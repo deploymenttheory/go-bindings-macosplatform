@@ -5,61 +5,72 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMStyleSheetList wraps [raw.DOMStyleSheetList] with a fluent Go API.
+// DOMStyleSheetList is an idiomatic wrapper over the Objective-C class DOMStyleSheetList.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMStyleSheetList struct {
-	inner *raw.DOMStyleSheetList
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMStyleSheetList].
-func (x *DOMStyleSheetList) Unwrap() *raw.DOMStyleSheetList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMStyleSheetList) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMStyleSheetListFromID adopts an existing object pointer as a DOMStyleSheetList (nil for 0).
+// DOMStyleSheetListFromID adopts an existing Objective-C object as a DOMStyleSheetList
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMStyleSheetListFromID(id objc.ID) *DOMStyleSheetList {
 	if id == 0 {
 		return nil
 	}
-	return &DOMStyleSheetList{inner: raw.DOMStyleSheetListFromID(id)}
+	x := &DOMStyleSheetList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMStyleSheetList creates a new [DOMStyleSheetList].
-func NewDOMStyleSheetList() *DOMStyleSheetList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMStyleSheetList")), objc.RegisterName("new"))
-	return &DOMStyleSheetList{inner: raw.DOMStyleSheetListFromID(_id)}
-}
-
-// Item calls the underlying Item.
-func (x *DOMStyleSheetList) Item(index uint) *DOMStyleSheet {
-	_r := x.inner.Item(index)
-	if _r == nil {
+// dOMStyleSheetListAdopt wraps an Objective-C object that this code just created as a
+// DOMStyleSheetList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMStyleSheetListAdopt(id objc.ID) *DOMStyleSheetList {
+	if id == 0 {
 		return nil
 	}
-	return &DOMStyleSheet{inner: _r}
+	x := &DOMStyleSheetList{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Length calls the underlying Length.
-func (x *DOMStyleSheetList) Length() uint {
-	return x.inner.Length()
+// NewDOMStyleSheetList creates a new DOMStyleSheetList.
+func NewDOMStyleSheetList() *DOMStyleSheetList {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMStyleSheetList")), objc.RegisterName("new"))
+	return dOMStyleSheetListAdopt(_id)
 }
 
-func (x *DOMStyleSheetList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
+// Item wraps the corresponding Objective-C method.
+func (x *DOMStyleSheetList) Item(index int) *DOMStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMStyleSheetFromID(_r)
+}
 
-func (x *DOMStyleSheetList) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// Length wraps the corresponding Objective-C method.
+func (x *DOMStyleSheetList) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // DOMStyleSheetListable is the interface implemented by [DOMStyleSheetList], for mocking and DI.
 type DOMStyleSheetListable interface {
-	Unwrap() *raw.DOMStyleSheetList
-	Item(index uint) *DOMStyleSheet
-	Length() uint
+	obj.Object
+	Item(index int) *DOMStyleSheet
+	Length() int
 }
 
 var _ DOMStyleSheetListable = (*DOMStyleSheetList)(nil)
+
+var _ DOMObjectProvider = (*DOMStyleSheetList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMStyleSheetList)(nil)

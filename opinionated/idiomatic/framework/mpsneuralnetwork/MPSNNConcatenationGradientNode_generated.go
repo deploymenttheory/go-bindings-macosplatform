@@ -5,71 +5,68 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class MPSNNConcatenationGradientNode @abstract  A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training @discussion As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for the slice operator to do, but we still need to extract out the relevant portion of the gradient of the input signal that went into the corresponding concatenation destination image.
+// NNConcatenationGradientNode is an idiomatic wrapper over the Objective-C class MPSNNConcatenationGradientNode.
 //
-// NNConcatenationGradientNode wraps [raw.MPSNNConcatenationGradientNode] with a fluent Go API.
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for the slice operator to do, but we still need to extract out the relevant portion of the gradient of the input signal that went into the corresponding concatenation destination image.
 type NNConcatenationGradientNode struct {
-	inner *raw.MPSNNConcatenationGradientNode
+	NNGradientFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNConcatenationGradientNode].
-func (x *NNConcatenationGradientNode) Unwrap() *raw.MPSNNConcatenationGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNConcatenationGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNConcatenationGradientNodeFromID adopts an existing object pointer as a NNConcatenationGradientNode (nil for 0).
+// NNConcatenationGradientNodeFromID adopts an existing Objective-C object as a NNConcatenationGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNConcatenationGradientNodeFromID(id objc.ID) *NNConcatenationGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNConcatenationGradientNode{inner: raw.MPSNNConcatenationGradientNodeFromID(id)}
-}
-
-// @abstract       Init a MPSNNConcatenationGradientNode @discussion     Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead. @param          gradientSourceNode  The gradient image functioning as input for the operator @param          sourceImage         The particular input image to the concatentation, if any, that the slice corresponds with @param          gradientState       The gradient state produced by the concatenation filter, consumed by this filter
-//
-// NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState creates a new [NNConcatenationGradientNode].
-func NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState(gradientSourceNode *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *NNConcatenationGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNConcatenationGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), gradientSourceNode.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	return &NNConcatenationGradientNode{inner: raw.MPSNNConcatenationGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNConcatenationGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNConcatenationGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &NNConcatenationGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// nNConcatenationGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// NNConcatenationGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNConcatenationGradientNodeAdopt(id objc.ID) *NNConcatenationGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNConcatenationGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState init a MPSNNConcatenationGradientNode Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead.
+func NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState(gradientSourceNode *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNConcatenationGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(gradientSourceNode), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return nNConcatenationGradientNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNConcatenationGradientNode) WithLabel(label string) *NNConcatenationGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NNConcatenationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *NNConcatenationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // NNConcatenationGradientNodeable is the interface implemented by [NNConcatenationGradientNode], for mocking and DI.
 type NNConcatenationGradientNodeable interface {
-	Unwrap() *raw.MPSNNConcatenationGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNConcatenationGradientNode
+	obj.Object
 	WithLabel(label string) *NNConcatenationGradientNode
 }
 
 var _ NNConcatenationGradientNodeable = (*NNConcatenationGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNConcatenationGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNConcatenationGradientNode)(nil)

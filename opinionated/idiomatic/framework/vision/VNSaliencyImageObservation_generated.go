@@ -5,62 +5,69 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An observation that contains a grayscale heat map of important areas across an image.
+// SaliencyImageObservation is an idiomatic wrapper over the Objective-C class VNSaliencyImageObservation.
 //
-// SaliencyImageObservation wraps [raw.VNSaliencyImageObservation] with a fluent Go API.
+// It embeds [PixelBufferObservation], promoting that type's methods.
+//
+// An observation that contains a grayscale heat map of important areas across an image.
 type SaliencyImageObservation struct {
-	inner *raw.VNSaliencyImageObservation
+	PixelBufferObservation
 }
 
-// Unwrap returns the underlying [raw.VNSaliencyImageObservation].
-func (x *SaliencyImageObservation) Unwrap() *raw.VNSaliencyImageObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SaliencyImageObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// SaliencyImageObservationFromID adopts an existing object pointer as a SaliencyImageObservation (nil for 0).
+// SaliencyImageObservationFromID adopts an existing Objective-C object as a SaliencyImageObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func SaliencyImageObservationFromID(id objc.ID) *SaliencyImageObservation {
 	if id == 0 {
 		return nil
 	}
-	return &SaliencyImageObservation{inner: raw.VNSaliencyImageObservationFromID(id)}
+	x := &SaliencyImageObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSaliencyImageObservation creates a new [SaliencyImageObservation].
-func NewSaliencyImageObservation() *SaliencyImageObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNSaliencyImageObservation")), objc.RegisterName("new"))
-	return &SaliencyImageObservation{inner: raw.VNSaliencyImageObservationFromID(_id)}
-}
-
-// SalientObjects returns the collection as a Go slice.
-func (x *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
-	arr := x.inner.SalientObjects()
-	if arr == nil {
+// saliencyImageObservationAdopt wraps an Objective-C object that this code just created as a
+// SaliencyImageObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func saliencyImageObservationAdopt(id objc.ID) *SaliencyImageObservation {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RectangleObservation {
-		return &RectangleObservation{inner: raw.VNRectangleObservationFromID(purego.Retain(_id))}
-	})
+	x := &SaliencyImageObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SaliencyImageObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation {
-	return &x.inner.VNPixelBufferObservation
+// NewSaliencyImageObservation creates a new SaliencyImageObservation.
+func NewSaliencyImageObservation() *SaliencyImageObservation {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNSaliencyImageObservation")), objc.RegisterName("new"))
+	return saliencyImageObservationAdopt(_id)
 }
 
-func (x *SaliencyImageObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNPixelBufferObservation.VNObservation
+// SalientObjects wraps the corresponding Objective-C method.
+//
+// SalientObjects returns the collection as a Go slice.
+func (x *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("salientObjects"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RectangleObservation { return RectangleObservationFromID(_id) })
 }
 
 // SaliencyImageObservationable is the interface implemented by [SaliencyImageObservation], for mocking and DI.
 type SaliencyImageObservationable interface {
-	Unwrap() *raw.VNSaliencyImageObservation
+	obj.Object
 	SalientObjects() []*RectangleObservation
 }
 
 var _ SaliencyImageObservationable = (*SaliencyImageObservation)(nil)
+
+var _ PixelBufferObservationProvider = (*SaliencyImageObservation)(nil)
+
+var _ ObservationProvider = (*SaliencyImageObservation)(nil)

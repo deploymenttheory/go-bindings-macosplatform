@@ -5,68 +5,100 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent wraps [raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent] with a fluent Go API.
+// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent.
 type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent struct {
-	inner *raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent].
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID adopts an existing object pointer as a MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent (nil for 0).
+// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID adopts an existing Objective-C object as a MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{inner: raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(id)}
+	x := &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent creates a new [MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent].
+// mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent creates a new MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent.
 func NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent() *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent")), objc.RegisterName("new"))
-	return &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{inner: raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent")), objc.RegisterName("new"))
+	return mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(_id)
 }
 
-// Current calls the underlying Current.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
-	return x.inner.Current()
+// Current wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+	return obj.Wrap(_r)
 }
 
-// SetCurrent calls the underlying SetCurrent.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	x.inner.SetCurrent(current)
+// SetCurrent wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous calls the underlying Previous.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
-	return x.inner.Previous()
+// Previous wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+	return obj.Wrap(_r)
 }
 
-// SetPrevious calls the underlying SetPrevious.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	x.inner.SetPrevious(previous)
+// SetPrevious wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
 
 // MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable interface {
-	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent
-	Current() *foundation.NSArray[objc.ID]
-	SetCurrent(current *foundation.NSArray[objc.ID])
-	Previous() *foundation.NSArray[objc.ID]
-	SetPrevious(previous *foundation.NSArray[objc.ID])
+	obj.Object
+	Current() obj.Object
+	SetCurrent(current obj.Object)
+	Previous() obj.Object
+	SetPrevious(previous obj.Object)
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable = (*MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent)(nil)

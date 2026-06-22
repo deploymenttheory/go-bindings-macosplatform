@@ -22,6 +22,8 @@ const (
 	TK_ANCHOR_CENTER Tk_Anchor = 8
 )
 
+// String returns the Tk_Anchor constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Tk_Anchor) String() string {
 	switch e {
 	case TK_ANCHOR_N:
@@ -55,6 +57,8 @@ const (
 	TK_JUSTIFY_CENTER Tk_Justify = 2
 )
 
+// String returns the Tk_Justify constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Tk_Justify) String() string {
 	switch e {
 	case TK_JUSTIFY_LEFT:

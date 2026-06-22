@@ -5,43 +5,79 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for objects representing impassable areas in a game world.
+// Obstacle is an idiomatic wrapper over the Objective-C class GKObstacle.
 //
-// Obstacle wraps [raw.GKObstacle] with a fluent Go API.
+// Obstacle is an abstract base — you do not construct it directly. Construct one of [CircleObstacle], [PolygonObstacle], [SphereObstacle] and pass it where a Obstacle is accepted.
+//
+// The abstract base class for objects representing impassable areas in a game world.
 type Obstacle struct {
-	inner *raw.GKObstacle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKObstacle].
-func (x *Obstacle) Unwrap() *raw.GKObstacle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Obstacle) ID() objc.ID { return x.inner.Ptr() }
-
-// ObstacleFromID adopts an existing object pointer as a Obstacle (nil for 0).
+// ObstacleFromID adopts an existing Objective-C object as a Obstacle
+// (nil for 0), retaining it and registering a release finalizer.
 func ObstacleFromID(id objc.ID) *Obstacle {
 	if id == 0 {
 		return nil
 	}
-	return &Obstacle{inner: raw.GKObstacleFromID(id)}
+	x := &Obstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObstacle creates a new [Obstacle].
-func NewObstacle() *Obstacle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKObstacle")), objc.RegisterName("new"))
-	return &Obstacle{inner: raw.GKObstacleFromID(_id)}
+// obstacleAdopt wraps an Objective-C object that this code just created as a
+// Obstacle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func obstacleAdopt(id objc.ID) *Obstacle {
+	if id == 0 {
+		return nil
+	}
+	x := &Obstacle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *Obstacle) asObstacle() *raw.GKObstacle { return x.inner }
+// Description returns the object's -description text.
+func (x *Obstacle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Obstacle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Obstacle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Obstacle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // Obstacleable is the interface implemented by [Obstacle], for mocking and DI.
 type Obstacleable interface {
-	Unwrap() *raw.GKObstacle
+	obj.Object
 }
 
 var _ Obstacleable = (*Obstacle)(nil)
+
+// isObstacle marks Obstacle — and, by embedding promotion, its
+// subclasses — as a member of the Obstacle hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Obstacle) isObstacle() {}
+
+var _ ObstacleProvider = (*Obstacle)(nil)

@@ -5,77 +5,100 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the space around the edges of items in a collection view.
+// CollectionLayoutEdgeSpacing is an idiomatic wrapper over the Objective-C class NSCollectionLayoutEdgeSpacing.
 //
-// CollectionLayoutEdgeSpacing wraps [raw.NSCollectionLayoutEdgeSpacing] with a fluent Go API.
+// An object that defines the space around the edges of items in a collection view.
 type CollectionLayoutEdgeSpacing struct {
-	inner *raw.NSCollectionLayoutEdgeSpacing
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutEdgeSpacing].
-func (x *CollectionLayoutEdgeSpacing) Unwrap() *raw.NSCollectionLayoutEdgeSpacing { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutEdgeSpacing) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutEdgeSpacingFromID adopts an existing object pointer as a CollectionLayoutEdgeSpacing (nil for 0).
+// CollectionLayoutEdgeSpacingFromID adopts an existing Objective-C object as a CollectionLayoutEdgeSpacing
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutEdgeSpacingFromID(id objc.ID) *CollectionLayoutEdgeSpacing {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutEdgeSpacing{inner: raw.NSCollectionLayoutEdgeSpacingFromID(id)}
+	x := &CollectionLayoutEdgeSpacing{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutEdgeSpacing creates a new [CollectionLayoutEdgeSpacing].
+// collectionLayoutEdgeSpacingAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutEdgeSpacing (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutEdgeSpacingAdopt(id objc.ID) *CollectionLayoutEdgeSpacing {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutEdgeSpacing{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutEdgeSpacing) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutEdgeSpacing) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutEdgeSpacing) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutEdgeSpacing) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollectionLayoutEdgeSpacing creates a new CollectionLayoutEdgeSpacing.
 func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutEdgeSpacing")), objc.RegisterName("new"))
-	return &CollectionLayoutEdgeSpacing{inner: raw.NSCollectionLayoutEdgeSpacingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutEdgeSpacing")), objc.RegisterName("new"))
+	return collectionLayoutEdgeSpacingAdopt(_id)
 }
 
-// Leading calls the underlying Leading.
+// Leading wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
-	_r := x.inner.Leading()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutSpacing{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leading"))
+	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Top calls the underlying Top.
+// Top wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
-	_r := x.inner.Top()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutSpacing{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
+	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Trailing calls the underlying Trailing.
+// Trailing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
-	_r := x.inner.Trailing()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutSpacing{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trailing"))
+	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Bottom calls the underlying Bottom.
+// Bottom wraps the corresponding Objective-C method.
 func (x *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
-	_r := x.inner.Bottom()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutSpacing{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
+	return CollectionLayoutSpacingFromID(_r)
 }
 
 // CollectionLayoutEdgeSpacingable is the interface implemented by [CollectionLayoutEdgeSpacing], for mocking and DI.
 type CollectionLayoutEdgeSpacingable interface {
-	Unwrap() *raw.NSCollectionLayoutEdgeSpacing
+	obj.Object
 	Leading() *CollectionLayoutSpacing
 	Top() *CollectionLayoutSpacing
 	Trailing() *CollectionLayoutSpacing

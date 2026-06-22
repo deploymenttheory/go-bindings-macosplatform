@@ -5,118 +5,144 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams wraps [raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams] with a fluent Go API.
+// MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams is an idiomatic wrapper over the Objective-C class MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams.
 type MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams struct {
-	inner *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams].
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams (nil for 0).
+// MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID adopts an existing Objective-C object as a MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams{inner: raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(id)}
+	x := &MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValueError creates a new [MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams].
-func NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsAdopt(id objc.ID) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams{inner: raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(_id)}, nil
-}
-
-// WithErrorCode sets the errorCode property and returns the receiver for chaining.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
-	x.inner.SetErrorCode(errorCode)
+	x := &MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithDebugText sets the debugText property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValueError initialize an MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsAdopt(_id), nil
+}
+
+// WithErrorCode sets the property and returns the receiver so calls can be chained.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
+	return x
+}
+
+// WithDebugText sets the property and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithDebugText(debugText string) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// ErrorCode calls the underlying ErrorCode.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ErrorCode() *foundation.NSNumber {
-	return x.inner.ErrorCode()
+// ErrorCode wraps the corresponding Objective-C method.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ErrorCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCode"))
+	return obj.Wrap(_r)
 }
 
-// SetErrorCode calls the underlying SetErrorCode.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetErrorCode(errorCode *foundation.NSNumber) {
-	x.inner.SetErrorCode(errorCode)
+// SetErrorCode wraps the corresponding Objective-C method.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetErrorCode(errorCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 }
 
-// DebugText calls the underlying DebugText.
+// DebugText wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) DebugText() string {
-	_r := x.inner.DebugText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDebugText calls the underlying SetDebugText.
+// SetDebugText wraps the corresponding Objective-C method.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetDebugText(debugText string) {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable is the interface implemented by [MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams], for mocking and DI.
 type MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable interface {
-	Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
-	WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	obj.Object
+	WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 	WithDebugText(debugText string) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
-	ErrorCode() *foundation.NSNumber
-	SetErrorCode(errorCode *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	ErrorCode() obj.Object
+	SetErrorCode(errorCode obj.Object)
 	DebugText() string
 	SetDebugText(debugText string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable = (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams)(nil)

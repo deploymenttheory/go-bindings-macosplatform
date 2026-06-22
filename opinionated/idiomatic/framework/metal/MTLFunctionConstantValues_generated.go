@@ -5,74 +5,81 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A set of constant values that specialize a graphics or compute GPU function.
+// FunctionConstantValues is an idiomatic wrapper over the Objective-C class MTLFunctionConstantValues.
 //
-// FunctionConstantValues wraps [raw.MTLFunctionConstantValues] with a fluent Go API.
+// A set of constant values that specialize a graphics or compute GPU function.
 type FunctionConstantValues struct {
-	inner *raw.MTLFunctionConstantValues
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionConstantValues].
-func (x *FunctionConstantValues) Unwrap() *raw.MTLFunctionConstantValues { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionConstantValues) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionConstantValuesFromID adopts an existing object pointer as a FunctionConstantValues (nil for 0).
+// FunctionConstantValuesFromID adopts an existing Objective-C object as a FunctionConstantValues
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionConstantValuesFromID(id objc.ID) *FunctionConstantValues {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionConstantValues{inner: raw.MTLFunctionConstantValuesFromID(id)}
+	x := &FunctionConstantValues{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFunctionConstantValues creates a new [FunctionConstantValues].
+// functionConstantValuesAdopt wraps an Objective-C object that this code just created as a
+// FunctionConstantValues (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionConstantValuesAdopt(id objc.ID) *FunctionConstantValues {
+	if id == 0 {
+		return nil
+	}
+	x := &FunctionConstantValues{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FunctionConstantValues) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionConstantValues) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionConstantValues) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionConstantValues) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFunctionConstantValues creates a new FunctionConstantValues.
 func NewFunctionConstantValues() *FunctionConstantValues {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionConstantValues")), objc.RegisterName("new"))
-	return &FunctionConstantValues{inner: raw.MTLFunctionConstantValuesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionConstantValues")), objc.RegisterName("new"))
+	return functionConstantValuesAdopt(_id)
 }
 
-// Sets a value for a function constant at a specific index.
-//
-// SetConstantValueTypeAtIndex calls the underlying SetConstantValueTypeAtIndex.
-func (x *FunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ MTLDataType, index uint) {
-	x.inner.SetConstantValueTypeAtIndex(value, raw.MTLDataType(type_), index)
-}
-
-// Sets values for a group of function constants within a specific index range.
-//
-// SetConstantValuesTypeWithRange calls the underlying SetConstantValuesTypeWithRange.
-func (x *FunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ MTLDataType, range_ foundation.NSRange) {
-	x.inner.SetConstantValuesTypeWithRange(values, raw.MTLDataType(type_), range_)
-}
-
-// Sets a value for a function constant with a specific name.
-//
-// SetConstantValueTypeWithName calls the underlying SetConstantValueTypeWithName.
-func (x *FunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ MTLDataType, name string) {
-	x.inner.SetConstantValueTypeWithName(value, raw.MTLDataType(type_), foundation.NSStringStringWithUTF8String(name))
-}
-
-// Deletes all previously set constant values.
-//
-// Reset calls the underlying Reset.
+// Reset deletes all previously set constant values.
 func (x *FunctionConstantValues) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // FunctionConstantValuesable is the interface implemented by [FunctionConstantValues], for mocking and DI.
 type FunctionConstantValuesable interface {
-	Unwrap() *raw.MTLFunctionConstantValues
-	SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ MTLDataType, index uint)
-	SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ MTLDataType, range_ foundation.NSRange)
-	SetConstantValueTypeWithName(value unsafe.Pointer, type_ MTLDataType, name string)
+	obj.Object
 	Reset()
 }
 

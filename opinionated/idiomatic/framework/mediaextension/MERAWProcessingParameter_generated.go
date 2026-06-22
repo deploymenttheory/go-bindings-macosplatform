@@ -5,99 +5,116 @@
 package mediaextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for the RAW processor to describe each processing parameter the processor exposes.
+// RAWProcessingParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingParameter.
 //
-// RAWProcessingParameter wraps [raw.MERAWProcessingParameter] with a fluent Go API.
+// RAWProcessingParameter is an abstract base — you do not construct it directly. Construct one of [RAWProcessingBooleanParameter], [RAWProcessingFloatParameter], [RAWProcessingIntegerParameter], [RAWProcessingListElementParameter], [RAWProcessingListParameter], [RAWProcessingSubGroupParameter] and pass it where a RAWProcessingParameter is accepted.
+//
+// An object for the RAW processor to describe each processing parameter the processor exposes.
 type RAWProcessingParameter struct {
-	inner *raw.MERAWProcessingParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MERAWProcessingParameter].
-func (x *RAWProcessingParameter) Unwrap() *raw.MERAWProcessingParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RAWProcessingParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// RAWProcessingParameterFromID adopts an existing object pointer as a RAWProcessingParameter (nil for 0).
+// RAWProcessingParameterFromID adopts an existing Objective-C object as a RAWProcessingParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func RAWProcessingParameterFromID(id objc.ID) *RAWProcessingParameter {
 	if id == 0 {
 		return nil
 	}
-	return &RAWProcessingParameter{inner: raw.MERAWProcessingParameterFromID(id)}
-}
-
-// NewRAWProcessingParameter creates a new [RAWProcessingParameter].
-func NewRAWProcessingParameter() *RAWProcessingParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingParameter")), objc.RegisterName("new"))
-	return &RAWProcessingParameter{inner: raw.MERAWProcessingParameterFromID(_id)}
-}
-
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {
-	x.inner.SetEnabled(enabled)
+	x := &RAWProcessingParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property		name @abstract		A localized human-readable name for the parameter, suitable for displaying in application UI.
-//
-// Name calls the underlying Name.
+// rAWProcessingParameterAdopt wraps an Objective-C object that this code just created as a
+// RAWProcessingParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rAWProcessingParameterAdopt(id objc.ID) *RAWProcessingParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &RAWProcessingParameter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RAWProcessingParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RAWProcessingParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RAWProcessingParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RAWProcessingParameter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
+func (x *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// Name a localized human-readable name for the parameter, suitable for displaying in application UI.
 func (x *RAWProcessingParameter) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property		key @abstract		A unique key string identifying this parameter.
-//
-// Key calls the underlying Key.
+// Key a unique key string identifying this parameter.
 func (x *RAWProcessingParameter) Key() string {
-	_r := x.inner.Key()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property		longDescription @abstract		A localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
-//
-// LongDescription calls the underlying LongDescription.
+// LongDescription a localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
 func (x *RAWProcessingParameter) LongDescription() string {
-	_r := x.inner.LongDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
-//
-// Enabled calls the underlying Enabled.
+// Enabled indicates whether the parameter is enabled or disabled by the extension. This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
 func (x *RAWProcessingParameter) Enabled() bool {
-	return x.inner.Enabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *RAWProcessingParameter) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
-}
-
-func (x *RAWProcessingParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // RAWProcessingParameterable is the interface implemented by [RAWProcessingParameter], for mocking and DI.
 type RAWProcessingParameterable interface {
-	Unwrap() *raw.MERAWProcessingParameter
+	obj.Object
 	WithEnabled(enabled bool) *RAWProcessingParameter
 	Name() string
 	Key() string
@@ -107,3 +124,10 @@ type RAWProcessingParameterable interface {
 }
 
 var _ RAWProcessingParameterable = (*RAWProcessingParameter)(nil)
+
+// isRAWProcessingParameter marks RAWProcessingParameter — and, by embedding promotion, its
+// subclasses — as a member of the RAWProcessingParameter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RAWProcessingParameter) isRAWProcessingParameter() {}
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingParameter)(nil)

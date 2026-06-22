@@ -5,660 +5,540 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A control that offers a binary choice.
+// Switch is an idiomatic wrapper over the Objective-C class NSSwitch.
 //
-// Switch wraps [raw.NSSwitch] with a fluent Go API.
+// It embeds [Control], promoting that type's methods.
+//
+// A control that offers a binary choice.
 type Switch struct {
-	inner *raw.NSSwitch
+	Control
 }
 
-// Unwrap returns the underlying [raw.NSSwitch].
-func (x *Switch) Unwrap() *raw.NSSwitch { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Switch) ID() objc.ID { return x.inner.Ptr() }
-
-// SwitchFromID adopts an existing object pointer as a Switch (nil for 0).
+// SwitchFromID adopts an existing Objective-C object as a Switch
+// (nil for 0), retaining it and registering a release finalizer.
 func SwitchFromID(id objc.ID) *Switch {
 	if id == 0 {
 		return nil
 	}
-	return &Switch{inner: raw.NSSwitchFromID(id)}
+	x := &Switch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSwitch creates a new [Switch].
+// switchAdopt wraps an Objective-C object that this code just created as a
+// Switch (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func switchAdopt(id objc.ID) *Switch {
+	if id == 0 {
+		return nil
+	}
+	x := &Switch{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSwitch creates a new Switch.
 func NewSwitch() *Switch {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSwitch")), objc.RegisterName("new"))
-	return &Switch{inner: raw.NSSwitchFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSwitch")), objc.RegisterName("new"))
+	return switchAdopt(_id)
 }
 
-// The current position of the switch.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the current position of the switch.
 func (x *Switch) WithState(state int) *Switch {
-	x.inner.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *Switch) WithTarget(target objc.ID) *Switch {
-	x.inner.NSControl.SetTarget(target)
+// WithTarget the target object that receives action messages from the cell.
+func (x *Switch) WithTarget(target obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *Switch) WithAction(action objc.SEL) *Switch {
-	x.inner.NSControl.SetAction(action)
-	return x
-}
-
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *Switch) WithTag(tag int) *Switch {
-	x.inner.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *Switch) WithIgnoresMultiClick(ignoresMultiClick bool) *Switch {
-	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *Switch) WithContinuous(continuous bool) *Switch {
-	x.inner.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *Switch) WithEnabled(enabled bool) *Switch {
-	x.inner.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *Switch) WithRefusesFirstResponder(refusesFirstResponder bool) *Switch {
-	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *Switch) WithHighlighted(highlighted bool) *Switch {
-	x.inner.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Switch) WithControlSize(controlSize NSControlSize) *Switch {
-	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the control.
+func (x *Switch) WithControlSize(controlSize ControlSize) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *Switch) WithFormatter(formatter *foundation.NSFormatter) *Switch {
-	x.inner.NSControl.SetFormatter(formatter)
+// WithFormatter the receiver’s formatter.
+func (x *Switch) WithFormatter(formatter obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *Switch) WithObjectValue(objectValue objc.ID) *Switch {
-	x.inner.NSControl.SetObjectValue(objectValue)
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
+func (x *Switch) WithObjectValue(objectValue obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *Switch) WithStringValue(stringValue string) *Switch {
-	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *Switch) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Switch {
-	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
+func (x *Switch) WithAttributedStringValue(attributedStringValue obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *Switch) WithIntValue(intValue int) *Switch {
-	x.inner.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *Switch) WithIntegerValue(integerValue int) *Switch {
-	x.inner.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *Switch) WithFloatValue(floatValue float32) *Switch {
-	x.inner.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *Switch) WithDoubleValue(doubleValue float64) *Switch {
-	x.inner.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *Switch) WithFont(font *Font) *Switch {
-	x.inner.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
-	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Switch) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Switch {
-	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
+func (x *Switch) WithLineBreakMode(lineBreakMode LineBreakMode) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Switch) WithAlignment(alignment NSTextAlignment) *Switch {
-	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment mode of the text in the receiver’s cell.
+func (x *Switch) WithAlignment(alignment TextAlignment) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Switch) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Switch {
-	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *Switch) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch {
-	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithCell(cell CellProvider) *Switch {
-	x.inner.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithSubviews(items ...ViewProvider) *Switch {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithHidden(hidden bool) *Switch {
-	x.inner.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch {
-	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithAutoresizesSubviews(autoresizesSubviews bool) *Switch {
-	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Switch) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Switch {
-	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (x *Switch) WithFrame(frame corefoundation.CGRect) *Switch {
-	x.inner.NSControl.NSView.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithFrameRotation(frameRotation float64) *Switch {
-	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithFrameCenterRotation(frameCenterRotation float64) *Switch {
-	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithBoundsRotation(boundsRotation float64) *Switch {
-	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (x *Switch) WithBounds(bounds corefoundation.CGRect) *Switch {
-	x.inner.NSControl.NSView.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithCanDrawConcurrently(canDrawConcurrently bool) *Switch {
-	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *Switch) WithNeedsDisplay(needsDisplay bool) *Switch {
-	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch {
-	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithWantsRestingTouches(wantsRestingTouches bool) *Switch {
-	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Switch {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Switch) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Switch {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithWantsLayer(wantsLayer bool) *Switch {
-	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *Switch) WithLayer(layer *quartzcore.CALayer) *Switch {
-	x.inner.NSControl.NSView.SetLayer(layer)
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithLayer(layer obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch {
-	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithNeedsLayout(needsLayout bool) *Switch {
-	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithAlphaValue(alphaValue float64) *Switch {
-	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch {
-	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Switch) WithBackgroundFilters(items ...*coreimage.CIFilter) *Switch {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithBackgroundFilters(items ...obj.Object) *Switch {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *Switch) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Switch {
-	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithCompositingFilter(compositingFilter obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Switch) WithContentFilters(items ...*coreimage.CIFilter) *Switch {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithContentFilters(items ...obj.Object) *Switch {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithShadow(shadow *Shadow) *Switch {
-	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithClipsToBounds(clipsToBounds bool) *Switch {
-	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch {
-	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithToolTip(toolTip string) *Switch {
-	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Switch {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch {
-	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return x
 }
 
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
-	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Switch) WithFocusRingType(focusRingType NSFocusRingType) *Switch {
-	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithFocusRingType(focusRingType FocusRingType) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Switch) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Switch {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *Switch) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch {
-	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch {
-	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch {
-	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch {
-	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch {
-	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch {
-	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch {
-	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch {
-	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
-	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *Switch) WithMenu(menu *Menu) *Switch {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Switch) WithUserActivity(userActivity *foundation.NSUserActivity) *Switch {
-	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *Switch) WithUserActivity(userActivity obj.Object) *Switch {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// State calls the underlying State.
+// State wraps the corresponding Objective-C method.
 func (x *Switch) State() int {
-	return x.inner.State()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// SetState calls the underlying SetState.
+// SetState wraps the corresponding Objective-C method.
 func (x *Switch) SetState(state int) {
-	x.inner.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 }
-
-func (x *Switch) asControl() *raw.NSControl { return &x.inner.NSControl }
-
-func (x *Switch) asView() *raw.NSView { return &x.inner.NSControl.NSView }
-
-func (x *Switch) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
 
 // Switchable is the interface implemented by [Switch], for mocking and DI.
 type Switchable interface {
-	Unwrap() *raw.NSSwitch
+	obj.Object
 	WithState(state int) *Switch
-	WithTarget(target objc.ID) *Switch
-	WithAction(action objc.SEL) *Switch
+	WithTarget(target obj.Object) *Switch
 	WithTag(tag int) *Switch
 	WithIgnoresMultiClick(ignoresMultiClick bool) *Switch
 	WithContinuous(continuous bool) *Switch
 	WithEnabled(enabled bool) *Switch
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Switch
 	WithHighlighted(highlighted bool) *Switch
-	WithControlSize(controlSize NSControlSize) *Switch
-	WithFormatter(formatter *foundation.NSFormatter) *Switch
-	WithObjectValue(objectValue objc.ID) *Switch
+	WithControlSize(controlSize ControlSize) *Switch
+	WithFormatter(formatter obj.Object) *Switch
+	WithObjectValue(objectValue obj.Object) *Switch
 	WithStringValue(stringValue string) *Switch
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Switch
+	WithAttributedStringValue(attributedStringValue obj.Object) *Switch
 	WithIntValue(intValue int) *Switch
 	WithIntegerValue(integerValue int) *Switch
 	WithFloatValue(floatValue float32) *Switch
 	WithDoubleValue(doubleValue float64) *Switch
 	WithFont(font *Font) *Switch
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Switch
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Switch
-	WithAlignment(alignment NSTextAlignment) *Switch
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Switch
+	WithLineBreakMode(lineBreakMode LineBreakMode) *Switch
+	WithAlignment(alignment TextAlignment) *Switch
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Switch
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch
 	WithCell(cell CellProvider) *Switch
 	WithSubviews(items ...ViewProvider) *Switch
 	WithHidden(hidden bool) *Switch
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Switch
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Switch
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Switch
 	WithFrame(frame corefoundation.CGRect) *Switch
 	WithFrameRotation(frameRotation float64) *Switch
 	WithFrameCenterRotation(frameCenterRotation float64) *Switch
@@ -668,27 +548,27 @@ type Switchable interface {
 	WithNeedsDisplay(needsDisplay bool) *Switch
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch
 	WithWantsRestingTouches(wantsRestingTouches bool) *Switch
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Switch
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Switch
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Switch
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Switch
 	WithWantsLayer(wantsLayer bool) *Switch
-	WithLayer(layer *quartzcore.CALayer) *Switch
+	WithLayer(layer obj.Object) *Switch
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch
 	WithNeedsLayout(needsLayout bool) *Switch
 	WithAlphaValue(alphaValue float64) *Switch
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *Switch
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Switch
-	WithContentFilters(items ...*coreimage.CIFilter) *Switch
+	WithBackgroundFilters(items ...obj.Object) *Switch
+	WithCompositingFilter(compositingFilter obj.Object) *Switch
+	WithContentFilters(items ...obj.Object) *Switch
 	WithShadow(shadow *Shadow) *Switch
 	WithClipsToBounds(clipsToBounds bool) *Switch
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch
 	WithToolTip(toolTip string) *Switch
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Switch
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Switch
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch
 	WithNextKeyView(nextKeyView ViewProvider) *Switch
-	WithFocusRingType(focusRingType NSFocusRingType) *Switch
+	WithFocusRingType(focusRingType FocusRingType) *Switch
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Switch
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Switch
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch
@@ -701,10 +581,16 @@ type Switchable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch
 	WithNextResponder(nextResponder ResponderProvider) *Switch
 	WithMenu(menu *Menu) *Switch
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Switch
+	WithUserActivity(userActivity obj.Object) *Switch
 	WithTouchBar(touchBar *TouchBar) *Switch
 	State() int
 	SetState(state int)
 }
 
 var _ Switchable = (*Switch)(nil)
+
+var _ ControlProvider = (*Switch)(nil)
+
+var _ ViewProvider = (*Switch)(nil)
+
+var _ ResponderProvider = (*Switch)(nil)

@@ -5,60 +5,76 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Attributes that describe the layout of video content.
+// AssetVariantVideoLayoutAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantVideoLayoutAttributes.
 //
-// AssetVariantVideoLayoutAttributes wraps [raw.AVAssetVariantVideoLayoutAttributes] with a fluent Go API.
+// Attributes that describe the layout of video content.
 type AssetVariantVideoLayoutAttributes struct {
-	inner *raw.AVAssetVariantVideoLayoutAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetVariantVideoLayoutAttributes].
-func (x *AssetVariantVideoLayoutAttributes) Unwrap() *raw.AVAssetVariantVideoLayoutAttributes {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetVariantVideoLayoutAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetVariantVideoLayoutAttributesFromID adopts an existing object pointer as a AssetVariantVideoLayoutAttributes (nil for 0).
+// AssetVariantVideoLayoutAttributesFromID adopts an existing Objective-C object as a AssetVariantVideoLayoutAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetVariantVideoLayoutAttributesFromID(id objc.ID) *AssetVariantVideoLayoutAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &AssetVariantVideoLayoutAttributes{inner: raw.AVAssetVariantVideoLayoutAttributesFromID(id)}
+	x := &AssetVariantVideoLayoutAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetVariantVideoLayoutAttributes creates a new [AssetVariantVideoLayoutAttributes].
+// assetVariantVideoLayoutAttributesAdopt wraps an Objective-C object that this code just created as a
+// AssetVariantVideoLayoutAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetVariantVideoLayoutAttributesAdopt(id objc.ID) *AssetVariantVideoLayoutAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetVariantVideoLayoutAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetVariantVideoLayoutAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetVariantVideoLayoutAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetVariantVideoLayoutAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantVideoLayoutAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetVariantVideoLayoutAttributes creates a new AssetVariantVideoLayoutAttributes.
 func NewAssetVariantVideoLayoutAttributes() *AssetVariantVideoLayoutAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariantVideoLayoutAttributes")), objc.RegisterName("new"))
-	return &AssetVariantVideoLayoutAttributes{inner: raw.AVAssetVariantVideoLayoutAttributesFromID(_id)}
-}
-
-// Describes the stereo components. If not declared, the value will be `kCMStereoViewComponent_None`. In case of monoscopic content, the value will be `kCMStereoViewComponent_None` and incase of stereoscopic content, the value will be `(kCMStereoViewComponent_LeftEye | kCMStereoViewComponent_RightEye)`.
-//
-// StereoViewComponents calls the underlying StereoViewComponents.
-func (x *AssetVariantVideoLayoutAttributes) StereoViewComponents() coremedia.CMStereoViewComponents {
-	return x.inner.StereoViewComponents()
-}
-
-// Describes the video projection.
-//
-// ProjectionType calls the underlying ProjectionType.
-func (x *AssetVariantVideoLayoutAttributes) ProjectionType() coremedia.CMProjectionType {
-	return x.inner.ProjectionType()
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantVideoLayoutAttributes")), objc.RegisterName("new"))
+	return assetVariantVideoLayoutAttributesAdopt(_id)
 }
 
 // AssetVariantVideoLayoutAttributesable is the interface implemented by [AssetVariantVideoLayoutAttributes], for mocking and DI.
 type AssetVariantVideoLayoutAttributesable interface {
-	Unwrap() *raw.AVAssetVariantVideoLayoutAttributes
-	StereoViewComponents() coremedia.CMStereoViewComponents
-	ProjectionType() coremedia.CMProjectionType
+	obj.Object
 }
 
 var _ AssetVariantVideoLayoutAttributesable = (*AssetVariantVideoLayoutAttributes)(nil)

@@ -5,45 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a double value associated with an intent.
+// DoubleResolutionResult is an idiomatic wrapper over the Objective-C class INDoubleResolutionResult.
 //
-// DoubleResolutionResult wraps [raw.INDoubleResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a double value associated with an intent.
 type DoubleResolutionResult struct {
-	inner *raw.INDoubleResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INDoubleResolutionResult].
-func (x *DoubleResolutionResult) Unwrap() *raw.INDoubleResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DoubleResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// DoubleResolutionResultFromID adopts an existing object pointer as a DoubleResolutionResult (nil for 0).
+// DoubleResolutionResultFromID adopts an existing Objective-C object as a DoubleResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func DoubleResolutionResultFromID(id objc.ID) *DoubleResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &DoubleResolutionResult{inner: raw.INDoubleResolutionResultFromID(id)}
+	x := &DoubleResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDoubleResolutionResult creates a new [DoubleResolutionResult].
+// doubleResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// DoubleResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func doubleResolutionResultAdopt(id objc.ID) *DoubleResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &DoubleResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDoubleResolutionResult creates a new DoubleResolutionResult.
 func NewDoubleResolutionResult() *DoubleResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INDoubleResolutionResult")), objc.RegisterName("new"))
-	return &DoubleResolutionResult{inner: raw.INDoubleResolutionResultFromID(_id)}
-}
-
-func (x *DoubleResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INDoubleResolutionResult")), objc.RegisterName("new"))
+	return doubleResolutionResultAdopt(_id)
 }
 
 // DoubleResolutionResultable is the interface implemented by [DoubleResolutionResult], for mocking and DI.
 type DoubleResolutionResultable interface {
-	Unwrap() *raw.INDoubleResolutionResult
+	obj.Object
 }
 
 var _ DoubleResolutionResultable = (*DoubleResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*DoubleResolutionResult)(nil)

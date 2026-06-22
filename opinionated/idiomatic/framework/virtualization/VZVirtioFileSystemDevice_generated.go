@@ -5,85 +5,88 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object the defines a VIRTIO file system device.
+// VirtioFileSystemDevice is an idiomatic wrapper over the Objective-C class VZVirtioFileSystemDevice.
 //
-// VirtioFileSystemDevice wraps [raw.VZVirtioFileSystemDevice] with a fluent Go API.
+// It embeds [DirectorySharingDevice], promoting that type's methods.
+//
+// An object the defines a VIRTIO file system device.
 type VirtioFileSystemDevice struct {
-	inner *raw.VZVirtioFileSystemDevice
+	DirectorySharingDevice
 }
 
-// Unwrap returns the underlying [raw.VZVirtioFileSystemDevice].
-func (x *VirtioFileSystemDevice) Unwrap() *raw.VZVirtioFileSystemDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioFileSystemDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioFileSystemDeviceFromID adopts an existing object pointer as a VirtioFileSystemDevice (nil for 0).
+// VirtioFileSystemDeviceFromID adopts an existing Objective-C object as a VirtioFileSystemDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioFileSystemDeviceFromID(id objc.ID) *VirtioFileSystemDevice {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioFileSystemDevice{inner: raw.VZVirtioFileSystemDeviceFromID(id)}
-}
-
-// NewVirtioFileSystemDevice creates a new [VirtioFileSystemDevice].
-func NewVirtioFileSystemDevice() *VirtioFileSystemDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioFileSystemDevice")), objc.RegisterName("new"))
-	return &VirtioFileSystemDevice{inner: raw.VZVirtioFileSystemDeviceFromID(_id)}
-}
-
-// A value that defines the directory share the host exposes to the guest VM.
-//
-// WithShare sets the share property and returns the receiver for chaining.
-func (x *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice {
-	x.inner.SetShare(share.asDirectoryShare())
+	x := &VirtioFileSystemDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract The tag is a string identifying the device. @discussion The tag is presented as a label in the guest identifying this device for mounting.
-//
-// Tag calls the underlying Tag.
-func (x *VirtioFileSystemDevice) Tag() string {
-	_r := x.inner.Tag()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract Directory share. Defines how host resources are exposed to the guest virtual machine. @discussion Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised. @see VZSingleDirectoryShare @see VZMultipleDirectoryShare
-//
-// Share calls the underlying Share.
-func (x *VirtioFileSystemDevice) Share() *DirectoryShare {
-	_r := x.inner.Share()
-	if _r == nil {
+// virtioFileSystemDeviceAdopt wraps an Objective-C object that this code just created as a
+// VirtioFileSystemDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioFileSystemDeviceAdopt(id objc.ID) *VirtioFileSystemDevice {
+	if id == 0 {
 		return nil
 	}
-	return &DirectoryShare{inner: _r}
+	x := &VirtioFileSystemDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetShare calls the underlying SetShare.
-func (x *VirtioFileSystemDevice) SetShare(share *raw.VZDirectoryShare) {
-	x.inner.SetShare(share)
+// NewVirtioFileSystemDevice creates a new VirtioFileSystemDevice.
+func NewVirtioFileSystemDevice() *VirtioFileSystemDevice {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioFileSystemDevice")), objc.RegisterName("new"))
+	return virtioFileSystemDeviceAdopt(_id)
 }
 
-func (x *VirtioFileSystemDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice {
-	return &x.inner.VZDirectorySharingDevice
+// WithShare a value that defines the directory share the host exposes to the guest VM.
+func (x *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
+	return x
+}
+
+// Tag the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting.
+func (x *VirtioFileSystemDevice) Tag() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tag"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Share directory share. Defines how host resources are exposed to the guest virtual machine. Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised.
+func (x *VirtioFileSystemDevice) Share() *DirectoryShare {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
+	return DirectoryShareFromID(_r)
+}
+
+// SetShare wraps the corresponding Objective-C method.
+func (x *VirtioFileSystemDevice) SetShare(share *DirectoryShare) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
 }
 
 // VirtioFileSystemDeviceable is the interface implemented by [VirtioFileSystemDevice], for mocking and DI.
 type VirtioFileSystemDeviceable interface {
-	Unwrap() *raw.VZVirtioFileSystemDevice
+	obj.Object
 	WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice
 	Tag() string
 	Share() *DirectoryShare
-	SetShare(share *raw.VZDirectoryShare)
+	SetShare(share *DirectoryShare)
 }
 
 var _ VirtioFileSystemDeviceable = (*VirtioFileSystemDevice)(nil)
+
+var _ DirectorySharingDeviceProvider = (*VirtioFileSystemDevice)(nil)

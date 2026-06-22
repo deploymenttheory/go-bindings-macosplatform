@@ -5,693 +5,566 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that controls the behavior of a date picker, or of a single date picker cell in a matrix.
+// DatePickerCell is an idiomatic wrapper over the Objective-C class NSDatePickerCell.
 //
-// DatePickerCell wraps [raw.NSDatePickerCell] with a fluent Go API.
+// It embeds [ActionCell], promoting that type's methods.
+//
+// An object that controls the behavior of a date picker, or of a single date picker cell in a matrix.
 type DatePickerCell struct {
-	inner *raw.NSDatePickerCell
+	ActionCell
 }
 
-// Unwrap returns the underlying [raw.NSDatePickerCell].
-func (x *DatePickerCell) Unwrap() *raw.NSDatePickerCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DatePickerCell) ID() objc.ID { return x.inner.Ptr() }
-
-// DatePickerCellFromID adopts an existing object pointer as a DatePickerCell (nil for 0).
+// DatePickerCellFromID adopts an existing Objective-C object as a DatePickerCell
+// (nil for 0), retaining it and registering a release finalizer.
 func DatePickerCellFromID(id objc.ID) *DatePickerCell {
 	if id == 0 {
 		return nil
 	}
-	return &DatePickerCell{inner: raw.NSDatePickerCellFromID(id)}
+	x := &DatePickerCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDatePickerCellTextCell creates a new [DatePickerCell].
+// datePickerCellAdopt wraps an Objective-C object that this code just created as a
+// DatePickerCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func datePickerCellAdopt(id objc.ID) *DatePickerCell {
+	if id == 0 {
+		return nil
+	}
+	x := &DatePickerCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDatePickerCellTextCell creates a new DatePickerCell.
 func NewDatePickerCellTextCell(string_ string) *DatePickerCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDatePickerCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &DatePickerCell{inner: raw.NSDatePickerCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDatePickerCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return datePickerCellAdopt(_id)
 }
 
-// NewDatePickerCellWithCoder creates a new [DatePickerCell].
-func NewDatePickerCellWithCoder(coder *foundation.NSCoder) *DatePickerCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDatePickerCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &DatePickerCell{inner: raw.NSDatePickerCellFromID(_id)}
+// NewDatePickerCellWithCoder creates a new DatePickerCell.
+func NewDatePickerCellWithCoder(coder obj.Object) *DatePickerCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDatePickerCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return datePickerCellAdopt(_id)
 }
 
-// The date picker style to use.
-//
-// WithDatePickerStyle sets the datePickerStyle property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePickerCell {
-	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
+// WithDatePickerStyle the date picker style to use.
+func (x *DatePickerCell) WithDatePickerStyle(datePickerStyle DatePickerStyle) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws its background.
-//
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground a Boolean value indicating whether the cell draws its background.
 func (x *DatePickerCell) WithDrawsBackground(drawsBackground bool) *DatePickerCell {
-	x.inner.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The cell’s background color.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the cell’s background color.
 func (x *DatePickerCell) WithBackgroundColor(backgroundColor *Color) *DatePickerCell {
-	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The cell’s text color.
-//
-// WithTextColor sets the textColor property and returns the receiver for chaining.
+// WithTextColor the cell’s text color.
 func (x *DatePickerCell) WithTextColor(textColor *Color) *DatePickerCell {
-	x.inner.SetTextColor(textColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
-// The mode in use by the date picker.
-//
-// WithDatePickerMode sets the datePickerMode property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePickerCell {
-	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
+// WithDatePickerMode the mode in use by the date picker.
+func (x *DatePickerCell) WithDatePickerMode(datePickerMode DatePickerMode) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerMode:"), datePickerMode)
 	return x
 }
 
-// A bitmask that indicates which visual elements are shown by the date picker.
-//
-// WithDatePickerElements sets the datePickerElements property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePickerCell {
-	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
+// WithDatePickerElements a bitmask that indicates which visual elements are shown by the date picker.
+func (x *DatePickerCell) WithDatePickerElements(datePickerElements DatePickerElementFlags) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerElements:"), datePickerElements)
 	return x
 }
 
-// The calendar used by the date picker.
-//
-// WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *DatePickerCell) WithCalendar(calendar *foundation.NSCalendar) *DatePickerCell {
-	x.inner.SetCalendar(calendar)
+// WithCalendar the calendar used by the date picker.
+func (x *DatePickerCell) WithCalendar(calendar obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// The locale used to display dates.
-//
-// WithLocale sets the locale property and returns the receiver for chaining.
-func (x *DatePickerCell) WithLocale(locale *foundation.NSLocale) *DatePickerCell {
-	x.inner.SetLocale(locale)
+// WithLocale the locale used to display dates.
+func (x *DatePickerCell) WithLocale(locale obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// The time zone used to display time-related values.
-//
-// WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *DatePickerCell) WithTimeZone(timeZone *foundation.NSTimeZone) *DatePickerCell {
-	x.inner.SetTimeZone(timeZone)
+// WithTimeZone the time zone used to display time-related values.
+func (x *DatePickerCell) WithTimeZone(timeZone obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// The date currently specified in the picker.
-//
-// WithDateValue sets the dateValue property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDateValue(dateValue *foundation.NSDate) *DatePickerCell {
-	x.inner.SetDateValue(dateValue)
+// WithDateValue the date currently specified in the picker.
+func (x *DatePickerCell) WithDateValue(dateValue obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
 	return x
 }
 
-// The time interval that represents the date range.
-//
-// WithTimeInterval sets the timeInterval property and returns the receiver for chaining.
+// WithTimeInterval the time interval that represents the date range.
 func (x *DatePickerCell) WithTimeInterval(timeInterval float64) *DatePickerCell {
-	x.inner.SetTimeInterval(timeInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeInterval:"), timeInterval)
 	return x
 }
 
-// The minimum date that the picker allows as input.
-//
-// WithMinDate sets the minDate property and returns the receiver for chaining.
-func (x *DatePickerCell) WithMinDate(minDate *foundation.NSDate) *DatePickerCell {
-	x.inner.SetMinDate(minDate)
+// WithMinDate the minimum date that the picker allows as input.
+func (x *DatePickerCell) WithMinDate(minDate obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
 	return x
 }
 
-// The maximum date that the picker allows as input.
-//
-// WithMaxDate sets the maxDate property and returns the receiver for chaining.
-func (x *DatePickerCell) WithMaxDate(maxDate *foundation.NSDate) *DatePickerCell {
-	x.inner.SetMaxDate(maxDate)
+// WithMaxDate the maximum date that the picker allows as input.
+func (x *DatePickerCell) WithMaxDate(maxDate obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
 	return x
 }
 
-// The delegate associated with the date picker.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePickerCell {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *DatePickerCell) WithControlView(controlView ViewProvider) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *DatePickerCell) WithType(type_ NSCellType) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *DatePickerCell) WithType(type_ CellType) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *DatePickerCell) WithState(state int) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *DatePickerCell) WithTarget(target objc.ID) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *DatePickerCell) WithTarget(target obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *DatePickerCell) WithAction(action objc.SEL) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *DatePickerCell) WithTag(tag int) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *DatePickerCell) WithTitle(title string) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *DatePickerCell) WithEnabled(enabled bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *DatePickerCell) WithContinuous(continuous bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *DatePickerCell) WithEditable(editable bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *DatePickerCell) WithSelectable(selectable bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *DatePickerCell) WithBordered(bordered bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *DatePickerCell) WithBezeled(bezeled bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *DatePickerCell) WithScrollable(scrollable bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *DatePickerCell) WithHighlighted(highlighted bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *DatePickerCell) WithAlignment(alignment NSTextAlignment) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *DatePickerCell) WithAlignment(alignment TextAlignment) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *DatePickerCell) WithWraps(wraps bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *DatePickerCell) WithFont(font *Font) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *DatePickerCell) WithFormatter(formatter *foundation.NSFormatter) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *DatePickerCell) WithFormatter(formatter obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *DatePickerCell) WithObjectValue(objectValue objc.ID) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *DatePickerCell) WithObjectValue(objectValue obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *DatePickerCell) WithStringValue(stringValue string) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *DatePickerCell) WithIntValue(intValue int) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *DatePickerCell) WithFloatValue(floatValue float32) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *DatePickerCell) WithDoubleValue(doubleValue float64) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *DatePickerCell) WithIntegerValue(integerValue int) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *DatePickerCell) WithImage(image *Image) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *DatePickerCell) WithControlSize(controlSize NSControlSize) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *DatePickerCell) WithControlSize(controlSize ControlSize) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *DatePickerCell) WithRepresentedObject(representedObject objc.ID) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *DatePickerCell) WithRepresentedObject(representedObject obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *DatePickerCell) WithMenu(menu *Menu) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *DatePickerCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *DatePickerCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *DatePickerCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *DatePickerCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *DatePickerCell) WithLineBreakMode(lineBreakMode LineBreakMode) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *DatePickerCell) WithAllowsUndo(allowsUndo bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *DatePickerCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *DatePickerCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *DatePickerCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *DatePickerCell) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *DatePickerCell) WithRefusesFirstResponder(refusesFirstResponder bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *DatePickerCell) WithShowsFirstResponder(showsFirstResponder bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *DatePickerCell) WithFocusRingType(focusRingType NSFocusRingType) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *DatePickerCell) WithFocusRingType(focusRingType FocusRingType) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *DatePickerCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *DatePickerCell) WithAttributedStringValue(attributedStringValue obj.Object) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *DatePickerCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *DatePickerCell) WithImportsGraphics(importsGraphics bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *DatePickerCell) WithAllowsMixedState(allowsMixedState bool) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *DatePickerCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *DatePickerCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *DatePickerCell) WithControlTint(controlTint NSControlTint) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *DatePickerCell) WithControlTint(controlTint ControlTint) *DatePickerCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// DatePickerStyle calls the underlying DatePickerStyle.
-func (x *DatePickerCell) DatePickerStyle() NSDatePickerStyle {
-	return NSDatePickerStyle(x.inner.DatePickerStyle())
+// DatePickerStyle wraps the corresponding Objective-C method.
+func (x *DatePickerCell) DatePickerStyle() DatePickerStyle {
+	_r := objc.Send[DatePickerStyle](objref.IDOf(x), objc.RegisterName("datePickerStyle"))
+	return _r
 }
 
-// SetDatePickerStyle calls the underlying SetDatePickerStyle.
-func (x *DatePickerCell) SetDatePickerStyle(datePickerStyle NSDatePickerStyle) {
-	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
+// SetDatePickerStyle wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetDatePickerStyle(datePickerStyle DatePickerStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
 }
 
-// DrawsBackground calls the underlying DrawsBackground.
+// DrawsBackground wraps the corresponding Objective-C method.
 func (x *DatePickerCell) DrawsBackground() bool {
-	return x.inner.DrawsBackground()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+	return _r
 }
 
-// SetDrawsBackground calls the underlying SetDrawsBackground.
+// SetDrawsBackground wraps the corresponding Objective-C method.
 func (x *DatePickerCell) SetDrawsBackground(drawsBackground bool) {
-	x.inner.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *DatePickerCell) BackgroundColor() *Color {
-	_r := x.inner.BackgroundColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return ColorFromID(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *DatePickerCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+// SetBackgroundColor wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetBackgroundColor(backgroundColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// TextColor calls the underlying TextColor.
+// TextColor wraps the corresponding Objective-C method.
 func (x *DatePickerCell) TextColor() *Color {
-	_r := x.inner.TextColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
+	return ColorFromID(_r)
 }
 
-// SetTextColor calls the underlying SetTextColor.
-func (x *DatePickerCell) SetTextColor(textColor *raw.NSColor) {
-	x.inner.SetTextColor(textColor)
+// SetTextColor wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetTextColor(textColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 }
 
-// DatePickerMode calls the underlying DatePickerMode.
-func (x *DatePickerCell) DatePickerMode() NSDatePickerMode {
-	return NSDatePickerMode(x.inner.DatePickerMode())
+// DatePickerMode wraps the corresponding Objective-C method.
+func (x *DatePickerCell) DatePickerMode() DatePickerMode {
+	_r := objc.Send[DatePickerMode](objref.IDOf(x), objc.RegisterName("datePickerMode"))
+	return _r
 }
 
-// SetDatePickerMode calls the underlying SetDatePickerMode.
-func (x *DatePickerCell) SetDatePickerMode(datePickerMode NSDatePickerMode) {
-	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
+// SetDatePickerMode wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetDatePickerMode(datePickerMode DatePickerMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerMode:"), datePickerMode)
 }
 
-// DatePickerElements calls the underlying DatePickerElements.
-func (x *DatePickerCell) DatePickerElements() NSDatePickerElementFlags {
-	return NSDatePickerElementFlags(x.inner.DatePickerElements())
+// DatePickerElements wraps the corresponding Objective-C method.
+func (x *DatePickerCell) DatePickerElements() DatePickerElementFlags {
+	_r := objc.Send[DatePickerElementFlags](objref.IDOf(x), objc.RegisterName("datePickerElements"))
+	return _r
 }
 
-// SetDatePickerElements calls the underlying SetDatePickerElements.
-func (x *DatePickerCell) SetDatePickerElements(datePickerElements NSDatePickerElementFlags) {
-	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
+// SetDatePickerElements wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetDatePickerElements(datePickerElements DatePickerElementFlags) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatePickerElements:"), datePickerElements)
 }
 
-// Calendar calls the underlying Calendar.
-func (x *DatePickerCell) Calendar() *foundation.NSCalendar {
-	return x.inner.Calendar()
+// Calendar wraps the corresponding Objective-C method.
+func (x *DatePickerCell) Calendar() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
+	return obj.Wrap(_r)
 }
 
-// SetCalendar calls the underlying SetCalendar.
-func (x *DatePickerCell) SetCalendar(calendar *foundation.NSCalendar) {
-	x.inner.SetCalendar(calendar)
+// SetCalendar wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetCalendar(calendar obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
-// Locale calls the underlying Locale.
-func (x *DatePickerCell) Locale() *foundation.NSLocale {
-	return x.inner.Locale()
+// Locale wraps the corresponding Objective-C method.
+func (x *DatePickerCell) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return obj.Wrap(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *DatePickerCell) SetLocale(locale *foundation.NSLocale) {
-	x.inner.SetLocale(locale)
+// SetLocale wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetLocale(locale obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
-// TimeZone calls the underlying TimeZone.
-func (x *DatePickerCell) TimeZone() *foundation.NSTimeZone {
-	return x.inner.TimeZone()
+// TimeZone wraps the corresponding Objective-C method.
+func (x *DatePickerCell) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return obj.Wrap(_r)
 }
 
-// SetTimeZone calls the underlying SetTimeZone.
-func (x *DatePickerCell) SetTimeZone(timeZone *foundation.NSTimeZone) {
-	x.inner.SetTimeZone(timeZone)
+// SetTimeZone wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetTimeZone(timeZone obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
-// DateValue calls the underlying DateValue.
-func (x *DatePickerCell) DateValue() *foundation.NSDate {
-	return x.inner.DateValue()
+// DateValue wraps the corresponding Objective-C method.
+func (x *DatePickerCell) DateValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateValue"))
+	return obj.Wrap(_r)
 }
 
-// SetDateValue calls the underlying SetDateValue.
-func (x *DatePickerCell) SetDateValue(dateValue *foundation.NSDate) {
-	x.inner.SetDateValue(dateValue)
+// SetDateValue wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetDateValue(dateValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
 }
 
-// TimeInterval calls the underlying TimeInterval.
+// TimeInterval wraps the corresponding Objective-C method.
 func (x *DatePickerCell) TimeInterval() float64 {
-	return x.inner.TimeInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+	return _r
 }
 
-// SetTimeInterval calls the underlying SetTimeInterval.
+// SetTimeInterval wraps the corresponding Objective-C method.
 func (x *DatePickerCell) SetTimeInterval(timeInterval float64) {
-	x.inner.SetTimeInterval(timeInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeInterval:"), timeInterval)
 }
 
-// MinDate calls the underlying MinDate.
-func (x *DatePickerCell) MinDate() *foundation.NSDate {
-	return x.inner.MinDate()
+// MinDate wraps the corresponding Objective-C method.
+func (x *DatePickerCell) MinDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDate"))
+	return obj.Wrap(_r)
 }
 
-// SetMinDate calls the underlying SetMinDate.
-func (x *DatePickerCell) SetMinDate(minDate *foundation.NSDate) {
-	x.inner.SetMinDate(minDate)
+// SetMinDate wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetMinDate(minDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
 }
 
-// MaxDate calls the underlying MaxDate.
-func (x *DatePickerCell) MaxDate() *foundation.NSDate {
-	return x.inner.MaxDate()
+// MaxDate wraps the corresponding Objective-C method.
+func (x *DatePickerCell) MaxDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDate"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxDate calls the underlying SetMaxDate.
-func (x *DatePickerCell) SetMaxDate(maxDate *foundation.NSDate) {
-	x.inner.SetMaxDate(maxDate)
+// SetMaxDate wraps the corresponding Objective-C method.
+func (x *DatePickerCell) SetMaxDate(maxDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
 }
-
-// Delegate calls the underlying Delegate.
-func (x *DatePickerCell) Delegate() raw.NSDatePickerCellDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *DatePickerCell) SetDelegate(delegate raw.NSDatePickerCellDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *DatePickerCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
-
-func (x *DatePickerCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 
 // DatePickerCellable is the interface implemented by [DatePickerCell], for mocking and DI.
 type DatePickerCellable interface {
-	Unwrap() *raw.NSDatePickerCell
-	WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePickerCell
+	obj.Object
+	WithDatePickerStyle(datePickerStyle DatePickerStyle) *DatePickerCell
 	WithDrawsBackground(drawsBackground bool) *DatePickerCell
 	WithBackgroundColor(backgroundColor *Color) *DatePickerCell
 	WithTextColor(textColor *Color) *DatePickerCell
-	WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePickerCell
-	WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePickerCell
-	WithCalendar(calendar *foundation.NSCalendar) *DatePickerCell
-	WithLocale(locale *foundation.NSLocale) *DatePickerCell
-	WithTimeZone(timeZone *foundation.NSTimeZone) *DatePickerCell
-	WithDateValue(dateValue *foundation.NSDate) *DatePickerCell
+	WithDatePickerMode(datePickerMode DatePickerMode) *DatePickerCell
+	WithDatePickerElements(datePickerElements DatePickerElementFlags) *DatePickerCell
+	WithCalendar(calendar obj.Object) *DatePickerCell
+	WithLocale(locale obj.Object) *DatePickerCell
+	WithTimeZone(timeZone obj.Object) *DatePickerCell
+	WithDateValue(dateValue obj.Object) *DatePickerCell
 	WithTimeInterval(timeInterval float64) *DatePickerCell
-	WithMinDate(minDate *foundation.NSDate) *DatePickerCell
-	WithMaxDate(maxDate *foundation.NSDate) *DatePickerCell
-	WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePickerCell
+	WithMinDate(minDate obj.Object) *DatePickerCell
+	WithMaxDate(maxDate obj.Object) *DatePickerCell
 	WithControlView(controlView ViewProvider) *DatePickerCell
-	WithType(type_ NSCellType) *DatePickerCell
+	WithType(type_ CellType) *DatePickerCell
 	WithState(state int) *DatePickerCell
-	WithTarget(target objc.ID) *DatePickerCell
-	WithAction(action objc.SEL) *DatePickerCell
+	WithTarget(target obj.Object) *DatePickerCell
 	WithTag(tag int) *DatePickerCell
 	WithTitle(title string) *DatePickerCell
 	WithEnabled(enabled bool) *DatePickerCell
@@ -702,64 +575,66 @@ type DatePickerCellable interface {
 	WithBezeled(bezeled bool) *DatePickerCell
 	WithScrollable(scrollable bool) *DatePickerCell
 	WithHighlighted(highlighted bool) *DatePickerCell
-	WithAlignment(alignment NSTextAlignment) *DatePickerCell
+	WithAlignment(alignment TextAlignment) *DatePickerCell
 	WithWraps(wraps bool) *DatePickerCell
 	WithFont(font *Font) *DatePickerCell
-	WithFormatter(formatter *foundation.NSFormatter) *DatePickerCell
-	WithObjectValue(objectValue objc.ID) *DatePickerCell
+	WithFormatter(formatter obj.Object) *DatePickerCell
+	WithObjectValue(objectValue obj.Object) *DatePickerCell
 	WithStringValue(stringValue string) *DatePickerCell
 	WithIntValue(intValue int) *DatePickerCell
 	WithFloatValue(floatValue float32) *DatePickerCell
 	WithDoubleValue(doubleValue float64) *DatePickerCell
 	WithIntegerValue(integerValue int) *DatePickerCell
 	WithImage(image *Image) *DatePickerCell
-	WithControlSize(controlSize NSControlSize) *DatePickerCell
-	WithRepresentedObject(representedObject objc.ID) *DatePickerCell
+	WithControlSize(controlSize ControlSize) *DatePickerCell
+	WithRepresentedObject(representedObject obj.Object) *DatePickerCell
 	WithMenu(menu *Menu) *DatePickerCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *DatePickerCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePickerCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePickerCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *DatePickerCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *DatePickerCell
 	WithAllowsUndo(allowsUndo bool) *DatePickerCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *DatePickerCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePickerCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *DatePickerCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *DatePickerCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *DatePickerCell
 	WithShowsFirstResponder(showsFirstResponder bool) *DatePickerCell
-	WithFocusRingType(focusRingType NSFocusRingType) *DatePickerCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *DatePickerCell
+	WithFocusRingType(focusRingType FocusRingType) *DatePickerCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *DatePickerCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *DatePickerCell
 	WithImportsGraphics(importsGraphics bool) *DatePickerCell
 	WithAllowsMixedState(allowsMixedState bool) *DatePickerCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *DatePickerCell
-	WithControlTint(controlTint NSControlTint) *DatePickerCell
-	DatePickerStyle() NSDatePickerStyle
-	SetDatePickerStyle(datePickerStyle NSDatePickerStyle)
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *DatePickerCell
+	WithControlTint(controlTint ControlTint) *DatePickerCell
+	DatePickerStyle() DatePickerStyle
+	SetDatePickerStyle(datePickerStyle DatePickerStyle)
 	DrawsBackground() bool
 	SetDrawsBackground(drawsBackground bool)
 	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *raw.NSColor)
+	SetBackgroundColor(backgroundColor *Color)
 	TextColor() *Color
-	SetTextColor(textColor *raw.NSColor)
-	DatePickerMode() NSDatePickerMode
-	SetDatePickerMode(datePickerMode NSDatePickerMode)
-	DatePickerElements() NSDatePickerElementFlags
-	SetDatePickerElements(datePickerElements NSDatePickerElementFlags)
-	Calendar() *foundation.NSCalendar
-	SetCalendar(calendar *foundation.NSCalendar)
-	Locale() *foundation.NSLocale
-	SetLocale(locale *foundation.NSLocale)
-	TimeZone() *foundation.NSTimeZone
-	SetTimeZone(timeZone *foundation.NSTimeZone)
-	DateValue() *foundation.NSDate
-	SetDateValue(dateValue *foundation.NSDate)
+	SetTextColor(textColor *Color)
+	DatePickerMode() DatePickerMode
+	SetDatePickerMode(datePickerMode DatePickerMode)
+	DatePickerElements() DatePickerElementFlags
+	SetDatePickerElements(datePickerElements DatePickerElementFlags)
+	Calendar() obj.Object
+	SetCalendar(calendar obj.Object)
+	Locale() obj.Object
+	SetLocale(locale obj.Object)
+	TimeZone() obj.Object
+	SetTimeZone(timeZone obj.Object)
+	DateValue() obj.Object
+	SetDateValue(dateValue obj.Object)
 	TimeInterval() float64
 	SetTimeInterval(timeInterval float64)
-	MinDate() *foundation.NSDate
-	SetMinDate(minDate *foundation.NSDate)
-	MaxDate() *foundation.NSDate
-	SetMaxDate(maxDate *foundation.NSDate)
-	Delegate() raw.NSDatePickerCellDelegate
-	SetDelegate(delegate raw.NSDatePickerCellDelegate)
+	MinDate() obj.Object
+	SetMinDate(minDate obj.Object)
+	MaxDate() obj.Object
+	SetMaxDate(maxDate obj.Object)
 }
 
 var _ DatePickerCellable = (*DatePickerCell)(nil)
+
+var _ ActionCellProvider = (*DatePickerCell)(nil)
+
+var _ CellProvider = (*DatePickerCell)(nil)

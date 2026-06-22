@@ -5,226 +5,261 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRDoorLockClusterGetWeekDayScheduleResponseParams wraps [raw.MTRDoorLockClusterGetWeekDayScheduleResponseParams] with a fluent Go API.
+// MTRDoorLockClusterGetWeekDayScheduleResponseParams is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterGetWeekDayScheduleResponseParams.
 type MTRDoorLockClusterGetWeekDayScheduleResponseParams struct {
-	inner *raw.MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterGetWeekDayScheduleResponseParams].
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Unwrap() *raw.MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID adopts an existing object pointer as a MTRDoorLockClusterGetWeekDayScheduleResponseParams (nil for 0).
+// MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID adopts an existing Objective-C object as a MTRDoorLockClusterGetWeekDayScheduleResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID(id objc.ID) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterGetWeekDayScheduleResponseParams{inner: raw.MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID(id)}
+	x := &MTRDoorLockClusterGetWeekDayScheduleResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRDoorLockClusterGetWeekDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError creates a new [MTRDoorLockClusterGetWeekDayScheduleResponseParams].
-func NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRDoorLockClusterGetWeekDayScheduleResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterGetWeekDayScheduleResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRDoorLockClusterGetWeekDayScheduleResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterGetWeekDayScheduleResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterGetWeekDayScheduleResponseParamsAdopt(id objc.ID) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRDoorLockClusterGetWeekDayScheduleResponseParams{inner: raw.MTRDoorLockClusterGetWeekDayScheduleResponseParamsFromID(_id)}, nil
-}
-
-// WithWeekDayIndex sets the weekDayIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithWeekDayIndex(weekDayIndex *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetWeekDayIndex(weekDayIndex)
+	x := &MTRDoorLockClusterGetWeekDayScheduleResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithUserIndex sets the userIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetUserIndex(userIndex)
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError initialize an MTRDoorLockClusterGetWeekDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetWeekDayScheduleResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRDoorLockClusterGetWeekDayScheduleResponseParamsAdopt(_id), nil
+}
+
+// WithWeekDayIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 	return x
 }
 
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStatus(status *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetStatus(status)
+// WithUserIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return x
 }
 
-// WithDaysMask sets the daysMask property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithDaysMask(daysMask *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetDaysMask(daysMask)
+// WithStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithStartHour sets the startHour property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStartHour(startHour *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetStartHour(startHour)
+// WithDaysMask sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithDaysMask(daysMask obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDaysMask:"), objref.IDOf(daysMask))
 	return x
 }
 
-// WithStartMinute sets the startMinute property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStartMinute(startMinute *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetStartMinute(startMinute)
+// WithStartHour sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStartHour(startHour obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartHour:"), objref.IDOf(startHour))
 	return x
 }
 
-// WithEndHour sets the endHour property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithEndHour(endHour *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetEndHour(endHour)
+// WithStartMinute sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStartMinute(startMinute obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMinute:"), objref.IDOf(startMinute))
 	return x
 }
 
-// WithEndMinute sets the endMinute property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithEndMinute(endMinute *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetEndMinute(endMinute)
+// WithEndHour sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithEndHour(endHour obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndHour:"), objref.IDOf(endHour))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithEndMinute sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithEndMinute(endMinute obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMinute:"), objref.IDOf(endMinute))
 	return x
 }
 
-// WeekDayIndex calls the underlying WeekDayIndex.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WeekDayIndex() *foundation.NSNumber {
-	return x.inner.WeekDayIndex()
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
 }
 
-// SetWeekDayIndex calls the underlying SetWeekDayIndex.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetWeekDayIndex(weekDayIndex *foundation.NSNumber) {
-	x.inner.SetWeekDayIndex(weekDayIndex)
+// WeekDayIndex wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WeekDayIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weekDayIndex"))
+	return obj.Wrap(_r)
 }
 
-// UserIndex calls the underlying UserIndex.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) UserIndex() *foundation.NSNumber {
-	return x.inner.UserIndex()
+// SetWeekDayIndex wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetWeekDayIndex(weekDayIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 }
 
-// SetUserIndex calls the underlying SetUserIndex.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetUserIndex(userIndex *foundation.NSNumber) {
-	x.inner.SetUserIndex(userIndex)
+// UserIndex wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) UserIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
+	return obj.Wrap(_r)
 }
 
-// Status calls the underlying Status.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Status() *foundation.NSNumber {
-	return x.inner.Status()
+// SetUserIndex wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetUserIndex(userIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetStatus(status *foundation.NSNumber) {
-	x.inner.SetStatus(status)
+// Status wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
 }
 
-// DaysMask calls the underlying DaysMask.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) DaysMask() *foundation.NSNumber {
-	return x.inner.DaysMask()
+// SetStatus wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetStatus(status obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
-// SetDaysMask calls the underlying SetDaysMask.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetDaysMask(daysMask *foundation.NSNumber) {
-	x.inner.SetDaysMask(daysMask)
+// DaysMask wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) DaysMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("daysMask"))
+	return obj.Wrap(_r)
 }
 
-// StartHour calls the underlying StartHour.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartHour() *foundation.NSNumber {
-	return x.inner.StartHour()
+// SetDaysMask wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetDaysMask(daysMask obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDaysMask:"), objref.IDOf(daysMask))
 }
 
-// SetStartHour calls the underlying SetStartHour.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetStartHour(startHour *foundation.NSNumber) {
-	x.inner.SetStartHour(startHour)
+// StartHour wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartHour() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startHour"))
+	return obj.Wrap(_r)
 }
 
-// StartMinute calls the underlying StartMinute.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartMinute() *foundation.NSNumber {
-	return x.inner.StartMinute()
+// SetStartHour wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetStartHour(startHour obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartHour:"), objref.IDOf(startHour))
 }
 
-// SetStartMinute calls the underlying SetStartMinute.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetStartMinute(startMinute *foundation.NSNumber) {
-	x.inner.SetStartMinute(startMinute)
+// StartMinute wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartMinute() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMinute"))
+	return obj.Wrap(_r)
 }
 
-// EndHour calls the underlying EndHour.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndHour() *foundation.NSNumber {
-	return x.inner.EndHour()
+// SetStartMinute wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetStartMinute(startMinute obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMinute:"), objref.IDOf(startMinute))
 }
 
-// SetEndHour calls the underlying SetEndHour.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetEndHour(endHour *foundation.NSNumber) {
-	x.inner.SetEndHour(endHour)
+// EndHour wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndHour() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endHour"))
+	return obj.Wrap(_r)
 }
 
-// EndMinute calls the underlying EndMinute.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndMinute() *foundation.NSNumber {
-	return x.inner.EndMinute()
+// SetEndHour wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetEndHour(endHour obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndHour:"), objref.IDOf(endHour))
 }
 
-// SetEndMinute calls the underlying SetEndMinute.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetEndMinute(endMinute *foundation.NSNumber) {
-	x.inner.SetEndMinute(endMinute)
+// EndMinute wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndMinute() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endMinute"))
+	return obj.Wrap(_r)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// SetEndMinute wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetEndMinute(endMinute obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMinute:"), objref.IDOf(endMinute))
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterGetWeekDayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRDoorLockClusterGetWeekDayScheduleResponseParamsable is the interface implemented by [MTRDoorLockClusterGetWeekDayScheduleResponseParams], for mocking and DI.
 type MTRDoorLockClusterGetWeekDayScheduleResponseParamsable interface {
-	Unwrap() *raw.MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithWeekDayIndex(weekDayIndex *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithDaysMask(daysMask *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithStartHour(startHour *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithStartMinute(startMinute *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithEndHour(endHour *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithEndMinute(endMinute *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
-	WeekDayIndex() *foundation.NSNumber
-	SetWeekDayIndex(weekDayIndex *foundation.NSNumber)
-	UserIndex() *foundation.NSNumber
-	SetUserIndex(userIndex *foundation.NSNumber)
-	Status() *foundation.NSNumber
-	SetStatus(status *foundation.NSNumber)
-	DaysMask() *foundation.NSNumber
-	SetDaysMask(daysMask *foundation.NSNumber)
-	StartHour() *foundation.NSNumber
-	SetStartHour(startHour *foundation.NSNumber)
-	StartMinute() *foundation.NSNumber
-	SetStartMinute(startMinute *foundation.NSNumber)
-	EndHour() *foundation.NSNumber
-	SetEndHour(endHour *foundation.NSNumber)
-	EndMinute() *foundation.NSNumber
-	SetEndMinute(endMinute *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	obj.Object
+	WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithStatus(status obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithDaysMask(daysMask obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithStartHour(startHour obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithStartMinute(startMinute obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithEndHour(endHour obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithEndMinute(endMinute obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams
+	WeekDayIndex() obj.Object
+	SetWeekDayIndex(weekDayIndex obj.Object)
+	UserIndex() obj.Object
+	SetUserIndex(userIndex obj.Object)
+	Status() obj.Object
+	SetStatus(status obj.Object)
+	DaysMask() obj.Object
+	SetDaysMask(daysMask obj.Object)
+	StartHour() obj.Object
+	SetStartHour(startHour obj.Object)
+	StartMinute() obj.Object
+	SetStartMinute(startMinute obj.Object)
+	EndHour() obj.Object
+	SetEndHour(endHour obj.Object)
+	EndMinute() obj.Object
+	SetEndMinute(endMinute obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRDoorLockClusterGetWeekDayScheduleResponseParamsable = (*MTRDoorLockClusterGetWeekDayScheduleResponseParams)(nil)

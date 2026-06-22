@@ -5,64 +5,70 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestUnknownCommandParams wraps [raw.MTRTestClusterClusterTestUnknownCommandParams] with a fluent Go API.
+// MTRTestClusterClusterTestUnknownCommandParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestUnknownCommandParams.
+//
+// It embeds [MTRUnitTestingClusterTestUnknownCommandParams], promoting that type's methods.
 type MTRTestClusterClusterTestUnknownCommandParams struct {
-	inner *raw.MTRTestClusterClusterTestUnknownCommandParams
+	MTRUnitTestingClusterTestUnknownCommandParams
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestUnknownCommandParams].
-func (x *MTRTestClusterClusterTestUnknownCommandParams) Unwrap() *raw.MTRTestClusterClusterTestUnknownCommandParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestUnknownCommandParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestUnknownCommandParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestUnknownCommandParams (nil for 0).
+// MTRTestClusterClusterTestUnknownCommandParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestUnknownCommandParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestUnknownCommandParamsFromID(id objc.ID) *MTRTestClusterClusterTestUnknownCommandParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestUnknownCommandParams{inner: raw.MTRTestClusterClusterTestUnknownCommandParamsFromID(id)}
+	x := &MTRTestClusterClusterTestUnknownCommandParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestUnknownCommandParams creates a new [MTRTestClusterClusterTestUnknownCommandParams].
+// mTRTestClusterClusterTestUnknownCommandParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestUnknownCommandParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestUnknownCommandParamsAdopt(id objc.ID) *MTRTestClusterClusterTestUnknownCommandParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestUnknownCommandParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRTestClusterClusterTestUnknownCommandParams creates a new MTRTestClusterClusterTestUnknownCommandParams.
 func NewMTRTestClusterClusterTestUnknownCommandParams() *MTRTestClusterClusterTestUnknownCommandParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestUnknownCommandParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestUnknownCommandParams{inner: raw.MTRTestClusterClusterTestUnknownCommandParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestUnknownCommandParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestUnknownCommandParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestUnknownCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams {
-	x.inner.MTRUnitTestingClusterTestUnknownCommandParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTestClusterClusterTestUnknownCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestUnknownCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestUnknownCommandParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams {
-	x.inner.MTRUnitTestingClusterTestUnknownCommandParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTestClusterClusterTestUnknownCommandParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestUnknownCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestUnknownCommandParams) asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams {
-	return &x.inner.MTRUnitTestingClusterTestUnknownCommandParams
 }
 
 // MTRTestClusterClusterTestUnknownCommandParamsable is the interface implemented by [MTRTestClusterClusterTestUnknownCommandParams], for mocking and DI.
 type MTRTestClusterClusterTestUnknownCommandParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestUnknownCommandParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestUnknownCommandParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestUnknownCommandParams
 }
 
 var _ MTRTestClusterClusterTestUnknownCommandParamsable = (*MTRTestClusterClusterTestUnknownCommandParams)(nil)
+
+var _ MTRUnitTestingClusterTestUnknownCommandParamsProvider = (*MTRTestClusterClusterTestUnknownCommandParams)(nil)

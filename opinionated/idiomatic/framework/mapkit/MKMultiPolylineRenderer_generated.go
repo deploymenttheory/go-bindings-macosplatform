@@ -5,171 +5,132 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A visual representation of multiple polyline overlay objects.
+// MultiPolylineRenderer is an idiomatic wrapper over the Objective-C class MKMultiPolylineRenderer.
 //
-// MultiPolylineRenderer wraps [raw.MKMultiPolylineRenderer] with a fluent Go API.
+// It embeds [OverlayPathRenderer], promoting that type's methods.
+//
+// A visual representation of multiple polyline overlay objects.
 type MultiPolylineRenderer struct {
-	inner *raw.MKMultiPolylineRenderer
+	OverlayPathRenderer
 }
 
-// Unwrap returns the underlying [raw.MKMultiPolylineRenderer].
-func (x *MultiPolylineRenderer) Unwrap() *raw.MKMultiPolylineRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiPolylineRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiPolylineRendererFromID adopts an existing object pointer as a MultiPolylineRenderer (nil for 0).
+// MultiPolylineRendererFromID adopts an existing Objective-C object as a MultiPolylineRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiPolylineRendererFromID(id objc.ID) *MultiPolylineRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &MultiPolylineRenderer{inner: raw.MKMultiPolylineRendererFromID(id)}
-}
-
-// Creates an object that renders a visual representation of multiple polyline objects.
-//
-// NewMultiPolylineRendererWithMultiPolyline creates a new [MultiPolylineRenderer].
-func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *raw.MKMultiPolyline) *MultiPolylineRenderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolylineRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolyline:"), multiPolyline.Ptr())
-	return &MultiPolylineRenderer{inner: raw.MKMultiPolylineRendererFromID(_id)}
-}
-
-// The fill color to use for the path.
-//
-// WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithFillColor(fillColor *appkit.NSColor) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+	x := &MultiPolylineRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The stroke color to use for the path.
-//
-// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
-	return x
-}
-
-// The stroke width to use for the path.
-//
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithLineWidth(lineWidth float64) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
-	return x
-}
-
-// The line join style to apply to the corners of the path.
-//
-// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
-	return x
-}
-
-// The line cap style to apply to the open ends of the path.
-//
-// WithLineCap sets the lineCap property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
-	return x
-}
-
-// The limiting value that helps avoid spikes at junctions between connected line segments.
-//
-// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithMiterLimit(miterLimit float64) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
-	return x
-}
-
-// The offset (in points) at which to start drawing the dash pattern.
-//
-// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
-	return x
-}
-
-// An array of numbers specifying the dash pattern to use for the path.
-//
-// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
-func (x *MultiPolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolylineRenderer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MKOverlayPathRenderer.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
-	return x
-}
-
-// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-//
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
-	return x
-}
-
-// The amount of transparency to apply to the overlay.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
-func (x *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRenderer {
-	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
-	return x
-}
-
-// MultiPolyline calls the underlying MultiPolyline.
-func (x *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
-	_r := x.inner.MultiPolyline()
-	if _r == nil {
+// multiPolylineRendererAdopt wraps an Objective-C object that this code just created as a
+// MultiPolylineRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiPolylineRendererAdopt(id objc.ID) *MultiPolylineRenderer {
+	if id == 0 {
 		return nil
 	}
-	return &MultiPolyline{inner: _r}
+	x := &MultiPolylineRenderer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MultiPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
-	return &x.inner.MKOverlayPathRenderer
+// NewMultiPolylineRendererWithMultiPolyline creates an object that renders a visual representation of multiple polyline objects.
+func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *MultiPolyline) *MultiPolylineRenderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolylineRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolyline:"), objref.IDOf(multiPolyline))
+	return multiPolylineRendererAdopt(_id)
 }
 
-func (x *MultiPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
-	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+// WithFillColor the fill color to use for the path.
+func (x *MultiPolylineRenderer) WithFillColor(fillColor obj.Object) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return x
+}
+
+// WithStrokeColor the stroke color to use for the path.
+func (x *MultiPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return x
+}
+
+// WithLineWidth the stroke width to use for the path.
+func (x *MultiPolylineRenderer) WithLineWidth(lineWidth float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
+	return x
+}
+
+// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
+func (x *MultiPolylineRenderer) WithMiterLimit(miterLimit float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return x
+}
+
+// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
+func (x *MultiPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return x
+}
+
+// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
+func (x *MultiPolylineRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolylineRenderer {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
+	return x
+}
+
+// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+func (x *MultiPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return x
+}
+
+// WithPath the path representing the overlay’s shape.
+func (x *MultiPolylineRenderer) WithPath(path obj.Object) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return x
+}
+
+// WithAlpha the amount of transparency to apply to the overlay.
+func (x *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
+	return x
+}
+
+// MultiPolyline wraps the corresponding Objective-C method.
+func (x *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiPolyline"))
+	return MultiPolylineFromID(_r)
 }
 
 // MultiPolylineRendererable is the interface implemented by [MultiPolylineRenderer], for mocking and DI.
 type MultiPolylineRendererable interface {
-	Unwrap() *raw.MKMultiPolylineRenderer
-	WithFillColor(fillColor *appkit.NSColor) *MultiPolylineRenderer
-	WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolylineRenderer
+	obj.Object
+	WithFillColor(fillColor obj.Object) *MultiPolylineRenderer
+	WithStrokeColor(strokeColor obj.Object) *MultiPolylineRenderer
 	WithLineWidth(lineWidth float64) *MultiPolylineRenderer
-	WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolylineRenderer
-	WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolylineRenderer
 	WithMiterLimit(miterLimit float64) *MultiPolylineRenderer
 	WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer
-	WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolylineRenderer
+	WithLineDashPattern(items ...obj.Object) *MultiPolylineRenderer
 	WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer
+	WithPath(path obj.Object) *MultiPolylineRenderer
 	WithAlpha(alpha float64) *MultiPolylineRenderer
 	MultiPolyline() *MultiPolyline
 }
 
 var _ MultiPolylineRendererable = (*MultiPolylineRenderer)(nil)
+
+var _ OverlayPathRendererProvider = (*MultiPolylineRenderer)(nil)
+
+var _ OverlayRendererProvider = (*MultiPolylineRenderer)(nil)

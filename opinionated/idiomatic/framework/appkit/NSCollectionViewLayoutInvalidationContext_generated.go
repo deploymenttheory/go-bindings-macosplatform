@@ -5,141 +5,162 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that identifies the portions of your layout that need to be updated.
+// CollectionViewLayoutInvalidationContext is an idiomatic wrapper over the Objective-C class NSCollectionViewLayoutInvalidationContext.
 //
-// CollectionViewLayoutInvalidationContext wraps [raw.NSCollectionViewLayoutInvalidationContext] with a fluent Go API.
+// CollectionViewLayoutInvalidationContext is an abstract base — you do not construct it directly. Construct one of [CollectionViewFlowLayoutInvalidationContext] and pass it where a CollectionViewLayoutInvalidationContext is accepted.
+//
+// An object that identifies the portions of your layout that need to be updated.
 type CollectionViewLayoutInvalidationContext struct {
-	inner *raw.NSCollectionViewLayoutInvalidationContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewLayoutInvalidationContext].
-func (x *CollectionViewLayoutInvalidationContext) Unwrap() *raw.NSCollectionViewLayoutInvalidationContext {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewLayoutInvalidationContext) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewLayoutInvalidationContextFromID adopts an existing object pointer as a CollectionViewLayoutInvalidationContext (nil for 0).
+// CollectionViewLayoutInvalidationContextFromID adopts an existing Objective-C object as a CollectionViewLayoutInvalidationContext
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewLayoutInvalidationContextFromID(id objc.ID) *CollectionViewLayoutInvalidationContext {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewLayoutInvalidationContext{inner: raw.NSCollectionViewLayoutInvalidationContextFromID(id)}
+	x := &CollectionViewLayoutInvalidationContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionViewLayoutInvalidationContext creates a new [CollectionViewLayoutInvalidationContext].
-func NewCollectionViewLayoutInvalidationContext() *CollectionViewLayoutInvalidationContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewLayoutInvalidationContext")), objc.RegisterName("new"))
-	return &CollectionViewLayoutInvalidationContext{inner: raw.NSCollectionViewLayoutInvalidationContextFromID(_id)}
+// collectionViewLayoutInvalidationContextAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewLayoutInvalidationContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewLayoutInvalidationContextAdopt(id objc.ID) *CollectionViewLayoutInvalidationContext {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewLayoutInvalidationContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The delta value to add to the collection view’s content offset.
-//
-// WithContentOffsetAdjustment sets the contentOffsetAdjustment property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *CollectionViewLayoutInvalidationContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewLayoutInvalidationContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewLayoutInvalidationContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionViewLayoutInvalidationContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithContentOffsetAdjustment the delta value to add to the collection view’s content offset.
 func (x *CollectionViewLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewLayoutInvalidationContext {
-	x.inner.SetContentOffsetAdjustment(contentOffsetAdjustment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
 	return x
 }
 
-// The delta value to add to the collection view’s content size.
-//
-// WithContentSizeAdjustment sets the contentSizeAdjustment property and returns the receiver for chaining.
+// WithContentSizeAdjustment the delta value to add to the collection view’s content size.
 func (x *CollectionViewLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewLayoutInvalidationContext {
-	x.inner.SetContentSizeAdjustment(contentSizeAdjustment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
 	return x
 }
 
-// Marks the specified items as invalid so that their layout information can be updated.
-//
-// InvalidateItemsAtIndexPaths calls the underlying InvalidateItemsAtIndexPaths.
-func (x *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	x.inner.InvalidateItemsAtIndexPaths(indexPaths)
+// InvalidateItemsAtIndexPaths marks the specified items as invalid so that their layout information can be updated.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateItemsAtIndexPaths:"), objref.IDOf(indexPaths))
 }
 
-// Marks the specified supplementary views as invalid so that their layout information can be updated.
-//
-// InvalidateSupplementaryElementsOfKindAtIndexPaths calls the underlying InvalidateSupplementaryElementsOfKindAtIndexPaths.
-func (x *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	x.inner.InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind, indexPaths)
+// InvalidateSupplementaryElementsOfKindAtIndexPaths marks the specified supplementary views as invalid so that their layout information can be updated.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateSupplementaryElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
 }
 
-// Marks the specified decoration views as invalid so that their layout information can be updated.
-//
-// InvalidateDecorationElementsOfKindAtIndexPaths calls the underlying InvalidateDecorationElementsOfKindAtIndexPaths.
-func (x *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	x.inner.InvalidateDecorationElementsOfKindAtIndexPaths(elementKind, indexPaths)
+// InvalidateDecorationElementsOfKindAtIndexPaths marks the specified decoration views as invalid so that their layout information can be updated.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
 }
 
-// InvalidateEverything calls the underlying InvalidateEverything.
+// InvalidateEverything wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
-	return x.inner.InvalidateEverything()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidateEverything"))
+	return _r
 }
 
-// InvalidateDataSourceCounts calls the underlying InvalidateDataSourceCounts.
+// InvalidateDataSourceCounts wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
-	return x.inner.InvalidateDataSourceCounts()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidateDataSourceCounts"))
+	return _r
 }
 
-// InvalidatedItemIndexPaths calls the underlying InvalidatedItemIndexPaths.
-func (x *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() *foundation.NSSet[*foundation.NSIndexPath] {
-	return x.inner.InvalidatedItemIndexPaths()
+// InvalidatedItemIndexPaths wraps the corresponding Objective-C method.
+func (x *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidatedItemIndexPaths"))
+	return obj.Wrap(_r)
 }
 
-// InvalidatedSupplementaryIndexPaths calls the underlying InvalidatedSupplementaryIndexPaths.
-func (x *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.InvalidatedSupplementaryIndexPaths()
+// InvalidatedSupplementaryIndexPaths wraps the corresponding Objective-C method.
+func (x *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidatedSupplementaryIndexPaths"))
+	return obj.Wrap(_r)
 }
 
-// InvalidatedDecorationIndexPaths calls the underlying InvalidatedDecorationIndexPaths.
-func (x *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.InvalidatedDecorationIndexPaths()
+// InvalidatedDecorationIndexPaths wraps the corresponding Objective-C method.
+func (x *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidatedDecorationIndexPaths"))
+	return obj.Wrap(_r)
 }
 
-// ContentOffsetAdjustment calls the underlying ContentOffsetAdjustment.
+// ContentOffsetAdjustment wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {
-	return x.inner.ContentOffsetAdjustment()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("contentOffsetAdjustment"))
+	return _r
 }
 
-// SetContentOffsetAdjustment calls the underlying SetContentOffsetAdjustment.
+// SetContentOffsetAdjustment wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutInvalidationContext) SetContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) {
-	x.inner.SetContentOffsetAdjustment(contentOffsetAdjustment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
 }
 
-// ContentSizeAdjustment calls the underlying ContentSizeAdjustment.
+// ContentSizeAdjustment wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutInvalidationContext) ContentSizeAdjustment() corefoundation.CGSize {
-	return x.inner.ContentSizeAdjustment()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentSizeAdjustment"))
+	return _r
 }
 
-// SetContentSizeAdjustment calls the underlying SetContentSizeAdjustment.
+// SetContentSizeAdjustment wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) {
-	x.inner.SetContentSizeAdjustment(contentSizeAdjustment)
-}
-
-func (x *CollectionViewLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
 }
 
 // CollectionViewLayoutInvalidationContextable is the interface implemented by [CollectionViewLayoutInvalidationContext], for mocking and DI.
 type CollectionViewLayoutInvalidationContextable interface {
-	Unwrap() *raw.NSCollectionViewLayoutInvalidationContext
+	obj.Object
 	WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewLayoutInvalidationContext
 	WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewLayoutInvalidationContext
-	InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath])
-	InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath])
-	InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath])
+	InvalidateItemsAtIndexPaths(indexPaths obj.Object)
+	InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object)
+	InvalidateDecorationElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object)
 	InvalidateEverything() bool
 	InvalidateDataSourceCounts() bool
-	InvalidatedItemIndexPaths() *foundation.NSSet[*foundation.NSIndexPath]
-	InvalidatedSupplementaryIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	InvalidatedDecorationIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	InvalidatedItemIndexPaths() obj.Object
+	InvalidatedSupplementaryIndexPaths() obj.Object
+	InvalidatedDecorationIndexPaths() obj.Object
 	ContentOffsetAdjustment() corefoundation.CGPoint
 	SetContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint)
 	ContentSizeAdjustment() corefoundation.CGSize
@@ -147,3 +168,10 @@ type CollectionViewLayoutInvalidationContextable interface {
 }
 
 var _ CollectionViewLayoutInvalidationContextable = (*CollectionViewLayoutInvalidationContext)(nil)
+
+// isCollectionViewLayoutInvalidationContext marks CollectionViewLayoutInvalidationContext — and, by embedding promotion, its
+// subclasses — as a member of the CollectionViewLayoutInvalidationContext hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CollectionViewLayoutInvalidationContext) isCollectionViewLayoutInvalidationContext() {}
+
+var _ CollectionViewLayoutInvalidationContextProvider = (*CollectionViewLayoutInvalidationContext)(nil)

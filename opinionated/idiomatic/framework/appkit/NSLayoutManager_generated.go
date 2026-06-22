@@ -5,1136 +5,868 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that coordinates the layout and display of text characters.
+// LayoutManager is an idiomatic wrapper over the Objective-C class NSLayoutManager.
 //
-// LayoutManager wraps [raw.NSLayoutManager] with a fluent Go API.
+// An object that coordinates the layout and display of text characters.
 type LayoutManager struct {
-	inner *raw.NSLayoutManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLayoutManager].
-func (x *LayoutManager) Unwrap() *raw.NSLayoutManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LayoutManager) ID() objc.ID { return x.inner.Ptr() }
-
-// LayoutManagerFromID adopts an existing object pointer as a LayoutManager (nil for 0).
+// LayoutManagerFromID adopts an existing Objective-C object as a LayoutManager
+// (nil for 0), retaining it and registering a release finalizer.
 func LayoutManagerFromID(id objc.ID) *LayoutManager {
 	if id == 0 {
 		return nil
 	}
-	return &LayoutManager{inner: raw.NSLayoutManagerFromID(id)}
+	x := &LayoutManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLayoutManager creates a new [LayoutManager].
+// layoutManagerAdopt wraps an Objective-C object that this code just created as a
+// LayoutManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func layoutManagerAdopt(id objc.ID) *LayoutManager {
+	if id == 0 {
+		return nil
+	}
+	x := &LayoutManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LayoutManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LayoutManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LayoutManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LayoutManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLayoutManager creates a new LayoutManager.
 func NewLayoutManager() *LayoutManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLayoutManager")), objc.RegisterName("new"))
-	return &LayoutManager{inner: raw.NSLayoutManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLayoutManager")), objc.RegisterName("new"))
+	return layoutManagerAdopt(_id)
 }
 
-// Creates a layout manager from data in an unarchiver.
-//
-// NewLayoutManagerWithCoder creates a new [LayoutManager].
-func NewLayoutManagerWithCoder(coder *foundation.NSCoder) *LayoutManager {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLayoutManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &LayoutManager{inner: raw.NSLayoutManagerFromID(_id)}
+// NewLayoutManagerWithCoder creates a layout manager from data in an unarchiver.
+func NewLayoutManagerWithCoder(coder obj.Object) *LayoutManager {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLayoutManager")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return layoutManagerAdopt(_id)
 }
 
-// The text storage object that contains the content to lay out.
-//
-// WithTextStorage sets the textStorage property and returns the receiver for chaining.
+// WithTextStorage the text storage object that contains the content to lay out.
 func (x *LayoutManager) WithTextStorage(textStorage *TextStorage) *LayoutManager {
-	x.inner.SetTextStorage(textStorage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStorage:"), objref.IDOf(textStorage))
 	return x
 }
 
-// The layout manager’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *LayoutManager) WithDelegate(delegate raw.NSLayoutManagerDelegate) *LayoutManager {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that indicates whether to substitute visible glyphs for whitespace and other typically invisible characters.
-//
-// WithShowsInvisibleCharacters sets the showsInvisibleCharacters property and returns the receiver for chaining.
+// WithShowsInvisibleCharacters a Boolean value that indicates whether to substitute visible glyphs for whitespace and other typically invisible characters.
 func (x *LayoutManager) WithShowsInvisibleCharacters(showsInvisibleCharacters bool) *LayoutManager {
-	x.inner.SetShowsInvisibleCharacters(showsInvisibleCharacters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsInvisibleCharacters:"), showsInvisibleCharacters)
 	return x
 }
 
-// A Boolean value that indicates whether the layout manager substitutes visible glyphs for control characters in the layout.
-//
-// WithShowsControlCharacters sets the showsControlCharacters property and returns the receiver for chaining.
+// WithShowsControlCharacters a Boolean value that indicates whether the layout manager substitutes visible glyphs for control characters in the layout.
 func (x *LayoutManager) WithShowsControlCharacters(showsControlCharacters bool) *LayoutManager {
-	x.inner.SetShowsControlCharacters(showsControlCharacters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsControlCharacters:"), showsControlCharacters)
 	return x
 }
 
-// A Boolean value that indicates whether the layout manager uses the default hyphenation rules to wrap lines.
-//
-// WithUsesDefaultHyphenation sets the usesDefaultHyphenation property and returns the receiver for chaining.
+// WithUsesDefaultHyphenation a Boolean value that indicates whether the layout manager uses the default hyphenation rules to wrap lines.
 func (x *LayoutManager) WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *LayoutManager {
-	x.inner.SetUsesDefaultHyphenation(usesDefaultHyphenation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
 	return x
 }
 
-// A Boolean value that indicates whether the layout manager uses the leading of the font.
-//
-// WithUsesFontLeading sets the usesFontLeading property and returns the receiver for chaining.
+// WithUsesFontLeading a Boolean value that indicates whether the layout manager uses the leading of the font.
 func (x *LayoutManager) WithUsesFontLeading(usesFontLeading bool) *LayoutManager {
-	x.inner.SetUsesFontLeading(usesFontLeading)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontLeading:"), usesFontLeading)
 	return x
 }
 
-// A Boolean value that indicates whether the layout manager allows noncontiguous layout.
-//
-// WithAllowsNonContiguousLayout sets the allowsNonContiguousLayout property and returns the receiver for chaining.
+// WithAllowsNonContiguousLayout a Boolean value that indicates whether the layout manager allows noncontiguous layout.
 func (x *LayoutManager) WithAllowsNonContiguousLayout(allowsNonContiguousLayout bool) *LayoutManager {
-	x.inner.SetAllowsNonContiguousLayout(allowsNonContiguousLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonContiguousLayout:"), allowsNonContiguousLayout)
 	return x
 }
 
-// A Boolean value that indicates whether the layout manager avoids laying out unusually long or suspicious input.
-//
-// WithLimitsLayoutForSuspiciousContents sets the limitsLayoutForSuspiciousContents property and returns the receiver for chaining.
+// WithLimitsLayoutForSuspiciousContents a Boolean value that indicates whether the layout manager avoids laying out unusually long or suspicious input.
 func (x *LayoutManager) WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *LayoutManager {
-	x.inner.SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitsLayoutForSuspiciousContents:"), limitsLayoutForSuspiciousContents)
 	return x
 }
 
-// A Boolean value that indicates whether the layout manager generates glyphs and lays them out when the app’s run loop is idle.
-//
-// WithBackgroundLayoutEnabled sets the backgroundLayoutEnabled property and returns the receiver for chaining.
+// WithBackgroundLayoutEnabled a Boolean value that indicates whether the layout manager generates glyphs and lays them out when the app’s run loop is idle.
 func (x *LayoutManager) WithBackgroundLayoutEnabled(backgroundLayoutEnabled bool) *LayoutManager {
-	x.inner.SetBackgroundLayoutEnabled(backgroundLayoutEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundLayoutEnabled:"), backgroundLayoutEnabled)
 	return x
 }
 
-// The default amount of scaling to apply when an attachment image is too large to fit in a text container.
-//
-// WithDefaultAttachmentScaling sets the defaultAttachmentScaling property and returns the receiver for chaining.
-func (x *LayoutManager) WithDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) *LayoutManager {
-	x.inner.SetDefaultAttachmentScaling(raw.NSImageScaling(defaultAttachmentScaling))
+// WithDefaultAttachmentScaling the default amount of scaling to apply when an attachment image is too large to fit in a text container.
+func (x *LayoutManager) WithDefaultAttachmentScaling(defaultAttachmentScaling ImageScaling) *LayoutManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultAttachmentScaling:"), defaultAttachmentScaling)
 	return x
 }
 
-// The current typesetter.
-//
-// WithTypesetter sets the typesetter property and returns the receiver for chaining.
+// WithTypesetter the current typesetter.
 func (x *LayoutManager) WithTypesetter(typesetter TypesetterProvider) *LayoutManager {
-	x.inner.SetTypesetter(typesetter.asTypesetter())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypesetter:"), objref.IDOf(typesetter))
 	return x
 }
 
-// The default typesetter behavior.
-//
-// WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
-func (x *LayoutManager) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *LayoutManager {
-	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
+// WithTypesetterBehavior the default typesetter behavior.
+func (x *LayoutManager) WithTypesetterBehavior(typesetterBehavior TypesetterBehavior) *LayoutManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypesetterBehavior:"), typesetterBehavior)
 	return x
 }
 
-// WithUsesScreenFonts sets the usesScreenFonts property and returns the receiver for chaining.
+// WithUsesScreenFonts sets the property and returns the receiver so calls can be chained.
 func (x *LayoutManager) WithUsesScreenFonts(usesScreenFonts bool) *LayoutManager {
-	x.inner.SetUsesScreenFonts(usesScreenFonts)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesScreenFonts:"), usesScreenFonts)
 	return x
 }
 
-// WithHyphenationFactor sets the hyphenationFactor property and returns the receiver for chaining.
+// WithHyphenationFactor sets the property and returns the receiver so calls can be chained.
 func (x *LayoutManager) WithHyphenationFactor(hyphenationFactor float32) *LayoutManager {
-	x.inner.SetHyphenationFactor(hyphenationFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
 	return x
 }
 
-// The glyph generator that the layout manager uses.
-//
-// WithGlyphGenerator sets the glyphGenerator property and returns the receiver for chaining.
+// WithGlyphGenerator the glyph generator that the layout manager uses.
 func (x *LayoutManager) WithGlyphGenerator(glyphGenerator *GlyphGenerator) *LayoutManager {
-	x.inner.SetGlyphGenerator(glyphGenerator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphGenerator:"), objref.IDOf(glyphGenerator))
 	return x
 }
 
-// Replaces the layout manager’s current text storage object with the specified object.
-//
-// ReplaceTextStorage calls the underlying ReplaceTextStorage.
-func (x *LayoutManager) ReplaceTextStorage(newTextStorage *raw.NSTextStorage) {
-	x.inner.ReplaceTextStorage(newTextStorage)
+// ReplaceTextStorage replaces the layout manager’s current text storage object with the specified object.
+func (x *LayoutManager) ReplaceTextStorage(newTextStorage *TextStorage) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceTextStorage:"), objref.IDOf(newTextStorage))
 }
 
-// Appends the specified text container to the series of text containers where the layout manager arranges text.
-//
-// AddTextContainer calls the underlying AddTextContainer.
-func (x *LayoutManager) AddTextContainer(container *raw.NSTextContainer) {
-	x.inner.AddTextContainer(container)
+// AddTextContainer appends the specified text container to the series of text containers where the layout manager arranges text.
+func (x *LayoutManager) AddTextContainer(container *TextContainer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTextContainer:"), objref.IDOf(container))
 }
 
-// Inserts a text container at the specified index in the list of text containers.
-//
-// InsertTextContainerAtIndex calls the underlying InsertTextContainerAtIndex.
-func (x *LayoutManager) InsertTextContainerAtIndex(container *raw.NSTextContainer, index uint) {
-	x.inner.InsertTextContainerAtIndex(container, index)
+// InsertTextContainerAtIndex inserts a text container at the specified index in the list of text containers.
+func (x *LayoutManager) InsertTextContainerAtIndex(container *TextContainer, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertTextContainer:atIndex:"), objref.IDOf(container), index)
 }
 
-// Removes the text container at the specified index and invalidates the layout as necessary.
-//
-// RemoveTextContainerAtIndex calls the underlying RemoveTextContainerAtIndex.
-func (x *LayoutManager) RemoveTextContainerAtIndex(index uint) {
-	x.inner.RemoveTextContainerAtIndex(index)
+// RemoveTextContainerAtIndex removes the text container at the specified index and invalidates the layout as necessary.
+func (x *LayoutManager) RemoveTextContainerAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTextContainerAtIndex:"), index)
 }
 
-// Invalidates the layout information, and possibly glyphs, for the specified text container and all subsequent text container objects.
-//
-// TextContainerChangedGeometry calls the underlying TextContainerChangedGeometry.
-func (x *LayoutManager) TextContainerChangedGeometry(container *raw.NSTextContainer) {
-	x.inner.TextContainerChangedGeometry(container)
+// TextContainerChangedGeometry invalidates the layout information, and possibly glyphs, for the specified text container and all subsequent text container objects.
+func (x *LayoutManager) TextContainerChangedGeometry(container *TextContainer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContainerChangedGeometry:"), objref.IDOf(container))
 }
 
-// Updates the information necessary to manage text view objects for the specified text container.
-//
-// TextContainerChangedTextView calls the underlying TextContainerChangedTextView.
-func (x *LayoutManager) TextContainerChangedTextView(container *raw.NSTextContainer) {
-	x.inner.TextContainerChangedTextView(container)
+// TextContainerChangedTextView updates the information necessary to manage text view objects for the specified text container.
+func (x *LayoutManager) TextContainerChangedTextView(container *TextContainer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContainerChangedTextView:"), objref.IDOf(container))
 }
 
-// Invalidates and adjusts the glyphs in the specified character range.
-//
-// InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange calls the underlying InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange.
-func (x *LayoutManager) InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange(charRange foundation.NSRange, delta int, actualCharRange *foundation.NSRange) {
-	x.inner.InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange(charRange, delta, actualCharRange)
-}
-
-// Invalidates the layout information for the glyphs that map to the specified character range.
-//
-// InvalidateLayoutForCharacterRangeActualCharacterRange calls the underlying InvalidateLayoutForCharacterRangeActualCharacterRange.
-func (x *LayoutManager) InvalidateLayoutForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) {
-	x.inner.InvalidateLayoutForCharacterRangeActualCharacterRange(charRange, actualCharRange)
-}
-
-// Invalidates display for the specified character range.
-//
-// InvalidateDisplayForCharacterRange calls the underlying InvalidateDisplayForCharacterRange.
+// InvalidateDisplayForCharacterRange invalidates display for the specified character range.
 func (x *LayoutManager) InvalidateDisplayForCharacterRange(charRange foundation.NSRange) {
-	x.inner.InvalidateDisplayForCharacterRange(charRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateDisplayForCharacterRange:"), charRange)
 }
 
-// Invalidates a range of glyphs, requiring new layout information, and updates the appropriate regions of any text views that display those glyphs.
-//
-// InvalidateDisplayForGlyphRange calls the underlying InvalidateDisplayForGlyphRange.
+// InvalidateDisplayForGlyphRange invalidates a range of glyphs, requiring new layout information, and updates the appropriate regions of any text views that display those glyphs.
 func (x *LayoutManager) InvalidateDisplayForGlyphRange(glyphRange foundation.NSRange) {
-	x.inner.InvalidateDisplayForGlyphRange(glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateDisplayForGlyphRange:"), glyphRange)
 }
 
-// Notifies the layout manager when an edit action changes the contents of its text storage object.
-//
-// ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange calls the underlying ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange.
-func (x *LayoutManager) ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
-	x.inner.ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage, raw.NSTextStorageEditActions(editMask), newCharRange, delta, invalidatedCharRange)
+// ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange notifies the layout manager when an edit action changes the contents of its text storage object.
+func (x *LayoutManager) ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *TextStorage, editMask TextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processEditingForTextStorage:edited:range:changeInLength:invalidatedRange:"), objref.IDOf(textStorage), editMask, newCharRange, delta, invalidatedCharRange)
 }
 
-// Forces the layout manager to generate glyphs for the specified character range if it hasn’t already.
-//
-// EnsureGlyphsForCharacterRange calls the underlying EnsureGlyphsForCharacterRange.
+// EnsureGlyphsForCharacterRange forces the layout manager to generate glyphs for the specified character range if it hasn’t already.
 func (x *LayoutManager) EnsureGlyphsForCharacterRange(charRange foundation.NSRange) {
-	x.inner.EnsureGlyphsForCharacterRange(charRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureGlyphsForCharacterRange:"), charRange)
 }
 
-// Forces the layout manager to generate glyphs for the specified glyph range if it hasn’t already.
-//
-// EnsureGlyphsForGlyphRange calls the underlying EnsureGlyphsForGlyphRange.
+// EnsureGlyphsForGlyphRange forces the layout manager to generate glyphs for the specified glyph range if it hasn’t already.
 func (x *LayoutManager) EnsureGlyphsForGlyphRange(glyphRange foundation.NSRange) {
-	x.inner.EnsureGlyphsForGlyphRange(glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureGlyphsForGlyphRange:"), glyphRange)
 }
 
-// Forces the layout manager to perform layout for the specified character range if it hasn’t already.
-//
-// EnsureLayoutForCharacterRange calls the underlying EnsureLayoutForCharacterRange.
+// EnsureLayoutForCharacterRange forces the layout manager to perform layout for the specified character range if it hasn’t already.
 func (x *LayoutManager) EnsureLayoutForCharacterRange(charRange foundation.NSRange) {
-	x.inner.EnsureLayoutForCharacterRange(charRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLayoutForCharacterRange:"), charRange)
 }
 
-// Forces the layout manager to perform layout for the specified glyph range if it hasn’t already.
-//
-// EnsureLayoutForGlyphRange calls the underlying EnsureLayoutForGlyphRange.
+// EnsureLayoutForGlyphRange forces the layout manager to perform layout for the specified glyph range if it hasn’t already.
 func (x *LayoutManager) EnsureLayoutForGlyphRange(glyphRange foundation.NSRange) {
-	x.inner.EnsureLayoutForGlyphRange(glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLayoutForGlyphRange:"), glyphRange)
 }
 
-// Forces the layout manager to perform layout for the specified text container if it hasn’t already.
-//
-// EnsureLayoutForTextContainer calls the underlying EnsureLayoutForTextContainer.
-func (x *LayoutManager) EnsureLayoutForTextContainer(container *raw.NSTextContainer) {
-	x.inner.EnsureLayoutForTextContainer(container)
+// EnsureLayoutForTextContainer forces the layout manager to perform layout for the specified text container if it hasn’t already.
+func (x *LayoutManager) EnsureLayoutForTextContainer(container *TextContainer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLayoutForTextContainer:"), objref.IDOf(container))
 }
 
-// Forces the layout manager to perform layout for the specified area in the specified text container if it hasn’t already.
-//
-// EnsureLayoutForBoundingRectInTextContainer calls the underlying EnsureLayoutForBoundingRectInTextContainer.
-func (x *LayoutManager) EnsureLayoutForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) {
-	x.inner.EnsureLayoutForBoundingRectInTextContainer(bounds, container)
+// EnsureLayoutForBoundingRectInTextContainer forces the layout manager to perform layout for the specified area in the specified text container if it hasn’t already.
+func (x *LayoutManager) EnsureLayoutForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *TextContainer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLayoutForBoundingRect:inTextContainer:"), bounds, objref.IDOf(container))
 }
 
-// Stores the initial glyphs and glyph properties for a character range.
-//
-// SetGlyphsPropertiesCharacterIndexesFontForGlyphRange calls the underlying SetGlyphsPropertiesCharacterIndexesFontForGlyphRange.
-func (x *LayoutManager) SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(glyphs *uint16, props *raw.NSGlyphProperty, charIndexes *uint, aFont *raw.NSFont, glyphRange foundation.NSRange) {
-	x.inner.SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(glyphs, props, charIndexes, aFont, glyphRange)
+// SetGlyphsPropertiesCharacterIndexesFontForGlyphRange stores the initial glyphs and glyph properties for a character range.
+func (x *LayoutManager) SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(aFont *Font, glyphRange foundation.NSRange) (glyphs uint16, props GlyphProperty, charIndexes int) {
+	var _out0 uint16
+	var _out1 GlyphProperty
+	var _out2 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphs:properties:characterIndexes:font:forGlyphRange:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), objref.IDOf(aFont), glyphRange)
+	return _out0, _out1, _out2
 }
 
-// Returns the glyph at the specified index along with information about whether the glyph index is valid.
-//
-// CGGlyphAtIndexIsValidIndex calls the underlying CGGlyphAtIndexIsValidIndex.
-func (x *LayoutManager) CGGlyphAtIndexIsValidIndex(glyphIndex uint, isValidIndex *bool) uint16 {
-	return x.inner.CGGlyphAtIndexIsValidIndex(glyphIndex, isValidIndex)
+// CGGlyphAtIndexIsValidIndex returns the glyph at the specified index along with information about whether the glyph index is valid.
+func (x *LayoutManager) CGGlyphAtIndexIsValidIndex(glyphIndex int) (result uint16, isValidIndex bool) {
+	var _out0 bool
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("CGGlyphAtIndex:isValidIndex:"), glyphIndex, unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// Returns the glyph at the specified index.
-//
-// CGGlyphAtIndex calls the underlying CGGlyphAtIndex.
-func (x *LayoutManager) CGGlyphAtIndex(glyphIndex uint) uint16 {
-	return x.inner.CGGlyphAtIndex(glyphIndex)
+// CGGlyphAtIndex returns the glyph at the specified index.
+func (x *LayoutManager) CGGlyphAtIndex(glyphIndex int) uint16 {
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("CGGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Indicates whether the specified index refers to a valid glyph.
-//
-// IsValidGlyphIndex calls the underlying IsValidGlyphIndex.
-func (x *LayoutManager) IsValidGlyphIndex(glyphIndex uint) bool {
-	return x.inner.IsValidGlyphIndex(glyphIndex)
+// IsValidGlyphIndex indicates whether the specified index refers to a valid glyph.
+func (x *LayoutManager) IsValidGlyphIndex(glyphIndex int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValidGlyphIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the glyph property of the glyph at the specified index.
-//
-// PropertyForGlyphAtIndex calls the underlying PropertyForGlyphAtIndex.
-func (x *LayoutManager) PropertyForGlyphAtIndex(glyphIndex uint) NSGlyphProperty {
-	return NSGlyphProperty(x.inner.PropertyForGlyphAtIndex(glyphIndex))
+// PropertyForGlyphAtIndex returns the glyph property of the glyph at the specified index.
+func (x *LayoutManager) PropertyForGlyphAtIndex(glyphIndex int) GlyphProperty {
+	_r := objc.Send[GlyphProperty](objref.IDOf(x), objc.RegisterName("propertyForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the index in the text storage for the first character of the specified glyph.
-//
-// CharacterIndexForGlyphAtIndex calls the underlying CharacterIndexForGlyphAtIndex.
-func (x *LayoutManager) CharacterIndexForGlyphAtIndex(glyphIndex uint) uint {
-	return x.inner.CharacterIndexForGlyphAtIndex(glyphIndex)
+// CharacterIndexForGlyphAtIndex returns the index in the text storage for the first character of the specified glyph.
+func (x *LayoutManager) CharacterIndexForGlyphAtIndex(glyphIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIndexForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the index of the first glyph of the character at the specified index.
-//
-// GlyphIndexForCharacterAtIndex calls the underlying GlyphIndexForCharacterAtIndex.
-func (x *LayoutManager) GlyphIndexForCharacterAtIndex(charIndex uint) uint {
-	return x.inner.GlyphIndexForCharacterAtIndex(charIndex)
+// GlyphIndexForCharacterAtIndex returns the index of the first glyph of the character at the specified index.
+func (x *LayoutManager) GlyphIndexForCharacterAtIndex(charIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphIndexForCharacterAtIndex:"), charIndex)
+	return _r
 }
 
-// Fills a passed-in buffer with a sequence of glyphs.
-//
-// GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels calls the underlying GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels.
-func (x *LayoutManager) GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange foundation.NSRange, glyphBuffer *uint16, props *raw.NSGlyphProperty, charIndexBuffer *uint, bidiLevelBuffer *uint8) uint {
-	return x.inner.GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange, glyphBuffer, props, charIndexBuffer, bidiLevelBuffer)
+// GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels fills a passed-in buffer with a sequence of glyphs.
+func (x *LayoutManager) GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange foundation.NSRange) (result int, glyphBuffer uint16, props GlyphProperty, charIndexBuffer int, bidiLevelBuffer uint8) {
+	var _out0 uint16
+	var _out1 GlyphProperty
+	var _out2 int
+	var _out3 uint8
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getGlyphsInRange:glyphs:properties:characterIndexes:bidiLevels:"), glyphRange, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _r, _out0, _out1, _out2, _out3
 }
 
-// Associates a text container with the specified range of glyphs.
-//
-// SetTextContainerForGlyphRange calls the underlying SetTextContainerForGlyphRange.
-func (x *LayoutManager) SetTextContainerForGlyphRange(container *raw.NSTextContainer, glyphRange foundation.NSRange) {
-	x.inner.SetTextContainerForGlyphRange(container, glyphRange)
+// SetTextContainerForGlyphRange associates a text container with the specified range of glyphs.
+func (x *LayoutManager) SetTextContainerForGlyphRange(container *TextContainer, glyphRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContainer:forGlyphRange:"), objref.IDOf(container), glyphRange)
 }
 
-// Associates the line fragment bounds for the specified range of glyphs.
-//
-// SetLineFragmentRectForGlyphRangeUsedRect calls the underlying SetLineFragmentRectForGlyphRangeUsedRect.
+// SetLineFragmentRectForGlyphRangeUsedRect associates the line fragment bounds for the specified range of glyphs.
 func (x *LayoutManager) SetLineFragmentRectForGlyphRangeUsedRect(fragmentRect corefoundation.CGRect, glyphRange foundation.NSRange, usedRect corefoundation.CGRect) {
-	x.inner.SetLineFragmentRectForGlyphRangeUsedRect(fragmentRect, glyphRange, usedRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineFragmentRect:forGlyphRange:usedRect:"), fragmentRect, glyphRange, usedRect)
 }
 
-// Sets the bounds and container for the extra line fragment.
-//
-// SetExtraLineFragmentRectUsedRectTextContainer calls the underlying SetExtraLineFragmentRectUsedRectTextContainer.
-func (x *LayoutManager) SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect corefoundation.CGRect, usedRect corefoundation.CGRect, container *raw.NSTextContainer) {
-	x.inner.SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect, usedRect, container)
+// SetExtraLineFragmentRectUsedRectTextContainer sets the bounds and container for the extra line fragment.
+func (x *LayoutManager) SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect corefoundation.CGRect, usedRect corefoundation.CGRect, container *TextContainer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraLineFragmentRect:usedRect:textContainer:"), fragmentRect, usedRect, objref.IDOf(container))
 }
 
-// Sets the location for the first glyph in the specified range.
-//
-// SetLocationForStartOfGlyphRange calls the underlying SetLocationForStartOfGlyphRange.
+// SetLocationForStartOfGlyphRange sets the location for the first glyph in the specified range.
 func (x *LayoutManager) SetLocationForStartOfGlyphRange(location corefoundation.CGPoint, glyphRange foundation.NSRange) {
-	x.inner.SetLocationForStartOfGlyphRange(location, glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:forStartOfGlyphRange:"), location, glyphRange)
 }
 
-// Sets the visibility of the glyph at the specified index.
-//
-// SetNotShownAttributeForGlyphAtIndex calls the underlying SetNotShownAttributeForGlyphAtIndex.
-func (x *LayoutManager) SetNotShownAttributeForGlyphAtIndex(flag bool, glyphIndex uint) {
-	x.inner.SetNotShownAttributeForGlyphAtIndex(flag, glyphIndex)
+// SetNotShownAttributeForGlyphAtIndex sets the visibility of the glyph at the specified index.
+func (x *LayoutManager) SetNotShownAttributeForGlyphAtIndex(flag bool, glyphIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotShownAttribute:forGlyphAtIndex:"), flag, glyphIndex)
 }
 
-// Indicates whether the specified glyph exceeds the bounds of the line fragment for its layout.
-//
-// SetDrawsOutsideLineFragmentForGlyphAtIndex calls the underlying SetDrawsOutsideLineFragmentForGlyphAtIndex.
-func (x *LayoutManager) SetDrawsOutsideLineFragmentForGlyphAtIndex(flag bool, glyphIndex uint) {
-	x.inner.SetDrawsOutsideLineFragmentForGlyphAtIndex(flag, glyphIndex)
+// SetDrawsOutsideLineFragmentForGlyphAtIndex indicates whether the specified glyph exceeds the bounds of the line fragment for its layout.
+func (x *LayoutManager) SetDrawsOutsideLineFragmentForGlyphAtIndex(flag bool, glyphIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsOutsideLineFragment:forGlyphAtIndex:"), flag, glyphIndex)
 }
 
-// Sets the size to use when drawing a glyph that represents an attachment.
-//
-// SetAttachmentSizeForGlyphRange calls the underlying SetAttachmentSizeForGlyphRange.
+// SetAttachmentSizeForGlyphRange sets the size to use when drawing a glyph that represents an attachment.
 func (x *LayoutManager) SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange) {
-	x.inner.SetAttachmentSizeForGlyphRange(attachmentSize, glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachmentSize:forGlyphRange:"), attachmentSize, glyphRange)
 }
 
-// Returns the indexes for the first character and glyph that have invalid layout information.
-//
-// GetFirstUnlaidCharacterIndexGlyphIndex calls the underlying GetFirstUnlaidCharacterIndexGlyphIndex.
-func (x *LayoutManager) GetFirstUnlaidCharacterIndexGlyphIndex(charIndex *uint, glyphIndex *uint) {
-	x.inner.GetFirstUnlaidCharacterIndexGlyphIndex(charIndex, glyphIndex)
+// GetFirstUnlaidCharacterIndexGlyphIndex returns the indexes for the first character and glyph that have invalid layout information.
+func (x *LayoutManager) GetFirstUnlaidCharacterIndexGlyphIndex() (charIndex int, glyphIndex int) {
+	var _out0 int
+	var _out1 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getFirstUnlaidCharacterIndex:glyphIndex:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
 }
 
-// Returns the index for the first character in the layout manager that isn’t in the layout.
-//
-// FirstUnlaidCharacterIndex calls the underlying FirstUnlaidCharacterIndex.
-func (x *LayoutManager) FirstUnlaidCharacterIndex() uint {
-	return x.inner.FirstUnlaidCharacterIndex()
+// FirstUnlaidCharacterIndex returns the index for the first character in the layout manager that isn’t in the layout.
+func (x *LayoutManager) FirstUnlaidCharacterIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("firstUnlaidCharacterIndex"))
+	return _r
 }
 
-// Returns the index for the first glyph in the layout manager that isn’t in the layout.
-//
-// FirstUnlaidGlyphIndex calls the underlying FirstUnlaidGlyphIndex.
-func (x *LayoutManager) FirstUnlaidGlyphIndex() uint {
-	return x.inner.FirstUnlaidGlyphIndex()
+// FirstUnlaidGlyphIndex returns the index for the first glyph in the layout manager that isn’t in the layout.
+func (x *LayoutManager) FirstUnlaidGlyphIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("firstUnlaidGlyphIndex"))
+	return _r
 }
 
-// Returns the text container that manages the layout for the specified glyph, causing layout to happen as necessary.
-//
-// TextContainerForGlyphAtIndexEffectiveRange calls the underlying TextContainerForGlyphAtIndexEffectiveRange.
-func (x *LayoutManager) TextContainerForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) *TextContainer {
-	_r := x.inner.TextContainerForGlyphAtIndexEffectiveRange(glyphIndex, effectiveGlyphRange)
-	if _r == nil {
-		return nil
-	}
-	return &TextContainer{inner: _r}
+// UsedRectForTextContainer returns the bounding rectangle for the glyphs in the specified text container.
+func (x *LayoutManager) UsedRectForTextContainer(container *TextContainer) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("usedRectForTextContainer:"), objref.IDOf(container))
+	return _r
 }
 
-// Returns the text container that manages the layout for the specified glyph.
-//
-// TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout calls the underlying TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout.
-func (x *LayoutManager) TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) *TextContainer {
-	_r := x.inner.TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex, effectiveGlyphRange, flag)
-	if _r == nil {
-		return nil
-	}
-	return &TextContainer{inner: _r}
+// LocationForGlyphAtIndex returns the location for the specified glyph within its line fragment.
+func (x *LayoutManager) LocationForGlyphAtIndex(glyphIndex int) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the bounding rectangle for the glyphs in the specified text container.
-//
-// UsedRectForTextContainer calls the underlying UsedRectForTextContainer.
-func (x *LayoutManager) UsedRectForTextContainer(container *raw.NSTextContainer) corefoundation.CGRect {
-	return x.inner.UsedRectForTextContainer(container)
+// NotShownAttributeForGlyphAtIndex indicates whether the glyph at the specified index has a visible representation.
+func (x *LayoutManager) NotShownAttributeForGlyphAtIndex(glyphIndex int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notShownAttributeForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the rectangle for the line fragment where the glyph lies and (optionally), by reference, the entire range of glyphs in that fragment.
-//
-// LineFragmentRectForGlyphAtIndexEffectiveRange calls the underlying LineFragmentRectForGlyphAtIndexEffectiveRange.
-func (x *LayoutManager) LineFragmentRectForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForGlyphAtIndexEffectiveRange(glyphIndex, effectiveGlyphRange)
+// DrawsOutsideLineFragmentForGlyphAtIndex indicates whether the glyph draws outside its line fragment rectangle.
+func (x *LayoutManager) DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsOutsideLineFragmentForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the line fragment rectangle that contains the glyph at the specified glyph index.
-//
-// LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout calls the underlying LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout.
-func (x *LayoutManager) LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex, effectiveGlyphRange, flag)
+// AttachmentSizeForGlyphAtIndex returns the size of the attachment glyph at the specified index.
+func (x *LayoutManager) AttachmentSizeForGlyphAtIndex(glyphIndex int) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("attachmentSizeForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the usage rectangle for the line fragment and (optionally) returns the entire range of glyphs in that fragment.
-//
-// LineFragmentUsedRectForGlyphAtIndexEffectiveRange calls the underlying LineFragmentUsedRectForGlyphAtIndexEffectiveRange.
-func (x *LayoutManager) LineFragmentUsedRectForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
-	return x.inner.LineFragmentUsedRectForGlyphAtIndexEffectiveRange(glyphIndex, effectiveGlyphRange)
+// TruncatedGlyphRangeInLineFragmentForGlyphAtIndex returns the range of truncated glyphs for a line fragment that contains the specified index.
+func (x *LayoutManager) TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex int) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("truncatedGlyphRangeInLineFragmentForGlyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// Returns the usage rectangle for the line fragment and (optionally) returns the entire range of glyphs in that fragment.
-//
-// LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout calls the underlying LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout.
-func (x *LayoutManager) LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect {
-	return x.inner.LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex, effectiveGlyphRange, flag)
+// GlyphRangeForTextContainer returns the range of glyphs lying within the specified text container.
+func (x *LayoutManager) GlyphRangeForTextContainer(container *TextContainer) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("glyphRangeForTextContainer:"), objref.IDOf(container))
+	return _r
 }
 
-// Returns the location for the specified glyph within its line fragment.
-//
-// LocationForGlyphAtIndex calls the underlying LocationForGlyphAtIndex.
-func (x *LayoutManager) LocationForGlyphAtIndex(glyphIndex uint) corefoundation.CGPoint {
-	return x.inner.LocationForGlyphAtIndex(glyphIndex)
+// RangeOfNominallySpacedGlyphsContainingIndex returns the range of displayable glyphs that surround the glyph at the specified index.
+func (x *LayoutManager) RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex int) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("rangeOfNominallySpacedGlyphsContainingIndex:"), glyphIndex)
+	return _r
 }
 
-// Indicates whether the glyph at the specified index has a visible representation.
-//
-// NotShownAttributeForGlyphAtIndex calls the underlying NotShownAttributeForGlyphAtIndex.
-func (x *LayoutManager) NotShownAttributeForGlyphAtIndex(glyphIndex uint) bool {
-	return x.inner.NotShownAttributeForGlyphAtIndex(glyphIndex)
+// BoundingRectForGlyphRangeInTextContainer returns the bounding rectangle for the specified glyphs in a container.
+func (x *LayoutManager) BoundingRectForGlyphRangeInTextContainer(glyphRange foundation.NSRange, container *TextContainer) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingRectForGlyphRange:inTextContainer:"), glyphRange, objref.IDOf(container))
+	return _r
 }
 
-// Indicates whether the glyph draws outside its line fragment rectangle.
-//
-// DrawsOutsideLineFragmentForGlyphAtIndex calls the underlying DrawsOutsideLineFragmentForGlyphAtIndex.
-func (x *LayoutManager) DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex uint) bool {
-	return x.inner.DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex)
+// GlyphRangeForBoundingRectInTextContainer returns the smallest contiguous range for glyphs lying wholly or partially within the specified rectangle of the text container.
+func (x *LayoutManager) GlyphRangeForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *TextContainer) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("glyphRangeForBoundingRect:inTextContainer:"), bounds, objref.IDOf(container))
+	return _r
 }
 
-// Returns the size of the attachment glyph at the specified index.
-//
-// AttachmentSizeForGlyphAtIndex calls the underlying AttachmentSizeForGlyphAtIndex.
-func (x *LayoutManager) AttachmentSizeForGlyphAtIndex(glyphIndex uint) corefoundation.CGSize {
-	return x.inner.AttachmentSizeForGlyphAtIndex(glyphIndex)
+// GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer returns the smallest contiguous range for glyphs lying wholly or partially within the specified rectangle of the text container.
+func (x *LayoutManager) GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds corefoundation.CGRect, container *TextContainer) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("glyphRangeForBoundingRectWithoutAdditionalLayout:inTextContainer:"), bounds, objref.IDOf(container))
+	return _r
 }
 
-// Returns the range of truncated glyphs for a line fragment that contains the specified index.
-//
-// TruncatedGlyphRangeInLineFragmentForGlyphAtIndex calls the underlying TruncatedGlyphRangeInLineFragmentForGlyphAtIndex.
-func (x *LayoutManager) TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex uint) foundation.NSRange {
-	return x.inner.TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex)
+// GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph returns the index of the glyph at the specified point using the container’s coordinate system.
+func (x *LayoutManager) GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point corefoundation.CGPoint, container *TextContainer) (result int, partialFraction float64) {
+	var _out0 float64
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphIndexForPoint:inTextContainer:fractionOfDistanceThroughGlyph:"), point, objref.IDOf(container), unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// Returns the range of glyphs that the specified range of characters generates.
-//
-// GlyphRangeForCharacterRangeActualCharacterRange calls the underlying GlyphRangeForCharacterRangeActualCharacterRange.
-func (x *LayoutManager) GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange {
-	return x.inner.GlyphRangeForCharacterRangeActualCharacterRange(charRange, actualCharRange)
+// GlyphIndexForPointInTextContainer returns the index of the glyph at the specified location in a text container.
+func (x *LayoutManager) GlyphIndexForPointInTextContainer(point corefoundation.CGPoint, container *TextContainer) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphIndexForPoint:inTextContainer:"), point, objref.IDOf(container))
+	return _r
 }
 
-// Returns the range of characters that correspond to the glyphs in the specified glyph range.
-//
-// CharacterRangeForGlyphRangeActualGlyphRange calls the underlying CharacterRangeForGlyphRangeActualGlyphRange.
-func (x *LayoutManager) CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange {
-	return x.inner.CharacterRangeForGlyphRangeActualGlyphRange(glyphRange, actualGlyphRange)
+// FractionOfDistanceThroughGlyphForPointInTextContainer returns the fraction of the distance between the glyph at the specified point and the next glyph.
+func (x *LayoutManager) FractionOfDistanceThroughGlyphForPointInTextContainer(point corefoundation.CGPoint, container *TextContainer) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:inTextContainer:"), point, objref.IDOf(container))
+	return _r
 }
 
-// Returns the range of glyphs lying within the specified text container.
-//
-// GlyphRangeForTextContainer calls the underlying GlyphRangeForTextContainer.
-func (x *LayoutManager) GlyphRangeForTextContainer(container *raw.NSTextContainer) foundation.NSRange {
-	return x.inner.GlyphRangeForTextContainer(container)
+// CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints returns the index of the character that lies beneath the specified point using the specified container’s coordinate system.
+func (x *LayoutManager) CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point corefoundation.CGPoint, container *TextContainer) (result int, partialFraction float64) {
+	var _out0 float64
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIndexForPoint:inTextContainer:fractionOfDistanceBetweenInsertionPoints:"), point, objref.IDOf(container), unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// Returns the range of displayable glyphs that surround the glyph at the specified index.
-//
-// RangeOfNominallySpacedGlyphsContainingIndex calls the underlying RangeOfNominallySpacedGlyphsContainingIndex.
-func (x *LayoutManager) RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex uint) foundation.NSRange {
-	return x.inner.RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex)
+// GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes returns insertion points in bulk for a specified line fragment.
+func (x *LayoutManager) GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex int, aFlag bool, dFlag bool) (result int, positions float64, charIndexes int) {
+	var _out0 float64
+	var _out1 int
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getLineFragmentInsertionPointsForCharacterAtIndex:alternatePositions:inDisplayOrder:positions:characterIndexes:"), charIndex, aFlag, dFlag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _r, _out0, _out1
 }
 
-// Returns the bounding rectangle for the specified glyphs in a container.
-//
-// BoundingRectForGlyphRangeInTextContainer calls the underlying BoundingRectForGlyphRangeInTextContainer.
-func (x *LayoutManager) BoundingRectForGlyphRangeInTextContainer(glyphRange foundation.NSRange, container *raw.NSTextContainer) corefoundation.CGRect {
-	return x.inner.BoundingRectForGlyphRangeInTextContainer(glyphRange, container)
-}
-
-// Returns the smallest contiguous range for glyphs lying wholly or partially within the specified rectangle of the text container.
-//
-// GlyphRangeForBoundingRectInTextContainer calls the underlying GlyphRangeForBoundingRectInTextContainer.
-func (x *LayoutManager) GlyphRangeForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) foundation.NSRange {
-	return x.inner.GlyphRangeForBoundingRectInTextContainer(bounds, container)
-}
-
-// Returns the smallest contiguous range for glyphs lying wholly or partially within the specified rectangle of the text container.
-//
-// GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer calls the underlying GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer.
-func (x *LayoutManager) GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) foundation.NSRange {
-	return x.inner.GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds, container)
-}
-
-// Returns the index of the glyph at the specified point using the container’s coordinate system.
-//
-// GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph calls the underlying GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph.
-func (x *LayoutManager) GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point corefoundation.CGPoint, container *raw.NSTextContainer, partialFraction *float64) uint {
-	return x.inner.GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point, container, partialFraction)
-}
-
-// Returns the index of the glyph at the specified location in a text container.
-//
-// GlyphIndexForPointInTextContainer calls the underlying GlyphIndexForPointInTextContainer.
-func (x *LayoutManager) GlyphIndexForPointInTextContainer(point corefoundation.CGPoint, container *raw.NSTextContainer) uint {
-	return x.inner.GlyphIndexForPointInTextContainer(point, container)
-}
-
-// Returns the fraction of the distance between the glyph at the specified point and the next glyph.
-//
-// FractionOfDistanceThroughGlyphForPointInTextContainer calls the underlying FractionOfDistanceThroughGlyphForPointInTextContainer.
-func (x *LayoutManager) FractionOfDistanceThroughGlyphForPointInTextContainer(point corefoundation.CGPoint, container *raw.NSTextContainer) float64 {
-	return x.inner.FractionOfDistanceThroughGlyphForPointInTextContainer(point, container)
-}
-
-// Returns the index of the character that lies beneath the specified point using the specified container’s coordinate system.
-//
-// CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints calls the underlying CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints.
-func (x *LayoutManager) CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point corefoundation.CGPoint, container *raw.NSTextContainer, partialFraction *float64) uint {
-	return x.inner.CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point, container, partialFraction)
-}
-
-// Returns insertion points in bulk for a specified line fragment.
-//
-// GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes calls the underlying GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes.
-func (x *LayoutManager) GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex uint, aFlag bool, dFlag bool, positions *float64, charIndexes *uint) uint {
-	return x.inner.GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex, aFlag, dFlag, positions, charIndexes)
-}
-
-// Enumerates line fragments intersecting with the specified glyph range.
-//
-// EnumerateLineFragmentsForGlyphRangeUsing calls the underlying EnumerateLineFragmentsForGlyphRangeUsing.
-func (x *LayoutManager) EnumerateLineFragmentsForGlyphRangeUsing(glyphRange foundation.NSRange, block objc.Block) {
-	x.inner.EnumerateLineFragmentsForGlyphRangeUsing(glyphRange, block)
-}
-
-// Enumerates enclosing rectangles for the specified glyph range in a text container.
-//
-// EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing calls the underlying EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing.
-func (x *LayoutManager) EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing(glyphRange foundation.NSRange, selectedRange foundation.NSRange, textContainer *raw.NSTextContainer, block objc.Block) {
-	x.inner.EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing(glyphRange, selectedRange, textContainer, block)
-}
-
-// Draws background marks for the specified glyphs, which must lie completely within a single text container.
-//
-// DrawBackgroundForGlyphRangeAtPoint calls the underlying DrawBackgroundForGlyphRangeAtPoint.
+// DrawBackgroundForGlyphRangeAtPoint draws background marks for the specified glyphs, which must lie completely within a single text container.
 func (x *LayoutManager) DrawBackgroundForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint) {
-	x.inner.DrawBackgroundForGlyphRangeAtPoint(glyphsToShow, origin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBackgroundForGlyphRange:atPoint:"), glyphsToShow, origin)
 }
 
-// Draws the specified glyphs, which must lie completely within a single text container.
-//
-// DrawGlyphsForGlyphRangeAtPoint calls the underlying DrawGlyphsForGlyphRangeAtPoint.
+// DrawGlyphsForGlyphRangeAtPoint draws the specified glyphs, which must lie completely within a single text container.
 func (x *LayoutManager) DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint) {
-	x.inner.DrawGlyphsForGlyphRangeAtPoint(glyphsToShow, origin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawGlyphsForGlyphRange:atPoint:"), glyphsToShow, origin)
 }
 
-// Renders the glyphs at the specified positions, using the specified attributes.
-//
-// ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext calls the underlying ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext.
-func (x *LayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount int, font *raw.NSFont, textMatrix corefoundation.CGAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], cGContext unsafe.Pointer) {
-	x.inner.ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs, positions, glyphCount, font, textMatrix, attributes, cGContext)
+// DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin draws underlining for the glyphs in a specified range.
+func (x *LayoutManager) DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal UnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawUnderlineForGlyphRange:underlineType:baselineOffset:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:"), glyphRange, underlineVal, baselineOffset, lineRect, lineGlyphRange, containerOrigin)
 }
 
-// Fills background rectangles with a color.
-//
-// FillBackgroundRectArrayCountForCharacterRangeColor calls the underlying FillBackgroundRectArrayCountForCharacterRangeColor.
-func (x *LayoutManager) FillBackgroundRectArrayCountForCharacterRangeColor(rectArray *corefoundation.CGRect, rectCount uint, charRange foundation.NSRange, color *raw.NSColor) {
-	x.inner.FillBackgroundRectArrayCountForCharacterRangeColor(rectArray, rectCount, charRange, color)
+// UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calculates subranges to underline for the specified glyphs and draws the underlining as appropriate.
+func (x *LayoutManager) UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal UnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underlineGlyphRange:underlineType:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:"), glyphRange, underlineVal, lineRect, lineGlyphRange, containerOrigin)
 }
 
-// Draws underlining for the glyphs in a specified range.
-//
-// DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(underlineVal), baselineOffset, lineRect, lineGlyphRange, containerOrigin)
+// DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin draws a strikethrough for the specified glyphs.
+func (x *LayoutManager) DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal UnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawStrikethroughForGlyphRange:strikethroughType:baselineOffset:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:"), glyphRange, strikethroughVal, baselineOffset, lineRect, lineGlyphRange, containerOrigin)
 }
 
-// Calculates subranges to underline for the specified glyphs and draws the underlining as appropriate.
-//
-// UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(underlineVal), lineRect, lineGlyphRange, containerOrigin)
+// StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calculates and draws strikethrough for the specified glyphs.
+func (x *LayoutManager) StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal UnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strikethroughGlyphRange:strikethroughType:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:"), glyphRange, strikethroughVal, lineRect, lineGlyphRange, containerOrigin)
 }
 
-// Draws a strikethrough for the specified glyphs.
-//
-// DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(strikethroughVal), baselineOffset, lineRect, lineGlyphRange, containerOrigin)
+// ShowAttachmentCellInRectCharacterIndex draws an attachment cell.
+func (x *LayoutManager) ShowAttachmentCellInRectCharacterIndex(cell *Cell, rect corefoundation.CGRect, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showAttachmentCell:inRect:characterIndex:"), objref.IDOf(cell), rect, attachmentIndex)
 }
 
-// Calculates and draws strikethrough for the specified glyphs.
-//
-// StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(strikethroughVal), lineRect, lineGlyphRange, containerOrigin)
+// SetLayoutRectForTextBlockGlyphRange sets the layout rectangle that encloses the specified text block and glyph range.
+func (x *LayoutManager) SetLayoutRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *TextBlock, glyphRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutRect:forTextBlock:glyphRange:"), rect, objref.IDOf(block), glyphRange)
 }
 
-// Draws an attachment cell.
-//
-// ShowAttachmentCellInRectCharacterIndex calls the underlying ShowAttachmentCellInRectCharacterIndex.
-func (x *LayoutManager) ShowAttachmentCellInRectCharacterIndex(cell *raw.NSCell, rect corefoundation.CGRect, attachmentIndex uint) {
-	x.inner.ShowAttachmentCellInRectCharacterIndex(cell, rect, attachmentIndex)
+// SetBoundsRectForTextBlockGlyphRange sets the bounding rectangle that encloses the specified text block and glyph range.
+func (x *LayoutManager) SetBoundsRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *TextBlock, glyphRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRect:forTextBlock:glyphRange:"), rect, objref.IDOf(block), glyphRange)
 }
 
-// Sets the layout rectangle that encloses the specified text block and glyph range.
-//
-// SetLayoutRectForTextBlockGlyphRange calls the underlying SetLayoutRectForTextBlockGlyphRange.
-func (x *LayoutManager) SetLayoutRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange) {
-	x.inner.SetLayoutRectForTextBlockGlyphRange(rect, block, glyphRange)
+// LayoutRectForTextBlockGlyphRange returns the rectangle for the layout of the specified text block and glyph range.
+func (x *LayoutManager) LayoutRectForTextBlockGlyphRange(block *TextBlock, glyphRange foundation.NSRange) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("layoutRectForTextBlock:glyphRange:"), objref.IDOf(block), glyphRange)
+	return _r
 }
 
-// Sets the bounding rectangle that encloses the specified text block and glyph range.
-//
-// SetBoundsRectForTextBlockGlyphRange calls the underlying SetBoundsRectForTextBlockGlyphRange.
-func (x *LayoutManager) SetBoundsRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange) {
-	x.inner.SetBoundsRectForTextBlockGlyphRange(rect, block, glyphRange)
+// BoundsRectForTextBlockGlyphRange returns the bounding rectangle that encloses the specified text block and glyph range.
+func (x *LayoutManager) BoundsRectForTextBlockGlyphRange(block *TextBlock, glyphRange foundation.NSRange) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundsRectForTextBlock:glyphRange:"), objref.IDOf(block), glyphRange)
+	return _r
 }
 
-// Returns the rectangle for the layout of the specified text block and glyph range.
-//
-// LayoutRectForTextBlockGlyphRange calls the underlying LayoutRectForTextBlockGlyphRange.
-func (x *LayoutManager) LayoutRectForTextBlockGlyphRange(block *raw.NSTextBlock, glyphRange foundation.NSRange) corefoundation.CGRect {
-	return x.inner.LayoutRectForTextBlockGlyphRange(block, glyphRange)
+// SetTemporaryAttributesForCharacterRange sets one or more temporary attributes for the specified character range.
+func (x *LayoutManager) SetTemporaryAttributesForCharacterRange(attrs obj.Object, charRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporaryAttributes:forCharacterRange:"), objref.IDOf(attrs), charRange)
 }
 
-// Returns the bounding rectangle that encloses the specified text block and glyph range.
-//
-// BoundsRectForTextBlockGlyphRange calls the underlying BoundsRectForTextBlockGlyphRange.
-func (x *LayoutManager) BoundsRectForTextBlockGlyphRange(block *raw.NSTextBlock, glyphRange foundation.NSRange) corefoundation.CGRect {
-	return x.inner.BoundsRectForTextBlockGlyphRange(block, glyphRange)
+// AddTemporaryAttributesForCharacterRange appends one or more temporary attributes to the attributes dictionary of the specified character range.
+func (x *LayoutManager) AddTemporaryAttributesForCharacterRange(attrs obj.Object, charRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTemporaryAttributes:forCharacterRange:"), objref.IDOf(attrs), charRange)
 }
 
-// Returns the rectangle for the layout of the specified text block and glyph.
-//
-// LayoutRectForTextBlockAtIndexEffectiveRange calls the underlying LayoutRectForTextBlockAtIndexEffectiveRange.
-func (x *LayoutManager) LayoutRectForTextBlockAtIndexEffectiveRange(block *raw.NSTextBlock, glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
-	return x.inner.LayoutRectForTextBlockAtIndexEffectiveRange(block, glyphIndex, effectiveGlyphRange)
+// RemoveTemporaryAttributeForCharacterRange removes a temporary attribute from the list of attributes for the specified character range.
+func (x *LayoutManager) RemoveTemporaryAttributeForCharacterRange(attrName obj.Object, charRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTemporaryAttribute:forCharacterRange:"), objref.IDOf(attrName), charRange)
 }
 
-// Returns the bounding rectangle for the specified text block and glyph.
-//
-// BoundsRectForTextBlockAtIndexEffectiveRange calls the underlying BoundsRectForTextBlockAtIndexEffectiveRange.
-func (x *LayoutManager) BoundsRectForTextBlockAtIndexEffectiveRange(block *raw.NSTextBlock, glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
-	return x.inner.BoundsRectForTextBlockAtIndexEffectiveRange(block, glyphIndex, effectiveGlyphRange)
+// AddTemporaryAttributeValueForCharacterRange adds a temporary attribute to the characters in the specified range.
+func (x *LayoutManager) AddTemporaryAttributeValueForCharacterRange(attrName obj.Object, value obj.Object, charRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTemporaryAttribute:value:forCharacterRange:"), objref.IDOf(attrName), objref.IDOf(value), charRange)
 }
 
-// Returns the dictionary of temporary attributes for the specified character range.
-//
-// TemporaryAttributesAtCharacterIndexEffectiveRange calls the underlying TemporaryAttributesAtCharacterIndexEffectiveRange.
-func (x *LayoutManager) TemporaryAttributesAtCharacterIndexEffectiveRange(charIndex uint, effectiveCharRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.TemporaryAttributesAtCharacterIndexEffectiveRange(charIndex, effectiveCharRange)
+// DefaultLineHeightForFont returns the default line height for a line of text that uses a specified font.
+func (x *LayoutManager) DefaultLineHeightForFont(theFont *Font) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("defaultLineHeightForFont:"), objref.IDOf(theFont))
+	return _r
 }
 
-// Sets one or more temporary attributes for the specified character range.
-//
-// SetTemporaryAttributesForCharacterRange calls the underlying SetTemporaryAttributesForCharacterRange.
-func (x *LayoutManager) SetTemporaryAttributesForCharacterRange(attrs *foundation.NSDictionary[*foundation.NSString, objc.ID], charRange foundation.NSRange) {
-	x.inner.SetTemporaryAttributesForCharacterRange(attrs, charRange)
+// DefaultBaselineOffsetForFont returns the default baseline offset that the layout manager’s typesetter uses for the specified font.
+func (x *LayoutManager) DefaultBaselineOffsetForFont(theFont *Font) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("defaultBaselineOffsetForFont:"), objref.IDOf(theFont))
+	return _r
 }
 
-// Appends one or more temporary attributes to the attributes dictionary of the specified character range.
-//
-// AddTemporaryAttributesForCharacterRange calls the underlying AddTemporaryAttributesForCharacterRange.
-func (x *LayoutManager) AddTemporaryAttributesForCharacterRange(attrs *foundation.NSDictionary[*foundation.NSString, objc.ID], charRange foundation.NSRange) {
-	x.inner.AddTemporaryAttributesForCharacterRange(attrs, charRange)
-}
-
-// Removes a temporary attribute from the list of attributes for the specified character range.
-//
-// RemoveTemporaryAttributeForCharacterRange calls the underlying RemoveTemporaryAttributeForCharacterRange.
-func (x *LayoutManager) RemoveTemporaryAttributeForCharacterRange(attrName *foundation.NSString, charRange foundation.NSRange) {
-	x.inner.RemoveTemporaryAttributeForCharacterRange(attrName, charRange)
-}
-
-// Returns the value for the temporary attribute of a character, and the range it applies to.
-//
-// TemporaryAttributeAtCharacterIndexEffectiveRange calls the underlying TemporaryAttributeAtCharacterIndexEffectiveRange.
-func (x *LayoutManager) TemporaryAttributeAtCharacterIndexEffectiveRange(attrName *foundation.NSString, location uint, range_ *foundation.NSRange) objc.ID {
-	return x.inner.TemporaryAttributeAtCharacterIndexEffectiveRange(attrName, location, range_)
-}
-
-// Returns the value for the temporary attribute of a character, and the maximum range it applies to.
-//
-// TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange calls the underlying TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange.
-func (x *LayoutManager) TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange(attrName *foundation.NSString, location uint, range_ *foundation.NSRange, rangeLimit foundation.NSRange) objc.ID {
-	return x.inner.TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange(attrName, location, range_, rangeLimit)
-}
-
-// Returns the temporary attributes for a character, and the maximum range they apply to.
-//
-// TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange calls the underlying TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange.
-func (x *LayoutManager) TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange(location uint, range_ *foundation.NSRange, rangeLimit foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange(location, range_, rangeLimit)
-}
-
-// Adds a temporary attribute to the characters in the specified range.
-//
-// AddTemporaryAttributeValueForCharacterRange calls the underlying AddTemporaryAttributeValueForCharacterRange.
-func (x *LayoutManager) AddTemporaryAttributeValueForCharacterRange(attrName *foundation.NSString, value objc.ID, charRange foundation.NSRange) {
-	x.inner.AddTemporaryAttributeValueForCharacterRange(attrName, value, charRange)
-}
-
-// Returns the default line height for a line of text that uses a specified font.
-//
-// DefaultLineHeightForFont calls the underlying DefaultLineHeightForFont.
-func (x *LayoutManager) DefaultLineHeightForFont(theFont *raw.NSFont) float64 {
-	return x.inner.DefaultLineHeightForFont(theFont)
-}
-
-// Returns the default baseline offset that the layout manager’s typesetter uses for the specified font.
-//
-// DefaultBaselineOffsetForFont calls the underlying DefaultBaselineOffsetForFont.
-func (x *LayoutManager) DefaultBaselineOffsetForFont(theFont *raw.NSFont) float64 {
-	return x.inner.DefaultBaselineOffsetForFont(theFont)
-}
-
-// TextStorage calls the underlying TextStorage.
+// TextStorage wraps the corresponding Objective-C method.
 func (x *LayoutManager) TextStorage() *TextStorage {
-	_r := x.inner.TextStorage()
-	if _r == nil {
-		return nil
-	}
-	return &TextStorage{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textStorage"))
+	return TextStorageFromID(_r)
 }
 
-// SetTextStorage calls the underlying SetTextStorage.
-func (x *LayoutManager) SetTextStorage(textStorage *raw.NSTextStorage) {
-	x.inner.SetTextStorage(textStorage)
+// SetTextStorage wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetTextStorage(textStorage *TextStorage) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStorage:"), objref.IDOf(textStorage))
 }
 
+// TextContainers wraps the corresponding Objective-C method.
+//
 // TextContainers returns the collection as a Go slice.
 func (x *LayoutManager) TextContainers() []*TextContainer {
-	arr := x.inner.TextContainers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextContainer {
-		return &TextContainer{inner: raw.NSTextContainerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContainers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextContainer { return TextContainerFromID(_id) })
 }
 
-// Delegate calls the underlying Delegate.
-func (x *LayoutManager) Delegate() raw.NSLayoutManagerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *LayoutManager) SetDelegate(delegate raw.NSLayoutManagerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// ShowsInvisibleCharacters calls the underlying ShowsInvisibleCharacters.
+// ShowsInvisibleCharacters wraps the corresponding Objective-C method.
 func (x *LayoutManager) ShowsInvisibleCharacters() bool {
-	return x.inner.ShowsInvisibleCharacters()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsInvisibleCharacters"))
+	return _r
 }
 
-// SetShowsInvisibleCharacters calls the underlying SetShowsInvisibleCharacters.
+// SetShowsInvisibleCharacters wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetShowsInvisibleCharacters(showsInvisibleCharacters bool) {
-	x.inner.SetShowsInvisibleCharacters(showsInvisibleCharacters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsInvisibleCharacters:"), showsInvisibleCharacters)
 }
 
-// ShowsControlCharacters calls the underlying ShowsControlCharacters.
+// ShowsControlCharacters wraps the corresponding Objective-C method.
 func (x *LayoutManager) ShowsControlCharacters() bool {
-	return x.inner.ShowsControlCharacters()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsControlCharacters"))
+	return _r
 }
 
-// SetShowsControlCharacters calls the underlying SetShowsControlCharacters.
+// SetShowsControlCharacters wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetShowsControlCharacters(showsControlCharacters bool) {
-	x.inner.SetShowsControlCharacters(showsControlCharacters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsControlCharacters:"), showsControlCharacters)
 }
 
-// UsesDefaultHyphenation calls the underlying UsesDefaultHyphenation.
+// UsesDefaultHyphenation wraps the corresponding Objective-C method.
 func (x *LayoutManager) UsesDefaultHyphenation() bool {
-	return x.inner.UsesDefaultHyphenation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDefaultHyphenation"))
+	return _r
 }
 
-// SetUsesDefaultHyphenation calls the underlying SetUsesDefaultHyphenation.
+// SetUsesDefaultHyphenation wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetUsesDefaultHyphenation(usesDefaultHyphenation bool) {
-	x.inner.SetUsesDefaultHyphenation(usesDefaultHyphenation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
 }
 
-// UsesFontLeading calls the underlying UsesFontLeading.
+// UsesFontLeading wraps the corresponding Objective-C method.
 func (x *LayoutManager) UsesFontLeading() bool {
-	return x.inner.UsesFontLeading()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesFontLeading"))
+	return _r
 }
 
-// SetUsesFontLeading calls the underlying SetUsesFontLeading.
+// SetUsesFontLeading wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetUsesFontLeading(usesFontLeading bool) {
-	x.inner.SetUsesFontLeading(usesFontLeading)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontLeading:"), usesFontLeading)
 }
 
-// AllowsNonContiguousLayout calls the underlying AllowsNonContiguousLayout.
+// AllowsNonContiguousLayout wraps the corresponding Objective-C method.
 func (x *LayoutManager) AllowsNonContiguousLayout() bool {
-	return x.inner.AllowsNonContiguousLayout()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNonContiguousLayout"))
+	return _r
 }
 
-// SetAllowsNonContiguousLayout calls the underlying SetAllowsNonContiguousLayout.
+// SetAllowsNonContiguousLayout wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetAllowsNonContiguousLayout(allowsNonContiguousLayout bool) {
-	x.inner.SetAllowsNonContiguousLayout(allowsNonContiguousLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonContiguousLayout:"), allowsNonContiguousLayout)
 }
 
-// HasNonContiguousLayout calls the underlying HasNonContiguousLayout.
+// HasNonContiguousLayout wraps the corresponding Objective-C method.
 func (x *LayoutManager) HasNonContiguousLayout() bool {
-	return x.inner.HasNonContiguousLayout()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNonContiguousLayout"))
+	return _r
 }
 
-// LimitsLayoutForSuspiciousContents calls the underlying LimitsLayoutForSuspiciousContents.
+// LimitsLayoutForSuspiciousContents wraps the corresponding Objective-C method.
 func (x *LayoutManager) LimitsLayoutForSuspiciousContents() bool {
-	return x.inner.LimitsLayoutForSuspiciousContents()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("limitsLayoutForSuspiciousContents"))
+	return _r
 }
 
-// SetLimitsLayoutForSuspiciousContents calls the underlying SetLimitsLayoutForSuspiciousContents.
+// SetLimitsLayoutForSuspiciousContents wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) {
-	x.inner.SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitsLayoutForSuspiciousContents:"), limitsLayoutForSuspiciousContents)
 }
 
-// BackgroundLayoutEnabled calls the underlying BackgroundLayoutEnabled.
+// BackgroundLayoutEnabled wraps the corresponding Objective-C method.
 func (x *LayoutManager) BackgroundLayoutEnabled() bool {
-	return x.inner.BackgroundLayoutEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("backgroundLayoutEnabled"))
+	return _r
 }
 
-// SetBackgroundLayoutEnabled calls the underlying SetBackgroundLayoutEnabled.
+// SetBackgroundLayoutEnabled wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetBackgroundLayoutEnabled(backgroundLayoutEnabled bool) {
-	x.inner.SetBackgroundLayoutEnabled(backgroundLayoutEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundLayoutEnabled:"), backgroundLayoutEnabled)
 }
 
-// DefaultAttachmentScaling calls the underlying DefaultAttachmentScaling.
-func (x *LayoutManager) DefaultAttachmentScaling() NSImageScaling {
-	return NSImageScaling(x.inner.DefaultAttachmentScaling())
+// DefaultAttachmentScaling wraps the corresponding Objective-C method.
+func (x *LayoutManager) DefaultAttachmentScaling() ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("defaultAttachmentScaling"))
+	return _r
 }
 
-// SetDefaultAttachmentScaling calls the underlying SetDefaultAttachmentScaling.
-func (x *LayoutManager) SetDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) {
-	x.inner.SetDefaultAttachmentScaling(raw.NSImageScaling(defaultAttachmentScaling))
+// SetDefaultAttachmentScaling wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetDefaultAttachmentScaling(defaultAttachmentScaling ImageScaling) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultAttachmentScaling:"), defaultAttachmentScaling)
 }
 
-// Typesetter calls the underlying Typesetter.
+// Typesetter wraps the corresponding Objective-C method.
 func (x *LayoutManager) Typesetter() *Typesetter {
-	_r := x.inner.Typesetter()
-	if _r == nil {
-		return nil
-	}
-	return &Typesetter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typesetter"))
+	return TypesetterFromID(_r)
 }
 
-// SetTypesetter calls the underlying SetTypesetter.
-func (x *LayoutManager) SetTypesetter(typesetter *raw.NSTypesetter) {
-	x.inner.SetTypesetter(typesetter)
+// SetTypesetter wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetTypesetter(typesetter *Typesetter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypesetter:"), objref.IDOf(typesetter))
 }
 
-// TypesetterBehavior calls the underlying TypesetterBehavior.
-func (x *LayoutManager) TypesetterBehavior() NSTypesetterBehavior {
-	return NSTypesetterBehavior(x.inner.TypesetterBehavior())
+// TypesetterBehavior wraps the corresponding Objective-C method.
+func (x *LayoutManager) TypesetterBehavior() TypesetterBehavior {
+	_r := objc.Send[TypesetterBehavior](objref.IDOf(x), objc.RegisterName("typesetterBehavior"))
+	return _r
 }
 
-// SetTypesetterBehavior calls the underlying SetTypesetterBehavior.
-func (x *LayoutManager) SetTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) {
-	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
+// SetTypesetterBehavior wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetTypesetterBehavior(typesetterBehavior TypesetterBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypesetterBehavior:"), typesetterBehavior)
 }
 
-// NumberOfGlyphs calls the underlying NumberOfGlyphs.
-func (x *LayoutManager) NumberOfGlyphs() uint {
-	return x.inner.NumberOfGlyphs()
+// NumberOfGlyphs wraps the corresponding Objective-C method.
+func (x *LayoutManager) NumberOfGlyphs() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfGlyphs"))
+	return _r
 }
 
-// ExtraLineFragmentRect calls the underlying ExtraLineFragmentRect.
+// ExtraLineFragmentRect wraps the corresponding Objective-C method.
 func (x *LayoutManager) ExtraLineFragmentRect() corefoundation.CGRect {
-	return x.inner.ExtraLineFragmentRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("extraLineFragmentRect"))
+	return _r
 }
 
-// ExtraLineFragmentUsedRect calls the underlying ExtraLineFragmentUsedRect.
+// ExtraLineFragmentUsedRect wraps the corresponding Objective-C method.
 func (x *LayoutManager) ExtraLineFragmentUsedRect() corefoundation.CGRect {
-	return x.inner.ExtraLineFragmentUsedRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("extraLineFragmentUsedRect"))
+	return _r
 }
 
-// ExtraLineFragmentTextContainer calls the underlying ExtraLineFragmentTextContainer.
+// ExtraLineFragmentTextContainer wraps the corresponding Objective-C method.
 func (x *LayoutManager) ExtraLineFragmentTextContainer() *TextContainer {
-	_r := x.inner.ExtraLineFragmentTextContainer()
-	if _r == nil {
-		return nil
-	}
-	return &TextContainer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extraLineFragmentTextContainer"))
+	return TextContainerFromID(_r)
 }
 
-// Returns an array of text ruler objects for the current selection.
-//
-// RulerMarkersForTextViewParagraphStyleRuler calls the underlying RulerMarkersForTextViewParagraphStyleRuler.
-func (x *LayoutManager) RulerMarkersForTextViewParagraphStyleRuler(view *raw.NSTextView, style *raw.NSParagraphStyle, ruler *raw.NSRulerView) *foundation.NSArray[*raw.NSRulerMarker] {
-	return x.inner.RulerMarkersForTextViewParagraphStyleRuler(view, style, ruler)
+// RulerMarkersForTextViewParagraphStyleRuler returns an array of text ruler objects for the current selection.
+func (x *LayoutManager) RulerMarkersForTextViewParagraphStyleRuler(view *TextView, style *ParagraphStyle, ruler *RulerView) []*RulerMarker {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerMarkersForTextView:paragraphStyle:ruler:"), objref.IDOf(view), objref.IDOf(style), objref.IDOf(ruler))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RulerMarker { return RulerMarkerFromID(_id) })
 }
 
-// Returns the accessory view that the text system uses for its ruler.
-//
-// RulerAccessoryViewForTextViewParagraphStyleRulerEnabled calls the underlying RulerAccessoryViewForTextViewParagraphStyleRulerEnabled.
-func (x *LayoutManager) RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view *raw.NSTextView, style *raw.NSParagraphStyle, ruler *raw.NSRulerView, isEnabled bool) *View {
-	_r := x.inner.RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view, style, ruler, isEnabled)
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+// RulerAccessoryViewForTextViewParagraphStyleRulerEnabled returns the accessory view that the text system uses for its ruler.
+func (x *LayoutManager) RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view *TextView, style *ParagraphStyle, ruler *RulerView, isEnabled bool) *View {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerAccessoryViewForTextView:paragraphStyle:ruler:enabled:"), objref.IDOf(view), objref.IDOf(style), objref.IDOf(ruler), isEnabled)
+	return ViewFromID(_r)
 }
 
-// Indicates whether the first responder in the specified window is a text view for the layout manager.
-//
-// LayoutManagerOwnsFirstResponderInWindow calls the underlying LayoutManagerOwnsFirstResponderInWindow.
-func (x *LayoutManager) LayoutManagerOwnsFirstResponderInWindow(window *raw.NSWindow) bool {
-	return x.inner.LayoutManagerOwnsFirstResponderInWindow(window)
+// LayoutManagerOwnsFirstResponderInWindow indicates whether the first responder in the specified window is a text view for the layout manager.
+func (x *LayoutManager) LayoutManagerOwnsFirstResponderInWindow(window *Window) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("layoutManagerOwnsFirstResponderInWindow:"), objref.IDOf(window))
+	return _r
 }
 
-// FirstTextView calls the underlying FirstTextView.
+// FirstTextView wraps the corresponding Objective-C method.
 func (x *LayoutManager) FirstTextView() *TextView {
-	_r := x.inner.FirstTextView()
-	if _r == nil {
-		return nil
-	}
-	return &TextView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstTextView"))
+	return TextViewFromID(_r)
 }
 
-// TextViewForBeginningOfSelection calls the underlying TextViewForBeginningOfSelection.
+// TextViewForBeginningOfSelection wraps the corresponding Objective-C method.
 func (x *LayoutManager) TextViewForBeginningOfSelection() *TextView {
-	_r := x.inner.TextViewForBeginningOfSelection()
-	if _r == nil {
-		return nil
-	}
-	return &TextView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textViewForBeginningOfSelection"))
+	return TextViewFromID(_r)
 }
 
-// GlyphAtIndexIsValidIndex calls the underlying GlyphAtIndexIsValidIndex.
-func (x *LayoutManager) GlyphAtIndexIsValidIndex(glyphIndex uint, isValidIndex *bool) uint {
-	return x.inner.GlyphAtIndexIsValidIndex(glyphIndex, isValidIndex)
+// GlyphAtIndexIsValidIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) GlyphAtIndexIsValidIndex(glyphIndex int) (result int, isValidIndex bool) {
+	var _out0 bool
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphAtIndex:isValidIndex:"), glyphIndex, unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// GlyphAtIndex calls the underlying GlyphAtIndex.
-func (x *LayoutManager) GlyphAtIndex(glyphIndex uint) uint {
-	return x.inner.GlyphAtIndex(glyphIndex)
+// GlyphAtIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) GlyphAtIndex(glyphIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphAtIndex:"), glyphIndex)
+	return _r
 }
 
-// RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount calls the underlying RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount.
-func (x *LayoutManager) RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount(charRange foundation.NSRange, selCharRange foundation.NSRange, container *raw.NSTextContainer, rectCount *uint) *corefoundation.CGRect {
-	return x.inner.RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount(charRange, selCharRange, container, rectCount)
+// SubstituteFontForFont wraps the corresponding Objective-C method.
+func (x *LayoutManager) SubstituteFontForFont(originalFont *Font) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substituteFontForFont:"), objref.IDOf(originalFont))
+	return FontFromID(_r)
 }
 
-// RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount calls the underlying RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount.
-func (x *LayoutManager) RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount(glyphRange foundation.NSRange, selGlyphRange foundation.NSRange, container *raw.NSTextContainer, rectCount *uint) *corefoundation.CGRect {
-	return x.inner.RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount(glyphRange, selGlyphRange, container, rectCount)
+// InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex(length int, glyphIndex int, charIndex int) (glyphs int) {
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertGlyphs:length:forStartingGlyphAtIndex:characterIndex:"), unsafe.Pointer(&_out0), length, glyphIndex, charIndex)
+	return _out0
 }
 
-// SubstituteFontForFont calls the underlying SubstituteFontForFont.
-func (x *LayoutManager) SubstituteFontForFont(originalFont *raw.NSFont) *Font {
-	_r := x.inner.SubstituteFontForFont(originalFont)
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// InsertGlyphAtGlyphIndexCharacterIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) InsertGlyphAtGlyphIndexCharacterIndex(glyph int, glyphIndex int, charIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertGlyph:atGlyphIndex:characterIndex:"), glyph, glyphIndex, charIndex)
 }
 
-// InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex calls the underlying InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex.
-func (x *LayoutManager) InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex(glyphs *uint, length uint, glyphIndex uint, charIndex uint) {
-	x.inner.InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex(glyphs, length, glyphIndex, charIndex)
+// ReplaceGlyphAtIndexWithGlyph wraps the corresponding Objective-C method.
+func (x *LayoutManager) ReplaceGlyphAtIndexWithGlyph(glyphIndex int, newGlyph int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceGlyphAtIndex:withGlyph:"), glyphIndex, newGlyph)
 }
 
-// InsertGlyphAtGlyphIndexCharacterIndex calls the underlying InsertGlyphAtGlyphIndexCharacterIndex.
-func (x *LayoutManager) InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIndex uint, charIndex uint) {
-	x.inner.InsertGlyphAtGlyphIndexCharacterIndex(glyph, glyphIndex, charIndex)
-}
-
-// ReplaceGlyphAtIndexWithGlyph calls the underlying ReplaceGlyphAtIndexWithGlyph.
-func (x *LayoutManager) ReplaceGlyphAtIndexWithGlyph(glyphIndex uint, newGlyph uint) {
-	x.inner.ReplaceGlyphAtIndexWithGlyph(glyphIndex, newGlyph)
-}
-
-// DeleteGlyphsInRange calls the underlying DeleteGlyphsInRange.
+// DeleteGlyphsInRange wraps the corresponding Objective-C method.
 func (x *LayoutManager) DeleteGlyphsInRange(glyphRange foundation.NSRange) {
-	x.inner.DeleteGlyphsInRange(glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteGlyphsInRange:"), glyphRange)
 }
 
-// SetCharacterIndexForGlyphAtIndex calls the underlying SetCharacterIndexForGlyphAtIndex.
-func (x *LayoutManager) SetCharacterIndexForGlyphAtIndex(charIndex uint, glyphIndex uint) {
-	x.inner.SetCharacterIndexForGlyphAtIndex(charIndex, glyphIndex)
+// SetCharacterIndexForGlyphAtIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetCharacterIndexForGlyphAtIndex(charIndex int, glyphIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacterIndex:forGlyphAtIndex:"), charIndex, glyphIndex)
 }
 
-// SetIntAttributeValueForGlyphAtIndex calls the underlying SetIntAttributeValueForGlyphAtIndex.
-func (x *LayoutManager) SetIntAttributeValueForGlyphAtIndex(attributeTag int, val int, glyphIndex uint) {
-	x.inner.SetIntAttributeValueForGlyphAtIndex(attributeTag, val, glyphIndex)
+// SetIntAttributeValueForGlyphAtIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetIntAttributeValueForGlyphAtIndex(attributeTag int, val int, glyphIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntAttribute:value:forGlyphAtIndex:"), attributeTag, val, glyphIndex)
 }
 
-// InvalidateGlyphsOnLayoutInvalidationForGlyphRange calls the underlying InvalidateGlyphsOnLayoutInvalidationForGlyphRange.
+// InvalidateGlyphsOnLayoutInvalidationForGlyphRange wraps the corresponding Objective-C method.
 func (x *LayoutManager) InvalidateGlyphsOnLayoutInvalidationForGlyphRange(glyphRange foundation.NSRange) {
-	x.inner.InvalidateGlyphsOnLayoutInvalidationForGlyphRange(glyphRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateGlyphsOnLayoutInvalidationForGlyphRange:"), glyphRange)
 }
 
-// IntAttributeForGlyphAtIndex calls the underlying IntAttributeForGlyphAtIndex.
-func (x *LayoutManager) IntAttributeForGlyphAtIndex(attributeTag int, glyphIndex uint) int {
-	return x.inner.IntAttributeForGlyphAtIndex(attributeTag, glyphIndex)
+// IntAttributeForGlyphAtIndex wraps the corresponding Objective-C method.
+func (x *LayoutManager) IntAttributeForGlyphAtIndex(attributeTag int, glyphIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intAttribute:forGlyphAtIndex:"), attributeTag, glyphIndex)
+	return _r
 }
 
-// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits.
-func (x *LayoutManager) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint {
-	return x.inner.GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer)
+// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits wraps the corresponding Objective-C method.
+func (x *LayoutManager) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool) {
+	var _out0 int
+	var _out1 int
+	var _out2 GlyphInscription
+	var _out3 bool
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:"), glyphRange, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _r, _out0, _out1, _out2, _out3
 }
 
-// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels.
-func (x *LayoutManager) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool, bidiLevelBuffer *uint8) uint {
-	return x.inner.GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer, bidiLevelBuffer)
+// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels wraps the corresponding Objective-C method.
+func (x *LayoutManager) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool, bidiLevelBuffer uint8) {
+	var _out0 int
+	var _out1 int
+	var _out2 GlyphInscription
+	var _out3 bool
+	var _out4 uint8
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:bidiLevels:"), glyphRange, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	return _r, _out0, _out1, _out2, _out3, _out4
 }
 
-// GetGlyphsRange calls the underlying GetGlyphsRange.
-func (x *LayoutManager) GetGlyphsRange(glyphArray *uint, glyphRange foundation.NSRange) uint {
-	return x.inner.GetGlyphsRange(glyphArray, glyphRange)
+// GetGlyphsRange wraps the corresponding Objective-C method.
+func (x *LayoutManager) GetGlyphsRange(glyphRange foundation.NSRange) (result int, glyphArray int) {
+	var _out0 int
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getGlyphs:range:"), unsafe.Pointer(&_out0), glyphRange)
+	return _r, _out0
 }
 
-// InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange calls the underlying InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange.
-func (x *LayoutManager) InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange(charRange foundation.NSRange, flag bool, actualCharRange *foundation.NSRange) {
-	x.inner.InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange(charRange, flag, actualCharRange)
+// TextStorageEditedRangeChangeInLengthInvalidatedRange wraps the corresponding Objective-C method.
+func (x *LayoutManager) TextStorageEditedRangeChangeInLengthInvalidatedRange(str *TextStorage, editedMask int, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textStorage:edited:range:changeInLength:invalidatedRange:"), objref.IDOf(str), editedMask, newCharRange, delta, invalidatedCharRange)
 }
 
-// TextStorageEditedRangeChangeInLengthInvalidatedRange calls the underlying TextStorageEditedRangeChangeInLengthInvalidatedRange.
-func (x *LayoutManager) TextStorageEditedRangeChangeInLengthInvalidatedRange(str *raw.NSTextStorage, editedMask uint, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
-	x.inner.TextStorageEditedRangeChangeInLengthInvalidatedRange(str, editedMask, newCharRange, delta, invalidatedCharRange)
+// ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment wraps the corresponding Objective-C method.
+func (x *LayoutManager) ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment(glyphs string, glyphLen int, glyphRange foundation.NSRange, point corefoundation.CGPoint, font *Font, color *Color, printingAdjustment corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showPackedGlyphs:length:glyphRange:atPoint:font:color:printingAdjustment:"), glyphs, glyphLen, glyphRange, point, objref.IDOf(font), objref.IDOf(color), printingAdjustment)
 }
 
-// SetLocationsStartingGlyphIndexesCountForGlyphRange calls the underlying SetLocationsStartingGlyphIndexesCountForGlyphRange.
-func (x *LayoutManager) SetLocationsStartingGlyphIndexesCountForGlyphRange(locations *corefoundation.CGPoint, glyphIndexes *uint, count uint, glyphRange foundation.NSRange) {
-	x.inner.SetLocationsStartingGlyphIndexesCountForGlyphRange(locations, glyphIndexes, count, glyphRange)
-}
-
-// ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment calls the underlying ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment.
-func (x *LayoutManager) ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment(glyphs string, glyphLen uint, glyphRange foundation.NSRange, point corefoundation.CGPoint, font *raw.NSFont, color *raw.NSColor, printingAdjustment corefoundation.CGSize) {
-	x.inner.ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment(glyphs, glyphLen, glyphRange, point, font, color, printingAdjustment)
-}
-
-// ShowCGGlyphsPositionsCountFontMatrixAttributesInContext calls the underlying ShowCGGlyphsPositionsCountFontMatrixAttributesInContext.
-func (x *LayoutManager) ShowCGGlyphsPositionsCountFontMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount uint, font *raw.NSFont, textMatrix *foundation.NSAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], graphicsContext *raw.NSGraphicsContext) {
-	x.inner.ShowCGGlyphsPositionsCountFontMatrixAttributesInContext(glyphs, positions, glyphCount, font, textMatrix, attributes, graphicsContext)
-}
-
-// UsesScreenFonts calls the underlying UsesScreenFonts.
+// UsesScreenFonts wraps the corresponding Objective-C method.
 func (x *LayoutManager) UsesScreenFonts() bool {
-	return x.inner.UsesScreenFonts()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesScreenFonts"))
+	return _r
 }
 
-// SetUsesScreenFonts calls the underlying SetUsesScreenFonts.
+// SetUsesScreenFonts wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetUsesScreenFonts(usesScreenFonts bool) {
-	x.inner.SetUsesScreenFonts(usesScreenFonts)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesScreenFonts:"), usesScreenFonts)
 }
 
-// HyphenationFactor calls the underlying HyphenationFactor.
+// HyphenationFactor wraps the corresponding Objective-C method.
 func (x *LayoutManager) HyphenationFactor() float32 {
-	return x.inner.HyphenationFactor()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("hyphenationFactor"))
+	return _r
 }
 
-// SetHyphenationFactor calls the underlying SetHyphenationFactor.
+// SetHyphenationFactor wraps the corresponding Objective-C method.
 func (x *LayoutManager) SetHyphenationFactor(hyphenationFactor float32) {
-	x.inner.SetHyphenationFactor(hyphenationFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
 }
 
-// GlyphGenerator calls the underlying GlyphGenerator.
+// GlyphGenerator wraps the corresponding Objective-C method.
 func (x *LayoutManager) GlyphGenerator() *GlyphGenerator {
-	_r := x.inner.GlyphGenerator()
-	if _r == nil {
-		return nil
-	}
-	return &GlyphGenerator{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphGenerator"))
+	return GlyphGeneratorFromID(_r)
 }
 
-// SetGlyphGenerator calls the underlying SetGlyphGenerator.
-func (x *LayoutManager) SetGlyphGenerator(glyphGenerator *raw.NSGlyphGenerator) {
-	x.inner.SetGlyphGenerator(glyphGenerator)
+// SetGlyphGenerator wraps the corresponding Objective-C method.
+func (x *LayoutManager) SetGlyphGenerator(glyphGenerator *GlyphGenerator) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphGenerator:"), objref.IDOf(glyphGenerator))
 }
 
 // LayoutManagerable is the interface implemented by [LayoutManager], for mocking and DI.
 type LayoutManagerable interface {
-	Unwrap() *raw.NSLayoutManager
+	obj.Object
 	WithTextStorage(textStorage *TextStorage) *LayoutManager
-	WithDelegate(delegate raw.NSLayoutManagerDelegate) *LayoutManager
 	WithShowsInvisibleCharacters(showsInvisibleCharacters bool) *LayoutManager
 	WithShowsControlCharacters(showsControlCharacters bool) *LayoutManager
 	WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *LayoutManager
@@ -1142,103 +874,81 @@ type LayoutManagerable interface {
 	WithAllowsNonContiguousLayout(allowsNonContiguousLayout bool) *LayoutManager
 	WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *LayoutManager
 	WithBackgroundLayoutEnabled(backgroundLayoutEnabled bool) *LayoutManager
-	WithDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) *LayoutManager
+	WithDefaultAttachmentScaling(defaultAttachmentScaling ImageScaling) *LayoutManager
 	WithTypesetter(typesetter TypesetterProvider) *LayoutManager
-	WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *LayoutManager
+	WithTypesetterBehavior(typesetterBehavior TypesetterBehavior) *LayoutManager
 	WithUsesScreenFonts(usesScreenFonts bool) *LayoutManager
 	WithHyphenationFactor(hyphenationFactor float32) *LayoutManager
 	WithGlyphGenerator(glyphGenerator *GlyphGenerator) *LayoutManager
-	ReplaceTextStorage(newTextStorage *raw.NSTextStorage)
-	AddTextContainer(container *raw.NSTextContainer)
-	InsertTextContainerAtIndex(container *raw.NSTextContainer, index uint)
-	RemoveTextContainerAtIndex(index uint)
-	TextContainerChangedGeometry(container *raw.NSTextContainer)
-	TextContainerChangedTextView(container *raw.NSTextContainer)
-	InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange(charRange foundation.NSRange, delta int, actualCharRange *foundation.NSRange)
-	InvalidateLayoutForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange)
+	ReplaceTextStorage(newTextStorage *TextStorage)
+	AddTextContainer(container *TextContainer)
+	InsertTextContainerAtIndex(container *TextContainer, index int)
+	RemoveTextContainerAtIndex(index int)
+	TextContainerChangedGeometry(container *TextContainer)
+	TextContainerChangedTextView(container *TextContainer)
 	InvalidateDisplayForCharacterRange(charRange foundation.NSRange)
 	InvalidateDisplayForGlyphRange(glyphRange foundation.NSRange)
-	ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange)
+	ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *TextStorage, editMask TextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange)
 	EnsureGlyphsForCharacterRange(charRange foundation.NSRange)
 	EnsureGlyphsForGlyphRange(glyphRange foundation.NSRange)
 	EnsureLayoutForCharacterRange(charRange foundation.NSRange)
 	EnsureLayoutForGlyphRange(glyphRange foundation.NSRange)
-	EnsureLayoutForTextContainer(container *raw.NSTextContainer)
-	EnsureLayoutForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer)
-	SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(glyphs *uint16, props *raw.NSGlyphProperty, charIndexes *uint, aFont *raw.NSFont, glyphRange foundation.NSRange)
-	CGGlyphAtIndexIsValidIndex(glyphIndex uint, isValidIndex *bool) uint16
-	CGGlyphAtIndex(glyphIndex uint) uint16
-	IsValidGlyphIndex(glyphIndex uint) bool
-	PropertyForGlyphAtIndex(glyphIndex uint) NSGlyphProperty
-	CharacterIndexForGlyphAtIndex(glyphIndex uint) uint
-	GlyphIndexForCharacterAtIndex(charIndex uint) uint
-	GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange foundation.NSRange, glyphBuffer *uint16, props *raw.NSGlyphProperty, charIndexBuffer *uint, bidiLevelBuffer *uint8) uint
-	SetTextContainerForGlyphRange(container *raw.NSTextContainer, glyphRange foundation.NSRange)
+	EnsureLayoutForTextContainer(container *TextContainer)
+	EnsureLayoutForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *TextContainer)
+	SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(aFont *Font, glyphRange foundation.NSRange) (glyphs uint16, props GlyphProperty, charIndexes int)
+	CGGlyphAtIndexIsValidIndex(glyphIndex int) (result uint16, isValidIndex bool)
+	CGGlyphAtIndex(glyphIndex int) uint16
+	IsValidGlyphIndex(glyphIndex int) bool
+	PropertyForGlyphAtIndex(glyphIndex int) GlyphProperty
+	CharacterIndexForGlyphAtIndex(glyphIndex int) int
+	GlyphIndexForCharacterAtIndex(charIndex int) int
+	GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange foundation.NSRange) (result int, glyphBuffer uint16, props GlyphProperty, charIndexBuffer int, bidiLevelBuffer uint8)
+	SetTextContainerForGlyphRange(container *TextContainer, glyphRange foundation.NSRange)
 	SetLineFragmentRectForGlyphRangeUsedRect(fragmentRect corefoundation.CGRect, glyphRange foundation.NSRange, usedRect corefoundation.CGRect)
-	SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect corefoundation.CGRect, usedRect corefoundation.CGRect, container *raw.NSTextContainer)
+	SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect corefoundation.CGRect, usedRect corefoundation.CGRect, container *TextContainer)
 	SetLocationForStartOfGlyphRange(location corefoundation.CGPoint, glyphRange foundation.NSRange)
-	SetNotShownAttributeForGlyphAtIndex(flag bool, glyphIndex uint)
-	SetDrawsOutsideLineFragmentForGlyphAtIndex(flag bool, glyphIndex uint)
+	SetNotShownAttributeForGlyphAtIndex(flag bool, glyphIndex int)
+	SetDrawsOutsideLineFragmentForGlyphAtIndex(flag bool, glyphIndex int)
 	SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange)
-	GetFirstUnlaidCharacterIndexGlyphIndex(charIndex *uint, glyphIndex *uint)
-	FirstUnlaidCharacterIndex() uint
-	FirstUnlaidGlyphIndex() uint
-	TextContainerForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) *TextContainer
-	TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) *TextContainer
-	UsedRectForTextContainer(container *raw.NSTextContainer) corefoundation.CGRect
-	LineFragmentRectForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect
-	LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect
-	LineFragmentUsedRectForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect
-	LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect
-	LocationForGlyphAtIndex(glyphIndex uint) corefoundation.CGPoint
-	NotShownAttributeForGlyphAtIndex(glyphIndex uint) bool
-	DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex uint) bool
-	AttachmentSizeForGlyphAtIndex(glyphIndex uint) corefoundation.CGSize
-	TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex uint) foundation.NSRange
-	GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange
-	CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange
-	GlyphRangeForTextContainer(container *raw.NSTextContainer) foundation.NSRange
-	RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex uint) foundation.NSRange
-	BoundingRectForGlyphRangeInTextContainer(glyphRange foundation.NSRange, container *raw.NSTextContainer) corefoundation.CGRect
-	GlyphRangeForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) foundation.NSRange
-	GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) foundation.NSRange
-	GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point corefoundation.CGPoint, container *raw.NSTextContainer, partialFraction *float64) uint
-	GlyphIndexForPointInTextContainer(point corefoundation.CGPoint, container *raw.NSTextContainer) uint
-	FractionOfDistanceThroughGlyphForPointInTextContainer(point corefoundation.CGPoint, container *raw.NSTextContainer) float64
-	CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point corefoundation.CGPoint, container *raw.NSTextContainer, partialFraction *float64) uint
-	GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex uint, aFlag bool, dFlag bool, positions *float64, charIndexes *uint) uint
-	EnumerateLineFragmentsForGlyphRangeUsing(glyphRange foundation.NSRange, block objc.Block)
-	EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing(glyphRange foundation.NSRange, selectedRange foundation.NSRange, textContainer *raw.NSTextContainer, block objc.Block)
+	GetFirstUnlaidCharacterIndexGlyphIndex() (charIndex int, glyphIndex int)
+	FirstUnlaidCharacterIndex() int
+	FirstUnlaidGlyphIndex() int
+	UsedRectForTextContainer(container *TextContainer) corefoundation.CGRect
+	LocationForGlyphAtIndex(glyphIndex int) corefoundation.CGPoint
+	NotShownAttributeForGlyphAtIndex(glyphIndex int) bool
+	DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex int) bool
+	AttachmentSizeForGlyphAtIndex(glyphIndex int) corefoundation.CGSize
+	TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex int) foundation.NSRange
+	GlyphRangeForTextContainer(container *TextContainer) foundation.NSRange
+	RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex int) foundation.NSRange
+	BoundingRectForGlyphRangeInTextContainer(glyphRange foundation.NSRange, container *TextContainer) corefoundation.CGRect
+	GlyphRangeForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *TextContainer) foundation.NSRange
+	GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds corefoundation.CGRect, container *TextContainer) foundation.NSRange
+	GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point corefoundation.CGPoint, container *TextContainer) (result int, partialFraction float64)
+	GlyphIndexForPointInTextContainer(point corefoundation.CGPoint, container *TextContainer) int
+	FractionOfDistanceThroughGlyphForPointInTextContainer(point corefoundation.CGPoint, container *TextContainer) float64
+	CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point corefoundation.CGPoint, container *TextContainer) (result int, partialFraction float64)
+	GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex int, aFlag bool, dFlag bool) (result int, positions float64, charIndexes int)
 	DrawBackgroundForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint)
 	DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint)
-	ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount int, font *raw.NSFont, textMatrix corefoundation.CGAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], cGContext unsafe.Pointer)
-	FillBackgroundRectArrayCountForCharacterRangeColor(rectArray *corefoundation.CGRect, rectCount uint, charRange foundation.NSRange, color *raw.NSColor)
-	DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	ShowAttachmentCellInRectCharacterIndex(cell *raw.NSCell, rect corefoundation.CGRect, attachmentIndex uint)
-	SetLayoutRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange)
-	SetBoundsRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange)
-	LayoutRectForTextBlockGlyphRange(block *raw.NSTextBlock, glyphRange foundation.NSRange) corefoundation.CGRect
-	BoundsRectForTextBlockGlyphRange(block *raw.NSTextBlock, glyphRange foundation.NSRange) corefoundation.CGRect
-	LayoutRectForTextBlockAtIndexEffectiveRange(block *raw.NSTextBlock, glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect
-	BoundsRectForTextBlockAtIndexEffectiveRange(block *raw.NSTextBlock, glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect
-	TemporaryAttributesAtCharacterIndexEffectiveRange(charIndex uint, effectiveCharRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetTemporaryAttributesForCharacterRange(attrs *foundation.NSDictionary[*foundation.NSString, objc.ID], charRange foundation.NSRange)
-	AddTemporaryAttributesForCharacterRange(attrs *foundation.NSDictionary[*foundation.NSString, objc.ID], charRange foundation.NSRange)
-	RemoveTemporaryAttributeForCharacterRange(attrName *foundation.NSString, charRange foundation.NSRange)
-	TemporaryAttributeAtCharacterIndexEffectiveRange(attrName *foundation.NSString, location uint, range_ *foundation.NSRange) objc.ID
-	TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange(attrName *foundation.NSString, location uint, range_ *foundation.NSRange, rangeLimit foundation.NSRange) objc.ID
-	TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange(location uint, range_ *foundation.NSRange, rangeLimit foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	AddTemporaryAttributeValueForCharacterRange(attrName *foundation.NSString, value objc.ID, charRange foundation.NSRange)
-	DefaultLineHeightForFont(theFont *raw.NSFont) float64
-	DefaultBaselineOffsetForFont(theFont *raw.NSFont) float64
+	DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal UnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal UnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal UnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal UnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	ShowAttachmentCellInRectCharacterIndex(cell *Cell, rect corefoundation.CGRect, attachmentIndex int)
+	SetLayoutRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *TextBlock, glyphRange foundation.NSRange)
+	SetBoundsRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *TextBlock, glyphRange foundation.NSRange)
+	LayoutRectForTextBlockGlyphRange(block *TextBlock, glyphRange foundation.NSRange) corefoundation.CGRect
+	BoundsRectForTextBlockGlyphRange(block *TextBlock, glyphRange foundation.NSRange) corefoundation.CGRect
+	SetTemporaryAttributesForCharacterRange(attrs obj.Object, charRange foundation.NSRange)
+	AddTemporaryAttributesForCharacterRange(attrs obj.Object, charRange foundation.NSRange)
+	RemoveTemporaryAttributeForCharacterRange(attrName obj.Object, charRange foundation.NSRange)
+	AddTemporaryAttributeValueForCharacterRange(attrName obj.Object, value obj.Object, charRange foundation.NSRange)
+	DefaultLineHeightForFont(theFont *Font) float64
+	DefaultBaselineOffsetForFont(theFont *Font) float64
 	TextStorage() *TextStorage
-	SetTextStorage(textStorage *raw.NSTextStorage)
+	SetTextStorage(textStorage *TextStorage)
 	TextContainers() []*TextContainer
-	Delegate() raw.NSLayoutManagerDelegate
-	SetDelegate(delegate raw.NSLayoutManagerDelegate)
 	ShowsInvisibleCharacters() bool
 	SetShowsInvisibleCharacters(showsInvisibleCharacters bool)
 	ShowsControlCharacters() bool
@@ -1254,48 +964,43 @@ type LayoutManagerable interface {
 	SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool)
 	BackgroundLayoutEnabled() bool
 	SetBackgroundLayoutEnabled(backgroundLayoutEnabled bool)
-	DefaultAttachmentScaling() NSImageScaling
-	SetDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling)
+	DefaultAttachmentScaling() ImageScaling
+	SetDefaultAttachmentScaling(defaultAttachmentScaling ImageScaling)
 	Typesetter() *Typesetter
-	SetTypesetter(typesetter *raw.NSTypesetter)
-	TypesetterBehavior() NSTypesetterBehavior
-	SetTypesetterBehavior(typesetterBehavior NSTypesetterBehavior)
-	NumberOfGlyphs() uint
+	SetTypesetter(typesetter *Typesetter)
+	TypesetterBehavior() TypesetterBehavior
+	SetTypesetterBehavior(typesetterBehavior TypesetterBehavior)
+	NumberOfGlyphs() int
 	ExtraLineFragmentRect() corefoundation.CGRect
 	ExtraLineFragmentUsedRect() corefoundation.CGRect
 	ExtraLineFragmentTextContainer() *TextContainer
-	RulerMarkersForTextViewParagraphStyleRuler(view *raw.NSTextView, style *raw.NSParagraphStyle, ruler *raw.NSRulerView) *foundation.NSArray[*raw.NSRulerMarker]
-	RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view *raw.NSTextView, style *raw.NSParagraphStyle, ruler *raw.NSRulerView, isEnabled bool) *View
-	LayoutManagerOwnsFirstResponderInWindow(window *raw.NSWindow) bool
+	RulerMarkersForTextViewParagraphStyleRuler(view *TextView, style *ParagraphStyle, ruler *RulerView) []*RulerMarker
+	RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view *TextView, style *ParagraphStyle, ruler *RulerView, isEnabled bool) *View
+	LayoutManagerOwnsFirstResponderInWindow(window *Window) bool
 	FirstTextView() *TextView
 	TextViewForBeginningOfSelection() *TextView
-	GlyphAtIndexIsValidIndex(glyphIndex uint, isValidIndex *bool) uint
-	GlyphAtIndex(glyphIndex uint) uint
-	RectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount(charRange foundation.NSRange, selCharRange foundation.NSRange, container *raw.NSTextContainer, rectCount *uint) *corefoundation.CGRect
-	RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount(glyphRange foundation.NSRange, selGlyphRange foundation.NSRange, container *raw.NSTextContainer, rectCount *uint) *corefoundation.CGRect
-	SubstituteFontForFont(originalFont *raw.NSFont) *Font
-	InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex(glyphs *uint, length uint, glyphIndex uint, charIndex uint)
-	InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIndex uint, charIndex uint)
-	ReplaceGlyphAtIndexWithGlyph(glyphIndex uint, newGlyph uint)
+	GlyphAtIndexIsValidIndex(glyphIndex int) (result int, isValidIndex bool)
+	GlyphAtIndex(glyphIndex int) int
+	SubstituteFontForFont(originalFont *Font) *Font
+	InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex(length int, glyphIndex int, charIndex int) (glyphs int)
+	InsertGlyphAtGlyphIndexCharacterIndex(glyph int, glyphIndex int, charIndex int)
+	ReplaceGlyphAtIndexWithGlyph(glyphIndex int, newGlyph int)
 	DeleteGlyphsInRange(glyphRange foundation.NSRange)
-	SetCharacterIndexForGlyphAtIndex(charIndex uint, glyphIndex uint)
-	SetIntAttributeValueForGlyphAtIndex(attributeTag int, val int, glyphIndex uint)
+	SetCharacterIndexForGlyphAtIndex(charIndex int, glyphIndex int)
+	SetIntAttributeValueForGlyphAtIndex(attributeTag int, val int, glyphIndex int)
 	InvalidateGlyphsOnLayoutInvalidationForGlyphRange(glyphRange foundation.NSRange)
-	IntAttributeForGlyphAtIndex(attributeTag int, glyphIndex uint) int
-	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint
-	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool, bidiLevelBuffer *uint8) uint
-	GetGlyphsRange(glyphArray *uint, glyphRange foundation.NSRange) uint
-	InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange(charRange foundation.NSRange, flag bool, actualCharRange *foundation.NSRange)
-	TextStorageEditedRangeChangeInLengthInvalidatedRange(str *raw.NSTextStorage, editedMask uint, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange)
-	SetLocationsStartingGlyphIndexesCountForGlyphRange(locations *corefoundation.CGPoint, glyphIndexes *uint, count uint, glyphRange foundation.NSRange)
-	ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment(glyphs string, glyphLen uint, glyphRange foundation.NSRange, point corefoundation.CGPoint, font *raw.NSFont, color *raw.NSColor, printingAdjustment corefoundation.CGSize)
-	ShowCGGlyphsPositionsCountFontMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount uint, font *raw.NSFont, textMatrix *foundation.NSAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], graphicsContext *raw.NSGraphicsContext)
+	IntAttributeForGlyphAtIndex(attributeTag int, glyphIndex int) int
+	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool)
+	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool, bidiLevelBuffer uint8)
+	GetGlyphsRange(glyphRange foundation.NSRange) (result int, glyphArray int)
+	TextStorageEditedRangeChangeInLengthInvalidatedRange(str *TextStorage, editedMask int, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange)
+	ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment(glyphs string, glyphLen int, glyphRange foundation.NSRange, point corefoundation.CGPoint, font *Font, color *Color, printingAdjustment corefoundation.CGSize)
 	UsesScreenFonts() bool
 	SetUsesScreenFonts(usesScreenFonts bool)
 	HyphenationFactor() float32
 	SetHyphenationFactor(hyphenationFactor float32)
 	GlyphGenerator() *GlyphGenerator
-	SetGlyphGenerator(glyphGenerator *raw.NSGlyphGenerator)
+	SetGlyphGenerator(glyphGenerator *GlyphGenerator)
 }
 
 var _ LayoutManagerable = (*LayoutManager)(nil)

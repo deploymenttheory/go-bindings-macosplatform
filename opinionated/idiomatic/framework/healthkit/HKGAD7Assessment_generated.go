@@ -5,73 +5,76 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// GAD7Assessment wraps [raw.HKGAD7Assessment] with a fluent Go API.
+// GAD7Assessment is an idiomatic wrapper over the Objective-C class HKGAD7Assessment.
+//
+// It embeds [ScoredAssessment], promoting that type's methods.
 type GAD7Assessment struct {
-	inner *raw.HKGAD7Assessment
+	ScoredAssessment
 }
 
-// Unwrap returns the underlying [raw.HKGAD7Assessment].
-func (x *GAD7Assessment) Unwrap() *raw.HKGAD7Assessment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GAD7Assessment) ID() objc.ID { return x.inner.Ptr() }
-
-// GAD7AssessmentFromID adopts an existing object pointer as a GAD7Assessment (nil for 0).
+// GAD7AssessmentFromID adopts an existing Objective-C object as a GAD7Assessment
+// (nil for 0), retaining it and registering a release finalizer.
 func GAD7AssessmentFromID(id objc.ID) *GAD7Assessment {
 	if id == 0 {
 		return nil
 	}
-	return &GAD7Assessment{inner: raw.HKGAD7AssessmentFromID(id)}
+	x := &GAD7Assessment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGAD7Assessment creates a new [GAD7Assessment].
-func NewGAD7Assessment() *GAD7Assessment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKGAD7Assessment")), objc.RegisterName("new"))
-	return &GAD7Assessment{inner: raw.HKGAD7AssessmentFromID(_id)}
-}
-
-// Answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
-//
-// Answers returns the collection as a Go slice.
-func (x *GAD7Assessment) Answers() []*foundation.NSNumber {
-	arr := x.inner.Answers()
-	if arr == nil {
+// gAD7AssessmentAdopt wraps an Objective-C object that this code just created as a
+// GAD7Assessment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gAD7AssessmentAdopt(id objc.ID) *GAD7Assessment {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &GAD7Assessment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   risk @discussion The risk determined by the score on a GAD-7 assessment.
+// NewGAD7Assessment creates a new GAD7Assessment.
+func NewGAD7Assessment() *GAD7Assessment {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("new"))
+	return gAD7AssessmentAdopt(_id)
+}
+
+// Answers answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
 //
-// Risk calls the underlying Risk.
-func (x *GAD7Assessment) Risk() HKGAD7AssessmentRisk {
-	return HKGAD7AssessmentRisk(x.inner.Risk())
+// Answers returns the collection as a Go slice.
+func (x *GAD7Assessment) Answers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("answers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-func (x *GAD7Assessment) asScoredAssessment() *raw.HKScoredAssessment {
-	return &x.inner.HKScoredAssessment
-}
-
-func (x *GAD7Assessment) asSample() *raw.HKSample { return &x.inner.HKScoredAssessment.HKSample }
-
-func (x *GAD7Assessment) asObject() *raw.HKObject {
-	return &x.inner.HKScoredAssessment.HKSample.HKObject
+// Risk the risk determined by the score on a GAD-7 assessment.
+func (x *GAD7Assessment) Risk() GAD7AssessmentRisk {
+	_r := objc.Send[GAD7AssessmentRisk](objref.IDOf(x), objc.RegisterName("risk"))
+	return _r
 }
 
 // GAD7Assessmentable is the interface implemented by [GAD7Assessment], for mocking and DI.
 type GAD7Assessmentable interface {
-	Unwrap() *raw.HKGAD7Assessment
-	Answers() []*foundation.NSNumber
-	Risk() HKGAD7AssessmentRisk
+	obj.Object
+	Answers() []obj.Object
+	Risk() GAD7AssessmentRisk
 }
 
 var _ GAD7Assessmentable = (*GAD7Assessment)(nil)
+
+var _ ScoredAssessmentProvider = (*GAD7Assessment)(nil)
+
+var _ SampleProvider = (*GAD7Assessment)(nil)
+
+var _ ObjectProvider = (*GAD7Assessment)(nil)

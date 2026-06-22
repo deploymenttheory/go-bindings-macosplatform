@@ -5,68 +5,74 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that stores the clamp mask used by gradient arithmetic operators.
+// CNNArithmeticGradientState is an idiomatic wrapper over the Objective-C class MPSCNNArithmeticGradientState.
 //
-// CNNArithmeticGradientState wraps [raw.MPSCNNArithmeticGradientState] with a fluent Go API.
+// It embeds [NNBinaryGradientState], promoting that type's methods.
+//
+// An object that stores the clamp mask used by gradient arithmetic operators.
 type CNNArithmeticGradientState struct {
-	inner *raw.MPSCNNArithmeticGradientState
+	NNBinaryGradientState
 }
 
-// Unwrap returns the underlying [raw.MPSCNNArithmeticGradientState].
-func (x *CNNArithmeticGradientState) Unwrap() *raw.MPSCNNArithmeticGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNArithmeticGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNArithmeticGradientStateFromID adopts an existing object pointer as a CNNArithmeticGradientState (nil for 0).
+// CNNArithmeticGradientStateFromID adopts an existing Objective-C object as a CNNArithmeticGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNArithmeticGradientStateFromID(id objc.ID) *CNNArithmeticGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNArithmeticGradientState{inner: raw.MPSCNNArithmeticGradientStateFromID(id)}
+	x := &CNNArithmeticGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNArithmeticGradientState creates a new [CNNArithmeticGradientState].
+// cNNArithmeticGradientStateAdopt wraps an Objective-C object that this code just created as a
+// CNNArithmeticGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNArithmeticGradientStateAdopt(id objc.ID) *CNNArithmeticGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNArithmeticGradientState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNArithmeticGradientState creates a new CNNArithmeticGradientState.
 func NewCNNArithmeticGradientState() *CNNArithmeticGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNArithmeticGradientState")), objc.RegisterName("new"))
-	return &CNNArithmeticGradientState{inner: raw.MPSCNNArithmeticGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNArithmeticGradientState")), objc.RegisterName("new"))
+	return cNNArithmeticGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *CNNArithmeticGradientState) WithReadCount(readCount uint) *CNNArithmeticGradientState {
-	x.inner.MPSNNBinaryGradientState.MPSState.SetReadCount(readCount)
+// WithReadCount sets the property and returns the receiver so calls can be chained.
+func (x *CNNArithmeticGradientState) WithReadCount(readCount int) *CNNArithmeticGradientState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *CNNArithmeticGradientState) WithLabel(label string) *CNNArithmeticGradientState {
-	x.inner.MPSNNBinaryGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *mpsneuralnetwork.MPSNNBinaryGradientState {
-	return &x.inner.MPSNNBinaryGradientState
-}
-
-func (x *CNNArithmeticGradientState) asState() *mpscore.MPSState {
-	return &x.inner.MPSNNBinaryGradientState.MPSState
 }
 
 // CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
 type CNNArithmeticGradientStateable interface {
-	Unwrap() *raw.MPSCNNArithmeticGradientState
-	WithReadCount(readCount uint) *CNNArithmeticGradientState
+	obj.Object
+	WithReadCount(readCount int) *CNNArithmeticGradientState
 	WithLabel(label string) *CNNArithmeticGradientState
 }
 
 var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)
+
+var _ NNBinaryGradientStateProvider = (*CNNArithmeticGradientState)(nil)
+
+var _ StateProvider = (*CNNArithmeticGradientState)(nil)

@@ -5,160 +5,177 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that configures new MTLDepthStencilState instances.
+// DepthStencilDescriptor is an idiomatic wrapper over the Objective-C class MTLDepthStencilDescriptor.
 //
-// DepthStencilDescriptor wraps [raw.MTLDepthStencilDescriptor] with a fluent Go API.
+// An instance that configures new MTLDepthStencilState instances.
 type DepthStencilDescriptor struct {
-	inner *raw.MTLDepthStencilDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLDepthStencilDescriptor].
-func (x *DepthStencilDescriptor) Unwrap() *raw.MTLDepthStencilDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DepthStencilDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// DepthStencilDescriptorFromID adopts an existing object pointer as a DepthStencilDescriptor (nil for 0).
+// DepthStencilDescriptorFromID adopts an existing Objective-C object as a DepthStencilDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func DepthStencilDescriptorFromID(id objc.ID) *DepthStencilDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &DepthStencilDescriptor{inner: raw.MTLDepthStencilDescriptorFromID(id)}
+	x := &DepthStencilDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDepthStencilDescriptor creates a new [DepthStencilDescriptor].
+// depthStencilDescriptorAdopt wraps an Objective-C object that this code just created as a
+// DepthStencilDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func depthStencilDescriptorAdopt(id objc.ID) *DepthStencilDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &DepthStencilDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DepthStencilDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DepthStencilDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DepthStencilDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DepthStencilDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDepthStencilDescriptor creates a new DepthStencilDescriptor.
 func NewDepthStencilDescriptor() *DepthStencilDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLDepthStencilDescriptor")), objc.RegisterName("new"))
-	return &DepthStencilDescriptor{inner: raw.MTLDepthStencilDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLDepthStencilDescriptor")), objc.RegisterName("new"))
+	return depthStencilDescriptorAdopt(_id)
 }
 
-// The comparison that is performed between a fragment’s depth value and the depth value in the attachment, which determines whether to discard the fragment.
-//
-// WithDepthCompareFunction sets the depthCompareFunction property and returns the receiver for chaining.
-func (x *DepthStencilDescriptor) WithDepthCompareFunction(depthCompareFunction MTLCompareFunction) *DepthStencilDescriptor {
-	x.inner.SetDepthCompareFunction(raw.MTLCompareFunction(depthCompareFunction))
+// WithDepthCompareFunction the comparison that is performed between a fragment’s depth value and the depth value in the attachment, which determines whether to discard the fragment.
+func (x *DepthStencilDescriptor) WithDepthCompareFunction(depthCompareFunction CompareFunction) *DepthStencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthCompareFunction:"), depthCompareFunction)
 	return x
 }
 
-// A Boolean value that indicates whether depth values can be written to the depth attachment.
-//
-// WithDepthWriteEnabled sets the depthWriteEnabled property and returns the receiver for chaining.
+// WithDepthWriteEnabled a Boolean value that indicates whether depth values can be written to the depth attachment.
 func (x *DepthStencilDescriptor) WithDepthWriteEnabled(depthWriteEnabled bool) *DepthStencilDescriptor {
-	x.inner.SetDepthWriteEnabled(depthWriteEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthWriteEnabled:"), depthWriteEnabled)
 	return x
 }
 
-// The stencil descriptor for front-facing primitives.
-//
-// WithFrontFaceStencil sets the frontFaceStencil property and returns the receiver for chaining.
+// WithFrontFaceStencil the stencil descriptor for front-facing primitives.
 func (x *DepthStencilDescriptor) WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
-	x.inner.SetFrontFaceStencil(frontFaceStencil.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrontFaceStencil:"), objref.IDOf(frontFaceStencil))
 	return x
 }
 
-// The stencil descriptor for back-facing primitives.
-//
-// WithBackFaceStencil sets the backFaceStencil property and returns the receiver for chaining.
+// WithBackFaceStencil the stencil descriptor for back-facing primitives.
 func (x *DepthStencilDescriptor) WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
-	x.inner.SetBackFaceStencil(backFaceStencil.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackFaceStencil:"), objref.IDOf(backFaceStencil))
 	return x
 }
 
-// A string that identifies this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that identifies this object.
 func (x *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// DepthCompareFunction calls the underlying DepthCompareFunction.
-func (x *DepthStencilDescriptor) DepthCompareFunction() MTLCompareFunction {
-	return MTLCompareFunction(x.inner.DepthCompareFunction())
+// DepthCompareFunction wraps the corresponding Objective-C method.
+func (x *DepthStencilDescriptor) DepthCompareFunction() CompareFunction {
+	_r := objc.Send[CompareFunction](objref.IDOf(x), objc.RegisterName("depthCompareFunction"))
+	return _r
 }
 
-// SetDepthCompareFunction calls the underlying SetDepthCompareFunction.
-func (x *DepthStencilDescriptor) SetDepthCompareFunction(depthCompareFunction MTLCompareFunction) {
-	x.inner.SetDepthCompareFunction(raw.MTLCompareFunction(depthCompareFunction))
+// SetDepthCompareFunction wraps the corresponding Objective-C method.
+func (x *DepthStencilDescriptor) SetDepthCompareFunction(depthCompareFunction CompareFunction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthCompareFunction:"), depthCompareFunction)
 }
 
-// IsDepthWriteEnabled calls the underlying IsDepthWriteEnabled.
+// IsDepthWriteEnabled wraps the corresponding Objective-C method.
 func (x *DepthStencilDescriptor) IsDepthWriteEnabled() bool {
-	return x.inner.IsDepthWriteEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDepthWriteEnabled"))
+	return _r
 }
 
-// SetDepthWriteEnabled calls the underlying SetDepthWriteEnabled.
+// SetDepthWriteEnabled wraps the corresponding Objective-C method.
 func (x *DepthStencilDescriptor) SetDepthWriteEnabled(depthWriteEnabled bool) {
-	x.inner.SetDepthWriteEnabled(depthWriteEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthWriteEnabled:"), depthWriteEnabled)
 }
 
-// FrontFaceStencil calls the underlying FrontFaceStencil.
+// FrontFaceStencil wraps the corresponding Objective-C method.
 func (x *DepthStencilDescriptor) FrontFaceStencil() *StencilDescriptor {
-	_r := x.inner.FrontFaceStencil()
-	if _r == nil {
-		return nil
-	}
-	return &StencilDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frontFaceStencil"))
+	return StencilDescriptorFromID(_r)
 }
 
-// SetFrontFaceStencil calls the underlying SetFrontFaceStencil.
-func (x *DepthStencilDescriptor) SetFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor) {
-	x.inner.SetFrontFaceStencil(frontFaceStencil)
+// SetFrontFaceStencil wraps the corresponding Objective-C method.
+func (x *DepthStencilDescriptor) SetFrontFaceStencil(frontFaceStencil *StencilDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrontFaceStencil:"), objref.IDOf(frontFaceStencil))
 }
 
-// BackFaceStencil calls the underlying BackFaceStencil.
+// BackFaceStencil wraps the corresponding Objective-C method.
 func (x *DepthStencilDescriptor) BackFaceStencil() *StencilDescriptor {
-	_r := x.inner.BackFaceStencil()
-	if _r == nil {
-		return nil
-	}
-	return &StencilDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backFaceStencil"))
+	return StencilDescriptorFromID(_r)
 }
 
-// SetBackFaceStencil calls the underlying SetBackFaceStencil.
-func (x *DepthStencilDescriptor) SetBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor) {
-	x.inner.SetBackFaceStencil(backFaceStencil)
+// SetBackFaceStencil wraps the corresponding Objective-C method.
+func (x *DepthStencilDescriptor) SetBackFaceStencil(backFaceStencil *StencilDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackFaceStencil:"), objref.IDOf(backFaceStencil))
 }
 
-// @property label @abstract A string to help identify the created object.
-//
-// Label calls the underlying Label.
+// Label a string to help identify the created object.
 func (x *DepthStencilDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *DepthStencilDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // DepthStencilDescriptorable is the interface implemented by [DepthStencilDescriptor], for mocking and DI.
 type DepthStencilDescriptorable interface {
-	Unwrap() *raw.MTLDepthStencilDescriptor
-	WithDepthCompareFunction(depthCompareFunction MTLCompareFunction) *DepthStencilDescriptor
+	obj.Object
+	WithDepthCompareFunction(depthCompareFunction CompareFunction) *DepthStencilDescriptor
 	WithDepthWriteEnabled(depthWriteEnabled bool) *DepthStencilDescriptor
 	WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor
 	WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor
 	WithLabel(label string) *DepthStencilDescriptor
-	DepthCompareFunction() MTLCompareFunction
-	SetDepthCompareFunction(depthCompareFunction MTLCompareFunction)
+	DepthCompareFunction() CompareFunction
+	SetDepthCompareFunction(depthCompareFunction CompareFunction)
 	IsDepthWriteEnabled() bool
 	SetDepthWriteEnabled(depthWriteEnabled bool)
 	FrontFaceStencil() *StencilDescriptor
-	SetFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor)
+	SetFrontFaceStencil(frontFaceStencil *StencilDescriptor)
 	BackFaceStencil() *StencilDescriptor
-	SetBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor)
+	SetBackFaceStencil(backFaceStencil *StencilDescriptor)
 	Label() string
 	SetLabel(label string)
 }

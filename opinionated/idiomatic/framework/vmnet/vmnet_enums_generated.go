@@ -15,6 +15,8 @@ const (
 	VMNET_INTERFACE_PACKETS_AVAILABLE Interface_event_t = 1
 )
 
+// String returns the Interface_event_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Interface_event_t) String() string {
 	switch e {
 	case VMNET_INTERFACE_PACKETS_AVAILABLE:
@@ -33,6 +35,8 @@ const (
 	VMNET_BRIDGED_MODE Operating_modes_t = 1002
 )
 
+// String returns the Operating_modes_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Operating_modes_t) String() string {
 	switch e {
 	case VMNET_HOST_MODE:
@@ -63,6 +67,8 @@ const (
 	VMNET_NOT_AUTHORIZED       Vmnet_return_t = 1010
 )
 
+// String returns the Vmnet_return_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Vmnet_return_t) String() string {
 	switch e {
 	case VMNET_SUCCESS:

@@ -5,65 +5,72 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object that requests the creation of a network device for the guest system.
+// VirtioNetworkDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioNetworkDeviceConfiguration.
 //
-// VirtioNetworkDeviceConfiguration wraps [raw.VZVirtioNetworkDeviceConfiguration] with a fluent Go API.
+// It embeds [NetworkDeviceConfiguration], promoting that type's methods.
+//
+// A configuration object that requests the creation of a network device for the guest system.
 type VirtioNetworkDeviceConfiguration struct {
-	inner *raw.VZVirtioNetworkDeviceConfiguration
+	NetworkDeviceConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZVirtioNetworkDeviceConfiguration].
-func (x *VirtioNetworkDeviceConfiguration) Unwrap() *raw.VZVirtioNetworkDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioNetworkDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioNetworkDeviceConfigurationFromID adopts an existing object pointer as a VirtioNetworkDeviceConfiguration (nil for 0).
+// VirtioNetworkDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioNetworkDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioNetworkDeviceConfigurationFromID(id objc.ID) *VirtioNetworkDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioNetworkDeviceConfiguration{inner: raw.VZVirtioNetworkDeviceConfigurationFromID(id)}
+	x := &VirtioNetworkDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioNetworkDeviceConfiguration creates a new [VirtioNetworkDeviceConfiguration].
+// virtioNetworkDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioNetworkDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioNetworkDeviceConfigurationAdopt(id objc.ID) *VirtioNetworkDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioNetworkDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVirtioNetworkDeviceConfiguration creates a new VirtioNetworkDeviceConfiguration.
 func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioNetworkDeviceConfiguration")), objc.RegisterName("new"))
-	return &VirtioNetworkDeviceConfiguration{inner: raw.VZVirtioNetworkDeviceConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioNetworkDeviceConfiguration")), objc.RegisterName("new"))
+	return virtioNetworkDeviceConfigurationAdopt(_id)
 }
 
-// The media access control (MAC) address to assign to the network device.
-//
-// WithMACAddress sets the mACAddress property and returns the receiver for chaining.
+// WithMACAddress the media access control (MAC) address to assign to the network device.
 func (x *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
-	x.inner.VZNetworkDeviceConfiguration.SetMACAddress(mACAddress.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
 	return x
 }
 
-// The object that defines how the virtual network device communicates with the host system.
-//
-// WithAttachment sets the attachment property and returns the receiver for chaining.
+// WithAttachment the object that defines how the virtual network device communicates with the host system.
 func (x *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration {
-	x.inner.VZNetworkDeviceConfiguration.SetAttachment(attachment.asNetworkDeviceAttachment())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
-}
-
-func (x *VirtioNetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration {
-	return &x.inner.VZNetworkDeviceConfiguration
 }
 
 // VirtioNetworkDeviceConfigurationable is the interface implemented by [VirtioNetworkDeviceConfiguration], for mocking and DI.
 type VirtioNetworkDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioNetworkDeviceConfiguration
+	obj.Object
 	WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration
 	WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration
 }
 
 var _ VirtioNetworkDeviceConfigurationable = (*VirtioNetworkDeviceConfiguration)(nil)
+
+var _ NetworkDeviceConfigurationProvider = (*VirtioNetworkDeviceConfiguration)(nil)

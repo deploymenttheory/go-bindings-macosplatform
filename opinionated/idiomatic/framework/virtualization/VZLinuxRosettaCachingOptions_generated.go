@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines UNIX socket-based caching options for Rosetta.
+// LinuxRosettaCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaCachingOptions.
 //
-// LinuxRosettaCachingOptions wraps [raw.VZLinuxRosettaCachingOptions] with a fluent Go API.
+// LinuxRosettaCachingOptions is an abstract base — you do not construct it directly. Construct one of [LinuxRosettaAbstractSocketCachingOptions], [LinuxRosettaUnixSocketCachingOptions] and pass it where a LinuxRosettaCachingOptions is accepted.
+//
+// An abstract class that defines UNIX socket-based caching options for Rosetta.
 type LinuxRosettaCachingOptions struct {
-	inner *raw.VZLinuxRosettaCachingOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZLinuxRosettaCachingOptions].
-func (x *LinuxRosettaCachingOptions) Unwrap() *raw.VZLinuxRosettaCachingOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinuxRosettaCachingOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// LinuxRosettaCachingOptionsFromID adopts an existing object pointer as a LinuxRosettaCachingOptions (nil for 0).
+// LinuxRosettaCachingOptionsFromID adopts an existing Objective-C object as a LinuxRosettaCachingOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func LinuxRosettaCachingOptionsFromID(id objc.ID) *LinuxRosettaCachingOptions {
 	if id == 0 {
 		return nil
 	}
-	return &LinuxRosettaCachingOptions{inner: raw.VZLinuxRosettaCachingOptionsFromID(id)}
+	x := &LinuxRosettaCachingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLinuxRosettaCachingOptions creates a new [LinuxRosettaCachingOptions].
-func NewLinuxRosettaCachingOptions() *LinuxRosettaCachingOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaCachingOptions")), objc.RegisterName("new"))
-	return &LinuxRosettaCachingOptions{inner: raw.VZLinuxRosettaCachingOptionsFromID(_id)}
+// linuxRosettaCachingOptionsAdopt wraps an Objective-C object that this code just created as a
+// LinuxRosettaCachingOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linuxRosettaCachingOptionsAdopt(id objc.ID) *LinuxRosettaCachingOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &LinuxRosettaCachingOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *LinuxRosettaCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions {
-	return x.inner
+// Description returns the object's -description text.
+func (x *LinuxRosettaCachingOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LinuxRosettaCachingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LinuxRosettaCachingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LinuxRosettaCachingOptions) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // LinuxRosettaCachingOptionsable is the interface implemented by [LinuxRosettaCachingOptions], for mocking and DI.
 type LinuxRosettaCachingOptionsable interface {
-	Unwrap() *raw.VZLinuxRosettaCachingOptions
+	obj.Object
 }
 
 var _ LinuxRosettaCachingOptionsable = (*LinuxRosettaCachingOptions)(nil)
+
+// isLinuxRosettaCachingOptions marks LinuxRosettaCachingOptions — and, by embedding promotion, its
+// subclasses — as a member of the LinuxRosettaCachingOptions hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LinuxRosettaCachingOptions) isLinuxRosettaCachingOptions() {}
+
+var _ LinuxRosettaCachingOptionsProvider = (*LinuxRosettaCachingOptions)(nil)

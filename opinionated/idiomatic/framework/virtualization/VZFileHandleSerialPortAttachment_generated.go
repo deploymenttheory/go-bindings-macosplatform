@@ -5,67 +5,73 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An attachment point that allows bidirectional communication using file handles.
+// FileHandleSerialPortAttachment is an idiomatic wrapper over the Objective-C class VZFileHandleSerialPortAttachment.
 //
-// FileHandleSerialPortAttachment wraps [raw.VZFileHandleSerialPortAttachment] with a fluent Go API.
+// It embeds [SerialPortAttachment], promoting that type's methods.
+//
+// An attachment point that allows bidirectional communication using file handles.
 type FileHandleSerialPortAttachment struct {
-	inner *raw.VZFileHandleSerialPortAttachment
+	SerialPortAttachment
 }
 
-// Unwrap returns the underlying [raw.VZFileHandleSerialPortAttachment].
-func (x *FileHandleSerialPortAttachment) Unwrap() *raw.VZFileHandleSerialPortAttachment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileHandleSerialPortAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// FileHandleSerialPortAttachmentFromID adopts an existing object pointer as a FileHandleSerialPortAttachment (nil for 0).
+// FileHandleSerialPortAttachmentFromID adopts an existing Objective-C object as a FileHandleSerialPortAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func FileHandleSerialPortAttachmentFromID(id objc.ID) *FileHandleSerialPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &FileHandleSerialPortAttachment{inner: raw.VZFileHandleSerialPortAttachmentFromID(id)}
+	x := &FileHandleSerialPortAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a serial port attachment object from the specified file handles.
-//
-// NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting creates a new [FileHandleSerialPortAttachment].
-func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting(fileHandleForReading *foundation.NSFileHandle, fileHandleForWriting *foundation.NSFileHandle) *FileHandleSerialPortAttachment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZFileHandleSerialPortAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandleForReading:fileHandleForWriting:"), fileHandleForReading.Ptr(), fileHandleForWriting.Ptr())
-	return &FileHandleSerialPortAttachment{inner: raw.VZFileHandleSerialPortAttachmentFromID(_id)}
+// fileHandleSerialPortAttachmentAdopt wraps an Objective-C object that this code just created as a
+// FileHandleSerialPortAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileHandleSerialPortAttachmentAdopt(id objc.ID) *FileHandleSerialPortAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &FileHandleSerialPortAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract File handle for reading from the file. @discussion Data written to fileHandleForReading goes to the guest.
-//
-// FileHandleForReading calls the underlying FileHandleForReading.
-func (x *FileHandleSerialPortAttachment) FileHandleForReading() *foundation.NSFileHandle {
-	return x.inner.FileHandleForReading()
+// NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting creates a serial port attachment object from the specified file handles.
+func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting(fileHandleForReading obj.Object, fileHandleForWriting obj.Object) *FileHandleSerialPortAttachment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileHandleSerialPortAttachment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandleForReading:fileHandleForWriting:"), objref.IDOf(fileHandleForReading), objref.IDOf(fileHandleForWriting))
+	return fileHandleSerialPortAttachmentAdopt(_id)
 }
 
-// @abstract File handle for writing to the file. @discussion Data sent from the guest appears on fileHandleForWriting.
-//
-// FileHandleForWriting calls the underlying FileHandleForWriting.
-func (x *FileHandleSerialPortAttachment) FileHandleForWriting() *foundation.NSFileHandle {
-	return x.inner.FileHandleForWriting()
+// FileHandleForReading file handle for reading from the file. Data written to fileHandleForReading goes to the guest.
+func (x *FileHandleSerialPortAttachment) FileHandleForReading() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForReading"))
+	return obj.Wrap(_r)
 }
 
-func (x *FileHandleSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment {
-	return &x.inner.VZSerialPortAttachment
+// FileHandleForWriting file handle for writing to the file. Data sent from the guest appears on fileHandleForWriting.
+func (x *FileHandleSerialPortAttachment) FileHandleForWriting() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForWriting"))
+	return obj.Wrap(_r)
 }
 
 // FileHandleSerialPortAttachmentable is the interface implemented by [FileHandleSerialPortAttachment], for mocking and DI.
 type FileHandleSerialPortAttachmentable interface {
-	Unwrap() *raw.VZFileHandleSerialPortAttachment
-	FileHandleForReading() *foundation.NSFileHandle
-	FileHandleForWriting() *foundation.NSFileHandle
+	obj.Object
+	FileHandleForReading() obj.Object
+	FileHandleForWriting() obj.Object
 }
 
 var _ FileHandleSerialPortAttachmentable = (*FileHandleSerialPortAttachment)(nil)
+
+var _ SerialPortAttachmentProvider = (*FileHandleSerialPortAttachment)(nil)

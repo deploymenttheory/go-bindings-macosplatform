@@ -5,10 +5,11 @@
 package scriptingbridge
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a SBObject subclass.
+// ObjectProvider is accepted wherever a SBObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.SBObject
+	objref.Object
+	isObject()
 }

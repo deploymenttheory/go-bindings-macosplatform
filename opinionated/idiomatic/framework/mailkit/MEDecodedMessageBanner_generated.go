@@ -5,65 +5,99 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DecodedMessageBanner wraps [raw.MEDecodedMessageBanner] with a fluent Go API.
+// DecodedMessageBanner is an idiomatic wrapper over the Objective-C class MEDecodedMessageBanner.
 type DecodedMessageBanner struct {
-	inner *raw.MEDecodedMessageBanner
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEDecodedMessageBanner].
-func (x *DecodedMessageBanner) Unwrap() *raw.MEDecodedMessageBanner { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecodedMessageBanner) ID() objc.ID { return x.inner.Ptr() }
-
-// DecodedMessageBannerFromID adopts an existing object pointer as a DecodedMessageBanner (nil for 0).
+// DecodedMessageBannerFromID adopts an existing Objective-C object as a DecodedMessageBanner
+// (nil for 0), retaining it and registering a release finalizer.
 func DecodedMessageBannerFromID(id objc.ID) *DecodedMessageBanner {
 	if id == 0 {
 		return nil
 	}
-	return &DecodedMessageBanner{inner: raw.MEDecodedMessageBannerFromID(id)}
+	x := &DecodedMessageBanner{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable creates a new [DecodedMessageBanner].
+// decodedMessageBannerAdopt wraps an Objective-C object that this code just created as a
+// DecodedMessageBanner (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decodedMessageBannerAdopt(id objc.ID) *DecodedMessageBanner {
+	if id == 0 {
+		return nil
+	}
+	x := &DecodedMessageBanner{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DecodedMessageBanner) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DecodedMessageBanner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DecodedMessageBanner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecodedMessageBanner) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable creates a new DecodedMessageBanner.
 func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string, primaryActionTitle string, dismissable bool) *DecodedMessageBanner {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEDecodedMessageBanner")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:primaryActionTitle:dismissable:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSStringStringWithUTF8String(primaryActionTitle).Ptr(), dismissable)
-	return &DecodedMessageBanner{inner: raw.MEDecodedMessageBannerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEDecodedMessageBanner")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:primaryActionTitle:dismissable:"), purego.NSString(title), purego.NSString(primaryActionTitle), dismissable)
+	return decodedMessageBannerAdopt(_id)
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *DecodedMessageBanner) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PrimaryActionTitle calls the underlying PrimaryActionTitle.
+// PrimaryActionTitle wraps the corresponding Objective-C method.
 func (x *DecodedMessageBanner) PrimaryActionTitle() string {
-	_r := x.inner.PrimaryActionTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryActionTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsDismissable calls the underlying IsDismissable.
+// IsDismissable wraps the corresponding Objective-C method.
 func (x *DecodedMessageBanner) IsDismissable() bool {
-	return x.inner.IsDismissable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDismissable"))
+	return _r
 }
 
 // DecodedMessageBannerable is the interface implemented by [DecodedMessageBanner], for mocking and DI.
 type DecodedMessageBannerable interface {
-	Unwrap() *raw.MEDecodedMessageBanner
+	obj.Object
 	Title() string
 	PrimaryActionTitle() string
 	IsDismissable() bool

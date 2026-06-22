@@ -5,1146 +5,1014 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of camera attributes that can be attached to a node to provide a point of view for displaying the scene.
+// Camera is an idiomatic wrapper over the Objective-C class SCNCamera.
 //
-// Camera wraps [raw.SCNCamera] with a fluent Go API.
+// A set of camera attributes that can be attached to a node to provide a point of view for displaying the scene.
 type Camera struct {
-	inner *raw.SCNCamera
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNCamera].
-func (x *Camera) Unwrap() *raw.SCNCamera { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Camera) ID() objc.ID { return x.inner.Ptr() }
-
-// CameraFromID adopts an existing object pointer as a Camera (nil for 0).
+// CameraFromID adopts an existing Objective-C object as a Camera
+// (nil for 0), retaining it and registering a release finalizer.
 func CameraFromID(id objc.ID) *Camera {
 	if id == 0 {
 		return nil
 	}
-	return &Camera{inner: raw.SCNCameraFromID(id)}
-}
-
-// NewCamera creates a new [Camera].
-func NewCamera() *Camera {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNCamera")), objc.RegisterName("new"))
-	return &Camera{inner: raw.SCNCameraFromID(_id)}
-}
-
-// A name associated with the camera object.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *Camera) WithName(name string) *Camera {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	x := &Camera{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The vertical or horizontal viewing angle of the camera.
-//
-// WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
-func (x *Camera) WithFieldOfView(fieldOfView float64) *Camera {
-	x.inner.SetFieldOfView(fieldOfView)
-	return x
-}
-
-// The axis used to determine field of view or orthographic scale.
-//
-// WithProjectionDirection sets the projectionDirection property and returns the receiver for chaining.
-func (x *Camera) WithProjectionDirection(projectionDirection SCNCameraProjectionDirection) *Camera {
-	x.inner.SetProjectionDirection(raw.SCNCameraProjectionDirection(projectionDirection))
-	return x
-}
-
-// The camera’s focal length, in millimeters.
-//
-// WithFocalLength sets the focalLength property and returns the receiver for chaining.
-func (x *Camera) WithFocalLength(focalLength float64) *Camera {
-	x.inner.SetFocalLength(focalLength)
-	return x
-}
-
-// The vertical size of the camera’s imaging plane, in millimeters.
-//
-// WithSensorHeight sets the sensorHeight property and returns the receiver for chaining.
-func (x *Camera) WithSensorHeight(sensorHeight float64) *Camera {
-	x.inner.SetSensorHeight(sensorHeight)
-	return x
-}
-
-// The camera’s near depth limit. Animatable.
-//
-// WithZNear sets the zNear property and returns the receiver for chaining.
-func (x *Camera) WithZNear(zNear float64) *Camera {
-	x.inner.SetZNear(zNear)
-	return x
-}
-
-// The camera’s far depth limit. Animatable.
-//
-// WithZFar sets the zFar property and returns the receiver for chaining.
-func (x *Camera) WithZFar(zFar float64) *Camera {
-	x.inner.SetZFar(zFar)
-	return x
-}
-
-// A Boolean value that determines whether the camera automatically adjusts its zNear and zFar depth limits.
-//
-// WithAutomaticallyAdjustsZRange sets the automaticallyAdjustsZRange property and returns the receiver for chaining.
-func (x *Camera) WithAutomaticallyAdjustsZRange(automaticallyAdjustsZRange bool) *Camera {
-	x.inner.SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange)
-	return x
-}
-
-// A Boolean value that determines whether the camera uses an orthographic projection.
-//
-// WithUsesOrthographicProjection sets the usesOrthographicProjection property and returns the receiver for chaining.
-func (x *Camera) WithUsesOrthographicProjection(usesOrthographicProjection bool) *Camera {
-	x.inner.SetUsesOrthographicProjection(usesOrthographicProjection)
-	return x
-}
-
-// Specifies the camera’s magnification factor when using an orthographic projection.
-//
-// WithOrthographicScale sets the orthographicScale property and returns the receiver for chaining.
-func (x *Camera) WithOrthographicScale(orthographicScale float64) *Camera {
-	x.inner.SetOrthographicScale(orthographicScale)
-	return x
-}
-
-// The camera’s projection transformation.
-//
-// WithProjectionTransform sets the projectionTransform property and returns the receiver for chaining.
-func (x *Camera) WithProjectionTransform(projectionTransform quartzcore.CATransform3D) *Camera {
-	x.inner.SetProjectionTransform(projectionTransform)
-	return x
-}
-
-// A Boolean value that determines whether SceneKit renders depth-of-field blur effects for the camera.
-//
-// WithWantsDepthOfField sets the wantsDepthOfField property and returns the receiver for chaining.
-func (x *Camera) WithWantsDepthOfField(wantsDepthOfField bool) *Camera {
-	x.inner.SetWantsDepthOfField(wantsDepthOfField)
-	return x
-}
-
-// The distance from the camera at which objects appear in sharp focus. Animatable.
-//
-// WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
-func (x *Camera) WithFocusDistance(focusDistance float64) *Camera {
-	x.inner.SetFocusDistance(focusDistance)
-	return x
-}
-
-// The number of pixel samples SceneKit uses to create depth-of-field blur effects.
-//
-// WithFocalBlurSampleCount sets the focalBlurSampleCount property and returns the receiver for chaining.
-func (x *Camera) WithFocalBlurSampleCount(focalBlurSampleCount int) *Camera {
-	x.inner.SetFocalBlurSampleCount(focalBlurSampleCount)
-	return x
-}
-
-// The physical camera aperture simulated by SceneKit for depth-of-field effects. Animatable.
-//
-// WithFStop sets the fStop property and returns the receiver for chaining.
-func (x *Camera) WithFStop(fStop float64) *Camera {
-	x.inner.SetFStop(fStop)
-	return x
-}
-
-// The number of physical camera aperture blades simulated by SceneKit for depth-of-field effects.
-//
-// WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
-func (x *Camera) WithApertureBladeCount(apertureBladeCount int) *Camera {
-	x.inner.SetApertureBladeCount(apertureBladeCount)
-	return x
-}
-
-// A factor that determines the intensity of motion blur effects. Animatable.
-//
-// WithMotionBlurIntensity sets the motionBlurIntensity property and returns the receiver for chaining.
-func (x *Camera) WithMotionBlurIntensity(motionBlurIntensity float64) *Camera {
-	x.inner.SetMotionBlurIntensity(motionBlurIntensity)
-	return x
-}
-
-// The intensity of the screen-space ambient occlusion effect applied in camera rendering.
-//
-// WithScreenSpaceAmbientOcclusionIntensity sets the screenSpaceAmbientOcclusionIntensity property and returns the receiver for chaining.
-func (x *Camera) WithScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity float64) *Camera {
-	x.inner.SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity)
-	return x
-}
-
-// The distance, in units of scene space, at which ambient occlusion takes effect.
-//
-// WithScreenSpaceAmbientOcclusionRadius sets the screenSpaceAmbientOcclusionRadius property and returns the receiver for chaining.
-func (x *Camera) WithScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius float64) *Camera {
-	x.inner.SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius)
-	return x
-}
-
-// An offset for modulating ambient occlusion effects.
-//
-// WithScreenSpaceAmbientOcclusionBias sets the screenSpaceAmbientOcclusionBias property and returns the receiver for chaining.
-func (x *Camera) WithScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias float64) *Camera {
-	x.inner.SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias)
-	return x
-}
-
-// The maximum depth difference, in units of scene space, at which to apply ambient occlusion effects.
-//
-// WithScreenSpaceAmbientOcclusionDepthThreshold sets the screenSpaceAmbientOcclusionDepthThreshold property and returns the receiver for chaining.
-func (x *Camera) WithScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold float64) *Camera {
-	x.inner.SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold)
-	return x
-}
-
-// The magnitude of the blur effect applied to create ambient occlusion shadows.
-//
-// WithScreenSpaceAmbientOcclusionNormalThreshold sets the screenSpaceAmbientOcclusionNormalThreshold property and returns the receiver for chaining.
-func (x *Camera) WithScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold float64) *Camera {
-	x.inner.SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold)
-	return x
-}
-
-// A Boolean value that determines whether SceneKit applies High Dynamic Range (HDR) postprocessing effects to a scene.
-//
-// WithWantsHDR sets the wantsHDR property and returns the receiver for chaining.
-func (x *Camera) WithWantsHDR(wantsHDR bool) *Camera {
-	x.inner.SetWantsHDR(wantsHDR)
-	return x
-}
-
-// A logarithmic bias that adjusts the results of SceneKit’s tone mapping operation, brightening or darkening the visible scene.
-//
-// WithExposureOffset sets the exposureOffset property and returns the receiver for chaining.
-func (x *Camera) WithExposureOffset(exposureOffset float64) *Camera {
-	x.inner.SetExposureOffset(exposureOffset)
-	return x
-}
-
-// The luminance level to use as the midpoint of a tone mapping curve.
-//
-// WithAverageGray sets the averageGray property and returns the receiver for chaining.
-func (x *Camera) WithAverageGray(averageGray float64) *Camera {
-	x.inner.SetAverageGray(averageGray)
-	return x
-}
-
-// The luminance level to use as the upper end of a tone mapping curve.
-//
-// WithWhitePoint sets the whitePoint property and returns the receiver for chaining.
-func (x *Camera) WithWhitePoint(whitePoint float64) *Camera {
-	x.inner.SetWhitePoint(whitePoint)
-	return x
-}
-
-// A Boolean value that determines whether SceneKit automatically adjusts the exposure level.
-//
-// WithWantsExposureAdaptation sets the wantsExposureAdaptation property and returns the receiver for chaining.
-func (x *Camera) WithWantsExposureAdaptation(wantsExposureAdaptation bool) *Camera {
-	x.inner.SetWantsExposureAdaptation(wantsExposureAdaptation)
-	return x
-}
-
-// The relative duration of automatically animated exposure transitions from dark to bright areas.
-//
-// WithExposureAdaptationBrighteningSpeedFactor sets the exposureAdaptationBrighteningSpeedFactor property and returns the receiver for chaining.
-func (x *Camera) WithExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor float64) *Camera {
-	x.inner.SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor)
-	return x
-}
-
-// The relative duration of automatically animated exposure transitions from bright to dark areas.
-//
-// WithExposureAdaptationDarkeningSpeedFactor sets the exposureAdaptationDarkeningSpeedFactor property and returns the receiver for chaining.
-func (x *Camera) WithExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor float64) *Camera {
-	x.inner.SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor)
-	return x
-}
-
-// The minimum exposure value to use in tone mapping.
-//
-// WithMinimumExposure sets the minimumExposure property and returns the receiver for chaining.
-func (x *Camera) WithMinimumExposure(minimumExposure float64) *Camera {
-	x.inner.SetMinimumExposure(minimumExposure)
-	return x
-}
-
-// The minimum exposure value to use in tone mapping.
-//
-// WithMaximumExposure sets the maximumExposure property and returns the receiver for chaining.
-func (x *Camera) WithMaximumExposure(maximumExposure float64) *Camera {
-	x.inner.SetMaximumExposure(maximumExposure)
-	return x
-}
-
-// The brightness threshold at which to apply a bloom effect to highlights in the rendered scene. Animatable.
-//
-// WithBloomThreshold sets the bloomThreshold property and returns the receiver for chaining.
-func (x *Camera) WithBloomThreshold(bloomThreshold float64) *Camera {
-	x.inner.SetBloomThreshold(bloomThreshold)
-	return x
-}
-
-// @property bloomIteration @abstract Determines the number of blur iterations. Defaults to 1.
-//
-// WithBloomIterationCount sets the bloomIterationCount property and returns the receiver for chaining.
-func (x *Camera) WithBloomIterationCount(bloomIterationCount int) *Camera {
-	x.inner.SetBloomIterationCount(bloomIterationCount)
-	return x
-}
-
-// @property bloomIterationSpread @abstract Determines how the bloom iterations are spread. Defaults to 0.
-//
-// WithBloomIterationSpread sets the bloomIterationSpread property and returns the receiver for chaining.
-func (x *Camera) WithBloomIterationSpread(bloomIterationSpread float64) *Camera {
-	x.inner.SetBloomIterationSpread(bloomIterationSpread)
-	return x
-}
-
-// The magnitude of bloom effect to apply to highlights in the rendered scene. Animatable.
-//
-// WithBloomIntensity sets the bloomIntensity property and returns the receiver for chaining.
-func (x *Camera) WithBloomIntensity(bloomIntensity float64) *Camera {
-	x.inner.SetBloomIntensity(bloomIntensity)
-	return x
-}
-
-// The radius, in pixels, for the blurring portion of the bloom effect applied to highlights in the rendered scene. Animatable.
-//
-// WithBloomBlurRadius sets the bloomBlurRadius property and returns the receiver for chaining.
-func (x *Camera) WithBloomBlurRadius(bloomBlurRadius float64) *Camera {
-	x.inner.SetBloomBlurRadius(bloomBlurRadius)
-	return x
-}
-
-// The amount of the rendered scene to darken with a vignette effect.
-//
-// WithVignettingPower sets the vignettingPower property and returns the receiver for chaining.
-func (x *Camera) WithVignettingPower(vignettingPower float64) *Camera {
-	x.inner.SetVignettingPower(vignettingPower)
-	return x
-}
-
-// The magnitude of vignette (darkening around edges) effect to apply to the rendered scene.
-//
-// WithVignettingIntensity sets the vignettingIntensity property and returns the receiver for chaining.
-func (x *Camera) WithVignettingIntensity(vignettingIntensity float64) *Camera {
-	x.inner.SetVignettingIntensity(vignettingIntensity)
-	return x
-}
-
-// The magnitude of color fringing effect to apply to the rendered scene.
-//
-// WithColorFringeStrength sets the colorFringeStrength property and returns the receiver for chaining.
-func (x *Camera) WithColorFringeStrength(colorFringeStrength float64) *Camera {
-	x.inner.SetColorFringeStrength(colorFringeStrength)
-	return x
-}
-
-// The blend factor for fading the color fringing effect applied to the rendered scene.
-//
-// WithColorFringeIntensity sets the colorFringeIntensity property and returns the receiver for chaining.
-func (x *Camera) WithColorFringeIntensity(colorFringeIntensity float64) *Camera {
-	x.inner.SetColorFringeIntensity(colorFringeIntensity)
-	return x
-}
-
-// An adjustment factor to apply to the overall color saturation of the rendered scene.
-//
-// WithSaturation sets the saturation property and returns the receiver for chaining.
-func (x *Camera) WithSaturation(saturation float64) *Camera {
-	x.inner.SetSaturation(saturation)
-	return x
-}
-
-// An adjustment factor to apply to the overall visual contrast of the rendered scene.
-//
-// WithContrast sets the contrast property and returns the receiver for chaining.
-func (x *Camera) WithContrast(contrast float64) *Camera {
-	x.inner.SetContrast(contrast)
-	return x
-}
-
-// @property grainIntensity @abstract Controls the intensity of the grain. Defaults to 0 (no effect).
-//
-// WithGrainIntensity sets the grainIntensity property and returns the receiver for chaining.
-func (x *Camera) WithGrainIntensity(grainIntensity float64) *Camera {
-	x.inner.SetGrainIntensity(grainIntensity)
-	return x
-}
-
-// @property grainScale @abstract Controls the scale of the grain. Defaults to 1.
-//
-// WithGrainScale sets the grainScale property and returns the receiver for chaining.
-func (x *Camera) WithGrainScale(grainScale float64) *Camera {
-	x.inner.SetGrainScale(grainScale)
-	return x
-}
-
-// @property grainIsColored @abstract Determines if the grain is colored or not. Defaults to NO.
-//
-// WithGrainIsColored sets the grainIsColored property and returns the receiver for chaining.
-func (x *Camera) WithGrainIsColored(grainIsColored bool) *Camera {
-	x.inner.SetGrainIsColored(grainIsColored)
-	return x
-}
-
-// @property whiteBalanceTemperature @abstract Controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
-//
-// WithWhiteBalanceTemperature sets the whiteBalanceTemperature property and returns the receiver for chaining.
-func (x *Camera) WithWhiteBalanceTemperature(whiteBalanceTemperature float64) *Camera {
-	x.inner.SetWhiteBalanceTemperature(whiteBalanceTemperature)
-	return x
-}
-
-// @property whiteBalanceTint @abstract Controls the overall white balance tint of the scene. Defaults to 0 (no effect).
-//
-// WithWhiteBalanceTint sets the whiteBalanceTint property and returns the receiver for chaining.
-func (x *Camera) WithWhiteBalanceTint(whiteBalanceTint float64) *Camera {
-	x.inner.SetWhiteBalanceTint(whiteBalanceTint)
-	return x
-}
-
-// A mask that defines which categories this camera belongs to.
-//
-// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
-func (x *Camera) WithCategoryBitMask(categoryBitMask uint) *Camera {
-	x.inner.SetCategoryBitMask(categoryBitMask)
-	return x
-}
-
-// The maximum amount of blurring, in pixels, applied to areas outside the camera’s depth of field. Animatable.
-//
-// WithFocalBlurRadius sets the focalBlurRadius property and returns the receiver for chaining.
-func (x *Camera) WithFocalBlurRadius(focalBlurRadius float64) *Camera {
-	x.inner.SetFocalBlurRadius(focalBlurRadius)
-	return x
-}
-
-// The camera’s field of view, in degrees, on the horizontal axis. Animatable.
-//
-// WithXFov sets the xFov property and returns the receiver for chaining.
-func (x *Camera) WithXFov(xFov float64) *Camera {
-	x.inner.SetXFov(xFov)
-	return x
-}
-
-// The camera’s field of view, in degrees, on the vertical axis. Animatable.
-//
-// WithYFov sets the yFov property and returns the receiver for chaining.
-func (x *Camera) WithYFov(yFov float64) *Camera {
-	x.inner.SetYFov(yFov)
-	return x
-}
-
-// A factor that determines the transition between in-focus and out-of-focus areas. Animatable.
-//
-// WithAperture sets the aperture property and returns the receiver for chaining.
-func (x *Camera) WithAperture(aperture float64) *Camera {
-	x.inner.SetAperture(aperture)
-	return x
-}
-
-// The width of the distance range at which objects appear in sharp focus. Animatable.
-//
-// WithFocalSize sets the focalSize property and returns the receiver for chaining.
-func (x *Camera) WithFocalSize(focalSize float64) *Camera {
-	x.inner.SetFocalSize(focalSize)
-	return x
-}
-
-// The distance from the camera at which objects appear in sharp focus. Animatable.
-//
-// WithFocalDistance sets the focalDistance property and returns the receiver for chaining.
-func (x *Camera) WithFocalDistance(focalDistance float64) *Camera {
-	x.inner.SetFocalDistance(focalDistance)
-	return x
-}
-
-// ProjectionTransform calls the underlying ProjectionTransform.
-func (x *Camera) ProjectionTransform() quartzcore.CATransform3D {
-	return x.inner.ProjectionTransform()
-}
-
-// SetProjectionTransform calls the underlying SetProjectionTransform.
-func (x *Camera) SetProjectionTransform(projectionTransform quartzcore.CATransform3D) {
-	x.inner.SetProjectionTransform(projectionTransform)
-}
-
-// ProjectionTransformWithViewportSize calls the underlying ProjectionTransformWithViewportSize.
-func (x *Camera) ProjectionTransformWithViewportSize(viewportSize corefoundation.CGSize) quartzcore.CATransform3D {
-	return x.inner.ProjectionTransformWithViewportSize(viewportSize)
-}
-
-// @property name @abstract Determines the name of the receiver.
-//
-// Name calls the underlying Name.
-func (x *Camera) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetName calls the underlying SetName.
-func (x *Camera) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// @property fieldOfView @abstract Determines the receiver's field of view (in degree). Defaults to 60°. Animatable. @discussion The fieldOfView is automatically updated when the sensorHeight or focalLength are set. Setting the fieldOfView will update the focalLength according to the new fieldOfView and the current sensorHeight.
-//
-// FieldOfView calls the underlying FieldOfView.
-func (x *Camera) FieldOfView() float64 {
-	return x.inner.FieldOfView()
-}
-
-// SetFieldOfView calls the underlying SetFieldOfView.
-func (x *Camera) SetFieldOfView(fieldOfView float64) {
-	x.inner.SetFieldOfView(fieldOfView)
-}
-
-// @property projectionDirection @abstract Determines whether the fieldOfView (or orthographicScale) is vertical or horizontal. Defaults to vertical.
-//
-// ProjectionDirection calls the underlying ProjectionDirection.
-func (x *Camera) ProjectionDirection() SCNCameraProjectionDirection {
-	return SCNCameraProjectionDirection(x.inner.ProjectionDirection())
-}
-
-// SetProjectionDirection calls the underlying SetProjectionDirection.
-func (x *Camera) SetProjectionDirection(projectionDirection SCNCameraProjectionDirection) {
-	x.inner.SetProjectionDirection(raw.SCNCameraProjectionDirection(projectionDirection))
-}
-
-// @property focalLength @abstract Determines the receiver's focal length in millimeter. Defaults to 50mm. Animatable. @discussion The focalLength is automatically updated when the sensorHeight or fieldOfView are set. Setting the focalLength will update the fieldOfView according to the new focalLength and the current sensorHeight.
-//
-// FocalLength calls the underlying FocalLength.
-func (x *Camera) FocalLength() float64 {
-	return x.inner.FocalLength()
-}
-
-// SetFocalLength calls the underlying SetFocalLength.
-func (x *Camera) SetFocalLength(focalLength float64) {
-	x.inner.SetFocalLength(focalLength)
-}
-
-// @property sensorHeight @abstract Determines the vertical size of the sensor in millimeter. Defaults to 24mm. Animatable. @discussion Setting the sensorHeight will automatically update the fieldOfView according to the new sensorHeight and the current focalLength.
-//
-// SensorHeight calls the underlying SensorHeight.
-func (x *Camera) SensorHeight() float64 {
-	return x.inner.SensorHeight()
-}
-
-// SetSensorHeight calls the underlying SetSensorHeight.
-func (x *Camera) SetSensorHeight(sensorHeight float64) {
-	x.inner.SetSensorHeight(sensorHeight)
-}
-
-// @property zNear @abstract Determines the receiver's near value. Animatable. @discussion The near value determines the minimal distance between the camera and a visible surface. If a surface is closer to the camera than this minimal distance, then the surface is clipped. The near value must be different than zero. Defaults to 1.
-//
-// ZNear calls the underlying ZNear.
-func (x *Camera) ZNear() float64 {
-	return x.inner.ZNear()
-}
-
-// SetZNear calls the underlying SetZNear.
-func (x *Camera) SetZNear(zNear float64) {
-	x.inner.SetZNear(zNear)
-}
-
-// @property zFar @abstract Determines the receiver's far value. Animatable. @discussion The far value determines the maximal distance between the camera and a visible surface. If a surface is further from the camera than this maximal distance, then the surface is clipped. Defaults to 100.
-//
-// ZFar calls the underlying ZFar.
-func (x *Camera) ZFar() float64 {
-	return x.inner.ZFar()
-}
-
-// SetZFar calls the underlying SetZFar.
-func (x *Camera) SetZFar(zFar float64) {
-	x.inner.SetZFar(zFar)
-}
-
-// @property automaticallyAdjustsZRange @abstract Determines whether the receiver automatically adjusts the zFar value. Defaults to NO. @discussion When set to YES, the near and far planes are automatically set to fit the bounding box of the entire scene at render time.
-//
-// AutomaticallyAdjustsZRange calls the underlying AutomaticallyAdjustsZRange.
-func (x *Camera) AutomaticallyAdjustsZRange() bool {
-	return x.inner.AutomaticallyAdjustsZRange()
-}
-
-// SetAutomaticallyAdjustsZRange calls the underlying SetAutomaticallyAdjustsZRange.
-func (x *Camera) SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange bool) {
-	x.inner.SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange)
-}
-
-// @property usesOrthographicProjection @abstract Determines whether the receiver uses an orthographic projection or not. Defaults to NO.
-//
-// UsesOrthographicProjection calls the underlying UsesOrthographicProjection.
-func (x *Camera) UsesOrthographicProjection() bool {
-	return x.inner.UsesOrthographicProjection()
-}
-
-// SetUsesOrthographicProjection calls the underlying SetUsesOrthographicProjection.
-func (x *Camera) SetUsesOrthographicProjection(usesOrthographicProjection bool) {
-	x.inner.SetUsesOrthographicProjection(usesOrthographicProjection)
-}
-
-// @property orthographicScale @abstract Determines the receiver's orthographic scale value. Animatable. Defaults to 1. @discussion This setting determines the size of the camera's visible area. This is only enabled when usesOrthographicProjection is set to YES.
-//
-// OrthographicScale calls the underlying OrthographicScale.
-func (x *Camera) OrthographicScale() float64 {
-	return x.inner.OrthographicScale()
-}
-
-// SetOrthographicScale calls the underlying SetOrthographicScale.
-func (x *Camera) SetOrthographicScale(orthographicScale float64) {
-	x.inner.SetOrthographicScale(orthographicScale)
-}
-
-// @property wantsDepthOfField @abstract Determines if the receiver has depth of field. Defaults to NO.
-//
-// WantsDepthOfField calls the underlying WantsDepthOfField.
-func (x *Camera) WantsDepthOfField() bool {
-	return x.inner.WantsDepthOfField()
-}
-
-// SetWantsDepthOfField calls the underlying SetWantsDepthOfField.
-func (x *Camera) SetWantsDepthOfField(wantsDepthOfField bool) {
-	x.inner.SetWantsDepthOfField(wantsDepthOfField)
-}
-
-// @property focusDistance @abstract Determines the receiver's focus distance. Animatable. @discussion Defaults to 2.5
-//
-// FocusDistance calls the underlying FocusDistance.
-func (x *Camera) FocusDistance() float64 {
-	return x.inner.FocusDistance()
-}
-
-// SetFocusDistance calls the underlying SetFocusDistance.
-func (x *Camera) SetFocusDistance(focusDistance float64) {
-	x.inner.SetFocusDistance(focusDistance)
-}
-
-// @property focalBlurSampleCount @abstract Determines the receiver's sample count for depth of field effect. @discussion Defaults to 25.
-//
-// FocalBlurSampleCount calls the underlying FocalBlurSampleCount.
-func (x *Camera) FocalBlurSampleCount() int {
-	return x.inner.FocalBlurSampleCount()
-}
-
-// SetFocalBlurSampleCount calls the underlying SetFocalBlurSampleCount.
-func (x *Camera) SetFocalBlurSampleCount(focalBlurSampleCount int) {
-	x.inner.SetFocalBlurSampleCount(focalBlurSampleCount)
-}
-
-// @property fStop @abstract Determines the receiver's fstop. Animatable. @discussion Defaults to 5.6.
-//
-// FStop calls the underlying FStop.
-func (x *Camera) FStop() float64 {
-	return x.inner.FStop()
-}
-
-// SetFStop calls the underlying SetFStop.
-func (x *Camera) SetFStop(fStop float64) {
-	x.inner.SetFStop(fStop)
-}
-
-// @property apertureBladeCount @abstract Determines the receiver's blade count of the aperture. @discussion Defaults to 6.
-//
-// ApertureBladeCount calls the underlying ApertureBladeCount.
-func (x *Camera) ApertureBladeCount() int {
-	return x.inner.ApertureBladeCount()
-}
-
-// SetApertureBladeCount calls the underlying SetApertureBladeCount.
-func (x *Camera) SetApertureBladeCount(apertureBladeCount int) {
-	x.inner.SetApertureBladeCount(apertureBladeCount)
-}
-
-// @property motionBlurIntensity @abstract Determines the intensity of the motion blur. Animatable. Defaults to 0. @discussion An intensity of zero means no motion blur. The intensity should not exceeed 1.
-//
-// MotionBlurIntensity calls the underlying MotionBlurIntensity.
-func (x *Camera) MotionBlurIntensity() float64 {
-	return x.inner.MotionBlurIntensity()
-}
-
-// SetMotionBlurIntensity calls the underlying SetMotionBlurIntensity.
-func (x *Camera) SetMotionBlurIntensity(motionBlurIntensity float64) {
-	x.inner.SetMotionBlurIntensity(motionBlurIntensity)
-}
-
-// @property screenSpaceAmbientOcclusionIntensity @abstract Determines the intensity of the screen space ambient occlusion. Animatable. @discussion defaults to 0.
-//
-// ScreenSpaceAmbientOcclusionIntensity calls the underlying ScreenSpaceAmbientOcclusionIntensity.
-func (x *Camera) ScreenSpaceAmbientOcclusionIntensity() float64 {
-	return x.inner.ScreenSpaceAmbientOcclusionIntensity()
-}
-
-// SetScreenSpaceAmbientOcclusionIntensity calls the underlying SetScreenSpaceAmbientOcclusionIntensity.
-func (x *Camera) SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity float64) {
-	x.inner.SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity)
-}
-
-// @property screenSpaceAmbientOcclusionRadius @abstract Determines the screen space ambient occlusion radius in scene unit. Animatable. @discussion defaults to 5.
-//
-// ScreenSpaceAmbientOcclusionRadius calls the underlying ScreenSpaceAmbientOcclusionRadius.
-func (x *Camera) ScreenSpaceAmbientOcclusionRadius() float64 {
-	return x.inner.ScreenSpaceAmbientOcclusionRadius()
-}
-
-// SetScreenSpaceAmbientOcclusionRadius calls the underlying SetScreenSpaceAmbientOcclusionRadius.
-func (x *Camera) SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius float64) {
-	x.inner.SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius)
-}
-
-// @property screenSpaceAmbientOcclusionBias @abstract Determines self occlusion bias in scene unit. @discussion defaults to 0.03.
-//
-// ScreenSpaceAmbientOcclusionBias calls the underlying ScreenSpaceAmbientOcclusionBias.
-func (x *Camera) ScreenSpaceAmbientOcclusionBias() float64 {
-	return x.inner.ScreenSpaceAmbientOcclusionBias()
-}
-
-// SetScreenSpaceAmbientOcclusionBias calls the underlying SetScreenSpaceAmbientOcclusionBias.
-func (x *Camera) SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias float64) {
-	x.inner.SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias)
-}
-
-// @property screenSpaceAmbientOcclusionDepthThreshold @abstract Determines the depth blur threshold in scene unit. @discussion defaults to 0.2.
-//
-// ScreenSpaceAmbientOcclusionDepthThreshold calls the underlying ScreenSpaceAmbientOcclusionDepthThreshold.
-func (x *Camera) ScreenSpaceAmbientOcclusionDepthThreshold() float64 {
-	return x.inner.ScreenSpaceAmbientOcclusionDepthThreshold()
-}
-
-// SetScreenSpaceAmbientOcclusionDepthThreshold calls the underlying SetScreenSpaceAmbientOcclusionDepthThreshold.
-func (x *Camera) SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold float64) {
-	x.inner.SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold)
-}
-
-// @property screenSpaceAmbientOcclusionNormalThreshold @abstract Determines the normal blur threshold. @discussion defaults to 0.3.
-//
-// ScreenSpaceAmbientOcclusionNormalThreshold calls the underlying ScreenSpaceAmbientOcclusionNormalThreshold.
-func (x *Camera) ScreenSpaceAmbientOcclusionNormalThreshold() float64 {
-	return x.inner.ScreenSpaceAmbientOcclusionNormalThreshold()
-}
-
-// SetScreenSpaceAmbientOcclusionNormalThreshold calls the underlying SetScreenSpaceAmbientOcclusionNormalThreshold.
-func (x *Camera) SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold float64) {
-	x.inner.SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold)
-}
-
-// @property wantsHDR @abstract Determines if the receiver has a high dynamic range. Defaults to NO.
-//
-// WantsHDR calls the underlying WantsHDR.
-func (x *Camera) WantsHDR() bool {
-	return x.inner.WantsHDR()
-}
-
-// SetWantsHDR calls the underlying SetWantsHDR.
-func (x *Camera) SetWantsHDR(wantsHDR bool) {
-	x.inner.SetWantsHDR(wantsHDR)
-}
-
-// @property exposureOffset @abstract Determines the logarithmic exposure biasing, in EV. Defaults to 0.
-//
-// ExposureOffset calls the underlying ExposureOffset.
-func (x *Camera) ExposureOffset() float64 {
-	return x.inner.ExposureOffset()
-}
-
-// SetExposureOffset calls the underlying SetExposureOffset.
-func (x *Camera) SetExposureOffset(exposureOffset float64) {
-	x.inner.SetExposureOffset(exposureOffset)
-}
-
-// @property averageGray @abstract Determines the average gray level desired in the final image. Defaults to 0.18.
-//
-// AverageGray calls the underlying AverageGray.
-func (x *Camera) AverageGray() float64 {
-	return x.inner.AverageGray()
-}
-
-// SetAverageGray calls the underlying SetAverageGray.
-func (x *Camera) SetAverageGray(averageGray float64) {
-	x.inner.SetAverageGray(averageGray)
-}
-
-// @property whitePoint @abstract Determines the smallest luminance level that will be mapped to white in the final image. Defaults to 1.
-//
-// WhitePoint calls the underlying WhitePoint.
-func (x *Camera) WhitePoint() float64 {
-	return x.inner.WhitePoint()
-}
-
-// SetWhitePoint calls the underlying SetWhitePoint.
-func (x *Camera) SetWhitePoint(whitePoint float64) {
-	x.inner.SetWhitePoint(whitePoint)
-}
-
-// @property wantsExposureAdaptation @abstract Determines if the receiver should simulate an eye and continuously adjust to luminance. Defaults to YES.
-//
-// WantsExposureAdaptation calls the underlying WantsExposureAdaptation.
-func (x *Camera) WantsExposureAdaptation() bool {
-	return x.inner.WantsExposureAdaptation()
-}
-
-// SetWantsExposureAdaptation calls the underlying SetWantsExposureAdaptation.
-func (x *Camera) SetWantsExposureAdaptation(wantsExposureAdaptation bool) {
-	x.inner.SetWantsExposureAdaptation(wantsExposureAdaptation)
-}
-
-// @property exposureAdaptationBrighteningSpeedFactor @abstract Determines the exposure adaptation speed when going from bright areas to dark areas. Defaults to 0.4.
-//
-// ExposureAdaptationBrighteningSpeedFactor calls the underlying ExposureAdaptationBrighteningSpeedFactor.
-func (x *Camera) ExposureAdaptationBrighteningSpeedFactor() float64 {
-	return x.inner.ExposureAdaptationBrighteningSpeedFactor()
-}
-
-// SetExposureAdaptationBrighteningSpeedFactor calls the underlying SetExposureAdaptationBrighteningSpeedFactor.
-func (x *Camera) SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor float64) {
-	x.inner.SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor)
-}
-
-// @property exposureAdaptationDarkeningSpeedFactor @abstract Determines the exposure adaptation speed when going from dark areas to bright areas. Defaults to 0.6.
-//
-// ExposureAdaptationDarkeningSpeedFactor calls the underlying ExposureAdaptationDarkeningSpeedFactor.
-func (x *Camera) ExposureAdaptationDarkeningSpeedFactor() float64 {
-	return x.inner.ExposureAdaptationDarkeningSpeedFactor()
-}
-
-// SetExposureAdaptationDarkeningSpeedFactor calls the underlying SetExposureAdaptationDarkeningSpeedFactor.
-func (x *Camera) SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor float64) {
-	x.inner.SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor)
-}
-
-// @property minimumExposure @abstract Determines the minimum exposure offset of the adaptation, in EV. Defaults to -15.
-//
-// MinimumExposure calls the underlying MinimumExposure.
-func (x *Camera) MinimumExposure() float64 {
-	return x.inner.MinimumExposure()
-}
-
-// SetMinimumExposure calls the underlying SetMinimumExposure.
-func (x *Camera) SetMinimumExposure(minimumExposure float64) {
-	x.inner.SetMinimumExposure(minimumExposure)
-}
-
-// @property maximumExposure @abstract Determines the maximum exposure offset of the adaptation, in EV. Defaults to -15.
-//
-// MaximumExposure calls the underlying MaximumExposure.
-func (x *Camera) MaximumExposure() float64 {
-	return x.inner.MaximumExposure()
-}
-
-// SetMaximumExposure calls the underlying SetMaximumExposure.
-func (x *Camera) SetMaximumExposure(maximumExposure float64) {
-	x.inner.SetMaximumExposure(maximumExposure)
-}
-
-// @property bloomThreshold @abstract Determines the luminance threshold for the bloom effect. Animatable. Defaults to 1.
-//
-// BloomThreshold calls the underlying BloomThreshold.
-func (x *Camera) BloomThreshold() float64 {
-	return x.inner.BloomThreshold()
-}
-
-// SetBloomThreshold calls the underlying SetBloomThreshold.
-func (x *Camera) SetBloomThreshold(bloomThreshold float64) {
-	x.inner.SetBloomThreshold(bloomThreshold)
-}
-
-// @property bloomIteration @abstract Determines the number of blur iterations. Defaults to 1.
-//
-// BloomIterationCount calls the underlying BloomIterationCount.
-func (x *Camera) BloomIterationCount() int {
-	return x.inner.BloomIterationCount()
-}
-
-// SetBloomIterationCount calls the underlying SetBloomIterationCount.
-func (x *Camera) SetBloomIterationCount(bloomIterationCount int) {
-	x.inner.SetBloomIterationCount(bloomIterationCount)
-}
-
-// @property bloomIterationSpread @abstract Determines how the bloom iterations are spread. Defaults to 0.
-//
-// BloomIterationSpread calls the underlying BloomIterationSpread.
-func (x *Camera) BloomIterationSpread() float64 {
-	return x.inner.BloomIterationSpread()
-}
-
-// SetBloomIterationSpread calls the underlying SetBloomIterationSpread.
-func (x *Camera) SetBloomIterationSpread(bloomIterationSpread float64) {
-	x.inner.SetBloomIterationSpread(bloomIterationSpread)
-}
-
-// @property bloomIntensity @abstract Determines the intensity of the bloom effect. Animatable. Defaults to 0 (no effect).
-//
-// BloomIntensity calls the underlying BloomIntensity.
-func (x *Camera) BloomIntensity() float64 {
-	return x.inner.BloomIntensity()
-}
-
-// SetBloomIntensity calls the underlying SetBloomIntensity.
-func (x *Camera) SetBloomIntensity(bloomIntensity float64) {
-	x.inner.SetBloomIntensity(bloomIntensity)
-}
-
-// @property bloomBlurRadius @abstract Determines the radius of the bloom effect in points. Animatable. Defaults to 4.
-//
-// BloomBlurRadius calls the underlying BloomBlurRadius.
-func (x *Camera) BloomBlurRadius() float64 {
-	return x.inner.BloomBlurRadius()
-}
-
-// SetBloomBlurRadius calls the underlying SetBloomBlurRadius.
-func (x *Camera) SetBloomBlurRadius(bloomBlurRadius float64) {
-	x.inner.SetBloomBlurRadius(bloomBlurRadius)
-}
-
-// @property vignettingPower @abstract Controls the shape of the vignetting effect. Defaults to 0 (no effect).
-//
-// VignettingPower calls the underlying VignettingPower.
-func (x *Camera) VignettingPower() float64 {
-	return x.inner.VignettingPower()
-}
-
-// SetVignettingPower calls the underlying SetVignettingPower.
-func (x *Camera) SetVignettingPower(vignettingPower float64) {
-	x.inner.SetVignettingPower(vignettingPower)
-}
-
-// @property vignettingIntensity @abstract Controls the intensity of the vignetting effect. Defaults to 0 (no effect).
-//
-// VignettingIntensity calls the underlying VignettingIntensity.
-func (x *Camera) VignettingIntensity() float64 {
-	return x.inner.VignettingIntensity()
-}
-
-// SetVignettingIntensity calls the underlying SetVignettingIntensity.
-func (x *Camera) SetVignettingIntensity(vignettingIntensity float64) {
-	x.inner.SetVignettingIntensity(vignettingIntensity)
-}
-
-// @property colorFringeStrength @abstract Controls the strength of the color shift effect. Defaults to 0 (no effect).
-//
-// ColorFringeStrength calls the underlying ColorFringeStrength.
-func (x *Camera) ColorFringeStrength() float64 {
-	return x.inner.ColorFringeStrength()
-}
-
-// SetColorFringeStrength calls the underlying SetColorFringeStrength.
-func (x *Camera) SetColorFringeStrength(colorFringeStrength float64) {
-	x.inner.SetColorFringeStrength(colorFringeStrength)
-}
-
-// @property colorFringeIntensity @abstract Controls the intensity of the color shift effect. Defaults to 1.
-//
-// ColorFringeIntensity calls the underlying ColorFringeIntensity.
-func (x *Camera) ColorFringeIntensity() float64 {
-	return x.inner.ColorFringeIntensity()
-}
-
-// SetColorFringeIntensity calls the underlying SetColorFringeIntensity.
-func (x *Camera) SetColorFringeIntensity(colorFringeIntensity float64) {
-	x.inner.SetColorFringeIntensity(colorFringeIntensity)
-}
-
-// @property saturation @abstract Controls the overall saturation of the scene. Defaults to 1 (no effect).
-//
-// Saturation calls the underlying Saturation.
-func (x *Camera) Saturation() float64 {
-	return x.inner.Saturation()
-}
-
-// SetSaturation calls the underlying SetSaturation.
-func (x *Camera) SetSaturation(saturation float64) {
-	x.inner.SetSaturation(saturation)
-}
-
-// @property contrast @abstract Controls the overall contrast of the scene. Defaults to 0 (no effect).
-//
-// Contrast calls the underlying Contrast.
-func (x *Camera) Contrast() float64 {
-	return x.inner.Contrast()
-}
-
-// SetContrast calls the underlying SetContrast.
-func (x *Camera) SetContrast(contrast float64) {
-	x.inner.SetContrast(contrast)
-}
-
-// @property grainIntensity @abstract Controls the intensity of the grain. Defaults to 0 (no effect).
-//
-// GrainIntensity calls the underlying GrainIntensity.
-func (x *Camera) GrainIntensity() float64 {
-	return x.inner.GrainIntensity()
-}
-
-// SetGrainIntensity calls the underlying SetGrainIntensity.
-func (x *Camera) SetGrainIntensity(grainIntensity float64) {
-	x.inner.SetGrainIntensity(grainIntensity)
-}
-
-// @property grainScale @abstract Controls the scale of the grain. Defaults to 1.
-//
-// GrainScale calls the underlying GrainScale.
-func (x *Camera) GrainScale() float64 {
-	return x.inner.GrainScale()
-}
-
-// SetGrainScale calls the underlying SetGrainScale.
-func (x *Camera) SetGrainScale(grainScale float64) {
-	x.inner.SetGrainScale(grainScale)
-}
-
-// @property grainIsColored @abstract Determines if the grain is colored or not. Defaults to NO.
-//
-// GrainIsColored calls the underlying GrainIsColored.
-func (x *Camera) GrainIsColored() bool {
-	return x.inner.GrainIsColored()
-}
-
-// SetGrainIsColored calls the underlying SetGrainIsColored.
-func (x *Camera) SetGrainIsColored(grainIsColored bool) {
-	x.inner.SetGrainIsColored(grainIsColored)
-}
-
-// @property whiteBalanceTemperature @abstract Controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
-//
-// WhiteBalanceTemperature calls the underlying WhiteBalanceTemperature.
-func (x *Camera) WhiteBalanceTemperature() float64 {
-	return x.inner.WhiteBalanceTemperature()
-}
-
-// SetWhiteBalanceTemperature calls the underlying SetWhiteBalanceTemperature.
-func (x *Camera) SetWhiteBalanceTemperature(whiteBalanceTemperature float64) {
-	x.inner.SetWhiteBalanceTemperature(whiteBalanceTemperature)
-}
-
-// @property whiteBalanceTint @abstract Controls the overall white balance tint of the scene. Defaults to 0 (no effect).
-//
-// WhiteBalanceTint calls the underlying WhiteBalanceTint.
-func (x *Camera) WhiteBalanceTint() float64 {
-	return x.inner.WhiteBalanceTint()
-}
-
-// SetWhiteBalanceTint calls the underlying SetWhiteBalanceTint.
-func (x *Camera) SetWhiteBalanceTint(whiteBalanceTint float64) {
-	x.inner.SetWhiteBalanceTint(whiteBalanceTint)
-}
-
-// @property colorGrading @abstract Specifies a lookup texture to apply color grading. The contents must a 2D image representing `n` slices of a unit color cube texture, arranged in an horizontal row of `n` images. For instance, a color cube of dimension 16x16x16 should be provided as an image of size 256x16.
-//
-// ColorGrading calls the underlying ColorGrading.
-func (x *Camera) ColorGrading() *MaterialProperty {
-	_r := x.inner.ColorGrading()
-	if _r == nil {
+// cameraAdopt wraps an Objective-C object that this code just created as a
+// Camera (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cameraAdopt(id objc.ID) *Camera {
+	if id == 0 {
 		return nil
 	}
-	return &MaterialProperty{inner: _r}
+	x := &Camera{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property categoryBitMask @abstract Determines the node categories that are visible from the receiver. Defaults to all bits set.
-//
-// CategoryBitMask calls the underlying CategoryBitMask.
-func (x *Camera) CategoryBitMask() uint {
-	return x.inner.CategoryBitMask()
+// Description returns the object's -description text.
+func (x *Camera) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetCategoryBitMask calls the underlying SetCategoryBitMask.
-func (x *Camera) SetCategoryBitMask(categoryBitMask uint) {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Camera) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property focalBlurRadius @abstract Determines the receiver's focal radius. Animatable. @discussion Determines the maximum amount of blur for objects out of focus. Defaults to 0.
-//
-// FocalBlurRadius calls the underlying FocalBlurRadius.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Camera) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Camera) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCamera creates a new Camera.
+func NewCamera() *Camera {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNCamera")), objc.RegisterName("new"))
+	return cameraAdopt(_id)
+}
+
+// WithName a name associated with the camera object.
+func (x *Camera) WithName(name string) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithFieldOfView the vertical or horizontal viewing angle of the camera.
+func (x *Camera) WithFieldOfView(fieldOfView float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldOfView:"), fieldOfView)
+	return x
+}
+
+// WithProjectionDirection the axis used to determine field of view or orthographic scale.
+func (x *Camera) WithProjectionDirection(projectionDirection CameraProjectionDirection) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectionDirection:"), projectionDirection)
+	return x
+}
+
+// WithFocalLength the camera’s focal length, in millimeters.
+func (x *Camera) WithFocalLength(focalLength float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), focalLength)
+	return x
+}
+
+// WithSensorHeight the vertical size of the camera’s imaging plane, in millimeters.
+func (x *Camera) WithSensorHeight(sensorHeight float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorHeight:"), sensorHeight)
+	return x
+}
+
+// WithZNear the camera’s near depth limit. Animatable.
+func (x *Camera) WithZNear(zNear float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZNear:"), zNear)
+	return x
+}
+
+// WithZFar the camera’s far depth limit. Animatable.
+func (x *Camera) WithZFar(zFar float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZFar:"), zFar)
+	return x
+}
+
+// WithAutomaticallyAdjustsZRange a Boolean value that determines whether the camera automatically adjusts its zNear and zFar depth limits.
+func (x *Camera) WithAutomaticallyAdjustsZRange(automaticallyAdjustsZRange bool) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsZRange:"), automaticallyAdjustsZRange)
+	return x
+}
+
+// WithUsesOrthographicProjection a Boolean value that determines whether the camera uses an orthographic projection.
+func (x *Camera) WithUsesOrthographicProjection(usesOrthographicProjection bool) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesOrthographicProjection:"), usesOrthographicProjection)
+	return x
+}
+
+// WithOrthographicScale specifies the camera’s magnification factor when using an orthographic projection.
+func (x *Camera) WithOrthographicScale(orthographicScale float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthographicScale:"), orthographicScale)
+	return x
+}
+
+// WithProjectionTransform the camera’s projection transformation.
+func (x *Camera) WithProjectionTransform(projectionTransform quartzcore.CATransform3D) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectionTransform:"), projectionTransform)
+	return x
+}
+
+// WithWantsDepthOfField a Boolean value that determines whether SceneKit renders depth-of-field blur effects for the camera.
+func (x *Camera) WithWantsDepthOfField(wantsDepthOfField bool) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsDepthOfField:"), wantsDepthOfField)
+	return x
+}
+
+// WithFocusDistance the distance from the camera at which objects appear in sharp focus. Animatable.
+func (x *Camera) WithFocusDistance(focusDistance float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDistance:"), focusDistance)
+	return x
+}
+
+// WithFocalBlurSampleCount the number of pixel samples SceneKit uses to create depth-of-field blur effects.
+func (x *Camera) WithFocalBlurSampleCount(focalBlurSampleCount int) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalBlurSampleCount:"), focalBlurSampleCount)
+	return x
+}
+
+// WithFStop the physical camera aperture simulated by SceneKit for depth-of-field effects. Animatable.
+func (x *Camera) WithFStop(fStop float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFStop:"), fStop)
+	return x
+}
+
+// WithApertureBladeCount the number of physical camera aperture blades simulated by SceneKit for depth-of-field effects.
+func (x *Camera) WithApertureBladeCount(apertureBladeCount int) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
+	return x
+}
+
+// WithMotionBlurIntensity a factor that determines the intensity of motion blur effects. Animatable.
+func (x *Camera) WithMotionBlurIntensity(motionBlurIntensity float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionBlurIntensity:"), motionBlurIntensity)
+	return x
+}
+
+// WithScreenSpaceAmbientOcclusionIntensity the intensity of the screen-space ambient occlusion effect applied in camera rendering.
+func (x *Camera) WithScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionIntensity:"), screenSpaceAmbientOcclusionIntensity)
+	return x
+}
+
+// WithScreenSpaceAmbientOcclusionRadius the distance, in units of scene space, at which ambient occlusion takes effect.
+func (x *Camera) WithScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionRadius:"), screenSpaceAmbientOcclusionRadius)
+	return x
+}
+
+// WithScreenSpaceAmbientOcclusionBias an offset for modulating ambient occlusion effects.
+func (x *Camera) WithScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionBias:"), screenSpaceAmbientOcclusionBias)
+	return x
+}
+
+// WithScreenSpaceAmbientOcclusionDepthThreshold the maximum depth difference, in units of scene space, at which to apply ambient occlusion effects.
+func (x *Camera) WithScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionDepthThreshold:"), screenSpaceAmbientOcclusionDepthThreshold)
+	return x
+}
+
+// WithScreenSpaceAmbientOcclusionNormalThreshold the magnitude of the blur effect applied to create ambient occlusion shadows.
+func (x *Camera) WithScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionNormalThreshold:"), screenSpaceAmbientOcclusionNormalThreshold)
+	return x
+}
+
+// WithWantsHDR a Boolean value that determines whether SceneKit applies High Dynamic Range (HDR) postprocessing effects to a scene.
+func (x *Camera) WithWantsHDR(wantsHDR bool) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsHDR:"), wantsHDR)
+	return x
+}
+
+// WithExposureOffset a logarithmic bias that adjusts the results of SceneKit’s tone mapping operation, brightening or darkening the visible scene.
+func (x *Camera) WithExposureOffset(exposureOffset float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureOffset:"), exposureOffset)
+	return x
+}
+
+// WithAverageGray the luminance level to use as the midpoint of a tone mapping curve.
+func (x *Camera) WithAverageGray(averageGray float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAverageGray:"), averageGray)
+	return x
+}
+
+// WithWhitePoint the luminance level to use as the upper end of a tone mapping curve.
+func (x *Camera) WithWhitePoint(whitePoint float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhitePoint:"), whitePoint)
+	return x
+}
+
+// WithWantsExposureAdaptation a Boolean value that determines whether SceneKit automatically adjusts the exposure level.
+func (x *Camera) WithWantsExposureAdaptation(wantsExposureAdaptation bool) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExposureAdaptation:"), wantsExposureAdaptation)
+	return x
+}
+
+// WithExposureAdaptationBrighteningSpeedFactor the relative duration of automatically animated exposure transitions from dark to bright areas.
+func (x *Camera) WithExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureAdaptationBrighteningSpeedFactor:"), exposureAdaptationBrighteningSpeedFactor)
+	return x
+}
+
+// WithExposureAdaptationDarkeningSpeedFactor the relative duration of automatically animated exposure transitions from bright to dark areas.
+func (x *Camera) WithExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureAdaptationDarkeningSpeedFactor:"), exposureAdaptationDarkeningSpeedFactor)
+	return x
+}
+
+// WithMinimumExposure the minimum exposure value to use in tone mapping.
+func (x *Camera) WithMinimumExposure(minimumExposure float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumExposure:"), minimumExposure)
+	return x
+}
+
+// WithMaximumExposure the minimum exposure value to use in tone mapping.
+func (x *Camera) WithMaximumExposure(maximumExposure float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumExposure:"), maximumExposure)
+	return x
+}
+
+// WithBloomThreshold the brightness threshold at which to apply a bloom effect to highlights in the rendered scene. Animatable.
+func (x *Camera) WithBloomThreshold(bloomThreshold float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomThreshold:"), bloomThreshold)
+	return x
+}
+
+// WithBloomIterationCount determines the number of blur iterations. Defaults to 1.
+func (x *Camera) WithBloomIterationCount(bloomIterationCount int) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomIterationCount:"), bloomIterationCount)
+	return x
+}
+
+// WithBloomIterationSpread determines how the bloom iterations are spread. Defaults to 0.
+func (x *Camera) WithBloomIterationSpread(bloomIterationSpread float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomIterationSpread:"), bloomIterationSpread)
+	return x
+}
+
+// WithBloomIntensity the magnitude of bloom effect to apply to highlights in the rendered scene. Animatable.
+func (x *Camera) WithBloomIntensity(bloomIntensity float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomIntensity:"), bloomIntensity)
+	return x
+}
+
+// WithBloomBlurRadius the radius, in pixels, for the blurring portion of the bloom effect applied to highlights in the rendered scene. Animatable.
+func (x *Camera) WithBloomBlurRadius(bloomBlurRadius float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomBlurRadius:"), bloomBlurRadius)
+	return x
+}
+
+// WithVignettingPower the amount of the rendered scene to darken with a vignette effect.
+func (x *Camera) WithVignettingPower(vignettingPower float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVignettingPower:"), vignettingPower)
+	return x
+}
+
+// WithVignettingIntensity the magnitude of vignette (darkening around edges) effect to apply to the rendered scene.
+func (x *Camera) WithVignettingIntensity(vignettingIntensity float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVignettingIntensity:"), vignettingIntensity)
+	return x
+}
+
+// WithColorFringeStrength the magnitude of color fringing effect to apply to the rendered scene.
+func (x *Camera) WithColorFringeStrength(colorFringeStrength float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorFringeStrength:"), colorFringeStrength)
+	return x
+}
+
+// WithColorFringeIntensity the blend factor for fading the color fringing effect applied to the rendered scene.
+func (x *Camera) WithColorFringeIntensity(colorFringeIntensity float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorFringeIntensity:"), colorFringeIntensity)
+	return x
+}
+
+// WithSaturation an adjustment factor to apply to the overall color saturation of the rendered scene.
+func (x *Camera) WithSaturation(saturation float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), saturation)
+	return x
+}
+
+// WithContrast an adjustment factor to apply to the overall visual contrast of the rendered scene.
+func (x *Camera) WithContrast(contrast float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrast:"), contrast)
+	return x
+}
+
+// WithGrainIntensity controls the intensity of the grain. Defaults to 0 (no effect).
+func (x *Camera) WithGrainIntensity(grainIntensity float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrainIntensity:"), grainIntensity)
+	return x
+}
+
+// WithGrainScale controls the scale of the grain. Defaults to 1.
+func (x *Camera) WithGrainScale(grainScale float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrainScale:"), grainScale)
+	return x
+}
+
+// WithGrainIsColored determines if the grain is colored or not. Defaults to NO.
+func (x *Camera) WithGrainIsColored(grainIsColored bool) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrainIsColored:"), grainIsColored)
+	return x
+}
+
+// WithWhiteBalanceTemperature controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
+func (x *Camera) WithWhiteBalanceTemperature(whiteBalanceTemperature float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteBalanceTemperature:"), whiteBalanceTemperature)
+	return x
+}
+
+// WithWhiteBalanceTint controls the overall white balance tint of the scene. Defaults to 0 (no effect).
+func (x *Camera) WithWhiteBalanceTint(whiteBalanceTint float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteBalanceTint:"), whiteBalanceTint)
+	return x
+}
+
+// WithCategoryBitMask a mask that defines which categories this camera belongs to.
+func (x *Camera) WithCategoryBitMask(categoryBitMask int) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	return x
+}
+
+// WithFocalBlurRadius the maximum amount of blurring, in pixels, applied to areas outside the camera’s depth of field. Animatable.
+func (x *Camera) WithFocalBlurRadius(focalBlurRadius float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalBlurRadius:"), focalBlurRadius)
+	return x
+}
+
+// WithXFov the camera’s field of view, in degrees, on the horizontal axis. Animatable.
+func (x *Camera) WithXFov(xFov float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXFov:"), xFov)
+	return x
+}
+
+// WithYFov the camera’s field of view, in degrees, on the vertical axis. Animatable.
+func (x *Camera) WithYFov(yFov float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYFov:"), yFov)
+	return x
+}
+
+// WithAperture a factor that determines the transition between in-focus and out-of-focus areas. Animatable.
+func (x *Camera) WithAperture(aperture float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAperture:"), aperture)
+	return x
+}
+
+// WithFocalSize the width of the distance range at which objects appear in sharp focus. Animatable.
+func (x *Camera) WithFocalSize(focalSize float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalSize:"), focalSize)
+	return x
+}
+
+// WithFocalDistance the distance from the camera at which objects appear in sharp focus. Animatable.
+func (x *Camera) WithFocalDistance(focalDistance float64) *Camera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalDistance:"), focalDistance)
+	return x
+}
+
+// ProjectionTransform wraps the corresponding Objective-C method.
+func (x *Camera) ProjectionTransform() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("projectionTransform"))
+	return _r
+}
+
+// SetProjectionTransform wraps the corresponding Objective-C method.
+func (x *Camera) SetProjectionTransform(projectionTransform quartzcore.CATransform3D) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectionTransform:"), projectionTransform)
+}
+
+// ProjectionTransformWithViewportSize wraps the corresponding Objective-C method.
+func (x *Camera) ProjectionTransformWithViewportSize(viewportSize corefoundation.CGSize) quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("projectionTransformWithViewportSize:"), viewportSize)
+	return _r
+}
+
+// Name determines the name of the receiver.
+func (x *Camera) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetName wraps the corresponding Objective-C method.
+func (x *Camera) SetName(name string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+}
+
+// FieldOfView determines the receiver's field of view (in degree). Defaults to 60°. Animatable. The fieldOfView is automatically updated when the sensorHeight or focalLength are set. Setting the fieldOfView will update the focalLength according to the new fieldOfView and the current sensorHeight.
+func (x *Camera) FieldOfView() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fieldOfView"))
+	return _r
+}
+
+// SetFieldOfView wraps the corresponding Objective-C method.
+func (x *Camera) SetFieldOfView(fieldOfView float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldOfView:"), fieldOfView)
+}
+
+// ProjectionDirection determines whether the fieldOfView (or orthographicScale) is vertical or horizontal. Defaults to vertical.
+func (x *Camera) ProjectionDirection() CameraProjectionDirection {
+	_r := objc.Send[CameraProjectionDirection](objref.IDOf(x), objc.RegisterName("projectionDirection"))
+	return _r
+}
+
+// SetProjectionDirection wraps the corresponding Objective-C method.
+func (x *Camera) SetProjectionDirection(projectionDirection CameraProjectionDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectionDirection:"), projectionDirection)
+}
+
+// FocalLength determines the receiver's focal length in millimeter. Defaults to 50mm. Animatable. The focalLength is automatically updated when the sensorHeight or fieldOfView are set. Setting the focalLength will update the fieldOfView according to the new focalLength and the current sensorHeight.
+func (x *Camera) FocalLength() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("focalLength"))
+	return _r
+}
+
+// SetFocalLength wraps the corresponding Objective-C method.
+func (x *Camera) SetFocalLength(focalLength float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), focalLength)
+}
+
+// SensorHeight determines the vertical size of the sensor in millimeter. Defaults to 24mm. Animatable. Setting the sensorHeight will automatically update the fieldOfView according to the new sensorHeight and the current focalLength.
+func (x *Camera) SensorHeight() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sensorHeight"))
+	return _r
+}
+
+// SetSensorHeight wraps the corresponding Objective-C method.
+func (x *Camera) SetSensorHeight(sensorHeight float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorHeight:"), sensorHeight)
+}
+
+// ZNear determines the receiver's near value. Animatable. The near value determines the minimal distance between the camera and a visible surface. If a surface is closer to the camera than this minimal distance, then the surface is clipped. The near value must be different than zero. Defaults to 1.
+func (x *Camera) ZNear() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zNear"))
+	return _r
+}
+
+// SetZNear wraps the corresponding Objective-C method.
+func (x *Camera) SetZNear(zNear float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZNear:"), zNear)
+}
+
+// ZFar determines the receiver's far value. Animatable. The far value determines the maximal distance between the camera and a visible surface. If a surface is further from the camera than this maximal distance, then the surface is clipped. Defaults to 100.
+func (x *Camera) ZFar() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zFar"))
+	return _r
+}
+
+// SetZFar wraps the corresponding Objective-C method.
+func (x *Camera) SetZFar(zFar float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZFar:"), zFar)
+}
+
+// AutomaticallyAdjustsZRange determines whether the receiver automatically adjusts the zFar value. Defaults to NO. When set to YES, the near and far planes are automatically set to fit the bounding box of the entire scene at render time.
+func (x *Camera) AutomaticallyAdjustsZRange() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsZRange"))
+	return _r
+}
+
+// SetAutomaticallyAdjustsZRange wraps the corresponding Objective-C method.
+func (x *Camera) SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsZRange:"), automaticallyAdjustsZRange)
+}
+
+// UsesOrthographicProjection determines whether the receiver uses an orthographic projection or not. Defaults to NO.
+func (x *Camera) UsesOrthographicProjection() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesOrthographicProjection"))
+	return _r
+}
+
+// SetUsesOrthographicProjection wraps the corresponding Objective-C method.
+func (x *Camera) SetUsesOrthographicProjection(usesOrthographicProjection bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesOrthographicProjection:"), usesOrthographicProjection)
+}
+
+// OrthographicScale determines the receiver's orthographic scale value. Animatable. Defaults to 1. This setting determines the size of the camera's visible area. This is only enabled when usesOrthographicProjection is set to YES.
+func (x *Camera) OrthographicScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("orthographicScale"))
+	return _r
+}
+
+// SetOrthographicScale wraps the corresponding Objective-C method.
+func (x *Camera) SetOrthographicScale(orthographicScale float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthographicScale:"), orthographicScale)
+}
+
+// WantsDepthOfField determines if the receiver has depth of field. Defaults to NO.
+func (x *Camera) WantsDepthOfField() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsDepthOfField"))
+	return _r
+}
+
+// SetWantsDepthOfField wraps the corresponding Objective-C method.
+func (x *Camera) SetWantsDepthOfField(wantsDepthOfField bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsDepthOfField:"), wantsDepthOfField)
+}
+
+// FocusDistance determines the receiver's focus distance. Animatable. Defaults to 2.5
+func (x *Camera) FocusDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("focusDistance"))
+	return _r
+}
+
+// SetFocusDistance wraps the corresponding Objective-C method.
+func (x *Camera) SetFocusDistance(focusDistance float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDistance:"), focusDistance)
+}
+
+// FocalBlurSampleCount determines the receiver's sample count for depth of field effect. Defaults to 25.
+func (x *Camera) FocalBlurSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("focalBlurSampleCount"))
+	return _r
+}
+
+// SetFocalBlurSampleCount wraps the corresponding Objective-C method.
+func (x *Camera) SetFocalBlurSampleCount(focalBlurSampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalBlurSampleCount:"), focalBlurSampleCount)
+}
+
+// FStop determines the receiver's fstop. Animatable. Defaults to 5.6.
+func (x *Camera) FStop() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fStop"))
+	return _r
+}
+
+// SetFStop wraps the corresponding Objective-C method.
+func (x *Camera) SetFStop(fStop float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFStop:"), fStop)
+}
+
+// ApertureBladeCount determines the receiver's blade count of the aperture. Defaults to 6.
+func (x *Camera) ApertureBladeCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("apertureBladeCount"))
+	return _r
+}
+
+// SetApertureBladeCount wraps the corresponding Objective-C method.
+func (x *Camera) SetApertureBladeCount(apertureBladeCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
+}
+
+// MotionBlurIntensity determines the intensity of the motion blur. Animatable. Defaults to 0. An intensity of zero means no motion blur. The intensity should not exceeed 1.
+func (x *Camera) MotionBlurIntensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("motionBlurIntensity"))
+	return _r
+}
+
+// SetMotionBlurIntensity wraps the corresponding Objective-C method.
+func (x *Camera) SetMotionBlurIntensity(motionBlurIntensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionBlurIntensity:"), motionBlurIntensity)
+}
+
+// ScreenSpaceAmbientOcclusionIntensity determines the intensity of the screen space ambient occlusion. Animatable. defaults to 0.
+func (x *Camera) ScreenSpaceAmbientOcclusionIntensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceAmbientOcclusionIntensity"))
+	return _r
+}
+
+// SetScreenSpaceAmbientOcclusionIntensity wraps the corresponding Objective-C method.
+func (x *Camera) SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionIntensity:"), screenSpaceAmbientOcclusionIntensity)
+}
+
+// ScreenSpaceAmbientOcclusionRadius determines the screen space ambient occlusion radius in scene unit. Animatable. defaults to 5.
+func (x *Camera) ScreenSpaceAmbientOcclusionRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceAmbientOcclusionRadius"))
+	return _r
+}
+
+// SetScreenSpaceAmbientOcclusionRadius wraps the corresponding Objective-C method.
+func (x *Camera) SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionRadius:"), screenSpaceAmbientOcclusionRadius)
+}
+
+// ScreenSpaceAmbientOcclusionBias determines self occlusion bias in scene unit. defaults to 0.03.
+func (x *Camera) ScreenSpaceAmbientOcclusionBias() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceAmbientOcclusionBias"))
+	return _r
+}
+
+// SetScreenSpaceAmbientOcclusionBias wraps the corresponding Objective-C method.
+func (x *Camera) SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionBias:"), screenSpaceAmbientOcclusionBias)
+}
+
+// ScreenSpaceAmbientOcclusionDepthThreshold determines the depth blur threshold in scene unit. defaults to 0.2.
+func (x *Camera) ScreenSpaceAmbientOcclusionDepthThreshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceAmbientOcclusionDepthThreshold"))
+	return _r
+}
+
+// SetScreenSpaceAmbientOcclusionDepthThreshold wraps the corresponding Objective-C method.
+func (x *Camera) SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionDepthThreshold:"), screenSpaceAmbientOcclusionDepthThreshold)
+}
+
+// ScreenSpaceAmbientOcclusionNormalThreshold determines the normal blur threshold. defaults to 0.3.
+func (x *Camera) ScreenSpaceAmbientOcclusionNormalThreshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceAmbientOcclusionNormalThreshold"))
+	return _r
+}
+
+// SetScreenSpaceAmbientOcclusionNormalThreshold wraps the corresponding Objective-C method.
+func (x *Camera) SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceAmbientOcclusionNormalThreshold:"), screenSpaceAmbientOcclusionNormalThreshold)
+}
+
+// WantsHDR determines if the receiver has a high dynamic range. Defaults to NO.
+func (x *Camera) WantsHDR() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsHDR"))
+	return _r
+}
+
+// SetWantsHDR wraps the corresponding Objective-C method.
+func (x *Camera) SetWantsHDR(wantsHDR bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsHDR:"), wantsHDR)
+}
+
+// ExposureOffset determines the logarithmic exposure biasing, in EV. Defaults to 0.
+func (x *Camera) ExposureOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("exposureOffset"))
+	return _r
+}
+
+// SetExposureOffset wraps the corresponding Objective-C method.
+func (x *Camera) SetExposureOffset(exposureOffset float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureOffset:"), exposureOffset)
+}
+
+// AverageGray determines the average gray level desired in the final image. Defaults to 0.18.
+func (x *Camera) AverageGray() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averageGray"))
+	return _r
+}
+
+// SetAverageGray wraps the corresponding Objective-C method.
+func (x *Camera) SetAverageGray(averageGray float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAverageGray:"), averageGray)
+}
+
+// WhitePoint determines the smallest luminance level that will be mapped to white in the final image. Defaults to 1.
+func (x *Camera) WhitePoint() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("whitePoint"))
+	return _r
+}
+
+// SetWhitePoint wraps the corresponding Objective-C method.
+func (x *Camera) SetWhitePoint(whitePoint float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhitePoint:"), whitePoint)
+}
+
+// WantsExposureAdaptation determines if the receiver should simulate an eye and continuously adjust to luminance. Defaults to YES.
+func (x *Camera) WantsExposureAdaptation() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsExposureAdaptation"))
+	return _r
+}
+
+// SetWantsExposureAdaptation wraps the corresponding Objective-C method.
+func (x *Camera) SetWantsExposureAdaptation(wantsExposureAdaptation bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExposureAdaptation:"), wantsExposureAdaptation)
+}
+
+// ExposureAdaptationBrighteningSpeedFactor determines the exposure adaptation speed when going from bright areas to dark areas. Defaults to 0.4.
+func (x *Camera) ExposureAdaptationBrighteningSpeedFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("exposureAdaptationBrighteningSpeedFactor"))
+	return _r
+}
+
+// SetExposureAdaptationBrighteningSpeedFactor wraps the corresponding Objective-C method.
+func (x *Camera) SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureAdaptationBrighteningSpeedFactor:"), exposureAdaptationBrighteningSpeedFactor)
+}
+
+// ExposureAdaptationDarkeningSpeedFactor determines the exposure adaptation speed when going from dark areas to bright areas. Defaults to 0.6.
+func (x *Camera) ExposureAdaptationDarkeningSpeedFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("exposureAdaptationDarkeningSpeedFactor"))
+	return _r
+}
+
+// SetExposureAdaptationDarkeningSpeedFactor wraps the corresponding Objective-C method.
+func (x *Camera) SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposureAdaptationDarkeningSpeedFactor:"), exposureAdaptationDarkeningSpeedFactor)
+}
+
+// MinimumExposure determines the minimum exposure offset of the adaptation, in EV. Defaults to -15.
+func (x *Camera) MinimumExposure() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumExposure"))
+	return _r
+}
+
+// SetMinimumExposure wraps the corresponding Objective-C method.
+func (x *Camera) SetMinimumExposure(minimumExposure float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumExposure:"), minimumExposure)
+}
+
+// MaximumExposure determines the maximum exposure offset of the adaptation, in EV. Defaults to -15.
+func (x *Camera) MaximumExposure() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumExposure"))
+	return _r
+}
+
+// SetMaximumExposure wraps the corresponding Objective-C method.
+func (x *Camera) SetMaximumExposure(maximumExposure float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumExposure:"), maximumExposure)
+}
+
+// BloomThreshold determines the luminance threshold for the bloom effect. Animatable. Defaults to 1.
+func (x *Camera) BloomThreshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bloomThreshold"))
+	return _r
+}
+
+// SetBloomThreshold wraps the corresponding Objective-C method.
+func (x *Camera) SetBloomThreshold(bloomThreshold float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomThreshold:"), bloomThreshold)
+}
+
+// BloomIterationCount determines the number of blur iterations. Defaults to 1.
+func (x *Camera) BloomIterationCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bloomIterationCount"))
+	return _r
+}
+
+// SetBloomIterationCount wraps the corresponding Objective-C method.
+func (x *Camera) SetBloomIterationCount(bloomIterationCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomIterationCount:"), bloomIterationCount)
+}
+
+// BloomIterationSpread determines how the bloom iterations are spread. Defaults to 0.
+func (x *Camera) BloomIterationSpread() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bloomIterationSpread"))
+	return _r
+}
+
+// SetBloomIterationSpread wraps the corresponding Objective-C method.
+func (x *Camera) SetBloomIterationSpread(bloomIterationSpread float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomIterationSpread:"), bloomIterationSpread)
+}
+
+// BloomIntensity determines the intensity of the bloom effect. Animatable. Defaults to 0 (no effect).
+func (x *Camera) BloomIntensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bloomIntensity"))
+	return _r
+}
+
+// SetBloomIntensity wraps the corresponding Objective-C method.
+func (x *Camera) SetBloomIntensity(bloomIntensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomIntensity:"), bloomIntensity)
+}
+
+// BloomBlurRadius determines the radius of the bloom effect in points. Animatable. Defaults to 4.
+func (x *Camera) BloomBlurRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bloomBlurRadius"))
+	return _r
+}
+
+// SetBloomBlurRadius wraps the corresponding Objective-C method.
+func (x *Camera) SetBloomBlurRadius(bloomBlurRadius float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBloomBlurRadius:"), bloomBlurRadius)
+}
+
+// VignettingPower controls the shape of the vignetting effect. Defaults to 0 (no effect).
+func (x *Camera) VignettingPower() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("vignettingPower"))
+	return _r
+}
+
+// SetVignettingPower wraps the corresponding Objective-C method.
+func (x *Camera) SetVignettingPower(vignettingPower float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVignettingPower:"), vignettingPower)
+}
+
+// VignettingIntensity controls the intensity of the vignetting effect. Defaults to 0 (no effect).
+func (x *Camera) VignettingIntensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("vignettingIntensity"))
+	return _r
+}
+
+// SetVignettingIntensity wraps the corresponding Objective-C method.
+func (x *Camera) SetVignettingIntensity(vignettingIntensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVignettingIntensity:"), vignettingIntensity)
+}
+
+// ColorFringeStrength controls the strength of the color shift effect. Defaults to 0 (no effect).
+func (x *Camera) ColorFringeStrength() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("colorFringeStrength"))
+	return _r
+}
+
+// SetColorFringeStrength wraps the corresponding Objective-C method.
+func (x *Camera) SetColorFringeStrength(colorFringeStrength float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorFringeStrength:"), colorFringeStrength)
+}
+
+// ColorFringeIntensity controls the intensity of the color shift effect. Defaults to 1.
+func (x *Camera) ColorFringeIntensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("colorFringeIntensity"))
+	return _r
+}
+
+// SetColorFringeIntensity wraps the corresponding Objective-C method.
+func (x *Camera) SetColorFringeIntensity(colorFringeIntensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorFringeIntensity:"), colorFringeIntensity)
+}
+
+// Saturation controls the overall saturation of the scene. Defaults to 1 (no effect).
+func (x *Camera) Saturation() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("saturation"))
+	return _r
+}
+
+// SetSaturation wraps the corresponding Objective-C method.
+func (x *Camera) SetSaturation(saturation float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), saturation)
+}
+
+// Contrast controls the overall contrast of the scene. Defaults to 0 (no effect).
+func (x *Camera) Contrast() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contrast"))
+	return _r
+}
+
+// SetContrast wraps the corresponding Objective-C method.
+func (x *Camera) SetContrast(contrast float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrast:"), contrast)
+}
+
+// GrainIntensity controls the intensity of the grain. Defaults to 0 (no effect).
+func (x *Camera) GrainIntensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("grainIntensity"))
+	return _r
+}
+
+// SetGrainIntensity wraps the corresponding Objective-C method.
+func (x *Camera) SetGrainIntensity(grainIntensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrainIntensity:"), grainIntensity)
+}
+
+// GrainScale controls the scale of the grain. Defaults to 1.
+func (x *Camera) GrainScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("grainScale"))
+	return _r
+}
+
+// SetGrainScale wraps the corresponding Objective-C method.
+func (x *Camera) SetGrainScale(grainScale float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrainScale:"), grainScale)
+}
+
+// GrainIsColored determines if the grain is colored or not. Defaults to NO.
+func (x *Camera) GrainIsColored() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("grainIsColored"))
+	return _r
+}
+
+// SetGrainIsColored wraps the corresponding Objective-C method.
+func (x *Camera) SetGrainIsColored(grainIsColored bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrainIsColored:"), grainIsColored)
+}
+
+// WhiteBalanceTemperature controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
+func (x *Camera) WhiteBalanceTemperature() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("whiteBalanceTemperature"))
+	return _r
+}
+
+// SetWhiteBalanceTemperature wraps the corresponding Objective-C method.
+func (x *Camera) SetWhiteBalanceTemperature(whiteBalanceTemperature float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteBalanceTemperature:"), whiteBalanceTemperature)
+}
+
+// WhiteBalanceTint controls the overall white balance tint of the scene. Defaults to 0 (no effect).
+func (x *Camera) WhiteBalanceTint() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("whiteBalanceTint"))
+	return _r
+}
+
+// SetWhiteBalanceTint wraps the corresponding Objective-C method.
+func (x *Camera) SetWhiteBalanceTint(whiteBalanceTint float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteBalanceTint:"), whiteBalanceTint)
+}
+
+// ColorGrading specifies a lookup texture to apply color grading. The contents must a 2D image representing `n` slices of a unit color cube texture, arranged in an horizontal row of `n` images. For instance, a color cube of dimension 16x16x16 should be provided as an image of size 256x16.
+func (x *Camera) ColorGrading() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorGrading"))
+	return MaterialPropertyFromID(_r)
+}
+
+// CategoryBitMask determines the node categories that are visible from the receiver. Defaults to all bits set.
+func (x *Camera) CategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+	return _r
+}
+
+// SetCategoryBitMask wraps the corresponding Objective-C method.
+func (x *Camera) SetCategoryBitMask(categoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+}
+
+// FocalBlurRadius determines the receiver's focal radius. Animatable. Determines the maximum amount of blur for objects out of focus. Defaults to 0.
 func (x *Camera) FocalBlurRadius() float64 {
-	return x.inner.FocalBlurRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("focalBlurRadius"))
+	return _r
 }
 
-// SetFocalBlurRadius calls the underlying SetFocalBlurRadius.
+// SetFocalBlurRadius wraps the corresponding Objective-C method.
 func (x *Camera) SetFocalBlurRadius(focalBlurRadius float64) {
-	x.inner.SetFocalBlurRadius(focalBlurRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalBlurRadius:"), focalBlurRadius)
 }
 
-// @property xFov @abstract Determines the receiver's field of view on the X axis (in degree). Animatable. @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
-//
-// XFov calls the underlying XFov.
+// XFov determines the receiver's field of view on the X axis (in degree). Animatable. When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
 func (x *Camera) XFov() float64 {
-	return x.inner.XFov()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xFov"))
+	return _r
 }
 
-// SetXFov calls the underlying SetXFov.
+// SetXFov wraps the corresponding Objective-C method.
 func (x *Camera) SetXFov(xFov float64) {
-	x.inner.SetXFov(xFov)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXFov:"), xFov)
 }
 
-// @property yFov @abstract Determines the receiver's field of view on the Y axis (in degree). Animatable. @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
-//
-// YFov calls the underlying YFov.
+// YFov determines the receiver's field of view on the Y axis (in degree). Animatable. When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
 func (x *Camera) YFov() float64 {
-	return x.inner.YFov()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yFov"))
+	return _r
 }
 
-// SetYFov calls the underlying SetYFov.
+// SetYFov wraps the corresponding Objective-C method.
 func (x *Camera) SetYFov(yFov float64) {
-	x.inner.SetYFov(yFov)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYFov:"), yFov)
 }
 
-// @property aperture @abstract Determines the receiver's aperture. Animatable. @discussion Defaults to 1/8.0.
-//
-// Aperture calls the underlying Aperture.
+// Aperture determines the receiver's aperture. Animatable. Defaults to 1/8.0.
 func (x *Camera) Aperture() float64 {
-	return x.inner.Aperture()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("aperture"))
+	return _r
 }
 
-// SetAperture calls the underlying SetAperture.
+// SetAperture wraps the corresponding Objective-C method.
 func (x *Camera) SetAperture(aperture float64) {
-	x.inner.SetAperture(aperture)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAperture:"), aperture)
 }
 
-// @property focalSize @abstract Determines the receiver's focal size. Animatable. @discussion Determines the size of the area around focalDistance where the objects are in focus. Defaults to 0.
-//
-// FocalSize calls the underlying FocalSize.
+// FocalSize determines the receiver's focal size. Animatable. Determines the size of the area around focalDistance where the objects are in focus. Defaults to 0.
 func (x *Camera) FocalSize() float64 {
-	return x.inner.FocalSize()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("focalSize"))
+	return _r
 }
 
-// SetFocalSize calls the underlying SetFocalSize.
+// SetFocalSize wraps the corresponding Objective-C method.
 func (x *Camera) SetFocalSize(focalSize float64) {
-	x.inner.SetFocalSize(focalSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalSize:"), focalSize)
 }
 
-// @property focalDistance @abstract Determines the receiver's focal distance. Animatable. @discussion When non zero, the focal distance determines how the camera focuses the objects in the 3d scene. Defaults to 10.0 prior to macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to 2.5 otherwise.
-//
-// FocalDistance calls the underlying FocalDistance.
+// FocalDistance determines the receiver's focal distance. Animatable. When non zero, the focal distance determines how the camera focuses the objects in the 3d scene. Defaults to 10.0 prior to macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to 2.5 otherwise.
 func (x *Camera) FocalDistance() float64 {
-	return x.inner.FocalDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("focalDistance"))
+	return _r
 }
 
-// SetFocalDistance calls the underlying SetFocalDistance.
+// SetFocalDistance wraps the corresponding Objective-C method.
 func (x *Camera) SetFocalDistance(focalDistance float64) {
-	x.inner.SetFocalDistance(focalDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalDistance:"), focalDistance)
 }
 
 // Cameraable is the interface implemented by [Camera], for mocking and DI.
 type Cameraable interface {
-	Unwrap() *raw.SCNCamera
+	obj.Object
 	WithName(name string) *Camera
 	WithFieldOfView(fieldOfView float64) *Camera
-	WithProjectionDirection(projectionDirection SCNCameraProjectionDirection) *Camera
+	WithProjectionDirection(projectionDirection CameraProjectionDirection) *Camera
 	WithFocalLength(focalLength float64) *Camera
 	WithSensorHeight(sensorHeight float64) *Camera
 	WithZNear(zNear float64) *Camera
@@ -1189,7 +1057,7 @@ type Cameraable interface {
 	WithGrainIsColored(grainIsColored bool) *Camera
 	WithWhiteBalanceTemperature(whiteBalanceTemperature float64) *Camera
 	WithWhiteBalanceTint(whiteBalanceTint float64) *Camera
-	WithCategoryBitMask(categoryBitMask uint) *Camera
+	WithCategoryBitMask(categoryBitMask int) *Camera
 	WithFocalBlurRadius(focalBlurRadius float64) *Camera
 	WithXFov(xFov float64) *Camera
 	WithYFov(yFov float64) *Camera
@@ -1203,8 +1071,8 @@ type Cameraable interface {
 	SetName(name string)
 	FieldOfView() float64
 	SetFieldOfView(fieldOfView float64)
-	ProjectionDirection() SCNCameraProjectionDirection
-	SetProjectionDirection(projectionDirection SCNCameraProjectionDirection)
+	ProjectionDirection() CameraProjectionDirection
+	SetProjectionDirection(projectionDirection CameraProjectionDirection)
 	FocalLength() float64
 	SetFocalLength(focalLength float64)
 	SensorHeight() float64
@@ -1292,8 +1160,8 @@ type Cameraable interface {
 	WhiteBalanceTint() float64
 	SetWhiteBalanceTint(whiteBalanceTint float64)
 	ColorGrading() *MaterialProperty
-	CategoryBitMask() uint
-	SetCategoryBitMask(categoryBitMask uint)
+	CategoryBitMask() int
+	SetCategoryBitMask(categoryBitMask int)
 	FocalBlurRadius() float64
 	SetFocalBlurRadius(focalBlurRadius float64)
 	XFov() float64

@@ -5,163 +5,137 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A navigation graph for 2D game worlds that creates a minimal network for precise pathfinding around obstacles.
+// ObstacleGraph is an idiomatic wrapper over the Objective-C class GKObstacleGraph.
 //
-// ObstacleGraph wraps [raw.GKObstacleGraph] with a fluent Go API.
+// It embeds [Graph], promoting that type's methods.
+//
+// A navigation graph for 2D game worlds that creates a minimal network for precise pathfinding around obstacles.
 type ObstacleGraph struct {
-	inner *raw.GKObstacleGraph[objc.ID]
+	Graph
 }
 
-// Unwrap returns the underlying [raw.GKObstacleGraph].
-func (x *ObstacleGraph) Unwrap() *raw.GKObstacleGraph[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObstacleGraph) ID() objc.ID { return x.inner.Ptr() }
-
-// ObstacleGraphFromID adopts an existing object pointer as a ObstacleGraph (nil for 0).
+// ObstacleGraphFromID adopts an existing Objective-C object as a ObstacleGraph
+// (nil for 0), retaining it and registering a release finalizer.
 func ObstacleGraphFromID(id objc.ID) *ObstacleGraph {
 	if id == 0 {
 		return nil
 	}
-	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](id)}
+	x := &ObstacleGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph with the specified list of obstacles.
-//
-// NewObstacleGraphWithObstaclesBufferRadius creates a new [ObstacleGraph].
-func NewObstacleGraphWithObstaclesBufferRadius(obstacles *foundation.NSArray[*raw.GKPolygonObstacle], bufferRadius float32) *ObstacleGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKObstacleGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObstacles:bufferRadius:"), obstacles.Ptr(), bufferRadius)
-	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](_id)}
-}
-
-// Initializes a graph with the specified list of obstacles, using the specified node class.
-//
-// NewObstacleGraphWithObstaclesBufferRadiusNodeClass creates a new [ObstacleGraph].
-func NewObstacleGraphWithObstaclesBufferRadiusNodeClass(obstacles *foundation.NSArray[*raw.GKPolygonObstacle], bufferRadius float32, nodeClass objc.Class) *ObstacleGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKObstacleGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObstacles:bufferRadius:nodeClass:"), obstacles.Ptr(), bufferRadius, nodeClass)
-	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](_id)}
-}
-
-// Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
-//
-// ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
-func (x *ObstacleGraph) ConnectNodeUsingObstacles(node objc.ID) {
-	x.inner.ConnectNodeUsingObstacles(node)
-}
-
-// Adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the area occupied by the specified obstacles.
-//
-// ConnectNodeUsingObstaclesIgnoringObstacles calls the underlying ConnectNodeUsingObstaclesIgnoringObstacles.
-func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringObstacles(node objc.ID, obstaclesToIgnore *foundation.NSArray[*raw.GKPolygonObstacle]) {
-	x.inner.ConnectNodeUsingObstaclesIgnoringObstacles(node, obstaclesToIgnore)
-}
-
-// Adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the buffer regions around the specified obstacles.
-//
-// ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles calls the underlying ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles.
-func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node objc.ID, obstaclesBufferRadiusToIgnore *foundation.NSArray[*raw.GKPolygonObstacle]) {
-	x.inner.ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node, obstaclesBufferRadiusToIgnore)
-}
-
-// Adds new obstacles to the graph.
-//
-// AddObstacles calls the underlying AddObstacles.
-func (x *ObstacleGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
-	x.inner.AddObstacles(obstacles)
-}
-
-// Removes the specified obstacle from the graph.
-//
-// RemoveObstacles calls the underlying RemoveObstacles.
-func (x *ObstacleGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
-	x.inner.RemoveObstacles(obstacles)
-}
-
-// Removes all obstacles from the graph.
-//
-// RemoveAllObstacles calls the underlying RemoveAllObstacles.
-func (x *ObstacleGraph) RemoveAllObstacles() {
-	x.inner.RemoveAllObstacles()
-}
-
-// Returns the group of nodes corresponding to an obstacle in the graph.
-//
-// NodesForObstacle calls the underlying NodesForObstacle.
-func (x *ObstacleGraph) NodesForObstacle(obstacle *raw.GKPolygonObstacle) *foundation.NSArray[objc.ID] {
-	return x.inner.NodesForObstacle(obstacle)
-}
-
-// Prevents the specified nodes from being disconnected due to the addition of obstacles.
-//
-// LockConnectionFromNodeToNode calls the underlying LockConnectionFromNodeToNode.
-func (x *ObstacleGraph) LockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID) {
-	x.inner.LockConnectionFromNodeToNode(startNode, endNode)
-}
-
-// Allows the specified nodes to be disconnected due to the addition of obstacles.
-//
-// UnlockConnectionFromNodeToNode calls the underlying UnlockConnectionFromNodeToNode.
-func (x *ObstacleGraph) UnlockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID) {
-	x.inner.UnlockConnectionFromNodeToNode(startNode, endNode)
-}
-
-// Returns a Boolean value indicating whether the specified nodes are protected from disconnection due to the addition of obstacles.
-//
-// IsConnectionLockedFromNodeToNode calls the underlying IsConnectionLockedFromNodeToNode.
-func (x *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode objc.ID, endNode objc.ID) bool {
-	return x.inner.IsConnectionLockedFromNodeToNode(startNode, endNode)
-}
-
-// Returns the class of the specified generic index
-//
-// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
-func (x *ObstacleGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
-	return x.inner.ClassForGenericArgumentAtIndex(index)
-}
-
-// Obstacles returns the collection as a Go slice.
-func (x *ObstacleGraph) Obstacles() []*PolygonObstacle {
-	arr := x.inner.Obstacles()
-	if arr == nil {
+// obstacleGraphAdopt wraps an Objective-C object that this code just created as a
+// ObstacleGraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func obstacleGraphAdopt(id objc.ID) *ObstacleGraph {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonObstacle {
-		return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(purego.Retain(_id))}
-	})
+	x := &ObstacleGraph{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// BufferRadius calls the underlying BufferRadius.
+// NewObstacleGraphWithObstaclesBufferRadius initializes a graph with the specified list of obstacles.
+func NewObstacleGraphWithObstaclesBufferRadius(obstacles []*PolygonObstacle, bufferRadius float32) *ObstacleGraph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKObstacleGraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObstacles:bufferRadius:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }), bufferRadius)
+	return obstacleGraphAdopt(_id)
+}
+
+// ConnectNodeUsingObstacles adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
+func (x *ObstacleGraph) ConnectNodeUsingObstacles(node obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
+}
+
+// ConnectNodeUsingObstaclesIgnoringObstacles adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the area occupied by the specified obstacles.
+func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringObstacles(node obj.Object, obstaclesToIgnore []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeUsingObstacles:ignoringObstacles:"), objref.IDOf(node), purego.SliceToNSArray(obstaclesToIgnore, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
+}
+
+// ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles adds the specified node to the graph, connecting it to its nearest neighbors while ignoring the buffer regions around the specified obstacles.
+func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node obj.Object, obstaclesBufferRadiusToIgnore []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeUsingObstacles:ignoringBufferRadiusOfObstacles:"), objref.IDOf(node), purego.SliceToNSArray(obstaclesBufferRadiusToIgnore, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
+}
+
+// AddObstacles adds new obstacles to the graph.
+func (x *ObstacleGraph) AddObstacles(obstacles []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
+}
+
+// RemoveObstacles removes the specified obstacle from the graph.
+func (x *ObstacleGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
+}
+
+// RemoveAllObstacles removes all obstacles from the graph.
+func (x *ObstacleGraph) RemoveAllObstacles() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObstacles"))
+}
+
+// NodesForObstacle returns the group of nodes corresponding to an obstacle in the graph.
+func (x *ObstacleGraph) NodesForObstacle(obstacle *PolygonObstacle) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodesForObstacle:"), objref.IDOf(obstacle))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// LockConnectionFromNodeToNode prevents the specified nodes from being disconnected due to the addition of obstacles.
+func (x *ObstacleGraph) LockConnectionFromNodeToNode(startNode obj.Object, endNode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockConnectionFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
+}
+
+// UnlockConnectionFromNodeToNode allows the specified nodes to be disconnected due to the addition of obstacles.
+func (x *ObstacleGraph) UnlockConnectionFromNodeToNode(startNode obj.Object, endNode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlockConnectionFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
+}
+
+// IsConnectionLockedFromNodeToNode returns a Boolean value indicating whether the specified nodes are protected from disconnection due to the addition of obstacles.
+func (x *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode obj.Object, endNode obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnectionLockedFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
+	return _r
+}
+
+// Obstacles wraps the corresponding Objective-C method.
+//
+// Obstacles returns the collection as a Go slice.
+func (x *ObstacleGraph) Obstacles() []*PolygonObstacle {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("obstacles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
+}
+
+// BufferRadius wraps the corresponding Objective-C method.
 func (x *ObstacleGraph) BufferRadius() float32 {
-	return x.inner.BufferRadius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bufferRadius"))
+	return _r
 }
-
-func (x *ObstacleGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
 
 // ObstacleGraphable is the interface implemented by [ObstacleGraph], for mocking and DI.
 type ObstacleGraphable interface {
-	Unwrap() *raw.GKObstacleGraph[objc.ID]
-	ConnectNodeUsingObstacles(node objc.ID)
-	ConnectNodeUsingObstaclesIgnoringObstacles(node objc.ID, obstaclesToIgnore *foundation.NSArray[*raw.GKPolygonObstacle])
-	ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node objc.ID, obstaclesBufferRadiusToIgnore *foundation.NSArray[*raw.GKPolygonObstacle])
-	AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
-	RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
+	obj.Object
+	ConnectNodeUsingObstacles(node obj.Object)
+	ConnectNodeUsingObstaclesIgnoringObstacles(node obj.Object, obstaclesToIgnore []*PolygonObstacle)
+	ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node obj.Object, obstaclesBufferRadiusToIgnore []*PolygonObstacle)
+	AddObstacles(obstacles []*PolygonObstacle)
+	RemoveObstacles(obstacles []*PolygonObstacle)
 	RemoveAllObstacles()
-	NodesForObstacle(obstacle *raw.GKPolygonObstacle) *foundation.NSArray[objc.ID]
-	LockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID)
-	UnlockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID)
-	IsConnectionLockedFromNodeToNode(startNode objc.ID, endNode objc.ID) bool
-	ClassForGenericArgumentAtIndex(index uint) objc.Class
+	NodesForObstacle(obstacle *PolygonObstacle) []obj.Object
+	LockConnectionFromNodeToNode(startNode obj.Object, endNode obj.Object)
+	UnlockConnectionFromNodeToNode(startNode obj.Object, endNode obj.Object)
+	IsConnectionLockedFromNodeToNode(startNode obj.Object, endNode obj.Object) bool
 	Obstacles() []*PolygonObstacle
 	BufferRadius() float32
 }
 
 var _ ObstacleGraphable = (*ObstacleGraph)(nil)
+
+var _ GraphProvider = (*ObstacleGraph)(nil)

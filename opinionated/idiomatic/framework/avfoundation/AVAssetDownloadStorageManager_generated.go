@@ -5,61 +5,88 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages policies to automatically purge downloaded assets.
+// AssetDownloadStorageManager is an idiomatic wrapper over the Objective-C class AVAssetDownloadStorageManager.
 //
-// AssetDownloadStorageManager wraps [raw.AVAssetDownloadStorageManager] with a fluent Go API.
+// An object that manages policies to automatically purge downloaded assets.
 type AssetDownloadStorageManager struct {
-	inner *raw.AVAssetDownloadStorageManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetDownloadStorageManager].
-func (x *AssetDownloadStorageManager) Unwrap() *raw.AVAssetDownloadStorageManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetDownloadStorageManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetDownloadStorageManagerFromID adopts an existing object pointer as a AssetDownloadStorageManager (nil for 0).
+// AssetDownloadStorageManagerFromID adopts an existing Objective-C object as a AssetDownloadStorageManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetDownloadStorageManagerFromID(id objc.ID) *AssetDownloadStorageManager {
 	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadStorageManager{inner: raw.AVAssetDownloadStorageManagerFromID(id)}
+	x := &AssetDownloadStorageManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetDownloadStorageManager creates a new [AssetDownloadStorageManager].
-func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadStorageManager")), objc.RegisterName("new"))
-	return &AssetDownloadStorageManager{inner: raw.AVAssetDownloadStorageManagerFromID(_id)}
-}
-
-// Sets a storage policy for the downloaded asset.
-//
-// SetStorageManagementPolicyForURL calls the underlying SetStorageManagementPolicyForURL.
-func (x *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *raw.AVAssetDownloadStorageManagementPolicy, downloadStorageURL string) {
-	x.inner.SetStorageManagementPolicyForURL(storageManagementPolicy, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadStorageURL)))
-}
-
-// Returns the storage management policy for a downloaded asset.
-//
-// StorageManagementPolicyForURL calls the underlying StorageManagementPolicyForURL.
-func (x *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
-	_r := x.inner.StorageManagementPolicyForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadStorageURL)))
-	if _r == nil {
+// assetDownloadStorageManagerAdopt wraps an Objective-C object that this code just created as a
+// AssetDownloadStorageManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetDownloadStorageManagerAdopt(id objc.ID) *AssetDownloadStorageManager {
+	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadStorageManagementPolicy{inner: _r}
+	x := &AssetDownloadStorageManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetDownloadStorageManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetDownloadStorageManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetDownloadStorageManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadStorageManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetDownloadStorageManager creates a new AssetDownloadStorageManager.
+func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadStorageManager")), objc.RegisterName("new"))
+	return assetDownloadStorageManagerAdopt(_id)
+}
+
+// SetStorageManagementPolicyForURL sets a storage policy for the downloaded asset.
+func (x *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageManagementPolicy:forURL:"), objref.IDOf(storageManagementPolicy), rt.FileURL(downloadStorageURL))
+}
+
+// StorageManagementPolicyForURL returns the storage management policy for a downloaded asset.
+func (x *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storageManagementPolicyForURL:"), rt.FileURL(downloadStorageURL))
+	return AssetDownloadStorageManagementPolicyFromID(_r)
 }
 
 // AssetDownloadStorageManagerable is the interface implemented by [AssetDownloadStorageManager], for mocking and DI.
 type AssetDownloadStorageManagerable interface {
-	Unwrap() *raw.AVAssetDownloadStorageManager
-	SetStorageManagementPolicyForURL(storageManagementPolicy *raw.AVAssetDownloadStorageManagementPolicy, downloadStorageURL string)
+	obj.Object
+	SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string)
 	StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy
 }
 

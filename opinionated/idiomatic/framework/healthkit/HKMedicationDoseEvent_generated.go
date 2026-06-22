@@ -5,120 +5,114 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MedicationDoseEvent wraps [raw.HKMedicationDoseEvent] with a fluent Go API.
+// MedicationDoseEvent is an idiomatic wrapper over the Objective-C class HKMedicationDoseEvent.
+//
+// It embeds [Sample], promoting that type's methods.
 type MedicationDoseEvent struct {
-	inner *raw.HKMedicationDoseEvent
+	Sample
 }
 
-// Unwrap returns the underlying [raw.HKMedicationDoseEvent].
-func (x *MedicationDoseEvent) Unwrap() *raw.HKMedicationDoseEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MedicationDoseEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MedicationDoseEventFromID adopts an existing object pointer as a MedicationDoseEvent (nil for 0).
+// MedicationDoseEventFromID adopts an existing Objective-C object as a MedicationDoseEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MedicationDoseEventFromID(id objc.ID) *MedicationDoseEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MedicationDoseEvent{inner: raw.HKMedicationDoseEventFromID(id)}
+	x := &MedicationDoseEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMedicationDoseEvent creates a new [MedicationDoseEvent].
+// medicationDoseEventAdopt wraps an Objective-C object that this code just created as a
+// MedicationDoseEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func medicationDoseEventAdopt(id objc.ID) *MedicationDoseEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MedicationDoseEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMedicationDoseEvent creates a new MedicationDoseEvent.
 func NewMedicationDoseEvent() *MedicationDoseEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKMedicationDoseEvent")), objc.RegisterName("new"))
-	return &MedicationDoseEvent{inner: raw.HKMedicationDoseEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKMedicationDoseEvent")), objc.RegisterName("new"))
+	return medicationDoseEventAdopt(_id)
 }
 
-// The data type that identified the samples that store medication dose event data. You use this type when creating queries or filtering results by sample type.
-//
-// MedicationDoseEventType calls the underlying MedicationDoseEventType.
+// MedicationDoseEventType the data type that identified the samples that store medication dose event data. You use this type when creating queries or filtering results by sample type.
 func (x *MedicationDoseEvent) MedicationDoseEventType() *MedicationDoseEventType {
-	_r := x.inner.MedicationDoseEventType()
-	if _r == nil {
-		return nil
-	}
-	return &MedicationDoseEventType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("medicationDoseEventType"))
+	return MedicationDoseEventTypeFromID(_r)
 }
 
-// The scheduling context for this logged dose event. The system sets this to “HKMedicationDoseEvent/ScheduleType/asNeeded“ when the person logs a dose without a schedule and “HKMedicationDoseEvent/ScheduleType/schedule“ when a person logs a dose from a scheduled medication reminder.
-//
-// ScheduleType calls the underlying ScheduleType.
-func (x *MedicationDoseEvent) ScheduleType() HKMedicationDoseEventScheduleType {
-	return HKMedicationDoseEventScheduleType(x.inner.ScheduleType())
+// ScheduleType the scheduling context for this logged dose event. The system sets this to “HKMedicationDoseEvent/ScheduleType/asNeeded“ when the person logs a dose without a schedule and “HKMedicationDoseEvent/ScheduleType/schedule“ when a person logs a dose from a scheduled medication reminder.
+func (x *MedicationDoseEvent) ScheduleType() MedicationDoseEventScheduleType {
+	_r := objc.Send[MedicationDoseEventScheduleType](objref.IDOf(x), objc.RegisterName("scheduleType"))
+	return _r
 }
 
-// The identifier of the medication concept the system associates with this dose event. The system uses this identifier to link the dose event back to its “HKMedicationConcept“ object.
-//
-// MedicationConceptIdentifier calls the underlying MedicationConceptIdentifier.
+// MedicationConceptIdentifier the identifier of the medication concept the system associates with this dose event. The system uses this identifier to link the dose event back to its “HKMedicationConcept“ object.
 func (x *MedicationDoseEvent) MedicationConceptIdentifier() *HealthConceptIdentifier {
-	_r := x.inner.MedicationConceptIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return &HealthConceptIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("medicationConceptIdentifier"))
+	return HealthConceptIdentifierFromID(_r)
 }
 
-// The date and time the person takes the medication, if scheduled. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“ and always null for  “HKMedicationDoseEvent/ScheduleType/asNeeded“.
-//
-// ScheduledDate calls the underlying ScheduledDate.
-func (x *MedicationDoseEvent) ScheduledDate() *foundation.NSDate {
-	return x.inner.ScheduledDate()
+// ScheduledDate the date and time the person takes the medication, if scheduled. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“ and always null for  “HKMedicationDoseEvent/ScheduleType/asNeeded“.
+func (x *MedicationDoseEvent) ScheduledDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduledDate"))
+	return obj.Wrap(_r)
 }
 
-// The dose quantity a person is expected to take based on their medication schedule. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“, and always null for “HKMedicationDoseEvent/ScheduleType/asNeeded“.
-//
-// ScheduledDoseQuantity calls the underlying ScheduledDoseQuantity.
-func (x *MedicationDoseEvent) ScheduledDoseQuantity() *foundation.NSNumber {
-	return x.inner.ScheduledDoseQuantity()
+// ScheduledDoseQuantity the dose quantity a person is expected to take based on their medication schedule. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“, and always null for “HKMedicationDoseEvent/ScheduleType/asNeeded“.
+func (x *MedicationDoseEvent) ScheduledDoseQuantity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduledDoseQuantity"))
+	return obj.Wrap(_r)
 }
 
-// The dose quantity the person reports as taken. For scheduled dose events, the value defaults to the “HKMedicationDoseEvent/scheduledDoseQuantity-477ge“, when logged from a reminder. For as needed dose events, the value defaults to `1` in the medication tracking experience, but can always be edited by the person logging.
-//
-// DoseQuantity calls the underlying DoseQuantity.
-func (x *MedicationDoseEvent) DoseQuantity() *foundation.NSNumber {
-	return x.inner.DoseQuantity()
+// DoseQuantity the dose quantity the person reports as taken. For scheduled dose events, the value defaults to the “HKMedicationDoseEvent/scheduledDoseQuantity-477ge“, when logged from a reminder. For as needed dose events, the value defaults to `1` in the medication tracking experience, but can always be edited by the person logging.
+func (x *MedicationDoseEvent) DoseQuantity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doseQuantity"))
+	return obj.Wrap(_r)
 }
 
-// The log status the system assigns to this dose event.
-//
-// LogStatus calls the underlying LogStatus.
-func (x *MedicationDoseEvent) LogStatus() HKMedicationDoseEventLogStatus {
-	return HKMedicationDoseEventLogStatus(x.inner.LogStatus())
+// LogStatus the log status the system assigns to this dose event.
+func (x *MedicationDoseEvent) LogStatus() MedicationDoseEventLogStatus {
+	_r := objc.Send[MedicationDoseEventLogStatus](objref.IDOf(x), objc.RegisterName("logStatus"))
+	return _r
 }
 
-// The unit that the system associates with the medication when the person logs the dose. This ensures that the dose quantity is recorded with the correct measurement unit.
-//
-// Unit calls the underlying Unit.
+// Unit the unit that the system associates with the medication when the person logs the dose. This ensures that the dose quantity is recorded with the correct measurement unit.
 func (x *MedicationDoseEvent) Unit() *Unit {
-	_r := x.inner.Unit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unit"))
+	return UnitFromID(_r)
 }
-
-func (x *MedicationDoseEvent) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *MedicationDoseEvent) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // MedicationDoseEventable is the interface implemented by [MedicationDoseEvent], for mocking and DI.
 type MedicationDoseEventable interface {
-	Unwrap() *raw.HKMedicationDoseEvent
+	obj.Object
 	MedicationDoseEventType() *MedicationDoseEventType
-	ScheduleType() HKMedicationDoseEventScheduleType
+	ScheduleType() MedicationDoseEventScheduleType
 	MedicationConceptIdentifier() *HealthConceptIdentifier
-	ScheduledDate() *foundation.NSDate
-	ScheduledDoseQuantity() *foundation.NSNumber
-	DoseQuantity() *foundation.NSNumber
-	LogStatus() HKMedicationDoseEventLogStatus
+	ScheduledDate() obj.Object
+	ScheduledDoseQuantity() obj.Object
+	DoseQuantity() obj.Object
+	LogStatus() MedicationDoseEventLogStatus
 	Unit() *Unit
 }
 
 var _ MedicationDoseEventable = (*MedicationDoseEvent)(nil)
+
+var _ SampleProvider = (*MedicationDoseEvent)(nil)
+
+var _ ObjectProvider = (*MedicationDoseEvent)(nil)

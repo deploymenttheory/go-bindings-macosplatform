@@ -5,87 +5,112 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object wrapper, or container, for an Interface Builder nib file.
+// Nib is an idiomatic wrapper over the Objective-C class NSNib.
 //
-// Nib wraps [raw.NSNib] with a fluent Go API.
+// An object wrapper, or container, for an Interface Builder nib file.
 type Nib struct {
-	inner *raw.NSNib
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSNib].
-func (x *Nib) Unwrap() *raw.NSNib { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Nib) ID() objc.ID { return x.inner.Ptr() }
-
-// NibFromID adopts an existing object pointer as a Nib (nil for 0).
+// NibFromID adopts an existing Objective-C object as a Nib
+// (nil for 0), retaining it and registering a release finalizer.
 func NibFromID(id objc.ID) *Nib {
 	if id == 0 {
 		return nil
 	}
-	return &Nib{inner: raw.NSNibFromID(id)}
+	x := &Nib{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns an NSNib object initialized to the nib file in the specified bundle.
-//
-// NewNibWithNibNamedBundle creates a new [Nib].
-func NewNibWithNibNamedBundle(nibName *foundation.NSString, bundle *foundation.NSBundle) *Nib {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNib")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibNamed:bundle:"), nibName.Ptr(), bundle.Ptr())
-	return &Nib{inner: raw.NSNibFromID(_id)}
+// nibAdopt wraps an Objective-C object that this code just created as a
+// Nib (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nibAdopt(id objc.ID) *Nib {
+	if id == 0 {
+		return nil
+	}
+	x := &Nib{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes an instance with nib data and specified bundle for locating resources.
-//
-// NewNibWithNibDataBundle creates a new [Nib].
-func NewNibWithNibDataBundle(nibData *foundation.NSData, bundle *foundation.NSBundle) *Nib {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNib")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibData:bundle:"), nibData.Ptr(), bundle.Ptr())
-	return &Nib{inner: raw.NSNibFromID(_id)}
+// Description returns the object's -description text.
+func (x *Nib) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns an NSNib object initialized to the nib file at the specified URL.
-//
-// NewNibWithContentsOfURL creates a new [Nib].
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Nib) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Nib) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Nib) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNibWithNibNamedBundle returns an NSNib object initialized to the nib file in the specified bundle.
+func NewNibWithNibNamedBundle(nibName obj.Object, bundle obj.Object) *Nib {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibNamed:bundle:"), objref.IDOf(nibName), objref.IDOf(bundle))
+	return nibAdopt(_id)
+}
+
+// NewNibWithNibDataBundle initializes an instance with nib data and specified bundle for locating resources.
+func NewNibWithNibDataBundle(nibData obj.Object, bundle obj.Object) *Nib {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibData:bundle:"), objref.IDOf(nibData), objref.IDOf(bundle))
+	return nibAdopt(_id)
+}
+
+// NewNibWithContentsOfURL returns an NSNib object initialized to the nib file at the specified URL.
 func NewNibWithContentsOfURL(nibFileURL string) *Nib {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNib")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nibFileURL)).Ptr())
-	return &Nib{inner: raw.NSNibFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(nibFileURL))
+	return nibAdopt(_id)
 }
 
-// Instantiates objects in the nib file with the specified owner.
-//
-// InstantiateWithOwnerTopLevelObjects calls the underlying InstantiateWithOwnerTopLevelObjects.
-func (x *Nib) InstantiateWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
-	return x.inner.InstantiateWithOwnerTopLevelObjects(owner, topLevelObjects)
+// InstantiateWithOwnerTopLevelObjects instantiates objects in the nib file with the specified owner.
+func (x *Nib) InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
+	return _r
 }
 
-// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
-//
-// InstantiateNibWithExternalNameTable calls the underlying InstantiateNibWithExternalNameTable.
-func (x *Nib) InstantiateNibWithExternalNameTable(externalNameTable *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.InstantiateNibWithExternalNameTable(externalNameTable)
+// InstantiateNibWithExternalNameTable unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
+func (x *Nib) InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateNibWithExternalNameTable:"), objref.IDOf(externalNameTable))
+	return _r
 }
 
-// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
-//
-// InstantiateNibWithOwnerTopLevelObjects calls the underlying InstantiateNibWithOwnerTopLevelObjects.
-func (x *Nib) InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
-	return x.inner.InstantiateNibWithOwnerTopLevelObjects(owner, topLevelObjects)
+// InstantiateNibWithOwnerTopLevelObjects unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
+func (x *Nib) InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("instantiateNibWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
+	return _r
 }
 
 // Nibable is the interface implemented by [Nib], for mocking and DI.
 type Nibable interface {
-	Unwrap() *raw.NSNib
-	InstantiateWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool
-	InstantiateNibWithExternalNameTable(externalNameTable *foundation.NSDictionary[objc.ID, objc.ID]) bool
-	InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool
+	obj.Object
+	InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool
+	InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool
+	InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool
 }
 
 var _ Nibable = (*Nib)(nil)

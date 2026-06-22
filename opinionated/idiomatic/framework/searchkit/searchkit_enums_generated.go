@@ -8,30 +8,6 @@ import (
 	"fmt"
 )
 
-type SKDocumentIndexState int64
-
-const (
-	KSKDocumentStateNotIndexed    SKDocumentIndexState = 0
-	KSKDocumentStateIndexed       SKDocumentIndexState = 1
-	KSKDocumentStateAddPending    SKDocumentIndexState = 2
-	KSKDocumentStateDeletePending SKDocumentIndexState = 3
-)
-
-func (e SKDocumentIndexState) String() string {
-	switch e {
-	case KSKDocumentStateNotIndexed:
-		return "KSKDocumentStateNotIndexed"
-	case KSKDocumentStateIndexed:
-		return "KSKDocumentStateIndexed"
-	case KSKDocumentStateAddPending:
-		return "KSKDocumentStateAddPending"
-	case KSKDocumentStateDeletePending:
-		return "KSKDocumentStateDeletePending"
-	default:
-		return fmt.Sprintf("SKDocumentIndexState(%d)", int64(e))
-	}
-}
-
 type SKIndexType int64
 
 const (
@@ -41,6 +17,8 @@ const (
 	KSKIndexInvertedVector SKIndexType = 3
 )
 
+// String returns the SKIndexType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SKIndexType) String() string {
 	switch e {
 	case KSKIndexUnknown:
@@ -65,6 +43,8 @@ const (
 	KSKSearchPrefixRanked   SKSearchType = 3
 )
 
+// String returns the SKSearchType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e SKSearchType) String() string {
 	switch e {
 	case KSKSearchRanked:

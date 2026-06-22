@@ -5,176 +5,119 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A convolution kernel with binary weights and an input image using binary approximations.
+// CNNBinaryConvolution is an idiomatic wrapper over the Objective-C class MPSCNNBinaryConvolution.
 //
-// CNNBinaryConvolution wraps [raw.MPSCNNBinaryConvolution] with a fluent Go API.
+// CNNBinaryConvolution is an abstract base — you do not construct it directly. Construct one of [CNNBinaryFullyConnected] and pass it where a CNNBinaryConvolution is accepted.
+//
+// A convolution kernel with binary weights and an input image using binary approximations.
 type CNNBinaryConvolution struct {
-	inner *raw.MPSCNNBinaryConvolution
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSCNNBinaryConvolution].
-func (x *CNNBinaryConvolution) Unwrap() *raw.MPSCNNBinaryConvolution { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNBinaryConvolution) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNBinaryConvolutionFromID adopts an existing object pointer as a CNNBinaryConvolution (nil for 0).
+// CNNBinaryConvolutionFromID adopts an existing Objective-C object as a CNNBinaryConvolution
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNBinaryConvolutionFromID(id objc.ID) *CNNBinaryConvolution {
 	if id == 0 {
 		return nil
 	}
-	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(id)}
+	x := &CNNBinaryConvolution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a binary convolution kernel.
-//
-// NewCNNBinaryConvolutionWithDeviceConvolutionDataScaleValueTypeFlags creates a new [CNNBinaryConvolution].
-func NewCNNBinaryConvolutionWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData mpsneuralnetwork.MPSCNNConvolutionDataSource, scaleValue float32, type_ mpsneuralnetwork.MPSCNNBinaryConvolutionType, flags mpsneuralnetwork.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolution {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:"), device, convolutionData, scaleValue, type_, flags)
-	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
+// cNNBinaryConvolutionAdopt wraps an Objective-C object that this code just created as a
+// CNNBinaryConvolution (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNBinaryConvolutionAdopt(id objc.ID) *CNNBinaryConvolution {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNBinaryConvolution{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a binary convolution kernel.
-//
-// NewCNNBinaryConvolutionWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags creates a new [CNNBinaryConvolution].
-func NewCNNBinaryConvolutionWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData mpsneuralnetwork.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ mpsneuralnetwork.MPSCNNBinaryConvolutionType, flags mpsneuralnetwork.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolution {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), device, convolutionData, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
-	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewCNNBinaryConvolutionWithCoderDevice creates a new [CNNBinaryConvolution].
-func NewCNNBinaryConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNBinaryConvolution {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
 func (x *CNNBinaryConvolution) WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *CNNBinaryConvolution) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *CNNBinaryConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *CNNBinaryConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNBinaryConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBinaryConvolution {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNBinaryConvolution) WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *CNNBinaryConvolution) WithLabel(label string) *CNNBinaryConvolution {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// InputFeatureChannels calls the underlying InputFeatureChannels.
-func (x *CNNBinaryConvolution) InputFeatureChannels() uint {
-	return x.inner.InputFeatureChannels()
+// InputFeatureChannels wraps the corresponding Objective-C method.
+func (x *CNNBinaryConvolution) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+	return _r
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
-//
-// OutputFeatureChannels calls the underlying OutputFeatureChannels.
-func (x *CNNBinaryConvolution) OutputFeatureChannels() uint {
-	return x.inner.OutputFeatureChannels()
+// OutputFeatureChannels the number of feature channels per pixel in the output image.
+func (x *CNNBinaryConvolution) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+	return _r
 }
-
-func (x *CNNBinaryConvolution) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNKernel
-}
-
-func (x *CNNBinaryConvolution) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
 // CNNBinaryConvolutionable is the interface implemented by [CNNBinaryConvolution], for mocking and DI.
 type CNNBinaryConvolutionable interface {
-	Unwrap() *raw.MPSCNNBinaryConvolution
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution
 	WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryConvolution
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryConvolution
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryConvolution
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryConvolution
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBinaryConvolution
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryConvolution
-	WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryConvolution
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryConvolution
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBinaryConvolution
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBinaryConvolution
 	WithLabel(label string) *CNNBinaryConvolution
-	InputFeatureChannels() uint
-	OutputFeatureChannels() uint
+	InputFeatureChannels() int
+	OutputFeatureChannels() int
 }
 
 var _ CNNBinaryConvolutionable = (*CNNBinaryConvolution)(nil)
+
+// isCNNBinaryConvolution marks CNNBinaryConvolution — and, by embedding promotion, its
+// subclasses — as a member of the CNNBinaryConvolution hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNBinaryConvolution) isCNNBinaryConvolution() {}
+
+var _ CNNBinaryConvolutionProvider = (*CNNBinaryConvolution)(nil)
+
+var _ CNNKernelProvider = (*CNNBinaryConvolution)(nil)
+
+var _ KernelProvider = (*CNNBinaryConvolution)(nil)

@@ -4,15 +4,14 @@
 
 package printcore
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/printcore"
-)
+type PMRect struct {
+	Top    float64
+	Left   float64
+	Bottom float64
+	Right  float64
+}
 
-// PMLanguageInfo is a type alias for the raw PMLanguageInfo value-type struct.
-type PMLanguageInfo = raw.PMLanguageInfo
-
-// PMRect is a type alias for the raw PMRect value-type struct.
-type PMRect = raw.PMRect
-
-// PMResolution is a type alias for the raw PMResolution value-type struct.
-type PMResolution = raw.PMResolution
+type PMResolution struct {
+	HRes float64
+	VRes float64
+}

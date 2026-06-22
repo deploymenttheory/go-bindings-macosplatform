@@ -5,68 +5,78 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains parcel tracking information that the data detection system matches.
+// MatchShipmentTrackingNumber is an idiomatic wrapper over the Objective-C class DDMatchShipmentTrackingNumber.
 //
-// MatchShipmentTrackingNumber wraps [raw.DDMatchShipmentTrackingNumber] with a fluent Go API.
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains parcel tracking information that the data detection system matches.
 type MatchShipmentTrackingNumber struct {
-	inner *raw.DDMatchShipmentTrackingNumber
+	Match
 }
 
-// Unwrap returns the underlying [raw.DDMatchShipmentTrackingNumber].
-func (x *MatchShipmentTrackingNumber) Unwrap() *raw.DDMatchShipmentTrackingNumber { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchShipmentTrackingNumber) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchShipmentTrackingNumberFromID adopts an existing object pointer as a MatchShipmentTrackingNumber (nil for 0).
+// MatchShipmentTrackingNumberFromID adopts an existing Objective-C object as a MatchShipmentTrackingNumber
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchShipmentTrackingNumberFromID(id objc.ID) *MatchShipmentTrackingNumber {
 	if id == 0 {
 		return nil
 	}
-	return &MatchShipmentTrackingNumber{inner: raw.DDMatchShipmentTrackingNumberFromID(id)}
+	x := &MatchShipmentTrackingNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatchShipmentTrackingNumber creates a new [MatchShipmentTrackingNumber].
+// matchShipmentTrackingNumberAdopt wraps an Objective-C object that this code just created as a
+// MatchShipmentTrackingNumber (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchShipmentTrackingNumberAdopt(id objc.ID) *MatchShipmentTrackingNumber {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchShipmentTrackingNumber{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatchShipmentTrackingNumber creates a new MatchShipmentTrackingNumber.
 func NewMatchShipmentTrackingNumber() *MatchShipmentTrackingNumber {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchShipmentTrackingNumber")), objc.RegisterName("new"))
-	return &MatchShipmentTrackingNumber{inner: raw.DDMatchShipmentTrackingNumberFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchShipmentTrackingNumber")), objc.RegisterName("new"))
+	return matchShipmentTrackingNumberAdopt(_id)
 }
 
-// The name of a parcel carrier.
-//
-// Carrier calls the underlying Carrier.
+// Carrier the name of a parcel carrier.
 func (x *MatchShipmentTrackingNumber) Carrier() string {
-	_r := x.inner.Carrier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("carrier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// A string that represents a carrier’s tracking identifier for a parcel.
-//
-// TrackingNumber calls the underlying TrackingNumber.
+// TrackingNumber a string that represents a carrier’s tracking identifier for a parcel.
 func (x *MatchShipmentTrackingNumber) TrackingNumber() string {
-	_r := x.inner.TrackingNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackingNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MatchShipmentTrackingNumber) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchShipmentTrackingNumberable is the interface implemented by [MatchShipmentTrackingNumber], for mocking and DI.
 type MatchShipmentTrackingNumberable interface {
-	Unwrap() *raw.DDMatchShipmentTrackingNumber
+	obj.Object
 	Carrier() string
 	TrackingNumber() string
 }
 
 var _ MatchShipmentTrackingNumberable = (*MatchShipmentTrackingNumber)(nil)
+
+var _ MatchProvider = (*MatchShipmentTrackingNumber)(nil)

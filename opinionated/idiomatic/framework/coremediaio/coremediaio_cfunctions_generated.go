@@ -5,68 +5,16 @@
 package coremediaio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// CMIOObjectAddPropertyListener calls [raw.CMIOObjectAddPropertyListener] (C function CMIOObjectAddPropertyListener).
-func CMIOObjectAddPropertyListener(objectID uint, address *raw.CMIOObjectPropertyAddress, listener unsafe.Pointer, clientData unsafe.Pointer) int {
-	return raw.CMIOObjectAddPropertyListener(objectID, address, listener, clientData)
-}
+var _fnCMIOObjectShow func(int)
 
-// CMIOObjectAddPropertyListenerBlock calls [raw.CMIOObjectAddPropertyListenerBlock] (C function CMIOObjectAddPropertyListenerBlock).
-func CMIOObjectAddPropertyListenerBlock(objectID uint, address *raw.CMIOObjectPropertyAddress, dispatchQueue *foundation.NSObject, listener func(uint, *raw.CMIOObjectPropertyAddress)) int {
-	return raw.CMIOObjectAddPropertyListenerBlock(objectID, address, dispatchQueue, listener)
-}
-
-// CMIOObjectGetPropertyData calls [raw.CMIOObjectGetPropertyData] (C function CMIOObjectGetPropertyData).
-func CMIOObjectGetPropertyData(objectID uint, address *raw.CMIOObjectPropertyAddress, qualifierDataSize uint, qualifierData unsafe.Pointer, dataSize uint, dataUsed *uint, data unsafe.Pointer) int {
-	return raw.CMIOObjectGetPropertyData(objectID, address, qualifierDataSize, qualifierData, dataSize, dataUsed, data)
-}
-
-// CMIOObjectGetPropertyDataSize calls [raw.CMIOObjectGetPropertyDataSize] (C function CMIOObjectGetPropertyDataSize).
-func CMIOObjectGetPropertyDataSize(objectID uint, address *raw.CMIOObjectPropertyAddress, qualifierDataSize uint, qualifierData unsafe.Pointer, dataSize *uint) int {
-	return raw.CMIOObjectGetPropertyDataSize(objectID, address, qualifierDataSize, qualifierData, dataSize)
-}
-
-// CMIOObjectHasProperty calls [raw.CMIOObjectHasProperty] (C function CMIOObjectHasProperty).
-func CMIOObjectHasProperty(objectID uint, address *raw.CMIOObjectPropertyAddress) uint8 {
-	return raw.CMIOObjectHasProperty(objectID, address)
-}
-
-// CMIOObjectRemovePropertyListener calls [raw.CMIOObjectRemovePropertyListener] (C function CMIOObjectRemovePropertyListener).
-func CMIOObjectRemovePropertyListener(objectID uint, address *raw.CMIOObjectPropertyAddress, listener unsafe.Pointer, clientData unsafe.Pointer) int {
-	return raw.CMIOObjectRemovePropertyListener(objectID, address, listener, clientData)
-}
-
-// CMIOObjectRemovePropertyListenerBlock calls [raw.CMIOObjectRemovePropertyListenerBlock] (C function CMIOObjectRemovePropertyListenerBlock).
-func CMIOObjectRemovePropertyListenerBlock(objectID uint, address *raw.CMIOObjectPropertyAddress, dispatchQueue *foundation.NSObject, listener func(uint, *raw.CMIOObjectPropertyAddress)) int {
-	return raw.CMIOObjectRemovePropertyListenerBlock(objectID, address, dispatchQueue, listener)
-}
-
-// CMIOObjectSetPropertyData calls [raw.CMIOObjectSetPropertyData] (C function CMIOObjectSetPropertyData).
-func CMIOObjectSetPropertyData(objectID uint, address *raw.CMIOObjectPropertyAddress, qualifierDataSize uint, qualifierData unsafe.Pointer, dataSize uint, data unsafe.Pointer) int {
-	return raw.CMIOObjectSetPropertyData(objectID, address, qualifierDataSize, qualifierData, dataSize, data)
-}
-
-// CMIOObjectShow calls [raw.CMIOObjectShow] (C function CMIOObjectShow).
-func CMIOObjectShow(objectID uint) {
-	raw.CMIOObjectShow(objectID)
-}
-
-// CMIOStreamClockConvertHostTimeToDeviceTime calls [raw.CMIOStreamClockConvertHostTimeToDeviceTime] (C function CMIOStreamClockConvertHostTimeToDeviceTime).
-func CMIOStreamClockConvertHostTimeToDeviceTime(hostTime uint64, clock unsafe.Pointer) coremedia.CMTime {
-	return raw.CMIOStreamClockConvertHostTimeToDeviceTime(hostTime, clock)
-}
-
-// CMIOStreamClockCreate calls [raw.CMIOStreamClockCreate] (C function CMIOStreamClockCreate).
-func CMIOStreamClockCreate(allocator unsafe.Pointer, clockName unsafe.Pointer, sourceIdentifier unsafe.Pointer, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint, numberOfAveragesForRateSmoothing uint, clock unsafe.Pointer) int {
-	return raw.CMIOStreamClockCreate(allocator, clockName, sourceIdentifier, getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing, clock)
-}
-
-// CMIOStreamCopyBufferQueue calls [raw.CMIOStreamCopyBufferQueue] (C function CMIOStreamCopyBufferQueue).
-func CMIOStreamCopyBufferQueue(streamID uint, queueAlteredProc unsafe.Pointer, queueAlteredRefCon unsafe.Pointer, queue unsafe.Pointer) int {
-	return raw.CMIOStreamCopyBufferQueue(streamID, queueAlteredProc, queueAlteredRefCon, queue)
+// CMIOObjectShow calls the CoreMediaIO framework function CMIOObjectShow.
+func CMIOObjectShow(objectID int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOObjectShow == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOObjectShow, _lib, "CMIOObjectShow")
+	}
+	_fnCMIOObjectShow(objectID)
 }

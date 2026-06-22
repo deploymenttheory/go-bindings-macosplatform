@@ -5,108 +5,86 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A query that performs multiple statistics queries over a series of fixed-length time intervals.
+// StatisticsCollectionQuery is an idiomatic wrapper over the Objective-C class HKStatisticsCollectionQuery.
 //
-// StatisticsCollectionQuery wraps [raw.HKStatisticsCollectionQuery] with a fluent Go API.
+// It embeds [Query], promoting that type's methods.
+//
+// A query that performs multiple statistics queries over a series of fixed-length time intervals.
 type StatisticsCollectionQuery struct {
-	inner *raw.HKStatisticsCollectionQuery
+	Query
 }
 
-// Unwrap returns the underlying [raw.HKStatisticsCollectionQuery].
-func (x *StatisticsCollectionQuery) Unwrap() *raw.HKStatisticsCollectionQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StatisticsCollectionQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// StatisticsCollectionQueryFromID adopts an existing object pointer as a StatisticsCollectionQuery (nil for 0).
+// StatisticsCollectionQueryFromID adopts an existing Objective-C object as a StatisticsCollectionQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func StatisticsCollectionQueryFromID(id objc.ID) *StatisticsCollectionQuery {
 	if id == 0 {
 		return nil
 	}
-	return &StatisticsCollectionQuery{inner: raw.HKStatisticsCollectionQueryFromID(id)}
+	x := &StatisticsCollectionQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStatisticsCollectionQuery creates a new [StatisticsCollectionQuery].
+// statisticsCollectionQueryAdopt wraps an Objective-C object that this code just created as a
+// StatisticsCollectionQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func statisticsCollectionQueryAdopt(id objc.ID) *StatisticsCollectionQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &StatisticsCollectionQuery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewStatisticsCollectionQuery creates a new StatisticsCollectionQuery.
 func NewStatisticsCollectionQuery() *StatisticsCollectionQuery {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsCollectionQuery")), objc.RegisterName("new"))
-	return &StatisticsCollectionQuery{inner: raw.HKStatisticsCollectionQueryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKStatisticsCollectionQuery")), objc.RegisterName("new"))
+	return statisticsCollectionQueryAdopt(_id)
 }
 
-// Initializes a statistics collection query to perform the specified calculations over a set of time intervals.
-//
-// NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents creates a new [StatisticsCollectionQuery].
-func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, anchorDate *foundation.NSDate, intervalComponents *foundation.NSDateComponents) *StatisticsCollectionQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), quantityType.Ptr(), quantitySamplePredicate.Ptr(), raw.HKStatisticsOptions(options), anchorDate.Ptr(), intervalComponents.Ptr())
-	return &StatisticsCollectionQuery{inner: raw.HKStatisticsCollectionQueryFromID(_id)}
+// NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents initializes a statistics collection query to perform the specified calculations over a set of time intervals.
+func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *QuantityType, quantitySamplePredicate obj.Object, options StatisticsOptions, anchorDate obj.Object, intervalComponents obj.Object) *StatisticsCollectionQuery {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), objref.IDOf(quantityType), objref.IDOf(quantitySamplePredicate), options, objref.IDOf(anchorDate), objref.IDOf(intervalComponents))
+	return statisticsCollectionQueryAdopt(_id)
 }
 
-// The results handler for the query’s initial results.
-//
-// WithInitialResultsHandler sets the initialResultsHandler property and returns the receiver for chaining.
-func (x *StatisticsCollectionQuery) WithInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery {
-	x.inner.SetInitialResultsHandler(initialResultsHandler)
-	return x
+// AnchorDate wraps the corresponding Objective-C method.
+func (x *StatisticsCollectionQuery) AnchorDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorDate"))
+	return obj.Wrap(_r)
 }
 
-// The results handler for monitoring updates to the HealthKit store.
-//
-// WithStatisticsUpdateHandler sets the statisticsUpdateHandler property and returns the receiver for chaining.
-func (x *StatisticsCollectionQuery) WithStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery {
-	x.inner.SetStatisticsUpdateHandler(statisticsUpdateHandler)
-	return x
+// Options wraps the corresponding Objective-C method.
+func (x *StatisticsCollectionQuery) Options() StatisticsOptions {
+	_r := objc.Send[StatisticsOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
-// AnchorDate calls the underlying AnchorDate.
-func (x *StatisticsCollectionQuery) AnchorDate() *foundation.NSDate {
-	return x.inner.AnchorDate()
+// IntervalComponents wraps the corresponding Objective-C method.
+func (x *StatisticsCollectionQuery) IntervalComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intervalComponents"))
+	return obj.Wrap(_r)
 }
-
-// Options calls the underlying Options.
-func (x *StatisticsCollectionQuery) Options() HKStatisticsOptions {
-	return HKStatisticsOptions(x.inner.Options())
-}
-
-// IntervalComponents calls the underlying IntervalComponents.
-func (x *StatisticsCollectionQuery) IntervalComponents() *foundation.NSDateComponents {
-	return x.inner.IntervalComponents()
-}
-
-// SetInitialResultsHandler calls the underlying SetInitialResultsHandler.
-func (x *StatisticsCollectionQuery) SetInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) {
-	x.inner.SetInitialResultsHandler(initialResultsHandler)
-}
-
-// StatisticsUpdateHandler calls the underlying StatisticsUpdateHandler.
-func (x *StatisticsCollectionQuery) StatisticsUpdateHandler() objc.Block {
-	return x.inner.StatisticsUpdateHandler()
-}
-
-// SetStatisticsUpdateHandler calls the underlying SetStatisticsUpdateHandler.
-func (x *StatisticsCollectionQuery) SetStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) {
-	x.inner.SetStatisticsUpdateHandler(statisticsUpdateHandler)
-}
-
-func (x *StatisticsCollectionQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
 // StatisticsCollectionQueryable is the interface implemented by [StatisticsCollectionQuery], for mocking and DI.
 type StatisticsCollectionQueryable interface {
-	Unwrap() *raw.HKStatisticsCollectionQuery
-	WithInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery
-	WithStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery
-	AnchorDate() *foundation.NSDate
-	Options() HKStatisticsOptions
-	IntervalComponents() *foundation.NSDateComponents
-	SetInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer))
-	StatisticsUpdateHandler() objc.Block
-	SetStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer))
+	obj.Object
+	AnchorDate() obj.Object
+	Options() StatisticsOptions
+	IntervalComponents() obj.Object
 }
 
 var _ StatisticsCollectionQueryable = (*StatisticsCollectionQuery)(nil)
+
+var _ QueryProvider = (*StatisticsCollectionQuery)(nil)

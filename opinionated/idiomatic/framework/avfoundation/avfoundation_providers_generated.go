@@ -5,215 +5,257 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AssetProvider is implemented by Asset and any idiomatic type wrapping a AVAsset subclass.
+// AssetProvider is accepted wherever a AVAsset (or one of its subclasses) is expected.
 type AssetProvider interface {
-	asAsset() *raw.AVAsset
+	objref.Object
+	isAsset()
 }
 
-// AssetDownloadStorageManagementPolicyProvider is implemented by AssetDownloadStorageManagementPolicy and any idiomatic type wrapping a AVAssetDownloadStorageManagementPolicy subclass.
+// AssetDownloadStorageManagementPolicyProvider is accepted wherever a AVAssetDownloadStorageManagementPolicy (or one of its subclasses) is expected.
 type AssetDownloadStorageManagementPolicyProvider interface {
-	asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy
+	objref.Object
+	isAssetDownloadStorageManagementPolicy()
 }
 
-// AssetReaderOutputProvider is implemented by AssetReaderOutput and any idiomatic type wrapping a AVAssetReaderOutput subclass.
+// AssetReaderOutputProvider is accepted wherever a AVAssetReaderOutput (or one of its subclasses) is expected.
 type AssetReaderOutputProvider interface {
-	asAssetReaderOutput() *raw.AVAssetReaderOutput
+	objref.Object
+	isAssetReaderOutput()
 }
 
-// AssetResourceLoadingRequestProvider is implemented by AssetResourceLoadingRequest and any idiomatic type wrapping a AVAssetResourceLoadingRequest subclass.
+// AssetResourceLoadingRequestProvider is accepted wherever a AVAssetResourceLoadingRequest (or one of its subclasses) is expected.
 type AssetResourceLoadingRequestProvider interface {
-	asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest
+	objref.Object
+	isAssetResourceLoadingRequest()
 }
 
-// AssetTrackProvider is implemented by AssetTrack and any idiomatic type wrapping a AVAssetTrack subclass.
+// AssetTrackProvider is accepted wherever a AVAssetTrack (or one of its subclasses) is expected.
 type AssetTrackProvider interface {
-	asAssetTrack() *raw.AVAssetTrack
+	objref.Object
+	isAssetTrack()
 }
 
-// AssetTrackSegmentProvider is implemented by AssetTrackSegment and any idiomatic type wrapping a AVAssetTrackSegment subclass.
+// AssetTrackSegmentProvider is accepted wherever a AVAssetTrackSegment (or one of its subclasses) is expected.
 type AssetTrackSegmentProvider interface {
-	asAssetTrackSegment() *raw.AVAssetTrackSegment
+	objref.Object
+	isAssetTrackSegment()
 }
 
-// AudioMixProvider is implemented by AudioMix and any idiomatic type wrapping a AVAudioMix subclass.
+// AudioMixProvider is accepted wherever a AVAudioMix (or one of its subclasses) is expected.
 type AudioMixProvider interface {
-	asAudioMix() *raw.AVAudioMix
+	objref.Object
+	isAudioMix()
 }
 
-// AudioMixInputParametersProvider is implemented by AudioMixInputParameters and any idiomatic type wrapping a AVAudioMixInputParameters subclass.
+// AudioMixInputParametersProvider is accepted wherever a AVAudioMixInputParameters (or one of its subclasses) is expected.
 type AudioMixInputParametersProvider interface {
-	asAudioMixInputParameters() *raw.AVAudioMixInputParameters
+	objref.Object
+	isAudioMixInputParameters()
 }
 
-// CaptionProvider is implemented by Caption and any idiomatic type wrapping a AVCaption subclass.
+// CaptionProvider is accepted wherever a AVCaption (or one of its subclasses) is expected.
 type CaptionProvider interface {
-	asCaption() *raw.AVCaption
+	objref.Object
+	isCaption()
 }
 
-// CaptionConversionAdjustmentProvider is implemented by CaptionConversionAdjustment and any idiomatic type wrapping a AVCaptionConversionAdjustment subclass.
+// CaptionConversionAdjustmentProvider is accepted wherever a AVCaptionConversionAdjustment (or one of its subclasses) is expected.
 type CaptionConversionAdjustmentProvider interface {
-	asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment
+	objref.Object
+	isCaptionConversionAdjustment()
 }
 
-// CaptionRegionProvider is implemented by CaptionRegion and any idiomatic type wrapping a AVCaptionRegion subclass.
+// CaptionRegionProvider is accepted wherever a AVCaptionRegion (or one of its subclasses) is expected.
 type CaptionRegionProvider interface {
-	asCaptionRegion() *raw.AVCaptionRegion
+	objref.Object
+	isCaptionRegion()
 }
 
-// CaptureControlProvider is implemented by CaptureControl and any idiomatic type wrapping a AVCaptureControl subclass.
+// CaptureControlProvider is accepted wherever a AVCaptureControl (or one of its subclasses) is expected.
 type CaptureControlProvider interface {
-	asCaptureControl() *raw.AVCaptureControl
+	objref.Object
+	isCaptureControl()
 }
 
-// CaptureFileOutputProvider is implemented by CaptureFileOutput and any idiomatic type wrapping a AVCaptureFileOutput subclass.
+// CaptureFileOutputProvider is accepted wherever a AVCaptureFileOutput (or one of its subclasses) is expected.
 type CaptureFileOutputProvider interface {
-	asCaptureFileOutput() *raw.AVCaptureFileOutput
+	objref.Object
+	isCaptureFileOutput()
 }
 
-// CaptureInputProvider is implemented by CaptureInput and any idiomatic type wrapping a AVCaptureInput subclass.
+// CaptureInputProvider is accepted wherever a AVCaptureInput (or one of its subclasses) is expected.
 type CaptureInputProvider interface {
-	asCaptureInput() *raw.AVCaptureInput
+	objref.Object
+	isCaptureInput()
 }
 
-// CaptureOutputProvider is implemented by CaptureOutput and any idiomatic type wrapping a AVCaptureOutput subclass.
+// CaptureOutputProvider is accepted wherever a AVCaptureOutput (or one of its subclasses) is expected.
 type CaptureOutputProvider interface {
-	asCaptureOutput() *raw.AVCaptureOutput
+	objref.Object
+	isCaptureOutput()
 }
 
-// CompositionProvider is implemented by Composition and any idiomatic type wrapping a AVComposition subclass.
+// CompositionProvider is accepted wherever a AVComposition (or one of its subclasses) is expected.
 type CompositionProvider interface {
-	asComposition() *raw.AVComposition
+	objref.Object
+	isComposition()
 }
 
-// CompositionTrackProvider is implemented by CompositionTrack and any idiomatic type wrapping a AVCompositionTrack subclass.
+// CompositionTrackProvider is accepted wherever a AVCompositionTrack (or one of its subclasses) is expected.
 type CompositionTrackProvider interface {
-	asCompositionTrack() *raw.AVCompositionTrack
+	objref.Object
+	isCompositionTrack()
 }
 
-// ContentKeyRequestProvider is implemented by ContentKeyRequest and any idiomatic type wrapping a AVContentKeyRequest subclass.
+// ContentKeyRequestProvider is accepted wherever a AVContentKeyRequest (or one of its subclasses) is expected.
 type ContentKeyRequestProvider interface {
-	asContentKeyRequest() *raw.AVContentKeyRequest
+	objref.Object
+	isContentKeyRequest()
 }
 
-// DateRangeMetadataGroupProvider is implemented by DateRangeMetadataGroup and any idiomatic type wrapping a AVDateRangeMetadataGroup subclass.
+// DateRangeMetadataGroupProvider is accepted wherever a AVDateRangeMetadataGroup (or one of its subclasses) is expected.
 type DateRangeMetadataGroupProvider interface {
-	asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup
+	objref.Object
+	isDateRangeMetadataGroup()
 }
 
-// DelegatingPlaybackCoordinatorPlaybackControlCommandProvider is implemented by DelegatingPlaybackCoordinatorPlaybackControlCommand and any idiomatic type wrapping a AVDelegatingPlaybackCoordinatorPlaybackControlCommand subclass.
+// DelegatingPlaybackCoordinatorPlaybackControlCommandProvider is accepted wherever a AVDelegatingPlaybackCoordinatorPlaybackControlCommand (or one of its subclasses) is expected.
 type DelegatingPlaybackCoordinatorPlaybackControlCommandProvider interface {
-	asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+	objref.Object
+	isDelegatingPlaybackCoordinatorPlaybackControlCommand()
 }
 
-// FragmentedAssetMinderProvider is implemented by FragmentedAssetMinder and any idiomatic type wrapping a AVFragmentedAssetMinder subclass.
+// FragmentedAssetMinderProvider is accepted wherever a AVFragmentedAssetMinder (or one of its subclasses) is expected.
 type FragmentedAssetMinderProvider interface {
-	asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder
+	objref.Object
+	isFragmentedAssetMinder()
 }
 
-// MediaSelectionProvider is implemented by MediaSelection and any idiomatic type wrapping a AVMediaSelection subclass.
+// MediaSelectionProvider is accepted wherever a AVMediaSelection (or one of its subclasses) is expected.
 type MediaSelectionProvider interface {
-	asMediaSelection() *raw.AVMediaSelection
+	objref.Object
+	isMediaSelection()
 }
 
-// MediaSelectionGroupProvider is implemented by MediaSelectionGroup and any idiomatic type wrapping a AVMediaSelectionGroup subclass.
+// MediaSelectionGroupProvider is accepted wherever a AVMediaSelectionGroup (or one of its subclasses) is expected.
 type MediaSelectionGroupProvider interface {
-	asMediaSelectionGroup() *raw.AVMediaSelectionGroup
+	objref.Object
+	isMediaSelectionGroup()
 }
 
-// MetadataBodyObjectProvider is implemented by MetadataBodyObject and any idiomatic type wrapping a AVMetadataBodyObject subclass.
+// MetadataBodyObjectProvider is accepted wherever a AVMetadataBodyObject (or one of its subclasses) is expected.
 type MetadataBodyObjectProvider interface {
-	asMetadataBodyObject() *raw.AVMetadataBodyObject
+	objref.Object
+	isMetadataBodyObject()
 }
 
-// MetadataGroupProvider is implemented by MetadataGroup and any idiomatic type wrapping a AVMetadataGroup subclass.
+// MetadataGroupProvider is accepted wherever a AVMetadataGroup (or one of its subclasses) is expected.
 type MetadataGroupProvider interface {
-	asMetadataGroup() *raw.AVMetadataGroup
+	objref.Object
+	isMetadataGroup()
 }
 
-// MetadataItemProvider is implemented by MetadataItem and any idiomatic type wrapping a AVMetadataItem subclass.
+// MetadataItemProvider is accepted wherever a AVMetadataItem (or one of its subclasses) is expected.
 type MetadataItemProvider interface {
-	asMetadataItem() *raw.AVMetadataItem
+	objref.Object
+	isMetadataItem()
 }
 
-// MetadataObjectProvider is implemented by MetadataObject and any idiomatic type wrapping a AVMetadataObject subclass.
+// MetadataObjectProvider is accepted wherever a AVMetadataObject (or one of its subclasses) is expected.
 type MetadataObjectProvider interface {
-	asMetadataObject() *raw.AVMetadataObject
+	objref.Object
+	isMetadataObject()
 }
 
-// MetricEventProvider is implemented by MetricEvent and any idiomatic type wrapping a AVMetricEvent subclass.
+// MetricEventProvider is accepted wherever a AVMetricEvent (or one of its subclasses) is expected.
 type MetricEventProvider interface {
-	asMetricEvent() *raw.AVMetricEvent
+	objref.Object
+	isMetricEvent()
 }
 
-// MetricPlayerItemLikelyToKeepUpEventProvider is implemented by MetricPlayerItemLikelyToKeepUpEvent and any idiomatic type wrapping a AVMetricPlayerItemLikelyToKeepUpEvent subclass.
+// MetricPlayerItemLikelyToKeepUpEventProvider is accepted wherever a AVMetricPlayerItemLikelyToKeepUpEvent (or one of its subclasses) is expected.
 type MetricPlayerItemLikelyToKeepUpEventProvider interface {
-	asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent
+	objref.Object
+	isMetricPlayerItemLikelyToKeepUpEvent()
 }
 
-// MetricPlayerItemRateChangeEventProvider is implemented by MetricPlayerItemRateChangeEvent and any idiomatic type wrapping a AVMetricPlayerItemRateChangeEvent subclass.
+// MetricPlayerItemRateChangeEventProvider is accepted wherever a AVMetricPlayerItemRateChangeEvent (or one of its subclasses) is expected.
 type MetricPlayerItemRateChangeEventProvider interface {
-	asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent
+	objref.Object
+	isMetricPlayerItemRateChangeEvent()
 }
 
-// MovieProvider is implemented by Movie and any idiomatic type wrapping a AVMovie subclass.
+// MovieProvider is accepted wherever a AVMovie (or one of its subclasses) is expected.
 type MovieProvider interface {
-	asMovie() *raw.AVMovie
+	objref.Object
+	isMovie()
 }
 
-// MovieTrackProvider is implemented by MovieTrack and any idiomatic type wrapping a AVMovieTrack subclass.
+// MovieTrackProvider is accepted wherever a AVMovieTrack (or one of its subclasses) is expected.
 type MovieTrackProvider interface {
-	asMovieTrack() *raw.AVMovieTrack
+	objref.Object
+	isMovieTrack()
 }
 
-// PlaybackCoordinatorProvider is implemented by PlaybackCoordinator and any idiomatic type wrapping a AVPlaybackCoordinator subclass.
+// PlaybackCoordinatorProvider is accepted wherever a AVPlaybackCoordinator (or one of its subclasses) is expected.
 type PlaybackCoordinatorProvider interface {
-	asPlaybackCoordinator() *raw.AVPlaybackCoordinator
+	objref.Object
+	isPlaybackCoordinator()
 }
 
-// PlayerProvider is implemented by Player and any idiomatic type wrapping a AVPlayer subclass.
+// PlayerProvider is accepted wherever a AVPlayer (or one of its subclasses) is expected.
 type PlayerProvider interface {
-	asPlayer() *raw.AVPlayer
+	objref.Object
+	isPlayer()
 }
 
-// PlayerInterstitialEventMonitorProvider is implemented by PlayerInterstitialEventMonitor and any idiomatic type wrapping a AVPlayerInterstitialEventMonitor subclass.
+// PlayerInterstitialEventMonitorProvider is accepted wherever a AVPlayerInterstitialEventMonitor (or one of its subclasses) is expected.
 type PlayerInterstitialEventMonitorProvider interface {
-	asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor
+	objref.Object
+	isPlayerInterstitialEventMonitor()
 }
 
-// PlayerItemMediaDataCollectorProvider is implemented by PlayerItemMediaDataCollector and any idiomatic type wrapping a AVPlayerItemMediaDataCollector subclass.
+// PlayerItemMediaDataCollectorProvider is accepted wherever a AVPlayerItemMediaDataCollector (or one of its subclasses) is expected.
 type PlayerItemMediaDataCollectorProvider interface {
-	asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector
+	objref.Object
+	isPlayerItemMediaDataCollector()
 }
 
-// PlayerItemOutputProvider is implemented by PlayerItemOutput and any idiomatic type wrapping a AVPlayerItemOutput subclass.
+// PlayerItemOutputProvider is accepted wherever a AVPlayerItemOutput (or one of its subclasses) is expected.
 type PlayerItemOutputProvider interface {
-	asPlayerItemOutput() *raw.AVPlayerItemOutput
+	objref.Object
+	isPlayerItemOutput()
 }
 
-// TimedMetadataGroupProvider is implemented by TimedMetadataGroup and any idiomatic type wrapping a AVTimedMetadataGroup subclass.
+// TimedMetadataGroupProvider is accepted wherever a AVTimedMetadataGroup (or one of its subclasses) is expected.
 type TimedMetadataGroupProvider interface {
-	asTimedMetadataGroup() *raw.AVTimedMetadataGroup
+	objref.Object
+	isTimedMetadataGroup()
 }
 
-// URLAssetProvider is implemented by URLAsset and any idiomatic type wrapping a AVURLAsset subclass.
+// URLAssetProvider is accepted wherever a AVURLAsset (or one of its subclasses) is expected.
 type URLAssetProvider interface {
-	asURLAsset() *raw.AVURLAsset
+	objref.Object
+	isURLAsset()
 }
 
-// VideoCompositionProvider is implemented by VideoComposition and any idiomatic type wrapping a AVVideoComposition subclass.
+// VideoCompositionProvider is accepted wherever a AVVideoComposition (or one of its subclasses) is expected.
 type VideoCompositionProvider interface {
-	asVideoComposition() *raw.AVVideoComposition
+	objref.Object
+	isVideoComposition()
 }
 
-// VideoCompositionInstructionProvider is implemented by VideoCompositionInstruction and any idiomatic type wrapping a AVVideoCompositionInstruction subclass.
+// VideoCompositionInstructionProvider is accepted wherever a AVVideoCompositionInstruction (or one of its subclasses) is expected.
 type VideoCompositionInstructionProvider interface {
-	asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction
+	objref.Object
+	isVideoCompositionInstruction()
 }
 
-// VideoCompositionLayerInstructionProvider is implemented by VideoCompositionLayerInstruction and any idiomatic type wrapping a AVVideoCompositionLayerInstruction subclass.
+// VideoCompositionLayerInstructionProvider is accepted wherever a AVVideoCompositionLayerInstruction (or one of its subclasses) is expected.
 type VideoCompositionLayerInstructionProvider interface {
-	asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction
+	objref.Object
+	isVideoCompositionLayerInstruction()
 }

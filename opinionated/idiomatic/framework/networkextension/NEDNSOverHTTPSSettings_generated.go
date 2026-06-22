@@ -5,166 +5,136 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The DNS resolver settings for a DNS-over-HTTPS server.
+// NEDNSOverHTTPSSettings is an idiomatic wrapper over the Objective-C class NEDNSOverHTTPSSettings.
 //
-// NEDNSOverHTTPSSettings wraps [raw.NEDNSOverHTTPSSettings] with a fluent Go API.
+// It embeds [NEDNSSettings], promoting that type's methods.
+//
+// The DNS resolver settings for a DNS-over-HTTPS server.
 type NEDNSOverHTTPSSettings struct {
-	inner *raw.NEDNSOverHTTPSSettings
+	NEDNSSettings
 }
 
-// Unwrap returns the underlying [raw.NEDNSOverHTTPSSettings].
-func (x *NEDNSOverHTTPSSettings) Unwrap() *raw.NEDNSOverHTTPSSettings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEDNSOverHTTPSSettings) ID() objc.ID { return x.inner.Ptr() }
-
-// NEDNSOverHTTPSSettingsFromID adopts an existing object pointer as a NEDNSOverHTTPSSettings (nil for 0).
+// NEDNSOverHTTPSSettingsFromID adopts an existing Objective-C object as a NEDNSOverHTTPSSettings
+// (nil for 0), retaining it and registering a release finalizer.
 func NEDNSOverHTTPSSettingsFromID(id objc.ID) *NEDNSOverHTTPSSettings {
 	if id == 0 {
 		return nil
 	}
-	return &NEDNSOverHTTPSSettings{inner: raw.NEDNSOverHTTPSSettingsFromID(id)}
+	x := &NEDNSOverHTTPSSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEDNSOverHTTPSSettings creates a new [NEDNSOverHTTPSSettings].
+// nEDNSOverHTTPSSettingsAdopt wraps an Objective-C object that this code just created as a
+// NEDNSOverHTTPSSettings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEDNSOverHTTPSSettingsAdopt(id objc.ID) *NEDNSOverHTTPSSettings {
+	if id == 0 {
+		return nil
+	}
+	x := &NEDNSOverHTTPSSettings{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNEDNSOverHTTPSSettings creates a new NEDNSOverHTTPSSettings.
 func NewNEDNSOverHTTPSSettings() *NEDNSOverHTTPSSettings {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEDNSOverHTTPSSettings")), objc.RegisterName("new"))
-	return &NEDNSOverHTTPSSettings{inner: raw.NEDNSOverHTTPSSettingsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEDNSOverHTTPSSettings")), objc.RegisterName("new"))
+	return nEDNSOverHTTPSSettingsAdopt(_id)
 }
 
-// The URL of a DNS-over-HTTPS server.
-//
-// WithServerURL sets the serverURL property and returns the receiver for chaining.
+// WithServerURL the URL of a DNS-over-HTTPS server.
 func (x *NEDNSOverHTTPSSettings) WithServerURL(serverURL string) *NEDNSOverHTTPSSettings {
-	x.inner.SetServerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(serverURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerURL:"), rt.FileURL(serverURL))
 	return x
 }
 
-// A persistent keychain reference to a keychain item containing the certificate and private key components of the DNS client credential.
-//
-// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
-func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverHTTPSSettings {
-	x.inner.SetIdentityReference(identityReference)
+// WithIdentityReference a persistent keychain reference to a keychain item containing the certificate and private key components of the DNS client credential.
+func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference obj.Object) *NEDNSOverHTTPSSettings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 	return x
 }
 
-// A list of domain strings used to fully qualify single-label host names.
-//
-// WithSearchDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEDNSSettings.SetSearchDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEDNSSettings.SetSearchDomains(_arr)
+// WithSearchDomains a list of domain strings used to fully qualify single-label host names.
+func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...obj.Object) *NEDNSOverHTTPSSettings {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDomains:"), _arr)
 	return x
 }
 
-// The primary domain of the tunnel.
-//
-// WithDomainName sets the domainName property and returns the receiver for chaining.
+// WithDomainName the primary domain of the tunnel.
 func (x *NEDNSOverHTTPSSettings) WithDomainName(domainName string) *NEDNSOverHTTPSSettings {
-	x.inner.NEDNSSettings.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainName:"), purego.NSString(domainName))
 	return x
 }
 
-// A list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
-//
-// WithMatchDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEDNSSettings.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEDNSSettings.SetMatchDomains(_arr)
+// WithMatchDomains a list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
+func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...obj.Object) *NEDNSOverHTTPSSettings {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), _arr)
 	return x
 }
 
-// A Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
-//
-// WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
+// WithMatchDomainsNoSearch a Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
 func (x *NEDNSOverHTTPSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverHTTPSSettings {
-	x.inner.NEDNSSettings.SetMatchDomainsNoSearch(matchDomainsNoSearch)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomainsNoSearch:"), matchDomainsNoSearch)
 	return x
 }
 
-// @property allowFailover @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
-//
-// WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
+// WithAllowFailover a boolean indicating if failover to the default system resolver is permitted on resolution failure.
 func (x *NEDNSOverHTTPSSettings) WithAllowFailover(allowFailover bool) *NEDNSOverHTTPSSettings {
-	x.inner.NEDNSSettings.SetAllowFailover(allowFailover)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowFailover:"), allowFailover)
 	return x
 }
 
-// @property serverURL @discussion The URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
-//
-// ServerURL calls the underlying ServerURL.
-func (x *NEDNSOverHTTPSSettings) ServerURL() *foundation.NSURL {
-	return x.inner.ServerURL()
+// ServerURL the URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
+func (x *NEDNSOverHTTPSSettings) ServerURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverURL"))
+	return obj.Wrap(_r)
 }
 
-// SetServerURL calls the underlying SetServerURL.
+// SetServerURL wraps the corresponding Objective-C method.
 func (x *NEDNSOverHTTPSSettings) SetServerURL(serverURL string) {
-	x.inner.SetServerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(serverURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerURL:"), rt.FileURL(serverURL))
 }
 
-// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
-//
-// IdentityReference calls the underlying IdentityReference.
-func (x *NEDNSOverHTTPSSettings) IdentityReference() *foundation.NSData {
-	return x.inner.IdentityReference()
+// IdentityReference the optional certificate identity keychain reference to use as a TLS client certificate.
+func (x *NEDNSOverHTTPSSettings) IdentityReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityReference"))
+	return obj.Wrap(_r)
 }
 
-// SetIdentityReference calls the underlying SetIdentityReference.
-func (x *NEDNSOverHTTPSSettings) SetIdentityReference(identityReference *foundation.NSData) {
-	x.inner.SetIdentityReference(identityReference)
+// SetIdentityReference wraps the corresponding Objective-C method.
+func (x *NEDNSOverHTTPSSettings) SetIdentityReference(identityReference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 }
-
-func (x *NEDNSOverHTTPSSettings) asNEDNSSettings() *raw.NEDNSSettings { return &x.inner.NEDNSSettings }
 
 // NEDNSOverHTTPSSettingsable is the interface implemented by [NEDNSOverHTTPSSettings], for mocking and DI.
 type NEDNSOverHTTPSSettingsable interface {
-	Unwrap() *raw.NEDNSOverHTTPSSettings
+	obj.Object
 	WithServerURL(serverURL string) *NEDNSOverHTTPSSettings
-	WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverHTTPSSettings
-	WithSearchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings
+	WithIdentityReference(identityReference obj.Object) *NEDNSOverHTTPSSettings
+	WithSearchDomains(items ...obj.Object) *NEDNSOverHTTPSSettings
 	WithDomainName(domainName string) *NEDNSOverHTTPSSettings
-	WithMatchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings
+	WithMatchDomains(items ...obj.Object) *NEDNSOverHTTPSSettings
 	WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverHTTPSSettings
 	WithAllowFailover(allowFailover bool) *NEDNSOverHTTPSSettings
-	ServerURL() *foundation.NSURL
+	ServerURL() obj.Object
 	SetServerURL(serverURL string)
-	IdentityReference() *foundation.NSData
-	SetIdentityReference(identityReference *foundation.NSData)
+	IdentityReference() obj.Object
+	SetIdentityReference(identityReference obj.Object)
 }
 
 var _ NEDNSOverHTTPSSettingsable = (*NEDNSOverHTTPSSettings)(nil)
+
+var _ NEDNSSettingsProvider = (*NEDNSOverHTTPSSettings)(nil)

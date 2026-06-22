@@ -5,132 +5,145 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract class that defines the interface to read media samples from an asset reader.
+// AssetReaderOutput is an idiomatic wrapper over the Objective-C class AVAssetReaderOutput.
 //
-// AssetReaderOutput wraps [raw.AVAssetReaderOutput] with a fluent Go API.
+// AssetReaderOutput is an abstract base — you do not construct it directly. Construct one of [AssetReaderAudioMixOutput], [AssetReaderSampleReferenceOutput], [AssetReaderTrackOutput], [AssetReaderVideoCompositionOutput] and pass it where a AssetReaderOutput is accepted.
+//
+// An abstract class that defines the interface to read media samples from an asset reader.
 type AssetReaderOutput struct {
-	inner *raw.AVAssetReaderOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetReaderOutput].
-func (x *AssetReaderOutput) Unwrap() *raw.AVAssetReaderOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReaderOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderOutputFromID adopts an existing object pointer as a AssetReaderOutput (nil for 0).
+// AssetReaderOutputFromID adopts an existing Objective-C object as a AssetReaderOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderOutputFromID(id objc.ID) *AssetReaderOutput {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReaderOutput{inner: raw.AVAssetReaderOutputFromID(id)}
-}
-
-// NewAssetReaderOutput creates a new [AssetReaderOutput].
-func NewAssetReaderOutput() *AssetReaderOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderOutput")), objc.RegisterName("new"))
-	return &AssetReaderOutput{inner: raw.AVAssetReaderOutputFromID(_id)}
-}
-
-// A Boolean value that indicates whether the output vends copied sample data.
-//
-// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
-func (x *AssetReaderOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput {
-	x.inner.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	x := &AssetReaderOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-//
-// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
-func (x *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput {
-	x.inner.SetSupportsRandomAccess(supportsRandomAccess)
-	return x
-}
-
-// Copies the next sample buffer from the output.
-//
-// CopyNextSampleBuffer calls the underlying CopyNextSampleBuffer.
-func (x *AssetReaderOutput) CopyNextSampleBuffer() unsafe.Pointer {
-	return x.inner.CopyNextSampleBuffer()
-}
-
-// @property mediaType @abstract The media type of the samples that can be read from the receiver. @discussion The value of this property is one of the media type strings defined in AVMediaFormat.h.
-//
-// MediaType calls the underlying MediaType.
-func (x *AssetReaderOutput) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
+// assetReaderOutputAdopt wraps an Objective-C object that this code just created as a
+// AssetReaderOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderOutputAdopt(id objc.ID) *AssetReaderOutput {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &AssetReaderOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property alwaysCopiesSampleData @abstract Indicates whether or not the data in buffers gets copied before being vended to the client. @discussion When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
-//
-// AlwaysCopiesSampleData calls the underlying AlwaysCopiesSampleData.
+// Description returns the object's -description text.
+func (x *AssetReaderOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetReaderOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetReaderOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReaderOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
+func (x *AssetReaderOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
+	return x
+}
+
+// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
+func (x *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
+	return x
+}
+
+// CopyNextSampleBuffer copies the next sample buffer from the output.
+func (x *AssetReaderOutput) CopyNextSampleBuffer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyNextSampleBuffer"))
+	return obj.Wrap(_r)
+}
+
+// MediaType the media type of the samples that can be read from the receiver. The value of this property is one of the media type strings defined in AVMediaFormat.h.
+func (x *AssetReaderOutput) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
+}
+
+// AlwaysCopiesSampleData indicates whether or not the data in buffers gets copied before being vended to the client. When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
 func (x *AssetReaderOutput) AlwaysCopiesSampleData() bool {
-	return x.inner.AlwaysCopiesSampleData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysCopiesSampleData"))
+	return _r
 }
 
-// @property alwaysCopiesSampleData @abstract Indicates whether or not the data in buffers gets copied before being vended to the client. @discussion When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
-//
-// SetAlwaysCopiesSampleData calls the underlying SetAlwaysCopiesSampleData.
+// SetAlwaysCopiesSampleData indicates whether or not the data in buffers gets copied before being vended to the client. When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
 func (x *AssetReaderOutput) SetAlwaysCopiesSampleData(alwaysCopiesSampleData bool) {
-	x.inner.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
 }
 
-// Restarts reading with a new set of time ranges.
-//
-// ResetForReadingTimeRanges calls the underlying ResetForReadingTimeRanges.
-func (x *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges *foundation.NSArray[*foundation.NSValue]) {
-	x.inner.ResetForReadingTimeRanges(timeRanges)
+// ResetForReadingTimeRanges restarts reading with a new set of time ranges.
+func (x *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetForReadingTimeRanges:"), purego.SliceToNSArray(timeRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Tells the output that it’s finished reconfiguring time ranges, and allows the asset reader to advance to a completed state.
-//
-// MarkConfigurationAsFinal calls the underlying MarkConfigurationAsFinal.
+// MarkConfigurationAsFinal tells the output that it’s finished reconfiguring time ranges, and allows the asset reader to advance to a completed state.
 func (x *AssetReaderOutput) MarkConfigurationAsFinal() {
-	x.inner.MarkConfigurationAsFinal()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markConfigurationAsFinal"))
 }
 
-// @property supportsRandomAccess @abstract Indicates whether the asset reader output supports reconfiguration of the time ranges to read. @discussion When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
-//
-// SupportsRandomAccess calls the underlying SupportsRandomAccess.
+// SupportsRandomAccess indicates whether the asset reader output supports reconfiguration of the time ranges to read. When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
 func (x *AssetReaderOutput) SupportsRandomAccess() bool {
-	return x.inner.SupportsRandomAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsRandomAccess"))
+	return _r
 }
 
-// @property supportsRandomAccess @abstract Indicates whether the asset reader output supports reconfiguration of the time ranges to read. @discussion When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
-//
-// SetSupportsRandomAccess calls the underlying SetSupportsRandomAccess.
+// SetSupportsRandomAccess indicates whether the asset reader output supports reconfiguration of the time ranges to read. When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
 func (x *AssetReaderOutput) SetSupportsRandomAccess(supportsRandomAccess bool) {
-	x.inner.SetSupportsRandomAccess(supportsRandomAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
 }
-
-func (x *AssetReaderOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return x.inner }
 
 // AssetReaderOutputable is the interface implemented by [AssetReaderOutput], for mocking and DI.
 type AssetReaderOutputable interface {
-	Unwrap() *raw.AVAssetReaderOutput
+	obj.Object
 	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput
 	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput
-	CopyNextSampleBuffer() unsafe.Pointer
-	MediaType() string
+	CopyNextSampleBuffer() obj.Object
+	MediaType() obj.Object
 	AlwaysCopiesSampleData() bool
 	SetAlwaysCopiesSampleData(alwaysCopiesSampleData bool)
-	ResetForReadingTimeRanges(timeRanges *foundation.NSArray[*foundation.NSValue])
+	ResetForReadingTimeRanges(timeRanges []obj.Object)
 	MarkConfigurationAsFinal()
 	SupportsRandomAccess() bool
 	SetSupportsRandomAccess(supportsRandomAccess bool)
 }
 
 var _ AssetReaderOutputable = (*AssetReaderOutput)(nil)
+
+// isAssetReaderOutput marks AssetReaderOutput — and, by embedding promotion, its
+// subclasses — as a member of the AssetReaderOutput hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetReaderOutput) isAssetReaderOutput() {}
+
+var _ AssetReaderOutputProvider = (*AssetReaderOutput)(nil)

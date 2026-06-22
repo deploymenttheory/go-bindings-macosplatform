@@ -5,19 +5,16 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant kAudioComponentRegistrationsChangedNotification @abstract Notification generated when the set of available AudioComponents changes. @discussion Register for this notification name with `[NSNotificationCenter defaultCenter]` or `CFNotificationCenterGetLocalCenter()`, using an object of NULL.
-// KAudioComponentRegistrationsChangedNotification returns the value of the CoreFoundation reference constant kAudioComponentRegistrationsChangedNotification as an objc.ID.
-func KAudioComponentRegistrationsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.KAudioComponentRegistrationsChangedNotification())
+// KAudioComponentRegistrationsChangedNotification returns the value of the constant kAudioComponentRegistrationsChangedNotification.
+func KAudioComponentRegistrationsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kAudioComponentRegistrationsChangedNotification")))
 }
 
-// @constant kAudioComponentInstanceInvalidationNotification @abstract Notification generated when the connection to an audio unit extension process is invalidated. @discussion Register for this notification name with `[NSNotificationCenter defaultCenter]` or `CFNotificationCenterGetLocalCenter()`. The "object" refers to an AUAudioUnit instance to be observed, or can be nil to observe all instances. This notification can happen for several reasons, for instance the connection being invalidated or the process abnormally ending. There can be multiple notifications for the same event (i.e. a terminated process will also invalidate the connection). The notification's userInfo dictionary may contain the following keys, depending on the reason for the invalidation and the platform in which it's running: @"audioUnit", a NSValue whose pointerValue is the AudioUnit or AudioComponentInstance which is wrapping the AUAudioUnit communicating with the extension process. (This may be null if there is no such component instance.). For example: ``` [[NSNotificationCenter defaultCenter] addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification object:nil queue:nil usingBlock:^(NSNotification *note) { AUAudioUnit *auAudioUnit = (AUAudioUnit *)note.object; NSValue *val = note.userInfo[@"audioUnit"]; AudioUnit audioUnit = (AudioUnit)val.pointerValue; NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p", auAudioUnit, audioUnit); }]; ``` @"Service PID", a NSNumber with the process ID for the service. @"Host PID", a NSNumber with the process ID for the host. @"Executable Path", a NSString with the path for the executable that may be responsible for the abnormal exit. @"Descriptions" a NSArray of NSValues representing byte encoded AudioComponentDescriptions that may be responsible for the abnormal exit.
-// KAudioComponentInstanceInvalidationNotification returns the value of the CoreFoundation reference constant kAudioComponentInstanceInvalidationNotification as an objc.ID.
-func KAudioComponentInstanceInvalidationNotification() objc.ID {
-	return purego.CFConstant(raw.KAudioComponentInstanceInvalidationNotification())
+// KAudioComponentInstanceInvalidationNotification returns the value of the constant kAudioComponentInstanceInvalidationNotification.
+func KAudioComponentInstanceInvalidationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kAudioComponentInstanceInvalidationNotification")))
 }

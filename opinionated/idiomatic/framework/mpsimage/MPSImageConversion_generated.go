@@ -5,92 +5,86 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ImageConversion wraps [raw.MPSImageConversion] with a fluent Go API.
+// ImageConversion is an idiomatic wrapper over the Objective-C class MPSImageConversion.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageConversion struct {
-	inner *raw.MPSImageConversion
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageConversion].
-func (x *ImageConversion) Unwrap() *raw.MPSImageConversion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageConversion) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageConversionFromID adopts an existing object pointer as a ImageConversion (nil for 0).
+// ImageConversionFromID adopts an existing Objective-C object as a ImageConversion
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageConversionFromID(id objc.ID) *ImageConversion {
 	if id == 0 {
 		return nil
 	}
-	return &ImageConversion{inner: raw.MPSImageConversionFromID(id)}
+	x := &ImageConversion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Create a converter that can convert texture colorspace, alpha and texture format @discussion Create a converter that can convert texture colorspace, alpha and MTLPixelFormat. Optimized cases exist for NULL color space converter and no alpha conversion. @param      device              The device the filter will run on @param      srcAlpha            The alpha encoding for the source texture @param      destAlpha           The alpha encoding for the destination texture @param      backgroundColor     An array of CGFloats giving the background color to use when flattening an image. The color is in the source colorspace.  The length of the array is the number of color channels in the src colorspace. If NULL, use {0}. @param      conversionInfo      The colorspace conversion to use. May be NULL, indicating no color space conversions need to be done. @result     An initialized MPSImageConversion object.
-//
-// NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo creates a new [ImageConversion].
-func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(device metal.MTLDevice, srcAlpha MPSAlphaType, destAlpha MPSAlphaType, backgroundColor *float64, conversionInfo unsafe.Pointer) *ImageConversion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConversion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:srcAlpha:destAlpha:backgroundColor:conversionInfo:"), device, raw.MPSAlphaType(srcAlpha), raw.MPSAlphaType(destAlpha), backgroundColor, conversionInfo)
-	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
+// imageConversionAdopt wraps an Objective-C object that this code just created as a
+// ImageConversion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageConversionAdopt(id objc.ID) *ImageConversion {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageConversion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// NewImageConversion creates a new ImageConversion.
+func NewImageConversion() *ImageConversion {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageConversion")), objc.RegisterName("new"))
+	return imageConversionAdopt(_id)
+}
+
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageConversion) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// SourceAlpha premultiplication description for the source texture Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
+func (x *ImageConversion) SourceAlpha() AlphaType {
+	_r := objc.Send[AlphaType](objref.IDOf(x), objc.RegisterName("sourceAlpha"))
+	return _r
 }
 
-// @property   sourceAlpha @abstract   Premultiplication description for the source texture @discussion Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
-//
-// SourceAlpha calls the underlying SourceAlpha.
-func (x *ImageConversion) SourceAlpha() MPSAlphaType {
-	return MPSAlphaType(x.inner.SourceAlpha())
-}
-
-// @property   destinationAlpha @abstract   Premultiplication description for the destinationAlpha texture @discussion Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
-//
-// DestinationAlpha calls the underlying DestinationAlpha.
-func (x *ImageConversion) DestinationAlpha() MPSAlphaType {
-	return MPSAlphaType(x.inner.DestinationAlpha())
-}
-
-func (x *ImageConversion) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+// DestinationAlpha premultiplication description for the destinationAlpha texture Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
+func (x *ImageConversion) DestinationAlpha() AlphaType {
+	_r := objc.Send[AlphaType](objref.IDOf(x), objc.RegisterName("destinationAlpha"))
+	return _r
 }
 
 // ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
 type ImageConversionable interface {
-	Unwrap() *raw.MPSImageConversion
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageConversion
 	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion
-	SourceAlpha() MPSAlphaType
-	DestinationAlpha() MPSAlphaType
+	SourceAlpha() AlphaType
+	DestinationAlpha() AlphaType
 }
 
 var _ ImageConversionable = (*ImageConversion)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageConversion)(nil)

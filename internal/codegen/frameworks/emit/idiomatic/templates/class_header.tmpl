@@ -1,28 +1,66 @@
 {{/*
-    class_header.tmpl — the wrapper struct + Unwrap, plus optional ID and
-    <Type>FromID. ID exposes the raw objc.ID for C APIs taking an object/CFTypeRef
-    pointer (skipped when a generated method claims the name); FromID adopts an
-    existing pointer, mirroring the raw FromID (releasing finalizer, no retain).
+    class_header.tmpl renders a wrapper type for one Objective-C class. A
+    framework root embeds objref.Handle (which stores the Objective-C object
+    pointer) and defines the obj.Object surface — Description/IsEqual/IsKind and
+    String — that every subclass then promotes. A subclass instead embeds its
+    same-framework base type, so it inherits that surface (and the base's other
+    methods) through Go embedding.
+
+    Two factory helpers exist because the object comes from two ownership
+    situations: <T>FromID is for an object you did not create (it adds a reference
+    so Go can keep it alive), while the Adopt helper is for an object a
+    constructor just created (Go already owns that reference, so it must not add
+    another). Both arrange for the object to be released once Go stops using it.
+    They assign the promoted Handle field, which works at any embedding depth.
 */}}
-{{define "class_header"}}{{if .DocComment}}{{.DocComment}}//
-{{end}}// {{.GoTypeName}} wraps [{{.RawAlias}}.{{.ClassName}}] with a fluent Go API.
-type {{.GoTypeName}} struct {
-inner *{{.RawType}}
+{{define "class_header"}}{{.DocComment}}type {{.GoTypeName}} struct {
+{{if .EmbedsRoot}}objref.Handle{{else}}{{.BaseType}}{{end}}
 }
 
-// Unwrap returns the underlying [{{.RawAlias}}.{{.ClassName}}].
-func (x *{{.GoTypeName}}) Unwrap() *{{.RawType}} { return x.inner }
-
-{{if .EmitID}}// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *{{.GoTypeName}}) ID() objc.ID { return x.inner.Ptr() }
-
-{{end}}{{if .EmitFromID}}// {{.GoTypeName}}FromID adopts an existing object pointer as a {{.GoTypeName}} (nil for 0).
+// {{.GoTypeName}}FromID adopts an existing Objective-C object as a {{.GoTypeName}}
+// (nil for 0), retaining it and registering a release finalizer.
 func {{.GoTypeName}}FromID(id objc.ID) *{{.GoTypeName}} {
 if id == 0 {
 return nil
 }
-return &{{.GoTypeName}}{inner: {{.RawAlias}}.{{.ClassName}}FromID{{.GenericArgs}}(id)}
+x := &{{.GoTypeName}}{}
+x.Handle = objref.Wrap(purego.Retain(id))
+objref.Track(x)
+return x
 }
 
+// {{.AdoptName}} wraps an Objective-C object that this code just created as a
+// {{.GoTypeName}} (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func {{.AdoptName}}(id objc.ID) *{{.GoTypeName}} {
+if id == 0 {
+return nil
+}
+x := &{{.GoTypeName}}{}
+x.Handle = objref.Wrap(id)
+objref.Track(x)
+return x
+}
+{{if .EmbedsRoot}}
+// Description returns the object's -description text.
+func (x *{{.GoTypeName}}) Description() string {
+return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *{{.GoTypeName}}) IsEqual(other obj.Object) bool {
+return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *{{.GoTypeName}}) IsKind(className string) bool {
+return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *{{.GoTypeName}}) String() string {
+return rt.Description(objref.IDOf(x))
+}
 {{end}}{{end}}

@@ -5,101 +5,120 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
+// Formatter is an idiomatic wrapper over the Objective-C class NSFormatter.
 //
-// Formatter wraps [raw.NSFormatter] with a fluent Go API.
+// Formatter is an abstract base — you do not construct it directly. Construct one of [ByteCountFormatter], [DateComponentsFormatter], [DateFormatter], [DateIntervalFormatter], [EnergyFormatter], [ISO8601DateFormatter], [LengthFormatter], [ListFormatter], [MassFormatter], [MeasurementFormatter], [NumberFormatter], [PersonNameComponentsFormatter], [RelativeDateTimeFormatter] and pass it where a Formatter is accepted.
+//
+// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
 type Formatter struct {
-	inner *raw.NSFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFormatter].
-func (x *Formatter) Unwrap() *raw.NSFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Formatter) ID() objc.ID { return x.inner.Ptr() }
-
-// FormatterFromID adopts an existing object pointer as a Formatter (nil for 0).
+// FormatterFromID adopts an existing Objective-C object as a Formatter
+// (nil for 0), retaining it and registering a release finalizer.
 func FormatterFromID(id objc.ID) *Formatter {
 	if id == 0 {
 		return nil
 	}
-	return &Formatter{inner: raw.NSFormatterFromID(id)}
-}
-
-// NewFormatter creates a new [Formatter].
-func NewFormatter() *Formatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFormatter")), objc.RegisterName("new"))
-	return &Formatter{inner: raw.NSFormatterFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Formatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Formatter {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Formatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// StringForObjectValue calls the underlying StringForObjectValue.
-func (x *Formatter) StringForObjectValue(obj objc.ID) *String {
-	_r := x.inner.StringForObjectValue(obj)
-	if _r == nil {
+// formatterAdopt wraps an Objective-C object that this code just created as a
+// Formatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func formatterAdopt(id objc.ID) *Formatter {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &Formatter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// AttributedStringForObjectValueWithDefaultAttributes calls the underlying AttributedStringForObjectValueWithDefaultAttributes.
-func (x *Formatter) AttributedStringForObjectValueWithDefaultAttributes(obj objc.ID, attrs *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
-	_r := x.inner.AttributedStringForObjectValueWithDefaultAttributes(obj, attrs)
-	if _r == nil {
-		return nil
+// Description returns the object's -description text.
+func (x *Formatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Formatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Formatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Formatter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Formatter) WithScriptingProperties(scriptingProperties obj.Object) *Formatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// StringForObjectValue wraps the corresponding Objective-C method.
+func (x *Formatter) StringForObjectValue(obj_ obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForObjectValue:"), objref.IDOf(obj_))
+	if _r == 0 {
+		return ""
 	}
-	return &AttributedString{inner: _r}
+	return purego.GoString(_r)
 }
 
-// EditingStringForObjectValue calls the underlying EditingStringForObjectValue.
-func (x *Formatter) EditingStringForObjectValue(obj objc.ID) *String {
-	_r := x.inner.EditingStringForObjectValue(obj)
-	if _r == nil {
-		return nil
+// AttributedStringForObjectValueWithDefaultAttributes wraps the corresponding Objective-C method.
+func (x *Formatter) AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:"), objref.IDOf(obj_), objref.IDOf(attrs))
+	return AttributedStringFromID(_r)
+}
+
+// EditingStringForObjectValue wraps the corresponding Objective-C method.
+func (x *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editingStringForObjectValue:"), objref.IDOf(obj_))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// GetObjectValueForStringErrorDescription calls the underlying GetObjectValueForStringErrorDescription.
-func (x *Formatter) GetObjectValueForStringErrorDescription(obj **raw.ObjcObject, string_ string, error_ string) bool {
-	return x.inner.GetObjectValueForStringErrorDescription(obj, foundation.NSStringStringWithUTF8String(string_), foundation.NSStringStringWithUTF8String(error_))
-}
-
-// IsPartialStringValidNewEditingStringErrorDescription calls the underlying IsPartialStringValidNewEditingStringErrorDescription.
+// IsPartialStringValidNewEditingStringErrorDescription wraps the corresponding Objective-C method.
 func (x *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool {
-	return x.inner.IsPartialStringValidNewEditingStringErrorDescription(foundation.NSStringStringWithUTF8String(partialString), foundation.NSStringStringWithUTF8String(newString), foundation.NSStringStringWithUTF8String(error_))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:"), purego.NSString(partialString), purego.NSString(newString), purego.NSString(error_))
+	return _r
 }
-
-// IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription calls the underlying IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription.
-func (x *Formatter) IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription(partialStringPtr string, proposedSelRangePtr *raw.NSRange, origString string, origSelRange raw.NSRange, error_ string) bool {
-	return x.inner.IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription(foundation.NSStringStringWithUTF8String(partialStringPtr), proposedSelRangePtr, foundation.NSStringStringWithUTF8String(origString), origSelRange, foundation.NSStringStringWithUTF8String(error_))
-}
-
-func (x *Formatter) asFormatter() *raw.NSFormatter { return x.inner }
-
-func (x *Formatter) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Formatterable is the interface implemented by [Formatter], for mocking and DI.
 type Formatterable interface {
-	Unwrap() *raw.NSFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Formatter
-	StringForObjectValue(obj objc.ID) *String
-	AttributedStringForObjectValueWithDefaultAttributes(obj objc.ID, attrs *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString
-	EditingStringForObjectValue(obj objc.ID) *String
-	GetObjectValueForStringErrorDescription(obj **raw.ObjcObject, string_ string, error_ string) bool
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Formatter
+	StringForObjectValue(obj_ obj.Object) string
+	AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString
+	EditingStringForObjectValue(obj_ obj.Object) string
 	IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool
-	IsPartialStringValidProposedSelectedRangeOriginalStringOriginalSelectedRangeErrorDescription(partialStringPtr string, proposedSelRangePtr *raw.NSRange, origString string, origSelRange raw.NSRange, error_ string) bool
 }
 
 var _ Formatterable = (*Formatter)(nil)
+
+// isFormatter marks Formatter — and, by embedding promotion, its
+// subclasses — as a member of the Formatter hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Formatter) isFormatter() {}
+
+var _ FormatterProvider = (*Formatter)(nil)

@@ -5,80 +5,106 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata of speech in the audio of a speech recognition request.
+// SpeechRecognitionMetadata is an idiomatic wrapper over the Objective-C class SFSpeechRecognitionMetadata.
 //
-// SpeechRecognitionMetadata wraps [raw.SFSpeechRecognitionMetadata] with a fluent Go API.
+// The metadata of speech in the audio of a speech recognition request.
 type SpeechRecognitionMetadata struct {
-	inner *raw.SFSpeechRecognitionMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSpeechRecognitionMetadata].
-func (x *SpeechRecognitionMetadata) Unwrap() *raw.SFSpeechRecognitionMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechRecognitionMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechRecognitionMetadataFromID adopts an existing object pointer as a SpeechRecognitionMetadata (nil for 0).
+// SpeechRecognitionMetadataFromID adopts an existing Objective-C object as a SpeechRecognitionMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechRecognitionMetadataFromID(id objc.ID) *SpeechRecognitionMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechRecognitionMetadata{inner: raw.SFSpeechRecognitionMetadataFromID(id)}
+	x := &SpeechRecognitionMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechRecognitionMetadata creates a new [SpeechRecognitionMetadata].
-func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechRecognitionMetadata")), objc.RegisterName("new"))
-	return &SpeechRecognitionMetadata{inner: raw.SFSpeechRecognitionMetadataFromID(_id)}
-}
-
-// The number of words spoken per minute.
-//
-// SpeakingRate calls the underlying SpeakingRate.
-func (x *SpeechRecognitionMetadata) SpeakingRate() float64 {
-	return x.inner.SpeakingRate()
-}
-
-// The average pause duration between words, measured in seconds.
-//
-// AveragePauseDuration calls the underlying AveragePauseDuration.
-func (x *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
-	return x.inner.AveragePauseDuration()
-}
-
-// The start timestamp of speech in the audio.
-//
-// SpeechStartTimestamp calls the underlying SpeechStartTimestamp.
-func (x *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
-	return x.inner.SpeechStartTimestamp()
-}
-
-// The duration in seconds of speech in the audio.
-//
-// SpeechDuration calls the underlying SpeechDuration.
-func (x *SpeechRecognitionMetadata) SpeechDuration() float64 {
-	return x.inner.SpeechDuration()
-}
-
-// An analysis of the transcription segment's vocal properties.
-//
-// VoiceAnalytics calls the underlying VoiceAnalytics.
-func (x *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
-	_r := x.inner.VoiceAnalytics()
-	if _r == nil {
+// speechRecognitionMetadataAdopt wraps an Objective-C object that this code just created as a
+// SpeechRecognitionMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechRecognitionMetadataAdopt(id objc.ID) *SpeechRecognitionMetadata {
+	if id == 0 {
 		return nil
 	}
-	return &VoiceAnalytics{inner: _r}
+	x := &SpeechRecognitionMetadata{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechRecognitionMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechRecognitionMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechRecognitionMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechRecognitionMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechRecognitionMetadata creates a new SpeechRecognitionMetadata.
+func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognitionMetadata")), objc.RegisterName("new"))
+	return speechRecognitionMetadataAdopt(_id)
+}
+
+// SpeakingRate the number of words spoken per minute.
+func (x *SpeechRecognitionMetadata) SpeakingRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speakingRate"))
+	return _r
+}
+
+// AveragePauseDuration the average pause duration between words, measured in seconds.
+func (x *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averagePauseDuration"))
+	return _r
+}
+
+// SpeechStartTimestamp the start timestamp of speech in the audio.
+func (x *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speechStartTimestamp"))
+	return _r
+}
+
+// SpeechDuration the duration in seconds of speech in the audio.
+func (x *SpeechRecognitionMetadata) SpeechDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speechDuration"))
+	return _r
+}
+
+// VoiceAnalytics an analysis of the transcription segment's vocal properties.
+func (x *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceAnalytics"))
+	return VoiceAnalyticsFromID(_r)
 }
 
 // SpeechRecognitionMetadataable is the interface implemented by [SpeechRecognitionMetadata], for mocking and DI.
 type SpeechRecognitionMetadataable interface {
-	Unwrap() *raw.SFSpeechRecognitionMetadata
+	obj.Object
 	SpeakingRate() float64
 	AveragePauseDuration() float64
 	SpeechStartTimestamp() float64

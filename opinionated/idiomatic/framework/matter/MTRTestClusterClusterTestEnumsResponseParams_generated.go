@@ -5,69 +5,77 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestEnumsResponseParams wraps [raw.MTRTestClusterClusterTestEnumsResponseParams] with a fluent Go API.
+// MTRTestClusterClusterTestEnumsResponseParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestEnumsResponseParams.
+//
+// It embeds [MTRUnitTestingClusterTestEnumsResponseParams], promoting that type's methods.
 type MTRTestClusterClusterTestEnumsResponseParams struct {
-	inner *raw.MTRTestClusterClusterTestEnumsResponseParams
+	MTRUnitTestingClusterTestEnumsResponseParams
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestEnumsResponseParams].
-func (x *MTRTestClusterClusterTestEnumsResponseParams) Unwrap() *raw.MTRTestClusterClusterTestEnumsResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestEnumsResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestEnumsResponseParams (nil for 0).
+// MTRTestClusterClusterTestEnumsResponseParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestEnumsResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestEnumsResponseParamsFromID(id objc.ID) *MTRTestClusterClusterTestEnumsResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestEnumsResponseParams{inner: raw.MTRTestClusterClusterTestEnumsResponseParamsFromID(id)}
+	x := &MTRTestClusterClusterTestEnumsResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestEnumsResponseParams creates a new [MTRTestClusterClusterTestEnumsResponseParams].
+// mTRTestClusterClusterTestEnumsResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestEnumsResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestEnumsResponseParamsAdopt(id objc.ID) *MTRTestClusterClusterTestEnumsResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestEnumsResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRTestClusterClusterTestEnumsResponseParams creates a new MTRTestClusterClusterTestEnumsResponseParams.
 func NewMTRTestClusterClusterTestEnumsResponseParams() *MTRTestClusterClusterTestEnumsResponseParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestEnumsResponseParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestEnumsResponseParams{inner: raw.MTRTestClusterClusterTestEnumsResponseParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestEnumsResponseParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestEnumsResponseParamsAdopt(_id)
 }
 
-// WithArg1 sets the arg1 property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams {
-	x.inner.MTRUnitTestingClusterTestEnumsResponseParams.SetArg1(arg1)
+// WithArg1 sets the property and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return x
 }
 
-// WithArg2 sets the arg2 property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams {
-	x.inner.MTRUnitTestingClusterTestEnumsResponseParams.SetArg2(arg2)
+// WithArg2 sets the property and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams {
-	x.inner.MTRUnitTestingClusterTestEnumsResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTestClusterClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestEnumsResponseParams) asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams {
-	return &x.inner.MTRUnitTestingClusterTestEnumsResponseParams
 }
 
 // MTRTestClusterClusterTestEnumsResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEnumsResponseParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestEnumsResponseParams
-	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams
-	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams
+	obj.Object
+	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams
+	WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEnumsResponseParams
 }
 
 var _ MTRTestClusterClusterTestEnumsResponseParamsable = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)
+
+var _ MTRUnitTestingClusterTestEnumsResponseParamsProvider = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)

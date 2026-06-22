@@ -5,98 +5,103 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A collection of segments that connect to graph a complex curve over a linear input.
+// Envelope is an idiomatic wrapper over the Objective-C class PHASEEnvelope.
 //
-// Envelope wraps [raw.PHASEEnvelope] with a fluent Go API.
+// A collection of segments that connect to graph a complex curve over a linear input.
 type Envelope struct {
-	inner *raw.PHASEEnvelope
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEEnvelope].
-func (x *Envelope) Unwrap() *raw.PHASEEnvelope { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Envelope) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvelopeFromID adopts an existing object pointer as a Envelope (nil for 0).
+// EnvelopeFromID adopts an existing Objective-C object as a Envelope
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvelopeFromID(id objc.ID) *Envelope {
 	if id == 0 {
 		return nil
 	}
-	return &Envelope{inner: raw.PHASEEnvelopeFromID(id)}
+	x := &Envelope{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an envelope with a start point and segments.
-//
-// NewEnvelopeWithStartPointSegments creates a new [Envelope].
-func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments *foundation.NSArray[*raw.PHASEEnvelopeSegment]) *Envelope {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartPoint:segments:"), startPoint, segments.Ptr())
-	return &Envelope{inner: raw.PHASEEnvelopeFromID(_id)}
+// envelopeAdopt wraps an Objective-C object that this code just created as a
+// Envelope (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func envelopeAdopt(id objc.ID) *Envelope {
+	if id == 0 {
+		return nil
+	}
+	x := &Envelope{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Provides the height of the envelope for an input value.
-//
-// EvaluateForValue calls the underlying EvaluateForValue.
+// Description returns the object's -description text.
+func (x *Envelope) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Envelope) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Envelope) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Envelope) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEnvelope creates a new Envelope.
+func NewEnvelope() *Envelope {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelope")), objc.RegisterName("new"))
+	return envelopeAdopt(_id)
+}
+
+// EvaluateForValue provides the height of the envelope for an input value.
 func (x *Envelope) EvaluateForValue(x_ float64) float64 {
-	return x.inner.EvaluateForValue(x_)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("evaluateForValue:"), x_)
+	return _r
 }
 
-// @property startPoint @abstract The start point of the envelope.
-//
-// StartPoint calls the underlying StartPoint.
-func (x *Envelope) StartPoint() unsafe.Pointer {
-	return x.inner.StartPoint()
-}
-
-// @property segments @abstract The segments of the envelope.
+// Segments the segments of the envelope.
 //
 // Segments returns the collection as a Go slice.
 func (x *Envelope) Segments() []*EnvelopeSegment {
-	arr := x.inner.Segments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EnvelopeSegment {
-		return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvelopeSegment { return EnvelopeSegmentFromID(_id) })
 }
 
-// @property domain @abstract The domain (along the x-axis). @discussion The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
-//
-// Domain calls the underlying Domain.
+// Domain the domain (along the x-axis). The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
 func (x *Envelope) Domain() *NumericPair {
-	_r := x.inner.Domain()
-	if _r == nil {
-		return nil
-	}
-	return &NumericPair{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+	return NumericPairFromID(_r)
 }
 
-// @property range @abstract The range (along the y-axis). @discussion The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
-//
-// Range calls the underlying Range.
+// Range the range (along the y-axis). The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
 func (x *Envelope) Range() *NumericPair {
-	_r := x.inner.Range()
-	if _r == nil {
-		return nil
-	}
-	return &NumericPair{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("range"))
+	return NumericPairFromID(_r)
 }
 
 // Envelopeable is the interface implemented by [Envelope], for mocking and DI.
 type Envelopeable interface {
-	Unwrap() *raw.PHASEEnvelope
+	obj.Object
 	EvaluateForValue(x_ float64) float64
-	StartPoint() unsafe.Pointer
 	Segments() []*EnvelopeSegment
 	Domain() *NumericPair
 	Range() *NumericPair

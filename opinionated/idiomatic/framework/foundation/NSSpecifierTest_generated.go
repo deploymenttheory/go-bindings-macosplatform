@@ -5,62 +5,73 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A comparison between an object specifier and a test object.
+// SpecifierTest is an idiomatic wrapper over the Objective-C class NSSpecifierTest.
 //
-// SpecifierTest wraps [raw.NSSpecifierTest] with a fluent Go API.
+// It embeds [ScriptWhoseTest], promoting that type's methods.
+//
+// A comparison between an object specifier and a test object.
 type SpecifierTest struct {
-	inner *raw.NSSpecifierTest
+	ScriptWhoseTest
 }
 
-// Unwrap returns the underlying [raw.NSSpecifierTest].
-func (x *SpecifierTest) Unwrap() *raw.NSSpecifierTest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpecifierTest) ID() objc.ID { return x.inner.Ptr() }
-
-// SpecifierTestFromID adopts an existing object pointer as a SpecifierTest (nil for 0).
+// SpecifierTestFromID adopts an existing Objective-C object as a SpecifierTest
+// (nil for 0), retaining it and registering a release finalizer.
 func SpecifierTestFromID(id objc.ID) *SpecifierTest {
 	if id == 0 {
 		return nil
 	}
-	return &SpecifierTest{inner: raw.NSSpecifierTestFromID(id)}
-}
-
-// NewSpecifierTestWithCoder creates a new [SpecifierTest].
-func NewSpecifierTestWithCoder(inCoder *raw.NSCoder) *SpecifierTest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSpecifierTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), inCoder.Ptr())
-	return &SpecifierTest{inner: raw.NSSpecifierTestFromID(_id)}
-}
-
-// Returns a specifier test initialized to evaluate a test object against an object specified by an object specifier using a given comparison operation.
-//
-// NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject creates a new [SpecifierTest].
-func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *raw.NSScriptObjectSpecifier, compOp NSTestComparisonOperation, obj2 objc.ID) *SpecifierTest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSpecifierTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:"), obj1.Ptr(), raw.NSTestComparisonOperation(compOp), obj2)
-	return &SpecifierTest{inner: raw.NSSpecifierTestFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SpecifierTest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpecifierTest {
-	x.inner.NSScriptWhoseTest.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &SpecifierTest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *SpecifierTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return &x.inner.NSScriptWhoseTest }
+// specifierTestAdopt wraps an Objective-C object that this code just created as a
+// SpecifierTest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func specifierTestAdopt(id objc.ID) *SpecifierTest {
+	if id == 0 {
+		return nil
+	}
+	x := &SpecifierTest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *SpecifierTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTest.NSObject }
+// NewSpecifierTestWithCoder creates a new SpecifierTest.
+func NewSpecifierTestWithCoder(inCoder *Coder) *SpecifierTest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSpecifierTest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
+	return specifierTestAdopt(_id)
+}
+
+// NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject returns a specifier test initialized to evaluate a test object against an object specified by an object specifier using a given comparison operation.
+func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *ScriptObjectSpecifier, compOp TestComparisonOperation, obj2 obj.Object) *SpecifierTest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSpecifierTest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:"), objref.IDOf(obj1), compOp, objref.IDOf(obj2))
+	return specifierTestAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *SpecifierTest) WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // SpecifierTestable is the interface implemented by [SpecifierTest], for mocking and DI.
 type SpecifierTestable interface {
-	Unwrap() *raw.NSSpecifierTest
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpecifierTest
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest
 }
 
 var _ SpecifierTestable = (*SpecifierTest)(nil)
+
+var _ ScriptWhoseTestProvider = (*SpecifierTest)(nil)

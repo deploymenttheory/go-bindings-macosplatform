@@ -5,43 +5,76 @@
 package extensionkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/extensionkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that displays an interface to enable or disable the host app’s extensions.
+// AppExtensionBrowserViewController is an idiomatic wrapper over the Objective-C class EXAppExtensionBrowserViewController.
 //
-// AppExtensionBrowserViewController wraps [raw.EXAppExtensionBrowserViewController] with a fluent Go API.
+// A view controller that displays an interface to enable or disable the host app’s extensions.
 type AppExtensionBrowserViewController struct {
-	inner *raw.EXAppExtensionBrowserViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EXAppExtensionBrowserViewController].
-func (x *AppExtensionBrowserViewController) Unwrap() *raw.EXAppExtensionBrowserViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppExtensionBrowserViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// AppExtensionBrowserViewControllerFromID adopts an existing object pointer as a AppExtensionBrowserViewController (nil for 0).
+// AppExtensionBrowserViewControllerFromID adopts an existing Objective-C object as a AppExtensionBrowserViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func AppExtensionBrowserViewControllerFromID(id objc.ID) *AppExtensionBrowserViewController {
 	if id == 0 {
 		return nil
 	}
-	return &AppExtensionBrowserViewController{inner: raw.EXAppExtensionBrowserViewControllerFromID(id)}
+	x := &AppExtensionBrowserViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAppExtensionBrowserViewController creates a new [AppExtensionBrowserViewController].
+// appExtensionBrowserViewControllerAdopt wraps an Objective-C object that this code just created as a
+// AppExtensionBrowserViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appExtensionBrowserViewControllerAdopt(id objc.ID) *AppExtensionBrowserViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &AppExtensionBrowserViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppExtensionBrowserViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppExtensionBrowserViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppExtensionBrowserViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppExtensionBrowserViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAppExtensionBrowserViewController creates a new AppExtensionBrowserViewController.
 func NewAppExtensionBrowserViewController() *AppExtensionBrowserViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EXAppExtensionBrowserViewController")), objc.RegisterName("new"))
-	return &AppExtensionBrowserViewController{inner: raw.EXAppExtensionBrowserViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EXAppExtensionBrowserViewController")), objc.RegisterName("new"))
+	return appExtensionBrowserViewControllerAdopt(_id)
 }
 
 // AppExtensionBrowserViewControllerable is the interface implemented by [AppExtensionBrowserViewController], for mocking and DI.
 type AppExtensionBrowserViewControllerable interface {
-	Unwrap() *raw.EXAppExtensionBrowserViewController
+	obj.Object
 }
 
 var _ AppExtensionBrowserViewControllerable = (*AppExtensionBrowserViewController)(nil)

@@ -5,174 +5,169 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.
+// Message is an idiomatic wrapper over the Objective-C class MEMessage.
 //
-// Message wraps [raw.MEMessage] with a fluent Go API.
+// An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.
 type Message struct {
-	inner *raw.MEMessage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEMessage].
-func (x *Message) Unwrap() *raw.MEMessage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Message) ID() objc.ID { return x.inner.Ptr() }
-
-// MessageFromID adopts an existing object pointer as a Message (nil for 0).
+// MessageFromID adopts an existing Objective-C object as a Message
+// (nil for 0), retaining it and registering a release finalizer.
 func MessageFromID(id objc.ID) *Message {
 	if id == 0 {
 		return nil
 	}
-	return &Message{inner: raw.MEMessageFromID(id)}
+	x := &Message{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMessage creates a new [Message].
-func NewMessage() *Message {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessage")), objc.RegisterName("new"))
-	return &Message{inner: raw.MEMessageFromID(_id)}
-}
-
-// @brief The state of the mail message.
-//
-// State calls the underlying State.
-func (x *Message) State() MEMessageState {
-	return MEMessageState(x.inner.State())
-}
-
-// @brief The encryption state of the mail message.
-//
-// EncryptionState calls the underlying EncryptionState.
-func (x *Message) EncryptionState() MEMessageEncryptionState {
-	return MEMessageEncryptionState(x.inner.EncryptionState())
-}
-
-// @brief The subject of the mail message.
-//
-// Subject calls the underlying Subject.
-func (x *Message) Subject() string {
-	_r := x.inner.Subject()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @brief Message sender's email address.
-//
-// FromAddress calls the underlying FromAddress.
-func (x *Message) FromAddress() *EmailAddress {
-	_r := x.inner.FromAddress()
-	if _r == nil {
+// messageAdopt wraps an Objective-C object that this code just created as a
+// Message (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messageAdopt(id objc.ID) *Message {
+	if id == 0 {
 		return nil
 	}
-	return &EmailAddress{inner: _r}
+	x := &Message{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief Recipient email addresses in the "To" address field of the message.
+// Description returns the object's -description text.
+func (x *Message) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Message) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Message) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Message) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMessage creates a new Message.
+func NewMessage() *Message {
+	_id := objc.Send[objc.ID](objc.ID(_class("MEMessage")), objc.RegisterName("new"))
+	return messageAdopt(_id)
+}
+
+// State the state of the mail message.
+func (x *Message) State() MessageState {
+	_r := objc.Send[MessageState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
+}
+
+// EncryptionState the encryption state of the mail message.
+func (x *Message) EncryptionState() MessageEncryptionState {
+	_r := objc.Send[MessageEncryptionState](objref.IDOf(x), objc.RegisterName("encryptionState"))
+	return _r
+}
+
+// Subject the subject of the mail message.
+func (x *Message) Subject() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// FromAddress message sender's email address.
+func (x *Message) FromAddress() *EmailAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromAddress"))
+	return EmailAddressFromID(_r)
+}
+
+// ToAddresses recipient email addresses in the "To" address field of the message.
 //
 // ToAddresses returns the collection as a Go slice.
 func (x *Message) ToAddresses() []*EmailAddress {
-	arr := x.inner.ToAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// @brief Recipient email addresses in the "Cc" address field of the message.
+// CcAddresses recipient email addresses in the "Cc" address field of the message.
 //
 // CcAddresses returns the collection as a Go slice.
 func (x *Message) CcAddresses() []*EmailAddress {
-	arr := x.inner.CcAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ccAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// @brief Recipient email addresses in the "Bcc" address field of the message.
+// BccAddresses recipient email addresses in the "Bcc" address field of the message.
 //
 // BccAddresses returns the collection as a Go slice.
 func (x *Message) BccAddresses() []*EmailAddress {
-	arr := x.inner.BccAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bccAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// @brief Recipient email addresses in the "Reply-To" field of the message.
+// ReplyToAddresses recipient email addresses in the "Reply-To" field of the message.
 //
 // ReplyToAddresses returns the collection as a Go slice.
 func (x *Message) ReplyToAddresses() []*EmailAddress {
-	arr := x.inner.ReplyToAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// @brief An array containing all recipients of the message.
+// AllRecipientAddresses an array containing all recipients of the message.
 //
 // AllRecipientAddresses returns the collection as a Go slice.
 func (x *Message) AllRecipientAddresses() []*EmailAddress {
-	arr := x.inner.AllRecipientAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allRecipientAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// @brief The date the mail message was sent. Optionally set by the by the sender.
-//
-// DateSent calls the underlying DateSent.
-func (x *Message) DateSent() *foundation.NSDate {
-	return x.inner.DateSent()
+// DateSent the date the mail message was sent. Optionally set by the by the sender.
+func (x *Message) DateSent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateSent"))
+	return obj.Wrap(_r)
 }
 
-// @brief The date the mail message was received. Only present if the message has been received.
-//
-// DateReceived calls the underlying DateReceived.
-func (x *Message) DateReceived() *foundation.NSDate {
-	return x.inner.DateReceived()
+// DateReceived the date the mail message was received. Only present if the message has been received.
+func (x *Message) DateReceived() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateReceived"))
+	return obj.Wrap(_r)
 }
 
-// @brief The headers for the message. Might only be a subset if the full body has not been downloaded.
-//
-// Headers calls the underlying Headers.
-func (x *Message) Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Headers()
+// Headers the headers for the message. Might only be a subset if the full body has not been downloaded.
+func (x *Message) Headers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headers"))
+	return obj.Wrap(_r)
 }
 
-// @brief The full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
-//
-// RawData calls the underlying RawData.
-func (x *Message) RawData() *foundation.NSData {
-	return x.inner.RawData()
+// RawData the full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
+func (x *Message) RawData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
+	return obj.Wrap(_r)
 }
 
 // Messageable is the interface implemented by [Message], for mocking and DI.
 type Messageable interface {
-	Unwrap() *raw.MEMessage
-	State() MEMessageState
-	EncryptionState() MEMessageEncryptionState
+	obj.Object
+	State() MessageState
+	EncryptionState() MessageEncryptionState
 	Subject() string
 	FromAddress() *EmailAddress
 	ToAddresses() []*EmailAddress
@@ -180,10 +175,10 @@ type Messageable interface {
 	BccAddresses() []*EmailAddress
 	ReplyToAddresses() []*EmailAddress
 	AllRecipientAddresses() []*EmailAddress
-	DateSent() *foundation.NSDate
-	DateReceived() *foundation.NSDate
-	Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	RawData() *foundation.NSData
+	DateSent() obj.Object
+	DateReceived() obj.Object
+	Headers() obj.Object
+	RawData() obj.Object
 }
 
 var _ Messageable = (*Message)(nil)

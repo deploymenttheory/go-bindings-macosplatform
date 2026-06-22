@@ -5,306 +5,137 @@
 package pcsc
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pcsc"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// MSCBeginTransaction calls [raw.MSCBeginTransaction] (C function MSCBeginTransaction).
-func MSCBeginTransaction(pConnection *raw.MSCTokenConnection) uint32 {
-	return raw.MSCBeginTransaction(pConnection)
-}
+var _fnMSCCancelEventWait func() uint32
 
-// MSCCancelEventWait calls [raw.MSCCancelEventWait] (C function MSCCancelEventWait).
+// MSCCancelEventWait calls the PCSC framework function MSCCancelEventWait.
 func MSCCancelEventWait() uint32 {
-	return raw.MSCCancelEventWait()
+	_loadOnce.Do(_loadLibrary)
+	if _fnMSCCancelEventWait == nil {
+		ebipurego.RegisterLibFunc(&_fnMSCCancelEventWait, _lib, "MSCCancelEventWait")
+	}
+	return _fnMSCCancelEventWait()
 }
 
-// MSCChangePIN calls [raw.MSCChangePIN] (C function MSCChangePIN).
-func MSCChangePIN(pConnection *raw.MSCTokenConnection, pinNum uint8, pOldPinCode *uint8, oldPinCodeSize uint8, pNewPinCode *uint8, newPinCodeSize uint8) uint32 {
-	return raw.MSCChangePIN(pConnection, pinNum, pOldPinCode, oldPinCodeSize, pNewPinCode, newPinCodeSize)
-}
+var _fnSCardBeginTransaction func(int32) int32
 
-// MSCClearReset calls [raw.MSCClearReset] (C function MSCClearReset).
-func MSCClearReset(pConnection *raw.MSCTokenConnection) uint8 {
-	return raw.MSCClearReset(pConnection)
-}
-
-// MSCComputeCrypt calls [raw.MSCComputeCrypt] (C function MSCComputeCrypt).
-func MSCComputeCrypt(pConnection *raw.MSCTokenConnection, cryptInit *raw.MSCCryptInit, pInputData *uint8, inputDataSize uint32, pOutputData *uint8, outputDataSize *uint32) uint32 {
-	return raw.MSCComputeCrypt(pConnection, cryptInit, pInputData, inputDataSize, pOutputData, outputDataSize)
-}
-
-// MSCCreateObject calls [raw.MSCCreateObject] (C function MSCCreateObject).
-func MSCCreateObject(pConnection *raw.MSCTokenConnection, objectID string, objectSize uint32, pObjectACL *raw.MSCObjectACL) uint32 {
-	return raw.MSCCreateObject(pConnection, objectID, objectSize, pObjectACL)
-}
-
-// MSCCreatePIN calls [raw.MSCCreatePIN] (C function MSCCreatePIN).
-func MSCCreatePIN(pConnection *raw.MSCTokenConnection, pinNum uint8, pinAttempts uint8, pPinCode *uint8, pinCodeSize uint32, pUnblockCode *uint8, unblockCodeSize uint8) uint32 {
-	return raw.MSCCreatePIN(pConnection, pinNum, pinAttempts, pPinCode, pinCodeSize, pUnblockCode, unblockCodeSize)
-}
-
-// MSCDeleteObject calls [raw.MSCDeleteObject] (C function MSCDeleteObject).
-func MSCDeleteObject(pConnection *raw.MSCTokenConnection, objectID string, zeroFlag uint8) uint32 {
-	return raw.MSCDeleteObject(pConnection, objectID, zeroFlag)
-}
-
-// MSCEndTransaction calls [raw.MSCEndTransaction] (C function MSCEndTransaction).
-func MSCEndTransaction(pConnection *raw.MSCTokenConnection, endAction uint32) uint32 {
-	return raw.MSCEndTransaction(pConnection, endAction)
-}
-
-// MSCEstablishConnection calls [raw.MSCEstablishConnection] (C function MSCEstablishConnection).
-func MSCEstablishConnection(tokenStruct *raw.MSCTokenInfo, sharingMode uint32, applicationName *uint8, nameSize uint32, pConnection *raw.MSCTokenConnection) uint32 {
-	return raw.MSCEstablishConnection(tokenStruct, sharingMode, applicationName, nameSize, pConnection)
-}
-
-// MSCExportKey calls [raw.MSCExportKey] (C function MSCExportKey).
-func MSCExportKey(pConnection *raw.MSCTokenConnection, keyNum uint8, pKeyBlob *uint8, keyBlobSize *uint32, pAddParams unsafe.Pointer, addParamsSize uint8) uint32 {
-	return raw.MSCExportKey(pConnection, keyNum, pKeyBlob, keyBlobSize, pAddParams, addParamsSize)
-}
-
-// MSCExtAuthenticate calls [raw.MSCExtAuthenticate] (C function MSCExtAuthenticate).
-func MSCExtAuthenticate(pConnection *raw.MSCTokenConnection, keyNum uint8, cipherMode uint8, cipherDirection uint8, pData *uint8, dataSize uint32) uint32 {
-	return raw.MSCExtAuthenticate(pConnection, keyNum, cipherMode, cipherDirection, pData, dataSize)
-}
-
-// MSCExtendedFeature calls [raw.MSCExtendedFeature] (C function MSCExtendedFeature).
-func MSCExtendedFeature(pConnection *raw.MSCTokenConnection, extFeature uint32, outData *uint8, outLength uint32, inData *uint8, inLength *uint32) uint32 {
-	return raw.MSCExtendedFeature(pConnection, extFeature, outData, outLength, inData, inLength)
-}
-
-// MSCGenerateKeys calls [raw.MSCGenerateKeys] (C function MSCGenerateKeys).
-func MSCGenerateKeys(pConnection *raw.MSCTokenConnection, prvKeyNum uint8, pubKeyNum uint8, pParams *raw.MSCGenKeyParams) uint32 {
-	return raw.MSCGenerateKeys(pConnection, prvKeyNum, pubKeyNum, pParams)
-}
-
-// MSCGetCapabilities calls [raw.MSCGetCapabilities] (C function MSCGetCapabilities).
-func MSCGetCapabilities(pConnection *raw.MSCTokenConnection, tag uint32, value *uint8, length *uint32) uint32 {
-	return raw.MSCGetCapabilities(pConnection, tag, value, length)
-}
-
-// MSCGetChallenge calls [raw.MSCGetChallenge] (C function MSCGetChallenge).
-func MSCGetChallenge(pConnection *raw.MSCTokenConnection, pSeed *uint8, seedSize uint16, pRandomData *uint8, randomDataSize uint16) uint32 {
-	return raw.MSCGetChallenge(pConnection, pSeed, seedSize, pRandomData, randomDataSize)
-}
-
-// MSCGetKeyAttributes calls [raw.MSCGetKeyAttributes] (C function MSCGetKeyAttributes).
-func MSCGetKeyAttributes(pConnection *raw.MSCTokenConnection, keyNumber uint8, pKeyInfo *raw.MSCKeyInfo) uint32 {
-	return raw.MSCGetKeyAttributes(pConnection, keyNumber, pKeyInfo)
-}
-
-// MSCGetObjectAttributes calls [raw.MSCGetObjectAttributes] (C function MSCGetObjectAttributes).
-func MSCGetObjectAttributes(pConnection *raw.MSCTokenConnection, objectID string, pObjectInfo *raw.MSCObjectInfo) uint32 {
-	return raw.MSCGetObjectAttributes(pConnection, objectID, pObjectInfo)
-}
-
-// MSCGetStatus calls [raw.MSCGetStatus] (C function MSCGetStatus).
-func MSCGetStatus(pConnection *raw.MSCTokenConnection, pStatusInfo *raw.MSCStatusInfo) uint32 {
-	return raw.MSCGetStatus(pConnection, pStatusInfo)
-}
-
-// MSCImportKey calls [raw.MSCImportKey] (C function MSCImportKey).
-func MSCImportKey(pConnection *raw.MSCTokenConnection, keyNum uint8, pKeyACL *raw.MSCKeyACL, pKeyBlob *uint8, keyBlobSize uint32, keyPolicy *raw.MSCKeyPolicy, pAddParams unsafe.Pointer, addParamsSize uint8) uint32 {
-	return raw.MSCImportKey(pConnection, keyNum, pKeyACL, pKeyBlob, keyBlobSize, keyPolicy, pAddParams, addParamsSize)
-}
-
-// MSCIsTokenChanged calls [raw.MSCIsTokenChanged] (C function MSCIsTokenChanged).
-func MSCIsTokenChanged(pConnection *raw.MSCTokenConnection) uint8 {
-	return raw.MSCIsTokenChanged(pConnection)
-}
-
-// MSCIsTokenKnown calls [raw.MSCIsTokenKnown] (C function MSCIsTokenKnown).
-func MSCIsTokenKnown(pConnection *raw.MSCTokenConnection) uint8 {
-	return raw.MSCIsTokenKnown(pConnection)
-}
-
-// MSCIsTokenMoved calls [raw.MSCIsTokenMoved] (C function MSCIsTokenMoved).
-func MSCIsTokenMoved(pConnection *raw.MSCTokenConnection) uint8 {
-	return raw.MSCIsTokenMoved(pConnection)
-}
-
-// MSCIsTokenReset calls [raw.MSCIsTokenReset] (C function MSCIsTokenReset).
-func MSCIsTokenReset(pConnection *raw.MSCTokenConnection) uint8 {
-	return raw.MSCIsTokenReset(pConnection)
-}
-
-// MSCListKeys calls [raw.MSCListKeys] (C function MSCListKeys).
-func MSCListKeys(pConnection *raw.MSCTokenConnection, seqOption uint8, pKeyInfo *raw.MSCKeyInfo) uint32 {
-	return raw.MSCListKeys(pConnection, seqOption, pKeyInfo)
-}
-
-// MSCListObjects calls [raw.MSCListObjects] (C function MSCListObjects).
-func MSCListObjects(pConnection *raw.MSCTokenConnection, seqOption uint8, pObjectInfo *raw.MSCObjectInfo) uint32 {
-	return raw.MSCListObjects(pConnection, seqOption, pObjectInfo)
-}
-
-// MSCListPINs calls [raw.MSCListPINs] (C function MSCListPINs).
-func MSCListPINs(pConnection *raw.MSCTokenConnection, pPinBitMask *uint16) uint32 {
-	return raw.MSCListPINs(pConnection, pPinBitMask)
-}
-
-// MSCListTokens calls [raw.MSCListTokens] (C function MSCListTokens).
-func MSCListTokens(listScope uint32, tokenArray *raw.MSCTokenInfo, arrayLength *uint32) uint32 {
-	return raw.MSCListTokens(listScope, tokenArray, arrayLength)
-}
-
-// MSCLogoutAll calls [raw.MSCLogoutAll] (C function MSCLogoutAll).
-func MSCLogoutAll(pConnection *raw.MSCTokenConnection) uint32 {
-	return raw.MSCLogoutAll(pConnection)
-}
-
-// MSCReadAllocateObject calls [raw.MSCReadAllocateObject] (C function MSCReadAllocateObject).
-func MSCReadAllocateObject(pConnection *raw.MSCTokenConnection, objectID string, pOutputData **uint8, dataSize *uint32, rwCallback unsafe.Pointer, addParams unsafe.Pointer) uint32 {
-	return raw.MSCReadAllocateObject(pConnection, objectID, pOutputData, dataSize, rwCallback, addParams)
-}
-
-// MSCReadObject calls [raw.MSCReadObject] (C function MSCReadObject).
-func MSCReadObject(pConnection *raw.MSCTokenConnection, objectID string, offset uint32, pOutputData *uint8, dataSize uint32, rwCallback unsafe.Pointer, addParams unsafe.Pointer) uint32 {
-	return raw.MSCReadObject(pConnection, objectID, offset, pOutputData, dataSize, rwCallback, addParams)
-}
-
-// MSCReleaseConnection calls [raw.MSCReleaseConnection] (C function MSCReleaseConnection).
-func MSCReleaseConnection(pConnection *raw.MSCTokenConnection, endAction uint32) uint32 {
-	return raw.MSCReleaseConnection(pConnection, endAction)
-}
-
-// MSCUnblockPIN calls [raw.MSCUnblockPIN] (C function MSCUnblockPIN).
-func MSCUnblockPIN(pConnection *raw.MSCTokenConnection, pinNum uint8, pUnblockCode *uint8, unblockCodeSize uint32) uint32 {
-	return raw.MSCUnblockPIN(pConnection, pinNum, pUnblockCode, unblockCodeSize)
-}
-
-// MSCVerifyPIN calls [raw.MSCVerifyPIN] (C function MSCVerifyPIN).
-func MSCVerifyPIN(pConnection *raw.MSCTokenConnection, pinNum uint8, pPinCode *uint8, pinCodeSize uint32) uint32 {
-	return raw.MSCVerifyPIN(pConnection, pinNum, pPinCode, pinCodeSize)
-}
-
-// MSCWaitForTokenEvent calls [raw.MSCWaitForTokenEvent] (C function MSCWaitForTokenEvent).
-func MSCWaitForTokenEvent(tokenArray *raw.MSCTokenInfo, arraySize uint32, timeoutValue uint32) uint32 {
-	return raw.MSCWaitForTokenEvent(tokenArray, arraySize, timeoutValue)
-}
-
-// MSCWriteFramework calls [raw.MSCWriteFramework] (C function MSCWriteFramework).
-func MSCWriteFramework(pConnection *raw.MSCTokenConnection, pInitParams *raw.MSCInitTokenParams) uint32 {
-	return raw.MSCWriteFramework(pConnection, pInitParams)
-}
-
-// MSCWriteObject calls [raw.MSCWriteObject] (C function MSCWriteObject).
-func MSCWriteObject(pConnection *raw.MSCTokenConnection, objectID string, offset uint32, pInputData *uint8, dataSize uint32, rwCallback unsafe.Pointer, addParams unsafe.Pointer) uint32 {
-	return raw.MSCWriteObject(pConnection, objectID, offset, pInputData, dataSize, rwCallback, addParams)
-}
-
-// SCardBeginTransaction calls [raw.SCardBeginTransaction] (C function SCardBeginTransaction).
+// SCardBeginTransaction calls the PCSC framework function SCardBeginTransaction.
 func SCardBeginTransaction(hCard int32) int32 {
-	return raw.SCardBeginTransaction(hCard)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardBeginTransaction == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardBeginTransaction, _lib, "SCardBeginTransaction")
+	}
+	return _fnSCardBeginTransaction(hCard)
 }
 
-// SCardCancel calls [raw.SCardCancel] (C function SCardCancel).
+var _fnSCardCancel func(int32) int32
+
+// SCardCancel calls the PCSC framework function SCardCancel.
 func SCardCancel(hContext int32) int32 {
-	return raw.SCardCancel(hContext)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardCancel == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardCancel, _lib, "SCardCancel")
+	}
+	return _fnSCardCancel(hContext)
 }
 
-// SCardCancelTransaction calls [raw.SCardCancelTransaction] (C function SCardCancelTransaction).
+var _fnSCardCancelTransaction func(int32) int32
+
+// SCardCancelTransaction calls the PCSC framework function SCardCancelTransaction.
 func SCardCancelTransaction(hCard int32) int32 {
-	return raw.SCardCancelTransaction(hCard)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardCancelTransaction == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardCancelTransaction, _lib, "SCardCancelTransaction")
+	}
+	return _fnSCardCancelTransaction(hCard)
 }
 
-// SCardConnect calls [raw.SCardConnect] (C function SCardConnect).
-func SCardConnect(hContext int32, szReader string, dwShareMode uint32, dwPreferredProtocols uint32, phCard *int32, pdwActiveProtocol *uint32) int32 {
-	return raw.SCardConnect(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
-}
+var _fnSCardDisconnect func(int32, uint32) int32
 
-// SCardControl calls [raw.SCardControl] (C function SCardControl).
-func SCardControl(hCard int32, pbSendBuffer unsafe.Pointer, cbSendLength uint32, pbRecvBuffer unsafe.Pointer, pcbRecvLength *uint32) int32 {
-	return raw.SCardControl(hCard, pbSendBuffer, cbSendLength, pbRecvBuffer, pcbRecvLength)
-}
-
-// SCardControl132 calls [raw.SCardControl132] (C function SCardControl132).
-func SCardControl132(hCard int32, dwControlCode uint32, pbSendBuffer unsafe.Pointer, cbSendLength uint32, pbRecvBuffer unsafe.Pointer, cbRecvLength uint32, lpBytesReturned *uint32) int32 {
-	return raw.SCardControl132(hCard, dwControlCode, pbSendBuffer, cbSendLength, pbRecvBuffer, cbRecvLength, lpBytesReturned)
-}
-
-// SCardDisconnect calls [raw.SCardDisconnect] (C function SCardDisconnect).
+// SCardDisconnect calls the PCSC framework function SCardDisconnect.
 func SCardDisconnect(hCard int32, dwDisposition uint32) int32 {
-	return raw.SCardDisconnect(hCard, dwDisposition)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardDisconnect == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardDisconnect, _lib, "SCardDisconnect")
+	}
+	return _fnSCardDisconnect(hCard, dwDisposition)
 }
 
-// SCardEndTransaction calls [raw.SCardEndTransaction] (C function SCardEndTransaction).
+var _fnSCardEndTransaction func(int32, uint32) int32
+
+// SCardEndTransaction calls the PCSC framework function SCardEndTransaction.
 func SCardEndTransaction(hCard int32, dwDisposition uint32) int32 {
-	return raw.SCardEndTransaction(hCard, dwDisposition)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardEndTransaction == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardEndTransaction, _lib, "SCardEndTransaction")
+	}
+	return _fnSCardEndTransaction(hCard, dwDisposition)
 }
 
-// SCardEstablishContext calls [raw.SCardEstablishContext] (C function SCardEstablishContext).
-func SCardEstablishContext(dwScope uint32, pvReserved1 unsafe.Pointer, pvReserved2 unsafe.Pointer, phContext *int32) int32 {
-	return raw.SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext)
-}
+var _fnSCardIsValidContext func(int32) int32
 
-// SCardGetAttrib calls [raw.SCardGetAttrib] (C function SCardGetAttrib).
-func SCardGetAttrib(hCard int32, dwAttrId uint32, pbAttr *uint8, pcbAttrLen *uint32) int32 {
-	return raw.SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen)
-}
-
-// SCardGetStatusChange calls [raw.SCardGetStatusChange] (C function SCardGetStatusChange).
-func SCardGetStatusChange(hContext int32, dwTimeout uint32, rgReaderStates *raw.SCARD_READERSTATE_A, cReaders uint32) int32 {
-	return raw.SCardGetStatusChange(hContext, dwTimeout, rgReaderStates, cReaders)
-}
-
-// SCardIsValidContext calls [raw.SCardIsValidContext] (C function SCardIsValidContext).
+// SCardIsValidContext calls the PCSC framework function SCardIsValidContext.
 func SCardIsValidContext(hContext int32) int32 {
-	return raw.SCardIsValidContext(hContext)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardIsValidContext == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardIsValidContext, _lib, "SCardIsValidContext")
+	}
+	return _fnSCardIsValidContext(hContext)
 }
 
-// SCardListReaderGroups calls [raw.SCardListReaderGroups] (C function SCardListReaderGroups).
-func SCardListReaderGroups(hContext int32, mszGroups string, pcchGroups *uint32) int32 {
-	return raw.SCardListReaderGroups(hContext, mszGroups, pcchGroups)
-}
+var _fnSCardReleaseContext func(int32) int32
 
-// SCardListReaders calls [raw.SCardListReaders] (C function SCardListReaders).
-func SCardListReaders(hContext int32, mszGroups string, mszReaders string, pcchReaders *uint32) int32 {
-	return raw.SCardListReaders(hContext, mszGroups, mszReaders, pcchReaders)
-}
-
-// SCardReconnect calls [raw.SCardReconnect] (C function SCardReconnect).
-func SCardReconnect(hCard int32, dwShareMode uint32, dwPreferredProtocols uint32, dwInitialization uint32, pdwActiveProtocol *uint32) int32 {
-	return raw.SCardReconnect(hCard, dwShareMode, dwPreferredProtocols, dwInitialization, pdwActiveProtocol)
-}
-
-// SCardReleaseContext calls [raw.SCardReleaseContext] (C function SCardReleaseContext).
+// SCardReleaseContext calls the PCSC framework function SCardReleaseContext.
 func SCardReleaseContext(hContext int32) int32 {
-	return raw.SCardReleaseContext(hContext)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardReleaseContext == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardReleaseContext, _lib, "SCardReleaseContext")
+	}
+	return _fnSCardReleaseContext(hContext)
 }
 
-// SCardSetAttrib calls [raw.SCardSetAttrib] (C function SCardSetAttrib).
-func SCardSetAttrib(hCard int32, dwAttrId uint32, pbAttr *uint8, cbAttrLen uint32) int32 {
-	return raw.SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen)
-}
+var _fnSCardSetTimeout func(int32, uint32) int32
 
-// SCardSetTimeout calls [raw.SCardSetTimeout] (C function SCardSetTimeout).
+// SCardSetTimeout calls the PCSC framework function SCardSetTimeout.
 func SCardSetTimeout(hContext int32, dwTimeout uint32) int32 {
-	return raw.SCardSetTimeout(hContext, dwTimeout)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardSetTimeout == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardSetTimeout, _lib, "SCardSetTimeout")
+	}
+	return _fnSCardSetTimeout(hContext, dwTimeout)
 }
 
-// SCardStatus calls [raw.SCardStatus] (C function SCardStatus).
-func SCardStatus(hCard int32, mszReaderNames string, pcchReaderLen *uint32, pdwState *uint32, pdwProtocol *uint32, pbAtr *uint8, pcbAtrLen *uint32) int32 {
-	return raw.SCardStatus(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
-}
+var _fnSCardUnload func()
 
-// SCardTransmit calls [raw.SCardTransmit] (C function SCardTransmit).
-func SCardTransmit(hCard int32, pioSendPci *raw.SCARD_IO_REQUEST, pbSendBuffer *uint8, cbSendLength uint32, pioRecvPci *raw.SCARDIOREQUEST, pbRecvBuffer *uint8, pcbRecvLength *uint32) int32 {
-	return raw.SCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength, pioRecvPci, pbRecvBuffer, pcbRecvLength)
-}
-
-// SCardUnload calls [raw.SCardUnload] (C function SCardUnload).
+// SCardUnload calls the PCSC framework function SCardUnload.
 func SCardUnload() {
-	raw.SCardUnload()
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCardUnload == nil {
+		ebipurego.RegisterLibFunc(&_fnSCardUnload, _lib, "SCardUnload")
+	}
+	_fnSCardUnload()
 }
 
-// MscError calls [raw.MscError] (C function msc_error).
-func MscError(errorCode uint) string {
-	return raw.MscError(errorCode)
+var _fnMscError func(int) string
+
+// MscError calls the PCSC framework function msc_error.
+func MscError(errorCode int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMscError == nil {
+		ebipurego.RegisterLibFunc(&_fnMscError, _lib, "msc_error")
+	}
+	return _fnMscError(errorCode)
 }
 
-// StringifyError calls [raw.PcscStringifyError] (C function pcsc_stringify_error).
+var _fnStringifyError func(int32) string
+
+// StringifyError calls the PCSC framework function pcsc_stringify_error.
 func StringifyError(err int32) string {
-	return raw.PcscStringifyError(err)
+	_loadOnce.Do(_loadLibrary)
+	if _fnStringifyError == nil {
+		ebipurego.RegisterLibFunc(&_fnStringifyError, _lib, "pcsc_stringify_error")
+	}
+	return _fnStringifyError(err)
 }

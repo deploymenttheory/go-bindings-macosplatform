@@ -5,60 +5,91 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the arguments of a compute function.
+// ComputePipelineReflection is an idiomatic wrapper over the Objective-C class MTLComputePipelineReflection.
 //
-// ComputePipelineReflection wraps [raw.MTLComputePipelineReflection] with a fluent Go API.
+// Information about the arguments of a compute function.
 type ComputePipelineReflection struct {
-	inner *raw.MTLComputePipelineReflection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLComputePipelineReflection].
-func (x *ComputePipelineReflection) Unwrap() *raw.MTLComputePipelineReflection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComputePipelineReflection) ID() objc.ID { return x.inner.Ptr() }
-
-// ComputePipelineReflectionFromID adopts an existing object pointer as a ComputePipelineReflection (nil for 0).
+// ComputePipelineReflectionFromID adopts an existing Objective-C object as a ComputePipelineReflection
+// (nil for 0), retaining it and registering a release finalizer.
 func ComputePipelineReflectionFromID(id objc.ID) *ComputePipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	return &ComputePipelineReflection{inner: raw.MTLComputePipelineReflectionFromID(id)}
+	x := &ComputePipelineReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComputePipelineReflection creates a new [ComputePipelineReflection].
-func NewComputePipelineReflection() *ComputePipelineReflection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLComputePipelineReflection")), objc.RegisterName("new"))
-	return &ComputePipelineReflection{inner: raw.MTLComputePipelineReflectionFromID(_id)}
-}
-
-// Bindings calls the underlying Bindings.
-func (x *ComputePipelineReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.Bindings()
-}
-
-// Arguments returns the collection as a Go slice.
-func (x *ComputePipelineReflection) Arguments() []*Argument {
-	arr := x.inner.Arguments()
-	if arr == nil {
+// computePipelineReflectionAdopt wraps an Objective-C object that this code just created as a
+// ComputePipelineReflection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func computePipelineReflectionAdopt(id objc.ID) *ComputePipelineReflection {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
-		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
-	})
+	x := &ComputePipelineReflection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComputePipelineReflection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComputePipelineReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComputePipelineReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePipelineReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewComputePipelineReflection creates a new ComputePipelineReflection.
+func NewComputePipelineReflection() *ComputePipelineReflection {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePipelineReflection")), objc.RegisterName("new"))
+	return computePipelineReflectionAdopt(_id)
+}
+
+// Bindings wraps the corresponding Objective-C method.
+func (x *ComputePipelineReflection) Bindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// Arguments wraps the corresponding Objective-C method.
+//
+// Arguments returns the collection as a Go slice.
+func (x *ComputePipelineReflection) Arguments() []*Argument {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
 // ComputePipelineReflectionable is the interface implemented by [ComputePipelineReflection], for mocking and DI.
 type ComputePipelineReflectionable interface {
-	Unwrap() *raw.MTLComputePipelineReflection
-	Bindings() *foundation.NSArray[raw.MTLBinding]
+	obj.Object
+	Bindings() []obj.Object
 	Arguments() []*Argument
 }
 

@@ -5,127 +5,109 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reads composited video frames from one or more tracks of an asset.
+// AssetReaderVideoCompositionOutput is an idiomatic wrapper over the Objective-C class AVAssetReaderVideoCompositionOutput.
 //
-// AssetReaderVideoCompositionOutput wraps [raw.AVAssetReaderVideoCompositionOutput] with a fluent Go API.
+// It embeds [AssetReaderOutput], promoting that type's methods.
+//
+// An object that reads composited video frames from one or more tracks of an asset.
 type AssetReaderVideoCompositionOutput struct {
-	inner *raw.AVAssetReaderVideoCompositionOutput
+	AssetReaderOutput
 }
 
-// Unwrap returns the underlying [raw.AVAssetReaderVideoCompositionOutput].
-func (x *AssetReaderVideoCompositionOutput) Unwrap() *raw.AVAssetReaderVideoCompositionOutput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReaderVideoCompositionOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderVideoCompositionOutputFromID adopts an existing object pointer as a AssetReaderVideoCompositionOutput (nil for 0).
+// AssetReaderVideoCompositionOutputFromID adopts an existing Objective-C object as a AssetReaderVideoCompositionOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderVideoCompositionOutputFromID(id objc.ID) *AssetReaderVideoCompositionOutput {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReaderVideoCompositionOutput{inner: raw.AVAssetReaderVideoCompositionOutputFromID(id)}
+	x := &AssetReaderVideoCompositionOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that reads composited video frames from the specified video tracks.
-//
-// NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings creates a new [AssetReaderVideoCompositionOutput].
-func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks *foundation.NSArray[*raw.AVAssetTrack], videoSettings purego.IDer) *AssetReaderVideoCompositionOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderVideoCompositionOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoTracks:videoSettings:"), videoTracks.Ptr(), videoSettings.ID())
-	return &AssetReaderVideoCompositionOutput{inner: raw.AVAssetReaderVideoCompositionOutputFromID(_id)}
+// assetReaderVideoCompositionOutputAdopt wraps an Objective-C object that this code just created as a
+// AssetReaderVideoCompositionOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderVideoCompositionOutputAdopt(id objc.ID) *AssetReaderVideoCompositionOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetReaderVideoCompositionOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The video composition to use for the output.
-//
-// WithVideoComposition sets the videoComposition property and returns the receiver for chaining.
+// NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings creates an object that reads composited video frames from the specified video tracks.
+func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks []*AssetTrack, videoSettings obj.Object) *AssetReaderVideoCompositionOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderVideoCompositionOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoTracks:videoSettings:"), purego.SliceToNSArray(videoTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(videoSettings))
+	return assetReaderVideoCompositionOutputAdopt(_id)
+}
+
+// WithVideoComposition the video composition to use for the output.
 func (x *AssetReaderVideoCompositionOutput) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput {
-	x.inner.SetVideoComposition(videoComposition.asVideoComposition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return x
 }
 
-// A Boolean value that indicates whether the output vends copied sample data.
-//
-// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
+// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
 func (x *AssetReaderVideoCompositionOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput {
-	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
 	return x
 }
 
-// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-//
-// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
+// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
 func (x *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput {
-	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
 	return x
 }
 
-// @property videoTracks @abstract The tracks from which the receiver reads composited video. @discussion The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
+// VideoTracks the tracks from which the receiver reads composited video. The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
 //
 // VideoTracks returns the collection as a Go slice.
 func (x *AssetReaderVideoCompositionOutput) VideoTracks() []*AssetTrack {
-	arr := x.inner.VideoTracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrack {
-		return &AssetTrack{inner: raw.AVAssetTrackFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoTracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
-// @property videoSettings @abstract The video settings used by the receiver. @discussion The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
-//
-// VideoSettings calls the underlying VideoSettings.
-func (x *AssetReaderVideoCompositionOutput) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.VideoSettings()
+// VideoSettings the video settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
+func (x *AssetReaderVideoCompositionOutput) VideoSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSettings"))
+	return obj.Wrap(_r)
 }
 
-// @property videoComposition @abstract The composition of video used by the receiver. @discussion The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.
-//
-// VideoComposition calls the underlying VideoComposition.
+// VideoComposition the composition of video used by the receiver. The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.
 func (x *AssetReaderVideoCompositionOutput) VideoComposition() *VideoComposition {
-	_r := x.inner.VideoComposition()
-	if _r == nil {
-		return nil
-	}
-	return &VideoComposition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
+	return VideoCompositionFromID(_r)
 }
 
-// SetVideoComposition calls the underlying SetVideoComposition.
-func (x *AssetReaderVideoCompositionOutput) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
-	x.inner.SetVideoComposition(videoComposition)
-}
-
-// @property customVideoCompositor @abstract Indicates the custom video compositor instance used by the receiver. @discussion This property is nil if there is no video compositor, or if the internal video compositor is in use.
-//
-// CustomVideoCompositor calls the underlying CustomVideoCompositor.
-func (x *AssetReaderVideoCompositionOutput) CustomVideoCompositor() raw.AVVideoCompositing {
-	return x.inner.CustomVideoCompositor()
-}
-
-func (x *AssetReaderVideoCompositionOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput {
-	return &x.inner.AVAssetReaderOutput
+// SetVideoComposition wraps the corresponding Objective-C method.
+func (x *AssetReaderVideoCompositionOutput) SetVideoComposition(videoComposition *VideoComposition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 }
 
 // AssetReaderVideoCompositionOutputable is the interface implemented by [AssetReaderVideoCompositionOutput], for mocking and DI.
 type AssetReaderVideoCompositionOutputable interface {
-	Unwrap() *raw.AVAssetReaderVideoCompositionOutput
+	obj.Object
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput
 	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput
 	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput
 	VideoTracks() []*AssetTrack
-	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	VideoSettings() obj.Object
 	VideoComposition() *VideoComposition
-	SetVideoComposition(videoComposition *raw.AVVideoComposition)
-	CustomVideoCompositor() raw.AVVideoCompositing
+	SetVideoComposition(videoComposition *VideoComposition)
 }
 
 var _ AssetReaderVideoCompositionOutputable = (*AssetReaderVideoCompositionOutput)(nil)
+
+var _ AssetReaderOutputProvider = (*AssetReaderVideoCompositionOutput)(nil)

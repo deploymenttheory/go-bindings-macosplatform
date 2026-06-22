@@ -5,63 +5,102 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of changes that occurred in an asset or collection object.
+// ObjectChangeDetails is an idiomatic wrapper over the Objective-C class PHObjectChangeDetails.
 //
-// ObjectChangeDetails wraps [raw.PHObjectChangeDetails] with a fluent Go API.
+// A description of changes that occurred in an asset or collection object.
 type ObjectChangeDetails struct {
-	inner *raw.PHObjectChangeDetails[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHObjectChangeDetails].
-func (x *ObjectChangeDetails) Unwrap() *raw.PHObjectChangeDetails[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectChangeDetails) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectChangeDetailsFromID adopts an existing object pointer as a ObjectChangeDetails (nil for 0).
+// ObjectChangeDetailsFromID adopts an existing Objective-C object as a ObjectChangeDetails
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectChangeDetailsFromID(id objc.ID) *ObjectChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectChangeDetails{inner: raw.PHObjectChangeDetailsFromID[objc.ID](id)}
+	x := &ObjectChangeDetails{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObjectChangeDetails creates a new [ObjectChangeDetails].
+// objectChangeDetailsAdopt wraps an Objective-C object that this code just created as a
+// ObjectChangeDetails (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectChangeDetailsAdopt(id objc.ID) *ObjectChangeDetails {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectChangeDetails{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ObjectChangeDetails) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ObjectChangeDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ObjectChangeDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectChangeDetails) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewObjectChangeDetails creates a new ObjectChangeDetails.
 func NewObjectChangeDetails() *ObjectChangeDetails {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHObjectChangeDetails")), objc.RegisterName("new"))
-	return &ObjectChangeDetails{inner: raw.PHObjectChangeDetailsFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHObjectChangeDetails")), objc.RegisterName("new"))
+	return objectChangeDetailsAdopt(_id)
 }
 
-// ObjectBeforeChanges calls the underlying ObjectBeforeChanges.
-func (x *ObjectChangeDetails) ObjectBeforeChanges() objc.ID {
-	return x.inner.ObjectBeforeChanges()
+// ObjectBeforeChanges wraps the corresponding Objective-C method.
+func (x *ObjectChangeDetails) ObjectBeforeChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBeforeChanges"))
+	return obj.Wrap(_r)
 }
 
-// ObjectAfterChanges calls the underlying ObjectAfterChanges.
-func (x *ObjectChangeDetails) ObjectAfterChanges() objc.ID {
-	return x.inner.ObjectAfterChanges()
+// ObjectAfterChanges wraps the corresponding Objective-C method.
+func (x *ObjectChangeDetails) ObjectAfterChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAfterChanges"))
+	return obj.Wrap(_r)
 }
 
-// AssetContentChanged calls the underlying AssetContentChanged.
+// AssetContentChanged wraps the corresponding Objective-C method.
 func (x *ObjectChangeDetails) AssetContentChanged() bool {
-	return x.inner.AssetContentChanged()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assetContentChanged"))
+	return _r
 }
 
-// ObjectWasDeleted calls the underlying ObjectWasDeleted.
+// ObjectWasDeleted wraps the corresponding Objective-C method.
 func (x *ObjectChangeDetails) ObjectWasDeleted() bool {
-	return x.inner.ObjectWasDeleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("objectWasDeleted"))
+	return _r
 }
 
 // ObjectChangeDetailsable is the interface implemented by [ObjectChangeDetails], for mocking and DI.
 type ObjectChangeDetailsable interface {
-	Unwrap() *raw.PHObjectChangeDetails[objc.ID]
-	ObjectBeforeChanges() objc.ID
-	ObjectAfterChanges() objc.ID
+	obj.Object
+	ObjectBeforeChanges() obj.Object
+	ObjectAfterChanges() obj.Object
 	AssetContentChanged() bool
 	ObjectWasDeleted() bool
 }

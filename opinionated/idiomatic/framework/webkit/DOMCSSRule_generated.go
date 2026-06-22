@@ -5,92 +5,86 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSRule wraps [raw.DOMCSSRule] with a fluent Go API.
+// DOMCSSRule is an idiomatic wrapper over the Objective-C class DOMCSSRule.
+//
+// DOMCSSRule is an abstract base — you do not construct it directly. Construct one of [DOMCSSCharsetRule], [DOMCSSFontFaceRule], [DOMCSSImportRule], [DOMCSSMediaRule], [DOMCSSPageRule], [DOMCSSStyleRule], [DOMCSSUnknownRule] and pass it where a DOMCSSRule is accepted.
 type DOMCSSRule struct {
-	inner *raw.DOMCSSRule
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMCSSRule].
-func (x *DOMCSSRule) Unwrap() *raw.DOMCSSRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSRuleFromID adopts an existing object pointer as a DOMCSSRule (nil for 0).
+// DOMCSSRuleFromID adopts an existing Objective-C object as a DOMCSSRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSRuleFromID(id objc.ID) *DOMCSSRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSRule{inner: raw.DOMCSSRuleFromID(id)}
-}
-
-// NewDOMCSSRule creates a new [DOMCSSRule].
-func NewDOMCSSRule() *DOMCSSRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSRule")), objc.RegisterName("new"))
-	return &DOMCSSRule{inner: raw.DOMCSSRuleFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSRule) WithCssText(cssText string) *DOMCSSRule {
-	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Type calls the underlying Type.
-func (x *DOMCSSRule) Type() uint16 {
-	return x.inner.Type()
+// dOMCSSRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSRuleAdopt(id objc.ID) *DOMCSSRule {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// CssText calls the underlying CssText.
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSRule) WithCssText(cssText string) *DOMCSSRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+// Type wraps the corresponding Objective-C method.
+func (x *DOMCSSRule) Type() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
+
+// CssText wraps the corresponding Objective-C method.
 func (x *DOMCSSRule) CssText() string {
-	_r := x.inner.CssText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCssText calls the underlying SetCssText.
+// SetCssText wraps the corresponding Objective-C method.
 func (x *DOMCSSRule) SetCssText(cssText string) {
-	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 }
 
-// ParentStyleSheet calls the underlying ParentStyleSheet.
+// ParentStyleSheet wraps the corresponding Objective-C method.
 func (x *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
-	_r := x.inner.ParentStyleSheet()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleSheet{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentStyleSheet"))
+	return DOMCSSStyleSheetFromID(_r)
 }
 
-// ParentRule calls the underlying ParentRule.
+// ParentRule wraps the corresponding Objective-C method.
 func (x *DOMCSSRule) ParentRule() *DOMCSSRule {
-	_r := x.inner.ParentRule()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRule{inner: _r}
-}
-
-func (x *DOMCSSRule) asDOMCSSRule() *raw.DOMCSSRule { return x.inner }
-
-func (x *DOMCSSRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMCSSRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentRule"))
+	return DOMCSSRuleFromID(_r)
 }
 
 // DOMCSSRuleable is the interface implemented by [DOMCSSRule], for mocking and DI.
 type DOMCSSRuleable interface {
-	Unwrap() *raw.DOMCSSRule
+	obj.Object
 	WithCssText(cssText string) *DOMCSSRule
 	Type() uint16
 	CssText() string
@@ -100,3 +94,14 @@ type DOMCSSRuleable interface {
 }
 
 var _ DOMCSSRuleable = (*DOMCSSRule)(nil)
+
+// isDOMCSSRule marks DOMCSSRule — and, by embedding promotion, its
+// subclasses — as a member of the DOMCSSRule hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMCSSRule) isDOMCSSRule() {}
+
+var _ DOMCSSRuleProvider = (*DOMCSSRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSRule)(nil)

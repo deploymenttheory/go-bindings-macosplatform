@@ -5,458 +5,402 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A description of search criteria used to retrieve data from a persistent store.
+// FetchRequest is an idiomatic wrapper over the Objective-C class NSFetchRequest.
 //
-// FetchRequest wraps [raw.NSFetchRequest] with a fluent Go API.
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A description of search criteria used to retrieve data from a persistent store.
 type FetchRequest struct {
-	inner *raw.NSFetchRequest[objc.ID]
+	PersistentStoreRequest
 }
 
-// Unwrap returns the underlying [raw.NSFetchRequest].
-func (x *FetchRequest) Unwrap() *raw.NSFetchRequest[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchRequestFromID adopts an existing object pointer as a FetchRequest (nil for 0).
+// FetchRequestFromID adopts an existing Objective-C object as a FetchRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchRequestFromID(id objc.ID) *FetchRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FetchRequest{inner: raw.NSFetchRequestFromID[objc.ID](id)}
-}
-
-// NewFetchRequest creates a new [FetchRequest].
-func NewFetchRequest() *FetchRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchRequest")), objc.RegisterName("new"))
-	return &FetchRequest{inner: raw.NSFetchRequestFromID[objc.ID](_id)}
-}
-
-// NewFetchRequestWithEntityName creates a new [FetchRequest].
-func NewFetchRequestWithEntityName(entityName string) *FetchRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityName:"), foundation.NSStringStringWithUTF8String(entityName).Ptr())
-	return &FetchRequest{inner: raw.NSFetchRequestFromID[objc.ID](_id)}
-}
-
-// The entity specified for the fetch request.
-//
-// WithEntity sets the entity property and returns the receiver for chaining.
-func (x *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
-	x.inner.SetEntity(entity.Unwrap())
+	x := &FetchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The predicate of the fetch request.
-//
-// WithPredicate sets the predicate property and returns the receiver for chaining.
-func (x *FetchRequest) WithPredicate(predicate *foundation.NSPredicate) *FetchRequest {
-	x.inner.SetPredicate(predicate)
-	return x
-}
-
-// The sort descriptors of the fetch request.
-//
-// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRequest) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSortDescriptors(_arr)
-	return x
-}
-
-// The fetch limit of the fetch request.
-//
-// WithFetchLimit sets the fetchLimit property and returns the receiver for chaining.
-func (x *FetchRequest) WithFetchLimit(fetchLimit uint) *FetchRequest {
-	x.inner.SetFetchLimit(fetchLimit)
-	return x
-}
-
-// The result type of the fetch request.
-//
-// WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *FetchRequest) WithResultType(resultType NSFetchRequestResultType) *FetchRequest {
-	x.inner.SetResultType(raw.NSFetchRequestResultType(resultType))
-	return x
-}
-
-// A Boolean value that indicates whether the fetch request includes subentities in the results.
-//
-// WithIncludesSubentities sets the includesSubentities property and returns the receiver for chaining.
-func (x *FetchRequest) WithIncludesSubentities(includesSubentities bool) *FetchRequest {
-	x.inner.SetIncludesSubentities(includesSubentities)
-	return x
-}
-
-// A Boolean value that indicates whether, when the fetch is executed, property data is obtained from the persistent store.
-//
-// WithIncludesPropertyValues sets the includesPropertyValues property and returns the receiver for chaining.
-func (x *FetchRequest) WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest {
-	x.inner.SetIncludesPropertyValues(includesPropertyValues)
-	return x
-}
-
-// A Boolean value that indicates whether the objects resulting from a fetch request are faults.
-//
-// WithReturnsObjectsAsFaults sets the returnsObjectsAsFaults property and returns the receiver for chaining.
-func (x *FetchRequest) WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest {
-	x.inner.SetReturnsObjectsAsFaults(returnsObjectsAsFaults)
-	return x
-}
-
-// The relationship key paths to prefetch along with the entity for the request.
-//
-// WithRelationshipKeyPathsForPrefetching sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...*foundation.NSString) *FetchRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRelationshipKeyPathsForPrefetching(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRelationshipKeyPathsForPrefetching(_arr)
-	return x
-}
-
-// A Boolean value that indicates whether, when the fetch is executed, it matches against currently unsaved changes in the managed object context.
-//
-// WithIncludesPendingChanges sets the includesPendingChanges property and returns the receiver for chaining.
-func (x *FetchRequest) WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest {
-	x.inner.SetIncludesPendingChanges(includesPendingChanges)
-	return x
-}
-
-// A Boolean value that indicates whether the fetch request returns only distinct values for the fields specified by propertiesToFetch.
-//
-// WithReturnsDistinctResults sets the returnsDistinctResults property and returns the receiver for chaining.
-func (x *FetchRequest) WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest {
-	x.inner.SetReturnsDistinctResults(returnsDistinctResults)
-	return x
-}
-
-// The fetch offset of the fetch request.
-//
-// WithFetchOffset sets the fetchOffset property and returns the receiver for chaining.
-func (x *FetchRequest) WithFetchOffset(fetchOffset uint) *FetchRequest {
-	x.inner.SetFetchOffset(fetchOffset)
-	return x
-}
-
-// The batch size of the objects specified in the fetch request.
-//
-// WithFetchBatchSize sets the fetchBatchSize property and returns the receiver for chaining.
-func (x *FetchRequest) WithFetchBatchSize(fetchBatchSize uint) *FetchRequest {
-	x.inner.SetFetchBatchSize(fetchBatchSize)
-	return x
-}
-
-// A Boolean value that indicates whether the property values of fetched objects will be updated with the current values in the persistent store.
-//
-// WithShouldRefreshRefetchedObjects sets the shouldRefreshRefetchedObjects property and returns the receiver for chaining.
-func (x *FetchRequest) WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest {
-	x.inner.SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects)
-	return x
-}
-
-// The predicate used to filter rows being returned by a query containing a GROUP BY directive.
-//
-// WithHavingPredicate sets the havingPredicate property and returns the receiver for chaining.
-func (x *FetchRequest) WithHavingPredicate(havingPredicate *foundation.NSPredicate) *FetchRequest {
-	x.inner.SetHavingPredicate(havingPredicate)
-	return x
-}
-
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
-	return x
-}
-
-// Executes the fetch request against the managed object context that is associated with the current queue.
-//
-// Execute calls the underlying Execute.
-func (x *FetchRequest) Execute() (*foundation.NSArray[objc.ID], error) {
-	return x.inner.Execute()
-}
-
-// Entity calls the underlying Entity.
-func (x *FetchRequest) Entity() *EntityDescription {
-	_r := x.inner.Entity()
-	if _r == nil {
+// fetchRequestAdopt wraps an Objective-C object that this code just created as a
+// FetchRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchRequestAdopt(id objc.ID) *FetchRequest {
+	if id == 0 {
 		return nil
 	}
-	return &EntityDescription{inner: _r}
+	x := &FetchRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetEntity calls the underlying SetEntity.
-func (x *FetchRequest) SetEntity(entity *raw.NSEntityDescription) {
-	x.inner.SetEntity(entity)
+// NewFetchRequest creates a new FetchRequest.
+func NewFetchRequest() *FetchRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFetchRequest")), objc.RegisterName("new"))
+	return fetchRequestAdopt(_id)
 }
 
-// EntityName calls the underlying EntityName.
+// NewFetchRequestWithEntityName creates a new FetchRequest.
+func NewFetchRequestWithEntityName(entityName string) *FetchRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFetchRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityName:"), purego.NSString(entityName))
+	return fetchRequestAdopt(_id)
+}
+
+// WithEntity the entity specified for the fetch request.
+func (x *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntity:"), objref.IDOf(entity))
+	return x
+}
+
+// WithPredicate the predicate of the fetch request.
+func (x *FetchRequest) WithPredicate(predicate obj.Object) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+	return x
+}
+
+// WithSortDescriptors the sort descriptors of the fetch request.
+func (x *FetchRequest) WithSortDescriptors(items ...obj.Object) *FetchRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
+	return x
+}
+
+// WithFetchLimit the fetch limit of the fetch request.
+func (x *FetchRequest) WithFetchLimit(fetchLimit int) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
+	return x
+}
+
+// WithResultType the result type of the fetch request.
+func (x *FetchRequest) WithResultType(resultType FetchRequestResultType) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
+	return x
+}
+
+// WithIncludesSubentities a Boolean value that indicates whether the fetch request includes subentities in the results.
+func (x *FetchRequest) WithIncludesSubentities(includesSubentities bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
+	return x
+}
+
+// WithIncludesPropertyValues a Boolean value that indicates whether, when the fetch is executed, property data is obtained from the persistent store.
+func (x *FetchRequest) WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPropertyValues:"), includesPropertyValues)
+	return x
+}
+
+// WithReturnsObjectsAsFaults a Boolean value that indicates whether the objects resulting from a fetch request are faults.
+func (x *FetchRequest) WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsObjectsAsFaults:"), returnsObjectsAsFaults)
+	return x
+}
+
+// WithRelationshipKeyPathsForPrefetching the relationship key paths to prefetch along with the entity for the request.
+func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...obj.Object) *FetchRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelationshipKeyPathsForPrefetching:"), _arr)
+	return x
+}
+
+// WithIncludesPendingChanges a Boolean value that indicates whether, when the fetch is executed, it matches against currently unsaved changes in the managed object context.
+func (x *FetchRequest) WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPendingChanges:"), includesPendingChanges)
+	return x
+}
+
+// WithReturnsDistinctResults a Boolean value that indicates whether the fetch request returns only distinct values for the fields specified by propertiesToFetch.
+func (x *FetchRequest) WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsDistinctResults:"), returnsDistinctResults)
+	return x
+}
+
+// WithFetchOffset the fetch offset of the fetch request.
+func (x *FetchRequest) WithFetchOffset(fetchOffset int) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchOffset:"), fetchOffset)
+	return x
+}
+
+// WithFetchBatchSize the batch size of the objects specified in the fetch request.
+func (x *FetchRequest) WithFetchBatchSize(fetchBatchSize int) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchBatchSize:"), fetchBatchSize)
+	return x
+}
+
+// WithShouldRefreshRefetchedObjects a Boolean value that indicates whether the property values of fetched objects will be updated with the current values in the persistent store.
+func (x *FetchRequest) WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefreshRefetchedObjects:"), shouldRefreshRefetchedObjects)
+	return x
+}
+
+// WithHavingPredicate the predicate used to filter rows being returned by a query containing a GROUP BY directive.
+func (x *FetchRequest) WithHavingPredicate(havingPredicate obj.Object) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHavingPredicate:"), objref.IDOf(havingPredicate))
+	return x
+}
+
+// WithAffectedStores the stores the request should be sent to.
+func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
+	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
+	return x
+}
+
+// Execute executes the fetch request against the managed object context that is associated with the current queue.
+func (x *FetchRequest) Execute() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("execute:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
+}
+
+// Entity wraps the corresponding Objective-C method.
+func (x *FetchRequest) Entity() *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+	return EntityDescriptionFromID(_r)
+}
+
+// SetEntity wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetEntity(entity *EntityDescription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntity:"), objref.IDOf(entity))
+}
+
+// EntityName wraps the corresponding Objective-C method.
 func (x *FetchRequest) EntityName() string {
-	_r := x.inner.EntityName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Predicate calls the underlying Predicate.
-func (x *FetchRequest) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
+// Predicate wraps the corresponding Objective-C method.
+func (x *FetchRequest) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
 
-// SetPredicate calls the underlying SetPredicate.
-func (x *FetchRequest) SetPredicate(predicate *foundation.NSPredicate) {
-	x.inner.SetPredicate(predicate)
+// SetPredicate wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetPredicate(predicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
+// SortDescriptors wraps the corresponding Objective-C method.
+//
 // SortDescriptors returns the collection as a Go slice.
-func (x *FetchRequest) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+func (x *FetchRequest) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSortDescriptors calls the underlying SetSortDescriptors.
-func (x *FetchRequest) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	x.inner.SetSortDescriptors(sortDescriptors)
+// SetSortDescriptors wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetSortDescriptors(sortDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// FetchLimit calls the underlying FetchLimit.
-func (x *FetchRequest) FetchLimit() uint {
-	return x.inner.FetchLimit()
+// FetchLimit wraps the corresponding Objective-C method.
+func (x *FetchRequest) FetchLimit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchLimit"))
+	return _r
 }
 
-// SetFetchLimit calls the underlying SetFetchLimit.
-func (x *FetchRequest) SetFetchLimit(fetchLimit uint) {
-	x.inner.SetFetchLimit(fetchLimit)
+// SetFetchLimit wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetFetchLimit(fetchLimit int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *FetchRequest) ResultType() NSFetchRequestResultType {
-	return NSFetchRequestResultType(x.inner.ResultType())
+// ResultType wraps the corresponding Objective-C method.
+func (x *FetchRequest) ResultType() FetchRequestResultType {
+	_r := objc.Send[FetchRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
-// SetResultType calls the underlying SetResultType.
-func (x *FetchRequest) SetResultType(resultType NSFetchRequestResultType) {
-	x.inner.SetResultType(raw.NSFetchRequestResultType(resultType))
+// SetResultType wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetResultType(resultType FetchRequestResultType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
 
-// IncludesSubentities calls the underlying IncludesSubentities.
+// IncludesSubentities wraps the corresponding Objective-C method.
 func (x *FetchRequest) IncludesSubentities() bool {
-	return x.inner.IncludesSubentities()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesSubentities"))
+	return _r
 }
 
-// SetIncludesSubentities calls the underlying SetIncludesSubentities.
+// SetIncludesSubentities wraps the corresponding Objective-C method.
 func (x *FetchRequest) SetIncludesSubentities(includesSubentities bool) {
-	x.inner.SetIncludesSubentities(includesSubentities)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
 }
 
-// IncludesPropertyValues calls the underlying IncludesPropertyValues.
+// IncludesPropertyValues wraps the corresponding Objective-C method.
 func (x *FetchRequest) IncludesPropertyValues() bool {
-	return x.inner.IncludesPropertyValues()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPropertyValues"))
+	return _r
 }
 
-// SetIncludesPropertyValues calls the underlying SetIncludesPropertyValues.
+// SetIncludesPropertyValues wraps the corresponding Objective-C method.
 func (x *FetchRequest) SetIncludesPropertyValues(includesPropertyValues bool) {
-	x.inner.SetIncludesPropertyValues(includesPropertyValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPropertyValues:"), includesPropertyValues)
 }
 
-// ReturnsObjectsAsFaults calls the underlying ReturnsObjectsAsFaults.
+// ReturnsObjectsAsFaults wraps the corresponding Objective-C method.
 func (x *FetchRequest) ReturnsObjectsAsFaults() bool {
-	return x.inner.ReturnsObjectsAsFaults()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsObjectsAsFaults"))
+	return _r
 }
 
-// SetReturnsObjectsAsFaults calls the underlying SetReturnsObjectsAsFaults.
+// SetReturnsObjectsAsFaults wraps the corresponding Objective-C method.
 func (x *FetchRequest) SetReturnsObjectsAsFaults(returnsObjectsAsFaults bool) {
-	x.inner.SetReturnsObjectsAsFaults(returnsObjectsAsFaults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsObjectsAsFaults:"), returnsObjectsAsFaults)
 }
 
+// RelationshipKeyPathsForPrefetching wraps the corresponding Objective-C method.
+//
 // RelationshipKeyPathsForPrefetching returns the collection as a Go slice.
 func (x *FetchRequest) RelationshipKeyPathsForPrefetching() []string {
-	arr := x.inner.RelationshipKeyPathsForPrefetching()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationshipKeyPathsForPrefetching"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetRelationshipKeyPathsForPrefetching calls the underlying SetRelationshipKeyPathsForPrefetching.
-func (x *FetchRequest) SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching)
+// SetRelationshipKeyPathsForPrefetching wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelationshipKeyPathsForPrefetching:"), purego.SliceToNSArray(relationshipKeyPathsForPrefetching, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// IncludesPendingChanges calls the underlying IncludesPendingChanges.
+// IncludesPendingChanges wraps the corresponding Objective-C method.
 func (x *FetchRequest) IncludesPendingChanges() bool {
-	return x.inner.IncludesPendingChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPendingChanges"))
+	return _r
 }
 
-// SetIncludesPendingChanges calls the underlying SetIncludesPendingChanges.
+// SetIncludesPendingChanges wraps the corresponding Objective-C method.
 func (x *FetchRequest) SetIncludesPendingChanges(includesPendingChanges bool) {
-	x.inner.SetIncludesPendingChanges(includesPendingChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPendingChanges:"), includesPendingChanges)
 }
 
-// ReturnsDistinctResults calls the underlying ReturnsDistinctResults.
+// ReturnsDistinctResults wraps the corresponding Objective-C method.
 func (x *FetchRequest) ReturnsDistinctResults() bool {
-	return x.inner.ReturnsDistinctResults()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsDistinctResults"))
+	return _r
 }
 
-// SetReturnsDistinctResults calls the underlying SetReturnsDistinctResults.
+// SetReturnsDistinctResults wraps the corresponding Objective-C method.
 func (x *FetchRequest) SetReturnsDistinctResults(returnsDistinctResults bool) {
-	x.inner.SetReturnsDistinctResults(returnsDistinctResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsDistinctResults:"), returnsDistinctResults)
 }
 
-// PropertiesToFetch calls the underlying PropertiesToFetch.
-func (x *FetchRequest) PropertiesToFetch() *foundation.NSArray[objc.ID] {
-	return x.inner.PropertiesToFetch()
+// PropertiesToFetch wraps the corresponding Objective-C method.
+func (x *FetchRequest) PropertiesToFetch() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesToFetch"))
+	return obj.Wrap(_r)
 }
 
-// SetPropertiesToFetch calls the underlying SetPropertiesToFetch.
-func (x *FetchRequest) SetPropertiesToFetch(propertiesToFetch *foundation.NSArray[objc.ID]) {
-	x.inner.SetPropertiesToFetch(propertiesToFetch)
+// SetPropertiesToFetch wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetPropertiesToFetch(propertiesToFetch obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToFetch:"), objref.IDOf(propertiesToFetch))
 }
 
-// FetchOffset calls the underlying FetchOffset.
-func (x *FetchRequest) FetchOffset() uint {
-	return x.inner.FetchOffset()
+// FetchOffset wraps the corresponding Objective-C method.
+func (x *FetchRequest) FetchOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchOffset"))
+	return _r
 }
 
-// SetFetchOffset calls the underlying SetFetchOffset.
-func (x *FetchRequest) SetFetchOffset(fetchOffset uint) {
-	x.inner.SetFetchOffset(fetchOffset)
+// SetFetchOffset wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetFetchOffset(fetchOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchOffset:"), fetchOffset)
 }
 
-// FetchBatchSize calls the underlying FetchBatchSize.
-func (x *FetchRequest) FetchBatchSize() uint {
-	return x.inner.FetchBatchSize()
+// FetchBatchSize wraps the corresponding Objective-C method.
+func (x *FetchRequest) FetchBatchSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchBatchSize"))
+	return _r
 }
 
-// SetFetchBatchSize calls the underlying SetFetchBatchSize.
-func (x *FetchRequest) SetFetchBatchSize(fetchBatchSize uint) {
-	x.inner.SetFetchBatchSize(fetchBatchSize)
+// SetFetchBatchSize wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetFetchBatchSize(fetchBatchSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchBatchSize:"), fetchBatchSize)
 }
 
-// ShouldRefreshRefetchedObjects calls the underlying ShouldRefreshRefetchedObjects.
+// ShouldRefreshRefetchedObjects wraps the corresponding Objective-C method.
 func (x *FetchRequest) ShouldRefreshRefetchedObjects() bool {
-	return x.inner.ShouldRefreshRefetchedObjects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRefreshRefetchedObjects"))
+	return _r
 }
 
-// SetShouldRefreshRefetchedObjects calls the underlying SetShouldRefreshRefetchedObjects.
+// SetShouldRefreshRefetchedObjects wraps the corresponding Objective-C method.
 func (x *FetchRequest) SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) {
-	x.inner.SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefreshRefetchedObjects:"), shouldRefreshRefetchedObjects)
 }
 
-// PropertiesToGroupBy calls the underlying PropertiesToGroupBy.
-func (x *FetchRequest) PropertiesToGroupBy() *foundation.NSArray[objc.ID] {
-	return x.inner.PropertiesToGroupBy()
+// PropertiesToGroupBy wraps the corresponding Objective-C method.
+func (x *FetchRequest) PropertiesToGroupBy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesToGroupBy"))
+	return obj.Wrap(_r)
 }
 
-// SetPropertiesToGroupBy calls the underlying SetPropertiesToGroupBy.
-func (x *FetchRequest) SetPropertiesToGroupBy(propertiesToGroupBy *foundation.NSArray[objc.ID]) {
-	x.inner.SetPropertiesToGroupBy(propertiesToGroupBy)
+// SetPropertiesToGroupBy wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetPropertiesToGroupBy(propertiesToGroupBy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToGroupBy:"), objref.IDOf(propertiesToGroupBy))
 }
 
-// HavingPredicate calls the underlying HavingPredicate.
-func (x *FetchRequest) HavingPredicate() *foundation.NSPredicate {
-	return x.inner.HavingPredicate()
+// HavingPredicate wraps the corresponding Objective-C method.
+func (x *FetchRequest) HavingPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("havingPredicate"))
+	return obj.Wrap(_r)
 }
 
-// SetHavingPredicate calls the underlying SetHavingPredicate.
-func (x *FetchRequest) SetHavingPredicate(havingPredicate *foundation.NSPredicate) {
-	x.inner.SetHavingPredicate(havingPredicate)
-}
-
-func (x *FetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
-	return &x.inner.NSPersistentStoreRequest
+// SetHavingPredicate wraps the corresponding Objective-C method.
+func (x *FetchRequest) SetHavingPredicate(havingPredicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHavingPredicate:"), objref.IDOf(havingPredicate))
 }
 
 // FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
 type FetchRequestable interface {
-	Unwrap() *raw.NSFetchRequest[objc.ID]
+	obj.Object
 	WithEntity(entity *EntityDescription) *FetchRequest
-	WithPredicate(predicate *foundation.NSPredicate) *FetchRequest
-	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchRequest
-	WithFetchLimit(fetchLimit uint) *FetchRequest
-	WithResultType(resultType NSFetchRequestResultType) *FetchRequest
+	WithPredicate(predicate obj.Object) *FetchRequest
+	WithSortDescriptors(items ...obj.Object) *FetchRequest
+	WithFetchLimit(fetchLimit int) *FetchRequest
+	WithResultType(resultType FetchRequestResultType) *FetchRequest
 	WithIncludesSubentities(includesSubentities bool) *FetchRequest
 	WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest
 	WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest
-	WithRelationshipKeyPathsForPrefetching(items ...*foundation.NSString) *FetchRequest
+	WithRelationshipKeyPathsForPrefetching(items ...obj.Object) *FetchRequest
 	WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest
 	WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest
-	WithFetchOffset(fetchOffset uint) *FetchRequest
-	WithFetchBatchSize(fetchBatchSize uint) *FetchRequest
+	WithFetchOffset(fetchOffset int) *FetchRequest
+	WithFetchBatchSize(fetchBatchSize int) *FetchRequest
 	WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest
-	WithHavingPredicate(havingPredicate *foundation.NSPredicate) *FetchRequest
+	WithHavingPredicate(havingPredicate obj.Object) *FetchRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest
-	Execute() (*foundation.NSArray[objc.ID], error)
+	Execute() (result []obj.Object, err error)
 	Entity() *EntityDescription
-	SetEntity(entity *raw.NSEntityDescription)
+	SetEntity(entity *EntityDescription)
 	EntityName() string
-	Predicate() *foundation.NSPredicate
-	SetPredicate(predicate *foundation.NSPredicate)
-	SortDescriptors() []*foundation.NSSortDescriptor
-	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
-	FetchLimit() uint
-	SetFetchLimit(fetchLimit uint)
-	ResultType() NSFetchRequestResultType
-	SetResultType(resultType NSFetchRequestResultType)
+	Predicate() obj.Object
+	SetPredicate(predicate obj.Object)
+	SortDescriptors() []obj.Object
+	SetSortDescriptors(sortDescriptors []obj.Object)
+	FetchLimit() int
+	SetFetchLimit(fetchLimit int)
+	ResultType() FetchRequestResultType
+	SetResultType(resultType FetchRequestResultType)
 	IncludesSubentities() bool
 	SetIncludesSubentities(includesSubentities bool)
 	IncludesPropertyValues() bool
@@ -464,23 +408,25 @@ type FetchRequestable interface {
 	ReturnsObjectsAsFaults() bool
 	SetReturnsObjectsAsFaults(returnsObjectsAsFaults bool)
 	RelationshipKeyPathsForPrefetching() []string
-	SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching *foundation.NSArray[*foundation.NSString])
+	SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching []string)
 	IncludesPendingChanges() bool
 	SetIncludesPendingChanges(includesPendingChanges bool)
 	ReturnsDistinctResults() bool
 	SetReturnsDistinctResults(returnsDistinctResults bool)
-	PropertiesToFetch() *foundation.NSArray[objc.ID]
-	SetPropertiesToFetch(propertiesToFetch *foundation.NSArray[objc.ID])
-	FetchOffset() uint
-	SetFetchOffset(fetchOffset uint)
-	FetchBatchSize() uint
-	SetFetchBatchSize(fetchBatchSize uint)
+	PropertiesToFetch() obj.Object
+	SetPropertiesToFetch(propertiesToFetch obj.Object)
+	FetchOffset() int
+	SetFetchOffset(fetchOffset int)
+	FetchBatchSize() int
+	SetFetchBatchSize(fetchBatchSize int)
 	ShouldRefreshRefetchedObjects() bool
 	SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool)
-	PropertiesToGroupBy() *foundation.NSArray[objc.ID]
-	SetPropertiesToGroupBy(propertiesToGroupBy *foundation.NSArray[objc.ID])
-	HavingPredicate() *foundation.NSPredicate
-	SetHavingPredicate(havingPredicate *foundation.NSPredicate)
+	PropertiesToGroupBy() obj.Object
+	SetPropertiesToGroupBy(propertiesToGroupBy obj.Object)
+	HavingPredicate() obj.Object
+	SetHavingPredicate(havingPredicate obj.Object)
 }
 
 var _ FetchRequestable = (*FetchRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*FetchRequest)(nil)

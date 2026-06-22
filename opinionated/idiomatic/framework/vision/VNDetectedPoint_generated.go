@@ -5,51 +5,66 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a normalized point in an image, along with a confidence value.
+// DetectedPoint is an idiomatic wrapper over the Objective-C class VNDetectedPoint.
 //
-// DetectedPoint wraps [raw.VNDetectedPoint] with a fluent Go API.
+// DetectedPoint is an abstract base — you do not construct it directly. Construct one of [RecognizedPoint] and pass it where a DetectedPoint is accepted.
+//
+// An object that represents a normalized point in an image, along with a confidence value.
 type DetectedPoint struct {
-	inner *raw.VNDetectedPoint
+	Point
 }
 
-// Unwrap returns the underlying [raw.VNDetectedPoint].
-func (x *DetectedPoint) Unwrap() *raw.VNDetectedPoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectedPoint) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectedPointFromID adopts an existing object pointer as a DetectedPoint (nil for 0).
+// DetectedPointFromID adopts an existing Objective-C object as a DetectedPoint
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectedPointFromID(id objc.ID) *DetectedPoint {
 	if id == 0 {
 		return nil
 	}
-	return &DetectedPoint{inner: raw.VNDetectedPointFromID(id)}
+	x := &DetectedPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectedPoint creates a new [DetectedPoint].
-func NewDetectedPoint() *DetectedPoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectedPoint")), objc.RegisterName("new"))
-	return &DetectedPoint{inner: raw.VNDetectedPointFromID(_id)}
+// detectedPointAdopt wraps an Objective-C object that this code just created as a
+// DetectedPoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectedPointAdopt(id objc.ID) *DetectedPoint {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectedPoint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Confidence calls the underlying Confidence.
+// Confidence wraps the corresponding Objective-C method.
 func (x *DetectedPoint) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
-
-func (x *DetectedPoint) asDetectedPoint() *raw.VNDetectedPoint { return x.inner }
-
-func (x *DetectedPoint) asPoint() *raw.VNPoint { return &x.inner.VNPoint }
 
 // DetectedPointable is the interface implemented by [DetectedPoint], for mocking and DI.
 type DetectedPointable interface {
-	Unwrap() *raw.VNDetectedPoint
+	obj.Object
 	Confidence() float32
 }
 
 var _ DetectedPointable = (*DetectedPoint)(nil)
+
+// isDetectedPoint marks DetectedPoint — and, by embedding promotion, its
+// subclasses — as a member of the DetectedPoint hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DetectedPoint) isDetectedPoint() {}
+
+var _ DetectedPointProvider = (*DetectedPoint)(nil)
+
+var _ PointProvider = (*DetectedPoint)(nil)

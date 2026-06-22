@@ -5,88 +5,122 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a single 2D point in an image.
+// Point is an idiomatic wrapper over the Objective-C class VNPoint.
 //
-// Point wraps [raw.VNPoint] with a fluent Go API.
+// Point is an abstract base — you do not construct it directly. Construct one of [DetectedPoint] and pass it where a Point is accepted.
+//
+// An immutable object that represents a single 2D point in an image.
 type Point struct {
-	inner *raw.VNPoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNPoint].
-func (x *Point) Unwrap() *raw.VNPoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Point) ID() objc.ID { return x.inner.Ptr() }
-
-// PointFromID adopts an existing object pointer as a Point (nil for 0).
+// PointFromID adopts an existing Objective-C object as a Point
+// (nil for 0), retaining it and registering a release finalizer.
 func PointFromID(id objc.ID) *Point {
 	if id == 0 {
 		return nil
 	}
-	return &Point{inner: raw.VNPointFromID(id)}
+	x := &Point{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a point object with the specified coordinates.
-//
-// NewPointWithXY creates a new [Point].
+// pointAdopt wraps an Objective-C object that this code just created as a
+// Point (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointAdopt(id objc.ID) *Point {
+	if id == 0 {
+		return nil
+	}
+	x := &Point{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Point) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Point) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Point) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Point) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPointWithXY creates a point object with the specified coordinates.
 func NewPointWithXY(x float64, y float64) *Point {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPoint")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:y:"), x, y)
-	return &Point{inner: raw.VNPointFromID(_id)}
+	return pointAdopt(_id)
 }
 
-// Creates a point object from the specified Core Graphics point.
-//
-// NewPointWithLocation creates a new [Point].
+// NewPointWithLocation creates a point object from the specified Core Graphics point.
 func NewPointWithLocation(location corefoundation.CGPoint) *Point {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPoint")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNPoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:"), location)
-	return &Point{inner: raw.VNPointFromID(_id)}
+	return pointAdopt(_id)
 }
 
-// Returns the distance to another point.
-//
-// DistanceToPoint calls the underlying DistanceToPoint.
-func (x *Point) DistanceToPoint(point *raw.VNPoint) float64 {
-	return x.inner.DistanceToPoint(point)
+// DistanceToPoint returns the distance to another point.
+func (x *Point) DistanceToPoint(point *Point) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("distanceToPoint:"), objref.IDOf(point))
+	return _r
 }
 
-// @brief Returns the X and Y coordinates of the point, as CGPoint type, with respect to the origin of the coordinate system the point is defined in.
-//
-// Location calls the underlying Location.
+// Location returns the X and Y coordinates of the point, as CGPoint type, with respect to the origin of the coordinate system the point is defined in.
 func (x *Point) Location() corefoundation.CGPoint {
-	return x.inner.Location()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("location"))
+	return _r
 }
 
-// @brief Returns the X coordinate of the point with respect to the origin of the coordinate system the point is defined in.
-//
-// X calls the underlying X.
+// X returns the X coordinate of the point with respect to the origin of the coordinate system the point is defined in.
 func (x *Point) X() float64 {
-	return x.inner.X()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
+	return _r
 }
 
-// @brief Returns the Y coordinate of the point with respect to the origin of the coordinate system the point is defined in.
-//
-// Y calls the underlying Y.
+// Y returns the Y coordinate of the point with respect to the origin of the coordinate system the point is defined in.
 func (x *Point) Y() float64 {
-	return x.inner.Y()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
+	return _r
 }
-
-func (x *Point) asPoint() *raw.VNPoint { return x.inner }
 
 // Pointable is the interface implemented by [Point], for mocking and DI.
 type Pointable interface {
-	Unwrap() *raw.VNPoint
-	DistanceToPoint(point *raw.VNPoint) float64
+	obj.Object
+	DistanceToPoint(point *Point) float64
 	Location() corefoundation.CGPoint
 	X() float64
 	Y() float64
 }
 
 var _ Pointable = (*Point)(nil)
+
+// isPoint marks Point — and, by embedding promotion, its
+// subclasses — as a member of the Point hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Point) isPoint() {}
+
+var _ PointProvider = (*Point)(nil)

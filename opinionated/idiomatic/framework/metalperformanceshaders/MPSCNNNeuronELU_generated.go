@@ -5,148 +5,106 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A parametric ELU neuron filter.
+// CNNNeuronELU is an idiomatic wrapper over the Objective-C class MPSCNNNeuronELU.
 //
-// CNNNeuronELU wraps [raw.MPSCNNNeuronELU] with a fluent Go API.
+// It embeds [CNNNeuron], promoting that type's methods.
+//
+// A parametric ELU neuron filter.
 type CNNNeuronELU struct {
-	inner *raw.MPSCNNNeuronELU
+	CNNNeuron
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNeuronELU].
-func (x *CNNNeuronELU) Unwrap() *raw.MPSCNNNeuronELU { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNeuronELU) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNeuronELUFromID adopts an existing object pointer as a CNNNeuronELU (nil for 0).
+// CNNNeuronELUFromID adopts an existing Objective-C object as a CNNNeuronELU
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNeuronELUFromID(id objc.ID) *CNNNeuronELU {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNeuronELU{inner: raw.MPSCNNNeuronELUFromID(id)}
+	x := &CNNNeuronELU{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a parametric ELU neuron filter.
-//
-// NewCNNNeuronELUWithDeviceA creates a new [CNNNeuronELU].
-func NewCNNNeuronELUWithDeviceA(device metal.MTLDevice, a float32) *CNNNeuronELU {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronELU")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:a:"), device, a)
-	return &CNNNeuronELU{inner: raw.MPSCNNNeuronELUFromID(_id)}
+// cNNNeuronELUAdopt wraps an Objective-C object that this code just created as a
+// CNNNeuronELU (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNeuronELUAdopt(id objc.ID) *CNNNeuronELU {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNeuronELU{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// NewCNNNeuronELU creates a new CNNNeuronELU.
+func NewCNNNeuronELU() *CNNNeuronELU {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELU")), objc.RegisterName("new"))
+	return cNNNeuronELUAdopt(_id)
+}
+
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
 func (x *CNNNeuronELU) WithOffset(offset mpscore.MPSOffset) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *CNNNeuronELU) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *CNNNeuronELU) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronELU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *CNNNeuronELU) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronELU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNNeuronELU) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronELU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNNeuronELU) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *CNNNeuronELU) WithLabel(label string) *CNNNeuronELU {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNNeuronELU) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
-
-func (x *CNNNeuronELU) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNNeuron.MPSCNNKernel
-}
-
-func (x *CNNNeuronELU) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
 }
 
 // CNNNeuronELUable is the interface implemented by [CNNNeuronELU], for mocking and DI.
 type CNNNeuronELUable interface {
-	Unwrap() *raw.MPSCNNNeuronELU
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *CNNNeuronELU
 	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronELU
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronELU
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronELU
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronELU
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronELU
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronELU
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronELU
-	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronELU
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronELU
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronELU
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronELU
 	WithLabel(label string) *CNNNeuronELU
 }
 
 var _ CNNNeuronELUable = (*CNNNeuronELU)(nil)
+
+var _ CNNNeuronProvider = (*CNNNeuronELU)(nil)
+
+var _ CNNKernelProvider = (*CNNNeuronELU)(nil)
+
+var _ KernelProvider = (*CNNNeuronELU)(nil)

@@ -5,68 +5,90 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the deletion of an individual record.
+// SyncEngineFetchedRecordDeletion is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchedRecordDeletion.
 //
-// SyncEngineFetchedRecordDeletion wraps [raw.CKSyncEngineFetchedRecordDeletion] with a fluent Go API.
+// An object that describes the deletion of an individual record.
 type SyncEngineFetchedRecordDeletion struct {
-	inner *raw.CKSyncEngineFetchedRecordDeletion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFetchedRecordDeletion].
-func (x *SyncEngineFetchedRecordDeletion) Unwrap() *raw.CKSyncEngineFetchedRecordDeletion {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFetchedRecordDeletion) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFetchedRecordDeletionFromID adopts an existing object pointer as a SyncEngineFetchedRecordDeletion (nil for 0).
+// SyncEngineFetchedRecordDeletionFromID adopts an existing Objective-C object as a SyncEngineFetchedRecordDeletion
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFetchedRecordDeletionFromID(id objc.ID) *SyncEngineFetchedRecordDeletion {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchedRecordDeletion{inner: raw.CKSyncEngineFetchedRecordDeletionFromID(id)}
+	x := &SyncEngineFetchedRecordDeletion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineFetchedRecordDeletion creates a new [SyncEngineFetchedRecordDeletion].
-func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchedRecordDeletion")), objc.RegisterName("new"))
-	return &SyncEngineFetchedRecordDeletion{inner: raw.CKSyncEngineFetchedRecordDeletionFromID(_id)}
-}
-
-// The deleted record's unique identifier.
-//
-// RecordID calls the underlying RecordID.
-func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
-	_r := x.inner.RecordID()
-	if _r == nil {
+// syncEngineFetchedRecordDeletionAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFetchedRecordDeletion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFetchedRecordDeletionAdopt(id objc.ID) *SyncEngineFetchedRecordDeletion {
+	if id == 0 {
 		return nil
 	}
-	return &RecordID{inner: _r}
+	x := &SyncEngineFetchedRecordDeletion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The record type of the deleted record.
-//
-// RecordType calls the underlying RecordType.
-func (x *SyncEngineFetchedRecordDeletion) RecordType() string {
-	_r := x.inner.RecordType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Description returns the object's -description text.
+func (x *SyncEngineFetchedRecordDeletion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFetchedRecordDeletion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFetchedRecordDeletion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchedRecordDeletion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineFetchedRecordDeletion creates a new SyncEngineFetchedRecordDeletion.
+func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchedRecordDeletion")), objc.RegisterName("new"))
+	return syncEngineFetchedRecordDeletionAdopt(_id)
+}
+
+// RecordID the deleted record's unique identifier.
+func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
+	return RecordIDFromID(_r)
+}
+
+// RecordType the record type of the deleted record.
+func (x *SyncEngineFetchedRecordDeletion) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+	return obj.Wrap(_r)
 }
 
 // SyncEngineFetchedRecordDeletionable is the interface implemented by [SyncEngineFetchedRecordDeletion], for mocking and DI.
 type SyncEngineFetchedRecordDeletionable interface {
-	Unwrap() *raw.CKSyncEngineFetchedRecordDeletion
+	obj.Object
 	RecordID() *RecordID
-	RecordType() string
+	RecordType() obj.Object
 }
 
 var _ SyncEngineFetchedRecordDeletionable = (*SyncEngineFetchedRecordDeletion)(nil)

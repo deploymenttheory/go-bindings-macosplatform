@@ -5,98 +5,90 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for augmenting or postprocessing SceneKit’s rendering of a scene using additional drawing passes with custom Metal or OpenGL shaders.
+// Technique is an idiomatic wrapper over the Objective-C class SCNTechnique.
 //
-// Technique wraps [raw.SCNTechnique] with a fluent Go API.
+// A specification for augmenting or postprocessing SceneKit’s rendering of a scene using additional drawing passes with custom Metal or OpenGL shaders.
 type Technique struct {
-	inner *raw.SCNTechnique
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNTechnique].
-func (x *Technique) Unwrap() *raw.SCNTechnique { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Technique) ID() objc.ID { return x.inner.Ptr() }
-
-// TechniqueFromID adopts an existing object pointer as a Technique (nil for 0).
+// TechniqueFromID adopts an existing Objective-C object as a Technique
+// (nil for 0), retaining it and registering a release finalizer.
 func TechniqueFromID(id objc.ID) *Technique {
 	if id == 0 {
 		return nil
 	}
-	return &Technique{inner: raw.SCNTechniqueFromID(id)}
-}
-
-// NewTechnique creates a new [Technique].
-func NewTechnique() *Technique {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNTechnique")), objc.RegisterName("new"))
-	return &Technique{inner: raw.SCNTechniqueFromID(_id)}
-}
-
-// @property library @abstract The Metal library to use to load the Metal programs specified in the technique description. Defaults to nil which corresponds to the default Metal library.
-//
-// WithLibrary sets the library property and returns the receiver for chaining.
-func (x *Technique) WithLibrary(library metal.MTLLibrary) *Technique {
-	x.inner.SetLibrary(library)
+	x := &Technique{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Specifies a block to be called before rendering using programs with the specified GLSL uniform variable or attribute name.
-//
-// HandleBindingOfSymbolUsing calls the underlying HandleBindingOfSymbolUsing.
-func (x *Technique) HandleBindingOfSymbolUsing(symbol string, block func(uint, uint, *raw.SCNNode, *raw.SCNRenderer)) {
-	x.inner.HandleBindingOfSymbolUsing(foundation.NSStringStringWithUTF8String(symbol), block)
+// techniqueAdopt wraps an Objective-C object that this code just created as a
+// Technique (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func techniqueAdopt(id objc.ID) *Technique {
+	if id == 0 {
+		return nil
+	}
+	x := &Technique{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
-//
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
-func (x *Technique) ObjectForKeyedSubscript(key objc.ID) objc.ID {
-	return x.inner.ObjectForKeyedSubscript(key)
+// Description returns the object's -description text.
+func (x *Technique) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Sets a value for the specified shader variable or attribute name, using subscript syntax.
-//
-// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
-func (x *Technique) SetObjectForKeyedSubscript(obj objc.ID, key foundation.NSCopying) {
-	x.inner.SetObjectForKeyedSubscript(obj, key)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Technique) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property dictionaryRepresentation @abstract Returns the dictionary representation of the technique.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *Technique) DictionaryRepresentation() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Technique) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property library @abstract The Metal library to use to load the Metal programs specified in the technique description. Defaults to nil which corresponds to the default Metal library.
-//
-// Library calls the underlying Library.
-func (x *Technique) Library() metal.MTLLibrary {
-	return x.inner.Library()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Technique) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetLibrary calls the underlying SetLibrary.
-func (x *Technique) SetLibrary(library metal.MTLLibrary) {
-	x.inner.SetLibrary(library)
+// NewTechnique creates a new Technique.
+func NewTechnique() *Technique {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNTechnique")), objc.RegisterName("new"))
+	return techniqueAdopt(_id)
+}
+
+// ObjectForKeyedSubscript returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
+func (x *Technique) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
+	return obj.Wrap(_r)
+}
+
+// DictionaryRepresentation returns the dictionary representation of the technique.
+func (x *Technique) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // Techniqueable is the interface implemented by [Technique], for mocking and DI.
 type Techniqueable interface {
-	Unwrap() *raw.SCNTechnique
-	WithLibrary(library metal.MTLLibrary) *Technique
-	HandleBindingOfSymbolUsing(symbol string, block func(uint, uint, *raw.SCNNode, *raw.SCNRenderer))
-	ObjectForKeyedSubscript(key objc.ID) objc.ID
-	SetObjectForKeyedSubscript(obj objc.ID, key foundation.NSCopying)
-	DictionaryRepresentation() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	Library() metal.MTLLibrary
-	SetLibrary(library metal.MTLLibrary)
+	obj.Object
+	ObjectForKeyedSubscript(key obj.Object) obj.Object
+	DictionaryRepresentation() obj.Object
 }
 
 var _ Techniqueable = (*Technique)(nil)

@@ -5,129 +5,151 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable representation of a property that might have multiple values.
+// MultiValue is an idiomatic wrapper over the Objective-C class ABMultiValue.
 //
-// MultiValue wraps [raw.ABMultiValue] with a fluent Go API.
+// MultiValue is an abstract base — you do not construct it directly. Construct one of [MutableMultiValue] and pass it where a MultiValue is accepted.
+//
+// An immutable representation of a property that might have multiple values.
 type MultiValue struct {
-	inner *raw.ABMultiValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ABMultiValue].
-func (x *MultiValue) Unwrap() *raw.ABMultiValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiValue) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiValueFromID adopts an existing object pointer as a MultiValue (nil for 0).
+// MultiValueFromID adopts an existing Objective-C object as a MultiValue
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiValueFromID(id objc.ID) *MultiValue {
 	if id == 0 {
 		return nil
 	}
-	return &MultiValue{inner: raw.ABMultiValueFromID(id)}
+	x := &MultiValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMultiValue creates a new [MultiValue].
-func NewMultiValue() *MultiValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ABMultiValue")), objc.RegisterName("new"))
-	return &MultiValue{inner: raw.ABMultiValueFromID(_id)}
+// multiValueAdopt wraps an Objective-C object that this code just created as a
+// MultiValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiValueAdopt(id objc.ID) *MultiValue {
+	if id == 0 {
+		return nil
+	}
+	x := &MultiValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the number of entries in a multivalue list.
-//
-// Count calls the underlying Count.
-func (x *MultiValue) Count() uint {
-	return x.inner.Count()
+// Description returns the object's -description text.
+func (x *MultiValue) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the value for the given index.
-//
-// ValueAtIndex calls the underlying ValueAtIndex.
-func (x *MultiValue) ValueAtIndex(index uint) objc.ID {
-	return x.inner.ValueAtIndex(index)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns the label for the given index.
-//
-// LabelAtIndex calls the underlying LabelAtIndex.
-func (x *MultiValue) LabelAtIndex(index uint) string {
-	_r := x.inner.LabelAtIndex(index)
-	if _r == nil {
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Count returns the number of entries in a multivalue list.
+func (x *MultiValue) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
+}
+
+// ValueAtIndex returns the value for the given index.
+func (x *MultiValue) ValueAtIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueAtIndex:"), index)
+	return obj.Wrap(_r)
+}
+
+// LabelAtIndex returns the label for the given index.
+func (x *MultiValue) LabelAtIndex(index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelAtIndex:"), index)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the identifier for the given index.
-//
-// IdentifierAtIndex calls the underlying IdentifierAtIndex.
-func (x *MultiValue) IdentifierAtIndex(index uint) string {
-	_r := x.inner.IdentifierAtIndex(index)
-	if _r == nil {
+// IdentifierAtIndex returns the identifier for the given index.
+func (x *MultiValue) IdentifierAtIndex(index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierAtIndex:"), index)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the index for the given identifier.
-//
-// IndexForIdentifier calls the underlying IndexForIdentifier.
-func (x *MultiValue) IndexForIdentifier(identifier string) uint {
-	return x.inner.IndexForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+// IndexForIdentifier returns the index for the given identifier.
+func (x *MultiValue) IndexForIdentifier(identifier string) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexForIdentifier:"), purego.NSString(identifier))
+	return _r
 }
 
-// Returns the identifier for the primary value.
-//
-// PrimaryIdentifier calls the underlying PrimaryIdentifier.
+// PrimaryIdentifier returns the identifier for the primary value.
 func (x *MultiValue) PrimaryIdentifier() string {
-	_r := x.inner.PrimaryIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the type for the values in a multivalue list.
-//
-// PropertyType calls the underlying PropertyType.
+// PropertyType returns the type for the values in a multivalue list.
 func (x *MultiValue) PropertyType() int {
-	return x.inner.PropertyType()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("propertyType"))
+	return _r
 }
 
-// Returns the value for the given identifier.
-//
-// ValueForIdentifier calls the underlying ValueForIdentifier.
-func (x *MultiValue) ValueForIdentifier(identifier string) objc.ID {
-	return x.inner.ValueForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+// ValueForIdentifier returns the value for the given identifier.
+func (x *MultiValue) ValueForIdentifier(identifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForIdentifier:"), purego.NSString(identifier))
+	return obj.Wrap(_r)
 }
 
-// Returns the label for the given identifier.
-//
-// LabelForIdentifier calls the underlying LabelForIdentifier.
-func (x *MultiValue) LabelForIdentifier(identifier string) objc.ID {
-	return x.inner.LabelForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+// LabelForIdentifier returns the label for the given identifier.
+func (x *MultiValue) LabelForIdentifier(identifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForIdentifier:"), purego.NSString(identifier))
+	return obj.Wrap(_r)
 }
-
-func (x *MultiValue) asMultiValue() *raw.ABMultiValue { return x.inner }
 
 // MultiValueable is the interface implemented by [MultiValue], for mocking and DI.
 type MultiValueable interface {
-	Unwrap() *raw.ABMultiValue
-	Count() uint
-	ValueAtIndex(index uint) objc.ID
-	LabelAtIndex(index uint) string
-	IdentifierAtIndex(index uint) string
-	IndexForIdentifier(identifier string) uint
+	obj.Object
+	Count() int
+	ValueAtIndex(index int) obj.Object
+	LabelAtIndex(index int) string
+	IdentifierAtIndex(index int) string
+	IndexForIdentifier(identifier string) int
 	PrimaryIdentifier() string
 	PropertyType() int
-	ValueForIdentifier(identifier string) objc.ID
-	LabelForIdentifier(identifier string) objc.ID
+	ValueForIdentifier(identifier string) obj.Object
+	LabelForIdentifier(identifier string) obj.Object
 }
 
 var _ MultiValueable = (*MultiValue)(nil)
+
+// isMultiValue marks MultiValue — and, by embedding promotion, its
+// subclasses — as a member of the MultiValue hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MultiValue) isMultiValue() {}
+
+var _ MultiValueProvider = (*MultiValue)(nil)

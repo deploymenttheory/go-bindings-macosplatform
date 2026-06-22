@@ -5,75 +5,81 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents caching options for a UNIX domain socket.
+// LinuxRosettaUnixSocketCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaUnixSocketCachingOptions.
 //
-// LinuxRosettaUnixSocketCachingOptions wraps [raw.VZLinuxRosettaUnixSocketCachingOptions] with a fluent Go API.
+// It embeds [LinuxRosettaCachingOptions], promoting that type's methods.
+//
+// An object that represents caching options for a UNIX domain socket.
 type LinuxRosettaUnixSocketCachingOptions struct {
-	inner *raw.VZLinuxRosettaUnixSocketCachingOptions
+	LinuxRosettaCachingOptions
 }
 
-// Unwrap returns the underlying [raw.VZLinuxRosettaUnixSocketCachingOptions].
-func (x *LinuxRosettaUnixSocketCachingOptions) Unwrap() *raw.VZLinuxRosettaUnixSocketCachingOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinuxRosettaUnixSocketCachingOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// LinuxRosettaUnixSocketCachingOptionsFromID adopts an existing object pointer as a LinuxRosettaUnixSocketCachingOptions (nil for 0).
+// LinuxRosettaUnixSocketCachingOptionsFromID adopts an existing Objective-C object as a LinuxRosettaUnixSocketCachingOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func LinuxRosettaUnixSocketCachingOptionsFromID(id objc.ID) *LinuxRosettaUnixSocketCachingOptions {
 	if id == 0 {
 		return nil
 	}
-	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(id)}
+	x := &LinuxRosettaUnixSocketCachingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLinuxRosettaUnixSocketCachingOptions creates a new [LinuxRosettaUnixSocketCachingOptions].
-func NewLinuxRosettaUnixSocketCachingOptions() *LinuxRosettaUnixSocketCachingOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("new"))
-	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(_id)}
-}
-
-// Creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
-//
-// NewLinuxRosettaUnixSocketCachingOptionsWithPathError creates a new [LinuxRosettaUnixSocketCachingOptions].
-func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRosettaUnixSocketCachingOptions, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// linuxRosettaUnixSocketCachingOptionsAdopt wraps an Objective-C object that this code just created as a
+// LinuxRosettaUnixSocketCachingOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linuxRosettaUnixSocketCachingOptionsAdopt(id objc.ID) *LinuxRosettaUnixSocketCachingOptions {
+	if id == 0 {
+		return nil
 	}
-	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(_id)}, nil
+	x := &LinuxRosettaUnixSocketCachingOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract Path set by initWithPath. @discussion This is the path of the Unix Domain Socket to be used by Rosetta.
-//
-// Path calls the underlying Path.
+// NewLinuxRosettaUnixSocketCachingOptions creates a new LinuxRosettaUnixSocketCachingOptions.
+func NewLinuxRosettaUnixSocketCachingOptions() *LinuxRosettaUnixSocketCachingOptions {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("new"))
+	return linuxRosettaUnixSocketCachingOptionsAdopt(_id)
+}
+
+// NewLinuxRosettaUnixSocketCachingOptionsWithPathError creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
+func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (result *LinuxRosettaUnixSocketCachingOptions, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return linuxRosettaUnixSocketCachingOptionsAdopt(_id), nil
+}
+
+// Path path set by initWithPath. This is the path of the Unix Domain Socket to be used by Rosetta.
 func (x *LinuxRosettaUnixSocketCachingOptions) Path() string {
-	_r := x.inner.Path()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *LinuxRosettaUnixSocketCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions {
-	return &x.inner.VZLinuxRosettaCachingOptions
+	return purego.GoString(_r)
 }
 
 // LinuxRosettaUnixSocketCachingOptionsable is the interface implemented by [LinuxRosettaUnixSocketCachingOptions], for mocking and DI.
 type LinuxRosettaUnixSocketCachingOptionsable interface {
-	Unwrap() *raw.VZLinuxRosettaUnixSocketCachingOptions
+	obj.Object
 	Path() string
 }
 
 var _ LinuxRosettaUnixSocketCachingOptionsable = (*LinuxRosettaUnixSocketCachingOptions)(nil)
+
+var _ LinuxRosettaCachingOptionsProvider = (*LinuxRosettaUnixSocketCachingOptions)(nil)

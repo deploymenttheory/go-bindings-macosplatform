@@ -5,108 +5,87 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayVectorLUTDequantize wraps [raw.MPSNDArrayVectorLUTDequantize] with a fluent Go API.
+// NDArrayVectorLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayVectorLUTDequantize.
+//
+// It embeds [NDArrayMultiaryKernel], promoting that type's methods.
 type NDArrayVectorLUTDequantize struct {
-	inner *raw.MPSNDArrayVectorLUTDequantize
+	NDArrayMultiaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayVectorLUTDequantize].
-func (x *NDArrayVectorLUTDequantize) Unwrap() *raw.MPSNDArrayVectorLUTDequantize { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayVectorLUTDequantize) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayVectorLUTDequantizeFromID adopts an existing object pointer as a NDArrayVectorLUTDequantize (nil for 0).
+// NDArrayVectorLUTDequantizeFromID adopts an existing Objective-C object as a NDArrayVectorLUTDequantize
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayVectorLUTDequantizeFromID(id objc.ID) *NDArrayVectorLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(id)}
-}
-
-// @abstract   Initializes a kernel for vector-based LUT dequantization. @param      device    The Metal device to be used with this kernel. @param      axis        The vector axis in the output. @result     A new vector LUT dequantization kernel.
-//
-// NewNDArrayVectorLUTDequantizeWithDeviceAxis creates a new [NDArrayVectorLUTDequantize].
-func NewNDArrayVectorLUTDequantizeWithDeviceAxis(device metal.MTLDevice, axis uint) *NDArrayVectorLUTDequantize {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayVectorLUTDequantize")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:axis:"), device, axis)
-	return &NDArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(_id)}
-}
-
-// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
-//
-// WithVectorAxis sets the vectorAxis property and returns the receiver for chaining.
-func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *NDArrayVectorLUTDequantize {
-	x.inner.SetVectorAxis(vectorAxis)
+	x := &NDArrayVectorLUTDequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayVectorLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayVectorLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+// nDArrayVectorLUTDequantizeAdopt wraps an Objective-C object that this code just created as a
+// NDArrayVectorLUTDequantize (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayVectorLUTDequantizeAdopt(id objc.ID) *NDArrayVectorLUTDequantize {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayVectorLUTDequantize{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayVectorLUTDequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayVectorLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// NewNDArrayVectorLUTDequantize creates a new NDArrayVectorLUTDequantize.
+func NewNDArrayVectorLUTDequantize() *NDArrayVectorLUTDequantize {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayVectorLUTDequantize")), objc.RegisterName("new"))
+	return nDArrayVectorLUTDequantizeAdopt(_id)
+}
+
+// WithVectorAxis which axis in the destination will receive the vector component, must be less than 4.
+func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *NDArrayVectorLUTDequantize {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
-//
-// VectorAxis calls the underlying VectorAxis.
-func (x *NDArrayVectorLUTDequantize) VectorAxis() uint {
-	return x.inner.VectorAxis()
+// VectorAxis which axis in the destination will receive the vector component, must be less than 4.
+func (x *NDArrayVectorLUTDequantize) VectorAxis() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorAxis"))
+	return _r
 }
 
-// SetVectorAxis calls the underlying SetVectorAxis.
-func (x *NDArrayVectorLUTDequantize) SetVectorAxis(vectorAxis uint) {
-	x.inner.SetVectorAxis(vectorAxis)
-}
-
-func (x *NDArrayVectorLUTDequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayVectorLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayVectorLUTDequantize) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+// SetVectorAxis wraps the corresponding Objective-C method.
+func (x *NDArrayVectorLUTDequantize) SetVectorAxis(vectorAxis int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 }
 
 // NDArrayVectorLUTDequantizeable is the interface implemented by [NDArrayVectorLUTDequantize], for mocking and DI.
 type NDArrayVectorLUTDequantizeable interface {
-	Unwrap() *raw.MPSNDArrayVectorLUTDequantize
-	WithVectorAxis(vectorAxis uint) *NDArrayVectorLUTDequantize
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayVectorLUTDequantize
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayVectorLUTDequantize
+	obj.Object
+	WithVectorAxis(vectorAxis int) *NDArrayVectorLUTDequantize
 	WithLabel(label string) *NDArrayVectorLUTDequantize
-	VectorAxis() uint
-	SetVectorAxis(vectorAxis uint)
+	VectorAxis() int
+	SetVectorAxis(vectorAxis int)
 }
 
 var _ NDArrayVectorLUTDequantizeable = (*NDArrayVectorLUTDequantize)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayVectorLUTDequantize)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayVectorLUTDequantize)(nil)
+
+var _ KernelProvider = (*NDArrayVectorLUTDequantize)(nil)

@@ -5,78 +5,80 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reads sample references from an asset track.
+// AssetReaderSampleReferenceOutput is an idiomatic wrapper over the Objective-C class AVAssetReaderSampleReferenceOutput.
 //
-// AssetReaderSampleReferenceOutput wraps [raw.AVAssetReaderSampleReferenceOutput] with a fluent Go API.
+// It embeds [AssetReaderOutput], promoting that type's methods.
+//
+// An object that reads sample references from an asset track.
 type AssetReaderSampleReferenceOutput struct {
-	inner *raw.AVAssetReaderSampleReferenceOutput
+	AssetReaderOutput
 }
 
-// Unwrap returns the underlying [raw.AVAssetReaderSampleReferenceOutput].
-func (x *AssetReaderSampleReferenceOutput) Unwrap() *raw.AVAssetReaderSampleReferenceOutput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReaderSampleReferenceOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderSampleReferenceOutputFromID adopts an existing object pointer as a AssetReaderSampleReferenceOutput (nil for 0).
+// AssetReaderSampleReferenceOutputFromID adopts an existing Objective-C object as a AssetReaderSampleReferenceOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderSampleReferenceOutputFromID(id objc.ID) *AssetReaderSampleReferenceOutput {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReaderSampleReferenceOutput{inner: raw.AVAssetReaderSampleReferenceOutputFromID(id)}
-}
-
-// Creates an object that supplies sample references.
-//
-// NewAssetReaderSampleReferenceOutputWithTrack creates a new [AssetReaderSampleReferenceOutput].
-func NewAssetReaderSampleReferenceOutputWithTrack(track *raw.AVAssetTrack) *AssetReaderSampleReferenceOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderSampleReferenceOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:"), track.Ptr())
-	return &AssetReaderSampleReferenceOutput{inner: raw.AVAssetReaderSampleReferenceOutputFromID(_id)}
-}
-
-// A Boolean value that indicates whether the output vends copied sample data.
-//
-// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
-func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
-	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	x := &AssetReaderSampleReferenceOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-//
-// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
-func (x *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {
-	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
-	return x
-}
-
-// Track calls the underlying Track.
-func (x *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
-	_r := x.inner.Track()
-	if _r == nil {
+// assetReaderSampleReferenceOutputAdopt wraps an Objective-C object that this code just created as a
+// AssetReaderSampleReferenceOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderSampleReferenceOutputAdopt(id objc.ID) *AssetReaderSampleReferenceOutput {
+	if id == 0 {
 		return nil
 	}
-	return &AssetTrack{inner: _r}
+	x := &AssetReaderSampleReferenceOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *AssetReaderSampleReferenceOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput {
-	return &x.inner.AVAssetReaderOutput
+// NewAssetReaderSampleReferenceOutputWithTrack creates an object that supplies sample references.
+func NewAssetReaderSampleReferenceOutputWithTrack(track *AssetTrack) *AssetReaderSampleReferenceOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderSampleReferenceOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:"), objref.IDOf(track))
+	return assetReaderSampleReferenceOutputAdopt(_id)
+}
+
+// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
+func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
+	return x
+}
+
+// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
+func (x *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
+	return x
+}
+
+// Track wraps the corresponding Objective-C method.
+func (x *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("track"))
+	return AssetTrackFromID(_r)
 }
 
 // AssetReaderSampleReferenceOutputable is the interface implemented by [AssetReaderSampleReferenceOutput], for mocking and DI.
 type AssetReaderSampleReferenceOutputable interface {
-	Unwrap() *raw.AVAssetReaderSampleReferenceOutput
+	obj.Object
 	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput
 	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput
 	Track() *AssetTrack
 }
 
 var _ AssetReaderSampleReferenceOutputable = (*AssetReaderSampleReferenceOutput)(nil)
+
+var _ AssetReaderOutputProvider = (*AssetReaderSampleReferenceOutput)(nil)

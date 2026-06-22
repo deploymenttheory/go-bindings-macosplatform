@@ -5,78 +5,94 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An AI that chooses moves in turn-based games using a deterministic strategy.
+// MinmaxStrategist is an idiomatic wrapper over the Objective-C class GKMinmaxStrategist.
 //
-// MinmaxStrategist wraps [raw.GKMinmaxStrategist] with a fluent Go API.
+// An AI that chooses moves in turn-based games using a deterministic strategy.
 type MinmaxStrategist struct {
-	inner *raw.GKMinmaxStrategist
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKMinmaxStrategist].
-func (x *MinmaxStrategist) Unwrap() *raw.GKMinmaxStrategist { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MinmaxStrategist) ID() objc.ID { return x.inner.Ptr() }
-
-// MinmaxStrategistFromID adopts an existing object pointer as a MinmaxStrategist (nil for 0).
+// MinmaxStrategistFromID adopts an existing Objective-C object as a MinmaxStrategist
+// (nil for 0), retaining it and registering a release finalizer.
 func MinmaxStrategistFromID(id objc.ID) *MinmaxStrategist {
 	if id == 0 {
 		return nil
 	}
-	return &MinmaxStrategist{inner: raw.GKMinmaxStrategistFromID(id)}
-}
-
-// NewMinmaxStrategist creates a new [MinmaxStrategist].
-func NewMinmaxStrategist() *MinmaxStrategist {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMinmaxStrategist")), objc.RegisterName("new"))
-	return &MinmaxStrategist{inner: raw.GKMinmaxStrategistFromID(_id)}
-}
-
-// The number of future turns for the strategist to consider when planning moves.
-//
-// WithMaxLookAheadDepth sets the maxLookAheadDepth property and returns the receiver for chaining.
-func (x *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist {
-	x.inner.SetMaxLookAheadDepth(maxLookAheadDepth)
+	x := &MinmaxStrategist{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Computes and returns the best possible move for the specified player.
-//
-// BestMoveForPlayer calls the underlying BestMoveForPlayer.
-func (x *MinmaxStrategist) BestMoveForPlayer(player raw.GKGameModelPlayer) raw.GKGameModelUpdate {
-	return x.inner.BestMoveForPlayer(player)
+// minmaxStrategistAdopt wraps an Objective-C object that this code just created as a
+// MinmaxStrategist (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func minmaxStrategistAdopt(id objc.ID) *MinmaxStrategist {
+	if id == 0 {
+		return nil
+	}
+	x := &MinmaxStrategist{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Computes several of the best possible moves for the specified player, and returns a move randomly selected from among them.
-//
-// RandomMoveForPlayerFromNumberOfBestMoves calls the underlying RandomMoveForPlayerFromNumberOfBestMoves.
-func (x *MinmaxStrategist) RandomMoveForPlayerFromNumberOfBestMoves(player raw.GKGameModelPlayer, numMovesToConsider int) raw.GKGameModelUpdate {
-	return x.inner.RandomMoveForPlayerFromNumberOfBestMoves(player, numMovesToConsider)
+// Description returns the object's -description text.
+func (x *MinmaxStrategist) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The maximum number of future turns that will be processed when searching for a move.
-//
-// MaxLookAheadDepth calls the underlying MaxLookAheadDepth.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MinmaxStrategist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MinmaxStrategist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MinmaxStrategist) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMinmaxStrategist creates a new MinmaxStrategist.
+func NewMinmaxStrategist() *MinmaxStrategist {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKMinmaxStrategist")), objc.RegisterName("new"))
+	return minmaxStrategistAdopt(_id)
+}
+
+// WithMaxLookAheadDepth the number of future turns for the strategist to consider when planning moves.
+func (x *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
+	return x
+}
+
+// MaxLookAheadDepth the maximum number of future turns that will be processed when searching for a move.
 func (x *MinmaxStrategist) MaxLookAheadDepth() int {
-	return x.inner.MaxLookAheadDepth()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxLookAheadDepth"))
+	return _r
 }
 
-// SetMaxLookAheadDepth calls the underlying SetMaxLookAheadDepth.
+// SetMaxLookAheadDepth wraps the corresponding Objective-C method.
 func (x *MinmaxStrategist) SetMaxLookAheadDepth(maxLookAheadDepth int) {
-	x.inner.SetMaxLookAheadDepth(maxLookAheadDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
 }
 
 // MinmaxStrategistable is the interface implemented by [MinmaxStrategist], for mocking and DI.
 type MinmaxStrategistable interface {
-	Unwrap() *raw.GKMinmaxStrategist
+	obj.Object
 	WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist
-	BestMoveForPlayer(player raw.GKGameModelPlayer) raw.GKGameModelUpdate
-	RandomMoveForPlayerFromNumberOfBestMoves(player raw.GKGameModelPlayer, numMovesToConsider int) raw.GKGameModelUpdate
 	MaxLookAheadDepth() int
 	SetMaxLookAheadDepth(maxLookAheadDepth int)
 }

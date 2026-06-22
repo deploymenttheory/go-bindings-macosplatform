@@ -5,46 +5,87 @@
 package executionpolicy
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/executionpolicy"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// ExecutionPolicy wraps [raw.EPExecutionPolicy] with a fluent Go API.
+// ExecutionPolicy is an idiomatic wrapper over the Objective-C class EPExecutionPolicy.
 type ExecutionPolicy struct {
-	inner *raw.EPExecutionPolicy
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EPExecutionPolicy].
-func (x *ExecutionPolicy) Unwrap() *raw.EPExecutionPolicy { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExecutionPolicy) ID() objc.ID { return x.inner.Ptr() }
-
-// ExecutionPolicyFromID adopts an existing object pointer as a ExecutionPolicy (nil for 0).
+// ExecutionPolicyFromID adopts an existing Objective-C object as a ExecutionPolicy
+// (nil for 0), retaining it and registering a release finalizer.
 func ExecutionPolicyFromID(id objc.ID) *ExecutionPolicy {
 	if id == 0 {
 		return nil
 	}
-	return &ExecutionPolicy{inner: raw.EPExecutionPolicyFromID(id)}
+	x := &ExecutionPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewExecutionPolicy creates a new [ExecutionPolicy].
+// executionPolicyAdopt wraps an Objective-C object that this code just created as a
+// ExecutionPolicy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func executionPolicyAdopt(id objc.ID) *ExecutionPolicy {
+	if id == 0 {
+		return nil
+	}
+	x := &ExecutionPolicy{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExecutionPolicy) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExecutionPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExecutionPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExecutionPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExecutionPolicy creates a new ExecutionPolicy.
 func NewExecutionPolicy() *ExecutionPolicy {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EPExecutionPolicy")), objc.RegisterName("new"))
-	return &ExecutionPolicy{inner: raw.EPExecutionPolicyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EPExecutionPolicy")), objc.RegisterName("new"))
+	return executionPolicyAdopt(_id)
 }
 
-// AddPolicyExceptionForURLError calls the underlying AddPolicyExceptionForURLError.
-func (x *ExecutionPolicy) AddPolicyExceptionForURLError(url string) (bool, error) {
-	return x.inner.AddPolicyExceptionForURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// AddPolicyExceptionForURL wraps the corresponding Objective-C method.
+func (x *ExecutionPolicy) AddPolicyExceptionForURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addPolicyExceptionForURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // ExecutionPolicyable is the interface implemented by [ExecutionPolicy], for mocking and DI.
 type ExecutionPolicyable interface {
-	Unwrap() *raw.EPExecutionPolicy
-	AddPolicyExceptionForURLError(url string) (bool, error)
+	obj.Object
+	AddPolicyExceptionForURL(url string) error
 }
 
 var _ ExecutionPolicyable = (*ExecutionPolicy)(nil)

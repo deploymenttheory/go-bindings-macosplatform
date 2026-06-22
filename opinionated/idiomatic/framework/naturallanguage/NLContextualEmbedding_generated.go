@@ -5,157 +5,163 @@
 package naturallanguage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A model that computes sequences of embedding vectors for natural language utterances.
+// ContextualEmbedding is an idiomatic wrapper over the Objective-C class NLContextualEmbedding.
 //
-// ContextualEmbedding wraps [raw.NLContextualEmbedding] with a fluent Go API.
+// A model that computes sequences of embedding vectors for natural language utterances.
 type ContextualEmbedding struct {
-	inner *raw.NLContextualEmbedding
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NLContextualEmbedding].
-func (x *ContextualEmbedding) Unwrap() *raw.NLContextualEmbedding { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContextualEmbedding) ID() objc.ID { return x.inner.Ptr() }
-
-// ContextualEmbeddingFromID adopts an existing object pointer as a ContextualEmbedding (nil for 0).
+// ContextualEmbeddingFromID adopts an existing Objective-C object as a ContextualEmbedding
+// (nil for 0), retaining it and registering a release finalizer.
 func ContextualEmbeddingFromID(id objc.ID) *ContextualEmbedding {
 	if id == 0 {
 		return nil
 	}
-	return &ContextualEmbedding{inner: raw.NLContextualEmbeddingFromID(id)}
+	x := &ContextualEmbedding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContextualEmbedding creates a new [ContextualEmbedding].
+// contextualEmbeddingAdopt wraps an Objective-C object that this code just created as a
+// ContextualEmbedding (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contextualEmbeddingAdopt(id objc.ID) *ContextualEmbedding {
+	if id == 0 {
+		return nil
+	}
+	x := &ContextualEmbedding{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContextualEmbedding) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContextualEmbedding) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContextualEmbedding) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContextualEmbedding) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContextualEmbedding creates a new ContextualEmbedding.
 func NewContextualEmbedding() *ContextualEmbedding {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NLContextualEmbedding")), objc.RegisterName("new"))
-	return &ContextualEmbedding{inner: raw.NLContextualEmbeddingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("new"))
+	return contextualEmbeddingAdopt(_id)
 }
 
-// The instance method that loads the embedding model.
+// Load the instance method that loads the embedding model.
 //
-// Load returns any validation error.
+// Load returns an error if the operation did not succeed.
 func (x *ContextualEmbedding) Load() error {
-	_, err := x.inner.LoadWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// The instance method that unloads the embedding model.
-//
-// Unload calls the underlying Unload.
+// Unload the instance method that unloads the embedding model.
 func (x *ContextualEmbedding) Unload() {
-	x.inner.Unload()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unload"))
 }
 
-// Applies an embedding to a string and obtains the resulting embedding vectors.
-//
-// EmbeddingResultForStringLanguageError calls the underlying EmbeddingResultForStringLanguageError.
-func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error) {
-	_r, _err := x.inner.EmbeddingResultForStringLanguageError(foundation.NSStringStringWithUTF8String(string_), language)
-	if _err != nil {
-		return nil, _err
+// EmbeddingResultForStringLanguageError applies an embedding to a string and obtains the resulting embedding vectors.
+func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language obj.Object) (result *ContextualEmbeddingResult, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeddingResultForString:language:error:"), purego.NSString(string_), objref.IDOf(language), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &ContextualEmbeddingResult{inner: _r}, nil
+	return ContextualEmbeddingResultFromID(_r), nil
 }
 
-// Requests embedding model assets and downloads them if available.
-//
-// RequestEmbeddingAssetsWithCompletionHandler calls the underlying RequestEmbeddingAssetsWithCompletionHandler.
-func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {
-	x.inner.RequestEmbeddingAssetsWithCompletionHandler(func(_a0 raw.NLContextualEmbeddingAssetsResult, _a1 unsafe.Pointer) {
-		completionHandler(NLContextualEmbeddingAssetsResult(_a0), _a1)
-	})
-}
-
-// A string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
-//
-// ModelIdentifier calls the underlying ModelIdentifier.
+// ModelIdentifier a string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
 func (x *ContextualEmbedding) ModelIdentifier() string {
-	_r := x.inner.ModelIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The languages that the contextual embedding supports. Starting in iOS 17 and macOS 14, the framework supports 27 languages across three models: - Latin — including Croatian, Czech, Danish, Dutch, English, Finnish, French, German, Hungarian, Indonesian, Italian, Norwegian, Polish, Portuguese, Romanian, Slovak, Swedish, Spanish, Turkish, and Vietnamese - Cyrillic — including Bulgarian, Kazakh, Russian, and Ukrainian - Chinese, Japanese, and Korean In iOS 18 and macOS 15, the framework expands language support to include three additional models: - Arabic - Indic — including Bangla, Gujarati, Hindi, Kannada, Malayalam, Marathi, Punjabi, Tamil, Telugu, and Urdu - Thai
+// Languages the languages that the contextual embedding supports. Starting in iOS 17 and macOS 14, the framework supports 27 languages across three models: - Latin — including Croatian, Czech, Danish, Dutch, English, Finnish, French, German, Hungarian, Indonesian, Italian, Norwegian, Polish, Portuguese, Romanian, Slovak, Swedish, Spanish, Turkish, and Vietnamese - Cyrillic — including Bulgarian, Kazakh, Russian, and Ukrainian - Chinese, Japanese, and Korean In iOS 18 and macOS 15, the framework expands language support to include three additional models: - Arabic - Indic — including Bangla, Gujarati, Hindi, Kannada, Malayalam, Marathi, Punjabi, Tamil, Telugu, and Urdu - Thai
 //
 // Languages returns the collection as a Go slice.
-func (x *ContextualEmbedding) Languages() []*foundation.NSString {
-	arr := x.inner.Languages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *ContextualEmbedding) Languages() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to “languages“.
+// Scripts the writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to “languages“.
 //
 // Scripts returns the collection as a Go slice.
-func (x *ContextualEmbedding) Scripts() []*foundation.NSString {
-	arr := x.inner.Scripts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *ContextualEmbedding) Scripts() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scripts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The version number the contextual embedding uses. Ensure your app uses the same model revision you used during development and testing to maintain consistent results.
-//
-// Revision calls the underlying Revision.
-func (x *ContextualEmbedding) Revision() uint {
-	return x.inner.Revision()
+// Revision the version number the contextual embedding uses. Ensure your app uses the same model revision you used during development and testing to maintain consistent results.
+func (x *ContextualEmbedding) Revision() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("revision"))
+	return _r
 }
 
-// The dimensionality of the embedding vectors generated by the model.
-//
-// Dimension calls the underlying Dimension.
-func (x *ContextualEmbedding) Dimension() uint {
-	return x.inner.Dimension()
+// Dimension the dimensionality of the embedding vectors generated by the model.
+func (x *ContextualEmbedding) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
 
-// The maximum number of tokens in sequence for which the embedding generates vectors. > Note: The model operates on subword tokens rather than whole words. Each token may represent a single character, part of a word, or (less commonly) an entire word. Most words are split into multiple tokens, especially rare or complex terms. As a result, the number of tokens in a sequence is often greater than the number of words. Inputs longer than the token limit will be truncated, and only the first `maximumSequenceLength` tokens will be processed to generate embeddings. `NLContextualEmbedding` works best with text snippets at the sentence or paragraph level. The model truncates text that exceeds this maximum length and only processes the truncated portion of the input.
-//
-// MaximumSequenceLength calls the underlying MaximumSequenceLength.
-func (x *ContextualEmbedding) MaximumSequenceLength() uint {
-	return x.inner.MaximumSequenceLength()
+// MaximumSequenceLength the maximum number of tokens in sequence for which the embedding generates vectors. > Note: The model operates on subword tokens rather than whole words. Each token may represent a single character, part of a word, or (less commonly) an entire word. Most words are split into multiple tokens, especially rare or complex terms. As a result, the number of tokens in a sequence is often greater than the number of words. Inputs longer than the token limit will be truncated, and only the first `maximumSequenceLength` tokens will be processed to generate embeddings. `NLContextualEmbedding` works best with text snippets at the sentence or paragraph level. The model truncates text that exceeds this maximum length and only processes the truncated portion of the input.
+func (x *ContextualEmbedding) MaximumSequenceLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumSequenceLength"))
+	return _r
 }
 
-// A Boolean value that indicates whether assets are available on-device.
-//
-// HasAvailableAssets calls the underlying HasAvailableAssets.
+// HasAvailableAssets a Boolean value that indicates whether assets are available on-device.
 func (x *ContextualEmbedding) HasAvailableAssets() bool {
-	return x.inner.HasAvailableAssets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAvailableAssets"))
+	return _r
 }
 
 // ContextualEmbeddingable is the interface implemented by [ContextualEmbedding], for mocking and DI.
 type ContextualEmbeddingable interface {
-	Unwrap() *raw.NLContextualEmbedding
+	obj.Object
 	Load() error
 	Unload()
-	EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error)
-	RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer))
+	EmbeddingResultForStringLanguageError(string_ string, language obj.Object) (result *ContextualEmbeddingResult, err error)
 	ModelIdentifier() string
-	Languages() []*foundation.NSString
-	Scripts() []*foundation.NSString
-	Revision() uint
-	Dimension() uint
-	MaximumSequenceLength() uint
+	Languages() []obj.Object
+	Scripts() []obj.Object
+	Revision() int
+	Dimension() int
+	MaximumSequenceLength() int
 	HasAvailableAssets() bool
 }
 

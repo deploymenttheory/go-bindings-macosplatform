@@ -5,104 +5,121 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a custom color space.
+// ColorSpace is an idiomatic wrapper over the Objective-C class NSColorSpace.
 //
-// ColorSpace wraps [raw.NSColorSpace] with a fluent Go API.
+// An object that represents a custom color space.
 type ColorSpace struct {
-	inner *raw.NSColorSpace
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSColorSpace].
-func (x *ColorSpace) Unwrap() *raw.NSColorSpace { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorSpace) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorSpaceFromID adopts an existing object pointer as a ColorSpace (nil for 0).
+// ColorSpaceFromID adopts an existing Objective-C object as a ColorSpace
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorSpaceFromID(id objc.ID) *ColorSpace {
 	if id == 0 {
 		return nil
 	}
-	return &ColorSpace{inner: raw.NSColorSpaceFromID(id)}
+	x := &ColorSpace{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a color space object from the specified ICC profile.
-//
-// NewColorSpaceWithICCProfileData creates a new [ColorSpace].
-func NewColorSpaceWithICCProfileData(iccData *foundation.NSData) *ColorSpace {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSpace")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithICCProfileData:"), iccData.Ptr())
-	return &ColorSpace{inner: raw.NSColorSpaceFromID(_id)}
+// colorSpaceAdopt wraps an Objective-C object that this code just created as a
+// ColorSpace (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorSpaceAdopt(id objc.ID) *ColorSpace {
+	if id == 0 {
+		return nil
+	}
+	x := &ColorSpace{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a color space object from the specified ColorSync profile.
-//
-// NewColorSpaceWithColorSyncProfile creates a new [ColorSpace].
-func NewColorSpaceWithColorSyncProfile(prof unsafe.Pointer) *ColorSpace {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSpace")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorSyncProfile:"), prof)
-	return &ColorSpace{inner: raw.NSColorSpaceFromID(_id)}
+// Description returns the object's -description text.
+func (x *ColorSpace) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Initializes and returns a color space object initialized from a Core Graphics color-space object.
-//
-// NewColorSpaceWithCGColorSpace creates a new [ColorSpace].
-func NewColorSpaceWithCGColorSpace(cgColorSpace unsafe.Pointer) *ColorSpace {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSpace")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColorSpace:"), cgColorSpace)
-	return &ColorSpace{inner: raw.NSColorSpaceFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ColorSpace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// ICCProfileData calls the underlying ICCProfileData.
-func (x *ColorSpace) ICCProfileData() *foundation.NSData {
-	return x.inner.ICCProfileData()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ColorSpace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// ColorSyncProfile calls the underlying ColorSyncProfile.
-func (x *ColorSpace) ColorSyncProfile() unsafe.Pointer {
-	return x.inner.ColorSyncProfile()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ColorSpace) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// CGColorSpace calls the underlying CGColorSpace.
-func (x *ColorSpace) CGColorSpace() unsafe.Pointer {
-	return x.inner.CGColorSpace()
+// NewColorSpaceWithICCProfileData initializes and returns a color space object from the specified ICC profile.
+func NewColorSpaceWithICCProfileData(iccData obj.Object) *ColorSpace {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithICCProfileData:"), objref.IDOf(iccData))
+	return colorSpaceAdopt(_id)
 }
 
-// NumberOfColorComponents calls the underlying NumberOfColorComponents.
+// NewColorSpaceWithCGColorSpace initializes and returns a color space object initialized from a Core Graphics color-space object.
+func NewColorSpaceWithCGColorSpace(cgColorSpace obj.Object) *ColorSpace {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColorSpace:"), objref.IDOf(cgColorSpace))
+	return colorSpaceAdopt(_id)
+}
+
+// ICCProfileData wraps the corresponding Objective-C method.
+func (x *ColorSpace) ICCProfileData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ICCProfileData"))
+	return obj.Wrap(_r)
+}
+
+// CGColorSpace wraps the corresponding Objective-C method.
+func (x *ColorSpace) CGColorSpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGColorSpace"))
+	return obj.Wrap(_r)
+}
+
+// NumberOfColorComponents wraps the corresponding Objective-C method.
 func (x *ColorSpace) NumberOfColorComponents() int {
-	return x.inner.NumberOfColorComponents()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColorComponents"))
+	return _r
 }
 
-// ColorSpaceModel calls the underlying ColorSpaceModel.
-func (x *ColorSpace) ColorSpaceModel() NSColorSpaceModel {
-	return NSColorSpaceModel(x.inner.ColorSpaceModel())
+// ColorSpaceModel wraps the corresponding Objective-C method.
+func (x *ColorSpace) ColorSpaceModel() ColorSpaceModel {
+	_r := objc.Send[ColorSpaceModel](objref.IDOf(x), objc.RegisterName("colorSpaceModel"))
+	return _r
 }
 
-// LocalizedName calls the underlying LocalizedName.
+// LocalizedName wraps the corresponding Objective-C method.
 func (x *ColorSpace) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ColorSpaceable is the interface implemented by [ColorSpace], for mocking and DI.
 type ColorSpaceable interface {
-	Unwrap() *raw.NSColorSpace
-	ICCProfileData() *foundation.NSData
-	ColorSyncProfile() unsafe.Pointer
-	CGColorSpace() unsafe.Pointer
+	obj.Object
+	ICCProfileData() obj.Object
+	CGColorSpace() obj.Object
 	NumberOfColorComponents() int
-	ColorSpaceModel() NSColorSpaceModel
+	ColorSpaceModel() ColorSpaceModel
 	LocalizedName() string
 }
 

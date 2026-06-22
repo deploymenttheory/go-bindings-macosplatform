@@ -5,255 +5,169 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.
+// Object is an idiomatic wrapper over the Objective-C class MDLObject.
 //
-// Object wraps [raw.MDLObject] with a fluent Go API.
+// Object is an abstract base — you do not construct it directly. Construct one of [Camera], [Light], [Mesh], [PackedJointAnimation], [Skeleton], [VoxelArray] and pass it where a Object is accepted.
+//
+// The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.
 type Object struct {
-	inner *raw.MDLObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLObject].
-func (x *Object) Unwrap() *raw.MDLObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Object) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
+// ObjectFromID adopts an existing Objective-C object as a Object
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	return &Object{inner: raw.MDLObjectFromID(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObject creates a new [Object].
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLObject")), objc.RegisterName("new"))
-	return &Object{inner: raw.MDLObjectFromID(_id)}
+// objectAdopt wraps an Objective-C object that this code just created as a
+// Object (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectAdopt(id objc.ID) *Object {
+	if id == 0 {
+		return nil
+	}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets the parent property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *Object) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithParent the parent object that contains this object.
 func (x *Object) WithParent(parent ObjectProvider) *Object {
-	x.inner.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Object) WithInstance(instance ObjectProvider) *Object {
-	x.inner.SetInstance(instance.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *Object) WithTransform(transform raw.MDLTransformComponent) *Object {
-	x.inner.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *Object) WithChildren(children raw.MDLObjectContainerComponent) *Object {
-	x.inner.SetChildren(children)
-	return x
-}
-
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Object) WithHidden(hidden bool) *Object {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Associates a component with the object for the specified protocol.
-//
-// SetComponentForProtocol calls the underlying SetComponentForProtocol.
-func (x *Object) SetComponentForProtocol(component raw.MDLComponent, protocol unsafe.Pointer) {
-	x.inner.SetComponentForProtocol(component, protocol)
-}
-
-// Returns the object’s component for the specified protocol.
-//
-// ComponentConformingToProtocol calls the underlying ComponentConformingToProtocol.
-func (x *Object) ComponentConformingToProtocol(protocol unsafe.Pointer) raw.MDLComponent {
-	return x.inner.ComponentConformingToProtocol(protocol)
-}
-
-// @method objectForKeyedSubscript: @abstract Allows shorthand [key] syntax for componentConformingToProtocol:. @param key The protocol that the component conforms to. @see componentConformingToProtocol:
-//
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
-func (x *Object) ObjectForKeyedSubscript(key unsafe.Pointer) raw.MDLComponent {
-	return x.inner.ObjectForKeyedSubscript(key)
-}
-
-// @method setObject:forKeyedSubscript: @abstract Allows shorthand [key] syntax for setComponent:forProtocol:. @param key The protocol that the component conforms to. @see setComponent:forProtocol:
-//
-// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
-func (x *Object) SetObjectForKeyedSubscript(obj raw.MDLComponent, key unsafe.Pointer) {
-	x.inner.SetObjectForKeyedSubscript(obj, key)
-}
-
-// Returns the child object at the specified path.
-//
-// ObjectAtPath calls the underlying ObjectAtPath.
+// ObjectAtPath returns the child object at the specified path.
 func (x *Object) ObjectAtPath(path string) *Object {
-	_r := x.inner.ObjectAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtPath:"), purego.NSString(path))
+	return ObjectFromID(_r)
 }
 
-// Executes the specified block using each object in this object’s child hierarchy.
-//
-// EnumerateChildObjectsOfClassRootUsingBlockStopPointer calls the underlying EnumerateChildObjectsOfClassRootUsingBlockStopPointer.
-func (x *Object) EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass objc.Class, root *raw.MDLObject, block func(*raw.MDLObject, *bool), stopPointer *bool) {
-	x.inner.EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass, root, block, stopPointer)
+// AddChild adds a child object to this object, creating a container for the object’s children if necessary.
+func (x *Object) AddChild(child *Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// Adds a child object to this object, creating a container for the object’s children if necessary.
-//
-// AddChild calls the underlying AddChild.
-func (x *Object) AddChild(child *raw.MDLObject) {
-	x.inner.AddChild(child)
+// Components allows applications to introspect the components on the objects.
+func (x *Object) Components() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns the minimum region entirely enclosing the object’s contents at the specified time sample.
-//
-// BoundingBoxAtTime calls the underlying BoundingBoxAtTime.
-func (x *Object) BoundingBoxAtTime(time_ float64) raw.MDLAxisAlignedBoundingBox {
-	return x.inner.BoundingBoxAtTime(time_)
-}
-
-// @property components @abstract Allows applications to introspect the components on the objects.
-//
-// Components calls the underlying Components.
-func (x *Object) Components() *foundation.NSArray[raw.MDLComponent] {
-	return x.inner.Components()
-}
-
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
-//
-// Parent calls the underlying Parent.
+// Parent parent object. Nil if no parent. Set to nil when you remove this from an object container inside the parent object.
 func (x *Object) Parent() *Object {
-	_r := x.inner.Parent()
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+	return ObjectFromID(_r)
 }
 
-// SetParent calls the underlying SetParent.
-func (x *Object) SetParent(parent *raw.MDLObject) {
-	x.inner.SetParent(parent)
+// SetParent wraps the corresponding Objective-C method.
+func (x *Object) SetParent(parent *Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
-//
-// Instance calls the underlying Instance.
+// Instance instance object nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
 func (x *Object) Instance() *Object {
-	_r := x.inner.Instance()
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instance"))
+	return ObjectFromID(_r)
 }
 
-// SetInstance calls the underlying SetInstance.
-func (x *Object) SetInstance(instance *raw.MDLObject) {
-	x.inner.SetInstance(instance)
+// SetInstance wraps the corresponding Objective-C method.
+func (x *Object) SetInstance(instance *Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 }
 
-// @property path @abstract a string representing a path to the object @discussion a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
-//
-// Path calls the underlying Path.
+// Path a string representing a path to the object a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
 func (x *Object) Path() string {
-	_r := x.inner.Path()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
-//
-// Transform calls the underlying Transform.
-func (x *Object) Transform() raw.MDLTransformComponent {
-	return x.inner.Transform()
-}
-
-// SetTransform calls the underlying SetTransform.
-func (x *Object) SetTransform(transform raw.MDLTransformComponent) {
-	x.inner.SetTransform(transform)
-}
-
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
-//
-// Children calls the underlying Children.
-func (x *Object) Children() raw.MDLObjectContainerComponent {
-	return x.inner.Children()
-}
-
-// SetChildren calls the underlying SetChildren.
-func (x *Object) SetChildren(children raw.MDLObjectContainerComponent) {
-	x.inner.SetChildren(children)
-}
-
-// Hidden calls the underlying Hidden.
+// Hidden wraps the corresponding Objective-C method.
 func (x *Object) Hidden() bool {
-	return x.inner.Hidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
+// SetHidden wraps the corresponding Objective-C method.
 func (x *Object) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
-
-func (x *Object) asObject() *raw.MDLObject { return x.inner }
 
 // Objectable is the interface implemented by [Object], for mocking and DI.
 type Objectable interface {
-	Unwrap() *raw.MDLObject
+	obj.Object
 	WithParent(parent ObjectProvider) *Object
 	WithInstance(instance ObjectProvider) *Object
-	WithTransform(transform raw.MDLTransformComponent) *Object
-	WithChildren(children raw.MDLObjectContainerComponent) *Object
 	WithHidden(hidden bool) *Object
-	SetComponentForProtocol(component raw.MDLComponent, protocol unsafe.Pointer)
-	ComponentConformingToProtocol(protocol unsafe.Pointer) raw.MDLComponent
-	ObjectForKeyedSubscript(key unsafe.Pointer) raw.MDLComponent
-	SetObjectForKeyedSubscript(obj raw.MDLComponent, key unsafe.Pointer)
 	ObjectAtPath(path string) *Object
-	EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass objc.Class, root *raw.MDLObject, block func(*raw.MDLObject, *bool), stopPointer *bool)
-	AddChild(child *raw.MDLObject)
-	BoundingBoxAtTime(time_ float64) raw.MDLAxisAlignedBoundingBox
-	Components() *foundation.NSArray[raw.MDLComponent]
+	AddChild(child *Object)
+	Components() []obj.Object
 	Parent() *Object
-	SetParent(parent *raw.MDLObject)
+	SetParent(parent *Object)
 	Instance() *Object
-	SetInstance(instance *raw.MDLObject)
+	SetInstance(instance *Object)
 	Path() string
-	Transform() raw.MDLTransformComponent
-	SetTransform(transform raw.MDLTransformComponent)
-	Children() raw.MDLObjectContainerComponent
-	SetChildren(children raw.MDLObjectContainerComponent)
 	Hidden() bool
 	SetHidden(hidden bool)
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

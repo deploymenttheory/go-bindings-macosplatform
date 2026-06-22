@@ -5,91 +5,94 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can filter the movement of an object and provides haptic feedback when alignment occurs.
+// AlignmentFeedbackFilter is an idiomatic wrapper over the Objective-C class NSAlignmentFeedbackFilter.
 //
-// AlignmentFeedbackFilter wraps [raw.NSAlignmentFeedbackFilter] with a fluent Go API.
+// An object that can filter the movement of an object and provides haptic feedback when alignment occurs.
 type AlignmentFeedbackFilter struct {
-	inner *raw.NSAlignmentFeedbackFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAlignmentFeedbackFilter].
-func (x *AlignmentFeedbackFilter) Unwrap() *raw.NSAlignmentFeedbackFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AlignmentFeedbackFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// AlignmentFeedbackFilterFromID adopts an existing object pointer as a AlignmentFeedbackFilter (nil for 0).
+// AlignmentFeedbackFilterFromID adopts an existing Objective-C object as a AlignmentFeedbackFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func AlignmentFeedbackFilterFromID(id objc.ID) *AlignmentFeedbackFilter {
 	if id == 0 {
 		return nil
 	}
-	return &AlignmentFeedbackFilter{inner: raw.NSAlignmentFeedbackFilterFromID(id)}
+	x := &AlignmentFeedbackFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAlignmentFeedbackFilter creates a new [AlignmentFeedbackFilter].
+// alignmentFeedbackFilterAdopt wraps an Objective-C object that this code just created as a
+// AlignmentFeedbackFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func alignmentFeedbackFilterAdopt(id objc.ID) *AlignmentFeedbackFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &AlignmentFeedbackFilter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AlignmentFeedbackFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AlignmentFeedbackFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AlignmentFeedbackFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AlignmentFeedbackFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAlignmentFeedbackFilter creates a new AlignmentFeedbackFilter.
 func NewAlignmentFeedbackFilter() *AlignmentFeedbackFilter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAlignmentFeedbackFilter")), objc.RegisterName("new"))
-	return &AlignmentFeedbackFilter{inner: raw.NSAlignmentFeedbackFilterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAlignmentFeedbackFilter")), objc.RegisterName("new"))
+	return alignmentFeedbackFilterAdopt(_id)
 }
 
-// Informs the feedback filter about a new event.
-//
-// UpdateWithEvent calls the underlying UpdateWithEvent.
-func (x *AlignmentFeedbackFilter) UpdateWithEvent(event *raw.NSEvent) {
-	x.inner.UpdateWithEvent(event)
+// UpdateWithEvent informs the feedback filter about a new event.
+func (x *AlignmentFeedbackFilter) UpdateWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the feedback filter about a new pan (drag) gesture recognizer event.
-//
-// UpdateWithPanRecognizer calls the underlying UpdateWithPanRecognizer.
-func (x *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *raw.NSPanGestureRecognizer) {
-	x.inner.UpdateWithPanRecognizer(panRecognizer)
+// UpdateWithPanRecognizer informs the feedback filter about a new pan (drag) gesture recognizer event.
+func (x *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithPanRecognizer:"), objref.IDOf(panRecognizer))
 }
 
-// Requests a feedback token for the alignment of an object requiring horizontal and vertical movement.
-//
-// AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint calls the underlying AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint.
-func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *raw.NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) raw.NSAlignmentFeedbackToken {
-	return x.inner.AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view, previousPoint, alignedPoint, defaultPoint)
-}
-
-// Requests a feedback token for the alignment of an object requiring horizontal movement only.
-//
-// AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX calls the underlying AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX.
-func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *raw.NSView, previousX float64, alignedX float64, defaultX float64) raw.NSAlignmentFeedbackToken {
-	return x.inner.AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view, previousX, alignedX, defaultX)
-}
-
-// Requests a feedback token for the alignment of an object requiring vertical movement only.
-//
-// AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY calls the underlying AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY.
-func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *raw.NSView, previousY float64, alignedY float64, defaultY float64) raw.NSAlignmentFeedbackToken {
-	return x.inner.AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view, previousY, alignedY, defaultY)
-}
-
-// Performs the haptic feedback described by one or more alignment feedback tokens.
-//
-// PerformFeedbackPerformanceTime calls the underlying PerformFeedbackPerformanceTime.
-func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime NSHapticFeedbackPerformanceTime) {
-	x.inner.PerformFeedbackPerformanceTime(alignmentFeedbackTokens, raw.NSHapticFeedbackPerformanceTime(performanceTime))
+// PerformFeedbackPerformanceTime performs the haptic feedback described by one or more alignment feedback tokens.
+func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performFeedback:performanceTime:"), purego.SliceToNSArray(alignmentFeedbackTokens, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), performanceTime)
 }
 
 // AlignmentFeedbackFilterable is the interface implemented by [AlignmentFeedbackFilter], for mocking and DI.
 type AlignmentFeedbackFilterable interface {
-	Unwrap() *raw.NSAlignmentFeedbackFilter
-	UpdateWithEvent(event *raw.NSEvent)
-	UpdateWithPanRecognizer(panRecognizer *raw.NSPanGestureRecognizer)
-	AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *raw.NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) raw.NSAlignmentFeedbackToken
-	AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *raw.NSView, previousX float64, alignedX float64, defaultX float64) raw.NSAlignmentFeedbackToken
-	AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *raw.NSView, previousY float64, alignedY float64, defaultY float64) raw.NSAlignmentFeedbackToken
-	PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime NSHapticFeedbackPerformanceTime)
+	obj.Object
+	UpdateWithEvent(event *Event)
+	UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer)
+	PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime)
 }
 
 var _ AlignmentFeedbackFilterable = (*AlignmentFeedbackFilter)(nil)

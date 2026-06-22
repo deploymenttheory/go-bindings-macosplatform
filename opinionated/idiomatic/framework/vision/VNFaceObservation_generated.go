@@ -5,94 +5,95 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Face or facial-feature information that an image analysis request detects.
+// FaceObservation is an idiomatic wrapper over the Objective-C class VNFaceObservation.
 //
-// FaceObservation wraps [raw.VNFaceObservation] with a fluent Go API.
+// It embeds [DetectedObjectObservation], promoting that type's methods.
+//
+// Face or facial-feature information that an image analysis request detects.
 type FaceObservation struct {
-	inner *raw.VNFaceObservation
+	DetectedObjectObservation
 }
 
-// Unwrap returns the underlying [raw.VNFaceObservation].
-func (x *FaceObservation) Unwrap() *raw.VNFaceObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FaceObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// FaceObservationFromID adopts an existing object pointer as a FaceObservation (nil for 0).
+// FaceObservationFromID adopts an existing Objective-C object as a FaceObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func FaceObservationFromID(id objc.ID) *FaceObservation {
 	if id == 0 {
 		return nil
 	}
-	return &FaceObservation{inner: raw.VNFaceObservationFromID(id)}
+	x := &FaceObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFaceObservation creates a new [FaceObservation].
-func NewFaceObservation() *FaceObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNFaceObservation")), objc.RegisterName("new"))
-	return &FaceObservation{inner: raw.VNFaceObservationFromID(_id)}
-}
-
-// @brief The face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
-//
-// Landmarks calls the underlying Landmarks.
-func (x *FaceObservation) Landmarks() *FaceLandmarks2D {
-	_r := x.inner.Landmarks()
-	if _r == nil {
+// faceObservationAdopt wraps an Objective-C object that this code just created as a
+// FaceObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func faceObservationAdopt(id objc.ID) *FaceObservation {
+	if id == 0 {
 		return nil
 	}
-	return &FaceLandmarks2D{inner: _r}
+	x := &FaceObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief The capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
-//
-// FaceCaptureQuality calls the underlying FaceCaptureQuality.
-func (x *FaceObservation) FaceCaptureQuality() *foundation.NSNumber {
-	return x.inner.FaceCaptureQuality()
+// NewFaceObservation creates a new FaceObservation.
+func NewFaceObservation() *FaceObservation {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNFaceObservation")), objc.RegisterName("new"))
+	return faceObservationAdopt(_id)
 }
 
-// @brief Face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
-//
-// Roll calls the underlying Roll.
-func (x *FaceObservation) Roll() *foundation.NSNumber {
-	return x.inner.Roll()
+// Landmarks the face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
+func (x *FaceObservation) Landmarks() *FaceLandmarks2D {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarks"))
+	return FaceLandmarks2DFromID(_r)
 }
 
-// @brief Face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
-//
-// Yaw calls the underlying Yaw.
-func (x *FaceObservation) Yaw() *foundation.NSNumber {
-	return x.inner.Yaw()
+// FaceCaptureQuality the capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
+func (x *FaceObservation) FaceCaptureQuality() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("faceCaptureQuality"))
+	return obj.Wrap(_r)
 }
 
-// @brief Face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
-//
-// Pitch calls the underlying Pitch.
-func (x *FaceObservation) Pitch() *foundation.NSNumber {
-	return x.inner.Pitch()
+// Roll face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
+func (x *FaceObservation) Roll() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roll"))
+	return obj.Wrap(_r)
 }
 
-func (x *FaceObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return &x.inner.VNDetectedObjectObservation
+// Yaw face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
+func (x *FaceObservation) Yaw() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yaw"))
+	return obj.Wrap(_r)
 }
 
-func (x *FaceObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNDetectedObjectObservation.VNObservation
+// Pitch face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
+func (x *FaceObservation) Pitch() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitch"))
+	return obj.Wrap(_r)
 }
 
 // FaceObservationable is the interface implemented by [FaceObservation], for mocking and DI.
 type FaceObservationable interface {
-	Unwrap() *raw.VNFaceObservation
+	obj.Object
 	Landmarks() *FaceLandmarks2D
-	FaceCaptureQuality() *foundation.NSNumber
-	Roll() *foundation.NSNumber
-	Yaw() *foundation.NSNumber
-	Pitch() *foundation.NSNumber
+	FaceCaptureQuality() obj.Object
+	Roll() obj.Object
+	Yaw() obj.Object
+	Pitch() obj.Object
 }
 
 var _ FaceObservationable = (*FaceObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*FaceObservation)(nil)
+
+var _ ObservationProvider = (*FaceObservation)(nil)

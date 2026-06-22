@@ -5,75 +5,85 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMOverflowEvent wraps [raw.DOMOverflowEvent] with a fluent Go API.
+// DOMOverflowEvent is an idiomatic wrapper over the Objective-C class DOMOverflowEvent.
+//
+// It embeds [DOMEvent], promoting that type's methods.
 type DOMOverflowEvent struct {
-	inner *raw.DOMOverflowEvent
+	DOMEvent
 }
 
-// Unwrap returns the underlying [raw.DOMOverflowEvent].
-func (x *DOMOverflowEvent) Unwrap() *raw.DOMOverflowEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMOverflowEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMOverflowEventFromID adopts an existing object pointer as a DOMOverflowEvent (nil for 0).
+// DOMOverflowEventFromID adopts an existing Objective-C object as a DOMOverflowEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMOverflowEventFromID(id objc.ID) *DOMOverflowEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DOMOverflowEvent{inner: raw.DOMOverflowEventFromID(id)}
+	x := &DOMOverflowEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow creates a new [DOMOverflowEvent].
+// dOMOverflowEventAdopt wraps an Objective-C object that this code just created as a
+// DOMOverflowEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMOverflowEventAdopt(id objc.ID) *DOMOverflowEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMOverflowEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow creates a new DOMOverflowEvent.
 func NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow(orient uint16, horizontalOverflow bool, verticalOverflow bool) *DOMOverflowEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMOverflowEvent")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMOverflowEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOverflowEvent:horizontalOverflow:verticalOverflow:"), orient, horizontalOverflow, verticalOverflow)
-	return &DOMOverflowEvent{inner: raw.DOMOverflowEventFromID(_id)}
+	return dOMOverflowEventAdopt(_id)
 }
 
-// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMOverflowEvent) WithReturnValue(returnValue bool) *DOMOverflowEvent {
-	x.inner.DOMEvent.SetReturnValue(returnValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEvent {
-	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
-// Orient calls the underlying Orient.
+// Orient wraps the corresponding Objective-C method.
 func (x *DOMOverflowEvent) Orient() uint16 {
-	return x.inner.Orient()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("orient"))
+	return _r
 }
 
-// HorizontalOverflow calls the underlying HorizontalOverflow.
+// HorizontalOverflow wraps the corresponding Objective-C method.
 func (x *DOMOverflowEvent) HorizontalOverflow() bool {
-	return x.inner.HorizontalOverflow()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("horizontalOverflow"))
+	return _r
 }
 
-// VerticalOverflow calls the underlying VerticalOverflow.
+// VerticalOverflow wraps the corresponding Objective-C method.
 func (x *DOMOverflowEvent) VerticalOverflow() bool {
-	return x.inner.VerticalOverflow()
-}
-
-func (x *DOMOverflowEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
-
-func (x *DOMOverflowEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
-
-func (x *DOMOverflowEvent) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verticalOverflow"))
+	return _r
 }
 
 // DOMOverflowEventable is the interface implemented by [DOMOverflowEvent], for mocking and DI.
 type DOMOverflowEventable interface {
-	Unwrap() *raw.DOMOverflowEvent
+	obj.Object
 	WithReturnValue(returnValue bool) *DOMOverflowEvent
 	WithCancelBubble(cancelBubble bool) *DOMOverflowEvent
 	Orient() uint16
@@ -82,3 +92,9 @@ type DOMOverflowEventable interface {
 }
 
 var _ DOMOverflowEventable = (*DOMOverflowEvent)(nil)
+
+var _ DOMEventProvider = (*DOMOverflowEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMOverflowEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMOverflowEvent)(nil)

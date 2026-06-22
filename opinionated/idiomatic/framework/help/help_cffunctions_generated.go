@@ -5,55 +5,83 @@
 package help
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/help"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AHGotoMainTOC wraps [raw.AHGotoMainTOC], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnAHGotoMainTOC func(int16) int32
+
+// AHGotoMainTOC reports an error if the Help framework function AHGotoMainTOC fails.
 func AHGotoMainTOC(toctype int16) error {
-	if _err := purego.NewOSStatus(raw.AHGotoMainTOC(toctype)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAHGotoMainTOC == nil {
+		ebipurego.RegisterLibFunc(&_fnAHGotoMainTOC, _lib, "AHGotoMainTOC")
+	}
+	_rc := _fnAHGotoMainTOC(toctype)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AHGotoPage wraps [raw.AHGotoPage], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AHGotoPage(bookname objc.ID, path objc.ID, anchor objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AHGotoPage(purego.CFRef(bookname), purego.CFRef(path), purego.CFRef(anchor))).Err(); _err != nil {
+var _fnAHGotoPage func(objc.ID, objc.ID, objc.ID) int32
+
+// AHGotoPage reports an error if the Help framework function AHGotoPage fails.
+func AHGotoPage(bookname obj.Object, path obj.Object, anchor obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAHGotoPage == nil {
+		ebipurego.RegisterLibFunc(&_fnAHGotoPage, _lib, "AHGotoPage")
+	}
+	_rc := _fnAHGotoPage(objref.IDOf(bookname), objref.IDOf(path), objref.IDOf(anchor))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AHLookupAnchor wraps [raw.AHLookupAnchor], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AHLookupAnchor(bookname objc.ID, anchor objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AHLookupAnchor(purego.CFRef(bookname), purego.CFRef(anchor))).Err(); _err != nil {
+var _fnAHLookupAnchor func(objc.ID, objc.ID) int32
+
+// AHLookupAnchor reports an error if the Help framework function AHLookupAnchor fails.
+func AHLookupAnchor(bookname obj.Object, anchor obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAHLookupAnchor == nil {
+		ebipurego.RegisterLibFunc(&_fnAHLookupAnchor, _lib, "AHLookupAnchor")
+	}
+	_rc := _fnAHLookupAnchor(objref.IDOf(bookname), objref.IDOf(anchor))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AHRegisterHelpBook wraps [raw.AHRegisterHelpBook], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AHRegisterHelpBook(appBundleRef *carboncore.FSRef) error {
-	if _err := purego.NewOSStatus(raw.AHRegisterHelpBook(appBundleRef)).Err(); _err != nil {
+var _fnAHRegisterHelpBookWithURL func(objc.ID) int32
+
+// AHRegisterHelpBookWithURL reports an error if the Help framework function AHRegisterHelpBookWithURL fails.
+func AHRegisterHelpBookWithURL(applicationURL obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAHRegisterHelpBookWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnAHRegisterHelpBookWithURL, _lib, "AHRegisterHelpBookWithURL")
+	}
+	_rc := _fnAHRegisterHelpBookWithURL(objref.IDOf(applicationURL))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AHRegisterHelpBookWithURL wraps [raw.AHRegisterHelpBookWithURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AHRegisterHelpBookWithURL(applicationURL objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AHRegisterHelpBookWithURL(purego.CFRef(applicationURL))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnAHSearch func(objc.ID, objc.ID) int32
 
-// AHSearch wraps [raw.AHSearch], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AHSearch(bookname objc.ID, query objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AHSearch(purego.CFRef(bookname), purego.CFRef(query))).Err(); _err != nil {
+// AHSearch reports an error if the Help framework function AHSearch fails.
+func AHSearch(bookname obj.Object, query obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAHSearch == nil {
+		ebipurego.RegisterLibFunc(&_fnAHSearch, _lib, "AHSearch")
+	}
+	_rc := _fnAHSearch(objref.IDOf(bookname), objref.IDOf(query))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

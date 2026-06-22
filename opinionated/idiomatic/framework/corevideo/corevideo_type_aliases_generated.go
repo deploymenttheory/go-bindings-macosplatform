@@ -4,30 +4,54 @@
 
 package corevideo
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
-)
+// A structure for describing planar components.
+type CVPlanarComponentInfo struct {
+	Offset   int32
+	RowBytes uint32
+}
 
-// CVFillExtendedPixelsCallBackData is a type alias for the raw CVFillExtendedPixelsCallBackData value-type struct.
-type CVFillExtendedPixelsCallBackData = raw.CVFillExtendedPixelsCallBackData
+// A structure for describing YCbCr biplanar buffers.
+type CVPlanarPixelBufferInfo_YCbCrBiPlanar struct {
+	ComponentInfoY    CVPlanarComponentInfo
+	ComponentInfoCbCr CVPlanarComponentInfo
+}
 
-// CVPlanarComponentInfo is a type alias for the raw CVPlanarComponentInfo value-type struct.
-type CVPlanarComponentInfo = raw.CVPlanarComponentInfo
+// A structure for describing YCbCr planar buffers.
+type CVPlanarPixelBufferInfo_YCbCrPlanar struct {
+	ComponentInfoY  CVPlanarComponentInfo
+	ComponentInfoCb CVPlanarComponentInfo
+	ComponentInfoCr CVPlanarComponentInfo
+}
 
-// CVPlanarPixelBufferInfo is a type alias for the raw CVPlanarPixelBufferInfo value-type struct.
-type CVPlanarPixelBufferInfo = raw.CVPlanarPixelBufferInfo
+// A structure for holding an SMPTE time.
+type CVSMPTETime struct {
+	Subframes       int16
+	SubframeDivisor int16
+	Counter         uint
+	Type            uint
+	Flags           uint
+	Hours           int16
+	Minutes         int16
+	Seconds         int16
+	Frames          int16
+}
 
-// CVPlanarPixelBufferInfo_YCbCrBiPlanar is a type alias for the raw CVPlanarPixelBufferInfo_YCbCrBiPlanar value-type struct.
-type CVPlanarPixelBufferInfo_YCbCrBiPlanar = raw.CVPlanarPixelBufferInfo_YCbCrBiPlanar
+// A structure for reporting Core Video time values.
+type CVTime struct {
+	TimeValue int64
+	TimeScale int32
+	Flags     int32
+}
 
-// CVPlanarPixelBufferInfo_YCbCrPlanar is a type alias for the raw CVPlanarPixelBufferInfo_YCbCrPlanar value-type struct.
-type CVPlanarPixelBufferInfo_YCbCrPlanar = raw.CVPlanarPixelBufferInfo_YCbCrPlanar
-
-// CVSMPTETime is a type alias for the raw CVSMPTETime value-type struct.
-type CVSMPTETime = raw.CVSMPTETime
-
-// CVTime is a type alias for the raw CVTime value-type struct.
-type CVTime = raw.CVTime
-
-// CVTimeStamp is a type alias for the raw CVTimeStamp value-type struct.
-type CVTimeStamp = raw.CVTimeStamp
+// A structure for defining a display timestamp.
+type CVTimeStamp struct {
+	Version            uint32
+	VideoTimeScale     int32
+	VideoTime          int64
+	HostTime           uint64
+	RateScalar         float64
+	VideoRefreshPeriod int64
+	SmpteTime          CVSMPTETime
+	Flags              uint64
+	Reserved           uint64
+}

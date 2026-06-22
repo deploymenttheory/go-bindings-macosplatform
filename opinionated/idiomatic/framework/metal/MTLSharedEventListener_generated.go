@@ -5,57 +5,90 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A listener for shareable event notifications.
+// SharedEventListener is an idiomatic wrapper over the Objective-C class MTLSharedEventListener.
 //
-// SharedEventListener wraps [raw.MTLSharedEventListener] with a fluent Go API.
+// A listener for shareable event notifications.
 type SharedEventListener struct {
-	inner *raw.MTLSharedEventListener
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLSharedEventListener].
-func (x *SharedEventListener) Unwrap() *raw.MTLSharedEventListener { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharedEventListener) ID() objc.ID { return x.inner.Ptr() }
-
-// SharedEventListenerFromID adopts an existing object pointer as a SharedEventListener (nil for 0).
+// SharedEventListenerFromID adopts an existing Objective-C object as a SharedEventListener
+// (nil for 0), retaining it and registering a release finalizer.
 func SharedEventListenerFromID(id objc.ID) *SharedEventListener {
 	if id == 0 {
 		return nil
 	}
-	return &SharedEventListener{inner: raw.MTLSharedEventListenerFromID(id)}
+	x := &SharedEventListener{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSharedEventListener creates a new [SharedEventListener].
+// sharedEventListenerAdopt wraps an Objective-C object that this code just created as a
+// SharedEventListener (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharedEventListenerAdopt(id objc.ID) *SharedEventListener {
+	if id == 0 {
+		return nil
+	}
+	x := &SharedEventListener{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharedEventListener) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharedEventListener) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharedEventListener) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharedEventListener) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharedEventListener creates a new SharedEventListener.
 func NewSharedEventListener() *SharedEventListener {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedEventListener")), objc.RegisterName("new"))
-	return &SharedEventListener{inner: raw.MTLSharedEventListenerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("new"))
+	return sharedEventListenerAdopt(_id)
 }
 
-// Creates a new shareable event listener with a specific dispatch queue.
-//
-// NewSharedEventListenerWithDispatchQueue creates a new [SharedEventListener].
-func NewSharedEventListenerWithDispatchQueue(dispatchQueue *foundation.NSObject) *SharedEventListener {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedEventListener")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDispatchQueue:"), dispatchQueue.Ptr())
-	return &SharedEventListener{inner: raw.MTLSharedEventListenerFromID(_id)}
+// NewSharedEventListenerWithDispatchQueue creates a new shareable event listener with a specific dispatch queue.
+func NewSharedEventListenerWithDispatchQueue(dispatchQueue obj.Object) *SharedEventListener {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDispatchQueue:"), objref.IDOf(dispatchQueue))
+	return sharedEventListenerAdopt(_id)
 }
 
-// DispatchQueue calls the underlying DispatchQueue.
-func (x *SharedEventListener) DispatchQueue() *foundation.NSObject {
-	return x.inner.DispatchQueue()
+// DispatchQueue wraps the corresponding Objective-C method.
+func (x *SharedEventListener) DispatchQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchQueue"))
+	return obj.Wrap(_r)
 }
 
 // SharedEventListenerable is the interface implemented by [SharedEventListener], for mocking and DI.
 type SharedEventListenerable interface {
-	Unwrap() *raw.MTLSharedEventListener
-	DispatchQueue() *foundation.NSObject
+	obj.Object
+	DispatchQueue() obj.Object
 }
 
 var _ SharedEventListenerable = (*SharedEventListener)(nil)

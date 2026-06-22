@@ -5,90 +5,89 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that plays audio from a 3D location and orientation in a scene.
+// Source is an idiomatic wrapper over the Objective-C class PHASESource.
 //
-// Source wraps [raw.PHASESource] with a fluent Go API.
+// It embeds [Object], promoting that type's methods.
+//
+// An object that plays audio from a 3D location and orientation in a scene.
 type Source struct {
-	inner *raw.PHASESource
+	Object
 }
 
-// Unwrap returns the underlying [raw.PHASESource].
-func (x *Source) Unwrap() *raw.PHASESource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Source) ID() objc.ID { return x.inner.Ptr() }
-
-// SourceFromID adopts an existing object pointer as a Source (nil for 0).
+// SourceFromID adopts an existing Objective-C object as a Source
+// (nil for 0), retaining it and registering a release finalizer.
 func SourceFromID(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	return &Source{inner: raw.PHASESourceFromID(id)}
-}
-
-// Creates a single point in the environment from which sound emanates.
-//
-// NewSourceWithEngine creates a new [Source].
-func NewSourceWithEngine(engine *raw.PHASEEngine) *Source {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), engine.Ptr())
-	return &Source{inner: raw.PHASESourceFromID(_id)}
-}
-
-// Creates a voluminous area in the environment from which sound emanates.
-//
-// NewSourceWithEngineShapes creates a new [Source].
-func NewSourceWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArray[*raw.PHASEShape]) *Source {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), engine.Ptr(), shapes.Ptr())
-	return &Source{inner: raw.PHASESourceFromID(_id)}
-}
-
-// The amount of sound the source emanates.
-//
-// WithGain sets the gain property and returns the receiver for chaining.
-func (x *Source) WithGain(gain float64) *Source {
-	x.inner.SetGain(gain)
+	x := &Source{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
-//
-// Gain calls the underlying Gain.
+// sourceAdopt wraps an Objective-C object that this code just created as a
+// Source (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sourceAdopt(id objc.ID) *Source {
+	if id == 0 {
+		return nil
+	}
+	x := &Source{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSourceWithEngine creates a single point in the environment from which sound emanates.
+func NewSourceWithEngine(engine *Engine) *Source {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
+	return sourceAdopt(_id)
+}
+
+// NewSourceWithEngineShapes creates a voluminous area in the environment from which sound emanates.
+func NewSourceWithEngineShapes(engine *Engine, shapes []*Shape) *Source {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
+	return sourceAdopt(_id)
+}
+
+// WithGain the amount of sound the source emanates.
+func (x *Source) WithGain(gain float64) *Source {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
+	return x
+}
+
+// Gain linear gain scalar.
 func (x *Source) Gain() float64 {
-	return x.inner.Gain()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+	return _r
 }
 
-// SetGain calls the underlying SetGain.
+// SetGain wraps the corresponding Objective-C method.
 func (x *Source) SetGain(gain float64) {
-	x.inner.SetGain(gain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 }
 
-// @property shapes @abstract Array of shapes associated with this source.
+// Shapes array of shapes associated with this source.
 //
 // Shapes returns the collection as a Go slice.
 func (x *Source) Shapes() []*Shape {
-	arr := x.inner.Shapes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Shape {
-		return &Shape{inner: raw.PHASEShapeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }
-
-func (x *Source) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
 
 // Sourceable is the interface implemented by [Source], for mocking and DI.
 type Sourceable interface {
-	Unwrap() *raw.PHASESource
+	obj.Object
 	WithGain(gain float64) *Source
 	Gain() float64
 	SetGain(gain float64)
@@ -96,3 +95,5 @@ type Sourceable interface {
 }
 
 var _ Sourceable = (*Source)(nil)
+
+var _ ObjectProvider = (*Source)(nil)

@@ -5,70 +5,80 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port that can be used as an endpoint for distributed object connections (or raw messaging).
+// MachPort is an idiomatic wrapper over the Objective-C class NSMachPort.
 //
-// MachPort wraps [raw.NSMachPort] with a fluent Go API.
+// It embeds [Port], promoting that type's methods.
+//
+// A port that can be used as an endpoint for distributed object connections (or raw messaging).
 type MachPort struct {
-	inner *raw.NSMachPort
+	Port
 }
 
-// Unwrap returns the underlying [raw.NSMachPort].
-func (x *MachPort) Unwrap() *raw.NSMachPort { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MachPort) ID() objc.ID { return x.inner.Ptr() }
-
-// MachPortFromID adopts an existing object pointer as a MachPort (nil for 0).
+// MachPortFromID adopts an existing Objective-C object as a MachPort
+// (nil for 0), retaining it and registering a release finalizer.
 func MachPortFromID(id objc.ID) *MachPort {
 	if id == 0 {
 		return nil
 	}
-	return &MachPort{inner: raw.NSMachPortFromID(id)}
-}
-
-// Initializes a newly allocated NSMachPort object with a given Mach port.
-//
-// NewMachPortWithMachPort creates a new [MachPort].
-func NewMachPortWithMachPort(machPort uint32) *MachPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMachPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:"), machPort)
-	return &MachPort{inner: raw.NSMachPortFromID(_id)}
-}
-
-// Initializes a newly allocated NSMachPort object with a given Mach port and the specified options.
-//
-// NewMachPortWithMachPortOptions creates a new [MachPort].
-func NewMachPortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *MachPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMachPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:options:"), machPort, raw.NSMachPortOptions(f))
-	return &MachPort{inner: raw.NSMachPortFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MachPort) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachPort {
-	x.inner.NSPort.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MachPort{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// MachPort calls the underlying MachPort.
-func (x *MachPort) MachPort() uint32 {
-	return x.inner.MachPort()
+// machPortAdopt wraps an Objective-C object that this code just created as a
+// MachPort (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func machPortAdopt(id objc.ID) *MachPort {
+	if id == 0 {
+		return nil
+	}
+	x := &MachPort{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MachPort) asPort() *raw.NSPort { return &x.inner.NSPort }
+// NewMachPortWithMachPort initializes a newly allocated NSMachPort object with a given Mach port.
+func NewMachPortWithMachPort(machPort uint32) *MachPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:"), machPort)
+	return machPortAdopt(_id)
+}
 
-func (x *MachPort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
+// NewMachPortWithMachPortOptions initializes a newly allocated NSMachPort object with a given Mach port and the specified options.
+func NewMachPortWithMachPortOptions(machPort uint32, f MachPortOptions) *MachPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:options:"), machPort, f)
+	return machPortAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MachPort) WithScriptingProperties(scriptingProperties obj.Object) *MachPort {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// MachPort wraps the corresponding Objective-C method.
+func (x *MachPort) MachPort() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("machPort"))
+	return _r
+}
 
 // MachPortable is the interface implemented by [MachPort], for mocking and DI.
 type MachPortable interface {
-	Unwrap() *raw.NSMachPort
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachPort
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MachPort
 	MachPort() uint32
 }
 
 var _ MachPortable = (*MachPort)(nil)
+
+var _ PortProvider = (*MachPort)(nil)

@@ -5,48 +5,63 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRCommandPath wraps [raw.MTRCommandPath] with a fluent Go API.
+// MTRCommandPath is an idiomatic wrapper over the Objective-C class MTRCommandPath.
+//
+// It embeds [MTRClusterPath], promoting that type's methods.
 type MTRCommandPath struct {
-	inner *raw.MTRCommandPath
+	MTRClusterPath
 }
 
-// Unwrap returns the underlying [raw.MTRCommandPath].
-func (x *MTRCommandPath) Unwrap() *raw.MTRCommandPath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommandPath) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCommandPathFromID adopts an existing object pointer as a MTRCommandPath (nil for 0).
+// MTRCommandPathFromID adopts an existing Objective-C object as a MTRCommandPath
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommandPathFromID(id objc.ID) *MTRCommandPath {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommandPath{inner: raw.MTRCommandPathFromID(id)}
+	x := &MTRCommandPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCommandPath creates a new [MTRCommandPath].
+// mTRCommandPathAdopt wraps an Objective-C object that this code just created as a
+// MTRCommandPath (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommandPathAdopt(id objc.ID) *MTRCommandPath {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommandPath{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRCommandPath creates a new MTRCommandPath.
 func NewMTRCommandPath() *MTRCommandPath {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommandPath")), objc.RegisterName("new"))
-	return &MTRCommandPath{inner: raw.MTRCommandPathFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommandPath")), objc.RegisterName("new"))
+	return mTRCommandPathAdopt(_id)
 }
 
-// Command calls the underlying Command.
-func (x *MTRCommandPath) Command() *foundation.NSNumber {
-	return x.inner.Command()
+// Command wraps the corresponding Objective-C method.
+func (x *MTRCommandPath) Command() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("command"))
+	return obj.Wrap(_r)
 }
-
-func (x *MTRCommandPath) asMTRClusterPath() *raw.MTRClusterPath { return &x.inner.MTRClusterPath }
 
 // MTRCommandPathable is the interface implemented by [MTRCommandPath], for mocking and DI.
 type MTRCommandPathable interface {
-	Unwrap() *raw.MTRCommandPath
-	Command() *foundation.NSNumber
+	obj.Object
+	Command() obj.Object
 }
 
 var _ MTRCommandPathable = (*MTRCommandPath)(nil)
+
+var _ MTRClusterPathProvider = (*MTRCommandPath)(nil)

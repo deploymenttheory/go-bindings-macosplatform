@@ -5,142 +5,135 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specifier representing an object in a collection (or container) with an index number.
+// IndexSpecifier is an idiomatic wrapper over the Objective-C class NSIndexSpecifier.
 //
-// IndexSpecifier wraps [raw.NSIndexSpecifier] with a fluent Go API.
+// It embeds [ScriptObjectSpecifier], promoting that type's methods.
+//
+// A specifier representing an object in a collection (or container) with an index number.
 type IndexSpecifier struct {
-	inner *raw.NSIndexSpecifier
+	ScriptObjectSpecifier
 }
 
-// Unwrap returns the underlying [raw.NSIndexSpecifier].
-func (x *IndexSpecifier) Unwrap() *raw.NSIndexSpecifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IndexSpecifier) ID() objc.ID { return x.inner.Ptr() }
-
-// IndexSpecifierFromID adopts an existing object pointer as a IndexSpecifier (nil for 0).
+// IndexSpecifierFromID adopts an existing Objective-C object as a IndexSpecifier
+// (nil for 0), retaining it and registering a release finalizer.
 func IndexSpecifierFromID(id objc.ID) *IndexSpecifier {
 	if id == 0 {
 		return nil
 	}
-	return &IndexSpecifier{inner: raw.NSIndexSpecifierFromID(id)}
+	x := &IndexSpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
-//
-// NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex creates a new [IndexSpecifier].
-func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, index int) *IndexSpecifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:index:"), classDesc.Ptr(), container.Ptr(), foundation.NSStringStringWithUTF8String(property).Ptr(), index)
-	return &IndexSpecifier{inner: raw.NSIndexSpecifierFromID(_id)}
+// indexSpecifierAdopt wraps an Objective-C object that this code just created as a
+// IndexSpecifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func indexSpecifierAdopt(id objc.ID) *IndexSpecifier {
+	if id == 0 {
+		return nil
+	}
+	x := &IndexSpecifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the value of the receiver’s index property.
-//
-// WithIndex sets the index property and returns the receiver for chaining.
+// NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
+func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, index int) *IndexSpecifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSpecifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:index:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), index)
+	return indexSpecifierAdopt(_id)
+}
+
+// WithIndex sets the value of the receiver’s index property.
 func (x *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
-	x.inner.SetIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
 	return x
 }
 
-// Sets the receiver’s child reference.
-//
-// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+// WithChildSpecifier sets the receiver’s child reference.
 func (x *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return x
 }
 
-// Sets the container specifier of the receiver.
-//
-// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+// WithContainerSpecifier sets the container specifier of the receiver.
 func (x *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return x
 }
 
-// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-//
-// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
 func (x *IndexSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
 	return x
 }
 
-// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-//
-// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
 func (x *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
 	return x
 }
 
-// Sets the key of the receiver.
-//
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *IndexSpecifier) WithKey(key string) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+// WithKey sets the key of the receiver.
+func (x *IndexSpecifier) WithKey(key StringProvider) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// Sets the class description of the receiver’s container specifier to a given specifier.
-//
-// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
 func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return x
 }
 
-// Sets the value of the evaluation error.
-//
-// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+// WithEvaluationErrorNumber sets the value of the evaluation error.
 func (x *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *IndexSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSpecifier {
-	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *IndexSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Index calls the underlying Index.
+// Index wraps the corresponding Objective-C method.
 func (x *IndexSpecifier) Index() int {
-	return x.inner.Index()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// SetIndex calls the underlying SetIndex.
+// SetIndex wraps the corresponding Objective-C method.
 func (x *IndexSpecifier) SetIndex(index int) {
-	x.inner.SetIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
 }
-
-func (x *IndexSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
-	return &x.inner.NSScriptObjectSpecifier
-}
-
-func (x *IndexSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
 
 // IndexSpecifierable is the interface implemented by [IndexSpecifier], for mocking and DI.
 type IndexSpecifierable interface {
-	Unwrap() *raw.NSIndexSpecifier
+	obj.Object
 	WithIndex(index int) *IndexSpecifier
 	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier
 	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier
-	WithKey(key string) *IndexSpecifier
+	WithKey(key StringProvider) *IndexSpecifier
 	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *IndexSpecifier
+	WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier
 	Index() int
 	SetIndex(index int)
 }
 
 var _ IndexSpecifierable = (*IndexSpecifier)(nil)
+
+var _ ScriptObjectSpecifierProvider = (*IndexSpecifier)(nil)

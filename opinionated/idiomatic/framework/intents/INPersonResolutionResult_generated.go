@@ -5,49 +5,59 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a user as a parameter of an intent.
+// PersonResolutionResult is an idiomatic wrapper over the Objective-C class INPersonResolutionResult.
 //
-// PersonResolutionResult wraps [raw.INPersonResolutionResult] with a fluent Go API.
+// PersonResolutionResult is an abstract base — you do not construct it directly. Construct one of [SendMessageRecipientResolutionResult] and pass it where a PersonResolutionResult is accepted.
+//
+// A resolution result for a user as a parameter of an intent.
 type PersonResolutionResult struct {
-	inner *raw.INPersonResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INPersonResolutionResult].
-func (x *PersonResolutionResult) Unwrap() *raw.INPersonResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersonResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonResolutionResultFromID adopts an existing object pointer as a PersonResolutionResult (nil for 0).
+// PersonResolutionResultFromID adopts an existing Objective-C object as a PersonResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonResolutionResultFromID(id objc.ID) *PersonResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &PersonResolutionResult{inner: raw.INPersonResolutionResultFromID(id)}
+	x := &PersonResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPersonResolutionResult creates a new [PersonResolutionResult].
-func NewPersonResolutionResult() *PersonResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INPersonResolutionResult")), objc.RegisterName("new"))
-	return &PersonResolutionResult{inner: raw.INPersonResolutionResultFromID(_id)}
-}
-
-func (x *PersonResolutionResult) asPersonResolutionResult() *raw.INPersonResolutionResult {
-	return x.inner
-}
-
-func (x *PersonResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+// personResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// PersonResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personResolutionResultAdopt(id objc.ID) *PersonResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PersonResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
 // PersonResolutionResultable is the interface implemented by [PersonResolutionResult], for mocking and DI.
 type PersonResolutionResultable interface {
-	Unwrap() *raw.INPersonResolutionResult
+	obj.Object
 }
 
 var _ PersonResolutionResultable = (*PersonResolutionResult)(nil)
+
+// isPersonResolutionResult marks PersonResolutionResult — and, by embedding promotion, its
+// subclasses — as a member of the PersonResolutionResult hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PersonResolutionResult) isPersonResolutionResult() {}
+
+var _ PersonResolutionResultProvider = (*PersonResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*PersonResolutionResult)(nil)

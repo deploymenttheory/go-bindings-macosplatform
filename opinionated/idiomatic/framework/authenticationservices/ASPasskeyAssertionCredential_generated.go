@@ -5,134 +5,149 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A passkey assertion credential.
+// PasskeyAssertionCredential is an idiomatic wrapper over the Objective-C class ASPasskeyAssertionCredential.
 //
-// PasskeyAssertionCredential wraps [raw.ASPasskeyAssertionCredential] with a fluent Go API.
+// A passkey assertion credential.
 type PasskeyAssertionCredential struct {
-	inner *raw.ASPasskeyAssertionCredential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyAssertionCredential].
-func (x *PasskeyAssertionCredential) Unwrap() *raw.ASPasskeyAssertionCredential { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyAssertionCredential) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyAssertionCredentialFromID adopts an existing object pointer as a PasskeyAssertionCredential (nil for 0).
+// PasskeyAssertionCredentialFromID adopts an existing Objective-C object as a PasskeyAssertionCredential
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyAssertionCredentialFromID(id objc.ID) *PasskeyAssertionCredential {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(id)}
-}
-
-// Initializes a passkey assertion credential object.
-//
-// NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID creates a new [PasskeyAssertionCredential].
-func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *PasskeyAssertionCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyAssertionCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:"), userHandle.Ptr(), foundation.NSStringStringWithUTF8String(relyingParty).Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr())
-	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(_id)}
-}
-
-// Initializes a passkey assertion credential object, optionally specifying an extension output.
-//
-// NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput creates a new [PasskeyAssertionCredential].
-func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData, extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyAssertionCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:extensionOutput:"), userHandle.Ptr(), foundation.NSStringStringWithUTF8String(relyingParty).Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr(), extensionOutput.Ptr())
-	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(_id)}
-}
-
-// An output from WebAuthn extensions.
-//
-// WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
-func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
-	x.inner.SetExtensionOutput(extensionOutput.Unwrap())
+	x := &PasskeyAssertionCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract The user handle of this passkey.
-//
-// UserHandle calls the underlying UserHandle.
-func (x *PasskeyAssertionCredential) UserHandle() *foundation.NSData {
-	return x.inner.UserHandle()
-}
-
-// @abstract The relying party of this credential.
-//
-// RelyingParty calls the underlying RelyingParty.
-func (x *PasskeyAssertionCredential) RelyingParty() string {
-	_r := x.inner.RelyingParty()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract The signature of this credential.
-//
-// Signature calls the underlying Signature.
-func (x *PasskeyAssertionCredential) Signature() *foundation.NSData {
-	return x.inner.Signature()
-}
-
-// @abstract The hash of the client data for this assertion result.
-//
-// ClientDataHash calls the underlying ClientDataHash.
-func (x *PasskeyAssertionCredential) ClientDataHash() *foundation.NSData {
-	return x.inner.ClientDataHash()
-}
-
-// @abstract The authenticator data of the application that created this credential.
-//
-// AuthenticatorData calls the underlying AuthenticatorData.
-func (x *PasskeyAssertionCredential) AuthenticatorData() *foundation.NSData {
-	return x.inner.AuthenticatorData()
-}
-
-// @abstract The raw credential ID for this passkey credential.
-//
-// CredentialID calls the underlying CredentialID.
-func (x *PasskeyAssertionCredential) CredentialID() *foundation.NSData {
-	return x.inner.CredentialID()
-}
-
-// @abstract The outputs of WebAuthn extensions processed by the credential provider.
-//
-// ExtensionOutput calls the underlying ExtensionOutput.
-func (x *PasskeyAssertionCredential) ExtensionOutput() *PasskeyAssertionCredentialExtensionOutput {
-	_r := x.inner.ExtensionOutput()
-	if _r == nil {
+// passkeyAssertionCredentialAdopt wraps an Objective-C object that this code just created as a
+// PasskeyAssertionCredential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyAssertionCredentialAdopt(id objc.ID) *PasskeyAssertionCredential {
+	if id == 0 {
 		return nil
 	}
-	return &PasskeyAssertionCredentialExtensionOutput{inner: _r}
+	x := &PasskeyAssertionCredential{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetExtensionOutput calls the underlying SetExtensionOutput.
-func (x *PasskeyAssertionCredential) SetExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) {
-	x.inner.SetExtensionOutput(extensionOutput)
+// Description returns the object's -description text.
+func (x *PasskeyAssertionCredential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyAssertionCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyAssertionCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyAssertionCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID initializes a passkey assertion credential object.
+func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle obj.Object, relyingParty string, signature obj.Object, clientDataHash obj.Object, authenticatorData obj.Object, credentialID obj.Object) *PasskeyAssertionCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:"), objref.IDOf(userHandle), purego.NSString(relyingParty), objref.IDOf(signature), objref.IDOf(clientDataHash), objref.IDOf(authenticatorData), objref.IDOf(credentialID))
+	return passkeyAssertionCredentialAdopt(_id)
+}
+
+// NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput initializes a passkey assertion credential object, optionally specifying an extension output.
+func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput(userHandle obj.Object, relyingParty string, signature obj.Object, clientDataHash obj.Object, authenticatorData obj.Object, credentialID obj.Object, extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:extensionOutput:"), objref.IDOf(userHandle), purego.NSString(relyingParty), objref.IDOf(signature), objref.IDOf(clientDataHash), objref.IDOf(authenticatorData), objref.IDOf(credentialID), objref.IDOf(extensionOutput))
+	return passkeyAssertionCredentialAdopt(_id)
+}
+
+// WithExtensionOutput an output from WebAuthn extensions.
+func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionOutput:"), objref.IDOf(extensionOutput))
+	return x
+}
+
+// UserHandle the user handle of this passkey.
+func (x *PasskeyAssertionCredential) UserHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
+	return obj.Wrap(_r)
+}
+
+// RelyingParty the relying party of this credential.
+func (x *PasskeyAssertionCredential) RelyingParty() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingParty"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Signature the signature of this credential.
+func (x *PasskeyAssertionCredential) Signature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
+	return obj.Wrap(_r)
+}
+
+// ClientDataHash the hash of the client data for this assertion result.
+func (x *PasskeyAssertionCredential) ClientDataHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDataHash"))
+	return obj.Wrap(_r)
+}
+
+// AuthenticatorData the authenticator data of the application that created this credential.
+func (x *PasskeyAssertionCredential) AuthenticatorData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticatorData"))
+	return obj.Wrap(_r)
+}
+
+// CredentialID the raw credential ID for this passkey credential.
+func (x *PasskeyAssertionCredential) CredentialID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
+	return obj.Wrap(_r)
+}
+
+// ExtensionOutput the outputs of WebAuthn extensions processed by the credential provider.
+func (x *PasskeyAssertionCredential) ExtensionOutput() *PasskeyAssertionCredentialExtensionOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionOutput"))
+	return PasskeyAssertionCredentialExtensionOutputFromID(_r)
+}
+
+// SetExtensionOutput wraps the corresponding Objective-C method.
+func (x *PasskeyAssertionCredential) SetExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionOutput:"), objref.IDOf(extensionOutput))
 }
 
 // PasskeyAssertionCredentialable is the interface implemented by [PasskeyAssertionCredential], for mocking and DI.
 type PasskeyAssertionCredentialable interface {
-	Unwrap() *raw.ASPasskeyAssertionCredential
+	obj.Object
 	WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential
-	UserHandle() *foundation.NSData
+	UserHandle() obj.Object
 	RelyingParty() string
-	Signature() *foundation.NSData
-	ClientDataHash() *foundation.NSData
-	AuthenticatorData() *foundation.NSData
-	CredentialID() *foundation.NSData
+	Signature() obj.Object
+	ClientDataHash() obj.Object
+	AuthenticatorData() obj.Object
+	CredentialID() obj.Object
 	ExtensionOutput() *PasskeyAssertionCredentialExtensionOutput
-	SetExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput)
+	SetExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput)
 }
 
 var _ PasskeyAssertionCredentialable = (*PasskeyAssertionCredential)(nil)

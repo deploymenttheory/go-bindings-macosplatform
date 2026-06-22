@@ -4,351 +4,349 @@
 
 package coretext
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coretext"
-)
-
-// ALMXGlyphEntry is a type alias for the raw ALMXGlyphEntry value-type struct.
-type ALMXGlyphEntry = raw.ALMXGlyphEntry
-
-// ALMXHeader is a type alias for the raw ALMXHeader value-type struct.
-type ALMXHeader = raw.ALMXHeader
-
-// AnchorPoint is a type alias for the raw AnchorPoint value-type struct.
-type AnchorPoint = raw.AnchorPoint
-
-// AnchorPointTable is a type alias for the raw AnchorPointTable value-type struct.
-type AnchorPointTable = raw.AnchorPointTable
-
-// AnkrTable is a type alias for the raw AnkrTable value-type struct.
-type AnkrTable = raw.AnkrTable
-
-// BslnFormat0Part is a type alias for the raw BslnFormat0Part value-type struct.
-type BslnFormat0Part = raw.BslnFormat0Part
-
-// BslnFormat1Part is a type alias for the raw BslnFormat1Part value-type struct.
-type BslnFormat1Part = raw.BslnFormat1Part
-
-// BslnFormat2Part is a type alias for the raw BslnFormat2Part value-type struct.
-type BslnFormat2Part = raw.BslnFormat2Part
-
-// BslnFormat3Part is a type alias for the raw BslnFormat3Part value-type struct.
-type BslnFormat3Part = raw.BslnFormat3Part
-
-// BslnTable is a type alias for the raw BslnTable value-type struct.
-type BslnTable = raw.BslnTable
-
-// CTParagraphStyleSetting is a type alias for the raw CTParagraphStyleSetting value-type struct.
-type CTParagraphStyleSetting = raw.CTParagraphStyleSetting
-
-// CTRunDelegateCallbacks is a type alias for the raw CTRunDelegateCallbacks value-type struct.
-type CTRunDelegateCallbacks = raw.CTRunDelegateCallbacks
-
-// FontVariation is a type alias for the raw FontVariation value-type struct.
-type FontVariation = raw.FontVariation
-
-// JustDirectionTable is a type alias for the raw JustDirectionTable value-type struct.
-type JustDirectionTable = raw.JustDirectionTable
-
-// JustPCAction is a type alias for the raw JustPCAction value-type struct.
-type JustPCAction = raw.JustPCAction
-
-// JustPCActionSubrecord is a type alias for the raw JustPCActionSubrecord value-type struct.
-type JustPCActionSubrecord = raw.JustPCActionSubrecord
-
-// JustPCConditionalAddAction is a type alias for the raw JustPCConditionalAddAction value-type struct.
-type JustPCConditionalAddAction = raw.JustPCConditionalAddAction
-
-// JustPCDecompositionAction is a type alias for the raw JustPCDecompositionAction value-type struct.
-type JustPCDecompositionAction = raw.JustPCDecompositionAction
-
-// JustPCDuctilityAction is a type alias for the raw JustPCDuctilityAction value-type struct.
-type JustPCDuctilityAction = raw.JustPCDuctilityAction
-
-// JustPCGlyphRepeatAddAction is a type alias for the raw JustPCGlyphRepeatAddAction value-type struct.
-type JustPCGlyphRepeatAddAction = raw.JustPCGlyphRepeatAddAction
-
-// JustPostcompTable is a type alias for the raw JustPostcompTable value-type struct.
-type JustPostcompTable = raw.JustPostcompTable
-
-// JustTable is a type alias for the raw JustTable value-type struct.
-type JustTable = raw.JustTable
-
-// JustWidthDeltaEntry is a type alias for the raw JustWidthDeltaEntry value-type struct.
-type JustWidthDeltaEntry = raw.JustWidthDeltaEntry
-
-// JustWidthDeltaGroup is a type alias for the raw JustWidthDeltaGroup value-type struct.
-type JustWidthDeltaGroup = raw.JustWidthDeltaGroup
-
-// KernIndexArrayHeader is a type alias for the raw KernIndexArrayHeader value-type struct.
-type KernIndexArrayHeader = raw.KernIndexArrayHeader
-
-// KernKerningPair is a type alias for the raw KernKerningPair value-type struct.
-type KernKerningPair = raw.KernKerningPair
-
-// KernOffsetTable is a type alias for the raw KernOffsetTable value-type struct.
-type KernOffsetTable = raw.KernOffsetTable
-
-// KernOrderedListEntry is a type alias for the raw KernOrderedListEntry value-type struct.
-type KernOrderedListEntry = raw.KernOrderedListEntry
-
-// KernOrderedListHeader is a type alias for the raw KernOrderedListHeader value-type struct.
-type KernOrderedListHeader = raw.KernOrderedListHeader
-
-// KernSimpleArrayHeader is a type alias for the raw KernSimpleArrayHeader value-type struct.
-type KernSimpleArrayHeader = raw.KernSimpleArrayHeader
-
-// KernStateEntry is a type alias for the raw KernStateEntry value-type struct.
-type KernStateEntry = raw.KernStateEntry
-
-// KernStateHeader is a type alias for the raw KernStateHeader value-type struct.
-type KernStateHeader = raw.KernStateHeader
-
-// KernSubtableHeader is a type alias for the raw KernSubtableHeader value-type struct.
-type KernSubtableHeader = raw.KernSubtableHeader
-
-// KernTableHeader is a type alias for the raw KernTableHeader value-type struct.
-type KernTableHeader = raw.KernTableHeader
-
-// KernVersion0Header is a type alias for the raw KernVersion0Header value-type struct.
-type KernVersion0Header = raw.KernVersion0Header
-
-// KernVersion0SubtableHeader is a type alias for the raw KernVersion0SubtableHeader value-type struct.
-type KernVersion0SubtableHeader = raw.KernVersion0SubtableHeader
-
-// KerxAnchorPointAction is a type alias for the raw KerxAnchorPointAction value-type struct.
-type KerxAnchorPointAction = raw.KerxAnchorPointAction
-
-// KerxControlPointAction is a type alias for the raw KerxControlPointAction value-type struct.
-type KerxControlPointAction = raw.KerxControlPointAction
-
-// KerxControlPointEntry is a type alias for the raw KerxControlPointEntry value-type struct.
-type KerxControlPointEntry = raw.KerxControlPointEntry
-
-// KerxControlPointHeader is a type alias for the raw KerxControlPointHeader value-type struct.
-type KerxControlPointHeader = raw.KerxControlPointHeader
-
-// KerxCoordinateAction is a type alias for the raw KerxCoordinateAction value-type struct.
-type KerxCoordinateAction = raw.KerxCoordinateAction
-
-// KerxIndexArrayHeader is a type alias for the raw KerxIndexArrayHeader value-type struct.
-type KerxIndexArrayHeader = raw.KerxIndexArrayHeader
-
-// KerxKerningPair is a type alias for the raw KerxKerningPair value-type struct.
-type KerxKerningPair = raw.KerxKerningPair
-
-// KerxOrderedListEntry is a type alias for the raw KerxOrderedListEntry value-type struct.
-type KerxOrderedListEntry = raw.KerxOrderedListEntry
-
-// KerxOrderedListHeader is a type alias for the raw KerxOrderedListHeader value-type struct.
-type KerxOrderedListHeader = raw.KerxOrderedListHeader
-
-// KerxSimpleArrayHeader is a type alias for the raw KerxSimpleArrayHeader value-type struct.
-type KerxSimpleArrayHeader = raw.KerxSimpleArrayHeader
-
-// KerxStateEntry is a type alias for the raw KerxStateEntry value-type struct.
-type KerxStateEntry = raw.KerxStateEntry
-
-// KerxStateHeader is a type alias for the raw KerxStateHeader value-type struct.
-type KerxStateHeader = raw.KerxStateHeader
-
-// KerxSubtableHeader is a type alias for the raw KerxSubtableHeader value-type struct.
-type KerxSubtableHeader = raw.KerxSubtableHeader
-
-// KerxTableHeader is a type alias for the raw KerxTableHeader value-type struct.
-type KerxTableHeader = raw.KerxTableHeader
-
-// LcarCaretClassEntry is a type alias for the raw LcarCaretClassEntry value-type struct.
-type LcarCaretClassEntry = raw.LcarCaretClassEntry
-
-// LcarCaretTable is a type alias for the raw LcarCaretTable value-type struct.
-type LcarCaretTable = raw.LcarCaretTable
-
-// LtagStringRange is a type alias for the raw LtagStringRange value-type struct.
-type LtagStringRange = raw.LtagStringRange
-
-// LtagTable is a type alias for the raw LtagTable value-type struct.
-type LtagTable = raw.LtagTable
-
-// MortChain is a type alias for the raw MortChain value-type struct.
-type MortChain = raw.MortChain
-
-// MortContextualSubtable is a type alias for the raw MortContextualSubtable value-type struct.
-type MortContextualSubtable = raw.MortContextualSubtable
-
-// MortFeatureEntry is a type alias for the raw MortFeatureEntry value-type struct.
-type MortFeatureEntry = raw.MortFeatureEntry
-
-// MortInsertionSubtable is a type alias for the raw MortInsertionSubtable value-type struct.
-type MortInsertionSubtable = raw.MortInsertionSubtable
-
-// MortLigatureSubtable is a type alias for the raw MortLigatureSubtable value-type struct.
-type MortLigatureSubtable = raw.MortLigatureSubtable
-
-// MortRearrangementSubtable is a type alias for the raw MortRearrangementSubtable value-type struct.
-type MortRearrangementSubtable = raw.MortRearrangementSubtable
-
-// MortSubtable is a type alias for the raw MortSubtable value-type struct.
-type MortSubtable = raw.MortSubtable
-
-// MortSwashSubtable is a type alias for the raw MortSwashSubtable value-type struct.
-type MortSwashSubtable = raw.MortSwashSubtable
-
-// MortTable is a type alias for the raw MortTable value-type struct.
-type MortTable = raw.MortTable
-
-// MorxChain is a type alias for the raw MorxChain value-type struct.
-type MorxChain = raw.MorxChain
-
-// MorxContextualSubtable is a type alias for the raw MorxContextualSubtable value-type struct.
-type MorxContextualSubtable = raw.MorxContextualSubtable
-
-// MorxInsertionSubtable is a type alias for the raw MorxInsertionSubtable value-type struct.
-type MorxInsertionSubtable = raw.MorxInsertionSubtable
-
-// MorxLigatureSubtable is a type alias for the raw MorxLigatureSubtable value-type struct.
-type MorxLigatureSubtable = raw.MorxLigatureSubtable
-
-// MorxRearrangementSubtable is a type alias for the raw MorxRearrangementSubtable value-type struct.
-type MorxRearrangementSubtable = raw.MorxRearrangementSubtable
-
-// MorxSubtable is a type alias for the raw MorxSubtable value-type struct.
-type MorxSubtable = raw.MorxSubtable
-
-// MorxTable is a type alias for the raw MorxTable value-type struct.
-type MorxTable = raw.MorxTable
-
-// OpbdSideValues is a type alias for the raw OpbdSideValues value-type struct.
-type OpbdSideValues = raw.OpbdSideValues
-
-// OpbdTable is a type alias for the raw OpbdTable value-type struct.
-type OpbdTable = raw.OpbdTable
-
-// PropLookupSegment is a type alias for the raw PropLookupSegment value-type struct.
-type PropLookupSegment = raw.PropLookupSegment
-
-// PropLookupSingle is a type alias for the raw PropLookupSingle value-type struct.
-type PropLookupSingle = raw.PropLookupSingle
-
-// PropTable is a type alias for the raw PropTable value-type struct.
-type PropTable = raw.PropTable
-
-// ROTAGlyphEntry is a type alias for the raw ROTAGlyphEntry value-type struct.
-type ROTAGlyphEntry = raw.ROTAGlyphEntry
-
-// ROTAHeader is a type alias for the raw ROTAHeader value-type struct.
-type ROTAHeader = raw.ROTAHeader
-
-// SFNTLookupArrayHeader is a type alias for the raw SFNTLookupArrayHeader value-type struct.
-type SFNTLookupArrayHeader = raw.SFNTLookupArrayHeader
-
-// SFNTLookupBinarySearchHeader is a type alias for the raw SFNTLookupBinarySearchHeader value-type struct.
-type SFNTLookupBinarySearchHeader = raw.SFNTLookupBinarySearchHeader
-
-// SFNTLookupSegment is a type alias for the raw SFNTLookupSegment value-type struct.
-type SFNTLookupSegment = raw.SFNTLookupSegment
-
-// SFNTLookupSegmentHeader is a type alias for the raw SFNTLookupSegmentHeader value-type struct.
-type SFNTLookupSegmentHeader = raw.SFNTLookupSegmentHeader
-
-// SFNTLookupSingle is a type alias for the raw SFNTLookupSingle value-type struct.
-type SFNTLookupSingle = raw.SFNTLookupSingle
-
-// SFNTLookupSingleHeader is a type alias for the raw SFNTLookupSingleHeader value-type struct.
-type SFNTLookupSingleHeader = raw.SFNTLookupSingleHeader
-
-// SFNTLookupTable is a type alias for the raw SFNTLookupTable value-type struct.
-type SFNTLookupTable = raw.SFNTLookupTable
-
-// SFNTLookupTrimmedArrayHeader is a type alias for the raw SFNTLookupTrimmedArrayHeader value-type struct.
-type SFNTLookupTrimmedArrayHeader = raw.SFNTLookupTrimmedArrayHeader
-
-// SFNTLookupVectorHeader is a type alias for the raw SFNTLookupVectorHeader value-type struct.
-type SFNTLookupVectorHeader = raw.SFNTLookupVectorHeader
-
-// STClassTable is a type alias for the raw STClassTable value-type struct.
-type STClassTable = raw.STClassTable
-
-// STEntryOne is a type alias for the raw STEntryOne value-type struct.
-type STEntryOne = raw.STEntryOne
-
-// STEntryTwo is a type alias for the raw STEntryTwo value-type struct.
-type STEntryTwo = raw.STEntryTwo
-
-// STEntryZero is a type alias for the raw STEntryZero value-type struct.
-type STEntryZero = raw.STEntryZero
-
-// STHeader is a type alias for the raw STHeader value-type struct.
-type STHeader = raw.STHeader
-
-// STXEntryOne is a type alias for the raw STXEntryOne value-type struct.
-type STXEntryOne = raw.STXEntryOne
-
-// STXEntryTwo is a type alias for the raw STXEntryTwo value-type struct.
-type STXEntryTwo = raw.STXEntryTwo
-
-// STXEntryZero is a type alias for the raw STXEntryZero value-type struct.
-type STXEntryZero = raw.STXEntryZero
-
-// STXHeader is a type alias for the raw STXHeader value-type struct.
-type STXHeader = raw.STXHeader
-
-// TrakTable is a type alias for the raw TrakTable value-type struct.
-type TrakTable = raw.TrakTable
-
-// TrakTableData is a type alias for the raw TrakTableData value-type struct.
-type TrakTableData = raw.TrakTableData
-
-// TrakTableEntry is a type alias for the raw TrakTableEntry value-type struct.
-type TrakTableEntry = raw.TrakTableEntry
-
-// SfntCMapEncoding is a type alias for the raw SfntCMapEncoding value-type struct.
-type SfntCMapEncoding = raw.SfntCMapEncoding
-
-// SfntCMapExtendedSubHeader is a type alias for the raw SfntCMapExtendedSubHeader value-type struct.
-type SfntCMapExtendedSubHeader = raw.SfntCMapExtendedSubHeader
-
-// SfntCMapHeader is a type alias for the raw SfntCMapHeader value-type struct.
-type SfntCMapHeader = raw.SfntCMapHeader
-
-// SfntCMapSubHeader is a type alias for the raw SfntCMapSubHeader value-type struct.
-type SfntCMapSubHeader = raw.SfntCMapSubHeader
-
-// SfntDescriptorHeader is a type alias for the raw SfntDescriptorHeader value-type struct.
-type SfntDescriptorHeader = raw.SfntDescriptorHeader
-
-// SfntDirectory is a type alias for the raw SfntDirectory value-type struct.
-type SfntDirectory = raw.SfntDirectory
-
-// SfntDirectoryEntry is a type alias for the raw SfntDirectoryEntry value-type struct.
-type SfntDirectoryEntry = raw.SfntDirectoryEntry
-
-// SfntFeatureHeader is a type alias for the raw SfntFeatureHeader value-type struct.
-type SfntFeatureHeader = raw.SfntFeatureHeader
-
-// SfntFeatureName is a type alias for the raw SfntFeatureName value-type struct.
-type SfntFeatureName = raw.SfntFeatureName
-
-// SfntFontDescriptor is a type alias for the raw SfntFontDescriptor value-type struct.
-type SfntFontDescriptor = raw.SfntFontDescriptor
-
-// SfntFontFeatureSetting is a type alias for the raw SfntFontFeatureSetting value-type struct.
-type SfntFontFeatureSetting = raw.SfntFontFeatureSetting
-
-// SfntFontRunFeature is a type alias for the raw SfntFontRunFeature value-type struct.
-type SfntFontRunFeature = raw.SfntFontRunFeature
-
-// SfntInstance is a type alias for the raw SfntInstance value-type struct.
-type SfntInstance = raw.SfntInstance
-
-// SfntNameHeader is a type alias for the raw SfntNameHeader value-type struct.
-type SfntNameHeader = raw.SfntNameHeader
-
-// SfntNameRecord is a type alias for the raw SfntNameRecord value-type struct.
-type SfntNameRecord = raw.SfntNameRecord
-
-// SfntVariationAxis is a type alias for the raw SfntVariationAxis value-type struct.
-type SfntVariationAxis = raw.SfntVariationAxis
-
-// SfntVariationHeader is a type alias for the raw SfntVariationHeader value-type struct.
-type SfntVariationHeader = raw.SfntVariationHeader
+type ALMXGlyphEntry struct {
+	GlyphIndexOffset  int16
+	HorizontalAdvance int16
+	XOffsetToHOrigin  int16
+	VerticalAdvance   int16
+	YOffsetToVOrigin  int16
+}
+
+type AnchorPoint struct {
+	X int16
+	Y int16
+}
+
+type AnkrTable struct {
+	Version                uint16
+	Flags                  uint16
+	LookupTableOffset      uint
+	AnchorPointTableOffset uint
+}
+
+type FontVariation struct {
+	Name  uint
+	Value int
+}
+
+type JustPCActionSubrecord struct {
+	TheClass uint16
+	TheType  uint16
+	Length   uint
+	Data     uint
+}
+
+type JustPCConditionalAddAction struct {
+	SubstThreshold int
+	AddGlyph       uint16
+	SubstGlyph     uint16
+}
+
+type JustPCDuctilityAction struct {
+	DuctilityAxis  uint
+	MinimumLimit   int
+	NoStretchValue int
+	MaximumLimit   int
+}
+
+type JustPCGlyphRepeatAddAction struct {
+	Flags uint16
+	Glyph uint16
+}
+
+type JustTable struct {
+	Version           int
+	Format            uint16
+	HorizHeaderOffset uint16
+	VertHeaderOffset  uint16
+}
+
+type JustWidthDeltaEntry struct {
+	JustClass         uint
+	BeforeGrowLimit   int
+	BeforeShrinkLimit int
+	AfterGrowLimit    int
+	AfterShrinkLimit  int
+	GrowFlags         uint16
+	ShrinkFlags       uint16
+}
+
+type KernKerningPair struct {
+	Left  uint16
+	Right uint16
+}
+
+type KernOrderedListEntry struct {
+	Pair  KernKerningPair
+	Value int16
+}
+
+type KernStateEntry struct {
+	NewState uint16
+	Flags    uint16
+}
+
+type KerxAnchorPointAction struct {
+	MarkAnchorPoint uint16
+	CurrAnchorPoint uint16
+}
+
+type KerxControlPointAction struct {
+	MarkControlPoint uint16
+	CurrControlPoint uint16
+}
+
+type KerxControlPointEntry struct {
+	NewState    uint16
+	Flags       uint16
+	ActionIndex uint16
+}
+
+type KerxCoordinateAction struct {
+	MarkX uint16
+	MarkY uint16
+	CurrX uint16
+	CurrY uint16
+}
+
+type KerxIndexArrayHeader struct {
+	Flags                  uint
+	RowCount               uint16
+	ColumnCount            uint16
+	RowIndexTableOffset    uint
+	ColumnIndexTableOffset uint
+	KerningArrayOffset     uint
+	KerningVectorOffset    uint
+}
+
+type KerxKerningPair struct {
+	Left  uint16
+	Right uint16
+}
+
+type KerxOrderedListEntry struct {
+	Pair  KerxKerningPair
+	Value int16
+}
+
+type KerxStateEntry struct {
+	NewState   uint16
+	Flags      uint16
+	ValueIndex uint16
+}
+
+type LtagStringRange struct {
+	Offset uint16
+	Length uint16
+}
+
+type MortContextualSubtable struct {
+	Header                  STHeader
+	SubstitutionTableOffset uint16
+}
+
+type MortFeatureEntry struct {
+	FeatureType     uint16
+	FeatureSelector uint16
+	EnableFlags     uint
+	DisableFlags    uint
+}
+
+type MortInsertionSubtable struct {
+	Header STHeader
+}
+
+type MortLigatureSubtable struct {
+	Header                    STHeader
+	LigatureActionTableOffset uint16
+	ComponentTableOffset      uint16
+	LigatureTableOffset       uint16
+}
+
+type MortRearrangementSubtable struct {
+	Header STHeader
+}
+
+type MorxContextualSubtable struct {
+	Header                  STXHeader
+	SubstitutionTableOffset uint
+}
+
+type MorxInsertionSubtable struct {
+	Header                    STXHeader
+	InsertionGlyphTableOffset uint
+}
+
+type MorxLigatureSubtable struct {
+	Header                    STXHeader
+	LigatureActionTableOffset uint
+	ComponentTableOffset      uint
+	LigatureTableOffset       uint
+}
+
+type MorxRearrangementSubtable struct {
+	Header STXHeader
+}
+
+type OpbdSideValues struct {
+	LeftSideShift   int16
+	TopSideShift    int16
+	RightSideShift  int16
+	BottomSideShift int16
+}
+
+type PropLookupSegment struct {
+	LastGlyph  uint16
+	FirstGlyph uint16
+	Value      uint16
+}
+
+type PropLookupSingle struct {
+	Glyph uint16
+	Props uint16
+}
+
+type ROTAGlyphEntry struct {
+	GlyphIndexOffset int16
+	HBaselineOffset  int16
+	VBaselineOffset  int16
+}
+
+type SFNTLookupBinarySearchHeader struct {
+	UnitSize      uint16
+	NUnits        uint16
+	SearchRange   uint16
+	EntrySelector uint16
+	RangeShift    uint16
+}
+
+type STEntryOne struct {
+	NewState uint16
+	Flags    uint16
+	Offset1  uint16
+}
+
+type STEntryTwo struct {
+	NewState uint16
+	Flags    uint16
+	Offset1  uint16
+	Offset2  uint16
+}
+
+type STEntryZero struct {
+	NewState uint16
+	Flags    uint16
+}
+
+type STHeader struct {
+	Filler           uint8
+	NClasses         uint8
+	ClassTableOffset uint16
+	StateArrayOffset uint16
+	EntryTableOffset uint16
+}
+
+type STXEntryOne struct {
+	NewState uint16
+	Flags    uint16
+	Index1   uint16
+}
+
+type STXEntryTwo struct {
+	NewState uint16
+	Flags    uint16
+	Index1   uint16
+	Index2   uint16
+}
+
+type STXEntryZero struct {
+	NewState uint16
+	Flags    uint16
+}
+
+type STXHeader struct {
+	NClasses         uint
+	ClassTableOffset uint
+	StateArrayOffset uint
+	EntryTableOffset uint
+}
+
+type SfntCMapEncoding struct {
+	PlatformID uint16
+	ScriptID   uint16
+	Offset     uint
+}
+
+type SfntCMapExtendedSubHeader struct {
+	Format   uint16
+	Reserved uint16
+	Length   uint
+	Language uint
+}
+
+type SfntCMapSubHeader struct {
+	Format     uint16
+	Length     uint16
+	LanguageID uint16
+}
+
+type SfntDirectoryEntry struct {
+	TableTag uint
+	CheckSum uint
+	Offset   uint
+	Length   uint
+}
+
+type SfntFeatureName struct {
+	FeatureType      uint16
+	SettingCount     uint16
+	OffsetToSettings int
+	FeatureFlags     uint16
+	NameID           int16
+}
+
+type SfntFontDescriptor struct {
+	Name  uint
+	Value int
+}
+
+type SfntFontFeatureSetting struct {
+	Setting uint16
+	NameID  int16
+}
+
+type SfntFontRunFeature struct {
+	FeatureType uint16
+	Setting     uint16
+}
+
+type SfntNameRecord struct {
+	PlatformID uint16
+	ScriptID   uint16
+	LanguageID uint16
+	NameID     uint16
+	Length     uint16
+	Offset     uint16
+}
+
+type SfntVariationAxis struct {
+	AxisTag      uint
+	MinValue     int
+	DefaultValue int
+	MaxValue     int
+	Flags        int16
+	NameID       int16
+}
+
+type TrakTable struct {
+	Version     int
+	Format      uint16
+	HorizOffset uint16
+	VertOffset  uint16
+}
+
+type TrakTableEntry struct {
+	Track          int
+	NameTableIndex uint16
+	SizesOffset    uint16
+}

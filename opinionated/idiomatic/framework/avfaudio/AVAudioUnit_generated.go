@@ -5,96 +5,100 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A subclass of the audio node class that, processes audio either in real time or nonreal time, depending on the type of the audio unit.
+// AudioUnit is an idiomatic wrapper over the Objective-C class AVAudioUnit.
 //
-// AudioUnit wraps [raw.AVAudioUnit] with a fluent Go API.
+// AudioUnit is an abstract base — you do not construct it directly. Construct one of [AudioUnitEffect], [AudioUnitGenerator], [AudioUnitMIDIInstrument], [AudioUnitTimeEffect] and pass it where a AudioUnit is accepted.
+//
+// A subclass of the audio node class that, processes audio either in real time or nonreal time, depending on the type of the audio unit.
 type AudioUnit struct {
-	inner *raw.AVAudioUnit
+	AudioNode
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnit].
-func (x *AudioUnit) Unwrap() *raw.AVAudioUnit { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnit) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitFromID adopts an existing object pointer as a AudioUnit (nil for 0).
+// AudioUnitFromID adopts an existing Objective-C object as a AudioUnit
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitFromID(id objc.ID) *AudioUnit {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnit{inner: raw.AVAudioUnitFromID(id)}
+	x := &AudioUnit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioUnit creates a new [AudioUnit].
-func NewAudioUnit() *AudioUnit {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnit")), objc.RegisterName("new"))
-	return &AudioUnit{inner: raw.AVAudioUnitFromID(_id)}
+// audioUnitAdopt wraps an Objective-C object that this code just created as a
+// AudioUnit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitAdopt(id objc.ID) *AudioUnit {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnit{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Loads an audio unit using a specified preset.
-//
-// LoadAudioUnitPresetAtURLError calls the underlying LoadAudioUnitPresetAtURLError.
-func (x *AudioUnit) LoadAudioUnitPresetAtURLError(url string) (bool, error) {
-	return x.inner.LoadAudioUnitPresetAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// LoadAudioUnitPresetAtURL loads an audio unit using a specified preset.
+func (x *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadAudioUnitPresetAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @property audioComponentDescription @abstract AudioComponentDescription of the underlying audio unit.
-//
-// AudioComponentDescription calls the underlying AudioComponentDescription.
-func (x *AudioUnit) AudioComponentDescription() objc.ID {
-	return x.inner.AudioComponentDescription()
+// AudioComponentDescription audioComponentDescription of the underlying audio unit.
+func (x *AudioUnit) AudioComponentDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioComponentDescription"))
+	return obj.Wrap(_r)
 }
 
-// @property audioUnit @abstract Reference to the underlying audio unit. @discussion A reference to the underlying audio unit is provided so that parameters that are not exposed by AVAudioUnit subclasses can be modified using the AudioUnit C API. No operations that may conflict with state maintained by the engine should be performed directly on the audio unit. These include changing initialization state, stream formats, channel layouts or connections to other audio units.
-//
-// AudioUnit calls the underlying AudioUnit.
-func (x *AudioUnit) AudioUnit() *carboncore.ComponentInstanceRecord {
-	return x.inner.AudioUnit()
-}
-
-// @property name @abstract Name of the audio unit.
-//
-// Name calls the underlying Name.
+// Name name of the audio unit.
 func (x *AudioUnit) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property manufacturerName @abstract Manufacturer name of the audio unit.
-//
-// ManufacturerName calls the underlying ManufacturerName.
+// ManufacturerName manufacturer name of the audio unit.
 func (x *AudioUnit) ManufacturerName() string {
-	_r := x.inner.ManufacturerName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *AudioUnit) asAudioUnit() *raw.AVAudioUnit { return x.inner }
-
-func (x *AudioUnit) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
 
 // AudioUnitable is the interface implemented by [AudioUnit], for mocking and DI.
 type AudioUnitable interface {
-	Unwrap() *raw.AVAudioUnit
-	LoadAudioUnitPresetAtURLError(url string) (bool, error)
-	AudioComponentDescription() objc.ID
-	AudioUnit() *carboncore.ComponentInstanceRecord
+	obj.Object
+	LoadAudioUnitPresetAtURL(url string) error
+	AudioComponentDescription() obj.Object
 	Name() string
 	ManufacturerName() string
 }
 
 var _ AudioUnitable = (*AudioUnit)(nil)
+
+// isAudioUnit marks AudioUnit — and, by embedding promotion, its
+// subclasses — as a member of the AudioUnit hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioUnit) isAudioUnit() {}
+
+var _ AudioUnitProvider = (*AudioUnit)(nil)
+
+var _ AudioNodeProvider = (*AudioUnit)(nil)

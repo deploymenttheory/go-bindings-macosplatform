@@ -5,260 +5,191 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that generates images from a video asset.
+// AssetImageGenerator is an idiomatic wrapper over the Objective-C class AVAssetImageGenerator.
 //
-// AssetImageGenerator wraps [raw.AVAssetImageGenerator] with a fluent Go API.
+// An object that generates images from a video asset.
 type AssetImageGenerator struct {
-	inner *raw.AVAssetImageGenerator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetImageGenerator].
-func (x *AssetImageGenerator) Unwrap() *raw.AVAssetImageGenerator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetImageGenerator) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetImageGeneratorFromID adopts an existing object pointer as a AssetImageGenerator (nil for 0).
+// AssetImageGeneratorFromID adopts an existing Objective-C object as a AssetImageGenerator
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetImageGeneratorFromID(id objc.ID) *AssetImageGenerator {
 	if id == 0 {
 		return nil
 	}
-	return &AssetImageGenerator{inner: raw.AVAssetImageGeneratorFromID(id)}
+	x := &AssetImageGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that generates images for times within a video asset.
-//
-// NewAssetImageGeneratorWithAsset creates a new [AssetImageGenerator].
-func NewAssetImageGeneratorWithAsset(asset *raw.AVAsset) *AssetImageGenerator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetImageGenerator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), asset.Ptr())
-	return &AssetImageGenerator{inner: raw.AVAssetImageGeneratorFromID(_id)}
+// assetImageGeneratorAdopt wraps an Objective-C object that this code just created as a
+// AssetImageGenerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetImageGeneratorAdopt(id objc.ID) *AssetImageGenerator {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetImageGenerator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A Boolean value that specifies whether to apply the track matrix or matrices when generating an image from the asset.
-//
-// WithAppliesPreferredTrackTransform sets the appliesPreferredTrackTransform property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *AssetImageGenerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetImageGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetImageGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetImageGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetImageGeneratorWithAsset creates an object that generates images for times within a video asset.
+func NewAssetImageGeneratorWithAsset(asset *Asset) *AssetImageGenerator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetImageGenerator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), objref.IDOf(asset))
+	return assetImageGeneratorAdopt(_id)
+}
+
+// WithAppliesPreferredTrackTransform a Boolean value that specifies whether to apply the track matrix or matrices when generating an image from the asset.
 func (x *AssetImageGenerator) WithAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) *AssetImageGenerator {
-	x.inner.SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesPreferredTrackTransform:"), appliesPreferredTrackTransform)
 	return x
 }
 
-// The maximum size of images to generate.
-//
-// WithMaximumSize sets the maximumSize property and returns the receiver for chaining.
+// WithMaximumSize the maximum size of images to generate.
 func (x *AssetImageGenerator) WithMaximumSize(maximumSize corefoundation.CGSize) *AssetImageGenerator {
-	x.inner.SetMaximumSize(maximumSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSize:"), maximumSize)
 	return x
 }
 
-// Specifies the aperture mode for the generated image.
-//
-// WithApertureMode sets the apertureMode property and returns the receiver for chaining.
-func (x *AssetImageGenerator) WithApertureMode(apertureMode *foundation.NSString) *AssetImageGenerator {
-	x.inner.SetApertureMode(apertureMode)
+// WithApertureMode specifies the aperture mode for the generated image.
+func (x *AssetImageGenerator) WithApertureMode(apertureMode obj.Object) *AssetImageGenerator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureMode:"), objref.IDOf(apertureMode))
 	return x
 }
 
-// The dynamic range policy to use when generating images.
-//
-// WithDynamicRangePolicy sets the dynamicRangePolicy property and returns the receiver for chaining.
-func (x *AssetImageGenerator) WithDynamicRangePolicy(dynamicRangePolicy *foundation.NSString) *AssetImageGenerator {
-	x.inner.SetDynamicRangePolicy(dynamicRangePolicy)
+// WithDynamicRangePolicy the dynamic range policy to use when generating images.
+func (x *AssetImageGenerator) WithDynamicRangePolicy(dynamicRangePolicy obj.Object) *AssetImageGenerator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRangePolicy:"), objref.IDOf(dynamicRangePolicy))
 	return x
 }
 
-// A video composition to use when extracting images from assets with multiple video tracks.
-//
-// WithVideoComposition sets the videoComposition property and returns the receiver for chaining.
+// WithVideoComposition a video composition to use when extracting images from assets with multiple video tracks.
 func (x *AssetImageGenerator) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator {
-	x.inner.SetVideoComposition(videoComposition.asVideoComposition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return x
 }
 
-// A maximum length of time before the requested time to allow image generation to occur.
-//
-// WithRequestedTimeToleranceBefore sets the requestedTimeToleranceBefore property and returns the receiver for chaining.
-func (x *AssetImageGenerator) WithRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime) *AssetImageGenerator {
-	x.inner.SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore)
-	return x
-}
-
-// A maximum length of time after the requested time to allow image generation to occur.
-//
-// WithRequestedTimeToleranceAfter sets the requestedTimeToleranceAfter property and returns the receiver for chaining.
-func (x *AssetImageGenerator) WithRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) *AssetImageGenerator {
-	x.inner.SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter)
-	return x
-}
-
-// Returns an image for the asset at or near a specified time.
-//
-// CopyCGImageAtTimeActualTimeError calls the underlying CopyCGImageAtTimeActualTimeError.
-func (x *AssetImageGenerator) CopyCGImageAtTimeActualTimeError(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (unsafe.Pointer, error) {
-	return x.inner.CopyCGImageAtTimeActualTimeError(requestedTime, actualTime)
-}
-
-// Generates images asynchronously for an array of requested times, and returns the results in a callback.
-//
-// GenerateCGImagesAsynchronouslyForTimesCompletionHandler calls the underlying GenerateCGImagesAsynchronouslyForTimesCompletionHandler.
-func (x *AssetImageGenerator) GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes *foundation.NSArray[*foundation.NSValue], handler objc.Block) {
-	x.inner.GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes, handler)
-}
-
-// Generates an image asynchronously for a requested time, and returns the result in a callback.
-//
-// GenerateCGImageAsynchronouslyForTimeCompletionHandler calls the underlying GenerateCGImageAsynchronouslyForTimeCompletionHandler.
-func (x *AssetImageGenerator) GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime coremedia.CMTime, handler objc.Block) {
-	x.inner.GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime, handler)
-}
-
-// Cancels all pending image generation requests.
-//
-// CancelAllCGImageGeneration calls the underlying CancelAllCGImageGeneration.
+// CancelAllCGImageGeneration cancels all pending image generation requests.
 func (x *AssetImageGenerator) CancelAllCGImageGeneration() {
-	x.inner.CancelAllCGImageGeneration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelAllCGImageGeneration"))
 }
 
-// Asset calls the underlying Asset.
+// Asset wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) Asset() *Asset {
-	_r := x.inner.Asset()
-	if _r == nil {
-		return nil
-	}
-	return &Asset{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return AssetFromID(_r)
 }
 
-// AppliesPreferredTrackTransform calls the underlying AppliesPreferredTrackTransform.
+// AppliesPreferredTrackTransform wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) AppliesPreferredTrackTransform() bool {
-	return x.inner.AppliesPreferredTrackTransform()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesPreferredTrackTransform"))
+	return _r
 }
 
-// SetAppliesPreferredTrackTransform calls the underlying SetAppliesPreferredTrackTransform.
+// SetAppliesPreferredTrackTransform wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) {
-	x.inner.SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesPreferredTrackTransform:"), appliesPreferredTrackTransform)
 }
 
-// MaximumSize calls the underlying MaximumSize.
+// MaximumSize wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) MaximumSize() corefoundation.CGSize {
-	return x.inner.MaximumSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumSize"))
+	return _r
 }
 
-// SetMaximumSize calls the underlying SetMaximumSize.
+// SetMaximumSize wraps the corresponding Objective-C method.
 func (x *AssetImageGenerator) SetMaximumSize(maximumSize corefoundation.CGSize) {
-	x.inner.SetMaximumSize(maximumSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSize:"), maximumSize)
 }
 
-// ApertureMode calls the underlying ApertureMode.
-func (x *AssetImageGenerator) ApertureMode() string {
-	_r := x.inner.ApertureMode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// ApertureMode wraps the corresponding Objective-C method.
+func (x *AssetImageGenerator) ApertureMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("apertureMode"))
+	return obj.Wrap(_r)
 }
 
-// SetApertureMode calls the underlying SetApertureMode.
-func (x *AssetImageGenerator) SetApertureMode(apertureMode *foundation.NSString) {
-	x.inner.SetApertureMode(apertureMode)
+// SetApertureMode wraps the corresponding Objective-C method.
+func (x *AssetImageGenerator) SetApertureMode(apertureMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureMode:"), objref.IDOf(apertureMode))
 }
 
-// @property		dynamicRangePolicy @abstract		Configures the video dynamic range for the output CGImage @discussion	Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
-//
-// DynamicRangePolicy calls the underlying DynamicRangePolicy.
-func (x *AssetImageGenerator) DynamicRangePolicy() string {
-	_r := x.inner.DynamicRangePolicy()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// DynamicRangePolicy configures the video dynamic range for the output CGImage Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
+func (x *AssetImageGenerator) DynamicRangePolicy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dynamicRangePolicy"))
+	return obj.Wrap(_r)
 }
 
-// SetDynamicRangePolicy calls the underlying SetDynamicRangePolicy.
-func (x *AssetImageGenerator) SetDynamicRangePolicy(dynamicRangePolicy *foundation.NSString) {
-	x.inner.SetDynamicRangePolicy(dynamicRangePolicy)
+// SetDynamicRangePolicy wraps the corresponding Objective-C method.
+func (x *AssetImageGenerator) SetDynamicRangePolicy(dynamicRangePolicy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRangePolicy:"), objref.IDOf(dynamicRangePolicy))
 }
 
-// @property		videoComposition @abstract		Specifies the video composition to use when extracting images from assets with multiple video tracks. @discussion	If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
-//
-// VideoComposition calls the underlying VideoComposition.
+// VideoComposition specifies the video composition to use when extracting images from assets with multiple video tracks. If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
 func (x *AssetImageGenerator) VideoComposition() *VideoComposition {
-	_r := x.inner.VideoComposition()
-	if _r == nil {
-		return nil
-	}
-	return &VideoComposition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
+	return VideoCompositionFromID(_r)
 }
 
-// SetVideoComposition calls the underlying SetVideoComposition.
-func (x *AssetImageGenerator) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
-	x.inner.SetVideoComposition(videoComposition)
-}
-
-// CustomVideoCompositor calls the underlying CustomVideoCompositor.
-func (x *AssetImageGenerator) CustomVideoCompositor() raw.AVVideoCompositing {
-	return x.inner.CustomVideoCompositor()
-}
-
-// RequestedTimeToleranceBefore calls the underlying RequestedTimeToleranceBefore.
-func (x *AssetImageGenerator) RequestedTimeToleranceBefore() coremedia.CMTime {
-	return x.inner.RequestedTimeToleranceBefore()
-}
-
-// SetRequestedTimeToleranceBefore calls the underlying SetRequestedTimeToleranceBefore.
-func (x *AssetImageGenerator) SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime) {
-	x.inner.SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore)
-}
-
-// RequestedTimeToleranceAfter calls the underlying RequestedTimeToleranceAfter.
-func (x *AssetImageGenerator) RequestedTimeToleranceAfter() coremedia.CMTime {
-	return x.inner.RequestedTimeToleranceAfter()
-}
-
-// SetRequestedTimeToleranceAfter calls the underlying SetRequestedTimeToleranceAfter.
-func (x *AssetImageGenerator) SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) {
-	x.inner.SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter)
+// SetVideoComposition wraps the corresponding Objective-C method.
+func (x *AssetImageGenerator) SetVideoComposition(videoComposition *VideoComposition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 }
 
 // AssetImageGeneratorable is the interface implemented by [AssetImageGenerator], for mocking and DI.
 type AssetImageGeneratorable interface {
-	Unwrap() *raw.AVAssetImageGenerator
+	obj.Object
 	WithAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) *AssetImageGenerator
 	WithMaximumSize(maximumSize corefoundation.CGSize) *AssetImageGenerator
-	WithApertureMode(apertureMode *foundation.NSString) *AssetImageGenerator
-	WithDynamicRangePolicy(dynamicRangePolicy *foundation.NSString) *AssetImageGenerator
+	WithApertureMode(apertureMode obj.Object) *AssetImageGenerator
+	WithDynamicRangePolicy(dynamicRangePolicy obj.Object) *AssetImageGenerator
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator
-	WithRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime) *AssetImageGenerator
-	WithRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) *AssetImageGenerator
-	CopyCGImageAtTimeActualTimeError(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (unsafe.Pointer, error)
-	GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes *foundation.NSArray[*foundation.NSValue], handler objc.Block)
-	GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime coremedia.CMTime, handler objc.Block)
 	CancelAllCGImageGeneration()
 	Asset() *Asset
 	AppliesPreferredTrackTransform() bool
 	SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool)
 	MaximumSize() corefoundation.CGSize
 	SetMaximumSize(maximumSize corefoundation.CGSize)
-	ApertureMode() string
-	SetApertureMode(apertureMode *foundation.NSString)
-	DynamicRangePolicy() string
-	SetDynamicRangePolicy(dynamicRangePolicy *foundation.NSString)
+	ApertureMode() obj.Object
+	SetApertureMode(apertureMode obj.Object)
+	DynamicRangePolicy() obj.Object
+	SetDynamicRangePolicy(dynamicRangePolicy obj.Object)
 	VideoComposition() *VideoComposition
-	SetVideoComposition(videoComposition *raw.AVVideoComposition)
-	CustomVideoCompositor() raw.AVVideoCompositing
-	RequestedTimeToleranceBefore() coremedia.CMTime
-	SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime)
-	RequestedTimeToleranceAfter() coremedia.CMTime
-	SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime)
+	SetVideoComposition(videoComposition *VideoComposition)
 }
 
 var _ AssetImageGeneratorable = (*AssetImageGenerator)(nil)

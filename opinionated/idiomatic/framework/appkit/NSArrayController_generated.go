@@ -5,521 +5,436 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A bindings-compatible controller that manages a collection of objects.
+// ArrayController is an idiomatic wrapper over the Objective-C class NSArrayController.
 //
-// ArrayController wraps [raw.NSArrayController] with a fluent Go API.
+// ArrayController is an abstract base — you do not construct it directly. Construct one of [DictionaryController] and pass it where a ArrayController is accepted.
+//
+// A bindings-compatible controller that manages a collection of objects.
 type ArrayController struct {
-	inner *raw.NSArrayController
+	ObjectController
 }
 
-// Unwrap returns the underlying [raw.NSArrayController].
-func (x *ArrayController) Unwrap() *raw.NSArrayController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayController) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayControllerFromID adopts an existing object pointer as a ArrayController (nil for 0).
+// ArrayControllerFromID adopts an existing Objective-C object as a ArrayController
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayControllerFromID(id objc.ID) *ArrayController {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayController{inner: raw.NSArrayControllerFromID(id)}
+	x := &ArrayController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewArrayController creates a new [ArrayController].
-func NewArrayController() *ArrayController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArrayController")), objc.RegisterName("new"))
-	return &ArrayController{inner: raw.NSArrayControllerFromID(_id)}
+// arrayControllerAdopt wraps an Objective-C object that this code just created as a
+// ArrayController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayControllerAdopt(id objc.ID) *ArrayController {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
-//
-// WithAutomaticallyRearrangesObjects sets the automaticallyRearrangesObjects property and returns the receiver for chaining.
+// WithAutomaticallyRearrangesObjects a Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
 func (x *ArrayController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController {
-	x.inner.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRearrangesObjects:"), automaticallyRearrangesObjects)
 	return x
 }
 
-// An array of sort descriptor objects, used by the receiver to arrange its content.
-//
-// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
-func (x *ArrayController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *ArrayController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSortDescriptors(_arr)
+// WithSortDescriptors an array of sort descriptor objects, used by the receiver to arrange its content.
+func (x *ArrayController) WithSortDescriptors(items ...obj.Object) *ArrayController {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
-// A predicate used by the receiver to filter the array controller contents
-//
-// WithFilterPredicate sets the filterPredicate property and returns the receiver for chaining.
-func (x *ArrayController) WithFilterPredicate(filterPredicate *foundation.NSPredicate) *ArrayController {
-	x.inner.SetFilterPredicate(filterPredicate)
+// WithFilterPredicate a predicate used by the receiver to filter the array controller contents
+func (x *ArrayController) WithFilterPredicate(filterPredicate obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
-//
-// WithClearsFilterPredicateOnInsertion sets the clearsFilterPredicateOnInsertion property and returns the receiver for chaining.
+// WithClearsFilterPredicateOnInsertion a Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
 func (x *ArrayController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController {
-	x.inner.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearsFilterPredicateOnInsertion:"), clearsFilterPredicateOnInsertion)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
-//
-// WithAvoidsEmptySelection sets the avoidsEmptySelection property and returns the receiver for chaining.
+// WithAvoidsEmptySelection a Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
 func (x *ArrayController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController {
-	x.inner.SetAvoidsEmptySelection(avoidsEmptySelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
-//
-// WithPreservesSelection sets the preservesSelection property and returns the receiver for chaining.
+// WithPreservesSelection a Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
 func (x *ArrayController) WithPreservesSelection(preservesSelection bool) *ArrayController {
-	x.inner.SetPreservesSelection(preservesSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver automatically selects inserted objects
-//
-// WithSelectsInsertedObjects sets the selectsInsertedObjects property and returns the receiver for chaining.
+// WithSelectsInsertedObjects a Boolean value that indicates whether the receiver automatically selects inserted objects
 func (x *ArrayController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController {
-	x.inner.SetSelectsInsertedObjects(selectsInsertedObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
-//
-// WithAlwaysUsesMultipleValuesMarker sets the alwaysUsesMultipleValuesMarker property and returns the receiver for chaining.
+// WithAlwaysUsesMultipleValuesMarker a Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
 func (x *ArrayController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController {
-	x.inner.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
 	return x
 }
 
-// An index set containing the indexes of the receiver’s currently selected objects in the content array
-//
-// WithSelectionIndexes sets the selectionIndexes property and returns the receiver for chaining.
-func (x *ArrayController) WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *ArrayController {
-	x.inner.SetSelectionIndexes(selectionIndexes)
+// WithSelectionIndexes an index set containing the indexes of the receiver’s currently selected objects in the content array
+func (x *ArrayController) WithSelectionIndexes(selectionIndexes obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
 	return x
 }
 
-// The index of the first object in the receiver’s selection
-//
-// WithSelectionIndex sets the selectionIndex property and returns the receiver for chaining.
-func (x *ArrayController) WithSelectionIndex(selectionIndex uint) *ArrayController {
-	x.inner.SetSelectionIndex(selectionIndex)
+// WithSelectionIndex the index of the first object in the receiver’s selection
+func (x *ArrayController) WithSelectionIndex(selectionIndex int) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndex:"), selectionIndex)
 	return x
 }
 
-// The receiver’s content object.
-//
-// WithContent sets the content property and returns the receiver for chaining.
-func (x *ArrayController) WithContent(content objc.ID) *ArrayController {
-	x.inner.NSObjectController.SetContent(content)
+// WithContent the receiver’s content object.
+func (x *ArrayController) WithContent(content obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return x
 }
 
-// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
-//
-// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+// WithAutomaticallyPreparesContent a Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
 func (x *ArrayController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController {
-	x.inner.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
 	return x
 }
 
-// The object class to use when creating new objects.
-//
-// WithObjectClass sets the objectClass property and returns the receiver for chaining.
-func (x *ArrayController) WithObjectClass(objectClass objc.Class) *ArrayController {
-	x.inner.NSObjectController.SetObjectClass(objectClass)
-	return x
-}
-
-// A Boolean that indicates whether the receiver allows adding and removing objects.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean that indicates whether the receiver allows adding and removing objects.
 func (x *ArrayController) WithEditable(editable bool) *ArrayController {
-	x.inner.NSObjectController.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// The receiver’s managed object context.
-//
-// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
-func (x *ArrayController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ArrayController {
-	x.inner.NSObjectController.SetManagedObjectContext(managedObjectContext)
+// WithManagedObjectContext the receiver’s managed object context.
+func (x *ArrayController) WithManagedObjectContext(managedObjectContext obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return x
 }
 
-// The entity name used by the receiver to create new objects.
-//
-// WithEntityName sets the entityName property and returns the receiver for chaining.
+// WithEntityName the entity name used by the receiver to create new objects.
 func (x *ArrayController) WithEntityName(entityName string) *ArrayController {
-	x.inner.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
 	return x
 }
 
-// The receiver’s fetch predicate.
-//
-// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
-func (x *ArrayController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ArrayController {
-	x.inner.NSObjectController.SetFetchPredicate(fetchPredicate)
+// WithFetchPredicate the receiver’s fetch predicate.
+func (x *ArrayController) WithFetchPredicate(fetchPredicate obj.Object) *ArrayController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return x
 }
 
-// A Boolean that indicates whether the receiver uses lazy fetching.
-//
-// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+// WithUsesLazyFetching a Boolean that indicates whether the receiver uses lazy fetching.
 func (x *ArrayController) WithUsesLazyFetching(usesLazyFetching bool) *ArrayController {
-	x.inner.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
 	return x
 }
 
-// Triggers filtering of the receiver’s content.
-//
-// RearrangeObjects calls the underlying RearrangeObjects.
+// RearrangeObjects triggers filtering of the receiver’s content.
 func (x *ArrayController) RearrangeObjects() {
-	x.inner.RearrangeObjects()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rearrangeObjects"))
 }
 
-// Invoked when any criteria for arranging objects change.
-//
-// DidChangeArrangementCriteria calls the underlying DidChangeArrangementCriteria.
+// DidChangeArrangementCriteria invoked when any criteria for arranging objects change.
 func (x *ArrayController) DidChangeArrangementCriteria() {
-	x.inner.DidChangeArrangementCriteria()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeArrangementCriteria"))
 }
 
-// Returns a given array, appropriately sorted and filtered.
-//
-// ArrangeObjects calls the underlying ArrangeObjects.
-func (x *ArrayController) ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	return x.inner.ArrangeObjects(objects)
+// ArrangeObjects returns a given array, appropriately sorted and filtered.
+func (x *ArrayController) ArrangeObjects(objects obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangeObjects:"), objref.IDOf(objects))
+	return obj.Wrap(_r)
 }
 
-// Sets the receiver’s selection indexes and returns a Boolean value that indicates whether the selection changed.
-//
-// SetSelectionIndexes calls the underlying SetSelectionIndexes.
-func (x *ArrayController) SetSelectionIndexes(indexes *foundation.NSIndexSet) bool {
-	return x.inner.SetSelectionIndexes(indexes)
+// SetSelectionIndexes sets the receiver’s selection indexes and returns a Boolean value that indicates whether the selection changed.
+func (x *ArrayController) SetSelectionIndexes(indexes obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(indexes))
+	return _r
 }
 
-// Sets the receiver’s selection to the given index, and returns a Boolean value that indicates whether the selection was changed.
-//
-// SetSelectionIndex calls the underlying SetSelectionIndex.
-func (x *ArrayController) SetSelectionIndex(index uint) bool {
-	return x.inner.SetSelectionIndex(index)
+// SetSelectionIndex sets the receiver’s selection to the given index, and returns a Boolean value that indicates whether the selection was changed.
+func (x *ArrayController) SetSelectionIndex(index int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectionIndex:"), index)
+	return _r
 }
 
-// Adds the objects at the specified indexes in the receiver’s content array to the current selection.
-//
-// AddSelectionIndexes calls the underlying AddSelectionIndexes.
-func (x *ArrayController) AddSelectionIndexes(indexes *foundation.NSIndexSet) bool {
-	return x.inner.AddSelectionIndexes(indexes)
+// AddSelectionIndexes adds the objects at the specified indexes in the receiver’s content array to the current selection.
+func (x *ArrayController) AddSelectionIndexes(indexes obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSelectionIndexes:"), objref.IDOf(indexes))
+	return _r
 }
 
-// Removes the object as the specified indexes from the receiver’s current selection.
-//
-// RemoveSelectionIndexes calls the underlying RemoveSelectionIndexes.
-func (x *ArrayController) RemoveSelectionIndexes(indexes *foundation.NSIndexSet) bool {
-	return x.inner.RemoveSelectionIndexes(indexes)
+// RemoveSelectionIndexes removes the object as the specified indexes from the receiver’s current selection.
+func (x *ArrayController) RemoveSelectionIndexes(indexes obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSelectionIndexes:"), objref.IDOf(indexes))
+	return _r
 }
 
-// Sets the specified objects as the receiver’s current selection.
-//
-// SetSelectedObjects calls the underlying SetSelectedObjects.
-func (x *ArrayController) SetSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
-	return x.inner.SetSelectedObjects(objects)
+// SetSelectedObjects sets the specified objects as the receiver’s current selection.
+func (x *ArrayController) SetSelectedObjects(objects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectedObjects:"), objref.IDOf(objects))
+	return _r
 }
 
-// Adds the specified objects from the receiver’s content array to the current selection.
-//
-// AddSelectedObjects calls the underlying AddSelectedObjects.
-func (x *ArrayController) AddSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
-	return x.inner.AddSelectedObjects(objects)
+// AddSelectedObjects adds the specified objects from the receiver’s content array to the current selection.
+func (x *ArrayController) AddSelectedObjects(objects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSelectedObjects:"), objref.IDOf(objects))
+	return _r
 }
 
-// Removes the specified objects from the receiver’s current selection.
-//
-// RemoveSelectedObjects calls the underlying RemoveSelectedObjects.
-func (x *ArrayController) RemoveSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
-	return x.inner.RemoveSelectedObjects(objects)
+// RemoveSelectedObjects removes the specified objects from the receiver’s current selection.
+func (x *ArrayController) RemoveSelectedObjects(objects obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSelectedObjects:"), objref.IDOf(objects))
+	return _r
 }
 
-// Creates a new object and inserts it into the receiver’s content array.
-//
-// Insert calls the underlying Insert.
-func (x *ArrayController) Insert(sender objc.ID) {
-	x.inner.Insert(sender)
+// Insert creates a new object and inserts it into the receiver’s content array.
+func (x *ArrayController) Insert(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insert:"), objref.IDOf(sender))
 }
 
-// Selects the next object, relative to the current selection, in the receiver’s arranged content.
-//
-// SelectNext calls the underlying SelectNext.
-func (x *ArrayController) SelectNext(sender objc.ID) {
-	x.inner.SelectNext(sender)
+// SelectNext selects the next object, relative to the current selection, in the receiver’s arranged content.
+func (x *ArrayController) SelectNext(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectNext:"), objref.IDOf(sender))
 }
 
-// Selects the previous object, relative to the current selection, in the receiver’s arranged content.
-//
-// SelectPrevious calls the underlying SelectPrevious.
-func (x *ArrayController) SelectPrevious(sender objc.ID) {
-	x.inner.SelectPrevious(sender)
+// SelectPrevious selects the previous object, relative to the current selection, in the receiver’s arranged content.
+func (x *ArrayController) SelectPrevious(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectPrevious:"), objref.IDOf(sender))
 }
 
-// Adds objects to the receiver’s content collection.
-//
-// AddObjects calls the underlying AddObjects.
-func (x *ArrayController) AddObjects(objects *foundation.NSArray[objc.ID]) {
-	x.inner.AddObjects(objects)
+// AddObjects adds objects to the receiver’s content collection.
+func (x *ArrayController) AddObjects(objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjects:"), objref.IDOf(objects))
 }
 
-// Inserts object into the receiver’s arranged objects array at the location specified by index, and adds it to the receiver’s content collection.
-//
-// InsertObjectAtArrangedObjectIndex calls the underlying InsertObjectAtArrangedObjectIndex.
-func (x *ArrayController) InsertObjectAtArrangedObjectIndex(object objc.ID, index uint) {
-	x.inner.InsertObjectAtArrangedObjectIndex(object, index)
+// InsertObjectAtArrangedObjectIndex inserts object into the receiver’s arranged objects array at the location specified by index, and adds it to the receiver’s content collection.
+func (x *ArrayController) InsertObjectAtArrangedObjectIndex(object obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:atArrangedObjectIndex:"), objref.IDOf(object), index)
 }
 
-// Inserts objects into the receiver’s arranged objects array at the locations specified in indexes, and adds it to the receiver’s content collection.
-//
-// InsertObjectsAtArrangedObjectIndexes calls the underlying InsertObjectsAtArrangedObjectIndexes.
-func (x *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects *foundation.NSArray[objc.ID], indexes *foundation.NSIndexSet) {
-	x.inner.InsertObjectsAtArrangedObjectIndexes(objects, indexes)
+// InsertObjectsAtArrangedObjectIndexes inserts objects into the receiver’s arranged objects array at the locations specified in indexes, and adds it to the receiver’s content collection.
+func (x *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects obj.Object, indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObjects:atArrangedObjectIndexes:"), objref.IDOf(objects), objref.IDOf(indexes))
 }
 
-// Removes the object at the specified index in the receiver’s arranged objects from the receiver’s content array.
-//
-// RemoveObjectAtArrangedObjectIndex calls the underlying RemoveObjectAtArrangedObjectIndex.
-func (x *ArrayController) RemoveObjectAtArrangedObjectIndex(index uint) {
-	x.inner.RemoveObjectAtArrangedObjectIndex(index)
+// RemoveObjectAtArrangedObjectIndex removes the object at the specified index in the receiver’s arranged objects from the receiver’s content array.
+func (x *ArrayController) RemoveObjectAtArrangedObjectIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectAtArrangedObjectIndex:"), index)
 }
 
-// Removes the objects at the specified indexes in the receiver’s arranged objects from the content array.
-//
-// RemoveObjectsAtArrangedObjectIndexes calls the underlying RemoveObjectsAtArrangedObjectIndexes.
-func (x *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes *foundation.NSIndexSet) {
-	x.inner.RemoveObjectsAtArrangedObjectIndexes(indexes)
+// RemoveObjectsAtArrangedObjectIndexes removes the objects at the specified indexes in the receiver’s arranged objects from the content array.
+func (x *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsAtArrangedObjectIndexes:"), objref.IDOf(indexes))
 }
 
-// Removes objects from the receiver’s content collection.
-//
-// RemoveObjects calls the underlying RemoveObjects.
-func (x *ArrayController) RemoveObjects(objects *foundation.NSArray[objc.ID]) {
-	x.inner.RemoveObjects(objects)
+// RemoveObjects removes objects from the receiver’s content collection.
+func (x *ArrayController) RemoveObjects(objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjects:"), objref.IDOf(objects))
 }
 
-// AutomaticallyRearrangesObjects calls the underlying AutomaticallyRearrangesObjects.
+// AutomaticallyRearrangesObjects wraps the corresponding Objective-C method.
 func (x *ArrayController) AutomaticallyRearrangesObjects() bool {
-	return x.inner.AutomaticallyRearrangesObjects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyRearrangesObjects"))
+	return _r
 }
 
-// SetAutomaticallyRearrangesObjects calls the underlying SetAutomaticallyRearrangesObjects.
+// SetAutomaticallyRearrangesObjects wraps the corresponding Objective-C method.
 func (x *ArrayController) SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) {
-	x.inner.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRearrangesObjects:"), automaticallyRearrangesObjects)
 }
 
+// AutomaticRearrangementKeyPaths wraps the corresponding Objective-C method.
+//
 // AutomaticRearrangementKeyPaths returns the collection as a Go slice.
 func (x *ArrayController) AutomaticRearrangementKeyPaths() []string {
-	arr := x.inner.AutomaticRearrangementKeyPaths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("automaticRearrangementKeyPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// SortDescriptors wraps the corresponding Objective-C method.
+//
 // SortDescriptors returns the collection as a Go slice.
-func (x *ArrayController) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+func (x *ArrayController) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSortDescriptors calls the underlying SetSortDescriptors.
-func (x *ArrayController) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	x.inner.SetSortDescriptors(sortDescriptors)
+// SetSortDescriptors wraps the corresponding Objective-C method.
+func (x *ArrayController) SetSortDescriptors(sortDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// FilterPredicate calls the underlying FilterPredicate.
-func (x *ArrayController) FilterPredicate() *foundation.NSPredicate {
-	return x.inner.FilterPredicate()
+// FilterPredicate wraps the corresponding Objective-C method.
+func (x *ArrayController) FilterPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterPredicate"))
+	return obj.Wrap(_r)
 }
 
-// SetFilterPredicate calls the underlying SetFilterPredicate.
-func (x *ArrayController) SetFilterPredicate(filterPredicate *foundation.NSPredicate) {
-	x.inner.SetFilterPredicate(filterPredicate)
+// SetFilterPredicate wraps the corresponding Objective-C method.
+func (x *ArrayController) SetFilterPredicate(filterPredicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
 }
 
-// ClearsFilterPredicateOnInsertion calls the underlying ClearsFilterPredicateOnInsertion.
+// ClearsFilterPredicateOnInsertion wraps the corresponding Objective-C method.
 func (x *ArrayController) ClearsFilterPredicateOnInsertion() bool {
-	return x.inner.ClearsFilterPredicateOnInsertion()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("clearsFilterPredicateOnInsertion"))
+	return _r
 }
 
-// SetClearsFilterPredicateOnInsertion calls the underlying SetClearsFilterPredicateOnInsertion.
+// SetClearsFilterPredicateOnInsertion wraps the corresponding Objective-C method.
 func (x *ArrayController) SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) {
-	x.inner.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearsFilterPredicateOnInsertion:"), clearsFilterPredicateOnInsertion)
 }
 
-// ArrangedObjects calls the underlying ArrangedObjects.
-func (x *ArrayController) ArrangedObjects() objc.ID {
-	return x.inner.ArrangedObjects()
+// ArrangedObjects wraps the corresponding Objective-C method.
+func (x *ArrayController) ArrangedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedObjects"))
+	return obj.Wrap(_r)
 }
 
-// AvoidsEmptySelection calls the underlying AvoidsEmptySelection.
+// AvoidsEmptySelection wraps the corresponding Objective-C method.
 func (x *ArrayController) AvoidsEmptySelection() bool {
-	return x.inner.AvoidsEmptySelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("avoidsEmptySelection"))
+	return _r
 }
 
-// SetAvoidsEmptySelection calls the underlying SetAvoidsEmptySelection.
+// SetAvoidsEmptySelection wraps the corresponding Objective-C method.
 func (x *ArrayController) SetAvoidsEmptySelection(avoidsEmptySelection bool) {
-	x.inner.SetAvoidsEmptySelection(avoidsEmptySelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
 }
 
-// PreservesSelection calls the underlying PreservesSelection.
+// PreservesSelection wraps the corresponding Objective-C method.
 func (x *ArrayController) PreservesSelection() bool {
-	return x.inner.PreservesSelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesSelection"))
+	return _r
 }
 
-// SetPreservesSelection calls the underlying SetPreservesSelection.
+// SetPreservesSelection wraps the corresponding Objective-C method.
 func (x *ArrayController) SetPreservesSelection(preservesSelection bool) {
-	x.inner.SetPreservesSelection(preservesSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
 }
 
-// SelectsInsertedObjects calls the underlying SelectsInsertedObjects.
+// SelectsInsertedObjects wraps the corresponding Objective-C method.
 func (x *ArrayController) SelectsInsertedObjects() bool {
-	return x.inner.SelectsInsertedObjects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectsInsertedObjects"))
+	return _r
 }
 
-// SetSelectsInsertedObjects calls the underlying SetSelectsInsertedObjects.
+// SetSelectsInsertedObjects wraps the corresponding Objective-C method.
 func (x *ArrayController) SetSelectsInsertedObjects(selectsInsertedObjects bool) {
-	x.inner.SetSelectsInsertedObjects(selectsInsertedObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
 }
 
-// AlwaysUsesMultipleValuesMarker calls the underlying AlwaysUsesMultipleValuesMarker.
+// AlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
 func (x *ArrayController) AlwaysUsesMultipleValuesMarker() bool {
-	return x.inner.AlwaysUsesMultipleValuesMarker()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysUsesMultipleValuesMarker"))
+	return _r
 }
 
-// SetAlwaysUsesMultipleValuesMarker calls the underlying SetAlwaysUsesMultipleValuesMarker.
+// SetAlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
 func (x *ArrayController) SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) {
-	x.inner.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
 }
 
-// SelectionIndexes calls the underlying SelectionIndexes.
-func (x *ArrayController) SelectionIndexes() *foundation.NSIndexSet {
-	return x.inner.SelectionIndexes()
+// SelectionIndexes wraps the corresponding Objective-C method.
+func (x *ArrayController) SelectionIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexes"))
+	return obj.Wrap(_r)
 }
 
-// SelectionIndex calls the underlying SelectionIndex.
-func (x *ArrayController) SelectionIndex() uint {
-	return x.inner.SelectionIndex()
+// SelectionIndex wraps the corresponding Objective-C method.
+func (x *ArrayController) SelectionIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionIndex"))
+	return _r
 }
 
-// CanInsert calls the underlying CanInsert.
+// CanInsert wraps the corresponding Objective-C method.
 func (x *ArrayController) CanInsert() bool {
-	return x.inner.CanInsert()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canInsert"))
+	return _r
 }
 
-// CanSelectNext calls the underlying CanSelectNext.
+// CanSelectNext wraps the corresponding Objective-C method.
 func (x *ArrayController) CanSelectNext() bool {
-	return x.inner.CanSelectNext()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSelectNext"))
+	return _r
 }
 
-// CanSelectPrevious calls the underlying CanSelectPrevious.
+// CanSelectPrevious wraps the corresponding Objective-C method.
 func (x *ArrayController) CanSelectPrevious() bool {
-	return x.inner.CanSelectPrevious()
-}
-
-func (x *ArrayController) asArrayController() *raw.NSArrayController { return x.inner }
-
-func (x *ArrayController) asObjectController() *raw.NSObjectController {
-	return &x.inner.NSObjectController
-}
-
-func (x *ArrayController) asController() *raw.NSController {
-	return &x.inner.NSObjectController.NSController
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSelectPrevious"))
+	return _r
 }
 
 // ArrayControllerable is the interface implemented by [ArrayController], for mocking and DI.
 type ArrayControllerable interface {
-	Unwrap() *raw.NSArrayController
+	obj.Object
 	WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController
-	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *ArrayController
-	WithFilterPredicate(filterPredicate *foundation.NSPredicate) *ArrayController
+	WithSortDescriptors(items ...obj.Object) *ArrayController
+	WithFilterPredicate(filterPredicate obj.Object) *ArrayController
 	WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController
 	WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController
 	WithPreservesSelection(preservesSelection bool) *ArrayController
 	WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController
 	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController
-	WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *ArrayController
-	WithSelectionIndex(selectionIndex uint) *ArrayController
-	WithContent(content objc.ID) *ArrayController
+	WithSelectionIndexes(selectionIndexes obj.Object) *ArrayController
+	WithSelectionIndex(selectionIndex int) *ArrayController
+	WithContent(content obj.Object) *ArrayController
 	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController
-	WithObjectClass(objectClass objc.Class) *ArrayController
 	WithEditable(editable bool) *ArrayController
-	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ArrayController
+	WithManagedObjectContext(managedObjectContext obj.Object) *ArrayController
 	WithEntityName(entityName string) *ArrayController
-	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ArrayController
+	WithFetchPredicate(fetchPredicate obj.Object) *ArrayController
 	WithUsesLazyFetching(usesLazyFetching bool) *ArrayController
 	RearrangeObjects()
 	DidChangeArrangementCriteria()
-	ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
-	SetSelectionIndexes(indexes *foundation.NSIndexSet) bool
-	SetSelectionIndex(index uint) bool
-	AddSelectionIndexes(indexes *foundation.NSIndexSet) bool
-	RemoveSelectionIndexes(indexes *foundation.NSIndexSet) bool
-	SetSelectedObjects(objects *foundation.NSArray[objc.ID]) bool
-	AddSelectedObjects(objects *foundation.NSArray[objc.ID]) bool
-	RemoveSelectedObjects(objects *foundation.NSArray[objc.ID]) bool
-	Insert(sender objc.ID)
-	SelectNext(sender objc.ID)
-	SelectPrevious(sender objc.ID)
-	AddObjects(objects *foundation.NSArray[objc.ID])
-	InsertObjectAtArrangedObjectIndex(object objc.ID, index uint)
-	InsertObjectsAtArrangedObjectIndexes(objects *foundation.NSArray[objc.ID], indexes *foundation.NSIndexSet)
-	RemoveObjectAtArrangedObjectIndex(index uint)
-	RemoveObjectsAtArrangedObjectIndexes(indexes *foundation.NSIndexSet)
-	RemoveObjects(objects *foundation.NSArray[objc.ID])
+	ArrangeObjects(objects obj.Object) obj.Object
+	SetSelectionIndexes(indexes obj.Object) bool
+	SetSelectionIndex(index int) bool
+	AddSelectionIndexes(indexes obj.Object) bool
+	RemoveSelectionIndexes(indexes obj.Object) bool
+	SetSelectedObjects(objects obj.Object) bool
+	AddSelectedObjects(objects obj.Object) bool
+	RemoveSelectedObjects(objects obj.Object) bool
+	Insert(sender obj.Object)
+	SelectNext(sender obj.Object)
+	SelectPrevious(sender obj.Object)
+	AddObjects(objects obj.Object)
+	InsertObjectAtArrangedObjectIndex(object obj.Object, index int)
+	InsertObjectsAtArrangedObjectIndexes(objects obj.Object, indexes obj.Object)
+	RemoveObjectAtArrangedObjectIndex(index int)
+	RemoveObjectsAtArrangedObjectIndexes(indexes obj.Object)
+	RemoveObjects(objects obj.Object)
 	AutomaticallyRearrangesObjects() bool
 	SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool)
 	AutomaticRearrangementKeyPaths() []string
-	SortDescriptors() []*foundation.NSSortDescriptor
-	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
-	FilterPredicate() *foundation.NSPredicate
-	SetFilterPredicate(filterPredicate *foundation.NSPredicate)
+	SortDescriptors() []obj.Object
+	SetSortDescriptors(sortDescriptors []obj.Object)
+	FilterPredicate() obj.Object
+	SetFilterPredicate(filterPredicate obj.Object)
 	ClearsFilterPredicateOnInsertion() bool
 	SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool)
-	ArrangedObjects() objc.ID
+	ArrangedObjects() obj.Object
 	AvoidsEmptySelection() bool
 	SetAvoidsEmptySelection(avoidsEmptySelection bool)
 	PreservesSelection() bool
@@ -528,11 +443,22 @@ type ArrayControllerable interface {
 	SetSelectsInsertedObjects(selectsInsertedObjects bool)
 	AlwaysUsesMultipleValuesMarker() bool
 	SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool)
-	SelectionIndexes() *foundation.NSIndexSet
-	SelectionIndex() uint
+	SelectionIndexes() obj.Object
+	SelectionIndex() int
 	CanInsert() bool
 	CanSelectNext() bool
 	CanSelectPrevious() bool
 }
 
 var _ ArrayControllerable = (*ArrayController)(nil)
+
+// isArrayController marks ArrayController — and, by embedding promotion, its
+// subclasses — as a member of the ArrayController hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayController) isArrayController() {}
+
+var _ ArrayControllerProvider = (*ArrayController)(nil)
+
+var _ ObjectControllerProvider = (*ArrayController)(nil)
+
+var _ ControllerProvider = (*ArrayController)(nil)

@@ -5,15 +5,17 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// HostIOSourceProvider is implemented by HostIOSource and any idiomatic type wrapping a IOUSBHostIOSource subclass.
+// HostIOSourceProvider is accepted wherever a IOUSBHostIOSource (or one of its subclasses) is expected.
 type HostIOSourceProvider interface {
-	asHostIOSource() *raw.IOUSBHostIOSource
+	objref.Object
+	isHostIOSource()
 }
 
-// HostObjectProvider is implemented by HostObject and any idiomatic type wrapping a IOUSBHostObject subclass.
+// HostObjectProvider is accepted wherever a IOUSBHostObject (or one of its subclasses) is expected.
 type HostObjectProvider interface {
-	asHostObject() *raw.IOUSBHostObject
+	objref.Object
+	isHostObject()
 }

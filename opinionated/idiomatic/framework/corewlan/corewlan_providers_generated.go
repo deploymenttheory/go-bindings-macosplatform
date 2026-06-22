@@ -5,15 +5,17 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ConfigurationProvider is implemented by Configuration and any idiomatic type wrapping a CWConfiguration subclass.
+// ConfigurationProvider is accepted wherever a CWConfiguration (or one of its subclasses) is expected.
 type ConfigurationProvider interface {
-	asConfiguration() *raw.CWConfiguration
+	objref.Object
+	isConfiguration()
 }
 
-// NetworkProfileProvider is implemented by NetworkProfile and any idiomatic type wrapping a CWNetworkProfile subclass.
+// NetworkProfileProvider is accepted wherever a CWNetworkProfile (or one of its subclasses) is expected.
 type NetworkProfileProvider interface {
-	asNetworkProfile() *raw.CWNetworkProfile
+	objref.Object
+	isNetworkProfile()
 }

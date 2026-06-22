@@ -5,60 +5,85 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The results from a map-based search.
+// LocalSearchResponse is an idiomatic wrapper over the Objective-C class MKLocalSearchResponse.
 //
-// LocalSearchResponse wraps [raw.MKLocalSearchResponse] with a fluent Go API.
+// The results from a map-based search.
 type LocalSearchResponse struct {
-	inner *raw.MKLocalSearchResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLocalSearchResponse].
-func (x *LocalSearchResponse) Unwrap() *raw.MKLocalSearchResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalSearchResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalSearchResponseFromID adopts an existing object pointer as a LocalSearchResponse (nil for 0).
+// LocalSearchResponseFromID adopts an existing Objective-C object as a LocalSearchResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalSearchResponseFromID(id objc.ID) *LocalSearchResponse {
 	if id == 0 {
 		return nil
 	}
-	return &LocalSearchResponse{inner: raw.MKLocalSearchResponseFromID(id)}
+	x := &LocalSearchResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLocalSearchResponse creates a new [LocalSearchResponse].
-func NewLocalSearchResponse() *LocalSearchResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearchResponse")), objc.RegisterName("new"))
-	return &LocalSearchResponse{inner: raw.MKLocalSearchResponseFromID(_id)}
-}
-
-// MapItems returns the collection as a Go slice.
-func (x *LocalSearchResponse) MapItems() []*MapItem {
-	arr := x.inner.MapItems()
-	if arr == nil {
+// localSearchResponseAdopt wraps an Objective-C object that this code just created as a
+// LocalSearchResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localSearchResponseAdopt(id objc.ID) *LocalSearchResponse {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MapItem {
-		return &MapItem{inner: raw.MKMapItemFromID(purego.Retain(_id))}
-	})
+	x := &LocalSearchResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// BoundingRegion calls the underlying BoundingRegion.
-func (x *LocalSearchResponse) BoundingRegion() raw.MKCoordinateRegion {
-	return x.inner.BoundingRegion()
+// Description returns the object's -description text.
+func (x *LocalSearchResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalSearchResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalSearchResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalSearchResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalSearchResponse creates a new LocalSearchResponse.
+func NewLocalSearchResponse() *LocalSearchResponse {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalSearchResponse")), objc.RegisterName("new"))
+	return localSearchResponseAdopt(_id)
+}
+
+// MapItems wraps the corresponding Objective-C method.
+//
+// MapItems returns the collection as a Go slice.
+func (x *LocalSearchResponse) MapItems() []*MapItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MapItem { return MapItemFromID(_id) })
 }
 
 // LocalSearchResponseable is the interface implemented by [LocalSearchResponse], for mocking and DI.
 type LocalSearchResponseable interface {
-	Unwrap() *raw.MKLocalSearchResponse
+	obj.Object
 	MapItems() []*MapItem
-	BoundingRegion() raw.MKCoordinateRegion
 }
 
 var _ LocalSearchResponseable = (*LocalSearchResponse)(nil)

@@ -5,47 +5,59 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for image-analysis results that describe the relative alignment of two images.
+// ImageAlignmentObservation is an idiomatic wrapper over the Objective-C class VNImageAlignmentObservation.
 //
-// ImageAlignmentObservation wraps [raw.VNImageAlignmentObservation] with a fluent Go API.
+// ImageAlignmentObservation is an abstract base — you do not construct it directly. Construct one of [ImageHomographicAlignmentObservation], [ImageTranslationAlignmentObservation] and pass it where a ImageAlignmentObservation is accepted.
+//
+// The abstract superclass for image-analysis results that describe the relative alignment of two images.
 type ImageAlignmentObservation struct {
-	inner *raw.VNImageAlignmentObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNImageAlignmentObservation].
-func (x *ImageAlignmentObservation) Unwrap() *raw.VNImageAlignmentObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAlignmentObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAlignmentObservationFromID adopts an existing object pointer as a ImageAlignmentObservation (nil for 0).
+// ImageAlignmentObservationFromID adopts an existing Objective-C object as a ImageAlignmentObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAlignmentObservationFromID(id objc.ID) *ImageAlignmentObservation {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAlignmentObservation{inner: raw.VNImageAlignmentObservationFromID(id)}
+	x := &ImageAlignmentObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageAlignmentObservation creates a new [ImageAlignmentObservation].
-func NewImageAlignmentObservation() *ImageAlignmentObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageAlignmentObservation")), objc.RegisterName("new"))
-	return &ImageAlignmentObservation{inner: raw.VNImageAlignmentObservationFromID(_id)}
+// imageAlignmentObservationAdopt wraps an Objective-C object that this code just created as a
+// ImageAlignmentObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAlignmentObservationAdopt(id objc.ID) *ImageAlignmentObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAlignmentObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
-
-func (x *ImageAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation {
-	return x.inner
-}
-
-func (x *ImageAlignmentObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // ImageAlignmentObservationable is the interface implemented by [ImageAlignmentObservation], for mocking and DI.
 type ImageAlignmentObservationable interface {
-	Unwrap() *raw.VNImageAlignmentObservation
+	obj.Object
 }
 
 var _ ImageAlignmentObservationable = (*ImageAlignmentObservation)(nil)
+
+// isImageAlignmentObservation marks ImageAlignmentObservation — and, by embedding promotion, its
+// subclasses — as a member of the ImageAlignmentObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageAlignmentObservation) isImageAlignmentObservation() {}
+
+var _ ImageAlignmentObservationProvider = (*ImageAlignmentObservation)(nil)
+
+var _ ObservationProvider = (*ImageAlignmentObservation)(nil)

@@ -5,70 +5,98 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CentralManager wraps [raw.AVBCentralManager] with a fluent Go API.
+// CentralManager is an idiomatic wrapper over the Objective-C class AVBCentralManager.
 type CentralManager struct {
-	inner *raw.AVBCentralManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVBCentralManager].
-func (x *CentralManager) Unwrap() *raw.AVBCentralManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CentralManager) ID() objc.ID { return x.inner.Ptr() }
-
-// CentralManagerFromID adopts an existing object pointer as a CentralManager (nil for 0).
+// CentralManagerFromID adopts an existing Objective-C object as a CentralManager
+// (nil for 0), retaining it and registering a release finalizer.
 func CentralManagerFromID(id objc.ID) *CentralManager {
 	if id == 0 {
 		return nil
 	}
-	return &CentralManager{inner: raw.AVBCentralManagerFromID(id)}
+	x := &CentralManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCentralManager creates a new [CentralManager].
+// centralManagerAdopt wraps an Objective-C object that this code just created as a
+// CentralManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func centralManagerAdopt(id objc.ID) *CentralManager {
+	if id == 0 {
+		return nil
+	}
+	x := &CentralManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CentralManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CentralManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CentralManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CentralManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCentralManager creates a new CentralManager.
 func NewCentralManager() *CentralManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBCentralManager")), objc.RegisterName("new"))
-	return &CentralManager{inner: raw.AVBCentralManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVBCentralManager")), objc.RegisterName("new"))
+	return centralManagerAdopt(_id)
 }
 
-// @abstract	This method triggers the IOKit matching for the network controllers. @discussion	This is usually called by a subclass as the last thing in it's init method. This call is broken out of the AVBCentralManager's init method so that subclasses can finish their setup before calling it.
-//
-// StartControllerMatching calls the underlying StartControllerMatching.
+// StartControllerMatching this method triggers the IOKit matching for the network controllers. This is usually called by a subclass as the last thing in it's init method. This call is broken out of the AVBCentralManager's init method so that subclasses can finish their setup before calling it.
 func (x *CentralManager) StartControllerMatching() {
-	x.inner.StartControllerMatching()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerMatching"))
 }
 
-// @abstract	This method is called when an AVBInterface object is created for a NIC, either when the central manager is first started up or when the NIC is added later. @param		interface	An instance of an AVBInterface subclass (as appropriate for the NIC) which has been added for the discovered NIC. @discussion	The AVBCentralManager maintains it's own internal reference to the interface object until <code>didRemoveInterface:<code> is called with the same interface object, subclasses do not need to maintain another reference to this. A subclass does not need to call the AVBCentralManager implementation. Note this method is not called on the main thread and is not safe for performing UI actions.
-//
-// DidAddInterface calls the underlying DidAddInterface.
-func (x *CentralManager) DidAddInterface(interface_ *raw.AVBInterface) {
-	x.inner.DidAddInterface(interface_)
+// DidAddInterface this method is called when an AVBInterface object is created for a NIC, either when the central manager is first started up or when the NIC is added later. The AVBCentralManager maintains it's own internal reference to the interface object until <code>didRemoveInterface:<code> is called with the same interface object, subclasses do not need to maintain another reference to this. A subclass does not need to call the AVBCentralManager implementation. Note this method is not called on the main thread and is not safe for performing UI actions.
+func (x *CentralManager) DidAddInterface(interface_ *Interface) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAddInterface:"), objref.IDOf(interface_))
 }
 
-// @abstract	This method is called when a NIC has been removed from the system and the central manager is cleaning it up. @param		interface	An instance of an AVBInterface subclass (as appropriate for the NIC) which is being removed for the discovered NIC. @discussion	Note this method is not called on the main thread and is not safe for performing UI actions.
-//
-// DidRemoveInterface calls the underlying DidRemoveInterface.
-func (x *CentralManager) DidRemoveInterface(interface_ *raw.AVBInterface) {
-	x.inner.DidRemoveInterface(interface_)
+// DidRemoveInterface this method is called when a NIC has been removed from the system and the central manager is cleaning it up. Note this method is not called on the main thread and is not safe for performing UI actions.
+func (x *CentralManager) DidRemoveInterface(interface_ *Interface) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didRemoveInterface:"), objref.IDOf(interface_))
 }
 
-// @abstract	This method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. @result		YES for only AVB Enabled interfaces or NO for all interfaces. @discussion	The default value returned is YES and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
-//
-// StreamingEnabledInterfacesOnly calls the underlying StreamingEnabledInterfacesOnly.
+// StreamingEnabledInterfacesOnly this method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. The default value returned is YES and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
 func (x *CentralManager) StreamingEnabledInterfacesOnly() bool {
-	return x.inner.StreamingEnabledInterfacesOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("streamingEnabledInterfacesOnly"))
+	return _r
 }
 
 // CentralManagerable is the interface implemented by [CentralManager], for mocking and DI.
 type CentralManagerable interface {
-	Unwrap() *raw.AVBCentralManager
+	obj.Object
 	StartControllerMatching()
-	DidAddInterface(interface_ *raw.AVBInterface)
-	DidRemoveInterface(interface_ *raw.AVBInterface)
+	DidAddInterface(interface_ *Interface)
+	DidRemoveInterface(interface_ *Interface)
 	StreamingEnabledInterfacesOnly() bool
 }
 

@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDoorLockClusterDoorStateChangeEvent wraps [raw.MTRDoorLockClusterDoorStateChangeEvent] with a fluent Go API.
+// MTRDoorLockClusterDoorStateChangeEvent is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterDoorStateChangeEvent.
 type MTRDoorLockClusterDoorStateChangeEvent struct {
-	inner *raw.MTRDoorLockClusterDoorStateChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterDoorStateChangeEvent].
-func (x *MTRDoorLockClusterDoorStateChangeEvent) Unwrap() *raw.MTRDoorLockClusterDoorStateChangeEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterDoorStateChangeEventFromID adopts an existing object pointer as a MTRDoorLockClusterDoorStateChangeEvent (nil for 0).
+// MTRDoorLockClusterDoorStateChangeEventFromID adopts an existing Objective-C object as a MTRDoorLockClusterDoorStateChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterDoorStateChangeEventFromID(id objc.ID) *MTRDoorLockClusterDoorStateChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterDoorStateChangeEvent{inner: raw.MTRDoorLockClusterDoorStateChangeEventFromID(id)}
-}
-
-// NewMTRDoorLockClusterDoorStateChangeEvent creates a new [MTRDoorLockClusterDoorStateChangeEvent].
-func NewMTRDoorLockClusterDoorStateChangeEvent() *MTRDoorLockClusterDoorStateChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterDoorStateChangeEvent")), objc.RegisterName("new"))
-	return &MTRDoorLockClusterDoorStateChangeEvent{inner: raw.MTRDoorLockClusterDoorStateChangeEventFromID(_id)}
-}
-
-// WithDoorState sets the doorState property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState *foundation.NSNumber) *MTRDoorLockClusterDoorStateChangeEvent {
-	x.inner.SetDoorState(doorState)
+	x := &MTRDoorLockClusterDoorStateChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// DoorState calls the underlying DoorState.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) DoorState() *foundation.NSNumber {
-	return x.inner.DoorState()
+// mTRDoorLockClusterDoorStateChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterDoorStateChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterDoorStateChangeEventAdopt(id objc.ID) *MTRDoorLockClusterDoorStateChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDoorLockClusterDoorStateChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDoorState calls the underlying SetDoorState.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) SetDoorState(doorState *foundation.NSNumber) {
-	x.inner.SetDoorState(doorState)
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDoorLockClusterDoorStateChangeEvent creates a new MTRDoorLockClusterDoorStateChangeEvent.
+func NewMTRDoorLockClusterDoorStateChangeEvent() *MTRDoorLockClusterDoorStateChangeEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterDoorStateChangeEvent")), objc.RegisterName("new"))
+	return mTRDoorLockClusterDoorStateChangeEventAdopt(_id)
+}
+
+// WithDoorState sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
+	return x
+}
+
+// DoorState wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) DoorState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doorState"))
+	return obj.Wrap(_r)
+}
+
+// SetDoorState wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) SetDoorState(doorState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
 }
 
 // MTRDoorLockClusterDoorStateChangeEventable is the interface implemented by [MTRDoorLockClusterDoorStateChangeEvent], for mocking and DI.
 type MTRDoorLockClusterDoorStateChangeEventable interface {
-	Unwrap() *raw.MTRDoorLockClusterDoorStateChangeEvent
-	WithDoorState(doorState *foundation.NSNumber) *MTRDoorLockClusterDoorStateChangeEvent
-	DoorState() *foundation.NSNumber
-	SetDoorState(doorState *foundation.NSNumber)
+	obj.Object
+	WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent
+	DoorState() obj.Object
+	SetDoorState(doorState obj.Object)
 }
 
 var _ MTRDoorLockClusterDoorStateChangeEventable = (*MTRDoorLockClusterDoorStateChangeEvent)(nil)

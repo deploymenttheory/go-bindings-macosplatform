@@ -5,177 +5,189 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the properties of a device.
+// ExtensionDeviceProperties is an idiomatic wrapper over the Objective-C class CMIOExtensionDeviceProperties.
 //
-// ExtensionDeviceProperties wraps [raw.CMIOExtensionDeviceProperties] with a fluent Go API.
+// An object that defines the properties of a device.
 type ExtensionDeviceProperties struct {
-	inner *raw.CMIOExtensionDeviceProperties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionDeviceProperties].
-func (x *ExtensionDeviceProperties) Unwrap() *raw.CMIOExtensionDeviceProperties { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionDeviceProperties) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionDevicePropertiesFromID adopts an existing object pointer as a ExtensionDeviceProperties (nil for 0).
+// ExtensionDevicePropertiesFromID adopts an existing Objective-C object as a ExtensionDeviceProperties
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionDevicePropertiesFromID(id objc.ID) *ExtensionDeviceProperties {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(id)}
+	x := &ExtensionDeviceProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a properties object with a dictionary of property states.
-//
-// NewExtensionDevicePropertiesWithDictionary creates a new [ExtensionDeviceProperties].
-func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionDeviceProperties {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionDeviceProperties")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.ID())
-	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(_id)}
+// extensionDevicePropertiesAdopt wraps an Objective-C object that this code just created as a
+// ExtensionDeviceProperties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionDevicePropertiesAdopt(id objc.ID) *ExtensionDeviceProperties {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionDeviceProperties{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A device model string.
-//
-// WithModel sets the model property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *ExtensionDeviceProperties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionDeviceProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionDeviceProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionDeviceProperties) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionDevicePropertiesWithDictionary creates a properties object with a dictionary of property states.
+func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionDeviceProperties")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(propertiesDictionary))
+	return extensionDevicePropertiesAdopt(_id)
+}
+
+// WithModel a device model string.
 func (x *ExtensionDeviceProperties) WithModel(model string) *ExtensionDeviceProperties {
-	x.inner.SetModel(foundation.NSStringStringWithUTF8String(model))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModel:"), purego.NSString(model))
 	return x
 }
 
-// A Boolean value that indicates whether the device is in a suspended state.
-//
-// WithSuspended sets the suspended property and returns the receiver for chaining.
-func (x *ExtensionDeviceProperties) WithSuspended(suspended *foundation.NSNumber) *ExtensionDeviceProperties {
-	x.inner.SetSuspended(suspended)
+// WithSuspended a Boolean value that indicates whether the device is in a suspended state.
+func (x *ExtensionDeviceProperties) WithSuspended(suspended obj.Object) *ExtensionDeviceProperties {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), objref.IDOf(suspended))
 	return x
 }
 
-// The transport type of the device, such as USB or HDMI.
-//
-// WithTransportType sets the transportType property and returns the receiver for chaining.
-func (x *ExtensionDeviceProperties) WithTransportType(transportType *foundation.NSNumber) *ExtensionDeviceProperties {
-	x.inner.SetTransportType(transportType)
+// WithTransportType the transport type of the device, such as USB or HDMI.
+func (x *ExtensionDeviceProperties) WithTransportType(transportType obj.Object) *ExtensionDeviceProperties {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransportType:"), objref.IDOf(transportType))
 	return x
 }
 
-// A universal identifier of the audio device linked to this device.
-//
-// WithLinkedCoreAudioDeviceUID sets the linkedCoreAudioDeviceUID property and returns the receiver for chaining.
+// WithLinkedCoreAudioDeviceUID a universal identifier of the audio device linked to this device.
 func (x *ExtensionDeviceProperties) WithLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) *ExtensionDeviceProperties {
-	x.inner.SetLinkedCoreAudioDeviceUID(foundation.NSStringStringWithUTF8String(linkedCoreAudioDeviceUID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkedCoreAudioDeviceUID:"), purego.NSString(linkedCoreAudioDeviceUID))
 	return x
 }
 
-// A dictionary of properties for a device.
-//
-// WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
-func (x *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties {
-	x.inner.SetPropertiesDictionary(propertiesDictionary)
+// WithPropertiesDictionary a dictionary of properties for a device.
+func (x *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
 	return x
 }
 
-// Sets the value of a device property.
-//
-// SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
-func (x *ExtensionDeviceProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
-	x.inner.SetPropertyStateForProperty(propertyState, property)
+// SetPropertyStateForProperty sets the value of a device property.
+func (x *ExtensionDeviceProperties) SetPropertyStateForProperty(propertyState obj.Object, property obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyState:forProperty:"), objref.IDOf(propertyState), objref.IDOf(property))
 }
 
-// @property model @abstract The device model. @discussion The property key is CMIOExtensionPropertyDeviceModel.
-//
-// Model calls the underlying Model.
+// Model the device model. The property key is CMIOExtensionPropertyDeviceModel.
 func (x *ExtensionDeviceProperties) Model() string {
-	_r := x.inner.Model()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetModel calls the underlying SetModel.
+// SetModel wraps the corresponding Objective-C method.
 func (x *ExtensionDeviceProperties) SetModel(model string) {
-	x.inner.SetModel(foundation.NSStringStringWithUTF8String(model))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModel:"), purego.NSString(model))
 }
 
-// @property suspended @abstract Indicates whether the device is suspended. @discussion The property key is CMIOExtensionPropertyDeviceIsSuspended.
-//
-// Suspended calls the underlying Suspended.
-func (x *ExtensionDeviceProperties) Suspended() *foundation.NSNumber {
-	return x.inner.Suspended()
+// Suspended indicates whether the device is suspended. The property key is CMIOExtensionPropertyDeviceIsSuspended.
+func (x *ExtensionDeviceProperties) Suspended() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspended"))
+	return obj.Wrap(_r)
 }
 
-// SetSuspended calls the underlying SetSuspended.
-func (x *ExtensionDeviceProperties) SetSuspended(suspended *foundation.NSNumber) {
-	x.inner.SetSuspended(suspended)
+// SetSuspended wraps the corresponding Objective-C method.
+func (x *ExtensionDeviceProperties) SetSuspended(suspended obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), objref.IDOf(suspended))
 }
 
-// @property transportType @abstract The transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. @discussion The property key is CMIOExtensionPropertyDeviceTransportType.
-//
-// TransportType calls the underlying TransportType.
-func (x *ExtensionDeviceProperties) TransportType() *foundation.NSNumber {
-	return x.inner.TransportType()
+// TransportType the transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. The property key is CMIOExtensionPropertyDeviceTransportType.
+func (x *ExtensionDeviceProperties) TransportType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transportType"))
+	return obj.Wrap(_r)
 }
 
-// SetTransportType calls the underlying SetTransportType.
-func (x *ExtensionDeviceProperties) SetTransportType(transportType *foundation.NSNumber) {
-	x.inner.SetTransportType(transportType)
+// SetTransportType wraps the corresponding Objective-C method.
+func (x *ExtensionDeviceProperties) SetTransportType(transportType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransportType:"), objref.IDOf(transportType))
 }
 
-// @property linkedCoreAudioDeviceUID @abstract The device linked CoreAudio device UID. @discussion The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
-//
-// LinkedCoreAudioDeviceUID calls the underlying LinkedCoreAudioDeviceUID.
+// LinkedCoreAudioDeviceUID the device linked CoreAudio device UID. The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
 func (x *ExtensionDeviceProperties) LinkedCoreAudioDeviceUID() string {
-	_r := x.inner.LinkedCoreAudioDeviceUID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkedCoreAudioDeviceUID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLinkedCoreAudioDeviceUID calls the underlying SetLinkedCoreAudioDeviceUID.
+// SetLinkedCoreAudioDeviceUID wraps the corresponding Objective-C method.
 func (x *ExtensionDeviceProperties) SetLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) {
-	x.inner.SetLinkedCoreAudioDeviceUID(foundation.NSStringStringWithUTF8String(linkedCoreAudioDeviceUID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkedCoreAudioDeviceUID:"), purego.NSString(linkedCoreAudioDeviceUID))
 }
 
-// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
-//
-// PropertiesDictionary calls the underlying PropertiesDictionary.
-func (x *ExtensionDeviceProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.PropertiesDictionary()
+// PropertiesDictionary the dictionary of properties. The dictionary containing all keys and values.
+func (x *ExtensionDeviceProperties) PropertiesDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesDictionary"))
+	return obj.Wrap(_r)
 }
 
-// SetPropertiesDictionary calls the underlying SetPropertiesDictionary.
-func (x *ExtensionDeviceProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetPropertiesDictionary(propertiesDictionary)
+// SetPropertiesDictionary wraps the corresponding Objective-C method.
+func (x *ExtensionDeviceProperties) SetPropertiesDictionary(propertiesDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
 }
 
 // ExtensionDevicePropertiesable is the interface implemented by [ExtensionDeviceProperties], for mocking and DI.
 type ExtensionDevicePropertiesable interface {
-	Unwrap() *raw.CMIOExtensionDeviceProperties
+	obj.Object
 	WithModel(model string) *ExtensionDeviceProperties
-	WithSuspended(suspended *foundation.NSNumber) *ExtensionDeviceProperties
-	WithTransportType(transportType *foundation.NSNumber) *ExtensionDeviceProperties
+	WithSuspended(suspended obj.Object) *ExtensionDeviceProperties
+	WithTransportType(transportType obj.Object) *ExtensionDeviceProperties
 	WithLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) *ExtensionDeviceProperties
-	WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties
-	SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString)
+	WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties
+	SetPropertyStateForProperty(propertyState obj.Object, property obj.Object)
 	Model() string
 	SetModel(model string)
-	Suspended() *foundation.NSNumber
-	SetSuspended(suspended *foundation.NSNumber)
-	TransportType() *foundation.NSNumber
-	SetTransportType(transportType *foundation.NSNumber)
+	Suspended() obj.Object
+	SetSuspended(suspended obj.Object)
+	TransportType() obj.Object
+	SetTransportType(transportType obj.Object)
 	LinkedCoreAudioDeviceUID() string
 	SetLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string)
-	PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	PropertiesDictionary() obj.Object
+	SetPropertiesDictionary(propertiesDictionary obj.Object)
 }
 
 var _ ExtensionDevicePropertiesable = (*ExtensionDeviceProperties)(nil)

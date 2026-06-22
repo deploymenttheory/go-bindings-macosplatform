@@ -5,66 +5,72 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A circular geographic region that a center point and radius deine.
+// CircularRegion is an idiomatic wrapper over the Objective-C class CLCircularRegion.
 //
-// CircularRegion wraps [raw.CLCircularRegion] with a fluent Go API.
+// It embeds [Region], promoting that type's methods.
+//
+// A circular geographic region that a center point and radius deine.
 type CircularRegion struct {
-	inner *raw.CLCircularRegion
+	Region
 }
 
-// Unwrap returns the underlying [raw.CLCircularRegion].
-func (x *CircularRegion) Unwrap() *raw.CLCircularRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CircularRegion) ID() objc.ID { return x.inner.Ptr() }
-
-// CircularRegionFromID adopts an existing object pointer as a CircularRegion (nil for 0).
+// CircularRegionFromID adopts an existing Objective-C object as a CircularRegion
+// (nil for 0), retaining it and registering a release finalizer.
 func CircularRegionFromID(id objc.ID) *CircularRegion {
 	if id == 0 {
 		return nil
 	}
-	return &CircularRegion{inner: raw.CLCircularRegionFromID(id)}
+	x := &CircularRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a region object defining a circular geographic area.
-//
-// NewCircularRegionWithCenterRadiusIdentifier creates a new [CircularRegion].
-func NewCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier string) *CircularRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLCircularRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:identifier:"), center, radius, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &CircularRegion{inner: raw.CLCircularRegionFromID(_id)}
+// circularRegionAdopt wraps an Objective-C object that this code just created as a
+// CircularRegion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func circularRegionAdopt(id objc.ID) *CircularRegion {
+	if id == 0 {
+		return nil
+	}
+	x := &CircularRegion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A Boolean indicating that notifications are generated upon entry into the region.
-//
-// WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
+// NewCircularRegion creates a new CircularRegion.
+func NewCircularRegion() *CircularRegion {
+	_id := objc.Send[objc.ID](objc.ID(_class("CLCircularRegion")), objc.RegisterName("new"))
+	return circularRegionAdopt(_id)
+}
+
+// WithNotifyOnEntry a Boolean indicating that notifications are generated upon entry into the region.
 func (x *CircularRegion) WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion {
-	x.inner.CLRegion.SetNotifyOnEntry(notifyOnEntry)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 	return x
 }
 
-// A Boolean indicating that notifications are generated upon exit from the region.
-//
-// WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
+// WithNotifyOnExit a Boolean indicating that notifications are generated upon exit from the region.
 func (x *CircularRegion) WithNotifyOnExit(notifyOnExit bool) *CircularRegion {
-	x.inner.CLRegion.SetNotifyOnExit(notifyOnExit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 	return x
 }
-
-func (x *CircularRegion) asRegion() *raw.CLRegion { return &x.inner.CLRegion }
 
 // CircularRegionable is the interface implemented by [CircularRegion], for mocking and DI.
 type CircularRegionable interface {
-	Unwrap() *raw.CLCircularRegion
+	obj.Object
 	WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion
 	WithNotifyOnExit(notifyOnExit bool) *CircularRegion
 }
 
 var _ CircularRegionable = (*CircularRegion)(nil)
+
+var _ RegionProvider = (*CircularRegion)(nil)

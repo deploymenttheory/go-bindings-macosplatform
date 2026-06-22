@@ -5,54 +5,88 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// MTRManualSetupPayloadParser wraps [raw.MTRManualSetupPayloadParser] with a fluent Go API.
+// MTRManualSetupPayloadParser is an idiomatic wrapper over the Objective-C class MTRManualSetupPayloadParser.
 type MTRManualSetupPayloadParser struct {
-	inner *raw.MTRManualSetupPayloadParser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRManualSetupPayloadParser].
-func (x *MTRManualSetupPayloadParser) Unwrap() *raw.MTRManualSetupPayloadParser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRManualSetupPayloadParser) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRManualSetupPayloadParserFromID adopts an existing object pointer as a MTRManualSetupPayloadParser (nil for 0).
+// MTRManualSetupPayloadParserFromID adopts an existing Objective-C object as a MTRManualSetupPayloadParser
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRManualSetupPayloadParserFromID(id objc.ID) *MTRManualSetupPayloadParser {
 	if id == 0 {
 		return nil
 	}
-	return &MTRManualSetupPayloadParser{inner: raw.MTRManualSetupPayloadParserFromID(id)}
+	x := &MTRManualSetupPayloadParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRManualSetupPayloadParserWithDecimalStringRepresentation creates a new [MTRManualSetupPayloadParser].
+// mTRManualSetupPayloadParserAdopt wraps an Objective-C object that this code just created as a
+// MTRManualSetupPayloadParser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRManualSetupPayloadParserAdopt(id objc.ID) *MTRManualSetupPayloadParser {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRManualSetupPayloadParser{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRManualSetupPayloadParser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRManualSetupPayloadParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRManualSetupPayloadParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRManualSetupPayloadParser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRManualSetupPayloadParserWithDecimalStringRepresentation creates a new MTRManualSetupPayloadParser.
 func NewMTRManualSetupPayloadParserWithDecimalStringRepresentation(decimalStringRepresentation string) *MTRManualSetupPayloadParser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRManualSetupPayloadParser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDecimalStringRepresentation:"), foundation.NSStringStringWithUTF8String(decimalStringRepresentation).Ptr())
-	return &MTRManualSetupPayloadParser{inner: raw.MTRManualSetupPayloadParserFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRManualSetupPayloadParser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDecimalStringRepresentation:"), purego.NSString(decimalStringRepresentation))
+	return mTRManualSetupPayloadParserAdopt(_id)
 }
 
-// PopulatePayload calls the underlying PopulatePayload.
-func (x *MTRManualSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
-	_r, _err := x.inner.PopulatePayload()
-	if _err != nil {
-		return nil, _err
+// PopulatePayload wraps the corresponding Objective-C method.
+func (x *MTRManualSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &MTRSetupPayload{inner: _r}, nil
+	return MTRSetupPayloadFromID(_r), nil
 }
 
 // MTRManualSetupPayloadParserable is the interface implemented by [MTRManualSetupPayloadParser], for mocking and DI.
 type MTRManualSetupPayloadParserable interface {
-	Unwrap() *raw.MTRManualSetupPayloadParser
-	PopulatePayload() (*MTRSetupPayload, error)
+	obj.Object
+	PopulatePayload() (result *MTRSetupPayload, err error)
 }
 
 var _ MTRManualSetupPayloadParserable = (*MTRManualSetupPayloadParser)(nil)

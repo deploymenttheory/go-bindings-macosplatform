@@ -5,87 +5,116 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that lets you view and edit Automator workflows in your app.
+// WorkflowView is an idiomatic wrapper over the Objective-C class AMWorkflowView.
 //
-// WorkflowView wraps [raw.AMWorkflowView] with a fluent Go API.
+// An object that lets you view and edit Automator workflows in your app.
 type WorkflowView struct {
-	inner *raw.AMWorkflowView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AMWorkflowView].
-func (x *WorkflowView) Unwrap() *raw.AMWorkflowView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkflowView) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkflowViewFromID adopts an existing object pointer as a WorkflowView (nil for 0).
+// WorkflowViewFromID adopts an existing Objective-C object as a WorkflowView
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkflowViewFromID(id objc.ID) *WorkflowView {
 	if id == 0 {
 		return nil
 	}
-	return &WorkflowView{inner: raw.AMWorkflowViewFromID(id)}
-}
-
-// NewWorkflowView creates a new [WorkflowView].
-func NewWorkflowView() *WorkflowView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkflowView")), objc.RegisterName("new"))
-	return &WorkflowView{inner: raw.AMWorkflowViewFromID(_id)}
-}
-
-// A Boolean value that indicates whether the workflow view is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
-func (x *WorkflowView) WithEditable(editable bool) *WorkflowView {
-	x.inner.SetEditable(editable)
+	x := &WorkflowView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The view’s workflow controller.
-//
-// WithWorkflowController sets the workflowController property and returns the receiver for chaining.
-func (x *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
-	x.inner.SetWorkflowController(workflowController.Unwrap())
-	return x
-}
-
-// IsEditable calls the underlying IsEditable.
-func (x *WorkflowView) IsEditable() bool {
-	return x.inner.IsEditable()
-}
-
-// SetEditable calls the underlying SetEditable.
-func (x *WorkflowView) SetEditable(editable bool) {
-	x.inner.SetEditable(editable)
-}
-
-// WorkflowController calls the underlying WorkflowController.
-func (x *WorkflowView) WorkflowController() *WorkflowController {
-	_r := x.inner.WorkflowController()
-	if _r == nil {
+// workflowViewAdopt wraps an Objective-C object that this code just created as a
+// WorkflowView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workflowViewAdopt(id objc.ID) *WorkflowView {
+	if id == 0 {
 		return nil
 	}
-	return &WorkflowController{inner: _r}
+	x := &WorkflowView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetWorkflowController calls the underlying SetWorkflowController.
-func (x *WorkflowView) SetWorkflowController(workflowController *raw.AMWorkflowController) {
-	x.inner.SetWorkflowController(workflowController)
+// Description returns the object's -description text.
+func (x *WorkflowView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkflowView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkflowView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkflowView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWorkflowView creates a new WorkflowView.
+func NewWorkflowView() *WorkflowView {
+	_id := objc.Send[objc.ID](objc.ID(_class("AMWorkflowView")), objc.RegisterName("new"))
+	return workflowViewAdopt(_id)
+}
+
+// WithEditable a Boolean value that indicates whether the workflow view is editable.
+func (x *WorkflowView) WithEditable(editable bool) *WorkflowView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
+	return x
+}
+
+// WithWorkflowController the view’s workflow controller.
+func (x *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
+	return x
+}
+
+// IsEditable wraps the corresponding Objective-C method.
+func (x *WorkflowView) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+	return _r
+}
+
+// SetEditable wraps the corresponding Objective-C method.
+func (x *WorkflowView) SetEditable(editable bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
+}
+
+// WorkflowController wraps the corresponding Objective-C method.
+func (x *WorkflowView) WorkflowController() *WorkflowController {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workflowController"))
+	return WorkflowControllerFromID(_r)
+}
+
+// SetWorkflowController wraps the corresponding Objective-C method.
+func (x *WorkflowView) SetWorkflowController(workflowController *WorkflowController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
 }
 
 // WorkflowViewable is the interface implemented by [WorkflowView], for mocking and DI.
 type WorkflowViewable interface {
-	Unwrap() *raw.AMWorkflowView
+	obj.Object
 	WithEditable(editable bool) *WorkflowView
 	WithWorkflowController(workflowController *WorkflowController) *WorkflowView
 	IsEditable() bool
 	SetEditable(editable bool)
 	WorkflowController() *WorkflowController
-	SetWorkflowController(workflowController *raw.AMWorkflowController)
+	SetWorkflowController(workflowController *WorkflowController)
 }
 
 var _ WorkflowViewable = (*WorkflowView)(nil)

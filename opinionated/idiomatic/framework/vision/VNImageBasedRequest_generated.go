@@ -5,94 +5,101 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for image-analysis requests that focus on a specific part of an image.
+// ImageBasedRequest is an idiomatic wrapper over the Objective-C class VNImageBasedRequest.
 //
-// ImageBasedRequest wraps [raw.VNImageBasedRequest] with a fluent Go API.
+// ImageBasedRequest is an abstract base — you do not construct it directly. Construct one of [CalculateImageAestheticsScoresRequest], [ClassifyImageRequest], [CoreMLRequest], [DetectAnimalBodyPoseRequest], [DetectBarcodesRequest], [DetectContoursRequest], [DetectDocumentSegmentationRequest], [DetectFaceCaptureQualityRequest], [DetectFaceLandmarksRequest], [DetectFaceRectanglesRequest], [DetectHorizonRequest], [DetectHumanBodyPoseRequest], [DetectHumanHandPoseRequest], [DetectHumanRectanglesRequest], [DetectRectanglesRequest], [DetectTextRectanglesRequest], [GenerateAttentionBasedSaliencyImageRequest], [GenerateForegroundInstanceMaskRequest], [GenerateImageFeaturePrintRequest], [GenerateObjectnessBasedSaliencyImageRequest], [GeneratePersonInstanceMaskRequest], [RecognizeAnimalsRequest], [RecognizeTextRequest], [StatefulRequest], [TargetedImageRequest], [TrackingRequest] and pass it where a ImageBasedRequest is accepted.
+//
+// The abstract superclass for image-analysis requests that focus on a specific part of an image.
 type ImageBasedRequest struct {
-	inner *raw.VNImageBasedRequest
+	Request
 }
 
-// Unwrap returns the underlying [raw.VNImageBasedRequest].
-func (x *ImageBasedRequest) Unwrap() *raw.VNImageBasedRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageBasedRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageBasedRequestFromID adopts an existing object pointer as a ImageBasedRequest (nil for 0).
+// ImageBasedRequestFromID adopts an existing Objective-C object as a ImageBasedRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageBasedRequestFromID(id objc.ID) *ImageBasedRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ImageBasedRequest{inner: raw.VNImageBasedRequestFromID(id)}
+	x := &ImageBasedRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageBasedRequest creates a new [ImageBasedRequest].
-func NewImageBasedRequest() *ImageBasedRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageBasedRequest")), objc.RegisterName("new"))
-	return &ImageBasedRequest{inner: raw.VNImageBasedRequestFromID(_id)}
+// imageBasedRequestAdopt wraps an Objective-C object that this code just created as a
+// ImageBasedRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageBasedRequestAdopt(id objc.ID) *ImageBasedRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageBasedRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *ImageBasedRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest {
-	x.inner.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *ImageBasedRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest {
-	x.inner.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *ImageBasedRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest {
-	x.inner.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *ImageBasedRequest) WithRevision(revision uint) *ImageBasedRequest {
-	x.inner.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *ImageBasedRequest) WithRevision(revision int) *ImageBasedRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// RegionOfInterest calls the underlying RegionOfInterest.
+// RegionOfInterest wraps the corresponding Objective-C method.
 func (x *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
-	return x.inner.RegionOfInterest()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("regionOfInterest"))
+	return _r
 }
 
-// SetRegionOfInterest calls the underlying SetRegionOfInterest.
+// SetRegionOfInterest wraps the corresponding Objective-C method.
 func (x *ImageBasedRequest) SetRegionOfInterest(regionOfInterest corefoundation.CGRect) {
-	x.inner.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 }
-
-func (x *ImageBasedRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return x.inner }
-
-func (x *ImageBasedRequest) asRequest() *raw.VNRequest { return &x.inner.VNRequest }
 
 // ImageBasedRequestable is the interface implemented by [ImageBasedRequest], for mocking and DI.
 type ImageBasedRequestable interface {
-	Unwrap() *raw.VNImageBasedRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageBasedRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *ImageBasedRequest
-	WithRevision(revision uint) *ImageBasedRequest
+	WithRevision(revision int) *ImageBasedRequest
 	RegionOfInterest() corefoundation.CGRect
 	SetRegionOfInterest(regionOfInterest corefoundation.CGRect)
 }
 
 var _ ImageBasedRequestable = (*ImageBasedRequest)(nil)
+
+// isImageBasedRequest marks ImageBasedRequest — and, by embedding promotion, its
+// subclasses — as a member of the ImageBasedRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageBasedRequest) isImageBasedRequest() {}
+
+var _ ImageBasedRequestProvider = (*ImageBasedRequest)(nil)
+
+var _ RequestProvider = (*ImageBasedRequest)(nil)

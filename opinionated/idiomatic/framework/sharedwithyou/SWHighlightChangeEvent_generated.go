@@ -5,57 +5,91 @@
 package sharedwithyou
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents change activity for a highlight.
+// HighlightChangeEvent is an idiomatic wrapper over the Objective-C class SWHighlightChangeEvent.
 //
-// HighlightChangeEvent wraps [raw.SWHighlightChangeEvent] with a fluent Go API.
+// An object that represents change activity for a highlight.
 type HighlightChangeEvent struct {
-	inner *raw.SWHighlightChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWHighlightChangeEvent].
-func (x *HighlightChangeEvent) Unwrap() *raw.SWHighlightChangeEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HighlightChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// HighlightChangeEventFromID adopts an existing object pointer as a HighlightChangeEvent (nil for 0).
+// HighlightChangeEventFromID adopts an existing Objective-C object as a HighlightChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func HighlightChangeEventFromID(id objc.ID) *HighlightChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &HighlightChangeEvent{inner: raw.SWHighlightChangeEventFromID(id)}
+	x := &HighlightChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and initializes a change event.
-//
-// NewHighlightChangeEventWithHighlightTrigger creates a new [HighlightChangeEvent].
-func NewHighlightChangeEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightChangeEventTrigger) *HighlightChangeEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightChangeEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), raw.SWHighlightChangeEventTrigger(trigger))
-	return &HighlightChangeEvent{inner: raw.SWHighlightChangeEventFromID(_id)}
+// highlightChangeEventAdopt wraps an Objective-C object that this code just created as a
+// HighlightChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func highlightChangeEventAdopt(id objc.ID) *HighlightChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &HighlightChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ChangeEventTrigger calls the underlying ChangeEventTrigger.
-func (x *HighlightChangeEvent) ChangeEventTrigger() SWHighlightChangeEventTrigger {
-	return SWHighlightChangeEventTrigger(x.inner.ChangeEventTrigger())
+// Description returns the object's -description text.
+func (x *HighlightChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// HighlightURL calls the underlying HighlightURL.
-func (x *HighlightChangeEvent) HighlightURL() *foundation.NSURL {
-	return x.inner.HighlightURL()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HighlightChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HighlightChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHighlightChangeEventWithHighlightTrigger creates and initializes a change event.
+func NewHighlightChangeEventWithHighlightTrigger(highlight *Highlight, trigger HighlightChangeEventTrigger) *HighlightChangeEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightChangeEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
+	return highlightChangeEventAdopt(_id)
+}
+
+// ChangeEventTrigger wraps the corresponding Objective-C method.
+func (x *HighlightChangeEvent) ChangeEventTrigger() HighlightChangeEventTrigger {
+	_r := objc.Send[HighlightChangeEventTrigger](objref.IDOf(x), objc.RegisterName("changeEventTrigger"))
+	return _r
+}
+
+// HighlightURL wraps the corresponding Objective-C method.
+func (x *HighlightChangeEvent) HighlightURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightURL"))
+	return obj.Wrap(_r)
 }
 
 // HighlightChangeEventable is the interface implemented by [HighlightChangeEvent], for mocking and DI.
 type HighlightChangeEventable interface {
-	Unwrap() *raw.SWHighlightChangeEvent
-	ChangeEventTrigger() SWHighlightChangeEventTrigger
-	HighlightURL() *foundation.NSURL
+	obj.Object
+	ChangeEventTrigger() HighlightChangeEventTrigger
+	HighlightURL() obj.Object
 }
 
 var _ HighlightChangeEventable = (*HighlightChangeEvent)(nil)

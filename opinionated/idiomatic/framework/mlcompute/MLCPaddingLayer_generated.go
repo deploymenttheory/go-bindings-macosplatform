@@ -5,110 +5,114 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that pads a tensor with the padding sizes you specify.
+// PaddingLayer is an idiomatic wrapper over the Objective-C class MLCPaddingLayer.
 //
-// PaddingLayer wraps [raw.MLCPaddingLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that pads a tensor with the padding sizes you specify.
 type PaddingLayer struct {
-	inner *raw.MLCPaddingLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCPaddingLayer].
-func (x *PaddingLayer) Unwrap() *raw.MLCPaddingLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaddingLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// PaddingLayerFromID adopts an existing object pointer as a PaddingLayer (nil for 0).
+// PaddingLayerFromID adopts an existing Objective-C object as a PaddingLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func PaddingLayerFromID(id objc.ID) *PaddingLayer {
 	if id == 0 {
 		return nil
 	}
-	return &PaddingLayer{inner: raw.MLCPaddingLayerFromID(id)}
+	x := &PaddingLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPaddingLayer creates a new [PaddingLayer].
+// paddingLayerAdopt wraps an Objective-C object that this code just created as a
+// PaddingLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paddingLayerAdopt(id objc.ID) *PaddingLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &PaddingLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPaddingLayer creates a new PaddingLayer.
 func NewPaddingLayer() *PaddingLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCPaddingLayer")), objc.RegisterName("new"))
-	return &PaddingLayer{inner: raw.MLCPaddingLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("new"))
+	return paddingLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   paddingType @abstract   The padding type i.e. constant, zero, reflect or symmetric
-//
-// PaddingType calls the underlying PaddingType.
-func (x *PaddingLayer) PaddingType() MLCPaddingType {
-	return MLCPaddingType(x.inner.PaddingType())
+// PaddingType the padding type i.e. constant, zero, reflect or symmetric
+func (x *PaddingLayer) PaddingType() PaddingType {
+	_r := objc.Send[PaddingType](objref.IDOf(x), objc.RegisterName("paddingType"))
+	return _r
 }
 
-// @property   paddingLeft @abstract   The left padding size
-//
-// PaddingLeft calls the underlying PaddingLeft.
-func (x *PaddingLayer) PaddingLeft() uint {
-	return x.inner.PaddingLeft()
+// PaddingLeft the left padding size
+func (x *PaddingLayer) PaddingLeft() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
+	return _r
 }
 
-// @property   paddingRight @abstract   The right padding size
-//
-// PaddingRight calls the underlying PaddingRight.
-func (x *PaddingLayer) PaddingRight() uint {
-	return x.inner.PaddingRight()
+// PaddingRight the right padding size
+func (x *PaddingLayer) PaddingRight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
+	return _r
 }
 
-// @property   paddingTop @abstract   The top padding size
-//
-// PaddingTop calls the underlying PaddingTop.
-func (x *PaddingLayer) PaddingTop() uint {
-	return x.inner.PaddingTop()
+// PaddingTop the top padding size
+func (x *PaddingLayer) PaddingTop() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
+	return _r
 }
 
-// @property   paddingBottom @abstract   The bottom padding size
-//
-// PaddingBottom calls the underlying PaddingBottom.
-func (x *PaddingLayer) PaddingBottom() uint {
-	return x.inner.PaddingBottom()
+// PaddingBottom the bottom padding size
+func (x *PaddingLayer) PaddingBottom() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
+	return _r
 }
 
-// @property   constantValue @abstract   The constant value to use if padding type is constant.
-//
-// ConstantValue calls the underlying ConstantValue.
+// ConstantValue the constant value to use if padding type is constant.
 func (x *PaddingLayer) ConstantValue() float32 {
-	return x.inner.ConstantValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantValue"))
+	return _r
 }
-
-func (x *PaddingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // PaddingLayerable is the interface implemented by [PaddingLayer], for mocking and DI.
 type PaddingLayerable interface {
-	Unwrap() *raw.MLCPaddingLayer
+	obj.Object
 	WithLabel(label string) *PaddingLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer
-	PaddingType() MLCPaddingType
-	PaddingLeft() uint
-	PaddingRight() uint
-	PaddingTop() uint
-	PaddingBottom() uint
+	PaddingType() PaddingType
+	PaddingLeft() int
+	PaddingRight() int
+	PaddingTop() int
+	PaddingBottom() int
 	ConstantValue() float32
 }
 
 var _ PaddingLayerable = (*PaddingLayer)(nil)
+
+var _ LayerProvider = (*PaddingLayer)(nil)

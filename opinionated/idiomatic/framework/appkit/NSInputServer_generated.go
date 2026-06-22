@@ -5,41 +5,75 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// InputServer wraps [raw.NSInputServer] with a fluent Go API.
+// InputServer is an idiomatic wrapper over the Objective-C class NSInputServer.
 type InputServer struct {
-	inner *raw.NSInputServer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInputServer].
-func (x *InputServer) Unwrap() *raw.NSInputServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InputServer) ID() objc.ID { return x.inner.Ptr() }
-
-// InputServerFromID adopts an existing object pointer as a InputServer (nil for 0).
+// InputServerFromID adopts an existing Objective-C object as a InputServer
+// (nil for 0), retaining it and registering a release finalizer.
 func InputServerFromID(id objc.ID) *InputServer {
 	if id == 0 {
 		return nil
 	}
-	return &InputServer{inner: raw.NSInputServerFromID(id)}
+	x := &InputServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewInputServerWithDelegateName creates a new [InputServer].
-func NewInputServerWithDelegateName(delegate objc.ID, name string) *InputServer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInputServer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:name:"), delegate, foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &InputServer{inner: raw.NSInputServerFromID(_id)}
+// inputServerAdopt wraps an Objective-C object that this code just created as a
+// InputServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inputServerAdopt(id objc.ID) *InputServer {
+	if id == 0 {
+		return nil
+	}
+	x := &InputServer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InputServer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InputServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InputServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InputServer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInputServerWithDelegateName creates a new InputServer.
+func NewInputServerWithDelegateName(delegate obj.Object, name string) *InputServer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputServer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:name:"), objref.IDOf(delegate), purego.NSString(name))
+	return inputServerAdopt(_id)
 }
 
 // InputServerable is the interface implemented by [InputServer], for mocking and DI.
 type InputServerable interface {
-	Unwrap() *raw.NSInputServer
+	obj.Object
 }
 
 var _ InputServerable = (*InputServer)(nil)

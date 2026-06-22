@@ -5,92 +5,81 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Configuration for a display attached to a Mac graphics device.
+// MacGraphicsDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZMacGraphicsDeviceConfiguration.
 //
-// MacGraphicsDeviceConfiguration wraps [raw.VZMacGraphicsDeviceConfiguration] with a fluent Go API.
+// It embeds [GraphicsDeviceConfiguration], promoting that type's methods.
+//
+// Configuration for a display attached to a Mac graphics device.
 type MacGraphicsDeviceConfiguration struct {
-	inner *raw.VZMacGraphicsDeviceConfiguration
+	GraphicsDeviceConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZMacGraphicsDeviceConfiguration].
-func (x *MacGraphicsDeviceConfiguration) Unwrap() *raw.VZMacGraphicsDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacGraphicsDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MacGraphicsDeviceConfigurationFromID adopts an existing object pointer as a MacGraphicsDeviceConfiguration (nil for 0).
+// MacGraphicsDeviceConfigurationFromID adopts an existing Objective-C object as a MacGraphicsDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MacGraphicsDeviceConfigurationFromID(id objc.ID) *MacGraphicsDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MacGraphicsDeviceConfiguration{inner: raw.VZMacGraphicsDeviceConfigurationFromID(id)}
-}
-
-// NewMacGraphicsDeviceConfiguration creates a new [MacGraphicsDeviceConfiguration].
-func NewMacGraphicsDeviceConfiguration() *MacGraphicsDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacGraphicsDeviceConfiguration")), objc.RegisterName("new"))
-	return &MacGraphicsDeviceConfiguration{inner: raw.VZMacGraphicsDeviceConfigurationFromID(_id)}
-}
-
-// The displays associated with this graphics device.
-//
-// WithDisplays sets the collection, converting the Go slice to an NSArray.
-func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*raw.VZMacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDisplays(foundation.NSArrayFromID[*raw.VZMacGraphicsDisplayConfiguration](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.VZMacGraphicsDisplayConfiguration](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDisplays(_arr)
+	x := &MacGraphicsDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Displays returns the collection as a Go slice.
-func (x *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
-	arr := x.inner.Displays()
-	if arr == nil {
+// macGraphicsDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MacGraphicsDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macGraphicsDeviceConfigurationAdopt(id objc.ID) *MacGraphicsDeviceConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MacGraphicsDisplayConfiguration {
-		return &MacGraphicsDisplayConfiguration{inner: raw.VZMacGraphicsDisplayConfigurationFromID(purego.Retain(_id))}
-	})
+	x := &MacGraphicsDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDisplays calls the underlying SetDisplays.
-func (x *MacGraphicsDeviceConfiguration) SetDisplays(displays *foundation.NSArray[*raw.VZMacGraphicsDisplayConfiguration]) {
-	x.inner.SetDisplays(displays)
+// NewMacGraphicsDeviceConfiguration creates a new MacGraphicsDeviceConfiguration.
+func NewMacGraphicsDeviceConfiguration() *MacGraphicsDeviceConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDeviceConfiguration")), objc.RegisterName("new"))
+	return macGraphicsDeviceConfigurationAdopt(_id)
 }
 
-func (x *MacGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration {
-	return &x.inner.VZGraphicsDeviceConfiguration
+// WithDisplays the displays associated with this graphics device.
+func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*MacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v *MacGraphicsDisplayConfiguration) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplays:"), _arr)
+	return x
+}
+
+// Displays wraps the corresponding Objective-C method.
+//
+// Displays returns the collection as a Go slice.
+func (x *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MacGraphicsDisplayConfiguration { return MacGraphicsDisplayConfigurationFromID(_id) })
+}
+
+// SetDisplays wraps the corresponding Objective-C method.
+func (x *MacGraphicsDeviceConfiguration) SetDisplays(displays []*MacGraphicsDisplayConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplays:"), purego.SliceToNSArray(displays, func(_v *MacGraphicsDisplayConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MacGraphicsDeviceConfigurationable is the interface implemented by [MacGraphicsDeviceConfiguration], for mocking and DI.
 type MacGraphicsDeviceConfigurationable interface {
-	Unwrap() *raw.VZMacGraphicsDeviceConfiguration
-	WithDisplays(items ...*raw.VZMacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration
+	obj.Object
+	WithDisplays(items ...*MacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration
 	Displays() []*MacGraphicsDisplayConfiguration
-	SetDisplays(displays *foundation.NSArray[*raw.VZMacGraphicsDisplayConfiguration])
+	SetDisplays(displays []*MacGraphicsDisplayConfiguration)
 }
 
 var _ MacGraphicsDeviceConfigurationable = (*MacGraphicsDeviceConfiguration)(nil)
+
+var _ GraphicsDeviceConfigurationProvider = (*MacGraphicsDeviceConfiguration)(nil)

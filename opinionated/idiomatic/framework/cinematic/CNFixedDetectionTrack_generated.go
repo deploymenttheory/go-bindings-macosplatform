@@ -5,75 +5,80 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the fixed detection track.
+// FixedDetectionTrack is an idiomatic wrapper over the Objective-C class CNFixedDetectionTrack.
 //
-// FixedDetectionTrack wraps [raw.CNFixedDetectionTrack] with a fluent Go API.
+// It embeds [DetectionTrack], promoting that type's methods.
+//
+// An object representing the fixed detection track.
 type FixedDetectionTrack struct {
-	inner *raw.CNFixedDetectionTrack
+	DetectionTrack
 }
 
-// Unwrap returns the underlying [raw.CNFixedDetectionTrack].
-func (x *FixedDetectionTrack) Unwrap() *raw.CNFixedDetectionTrack { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FixedDetectionTrack) ID() objc.ID { return x.inner.Ptr() }
-
-// FixedDetectionTrackFromID adopts an existing object pointer as a FixedDetectionTrack (nil for 0).
+// FixedDetectionTrackFromID adopts an existing Objective-C object as a FixedDetectionTrack
+// (nil for 0), retaining it and registering a release finalizer.
 func FixedDetectionTrackFromID(id objc.ID) *FixedDetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	return &FixedDetectionTrack{inner: raw.CNFixedDetectionTrackFromID(id)}
+	x := &FixedDetectionTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Create a detection track with fixed focus at the given disparity.
-//
-// NewFixedDetectionTrackWithFocusDisparity creates a new [FixedDetectionTrack].
-func NewFixedDetectionTrackWithFocusDisparity(focusDisparity float32) *FixedDetectionTrack {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusDisparity:"), focusDisparity)
-	return &FixedDetectionTrack{inner: raw.CNFixedDetectionTrackFromID(_id)}
-}
-
-// Create a detection track with fixed focus at the disparity of an existing detection.
-//
-// NewFixedDetectionTrackWithOriginalDetection creates a new [FixedDetectionTrack].
-func NewFixedDetectionTrackWithOriginalDetection(originalDetection *raw.CNDetection) *FixedDetectionTrack {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOriginalDetection:"), originalDetection.Ptr())
-	return &FixedDetectionTrack{inner: raw.CNFixedDetectionTrackFromID(_id)}
-}
-
-// FocusDisparity calls the underlying FocusDisparity.
-func (x *FixedDetectionTrack) FocusDisparity() float32 {
-	return x.inner.FocusDisparity()
-}
-
-// The original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
-//
-// OriginalDetection calls the underlying OriginalDetection.
-func (x *FixedDetectionTrack) OriginalDetection() *Detection {
-	_r := x.inner.OriginalDetection()
-	if _r == nil {
+// fixedDetectionTrackAdopt wraps an Objective-C object that this code just created as a
+// FixedDetectionTrack (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fixedDetectionTrackAdopt(id objc.ID) *FixedDetectionTrack {
+	if id == 0 {
 		return nil
 	}
-	return &Detection{inner: _r}
+	x := &FixedDetectionTrack{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *FixedDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack {
-	return &x.inner.CNDetectionTrack
+// NewFixedDetectionTrackWithFocusDisparity create a detection track with fixed focus at the given disparity.
+func NewFixedDetectionTrackWithFocusDisparity(focusDisparity float32) *FixedDetectionTrack {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusDisparity:"), focusDisparity)
+	return fixedDetectionTrackAdopt(_id)
+}
+
+// NewFixedDetectionTrackWithOriginalDetection create a detection track with fixed focus at the disparity of an existing detection.
+func NewFixedDetectionTrackWithOriginalDetection(originalDetection *Detection) *FixedDetectionTrack {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOriginalDetection:"), objref.IDOf(originalDetection))
+	return fixedDetectionTrackAdopt(_id)
+}
+
+// FocusDisparity wraps the corresponding Objective-C method.
+func (x *FixedDetectionTrack) FocusDisparity() float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+	return _r
+}
+
+// OriginalDetection the original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
+func (x *FixedDetectionTrack) OriginalDetection() *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalDetection"))
+	return DetectionFromID(_r)
 }
 
 // FixedDetectionTrackable is the interface implemented by [FixedDetectionTrack], for mocking and DI.
 type FixedDetectionTrackable interface {
-	Unwrap() *raw.CNFixedDetectionTrack
+	obj.Object
 	FocusDisparity() float32
 	OriginalDetection() *Detection
 }
 
 var _ FixedDetectionTrackable = (*FixedDetectionTrack)(nil)
+
+var _ DetectionTrackProvider = (*FixedDetectionTrack)(nil)

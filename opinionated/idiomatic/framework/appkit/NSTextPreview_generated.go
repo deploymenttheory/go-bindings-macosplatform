@@ -5,87 +5,108 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A snapshot of the text in your view, which the system uses to create user-visible effects.
+// TextPreview is an idiomatic wrapper over the Objective-C class NSTextPreview.
 //
-// TextPreview wraps [raw.NSTextPreview] with a fluent Go API.
+// A snapshot of the text in your view, which the system uses to create user-visible effects.
 type TextPreview struct {
-	inner *raw.NSTextPreview
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextPreview].
-func (x *TextPreview) Unwrap() *raw.NSTextPreview { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextPreview) ID() objc.ID { return x.inner.Ptr() }
-
-// TextPreviewFromID adopts an existing object pointer as a TextPreview (nil for 0).
+// TextPreviewFromID adopts an existing Objective-C object as a TextPreview
+// (nil for 0), retaining it and registering a release finalizer.
 func TextPreviewFromID(id objc.ID) *TextPreview {
 	if id == 0 {
 		return nil
 	}
-	return &TextPreview{inner: raw.NSTextPreviewFromID(id)}
+	x := &TextPreview{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
-//
-// NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects creates a new [TextPreview].
-func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect, candidateRects *foundation.NSArray[*foundation.NSValue]) *TextPreview {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), snapshotImage, presentationFrame, candidateRects.Ptr())
-	return &TextPreview{inner: raw.NSTextPreviewFromID(_id)}
-}
-
-// Creates a text preview using the specified image.
-//
-// NewTextPreviewWithSnapshotImagePresentationFrame creates a new [TextPreview].
-func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect) *TextPreview {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:"), snapshotImage, presentationFrame)
-	return &TextPreview{inner: raw.NSTextPreviewFromID(_id)}
-}
-
-// The image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
-//
-// PreviewImage calls the underlying PreviewImage.
-func (x *TextPreview) PreviewImage() unsafe.Pointer {
-	return x.inner.PreviewImage()
-}
-
-// The frame rectangle that places the preview image directly over the matching text. You specify this value at initialization time. The system uses it to position the preview image over the text in your view. Make sure the frame rectangle is in your view's coordinate space.
-//
-// PresentationFrame calls the underlying PresentationFrame.
-func (x *TextPreview) PresentationFrame() corefoundation.CGRect {
-	return x.inner.PresentationFrame()
-}
-
-// Rectangles that define the specific portions of text to highlight. At initialization time, you set this property to an array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of the target view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
-//
-// CandidateRects returns the collection as a Go slice.
-func (x *TextPreview) CandidateRects() []*foundation.NSValue {
-	arr := x.inner.CandidateRects()
-	if arr == nil {
+// textPreviewAdopt wraps an Objective-C object that this code just created as a
+// TextPreview (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textPreviewAdopt(id objc.ID) *TextPreview {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+	x := &TextPreview{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextPreview) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextPreview) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextPreview) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextPreview) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
+func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage obj.Object, presentationFrame corefoundation.CGRect, candidateRects []obj.Object) *TextPreview {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return textPreviewAdopt(_id)
+}
+
+// NewTextPreviewWithSnapshotImagePresentationFrame creates a text preview using the specified image.
+func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage obj.Object, presentationFrame corefoundation.CGRect) *TextPreview {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:"), objref.IDOf(snapshotImage), presentationFrame)
+	return textPreviewAdopt(_id)
+}
+
+// PreviewImage the image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
+func (x *TextPreview) PreviewImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previewImage"))
+	return obj.Wrap(_r)
+}
+
+// PresentationFrame the frame rectangle that places the preview image directly over the matching text. You specify this value at initialization time. The system uses it to position the preview image over the text in your view. Make sure the frame rectangle is in your view's coordinate space.
+func (x *TextPreview) PresentationFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("presentationFrame"))
+	return _r
+}
+
+// CandidateRects rectangles that define the specific portions of text to highlight. At initialization time, you set this property to an array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of the target view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
+//
+// CandidateRects returns the collection as a Go slice.
+func (x *TextPreview) CandidateRects() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateRects"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TextPreviewable is the interface implemented by [TextPreview], for mocking and DI.
 type TextPreviewable interface {
-	Unwrap() *raw.NSTextPreview
-	PreviewImage() unsafe.Pointer
+	obj.Object
+	PreviewImage() obj.Object
 	PresentationFrame() corefoundation.CGRect
-	CandidateRects() []*foundation.NSValue
+	CandidateRects() []obj.Object
 }
 
 var _ TextPreviewable = (*TextPreview)(nil)

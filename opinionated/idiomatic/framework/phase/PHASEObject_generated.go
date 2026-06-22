@@ -5,126 +5,127 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object in the scene.
+// Object is an idiomatic wrapper over the Objective-C class PHASEObject.
 //
-// Object wraps [raw.PHASEObject] with a fluent Go API.
+// Object is an abstract base — you do not construct it directly. Construct one of [Listener], [Occluder], [Source] and pass it where a Object is accepted.
+//
+// An object in the scene.
 type Object struct {
-	inner *raw.PHASEObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEObject].
-func (x *Object) Unwrap() *raw.PHASEObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Object) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
+// ObjectFromID adopts an existing Objective-C object as a Object
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	return &Object{inner: raw.PHASEObjectFromID(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object in the scene.
-//
-// NewObjectWithEngine creates a new [Object].
-func NewObjectWithEngine(engine *raw.PHASEEngine) *Object {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), engine.Ptr())
-	return &Object{inner: raw.PHASEObjectFromID(_id)}
-}
-
-// Adds the given object as a child.
-//
-// AddChildError calls the underlying AddChildError.
-func (x *Object) AddChildError(child *raw.PHASEObject) (bool, error) {
-	return x.inner.AddChildError(child)
-}
-
-// Removes the given object as a child.
-//
-// RemoveChild calls the underlying RemoveChild.
-func (x *Object) RemoveChild(child *raw.PHASEObject) {
-	x.inner.RemoveChild(child)
-}
-
-// Removes all child objects from the given object.
-//
-// RemoveChildren calls the underlying RemoveChildren.
-func (x *Object) RemoveChildren() {
-	x.inner.RemoveChildren()
-}
-
-// @property parent @abstract The parent of this object, or nil if this object doesn't have a parent object.
-//
-// Parent calls the underlying Parent.
-func (x *Object) Parent() *Object {
-	_r := x.inner.Parent()
-	if _r == nil {
+// objectAdopt wraps an Objective-C object that this code just created as a
+// Object (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectAdopt(id objc.ID) *Object {
+	if id == 0 {
 		return nil
 	}
-	return &Object{inner: _r}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property children @abstract The children of this object.
+// Description returns the object's -description text.
+func (x *Object) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewObjectWithEngine creates an object in the scene.
+func NewObjectWithEngine(engine *Engine) *Object {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEObject")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
+	return objectAdopt(_id)
+}
+
+// AddChild adds the given object as a child.
+func (x *Object) AddChild(child *Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addChild:error:"), objref.IDOf(child), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RemoveChild removes the given object as a child.
+func (x *Object) RemoveChild(child *Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChild:"), objref.IDOf(child))
+}
+
+// RemoveChildren removes all child objects from the given object.
+func (x *Object) RemoveChildren() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildren"))
+}
+
+// Parent the parent of this object, or nil if this object doesn't have a parent object.
+func (x *Object) Parent() *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+	return ObjectFromID(_r)
+}
+
+// Children the children of this object.
 //
 // Children returns the collection as a Go slice.
 func (x *Object) Children() []*Object {
-	arr := x.inner.Children()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Object {
-		return &Object{inner: raw.PHASEObjectFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Object { return ObjectFromID(_id) })
 }
-
-// @property transform @abstract The object's transform. @note The transform must have orthogonal basis vectors and uniform scale.
-//
-// Transform calls the underlying Transform.
-func (x *Object) Transform() unsafe.Pointer {
-	return x.inner.Transform()
-}
-
-// SetTransform calls the underlying SetTransform.
-func (x *Object) SetTransform(transform unsafe.Pointer) {
-	x.inner.SetTransform(transform)
-}
-
-// @property worldTransform @abstract The world transform applied to the object. @note The transform must have orthogonal basis vectors and uniform scale.
-//
-// WorldTransform calls the underlying WorldTransform.
-func (x *Object) WorldTransform() unsafe.Pointer {
-	return x.inner.WorldTransform()
-}
-
-// SetWorldTransform calls the underlying SetWorldTransform.
-func (x *Object) SetWorldTransform(worldTransform unsafe.Pointer) {
-	x.inner.SetWorldTransform(worldTransform)
-}
-
-func (x *Object) asObject() *raw.PHASEObject { return x.inner }
 
 // Objectable is the interface implemented by [Object], for mocking and DI.
 type Objectable interface {
-	Unwrap() *raw.PHASEObject
-	AddChildError(child *raw.PHASEObject) (bool, error)
-	RemoveChild(child *raw.PHASEObject)
+	obj.Object
+	AddChild(child *Object) error
+	RemoveChild(child *Object)
 	RemoveChildren()
 	Parent() *Object
 	Children() []*Object
-	Transform() unsafe.Pointer
-	SetTransform(transform unsafe.Pointer)
-	WorldTransform() unsafe.Pointer
-	SetWorldTransform(worldTransform unsafe.Pointer)
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

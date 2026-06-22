@@ -5,106 +5,135 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about the arguments of a graphics function.
+// RenderPipelineReflection is an idiomatic wrapper over the Objective-C class MTLRenderPipelineReflection.
 //
-// RenderPipelineReflection wraps [raw.MTLRenderPipelineReflection] with a fluent Go API.
+// Information about the arguments of a graphics function.
 type RenderPipelineReflection struct {
-	inner *raw.MTLRenderPipelineReflection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRenderPipelineReflection].
-func (x *RenderPipelineReflection) Unwrap() *raw.MTLRenderPipelineReflection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderPipelineReflection) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderPipelineReflectionFromID adopts an existing object pointer as a RenderPipelineReflection (nil for 0).
+// RenderPipelineReflectionFromID adopts an existing Objective-C object as a RenderPipelineReflection
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderPipelineReflectionFromID(id objc.ID) *RenderPipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	return &RenderPipelineReflection{inner: raw.MTLRenderPipelineReflectionFromID(id)}
+	x := &RenderPipelineReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderPipelineReflection creates a new [RenderPipelineReflection].
+// renderPipelineReflectionAdopt wraps an Objective-C object that this code just created as a
+// RenderPipelineReflection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderPipelineReflectionAdopt(id objc.ID) *RenderPipelineReflection {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderPipelineReflection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderPipelineReflection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderPipelineReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderPipelineReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPipelineReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderPipelineReflection creates a new RenderPipelineReflection.
 func NewRenderPipelineReflection() *RenderPipelineReflection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRenderPipelineReflection")), objc.RegisterName("new"))
-	return &RenderPipelineReflection{inner: raw.MTLRenderPipelineReflectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPipelineReflection")), objc.RegisterName("new"))
+	return renderPipelineReflectionAdopt(_id)
 }
 
-// VertexBindings calls the underlying VertexBindings.
-func (x *RenderPipelineReflection) VertexBindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.VertexBindings()
+// VertexBindings wraps the corresponding Objective-C method.
+func (x *RenderPipelineReflection) VertexBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// FragmentBindings calls the underlying FragmentBindings.
-func (x *RenderPipelineReflection) FragmentBindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.FragmentBindings()
+// FragmentBindings wraps the corresponding Objective-C method.
+func (x *RenderPipelineReflection) FragmentBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentBindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// TileBindings calls the underlying TileBindings.
-func (x *RenderPipelineReflection) TileBindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.TileBindings()
+// TileBindings wraps the corresponding Objective-C method.
+func (x *RenderPipelineReflection) TileBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileBindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ObjectBindings calls the underlying ObjectBindings.
-func (x *RenderPipelineReflection) ObjectBindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.ObjectBindings()
+// ObjectBindings wraps the corresponding Objective-C method.
+func (x *RenderPipelineReflection) ObjectBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// MeshBindings calls the underlying MeshBindings.
-func (x *RenderPipelineReflection) MeshBindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.MeshBindings()
+// MeshBindings wraps the corresponding Objective-C method.
+func (x *RenderPipelineReflection) MeshBindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshBindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// VertexArguments wraps the corresponding Objective-C method.
+//
 // VertexArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) VertexArguments() []*Argument {
-	arr := x.inner.VertexArguments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
-		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexArguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
+// FragmentArguments wraps the corresponding Objective-C method.
+//
 // FragmentArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) FragmentArguments() []*Argument {
-	arr := x.inner.FragmentArguments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
-		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentArguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
+// TileArguments wraps the corresponding Objective-C method.
+//
 // TileArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) TileArguments() []*Argument {
-	arr := x.inner.TileArguments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
-		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileArguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
 // RenderPipelineReflectionable is the interface implemented by [RenderPipelineReflection], for mocking and DI.
 type RenderPipelineReflectionable interface {
-	Unwrap() *raw.MTLRenderPipelineReflection
-	VertexBindings() *foundation.NSArray[raw.MTLBinding]
-	FragmentBindings() *foundation.NSArray[raw.MTLBinding]
-	TileBindings() *foundation.NSArray[raw.MTLBinding]
-	ObjectBindings() *foundation.NSArray[raw.MTLBinding]
-	MeshBindings() *foundation.NSArray[raw.MTLBinding]
+	obj.Object
+	VertexBindings() []obj.Object
+	FragmentBindings() []obj.Object
+	TileBindings() []obj.Object
+	ObjectBindings() []obj.Object
+	MeshBindings() []obj.Object
 	VertexArguments() []*Argument
 	FragmentArguments() []*Argument
 	TileArguments() []*Argument

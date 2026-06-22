@@ -5,18 +5,19 @@
 package iousbhost
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray calls the underlying IOUSBHostDeviceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray.
-func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray(vendorID *foundation.NSNumber, productID *foundation.NSNumber, bcdDevice *foundation.NSNumber, deviceClass *foundation.NSNumber, deviceSubclass *foundation.NSNumber, deviceProtocol *foundation.NSNumber, speed *foundation.NSNumber, productIDArray *foundation.NSArray[objc.ID]) unsafe.Pointer {
-	return raw.IOUSBHostDeviceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray(vendorID, productID, bcdDevice, deviceClass, deviceSubclass, deviceProtocol, speed, productIDArray)
+// CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray creates a matching dictionary to find a USB device.
+func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceDeviceClassDeviceSubclassDeviceProtocolSpeedProductIDArray(vendorID obj.Object, productID obj.Object, bcdDevice obj.Object, deviceClass obj.Object, deviceSubclass obj.Object, deviceProtocol obj.Object, speed obj.Object, productIDArray obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOUSBHostDevice")), objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:deviceClass:deviceSubclass:deviceProtocol:speed:productIDArray:"), objref.IDOf(vendorID), objref.IDOf(productID), objref.IDOf(bcdDevice), objref.IDOf(deviceClass), objref.IDOf(deviceSubclass), objref.IDOf(deviceProtocol), objref.IDOf(speed), objref.IDOf(productIDArray))
+	return obj.Wrap(_r)
 }
 
-// CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray calls the underlying IOUSBHostInterfaceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray.
-func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID *foundation.NSNumber, productID *foundation.NSNumber, bcdDevice *foundation.NSNumber, interfaceNumber *foundation.NSNumber, configurationValue *foundation.NSNumber, interfaceClass *foundation.NSNumber, interfaceSubclass *foundation.NSNumber, interfaceProtocol *foundation.NSNumber, speed *foundation.NSNumber, productIDArray *foundation.NSArray[objc.ID]) unsafe.Pointer {
-	return raw.IOUSBHostInterfaceCreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID, productID, bcdDevice, interfaceNumber, configurationValue, interfaceClass, interfaceSubclass, interfaceProtocol, speed, productIDArray)
+// CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray creates a matching dictionary to find a USB interface.
+func CreateMatchingDictionaryWithVendorIDProductIDBcdDeviceInterfaceNumberConfigurationValueInterfaceClassInterfaceSubclassInterfaceProtocolSpeedProductIDArray(vendorID obj.Object, productID obj.Object, bcdDevice obj.Object, interfaceNumber obj.Object, configurationValue obj.Object, interfaceClass obj.Object, interfaceSubclass obj.Object, interfaceProtocol obj.Object, speed obj.Object, productIDArray obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOUSBHostInterface")), objc.RegisterName("createMatchingDictionaryWithVendorID:productID:bcdDevice:interfaceNumber:configurationValue:interfaceClass:interfaceSubclass:interfaceProtocol:speed:productIDArray:"), objref.IDOf(vendorID), objref.IDOf(productID), objref.IDOf(bcdDevice), objref.IDOf(interfaceNumber), objref.IDOf(configurationValue), objref.IDOf(interfaceClass), objref.IDOf(interfaceSubclass), objref.IDOf(interfaceProtocol), objref.IDOf(speed), objref.IDOf(productIDArray))
+	return obj.Wrap(_r)
 }

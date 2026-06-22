@@ -5,101 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRThermostatClusterAtomicResponseParams wraps [raw.MTRThermostatClusterAtomicResponseParams] with a fluent Go API.
+// MTRThermostatClusterAtomicResponseParams is an idiomatic wrapper over the Objective-C class MTRThermostatClusterAtomicResponseParams.
 type MTRThermostatClusterAtomicResponseParams struct {
-	inner *raw.MTRThermostatClusterAtomicResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThermostatClusterAtomicResponseParams].
-func (x *MTRThermostatClusterAtomicResponseParams) Unwrap() *raw.MTRThermostatClusterAtomicResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThermostatClusterAtomicResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThermostatClusterAtomicResponseParamsFromID adopts an existing object pointer as a MTRThermostatClusterAtomicResponseParams (nil for 0).
+// MTRThermostatClusterAtomicResponseParamsFromID adopts an existing Objective-C object as a MTRThermostatClusterAtomicResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThermostatClusterAtomicResponseParamsFromID(id objc.ID) *MTRThermostatClusterAtomicResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThermostatClusterAtomicResponseParams{inner: raw.MTRThermostatClusterAtomicResponseParamsFromID(id)}
+	x := &MTRThermostatClusterAtomicResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError creates a new [MTRThermostatClusterAtomicResponseParams].
-func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRThermostatClusterAtomicResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThermostatClusterAtomicResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRThermostatClusterAtomicResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThermostatClusterAtomicResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThermostatClusterAtomicResponseParamsAdopt(id objc.ID) *MTRThermostatClusterAtomicResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRThermostatClusterAtomicResponseParams{inner: raw.MTRThermostatClusterAtomicResponseParamsFromID(_id)}, nil
-}
-
-// WithStatusCode sets the statusCode property and returns the receiver for chaining.
-func (x *MTRThermostatClusterAtomicResponseParams) WithStatusCode(statusCode *foundation.NSNumber) *MTRThermostatClusterAtomicResponseParams {
-	x.inner.SetStatusCode(statusCode)
+	x := &MTRThermostatClusterAtomicResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithTimeout sets the timeout property and returns the receiver for chaining.
-func (x *MTRThermostatClusterAtomicResponseParams) WithTimeout(timeout *foundation.NSNumber) *MTRThermostatClusterAtomicResponseParams {
-	x.inner.SetTimeout(timeout)
+// Description returns the object's -description text.
+func (x *MTRThermostatClusterAtomicResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThermostatClusterAtomicResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThermostatClusterAtomicResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThermostatClusterAtomicResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterAtomicResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRThermostatClusterAtomicResponseParamsAdopt(_id), nil
+}
+
+// WithStatusCode sets the property and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterAtomicResponseParams) WithStatusCode(statusCode obj.Object) *MTRThermostatClusterAtomicResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return x
 }
 
-// StatusCode calls the underlying StatusCode.
-func (x *MTRThermostatClusterAtomicResponseParams) StatusCode() *foundation.NSNumber {
-	return x.inner.StatusCode()
+// WithTimeout sets the property and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterAtomicResponseParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
+	return x
 }
 
-// SetStatusCode calls the underlying SetStatusCode.
-func (x *MTRThermostatClusterAtomicResponseParams) SetStatusCode(statusCode *foundation.NSNumber) {
-	x.inner.SetStatusCode(statusCode)
+// StatusCode wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterAtomicResponseParams) StatusCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusCode"))
+	return obj.Wrap(_r)
 }
 
-// AttributeStatus calls the underlying AttributeStatus.
-func (x *MTRThermostatClusterAtomicResponseParams) AttributeStatus() *foundation.NSArray[objc.ID] {
-	return x.inner.AttributeStatus()
+// SetStatusCode wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterAtomicResponseParams) SetStatusCode(statusCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 }
 
-// SetAttributeStatus calls the underlying SetAttributeStatus.
-func (x *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeStatus *foundation.NSArray[objc.ID]) {
-	x.inner.SetAttributeStatus(attributeStatus)
+// AttributeStatus wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterAtomicResponseParams) AttributeStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeStatus"))
+	return obj.Wrap(_r)
 }
 
-// Timeout calls the underlying Timeout.
-func (x *MTRThermostatClusterAtomicResponseParams) Timeout() *foundation.NSNumber {
-	return x.inner.Timeout()
+// SetAttributeStatus wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeStatus obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeStatus:"), objref.IDOf(attributeStatus))
 }
 
-// SetTimeout calls the underlying SetTimeout.
-func (x *MTRThermostatClusterAtomicResponseParams) SetTimeout(timeout *foundation.NSNumber) {
-	x.inner.SetTimeout(timeout)
+// Timeout wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterAtomicResponseParams) Timeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeout"))
+	return obj.Wrap(_r)
+}
+
+// SetTimeout wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterAtomicResponseParams) SetTimeout(timeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 }
 
 // MTRThermostatClusterAtomicResponseParamsable is the interface implemented by [MTRThermostatClusterAtomicResponseParams], for mocking and DI.
 type MTRThermostatClusterAtomicResponseParamsable interface {
-	Unwrap() *raw.MTRThermostatClusterAtomicResponseParams
-	WithStatusCode(statusCode *foundation.NSNumber) *MTRThermostatClusterAtomicResponseParams
-	WithTimeout(timeout *foundation.NSNumber) *MTRThermostatClusterAtomicResponseParams
-	StatusCode() *foundation.NSNumber
-	SetStatusCode(statusCode *foundation.NSNumber)
-	AttributeStatus() *foundation.NSArray[objc.ID]
-	SetAttributeStatus(attributeStatus *foundation.NSArray[objc.ID])
-	Timeout() *foundation.NSNumber
-	SetTimeout(timeout *foundation.NSNumber)
+	obj.Object
+	WithStatusCode(statusCode obj.Object) *MTRThermostatClusterAtomicResponseParams
+	WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicResponseParams
+	StatusCode() obj.Object
+	SetStatusCode(statusCode obj.Object)
+	AttributeStatus() obj.Object
+	SetAttributeStatus(attributeStatus obj.Object)
+	Timeout() obj.Object
+	SetTimeout(timeout obj.Object)
 }
 
 var _ MTRThermostatClusterAtomicResponseParamsable = (*MTRThermostatClusterAtomicResponseParams)(nil)

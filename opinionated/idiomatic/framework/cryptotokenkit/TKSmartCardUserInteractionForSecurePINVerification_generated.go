@@ -5,140 +5,110 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A representation of the user interaction for secure PIN change verification on a Smart Card reader.
+// SmartCardUserInteractionForSecurePINVerification is an idiomatic wrapper over the Objective-C class TKSmartCardUserInteractionForSecurePINVerification.
 //
-// SmartCardUserInteractionForSecurePINVerification wraps [raw.TKSmartCardUserInteractionForSecurePINVerification] with a fluent Go API.
+// It embeds [SmartCardUserInteractionForPINOperation], promoting that type's methods.
+//
+// A representation of the user interaction for secure PIN change verification on a Smart Card reader.
 type SmartCardUserInteractionForSecurePINVerification struct {
-	inner *raw.TKSmartCardUserInteractionForSecurePINVerification
+	SmartCardUserInteractionForPINOperation
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardUserInteractionForSecurePINVerification].
-func (x *SmartCardUserInteractionForSecurePINVerification) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINVerification {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardUserInteractionForSecurePINVerification) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardUserInteractionForSecurePINVerificationFromID adopts an existing object pointer as a SmartCardUserInteractionForSecurePINVerification (nil for 0).
+// SmartCardUserInteractionForSecurePINVerificationFromID adopts an existing Objective-C object as a SmartCardUserInteractionForSecurePINVerification
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardUserInteractionForSecurePINVerificationFromID(id objc.ID) *SmartCardUserInteractionForSecurePINVerification {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardUserInteractionForSecurePINVerification{inner: raw.TKSmartCardUserInteractionForSecurePINVerificationFromID(id)}
+	x := &SmartCardUserInteractionForSecurePINVerification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCardUserInteractionForSecurePINVerification creates a new [SmartCardUserInteractionForSecurePINVerification].
+// smartCardUserInteractionForSecurePINVerificationAdopt wraps an Objective-C object that this code just created as a
+// SmartCardUserInteractionForSecurePINVerification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardUserInteractionForSecurePINVerificationAdopt(id objc.ID) *SmartCardUserInteractionForSecurePINVerification {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardUserInteractionForSecurePINVerification{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSmartCardUserInteractionForSecurePINVerification creates a new SmartCardUserInteractionForSecurePINVerification.
 func NewSmartCardUserInteractionForSecurePINVerification() *SmartCardUserInteractionForSecurePINVerification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardUserInteractionForSecurePINVerification")), objc.RegisterName("new"))
-	return &SmartCardUserInteractionForSecurePINVerification{inner: raw.TKSmartCardUserInteractionForSecurePINVerificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardUserInteractionForSecurePINVerification")), objc.RegisterName("new"))
+	return smartCardUserInteractionForSecurePINVerificationAdopt(_id)
 }
 
-// The conditions under which PIN entry should be considered complete.
-//
-// WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
+// WithPINCompletion the conditions under which PIN entry should be considered complete.
+func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
 	return x
 }
 
-// A list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
-//
-// WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINVerification {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(_arr)
+// WithPINMessageIndices a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
+func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), _arr)
 	return x
 }
 
-// The locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
-//
-// WithLocale sets the locale property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetLocale(locale)
+// WithLocale the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
+func (x *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// The SW1-SW2 status bytes.
-//
-// WithResultSW sets the resultSW property and returns the receiver for chaining.
+// WithResultSW the SW1-SW2 status bytes.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultSW(resultSW)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
 	return x
 }
 
-// The returned data without SW1-SW2 bytes, if any.
-//
-// WithResultData sets the resultData property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultData(resultData)
+// WithResultData the returned data without SW1-SW2 bytes, if any.
+func (x *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
 	return x
 }
 
-// The delegate for observing events that occur during the user interaction.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetDelegate(delegate)
-	return x
-}
-
-// The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
-//
-// WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
+// WithInitialTimeout the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
 	return x
 }
 
-// The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
-//
-// WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
+// WithInteractionTimeout the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
 	return x
-}
-
-func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
-	return &x.inner.TKSmartCardUserInteractionForPINOperation
-}
-
-func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
-	return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction
 }
 
 // SmartCardUserInteractionForSecurePINVerificationable is the interface implemented by [SmartCardUserInteractionForSecurePINVerification], for mocking and DI.
 type SmartCardUserInteractionForSecurePINVerificationable interface {
-	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINVerification
-	WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification
-	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINVerification
-	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINVerification
+	obj.Object
+	WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification
+	WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINVerification
+	WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINVerification
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification
-	WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINVerification
-	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINVerification
+	WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINVerification
 	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification
 	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification
 }
 
 var _ SmartCardUserInteractionForSecurePINVerificationable = (*SmartCardUserInteractionForSecurePINVerification)(nil)
+
+var _ SmartCardUserInteractionForPINOperationProvider = (*SmartCardUserInteractionForSecurePINVerification)(nil)
+
+var _ SmartCardUserInteractionProvider = (*SmartCardUserInteractionForSecurePINVerification)(nil)

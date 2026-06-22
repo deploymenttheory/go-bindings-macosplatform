@@ -5,55 +5,88 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes whether a specific capability is supported and if that capability is currently enabled
+// AudioSessionCapability is an idiomatic wrapper over the Objective-C class AVAudioSessionCapability.
 //
-// AudioSessionCapability wraps [raw.AVAudioSessionCapability] with a fluent Go API.
+// Describes whether a specific capability is supported and if that capability is currently enabled
 type AudioSessionCapability struct {
-	inner *raw.AVAudioSessionCapability
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioSessionCapability].
-func (x *AudioSessionCapability) Unwrap() *raw.AVAudioSessionCapability { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioSessionCapability) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioSessionCapabilityFromID adopts an existing object pointer as a AudioSessionCapability (nil for 0).
+// AudioSessionCapabilityFromID adopts an existing Objective-C object as a AudioSessionCapability
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioSessionCapabilityFromID(id objc.ID) *AudioSessionCapability {
 	if id == 0 {
 		return nil
 	}
-	return &AudioSessionCapability{inner: raw.AVAudioSessionCapabilityFromID(id)}
+	x := &AudioSessionCapability{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioSessionCapability creates a new [AudioSessionCapability].
+// audioSessionCapabilityAdopt wraps an Objective-C object that this code just created as a
+// AudioSessionCapability (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioSessionCapabilityAdopt(id objc.ID) *AudioSessionCapability {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioSessionCapability{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioSessionCapability) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioSessionCapability) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioSessionCapability) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioSessionCapability) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioSessionCapability creates a new AudioSessionCapability.
 func NewAudioSessionCapability() *AudioSessionCapability {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSessionCapability")), objc.RegisterName("new"))
-	return &AudioSessionCapability{inner: raw.AVAudioSessionCapabilityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSessionCapability")), objc.RegisterName("new"))
+	return audioSessionCapabilityAdopt(_id)
 }
 
-// A Boolean value that indicates whether the capability is supported.
-//
-// IsSupported calls the underlying IsSupported.
+// IsSupported a Boolean value that indicates whether the capability is supported.
 func (x *AudioSessionCapability) IsSupported() bool {
-	return x.inner.IsSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+	return _r
 }
 
-// A Boolean value that indicates whether the capability is enabled.
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled a Boolean value that indicates whether the capability is enabled.
 func (x *AudioSessionCapability) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
 // AudioSessionCapabilityable is the interface implemented by [AudioSessionCapability], for mocking and DI.
 type AudioSessionCapabilityable interface {
-	Unwrap() *raw.AVAudioSessionCapability
+	obj.Object
 	IsSupported() bool
 	IsEnabled() bool
 }

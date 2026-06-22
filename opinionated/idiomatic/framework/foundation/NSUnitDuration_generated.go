@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for a duration of time.
+// UnitDuration is an idiomatic wrapper over the Objective-C class NSUnitDuration.
 //
-// UnitDuration wraps [raw.NSUnitDuration] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for a duration of time.
 type UnitDuration struct {
-	inner *raw.NSUnitDuration
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitDuration].
-func (x *UnitDuration) Unwrap() *raw.NSUnitDuration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitDuration) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitDurationFromID adopts an existing object pointer as a UnitDuration (nil for 0).
+// UnitDurationFromID adopts an existing Objective-C object as a UnitDuration
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitDurationFromID(id objc.ID) *UnitDuration {
 	if id == 0 {
 		return nil
 	}
-	return &UnitDuration{inner: raw.NSUnitDurationFromID(id)}
-}
-
-// NewUnitDuration creates a new [UnitDuration].
-func NewUnitDuration() *UnitDuration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitDuration")), objc.RegisterName("new"))
-	return &UnitDuration{inner: raw.NSUnitDurationFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitDuration) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDuration {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitDuration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitDuration) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitDurationAdopt wraps an Objective-C object that this code just created as a
+// UnitDuration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitDurationAdopt(id objc.ID) *UnitDuration {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitDuration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitDuration) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitDuration creates a new UnitDuration.
+func NewUnitDuration() *UnitDuration {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("new"))
+	return unitDurationAdopt(_id)
+}
 
-func (x *UnitDuration) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitDuration) WithScriptingProperties(scriptingProperties obj.Object) *UnitDuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitDurationable is the interface implemented by [UnitDuration], for mocking and DI.
 type UnitDurationable interface {
-	Unwrap() *raw.NSUnitDuration
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDuration
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitDuration
 }
 
 var _ UnitDurationable = (*UnitDuration)(nil)
+
+var _ DimensionProvider = (*UnitDuration)(nil)
+
+var _ UnitProvider = (*UnitDuration)(nil)

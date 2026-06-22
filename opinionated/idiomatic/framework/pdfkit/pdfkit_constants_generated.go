@@ -5,722 +5,719 @@
 package pdfkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// PDFPageImageInitializationOptionMediaBox returns the string constant PDFPageImageInitializationOptionMediaBox as an objc.ID, for use as a dictionary key or selector argument.
-func PDFPageImageInitializationOptionMediaBox() objc.ID {
-	return purego.CFConstant(raw.PDFPageImageInitializationOptionMediaBox())
+// PDFPageImageInitializationOptionMediaBox returns the string constant PDFPageImageInitializationOptionMediaBox, for use as a dictionary key or argument.
+func PDFPageImageInitializationOptionMediaBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFPageImageInitializationOptionMediaBox")))
 }
 
-// PDFPageImageInitializationOptionRotation returns the string constant PDFPageImageInitializationOptionRotation as an objc.ID, for use as a dictionary key or selector argument.
-func PDFPageImageInitializationOptionRotation() objc.ID {
-	return purego.CFConstant(raw.PDFPageImageInitializationOptionRotation())
+// PDFPageImageInitializationOptionRotation returns the string constant PDFPageImageInitializationOptionRotation, for use as a dictionary key or argument.
+func PDFPageImageInitializationOptionRotation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFPageImageInitializationOptionRotation")))
 }
 
-// PDFPageImageInitializationOptionUpscaleIfSmaller returns the string constant PDFPageImageInitializationOptionUpscaleIfSmaller as an objc.ID, for use as a dictionary key or selector argument.
-func PDFPageImageInitializationOptionUpscaleIfSmaller() objc.ID {
-	return purego.CFConstant(raw.PDFPageImageInitializationOptionUpscaleIfSmaller())
+// PDFPageImageInitializationOptionUpscaleIfSmaller returns the string constant PDFPageImageInitializationOptionUpscaleIfSmaller, for use as a dictionary key or argument.
+func PDFPageImageInitializationOptionUpscaleIfSmaller() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFPageImageInitializationOptionUpscaleIfSmaller")))
 }
 
-// PDFPageImageInitializationOptionCompressionQuality returns the string constant PDFPageImageInitializationOptionCompressionQuality as an objc.ID, for use as a dictionary key or selector argument.
-func PDFPageImageInitializationOptionCompressionQuality() objc.ID {
-	return purego.CFConstant(raw.PDFPageImageInitializationOptionCompressionQuality())
+// PDFPageImageInitializationOptionCompressionQuality returns the string constant PDFPageImageInitializationOptionCompressionQuality, for use as a dictionary key or argument.
+func PDFPageImageInitializationOptionCompressionQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFPageImageInitializationOptionCompressionQuality")))
 }
 
-// PDFAnnotationKeyAppearanceDictionary returns the string constant PDFAnnotationKeyAppearanceDictionary as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyAppearanceDictionary() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyAppearanceDictionary())
+// PDFAnnotationKeyAppearanceDictionary returns the string constant PDFAnnotationKeyAppearanceDictionary, for use as a dictionary key or argument.
+func PDFAnnotationKeyAppearanceDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyAppearanceDictionary")))
 }
 
-// PDFAnnotationKeyAppearanceState returns the string constant PDFAnnotationKeyAppearanceState as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyAppearanceState() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyAppearanceState())
+// PDFAnnotationKeyAppearanceState returns the string constant PDFAnnotationKeyAppearanceState, for use as a dictionary key or argument.
+func PDFAnnotationKeyAppearanceState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyAppearanceState")))
 }
 
-// PDFAnnotationKeyBorder returns the string constant PDFAnnotationKeyBorder as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyBorder() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyBorder())
+// PDFAnnotationKeyBorder returns the string constant PDFAnnotationKeyBorder, for use as a dictionary key or argument.
+func PDFAnnotationKeyBorder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyBorder")))
 }
 
-// PDFAnnotationKeyColor returns the string constant PDFAnnotationKeyColor as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyColor() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyColor())
+// PDFAnnotationKeyColor returns the string constant PDFAnnotationKeyColor, for use as a dictionary key or argument.
+func PDFAnnotationKeyColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyColor")))
 }
 
-// PDFAnnotationKeyContents returns the string constant PDFAnnotationKeyContents as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyContents() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyContents())
+// PDFAnnotationKeyContents returns the string constant PDFAnnotationKeyContents, for use as a dictionary key or argument.
+func PDFAnnotationKeyContents() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyContents")))
 }
 
-// PDFAnnotationKeyFlags returns the string constant PDFAnnotationKeyFlags as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyFlags() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyFlags())
+// PDFAnnotationKeyFlags returns the string constant PDFAnnotationKeyFlags, for use as a dictionary key or argument.
+func PDFAnnotationKeyFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyFlags")))
 }
 
-// PDFAnnotationKeyDate returns the string constant PDFAnnotationKeyDate as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyDate() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyDate())
+// PDFAnnotationKeyDate returns the string constant PDFAnnotationKeyDate, for use as a dictionary key or argument.
+func PDFAnnotationKeyDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyDate")))
 }
 
-// PDFAnnotationKeyName returns the string constant PDFAnnotationKeyName as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyName() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyName())
+// PDFAnnotationKeyName returns the string constant PDFAnnotationKeyName, for use as a dictionary key or argument.
+func PDFAnnotationKeyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyName")))
 }
 
-// PDFAnnotationKeyPage returns the string constant PDFAnnotationKeyPage as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyPage() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyPage())
+// PDFAnnotationKeyPage returns the string constant PDFAnnotationKeyPage, for use as a dictionary key or argument.
+func PDFAnnotationKeyPage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyPage")))
 }
 
-// PDFAnnotationKeyRect returns the string constant PDFAnnotationKeyRect as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyRect() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyRect())
+// PDFAnnotationKeyRect returns the string constant PDFAnnotationKeyRect, for use as a dictionary key or argument.
+func PDFAnnotationKeyRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyRect")))
 }
 
-// PDFAnnotationKeySubtype returns the string constant PDFAnnotationKeySubtype as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeySubtype() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeySubtype())
+// PDFAnnotationKeySubtype returns the string constant PDFAnnotationKeySubtype, for use as a dictionary key or argument.
+func PDFAnnotationKeySubtype() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeySubtype")))
 }
 
-// PDFAnnotationKeyAction returns the string constant PDFAnnotationKeyAction as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyAction() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyAction())
+// PDFAnnotationKeyAction returns the string constant PDFAnnotationKeyAction, for use as a dictionary key or argument.
+func PDFAnnotationKeyAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyAction")))
 }
 
-// PDFAnnotationKeyAdditionalActions returns the string constant PDFAnnotationKeyAdditionalActions as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyAdditionalActions() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyAdditionalActions())
+// PDFAnnotationKeyAdditionalActions returns the string constant PDFAnnotationKeyAdditionalActions, for use as a dictionary key or argument.
+func PDFAnnotationKeyAdditionalActions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyAdditionalActions")))
 }
 
-// PDFAnnotationKeyBorderStyle returns the string constant PDFAnnotationKeyBorderStyle as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyBorderStyle() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyBorderStyle())
+// PDFAnnotationKeyBorderStyle returns the string constant PDFAnnotationKeyBorderStyle, for use as a dictionary key or argument.
+func PDFAnnotationKeyBorderStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyBorderStyle")))
 }
 
-// PDFAnnotationKeyDefaultAppearance returns the string constant PDFAnnotationKeyDefaultAppearance as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyDefaultAppearance() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyDefaultAppearance())
+// PDFAnnotationKeyDefaultAppearance returns the string constant PDFAnnotationKeyDefaultAppearance, for use as a dictionary key or argument.
+func PDFAnnotationKeyDefaultAppearance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyDefaultAppearance")))
 }
 
-// PDFAnnotationKeyDestination returns the string constant PDFAnnotationKeyDestination as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyDestination() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyDestination())
+// PDFAnnotationKeyDestination returns the string constant PDFAnnotationKeyDestination, for use as a dictionary key or argument.
+func PDFAnnotationKeyDestination() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyDestination")))
 }
 
-// PDFAnnotationKeyHighlightingMode returns the string constant PDFAnnotationKeyHighlightingMode as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyHighlightingMode() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyHighlightingMode())
+// PDFAnnotationKeyHighlightingMode returns the string constant PDFAnnotationKeyHighlightingMode, for use as a dictionary key or argument.
+func PDFAnnotationKeyHighlightingMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyHighlightingMode")))
 }
 
-// PDFAnnotationKeyInklist returns the string constant PDFAnnotationKeyInklist as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyInklist() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyInklist())
+// PDFAnnotationKeyInklist returns the string constant PDFAnnotationKeyInklist, for use as a dictionary key or argument.
+func PDFAnnotationKeyInklist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyInklist")))
 }
 
-// PDFAnnotationKeyInteriorColor returns the string constant PDFAnnotationKeyInteriorColor as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyInteriorColor() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyInteriorColor())
+// PDFAnnotationKeyInteriorColor returns the string constant PDFAnnotationKeyInteriorColor, for use as a dictionary key or argument.
+func PDFAnnotationKeyInteriorColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyInteriorColor")))
 }
 
-// PDFAnnotationKeyLinePoints returns the string constant PDFAnnotationKeyLinePoints as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyLinePoints() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyLinePoints())
+// PDFAnnotationKeyLinePoints returns the string constant PDFAnnotationKeyLinePoints, for use as a dictionary key or argument.
+func PDFAnnotationKeyLinePoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyLinePoints")))
 }
 
-// PDFAnnotationKeyLineEndingStyles returns the string constant PDFAnnotationKeyLineEndingStyles as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyLineEndingStyles() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyLineEndingStyles())
+// PDFAnnotationKeyLineEndingStyles returns the string constant PDFAnnotationKeyLineEndingStyles, for use as a dictionary key or argument.
+func PDFAnnotationKeyLineEndingStyles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyLineEndingStyles")))
 }
 
-// PDFAnnotationKeyIconName returns the string constant PDFAnnotationKeyIconName as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyIconName() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyIconName())
+// PDFAnnotationKeyIconName returns the string constant PDFAnnotationKeyIconName, for use as a dictionary key or argument.
+func PDFAnnotationKeyIconName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyIconName")))
 }
 
-// PDFAnnotationKeyOpen returns the string constant PDFAnnotationKeyOpen as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyOpen() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyOpen())
+// PDFAnnotationKeyOpen returns the string constant PDFAnnotationKeyOpen, for use as a dictionary key or argument.
+func PDFAnnotationKeyOpen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyOpen")))
 }
 
-// PDFAnnotationKeyParent returns the string constant PDFAnnotationKeyParent as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyParent() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyParent())
+// PDFAnnotationKeyParent returns the string constant PDFAnnotationKeyParent, for use as a dictionary key or argument.
+func PDFAnnotationKeyParent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyParent")))
 }
 
-// PDFAnnotationKeyPopup returns the string constant PDFAnnotationKeyPopup as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyPopup() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyPopup())
+// PDFAnnotationKeyPopup returns the string constant PDFAnnotationKeyPopup, for use as a dictionary key or argument.
+func PDFAnnotationKeyPopup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyPopup")))
 }
 
-// PDFAnnotationKeyQuadding returns the string constant PDFAnnotationKeyQuadding as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyQuadding() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyQuadding())
+// PDFAnnotationKeyQuadding returns the string constant PDFAnnotationKeyQuadding, for use as a dictionary key or argument.
+func PDFAnnotationKeyQuadding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyQuadding")))
 }
 
-// PDFAnnotationKeyQuadPoints returns the string constant PDFAnnotationKeyQuadPoints as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyQuadPoints() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyQuadPoints())
+// PDFAnnotationKeyQuadPoints returns the string constant PDFAnnotationKeyQuadPoints, for use as a dictionary key or argument.
+func PDFAnnotationKeyQuadPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyQuadPoints")))
 }
 
-// PDFAnnotationKeyTextLabel returns the string constant PDFAnnotationKeyTextLabel as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyTextLabel() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyTextLabel())
+// PDFAnnotationKeyTextLabel returns the string constant PDFAnnotationKeyTextLabel, for use as a dictionary key or argument.
+func PDFAnnotationKeyTextLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyTextLabel")))
 }
 
-// PDFAnnotationKeyWidgetDownCaption returns the string constant PDFAnnotationKeyWidgetDownCaption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetDownCaption() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetDownCaption())
+// PDFAnnotationKeyWidgetDownCaption returns the string constant PDFAnnotationKeyWidgetDownCaption, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetDownCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetDownCaption")))
 }
 
-// PDFAnnotationKeyWidgetBorderColor returns the string constant PDFAnnotationKeyWidgetBorderColor as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetBorderColor() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetBorderColor())
+// PDFAnnotationKeyWidgetBorderColor returns the string constant PDFAnnotationKeyWidgetBorderColor, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetBorderColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetBorderColor")))
 }
 
-// PDFAnnotationKeyWidgetBackgroundColor returns the string constant PDFAnnotationKeyWidgetBackgroundColor as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetBackgroundColor() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetBackgroundColor())
+// PDFAnnotationKeyWidgetBackgroundColor returns the string constant PDFAnnotationKeyWidgetBackgroundColor, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetBackgroundColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetBackgroundColor")))
 }
 
-// PDFAnnotationKeyWidgetCaption returns the string constant PDFAnnotationKeyWidgetCaption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetCaption() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetCaption())
+// PDFAnnotationKeyWidgetCaption returns the string constant PDFAnnotationKeyWidgetCaption, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetCaption")))
 }
 
-// PDFAnnotationKeyWidgetDefaultValue returns the string constant PDFAnnotationKeyWidgetDefaultValue as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetDefaultValue() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetDefaultValue())
+// PDFAnnotationKeyWidgetDefaultValue returns the string constant PDFAnnotationKeyWidgetDefaultValue, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetDefaultValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetDefaultValue")))
 }
 
-// PDFAnnotationKeyWidgetFieldFlags returns the string constant PDFAnnotationKeyWidgetFieldFlags as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetFieldFlags() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetFieldFlags())
+// PDFAnnotationKeyWidgetFieldFlags returns the string constant PDFAnnotationKeyWidgetFieldFlags, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetFieldFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetFieldFlags")))
 }
 
-// PDFAnnotationKeyWidgetFieldType returns the string constant PDFAnnotationKeyWidgetFieldType as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetFieldType() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetFieldType())
+// PDFAnnotationKeyWidgetFieldType returns the string constant PDFAnnotationKeyWidgetFieldType, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetFieldType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetFieldType")))
 }
 
-// PDFAnnotationKeyWidgetAppearanceDictionary returns the string constant PDFAnnotationKeyWidgetAppearanceDictionary as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetAppearanceDictionary() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetAppearanceDictionary())
+// PDFAnnotationKeyWidgetAppearanceDictionary returns the string constant PDFAnnotationKeyWidgetAppearanceDictionary, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetAppearanceDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetAppearanceDictionary")))
 }
 
-// PDFAnnotationKeyWidgetMaxLen returns the string constant PDFAnnotationKeyWidgetMaxLen as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetMaxLen() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetMaxLen())
+// PDFAnnotationKeyWidgetMaxLen returns the string constant PDFAnnotationKeyWidgetMaxLen, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetMaxLen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetMaxLen")))
 }
 
-// PDFAnnotationKeyWidgetOptions returns the string constant PDFAnnotationKeyWidgetOptions as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetOptions() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetOptions())
+// PDFAnnotationKeyWidgetOptions returns the string constant PDFAnnotationKeyWidgetOptions, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetOptions")))
 }
 
-// PDFAnnotationKeyWidgetRotation returns the string constant PDFAnnotationKeyWidgetRotation as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetRotation() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetRotation())
+// PDFAnnotationKeyWidgetRotation returns the string constant PDFAnnotationKeyWidgetRotation, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetRotation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetRotation")))
 }
 
-// PDFAnnotationKeyWidgetRolloverCaption returns the string constant PDFAnnotationKeyWidgetRolloverCaption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetRolloverCaption() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetRolloverCaption())
+// PDFAnnotationKeyWidgetRolloverCaption returns the string constant PDFAnnotationKeyWidgetRolloverCaption, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetRolloverCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetRolloverCaption")))
 }
 
-// PDFAnnotationKeyWidgetTextLabelUI returns the string constant PDFAnnotationKeyWidgetTextLabelUI as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetTextLabelUI() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetTextLabelUI())
+// PDFAnnotationKeyWidgetTextLabelUI returns the string constant PDFAnnotationKeyWidgetTextLabelUI, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetTextLabelUI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetTextLabelUI")))
 }
 
-// PDFAnnotationKeyWidgetValue returns the string constant PDFAnnotationKeyWidgetValue as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationKeyWidgetValue() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationKeyWidgetValue())
+// PDFAnnotationKeyWidgetValue returns the string constant PDFAnnotationKeyWidgetValue, for use as a dictionary key or argument.
+func PDFAnnotationKeyWidgetValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationKeyWidgetValue")))
 }
 
-// KPDFAnnotationKey_AppearanceDictionary returns the string constant kPDFAnnotationKey_AppearanceDictionary as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_AppearanceDictionary() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_AppearanceDictionary())
+// KPDFAnnotationKey_AppearanceDictionary returns the string constant kPDFAnnotationKey_AppearanceDictionary, for use as a dictionary key or argument.
+func KPDFAnnotationKey_AppearanceDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_AppearanceDictionary")))
 }
 
-// KPDFAnnotationKey_AppearanceState returns the string constant kPDFAnnotationKey_AppearanceState as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_AppearanceState() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_AppearanceState())
+// KPDFAnnotationKey_AppearanceState returns the string constant kPDFAnnotationKey_AppearanceState, for use as a dictionary key or argument.
+func KPDFAnnotationKey_AppearanceState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_AppearanceState")))
 }
 
-// KPDFAnnotationKey_Border returns the string constant kPDFAnnotationKey_Border as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Border() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Border())
+// KPDFAnnotationKey_Border returns the string constant kPDFAnnotationKey_Border, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Border() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Border")))
 }
 
-// KPDFAnnotationKey_Color returns the string constant kPDFAnnotationKey_Color as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Color() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Color())
+// KPDFAnnotationKey_Color returns the string constant kPDFAnnotationKey_Color, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Color() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Color")))
 }
 
-// KPDFAnnotationKey_Contents returns the string constant kPDFAnnotationKey_Contents as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Contents() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Contents())
+// KPDFAnnotationKey_Contents returns the string constant kPDFAnnotationKey_Contents, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Contents() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Contents")))
 }
 
-// KPDFAnnotationKey_Flags returns the string constant kPDFAnnotationKey_Flags as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Flags() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Flags())
+// KPDFAnnotationKey_Flags returns the string constant kPDFAnnotationKey_Flags, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Flags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Flags")))
 }
 
-// KPDFAnnotationKey_Date returns the string constant kPDFAnnotationKey_Date as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Date() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Date())
+// KPDFAnnotationKey_Date returns the string constant kPDFAnnotationKey_Date, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Date() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Date")))
 }
 
-// KPDFAnnotationKey_Name returns the string constant kPDFAnnotationKey_Name as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Name() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Name())
+// KPDFAnnotationKey_Name returns the string constant kPDFAnnotationKey_Name, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Name() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Name")))
 }
 
-// KPDFAnnotationKey_Page returns the string constant kPDFAnnotationKey_Page as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Page() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Page())
+// KPDFAnnotationKey_Page returns the string constant kPDFAnnotationKey_Page, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Page() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Page")))
 }
 
-// KPDFAnnotationKey_Rect returns the string constant kPDFAnnotationKey_Rect as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Rect() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Rect())
+// KPDFAnnotationKey_Rect returns the string constant kPDFAnnotationKey_Rect, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Rect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Rect")))
 }
 
-// KPDFAnnotationKey_Subtype returns the string constant kPDFAnnotationKey_Subtype as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Subtype() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Subtype())
+// KPDFAnnotationKey_Subtype returns the string constant kPDFAnnotationKey_Subtype, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Subtype() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Subtype")))
 }
 
-// KPDFAnnotationKey_Action returns the string constant kPDFAnnotationKey_Action as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Action() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Action())
+// KPDFAnnotationKey_Action returns the string constant kPDFAnnotationKey_Action, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Action() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Action")))
 }
 
-// KPDFAnnotationKey_AdditionalActions returns the string constant kPDFAnnotationKey_AdditionalActions as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_AdditionalActions() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_AdditionalActions())
+// KPDFAnnotationKey_AdditionalActions returns the string constant kPDFAnnotationKey_AdditionalActions, for use as a dictionary key or argument.
+func KPDFAnnotationKey_AdditionalActions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_AdditionalActions")))
 }
 
-// KPDFAnnotationKey_BorderStyle returns the string constant kPDFAnnotationKey_BorderStyle as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_BorderStyle() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_BorderStyle())
+// KPDFAnnotationKey_BorderStyle returns the string constant kPDFAnnotationKey_BorderStyle, for use as a dictionary key or argument.
+func KPDFAnnotationKey_BorderStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_BorderStyle")))
 }
 
-// KPDFAnnotationKey_DefaultAppearance returns the string constant kPDFAnnotationKey_DefaultAppearance as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_DefaultAppearance() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_DefaultAppearance())
+// KPDFAnnotationKey_DefaultAppearance returns the string constant kPDFAnnotationKey_DefaultAppearance, for use as a dictionary key or argument.
+func KPDFAnnotationKey_DefaultAppearance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_DefaultAppearance")))
 }
 
-// KPDFAnnotationKey_Destination returns the string constant kPDFAnnotationKey_Destination as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Destination() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Destination())
+// KPDFAnnotationKey_Destination returns the string constant kPDFAnnotationKey_Destination, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Destination() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Destination")))
 }
 
-// KPDFAnnotationKey_HighlightingMode returns the string constant kPDFAnnotationKey_HighlightingMode as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_HighlightingMode() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_HighlightingMode())
+// KPDFAnnotationKey_HighlightingMode returns the string constant kPDFAnnotationKey_HighlightingMode, for use as a dictionary key or argument.
+func KPDFAnnotationKey_HighlightingMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_HighlightingMode")))
 }
 
-// KPDFAnnotationKey_Inklist returns the string constant kPDFAnnotationKey_Inklist as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Inklist() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Inklist())
+// KPDFAnnotationKey_Inklist returns the string constant kPDFAnnotationKey_Inklist, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Inklist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Inklist")))
 }
 
-// KPDFAnnotationKey_InteriorColor returns the string constant kPDFAnnotationKey_InteriorColor as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_InteriorColor() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_InteriorColor())
+// KPDFAnnotationKey_InteriorColor returns the string constant kPDFAnnotationKey_InteriorColor, for use as a dictionary key or argument.
+func KPDFAnnotationKey_InteriorColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_InteriorColor")))
 }
 
-// KPDFAnnotationKey_LinePoints returns the string constant kPDFAnnotationKey_LinePoints as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_LinePoints() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_LinePoints())
+// KPDFAnnotationKey_LinePoints returns the string constant kPDFAnnotationKey_LinePoints, for use as a dictionary key or argument.
+func KPDFAnnotationKey_LinePoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_LinePoints")))
 }
 
-// KPDFAnnotationKey_LineEndingStyles returns the string constant kPDFAnnotationKey_LineEndingStyles as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_LineEndingStyles() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_LineEndingStyles())
+// KPDFAnnotationKey_LineEndingStyles returns the string constant kPDFAnnotationKey_LineEndingStyles, for use as a dictionary key or argument.
+func KPDFAnnotationKey_LineEndingStyles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_LineEndingStyles")))
 }
 
-// KPDFAnnotationKey_IconName returns the string constant kPDFAnnotationKey_IconName as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_IconName() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_IconName())
+// KPDFAnnotationKey_IconName returns the string constant kPDFAnnotationKey_IconName, for use as a dictionary key or argument.
+func KPDFAnnotationKey_IconName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_IconName")))
 }
 
-// KPDFAnnotationKey_Open returns the string constant kPDFAnnotationKey_Open as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Open() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Open())
+// KPDFAnnotationKey_Open returns the string constant kPDFAnnotationKey_Open, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Open() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Open")))
 }
 
-// KPDFAnnotationKey_Parent returns the string constant kPDFAnnotationKey_Parent as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Parent() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Parent())
+// KPDFAnnotationKey_Parent returns the string constant kPDFAnnotationKey_Parent, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Parent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Parent")))
 }
 
-// KPDFAnnotationKey_Popup returns the string constant kPDFAnnotationKey_Popup as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Popup() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Popup())
+// KPDFAnnotationKey_Popup returns the string constant kPDFAnnotationKey_Popup, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Popup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Popup")))
 }
 
-// KPDFAnnotationKey_Quadding returns the string constant kPDFAnnotationKey_Quadding as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_Quadding() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_Quadding())
+// KPDFAnnotationKey_Quadding returns the string constant kPDFAnnotationKey_Quadding, for use as a dictionary key or argument.
+func KPDFAnnotationKey_Quadding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_Quadding")))
 }
 
-// KPDFAnnotationKey_QuadPoints returns the string constant kPDFAnnotationKey_QuadPoints as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_QuadPoints() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_QuadPoints())
+// KPDFAnnotationKey_QuadPoints returns the string constant kPDFAnnotationKey_QuadPoints, for use as a dictionary key or argument.
+func KPDFAnnotationKey_QuadPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_QuadPoints")))
 }
 
-// KPDFAnnotationKey_TextLabel returns the string constant kPDFAnnotationKey_TextLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_TextLabel() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_TextLabel())
+// KPDFAnnotationKey_TextLabel returns the string constant kPDFAnnotationKey_TextLabel, for use as a dictionary key or argument.
+func KPDFAnnotationKey_TextLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_TextLabel")))
 }
 
-// KPDFAnnotationKey_WidgetDefaultValue returns the string constant kPDFAnnotationKey_WidgetDefaultValue as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetDefaultValue() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetDefaultValue())
+// KPDFAnnotationKey_WidgetDefaultValue returns the string constant kPDFAnnotationKey_WidgetDefaultValue, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetDefaultValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetDefaultValue")))
 }
 
-// KPDFAnnotationKey_WidgetFieldFlags returns the string constant kPDFAnnotationKey_WidgetFieldFlags as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetFieldFlags() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetFieldFlags())
+// KPDFAnnotationKey_WidgetFieldFlags returns the string constant kPDFAnnotationKey_WidgetFieldFlags, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetFieldFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetFieldFlags")))
 }
 
-// KPDFAnnotationKey_WidgetFieldType returns the string constant kPDFAnnotationKey_WidgetFieldType as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetFieldType() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetFieldType())
+// KPDFAnnotationKey_WidgetFieldType returns the string constant kPDFAnnotationKey_WidgetFieldType, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetFieldType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetFieldType")))
 }
 
-// KPDFAnnotationKey_WidgetAppearanceDictionary returns the string constant kPDFAnnotationKey_WidgetAppearanceDictionary as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetAppearanceDictionary() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetAppearanceDictionary())
+// KPDFAnnotationKey_WidgetAppearanceDictionary returns the string constant kPDFAnnotationKey_WidgetAppearanceDictionary, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetAppearanceDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetAppearanceDictionary")))
 }
 
-// KPDFAnnotationKey_WidgetMaxLen returns the string constant kPDFAnnotationKey_WidgetMaxLen as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetMaxLen() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetMaxLen())
+// KPDFAnnotationKey_WidgetMaxLen returns the string constant kPDFAnnotationKey_WidgetMaxLen, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetMaxLen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetMaxLen")))
 }
 
-// KPDFAnnotationKey_WidgetOptions returns the string constant kPDFAnnotationKey_WidgetOptions as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetOptions() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetOptions())
+// KPDFAnnotationKey_WidgetOptions returns the string constant kPDFAnnotationKey_WidgetOptions, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetOptions")))
 }
 
-// KPDFAnnotationKey_WidgetTextLabelUI returns the string constant kPDFAnnotationKey_WidgetTextLabelUI as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetTextLabelUI() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetTextLabelUI())
+// KPDFAnnotationKey_WidgetTextLabelUI returns the string constant kPDFAnnotationKey_WidgetTextLabelUI, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetTextLabelUI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetTextLabelUI")))
 }
 
-// KPDFAnnotationKey_WidgetValue returns the string constant kPDFAnnotationKey_WidgetValue as an objc.ID, for use as a dictionary key or selector argument.
-func KPDFAnnotationKey_WidgetValue() objc.ID {
-	return purego.CFConstant(raw.KPDFAnnotationKey_WidgetValue())
+// KPDFAnnotationKey_WidgetValue returns the string constant kPDFAnnotationKey_WidgetValue, for use as a dictionary key or argument.
+func KPDFAnnotationKey_WidgetValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kPDFAnnotationKey_WidgetValue")))
 }
 
-// PDFAnnotationSubtypeText returns the string constant PDFAnnotationSubtypeText as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeText() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeText())
+// PDFAnnotationSubtypeText returns the string constant PDFAnnotationSubtypeText, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeText")))
 }
 
-// PDFAnnotationSubtypeLink returns the string constant PDFAnnotationSubtypeLink as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeLink() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeLink())
+// PDFAnnotationSubtypeLink returns the string constant PDFAnnotationSubtypeLink, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeLink")))
 }
 
-// PDFAnnotationSubtypeFreeText returns the string constant PDFAnnotationSubtypeFreeText as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeFreeText() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeFreeText())
+// PDFAnnotationSubtypeFreeText returns the string constant PDFAnnotationSubtypeFreeText, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeFreeText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeFreeText")))
 }
 
-// PDFAnnotationSubtypeLine returns the string constant PDFAnnotationSubtypeLine as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeLine() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeLine())
+// PDFAnnotationSubtypeLine returns the string constant PDFAnnotationSubtypeLine, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeLine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeLine")))
 }
 
-// PDFAnnotationSubtypeSquare returns the string constant PDFAnnotationSubtypeSquare as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeSquare() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeSquare())
+// PDFAnnotationSubtypeSquare returns the string constant PDFAnnotationSubtypeSquare, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeSquare() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeSquare")))
 }
 
-// PDFAnnotationSubtypeCircle returns the string constant PDFAnnotationSubtypeCircle as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeCircle() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeCircle())
+// PDFAnnotationSubtypeCircle returns the string constant PDFAnnotationSubtypeCircle, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeCircle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeCircle")))
 }
 
-// PDFAnnotationSubtypeHighlight returns the string constant PDFAnnotationSubtypeHighlight as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeHighlight() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeHighlight())
+// PDFAnnotationSubtypeHighlight returns the string constant PDFAnnotationSubtypeHighlight, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeHighlight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeHighlight")))
 }
 
-// PDFAnnotationSubtypeUnderline returns the string constant PDFAnnotationSubtypeUnderline as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeUnderline() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeUnderline())
+// PDFAnnotationSubtypeUnderline returns the string constant PDFAnnotationSubtypeUnderline, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeUnderline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeUnderline")))
 }
 
-// PDFAnnotationSubtypeStrikeOut returns the string constant PDFAnnotationSubtypeStrikeOut as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeStrikeOut() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeStrikeOut())
+// PDFAnnotationSubtypeStrikeOut returns the string constant PDFAnnotationSubtypeStrikeOut, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeStrikeOut() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeStrikeOut")))
 }
 
-// PDFAnnotationSubtypeInk returns the string constant PDFAnnotationSubtypeInk as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeInk() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeInk())
+// PDFAnnotationSubtypeInk returns the string constant PDFAnnotationSubtypeInk, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeInk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeInk")))
 }
 
-// PDFAnnotationSubtypeStamp returns the string constant PDFAnnotationSubtypeStamp as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeStamp() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeStamp())
+// PDFAnnotationSubtypeStamp returns the string constant PDFAnnotationSubtypeStamp, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeStamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeStamp")))
 }
 
-// PDFAnnotationSubtypePopup returns the string constant PDFAnnotationSubtypePopup as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypePopup() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypePopup())
+// PDFAnnotationSubtypePopup returns the string constant PDFAnnotationSubtypePopup, for use as a dictionary key or argument.
+func PDFAnnotationSubtypePopup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypePopup")))
 }
 
-// PDFAnnotationSubtypeWidget returns the string constant PDFAnnotationSubtypeWidget as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationSubtypeWidget() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationSubtypeWidget())
+// PDFAnnotationSubtypeWidget returns the string constant PDFAnnotationSubtypeWidget, for use as a dictionary key or argument.
+func PDFAnnotationSubtypeWidget() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationSubtypeWidget")))
 }
 
-// PDFAnnotationWidgetSubtypeButton returns the string constant PDFAnnotationWidgetSubtypeButton as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationWidgetSubtypeButton() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationWidgetSubtypeButton())
+// PDFAnnotationWidgetSubtypeButton returns the string constant PDFAnnotationWidgetSubtypeButton, for use as a dictionary key or argument.
+func PDFAnnotationWidgetSubtypeButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationWidgetSubtypeButton")))
 }
 
-// PDFAnnotationWidgetSubtypeChoice returns the string constant PDFAnnotationWidgetSubtypeChoice as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationWidgetSubtypeChoice() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationWidgetSubtypeChoice())
+// PDFAnnotationWidgetSubtypeChoice returns the string constant PDFAnnotationWidgetSubtypeChoice, for use as a dictionary key or argument.
+func PDFAnnotationWidgetSubtypeChoice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationWidgetSubtypeChoice")))
 }
 
-// PDFAnnotationWidgetSubtypeSignature returns the string constant PDFAnnotationWidgetSubtypeSignature as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationWidgetSubtypeSignature() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationWidgetSubtypeSignature())
+// PDFAnnotationWidgetSubtypeSignature returns the string constant PDFAnnotationWidgetSubtypeSignature, for use as a dictionary key or argument.
+func PDFAnnotationWidgetSubtypeSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationWidgetSubtypeSignature")))
 }
 
-// PDFAnnotationWidgetSubtypeText returns the string constant PDFAnnotationWidgetSubtypeText as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationWidgetSubtypeText() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationWidgetSubtypeText())
+// PDFAnnotationWidgetSubtypeText returns the string constant PDFAnnotationWidgetSubtypeText, for use as a dictionary key or argument.
+func PDFAnnotationWidgetSubtypeText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationWidgetSubtypeText")))
 }
 
-// PDFAnnotationLineEndingStyleNone returns the string constant PDFAnnotationLineEndingStyleNone as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationLineEndingStyleNone() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationLineEndingStyleNone())
+// PDFAnnotationLineEndingStyleNone returns the string constant PDFAnnotationLineEndingStyleNone, for use as a dictionary key or argument.
+func PDFAnnotationLineEndingStyleNone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationLineEndingStyleNone")))
 }
 
-// PDFAnnotationLineEndingStyleSquare returns the string constant PDFAnnotationLineEndingStyleSquare as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationLineEndingStyleSquare() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationLineEndingStyleSquare())
+// PDFAnnotationLineEndingStyleSquare returns the string constant PDFAnnotationLineEndingStyleSquare, for use as a dictionary key or argument.
+func PDFAnnotationLineEndingStyleSquare() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationLineEndingStyleSquare")))
 }
 
-// PDFAnnotationLineEndingStyleCircle returns the string constant PDFAnnotationLineEndingStyleCircle as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationLineEndingStyleCircle() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationLineEndingStyleCircle())
+// PDFAnnotationLineEndingStyleCircle returns the string constant PDFAnnotationLineEndingStyleCircle, for use as a dictionary key or argument.
+func PDFAnnotationLineEndingStyleCircle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationLineEndingStyleCircle")))
 }
 
-// PDFAnnotationLineEndingStyleDiamond returns the string constant PDFAnnotationLineEndingStyleDiamond as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationLineEndingStyleDiamond() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationLineEndingStyleDiamond())
+// PDFAnnotationLineEndingStyleDiamond returns the string constant PDFAnnotationLineEndingStyleDiamond, for use as a dictionary key or argument.
+func PDFAnnotationLineEndingStyleDiamond() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationLineEndingStyleDiamond")))
 }
 
-// PDFAnnotationLineEndingStyleOpenArrow returns the string constant PDFAnnotationLineEndingStyleOpenArrow as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationLineEndingStyleOpenArrow() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationLineEndingStyleOpenArrow())
+// PDFAnnotationLineEndingStyleOpenArrow returns the string constant PDFAnnotationLineEndingStyleOpenArrow, for use as a dictionary key or argument.
+func PDFAnnotationLineEndingStyleOpenArrow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationLineEndingStyleOpenArrow")))
 }
 
-// PDFAnnotationLineEndingStyleClosedArrow returns the string constant PDFAnnotationLineEndingStyleClosedArrow as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationLineEndingStyleClosedArrow() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationLineEndingStyleClosedArrow())
+// PDFAnnotationLineEndingStyleClosedArrow returns the string constant PDFAnnotationLineEndingStyleClosedArrow, for use as a dictionary key or argument.
+func PDFAnnotationLineEndingStyleClosedArrow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationLineEndingStyleClosedArrow")))
 }
 
-// PDFAnnotationTextIconTypeComment returns the string constant PDFAnnotationTextIconTypeComment as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeComment() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeComment())
+// PDFAnnotationTextIconTypeComment returns the string constant PDFAnnotationTextIconTypeComment, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeComment")))
 }
 
-// PDFAnnotationTextIconTypeKey returns the string constant PDFAnnotationTextIconTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeKey() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeKey())
+// PDFAnnotationTextIconTypeKey returns the string constant PDFAnnotationTextIconTypeKey, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeKey")))
 }
 
-// PDFAnnotationTextIconTypeNote returns the string constant PDFAnnotationTextIconTypeNote as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeNote() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeNote())
+// PDFAnnotationTextIconTypeNote returns the string constant PDFAnnotationTextIconTypeNote, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeNote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeNote")))
 }
 
-// PDFAnnotationTextIconTypeHelp returns the string constant PDFAnnotationTextIconTypeHelp as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeHelp() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeHelp())
+// PDFAnnotationTextIconTypeHelp returns the string constant PDFAnnotationTextIconTypeHelp, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeHelp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeHelp")))
 }
 
-// PDFAnnotationTextIconTypeNewParagraph returns the string constant PDFAnnotationTextIconTypeNewParagraph as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeNewParagraph() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeNewParagraph())
+// PDFAnnotationTextIconTypeNewParagraph returns the string constant PDFAnnotationTextIconTypeNewParagraph, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeNewParagraph() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeNewParagraph")))
 }
 
-// PDFAnnotationTextIconTypeParagraph returns the string constant PDFAnnotationTextIconTypeParagraph as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeParagraph() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeParagraph())
+// PDFAnnotationTextIconTypeParagraph returns the string constant PDFAnnotationTextIconTypeParagraph, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeParagraph() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeParagraph")))
 }
 
-// PDFAnnotationTextIconTypeInsert returns the string constant PDFAnnotationTextIconTypeInsert as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationTextIconTypeInsert() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationTextIconTypeInsert())
+// PDFAnnotationTextIconTypeInsert returns the string constant PDFAnnotationTextIconTypeInsert, for use as a dictionary key or argument.
+func PDFAnnotationTextIconTypeInsert() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationTextIconTypeInsert")))
 }
 
-// PDFAnnotationHighlightingModeNone returns the string constant PDFAnnotationHighlightingModeNone as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationHighlightingModeNone() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationHighlightingModeNone())
+// PDFAnnotationHighlightingModeNone returns the string constant PDFAnnotationHighlightingModeNone, for use as a dictionary key or argument.
+func PDFAnnotationHighlightingModeNone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationHighlightingModeNone")))
 }
 
-// PDFAnnotationHighlightingModeInvert returns the string constant PDFAnnotationHighlightingModeInvert as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationHighlightingModeInvert() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationHighlightingModeInvert())
+// PDFAnnotationHighlightingModeInvert returns the string constant PDFAnnotationHighlightingModeInvert, for use as a dictionary key or argument.
+func PDFAnnotationHighlightingModeInvert() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationHighlightingModeInvert")))
 }
 
-// PDFAnnotationHighlightingModeOutline returns the string constant PDFAnnotationHighlightingModeOutline as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationHighlightingModeOutline() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationHighlightingModeOutline())
+// PDFAnnotationHighlightingModeOutline returns the string constant PDFAnnotationHighlightingModeOutline, for use as a dictionary key or argument.
+func PDFAnnotationHighlightingModeOutline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationHighlightingModeOutline")))
 }
 
-// PDFAnnotationHighlightingModePush returns the string constant PDFAnnotationHighlightingModePush as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAnnotationHighlightingModePush() objc.ID {
-	return purego.CFConstant(raw.PDFAnnotationHighlightingModePush())
+// PDFAnnotationHighlightingModePush returns the string constant PDFAnnotationHighlightingModePush, for use as a dictionary key or argument.
+func PDFAnnotationHighlightingModePush() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAnnotationHighlightingModePush")))
 }
 
-// PDFAppearanceCharacteristicsKeyBackgroundColor returns the string constant PDFAppearanceCharacteristicsKeyBackgroundColor as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAppearanceCharacteristicsKeyBackgroundColor() objc.ID {
-	return purego.CFConstant(raw.PDFAppearanceCharacteristicsKeyBackgroundColor())
+// PDFAppearanceCharacteristicsKeyBackgroundColor returns the string constant PDFAppearanceCharacteristicsKeyBackgroundColor, for use as a dictionary key or argument.
+func PDFAppearanceCharacteristicsKeyBackgroundColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAppearanceCharacteristicsKeyBackgroundColor")))
 }
 
-// PDFAppearanceCharacteristicsKeyBorderColor returns the string constant PDFAppearanceCharacteristicsKeyBorderColor as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAppearanceCharacteristicsKeyBorderColor() objc.ID {
-	return purego.CFConstant(raw.PDFAppearanceCharacteristicsKeyBorderColor())
+// PDFAppearanceCharacteristicsKeyBorderColor returns the string constant PDFAppearanceCharacteristicsKeyBorderColor, for use as a dictionary key or argument.
+func PDFAppearanceCharacteristicsKeyBorderColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAppearanceCharacteristicsKeyBorderColor")))
 }
 
-// PDFAppearanceCharacteristicsKeyRotation returns the string constant PDFAppearanceCharacteristicsKeyRotation as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAppearanceCharacteristicsKeyRotation() objc.ID {
-	return purego.CFConstant(raw.PDFAppearanceCharacteristicsKeyRotation())
+// PDFAppearanceCharacteristicsKeyRotation returns the string constant PDFAppearanceCharacteristicsKeyRotation, for use as a dictionary key or argument.
+func PDFAppearanceCharacteristicsKeyRotation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAppearanceCharacteristicsKeyRotation")))
 }
 
-// PDFAppearanceCharacteristicsKeyCaption returns the string constant PDFAppearanceCharacteristicsKeyCaption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAppearanceCharacteristicsKeyCaption() objc.ID {
-	return purego.CFConstant(raw.PDFAppearanceCharacteristicsKeyCaption())
+// PDFAppearanceCharacteristicsKeyCaption returns the string constant PDFAppearanceCharacteristicsKeyCaption, for use as a dictionary key or argument.
+func PDFAppearanceCharacteristicsKeyCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAppearanceCharacteristicsKeyCaption")))
 }
 
-// PDFAppearanceCharacteristicsKeyRolloverCaption returns the string constant PDFAppearanceCharacteristicsKeyRolloverCaption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAppearanceCharacteristicsKeyRolloverCaption() objc.ID {
-	return purego.CFConstant(raw.PDFAppearanceCharacteristicsKeyRolloverCaption())
+// PDFAppearanceCharacteristicsKeyRolloverCaption returns the string constant PDFAppearanceCharacteristicsKeyRolloverCaption, for use as a dictionary key or argument.
+func PDFAppearanceCharacteristicsKeyRolloverCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAppearanceCharacteristicsKeyRolloverCaption")))
 }
 
-// PDFAppearanceCharacteristicsKeyDownCaption returns the string constant PDFAppearanceCharacteristicsKeyDownCaption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFAppearanceCharacteristicsKeyDownCaption() objc.ID {
-	return purego.CFConstant(raw.PDFAppearanceCharacteristicsKeyDownCaption())
+// PDFAppearanceCharacteristicsKeyDownCaption returns the string constant PDFAppearanceCharacteristicsKeyDownCaption, for use as a dictionary key or argument.
+func PDFAppearanceCharacteristicsKeyDownCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFAppearanceCharacteristicsKeyDownCaption")))
 }
 
-// PDFBorderKeyLineWidth returns the string constant PDFBorderKeyLineWidth as an objc.ID, for use as a dictionary key or selector argument.
-func PDFBorderKeyLineWidth() objc.ID {
-	return purego.CFConstant(raw.PDFBorderKeyLineWidth())
+// PDFBorderKeyLineWidth returns the string constant PDFBorderKeyLineWidth, for use as a dictionary key or argument.
+func PDFBorderKeyLineWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFBorderKeyLineWidth")))
 }
 
-// PDFBorderKeyStyle returns the string constant PDFBorderKeyStyle as an objc.ID, for use as a dictionary key or selector argument.
-func PDFBorderKeyStyle() objc.ID {
-	return purego.CFConstant(raw.PDFBorderKeyStyle())
-}
+// PDFBorderKeyStyle returns the string constant PDFBorderKeyStyle, for use as a dictionary key or argument.
+func PDFBorderKeyStyle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PDFBorderKeyStyle"))) }
 
-// PDFBorderKeyDashPattern returns the string constant PDFBorderKeyDashPattern as an objc.ID, for use as a dictionary key or selector argument.
-func PDFBorderKeyDashPattern() objc.ID {
-	return purego.CFConstant(raw.PDFBorderKeyDashPattern())
+// PDFBorderKeyDashPattern returns the string constant PDFBorderKeyDashPattern, for use as a dictionary key or argument.
+func PDFBorderKeyDashPattern() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFBorderKeyDashPattern")))
 }
 
-// PDFDocumentFoundSelectionKey returns the string constant PDFDocumentFoundSelectionKey as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentFoundSelectionKey() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentFoundSelectionKey())
+// PDFDocumentFoundSelectionKey returns the string constant PDFDocumentFoundSelectionKey, for use as a dictionary key or argument.
+func PDFDocumentFoundSelectionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentFoundSelectionKey")))
 }
 
-// PDFDocumentPageIndexKey returns the string constant PDFDocumentPageIndexKey as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentPageIndexKey() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentPageIndexKey())
+// PDFDocumentPageIndexKey returns the string constant PDFDocumentPageIndexKey, for use as a dictionary key or argument.
+func PDFDocumentPageIndexKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentPageIndexKey")))
 }
 
-// PDFDocumentTitleAttribute returns the string constant PDFDocumentTitleAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentTitleAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentTitleAttribute())
+// PDFDocumentTitleAttribute returns the string constant PDFDocumentTitleAttribute, for use as a dictionary key or argument.
+func PDFDocumentTitleAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentTitleAttribute")))
 }
 
-// PDFDocumentAuthorAttribute returns the string constant PDFDocumentAuthorAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentAuthorAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentAuthorAttribute())
+// PDFDocumentAuthorAttribute returns the string constant PDFDocumentAuthorAttribute, for use as a dictionary key or argument.
+func PDFDocumentAuthorAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentAuthorAttribute")))
 }
 
-// PDFDocumentSubjectAttribute returns the string constant PDFDocumentSubjectAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentSubjectAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentSubjectAttribute())
+// PDFDocumentSubjectAttribute returns the string constant PDFDocumentSubjectAttribute, for use as a dictionary key or argument.
+func PDFDocumentSubjectAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentSubjectAttribute")))
 }
 
-// PDFDocumentCreatorAttribute returns the string constant PDFDocumentCreatorAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentCreatorAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentCreatorAttribute())
+// PDFDocumentCreatorAttribute returns the string constant PDFDocumentCreatorAttribute, for use as a dictionary key or argument.
+func PDFDocumentCreatorAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentCreatorAttribute")))
 }
 
-// PDFDocumentProducerAttribute returns the string constant PDFDocumentProducerAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentProducerAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentProducerAttribute())
+// PDFDocumentProducerAttribute returns the string constant PDFDocumentProducerAttribute, for use as a dictionary key or argument.
+func PDFDocumentProducerAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentProducerAttribute")))
 }
 
-// PDFDocumentCreationDateAttribute returns the string constant PDFDocumentCreationDateAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentCreationDateAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentCreationDateAttribute())
+// PDFDocumentCreationDateAttribute returns the string constant PDFDocumentCreationDateAttribute, for use as a dictionary key or argument.
+func PDFDocumentCreationDateAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentCreationDateAttribute")))
 }
 
-// PDFDocumentModificationDateAttribute returns the string constant PDFDocumentModificationDateAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentModificationDateAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentModificationDateAttribute())
+// PDFDocumentModificationDateAttribute returns the string constant PDFDocumentModificationDateAttribute, for use as a dictionary key or argument.
+func PDFDocumentModificationDateAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentModificationDateAttribute")))
 }
 
-// PDFDocumentKeywordsAttribute returns the string constant PDFDocumentKeywordsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentKeywordsAttribute() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentKeywordsAttribute())
+// PDFDocumentKeywordsAttribute returns the string constant PDFDocumentKeywordsAttribute, for use as a dictionary key or argument.
+func PDFDocumentKeywordsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentKeywordsAttribute")))
 }
 
-// PDFDocumentOwnerPasswordOption returns the string constant PDFDocumentOwnerPasswordOption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentOwnerPasswordOption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentOwnerPasswordOption())
+// PDFDocumentOwnerPasswordOption returns the string constant PDFDocumentOwnerPasswordOption, for use as a dictionary key or argument.
+func PDFDocumentOwnerPasswordOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentOwnerPasswordOption")))
 }
 
-// PDFDocumentUserPasswordOption returns the string constant PDFDocumentUserPasswordOption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentUserPasswordOption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentUserPasswordOption())
+// PDFDocumentUserPasswordOption returns the string constant PDFDocumentUserPasswordOption, for use as a dictionary key or argument.
+func PDFDocumentUserPasswordOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentUserPasswordOption")))
 }
 
-// PDFDocumentAccessPermissionsOption returns the string constant PDFDocumentAccessPermissionsOption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentAccessPermissionsOption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentAccessPermissionsOption())
+// PDFDocumentAccessPermissionsOption returns the string constant PDFDocumentAccessPermissionsOption, for use as a dictionary key or argument.
+func PDFDocumentAccessPermissionsOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentAccessPermissionsOption")))
 }
 
-// PDFDocumentBurnInAnnotationsOption returns the string constant PDFDocumentBurnInAnnotationsOption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentBurnInAnnotationsOption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentBurnInAnnotationsOption())
+// PDFDocumentBurnInAnnotationsOption returns the string constant PDFDocumentBurnInAnnotationsOption, for use as a dictionary key or argument.
+func PDFDocumentBurnInAnnotationsOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentBurnInAnnotationsOption")))
 }
 
-// PDFDocumentSaveTextFromOCROption returns the string constant PDFDocumentSaveTextFromOCROption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentSaveTextFromOCROption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentSaveTextFromOCROption())
+// PDFDocumentSaveTextFromOCROption returns the string constant PDFDocumentSaveTextFromOCROption, for use as a dictionary key or argument.
+func PDFDocumentSaveTextFromOCROption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentSaveTextFromOCROption")))
 }
 
-// PDFDocumentSaveImagesAsJPEGOption returns the string constant PDFDocumentSaveImagesAsJPEGOption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentSaveImagesAsJPEGOption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentSaveImagesAsJPEGOption())
+// PDFDocumentSaveImagesAsJPEGOption returns the string constant PDFDocumentSaveImagesAsJPEGOption, for use as a dictionary key or argument.
+func PDFDocumentSaveImagesAsJPEGOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentSaveImagesAsJPEGOption")))
 }
 
-// PDFDocumentOptimizeImagesForScreenOption returns the string constant PDFDocumentOptimizeImagesForScreenOption as an objc.ID, for use as a dictionary key or selector argument.
-func PDFDocumentOptimizeImagesForScreenOption() objc.ID {
-	return purego.CFConstant(raw.PDFDocumentOptimizeImagesForScreenOption())
+// PDFDocumentOptimizeImagesForScreenOption returns the string constant PDFDocumentOptimizeImagesForScreenOption, for use as a dictionary key or argument.
+func PDFDocumentOptimizeImagesForScreenOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFDocumentOptimizeImagesForScreenOption")))
 }
 
-// PDFThumbnailViewDocumentEditedNotification returns the string constant PDFThumbnailViewDocumentEditedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func PDFThumbnailViewDocumentEditedNotification() objc.ID {
-	return purego.CFConstant(raw.PDFThumbnailViewDocumentEditedNotification())
+// PDFThumbnailViewDocumentEditedNotification returns the string constant PDFThumbnailViewDocumentEditedNotification, for use as a dictionary key or argument.
+func PDFThumbnailViewDocumentEditedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PDFThumbnailViewDocumentEditedNotification")))
 }

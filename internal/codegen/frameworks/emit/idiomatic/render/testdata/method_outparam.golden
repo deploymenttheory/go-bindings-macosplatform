@@ -1,0 +1,11 @@
+func (x *Serializer) PropertyList(data obj.Object) (obj.Object, PropertyListFormat, error) {
+var _out0 PropertyListFormat
+var _nsErr uintptr
+_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListWithData:format:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+_v := obj.Wrap(_r)
+if _nsErr != 0 {
+return nil, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return _v, _out0, nil
+}
+

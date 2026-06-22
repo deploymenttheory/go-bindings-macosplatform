@@ -5,66 +5,77 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSCharsetRule wraps [raw.DOMCSSCharsetRule] with a fluent Go API.
+// DOMCSSCharsetRule is an idiomatic wrapper over the Objective-C class DOMCSSCharsetRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSCharsetRule struct {
-	inner *raw.DOMCSSCharsetRule
+	DOMCSSRule
 }
 
-// Unwrap returns the underlying [raw.DOMCSSCharsetRule].
-func (x *DOMCSSCharsetRule) Unwrap() *raw.DOMCSSCharsetRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSCharsetRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSCharsetRuleFromID adopts an existing object pointer as a DOMCSSCharsetRule (nil for 0).
+// DOMCSSCharsetRuleFromID adopts an existing Objective-C object as a DOMCSSCharsetRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSCharsetRuleFromID(id objc.ID) *DOMCSSCharsetRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSCharsetRule{inner: raw.DOMCSSCharsetRuleFromID(id)}
-}
-
-// NewDOMCSSCharsetRule creates a new [DOMCSSCharsetRule].
-func NewDOMCSSCharsetRule() *DOMCSSCharsetRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSCharsetRule")), objc.RegisterName("new"))
-	return &DOMCSSCharsetRule{inner: raw.DOMCSSCharsetRuleFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSCharsetRule) WithCssText(cssText string) *DOMCSSCharsetRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSCharsetRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Encoding calls the underlying Encoding.
-func (x *DOMCSSCharsetRule) Encoding() string {
-	_r := x.inner.Encoding()
-	if _r == nil {
-		return ""
+// dOMCSSCharsetRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSCharsetRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSCharsetRuleAdopt(id objc.ID) *DOMCSSCharsetRule {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &DOMCSSCharsetRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DOMCSSCharsetRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
+// NewDOMCSSCharsetRule creates a new DOMCSSCharsetRule.
+func NewDOMCSSCharsetRule() *DOMCSSCharsetRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSCharsetRule")), objc.RegisterName("new"))
+	return dOMCSSCharsetRuleAdopt(_id)
+}
 
-func (x *DOMCSSCharsetRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSCharsetRule) WithCssText(cssText string) *DOMCSSCharsetRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
 
-func (x *DOMCSSCharsetRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+// Encoding wraps the corresponding Objective-C method.
+func (x *DOMCSSCharsetRule) Encoding() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encoding"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // DOMCSSCharsetRuleable is the interface implemented by [DOMCSSCharsetRule], for mocking and DI.
 type DOMCSSCharsetRuleable interface {
-	Unwrap() *raw.DOMCSSCharsetRule
+	obj.Object
 	WithCssText(cssText string) *DOMCSSCharsetRule
 	Encoding() string
 }
 
 var _ DOMCSSCharsetRuleable = (*DOMCSSCharsetRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSCharsetRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSCharsetRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSCharsetRule)(nil)

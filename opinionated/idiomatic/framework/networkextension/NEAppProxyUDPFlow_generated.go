@@ -6,95 +6,71 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object for reading and writing data to and from a UDP conversation being proxied by the provider.
+// NEAppProxyUDPFlow is an idiomatic wrapper over the Objective-C class NEAppProxyUDPFlow.
 //
-// NEAppProxyUDPFlow wraps [raw.NEAppProxyUDPFlow] with a fluent Go API.
+// It embeds [NEAppProxyFlow], promoting that type's methods.
+//
+// An object for reading and writing data to and from a UDP conversation being proxied by the provider.
 type NEAppProxyUDPFlow struct {
-	inner *raw.NEAppProxyUDPFlow
+	NEAppProxyFlow
 }
 
-// Unwrap returns the underlying [raw.NEAppProxyUDPFlow].
-func (x *NEAppProxyUDPFlow) Unwrap() *raw.NEAppProxyUDPFlow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEAppProxyUDPFlow) ID() objc.ID { return x.inner.Ptr() }
-
-// NEAppProxyUDPFlowFromID adopts an existing object pointer as a NEAppProxyUDPFlow (nil for 0).
+// NEAppProxyUDPFlowFromID adopts an existing Objective-C object as a NEAppProxyUDPFlow
+// (nil for 0), retaining it and registering a release finalizer.
 func NEAppProxyUDPFlowFromID(id objc.ID) *NEAppProxyUDPFlow {
 	if id == 0 {
 		return nil
 	}
-	return &NEAppProxyUDPFlow{inner: raw.NEAppProxyUDPFlowFromID(id)}
-}
-
-// NewNEAppProxyUDPFlow creates a new [NEAppProxyUDPFlow].
-func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEAppProxyUDPFlow")), objc.RegisterName("new"))
-	return &NEAppProxyUDPFlow{inner: raw.NEAppProxyUDPFlowFromID(_id)}
-}
-
-// The network interface, if any, used by this flow.
-//
-// WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
-func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow {
-	x.inner.NEAppProxyFlow.SetNetworkInterface(networkInterface)
+	x := &NEAppProxyUDPFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @method readDatagramsAndFlowEndpointsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
-//
-// ReadDatagramsAndFlowEndpointsWithCompletionHandler calls the underlying ReadDatagramsAndFlowEndpointsWithCompletionHandler.
-func (x *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler)
-}
-
-// Read datagrams from the flow.
-//
-// ReadDatagramsWithCompletionHandler calls the underlying ReadDatagramsWithCompletionHandler.
-func (x *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[objc.ID], unsafe.Pointer)) {
-	x.inner.ReadDatagramsWithCompletionHandler(completionHandler)
-}
-
-// @method writeDatagrams:sentByFlowEndpoints:completionHandler: @discussion Write datagrams to the flow. @param datagrams An array of NSData objects containing the data to be written. @param remoteEndpoints The source endpoints of the datagrams. @param completionHandler A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer.
-//
-// WriteDatagramsSentByFlowEndpoints blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error {
-	_ch := make(chan error, 1)
-	x.inner.WriteDatagramsSentByFlowEndpointsCompletionHandler(datagrams, remoteEndpoints, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
+// nEAppProxyUDPFlowAdopt wraps an Objective-C object that this code just created as a
+// NEAppProxyUDPFlow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEAppProxyUDPFlowAdopt(id objc.ID) *NEAppProxyUDPFlow {
+	if id == 0 {
+		return nil
 	}
+	x := &NEAppProxyUDPFlow{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Write datagrams to the flow.
+// NewNEAppProxyUDPFlow creates a new NEAppProxyUDPFlow.
+func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
+	_id := objc.Send[objc.ID](objc.ID(_class("NEAppProxyUDPFlow")), objc.RegisterName("new"))
+	return nEAppProxyUDPFlowAdopt(_id)
+}
+
+// WithNetworkInterface the network interface, if any, used by this flow.
+func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
+	return x
+}
+
+// WriteDatagramsSentByEndpoints write datagrams to the flow.
 //
 // WriteDatagramsSentByEndpoints blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error {
+func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.WriteDatagramsSentByEndpointsCompletionHandler(datagrams, remoteEndpoints, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(remoteEndpoints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -103,32 +79,20 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, d
 	}
 }
 
-// @property localFlowEndpoint @discussion An `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
-//
-// LocalFlowEndpoint calls the underlying LocalFlowEndpoint.
-func (x *NEAppProxyUDPFlow) LocalFlowEndpoint() *foundation.NSObject {
-	return x.inner.LocalFlowEndpoint()
+// LocalFlowEndpoint an `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
+func (x *NEAppProxyUDPFlow) LocalFlowEndpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localFlowEndpoint"))
+	return obj.Wrap(_r)
 }
-
-// @property localEndpoint @discussion An NWEndpoint object containing the local endpoint of the flow's corresponding socket.
-//
-// LocalEndpoint calls the underlying LocalEndpoint.
-func (x *NEAppProxyUDPFlow) LocalEndpoint() unsafe.Pointer {
-	return x.inner.LocalEndpoint()
-}
-
-func (x *NEAppProxyUDPFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return &x.inner.NEAppProxyFlow }
 
 // NEAppProxyUDPFlowable is the interface implemented by [NEAppProxyUDPFlow], for mocking and DI.
 type NEAppProxyUDPFlowable interface {
-	Unwrap() *raw.NEAppProxyUDPFlow
-	WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow
-	ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer, unsafe.Pointer))
-	ReadDatagramsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[objc.ID], unsafe.Pointer))
-	WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error
-	WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error
-	LocalFlowEndpoint() *foundation.NSObject
-	LocalEndpoint() unsafe.Pointer
+	obj.Object
+	WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow
+	WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error
+	LocalFlowEndpoint() obj.Object
 }
 
 var _ NEAppProxyUDPFlowable = (*NEAppProxyUDPFlow)(nil)
+
+var _ NEAppProxyFlowProvider = (*NEAppProxyUDPFlow)(nil)

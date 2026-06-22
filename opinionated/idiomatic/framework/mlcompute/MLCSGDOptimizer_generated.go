@@ -5,73 +5,80 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimizer that represents the stochastic gradient decent algorithm.
+// SGDOptimizer is an idiomatic wrapper over the Objective-C class MLCSGDOptimizer.
 //
-// SGDOptimizer wraps [raw.MLCSGDOptimizer] with a fluent Go API.
+// It embeds [Optimizer], promoting that type's methods.
+//
+// An optimizer that represents the stochastic gradient decent algorithm.
 type SGDOptimizer struct {
-	inner *raw.MLCSGDOptimizer
+	Optimizer
 }
 
-// Unwrap returns the underlying [raw.MLCSGDOptimizer].
-func (x *SGDOptimizer) Unwrap() *raw.MLCSGDOptimizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SGDOptimizer) ID() objc.ID { return x.inner.Ptr() }
-
-// SGDOptimizerFromID adopts an existing object pointer as a SGDOptimizer (nil for 0).
+// SGDOptimizerFromID adopts an existing Objective-C object as a SGDOptimizer
+// (nil for 0), retaining it and registering a release finalizer.
 func SGDOptimizerFromID(id objc.ID) *SGDOptimizer {
 	if id == 0 {
 		return nil
 	}
-	return &SGDOptimizer{inner: raw.MLCSGDOptimizerFromID(id)}
+	x := &SGDOptimizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSGDOptimizer creates a new [SGDOptimizer].
+// sGDOptimizerAdopt wraps an Objective-C object that this code just created as a
+// SGDOptimizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sGDOptimizerAdopt(id objc.ID) *SGDOptimizer {
+	if id == 0 {
+		return nil
+	}
+	x := &SGDOptimizer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSGDOptimizer creates a new SGDOptimizer.
 func NewSGDOptimizer() *SGDOptimizer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCSGDOptimizer")), objc.RegisterName("new"))
-	return &SGDOptimizer{inner: raw.MLCSGDOptimizerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCSGDOptimizer")), objc.RegisterName("new"))
+	return sGDOptimizerAdopt(_id)
 }
 
-// The learning rate.
-//
-// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+// WithLearningRate the learning rate.
 func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
-	x.inner.MLCOptimizer.SetLearningRate(learningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// A Boolean value that indicates whether you apply gradient clipping.
-//
-// WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
+// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
 func (x *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {
-	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// @property   momentumScale @abstract   The momentum factor.  A hyper-parameter. @discussion The default is 0.0.
-//
-// MomentumScale calls the underlying MomentumScale.
+// MomentumScale the momentum factor.  A hyper-parameter. The default is 0.0.
 func (x *SGDOptimizer) MomentumScale() float32 {
-	return x.inner.MomentumScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
+	return _r
 }
 
-// @property   usesNesterovMomentum @abstract   A boolean that specifies whether to apply nesterov momentum or not. @discussion The default is false.
-//
-// UsesNesterovMomentum calls the underlying UsesNesterovMomentum.
+// UsesNesterovMomentum a boolean that specifies whether to apply nesterov momentum or not. The default is false.
 func (x *SGDOptimizer) UsesNesterovMomentum() bool {
-	return x.inner.UsesNesterovMomentum()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesNesterovMomentum"))
+	return _r
 }
-
-func (x *SGDOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
 
 // SGDOptimizerable is the interface implemented by [SGDOptimizer], for mocking and DI.
 type SGDOptimizerable interface {
-	Unwrap() *raw.MLCSGDOptimizer
+	obj.Object
 	WithLearningRate(learningRate float32) *SGDOptimizer
 	WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer
 	MomentumScale() float32
@@ -79,3 +86,5 @@ type SGDOptimizerable interface {
 }
 
 var _ SGDOptimizerable = (*SGDOptimizer)(nil)
+
+var _ OptimizerProvider = (*SGDOptimizer)(nil)

@@ -5,51 +5,59 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data object that contains a single rotation-rate measurement.
+// RotationRateData is an idiomatic wrapper over the Objective-C class CMRotationRateData.
 //
-// RotationRateData wraps [raw.CMRotationRateData] with a fluent Go API.
+// RotationRateData is an abstract base — you do not construct it directly. Construct one of [RecordedRotationRateData] and pass it where a RotationRateData is accepted.
+//
+// A data object that contains a single rotation-rate measurement.
 type RotationRateData struct {
-	inner *raw.CMRotationRateData
+	LogItem
 }
 
-// Unwrap returns the underlying [raw.CMRotationRateData].
-func (x *RotationRateData) Unwrap() *raw.CMRotationRateData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RotationRateData) ID() objc.ID { return x.inner.Ptr() }
-
-// RotationRateDataFromID adopts an existing object pointer as a RotationRateData (nil for 0).
+// RotationRateDataFromID adopts an existing Objective-C object as a RotationRateData
+// (nil for 0), retaining it and registering a release finalizer.
 func RotationRateDataFromID(id objc.ID) *RotationRateData {
 	if id == 0 {
 		return nil
 	}
-	return &RotationRateData{inner: raw.CMRotationRateDataFromID(id)}
+	x := &RotationRateData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRotationRateData creates a new [RotationRateData].
-func NewRotationRateData() *RotationRateData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMRotationRateData")), objc.RegisterName("new"))
-	return &RotationRateData{inner: raw.CMRotationRateDataFromID(_id)}
+// rotationRateDataAdopt wraps an Objective-C object that this code just created as a
+// RotationRateData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rotationRateDataAdopt(id objc.ID) *RotationRateData {
+	if id == 0 {
+		return nil
+	}
+	x := &RotationRateData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
-
-// RotationRate calls the underlying RotationRate.
-func (x *RotationRateData) RotationRate() raw.CMRotationRate {
-	return x.inner.RotationRate()
-}
-
-func (x *RotationRateData) asRotationRateData() *raw.CMRotationRateData { return x.inner }
-
-func (x *RotationRateData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
 
 // RotationRateDataable is the interface implemented by [RotationRateData], for mocking and DI.
 type RotationRateDataable interface {
-	Unwrap() *raw.CMRotationRateData
-	RotationRate() raw.CMRotationRate
+	obj.Object
 }
 
 var _ RotationRateDataable = (*RotationRateData)(nil)
+
+// isRotationRateData marks RotationRateData — and, by embedding promotion, its
+// subclasses — as a member of the RotationRateData hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RotationRateData) isRotationRateData() {}
+
+var _ RotationRateDataProvider = (*RotationRateData)(nil)
+
+var _ LogItemProvider = (*RotationRateData)(nil)

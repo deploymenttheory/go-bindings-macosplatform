@@ -5,80 +5,84 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that stores a clinical record.
+// ClinicalRecord is an idiomatic wrapper over the Objective-C class HKClinicalRecord.
 //
-// ClinicalRecord wraps [raw.HKClinicalRecord] with a fluent Go API.
+// It embeds [Sample], promoting that type's methods.
+//
+// A sample that stores a clinical record.
 type ClinicalRecord struct {
-	inner *raw.HKClinicalRecord
+	Sample
 }
 
-// Unwrap returns the underlying [raw.HKClinicalRecord].
-func (x *ClinicalRecord) Unwrap() *raw.HKClinicalRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClinicalRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// ClinicalRecordFromID adopts an existing object pointer as a ClinicalRecord (nil for 0).
+// ClinicalRecordFromID adopts an existing Objective-C object as a ClinicalRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func ClinicalRecordFromID(id objc.ID) *ClinicalRecord {
 	if id == 0 {
 		return nil
 	}
-	return &ClinicalRecord{inner: raw.HKClinicalRecordFromID(id)}
+	x := &ClinicalRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewClinicalRecord creates a new [ClinicalRecord].
-func NewClinicalRecord() *ClinicalRecord {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKClinicalRecord")), objc.RegisterName("new"))
-	return &ClinicalRecord{inner: raw.HKClinicalRecordFromID(_id)}
-}
-
-// ClinicalType calls the underlying ClinicalType.
-func (x *ClinicalRecord) ClinicalType() *ClinicalType {
-	_r := x.inner.ClinicalType()
-	if _r == nil {
+// clinicalRecordAdopt wraps an Objective-C object that this code just created as a
+// ClinicalRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func clinicalRecordAdopt(id objc.ID) *ClinicalRecord {
+	if id == 0 {
 		return nil
 	}
-	return &ClinicalType{inner: _r}
+	x := &ClinicalRecord{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property     displayName @abstract     The primary display name used in Health. @discussion   The display name is not localized, and is generally expected to be US English.
-//
-// DisplayName calls the underlying DisplayName.
+// NewClinicalRecord creates a new ClinicalRecord.
+func NewClinicalRecord() *ClinicalRecord {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKClinicalRecord")), objc.RegisterName("new"))
+	return clinicalRecordAdopt(_id)
+}
+
+// ClinicalType wraps the corresponding Objective-C method.
+func (x *ClinicalRecord) ClinicalType() *ClinicalType {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clinicalType"))
+	return ClinicalTypeFromID(_r)
+}
+
+// DisplayName the primary display name used in Health. The display name is not localized, and is generally expected to be US English.
 func (x *ClinicalRecord) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property     FHIRResource @abstract     The FHIR resource (where applicable) backing this sample.
-//
-// FHIRResource calls the underlying FHIRResource.
+// FHIRResource the FHIR resource (where applicable) backing this sample.
 func (x *ClinicalRecord) FHIRResource() *FHIRResource {
-	_r := x.inner.FHIRResource()
-	if _r == nil {
-		return nil
-	}
-	return &FHIRResource{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRResource"))
+	return FHIRResourceFromID(_r)
 }
-
-func (x *ClinicalRecord) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *ClinicalRecord) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // ClinicalRecordable is the interface implemented by [ClinicalRecord], for mocking and DI.
 type ClinicalRecordable interface {
-	Unwrap() *raw.HKClinicalRecord
+	obj.Object
 	ClinicalType() *ClinicalType
 	DisplayName() string
 	FHIRResource() *FHIRResource
 }
 
 var _ ClinicalRecordable = (*ClinicalRecord)(nil)
+
+var _ SampleProvider = (*ClinicalRecord)(nil)
+
+var _ ObjectProvider = (*ClinicalRecord)(nil)

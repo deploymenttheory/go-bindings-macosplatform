@@ -5,41 +5,36 @@
 package mediaaccessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @const kMACaptionAppearanceSettingsChangedNotification @abstract CFNotification sent when any user-defined captioning settings are changed.
-// KMACaptionAppearanceSettingsChangedNotification returns the value of the CoreFoundation reference constant kMACaptionAppearanceSettingsChangedNotification as an objc.ID.
-func KMACaptionAppearanceSettingsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.KMACaptionAppearanceSettingsChangedNotification())
+// KMACaptionAppearanceSettingsChangedNotification returns the value of the constant kMACaptionAppearanceSettingsChangedNotification.
+func KMACaptionAppearanceSettingsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMACaptionAppearanceSettingsChangedNotification")))
 }
 
-// MAMediaCharacteristicDescribesMusicAndSoundForAccessibility returns the value of the CoreFoundation reference constant MAMediaCharacteristicDescribesMusicAndSoundForAccessibility as an objc.ID.
-func MAMediaCharacteristicDescribesMusicAndSoundForAccessibility() objc.ID {
-	return purego.CFConstant(raw.MAMediaCharacteristicDescribesMusicAndSoundForAccessibility())
+// MAMediaCharacteristicDescribesMusicAndSoundForAccessibility returns the value of the constant MAMediaCharacteristicDescribesMusicAndSoundForAccessibility.
+func MAMediaCharacteristicDescribesMusicAndSoundForAccessibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MAMediaCharacteristicDescribesMusicAndSoundForAccessibility")))
 }
 
-// @constant MAMediaCharacteristicTranscribesSpokenDialogForAccessibility @abstract A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - transcribes spoken dialog and - identifies speakers whenever other visual cues are insufficient for a viewer to determine who is speaking. @discussion Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with MAMediaCharacteristicDescribesMusicAndSoundForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track that has no spoken dialog can be tagged with this characteristic, because it trivially meets these requirements.
-// MAMediaCharacteristicTranscribesSpokenDialogForAccessibility returns the value of the CoreFoundation reference constant MAMediaCharacteristicTranscribesSpokenDialogForAccessibility as an objc.ID.
-func MAMediaCharacteristicTranscribesSpokenDialogForAccessibility() objc.ID {
-	return purego.CFConstant(raw.MAMediaCharacteristicTranscribesSpokenDialogForAccessibility())
+// MAMediaCharacteristicTranscribesSpokenDialogForAccessibility returns the value of the constant MAMediaCharacteristicTranscribesSpokenDialogForAccessibility.
+func MAMediaCharacteristicTranscribesSpokenDialogForAccessibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MAMediaCharacteristicTranscribesSpokenDialogForAccessibility")))
 }
 
-// @constant kMAAudibleMediaSettingsChangedNotification @abstract CFNotification sent when any user-defined audible media settings are changed.
-// KMAAudibleMediaSettingsChangedNotification returns the value of the CoreFoundation reference constant kMAAudibleMediaSettingsChangedNotification as an objc.ID.
-func KMAAudibleMediaSettingsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.KMAAudibleMediaSettingsChangedNotification())
+// KMAAudibleMediaSettingsChangedNotification returns the value of the constant kMAAudibleMediaSettingsChangedNotification.
+func KMAAudibleMediaSettingsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMAAudibleMediaSettingsChangedNotification")))
 }
 
-// @constant MAMediaCharacteristicDescribesVideoForAccessibility @abstract A media characteristic that indicates that a track or media selection option includes audible content that descries a video for accessibility.
-// MAMediaCharacteristicDescribesVideoForAccessibility returns the value of the CoreFoundation reference constant MAMediaCharacteristicDescribesVideoForAccessibility as an objc.ID.
-func MAMediaCharacteristicDescribesVideoForAccessibility() objc.ID {
-	return purego.CFConstant(raw.MAMediaCharacteristicDescribesVideoForAccessibility())
+// MAMediaCharacteristicDescribesVideoForAccessibility returns the value of the constant MAMediaCharacteristicDescribesVideoForAccessibility.
+func MAMediaCharacteristicDescribesVideoForAccessibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MAMediaCharacteristicDescribesVideoForAccessibility")))
 }
 
-// KMADimFlashingLightsChangedNotification returns the value of the CoreFoundation reference constant kMADimFlashingLightsChangedNotification as an objc.ID.
-func KMADimFlashingLightsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.KMADimFlashingLightsChangedNotification())
+// KMADimFlashingLightsChangedNotification returns the value of the constant kMADimFlashingLightsChangedNotification.
+func KMADimFlashingLightsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMADimFlashingLightsChangedNotification")))
 }

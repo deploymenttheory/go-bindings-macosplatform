@@ -5,41 +5,76 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that uniquely identifies a push notification that a container sends.
+// NotificationID is an idiomatic wrapper over the Objective-C class CKNotificationID.
 //
-// NotificationID wraps [raw.CKNotificationID] with a fluent Go API.
+// An object that uniquely identifies a push notification that a container sends.
 type NotificationID struct {
-	inner *raw.CKNotificationID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKNotificationID].
-func (x *NotificationID) Unwrap() *raw.CKNotificationID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationID) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationIDFromID adopts an existing object pointer as a NotificationID (nil for 0).
+// NotificationIDFromID adopts an existing Objective-C object as a NotificationID
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationIDFromID(id objc.ID) *NotificationID {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationID{inner: raw.CKNotificationIDFromID(id)}
+	x := &NotificationID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationID creates a new [NotificationID].
+// notificationIDAdopt wraps an Objective-C object that this code just created as a
+// NotificationID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationIDAdopt(id objc.ID) *NotificationID {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationID{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotificationID creates a new NotificationID.
 func NewNotificationID() *NotificationID {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKNotificationID")), objc.RegisterName("new"))
-	return &NotificationID{inner: raw.CKNotificationIDFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKNotificationID")), objc.RegisterName("new"))
+	return notificationIDAdopt(_id)
 }
 
 // NotificationIDable is the interface implemented by [NotificationID], for mocking and DI.
 type NotificationIDable interface {
-	Unwrap() *raw.CKNotificationID
+	obj.Object
 }
 
 var _ NotificationIDable = (*NotificationID)(nil)

@@ -5,53 +5,67 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a provisioned payment card for in-app payments.
+// PaymentPass is an idiomatic wrapper over the Objective-C class PKPaymentPass.
 //
-// PaymentPass wraps [raw.PKPaymentPass] with a fluent Go API.
+// It embeds [SecureElementPass], promoting that type's methods.
+//
+// An object that represents a provisioned payment card for in-app payments.
 type PaymentPass struct {
-	inner *raw.PKPaymentPass
+	SecureElementPass
 }
 
-// Unwrap returns the underlying [raw.PKPaymentPass].
-func (x *PaymentPass) Unwrap() *raw.PKPaymentPass { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentPass) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentPassFromID adopts an existing object pointer as a PaymentPass (nil for 0).
+// PaymentPassFromID adopts an existing Objective-C object as a PaymentPass
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentPassFromID(id objc.ID) *PaymentPass {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentPass{inner: raw.PKPaymentPassFromID(id)}
+	x := &PaymentPass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentPass creates a new [PaymentPass].
+// paymentPassAdopt wraps an Objective-C object that this code just created as a
+// PaymentPass (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentPassAdopt(id objc.ID) *PaymentPass {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentPass{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPaymentPass creates a new PaymentPass.
 func NewPaymentPass() *PaymentPass {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentPass")), objc.RegisterName("new"))
-	return &PaymentPass{inner: raw.PKPaymentPassFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentPass")), objc.RegisterName("new"))
+	return paymentPassAdopt(_id)
 }
 
-// ActivationState calls the underlying ActivationState.
-func (x *PaymentPass) ActivationState() PKPaymentPassActivationState {
-	return PKPaymentPassActivationState(x.inner.ActivationState())
+// ActivationState wraps the corresponding Objective-C method.
+func (x *PaymentPass) ActivationState() PaymentPassActivationState {
+	_r := objc.Send[PaymentPassActivationState](objref.IDOf(x), objc.RegisterName("activationState"))
+	return _r
 }
-
-func (x *PaymentPass) asSecureElementPass() *raw.PKSecureElementPass {
-	return &x.inner.PKSecureElementPass
-}
-
-func (x *PaymentPass) asPass() *raw.PKPass { return &x.inner.PKSecureElementPass.PKPass }
 
 // PaymentPassable is the interface implemented by [PaymentPass], for mocking and DI.
 type PaymentPassable interface {
-	Unwrap() *raw.PKPaymentPass
-	ActivationState() PKPaymentPassActivationState
+	obj.Object
+	ActivationState() PaymentPassActivationState
 }
 
 var _ PaymentPassable = (*PaymentPass)(nil)
+
+var _ SecureElementPassProvider = (*PaymentPass)(nil)
+
+var _ PassProvider = (*PaymentPass)(nil)

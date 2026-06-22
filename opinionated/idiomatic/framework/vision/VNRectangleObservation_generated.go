@@ -5,72 +5,75 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the four vertices of a detected rectangle.
+// RectangleObservation is an idiomatic wrapper over the Objective-C class VNRectangleObservation.
 //
-// RectangleObservation wraps [raw.VNRectangleObservation] with a fluent Go API.
+// RectangleObservation is an abstract base — you do not construct it directly. Construct one of [BarcodeObservation], [RecognizedTextObservation], [TextObservation] and pass it where a RectangleObservation is accepted.
+//
+// An object that represents the four vertices of a detected rectangle.
 type RectangleObservation struct {
-	inner *raw.VNRectangleObservation
+	DetectedObjectObservation
 }
 
-// Unwrap returns the underlying [raw.VNRectangleObservation].
-func (x *RectangleObservation) Unwrap() *raw.VNRectangleObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RectangleObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// RectangleObservationFromID adopts an existing object pointer as a RectangleObservation (nil for 0).
+// RectangleObservationFromID adopts an existing Objective-C object as a RectangleObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func RectangleObservationFromID(id objc.ID) *RectangleObservation {
 	if id == 0 {
 		return nil
 	}
-	return &RectangleObservation{inner: raw.VNRectangleObservationFromID(id)}
+	x := &RectangleObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRectangleObservation creates a new [RectangleObservation].
-func NewRectangleObservation() *RectangleObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRectangleObservation")), objc.RegisterName("new"))
-	return &RectangleObservation{inner: raw.VNRectangleObservationFromID(_id)}
+// rectangleObservationAdopt wraps an Objective-C object that this code just created as a
+// RectangleObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rectangleObservationAdopt(id objc.ID) *RectangleObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &RectangleObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// TopLeft calls the underlying TopLeft.
+// TopLeft wraps the corresponding Objective-C method.
 func (x *RectangleObservation) TopLeft() corefoundation.CGPoint {
-	return x.inner.TopLeft()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+	return _r
 }
 
-// TopRight calls the underlying TopRight.
+// TopRight wraps the corresponding Objective-C method.
 func (x *RectangleObservation) TopRight() corefoundation.CGPoint {
-	return x.inner.TopRight()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+	return _r
 }
 
-// BottomLeft calls the underlying BottomLeft.
+// BottomLeft wraps the corresponding Objective-C method.
 func (x *RectangleObservation) BottomLeft() corefoundation.CGPoint {
-	return x.inner.BottomLeft()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+	return _r
 }
 
-// BottomRight calls the underlying BottomRight.
+// BottomRight wraps the corresponding Objective-C method.
 func (x *RectangleObservation) BottomRight() corefoundation.CGPoint {
-	return x.inner.BottomRight()
-}
-
-func (x *RectangleObservation) asRectangleObservation() *raw.VNRectangleObservation { return x.inner }
-
-func (x *RectangleObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return &x.inner.VNDetectedObjectObservation
-}
-
-func (x *RectangleObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNDetectedObjectObservation.VNObservation
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+	return _r
 }
 
 // RectangleObservationable is the interface implemented by [RectangleObservation], for mocking and DI.
 type RectangleObservationable interface {
-	Unwrap() *raw.VNRectangleObservation
+	obj.Object
 	TopLeft() corefoundation.CGPoint
 	TopRight() corefoundation.CGPoint
 	BottomLeft() corefoundation.CGPoint
@@ -78,3 +81,14 @@ type RectangleObservationable interface {
 }
 
 var _ RectangleObservationable = (*RectangleObservation)(nil)
+
+// isRectangleObservation marks RectangleObservation — and, by embedding promotion, its
+// subclasses — as a member of the RectangleObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RectangleObservation) isRectangleObservation() {}
+
+var _ RectangleObservationProvider = (*RectangleObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*RectangleObservation)(nil)
+
+var _ ObservationProvider = (*RectangleObservation)(nil)

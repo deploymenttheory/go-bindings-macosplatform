@@ -5,54 +5,49 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant kGLKModelErrorDomain
-// KGLKModelErrorDomain returns the string constant kGLKModelErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KGLKModelErrorDomain() objc.ID {
-	return purego.CFConstant(raw.KGLKModelErrorDomain())
+// KGLKModelErrorDomain returns the string constant kGLKModelErrorDomain, for use as a dictionary key or argument.
+func KGLKModelErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kGLKModelErrorDomain")))
 }
 
-// @constant kGLKModelErrorKey
-// KGLKModelErrorKey returns the string constant kGLKModelErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func KGLKModelErrorKey() objc.ID {
-	return purego.CFConstant(raw.KGLKModelErrorKey())
+// KGLKModelErrorKey returns the string constant kGLKModelErrorKey, for use as a dictionary key or argument.
+func KGLKModelErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kGLKModelErrorKey"))) }
+
+// GLKTextureLoaderApplyPremultiplication returns the string constant GLKTextureLoaderApplyPremultiplication, for use as a dictionary key or argument.
+func GLKTextureLoaderApplyPremultiplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderApplyPremultiplication")))
 }
 
-// GLKTextureLoaderApplyPremultiplication returns the string constant GLKTextureLoaderApplyPremultiplication as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderApplyPremultiplication() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderApplyPremultiplication())
+// GLKTextureLoaderGenerateMipmaps returns the string constant GLKTextureLoaderGenerateMipmaps, for use as a dictionary key or argument.
+func GLKTextureLoaderGenerateMipmaps() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderGenerateMipmaps")))
 }
 
-// GLKTextureLoaderGenerateMipmaps returns the string constant GLKTextureLoaderGenerateMipmaps as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderGenerateMipmaps() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderGenerateMipmaps())
+// GLKTextureLoaderOriginBottomLeft returns the string constant GLKTextureLoaderOriginBottomLeft, for use as a dictionary key or argument.
+func GLKTextureLoaderOriginBottomLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderOriginBottomLeft")))
 }
 
-// GLKTextureLoaderOriginBottomLeft returns the string constant GLKTextureLoaderOriginBottomLeft as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderOriginBottomLeft() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderOriginBottomLeft())
+// GLKTextureLoaderSRGB returns the string constant GLKTextureLoaderSRGB, for use as a dictionary key or argument.
+func GLKTextureLoaderSRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderSRGB")))
 }
 
-// GLKTextureLoaderSRGB returns the string constant GLKTextureLoaderSRGB as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderSRGB() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderSRGB())
+// GLKTextureLoaderErrorDomain returns the string constant GLKTextureLoaderErrorDomain, for use as a dictionary key or argument.
+func GLKTextureLoaderErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderErrorDomain")))
 }
 
-// GLKTextureLoaderErrorDomain returns the string constant GLKTextureLoaderErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderErrorDomain() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderErrorDomain())
+// GLKTextureLoaderErrorKey returns the string constant GLKTextureLoaderErrorKey, for use as a dictionary key or argument.
+func GLKTextureLoaderErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderErrorKey")))
 }
 
-// GLKTextureLoaderErrorKey returns the string constant GLKTextureLoaderErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderErrorKey() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderErrorKey())
-}
-
-// GLKTextureLoaderGLErrorKey returns the string constant GLKTextureLoaderGLErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func GLKTextureLoaderGLErrorKey() objc.ID {
-	return purego.CFConstant(raw.GLKTextureLoaderGLErrorKey())
+// GLKTextureLoaderGLErrorKey returns the string constant GLKTextureLoaderGLErrorKey, for use as a dictionary key or argument.
+func GLKTextureLoaderGLErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderGLErrorKey")))
 }

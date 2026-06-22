@@ -5,92 +5,110 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a layer in a NeuralNetwork.
+// ModelStructureNeuralNetworkLayer is an idiomatic wrapper over the Objective-C class MLModelStructureNeuralNetworkLayer.
 //
-// ModelStructureNeuralNetworkLayer wraps [raw.MLModelStructureNeuralNetworkLayer] with a fluent Go API.
+// A class representing a layer in a NeuralNetwork.
 type ModelStructureNeuralNetworkLayer struct {
-	inner *raw.MLModelStructureNeuralNetworkLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructureNeuralNetworkLayer].
-func (x *ModelStructureNeuralNetworkLayer) Unwrap() *raw.MLModelStructureNeuralNetworkLayer {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructureNeuralNetworkLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureNeuralNetworkLayerFromID adopts an existing object pointer as a ModelStructureNeuralNetworkLayer (nil for 0).
+// ModelStructureNeuralNetworkLayerFromID adopts an existing Objective-C object as a ModelStructureNeuralNetworkLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureNeuralNetworkLayerFromID(id objc.ID) *ModelStructureNeuralNetworkLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructureNeuralNetworkLayer{inner: raw.MLModelStructureNeuralNetworkLayerFromID(id)}
+	x := &ModelStructureNeuralNetworkLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructureNeuralNetworkLayer creates a new [ModelStructureNeuralNetworkLayer].
+// modelStructureNeuralNetworkLayerAdopt wraps an Objective-C object that this code just created as a
+// ModelStructureNeuralNetworkLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureNeuralNetworkLayerAdopt(id objc.ID) *ModelStructureNeuralNetworkLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructureNeuralNetworkLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructureNeuralNetworkLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructureNeuralNetworkLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructureNeuralNetworkLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureNeuralNetworkLayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModelStructureNeuralNetworkLayer creates a new ModelStructureNeuralNetworkLayer.
 func NewModelStructureNeuralNetworkLayer() *ModelStructureNeuralNetworkLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureNeuralNetworkLayer")), objc.RegisterName("new"))
-	return &ModelStructureNeuralNetworkLayer{inner: raw.MLModelStructureNeuralNetworkLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureNeuralNetworkLayer")), objc.RegisterName("new"))
+	return modelStructureNeuralNetworkLayerAdopt(_id)
 }
 
-// The layer name.
-//
-// Name calls the underlying Name.
+// Name the layer name.
 func (x *ModelStructureNeuralNetworkLayer) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The type of the layer, e,g, "elementwise", "pooling", etc.
-//
-// Type calls the underlying Type.
+// Type the type of the layer, e,g, "elementwise", "pooling", etc.
 func (x *ModelStructureNeuralNetworkLayer) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The input names.
+// InputNames the input names.
 //
 // InputNames returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
-	arr := x.inner.InputNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// The output names.
+// OutputNames the output names.
 //
 // OutputNames returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetworkLayer) OutputNames() []string {
-	arr := x.inner.OutputNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ModelStructureNeuralNetworkLayerable is the interface implemented by [ModelStructureNeuralNetworkLayer], for mocking and DI.
 type ModelStructureNeuralNetworkLayerable interface {
-	Unwrap() *raw.MLModelStructureNeuralNetworkLayer
+	obj.Object
 	Name() string
 	Type() string
 	InputNames() []string

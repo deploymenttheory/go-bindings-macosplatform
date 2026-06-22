@@ -5,59 +5,91 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The values to use as inputs to the salts for deriving the symmetric key.
+// AuthorizationPublicKeyCredentialPRFAssertionInputValues is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFAssertionInputValues.
 //
-// AuthorizationPublicKeyCredentialPRFAssertionInputValues wraps [raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues] with a fluent Go API.
+// The values to use as inputs to the salts for deriving the symmetric key.
 type AuthorizationPublicKeyCredentialPRFAssertionInputValues struct {
-	inner *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues].
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialPRFAssertionInputValues (nil for 0).
+// AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID adopts an existing Objective-C object as a AuthorizationPublicKeyCredentialPRFAssertionInputValues
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id objc.ID) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id)}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionInputValues{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an input values object with the given salts.
-//
-// NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 creates a new [AuthorizationPublicKeyCredentialPRFAssertionInputValues].
-func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2(saltInput1 *foundation.NSData, saltInput2 *foundation.NSData) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSaltInput1:saltInput2:"), saltInput1.Ptr(), saltInput2.Ptr())
-	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_id)}
+// authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPublicKeyCredentialPRFAssertionInputValues (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(id objc.ID) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionInputValues{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SaltInput1 calls the underlying SaltInput1.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() *foundation.NSData {
-	return x.inner.SaltInput1()
+// Description returns the object's -description text.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SaltInput2 calls the underlying SaltInput2.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() *foundation.NSData {
-	return x.inner.SaltInput2()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 initializes an input values object with the given salts.
+func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2(saltInput1 obj.Object, saltInput2 obj.Object) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSaltInput1:saltInput2:"), objref.IDOf(saltInput1), objref.IDOf(saltInput2))
+	return authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(_id)
+}
+
+// SaltInput1 wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saltInput1"))
+	return obj.Wrap(_r)
+}
+
+// SaltInput2 wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saltInput2"))
+	return obj.Wrap(_r)
 }
 
 // AuthorizationPublicKeyCredentialPRFAssertionInputValuesable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionInputValues], for mocking and DI.
 type AuthorizationPublicKeyCredentialPRFAssertionInputValuesable interface {
-	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues
-	SaltInput1() *foundation.NSData
-	SaltInput2() *foundation.NSData
+	obj.Object
+	SaltInput1() obj.Object
+	SaltInput2() obj.Object
 }
 
 var _ AuthorizationPublicKeyCredentialPRFAssertionInputValuesable = (*AuthorizationPublicKeyCredentialPRFAssertionInputValues)(nil)

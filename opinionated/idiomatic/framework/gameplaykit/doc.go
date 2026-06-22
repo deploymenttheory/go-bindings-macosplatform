@@ -3,4 +3,21 @@
 //go:build darwin
 
 // Package gameplaykit provides a fluent Go API over the macOS GameplayKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Agent: [Agent2D], [Agent3D]
+//   - Behavior: [CompositeBehavior]
+//   - CoherentNoiseSource: [BillowNoiseSource], [PerlinNoiseSource], [RidgedNoiseSource]
+//   - Component: [Agent], [SCNNodeComponent], [SKNodeComponent]
+//   - Graph: [GridGraph], [MeshGraph], [ObstacleGraph]
+//   - GraphNode: [GraphNode2D], [GraphNode3D], [GridGraphNode]
+//   - NoiseSource: [CheckerboardNoiseSource], [CoherentNoiseSource], [ConstantNoiseSource], [CylindersNoiseSource], [SpheresNoiseSource], [VoronoiNoiseSource]
+//   - Obstacle: [CircleObstacle], [PolygonObstacle], [SphereObstacle]
+//   - RandomDistribution: [GaussianDistribution], [ShuffledDistribution]
+//   - RandomSource: [ARC4RandomSource], [LinearCongruentialRandomSource], [MersenneTwisterRandomSource]
+//   - Rule: [NSPredicateRule]
 package gameplaykit

@@ -5,48 +5,81 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// LocalizedNumberFormatRule wraps [raw.NSLocalizedNumberFormatRule] with a fluent Go API.
+// LocalizedNumberFormatRule is an idiomatic wrapper over the Objective-C class NSLocalizedNumberFormatRule.
 type LocalizedNumberFormatRule struct {
-	inner *raw.NSLocalizedNumberFormatRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLocalizedNumberFormatRule].
-func (x *LocalizedNumberFormatRule) Unwrap() *raw.NSLocalizedNumberFormatRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalizedNumberFormatRule) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalizedNumberFormatRuleFromID adopts an existing object pointer as a LocalizedNumberFormatRule (nil for 0).
+// LocalizedNumberFormatRuleFromID adopts an existing Objective-C object as a LocalizedNumberFormatRule
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalizedNumberFormatRuleFromID(id objc.ID) *LocalizedNumberFormatRule {
 	if id == 0 {
 		return nil
 	}
-	return &LocalizedNumberFormatRule{inner: raw.NSLocalizedNumberFormatRuleFromID(id)}
-}
-
-// NewLocalizedNumberFormatRule creates a new [LocalizedNumberFormatRule].
-func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLocalizedNumberFormatRule")), objc.RegisterName("new"))
-	return &LocalizedNumberFormatRule{inner: raw.NSLocalizedNumberFormatRuleFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LocalizedNumberFormatRule {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &LocalizedNumberFormatRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *LocalizedNumberFormatRule) asObject() *raw.NSObject { return &x.inner.NSObject }
+// localizedNumberFormatRuleAdopt wraps an Objective-C object that this code just created as a
+// LocalizedNumberFormatRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localizedNumberFormatRuleAdopt(id objc.ID) *LocalizedNumberFormatRule {
+	if id == 0 {
+		return nil
+	}
+	x := &LocalizedNumberFormatRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocalizedNumberFormatRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalizedNumberFormatRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalizedNumberFormatRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalizedNumberFormatRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalizedNumberFormatRule creates a new LocalizedNumberFormatRule.
+func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLocalizedNumberFormatRule")), objc.RegisterName("new"))
+	return localizedNumberFormatRuleAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // LocalizedNumberFormatRuleable is the interface implemented by [LocalizedNumberFormatRule], for mocking and DI.
 type LocalizedNumberFormatRuleable interface {
-	Unwrap() *raw.NSLocalizedNumberFormatRule
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LocalizedNumberFormatRule
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule
 }
 
 var _ LocalizedNumberFormatRuleable = (*LocalizedNumberFormatRule)(nil)

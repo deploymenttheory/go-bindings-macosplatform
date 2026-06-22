@@ -5,73 +5,79 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result from a filter data provder for subsequent chunks of data on a flow.
+// NEFilterDataVerdict is an idiomatic wrapper over the Objective-C class NEFilterDataVerdict.
 //
-// NEFilterDataVerdict wraps [raw.NEFilterDataVerdict] with a fluent Go API.
+// It embeds [NEFilterVerdict], promoting that type's methods.
+//
+// The result from a filter data provder for subsequent chunks of data on a flow.
 type NEFilterDataVerdict struct {
-	inner *raw.NEFilterDataVerdict
+	NEFilterVerdict
 }
 
-// Unwrap returns the underlying [raw.NEFilterDataVerdict].
-func (x *NEFilterDataVerdict) Unwrap() *raw.NEFilterDataVerdict { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterDataVerdict) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterDataVerdictFromID adopts an existing object pointer as a NEFilterDataVerdict (nil for 0).
+// NEFilterDataVerdictFromID adopts an existing Objective-C object as a NEFilterDataVerdict
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterDataVerdictFromID(id objc.ID) *NEFilterDataVerdict {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterDataVerdict{inner: raw.NEFilterDataVerdictFromID(id)}
+	x := &NEFilterDataVerdict{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEFilterDataVerdict creates a new [NEFilterDataVerdict].
+// nEFilterDataVerdictAdopt wraps an Objective-C object that this code just created as a
+// NEFilterDataVerdict (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterDataVerdictAdopt(id objc.ID) *NEFilterDataVerdict {
+	if id == 0 {
+		return nil
+	}
+	x := &NEFilterDataVerdict{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNEFilterDataVerdict creates a new NEFilterDataVerdict.
 func NewNEFilterDataVerdict() *NEFilterDataVerdict {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterDataVerdict")), objc.RegisterName("new"))
-	return &NEFilterDataVerdict{inner: raw.NEFilterDataVerdictFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("new"))
+	return nEFilterDataVerdictAdopt(_id)
 }
 
-// The frequencty at which to provide flow statistics to the data provider.
-//
-// WithStatisticsReportFrequency sets the statisticsReportFrequency property and returns the receiver for chaining.
+// WithStatisticsReportFrequency the frequencty at which to provide flow statistics to the data provider.
 func (x *NEFilterDataVerdict) WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterDataVerdict {
-	x.inner.SetStatisticsReportFrequency(raw.NEFilterReportFrequency(statisticsReportFrequency))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
 	return x
 }
 
-// A Boolean value that indicates whether to send a report to the control provider when processing this verdict.
-//
-// WithShouldReport sets the shouldReport property and returns the receiver for chaining.
+// WithShouldReport a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
 func (x *NEFilterDataVerdict) WithShouldReport(shouldReport bool) *NEFilterDataVerdict {
-	x.inner.NEFilterVerdict.SetShouldReport(shouldReport)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
 	return x
 }
 
-// @property statisticsReportFrequency @discussion The frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
-//
-// StatisticsReportFrequency calls the underlying StatisticsReportFrequency.
+// StatisticsReportFrequency the frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
 func (x *NEFilterDataVerdict) StatisticsReportFrequency() NEFilterReportFrequency {
-	return NEFilterReportFrequency(x.inner.StatisticsReportFrequency())
+	_r := objc.Send[NEFilterReportFrequency](objref.IDOf(x), objc.RegisterName("statisticsReportFrequency"))
+	return _r
 }
 
-// SetStatisticsReportFrequency calls the underlying SetStatisticsReportFrequency.
+// SetStatisticsReportFrequency wraps the corresponding Objective-C method.
 func (x *NEFilterDataVerdict) SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) {
-	x.inner.SetStatisticsReportFrequency(raw.NEFilterReportFrequency(statisticsReportFrequency))
-}
-
-func (x *NEFilterDataVerdict) asNEFilterVerdict() *raw.NEFilterVerdict {
-	return &x.inner.NEFilterVerdict
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatisticsReportFrequency:"), statisticsReportFrequency)
 }
 
 // NEFilterDataVerdictable is the interface implemented by [NEFilterDataVerdict], for mocking and DI.
 type NEFilterDataVerdictable interface {
-	Unwrap() *raw.NEFilterDataVerdict
+	obj.Object
 	WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterDataVerdict
 	WithShouldReport(shouldReport bool) *NEFilterDataVerdict
 	StatisticsReportFrequency() NEFilterReportFrequency
@@ -79,3 +85,5 @@ type NEFilterDataVerdictable interface {
 }
 
 var _ NEFilterDataVerdictable = (*NEFilterDataVerdict)(nil)
+
+var _ NEFilterVerdictProvider = (*NEFilterDataVerdict)(nil)

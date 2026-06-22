@@ -5,51 +5,83 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A distance over which the framework fades out sound.
+// DistanceModelFadeOutParameters is an idiomatic wrapper over the Objective-C class PHASEDistanceModelFadeOutParameters.
 //
-// DistanceModelFadeOutParameters wraps [raw.PHASEDistanceModelFadeOutParameters] with a fluent Go API.
+// A distance over which the framework fades out sound.
 type DistanceModelFadeOutParameters struct {
-	inner *raw.PHASEDistanceModelFadeOutParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEDistanceModelFadeOutParameters].
-func (x *DistanceModelFadeOutParameters) Unwrap() *raw.PHASEDistanceModelFadeOutParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DistanceModelFadeOutParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// DistanceModelFadeOutParametersFromID adopts an existing object pointer as a DistanceModelFadeOutParameters (nil for 0).
+// DistanceModelFadeOutParametersFromID adopts an existing Objective-C object as a DistanceModelFadeOutParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func DistanceModelFadeOutParametersFromID(id objc.ID) *DistanceModelFadeOutParameters {
 	if id == 0 {
 		return nil
 	}
-	return &DistanceModelFadeOutParameters{inner: raw.PHASEDistanceModelFadeOutParametersFromID(id)}
+	x := &DistanceModelFadeOutParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a distance beyond which sound sources stop playing.
-//
-// NewDistanceModelFadeOutParametersWithCullDistance creates a new [DistanceModelFadeOutParameters].
+// distanceModelFadeOutParametersAdopt wraps an Objective-C object that this code just created as a
+// DistanceModelFadeOutParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func distanceModelFadeOutParametersAdopt(id objc.ID) *DistanceModelFadeOutParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &DistanceModelFadeOutParameters{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DistanceModelFadeOutParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DistanceModelFadeOutParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DistanceModelFadeOutParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DistanceModelFadeOutParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDistanceModelFadeOutParametersWithCullDistance creates a distance beyond which sound sources stop playing.
 func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *DistanceModelFadeOutParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDistanceModelFadeOutParameters")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEDistanceModelFadeOutParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCullDistance:"), cullDistance)
-	return &DistanceModelFadeOutParameters{inner: raw.PHASEDistanceModelFadeOutParametersFromID(_id)}
+	return distanceModelFadeOutParametersAdopt(_id)
 }
 
-// CullDistance calls the underlying CullDistance.
+// CullDistance wraps the corresponding Objective-C method.
 func (x *DistanceModelFadeOutParameters) CullDistance() float64 {
-	return x.inner.CullDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cullDistance"))
+	return _r
 }
 
 // DistanceModelFadeOutParametersable is the interface implemented by [DistanceModelFadeOutParameters], for mocking and DI.
 type DistanceModelFadeOutParametersable interface {
-	Unwrap() *raw.PHASEDistanceModelFadeOutParameters
+	obj.Object
 	CullDistance() float64
 }
 

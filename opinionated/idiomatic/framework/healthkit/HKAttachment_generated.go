@@ -5,96 +5,121 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A file that is attached to a sample in the HealthKit store.
+// Attachment is an idiomatic wrapper over the Objective-C class HKAttachment.
 //
-// Attachment wraps [raw.HKAttachment] with a fluent Go API.
+// A file that is attached to a sample in the HealthKit store.
 type Attachment struct {
-	inner *raw.HKAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKAttachment].
-func (x *Attachment) Unwrap() *raw.HKAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Attachment) ID() objc.ID { return x.inner.Ptr() }
-
-// AttachmentFromID adopts an existing object pointer as a Attachment (nil for 0).
+// AttachmentFromID adopts an existing Objective-C object as a Attachment
+// (nil for 0), retaining it and registering a release finalizer.
 func AttachmentFromID(id objc.ID) *Attachment {
 	if id == 0 {
 		return nil
 	}
-	return &Attachment{inner: raw.HKAttachmentFromID(id)}
+	x := &Attachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAttachment creates a new [Attachment].
+// attachmentAdopt wraps an Objective-C object that this code just created as a
+// Attachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attachmentAdopt(id objc.ID) *Attachment {
+	if id == 0 {
+		return nil
+	}
+	x := &Attachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Attachment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Attachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Attachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttachment creates a new Attachment.
 func NewAttachment() *Attachment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAttachment")), objc.RegisterName("new"))
-	return &Attachment{inner: raw.HKAttachmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKAttachment")), objc.RegisterName("new"))
+	return attachmentAdopt(_id)
 }
 
-// @property      identifier @abstract      A unique identifier of the receiver in the HealthKit database.
-//
-// Identifier calls the underlying Identifier.
-func (x *Attachment) Identifier() *foundation.NSUUID {
-	return x.inner.Identifier()
+// Identifier a unique identifier of the receiver in the HealthKit database.
+func (x *Attachment) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
-// @property      name @abstract      Represents the name of the file.
-//
-// Name calls the underlying Name.
+// Name represents the name of the file.
 func (x *Attachment) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      contentType @abstract      The Uniform Type of the file.
-//
-// ContentType calls the underlying ContentType.
-func (x *Attachment) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+// ContentType the Uniform Type of the file.
+func (x *Attachment) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// @property      size @abstract      The size in bytes of the file.
-//
-// Size calls the underlying Size.
+// Size the size in bytes of the file.
 func (x *Attachment) Size() int {
-	return x.inner.Size()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
 
-// @property      creationDate @abstract      The date the receiver was created.
-//
-// CreationDate calls the underlying CreationDate.
-func (x *Attachment) CreationDate() *foundation.NSDate {
-	return x.inner.CreationDate()
+// CreationDate the date the receiver was created.
+func (x *Attachment) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      metadata @abstract      Extra information describing the attachment. @discussion    Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
-//
-// Metadata calls the underlying Metadata.
-func (x *Attachment) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Metadata()
+// Metadata extra information describing the attachment. Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
+func (x *Attachment) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
 
 // Attachmentable is the interface implemented by [Attachment], for mocking and DI.
 type Attachmentable interface {
-	Unwrap() *raw.HKAttachment
-	Identifier() *foundation.NSUUID
+	obj.Object
+	Identifier() obj.Object
 	Name() string
-	ContentType() *uniformtypeidentifiers.UTType
+	ContentType() obj.Object
 	Size() int
-	CreationDate() *foundation.NSDate
-	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	CreationDate() obj.Object
+	Metadata() obj.Object
 }
 
 var _ Attachmentable = (*Attachment)(nil)

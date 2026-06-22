@@ -5,70 +5,101 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGeneralDiagnosticsClusterPayloadTestResponseParams wraps [raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterPayloadTestResponseParams is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterPayloadTestResponseParams.
 type MTRGeneralDiagnosticsClusterPayloadTestResponseParams struct {
-	inner *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams].
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterPayloadTestResponseParams (nil for 0).
+// MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterPayloadTestResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{inner: raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(id)}
-}
-
-// Initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError creates a new [MTRGeneralDiagnosticsClusterPayloadTestResponseParams].
-func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterPayloadTestResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{inner: raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(_id)}, nil
-}
-
-// WithPayload sets the payload property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload *foundation.NSData) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
-	x.inner.SetPayload(payload)
+	x := &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Payload calls the underlying Payload.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() *foundation.NSData {
-	return x.inner.Payload()
+// mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterPayloadTestResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPayload calls the underlying SetPayload.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) SetPayload(payload *foundation.NSData) {
-	x.inner.SetPayload(payload)
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralDiagnosticsClusterPayloadTestResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterPayloadTestResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(_id), nil
+}
+
+// WithPayload sets the property and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayload:"), objref.IDOf(payload))
+	return x
+}
+
+// Payload wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payload"))
+	return obj.Wrap(_r)
+}
+
+// SetPayload wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) SetPayload(payload obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayload:"), objref.IDOf(payload))
 }
 
 // MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterPayloadTestResponseParams], for mocking and DI.
 type MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams
-	WithPayload(payload *foundation.NSData) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams
-	Payload() *foundation.NSData
-	SetPayload(payload *foundation.NSData)
+	obj.Object
+	WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams
+	Payload() obj.Object
+	SetPayload(payload obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable = (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams)(nil)

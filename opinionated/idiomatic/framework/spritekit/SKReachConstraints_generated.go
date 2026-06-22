@@ -5,84 +5,111 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification of the degree of freedom when solving inverse kinematics.
+// ReachConstraints is an idiomatic wrapper over the Objective-C class SKReachConstraints.
 //
-// ReachConstraints wraps [raw.SKReachConstraints] with a fluent Go API.
+// A specification of the degree of freedom when solving inverse kinematics.
 type ReachConstraints struct {
-	inner *raw.SKReachConstraints
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKReachConstraints].
-func (x *ReachConstraints) Unwrap() *raw.SKReachConstraints { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReachConstraints) ID() objc.ID { return x.inner.Ptr() }
-
-// ReachConstraintsFromID adopts an existing object pointer as a ReachConstraints (nil for 0).
+// ReachConstraintsFromID adopts an existing Objective-C object as a ReachConstraints
+// (nil for 0), retaining it and registering a release finalizer.
 func ReachConstraintsFromID(id objc.ID) *ReachConstraints {
 	if id == 0 {
 		return nil
 	}
-	return &ReachConstraints{inner: raw.SKReachConstraintsFromID(id)}
+	x := &ReachConstraints{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new reach constraint object.
-//
-// NewReachConstraintsWithLowerAngleLimitUpperAngleLimit creates a new [ReachConstraints].
+// reachConstraintsAdopt wraps an Objective-C object that this code just created as a
+// ReachConstraints (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func reachConstraintsAdopt(id objc.ID) *ReachConstraints {
+	if id == 0 {
+		return nil
+	}
+	x := &ReachConstraints{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ReachConstraints) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ReachConstraints) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ReachConstraints) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ReachConstraints) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewReachConstraintsWithLowerAngleLimitUpperAngleLimit initializes a new reach constraint object.
 func NewReachConstraintsWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float64, upperAngleLimit float64) *ReachConstraints {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReachConstraints")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReachConstraints")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerAngleLimit:upperAngleLimit:"), lowerAngleLimit, upperAngleLimit)
-	return &ReachConstraints{inner: raw.SKReachConstraintsFromID(_id)}
+	return reachConstraintsAdopt(_id)
 }
 
-// The minimum angle that the node can have after it is rotated by a reach event.
-//
-// WithLowerAngleLimit sets the lowerAngleLimit property and returns the receiver for chaining.
+// WithLowerAngleLimit the minimum angle that the node can have after it is rotated by a reach event.
 func (x *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints {
-	x.inner.SetLowerAngleLimit(lowerAngleLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
 	return x
 }
 
-// The maximum angle that the node can have after it is rotated by a reach event.
-//
-// WithUpperAngleLimit sets the upperAngleLimit property and returns the receiver for chaining.
+// WithUpperAngleLimit the maximum angle that the node can have after it is rotated by a reach event.
 func (x *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints {
-	x.inner.SetUpperAngleLimit(upperAngleLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
 	return x
 }
 
-// Lower angle limit in radians
-//
-// LowerAngleLimit calls the underlying LowerAngleLimit.
+// LowerAngleLimit lower angle limit in radians
 func (x *ReachConstraints) LowerAngleLimit() float64 {
-	return x.inner.LowerAngleLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerAngleLimit"))
+	return _r
 }
 
-// SetLowerAngleLimit calls the underlying SetLowerAngleLimit.
+// SetLowerAngleLimit wraps the corresponding Objective-C method.
 func (x *ReachConstraints) SetLowerAngleLimit(lowerAngleLimit float64) {
-	x.inner.SetLowerAngleLimit(lowerAngleLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
 }
 
-// Upper angle limit in radians
-//
-// UpperAngleLimit calls the underlying UpperAngleLimit.
+// UpperAngleLimit upper angle limit in radians
 func (x *ReachConstraints) UpperAngleLimit() float64 {
-	return x.inner.UpperAngleLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperAngleLimit"))
+	return _r
 }
 
-// SetUpperAngleLimit calls the underlying SetUpperAngleLimit.
+// SetUpperAngleLimit wraps the corresponding Objective-C method.
 func (x *ReachConstraints) SetUpperAngleLimit(upperAngleLimit float64) {
-	x.inner.SetUpperAngleLimit(upperAngleLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
 }
 
 // ReachConstraintsable is the interface implemented by [ReachConstraints], for mocking and DI.
 type ReachConstraintsable interface {
-	Unwrap() *raw.SKReachConstraints
+	obj.Object
 	WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints
 	WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints
 	LowerAngleLimit() float64

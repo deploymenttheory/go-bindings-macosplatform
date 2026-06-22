@@ -5,61 +5,60 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayGatherGradient wraps [raw.MPSNDArrayGatherGradient] with a fluent Go API.
+// ArrayGatherGradient is an idiomatic wrapper over the Objective-C class MPSNDArrayGatherGradient.
+//
+// It embeds [ArrayBinaryPrimaryGradientKernel], promoting that type's methods.
 type ArrayGatherGradient struct {
-	inner *raw.MPSNDArrayGatherGradient
+	ArrayBinaryPrimaryGradientKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayGatherGradient].
-func (x *ArrayGatherGradient) Unwrap() *raw.MPSNDArrayGatherGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayGatherGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayGatherGradientFromID adopts an existing object pointer as a ArrayGatherGradient (nil for 0).
+// ArrayGatherGradientFromID adopts an existing Objective-C object as a ArrayGatherGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayGatherGradientFromID(id objc.ID) *ArrayGatherGradient {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(id)}
-}
-
-// NewArrayGatherGradient creates a new [ArrayGatherGradient].
-func NewArrayGatherGradient() *ArrayGatherGradient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayGatherGradient")), objc.RegisterName("new"))
-	return &ArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGatherGradient {
-	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayGatherGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *ArrayGatherGradient) asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel
+// arrayGatherGradientAdopt wraps an Objective-C object that this code just created as a
+// ArrayGatherGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayGatherGradientAdopt(id objc.ID) *ArrayGatherGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayGatherGradient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ArrayGatherGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel
-}
-
-func (x *ArrayGatherGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+// NewArrayGatherGradient creates a new ArrayGatherGradient.
+func NewArrayGatherGradient() *ArrayGatherGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGatherGradient")), objc.RegisterName("new"))
+	return arrayGatherGradientAdopt(_id)
 }
 
 // ArrayGatherGradientable is the interface implemented by [ArrayGatherGradient], for mocking and DI.
 type ArrayGatherGradientable interface {
-	Unwrap() *raw.MPSNDArrayGatherGradient
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGatherGradient
+	obj.Object
 }
 
 var _ ArrayGatherGradientable = (*ArrayGatherGradient)(nil)
+
+var _ ArrayBinaryPrimaryGradientKernelProvider = (*ArrayGatherGradient)(nil)
+
+var _ ArrayMultiaryGradientKernelProvider = (*ArrayGatherGradient)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayGatherGradient)(nil)

@@ -3,4 +3,17 @@
 //go:build darwin
 
 // Package cloudkit provides a fluent Go API over the macOS CloudKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - DatabaseOperation: [FetchDatabaseChangesOperation], [FetchRecordChangesOperation], [FetchRecordZoneChangesOperation], [FetchRecordZonesOperation], [FetchRecordsOperation], [FetchSubscriptionsOperation], [FetchWebAuthTokenOperation], [ModifyRecordZonesOperation], [ModifyRecordsOperation], [ModifySubscriptionsOperation], [QueryOperation]
+//   - Notification: [DatabaseNotification], [QueryNotification], [RecordZoneNotification]
+//   - Operation: [AcceptSharesOperation], [DatabaseOperation], [DiscoverAllUserIdentitiesOperation], [DiscoverUserIdentitiesOperation], [FetchShareMetadataOperation], [FetchShareParticipantsOperation], [ShareRequestAccessOperation]
+//   - Record: [Share]
+//   - Subscription: [DatabaseSubscription], [QuerySubscription], [RecordZoneSubscription]
+//   - SyncEngineEvent: [SyncEngineAccountChangeEvent], [SyncEngineDidFetchChangesEvent], [SyncEngineDidFetchRecordZoneChangesEvent], [SyncEngineDidSendChangesEvent], [SyncEngineFetchedDatabaseChangesEvent], [SyncEngineFetchedRecordZoneChangesEvent], [SyncEngineSentDatabaseChangesEvent], [SyncEngineSentRecordZoneChangesEvent], [SyncEngineStateUpdateEvent], [SyncEngineWillFetchChangesEvent], [SyncEngineWillFetchRecordZoneChangesEvent], [SyncEngineWillSendChangesEvent]
+//   - SyncEnginePendingDatabaseChange: [SyncEnginePendingZoneDelete], [SyncEnginePendingZoneSave]
 package cloudkit

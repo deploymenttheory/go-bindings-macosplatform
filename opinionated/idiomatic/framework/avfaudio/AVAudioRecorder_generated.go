@@ -5,228 +5,210 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that records audio data to a file.
+// AudioRecorder is an idiomatic wrapper over the Objective-C class AVAudioRecorder.
 //
-// AudioRecorder wraps [raw.AVAudioRecorder] with a fluent Go API.
+// An object that records audio data to a file.
 type AudioRecorder struct {
-	inner *raw.AVAudioRecorder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioRecorder].
-func (x *AudioRecorder) Unwrap() *raw.AVAudioRecorder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioRecorder) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioRecorderFromID adopts an existing object pointer as a AudioRecorder (nil for 0).
+// AudioRecorderFromID adopts an existing Objective-C object as a AudioRecorder
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioRecorderFromID(id objc.ID) *AudioRecorder {
 	if id == 0 {
 		return nil
 	}
-	return &AudioRecorder{inner: raw.AVAudioRecorderFromID(id)}
-}
-
-// Creates an audio recorder with settings.
-//
-// NewAudioRecorderWithURLSettingsError creates a new [AudioRecorder].
-func NewAudioRecorderWithURLSettingsError(url string, settings purego.IDer) (*AudioRecorder, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRecorder")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:settings:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), settings.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AudioRecorder{inner: raw.AVAudioRecorderFromID(_id)}, nil
-}
-
-// Creates an audio recorder with an audio format.
-//
-// NewAudioRecorderWithURLFormatError creates a new [AudioRecorder].
-func NewAudioRecorderWithURLFormatError(url string, format *raw.AVAudioFormat) (*AudioRecorder, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRecorder")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:format:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), format.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AudioRecorder{inner: raw.AVAudioRecorderFromID(_id)}, nil
-}
-
-// The delegate object for the audio recorder.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AudioRecorder) WithDelegate(delegate raw.AVAudioRecorderDelegate) *AudioRecorder {
-	x.inner.SetDelegate(delegate)
+	x := &AudioRecorder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether you’ve enabled the recorder to generate audio-level metering data.
-//
-// WithMeteringEnabled sets the meteringEnabled property and returns the receiver for chaining.
-func (x *AudioRecorder) WithMeteringEnabled(meteringEnabled bool) *AudioRecorder {
-	x.inner.SetMeteringEnabled(meteringEnabled)
-	return x
-}
-
-// Creates an audio file and prepares the system for recording.
-//
-// PrepareToRecord calls the underlying PrepareToRecord.
-func (x *AudioRecorder) PrepareToRecord() bool {
-	return x.inner.PrepareToRecord()
-}
-
-// Starts or resumes audio recording.
-//
-// Record calls the underlying Record.
-func (x *AudioRecorder) Record() bool {
-	return x.inner.Record()
-}
-
-// Records audio starting at a specific time.
-//
-// RecordAtTime calls the underlying RecordAtTime.
-func (x *AudioRecorder) RecordAtTime(time_ float64) bool {
-	return x.inner.RecordAtTime(time_)
-}
-
-// Records audio for the indicated duration of time.
-//
-// RecordForDuration calls the underlying RecordForDuration.
-func (x *AudioRecorder) RecordForDuration(duration float64) bool {
-	return x.inner.RecordForDuration(duration)
-}
-
-// Records audio starting at a specific time for the indicated duration.
-//
-// RecordAtTimeForDuration calls the underlying RecordAtTimeForDuration.
-func (x *AudioRecorder) RecordAtTimeForDuration(time_ float64, duration float64) bool {
-	return x.inner.RecordAtTimeForDuration(time_, duration)
-}
-
-// Pauses an audio recording.
-//
-// Pause calls the underlying Pause.
-func (x *AudioRecorder) Pause() {
-	x.inner.Pause()
-}
-
-// Stops recording and closes the audio file.
-//
-// Stop calls the underlying Stop.
-func (x *AudioRecorder) Stop() {
-	x.inner.Stop()
-}
-
-// Deletes a recorded audio file.
-//
-// DeleteRecording calls the underlying DeleteRecording.
-func (x *AudioRecorder) DeleteRecording() bool {
-	return x.inner.DeleteRecording()
-}
-
-// Refreshes the average and peak power values for all channels of an audio recorder.
-//
-// UpdateMeters calls the underlying UpdateMeters.
-func (x *AudioRecorder) UpdateMeters() {
-	x.inner.UpdateMeters()
-}
-
-// Returns the peak power, in decibels full-scale (dBFS), for an audio channel.
-//
-// PeakPowerForChannel calls the underlying PeakPowerForChannel.
-func (x *AudioRecorder) PeakPowerForChannel(channelNumber uint) float32 {
-	return x.inner.PeakPowerForChannel(channelNumber)
-}
-
-// Returns the average power, in decibels full-scale (dBFS), for an audio channel.
-//
-// AveragePowerForChannel calls the underlying AveragePowerForChannel.
-func (x *AudioRecorder) AveragePowerForChannel(channelNumber uint) float32 {
-	return x.inner.AveragePowerForChannel(channelNumber)
-}
-
-// @property recording @abstract Returns YES if the AudioRecorder is currently recording.
-//
-// IsRecording calls the underlying IsRecording.
-func (x *AudioRecorder) IsRecording() bool {
-	return x.inner.IsRecording()
-}
-
-// @property url @abstract URL of the recorded file.
-//
-// Url calls the underlying Url.
-func (x *AudioRecorder) Url() *foundation.NSURL {
-	return x.inner.Url()
-}
-
-// @property settings @abstract A dictionary of settings for the AudioRecorder. @discussion These settings are fully valid only when prepareToRecord has been called. For supported key-value pairs, see https://developer.apple.com/documentation/avfaudio/avaudiorecorder/1388386-initwithurl?language=objc
-//
-// Settings calls the underlying Settings.
-func (x *AudioRecorder) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Settings()
-}
-
-// @property format @abstract The audio format of the AudioRecorder. @discussion This property is fully valid only when prepareToRecord has been called.
-//
-// Format calls the underlying Format.
-func (x *AudioRecorder) Format() *AudioFormat {
-	_r := x.inner.Format()
-	if _r == nil {
+// audioRecorderAdopt wraps an Objective-C object that this code just created as a
+// AudioRecorder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioRecorderAdopt(id objc.ID) *AudioRecorder {
+	if id == 0 {
 		return nil
 	}
-	return &AudioFormat{inner: _r}
+	x := &AudioRecorder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property delegate @abstract A delegate object to the AudioRecorder that conforms to the AVAudioRecorderDelegate protocol.
-//
-// Delegate calls the underlying Delegate.
-func (x *AudioRecorder) Delegate() raw.AVAudioRecorderDelegate {
-	return x.inner.Delegate()
+// Description returns the object's -description text.
+func (x *AudioRecorder) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *AudioRecorder) SetDelegate(delegate raw.AVAudioRecorderDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioRecorder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property currentTime @abstract Get the current time of the recording. @discussion This method is only vaild while recording.
-//
-// CurrentTime calls the underlying CurrentTime.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioRecorder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioRecorder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioRecorderWithURLSettingsError creates an audio recorder with settings.
+func NewAudioRecorderWithURLSettingsError(url string, settings obj.Object) (result *AudioRecorder, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioRecorder")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:settings:error:"), rt.FileURL(url), objref.IDOf(settings), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioRecorderAdopt(_id), nil
+}
+
+// NewAudioRecorderWithURLFormatError creates an audio recorder with an audio format.
+func NewAudioRecorderWithURLFormatError(url string, format *AudioFormat) (result *AudioRecorder, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioRecorder")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:format:error:"), rt.FileURL(url), objref.IDOf(format), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioRecorderAdopt(_id), nil
+}
+
+// WithMeteringEnabled a Boolean value that indicates whether you’ve enabled the recorder to generate audio-level metering data.
+func (x *AudioRecorder) WithMeteringEnabled(meteringEnabled bool) *AudioRecorder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeteringEnabled:"), meteringEnabled)
+	return x
+}
+
+// PrepareToRecord creates an audio file and prepares the system for recording.
+func (x *AudioRecorder) PrepareToRecord() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prepareToRecord"))
+	return _r
+}
+
+// Record starts or resumes audio recording.
+func (x *AudioRecorder) Record() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("record"))
+	return _r
+}
+
+// RecordAtTime records audio starting at a specific time.
+func (x *AudioRecorder) RecordAtTime(time_ float64) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recordAtTime:"), time_)
+	return _r
+}
+
+// RecordForDuration records audio for the indicated duration of time.
+func (x *AudioRecorder) RecordForDuration(duration float64) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recordForDuration:"), duration)
+	return _r
+}
+
+// RecordAtTimeForDuration records audio starting at a specific time for the indicated duration.
+func (x *AudioRecorder) RecordAtTimeForDuration(time_ float64, duration float64) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recordAtTime:forDuration:"), time_, duration)
+	return _r
+}
+
+// Pause pauses an audio recording.
+func (x *AudioRecorder) Pause() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+}
+
+// Stop stops recording and closes the audio file.
+func (x *AudioRecorder) Stop() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+}
+
+// DeleteRecording deletes a recorded audio file.
+func (x *AudioRecorder) DeleteRecording() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deleteRecording"))
+	return _r
+}
+
+// UpdateMeters refreshes the average and peak power values for all channels of an audio recorder.
+func (x *AudioRecorder) UpdateMeters() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateMeters"))
+}
+
+// PeakPowerForChannel returns the peak power, in decibels full-scale (dBFS), for an audio channel.
+func (x *AudioRecorder) PeakPowerForChannel(channelNumber int) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("peakPowerForChannel:"), channelNumber)
+	return _r
+}
+
+// AveragePowerForChannel returns the average power, in decibels full-scale (dBFS), for an audio channel.
+func (x *AudioRecorder) AveragePowerForChannel(channelNumber int) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("averagePowerForChannel:"), channelNumber)
+	return _r
+}
+
+// IsRecording returns YES if the AudioRecorder is currently recording.
+func (x *AudioRecorder) IsRecording() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecording"))
+	return _r
+}
+
+// Url URL of the recorded file.
+func (x *AudioRecorder) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
+}
+
+// Settings a dictionary of settings for the AudioRecorder. These settings are fully valid only when prepareToRecord has been called. For supported key-value pairs, see https://developer.apple.com/documentation/avfaudio/avaudiorecorder/1388386-initwithurl?language=objc
+func (x *AudioRecorder) Settings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
+	return obj.Wrap(_r)
+}
+
+// Format the audio format of the AudioRecorder. This property is fully valid only when prepareToRecord has been called.
+func (x *AudioRecorder) Format() *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+	return AudioFormatFromID(_r)
+}
+
+// CurrentTime get the current time of the recording. This method is only vaild while recording.
 func (x *AudioRecorder) CurrentTime() float64 {
-	return x.inner.CurrentTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentTime"))
+	return _r
 }
 
-// @property deviceCurrentTime @abstract Get the device current time. @discussion This method is always valid.
-//
-// DeviceCurrentTime calls the underlying DeviceCurrentTime.
+// DeviceCurrentTime get the device current time. This method is always valid.
 func (x *AudioRecorder) DeviceCurrentTime() float64 {
-	return x.inner.DeviceCurrentTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deviceCurrentTime"))
+	return _r
 }
 
-// @property meteringEnabled @abstract Turns level metering on or off. @discussion Default is off.
-//
-// IsMeteringEnabled calls the underlying IsMeteringEnabled.
+// IsMeteringEnabled turns level metering on or off. Default is off.
 func (x *AudioRecorder) IsMeteringEnabled() bool {
-	return x.inner.IsMeteringEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMeteringEnabled"))
+	return _r
 }
 
-// SetMeteringEnabled calls the underlying SetMeteringEnabled.
+// SetMeteringEnabled wraps the corresponding Objective-C method.
 func (x *AudioRecorder) SetMeteringEnabled(meteringEnabled bool) {
-	x.inner.SetMeteringEnabled(meteringEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeteringEnabled:"), meteringEnabled)
 }
 
 // AudioRecorderable is the interface implemented by [AudioRecorder], for mocking and DI.
 type AudioRecorderable interface {
-	Unwrap() *raw.AVAudioRecorder
-	WithDelegate(delegate raw.AVAudioRecorderDelegate) *AudioRecorder
+	obj.Object
 	WithMeteringEnabled(meteringEnabled bool) *AudioRecorder
 	PrepareToRecord() bool
 	Record() bool
@@ -237,14 +219,12 @@ type AudioRecorderable interface {
 	Stop()
 	DeleteRecording() bool
 	UpdateMeters()
-	PeakPowerForChannel(channelNumber uint) float32
-	AveragePowerForChannel(channelNumber uint) float32
+	PeakPowerForChannel(channelNumber int) float32
+	AveragePowerForChannel(channelNumber int) float32
 	IsRecording() bool
-	Url() *foundation.NSURL
-	Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Url() obj.Object
+	Settings() obj.Object
 	Format() *AudioFormat
-	Delegate() raw.AVAudioRecorderDelegate
-	SetDelegate(delegate raw.AVAudioRecorderDelegate)
 	CurrentTime() float64
 	DeviceCurrentTime() float64
 	IsMeteringEnabled() bool

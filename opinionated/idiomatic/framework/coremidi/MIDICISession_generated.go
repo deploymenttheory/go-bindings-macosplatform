@@ -5,164 +5,156 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents a MIDI-CI session.
+// CISession is an idiomatic wrapper over the Objective-C class MIDICISession.
 //
-// CISession wraps [raw.MIDICISession] with a fluent Go API.
+// An object that represents a MIDI-CI session.
 type CISession struct {
-	inner *raw.MIDICISession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICISession].
-func (x *CISession) Unwrap() *raw.MIDICISession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CISession) ID() objc.ID { return x.inner.Ptr() }
-
-// CISessionFromID adopts an existing object pointer as a CISession (nil for 0).
+// CISessionFromID adopts an existing Objective-C object as a CISession
+// (nil for 0), retaining it and registering a release finalizer.
 func CISessionFromID(id objc.ID) *CISession {
 	if id == 0 {
 		return nil
 	}
-	return &CISession{inner: raw.MIDICISessionFromID(id)}
-}
-
-// Creates a MIDI-CI session.
-//
-// NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler creates a new [CISession].
-func NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler(discoveredNode *raw.MIDICIDiscoveredNode, handler func(), disconnectHandler func(*raw.MIDICISession, unsafe.Pointer)) *CISession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICISession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDiscoveredNode:dataReadyHandler:disconnectHandler:"), discoveredNode.Ptr(), handler, disconnectHandler)
-	return &CISession{inner: raw.MIDICISessionFromID(_id)}
-}
-
-// An optional block the system calls after it enables or disables a profile.
-//
-// WithProfileChangedCallback sets the profileChangedCallback property and returns the receiver for chaining.
-func (x *CISession) WithProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool)) *CISession {
-	x.inner.SetProfileChangedCallback(profileChangedCallback)
+	x := &CISession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// An optional block the system calls when a device sends profile-specific data to the session.
-//
-// WithProfileSpecificDataHandler sets the profileSpecificDataHandler property and returns the receiver for chaining.
-func (x *CISession) WithProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData)) *CISession {
-	x.inner.SetProfileSpecificDataHandler(profileSpecificDataHandler)
+// cISessionAdopt wraps an Objective-C object that this code just created as a
+// CISession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cISessionAdopt(id objc.ID) *CISession {
+	if id == 0 {
+		return nil
+	}
+	x := &CISession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// Returns the profile state for the specified MIDI channel number.
-//
-// ProfileStateForChannel calls the underlying ProfileStateForChannel.
+// Description returns the object's -description text.
+func (x *CISession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CISession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CISession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CISession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCISession creates a new CISession.
+func NewCISession() *CISession {
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDICISession")), objc.RegisterName("new"))
+	return cISessionAdopt(_id)
+}
+
+// ProfileStateForChannel returns the profile state for the specified MIDI channel number.
 func (x *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
-	_r := x.inner.ProfileStateForChannel(channel)
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileStateForChannel:"), channel)
+	return CIProfileStateFromID(_r)
+}
+
+// EnableProfileOnChannel performs an asynchronous request to enable a profile for a specific MIDI channel number.
+func (x *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &CIProfileState{inner: _r}
+	return nil
 }
 
-// Performs an asynchronous request to enable a profile for a specific MIDI channel number.
-//
-// EnableProfileOnChannelError calls the underlying EnableProfileOnChannelError.
-func (x *CISession) EnableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error) {
-	return x.inner.EnableProfileOnChannelError(profile, channel)
+// DisableProfileOnChannel performs an asynchronous request to disable a profile for a specific MIDI channel number.
+func (x *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Performs an asynchronous request to disable a profile for a specific MIDI channel number.
-//
-// DisableProfileOnChannelError calls the underlying DisableProfileOnChannelError.
-func (x *CISession) DisableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error) {
-	return x.inner.DisableProfileOnChannelError(profile, channel)
+// SendProfileOnChannelProfileData sends profile-specific data to the MIDI-CI session.
+func (x *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(profile), channel, objref.IDOf(profileSpecificData))
+	return _r
 }
 
-// Sends profile-specific data to the MIDI-CI session.
-//
-// SendProfileOnChannelProfileData calls the underlying SendProfileOnChannelProfileData.
-func (x *CISession) SendProfileOnChannelProfileData(profile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
-	return x.inner.SendProfileOnChannelProfileData(profile, channel, profileSpecificData)
+// MidiDestination wraps the corresponding Objective-C method.
+func (x *CISession) MidiDestination() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("midiDestination"))
+	return _r
 }
 
-// MidiDestination calls the underlying MidiDestination.
-func (x *CISession) MidiDestination() uint {
-	return x.inner.MidiDestination()
-}
-
-// SupportsProfileCapability calls the underlying SupportsProfileCapability.
+// SupportsProfileCapability wraps the corresponding Objective-C method.
 func (x *CISession) SupportsProfileCapability() bool {
-	return x.inner.SupportsProfileCapability()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfileCapability"))
+	return _r
 }
 
-// SupportsPropertyCapability calls the underlying SupportsPropertyCapability.
+// SupportsPropertyCapability wraps the corresponding Objective-C method.
 func (x *CISession) SupportsPropertyCapability() bool {
-	return x.inner.SupportsPropertyCapability()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPropertyCapability"))
+	return _r
 }
 
-// DeviceInfo calls the underlying DeviceInfo.
+// DeviceInfo wraps the corresponding Objective-C method.
 func (x *CISession) DeviceInfo() *CIDeviceInfo {
-	_r := x.inner.DeviceInfo()
-	if _r == nil {
-		return nil
-	}
-	return &CIDeviceInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+	return CIDeviceInfoFromID(_r)
 }
 
-// MaxSysExSize calls the underlying MaxSysExSize.
-func (x *CISession) MaxSysExSize() *foundation.NSNumber {
-	return x.inner.MaxSysExSize()
+// MaxSysExSize wraps the corresponding Objective-C method.
+func (x *CISession) MaxSysExSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxSysExSize"))
+	return obj.Wrap(_r)
 }
 
-// MaxPropertyRequests calls the underlying MaxPropertyRequests.
-func (x *CISession) MaxPropertyRequests() *foundation.NSNumber {
-	return x.inner.MaxPropertyRequests()
-}
-
-// ProfileChangedCallback calls the underlying ProfileChangedCallback.
-func (x *CISession) ProfileChangedCallback() objc.Block {
-	return x.inner.ProfileChangedCallback()
-}
-
-// SetProfileChangedCallback calls the underlying SetProfileChangedCallback.
-func (x *CISession) SetProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool)) {
-	x.inner.SetProfileChangedCallback(profileChangedCallback)
-}
-
-// ProfileSpecificDataHandler calls the underlying ProfileSpecificDataHandler.
-func (x *CISession) ProfileSpecificDataHandler() objc.Block {
-	return x.inner.ProfileSpecificDataHandler()
-}
-
-// SetProfileSpecificDataHandler calls the underlying SetProfileSpecificDataHandler.
-func (x *CISession) SetProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData)) {
-	x.inner.SetProfileSpecificDataHandler(profileSpecificDataHandler)
+// MaxPropertyRequests wraps the corresponding Objective-C method.
+func (x *CISession) MaxPropertyRequests() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPropertyRequests"))
+	return obj.Wrap(_r)
 }
 
 // CISessionable is the interface implemented by [CISession], for mocking and DI.
 type CISessionable interface {
-	Unwrap() *raw.MIDICISession
-	WithProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool)) *CISession
-	WithProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData)) *CISession
+	obj.Object
 	ProfileStateForChannel(channel uint8) *CIProfileState
-	EnableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error)
-	DisableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error)
-	SendProfileOnChannelProfileData(profile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool
-	MidiDestination() uint
+	EnableProfileOnChannel(profile *CIProfile, channel uint8) error
+	DisableProfileOnChannel(profile *CIProfile, channel uint8) error
+	SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool
+	MidiDestination() int
 	SupportsProfileCapability() bool
 	SupportsPropertyCapability() bool
 	DeviceInfo() *CIDeviceInfo
-	MaxSysExSize() *foundation.NSNumber
-	MaxPropertyRequests() *foundation.NSNumber
-	ProfileChangedCallback() objc.Block
-	SetProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool))
-	ProfileSpecificDataHandler() objc.Block
-	SetProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData))
+	MaxSysExSize() obj.Object
+	MaxPropertyRequests() obj.Object
 }
 
 var _ CISessionable = (*CISession)(nil)

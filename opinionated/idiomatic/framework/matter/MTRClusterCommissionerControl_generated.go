@@ -6,66 +6,71 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Cluster Commissioner Control Supports the ability for clients to request the commissioning of themselves or other nodes onto a fabric which the cluster server can commission onto.
+// MTRClusterCommissionerControl is an idiomatic wrapper over the Objective-C class MTRClusterCommissionerControl.
 //
-// MTRClusterCommissionerControl wraps [raw.MTRClusterCommissionerControl] with a fluent Go API.
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Commissioner Control Supports the ability for clients to request the commissioning of themselves or other nodes onto a fabric which the cluster server can commission onto.
 type MTRClusterCommissionerControl struct {
-	inner *raw.MTRClusterCommissionerControl
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterCommissionerControl].
-func (x *MTRClusterCommissionerControl) Unwrap() *raw.MTRClusterCommissionerControl { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterCommissionerControl) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterCommissionerControlFromID adopts an existing object pointer as a MTRClusterCommissionerControl (nil for 0).
+// MTRClusterCommissionerControlFromID adopts an existing Objective-C object as a MTRClusterCommissionerControl
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterCommissionerControlFromID(id objc.ID) *MTRClusterCommissionerControl {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterCommissionerControl{inner: raw.MTRClusterCommissionerControlFromID(id)}
+	x := &MTRClusterCommissionerControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+// mTRClusterCommissionerControlAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterCommissionerControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterCommissionerControlAdopt(id objc.ID) *MTRClusterCommissionerControl {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterCommissionerControl{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterCommissionerControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterCommissionerControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterCommissionerControlAdopt(_id)
+}
+
+// CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
-// NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue creates a new [MTRClusterCommissionerControl].
-func NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterCommissionerControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterCommissionerControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterCommissionerControl{inner: raw.MTRClusterCommissionerControlFromID(_id)}
-}
-
-// RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterCommissionerControl) RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
-}
-
 // CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterCommissionerControl) CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRCommissionerControlClusterCommissionNodeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error) {
+func (x *MTRClusterCommissionerControl) CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRCommissionerControlClusterCommissionNodeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, err error) {
 	type _result struct {
 		val *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRCommissionerControlClusterReverseOpenCommissioningWindowParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissionNodeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -75,55 +80,56 @@ func (x *MTRClusterCommissionerControl) CommissionNodeWithParamsExpectedValuesEx
 	}
 }
 
-// ReadAttributeSupportedDeviceCategoriesWithParams calls the underlying ReadAttributeSupportedDeviceCategoriesWithParams.
-func (x *MTRClusterCommissionerControl) ReadAttributeSupportedDeviceCategoriesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedDeviceCategoriesWithParams(params)
+// ReadAttributeSupportedDeviceCategoriesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterCommissionerControl) ReadAttributeSupportedDeviceCategoriesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedDeviceCategoriesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterCommissionerControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterCommissionerControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterCommissionerControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterCommissionerControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterCommissionerControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterCommissionerControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterCommissionerControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterCommissionerControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterCommissionerControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterCommissionerControl) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterCommissionerControl) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterCommissionerControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterCommissionerControlable is the interface implemented by [MTRClusterCommissionerControl], for mocking and DI.
 type MTRClusterCommissionerControlable interface {
-	Unwrap() *raw.MTRClusterCommissionerControl
-	RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRCommissionerControlClusterCommissionNodeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error)
-	ReadAttributeSupportedDeviceCategoriesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRCommissionerControlClusterCommissionNodeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error)
+	ReadAttributeSupportedDeviceCategoriesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterCommissionerControlable = (*MTRClusterCommissionerControl)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterCommissionerControl)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterCommissionerControl)(nil)

@@ -9,24 +9,26 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type MPSDeviceOptions uint64
+type DeviceOptions uint64
 
 const (
 	// Use default options
-	MPSDeviceOptionsDefault MPSDeviceOptions = 0
+	DeviceOptionsDefault DeviceOptions = 0
 	// Prefer a low power device
-	MPSDeviceOptionsLowPower MPSDeviceOptions = 1
+	DeviceOptionsLowPower DeviceOptions = 1
 	// Skip removable devices
-	MPSDeviceOptionsSkipRemovable MPSDeviceOptions = 2
+	DeviceOptionsSkipRemovable DeviceOptions = 2
 )
 
-func (e MPSDeviceOptions) String() string {
+// String returns the DeviceOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceOptions) String() string {
 	var parts []string
-	if e&MPSDeviceOptionsLowPower != 0 {
-		parts = append(parts, "MPSDeviceOptionsLowPower")
+	if e&DeviceOptionsLowPower != 0 {
+		parts = append(parts, "DeviceOptionsLowPower")
 	}
-	if e&MPSDeviceOptionsSkipRemovable != 0 {
-		parts = append(parts, "MPSDeviceOptionsSkipRemovable")
+	if e&DeviceOptionsSkipRemovable != 0 {
+		parts = append(parts, "DeviceOptionsSkipRemovable")
 	}
 	if len(parts) == 0 {
 		return "0"

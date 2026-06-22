@@ -5,75 +5,59 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayUnaryGradientKernel wraps [raw.MPSNDArrayUnaryGradientKernel] with a fluent Go API.
+// ArrayUnaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayUnaryGradientKernel.
+//
+// ArrayUnaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [ArrayStridedSliceGradient] and pass it where a ArrayUnaryGradientKernel is accepted.
 type ArrayUnaryGradientKernel struct {
-	inner *raw.MPSNDArrayUnaryGradientKernel
+	ArrayMultiaryGradientKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayUnaryGradientKernel].
-func (x *ArrayUnaryGradientKernel) Unwrap() *raw.MPSNDArrayUnaryGradientKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayUnaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayUnaryGradientKernelFromID adopts an existing object pointer as a ArrayUnaryGradientKernel (nil for 0).
+// ArrayUnaryGradientKernelFromID adopts an existing Objective-C object as a ArrayUnaryGradientKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayUnaryGradientKernelFromID(id objc.ID) *ArrayUnaryGradientKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(id)}
-}
-
-// NewArrayUnaryGradientKernelWithDevice creates a new [ArrayUnaryGradientKernel].
-func NewArrayUnaryGradientKernelWithDevice(device metal.MTLDevice) *ArrayUnaryGradientKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayUnaryGradientKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayUnaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayUnaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// EncodeToCommandBufferSourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientState.
-func (x *ArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf, sourceArray, gradient, state)
-}
-
-// EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray.
-func (x *ArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf, sourceArray, gradient, state, destination)
-}
-
-func (x *ArrayUnaryGradientKernel) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel {
-	return x.inner
-}
-
-func (x *ArrayUnaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel
-}
-
-func (x *ArrayUnaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+// arrayUnaryGradientKernelAdopt wraps an Objective-C object that this code just created as a
+// ArrayUnaryGradientKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayUnaryGradientKernelAdopt(id objc.ID) *ArrayUnaryGradientKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayUnaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
 // ArrayUnaryGradientKernelable is the interface implemented by [ArrayUnaryGradientKernel], for mocking and DI.
 type ArrayUnaryGradientKernelable interface {
-	Unwrap() *raw.MPSNDArrayUnaryGradientKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryGradientKernel
-	EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	obj.Object
 }
 
 var _ ArrayUnaryGradientKernelable = (*ArrayUnaryGradientKernel)(nil)
+
+// isArrayUnaryGradientKernel marks ArrayUnaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the ArrayUnaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayUnaryGradientKernel) isArrayUnaryGradientKernel() {}
+
+var _ ArrayUnaryGradientKernelProvider = (*ArrayUnaryGradientKernel)(nil)
+
+var _ ArrayMultiaryGradientKernelProvider = (*ArrayUnaryGradientKernel)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayUnaryGradientKernel)(nil)

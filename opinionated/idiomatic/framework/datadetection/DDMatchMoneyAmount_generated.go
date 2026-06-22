@@ -5,64 +5,75 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains an amount of money that the data detection system matches.
+// MatchMoneyAmount is an idiomatic wrapper over the Objective-C class DDMatchMoneyAmount.
 //
-// MatchMoneyAmount wraps [raw.DDMatchMoneyAmount] with a fluent Go API.
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains an amount of money that the data detection system matches.
 type MatchMoneyAmount struct {
-	inner *raw.DDMatchMoneyAmount
+	Match
 }
 
-// Unwrap returns the underlying [raw.DDMatchMoneyAmount].
-func (x *MatchMoneyAmount) Unwrap() *raw.DDMatchMoneyAmount { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchMoneyAmount) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchMoneyAmountFromID adopts an existing object pointer as a MatchMoneyAmount (nil for 0).
+// MatchMoneyAmountFromID adopts an existing Objective-C object as a MatchMoneyAmount
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchMoneyAmountFromID(id objc.ID) *MatchMoneyAmount {
 	if id == 0 {
 		return nil
 	}
-	return &MatchMoneyAmount{inner: raw.DDMatchMoneyAmountFromID(id)}
+	x := &MatchMoneyAmount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatchMoneyAmount creates a new [MatchMoneyAmount].
+// matchMoneyAmountAdopt wraps an Objective-C object that this code just created as a
+// MatchMoneyAmount (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchMoneyAmountAdopt(id objc.ID) *MatchMoneyAmount {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchMoneyAmount{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatchMoneyAmount creates a new MatchMoneyAmount.
 func NewMatchMoneyAmount() *MatchMoneyAmount {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchMoneyAmount")), objc.RegisterName("new"))
-	return &MatchMoneyAmount{inner: raw.DDMatchMoneyAmountFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchMoneyAmount")), objc.RegisterName("new"))
+	return matchMoneyAmountAdopt(_id)
 }
 
-// A string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
-//
-// Currency calls the underlying Currency.
+// Currency a string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
 func (x *MatchMoneyAmount) Currency() string {
-	_r := x.inner.Currency()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currency"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// A number that represents an amount of money.
-//
-// Amount calls the underlying Amount.
+// Amount a number that represents an amount of money.
 func (x *MatchMoneyAmount) Amount() float64 {
-	return x.inner.Amount()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("amount"))
+	return _r
 }
-
-func (x *MatchMoneyAmount) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchMoneyAmountable is the interface implemented by [MatchMoneyAmount], for mocking and DI.
 type MatchMoneyAmountable interface {
-	Unwrap() *raw.DDMatchMoneyAmount
+	obj.Object
 	Currency() string
 	Amount() float64
 }
 
 var _ MatchMoneyAmountable = (*MatchMoneyAmount)(nil)
+
+var _ MatchProvider = (*MatchMoneyAmount)(nil)

@@ -5,56 +5,83 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.
+// QCPlugInViewController is an idiomatic wrapper over the Objective-C class QCPlugInViewController.
 //
-// QCPlugInViewController wraps [raw.QCPlugInViewController] with a fluent Go API.
+// The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.
 type QCPlugInViewController struct {
-	inner *raw.QCPlugInViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCPlugInViewController].
-func (x *QCPlugInViewController) Unwrap() *raw.QCPlugInViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCPlugInViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// QCPlugInViewControllerFromID adopts an existing object pointer as a QCPlugInViewController (nil for 0).
+// QCPlugInViewControllerFromID adopts an existing Objective-C object as a QCPlugInViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
 	if id == 0 {
 		return nil
 	}
-	return &QCPlugInViewController{inner: raw.QCPlugInViewControllerFromID(id)}
+	x := &QCPlugInViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and initializes a controller for the specified QCPlugIn object and nib file.
-//
-// NewQCPlugInViewControllerWithPlugInViewNibName creates a new [QCPlugInViewController].
-func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *raw.QCPlugIn, name string) *QCPlugInViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCPlugInViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), plugIn.Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &QCPlugInViewController{inner: raw.QCPlugInViewControllerFromID(_id)}
-}
-
-// Returns the QCPlugIn object associated with the view controller for the custom patch.
-//
-// PlugIn calls the underlying PlugIn.
-func (x *QCPlugInViewController) PlugIn() *QCPlugIn {
-	_r := x.inner.PlugIn()
-	if _r == nil {
+// qCPlugInViewControllerAdopt wraps an Objective-C object that this code just created as a
+// QCPlugInViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCPlugInViewControllerAdopt(id objc.ID) *QCPlugInViewController {
+	if id == 0 {
 		return nil
 	}
-	return &QCPlugIn{inner: _r}
+	x := &QCPlugInViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCPlugInViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCPlugInViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCPlugInViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCPlugInViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQCPlugInViewControllerWithPlugInViewNibName creates and initializes a controller for the specified QCPlugIn object and nib file.
+func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *QCPlugIn, name string) *QCPlugInViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
+	return qCPlugInViewControllerAdopt(_id)
+}
+
+// PlugIn returns the QCPlugIn object associated with the view controller for the custom patch.
+func (x *QCPlugInViewController) PlugIn() *QCPlugIn {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plugIn"))
+	return QCPlugInFromID(_r)
 }
 
 // QCPlugInViewControllerable is the interface implemented by [QCPlugInViewController], for mocking and DI.
 type QCPlugInViewControllerable interface {
-	Unwrap() *raw.QCPlugInViewController
+	obj.Object
 	PlugIn() *QCPlugIn
 }
 

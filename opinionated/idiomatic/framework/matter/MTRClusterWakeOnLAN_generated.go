@@ -5,53 +5,115 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterWakeOnLan wraps [raw.MTRClusterWakeOnLan] with a fluent Go API.
-type MTRClusterWakeOnLan struct {
-	inner *raw.MTRClusterWakeOnLan
+// MTRClusterWakeOnLAN is an idiomatic wrapper over the Objective-C class MTRClusterWakeOnLAN.
+//
+// MTRClusterWakeOnLAN is an abstract base — you do not construct it directly. Construct one of [MTRClusterWakeOnLan] and pass it where a MTRClusterWakeOnLAN is accepted.
+type MTRClusterWakeOnLAN struct {
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterWakeOnLan].
-func (x *MTRClusterWakeOnLan) Unwrap() *raw.MTRClusterWakeOnLan { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterWakeOnLan) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterWakeOnLanFromID adopts an existing object pointer as a MTRClusterWakeOnLan (nil for 0).
-func MTRClusterWakeOnLanFromID(id objc.ID) *MTRClusterWakeOnLan {
+// MTRClusterWakeOnLANFromID adopts an existing Objective-C object as a MTRClusterWakeOnLAN
+// (nil for 0), retaining it and registering a release finalizer.
+func MTRClusterWakeOnLANFromID(id objc.ID) *MTRClusterWakeOnLAN {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterWakeOnLan{inner: raw.MTRClusterWakeOnLanFromID(id)}
+	x := &MTRClusterWakeOnLAN{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterWakeOnLanWithDeviceEndpointQueue creates a new [MTRClusterWakeOnLan].
-func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterWakeOnLan {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWakeOnLan")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterWakeOnLan{inner: raw.MTRClusterWakeOnLanFromID(_id)}
+// mTRClusterWakeOnLANAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterWakeOnLAN (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterWakeOnLANAdopt(id objc.ID) *MTRClusterWakeOnLAN {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterWakeOnLAN{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MTRClusterWakeOnLan) asMTRClusterWakeOnLAN() *raw.MTRClusterWakeOnLAN {
-	return &x.inner.MTRClusterWakeOnLAN
+// NewMTRClusterWakeOnLANWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterWakeOnLANWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterWakeOnLAN {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWakeOnLAN")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterWakeOnLANAdopt(_id)
 }
 
-func (x *MTRClusterWakeOnLan) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster
+// ReadAttributeMACAddressWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeMACAddressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMACAddressWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterWakeOnLan) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster.MTRCluster
+// ReadAttributeLinkLocalAddressWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeLinkLocalAddressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLinkLocalAddressWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// MTRClusterWakeOnLanable is the interface implemented by [MTRClusterWakeOnLan], for mocking and DI.
-type MTRClusterWakeOnLanable interface {
-	Unwrap() *raw.MTRClusterWakeOnLan
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-var _ MTRClusterWakeOnLanable = (*MTRClusterWakeOnLan)(nil)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWakeOnLAN) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// MTRClusterWakeOnLANable is the interface implemented by [MTRClusterWakeOnLAN], for mocking and DI.
+type MTRClusterWakeOnLANable interface {
+	obj.Object
+	ReadAttributeMACAddressWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLinkLocalAddressWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+}
+
+var _ MTRClusterWakeOnLANable = (*MTRClusterWakeOnLAN)(nil)
+
+// isMTRClusterWakeOnLAN marks MTRClusterWakeOnLAN — and, by embedding promotion, its
+// subclasses — as a member of the MTRClusterWakeOnLAN hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRClusterWakeOnLAN) isMTRClusterWakeOnLAN() {}
+
+var _ MTRClusterWakeOnLANProvider = (*MTRClusterWakeOnLAN)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterWakeOnLAN)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterWakeOnLAN)(nil)

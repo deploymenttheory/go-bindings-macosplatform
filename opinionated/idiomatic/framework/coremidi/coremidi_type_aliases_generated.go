@@ -4,81 +4,47 @@
 
 package coremidi
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-)
+// A C-style struct containing a Manufacturer Specific profile ID.
+type MIDICIProfileIDManufacturerSpecific struct {
+	SysExID1 uint8
+	SysExID2 uint8
+	SysExID3 uint8
+	Info1    uint8
+	Info2    uint8
+}
 
-// MIDI2DeviceManufacturer is a type alias for the raw MIDI2DeviceManufacturer value-type struct.
-type MIDI2DeviceManufacturer = raw.MIDI2DeviceManufacturer
+// A C-style struct containing a standard profile ID.
+type MIDICIProfileIDStandard struct {
+	ProfileIDByte1 uint8
+	ProfileBank    uint8
+	ProfileNumber  uint8
+	ProfileVersion uint8
+	ProfileLevel   uint8
+}
 
-// MIDI2DeviceRevisionLevel is a type alias for the raw MIDI2DeviceRevisionLevel value-type struct.
-type MIDI2DeviceRevisionLevel = raw.MIDI2DeviceRevisionLevel
+// A 128-bit MIDI message.
+type MIDIMessage_128 struct {
+	Word0 uint
+	Word1 uint
+	Word2 uint
+	Word3 uint
+}
 
-// MIDICIDeviceIdentification is a type alias for the raw MIDICIDeviceIdentification value-type struct.
-type MIDICIDeviceIdentification = raw.MIDICIDeviceIdentification
+// A 64-bit MIDI message.
+type MIDIMessage_64 struct {
+	Word0 uint
+	Word1 uint
+}
 
-// MIDICIProfileIDManufacturerSpecific is a type alias for the raw MIDICIProfileIDManufacturerSpecific value-type struct.
-type MIDICIProfileIDManufacturerSpecific = raw.MIDICIProfileIDManufacturerSpecific
+// A 96-bit MIDI message.
+type MIDIMessage_96 struct {
+	Word0 uint
+	Word1 uint
+	Word2 uint
+}
 
-// MIDICIProfileIDStandard is a type alias for the raw MIDICIProfileIDStandard value-type struct.
-type MIDICIProfileIDStandard = raw.MIDICIProfileIDStandard
-
-// MIDIControlTransform is a type alias for the raw MIDIControlTransform value-type struct.
-type MIDIControlTransform = raw.MIDIControlTransform
-
-// MIDIDriverInterface is a type alias for the raw MIDIDriverInterface value-type struct.
-type MIDIDriverInterface = raw.MIDIDriverInterface
-
-// MIDIEventList is a type alias for the raw MIDIEventList value-type struct.
-type MIDIEventList = raw.MIDIEventList
-
-// MIDIEventPacket is a type alias for the raw MIDIEventPacket value-type struct.
-type MIDIEventPacket = raw.MIDIEventPacket
-
-// MIDIIOErrorNotification is a type alias for the raw MIDIIOErrorNotification value-type struct.
-type MIDIIOErrorNotification = raw.MIDIIOErrorNotification
-
-// MIDIMessage_128 is a type alias for the raw MIDIMessage_128 value-type struct.
-type MIDIMessage_128 = raw.MIDIMessage_128
-
-// MIDIMessage_64 is a type alias for the raw MIDIMessage_64 value-type struct.
-type MIDIMessage_64 = raw.MIDIMessage_64
-
-// MIDIMessage_96 is a type alias for the raw MIDIMessage_96 value-type struct.
-type MIDIMessage_96 = raw.MIDIMessage_96
-
-// MIDINotification is a type alias for the raw MIDINotification value-type struct.
-type MIDINotification = raw.MIDINotification
-
-// MIDIObjectAddRemoveNotification is a type alias for the raw MIDIObjectAddRemoveNotification value-type struct.
-type MIDIObjectAddRemoveNotification = raw.MIDIObjectAddRemoveNotification
-
-// MIDIObjectPropertyChangeNotification is a type alias for the raw MIDIObjectPropertyChangeNotification value-type struct.
-type MIDIObjectPropertyChangeNotification = raw.MIDIObjectPropertyChangeNotification
-
-// MIDIPacket is a type alias for the raw MIDIPacket value-type struct.
-type MIDIPacket = raw.MIDIPacket
-
-// MIDIPacketList is a type alias for the raw MIDIPacketList value-type struct.
-type MIDIPacketList = raw.MIDIPacketList
-
-// MIDISysexSendRequest is a type alias for the raw MIDISysexSendRequest value-type struct.
-type MIDISysexSendRequest = raw.MIDISysexSendRequest
-
-// MIDISysexSendRequestUMP is a type alias for the raw MIDISysexSendRequestUMP value-type struct.
-type MIDISysexSendRequestUMP = raw.MIDISysexSendRequestUMP
-
-// MIDIThruConnectionEndpoint is a type alias for the raw MIDIThruConnectionEndpoint value-type struct.
-type MIDIThruConnectionEndpoint = raw.MIDIThruConnectionEndpoint
-
-// MIDIThruConnectionParams is a type alias for the raw MIDIThruConnectionParams value-type struct.
-type MIDIThruConnectionParams = raw.MIDIThruConnectionParams
-
-// MIDITransform is a type alias for the raw MIDITransform value-type struct.
-type MIDITransform = raw.MIDITransform
-
-// MIDIUniversalMessage is a type alias for the raw MIDIUniversalMessage value-type struct.
-type MIDIUniversalMessage = raw.MIDIUniversalMessage
-
-// MIDIValueMap is a type alias for the raw MIDIValueMap value-type struct.
-type MIDIValueMap = raw.MIDIValueMap
+// A source or destination in a MIDI thru connection.
+type MIDIThruConnectionEndpoint struct {
+	EndpointRef uint
+	UniqueID    int
+}

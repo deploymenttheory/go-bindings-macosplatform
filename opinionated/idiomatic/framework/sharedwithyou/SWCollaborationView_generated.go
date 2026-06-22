@@ -6,123 +6,118 @@ package sharedwithyou
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that contains the collaboration content and options.
+// CollaborationView is an idiomatic wrapper over the Objective-C class SWCollaborationView.
 //
-// CollaborationView wraps [raw.SWCollaborationView] with a fluent Go API.
+// A view that contains the collaboration content and options.
 type CollaborationView struct {
-	inner *raw.SWCollaborationView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWCollaborationView].
-func (x *CollaborationView) Unwrap() *raw.SWCollaborationView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollaborationView) ID() objc.ID { return x.inner.Ptr() }
-
-// CollaborationViewFromID adopts an existing object pointer as a CollaborationView (nil for 0).
+// CollaborationViewFromID adopts an existing Objective-C object as a CollaborationView
+// (nil for 0), retaining it and registering a release finalizer.
 func CollaborationViewFromID(id objc.ID) *CollaborationView {
 	if id == 0 {
 		return nil
 	}
-	return &CollaborationView{inner: raw.SWCollaborationViewFromID(id)}
-}
-
-// Creates and initializes a collaboration view.
-//
-// NewCollaborationViewWithItemProvider creates a new [CollaborationView].
-func NewCollaborationViewWithItemProvider(itemProvider *foundation.NSItemProvider) *CollaborationView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemProvider:"), itemProvider.Ptr())
-	return &CollaborationView{inner: raw.SWCollaborationViewFromID(_id)}
-}
-
-// The delegate object for the cloud-sharing controller.
-//
-// WithCloudSharingDelegate sets the cloudSharingDelegate property and returns the receiver for chaining.
-func (x *CollaborationView) WithCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView {
-	x.inner.SetCloudSharingDelegate(cloudSharingDelegate)
+	x := &CollaborationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The number of participants in a collaboration.
-//
-// WithActiveParticipantCount sets the activeParticipantCount property and returns the receiver for chaining.
-func (x *CollaborationView) WithActiveParticipantCount(activeParticipantCount uint) *CollaborationView {
-	x.inner.SetActiveParticipantCount(activeParticipantCount)
+// collaborationViewAdopt wraps an Objective-C object that this code just created as a
+// CollaborationView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collaborationViewAdopt(id objc.ID) *CollaborationView {
+	if id == 0 {
+		return nil
+	}
+	x := &CollaborationView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The delegate object for the collaboration view.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CollaborationView) WithDelegate(delegate raw.SWCollaborationViewDelegate) *CollaborationView {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *CollaborationView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollaborationView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollaborationView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollaborationView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollaborationViewWithItemProvider creates and initializes a collaboration view.
+func NewCollaborationViewWithItemProvider(itemProvider obj.Object) *CollaborationView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemProvider:"), objref.IDOf(itemProvider))
+	return collaborationViewAdopt(_id)
+}
+
+// WithActiveParticipantCount the number of participants in a collaboration.
+func (x *CollaborationView) WithActiveParticipantCount(activeParticipantCount int) *CollaborationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
 	return x
 }
 
-// The title that the system displays in the header.
-//
-// WithHeaderTitle sets the headerTitle property and returns the receiver for chaining.
+// WithHeaderTitle the title that the system displays in the header.
 func (x *CollaborationView) WithHeaderTitle(headerTitle string) *CollaborationView {
-	x.inner.SetHeaderTitle(foundation.NSStringStringWithUTF8String(headerTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderTitle:"), purego.NSString(headerTitle))
 	return x
 }
 
-// The subtitle that the system displays in the header.
-//
-// WithHeaderSubtitle sets the headerSubtitle property and returns the receiver for chaining.
+// WithHeaderSubtitle the subtitle that the system displays in the header.
 func (x *CollaborationView) WithHeaderSubtitle(headerSubtitle string) *CollaborationView {
-	x.inner.SetHeaderSubtitle(foundation.NSStringStringWithUTF8String(headerSubtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderSubtitle:"), purego.NSString(headerSubtitle))
 	return x
 }
 
-// The image that the system displays in the header.
-//
-// WithHeaderImage sets the headerImage property and returns the receiver for chaining.
-func (x *CollaborationView) WithHeaderImage(headerImage *appkit.NSImage) *CollaborationView {
-	x.inner.SetHeaderImage(headerImage)
+// WithHeaderImage the image that the system displays in the header.
+func (x *CollaborationView) WithHeaderImage(headerImage obj.Object) *CollaborationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
 	return x
 }
 
-// A reference to an object that conforms to the cloud-sharing service delegate protocol.
-//
-// WithCloudSharingServiceDelegate sets the cloudSharingServiceDelegate property and returns the receiver for chaining.
-func (x *CollaborationView) WithCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView {
-	x.inner.SetCloudSharingServiceDelegate(cloudSharingServiceDelegate)
-	return x
-}
-
-// The manage button title that the system displays in the header.
-//
-// WithManageButtonTitle sets the manageButtonTitle property and returns the receiver for chaining.
+// WithManageButtonTitle the manage button title that the system displays in the header.
 func (x *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *CollaborationView {
-	x.inner.SetManageButtonTitle(foundation.NSStringStringWithUTF8String(manageButtonTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManageButtonTitle:"), purego.NSString(manageButtonTitle))
 	return x
 }
 
-// Sets the content view.
-//
-// SetContentView calls the underlying SetContentView.
-func (x *CollaborationView) SetContentView(detailViewListContentView *appkit.NSView) {
-	x.inner.SetContentView(detailViewListContentView)
+// SetContentView sets the content view.
+func (x *CollaborationView) SetContentView(detailViewListContentView obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(detailViewListContentView))
 }
 
-// Dismisses the popover.
+// DismissPopover dismisses the popover.
 //
 // DismissPopover blocks until the operation completes or ctx is cancelled.
 func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.DismissPopover(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissPopover:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -131,143 +126,101 @@ func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	}
 }
 
-// A Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
-//
-// SetShowManageButton calls the underlying SetShowManageButton.
+// SetShowManageButton a Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 func (x *CollaborationView) SetShowManageButton(showManageButton bool) {
-	x.inner.SetShowManageButton(showManageButton)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowManageButton:"), showManageButton)
 }
 
-// CloudSharingDelegate calls the underlying CloudSharingDelegate.
-func (x *CollaborationView) CloudSharingDelegate() appkit.NSCloudSharingServiceDelegate {
-	return x.inner.CloudSharingDelegate()
+// ActiveParticipantCount wraps the corresponding Objective-C method.
+func (x *CollaborationView) ActiveParticipantCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("activeParticipantCount"))
+	return _r
 }
 
-// SetCloudSharingDelegate calls the underlying SetCloudSharingDelegate.
-func (x *CollaborationView) SetCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) {
-	x.inner.SetCloudSharingDelegate(cloudSharingDelegate)
+// SetActiveParticipantCount wraps the corresponding Objective-C method.
+func (x *CollaborationView) SetActiveParticipantCount(activeParticipantCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
 }
 
-// ActiveParticipantCount calls the underlying ActiveParticipantCount.
-func (x *CollaborationView) ActiveParticipantCount() uint {
-	return x.inner.ActiveParticipantCount()
-}
-
-// SetActiveParticipantCount calls the underlying SetActiveParticipantCount.
-func (x *CollaborationView) SetActiveParticipantCount(activeParticipantCount uint) {
-	x.inner.SetActiveParticipantCount(activeParticipantCount)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *CollaborationView) Delegate() raw.SWCollaborationViewDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *CollaborationView) SetDelegate(delegate raw.SWCollaborationViewDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// HeaderTitle calls the underlying HeaderTitle.
+// HeaderTitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) HeaderTitle() string {
-	_r := x.inner.HeaderTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHeaderTitle calls the underlying SetHeaderTitle.
+// SetHeaderTitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetHeaderTitle(headerTitle string) {
-	x.inner.SetHeaderTitle(foundation.NSStringStringWithUTF8String(headerTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderTitle:"), purego.NSString(headerTitle))
 }
 
-// HeaderSubtitle calls the underlying HeaderSubtitle.
+// HeaderSubtitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) HeaderSubtitle() string {
-	_r := x.inner.HeaderSubtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerSubtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHeaderSubtitle calls the underlying SetHeaderSubtitle.
+// SetHeaderSubtitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetHeaderSubtitle(headerSubtitle string) {
-	x.inner.SetHeaderSubtitle(foundation.NSStringStringWithUTF8String(headerSubtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderSubtitle:"), purego.NSString(headerSubtitle))
 }
 
-// HeaderImage calls the underlying HeaderImage.
-func (x *CollaborationView) HeaderImage() *appkit.NSImage {
-	return x.inner.HeaderImage()
+// HeaderImage wraps the corresponding Objective-C method.
+func (x *CollaborationView) HeaderImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerImage"))
+	return obj.Wrap(_r)
 }
 
-// SetHeaderImage calls the underlying SetHeaderImage.
-func (x *CollaborationView) SetHeaderImage(headerImage *appkit.NSImage) {
-	x.inner.SetHeaderImage(headerImage)
+// SetHeaderImage wraps the corresponding Objective-C method.
+func (x *CollaborationView) SetHeaderImage(headerImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
 }
 
-// MenuFormRepresentation calls the underlying MenuFormRepresentation.
-func (x *CollaborationView) MenuFormRepresentation() *appkit.NSMenuItem {
-	return x.inner.MenuFormRepresentation()
+// MenuFormRepresentation wraps the corresponding Objective-C method.
+func (x *CollaborationView) MenuFormRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuFormRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @abstract If you are using the built in manage share button, this delegate property will be forwarded along to the NSCloudSharingService that button presents. If you have your own and suppress the provided one via setShowManageButton, this does nothing.
-//
-// CloudSharingServiceDelegate calls the underlying CloudSharingServiceDelegate.
-func (x *CollaborationView) CloudSharingServiceDelegate() appkit.NSCloudSharingServiceDelegate {
-	return x.inner.CloudSharingServiceDelegate()
-}
-
-// SetCloudSharingServiceDelegate calls the underlying SetCloudSharingServiceDelegate.
-func (x *CollaborationView) SetCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) {
-	x.inner.SetCloudSharingServiceDelegate(cloudSharingServiceDelegate)
-}
-
-// @abstract sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
-//
-// ManageButtonTitle calls the underlying ManageButtonTitle.
+// ManageButtonTitle sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
 func (x *CollaborationView) ManageButtonTitle() string {
-	_r := x.inner.ManageButtonTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manageButtonTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetManageButtonTitle calls the underlying SetManageButtonTitle.
+// SetManageButtonTitle wraps the corresponding Objective-C method.
 func (x *CollaborationView) SetManageButtonTitle(manageButtonTitle string) {
-	x.inner.SetManageButtonTitle(foundation.NSStringStringWithUTF8String(manageButtonTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManageButtonTitle:"), purego.NSString(manageButtonTitle))
 }
 
 // CollaborationViewable is the interface implemented by [CollaborationView], for mocking and DI.
 type CollaborationViewable interface {
-	Unwrap() *raw.SWCollaborationView
-	WithCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView
-	WithActiveParticipantCount(activeParticipantCount uint) *CollaborationView
-	WithDelegate(delegate raw.SWCollaborationViewDelegate) *CollaborationView
+	obj.Object
+	WithActiveParticipantCount(activeParticipantCount int) *CollaborationView
 	WithHeaderTitle(headerTitle string) *CollaborationView
 	WithHeaderSubtitle(headerSubtitle string) *CollaborationView
-	WithHeaderImage(headerImage *appkit.NSImage) *CollaborationView
-	WithCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView
+	WithHeaderImage(headerImage obj.Object) *CollaborationView
 	WithManageButtonTitle(manageButtonTitle string) *CollaborationView
-	SetContentView(detailViewListContentView *appkit.NSView)
+	SetContentView(detailViewListContentView obj.Object)
 	DismissPopover(ctx context.Context) error
 	SetShowManageButton(showManageButton bool)
-	CloudSharingDelegate() appkit.NSCloudSharingServiceDelegate
-	SetCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate)
-	ActiveParticipantCount() uint
-	SetActiveParticipantCount(activeParticipantCount uint)
-	Delegate() raw.SWCollaborationViewDelegate
-	SetDelegate(delegate raw.SWCollaborationViewDelegate)
+	ActiveParticipantCount() int
+	SetActiveParticipantCount(activeParticipantCount int)
 	HeaderTitle() string
 	SetHeaderTitle(headerTitle string)
 	HeaderSubtitle() string
 	SetHeaderSubtitle(headerSubtitle string)
-	HeaderImage() *appkit.NSImage
-	SetHeaderImage(headerImage *appkit.NSImage)
-	MenuFormRepresentation() *appkit.NSMenuItem
-	CloudSharingServiceDelegate() appkit.NSCloudSharingServiceDelegate
-	SetCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate)
+	HeaderImage() obj.Object
+	SetHeaderImage(headerImage obj.Object)
+	MenuFormRepresentation() obj.Object
 	ManageButtonTitle() string
 	SetManageButtonTitle(manageButtonTitle string)
 }

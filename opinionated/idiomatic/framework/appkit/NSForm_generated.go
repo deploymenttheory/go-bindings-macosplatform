@@ -5,900 +5,692 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An NSForm object is a vertical matrix of NSFormCell objects to implement the fields.
+// Form is an idiomatic wrapper over the Objective-C class NSForm.
 //
-// Form wraps [raw.NSForm] with a fluent Go API.
+// It embeds [Matrix], promoting that type's methods.
+//
+// An NSForm object is a vertical matrix of NSFormCell objects to implement the fields.
 type Form struct {
-	inner *raw.NSForm
+	Matrix
 }
 
-// Unwrap returns the underlying [raw.NSForm].
-func (x *Form) Unwrap() *raw.NSForm { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Form) ID() objc.ID { return x.inner.Ptr() }
-
-// FormFromID adopts an existing object pointer as a Form (nil for 0).
+// FormFromID adopts an existing Objective-C object as a Form
+// (nil for 0), retaining it and registering a release finalizer.
 func FormFromID(id objc.ID) *Form {
 	if id == 0 {
 		return nil
 	}
-	return &Form{inner: raw.NSFormFromID(id)}
+	x := &Form{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewForm creates a new [Form].
+// formAdopt wraps an Objective-C object that this code just created as a
+// Form (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func formAdopt(id objc.ID) *Form {
+	if id == 0 {
+		return nil
+	}
+	x := &Form{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewForm creates a new Form.
 func NewForm() *Form {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSForm")), objc.RegisterName("new"))
-	return &Form{inner: raw.NSFormFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSForm")), objc.RegisterName("new"))
+	return formAdopt(_id)
 }
 
-// The prototype cell that’s copied whenever the matrix creates a new cell.
-//
-// WithPrototype sets the prototype property and returns the receiver for chaining.
+// WithPrototype the prototype cell that’s copied whenever the matrix creates a new cell.
 func (x *Form) WithPrototype(prototype CellProvider) *Form {
-	x.inner.NSMatrix.SetPrototype(prototype.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrototype:"), objref.IDOf(prototype))
 	return x
 }
 
-// The selection mode of the receiver.
-//
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *Form) WithMode(mode NSMatrixMode) *Form {
-	x.inner.NSMatrix.SetMode(raw.NSMatrixMode(mode))
+// WithMode the selection mode of the receiver.
+func (x *Form) WithMode(mode MatrixMode) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// A Boolean that indicates whether a radio-mode matrix supports an empty selection.
-//
-// WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
+// WithAllowsEmptySelection a Boolean that indicates whether a radio-mode matrix supports an empty selection.
 func (x *Form) WithAllowsEmptySelection(allowsEmptySelection bool) *Form {
-	x.inner.NSMatrix.SetAllowsEmptySelection(allowsEmptySelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
 	return x
 }
 
-// A Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
-//
-// WithSelectionByRect sets the selectionByRect property and returns the receiver for chaining.
+// WithSelectionByRect a Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
 func (x *Form) WithSelectionByRect(selectionByRect bool) *Form {
-	x.inner.NSMatrix.SetSelectionByRect(selectionByRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionByRect:"), selectionByRect)
 	return x
 }
 
-// The size of each cell in the matrix.
-//
-// WithCellSize sets the cellSize property and returns the receiver for chaining.
+// WithCellSize the size of each cell in the matrix.
 func (x *Form) WithCellSize(cellSize corefoundation.CGSize) *Form {
-	x.inner.NSMatrix.SetCellSize(cellSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellSize:"), cellSize)
 	return x
 }
 
-// The vertical and horizontal spacing between cells in the matrix.
-//
-// WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
+// WithIntercellSpacing the vertical and horizontal spacing between cells in the matrix.
 func (x *Form) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Form {
-	x.inner.NSMatrix.SetIntercellSpacing(intercellSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
 	return x
 }
 
-// The background color of the matrix (the space between the cells).
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the background color of the matrix (the space between the cells).
 func (x *Form) WithBackgroundColor(backgroundColor *Color) *Form {
-	x.inner.NSMatrix.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The background color of the matrix’s cells.
-//
-// WithCellBackgroundColor sets the cellBackgroundColor property and returns the receiver for chaining.
+// WithCellBackgroundColor the background color of the matrix’s cells.
 func (x *Form) WithCellBackgroundColor(cellBackgroundColor *Color) *Form {
-	x.inner.NSMatrix.SetCellBackgroundColor(cellBackgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellBackgroundColor:"), objref.IDOf(cellBackgroundColor))
 	return x
 }
 
-// A Boolean that indicates whether the matrix draws the background within each of its cells.
-//
-// WithDrawsCellBackground sets the drawsCellBackground property and returns the receiver for chaining.
+// WithDrawsCellBackground a Boolean that indicates whether the matrix draws the background within each of its cells.
 func (x *Form) WithDrawsCellBackground(drawsCellBackground bool) *Form {
-	x.inner.NSMatrix.SetDrawsCellBackground(drawsCellBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsCellBackground:"), drawsCellBackground)
 	return x
 }
 
-// A Boolean that indicates whether the matrix draws its background.
-//
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground a Boolean that indicates whether the matrix draws its background.
 func (x *Form) WithDrawsBackground(drawsBackground bool) *Form {
-	x.inner.NSMatrix.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The action sent to the target of the receiver when the user double-clicks a cell.
-//
-// WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
-func (x *Form) WithDoubleAction(doubleAction objc.SEL) *Form {
-	x.inner.NSMatrix.SetDoubleAction(doubleAction)
-	return x
-}
-
-// A Boolean that indicates whether the cell sizes change when the receiver is resized.
-//
-// WithAutosizesCells sets the autosizesCells property and returns the receiver for chaining.
+// WithAutosizesCells a Boolean that indicates whether the cell sizes change when the receiver is resized.
 func (x *Form) WithAutosizesCells(autosizesCells bool) *Form {
-	x.inner.NSMatrix.SetAutosizesCells(autosizesCells)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosizesCells:"), autosizesCells)
 	return x
 }
 
-// A Boolean that indicates whether the receiver is automatically scrolled.
-//
-// WithAutoscroll sets the autoscroll property and returns the receiver for chaining.
+// WithAutoscroll a Boolean that indicates whether the receiver is automatically scrolled.
 func (x *Form) WithAutoscroll(autoscroll bool) *Form {
-	x.inner.NSMatrix.SetAutoscroll(autoscroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoscroll:"), autoscroll)
 	return x
 }
 
-// The delegate for messages from the field editor.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Form) WithDelegate(delegate raw.NSMatrixDelegate) *Form {
-	x.inner.NSMatrix.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean that indicates whether the matrix auto-recalculates its cell size.
-//
-// WithAutorecalculatesCellSize sets the autorecalculatesCellSize property and returns the receiver for chaining.
+// WithAutorecalculatesCellSize a Boolean that indicates whether the matrix auto-recalculates its cell size.
 func (x *Form) WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Form {
-	x.inner.NSMatrix.SetAutorecalculatesCellSize(autorecalculatesCellSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesCellSize:"), autorecalculatesCellSize)
 	return x
 }
 
-// A Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
-//
-// WithTabKeyTraversesCells sets the tabKeyTraversesCells property and returns the receiver for chaining.
+// WithTabKeyTraversesCells a Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
 func (x *Form) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Form {
-	x.inner.NSMatrix.SetTabKeyTraversesCells(tabKeyTraversesCells)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabKeyTraversesCells:"), tabKeyTraversesCells)
 	return x
 }
 
-// The cell that will be clicked when the user presses the Space bar.
-//
-// WithKeyCell sets the keyCell property and returns the receiver for chaining.
+// WithKeyCell the cell that will be clicked when the user presses the Space bar.
 func (x *Form) WithKeyCell(keyCell CellProvider) *Form {
-	x.inner.NSMatrix.SetKeyCell(keyCell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCell:"), objref.IDOf(keyCell))
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *Form) WithTarget(target objc.ID) *Form {
-	x.inner.NSMatrix.NSControl.SetTarget(target)
+// WithTarget the target object that receives action messages from the cell.
+func (x *Form) WithTarget(target obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *Form) WithAction(action objc.SEL) *Form {
-	x.inner.NSMatrix.NSControl.SetAction(action)
-	return x
-}
-
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *Form) WithTag(tag int) *Form {
-	x.inner.NSMatrix.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *Form) WithIgnoresMultiClick(ignoresMultiClick bool) *Form {
-	x.inner.NSMatrix.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *Form) WithContinuous(continuous bool) *Form {
-	x.inner.NSMatrix.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *Form) WithEnabled(enabled bool) *Form {
-	x.inner.NSMatrix.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *Form) WithRefusesFirstResponder(refusesFirstResponder bool) *Form {
-	x.inner.NSMatrix.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *Form) WithHighlighted(highlighted bool) *Form {
-	x.inner.NSMatrix.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Form) WithControlSize(controlSize NSControlSize) *Form {
-	x.inner.NSMatrix.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the control.
+func (x *Form) WithControlSize(controlSize ControlSize) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *Form) WithFormatter(formatter *foundation.NSFormatter) *Form {
-	x.inner.NSMatrix.NSControl.SetFormatter(formatter)
+// WithFormatter the receiver’s formatter.
+func (x *Form) WithFormatter(formatter obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *Form) WithObjectValue(objectValue objc.ID) *Form {
-	x.inner.NSMatrix.NSControl.SetObjectValue(objectValue)
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
+func (x *Form) WithObjectValue(objectValue obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *Form) WithStringValue(stringValue string) *Form {
-	x.inner.NSMatrix.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *Form) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Form {
-	x.inner.NSMatrix.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
+func (x *Form) WithAttributedStringValue(attributedStringValue obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *Form) WithIntValue(intValue int) *Form {
-	x.inner.NSMatrix.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *Form) WithIntegerValue(integerValue int) *Form {
-	x.inner.NSMatrix.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *Form) WithFloatValue(floatValue float32) *Form {
-	x.inner.NSMatrix.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *Form) WithDoubleValue(doubleValue float64) *Form {
-	x.inner.NSMatrix.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *Form) WithFont(font *Font) *Form {
-	x.inner.NSMatrix.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *Form) WithUsesSingleLineMode(usesSingleLineMode bool) *Form {
-	x.inner.NSMatrix.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Form) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Form {
-	x.inner.NSMatrix.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
+func (x *Form) WithLineBreakMode(lineBreakMode LineBreakMode) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Form) WithAlignment(alignment NSTextAlignment) *Form {
-	x.inner.NSMatrix.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment mode of the text in the receiver’s cell.
+func (x *Form) WithAlignment(alignment TextAlignment) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Form) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Form {
-	x.inner.NSMatrix.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *Form) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *Form) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form {
-	x.inner.NSMatrix.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithCell(cell CellProvider) *Form {
-	x.inner.NSMatrix.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithSubviews(items ...ViewProvider) *Form {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSMatrix.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSMatrix.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithHidden(hidden bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithAutoresizesSubviews(autoresizesSubviews bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Form) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (x *Form) WithFrame(frame corefoundation.CGRect) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithFrameRotation(frameRotation float64) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithFrameCenterRotation(frameCenterRotation float64) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithBoundsRotation(boundsRotation float64) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (x *Form) WithBounds(bounds corefoundation.CGRect) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithCanDrawConcurrently(canDrawConcurrently bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *Form) WithNeedsDisplay(needsDisplay bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithWantsRestingTouches(wantsRestingTouches bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Form) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Form) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithWantsLayer(wantsLayer bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *Form) WithLayer(layer *quartzcore.CALayer) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetLayer(layer)
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithLayer(layer obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithNeedsLayout(needsLayout bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithAlphaValue(alphaValue float64) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Form) WithBackgroundFilters(items ...*coreimage.CIFilter) *Form {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSMatrix.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSMatrix.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithBackgroundFilters(items ...obj.Object) *Form {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *Form) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithCompositingFilter(compositingFilter obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Form) WithContentFilters(items ...*coreimage.CIFilter) *Form {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSMatrix.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSMatrix.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithContentFilters(items ...obj.Object) *Form {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithShadow(shadow *Shadow) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithClipsToBounds(clipsToBounds bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithToolTip(toolTip string) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Form) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return x
 }
 
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithNextKeyView(nextKeyView ViewProvider) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Form) WithFocusRingType(focusRingType NSFocusRingType) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithFocusRingType(focusRingType FocusRingType) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithGestureRecognizers(items ...GestureRecognizerProvider) *Form {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSMatrix.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSMatrix.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Form) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *Form) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *Form) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *Form) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Form) WithNextResponder(nextResponder ResponderProvider) *Form {
-	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *Form) WithMenu(menu *Menu) *Form {
-	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Form) WithUserActivity(userActivity *foundation.NSUserActivity) *Form {
-	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *Form) WithUserActivity(userActivity obj.Object) *Form {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Form) WithTouchBar(touchBar *TouchBar) *Form {
-	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Returns the index of the selected entry.
-//
-// IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
+// IndexOfSelectedItem returns the index of the selected entry.
 func (x *Form) IndexOfSelectedItem() int {
-	return x.inner.IndexOfSelectedItem()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfSelectedItem"))
+	return _r
 }
 
-// Sets the width of all the entries in the receiver.
-//
-// SetEntryWidth calls the underlying SetEntryWidth.
+// SetEntryWidth sets the width of all the entries in the receiver.
 func (x *Form) SetEntryWidth(width float64) {
-	x.inner.SetEntryWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntryWidth:"), width)
 }
 
-// Sets the spacing between entries
-//
-// SetInterlineSpacing calls the underlying SetInterlineSpacing.
+// SetInterlineSpacing sets the spacing between entries
 func (x *Form) SetInterlineSpacing(spacing float64) {
-	x.inner.SetInterlineSpacing(spacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterlineSpacing:"), spacing)
 }
 
-// Sets whether the receiver’s entries should display a border around their editable text fields.
-//
-// SetBordered calls the underlying SetBordered.
+// SetBordered sets whether the receiver’s entries should display a border around their editable text fields.
 func (x *Form) SetBordered(flag bool) {
-	x.inner.SetBordered(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), flag)
 }
 
-// Sets whether the receiver’s entries should display a bezel around their editable text.
-//
-// SetBezeled calls the underlying SetBezeled.
+// SetBezeled sets whether the receiver’s entries should display a bezel around their editable text.
 func (x *Form) SetBezeled(flag bool) {
-	x.inner.SetBezeled(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), flag)
 }
 
-// Sets the alignment for all of the entry titles.
-//
-// SetTitleAlignment calls the underlying SetTitleAlignment.
-func (x *Form) SetTitleAlignment(mode NSTextAlignment) {
-	x.inner.SetTitleAlignment(raw.NSTextAlignment(mode))
+// SetTitleAlignment sets the alignment for all of the entry titles.
+func (x *Form) SetTitleAlignment(mode TextAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleAlignment:"), mode)
 }
 
-// Sets the alignment for all of the receiver’s editable text.
-//
-// SetTextAlignment calls the underlying SetTextAlignment.
-func (x *Form) SetTextAlignment(mode NSTextAlignment) {
-	x.inner.SetTextAlignment(raw.NSTextAlignment(mode))
+// SetTextAlignment sets the alignment for all of the receiver’s editable text.
+func (x *Form) SetTextAlignment(mode TextAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAlignment:"), mode)
 }
 
-// Sets the font for all of the entry titles.
-//
-// SetTitleFont calls the underlying SetTitleFont.
-func (x *Form) SetTitleFont(fontObj *raw.NSFont) {
-	x.inner.SetTitleFont(fontObj)
+// SetTitleFont sets the font for all of the entry titles.
+func (x *Form) SetTitleFont(fontObj *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
 }
 
-// Sets the font for all of the receiver’s editable text fields
-//
-// SetTextFont calls the underlying SetTextFont.
-func (x *Form) SetTextFont(fontObj *raw.NSFont) {
-	x.inner.SetTextFont(fontObj)
+// SetTextFont sets the font for all of the receiver’s editable text fields
+func (x *Form) SetTextFont(fontObj *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextFont:"), objref.IDOf(fontObj))
 }
 
-// Returns the entry at the specified index.
-//
-// CellAtIndex calls the underlying CellAtIndex.
-func (x *Form) CellAtIndex(index int) objc.ID {
-	return x.inner.CellAtIndex(index)
+// CellAtIndex returns the entry at the specified index.
+func (x *Form) CellAtIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellAtIndex:"), index)
+	return obj.Wrap(_r)
 }
 
-// Displays the entry at the specified index.
-//
-// DrawCellAtIndex calls the underlying DrawCellAtIndex.
+// DrawCellAtIndex displays the entry at the specified index.
 func (x *Form) DrawCellAtIndex(index int) {
-	x.inner.DrawCellAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawCellAtIndex:"), index)
 }
 
-// Adds a new entry to the end of the receiver and gives it the specified title.
-//
-// AddEntry calls the underlying AddEntry.
+// AddEntry adds a new entry to the end of the receiver and gives it the specified title.
 func (x *Form) AddEntry(title string) *FormCell {
-	_r := x.inner.AddEntry(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &FormCell{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntry:"), purego.NSString(title))
+	return FormCellFromID(_r)
 }
 
-// Inserts an entry with the specified title into the receiver.
-//
-// InsertEntryAtIndex calls the underlying InsertEntryAtIndex.
+// InsertEntryAtIndex inserts an entry with the specified title into the receiver.
 func (x *Form) InsertEntryAtIndex(title string, index int) *FormCell {
-	_r := x.inner.InsertEntryAtIndex(foundation.NSStringStringWithUTF8String(title), index)
-	if _r == nil {
-		return nil
-	}
-	return &FormCell{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertEntry:atIndex:"), purego.NSString(title), index)
+	return FormCellFromID(_r)
 }
 
-// Removes and releases the entry at the specified index.
-//
-// RemoveEntryAtIndex calls the underlying RemoveEntryAtIndex.
+// RemoveEntryAtIndex removes and releases the entry at the specified index.
 func (x *Form) RemoveEntryAtIndex(index int) {
-	x.inner.RemoveEntryAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeEntryAtIndex:"), index)
 }
 
-// Returns the index of the entry whose tag is tag.
-//
-// IndexOfCellWithTag calls the underlying IndexOfCellWithTag.
+// IndexOfCellWithTag returns the index of the entry whose tag is tag.
 func (x *Form) IndexOfCellWithTag(tag int) int {
-	return x.inner.IndexOfCellWithTag(tag)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfCellWithTag:"), tag)
+	return _r
 }
 
-// Selects the entry at the specified index.
-//
-// SelectTextAtIndex calls the underlying SelectTextAtIndex.
+// SelectTextAtIndex selects the entry at the specified index.
 func (x *Form) SelectTextAtIndex(index int) {
-	x.inner.SelectTextAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectTextAtIndex:"), index)
 }
 
-// Sets the writing direction for the title of every control embedded in the form.
-//
-// SetTitleBaseWritingDirection calls the underlying SetTitleBaseWritingDirection.
-func (x *Form) SetTitleBaseWritingDirection(writingDirection NSWritingDirection) {
-	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(writingDirection))
+// SetTitleBaseWritingDirection sets the writing direction for the title of every control embedded in the form.
+func (x *Form) SetTitleBaseWritingDirection(writingDirection WritingDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleBaseWritingDirection:"), writingDirection)
 }
 
-// Sets the writing direction for the text content of every control embedded in the form.
-//
-// SetTextBaseWritingDirection calls the underlying SetTextBaseWritingDirection.
-func (x *Form) SetTextBaseWritingDirection(writingDirection NSWritingDirection) {
-	x.inner.SetTextBaseWritingDirection(raw.NSWritingDirection(writingDirection))
+// SetTextBaseWritingDirection sets the writing direction for the text content of every control embedded in the form.
+func (x *Form) SetTextBaseWritingDirection(writingDirection WritingDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextBaseWritingDirection:"), writingDirection)
 }
 
-// Sets the preferred text field width used by Auto Layout.
-//
-// SetPreferredTextFieldWidth calls the underlying SetPreferredTextFieldWidth.
+// SetPreferredTextFieldWidth sets the preferred text field width used by Auto Layout.
 func (x *Form) SetPreferredTextFieldWidth(preferredWidth float64) {
-	x.inner.SetPreferredTextFieldWidth(preferredWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTextFieldWidth:"), preferredWidth)
 }
 
-// The preferred width of the form’s cells when using Auto Layout.
-//
-// PreferredTextFieldWidth calls the underlying PreferredTextFieldWidth.
+// PreferredTextFieldWidth the preferred width of the form’s cells when using Auto Layout.
 func (x *Form) PreferredTextFieldWidth() float64 {
-	return x.inner.PreferredTextFieldWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredTextFieldWidth"))
+	return _r
 }
-
-func (x *Form) asMatrix() *raw.NSMatrix { return &x.inner.NSMatrix }
-
-func (x *Form) asControl() *raw.NSControl { return &x.inner.NSMatrix.NSControl }
-
-func (x *Form) asView() *raw.NSView { return &x.inner.NSMatrix.NSControl.NSView }
-
-func (x *Form) asResponder() *raw.NSResponder { return &x.inner.NSMatrix.NSControl.NSView.NSResponder }
 
 // Formable is the interface implemented by [Form], for mocking and DI.
 type Formable interface {
-	Unwrap() *raw.NSForm
+	obj.Object
 	WithPrototype(prototype CellProvider) *Form
-	WithMode(mode NSMatrixMode) *Form
+	WithMode(mode MatrixMode) *Form
 	WithAllowsEmptySelection(allowsEmptySelection bool) *Form
 	WithSelectionByRect(selectionByRect bool) *Form
 	WithCellSize(cellSize corefoundation.CGSize) *Form
@@ -907,42 +699,39 @@ type Formable interface {
 	WithCellBackgroundColor(cellBackgroundColor *Color) *Form
 	WithDrawsCellBackground(drawsCellBackground bool) *Form
 	WithDrawsBackground(drawsBackground bool) *Form
-	WithDoubleAction(doubleAction objc.SEL) *Form
 	WithAutosizesCells(autosizesCells bool) *Form
 	WithAutoscroll(autoscroll bool) *Form
-	WithDelegate(delegate raw.NSMatrixDelegate) *Form
 	WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Form
 	WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Form
 	WithKeyCell(keyCell CellProvider) *Form
-	WithTarget(target objc.ID) *Form
-	WithAction(action objc.SEL) *Form
+	WithTarget(target obj.Object) *Form
 	WithTag(tag int) *Form
 	WithIgnoresMultiClick(ignoresMultiClick bool) *Form
 	WithContinuous(continuous bool) *Form
 	WithEnabled(enabled bool) *Form
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Form
 	WithHighlighted(highlighted bool) *Form
-	WithControlSize(controlSize NSControlSize) *Form
-	WithFormatter(formatter *foundation.NSFormatter) *Form
-	WithObjectValue(objectValue objc.ID) *Form
+	WithControlSize(controlSize ControlSize) *Form
+	WithFormatter(formatter obj.Object) *Form
+	WithObjectValue(objectValue obj.Object) *Form
 	WithStringValue(stringValue string) *Form
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Form
+	WithAttributedStringValue(attributedStringValue obj.Object) *Form
 	WithIntValue(intValue int) *Form
 	WithIntegerValue(integerValue int) *Form
 	WithFloatValue(floatValue float32) *Form
 	WithDoubleValue(doubleValue float64) *Form
 	WithFont(font *Font) *Form
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Form
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Form
-	WithAlignment(alignment NSTextAlignment) *Form
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Form
+	WithLineBreakMode(lineBreakMode LineBreakMode) *Form
+	WithAlignment(alignment TextAlignment) *Form
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Form
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form
 	WithCell(cell CellProvider) *Form
 	WithSubviews(items ...ViewProvider) *Form
 	WithHidden(hidden bool) *Form
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Form
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Form
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Form
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Form
 	WithFrame(frame corefoundation.CGRect) *Form
 	WithFrameRotation(frameRotation float64) *Form
 	WithFrameCenterRotation(frameCenterRotation float64) *Form
@@ -952,27 +741,27 @@ type Formable interface {
 	WithNeedsDisplay(needsDisplay bool) *Form
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Form
 	WithWantsRestingTouches(wantsRestingTouches bool) *Form
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Form
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Form
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Form
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Form
 	WithWantsLayer(wantsLayer bool) *Form
-	WithLayer(layer *quartzcore.CALayer) *Form
+	WithLayer(layer obj.Object) *Form
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Form
 	WithNeedsLayout(needsLayout bool) *Form
 	WithAlphaValue(alphaValue float64) *Form
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Form
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *Form
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Form
-	WithContentFilters(items ...*coreimage.CIFilter) *Form
+	WithBackgroundFilters(items ...obj.Object) *Form
+	WithCompositingFilter(compositingFilter obj.Object) *Form
+	WithContentFilters(items ...obj.Object) *Form
 	WithShadow(shadow *Shadow) *Form
 	WithClipsToBounds(clipsToBounds bool) *Form
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form
 	WithToolTip(toolTip string) *Form
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Form
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Form
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Form
 	WithNextKeyView(nextKeyView ViewProvider) *Form
-	WithFocusRingType(focusRingType NSFocusRingType) *Form
+	WithFocusRingType(focusRingType FocusRingType) *Form
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Form
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Form
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Form
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form
@@ -985,28 +774,36 @@ type Formable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Form
 	WithNextResponder(nextResponder ResponderProvider) *Form
 	WithMenu(menu *Menu) *Form
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Form
+	WithUserActivity(userActivity obj.Object) *Form
 	WithTouchBar(touchBar *TouchBar) *Form
 	IndexOfSelectedItem() int
 	SetEntryWidth(width float64)
 	SetInterlineSpacing(spacing float64)
 	SetBordered(flag bool)
 	SetBezeled(flag bool)
-	SetTitleAlignment(mode NSTextAlignment)
-	SetTextAlignment(mode NSTextAlignment)
-	SetTitleFont(fontObj *raw.NSFont)
-	SetTextFont(fontObj *raw.NSFont)
-	CellAtIndex(index int) objc.ID
+	SetTitleAlignment(mode TextAlignment)
+	SetTextAlignment(mode TextAlignment)
+	SetTitleFont(fontObj *Font)
+	SetTextFont(fontObj *Font)
+	CellAtIndex(index int) obj.Object
 	DrawCellAtIndex(index int)
 	AddEntry(title string) *FormCell
 	InsertEntryAtIndex(title string, index int) *FormCell
 	RemoveEntryAtIndex(index int)
 	IndexOfCellWithTag(tag int) int
 	SelectTextAtIndex(index int)
-	SetTitleBaseWritingDirection(writingDirection NSWritingDirection)
-	SetTextBaseWritingDirection(writingDirection NSWritingDirection)
+	SetTitleBaseWritingDirection(writingDirection WritingDirection)
+	SetTextBaseWritingDirection(writingDirection WritingDirection)
 	SetPreferredTextFieldWidth(preferredWidth float64)
 	PreferredTextFieldWidth() float64
 }
 
 var _ Formable = (*Form)(nil)
+
+var _ MatrixProvider = (*Form)(nil)
+
+var _ ControlProvider = (*Form)(nil)
+
+var _ ViewProvider = (*Form)(nil)
+
+var _ ResponderProvider = (*Form)(nil)

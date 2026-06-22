@@ -5,140 +5,157 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An ordered list of assets or collections returned from a Photos fetch method.
+// FetchResult is an idiomatic wrapper over the Objective-C class PHFetchResult.
 //
-// FetchResult wraps [raw.PHFetchResult] with a fluent Go API.
+// An ordered list of assets or collections returned from a Photos fetch method.
 type FetchResult struct {
-	inner *raw.PHFetchResult[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHFetchResult].
-func (x *FetchResult) Unwrap() *raw.PHFetchResult[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchResult) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchResultFromID adopts an existing object pointer as a FetchResult (nil for 0).
+// FetchResultFromID adopts an existing Objective-C object as a FetchResult
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchResultFromID(id objc.ID) *FetchResult {
 	if id == 0 {
 		return nil
 	}
-	return &FetchResult{inner: raw.PHFetchResultFromID[objc.ID](id)}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFetchResult creates a new [FetchResult].
+// fetchResultAdopt wraps an Objective-C object that this code just created as a
+// FetchResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchResultAdopt(id objc.ID) *FetchResult {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFetchResult creates a new FetchResult.
 func NewFetchResult() *FetchResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHFetchResult")), objc.RegisterName("new"))
-	return &FetchResult{inner: raw.PHFetchResultFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHFetchResult")), objc.RegisterName("new"))
+	return fetchResultAdopt(_id)
 }
 
-// Returns the object located at the specified index.
-//
-// ObjectAtIndex calls the underlying ObjectAtIndex.
-func (x *FetchResult) ObjectAtIndex(index uint) objc.ID {
-	return x.inner.ObjectAtIndex(index)
+// ObjectAtIndex returns the object located at the specified index.
+func (x *FetchResult) ObjectAtIndex(index int) obj.Object {
+	errkit.CheckIndex(index, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
+	return obj.Wrap(_r)
 }
 
-// Returns the object located at the specified index.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *FetchResult) ObjectAtIndexedSubscript(idx uint) objc.ID {
-	return x.inner.ObjectAtIndexedSubscript(idx)
+// ObjectAtIndexedSubscript returns the object located at the specified index.
+func (x *FetchResult) ObjectAtIndexedSubscript(idx int) obj.Object {
+	errkit.CheckIndex(idx, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+	return obj.Wrap(_r)
 }
 
-// Returns whether the specified object is present in the fetch result.
-//
-// ContainsObject calls the underlying ContainsObject.
-func (x *FetchResult) ContainsObject(anObject objc.ID) bool {
-	return x.inner.ContainsObject(anObject)
+// ContainsObject returns whether the specified object is present in the fetch result.
+func (x *FetchResult) ContainsObject(anObject obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
+	return _r
 }
 
-// Returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
-//
-// IndexOfObject calls the underlying IndexOfObject.
-func (x *FetchResult) IndexOfObject(anObject objc.ID) uint {
-	return x.inner.IndexOfObject(anObject)
+// IndexOfObject returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
+func (x *FetchResult) IndexOfObject(anObject obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:"), objref.IDOf(anObject))
+	return _r
 }
 
-// Returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.
-//
-// IndexOfObjectInRange calls the underlying IndexOfObjectInRange.
-func (x *FetchResult) IndexOfObjectInRange(anObject objc.ID, range_ foundation.NSRange) uint {
-	return x.inner.IndexOfObjectInRange(anObject, range_)
+// IndexOfObjectInRange returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.
+func (x *FetchResult) IndexOfObjectInRange(anObject obj.Object, range_ foundation.NSRange) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:inRange:"), objref.IDOf(anObject), range_)
+	return _r
 }
 
-// Returns an array containing the objects in the fetch result at the indexes in the specified index set.
-//
-// ObjectsAtIndexes calls the underlying ObjectsAtIndexes.
-func (x *FetchResult) ObjectsAtIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[objc.ID] {
-	return x.inner.ObjectsAtIndexes(indexes)
+// ObjectsAtIndexes returns an array containing the objects in the fetch result at the indexes in the specified index set.
+func (x *FetchResult) ObjectsAtIndexes(indexes obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
-//
-// EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
-func (x *FetchResult) EnumerateObjectsUsing(block objc.Block) {
-	x.inner.EnumerateObjectsUsing(block)
+// EnumerateObjectsUsing executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
+func (x *FetchResult) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// Executes the specified block using each object in the fetch result.
-//
-// EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
-func (x *FetchResult) EnumerateObjectsWithOptionsUsing(opts foundation.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsWithOptionsUsing(opts, block)
+// CountOfAssetsWithMediaType returns the number of assets in the fetch result of a specified type.
+func (x *FetchResult) CountOfAssetsWithMediaType(mediaType AssetMediaType) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countOfAssetsWithMediaType:"), mediaType)
+	return _r
 }
 
-// Executes the specified block using the objects in the fetch result at the specified indexes.
-//
-// EnumerateObjectsAtIndexesOptionsUsing calls the underlying EnumerateObjectsAtIndexesOptionsUsing.
-func (x *FetchResult) EnumerateObjectsAtIndexesOptionsUsing(s *foundation.NSIndexSet, opts foundation.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, opts, block)
+// Count wraps the corresponding Objective-C method.
+func (x *FetchResult) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// Returns the number of assets in the fetch result of a specified type.
-//
-// CountOfAssetsWithMediaType calls the underlying CountOfAssetsWithMediaType.
-func (x *FetchResult) CountOfAssetsWithMediaType(mediaType PHAssetMediaType) uint {
-	return x.inner.CountOfAssetsWithMediaType(raw.PHAssetMediaType(mediaType))
+// FirstObject wraps the corresponding Objective-C method.
+func (x *FetchResult) FirstObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObject"))
+	return obj.Wrap(_r)
 }
 
-// Count calls the underlying Count.
-func (x *FetchResult) Count() uint {
-	return x.inner.Count()
-}
-
-// FirstObject calls the underlying FirstObject.
-func (x *FetchResult) FirstObject() objc.ID {
-	return x.inner.FirstObject()
-}
-
-// LastObject calls the underlying LastObject.
-func (x *FetchResult) LastObject() objc.ID {
-	return x.inner.LastObject()
+// LastObject wraps the corresponding Objective-C method.
+func (x *FetchResult) LastObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastObject"))
+	return obj.Wrap(_r)
 }
 
 // FetchResultable is the interface implemented by [FetchResult], for mocking and DI.
 type FetchResultable interface {
-	Unwrap() *raw.PHFetchResult[objc.ID]
-	ObjectAtIndex(index uint) objc.ID
-	ObjectAtIndexedSubscript(idx uint) objc.ID
-	ContainsObject(anObject objc.ID) bool
-	IndexOfObject(anObject objc.ID) uint
-	IndexOfObjectInRange(anObject objc.ID, range_ foundation.NSRange) uint
-	ObjectsAtIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[objc.ID]
-	EnumerateObjectsUsing(block objc.Block)
-	EnumerateObjectsWithOptionsUsing(opts foundation.NSEnumerationOptions, block objc.Block)
-	EnumerateObjectsAtIndexesOptionsUsing(s *foundation.NSIndexSet, opts foundation.NSEnumerationOptions, block objc.Block)
-	CountOfAssetsWithMediaType(mediaType PHAssetMediaType) uint
-	Count() uint
-	FirstObject() objc.ID
-	LastObject() objc.ID
+	obj.Object
+	ObjectAtIndex(index int) obj.Object
+	ObjectAtIndexedSubscript(idx int) obj.Object
+	ContainsObject(anObject obj.Object) bool
+	IndexOfObject(anObject obj.Object) int
+	IndexOfObjectInRange(anObject obj.Object, range_ foundation.NSRange) int
+	ObjectsAtIndexes(indexes obj.Object) []obj.Object
+	EnumerateObjectsUsing(block func(obj.Object, int, *bool))
+	CountOfAssetsWithMediaType(mediaType AssetMediaType) int
+	Count() int
+	FirstObject() obj.Object
+	LastObject() obj.Object
 }
 
 var _ FetchResultable = (*FetchResult)(nil)

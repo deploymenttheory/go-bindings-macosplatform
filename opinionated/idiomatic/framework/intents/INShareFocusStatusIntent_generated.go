@@ -5,73 +5,80 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates the user’s focus status is changing.
+// ShareFocusStatusIntent is an idiomatic wrapper over the Objective-C class INShareFocusStatusIntent.
 //
-// ShareFocusStatusIntent wraps [raw.INShareFocusStatusIntent] with a fluent Go API.
+// It embeds [Intent], promoting that type's methods.
+//
+// An object that indicates the user’s focus status is changing.
 type ShareFocusStatusIntent struct {
-	inner *raw.INShareFocusStatusIntent
+	Intent
 }
 
-// Unwrap returns the underlying [raw.INShareFocusStatusIntent].
-func (x *ShareFocusStatusIntent) Unwrap() *raw.INShareFocusStatusIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareFocusStatusIntent) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareFocusStatusIntentFromID adopts an existing object pointer as a ShareFocusStatusIntent (nil for 0).
+// ShareFocusStatusIntentFromID adopts an existing Objective-C object as a ShareFocusStatusIntent
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareFocusStatusIntentFromID(id objc.ID) *ShareFocusStatusIntent {
 	if id == 0 {
 		return nil
 	}
-	return &ShareFocusStatusIntent{inner: raw.INShareFocusStatusIntentFromID(id)}
-}
-
-// Creates an intent with the specified focus status.
-//
-// NewShareFocusStatusIntentWithFocusStatus creates a new [ShareFocusStatusIntent].
-func NewShareFocusStatusIntentWithFocusStatus(focusStatus *raw.INFocusStatus) *ShareFocusStatusIntent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShareFocusStatusIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusStatus:"), focusStatus.Ptr())
-	return &ShareFocusStatusIntent{inner: raw.INShareFocusStatusIntentFromID(_id)}
-}
-
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
-func (x *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent {
-	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	x := &ShareFocusStatusIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
-func (x *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
-	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
-	return x
-}
-
-// FocusStatus calls the underlying FocusStatus.
-func (x *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
-	_r := x.inner.FocusStatus()
-	if _r == nil {
+// shareFocusStatusIntentAdopt wraps an Objective-C object that this code just created as a
+// ShareFocusStatusIntent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareFocusStatusIntentAdopt(id objc.ID) *ShareFocusStatusIntent {
+	if id == 0 {
 		return nil
 	}
-	return &FocusStatus{inner: _r}
+	x := &ShareFocusStatusIntent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ShareFocusStatusIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+// NewShareFocusStatusIntentWithFocusStatus creates an intent with the specified focus status.
+func NewShareFocusStatusIntentWithFocusStatus(focusStatus *FocusStatus) *ShareFocusStatusIntent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INShareFocusStatusIntent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusStatus:"), objref.IDOf(focusStatus))
+	return shareFocusStatusIntentAdopt(_id)
+}
+
+// WithSuggestedInvocationPhrase the intent’s display name.
+func (x *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+func (x *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return x
+}
+
+// FocusStatus wraps the corresponding Objective-C method.
+func (x *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusStatus"))
+	return FocusStatusFromID(_r)
+}
 
 // ShareFocusStatusIntentable is the interface implemented by [ShareFocusStatusIntent], for mocking and DI.
 type ShareFocusStatusIntentable interface {
-	Unwrap() *raw.INShareFocusStatusIntent
+	obj.Object
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent
 	FocusStatus() *FocusStatus
 }
 
 var _ ShareFocusStatusIntentable = (*ShareFocusStatusIntent)(nil)
+
+var _ IntentProvider = (*ShareFocusStatusIntent)(nil)

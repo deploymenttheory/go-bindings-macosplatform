@@ -5,1359 +5,849 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @brief The stage of a request where the main functionality is being performed. @discussion All requests will have this compute stage.
-// VNComputeStageMain returns the string constant VNComputeStageMain as an objc.ID, for use as a dictionary key or selector argument.
-func VNComputeStageMain() objc.ID {
-	if _r := raw.VNComputeStageMain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @brief A compute stage for additional analysis and/or conversion of the data produced by the `VNComputeStageMain`. @discussion This is an optional compute stage that some requests may expose.
-// VNComputeStagePostProcessing returns the string constant VNComputeStagePostProcessing as an objc.ID, for use as a dictionary key or selector argument.
-func VNComputeStagePostProcessing() objc.ID {
-	if _r := raw.VNComputeStagePostProcessing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyAztec returns the string constant VNBarcodeSymbologyAztec as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyAztec() objc.ID {
-	if _r := raw.VNBarcodeSymbologyAztec(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode39 returns the string constant VNBarcodeSymbologyCode39 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode39() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode39(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode39Checksum returns the string constant VNBarcodeSymbologyCode39Checksum as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode39Checksum() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode39Checksum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode39FullASCII returns the string constant VNBarcodeSymbologyCode39FullASCII as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode39FullASCII() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode39FullASCII(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode39FullASCIIChecksum returns the string constant VNBarcodeSymbologyCode39FullASCIIChecksum as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode39FullASCIIChecksum() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode39FullASCIIChecksum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode93 returns the string constant VNBarcodeSymbologyCode93 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode93() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode93(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode93i returns the string constant VNBarcodeSymbologyCode93i as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode93i() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode93i(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyCode128 returns the string constant VNBarcodeSymbologyCode128 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCode128() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCode128(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyDataMatrix returns the string constant VNBarcodeSymbologyDataMatrix as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyDataMatrix() objc.ID {
-	if _r := raw.VNBarcodeSymbologyDataMatrix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyEAN8 returns the string constant VNBarcodeSymbologyEAN8 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyEAN8() objc.ID {
-	if _r := raw.VNBarcodeSymbologyEAN8(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNBarcodeSymbologyEAN13 returns the string constant VNBarcodeSymbologyEAN13 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyEAN13() objc.ID {
-	if _r := raw.VNBarcodeSymbologyEAN13(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNComputeStageMain returns the string constant VNComputeStageMain, for use as a dictionary key or argument.
+func VNComputeStageMain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNComputeStageMain")))
 }
-
-// VNBarcodeSymbologyI2of5 returns the string constant VNBarcodeSymbologyI2of5 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyI2of5() objc.ID {
-	if _r := raw.VNBarcodeSymbologyI2of5(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNComputeStagePostProcessing returns the string constant VNComputeStagePostProcessing, for use as a dictionary key or argument.
+func VNComputeStagePostProcessing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNComputeStagePostProcessing")))
+}
+
+// VNBarcodeSymbologyAztec returns the string constant VNBarcodeSymbologyAztec, for use as a dictionary key or argument.
+func VNBarcodeSymbologyAztec() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyAztec")))
+}
+
+// VNBarcodeSymbologyCode39 returns the string constant VNBarcodeSymbologyCode39, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode39() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode39")))
+}
+
+// VNBarcodeSymbologyCode39Checksum returns the string constant VNBarcodeSymbologyCode39Checksum, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode39Checksum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode39Checksum")))
+}
+
+// VNBarcodeSymbologyCode39FullASCII returns the string constant VNBarcodeSymbologyCode39FullASCII, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode39FullASCII() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode39FullASCII")))
+}
+
+// VNBarcodeSymbologyCode39FullASCIIChecksum returns the string constant VNBarcodeSymbologyCode39FullASCIIChecksum, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode39FullASCIIChecksum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode39FullASCIIChecksum")))
+}
+
+// VNBarcodeSymbologyCode93 returns the string constant VNBarcodeSymbologyCode93, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode93() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode93")))
+}
+
+// VNBarcodeSymbologyCode93i returns the string constant VNBarcodeSymbologyCode93i, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode93i() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode93i")))
+}
+
+// VNBarcodeSymbologyCode128 returns the string constant VNBarcodeSymbologyCode128, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCode128() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCode128")))
+}
+
+// VNBarcodeSymbologyDataMatrix returns the string constant VNBarcodeSymbologyDataMatrix, for use as a dictionary key or argument.
+func VNBarcodeSymbologyDataMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyDataMatrix")))
+}
+
+// VNBarcodeSymbologyEAN8 returns the string constant VNBarcodeSymbologyEAN8, for use as a dictionary key or argument.
+func VNBarcodeSymbologyEAN8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyEAN8")))
+}
+
+// VNBarcodeSymbologyEAN13 returns the string constant VNBarcodeSymbologyEAN13, for use as a dictionary key or argument.
+func VNBarcodeSymbologyEAN13() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyEAN13")))
+}
+
+// VNBarcodeSymbologyI2of5 returns the string constant VNBarcodeSymbologyI2of5, for use as a dictionary key or argument.
+func VNBarcodeSymbologyI2of5() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyI2of5")))
+}
+
+// VNBarcodeSymbologyI2of5Checksum returns the string constant VNBarcodeSymbologyI2of5Checksum, for use as a dictionary key or argument.
+func VNBarcodeSymbologyI2of5Checksum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyI2of5Checksum")))
+}
+
+// VNBarcodeSymbologyITF14 returns the string constant VNBarcodeSymbologyITF14, for use as a dictionary key or argument.
+func VNBarcodeSymbologyITF14() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyITF14")))
 }
-
-// VNBarcodeSymbologyI2of5Checksum returns the string constant VNBarcodeSymbologyI2of5Checksum as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyI2of5Checksum() objc.ID {
-	if _r := raw.VNBarcodeSymbologyI2of5Checksum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNBarcodeSymbologyPDF417 returns the string constant VNBarcodeSymbologyPDF417, for use as a dictionary key or argument.
+func VNBarcodeSymbologyPDF417() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyPDF417")))
+}
+
+// VNBarcodeSymbologyQR returns the string constant VNBarcodeSymbologyQR, for use as a dictionary key or argument.
+func VNBarcodeSymbologyQR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyQR")))
+}
+
+// VNBarcodeSymbologyUPCE returns the string constant VNBarcodeSymbologyUPCE, for use as a dictionary key or argument.
+func VNBarcodeSymbologyUPCE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyUPCE")))
+}
+
+// VNBarcodeSymbologyCodabar returns the string constant VNBarcodeSymbologyCodabar, for use as a dictionary key or argument.
+func VNBarcodeSymbologyCodabar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyCodabar")))
+}
+
+// VNBarcodeSymbologyGS1DataBar returns the string constant VNBarcodeSymbologyGS1DataBar, for use as a dictionary key or argument.
+func VNBarcodeSymbologyGS1DataBar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyGS1DataBar")))
+}
+
+// VNBarcodeSymbologyGS1DataBarExpanded returns the string constant VNBarcodeSymbologyGS1DataBarExpanded, for use as a dictionary key or argument.
+func VNBarcodeSymbologyGS1DataBarExpanded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyGS1DataBarExpanded")))
+}
+
+// VNBarcodeSymbologyGS1DataBarLimited returns the string constant VNBarcodeSymbologyGS1DataBarLimited, for use as a dictionary key or argument.
+func VNBarcodeSymbologyGS1DataBarLimited() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyGS1DataBarLimited")))
+}
+
+// VNBarcodeSymbologyMicroPDF417 returns the string constant VNBarcodeSymbologyMicroPDF417, for use as a dictionary key or argument.
+func VNBarcodeSymbologyMicroPDF417() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyMicroPDF417")))
 }
-
-// VNBarcodeSymbologyITF14 returns the string constant VNBarcodeSymbologyITF14 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyITF14() objc.ID {
-	if _r := raw.VNBarcodeSymbologyITF14(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNBarcodeSymbologyMicroQR returns the string constant VNBarcodeSymbologyMicroQR, for use as a dictionary key or argument.
+func VNBarcodeSymbologyMicroQR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyMicroQR")))
+}
+
+// VNBarcodeSymbologyMSIPlessey returns the string constant VNBarcodeSymbologyMSIPlessey, for use as a dictionary key or argument.
+func VNBarcodeSymbologyMSIPlessey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBarcodeSymbologyMSIPlessey")))
 }
-
-// VNBarcodeSymbologyPDF417 returns the string constant VNBarcodeSymbologyPDF417 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyPDF417() objc.ID {
-	if _r := raw.VNBarcodeSymbologyPDF417(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNVideoProcessingOptionFrameCadence returns the string constant VNVideoProcessingOptionFrameCadence, for use as a dictionary key or argument.
+func VNVideoProcessingOptionFrameCadence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNVideoProcessingOptionFrameCadence")))
+}
+
+// VNVideoProcessingOptionTimeInterval returns the string constant VNVideoProcessingOptionTimeInterval, for use as a dictionary key or argument.
+func VNVideoProcessingOptionTimeInterval() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNVideoProcessingOptionTimeInterval")))
 }
-
-// VNBarcodeSymbologyQR returns the string constant VNBarcodeSymbologyQR as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyQR() objc.ID {
-	if _r := raw.VNBarcodeSymbologyQR(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftEarTop returns the string constant VNAnimalBodyPoseObservationJointNameLeftEarTop, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftEarTop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftEarTop")))
 }
-
-// VNBarcodeSymbologyUPCE returns the string constant VNBarcodeSymbologyUPCE as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyUPCE() objc.ID {
-	if _r := raw.VNBarcodeSymbologyUPCE(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightEarTop returns the string constant VNAnimalBodyPoseObservationJointNameRightEarTop, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightEarTop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightEarTop")))
 }
-
-// VNBarcodeSymbologyCodabar returns the string constant VNBarcodeSymbologyCodabar as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyCodabar() objc.ID {
-	if _r := raw.VNBarcodeSymbologyCodabar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftEarMiddle returns the string constant VNAnimalBodyPoseObservationJointNameLeftEarMiddle, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftEarMiddle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftEarMiddle")))
 }
-
-// VNBarcodeSymbologyGS1DataBar returns the string constant VNBarcodeSymbologyGS1DataBar as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyGS1DataBar() objc.ID {
-	if _r := raw.VNBarcodeSymbologyGS1DataBar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightEarMiddle returns the string constant VNAnimalBodyPoseObservationJointNameRightEarMiddle, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightEarMiddle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightEarMiddle")))
 }
-
-// VNBarcodeSymbologyGS1DataBarExpanded returns the string constant VNBarcodeSymbologyGS1DataBarExpanded as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyGS1DataBarExpanded() objc.ID {
-	if _r := raw.VNBarcodeSymbologyGS1DataBarExpanded(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftEarBottom returns the string constant VNAnimalBodyPoseObservationJointNameLeftEarBottom, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftEarBottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftEarBottom")))
 }
-
-// VNBarcodeSymbologyGS1DataBarLimited returns the string constant VNBarcodeSymbologyGS1DataBarLimited as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyGS1DataBarLimited() objc.ID {
-	if _r := raw.VNBarcodeSymbologyGS1DataBarLimited(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightEarBottom returns the string constant VNAnimalBodyPoseObservationJointNameRightEarBottom, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightEarBottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightEarBottom")))
 }
-
-// VNBarcodeSymbologyMicroPDF417 returns the string constant VNBarcodeSymbologyMicroPDF417 as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyMicroPDF417() objc.ID {
-	if _r := raw.VNBarcodeSymbologyMicroPDF417(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftEye returns the string constant VNAnimalBodyPoseObservationJointNameLeftEye, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftEye")))
 }
-
-// VNBarcodeSymbologyMicroQR returns the string constant VNBarcodeSymbologyMicroQR as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyMicroQR() objc.ID {
-	if _r := raw.VNBarcodeSymbologyMicroQR(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightEye returns the string constant VNAnimalBodyPoseObservationJointNameRightEye, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightEye")))
 }
-
-// VNBarcodeSymbologyMSIPlessey returns the string constant VNBarcodeSymbologyMSIPlessey as an objc.ID, for use as a dictionary key or selector argument.
-func VNBarcodeSymbologyMSIPlessey() objc.ID {
-	if _r := raw.VNBarcodeSymbologyMSIPlessey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameNose returns the string constant VNAnimalBodyPoseObservationJointNameNose, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameNose() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameNose")))
 }
-
-// VNVideoProcessingOptionFrameCadence returns the string constant VNVideoProcessingOptionFrameCadence as an objc.ID, for use as a dictionary key or selector argument.
-func VNVideoProcessingOptionFrameCadence() objc.ID {
-	if _r := raw.VNVideoProcessingOptionFrameCadence(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameNeck returns the string constant VNAnimalBodyPoseObservationJointNameNeck, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameNeck() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameNeck")))
 }
-
-// VNVideoProcessingOptionTimeInterval returns the string constant VNVideoProcessingOptionTimeInterval as an objc.ID, for use as a dictionary key or selector argument.
-func VNVideoProcessingOptionTimeInterval() objc.ID {
-	if _r := raw.VNVideoProcessingOptionTimeInterval(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftFrontElbow returns the string constant VNAnimalBodyPoseObservationJointNameLeftFrontElbow, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftFrontElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftFrontElbow")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftEarTop returns the string constant VNAnimalBodyPoseObservationJointNameLeftEarTop as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftEarTop() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftEarTop(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightFrontElbow returns the string constant VNAnimalBodyPoseObservationJointNameRightFrontElbow, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightFrontElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightFrontElbow")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightEarTop returns the string constant VNAnimalBodyPoseObservationJointNameRightEarTop as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightEarTop() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightEarTop(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftFrontKnee returns the string constant VNAnimalBodyPoseObservationJointNameLeftFrontKnee, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftFrontKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftFrontKnee")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftEarMiddle returns the string constant VNAnimalBodyPoseObservationJointNameLeftEarMiddle as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftEarMiddle() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftEarMiddle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightFrontKnee returns the string constant VNAnimalBodyPoseObservationJointNameRightFrontKnee, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightFrontKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightFrontKnee")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightEarMiddle returns the string constant VNAnimalBodyPoseObservationJointNameRightEarMiddle as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightEarMiddle() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightEarMiddle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftFrontPaw returns the string constant VNAnimalBodyPoseObservationJointNameLeftFrontPaw, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftFrontPaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftFrontPaw")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftEarBottom returns the string constant VNAnimalBodyPoseObservationJointNameLeftEarBottom as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftEarBottom() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftEarBottom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightFrontPaw returns the string constant VNAnimalBodyPoseObservationJointNameRightFrontPaw, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightFrontPaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightFrontPaw")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightEarBottom returns the string constant VNAnimalBodyPoseObservationJointNameRightEarBottom as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightEarBottom() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightEarBottom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftBackElbow returns the string constant VNAnimalBodyPoseObservationJointNameLeftBackElbow, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftBackElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftBackElbow")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftEye returns the string constant VNAnimalBodyPoseObservationJointNameLeftEye as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftEye() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftEye(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightBackElbow returns the string constant VNAnimalBodyPoseObservationJointNameRightBackElbow, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightBackElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightBackElbow")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightEye returns the string constant VNAnimalBodyPoseObservationJointNameRightEye as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightEye() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightEye(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftBackKnee returns the string constant VNAnimalBodyPoseObservationJointNameLeftBackKnee, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftBackKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftBackKnee")))
 }
-
-// VNAnimalBodyPoseObservationJointNameNose returns the string constant VNAnimalBodyPoseObservationJointNameNose as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameNose() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameNose(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightBackKnee returns the string constant VNAnimalBodyPoseObservationJointNameRightBackKnee, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightBackKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightBackKnee")))
 }
-
-// VNAnimalBodyPoseObservationJointNameNeck returns the string constant VNAnimalBodyPoseObservationJointNameNeck as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameNeck() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameNeck(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameLeftBackPaw returns the string constant VNAnimalBodyPoseObservationJointNameLeftBackPaw, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameLeftBackPaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameLeftBackPaw")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftFrontElbow returns the string constant VNAnimalBodyPoseObservationJointNameLeftFrontElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftFrontElbow() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftFrontElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameRightBackPaw returns the string constant VNAnimalBodyPoseObservationJointNameRightBackPaw, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameRightBackPaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameRightBackPaw")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightFrontElbow returns the string constant VNAnimalBodyPoseObservationJointNameRightFrontElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightFrontElbow() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightFrontElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameTailTop returns the string constant VNAnimalBodyPoseObservationJointNameTailTop, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameTailTop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameTailTop")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftFrontKnee returns the string constant VNAnimalBodyPoseObservationJointNameLeftFrontKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftFrontKnee() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftFrontKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameTailMiddle returns the string constant VNAnimalBodyPoseObservationJointNameTailMiddle, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameTailMiddle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameTailMiddle")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightFrontKnee returns the string constant VNAnimalBodyPoseObservationJointNameRightFrontKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightFrontKnee() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightFrontKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointNameTailBottom returns the string constant VNAnimalBodyPoseObservationJointNameTailBottom, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointNameTailBottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointNameTailBottom")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftFrontPaw returns the string constant VNAnimalBodyPoseObservationJointNameLeftFrontPaw as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftFrontPaw() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftFrontPaw(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointsGroupNameHead returns the string constant VNAnimalBodyPoseObservationJointsGroupNameHead, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointsGroupNameHead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointsGroupNameHead")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightFrontPaw returns the string constant VNAnimalBodyPoseObservationJointNameRightFrontPaw as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightFrontPaw() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightFrontPaw(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointsGroupNameTrunk returns the string constant VNAnimalBodyPoseObservationJointsGroupNameTrunk, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointsGroupNameTrunk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointsGroupNameTrunk")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftBackElbow returns the string constant VNAnimalBodyPoseObservationJointNameLeftBackElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftBackElbow() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftBackElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointsGroupNameForelegs returns the string constant VNAnimalBodyPoseObservationJointsGroupNameForelegs, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointsGroupNameForelegs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointsGroupNameForelegs")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightBackElbow returns the string constant VNAnimalBodyPoseObservationJointNameRightBackElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightBackElbow() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightBackElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointsGroupNameHindlegs returns the string constant VNAnimalBodyPoseObservationJointsGroupNameHindlegs, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointsGroupNameHindlegs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointsGroupNameHindlegs")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftBackKnee returns the string constant VNAnimalBodyPoseObservationJointNameLeftBackKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftBackKnee() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftBackKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointsGroupNameTail returns the string constant VNAnimalBodyPoseObservationJointsGroupNameTail, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointsGroupNameTail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointsGroupNameTail")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightBackKnee returns the string constant VNAnimalBodyPoseObservationJointNameRightBackKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightBackKnee() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightBackKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalBodyPoseObservationJointsGroupNameAll returns the string constant VNAnimalBodyPoseObservationJointsGroupNameAll, for use as a dictionary key or argument.
+func VNAnimalBodyPoseObservationJointsGroupNameAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalBodyPoseObservationJointsGroupNameAll")))
 }
-
-// VNAnimalBodyPoseObservationJointNameLeftBackPaw returns the string constant VNAnimalBodyPoseObservationJointNameLeftBackPaw as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameLeftBackPaw() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameLeftBackPaw(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRoot returns the string constant VNHumanBodyPose3DObservationJointNameRoot, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRoot() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRoot")))
 }
-
-// VNAnimalBodyPoseObservationJointNameRightBackPaw returns the string constant VNAnimalBodyPoseObservationJointNameRightBackPaw as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameRightBackPaw() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameRightBackPaw(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRightHip returns the string constant VNHumanBodyPose3DObservationJointNameRightHip, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRightHip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRightHip")))
 }
-
-// VNAnimalBodyPoseObservationJointNameTailTop returns the string constant VNAnimalBodyPoseObservationJointNameTailTop as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameTailTop() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameTailTop(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRightKnee returns the string constant VNHumanBodyPose3DObservationJointNameRightKnee, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRightKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRightKnee")))
 }
-
-// VNAnimalBodyPoseObservationJointNameTailMiddle returns the string constant VNAnimalBodyPoseObservationJointNameTailMiddle as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameTailMiddle() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameTailMiddle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRightAnkle returns the string constant VNHumanBodyPose3DObservationJointNameRightAnkle, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRightAnkle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRightAnkle")))
 }
-
-// VNAnimalBodyPoseObservationJointNameTailBottom returns the string constant VNAnimalBodyPoseObservationJointNameTailBottom as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointNameTailBottom() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointNameTailBottom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameLeftHip returns the string constant VNHumanBodyPose3DObservationJointNameLeftHip, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameLeftHip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameLeftHip")))
 }
-
-// VNAnimalBodyPoseObservationJointsGroupNameHead returns the string constant VNAnimalBodyPoseObservationJointsGroupNameHead as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointsGroupNameHead() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointsGroupNameHead(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameLeftKnee returns the string constant VNHumanBodyPose3DObservationJointNameLeftKnee, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameLeftKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameLeftKnee")))
 }
-
-// VNAnimalBodyPoseObservationJointsGroupNameTrunk returns the string constant VNAnimalBodyPoseObservationJointsGroupNameTrunk as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointsGroupNameTrunk() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointsGroupNameTrunk(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameLeftAnkle returns the string constant VNHumanBodyPose3DObservationJointNameLeftAnkle, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameLeftAnkle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameLeftAnkle")))
 }
-
-// VNAnimalBodyPoseObservationJointsGroupNameForelegs returns the string constant VNAnimalBodyPoseObservationJointsGroupNameForelegs as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointsGroupNameForelegs() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointsGroupNameForelegs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameSpine returns the string constant VNHumanBodyPose3DObservationJointNameSpine, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameSpine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameSpine")))
 }
-
-// VNAnimalBodyPoseObservationJointsGroupNameHindlegs returns the string constant VNAnimalBodyPoseObservationJointsGroupNameHindlegs as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointsGroupNameHindlegs() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointsGroupNameHindlegs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameCenterShoulder returns the string constant VNHumanBodyPose3DObservationJointNameCenterShoulder, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameCenterShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameCenterShoulder")))
 }
-
-// VNAnimalBodyPoseObservationJointsGroupNameTail returns the string constant VNAnimalBodyPoseObservationJointsGroupNameTail as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointsGroupNameTail() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointsGroupNameTail(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameCenterHead returns the string constant VNHumanBodyPose3DObservationJointNameCenterHead, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameCenterHead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameCenterHead")))
 }
-
-// VNAnimalBodyPoseObservationJointsGroupNameAll returns the string constant VNAnimalBodyPoseObservationJointsGroupNameAll as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalBodyPoseObservationJointsGroupNameAll() objc.ID {
-	if _r := raw.VNAnimalBodyPoseObservationJointsGroupNameAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameTopHead returns the string constant VNHumanBodyPose3DObservationJointNameTopHead, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameTopHead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameTopHead")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRoot returns the string constant VNHumanBodyPose3DObservationJointNameRoot as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRoot() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRoot(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameLeftShoulder returns the string constant VNHumanBodyPose3DObservationJointNameLeftShoulder, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameLeftShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameLeftShoulder")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRightHip returns the string constant VNHumanBodyPose3DObservationJointNameRightHip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRightHip() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRightHip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameLeftElbow returns the string constant VNHumanBodyPose3DObservationJointNameLeftElbow, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameLeftElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameLeftElbow")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRightKnee returns the string constant VNHumanBodyPose3DObservationJointNameRightKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRightKnee() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRightKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameLeftWrist returns the string constant VNHumanBodyPose3DObservationJointNameLeftWrist, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameLeftWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameLeftWrist")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRightAnkle returns the string constant VNHumanBodyPose3DObservationJointNameRightAnkle as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRightAnkle() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRightAnkle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRightShoulder returns the string constant VNHumanBodyPose3DObservationJointNameRightShoulder, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRightShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRightShoulder")))
 }
-
-// VNHumanBodyPose3DObservationJointNameLeftHip returns the string constant VNHumanBodyPose3DObservationJointNameLeftHip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameLeftHip() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameLeftHip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRightElbow returns the string constant VNHumanBodyPose3DObservationJointNameRightElbow, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRightElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRightElbow")))
 }
-
-// VNHumanBodyPose3DObservationJointNameLeftKnee returns the string constant VNHumanBodyPose3DObservationJointNameLeftKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameLeftKnee() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameLeftKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointNameRightWrist returns the string constant VNHumanBodyPose3DObservationJointNameRightWrist, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointNameRightWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointNameRightWrist")))
 }
-
-// VNHumanBodyPose3DObservationJointNameLeftAnkle returns the string constant VNHumanBodyPose3DObservationJointNameLeftAnkle as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameLeftAnkle() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameLeftAnkle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameHead returns the string constant VNHumanBodyPose3DObservationJointsGroupNameHead, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameHead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameHead")))
 }
-
-// VNHumanBodyPose3DObservationJointNameSpine returns the string constant VNHumanBodyPose3DObservationJointNameSpine as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameSpine() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameSpine(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameTorso returns the string constant VNHumanBodyPose3DObservationJointsGroupNameTorso, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameTorso() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameTorso")))
 }
-
-// VNHumanBodyPose3DObservationJointNameCenterShoulder returns the string constant VNHumanBodyPose3DObservationJointNameCenterShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameCenterShoulder() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameCenterShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameLeftArm returns the string constant VNHumanBodyPose3DObservationJointsGroupNameLeftArm, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameLeftArm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameLeftArm")))
 }
-
-// VNHumanBodyPose3DObservationJointNameCenterHead returns the string constant VNHumanBodyPose3DObservationJointNameCenterHead as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameCenterHead() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameCenterHead(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameRightArm returns the string constant VNHumanBodyPose3DObservationJointsGroupNameRightArm, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameRightArm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameRightArm")))
 }
-
-// VNHumanBodyPose3DObservationJointNameTopHead returns the string constant VNHumanBodyPose3DObservationJointNameTopHead as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameTopHead() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameTopHead(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameLeftLeg returns the string constant VNHumanBodyPose3DObservationJointsGroupNameLeftLeg, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameLeftLeg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameLeftLeg")))
 }
-
-// VNHumanBodyPose3DObservationJointNameLeftShoulder returns the string constant VNHumanBodyPose3DObservationJointNameLeftShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameLeftShoulder() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameLeftShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameRightLeg returns the string constant VNHumanBodyPose3DObservationJointsGroupNameRightLeg, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameRightLeg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameRightLeg")))
 }
-
-// VNHumanBodyPose3DObservationJointNameLeftElbow returns the string constant VNHumanBodyPose3DObservationJointNameLeftElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameLeftElbow() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameLeftElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanBodyPose3DObservationJointsGroupNameAll returns the string constant VNHumanBodyPose3DObservationJointsGroupNameAll, for use as a dictionary key or argument.
+func VNHumanBodyPose3DObservationJointsGroupNameAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPose3DObservationJointsGroupNameAll")))
 }
-
-// VNHumanBodyPose3DObservationJointNameLeftWrist returns the string constant VNHumanBodyPose3DObservationJointNameLeftWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameLeftWrist() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameLeftWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNErrorDomain returns the string constant VNErrorDomain, for use as a dictionary key or argument.
+func VNErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("VNErrorDomain"))) }
+
+// VNRecognizedPointGroupKeyAll returns the string constant VNRecognizedPointGroupKeyAll, for use as a dictionary key or argument.
+func VNRecognizedPointGroupKeyAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNRecognizedPointGroupKeyAll")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRightShoulder returns the string constant VNHumanBodyPose3DObservationJointNameRightShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRightShoulder() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRightShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNRecognizedPoint3DGroupKeyAll returns the string constant VNRecognizedPoint3DGroupKeyAll, for use as a dictionary key or argument.
+func VNRecognizedPoint3DGroupKeyAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNRecognizedPoint3DGroupKeyAll")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRightElbow returns the string constant VNHumanBodyPose3DObservationJointNameRightElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRightElbow() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRightElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNImageOptionProperties returns the string constant VNImageOptionProperties, for use as a dictionary key or argument.
+func VNImageOptionProperties() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNImageOptionProperties")))
 }
-
-// VNHumanBodyPose3DObservationJointNameRightWrist returns the string constant VNHumanBodyPose3DObservationJointNameRightWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointNameRightWrist() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointNameRightWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNImageOptionCameraIntrinsics returns the string constant VNImageOptionCameraIntrinsics, for use as a dictionary key or argument.
+func VNImageOptionCameraIntrinsics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNImageOptionCameraIntrinsics")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameHead returns the string constant VNHumanBodyPose3DObservationJointsGroupNameHead as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameHead() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameHead(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNImageOptionCIContext returns the string constant VNImageOptionCIContext, for use as a dictionary key or argument.
+func VNImageOptionCIContext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNImageOptionCIContext")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameTorso returns the string constant VNHumanBodyPose3DObservationJointsGroupNameTorso as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameTorso() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameTorso(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalIdentifierDog returns the string constant VNAnimalIdentifierDog, for use as a dictionary key or argument.
+func VNAnimalIdentifierDog() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalIdentifierDog")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameLeftArm returns the string constant VNHumanBodyPose3DObservationJointsGroupNameLeftArm as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameLeftArm() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameLeftArm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNAnimalIdentifierCat returns the string constant VNAnimalIdentifierCat, for use as a dictionary key or argument.
+func VNAnimalIdentifierCat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNAnimalIdentifierCat")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameRightArm returns the string constant VNHumanBodyPose3DObservationJointsGroupNameRightArm as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameRightArm() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameRightArm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanHandPoseObservationJointNameWrist returns the string constant VNHumanHandPoseObservationJointNameWrist, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameWrist")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameLeftLeg returns the string constant VNHumanBodyPose3DObservationJointsGroupNameLeftLeg as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameLeftLeg() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameLeftLeg(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanHandPoseObservationJointNameThumbCMC returns the string constant VNHumanHandPoseObservationJointNameThumbCMC, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameThumbCMC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameThumbCMC")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameRightLeg returns the string constant VNHumanBodyPose3DObservationJointsGroupNameRightLeg as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameRightLeg() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameRightLeg(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanHandPoseObservationJointNameThumbMP returns the string constant VNHumanHandPoseObservationJointNameThumbMP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameThumbMP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameThumbMP")))
 }
-
-// VNHumanBodyPose3DObservationJointsGroupNameAll returns the string constant VNHumanBodyPose3DObservationJointsGroupNameAll as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPose3DObservationJointsGroupNameAll() objc.ID {
-	if _r := raw.VNHumanBodyPose3DObservationJointsGroupNameAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// VNHumanHandPoseObservationJointNameThumbIP returns the string constant VNHumanHandPoseObservationJointNameThumbIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameThumbIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameThumbIP")))
 }
-
-// VNErrorDomain returns the string constant VNErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func VNErrorDomain() objc.ID {
-	return purego.CFConstant(raw.VNErrorDomain())
+
+// VNHumanHandPoseObservationJointNameThumbTip returns the string constant VNHumanHandPoseObservationJointNameThumbTip, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameThumbTip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameThumbTip")))
 }
 
-// VNRecognizedPointGroupKeyAll returns the string constant VNRecognizedPointGroupKeyAll as an objc.ID, for use as a dictionary key or selector argument.
-func VNRecognizedPointGroupKeyAll() objc.ID {
-	if _r := raw.VNRecognizedPointGroupKeyAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameIndexMCP returns the string constant VNHumanHandPoseObservationJointNameIndexMCP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameIndexMCP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameIndexMCP")))
 }
 
-// VNRecognizedPoint3DGroupKeyAll returns the string constant VNRecognizedPoint3DGroupKeyAll as an objc.ID, for use as a dictionary key or selector argument.
-func VNRecognizedPoint3DGroupKeyAll() objc.ID {
-	if _r := raw.VNRecognizedPoint3DGroupKeyAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameIndexPIP returns the string constant VNHumanHandPoseObservationJointNameIndexPIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameIndexPIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameIndexPIP")))
 }
 
-// VNImageOptionProperties returns the string constant VNImageOptionProperties as an objc.ID, for use as a dictionary key or selector argument.
-func VNImageOptionProperties() objc.ID {
-	if _r := raw.VNImageOptionProperties(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameIndexDIP returns the string constant VNHumanHandPoseObservationJointNameIndexDIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameIndexDIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameIndexDIP")))
 }
 
-// @brief VNImageOptionCameraIntrinsics  Specifies the camera intrinsics as an NSData or CFData representing a matrix_float3x3. See kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix for details @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. It has the following contents: fx	0	ox 0	fy	oy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. ox and oy are the coordinates of the principal point. The origin is the upper left of the frame. @note When using a CMSampleBuffer as an input and that sample buffer has camera intrinsics attached to it, Vision will use the camera intrinsic from there unless overwritten by passing in as an explicit option which will take precedence.
-// VNImageOptionCameraIntrinsics returns the string constant VNImageOptionCameraIntrinsics as an objc.ID, for use as a dictionary key or selector argument.
-func VNImageOptionCameraIntrinsics() objc.ID {
-	if _r := raw.VNImageOptionCameraIntrinsics(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameIndexTip returns the string constant VNHumanHandPoseObservationJointNameIndexTip, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameIndexTip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameIndexTip")))
 }
 
-// VNImageOptionCIContext returns the string constant VNImageOptionCIContext as an objc.ID, for use as a dictionary key or selector argument.
-func VNImageOptionCIContext() objc.ID {
-	if _r := raw.VNImageOptionCIContext(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameMiddleMCP returns the string constant VNHumanHandPoseObservationJointNameMiddleMCP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameMiddleMCP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameMiddleMCP")))
 }
 
-// VNAnimalIdentifierDog returns the string constant VNAnimalIdentifierDog as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalIdentifierDog() objc.ID {
-	if _r := raw.VNAnimalIdentifierDog(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameMiddlePIP returns the string constant VNHumanHandPoseObservationJointNameMiddlePIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameMiddlePIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameMiddlePIP")))
 }
 
-// VNAnimalIdentifierCat returns the string constant VNAnimalIdentifierCat as an objc.ID, for use as a dictionary key or selector argument.
-func VNAnimalIdentifierCat() objc.ID {
-	if _r := raw.VNAnimalIdentifierCat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameMiddleDIP returns the string constant VNHumanHandPoseObservationJointNameMiddleDIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameMiddleDIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameMiddleDIP")))
 }
 
-// VNHumanHandPoseObservationJointNameWrist returns the string constant VNHumanHandPoseObservationJointNameWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameWrist() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameMiddleTip returns the string constant VNHumanHandPoseObservationJointNameMiddleTip, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameMiddleTip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameMiddleTip")))
 }
 
-// VNHumanHandPoseObservationJointNameThumbCMC returns the string constant VNHumanHandPoseObservationJointNameThumbCMC as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameThumbCMC() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameThumbCMC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameRingMCP returns the string constant VNHumanHandPoseObservationJointNameRingMCP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameRingMCP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameRingMCP")))
 }
 
-// VNHumanHandPoseObservationJointNameThumbMP returns the string constant VNHumanHandPoseObservationJointNameThumbMP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameThumbMP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameThumbMP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameRingPIP returns the string constant VNHumanHandPoseObservationJointNameRingPIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameRingPIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameRingPIP")))
 }
 
-// VNHumanHandPoseObservationJointNameThumbIP returns the string constant VNHumanHandPoseObservationJointNameThumbIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameThumbIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameThumbIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameRingDIP returns the string constant VNHumanHandPoseObservationJointNameRingDIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameRingDIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameRingDIP")))
 }
 
-// VNHumanHandPoseObservationJointNameThumbTip returns the string constant VNHumanHandPoseObservationJointNameThumbTip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameThumbTip() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameThumbTip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameRingTip returns the string constant VNHumanHandPoseObservationJointNameRingTip, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameRingTip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameRingTip")))
 }
 
-// VNHumanHandPoseObservationJointNameIndexMCP returns the string constant VNHumanHandPoseObservationJointNameIndexMCP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameIndexMCP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameIndexMCP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameLittleMCP returns the string constant VNHumanHandPoseObservationJointNameLittleMCP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameLittleMCP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameLittleMCP")))
 }
 
-// VNHumanHandPoseObservationJointNameIndexPIP returns the string constant VNHumanHandPoseObservationJointNameIndexPIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameIndexPIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameIndexPIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameLittlePIP returns the string constant VNHumanHandPoseObservationJointNameLittlePIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameLittlePIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameLittlePIP")))
 }
 
-// VNHumanHandPoseObservationJointNameIndexDIP returns the string constant VNHumanHandPoseObservationJointNameIndexDIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameIndexDIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameIndexDIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameLittleDIP returns the string constant VNHumanHandPoseObservationJointNameLittleDIP, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameLittleDIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameLittleDIP")))
 }
 
-// VNHumanHandPoseObservationJointNameIndexTip returns the string constant VNHumanHandPoseObservationJointNameIndexTip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameIndexTip() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameIndexTip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointNameLittleTip returns the string constant VNHumanHandPoseObservationJointNameLittleTip, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointNameLittleTip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointNameLittleTip")))
 }
 
-// VNHumanHandPoseObservationJointNameMiddleMCP returns the string constant VNHumanHandPoseObservationJointNameMiddleMCP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameMiddleMCP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameMiddleMCP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointsGroupNameThumb returns the string constant VNHumanHandPoseObservationJointsGroupNameThumb, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointsGroupNameThumb() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointsGroupNameThumb")))
 }
 
-// VNHumanHandPoseObservationJointNameMiddlePIP returns the string constant VNHumanHandPoseObservationJointNameMiddlePIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameMiddlePIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameMiddlePIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointsGroupNameIndexFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameIndexFinger, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointsGroupNameIndexFinger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointsGroupNameIndexFinger")))
 }
 
-// VNHumanHandPoseObservationJointNameMiddleDIP returns the string constant VNHumanHandPoseObservationJointNameMiddleDIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameMiddleDIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameMiddleDIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointsGroupNameMiddleFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameMiddleFinger, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointsGroupNameMiddleFinger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointsGroupNameMiddleFinger")))
 }
 
-// VNHumanHandPoseObservationJointNameMiddleTip returns the string constant VNHumanHandPoseObservationJointNameMiddleTip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameMiddleTip() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameMiddleTip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointsGroupNameRingFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameRingFinger, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointsGroupNameRingFinger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointsGroupNameRingFinger")))
 }
 
-// VNHumanHandPoseObservationJointNameRingMCP returns the string constant VNHumanHandPoseObservationJointNameRingMCP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameRingMCP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameRingMCP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointsGroupNameLittleFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameLittleFinger, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointsGroupNameLittleFinger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointsGroupNameLittleFinger")))
 }
 
-// VNHumanHandPoseObservationJointNameRingPIP returns the string constant VNHumanHandPoseObservationJointNameRingPIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameRingPIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameRingPIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanHandPoseObservationJointsGroupNameAll returns the string constant VNHumanHandPoseObservationJointsGroupNameAll, for use as a dictionary key or argument.
+func VNHumanHandPoseObservationJointsGroupNameAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanHandPoseObservationJointsGroupNameAll")))
 }
 
-// VNHumanHandPoseObservationJointNameRingDIP returns the string constant VNHumanHandPoseObservationJointNameRingDIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameRingDIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameRingDIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyNose returns the string constant VNBodyLandmarkKeyNose, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyNose() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyNose")))
 }
 
-// VNHumanHandPoseObservationJointNameRingTip returns the string constant VNHumanHandPoseObservationJointNameRingTip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameRingTip() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameRingTip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftEye returns the string constant VNBodyLandmarkKeyLeftEye, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftEye")))
 }
 
-// VNHumanHandPoseObservationJointNameLittleMCP returns the string constant VNHumanHandPoseObservationJointNameLittleMCP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameLittleMCP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameLittleMCP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightEye returns the string constant VNBodyLandmarkKeyRightEye, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightEye")))
 }
 
-// VNHumanHandPoseObservationJointNameLittlePIP returns the string constant VNHumanHandPoseObservationJointNameLittlePIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameLittlePIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameLittlePIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftEar returns the string constant VNBodyLandmarkKeyLeftEar, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftEar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftEar")))
 }
 
-// VNHumanHandPoseObservationJointNameLittleDIP returns the string constant VNHumanHandPoseObservationJointNameLittleDIP as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameLittleDIP() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameLittleDIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightEar returns the string constant VNBodyLandmarkKeyRightEar, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightEar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightEar")))
 }
 
-// VNHumanHandPoseObservationJointNameLittleTip returns the string constant VNHumanHandPoseObservationJointNameLittleTip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointNameLittleTip() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointNameLittleTip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftShoulder returns the string constant VNBodyLandmarkKeyLeftShoulder, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftShoulder")))
 }
 
-// VNHumanHandPoseObservationJointsGroupNameThumb returns the string constant VNHumanHandPoseObservationJointsGroupNameThumb as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointsGroupNameThumb() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointsGroupNameThumb(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightShoulder returns the string constant VNBodyLandmarkKeyRightShoulder, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightShoulder")))
 }
 
-// VNHumanHandPoseObservationJointsGroupNameIndexFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameIndexFinger as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointsGroupNameIndexFinger() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointsGroupNameIndexFinger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyNeck returns the string constant VNBodyLandmarkKeyNeck, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyNeck() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyNeck")))
 }
 
-// VNHumanHandPoseObservationJointsGroupNameMiddleFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameMiddleFinger as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointsGroupNameMiddleFinger() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointsGroupNameMiddleFinger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftElbow returns the string constant VNBodyLandmarkKeyLeftElbow, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftElbow")))
 }
 
-// VNHumanHandPoseObservationJointsGroupNameRingFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameRingFinger as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointsGroupNameRingFinger() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointsGroupNameRingFinger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightElbow returns the string constant VNBodyLandmarkKeyRightElbow, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightElbow")))
 }
 
-// VNHumanHandPoseObservationJointsGroupNameLittleFinger returns the string constant VNHumanHandPoseObservationJointsGroupNameLittleFinger as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointsGroupNameLittleFinger() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointsGroupNameLittleFinger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftWrist returns the string constant VNBodyLandmarkKeyLeftWrist, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftWrist")))
 }
 
-// VNHumanHandPoseObservationJointsGroupNameAll returns the string constant VNHumanHandPoseObservationJointsGroupNameAll as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanHandPoseObservationJointsGroupNameAll() objc.ID {
-	if _r := raw.VNHumanHandPoseObservationJointsGroupNameAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightWrist returns the string constant VNBodyLandmarkKeyRightWrist, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightWrist")))
 }
 
-// VNBodyLandmarkKeyNose returns the string constant VNBodyLandmarkKeyNose as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyNose() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyNose(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftHip returns the string constant VNBodyLandmarkKeyLeftHip, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftHip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftHip")))
 }
 
-// VNBodyLandmarkKeyLeftEye returns the string constant VNBodyLandmarkKeyLeftEye as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftEye() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftEye(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightHip returns the string constant VNBodyLandmarkKeyRightHip, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightHip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightHip")))
 }
 
-// VNBodyLandmarkKeyRightEye returns the string constant VNBodyLandmarkKeyRightEye as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightEye() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightEye(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRoot returns the string constant VNBodyLandmarkKeyRoot, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRoot() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRoot")))
 }
 
-// VNBodyLandmarkKeyLeftEar returns the string constant VNBodyLandmarkKeyLeftEar as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftEar() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftEar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftKnee returns the string constant VNBodyLandmarkKeyLeftKnee, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftKnee")))
 }
 
-// VNBodyLandmarkKeyRightEar returns the string constant VNBodyLandmarkKeyRightEar as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightEar() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightEar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightKnee returns the string constant VNBodyLandmarkKeyRightKnee, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightKnee")))
 }
 
-// VNBodyLandmarkKeyLeftShoulder returns the string constant VNBodyLandmarkKeyLeftShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftShoulder() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyLeftAnkle returns the string constant VNBodyLandmarkKeyLeftAnkle, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyLeftAnkle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyLeftAnkle")))
 }
 
-// VNBodyLandmarkKeyRightShoulder returns the string constant VNBodyLandmarkKeyRightShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightShoulder() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkKeyRightAnkle returns the string constant VNBodyLandmarkKeyRightAnkle, for use as a dictionary key or argument.
+func VNBodyLandmarkKeyRightAnkle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkKeyRightAnkle")))
 }
 
-// VNBodyLandmarkKeyNeck returns the string constant VNBodyLandmarkKeyNeck as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyNeck() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyNeck(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkRegionKeyFace returns the string constant VNBodyLandmarkRegionKeyFace, for use as a dictionary key or argument.
+func VNBodyLandmarkRegionKeyFace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkRegionKeyFace")))
 }
 
-// VNBodyLandmarkKeyLeftElbow returns the string constant VNBodyLandmarkKeyLeftElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftElbow() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkRegionKeyTorso returns the string constant VNBodyLandmarkRegionKeyTorso, for use as a dictionary key or argument.
+func VNBodyLandmarkRegionKeyTorso() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkRegionKeyTorso")))
 }
 
-// VNBodyLandmarkKeyRightElbow returns the string constant VNBodyLandmarkKeyRightElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightElbow() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkRegionKeyLeftArm returns the string constant VNBodyLandmarkRegionKeyLeftArm, for use as a dictionary key or argument.
+func VNBodyLandmarkRegionKeyLeftArm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkRegionKeyLeftArm")))
 }
 
-// VNBodyLandmarkKeyLeftWrist returns the string constant VNBodyLandmarkKeyLeftWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftWrist() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkRegionKeyRightArm returns the string constant VNBodyLandmarkRegionKeyRightArm, for use as a dictionary key or argument.
+func VNBodyLandmarkRegionKeyRightArm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkRegionKeyRightArm")))
 }
 
-// VNBodyLandmarkKeyRightWrist returns the string constant VNBodyLandmarkKeyRightWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightWrist() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkRegionKeyLeftLeg returns the string constant VNBodyLandmarkRegionKeyLeftLeg, for use as a dictionary key or argument.
+func VNBodyLandmarkRegionKeyLeftLeg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkRegionKeyLeftLeg")))
 }
 
-// VNBodyLandmarkKeyLeftHip returns the string constant VNBodyLandmarkKeyLeftHip as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftHip() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftHip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNBodyLandmarkRegionKeyRightLeg returns the string constant VNBodyLandmarkRegionKeyRightLeg, for use as a dictionary key or argument.
+func VNBodyLandmarkRegionKeyRightLeg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNBodyLandmarkRegionKeyRightLeg")))
 }
 
-// VNBodyLandmarkKeyRightHip returns the string constant VNBodyLandmarkKeyRightHip as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightHip() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightHip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameNose returns the string constant VNHumanBodyPoseObservationJointNameNose, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameNose() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameNose")))
 }
 
-// VNBodyLandmarkKeyRoot returns the string constant VNBodyLandmarkKeyRoot as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRoot() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRoot(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftEye returns the string constant VNHumanBodyPoseObservationJointNameLeftEye, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftEye")))
 }
 
-// VNBodyLandmarkKeyLeftKnee returns the string constant VNBodyLandmarkKeyLeftKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftKnee() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightEye returns the string constant VNHumanBodyPoseObservationJointNameRightEye, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightEye")))
 }
 
-// VNBodyLandmarkKeyRightKnee returns the string constant VNBodyLandmarkKeyRightKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightKnee() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftEar returns the string constant VNHumanBodyPoseObservationJointNameLeftEar, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftEar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftEar")))
 }
 
-// VNBodyLandmarkKeyLeftAnkle returns the string constant VNBodyLandmarkKeyLeftAnkle as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyLeftAnkle() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyLeftAnkle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightEar returns the string constant VNHumanBodyPoseObservationJointNameRightEar, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightEar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightEar")))
 }
 
-// VNBodyLandmarkKeyRightAnkle returns the string constant VNBodyLandmarkKeyRightAnkle as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkKeyRightAnkle() objc.ID {
-	if _r := raw.VNBodyLandmarkKeyRightAnkle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftShoulder returns the string constant VNHumanBodyPoseObservationJointNameLeftShoulder, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftShoulder")))
 }
 
-// VNBodyLandmarkRegionKeyFace returns the string constant VNBodyLandmarkRegionKeyFace as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkRegionKeyFace() objc.ID {
-	if _r := raw.VNBodyLandmarkRegionKeyFace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightShoulder returns the string constant VNHumanBodyPoseObservationJointNameRightShoulder, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightShoulder")))
 }
 
-// VNBodyLandmarkRegionKeyTorso returns the string constant VNBodyLandmarkRegionKeyTorso as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkRegionKeyTorso() objc.ID {
-	if _r := raw.VNBodyLandmarkRegionKeyTorso(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameNeck returns the string constant VNHumanBodyPoseObservationJointNameNeck, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameNeck() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameNeck")))
 }
 
-// VNBodyLandmarkRegionKeyLeftArm returns the string constant VNBodyLandmarkRegionKeyLeftArm as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkRegionKeyLeftArm() objc.ID {
-	if _r := raw.VNBodyLandmarkRegionKeyLeftArm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftElbow returns the string constant VNHumanBodyPoseObservationJointNameLeftElbow, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftElbow")))
 }
 
-// VNBodyLandmarkRegionKeyRightArm returns the string constant VNBodyLandmarkRegionKeyRightArm as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkRegionKeyRightArm() objc.ID {
-	if _r := raw.VNBodyLandmarkRegionKeyRightArm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightElbow returns the string constant VNHumanBodyPoseObservationJointNameRightElbow, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightElbow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightElbow")))
 }
 
-// VNBodyLandmarkRegionKeyLeftLeg returns the string constant VNBodyLandmarkRegionKeyLeftLeg as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkRegionKeyLeftLeg() objc.ID {
-	if _r := raw.VNBodyLandmarkRegionKeyLeftLeg(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftWrist returns the string constant VNHumanBodyPoseObservationJointNameLeftWrist, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftWrist")))
 }
 
-// VNBodyLandmarkRegionKeyRightLeg returns the string constant VNBodyLandmarkRegionKeyRightLeg as an objc.ID, for use as a dictionary key or selector argument.
-func VNBodyLandmarkRegionKeyRightLeg() objc.ID {
-	if _r := raw.VNBodyLandmarkRegionKeyRightLeg(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightWrist returns the string constant VNHumanBodyPoseObservationJointNameRightWrist, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightWrist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightWrist")))
 }
 
-// VNHumanBodyPoseObservationJointNameNose returns the string constant VNHumanBodyPoseObservationJointNameNose as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameNose() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameNose(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftHip returns the string constant VNHumanBodyPoseObservationJointNameLeftHip, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftHip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftHip")))
 }
 
-// VNHumanBodyPoseObservationJointNameLeftEye returns the string constant VNHumanBodyPoseObservationJointNameLeftEye as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftEye() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftEye(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightHip returns the string constant VNHumanBodyPoseObservationJointNameRightHip, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightHip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightHip")))
 }
 
-// VNHumanBodyPoseObservationJointNameRightEye returns the string constant VNHumanBodyPoseObservationJointNameRightEye as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightEye() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightEye(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRoot returns the string constant VNHumanBodyPoseObservationJointNameRoot, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRoot() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRoot")))
 }
 
-// VNHumanBodyPoseObservationJointNameLeftEar returns the string constant VNHumanBodyPoseObservationJointNameLeftEar as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftEar() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftEar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftKnee returns the string constant VNHumanBodyPoseObservationJointNameLeftKnee, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftKnee")))
 }
 
-// VNHumanBodyPoseObservationJointNameRightEar returns the string constant VNHumanBodyPoseObservationJointNameRightEar as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightEar() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightEar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightKnee returns the string constant VNHumanBodyPoseObservationJointNameRightKnee, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightKnee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightKnee")))
 }
 
-// VNHumanBodyPoseObservationJointNameLeftShoulder returns the string constant VNHumanBodyPoseObservationJointNameLeftShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftShoulder() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameLeftAnkle returns the string constant VNHumanBodyPoseObservationJointNameLeftAnkle, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameLeftAnkle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameLeftAnkle")))
 }
 
-// VNHumanBodyPoseObservationJointNameRightShoulder returns the string constant VNHumanBodyPoseObservationJointNameRightShoulder as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightShoulder() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightShoulder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointNameRightAnkle returns the string constant VNHumanBodyPoseObservationJointNameRightAnkle, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointNameRightAnkle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointNameRightAnkle")))
 }
 
-// VNHumanBodyPoseObservationJointNameNeck returns the string constant VNHumanBodyPoseObservationJointNameNeck as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameNeck() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameNeck(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameFace returns the string constant VNHumanBodyPoseObservationJointsGroupNameFace, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameFace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameFace")))
 }
 
-// VNHumanBodyPoseObservationJointNameLeftElbow returns the string constant VNHumanBodyPoseObservationJointNameLeftElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftElbow() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameTorso returns the string constant VNHumanBodyPoseObservationJointsGroupNameTorso, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameTorso() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameTorso")))
 }
 
-// VNHumanBodyPoseObservationJointNameRightElbow returns the string constant VNHumanBodyPoseObservationJointNameRightElbow as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightElbow() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightElbow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameLeftArm returns the string constant VNHumanBodyPoseObservationJointsGroupNameLeftArm, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameLeftArm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameLeftArm")))
 }
 
-// VNHumanBodyPoseObservationJointNameLeftWrist returns the string constant VNHumanBodyPoseObservationJointNameLeftWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftWrist() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameRightArm returns the string constant VNHumanBodyPoseObservationJointsGroupNameRightArm, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameRightArm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameRightArm")))
 }
 
-// VNHumanBodyPoseObservationJointNameRightWrist returns the string constant VNHumanBodyPoseObservationJointNameRightWrist as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightWrist() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightWrist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameLeftLeg returns the string constant VNHumanBodyPoseObservationJointsGroupNameLeftLeg, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameLeftLeg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameLeftLeg")))
 }
 
-// VNHumanBodyPoseObservationJointNameLeftHip returns the string constant VNHumanBodyPoseObservationJointNameLeftHip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftHip() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftHip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameRightLeg returns the string constant VNHumanBodyPoseObservationJointsGroupNameRightLeg, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameRightLeg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameRightLeg")))
 }
 
-// VNHumanBodyPoseObservationJointNameRightHip returns the string constant VNHumanBodyPoseObservationJointNameRightHip as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightHip() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightHip(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointNameRoot returns the string constant VNHumanBodyPoseObservationJointNameRoot as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRoot() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRoot(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointNameLeftKnee returns the string constant VNHumanBodyPoseObservationJointNameLeftKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftKnee() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointNameRightKnee returns the string constant VNHumanBodyPoseObservationJointNameRightKnee as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightKnee() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightKnee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointNameLeftAnkle returns the string constant VNHumanBodyPoseObservationJointNameLeftAnkle as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameLeftAnkle() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameLeftAnkle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointNameRightAnkle returns the string constant VNHumanBodyPoseObservationJointNameRightAnkle as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointNameRightAnkle() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointNameRightAnkle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameFace returns the string constant VNHumanBodyPoseObservationJointsGroupNameFace as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameFace() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameFace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameTorso returns the string constant VNHumanBodyPoseObservationJointsGroupNameTorso as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameTorso() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameTorso(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameLeftArm returns the string constant VNHumanBodyPoseObservationJointsGroupNameLeftArm as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameLeftArm() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameLeftArm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameRightArm returns the string constant VNHumanBodyPoseObservationJointsGroupNameRightArm as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameRightArm() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameRightArm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameLeftLeg returns the string constant VNHumanBodyPoseObservationJointsGroupNameLeftLeg as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameLeftLeg() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameLeftLeg(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameRightLeg returns the string constant VNHumanBodyPoseObservationJointsGroupNameRightLeg as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameRightLeg() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameRightLeg(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// VNHumanBodyPoseObservationJointsGroupNameAll returns the string constant VNHumanBodyPoseObservationJointsGroupNameAll as an objc.ID, for use as a dictionary key or selector argument.
-func VNHumanBodyPoseObservationJointsGroupNameAll() objc.ID {
-	if _r := raw.VNHumanBodyPoseObservationJointsGroupNameAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// VNHumanBodyPoseObservationJointsGroupNameAll returns the string constant VNHumanBodyPoseObservationJointsGroupNameAll, for use as a dictionary key or argument.
+func VNHumanBodyPoseObservationJointsGroupNameAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameAll")))
 }

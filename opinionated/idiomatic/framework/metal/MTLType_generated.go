@@ -5,49 +5,86 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a data type.
+// Type is an idiomatic wrapper over the Objective-C class MTLType.
 //
-// Type wraps [raw.MTLType] with a fluent Go API.
+// Type is an abstract base — you do not construct it directly. Construct one of [ArrayType], [PointerType], [StructType], [TensorReferenceType], [TextureReferenceType] and pass it where a Type is accepted.
+//
+// A description of a data type.
 type Type struct {
-	inner *raw.MTLType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLType].
-func (x *Type) Unwrap() *raw.MTLType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Type) ID() objc.ID { return x.inner.Ptr() }
-
-// TypeFromID adopts an existing object pointer as a Type (nil for 0).
+// TypeFromID adopts an existing Objective-C object as a Type
+// (nil for 0), retaining it and registering a release finalizer.
 func TypeFromID(id objc.ID) *Type {
 	if id == 0 {
 		return nil
 	}
-	return &Type{inner: raw.MTLTypeFromID(id)}
+	x := &Type{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewType creates a new [Type].
-func NewType() *Type {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLType")), objc.RegisterName("new"))
-	return &Type{inner: raw.MTLTypeFromID(_id)}
+// typeAdopt wraps an Objective-C object that this code just created as a
+// Type (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func typeAdopt(id objc.ID) *Type {
+	if id == 0 {
+		return nil
+	}
+	x := &Type{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DataType calls the underlying DataType.
-func (x *Type) DataType() MTLDataType {
-	return MTLDataType(x.inner.DataType())
+// Description returns the object's -description text.
+func (x *Type) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *Type) asType() *raw.MTLType { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Type) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Type) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Type) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// DataType wraps the corresponding Objective-C method.
+func (x *Type) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
+}
 
 // Typeable is the interface implemented by [Type], for mocking and DI.
 type Typeable interface {
-	Unwrap() *raw.MTLType
-	DataType() MTLDataType
+	obj.Object
+	DataType() DataType
 }
 
 var _ Typeable = (*Type)(nil)
+
+// isType marks Type — and, by embedding promotion, its
+// subclasses — as a member of the Type hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Type) isType() {}
+
+var _ TypeProvider = (*Type)(nil)

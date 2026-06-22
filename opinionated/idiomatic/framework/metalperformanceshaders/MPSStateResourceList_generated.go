@@ -5,58 +5,88 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface for objects that define resources for Metal Performance Shaders state containers.
+// StateResourceList is an idiomatic wrapper over the Objective-C class MPSStateResourceList.
 //
-// StateResourceList wraps [raw.MPSStateResourceList] with a fluent Go API.
+// An interface for objects that define resources for Metal Performance Shaders state containers.
 type StateResourceList struct {
-	inner *raw.MPSStateResourceList
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSStateResourceList].
-func (x *StateResourceList) Unwrap() *raw.MPSStateResourceList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StateResourceList) ID() objc.ID { return x.inner.Ptr() }
-
-// StateResourceListFromID adopts an existing object pointer as a StateResourceList (nil for 0).
+// StateResourceListFromID adopts an existing Objective-C object as a StateResourceList
+// (nil for 0), retaining it and registering a release finalizer.
 func StateResourceListFromID(id objc.ID) *StateResourceList {
 	if id == 0 {
 		return nil
 	}
-	return &StateResourceList{inner: raw.MPSStateResourceListFromID(id)}
+	x := &StateResourceList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStateResourceList creates a new [StateResourceList].
+// stateResourceListAdopt wraps an Objective-C object that this code just created as a
+// StateResourceList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateResourceListAdopt(id objc.ID) *StateResourceList {
+	if id == 0 {
+		return nil
+	}
+	x := &StateResourceList{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StateResourceList) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StateResourceList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StateResourceList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StateResourceList) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStateResourceList creates a new StateResourceList.
 func NewStateResourceList() *StateResourceList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSStateResourceList")), objc.RegisterName("new"))
-	return &StateResourceList{inner: raw.MPSStateResourceListFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSStateResourceList")), objc.RegisterName("new"))
+	return stateResourceListAdopt(_id)
 }
 
-// @abstract append a texture to the resource list
-//
-// AppendTexture calls the underlying AppendTexture.
-func (x *StateResourceList) AppendTexture(descriptor *metal.MTLTextureDescriptor) {
-	x.inner.AppendTexture(descriptor)
+// AppendTexture append a texture to the resource list
+func (x *StateResourceList) AppendTexture(descriptor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendTexture:"), objref.IDOf(descriptor))
 }
 
-// @abstract append a buffer to the resource list
-//
-// AppendBuffer calls the underlying AppendBuffer.
-func (x *StateResourceList) AppendBuffer(size uint) {
-	x.inner.AppendBuffer(size)
+// AppendBuffer append a buffer to the resource list
+func (x *StateResourceList) AppendBuffer(size int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendBuffer:"), size)
 }
 
 // StateResourceListable is the interface implemented by [StateResourceList], for mocking and DI.
 type StateResourceListable interface {
-	Unwrap() *raw.MPSStateResourceList
-	AppendTexture(descriptor *metal.MTLTextureDescriptor)
-	AppendBuffer(size uint)
+	obj.Object
+	AppendTexture(descriptor obj.Object)
+	AppendBuffer(size int)
 }
 
 var _ StateResourceListable = (*StateResourceList)(nil)

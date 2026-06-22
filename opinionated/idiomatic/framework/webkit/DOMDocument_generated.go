@@ -5,869 +5,654 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMDocument wraps [raw.DOMDocument] with a fluent Go API.
+// DOMDocument is an idiomatic wrapper over the Objective-C class DOMDocument.
+//
+// DOMDocument is an abstract base — you do not construct it directly. Construct one of [DOMHTMLDocument] and pass it where a DOMDocument is accepted.
 type DOMDocument struct {
-	inner *raw.DOMDocument
+	DOMNode
 }
 
-// Unwrap returns the underlying [raw.DOMDocument].
-func (x *DOMDocument) Unwrap() *raw.DOMDocument { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMDocument) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMDocumentFromID adopts an existing object pointer as a DOMDocument (nil for 0).
+// DOMDocumentFromID adopts an existing Objective-C object as a DOMDocument
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMDocumentFromID(id objc.ID) *DOMDocument {
 	if id == 0 {
 		return nil
 	}
-	return &DOMDocument{inner: raw.DOMDocumentFromID(id)}
+	x := &DOMDocument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMDocument creates a new [DOMDocument].
-func NewDOMDocument() *DOMDocument {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMDocument")), objc.RegisterName("new"))
-	return &DOMDocument{inner: raw.DOMDocumentFromID(_id)}
+// dOMDocumentAdopt wraps an Objective-C object that this code just created as a
+// DOMDocument (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMDocumentAdopt(id objc.ID) *DOMDocument {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMDocument{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithXmlVersion sets the xmlVersion property and returns the receiver for chaining.
+// WithXmlVersion sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithXmlVersion(xmlVersion string) *DOMDocument {
-	x.inner.SetXmlVersion(foundation.NSStringStringWithUTF8String(xmlVersion))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlVersion:"), purego.NSString(xmlVersion))
 	return x
 }
 
-// WithXmlStandalone sets the xmlStandalone property and returns the receiver for chaining.
+// WithXmlStandalone sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithXmlStandalone(xmlStandalone bool) *DOMDocument {
-	x.inner.SetXmlStandalone(xmlStandalone)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlStandalone:"), xmlStandalone)
 	return x
 }
 
-// WithDocumentURI sets the documentURI property and returns the receiver for chaining.
+// WithDocumentURI sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithDocumentURI(documentURI string) *DOMDocument {
-	x.inner.SetDocumentURI(foundation.NSStringStringWithUTF8String(documentURI))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentURI:"), purego.NSString(documentURI))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithTitle(title string) *DOMDocument {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithCookie sets the cookie property and returns the receiver for chaining.
+// WithCookie sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithCookie(cookie string) *DOMDocument {
-	x.inner.SetCookie(foundation.NSStringStringWithUTF8String(cookie))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:"), purego.NSString(cookie))
 	return x
 }
 
-// WithBody sets the body property and returns the receiver for chaining.
+// WithBody sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithBody(body DOMHTMLElementProvider) *DOMDocument {
-	x.inner.SetBody(body.asDOMHTMLElement())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), objref.IDOf(body))
 	return x
 }
 
-// WithCharset sets the charset property and returns the receiver for chaining.
+// WithCharset sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithCharset(charset string) *DOMDocument {
-	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 	return x
 }
 
-// WithSelectedStylesheetSet sets the selectedStylesheetSet property and returns the receiver for chaining.
+// WithSelectedStylesheetSet sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithSelectedStylesheetSet(selectedStylesheetSet string) *DOMDocument {
-	x.inner.SetSelectedStylesheetSet(foundation.NSStringStringWithUTF8String(selectedStylesheetSet))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedStylesheetSet:"), purego.NSString(selectedStylesheetSet))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithNodeValue(nodeValue string) *DOMDocument {
-	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithPrefix(prefix string) *DOMDocument {
-	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMDocument) WithTextContent(textContent string) *DOMDocument {
-	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// CreateElement calls the underlying CreateElement.
+// CreateElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateElement(tagName string) *DOMElement {
-	_r := x.inner.CreateElement(foundation.NSStringStringWithUTF8String(tagName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createElement:"), purego.NSString(tagName))
+	return DOMElementFromID(_r)
 }
 
-// CreateDocumentFragment calls the underlying CreateDocumentFragment.
+// CreateDocumentFragment wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateDocumentFragment() *DOMDocumentFragment {
-	_r := x.inner.CreateDocumentFragment()
-	if _r == nil {
-		return nil
-	}
-	return &DOMDocumentFragment{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentFragment"))
+	return DOMDocumentFragmentFromID(_r)
 }
 
-// CreateTextNode calls the underlying CreateTextNode.
+// CreateTextNode wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateTextNode(data string) *DOMText {
-	_r := x.inner.CreateTextNode(foundation.NSStringStringWithUTF8String(data))
-	if _r == nil {
-		return nil
-	}
-	return &DOMText{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createTextNode:"), purego.NSString(data))
+	return DOMTextFromID(_r)
 }
 
-// CreateComment calls the underlying CreateComment.
+// CreateComment wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateComment(data string) *DOMComment {
-	_r := x.inner.CreateComment(foundation.NSStringStringWithUTF8String(data))
-	if _r == nil {
-		return nil
-	}
-	return &DOMComment{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createComment:"), purego.NSString(data))
+	return DOMCommentFromID(_r)
 }
 
-// CreateCDATASection calls the underlying CreateCDATASection.
+// CreateCDATASection wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateCDATASection(data string) *DOMCDATASection {
-	_r := x.inner.CreateCDATASection(foundation.NSStringStringWithUTF8String(data))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCDATASection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCDATASection:"), purego.NSString(data))
+	return DOMCDATASectionFromID(_r)
 }
 
-// CreateProcessingInstructionData calls the underlying CreateProcessingInstructionData.
+// CreateProcessingInstructionData wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateProcessingInstructionData(target string, data string) *DOMProcessingInstruction {
-	_r := x.inner.CreateProcessingInstructionData(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(data))
-	if _r == nil {
-		return nil
-	}
-	return &DOMProcessingInstruction{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createProcessingInstruction:data:"), purego.NSString(target), purego.NSString(data))
+	return DOMProcessingInstructionFromID(_r)
 }
 
-// CreateAttribute calls the underlying CreateAttribute.
+// CreateAttribute wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateAttribute(name string) *DOMAttr {
-	_r := x.inner.CreateAttribute(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &DOMAttr{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAttribute:"), purego.NSString(name))
+	return DOMAttrFromID(_r)
 }
 
-// CreateEntityReference calls the underlying CreateEntityReference.
+// CreateEntityReference wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateEntityReference(name string) *DOMEntityReference {
-	_r := x.inner.CreateEntityReference(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &DOMEntityReference{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEntityReference:"), purego.NSString(name))
+	return DOMEntityReferenceFromID(_r)
 }
 
-// GetElementsByTagName calls the underlying GetElementsByTagName.
+// GetElementsByTagName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByTagName(tagname string) *DOMNodeList {
-	_r := x.inner.GetElementsByTagName(foundation.NSStringStringWithUTF8String(tagname))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByTagName:"), purego.NSString(tagname))
+	return DOMNodeListFromID(_r)
 }
 
-// ImportNodeDeep calls the underlying ImportNodeDeep.
-func (x *DOMDocument) ImportNodeDeep(importedNode *raw.DOMNode, deep bool) *DOMNode {
-	_r := x.inner.ImportNodeDeep(importedNode, deep)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// ImportNodeDeep wraps the corresponding Objective-C method.
+func (x *DOMDocument) ImportNodeDeep(importedNode *DOMNode, deep bool) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importNode:deep:"), objref.IDOf(importedNode), deep)
+	return DOMNodeFromID(_r)
 }
 
-// CreateElementNSQualifiedName calls the underlying CreateElementNSQualifiedName.
+// CreateElementNSQualifiedName wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateElementNSQualifiedName(namespaceURI string, qualifiedName string) *DOMElement {
-	_r := x.inner.CreateElementNSQualifiedName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createElementNS:qualifiedName:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
+	return DOMElementFromID(_r)
 }
 
-// CreateAttributeNSQualifiedName calls the underlying CreateAttributeNSQualifiedName.
+// CreateAttributeNSQualifiedName wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateAttributeNSQualifiedName(namespaceURI string, qualifiedName string) *DOMAttr {
-	_r := x.inner.CreateAttributeNSQualifiedName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMAttr{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAttributeNS:qualifiedName:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
+	return DOMAttrFromID(_r)
 }
 
-// GetElementsByTagNameNSLocalName calls the underlying GetElementsByTagNameNSLocalName.
+// GetElementsByTagNameNSLocalName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByTagNameNSLocalName(namespaceURI string, localName string) *DOMNodeList {
-	_r := x.inner.GetElementsByTagNameNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByTagNameNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
+	return DOMNodeListFromID(_r)
 }
 
-// AdoptNode calls the underlying AdoptNode.
-func (x *DOMDocument) AdoptNode(source *raw.DOMNode) *DOMNode {
-	_r := x.inner.AdoptNode(source)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// AdoptNode wraps the corresponding Objective-C method.
+func (x *DOMDocument) AdoptNode(source *DOMNode) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adoptNode:"), objref.IDOf(source))
+	return DOMNodeFromID(_r)
 }
 
-// CreateEvent calls the underlying CreateEvent.
+// CreateEvent wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateEvent(eventType string) *DOMEvent {
-	_r := x.inner.CreateEvent(foundation.NSStringStringWithUTF8String(eventType))
-	if _r == nil {
-		return nil
-	}
-	return &DOMEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEvent:"), purego.NSString(eventType))
+	return DOMEventFromID(_r)
 }
 
-// CreateRange calls the underlying CreateRange.
+// CreateRange wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateRange() *DOMRange {
-	_r := x.inner.CreateRange()
-	if _r == nil {
-		return nil
-	}
-	return &DOMRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRange"))
+	return DOMRangeFromID(_r)
 }
 
-// CreateNodeIteratorWhatToShowFilterExpandEntityReferences calls the underlying CreateNodeIteratorWhatToShowFilterExpandEntityReferences.
-func (x *DOMDocument) CreateNodeIteratorWhatToShowFilterExpandEntityReferences(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMNodeIterator {
-	_r := x.inner.CreateNodeIteratorWhatToShowFilterExpandEntityReferences(root, whatToShow, filter, expandEntityReferences)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeIterator{inner: _r}
+// GetOverrideStylePseudoElement wraps the corresponding Objective-C method.
+func (x *DOMDocument) GetOverrideStylePseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOverrideStyle:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// CreateTreeWalkerWhatToShowFilterExpandEntityReferences calls the underlying CreateTreeWalkerWhatToShowFilterExpandEntityReferences.
-func (x *DOMDocument) CreateTreeWalkerWhatToShowFilterExpandEntityReferences(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMTreeWalker {
-	_r := x.inner.CreateTreeWalkerWhatToShowFilterExpandEntityReferences(root, whatToShow, filter, expandEntityReferences)
-	if _r == nil {
-		return nil
-	}
-	return &DOMTreeWalker{inner: _r}
-}
-
-// GetOverrideStylePseudoElement calls the underlying GetOverrideStylePseudoElement.
-func (x *DOMDocument) GetOverrideStylePseudoElement(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
-	_r := x.inner.GetOverrideStylePseudoElement(element, foundation.NSStringStringWithUTF8String(pseudoElement))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleDeclaration{inner: _r}
-}
-
-// CreateExpressionResolver calls the underlying CreateExpressionResolver.
-func (x *DOMDocument) CreateExpressionResolver(expression string, resolver raw.DOMXPathNSResolver) *DOMXPathExpression {
-	_r := x.inner.CreateExpressionResolver(foundation.NSStringStringWithUTF8String(expression), resolver)
-	if _r == nil {
-		return nil
-	}
-	return &DOMXPathExpression{inner: _r}
-}
-
-// CreateNSResolver calls the underlying CreateNSResolver.
-func (x *DOMDocument) CreateNSResolver(nodeResolver *raw.DOMNode) raw.DOMXPathNSResolver {
-	return x.inner.CreateNSResolver(nodeResolver)
-}
-
-// EvaluateContextNodeResolverTypeInResult calls the underlying EvaluateContextNodeResolverTypeInResult.
-func (x *DOMDocument) EvaluateContextNodeResolverTypeInResult(expression string, contextNode *raw.DOMNode, resolver raw.DOMXPathNSResolver, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult {
-	_r := x.inner.EvaluateContextNodeResolverTypeInResult(foundation.NSStringStringWithUTF8String(expression), contextNode, resolver, type_, inResult)
-	if _r == nil {
-		return nil
-	}
-	return &DOMXPathResult{inner: _r}
-}
-
-// ExecCommandUserInterfaceValue calls the underlying ExecCommandUserInterfaceValue.
+// ExecCommandUserInterfaceValue wraps the corresponding Objective-C method.
 func (x *DOMDocument) ExecCommandUserInterfaceValue(command string, userInterface bool, value string) bool {
-	return x.inner.ExecCommandUserInterfaceValue(foundation.NSStringStringWithUTF8String(command), userInterface, foundation.NSStringStringWithUTF8String(value))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execCommand:userInterface:value:"), purego.NSString(command), userInterface, purego.NSString(value))
+	return _r
 }
 
-// ExecCommandUserInterface calls the underlying ExecCommandUserInterface.
+// ExecCommandUserInterface wraps the corresponding Objective-C method.
 func (x *DOMDocument) ExecCommandUserInterface(command string, userInterface bool) bool {
-	return x.inner.ExecCommandUserInterface(foundation.NSStringStringWithUTF8String(command), userInterface)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execCommand:userInterface:"), purego.NSString(command), userInterface)
+	return _r
 }
 
-// ExecCommand calls the underlying ExecCommand.
+// ExecCommand wraps the corresponding Objective-C method.
 func (x *DOMDocument) ExecCommand(command string) bool {
-	return x.inner.ExecCommand(foundation.NSStringStringWithUTF8String(command))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execCommand:"), purego.NSString(command))
+	return _r
 }
 
-// QueryCommandEnabled calls the underlying QueryCommandEnabled.
+// QueryCommandEnabled wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandEnabled(command string) bool {
-	return x.inner.QueryCommandEnabled(foundation.NSStringStringWithUTF8String(command))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandEnabled:"), purego.NSString(command))
+	return _r
 }
 
-// QueryCommandIndeterm calls the underlying QueryCommandIndeterm.
+// QueryCommandIndeterm wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandIndeterm(command string) bool {
-	return x.inner.QueryCommandIndeterm(foundation.NSStringStringWithUTF8String(command))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandIndeterm:"), purego.NSString(command))
+	return _r
 }
 
-// QueryCommandState calls the underlying QueryCommandState.
+// QueryCommandState wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandState(command string) bool {
-	return x.inner.QueryCommandState(foundation.NSStringStringWithUTF8String(command))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandState:"), purego.NSString(command))
+	return _r
 }
 
-// QueryCommandSupported calls the underlying QueryCommandSupported.
+// QueryCommandSupported wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandSupported(command string) bool {
-	return x.inner.QueryCommandSupported(foundation.NSStringStringWithUTF8String(command))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("queryCommandSupported:"), purego.NSString(command))
+	return _r
 }
 
-// QueryCommandValue calls the underlying QueryCommandValue.
+// QueryCommandValue wraps the corresponding Objective-C method.
 func (x *DOMDocument) QueryCommandValue(command string) string {
-	_r := x.inner.QueryCommandValue(foundation.NSStringStringWithUTF8String(command))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryCommandValue:"), purego.NSString(command))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GetElementsByName calls the underlying GetElementsByName.
+// GetElementsByName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByName(elementName string) *DOMNodeList {
-	_r := x.inner.GetElementsByName(foundation.NSStringStringWithUTF8String(elementName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByName:"), purego.NSString(elementName))
+	return DOMNodeListFromID(_r)
 }
 
-// ElementFromPointY calls the underlying ElementFromPointY.
+// ElementFromPointY wraps the corresponding Objective-C method.
 func (x *DOMDocument) ElementFromPointY(x_ int, y int) *DOMElement {
-	_r := x.inner.ElementFromPointY(x_, y)
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementFromPoint:y:"), x_, y)
+	return DOMElementFromID(_r)
 }
 
-// CreateCSSStyleDeclaration calls the underlying CreateCSSStyleDeclaration.
+// CreateCSSStyleDeclaration wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateCSSStyleDeclaration() *DOMCSSStyleDeclaration {
-	_r := x.inner.CreateCSSStyleDeclaration()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleDeclaration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCSSStyleDeclaration"))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// GetComputedStylePseudoElement calls the underlying GetComputedStylePseudoElement.
-func (x *DOMDocument) GetComputedStylePseudoElement(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
-	_r := x.inner.GetComputedStylePseudoElement(element, foundation.NSStringStringWithUTF8String(pseudoElement))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleDeclaration{inner: _r}
+// GetComputedStylePseudoElement wraps the corresponding Objective-C method.
+func (x *DOMDocument) GetComputedStylePseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getComputedStyle:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// GetMatchedCSSRulesPseudoElement calls the underlying GetMatchedCSSRulesPseudoElement.
-func (x *DOMDocument) GetMatchedCSSRulesPseudoElement(element *raw.DOMElement, pseudoElement string) *DOMCSSRuleList {
-	_r := x.inner.GetMatchedCSSRulesPseudoElement(element, foundation.NSStringStringWithUTF8String(pseudoElement))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRuleList{inner: _r}
+// GetMatchedCSSRulesPseudoElement wraps the corresponding Objective-C method.
+func (x *DOMDocument) GetMatchedCSSRulesPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSRuleList {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMatchedCSSRules:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
+	return DOMCSSRuleListFromID(_r)
 }
 
-// GetMatchedCSSRulesPseudoElementAuthorOnly calls the underlying GetMatchedCSSRulesPseudoElementAuthorOnly.
-func (x *DOMDocument) GetMatchedCSSRulesPseudoElementAuthorOnly(element *raw.DOMElement, pseudoElement string, authorOnly bool) *DOMCSSRuleList {
-	_r := x.inner.GetMatchedCSSRulesPseudoElementAuthorOnly(element, foundation.NSStringStringWithUTF8String(pseudoElement), authorOnly)
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRuleList{inner: _r}
+// GetMatchedCSSRulesPseudoElementAuthorOnly wraps the corresponding Objective-C method.
+func (x *DOMDocument) GetMatchedCSSRulesPseudoElementAuthorOnly(element *DOMElement, pseudoElement string, authorOnly bool) *DOMCSSRuleList {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMatchedCSSRules:pseudoElement:authorOnly:"), objref.IDOf(element), purego.NSString(pseudoElement), authorOnly)
+	return DOMCSSRuleListFromID(_r)
 }
 
-// GetElementsByClassName calls the underlying GetElementsByClassName.
+// GetElementsByClassName wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByClassName(classNames string) *DOMNodeList {
-	_r := x.inner.GetElementsByClassName(foundation.NSStringStringWithUTF8String(classNames))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByClassName:"), purego.NSString(classNames))
+	return DOMNodeListFromID(_r)
 }
 
-// HasFocus calls the underlying HasFocus.
+// HasFocus wraps the corresponding Objective-C method.
 func (x *DOMDocument) HasFocus() bool {
-	return x.inner.HasFocus()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFocus"))
+	return _r
 }
 
-// WebkitCancelFullScreen calls the underlying WebkitCancelFullScreen.
+// WebkitCancelFullScreen wraps the corresponding Objective-C method.
 func (x *DOMDocument) WebkitCancelFullScreen() {
-	x.inner.WebkitCancelFullScreen()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webkitCancelFullScreen"))
 }
 
-// GetElementById calls the underlying GetElementById.
+// GetElementById wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementById(elementId string) *DOMElement {
-	_r := x.inner.GetElementById(foundation.NSStringStringWithUTF8String(elementId))
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementById:"), purego.NSString(elementId))
+	return DOMElementFromID(_r)
 }
 
-// QuerySelector calls the underlying QuerySelector.
+// QuerySelector wraps the corresponding Objective-C method.
 func (x *DOMDocument) QuerySelector(selectors string) *DOMElement {
-	_r := x.inner.QuerySelector(foundation.NSStringStringWithUTF8String(selectors))
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("querySelector:"), purego.NSString(selectors))
+	return DOMElementFromID(_r)
 }
 
-// QuerySelectorAll calls the underlying QuerySelectorAll.
+// QuerySelectorAll wraps the corresponding Objective-C method.
 func (x *DOMDocument) QuerySelectorAll(selectors string) *DOMNodeList {
-	_r := x.inner.QuerySelectorAll(foundation.NSStringStringWithUTF8String(selectors))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("querySelectorAll:"), purego.NSString(selectors))
+	return DOMNodeListFromID(_r)
 }
 
-// Doctype calls the underlying Doctype.
+// Doctype wraps the corresponding Objective-C method.
 func (x *DOMDocument) Doctype() *DOMDocumentType {
-	_r := x.inner.Doctype()
-	if _r == nil {
-		return nil
-	}
-	return &DOMDocumentType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doctype"))
+	return DOMDocumentTypeFromID(_r)
 }
 
-// Implementation calls the underlying Implementation.
+// Implementation wraps the corresponding Objective-C method.
 func (x *DOMDocument) Implementation() *DOMImplementation {
-	_r := x.inner.Implementation()
-	if _r == nil {
-		return nil
-	}
-	return &DOMImplementation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("implementation"))
+	return DOMImplementationFromID(_r)
 }
 
-// DocumentElement calls the underlying DocumentElement.
+// DocumentElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) DocumentElement() *DOMElement {
-	_r := x.inner.DocumentElement()
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentElement"))
+	return DOMElementFromID(_r)
 }
 
-// InputEncoding calls the underlying InputEncoding.
+// InputEncoding wraps the corresponding Objective-C method.
 func (x *DOMDocument) InputEncoding() string {
-	_r := x.inner.InputEncoding()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputEncoding"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// XmlEncoding calls the underlying XmlEncoding.
+// XmlEncoding wraps the corresponding Objective-C method.
 func (x *DOMDocument) XmlEncoding() string {
-	_r := x.inner.XmlEncoding()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xmlEncoding"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// XmlVersion calls the underlying XmlVersion.
+// XmlVersion wraps the corresponding Objective-C method.
 func (x *DOMDocument) XmlVersion() string {
-	_r := x.inner.XmlVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xmlVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetXmlVersion calls the underlying SetXmlVersion.
+// SetXmlVersion wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetXmlVersion(xmlVersion string) {
-	x.inner.SetXmlVersion(foundation.NSStringStringWithUTF8String(xmlVersion))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlVersion:"), purego.NSString(xmlVersion))
 }
 
-// XmlStandalone calls the underlying XmlStandalone.
+// XmlStandalone wraps the corresponding Objective-C method.
 func (x *DOMDocument) XmlStandalone() bool {
-	return x.inner.XmlStandalone()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("xmlStandalone"))
+	return _r
 }
 
-// SetXmlStandalone calls the underlying SetXmlStandalone.
+// SetXmlStandalone wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetXmlStandalone(xmlStandalone bool) {
-	x.inner.SetXmlStandalone(xmlStandalone)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXmlStandalone:"), xmlStandalone)
 }
 
-// DocumentURI calls the underlying DocumentURI.
+// DocumentURI wraps the corresponding Objective-C method.
 func (x *DOMDocument) DocumentURI() string {
-	_r := x.inner.DocumentURI()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentURI"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDocumentURI calls the underlying SetDocumentURI.
+// SetDocumentURI wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetDocumentURI(documentURI string) {
-	x.inner.SetDocumentURI(foundation.NSStringStringWithUTF8String(documentURI))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentURI:"), purego.NSString(documentURI))
 }
 
-// DefaultView calls the underlying DefaultView.
+// DefaultView wraps the corresponding Objective-C method.
 func (x *DOMDocument) DefaultView() *DOMAbstractView {
-	_r := x.inner.DefaultView()
-	if _r == nil {
-		return nil
-	}
-	return &DOMAbstractView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultView"))
+	return DOMAbstractViewFromID(_r)
 }
 
-// StyleSheets calls the underlying StyleSheets.
+// StyleSheets wraps the corresponding Objective-C method.
 func (x *DOMDocument) StyleSheets() *DOMStyleSheetList {
-	_r := x.inner.StyleSheets()
-	if _r == nil {
-		return nil
-	}
-	return &DOMStyleSheetList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("styleSheets"))
+	return DOMStyleSheetListFromID(_r)
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *DOMDocument) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Referrer calls the underlying Referrer.
+// Referrer wraps the corresponding Objective-C method.
 func (x *DOMDocument) Referrer() string {
-	_r := x.inner.Referrer()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referrer"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Domain calls the underlying Domain.
+// Domain wraps the corresponding Objective-C method.
 func (x *DOMDocument) Domain() string {
-	_r := x.inner.Domain()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// URL calls the underlying URL.
+// URL wraps the corresponding Objective-C method.
 func (x *DOMDocument) URL() string {
-	_r := x.inner.URL()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Cookie calls the underlying Cookie.
+// Cookie wraps the corresponding Objective-C method.
 func (x *DOMDocument) Cookie() string {
-	_r := x.inner.Cookie()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookie"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCookie calls the underlying SetCookie.
+// SetCookie wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetCookie(cookie string) {
-	x.inner.SetCookie(foundation.NSStringStringWithUTF8String(cookie))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookie:"), purego.NSString(cookie))
 }
 
-// Body calls the underlying Body.
+// Body wraps the corresponding Objective-C method.
 func (x *DOMDocument) Body() *DOMHTMLElement {
-	_r := x.inner.Body()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
+	return DOMHTMLElementFromID(_r)
 }
 
-// SetBody calls the underlying SetBody.
-func (x *DOMDocument) SetBody(body *raw.DOMHTMLElement) {
-	x.inner.SetBody(body)
+// SetBody wraps the corresponding Objective-C method.
+func (x *DOMDocument) SetBody(body *DOMHTMLElement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), objref.IDOf(body))
 }
 
-// Images calls the underlying Images.
+// Images wraps the corresponding Objective-C method.
 func (x *DOMDocument) Images() *DOMHTMLCollection {
-	_r := x.inner.Images()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLCollection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("images"))
+	return DOMHTMLCollectionFromID(_r)
 }
 
-// Applets calls the underlying Applets.
+// Applets wraps the corresponding Objective-C method.
 func (x *DOMDocument) Applets() *DOMHTMLCollection {
-	_r := x.inner.Applets()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLCollection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applets"))
+	return DOMHTMLCollectionFromID(_r)
 }
 
-// Links calls the underlying Links.
+// Links wraps the corresponding Objective-C method.
 func (x *DOMDocument) Links() *DOMHTMLCollection {
-	_r := x.inner.Links()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLCollection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("links"))
+	return DOMHTMLCollectionFromID(_r)
 }
 
-// Forms calls the underlying Forms.
+// Forms wraps the corresponding Objective-C method.
 func (x *DOMDocument) Forms() *DOMHTMLCollection {
-	_r := x.inner.Forms()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLCollection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forms"))
+	return DOMHTMLCollectionFromID(_r)
 }
 
-// Anchors calls the underlying Anchors.
+// Anchors wraps the corresponding Objective-C method.
 func (x *DOMDocument) Anchors() *DOMHTMLCollection {
-	_r := x.inner.Anchors()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLCollection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchors"))
+	return DOMHTMLCollectionFromID(_r)
 }
 
-// LastModified calls the underlying LastModified.
+// LastModified wraps the corresponding Objective-C method.
 func (x *DOMDocument) LastModified() string {
-	_r := x.inner.LastModified()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModified"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Charset calls the underlying Charset.
+// Charset wraps the corresponding Objective-C method.
 func (x *DOMDocument) Charset() string {
-	_r := x.inner.Charset()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charset"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCharset calls the underlying SetCharset.
+// SetCharset wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetCharset(charset string) {
-	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 }
 
-// DefaultCharset calls the underlying DefaultCharset.
+// DefaultCharset wraps the corresponding Objective-C method.
 func (x *DOMDocument) DefaultCharset() string {
-	_r := x.inner.DefaultCharset()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCharset"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ReadyState calls the underlying ReadyState.
+// ReadyState wraps the corresponding Objective-C method.
 func (x *DOMDocument) ReadyState() string {
-	_r := x.inner.ReadyState()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readyState"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CharacterSet calls the underlying CharacterSet.
+// CharacterSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) CharacterSet() string {
-	_r := x.inner.CharacterSet()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characterSet"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PreferredStylesheetSet calls the underlying PreferredStylesheetSet.
+// PreferredStylesheetSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) PreferredStylesheetSet() string {
-	_r := x.inner.PreferredStylesheetSet()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredStylesheetSet"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SelectedStylesheetSet calls the underlying SelectedStylesheetSet.
+// SelectedStylesheetSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) SelectedStylesheetSet() string {
-	_r := x.inner.SelectedStylesheetSet()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedStylesheetSet"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSelectedStylesheetSet calls the underlying SetSelectedStylesheetSet.
+// SetSelectedStylesheetSet wraps the corresponding Objective-C method.
 func (x *DOMDocument) SetSelectedStylesheetSet(selectedStylesheetSet string) {
-	x.inner.SetSelectedStylesheetSet(foundation.NSStringStringWithUTF8String(selectedStylesheetSet))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedStylesheetSet:"), purego.NSString(selectedStylesheetSet))
 }
 
-// ActiveElement calls the underlying ActiveElement.
+// ActiveElement wraps the corresponding Objective-C method.
 func (x *DOMDocument) ActiveElement() *DOMElement {
-	_r := x.inner.ActiveElement()
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeElement"))
+	return DOMElementFromID(_r)
 }
 
-// CreateProcessingInstruction calls the underlying CreateProcessingInstruction.
+// CreateProcessingInstruction wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateProcessingInstruction(target string, data string) *DOMProcessingInstruction {
-	_r := x.inner.CreateProcessingInstruction(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(data))
-	if _r == nil {
-		return nil
-	}
-	return &DOMProcessingInstruction{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createProcessingInstruction::"), purego.NSString(target), purego.NSString(data))
+	return DOMProcessingInstructionFromID(_r)
 }
 
-// ImportNode calls the underlying ImportNode.
-func (x *DOMDocument) ImportNode(importedNode *raw.DOMNode, deep bool) *DOMNode {
-	_r := x.inner.ImportNode(importedNode, deep)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// ImportNode wraps the corresponding Objective-C method.
+func (x *DOMDocument) ImportNode(importedNode *DOMNode, deep bool) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importNode::"), objref.IDOf(importedNode), deep)
+	return DOMNodeFromID(_r)
 }
 
-// CreateElementNS calls the underlying CreateElementNS.
+// CreateElementNS wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateElementNS(namespaceURI string, qualifiedName string) *DOMElement {
-	_r := x.inner.CreateElementNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createElementNS::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
+	return DOMElementFromID(_r)
 }
 
-// CreateAttributeNS calls the underlying CreateAttributeNS.
+// CreateAttributeNS wraps the corresponding Objective-C method.
 func (x *DOMDocument) CreateAttributeNS(namespaceURI string, qualifiedName string) *DOMAttr {
-	_r := x.inner.CreateAttributeNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMAttr{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAttributeNS::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName))
+	return DOMAttrFromID(_r)
 }
 
-// GetElementsByTagNameNS calls the underlying GetElementsByTagNameNS.
+// GetElementsByTagNameNS wraps the corresponding Objective-C method.
 func (x *DOMDocument) GetElementsByTagNameNS(namespaceURI string, localName string) *DOMNodeList {
-	_r := x.inner.GetElementsByTagNameNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getElementsByTagNameNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
+	return DOMNodeListFromID(_r)
 }
 
-// CreateNodeIterator calls the underlying CreateNodeIterator.
-func (x *DOMDocument) CreateNodeIterator(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMNodeIterator {
-	_r := x.inner.CreateNodeIterator(root, whatToShow, filter, expandEntityReferences)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeIterator{inner: _r}
+// GetOverrideStyle wraps the corresponding Objective-C method.
+func (x *DOMDocument) GetOverrideStyle(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOverrideStyle::"), objref.IDOf(element), purego.NSString(pseudoElement))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// CreateTreeWalker calls the underlying CreateTreeWalker.
-func (x *DOMDocument) CreateTreeWalker(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMTreeWalker {
-	_r := x.inner.CreateTreeWalker(root, whatToShow, filter, expandEntityReferences)
-	if _r == nil {
-		return nil
-	}
-	return &DOMTreeWalker{inner: _r}
+// GetComputedStyle wraps the corresponding Objective-C method.
+func (x *DOMDocument) GetComputedStyle(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getComputedStyle::"), objref.IDOf(element), purego.NSString(pseudoElement))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// GetOverrideStyle calls the underlying GetOverrideStyle.
-func (x *DOMDocument) GetOverrideStyle(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
-	_r := x.inner.GetOverrideStyle(element, foundation.NSStringStringWithUTF8String(pseudoElement))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleDeclaration{inner: _r}
+// URLWithAttributeString constructs a URL given an attribute string.
+func (x *DOMDocument) URLWithAttributeString(string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLWithAttributeString:"), purego.NSString(string_))
+	return obj.Wrap(_r)
 }
 
-// CreateExpression calls the underlying CreateExpression.
-func (x *DOMDocument) CreateExpression(expression string, resolver raw.DOMXPathNSResolver) *DOMXPathExpression {
-	_r := x.inner.CreateExpression(foundation.NSStringStringWithUTF8String(expression), resolver)
-	if _r == nil {
-		return nil
-	}
-	return &DOMXPathExpression{inner: _r}
-}
-
-// Evaluate calls the underlying Evaluate.
-func (x *DOMDocument) Evaluate(expression string, contextNode *raw.DOMNode, resolver raw.DOMXPathNSResolver, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult {
-	_r := x.inner.Evaluate(foundation.NSStringStringWithUTF8String(expression), contextNode, resolver, type_, inResult)
-	if _r == nil {
-		return nil
-	}
-	return &DOMXPathResult{inner: _r}
-}
-
-// GetComputedStyle calls the underlying GetComputedStyle.
-func (x *DOMDocument) GetComputedStyle(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
-	_r := x.inner.GetComputedStyle(element, foundation.NSStringStringWithUTF8String(pseudoElement))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleDeclaration{inner: _r}
-}
-
-// Constructs a URL given an attribute string.
-//
-// URLWithAttributeString calls the underlying URLWithAttributeString.
-func (x *DOMDocument) URLWithAttributeString(string_ string) *foundation.NSURL {
-	return x.inner.URLWithAttributeString(foundation.NSStringStringWithUTF8String(string_))
-}
-
-// @property webFrame @abstract The frame of the DOM document.
-//
-// WebFrame calls the underlying WebFrame.
+// WebFrame the frame of the DOM document.
 func (x *DOMDocument) WebFrame() *WebFrame {
-	_r := x.inner.WebFrame()
-	if _r == nil {
-		return nil
-	}
-	return &WebFrame{inner: _r}
-}
-
-func (x *DOMDocument) asDOMDocument() *raw.DOMDocument { return x.inner }
-
-func (x *DOMDocument) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
-
-func (x *DOMDocument) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
-
-func (x *DOMDocument) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMNode.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webFrame"))
+	return WebFrameFromID(_r)
 }
 
 // DOMDocumentable is the interface implemented by [DOMDocument], for mocking and DI.
 type DOMDocumentable interface {
-	Unwrap() *raw.DOMDocument
+	obj.Object
 	WithXmlVersion(xmlVersion string) *DOMDocument
 	WithXmlStandalone(xmlStandalone bool) *DOMDocument
 	WithDocumentURI(documentURI string) *DOMDocument
@@ -888,19 +673,14 @@ type DOMDocumentable interface {
 	CreateAttribute(name string) *DOMAttr
 	CreateEntityReference(name string) *DOMEntityReference
 	GetElementsByTagName(tagname string) *DOMNodeList
-	ImportNodeDeep(importedNode *raw.DOMNode, deep bool) *DOMNode
+	ImportNodeDeep(importedNode *DOMNode, deep bool) *DOMNode
 	CreateElementNSQualifiedName(namespaceURI string, qualifiedName string) *DOMElement
 	CreateAttributeNSQualifiedName(namespaceURI string, qualifiedName string) *DOMAttr
 	GetElementsByTagNameNSLocalName(namespaceURI string, localName string) *DOMNodeList
-	AdoptNode(source *raw.DOMNode) *DOMNode
+	AdoptNode(source *DOMNode) *DOMNode
 	CreateEvent(eventType string) *DOMEvent
 	CreateRange() *DOMRange
-	CreateNodeIteratorWhatToShowFilterExpandEntityReferences(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMNodeIterator
-	CreateTreeWalkerWhatToShowFilterExpandEntityReferences(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMTreeWalker
-	GetOverrideStylePseudoElement(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
-	CreateExpressionResolver(expression string, resolver raw.DOMXPathNSResolver) *DOMXPathExpression
-	CreateNSResolver(nodeResolver *raw.DOMNode) raw.DOMXPathNSResolver
-	EvaluateContextNodeResolverTypeInResult(expression string, contextNode *raw.DOMNode, resolver raw.DOMXPathNSResolver, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult
+	GetOverrideStylePseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
 	ExecCommandUserInterfaceValue(command string, userInterface bool, value string) bool
 	ExecCommandUserInterface(command string, userInterface bool) bool
 	ExecCommand(command string) bool
@@ -912,9 +692,9 @@ type DOMDocumentable interface {
 	GetElementsByName(elementName string) *DOMNodeList
 	ElementFromPointY(x_ int, y int) *DOMElement
 	CreateCSSStyleDeclaration() *DOMCSSStyleDeclaration
-	GetComputedStylePseudoElement(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
-	GetMatchedCSSRulesPseudoElement(element *raw.DOMElement, pseudoElement string) *DOMCSSRuleList
-	GetMatchedCSSRulesPseudoElementAuthorOnly(element *raw.DOMElement, pseudoElement string, authorOnly bool) *DOMCSSRuleList
+	GetComputedStylePseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
+	GetMatchedCSSRulesPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSRuleList
+	GetMatchedCSSRulesPseudoElementAuthorOnly(element *DOMElement, pseudoElement string, authorOnly bool) *DOMCSSRuleList
 	GetElementsByClassName(classNames string) *DOMNodeList
 	HasFocus() bool
 	WebkitCancelFullScreen()
@@ -942,7 +722,7 @@ type DOMDocumentable interface {
 	Cookie() string
 	SetCookie(cookie string)
 	Body() *DOMHTMLElement
-	SetBody(body *raw.DOMHTMLElement)
+	SetBody(body *DOMHTMLElement)
 	Images() *DOMHTMLCollection
 	Applets() *DOMHTMLCollection
 	Links() *DOMHTMLCollection
@@ -959,18 +739,27 @@ type DOMDocumentable interface {
 	SetSelectedStylesheetSet(selectedStylesheetSet string)
 	ActiveElement() *DOMElement
 	CreateProcessingInstruction(target string, data string) *DOMProcessingInstruction
-	ImportNode(importedNode *raw.DOMNode, deep bool) *DOMNode
+	ImportNode(importedNode *DOMNode, deep bool) *DOMNode
 	CreateElementNS(namespaceURI string, qualifiedName string) *DOMElement
 	CreateAttributeNS(namespaceURI string, qualifiedName string) *DOMAttr
 	GetElementsByTagNameNS(namespaceURI string, localName string) *DOMNodeList
-	CreateNodeIterator(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMNodeIterator
-	CreateTreeWalker(root *raw.DOMNode, whatToShow uint, filter raw.DOMNodeFilter, expandEntityReferences bool) *DOMTreeWalker
-	GetOverrideStyle(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
-	CreateExpression(expression string, resolver raw.DOMXPathNSResolver) *DOMXPathExpression
-	Evaluate(expression string, contextNode *raw.DOMNode, resolver raw.DOMXPathNSResolver, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult
-	GetComputedStyle(element *raw.DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
-	URLWithAttributeString(string_ string) *foundation.NSURL
+	GetOverrideStyle(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
+	GetComputedStyle(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
+	URLWithAttributeString(string_ string) obj.Object
 	WebFrame() *WebFrame
 }
 
 var _ DOMDocumentable = (*DOMDocument)(nil)
+
+// isDOMDocument marks DOMDocument — and, by embedding promotion, its
+// subclasses — as a member of the DOMDocument hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMDocument) isDOMDocument() {}
+
+var _ DOMDocumentProvider = (*DOMDocument)(nil)
+
+var _ DOMNodeProvider = (*DOMDocument)(nil)
+
+var _ DOMObjectProvider = (*DOMDocument)(nil)
+
+var _ WebScriptObjectProvider = (*DOMDocument)(nil)

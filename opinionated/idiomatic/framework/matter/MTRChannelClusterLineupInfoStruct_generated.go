@@ -5,135 +5,166 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterLineupInfoStruct wraps [raw.MTRChannelClusterLineupInfoStruct] with a fluent Go API.
+// MTRChannelClusterLineupInfoStruct is an idiomatic wrapper over the Objective-C class MTRChannelClusterLineupInfoStruct.
+//
+// MTRChannelClusterLineupInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRChannelClusterLineupInfo] and pass it where a MTRChannelClusterLineupInfoStruct is accepted.
 type MTRChannelClusterLineupInfoStruct struct {
-	inner *raw.MTRChannelClusterLineupInfoStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterLineupInfoStruct].
-func (x *MTRChannelClusterLineupInfoStruct) Unwrap() *raw.MTRChannelClusterLineupInfoStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterLineupInfoStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterLineupInfoStructFromID adopts an existing object pointer as a MTRChannelClusterLineupInfoStruct (nil for 0).
+// MTRChannelClusterLineupInfoStructFromID adopts an existing Objective-C object as a MTRChannelClusterLineupInfoStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterLineupInfoStructFromID(id objc.ID) *MTRChannelClusterLineupInfoStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterLineupInfoStruct{inner: raw.MTRChannelClusterLineupInfoStructFromID(id)}
+	x := &MTRChannelClusterLineupInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterLineupInfoStruct creates a new [MTRChannelClusterLineupInfoStruct].
-func NewMTRChannelClusterLineupInfoStruct() *MTRChannelClusterLineupInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterLineupInfoStruct")), objc.RegisterName("new"))
-	return &MTRChannelClusterLineupInfoStruct{inner: raw.MTRChannelClusterLineupInfoStructFromID(_id)}
+// mTRChannelClusterLineupInfoStructAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterLineupInfoStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterLineupInfoStructAdopt(id objc.ID) *MTRChannelClusterLineupInfoStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterLineupInfoStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithOperatorName sets the operatorName property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MTRChannelClusterLineupInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterLineupInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterLineupInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterLineupInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithOperatorName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfoStruct) WithOperatorName(operatorName string) *MTRChannelClusterLineupInfoStruct {
-	x.inner.SetOperatorName(foundation.NSStringStringWithUTF8String(operatorName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperatorName:"), purego.NSString(operatorName))
 	return x
 }
 
-// WithLineupName sets the lineupName property and returns the receiver for chaining.
+// WithLineupName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfoStruct) WithLineupName(lineupName string) *MTRChannelClusterLineupInfoStruct {
-	x.inner.SetLineupName(foundation.NSStringStringWithUTF8String(lineupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupName:"), purego.NSString(lineupName))
 	return x
 }
 
-// WithPostalCode sets the postalCode property and returns the receiver for chaining.
+// WithPostalCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfoStruct) WithPostalCode(postalCode string) *MTRChannelClusterLineupInfoStruct {
-	x.inner.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 	return x
 }
 
-// WithLineupInfoType sets the lineupInfoType property and returns the receiver for chaining.
-func (x *MTRChannelClusterLineupInfoStruct) WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfoStruct {
-	x.inner.SetLineupInfoType(lineupInfoType)
+// WithLineupInfoType sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterLineupInfoStruct) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return x
 }
 
-// OperatorName calls the underlying OperatorName.
+// OperatorName wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterLineupInfoStruct) OperatorName() string {
-	_r := x.inner.OperatorName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatorName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOperatorName calls the underlying SetOperatorName.
+// SetOperatorName wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterLineupInfoStruct) SetOperatorName(operatorName string) {
-	x.inner.SetOperatorName(foundation.NSStringStringWithUTF8String(operatorName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperatorName:"), purego.NSString(operatorName))
 }
 
-// LineupName calls the underlying LineupName.
+// LineupName wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterLineupInfoStruct) LineupName() string {
-	_r := x.inner.LineupName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineupName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLineupName calls the underlying SetLineupName.
+// SetLineupName wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterLineupInfoStruct) SetLineupName(lineupName string) {
-	x.inner.SetLineupName(foundation.NSStringStringWithUTF8String(lineupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupName:"), purego.NSString(lineupName))
 }
 
-// PostalCode calls the underlying PostalCode.
+// PostalCode wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterLineupInfoStruct) PostalCode() string {
-	_r := x.inner.PostalCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPostalCode calls the underlying SetPostalCode.
+// SetPostalCode wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterLineupInfoStruct) SetPostalCode(postalCode string) {
-	x.inner.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 }
 
-// LineupInfoType calls the underlying LineupInfoType.
-func (x *MTRChannelClusterLineupInfoStruct) LineupInfoType() *foundation.NSNumber {
-	return x.inner.LineupInfoType()
+// LineupInfoType wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterLineupInfoStruct) LineupInfoType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineupInfoType"))
+	return obj.Wrap(_r)
 }
 
-// SetLineupInfoType calls the underlying SetLineupInfoType.
-func (x *MTRChannelClusterLineupInfoStruct) SetLineupInfoType(lineupInfoType *foundation.NSNumber) {
-	x.inner.SetLineupInfoType(lineupInfoType)
-}
-
-func (x *MTRChannelClusterLineupInfoStruct) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct {
-	return x.inner
+// SetLineupInfoType wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterLineupInfoStruct) SetLineupInfoType(lineupInfoType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 }
 
 // MTRChannelClusterLineupInfoStructable is the interface implemented by [MTRChannelClusterLineupInfoStruct], for mocking and DI.
 type MTRChannelClusterLineupInfoStructable interface {
-	Unwrap() *raw.MTRChannelClusterLineupInfoStruct
+	obj.Object
 	WithOperatorName(operatorName string) *MTRChannelClusterLineupInfoStruct
 	WithLineupName(lineupName string) *MTRChannelClusterLineupInfoStruct
 	WithPostalCode(postalCode string) *MTRChannelClusterLineupInfoStruct
-	WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfoStruct
+	WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfoStruct
 	OperatorName() string
 	SetOperatorName(operatorName string)
 	LineupName() string
 	SetLineupName(lineupName string)
 	PostalCode() string
 	SetPostalCode(postalCode string)
-	LineupInfoType() *foundation.NSNumber
-	SetLineupInfoType(lineupInfoType *foundation.NSNumber)
+	LineupInfoType() obj.Object
+	SetLineupInfoType(lineupInfoType obj.Object)
 }
 
 var _ MTRChannelClusterLineupInfoStructable = (*MTRChannelClusterLineupInfoStruct)(nil)
+
+// isMTRChannelClusterLineupInfoStruct marks MTRChannelClusterLineupInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRChannelClusterLineupInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRChannelClusterLineupInfoStruct) isMTRChannelClusterLineupInfoStruct() {}
+
+var _ MTRChannelClusterLineupInfoStructProvider = (*MTRChannelClusterLineupInfoStruct)(nil)

@@ -5,10 +5,11 @@
 package safetykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
+	"github.com/ebitengine/purego/objc"
 )
 
-// IsAvailable calls the underlying SACrashDetectionManagerIsAvailable.
+// IsAvailable available Returns a  value indicating whether the current device supports Crash Detection.
 func IsAvailable() bool {
-	return raw.SACrashDetectionManagerIsAvailable()
+	_r := objc.Send[bool](objc.ID(_class("SACrashDetectionManager")), objc.RegisterName("isAvailable"))
+	return _r
 }

@@ -5,109 +5,117 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface that allows a player to invite other players to a turn-based match and automatch to fill any empty slots.
+// TurnBasedMatchmakerViewController is an idiomatic wrapper over the Objective-C class GKTurnBasedMatchmakerViewController.
 //
-// TurnBasedMatchmakerViewController wraps [raw.GKTurnBasedMatchmakerViewController] with a fluent Go API.
+// An interface that allows a player to invite other players to a turn-based match and automatch to fill any empty slots.
 type TurnBasedMatchmakerViewController struct {
-	inner *raw.GKTurnBasedMatchmakerViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKTurnBasedMatchmakerViewController].
-func (x *TurnBasedMatchmakerViewController) Unwrap() *raw.GKTurnBasedMatchmakerViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TurnBasedMatchmakerViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// TurnBasedMatchmakerViewControllerFromID adopts an existing object pointer as a TurnBasedMatchmakerViewController (nil for 0).
+// TurnBasedMatchmakerViewControllerFromID adopts an existing Objective-C object as a TurnBasedMatchmakerViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func TurnBasedMatchmakerViewControllerFromID(id objc.ID) *TurnBasedMatchmakerViewController {
 	if id == 0 {
 		return nil
 	}
-	return &TurnBasedMatchmakerViewController{inner: raw.GKTurnBasedMatchmakerViewControllerFromID(id)}
-}
-
-// Creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
-//
-// NewTurnBasedMatchmakerViewControllerWithMatchRequest creates a new [TurnBasedMatchmakerViewController].
-func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *TurnBasedMatchmakerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedMatchmakerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), request.Ptr())
-	return &TurnBasedMatchmakerViewController{inner: raw.GKTurnBasedMatchmakerViewControllerFromID(_id)}
-}
-
-// The object that handles turn-based matchmaker view controller changes.
-//
-// WithTurnBasedMatchmakerDelegate sets the turnBasedMatchmakerDelegate property and returns the receiver for chaining.
-func (x *TurnBasedMatchmakerViewController) WithTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate) *TurnBasedMatchmakerViewController {
-	x.inner.SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate)
+	x := &TurnBasedMatchmakerViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that determines whether the view controller shows existing matches.
-//
-// WithShowExistingMatches sets the showExistingMatches property and returns the receiver for chaining.
+// turnBasedMatchmakerViewControllerAdopt wraps an Objective-C object that this code just created as a
+// TurnBasedMatchmakerViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func turnBasedMatchmakerViewControllerAdopt(id objc.ID) *TurnBasedMatchmakerViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &TurnBasedMatchmakerViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TurnBasedMatchmakerViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TurnBasedMatchmakerViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TurnBasedMatchmakerViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedMatchmakerViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTurnBasedMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
+func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *TurnBasedMatchmakerViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedMatchmakerViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), objref.IDOf(request))
+	return turnBasedMatchmakerViewControllerAdopt(_id)
+}
+
+// WithShowExistingMatches a Boolean value that determines whether the view controller shows existing matches.
 func (x *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController {
-	x.inner.SetShowExistingMatches(showExistingMatches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
 	return x
 }
 
-// The mode that a multiplayer game uses to find players.
-//
-// WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
-func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *TurnBasedMatchmakerViewController {
-	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
+// WithMatchmakingMode the mode that a multiplayer game uses to find players.
+func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *TurnBasedMatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
 	return x
 }
 
-// TurnBasedMatchmakerDelegate calls the underlying TurnBasedMatchmakerDelegate.
-func (x *TurnBasedMatchmakerViewController) TurnBasedMatchmakerDelegate() raw.GKTurnBasedMatchmakerViewControllerDelegate {
-	return x.inner.TurnBasedMatchmakerDelegate()
-}
-
-// SetTurnBasedMatchmakerDelegate calls the underlying SetTurnBasedMatchmakerDelegate.
-func (x *TurnBasedMatchmakerViewController) SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate) {
-	x.inner.SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate)
-}
-
-// ShowExistingMatches calls the underlying ShowExistingMatches.
+// ShowExistingMatches wraps the corresponding Objective-C method.
 func (x *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
-	return x.inner.ShowExistingMatches()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showExistingMatches"))
+	return _r
 }
 
-// SetShowExistingMatches calls the underlying SetShowExistingMatches.
+// SetShowExistingMatches wraps the corresponding Objective-C method.
 func (x *TurnBasedMatchmakerViewController) SetShowExistingMatches(showExistingMatches bool) {
-	x.inner.SetShowExistingMatches(showExistingMatches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
 }
 
-// MatchmakingMode calls the underlying MatchmakingMode.
-func (x *TurnBasedMatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
-	return GKMatchmakingMode(x.inner.MatchmakingMode())
+// MatchmakingMode wraps the corresponding Objective-C method.
+func (x *TurnBasedMatchmakerViewController) MatchmakingMode() MatchmakingMode {
+	_r := objc.Send[MatchmakingMode](objref.IDOf(x), objc.RegisterName("matchmakingMode"))
+	return _r
 }
 
-// SetMatchmakingMode calls the underlying SetMatchmakingMode.
-func (x *TurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmakingMode) {
-	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
+// SetMatchmakingMode wraps the corresponding Objective-C method.
+func (x *TurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode MatchmakingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
 }
 
 // TurnBasedMatchmakerViewControllerable is the interface implemented by [TurnBasedMatchmakerViewController], for mocking and DI.
 type TurnBasedMatchmakerViewControllerable interface {
-	Unwrap() *raw.GKTurnBasedMatchmakerViewController
-	WithTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate) *TurnBasedMatchmakerViewController
+	obj.Object
 	WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController
-	WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *TurnBasedMatchmakerViewController
-	TurnBasedMatchmakerDelegate() raw.GKTurnBasedMatchmakerViewControllerDelegate
-	SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate)
+	WithMatchmakingMode(matchmakingMode MatchmakingMode) *TurnBasedMatchmakerViewController
 	ShowExistingMatches() bool
 	SetShowExistingMatches(showExistingMatches bool)
-	MatchmakingMode() GKMatchmakingMode
-	SetMatchmakingMode(matchmakingMode GKMatchmakingMode)
+	MatchmakingMode() MatchmakingMode
+	SetMatchmakingMode(matchmakingMode MatchmakingMode)
 }
 
 var _ TurnBasedMatchmakerViewControllerable = (*TurnBasedMatchmakerViewController)(nil)

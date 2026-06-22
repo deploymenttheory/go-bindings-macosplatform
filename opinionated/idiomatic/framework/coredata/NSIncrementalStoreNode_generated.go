@@ -5,71 +5,96 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete class used to represent basic nodes in a Core Data incremental store.
+// IncrementalStoreNode is an idiomatic wrapper over the Objective-C class NSIncrementalStoreNode.
 //
-// IncrementalStoreNode wraps [raw.NSIncrementalStoreNode] with a fluent Go API.
+// A concrete class used to represent basic nodes in a Core Data incremental store.
 type IncrementalStoreNode struct {
-	inner *raw.NSIncrementalStoreNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSIncrementalStoreNode].
-func (x *IncrementalStoreNode) Unwrap() *raw.NSIncrementalStoreNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IncrementalStoreNode) ID() objc.ID { return x.inner.Ptr() }
-
-// IncrementalStoreNodeFromID adopts an existing object pointer as a IncrementalStoreNode (nil for 0).
+// IncrementalStoreNodeFromID adopts an existing Objective-C object as a IncrementalStoreNode
+// (nil for 0), retaining it and registering a release finalizer.
 func IncrementalStoreNodeFromID(id objc.ID) *IncrementalStoreNode {
 	if id == 0 {
 		return nil
 	}
-	return &IncrementalStoreNode{inner: raw.NSIncrementalStoreNodeFromID(id)}
+	x := &IncrementalStoreNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns an object initialized with the given values.
-//
-// NewIncrementalStoreNodeWithObjectIDWithValuesVersion creates a new [IncrementalStoreNode].
-func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *raw.NSManagedObjectID, values purego.IDer, version uint64) *IncrementalStoreNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIncrementalStoreNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objectID.Ptr(), values.ID(), version)
-	return &IncrementalStoreNode{inner: raw.NSIncrementalStoreNodeFromID(_id)}
-}
-
-// Update the values and version to reflect new data being saved to or loaded from the external store.
-//
-// UpdateWithValuesVersion calls the underlying UpdateWithValuesVersion.
-func (x *IncrementalStoreNode) UpdateWithValuesVersion(values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) {
-	x.inner.UpdateWithValuesVersion(values, version)
-}
-
-// Returns the value for the given property.
-//
-// ValueForPropertyDescription calls the underlying ValueForPropertyDescription.
-func (x *IncrementalStoreNode) ValueForPropertyDescription(prop *raw.NSPropertyDescription) objc.ID {
-	return x.inner.ValueForPropertyDescription(prop)
-}
-
-// ObjectID calls the underlying ObjectID.
-func (x *IncrementalStoreNode) ObjectID() *ManagedObjectID {
-	_r := x.inner.ObjectID()
-	if _r == nil {
+// incrementalStoreNodeAdopt wraps an Objective-C object that this code just created as a
+// IncrementalStoreNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func incrementalStoreNodeAdopt(id objc.ID) *IncrementalStoreNode {
+	if id == 0 {
 		return nil
 	}
-	return &ManagedObjectID{inner: _r}
+	x := &IncrementalStoreNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IncrementalStoreNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IncrementalStoreNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IncrementalStoreNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IncrementalStoreNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIncrementalStoreNodeWithObjectIDWithValuesVersion returns an object initialized with the given values.
+func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *ManagedObjectID, values obj.Object, version uint64) *IncrementalStoreNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIncrementalStoreNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objref.IDOf(objectID), objref.IDOf(values), version)
+	return incrementalStoreNodeAdopt(_id)
+}
+
+// UpdateWithValuesVersion update the values and version to reflect new data being saved to or loaded from the external store.
+func (x *IncrementalStoreNode) UpdateWithValuesVersion(values obj.Object, version uint64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithValues:version:"), objref.IDOf(values), version)
+}
+
+// ValueForPropertyDescription returns the value for the given property.
+func (x *IncrementalStoreNode) ValueForPropertyDescription(prop *PropertyDescription) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForPropertyDescription:"), objref.IDOf(prop))
+	return obj.Wrap(_r)
+}
+
+// ObjectID wraps the corresponding Objective-C method.
+func (x *IncrementalStoreNode) ObjectID() *ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
+	return ManagedObjectIDFromID(_r)
 }
 
 // IncrementalStoreNodeable is the interface implemented by [IncrementalStoreNode], for mocking and DI.
 type IncrementalStoreNodeable interface {
-	Unwrap() *raw.NSIncrementalStoreNode
-	UpdateWithValuesVersion(values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64)
-	ValueForPropertyDescription(prop *raw.NSPropertyDescription) objc.ID
+	obj.Object
+	UpdateWithValuesVersion(values obj.Object, version uint64)
+	ValueForPropertyDescription(prop *PropertyDescription) obj.Object
 	ObjectID() *ManagedObjectID
 }
 

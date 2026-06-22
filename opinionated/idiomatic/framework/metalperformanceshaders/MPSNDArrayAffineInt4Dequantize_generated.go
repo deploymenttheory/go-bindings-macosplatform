@@ -5,85 +5,67 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayAffineInt4Dequantize wraps [raw.MPSNDArrayAffineInt4Dequantize] with a fluent Go API.
+// NDArrayAffineInt4Dequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayAffineInt4Dequantize.
+//
+// It embeds [NDArrayMultiaryKernel], promoting that type's methods.
 type NDArrayAffineInt4Dequantize struct {
-	inner *raw.MPSNDArrayAffineInt4Dequantize
+	NDArrayMultiaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayAffineInt4Dequantize].
-func (x *NDArrayAffineInt4Dequantize) Unwrap() *raw.MPSNDArrayAffineInt4Dequantize { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayAffineInt4Dequantize) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayAffineInt4DequantizeFromID adopts an existing object pointer as a NDArrayAffineInt4Dequantize (nil for 0).
+// NDArrayAffineInt4DequantizeFromID adopts an existing Objective-C object as a NDArrayAffineInt4Dequantize
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayAffineInt4DequantizeFromID(id objc.ID) *NDArrayAffineInt4Dequantize {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(id)}
-}
-
-// @abstract   Initializes a kernel for 4-bit affine dequantization. @param      device    The Metal device to be used with this kernel. @param      quantizationDescriptor        Describes the quantization scheme. @result     A new vector LUT dequantization kernel.
-//
-// NewNDArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor creates a new [NDArrayAffineInt4Dequantize].
-func NewNDArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal.MTLDevice, quantizationDescriptor *mpsndarray.MPSNDArrayAffineQuantizationDescriptor) *NDArrayAffineInt4Dequantize {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayAffineInt4Dequantize")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:quantizationDescriptor:"), device, quantizationDescriptor.Ptr())
-	return &NDArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayAffineInt4Dequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayAffineInt4Dequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayAffineInt4Dequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayAffineInt4Dequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayAffineInt4Dequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// nDArrayAffineInt4DequantizeAdopt wraps an Objective-C object that this code just created as a
+// NDArrayAffineInt4Dequantize (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayAffineInt4DequantizeAdopt(id objc.ID) *NDArrayAffineInt4Dequantize {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayAffineInt4Dequantize{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNDArrayAffineInt4Dequantize creates a new NDArrayAffineInt4Dequantize.
+func NewNDArrayAffineInt4Dequantize() *NDArrayAffineInt4Dequantize {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayAffineInt4Dequantize")), objc.RegisterName("new"))
+	return nDArrayAffineInt4DequantizeAdopt(_id)
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4Dequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayAffineInt4Dequantize) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayAffineInt4Dequantizeable is the interface implemented by [NDArrayAffineInt4Dequantize], for mocking and DI.
 type NDArrayAffineInt4Dequantizeable interface {
-	Unwrap() *raw.MPSNDArrayAffineInt4Dequantize
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayAffineInt4Dequantize
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayAffineInt4Dequantize
+	obj.Object
 	WithLabel(label string) *NDArrayAffineInt4Dequantize
 }
 
 var _ NDArrayAffineInt4Dequantizeable = (*NDArrayAffineInt4Dequantize)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayAffineInt4Dequantize)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayAffineInt4Dequantize)(nil)
+
+var _ KernelProvider = (*NDArrayAffineInt4Dequantize)(nil)

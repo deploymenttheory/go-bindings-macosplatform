@@ -5,109 +5,132 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An annotation that reflects the user’s location on the map.
+// UserLocation is an idiomatic wrapper over the Objective-C class MKUserLocation.
 //
-// UserLocation wraps [raw.MKUserLocation] with a fluent Go API.
+// An annotation that reflects the user’s location on the map.
 type UserLocation struct {
-	inner *raw.MKUserLocation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKUserLocation].
-func (x *UserLocation) Unwrap() *raw.MKUserLocation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserLocation) ID() objc.ID { return x.inner.Ptr() }
-
-// UserLocationFromID adopts an existing object pointer as a UserLocation (nil for 0).
+// UserLocationFromID adopts an existing Objective-C object as a UserLocation
+// (nil for 0), retaining it and registering a release finalizer.
 func UserLocationFromID(id objc.ID) *UserLocation {
 	if id == 0 {
 		return nil
 	}
-	return &UserLocation{inner: raw.MKUserLocationFromID(id)}
+	x := &UserLocation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUserLocation creates a new [UserLocation].
+// userLocationAdopt wraps an Objective-C object that this code just created as a
+// UserLocation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userLocationAdopt(id objc.ID) *UserLocation {
+	if id == 0 {
+		return nil
+	}
+	x := &UserLocation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserLocation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserLocation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUserLocation creates a new UserLocation.
 func NewUserLocation() *UserLocation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKUserLocation")), objc.RegisterName("new"))
-	return &UserLocation{inner: raw.MKUserLocationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKUserLocation")), objc.RegisterName("new"))
+	return userLocationAdopt(_id)
 }
 
-// The title to display for the user’s location annotation.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the title to display for the user’s location annotation.
 func (x *UserLocation) WithTitle(title string) *UserLocation {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle to display for the user’s location annotation.
-//
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle the subtitle to display for the user’s location annotation.
 func (x *UserLocation) WithSubtitle(subtitle string) *UserLocation {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// IsUpdating calls the underlying IsUpdating.
+// IsUpdating wraps the corresponding Objective-C method.
 func (x *UserLocation) IsUpdating() bool {
-	return x.inner.IsUpdating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdating"))
+	return _r
 }
 
-// Location calls the underlying Location.
-func (x *UserLocation) Location() unsafe.Pointer {
-	return x.inner.Location()
+// Heading wraps the corresponding Objective-C method.
+func (x *UserLocation) Heading() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heading"))
+	return obj.Wrap(_r)
 }
 
-// Heading calls the underlying Heading.
-func (x *UserLocation) Heading() *corelocation.CLHeading {
-	return x.inner.Heading()
-}
-
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *UserLocation) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *UserLocation) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Subtitle calls the underlying Subtitle.
+// Subtitle wraps the corresponding Objective-C method.
 func (x *UserLocation) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSubtitle calls the underlying SetSubtitle.
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *UserLocation) SetSubtitle(subtitle string) {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
 // UserLocationable is the interface implemented by [UserLocation], for mocking and DI.
 type UserLocationable interface {
-	Unwrap() *raw.MKUserLocation
+	obj.Object
 	WithTitle(title string) *UserLocation
 	WithSubtitle(subtitle string) *UserLocation
 	IsUpdating() bool
-	Location() unsafe.Pointer
-	Heading() *corelocation.CLHeading
+	Heading() obj.Object
 	Title() string
 	SetTitle(title string)
 	Subtitle() string

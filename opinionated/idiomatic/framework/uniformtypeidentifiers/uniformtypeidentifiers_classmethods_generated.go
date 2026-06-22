@@ -5,101 +5,73 @@
 package uniformtypeidentifiers
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/ebitengine/purego/objc"
 )
 
-// TypeWithIdentifier calls the underlying UTTypeTypeWithIdentifier.
+// TypeWithIdentifier \brief Create a type given a type identifier. \param identifier The type identifier. \result A type, or \c nil if the type identifier is not known to the system.
 func TypeWithIdentifier(identifier string) *Type {
-	_r := raw.UTTypeTypeWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typeWithIdentifier:"), purego.NSString(identifier))
+	return TypeFromID(_r)
 }
 
-// TypeWithFilenameExtension calls the underlying UTTypeTypeWithFilenameExtension.
+// TypeWithFilenameExtension \brief Create a type given a filename extension that conforms to \c UTTypeData. \param filenameExtension The filename extension for which a type is desired. \result A type. If no types are known to the system with the specified filename extension and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:filenameExtension tagClass:UTTagClassFilenameExtension conformingToType:UTTypeData] \endcode To get the type of a file on disk, use the \c NSURLContentTypeKey property. You should not attempt to derive the type of a file system object based solely on its path extension.
 func TypeWithFilenameExtension(filenameExtension string) *Type {
-	_r := raw.UTTypeTypeWithFilenameExtension(foundation.NSStringStringWithUTF8String(filenameExtension))
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typeWithFilenameExtension:"), purego.NSString(filenameExtension))
+	return TypeFromID(_r)
 }
 
-// TypeWithFilenameExtensionConformingToType calls the underlying UTTypeTypeWithFilenameExtensionConformingToType.
-func TypeWithFilenameExtensionConformingToType(filenameExtension string, supertype *raw.UTType) *Type {
-	_r := raw.UTTypeTypeWithFilenameExtensionConformingToType(foundation.NSStringStringWithUTF8String(filenameExtension), supertype)
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+// TypeWithFilenameExtensionConformingToType \brief Create a type given a filename extension. \param filenameExtension The filename extension for which a type is desired. \param supertype Another type that the resulting type must conform to. Typically, you would pass \c UTTypeData or \c UTTypePackage. \result A type. If no types are known to the system with the specified filename extension and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:filenameExtension tagClass:UTTagClassFilenameExtension conformingToType:supertype] \endcode To get the type of a file on disk, use the \c NSURLContentTypeKey property. You should not attempt to derive the type of a file system object based solely on its path extension.
+func TypeWithFilenameExtensionConformingToType(filenameExtension string, supertype *Type) *Type {
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typeWithFilenameExtension:conformingToType:"), purego.NSString(filenameExtension), objref.IDOf(supertype))
+	return TypeFromID(_r)
 }
 
-// TypeWithMIMEType calls the underlying UTTypeTypeWithMIMEType.
+// TypeWithMIMEType \brief Create a type given a MIME type that conforms to \c UTTypeData. \param mimeType The MIME type for which a type is desired. \result A type. If no types are known to the system with the specified MIME type and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:mimeType tagClass:UTTagClassMIMEType conformingToType:UTTypeData] \endcode
 func TypeWithMIMEType(mimeType string) *Type {
-	_r := raw.UTTypeTypeWithMIMEType(foundation.NSStringStringWithUTF8String(mimeType))
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typeWithMIMEType:"), purego.NSString(mimeType))
+	return TypeFromID(_r)
 }
 
-// TypeWithMIMETypeConformingToType calls the underlying UTTypeTypeWithMIMETypeConformingToType.
-func TypeWithMIMETypeConformingToType(mimeType string, supertype *raw.UTType) *Type {
-	_r := raw.UTTypeTypeWithMIMETypeConformingToType(foundation.NSStringStringWithUTF8String(mimeType), supertype)
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+// TypeWithMIMETypeConformingToType \brief Create a type given a MIME type. \param mimeType The MIME type for which a type is desired. \param supertype Another type that the resulting type must conform to. Typically, you would pass \c UTTypeData. \result A type. If no types are known to the system with the specified MIME type and conformance but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil. This method is equivalent to: \code [UTType typeWithTag:mimeType tagClass:UTTagClassMIMEType conformingToType:supertype] \endcode
+func TypeWithMIMETypeConformingToType(mimeType string, supertype *Type) *Type {
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typeWithMIMEType:conformingToType:"), purego.NSString(mimeType), objref.IDOf(supertype))
+	return TypeFromID(_r)
 }
 
-// TypeWithTagTagClassConformingToType calls the underlying UTTypeTypeWithTagTagClassConformingToType.
-func TypeWithTagTagClassConformingToType(tag string, tagClass string, supertype *raw.UTType) *Type {
-	_r := raw.UTTypeTypeWithTagTagClassConformingToType(foundation.NSStringStringWithUTF8String(tag), foundation.NSStringStringWithUTF8String(tagClass), supertype)
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+// TypeWithTagTagClassConformingToType \brief Create a type given a type tag. \param tag The tag, such as the path extension, for which a type is desired. \param tagClass The class of the tag, such as \c UTTagClassFilenameExtension. \param supertype Another type that the resulting type must conform to. If \c nil, no conformance is required. \result A type. If no types are known to the system with the specified tag but the inputs were otherwise valid, a dynamic type may be provided. If the inputs were not valid, returns \c nil.
+func TypeWithTagTagClassConformingToType(tag string, tagClass string, supertype *Type) *Type {
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typeWithTag:tagClass:conformingToType:"), purego.NSString(tag), purego.NSString(tagClass), objref.IDOf(supertype))
+	return TypeFromID(_r)
 }
 
-// TypesWithTagTagClassConformingToType calls the underlying UTTypeTypesWithTagTagClassConformingToType.
-func TypesWithTagTagClassConformingToType(tag string, tagClass string, supertype *raw.UTType) *foundation.NSArray[*raw.UTType] {
-	return raw.UTTypeTypesWithTagTagClassConformingToType(foundation.NSStringStringWithUTF8String(tag), foundation.NSStringStringWithUTF8String(tagClass), supertype)
+// TypesWithTagTagClassConformingToType \brief Create an array of types given a type tag. \param tag The tag, such as the path extension, for which a set of types is desired. \param tagClass The class of the tag, such as \c UTTagClassFilenameExtension. \param supertype Another type that the resulting types must conform to. If \c nil, no conformance is required. \result An array of types, or the empty array if no such types were available. If no types are known to the system with the specified tag but the inputs were otherwise valid, a dynamic type may be provided.
+func TypesWithTagTagClassConformingToType(tag string, tagClass string, supertype *Type) []*Type {
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("typesWithTag:tagClass:conformingToType:"), purego.NSString(tag), purego.NSString(tagClass), objref.IDOf(supertype))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Type { return TypeFromID(_id) })
 }
 
-// ExportedTypeWithIdentifier calls the underlying UTTypeExportedTypeWithIdentifier.
+// ExportedTypeWithIdentifier \brief Gets an active \c UTType corresponding to a type that is declared as "exported" by the current process. \param identifier The type identifier for which a type is desired. \result A type. Use this method to get types that are exported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. Conformance to either \c UTTypeData or \c UTTypePackage is assumed. You would generally use this method with \c dispatch_once(): \code UTType *GetMyFileFormat(void) { static UTType *result = nil; static dispatch_once_t once; dispatch_once(&once, ^ { result = [UTType exportedTypeWithIdentifier:
 func ExportedTypeWithIdentifier(identifier string) *Type {
-	_r := raw.UTTypeExportedTypeWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("exportedTypeWithIdentifier:"), purego.NSString(identifier))
+	return TypeFromID(_r)
 }
 
-// ExportedTypeWithIdentifierConformingToType calls the underlying UTTypeExportedTypeWithIdentifierConformingToType.
-func ExportedTypeWithIdentifierConformingToType(identifier string, parentType *raw.UTType) *Type {
-	_r := raw.UTTypeExportedTypeWithIdentifierConformingToType(foundation.NSStringStringWithUTF8String(identifier), parentType)
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+// ExportedTypeWithIdentifierConformingToType \brief Gets an active \c UTType corresponding to a type that is declared as "exported" by the current process. \param identifier The type identifier for which a type is desired. \param parentType A parent type that the resulting type is expected to conform to. \result A type. Use this method to get types that are exported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. You would generally use this method with \c dispatch_once(): \code UTType *GetMyFileFormat(void) { static UTType *result = nil; static dispatch_once_t once; dispatch_once(&once, ^ { result = [UTType exportedTypeWithIdentifier:
+func ExportedTypeWithIdentifierConformingToType(identifier string, parentType *Type) *Type {
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("exportedTypeWithIdentifier:conformingToType:"), purego.NSString(identifier), objref.IDOf(parentType))
+	return TypeFromID(_r)
 }
 
-// ImportedTypeWithIdentifier calls the underlying UTTypeImportedTypeWithIdentifier.
+// ImportedTypeWithIdentifier \brief Gets an active \c UTType corresponding to a type that is declared as "imported" by the current process. \param identifier The type identifier for which a type is desired. \result A type whose identifier may or may not be equal to \a identifier, but which is functionally equivalent. Use this method to get types that are imported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. Conformance to either \c UTTypeData or \c UTTypePackage is assumed. You would generally use this method in the body of a funcion or method and would \em not use \c dispatch_once() as the type can change over time: \code UTType *GetCompetitorFileFormat(void) { return [UTType importedTypeWithIdentifier:
 func ImportedTypeWithIdentifier(identifier string) *Type {
-	_r := raw.UTTypeImportedTypeWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("importedTypeWithIdentifier:"), purego.NSString(identifier))
+	return TypeFromID(_r)
 }
 
-// ImportedTypeWithIdentifierConformingToType calls the underlying UTTypeImportedTypeWithIdentifierConformingToType.
-func ImportedTypeWithIdentifierConformingToType(identifier string, parentType *raw.UTType) *Type {
-	_r := raw.UTTypeImportedTypeWithIdentifierConformingToType(foundation.NSStringStringWithUTF8String(identifier), parentType)
-	if _r == nil {
-		return nil
-	}
-	return &Type{inner: _r}
+// ImportedTypeWithIdentifierConformingToType \brief Gets an active \c UTType corresponding to a type that is declared as "imported" by the current process. \param identifier The type identifier for which a type is desired. \param parentType A parent type that the resulting type is expected to conform to. \result A type whose identifier may or may not be equal to \a identifier, but which is functionally equivalent. Use this method to get types that are imported by your application. If \a identifier does not correspond to any type known to the system, the result is undefined. You would generally use this method in the body of a funcion or method and would \em not use \c dispatch_once() as the type can change over time: \code UTType *GetCompetitorFileFormat(void) { return [UTType importedTypeWithIdentifier:
+func ImportedTypeWithIdentifierConformingToType(identifier string, parentType *Type) *Type {
+	_r := objc.Send[objc.ID](objc.ID(_class("UTType")), objc.RegisterName("importedTypeWithIdentifier:conformingToType:"), purego.NSString(identifier), objref.IDOf(parentType))
+	return TypeFromID(_r)
 }

@@ -5,105 +5,104 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A request that recognizes animals in an image.
+// RecognizeAnimalsRequest is an idiomatic wrapper over the Objective-C class VNRecognizeAnimalsRequest.
 //
-// RecognizeAnimalsRequest wraps [raw.VNRecognizeAnimalsRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that recognizes animals in an image.
 type RecognizeAnimalsRequest struct {
-	inner *raw.VNRecognizeAnimalsRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNRecognizeAnimalsRequest].
-func (x *RecognizeAnimalsRequest) Unwrap() *raw.VNRecognizeAnimalsRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizeAnimalsRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizeAnimalsRequestFromID adopts an existing object pointer as a RecognizeAnimalsRequest (nil for 0).
+// RecognizeAnimalsRequestFromID adopts an existing Objective-C object as a RecognizeAnimalsRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizeAnimalsRequestFromID(id objc.ID) *RecognizeAnimalsRequest {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizeAnimalsRequest{inner: raw.VNRecognizeAnimalsRequestFromID(id)}
+	x := &RecognizeAnimalsRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizeAnimalsRequest creates a new [RecognizeAnimalsRequest].
+// recognizeAnimalsRequestAdopt wraps an Objective-C object that this code just created as a
+// RecognizeAnimalsRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizeAnimalsRequestAdopt(id objc.ID) *RecognizeAnimalsRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &RecognizeAnimalsRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRecognizeAnimalsRequest creates a new RecognizeAnimalsRequest.
 func NewRecognizeAnimalsRequest() *RecognizeAnimalsRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizeAnimalsRequest")), objc.RegisterName("new"))
-	return &RecognizeAnimalsRequest{inner: raw.VNRecognizeAnimalsRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizeAnimalsRequest")), objc.RegisterName("new"))
+	return recognizeAnimalsRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *RecognizeAnimalsRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *RecognizeAnimalsRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *RecognizeAnimalsRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *RecognizeAnimalsRequest) WithRevision(revision uint) *RecognizeAnimalsRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *RecognizeAnimalsRequest) WithRevision(revision int) *RecognizeAnimalsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Returns the identifiers of the animals that the request detects.
+// SupportedIdentifiers returns the identifiers of the animals that the request detects.
 //
 // SupportedIdentifiers returns the collection as a Go slice.
-func (x *RecognizeAnimalsRequest) SupportedIdentifiers() ([]*foundation.NSString, error) {
-	arr, err := x.inner.SupportedIdentifiersAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *RecognizeAnimalsRequest) SupportedIdentifiers() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	}), nil
-}
-
-func (x *RecognizeAnimalsRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *RecognizeAnimalsRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // RecognizeAnimalsRequestable is the interface implemented by [RecognizeAnimalsRequest], for mocking and DI.
 type RecognizeAnimalsRequestable interface {
-	Unwrap() *raw.VNRecognizeAnimalsRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest
-	WithRevision(revision uint) *RecognizeAnimalsRequest
-	SupportedIdentifiers() ([]*foundation.NSString, error)
+	WithRevision(revision int) *RecognizeAnimalsRequest
+	SupportedIdentifiers() ([]obj.Object, error)
 }
 
 var _ RecognizeAnimalsRequestable = (*RecognizeAnimalsRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*RecognizeAnimalsRequest)(nil)
+
+var _ RequestProvider = (*RecognizeAnimalsRequest)(nil)

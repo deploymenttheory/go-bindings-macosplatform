@@ -5,84 +5,80 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayGather wraps [raw.MPSNDArrayGather] with a fluent Go API.
+// ArrayGather is an idiomatic wrapper over the Objective-C class MPSNDArrayGather.
+//
+// It embeds [ArrayBinaryKernel], promoting that type's methods.
 type ArrayGather struct {
-	inner *raw.MPSNDArrayGather
+	ArrayBinaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayGather].
-func (x *ArrayGather) Unwrap() *raw.MPSNDArrayGather { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayGather) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayGatherFromID adopts an existing object pointer as a ArrayGather (nil for 0).
+// ArrayGatherFromID adopts an existing Objective-C object as a ArrayGather
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayGatherFromID(id objc.ID) *ArrayGather {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayGather{inner: raw.MPSNDArrayGatherFromID(id)}
+	x := &ArrayGather{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewArrayGather creates a new [ArrayGather].
+// arrayGatherAdopt wraps an Objective-C object that this code just created as a
+// ArrayGather (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayGatherAdopt(id objc.ID) *ArrayGather {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayGather{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewArrayGather creates a new ArrayGather.
 func NewArrayGather() *ArrayGather {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayGather")), objc.RegisterName("new"))
-	return &ArrayGather{inner: raw.MPSNDArrayGatherFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGather")), objc.RegisterName("new"))
+	return arrayGatherAdopt(_id)
 }
 
-// @property  axis @abstract  The axis along which to apply the gather operation. Defaults to zero.
-//
-// WithAxis sets the axis property and returns the receiver for chaining.
-func (x *ArrayGather) WithAxis(axis uint) *ArrayGather {
-	x.inner.SetAxis(axis)
+// WithAxis the axis along which to apply the gather operation. Defaults to zero.
+func (x *ArrayGather) WithAxis(axis int) *ArrayGather {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 	return x
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayGather) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGather {
-	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
+// Axis the axis along which to apply the gather operation. Defaults to zero.
+func (x *ArrayGather) Axis() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("axis"))
+	return _r
 }
 
-// @property  axis @abstract  The axis along which to apply the gather operation. Defaults to zero.
-//
-// Axis calls the underlying Axis.
-func (x *ArrayGather) Axis() uint {
-	return x.inner.Axis()
-}
-
-// SetAxis calls the underlying SetAxis.
-func (x *ArrayGather) SetAxis(axis uint) {
-	x.inner.SetAxis(axis)
-}
-
-func (x *ArrayGather) asArrayBinaryKernel() *raw.MPSNDArrayBinaryKernel {
-	return &x.inner.MPSNDArrayBinaryKernel
-}
-
-func (x *ArrayGather) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel
-}
-
-func (x *ArrayGather) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+// SetAxis wraps the corresponding Objective-C method.
+func (x *ArrayGather) SetAxis(axis int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 }
 
 // ArrayGatherable is the interface implemented by [ArrayGather], for mocking and DI.
 type ArrayGatherable interface {
-	Unwrap() *raw.MPSNDArrayGather
-	WithAxis(axis uint) *ArrayGather
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGather
-	Axis() uint
-	SetAxis(axis uint)
+	obj.Object
+	WithAxis(axis int) *ArrayGather
+	Axis() int
+	SetAxis(axis int)
 }
 
 var _ ArrayGatherable = (*ArrayGather)(nil)
+
+var _ ArrayBinaryKernelProvider = (*ArrayGather)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayGather)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayGather)(nil)

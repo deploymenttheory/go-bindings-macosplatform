@@ -5,111 +5,109 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-based request to generate feature prints from an image.
+// GenerateImageFeaturePrintRequest is an idiomatic wrapper over the Objective-C class VNGenerateImageFeaturePrintRequest.
 //
-// GenerateImageFeaturePrintRequest wraps [raw.VNGenerateImageFeaturePrintRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An image-based request to generate feature prints from an image.
 type GenerateImageFeaturePrintRequest struct {
-	inner *raw.VNGenerateImageFeaturePrintRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNGenerateImageFeaturePrintRequest].
-func (x *GenerateImageFeaturePrintRequest) Unwrap() *raw.VNGenerateImageFeaturePrintRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GenerateImageFeaturePrintRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// GenerateImageFeaturePrintRequestFromID adopts an existing object pointer as a GenerateImageFeaturePrintRequest (nil for 0).
+// GenerateImageFeaturePrintRequestFromID adopts an existing Objective-C object as a GenerateImageFeaturePrintRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func GenerateImageFeaturePrintRequestFromID(id objc.ID) *GenerateImageFeaturePrintRequest {
 	if id == 0 {
 		return nil
 	}
-	return &GenerateImageFeaturePrintRequest{inner: raw.VNGenerateImageFeaturePrintRequestFromID(id)}
+	x := &GenerateImageFeaturePrintRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGenerateImageFeaturePrintRequest creates a new [GenerateImageFeaturePrintRequest].
+// generateImageFeaturePrintRequestAdopt wraps an Objective-C object that this code just created as a
+// GenerateImageFeaturePrintRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func generateImageFeaturePrintRequestAdopt(id objc.ID) *GenerateImageFeaturePrintRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &GenerateImageFeaturePrintRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGenerateImageFeaturePrintRequest creates a new GenerateImageFeaturePrintRequest.
 func NewGenerateImageFeaturePrintRequest() *GenerateImageFeaturePrintRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNGenerateImageFeaturePrintRequest")), objc.RegisterName("new"))
-	return &GenerateImageFeaturePrintRequest{inner: raw.VNGenerateImageFeaturePrintRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNGenerateImageFeaturePrintRequest")), objc.RegisterName("new"))
+	return generateImageFeaturePrintRequestAdopt(_id)
 }
 
-// An optional setting that tells the algorithm how to scale an input image before generating the feature print.
-//
-// WithImageCropAndScaleOption sets the imageCropAndScaleOption property and returns the receiver for chaining.
-func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
-	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
+// WithImageCropAndScaleOption an optional setting that tells the algorithm how to scale an input image before generating the feature print.
+func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *GenerateImageFeaturePrintRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateImageFeaturePrintRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateImageFeaturePrintRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *GenerateImageFeaturePrintRequest) WithRevision(revision uint) *GenerateImageFeaturePrintRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *GenerateImageFeaturePrintRequest) WithRevision(revision int) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// @brief Determine what type of croping and scaling action should be applied to the image before generating the feature print. @discussion The default value for this property is `VNImageCropAndScaleOptionScaleFill`.
-//
-// ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
-func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() VNImageCropAndScaleOption {
-	return VNImageCropAndScaleOption(x.inner.ImageCropAndScaleOption())
+// ImageCropAndScaleOption determine what type of croping and scaling action should be applied to the image before generating the feature print. The default value for this property is `VNImageCropAndScaleOptionScaleFill`.
+func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
+	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(x), objc.RegisterName("imageCropAndScaleOption"))
+	return _r
 }
 
-// SetImageCropAndScaleOption calls the underlying SetImageCropAndScaleOption.
-func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) {
-	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
-}
-
-func (x *GenerateImageFeaturePrintRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *GenerateImageFeaturePrintRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+// SetImageCropAndScaleOption wraps the corresponding Objective-C method.
+func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
 }
 
 // GenerateImageFeaturePrintRequestable is the interface implemented by [GenerateImageFeaturePrintRequest], for mocking and DI.
 type GenerateImageFeaturePrintRequestable interface {
-	Unwrap() *raw.VNGenerateImageFeaturePrintRequest
-	WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
+	obj.Object
+	WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest
-	WithRevision(revision uint) *GenerateImageFeaturePrintRequest
-	ImageCropAndScaleOption() VNImageCropAndScaleOption
-	SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption)
+	WithRevision(revision int) *GenerateImageFeaturePrintRequest
+	ImageCropAndScaleOption() ImageCropAndScaleOption
+	SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption)
 }
 
 var _ GenerateImageFeaturePrintRequestable = (*GenerateImageFeaturePrintRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateImageFeaturePrintRequest)(nil)
+
+var _ RequestProvider = (*GenerateImageFeaturePrintRequest)(nil)

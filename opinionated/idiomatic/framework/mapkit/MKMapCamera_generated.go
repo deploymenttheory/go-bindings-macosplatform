@@ -5,111 +5,96 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A virtual camera for defining the appearance of the map.
+// MapCamera is an idiomatic wrapper over the Objective-C class MKMapCamera.
 //
-// MapCamera wraps [raw.MKMapCamera] with a fluent Go API.
+// A virtual camera for defining the appearance of the map.
 type MapCamera struct {
-	inner *raw.MKMapCamera
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapCamera].
-func (x *MapCamera) Unwrap() *raw.MKMapCamera { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapCamera) ID() objc.ID { return x.inner.Ptr() }
-
-// MapCameraFromID adopts an existing object pointer as a MapCamera (nil for 0).
+// MapCameraFromID adopts an existing Objective-C object as a MapCamera
+// (nil for 0), retaining it and registering a release finalizer.
 func MapCameraFromID(id objc.ID) *MapCamera {
 	if id == 0 {
 		return nil
 	}
-	return &MapCamera{inner: raw.MKMapCameraFromID(id)}
-}
-
-// NewMapCamera creates a new [MapCamera].
-func NewMapCamera() *MapCamera {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapCamera")), objc.RegisterName("new"))
-	return &MapCamera{inner: raw.MKMapCameraFromID(_id)}
-}
-
-// The viewing angle of the camera, in degrees.
-//
-// WithPitch sets the pitch property and returns the receiver for chaining.
-func (x *MapCamera) WithPitch(pitch float64) *MapCamera {
-	x.inner.SetPitch(pitch)
+	x := &MapCamera{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// CenterCoordinate calls the underlying CenterCoordinate.
-func (x *MapCamera) CenterCoordinate() unsafe.Pointer {
-	return x.inner.CenterCoordinate()
+// mapCameraAdopt wraps an Objective-C object that this code just created as a
+// MapCamera (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapCameraAdopt(id objc.ID) *MapCamera {
+	if id == 0 {
+		return nil
+	}
+	x := &MapCamera{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetCenterCoordinate calls the underlying SetCenterCoordinate.
-func (x *MapCamera) SetCenterCoordinate(centerCoordinate unsafe.Pointer) {
-	x.inner.SetCenterCoordinate(centerCoordinate)
+// Description returns the object's -description text.
+func (x *MapCamera) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// CenterCoordinateDistance calls the underlying CenterCoordinateDistance.
-func (x *MapCamera) CenterCoordinateDistance() unsafe.Pointer {
-	return x.inner.CenterCoordinateDistance()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapCamera) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetCenterCoordinateDistance calls the underlying SetCenterCoordinateDistance.
-func (x *MapCamera) SetCenterCoordinateDistance(centerCoordinateDistance unsafe.Pointer) {
-	x.inner.SetCenterCoordinateDistance(centerCoordinateDistance)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapCamera) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Heading calls the underlying Heading.
-func (x *MapCamera) Heading() unsafe.Pointer {
-	return x.inner.Heading()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapCamera) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetHeading calls the underlying SetHeading.
-func (x *MapCamera) SetHeading(heading unsafe.Pointer) {
-	x.inner.SetHeading(heading)
+// NewMapCamera creates a new MapCamera.
+func NewMapCamera() *MapCamera {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("new"))
+	return mapCameraAdopt(_id)
 }
 
-// Pitch calls the underlying Pitch.
+// WithPitch the viewing angle of the camera, in degrees.
+func (x *MapCamera) WithPitch(pitch float64) *MapCamera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
+	return x
+}
+
+// Pitch wraps the corresponding Objective-C method.
 func (x *MapCamera) Pitch() float64 {
-	return x.inner.Pitch()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
+	return _r
 }
 
-// SetPitch calls the underlying SetPitch.
+// SetPitch wraps the corresponding Objective-C method.
 func (x *MapCamera) SetPitch(pitch float64) {
-	x.inner.SetPitch(pitch)
-}
-
-// Altitude calls the underlying Altitude.
-func (x *MapCamera) Altitude() unsafe.Pointer {
-	return x.inner.Altitude()
-}
-
-// SetAltitude calls the underlying SetAltitude.
-func (x *MapCamera) SetAltitude(altitude unsafe.Pointer) {
-	x.inner.SetAltitude(altitude)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), pitch)
 }
 
 // MapCameraable is the interface implemented by [MapCamera], for mocking and DI.
 type MapCameraable interface {
-	Unwrap() *raw.MKMapCamera
+	obj.Object
 	WithPitch(pitch float64) *MapCamera
-	CenterCoordinate() unsafe.Pointer
-	SetCenterCoordinate(centerCoordinate unsafe.Pointer)
-	CenterCoordinateDistance() unsafe.Pointer
-	SetCenterCoordinateDistance(centerCoordinateDistance unsafe.Pointer)
-	Heading() unsafe.Pointer
-	SetHeading(heading unsafe.Pointer)
 	Pitch() float64
 	SetPitch(pitch float64)
-	Altitude() unsafe.Pointer
-	SetAltitude(altitude unsafe.Pointer)
 }
 
 var _ MapCameraable = (*MapCamera)(nil)

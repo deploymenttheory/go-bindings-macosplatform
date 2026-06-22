@@ -5,53 +5,64 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMObject wraps [raw.DOMObject] with a fluent Go API.
+// DOMObject is an idiomatic wrapper over the Objective-C class DOMObject.
+//
+// DOMObject is an abstract base — you do not construct it directly. Construct one of [DOMAbstractView], [DOMBlob], [DOMCSSRuleList], [DOMCSSRule], [DOMCSSStyleDeclaration], [DOMCSSValue], [DOMCounter], [DOMEvent], [DOMFileList], [DOMHTMLCollection], [DOMHTMLOptionsCollection], [DOMImplementation], [DOMMediaList], [DOMNamedNodeMap], [DOMNodeIterator], [DOMNodeList], [DOMNode], [DOMRGBColor], [DOMRange], [DOMRect], [DOMStyleSheetList], [DOMStyleSheet], [DOMTreeWalker], [DOMXPathExpression], [DOMXPathResult] and pass it where a DOMObject is accepted.
 type DOMObject struct {
-	inner *raw.DOMObject
+	WebScriptObject
 }
 
-// Unwrap returns the underlying [raw.DOMObject].
-func (x *DOMObject) Unwrap() *raw.DOMObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMObject) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMObjectFromID adopts an existing object pointer as a DOMObject (nil for 0).
+// DOMObjectFromID adopts an existing Objective-C object as a DOMObject
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMObjectFromID(id objc.ID) *DOMObject {
 	if id == 0 {
 		return nil
 	}
-	return &DOMObject{inner: raw.DOMObjectFromID(id)}
+	x := &DOMObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMObject creates a new [DOMObject].
-func NewDOMObject() *DOMObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMObject")), objc.RegisterName("new"))
-	return &DOMObject{inner: raw.DOMObjectFromID(_id)}
-}
-
-// Sheet calls the underlying Sheet.
-func (x *DOMObject) Sheet() *DOMStyleSheet {
-	_r := x.inner.Sheet()
-	if _r == nil {
+// dOMObjectAdopt wraps an Objective-C object that this code just created as a
+// DOMObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMObjectAdopt(id objc.ID) *DOMObject {
+	if id == 0 {
 		return nil
 	}
-	return &DOMStyleSheet{inner: _r}
+	x := &DOMObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DOMObject) asDOMObject() *raw.DOMObject { return x.inner }
-
-func (x *DOMObject) asWebScriptObject() *raw.WebScriptObject { return &x.inner.WebScriptObject }
+// Sheet wraps the corresponding Objective-C method.
+func (x *DOMObject) Sheet() *DOMStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheet"))
+	return DOMStyleSheetFromID(_r)
+}
 
 // DOMObjectable is the interface implemented by [DOMObject], for mocking and DI.
 type DOMObjectable interface {
-	Unwrap() *raw.DOMObject
+	obj.Object
 	Sheet() *DOMStyleSheet
 }
 
 var _ DOMObjectable = (*DOMObject)(nil)
+
+// isDOMObject marks DOMObject — and, by embedding promotion, its
+// subclasses — as a member of the DOMObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMObject) isDOMObject() {}
+
+var _ DOMObjectProvider = (*DOMObject)(nil)
+
+var _ WebScriptObjectProvider = (*DOMObject)(nil)

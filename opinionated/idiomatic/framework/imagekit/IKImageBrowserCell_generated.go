@@ -5,160 +5,159 @@
 package imagekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageBrowserCell wraps [raw.IKImageBrowserCell] with a fluent Go API.
+// ImageBrowserCell is an idiomatic wrapper over the Objective-C class IKImageBrowserCell.
 type ImageBrowserCell struct {
-	inner *raw.IKImageBrowserCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKImageBrowserCell].
-func (x *ImageBrowserCell) Unwrap() *raw.IKImageBrowserCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageBrowserCell) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageBrowserCellFromID adopts an existing object pointer as a ImageBrowserCell (nil for 0).
+// ImageBrowserCellFromID adopts an existing Objective-C object as a ImageBrowserCell
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageBrowserCellFromID(id objc.ID) *ImageBrowserCell {
 	if id == 0 {
 		return nil
 	}
-	return &ImageBrowserCell{inner: raw.IKImageBrowserCellFromID(id)}
+	x := &ImageBrowserCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageBrowserCell creates a new [ImageBrowserCell].
-func NewImageBrowserCell() *ImageBrowserCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKImageBrowserCell")), objc.RegisterName("new"))
-	return &ImageBrowserCell{inner: raw.IKImageBrowserCellFromID(_id)}
-}
-
-// @method imageBrowserView @abstract Returns the view the receiver uses to display its represented object. @discussion Subclasses should not override this method.
-//
-// ImageBrowserView calls the underlying ImageBrowserView.
-func (x *ImageBrowserCell) ImageBrowserView() *ImageBrowserView {
-	_r := x.inner.ImageBrowserView()
-	if _r == nil {
+// imageBrowserCellAdopt wraps an Objective-C object that this code just created as a
+// ImageBrowserCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageBrowserCellAdopt(id objc.ID) *ImageBrowserCell {
+	if id == 0 {
 		return nil
 	}
-	return &ImageBrowserView{inner: _r}
+	x := &ImageBrowserCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method representedItem @abstract Returns the receiver�s represented object. @discussion Subclasses should not override this method.
-//
-// RepresentedItem calls the underlying RepresentedItem.
-func (x *ImageBrowserCell) RepresentedItem() objc.ID {
-	return x.inner.RepresentedItem()
+// Description returns the object's -description text.
+func (x *ImageBrowserCell) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @method indexOfRepresentedItem @abstract Returns the index of the receiver�s represented object in the datasource. @discussion Subclasses should not override this method.
-//
-// IndexOfRepresentedItem calls the underlying IndexOfRepresentedItem.
-func (x *ImageBrowserCell) IndexOfRepresentedItem() uint {
-	return x.inner.IndexOfRepresentedItem()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageBrowserCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @method frame @abstract Returns the receiver�s frame rectangle, which defines its position in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses should not override this method.
-//
-// Frame calls the underlying Frame.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageBrowserCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageBrowserCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageBrowserCell creates a new ImageBrowserCell.
+func NewImageBrowserCell() *ImageBrowserCell {
+	_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserCell")), objc.RegisterName("new"))
+	return imageBrowserCellAdopt(_id)
+}
+
+// ImageBrowserView returns the view the receiver uses to display its represented object. Subclasses should not override this method.
+func (x *ImageBrowserCell) ImageBrowserView() *ImageBrowserView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageBrowserView"))
+	return ImageBrowserViewFromID(_r)
+}
+
+// RepresentedItem returns the receiver�s represented object. Subclasses should not override this method.
+func (x *ImageBrowserCell) RepresentedItem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedItem"))
+	return obj.Wrap(_r)
+}
+
+// IndexOfRepresentedItem returns the index of the receiver�s represented object in the datasource. Subclasses should not override this method.
+func (x *ImageBrowserCell) IndexOfRepresentedItem() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfRepresentedItem"))
+	return _r
+}
+
+// Frame returns the receiver�s frame rectangle, which defines its position in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses should not override this method.
 func (x *ImageBrowserCell) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
 }
 
-// @method imageContainerFrame @abstract Returns the receiver�s image container frame rectangle, which defines the position of the container of the thumbnail in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail container. The image frame is computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
-//
-// ImageContainerFrame calls the underlying ImageContainerFrame.
+// ImageContainerFrame returns the receiver�s image container frame rectangle, which defines the position of the container of the thumbnail in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail container. The image frame is computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
 func (x *ImageBrowserCell) ImageContainerFrame() corefoundation.CGRect {
-	return x.inner.ImageContainerFrame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageContainerFrame"))
+	return _r
 }
 
-// @method imageFrame @abstract Returns the receiver�s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail.
-//
-// ImageFrame calls the underlying ImageFrame.
+// ImageFrame returns the receiver�s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail.
 func (x *ImageBrowserCell) ImageFrame() corefoundation.CGRect {
-	return x.inner.ImageFrame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageFrame"))
+	return _r
 }
 
-// @method selectionFrame @abstract Returns the receiver�s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the selection frame.
-//
-// SelectionFrame calls the underlying SelectionFrame.
+// SelectionFrame returns the receiver�s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the selection frame.
 func (x *ImageBrowserCell) SelectionFrame() corefoundation.CGRect {
-	return x.inner.SelectionFrame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("selectionFrame"))
+	return _r
 }
 
-// @method titleFrame @abstract Returns the receiver�s title frame rectangle, which defines the position of the title in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the title.
-//
-// TitleFrame calls the underlying TitleFrame.
+// TitleFrame returns the receiver�s title frame rectangle, which defines the position of the title in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the title.
 func (x *ImageBrowserCell) TitleFrame() corefoundation.CGRect {
-	return x.inner.TitleFrame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("titleFrame"))
+	return _r
 }
 
-// @method subtitleFrame @abstract Returns the receiver�s subtitle frame rectangle, which defines the position of the subtitle in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the subtitle.
-//
-// SubtitleFrame calls the underlying SubtitleFrame.
+// SubtitleFrame returns the receiver�s subtitle frame rectangle, which defines the position of the subtitle in its IKImageBrowserView. The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the subtitle.
 func (x *ImageBrowserCell) SubtitleFrame() corefoundation.CGRect {
-	return x.inner.SubtitleFrame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("subtitleFrame"))
+	return _r
 }
 
-// @method imageAlignment @abstract Returns the position of the cell�s image in the frame. The default is NSImageAlignCenter. @discussion Subclasses can override this method to customize the image alignment. For the list of possible alignments, see [NSImageView setImageAlignment:]. The image frame will be computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
-//
-// ImageAlignment calls the underlying ImageAlignment.
-func (x *ImageBrowserCell) ImageAlignment() appkit.NSImageAlignment {
-	return x.inner.ImageAlignment()
-}
-
-// @method isSelected @abstract Returns the selection state of the receiver. @discussion Returns YES if the receiver is selected, otherwise NO. Subclasses should not override this method.
-//
-// IsSelected calls the underlying IsSelected.
+// IsSelected returns the selection state of the receiver. Returns YES if the receiver is selected, otherwise NO. Subclasses should not override this method.
 func (x *ImageBrowserCell) IsSelected() bool {
-	return x.inner.IsSelected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
+	return _r
 }
 
-// @method cellState @abstract Returns the current cell state of the receiver. @discussion Returns IKImageStateReady if the receiver�s represented object has been set and the cell is ready to display. The IKImageBrowserView creates thumbnails asynchronously; This method returns IKImageStateNoImage until a thumbnail has been created from the represented object.
-//
-// CellState calls the underlying CellState.
-func (x *ImageBrowserCell) CellState() quartz.IKImageBrowserCellState {
-	return x.inner.CellState()
-}
-
-// @method opacity @abstract Determines the opacity of the receiver. @discussion Possible values are between 0.0 (transparent) and 1.0 (opaque). Subclasses can override this method to customize the opacity of the cell.
-//
-// Opacity calls the underlying Opacity.
+// Opacity determines the opacity of the receiver. Possible values are between 0.0 (transparent) and 1.0 (opaque). Subclasses can override this method to customize the opacity of the cell.
 func (x *ImageBrowserCell) Opacity() float64 {
-	return x.inner.Opacity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
+	return _r
 }
 
-// @method layerForType: @abstract Provides the receiver�s layer for the given type. The default is nil. @discussion Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
-//
-// LayerForType calls the underlying LayerForType.
-func (x *ImageBrowserCell) LayerForType(type_ string) *quartzcore.CALayer {
-	return x.inner.LayerForType(foundation.NSStringStringWithUTF8String(type_))
+// LayerForType provides the receiver�s layer for the given type. The default is nil. Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
+func (x *ImageBrowserCell) LayerForType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerForType:"), purego.NSString(type_))
+	return obj.Wrap(_r)
 }
 
 // ImageBrowserCellable is the interface implemented by [ImageBrowserCell], for mocking and DI.
 type ImageBrowserCellable interface {
-	Unwrap() *raw.IKImageBrowserCell
+	obj.Object
 	ImageBrowserView() *ImageBrowserView
-	RepresentedItem() objc.ID
-	IndexOfRepresentedItem() uint
+	RepresentedItem() obj.Object
+	IndexOfRepresentedItem() int
 	Frame() corefoundation.CGRect
 	ImageContainerFrame() corefoundation.CGRect
 	ImageFrame() corefoundation.CGRect
 	SelectionFrame() corefoundation.CGRect
 	TitleFrame() corefoundation.CGRect
 	SubtitleFrame() corefoundation.CGRect
-	ImageAlignment() appkit.NSImageAlignment
 	IsSelected() bool
-	CellState() quartz.IKImageBrowserCellState
 	Opacity() float64
-	LayerForType(type_ string) *quartzcore.CALayer
+	LayerForType(type_ string) obj.Object
 }
 
 var _ ImageBrowserCellable = (*ImageBrowserCell)(nil)

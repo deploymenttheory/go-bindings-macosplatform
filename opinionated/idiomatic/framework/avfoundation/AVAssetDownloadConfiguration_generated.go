@@ -5,173 +5,170 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that provides the configuration for a download task.
+// AssetDownloadConfiguration is an idiomatic wrapper over the Objective-C class AVAssetDownloadConfiguration.
 //
-// AssetDownloadConfiguration wraps [raw.AVAssetDownloadConfiguration] with a fluent Go API.
+// An object that provides the configuration for a download task.
 type AssetDownloadConfiguration struct {
-	inner *raw.AVAssetDownloadConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetDownloadConfiguration].
-func (x *AssetDownloadConfiguration) Unwrap() *raw.AVAssetDownloadConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetDownloadConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetDownloadConfigurationFromID adopts an existing object pointer as a AssetDownloadConfiguration (nil for 0).
+// AssetDownloadConfigurationFromID adopts an existing Objective-C object as a AssetDownloadConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetDownloadConfigurationFromID(id objc.ID) *AssetDownloadConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadConfiguration{inner: raw.AVAssetDownloadConfigurationFromID(id)}
-}
-
-// NewAssetDownloadConfiguration creates a new [AssetDownloadConfiguration].
-func NewAssetDownloadConfiguration() *AssetDownloadConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadConfiguration")), objc.RegisterName("new"))
-	return &AssetDownloadConfiguration{inner: raw.AVAssetDownloadConfigurationFromID(_id)}
-}
-
-// A data value that represents the asset’s artwork.
-//
-// WithArtworkData sets the artworkData property and returns the receiver for chaining.
-func (x *AssetDownloadConfiguration) WithArtworkData(artworkData *foundation.NSData) *AssetDownloadConfiguration {
-	x.inner.SetArtworkData(artworkData)
+	x := &AssetDownloadConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The configuration for the auxiliary content that the task downloads.
-//
-// WithAuxiliaryContentConfigurations sets the collection, converting the Go slice to an NSArray.
-func (x *AssetDownloadConfiguration) WithAuxiliaryContentConfigurations(items ...*raw.AVAssetDownloadContentConfiguration) *AssetDownloadConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAuxiliaryContentConfigurations(foundation.NSArrayFromID[*raw.AVAssetDownloadContentConfiguration](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVAssetDownloadContentConfiguration](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAuxiliaryContentConfigurations(_arr)
-	return x
-}
-
-// A Boolean value that indicates whether the task optimizes auxiliary content selection.
-//
-// WithOptimizesAuxiliaryContentConfigurations sets the optimizesAuxiliaryContentConfigurations property and returns the receiver for chaining.
-func (x *AssetDownloadConfiguration) WithOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) *AssetDownloadConfiguration {
-	x.inner.SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations)
-	return x
-}
-
-// Download interstitial assets as listed in the index file. False by default.
-//
-// WithDownloadsInterstitialAssets sets the downloadsInterstitialAssets property and returns the receiver for chaining.
-func (x *AssetDownloadConfiguration) WithDownloadsInterstitialAssets(downloadsInterstitialAssets bool) *AssetDownloadConfiguration {
-	x.inner.SetDownloadsInterstitialAssets(downloadsInterstitialAssets)
-	return x
-}
-
-// Sets media selection on interstitials for this asset
-//
-// SetInterstitialMediaSelectionCriteriaForMediaCharacteristic calls the underlying SetInterstitialMediaSelectionCriteriaForMediaCharacteristic.
-func (x *AssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria *foundation.NSArray[*raw.AVPlayerMediaSelectionCriteria], mediaCharacteristic *foundation.NSString) {
-	x.inner.SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria, mediaCharacteristic)
-}
-
-// NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
-//
-// ArtworkData calls the underlying ArtworkData.
-func (x *AssetDownloadConfiguration) ArtworkData() *foundation.NSData {
-	return x.inner.ArtworkData()
-}
-
-// SetArtworkData calls the underlying SetArtworkData.
-func (x *AssetDownloadConfiguration) SetArtworkData(artworkData *foundation.NSData) {
-	x.inner.SetArtworkData(artworkData)
-}
-
-// The primary content for the download.
-//
-// PrimaryContentConfiguration calls the underlying PrimaryContentConfiguration.
-func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloadContentConfiguration {
-	_r := x.inner.PrimaryContentConfiguration()
-	if _r == nil {
+// assetDownloadConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AssetDownloadConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetDownloadConfigurationAdopt(id objc.ID) *AssetDownloadConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadContentConfiguration{inner: _r}
+	x := &AssetDownloadConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
+// Description returns the object's -description text.
+func (x *AssetDownloadConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetDownloadConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetDownloadConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetDownloadConfiguration creates a new AssetDownloadConfiguration.
+func NewAssetDownloadConfiguration() *AssetDownloadConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadConfiguration")), objc.RegisterName("new"))
+	return assetDownloadConfigurationAdopt(_id)
+}
+
+// WithArtworkData a data value that represents the asset’s artwork.
+func (x *AssetDownloadConfiguration) WithArtworkData(artworkData obj.Object) *AssetDownloadConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtworkData:"), objref.IDOf(artworkData))
+	return x
+}
+
+// WithAuxiliaryContentConfigurations the configuration for the auxiliary content that the task downloads.
+func (x *AssetDownloadConfiguration) WithAuxiliaryContentConfigurations(items ...*AssetDownloadContentConfiguration) *AssetDownloadConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v *AssetDownloadContentConfiguration) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryContentConfigurations:"), _arr)
+	return x
+}
+
+// WithOptimizesAuxiliaryContentConfigurations a Boolean value that indicates whether the task optimizes auxiliary content selection.
+func (x *AssetDownloadConfiguration) WithOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) *AssetDownloadConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizesAuxiliaryContentConfigurations:"), optimizesAuxiliaryContentConfigurations)
+	return x
+}
+
+// WithDownloadsInterstitialAssets download interstitial assets as listed in the index file. False by default.
+func (x *AssetDownloadConfiguration) WithDownloadsInterstitialAssets(downloadsInterstitialAssets bool) *AssetDownloadConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsInterstitialAssets:"), downloadsInterstitialAssets)
+	return x
+}
+
+// SetInterstitialMediaSelectionCriteriaForMediaCharacteristic sets media selection on interstitials for this asset
+func (x *AssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria []*PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterstitialMediaSelectionCriteria:forMediaCharacteristic:"), purego.SliceToNSArray(criteria, func(_v *PlayerMediaSelectionCriteria) objc.ID { return objref.IDOf(_v) }), objref.IDOf(mediaCharacteristic))
+}
+
+// ArtworkData NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
+func (x *AssetDownloadConfiguration) ArtworkData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkData"))
+	return obj.Wrap(_r)
+}
+
+// SetArtworkData wraps the corresponding Objective-C method.
+func (x *AssetDownloadConfiguration) SetArtworkData(artworkData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtworkData:"), objref.IDOf(artworkData))
+}
+
+// PrimaryContentConfiguration the primary content for the download.
+func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloadContentConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryContentConfiguration"))
+	return AssetDownloadContentConfigurationFromID(_r)
+}
+
+// AuxiliaryContentConfigurations the auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
 //
 // AuxiliaryContentConfigurations returns the collection as a Go slice.
 func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration {
-	arr := x.inner.AuxiliaryContentConfigurations()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetDownloadContentConfiguration {
-		return &AssetDownloadContentConfiguration{inner: raw.AVAssetDownloadContentConfigurationFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auxiliaryContentConfigurations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetDownloadContentConfiguration {
+		return AssetDownloadContentConfigurationFromID(_id)
 	})
 }
 
-// SetAuxiliaryContentConfigurations calls the underlying SetAuxiliaryContentConfigurations.
-func (x *AssetDownloadConfiguration) SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations *foundation.NSArray[*raw.AVAssetDownloadContentConfiguration]) {
-	x.inner.SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations)
+// SetAuxiliaryContentConfigurations wraps the corresponding Objective-C method.
+func (x *AssetDownloadConfiguration) SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations []*AssetDownloadContentConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryContentConfigurations:"), purego.SliceToNSArray(auxiliaryContentConfigurations, func(_v *AssetDownloadContentConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
-//
-// OptimizesAuxiliaryContentConfigurations calls the underlying OptimizesAuxiliaryContentConfigurations.
+// OptimizesAuxiliaryContentConfigurations optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
 func (x *AssetDownloadConfiguration) OptimizesAuxiliaryContentConfigurations() bool {
-	return x.inner.OptimizesAuxiliaryContentConfigurations()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("optimizesAuxiliaryContentConfigurations"))
+	return _r
 }
 
-// SetOptimizesAuxiliaryContentConfigurations calls the underlying SetOptimizesAuxiliaryContentConfigurations.
+// SetOptimizesAuxiliaryContentConfigurations wraps the corresponding Objective-C method.
 func (x *AssetDownloadConfiguration) SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) {
-	x.inner.SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizesAuxiliaryContentConfigurations:"), optimizesAuxiliaryContentConfigurations)
 }
 
-// Download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
-//
-// DownloadsInterstitialAssets calls the underlying DownloadsInterstitialAssets.
+// DownloadsInterstitialAssets download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
 func (x *AssetDownloadConfiguration) DownloadsInterstitialAssets() bool {
-	return x.inner.DownloadsInterstitialAssets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("downloadsInterstitialAssets"))
+	return _r
 }
 
-// SetDownloadsInterstitialAssets calls the underlying SetDownloadsInterstitialAssets.
+// SetDownloadsInterstitialAssets wraps the corresponding Objective-C method.
 func (x *AssetDownloadConfiguration) SetDownloadsInterstitialAssets(downloadsInterstitialAssets bool) {
-	x.inner.SetDownloadsInterstitialAssets(downloadsInterstitialAssets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsInterstitialAssets:"), downloadsInterstitialAssets)
 }
 
 // AssetDownloadConfigurationable is the interface implemented by [AssetDownloadConfiguration], for mocking and DI.
 type AssetDownloadConfigurationable interface {
-	Unwrap() *raw.AVAssetDownloadConfiguration
-	WithArtworkData(artworkData *foundation.NSData) *AssetDownloadConfiguration
-	WithAuxiliaryContentConfigurations(items ...*raw.AVAssetDownloadContentConfiguration) *AssetDownloadConfiguration
+	obj.Object
+	WithArtworkData(artworkData obj.Object) *AssetDownloadConfiguration
+	WithAuxiliaryContentConfigurations(items ...*AssetDownloadContentConfiguration) *AssetDownloadConfiguration
 	WithOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) *AssetDownloadConfiguration
 	WithDownloadsInterstitialAssets(downloadsInterstitialAssets bool) *AssetDownloadConfiguration
-	SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria *foundation.NSArray[*raw.AVPlayerMediaSelectionCriteria], mediaCharacteristic *foundation.NSString)
-	ArtworkData() *foundation.NSData
-	SetArtworkData(artworkData *foundation.NSData)
+	SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria []*PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object)
+	ArtworkData() obj.Object
+	SetArtworkData(artworkData obj.Object)
 	PrimaryContentConfiguration() *AssetDownloadContentConfiguration
 	AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration
-	SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations *foundation.NSArray[*raw.AVAssetDownloadContentConfiguration])
+	SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations []*AssetDownloadContentConfiguration)
 	OptimizesAuxiliaryContentConfigurations() bool
 	SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool)
 	DownloadsInterstitialAssets() bool

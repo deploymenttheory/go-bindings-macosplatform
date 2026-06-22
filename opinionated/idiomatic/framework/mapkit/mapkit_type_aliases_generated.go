@@ -4,24 +4,28 @@
 
 package mapkit
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
-)
+// A point on a two-dimensional map projection.
+type MKMapPoint struct {
+	X float64
+	Y float64
+}
 
-// MKCoordinateRegion is a type alias for the raw MKCoordinateRegion value-type struct.
-type MKCoordinateRegion = raw.MKCoordinateRegion
+// A rectangular area on a two-dimensional map projection.
+type MKMapRect struct {
+	Origin MKMapPoint
+	Size   MKMapSize
+}
 
-// MKCoordinateSpan is a type alias for the raw MKCoordinateSpan value-type struct.
-type MKCoordinateSpan = raw.MKCoordinateSpan
+// Width and height information on a two-dimensional map projection.
+type MKMapSize struct {
+	Width  float64
+	Height float64
+}
 
-// MKMapPoint is a type alias for the raw MKMapPoint value-type struct.
-type MKMapPoint = raw.MKMapPoint
-
-// MKMapRect is a type alias for the raw MKMapRect value-type struct.
-type MKMapRect = raw.MKMapRect
-
-// MKMapSize is a type alias for the raw MKMapSize value-type struct.
-type MKMapSize = raw.MKMapSize
-
-// MKTileOverlayPath is a type alias for the raw MKTileOverlayPath value-type struct.
-type MKTileOverlayPath = raw.MKTileOverlayPath
+// Values that specify the path indexes for a single overlay tile.
+type MKTileOverlayPath struct {
+	X                  int
+	Y                  int
+	Z                  int
+	ContentScaleFactor float64
+}

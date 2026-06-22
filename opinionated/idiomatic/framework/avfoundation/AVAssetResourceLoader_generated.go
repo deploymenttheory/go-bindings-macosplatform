@@ -5,104 +5,119 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that mediates resource requests from a URL asset.
+// AssetResourceLoader is an idiomatic wrapper over the Objective-C class AVAssetResourceLoader.
 //
-// AssetResourceLoader wraps [raw.AVAssetResourceLoader] with a fluent Go API.
+// An object that mediates resource requests from a URL asset.
 type AssetResourceLoader struct {
-	inner *raw.AVAssetResourceLoader
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetResourceLoader].
-func (x *AssetResourceLoader) Unwrap() *raw.AVAssetResourceLoader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResourceLoader) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceLoaderFromID adopts an existing object pointer as a AssetResourceLoader (nil for 0).
+// AssetResourceLoaderFromID adopts an existing Objective-C object as a AssetResourceLoader
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceLoaderFromID(id objc.ID) *AssetResourceLoader {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResourceLoader{inner: raw.AVAssetResourceLoaderFromID(id)}
+	x := &AssetResourceLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResourceLoader creates a new [AssetResourceLoader].
+// assetResourceLoaderAdopt wraps an Objective-C object that this code just created as a
+// AssetResourceLoader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceLoaderAdopt(id objc.ID) *AssetResourceLoader {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResourceLoader{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetResourceLoader) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetResourceLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetResourceLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceLoader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetResourceLoader creates a new AssetResourceLoader.
 func NewAssetResourceLoader() *AssetResourceLoader {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetResourceLoader")), objc.RegisterName("new"))
-	return &AssetResourceLoader{inner: raw.AVAssetResourceLoaderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoader")), objc.RegisterName("new"))
+	return assetResourceLoaderAdopt(_id)
 }
 
-// A Boolean value that indicates whether content keys will be loaded as quickly as possible.
-//
-// WithPreloadsEligibleContentKeys sets the preloadsEligibleContentKeys property and returns the receiver for chaining.
+// WithPreloadsEligibleContentKeys a Boolean value that indicates whether content keys will be loaded as quickly as possible.
 func (x *AssetResourceLoader) WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader {
-	x.inner.SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
 	return x
 }
 
-// A Boolean value that indicates whether to enable attaching Common Media Client Data as HTTP request headers.
-//
-// WithSendsCommonMediaClientDataAsHTTPHeaders sets the sendsCommonMediaClientDataAsHTTPHeaders property and returns the receiver for chaining.
+// WithSendsCommonMediaClientDataAsHTTPHeaders a Boolean value that indicates whether to enable attaching Common Media Client Data as HTTP request headers.
 func (x *AssetResourceLoader) WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader {
-	x.inner.SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
 	return x
 }
 
-// Sets the delegate and dispatch queue to use with the resource loader.
-//
-// SetDelegateQueue calls the underlying SetDelegateQueue.
-func (x *AssetResourceLoader) SetDelegateQueue(delegate raw.AVAssetResourceLoaderDelegate, delegateQueue *foundation.NSObject) {
-	x.inner.SetDelegateQueue(delegate, delegateQueue)
+// DelegateQueue the dispatch queue on which all delegate methods will be invoked. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
+func (x *AssetResourceLoader) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+	return obj.Wrap(_r)
 }
 
-// @property 		delegate @abstract		The receiver's delegate. @discussion The value of this property is an object conforming to the AVAssetResourceLoaderDelegate protocol. The delegate is set using the setDelegate:queue: method. The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.
-//
-// Delegate calls the underlying Delegate.
-func (x *AssetResourceLoader) Delegate() raw.AVAssetResourceLoaderDelegate {
-	return x.inner.Delegate()
-}
-
-// @property 		delegateQueue @abstract		The dispatch queue on which all delegate methods will be invoked. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
-//
-// DelegateQueue calls the underlying DelegateQueue.
-func (x *AssetResourceLoader) DelegateQueue() *foundation.NSObject {
-	return x.inner.DelegateQueue()
-}
-
-// PreloadsEligibleContentKeys calls the underlying PreloadsEligibleContentKeys.
+// PreloadsEligibleContentKeys wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) PreloadsEligibleContentKeys() bool {
-	return x.inner.PreloadsEligibleContentKeys()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preloadsEligibleContentKeys"))
+	return _r
 }
 
-// SetPreloadsEligibleContentKeys calls the underlying SetPreloadsEligibleContentKeys.
+// SetPreloadsEligibleContentKeys wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) {
-	x.inner.SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
 }
 
-// SendsCommonMediaClientDataAsHTTPHeaders calls the underlying SendsCommonMediaClientDataAsHTTPHeaders.
+// SendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
-	return x.inner.SendsCommonMediaClientDataAsHTTPHeaders()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders"))
+	return _r
 }
 
-// SetSendsCommonMediaClientDataAsHTTPHeaders calls the underlying SetSendsCommonMediaClientDataAsHTTPHeaders.
+// SetSendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
 func (x *AssetResourceLoader) SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) {
-	x.inner.SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
 }
 
 // AssetResourceLoaderable is the interface implemented by [AssetResourceLoader], for mocking and DI.
 type AssetResourceLoaderable interface {
-	Unwrap() *raw.AVAssetResourceLoader
+	obj.Object
 	WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader
 	WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader
-	SetDelegateQueue(delegate raw.AVAssetResourceLoaderDelegate, delegateQueue *foundation.NSObject)
-	Delegate() raw.AVAssetResourceLoaderDelegate
-	DelegateQueue() *foundation.NSObject
+	DelegateQueue() obj.Object
 	PreloadsEligibleContentKeys() bool
 	SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool)
 	SendsCommonMediaClientDataAsHTTPHeaders() bool

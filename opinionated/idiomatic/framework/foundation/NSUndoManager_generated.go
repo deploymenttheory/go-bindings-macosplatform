@@ -5,403 +5,337 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A general-purpose recorder of operations that enables undo and redo.
+// UndoManager is an idiomatic wrapper over the Objective-C class NSUndoManager.
 //
-// UndoManager wraps [raw.NSUndoManager] with a fluent Go API.
+// A general-purpose recorder of operations that enables undo and redo.
 type UndoManager struct {
-	inner *raw.NSUndoManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUndoManager].
-func (x *UndoManager) Unwrap() *raw.NSUndoManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UndoManager) ID() objc.ID { return x.inner.Ptr() }
-
-// UndoManagerFromID adopts an existing object pointer as a UndoManager (nil for 0).
+// UndoManagerFromID adopts an existing Objective-C object as a UndoManager
+// (nil for 0), retaining it and registering a release finalizer.
 func UndoManagerFromID(id objc.ID) *UndoManager {
 	if id == 0 {
 		return nil
 	}
-	return &UndoManager{inner: raw.NSUndoManagerFromID(id)}
+	x := &UndoManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUndoManager creates a new [UndoManager].
+// undoManagerAdopt wraps an Objective-C object that this code just created as a
+// UndoManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func undoManagerAdopt(id objc.ID) *UndoManager {
+	if id == 0 {
+		return nil
+	}
+	x := &UndoManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UndoManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UndoManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UndoManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UndoManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUndoManager creates a new UndoManager.
 func NewUndoManager() *UndoManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUndoManager")), objc.RegisterName("new"))
-	return &UndoManager{inner: raw.NSUndoManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUndoManager")), objc.RegisterName("new"))
+	return undoManagerAdopt(_id)
 }
 
-// A Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
-//
-// WithGroupsByEvent sets the groupsByEvent property and returns the receiver for chaining.
+// WithGroupsByEvent a Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (x *UndoManager) WithGroupsByEvent(groupsByEvent bool) *UndoManager {
-	x.inner.SetGroupsByEvent(groupsByEvent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupsByEvent:"), groupsByEvent)
 	return x
 }
 
-// The maximum number of top-level undo groups the receiver holds. An integer specifying the number of undo groups. A limit of 0 indicates no limit, so old undo groups are never dropped. When ending an undo group results in the number of groups exceeding this limit, the oldest groups are dropped from the stack. The default is 0. If you change the limit to a level below the prior limit, old undo groups are immediately dropped.
-//
-// WithLevelsOfUndo sets the levelsOfUndo property and returns the receiver for chaining.
-func (x *UndoManager) WithLevelsOfUndo(levelsOfUndo uint) *UndoManager {
-	x.inner.SetLevelsOfUndo(levelsOfUndo)
+// WithLevelsOfUndo the maximum number of top-level undo groups the receiver holds. An integer specifying the number of undo groups. A limit of 0 indicates no limit, so old undo groups are never dropped. When ending an undo group results in the number of groups exceeding this limit, the oldest groups are dropped from the stack. The default is 0. If you change the limit to a level below the prior limit, old undo groups are immediately dropped.
+func (x *UndoManager) WithLevelsOfUndo(levelsOfUndo int) *UndoManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfUndo:"), levelsOfUndo)
 	return x
 }
 
-// The modes governing the types of input handled during a cycle of the run loop. An array of string constants specifying the current run-loop modes. By default, the sole run-loop mode is “NSDefaultRunLoopMode“ (which excludes data from “NSConnection“ objects). Some examples of other uses are to limit the input to data received during a mouse-tracking session by setting the mode to “NSEventTrackingRunLoopMode“, or limit it to data received from a modal panel with “NSModalPanelRunLoopMode“.
-//
-// WithRunLoopModes sets the collection, converting the Go slice to an NSArray.
+// WithRunLoopModes the modes governing the types of input handled during a cycle of the run loop. An array of string constants specifying the current run-loop modes. By default, the sole run-loop mode is “NSDefaultRunLoopMode“ (which excludes data from “NSConnection“ objects). Some examples of other uses are to limit the input to data received during a mouse-tracking session by setting the mode to “NSEventTrackingRunLoopMode“, or limit it to data received from a modal panel with “NSModalPanelRunLoopMode“.
 func (x *UndoManager) WithRunLoopModes(items ...StringProvider) *UndoManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRunLoopModes(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRunLoopModes(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRunLoopModes:"), _arr)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UndoManager) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UndoManager {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UndoManager) WithScriptingProperties(scriptingProperties obj.Object) *UndoManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Marks the beginning of an undo group. All individual undo operations before a subsequent “endUndoGrouping“ message are grouped together and reversed by a later “undo“ message. By default undo groups are begun automatically at the start of the event loop, but you can begin your own undo groups with this method, and nest them within other groups. This method posts an “NSUndoManagerCheckpointNotification“ unless a top-level undo is in progress. It posts an “NSUndoManagerDidOpenUndoGroupNotification“ if a new group was successfully created.
-//
-// BeginUndoGrouping calls the underlying BeginUndoGrouping.
+// BeginUndoGrouping marks the beginning of an undo group. All individual undo operations before a subsequent “endUndoGrouping“ message are grouped together and reversed by a later “undo“ message. By default undo groups are begun automatically at the start of the event loop, but you can begin your own undo groups with this method, and nest them within other groups. This method posts an “NSUndoManagerCheckpointNotification“ unless a top-level undo is in progress. It posts an “NSUndoManagerDidOpenUndoGroupNotification“ if a new group was successfully created.
 func (x *UndoManager) BeginUndoGrouping() {
-	x.inner.BeginUndoGrouping()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginUndoGrouping"))
 }
 
-// Marks the end of an undo group. All individual undo operations back to the matching “beginUndoGrouping“ message are grouped together and reversed by a later “undo“ or “undoNestedGroup“ message. Undo groups can be nested, thus providing functionality similar to nested transactions. Raises an “NSInternalInconsistencyException“ if there’s no “beginUndoGrouping“ message in effect. This method posts an “NSUndoManagerCheckpointNotification“ and an “NSUndoManagerDidCloseUndoGroupNotification“ just before the group is closed.
-//
-// EndUndoGrouping calls the underlying EndUndoGrouping.
+// EndUndoGrouping marks the end of an undo group. All individual undo operations back to the matching “beginUndoGrouping“ message are grouped together and reversed by a later “undo“ or “undoNestedGroup“ message. Undo groups can be nested, thus providing functionality similar to nested transactions. Raises an “NSInternalInconsistencyException“ if there’s no “beginUndoGrouping“ message in effect. This method posts an “NSUndoManagerCheckpointNotification“ and an “NSUndoManagerDidCloseUndoGroupNotification“ just before the group is closed.
 func (x *UndoManager) EndUndoGrouping() {
-	x.inner.EndUndoGrouping()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endUndoGrouping"))
 }
 
-// Disables the recording of undo operations, whether by “registerUndoWithTarget:selector:object:“ or by invocation-based undo. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
-//
-// DisableUndoRegistration calls the underlying DisableUndoRegistration.
+// DisableUndoRegistration disables the recording of undo operations, whether by “registerUndoWithTarget:selector:object:“ or by invocation-based undo. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
 func (x *UndoManager) DisableUndoRegistration() {
-	x.inner.DisableUndoRegistration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableUndoRegistration"))
 }
 
-// Enables the recording of undo operations. Because undo registration is enabled by default, this is used to balance a prior “disableUndoRegistration“. Undo registration isn’t actually re-enabled until an enable message balances the last disable message in effect. Raises an NSInternalInconsistencyException if invoked while no disableUndoRegistration() message is in effect.
-//
-// EnableUndoRegistration calls the underlying EnableUndoRegistration.
+// EnableUndoRegistration enables the recording of undo operations. Because undo registration is enabled by default, this is used to balance a prior “disableUndoRegistration“. Undo registration isn’t actually re-enabled until an enable message balances the last disable message in effect. Raises an NSInternalInconsistencyException if invoked while no disableUndoRegistration() message is in effect.
 func (x *UndoManager) EnableUndoRegistration() {
-	x.inner.EnableUndoRegistration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableUndoRegistration"))
 }
 
-// Closes the top-level undo group if necessary and invokes “undoNestedGroup“. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
-//
-// Undo calls the underlying Undo.
+// Undo closes the top-level undo group if necessary and invokes “undoNestedGroup“. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
 func (x *UndoManager) Undo() {
-	x.inner.Undo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undo"))
 }
 
-// Performs the operations in the last group on the redo stack, if there are any, recording them on the undo stack as a single group. Raises an “NSInternalInconsistencyException“ if the method is invoked during an undo operation. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillRedoChangeNotification“ before it performs the redo operation, and it posts the “NSUndoManagerDidRedoChangeNotification“ after it performs the redo operation.
-//
-// Redo calls the underlying Redo.
+// Redo performs the operations in the last group on the redo stack, if there are any, recording them on the undo stack as a single group. Raises an “NSInternalInconsistencyException“ if the method is invoked during an undo operation. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillRedoChangeNotification“ before it performs the redo operation, and it posts the “NSUndoManagerDidRedoChangeNotification“ after it performs the redo operation.
 func (x *UndoManager) Redo() {
-	x.inner.Redo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redo"))
 }
 
-// Performs the undo operations in the last undo group (whether top-level or nested), recording the operations on the redo stack as a single group. Raises an “NSInternalInconsistencyException“ if any undo operations have been registered since the last “enableUndoRegistration“ message. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillUndoChangeNotification“ before it performs the undo operation, and it posts an “NSUndoManagerDidUndoChangeNotification“ after it performs the undo operation.
-//
-// UndoNestedGroup calls the underlying UndoNestedGroup.
+// UndoNestedGroup performs the undo operations in the last undo group (whether top-level or nested), recording the operations on the redo stack as a single group. Raises an “NSInternalInconsistencyException“ if any undo operations have been registered since the last “enableUndoRegistration“ message. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillUndoChangeNotification“ before it performs the undo operation, and it posts an “NSUndoManagerDidUndoChangeNotification“ after it performs the undo operation.
 func (x *UndoManager) UndoNestedGroup() {
-	x.inner.UndoNestedGroup()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoNestedGroup"))
 }
 
-// Clears the undo and redo stacks and re-enables the receiver.
-//
-// RemoveAllActions calls the underlying RemoveAllActions.
+// RemoveAllActions clears the undo and redo stacks and re-enables the receiver.
 func (x *UndoManager) RemoveAllActions() {
-	x.inner.RemoveAllActions()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllActions"))
 }
 
-// Clears the undo and redo stacks of all operations involving the specified target as the recipient of the undo message. Doesn't re-enable the receiver if it's disabled. - Parameter target: The recepient of the undo mesages to be removed.
-//
-// RemoveAllActionsWithTarget calls the underlying RemoveAllActionsWithTarget.
-func (x *UndoManager) RemoveAllActionsWithTarget(target objc.ID) {
-	x.inner.RemoveAllActionsWithTarget(target)
+// RemoveAllActionsWithTarget clears the undo and redo stacks of all operations involving the specified target as the recipient of the undo message. Doesn't re-enable the receiver if it's disabled. - Parameter target: The recepient of the undo mesages to be removed.
+func (x *UndoManager) RemoveAllActionsWithTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllActionsWithTarget:"), objref.IDOf(target))
 }
 
-// Registers the selector of the specified target to implement a single undo operation that the target receives. - Parameter target: The target of the undo operation. The undo manager maintains an unowned reference to `target` to prevent retain cycles. - Parameter selector: The selector for the undo operation. - Parameter object: The argument sent with the selector. The undo manager maintains a strong reference to `object`
-//
-// RegisterUndoWithTargetSelectorObject calls the underlying RegisterUndoWithTargetSelectorObject.
-func (x *UndoManager) RegisterUndoWithTargetSelectorObject(target objc.ID, selector objc.SEL, object objc.ID) {
-	x.inner.RegisterUndoWithTargetSelectorObject(target, selector, object)
+// PrepareWithInvocationTarget prepares the undo manager for invocation-based undo with the given target as the subject of the next undo operation. For example, when called as: [[undoManager prepareWithInvocationTarget:target] setFont:oldFont color:oldColor] When undo is called, the specified target will be called with [target setFont:oldFont color:oldColor] - Parameter target: The target of the undo operation. The undo manager maintains a weak reference to `target`. - Returns:  A proxy object that forwards messages to the undo manager for recording as undo actions.
+func (x *UndoManager) PrepareWithInvocationTarget(target obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareWithInvocationTarget:"), objref.IDOf(target))
+	return obj.Wrap(_r)
 }
 
-// Prepares the undo manager for invocation-based undo with the given target as the subject of the next undo operation. For example, when called as: [[undoManager prepareWithInvocationTarget:target] setFont:oldFont color:oldColor] When undo is called, the specified target will be called with [target setFont:oldFont color:oldColor] - Parameter target: The target of the undo operation. The undo manager maintains a weak reference to `target`. - Returns:  A proxy object that forwards messages to the undo manager for recording as undo actions.
-//
-// PrepareWithInvocationTarget calls the underlying PrepareWithInvocationTarget.
-func (x *UndoManager) PrepareWithInvocationTarget(target objc.ID) objc.ID {
-	return x.inner.PrepareWithInvocationTarget(target)
+// RegisterUndoWithTargetHandler records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
+func (x *UndoManager) RegisterUndoWithTargetHandler(target obj.Object, undoHandler func(obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerUndoWithTarget:handler:"), objref.IDOf(target), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { undoHandler(obj.Wrap(_b0)) }))
 }
 
-// Records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
-//
-// RegisterUndoWithTargetHandler calls the underlying RegisterUndoWithTargetHandler.
-func (x *UndoManager) RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID)) {
-	x.inner.RegisterUndoWithTargetHandler(target, undoHandler)
-}
-
-// Sets whether the next undo or redo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the “NSUndoManagerGroupIsDiscardableKey“ in the `userInfo` dictionary of the “NSUndoManagerWillCloseUndoGroupNotification“. - Parameter discardable: Specifies if the action is discardable. YES if the next undo or redo action can be discarded; NO otherwise.
-//
-// SetActionIsDiscardable calls the underlying SetActionIsDiscardable.
+// SetActionIsDiscardable sets whether the next undo or redo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the “NSUndoManagerGroupIsDiscardableKey“ in the `userInfo` dictionary of the “NSUndoManagerWillCloseUndoGroupNotification“. - Parameter discardable: Specifies if the action is discardable. YES if the next undo or redo action can be discarded; NO otherwise.
 func (x *UndoManager) SetActionIsDiscardable(discardable bool) {
-	x.inner.SetActionIsDiscardable(discardable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionIsDiscardable:"), discardable)
 }
 
-// Sets the name of the action associated with the Undo or Redo command. If `actionName` is an empty string, the undo manager removes the action name currently associated with the menu command. - Parameter actionName: The name of the action.
-//
-// SetActionName calls the underlying SetActionName.
+// SetActionName sets the name of the action associated with the Undo or Redo command. If `actionName` is an empty string, the undo manager removes the action name currently associated with the menu command. - Parameter actionName: The name of the action.
 func (x *UndoManager) SetActionName(actionName string) {
-	x.inner.SetActionName(foundation.NSStringStringWithUTF8String(actionName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionName:"), purego.NSString(actionName))
 }
 
-// Get a value from the undo action's user info - Parameter key: Which value should be retrieved
-//
-// UndoActionUserInfoValueForKey calls the underlying UndoActionUserInfoValueForKey.
-func (x *UndoManager) UndoActionUserInfoValueForKey(key *raw.NSString) objc.ID {
-	return x.inner.UndoActionUserInfoValueForKey(key)
+// UndoActionUserInfoValueForKey get a value from the undo action's user info - Parameter key: Which value should be retrieved
+func (x *UndoManager) UndoActionUserInfoValueForKey(key *String) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoActionUserInfoValueForKey:"), objref.IDOf(key))
+	return obj.Wrap(_r)
 }
 
-// Get a value from the redo action's user info - Parameter key: Which value should be retrieved
-//
-// RedoActionUserInfoValueForKey calls the underlying RedoActionUserInfoValueForKey.
-func (x *UndoManager) RedoActionUserInfoValueForKey(key *raw.NSString) objc.ID {
-	return x.inner.RedoActionUserInfoValueForKey(key)
+// RedoActionUserInfoValueForKey get a value from the redo action's user info - Parameter key: Which value should be retrieved
+func (x *UndoManager) RedoActionUserInfoValueForKey(key *String) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redoActionUserInfoValueForKey:"), objref.IDOf(key))
+	return obj.Wrap(_r)
 }
 
-// Set user info for the Undo or Redo command. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
-//
-// SetActionUserInfoValueForKey calls the underlying SetActionUserInfoValueForKey.
-func (x *UndoManager) SetActionUserInfoValueForKey(info objc.ID, key *raw.NSString) {
-	x.inner.SetActionUserInfoValueForKey(info, key)
+// SetActionUserInfoValueForKey set user info for the Undo or Redo command. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
+func (x *UndoManager) SetActionUserInfoValueForKey(info obj.Object, key *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionUserInfoValue:forKey:"), objref.IDOf(info), objref.IDOf(key))
 }
 
-// Returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
-//
-// UndoMenuTitleForUndoActionName calls the underlying UndoMenuTitleForUndoActionName.
-func (x *UndoManager) UndoMenuTitleForUndoActionName(actionName string) *String {
-	_r := x.inner.UndoMenuTitleForUndoActionName(foundation.NSStringStringWithUTF8String(actionName))
-	if _r == nil {
-		return nil
+// UndoMenuTitleForUndoActionName returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
+func (x *UndoManager) UndoMenuTitleForUndoActionName(actionName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoMenuTitleForUndoActionName:"), purego.NSString(actionName))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
-//
-// RedoMenuTitleForUndoActionName calls the underlying RedoMenuTitleForUndoActionName.
-func (x *UndoManager) RedoMenuTitleForUndoActionName(actionName string) *String {
-	_r := x.inner.RedoMenuTitleForUndoActionName(foundation.NSStringStringWithUTF8String(actionName))
-	if _r == nil {
-		return nil
+// RedoMenuTitleForUndoActionName returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
+func (x *UndoManager) RedoMenuTitleForUndoActionName(actionName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redoMenuTitleForUndoActionName:"), purego.NSString(actionName))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// The number of nested undo groups (or redo groups, if Redo was invoked last) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
-//
-// GroupingLevel calls the underlying GroupingLevel.
+// GroupingLevel the number of nested undo groups (or redo groups, if Redo was invoked last) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
 func (x *UndoManager) GroupingLevel() int {
-	return x.inner.GroupingLevel()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupingLevel"))
+	return _r
 }
 
-// Whether the recording of undo operations is enabled.
-//
-// IsUndoRegistrationEnabled calls the underlying IsUndoRegistrationEnabled.
+// IsUndoRegistrationEnabled whether the recording of undo operations is enabled.
 func (x *UndoManager) IsUndoRegistrationEnabled() bool {
-	return x.inner.IsUndoRegistrationEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUndoRegistrationEnabled"))
+	return _r
 }
 
-// A Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
-//
-// GroupsByEvent calls the underlying GroupsByEvent.
+// GroupsByEvent a Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (x *UndoManager) GroupsByEvent() bool {
-	return x.inner.GroupsByEvent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("groupsByEvent"))
+	return _r
 }
 
-// SetGroupsByEvent calls the underlying SetGroupsByEvent.
+// SetGroupsByEvent wraps the corresponding Objective-C method.
 func (x *UndoManager) SetGroupsByEvent(groupsByEvent bool) {
-	x.inner.SetGroupsByEvent(groupsByEvent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupsByEvent:"), groupsByEvent)
 }
 
-// The maximum number of top-level undo groups the receiver holds. An integer specifying the number of undo groups. A limit of 0 indicates no limit, so old undo groups are never dropped. When ending an undo group results in the number of groups exceeding this limit, the oldest groups are dropped from the stack. The default is 0. If you change the limit to a level below the prior limit, old undo groups are immediately dropped.
-//
-// LevelsOfUndo calls the underlying LevelsOfUndo.
-func (x *UndoManager) LevelsOfUndo() uint {
-	return x.inner.LevelsOfUndo()
+// LevelsOfUndo the maximum number of top-level undo groups the receiver holds. An integer specifying the number of undo groups. A limit of 0 indicates no limit, so old undo groups are never dropped. When ending an undo group results in the number of groups exceeding this limit, the oldest groups are dropped from the stack. The default is 0. If you change the limit to a level below the prior limit, old undo groups are immediately dropped.
+func (x *UndoManager) LevelsOfUndo() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("levelsOfUndo"))
+	return _r
 }
 
-// SetLevelsOfUndo calls the underlying SetLevelsOfUndo.
-func (x *UndoManager) SetLevelsOfUndo(levelsOfUndo uint) {
-	x.inner.SetLevelsOfUndo(levelsOfUndo)
+// SetLevelsOfUndo wraps the corresponding Objective-C method.
+func (x *UndoManager) SetLevelsOfUndo(levelsOfUndo int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfUndo:"), levelsOfUndo)
 }
 
-// The modes governing the types of input handled during a cycle of the run loop. An array of string constants specifying the current run-loop modes. By default, the sole run-loop mode is “NSDefaultRunLoopMode“ (which excludes data from “NSConnection“ objects). Some examples of other uses are to limit the input to data received during a mouse-tracking session by setting the mode to “NSEventTrackingRunLoopMode“, or limit it to data received from a modal panel with “NSModalPanelRunLoopMode“.
+// RunLoopModes the modes governing the types of input handled during a cycle of the run loop. An array of string constants specifying the current run-loop modes. By default, the sole run-loop mode is “NSDefaultRunLoopMode“ (which excludes data from “NSConnection“ objects). Some examples of other uses are to limit the input to data received during a mouse-tracking session by setting the mode to “NSEventTrackingRunLoopMode“, or limit it to data received from a modal panel with “NSModalPanelRunLoopMode“.
 //
 // RunLoopModes returns the collection as a Go slice.
 func (x *UndoManager) RunLoopModes() []*String {
-	arr := x.inner.RunLoopModes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *String {
-		return &String{inner: raw.NSStringFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runLoopModes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// SetRunLoopModes calls the underlying SetRunLoopModes.
-func (x *UndoManager) SetRunLoopModes(runLoopModes ...StringProvider) {
-	_ptrs := make([]objc.ID, len(runLoopModes))
-	for _i, _v := range runLoopModes {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetRunLoopModes(_arg0)
+// SetRunLoopModes wraps the corresponding Objective-C method.
+func (x *UndoManager) SetRunLoopModes(runLoopModes []*String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRunLoopModes:"), purego.SliceToNSArray(runLoopModes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Whether the receiver has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
-//
-// CanUndo calls the underlying CanUndo.
+// CanUndo whether the receiver has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
 func (x *UndoManager) CanUndo() bool {
-	return x.inner.CanUndo()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canUndo"))
+	return _r
 }
 
-// Whether the receiver has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
-//
-// CanRedo calls the underlying CanRedo.
+// CanRedo whether the receiver has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
 func (x *UndoManager) CanRedo() bool {
-	return x.inner.CanRedo()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRedo"))
+	return _r
 }
 
-// How many times `undo` can be invoked before there are no more actions left to be undone
-//
-// UndoCount calls the underlying UndoCount.
-func (x *UndoManager) UndoCount() uint {
-	return x.inner.UndoCount()
+// UndoCount how many times `undo` can be invoked before there are no more actions left to be undone
+func (x *UndoManager) UndoCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("undoCount"))
+	return _r
 }
 
-// How many times `redo` can be invoked before there are no more actions left to be redone
-//
-// RedoCount calls the underlying RedoCount.
-func (x *UndoManager) RedoCount() uint {
-	return x.inner.RedoCount()
+// RedoCount how many times `redo` can be invoked before there are no more actions left to be redone
+func (x *UndoManager) RedoCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("redoCount"))
+	return _r
 }
 
-// Whether the receiver is in the process of performing its “undo“ or “undoNestedGroup“ method.
-//
-// IsUndoing calls the underlying IsUndoing.
+// IsUndoing whether the receiver is in the process of performing its “undo“ or “undoNestedGroup“ method.
 func (x *UndoManager) IsUndoing() bool {
-	return x.inner.IsUndoing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUndoing"))
+	return _r
 }
 
-// Whether the receiver is in the process of performing its “redo“ method.
-//
-// IsRedoing calls the underlying IsRedoing.
+// IsRedoing whether the receiver is in the process of performing its “redo“ method.
 func (x *UndoManager) IsRedoing() bool {
-	return x.inner.IsRedoing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRedoing"))
+	return _r
 }
 
-// Whether the next undo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. These are typically actions that don’t affect persistent state. An example might be an undo action that changes the viewable area of a document.
-//
-// UndoActionIsDiscardable calls the underlying UndoActionIsDiscardable.
+// UndoActionIsDiscardable whether the next undo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. These are typically actions that don’t affect persistent state. An example might be an undo action that changes the viewable area of a document.
 func (x *UndoManager) UndoActionIsDiscardable() bool {
-	return x.inner.UndoActionIsDiscardable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("undoActionIsDiscardable"))
+	return _r
 }
 
-// Whether the next redo action is discardable. Specifies that the latest redo action may be safely discarded when a document can not be saved for any reason. These are typically actions that don’t affect persistent state. An example might be an redo action that changes the viewable area of a document.
-//
-// RedoActionIsDiscardable calls the underlying RedoActionIsDiscardable.
+// RedoActionIsDiscardable whether the next redo action is discardable. Specifies that the latest redo action may be safely discarded when a document can not be saved for any reason. These are typically actions that don’t affect persistent state. An example might be an redo action that changes the viewable area of a document.
 func (x *UndoManager) RedoActionIsDiscardable() bool {
-	return x.inner.RedoActionIsDiscardable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("redoActionIsDiscardable"))
+	return _r
 }
 
-// The name identifying the undo action. The undo action name. Returns an empty string if no action name has been assigned or if there is nothing to undo. For example, if the menu title is “Undo Delete,” the string returned is “Delete.”
-//
-// UndoActionName calls the underlying UndoActionName.
-func (x *UndoManager) UndoActionName() *String {
-	_r := x.inner.UndoActionName()
-	if _r == nil {
-		return nil
+// UndoActionName the name identifying the undo action. The undo action name. Returns an empty string if no action name has been assigned or if there is nothing to undo. For example, if the menu title is “Undo Delete,” the string returned is “Delete.”
+func (x *UndoManager) UndoActionName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoActionName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// The name identifying the redo action. The redo action name. Returns an empty string if no action name has been assigned or if there is nothing to redo. For example, if the menu title is “Redo Delete,” the string returned is “Delete.”
-//
-// RedoActionName calls the underlying RedoActionName.
-func (x *UndoManager) RedoActionName() *String {
-	_r := x.inner.RedoActionName()
-	if _r == nil {
-		return nil
+// RedoActionName the name identifying the redo action. The redo action name. Returns an empty string if no action name has been assigned or if there is nothing to redo. For example, if the menu title is “Redo Delete,” the string returned is “Delete.”
+func (x *UndoManager) RedoActionName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redoActionName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// The complete title of the Undo menu command, for example, “Undo Paste.” Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
-//
-// UndoMenuItemTitle calls the underlying UndoMenuItemTitle.
-func (x *UndoManager) UndoMenuItemTitle() *String {
-	_r := x.inner.UndoMenuItemTitle()
-	if _r == nil {
-		return nil
+// UndoMenuItemTitle the complete title of the Undo menu command, for example, “Undo Paste.” Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
+func (x *UndoManager) UndoMenuItemTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoMenuItemTitle"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// The complete title of the Redo menu command, for example, “Redo Paste.” Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
-//
-// RedoMenuItemTitle calls the underlying RedoMenuItemTitle.
-func (x *UndoManager) RedoMenuItemTitle() *String {
-	_r := x.inner.RedoMenuItemTitle()
-	if _r == nil {
-		return nil
+// RedoMenuItemTitle the complete title of the Redo menu command, for example, “Redo Paste.” Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
+func (x *UndoManager) RedoMenuItemTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redoMenuItemTitle"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *UndoManager) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // UndoManagerable is the interface implemented by [UndoManager], for mocking and DI.
 type UndoManagerable interface {
-	Unwrap() *raw.NSUndoManager
+	obj.Object
 	WithGroupsByEvent(groupsByEvent bool) *UndoManager
-	WithLevelsOfUndo(levelsOfUndo uint) *UndoManager
+	WithLevelsOfUndo(levelsOfUndo int) *UndoManager
 	WithRunLoopModes(items ...StringProvider) *UndoManager
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UndoManager
+	WithScriptingProperties(scriptingProperties obj.Object) *UndoManager
 	BeginUndoGrouping()
 	EndUndoGrouping()
 	DisableUndoRegistration()
@@ -410,37 +344,36 @@ type UndoManagerable interface {
 	Redo()
 	UndoNestedGroup()
 	RemoveAllActions()
-	RemoveAllActionsWithTarget(target objc.ID)
-	RegisterUndoWithTargetSelectorObject(target objc.ID, selector objc.SEL, object objc.ID)
-	PrepareWithInvocationTarget(target objc.ID) objc.ID
-	RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID))
+	RemoveAllActionsWithTarget(target obj.Object)
+	PrepareWithInvocationTarget(target obj.Object) obj.Object
+	RegisterUndoWithTargetHandler(target obj.Object, undoHandler func(obj.Object))
 	SetActionIsDiscardable(discardable bool)
 	SetActionName(actionName string)
-	UndoActionUserInfoValueForKey(key *raw.NSString) objc.ID
-	RedoActionUserInfoValueForKey(key *raw.NSString) objc.ID
-	SetActionUserInfoValueForKey(info objc.ID, key *raw.NSString)
-	UndoMenuTitleForUndoActionName(actionName string) *String
-	RedoMenuTitleForUndoActionName(actionName string) *String
+	UndoActionUserInfoValueForKey(key *String) obj.Object
+	RedoActionUserInfoValueForKey(key *String) obj.Object
+	SetActionUserInfoValueForKey(info obj.Object, key *String)
+	UndoMenuTitleForUndoActionName(actionName string) string
+	RedoMenuTitleForUndoActionName(actionName string) string
 	GroupingLevel() int
 	IsUndoRegistrationEnabled() bool
 	GroupsByEvent() bool
 	SetGroupsByEvent(groupsByEvent bool)
-	LevelsOfUndo() uint
-	SetLevelsOfUndo(levelsOfUndo uint)
+	LevelsOfUndo() int
+	SetLevelsOfUndo(levelsOfUndo int)
 	RunLoopModes() []*String
-	SetRunLoopModes(runLoopModes ...StringProvider)
+	SetRunLoopModes(runLoopModes []*String)
 	CanUndo() bool
 	CanRedo() bool
-	UndoCount() uint
-	RedoCount() uint
+	UndoCount() int
+	RedoCount() int
 	IsUndoing() bool
 	IsRedoing() bool
 	UndoActionIsDiscardable() bool
 	RedoActionIsDiscardable() bool
-	UndoActionName() *String
-	RedoActionName() *String
-	UndoMenuItemTitle() *String
-	RedoMenuItemTitle() *String
+	UndoActionName() string
+	RedoActionName() string
+	UndoMenuItemTitle() string
+	RedoMenuItemTitle() string
 }
 
 var _ UndoManagerable = (*UndoManager)(nil)

@@ -5,198 +5,195 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterValveConfigurationAndControl wraps [raw.MTRClusterValveConfigurationAndControl] with a fluent Go API.
+// MTRClusterValveConfigurationAndControl is an idiomatic wrapper over the Objective-C class MTRClusterValveConfigurationAndControl.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterValveConfigurationAndControl struct {
-	inner *raw.MTRClusterValveConfigurationAndControl
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterValveConfigurationAndControl].
-func (x *MTRClusterValveConfigurationAndControl) Unwrap() *raw.MTRClusterValveConfigurationAndControl {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterValveConfigurationAndControl) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterValveConfigurationAndControlFromID adopts an existing object pointer as a MTRClusterValveConfigurationAndControl (nil for 0).
+// MTRClusterValveConfigurationAndControlFromID adopts an existing Objective-C object as a MTRClusterValveConfigurationAndControl
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterValveConfigurationAndControlFromID(id objc.ID) *MTRClusterValveConfigurationAndControl {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterValveConfigurationAndControl{inner: raw.MTRClusterValveConfigurationAndControlFromID(id)}
+	x := &MTRClusterValveConfigurationAndControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue creates a new [MTRClusterValveConfigurationAndControl].
-func NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterValveConfigurationAndControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterValveConfigurationAndControl{inner: raw.MTRClusterValveConfigurationAndControlFromID(_id)}
+// mTRClusterValveConfigurationAndControlAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterValveConfigurationAndControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterValveConfigurationAndControlAdopt(id objc.ID) *MTRClusterValveConfigurationAndControl {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterValveConfigurationAndControl{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// OpenWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying OpenWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterValveConfigurationAndControl) OpenWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRValveConfigurationAndControlClusterOpenParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OpenWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterValveConfigurationAndControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterValveConfigurationAndControlAdopt(_id)
 }
 
-// OpenWithExpectedValuesExpectedValueIntervalCompletion calls the underlying OpenWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterValveConfigurationAndControl) OpenWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OpenWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// ReadAttributeOpenDurationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOpenDurationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// CloseWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying CloseWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterValveConfigurationAndControl) CloseWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRValveConfigurationAndControlClusterCloseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CloseWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeDefaultOpenDurationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultOpenDurationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// CloseWithExpectedValuesExpectedValueIntervalCompletion calls the underlying CloseWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterValveConfigurationAndControl) CloseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CloseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOpenDurationWithParams calls the underlying ReadAttributeOpenDurationWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOpenDurationWithParams(params)
+// WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOpenDurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeDefaultOpenDurationWithParams calls the underlying ReadAttributeDefaultOpenDurationWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDefaultOpenDurationWithParams(params)
+// ReadAttributeAutoCloseTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAutoCloseTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval calls the underlying WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval.
-func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeRemainingDurationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRemainingDurationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams calls the underlying WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams.
-func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// ReadAttributeCurrentStateWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAutoCloseTimeWithParams calls the underlying ReadAttributeAutoCloseTimeWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAutoCloseTimeWithParams(params)
+// ReadAttributeTargetStateWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeTargetStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRemainingDurationWithParams calls the underlying ReadAttributeRemainingDurationWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRemainingDurationWithParams(params)
+// ReadAttributeCurrentLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentStateWithParams calls the underlying ReadAttributeCurrentStateWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentStateWithParams(params)
+// ReadAttributeTargetLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTargetStateWithParams calls the underlying ReadAttributeTargetStateWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeTargetStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTargetStateWithParams(params)
+// ReadAttributeDefaultOpenLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultOpenLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentLevelWithParams calls the underlying ReadAttributeCurrentLevelWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentLevelWithParams(params)
+// WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeTargetLevelWithParams calls the underlying ReadAttributeTargetLevelWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTargetLevelWithParams(params)
+// WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOpenLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeDefaultOpenLevelWithParams calls the underlying ReadAttributeDefaultOpenLevelWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDefaultOpenLevelWithParams(params)
+// ReadAttributeValveFaultWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeValveFaultWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeValveFaultWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval calls the underlying WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval.
-func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeLevelStepWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeLevelStepWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLevelStepWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterValveConfigurationAndControl) WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeValveFaultWithParams calls the underlying ReadAttributeValveFaultWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeValveFaultWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeValveFaultWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLevelStepWithParams calls the underlying ReadAttributeLevelStepWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeLevelStepWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLevelStepWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterValveConfigurationAndControl) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterValveConfigurationAndControl) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterValveConfigurationAndControlable is the interface implemented by [MTRClusterValveConfigurationAndControl], for mocking and DI.
 type MTRClusterValveConfigurationAndControlable interface {
-	Unwrap() *raw.MTRClusterValveConfigurationAndControl
-	OpenWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRValveConfigurationAndControlClusterOpenParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OpenWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CloseWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRValveConfigurationAndControlClusterCloseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CloseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeOpenDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDefaultOpenDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeAutoCloseTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRemainingDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTargetStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTargetLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDefaultOpenLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeValveFaultWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLevelStepWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeOpenDurationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDefaultOpenDurationWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeDefaultOpenDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeDefaultOpenDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeAutoCloseTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRemainingDurationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTargetStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTargetLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDefaultOpenLevelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeDefaultOpenLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeDefaultOpenLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeValveFaultWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLevelStepWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterValveConfigurationAndControlable = (*MTRClusterValveConfigurationAndControl)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterValveConfigurationAndControl)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterValveConfigurationAndControl)(nil)

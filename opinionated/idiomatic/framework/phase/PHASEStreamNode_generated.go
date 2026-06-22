@@ -5,86 +5,105 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// StreamNode wraps [raw.PHASEStreamNode] with a fluent Go API.
+// StreamNode is an idiomatic wrapper over the Objective-C class PHASEStreamNode.
+//
+// StreamNode is an abstract base — you do not construct it directly. Construct one of [PullStreamNode], [PushStreamNode] and pass it where a StreamNode is accepted.
 type StreamNode struct {
-	inner *raw.PHASEStreamNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEStreamNode].
-func (x *StreamNode) Unwrap() *raw.PHASEStreamNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StreamNode) ID() objc.ID { return x.inner.Ptr() }
-
-// StreamNodeFromID adopts an existing object pointer as a StreamNode (nil for 0).
+// StreamNodeFromID adopts an existing Objective-C object as a StreamNode
+// (nil for 0), retaining it and registering a release finalizer.
 func StreamNodeFromID(id objc.ID) *StreamNode {
 	if id == 0 {
 		return nil
 	}
-	return &StreamNode{inner: raw.PHASEStreamNodeFromID(id)}
+	x := &StreamNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStreamNode creates a new [StreamNode].
-func NewStreamNode() *StreamNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEStreamNode")), objc.RegisterName("new"))
-	return &StreamNode{inner: raw.PHASEStreamNodeFromID(_id)}
+// streamNodeAdopt wraps an Objective-C object that this code just created as a
+// StreamNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func streamNodeAdopt(id objc.ID) *StreamNode {
+	if id == 0 {
+		return nil
+	}
+	x := &StreamNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property gainMetaParameter @abstract If specified during construction, the metaparameter for controlling gain will be available here
-//
-// GainMetaParameter calls the underlying GainMetaParameter.
+// Description returns the object's -description text.
+func (x *StreamNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StreamNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StreamNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StreamNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// GainMetaParameter if specified during construction, the metaparameter for controlling gain will be available here
 func (x *StreamNode) GainMetaParameter() *NumberMetaParameter {
-	_r := x.inner.GainMetaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &NumberMetaParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameter"))
+	return NumberMetaParameterFromID(_r)
 }
 
-// @property rateMetaParameter @abstract If specified during construction, the metaparameter for controlling rate/pitch will be available here
-//
-// RateMetaParameter calls the underlying RateMetaParameter.
+// RateMetaParameter if specified during construction, the metaparameter for controlling rate/pitch will be available here
 func (x *StreamNode) RateMetaParameter() *NumberMetaParameter {
-	_r := x.inner.RateMetaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &NumberMetaParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rateMetaParameter"))
+	return NumberMetaParameterFromID(_r)
 }
 
-// @property mixer @abstract The readonly property that returns the PHASEMixer this stream was created with and assigned to.
-//
-// Mixer calls the underlying Mixer.
+// Mixer the readonly property that returns the PHASEMixer this stream was created with and assigned to.
 func (x *StreamNode) Mixer() *Mixer {
-	_r := x.inner.Mixer()
-	if _r == nil {
-		return nil
-	}
-	return &Mixer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mixer"))
+	return MixerFromID(_r)
 }
 
-// @property format @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with.
-//
-// Format calls the underlying Format.
-func (x *StreamNode) Format() *avfaudio.AVAudioFormat {
-	return x.inner.Format()
+// Format the readonly property that returns the AVAudioFormat that this stream was initialized with.
+func (x *StreamNode) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+	return obj.Wrap(_r)
 }
-
-func (x *StreamNode) asStreamNode() *raw.PHASEStreamNode { return x.inner }
 
 // StreamNodeable is the interface implemented by [StreamNode], for mocking and DI.
 type StreamNodeable interface {
-	Unwrap() *raw.PHASEStreamNode
+	obj.Object
 	GainMetaParameter() *NumberMetaParameter
 	RateMetaParameter() *NumberMetaParameter
 	Mixer() *Mixer
-	Format() *avfaudio.AVAudioFormat
+	Format() obj.Object
 }
 
 var _ StreamNodeable = (*StreamNode)(nil)
+
+// isStreamNode marks StreamNode — and, by embedding promotion, its
+// subclasses — as a member of the StreamNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StreamNode) isStreamNode() {}
+
+var _ StreamNodeProvider = (*StreamNode)(nil)

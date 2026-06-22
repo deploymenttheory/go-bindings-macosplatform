@@ -5,151 +5,127 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents an audio buffer that you use for compressed audio formats.
+// AudioCompressedBuffer is an idiomatic wrapper over the Objective-C class AVAudioCompressedBuffer.
 //
-// AudioCompressedBuffer wraps [raw.AVAudioCompressedBuffer] with a fluent Go API.
+// It embeds [AudioBuffer], promoting that type's methods.
+//
+// An object that represents an audio buffer that you use for compressed audio formats.
 type AudioCompressedBuffer struct {
-	inner *raw.AVAudioCompressedBuffer
+	AudioBuffer
 }
 
-// Unwrap returns the underlying [raw.AVAudioCompressedBuffer].
-func (x *AudioCompressedBuffer) Unwrap() *raw.AVAudioCompressedBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioCompressedBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioCompressedBufferFromID adopts an existing object pointer as a AudioCompressedBuffer (nil for 0).
+// AudioCompressedBufferFromID adopts an existing Objective-C object as a AudioCompressedBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioCompressedBufferFromID(id objc.ID) *AudioCompressedBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(id)}
+	x := &AudioCompressedBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a buffer that contains audio data in a compressed state.
-//
-// NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a new [AudioCompressedBuffer].
-func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *raw.AVAudioFormat, packetCapacity uint32, maximumPacketSize int) *AudioCompressedBuffer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:maximumPacketSize:"), format.Ptr(), packetCapacity, maximumPacketSize)
-	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(_id)}
+// audioCompressedBufferAdopt wraps an Objective-C object that this code just created as a
+// AudioCompressedBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioCompressedBufferAdopt(id objc.ID) *AudioCompressedBuffer {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioCompressedBuffer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a buffer that contains constant bytes per packet of audio data in a compressed state.
-//
-// NewAudioCompressedBufferWithFormatPacketCapacity creates a new [AudioCompressedBuffer].
-func NewAudioCompressedBufferWithFormatPacketCapacity(format *raw.AVAudioFormat, packetCapacity uint32) *AudioCompressedBuffer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:"), format.Ptr(), packetCapacity)
-	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(_id)}
+// NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a buffer that contains audio data in a compressed state.
+func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *AudioFormat, packetCapacity uint32, maximumPacketSize int) *AudioCompressedBuffer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:maximumPacketSize:"), objref.IDOf(format), packetCapacity, maximumPacketSize)
+	return audioCompressedBufferAdopt(_id)
 }
 
-// The number of packets currently in the buffer.
-//
-// WithPacketCount sets the packetCount property and returns the receiver for chaining.
+// NewAudioCompressedBufferWithFormatPacketCapacity creates a buffer that contains constant bytes per packet of audio data in a compressed state.
+func NewAudioCompressedBufferWithFormatPacketCapacity(format *AudioFormat, packetCapacity uint32) *AudioCompressedBuffer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:packetCapacity:"), objref.IDOf(format), packetCapacity)
+	return audioCompressedBufferAdopt(_id)
+}
+
+// WithPacketCount the number of packets currently in the buffer.
 func (x *AudioCompressedBuffer) WithPacketCount(packetCount uint32) *AudioCompressedBuffer {
-	x.inner.SetPacketCount(packetCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketCount:"), packetCount)
 	return x
 }
 
-// The number of valid bytes in the buffer.
-//
-// WithByteLength sets the byteLength property and returns the receiver for chaining.
+// WithByteLength the number of valid bytes in the buffer.
 func (x *AudioCompressedBuffer) WithByteLength(byteLength uint32) *AudioCompressedBuffer {
-	x.inner.SetByteLength(byteLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteLength:"), byteLength)
 	return x
 }
 
-// @property packetCapacity @abstract The number of compressed packets the buffer can contain.
-//
-// PacketCapacity calls the underlying PacketCapacity.
+// PacketCapacity the number of compressed packets the buffer can contain.
 func (x *AudioCompressedBuffer) PacketCapacity() uint32 {
-	return x.inner.PacketCapacity()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("packetCapacity"))
+	return _r
 }
 
-// @property packetCount @abstract The current number of compressed packets in the buffer. @discussion You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
-//
-// PacketCount calls the underlying PacketCount.
+// PacketCount the current number of compressed packets in the buffer. You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
 func (x *AudioCompressedBuffer) PacketCount() uint32 {
-	return x.inner.PacketCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("packetCount"))
+	return _r
 }
 
-// SetPacketCount calls the underlying SetPacketCount.
+// SetPacketCount wraps the corresponding Objective-C method.
 func (x *AudioCompressedBuffer) SetPacketCount(packetCount uint32) {
-	x.inner.SetPacketCount(packetCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketCount:"), packetCount)
 }
 
-// @property maximumPacketSize @abstract The maximum size of a compressed packet in bytes.
-//
-// MaximumPacketSize calls the underlying MaximumPacketSize.
+// MaximumPacketSize the maximum size of a compressed packet in bytes.
 func (x *AudioCompressedBuffer) MaximumPacketSize() int {
-	return x.inner.MaximumPacketSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumPacketSize"))
+	return _r
 }
 
-// @property data @abstract Access the buffer's data bytes.
-//
-// Data calls the underlying Data.
-func (x *AudioCompressedBuffer) Data() unsafe.Pointer {
-	return x.inner.Data()
-}
-
-// @property byteCapacity @abstract The buffer's capacity in bytes
-//
-// ByteCapacity calls the underlying ByteCapacity.
+// ByteCapacity the buffer's capacity in bytes
 func (x *AudioCompressedBuffer) ByteCapacity() uint32 {
-	return x.inner.ByteCapacity()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("byteCapacity"))
+	return _r
 }
 
-// @property byteLength @abstract The current number of valid bytes in the buffer. @discussion Can be changed as part of an operation that modifies the contents.
-//
-// ByteLength calls the underlying ByteLength.
+// ByteLength the current number of valid bytes in the buffer. Can be changed as part of an operation that modifies the contents.
 func (x *AudioCompressedBuffer) ByteLength() uint32 {
-	return x.inner.ByteLength()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("byteLength"))
+	return _r
 }
 
-// SetByteLength calls the underlying SetByteLength.
+// SetByteLength wraps the corresponding Objective-C method.
 func (x *AudioCompressedBuffer) SetByteLength(byteLength uint32) {
-	x.inner.SetByteLength(byteLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByteLength:"), byteLength)
 }
-
-// @property packetDescriptions @abstract Access the buffer's array of packet descriptions, if any. @discussion If the format has constant bytes per packet (format.streamDescription->mBytesPerPacket != 0), then this will return nil.
-//
-// PacketDescriptions calls the underlying PacketDescriptions.
-func (x *AudioCompressedBuffer) PacketDescriptions() *coreaudiotypes.AudioStreamPacketDescription {
-	return x.inner.PacketDescriptions()
-}
-
-// @property packetDependencies @abstract Access the buffer's array of packet dependencies, if any. @discussion If the format doesn't employ packet dependencies, this will be nil.
-//
-// PacketDependencies calls the underlying PacketDependencies.
-func (x *AudioCompressedBuffer) PacketDependencies() *coreaudiotypes.AudioStreamPacketDependencyDescription {
-	return x.inner.PacketDependencies()
-}
-
-func (x *AudioCompressedBuffer) asAudioBuffer() *raw.AVAudioBuffer { return &x.inner.AVAudioBuffer }
 
 // AudioCompressedBufferable is the interface implemented by [AudioCompressedBuffer], for mocking and DI.
 type AudioCompressedBufferable interface {
-	Unwrap() *raw.AVAudioCompressedBuffer
+	obj.Object
 	WithPacketCount(packetCount uint32) *AudioCompressedBuffer
 	WithByteLength(byteLength uint32) *AudioCompressedBuffer
 	PacketCapacity() uint32
 	PacketCount() uint32
 	SetPacketCount(packetCount uint32)
 	MaximumPacketSize() int
-	Data() unsafe.Pointer
 	ByteCapacity() uint32
 	ByteLength() uint32
 	SetByteLength(byteLength uint32)
-	PacketDescriptions() *coreaudiotypes.AudioStreamPacketDescription
-	PacketDependencies() *coreaudiotypes.AudioStreamPacketDependencyDescription
 }
 
 var _ AudioCompressedBufferable = (*AudioCompressedBuffer)(nil)
+
+var _ AudioBufferProvider = (*AudioCompressedBuffer)(nil)

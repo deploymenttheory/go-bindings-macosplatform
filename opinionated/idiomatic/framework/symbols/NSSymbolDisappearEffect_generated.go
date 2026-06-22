@@ -5,67 +5,72 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that makes the layers of a symbol-based image disappear separately or as a whole.
+// SymbolDisappearEffect is an idiomatic wrapper over the Objective-C class NSSymbolDisappearEffect.
 //
-// SymbolDisappearEffect wraps [raw.NSSymbolDisappearEffect] with a fluent Go API.
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that makes the layers of a symbol-based image disappear separately or as a whole.
 type SymbolDisappearEffect struct {
-	inner *raw.NSSymbolDisappearEffect
+	SymbolEffect
 }
 
-// Unwrap returns the underlying [raw.NSSymbolDisappearEffect].
-func (x *SymbolDisappearEffect) Unwrap() *raw.NSSymbolDisappearEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolDisappearEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolDisappearEffectFromID adopts an existing object pointer as a SymbolDisappearEffect (nil for 0).
+// SymbolDisappearEffectFromID adopts an existing Objective-C object as a SymbolDisappearEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolDisappearEffectFromID(id objc.ID) *SymbolDisappearEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolDisappearEffect{inner: raw.NSSymbolDisappearEffectFromID(id)}
+	x := &SymbolDisappearEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolDisappearEffect creates a new [SymbolDisappearEffect].
+// symbolDisappearEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolDisappearEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolDisappearEffectAdopt(id objc.ID) *SymbolDisappearEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolDisappearEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolDisappearEffect creates a new SymbolDisappearEffect.
 func NewSymbolDisappearEffect() *SymbolDisappearEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolDisappearEffect")), objc.RegisterName("new"))
-	return &SymbolDisappearEffect{inner: raw.NSSymbolDisappearEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolDisappearEffect")), objc.RegisterName("new"))
+	return symbolDisappearEffectAdopt(_id)
 }
 
-// An effect that makes each layer disappear separately.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
+// EffectWithByLayer an effect that makes each layer disappear separately.
 func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDisappearEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolDisappearEffectFromID(_r)
 }
 
-// An effect that makes all layers disappear simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+// EffectWithWholeSymbol an effect that makes all layers disappear simultaneously.
 func (x *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDisappearEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolDisappearEffectFromID(_r)
 }
-
-func (x *SymbolDisappearEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolDisappearEffectable is the interface implemented by [SymbolDisappearEffect], for mocking and DI.
 type SymbolDisappearEffectable interface {
-	Unwrap() *raw.NSSymbolDisappearEffect
+	obj.Object
 	EffectWithByLayer() *SymbolDisappearEffect
 	EffectWithWholeSymbol() *SymbolDisappearEffect
 }
 
 var _ SymbolDisappearEffectable = (*SymbolDisappearEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolDisappearEffect)(nil)

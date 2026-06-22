@@ -5,142 +5,147 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that allows an application to render a layer tree into a Core OpenGL context.
+// Renderer is an idiomatic wrapper over the Objective-C class CARenderer.
 //
-// Renderer wraps [raw.CARenderer] with a fluent Go API.
+// A layer that allows an application to render a layer tree into a Core OpenGL context.
 type Renderer struct {
-	inner *raw.CARenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CARenderer].
-func (x *Renderer) Unwrap() *raw.CARenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Renderer) ID() objc.ID { return x.inner.Ptr() }
-
-// RendererFromID adopts an existing object pointer as a Renderer (nil for 0).
+// RendererFromID adopts an existing Objective-C object as a Renderer
+// (nil for 0), retaining it and registering a release finalizer.
 func RendererFromID(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	return &Renderer{inner: raw.CARendererFromID(id)}
-}
-
-// NewRenderer creates a new [Renderer].
-func NewRenderer() *Renderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CARenderer")), objc.RegisterName("new"))
-	return &Renderer{inner: raw.CARendererFromID(_id)}
-}
-
-// The root layer of the layer-tree the receiver should render.
-//
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *Renderer) WithLayer(layer LayerProvider) *Renderer {
-	x.inner.SetLayer(layer.asLayer())
+	x := &Renderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The bounds of the receiver.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
-	x.inner.SetBounds(bounds)
-	return x
-}
-
-// Begin rendering a frame at the specified time.
-//
-// BeginFrameAtTimeTimeStamp calls the underlying BeginFrameAtTimeTimeStamp.
-func (x *Renderer) BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp) {
-	x.inner.BeginFrameAtTimeTimeStamp(t, ts)
-}
-
-// Returns the bounds of the update region that contains all pixels that will be rendered by the current frame.
-//
-// UpdateBounds calls the underlying UpdateBounds.
-func (x *Renderer) UpdateBounds() corefoundation.CGRect {
-	return x.inner.UpdateBounds()
-}
-
-// Adds the rectangle to the update region of the current frame.
-//
-// AddUpdateRect calls the underlying AddUpdateRect.
-func (x *Renderer) AddUpdateRect(r corefoundation.CGRect) {
-	x.inner.AddUpdateRect(r)
-}
-
-// Render the update region of the current frame to the target context.
-//
-// Render calls the underlying Render.
-func (x *Renderer) Render() {
-	x.inner.Render()
-}
-
-// Returns the time at which the next update should happen.
-//
-// NextFrameTime calls the underlying NextFrameTime.
-func (x *Renderer) NextFrameTime() float64 {
-	return x.inner.NextFrameTime()
-}
-
-// Release any data associated with the current frame.
-//
-// EndFrame calls the underlying EndFrame.
-func (x *Renderer) EndFrame() {
-	x.inner.EndFrame()
-}
-
-// SetDestination calls the underlying SetDestination.
-func (x *Renderer) SetDestination(tex metal.MTLTexture) {
-	x.inner.SetDestination(tex)
-}
-
-// Layer calls the underlying Layer.
-func (x *Renderer) Layer() *Layer {
-	_r := x.inner.Layer()
-	if _r == nil {
+// rendererAdopt wraps an Objective-C object that this code just created as a
+// Renderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rendererAdopt(id objc.ID) *Renderer {
+	if id == 0 {
 		return nil
 	}
-	return &Layer{inner: _r}
+	x := &Renderer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetLayer calls the underlying SetLayer.
-func (x *Renderer) SetLayer(layer *raw.CALayer) {
-	x.inner.SetLayer(layer)
+// Description returns the object's -description text.
+func (x *Renderer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Bounds calls the underlying Bounds.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Renderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderer creates a new Renderer.
+func NewRenderer() *Renderer {
+	_id := objc.Send[objc.ID](objc.ID(_class("CARenderer")), objc.RegisterName("new"))
+	return rendererAdopt(_id)
+}
+
+// WithLayer the root layer of the layer-tree the receiver should render.
+func (x *Renderer) WithLayer(layer LayerProvider) *Renderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return x
+}
+
+// WithBounds the bounds of the receiver.
+func (x *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// UpdateBounds returns the bounds of the update region that contains all pixels that will be rendered by the current frame.
+func (x *Renderer) UpdateBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("updateBounds"))
+	return _r
+}
+
+// AddUpdateRect adds the rectangle to the update region of the current frame.
+func (x *Renderer) AddUpdateRect(r corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUpdateRect:"), r)
+}
+
+// Render render the update region of the current frame to the target context.
+func (x *Renderer) Render() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("render"))
+}
+
+// NextFrameTime returns the time at which the next update should happen.
+func (x *Renderer) NextFrameTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("nextFrameTime"))
+	return _r
+}
+
+// EndFrame release any data associated with the current frame.
+func (x *Renderer) EndFrame() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endFrame"))
+}
+
+// Layer wraps the corresponding Objective-C method.
+func (x *Renderer) Layer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layer"))
+	return LayerFromID(_r)
+}
+
+// SetLayer wraps the corresponding Objective-C method.
+func (x *Renderer) SetLayer(layer *Layer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+}
+
+// Bounds wraps the corresponding Objective-C method.
 func (x *Renderer) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
 }
 
-// SetBounds calls the underlying SetBounds.
+// SetBounds wraps the corresponding Objective-C method.
 func (x *Renderer) SetBounds(bounds corefoundation.CGRect) {
-	x.inner.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 }
 
 // Rendererable is the interface implemented by [Renderer], for mocking and DI.
 type Rendererable interface {
-	Unwrap() *raw.CARenderer
+	obj.Object
 	WithLayer(layer LayerProvider) *Renderer
 	WithBounds(bounds corefoundation.CGRect) *Renderer
-	BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp)
 	UpdateBounds() corefoundation.CGRect
 	AddUpdateRect(r corefoundation.CGRect)
 	Render()
 	NextFrameTime() float64
 	EndFrame()
-	SetDestination(tex metal.MTLTexture)
 	Layer() *Layer
-	SetLayer(layer *raw.CALayer)
+	SetLayer(layer *Layer)
 	Bounds() corefoundation.CGRect
 	SetBounds(bounds corefoundation.CGRect)
 }

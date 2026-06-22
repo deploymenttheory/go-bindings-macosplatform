@@ -5,53 +5,84 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The AVPlaybackCoordinationMedium passes states and messages between its connected playback coordinators.
+// PlaybackCoordinationMedium is an idiomatic wrapper over the Objective-C class AVPlaybackCoordinationMedium.
 //
-// PlaybackCoordinationMedium wraps [raw.AVPlaybackCoordinationMedium] with a fluent Go API.
+// The AVPlaybackCoordinationMedium passes states and messages between its connected playback coordinators.
 type PlaybackCoordinationMedium struct {
-	inner *raw.AVPlaybackCoordinationMedium
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlaybackCoordinationMedium].
-func (x *PlaybackCoordinationMedium) Unwrap() *raw.AVPlaybackCoordinationMedium { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlaybackCoordinationMedium) ID() objc.ID { return x.inner.Ptr() }
-
-// PlaybackCoordinationMediumFromID adopts an existing object pointer as a PlaybackCoordinationMedium (nil for 0).
+// PlaybackCoordinationMediumFromID adopts an existing Objective-C object as a PlaybackCoordinationMedium
+// (nil for 0), retaining it and registering a release finalizer.
 func PlaybackCoordinationMediumFromID(id objc.ID) *PlaybackCoordinationMedium {
 	if id == 0 {
 		return nil
 	}
-	return &PlaybackCoordinationMedium{inner: raw.AVPlaybackCoordinationMediumFromID(id)}
+	x := &PlaybackCoordinationMedium{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlaybackCoordinationMedium creates a new [PlaybackCoordinationMedium].
-func NewPlaybackCoordinationMedium() *PlaybackCoordinationMedium {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlaybackCoordinationMedium")), objc.RegisterName("new"))
-	return &PlaybackCoordinationMedium{inner: raw.AVPlaybackCoordinationMediumFromID(_id)}
-}
-
-// ConnectedPlaybackCoordinators returns the collection as a Go slice.
-func (x *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {
-	arr := x.inner.ConnectedPlaybackCoordinators()
-	if arr == nil {
+// playbackCoordinationMediumAdopt wraps an Objective-C object that this code just created as a
+// PlaybackCoordinationMedium (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playbackCoordinationMediumAdopt(id objc.ID) *PlaybackCoordinationMedium {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerPlaybackCoordinator {
-		return &PlayerPlaybackCoordinator{inner: raw.AVPlayerPlaybackCoordinatorFromID(purego.Retain(_id))}
-	})
+	x := &PlaybackCoordinationMedium{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlaybackCoordinationMedium) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlaybackCoordinationMedium) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlaybackCoordinationMedium) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlaybackCoordinationMedium) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlaybackCoordinationMedium creates a new PlaybackCoordinationMedium.
+func NewPlaybackCoordinationMedium() *PlaybackCoordinationMedium {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlaybackCoordinationMedium")), objc.RegisterName("new"))
+	return playbackCoordinationMediumAdopt(_id)
+}
+
+// ConnectedPlaybackCoordinators wraps the corresponding Objective-C method.
+//
+// ConnectedPlaybackCoordinators returns the collection as a Go slice.
+func (x *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedPlaybackCoordinators"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerPlaybackCoordinator { return PlayerPlaybackCoordinatorFromID(_id) })
 }
 
 // PlaybackCoordinationMediumable is the interface implemented by [PlaybackCoordinationMedium], for mocking and DI.
 type PlaybackCoordinationMediumable interface {
-	Unwrap() *raw.AVPlaybackCoordinationMedium
+	obj.Object
 	ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator
 }
 

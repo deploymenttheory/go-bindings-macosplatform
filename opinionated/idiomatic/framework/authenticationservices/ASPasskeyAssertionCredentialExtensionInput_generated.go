@@ -5,52 +5,82 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for various WebAuthn extensions during passkey assertion.
+// PasskeyAssertionCredentialExtensionInput is an idiomatic wrapper over the Objective-C class ASPasskeyAssertionCredentialExtensionInput.
 //
-// PasskeyAssertionCredentialExtensionInput wraps [raw.ASPasskeyAssertionCredentialExtensionInput] with a fluent Go API.
+// A type that encapsulates input for various WebAuthn extensions during passkey assertion.
 type PasskeyAssertionCredentialExtensionInput struct {
-	inner *raw.ASPasskeyAssertionCredentialExtensionInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyAssertionCredentialExtensionInput].
-func (x *PasskeyAssertionCredentialExtensionInput) Unwrap() *raw.ASPasskeyAssertionCredentialExtensionInput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyAssertionCredentialExtensionInput) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyAssertionCredentialExtensionInputFromID adopts an existing object pointer as a PasskeyAssertionCredentialExtensionInput (nil for 0).
+// PasskeyAssertionCredentialExtensionInputFromID adopts an existing Objective-C object as a PasskeyAssertionCredentialExtensionInput
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyAssertionCredentialExtensionInputFromID(id objc.ID) *PasskeyAssertionCredentialExtensionInput {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyAssertionCredentialExtensionInput{inner: raw.ASPasskeyAssertionCredentialExtensionInputFromID(id)}
+	x := &PasskeyAssertionCredentialExtensionInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPasskeyAssertionCredentialExtensionInput creates a new [PasskeyAssertionCredentialExtensionInput].
-func NewPasskeyAssertionCredentialExtensionInput() *PasskeyAssertionCredentialExtensionInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyAssertionCredentialExtensionInput")), objc.RegisterName("new"))
-	return &PasskeyAssertionCredentialExtensionInput{inner: raw.ASPasskeyAssertionCredentialExtensionInputFromID(_id)}
-}
-
-// LargeBlob calls the underlying LargeBlob.
-func (x *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	_r := x.inner.LargeBlob()
-	if _r == nil {
+// passkeyAssertionCredentialExtensionInputAdopt wraps an Objective-C object that this code just created as a
+// PasskeyAssertionCredentialExtensionInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyAssertionCredentialExtensionInputAdopt(id objc.ID) *PasskeyAssertionCredentialExtensionInput {
+	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: _r}
+	x := &PasskeyAssertionCredentialExtensionInput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasskeyAssertionCredentialExtensionInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyAssertionCredentialExtensionInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyAssertionCredentialExtensionInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyAssertionCredentialExtensionInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasskeyAssertionCredentialExtensionInput creates a new PasskeyAssertionCredentialExtensionInput.
+func NewPasskeyAssertionCredentialExtensionInput() *PasskeyAssertionCredentialExtensionInput {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredentialExtensionInput")), objc.RegisterName("new"))
+	return passkeyAssertionCredentialExtensionInputAdopt(_id)
+}
+
+// LargeBlob wraps the corresponding Objective-C method.
+func (x *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)
 }
 
 // PasskeyAssertionCredentialExtensionInputable is the interface implemented by [PasskeyAssertionCredentialExtensionInput], for mocking and DI.
 type PasskeyAssertionCredentialExtensionInputable interface {
-	Unwrap() *raw.ASPasskeyAssertionCredentialExtensionInput
+	obj.Object
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
 }
 

@@ -5,87 +5,104 @@
 package videotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes frame-level optical flow parameters.
+// OpticalFlowParameters is an idiomatic wrapper over the Objective-C class VTOpticalFlowParameters.
 //
-// OpticalFlowParameters wraps [raw.VTOpticalFlowParameters] with a fluent Go API.
+// An object that describes frame-level optical flow parameters.
 type OpticalFlowParameters struct {
-	inner *raw.VTOpticalFlowParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTOpticalFlowParameters].
-func (x *OpticalFlowParameters) Unwrap() *raw.VTOpticalFlowParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OpticalFlowParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// OpticalFlowParametersFromID adopts an existing object pointer as a OpticalFlowParameters (nil for 0).
+// OpticalFlowParametersFromID adopts an existing Objective-C object as a OpticalFlowParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func OpticalFlowParametersFromID(id objc.ID) *OpticalFlowParameters {
 	if id == 0 {
 		return nil
 	}
-	return &OpticalFlowParameters{inner: raw.VTOpticalFlowParametersFromID(id)}
+	x := &OpticalFlowParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
-//
-// NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new [OpticalFlowParameters].
-func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, submissionMode VTOpticalFlowParametersSubmissionMode, destinationOpticalFlow *raw.VTFrameProcessorOpticalFlow) *OpticalFlowParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTOpticalFlowParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:"), sourceFrame.Ptr(), nextFrame.Ptr(), raw.VTOpticalFlowParametersSubmissionMode(submissionMode), destinationOpticalFlow.Ptr())
-	return &OpticalFlowParameters{inner: raw.VTOpticalFlowParametersFromID(_id)}
+// opticalFlowParametersAdopt wraps an Objective-C object that this code just created as a
+// OpticalFlowParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func opticalFlowParametersAdopt(id objc.ID) *OpticalFlowParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &OpticalFlowParameters{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Current source frame, which must be non `nil`.
-//
-// SourceFrame calls the underlying SourceFrame.
+// Description returns the object's -description text.
+func (x *OpticalFlowParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OpticalFlowParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OpticalFlowParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OpticalFlowParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
+func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *FrameProcessorFrame, nextFrame *FrameProcessorFrame, submissionMode OpticalFlowParametersSubmissionMode, destinationOpticalFlow *FrameProcessorOpticalFlow) *OpticalFlowParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTOpticalFlowParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:"), objref.IDOf(sourceFrame), objref.IDOf(nextFrame), submissionMode, objref.IDOf(destinationOpticalFlow))
+	return opticalFlowParametersAdopt(_id)
+}
+
+// SourceFrame current source frame, which must be non `nil`.
 func (x *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
-	_r := x.inner.SourceFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
-// The next source frame in presentation time order.
-//
-// NextFrame calls the underlying NextFrame.
+// NextFrame the next source frame in presentation time order.
 func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
-	_r := x.inner.NextFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
-// Ordering of the input frames in this submission relative to the previous submission.
-//
-// SubmissionMode calls the underlying SubmissionMode.
-func (x *OpticalFlowParameters) SubmissionMode() VTOpticalFlowParametersSubmissionMode {
-	return VTOpticalFlowParametersSubmissionMode(x.inner.SubmissionMode())
+// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
+func (x *OpticalFlowParameters) SubmissionMode() OpticalFlowParametersSubmissionMode {
+	_r := objc.Send[OpticalFlowParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
+	return _r
 }
 
-// Output optical flow calculated by the processor.
-//
-// DestinationOpticalFlow calls the underlying DestinationOpticalFlow.
+// DestinationOpticalFlow output optical flow calculated by the processor.
 func (x *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
-	_r := x.inner.DestinationOpticalFlow()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorOpticalFlow{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationOpticalFlow"))
+	return FrameProcessorOpticalFlowFromID(_r)
 }
 
 // OpticalFlowParametersable is the interface implemented by [OpticalFlowParameters], for mocking and DI.
 type OpticalFlowParametersable interface {
-	Unwrap() *raw.VTOpticalFlowParameters
+	obj.Object
 	SourceFrame() *FrameProcessorFrame
 	NextFrame() *FrameProcessorFrame
-	SubmissionMode() VTOpticalFlowParametersSubmissionMode
+	SubmissionMode() OpticalFlowParametersSubmissionMode
 	DestinationOpticalFlow() *FrameProcessorOpticalFlow
 }
 

@@ -5,199 +5,177 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optional search-and-replace find interface inside a view, usually a scroll view.
+// TextFinder is an idiomatic wrapper over the Objective-C class NSTextFinder.
 //
-// TextFinder wraps [raw.NSTextFinder] with a fluent Go API.
+// An optional search-and-replace find interface inside a view, usually a scroll view.
 type TextFinder struct {
-	inner *raw.NSTextFinder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextFinder].
-func (x *TextFinder) Unwrap() *raw.NSTextFinder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextFinder) ID() objc.ID { return x.inner.Ptr() }
-
-// TextFinderFromID adopts an existing object pointer as a TextFinder (nil for 0).
+// TextFinderFromID adopts an existing Objective-C object as a TextFinder
+// (nil for 0), retaining it and registering a release finalizer.
 func TextFinderFromID(id objc.ID) *TextFinder {
 	if id == 0 {
 		return nil
 	}
-	return &TextFinder{inner: raw.NSTextFinderFromID(id)}
-}
-
-// NewTextFinder creates a new [TextFinder].
-func NewTextFinder() *TextFinder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextFinder")), objc.RegisterName("new"))
-	return &TextFinder{inner: raw.NSTextFinderFromID(_id)}
-}
-
-// NewTextFinderWithCoder creates a new [TextFinder].
-func NewTextFinderWithCoder(coder *foundation.NSCoder) *TextFinder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextFinder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &TextFinder{inner: raw.NSTextFinderFromID(_id)}
-}
-
-// The object that provides the target search string, find bar location, and feedback methods.
-//
-// WithClient sets the client property and returns the receiver for chaining.
-func (x *TextFinder) WithClient(client raw.NSTextFinderClient) *TextFinder {
-	x.inner.SetClient(client)
+	x := &TextFinder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Specifies the find bar container.
-//
-// WithFindBarContainer sets the findBarContainer property and returns the receiver for chaining.
-func (x *TextFinder) WithFindBarContainer(findBarContainer raw.NSTextFinderBarContainer) *TextFinder {
-	x.inner.SetFindBarContainer(findBarContainer)
-	return x
-}
-
-// Invoke to specify that the find indicator needs updating when not contained within a scroll view.
-//
-// WithFindIndicatorNeedsUpdate sets the findIndicatorNeedsUpdate property and returns the receiver for chaining.
-func (x *TextFinder) WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder {
-	x.inner.SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate)
-	return x
-}
-
-// Determines if incremental searching is enabled.
-//
-// WithIncrementalSearchingEnabled sets the incrementalSearchingEnabled property and returns the receiver for chaining.
-func (x *TextFinder) WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder {
-	x.inner.SetIncrementalSearchingEnabled(incrementalSearchingEnabled)
-	return x
-}
-
-// Determines the type of incremental search feedback to be presented
-//
-// WithIncrementalSearchingShouldDimContentView sets the incrementalSearchingShouldDimContentView property and returns the receiver for chaining.
-func (x *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder {
-	x.inner.SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView)
-	return x
-}
-
-// Performs the specified text finding action.
-//
-// PerformAction calls the underlying PerformAction.
-func (x *TextFinder) PerformAction(op NSTextFinderAction) {
-	x.inner.PerformAction(raw.NSTextFinderAction(op))
-}
-
-// Allows validation of the find action before performing.
-//
-// ValidateAction calls the underlying ValidateAction.
-func (x *TextFinder) ValidateAction(op NSTextFinderAction) bool {
-	return x.inner.ValidateAction(raw.NSTextFinderAction(op))
-}
-
-// Cancels the find indicator immediately.
-//
-// CancelFindIndicator calls the underlying CancelFindIndicator.
-func (x *TextFinder) CancelFindIndicator() {
-	x.inner.CancelFindIndicator()
-}
-
-// Invoke this method when the searched content will change.
-//
-// NoteClientStringWillChange calls the underlying NoteClientStringWillChange.
-func (x *TextFinder) NoteClientStringWillChange() {
-	x.inner.NoteClientStringWillChange()
-}
-
-// Client calls the underlying Client.
-func (x *TextFinder) Client() raw.NSTextFinderClient {
-	return x.inner.Client()
-}
-
-// SetClient calls the underlying SetClient.
-func (x *TextFinder) SetClient(client raw.NSTextFinderClient) {
-	x.inner.SetClient(client)
-}
-
-// FindBarContainer calls the underlying FindBarContainer.
-func (x *TextFinder) FindBarContainer() raw.NSTextFinderBarContainer {
-	return x.inner.FindBarContainer()
-}
-
-// SetFindBarContainer calls the underlying SetFindBarContainer.
-func (x *TextFinder) SetFindBarContainer(findBarContainer raw.NSTextFinderBarContainer) {
-	x.inner.SetFindBarContainer(findBarContainer)
-}
-
-// FindIndicatorNeedsUpdate calls the underlying FindIndicatorNeedsUpdate.
-func (x *TextFinder) FindIndicatorNeedsUpdate() bool {
-	return x.inner.FindIndicatorNeedsUpdate()
-}
-
-// SetFindIndicatorNeedsUpdate calls the underlying SetFindIndicatorNeedsUpdate.
-func (x *TextFinder) SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) {
-	x.inner.SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate)
-}
-
-// IsIncrementalSearchingEnabled calls the underlying IsIncrementalSearchingEnabled.
-func (x *TextFinder) IsIncrementalSearchingEnabled() bool {
-	return x.inner.IsIncrementalSearchingEnabled()
-}
-
-// SetIncrementalSearchingEnabled calls the underlying SetIncrementalSearchingEnabled.
-func (x *TextFinder) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool) {
-	x.inner.SetIncrementalSearchingEnabled(incrementalSearchingEnabled)
-}
-
-// IncrementalSearchingShouldDimContentView calls the underlying IncrementalSearchingShouldDimContentView.
-func (x *TextFinder) IncrementalSearchingShouldDimContentView() bool {
-	return x.inner.IncrementalSearchingShouldDimContentView()
-}
-
-// SetIncrementalSearchingShouldDimContentView calls the underlying SetIncrementalSearchingShouldDimContentView.
-func (x *TextFinder) SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) {
-	x.inner.SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView)
-}
-
-// IncrementalMatchRanges returns the collection as a Go slice.
-func (x *TextFinder) IncrementalMatchRanges() []*foundation.NSValue {
-	arr := x.inner.IncrementalMatchRanges()
-	if arr == nil {
+// textFinderAdopt wraps an Objective-C object that this code just created as a
+// TextFinder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textFinderAdopt(id objc.ID) *TextFinder {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+	x := &TextFinder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextFinder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextFinder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextFinder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextFinder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextFinder creates a new TextFinder.
+func NewTextFinder() *TextFinder {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTextFinder")), objc.RegisterName("new"))
+	return textFinderAdopt(_id)
+}
+
+// NewTextFinderWithCoder creates a new TextFinder.
+func NewTextFinderWithCoder(coder obj.Object) *TextFinder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextFinder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return textFinderAdopt(_id)
+}
+
+// WithFindIndicatorNeedsUpdate invoke to specify that the find indicator needs updating when not contained within a scroll view.
+func (x *TextFinder) WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFindIndicatorNeedsUpdate:"), findIndicatorNeedsUpdate)
+	return x
+}
+
+// WithIncrementalSearchingEnabled determines if incremental searching is enabled.
+func (x *TextFinder) WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingEnabled:"), incrementalSearchingEnabled)
+	return x
+}
+
+// WithIncrementalSearchingShouldDimContentView determines the type of incremental search feedback to be presented
+func (x *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingShouldDimContentView:"), incrementalSearchingShouldDimContentView)
+	return x
+}
+
+// PerformAction performs the specified text finding action.
+func (x *TextFinder) PerformAction(op TextFinderAction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAction:"), op)
+}
+
+// ValidateAction allows validation of the find action before performing.
+func (x *TextFinder) ValidateAction(op TextFinderAction) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateAction:"), op)
+	return _r
+}
+
+// CancelFindIndicator cancels the find indicator immediately.
+func (x *TextFinder) CancelFindIndicator() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelFindIndicator"))
+}
+
+// NoteClientStringWillChange invoke this method when the searched content will change.
+func (x *TextFinder) NoteClientStringWillChange() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteClientStringWillChange"))
+}
+
+// FindIndicatorNeedsUpdate wraps the corresponding Objective-C method.
+func (x *TextFinder) FindIndicatorNeedsUpdate() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("findIndicatorNeedsUpdate"))
+	return _r
+}
+
+// SetFindIndicatorNeedsUpdate wraps the corresponding Objective-C method.
+func (x *TextFinder) SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFindIndicatorNeedsUpdate:"), findIndicatorNeedsUpdate)
+}
+
+// IsIncrementalSearchingEnabled wraps the corresponding Objective-C method.
+func (x *TextFinder) IsIncrementalSearchingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncrementalSearchingEnabled"))
+	return _r
+}
+
+// SetIncrementalSearchingEnabled wraps the corresponding Objective-C method.
+func (x *TextFinder) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingEnabled:"), incrementalSearchingEnabled)
+}
+
+// IncrementalSearchingShouldDimContentView wraps the corresponding Objective-C method.
+func (x *TextFinder) IncrementalSearchingShouldDimContentView() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("incrementalSearchingShouldDimContentView"))
+	return _r
+}
+
+// SetIncrementalSearchingShouldDimContentView wraps the corresponding Objective-C method.
+func (x *TextFinder) SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrementalSearchingShouldDimContentView:"), incrementalSearchingShouldDimContentView)
+}
+
+// IncrementalMatchRanges wraps the corresponding Objective-C method.
+//
+// IncrementalMatchRanges returns the collection as a Go slice.
+func (x *TextFinder) IncrementalMatchRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("incrementalMatchRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TextFinderable is the interface implemented by [TextFinder], for mocking and DI.
 type TextFinderable interface {
-	Unwrap() *raw.NSTextFinder
-	WithClient(client raw.NSTextFinderClient) *TextFinder
-	WithFindBarContainer(findBarContainer raw.NSTextFinderBarContainer) *TextFinder
+	obj.Object
 	WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder
 	WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder
 	WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder
-	PerformAction(op NSTextFinderAction)
-	ValidateAction(op NSTextFinderAction) bool
+	PerformAction(op TextFinderAction)
+	ValidateAction(op TextFinderAction) bool
 	CancelFindIndicator()
 	NoteClientStringWillChange()
-	Client() raw.NSTextFinderClient
-	SetClient(client raw.NSTextFinderClient)
-	FindBarContainer() raw.NSTextFinderBarContainer
-	SetFindBarContainer(findBarContainer raw.NSTextFinderBarContainer)
 	FindIndicatorNeedsUpdate() bool
 	SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool)
 	IsIncrementalSearchingEnabled() bool
 	SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool)
 	IncrementalSearchingShouldDimContentView() bool
 	SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool)
-	IncrementalMatchRanges() []*foundation.NSValue
+	IncrementalMatchRanges() []obj.Object
 }
 
 var _ TextFinderable = (*TextFinder)(nil)

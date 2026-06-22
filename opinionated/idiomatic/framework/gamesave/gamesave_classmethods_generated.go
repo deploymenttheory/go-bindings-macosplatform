@@ -5,15 +5,12 @@
 package gamesave
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamesave"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// OpenDirectoryForContainerIdentifier calls the underlying GSSyncedDirectoryOpenDirectoryForContainerIdentifier.
+// OpenDirectoryForContainerIdentifier requests an instance of the game-save directory.
 func OpenDirectoryForContainerIdentifier(containerIdentifier string) *SyncedDirectory {
-	_r := raw.GSSyncedDirectoryOpenDirectoryForContainerIdentifier(foundation.NSStringStringWithUTF8String(containerIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &SyncedDirectory{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectory")), objc.RegisterName("openDirectoryForContainerIdentifier:"), purego.NSString(containerIdentifier))
+	return SyncedDirectoryFromID(_r)
 }

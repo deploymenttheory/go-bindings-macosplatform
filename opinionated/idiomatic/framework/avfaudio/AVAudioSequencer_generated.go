@@ -5,278 +5,290 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that plays audio from a collection of MIDI events the system organizes into music tracks.
+// AudioSequencer is an idiomatic wrapper over the Objective-C class AVAudioSequencer.
 //
-// AudioSequencer wraps [raw.AVAudioSequencer] with a fluent Go API.
+// An object that plays audio from a collection of MIDI events the system organizes into music tracks.
 type AudioSequencer struct {
-	inner *raw.AVAudioSequencer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioSequencer].
-func (x *AudioSequencer) Unwrap() *raw.AVAudioSequencer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioSequencer) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioSequencerFromID adopts an existing object pointer as a AudioSequencer (nil for 0).
+// AudioSequencerFromID adopts an existing Objective-C object as a AudioSequencer
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioSequencerFromID(id objc.ID) *AudioSequencer {
 	if id == 0 {
 		return nil
 	}
-	return &AudioSequencer{inner: raw.AVAudioSequencerFromID(id)}
-}
-
-// NewAudioSequencer creates a new [AudioSequencer].
-func NewAudioSequencer() *AudioSequencer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSequencer")), objc.RegisterName("new"))
-	return &AudioSequencer{inner: raw.AVAudioSequencerFromID(_id)}
-}
-
-// Creates an audio sequencer that the framework attaches to an audio engine instance.
-//
-// NewAudioSequencerWithAudioEngine creates a new [AudioSequencer].
-func NewAudioSequencerWithAudioEngine(engine *raw.AVAudioEngine) *AudioSequencer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSequencer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioEngine:"), engine.Ptr())
-	return &AudioSequencer{inner: raw.AVAudioSequencerFromID(_id)}
-}
-
-// The current playback position, in seconds.
-//
-// WithCurrentPositionInSeconds sets the currentPositionInSeconds property and returns the receiver for chaining.
-func (x *AudioSequencer) WithCurrentPositionInSeconds(currentPositionInSeconds float64) *AudioSequencer {
-	x.inner.SetCurrentPositionInSeconds(currentPositionInSeconds)
+	x := &AudioSequencer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The current playback position, in beats.
-//
-// WithCurrentPositionInBeats sets the currentPositionInBeats property and returns the receiver for chaining.
-func (x *AudioSequencer) WithCurrentPositionInBeats(currentPositionInBeats float64) *AudioSequencer {
-	x.inner.SetCurrentPositionInBeats(currentPositionInBeats)
-	return x
-}
-
-// The playback rate of the sequencer’s player.
-//
-// WithRate sets the rate property and returns the receiver for chaining.
-func (x *AudioSequencer) WithRate(rate float32) *AudioSequencer {
-	x.inner.SetRate(rate)
-	return x
-}
-
-// Loads the file the URL references and adds the events to the sequence.
-//
-// LoadFromURLOptionsError calls the underlying LoadFromURLOptionsError.
-func (x *AudioSequencer) LoadFromURLOptionsError(fileURL string, options AVMusicSequenceLoadOptions) (bool, error) {
-	return x.inner.LoadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), raw.AVMusicSequenceLoadOptions(options))
-}
-
-// Parses the data and adds its events to the sequence.
-//
-// LoadFromDataOptionsError calls the underlying LoadFromDataOptionsError.
-func (x *AudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, options AVMusicSequenceLoadOptions) (bool, error) {
-	return x.inner.LoadFromDataOptionsError(data, raw.AVMusicSequenceLoadOptions(options))
-}
-
-// Creates and writes a MIDI file from the events in the sequence.
-//
-// WriteToURLSMPTEResolutionReplaceExistingError calls the underlying WriteToURLSMPTEResolutionReplaceExistingError.
-func (x *AudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL string, resolution int, replace bool) (bool, error) {
-	return x.inner.WriteToURLSMPTEResolutionReplaceExistingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), resolution, replace)
-}
-
-// Gets a data object that contains the events from the sequence.
-//
-// DataWithSMPTEResolutionError calls the underlying DataWithSMPTEResolutionError.
-func (x *AudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error) {
-	return x.inner.DataWithSMPTEResolutionError(sMPTEResolution)
-}
-
-// Gets the time for the specified beat position (timestamp) in the track, in seconds.
-//
-// SecondsForBeats calls the underlying SecondsForBeats.
-func (x *AudioSequencer) SecondsForBeats(beats float64) float64 {
-	return x.inner.SecondsForBeats(beats)
-}
-
-// Gets the beat position (timestamp) for the specified time in the track.
-//
-// BeatsForSeconds calls the underlying BeatsForSeconds.
-func (x *AudioSequencer) BeatsForSeconds(seconds float64) float64 {
-	return x.inner.BeatsForSeconds(seconds)
-}
-
-// Reverses the order of all events in all music tracks, including the tempo track.
-//
-// ReverseEvents calls the underlying ReverseEvents.
-func (x *AudioSequencer) ReverseEvents() {
-	x.inner.ReverseEvents()
-}
-
-// Creates a new music track and appends it to the sequencer’s list.
-//
-// CreateAndAppendTrack calls the underlying CreateAndAppendTrack.
-func (x *AudioSequencer) CreateAndAppendTrack() *MusicTrack {
-	_r := x.inner.CreateAndAppendTrack()
-	if _r == nil {
+// audioSequencerAdopt wraps an Objective-C object that this code just created as a
+// AudioSequencer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioSequencerAdopt(id objc.ID) *AudioSequencer {
+	if id == 0 {
 		return nil
 	}
-	return &MusicTrack{inner: _r}
+	x := &AudioSequencer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Removes the music track from the sequencer.
-//
-// RemoveTrack calls the underlying RemoveTrack.
-func (x *AudioSequencer) RemoveTrack(track *raw.AVMusicTrack) bool {
-	return x.inner.RemoveTrack(track)
+// Description returns the object's -description text.
+func (x *AudioSequencer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Adds a callback that the sequencer calls each time it encounters a user event during playback.
-//
-// SetUserCallback calls the underlying SetUserCallback.
-func (x *AudioSequencer) SetUserCallback(userCallback func(*raw.AVMusicTrack, *foundation.NSData, float64)) {
-	x.inner.SetUserCallback(userCallback)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioSequencer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property tracks @abstract An NSArray containing all the AVMusicTracks in the sequence @discussion This list will not include the tempo track.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioSequencer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioSequencer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioSequencer creates a new AudioSequencer.
+func NewAudioSequencer() *AudioSequencer {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSequencer")), objc.RegisterName("new"))
+	return audioSequencerAdopt(_id)
+}
+
+// NewAudioSequencerWithAudioEngine creates an audio sequencer that the framework attaches to an audio engine instance.
+func NewAudioSequencerWithAudioEngine(engine *AudioEngine) *AudioSequencer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioSequencer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioEngine:"), objref.IDOf(engine))
+	return audioSequencerAdopt(_id)
+}
+
+// WithCurrentPositionInSeconds the current playback position, in seconds.
+func (x *AudioSequencer) WithCurrentPositionInSeconds(currentPositionInSeconds float64) *AudioSequencer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPositionInSeconds:"), currentPositionInSeconds)
+	return x
+}
+
+// WithCurrentPositionInBeats the current playback position, in beats.
+func (x *AudioSequencer) WithCurrentPositionInBeats(currentPositionInBeats float64) *AudioSequencer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPositionInBeats:"), currentPositionInBeats)
+	return x
+}
+
+// WithRate the playback rate of the sequencer’s player.
+func (x *AudioSequencer) WithRate(rate float32) *AudioSequencer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
+	return x
+}
+
+// LoadFromURLOptions loads the file the URL references and adds the events to the sequence.
+func (x *AudioSequencer) LoadFromURLOptions(fileURL string, options MusicSequenceLoadOptions) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadFromURL:options:error:"), rt.FileURL(fileURL), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// LoadFromDataOptions parses the data and adds its events to the sequence.
+func (x *AudioSequencer) LoadFromDataOptions(data obj.Object, options MusicSequenceLoadOptions) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadFromData:options:error:"), objref.IDOf(data), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// WriteToURLSMPTEResolutionReplaceExisting creates and writes a MIDI file from the events in the sequence.
+func (x *AudioSequencer) WriteToURLSMPTEResolutionReplaceExisting(fileURL string, resolution int, replace bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:SMPTEResolution:replaceExisting:error:"), rt.FileURL(fileURL), resolution, replace, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// DataWithSMPTEResolutionError gets a data object that contains the events from the sequence.
+func (x *AudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataWithSMPTEResolution:error:"), sMPTEResolution, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
+}
+
+// SecondsForBeats gets the time for the specified beat position (timestamp) in the track, in seconds.
+func (x *AudioSequencer) SecondsForBeats(beats float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("secondsForBeats:"), beats)
+	return _r
+}
+
+// BeatsForSeconds gets the beat position (timestamp) for the specified time in the track.
+func (x *AudioSequencer) BeatsForSeconds(seconds float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beatsForSeconds:"), seconds)
+	return _r
+}
+
+// ReverseEvents reverses the order of all events in all music tracks, including the tempo track.
+func (x *AudioSequencer) ReverseEvents() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseEvents"))
+}
+
+// CreateAndAppendTrack creates a new music track and appends it to the sequencer’s list.
+func (x *AudioSequencer) CreateAndAppendTrack() *MusicTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createAndAppendTrack"))
+	return MusicTrackFromID(_r)
+}
+
+// RemoveTrack removes the music track from the sequencer.
+func (x *AudioSequencer) RemoveTrack(track *MusicTrack) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeTrack:"), objref.IDOf(track))
+	return _r
+}
+
+// Tracks an NSArray containing all the AVMusicTracks in the sequence This list will not include the tempo track.
 //
 // Tracks returns the collection as a Go slice.
 func (x *AudioSequencer) Tracks() []*MusicTrack {
-	arr := x.inner.Tracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MusicTrack {
-		return &MusicTrack{inner: raw.AVMusicTrackFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MusicTrack { return MusicTrackFromID(_id) })
 }
 
-// @property tempoTrack @abstract The tempo track @discussion Each AVMusicSequence has a single tempo track. All tempo events read from external MIDI files are placed into this track (as well as other appropriate events (e.g., the time signature meta event from the file). The tempo track can be edited and iterated upon as any other track. Non-tempo-related events will generate exceptions if added.
-//
-// TempoTrack calls the underlying TempoTrack.
+// TempoTrack the tempo track Each AVMusicSequence has a single tempo track. All tempo events read from external MIDI files are placed into this track (as well as other appropriate events (e.g., the time signature meta event from the file). The tempo track can be edited and iterated upon as any other track. Non-tempo-related events will generate exceptions if added.
 func (x *AudioSequencer) TempoTrack() *MusicTrack {
-	_r := x.inner.TempoTrack()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tempoTrack"))
+	return MusicTrackFromID(_r)
+}
+
+// UserInfo a dictionary containing meta-data derived from a sequence The dictionary can contain one or more of the values accessible via the AVAudioSequencerInfoDictionaryKeys.
+func (x *AudioSequencer) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
+}
+
+// HostTimeForBeatsError gets the host time the sequence plays at the specified position.
+func (x *AudioSequencer) HostTimeForBeatsError(inBeats float64) (result uint64, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTimeForBeats:error:"), inBeats, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MusicTrack{inner: _r}
+	return _r, nil
 }
 
-// @property userInfo @abstract A dictionary containing meta-data derived from a sequence @discussion The dictionary can contain one or more of the values accessible via the AVAudioSequencerInfoDictionaryKeys.
-//
-// UserInfo calls the underlying UserInfo.
-func (x *AudioSequencer) UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.UserInfo()
+// BeatsForHostTimeError gets the beat the system plays at the specified host time.
+func (x *AudioSequencer) BeatsForHostTimeError(inHostTime uint64) (result float64, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beatsForHostTime:error:"), inHostTime, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
 }
 
-// Gets the host time the sequence plays at the specified position.
-//
-// HostTimeForBeatsError calls the underlying HostTimeForBeatsError.
-func (x *AudioSequencer) HostTimeForBeatsError(inBeats float64) (uint64, error) {
-	return x.inner.HostTimeForBeatsError(inBeats)
-}
-
-// Gets the beat the system plays at the specified host time.
-//
-// BeatsForHostTimeError calls the underlying BeatsForHostTimeError.
-func (x *AudioSequencer) BeatsForHostTimeError(inHostTime uint64) (float64, error) {
-	return x.inner.BeatsForHostTimeError(inHostTime)
-}
-
-// Gets ready to play the sequence by prerolling all events.
-//
-// PrepareToPlay calls the underlying PrepareToPlay.
+// PrepareToPlay gets ready to play the sequence by prerolling all events.
 func (x *AudioSequencer) PrepareToPlay() {
-	x.inner.PrepareToPlay()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareToPlay"))
 }
 
-// Starts the sequencer’s player.
+// StartAndReturnError starts the sequencer’s player.
 //
-// StartAndReturnError returns any validation error.
+// StartAndReturnError returns an error if the operation did not succeed.
 func (x *AudioSequencer) StartAndReturnError() error {
-	_, err := x.inner.StartAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("startAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Stops the sequencer’s player.
-//
-// Stop calls the underlying Stop.
+// Stop stops the sequencer’s player.
 func (x *AudioSequencer) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// @property currentPositionInSeconds @abstract The current playback position in seconds @discussion Setting this positions the sequencer's player to the specified time.  This can be set while the player is playing, in which case playback will resume at the new position.
-//
-// CurrentPositionInSeconds calls the underlying CurrentPositionInSeconds.
+// CurrentPositionInSeconds the current playback position in seconds Setting this positions the sequencer's player to the specified time.  This can be set while the player is playing, in which case playback will resume at the new position.
 func (x *AudioSequencer) CurrentPositionInSeconds() float64 {
-	return x.inner.CurrentPositionInSeconds()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentPositionInSeconds"))
+	return _r
 }
 
-// SetCurrentPositionInSeconds calls the underlying SetCurrentPositionInSeconds.
+// SetCurrentPositionInSeconds wraps the corresponding Objective-C method.
 func (x *AudioSequencer) SetCurrentPositionInSeconds(currentPositionInSeconds float64) {
-	x.inner.SetCurrentPositionInSeconds(currentPositionInSeconds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPositionInSeconds:"), currentPositionInSeconds)
 }
 
-// @property currentPositionInBeats @abstract The current playback position in beats @discussion Setting this positions the sequencer's player to the specified beat.  This can be set while the player is playing, in which case playback will resume at the new position.
-//
-// CurrentPositionInBeats calls the underlying CurrentPositionInBeats.
+// CurrentPositionInBeats the current playback position in beats Setting this positions the sequencer's player to the specified beat.  This can be set while the player is playing, in which case playback will resume at the new position.
 func (x *AudioSequencer) CurrentPositionInBeats() float64 {
-	return x.inner.CurrentPositionInBeats()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentPositionInBeats"))
+	return _r
 }
 
-// SetCurrentPositionInBeats calls the underlying SetCurrentPositionInBeats.
+// SetCurrentPositionInBeats wraps the corresponding Objective-C method.
 func (x *AudioSequencer) SetCurrentPositionInBeats(currentPositionInBeats float64) {
-	x.inner.SetCurrentPositionInBeats(currentPositionInBeats)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPositionInBeats:"), currentPositionInBeats)
 }
 
-// @property playing @abstract Indicates whether or not the sequencer's player is playing @discussion Returns TRUE if the sequencer's player has been started and not stopped. It may have "played" past the end of the events in the sequence, but it is still considered to be playing (and its time value increasing) until it is explicitly stopped.
-//
-// IsPlaying calls the underlying IsPlaying.
+// IsPlaying indicates whether or not the sequencer's player is playing Returns TRUE if the sequencer's player has been started and not stopped. It may have "played" past the end of the events in the sequence, but it is still considered to be playing (and its time value increasing) until it is explicitly stopped.
 func (x *AudioSequencer) IsPlaying() bool {
-	return x.inner.IsPlaying()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
+	return _r
 }
 
-// @property rate @abstract The playback rate of the sequencer's player @discussion 1.0 is normal playback rate.  Rate must be > 0.0.
-//
-// Rate calls the underlying Rate.
+// Rate the playback rate of the sequencer's player 1.0 is normal playback rate.  Rate must be > 0.0.
 func (x *AudioSequencer) Rate() float32 {
-	return x.inner.Rate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// SetRate calls the underlying SetRate.
+// SetRate wraps the corresponding Objective-C method.
 func (x *AudioSequencer) SetRate(rate float32) {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
 // AudioSequencerable is the interface implemented by [AudioSequencer], for mocking and DI.
 type AudioSequencerable interface {
-	Unwrap() *raw.AVAudioSequencer
+	obj.Object
 	WithCurrentPositionInSeconds(currentPositionInSeconds float64) *AudioSequencer
 	WithCurrentPositionInBeats(currentPositionInBeats float64) *AudioSequencer
 	WithRate(rate float32) *AudioSequencer
-	LoadFromURLOptionsError(fileURL string, options AVMusicSequenceLoadOptions) (bool, error)
-	LoadFromDataOptionsError(data *foundation.NSData, options AVMusicSequenceLoadOptions) (bool, error)
-	WriteToURLSMPTEResolutionReplaceExistingError(fileURL string, resolution int, replace bool) (bool, error)
-	DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error)
+	LoadFromURLOptions(fileURL string, options MusicSequenceLoadOptions) error
+	LoadFromDataOptions(data obj.Object, options MusicSequenceLoadOptions) error
+	WriteToURLSMPTEResolutionReplaceExisting(fileURL string, resolution int, replace bool) error
+	DataWithSMPTEResolutionError(sMPTEResolution int) (result obj.Object, err error)
 	SecondsForBeats(beats float64) float64
 	BeatsForSeconds(seconds float64) float64
 	ReverseEvents()
 	CreateAndAppendTrack() *MusicTrack
-	RemoveTrack(track *raw.AVMusicTrack) bool
-	SetUserCallback(userCallback func(*raw.AVMusicTrack, *foundation.NSData, float64))
+	RemoveTrack(track *MusicTrack) bool
 	Tracks() []*MusicTrack
 	TempoTrack() *MusicTrack
-	UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	HostTimeForBeatsError(inBeats float64) (uint64, error)
-	BeatsForHostTimeError(inHostTime uint64) (float64, error)
+	UserInfo() obj.Object
+	HostTimeForBeatsError(inBeats float64) (result uint64, err error)
+	BeatsForHostTimeError(inHostTime uint64) (result float64, err error)
 	PrepareToPlay()
 	StartAndReturnError() error
 	Stop()

@@ -5,118 +5,81 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// INIntentErrorDomain returns the string constant INIntentErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func INIntentErrorDomain() objc.ID {
-	return purego.CFConstant(raw.INIntentErrorDomain())
+// INIntentErrorDomain returns the string constant INIntentErrorDomain, for use as a dictionary key or argument.
+func INIntentErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INIntentErrorDomain")))
 }
 
-// INAnswerCallIntentIdentifier returns the string constant INAnswerCallIntentIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func INAnswerCallIntentIdentifier() objc.ID {
-	return purego.CFConstant(raw.INAnswerCallIntentIdentifier())
+// INAnswerCallIntentIdentifier returns the string constant INAnswerCallIntentIdentifier, for use as a dictionary key or argument.
+func INAnswerCallIntentIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INAnswerCallIntentIdentifier")))
 }
 
-// INHangUpCallIntentIdentifier returns the string constant INHangUpCallIntentIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func INHangUpCallIntentIdentifier() objc.ID {
-	return purego.CFConstant(raw.INHangUpCallIntentIdentifier())
+// INHangUpCallIntentIdentifier returns the string constant INHangUpCallIntentIdentifier, for use as a dictionary key or argument.
+func INHangUpCallIntentIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INHangUpCallIntentIdentifier")))
 }
 
-// INPersonHandleLabelHome returns the string constant INPersonHandleLabelHome as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelHome() objc.ID {
-	if _r := raw.INPersonHandleLabelHome(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelHome returns the string constant INPersonHandleLabelHome, for use as a dictionary key or argument.
+func INPersonHandleLabelHome() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelHome")))
 }
 
-// INPersonHandleLabelWork returns the string constant INPersonHandleLabelWork as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelWork() objc.ID {
-	if _r := raw.INPersonHandleLabelWork(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelWork returns the string constant INPersonHandleLabelWork, for use as a dictionary key or argument.
+func INPersonHandleLabelWork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelWork")))
 }
 
-// INPersonHandleLabeliPhone returns the string constant INPersonHandleLabeliPhone as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabeliPhone() objc.ID {
-	if _r := raw.INPersonHandleLabeliPhone(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabeliPhone returns the string constant INPersonHandleLabeliPhone, for use as a dictionary key or argument.
+func INPersonHandleLabeliPhone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabeliPhone")))
 }
 
-// INPersonHandleLabelMobile returns the string constant INPersonHandleLabelMobile as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelMobile() objc.ID {
-	if _r := raw.INPersonHandleLabelMobile(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelMobile returns the string constant INPersonHandleLabelMobile, for use as a dictionary key or argument.
+func INPersonHandleLabelMobile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelMobile")))
 }
 
-// INPersonHandleLabelMain returns the string constant INPersonHandleLabelMain as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelMain() objc.ID {
-	if _r := raw.INPersonHandleLabelMain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelMain returns the string constant INPersonHandleLabelMain, for use as a dictionary key or argument.
+func INPersonHandleLabelMain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelMain")))
 }
 
-// INPersonHandleLabelHomeFax returns the string constant INPersonHandleLabelHomeFax as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelHomeFax() objc.ID {
-	if _r := raw.INPersonHandleLabelHomeFax(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelHomeFax returns the string constant INPersonHandleLabelHomeFax, for use as a dictionary key or argument.
+func INPersonHandleLabelHomeFax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelHomeFax")))
 }
 
-// INPersonHandleLabelWorkFax returns the string constant INPersonHandleLabelWorkFax as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelWorkFax() objc.ID {
-	if _r := raw.INPersonHandleLabelWorkFax(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelWorkFax returns the string constant INPersonHandleLabelWorkFax, for use as a dictionary key or argument.
+func INPersonHandleLabelWorkFax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelWorkFax")))
 }
 
-// INPersonHandleLabelPager returns the string constant INPersonHandleLabelPager as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelPager() objc.ID {
-	if _r := raw.INPersonHandleLabelPager(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelPager returns the string constant INPersonHandleLabelPager, for use as a dictionary key or argument.
+func INPersonHandleLabelPager() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelPager")))
 }
 
-// INPersonHandleLabelOther returns the string constant INPersonHandleLabelOther as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelOther() objc.ID {
-	if _r := raw.INPersonHandleLabelOther(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelOther returns the string constant INPersonHandleLabelOther, for use as a dictionary key or argument.
+func INPersonHandleLabelOther() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelOther")))
 }
 
-// INPersonHandleLabelSchool returns the string constant INPersonHandleLabelSchool as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonHandleLabelSchool() objc.ID {
-	if _r := raw.INPersonHandleLabelSchool(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonHandleLabelSchool returns the string constant INPersonHandleLabelSchool, for use as a dictionary key or argument.
+func INPersonHandleLabelSchool() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonHandleLabelSchool")))
 }
 
-// INPersonRelationshipSon returns the string constant INPersonRelationshipSon as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonRelationshipSon() objc.ID {
-	if _r := raw.INPersonRelationshipSon(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonRelationshipSon returns the string constant INPersonRelationshipSon, for use as a dictionary key or argument.
+func INPersonRelationshipSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonRelationshipSon")))
 }
 
-// INPersonRelationshipDaughter returns the string constant INPersonRelationshipDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func INPersonRelationshipDaughter() objc.ID {
-	if _r := raw.INPersonRelationshipDaughter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// INPersonRelationshipDaughter returns the string constant INPersonRelationshipDaughter, for use as a dictionary key or argument.
+func INPersonRelationshipDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("INPersonRelationshipDaughter")))
 }

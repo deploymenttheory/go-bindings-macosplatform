@@ -5,98 +5,87 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
+// ObjectTracker is an idiomatic wrapper over the Objective-C class CNObjectTracker.
 //
-// ObjectTracker wraps [raw.CNObjectTracker] with a fluent Go API.
+// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
 type ObjectTracker struct {
-	inner *raw.CNObjectTracker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNObjectTracker].
-func (x *ObjectTracker) Unwrap() *raw.CNObjectTracker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectTracker) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectTrackerFromID adopts an existing object pointer as a ObjectTracker (nil for 0).
+// ObjectTrackerFromID adopts an existing Objective-C object as a ObjectTracker
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectTrackerFromID(id objc.ID) *ObjectTracker {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectTracker{inner: raw.CNObjectTrackerFromID(id)}
+	x := &ObjectTracker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Create a new detection track builder. - Parameters: - commandQueue: the command queue of a metal device to which commands should be submitted to perform work
-//
-// NewObjectTrackerWithCommandQueue creates a new [ObjectTracker].
-func NewObjectTrackerWithCommandQueue(commandQueue metal.MTLCommandQueue) *ObjectTracker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNObjectTracker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandQueue:"), commandQueue)
-	return &ObjectTracker{inner: raw.CNObjectTrackerFromID(_id)}
-}
-
-// Find the bounds of an object at the given point. Can be used to convert a normalized point in an image to a rectangle that can be used to start tracking. - Parameters: - point: location of object in image in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: pixel buffer containing the image - Returns: A prediction, which includes bounds that can be used to start tracking, or `nil` if no discernible object is detected.
-//
-// FindObjectAtPointSourceImage calls the underlying FindObjectAtPointSourceImage.
-func (x *ObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction {
-	_r := x.inner.FindObjectAtPointSourceImage(point, sourceImage)
-	if _r == nil {
+// objectTrackerAdopt wraps an Objective-C object that this code just created as a
+// ObjectTracker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectTrackerAdopt(id objc.ID) *ObjectTracker {
+	if id == 0 {
 		return nil
 	}
-	return &BoundsPrediction{inner: _r}
+	x := &ObjectTracker{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Start creating a detection track to track an object within the given bounds. - Parameters: - time: the presentation time of the first frame in the detection track - normalizedBounds: the bounds of the object to track in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: image buffer containing the image - sourceDisparity: disparity buffer containing depth information - Returns: whether the object can be tracked - Note: if the object can be tracked, a detection is added to the detection track being built
-//
-// StartTrackingAtWithinSourceImageSourceDisparity calls the underlying StartTrackingAtWithinSourceImageSourceDisparity.
-func (x *ObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool {
-	return x.inner.StartTrackingAtWithinSourceImageSourceDisparity(time_, normalizedBounds, sourceImage, sourceDisparity)
+// Description returns the object's -description text.
+func (x *ObjectTracker) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
-//
-// ContinueTrackingAtSourceImageSourceDisparity calls the underlying ContinueTrackingAtSourceImageSourceDisparity.
-func (x *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction {
-	_r := x.inner.ContinueTrackingAtSourceImageSourceDisparity(time_, sourceImage, sourceDisparity)
-	if _r == nil {
-		return nil
-	}
-	return &BoundsPrediction{inner: _r}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ObjectTracker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Finish constructing the detection track and return it. - Returns: a detection track which tracks the object
-//
-// FinishDetectionTrack calls the underlying FinishDetectionTrack.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ObjectTracker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectTracker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewObjectTracker creates a new ObjectTracker.
+func NewObjectTracker() *ObjectTracker {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNObjectTracker")), objc.RegisterName("new"))
+	return objectTrackerAdopt(_id)
+}
+
+// FinishDetectionTrack finish constructing the detection track and return it. - Returns: a detection track which tracks the object
 func (x *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
-	_r := x.inner.FinishDetectionTrack()
-	if _r == nil {
-		return nil
-	}
-	return &DetectionTrack{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishDetectionTrack"))
+	return DetectionTrackFromID(_r)
 }
 
-// Reset the builder to construct a new detection track.
-//
-// ResetDetectionTrack calls the underlying ResetDetectionTrack.
+// ResetDetectionTrack reset the builder to construct a new detection track.
 func (x *ObjectTracker) ResetDetectionTrack() {
-	x.inner.ResetDetectionTrack()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetDetectionTrack"))
 }
 
 // ObjectTrackerable is the interface implemented by [ObjectTracker], for mocking and DI.
 type ObjectTrackerable interface {
-	Unwrap() *raw.CNObjectTracker
-	FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction
-	StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool
-	ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction
+	obj.Object
 	FinishDetectionTrack() *DetectionTrack
 	ResetDetectionTrack()
 }

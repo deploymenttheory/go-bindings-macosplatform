@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for planar angle and rotation.
+// UnitAngle is an idiomatic wrapper over the Objective-C class NSUnitAngle.
 //
-// UnitAngle wraps [raw.NSUnitAngle] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for planar angle and rotation.
 type UnitAngle struct {
-	inner *raw.NSUnitAngle
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitAngle].
-func (x *UnitAngle) Unwrap() *raw.NSUnitAngle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitAngle) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitAngleFromID adopts an existing object pointer as a UnitAngle (nil for 0).
+// UnitAngleFromID adopts an existing Objective-C object as a UnitAngle
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitAngleFromID(id objc.ID) *UnitAngle {
 	if id == 0 {
 		return nil
 	}
-	return &UnitAngle{inner: raw.NSUnitAngleFromID(id)}
-}
-
-// NewUnitAngle creates a new [UnitAngle].
-func NewUnitAngle() *UnitAngle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitAngle")), objc.RegisterName("new"))
-	return &UnitAngle{inner: raw.NSUnitAngleFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitAngle) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAngle {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitAngle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitAngle) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitAngleAdopt wraps an Objective-C object that this code just created as a
+// UnitAngle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitAngleAdopt(id objc.ID) *UnitAngle {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitAngle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitAngle) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitAngle creates a new UnitAngle.
+func NewUnitAngle() *UnitAngle {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("new"))
+	return unitAngleAdopt(_id)
+}
 
-func (x *UnitAngle) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitAngle) WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitAngleable is the interface implemented by [UnitAngle], for mocking and DI.
 type UnitAngleable interface {
-	Unwrap() *raw.NSUnitAngle
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAngle
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle
 }
 
 var _ UnitAngleable = (*UnitAngle)(nil)
+
+var _ DimensionProvider = (*UnitAngle)(nil)
+
+var _ UnitProvider = (*UnitAngle)(nil)

@@ -5,64 +5,37 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// SharedCoordinator calls the underlying SWCollaborationCoordinatorSharedCoordinator.
+// SharedCoordinator wraps the corresponding Objective-C method.
 func SharedCoordinator() *CollaborationCoordinator {
-	_r := raw.SWCollaborationCoordinatorSharedCoordinator()
-	if _r == nil {
-		return nil
-	}
-	return &CollaborationCoordinator{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationCoordinator")), objc.RegisterName("sharedCoordinator"))
+	return CollaborationCoordinatorFromID(_r)
 }
 
-// OptionWithTitleIdentifier calls the underlying SWCollaborationOptionOptionWithTitleIdentifier.
+// OptionWithTitleIdentifier creates and initializes a collaboration option object with a provided title and identifier.
 func OptionWithTitleIdentifier(title string, identifier string) *CollaborationOption {
-	_r := raw.SWCollaborationOptionOptionWithTitleIdentifier(foundation.NSStringStringWithUTF8String(title), foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &CollaborationOption{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOption")), objc.RegisterName("optionWithTitle:identifier:"), purego.NSString(title), purego.NSString(identifier))
+	return CollaborationOptionFromID(_r)
 }
 
-// OptionsGroupWithIdentifierOptions calls the underlying SWCollaborationOptionsGroupOptionsGroupWithIdentifierOptions.
-func OptionsGroupWithIdentifierOptions(identifier string, options *foundation.NSArray[*raw.SWCollaborationOption]) *CollaborationOptionsGroup {
-	_r := raw.SWCollaborationOptionsGroupOptionsGroupWithIdentifierOptions(foundation.NSStringStringWithUTF8String(identifier), options)
-	if _r == nil {
-		return nil
-	}
-	return &CollaborationOptionsGroup{inner: _r}
+// OptionsGroupWithIdentifierOptions creates and initializes a collaboration options group object.
+func OptionsGroupWithIdentifierOptions(identifier string, options []*CollaborationOption) *CollaborationOptionsGroup {
+	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOptionsGroup")), objc.RegisterName("optionsGroupWithIdentifier:options:"), purego.NSString(identifier), purego.SliceToNSArray(options, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) }))
+	return CollaborationOptionsGroupFromID(_r)
 }
 
-// ShareOptionsWithOptionsGroupsSummary calls the underlying SWCollaborationShareOptionsShareOptionsWithOptionsGroupsSummary.
-func ShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup], summary string) *CollaborationShareOptions {
-	_r := raw.SWCollaborationShareOptionsShareOptionsWithOptionsGroupsSummary(optionsGroups, foundation.NSStringStringWithUTF8String(summary))
-	if _r == nil {
-		return nil
-	}
-	return &CollaborationShareOptions{inner: _r}
+// ShareOptionsWithOptionsGroupsSummary creates and initializes a collaboration share options object the array of groups and a summary string.
+func ShareOptionsWithOptionsGroupsSummary(optionsGroups []*CollaborationOptionsGroup, summary string) *CollaborationShareOptions {
+	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("shareOptionsWithOptionsGroups:summary:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }), purego.NSString(summary))
+	return CollaborationShareOptionsFromID(_r)
 }
 
-// ShareOptionsWithOptionsGroups calls the underlying SWCollaborationShareOptionsShareOptionsWithOptionsGroups.
-func ShareOptionsWithOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
-	_ptrs := make([]objc.ID, len(optionsGroups))
-	for _i, _v := range optionsGroups {
-		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.SWCollaborationShareOptionsShareOptionsWithOptionsGroups(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &CollaborationShareOptions{inner: _r}
+// ShareOptionsWithOptionsGroups creates and initializes a collaboration share options object with the array of groups.
+func ShareOptionsWithOptionsGroups(optionsGroups []*CollaborationOptionsGroup) *CollaborationShareOptions {
+	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("shareOptionsWithOptionsGroups:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }))
+	return CollaborationShareOptionsFromID(_r)
 }

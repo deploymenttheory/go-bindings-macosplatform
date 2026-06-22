@@ -5,92 +5,102 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MeshBuffer wraps [raw.GLKMeshBuffer] with a fluent Go API.
+// MeshBuffer is an idiomatic wrapper over the Objective-C class GLKMeshBuffer.
 type MeshBuffer struct {
-	inner *raw.GLKMeshBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKMeshBuffer].
-func (x *MeshBuffer) Unwrap() *raw.GLKMeshBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferFromID adopts an existing object pointer as a MeshBuffer (nil for 0).
+// MeshBufferFromID adopts an existing Objective-C object as a MeshBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferFromID(id objc.ID) *MeshBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBuffer{inner: raw.GLKMeshBufferFromID(id)}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMeshBuffer creates a new [MeshBuffer].
-func NewMeshBuffer() *MeshBuffer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKMeshBuffer")), objc.RegisterName("new"))
-	return &MeshBuffer{inner: raw.GLKMeshBufferFromID(_id)}
-}
-
-// @method length @abstract Size in bytes of the buffer allocation
-//
-// Length calls the underlying Length.
-func (x *MeshBuffer) Length() uint {
-	return x.inner.Length()
-}
-
-// @property allocator @abstract Allocator object used to create this buffer. @discussion This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
-//
-// Allocator calls the underlying Allocator.
-func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
-	_r := x.inner.Allocator()
-	if _r == nil {
+// meshBufferAdopt wraps an Objective-C object that this code just created as a
+// MeshBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferAdopt(id objc.ID) *MeshBuffer {
+	if id == 0 {
 		return nil
 	}
-	return &MeshBufferAllocator{inner: _r}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property glBufferName @abstract glBufferName for buffer object backing vertex/index data @discussion Many GLKMeshBuffers may reference the same OpenGL buffer object, but each with its own offset.  (i.e. Many GLKMeshBuffers may be suballocated from a single OpenGL buffer object)
-//
-// GlBufferName calls the underlying GlBufferName.
+// Description returns the object's -description text.
+func (x *MeshBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeshBuffer creates a new MeshBuffer.
+func NewMeshBuffer() *MeshBuffer {
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKMeshBuffer")), objc.RegisterName("new"))
+	return meshBufferAdopt(_id)
+}
+
+// Length size in bytes of the buffer allocation
+func (x *MeshBuffer) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
+}
+
+// Allocator allocator object used to create this buffer. This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
+func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocator"))
+	return MeshBufferAllocatorFromID(_r)
+}
+
+// GlBufferName glBufferName for buffer object backing vertex/index data Many GLKMeshBuffers may reference the same OpenGL buffer object, but each with its own offset.  (i.e. Many GLKMeshBuffers may be suballocated from a single OpenGL buffer object)
 func (x *MeshBuffer) GlBufferName() uint32 {
-	return x.inner.GlBufferName()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("glBufferName"))
+	return _r
 }
 
-// @property offset @abstract Byte offset of the data within the OpenGL buffer
-//
-// Offset calls the underlying Offset.
-func (x *MeshBuffer) Offset() uint {
-	return x.inner.Offset()
-}
-
-// @property zone @abstract Zone from which this buffer was created (if it was created witha zone) @discussion A single GL buffer is allocated for each zone.  Each zone could have many GLKMeshBuffers, each with it's own offset.  If a GLKMeshBufferAllocator is used, Model I/O will attempt to load all vertex and indexData of a single model into a single zone.  So although there maybe many GLKMeshBuffers for a model they will be backed with the same contigous GL buffer.
-//
-// Zone calls the underlying Zone.
-func (x *MeshBuffer) Zone() modelio.MDLMeshBufferZone {
-	return x.inner.Zone()
-}
-
-// @property type @abstract the intended type of the buffer
-//
-// Type calls the underlying Type.
-func (x *MeshBuffer) Type() modelio.MDLMeshBufferType {
-	return x.inner.Type()
+// Offset byte offset of the data within the OpenGL buffer
+func (x *MeshBuffer) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
 // MeshBufferable is the interface implemented by [MeshBuffer], for mocking and DI.
 type MeshBufferable interface {
-	Unwrap() *raw.GLKMeshBuffer
-	Length() uint
+	obj.Object
+	Length() int
 	Allocator() *MeshBufferAllocator
 	GlBufferName() uint32
-	Offset() uint
-	Zone() modelio.MDLMeshBufferZone
-	Type() modelio.MDLMeshBufferType
+	Offset() int
 }
 
 var _ MeshBufferable = (*MeshBuffer)(nil)

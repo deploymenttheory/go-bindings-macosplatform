@@ -5,71 +5,99 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract resource a file system uses to provide data for a volume.
+// Resource is an idiomatic wrapper over the Objective-C class FSResource.
 //
-// Resource wraps [raw.FSResource] with a fluent Go API.
+// Resource is an abstract base — you do not construct it directly. Construct one of [BlockDeviceResource], [GenericURLResource], [PathURLResource] and pass it where a Resource is accepted.
+//
+// An abstract resource a file system uses to provide data for a volume.
 type Resource struct {
-	inner *raw.FSResource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSResource].
-func (x *Resource) Unwrap() *raw.FSResource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Resource) ID() objc.ID { return x.inner.Ptr() }
-
-// ResourceFromID adopts an existing object pointer as a Resource (nil for 0).
+// ResourceFromID adopts an existing Objective-C object as a Resource
+// (nil for 0), retaining it and registering a release finalizer.
 func ResourceFromID(id objc.ID) *Resource {
 	if id == 0 {
 		return nil
 	}
-	return &Resource{inner: raw.FSResourceFromID(id)}
+	x := &Resource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewResource creates a new [Resource].
-func NewResource() *Resource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSResource")), objc.RegisterName("new"))
-	return &Resource{inner: raw.FSResourceFromID(_id)}
-}
-
-// Creates a proxy object of this resource.
-//
-// MakeProxy calls the underlying MakeProxy.
-func (x *Resource) MakeProxy() *Resource {
-	_r := x.inner.MakeProxy()
-	if _r == nil {
+// resourceAdopt wraps an Objective-C object that this code just created as a
+// Resource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func resourceAdopt(id objc.ID) *Resource {
+	if id == 0 {
 		return nil
 	}
-	return &Resource{inner: _r}
+	x := &Resource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Revokes the resource.
-//
-// Revoke calls the underlying Revoke.
+// Description returns the object's -description text.
+func (x *Resource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Resource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Resource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Resource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// MakeProxy creates a proxy object of this resource.
+func (x *Resource) MakeProxy() *Resource {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeProxy"))
+	return ResourceFromID(_r)
+}
+
+// Revoke revokes the resource.
 func (x *Resource) Revoke() {
-	x.inner.Revoke()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revoke"))
 }
 
-// A Boolean value that indicates whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
-//
-// IsRevoked calls the underlying IsRevoked.
+// IsRevoked a Boolean value that indicates whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
 func (x *Resource) IsRevoked() bool {
-	return x.inner.IsRevoked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRevoked"))
+	return _r
 }
-
-func (x *Resource) asResource() *raw.FSResource { return x.inner }
 
 // Resourceable is the interface implemented by [Resource], for mocking and DI.
 type Resourceable interface {
-	Unwrap() *raw.FSResource
+	obj.Object
 	MakeProxy() *Resource
 	Revoke()
 	IsRevoked() bool
 }
 
 var _ Resourceable = (*Resource)(nil)
+
+// isResource marks Resource — and, by embedding promotion, its
+// subclasses — as a member of the Resource hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Resource) isResource() {}
+
+var _ ResourceProvider = (*Resource)(nil)

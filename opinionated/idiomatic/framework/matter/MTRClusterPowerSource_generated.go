@@ -5,280 +5,325 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterPowerSource wraps [raw.MTRClusterPowerSource] with a fluent Go API.
+// MTRClusterPowerSource is an idiomatic wrapper over the Objective-C class MTRClusterPowerSource.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterPowerSource struct {
-	inner *raw.MTRClusterPowerSource
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterPowerSource].
-func (x *MTRClusterPowerSource) Unwrap() *raw.MTRClusterPowerSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterPowerSource) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterPowerSourceFromID adopts an existing object pointer as a MTRClusterPowerSource (nil for 0).
+// MTRClusterPowerSourceFromID adopts an existing Objective-C object as a MTRClusterPowerSource
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterPowerSourceFromID(id objc.ID) *MTRClusterPowerSource {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterPowerSource{inner: raw.MTRClusterPowerSourceFromID(id)}
+	x := &MTRClusterPowerSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterPowerSourceWithDeviceEndpointIDQueue creates a new [MTRClusterPowerSource].
-func NewMTRClusterPowerSourceWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPowerSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPowerSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterPowerSource{inner: raw.MTRClusterPowerSourceFromID(_id)}
+// mTRClusterPowerSourceAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterPowerSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterPowerSourceAdopt(id objc.ID) *MTRClusterPowerSource {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterPowerSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterPowerSourceWithDeviceEndpointQueue creates a new [MTRClusterPowerSource].
-func NewMTRClusterPowerSourceWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterPowerSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPowerSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterPowerSource{inner: raw.MTRClusterPowerSourceFromID(_id)}
+// NewMTRClusterPowerSourceWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterPowerSourceWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPowerSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPowerSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterPowerSourceAdopt(_id)
 }
 
-// ReadAttributeStatusWithParams calls the underlying ReadAttributeStatusWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStatusWithParams(params)
+// NewMTRClusterPowerSourceWithDeviceEndpointQueue creates a new MTRClusterPowerSource.
+func NewMTRClusterPowerSourceWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterPowerSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPowerSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterPowerSourceAdopt(_id)
 }
 
-// ReadAttributeOrderWithParams calls the underlying ReadAttributeOrderWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeOrderWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOrderWithParams(params)
+// ReadAttributeStatusWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStatusWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDescriptionWithParams calls the underlying ReadAttributeDescriptionWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDescriptionWithParams(params)
+// ReadAttributeOrderWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeOrderWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOrderWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredAssessedInputVoltageWithParams calls the underlying ReadAttributeWiredAssessedInputVoltageWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredAssessedInputVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredAssessedInputVoltageWithParams(params)
+// ReadAttributeDescriptionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredAssessedInputFrequencyWithParams calls the underlying ReadAttributeWiredAssessedInputFrequencyWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredAssessedInputFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredAssessedInputFrequencyWithParams(params)
+// ReadAttributeWiredAssessedInputVoltageWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredAssessedInputVoltageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredAssessedInputVoltageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredCurrentTypeWithParams calls the underlying ReadAttributeWiredCurrentTypeWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredCurrentTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredCurrentTypeWithParams(params)
+// ReadAttributeWiredAssessedInputFrequencyWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredAssessedInputFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredAssessedInputFrequencyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredAssessedCurrentWithParams calls the underlying ReadAttributeWiredAssessedCurrentWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredAssessedCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredAssessedCurrentWithParams(params)
+// ReadAttributeWiredCurrentTypeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredCurrentTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredCurrentTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredNominalVoltageWithParams calls the underlying ReadAttributeWiredNominalVoltageWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredNominalVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredNominalVoltageWithParams(params)
+// ReadAttributeWiredAssessedCurrentWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredAssessedCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredAssessedCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredMaximumCurrentWithParams calls the underlying ReadAttributeWiredMaximumCurrentWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredMaximumCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredMaximumCurrentWithParams(params)
+// ReadAttributeWiredNominalVoltageWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredNominalVoltageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredNominalVoltageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredPresentWithParams calls the underlying ReadAttributeWiredPresentWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeWiredPresentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiredPresentWithParams(params)
+// ReadAttributeWiredMaximumCurrentWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredMaximumCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredMaximumCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveWiredFaultsWithParams calls the underlying ReadAttributeActiveWiredFaultsWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeActiveWiredFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveWiredFaultsWithParams(params)
+// ReadAttributeWiredPresentWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeWiredPresentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiredPresentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatVoltageWithParams calls the underlying ReadAttributeBatVoltageWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatVoltageWithParams(params)
+// ReadAttributeActiveWiredFaultsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeActiveWiredFaultsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveWiredFaultsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatPercentRemainingWithParams calls the underlying ReadAttributeBatPercentRemainingWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatPercentRemainingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatPercentRemainingWithParams(params)
+// ReadAttributeBatVoltageWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatVoltageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatVoltageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatTimeRemainingWithParams calls the underlying ReadAttributeBatTimeRemainingWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatTimeRemainingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatTimeRemainingWithParams(params)
+// ReadAttributeBatPercentRemainingWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatPercentRemainingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatPercentRemainingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatChargeLevelWithParams calls the underlying ReadAttributeBatChargeLevelWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatChargeLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatChargeLevelWithParams(params)
+// ReadAttributeBatTimeRemainingWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatTimeRemainingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatTimeRemainingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatReplacementNeededWithParams calls the underlying ReadAttributeBatReplacementNeededWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatReplacementNeededWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatReplacementNeededWithParams(params)
+// ReadAttributeBatChargeLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatChargeLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatChargeLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatReplaceabilityWithParams calls the underlying ReadAttributeBatReplaceabilityWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatReplaceabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatReplaceabilityWithParams(params)
+// ReadAttributeBatReplacementNeededWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatReplacementNeededWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatReplacementNeededWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatPresentWithParams calls the underlying ReadAttributeBatPresentWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatPresentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatPresentWithParams(params)
+// ReadAttributeBatReplaceabilityWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatReplaceabilityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatReplaceabilityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveBatFaultsWithParams calls the underlying ReadAttributeActiveBatFaultsWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeActiveBatFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveBatFaultsWithParams(params)
+// ReadAttributeBatPresentWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatPresentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatPresentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatReplacementDescriptionWithParams calls the underlying ReadAttributeBatReplacementDescriptionWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatReplacementDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatReplacementDescriptionWithParams(params)
+// ReadAttributeActiveBatFaultsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeActiveBatFaultsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveBatFaultsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatCommonDesignationWithParams calls the underlying ReadAttributeBatCommonDesignationWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatCommonDesignationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatCommonDesignationWithParams(params)
+// ReadAttributeBatReplacementDescriptionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatReplacementDescriptionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatReplacementDescriptionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatANSIDesignationWithParams calls the underlying ReadAttributeBatANSIDesignationWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatANSIDesignationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatANSIDesignationWithParams(params)
+// ReadAttributeBatCommonDesignationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatCommonDesignationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatCommonDesignationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatIECDesignationWithParams calls the underlying ReadAttributeBatIECDesignationWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatIECDesignationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatIECDesignationWithParams(params)
+// ReadAttributeBatANSIDesignationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatANSIDesignationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatANSIDesignationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatApprovedChemistryWithParams calls the underlying ReadAttributeBatApprovedChemistryWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatApprovedChemistryWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatApprovedChemistryWithParams(params)
+// ReadAttributeBatIECDesignationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatIECDesignationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatIECDesignationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatCapacityWithParams calls the underlying ReadAttributeBatCapacityWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatCapacityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatCapacityWithParams(params)
+// ReadAttributeBatApprovedChemistryWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatApprovedChemistryWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatApprovedChemistryWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatQuantityWithParams calls the underlying ReadAttributeBatQuantityWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatQuantityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatQuantityWithParams(params)
+// ReadAttributeBatCapacityWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatCapacityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatCapacityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatChargeStateWithParams calls the underlying ReadAttributeBatChargeStateWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatChargeStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatChargeStateWithParams(params)
+// ReadAttributeBatQuantityWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatQuantityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatQuantityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatTimeToFullChargeWithParams calls the underlying ReadAttributeBatTimeToFullChargeWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatTimeToFullChargeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatTimeToFullChargeWithParams(params)
+// ReadAttributeBatChargeStateWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatChargeStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatChargeStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatFunctionalWhileChargingWithParams calls the underlying ReadAttributeBatFunctionalWhileChargingWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatFunctionalWhileChargingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatFunctionalWhileChargingWithParams(params)
+// ReadAttributeBatTimeToFullChargeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatTimeToFullChargeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatTimeToFullChargeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatChargingCurrentWithParams calls the underlying ReadAttributeBatChargingCurrentWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeBatChargingCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBatChargingCurrentWithParams(params)
+// ReadAttributeBatFunctionalWhileChargingWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatFunctionalWhileChargingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatFunctionalWhileChargingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveBatChargeFaultsWithParams calls the underlying ReadAttributeActiveBatChargeFaultsWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeActiveBatChargeFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveBatChargeFaultsWithParams(params)
+// ReadAttributeBatChargingCurrentWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeBatChargingCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatChargingCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeEndpointListWithParams calls the underlying ReadAttributeEndpointListWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeEndpointListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeEndpointListWithParams(params)
+// ReadAttributeActiveBatChargeFaultsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeActiveBatChargeFaultsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveBatChargeFaultsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeEndpointListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeEndpointListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEndpointListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterPowerSource) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterPowerSource) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterPowerSource) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPowerSource) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterPowerSourceable is the interface implemented by [MTRClusterPowerSource], for mocking and DI.
 type MTRClusterPowerSourceable interface {
-	Unwrap() *raw.MTRClusterPowerSource
-	ReadAttributeStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOrderWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredAssessedInputVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredAssessedInputFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredCurrentTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredAssessedCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredNominalVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredMaximumCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiredPresentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveWiredFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatPercentRemainingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatTimeRemainingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatChargeLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatReplacementNeededWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatReplaceabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatPresentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveBatFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatReplacementDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatCommonDesignationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatANSIDesignationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatIECDesignationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatApprovedChemistryWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatCapacityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatQuantityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatChargeStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatTimeToFullChargeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatFunctionalWhileChargingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBatChargingCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveBatChargeFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeEndpointListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOrderWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredAssessedInputVoltageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredAssessedInputFrequencyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredCurrentTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredAssessedCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredNominalVoltageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredMaximumCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiredPresentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveWiredFaultsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatVoltageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatPercentRemainingWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatTimeRemainingWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatChargeLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatReplacementNeededWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatReplaceabilityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatPresentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveBatFaultsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatReplacementDescriptionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatCommonDesignationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatANSIDesignationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatIECDesignationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatApprovedChemistryWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatCapacityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatQuantityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatChargeStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatTimeToFullChargeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatFunctionalWhileChargingWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBatChargingCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveBatChargeFaultsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeEndpointListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterPowerSourceable = (*MTRClusterPowerSource)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterPowerSource)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterPowerSource)(nil)

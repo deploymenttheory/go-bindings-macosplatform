@@ -5,82 +5,113 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing seat information associated with a reservation.
+// Seat is an idiomatic wrapper over the Objective-C class INSeat.
 //
-// Seat wraps [raw.INSeat] with a fluent Go API.
+// An object containing seat information associated with a reservation.
 type Seat struct {
-	inner *raw.INSeat
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INSeat].
-func (x *Seat) Unwrap() *raw.INSeat { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Seat) ID() objc.ID { return x.inner.Ptr() }
-
-// SeatFromID adopts an existing object pointer as a Seat (nil for 0).
+// SeatFromID adopts an existing Objective-C object as a Seat
+// (nil for 0), retaining it and registering a release finalizer.
 func SeatFromID(id objc.ID) *Seat {
 	if id == 0 {
 		return nil
 	}
-	return &Seat{inner: raw.INSeatFromID(id)}
+	x := &Seat{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new seat object containing the required seat information.
-//
-// NewSeatWithSeatSectionSeatRowSeatNumberSeatingType creates a new [Seat].
+// seatAdopt wraps an Objective-C object that this code just created as a
+// Seat (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func seatAdopt(id objc.ID) *Seat {
+	if id == 0 {
+		return nil
+	}
+	x := &Seat{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Seat) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Seat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Seat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Seat) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSeatWithSeatSectionSeatRowSeatNumberSeatingType creates a new seat object containing the required seat information.
 func NewSeatWithSeatSectionSeatRowSeatNumberSeatingType(seatSection string, seatRow string, seatNumber string, seatingType string) *Seat {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSeat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeatSection:seatRow:seatNumber:seatingType:"), foundation.NSStringStringWithUTF8String(seatSection).Ptr(), foundation.NSStringStringWithUTF8String(seatRow).Ptr(), foundation.NSStringStringWithUTF8String(seatNumber).Ptr(), foundation.NSStringStringWithUTF8String(seatingType).Ptr())
-	return &Seat{inner: raw.INSeatFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INSeat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeatSection:seatRow:seatNumber:seatingType:"), purego.NSString(seatSection), purego.NSString(seatRow), purego.NSString(seatNumber), purego.NSString(seatingType))
+	return seatAdopt(_id)
 }
 
-// SeatSection calls the underlying SeatSection.
+// SeatSection wraps the corresponding Objective-C method.
 func (x *Seat) SeatSection() string {
-	_r := x.inner.SeatSection()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatSection"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SeatRow calls the underlying SeatRow.
+// SeatRow wraps the corresponding Objective-C method.
 func (x *Seat) SeatRow() string {
-	_r := x.inner.SeatRow()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatRow"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SeatNumber calls the underlying SeatNumber.
+// SeatNumber wraps the corresponding Objective-C method.
 func (x *Seat) SeatNumber() string {
-	_r := x.inner.SeatNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SeatingType calls the underlying SeatingType.
+// SeatingType wraps the corresponding Objective-C method.
 func (x *Seat) SeatingType() string {
-	_r := x.inner.SeatingType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seatingType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Seatable is the interface implemented by [Seat], for mocking and DI.
 type Seatable interface {
-	Unwrap() *raw.INSeat
+	obj.Object
 	SeatSection() string
 	SeatRow() string
 	SeatNumber() string

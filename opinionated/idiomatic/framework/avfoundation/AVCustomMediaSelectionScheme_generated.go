@@ -5,84 +5,105 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVCustomMediaSelectionScheme provides a collection of custom settings for controlling the presentation of the media.
+// CustomMediaSelectionScheme is an idiomatic wrapper over the Objective-C class AVCustomMediaSelectionScheme.
 //
-// CustomMediaSelectionScheme wraps [raw.AVCustomMediaSelectionScheme] with a fluent Go API.
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVCustomMediaSelectionScheme provides a collection of custom settings for controlling the presentation of the media.
 type CustomMediaSelectionScheme struct {
-	inner *raw.AVCustomMediaSelectionScheme
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCustomMediaSelectionScheme].
-func (x *CustomMediaSelectionScheme) Unwrap() *raw.AVCustomMediaSelectionScheme { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomMediaSelectionScheme) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomMediaSelectionSchemeFromID adopts an existing object pointer as a CustomMediaSelectionScheme (nil for 0).
+// CustomMediaSelectionSchemeFromID adopts an existing Objective-C object as a CustomMediaSelectionScheme
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomMediaSelectionSchemeFromID(id objc.ID) *CustomMediaSelectionScheme {
 	if id == 0 {
 		return nil
 	}
-	return &CustomMediaSelectionScheme{inner: raw.AVCustomMediaSelectionSchemeFromID(id)}
+	x := &CustomMediaSelectionScheme{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCustomMediaSelectionScheme creates a new [CustomMediaSelectionScheme].
+// customMediaSelectionSchemeAdopt wraps an Objective-C object that this code just created as a
+// CustomMediaSelectionScheme (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customMediaSelectionSchemeAdopt(id objc.ID) *CustomMediaSelectionScheme {
+	if id == 0 {
+		return nil
+	}
+	x := &CustomMediaSelectionScheme{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CustomMediaSelectionScheme) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CustomMediaSelectionScheme) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CustomMediaSelectionScheme) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CustomMediaSelectionScheme) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCustomMediaSelectionScheme creates a new CustomMediaSelectionScheme.
 func NewCustomMediaSelectionScheme() *CustomMediaSelectionScheme {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCustomMediaSelectionScheme")), objc.RegisterName("new"))
-	return &CustomMediaSelectionScheme{inner: raw.AVCustomMediaSelectionSchemeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCustomMediaSelectionScheme")), objc.RegisterName("new"))
+	return customMediaSelectionSchemeAdopt(_id)
 }
 
-// Provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver.
-//
-// MediaPresentationSettingsForSelectorComplementaryToLanguageSettings calls the underlying MediaPresentationSettingsForSelectorComplementaryToLanguageSettings.
-func (x *CustomMediaSelectionScheme) MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *raw.AVMediaPresentationSelector, language string, settings *foundation.NSArray[*raw.AVMediaPresentationSetting]) *foundation.NSArray[*raw.AVMediaPresentationSetting] {
-	return x.inner.MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector, foundation.NSStringStringWithUTF8String(language), settings)
+// MediaPresentationSettingsForSelectorComplementaryToLanguageSettings provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver.
+func (x *CustomMediaSelectionScheme) MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *MediaPresentationSelector, language string, settings []*MediaPresentationSetting) []*MediaPresentationSetting {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationSettingsForSelector:complementaryToLanguage:settings:"), objref.IDOf(selector), purego.NSString(language), purego.SliceToNSArray(settings, func(_v *MediaPresentationSetting) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaPresentationSetting { return MediaPresentationSettingFromID(_id) })
 }
 
-// Indicates whether an alternative selection interface should provide a menu of language choices.
-//
-// ShouldOfferLanguageSelection calls the underlying ShouldOfferLanguageSelection.
+// ShouldOfferLanguageSelection indicates whether an alternative selection interface should provide a menu of language choices.
 func (x *CustomMediaSelectionScheme) ShouldOfferLanguageSelection() bool {
-	return x.inner.ShouldOfferLanguageSelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldOfferLanguageSelection"))
+	return _r
 }
 
-// Provides available language choices. Each string in the array is intended to be interpreted as a BCP 47 language tag.
+// AvailableLanguages provides available language choices. Each string in the array is intended to be interpreted as a BCP 47 language tag.
 //
 // AvailableLanguages returns the collection as a Go slice.
 func (x *CustomMediaSelectionScheme) AvailableLanguages() []string {
-	arr := x.inner.AvailableLanguages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableLanguages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Provides custom settings.
+// Selectors provides custom settings.
 //
 // Selectors returns the collection as a Go slice.
 func (x *CustomMediaSelectionScheme) Selectors() []*MediaPresentationSelector {
-	arr := x.inner.Selectors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaPresentationSelector {
-		return &MediaPresentationSelector{inner: raw.AVMediaPresentationSelectorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaPresentationSelector { return MediaPresentationSelectorFromID(_id) })
 }
 
 // CustomMediaSelectionSchemeable is the interface implemented by [CustomMediaSelectionScheme], for mocking and DI.
 type CustomMediaSelectionSchemeable interface {
-	Unwrap() *raw.AVCustomMediaSelectionScheme
-	MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *raw.AVMediaPresentationSelector, language string, settings *foundation.NSArray[*raw.AVMediaPresentationSetting]) *foundation.NSArray[*raw.AVMediaPresentationSetting]
+	obj.Object
+	MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *MediaPresentationSelector, language string, settings []*MediaPresentationSetting) []*MediaPresentationSetting
 	ShouldOfferLanguageSelection() bool
 	AvailableLanguages() []string
 	Selectors() []*MediaPresentationSelector

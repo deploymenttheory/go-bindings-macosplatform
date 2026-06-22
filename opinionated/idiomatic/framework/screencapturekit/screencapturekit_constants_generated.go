@@ -5,93 +5,56 @@
 package screencapturekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @key SCStreamFrameInfoStatus @abstract The key for the CFDictionary attached to the CMSampleBuffer that denotes the frames SCFrameStatus
-// SCStreamFrameInfoStatus returns the string constant SCStreamFrameInfoStatus as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoStatus() objc.ID {
-	if _r := raw.SCStreamFrameInfoStatus(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoStatus returns the string constant SCStreamFrameInfoStatus, for use as a dictionary key or argument.
+func SCStreamFrameInfoStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoStatus")))
 }
 
-// @key SCStreamFrameInfoDisplayTime @abstract The key for the CFDictionary attached to the CMSampleBuffer for the mach absolute time when the event occurred. For a frame event, this is when the frame was displayed by the window server.
-// SCStreamFrameInfoDisplayTime returns the string constant SCStreamFrameInfoDisplayTime as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoDisplayTime() objc.ID {
-	if _r := raw.SCStreamFrameInfoDisplayTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoDisplayTime returns the string constant SCStreamFrameInfoDisplayTime, for use as a dictionary key or argument.
+func SCStreamFrameInfoDisplayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoDisplayTime")))
 }
 
-// @key SCStreamFrameInfoScaleFactor @abstract The key for the CFDictionary attached to the CMSampleBuffer for the display resolution associated with the frame. Display resolution is the pixel to point scaling factor. It should be in the range of [1, 4].
-// SCStreamFrameInfoScaleFactor returns the string constant SCStreamFrameInfoScaleFactor as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoScaleFactor() objc.ID {
-	if _r := raw.SCStreamFrameInfoScaleFactor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoScaleFactor returns the string constant SCStreamFrameInfoScaleFactor, for use as a dictionary key or argument.
+func SCStreamFrameInfoScaleFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoScaleFactor")))
 }
 
-// @key SCStreamFrameInfoContentScale @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content scale associated with the frame. Content scale is the scaling factor from original content size to its size in surface.
-// SCStreamFrameInfoContentScale returns the string constant SCStreamFrameInfoContentScale as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoContentScale() objc.ID {
-	if _r := raw.SCStreamFrameInfoContentScale(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoContentScale returns the string constant SCStreamFrameInfoContentScale, for use as a dictionary key or argument.
+func SCStreamFrameInfoContentScale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoContentScale")))
 }
 
-// @key SCStreamFrameInfoContentRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content rect associated with the frame. Content rect is the size and location of content in points in surface.
-// SCStreamFrameInfoContentRect returns the string constant SCStreamFrameInfoContentRect as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoContentRect() objc.ID {
-	if _r := raw.SCStreamFrameInfoContentRect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoContentRect returns the string constant SCStreamFrameInfoContentRect, for use as a dictionary key or argument.
+func SCStreamFrameInfoContentRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoContentRect")))
 }
 
-// @key SCStreamFrameInfoDirtyRects @abstract The key for the CFDictionary attached to the CMSampleBuffer for an array of rectangles that is the union of both rectangles that were redrawn and rectangles that were moved. This is an array of CGRect in NSValue. The CGRects elements are specified in pixels.
-// SCStreamFrameInfoDirtyRects returns the string constant SCStreamFrameInfoDirtyRects as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoDirtyRects() objc.ID {
-	if _r := raw.SCStreamFrameInfoDirtyRects(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoDirtyRects returns the string constant SCStreamFrameInfoDirtyRects, for use as a dictionary key or argument.
+func SCStreamFrameInfoDirtyRects() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoDirtyRects")))
 }
 
-// @key SCStreamFrameInfoScreenRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the onscreen location of the captured content
-// SCStreamFrameInfoScreenRect returns the string constant SCStreamFrameInfoScreenRect as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoScreenRect() objc.ID {
-	if _r := raw.SCStreamFrameInfoScreenRect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoScreenRect returns the string constant SCStreamFrameInfoScreenRect, for use as a dictionary key or argument.
+func SCStreamFrameInfoScreenRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoScreenRect")))
 }
 
-// @key SCStreamFrameInfoBoundingRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the bounding rect associated with the frame. Bounding rect is the size and location of smallest bounding box containing all captured windows in points and in surface coordinates.
-// SCStreamFrameInfoBoundingRect returns the string constant SCStreamFrameInfoBoundingRect as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoBoundingRect() objc.ID {
-	if _r := raw.SCStreamFrameInfoBoundingRect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoBoundingRect returns the string constant SCStreamFrameInfoBoundingRect, for use as a dictionary key or argument.
+func SCStreamFrameInfoBoundingRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoBoundingRect")))
 }
 
-// @key SCStreamFrameInfoPresenterOverlayContentRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content rect associated with the frame while in presenter overlay.  In presenter overlay small, this content rect is the size and location of smallest bounding box containing all captured windows plus small overlay window in points and in surface coordinates. In presenter overlay large, this content rect is the size and location of shared content in points and in surface coordinates.
-// SCStreamFrameInfoPresenterOverlayContentRect returns the string constant SCStreamFrameInfoPresenterOverlayContentRect as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamFrameInfoPresenterOverlayContentRect() objc.ID {
-	if _r := raw.SCStreamFrameInfoPresenterOverlayContentRect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SCStreamFrameInfoPresenterOverlayContentRect returns the string constant SCStreamFrameInfoPresenterOverlayContentRect, for use as a dictionary key or argument.
+func SCStreamFrameInfoPresenterOverlayContentRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamFrameInfoPresenterOverlayContentRect")))
 }
 
-// SCStreamErrorDomain returns the string constant SCStreamErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamErrorDomain() objc.ID {
-	return purego.CFConstant(raw.SCStreamErrorDomain())
+// SCStreamErrorDomain returns the string constant SCStreamErrorDomain, for use as a dictionary key or argument.
+func SCStreamErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamErrorDomain")))
 }

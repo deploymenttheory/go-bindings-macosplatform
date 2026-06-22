@@ -5,42 +5,49 @@
 package pencilkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DefaultWidthForEraserType calls the underlying PKEraserToolDefaultWidthForEraserType.
-func DefaultWidthForEraserType(eraserType PKEraserType) float64 {
-	return raw.PKEraserToolDefaultWidthForEraserType(raw.PKEraserType(eraserType))
+// DefaultWidthForEraserType the default width for an eraser type.
+func DefaultWidthForEraserType(eraserType EraserType) float64 {
+	_r := objc.Send[float64](objc.ID(_class("PKEraserTool")), objc.RegisterName("defaultWidthForEraserType:"), eraserType)
+	return _r
 }
 
-// MinimumWidthForEraserType calls the underlying PKEraserToolMinimumWidthForEraserType.
-func MinimumWidthForEraserType(eraserType PKEraserType) float64 {
-	return raw.PKEraserToolMinimumWidthForEraserType(raw.PKEraserType(eraserType))
+// MinimumWidthForEraserType the minimum width for an eraser type.
+func MinimumWidthForEraserType(eraserType EraserType) float64 {
+	_r := objc.Send[float64](objc.ID(_class("PKEraserTool")), objc.RegisterName("minimumWidthForEraserType:"), eraserType)
+	return _r
 }
 
-// MaximumWidthForEraserType calls the underlying PKEraserToolMaximumWidthForEraserType.
-func MaximumWidthForEraserType(eraserType PKEraserType) float64 {
-	return raw.PKEraserToolMaximumWidthForEraserType(raw.PKEraserType(eraserType))
+// MaximumWidthForEraserType the maximum width for an eraser type.
+func MaximumWidthForEraserType(eraserType EraserType) float64 {
+	_r := objc.Send[float64](objc.ID(_class("PKEraserTool")), objc.RegisterName("maximumWidthForEraserType:"), eraserType)
+	return _r
 }
 
-// DefaultWidthForInkType calls the underlying PKInkingToolDefaultWidthForInkType.
-func DefaultWidthForInkType(inkType *foundation.NSString) float64 {
-	return raw.PKInkingToolDefaultWidthForInkType(inkType)
+// DefaultWidthForInkType the default width for an ink of a type.
+func DefaultWidthForInkType(inkType obj.Object) float64 {
+	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("defaultWidthForInkType:"), objref.IDOf(inkType))
+	return _r
 }
 
-// MinimumWidthForInkType calls the underlying PKInkingToolMinimumWidthForInkType.
-func MinimumWidthForInkType(inkType *foundation.NSString) float64 {
-	return raw.PKInkingToolMinimumWidthForInkType(inkType)
+// MinimumWidthForInkType the minimum width for an ink of a type.
+func MinimumWidthForInkType(inkType obj.Object) float64 {
+	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("minimumWidthForInkType:"), objref.IDOf(inkType))
+	return _r
 }
 
-// MaximumWidthForInkType calls the underlying PKInkingToolMaximumWidthForInkType.
-func MaximumWidthForInkType(inkType *foundation.NSString) float64 {
-	return raw.PKInkingToolMaximumWidthForInkType(inkType)
+// MaximumWidthForInkType the maximum width for an ink of a type.
+func MaximumWidthForInkType(inkType obj.Object) float64 {
+	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("maximumWidthForInkType:"), objref.IDOf(inkType))
+	return _r
 }
 
-// InvertColor calls the underlying PKInkingToolInvertColor.
-func InvertColor(color unsafe.Pointer) unsafe.Pointer {
-	return raw.PKInkingToolInvertColor(color)
+// InvertColor converts a color from light to dark appearance or vice versa.
+func InvertColor(color obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("invertColor:"), objref.IDOf(color))
+	return obj.Wrap(_r)
 }

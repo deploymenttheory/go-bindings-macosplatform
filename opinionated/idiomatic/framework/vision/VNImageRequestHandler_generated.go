@@ -5,186 +5,118 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that processes one or more image-analysis request pertaining to a single image.
+// ImageRequestHandler is an idiomatic wrapper over the Objective-C class VNImageRequestHandler.
 //
-// ImageRequestHandler wraps [raw.VNImageRequestHandler] with a fluent Go API.
+// An object that processes one or more image-analysis request pertaining to a single image.
 type ImageRequestHandler struct {
-	inner *raw.VNImageRequestHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNImageRequestHandler].
-func (x *ImageRequestHandler) Unwrap() *raw.VNImageRequestHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageRequestHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageRequestHandlerFromID adopts an existing object pointer as a ImageRequestHandler (nil for 0).
+// ImageRequestHandlerFromID adopts an existing Objective-C object as a ImageRequestHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageRequestHandlerFromID(id objc.ID) *ImageRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(id)}
+	x := &ImageRequestHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a handler for performing requests on a Core Video pixel buffer.
-//
-// NewImageRequestHandlerWithCVPixelBufferOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:options:"), pixelBuffer, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler for performing requests on a Core Video pixel buffer of a known orientation.
-//
-// NewImageRequestHandlerWithCVPixelBufferOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCVPixelBufferOrientationOptions(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:orientation:options:"), pixelBuffer, orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// @brief initWithCVPixelBuffer:depthData:orientation:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer with depth information. @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler. @param depthData An AVDepthData instance associated with the pixelBuffer @param orientation The orientation of the image and depth buffers based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information and should match for both buffers. @param options A dictionary with options specifying auxiliary information for the buffer/image
-//
-// NewImageRequestHandlerWithCVPixelBufferDepthDataOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCVPixelBufferDepthDataOrientationOptions(pixelBuffer unsafe.Pointer, depthData *avfoundation.AVDepthData, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:depthData:orientation:options:"), pixelBuffer, depthData.Ptr(), orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to be used for performing requests on Core Graphics images.
-//
-// NewImageRequestHandlerWithCGImageOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCGImageOptions(image unsafe.Pointer, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), image, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to be used for performing requests on a Core Graphics image with known orientation.
-//
-// NewImageRequestHandlerWithCGImageOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCGImageOrientationOptions(image unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:orientation:options:"), image, orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to use for performing requests on Core Image image data.
-//
-// NewImageRequestHandlerWithCIImageOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCIImageOptions(image *coreimage.CIImage, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:options:"), image.Ptr(), options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to be used for performing requests on Core Image image data of a known orientation.
-//
-// NewImageRequestHandlerWithCIImageOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCIImageOrientationOptions(image *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:orientation:options:"), image.Ptr(), orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to be used for performing requests on an image at the specified URL.
-//
-// NewImageRequestHandlerWithURLOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithURLOptions(imageURL string, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to be used for performing requests on an image with known orientation, at the specified URL.
-//
-// NewImageRequestHandlerWithURLOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithURLOrientationOptions(imageURL string, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:orientation:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to use for performing requests on an image in a data object.
-//
-// NewImageRequestHandlerWithDataOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithDataOptions(imageData *foundation.NSData, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), imageData.Ptr(), options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a handler to use for performing requests on an image of known orientation.
-//
-// NewImageRequestHandlerWithDataOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithDataOrientationOptions(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:orientation:options:"), imageData.Ptr(), orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a request handler that performs requests on an image contained within a sample buffer.
-//
-// NewImageRequestHandlerWithCMSampleBufferOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCMSampleBufferOptions(sampleBuffer unsafe.Pointer, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMSampleBuffer:options:"), sampleBuffer, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a request handler that performs requests on an image of a specified orientation contained within a sample buffer.
-//
-// NewImageRequestHandlerWithCMSampleBufferOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCMSampleBufferOrientationOptions(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMSampleBuffer:orientation:options:"), sampleBuffer, orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Creates a request handler that performs requests on an image in a sample buffer that contains depth data.
-//
-// NewImageRequestHandlerWithCMSampleBufferDepthDataOrientationOptions creates a new [ImageRequestHandler].
-func NewImageRequestHandlerWithCMSampleBufferDepthDataOrientationOptions(sampleBuffer unsafe.Pointer, depthData *avfoundation.AVDepthData, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *ImageRequestHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMSampleBuffer:depthData:orientation:options:"), sampleBuffer, depthData.Ptr(), orientation, options.ID())
-	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
-}
-
-// Schedules Vision requests to perform.
-//
-// PerformRequestsError calls the underlying PerformRequestsError.
-func (x *ImageRequestHandler) PerformRequestsError(requests ...RequestProvider) (bool, error) {
-	_ptrs := make([]objc.ID, len(requests))
-	for _i, _v := range requests {
-		_ptrs[_i] = _v.asRequest().Ptr()
+// imageRequestHandlerAdopt wraps an Objective-C object that this code just created as a
+// ImageRequestHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageRequestHandlerAdopt(id objc.ID) *ImageRequestHandler {
+	if id == 0 {
+		return nil
 	}
-	var _arg0 *foundation.NSArray[*raw.VNRequest]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.VNRequest](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.VNRequest](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
+	x := &ImageRequestHandler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-	return x.inner.PerformRequestsError(_arg0)
+// Description returns the object's -description text.
+func (x *ImageRequestHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageRequestHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageRequestHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageRequestHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageRequestHandlerWithCGImageOptions creates a handler to be used for performing requests on Core Graphics images.
+func NewImageRequestHandlerWithCGImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	return imageRequestHandlerAdopt(_id)
+}
+
+// NewImageRequestHandlerWithCIImageOptions creates a handler to use for performing requests on Core Image image data.
+func NewImageRequestHandlerWithCIImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	return imageRequestHandlerAdopt(_id)
+}
+
+// NewImageRequestHandlerWithURLOptions creates a handler to be used for performing requests on an image at the specified URL.
+func NewImageRequestHandlerWithURLOptions(imageURL string, options obj.Object) *ImageRequestHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(imageURL), objref.IDOf(options))
+	return imageRequestHandlerAdopt(_id)
+}
+
+// NewImageRequestHandlerWithDataOptions creates a handler to use for performing requests on an image in a data object.
+func NewImageRequestHandlerWithDataOptions(imageData obj.Object, options obj.Object) *ImageRequestHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(imageData), objref.IDOf(options))
+	return imageRequestHandlerAdopt(_id)
+}
+
+// NewImageRequestHandlerWithCMSampleBufferOptions creates a request handler that performs requests on an image contained within a sample buffer.
+func NewImageRequestHandlerWithCMSampleBufferOptions(sampleBuffer obj.Object, options obj.Object) *ImageRequestHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMSampleBuffer:options:"), objref.IDOf(sampleBuffer), objref.IDOf(options))
+	return imageRequestHandlerAdopt(_id)
+}
+
+// PerformRequests schedules Vision requests to perform.
+func (x *ImageRequestHandler) PerformRequests(requests []*Request) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // ImageRequestHandlerable is the interface implemented by [ImageRequestHandler], for mocking and DI.
 type ImageRequestHandlerable interface {
-	Unwrap() *raw.VNImageRequestHandler
-	PerformRequestsError(requests ...RequestProvider) (bool, error)
+	obj.Object
+	PerformRequests(requests []*Request) error
 }
 
 var _ ImageRequestHandlerable = (*ImageRequestHandler)(nil)

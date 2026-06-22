@@ -5,79 +5,109 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the ability to present the dashboard in macOS games.
+// DialogController is an idiomatic wrapper over the Objective-C class GKDialogController.
 //
-// DialogController wraps [raw.GKDialogController] with a fluent Go API.
+// An object that provides the ability to present the dashboard in macOS games.
 type DialogController struct {
-	inner *raw.GKDialogController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKDialogController].
-func (x *DialogController) Unwrap() *raw.GKDialogController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DialogController) ID() objc.ID { return x.inner.Ptr() }
-
-// DialogControllerFromID adopts an existing object pointer as a DialogController (nil for 0).
+// DialogControllerFromID adopts an existing Objective-C object as a DialogController
+// (nil for 0), retaining it and registering a release finalizer.
 func DialogControllerFromID(id objc.ID) *DialogController {
 	if id == 0 {
 		return nil
 	}
-	return &DialogController{inner: raw.GKDialogControllerFromID(id)}
-}
-
-// NewDialogController creates a new [DialogController].
-func NewDialogController() *DialogController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDialogController")), objc.RegisterName("new"))
-	return &DialogController{inner: raw.GKDialogControllerFromID(_id)}
-}
-
-// The window that displays the dashboard.
-//
-// WithParentWindow sets the parentWindow property and returns the receiver for chaining.
-func (x *DialogController) WithParentWindow(parentWindow *appkit.NSWindow) *DialogController {
-	x.inner.SetParentWindow(parentWindow)
+	x := &DialogController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Presents the dashboard in the window.
-//
-// PresentViewController calls the underlying PresentViewController.
-func (x *DialogController) PresentViewController(viewController *appkit.NSViewController) bool {
-	return x.inner.PresentViewController(viewController)
+// dialogControllerAdopt wraps an Objective-C object that this code just created as a
+// DialogController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dialogControllerAdopt(id objc.ID) *DialogController {
+	if id == 0 {
+		return nil
+	}
+	x := &DialogController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Dismisses the dashboard.
-//
-// Dismiss calls the underlying Dismiss.
-func (x *DialogController) Dismiss(sender objc.ID) {
-	x.inner.Dismiss(sender)
+// Description returns the object's -description text.
+func (x *DialogController) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ParentWindow calls the underlying ParentWindow.
-func (x *DialogController) ParentWindow() *appkit.NSWindow {
-	return x.inner.ParentWindow()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DialogController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetParentWindow calls the underlying SetParentWindow.
-func (x *DialogController) SetParentWindow(parentWindow *appkit.NSWindow) {
-	x.inner.SetParentWindow(parentWindow)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DialogController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DialogController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDialogController creates a new DialogController.
+func NewDialogController() *DialogController {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("new"))
+	return dialogControllerAdopt(_id)
+}
+
+// WithParentWindow the window that displays the dashboard.
+func (x *DialogController) WithParentWindow(parentWindow obj.Object) *DialogController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	return x
+}
+
+// PresentViewController presents the dashboard in the window.
+func (x *DialogController) PresentViewController(viewController obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentViewController:"), objref.IDOf(viewController))
+	return _r
+}
+
+// Dismiss dismisses the dashboard.
+func (x *DialogController) Dismiss(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismiss:"), objref.IDOf(sender))
+}
+
+// ParentWindow wraps the corresponding Objective-C method.
+func (x *DialogController) ParentWindow() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentWindow"))
+	return obj.Wrap(_r)
+}
+
+// SetParentWindow wraps the corresponding Objective-C method.
+func (x *DialogController) SetParentWindow(parentWindow obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 }
 
 // DialogControllerable is the interface implemented by [DialogController], for mocking and DI.
 type DialogControllerable interface {
-	Unwrap() *raw.GKDialogController
-	WithParentWindow(parentWindow *appkit.NSWindow) *DialogController
-	PresentViewController(viewController *appkit.NSViewController) bool
-	Dismiss(sender objc.ID)
-	ParentWindow() *appkit.NSWindow
-	SetParentWindow(parentWindow *appkit.NSWindow)
+	obj.Object
+	WithParentWindow(parentWindow obj.Object) *DialogController
+	PresentViewController(viewController obj.Object) bool
+	Dismiss(sender obj.Object)
+	ParentWindow() obj.Object
+	SetParentWindow(parentWindow obj.Object)
 }
 
 var _ DialogControllerable = (*DialogController)(nil)

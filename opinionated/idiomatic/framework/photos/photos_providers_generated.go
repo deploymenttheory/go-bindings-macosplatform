@@ -5,35 +5,41 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AssetChangeRequestProvider is implemented by AssetChangeRequest and any idiomatic type wrapping a PHAssetChangeRequest subclass.
+// AssetChangeRequestProvider is accepted wherever a PHAssetChangeRequest (or one of its subclasses) is expected.
 type AssetChangeRequestProvider interface {
-	asAssetChangeRequest() *raw.PHAssetChangeRequest
+	objref.Object
+	isAssetChangeRequest()
 }
 
-// AssetCollectionProvider is implemented by AssetCollection and any idiomatic type wrapping a PHAssetCollection subclass.
+// AssetCollectionProvider is accepted wherever a PHAssetCollection (or one of its subclasses) is expected.
 type AssetCollectionProvider interface {
-	asAssetCollection() *raw.PHAssetCollection
+	objref.Object
+	isAssetCollection()
 }
 
-// ChangeRequestProvider is implemented by ChangeRequest and any idiomatic type wrapping a PHChangeRequest subclass.
+// ChangeRequestProvider is accepted wherever a PHChangeRequest (or one of its subclasses) is expected.
 type ChangeRequestProvider interface {
-	asChangeRequest() *raw.PHChangeRequest
+	objref.Object
+	isChangeRequest()
 }
 
-// CollectionProvider is implemented by Collection and any idiomatic type wrapping a PHCollection subclass.
+// CollectionProvider is accepted wherever a PHCollection (or one of its subclasses) is expected.
 type CollectionProvider interface {
-	asCollection() *raw.PHCollection
+	objref.Object
+	isCollection()
 }
 
-// ImageManagerProvider is implemented by ImageManager and any idiomatic type wrapping a PHImageManager subclass.
+// ImageManagerProvider is accepted wherever a PHImageManager (or one of its subclasses) is expected.
 type ImageManagerProvider interface {
-	asImageManager() *raw.PHImageManager
+	objref.Object
+	isImageManager()
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a PHObject subclass.
+// ObjectProvider is accepted wherever a PHObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.PHObject
+	objref.Object
+	isObject()
 }

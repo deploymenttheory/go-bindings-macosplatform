@@ -5,167 +5,163 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// The abstract superclass for image-analysis requests that track unique features across multiple images or video frames.
+// TrackingRequest is an idiomatic wrapper over the Objective-C class VNTrackingRequest.
 //
-// TrackingRequest wraps [raw.VNTrackingRequest] with a fluent Go API.
+// TrackingRequest is an abstract base — you do not construct it directly. Construct one of [TrackObjectRequest], [TrackRectangleRequest] and pass it where a TrackingRequest is accepted.
+//
+// The abstract superclass for image-analysis requests that track unique features across multiple images or video frames.
 type TrackingRequest struct {
-	inner *raw.VNTrackingRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNTrackingRequest].
-func (x *TrackingRequest) Unwrap() *raw.VNTrackingRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrackingRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// TrackingRequestFromID adopts an existing object pointer as a TrackingRequest (nil for 0).
+// TrackingRequestFromID adopts an existing Objective-C object as a TrackingRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func TrackingRequestFromID(id objc.ID) *TrackingRequest {
 	if id == 0 {
 		return nil
 	}
-	return &TrackingRequest{inner: raw.VNTrackingRequestFromID(id)}
-}
-
-// NewTrackingRequest creates a new [TrackingRequest].
-func NewTrackingRequest() *TrackingRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackingRequest")), objc.RegisterName("new"))
-	return &TrackingRequest{inner: raw.VNTrackingRequestFromID(_id)}
-}
-
-// The observation object defining a region to track.
-//
-// WithInputObservation sets the inputObservation property and returns the receiver for chaining.
-func (x *TrackingRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest {
-	x.inner.SetInputObservation(inputObservation.asDetectedObjectObservation())
+	x := &TrackingRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A value for specifying whether to prioritize speed or location accuracy.
-//
-// WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
-func (x *TrackingRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackingRequest {
-	x.inner.SetTrackingLevel(raw.VNRequestTrackingLevel(trackingLevel))
-	return x
-}
-
-// A Boolean that indicates the last frame in a tracking sequence.
-//
-// WithLastFrame sets the lastFrame property and returns the receiver for chaining.
-func (x *TrackingRequest) WithLastFrame(lastFrame bool) *TrackingRequest {
-	x.inner.SetLastFrame(lastFrame)
-	return x
-}
-
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
-func (x *TrackingRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackingRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
-	return x
-}
-
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
-func (x *TrackingRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackingRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
-	return x
-}
-
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
-func (x *TrackingRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
-	return x
-}
-
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *TrackingRequest) WithRevision(revision uint) *TrackingRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
-	return x
-}
-
-// Returns the maximum number of simultaneous trackers for the request.
-//
-// SupportedNumberOfTrackersAndReturnError calls the underlying SupportedNumberOfTrackersAndReturnError.
-func (x *TrackingRequest) SupportedNumberOfTrackersAndReturnError() (uint, error) {
-	return x.inner.SupportedNumberOfTrackersAndReturnError()
-}
-
-// @property property inputObservation @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
-//
-// InputObservation calls the underlying InputObservation.
-func (x *TrackingRequest) InputObservation() *DetectedObjectObservation {
-	_r := x.inner.InputObservation()
-	if _r == nil {
+// trackingRequestAdopt wraps an Objective-C object that this code just created as a
+// TrackingRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trackingRequestAdopt(id objc.ID) *TrackingRequest {
+	if id == 0 {
 		return nil
 	}
-	return &DetectedObjectObservation{inner: _r}
+	x := &TrackingRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetInputObservation calls the underlying SetInputObservation.
-func (x *TrackingRequest) SetInputObservation(inputObservation *raw.VNDetectedObjectObservation) {
-	x.inner.SetInputObservation(inputObservation)
+// WithInputObservation the observation object defining a region to track.
+func (x *TrackingRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
+	return x
 }
 
-// @property property trackingLevel @abstract Tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
-//
-// TrackingLevel calls the underlying TrackingLevel.
-func (x *TrackingRequest) TrackingLevel() VNRequestTrackingLevel {
-	return VNRequestTrackingLevel(x.inner.TrackingLevel())
+// WithTrackingLevel a value for specifying whether to prioritize speed or location accuracy.
+func (x *TrackingRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingLevel:"), trackingLevel)
+	return x
 }
 
-// SetTrackingLevel calls the underlying SetTrackingLevel.
-func (x *TrackingRequest) SetTrackingLevel(trackingLevel VNRequestTrackingLevel) {
-	x.inner.SetTrackingLevel(raw.VNRequestTrackingLevel(trackingLevel))
+// WithLastFrame a Boolean that indicates the last frame in a tracking sequence.
+func (x *TrackingRequest) WithLastFrame(lastFrame bool) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastFrame:"), lastFrame)
+	return x
 }
 
-// @property property lastFrame @abstract This property allows marking the last frame for tracking using current tracker. If set to YES, the results for this frame will be processed and returned and the current tracker will be released to the pool of available trackers
-//
-// IsLastFrame calls the underlying IsLastFrame.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *TrackingRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
+func (x *TrackingRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (x *TrackingRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return x
+}
+
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *TrackingRequest) WithRevision(revision int) *TrackingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
+	return x
+}
+
+// SupportedNumberOfTrackersAndReturnError returns the maximum number of simultaneous trackers for the request.
+func (x *TrackingRequest) SupportedNumberOfTrackersAndReturnError() (result int, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("supportedNumberOfTrackersAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// InputObservation the observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
+func (x *TrackingRequest) InputObservation() *DetectedObjectObservation {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputObservation"))
+	return DetectedObjectObservationFromID(_r)
+}
+
+// SetInputObservation wraps the corresponding Objective-C method.
+func (x *TrackingRequest) SetInputObservation(inputObservation *DetectedObjectObservation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
+}
+
+// TrackingLevel tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
+func (x *TrackingRequest) TrackingLevel() RequestTrackingLevel {
+	_r := objc.Send[RequestTrackingLevel](objref.IDOf(x), objc.RegisterName("trackingLevel"))
+	return _r
+}
+
+// SetTrackingLevel wraps the corresponding Objective-C method.
+func (x *TrackingRequest) SetTrackingLevel(trackingLevel RequestTrackingLevel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingLevel:"), trackingLevel)
+}
+
+// IsLastFrame this property allows marking the last frame for tracking using current tracker. If set to YES, the results for this frame will be processed and returned and the current tracker will be released to the pool of available trackers
 func (x *TrackingRequest) IsLastFrame() bool {
-	return x.inner.IsLastFrame()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLastFrame"))
+	return _r
 }
 
-// SetLastFrame calls the underlying SetLastFrame.
+// SetLastFrame wraps the corresponding Objective-C method.
 func (x *TrackingRequest) SetLastFrame(lastFrame bool) {
-	x.inner.SetLastFrame(lastFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastFrame:"), lastFrame)
 }
-
-func (x *TrackingRequest) asTrackingRequest() *raw.VNTrackingRequest { return x.inner }
-
-func (x *TrackingRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *TrackingRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
 // TrackingRequestable is the interface implemented by [TrackingRequest], for mocking and DI.
 type TrackingRequestable interface {
-	Unwrap() *raw.VNTrackingRequest
+	obj.Object
 	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest
-	WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackingRequest
+	WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackingRequest
 	WithLastFrame(lastFrame bool) *TrackingRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackingRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackingRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest
-	WithRevision(revision uint) *TrackingRequest
-	SupportedNumberOfTrackersAndReturnError() (uint, error)
+	WithRevision(revision int) *TrackingRequest
+	SupportedNumberOfTrackersAndReturnError() (result int, err error)
 	InputObservation() *DetectedObjectObservation
-	SetInputObservation(inputObservation *raw.VNDetectedObjectObservation)
-	TrackingLevel() VNRequestTrackingLevel
-	SetTrackingLevel(trackingLevel VNRequestTrackingLevel)
+	SetInputObservation(inputObservation *DetectedObjectObservation)
+	TrackingLevel() RequestTrackingLevel
+	SetTrackingLevel(trackingLevel RequestTrackingLevel)
 	IsLastFrame() bool
 	SetLastFrame(lastFrame bool)
 }
 
 var _ TrackingRequestable = (*TrackingRequest)(nil)
+
+// isTrackingRequest marks TrackingRequest — and, by embedding promotion, its
+// subclasses — as a member of the TrackingRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TrackingRequest) isTrackingRequest() {}
+
+var _ TrackingRequestProvider = (*TrackingRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TrackingRequest)(nil)
+
+var _ RequestProvider = (*TrackingRequest)(nil)

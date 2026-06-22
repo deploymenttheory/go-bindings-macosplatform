@@ -5,92 +5,96 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.
+// PickerUpdateConfiguration is an idiomatic wrapper over the Objective-C class PHPickerUpdateConfiguration.
 //
-// PickerUpdateConfiguration wraps [raw.PHPickerUpdateConfiguration] with a fluent Go API.
+// An object that defines the aspects of a photo picker’s appearance that can change while it’s presented.
 type PickerUpdateConfiguration struct {
-	inner *raw.PHPickerUpdateConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPickerUpdateConfiguration].
-func (x *PickerUpdateConfiguration) Unwrap() *raw.PHPickerUpdateConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PickerUpdateConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// PickerUpdateConfigurationFromID adopts an existing object pointer as a PickerUpdateConfiguration (nil for 0).
+// PickerUpdateConfigurationFromID adopts an existing Objective-C object as a PickerUpdateConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func PickerUpdateConfigurationFromID(id objc.ID) *PickerUpdateConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &PickerUpdateConfiguration{inner: raw.PHPickerUpdateConfigurationFromID(id)}
+	x := &PickerUpdateConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPickerUpdateConfiguration creates a new [PickerUpdateConfiguration].
+// pickerUpdateConfigurationAdopt wraps an Objective-C object that this code just created as a
+// PickerUpdateConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pickerUpdateConfigurationAdopt(id objc.ID) *PickerUpdateConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &PickerUpdateConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PickerUpdateConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PickerUpdateConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PickerUpdateConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerUpdateConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPickerUpdateConfiguration creates a new PickerUpdateConfiguration.
 func NewPickerUpdateConfiguration() *PickerUpdateConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerUpdateConfiguration")), objc.RegisterName("new"))
-	return &PickerUpdateConfiguration{inner: raw.PHPickerUpdateConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerUpdateConfiguration")), objc.RegisterName("new"))
+	return pickerUpdateConfigurationAdopt(_id)
 }
 
-// The maximum number of selections the user can make.
-//
-// WithSelectionLimit sets the selectionLimit property and returns the receiver for chaining.
+// WithSelectionLimit the maximum number of selections the user can make.
 func (x *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration {
-	x.inner.SetSelectionLimit(selectionLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
 	return x
 }
 
-// The portions of a photo picker’s permiter that are borderless.
-//
-// WithEdgesWithoutContentMargins sets the edgesWithoutContentMargins property and returns the receiver for chaining.
-func (x *PickerUpdateConfiguration) WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerUpdateConfiguration {
-	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
-	return x
-}
-
-// The maximum number of assets that can be selected.
-//
-// SelectionLimit calls the underlying SelectionLimit.
+// SelectionLimit the maximum number of assets that can be selected.
 func (x *PickerUpdateConfiguration) SelectionLimit() int {
-	return x.inner.SelectionLimit()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionLimit"))
+	return _r
 }
 
-// The maximum number of assets that can be selected.
-//
-// SetSelectionLimit calls the underlying SetSelectionLimit.
+// SetSelectionLimit the maximum number of assets that can be selected.
 func (x *PickerUpdateConfiguration) SetSelectionLimit(selectionLimit int) {
-	x.inner.SetSelectionLimit(selectionLimit)
-}
-
-// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
-//
-// EdgesWithoutContentMargins calls the underlying EdgesWithoutContentMargins.
-func (x *PickerUpdateConfiguration) EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge {
-	return x.inner.EdgesWithoutContentMargins()
-}
-
-// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
-//
-// SetEdgesWithoutContentMargins calls the underlying SetEdgesWithoutContentMargins.
-func (x *PickerUpdateConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
-	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
 }
 
 // PickerUpdateConfigurationable is the interface implemented by [PickerUpdateConfiguration], for mocking and DI.
 type PickerUpdateConfigurationable interface {
-	Unwrap() *raw.PHPickerUpdateConfiguration
+	obj.Object
 	WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration
-	WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerUpdateConfiguration
 	SelectionLimit() int
 	SetSelectionLimit(selectionLimit int)
-	EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge
-	SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge)
 }
 
 var _ PickerUpdateConfigurationable = (*PickerUpdateConfiguration)(nil)

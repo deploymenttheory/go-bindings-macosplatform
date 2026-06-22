@@ -9,122 +9,132 @@ import (
 )
 
 // A constant that describes how lighting is calculated by an effect.
-type GLKLightingType int64
+type LightingType int64
 
 const (
 	// Indicates that the lighting calculations are performed at each vertex in a triangle and then interpolated across the triangle.
-	GLKLightingTypePerVertex GLKLightingType = 0
+	LightingTypePerVertex LightingType = 0
 	// Indicates that the inputs to the lighting calculation are interpolated across a triangle and the lighting calculations are performed at each fragment.
-	GLKLightingTypePerPixel GLKLightingType = 1
+	LightingTypePerPixel LightingType = 1
 )
 
-func (e GLKLightingType) String() string {
+// String returns the LightingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LightingType) String() string {
 	switch e {
-	case GLKLightingTypePerVertex:
-		return "GLKLightingTypePerVertex"
-	case GLKLightingTypePerPixel:
-		return "GLKLightingTypePerPixel"
+	case LightingTypePerVertex:
+		return "LightingTypePerVertex"
+	case LightingTypePerPixel:
+		return "LightingTypePerPixel"
 	default:
-		return fmt.Sprintf("GLKLightingType(%d)", int64(e))
+		return fmt.Sprintf("LightingType(%d)", int64(e))
 	}
 }
 
 // The mode used to combine the texture with other color components.
-type GLKTextureEnvMode int64
+type TextureEnvMode int64
 
 const (
 	// The output color is set to the color fetched from the texture. The input color is ignored.
-	GLKTextureEnvModeReplace GLKTextureEnvMode = 0
+	TextureEnvModeReplace TextureEnvMode = 0
 	// The output color is calculated by multiplying the texture’s color by the input color.
-	GLKTextureEnvModeModulate GLKTextureEnvMode = 1
+	TextureEnvModeModulate TextureEnvMode = 1
 	// The output color is calculated by using the texture’s alpha component to blend the texture’s color with the input color.
-	GLKTextureEnvModeDecal GLKTextureEnvMode = 2
+	TextureEnvModeDecal TextureEnvMode = 2
 )
 
-func (e GLKTextureEnvMode) String() string {
+// String returns the TextureEnvMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextureEnvMode) String() string {
 	switch e {
-	case GLKTextureEnvModeReplace:
-		return "GLKTextureEnvModeReplace"
-	case GLKTextureEnvModeModulate:
-		return "GLKTextureEnvModeModulate"
-	case GLKTextureEnvModeDecal:
-		return "GLKTextureEnvModeDecal"
+	case TextureEnvModeReplace:
+		return "TextureEnvModeReplace"
+	case TextureEnvModeModulate:
+		return "TextureEnvModeModulate"
+	case TextureEnvModeDecal:
+		return "TextureEnvModeDecal"
 	default:
-		return fmt.Sprintf("GLKTextureEnvMode(%d)", int64(e))
+		return fmt.Sprintf("TextureEnvMode(%d)", int64(e))
 	}
 }
 
 // Values that describe the alpha information stored in a source image’s pixel data.
-type GLKTextureInfoAlphaState int64
+type TextureInfoAlphaState int64
 
 const (
 	// Indicates that the texture has no alpha information.
-	GLKTextureInfoAlphaStateNone GLKTextureInfoAlphaState = 0
+	TextureInfoAlphaStateNone TextureInfoAlphaState = 0
 	// Indicates that the color values in the texture were not premultiplied by the alpha value.
-	GLKTextureInfoAlphaStateNonPremultiplied GLKTextureInfoAlphaState = 1
+	TextureInfoAlphaStateNonPremultiplied TextureInfoAlphaState = 1
 	// Indicates that the color values in the texture have already been premultiplied by the alpha value.
-	GLKTextureInfoAlphaStatePremultiplied GLKTextureInfoAlphaState = 2
+	TextureInfoAlphaStatePremultiplied TextureInfoAlphaState = 2
 )
 
-func (e GLKTextureInfoAlphaState) String() string {
+// String returns the TextureInfoAlphaState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextureInfoAlphaState) String() string {
 	switch e {
-	case GLKTextureInfoAlphaStateNone:
-		return "GLKTextureInfoAlphaStateNone"
-	case GLKTextureInfoAlphaStateNonPremultiplied:
-		return "GLKTextureInfoAlphaStateNonPremultiplied"
-	case GLKTextureInfoAlphaStatePremultiplied:
-		return "GLKTextureInfoAlphaStatePremultiplied"
+	case TextureInfoAlphaStateNone:
+		return "TextureInfoAlphaStateNone"
+	case TextureInfoAlphaStateNonPremultiplied:
+		return "TextureInfoAlphaStateNonPremultiplied"
+	case TextureInfoAlphaStatePremultiplied:
+		return "TextureInfoAlphaStatePremultiplied"
 	default:
-		return fmt.Sprintf("GLKTextureInfoAlphaState(%d)", int64(e))
+		return fmt.Sprintf("TextureInfoAlphaState(%d)", int64(e))
 	}
 }
 
 // The location of the origin in the original source image.
-type GLKTextureInfoOrigin int64
+type TextureInfoOrigin int64
 
 const (
 	// The origin of the texture is not supported.
-	GLKTextureInfoOriginUnknown GLKTextureInfoOrigin = 0
+	TextureInfoOriginUnknown TextureInfoOrigin = 0
 	// The origin of the texture is in the top-left corner.
-	GLKTextureInfoOriginTopLeft GLKTextureInfoOrigin = 1
+	TextureInfoOriginTopLeft TextureInfoOrigin = 1
 	// The origin of the texture is in the bottom-left corner.
-	GLKTextureInfoOriginBottomLeft GLKTextureInfoOrigin = 2
+	TextureInfoOriginBottomLeft TextureInfoOrigin = 2
 )
 
-func (e GLKTextureInfoOrigin) String() string {
+// String returns the TextureInfoOrigin constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextureInfoOrigin) String() string {
 	switch e {
-	case GLKTextureInfoOriginUnknown:
-		return "GLKTextureInfoOriginUnknown"
-	case GLKTextureInfoOriginTopLeft:
-		return "GLKTextureInfoOriginTopLeft"
-	case GLKTextureInfoOriginBottomLeft:
-		return "GLKTextureInfoOriginBottomLeft"
+	case TextureInfoOriginUnknown:
+		return "TextureInfoOriginUnknown"
+	case TextureInfoOriginTopLeft:
+		return "TextureInfoOriginTopLeft"
+	case TextureInfoOriginBottomLeft:
+		return "TextureInfoOriginBottomLeft"
 	default:
-		return fmt.Sprintf("GLKTextureInfoOrigin(%d)", int64(e))
+		return fmt.Sprintf("TextureInfoOrigin(%d)", int64(e))
 	}
 }
 
 // The kind of texture pointed to by the property.
-type GLKTextureTarget int64
+type TextureTarget int64
 
 const (
 	// The texture is a 2D texture.
-	GLKTextureTarget2D GLKTextureTarget = 3553
+	TextureTarget2D TextureTarget = 3553
 	// The texture is a set of six textures that make up a cube map.
-	GLKTextureTargetCubeMap GLKTextureTarget = 34067
+	TextureTargetCubeMap TextureTarget = 34067
 	// The number of items in the enumeration.
-	GLKTextureTargetCt GLKTextureTarget = 2
+	TextureTargetCt TextureTarget = 2
 )
 
-func (e GLKTextureTarget) String() string {
+// String returns the TextureTarget constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextureTarget) String() string {
 	switch e {
-	case GLKTextureTarget2D:
-		return "GLKTextureTarget2D"
-	case GLKTextureTargetCubeMap:
-		return "GLKTextureTargetCubeMap"
-	case GLKTextureTargetCt:
-		return "GLKTextureTargetCt"
+	case TextureTarget2D:
+		return "TextureTarget2D"
+	case TextureTargetCubeMap:
+		return "TextureTargetCubeMap"
+	case TextureTargetCt:
+		return "TextureTargetCt"
 	default:
-		return fmt.Sprintf("GLKTextureTarget(%d)", int64(e))
+		return fmt.Sprintf("TextureTarget(%d)", int64(e))
 	}
 }

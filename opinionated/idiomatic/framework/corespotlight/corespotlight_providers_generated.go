@@ -5,15 +5,17 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// SearchQueryProvider is implemented by SearchQuery and any idiomatic type wrapping a CSSearchQuery subclass.
+// SearchQueryProvider is accepted wherever a CSSearchQuery (or one of its subclasses) is expected.
 type SearchQueryProvider interface {
-	asSearchQuery() *raw.CSSearchQuery
+	objref.Object
+	isSearchQuery()
 }
 
-// SearchQueryContextProvider is implemented by SearchQueryContext and any idiomatic type wrapping a CSSearchQueryContext subclass.
+// SearchQueryContextProvider is accepted wherever a CSSearchQueryContext (or one of its subclasses) is expected.
 type SearchQueryContextProvider interface {
-	asSearchQueryContext() *raw.CSSearchQueryContext
+	objref.Object
+	isSearchQueryContext()
 }

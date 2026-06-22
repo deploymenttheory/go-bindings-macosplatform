@@ -4,48 +4,98 @@
 
 package vimage
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vimage"
-)
+type VImageARGBToYpCbCrMatrix struct {
+	R_Yp      float32
+	G_Yp      float32
+	B_Yp      float32
+	R_Cb      float32
+	G_Cb      float32
+	B_Cb_R_Cr float32
+	G_Cr      float32
+	B_Cr      float32
+}
 
-// VImageChannelDescription is a type alias for the raw VImageChannelDescription value-type struct.
-type VImageChannelDescription = raw.VImageChannelDescription
+type VImageAffineTransform struct {
+	A  float32
+	B  float32
+	C  float32
+	D  float32
+	Tx float32
+	Ty float32
+}
 
-// VImageRGBPrimaries is a type alias for the raw VImageRGBPrimaries value-type struct.
-type VImageRGBPrimaries = raw.VImageRGBPrimaries
+type VImageAffineTransformDouble struct {
+	A  float64
+	B  float64
+	C  float64
+	D  float64
+	Tx float64
+	Ty float64
+}
 
-// VImageTransferFunction is a type alias for the raw VImageTransferFunction value-type struct.
-type VImageTransferFunction = raw.VImageTransferFunction
+type VImageChannelDescription struct {
+	Min  float64
+	Zero float64
+	Full float64
+	Max  float64
+}
 
-// VImageWhitePoint is a type alias for the raw VImageWhitePoint value-type struct.
-type VImageWhitePoint = raw.VImageWhitePoint
+// Coefficients defining the 3x3 perspective (projective) transform matrix
+type VImagePerpsectiveTransform struct {
+	A  float32
+	B  float32
+	C  float32
+	D  float32
+	Tx float32
+	Ty float32
+	Vx float32
+	Vy float32
+	V  float32
+}
 
-// VImageARGBToYpCbCr is a type alias for the raw VImageARGBToYpCbCr value-type struct.
-type VImageARGBToYpCbCr = raw.VImageARGBToYpCbCr
+type VImageRGBPrimaries struct {
+	Red_x   float32
+	Green_x float32
+	Blue_x  float32
+	White_x float32
+	Red_y   float32
+	Green_y float32
+	Blue_y  float32
+	White_y float32
+}
 
-// VImageARGBToYpCbCrMatrix is a type alias for the raw VImageARGBToYpCbCrMatrix value-type struct.
-type VImageARGBToYpCbCrMatrix = raw.VImageARGBToYpCbCrMatrix
+type VImageTransferFunction struct {
+	C0     float64
+	C1     float64
+	C2     float64
+	C3     float64
+	Gamma  float64
+	Cutoff float64
+	C4     float64
+	C5     float64
+}
 
-// VImageAffineTransform is a type alias for the raw VImageAffineTransform value-type struct.
-type VImageAffineTransform = raw.VImageAffineTransform
+type VImageWhitePoint struct {
+	White_x float32
+	White_y float32
+}
 
-// VImageAffineTransformDouble is a type alias for the raw VImageAffineTransformDouble value-type struct.
-type VImageAffineTransformDouble = raw.VImageAffineTransformDouble
+// Range and clamping information for Y'CbCr pixel formats Y'CbCr formats frequently don't use the entire representable range available to them to represent image data. While a "full range" video format does use the entire range, a "video range" format often leaves the extrema unused, except perhaps to represent values outside of the standard Y'=[0,1] CbCr = [-0.5, 0.5] range. For example, a 8-bit video range format typically uses the range [16,235] for Y' and [16, 240] for Cb and Cr. Some examples:
+type VImageYpCbCrPixelRange struct {
+	Yp_bias      int32
+	CbCr_bias    int32
+	YpRangeMax   int32
+	CbCrRangeMax int32
+	YpMax        int32
+	YpMin        int32
+	CbCrMax      int32
+	CbCrMin      int32
+}
 
-// VImageBuffer is a type alias for the raw VImageBuffer value-type struct.
-type VImageBuffer = raw.VImageBuffer
-
-// VImageCGImageFormat is a type alias for the raw VImageCGImageFormat value-type struct.
-type VImageCGImageFormat = raw.VImageCGImageFormat
-
-// VImagePerpsectiveTransform is a type alias for the raw VImagePerpsectiveTransform value-type struct.
-type VImagePerpsectiveTransform = raw.VImagePerpsectiveTransform
-
-// VImageYpCbCrPixelRange is a type alias for the raw VImageYpCbCrPixelRange value-type struct.
-type VImageYpCbCrPixelRange = raw.VImageYpCbCrPixelRange
-
-// VImageYpCbCrToARGB is a type alias for the raw VImageYpCbCrToARGB value-type struct.
-type VImageYpCbCrToARGB = raw.VImageYpCbCrToARGB
-
-// VImageYpCbCrToARGBMatrix is a type alias for the raw VImageYpCbCrToARGBMatrix value-type struct.
-type VImageYpCbCrToARGBMatrix = raw.VImageYpCbCrToARGBMatrix
+type VImageYpCbCrToARGBMatrix struct {
+	Yp   float32
+	Cr_R float32
+	Cr_G float32
+	Cb_G float32
+	Cb_B float32
+}

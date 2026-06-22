@@ -5,53 +5,56 @@
 package carboncore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KFSOperationTotalBytesKey returns the value of the CoreFoundation reference constant kFSOperationTotalBytesKey as an objc.ID.
-func KFSOperationTotalBytesKey() objc.ID { return purego.CFConstant(raw.KFSOperationTotalBytesKey()) }
-
-// KFSOperationBytesCompleteKey returns the value of the CoreFoundation reference constant kFSOperationBytesCompleteKey as an objc.ID.
-func KFSOperationBytesCompleteKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationBytesCompleteKey())
+// KFSOperationTotalBytesKey returns the value of the constant kFSOperationTotalBytesKey.
+func KFSOperationTotalBytesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationTotalBytesKey")))
 }
 
-// KFSOperationBytesRemainingKey returns the value of the CoreFoundation reference constant kFSOperationBytesRemainingKey as an objc.ID.
-func KFSOperationBytesRemainingKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationBytesRemainingKey())
+// KFSOperationBytesCompleteKey returns the value of the constant kFSOperationBytesCompleteKey.
+func KFSOperationBytesCompleteKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationBytesCompleteKey")))
 }
 
-// KFSOperationTotalObjectsKey returns the value of the CoreFoundation reference constant kFSOperationTotalObjectsKey as an objc.ID.
-func KFSOperationTotalObjectsKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationTotalObjectsKey())
+// KFSOperationBytesRemainingKey returns the value of the constant kFSOperationBytesRemainingKey.
+func KFSOperationBytesRemainingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationBytesRemainingKey")))
 }
 
-// KFSOperationObjectsCompleteKey returns the value of the CoreFoundation reference constant kFSOperationObjectsCompleteKey as an objc.ID.
-func KFSOperationObjectsCompleteKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationObjectsCompleteKey())
+// KFSOperationTotalObjectsKey returns the value of the constant kFSOperationTotalObjectsKey.
+func KFSOperationTotalObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationTotalObjectsKey")))
 }
 
-// KFSOperationObjectsRemainingKey returns the value of the CoreFoundation reference constant kFSOperationObjectsRemainingKey as an objc.ID.
-func KFSOperationObjectsRemainingKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationObjectsRemainingKey())
+// KFSOperationObjectsCompleteKey returns the value of the constant kFSOperationObjectsCompleteKey.
+func KFSOperationObjectsCompleteKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationObjectsCompleteKey")))
 }
 
-// KFSOperationTotalUserVisibleObjectsKey returns the value of the CoreFoundation reference constant kFSOperationTotalUserVisibleObjectsKey as an objc.ID.
-func KFSOperationTotalUserVisibleObjectsKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationTotalUserVisibleObjectsKey())
+// KFSOperationObjectsRemainingKey returns the value of the constant kFSOperationObjectsRemainingKey.
+func KFSOperationObjectsRemainingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationObjectsRemainingKey")))
 }
 
-// KFSOperationUserVisibleObjectsCompleteKey returns the value of the CoreFoundation reference constant kFSOperationUserVisibleObjectsCompleteKey as an objc.ID.
-func KFSOperationUserVisibleObjectsCompleteKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationUserVisibleObjectsCompleteKey())
+// KFSOperationTotalUserVisibleObjectsKey returns the value of the constant kFSOperationTotalUserVisibleObjectsKey.
+func KFSOperationTotalUserVisibleObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationTotalUserVisibleObjectsKey")))
 }
 
-// KFSOperationUserVisibleObjectsRemainingKey returns the value of the CoreFoundation reference constant kFSOperationUserVisibleObjectsRemainingKey as an objc.ID.
-func KFSOperationUserVisibleObjectsRemainingKey() objc.ID {
-	return purego.CFConstant(raw.KFSOperationUserVisibleObjectsRemainingKey())
+// KFSOperationUserVisibleObjectsCompleteKey returns the value of the constant kFSOperationUserVisibleObjectsCompleteKey.
+func KFSOperationUserVisibleObjectsCompleteKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationUserVisibleObjectsCompleteKey")))
 }
 
-// KFSOperationThroughputKey returns the value of the CoreFoundation reference constant kFSOperationThroughputKey as an objc.ID.
-func KFSOperationThroughputKey() objc.ID { return purego.CFConstant(raw.KFSOperationThroughputKey()) }
+// KFSOperationUserVisibleObjectsRemainingKey returns the value of the constant kFSOperationUserVisibleObjectsRemainingKey.
+func KFSOperationUserVisibleObjectsRemainingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationUserVisibleObjectsRemainingKey")))
+}
+
+// KFSOperationThroughputKey returns the value of the constant kFSOperationThroughputKey.
+func KFSOperationThroughputKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationThroughputKey")))
+}

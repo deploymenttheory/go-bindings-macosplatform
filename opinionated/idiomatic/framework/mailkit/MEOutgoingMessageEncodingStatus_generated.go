@@ -5,84 +5,98 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains information about security measures the user can apply when composing a message.
+// OutgoingMessageEncodingStatus is an idiomatic wrapper over the Objective-C class MEOutgoingMessageEncodingStatus.
 //
-// OutgoingMessageEncodingStatus wraps [raw.MEOutgoingMessageEncodingStatus] with a fluent Go API.
+// An object that contains information about security measures the user can apply when composing a message.
 type OutgoingMessageEncodingStatus struct {
-	inner *raw.MEOutgoingMessageEncodingStatus
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEOutgoingMessageEncodingStatus].
-func (x *OutgoingMessageEncodingStatus) Unwrap() *raw.MEOutgoingMessageEncodingStatus { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OutgoingMessageEncodingStatus) ID() objc.ID { return x.inner.Ptr() }
-
-// OutgoingMessageEncodingStatusFromID adopts an existing object pointer as a OutgoingMessageEncodingStatus (nil for 0).
+// OutgoingMessageEncodingStatusFromID adopts an existing Objective-C object as a OutgoingMessageEncodingStatus
+// (nil for 0), retaining it and registering a release finalizer.
 func OutgoingMessageEncodingStatusFromID(id objc.ID) *OutgoingMessageEncodingStatus {
 	if id == 0 {
 		return nil
 	}
-	return &OutgoingMessageEncodingStatus{inner: raw.MEOutgoingMessageEncodingStatusFromID(id)}
+	x := &OutgoingMessageEncodingStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that describes whether the message security handler can encrypt or sign an outgoing message.
-//
-// NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption creates a new [OutgoingMessageEncodingStatus].
-func NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption(canSign bool, canEncrypt bool, securityError unsafe.Pointer, addressesFailingEncryption *foundation.NSArray[*raw.MEEmailAddress]) *OutgoingMessageEncodingStatus {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEOutgoingMessageEncodingStatus")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCanSign:canEncrypt:securityError:addressesFailingEncryption:"), canSign, canEncrypt, securityError, addressesFailingEncryption.Ptr())
-	return &OutgoingMessageEncodingStatus{inner: raw.MEOutgoingMessageEncodingStatusFromID(_id)}
+// outgoingMessageEncodingStatusAdopt wraps an Objective-C object that this code just created as a
+// OutgoingMessageEncodingStatus (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func outgoingMessageEncodingStatusAdopt(id objc.ID) *OutgoingMessageEncodingStatus {
+	if id == 0 {
+		return nil
+	}
+	x := &OutgoingMessageEncodingStatus{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief Whether or not the message can be signed.
-//
-// CanSign calls the underlying CanSign.
+// Description returns the object's -description text.
+func (x *OutgoingMessageEncodingStatus) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OutgoingMessageEncodingStatus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OutgoingMessageEncodingStatus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OutgoingMessageEncodingStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOutgoingMessageEncodingStatus creates a new OutgoingMessageEncodingStatus.
+func NewOutgoingMessageEncodingStatus() *OutgoingMessageEncodingStatus {
+	_id := objc.Send[objc.ID](objc.ID(_class("MEOutgoingMessageEncodingStatus")), objc.RegisterName("new"))
+	return outgoingMessageEncodingStatusAdopt(_id)
+}
+
+// CanSign whether or not the message can be signed.
 func (x *OutgoingMessageEncodingStatus) CanSign() bool {
-	return x.inner.CanSign()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSign"))
+	return _r
 }
 
-// @brief Whether or not the message can be encrypted.
-//
-// CanEncrypt calls the underlying CanEncrypt.
+// CanEncrypt whether or not the message can be encrypted.
 func (x *OutgoingMessageEncodingStatus) CanEncrypt() bool {
-	return x.inner.CanEncrypt()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canEncrypt"))
+	return _r
 }
 
-// @brief Any error that occurred while verifying the security status for the outgoing mail message.
-//
-// SecurityError calls the underlying SecurityError.
-func (x *OutgoingMessageEncodingStatus) SecurityError() unsafe.Pointer {
-	return x.inner.SecurityError()
-}
-
-// @brief A list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
+// AddressesFailingEncryption a list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
 //
 // AddressesFailingEncryption returns the collection as a Go slice.
 func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {
-	arr := x.inner.AddressesFailingEncryption()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressesFailingEncryption"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
 // OutgoingMessageEncodingStatusable is the interface implemented by [OutgoingMessageEncodingStatus], for mocking and DI.
 type OutgoingMessageEncodingStatusable interface {
-	Unwrap() *raw.MEOutgoingMessageEncodingStatus
+	obj.Object
 	CanSign() bool
 	CanEncrypt() bool
-	SecurityError() unsafe.Pointer
 	AddressesFailingEncryption() []*EmailAddress
 }
 

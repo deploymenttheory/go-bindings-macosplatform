@@ -5,82 +5,86 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network device that transmits raw network packets and frames using a datagram socket.
+// FileHandleNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZFileHandleNetworkDeviceAttachment.
 //
-// FileHandleNetworkDeviceAttachment wraps [raw.VZFileHandleNetworkDeviceAttachment] with a fluent Go API.
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A network device that transmits raw network packets and frames using a datagram socket.
 type FileHandleNetworkDeviceAttachment struct {
-	inner *raw.VZFileHandleNetworkDeviceAttachment
+	NetworkDeviceAttachment
 }
 
-// Unwrap returns the underlying [raw.VZFileHandleNetworkDeviceAttachment].
-func (x *FileHandleNetworkDeviceAttachment) Unwrap() *raw.VZFileHandleNetworkDeviceAttachment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileHandleNetworkDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// FileHandleNetworkDeviceAttachmentFromID adopts an existing object pointer as a FileHandleNetworkDeviceAttachment (nil for 0).
+// FileHandleNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a FileHandleNetworkDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func FileHandleNetworkDeviceAttachmentFromID(id objc.ID) *FileHandleNetworkDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &FileHandleNetworkDeviceAttachment{inner: raw.VZFileHandleNetworkDeviceAttachmentFromID(id)}
-}
-
-// Creates the attachment from a file handle that contains a connected datagram socket.
-//
-// NewFileHandleNetworkDeviceAttachmentWithFileHandle creates a new [FileHandleNetworkDeviceAttachment].
-func NewFileHandleNetworkDeviceAttachmentWithFileHandle(fileHandle *foundation.NSFileHandle) *FileHandleNetworkDeviceAttachment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZFileHandleNetworkDeviceAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:"), fileHandle.Ptr())
-	return &FileHandleNetworkDeviceAttachment{inner: raw.VZFileHandleNetworkDeviceAttachmentFromID(_id)}
-}
-
-// An integer value that indicates the maximum transmission unit (MTU) associated with this attachment.
-//
-// WithMaximumTransmissionUnit sets the maximumTransmissionUnit property and returns the receiver for chaining.
-func (x *FileHandleNetworkDeviceAttachment) WithMaximumTransmissionUnit(maximumTransmissionUnit int) *FileHandleNetworkDeviceAttachment {
-	x.inner.SetMaximumTransmissionUnit(maximumTransmissionUnit)
+	x := &FileHandleNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract The file handle associated with this attachment.
-//
-// FileHandle calls the underlying FileHandle.
-func (x *FileHandleNetworkDeviceAttachment) FileHandle() *foundation.NSFileHandle {
-	return x.inner.FileHandle()
+// fileHandleNetworkDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// FileHandleNetworkDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileHandleNetworkDeviceAttachmentAdopt(id objc.ID) *FileHandleNetworkDeviceAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &FileHandleNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract The maximum transmission unit (MTU) associated with this attachment. @discussion The client side of the associated datagram socket must be properly configured with the appropriate values for `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF` is recommended to be four times the value of `SO_SNDBUF`. The default MTU is 1500. The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid virtual machine configuration.
-//
-// MaximumTransmissionUnit calls the underlying MaximumTransmissionUnit.
+// NewFileHandleNetworkDeviceAttachmentWithFileHandle creates the attachment from a file handle that contains a connected datagram socket.
+func NewFileHandleNetworkDeviceAttachmentWithFileHandle(fileHandle obj.Object) *FileHandleNetworkDeviceAttachment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileHandleNetworkDeviceAttachment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:"), objref.IDOf(fileHandle))
+	return fileHandleNetworkDeviceAttachmentAdopt(_id)
+}
+
+// WithMaximumTransmissionUnit an integer value that indicates the maximum transmission unit (MTU) associated with this attachment.
+func (x *FileHandleNetworkDeviceAttachment) WithMaximumTransmissionUnit(maximumTransmissionUnit int) *FileHandleNetworkDeviceAttachment {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTransmissionUnit:"), maximumTransmissionUnit)
+	return x
+}
+
+// FileHandle the file handle associated with this attachment.
+func (x *FileHandleNetworkDeviceAttachment) FileHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandle"))
+	return obj.Wrap(_r)
+}
+
+// MaximumTransmissionUnit the maximum transmission unit (MTU) associated with this attachment. The client side of the associated datagram socket must be properly configured with the appropriate values for `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF` is recommended to be four times the value of `SO_SNDBUF`. The default MTU is 1500. The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid virtual machine configuration.
 func (x *FileHandleNetworkDeviceAttachment) MaximumTransmissionUnit() int {
-	return x.inner.MaximumTransmissionUnit()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumTransmissionUnit"))
+	return _r
 }
 
-// SetMaximumTransmissionUnit calls the underlying SetMaximumTransmissionUnit.
+// SetMaximumTransmissionUnit wraps the corresponding Objective-C method.
 func (x *FileHandleNetworkDeviceAttachment) SetMaximumTransmissionUnit(maximumTransmissionUnit int) {
-	x.inner.SetMaximumTransmissionUnit(maximumTransmissionUnit)
-}
-
-func (x *FileHandleNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
-	return &x.inner.VZNetworkDeviceAttachment
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumTransmissionUnit:"), maximumTransmissionUnit)
 }
 
 // FileHandleNetworkDeviceAttachmentable is the interface implemented by [FileHandleNetworkDeviceAttachment], for mocking and DI.
 type FileHandleNetworkDeviceAttachmentable interface {
-	Unwrap() *raw.VZFileHandleNetworkDeviceAttachment
+	obj.Object
 	WithMaximumTransmissionUnit(maximumTransmissionUnit int) *FileHandleNetworkDeviceAttachment
-	FileHandle() *foundation.NSFileHandle
+	FileHandle() obj.Object
 	MaximumTransmissionUnit() int
 	SetMaximumTransmissionUnit(maximumTransmissionUnit int)
 }
 
 var _ FileHandleNetworkDeviceAttachmentable = (*FileHandleNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*FileHandleNetworkDeviceAttachment)(nil)

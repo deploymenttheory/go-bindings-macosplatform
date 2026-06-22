@@ -5,74 +5,78 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpressionUnderOver wraps [raw.AXMathExpressionUnderOver] with a fluent Go API.
+// MathExpressionUnderOver is an idiomatic wrapper over the Objective-C class AXMathExpressionUnderOver.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionUnderOver struct {
-	inner *raw.AXMathExpressionUnderOver
+	MathExpression
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionUnderOver].
-func (x *MathExpressionUnderOver) Unwrap() *raw.AXMathExpressionUnderOver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionUnderOver) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionUnderOverFromID adopts an existing object pointer as a MathExpressionUnderOver (nil for 0).
+// MathExpressionUnderOverFromID adopts an existing Objective-C object as a MathExpressionUnderOver
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionUnderOverFromID(id objc.ID) *MathExpressionUnderOver {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionUnderOver{inner: raw.AXMathExpressionUnderOverFromID(id)}
+	x := &MathExpressionUnderOver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression creates a new [MathExpressionUnderOver].
-func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(baseExpression *raw.AXMathExpression, underExpression *raw.AXMathExpression, overExpression *raw.AXMathExpression) *MathExpressionUnderOver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionUnderOver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:underExpression:overExpression:"), baseExpression.Ptr(), underExpression.Ptr(), overExpression.Ptr())
-	return &MathExpressionUnderOver{inner: raw.AXMathExpressionUnderOverFromID(_id)}
+// mathExpressionUnderOverAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionUnderOver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionUnderOverAdopt(id objc.ID) *MathExpressionUnderOver {
+	if id == 0 {
+		return nil
+	}
+	x := &MathExpressionUnderOver{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// BaseExpression calls the underlying BaseExpression.
+// NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression creates a new MathExpressionUnderOver.
+func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(baseExpression *MathExpression, underExpression *MathExpression, overExpression *MathExpression) *MathExpressionUnderOver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionUnderOver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:underExpression:overExpression:"), objref.IDOf(baseExpression), objref.IDOf(underExpression), objref.IDOf(overExpression))
+	return mathExpressionUnderOverAdopt(_id)
+}
+
+// BaseExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionUnderOver) BaseExpression() *MathExpression {
-	_r := x.inner.BaseExpression()
-	if _r == nil {
-		return nil
-	}
-	return &MathExpression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
+	return MathExpressionFromID(_r)
 }
 
-// UnderExpression calls the underlying UnderExpression.
+// UnderExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionUnderOver) UnderExpression() *MathExpression {
-	_r := x.inner.UnderExpression()
-	if _r == nil {
-		return nil
-	}
-	return &MathExpression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underExpression"))
+	return MathExpressionFromID(_r)
 }
 
-// OverExpression calls the underlying OverExpression.
+// OverExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionUnderOver) OverExpression() *MathExpression {
-	_r := x.inner.OverExpression()
-	if _r == nil {
-		return nil
-	}
-	return &MathExpression{inner: _r}
-}
-
-func (x *MathExpressionUnderOver) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overExpression"))
+	return MathExpressionFromID(_r)
 }
 
 // MathExpressionUnderOverable is the interface implemented by [MathExpressionUnderOver], for mocking and DI.
 type MathExpressionUnderOverable interface {
-	Unwrap() *raw.AXMathExpressionUnderOver
+	obj.Object
 	BaseExpression() *MathExpression
 	UnderExpression() *MathExpression
 	OverExpression() *MathExpression
 }
 
 var _ MathExpressionUnderOverable = (*MathExpressionUnderOver)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionUnderOver)(nil)

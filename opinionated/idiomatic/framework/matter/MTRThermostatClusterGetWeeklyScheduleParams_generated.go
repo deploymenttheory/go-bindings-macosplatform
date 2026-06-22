@@ -5,126 +5,154 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThermostatClusterGetWeeklyScheduleParams wraps [raw.MTRThermostatClusterGetWeeklyScheduleParams] with a fluent Go API.
+// MTRThermostatClusterGetWeeklyScheduleParams is an idiomatic wrapper over the Objective-C class MTRThermostatClusterGetWeeklyScheduleParams.
 type MTRThermostatClusterGetWeeklyScheduleParams struct {
-	inner *raw.MTRThermostatClusterGetWeeklyScheduleParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThermostatClusterGetWeeklyScheduleParams].
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) Unwrap() *raw.MTRThermostatClusterGetWeeklyScheduleParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThermostatClusterGetWeeklyScheduleParamsFromID adopts an existing object pointer as a MTRThermostatClusterGetWeeklyScheduleParams (nil for 0).
+// MTRThermostatClusterGetWeeklyScheduleParamsFromID adopts an existing Objective-C object as a MTRThermostatClusterGetWeeklyScheduleParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThermostatClusterGetWeeklyScheduleParamsFromID(id objc.ID) *MTRThermostatClusterGetWeeklyScheduleParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThermostatClusterGetWeeklyScheduleParams{inner: raw.MTRThermostatClusterGetWeeklyScheduleParamsFromID(id)}
+	x := &MTRThermostatClusterGetWeeklyScheduleParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThermostatClusterGetWeeklyScheduleParams creates a new [MTRThermostatClusterGetWeeklyScheduleParams].
+// mTRThermostatClusterGetWeeklyScheduleParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThermostatClusterGetWeeklyScheduleParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThermostatClusterGetWeeklyScheduleParamsAdopt(id objc.ID) *MTRThermostatClusterGetWeeklyScheduleParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThermostatClusterGetWeeklyScheduleParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThermostatClusterGetWeeklyScheduleParams creates a new MTRThermostatClusterGetWeeklyScheduleParams.
 func NewMTRThermostatClusterGetWeeklyScheduleParams() *MTRThermostatClusterGetWeeklyScheduleParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThermostatClusterGetWeeklyScheduleParams")), objc.RegisterName("new"))
-	return &MTRThermostatClusterGetWeeklyScheduleParams{inner: raw.MTRThermostatClusterGetWeeklyScheduleParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterGetWeeklyScheduleParams")), objc.RegisterName("new"))
+	return mTRThermostatClusterGetWeeklyScheduleParamsAdopt(_id)
 }
 
-// WithDaysToReturn sets the daysToReturn property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithDaysToReturn(daysToReturn *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams {
-	x.inner.SetDaysToReturn(daysToReturn)
+// WithDaysToReturn sets the property and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithDaysToReturn(daysToReturn obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDaysToReturn:"), objref.IDOf(daysToReturn))
 	return x
 }
 
-// WithModeToReturn sets the modeToReturn property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithModeToReturn(modeToReturn *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams {
-	x.inner.SetModeToReturn(modeToReturn)
+// WithModeToReturn sets the property and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithModeToReturn(modeToReturn obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeToReturn:"), objref.IDOf(modeToReturn))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// DaysToReturn calls the underlying DaysToReturn.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) DaysToReturn() *foundation.NSNumber {
-	return x.inner.DaysToReturn()
+// DaysToReturn wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) DaysToReturn() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("daysToReturn"))
+	return obj.Wrap(_r)
 }
 
-// SetDaysToReturn calls the underlying SetDaysToReturn.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetDaysToReturn(daysToReturn *foundation.NSNumber) {
-	x.inner.SetDaysToReturn(daysToReturn)
+// SetDaysToReturn wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetDaysToReturn(daysToReturn obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDaysToReturn:"), objref.IDOf(daysToReturn))
 }
 
-// ModeToReturn calls the underlying ModeToReturn.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) ModeToReturn() *foundation.NSNumber {
-	return x.inner.ModeToReturn()
+// ModeToReturn wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) ModeToReturn() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeToReturn"))
+	return obj.Wrap(_r)
 }
 
-// SetModeToReturn calls the underlying SetModeToReturn.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetModeToReturn(modeToReturn *foundation.NSNumber) {
-	x.inner.SetModeToReturn(modeToReturn)
+// SetModeToReturn wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetModeToReturn(modeToReturn obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeToReturn:"), objref.IDOf(modeToReturn))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRThermostatClusterGetWeeklyScheduleParamsable is the interface implemented by [MTRThermostatClusterGetWeeklyScheduleParams], for mocking and DI.
 type MTRThermostatClusterGetWeeklyScheduleParamsable interface {
-	Unwrap() *raw.MTRThermostatClusterGetWeeklyScheduleParams
-	WithDaysToReturn(daysToReturn *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
-	WithModeToReturn(modeToReturn *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
-	DaysToReturn() *foundation.NSNumber
-	SetDaysToReturn(daysToReturn *foundation.NSNumber)
-	ModeToReturn() *foundation.NSNumber
-	SetModeToReturn(modeToReturn *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithDaysToReturn(daysToReturn obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams
+	WithModeToReturn(modeToReturn obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams
+	DaysToReturn() obj.Object
+	SetDaysToReturn(daysToReturn obj.Object)
+	ModeToReturn() obj.Object
+	SetModeToReturn(modeToReturn obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRThermostatClusterGetWeeklyScheduleParamsable = (*MTRThermostatClusterGetWeeklyScheduleParams)(nil)

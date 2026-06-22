@@ -5,92 +5,82 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MathExpressionSubSuperscript wraps [raw.AXMathExpressionSubSuperscript] with a fluent Go API.
+// MathExpressionSubSuperscript is an idiomatic wrapper over the Objective-C class AXMathExpressionSubSuperscript.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionSubSuperscript struct {
-	inner *raw.AXMathExpressionSubSuperscript
+	MathExpression
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionSubSuperscript].
-func (x *MathExpressionSubSuperscript) Unwrap() *raw.AXMathExpressionSubSuperscript { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionSubSuperscript) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionSubSuperscriptFromID adopts an existing object pointer as a MathExpressionSubSuperscript (nil for 0).
+// MathExpressionSubSuperscriptFromID adopts an existing Objective-C object as a MathExpressionSubSuperscript
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionSubSuperscriptFromID(id objc.ID) *MathExpressionSubSuperscript {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(id)}
+	x := &MathExpressionSubSuperscript{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions creates a new [MathExpressionSubSuperscript].
-func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions(baseExpression *foundation.NSArray[*raw.AXMathExpression], subscriptExpressions *foundation.NSArray[*raw.AXMathExpression], superscriptExpressions ...MathExpressionProvider) *MathExpressionSubSuperscript {
-	_ptrs := make([]objc.ID, len(superscriptExpressions))
-	for _i, _v := range superscriptExpressions {
-		_ptrs[_i] = _v.asMathExpression().Ptr()
-	}
-	var _arg2 *foundation.NSArray[*raw.AXMathExpression]
-	if len(_ptrs) > 0 {
-		_arg2 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionSubSuperscript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:subscriptExpressions:superscriptExpressions:"), baseExpression.Ptr(), subscriptExpressions.Ptr(), _arg2.Ptr())
-	return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(_id)}
-}
-
-// BaseExpression calls the underlying BaseExpression.
-func (x *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
-	_r := x.inner.BaseExpression()
-	if _r == nil {
+// mathExpressionSubSuperscriptAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionSubSuperscript (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionSubSuperscriptAdopt(id objc.ID) *MathExpressionSubSuperscript {
+	if id == 0 {
 		return nil
 	}
-	return &MathExpression{inner: _r}
+	x := &MathExpressionSubSuperscript{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
+// NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions creates a new MathExpressionSubSuperscript.
+func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions(baseExpression []*MathExpression, subscriptExpressions []*MathExpression, superscriptExpressions []*MathExpression) *MathExpressionSubSuperscript {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionSubSuperscript")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:subscriptExpressions:superscriptExpressions:"), purego.SliceToNSArray(baseExpression, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(subscriptExpressions, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(superscriptExpressions, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }))
+	return mathExpressionSubSuperscriptAdopt(_id)
+}
+
+// BaseExpression wraps the corresponding Objective-C method.
+func (x *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
+	return MathExpressionFromID(_r)
+}
+
+// SubscriptExpressions wraps the corresponding Objective-C method.
+//
 // SubscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
-	arr := x.inner.SubscriptExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
-		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
+// SuperscriptExpressions wraps the corresponding Objective-C method.
+//
 // SuperscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {
-	arr := x.inner.SuperscriptExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
-		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *MathExpressionSubSuperscript) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superscriptExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // MathExpressionSubSuperscriptable is the interface implemented by [MathExpressionSubSuperscript], for mocking and DI.
 type MathExpressionSubSuperscriptable interface {
-	Unwrap() *raw.AXMathExpressionSubSuperscript
+	obj.Object
 	BaseExpression() *MathExpression
 	SubscriptExpressions() []*MathExpression
 	SuperscriptExpressions() []*MathExpression
 }
 
 var _ MathExpressionSubSuperscriptable = (*MathExpressionSubSuperscript)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionSubSuperscript)(nil)

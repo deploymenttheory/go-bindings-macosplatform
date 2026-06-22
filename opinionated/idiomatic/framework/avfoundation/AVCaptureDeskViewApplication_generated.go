@@ -6,52 +6,85 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that programmatically presents Desk View.
+// CaptureDeskViewApplication is an idiomatic wrapper over the Objective-C class AVCaptureDeskViewApplication.
 //
-// CaptureDeskViewApplication wraps [raw.AVCaptureDeskViewApplication] with a fluent Go API.
+// An object that programmatically presents Desk View.
 type CaptureDeskViewApplication struct {
-	inner *raw.AVCaptureDeskViewApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureDeskViewApplication].
-func (x *CaptureDeskViewApplication) Unwrap() *raw.AVCaptureDeskViewApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureDeskViewApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureDeskViewApplicationFromID adopts an existing object pointer as a CaptureDeskViewApplication (nil for 0).
+// CaptureDeskViewApplicationFromID adopts an existing Objective-C object as a CaptureDeskViewApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureDeskViewApplicationFromID(id objc.ID) *CaptureDeskViewApplication {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureDeskViewApplication{inner: raw.AVCaptureDeskViewApplicationFromID(id)}
+	x := &CaptureDeskViewApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureDeskViewApplication creates a new [CaptureDeskViewApplication].
+// captureDeskViewApplicationAdopt wraps an Objective-C object that this code just created as a
+// CaptureDeskViewApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureDeskViewApplicationAdopt(id objc.ID) *CaptureDeskViewApplication {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureDeskViewApplication{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureDeskViewApplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureDeskViewApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureDeskViewApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDeskViewApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureDeskViewApplication creates a new CaptureDeskViewApplication.
 func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureDeskViewApplication")), objc.RegisterName("new"))
-	return &CaptureDeskViewApplication{inner: raw.AVCaptureDeskViewApplicationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeskViewApplication")), objc.RegisterName("new"))
+	return captureDeskViewApplicationAdopt(_id)
 }
 
-// Launches Desk View with no additional configuration and then performs a completion handler if you specify it.
+// Present launches Desk View with no additional configuration and then performs a completion handler if you specify it.
 //
 // Present blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PresentWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -60,18 +93,17 @@ func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	}
 }
 
-// Launches Desk View with the configuration and completion handler that you specify.
+// PresentWithLaunchConfiguration launches Desk View with the configuration and completion handler that you specify.
 //
 // PresentWithLaunchConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *raw.AVCaptureDeskViewApplicationLaunchConfiguration) error {
+func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error {
 	_ch := make(chan error, 1)
-	x.inner.PresentWithLaunchConfigurationCompletionHandler(launchConfiguration, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithLaunchConfiguration:completionHandler:"), objref.IDOf(launchConfiguration), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -82,9 +114,9 @@ func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.
 
 // CaptureDeskViewApplicationable is the interface implemented by [CaptureDeskViewApplication], for mocking and DI.
 type CaptureDeskViewApplicationable interface {
-	Unwrap() *raw.AVCaptureDeskViewApplication
+	obj.Object
 	Present(ctx context.Context) error
-	PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *raw.AVCaptureDeskViewApplicationLaunchConfiguration) error
+	PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error
 }
 
 var _ CaptureDeskViewApplicationable = (*CaptureDeskViewApplication)(nil)

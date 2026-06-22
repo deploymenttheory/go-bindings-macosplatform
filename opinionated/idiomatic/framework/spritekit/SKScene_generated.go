@@ -5,577 +5,433 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that organizes all of the active SpriteKit content.
+// Scene is an idiomatic wrapper over the Objective-C class SKScene.
 //
-// Scene wraps [raw.SKScene] with a fluent Go API.
+// It embeds [EffectNode], promoting that type's methods.
+//
+// An object that organizes all of the active SpriteKit content.
 type Scene struct {
-	inner *raw.SKScene
+	EffectNode
 }
 
-// Unwrap returns the underlying [raw.SKScene].
-func (x *Scene) Unwrap() *raw.SKScene { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Scene) ID() objc.ID { return x.inner.Ptr() }
-
-// SceneFromID adopts an existing object pointer as a Scene (nil for 0).
+// SceneFromID adopts an existing Objective-C object as a Scene
+// (nil for 0), retaining it and registering a release finalizer.
 func SceneFromID(id objc.ID) *Scene {
 	if id == 0 {
 		return nil
 	}
-	return &Scene{inner: raw.SKSceneFromID(id)}
+	x := &Scene{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new scene object.
-//
-// NewSceneWithSize creates a new [Scene].
+// sceneAdopt wraps an Objective-C object that this code just created as a
+// Scene (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sceneAdopt(id objc.ID) *Scene {
+	if id == 0 {
+		return nil
+	}
+	x := &Scene{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSceneWithSize initializes a new scene object.
 func NewSceneWithSize(size corefoundation.CGSize) *Scene {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKScene")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKScene")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
-	return &Scene{inner: raw.SKSceneFromID(_id)}
+	return sceneAdopt(_id)
 }
 
-// The dimensions of the scene, in points.
-//
-// WithSize sets the size property and returns the receiver for chaining.
+// WithSize the dimensions of the scene, in points.
 func (x *Scene) WithSize(size corefoundation.CGSize) *Scene {
-	x.inner.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// A setting that defines how the scene is mapped to the view that presents it.
-//
-// WithScaleMode sets the scaleMode property and returns the receiver for chaining.
-func (x *Scene) WithScaleMode(scaleMode SKSceneScaleMode) *Scene {
-	x.inner.SetScaleMode(raw.SKSceneScaleMode(scaleMode))
+// WithScaleMode a setting that defines how the scene is mapped to the view that presents it.
+func (x *Scene) WithScaleMode(scaleMode SceneScaleMode) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleMode:"), scaleMode)
 	return x
 }
 
-// The camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
-//
-// WithCamera sets the camera property and returns the receiver for chaining.
+// WithCamera the camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
 func (x *Scene) WithCamera(camera *CameraNode) *Scene {
-	x.inner.SetCamera(camera.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return x
 }
 
-// A node used to determine the position of the listener for positional audio in the scene.
-//
-// WithListener sets the listener property and returns the receiver for chaining.
+// WithListener a node used to determine the position of the listener for positional audio in the scene.
 func (x *Scene) WithListener(listener NodeProvider) *Scene {
-	x.inner.SetListener(listener.asNode())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListener:"), objref.IDOf(listener))
 	return x
 }
 
-// The background color of the scene.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *Scene) WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene {
-	x.inner.SetBackgroundColor(backgroundColor)
+// WithBackgroundColor the background color of the scene.
+func (x *Scene) WithBackgroundColor(backgroundColor obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A delegate to be called during the animation loop.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Scene) WithDelegate(delegate raw.SKSceneDelegate) *Scene {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The point in the view’s frame that corresponds to the scene’s origin.
-//
-// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+// WithAnchorPoint the point in the view’s frame that corresponds to the scene’s origin.
 func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
-	x.inner.SetAnchorPoint(anchorPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
 	return x
 }
 
-// The Core Image filter to apply.
-//
-// WithFilter sets the filter property and returns the receiver for chaining.
-func (x *Scene) WithFilter(filter *coreimage.CIFilter) *Scene {
-	x.inner.SKEffectNode.SetFilter(filter)
+// WithFilter the Core Image filter to apply.
+func (x *Scene) WithFilter(filter obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	return x
 }
 
-// A Boolean value that determines whether the effect node automatically sets the filter’s image center.
-//
-// WithShouldCenterFilter sets the shouldCenterFilter property and returns the receiver for chaining.
+// WithShouldCenterFilter a Boolean value that determines whether the effect node automatically sets the filter’s image center.
 func (x *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
-	x.inner.SKEffectNode.SetShouldCenterFilter(shouldCenterFilter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
 	return x
 }
 
-// A Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
-//
-// WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
+// WithShouldEnableEffects a Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
 func (x *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
-	x.inner.SKEffectNode.SetShouldEnableEffects(shouldEnableEffects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
 	return x
 }
 
-// A Boolean value that indicates whether the results of rendering the child nodes should be cached.
-//
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize a Boolean value that indicates whether the results of rendering the child nodes should be cached.
 func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
-	x.inner.SKEffectNode.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
-// The blend mode used to draw the node’s contents into its parent’s framebuffer.
-//
-// WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *Scene) WithBlendMode(blendMode SKBlendMode) *Scene {
-	x.inner.SKEffectNode.SetBlendMode(raw.SKBlendMode(blendMode))
+// WithBlendMode the blend mode used to draw the node’s contents into its parent’s framebuffer.
+func (x *Scene) WithBlendMode(blendMode BlendMode) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 	return x
 }
 
-// A custom shader that is called when the effect node is blended into the parent’s framebuffer.
-//
-// WithShader sets the shader property and returns the receiver for chaining.
+// WithShader a custom shader that is called when the effect node is blended into the parent’s framebuffer.
 func (x *Scene) WithShader(shader *Shader) *Scene {
-	x.inner.SKEffectNode.SetShader(shader.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	return x
 }
 
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
+// WithPosition the position of the node in its parent’s coordinate system.
 func (x *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
-	x.inner.SKEffectNode.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition the height of the node relative to its parent.
 func (x *Scene) WithZPosition(zPosition float64) *Scene {
-	x.inner.SKEffectNode.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *Scene) WithZRotation(zRotation float64) *Scene {
-	x.inner.SKEffectNode.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *Scene) WithXScale(xScale float64) *Scene {
-	x.inner.SKEffectNode.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *Scene) WithYScale(yScale float64) *Scene {
-	x.inner.SKEffectNode.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *Scene) WithSpeed(speed float64) *Scene {
-	x.inner.SKEffectNode.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *Scene) WithAlpha(alpha float64) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *Scene) WithPaused(paused bool) *Scene {
-	x.inner.SKEffectNode.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *Scene) WithHidden(hidden bool) *Scene {
-	x.inner.SKEffectNode.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
-	x.inner.SKEffectNode.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the node’s assignable name.
 func (x *Scene) WithName(name string) *Scene {
-	x.inner.SKEffectNode.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody the physics body associated with the node.
 func (x *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
-	x.inner.SKEffectNode.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *Scene) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene {
-	x.inner.SKEffectNode.SKNode.SetUserData(userData)
+// WithUserData a dictionary containing arbitrary data.
+func (x *Scene) WithUserData(userData obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
-	x.inner.SKEffectNode.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *Scene) WithConstraints(items ...*raw.SKConstraint) *Scene {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKEffectNode.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKEffectNode.SKNode.SetConstraints(_arr)
+// WithConstraints a list of constraints to apply to the node.
+func (x *Scene) WithConstraints(items ...*Constraint) *Scene {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *Scene) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
+func (x *Scene) WithAttributeValues(attributeValues obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *Scene) WithAccessibilityElement(accessibilityElement bool) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *Scene) WithAccessibilityRole(accessibilityRole string) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *Scene) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *Scene) WithAccessibilitySubrole(accessibilitySubrole string) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
 func (x *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *Scene) WithAccessibilityParent(accessibilityParent objc.ID) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent the user interface element that contains this element.
+func (x *Scene) WithAccessibilityParent(accessibilityParent obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *Scene) WithAccessibilityHelp(accessibilityHelp string) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *Scene) WithAccessibilityLabel(accessibilityLabel string) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
-	x.inner.SKEffectNode.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Tells you when the scene is presented.
-//
-// SceneDidLoad calls the underlying SceneDidLoad.
+// SceneDidLoad tells you when the scene is presented.
 func (x *Scene) SceneDidLoad() {
-	x.inner.SceneDidLoad()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sceneDidLoad"))
 }
 
-// Converts a point from view coordinates to scene coordinates.
-//
-// ConvertPointFromView calls the underlying ConvertPointFromView.
+// ConvertPointFromView converts a point from view coordinates to scene coordinates.
 func (x *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	return x.inner.ConvertPointFromView(point)
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromView:"), point)
+	return _r
 }
 
-// Converts a point from scene coordinates to view coordinates.
-//
-// ConvertPointToView calls the underlying ConvertPointToView.
+// ConvertPointToView converts a point from scene coordinates to view coordinates.
 func (x *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	return x.inner.ConvertPointToView(point)
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToView:"), point)
+	return _r
 }
 
-// Tells your app to perform any app-specific logic to update your scene.
-//
-// Update calls the underlying Update.
+// Update tells your app to perform any app-specific logic to update your scene.
 func (x *Scene) Update(currentTime float64) {
-	x.inner.Update(currentTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update:"), currentTime)
 }
 
-// Tells your app to peform any necessary logic after scene actions are evaluated.
-//
-// DidEvaluateActions calls the underlying DidEvaluateActions.
+// DidEvaluateActions tells your app to peform any necessary logic after scene actions are evaluated.
 func (x *Scene) DidEvaluateActions() {
-	x.inner.DidEvaluateActions()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didEvaluateActions"))
 }
 
-// Tells your app to peform any necessary logic after physics simulations are performed.
-//
-// DidSimulatePhysics calls the underlying DidSimulatePhysics.
+// DidSimulatePhysics tells your app to peform any necessary logic after physics simulations are performed.
 func (x *Scene) DidSimulatePhysics() {
-	x.inner.DidSimulatePhysics()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSimulatePhysics"))
 }
 
-// Tells your app to peform any necessary logic after constraints are applied.
-//
-// DidApplyConstraints calls the underlying DidApplyConstraints.
+// DidApplyConstraints tells your app to peform any necessary logic after constraints are applied.
 func (x *Scene) DidApplyConstraints() {
-	x.inner.DidApplyConstraints()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didApplyConstraints"))
 }
 
-// Tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
-//
-// DidFinishUpdate calls the underlying DidFinishUpdate.
+// DidFinishUpdate tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
 func (x *Scene) DidFinishUpdate() {
-	x.inner.DidFinishUpdate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFinishUpdate"))
 }
 
-// Tells you when the scene is presented by a view.
-//
-// DidMoveToView calls the underlying DidMoveToView.
-func (x *Scene) DidMoveToView(view *raw.SKView) {
-	x.inner.DidMoveToView(view)
+// DidMoveToView tells you when the scene is presented by a view.
+func (x *Scene) DidMoveToView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didMoveToView:"), objref.IDOf(view))
 }
 
-// Tells you when the scene is about to be removed from a view.
-//
-// WillMoveFromView calls the underlying WillMoveFromView.
-func (x *Scene) WillMoveFromView(view *raw.SKView) {
-	x.inner.WillMoveFromView(view)
+// WillMoveFromView tells you when the scene is about to be removed from a view.
+func (x *Scene) WillMoveFromView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willMoveFromView:"), objref.IDOf(view))
 }
 
-// Tells you when the scene’s size has changed.
-//
-// DidChangeSize calls the underlying DidChangeSize.
+// DidChangeSize tells you when the scene’s size has changed.
 func (x *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
-	x.inner.DidChangeSize(oldSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeSize:"), oldSize)
 }
 
-// Size calls the underlying Size.
+// Size wraps the corresponding Objective-C method.
 func (x *Scene) Size() corefoundation.CGSize {
-	return x.inner.Size()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
 
-// SetSize calls the underlying SetSize.
+// SetSize wraps the corresponding Objective-C method.
 func (x *Scene) SetSize(size corefoundation.CGSize) {
-	x.inner.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
-// Used to determine how to scale the scene to match the SKView it is being displayed in.
-//
-// ScaleMode calls the underlying ScaleMode.
-func (x *Scene) ScaleMode() SKSceneScaleMode {
-	return SKSceneScaleMode(x.inner.ScaleMode())
+// ScaleMode used to determine how to scale the scene to match the SKView it is being displayed in.
+func (x *Scene) ScaleMode() SceneScaleMode {
+	_r := objc.Send[SceneScaleMode](objref.IDOf(x), objc.RegisterName("scaleMode"))
+	return _r
 }
 
-// SetScaleMode calls the underlying SetScaleMode.
-func (x *Scene) SetScaleMode(scaleMode SKSceneScaleMode) {
-	x.inner.SetScaleMode(raw.SKSceneScaleMode(scaleMode))
+// SetScaleMode wraps the corresponding Objective-C method.
+func (x *Scene) SetScaleMode(scaleMode SceneScaleMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleMode:"), scaleMode)
 }
 
-// The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
-//
-// Camera calls the underlying Camera.
+// Camera the camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
 func (x *Scene) Camera() *CameraNode {
-	_r := x.inner.Camera()
-	if _r == nil {
-		return nil
-	}
-	return &CameraNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("camera"))
+	return CameraNodeFromID(_r)
 }
 
-// SetCamera calls the underlying SetCamera.
-func (x *Scene) SetCamera(camera *raw.SKCameraNode) {
-	x.inner.SetCamera(camera)
+// SetCamera wraps the corresponding Objective-C method.
+func (x *Scene) SetCamera(camera *CameraNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 }
 
-// The node that is currently the listener for positional audio coming from SKAudioNodes @see SKAudioNode
-//
-// Listener calls the underlying Listener.
+// Listener the node that is currently the listener for positional audio coming from SKAudioNodes
 func (x *Scene) Listener() *Node {
-	_r := x.inner.Listener()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listener"))
+	return NodeFromID(_r)
 }
 
-// SetListener calls the underlying SetListener.
-func (x *Scene) SetListener(listener *raw.SKNode) {
-	x.inner.SetListener(listener)
+// SetListener wraps the corresponding Objective-C method.
+func (x *Scene) SetListener(listener *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListener:"), objref.IDOf(listener))
 }
 
-// AudioEngine calls the underlying AudioEngine.
-func (x *Scene) AudioEngine() *avfaudio.AVAudioEngine {
-	return x.inner.AudioEngine()
+// AudioEngine wraps the corresponding Objective-C method.
+func (x *Scene) AudioEngine() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioEngine"))
+	return obj.Wrap(_r)
 }
 
-// Background color, defaults to gray
-//
-// BackgroundColor calls the underlying BackgroundColor.
-func (x *Scene) BackgroundColor() *appkit.NSColor {
-	return x.inner.BackgroundColor()
+// BackgroundColor background color, defaults to gray
+func (x *Scene) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *Scene) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+// SetBackgroundColor wraps the corresponding Objective-C method.
+func (x *Scene) SetBackgroundColor(backgroundColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Scene) Delegate() raw.SKSceneDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Scene) SetDelegate(delegate raw.SKSceneDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Used to choose the origin of the scene's coordinate system
-//
-// AnchorPoint calls the underlying AnchorPoint.
+// AnchorPoint used to choose the origin of the scene's coordinate system
 func (x *Scene) AnchorPoint() corefoundation.CGPoint {
-	return x.inner.AnchorPoint()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("anchorPoint"))
+	return _r
 }
 
-// SetAnchorPoint calls the underlying SetAnchorPoint.
+// SetAnchorPoint wraps the corresponding Objective-C method.
 func (x *Scene) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	x.inner.SetAnchorPoint(anchorPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
 }
 
-// Physics simulation functionality
-//
-// PhysicsWorld calls the underlying PhysicsWorld.
+// PhysicsWorld physics simulation functionality
 func (x *Scene) PhysicsWorld() *PhysicsWorld {
-	_r := x.inner.PhysicsWorld()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsWorld{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsWorld"))
+	return PhysicsWorldFromID(_r)
 }
 
-// The SKView this scene is currently presented in, or nil if it is not being presented.
-//
-// View calls the underlying View.
+// View the SKView this scene is currently presented in, or nil if it is not being presented.
 func (x *Scene) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
-
-func (x *Scene) asEffectNode() *raw.SKEffectNode { return &x.inner.SKEffectNode }
-
-func (x *Scene) asNode() *raw.SKNode { return &x.inner.SKEffectNode.SKNode }
 
 // Sceneable is the interface implemented by [Scene], for mocking and DI.
 type Sceneable interface {
-	Unwrap() *raw.SKScene
+	obj.Object
 	WithSize(size corefoundation.CGSize) *Scene
-	WithScaleMode(scaleMode SKSceneScaleMode) *Scene
+	WithScaleMode(scaleMode SceneScaleMode) *Scene
 	WithCamera(camera *CameraNode) *Scene
 	WithListener(listener NodeProvider) *Scene
-	WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene
-	WithDelegate(delegate raw.SKSceneDelegate) *Scene
+	WithBackgroundColor(backgroundColor obj.Object) *Scene
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene
-	WithFilter(filter *coreimage.CIFilter) *Scene
+	WithFilter(filter obj.Object) *Scene
 	WithShouldCenterFilter(shouldCenterFilter bool) *Scene
 	WithShouldEnableEffects(shouldEnableEffects bool) *Scene
 	WithShouldRasterize(shouldRasterize bool) *Scene
-	WithBlendMode(blendMode SKBlendMode) *Scene
+	WithBlendMode(blendMode BlendMode) *Scene
 	WithShader(shader *Shader) *Scene
 	WithPosition(position corefoundation.CGPoint) *Scene
 	WithZPosition(zPosition float64) *Scene
@@ -589,16 +445,16 @@ type Sceneable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *Scene
 	WithName(name string) *Scene
 	WithPhysicsBody(physicsBody *PhysicsBody) *Scene
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene
+	WithUserData(userData obj.Object) *Scene
 	WithReachConstraints(reachConstraints *ReachConstraints) *Scene
-	WithConstraints(items ...*raw.SKConstraint) *Scene
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene
+	WithConstraints(items ...*Constraint) *Scene
+	WithAttributeValues(attributeValues obj.Object) *Scene
 	WithAccessibilityElement(accessibilityElement bool) *Scene
 	WithAccessibilityRole(accessibilityRole string) *Scene
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene
 	WithAccessibilitySubrole(accessibilitySubrole string) *Scene
 	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene
-	WithAccessibilityParent(accessibilityParent objc.ID) *Scene
+	WithAccessibilityParent(accessibilityParent obj.Object) *Scene
 	WithAccessibilityHelp(accessibilityHelp string) *Scene
 	WithAccessibilityLabel(accessibilityLabel string) *Scene
 	WithAccessibilityEnabled(accessibilityEnabled bool) *Scene
@@ -610,22 +466,20 @@ type Sceneable interface {
 	DidSimulatePhysics()
 	DidApplyConstraints()
 	DidFinishUpdate()
-	DidMoveToView(view *raw.SKView)
-	WillMoveFromView(view *raw.SKView)
+	DidMoveToView(view *View)
+	WillMoveFromView(view *View)
 	DidChangeSize(oldSize corefoundation.CGSize)
 	Size() corefoundation.CGSize
 	SetSize(size corefoundation.CGSize)
-	ScaleMode() SKSceneScaleMode
-	SetScaleMode(scaleMode SKSceneScaleMode)
+	ScaleMode() SceneScaleMode
+	SetScaleMode(scaleMode SceneScaleMode)
 	Camera() *CameraNode
-	SetCamera(camera *raw.SKCameraNode)
+	SetCamera(camera *CameraNode)
 	Listener() *Node
-	SetListener(listener *raw.SKNode)
-	AudioEngine() *avfaudio.AVAudioEngine
-	BackgroundColor() *appkit.NSColor
-	SetBackgroundColor(backgroundColor *appkit.NSColor)
-	Delegate() raw.SKSceneDelegate
-	SetDelegate(delegate raw.SKSceneDelegate)
+	SetListener(listener *Node)
+	AudioEngine() obj.Object
+	BackgroundColor() obj.Object
+	SetBackgroundColor(backgroundColor obj.Object)
 	AnchorPoint() corefoundation.CGPoint
 	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
 	PhysicsWorld() *PhysicsWorld
@@ -633,3 +487,7 @@ type Sceneable interface {
 }
 
 var _ Sceneable = (*Scene)(nil)
+
+var _ EffectNodeProvider = (*Scene)(nil)
+
+var _ NodeProvider = (*Scene)(nil)

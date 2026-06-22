@@ -6,1710 +6,1091 @@ package spritekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// NodeWithViewportSize calls the underlying SK3DNodeNodeWithViewportSize.
+// NodeWithViewportSize creates and initializes a new 3D node.
 func NodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	_r := raw.SK3DNodeNodeWithViewportSize(viewportSize)
-	if _r == nil {
-		return nil
-	}
-	return &SK3DNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("nodeWithViewportSize:"), viewportSize)
+	return SK3DNodeFromID(_r)
 }
 
-// MoveByDuration calls the underlying SKActionMoveByDuration.
+// MoveByDuration creates an action that moves a node relative to its current position
 func MoveByDuration(delta corefoundation.CGVector, duration float64) *Action {
-	_r := raw.SKActionMoveByDuration(delta, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveBy:duration:"), delta, duration)
+	return ActionFromID(_r)
 }
 
-// MoveByXYDuration calls the underlying SKActionMoveByXYDuration.
+// MoveByXYDuration wraps the corresponding Objective-C method.
 func MoveByXYDuration(deltaX float64, deltaY float64, duration float64) *Action {
-	_r := raw.SKActionMoveByXYDuration(deltaX, deltaY, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveByX:y:duration:"), deltaX, deltaY, duration)
+	return ActionFromID(_r)
 }
 
-// MoveToDuration calls the underlying SKActionMoveToDuration.
+// MoveToDuration creates an action that moves a node to a new position
 func MoveToDuration(location corefoundation.CGPoint, duration float64) *Action {
-	_r := raw.SKActionMoveToDuration(location, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveTo:duration:"), location, duration)
+	return ActionFromID(_r)
 }
 
-// MoveToXDuration calls the underlying SKActionMoveToXDuration.
+// MoveToXDuration wraps the corresponding Objective-C method.
 func MoveToXDuration(x_ float64, duration float64) *Action {
-	_r := raw.SKActionMoveToXDuration(x_, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveToX:duration:"), x_, duration)
+	return ActionFromID(_r)
 }
 
-// MoveToYDuration calls the underlying SKActionMoveToYDuration.
+// MoveToYDuration wraps the corresponding Objective-C method.
 func MoveToYDuration(y float64, duration float64) *Action {
-	_r := raw.SKActionMoveToYDuration(y, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveToY:duration:"), y, duration)
+	return ActionFromID(_r)
 }
 
-// RotateByAngleDuration calls the underlying SKActionRotateByAngleDuration.
+// RotateByAngleDuration creates an action that rotates the node by a relative value
 func RotateByAngleDuration(radians float64, duration float64) *Action {
-	_r := raw.SKActionRotateByAngleDuration(radians, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("rotateByAngle:duration:"), radians, duration)
+	return ActionFromID(_r)
 }
 
-// RotateToAngleDuration calls the underlying SKActionRotateToAngleDuration.
+// RotateToAngleDuration creates an action that rotates the node counterclockwise to an absolute angle
 func RotateToAngleDuration(radians float64, duration float64) *Action {
-	_r := raw.SKActionRotateToAngleDuration(radians, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("rotateToAngle:duration:"), radians, duration)
+	return ActionFromID(_r)
 }
 
-// RotateToAngleDurationShortestUnitArc calls the underlying SKActionRotateToAngleDurationShortestUnitArc.
+// RotateToAngleDurationShortestUnitArc creates an action that rotates the node to an absolute value
 func RotateToAngleDurationShortestUnitArc(radians float64, duration float64, shortestUnitArc bool) *Action {
-	_r := raw.SKActionRotateToAngleDurationShortestUnitArc(radians, duration, shortestUnitArc)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("rotateToAngle:duration:shortestUnitArc:"), radians, duration, shortestUnitArc)
+	return ActionFromID(_r)
 }
 
-// ResizeByWidthHeightDuration calls the underlying SKActionResizeByWidthHeightDuration.
+// ResizeByWidthHeightDuration creates an action that adjusts the size of a sprite
 func ResizeByWidthHeightDuration(width float64, height float64, duration float64) *Action {
-	_r := raw.SKActionResizeByWidthHeightDuration(width, height, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("resizeByWidth:height:duration:"), width, height, duration)
+	return ActionFromID(_r)
 }
 
-// ResizeToWidthHeightDuration calls the underlying SKActionResizeToWidthHeightDuration.
+// ResizeToWidthHeightDuration creates an action that changes the width and height of a sprite to a new absolute value
 func ResizeToWidthHeightDuration(width float64, height float64, duration float64) *Action {
-	_r := raw.SKActionResizeToWidthHeightDuration(width, height, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("resizeToWidth:height:duration:"), width, height, duration)
+	return ActionFromID(_r)
 }
 
-// ResizeToWidthDuration calls the underlying SKActionResizeToWidthDuration.
+// ResizeToWidthDuration wraps the corresponding Objective-C method.
 func ResizeToWidthDuration(width float64, duration float64) *Action {
-	_r := raw.SKActionResizeToWidthDuration(width, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("resizeToWidth:duration:"), width, duration)
+	return ActionFromID(_r)
 }
 
-// ResizeToHeightDuration calls the underlying SKActionResizeToHeightDuration.
+// ResizeToHeightDuration wraps the corresponding Objective-C method.
 func ResizeToHeightDuration(height float64, duration float64) *Action {
-	_r := raw.SKActionResizeToHeightDuration(height, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("resizeToHeight:duration:"), height, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleByDuration calls the underlying SKActionScaleByDuration.
+// ScaleByDuration creates an action that changes the x and y scale values of a node by a relative value
 func ScaleByDuration(scale float64, duration float64) *Action {
-	_r := raw.SKActionScaleByDuration(scale, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleBy:duration:"), scale, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleXByYDuration calls the underlying SKActionScaleXByYDuration.
+// ScaleXByYDuration wraps the corresponding Objective-C method.
 func ScaleXByYDuration(xScale float64, yScale float64, duration float64) *Action {
-	_r := raw.SKActionScaleXByYDuration(xScale, yScale, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleXBy:y:duration:"), xScale, yScale, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleToDuration calls the underlying SKActionScaleToDuration.
+// ScaleToDuration creates an action that changes the x and y scale values of a node by a relative value
 func ScaleToDuration(scale float64, duration float64) *Action {
-	_r := raw.SKActionScaleToDuration(scale, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleTo:duration:"), scale, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleXToYDuration calls the underlying SKActionScaleXToYDuration.
+// ScaleXToYDuration wraps the corresponding Objective-C method.
 func ScaleXToYDuration(xScale float64, yScale float64, duration float64) *Action {
-	_r := raw.SKActionScaleXToYDuration(xScale, yScale, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleXTo:y:duration:"), xScale, yScale, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleXToDuration calls the underlying SKActionScaleXToDuration.
+// ScaleXToDuration wraps the corresponding Objective-C method.
 func ScaleXToDuration(scale float64, duration float64) *Action {
-	_r := raw.SKActionScaleXToDuration(scale, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleXTo:duration:"), scale, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleYToDuration calls the underlying SKActionScaleYToDuration.
+// ScaleYToDuration wraps the corresponding Objective-C method.
 func ScaleYToDuration(scale float64, duration float64) *Action {
-	_r := raw.SKActionScaleYToDuration(scale, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleYTo:duration:"), scale, duration)
+	return ActionFromID(_r)
 }
 
-// ScaleToSizeDuration calls the underlying SKActionScaleToSizeDuration.
+// ScaleToSizeDuration adjust the sprite's xScale & yScale to achieve the desired size (in parent's coordinate space)
 func ScaleToSizeDuration(size corefoundation.CGSize, duration float64) *Action {
-	_r := raw.SKActionScaleToSizeDuration(size, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("scaleToSize:duration:"), size, duration)
+	return ActionFromID(_r)
 }
 
-// Sequence calls the underlying SKActionSequence.
-func Sequence(actions *foundation.NSArray[*raw.SKAction]) *Action {
-	_r := raw.SKActionSequence(actions)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Sequence creates an action that runs a collection of actions sequentially When the action executes, the first action in the sequence starts and runs to completion. Subsequent actions in the sequence run in a similar fashion until all of the actions in the sequence have executed. The duration of the sequence action is the sum of the durations of the actions in the sequence. This action is reversible; it creates a new sequence action that reverses the order of the actions. Each action in the reversed sequence is itself reversed. For example, if an action sequence is {1,2,3}, the reversed sequence would be {3R,2R,1R}.
+func Sequence(actions []*Action) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("sequence:"), purego.SliceToNSArray(actions, func(_v *Action) objc.ID { return objref.IDOf(_v) }))
+	return ActionFromID(_r)
 }
 
-// Group calls the underlying SKActionGroup.
-func Group(actions *foundation.NSArray[*raw.SKAction]) *Action {
-	_r := raw.SKActionGroup(actions)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Group creates an action that runs a collection of actions concurrently When the action executes, the actions that comprise the group all start immediately and run in parallel. The duration of the group action is the longest duration among the collection of actions. If an action in the group has a duration less than the group’s duration, the action completes, then idles until the group completes the remaining actions. This matters most when creating a repeating action that repeats a group.
+func Group(actions []*Action) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("group:"), purego.SliceToNSArray(actions, func(_v *Action) objc.ID { return objref.IDOf(_v) }))
+	return ActionFromID(_r)
 }
 
-// RepeatActionCount calls the underlying SKActionRepeatActionCount.
-func RepeatActionCount(action *raw.SKAction, count uint) *Action {
-	_r := raw.SKActionRepeatActionCount(action, count)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// RepeatActionCount creates an action that repeats another action a specified number of times
+func RepeatActionCount(action *Action, count int) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("repeatAction:count:"), objref.IDOf(action), count)
+	return ActionFromID(_r)
 }
 
-// RepeatActionForever calls the underlying SKActionRepeatActionForever.
-func RepeatActionForever(action *raw.SKAction) *Action {
-	_r := raw.SKActionRepeatActionForever(action)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// RepeatActionForever creates an action that repeats forever
+func RepeatActionForever(action *Action) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("repeatActionForever:"), objref.IDOf(action))
+	return ActionFromID(_r)
 }
 
-// FadeInWithDuration calls the underlying SKActionFadeInWithDuration.
+// FadeInWithDuration creates an action that changes the alpha value of the node to 1.0
 func FadeInWithDuration(duration float64) *Action {
-	_r := raw.SKActionFadeInWithDuration(duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("fadeInWithDuration:"), duration)
+	return ActionFromID(_r)
 }
 
-// FadeOutWithDuration calls the underlying SKActionFadeOutWithDuration.
+// FadeOutWithDuration creates an action that changes the alpha value of the node to 0.0
 func FadeOutWithDuration(duration float64) *Action {
-	_r := raw.SKActionFadeOutWithDuration(duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("fadeOutWithDuration:"), duration)
+	return ActionFromID(_r)
 }
 
-// FadeAlphaByDuration calls the underlying SKActionFadeAlphaByDuration.
+// FadeAlphaByDuration creates an action that adjusts the alpha value of a node by a relative value
 func FadeAlphaByDuration(factor float64, duration float64) *Action {
-	_r := raw.SKActionFadeAlphaByDuration(factor, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("fadeAlphaBy:duration:"), factor, duration)
+	return ActionFromID(_r)
 }
 
-// FadeAlphaToDuration calls the underlying SKActionFadeAlphaToDuration.
+// FadeAlphaToDuration creates an action that adjusts the alpha value of a node to a new value
 func FadeAlphaToDuration(alpha float64, duration float64) *Action {
-	_r := raw.SKActionFadeAlphaToDuration(alpha, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("fadeAlphaTo:duration:"), alpha, duration)
+	return ActionFromID(_r)
 }
 
-// Hide calls the underlying SKActionHide.
+// Hide creates an action that hides a node
 func Hide() *Action {
-	_r := raw.SKActionHide()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("hide"))
+	return ActionFromID(_r)
 }
 
-// Unhide calls the underlying SKActionUnhide.
+// Unhide creates an action that unhides a node
 func Unhide() *Action {
-	_r := raw.SKActionUnhide()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("unhide"))
+	return ActionFromID(_r)
 }
 
-// SetTexture calls the underlying SKActionSetTexture.
-func SetTexture(texture *raw.SKTexture) *Action {
-	_r := raw.SKActionSetTexture(texture)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// SetTexture creates an action that changes a sprite’s texture
+func SetTexture(texture *Texture) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setTexture:"), objref.IDOf(texture))
+	return ActionFromID(_r)
 }
 
-// SetNormalTexture calls the underlying SKActionSetNormalTexture.
-func SetNormalTexture(texture *raw.SKTexture) *Action {
-	_r := raw.SKActionSetNormalTexture(texture)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// SetNormalTexture wraps the corresponding Objective-C method.
+func SetNormalTexture(texture *Texture) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setNormalTexture:"), objref.IDOf(texture))
+	return ActionFromID(_r)
 }
 
-// SetTextureResize calls the underlying SKActionSetTextureResize.
-func SetTextureResize(texture *raw.SKTexture, resize bool) *Action {
-	_r := raw.SKActionSetTextureResize(texture, resize)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// SetTextureResize creates an action that changes a sprite’s texture, possibly resizing the sprite
+func SetTextureResize(texture *Texture, resize bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setTexture:resize:"), objref.IDOf(texture), resize)
+	return ActionFromID(_r)
 }
 
-// SetNormalTextureResize calls the underlying SKActionSetNormalTextureResize.
-func SetNormalTextureResize(texture *raw.SKTexture, resize bool) *Action {
-	_r := raw.SKActionSetNormalTextureResize(texture, resize)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// SetNormalTextureResize wraps the corresponding Objective-C method.
+func SetNormalTextureResize(texture *Texture, resize bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("setNormalTexture:resize:"), objref.IDOf(texture), resize)
+	return ActionFromID(_r)
 }
 
-// AnimateWithTexturesTimePerFrame calls the underlying SKActionAnimateWithTexturesTimePerFrame.
-func AnimateWithTexturesTimePerFrame(textures *foundation.NSArray[*raw.SKTexture], sec float64) *Action {
-	_r := raw.SKActionAnimateWithTexturesTimePerFrame(textures, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// AnimateWithTexturesTimePerFrame creates an action that animates changes to a sprite’s texture
+func AnimateWithTexturesTimePerFrame(textures []*Texture, sec float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithTextures:timePerFrame:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), sec)
+	return ActionFromID(_r)
 }
 
-// AnimateWithNormalTexturesTimePerFrame calls the underlying SKActionAnimateWithNormalTexturesTimePerFrame.
-func AnimateWithNormalTexturesTimePerFrame(textures *foundation.NSArray[*raw.SKTexture], sec float64) *Action {
-	_r := raw.SKActionAnimateWithNormalTexturesTimePerFrame(textures, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// AnimateWithNormalTexturesTimePerFrame wraps the corresponding Objective-C method.
+func AnimateWithNormalTexturesTimePerFrame(textures []*Texture, sec float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithNormalTextures:timePerFrame:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), sec)
+	return ActionFromID(_r)
 }
 
-// AnimateWithTexturesTimePerFrameResizeRestore calls the underlying SKActionAnimateWithTexturesTimePerFrameResizeRestore.
-func AnimateWithTexturesTimePerFrameResizeRestore(textures *foundation.NSArray[*raw.SKTexture], sec float64, resize bool, restore bool) *Action {
-	_r := raw.SKActionAnimateWithTexturesTimePerFrameResizeRestore(textures, sec, resize, restore)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// AnimateWithTexturesTimePerFrameResizeRestore creates an action that animates changes to a sprite’s texture
+func AnimateWithTexturesTimePerFrameResizeRestore(textures []*Texture, sec float64, resize bool, restore bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithTextures:timePerFrame:resize:restore:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), sec, resize, restore)
+	return ActionFromID(_r)
 }
 
-// AnimateWithNormalTexturesTimePerFrameResizeRestore calls the underlying SKActionAnimateWithNormalTexturesTimePerFrameResizeRestore.
-func AnimateWithNormalTexturesTimePerFrameResizeRestore(textures *foundation.NSArray[*raw.SKTexture], sec float64, resize bool, restore bool) *Action {
-	_r := raw.SKActionAnimateWithNormalTexturesTimePerFrameResizeRestore(textures, sec, resize, restore)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// AnimateWithNormalTexturesTimePerFrameResizeRestore wraps the corresponding Objective-C method.
+func AnimateWithNormalTexturesTimePerFrameResizeRestore(textures []*Texture, sec float64, resize bool, restore bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithNormalTextures:timePerFrame:resize:restore:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), sec, resize, restore)
+	return ActionFromID(_r)
 }
 
-// PlaySoundFileNamedWaitForCompletion calls the underlying SKActionPlaySoundFileNamedWaitForCompletion.
+// PlaySoundFileNamedWaitForCompletion creates an action that plays a sound The file name must be the name or path of a file of a platform supported audio file format. Use a LinearPCM format audio file with 8 or 16 bits per channel for best performance
 func PlaySoundFileNamedWaitForCompletion(soundFile string, wait bool) *Action {
-	_r := raw.SKActionPlaySoundFileNamedWaitForCompletion(foundation.NSStringStringWithUTF8String(soundFile), wait)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("playSoundFileNamed:waitForCompletion:"), purego.NSString(soundFile), wait)
+	return ActionFromID(_r)
 }
 
-// ColorizeWithColorColorBlendFactorDuration calls the underlying SKActionColorizeWithColorColorBlendFactorDuration.
-func ColorizeWithColorColorBlendFactorDuration(color *appkit.NSColor, colorBlendFactor float64, duration float64) *Action {
-	_r := raw.SKActionColorizeWithColorColorBlendFactorDuration(color, colorBlendFactor, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// ColorizeWithColorColorBlendFactorDuration creates an animation that animates a sprite’s color and blend factor
+func ColorizeWithColorColorBlendFactorDuration(color obj.Object, colorBlendFactor float64, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("colorizeWithColor:colorBlendFactor:duration:"), objref.IDOf(color), colorBlendFactor, duration)
+	return ActionFromID(_r)
 }
 
-// ColorizeWithColorBlendFactorDuration calls the underlying SKActionColorizeWithColorBlendFactorDuration.
+// ColorizeWithColorBlendFactorDuration wraps the corresponding Objective-C method.
 func ColorizeWithColorBlendFactorDuration(colorBlendFactor float64, sec float64) *Action {
-	_r := raw.SKActionColorizeWithColorBlendFactorDuration(colorBlendFactor, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("colorizeWithColorBlendFactor:duration:"), colorBlendFactor, sec)
+	return ActionFromID(_r)
 }
 
-// FalloffToDuration calls the underlying SKActionFalloffToDuration.
+// FalloffToDuration creates an action that sets the falloff of a field
 func FalloffToDuration(falloff float32, duration float64) *Action {
-	_r := raw.SKActionFalloffToDuration(falloff, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("falloffTo:duration:"), falloff, duration)
+	return ActionFromID(_r)
 }
 
-// FalloffByDuration calls the underlying SKActionFalloffByDuration.
+// FalloffByDuration creates an action that sets the falloff of a field
 func FalloffByDuration(falloff float32, duration float64) *Action {
-	_r := raw.SKActionFalloffByDuration(falloff, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("falloffBy:duration:"), falloff, duration)
+	return ActionFromID(_r)
 }
 
-// FollowPathDuration calls the underlying SKActionFollowPathDuration.
-func FollowPathDuration(path unsafe.Pointer, duration float64) *Action {
-	_r := raw.SKActionFollowPathDuration(path, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// FollowPathDuration creates an action that moves the node along a relative path, orienting the node to the path
+func FollowPathDuration(path obj.Object, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:duration:"), objref.IDOf(path), duration)
+	return ActionFromID(_r)
 }
 
-// FollowPathAsOffsetOrientToPathDuration calls the underlying SKActionFollowPathAsOffsetOrientToPathDuration.
-func FollowPathAsOffsetOrientToPathDuration(path unsafe.Pointer, offset bool, orient bool, duration float64) *Action {
-	_r := raw.SKActionFollowPathAsOffsetOrientToPathDuration(path, offset, orient, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// FollowPathAsOffsetOrientToPathDuration creates an action that moves the node along a path
+func FollowPathAsOffsetOrientToPathDuration(path obj.Object, offset bool, orient bool, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:duration:"), objref.IDOf(path), offset, orient, duration)
+	return ActionFromID(_r)
 }
 
-// FollowPathSpeed calls the underlying SKActionFollowPathSpeed.
-func FollowPathSpeed(path unsafe.Pointer, speed float64) *Action {
-	_r := raw.SKActionFollowPathSpeed(path, speed)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// FollowPathSpeed creates an action that moves the node along a relative path, orienting the node to the path
+func FollowPathSpeed(path obj.Object, speed float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:speed:"), objref.IDOf(path), speed)
+	return ActionFromID(_r)
 }
 
-// FollowPathAsOffsetOrientToPathSpeed calls the underlying SKActionFollowPathAsOffsetOrientToPathSpeed.
-func FollowPathAsOffsetOrientToPathSpeed(path unsafe.Pointer, offset bool, orient bool, speed float64) *Action {
-	_r := raw.SKActionFollowPathAsOffsetOrientToPathSpeed(path, offset, orient, speed)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// FollowPathAsOffsetOrientToPathSpeed wraps the corresponding Objective-C method.
+func FollowPathAsOffsetOrientToPathSpeed(path obj.Object, offset bool, orient bool, speed float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:speed:"), objref.IDOf(path), offset, orient, speed)
+	return ActionFromID(_r)
 }
 
-// SpeedByDuration calls the underlying SKActionSpeedByDuration.
+// SpeedByDuration creates an action that changes how fast the node executes actions by a relative value
 func SpeedByDuration(speed float64, duration float64) *Action {
-	_r := raw.SKActionSpeedByDuration(speed, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("speedBy:duration:"), speed, duration)
+	return ActionFromID(_r)
 }
 
-// SpeedToDuration calls the underlying SKActionSpeedToDuration.
+// SpeedToDuration creates an action that changes how fast the node executes actions
 func SpeedToDuration(speed float64, duration float64) *Action {
-	_r := raw.SKActionSpeedToDuration(speed, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("speedTo:duration:"), speed, duration)
+	return ActionFromID(_r)
 }
 
-// ReachToRootNodeDuration calls the underlying SKActionReachToRootNodeDuration.
-func ReachToRootNodeDuration(position corefoundation.CGPoint, root *raw.SKNode, duration float64) *Action {
-	_r := raw.SKActionReachToRootNodeDuration(position, root, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// ReachToRootNodeDuration creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
+func ReachToRootNodeDuration(position corefoundation.CGPoint, root *Node, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachTo:rootNode:duration:"), position, objref.IDOf(root), duration)
+	return ActionFromID(_r)
 }
 
-// ReachToRootNodeVelocity calls the underlying SKActionReachToRootNodeVelocity.
-func ReachToRootNodeVelocity(position corefoundation.CGPoint, root *raw.SKNode, velocity float64) *Action {
-	_r := raw.SKActionReachToRootNodeVelocity(position, root, velocity)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// ReachToRootNodeVelocity creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
+func ReachToRootNodeVelocity(position corefoundation.CGPoint, root *Node, velocity float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachTo:rootNode:velocity:"), position, objref.IDOf(root), velocity)
+	return ActionFromID(_r)
 }
 
-// ReachToNodeRootNodeDuration calls the underlying SKActionReachToNodeRootNodeDuration.
-func ReachToNodeRootNodeDuration(node *raw.SKNode, root *raw.SKNode, sec float64) *Action {
-	_r := raw.SKActionReachToNodeRootNodeDuration(node, root, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// ReachToNodeRootNodeDuration creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
+func ReachToNodeRootNodeDuration(node *Node, root *Node, sec float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachToNode:rootNode:duration:"), objref.IDOf(node), objref.IDOf(root), sec)
+	return ActionFromID(_r)
 }
 
-// ReachToNodeRootNodeVelocity calls the underlying SKActionReachToNodeRootNodeVelocity.
-func ReachToNodeRootNodeVelocity(node *raw.SKNode, root *raw.SKNode, velocity float64) *Action {
-	_r := raw.SKActionReachToNodeRootNodeVelocity(node, root, velocity)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// ReachToNodeRootNodeVelocity creates an action that performs an inverse kinematic reach. This action must be run on a descendent of the rootNode for animation to occur. Running this action on the rootNode itself will not cause any animation to occur.
+func ReachToNodeRootNodeVelocity(node *Node, root *Node, velocity float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("reachToNode:rootNode:velocity:"), objref.IDOf(node), objref.IDOf(root), velocity)
+	return ActionFromID(_r)
 }
 
-// StrengthToDuration calls the underlying SKActionStrengthToDuration.
+// StrengthToDuration creates an action that sets the strength of a field
 func StrengthToDuration(strength float32, duration float64) *Action {
-	_r := raw.SKActionStrengthToDuration(strength, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("strengthTo:duration:"), strength, duration)
+	return ActionFromID(_r)
 }
 
-// StrengthByDuration calls the underlying SKActionStrengthByDuration.
+// StrengthByDuration creates an action that sets the strength of a field
 func StrengthByDuration(strength float32, duration float64) *Action {
-	_r := raw.SKActionStrengthByDuration(strength, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("strengthBy:duration:"), strength, duration)
+	return ActionFromID(_r)
 }
 
-// WaitForDuration calls the underlying SKActionWaitForDuration.
+// WaitForDuration creates an action that idles for a specified period of time
 func WaitForDuration(duration float64) *Action {
-	_r := raw.SKActionWaitForDuration(duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("waitForDuration:"), duration)
+	return ActionFromID(_r)
 }
 
-// WaitForDurationWithRange calls the underlying SKActionWaitForDurationWithRange.
+// WaitForDurationWithRange creates an action that idles for a randomized period of time
 func WaitForDurationWithRange(duration float64, durationRange float64) *Action {
-	_r := raw.SKActionWaitForDurationWithRange(duration, durationRange)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("waitForDuration:withRange:"), duration, durationRange)
+	return ActionFromID(_r)
 }
 
-// RemoveFromParent calls the underlying SKActionRemoveFromParent.
+// RemoveFromParent creates an action that removes the node from its parent
 func RemoveFromParent() *Action {
-	_r := raw.SKActionRemoveFromParent()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("removeFromParent"))
+	return ActionFromID(_r)
 }
 
-// PerformSelectorOnTarget calls the underlying SKActionPerformSelectorOnTarget.
-func PerformSelectorOnTarget(selector objc.SEL, target objc.ID) *Action {
-	_r := raw.SKActionPerformSelectorOnTarget(selector, target)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
-}
-
-// RunBlock calls the underlying SKActionRunBlock.
+// RunBlock creates an action that executes a block
 func RunBlock(block func()) *Action {
-	_r := raw.SKActionRunBlock(block)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:"), block)
+	return ActionFromID(_r)
 }
 
-// RunBlockQueue calls the underlying SKActionRunBlockQueue.
-func RunBlockQueue(block func(), queue *foundation.NSObject) *Action {
-	_r := raw.SKActionRunBlockQueue(block, queue)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// RunBlockQueue creates an action that executes a block
+func RunBlockQueue(block func(), queue obj.Object) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:queue:"), block, objref.IDOf(queue))
+	return ActionFromID(_r)
 }
 
-// RunActionOnChildWithName calls the underlying SKActionRunActionOnChildWithName.
-func RunActionOnChildWithName(action *raw.SKAction, name string) *Action {
-	_r := raw.SKActionRunActionOnChildWithName(action, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// RunActionOnChildWithName creates an action that runs an action on a named child object
+func RunActionOnChildWithName(action *Action, name string) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runAction:onChildWithName:"), objref.IDOf(action), purego.NSString(name))
+	return ActionFromID(_r)
 }
 
-// CustomActionWithDurationActionBlock calls the underlying SKActionCustomActionWithDurationActionBlock.
-func CustomActionWithDurationActionBlock(duration float64, block func(*raw.SKNode, float64)) *Action {
-	_r := raw.SKActionCustomActionWithDurationActionBlock(duration, block)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// CustomActionWithDurationActionBlock creates an action that executes a block over a duration
+func CustomActionWithDurationActionBlock(duration float64, block func(obj.Object, float64)) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("customActionWithDuration:actionBlock:"), duration, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { block(obj.Wrap(_b0), _b1) }))
+	return ActionFromID(_r)
 }
 
-// ActionNamed calls the underlying SKActionActionNamed.
+// ActionNamed creates an action of the given name from an action file.
 func ActionNamed(name string) *Action {
-	_r := raw.SKActionActionNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("actionNamed:"), purego.NSString(name))
+	return ActionFromID(_r)
 }
 
-// ActionNamedDuration calls the underlying SKActionActionNamedDuration.
+// ActionNamedDuration creates an action of the given name from an action file with a new duration.
 func ActionNamedDuration(name string, duration float64) *Action {
-	_r := raw.SKActionActionNamedDuration(foundation.NSStringStringWithUTF8String(name), duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("actionNamed:duration:"), purego.NSString(name), duration)
+	return ActionFromID(_r)
 }
 
-// ActionNamedFromURL calls the underlying SKActionActionNamedFromURL.
+// ActionNamedFromURL creates an action of the given name from an action file.
 func ActionNamedFromURL(name string, url string) *Action {
-	_r := raw.SKActionActionNamedFromURL(foundation.NSStringStringWithUTF8String(name), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("actionNamed:fromURL:"), purego.NSString(name), rt.FileURL(url))
+	return ActionFromID(_r)
 }
 
-// ActionNamedFromURLDuration calls the underlying SKActionActionNamedFromURLDuration.
+// ActionNamedFromURLDuration creates an action of the given name from an action file with a new duration.
 func ActionNamedFromURLDuration(name string, url string, duration float64) *Action {
-	_r := raw.SKActionActionNamedFromURLDuration(foundation.NSStringStringWithUTF8String(name), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("actionNamed:fromURL:duration:"), purego.NSString(name), rt.FileURL(url), duration)
+	return ActionFromID(_r)
 }
 
-// ChangeChargeToDuration calls the underlying SKActionChangeChargeToDuration.
+// ChangeChargeToDuration wraps the corresponding Objective-C method.
 func ChangeChargeToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeChargeToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeChargeTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeChargeByDuration calls the underlying SKActionChangeChargeByDuration.
+// ChangeChargeByDuration wraps the corresponding Objective-C method.
 func ChangeChargeByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeChargeByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeChargeBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeMassToDuration calls the underlying SKActionChangeMassToDuration.
+// ChangeMassToDuration wraps the corresponding Objective-C method.
 func ChangeMassToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeMassToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeMassTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeMassByDuration calls the underlying SKActionChangeMassByDuration.
+// ChangeMassByDuration wraps the corresponding Objective-C method.
 func ChangeMassByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeMassByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeMassBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ApplyForceDuration calls the underlying SKActionApplyForceDuration.
+// ApplyForceDuration wraps the corresponding Objective-C method.
 func ApplyForceDuration(force corefoundation.CGVector, duration float64) *Action {
-	_r := raw.SKActionApplyForceDuration(force, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyForce:duration:"), force, duration)
+	return ActionFromID(_r)
 }
 
-// ApplyForceAtPointDuration calls the underlying SKActionApplyForceAtPointDuration.
+// ApplyForceAtPointDuration wraps the corresponding Objective-C method.
 func ApplyForceAtPointDuration(force corefoundation.CGVector, point corefoundation.CGPoint, duration float64) *Action {
-	_r := raw.SKActionApplyForceAtPointDuration(force, point, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyForce:atPoint:duration:"), force, point, duration)
+	return ActionFromID(_r)
 }
 
-// ApplyTorqueDuration calls the underlying SKActionApplyTorqueDuration.
+// ApplyTorqueDuration wraps the corresponding Objective-C method.
 func ApplyTorqueDuration(torque float64, duration float64) *Action {
-	_r := raw.SKActionApplyTorqueDuration(torque, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyTorque:duration:"), torque, duration)
+	return ActionFromID(_r)
 }
 
-// ApplyImpulseDuration calls the underlying SKActionApplyImpulseDuration.
+// ApplyImpulseDuration wraps the corresponding Objective-C method.
 func ApplyImpulseDuration(impulse corefoundation.CGVector, duration float64) *Action {
-	_r := raw.SKActionApplyImpulseDuration(impulse, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyImpulse:duration:"), impulse, duration)
+	return ActionFromID(_r)
 }
 
-// ApplyImpulseAtPointDuration calls the underlying SKActionApplyImpulseAtPointDuration.
+// ApplyImpulseAtPointDuration wraps the corresponding Objective-C method.
 func ApplyImpulseAtPointDuration(impulse corefoundation.CGVector, point corefoundation.CGPoint, duration float64) *Action {
-	_r := raw.SKActionApplyImpulseAtPointDuration(impulse, point, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyImpulse:atPoint:duration:"), impulse, point, duration)
+	return ActionFromID(_r)
 }
 
-// ApplyAngularImpulseDuration calls the underlying SKActionApplyAngularImpulseDuration.
+// ApplyAngularImpulseDuration wraps the corresponding Objective-C method.
 func ApplyAngularImpulseDuration(impulse float64, duration float64) *Action {
-	_r := raw.SKActionApplyAngularImpulseDuration(impulse, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyAngularImpulse:duration:"), impulse, duration)
+	return ActionFromID(_r)
 }
 
-// Play calls the underlying SKActionPlay.
+// Play wraps the corresponding Objective-C method.
 func Play() *Action {
-	_r := raw.SKActionPlay()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("play"))
+	return ActionFromID(_r)
 }
 
-// Pause calls the underlying SKActionPause.
+// Pause wraps the corresponding Objective-C method.
 func Pause() *Action {
-	_r := raw.SKActionPause()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("pause"))
+	return ActionFromID(_r)
 }
 
-// Stop calls the underlying SKActionStop.
+// Stop wraps the corresponding Objective-C method.
 func Stop() *Action {
-	_r := raw.SKActionStop()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("stop"))
+	return ActionFromID(_r)
 }
 
-// ChangePlaybackRateToDuration calls the underlying SKActionChangePlaybackRateToDuration.
+// ChangePlaybackRateToDuration wraps the corresponding Objective-C method.
 func ChangePlaybackRateToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangePlaybackRateToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changePlaybackRateTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangePlaybackRateByDuration calls the underlying SKActionChangePlaybackRateByDuration.
+// ChangePlaybackRateByDuration wraps the corresponding Objective-C method.
 func ChangePlaybackRateByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangePlaybackRateByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changePlaybackRateBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeVolumeToDuration calls the underlying SKActionChangeVolumeToDuration.
+// ChangeVolumeToDuration wraps the corresponding Objective-C method.
 func ChangeVolumeToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeVolumeToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeVolumeTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeVolumeByDuration calls the underlying SKActionChangeVolumeByDuration.
+// ChangeVolumeByDuration wraps the corresponding Objective-C method.
 func ChangeVolumeByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeVolumeByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeVolumeBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// WarpToDuration calls the underlying SKActionWarpToDuration.
-func WarpToDuration(warp *raw.SKWarpGeometry, duration float64) *Action {
-	_r := raw.SKActionWarpToDuration(warp, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// WarpToDuration wraps the corresponding Objective-C method.
+func WarpToDuration(warp *WarpGeometry, duration float64) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("warpTo:duration:"), objref.IDOf(warp), duration)
+	return ActionFromID(_r)
 }
 
-// AnimateWithWarpsTimes calls the underlying SKActionAnimateWithWarpsTimes.
-func AnimateWithWarpsTimes(warps *foundation.NSArray[*raw.SKWarpGeometry], times *foundation.NSArray[*foundation.NSNumber]) *Action {
-	_r := raw.SKActionAnimateWithWarpsTimes(warps, times)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// AnimateWithWarpsTimes wraps the corresponding Objective-C method.
+func AnimateWithWarpsTimes(warps []*WarpGeometry, times []obj.Object) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithWarps:times:"), purego.SliceToNSArray(warps, func(_v *WarpGeometry) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ActionFromID(_r)
 }
 
-// AnimateWithWarpsTimesRestore calls the underlying SKActionAnimateWithWarpsTimesRestore.
-func AnimateWithWarpsTimesRestore(warps *foundation.NSArray[*raw.SKWarpGeometry], times *foundation.NSArray[*foundation.NSNumber], restore bool) *Action {
-	_r := raw.SKActionAnimateWithWarpsTimesRestore(warps, times, restore)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// AnimateWithWarpsTimesRestore wraps the corresponding Objective-C method.
+func AnimateWithWarpsTimesRestore(warps []*WarpGeometry, times []obj.Object, restore bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("animateWithWarps:times:restore:"), purego.SliceToNSArray(warps, func(_v *WarpGeometry) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), restore)
+	return ActionFromID(_r)
 }
 
-// StereoPanToDuration calls the underlying SKActionStereoPanToDuration.
+// StereoPanToDuration wraps the corresponding Objective-C method.
 func StereoPanToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionStereoPanToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("stereoPanTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// StereoPanByDuration calls the underlying SKActionStereoPanByDuration.
+// StereoPanByDuration wraps the corresponding Objective-C method.
 func StereoPanByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionStereoPanByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("stereoPanBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeReverbToDuration calls the underlying SKActionChangeReverbToDuration.
+// ChangeReverbToDuration wraps the corresponding Objective-C method.
 func ChangeReverbToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeReverbToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeReverbTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeReverbByDuration calls the underlying SKActionChangeReverbByDuration.
+// ChangeReverbByDuration wraps the corresponding Objective-C method.
 func ChangeReverbByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeReverbByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeReverbBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeObstructionToDuration calls the underlying SKActionChangeObstructionToDuration.
+// ChangeObstructionToDuration wraps the corresponding Objective-C method.
 func ChangeObstructionToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeObstructionToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeObstructionTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeObstructionByDuration calls the underlying SKActionChangeObstructionByDuration.
+// ChangeObstructionByDuration wraps the corresponding Objective-C method.
 func ChangeObstructionByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeObstructionByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeObstructionBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeOcclusionToDuration calls the underlying SKActionChangeOcclusionToDuration.
+// ChangeOcclusionToDuration wraps the corresponding Objective-C method.
 func ChangeOcclusionToDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeOcclusionToDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeOcclusionTo:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// ChangeOcclusionByDuration calls the underlying SKActionChangeOcclusionByDuration.
+// ChangeOcclusionByDuration wraps the corresponding Objective-C method.
 func ChangeOcclusionByDuration(v float32, duration float64) *Action {
-	_r := raw.SKActionChangeOcclusionByDuration(v, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("changeOcclusionBy:duration:"), v, duration)
+	return ActionFromID(_r)
 }
 
-// AttributeWithNameType calls the underlying SKAttributeAttributeWithNameType.
-func AttributeWithNameType(name string, type_ SKAttributeType) *Attribute {
-	_r := raw.SKAttributeAttributeWithNameType(foundation.NSStringStringWithUTF8String(name), raw.SKAttributeType(type_))
-	if _r == nil {
-		return nil
-	}
-	return &Attribute{inner: _r}
+// AttributeWithNameType wraps the corresponding Objective-C method.
+func AttributeWithNameType(name string, type_ AttributeType) *Attribute {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAttribute")), objc.RegisterName("attributeWithName:type:"), purego.NSString(name), type_)
+	return AttributeFromID(_r)
 }
 
-// ValueWithFloat calls the underlying SKAttributeValueValueWithFloat.
+// ValueWithFloat creates and initializes a new attribute value object that holds a floating point number.
 func ValueWithFloat(value float32) *AttributeValue {
-	_r := raw.SKAttributeValueValueWithFloat(value)
-	if _r == nil {
-		return nil
-	}
-	return &AttributeValue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAttributeValue")), objc.RegisterName("valueWithFloat:"), value)
+	return AttributeValueFromID(_r)
 }
 
-// ValueWithVectorFloat2 calls the underlying SKAttributeValueValueWithVectorFloat2.
-func ValueWithVectorFloat2(value unsafe.Pointer) *AttributeValue {
-	_r := raw.SKAttributeValueValueWithVectorFloat2(value)
-	if _r == nil {
-		return nil
-	}
-	return &AttributeValue{inner: _r}
+// PositionX creates a constraint that restricts the x-coordinate of a node’s position.
+func PositionX(range_ *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionX:"), objref.IDOf(range_))
+	return ConstraintFromID(_r)
 }
 
-// ValueWithVectorFloat3 calls the underlying SKAttributeValueValueWithVectorFloat3.
-func ValueWithVectorFloat3(value unsafe.Pointer) *AttributeValue {
-	_r := raw.SKAttributeValueValueWithVectorFloat3(value)
-	if _r == nil {
-		return nil
-	}
-	return &AttributeValue{inner: _r}
+// PositionY creates a constraint that restricts the y-coordinate of a node’s position.
+func PositionY(range_ *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionY:"), objref.IDOf(range_))
+	return ConstraintFromID(_r)
 }
 
-// ValueWithVectorFloat4 calls the underlying SKAttributeValueValueWithVectorFloat4.
-func ValueWithVectorFloat4(value unsafe.Pointer) *AttributeValue {
-	_r := raw.SKAttributeValueValueWithVectorFloat4(value)
-	if _r == nil {
-		return nil
-	}
-	return &AttributeValue{inner: _r}
+// PositionXY creates a constraint that restricts both coordinates of a node’s position.
+func PositionXY(xRange *Range, yRange *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionX:Y:"), objref.IDOf(xRange), objref.IDOf(yRange))
+	return ConstraintFromID(_r)
 }
 
-// PositionX calls the underlying SKConstraintPositionX.
-func PositionX(range_ *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintPositionX(range_)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// DistanceToNode creates a constraint that keeps a node within a certain distance of another node.
+func DistanceToNode(range_ *Range, node *Node) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("distance:toNode:"), objref.IDOf(range_), objref.IDOf(node))
+	return ConstraintFromID(_r)
 }
 
-// PositionY calls the underlying SKConstraintPositionY.
-func PositionY(range_ *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintPositionY(range_)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// DistanceToPoint creates a constraint that keeps a node within a certain distance of a point.
+func DistanceToPoint(range_ *Range, point corefoundation.CGPoint) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("distance:toPoint:"), objref.IDOf(range_), point)
+	return ConstraintFromID(_r)
 }
 
-// PositionXY calls the underlying SKConstraintPositionXY.
-func PositionXY(xRange *raw.SKRange, yRange *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintPositionXY(xRange, yRange)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// DistanceToPointInNode creates a constraint that keeps a node within a certain distance of a point in another node’s coordinate system.
+func DistanceToPointInNode(range_ *Range, point corefoundation.CGPoint, node *Node) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("distance:toPoint:inNode:"), objref.IDOf(range_), point, objref.IDOf(node))
+	return ConstraintFromID(_r)
 }
 
-// DistanceToNode calls the underlying SKConstraintDistanceToNode.
-func DistanceToNode(range_ *raw.SKRange, node *raw.SKNode) *Constraint {
-	_r := raw.SKConstraintDistanceToNode(range_, node)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// ZRotation creates a constraint that limits the orientation of a node.
+func ZRotation(zRange *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("zRotation:"), objref.IDOf(zRange))
+	return ConstraintFromID(_r)
 }
 
-// DistanceToPoint calls the underlying SKConstraintDistanceToPoint.
-func DistanceToPoint(range_ *raw.SKRange, point corefoundation.CGPoint) *Constraint {
-	_r := raw.SKConstraintDistanceToPoint(range_, point)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// OrientToNodeOffset creates a constraint that forces a node to rotate to face another node.
+func OrientToNodeOffset(node *Node, radians *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("orientToNode:offset:"), objref.IDOf(node), objref.IDOf(radians))
+	return ConstraintFromID(_r)
 }
 
-// DistanceToPointInNode calls the underlying SKConstraintDistanceToPointInNode.
-func DistanceToPointInNode(range_ *raw.SKRange, point corefoundation.CGPoint, node *raw.SKNode) *Constraint {
-	_r := raw.SKConstraintDistanceToPointInNode(range_, point, node)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// OrientToPointOffset creates a constraint that forces a node to rotate to face a fixed point.
+func OrientToPointOffset(point corefoundation.CGPoint, radians *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("orientToPoint:offset:"), point, objref.IDOf(radians))
+	return ConstraintFromID(_r)
 }
 
-// ZRotation calls the underlying SKConstraintZRotation.
-func ZRotation(zRange *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintZRotation(zRange)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// OrientToPointInNodeOffset creates a constraint that forces a node to rotate to face a point in another node’s coordinate system.
+func OrientToPointInNodeOffset(point corefoundation.CGPoint, node *Node, radians *Range) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("orientToPoint:inNode:offset:"), point, objref.IDOf(node), objref.IDOf(radians))
+	return ConstraintFromID(_r)
 }
 
-// OrientToNodeOffset calls the underlying SKConstraintOrientToNodeOffset.
-func OrientToNodeOffset(node *raw.SKNode, radians *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintOrientToNodeOffset(node, radians)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
-}
-
-// OrientToPointOffset calls the underlying SKConstraintOrientToPointOffset.
-func OrientToPointOffset(point corefoundation.CGPoint, radians *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintOrientToPointOffset(point, radians)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
-}
-
-// OrientToPointInNodeOffset calls the underlying SKConstraintOrientToPointInNodeOffset.
-func OrientToPointInNodeOffset(point corefoundation.CGPoint, node *raw.SKNode, radians *raw.SKRange) *Constraint {
-	_r := raw.SKConstraintOrientToPointInNodeOffset(point, node, radians)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
-}
-
-// DragField calls the underlying SKFieldNodeDragField.
+// DragField creates a field node that applies a force that resists the motion of physics bodies.
 func DragField() *FieldNode {
-	_r := raw.SKFieldNodeDragField()
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("dragField"))
+	return FieldNodeFromID(_r)
 }
 
-// VortexField calls the underlying SKFieldNodeVortexField.
+// VortexField creates a field node that applies a perpendicular force to physics bodies.
 func VortexField() *FieldNode {
-	_r := raw.SKFieldNodeVortexField()
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("vortexField"))
+	return FieldNodeFromID(_r)
 }
 
-// RadialGravityField calls the underlying SKFieldNodeRadialGravityField.
+// RadialGravityField creates a field node that accelerates physics bodies toward the field node.
 func RadialGravityField() *FieldNode {
-	_r := raw.SKFieldNodeRadialGravityField()
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("radialGravityField"))
+	return FieldNodeFromID(_r)
 }
 
-// LinearGravityFieldWithVector calls the underlying SKFieldNodeLinearGravityFieldWithVector.
-func LinearGravityFieldWithVector(direction unsafe.Pointer) *FieldNode {
-	_r := raw.SKFieldNodeLinearGravityFieldWithVector(direction)
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+// VelocityFieldWithTexture creates a field node that sets the velocity of physics bodies that enter the node’s area based on the pixel values of a texture.
+func VelocityFieldWithTexture(velocityTexture *Texture) *FieldNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("velocityFieldWithTexture:"), objref.IDOf(velocityTexture))
+	return FieldNodeFromID(_r)
 }
 
-// VelocityFieldWithVector calls the underlying SKFieldNodeVelocityFieldWithVector.
-func VelocityFieldWithVector(direction unsafe.Pointer) *FieldNode {
-	_r := raw.SKFieldNodeVelocityFieldWithVector(direction)
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
-}
-
-// VelocityFieldWithTexture calls the underlying SKFieldNodeVelocityFieldWithTexture.
-func VelocityFieldWithTexture(velocityTexture *raw.SKTexture) *FieldNode {
-	_r := raw.SKFieldNodeVelocityFieldWithTexture(velocityTexture)
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
-}
-
-// NoiseFieldWithSmoothnessAnimationSpeed calls the underlying SKFieldNodeNoiseFieldWithSmoothnessAnimationSpeed.
+// NoiseFieldWithSmoothnessAnimationSpeed creates a field node that applies a randomized acceleration to physics bodies.
 func NoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *FieldNode {
-	_r := raw.SKFieldNodeNoiseFieldWithSmoothnessAnimationSpeed(smoothness, speed)
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:"), smoothness, speed)
+	return FieldNodeFromID(_r)
 }
 
-// TurbulenceFieldWithSmoothnessAnimationSpeed calls the underlying SKFieldNodeTurbulenceFieldWithSmoothnessAnimationSpeed.
+// TurbulenceFieldWithSmoothnessAnimationSpeed creates a field node that applies a randomized acceleration to physics bodies.
 func TurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *FieldNode {
-	_r := raw.SKFieldNodeTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness, speed)
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("turbulenceFieldWithSmoothness:animationSpeed:"), smoothness, speed)
+	return FieldNodeFromID(_r)
 }
 
-// SpringField calls the underlying SKFieldNodeSpringField.
+// SpringField creates a field node that applies a spring-like force that pulls physics bodies toward the field node.
 func SpringField() *FieldNode {
-	_r := raw.SKFieldNodeSpringField()
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("springField"))
+	return FieldNodeFromID(_r)
 }
 
-// ElectricField calls the underlying SKFieldNodeElectricField.
+// ElectricField creates a field node that applies an electrical force proportional to the electrical charge of physics bodies.
 func ElectricField() *FieldNode {
-	_r := raw.SKFieldNodeElectricField()
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("electricField"))
+	return FieldNodeFromID(_r)
 }
 
-// MagneticField calls the underlying SKFieldNodeMagneticField.
+// MagneticField creates a field node that applies a magnetic force based on the velocity and electrical charge of the physics bodies.
 func MagneticField() *FieldNode {
-	_r := raw.SKFieldNodeMagneticField()
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("magneticField"))
+	return FieldNodeFromID(_r)
 }
 
-// CustomFieldWithEvaluationBlock calls the underlying SKFieldNodeCustomFieldWithEvaluationBlock.
-func CustomFieldWithEvaluationBlock(block func(unsafe.Pointer, unsafe.Pointer, float32, float32, float64) unsafe.Pointer) *FieldNode {
-	_r := raw.SKFieldNodeCustomFieldWithEvaluationBlock(block)
-	if _r == nil {
-		return nil
-	}
-	return &FieldNode{inner: _r}
-}
-
-// LabelNodeWithText calls the underlying SKLabelNodeLabelNodeWithText.
+// LabelNodeWithText initializes a new label object with a text string.
 func LabelNodeWithText(text string) *LabelNode {
-	_r := raw.SKLabelNodeLabelNodeWithText(foundation.NSStringStringWithUTF8String(text))
-	if _r == nil {
-		return nil
-	}
-	return &LabelNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("labelNodeWithText:"), purego.NSString(text))
+	return LabelNodeFromID(_r)
 }
 
-// LabelNodeWithAttributedText calls the underlying SKLabelNodeLabelNodeWithAttributedText.
-func LabelNodeWithAttributedText(attributedText *foundation.NSAttributedString) *LabelNode {
-	_r := raw.SKLabelNodeLabelNodeWithAttributedText(attributedText)
-	if _r == nil {
-		return nil
-	}
-	return &LabelNode{inner: _r}
+// LabelNodeWithAttributedText initializes a new label object with an attributed text string.
+func LabelNodeWithAttributedText(attributedText obj.Object) *LabelNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("labelNodeWithAttributedText:"), objref.IDOf(attributedText))
+	return LabelNodeFromID(_r)
 }
 
-// LabelNodeWithFontNamed calls the underlying SKLabelNodeLabelNodeWithFontNamed.
+// LabelNodeWithFontNamed initializes a new label object.
 func LabelNodeWithFontNamed(fontName string) *LabelNode {
-	_r := raw.SKLabelNodeLabelNodeWithFontNamed(foundation.NSStringStringWithUTF8String(fontName))
-	if _r == nil {
-		return nil
-	}
-	return &LabelNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("labelNodeWithFontNamed:"), purego.NSString(fontName))
+	return LabelNodeFromID(_r)
 }
 
-// MutableTextureWithSize calls the underlying SKMutableTextureMutableTextureWithSize.
+// MutableTextureWithSize creates an empty texture with a specific size.
 func MutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
-	_r := raw.SKMutableTextureMutableTextureWithSize(size)
-	if _r == nil {
-		return nil
-	}
-	return &MutableTexture{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKMutableTexture")), objc.RegisterName("mutableTextureWithSize:"), size)
+	return MutableTextureFromID(_r)
 }
 
-// SKNodeNode calls the underlying SKNodeNode.
+// SKNodeNode creates a new node.
 func SKNodeNode() *Node {
-	_r := raw.SKNodeNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("node"))
+	return NodeFromID(_r)
 }
 
-// NodeWithFileNamed calls the underlying SKNodeNodeWithFileNamed.
+// NodeWithFileNamed creates a new node by loading an archive file from the game’s main bundle.
 func NodeWithFileNamed(filename string) *Node {
-	_r := raw.SKNodeNodeWithFileNamed(foundation.NSStringStringWithUTF8String(filename))
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("nodeWithFileNamed:"), purego.NSString(filename))
+	return NodeFromID(_r)
 }
 
-// NodeWithFileNamedSecurelyWithClassesAndError calls the underlying SKNodeNodeWithFileNamedSecurelyWithClassesAndError.
-func NodeWithFileNamedSecurelyWithClassesAndError(filename string, classes *foundation.NSSet[objc.Class]) (*Node, error) {
-	_r, _err := raw.SKNodeNodeWithFileNamedSecurelyWithClassesAndError(foundation.NSStringStringWithUTF8String(filename), classes)
-	if _err != nil {
-		return nil, _err
+// NodeWithFileNamedSecurelyWithClassesAndError wraps the corresponding Objective-C method.
+func NodeWithFileNamedSecurelyWithClassesAndError(filename string, classes obj.Object) (result *Node, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("SKNode")), objc.RegisterName("nodeWithFileNamed:securelyWithClasses:andError:"), purego.NSString(filename), objref.IDOf(classes), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Node{inner: _r}, nil
+	return NodeFromID(_r), nil
 }
 
-// BodyWithCircleOfRadius calls the underlying SKPhysicsBodyBodyWithCircleOfRadius.
+// BodyWithCircleOfRadius creates a circular physics body centered on the owning node’s origin.
 func BodyWithCircleOfRadius(r float64) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithCircleOfRadius(r)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithCircleOfRadius:"), r)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithCircleOfRadiusCenter calls the underlying SKPhysicsBodyBodyWithCircleOfRadiusCenter.
+// BodyWithCircleOfRadiusCenter creates a circular physics body centered on an arbitrary point.
 func BodyWithCircleOfRadiusCenter(r float64, center corefoundation.CGPoint) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithCircleOfRadiusCenter(r, center)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithCircleOfRadius:center:"), r, center)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithRectangleOfSize calls the underlying SKPhysicsBodyBodyWithRectangleOfSize.
+// BodyWithRectangleOfSize creates a rectangular physics body centered on the owning node’s origin.
 func BodyWithRectangleOfSize(s corefoundation.CGSize) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithRectangleOfSize(s)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithRectangleOfSize:"), s)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithRectangleOfSizeCenter calls the underlying SKPhysicsBodyBodyWithRectangleOfSizeCenter.
+// BodyWithRectangleOfSizeCenter creates a rectangular physics body centered on an arbitrary point.
 func BodyWithRectangleOfSizeCenter(s corefoundation.CGSize, center corefoundation.CGPoint) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithRectangleOfSizeCenter(s, center)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithRectangleOfSize:center:"), s, center)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithPolygonFromPath calls the underlying SKPhysicsBodyBodyWithPolygonFromPath.
-func BodyWithPolygonFromPath(path unsafe.Pointer) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithPolygonFromPath(path)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// BodyWithPolygonFromPath creates a polygonal physics body.
+func BodyWithPolygonFromPath(path obj.Object) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithPolygonFromPath:"), objref.IDOf(path))
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithEdgeFromPointToPoint calls the underlying SKPhysicsBodyBodyWithEdgeFromPointToPoint.
+// BodyWithEdgeFromPointToPoint creates an edge between two points.
 func BodyWithEdgeFromPointToPoint(p1 corefoundation.CGPoint, p2 corefoundation.CGPoint) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithEdgeFromPointToPoint(p1, p2)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeFromPoint:toPoint:"), p1, p2)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithEdgeChainFromPath calls the underlying SKPhysicsBodyBodyWithEdgeChainFromPath.
-func BodyWithEdgeChainFromPath(path unsafe.Pointer) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithEdgeChainFromPath(path)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// BodyWithEdgeChainFromPath creates an edge chain from a path.
+func BodyWithEdgeChainFromPath(path obj.Object) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeChainFromPath:"), objref.IDOf(path))
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithEdgeLoopFromPath calls the underlying SKPhysicsBodyBodyWithEdgeLoopFromPath.
-func BodyWithEdgeLoopFromPath(path unsafe.Pointer) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithEdgeLoopFromPath(path)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// BodyWithEdgeLoopFromPath creates an edge loop from a path.
+func BodyWithEdgeLoopFromPath(path obj.Object) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeLoopFromPath:"), objref.IDOf(path))
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithEdgeLoopFromRect calls the underlying SKPhysicsBodyBodyWithEdgeLoopFromRect.
+// BodyWithEdgeLoopFromRect creates an edge loop from a rectangle.
 func BodyWithEdgeLoopFromRect(rect corefoundation.CGRect) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithEdgeLoopFromRect(rect)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeLoopFromRect:"), rect)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithTextureSize calls the underlying SKPhysicsBodyBodyWithTextureSize.
-func BodyWithTextureSize(texture *raw.SKTexture, size corefoundation.CGSize) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithTextureSize(texture, size)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// BodyWithTextureSize creates a physics body from the contents of a texture.
+func BodyWithTextureSize(texture *Texture, size corefoundation.CGSize) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithTexture:size:"), objref.IDOf(texture), size)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithTextureAlphaThresholdSize calls the underlying SKPhysicsBodyBodyWithTextureAlphaThresholdSize.
-func BodyWithTextureAlphaThresholdSize(texture *raw.SKTexture, alphaThreshold float32, size corefoundation.CGSize) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithTextureAlphaThresholdSize(texture, alphaThreshold, size)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// BodyWithTextureAlphaThresholdSize creates a physics body from the contents of a texture, capturing only the texels that exceed a specified transparency value.
+func BodyWithTextureAlphaThresholdSize(texture *Texture, alphaThreshold float32, size corefoundation.CGSize) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithTexture:alphaThreshold:size:"), objref.IDOf(texture), alphaThreshold, size)
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithBodies calls the underlying SKPhysicsBodyBodyWithBodies.
-func BodyWithBodies(bodies *foundation.NSArray[*raw.SKPhysicsBody]) *PhysicsBody {
-	_r := raw.SKPhysicsBodyBodyWithBodies(bodies)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// BodyWithBodies creates a physics body that’s shaped like a union of the argument physics bodies.
+func BodyWithBodies(bodies []*PhysicsBody) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithBodies:"), purego.SliceToNSArray(bodies, func(_v *PhysicsBody) objc.ID { return objref.IDOf(_v) }))
+	return PhysicsBodyFromID(_r)
 }
 
-// JointWithBodyABodyBAnchor calls the underlying SKPhysicsJointFixedJointWithBodyABodyBAnchor.
-func JointWithBodyABodyBAnchor(bodyA *raw.SKPhysicsBody, bodyB *raw.SKPhysicsBody, anchor corefoundation.CGPoint) *PhysicsJointFixed {
-	_r := raw.SKPhysicsJointFixedJointWithBodyABodyBAnchor(bodyA, bodyB, anchor)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsJointFixed{inner: _r}
+// JointWithBodyABodyBAnchor creates a new fixed joint.
+func JointWithBodyABodyBAnchor(bodyA *PhysicsBody, bodyB *PhysicsBody, anchor corefoundation.CGPoint) *PhysicsJointFixed {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointFixed")), objc.RegisterName("jointWithBodyA:bodyB:anchor:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchor)
+	return PhysicsJointFixedFromID(_r)
 }
 
-// JointWithBodyABodyBAnchorAAnchorB calls the underlying SKPhysicsJointLimitJointWithBodyABodyBAnchorAAnchorB.
-func JointWithBodyABodyBAnchorAAnchorB(bodyA *raw.SKPhysicsBody, bodyB *raw.SKPhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *PhysicsJointLimit {
-	_r := raw.SKPhysicsJointLimitJointWithBodyABodyBAnchorAAnchorB(bodyA, bodyB, anchorA, anchorB)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsJointLimit{inner: _r}
+// JointWithBodyABodyBAnchorAAnchorB creates a new limit joint.
+func JointWithBodyABodyBAnchorAAnchorB(bodyA *PhysicsBody, bodyB *PhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *PhysicsJointLimit {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointLimit")), objc.RegisterName("jointWithBodyA:bodyB:anchorA:anchorB:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchorA, anchorB)
+	return PhysicsJointLimitFromID(_r)
 }
 
-// SKPhysicsJointPinJointWithBodyABodyBAnchor calls the underlying SKPhysicsJointPinJointWithBodyABodyBAnchor.
-func SKPhysicsJointPinJointWithBodyABodyBAnchor(bodyA *raw.SKPhysicsBody, bodyB *raw.SKPhysicsBody, anchor corefoundation.CGPoint) *PhysicsJointPin {
-	_r := raw.SKPhysicsJointPinJointWithBodyABodyBAnchor(bodyA, bodyB, anchor)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsJointPin{inner: _r}
+// SKPhysicsJointPinJointWithBodyABodyBAnchor creates a new pin joint.
+func SKPhysicsJointPinJointWithBodyABodyBAnchor(bodyA *PhysicsBody, bodyB *PhysicsBody, anchor corefoundation.CGPoint) *PhysicsJointPin {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointPin")), objc.RegisterName("jointWithBodyA:bodyB:anchor:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchor)
+	return PhysicsJointPinFromID(_r)
 }
 
-// JointWithBodyABodyBAnchorAxis calls the underlying SKPhysicsJointSlidingJointWithBodyABodyBAnchorAxis.
-func JointWithBodyABodyBAnchorAxis(bodyA *raw.SKPhysicsBody, bodyB *raw.SKPhysicsBody, anchor corefoundation.CGPoint, axis corefoundation.CGVector) *PhysicsJointSliding {
-	_r := raw.SKPhysicsJointSlidingJointWithBodyABodyBAnchorAxis(bodyA, bodyB, anchor, axis)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsJointSliding{inner: _r}
+// JointWithBodyABodyBAnchorAxis creates a new sliding joint.
+func JointWithBodyABodyBAnchorAxis(bodyA *PhysicsBody, bodyB *PhysicsBody, anchor corefoundation.CGPoint, axis corefoundation.CGVector) *PhysicsJointSliding {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointSliding")), objc.RegisterName("jointWithBodyA:bodyB:anchor:axis:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchor, axis)
+	return PhysicsJointSlidingFromID(_r)
 }
 
-// SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB calls the underlying SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB.
-func SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB(bodyA *raw.SKPhysicsBody, bodyB *raw.SKPhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *PhysicsJointSpring {
-	_r := raw.SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB(bodyA, bodyB, anchorA, anchorB)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsJointSpring{inner: _r}
+// SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB creates a new spring joint.
+func SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB(bodyA *PhysicsBody, bodyB *PhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *PhysicsJointSpring {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointSpring")), objc.RegisterName("jointWithBodyA:bodyB:anchorA:anchorB:"), objref.IDOf(bodyA), objref.IDOf(bodyB), anchorA, anchorB)
+	return PhysicsJointSpringFromID(_r)
 }
 
-// RangeWithLowerLimitUpperLimit calls the underlying SKRangeRangeWithLowerLimitUpperLimit.
+// RangeWithLowerLimitUpperLimit creates and initializes a new range object.
 func RangeWithLowerLimitUpperLimit(lower float64, upper float64) *Range {
-	_r := raw.SKRangeRangeWithLowerLimitUpperLimit(lower, upper)
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("rangeWithLowerLimit:upperLimit:"), lower, upper)
+	return RangeFromID(_r)
 }
 
-// RangeWithLowerLimit calls the underlying SKRangeRangeWithLowerLimit.
+// RangeWithLowerLimit creates and initializes a new range object that specifies only a minimum value.
 func RangeWithLowerLimit(lower float64) *Range {
-	_r := raw.SKRangeRangeWithLowerLimit(lower)
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("rangeWithLowerLimit:"), lower)
+	return RangeFromID(_r)
 }
 
-// RangeWithUpperLimit calls the underlying SKRangeRangeWithUpperLimit.
+// RangeWithUpperLimit creates and initializes a new range object that specifies only a maximum value.
 func RangeWithUpperLimit(upper float64) *Range {
-	_r := raw.SKRangeRangeWithUpperLimit(upper)
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("rangeWithUpperLimit:"), upper)
+	return RangeFromID(_r)
 }
 
-// RangeWithConstantValue calls the underlying SKRangeRangeWithConstantValue.
+// RangeWithConstantValue creates and initializes a new range object that specifies a constant value.
 func RangeWithConstantValue(value float64) *Range {
-	_r := raw.SKRangeRangeWithConstantValue(value)
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("rangeWithConstantValue:"), value)
+	return RangeFromID(_r)
 }
 
-// RangeWithValueVariance calls the underlying SKRangeRangeWithValueVariance.
+// RangeWithValueVariance creates and initializes a new range object using a value and a maximum distance from that value.
 func RangeWithValueVariance(value float64, variance float64) *Range {
-	_r := raw.SKRangeRangeWithValueVariance(value, variance)
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("rangeWithValue:variance:"), value, variance)
+	return RangeFromID(_r)
 }
 
-// RangeWithNoLimits calls the underlying SKRangeRangeWithNoLimits.
+// RangeWithNoLimits creates and initializes a new range object that encompasses all possible values.
 func RangeWithNoLimits() *Range {
-	_r := raw.SKRangeRangeWithNoLimits()
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("rangeWithNoLimits"))
+	return RangeFromID(_r)
 }
 
-// ReferenceNodeWithFileNamed calls the underlying SKReferenceNodeReferenceNodeWithFileNamed.
+// ReferenceNodeWithFileNamed creates a reference node from a file in the app’s main bundle.
 func ReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
-	_r := raw.SKReferenceNodeReferenceNodeWithFileNamed(foundation.NSStringStringWithUTF8String(fileName))
-	if _r == nil {
-		return nil
-	}
-	return &ReferenceNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("referenceNodeWithFileNamed:"), purego.NSString(fileName))
+	return ReferenceNodeFromID(_r)
 }
 
-// ReferenceNodeWithURL calls the underlying SKReferenceNodeReferenceNodeWithURL.
+// ReferenceNodeWithURL creates a reference node from a URL.
 func ReferenceNodeWithURL(referenceURL string) *ReferenceNode {
-	_r := raw.SKReferenceNodeReferenceNodeWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referenceURL)))
-	if _r == nil {
-		return nil
-	}
-	return &ReferenceNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("referenceNodeWithURL:"), rt.FileURL(referenceURL))
+	return ReferenceNodeFromID(_r)
 }
 
-// InfiniteRegion calls the underlying SKRegionInfiniteRegion.
+// InfiniteRegion returns a region that defines a region that includes all points.
 func InfiniteRegion() *Region {
-	_r := raw.SKRegionInfiniteRegion()
-	if _r == nil {
-		return nil
-	}
-	return &Region{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKRegion")), objc.RegisterName("infiniteRegion"))
+	return RegionFromID(_r)
 }
 
-// RendererWithDevice calls the underlying SKRendererRendererWithDevice.
-func RendererWithDevice(device metal.MTLDevice) *Renderer {
-	_r := raw.SKRendererRendererWithDevice(device)
-	if _r == nil {
-		return nil
-	}
-	return &Renderer{inner: _r}
-}
-
-// SceneWithSize calls the underlying SKSceneSceneWithSize.
+// SceneWithSize creates and returns a new scene object.
 func SceneWithSize(size corefoundation.CGSize) *Scene {
-	_r := raw.SKSceneSceneWithSize(size)
-	if _r == nil {
-		return nil
-	}
-	return &Scene{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKScene")), objc.RegisterName("sceneWithSize:"), size)
+	return SceneFromID(_r)
 }
 
-// SKShaderShader calls the underlying SKShaderShader.
+// SKShaderShader creates a new empty shader object.
 func SKShaderShader() *Shader {
-	_r := raw.SKShaderShader()
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("shader"))
+	return ShaderFromID(_r)
 }
 
-// ShaderWithSource calls the underlying SKShaderShaderWithSource.
+// ShaderWithSource creates a new shader object using the specified source code.
 func ShaderWithSource(source string) *Shader {
-	_r := raw.SKShaderShaderWithSource(foundation.NSStringStringWithUTF8String(source))
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("shaderWithSource:"), purego.NSString(source))
+	return ShaderFromID(_r)
 }
 
-// ShaderWithSourceUniforms calls the underlying SKShaderShaderWithSourceUniforms.
-func ShaderWithSourceUniforms(source string, uniforms *foundation.NSArray[*raw.SKUniform]) *Shader {
-	_r := raw.SKShaderShaderWithSourceUniforms(foundation.NSStringStringWithUTF8String(source), uniforms)
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+// ShaderWithSourceUniforms creates a new shader object using the specified source and uniform data.
+func ShaderWithSourceUniforms(source string, uniforms []*Uniform) *Shader {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("shaderWithSource:uniforms:"), purego.NSString(source), purego.SliceToNSArray(uniforms, func(_v *Uniform) objc.ID { return objref.IDOf(_v) }))
+	return ShaderFromID(_r)
 }
 
-// ShaderWithFileNamed calls the underlying SKShaderShaderWithFileNamed.
+// ShaderWithFileNamed creates a new shader object by loading the source for a fragment shader from a file stored in the app’s bundle.
 func ShaderWithFileNamed(name string) *Shader {
-	_r := raw.SKShaderShaderWithFileNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("shaderWithFileNamed:"), purego.NSString(name))
+	return ShaderFromID(_r)
 }
 
-// ShapeNodeWithPath calls the underlying SKShapeNodeShapeNodeWithPath.
-func ShapeNodeWithPath(path unsafe.Pointer) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithPath(path)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+// ShapeNodeWithPath creates a shape node from a Core Graphics path.
+func ShapeNodeWithPath(path obj.Object) *ShapeNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:"), objref.IDOf(path))
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithPathCentered calls the underlying SKShapeNodeShapeNodeWithPathCentered.
-func ShapeNodeWithPathCentered(path unsafe.Pointer, centered bool) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithPathCentered(path, centered)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+// ShapeNodeWithPathCentered creates a shape node from a Core Graphics path, centered around its position.
+func ShapeNodeWithPathCentered(path obj.Object, centered bool) *ShapeNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:centered:"), objref.IDOf(path), centered)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithRect calls the underlying SKShapeNodeShapeNodeWithRect.
+// ShapeNodeWithRect creates a shape node with a rectangular path.
 func ShapeNodeWithRect(rect corefoundation.CGRect) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithRect(rect)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithRect:"), rect)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithRectOfSize calls the underlying SKShapeNodeShapeNodeWithRectOfSize.
+// ShapeNodeWithRectOfSize creates a shape node with a rectangular path centered on the node’s origin.
 func ShapeNodeWithRectOfSize(size corefoundation.CGSize) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithRectOfSize(size)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithRectOfSize:"), size)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithRectCornerRadius calls the underlying SKShapeNodeShapeNodeWithRectCornerRadius.
+// ShapeNodeWithRectCornerRadius creates a shape with a rectangular path that has rounded corners.
 func ShapeNodeWithRectCornerRadius(rect corefoundation.CGRect, cornerRadius float64) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithRectCornerRadius(rect, cornerRadius)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithRect:cornerRadius:"), rect, cornerRadius)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithRectOfSizeCornerRadius calls the underlying SKShapeNodeShapeNodeWithRectOfSizeCornerRadius.
+// ShapeNodeWithRectOfSizeCornerRadius creates a shape with a rectangular path that has rounded corners centered on the node’s position.
 func ShapeNodeWithRectOfSizeCornerRadius(size corefoundation.CGSize, cornerRadius float64) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithRectOfSizeCornerRadius(size, cornerRadius)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithRectOfSize:cornerRadius:"), size, cornerRadius)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithCircleOfRadius calls the underlying SKShapeNodeShapeNodeWithCircleOfRadius.
+// ShapeNodeWithCircleOfRadius creates a shape node with a circular path centered on the node’s origin.
 func ShapeNodeWithCircleOfRadius(radius float64) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithCircleOfRadius(radius)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithCircleOfRadius:"), radius)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithEllipseInRect calls the underlying SKShapeNodeShapeNodeWithEllipseInRect.
+// ShapeNodeWithEllipseInRect creates a shape node with an elliptical path that fills the specified rectangle.
 func ShapeNodeWithEllipseInRect(rect corefoundation.CGRect) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithEllipseInRect(rect)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithEllipseInRect:"), rect)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithEllipseOfSize calls the underlying SKShapeNodeShapeNodeWithEllipseOfSize.
+// ShapeNodeWithEllipseOfSize creates a shape node with an elliptical path centered on the node’s origin.
 func ShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithEllipseOfSize(size)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithEllipseOfSize:"), size)
+	return ShapeNodeFromID(_r)
 }
 
-// ShapeNodeWithPointsCount calls the underlying SKShapeNodeShapeNodeWithPointsCount.
-func ShapeNodeWithPointsCount(points *corefoundation.CGPoint, numPoints uint) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithPointsCount(points, numPoints)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+// SpriteNodeWithTextureSize initializes a textured sprite using an existing texture object but with a specified size.
+func SpriteNodeWithTextureSize(texture *Texture, size corefoundation.CGSize) *SpriteNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithTexture:size:"), objref.IDOf(texture), size)
+	return SpriteNodeFromID(_r)
 }
 
-// ShapeNodeWithSplinePointsCount calls the underlying SKShapeNodeShapeNodeWithSplinePointsCount.
-func ShapeNodeWithSplinePointsCount(points *corefoundation.CGPoint, numPoints uint) *ShapeNode {
-	_r := raw.SKShapeNodeShapeNodeWithSplinePointsCount(points, numPoints)
-	if _r == nil {
-		return nil
-	}
-	return &ShapeNode{inner: _r}
+// SpriteNodeWithTexture initializes a textured sprite using an existing texture object.
+func SpriteNodeWithTexture(texture *Texture) *SpriteNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithTexture:"), objref.IDOf(texture))
+	return SpriteNodeFromID(_r)
 }
 
-// SpriteNodeWithTextureSize calls the underlying SKSpriteNodeSpriteNodeWithTextureSize.
-func SpriteNodeWithTextureSize(texture *raw.SKTexture, size corefoundation.CGSize) *SpriteNode {
-	_r := raw.SKSpriteNodeSpriteNodeWithTextureSize(texture, size)
-	if _r == nil {
-		return nil
-	}
-	return &SpriteNode{inner: _r}
+// SpriteNodeWithTextureNormalMap initializes a textured sprite with a normal map to simulate 3D lighting.
+func SpriteNodeWithTextureNormalMap(texture *Texture, normalMap *Texture) *SpriteNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithTexture:normalMap:"), objref.IDOf(texture), objref.IDOf(normalMap))
+	return SpriteNodeFromID(_r)
 }
 
-// SpriteNodeWithTexture calls the underlying SKSpriteNodeSpriteNodeWithTexture.
-func SpriteNodeWithTexture(texture *raw.SKTexture) *SpriteNode {
-	_r := raw.SKSpriteNodeSpriteNodeWithTexture(texture)
-	if _r == nil {
-		return nil
-	}
-	return &SpriteNode{inner: _r}
-}
-
-// SpriteNodeWithTextureNormalMap calls the underlying SKSpriteNodeSpriteNodeWithTextureNormalMap.
-func SpriteNodeWithTextureNormalMap(texture *raw.SKTexture, normalMap *raw.SKTexture) *SpriteNode {
-	_r := raw.SKSpriteNodeSpriteNodeWithTextureNormalMap(texture, normalMap)
-	if _r == nil {
-		return nil
-	}
-	return &SpriteNode{inner: _r}
-}
-
-// SpriteNodeWithImageNamed calls the underlying SKSpriteNodeSpriteNodeWithImageNamed.
+// SpriteNodeWithImageNamed initializes a textured sprite using an image file.
 func SpriteNodeWithImageNamed(name string) *SpriteNode {
-	_r := raw.SKSpriteNodeSpriteNodeWithImageNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &SpriteNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithImageNamed:"), purego.NSString(name))
+	return SpriteNodeFromID(_r)
 }
 
-// SpriteNodeWithImageNamedNormalMapped calls the underlying SKSpriteNodeSpriteNodeWithImageNamedNormalMapped.
+// SpriteNodeWithImageNamedNormalMapped initializes a textured sprite using an image file, optionally adding a normal map to simulate 3D lighting.
 func SpriteNodeWithImageNamedNormalMapped(name string, generateNormalMap bool) *SpriteNode {
-	_r := raw.SKSpriteNodeSpriteNodeWithImageNamedNormalMapped(foundation.NSStringStringWithUTF8String(name), generateNormalMap)
-	if _r == nil {
-		return nil
-	}
-	return &SpriteNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithImageNamed:normalMapped:"), purego.NSString(name), generateNormalMap)
+	return SpriteNodeFromID(_r)
 }
 
-// SpriteNodeWithColorSize calls the underlying SKSpriteNodeSpriteNodeWithColorSize.
-func SpriteNodeWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SpriteNode {
-	_r := raw.SKSpriteNodeSpriteNodeWithColorSize(color, size)
-	if _r == nil {
-		return nil
-	}
-	return &SpriteNode{inner: _r}
+// SpriteNodeWithColorSize initializes a single-color sprite.
+func SpriteNodeWithColorSize(color obj.Object, size corefoundation.CGSize) *SpriteNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("spriteNodeWithColor:size:"), objref.IDOf(color), size)
+	return SpriteNodeFromID(_r)
 }
 
-// TextureWithImageNamed calls the underlying SKTextureTextureWithImageNamed.
+// TextureWithImageNamed create a texture from an image file. Behaves similar to imageNamed: in UIImage or NSImage
 func TextureWithImageNamed(name string) *Texture {
-	_r := raw.SKTextureTextureWithImageNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithImageNamed:"), purego.NSString(name))
+	return TextureFromID(_r)
 }
 
-// TextureWithRectInTexture calls the underlying SKTextureTextureWithRectInTexture.
-func TextureWithRectInTexture(rect corefoundation.CGRect, texture *raw.SKTexture) *Texture {
-	_r := raw.SKTextureTextureWithRectInTexture(rect, texture)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// TextureWithRectInTexture create a texture that is a subrect of an existing texture. See textureRect property for details.
+func TextureWithRectInTexture(rect corefoundation.CGRect, texture *Texture) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithRect:inTexture:"), rect, objref.IDOf(texture))
+	return TextureFromID(_r)
 }
 
-// TextureVectorNoiseWithSmoothnessSize calls the underlying SKTextureTextureVectorNoiseWithSmoothnessSize.
+// TextureVectorNoiseWithSmoothnessSize create a texture containing directional noise. The RGBA values in this texture can be used as a normal map or as direction possibly with length. XYZ are a three dimensional direction, and A is a magnitude.
 func TextureVectorNoiseWithSmoothnessSize(smoothness float64, size corefoundation.CGSize) *Texture {
-	_r := raw.SKTextureTextureVectorNoiseWithSmoothnessSize(smoothness, size)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureVectorNoiseWithSmoothness:size:"), smoothness, size)
+	return TextureFromID(_r)
 }
 
-// TextureNoiseWithSmoothnessSizeGrayscale calls the underlying SKTextureTextureNoiseWithSmoothnessSizeGrayscale.
+// TextureNoiseWithSmoothnessSizeGrayscale create a texture containing colored noise. The noise texture is tileable with itself.
 func TextureNoiseWithSmoothnessSizeGrayscale(smoothness float64, size corefoundation.CGSize, grayscale bool) *Texture {
-	_r := raw.SKTextureTextureNoiseWithSmoothnessSizeGrayscale(smoothness, size, grayscale)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureNoiseWithSmoothness:size:grayscale:"), smoothness, size, grayscale)
+	return TextureFromID(_r)
 }
 
-// TextureWithCGImage calls the underlying SKTextureTextureWithCGImage.
-func TextureWithCGImage(image unsafe.Pointer) *Texture {
-	_r := raw.SKTextureTextureWithCGImage(image)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// TextureWithCGImage create a texture from a CGImageRef.
+func TextureWithCGImage(image obj.Object) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithCGImage:"), objref.IDOf(image))
+	return TextureFromID(_r)
 }
 
-// TextureWithImage calls the underlying SKTextureTextureWithImage.
-func TextureWithImage(image *appkit.NSImage) *Texture {
-	_r := raw.SKTextureTextureWithImage(image)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// TextureWithImage wraps the corresponding Objective-C method.
+func TextureWithImage(image obj.Object) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithImage:"), objref.IDOf(image))
+	return TextureFromID(_r)
 }
 
-// TextureWithDataSize calls the underlying SKTextureTextureWithDataSize.
-func TextureWithDataSize(pixelData *foundation.NSData, size corefoundation.CGSize) *Texture {
-	_r := raw.SKTextureTextureWithDataSize(pixelData, size)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// TextureWithDataSize create new texture with bitmap RGBA data in unsigned bytes. Data is copied once, additional changes to the data does not affect the texture. All pixel data is assumed to be premultiplied alpha.
+func TextureWithDataSize(pixelData obj.Object, size corefoundation.CGSize) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:"), objref.IDOf(pixelData), size)
+	return TextureFromID(_r)
 }
 
-// TextureWithDataSizeFlipped calls the underlying SKTextureTextureWithDataSizeFlipped.
-func TextureWithDataSizeFlipped(pixelData *foundation.NSData, size corefoundation.CGSize, flipped bool) *Texture {
-	_r := raw.SKTextureTextureWithDataSizeFlipped(pixelData, size, flipped)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// TextureWithDataSizeFlipped wraps the corresponding Objective-C method.
+func TextureWithDataSizeFlipped(pixelData obj.Object, size corefoundation.CGSize, flipped bool) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:flipped:"), objref.IDOf(pixelData), size, flipped)
+	return TextureFromID(_r)
 }
 
-// TextureWithDataSizeRowLengthAlignment calls the underlying SKTextureTextureWithDataSizeRowLengthAlignment.
-func TextureWithDataSizeRowLengthAlignment(pixelData *foundation.NSData, size corefoundation.CGSize, rowLength uint, alignment uint) *Texture {
-	_r := raw.SKTextureTextureWithDataSizeRowLengthAlignment(pixelData, size, rowLength, alignment)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// TextureWithDataSizeRowLengthAlignment create new texture with bitmap RGBA data in unsigned bytes using a custom row length and row alignment. Data is copied once, additional changes to the data does not affect the texture. All pixel data is assumed to be premultiplied alpha.
+func TextureWithDataSizeRowLengthAlignment(pixelData obj.Object, size corefoundation.CGSize, rowLength int, alignment int) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithData:size:rowLength:alignment:"), objref.IDOf(pixelData), size, rowLength, alignment)
+	return TextureFromID(_r)
 }
 
+// PreloadTextures load the data of multiple textures into memory.
+//
 // PreloadTextures blocks until the operation completes or ctx is cancelled.
-func PreloadTextures(ctx context.Context, textures *foundation.NSArray[*raw.SKTexture]) error {
+func PreloadTextures(ctx context.Context, textures []*Texture) error {
 	_ch := make(chan error, 1)
-	raw.SKTexturePreloadTexturesWithCompletionHandler(textures, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("preloadTextures:withCompletionHandler:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -1718,30 +1099,27 @@ func PreloadTextures(ctx context.Context, textures *foundation.NSArray[*raw.SKTe
 	}
 }
 
-// AtlasNamed calls the underlying SKTextureAtlasAtlasNamed.
+// AtlasNamed creates a texture atlas from data stored in the app bundle.
 func AtlasNamed(name string) *TextureAtlas {
-	_r := raw.SKTextureAtlasAtlasNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &TextureAtlas{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("atlasNamed:"), purego.NSString(name))
+	return TextureAtlasFromID(_r)
 }
 
-// AtlasWithDictionary calls the underlying SKTextureAtlasAtlasWithDictionary.
-func AtlasWithDictionary(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextureAtlas {
-	_r := raw.SKTextureAtlasAtlasWithDictionary(properties)
-	if _r == nil {
-		return nil
-	}
-	return &TextureAtlas{inner: _r}
+// AtlasWithDictionary creates a texture atlas from a set of image files.
+func AtlasWithDictionary(properties obj.Object) *TextureAtlas {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("atlasWithDictionary:"), objref.IDOf(properties))
+	return TextureAtlasFromID(_r)
 }
 
+// PreloadTextureAtlases loads the textures of multiple atlas objects into memory, calling a completion handler after the task completes.
+//
 // PreloadTextureAtlases blocks until the operation completes or ctx is cancelled.
-func PreloadTextureAtlases(ctx context.Context, textureAtlases *foundation.NSArray[*raw.SKTextureAtlas]) error {
+func PreloadTextureAtlases(ctx context.Context, textureAtlases []*TextureAtlas) error {
 	_ch := make(chan error, 1)
-	raw.SKTextureAtlasPreloadTextureAtlasesWithCompletionHandler(textureAtlases, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("preloadTextureAtlases:withCompletionHandler:"), purego.SliceToNSArray(textureAtlases, func(_v *TextureAtlas) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -1750,503 +1128,267 @@ func PreloadTextureAtlases(ctx context.Context, textureAtlases *foundation.NSArr
 	}
 }
 
+// PreloadTextureAtlasesNamed loads the textures of multiple atlases into memory, calling a completion handler after the task completes.
+//
 // PreloadTextureAtlasesNamed blocks until the operation completes or ctx is cancelled.
-func PreloadTextureAtlasesNamed(ctx context.Context, atlasNames *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.SKTextureAtlas], error) {
+func PreloadTextureAtlasesNamed(ctx context.Context, atlasNames []string) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.SKTextureAtlas]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SKTextureAtlasPreloadTextureAtlasesNamedWithCompletionHandler(atlasNames, func(_p0 unsafe.Pointer, _p1 *foundation.NSArray[*raw.SKTextureAtlas]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p0) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_o.val = _p1
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_o.val = obj.Wrap(_p1)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("preloadTextureAtlasesNamed:withCompletionHandler:"), purego.SliceToNSArray(atlasNames, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.SKTextureAtlas]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// TileDefinitionWithTexture calls the underlying SKTileDefinitionTileDefinitionWithTexture.
-func TileDefinitionWithTexture(texture *raw.SKTexture) *TileDefinition {
-	_r := raw.SKTileDefinitionTileDefinitionWithTexture(texture)
-	if _r == nil {
-		return nil
-	}
-	return &TileDefinition{inner: _r}
+// TileDefinitionWithTexture create a tile definition with an SKTexture, and set its size to the SKTexture's width/height.
+func TileDefinitionWithTexture(texture *Texture) *TileDefinition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTexture:"), objref.IDOf(texture))
+	return TileDefinitionFromID(_r)
 }
 
-// TileDefinitionWithTextureSize calls the underlying SKTileDefinitionTileDefinitionWithTextureSize.
-func TileDefinitionWithTextureSize(texture *raw.SKTexture, size corefoundation.CGSize) *TileDefinition {
-	_r := raw.SKTileDefinitionTileDefinitionWithTextureSize(texture, size)
-	if _r == nil {
-		return nil
-	}
-	return &TileDefinition{inner: _r}
+// TileDefinitionWithTextureSize create a tile definition with an SKTexture and the specified size.
+func TileDefinitionWithTextureSize(texture *Texture, size corefoundation.CGSize) *TileDefinition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTexture:size:"), objref.IDOf(texture), size)
+	return TileDefinitionFromID(_r)
 }
 
-// TileDefinitionWithTextureNormalTextureSize calls the underlying SKTileDefinitionTileDefinitionWithTextureNormalTextureSize.
-func TileDefinitionWithTextureNormalTextureSize(texture *raw.SKTexture, normalTexture *raw.SKTexture, size corefoundation.CGSize) *TileDefinition {
-	_r := raw.SKTileDefinitionTileDefinitionWithTextureNormalTextureSize(texture, normalTexture, size)
-	if _r == nil {
-		return nil
-	}
-	return &TileDefinition{inner: _r}
+// TileDefinitionWithTextureNormalTextureSize create a tile definition with an SKTexture and the specified size.
+func TileDefinitionWithTextureNormalTextureSize(texture *Texture, normalTexture *Texture, size corefoundation.CGSize) *TileDefinition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTexture:normalTexture:size:"), objref.IDOf(texture), objref.IDOf(normalTexture), size)
+	return TileDefinitionFromID(_r)
 }
 
-// TileDefinitionWithTexturesSizeTimePerFrame calls the underlying SKTileDefinitionTileDefinitionWithTexturesSizeTimePerFrame.
-func TileDefinitionWithTexturesSizeTimePerFrame(textures *foundation.NSArray[*raw.SKTexture], size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
-	_r := raw.SKTileDefinitionTileDefinitionWithTexturesSizeTimePerFrame(textures, size, timePerFrame)
-	if _r == nil {
-		return nil
-	}
-	return &TileDefinition{inner: _r}
+// TileDefinitionWithTexturesSizeTimePerFrame create an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation.
+func TileDefinitionWithTexturesSizeTimePerFrame(textures []*Texture, size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTextures:size:timePerFrame:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), size, timePerFrame)
+	return TileDefinitionFromID(_r)
 }
 
-// TileDefinitionWithTexturesNormalTexturesSizeTimePerFrame calls the underlying SKTileDefinitionTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame.
-func TileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures *foundation.NSArray[*raw.SKTexture], normalTextures *foundation.NSArray[*raw.SKTexture], size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
-	_r := raw.SKTileDefinitionTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures, normalTextures, size, timePerFrame)
-	if _r == nil {
-		return nil
-	}
-	return &TileDefinition{inner: _r}
+// TileDefinitionWithTexturesNormalTexturesSizeTimePerFrame create an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation.
+func TileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures []*Texture, normalTextures []*Texture, size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileDefinition")), objc.RegisterName("tileDefinitionWithTextures:normalTextures:size:timePerFrame:"), purego.SliceToNSArray(textures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(normalTextures, func(_v *Texture) objc.ID { return objref.IDOf(_v) }), size, timePerFrame)
+	return TileDefinitionFromID(_r)
 }
 
-// TileGroupWithTileDefinition calls the underlying SKTileGroupTileGroupWithTileDefinition.
-func TileGroupWithTileDefinition(tileDefinition *raw.SKTileDefinition) *TileGroup {
-	_r := raw.SKTileGroupTileGroupWithTileDefinition(tileDefinition)
-	if _r == nil {
-		return nil
-	}
-	return &TileGroup{inner: _r}
+// TileGroupWithTileDefinition create a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map.
+func TileGroupWithTileDefinition(tileDefinition *TileDefinition) *TileGroup {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("tileGroupWithTileDefinition:"), objref.IDOf(tileDefinition))
+	return TileGroupFromID(_r)
 }
 
-// TileGroupWithRules calls the underlying SKTileGroupTileGroupWithRules.
-func TileGroupWithRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) *TileGroup {
-	_r := raw.SKTileGroupTileGroupWithRules(rules)
-	if _r == nil {
-		return nil
-	}
-	return &TileGroup{inner: _r}
+// TileGroupWithRules create a tile group with the specified rules.
+func TileGroupWithRules(rules []*TileGroupRule) *TileGroup {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("tileGroupWithRules:"), purego.SliceToNSArray(rules, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) }))
+	return TileGroupFromID(_r)
 }
 
-// EmptyTileGroup calls the underlying SKTileGroupEmptyTileGroup.
+// EmptyTileGroup creates an empty tile that erases the existing tile at that location on a tile map.
 func EmptyTileGroup() *TileGroup {
-	_r := raw.SKTileGroupEmptyTileGroup()
-	if _r == nil {
-		return nil
-	}
-	return &TileGroup{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("emptyTileGroup"))
+	return TileGroupFromID(_r)
 }
 
-// TileGroupRuleWithAdjacencyTileDefinitions calls the underlying SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions.
-func TileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) *TileGroupRule {
-	_r := raw.SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions(raw.SKTileAdjacencyMask(adjacency), tileDefinitions)
-	if _r == nil {
-		return nil
-	}
-	return &TileGroupRule{inner: _r}
+// TileGroupRuleWithAdjacencyTileDefinitions create a tile group rule with the specified adjacency and tile definitions.
+func TileGroupRuleWithAdjacencyTileDefinitions(adjacency TileAdjacencyMask, tileDefinitions []*TileDefinition) *TileGroupRule {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileGroupRule")), objc.RegisterName("tileGroupRuleWithAdjacency:tileDefinitions:"), adjacency, purego.SliceToNSArray(tileDefinitions, func(_v *TileDefinition) objc.ID { return objref.IDOf(_v) }))
+	return TileGroupRuleFromID(_r)
 }
 
-// TileMapNodeWithTileSetColumnsRowsTileSize calls the underlying SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSize.
-func TileMapNodeWithTileSetColumnsRowsTileSize(tileSet *raw.SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize) *TileMapNode {
-	_r := raw.SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSize(tileSet, columns, rows, tileSize)
-	if _r == nil {
-		return nil
-	}
-	return &TileMapNode{inner: _r}
+// TileMapNodeWithTileSetColumnsRowsTileSize create a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group.
+func TileMapNodeWithTileSetColumnsRowsTileSize(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize) *TileMapNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:"), objref.IDOf(tileSet), columns, rows, tileSize)
+	return TileMapNodeFromID(_r)
 }
 
-// TileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup calls the underlying SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup.
-func TileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *raw.SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroup *raw.SKTileGroup) *TileMapNode {
-	_r := raw.SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet, columns, rows, tileSize, tileGroup)
-	if _r == nil {
-		return nil
-	}
-	return &TileMapNode{inner: _r}
+// TileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup create a tile map node with the specified tile set and dimensions, and fill it with the specified tile group.
+func TileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroup *TileGroup) *TileMapNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:fillWithTileGroup:"), objref.IDOf(tileSet), columns, rows, tileSize, objref.IDOf(tileGroup))
+	return TileMapNodeFromID(_r)
 }
 
-// TileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout calls the underlying SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout.
-func TileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *raw.SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroupLayout *foundation.NSArray[*raw.SKTileGroup]) *TileMapNode {
-	_r := raw.SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet, columns, rows, tileSize, tileGroupLayout)
-	if _r == nil {
-		return nil
-	}
-	return &TileMapNode{inner: _r}
+// TileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout create a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored.
+func TileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroupLayout []*TileGroup) *TileMapNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("tileMapNodeWithTileSet:columns:rows:tileSize:tileGroupLayout:"), objref.IDOf(tileSet), columns, rows, tileSize, purego.SliceToNSArray(tileGroupLayout, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }))
+	return TileMapNodeFromID(_r)
 }
 
-// TileSetWithTileGroups calls the underlying SKTileSetTileSetWithTileGroups.
-func TileSetWithTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup]) *TileSet {
-	_r := raw.SKTileSetTileSetWithTileGroups(tileGroups)
-	if _r == nil {
-		return nil
-	}
-	return &TileSet{inner: _r}
+// TileSetWithTileGroups create a tile set with the specified tile groups.
+func TileSetWithTileGroups(tileGroups []*TileGroup) *TileSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileSet")), objc.RegisterName("tileSetWithTileGroups:"), purego.SliceToNSArray(tileGroups, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }))
+	return TileSetFromID(_r)
 }
 
-// TileSetWithTileGroupsTileSetType calls the underlying SKTileSetTileSetWithTileGroupsTileSetType.
-func TileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKTileGroup], tileSetType SKTileSetType) *TileSet {
-	_r := raw.SKTileSetTileSetWithTileGroupsTileSetType(tileGroups, raw.SKTileSetType(tileSetType))
-	if _r == nil {
-		return nil
-	}
-	return &TileSet{inner: _r}
+// TileSetWithTileGroupsTileSetType create a tile set with the specified tile groups and tile set type.
+func TileSetWithTileGroupsTileSetType(tileGroups []*TileGroup, tileSetType TileSetType) *TileSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileSet")), objc.RegisterName("tileSetWithTileGroups:tileSetType:"), purego.SliceToNSArray(tileGroups, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }), tileSetType)
+	return TileSetFromID(_r)
 }
 
-// TileSetNamed calls the underlying SKTileSetTileSetNamed.
+// TileSetNamed initializes a tile set by searching the app bundle for an archived .sks file by name.
 func TileSetNamed(name string) *TileSet {
-	_r := raw.SKTileSetTileSetNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &TileSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileSet")), objc.RegisterName("tileSetNamed:"), purego.NSString(name))
+	return TileSetFromID(_r)
 }
 
-// TileSetFromURL calls the underlying SKTileSetTileSetFromURL.
+// TileSetFromURL initializes a tile set from a URL to an archived .sks file.
 func TileSetFromURL(url string) *TileSet {
-	_r := raw.SKTileSetTileSetFromURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &TileSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTileSet")), objc.RegisterName("tileSetFromURL:"), rt.FileURL(url))
+	return TileSetFromID(_r)
 }
 
-// CrossFadeWithDuration calls the underlying SKTransitionCrossFadeWithDuration.
+// CrossFadeWithDuration creates a cross fade transition.
 func CrossFadeWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionCrossFadeWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("crossFadeWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// FadeWithDuration calls the underlying SKTransitionFadeWithDuration.
+// FadeWithDuration creates a transition that first fades to black and then fades to the new scene.
 func FadeWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionFadeWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("fadeWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// FadeWithColorDuration calls the underlying SKTransitionFadeWithColorDuration.
-func FadeWithColorDuration(color *appkit.NSColor, sec float64) *Transition {
-	_r := raw.SKTransitionFadeWithColorDuration(color, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+// FadeWithColorDuration creates a transition that first fades to a constant color and then fades to the new scene.
+func FadeWithColorDuration(color obj.Object, sec float64) *Transition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("fadeWithColor:duration:"), objref.IDOf(color), sec)
+	return TransitionFromID(_r)
 }
 
-// FlipHorizontalWithDuration calls the underlying SKTransitionFlipHorizontalWithDuration.
+// FlipHorizontalWithDuration creates a transition where the two scenes are flipped across a horizontal line running through the center of the view.
 func FlipHorizontalWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionFlipHorizontalWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("flipHorizontalWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// FlipVerticalWithDuration calls the underlying SKTransitionFlipVerticalWithDuration.
+// FlipVerticalWithDuration creates a transition where the two scenes are flipped across a vertical line running through the center of the view.
 func FlipVerticalWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionFlipVerticalWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("flipVerticalWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// RevealWithDirectionDuration calls the underlying SKTransitionRevealWithDirectionDuration.
-func RevealWithDirectionDuration(direction SKTransitionDirection, sec float64) *Transition {
-	_r := raw.SKTransitionRevealWithDirectionDuration(raw.SKTransitionDirection(direction), sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+// RevealWithDirectionDuration creates a transition where the old scene moves out of the view, revealing the new scene underneath it.
+func RevealWithDirectionDuration(direction TransitionDirection, sec float64) *Transition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("revealWithDirection:duration:"), direction, sec)
+	return TransitionFromID(_r)
 }
 
-// MoveInWithDirectionDuration calls the underlying SKTransitionMoveInWithDirectionDuration.
-func MoveInWithDirectionDuration(direction SKTransitionDirection, sec float64) *Transition {
-	_r := raw.SKTransitionMoveInWithDirectionDuration(raw.SKTransitionDirection(direction), sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+// MoveInWithDirectionDuration creates a transition where the new scene moves in on top of the old scene.
+func MoveInWithDirectionDuration(direction TransitionDirection, sec float64) *Transition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("moveInWithDirection:duration:"), direction, sec)
+	return TransitionFromID(_r)
 }
 
-// PushWithDirectionDuration calls the underlying SKTransitionPushWithDirectionDuration.
-func PushWithDirectionDuration(direction SKTransitionDirection, sec float64) *Transition {
-	_r := raw.SKTransitionPushWithDirectionDuration(raw.SKTransitionDirection(direction), sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+// PushWithDirectionDuration creates a transition where the new scene moves in, pushing the old scene out of the view.
+func PushWithDirectionDuration(direction TransitionDirection, sec float64) *Transition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("pushWithDirection:duration:"), direction, sec)
+	return TransitionFromID(_r)
 }
 
-// DoorsOpenHorizontalWithDuration calls the underlying SKTransitionDoorsOpenHorizontalWithDuration.
+// DoorsOpenHorizontalWithDuration creates a transition where the new scene appears as a pair of opening horizontal doors.
 func DoorsOpenHorizontalWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionDoorsOpenHorizontalWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("doorsOpenHorizontalWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// DoorsOpenVerticalWithDuration calls the underlying SKTransitionDoorsOpenVerticalWithDuration.
+// DoorsOpenVerticalWithDuration creates a transition where the new scene appears as a pair of opening vertical doors.
 func DoorsOpenVerticalWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionDoorsOpenVerticalWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("doorsOpenVerticalWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// DoorsCloseHorizontalWithDuration calls the underlying SKTransitionDoorsCloseHorizontalWithDuration.
+// DoorsCloseHorizontalWithDuration creates a transition where the new scene appears as a pair of closing horizontal doors.
 func DoorsCloseHorizontalWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionDoorsCloseHorizontalWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("doorsCloseHorizontalWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// DoorsCloseVerticalWithDuration calls the underlying SKTransitionDoorsCloseVerticalWithDuration.
+// DoorsCloseVerticalWithDuration creates a transition where the new scene appears as a pair of closing vertical doors.
 func DoorsCloseVerticalWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionDoorsCloseVerticalWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("doorsCloseVerticalWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// DoorwayWithDuration calls the underlying SKTransitionDoorwayWithDuration.
+// DoorwayWithDuration creates a transition where the previous scene disappears as a pair of opening doors.
 func DoorwayWithDuration(sec float64) *Transition {
-	_r := raw.SKTransitionDoorwayWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("doorwayWithDuration:"), sec)
+	return TransitionFromID(_r)
 }
 
-// TransitionWithCIFilterDuration calls the underlying SKTransitionTransitionWithCIFilterDuration.
-func TransitionWithCIFilterDuration(filter *coreimage.CIFilter, sec float64) *Transition {
-	_r := raw.SKTransitionTransitionWithCIFilterDuration(filter, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Transition{inner: _r}
+// TransitionWithCIFilterDuration creates a transition that uses a Core Image filter to perform the transition.
+func TransitionWithCIFilterDuration(filter obj.Object, sec float64) *Transition {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("transitionWithCIFilter:duration:"), objref.IDOf(filter), sec)
+	return TransitionFromID(_r)
 }
 
-// UniformWithName calls the underlying SKUniformUniformWithName.
+// UniformWithName creates and initializes a new uniform object.
 func UniformWithName(name string) *Uniform {
-	_r := raw.SKUniformUniformWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:"), purego.NSString(name))
+	return UniformFromID(_r)
 }
 
-// UniformWithNameTexture calls the underlying SKUniformUniformWithNameTexture.
-func UniformWithNameTexture(name string, texture *raw.SKTexture) *Uniform {
-	_r := raw.SKUniformUniformWithNameTexture(foundation.NSStringStringWithUTF8String(name), texture)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
+// UniformWithNameTexture creates and initializes a new uniform object that holds a reference to a texture.
+func UniformWithNameTexture(name string, texture *Texture) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:texture:"), purego.NSString(name), objref.IDOf(texture))
+	return UniformFromID(_r)
 }
 
-// UniformWithNameFloat calls the underlying SKUniformUniformWithNameFloat.
+// UniformWithNameFloat creates and initializes a new uniform object that holds a floating-point number.
 func UniformWithNameFloat(name string, value float32) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloat(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:float:"), purego.NSString(name), value)
+	return UniformFromID(_r)
 }
 
-// UniformWithNameVectorFloat2 calls the underlying SKUniformUniformWithNameVectorFloat2.
-func UniformWithNameVectorFloat2(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameVectorFloat2(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
+// VideoNodeWithAVPlayer creates and initializes a video node using an existing video player object.
+func VideoNodeWithAVPlayer(player obj.Object) *VideoNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithAVPlayer:"), objref.IDOf(player))
+	return VideoNodeFromID(_r)
 }
 
-// UniformWithNameVectorFloat3 calls the underlying SKUniformUniformWithNameVectorFloat3.
-func UniformWithNameVectorFloat3(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameVectorFloat3(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameVectorFloat4 calls the underlying SKUniformUniformWithNameVectorFloat4.
-func UniformWithNameVectorFloat4(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameVectorFloat4(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameMatrixFloat2x2 calls the underlying SKUniformUniformWithNameMatrixFloat2x2.
-func UniformWithNameMatrixFloat2x2(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameMatrixFloat2x2(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameMatrixFloat3x3 calls the underlying SKUniformUniformWithNameMatrixFloat3x3.
-func UniformWithNameMatrixFloat3x3(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameMatrixFloat3x3(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameMatrixFloat4x4 calls the underlying SKUniformUniformWithNameMatrixFloat4x4.
-func UniformWithNameMatrixFloat4x4(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameMatrixFloat4x4(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameFloatVector2 calls the underlying SKUniformUniformWithNameFloatVector2.
-func UniformWithNameFloatVector2(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloatVector2(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameFloatVector3 calls the underlying SKUniformUniformWithNameFloatVector3.
-func UniformWithNameFloatVector3(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloatVector3(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameFloatVector4 calls the underlying SKUniformUniformWithNameFloatVector4.
-func UniformWithNameFloatVector4(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloatVector4(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameFloatMatrix2 calls the underlying SKUniformUniformWithNameFloatMatrix2.
-func UniformWithNameFloatMatrix2(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloatMatrix2(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameFloatMatrix3 calls the underlying SKUniformUniformWithNameFloatMatrix3.
-func UniformWithNameFloatMatrix3(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloatMatrix3(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// UniformWithNameFloatMatrix4 calls the underlying SKUniformUniformWithNameFloatMatrix4.
-func UniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform {
-	_r := raw.SKUniformUniformWithNameFloatMatrix4(foundation.NSStringStringWithUTF8String(name), value)
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
-}
-
-// VideoNodeWithAVPlayer calls the underlying SKVideoNodeVideoNodeWithAVPlayer.
-func VideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *VideoNode {
-	_r := raw.SKVideoNodeVideoNodeWithAVPlayer(player)
-	if _r == nil {
-		return nil
-	}
-	return &VideoNode{inner: _r}
-}
-
-// VideoNodeWithVideoFileNamed calls the underlying SKVideoNodeVideoNodeWithVideoFileNamed.
+// VideoNodeWithVideoFileNamed creates and initializes a new video node using a video file stored in the app bundle.
 func VideoNodeWithVideoFileNamed(videoFile string) *VideoNode {
-	_r := raw.SKVideoNodeVideoNodeWithVideoFileNamed(foundation.NSStringStringWithUTF8String(videoFile))
-	if _r == nil {
-		return nil
-	}
-	return &VideoNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithVideoFileNamed:"), purego.NSString(videoFile))
+	return VideoNodeFromID(_r)
 }
 
-// VideoNodeWithFileNamed calls the underlying SKVideoNodeVideoNodeWithFileNamed.
+// VideoNodeWithFileNamed creates and initializes a new video node using a video file stored in the app bundle.
 func VideoNodeWithFileNamed(videoFile string) *VideoNode {
-	_r := raw.SKVideoNodeVideoNodeWithFileNamed(foundation.NSStringStringWithUTF8String(videoFile))
-	if _r == nil {
-		return nil
-	}
-	return &VideoNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithFileNamed:"), purego.NSString(videoFile))
+	return VideoNodeFromID(_r)
 }
 
-// VideoNodeWithVideoURL calls the underlying SKVideoNodeVideoNodeWithVideoURL.
+// VideoNodeWithVideoURL creates and initializes a video node using a URL that points to a video file.
 func VideoNodeWithVideoURL(videoURL string) *VideoNode {
-	_r := raw.SKVideoNodeVideoNodeWithVideoURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(videoURL)))
-	if _r == nil {
-		return nil
-	}
-	return &VideoNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithVideoURL:"), rt.FileURL(videoURL))
+	return VideoNodeFromID(_r)
 }
 
-// VideoNodeWithURL calls the underlying SKVideoNodeVideoNodeWithURL.
+// VideoNodeWithURL creates and initializes a video node using a URL that points to a video file.
 func VideoNodeWithURL(videoURL string) *VideoNode {
-	_r := raw.SKVideoNodeVideoNodeWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(videoURL)))
-	if _r == nil {
-		return nil
-	}
-	return &VideoNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithURL:"), rt.FileURL(videoURL))
+	return VideoNodeFromID(_r)
 }
 
-// Grid calls the underlying SKWarpGeometryGridGrid.
+// Grid initializes a new empty grid.
 func Grid() *WarpGeometryGrid {
-	_r := raw.SKWarpGeometryGridGrid()
-	if _r == nil {
-		return nil
-	}
-	return &WarpGeometryGrid{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("grid"))
+	return WarpGeometryGridFromID(_r)
 }
 
-// GridWithColumnsRows calls the underlying SKWarpGeometryGridGridWithColumnsRows.
+// GridWithColumnsRows creates a warp geometry grid of a specified size.
 func GridWithColumnsRows(cols int, rows int) *WarpGeometryGrid {
-	_r := raw.SKWarpGeometryGridGridWithColumnsRows(cols, rows)
-	if _r == nil {
-		return nil
-	}
-	return &WarpGeometryGrid{inner: _r}
-}
-
-// GridWithColumnsRowsSourcePositionsDestPositions calls the underlying SKWarpGeometryGridGridWithColumnsRowsSourcePositionsDestPositions.
-func GridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *WarpGeometryGrid {
-	_r := raw.SKWarpGeometryGridGridWithColumnsRowsSourcePositionsDestPositions(cols, rows, sourcePositions, destPositions)
-	if _r == nil {
-		return nil
-	}
-	return &WarpGeometryGrid{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("gridWithColumns:rows:"), cols, rows)
+	return WarpGeometryGridFromID(_r)
 }

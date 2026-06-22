@@ -5,104 +5,85 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A navigation graph for 2D game worlds where movement is constrained to an integer grid.
+// GridGraph is an idiomatic wrapper over the Objective-C class GKGridGraph.
 //
-// GridGraph wraps [raw.GKGridGraph] with a fluent Go API.
+// It embeds [Graph], promoting that type's methods.
+//
+// A navigation graph for 2D game worlds where movement is constrained to an integer grid.
 type GridGraph struct {
-	inner *raw.GKGridGraph[objc.ID]
+	Graph
 }
 
-// Unwrap returns the underlying [raw.GKGridGraph].
-func (x *GridGraph) Unwrap() *raw.GKGridGraph[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GridGraph) ID() objc.ID { return x.inner.Ptr() }
-
-// GridGraphFromID adopts an existing object pointer as a GridGraph (nil for 0).
+// GridGraphFromID adopts an existing Objective-C object as a GridGraph
+// (nil for 0), retaining it and registering a release finalizer.
 func GridGraphFromID(id objc.ID) *GridGraph {
 	if id == 0 {
 		return nil
 	}
-	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](id)}
+	x := &GridGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph that describes an integer grid with the specified dimensions.
-//
-// NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed creates a new [GridGraph].
-func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GridGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGridGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:"), position, width, height, diagonalsAllowed)
-	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](_id)}
+// gridGraphAdopt wraps an Objective-C object that this code just created as a
+// GridGraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gridGraphAdopt(id objc.ID) *GridGraph {
+	if id == 0 {
+		return nil
+	}
+	x := &GridGraph{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph that describes an integer grid with the specified dimensions, using the specified node class.
-//
-// NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass creates a new [GridGraph].
-func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position unsafe.Pointer, width int, height int, diagonalsAllowed bool, nodeClass objc.Class) *GridGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGridGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:"), position, width, height, diagonalsAllowed, nodeClass)
-	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](_id)}
+// NewGridGraph creates a new GridGraph.
+func NewGridGraph() *GridGraph {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKGridGraph")), objc.RegisterName("new"))
+	return gridGraphAdopt(_id)
 }
 
-// Returns the node in the graph at the specified grid coordinates.
-//
-// NodeAtGridPosition calls the underlying NodeAtGridPosition.
-func (x *GridGraph) NodeAtGridPosition(position unsafe.Pointer) objc.ID {
-	return x.inner.NodeAtGridPosition(position)
+// ConnectNodeToAdjacentNodes adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
+func (x *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
 }
 
-// Adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
-//
-// ConnectNodeToAdjacentNodes calls the underlying ConnectNodeToAdjacentNodes.
-func (x *GridGraph) ConnectNodeToAdjacentNodes(node *raw.GKGridGraphNode) {
-	x.inner.ConnectNodeToAdjacentNodes(node)
+// GridWidth wraps the corresponding Objective-C method.
+func (x *GridGraph) GridWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gridWidth"))
+	return _r
 }
 
-// Returns the class of the specified generic index
-//
-// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
-func (x *GridGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
-	return x.inner.ClassForGenericArgumentAtIndex(index)
+// GridHeight wraps the corresponding Objective-C method.
+func (x *GridGraph) GridHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gridHeight"))
+	return _r
 }
 
-// GridOrigin calls the underlying GridOrigin.
-func (x *GridGraph) GridOrigin() unsafe.Pointer {
-	return x.inner.GridOrigin()
-}
-
-// GridWidth calls the underlying GridWidth.
-func (x *GridGraph) GridWidth() uint {
-	return x.inner.GridWidth()
-}
-
-// GridHeight calls the underlying GridHeight.
-func (x *GridGraph) GridHeight() uint {
-	return x.inner.GridHeight()
-}
-
-// DiagonalsAllowed calls the underlying DiagonalsAllowed.
+// DiagonalsAllowed wraps the corresponding Objective-C method.
 func (x *GridGraph) DiagonalsAllowed() bool {
-	return x.inner.DiagonalsAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("diagonalsAllowed"))
+	return _r
 }
-
-func (x *GridGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
 
 // GridGraphable is the interface implemented by [GridGraph], for mocking and DI.
 type GridGraphable interface {
-	Unwrap() *raw.GKGridGraph[objc.ID]
-	NodeAtGridPosition(position unsafe.Pointer) objc.ID
-	ConnectNodeToAdjacentNodes(node *raw.GKGridGraphNode)
-	ClassForGenericArgumentAtIndex(index uint) objc.Class
-	GridOrigin() unsafe.Pointer
-	GridWidth() uint
-	GridHeight() uint
+	obj.Object
+	ConnectNodeToAdjacentNodes(node *GridGraphNode)
+	GridWidth() int
+	GridHeight() int
 	DiagonalsAllowed() bool
 }
 
 var _ GridGraphable = (*GridGraph)(nil)
+
+var _ GraphProvider = (*GridGraph)(nil)

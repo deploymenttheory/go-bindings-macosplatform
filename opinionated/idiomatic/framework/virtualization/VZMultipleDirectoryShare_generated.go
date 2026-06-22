@@ -5,64 +5,72 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a directory share for multiple directories.
+// MultipleDirectoryShare is an idiomatic wrapper over the Objective-C class VZMultipleDirectoryShare.
 //
-// MultipleDirectoryShare wraps [raw.VZMultipleDirectoryShare] with a fluent Go API.
+// It embeds [DirectoryShare], promoting that type's methods.
+//
+// An object that describes a directory share for multiple directories.
 type MultipleDirectoryShare struct {
-	inner *raw.VZMultipleDirectoryShare
+	DirectoryShare
 }
 
-// Unwrap returns the underlying [raw.VZMultipleDirectoryShare].
-func (x *MultipleDirectoryShare) Unwrap() *raw.VZMultipleDirectoryShare { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultipleDirectoryShare) ID() objc.ID { return x.inner.Ptr() }
-
-// MultipleDirectoryShareFromID adopts an existing object pointer as a MultipleDirectoryShare (nil for 0).
+// MultipleDirectoryShareFromID adopts an existing Objective-C object as a MultipleDirectoryShare
+// (nil for 0), retaining it and registering a release finalizer.
 func MultipleDirectoryShareFromID(id objc.ID) *MultipleDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(id)}
+	x := &MultipleDirectoryShare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMultipleDirectoryShare creates a new [MultipleDirectoryShare].
+// multipleDirectoryShareAdopt wraps an Objective-C object that this code just created as a
+// MultipleDirectoryShare (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multipleDirectoryShareAdopt(id objc.ID) *MultipleDirectoryShare {
+	if id == 0 {
+		return nil
+	}
+	x := &MultipleDirectoryShare{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMultipleDirectoryShare creates a new MultipleDirectoryShare.
 func NewMultipleDirectoryShare() *MultipleDirectoryShare {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMultipleDirectoryShare")), objc.RegisterName("new"))
-	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("new"))
+	return multipleDirectoryShareAdopt(_id)
 }
 
-// Creates the directory share with a set of directories on the host.
-//
-// NewMultipleDirectoryShareWithDirectories creates a new [MultipleDirectoryShare].
-func NewMultipleDirectoryShareWithDirectories(directories purego.IDer) *MultipleDirectoryShare {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMultipleDirectoryShare")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), directories.ID())
-	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(_id)}
+// NewMultipleDirectoryShareWithDirectories creates the directory share with a set of directories on the host.
+func NewMultipleDirectoryShareWithDirectories(directories obj.Object) *MultipleDirectoryShare {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), objref.IDOf(directories))
+	return multipleDirectoryShareAdopt(_id)
 }
 
-// @abstract The directories on the host to expose to the guest. @discussion The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised. @see +[VZMultipleDirectoryShare validateName:error:]
-//
-// Directories calls the underlying Directories.
-func (x *MultipleDirectoryShare) Directories() *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory] {
-	return x.inner.Directories()
-}
-
-func (x *MultipleDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare {
-	return &x.inner.VZDirectoryShare
+// Directories the directories on the host to expose to the guest. The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised.
+func (x *MultipleDirectoryShare) Directories() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directories"))
+	return obj.Wrap(_r)
 }
 
 // MultipleDirectoryShareable is the interface implemented by [MultipleDirectoryShare], for mocking and DI.
 type MultipleDirectoryShareable interface {
-	Unwrap() *raw.VZMultipleDirectoryShare
-	Directories() *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory]
+	obj.Object
+	Directories() obj.Object
 }
 
 var _ MultipleDirectoryShareable = (*MultipleDirectoryShare)(nil)
+
+var _ DirectoryShareProvider = (*MultipleDirectoryShare)(nil)

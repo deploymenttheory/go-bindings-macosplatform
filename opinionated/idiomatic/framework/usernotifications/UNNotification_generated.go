@@ -5,57 +5,89 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The data for a local or remote notification the system delivers to your app.
+// Notification is an idiomatic wrapper over the Objective-C class UNNotification.
 //
-// Notification wraps [raw.UNNotification] with a fluent Go API.
+// The data for a local or remote notification the system delivers to your app.
 type Notification struct {
-	inner *raw.UNNotification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotification].
-func (x *Notification) Unwrap() *raw.UNNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Notification) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationFromID adopts an existing object pointer as a Notification (nil for 0).
+// NotificationFromID adopts an existing Objective-C object as a Notification
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationFromID(id objc.ID) *Notification {
 	if id == 0 {
 		return nil
 	}
-	return &Notification{inner: raw.UNNotificationFromID(id)}
+	x := &Notification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotification creates a new [Notification].
-func NewNotification() *Notification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotification")), objc.RegisterName("new"))
-	return &Notification{inner: raw.UNNotificationFromID(_id)}
-}
-
-// Date calls the underlying Date.
-func (x *Notification) Date() *foundation.NSDate {
-	return x.inner.Date()
-}
-
-// Request calls the underlying Request.
-func (x *Notification) Request() *NotificationRequest {
-	_r := x.inner.Request()
-	if _r == nil {
+// notificationAdopt wraps an Objective-C object that this code just created as a
+// Notification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationAdopt(id objc.ID) *Notification {
+	if id == 0 {
 		return nil
 	}
-	return &NotificationRequest{inner: _r}
+	x := &Notification{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Notification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Notification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Notification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Notification) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotification creates a new Notification.
+func NewNotification() *Notification {
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotification")), objc.RegisterName("new"))
+	return notificationAdopt(_id)
+}
+
+// Date wraps the corresponding Objective-C method.
+func (x *Notification) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
+}
+
+// Request wraps the corresponding Objective-C method.
+func (x *Notification) Request() *NotificationRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+	return NotificationRequestFromID(_r)
 }
 
 // Notificationable is the interface implemented by [Notification], for mocking and DI.
 type Notificationable interface {
-	Unwrap() *raw.UNNotification
-	Date() *foundation.NSDate
+	obj.Object
+	Date() obj.Object
 	Request() *NotificationRequest
 }
 

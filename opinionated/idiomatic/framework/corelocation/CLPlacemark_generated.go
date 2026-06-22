@@ -5,200 +5,220 @@
 package corelocation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A user-friendly description of a geographic coordinate, often containing the name of the place, its address, and other relevant information.
+// Placemark is an idiomatic wrapper over the Objective-C class CLPlacemark.
 //
-// Placemark wraps [raw.CLPlacemark] with a fluent Go API.
+// A user-friendly description of a geographic coordinate, often containing the name of the place, its address, and other relevant information.
 type Placemark struct {
-	inner *raw.CLPlacemark
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLPlacemark].
-func (x *Placemark) Unwrap() *raw.CLPlacemark { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Placemark) ID() objc.ID { return x.inner.Ptr() }
-
-// PlacemarkFromID adopts an existing object pointer as a Placemark (nil for 0).
+// PlacemarkFromID adopts an existing Objective-C object as a Placemark
+// (nil for 0), retaining it and registering a release finalizer.
 func PlacemarkFromID(id objc.ID) *Placemark {
 	if id == 0 {
 		return nil
 	}
-	return &Placemark{inner: raw.CLPlacemarkFromID(id)}
+	x := &Placemark{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a placemark object from another placemark object.
-//
-// NewPlacemarkWithPlacemark creates a new [Placemark].
-func NewPlacemarkWithPlacemark(placemark *raw.CLPlacemark) *Placemark {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLPlacemark")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), placemark.Ptr())
-	return &Placemark{inner: raw.CLPlacemarkFromID(_id)}
-}
-
-// Location calls the underlying Location.
-func (x *Placemark) Location() unsafe.Pointer {
-	return x.inner.Location()
-}
-
-// Region calls the underlying Region.
-func (x *Placemark) Region() *Region {
-	_r := x.inner.Region()
-	if _r == nil {
+// placemarkAdopt wraps an Objective-C object that this code just created as a
+// Placemark (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func placemarkAdopt(id objc.ID) *Placemark {
+	if id == 0 {
 		return nil
 	}
-	return &Region{inner: _r}
+	x := &Placemark{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// TimeZone calls the underlying TimeZone.
-func (x *Placemark) TimeZone() *foundation.NSTimeZone {
-	return x.inner.TimeZone()
+// Description returns the object's -description text.
+func (x *Placemark) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// AddressDictionary calls the underlying AddressDictionary.
-func (x *Placemark) AddressDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.AddressDictionary()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Placemark) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Name calls the underlying Name.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Placemark) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Placemark) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlacemarkWithPlacemark initializes and returns a placemark object from another placemark object.
+func NewPlacemarkWithPlacemark(placemark *Placemark) *Placemark {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLPlacemark")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
+	return placemarkAdopt(_id)
+}
+
+// Region wraps the corresponding Objective-C method.
+func (x *Placemark) Region() *Region {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("region"))
+	return RegionFromID(_r)
+}
+
+// TimeZone wraps the corresponding Objective-C method.
+func (x *Placemark) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return obj.Wrap(_r)
+}
+
+// AddressDictionary wraps the corresponding Objective-C method.
+func (x *Placemark) AddressDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressDictionary"))
+	return obj.Wrap(_r)
+}
+
+// Name wraps the corresponding Objective-C method.
 func (x *Placemark) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Thoroughfare calls the underlying Thoroughfare.
+// Thoroughfare wraps the corresponding Objective-C method.
 func (x *Placemark) Thoroughfare() string {
-	_r := x.inner.Thoroughfare()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thoroughfare"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SubThoroughfare calls the underlying SubThoroughfare.
+// SubThoroughfare wraps the corresponding Objective-C method.
 func (x *Placemark) SubThoroughfare() string {
-	_r := x.inner.SubThoroughfare()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subThoroughfare"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Locality calls the underlying Locality.
+// Locality wraps the corresponding Objective-C method.
 func (x *Placemark) Locality() string {
-	_r := x.inner.Locality()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locality"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SubLocality calls the underlying SubLocality.
+// SubLocality wraps the corresponding Objective-C method.
 func (x *Placemark) SubLocality() string {
-	_r := x.inner.SubLocality()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subLocality"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AdministrativeArea calls the underlying AdministrativeArea.
+// AdministrativeArea wraps the corresponding Objective-C method.
 func (x *Placemark) AdministrativeArea() string {
-	_r := x.inner.AdministrativeArea()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("administrativeArea"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SubAdministrativeArea calls the underlying SubAdministrativeArea.
+// SubAdministrativeArea wraps the corresponding Objective-C method.
 func (x *Placemark) SubAdministrativeArea() string {
-	_r := x.inner.SubAdministrativeArea()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subAdministrativeArea"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PostalCode calls the underlying PostalCode.
+// PostalCode wraps the corresponding Objective-C method.
 func (x *Placemark) PostalCode() string {
-	_r := x.inner.PostalCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ISOcountryCode calls the underlying ISOcountryCode.
+// ISOcountryCode wraps the corresponding Objective-C method.
 func (x *Placemark) ISOcountryCode() string {
-	_r := x.inner.ISOcountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ISOcountryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Country calls the underlying Country.
+// Country wraps the corresponding Objective-C method.
 func (x *Placemark) Country() string {
-	_r := x.inner.Country()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// InlandWater calls the underlying InlandWater.
+// InlandWater wraps the corresponding Objective-C method.
 func (x *Placemark) InlandWater() string {
-	_r := x.inner.InlandWater()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inlandWater"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Ocean calls the underlying Ocean.
+// Ocean wraps the corresponding Objective-C method.
 func (x *Placemark) Ocean() string {
-	_r := x.inner.Ocean()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ocean"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
+// AreasOfInterest wraps the corresponding Objective-C method.
+//
 // AreasOfInterest returns the collection as a Go slice.
 func (x *Placemark) AreasOfInterest() []string {
-	arr := x.inner.AreasOfInterest()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areasOfInterest"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PostalAddress calls the underlying PostalAddress.
-func (x *Placemark) PostalAddress() *contacts.CNPostalAddress {
-	return x.inner.PostalAddress()
+// PostalAddress wraps the corresponding Objective-C method.
+func (x *Placemark) PostalAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalAddress"))
+	return obj.Wrap(_r)
 }
 
 // Placemarkable is the interface implemented by [Placemark], for mocking and DI.
 type Placemarkable interface {
-	Unwrap() *raw.CLPlacemark
-	Location() unsafe.Pointer
+	obj.Object
 	Region() *Region
-	TimeZone() *foundation.NSTimeZone
-	AddressDictionary() *foundation.NSDictionary[objc.ID, objc.ID]
+	TimeZone() obj.Object
+	AddressDictionary() obj.Object
 	Name() string
 	Thoroughfare() string
 	SubThoroughfare() string
@@ -212,7 +232,7 @@ type Placemarkable interface {
 	InlandWater() string
 	Ocean() string
 	AreasOfInterest() []string
-	PostalAddress() *contacts.CNPostalAddress
+	PostalAddress() obj.Object
 }
 
 var _ Placemarkable = (*Placemark)(nil)

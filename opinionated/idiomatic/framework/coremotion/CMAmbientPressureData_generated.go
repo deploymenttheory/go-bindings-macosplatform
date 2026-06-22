@@ -5,60 +5,72 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A measurement of the ambient pressure and temperature.
+// AmbientPressureData is an idiomatic wrapper over the Objective-C class CMAmbientPressureData.
 //
-// AmbientPressureData wraps [raw.CMAmbientPressureData] with a fluent Go API.
+// It embeds [LogItem], promoting that type's methods.
+//
+// A measurement of the ambient pressure and temperature.
 type AmbientPressureData struct {
-	inner *raw.CMAmbientPressureData
+	LogItem
 }
 
-// Unwrap returns the underlying [raw.CMAmbientPressureData].
-func (x *AmbientPressureData) Unwrap() *raw.CMAmbientPressureData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AmbientPressureData) ID() objc.ID { return x.inner.Ptr() }
-
-// AmbientPressureDataFromID adopts an existing object pointer as a AmbientPressureData (nil for 0).
+// AmbientPressureDataFromID adopts an existing Objective-C object as a AmbientPressureData
+// (nil for 0), retaining it and registering a release finalizer.
 func AmbientPressureDataFromID(id objc.ID) *AmbientPressureData {
 	if id == 0 {
 		return nil
 	}
-	return &AmbientPressureData{inner: raw.CMAmbientPressureDataFromID(id)}
+	x := &AmbientPressureData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAmbientPressureData creates a new [AmbientPressureData].
+// ambientPressureDataAdopt wraps an Objective-C object that this code just created as a
+// AmbientPressureData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ambientPressureDataAdopt(id objc.ID) *AmbientPressureData {
+	if id == 0 {
+		return nil
+	}
+	x := &AmbientPressureData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAmbientPressureData creates a new AmbientPressureData.
 func NewAmbientPressureData() *AmbientPressureData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMAmbientPressureData")), objc.RegisterName("new"))
-	return &AmbientPressureData{inner: raw.CMAmbientPressureDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMAmbientPressureData")), objc.RegisterName("new"))
+	return ambientPressureDataAdopt(_id)
 }
 
-// Discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
-//
-// Pressure calls the underlying Pressure.
-func (x *AmbientPressureData) Pressure() *foundation.NSMeasurement[*foundation.NSUnitPressure] {
-	return x.inner.Pressure()
+// Pressure discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
+func (x *AmbientPressureData) Pressure() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressure"))
+	return obj.Wrap(_r)
 }
 
-// Discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
-//
-// Temperature calls the underlying Temperature.
-func (x *AmbientPressureData) Temperature() *foundation.NSMeasurement[*foundation.NSUnitTemperature] {
-	return x.inner.Temperature()
+// Temperature discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
+func (x *AmbientPressureData) Temperature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temperature"))
+	return obj.Wrap(_r)
 }
-
-func (x *AmbientPressureData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
 
 // AmbientPressureDataable is the interface implemented by [AmbientPressureData], for mocking and DI.
 type AmbientPressureDataable interface {
-	Unwrap() *raw.CMAmbientPressureData
-	Pressure() *foundation.NSMeasurement[*foundation.NSUnitPressure]
-	Temperature() *foundation.NSMeasurement[*foundation.NSUnitTemperature]
+	obj.Object
+	Pressure() obj.Object
+	Temperature() obj.Object
 }
 
 var _ AmbientPressureDataable = (*AmbientPressureData)(nil)
+
+var _ LogItemProvider = (*AmbientPressureData)(nil)

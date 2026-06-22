@@ -5,62 +5,72 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer for selecting elements from two tensors.
+// SelectionLayer is an idiomatic wrapper over the Objective-C class MLCSelectionLayer.
 //
-// SelectionLayer wraps [raw.MLCSelectionLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer for selecting elements from two tensors.
 type SelectionLayer struct {
-	inner *raw.MLCSelectionLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCSelectionLayer].
-func (x *SelectionLayer) Unwrap() *raw.MLCSelectionLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SelectionLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// SelectionLayerFromID adopts an existing object pointer as a SelectionLayer (nil for 0).
+// SelectionLayerFromID adopts an existing Objective-C object as a SelectionLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func SelectionLayerFromID(id objc.ID) *SelectionLayer {
 	if id == 0 {
 		return nil
 	}
-	return &SelectionLayer{inner: raw.MLCSelectionLayerFromID(id)}
+	x := &SelectionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSelectionLayer creates a new [SelectionLayer].
+// selectionLayerAdopt wraps an Objective-C object that this code just created as a
+// SelectionLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func selectionLayerAdopt(id objc.ID) *SelectionLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &SelectionLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSelectionLayer creates a new SelectionLayer.
 func NewSelectionLayer() *SelectionLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCSelectionLayer")), objc.RegisterName("new"))
-	return &SelectionLayer{inner: raw.MLCSelectionLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCSelectionLayer")), objc.RegisterName("new"))
+	return selectionLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *SelectionLayer) WithLabel(label string) *SelectionLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *SelectionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
-
-func (x *SelectionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // SelectionLayerable is the interface implemented by [SelectionLayer], for mocking and DI.
 type SelectionLayerable interface {
-	Unwrap() *raw.MLCSelectionLayer
+	obj.Object
 	WithLabel(label string) *SelectionLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer
 }
 
 var _ SelectionLayerable = (*SelectionLayer)(nil)
+
+var _ LayerProvider = (*SelectionLayer)(nil)

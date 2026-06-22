@@ -6,48 +6,78 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract base class for all NetworkExtension providers.
+// NEProvider is an idiomatic wrapper over the Objective-C class NEProvider.
 //
-// NEProvider wraps [raw.NEProvider] with a fluent Go API.
+// NEProvider is an abstract base — you do not construct it directly. Construct one of [NEDNSProxyProvider], [NEFilterProvider], [NETunnelProvider] and pass it where a NEProvider is accepted.
+//
+// An abstract base class for all NetworkExtension providers.
 type NEProvider struct {
-	inner *raw.NEProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEProvider].
-func (x *NEProvider) Unwrap() *raw.NEProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NEProviderFromID adopts an existing object pointer as a NEProvider (nil for 0).
+// NEProviderFromID adopts an existing Objective-C object as a NEProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NEProviderFromID(id objc.ID) *NEProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NEProvider{inner: raw.NEProviderFromID(id)}
+	x := &NEProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEProvider creates a new [NEProvider].
-func NewNEProvider() *NEProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEProvider")), objc.RegisterName("new"))
-	return &NEProvider{inner: raw.NEProviderFromID(_id)}
+// nEProviderAdopt wraps an Objective-C object that this code just created as a
+// NEProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEProviderAdopt(id objc.ID) *NEProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &NEProvider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Handle a sleep event.
+// Description returns the object's -description text.
+func (x *NEProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Sleep handle a sleep event.
 //
 // Sleep blocks until the operation completes or ctx is cancelled.
 func (x *NEProvider) Sleep(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SleepWithCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sleepWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -56,62 +86,36 @@ func (x *NEProvider) Sleep(ctx context.Context) error {
 	}
 }
 
-// Handle a wake event.
-//
-// Wake calls the underlying Wake.
+// Wake handle a wake event.
 func (x *NEProvider) Wake() {
-	x.inner.Wake()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wake"))
 }
 
-// Create a TCP connection.
-//
-// CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate calls the underlying CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate.
-func (x *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection {
-	_r := x.inner.CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint, enableTLS, tLSParameters, delegate)
-	if _r == nil {
-		return nil
-	}
-	return &NWTCPConnection{inner: _r}
-}
-
-// Creates a UDP session.
-//
-// CreateUDPSessionToEndpointFromEndpoint calls the underlying CreateUDPSessionToEndpointFromEndpoint.
-func (x *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession {
-	_r := x.inner.CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint, localEndpoint)
-	if _r == nil {
-		return nil
-	}
-	return &NWUDPSession{inner: _r}
-}
-
-// Call this method from your NEProvider subclass if you want to display a message to the person using the app.
-//
-// DisplayMessageCompletionHandler calls the underlying DisplayMessageCompletionHandler.
+// DisplayMessageCompletionHandler call this method from your NEProvider subclass if you want to display a message to the person using the app.
 func (x *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {
-	x.inner.DisplayMessageCompletionHandler(foundation.NSStringStringWithUTF8String(message), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayMessage:completionHandler:"), purego.NSString(message), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// DefaultPath calls the underlying DefaultPath.
+// DefaultPath wraps the corresponding Objective-C method.
 func (x *NEProvider) DefaultPath() *NWPath {
-	_r := x.inner.DefaultPath()
-	if _r == nil {
-		return nil
-	}
-	return &NWPath{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultPath"))
+	return NWPathFromID(_r)
 }
-
-func (x *NEProvider) asNEProvider() *raw.NEProvider { return x.inner }
 
 // NEProviderable is the interface implemented by [NEProvider], for mocking and DI.
 type NEProviderable interface {
-	Unwrap() *raw.NEProvider
+	obj.Object
 	Sleep(ctx context.Context) error
 	Wake()
-	CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection
-	CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession
 	DisplayMessageCompletionHandler(message string, completionHandler func(bool))
 	DefaultPath() *NWPath
 }
 
 var _ NEProviderable = (*NEProvider)(nil)
+
+// isNEProvider marks NEProvider — and, by embedding promotion, its
+// subclasses — as a member of the NEProvider hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEProvider) isNEProvider() {}
+
+var _ NEProviderProvider = (*NEProvider)(nil)

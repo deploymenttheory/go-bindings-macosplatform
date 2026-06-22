@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package metrickit provides a fluent Go API over the macOS MetricKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Diagnostic: [CPUExceptionDiagnostic], [CrashDiagnostic], [DiskWriteExceptionDiagnostic], [HangDiagnostic]
+//   - Metric: [AnimationMetric], [AppExitMetric], [AppLaunchMetric], [AppResponsivenessMetric], [AppRunTimeMetric], [CPUMetric], [CellularConditionMetric], [DiskIOMetric], [DiskSpaceUsageMetric], [DisplayMetric], [GPUMetric], [LocationActivityMetric], [MemoryMetric], [NetworkTransferMetric], [SignpostMetric]
 package metrickit

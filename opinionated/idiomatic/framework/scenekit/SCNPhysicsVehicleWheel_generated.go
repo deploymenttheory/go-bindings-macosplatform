@@ -5,257 +5,224 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The appearance and physical characteristics of an individual wheel associated with an physics vehicle behavior.
+// PhysicsVehicleWheel is an idiomatic wrapper over the Objective-C class SCNPhysicsVehicleWheel.
 //
-// PhysicsVehicleWheel wraps [raw.SCNPhysicsVehicleWheel] with a fluent Go API.
+// The appearance and physical characteristics of an individual wheel associated with an physics vehicle behavior.
 type PhysicsVehicleWheel struct {
-	inner *raw.SCNPhysicsVehicleWheel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsVehicleWheel].
-func (x *PhysicsVehicleWheel) Unwrap() *raw.SCNPhysicsVehicleWheel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsVehicleWheel) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsVehicleWheelFromID adopts an existing object pointer as a PhysicsVehicleWheel (nil for 0).
+// PhysicsVehicleWheelFromID adopts an existing Objective-C object as a PhysicsVehicleWheel
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsVehicleWheelFromID(id objc.ID) *PhysicsVehicleWheel {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsVehicleWheel{inner: raw.SCNPhysicsVehicleWheelFromID(id)}
-}
-
-// NewPhysicsVehicleWheel creates a new [PhysicsVehicleWheel].
-func NewPhysicsVehicleWheel() *PhysicsVehicleWheel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsVehicleWheel")), objc.RegisterName("new"))
-	return &PhysicsVehicleWheel{inner: raw.SCNPhysicsVehicleWheelFromID(_id)}
-}
-
-// The spring coefficient of the suspension between the vehicle and the wheel.
-//
-// WithSuspensionStiffness sets the suspensionStiffness property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel {
-	x.inner.SetSuspensionStiffness(suspensionStiffness)
+	x := &PhysicsVehicleWheel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The coefficient that limits the speed of the suspension returning to its rest length when compressed.
-//
-// WithSuspensionCompression sets the suspensionCompression property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel {
-	x.inner.SetSuspensionCompression(suspensionCompression)
-	return x
-}
-
-// The damping ratio that limits oscillation in the vehicle’s suspension.
-//
-// WithSuspensionDamping sets the suspensionDamping property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel {
-	x.inner.SetSuspensionDamping(suspensionDamping)
-	return x
-}
-
-// The maximum distance that the wheel is allowed to move up or down relative to its connection point, in centimeters.
-//
-// WithMaximumSuspensionTravel sets the maximumSuspensionTravel property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel {
-	x.inner.SetMaximumSuspensionTravel(maximumSuspensionTravel)
-	return x
-}
-
-// The traction between the wheel and any surface in contact with it.
-//
-// WithFrictionSlip sets the frictionSlip property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel {
-	x.inner.SetFrictionSlip(frictionSlip)
-	return x
-}
-
-// The maximum force of the suspension between the vehicle and the wheel, in newtons.
-//
-// WithMaximumSuspensionForce sets the maximumSuspensionForce property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel {
-	x.inner.SetMaximumSuspensionForce(maximumSuspensionForce)
-	return x
-}
-
-// The position of the wheel’s connection to the vehicle’s chassis.
-//
-// WithConnectionPosition sets the connectionPosition property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithConnectionPosition(connectionPosition raw.SCNVector3) *PhysicsVehicleWheel {
-	x.inner.SetConnectionPosition(connectionPosition)
-	return x
-}
-
-// The direction of the axis that the wheel pivots around to steer the vehicle.
-//
-// WithSteeringAxis sets the steeringAxis property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithSteeringAxis(steeringAxis raw.SCNVector3) *PhysicsVehicleWheel {
-	x.inner.SetSteeringAxis(steeringAxis)
-	return x
-}
-
-// The direction of the axis that the wheel spins around to move the vehicle.
-//
-// WithAxle sets the axle property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithAxle(axle raw.SCNVector3) *PhysicsVehicleWheel {
-	x.inner.SetAxle(axle)
-	return x
-}
-
-// The radius of the wheel.
-//
-// WithRadius sets the radius property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithRadius(radius float64) *PhysicsVehicleWheel {
-	x.inner.SetRadius(radius)
-	return x
-}
-
-// The resting length of the suspension, in meters.
-//
-// WithSuspensionRestLength sets the suspensionRestLength property and returns the receiver for chaining.
-func (x *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel {
-	x.inner.SetSuspensionRestLength(suspensionRestLength)
-	return x
-}
-
-// Node calls the underlying Node.
-func (x *PhysicsVehicleWheel) Node() *Node {
-	_r := x.inner.Node()
-	if _r == nil {
+// physicsVehicleWheelAdopt wraps an Objective-C object that this code just created as a
+// PhysicsVehicleWheel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsVehicleWheelAdopt(id objc.ID) *PhysicsVehicleWheel {
+	if id == 0 {
 		return nil
 	}
-	return &Node{inner: _r}
+	x := &PhysicsVehicleWheel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SuspensionStiffness calls the underlying SuspensionStiffness.
+// Description returns the object's -description text.
+func (x *PhysicsVehicleWheel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsVehicleWheel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsVehicleWheel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsVehicleWheel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPhysicsVehicleWheel creates a new PhysicsVehicleWheel.
+func NewPhysicsVehicleWheel() *PhysicsVehicleWheel {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsVehicleWheel")), objc.RegisterName("new"))
+	return physicsVehicleWheelAdopt(_id)
+}
+
+// WithSuspensionStiffness the spring coefficient of the suspension between the vehicle and the wheel.
+func (x *PhysicsVehicleWheel) WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionStiffness:"), suspensionStiffness)
+	return x
+}
+
+// WithSuspensionCompression the coefficient that limits the speed of the suspension returning to its rest length when compressed.
+func (x *PhysicsVehicleWheel) WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionCompression:"), suspensionCompression)
+	return x
+}
+
+// WithSuspensionDamping the damping ratio that limits oscillation in the vehicle’s suspension.
+func (x *PhysicsVehicleWheel) WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionDamping:"), suspensionDamping)
+	return x
+}
+
+// WithMaximumSuspensionTravel the maximum distance that the wheel is allowed to move up or down relative to its connection point, in centimeters.
+func (x *PhysicsVehicleWheel) WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionTravel:"), maximumSuspensionTravel)
+	return x
+}
+
+// WithFrictionSlip the traction between the wheel and any surface in contact with it.
+func (x *PhysicsVehicleWheel) WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrictionSlip:"), frictionSlip)
+	return x
+}
+
+// WithMaximumSuspensionForce the maximum force of the suspension between the vehicle and the wheel, in newtons.
+func (x *PhysicsVehicleWheel) WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionForce:"), maximumSuspensionForce)
+	return x
+}
+
+// WithRadius the radius of the wheel.
+func (x *PhysicsVehicleWheel) WithRadius(radius float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
+	return x
+}
+
+// WithSuspensionRestLength the resting length of the suspension, in meters.
+func (x *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionRestLength:"), suspensionRestLength)
+	return x
+}
+
+// Node wraps the corresponding Objective-C method.
+func (x *PhysicsVehicleWheel) Node() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+	return NodeFromID(_r)
+}
+
+// SuspensionStiffness wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SuspensionStiffness() float64 {
-	return x.inner.SuspensionStiffness()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionStiffness"))
+	return _r
 }
 
-// SetSuspensionStiffness calls the underlying SetSuspensionStiffness.
+// SetSuspensionStiffness wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetSuspensionStiffness(suspensionStiffness float64) {
-	x.inner.SetSuspensionStiffness(suspensionStiffness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionStiffness:"), suspensionStiffness)
 }
 
-// SuspensionCompression calls the underlying SuspensionCompression.
+// SuspensionCompression wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SuspensionCompression() float64 {
-	return x.inner.SuspensionCompression()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionCompression"))
+	return _r
 }
 
-// SetSuspensionCompression calls the underlying SetSuspensionCompression.
+// SetSuspensionCompression wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetSuspensionCompression(suspensionCompression float64) {
-	x.inner.SetSuspensionCompression(suspensionCompression)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionCompression:"), suspensionCompression)
 }
 
-// SuspensionDamping calls the underlying SuspensionDamping.
+// SuspensionDamping wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SuspensionDamping() float64 {
-	return x.inner.SuspensionDamping()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionDamping"))
+	return _r
 }
 
-// SetSuspensionDamping calls the underlying SetSuspensionDamping.
+// SetSuspensionDamping wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetSuspensionDamping(suspensionDamping float64) {
-	x.inner.SetSuspensionDamping(suspensionDamping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionDamping:"), suspensionDamping)
 }
 
-// MaximumSuspensionTravel calls the underlying MaximumSuspensionTravel.
+// MaximumSuspensionTravel wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) MaximumSuspensionTravel() float64 {
-	return x.inner.MaximumSuspensionTravel()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumSuspensionTravel"))
+	return _r
 }
 
-// SetMaximumSuspensionTravel calls the underlying SetMaximumSuspensionTravel.
+// SetMaximumSuspensionTravel wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetMaximumSuspensionTravel(maximumSuspensionTravel float64) {
-	x.inner.SetMaximumSuspensionTravel(maximumSuspensionTravel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionTravel:"), maximumSuspensionTravel)
 }
 
-// FrictionSlip calls the underlying FrictionSlip.
+// FrictionSlip wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) FrictionSlip() float64 {
-	return x.inner.FrictionSlip()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frictionSlip"))
+	return _r
 }
 
-// SetFrictionSlip calls the underlying SetFrictionSlip.
+// SetFrictionSlip wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetFrictionSlip(frictionSlip float64) {
-	x.inner.SetFrictionSlip(frictionSlip)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrictionSlip:"), frictionSlip)
 }
 
-// MaximumSuspensionForce calls the underlying MaximumSuspensionForce.
+// MaximumSuspensionForce wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) MaximumSuspensionForce() float64 {
-	return x.inner.MaximumSuspensionForce()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumSuspensionForce"))
+	return _r
 }
 
-// SetMaximumSuspensionForce calls the underlying SetMaximumSuspensionForce.
+// SetMaximumSuspensionForce wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetMaximumSuspensionForce(maximumSuspensionForce float64) {
-	x.inner.SetMaximumSuspensionForce(maximumSuspensionForce)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionForce:"), maximumSuspensionForce)
 }
 
-// ConnectionPosition calls the underlying ConnectionPosition.
-func (x *PhysicsVehicleWheel) ConnectionPosition() raw.SCNVector3 {
-	return x.inner.ConnectionPosition()
-}
-
-// SetConnectionPosition calls the underlying SetConnectionPosition.
-func (x *PhysicsVehicleWheel) SetConnectionPosition(connectionPosition raw.SCNVector3) {
-	x.inner.SetConnectionPosition(connectionPosition)
-}
-
-// SteeringAxis calls the underlying SteeringAxis.
-func (x *PhysicsVehicleWheel) SteeringAxis() raw.SCNVector3 {
-	return x.inner.SteeringAxis()
-}
-
-// SetSteeringAxis calls the underlying SetSteeringAxis.
-func (x *PhysicsVehicleWheel) SetSteeringAxis(steeringAxis raw.SCNVector3) {
-	x.inner.SetSteeringAxis(steeringAxis)
-}
-
-// Axle calls the underlying Axle.
-func (x *PhysicsVehicleWheel) Axle() raw.SCNVector3 {
-	return x.inner.Axle()
-}
-
-// SetAxle calls the underlying SetAxle.
-func (x *PhysicsVehicleWheel) SetAxle(axle raw.SCNVector3) {
-	x.inner.SetAxle(axle)
-}
-
-// Radius calls the underlying Radius.
+// Radius wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) Radius() float64 {
-	return x.inner.Radius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
+// SetRadius wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetRadius(radius float64) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
-// SuspensionRestLength calls the underlying SuspensionRestLength.
+// SuspensionRestLength wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SuspensionRestLength() float64 {
-	return x.inner.SuspensionRestLength()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionRestLength"))
+	return _r
 }
 
-// SetSuspensionRestLength calls the underlying SetSuspensionRestLength.
+// SetSuspensionRestLength wraps the corresponding Objective-C method.
 func (x *PhysicsVehicleWheel) SetSuspensionRestLength(suspensionRestLength float64) {
-	x.inner.SetSuspensionRestLength(suspensionRestLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionRestLength:"), suspensionRestLength)
 }
 
 // PhysicsVehicleWheelable is the interface implemented by [PhysicsVehicleWheel], for mocking and DI.
 type PhysicsVehicleWheelable interface {
-	Unwrap() *raw.SCNPhysicsVehicleWheel
+	obj.Object
 	WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel
 	WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel
 	WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel
 	WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel
 	WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel
 	WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel
-	WithConnectionPosition(connectionPosition raw.SCNVector3) *PhysicsVehicleWheel
-	WithSteeringAxis(steeringAxis raw.SCNVector3) *PhysicsVehicleWheel
-	WithAxle(axle raw.SCNVector3) *PhysicsVehicleWheel
 	WithRadius(radius float64) *PhysicsVehicleWheel
 	WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel
 	Node() *Node
@@ -271,12 +238,6 @@ type PhysicsVehicleWheelable interface {
 	SetFrictionSlip(frictionSlip float64)
 	MaximumSuspensionForce() float64
 	SetMaximumSuspensionForce(maximumSuspensionForce float64)
-	ConnectionPosition() raw.SCNVector3
-	SetConnectionPosition(connectionPosition raw.SCNVector3)
-	SteeringAxis() raw.SCNVector3
-	SetSteeringAxis(steeringAxis raw.SCNVector3)
-	Axle() raw.SCNVector3
-	SetAxle(axle raw.SCNVector3)
 	Radius() float64
 	SetRadius(radius float64)
 	SuspensionRestLength() float64

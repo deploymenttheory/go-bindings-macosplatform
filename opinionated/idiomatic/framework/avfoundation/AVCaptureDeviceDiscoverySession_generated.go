@@ -5,55 +5,84 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that finds capture devices that match specific search criteria.
+// CaptureDeviceDiscoverySession is an idiomatic wrapper over the Objective-C class AVCaptureDeviceDiscoverySession.
 //
-// CaptureDeviceDiscoverySession wraps [raw.AVCaptureDeviceDiscoverySession] with a fluent Go API.
+// An object that finds capture devices that match specific search criteria.
 type CaptureDeviceDiscoverySession struct {
-	inner *raw.AVCaptureDeviceDiscoverySession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureDeviceDiscoverySession].
-func (x *CaptureDeviceDiscoverySession) Unwrap() *raw.AVCaptureDeviceDiscoverySession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureDeviceDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureDeviceDiscoverySessionFromID adopts an existing object pointer as a CaptureDeviceDiscoverySession (nil for 0).
+// CaptureDeviceDiscoverySessionFromID adopts an existing Objective-C object as a CaptureDeviceDiscoverySession
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureDeviceDiscoverySessionFromID(id objc.ID) *CaptureDeviceDiscoverySession {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureDeviceDiscoverySession{inner: raw.AVCaptureDeviceDiscoverySessionFromID(id)}
+	x := &CaptureDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureDeviceDiscoverySession creates a new [CaptureDeviceDiscoverySession].
+// captureDeviceDiscoverySessionAdopt wraps an Objective-C object that this code just created as a
+// CaptureDeviceDiscoverySession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureDeviceDiscoverySessionAdopt(id objc.ID) *CaptureDeviceDiscoverySession {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureDeviceDiscoverySession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureDeviceDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureDeviceDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureDeviceDiscoverySession creates a new CaptureDeviceDiscoverySession.
 func NewCaptureDeviceDiscoverySession() *CaptureDeviceDiscoverySession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureDeviceDiscoverySession")), objc.RegisterName("new"))
-	return &CaptureDeviceDiscoverySession{inner: raw.AVCaptureDeviceDiscoverySessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceDiscoverySession")), objc.RegisterName("new"))
+	return captureDeviceDiscoverySessionAdopt(_id)
 }
 
-// @property devices @abstract The list of devices that comply to the search criteria specified on the discovery session. @discussion The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
+// Devices the list of devices that comply to the search criteria specified on the discovery session. The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
 //
 // Devices returns the collection as a Go slice.
 func (x *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {
-	arr := x.inner.Devices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDevice {
-		return &CaptureDevice{inner: raw.AVCaptureDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
 
 // CaptureDeviceDiscoverySessionable is the interface implemented by [CaptureDeviceDiscoverySession], for mocking and DI.
 type CaptureDeviceDiscoverySessionable interface {
-	Unwrap() *raw.AVCaptureDeviceDiscoverySession
+	obj.Object
 	Devices() []*CaptureDevice
 }
 

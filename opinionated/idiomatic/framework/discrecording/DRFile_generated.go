@@ -5,74 +5,80 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class		DRFile @abstract	Represents a file to be created on the disc. @discussion A file can be either a pointer to an exiting file (residing on a hard drive for example) or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of virtual @link //apple_ref/occ/cl/DRFolder DRFolder @/link objects.
+// File is an idiomatic wrapper over the Objective-C class DRFile.
 //
-// File wraps [raw.DRFile] with a fluent Go API.
+// It embeds [FSObject], promoting that type's methods.
+//
+// Represents a file to be created on the disc. A file can be either a pointer to an exiting file (residing on a hard drive for example) or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of virtual
 type File struct {
-	inner *raw.DRFile
+	FSObject
 }
 
-// Unwrap returns the underlying [raw.DRFile].
-func (x *File) Unwrap() *raw.DRFile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *File) ID() objc.ID { return x.inner.Ptr() }
-
-// FileFromID adopts an existing object pointer as a File (nil for 0).
+// FileFromID adopts an existing Objective-C object as a File
+// (nil for 0), retaining it and registering a release finalizer.
 func FileFromID(id objc.ID) *File {
 	if id == 0 {
 		return nil
 	}
-	return &File{inner: raw.DRFileFromID(id)}
+	x := &File{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @method 		initWithPath: @abstract		Initializes a real file object @discussion		This type of DRFile reads in data from an existing file located at path and burns that data to disc. @param 			path	The path to an existing file. @result  		An DRFile object.
-//
-// NewFileWithPath creates a new [File].
+// fileAdopt wraps an Objective-C object that this code just created as a
+// File (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileAdopt(id objc.ID) *File {
+	if id == 0 {
+		return nil
+	}
+	x := &File{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFileWithPath initializes a real file object This type of DRFile reads in data from an existing file located at path and burns that data to disc.
 func NewFileWithPath(path string) *File {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &File{inner: raw.DRFileFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
+	return fileAdopt(_id)
 }
 
-// @method 		initWithName:data: @abstract		Initializes a virtual file object @discussion		This type of DRFile burns the data passed in to the output disc, creating a file with the passed in name. @param 			name	The name of the file on output disc. @param			data	The data that will become the contents of the file on the output disc. @result  		A DRFile object.
-//
-// NewFileWithNameData creates a new [File].
-func NewFileWithNameData(name string, data *foundation.NSData) *File {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), foundation.NSStringStringWithUTF8String(name).Ptr(), data.Ptr())
-	return &File{inner: raw.DRFileFromID(_id)}
+// NewFileWithNameData initializes a virtual file object This type of DRFile burns the data passed in to the output disc, creating a file with the passed in name.
+func NewFileWithNameData(name string, data obj.Object) *File {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(name), objref.IDOf(data))
+	return fileAdopt(_id)
 }
 
-// @method 		initWithName:dataProducer: @abstract		Initializes a virtual file object @discussion		This type of DRFile burns the data produced to the output disc, creating a file with the passed in name. @param 			name		The name of the file on output disc. @param			producer	The object supplying the file data to the burn. @result  		A DRFile object.
-//
-// NewFileWithNameDataProducer creates a new [File].
-func NewFileWithNameDataProducer(name string, producer objc.ID) *File {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:dataProducer:"), foundation.NSStringStringWithUTF8String(name).Ptr(), producer)
-	return &File{inner: raw.DRFileFromID(_id)}
+// NewFileWithNameDataProducer initializes a virtual file object This type of DRFile burns the data produced to the output disc, creating a file with the passed in name.
+func NewFileWithNameDataProducer(name string, producer obj.Object) *File {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:dataProducer:"), purego.NSString(name), objref.IDOf(producer))
+	return fileAdopt(_id)
 }
 
-// @method 		initWithLinkType:pointingTo:inFilesystem: @abstract		Initializes a file object to point to another file on the output disc. @param 			linkType	The type of link that will be created. @param 			original	The file to point he hard link to @param			filesystem	The filesystem this link will exist on. @result  		A DRFile object.
-//
-// NewFileWithLinkTypePointingToInFilesystem creates a new [File].
-func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *raw.DRFSObject, filesystem string) *File {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLinkType:pointingTo:inFilesystem:"), foundation.NSStringStringWithUTF8String(linkType).Ptr(), original.Ptr(), foundation.NSStringStringWithUTF8String(filesystem).Ptr())
-	return &File{inner: raw.DRFileFromID(_id)}
+// NewFileWithLinkTypePointingToInFilesystem initializes a file object to point to another file on the output disc.
+func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *FSObject, filesystem string) *File {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLinkType:pointingTo:inFilesystem:"), purego.NSString(linkType), objref.IDOf(original), purego.NSString(filesystem))
+	return fileAdopt(_id)
 }
-
-func (x *File) asFSObject() *raw.DRFSObject { return &x.inner.DRFSObject }
 
 // Fileable is the interface implemented by [File], for mocking and DI.
 type Fileable interface {
-	Unwrap() *raw.DRFile
+	obj.Object
 }
 
 var _ Fileable = (*File)(nil)
+
+var _ FSObjectProvider = (*File)(nil)

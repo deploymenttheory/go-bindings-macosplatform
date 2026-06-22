@@ -5,45 +5,79 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for transitions you can apply to symbol-based images.
+// SymbolContentTransition is an idiomatic wrapper over the Objective-C class NSSymbolContentTransition.
 //
-// SymbolContentTransition wraps [raw.NSSymbolContentTransition] with a fluent Go API.
+// SymbolContentTransition is an abstract base — you do not construct it directly. Construct one of [SymbolAutomaticContentTransition], [SymbolMagicReplaceContentTransition], [SymbolReplaceContentTransition] and pass it where a SymbolContentTransition is accepted.
+//
+// An abstract base class for transitions you can apply to symbol-based images.
 type SymbolContentTransition struct {
-	inner *raw.NSSymbolContentTransition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolContentTransition].
-func (x *SymbolContentTransition) Unwrap() *raw.NSSymbolContentTransition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolContentTransition) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolContentTransitionFromID adopts an existing object pointer as a SymbolContentTransition (nil for 0).
+// SymbolContentTransitionFromID adopts an existing Objective-C object as a SymbolContentTransition
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolContentTransitionFromID(id objc.ID) *SymbolContentTransition {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolContentTransition{inner: raw.NSSymbolContentTransitionFromID(id)}
+	x := &SymbolContentTransition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolContentTransition creates a new [SymbolContentTransition].
-func NewSymbolContentTransition() *SymbolContentTransition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolContentTransition")), objc.RegisterName("new"))
-	return &SymbolContentTransition{inner: raw.NSSymbolContentTransitionFromID(_id)}
+// symbolContentTransitionAdopt wraps an Objective-C object that this code just created as a
+// SymbolContentTransition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolContentTransitionAdopt(id objc.ID) *SymbolContentTransition {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolContentTransition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SymbolContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
-	return x.inner
+// Description returns the object's -description text.
+func (x *SymbolContentTransition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolContentTransition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolContentTransition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolContentTransition) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // SymbolContentTransitionable is the interface implemented by [SymbolContentTransition], for mocking and DI.
 type SymbolContentTransitionable interface {
-	Unwrap() *raw.NSSymbolContentTransition
+	obj.Object
 }
 
 var _ SymbolContentTransitionable = (*SymbolContentTransition)(nil)
+
+// isSymbolContentTransition marks SymbolContentTransition — and, by embedding promotion, its
+// subclasses — as a member of the SymbolContentTransition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SymbolContentTransition) isSymbolContentTransition() {}
+
+var _ SymbolContentTransitionProvider = (*SymbolContentTransition)(nil)

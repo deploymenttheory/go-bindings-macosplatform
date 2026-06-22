@@ -5,96 +5,131 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.
+// AssetResource is an idiomatic wrapper over the Objective-C class PHAssetResource.
 //
-// AssetResource wraps [raw.PHAssetResource] with a fluent Go API.
+// An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.
 type AssetResource struct {
-	inner *raw.PHAssetResource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAssetResource].
-func (x *AssetResource) Unwrap() *raw.PHAssetResource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResource) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceFromID adopts an existing object pointer as a AssetResource (nil for 0).
+// AssetResourceFromID adopts an existing Objective-C object as a AssetResource
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceFromID(id objc.ID) *AssetResource {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResource{inner: raw.PHAssetResourceFromID(id)}
+	x := &AssetResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResource creates a new [AssetResource].
+// assetResourceAdopt wraps an Objective-C object that this code just created as a
+// AssetResource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceAdopt(id objc.ID) *AssetResource {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetResource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetResource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetResource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetResource creates a new AssetResource.
 func NewAssetResource() *AssetResource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetResource")), objc.RegisterName("new"))
-	return &AssetResource{inner: raw.PHAssetResourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("new"))
+	return assetResourceAdopt(_id)
 }
 
-// Type calls the underlying Type.
-func (x *AssetResource) Type() PHAssetResourceType {
-	return PHAssetResourceType(x.inner.Type())
+// Type wraps the corresponding Objective-C method.
+func (x *AssetResource) Type() AssetResourceType {
+	_r := objc.Send[AssetResourceType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// AssetLocalIdentifier calls the underlying AssetLocalIdentifier.
+// AssetLocalIdentifier wraps the corresponding Objective-C method.
 func (x *AssetResource) AssetLocalIdentifier() string {
-	_r := x.inner.AssetLocalIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetLocalIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// OriginalFilename calls the underlying OriginalFilename.
+// OriginalFilename wraps the corresponding Objective-C method.
 func (x *AssetResource) OriginalFilename() string {
-	_r := x.inner.OriginalFilename()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFilename"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
-//
-// ContentType calls the underlying ContentType.
-func (x *AssetResource) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+// ContentType the type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
+func (x *AssetResource) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// UniformTypeIdentifier calls the underlying UniformTypeIdentifier.
+// UniformTypeIdentifier wraps the corresponding Objective-C method.
 func (x *AssetResource) UniformTypeIdentifier() string {
-	_r := x.inner.UniformTypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PixelWidth calls the underlying PixelWidth.
+// PixelWidth wraps the corresponding Objective-C method.
 func (x *AssetResource) PixelWidth() int {
-	return x.inner.PixelWidth()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelWidth"))
+	return _r
 }
 
-// PixelHeight calls the underlying PixelHeight.
+// PixelHeight wraps the corresponding Objective-C method.
 func (x *AssetResource) PixelHeight() int {
-	return x.inner.PixelHeight()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelHeight"))
+	return _r
 }
 
 // AssetResourceable is the interface implemented by [AssetResource], for mocking and DI.
 type AssetResourceable interface {
-	Unwrap() *raw.PHAssetResource
-	Type() PHAssetResourceType
+	obj.Object
+	Type() AssetResourceType
 	AssetLocalIdentifier() string
 	OriginalFilename() string
-	ContentType() *uniformtypeidentifiers.UTType
+	ContentType() obj.Object
 	UniformTypeIdentifier() string
 	PixelWidth() int
 	PixelHeight() int

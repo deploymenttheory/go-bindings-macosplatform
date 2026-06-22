@@ -5,87 +5,93 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.
+// ShellScriptAction is an idiomatic wrapper over the Objective-C class AMShellScriptAction.
 //
-// ShellScriptAction wraps [raw.AMShellScriptAction] with a fluent Go API.
+// It embeds [BundleAction], promoting that type's methods.
+//
+// An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.
 type ShellScriptAction struct {
-	inner *raw.AMShellScriptAction
+	BundleAction
 }
 
-// Unwrap returns the underlying [raw.AMShellScriptAction].
-func (x *ShellScriptAction) Unwrap() *raw.AMShellScriptAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShellScriptAction) ID() objc.ID { return x.inner.Ptr() }
-
-// ShellScriptActionFromID adopts an existing object pointer as a ShellScriptAction (nil for 0).
+// ShellScriptActionFromID adopts an existing Objective-C object as a ShellScriptAction
+// (nil for 0), retaining it and registering a release finalizer.
 func ShellScriptActionFromID(id objc.ID) *ShellScriptAction {
 	if id == 0 {
 		return nil
 	}
-	return &ShellScriptAction{inner: raw.AMShellScriptActionFromID(id)}
+	x := &ShellScriptAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewShellScriptAction creates a new [ShellScriptAction].
+// shellScriptActionAdopt wraps an Objective-C object that this code just created as a
+// ShellScriptAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shellScriptActionAdopt(id objc.ID) *ShellScriptAction {
+	if id == 0 {
+		return nil
+	}
+	x := &ShellScriptAction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewShellScriptAction creates a new ShellScriptAction.
 func NewShellScriptAction() *ShellScriptAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMShellScriptAction")), objc.RegisterName("new"))
-	return &ShellScriptAction{inner: raw.AMShellScriptActionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AMShellScriptAction")), objc.RegisterName("new"))
+	return shellScriptActionAdopt(_id)
 }
 
-// The action’s parameters.
-//
-// WithParameters sets the parameters property and returns the receiver for chaining.
-func (x *ShellScriptAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *ShellScriptAction {
-	x.inner.AMBundleAction.SetParameters(parameters)
+// WithParameters the action’s parameters.
+func (x *ShellScriptAction) WithParameters(parameters obj.Object) *ShellScriptAction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets the progressValue property and returns the receiver for chaining.
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
 func (x *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
-	x.inner.AMBundleAction.AMAction.SetProgressValue(progressValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
-// RemapLineEndings calls the underlying RemapLineEndings.
+// RemapLineEndings wraps the corresponding Objective-C method.
 func (x *ShellScriptAction) RemapLineEndings() bool {
-	return x.inner.RemapLineEndings()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("remapLineEndings"))
+	return _r
 }
 
-// InputFieldSeparator calls the underlying InputFieldSeparator.
+// InputFieldSeparator wraps the corresponding Objective-C method.
 func (x *ShellScriptAction) InputFieldSeparator() string {
-	_r := x.inner.InputFieldSeparator()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputFieldSeparator"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// OutputFieldSeparator calls the underlying OutputFieldSeparator.
+// OutputFieldSeparator wraps the corresponding Objective-C method.
 func (x *ShellScriptAction) OutputFieldSeparator() string {
-	_r := x.inner.OutputFieldSeparator()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFieldSeparator"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *ShellScriptAction) asBundleAction() *raw.AMBundleAction { return &x.inner.AMBundleAction }
-
-func (x *ShellScriptAction) asAction() *raw.AMAction { return &x.inner.AMBundleAction.AMAction }
 
 // ShellScriptActionable is the interface implemented by [ShellScriptAction], for mocking and DI.
 type ShellScriptActionable interface {
-	Unwrap() *raw.AMShellScriptAction
-	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *ShellScriptAction
+	obj.Object
+	WithParameters(parameters obj.Object) *ShellScriptAction
 	WithProgressValue(progressValue float64) *ShellScriptAction
 	RemapLineEndings() bool
 	InputFieldSeparator() string
@@ -93,3 +99,7 @@ type ShellScriptActionable interface {
 }
 
 var _ ShellScriptActionable = (*ShellScriptAction)(nil)
+
+var _ BundleActionProvider = (*ShellScriptAction)(nil)
+
+var _ ActionProvider = (*ShellScriptAction)(nil)

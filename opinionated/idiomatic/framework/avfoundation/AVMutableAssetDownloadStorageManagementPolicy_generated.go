@@ -5,78 +5,84 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable object that you use to create a new storage management policy.
+// MutableAssetDownloadStorageManagementPolicy is an idiomatic wrapper over the Objective-C class AVMutableAssetDownloadStorageManagementPolicy.
 //
-// MutableAssetDownloadStorageManagementPolicy wraps [raw.AVMutableAssetDownloadStorageManagementPolicy] with a fluent Go API.
+// It embeds [AssetDownloadStorageManagementPolicy], promoting that type's methods.
+//
+// A mutable object that you use to create a new storage management policy.
 type MutableAssetDownloadStorageManagementPolicy struct {
-	inner *raw.AVMutableAssetDownloadStorageManagementPolicy
+	AssetDownloadStorageManagementPolicy
 }
 
-// Unwrap returns the underlying [raw.AVMutableAssetDownloadStorageManagementPolicy].
-func (x *MutableAssetDownloadStorageManagementPolicy) Unwrap() *raw.AVMutableAssetDownloadStorageManagementPolicy {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableAssetDownloadStorageManagementPolicy) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableAssetDownloadStorageManagementPolicyFromID adopts an existing object pointer as a MutableAssetDownloadStorageManagementPolicy (nil for 0).
+// MutableAssetDownloadStorageManagementPolicyFromID adopts an existing Objective-C object as a MutableAssetDownloadStorageManagementPolicy
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableAssetDownloadStorageManagementPolicyFromID(id objc.ID) *MutableAssetDownloadStorageManagementPolicy {
 	if id == 0 {
 		return nil
 	}
-	return &MutableAssetDownloadStorageManagementPolicy{inner: raw.AVMutableAssetDownloadStorageManagementPolicyFromID(id)}
+	x := &MutableAssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutableAssetDownloadStorageManagementPolicy creates a new [MutableAssetDownloadStorageManagementPolicy].
+// mutableAssetDownloadStorageManagementPolicyAdopt wraps an Objective-C object that this code just created as a
+// MutableAssetDownloadStorageManagementPolicy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableAssetDownloadStorageManagementPolicyAdopt(id objc.ID) *MutableAssetDownloadStorageManagementPolicy {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableAssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableAssetDownloadStorageManagementPolicy creates a new MutableAssetDownloadStorageManagementPolicy.
 func NewMutableAssetDownloadStorageManagementPolicy() *MutableAssetDownloadStorageManagementPolicy {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableAssetDownloadStorageManagementPolicy")), objc.RegisterName("new"))
-	return &MutableAssetDownloadStorageManagementPolicy{inner: raw.AVMutableAssetDownloadStorageManagementPolicyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableAssetDownloadStorageManagementPolicy")), objc.RegisterName("new"))
+	return mutableAssetDownloadStorageManagementPolicyAdopt(_id)
 }
 
-// The eviction priority for a downloaded asset.
-//
-// WithPriority sets the priority property and returns the receiver for chaining.
-func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority *foundation.NSString) *MutableAssetDownloadStorageManagementPolicy {
-	x.inner.SetPriority(priority)
+// WithPriority the eviction priority for a downloaded asset.
+func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return x
 }
 
-// The expiration date for an asset.
-//
-// WithExpirationDate sets the expirationDate property and returns the receiver for chaining.
-func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate *foundation.NSDate) *MutableAssetDownloadStorageManagementPolicy {
-	x.inner.SetExpirationDate(expirationDate)
+// WithExpirationDate the expiration date for an asset.
+func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 	return x
 }
 
-// SetPriority calls the underlying SetPriority.
-func (x *MutableAssetDownloadStorageManagementPolicy) SetPriority(priority *foundation.NSString) {
-	x.inner.SetPriority(priority)
+// SetPriority wraps the corresponding Objective-C method.
+func (x *MutableAssetDownloadStorageManagementPolicy) SetPriority(priority obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 }
 
-// SetExpirationDate calls the underlying SetExpirationDate.
-func (x *MutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirationDate *foundation.NSDate) {
-	x.inner.SetExpirationDate(expirationDate)
-}
-
-func (x *MutableAssetDownloadStorageManagementPolicy) asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy {
-	return &x.inner.AVAssetDownloadStorageManagementPolicy
+// SetExpirationDate wraps the corresponding Objective-C method.
+func (x *MutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirationDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
 }
 
 // MutableAssetDownloadStorageManagementPolicyable is the interface implemented by [MutableAssetDownloadStorageManagementPolicy], for mocking and DI.
 type MutableAssetDownloadStorageManagementPolicyable interface {
-	Unwrap() *raw.AVMutableAssetDownloadStorageManagementPolicy
-	WithPriority(priority *foundation.NSString) *MutableAssetDownloadStorageManagementPolicy
-	WithExpirationDate(expirationDate *foundation.NSDate) *MutableAssetDownloadStorageManagementPolicy
-	SetPriority(priority *foundation.NSString)
-	SetExpirationDate(expirationDate *foundation.NSDate)
+	obj.Object
+	WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy
+	WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy
+	SetPriority(priority obj.Object)
+	SetExpirationDate(expirationDate obj.Object)
 }
 
 var _ MutableAssetDownloadStorageManagementPolicyable = (*MutableAssetDownloadStorageManagementPolicy)(nil)
+
+var _ AssetDownloadStorageManagementPolicyProvider = (*MutableAssetDownloadStorageManagementPolicy)(nil)

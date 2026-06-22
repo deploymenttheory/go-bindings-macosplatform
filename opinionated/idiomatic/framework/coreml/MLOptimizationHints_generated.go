@@ -5,85 +5,114 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// OptimizationHints wraps [raw.MLOptimizationHints] with a fluent Go API.
+// OptimizationHints is an idiomatic wrapper over the Objective-C class MLOptimizationHints.
 type OptimizationHints struct {
-	inner *raw.MLOptimizationHints
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLOptimizationHints].
-func (x *OptimizationHints) Unwrap() *raw.MLOptimizationHints { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OptimizationHints) ID() objc.ID { return x.inner.Ptr() }
-
-// OptimizationHintsFromID adopts an existing object pointer as a OptimizationHints (nil for 0).
+// OptimizationHintsFromID adopts an existing Objective-C object as a OptimizationHints
+// (nil for 0), retaining it and registering a release finalizer.
 func OptimizationHintsFromID(id objc.ID) *OptimizationHints {
 	if id == 0 {
 		return nil
 	}
-	return &OptimizationHints{inner: raw.MLOptimizationHintsFromID(id)}
+	x := &OptimizationHints{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewOptimizationHints creates a new [OptimizationHints].
+// optimizationHintsAdopt wraps an Objective-C object that this code just created as a
+// OptimizationHints (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func optimizationHintsAdopt(id objc.ID) *OptimizationHints {
+	if id == 0 {
+		return nil
+	}
+	x := &OptimizationHints{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OptimizationHints) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OptimizationHints) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OptimizationHints) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OptimizationHints) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOptimizationHints creates a new OptimizationHints.
 func NewOptimizationHints() *OptimizationHints {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLOptimizationHints")), objc.RegisterName("new"))
-	return &OptimizationHints{inner: raw.MLOptimizationHintsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLOptimizationHints")), objc.RegisterName("new"))
+	return optimizationHintsAdopt(_id)
 }
 
-// The anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
-//
-// WithReshapeFrequency sets the reshapeFrequency property and returns the receiver for chaining.
-func (x *OptimizationHints) WithReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint) *OptimizationHints {
-	x.inner.SetReshapeFrequency(raw.MLReshapeFrequencyHint(reshapeFrequency))
+// WithReshapeFrequency the anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
+func (x *OptimizationHints) WithReshapeFrequency(reshapeFrequency ReshapeFrequencyHint) *OptimizationHints {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReshapeFrequency:"), reshapeFrequency)
 	return x
 }
 
-// Optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
-//
-// WithSpecializationStrategy sets the specializationStrategy property and returns the receiver for chaining.
-func (x *OptimizationHints) WithSpecializationStrategy(specializationStrategy MLSpecializationStrategy) *OptimizationHints {
-	x.inner.SetSpecializationStrategy(raw.MLSpecializationStrategy(specializationStrategy))
+// WithSpecializationStrategy optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
+func (x *OptimizationHints) WithSpecializationStrategy(specializationStrategy SpecializationStrategy) *OptimizationHints {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializationStrategy:"), specializationStrategy)
 	return x
 }
 
-// The anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
-//
-// ReshapeFrequency calls the underlying ReshapeFrequency.
-func (x *OptimizationHints) ReshapeFrequency() MLReshapeFrequencyHint {
-	return MLReshapeFrequencyHint(x.inner.ReshapeFrequency())
+// ReshapeFrequency the anticipated reshape frequency CoreML framework needs to reshape the model with new shapes for models with flexible input. Specify the anticipated reshape frequency (frequent or infrequent), so that the framework can optimize for fast shape switching or fast prediction on seen shapes. The default value is frequent, which means CoreML tries to switch to new shapes as fast as possible
+func (x *OptimizationHints) ReshapeFrequency() ReshapeFrequencyHint {
+	_r := objc.Send[ReshapeFrequencyHint](objref.IDOf(x), objc.RegisterName("reshapeFrequency"))
+	return _r
 }
 
-// SetReshapeFrequency calls the underlying SetReshapeFrequency.
-func (x *OptimizationHints) SetReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint) {
-	x.inner.SetReshapeFrequency(raw.MLReshapeFrequencyHint(reshapeFrequency))
+// SetReshapeFrequency wraps the corresponding Objective-C method.
+func (x *OptimizationHints) SetReshapeFrequency(reshapeFrequency ReshapeFrequencyHint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReshapeFrequency:"), reshapeFrequency)
 }
 
-// Optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
-//
-// SpecializationStrategy calls the underlying SpecializationStrategy.
-func (x *OptimizationHints) SpecializationStrategy() MLSpecializationStrategy {
-	return MLSpecializationStrategy(x.inner.SpecializationStrategy())
+// SpecializationStrategy optimization strategy for the model specialization. Core ML segments the model's compute graph and optimizes each segment for the target compute device. This process can affect the model loading time and the prediction latency. Use this option to tailor the specialization strategy for your application.
+func (x *OptimizationHints) SpecializationStrategy() SpecializationStrategy {
+	_r := objc.Send[SpecializationStrategy](objref.IDOf(x), objc.RegisterName("specializationStrategy"))
+	return _r
 }
 
-// SetSpecializationStrategy calls the underlying SetSpecializationStrategy.
-func (x *OptimizationHints) SetSpecializationStrategy(specializationStrategy MLSpecializationStrategy) {
-	x.inner.SetSpecializationStrategy(raw.MLSpecializationStrategy(specializationStrategy))
+// SetSpecializationStrategy wraps the corresponding Objective-C method.
+func (x *OptimizationHints) SetSpecializationStrategy(specializationStrategy SpecializationStrategy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializationStrategy:"), specializationStrategy)
 }
 
 // OptimizationHintsable is the interface implemented by [OptimizationHints], for mocking and DI.
 type OptimizationHintsable interface {
-	Unwrap() *raw.MLOptimizationHints
-	WithReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint) *OptimizationHints
-	WithSpecializationStrategy(specializationStrategy MLSpecializationStrategy) *OptimizationHints
-	ReshapeFrequency() MLReshapeFrequencyHint
-	SetReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint)
-	SpecializationStrategy() MLSpecializationStrategy
-	SetSpecializationStrategy(specializationStrategy MLSpecializationStrategy)
+	obj.Object
+	WithReshapeFrequency(reshapeFrequency ReshapeFrequencyHint) *OptimizationHints
+	WithSpecializationStrategy(specializationStrategy SpecializationStrategy) *OptimizationHints
+	ReshapeFrequency() ReshapeFrequencyHint
+	SetReshapeFrequency(reshapeFrequency ReshapeFrequencyHint)
+	SpecializationStrategy() SpecializationStrategy
+	SetSpecializationStrategy(specializationStrategy SpecializationStrategy)
 }
 
 var _ OptimizationHintsable = (*OptimizationHints)(nil)

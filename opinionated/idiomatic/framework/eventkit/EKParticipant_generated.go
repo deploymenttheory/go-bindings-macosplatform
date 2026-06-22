@@ -5,114 +5,117 @@
 package eventkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents person, group, or room invited to a calendar event.
+// Participant is an idiomatic wrapper over the Objective-C class EKParticipant.
 //
-// Participant wraps [raw.EKParticipant] with a fluent Go API.
+// It embeds [Object], promoting that type's methods.
+//
+// A class that represents person, group, or room invited to a calendar event.
 type Participant struct {
-	inner *raw.EKParticipant
+	Object
 }
 
-// Unwrap returns the underlying [raw.EKParticipant].
-func (x *Participant) Unwrap() *raw.EKParticipant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Participant) ID() objc.ID { return x.inner.Ptr() }
-
-// ParticipantFromID adopts an existing object pointer as a Participant (nil for 0).
+// ParticipantFromID adopts an existing Objective-C object as a Participant
+// (nil for 0), retaining it and registering a release finalizer.
 func ParticipantFromID(id objc.ID) *Participant {
 	if id == 0 {
 		return nil
 	}
-	return &Participant{inner: raw.EKParticipantFromID(id)}
+	x := &Participant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewParticipant creates a new [Participant].
+// participantAdopt wraps an Objective-C object that this code just created as a
+// Participant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func participantAdopt(id objc.ID) *Participant {
+	if id == 0 {
+		return nil
+	}
+	x := &Participant{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewParticipant creates a new Participant.
 func NewParticipant() *Participant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKParticipant")), objc.RegisterName("new"))
-	return &Participant{inner: raw.EKParticipantFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EKParticipant")), objc.RegisterName("new"))
+	return participantAdopt(_id)
 }
 
-// Returns the address book record that represents the participant.
-//
-// ABPersonInAddressBook calls the underlying ABPersonInAddressBook.
-func (x *Participant) ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson {
-	return x.inner.ABPersonInAddressBook(addressBook)
+// ABPersonInAddressBook returns the address book record that represents the participant.
+func (x *Participant) ABPersonInAddressBook(addressBook obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ABPersonInAddressBook:"), objref.IDOf(addressBook))
+	return obj.Wrap(_r)
 }
 
-// @property   url @abstract   URL representing this participant.
-//
-// URL calls the underlying URL.
-func (x *Participant) URL() *foundation.NSURL {
-	return x.inner.URL()
+// URL URL representing this participant.
+func (x *Participant) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// @property   name @abstract   Name of this participant.
-//
-// Name calls the underlying Name.
+// Name name of this participant.
 func (x *Participant) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property   participantStatus @abstract   The status of the attendee. @discussion Returns the status of the attendee as a EKParticipantStatus value.
-//
-// ParticipantStatus calls the underlying ParticipantStatus.
-func (x *Participant) ParticipantStatus() EKParticipantStatus {
-	return EKParticipantStatus(x.inner.ParticipantStatus())
+// ParticipantStatus the status of the attendee. Returns the status of the attendee as a EKParticipantStatus value.
+func (x *Participant) ParticipantStatus() ParticipantStatus {
+	_r := objc.Send[ParticipantStatus](objref.IDOf(x), objc.RegisterName("participantStatus"))
+	return _r
 }
 
-// @property   participantRole @abstract   The role of the attendee. @discussion Returns the role of the attendee as a EKParticipantRole value.
-//
-// ParticipantRole calls the underlying ParticipantRole.
-func (x *Participant) ParticipantRole() EKParticipantRole {
-	return EKParticipantRole(x.inner.ParticipantRole())
+// ParticipantRole the role of the attendee. Returns the role of the attendee as a EKParticipantRole value.
+func (x *Participant) ParticipantRole() ParticipantRole {
+	_r := objc.Send[ParticipantRole](objref.IDOf(x), objc.RegisterName("participantRole"))
+	return _r
 }
 
-// @property   participantType @abstract   The type of the attendee. @discussion Returns the type of the attendee as a EKParticipantType value.
-//
-// ParticipantType calls the underlying ParticipantType.
-func (x *Participant) ParticipantType() EKParticipantType {
-	return EKParticipantType(x.inner.ParticipantType())
+// ParticipantType the type of the attendee. Returns the type of the attendee as a EKParticipantType value.
+func (x *Participant) ParticipantType() ParticipantType {
+	_r := objc.Send[ParticipantType](objref.IDOf(x), objc.RegisterName("participantType"))
+	return _r
 }
 
-// @property   currentUser @abstract   A boolean indicating whether this participant represents the owner of this account.
-//
-// IsCurrentUser calls the underlying IsCurrentUser.
+// IsCurrentUser a boolean indicating whether this participant represents the owner of this account.
 func (x *Participant) IsCurrentUser() bool {
-	return x.inner.IsCurrentUser()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCurrentUser"))
+	return _r
 }
 
-// @method     contactPredicate @abstract   Returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. @discussion This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
-//
-// ContactPredicate calls the underlying ContactPredicate.
-func (x *Participant) ContactPredicate() *foundation.NSPredicate {
-	return x.inner.ContactPredicate()
+// ContactPredicate returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
+func (x *Participant) ContactPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactPredicate"))
+	return obj.Wrap(_r)
 }
-
-func (x *Participant) asObject() *raw.EKObject { return &x.inner.EKObject }
 
 // Participantable is the interface implemented by [Participant], for mocking and DI.
 type Participantable interface {
-	Unwrap() *raw.EKParticipant
-	ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson
-	URL() *foundation.NSURL
+	obj.Object
+	ABPersonInAddressBook(addressBook obj.Object) obj.Object
+	URL() obj.Object
 	Name() string
-	ParticipantStatus() EKParticipantStatus
-	ParticipantRole() EKParticipantRole
-	ParticipantType() EKParticipantType
+	ParticipantStatus() ParticipantStatus
+	ParticipantRole() ParticipantRole
+	ParticipantType() ParticipantType
 	IsCurrentUser() bool
-	ContactPredicate() *foundation.NSPredicate
+	ContactPredicate() obj.Object
 }
 
 var _ Participantable = (*Participant)(nil)
+
+var _ ObjectProvider = (*Participant)(nil)

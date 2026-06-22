@@ -5,121 +5,104 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for reduction filters that take a single source as input.
+// ImageReduceUnary is an idiomatic wrapper over the Objective-C class MPSImageReduceUnary.
 //
-// ImageReduceUnary wraps [raw.MPSImageReduceUnary] with a fluent Go API.
+// ImageReduceUnary is an abstract base — you do not construct it directly. Construct one of [ImageReduceColumnMax], [ImageReduceColumnMean], [ImageReduceColumnMin], [ImageReduceColumnSum], [ImageReduceRowMax], [ImageReduceRowMean], [ImageReduceRowMin], [ImageReduceRowSum] and pass it where a ImageReduceUnary is accepted.
+//
+// The base class for reduction filters that take a single source as input.
 type ImageReduceUnary struct {
-	inner *raw.MPSImageReduceUnary
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageReduceUnary].
-func (x *ImageReduceUnary) Unwrap() *raw.MPSImageReduceUnary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageReduceUnary) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageReduceUnaryFromID adopts an existing object pointer as a ImageReduceUnary (nil for 0).
+// ImageReduceUnaryFromID adopts an existing Objective-C object as a ImageReduceUnary
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageReduceUnaryFromID(id objc.ID) *ImageReduceUnary {
 	if id == 0 {
 		return nil
 	}
-	return &ImageReduceUnary{inner: raw.MPSImageReduceUnaryFromID(id)}
+	x := &ImageReduceUnary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageReduceUnary creates a new [ImageReduceUnary].
-func NewImageReduceUnary() *ImageReduceUnary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageReduceUnary")), objc.RegisterName("new"))
-	return &ImageReduceUnary{inner: raw.MPSImageReduceUnaryFromID(_id)}
+// imageReduceUnaryAdopt wraps an Objective-C object that this code just created as a
+// ImageReduceUnary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageReduceUnaryAdopt(id objc.ID) *ImageReduceUnary {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageReduceUnary{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (x *ImageReduceUnary) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceUnary {
-	x.inner.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageReduceUnary) WithOffset(offset mpscore.MPSOffset) *ImageReduceUnary {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageReduceUnary) WithClipRect(clipRect metal.MTLRegion) *ImageReduceUnary {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageReduceUnary) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceUnary {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageReduceUnary) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceUnary {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageReduceUnary) WithLabel(label string) *ImageReduceUnary {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// ClipRectSource calls the underlying ClipRectSource.
+// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (x *ImageReduceUnary) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+	return _r
 }
 
-// SetClipRectSource calls the underlying SetClipRectSource.
+// SetClipRectSource wraps the corresponding Objective-C method.
 func (x *ImageReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
-}
-
-func (x *ImageReduceUnary) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageReduceUnary) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 }
 
 // ImageReduceUnaryable is the interface implemented by [ImageReduceUnary], for mocking and DI.
 type ImageReduceUnaryable interface {
-	Unwrap() *raw.MPSImageReduceUnary
+	obj.Object
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceUnary
 	WithOffset(offset mpscore.MPSOffset) *ImageReduceUnary
 	WithClipRect(clipRect metal.MTLRegion) *ImageReduceUnary
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceUnary
-	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceUnary
 	WithLabel(label string) *ImageReduceUnary
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }
 
 var _ ImageReduceUnaryable = (*ImageReduceUnary)(nil)
+
+// isImageReduceUnary marks ImageReduceUnary — and, by embedding promotion, its
+// subclasses — as a member of the ImageReduceUnary hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageReduceUnary) isImageReduceUnary() {}
+
+var _ ImageReduceUnaryProvider = (*ImageReduceUnary)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageReduceUnary)(nil)
+
+var _ KernelProvider = (*ImageReduceUnary)(nil)

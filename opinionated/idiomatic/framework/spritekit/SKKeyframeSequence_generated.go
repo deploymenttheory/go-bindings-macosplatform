@@ -5,185 +5,195 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that performs interpolation between values specified at different times (keyframes).
+// KeyframeSequence is an idiomatic wrapper over the Objective-C class SKKeyframeSequence.
 //
-// KeyframeSequence wraps [raw.SKKeyframeSequence] with a fluent Go API.
+// An object that performs interpolation between values specified at different times (keyframes).
 type KeyframeSequence struct {
-	inner *raw.SKKeyframeSequence
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKKeyframeSequence].
-func (x *KeyframeSequence) Unwrap() *raw.SKKeyframeSequence { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyframeSequence) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyframeSequenceFromID adopts an existing object pointer as a KeyframeSequence (nil for 0).
+// KeyframeSequenceFromID adopts an existing Objective-C object as a KeyframeSequence
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyframeSequenceFromID(id objc.ID) *KeyframeSequence {
 	if id == 0 {
 		return nil
 	}
-	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(id)}
+	x := &KeyframeSequence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a keyframe sequence with an initial set of values and times.
-//
-// NewKeyframeSequenceWithKeyframeValuesTimes creates a new [KeyframeSequence].
-func NewKeyframeSequenceWithKeyframeValuesTimes(values *foundation.NSArray[objc.ID], times *foundation.NSArray[*foundation.NSNumber]) *KeyframeSequence {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKKeyframeSequence")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyframeValues:times:"), values.Ptr(), times.Ptr())
-	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(_id)}
+// keyframeSequenceAdopt wraps an Objective-C object that this code just created as a
+// KeyframeSequence (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyframeSequenceAdopt(id objc.ID) *KeyframeSequence {
+	if id == 0 {
+		return nil
+	}
+	x := &KeyframeSequence{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new keyframe sequence.
-//
-// NewKeyframeSequenceWithCapacity creates a new [KeyframeSequence].
-func NewKeyframeSequenceWithCapacity(numItems uint) *KeyframeSequence {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKKeyframeSequence")), objc.RegisterName("alloc"))
+// Description returns the object's -description text.
+func (x *KeyframeSequence) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyframeSequence) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyframeSequence) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyframeSequence) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewKeyframeSequenceWithKeyframeValuesTimes initializes a keyframe sequence with an initial set of values and times.
+func NewKeyframeSequenceWithKeyframeValuesTimes(values obj.Object, times []obj.Object) *KeyframeSequence {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKKeyframeSequence")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyframeValues:times:"), objref.IDOf(values), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return keyframeSequenceAdopt(_id)
+}
+
+// NewKeyframeSequenceWithCapacity initializes a new keyframe sequence.
+func NewKeyframeSequenceWithCapacity(numItems int) *KeyframeSequence {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKKeyframeSequence")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
-	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(_id)}
+	return keyframeSequenceAdopt(_id)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
-//
-// NewKeyframeSequenceWithCoder creates a new [KeyframeSequence].
-func NewKeyframeSequenceWithCoder(aDecoder *foundation.NSCoder) *KeyframeSequence {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKKeyframeSequence")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(_id)}
+// NewKeyframeSequenceWithCoder support coding and decoding via NSKeyedArchiver.
+func NewKeyframeSequenceWithCoder(aDecoder obj.Object) *KeyframeSequence {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKKeyframeSequence")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return keyframeSequenceAdopt(_id)
 }
 
-// The mode used to determine how values for times between the keyframes are calculated.
-//
-// WithInterpolationMode sets the interpolationMode property and returns the receiver for chaining.
-func (x *KeyframeSequence) WithInterpolationMode(interpolationMode SKInterpolationMode) *KeyframeSequence {
-	x.inner.SetInterpolationMode(raw.SKInterpolationMode(interpolationMode))
+// WithInterpolationMode the mode used to determine how values for times between the keyframes are calculated.
+func (x *KeyframeSequence) WithInterpolationMode(interpolationMode InterpolationMode) *KeyframeSequence {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationMode:"), interpolationMode)
 	return x
 }
 
-// The mode used to determine how the keyframe sequence repeats.
-//
-// WithRepeatMode sets the repeatMode property and returns the receiver for chaining.
-func (x *KeyframeSequence) WithRepeatMode(repeatMode SKRepeatMode) *KeyframeSequence {
-	x.inner.SetRepeatMode(raw.SKRepeatMode(repeatMode))
+// WithRepeatMode the mode used to determine how the keyframe sequence repeats.
+func (x *KeyframeSequence) WithRepeatMode(repeatMode RepeatMode) *KeyframeSequence {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatMode:"), repeatMode)
 	return x
 }
 
-// The number of keyframes in the sequence.
-//
-// Count calls the underlying Count.
-func (x *KeyframeSequence) Count() uint {
-	return x.inner.Count()
+// Count the number of keyframes in the sequence.
+func (x *KeyframeSequence) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// Adds a keyframe to the sequence.
-//
-// AddKeyframeValueTime calls the underlying AddKeyframeValueTime.
-func (x *KeyframeSequence) AddKeyframeValueTime(value objc.ID, time_ float64) {
-	x.inner.AddKeyframeValueTime(value, time_)
+// AddKeyframeValueTime adds a keyframe to the sequence.
+func (x *KeyframeSequence) AddKeyframeValueTime(value obj.Object, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addKeyframeValue:time:"), objref.IDOf(value), time_)
 }
 
-// Removes the last value in the sequence.
-//
-// RemoveLastKeyframe calls the underlying RemoveLastKeyframe.
+// RemoveLastKeyframe removes the last value in the sequence.
 func (x *KeyframeSequence) RemoveLastKeyframe() {
-	x.inner.RemoveLastKeyframe()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLastKeyframe"))
 }
 
-// Removes a keyframe from the sequence.
-//
-// RemoveKeyframeAtIndex calls the underlying RemoveKeyframeAtIndex.
-func (x *KeyframeSequence) RemoveKeyframeAtIndex(index uint) {
-	x.inner.RemoveKeyframeAtIndex(index)
+// RemoveKeyframeAtIndex removes a keyframe from the sequence.
+func (x *KeyframeSequence) RemoveKeyframeAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeKeyframeAtIndex:"), index)
 }
 
-// Changes the value for a specific keyframe.
-//
-// SetKeyframeValueForIndex calls the underlying SetKeyframeValueForIndex.
-func (x *KeyframeSequence) SetKeyframeValueForIndex(value objc.ID, index uint) {
-	x.inner.SetKeyframeValueForIndex(value, index)
+// SetKeyframeValueForIndex changes the value for a specific keyframe.
+func (x *KeyframeSequence) SetKeyframeValueForIndex(value obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeValue:forIndex:"), objref.IDOf(value), index)
 }
 
-// Changes the time for a specific keyframe.
-//
-// SetKeyframeTimeForIndex calls the underlying SetKeyframeTimeForIndex.
-func (x *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index uint) {
-	x.inner.SetKeyframeTimeForIndex(time_, index)
+// SetKeyframeTimeForIndex changes the time for a specific keyframe.
+func (x *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeTime:forIndex:"), time_, index)
 }
 
-// Replaces a keyframe in the sequence with a new keyframe.
-//
-// SetKeyframeValueTimeForIndex calls the underlying SetKeyframeValueTimeForIndex.
-func (x *KeyframeSequence) SetKeyframeValueTimeForIndex(value objc.ID, time_ float64, index uint) {
-	x.inner.SetKeyframeValueTimeForIndex(value, time_, index)
+// SetKeyframeValueTimeForIndex replaces a keyframe in the sequence with a new keyframe.
+func (x *KeyframeSequence) SetKeyframeValueTimeForIndex(value obj.Object, time_ float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeValue:time:forIndex:"), objref.IDOf(value), time_, index)
 }
 
-// Gets the value for a keyframe in the sequence.
-//
-// GetKeyframeValueForIndex calls the underlying GetKeyframeValueForIndex.
-func (x *KeyframeSequence) GetKeyframeValueForIndex(index uint) objc.ID {
-	return x.inner.GetKeyframeValueForIndex(index)
+// GetKeyframeValueForIndex gets the value for a keyframe in the sequence.
+func (x *KeyframeSequence) GetKeyframeValueForIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getKeyframeValueForIndex:"), index)
+	return obj.Wrap(_r)
 }
 
-// Gets the time for a keyframe in the sequence.
-//
-// GetKeyframeTimeForIndex calls the underlying GetKeyframeTimeForIndex.
-func (x *KeyframeSequence) GetKeyframeTimeForIndex(index uint) float64 {
-	return x.inner.GetKeyframeTimeForIndex(index)
+// GetKeyframeTimeForIndex gets the time for a keyframe in the sequence.
+func (x *KeyframeSequence) GetKeyframeTimeForIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("getKeyframeTimeForIndex:"), index)
+	return _r
 }
 
-// Calculates the sample at a particular time.
-//
-// SampleAtTime calls the underlying SampleAtTime.
-func (x *KeyframeSequence) SampleAtTime(time_ float64) objc.ID {
-	return x.inner.SampleAtTime(time_)
+// SampleAtTime calculates the sample at a particular time.
+func (x *KeyframeSequence) SampleAtTime(time_ float64) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleAtTime:"), time_)
+	return obj.Wrap(_r)
 }
 
-// InterpolationMode calls the underlying InterpolationMode.
-func (x *KeyframeSequence) InterpolationMode() SKInterpolationMode {
-	return SKInterpolationMode(x.inner.InterpolationMode())
+// InterpolationMode wraps the corresponding Objective-C method.
+func (x *KeyframeSequence) InterpolationMode() InterpolationMode {
+	_r := objc.Send[InterpolationMode](objref.IDOf(x), objc.RegisterName("interpolationMode"))
+	return _r
 }
 
-// SetInterpolationMode calls the underlying SetInterpolationMode.
-func (x *KeyframeSequence) SetInterpolationMode(interpolationMode SKInterpolationMode) {
-	x.inner.SetInterpolationMode(raw.SKInterpolationMode(interpolationMode))
+// SetInterpolationMode wraps the corresponding Objective-C method.
+func (x *KeyframeSequence) SetInterpolationMode(interpolationMode InterpolationMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationMode:"), interpolationMode)
 }
 
-// RepeatMode calls the underlying RepeatMode.
-func (x *KeyframeSequence) RepeatMode() SKRepeatMode {
-	return SKRepeatMode(x.inner.RepeatMode())
+// RepeatMode wraps the corresponding Objective-C method.
+func (x *KeyframeSequence) RepeatMode() RepeatMode {
+	_r := objc.Send[RepeatMode](objref.IDOf(x), objc.RegisterName("repeatMode"))
+	return _r
 }
 
-// SetRepeatMode calls the underlying SetRepeatMode.
-func (x *KeyframeSequence) SetRepeatMode(repeatMode SKRepeatMode) {
-	x.inner.SetRepeatMode(raw.SKRepeatMode(repeatMode))
+// SetRepeatMode wraps the corresponding Objective-C method.
+func (x *KeyframeSequence) SetRepeatMode(repeatMode RepeatMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatMode:"), repeatMode)
 }
 
 // KeyframeSequenceable is the interface implemented by [KeyframeSequence], for mocking and DI.
 type KeyframeSequenceable interface {
-	Unwrap() *raw.SKKeyframeSequence
-	WithInterpolationMode(interpolationMode SKInterpolationMode) *KeyframeSequence
-	WithRepeatMode(repeatMode SKRepeatMode) *KeyframeSequence
-	Count() uint
-	AddKeyframeValueTime(value objc.ID, time_ float64)
+	obj.Object
+	WithInterpolationMode(interpolationMode InterpolationMode) *KeyframeSequence
+	WithRepeatMode(repeatMode RepeatMode) *KeyframeSequence
+	Count() int
+	AddKeyframeValueTime(value obj.Object, time_ float64)
 	RemoveLastKeyframe()
-	RemoveKeyframeAtIndex(index uint)
-	SetKeyframeValueForIndex(value objc.ID, index uint)
-	SetKeyframeTimeForIndex(time_ float64, index uint)
-	SetKeyframeValueTimeForIndex(value objc.ID, time_ float64, index uint)
-	GetKeyframeValueForIndex(index uint) objc.ID
-	GetKeyframeTimeForIndex(index uint) float64
-	SampleAtTime(time_ float64) objc.ID
-	InterpolationMode() SKInterpolationMode
-	SetInterpolationMode(interpolationMode SKInterpolationMode)
-	RepeatMode() SKRepeatMode
-	SetRepeatMode(repeatMode SKRepeatMode)
+	RemoveKeyframeAtIndex(index int)
+	SetKeyframeValueForIndex(value obj.Object, index int)
+	SetKeyframeTimeForIndex(time_ float64, index int)
+	SetKeyframeValueTimeForIndex(value obj.Object, time_ float64, index int)
+	GetKeyframeValueForIndex(index int) obj.Object
+	GetKeyframeTimeForIndex(index int) float64
+	SampleAtTime(time_ float64) obj.Object
+	InterpolationMode() InterpolationMode
+	SetInterpolationMode(interpolationMode InterpolationMode)
+	RepeatMode() RepeatMode
+	SetRepeatMode(repeatMode RepeatMode)
 }
 
 var _ KeyframeSequenceable = (*KeyframeSequence)(nil)

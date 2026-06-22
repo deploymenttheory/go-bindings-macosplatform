@@ -5,93 +5,128 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The details of an introductory offer or a promotional offer for an auto-renewable subscription.
+// ProductDiscount is an idiomatic wrapper over the Objective-C class SKProductDiscount.
 //
-// ProductDiscount wraps [raw.SKProductDiscount] with a fluent Go API.
+// The details of an introductory offer or a promotional offer for an auto-renewable subscription.
 type ProductDiscount struct {
-	inner *raw.SKProductDiscount
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKProductDiscount].
-func (x *ProductDiscount) Unwrap() *raw.SKProductDiscount { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProductDiscount) ID() objc.ID { return x.inner.Ptr() }
-
-// ProductDiscountFromID adopts an existing object pointer as a ProductDiscount (nil for 0).
+// ProductDiscountFromID adopts an existing Objective-C object as a ProductDiscount
+// (nil for 0), retaining it and registering a release finalizer.
 func ProductDiscountFromID(id objc.ID) *ProductDiscount {
 	if id == 0 {
 		return nil
 	}
-	return &ProductDiscount{inner: raw.SKProductDiscountFromID(id)}
+	x := &ProductDiscount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProductDiscount creates a new [ProductDiscount].
-func NewProductDiscount() *ProductDiscount {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductDiscount")), objc.RegisterName("new"))
-	return &ProductDiscount{inner: raw.SKProductDiscountFromID(_id)}
-}
-
-// Price calls the underlying Price.
-func (x *ProductDiscount) Price() *foundation.NSDecimalNumber {
-	return x.inner.Price()
-}
-
-// PriceLocale calls the underlying PriceLocale.
-func (x *ProductDiscount) PriceLocale() *foundation.NSLocale {
-	return x.inner.PriceLocale()
-}
-
-// Identifier calls the underlying Identifier.
-func (x *ProductDiscount) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SubscriptionPeriod calls the underlying SubscriptionPeriod.
-func (x *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
-	_r := x.inner.SubscriptionPeriod()
-	if _r == nil {
+// productDiscountAdopt wraps an Objective-C object that this code just created as a
+// ProductDiscount (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func productDiscountAdopt(id objc.ID) *ProductDiscount {
+	if id == 0 {
 		return nil
 	}
-	return &ProductSubscriptionPeriod{inner: _r}
+	x := &ProductDiscount{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NumberOfPeriods calls the underlying NumberOfPeriods.
-func (x *ProductDiscount) NumberOfPeriods() uint {
-	return x.inner.NumberOfPeriods()
+// Description returns the object's -description text.
+func (x *ProductDiscount) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// PaymentMode calls the underlying PaymentMode.
-func (x *ProductDiscount) PaymentMode() SKProductDiscountPaymentMode {
-	return SKProductDiscountPaymentMode(x.inner.PaymentMode())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProductDiscount) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Type calls the underlying Type.
-func (x *ProductDiscount) Type() SKProductDiscountType {
-	return SKProductDiscountType(x.inner.Type())
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProductDiscount) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductDiscount) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewProductDiscount creates a new ProductDiscount.
+func NewProductDiscount() *ProductDiscount {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKProductDiscount")), objc.RegisterName("new"))
+	return productDiscountAdopt(_id)
+}
+
+// Price wraps the corresponding Objective-C method.
+func (x *ProductDiscount) Price() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("price"))
+	return obj.Wrap(_r)
+}
+
+// PriceLocale wraps the corresponding Objective-C method.
+func (x *ProductDiscount) PriceLocale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priceLocale"))
+	return obj.Wrap(_r)
+}
+
+// Identifier wraps the corresponding Objective-C method.
+func (x *ProductDiscount) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SubscriptionPeriod wraps the corresponding Objective-C method.
+func (x *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionPeriod"))
+	return ProductSubscriptionPeriodFromID(_r)
+}
+
+// NumberOfPeriods wraps the corresponding Objective-C method.
+func (x *ProductDiscount) NumberOfPeriods() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfPeriods"))
+	return _r
+}
+
+// PaymentMode wraps the corresponding Objective-C method.
+func (x *ProductDiscount) PaymentMode() ProductDiscountPaymentMode {
+	_r := objc.Send[ProductDiscountPaymentMode](objref.IDOf(x), objc.RegisterName("paymentMode"))
+	return _r
+}
+
+// Type wraps the corresponding Objective-C method.
+func (x *ProductDiscount) Type() ProductDiscountType {
+	_r := objc.Send[ProductDiscountType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // ProductDiscountable is the interface implemented by [ProductDiscount], for mocking and DI.
 type ProductDiscountable interface {
-	Unwrap() *raw.SKProductDiscount
-	Price() *foundation.NSDecimalNumber
-	PriceLocale() *foundation.NSLocale
+	obj.Object
+	Price() obj.Object
+	PriceLocale() obj.Object
 	Identifier() string
 	SubscriptionPeriod() *ProductSubscriptionPeriod
-	NumberOfPeriods() uint
-	PaymentMode() SKProductDiscountPaymentMode
-	Type() SKProductDiscountType
+	NumberOfPeriods() int
+	PaymentMode() ProductDiscountPaymentMode
+	Type() ProductDiscountType
 }
 
 var _ ProductDiscountable = (*ProductDiscount)(nil)

@@ -5,67 +5,72 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
+// SymbolBounceEffect is an idiomatic wrapper over the Objective-C class NSSymbolBounceEffect.
 //
-// SymbolBounceEffect wraps [raw.NSSymbolBounceEffect] with a fluent Go API.
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
 type SymbolBounceEffect struct {
-	inner *raw.NSSymbolBounceEffect
+	SymbolEffect
 }
 
-// Unwrap returns the underlying [raw.NSSymbolBounceEffect].
-func (x *SymbolBounceEffect) Unwrap() *raw.NSSymbolBounceEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolBounceEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolBounceEffectFromID adopts an existing object pointer as a SymbolBounceEffect (nil for 0).
+// SymbolBounceEffectFromID adopts an existing Objective-C object as a SymbolBounceEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolBounceEffectFromID(id objc.ID) *SymbolBounceEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolBounceEffect{inner: raw.NSSymbolBounceEffectFromID(id)}
+	x := &SymbolBounceEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolBounceEffect creates a new [SymbolBounceEffect].
+// symbolBounceEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolBounceEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolBounceEffectAdopt(id objc.ID) *SymbolBounceEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolBounceEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolBounceEffect creates a new SymbolBounceEffect.
 func NewSymbolBounceEffect() *SymbolBounceEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolBounceEffect")), objc.RegisterName("new"))
-	return &SymbolBounceEffect{inner: raw.NSSymbolBounceEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolBounceEffect")), objc.RegisterName("new"))
+	return symbolBounceEffectAdopt(_id)
 }
 
-// An effect that bounces each layer separately.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
+// EffectWithByLayer an effect that bounces each layer separately.
 func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolBounceEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolBounceEffectFromID(_r)
 }
 
-// An effect that bounces all layers simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+// EffectWithWholeSymbol an effect that bounces all layers simultaneously.
 func (x *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolBounceEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolBounceEffectFromID(_r)
 }
-
-func (x *SymbolBounceEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolBounceEffectable is the interface implemented by [SymbolBounceEffect], for mocking and DI.
 type SymbolBounceEffectable interface {
-	Unwrap() *raw.NSSymbolBounceEffect
+	obj.Object
 	EffectWithByLayer() *SymbolBounceEffect
 	EffectWithWholeSymbol() *SymbolBounceEffect
 }
 
 var _ SymbolBounceEffectable = (*SymbolBounceEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolBounceEffect)(nil)

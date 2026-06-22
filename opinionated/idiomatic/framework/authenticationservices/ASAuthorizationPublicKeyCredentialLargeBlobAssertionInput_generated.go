@@ -5,70 +5,104 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that represents input for the binary large object extension in passkey assertion requests.
+// AuthorizationPublicKeyCredentialLargeBlobAssertionInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput.
 //
-// AuthorizationPublicKeyCredentialLargeBlobAssertionInput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput] with a fluent Go API.
+// A type that represents input for the binary large object extension in passkey assertion requests.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionInput struct {
-	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput].
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialLargeBlobAssertionInput (nil for 0).
+// AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID adopts an existing Objective-C object as a AuthorizationPublicKeyCredentialLargeBlobAssertionInput
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(id)}
-}
-
-// NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation creates a new [AuthorizationPublicKeyCredentialLargeBlobAssertionInput].
-func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(operation ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOperation:"), raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation(operation))
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_id)}
-}
-
-// WithDataToWrite sets the dataToWrite property and returns the receiver for chaining.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite *foundation.NSData) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	x.inner.SetDataToWrite(dataToWrite)
+	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Operation calls the underlying Operation.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
-	return ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation(x.inner.Operation())
+// authorizationPublicKeyCredentialLargeBlobAssertionInputAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPublicKeyCredentialLargeBlobAssertionInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPublicKeyCredentialLargeBlobAssertionInputAdopt(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DataToWrite calls the underlying DataToWrite.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() *foundation.NSData {
-	return x.inner.DataToWrite()
+// Description returns the object's -description text.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetDataToWrite calls the underlying SetDataToWrite.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) SetDataToWrite(dataToWrite *foundation.NSData) {
-	x.inner.SetDataToWrite(dataToWrite)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation creates a new AuthorizationPublicKeyCredentialLargeBlobAssertionInput.
+func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(operation AuthorizationPublicKeyCredentialLargeBlobAssertionOperation) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOperation:"), operation)
+	return authorizationPublicKeyCredentialLargeBlobAssertionInputAdopt(_id)
+}
+
+// WithDataToWrite sets the property and returns the receiver so calls can be chained.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
+	return x
+}
+
+// Operation wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
+	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobAssertionOperation](objref.IDOf(x), objc.RegisterName("operation"))
+	return _r
+}
+
+// DataToWrite wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataToWrite"))
+	return obj.Wrap(_r)
+}
+
+// SetDataToWrite wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) SetDataToWrite(dataToWrite obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
 }
 
 // AuthorizationPublicKeyCredentialLargeBlobAssertionInputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobAssertionInput], for mocking and DI.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionInputable interface {
-	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput
-	WithDataToWrite(dataToWrite *foundation.NSData) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
-	Operation() ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation
-	DataToWrite() *foundation.NSData
-	SetDataToWrite(dataToWrite *foundation.NSData)
+	obj.Object
+	WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
+	Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation
+	DataToWrite() obj.Object
+	SetDataToWrite(dataToWrite obj.Object)
 }
 
 var _ AuthorizationPublicKeyCredentialLargeBlobAssertionInputable = (*AuthorizationPublicKeyCredentialLargeBlobAssertionInput)(nil)

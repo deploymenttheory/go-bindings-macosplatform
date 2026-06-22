@@ -5,101 +5,111 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Options that configure how effects apply to symbol-based images.
+// SymbolEffectOptions is an idiomatic wrapper over the Objective-C class NSSymbolEffectOptions.
 //
-// SymbolEffectOptions wraps [raw.NSSymbolEffectOptions] with a fluent Go API.
+// Options that configure how effects apply to symbol-based images.
 type SymbolEffectOptions struct {
-	inner *raw.NSSymbolEffectOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolEffectOptions].
-func (x *SymbolEffectOptions) Unwrap() *raw.NSSymbolEffectOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolEffectOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolEffectOptionsFromID adopts an existing object pointer as a SymbolEffectOptions (nil for 0).
+// SymbolEffectOptionsFromID adopts an existing Objective-C object as a SymbolEffectOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolEffectOptionsFromID(id objc.ID) *SymbolEffectOptions {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolEffectOptions{inner: raw.NSSymbolEffectOptionsFromID(id)}
+	x := &SymbolEffectOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolEffectOptions creates a new [SymbolEffectOptions].
+// symbolEffectOptionsAdopt wraps an Objective-C object that this code just created as a
+// SymbolEffectOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolEffectOptionsAdopt(id objc.ID) *SymbolEffectOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolEffectOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolEffectOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolEffectOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolEffectOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolEffectOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSymbolEffectOptions creates a new SymbolEffectOptions.
 func NewSymbolEffectOptions() *SymbolEffectOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolEffectOptions")), objc.RegisterName("new"))
-	return &SymbolEffectOptions{inner: raw.NSSymbolEffectOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("new"))
+	return symbolEffectOptionsAdopt(_id)
 }
 
-// A set of effect options that prefers to repeat indefinitely.
-//
-// OptionsWithRepeating calls the underlying OptionsWithRepeating.
+// OptionsWithRepeating a set of effect options that prefers to repeat indefinitely.
 func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
-	_r := x.inner.OptionsWithRepeating()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolEffectOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeating"))
+	return SymbolEffectOptionsFromID(_r)
 }
 
-// A set of effect options that prefers to not repeat.
-//
-// OptionsWithNonRepeating calls the underlying OptionsWithNonRepeating.
+// OptionsWithNonRepeating a set of effect options that prefers to not repeat.
 func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
-	_r := x.inner.OptionsWithNonRepeating()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolEffectOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithNonRepeating"))
+	return SymbolEffectOptionsFromID(_r)
 }
 
-// Creates a set of effect options with a preferred repeat count.
-//
-// OptionsWithRepeatCount calls the underlying OptionsWithRepeatCount.
+// OptionsWithRepeatCount creates a set of effect options with a preferred repeat count.
 func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
-	_r := x.inner.OptionsWithRepeatCount(count)
-	if _r == nil {
-		return nil
-	}
-	return &SymbolEffectOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeatCount:"), count)
+	return SymbolEffectOptionsFromID(_r)
 }
 
-// Creates a set of effect options with a preferred speed multiplier.
-//
-// OptionsWithSpeed calls the underlying OptionsWithSpeed.
+// OptionsWithSpeed creates a set of effect options with a preferred speed multiplier.
 func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
-	_r := x.inner.OptionsWithSpeed(speed)
-	if _r == nil {
-		return nil
-	}
-	return &SymbolEffectOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithSpeed:"), speed)
+	return SymbolEffectOptionsFromID(_r)
 }
 
-// Return a copy of the options setting a preferred repeat behavior.
-//
-// OptionsWithRepeatBehavior calls the underlying OptionsWithRepeatBehavior.
-func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *raw.NSSymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
-	_r := x.inner.OptionsWithRepeatBehavior(behavior)
-	if _r == nil {
-		return nil
-	}
-	return &SymbolEffectOptions{inner: _r}
+// OptionsWithRepeatBehavior return a copy of the options setting a preferred repeat behavior.
+func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
+	return SymbolEffectOptionsFromID(_r)
 }
 
 // SymbolEffectOptionsable is the interface implemented by [SymbolEffectOptions], for mocking and DI.
 type SymbolEffectOptionsable interface {
-	Unwrap() *raw.NSSymbolEffectOptions
+	obj.Object
 	OptionsWithRepeating() *SymbolEffectOptions
 	OptionsWithNonRepeating() *SymbolEffectOptions
 	OptionsWithRepeatCount(count int) *SymbolEffectOptions
 	OptionsWithSpeed(speed float64) *SymbolEffectOptions
-	OptionsWithRepeatBehavior(behavior *raw.NSSymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions
+	OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions
 }
 
 var _ SymbolEffectOptionsable = (*SymbolEffectOptions)(nil)

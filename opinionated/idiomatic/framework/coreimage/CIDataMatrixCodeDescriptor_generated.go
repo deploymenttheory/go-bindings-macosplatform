@@ -5,81 +5,87 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete subclass the Core Image Barcode Descriptor that represents an Data Matrix code symbol.
+// DataMatrixCodeDescriptor is an idiomatic wrapper over the Objective-C class CIDataMatrixCodeDescriptor.
 //
-// DataMatrixCodeDescriptor wraps [raw.CIDataMatrixCodeDescriptor] with a fluent Go API.
+// It embeds [BarcodeDescriptor], promoting that type's methods.
+//
+// A concrete subclass the Core Image Barcode Descriptor that represents an Data Matrix code symbol.
 type DataMatrixCodeDescriptor struct {
-	inner *raw.CIDataMatrixCodeDescriptor
+	BarcodeDescriptor
 }
 
-// Unwrap returns the underlying [raw.CIDataMatrixCodeDescriptor].
-func (x *DataMatrixCodeDescriptor) Unwrap() *raw.CIDataMatrixCodeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DataMatrixCodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// DataMatrixCodeDescriptorFromID adopts an existing object pointer as a DataMatrixCodeDescriptor (nil for 0).
+// DataMatrixCodeDescriptorFromID adopts an existing Objective-C object as a DataMatrixCodeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func DataMatrixCodeDescriptorFromID(id objc.ID) *DataMatrixCodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(id)}
+	x := &DataMatrixCodeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a Data Matrix code descriptor for the given payload and parameters.
-//
-// NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion creates a new [DataMatrixCodeDescriptor].
-func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIDataMatrixCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:"), errorCorrectedPayload.Ptr(), rowCount, columnCount, raw.CIDataMatrixCodeECCVersion(eccVersion))
-	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(_id)}
+// dataMatrixCodeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// DataMatrixCodeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dataMatrixCodeDescriptorAdopt(id objc.ID) *DataMatrixCodeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &DataMatrixCodeDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
-//
-// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
-func (x *DataMatrixCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
-	return x.inner.ErrorCorrectedPayload()
+// NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion initializes a Data Matrix code descriptor for the given payload and parameters.
+func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload obj.Object, rowCount int, columnCount int, eccVersion DataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIDataMatrixCodeDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:"), objref.IDOf(errorCorrectedPayload), rowCount, columnCount, eccVersion)
+	return dataMatrixCodeDescriptorAdopt(_id)
 }
 
-// The number of rows in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
-//
-// RowCount calls the underlying RowCount.
+// ErrorCorrectedPayload the error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
+func (x *DataMatrixCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+	return obj.Wrap(_r)
+}
+
+// RowCount the number of rows in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
 func (x *DataMatrixCodeDescriptor) RowCount() int {
-	return x.inner.RowCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowCount"))
+	return _r
 }
 
-// The number of columns in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
-//
-// ColumnCount calls the underlying ColumnCount.
+// ColumnCount the number of columns in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
 func (x *DataMatrixCodeDescriptor) ColumnCount() int {
-	return x.inner.ColumnCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnCount"))
+	return _r
 }
 
-// The error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
-//
-// EccVersion calls the underlying EccVersion.
-func (x *DataMatrixCodeDescriptor) EccVersion() CIDataMatrixCodeECCVersion {
-	return CIDataMatrixCodeECCVersion(x.inner.EccVersion())
-}
-
-func (x *DataMatrixCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
-	return &x.inner.CIBarcodeDescriptor
+// EccVersion the error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
+func (x *DataMatrixCodeDescriptor) EccVersion() DataMatrixCodeECCVersion {
+	_r := objc.Send[DataMatrixCodeECCVersion](objref.IDOf(x), objc.RegisterName("eccVersion"))
+	return _r
 }
 
 // DataMatrixCodeDescriptorable is the interface implemented by [DataMatrixCodeDescriptor], for mocking and DI.
 type DataMatrixCodeDescriptorable interface {
-	Unwrap() *raw.CIDataMatrixCodeDescriptor
-	ErrorCorrectedPayload() *foundation.NSData
+	obj.Object
+	ErrorCorrectedPayload() obj.Object
 	RowCount() int
 	ColumnCount() int
-	EccVersion() CIDataMatrixCodeECCVersion
+	EccVersion() DataMatrixCodeECCVersion
 }
 
 var _ DataMatrixCodeDescriptorable = (*DataMatrixCodeDescriptor)(nil)
+
+var _ BarcodeDescriptorProvider = (*DataMatrixCodeDescriptor)(nil)

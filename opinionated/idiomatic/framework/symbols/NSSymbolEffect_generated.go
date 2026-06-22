@@ -5,43 +5,79 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for effects that you can apply to a symbol-based image.
+// SymbolEffect is an idiomatic wrapper over the Objective-C class NSSymbolEffect.
 //
-// SymbolEffect wraps [raw.NSSymbolEffect] with a fluent Go API.
+// SymbolEffect is an abstract base — you do not construct it directly. Construct one of [SymbolAppearEffect], [SymbolBounceEffect], [SymbolBreatheEffect], [SymbolDisappearEffect], [SymbolDrawOffEffect], [SymbolDrawOnEffect], [SymbolPulseEffect], [SymbolRotateEffect], [SymbolScaleEffect], [SymbolVariableColorEffect], [SymbolWiggleEffect] and pass it where a SymbolEffect is accepted.
+//
+// An abstract base class for effects that you can apply to a symbol-based image.
 type SymbolEffect struct {
-	inner *raw.NSSymbolEffect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolEffect].
-func (x *SymbolEffect) Unwrap() *raw.NSSymbolEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolEffectFromID adopts an existing object pointer as a SymbolEffect (nil for 0).
+// SymbolEffectFromID adopts an existing Objective-C object as a SymbolEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolEffectFromID(id objc.ID) *SymbolEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolEffect{inner: raw.NSSymbolEffectFromID(id)}
+	x := &SymbolEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolEffect creates a new [SymbolEffect].
-func NewSymbolEffect() *SymbolEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolEffect")), objc.RegisterName("new"))
-	return &SymbolEffect{inner: raw.NSSymbolEffectFromID(_id)}
+// symbolEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolEffectAdopt(id objc.ID) *SymbolEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SymbolEffect) asSymbolEffect() *raw.NSSymbolEffect { return x.inner }
+// Description returns the object's -description text.
+func (x *SymbolEffect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolEffect) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // SymbolEffectable is the interface implemented by [SymbolEffect], for mocking and DI.
 type SymbolEffectable interface {
-	Unwrap() *raw.NSSymbolEffect
+	obj.Object
 }
 
 var _ SymbolEffectable = (*SymbolEffect)(nil)
+
+// isSymbolEffect marks SymbolEffect — and, by embedding promotion, its
+// subclasses — as a member of the SymbolEffect hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SymbolEffect) isSymbolEffect() {}
+
+var _ SymbolEffectProvider = (*SymbolEffect)(nil)

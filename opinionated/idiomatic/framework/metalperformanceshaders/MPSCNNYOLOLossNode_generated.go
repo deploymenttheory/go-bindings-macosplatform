@@ -5,74 +5,73 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a YOLO loss kernel.
+// CNNYOLOLossNode is an idiomatic wrapper over the Objective-C class MPSCNNYOLOLossNode.
 //
-// CNNYOLOLossNode wraps [raw.MPSCNNYOLOLossNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a YOLO loss kernel.
 type CNNYOLOLossNode struct {
-	inner *raw.MPSCNNYOLOLossNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNYOLOLossNode].
-func (x *CNNYOLOLossNode) Unwrap() *raw.MPSCNNYOLOLossNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNYOLOLossNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNYOLOLossNodeFromID adopts an existing object pointer as a CNNYOLOLossNode (nil for 0).
+// CNNYOLOLossNodeFromID adopts an existing Objective-C object as a CNNYOLOLossNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNYOLOLossNodeFromID(id objc.ID) *CNNYOLOLossNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNYOLOLossNode{inner: raw.MPSCNNYOLOLossNodeFromID(id)}
-}
-
-// NewCNNYOLOLossNodeWithSourceLossDescriptor creates a new [CNNYOLOLossNode].
-func NewCNNYOLOLossNodeWithSourceLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNYOLOLossDescriptor) *CNNYOLOLossNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNYOLOLossNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:lossDescriptor:"), source.Ptr(), descriptor.Ptr())
-	return &CNNYOLOLossNode{inner: raw.MPSCNNYOLOLossNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNYOLOLossNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNYOLOLossNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNYOLOLossNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNYOLOLossNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNYOLOLossNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNYOLOLossNodeAdopt(id objc.ID) *CNNYOLOLossNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNYOLOLossNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNYOLOLossNodeWithSourceLossDescriptor creates a new CNNYOLOLossNode.
+func NewCNNYOLOLossNodeWithSourceLossDescriptor(source obj.Object, descriptor obj.Object) *CNNYOLOLossNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNYOLOLossNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:lossDescriptor:"), objref.IDOf(source), objref.IDOf(descriptor))
+	return cNNYOLOLossNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNYOLOLossNode) WithLabel(label string) *CNNYOLOLossNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract Get the input node for labes and weights, for example to set the handle
-//
-// InputLabels calls the underlying InputLabels.
-func (x *CNNYOLOLossNode) InputLabels() *mpsneuralnetwork.MPSNNLabelsNode {
-	return x.inner.InputLabels()
-}
-
-func (x *CNNYOLOLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+// InputLabels get the input node for labes and weights, for example to set the handle
+func (x *CNNYOLOLossNode) InputLabels() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputLabels"))
+	return obj.Wrap(_r)
 }
 
 // CNNYOLOLossNodeable is the interface implemented by [CNNYOLOLossNode], for mocking and DI.
 type CNNYOLOLossNodeable interface {
-	Unwrap() *raw.MPSCNNYOLOLossNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNYOLOLossNode
+	obj.Object
 	WithLabel(label string) *CNNYOLOLossNode
-	InputLabels() *mpsneuralnetwork.MPSNNLabelsNode
+	InputLabels() obj.Object
 }
 
 var _ CNNYOLOLossNodeable = (*CNNYOLOLossNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNYOLOLossNode)(nil)

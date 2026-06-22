@@ -5,65 +5,72 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMXPathExpression wraps [raw.DOMXPathExpression] with a fluent Go API.
+// DOMXPathExpression is an idiomatic wrapper over the Objective-C class DOMXPathExpression.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMXPathExpression struct {
-	inner *raw.DOMXPathExpression
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMXPathExpression].
-func (x *DOMXPathExpression) Unwrap() *raw.DOMXPathExpression { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMXPathExpression) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMXPathExpressionFromID adopts an existing object pointer as a DOMXPathExpression (nil for 0).
+// DOMXPathExpressionFromID adopts an existing Objective-C object as a DOMXPathExpression
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMXPathExpressionFromID(id objc.ID) *DOMXPathExpression {
 	if id == 0 {
 		return nil
 	}
-	return &DOMXPathExpression{inner: raw.DOMXPathExpressionFromID(id)}
+	x := &DOMXPathExpression{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMXPathExpression creates a new [DOMXPathExpression].
+// dOMXPathExpressionAdopt wraps an Objective-C object that this code just created as a
+// DOMXPathExpression (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMXPathExpressionAdopt(id objc.ID) *DOMXPathExpression {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMXPathExpression{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMXPathExpression creates a new DOMXPathExpression.
 func NewDOMXPathExpression() *DOMXPathExpression {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMXPathExpression")), objc.RegisterName("new"))
-	return &DOMXPathExpression{inner: raw.DOMXPathExpressionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMXPathExpression")), objc.RegisterName("new"))
+	return dOMXPathExpressionAdopt(_id)
 }
 
-// EvaluateTypeInResult calls the underlying EvaluateTypeInResult.
-func (x *DOMXPathExpression) EvaluateTypeInResult(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult {
-	_r := x.inner.EvaluateTypeInResult(contextNode, type_, inResult)
-	if _r == nil {
-		return nil
-	}
-	return &DOMXPathResult{inner: _r}
+// EvaluateTypeInResult wraps the corresponding Objective-C method.
+func (x *DOMXPathExpression) EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate:type:inResult:"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
+	return DOMXPathResultFromID(_r)
 }
 
-// Evaluate calls the underlying Evaluate.
-func (x *DOMXPathExpression) Evaluate(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult {
-	_r := x.inner.Evaluate(contextNode, type_, inResult)
-	if _r == nil {
-		return nil
-	}
-	return &DOMXPathResult{inner: _r}
-}
-
-func (x *DOMXPathExpression) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMXPathExpression) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// Evaluate wraps the corresponding Objective-C method.
+func (x *DOMXPathExpression) Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate:::"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
+	return DOMXPathResultFromID(_r)
 }
 
 // DOMXPathExpressionable is the interface implemented by [DOMXPathExpression], for mocking and DI.
 type DOMXPathExpressionable interface {
-	Unwrap() *raw.DOMXPathExpression
-	EvaluateTypeInResult(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult
-	Evaluate(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult
+	obj.Object
+	EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult
+	Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult
 }
 
 var _ DOMXPathExpressionable = (*DOMXPathExpression)(nil)
+
+var _ DOMObjectProvider = (*DOMXPathExpression)(nil)
+
+var _ WebScriptObjectProvider = (*DOMXPathExpression)(nil)

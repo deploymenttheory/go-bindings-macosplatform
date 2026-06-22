@@ -5,104 +5,137 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSoftwareDiagnosticsClusterSoftwareFaultEvent wraps [raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent] with a fluent Go API.
+// MTRSoftwareDiagnosticsClusterSoftwareFaultEvent is an idiomatic wrapper over the Objective-C class MTRSoftwareDiagnosticsClusterSoftwareFaultEvent.
 type MTRSoftwareDiagnosticsClusterSoftwareFaultEvent struct {
-	inner *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent].
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Unwrap() *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID adopts an existing object pointer as a MTRSoftwareDiagnosticsClusterSoftwareFaultEvent (nil for 0).
+// MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID adopts an existing Objective-C object as a MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID(id objc.ID) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{inner: raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID(id)}
+	x := &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent creates a new [MTRSoftwareDiagnosticsClusterSoftwareFaultEvent].
+// mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSoftwareDiagnosticsClusterSoftwareFaultEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt(id objc.ID) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent creates a new MTRSoftwareDiagnosticsClusterSoftwareFaultEvent.
 func NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent() *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSoftwareDiagnosticsClusterSoftwareFaultEvent")), objc.RegisterName("new"))
-	return &MTRSoftwareDiagnosticsClusterSoftwareFaultEvent{inner: raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSoftwareDiagnosticsClusterSoftwareFaultEvent")), objc.RegisterName("new"))
+	return mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt(_id)
 }
 
-// WithId sets the id_ property and returns the receiver for chaining.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	x.inner.SetId(id_)
+// WithId sets the property and returns the receiver so calls can be chained.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithName(name string) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithFaultRecording sets the faultRecording property and returns the receiver for chaining.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(faultRecording *foundation.NSData) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	x.inner.SetFaultRecording(faultRecording)
+// WithFaultRecording sets the property and returns the receiver so calls can be chained.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(faultRecording obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultRecording:"), objref.IDOf(faultRecording))
 	return x
 }
 
-// Id calls the underlying Id.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Id() *foundation.NSNumber {
-	return x.inner.Id()
+// Id wraps the corresponding Objective-C method.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Id() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("id"))
+	return obj.Wrap(_r)
 }
 
-// SetId calls the underlying SetId.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetId(id_ *foundation.NSNumber) {
-	x.inner.SetId(id_)
+// SetId wraps the corresponding Objective-C method.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetId(id_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// FaultRecording calls the underlying FaultRecording.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() *foundation.NSData {
-	return x.inner.FaultRecording()
+// FaultRecording wraps the corresponding Objective-C method.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("faultRecording"))
+	return obj.Wrap(_r)
 }
 
-// SetFaultRecording calls the underlying SetFaultRecording.
-func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetFaultRecording(faultRecording *foundation.NSData) {
-	x.inner.SetFaultRecording(faultRecording)
+// SetFaultRecording wraps the corresponding Objective-C method.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetFaultRecording(faultRecording obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultRecording:"), objref.IDOf(faultRecording))
 }
 
 // MTRSoftwareDiagnosticsClusterSoftwareFaultEventable is the interface implemented by [MTRSoftwareDiagnosticsClusterSoftwareFaultEvent], for mocking and DI.
 type MTRSoftwareDiagnosticsClusterSoftwareFaultEventable interface {
-	Unwrap() *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
-	WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	obj.Object
+	WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
 	WithName(name string) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
-	WithFaultRecording(faultRecording *foundation.NSData) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
-	Id() *foundation.NSNumber
-	SetId(id_ *foundation.NSNumber)
+	WithFaultRecording(faultRecording obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	Id() obj.Object
+	SetId(id_ obj.Object)
 	Name() string
 	SetName(name string)
-	FaultRecording() *foundation.NSData
-	SetFaultRecording(faultRecording *foundation.NSData)
+	FaultRecording() obj.Object
+	SetFaultRecording(faultRecording obj.Object)
 }
 
 var _ MTRSoftwareDiagnosticsClusterSoftwareFaultEventable = (*MTRSoftwareDiagnosticsClusterSoftwareFaultEvent)(nil)

@@ -5,20 +5,23 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AudioUnitProvider is implemented by AudioUnit and any idiomatic type wrapping a AUAudioUnit subclass.
+// AudioUnitProvider is accepted wherever a AUAudioUnit (or one of its subclasses) is expected.
 type AudioUnitProvider interface {
-	asAudioUnit() *raw.AUAudioUnit
+	objref.Object
+	isAudioUnit()
 }
 
-// ParameterGroupProvider is implemented by ParameterGroup and any idiomatic type wrapping a AUParameterGroup subclass.
+// ParameterGroupProvider is accepted wherever a AUParameterGroup (or one of its subclasses) is expected.
 type ParameterGroupProvider interface {
-	asParameterGroup() *raw.AUParameterGroup
+	objref.Object
+	isParameterGroup()
 }
 
-// ParameterNodeProvider is implemented by ParameterNode and any idiomatic type wrapping a AUParameterNode subclass.
+// ParameterNodeProvider is accepted wherever a AUParameterNode (or one of its subclasses) is expected.
 type ParameterNodeProvider interface {
-	asParameterNode() *raw.AUParameterNode
+	objref.Object
+	isParameterNode()
 }

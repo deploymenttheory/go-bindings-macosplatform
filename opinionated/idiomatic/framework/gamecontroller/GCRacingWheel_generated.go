@@ -5,92 +5,119 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that represents a physical racing wheel controller connected to a device.
+// RacingWheel is an idiomatic wrapper over the Objective-C class GCRacingWheel.
 //
-// RacingWheel wraps [raw.GCRacingWheel] with a fluent Go API.
+// An object that represents a physical racing wheel controller connected to a device.
 type RacingWheel struct {
-	inner *raw.GCRacingWheel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCRacingWheel].
-func (x *RacingWheel) Unwrap() *raw.GCRacingWheel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RacingWheel) ID() objc.ID { return x.inner.Ptr() }
-
-// RacingWheelFromID adopts an existing object pointer as a RacingWheel (nil for 0).
+// RacingWheelFromID adopts an existing Objective-C object as a RacingWheel
+// (nil for 0), retaining it and registering a release finalizer.
 func RacingWheelFromID(id objc.ID) *RacingWheel {
 	if id == 0 {
 		return nil
 	}
-	return &RacingWheel{inner: raw.GCRacingWheelFromID(id)}
+	x := &RacingWheel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRacingWheel creates a new [RacingWheel].
+// racingWheelAdopt wraps an Objective-C object that this code just created as a
+// RacingWheel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func racingWheelAdopt(id objc.ID) *RacingWheel {
+	if id == 0 {
+		return nil
+	}
+	x := &RacingWheel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RacingWheel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RacingWheel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RacingWheel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RacingWheel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRacingWheel creates a new RacingWheel.
 func NewRacingWheel() *RacingWheel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCRacingWheel")), objc.RegisterName("new"))
-	return &RacingWheel{inner: raw.GCRacingWheelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCRacingWheel")), objc.RegisterName("new"))
+	return racingWheelAdopt(_id)
 }
 
-// Starts receiving events from the racing wheel.
+// AcquireDevice starts receiving events from the racing wheel.
 //
-// AcquireDevice returns any validation error.
+// AcquireDevice returns an error if the operation did not succeed.
 func (x *RacingWheel) AcquireDevice() error {
-	_, err := x.inner.AcquireDeviceWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("acquireDeviceWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Stops receiving events from the racing wheel.
-//
-// RelinquishDevice calls the underlying RelinquishDevice.
+// RelinquishDevice stops receiving events from the racing wheel.
 func (x *RacingWheel) RelinquishDevice() {
-	x.inner.RelinquishDevice()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relinquishDevice"))
 }
 
-// Returns a snapshot of the racing wheel with its current element values.
-//
-// Capture calls the underlying Capture.
+// Capture returns a snapshot of the racing wheel with its current element values.
 func (x *RacingWheel) Capture() *RacingWheel {
-	_r := x.inner.Capture()
-	if _r == nil {
-		return nil
-	}
-	return &RacingWheel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
+	return RacingWheelFromID(_r)
 }
 
-// Checks if the racing wheel has been acquired by the application. This property is observable.
-//
-// IsAcquired calls the underlying IsAcquired.
+// IsAcquired checks if the racing wheel has been acquired by the application. This property is observable.
 func (x *RacingWheel) IsAcquired() bool {
-	return x.inner.IsAcquired()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAcquired"))
+	return _r
 }
 
-// Get the physical input profile for the racing wheel.
-//
-// WheelInput calls the underlying WheelInput.
+// WheelInput get the physical input profile for the racing wheel.
 func (x *RacingWheel) WheelInput() *RacingWheelInput {
-	_r := x.inner.WheelInput()
-	if _r == nil {
-		return nil
-	}
-	return &RacingWheelInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheelInput"))
+	return RacingWheelInputFromID(_r)
 }
 
-// A GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer. @see capture
-//
-// IsSnapshot calls the underlying IsSnapshot.
+// IsSnapshot a GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer.
 func (x *RacingWheel) IsSnapshot() bool {
-	return x.inner.IsSnapshot()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSnapshot"))
+	return _r
 }
 
 // RacingWheelable is the interface implemented by [RacingWheel], for mocking and DI.
 type RacingWheelable interface {
-	Unwrap() *raw.GCRacingWheel
+	obj.Object
 	AcquireDevice() error
 	RelinquishDevice()
 	Capture() *RacingWheel

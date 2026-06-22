@@ -3,4 +3,15 @@
 //go:build darwin
 
 // Package contacts provides a fluent Go API over the macOS Contacts framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - ChangeHistoryEvent: [ChangeHistoryAddContactEvent], [ChangeHistoryAddGroupEvent], [ChangeHistoryAddMemberToGroupEvent], [ChangeHistoryAddSubgroupToGroupEvent], [ChangeHistoryDeleteContactEvent], [ChangeHistoryDeleteGroupEvent], [ChangeHistoryDropEverythingEvent], [ChangeHistoryRemoveMemberFromGroupEvent], [ChangeHistoryRemoveSubgroupFromGroupEvent], [ChangeHistoryUpdateContactEvent], [ChangeHistoryUpdateGroupEvent]
+//   - Contact: [MutableContact]
+//   - FetchRequest: [ChangeHistoryFetchRequest], [ContactFetchRequest]
+//   - Group: [MutableGroup]
+//   - PostalAddress: [MutablePostalAddress]
 package contacts

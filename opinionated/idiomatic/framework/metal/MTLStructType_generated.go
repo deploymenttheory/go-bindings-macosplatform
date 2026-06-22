@@ -5,69 +5,74 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a structure.
+// StructType is an idiomatic wrapper over the Objective-C class MTLStructType.
 //
-// StructType wraps [raw.MTLStructType] with a fluent Go API.
+// It embeds [Type], promoting that type's methods.
+//
+// A description of a structure.
 type StructType struct {
-	inner *raw.MTLStructType
+	Type
 }
 
-// Unwrap returns the underlying [raw.MTLStructType].
-func (x *StructType) Unwrap() *raw.MTLStructType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StructType) ID() objc.ID { return x.inner.Ptr() }
-
-// StructTypeFromID adopts an existing object pointer as a StructType (nil for 0).
+// StructTypeFromID adopts an existing Objective-C object as a StructType
+// (nil for 0), retaining it and registering a release finalizer.
 func StructTypeFromID(id objc.ID) *StructType {
 	if id == 0 {
 		return nil
 	}
-	return &StructType{inner: raw.MTLStructTypeFromID(id)}
+	x := &StructType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStructType creates a new [StructType].
-func NewStructType() *StructType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLStructType")), objc.RegisterName("new"))
-	return &StructType{inner: raw.MTLStructTypeFromID(_id)}
-}
-
-// Provides a representation of a struct member.
-//
-// MemberByName calls the underlying MemberByName.
-func (x *StructType) MemberByName(name string) *StructMember {
-	_r := x.inner.MemberByName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
+// structTypeAdopt wraps an Objective-C object that this code just created as a
+// StructType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func structTypeAdopt(id objc.ID) *StructType {
+	if id == 0 {
 		return nil
 	}
-	return &StructMember{inner: _r}
+	x := &StructType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
+// NewStructType creates a new StructType.
+func NewStructType() *StructType {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLStructType")), objc.RegisterName("new"))
+	return structTypeAdopt(_id)
+}
+
+// MemberByName provides a representation of a struct member.
+func (x *StructType) MemberByName(name string) *StructMember {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberByName:"), purego.NSString(name))
+	return StructMemberFromID(_r)
+}
+
+// Members wraps the corresponding Objective-C method.
+//
 // Members returns the collection as a Go slice.
 func (x *StructType) Members() []*StructMember {
-	arr := x.inner.Members()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *StructMember {
-		return &StructMember{inner: raw.MTLStructMemberFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StructMember { return StructMemberFromID(_id) })
 }
-
-func (x *StructType) asType() *raw.MTLType { return &x.inner.MTLType }
 
 // StructTypeable is the interface implemented by [StructType], for mocking and DI.
 type StructTypeable interface {
-	Unwrap() *raw.MTLStructType
+	obj.Object
 	MemberByName(name string) *StructMember
 	Members() []*StructMember
 }
 
 var _ StructTypeable = (*StructType)(nil)
+
+var _ TypeProvider = (*StructType)(nil)

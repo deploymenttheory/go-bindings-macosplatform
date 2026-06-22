@@ -5,52 +5,94 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An authentication operation for a cryptographic token.
+// TokenAuthOperation is an idiomatic wrapper over the Objective-C class TKTokenAuthOperation.
 //
-// TokenAuthOperation wraps [raw.TKTokenAuthOperation] with a fluent Go API.
+// TokenAuthOperation is an abstract base — you do not construct it directly. Construct one of [TokenPasswordAuthOperation], [TokenSmartCardPINAuthOperation] and pass it where a TokenAuthOperation is accepted.
+//
+// An authentication operation for a cryptographic token.
 type TokenAuthOperation struct {
-	inner *raw.TKTokenAuthOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenAuthOperation].
-func (x *TokenAuthOperation) Unwrap() *raw.TKTokenAuthOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenAuthOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenAuthOperationFromID adopts an existing object pointer as a TokenAuthOperation (nil for 0).
+// TokenAuthOperationFromID adopts an existing Objective-C object as a TokenAuthOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenAuthOperationFromID(id objc.ID) *TokenAuthOperation {
 	if id == 0 {
 		return nil
 	}
-	return &TokenAuthOperation{inner: raw.TKTokenAuthOperationFromID(id)}
+	x := &TokenAuthOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTokenAuthOperation creates a new [TokenAuthOperation].
-func NewTokenAuthOperation() *TokenAuthOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenAuthOperation")), objc.RegisterName("new"))
-	return &TokenAuthOperation{inner: raw.TKTokenAuthOperationFromID(_id)}
+// tokenAuthOperationAdopt wraps an Objective-C object that this code just created as a
+// TokenAuthOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenAuthOperationAdopt(id objc.ID) *TokenAuthOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenAuthOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Finishes the authentication operation.
+// Description returns the object's -description text.
+func (x *TokenAuthOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenAuthOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenAuthOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenAuthOperation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Finish finishes the authentication operation.
 //
-// Finish returns any validation error.
+// Finish returns an error if the operation did not succeed.
 func (x *TokenAuthOperation) Finish() error {
-	_, err := x.inner.FinishWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("finishWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
-
-func (x *TokenAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation { return x.inner }
 
 // TokenAuthOperationable is the interface implemented by [TokenAuthOperation], for mocking and DI.
 type TokenAuthOperationable interface {
-	Unwrap() *raw.TKTokenAuthOperation
+	obj.Object
 	Finish() error
 }
 
 var _ TokenAuthOperationable = (*TokenAuthOperation)(nil)
+
+// isTokenAuthOperation marks TokenAuthOperation — and, by embedding promotion, its
+// subclasses — as a member of the TokenAuthOperation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TokenAuthOperation) isTokenAuthOperation() {}
+
+var _ TokenAuthOperationProvider = (*TokenAuthOperation)(nil)

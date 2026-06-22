@@ -5,52 +5,67 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
+// ScannerFeatureTemplate is an idiomatic wrapper over the Objective-C class ICScannerFeatureTemplate.
 //
-// ScannerFeatureTemplate wraps [raw.ICScannerFeatureTemplate] with a fluent Go API.
+// It embeds [ScannerFeature], promoting that type's methods.
+//
+// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
 type ScannerFeatureTemplate struct {
-	inner *raw.ICScannerFeatureTemplate
+	ScannerFeature
 }
 
-// Unwrap returns the underlying [raw.ICScannerFeatureTemplate].
-func (x *ScannerFeatureTemplate) Unwrap() *raw.ICScannerFeatureTemplate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerFeatureTemplate) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerFeatureTemplateFromID adopts an existing object pointer as a ScannerFeatureTemplate (nil for 0).
+// ScannerFeatureTemplateFromID adopts an existing Objective-C object as a ScannerFeatureTemplate
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerFeatureTemplateFromID(id objc.ID) *ScannerFeatureTemplate {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerFeatureTemplate{inner: raw.ICScannerFeatureTemplateFromID(id)}
+	x := &ScannerFeatureTemplate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScannerFeatureTemplate creates a new [ScannerFeatureTemplate].
+// scannerFeatureTemplateAdopt wraps an Objective-C object that this code just created as a
+// ScannerFeatureTemplate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerFeatureTemplateAdopt(id objc.ID) *ScannerFeatureTemplate {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerFeatureTemplate{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewScannerFeatureTemplate creates a new ScannerFeatureTemplate.
 func NewScannerFeatureTemplate() *ScannerFeatureTemplate {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerFeatureTemplate")), objc.RegisterName("new"))
-	return &ScannerFeatureTemplate{inner: raw.ICScannerFeatureTemplateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerFeatureTemplate")), objc.RegisterName("new"))
+	return scannerFeatureTemplateAdopt(_id)
 }
 
-// Targets calls the underlying Targets.
-func (x *ScannerFeatureTemplate) Targets() *foundation.NSArray[objc.ID] {
-	return x.inner.Targets()
-}
-
-func (x *ScannerFeatureTemplate) asScannerFeature() *raw.ICScannerFeature {
-	return &x.inner.ICScannerFeature
+// Targets wraps the corresponding Objective-C method.
+//
+// Targets returns the collection as a Go slice.
+func (x *ScannerFeatureTemplate) Targets() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targets"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ScannerFeatureTemplateable is the interface implemented by [ScannerFeatureTemplate], for mocking and DI.
 type ScannerFeatureTemplateable interface {
-	Unwrap() *raw.ICScannerFeatureTemplate
-	Targets() *foundation.NSArray[objc.ID]
+	obj.Object
+	Targets() []obj.Object
 }
 
 var _ ScannerFeatureTemplateable = (*ScannerFeatureTemplate)(nil)
+
+var _ ScannerFeatureProvider = (*ScannerFeatureTemplate)(nil)

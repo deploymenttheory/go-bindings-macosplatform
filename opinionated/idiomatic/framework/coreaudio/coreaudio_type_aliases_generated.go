@@ -4,15 +4,9 @@
 
 package coreaudio
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudio"
-)
-
-// AudioHardwareIOProcStreamUsage is a type alias for the raw AudioHardwareIOProcStreamUsage value-type struct.
-type AudioHardwareIOProcStreamUsage = raw.AudioHardwareIOProcStreamUsage
-
-// AudioObjectPropertyAddress is a type alias for the raw AudioObjectPropertyAddress value-type struct.
-type AudioObjectPropertyAddress = raw.AudioObjectPropertyAddress
-
-// AudioStreamRangedDescription is a type alias for the raw AudioStreamRangedDescription value-type struct.
-type AudioStreamRangedDescription = raw.AudioStreamRangedDescription
+// An AudioObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission.
+type AudioObjectPropertyAddress struct {
+	MSelector uint
+	MScope    uint
+	MElement  uint
+}

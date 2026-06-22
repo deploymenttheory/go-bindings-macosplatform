@@ -5,125 +5,83 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that convolves an image with the Sobel operator.
+// ImageSobel is an idiomatic wrapper over the Objective-C class MPSImageSobel.
 //
-// ImageSobel wraps [raw.MPSImageSobel] with a fluent Go API.
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that convolves an image with the Sobel operator.
 type ImageSobel struct {
-	inner *raw.MPSImageSobel
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageSobel].
-func (x *ImageSobel) Unwrap() *raw.MPSImageSobel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageSobel) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageSobelFromID adopts an existing object pointer as a ImageSobel (nil for 0).
+// ImageSobelFromID adopts an existing Objective-C object as a ImageSobel
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageSobelFromID(id objc.ID) *ImageSobel {
 	if id == 0 {
 		return nil
 	}
-	return &ImageSobel{inner: raw.MPSImageSobelFromID(id)}
+	x := &ImageSobel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a Sobel filter on a given device using the default color transform.
-//
-// NewImageSobelWithDevice creates a new [ImageSobel].
-func NewImageSobelWithDevice(device metal.MTLDevice) *ImageSobel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageSobel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
+// imageSobelAdopt wraps an Objective-C object that this code just created as a
+// ImageSobel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageSobelAdopt(id objc.ID) *ImageSobel {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageSobel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a Sobel filter on a given device using a specific color transform.
-//
-// NewImageSobelWithDeviceLinearGrayColorTransform creates a new [ImageSobel].
-func NewImageSobelWithDeviceLinearGrayColorTransform(device metal.MTLDevice, transform *float32) *ImageSobel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageSobel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:linearGrayColorTransform:"), device, transform)
-	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
+// NewImageSobel creates a new ImageSobel.
+func NewImageSobel() *ImageSobel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageSobel")), objc.RegisterName("new"))
+	return imageSobelAdopt(_id)
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageSobelWithCoderDevice creates a new [ImageSobel].
-func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageSobel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageSobel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageSobel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageSobel) WithOptions(options mpscore.MPSKernelOptions) *ImageSobel {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageSobel) WithLabel(label string) *ImageSobel {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-// @property    colorTransform @discussion  Returns a pointer to the array of three floats used to convert RGBA, RGB or RG images to the destination format when the destination is monochrome.
-//
-// ColorTransform calls the underlying ColorTransform.
-func (x *ImageSobel) ColorTransform() *float32 {
-	return x.inner.ColorTransform()
-}
-
-func (x *ImageSobel) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageSobel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageSobelable is the interface implemented by [ImageSobel], for mocking and DI.
 type ImageSobelable interface {
-	Unwrap() *raw.MPSImageSobel
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageSobel
 	WithClipRect(clipRect metal.MTLRegion) *ImageSobel
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel
-	WithOptions(options mpscore.MPSKernelOptions) *ImageSobel
 	WithLabel(label string) *ImageSobel
-	ColorTransform() *float32
 }
 
 var _ ImageSobelable = (*ImageSobel)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageSobel)(nil)
+
+var _ KernelProvider = (*ImageSobel)(nil)

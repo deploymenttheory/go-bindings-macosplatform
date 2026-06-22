@@ -5,66 +5,73 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your app’s response to an intent that shares the user’s focus status.
+// ShareFocusStatusIntentResponse is an idiomatic wrapper over the Objective-C class INShareFocusStatusIntentResponse.
 //
-// ShareFocusStatusIntentResponse wraps [raw.INShareFocusStatusIntentResponse] with a fluent Go API.
+// It embeds [IntentResponse], promoting that type's methods.
+//
+// Your app’s response to an intent that shares the user’s focus status.
 type ShareFocusStatusIntentResponse struct {
-	inner *raw.INShareFocusStatusIntentResponse
+	IntentResponse
 }
 
-// Unwrap returns the underlying [raw.INShareFocusStatusIntentResponse].
-func (x *ShareFocusStatusIntentResponse) Unwrap() *raw.INShareFocusStatusIntentResponse {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareFocusStatusIntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareFocusStatusIntentResponseFromID adopts an existing object pointer as a ShareFocusStatusIntentResponse (nil for 0).
+// ShareFocusStatusIntentResponseFromID adopts an existing Objective-C object as a ShareFocusStatusIntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareFocusStatusIntentResponseFromID(id objc.ID) *ShareFocusStatusIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &ShareFocusStatusIntentResponse{inner: raw.INShareFocusStatusIntentResponseFromID(id)}
-}
-
-// Creates a response with the specified response code and user activity.
-//
-// NewShareFocusStatusIntentResponseWithCodeUserActivity creates a new [ShareFocusStatusIntentResponse].
-func NewShareFocusStatusIntentResponseWithCodeUserActivity(code INShareFocusStatusIntentResponseCode, userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShareFocusStatusIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INShareFocusStatusIntentResponseCode(code), userActivity.Ptr())
-	return &ShareFocusStatusIntentResponse{inner: raw.INShareFocusStatusIntentResponseFromID(_id)}
-}
-
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ShareFocusStatusIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse {
-	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	x := &ShareFocusStatusIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Code calls the underlying Code.
-func (x *ShareFocusStatusIntentResponse) Code() INShareFocusStatusIntentResponseCode {
-	return INShareFocusStatusIntentResponseCode(x.inner.Code())
+// shareFocusStatusIntentResponseAdopt wraps an Objective-C object that this code just created as a
+// ShareFocusStatusIntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareFocusStatusIntentResponseAdopt(id objc.ID) *ShareFocusStatusIntentResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareFocusStatusIntentResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ShareFocusStatusIntentResponse) asIntentResponse() *raw.INIntentResponse {
-	return &x.inner.INIntentResponse
+// NewShareFocusStatusIntentResponseWithCodeUserActivity creates a response with the specified response code and user activity.
+func NewShareFocusStatusIntentResponseWithCodeUserActivity(code ShareFocusStatusIntentResponseCode, userActivity obj.Object) *ShareFocusStatusIntentResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INShareFocusStatusIntentResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
+	return shareFocusStatusIntentResponseAdopt(_id)
+}
+
+// WithUserActivity the user activity object to use when launching the app.
+func (x *ShareFocusStatusIntentResponse) WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// Code wraps the corresponding Objective-C method.
+func (x *ShareFocusStatusIntentResponse) Code() ShareFocusStatusIntentResponseCode {
+	_r := objc.Send[ShareFocusStatusIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
 }
 
 // ShareFocusStatusIntentResponseable is the interface implemented by [ShareFocusStatusIntentResponse], for mocking and DI.
 type ShareFocusStatusIntentResponseable interface {
-	Unwrap() *raw.INShareFocusStatusIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse
-	Code() INShareFocusStatusIntentResponseCode
+	obj.Object
+	WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse
+	Code() ShareFocusStatusIntentResponseCode
 }
 
 var _ ShareFocusStatusIntentResponseable = (*ShareFocusStatusIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*ShareFocusStatusIntentResponse)(nil)

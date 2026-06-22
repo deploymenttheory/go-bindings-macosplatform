@@ -5,71 +5,58 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A query for reading activity summary objects from the HealthKit store.
+// ActivitySummaryQuery is an idiomatic wrapper over the Objective-C class HKActivitySummaryQuery.
 //
-// ActivitySummaryQuery wraps [raw.HKActivitySummaryQuery] with a fluent Go API.
+// It embeds [Query], promoting that type's methods.
+//
+// A query for reading activity summary objects from the HealthKit store.
 type ActivitySummaryQuery struct {
-	inner *raw.HKActivitySummaryQuery
+	Query
 }
 
-// Unwrap returns the underlying [raw.HKActivitySummaryQuery].
-func (x *ActivitySummaryQuery) Unwrap() *raw.HKActivitySummaryQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActivitySummaryQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivitySummaryQueryFromID adopts an existing object pointer as a ActivitySummaryQuery (nil for 0).
+// ActivitySummaryQueryFromID adopts an existing Objective-C object as a ActivitySummaryQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivitySummaryQueryFromID(id objc.ID) *ActivitySummaryQuery {
 	if id == 0 {
 		return nil
 	}
-	return &ActivitySummaryQuery{inner: raw.HKActivitySummaryQueryFromID(id)}
-}
-
-// Initializes a new active summary query.
-//
-// NewActivitySummaryQueryWithPredicateResultsHandler creates a new [ActivitySummaryQuery].
-func NewActivitySummaryQueryWithPredicateResultsHandler(predicate *foundation.NSPredicate, handler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKActivitySummaryQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:resultsHandler:"), predicate.Ptr(), handler)
-	return &ActivitySummaryQuery{inner: raw.HKActivitySummaryQueryFromID(_id)}
-}
-
-// The handler for monitoring updates to activity summaries saved in the HealthKit store.
-//
-// WithUpdateHandler sets the updateHandler property and returns the receiver for chaining.
-func (x *ActivitySummaryQuery) WithUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery {
-	x.inner.SetUpdateHandler(updateHandler)
+	x := &ActivitySummaryQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property      updateHandler @abstract      An optional handler to be called when activity summaries matching the given predicate are updated. @discussion    This property may not be modified once the query has been executed. If this property is nonnull, then the query must be manually stopped.
-//
-// UpdateHandler calls the underlying UpdateHandler.
-func (x *ActivitySummaryQuery) UpdateHandler() objc.Block {
-	return x.inner.UpdateHandler()
+// activitySummaryQueryAdopt wraps an Objective-C object that this code just created as a
+// ActivitySummaryQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activitySummaryQueryAdopt(id objc.ID) *ActivitySummaryQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &ActivitySummaryQuery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetUpdateHandler calls the underlying SetUpdateHandler.
-func (x *ActivitySummaryQuery) SetUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) {
-	x.inner.SetUpdateHandler(updateHandler)
+// NewActivitySummaryQuery creates a new ActivitySummaryQuery.
+func NewActivitySummaryQuery() *ActivitySummaryQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKActivitySummaryQuery")), objc.RegisterName("new"))
+	return activitySummaryQueryAdopt(_id)
 }
-
-func (x *ActivitySummaryQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
 // ActivitySummaryQueryable is the interface implemented by [ActivitySummaryQuery], for mocking and DI.
 type ActivitySummaryQueryable interface {
-	Unwrap() *raw.HKActivitySummaryQuery
-	WithUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery
-	UpdateHandler() objc.Block
-	SetUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer))
+	obj.Object
 }
 
 var _ ActivitySummaryQueryable = (*ActivitySummaryQuery)(nil)
+
+var _ QueryProvider = (*ActivitySummaryQuery)(nil)

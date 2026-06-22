@@ -5,72 +5,99 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tensor parameter object.
+// TensorParameter is an idiomatic wrapper over the Objective-C class MLCTensorParameter.
 //
-// TensorParameter wraps [raw.MLCTensorParameter] with a fluent Go API.
+// A tensor parameter object.
 type TensorParameter struct {
-	inner *raw.MLCTensorParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCTensorParameter].
-func (x *TensorParameter) Unwrap() *raw.MLCTensorParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TensorParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorParameterFromID adopts an existing object pointer as a TensorParameter (nil for 0).
+// TensorParameterFromID adopts an existing Objective-C object as a TensorParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorParameterFromID(id objc.ID) *TensorParameter {
 	if id == 0 {
 		return nil
 	}
-	return &TensorParameter{inner: raw.MLCTensorParameterFromID(id)}
-}
-
-// NewTensorParameter creates a new [TensorParameter].
-func NewTensorParameter() *TensorParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTensorParameter")), objc.RegisterName("new"))
-	return &TensorParameter{inner: raw.MLCTensorParameterFromID(_id)}
-}
-
-// A Boolean that indicates whether this tensor parameter is updatable.
-//
-// WithIsUpdatable sets the isUpdatable property and returns the receiver for chaining.
-func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
-	x.inner.SetIsUpdatable(isUpdatable)
+	x := &TensorParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property   tensor @abstract   The underlying tensor
-//
-// Tensor calls the underlying Tensor.
-func (x *TensorParameter) Tensor() *Tensor {
-	_r := x.inner.Tensor()
-	if _r == nil {
+// tensorParameterAdopt wraps an Objective-C object that this code just created as a
+// TensorParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorParameterAdopt(id objc.ID) *TensorParameter {
+	if id == 0 {
 		return nil
 	}
-	return &Tensor{inner: _r}
+	x := &TensorParameter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   isUpdatable @abstract   Specifies whether this tensor parameter is updatable
-//
-// IsUpdatable calls the underlying IsUpdatable.
+// Description returns the object's -description text.
+func (x *TensorParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TensorParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TensorParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorParameter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTensorParameter creates a new TensorParameter.
+func NewTensorParameter() *TensorParameter {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorParameter")), objc.RegisterName("new"))
+	return tensorParameterAdopt(_id)
+}
+
+// WithIsUpdatable a Boolean that indicates whether this tensor parameter is updatable.
+func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdatable:"), isUpdatable)
+	return x
+}
+
+// Tensor the underlying tensor
+func (x *TensorParameter) Tensor() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensor"))
+	return TensorFromID(_r)
+}
+
+// IsUpdatable specifies whether this tensor parameter is updatable
 func (x *TensorParameter) IsUpdatable() bool {
-	return x.inner.IsUpdatable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdatable"))
+	return _r
 }
 
-// SetIsUpdatable calls the underlying SetIsUpdatable.
+// SetIsUpdatable wraps the corresponding Objective-C method.
 func (x *TensorParameter) SetIsUpdatable(isUpdatable bool) {
-	x.inner.SetIsUpdatable(isUpdatable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdatable:"), isUpdatable)
 }
 
 // TensorParameterable is the interface implemented by [TensorParameter], for mocking and DI.
 type TensorParameterable interface {
-	Unwrap() *raw.MLCTensorParameter
+	obj.Object
 	WithIsUpdatable(isUpdatable bool) *TensorParameter
 	Tensor() *Tensor
 	IsUpdatable() bool

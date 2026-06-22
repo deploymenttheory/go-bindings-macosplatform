@@ -5,93 +5,117 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that performs offline analysis of video content.
+// VideoProcessor is an idiomatic wrapper over the Objective-C class VNVideoProcessor.
 //
-// VideoProcessor wraps [raw.VNVideoProcessor] with a fluent Go API.
+// An object that performs offline analysis of video content.
 type VideoProcessor struct {
-	inner *raw.VNVideoProcessor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNVideoProcessor].
-func (x *VideoProcessor) Unwrap() *raw.VNVideoProcessor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoProcessor) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoProcessorFromID adopts an existing object pointer as a VideoProcessor (nil for 0).
+// VideoProcessorFromID adopts an existing Objective-C object as a VideoProcessor
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoProcessorFromID(id objc.ID) *VideoProcessor {
 	if id == 0 {
 		return nil
 	}
-	return &VideoProcessor{inner: raw.VNVideoProcessorFromID(id)}
+	x := &VideoProcessor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a video processor to perform Vision requests against the specified video asset.
-//
-// NewVideoProcessorWithURL creates a new [VideoProcessor].
+// videoProcessorAdopt wraps an Objective-C object that this code just created as a
+// VideoProcessor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoProcessorAdopt(id objc.ID) *VideoProcessor {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoProcessor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VideoProcessor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoProcessor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoProcessor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoProcessor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVideoProcessorWithURL creates a video processor to perform Vision requests against the specified video asset.
 func NewVideoProcessorWithURL(videoURL string) *VideoProcessor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVideoProcessor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(videoURL)).Ptr())
-	return &VideoProcessor{inner: raw.VNVideoProcessorFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(videoURL))
+	return videoProcessorAdopt(_id)
 }
 
-// Adds a request with processing options to the video processor.
-//
-// AddRequestProcessingOptionsError calls the underlying AddRequestProcessingOptionsError.
-func (x *VideoProcessor) AddRequestProcessingOptionsError(request *raw.VNRequest, processingOptions *raw.VNVideoProcessorRequestProcessingOptions) (bool, error) {
-	return x.inner.AddRequestProcessingOptionsError(request, processingOptions)
+// AddRequestProcessingOptions adds a request with processing options to the video processor.
+func (x *VideoProcessor) AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRequest:processingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Adds a Vision request to perform with the specified configuration.
-//
-// AddRequestWithProcessingOptionsError calls the underlying AddRequestWithProcessingOptionsError.
-func (x *VideoProcessor) AddRequestWithProcessingOptionsError(request *raw.VNRequest, processingOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
-	return x.inner.AddRequestWithProcessingOptionsError(request, processingOptions)
+// AddRequestWithProcessingOptions adds a Vision request to perform with the specified configuration.
+func (x *VideoProcessor) AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRequest:withProcessingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Removes a Vision request from the video processor’s request queue.
-//
-// RemoveRequestError calls the underlying RemoveRequestError.
-func (x *VideoProcessor) RemoveRequestError(request *raw.VNRequest) (bool, error) {
-	return x.inner.RemoveRequestError(request)
+// RemoveRequest removes a Vision request from the video processor’s request queue.
+func (x *VideoProcessor) RemoveRequest(request *Request) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Analyzes a time range of video content.
-//
-// AnalyzeTimeRangeError calls the underlying AnalyzeTimeRangeError.
-func (x *VideoProcessor) AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error) {
-	return x.inner.AnalyzeTimeRangeError(timeRange)
-}
-
-// Analyzes the specifed time range of the video content.
-//
-// AnalyzeWithTimeRangeError calls the underlying AnalyzeWithTimeRangeError.
-func (x *VideoProcessor) AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error) {
-	return x.inner.AnalyzeWithTimeRangeError(timeRange)
-}
-
-// Cancels the video processing.
-//
-// Cancel calls the underlying Cancel.
+// Cancel cancels the video processing.
 func (x *VideoProcessor) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
 // VideoProcessorable is the interface implemented by [VideoProcessor], for mocking and DI.
 type VideoProcessorable interface {
-	Unwrap() *raw.VNVideoProcessor
-	AddRequestProcessingOptionsError(request *raw.VNRequest, processingOptions *raw.VNVideoProcessorRequestProcessingOptions) (bool, error)
-	AddRequestWithProcessingOptionsError(request *raw.VNRequest, processingOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
-	RemoveRequestError(request *raw.VNRequest) (bool, error)
-	AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error)
-	AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error)
+	obj.Object
+	AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error
+	AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error
+	RemoveRequest(request *Request) error
 	Cancel()
 }
 

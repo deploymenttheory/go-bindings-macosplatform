@@ -1,0 +1,11 @@
+// CGPoint is a point in a two-dimensional coordinate system.
+type CGPoint struct {
+X float64
+Y float64
+}
+
+type CGRect struct {
+Origin CGPoint
+Size CGSize
+}
+

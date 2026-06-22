@@ -4,93 +4,12 @@
 
 package tcl
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/tcl"
-)
+type Tcl_RegExpIndices struct {
+	Start int
+	End   int
+}
 
-// TclPlatStubs is a type alias for the raw TclPlatStubs value-type struct.
-type TclPlatStubs = raw.TclPlatStubs
-
-// TclStubHooks is a type alias for the raw TclStubHooks value-type struct.
-type TclStubHooks = raw.TclStubHooks
-
-// TclStubs is a type alias for the raw TclStubs value-type struct.
-type TclStubs = raw.TclStubs
-
-// Tcl_CallFrame is a type alias for the raw Tcl_CallFrame value-type struct.
-type Tcl_CallFrame = raw.Tcl_CallFrame
-
-// Tcl_ChannelType is a type alias for the raw Tcl_ChannelType value-type struct.
-type Tcl_ChannelType = raw.Tcl_ChannelType
-
-// Tcl_CmdInfo is a type alias for the raw Tcl_CmdInfo value-type struct.
-type Tcl_CmdInfo = raw.Tcl_CmdInfo
-
-// Tcl_Config is a type alias for the raw Tcl_Config value-type struct.
-type Tcl_Config = raw.Tcl_Config
-
-// Tcl_DString is a type alias for the raw Tcl_DString value-type struct.
-type Tcl_DString = raw.Tcl_DString
-
-// Tcl_DictSearch is a type alias for the raw Tcl_DictSearch value-type struct.
-type Tcl_DictSearch = raw.Tcl_DictSearch
-
-// Tcl_EncodingType is a type alias for the raw Tcl_EncodingType value-type struct.
-type Tcl_EncodingType = raw.Tcl_EncodingType
-
-// Tcl_Event is a type alias for the raw Tcl_Event value-type struct.
-type Tcl_Event = raw.Tcl_Event
-
-// Tcl_Filesystem is a type alias for the raw Tcl_Filesystem value-type struct.
-type Tcl_Filesystem = raw.Tcl_Filesystem
-
-// Tcl_GlobTypeData is a type alias for the raw Tcl_GlobTypeData value-type struct.
-type Tcl_GlobTypeData = raw.Tcl_GlobTypeData
-
-// Tcl_HashEntry is a type alias for the raw Tcl_HashEntry value-type struct.
-type Tcl_HashEntry = raw.Tcl_HashEntry
-
-// Tcl_HashKeyType is a type alias for the raw Tcl_HashKeyType value-type struct.
-type Tcl_HashKeyType = raw.Tcl_HashKeyType
-
-// Tcl_HashSearch is a type alias for the raw Tcl_HashSearch value-type struct.
-type Tcl_HashSearch = raw.Tcl_HashSearch
-
-// Tcl_HashTable is a type alias for the raw Tcl_HashTable value-type struct.
-type Tcl_HashTable = raw.Tcl_HashTable
-
-// Tcl_Interp is a type alias for the raw Tcl_Interp value-type struct.
-type Tcl_Interp = raw.Tcl_Interp
-
-// Tcl_Namespace is a type alias for the raw Tcl_Namespace value-type struct.
-type Tcl_Namespace = raw.Tcl_Namespace
-
-// Tcl_NotifierProcs is a type alias for the raw Tcl_NotifierProcs value-type struct.
-type Tcl_NotifierProcs = raw.Tcl_NotifierProcs
-
-// Tcl_Obj is a type alias for the raw Tcl_Obj value-type struct.
-type Tcl_Obj = raw.Tcl_Obj
-
-// Tcl_ObjType is a type alias for the raw Tcl_ObjType value-type struct.
-type Tcl_ObjType = raw.Tcl_ObjType
-
-// Tcl_Parse is a type alias for the raw Tcl_Parse value-type struct.
-type Tcl_Parse = raw.Tcl_Parse
-
-// Tcl_RegExpIndices is a type alias for the raw Tcl_RegExpIndices value-type struct.
-type Tcl_RegExpIndices = raw.Tcl_RegExpIndices
-
-// Tcl_RegExpInfo is a type alias for the raw Tcl_RegExpInfo value-type struct.
-type Tcl_RegExpInfo = raw.Tcl_RegExpInfo
-
-// Tcl_SavedResult is a type alias for the raw Tcl_SavedResult value-type struct.
-type Tcl_SavedResult = raw.Tcl_SavedResult
-
-// Tcl_Time is a type alias for the raw Tcl_Time value-type struct.
-type Tcl_Time = raw.Tcl_Time
-
-// Tcl_Token is a type alias for the raw Tcl_Token value-type struct.
-type Tcl_Token = raw.Tcl_Token
-
-// Tcl_Value is a type alias for the raw Tcl_Value value-type struct.
-type Tcl_Value = raw.Tcl_Value
+type Tcl_Time struct {
+	Sec  int
+	Usec int
+}

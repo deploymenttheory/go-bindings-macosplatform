@@ -5,56 +5,67 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data object that contains a single rotation-rate measurement at a specific time.
+// RecordedRotationRateData is an idiomatic wrapper over the Objective-C class CMRecordedRotationRateData.
 //
-// RecordedRotationRateData wraps [raw.CMRecordedRotationRateData] with a fluent Go API.
+// It embeds [RotationRateData], promoting that type's methods.
+//
+// A data object that contains a single rotation-rate measurement at a specific time.
 type RecordedRotationRateData struct {
-	inner *raw.CMRecordedRotationRateData
+	RotationRateData
 }
 
-// Unwrap returns the underlying [raw.CMRecordedRotationRateData].
-func (x *RecordedRotationRateData) Unwrap() *raw.CMRecordedRotationRateData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecordedRotationRateData) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordedRotationRateDataFromID adopts an existing object pointer as a RecordedRotationRateData (nil for 0).
+// RecordedRotationRateDataFromID adopts an existing Objective-C object as a RecordedRotationRateData
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordedRotationRateDataFromID(id objc.ID) *RecordedRotationRateData {
 	if id == 0 {
 		return nil
 	}
-	return &RecordedRotationRateData{inner: raw.CMRecordedRotationRateDataFromID(id)}
+	x := &RecordedRotationRateData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecordedRotationRateData creates a new [RecordedRotationRateData].
+// recordedRotationRateDataAdopt wraps an Objective-C object that this code just created as a
+// RecordedRotationRateData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordedRotationRateDataAdopt(id objc.ID) *RecordedRotationRateData {
+	if id == 0 {
+		return nil
+	}
+	x := &RecordedRotationRateData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRecordedRotationRateData creates a new RecordedRotationRateData.
 func NewRecordedRotationRateData() *RecordedRotationRateData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMRecordedRotationRateData")), objc.RegisterName("new"))
-	return &RecordedRotationRateData{inner: raw.CMRecordedRotationRateDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMRecordedRotationRateData")), objc.RegisterName("new"))
+	return recordedRotationRateDataAdopt(_id)
 }
 
-// StartDate calls the underlying StartDate.
-func (x *RecordedRotationRateData) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
-}
-
-func (x *RecordedRotationRateData) asRotationRateData() *raw.CMRotationRateData {
-	return &x.inner.CMRotationRateData
-}
-
-func (x *RecordedRotationRateData) asLogItem() *raw.CMLogItem {
-	return &x.inner.CMRotationRateData.CMLogItem
+// StartDate wraps the corresponding Objective-C method.
+func (x *RecordedRotationRateData) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
 // RecordedRotationRateDataable is the interface implemented by [RecordedRotationRateData], for mocking and DI.
 type RecordedRotationRateDataable interface {
-	Unwrap() *raw.CMRecordedRotationRateData
-	StartDate() *foundation.NSDate
+	obj.Object
+	StartDate() obj.Object
 }
 
 var _ RecordedRotationRateDataable = (*RecordedRotationRateData)(nil)
+
+var _ RotationRateDataProvider = (*RecordedRotationRateData)(nil)
+
+var _ LogItemProvider = (*RecordedRotationRateData)(nil)

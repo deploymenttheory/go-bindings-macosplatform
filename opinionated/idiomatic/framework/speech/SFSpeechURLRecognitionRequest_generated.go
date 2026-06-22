@@ -5,132 +5,117 @@
 package speech
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A request to recognize speech in a recorded audio file.
+// SpeechURLRecognitionRequest is an idiomatic wrapper over the Objective-C class SFSpeechURLRecognitionRequest.
 //
-// SpeechURLRecognitionRequest wraps [raw.SFSpeechURLRecognitionRequest] with a fluent Go API.
+// It embeds [SpeechRecognitionRequest], promoting that type's methods.
+//
+// A request to recognize speech in a recorded audio file.
 type SpeechURLRecognitionRequest struct {
-	inner *raw.SFSpeechURLRecognitionRequest
+	SpeechRecognitionRequest
 }
 
-// Unwrap returns the underlying [raw.SFSpeechURLRecognitionRequest].
-func (x *SpeechURLRecognitionRequest) Unwrap() *raw.SFSpeechURLRecognitionRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechURLRecognitionRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechURLRecognitionRequestFromID adopts an existing object pointer as a SpeechURLRecognitionRequest (nil for 0).
+// SpeechURLRecognitionRequestFromID adopts an existing Objective-C object as a SpeechURLRecognitionRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechURLRecognitionRequestFromID(id objc.ID) *SpeechURLRecognitionRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechURLRecognitionRequest{inner: raw.SFSpeechURLRecognitionRequestFromID(id)}
+	x := &SpeechURLRecognitionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a speech recognition request, initialized with the specified URL.
-//
-// NewSpeechURLRecognitionRequestWithURL creates a new [SpeechURLRecognitionRequest].
+// speechURLRecognitionRequestAdopt wraps an Objective-C object that this code just created as a
+// SpeechURLRecognitionRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechURLRecognitionRequestAdopt(id objc.ID) *SpeechURLRecognitionRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechURLRecognitionRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSpeechURLRecognitionRequestWithURL creates a speech recognition request, initialized with the specified URL.
 func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechURLRecognitionRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &SpeechURLRecognitionRequest{inner: raw.SFSpeechURLRecognitionRequestFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechURLRecognitionRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	return speechURLRecognitionRequestAdopt(_id)
 }
 
-// A value that indicates the type of speech recognition being performed.
-//
-// WithTaskHint sets the taskHint property and returns the receiver for chaining.
-func (x *SpeechURLRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
+// WithTaskHint a value that indicates the type of speech recognition being performed.
+func (x *SpeechURLRecognitionRequest) WithTaskHint(taskHint SpeechRecognitionTaskHint) *SpeechURLRecognitionRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskHint:"), taskHint)
 	return x
 }
 
-// A Boolean value that indicates whether you want intermediate results returned for each utterance.
-//
-// WithShouldReportPartialResults sets the shouldReportPartialResults property and returns the receiver for chaining.
+// WithShouldReportPartialResults a Boolean value that indicates whether you want intermediate results returned for each utterance.
 func (x *SpeechURLRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetShouldReportPartialResults(shouldReportPartialResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportPartialResults:"), shouldReportPartialResults)
 	return x
 }
 
-// An array of phrases that should be recognized, even if they are not in the system vocabulary.
-//
-// WithContextualStrings sets the collection, converting the Go slice to an NSArray.
-func (x *SpeechURLRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechURLRecognitionRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SFSpeechRecognitionRequest.SetContextualStrings(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SFSpeechRecognitionRequest.SetContextualStrings(_arr)
+// WithContextualStrings an array of phrases that should be recognized, even if they are not in the system vocabulary.
+func (x *SpeechURLRecognitionRequest) WithContextualStrings(items ...obj.Object) *SpeechURLRecognitionRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextualStrings:"), _arr)
 	return x
 }
 
-// An identifier string that you use to describe the type of interaction associated with the speech recognition request.
-//
-// WithInteractionIdentifier sets the interactionIdentifier property and returns the receiver for chaining.
+// WithInteractionIdentifier an identifier string that you use to describe the type of interaction associated with the speech recognition request.
 func (x *SpeechURLRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetInteractionIdentifier(foundation.NSStringStringWithUTF8String(interactionIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionIdentifier:"), purego.NSString(interactionIdentifier))
 	return x
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device.
-//
-// WithRequiresOnDeviceRecognition sets the requiresOnDeviceRecognition property and returns the receiver for chaining.
+// WithRequiresOnDeviceRecognition a Boolean value that determines whether a request must keep its audio data on the device.
 func (x *SpeechURLRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresOnDeviceRecognition:"), requiresOnDeviceRecognition)
 	return x
 }
 
-// A Boolean value that indicates whether to add punctuation to speech recognition results.
-//
-// WithAddsPunctuation sets the addsPunctuation property and returns the receiver for chaining.
+// WithAddsPunctuation a Boolean value that indicates whether to add punctuation to speech recognition results.
 func (x *SpeechURLRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetAddsPunctuation(addsPunctuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsPunctuation:"), addsPunctuation)
 	return x
 }
 
-// WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
+// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
 func (x *SpeechURLRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return x
 }
 
-// URL calls the underlying URL.
-func (x *SpeechURLRecognitionRequest) URL() *foundation.NSURL {
-	return x.inner.URL()
-}
-
-func (x *SpeechURLRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest {
-	return &x.inner.SFSpeechRecognitionRequest
+// URL wraps the corresponding Objective-C method.
+func (x *SpeechURLRecognitionRequest) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
 // SpeechURLRecognitionRequestable is the interface implemented by [SpeechURLRecognitionRequest], for mocking and DI.
 type SpeechURLRecognitionRequestable interface {
-	Unwrap() *raw.SFSpeechURLRecognitionRequest
-	WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest
+	obj.Object
+	WithTaskHint(taskHint SpeechRecognitionTaskHint) *SpeechURLRecognitionRequest
 	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechURLRecognitionRequest
-	WithContextualStrings(items ...*foundation.NSString) *SpeechURLRecognitionRequest
+	WithContextualStrings(items ...obj.Object) *SpeechURLRecognitionRequest
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest
 	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechURLRecognitionRequest
 	WithAddsPunctuation(addsPunctuation bool) *SpeechURLRecognitionRequest
 	WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest
-	URL() *foundation.NSURL
+	URL() obj.Object
 }
 
 var _ SpeechURLRecognitionRequestable = (*SpeechURLRecognitionRequest)(nil)
+
+var _ SpeechRecognitionRequestProvider = (*SpeechURLRecognitionRequest)(nil)

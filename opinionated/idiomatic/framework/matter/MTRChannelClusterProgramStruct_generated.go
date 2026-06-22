@@ -5,330 +5,364 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterProgramStruct wraps [raw.MTRChannelClusterProgramStruct] with a fluent Go API.
+// MTRChannelClusterProgramStruct is an idiomatic wrapper over the Objective-C class MTRChannelClusterProgramStruct.
 type MTRChannelClusterProgramStruct struct {
-	inner *raw.MTRChannelClusterProgramStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterProgramStruct].
-func (x *MTRChannelClusterProgramStruct) Unwrap() *raw.MTRChannelClusterProgramStruct { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterProgramStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterProgramStructFromID adopts an existing object pointer as a MTRChannelClusterProgramStruct (nil for 0).
+// MTRChannelClusterProgramStructFromID adopts an existing Objective-C object as a MTRChannelClusterProgramStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterProgramStructFromID(id objc.ID) *MTRChannelClusterProgramStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterProgramStruct{inner: raw.MTRChannelClusterProgramStructFromID(id)}
+	x := &MTRChannelClusterProgramStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterProgramStruct creates a new [MTRChannelClusterProgramStruct].
+// mTRChannelClusterProgramStructAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterProgramStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterProgramStructAdopt(id objc.ID) *MTRChannelClusterProgramStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterProgramStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterProgramStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterProgramStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterProgramStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterProgramStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRChannelClusterProgramStruct creates a new MTRChannelClusterProgramStruct.
 func NewMTRChannelClusterProgramStruct() *MTRChannelClusterProgramStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterProgramStruct")), objc.RegisterName("new"))
-	return &MTRChannelClusterProgramStruct{inner: raw.MTRChannelClusterProgramStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterProgramStruct")), objc.RegisterName("new"))
+	return mTRChannelClusterProgramStructAdopt(_id)
 }
 
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
+// WithIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithIdentifier(identifier string) *MTRChannelClusterProgramStruct {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// WithChannel sets the channel property and returns the receiver for chaining.
+// WithChannel sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithChannel(channel MTRChannelClusterChannelInfoStructProvider) *MTRChannelClusterProgramStruct {
-	x.inner.SetChannel(channel.asMTRChannelClusterChannelInfoStruct())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return x
 }
 
-// WithStartTime sets the startTime property and returns the receiver for chaining.
-func (x *MTRChannelClusterProgramStruct) WithStartTime(startTime *foundation.NSNumber) *MTRChannelClusterProgramStruct {
-	x.inner.SetStartTime(startTime)
+// WithStartTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterProgramStruct) WithStartTime(startTime obj.Object) *MTRChannelClusterProgramStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithEndTime sets the endTime property and returns the receiver for chaining.
-func (x *MTRChannelClusterProgramStruct) WithEndTime(endTime *foundation.NSNumber) *MTRChannelClusterProgramStruct {
-	x.inner.SetEndTime(endTime)
+// WithEndTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterProgramStruct) WithEndTime(endTime obj.Object) *MTRChannelClusterProgramStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithTitle(title string) *MTRChannelClusterProgramStruct {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithSubtitle(subtitle string) *MTRChannelClusterProgramStruct {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// WithDescriptionString sets the descriptionString property and returns the receiver for chaining.
+// WithDescriptionString sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithDescriptionString(descriptionString string) *MTRChannelClusterProgramStruct {
-	x.inner.SetDescriptionString(foundation.NSStringStringWithUTF8String(descriptionString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 	return x
 }
 
-// WithReleaseDate sets the releaseDate property and returns the receiver for chaining.
+// WithReleaseDate sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithReleaseDate(releaseDate string) *MTRChannelClusterProgramStruct {
-	x.inner.SetReleaseDate(foundation.NSStringStringWithUTF8String(releaseDate))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleaseDate:"), purego.NSString(releaseDate))
 	return x
 }
 
-// WithParentalGuidanceText sets the parentalGuidanceText property and returns the receiver for chaining.
+// WithParentalGuidanceText sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithParentalGuidanceText(parentalGuidanceText string) *MTRChannelClusterProgramStruct {
-	x.inner.SetParentalGuidanceText(foundation.NSStringStringWithUTF8String(parentalGuidanceText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentalGuidanceText:"), purego.NSString(parentalGuidanceText))
 	return x
 }
 
-// WithRecordingFlag sets the recordingFlag property and returns the receiver for chaining.
-func (x *MTRChannelClusterProgramStruct) WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterProgramStruct {
-	x.inner.SetRecordingFlag(recordingFlag)
+// WithRecordingFlag sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterProgramStruct) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterProgramStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 	return x
 }
 
-// WithSeriesInfo sets the seriesInfo property and returns the receiver for chaining.
+// WithSeriesInfo sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterProgramStruct) WithSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct {
-	x.inner.SetSeriesInfo(seriesInfo.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeriesInfo:"), objref.IDOf(seriesInfo))
 	return x
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
-// Channel calls the underlying Channel.
+// Channel wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) Channel() *MTRChannelClusterChannelInfoStruct {
-	_r := x.inner.Channel()
-	if _r == nil {
-		return nil
-	}
-	return &MTRChannelClusterChannelInfoStruct{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channel"))
+	return MTRChannelClusterChannelInfoStructFromID(_r)
 }
 
-// SetChannel calls the underlying SetChannel.
-func (x *MTRChannelClusterProgramStruct) SetChannel(channel *raw.MTRChannelClusterChannelInfoStruct) {
-	x.inner.SetChannel(channel)
+// SetChannel wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetChannel(channel *MTRChannelClusterChannelInfoStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 }
 
-// StartTime calls the underlying StartTime.
-func (x *MTRChannelClusterProgramStruct) StartTime() *foundation.NSNumber {
-	return x.inner.StartTime()
+// StartTime wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+	return obj.Wrap(_r)
 }
 
-// SetStartTime calls the underlying SetStartTime.
-func (x *MTRChannelClusterProgramStruct) SetStartTime(startTime *foundation.NSNumber) {
-	x.inner.SetStartTime(startTime)
+// SetStartTime wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetStartTime(startTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
-// EndTime calls the underlying EndTime.
-func (x *MTRChannelClusterProgramStruct) EndTime() *foundation.NSNumber {
-	return x.inner.EndTime()
+// EndTime wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) EndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTime"))
+	return obj.Wrap(_r)
 }
 
-// SetEndTime calls the underlying SetEndTime.
-func (x *MTRChannelClusterProgramStruct) SetEndTime(endTime *foundation.NSNumber) {
-	x.inner.SetEndTime(endTime)
+// SetEndTime wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetEndTime(endTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Subtitle calls the underlying Subtitle.
+// Subtitle wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSubtitle calls the underlying SetSubtitle.
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SetSubtitle(subtitle string) {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
-// DescriptionString calls the underlying DescriptionString.
+// DescriptionString wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) DescriptionString() string {
-	_r := x.inner.DescriptionString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDescriptionString calls the underlying SetDescriptionString.
+// SetDescriptionString wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SetDescriptionString(descriptionString string) {
-	x.inner.SetDescriptionString(foundation.NSStringStringWithUTF8String(descriptionString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 }
 
-// AudioLanguages calls the underlying AudioLanguages.
-func (x *MTRChannelClusterProgramStruct) AudioLanguages() *foundation.NSArray[objc.ID] {
-	return x.inner.AudioLanguages()
+// AudioLanguages wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) AudioLanguages() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioLanguages"))
+	return obj.Wrap(_r)
 }
 
-// SetAudioLanguages calls the underlying SetAudioLanguages.
-func (x *MTRChannelClusterProgramStruct) SetAudioLanguages(audioLanguages *foundation.NSArray[objc.ID]) {
-	x.inner.SetAudioLanguages(audioLanguages)
+// SetAudioLanguages wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetAudioLanguages(audioLanguages obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioLanguages:"), objref.IDOf(audioLanguages))
 }
 
-// Ratings calls the underlying Ratings.
-func (x *MTRChannelClusterProgramStruct) Ratings() *foundation.NSArray[objc.ID] {
-	return x.inner.Ratings()
+// Ratings wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) Ratings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ratings"))
+	return obj.Wrap(_r)
 }
 
-// SetRatings calls the underlying SetRatings.
-func (x *MTRChannelClusterProgramStruct) SetRatings(ratings *foundation.NSArray[objc.ID]) {
-	x.inner.SetRatings(ratings)
+// SetRatings wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetRatings(ratings obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatings:"), objref.IDOf(ratings))
 }
 
-// ReleaseDate calls the underlying ReleaseDate.
+// ReleaseDate wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) ReleaseDate() string {
-	_r := x.inner.ReleaseDate()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseDate"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetReleaseDate calls the underlying SetReleaseDate.
+// SetReleaseDate wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SetReleaseDate(releaseDate string) {
-	x.inner.SetReleaseDate(foundation.NSStringStringWithUTF8String(releaseDate))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleaseDate:"), purego.NSString(releaseDate))
 }
 
-// ParentalGuidanceText calls the underlying ParentalGuidanceText.
+// ParentalGuidanceText wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) ParentalGuidanceText() string {
-	_r := x.inner.ParentalGuidanceText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentalGuidanceText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetParentalGuidanceText calls the underlying SetParentalGuidanceText.
+// SetParentalGuidanceText wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SetParentalGuidanceText(parentalGuidanceText string) {
-	x.inner.SetParentalGuidanceText(foundation.NSStringStringWithUTF8String(parentalGuidanceText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentalGuidanceText:"), purego.NSString(parentalGuidanceText))
 }
 
-// RecordingFlag calls the underlying RecordingFlag.
-func (x *MTRChannelClusterProgramStruct) RecordingFlag() *foundation.NSNumber {
-	return x.inner.RecordingFlag()
+// RecordingFlag wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) RecordingFlag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordingFlag"))
+	return obj.Wrap(_r)
 }
 
-// SetRecordingFlag calls the underlying SetRecordingFlag.
-func (x *MTRChannelClusterProgramStruct) SetRecordingFlag(recordingFlag *foundation.NSNumber) {
-	x.inner.SetRecordingFlag(recordingFlag)
+// SetRecordingFlag wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetRecordingFlag(recordingFlag obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 }
 
-// SeriesInfo calls the underlying SeriesInfo.
+// SeriesInfo wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterProgramStruct) SeriesInfo() *MTRChannelClusterSeriesInfoStruct {
-	_r := x.inner.SeriesInfo()
-	if _r == nil {
-		return nil
-	}
-	return &MTRChannelClusterSeriesInfoStruct{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seriesInfo"))
+	return MTRChannelClusterSeriesInfoStructFromID(_r)
 }
 
-// SetSeriesInfo calls the underlying SetSeriesInfo.
-func (x *MTRChannelClusterProgramStruct) SetSeriesInfo(seriesInfo *raw.MTRChannelClusterSeriesInfoStruct) {
-	x.inner.SetSeriesInfo(seriesInfo)
+// SetSeriesInfo wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeriesInfo:"), objref.IDOf(seriesInfo))
 }
 
-// CategoryList calls the underlying CategoryList.
-func (x *MTRChannelClusterProgramStruct) CategoryList() *foundation.NSArray[objc.ID] {
-	return x.inner.CategoryList()
+// CategoryList wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) CategoryList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryList"))
+	return obj.Wrap(_r)
 }
 
-// SetCategoryList calls the underlying SetCategoryList.
-func (x *MTRChannelClusterProgramStruct) SetCategoryList(categoryList *foundation.NSArray[objc.ID]) {
-	x.inner.SetCategoryList(categoryList)
+// SetCategoryList wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetCategoryList(categoryList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryList:"), objref.IDOf(categoryList))
 }
 
-// CastList calls the underlying CastList.
-func (x *MTRChannelClusterProgramStruct) CastList() *foundation.NSArray[objc.ID] {
-	return x.inner.CastList()
+// CastList wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) CastList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("castList"))
+	return obj.Wrap(_r)
 }
 
-// SetCastList calls the underlying SetCastList.
-func (x *MTRChannelClusterProgramStruct) SetCastList(castList *foundation.NSArray[objc.ID]) {
-	x.inner.SetCastList(castList)
+// SetCastList wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramStruct) SetCastList(castList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastList:"), objref.IDOf(castList))
 }
 
 // MTRChannelClusterProgramStructable is the interface implemented by [MTRChannelClusterProgramStruct], for mocking and DI.
 type MTRChannelClusterProgramStructable interface {
-	Unwrap() *raw.MTRChannelClusterProgramStruct
+	obj.Object
 	WithIdentifier(identifier string) *MTRChannelClusterProgramStruct
 	WithChannel(channel MTRChannelClusterChannelInfoStructProvider) *MTRChannelClusterProgramStruct
-	WithStartTime(startTime *foundation.NSNumber) *MTRChannelClusterProgramStruct
-	WithEndTime(endTime *foundation.NSNumber) *MTRChannelClusterProgramStruct
+	WithStartTime(startTime obj.Object) *MTRChannelClusterProgramStruct
+	WithEndTime(endTime obj.Object) *MTRChannelClusterProgramStruct
 	WithTitle(title string) *MTRChannelClusterProgramStruct
 	WithSubtitle(subtitle string) *MTRChannelClusterProgramStruct
 	WithDescriptionString(descriptionString string) *MTRChannelClusterProgramStruct
 	WithReleaseDate(releaseDate string) *MTRChannelClusterProgramStruct
 	WithParentalGuidanceText(parentalGuidanceText string) *MTRChannelClusterProgramStruct
-	WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterProgramStruct
+	WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterProgramStruct
 	WithSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct
 	Identifier() string
 	SetIdentifier(identifier string)
 	Channel() *MTRChannelClusterChannelInfoStruct
-	SetChannel(channel *raw.MTRChannelClusterChannelInfoStruct)
-	StartTime() *foundation.NSNumber
-	SetStartTime(startTime *foundation.NSNumber)
-	EndTime() *foundation.NSNumber
-	SetEndTime(endTime *foundation.NSNumber)
+	SetChannel(channel *MTRChannelClusterChannelInfoStruct)
+	StartTime() obj.Object
+	SetStartTime(startTime obj.Object)
+	EndTime() obj.Object
+	SetEndTime(endTime obj.Object)
 	Title() string
 	SetTitle(title string)
 	Subtitle() string
 	SetSubtitle(subtitle string)
 	DescriptionString() string
 	SetDescriptionString(descriptionString string)
-	AudioLanguages() *foundation.NSArray[objc.ID]
-	SetAudioLanguages(audioLanguages *foundation.NSArray[objc.ID])
-	Ratings() *foundation.NSArray[objc.ID]
-	SetRatings(ratings *foundation.NSArray[objc.ID])
+	AudioLanguages() obj.Object
+	SetAudioLanguages(audioLanguages obj.Object)
+	Ratings() obj.Object
+	SetRatings(ratings obj.Object)
 	ReleaseDate() string
 	SetReleaseDate(releaseDate string)
 	ParentalGuidanceText() string
 	SetParentalGuidanceText(parentalGuidanceText string)
-	RecordingFlag() *foundation.NSNumber
-	SetRecordingFlag(recordingFlag *foundation.NSNumber)
+	RecordingFlag() obj.Object
+	SetRecordingFlag(recordingFlag obj.Object)
 	SeriesInfo() *MTRChannelClusterSeriesInfoStruct
-	SetSeriesInfo(seriesInfo *raw.MTRChannelClusterSeriesInfoStruct)
-	CategoryList() *foundation.NSArray[objc.ID]
-	SetCategoryList(categoryList *foundation.NSArray[objc.ID])
-	CastList() *foundation.NSArray[objc.ID]
-	SetCastList(castList *foundation.NSArray[objc.ID])
+	SetSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct)
+	CategoryList() obj.Object
+	SetCategoryList(categoryList obj.Object)
+	CastList() obj.Object
+	SetCastList(castList obj.Object)
 }
 
 var _ MTRChannelClusterProgramStructable = (*MTRChannelClusterProgramStruct)(nil)

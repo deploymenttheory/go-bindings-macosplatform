@@ -5,53 +5,66 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a custom user message.
+// MusicUserEvent is an idiomatic wrapper over the Objective-C class AVMusicUserEvent.
 //
-// MusicUserEvent wraps [raw.AVMusicUserEvent] with a fluent Go API.
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a custom user message.
 type MusicUserEvent struct {
-	inner *raw.AVMusicUserEvent
+	MusicEvent
 }
 
-// Unwrap returns the underlying [raw.AVMusicUserEvent].
-func (x *MusicUserEvent) Unwrap() *raw.AVMusicUserEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MusicUserEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MusicUserEventFromID adopts an existing object pointer as a MusicUserEvent (nil for 0).
+// MusicUserEventFromID adopts an existing Objective-C object as a MusicUserEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MusicUserEventFromID(id objc.ID) *MusicUserEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MusicUserEvent{inner: raw.AVMusicUserEventFromID(id)}
+	x := &MusicUserEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a user event with the data you specify.
-//
-// NewMusicUserEventWithData creates a new [MusicUserEvent].
-func NewMusicUserEventWithData(data *foundation.NSData) *MusicUserEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMusicUserEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &MusicUserEvent{inner: raw.AVMusicUserEventFromID(_id)}
+// musicUserEventAdopt wraps an Objective-C object that this code just created as a
+// MusicUserEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func musicUserEventAdopt(id objc.ID) *MusicUserEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MusicUserEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SizeInBytes calls the underlying SizeInBytes.
-func (x *MusicUserEvent) SizeInBytes() uint {
-	return x.inner.SizeInBytes()
+// NewMusicUserEventWithData creates a user event with the data you specify.
+func NewMusicUserEventWithData(data obj.Object) *MusicUserEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMusicUserEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return musicUserEventAdopt(_id)
 }
 
-func (x *MusicUserEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+// SizeInBytes wraps the corresponding Objective-C method.
+func (x *MusicUserEvent) SizeInBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytes"))
+	return _r
+}
 
 // MusicUserEventable is the interface implemented by [MusicUserEvent], for mocking and DI.
 type MusicUserEventable interface {
-	Unwrap() *raw.AVMusicUserEvent
-	SizeInBytes() uint
+	obj.Object
+	SizeInBytes() int
 }
 
 var _ MusicUserEventable = (*MusicUserEvent)(nil)
+
+var _ MusicEventProvider = (*MusicUserEvent)(nil)

@@ -5,83 +5,95 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Matrix4x4Array wraps [raw.MDLMatrix4x4Array] with a fluent Go API.
+// Matrix4x4Array is an idiomatic wrapper over the Objective-C class MDLMatrix4x4Array.
 type Matrix4x4Array struct {
-	inner *raw.MDLMatrix4x4Array
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMatrix4x4Array].
-func (x *Matrix4x4Array) Unwrap() *raw.MDLMatrix4x4Array { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Matrix4x4Array) ID() objc.ID { return x.inner.Ptr() }
-
-// Matrix4x4ArrayFromID adopts an existing object pointer as a Matrix4x4Array (nil for 0).
+// Matrix4x4ArrayFromID adopts an existing Objective-C object as a Matrix4x4Array
+// (nil for 0), retaining it and registering a release finalizer.
 func Matrix4x4ArrayFromID(id objc.ID) *Matrix4x4Array {
 	if id == 0 {
 		return nil
 	}
-	return &Matrix4x4Array{inner: raw.MDLMatrix4x4ArrayFromID(id)}
+	x := &Matrix4x4Array{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatrix4x4ArrayWithElementCount creates a new [Matrix4x4Array].
-func NewMatrix4x4ArrayWithElementCount(arrayElementCount uint) *Matrix4x4Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMatrix4x4Array")), objc.RegisterName("alloc"))
+// matrix4x4ArrayAdopt wraps an Objective-C object that this code just created as a
+// Matrix4x4Array (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrix4x4ArrayAdopt(id objc.ID) *Matrix4x4Array {
+	if id == 0 {
+		return nil
+	}
+	x := &Matrix4x4Array{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Matrix4x4Array) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Matrix4x4Array) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Matrix4x4Array) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Matrix4x4Array) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMatrix4x4ArrayWithElementCount creates a new Matrix4x4Array.
+func NewMatrix4x4ArrayWithElementCount(arrayElementCount int) *Matrix4x4Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMatrix4x4Array")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
-	return &Matrix4x4Array{inner: raw.MDLMatrix4x4ArrayFromID(_id)}
+	return matrix4x4ArrayAdopt(_id)
 }
 
-// Clear calls the underlying Clear.
+// Clear wraps the corresponding Objective-C method.
 func (x *Matrix4x4Array) Clear() {
-	x.inner.Clear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
-// SetFloat4x4ArrayCount calls the underlying SetFloat4x4ArrayCount.
-func (x *Matrix4x4Array) SetFloat4x4ArrayCount(valuesArray unsafe.Pointer, count uint) {
-	x.inner.SetFloat4x4ArrayCount(valuesArray, count)
+// ElementCount wraps the corresponding Objective-C method.
+func (x *Matrix4x4Array) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+	return _r
 }
 
-// SetDouble4x4ArrayCount calls the underlying SetDouble4x4ArrayCount.
-func (x *Matrix4x4Array) SetDouble4x4ArrayCount(valuesArray unsafe.Pointer, count uint) {
-	x.inner.SetDouble4x4ArrayCount(valuesArray, count)
-}
-
-// GetFloat4x4ArrayMaxCount calls the underlying GetFloat4x4ArrayMaxCount.
-func (x *Matrix4x4Array) GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetFloat4x4ArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDouble4x4ArrayMaxCount calls the underlying GetDouble4x4ArrayMaxCount.
-func (x *Matrix4x4Array) GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetDouble4x4ArrayMaxCount(valuesArray, maxCount)
-}
-
-// ElementCount calls the underlying ElementCount.
-func (x *Matrix4x4Array) ElementCount() uint {
-	return x.inner.ElementCount()
-}
-
-// Precision calls the underlying Precision.
-func (x *Matrix4x4Array) Precision() MDLDataPrecision {
-	return MDLDataPrecision(x.inner.Precision())
+// Precision wraps the corresponding Objective-C method.
+func (x *Matrix4x4Array) Precision() DataPrecision {
+	_r := objc.Send[DataPrecision](objref.IDOf(x), objc.RegisterName("precision"))
+	return _r
 }
 
 // Matrix4x4Arrayable is the interface implemented by [Matrix4x4Array], for mocking and DI.
 type Matrix4x4Arrayable interface {
-	Unwrap() *raw.MDLMatrix4x4Array
+	obj.Object
 	Clear()
-	SetFloat4x4ArrayCount(valuesArray unsafe.Pointer, count uint)
-	SetDouble4x4ArrayCount(valuesArray unsafe.Pointer, count uint)
-	GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	ElementCount() uint
-	Precision() MDLDataPrecision
+	ElementCount() int
+	Precision() DataPrecision
 }
 
 var _ Matrix4x4Arrayable = (*Matrix4x4Array)(nil)

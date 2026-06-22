@@ -5,56 +5,58 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that supplies audio data.
+// AudioSourceNode is an idiomatic wrapper over the Objective-C class AVAudioSourceNode.
 //
-// AudioSourceNode wraps [raw.AVAudioSourceNode] with a fluent Go API.
+// It embeds [AudioNode], promoting that type's methods.
+//
+// An object that supplies audio data.
 type AudioSourceNode struct {
-	inner *raw.AVAudioSourceNode
+	AudioNode
 }
 
-// Unwrap returns the underlying [raw.AVAudioSourceNode].
-func (x *AudioSourceNode) Unwrap() *raw.AVAudioSourceNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioSourceNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioSourceNodeFromID adopts an existing object pointer as a AudioSourceNode (nil for 0).
+// AudioSourceNodeFromID adopts an existing Objective-C object as a AudioSourceNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioSourceNodeFromID(id objc.ID) *AudioSourceNode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioSourceNode{inner: raw.AVAudioSourceNodeFromID(id)}
+	x := &AudioSourceNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an audio source node with a block that supplies audio data.
-//
-// NewAudioSourceNodeWithRenderBlock creates a new [AudioSourceNode].
-func NewAudioSourceNodeWithRenderBlock(block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AudioSourceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSourceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRenderBlock:"), block)
-	return &AudioSourceNode{inner: raw.AVAudioSourceNodeFromID(_id)}
+// audioSourceNodeAdopt wraps an Objective-C object that this code just created as a
+// AudioSourceNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioSourceNodeAdopt(id objc.ID) *AudioSourceNode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioSourceNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates an audio source node with the audio format and a block that supplies audio data.
-//
-// NewAudioSourceNodeWithFormatRenderBlock creates a new [AudioSourceNode].
-func NewAudioSourceNodeWithFormatRenderBlock(format *raw.AVAudioFormat, block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AudioSourceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSourceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:renderBlock:"), format.Ptr(), block)
-	return &AudioSourceNode{inner: raw.AVAudioSourceNodeFromID(_id)}
+// NewAudioSourceNode creates a new AudioSourceNode.
+func NewAudioSourceNode() *AudioSourceNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSourceNode")), objc.RegisterName("new"))
+	return audioSourceNodeAdopt(_id)
 }
-
-func (x *AudioSourceNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
 
 // AudioSourceNodeable is the interface implemented by [AudioSourceNode], for mocking and DI.
 type AudioSourceNodeable interface {
-	Unwrap() *raw.AVAudioSourceNode
+	obj.Object
 }
 
 var _ AudioSourceNodeable = (*AudioSourceNode)(nil)
+
+var _ AudioNodeProvider = (*AudioSourceNode)(nil)

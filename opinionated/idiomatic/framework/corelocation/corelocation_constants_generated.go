@@ -5,17 +5,14 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCLErrorDomain returns the string constant kCLErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KCLErrorDomain() objc.ID {
-	return purego.CFConstant(raw.KCLErrorDomain())
-}
+// KCLErrorDomain returns the string constant kCLErrorDomain, for use as a dictionary key or argument.
+func KCLErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCLErrorDomain"))) }
 
-// KCLErrorUserInfoAlternateRegionKey returns the string constant kCLErrorUserInfoAlternateRegionKey as an objc.ID, for use as a dictionary key or selector argument.
-func KCLErrorUserInfoAlternateRegionKey() objc.ID {
-	return purego.CFConstant(raw.KCLErrorUserInfoAlternateRegionKey())
+// KCLErrorUserInfoAlternateRegionKey returns the string constant kCLErrorUserInfoAlternateRegionKey, for use as a dictionary key or argument.
+func KCLErrorUserInfoAlternateRegionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCLErrorUserInfoAlternateRegionKey")))
 }

@@ -5,173 +5,210 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMessagesClusterMessageStruct wraps [raw.MTRMessagesClusterMessageStruct] with a fluent Go API.
+// MTRMessagesClusterMessageStruct is an idiomatic wrapper over the Objective-C class MTRMessagesClusterMessageStruct.
 type MTRMessagesClusterMessageStruct struct {
-	inner *raw.MTRMessagesClusterMessageStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMessagesClusterMessageStruct].
-func (x *MTRMessagesClusterMessageStruct) Unwrap() *raw.MTRMessagesClusterMessageStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMessagesClusterMessageStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMessagesClusterMessageStructFromID adopts an existing object pointer as a MTRMessagesClusterMessageStruct (nil for 0).
+// MTRMessagesClusterMessageStructFromID adopts an existing Objective-C object as a MTRMessagesClusterMessageStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMessagesClusterMessageStructFromID(id objc.ID) *MTRMessagesClusterMessageStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMessagesClusterMessageStruct{inner: raw.MTRMessagesClusterMessageStructFromID(id)}
+	x := &MTRMessagesClusterMessageStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMessagesClusterMessageStruct creates a new [MTRMessagesClusterMessageStruct].
+// mTRMessagesClusterMessageStructAdopt wraps an Objective-C object that this code just created as a
+// MTRMessagesClusterMessageStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMessagesClusterMessageStructAdopt(id objc.ID) *MTRMessagesClusterMessageStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMessagesClusterMessageStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMessagesClusterMessageStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMessagesClusterMessageStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMessagesClusterMessageStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMessagesClusterMessageStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRMessagesClusterMessageStruct creates a new MTRMessagesClusterMessageStruct.
 func NewMTRMessagesClusterMessageStruct() *MTRMessagesClusterMessageStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMessagesClusterMessageStruct")), objc.RegisterName("new"))
-	return &MTRMessagesClusterMessageStruct{inner: raw.MTRMessagesClusterMessageStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessageStruct")), objc.RegisterName("new"))
+	return mTRMessagesClusterMessageStructAdopt(_id)
 }
 
-// WithMessageID sets the messageID property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageStruct) WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageStruct {
-	x.inner.SetMessageID(messageID)
+// WithMessageID sets the property and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageStruct) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return x
 }
 
-// WithPriority sets the priority property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageStruct) WithPriority(priority *foundation.NSNumber) *MTRMessagesClusterMessageStruct {
-	x.inner.SetPriority(priority)
+// WithPriority sets the property and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageStruct) WithPriority(priority obj.Object) *MTRMessagesClusterMessageStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return x
 }
 
-// WithMessageControl sets the messageControl property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageStruct) WithMessageControl(messageControl *foundation.NSNumber) *MTRMessagesClusterMessageStruct {
-	x.inner.SetMessageControl(messageControl)
+// WithMessageControl sets the property and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageStruct) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterMessageStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 	return x
 }
 
-// WithStartTime sets the startTime property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageStruct) WithStartTime(startTime *foundation.NSNumber) *MTRMessagesClusterMessageStruct {
-	x.inner.SetStartTime(startTime)
+// WithStartTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageStruct) WithStartTime(startTime obj.Object) *MTRMessagesClusterMessageStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageStruct) WithDuration(duration *foundation.NSNumber) *MTRMessagesClusterMessageStruct {
-	x.inner.SetDuration(duration)
+// WithDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageStruct) WithDuration(duration obj.Object) *MTRMessagesClusterMessageStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// WithMessageText sets the messageText property and returns the receiver for chaining.
+// WithMessageText sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageStruct) WithMessageText(messageText string) *MTRMessagesClusterMessageStruct {
-	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 	return x
 }
 
-// MessageID calls the underlying MessageID.
-func (x *MTRMessagesClusterMessageStruct) MessageID() *foundation.NSData {
-	return x.inner.MessageID()
+// MessageID wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) MessageID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
+	return obj.Wrap(_r)
 }
 
-// SetMessageID calls the underlying SetMessageID.
-func (x *MTRMessagesClusterMessageStruct) SetMessageID(messageID *foundation.NSData) {
-	x.inner.SetMessageID(messageID)
+// SetMessageID wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) SetMessageID(messageID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }
 
-// Priority calls the underlying Priority.
-func (x *MTRMessagesClusterMessageStruct) Priority() *foundation.NSNumber {
-	return x.inner.Priority()
+// Priority wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) Priority() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
+	return obj.Wrap(_r)
 }
 
-// SetPriority calls the underlying SetPriority.
-func (x *MTRMessagesClusterMessageStruct) SetPriority(priority *foundation.NSNumber) {
-	x.inner.SetPriority(priority)
+// SetPriority wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) SetPriority(priority obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 }
 
-// MessageControl calls the underlying MessageControl.
-func (x *MTRMessagesClusterMessageStruct) MessageControl() *foundation.NSNumber {
-	return x.inner.MessageControl()
+// MessageControl wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) MessageControl() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageControl"))
+	return obj.Wrap(_r)
 }
 
-// SetMessageControl calls the underlying SetMessageControl.
-func (x *MTRMessagesClusterMessageStruct) SetMessageControl(messageControl *foundation.NSNumber) {
-	x.inner.SetMessageControl(messageControl)
+// SetMessageControl wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) SetMessageControl(messageControl obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 }
 
-// StartTime calls the underlying StartTime.
-func (x *MTRMessagesClusterMessageStruct) StartTime() *foundation.NSNumber {
-	return x.inner.StartTime()
+// StartTime wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+	return obj.Wrap(_r)
 }
 
-// SetStartTime calls the underlying SetStartTime.
-func (x *MTRMessagesClusterMessageStruct) SetStartTime(startTime *foundation.NSNumber) {
-	x.inner.SetStartTime(startTime)
+// SetStartTime wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) SetStartTime(startTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
-// Duration calls the underlying Duration.
-func (x *MTRMessagesClusterMessageStruct) Duration() *foundation.NSNumber {
-	return x.inner.Duration()
+// Duration wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+	return obj.Wrap(_r)
 }
 
-// SetDuration calls the underlying SetDuration.
-func (x *MTRMessagesClusterMessageStruct) SetDuration(duration *foundation.NSNumber) {
-	x.inner.SetDuration(duration)
+// SetDuration wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) SetDuration(duration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
-// MessageText calls the underlying MessageText.
+// MessageText wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) MessageText() string {
-	_r := x.inner.MessageText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMessageText calls the underlying SetMessageText.
+// SetMessageText wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageStruct) SetMessageText(messageText string) {
-	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 }
 
-// Responses calls the underlying Responses.
-func (x *MTRMessagesClusterMessageStruct) Responses() *foundation.NSArray[objc.ID] {
-	return x.inner.Responses()
+// Responses wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) Responses() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responses"))
+	return obj.Wrap(_r)
 }
 
-// SetResponses calls the underlying SetResponses.
-func (x *MTRMessagesClusterMessageStruct) SetResponses(responses *foundation.NSArray[objc.ID]) {
-	x.inner.SetResponses(responses)
+// SetResponses wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageStruct) SetResponses(responses obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponses:"), objref.IDOf(responses))
 }
 
 // MTRMessagesClusterMessageStructable is the interface implemented by [MTRMessagesClusterMessageStruct], for mocking and DI.
 type MTRMessagesClusterMessageStructable interface {
-	Unwrap() *raw.MTRMessagesClusterMessageStruct
-	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageStruct
-	WithPriority(priority *foundation.NSNumber) *MTRMessagesClusterMessageStruct
-	WithMessageControl(messageControl *foundation.NSNumber) *MTRMessagesClusterMessageStruct
-	WithStartTime(startTime *foundation.NSNumber) *MTRMessagesClusterMessageStruct
-	WithDuration(duration *foundation.NSNumber) *MTRMessagesClusterMessageStruct
+	obj.Object
+	WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageStruct
+	WithPriority(priority obj.Object) *MTRMessagesClusterMessageStruct
+	WithMessageControl(messageControl obj.Object) *MTRMessagesClusterMessageStruct
+	WithStartTime(startTime obj.Object) *MTRMessagesClusterMessageStruct
+	WithDuration(duration obj.Object) *MTRMessagesClusterMessageStruct
 	WithMessageText(messageText string) *MTRMessagesClusterMessageStruct
-	MessageID() *foundation.NSData
-	SetMessageID(messageID *foundation.NSData)
-	Priority() *foundation.NSNumber
-	SetPriority(priority *foundation.NSNumber)
-	MessageControl() *foundation.NSNumber
-	SetMessageControl(messageControl *foundation.NSNumber)
-	StartTime() *foundation.NSNumber
-	SetStartTime(startTime *foundation.NSNumber)
-	Duration() *foundation.NSNumber
-	SetDuration(duration *foundation.NSNumber)
+	MessageID() obj.Object
+	SetMessageID(messageID obj.Object)
+	Priority() obj.Object
+	SetPriority(priority obj.Object)
+	MessageControl() obj.Object
+	SetMessageControl(messageControl obj.Object)
+	StartTime() obj.Object
+	SetStartTime(startTime obj.Object)
+	Duration() obj.Object
+	SetDuration(duration obj.Object)
 	MessageText() string
 	SetMessageText(messageText string)
-	Responses() *foundation.NSArray[objc.ID]
-	SetResponses(responses *foundation.NSArray[objc.ID])
+	Responses() obj.Object
+	SetResponses(responses obj.Object)
 }
 
 var _ MTRMessagesClusterMessageStructable = (*MTRMessagesClusterMessageStruct)(nil)

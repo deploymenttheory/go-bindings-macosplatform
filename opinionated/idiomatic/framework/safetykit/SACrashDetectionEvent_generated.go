@@ -5,67 +5,90 @@
 package safetykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Describes the information about a vehicular crash.
+// CrashDetectionEvent is an idiomatic wrapper over the Objective-C class SACrashDetectionEvent.
 //
-// CrashDetectionEvent wraps [raw.SACrashDetectionEvent] with a fluent Go API.
+// Describes the information about a vehicular crash.
 type CrashDetectionEvent struct {
-	inner *raw.SACrashDetectionEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SACrashDetectionEvent].
-func (x *CrashDetectionEvent) Unwrap() *raw.SACrashDetectionEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CrashDetectionEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// CrashDetectionEventFromID adopts an existing object pointer as a CrashDetectionEvent (nil for 0).
+// CrashDetectionEventFromID adopts an existing Objective-C object as a CrashDetectionEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func CrashDetectionEventFromID(id objc.ID) *CrashDetectionEvent {
 	if id == 0 {
 		return nil
 	}
-	return &CrashDetectionEvent{inner: raw.SACrashDetectionEventFromID(id)}
+	x := &CrashDetectionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCrashDetectionEvent creates a new [CrashDetectionEvent].
+// crashDetectionEventAdopt wraps an Objective-C object that this code just created as a
+// CrashDetectionEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func crashDetectionEventAdopt(id objc.ID) *CrashDetectionEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &CrashDetectionEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CrashDetectionEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CrashDetectionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CrashDetectionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CrashDetectionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCrashDetectionEvent creates a new CrashDetectionEvent.
 func NewCrashDetectionEvent() *CrashDetectionEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SACrashDetectionEvent")), objc.RegisterName("new"))
-	return &CrashDetectionEvent{inner: raw.SACrashDetectionEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SACrashDetectionEvent")), objc.RegisterName("new"))
+	return crashDetectionEventAdopt(_id)
 }
 
-// date @discussion The time a crash was detected
-//
-// Date calls the underlying Date.
-func (x *CrashDetectionEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
+// Date date The time a crash was detected
+func (x *CrashDetectionEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
-// response @discussion enum value representing the emergency response to the Crash Detection event @sa SACrashDetectionEventResponse
-//
-// Response calls the underlying Response.
-func (x *CrashDetectionEvent) Response() SACrashDetectionEventResponse {
-	return SACrashDetectionEventResponse(x.inner.Response())
-}
-
-// location @discussion Location information describing the geographical location of where the Crash Detection occurred. @sa CLLocation
-//
-// Location calls the underlying Location.
-func (x *CrashDetectionEvent) Location() unsafe.Pointer {
-	return x.inner.Location()
+// Response response enum value representing the emergency response to the Crash Detection event
+func (x *CrashDetectionEvent) Response() CrashDetectionEventResponse {
+	_r := objc.Send[CrashDetectionEventResponse](objref.IDOf(x), objc.RegisterName("response"))
+	return _r
 }
 
 // CrashDetectionEventable is the interface implemented by [CrashDetectionEvent], for mocking and DI.
 type CrashDetectionEventable interface {
-	Unwrap() *raw.SACrashDetectionEvent
-	Date() *foundation.NSDate
-	Response() SACrashDetectionEventResponse
-	Location() unsafe.Pointer
+	obj.Object
+	Date() obj.Object
+	Response() CrashDetectionEventResponse
 }
 
 var _ CrashDetectionEventable = (*CrashDetectionEvent)(nil)

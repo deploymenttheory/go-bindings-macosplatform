@@ -5,122 +5,106 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CommandBuffer wraps [raw.MPSCommandBuffer] with a fluent Go API.
+// CommandBuffer is an idiomatic wrapper over the Objective-C class MPSCommandBuffer.
 type CommandBuffer struct {
-	inner *raw.MPSCommandBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCommandBuffer].
-func (x *CommandBuffer) Unwrap() *raw.MPSCommandBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CommandBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// CommandBufferFromID adopts an existing object pointer as a CommandBuffer (nil for 0).
+// CommandBufferFromID adopts an existing Objective-C object as a CommandBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func CommandBufferFromID(id objc.ID) *CommandBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &CommandBuffer{inner: raw.MPSCommandBufferFromID(id)}
-}
-
-// @abstract   Initializes an empty MPSCommandBuffer object with given MTLCommandBuffer. Once we create this MPSCommandBuffer, any methods utilizing it could call commitAndContinue and so the users original commandBuffer may have been committed. Please use the rootCommandBuffer method to get the current alive underlying MTLCommandBuffer. @result     A pointer to the newly initialized MPSCommandBuffer object.
-//
-// NewCommandBufferWithCommandBuffer creates a new [CommandBuffer].
-func NewCommandBufferWithCommandBuffer(commandBuffer metal.MTLCommandBuffer) *CommandBuffer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCommandBuffer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandBuffer:"), commandBuffer)
-	return &CommandBuffer{inner: raw.MPSCommandBufferFromID(_id)}
-}
-
-// @property   predicate @abstract   A GPU predicate object. Default: nil.
-//
-// WithPredicate sets the predicate property and returns the receiver for chaining.
-func (x *CommandBuffer) WithPredicate(predicate *mpscore.MPSPredicate) *CommandBuffer {
-	x.inner.SetPredicate(predicate)
+	x := &CommandBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property   heapProvider @abstract   A application supplied object to allocate MTLHeaps for MPS @discussion By default this is nil, which will use MPS' device level global heap cache to allocate the heaps. This is a reasonable choice. However, it may be inefficient if you are keeping your own MTLHeap, since there will be two pessimistically sized free stores which may be larger than is strictly necessary, and of course fragmentation across multiple heaps. In such cases, the problem may be solved either by using MPS' automatically managed heap (simple) or having MPS use your heap. The heapProvider allows you to implement the second case.  To use the MPS heap, simply make temporary MPSImages, vectors and matrices. If multiple MPSCommandBuffers reference the same MTLCommandBuffer, changing the heapProvider on one will change the heap provider for all of them.
-//
-// WithHeapProvider sets the heapProvider property and returns the receiver for chaining.
-func (x *CommandBuffer) WithHeapProvider(heapProvider mpscore.MPSHeapProvider) *CommandBuffer {
-	x.inner.SetHeapProvider(heapProvider)
+// commandBufferAdopt wraps an Objective-C object that this code just created as a
+// CommandBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func commandBufferAdopt(id objc.ID) *CommandBuffer {
+	if id == 0 {
+		return nil
+	}
+	x := &CommandBuffer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Commit work encoded so far and continue with a new underlying command buffer @discussion This method commits the underlying root MTLCommandBuffer, and makes a new one on the same command queue. The MPS heap is moved forward to the new command buffer such that temporary objects used by the previous command buffer can be still be used with the new one. This provides a way to move work already encoded into consideration by the Metal back end sooner. For large workloads, e.g. a neural networking graph periodically calling -commitAndContinue may allow you to improve CPU / GPU parallelism without the substantial memory increases associated with double buffering. It will also help decrease overall latency. Any Metal schedule or completion callbacks previously attached to this object will remain attached to the old command buffer and will fire as expected as the old command buffer is scheduled and completes. If your application is relying on such callbacks to coordinate retain / release of important objects that are needed for work encoded after -commitAndContinue, your application should retain these objects before calling commitAndContinue, and attach new release callbacks to this object with a new completion handler so that they persist through the lifetime of the new underlying command buffer. You may do this, for example by adding the objects to a mutable array before calling -commitAndContinue, then release the mutable array in a new completion callback added after -commitAndContinue. Because -commitAndContinue commits the old command buffer then switches to a new one, some aspects of command buffer completion may surprise unwary developers. For example, -waitUntilCompleted called immediately after -commitAndContinue asks Metal to wait for the new command buffer to finish, not the old one. Since the new command buffer presumably hasn't been committed yet, it is formally a deadlock, resources may leak and Metal may complain. Your application should ether call -commit before -waitUntilCompleted, or capture the -rootCommandBuffer from before the call to -commitAndContinue and wait on that.  Similarly, your application should be sure to use the appropriate command buffer when querying the [MTLCommandBuffer status] property. If the underlying MTLCommandBuffer also implements -commitAndContinue, then the message will be forwarded to that object instead. In this way, underlying predicate objects and other state will be preserved.
-//
-// CommitAndContinue calls the underlying CommitAndContinue.
+// Description returns the object's -description text.
+func (x *CommandBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CommandBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CommandBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CommandBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCommandBuffer creates a new CommandBuffer.
+func NewCommandBuffer() *CommandBuffer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCommandBuffer")), objc.RegisterName("new"))
+	return commandBufferAdopt(_id)
+}
+
+// WithPredicate a GPU predicate object. Default: nil.
+func (x *CommandBuffer) WithPredicate(predicate obj.Object) *CommandBuffer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+	return x
+}
+
+// CommitAndContinue commit work encoded so far and continue with a new underlying command buffer This method commits the underlying root MTLCommandBuffer, and makes a new one on the same command queue. The MPS heap is moved forward to the new command buffer such that temporary objects used by the previous command buffer can be still be used with the new one. This provides a way to move work already encoded into consideration by the Metal back end sooner. For large workloads, e.g. a neural networking graph periodically calling -commitAndContinue may allow you to improve CPU / GPU parallelism without the substantial memory increases associated with double buffering. It will also help decrease overall latency. Any Metal schedule or completion callbacks previously attached to this object will remain attached to the old command buffer and will fire as expected as the old command buffer is scheduled and completes. If your application is relying on such callbacks to coordinate retain / release of important objects that are needed for work encoded after -commitAndContinue, your application should retain these objects before calling commitAndContinue, and attach new release callbacks to this object with a new completion handler so that they persist through the lifetime of the new underlying command buffer. You may do this, for example by adding the objects to a mutable array before calling -commitAndContinue, then release the mutable array in a new completion callback added after -commitAndContinue. Because -commitAndContinue commits the old command buffer then switches to a new one, some aspects of command buffer completion may surprise unwary developers. For example, -waitUntilCompleted called immediately after -commitAndContinue asks Metal to wait for the new command buffer to finish, not the old one. Since the new command buffer presumably hasn't been committed yet, it is formally a deadlock, resources may leak and Metal may complain. Your application should ether call -commit before -waitUntilCompleted, or capture the -rootCommandBuffer from before the call to -commitAndContinue and wait on that.  Similarly, your application should be sure to use the appropriate command buffer when querying the [MTLCommandBuffer status] property. If the underlying MTLCommandBuffer also implements -commitAndContinue, then the message will be forwarded to that object instead. In this way, underlying predicate objects and other state will be preserved.
 func (x *CommandBuffer) CommitAndContinue() {
-	x.inner.CommitAndContinue()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commitAndContinue"))
 }
 
-// @abstract   Prefetch heap into the MPS command buffer heap cache. @discussion If there is not sufficient free storage in the MPS heap for the command buffer for allocations of total size size, pre-warm the MPS heap with a new MTLHeap allocation of sufficient size.  If this size turns out to be too small MPS may ask for more heaps later to cover additional allocations. If heapProvider is not nil, the heapProvider will be used. @param      size        The minimum size of the free store needed
-//
-// PrefetchHeapForWorkloadSize calls the underlying PrefetchHeapForWorkloadSize.
-func (x *CommandBuffer) PrefetchHeapForWorkloadSize(size uint) {
-	x.inner.PrefetchHeapForWorkloadSize(size)
+// PrefetchHeapForWorkloadSize prefetch heap into the MPS command buffer heap cache. If there is not sufficient free storage in the MPS heap for the command buffer for allocations of total size size, pre-warm the MPS heap with a new MTLHeap allocation of sufficient size.  If this size turns out to be too small MPS may ask for more heaps later to cover additional allocations. If heapProvider is not nil, the heapProvider will be used.
+func (x *CommandBuffer) PrefetchHeapForWorkloadSize(size int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prefetchHeapForWorkloadSize:"), size)
 }
 
-// @property   commandBuffer @abstract   The Metal Command Buffer that was used to initialize this object.
-//
-// CommandBuffer calls the underlying CommandBuffer.
-func (x *CommandBuffer) CommandBuffer() metal.MTLCommandBuffer {
-	return x.inner.CommandBuffer()
+// Predicate a GPU predicate object. Default: nil.
+func (x *CommandBuffer) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
 
-// @property   rootCommandBuffer @abstract   The base MTLCommandBuffer underlying the MPSCommandBuffer @discussion MPSCommandBuffers may wrap other MPSCommandBuffers, in the process creating what is in effect a stack of predicate objects that may be pushed or popped by making new MPSCommandBuffers or by calling -commandBuffer. In some circumstances, it is preferable to use the root command buffer, particularly when trying to identify the command buffer that will be commited by -commitAndContinue.
-//
-// RootCommandBuffer calls the underlying RootCommandBuffer.
-func (x *CommandBuffer) RootCommandBuffer() metal.MTLCommandBuffer {
-	return x.inner.RootCommandBuffer()
-}
-
-// @property   predicate @abstract   A GPU predicate object. Default: nil.
-//
-// Predicate calls the underlying Predicate.
-func (x *CommandBuffer) Predicate() *mpscore.MPSPredicate {
-	return x.inner.Predicate()
-}
-
-// SetPredicate calls the underlying SetPredicate.
-func (x *CommandBuffer) SetPredicate(predicate *mpscore.MPSPredicate) {
-	x.inner.SetPredicate(predicate)
-}
-
-// @property   heapProvider @abstract   A application supplied object to allocate MTLHeaps for MPS @discussion By default this is nil, which will use MPS' device level global heap cache to allocate the heaps. This is a reasonable choice. However, it may be inefficient if you are keeping your own MTLHeap, since there will be two pessimistically sized free stores which may be larger than is strictly necessary, and of course fragmentation across multiple heaps. In such cases, the problem may be solved either by using MPS' automatically managed heap (simple) or having MPS use your heap. The heapProvider allows you to implement the second case.  To use the MPS heap, simply make temporary MPSImages, vectors and matrices. If multiple MPSCommandBuffers reference the same MTLCommandBuffer, changing the heapProvider on one will change the heap provider for all of them.
-//
-// HeapProvider calls the underlying HeapProvider.
-func (x *CommandBuffer) HeapProvider() mpscore.MPSHeapProvider {
-	return x.inner.HeapProvider()
-}
-
-// SetHeapProvider calls the underlying SetHeapProvider.
-func (x *CommandBuffer) SetHeapProvider(heapProvider mpscore.MPSHeapProvider) {
-	x.inner.SetHeapProvider(heapProvider)
+// SetPredicate wraps the corresponding Objective-C method.
+func (x *CommandBuffer) SetPredicate(predicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
 // CommandBufferable is the interface implemented by [CommandBuffer], for mocking and DI.
 type CommandBufferable interface {
-	Unwrap() *raw.MPSCommandBuffer
-	WithPredicate(predicate *mpscore.MPSPredicate) *CommandBuffer
-	WithHeapProvider(heapProvider mpscore.MPSHeapProvider) *CommandBuffer
+	obj.Object
+	WithPredicate(predicate obj.Object) *CommandBuffer
 	CommitAndContinue()
-	PrefetchHeapForWorkloadSize(size uint)
-	CommandBuffer() metal.MTLCommandBuffer
-	RootCommandBuffer() metal.MTLCommandBuffer
-	Predicate() *mpscore.MPSPredicate
-	SetPredicate(predicate *mpscore.MPSPredicate)
-	HeapProvider() mpscore.MPSHeapProvider
-	SetHeapProvider(heapProvider mpscore.MPSHeapProvider)
+	PrefetchHeapForWorkloadSize(size int)
+	Predicate() obj.Object
+	SetPredicate(predicate obj.Object)
 }
 
 var _ CommandBufferable = (*CommandBuffer)(nil)

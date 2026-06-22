@@ -4,144 +4,102 @@
 
 package corefoundation
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-)
+// Structure used to represent a point in time using the Gregorian calendar.
+type CFGregorianDate struct {
+	Year   int
+	Month  int8
+	Day    int8
+	Hour   int8
+	Minute int8
+	Second float64
+}
 
-// CFAllocatorContext is a type alias for the raw CFAllocatorContext value-type struct.
-type CFAllocatorContext = raw.CFAllocatorContext
+// Structure used to represent a time interval in Gregorian units.
+type CFGregorianUnits struct {
+	Years   int
+	Months  int
+	Days    int
+	Hours   int
+	Minutes int
+	Seconds float64
+}
 
-// CFArrayCallBacks is a type alias for the raw CFArrayCallBacks value-type struct.
-type CFArrayCallBacks = raw.CFArrayCallBacks
+// A structure representing a range of sequential items in a container, such as characters in a buffer or elements in a collection.
+type CFRange struct {
+	Location int
+	Length   int
+}
 
-// CFBagCallBacks is a type alias for the raw CFBagCallBacks value-type struct.
-type CFBagCallBacks = raw.CFBagCallBacks
+// The structure returned by CFReadStreamGetError and CFWriteStreamGetError.
+type CFStreamError struct {
+	Domain int
+	Error  int
+}
 
-// CFBinaryHeapCallBacks is a type alias for the raw CFBinaryHeapCallBacks value-type struct.
-type CFBinaryHeapCallBacks = raw.CFBinaryHeapCallBacks
+// Structure holding a 32-bit float value in a platform-independentbyte order.
+type CFSwappedFloat32 struct {
+	V uint32
+}
 
-// CFBinaryHeapCompareContext is a type alias for the raw CFBinaryHeapCompareContext value-type struct.
-type CFBinaryHeapCompareContext = raw.CFBinaryHeapCompareContext
+// Structure holding a 64-bit float value in a platform-independentbyte order.
+type CFSwappedFloat64 struct {
+	V uint64
+}
 
-// CFDictionaryKeyCallBacks is a type alias for the raw CFDictionaryKeyCallBacks value-type struct.
-type CFDictionaryKeyCallBacks = raw.CFDictionaryKeyCallBacks
+// A 128-bit struct that represents a UUID as raw bytes.
+type CFUUIDBytes struct {
+	Byte0  uint8
+	Byte1  uint8
+	Byte2  uint8
+	Byte3  uint8
+	Byte4  uint8
+	Byte5  uint8
+	Byte6  uint8
+	Byte7  uint8
+	Byte8  uint8
+	Byte9  uint8
+	Byte10 uint8
+	Byte11 uint8
+	Byte12 uint8
+	Byte13 uint8
+	Byte14 uint8
+	Byte15 uint8
+}
 
-// CFDictionaryValueCallBacks is a type alias for the raw CFDictionaryValueCallBacks value-type struct.
-type CFDictionaryValueCallBacks = raw.CFDictionaryValueCallBacks
+type CGAffineTransform struct {
+	A  float64
+	B  float64
+	C  float64
+	D  float64
+	Tx float64
+	Ty float64
+}
 
-// CFFileDescriptorContext is a type alias for the raw CFFileDescriptorContext value-type struct.
-type CFFileDescriptorContext = raw.CFFileDescriptorContext
+type CGAffineTransformComponents struct {
+	Scale           CGSize
+	HorizontalShear float64
+	Rotation        float64
+	Translation     CGVector
+}
 
-// CFGregorianDate is a type alias for the raw CFGregorianDate value-type struct.
-type CFGregorianDate = raw.CFGregorianDate
+type CGPoint struct {
+	X float64
+	Y float64
+}
 
-// CFGregorianUnits is a type alias for the raw CFGregorianUnits value-type struct.
-type CFGregorianUnits = raw.CFGregorianUnits
+type CGRect struct {
+	Origin CGPoint
+	Size   CGSize
+}
 
-// CFMachPortContext is a type alias for the raw CFMachPortContext value-type struct.
-type CFMachPortContext = raw.CFMachPortContext
+// A structure that contains width and height values.
+type CGSize struct {
+	Width  float64
+	Height float64
+}
 
-// CFMessagePortContext is a type alias for the raw CFMessagePortContext value-type struct.
-type CFMessagePortContext = raw.CFMessagePortContext
-
-// CFRange is a type alias for the raw CFRange value-type struct.
-type CFRange = raw.CFRange
-
-// CFRunLoopObserverContext is a type alias for the raw CFRunLoopObserverContext value-type struct.
-type CFRunLoopObserverContext = raw.CFRunLoopObserverContext
-
-// CFRunLoopSourceContext is a type alias for the raw CFRunLoopSourceContext value-type struct.
-type CFRunLoopSourceContext = raw.CFRunLoopSourceContext
-
-// CFRunLoopSourceContext1 is a type alias for the raw CFRunLoopSourceContext1 value-type struct.
-type CFRunLoopSourceContext1 = raw.CFRunLoopSourceContext1
-
-// CFRunLoopTimerContext is a type alias for the raw CFRunLoopTimerContext value-type struct.
-type CFRunLoopTimerContext = raw.CFRunLoopTimerContext
-
-// CFSetCallBacks is a type alias for the raw CFSetCallBacks value-type struct.
-type CFSetCallBacks = raw.CFSetCallBacks
-
-// CFSocketContext is a type alias for the raw CFSocketContext value-type struct.
-type CFSocketContext = raw.CFSocketContext
-
-// CFSocketSignature is a type alias for the raw CFSocketSignature value-type struct.
-type CFSocketSignature = raw.CFSocketSignature
-
-// CFStreamClientContext is a type alias for the raw CFStreamClientContext value-type struct.
-type CFStreamClientContext = raw.CFStreamClientContext
-
-// CFStreamError is a type alias for the raw CFStreamError value-type struct.
-type CFStreamError = raw.CFStreamError
-
-// CFStringInlineBuffer is a type alias for the raw CFStringInlineBuffer value-type struct.
-type CFStringInlineBuffer = raw.CFStringInlineBuffer
-
-// CFSwappedFloat32 is a type alias for the raw CFSwappedFloat32 value-type struct.
-type CFSwappedFloat32 = raw.CFSwappedFloat32
-
-// CFSwappedFloat64 is a type alias for the raw CFSwappedFloat64 value-type struct.
-type CFSwappedFloat64 = raw.CFSwappedFloat64
-
-// CFTreeContext is a type alias for the raw CFTreeContext value-type struct.
-type CFTreeContext = raw.CFTreeContext
-
-// CFUUIDBytes is a type alias for the raw CFUUIDBytes value-type struct.
-type CFUUIDBytes = raw.CFUUIDBytes
-
-// CFXMLAttributeDeclarationInfo is a type alias for the raw CFXMLAttributeDeclarationInfo value-type struct.
-type CFXMLAttributeDeclarationInfo = raw.CFXMLAttributeDeclarationInfo
-
-// CFXMLAttributeListDeclarationInfo is a type alias for the raw CFXMLAttributeListDeclarationInfo value-type struct.
-type CFXMLAttributeListDeclarationInfo = raw.CFXMLAttributeListDeclarationInfo
-
-// CFXMLDocumentInfo is a type alias for the raw CFXMLDocumentInfo value-type struct.
-type CFXMLDocumentInfo = raw.CFXMLDocumentInfo
-
-// CFXMLDocumentTypeInfo is a type alias for the raw CFXMLDocumentTypeInfo value-type struct.
-type CFXMLDocumentTypeInfo = raw.CFXMLDocumentTypeInfo
-
-// CFXMLElementInfo is a type alias for the raw CFXMLElementInfo value-type struct.
-type CFXMLElementInfo = raw.CFXMLElementInfo
-
-// CFXMLElementTypeDeclarationInfo is a type alias for the raw CFXMLElementTypeDeclarationInfo value-type struct.
-type CFXMLElementTypeDeclarationInfo = raw.CFXMLElementTypeDeclarationInfo
-
-// CFXMLEntityInfo is a type alias for the raw CFXMLEntityInfo value-type struct.
-type CFXMLEntityInfo = raw.CFXMLEntityInfo
-
-// CFXMLEntityReferenceInfo is a type alias for the raw CFXMLEntityReferenceInfo value-type struct.
-type CFXMLEntityReferenceInfo = raw.CFXMLEntityReferenceInfo
-
-// CFXMLExternalID is a type alias for the raw CFXMLExternalID value-type struct.
-type CFXMLExternalID = raw.CFXMLExternalID
-
-// CFXMLNotationInfo is a type alias for the raw CFXMLNotationInfo value-type struct.
-type CFXMLNotationInfo = raw.CFXMLNotationInfo
-
-// CFXMLParserCallBacks is a type alias for the raw CFXMLParserCallBacks value-type struct.
-type CFXMLParserCallBacks = raw.CFXMLParserCallBacks
-
-// CFXMLParserContext is a type alias for the raw CFXMLParserContext value-type struct.
-type CFXMLParserContext = raw.CFXMLParserContext
-
-// CFXMLProcessingInstructionInfo is a type alias for the raw CFXMLProcessingInstructionInfo value-type struct.
-type CFXMLProcessingInstructionInfo = raw.CFXMLProcessingInstructionInfo
-
-// CGAffineTransform is a type alias for the raw CGAffineTransform value-type struct.
-type CGAffineTransform = raw.CGAffineTransform
-
-// CGAffineTransformComponents is a type alias for the raw CGAffineTransformComponents value-type struct.
-type CGAffineTransformComponents = raw.CGAffineTransformComponents
-
-// CGPoint is a type alias for the raw CGPoint value-type struct.
-type CGPoint = raw.CGPoint
-
-// CGRect is a type alias for the raw CGRect value-type struct.
-type CGRect = raw.CGRect
-
-// CGSize is a type alias for the raw CGSize value-type struct.
-type CGSize = raw.CGSize
-
-// CGVector is a type alias for the raw CGVector value-type struct.
-type CGVector = raw.CGVector
+// A structure that contains a two-dimensional vector.
+type CGVector struct {
+	Dx float64
+	Dy float64
+}

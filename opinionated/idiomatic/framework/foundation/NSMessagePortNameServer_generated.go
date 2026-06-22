@@ -5,54 +5,65 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A server takes and returns message ports.
+// MessagePortNameServer is an idiomatic wrapper over the Objective-C class NSMessagePortNameServer.
 //
-// MessagePortNameServer wraps [raw.NSMessagePortNameServer] with a fluent Go API.
+// It embeds [PortNameServer], promoting that type's methods.
+//
+// A server takes and returns message ports.
 type MessagePortNameServer struct {
-	inner *raw.NSMessagePortNameServer
+	PortNameServer
 }
 
-// Unwrap returns the underlying [raw.NSMessagePortNameServer].
-func (x *MessagePortNameServer) Unwrap() *raw.NSMessagePortNameServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MessagePortNameServer) ID() objc.ID { return x.inner.Ptr() }
-
-// MessagePortNameServerFromID adopts an existing object pointer as a MessagePortNameServer (nil for 0).
+// MessagePortNameServerFromID adopts an existing Objective-C object as a MessagePortNameServer
+// (nil for 0), retaining it and registering a release finalizer.
 func MessagePortNameServerFromID(id objc.ID) *MessagePortNameServer {
 	if id == 0 {
 		return nil
 	}
-	return &MessagePortNameServer{inner: raw.NSMessagePortNameServerFromID(id)}
-}
-
-// NewMessagePortNameServer creates a new [MessagePortNameServer].
-func NewMessagePortNameServer() *MessagePortNameServer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMessagePortNameServer")), objc.RegisterName("new"))
-	return &MessagePortNameServer{inner: raw.NSMessagePortNameServerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MessagePortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MessagePortNameServer {
-	x.inner.NSPortNameServer.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MessagePortNameServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *MessagePortNameServer) asPortNameServer() *raw.NSPortNameServer {
-	return &x.inner.NSPortNameServer
+// messagePortNameServerAdopt wraps an Objective-C object that this code just created as a
+// MessagePortNameServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messagePortNameServerAdopt(id objc.ID) *MessagePortNameServer {
+	if id == 0 {
+		return nil
+	}
+	x := &MessagePortNameServer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MessagePortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
+// NewMessagePortNameServer creates a new MessagePortNameServer.
+func NewMessagePortNameServer() *MessagePortNameServer {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMessagePortNameServer")), objc.RegisterName("new"))
+	return messagePortNameServerAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MessagePortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // MessagePortNameServerable is the interface implemented by [MessagePortNameServer], for mocking and DI.
 type MessagePortNameServerable interface {
-	Unwrap() *raw.NSMessagePortNameServer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MessagePortNameServer
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer
 }
 
 var _ MessagePortNameServerable = (*MessagePortNameServer)(nil)
+
+var _ PortNameServerProvider = (*MessagePortNameServer)(nil)

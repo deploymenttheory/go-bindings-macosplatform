@@ -5,693 +5,506 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that configures new render pipeline state objects for mesh shading.
+// MeshRenderPipelineDescriptor is an idiomatic wrapper over the Objective-C class MTLMeshRenderPipelineDescriptor.
 //
-// MeshRenderPipelineDescriptor wraps [raw.MTLMeshRenderPipelineDescriptor] with a fluent Go API.
+// An object that configures new render pipeline state objects for mesh shading.
 type MeshRenderPipelineDescriptor struct {
-	inner *raw.MTLMeshRenderPipelineDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLMeshRenderPipelineDescriptor].
-func (x *MeshRenderPipelineDescriptor) Unwrap() *raw.MTLMeshRenderPipelineDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshRenderPipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshRenderPipelineDescriptorFromID adopts an existing object pointer as a MeshRenderPipelineDescriptor (nil for 0).
+// MeshRenderPipelineDescriptorFromID adopts an existing Objective-C object as a MeshRenderPipelineDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshRenderPipelineDescriptorFromID(id objc.ID) *MeshRenderPipelineDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MeshRenderPipelineDescriptor{inner: raw.MTLMeshRenderPipelineDescriptorFromID(id)}
+	x := &MeshRenderPipelineDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMeshRenderPipelineDescriptor creates a new [MeshRenderPipelineDescriptor].
+// meshRenderPipelineDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MeshRenderPipelineDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshRenderPipelineDescriptorAdopt(id objc.ID) *MeshRenderPipelineDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshRenderPipelineDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MeshRenderPipelineDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshRenderPipelineDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshRenderPipelineDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshRenderPipelineDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeshRenderPipelineDescriptor creates a new MeshRenderPipelineDescriptor.
 func NewMeshRenderPipelineDescriptor() *MeshRenderPipelineDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLMeshRenderPipelineDescriptor")), objc.RegisterName("new"))
-	return &MeshRenderPipelineDescriptor{inner: raw.MTLMeshRenderPipelineDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLMeshRenderPipelineDescriptor")), objc.RegisterName("new"))
+	return meshRenderPipelineDescriptorAdopt(_id)
 }
 
-// @property label @discussion A name or description provided by the application that will be displayed in debugging tools. The default value is nil.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a name or description provided by the application that will be displayed in debugging tools. The default value is nil.
 func (x *MeshRenderPipelineDescriptor) WithLabel(label string) *MeshRenderPipelineDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property objectFunction @discussion Optional shader function responsible for determining how many threadgroups of the mesh shader to run, can optionally provide payload data for the mesh stage. If this is nil, no payload data is available to the mesh function, and the draw command determines how many threadgroups of the mesh stage to run. The default value is nil.
-//
-// WithObjectFunction sets the objectFunction property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithObjectFunction(objectFunction raw.MTLFunction) *MeshRenderPipelineDescriptor {
-	x.inner.SetObjectFunction(objectFunction)
+// WithMaxTotalThreadsPerObjectThreadgroup the maximum size of the product of threadsPerObjectThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on objectFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
+func (x *MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup int) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerObjectThreadgroup:"), maxTotalThreadsPerObjectThreadgroup)
 	return x
 }
 
-// @property meshFunction @discussion Shader function responsible for exporting a chunk of geometry per threadgroup for the rasterizer. The default value is nil.
-//
-// WithMeshFunction sets the meshFunction property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithMeshFunction(meshFunction raw.MTLFunction) *MeshRenderPipelineDescriptor {
-	x.inner.SetMeshFunction(meshFunction)
+// WithMaxTotalThreadsPerMeshThreadgroup the maximum size of the product of threadsPerMeshThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on meshFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
+func (x *MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup int) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerMeshThreadgroup:"), maxTotalThreadsPerMeshThreadgroup)
 	return x
 }
 
-// @property fragmentFunction @discussion Like a classical render pipeline, this fragments covered by the rasterized geometry are shaded with this function. The default value is nil. To create a pipeline, you must either set fragmentFunction to non-nil, or set rasterizationEnabled to NO.
-//
-// WithFragmentFunction sets the fragmentFunction property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithFragmentFunction(fragmentFunction raw.MTLFunction) *MeshRenderPipelineDescriptor {
-	x.inner.SetFragmentFunction(fragmentFunction)
-	return x
-}
-
-// @property maxTotalThreadsPerObjectThreadgroup @discussion The maximum size of the product of threadsPerObjectThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on objectFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
-//
-// WithMaxTotalThreadsPerObjectThreadgroup sets the maxTotalThreadsPerObjectThreadgroup property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint) *MeshRenderPipelineDescriptor {
-	x.inner.SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup)
-	return x
-}
-
-// @property maxTotalThreadsPerMeshThreadgroup @discussion The maximum size of the product of threadsPerMeshThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on meshFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
-//
-// WithMaxTotalThreadsPerMeshThreadgroup sets the maxTotalThreadsPerMeshThreadgroup property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint) *MeshRenderPipelineDescriptor {
-	x.inner.SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup)
-	return x
-}
-
-// @property objectThreadgroupSizeIsMultipleOfThreadExecutionWidth @discussion Set this value to YES when you will only use draws with the product of threadsPerObjectThreadgroup set to a multiple of the objectThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
-//
-// WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth sets the objectThreadgroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
+// WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth set this value to YES when you will only use draws with the product of threadsPerObjectThreadgroup set to a multiple of the objectThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
 func (x *MeshRenderPipelineDescriptor) WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MeshRenderPipelineDescriptor {
-	x.inner.SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth:"), objectThreadgroupSizeIsMultipleOfThreadExecutionWidth)
 	return x
 }
 
-// @property meshThreadgroupSizeIsMultipleOfThreadExecutionWidth @discussion Set this value to YES when you will only use draws with the product of threadsPerMeshThreadgroup set to a multiple of the meshThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
-//
-// WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth sets the meshThreadgroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
+// WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth set this value to YES when you will only use draws with the product of threadsPerMeshThreadgroup set to a multiple of the meshThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
 func (x *MeshRenderPipelineDescriptor) WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MeshRenderPipelineDescriptor {
-	x.inner.SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth:"), meshThreadgroupSizeIsMultipleOfThreadExecutionWidth)
 	return x
 }
 
-// @property payloadMemoryLength @discussion The size, in bytes, of the buffer indicated by [[payload]] in the object and mesh shader. If this value is 0, the size of the dereferenced type declared in the object shader for the buffer is used (space for a single element is assumed for pointers). The default value is 0.
-//
-// WithPayloadMemoryLength sets the payloadMemoryLength property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithPayloadMemoryLength(payloadMemoryLength uint) *MeshRenderPipelineDescriptor {
-	x.inner.SetPayloadMemoryLength(payloadMemoryLength)
+// WithPayloadMemoryLength the size, in bytes, of the buffer indicated by [[payload]] in the object and mesh shader. If this value is 0, the size of the dereferenced type declared in the object shader for the buffer is used (space for a single element is assumed for pointers). The default value is 0.
+func (x *MeshRenderPipelineDescriptor) WithPayloadMemoryLength(payloadMemoryLength int) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayloadMemoryLength:"), payloadMemoryLength)
 	return x
 }
 
-// @property maxTotalThreadgroupsPerMeshGrid @discussion The maximum value of the product of vector elements that the object shader may pass to the mesh_grid_properties::set_threadgroups_per_grid built-in function. The default value is 0, which means that the value specified with the [[max_total_threadgroups_per_mesh_grid(N)]] specified on objectFunction will be used. When both the [[max_total_threadgroups_per_mesh_grid(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threadgroups per mesh grid". Specifying this value is optional; it may be used to improve scheduling of the workload. If neither this value nor the shader attribute are used, the device's maximum supported value is used instead.
-//
-// WithMaxTotalThreadgroupsPerMeshGrid sets the maxTotalThreadgroupsPerMeshGrid property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) *MeshRenderPipelineDescriptor {
-	x.inner.SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid)
+// WithMaxTotalThreadgroupsPerMeshGrid the maximum value of the product of vector elements that the object shader may pass to the mesh_grid_properties::set_threadgroups_per_grid built-in function. The default value is 0, which means that the value specified with the [[max_total_threadgroups_per_mesh_grid(N)]] specified on objectFunction will be used. When both the [[max_total_threadgroups_per_mesh_grid(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threadgroups per mesh grid". Specifying this value is optional; it may be used to improve scheduling of the workload. If neither this value nor the shader attribute are used, the device's maximum supported value is used instead.
+func (x *MeshRenderPipelineDescriptor) WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid int) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadgroupsPerMeshGrid:"), maxTotalThreadgroupsPerMeshGrid)
 	return x
 }
 
-// @property rasterSampleCount @discussion The number of samples per fragment of the render pass in which this pipeline will be used.
-//
-// WithRasterSampleCount sets the rasterSampleCount property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount uint) *MeshRenderPipelineDescriptor {
-	x.inner.SetRasterSampleCount(rasterSampleCount)
+// WithRasterSampleCount the number of samples per fragment of the render pass in which this pipeline will be used.
+func (x *MeshRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount int) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
 	return x
 }
 
-// @property alphaToCoverageEnabled @abstract Whether the alpha value exported by the fragment shader for the first color attachment is converted to a sample mask, which is subsequently AND-ed with the fragments' sample mask @discussion The default value is NO.
-//
-// WithAlphaToCoverageEnabled sets the alphaToCoverageEnabled property and returns the receiver for chaining.
+// WithAlphaToCoverageEnabled whether the alpha value exported by the fragment shader for the first color attachment is converted to a sample mask, which is subsequently AND-ed with the fragments' sample mask The default value is NO.
 func (x *MeshRenderPipelineDescriptor) WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *MeshRenderPipelineDescriptor {
-	x.inner.SetAlphaToCoverageEnabled(alphaToCoverageEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToCoverageEnabled:"), alphaToCoverageEnabled)
 	return x
 }
 
-// @property alphaToOneEnabled @abstract Whether the alpha value exported by the fragment shader for all color attachments is modified to 1 (after evaluating alphaToCoverage). @discussion The default value is NO.
-//
-// WithAlphaToOneEnabled sets the alphaToOneEnabled property and returns the receiver for chaining.
+// WithAlphaToOneEnabled whether the alpha value exported by the fragment shader for all color attachments is modified to 1 (after evaluating alphaToCoverage). The default value is NO.
 func (x *MeshRenderPipelineDescriptor) WithAlphaToOneEnabled(alphaToOneEnabled bool) *MeshRenderPipelineDescriptor {
-	x.inner.SetAlphaToOneEnabled(alphaToOneEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToOneEnabled:"), alphaToOneEnabled)
 	return x
 }
 
-// @property rasterizationEnabled @abstract Whether rasterization is disabled, all primitives are dropped prior to rasterization. @discussion The default value is YES.
-//
-// WithRasterizationEnabled sets the rasterizationEnabled property and returns the receiver for chaining.
+// WithRasterizationEnabled whether rasterization is disabled, all primitives are dropped prior to rasterization. The default value is YES.
 func (x *MeshRenderPipelineDescriptor) WithRasterizationEnabled(rasterizationEnabled bool) *MeshRenderPipelineDescriptor {
-	x.inner.SetRasterizationEnabled(rasterizationEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationEnabled:"), rasterizationEnabled)
 	return x
 }
 
-// @property maxVertexAmplificationCount @abstract The maximum value that can be passed to setVertexAmplificationCount when using this pipeline. @discussion The default value is 1. The value must be supported by the device, which can be checked with supportsVertexAmplificationCount.
-//
-// WithMaxVertexAmplificationCount sets the maxVertexAmplificationCount property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MeshRenderPipelineDescriptor {
-	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
+// WithMaxVertexAmplificationCount the maximum value that can be passed to setVertexAmplificationCount when using this pipeline. The default value is 1. The value must be supported by the device, which can be checked with supportsVertexAmplificationCount.
+func (x *MeshRenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount int) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexAmplificationCount:"), maxVertexAmplificationCount)
 	return x
 }
 
-// @property depthAttachmentPixelFormat @abstract The pixel format of the depth attachment of the render pass in which this pipeline will be used. @discussion The default value is MTLPixelFormatInvalid; indicating no depth attachment will be used.
-//
-// WithDepthAttachmentPixelFormat sets the depthAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor {
-	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
+// WithDepthAttachmentPixelFormat the pixel format of the depth attachment of the render pass in which this pipeline will be used. The default value is MTLPixelFormatInvalid; indicating no depth attachment will be used.
+func (x *MeshRenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthAttachmentPixelFormat:"), depthAttachmentPixelFormat)
 	return x
 }
 
-// @property stencilAttachmentPixelFormat @abstract The pixel format of the stencil attachment of the render pass in which this pipeline will be used. @discussion The default value is MTLPixelFormatInvalid; indicating no stencil attachment will be used.
-//
-// WithStencilAttachmentPixelFormat sets the stencilAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor {
-	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
+// WithStencilAttachmentPixelFormat the pixel format of the stencil attachment of the render pass in which this pipeline will be used. The default value is MTLPixelFormatInvalid; indicating no stencil attachment will be used.
+func (x *MeshRenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilAttachmentPixelFormat:"), stencilAttachmentPixelFormat)
 	return x
 }
 
-// @property supportIndirectCommandBuffers @abstract Whether this pipeline will support being used by commands in an indirect command buffer. @discussion The default value is NO.
-//
-// WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
+// WithSupportIndirectCommandBuffers whether this pipeline will support being used by commands in an indirect command buffer. The default value is NO.
 func (x *MeshRenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *MeshRenderPipelineDescriptor {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
 	return x
 }
 
-// @property objectLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the object function. @see MTLLinkedFunctions
-//
-// WithObjectLinkedFunctions sets the objectLinkedFunctions property and returns the receiver for chaining.
+// WithObjectLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the object function.
 func (x *MeshRenderPipelineDescriptor) WithObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor {
-	x.inner.SetObjectLinkedFunctions(objectLinkedFunctions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectLinkedFunctions:"), objref.IDOf(objectLinkedFunctions))
 	return x
 }
 
-// @property meshLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the mesh function. @see MTLLinkedFunctions
-//
-// WithMeshLinkedFunctions sets the meshLinkedFunctions property and returns the receiver for chaining.
+// WithMeshLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the mesh function.
 func (x *MeshRenderPipelineDescriptor) WithMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor {
-	x.inner.SetMeshLinkedFunctions(meshLinkedFunctions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeshLinkedFunctions:"), objref.IDOf(meshLinkedFunctions))
 	return x
 }
 
-// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
-//
-// WithFragmentLinkedFunctions sets the fragmentLinkedFunctions property and returns the receiver for chaining.
+// WithFragmentLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the fragment function.
 func (x *MeshRenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor {
-	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentLinkedFunctions:"), objref.IDOf(fragmentLinkedFunctions))
 	return x
 }
 
-// A value that enables or disables shader validation for the pipeline.
-//
-// WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *MeshRenderPipelineDescriptor {
-	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
+// WithShaderValidation a value that enables or disables shader validation for the pipeline.
+func (x *MeshRenderPipelineDescriptor) WithShaderValidation(shaderValidation ShaderValidation) *MeshRenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 	return x
 }
 
-// @property requiredThreadsPerObjectThreadgroup @abstract Sets the required object threads-per-threadgroup during mesh draws. The `threadsPerObjectThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
-//
-// WithRequiredThreadsPerObjectThreadgroup sets the requiredThreadsPerObjectThreadgroup property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor {
-	x.inner.SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup)
-	return x
-}
-
-// @property requiredThreadsPerMeshThreadgroup @abstract Sets the required mesh threads-per-threadgroup during mesh draws. The `threadsPerMeshThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
-//
-// WithRequiredThreadsPerMeshThreadgroup sets the requiredThreadsPerMeshThreadgroup property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor {
-	x.inner.SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup)
-	return x
-}
-
-// @method reset @abstract Restore all mesh pipeline descriptor properties to their default values.
-//
-// Reset calls the underlying Reset.
+// Reset restore all mesh pipeline descriptor properties to their default values.
 func (x *MeshRenderPipelineDescriptor) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// @property label @discussion A name or description provided by the application that will be displayed in debugging tools. The default value is nil.
-//
-// Label calls the underlying Label.
+// Label a name or description provided by the application that will be displayed in debugging tools. The default value is nil.
 func (x *MeshRenderPipelineDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @property objectFunction @discussion Optional shader function responsible for determining how many threadgroups of the mesh shader to run, can optionally provide payload data for the mesh stage. If this is nil, no payload data is available to the mesh function, and the draw command determines how many threadgroups of the mesh stage to run. The default value is nil.
-//
-// ObjectFunction calls the underlying ObjectFunction.
-func (x *MeshRenderPipelineDescriptor) ObjectFunction() raw.MTLFunction {
-	return x.inner.ObjectFunction()
+// MaxTotalThreadsPerObjectThreadgroup the maximum size of the product of threadsPerObjectThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on objectFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
+func (x *MeshRenderPipelineDescriptor) MaxTotalThreadsPerObjectThreadgroup() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerObjectThreadgroup"))
+	return _r
 }
 
-// SetObjectFunction calls the underlying SetObjectFunction.
-func (x *MeshRenderPipelineDescriptor) SetObjectFunction(objectFunction raw.MTLFunction) {
-	x.inner.SetObjectFunction(objectFunction)
+// SetMaxTotalThreadsPerObjectThreadgroup wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerObjectThreadgroup:"), maxTotalThreadsPerObjectThreadgroup)
 }
 
-// @property meshFunction @discussion Shader function responsible for exporting a chunk of geometry per threadgroup for the rasterizer. The default value is nil.
-//
-// MeshFunction calls the underlying MeshFunction.
-func (x *MeshRenderPipelineDescriptor) MeshFunction() raw.MTLFunction {
-	return x.inner.MeshFunction()
+// MaxTotalThreadsPerMeshThreadgroup the maximum size of the product of threadsPerMeshThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on meshFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
+func (x *MeshRenderPipelineDescriptor) MaxTotalThreadsPerMeshThreadgroup() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerMeshThreadgroup"))
+	return _r
 }
 
-// SetMeshFunction calls the underlying SetMeshFunction.
-func (x *MeshRenderPipelineDescriptor) SetMeshFunction(meshFunction raw.MTLFunction) {
-	x.inner.SetMeshFunction(meshFunction)
+// SetMaxTotalThreadsPerMeshThreadgroup wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerMeshThreadgroup:"), maxTotalThreadsPerMeshThreadgroup)
 }
 
-// @property fragmentFunction @discussion Like a classical render pipeline, this fragments covered by the rasterized geometry are shaded with this function. The default value is nil. To create a pipeline, you must either set fragmentFunction to non-nil, or set rasterizationEnabled to NO.
-//
-// FragmentFunction calls the underlying FragmentFunction.
-func (x *MeshRenderPipelineDescriptor) FragmentFunction() raw.MTLFunction {
-	return x.inner.FragmentFunction()
-}
-
-// SetFragmentFunction calls the underlying SetFragmentFunction.
-func (x *MeshRenderPipelineDescriptor) SetFragmentFunction(fragmentFunction raw.MTLFunction) {
-	x.inner.SetFragmentFunction(fragmentFunction)
-}
-
-// @property maxTotalThreadsPerObjectThreadgroup @discussion The maximum size of the product of threadsPerObjectThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on objectFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
-//
-// MaxTotalThreadsPerObjectThreadgroup calls the underlying MaxTotalThreadsPerObjectThreadgroup.
-func (x *MeshRenderPipelineDescriptor) MaxTotalThreadsPerObjectThreadgroup() uint {
-	return x.inner.MaxTotalThreadsPerObjectThreadgroup()
-}
-
-// SetMaxTotalThreadsPerObjectThreadgroup calls the underlying SetMaxTotalThreadsPerObjectThreadgroup.
-func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint) {
-	x.inner.SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup)
-}
-
-// @property maxTotalThreadsPerMeshThreadgroup @discussion The maximum size of the product of threadsPerMeshThreadgroup that can be used for draws with this pipeline. This information can be used by the optimizer to generate more efficient code, specifically when the specified value does not exceed the thread execution width of the underlying GPU. The default value is 0, which means that the value specified with the [[max_total_threads_per_threadgroup(N)]] specified on meshFunction will be used. When both the [[max_total_threads_per_threadgroup(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threads per threadgroup".
-//
-// MaxTotalThreadsPerMeshThreadgroup calls the underlying MaxTotalThreadsPerMeshThreadgroup.
-func (x *MeshRenderPipelineDescriptor) MaxTotalThreadsPerMeshThreadgroup() uint {
-	return x.inner.MaxTotalThreadsPerMeshThreadgroup()
-}
-
-// SetMaxTotalThreadsPerMeshThreadgroup calls the underlying SetMaxTotalThreadsPerMeshThreadgroup.
-func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint) {
-	x.inner.SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup)
-}
-
-// @property objectThreadgroupSizeIsMultipleOfThreadExecutionWidth @discussion Set this value to YES when you will only use draws with the product of threadsPerObjectThreadgroup set to a multiple of the objectThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
-//
-// ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+// ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth set this value to YES when you will only use draws with the product of threadsPerObjectThreadgroup set to a multiple of the objectThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
 func (x *MeshRenderPipelineDescriptor) ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool {
-	return x.inner.ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("objectThreadgroupSizeIsMultipleOfThreadExecutionWidth"))
+	return _r
 }
 
-// SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+// SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) {
-	x.inner.SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth:"), objectThreadgroupSizeIsMultipleOfThreadExecutionWidth)
 }
 
-// @property meshThreadgroupSizeIsMultipleOfThreadExecutionWidth @discussion Set this value to YES when you will only use draws with the product of threadsPerMeshThreadgroup set to a multiple of the meshThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
-//
-// MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+// MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth set this value to YES when you will only use draws with the product of threadsPerMeshThreadgroup set to a multiple of the meshThreadExecutionWidth of the returned pipeline state. This information can be used by the optimizer to generate more efficient code. The default value is NO.
 func (x *MeshRenderPipelineDescriptor) MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool {
-	return x.inner.MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("meshThreadgroupSizeIsMultipleOfThreadExecutionWidth"))
+	return _r
 }
 
-// SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+// SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) {
-	x.inner.SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth:"), meshThreadgroupSizeIsMultipleOfThreadExecutionWidth)
 }
 
-// @property payloadMemoryLength @discussion The size, in bytes, of the buffer indicated by [[payload]] in the object and mesh shader. If this value is 0, the size of the dereferenced type declared in the object shader for the buffer is used (space for a single element is assumed for pointers). The default value is 0.
-//
-// PayloadMemoryLength calls the underlying PayloadMemoryLength.
-func (x *MeshRenderPipelineDescriptor) PayloadMemoryLength() uint {
-	return x.inner.PayloadMemoryLength()
+// PayloadMemoryLength the size, in bytes, of the buffer indicated by [[payload]] in the object and mesh shader. If this value is 0, the size of the dereferenced type declared in the object shader for the buffer is used (space for a single element is assumed for pointers). The default value is 0.
+func (x *MeshRenderPipelineDescriptor) PayloadMemoryLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("payloadMemoryLength"))
+	return _r
 }
 
-// SetPayloadMemoryLength calls the underlying SetPayloadMemoryLength.
-func (x *MeshRenderPipelineDescriptor) SetPayloadMemoryLength(payloadMemoryLength uint) {
-	x.inner.SetPayloadMemoryLength(payloadMemoryLength)
+// SetPayloadMemoryLength wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetPayloadMemoryLength(payloadMemoryLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayloadMemoryLength:"), payloadMemoryLength)
 }
 
-// @property maxTotalThreadgroupsPerMeshGrid @discussion The maximum value of the product of vector elements that the object shader may pass to the mesh_grid_properties::set_threadgroups_per_grid built-in function. The default value is 0, which means that the value specified with the [[max_total_threadgroups_per_mesh_grid(N)]] specified on objectFunction will be used. When both the [[max_total_threadgroups_per_mesh_grid(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threadgroups per mesh grid". Specifying this value is optional; it may be used to improve scheduling of the workload. If neither this value nor the shader attribute are used, the device's maximum supported value is used instead.
-//
-// MaxTotalThreadgroupsPerMeshGrid calls the underlying MaxTotalThreadgroupsPerMeshGrid.
-func (x *MeshRenderPipelineDescriptor) MaxTotalThreadgroupsPerMeshGrid() uint {
-	return x.inner.MaxTotalThreadgroupsPerMeshGrid()
+// MaxTotalThreadgroupsPerMeshGrid the maximum value of the product of vector elements that the object shader may pass to the mesh_grid_properties::set_threadgroups_per_grid built-in function. The default value is 0, which means that the value specified with the [[max_total_threadgroups_per_mesh_grid(N)]] specified on objectFunction will be used. When both the [[max_total_threadgroups_per_mesh_grid(N)]] attribute and a non-zero value are specified, both values must match. Any value specified cannot exceed the device limit as documented in the "Metal Feature Set Tables" for "Maximum threadgroups per mesh grid". Specifying this value is optional; it may be used to improve scheduling of the workload. If neither this value nor the shader attribute are used, the device's maximum supported value is used instead.
+func (x *MeshRenderPipelineDescriptor) MaxTotalThreadgroupsPerMeshGrid() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadgroupsPerMeshGrid"))
+	return _r
 }
 
-// SetMaxTotalThreadgroupsPerMeshGrid calls the underlying SetMaxTotalThreadgroupsPerMeshGrid.
-func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) {
-	x.inner.SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid)
+// SetMaxTotalThreadgroupsPerMeshGrid wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadgroupsPerMeshGrid:"), maxTotalThreadgroupsPerMeshGrid)
 }
 
-// @property objectBuffers @abstract Provide mutability information on the buffers used by objectFunction. @discussion Specifying these values is optional; it may be used to optimize the shader code.
-//
-// ObjectBuffers calls the underlying ObjectBuffers.
+// ObjectBuffers provide mutability information on the buffers used by objectFunction. Specifying these values is optional; it may be used to optimize the shader code.
 func (x *MeshRenderPipelineDescriptor) ObjectBuffers() *PipelineBufferDescriptorArray {
-	_r := x.inner.ObjectBuffers()
-	if _r == nil {
-		return nil
-	}
-	return &PipelineBufferDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBuffers"))
+	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// @property meshBuffers @abstract Provide mutability information on the buffers used by meshFunction. @discussion Specifying these values is optional; it may be used to optimize the shader code.
-//
-// MeshBuffers calls the underlying MeshBuffers.
+// MeshBuffers provide mutability information on the buffers used by meshFunction. Specifying these values is optional; it may be used to optimize the shader code.
 func (x *MeshRenderPipelineDescriptor) MeshBuffers() *PipelineBufferDescriptorArray {
-	_r := x.inner.MeshBuffers()
-	if _r == nil {
-		return nil
-	}
-	return &PipelineBufferDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshBuffers"))
+	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// @property fragmentBuffers @abstract Provide mutability information on the buffers used by fragmentFunction. @discussion Specifying these values is optional; it may be used to optimize the shader code.
-//
-// FragmentBuffers calls the underlying FragmentBuffers.
+// FragmentBuffers provide mutability information on the buffers used by fragmentFunction. Specifying these values is optional; it may be used to optimize the shader code.
 func (x *MeshRenderPipelineDescriptor) FragmentBuffers() *PipelineBufferDescriptorArray {
-	_r := x.inner.FragmentBuffers()
-	if _r == nil {
-		return nil
-	}
-	return &PipelineBufferDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentBuffers"))
+	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// @property rasterSampleCount @discussion The number of samples per fragment of the render pass in which this pipeline will be used.
-//
-// RasterSampleCount calls the underlying RasterSampleCount.
-func (x *MeshRenderPipelineDescriptor) RasterSampleCount() uint {
-	return x.inner.RasterSampleCount()
+// RasterSampleCount the number of samples per fragment of the render pass in which this pipeline will be used.
+func (x *MeshRenderPipelineDescriptor) RasterSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rasterSampleCount"))
+	return _r
 }
 
-// SetRasterSampleCount calls the underlying SetRasterSampleCount.
-func (x *MeshRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount uint) {
-	x.inner.SetRasterSampleCount(rasterSampleCount)
+// SetRasterSampleCount wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
 }
 
-// @property alphaToCoverageEnabled @abstract Whether the alpha value exported by the fragment shader for the first color attachment is converted to a sample mask, which is subsequently AND-ed with the fragments' sample mask @discussion The default value is NO.
-//
-// IsAlphaToCoverageEnabled calls the underlying IsAlphaToCoverageEnabled.
+// IsAlphaToCoverageEnabled whether the alpha value exported by the fragment shader for the first color attachment is converted to a sample mask, which is subsequently AND-ed with the fragments' sample mask The default value is NO.
 func (x *MeshRenderPipelineDescriptor) IsAlphaToCoverageEnabled() bool {
-	return x.inner.IsAlphaToCoverageEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAlphaToCoverageEnabled"))
+	return _r
 }
 
-// SetAlphaToCoverageEnabled calls the underlying SetAlphaToCoverageEnabled.
+// SetAlphaToCoverageEnabled wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetAlphaToCoverageEnabled(alphaToCoverageEnabled bool) {
-	x.inner.SetAlphaToCoverageEnabled(alphaToCoverageEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToCoverageEnabled:"), alphaToCoverageEnabled)
 }
 
-// @property alphaToOneEnabled @abstract Whether the alpha value exported by the fragment shader for all color attachments is modified to 1 (after evaluating alphaToCoverage). @discussion The default value is NO.
-//
-// IsAlphaToOneEnabled calls the underlying IsAlphaToOneEnabled.
+// IsAlphaToOneEnabled whether the alpha value exported by the fragment shader for all color attachments is modified to 1 (after evaluating alphaToCoverage). The default value is NO.
 func (x *MeshRenderPipelineDescriptor) IsAlphaToOneEnabled() bool {
-	return x.inner.IsAlphaToOneEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAlphaToOneEnabled"))
+	return _r
 }
 
-// SetAlphaToOneEnabled calls the underlying SetAlphaToOneEnabled.
+// SetAlphaToOneEnabled wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetAlphaToOneEnabled(alphaToOneEnabled bool) {
-	x.inner.SetAlphaToOneEnabled(alphaToOneEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToOneEnabled:"), alphaToOneEnabled)
 }
 
-// @property rasterizationEnabled @abstract Whether rasterization is disabled, all primitives are dropped prior to rasterization. @discussion The default value is YES.
-//
-// IsRasterizationEnabled calls the underlying IsRasterizationEnabled.
+// IsRasterizationEnabled whether rasterization is disabled, all primitives are dropped prior to rasterization. The default value is YES.
 func (x *MeshRenderPipelineDescriptor) IsRasterizationEnabled() bool {
-	return x.inner.IsRasterizationEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRasterizationEnabled"))
+	return _r
 }
 
-// SetRasterizationEnabled calls the underlying SetRasterizationEnabled.
+// SetRasterizationEnabled wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetRasterizationEnabled(rasterizationEnabled bool) {
-	x.inner.SetRasterizationEnabled(rasterizationEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationEnabled:"), rasterizationEnabled)
 }
 
-// @property maxVertexAmplificationCount @abstract The maximum value that can be passed to setVertexAmplificationCount when using this pipeline. @discussion The default value is 1. The value must be supported by the device, which can be checked with supportsVertexAmplificationCount.
-//
-// MaxVertexAmplificationCount calls the underlying MaxVertexAmplificationCount.
-func (x *MeshRenderPipelineDescriptor) MaxVertexAmplificationCount() uint {
-	return x.inner.MaxVertexAmplificationCount()
+// MaxVertexAmplificationCount the maximum value that can be passed to setVertexAmplificationCount when using this pipeline. The default value is 1. The value must be supported by the device, which can be checked with supportsVertexAmplificationCount.
+func (x *MeshRenderPipelineDescriptor) MaxVertexAmplificationCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxVertexAmplificationCount"))
+	return _r
 }
 
-// SetMaxVertexAmplificationCount calls the underlying SetMaxVertexAmplificationCount.
-func (x *MeshRenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint) {
-	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
+// SetMaxVertexAmplificationCount wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAmplificationCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexAmplificationCount:"), maxVertexAmplificationCount)
 }
 
-// @property colorAttachments @abstract Describes the color attachments of the render pass in which this pipeline will be used.
-//
-// ColorAttachments calls the underlying ColorAttachments.
+// ColorAttachments describes the color attachments of the render pass in which this pipeline will be used.
 func (x *MeshRenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray {
-	_r := x.inner.ColorAttachments()
-	if _r == nil {
-		return nil
-	}
-	return &RenderPipelineColorAttachmentDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorAttachments"))
+	return RenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// @property depthAttachmentPixelFormat @abstract The pixel format of the depth attachment of the render pass in which this pipeline will be used. @discussion The default value is MTLPixelFormatInvalid; indicating no depth attachment will be used.
-//
-// DepthAttachmentPixelFormat calls the underlying DepthAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) DepthAttachmentPixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.DepthAttachmentPixelFormat())
+// DepthAttachmentPixelFormat the pixel format of the depth attachment of the render pass in which this pipeline will be used. The default value is MTLPixelFormatInvalid; indicating no depth attachment will be used.
+func (x *MeshRenderPipelineDescriptor) DepthAttachmentPixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("depthAttachmentPixelFormat"))
+	return _r
 }
 
-// SetDepthAttachmentPixelFormat calls the underlying SetDepthAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) {
-	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
+// SetDepthAttachmentPixelFormat wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthAttachmentPixelFormat:"), depthAttachmentPixelFormat)
 }
 
-// @property stencilAttachmentPixelFormat @abstract The pixel format of the stencil attachment of the render pass in which this pipeline will be used. @discussion The default value is MTLPixelFormatInvalid; indicating no stencil attachment will be used.
-//
-// StencilAttachmentPixelFormat calls the underlying StencilAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) StencilAttachmentPixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.StencilAttachmentPixelFormat())
+// StencilAttachmentPixelFormat the pixel format of the stencil attachment of the render pass in which this pipeline will be used. The default value is MTLPixelFormatInvalid; indicating no stencil attachment will be used.
+func (x *MeshRenderPipelineDescriptor) StencilAttachmentPixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("stencilAttachmentPixelFormat"))
+	return _r
 }
 
-// SetStencilAttachmentPixelFormat calls the underlying SetStencilAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) {
-	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
+// SetStencilAttachmentPixelFormat wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilAttachmentPixelFormat:"), stencilAttachmentPixelFormat)
 }
 
-// @property supportIndirectCommandBuffers @abstract Whether this pipeline will support being used by commands in an indirect command buffer. @discussion The default value is NO.
-//
-// SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
+// SupportIndirectCommandBuffers whether this pipeline will support being used by commands in an indirect command buffer. The default value is NO.
 func (x *MeshRenderPipelineDescriptor) SupportIndirectCommandBuffers() bool {
-	return x.inner.SupportIndirectCommandBuffers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportIndirectCommandBuffers"))
+	return _r
 }
 
-// SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
+// SetSupportIndirectCommandBuffers wraps the corresponding Objective-C method.
 func (x *MeshRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
 }
 
-// @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
-//
-// BinaryArchives calls the underlying BinaryArchives.
-func (x *MeshRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
-	return x.inner.BinaryArchives()
+// BinaryArchives the set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
+func (x *MeshRenderPipelineDescriptor) BinaryArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryArchives"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *MeshRenderPipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(binaryArchives))
-	for _i, _v := range binaryArchives {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetBinaryArchives(_arg0)
+// SetBinaryArchives wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property objectLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the object function. @see MTLLinkedFunctions
-//
-// ObjectLinkedFunctions calls the underlying ObjectLinkedFunctions.
+// ObjectLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the object function.
 func (x *MeshRenderPipelineDescriptor) ObjectLinkedFunctions() *LinkedFunctions {
-	_r := x.inner.ObjectLinkedFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &LinkedFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectLinkedFunctions"))
+	return LinkedFunctionsFromID(_r)
 }
 
-// SetObjectLinkedFunctions calls the underlying SetObjectLinkedFunctions.
-func (x *MeshRenderPipelineDescriptor) SetObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions) {
-	x.inner.SetObjectLinkedFunctions(objectLinkedFunctions)
+// SetObjectLinkedFunctions wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectLinkedFunctions:"), objref.IDOf(objectLinkedFunctions))
 }
 
-// @property meshLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the mesh function. @see MTLLinkedFunctions
-//
-// MeshLinkedFunctions calls the underlying MeshLinkedFunctions.
+// MeshLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the mesh function.
 func (x *MeshRenderPipelineDescriptor) MeshLinkedFunctions() *LinkedFunctions {
-	_r := x.inner.MeshLinkedFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &LinkedFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meshLinkedFunctions"))
+	return LinkedFunctionsFromID(_r)
 }
 
-// SetMeshLinkedFunctions calls the underlying SetMeshLinkedFunctions.
-func (x *MeshRenderPipelineDescriptor) SetMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions) {
-	x.inner.SetMeshLinkedFunctions(meshLinkedFunctions)
+// SetMeshLinkedFunctions wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeshLinkedFunctions:"), objref.IDOf(meshLinkedFunctions))
 }
 
-// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
-//
-// FragmentLinkedFunctions calls the underlying FragmentLinkedFunctions.
+// FragmentLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the fragment function.
 func (x *MeshRenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunctions {
-	_r := x.inner.FragmentLinkedFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &LinkedFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentLinkedFunctions"))
+	return LinkedFunctionsFromID(_r)
 }
 
-// SetFragmentLinkedFunctions calls the underlying SetFragmentLinkedFunctions.
-func (x *MeshRenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) {
-	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions)
+// SetFragmentLinkedFunctions wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentLinkedFunctions:"), objref.IDOf(fragmentLinkedFunctions))
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
-//
-// ShaderValidation calls the underlying ShaderValidation.
-func (x *MeshRenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
-	return MTLShaderValidation(x.inner.ShaderValidation())
+// ShaderValidation toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+func (x *MeshRenderPipelineDescriptor) ShaderValidation() ShaderValidation {
+	_r := objc.Send[ShaderValidation](objref.IDOf(x), objc.RegisterName("shaderValidation"))
+	return _r
 }
 
-// SetShaderValidation calls the underlying SetShaderValidation.
-func (x *MeshRenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
-	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
-}
-
-// @property requiredThreadsPerObjectThreadgroup @abstract Sets the required object threads-per-threadgroup during mesh draws. The `threadsPerObjectThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
-//
-// RequiredThreadsPerObjectThreadgroup calls the underlying RequiredThreadsPerObjectThreadgroup.
-func (x *MeshRenderPipelineDescriptor) RequiredThreadsPerObjectThreadgroup() raw.MTLSize {
-	return x.inner.RequiredThreadsPerObjectThreadgroup()
-}
-
-// SetRequiredThreadsPerObjectThreadgroup calls the underlying SetRequiredThreadsPerObjectThreadgroup.
-func (x *MeshRenderPipelineDescriptor) SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) {
-	x.inner.SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup)
-}
-
-// @property requiredThreadsPerMeshThreadgroup @abstract Sets the required mesh threads-per-threadgroup during mesh draws. The `threadsPerMeshThreadgroup` argument of any draw must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
-//
-// RequiredThreadsPerMeshThreadgroup calls the underlying RequiredThreadsPerMeshThreadgroup.
-func (x *MeshRenderPipelineDescriptor) RequiredThreadsPerMeshThreadgroup() raw.MTLSize {
-	return x.inner.RequiredThreadsPerMeshThreadgroup()
-}
-
-// SetRequiredThreadsPerMeshThreadgroup calls the underlying SetRequiredThreadsPerMeshThreadgroup.
-func (x *MeshRenderPipelineDescriptor) SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) {
-	x.inner.SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup)
+// SetShaderValidation wraps the corresponding Objective-C method.
+func (x *MeshRenderPipelineDescriptor) SetShaderValidation(shaderValidation ShaderValidation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 }
 
 // MeshRenderPipelineDescriptorable is the interface implemented by [MeshRenderPipelineDescriptor], for mocking and DI.
 type MeshRenderPipelineDescriptorable interface {
-	Unwrap() *raw.MTLMeshRenderPipelineDescriptor
+	obj.Object
 	WithLabel(label string) *MeshRenderPipelineDescriptor
-	WithObjectFunction(objectFunction raw.MTLFunction) *MeshRenderPipelineDescriptor
-	WithMeshFunction(meshFunction raw.MTLFunction) *MeshRenderPipelineDescriptor
-	WithFragmentFunction(fragmentFunction raw.MTLFunction) *MeshRenderPipelineDescriptor
-	WithMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint) *MeshRenderPipelineDescriptor
-	WithMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint) *MeshRenderPipelineDescriptor
+	WithMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup int) *MeshRenderPipelineDescriptor
+	WithMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup int) *MeshRenderPipelineDescriptor
 	WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MeshRenderPipelineDescriptor
 	WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MeshRenderPipelineDescriptor
-	WithPayloadMemoryLength(payloadMemoryLength uint) *MeshRenderPipelineDescriptor
-	WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) *MeshRenderPipelineDescriptor
-	WithRasterSampleCount(rasterSampleCount uint) *MeshRenderPipelineDescriptor
+	WithPayloadMemoryLength(payloadMemoryLength int) *MeshRenderPipelineDescriptor
+	WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid int) *MeshRenderPipelineDescriptor
+	WithRasterSampleCount(rasterSampleCount int) *MeshRenderPipelineDescriptor
 	WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *MeshRenderPipelineDescriptor
 	WithAlphaToOneEnabled(alphaToOneEnabled bool) *MeshRenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *MeshRenderPipelineDescriptor
-	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MeshRenderPipelineDescriptor
-	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor
-	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor
+	WithMaxVertexAmplificationCount(maxVertexAmplificationCount int) *MeshRenderPipelineDescriptor
+	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat) *MeshRenderPipelineDescriptor
+	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat) *MeshRenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *MeshRenderPipelineDescriptor
 	WithObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
 	WithMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
 	WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
-	WithShaderValidation(shaderValidation MTLShaderValidation) *MeshRenderPipelineDescriptor
-	WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
-	WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
+	WithShaderValidation(shaderValidation ShaderValidation) *MeshRenderPipelineDescriptor
 	Reset()
 	Label() string
 	SetLabel(label string)
-	ObjectFunction() raw.MTLFunction
-	SetObjectFunction(objectFunction raw.MTLFunction)
-	MeshFunction() raw.MTLFunction
-	SetMeshFunction(meshFunction raw.MTLFunction)
-	FragmentFunction() raw.MTLFunction
-	SetFragmentFunction(fragmentFunction raw.MTLFunction)
-	MaxTotalThreadsPerObjectThreadgroup() uint
-	SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint)
-	MaxTotalThreadsPerMeshThreadgroup() uint
-	SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint)
+	MaxTotalThreadsPerObjectThreadgroup() int
+	SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup int)
+	MaxTotalThreadsPerMeshThreadgroup() int
+	SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup int)
 	ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool
 	SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool)
 	MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool
 	SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool)
-	PayloadMemoryLength() uint
-	SetPayloadMemoryLength(payloadMemoryLength uint)
-	MaxTotalThreadgroupsPerMeshGrid() uint
-	SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint)
+	PayloadMemoryLength() int
+	SetPayloadMemoryLength(payloadMemoryLength int)
+	MaxTotalThreadgroupsPerMeshGrid() int
+	SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid int)
 	ObjectBuffers() *PipelineBufferDescriptorArray
 	MeshBuffers() *PipelineBufferDescriptorArray
 	FragmentBuffers() *PipelineBufferDescriptorArray
-	RasterSampleCount() uint
-	SetRasterSampleCount(rasterSampleCount uint)
+	RasterSampleCount() int
+	SetRasterSampleCount(rasterSampleCount int)
 	IsAlphaToCoverageEnabled() bool
 	SetAlphaToCoverageEnabled(alphaToCoverageEnabled bool)
 	IsAlphaToOneEnabled() bool
 	SetAlphaToOneEnabled(alphaToOneEnabled bool)
 	IsRasterizationEnabled() bool
 	SetRasterizationEnabled(rasterizationEnabled bool)
-	MaxVertexAmplificationCount() uint
-	SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint)
+	MaxVertexAmplificationCount() int
+	SetMaxVertexAmplificationCount(maxVertexAmplificationCount int)
 	ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray
-	DepthAttachmentPixelFormat() MTLPixelFormat
-	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat)
-	StencilAttachmentPixelFormat() MTLPixelFormat
-	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat)
+	DepthAttachmentPixelFormat() PixelFormat
+	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat)
+	StencilAttachmentPixelFormat() PixelFormat
+	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat)
 	SupportIndirectCommandBuffers() bool
 	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
-	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives ...purego.IDer)
+	BinaryArchives() []obj.Object
+	SetBinaryArchives(binaryArchives []obj.Object)
 	ObjectLinkedFunctions() *LinkedFunctions
-	SetObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions)
+	SetObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions)
 	MeshLinkedFunctions() *LinkedFunctions
-	SetMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions)
+	SetMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions)
 	FragmentLinkedFunctions() *LinkedFunctions
-	SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions)
-	ShaderValidation() MTLShaderValidation
-	SetShaderValidation(shaderValidation MTLShaderValidation)
-	RequiredThreadsPerObjectThreadgroup() raw.MTLSize
-	SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize)
-	RequiredThreadsPerMeshThreadgroup() raw.MTLSize
-	SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize)
+	SetFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions)
+	ShaderValidation() ShaderValidation
+	SetShaderValidation(shaderValidation ShaderValidation)
 }
 
 var _ MeshRenderPipelineDescriptorable = (*MeshRenderPipelineDescriptor)(nil)

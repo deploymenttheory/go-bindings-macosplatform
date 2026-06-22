@@ -5,176 +5,168 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The behavior configuration to use for a search query.
+// SearchQueryContext is an idiomatic wrapper over the Objective-C class CSSearchQueryContext.
 //
-// SearchQueryContext wraps [raw.CSSearchQueryContext] with a fluent Go API.
+// SearchQueryContext is an abstract base — you do not construct it directly. Construct one of [UserQueryContext] and pass it where a SearchQueryContext is accepted.
+//
+// The behavior configuration to use for a search query.
 type SearchQueryContext struct {
-	inner *raw.CSSearchQueryContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSSearchQueryContext].
-func (x *SearchQueryContext) Unwrap() *raw.CSSearchQueryContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SearchQueryContext) ID() objc.ID { return x.inner.Ptr() }
-
-// SearchQueryContextFromID adopts an existing object pointer as a SearchQueryContext (nil for 0).
+// SearchQueryContextFromID adopts an existing Objective-C object as a SearchQueryContext
+// (nil for 0), retaining it and registering a release finalizer.
 func SearchQueryContextFromID(id objc.ID) *SearchQueryContext {
 	if id == 0 {
 		return nil
 	}
-	return &SearchQueryContext{inner: raw.CSSearchQueryContextFromID(id)}
-}
-
-// NewSearchQueryContext creates a new [SearchQueryContext].
-func NewSearchQueryContext() *SearchQueryContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchQueryContext")), objc.RegisterName("new"))
-	return &SearchQueryContext{inner: raw.CSSearchQueryContextFromID(_id)}
-}
-
-// The attributes the system fetches for the searchable items.
-//
-// WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
-func (x *SearchQueryContext) WithFetchAttributes(items ...*foundation.NSString) *SearchQueryContext {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetFetchAttributes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetFetchAttributes(_arr)
+	x := &SearchQueryContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The query string used to filter the results.
-//
-// WithFilterQueries sets the collection, converting the Go slice to an NSArray.
-func (x *SearchQueryContext) WithFilterQueries(items ...*foundation.NSString) *SearchQueryContext {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetFilterQueries(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
+// searchQueryContextAdopt wraps an Objective-C object that this code just created as a
+// SearchQueryContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func searchQueryContextAdopt(id objc.ID) *SearchQueryContext {
+	if id == 0 {
+		return nil
 	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetFilterQueries(_arr)
+	x := &SearchQueryContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The language used for the query.
-//
-// WithKeyboardLanguage sets the keyboardLanguage property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *SearchQueryContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SearchQueryContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SearchQueryContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchQueryContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithFetchAttributes the attributes the system fetches for the searchable items.
+func (x *SearchQueryContext) WithFetchAttributes(items ...obj.Object) *SearchQueryContext {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAttributes:"), _arr)
+	return x
+}
+
+// WithFilterQueries the query string used to filter the results.
+func (x *SearchQueryContext) WithFilterQueries(items ...obj.Object) *SearchQueryContext {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterQueries:"), _arr)
+	return x
+}
+
+// WithKeyboardLanguage the language used for the query.
 func (x *SearchQueryContext) WithKeyboardLanguage(keyboardLanguage string) *SearchQueryContext {
-	x.inner.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
 	return x
 }
 
-// The query source options to allow or deny Mail messages in the search.
+// WithSourceOptions the query source options to allow or deny Mail messages in the search.
+func (x *SearchQueryContext) WithSourceOptions(sourceOptions SearchQuerySourceOptions) *SearchQueryContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOptions:"), sourceOptions)
+	return x
+}
+
+// FetchAttributes wraps the corresponding Objective-C method.
 //
-// WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
-func (x *SearchQueryContext) WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *SearchQueryContext {
-	x.inner.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))
-	return x
-}
-
 // FetchAttributes returns the collection as a Go slice.
 func (x *SearchQueryContext) FetchAttributes() []string {
-	arr := x.inner.FetchAttributes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAttributes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetFetchAttributes calls the underlying SetFetchAttributes.
-func (x *SearchQueryContext) SetFetchAttributes(fetchAttributes *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetFetchAttributes(fetchAttributes)
+// SetFetchAttributes wraps the corresponding Objective-C method.
+func (x *SearchQueryContext) SetFetchAttributes(fetchAttributes []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAttributes:"), purego.SliceToNSArray(fetchAttributes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// FilterQueries wraps the corresponding Objective-C method.
+//
 // FilterQueries returns the collection as a Go slice.
 func (x *SearchQueryContext) FilterQueries() []string {
-	arr := x.inner.FilterQueries()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterQueries"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetFilterQueries calls the underlying SetFilterQueries.
-func (x *SearchQueryContext) SetFilterQueries(filterQueries *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetFilterQueries(filterQueries)
+// SetFilterQueries wraps the corresponding Objective-C method.
+func (x *SearchQueryContext) SetFilterQueries(filterQueries []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterQueries:"), purego.SliceToNSArray(filterQueries, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// KeyboardLanguage calls the underlying KeyboardLanguage.
+// KeyboardLanguage wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) KeyboardLanguage() string {
-	_r := x.inner.KeyboardLanguage()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyboardLanguage"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetKeyboardLanguage calls the underlying SetKeyboardLanguage.
+// SetKeyboardLanguage wraps the corresponding Objective-C method.
 func (x *SearchQueryContext) SetKeyboardLanguage(keyboardLanguage string) {
-	x.inner.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
 }
 
-// SourceOptions calls the underlying SourceOptions.
-func (x *SearchQueryContext) SourceOptions() CSSearchQuerySourceOptions {
-	return CSSearchQuerySourceOptions(x.inner.SourceOptions())
+// SourceOptions wraps the corresponding Objective-C method.
+func (x *SearchQueryContext) SourceOptions() SearchQuerySourceOptions {
+	_r := objc.Send[SearchQuerySourceOptions](objref.IDOf(x), objc.RegisterName("sourceOptions"))
+	return _r
 }
 
-// SetSourceOptions calls the underlying SetSourceOptions.
-func (x *SearchQueryContext) SetSourceOptions(sourceOptions CSSearchQuerySourceOptions) {
-	x.inner.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))
+// SetSourceOptions wraps the corresponding Objective-C method.
+func (x *SearchQueryContext) SetSourceOptions(sourceOptions SearchQuerySourceOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOptions:"), sourceOptions)
 }
-
-func (x *SearchQueryContext) asSearchQueryContext() *raw.CSSearchQueryContext { return x.inner }
 
 // SearchQueryContextable is the interface implemented by [SearchQueryContext], for mocking and DI.
 type SearchQueryContextable interface {
-	Unwrap() *raw.CSSearchQueryContext
-	WithFetchAttributes(items ...*foundation.NSString) *SearchQueryContext
-	WithFilterQueries(items ...*foundation.NSString) *SearchQueryContext
+	obj.Object
+	WithFetchAttributes(items ...obj.Object) *SearchQueryContext
+	WithFilterQueries(items ...obj.Object) *SearchQueryContext
 	WithKeyboardLanguage(keyboardLanguage string) *SearchQueryContext
-	WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *SearchQueryContext
+	WithSourceOptions(sourceOptions SearchQuerySourceOptions) *SearchQueryContext
 	FetchAttributes() []string
-	SetFetchAttributes(fetchAttributes *foundation.NSArray[*foundation.NSString])
+	SetFetchAttributes(fetchAttributes []string)
 	FilterQueries() []string
-	SetFilterQueries(filterQueries *foundation.NSArray[*foundation.NSString])
+	SetFilterQueries(filterQueries []string)
 	KeyboardLanguage() string
 	SetKeyboardLanguage(keyboardLanguage string)
-	SourceOptions() CSSearchQuerySourceOptions
-	SetSourceOptions(sourceOptions CSSearchQuerySourceOptions)
+	SourceOptions() SearchQuerySourceOptions
+	SetSourceOptions(sourceOptions SearchQuerySourceOptions)
 }
 
 var _ SearchQueryContextable = (*SearchQueryContext)(nil)
+
+// isSearchQueryContext marks SearchQueryContext — and, by embedding promotion, its
+// subclasses — as a member of the SearchQueryContext hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SearchQueryContext) isSearchQueryContext() {}
+
+var _ SearchQueryContextProvider = (*SearchQueryContext)(nil)

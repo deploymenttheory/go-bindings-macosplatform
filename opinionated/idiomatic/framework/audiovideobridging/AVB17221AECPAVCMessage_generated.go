@@ -5,119 +5,118 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AVB17221AECPAVCMessage wraps [raw.AVB17221AECPAVCMessage] with a fluent Go API.
+// AVB17221AECPAVCMessage is an idiomatic wrapper over the Objective-C class AVB17221AECPAVCMessage.
+//
+// It embeds [AVB17221AECPMessage], promoting that type's methods.
 type AVB17221AECPAVCMessage struct {
-	inner *raw.AVB17221AECPAVCMessage
+	AVB17221AECPMessage
 }
 
-// Unwrap returns the underlying [raw.AVB17221AECPAVCMessage].
-func (x *AVB17221AECPAVCMessage) Unwrap() *raw.AVB17221AECPAVCMessage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB17221AECPAVCMessage) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB17221AECPAVCMessageFromID adopts an existing object pointer as a AVB17221AECPAVCMessage (nil for 0).
+// AVB17221AECPAVCMessageFromID adopts an existing Objective-C object as a AVB17221AECPAVCMessage
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB17221AECPAVCMessageFromID(id objc.ID) *AVB17221AECPAVCMessage {
 	if id == 0 {
 		return nil
 	}
-	return &AVB17221AECPAVCMessage{inner: raw.AVB17221AECPAVCMessageFromID(id)}
+	x := &AVB17221AECPAVCMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAVB17221AECPAVCMessage creates a new [AVB17221AECPAVCMessage].
+// aVB17221AECPAVCMessageAdopt wraps an Objective-C object that this code just created as a
+// AVB17221AECPAVCMessage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB17221AECPAVCMessageAdopt(id objc.ID) *AVB17221AECPAVCMessage {
+	if id == 0 {
+		return nil
+	}
+	x := &AVB17221AECPAVCMessage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAVB17221AECPAVCMessage creates a new AVB17221AECPAVCMessage.
 func NewAVB17221AECPAVCMessage() *AVB17221AECPAVCMessage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221AECPAVCMessage")), objc.RegisterName("new"))
-	return &AVB17221AECPAVCMessage{inner: raw.AVB17221AECPAVCMessageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAVCMessage")), objc.RegisterName("new"))
+	return aVB17221AECPAVCMessageAdopt(_id)
 }
 
-// @property	commandResponse @abstract	The avc_command_response field of the AECP AEM message.
-//
-// WithCommandResponse sets the commandResponse property and returns the receiver for chaining.
-func (x *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse *foundation.NSData) *AVB17221AECPAVCMessage {
-	x.inner.SetCommandResponse(commandResponse)
+// WithCommandResponse the avc_command_response field of the AECP AEM message.
+func (x *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
 	return x
 }
 
-// @property	messageType @abstract	The message_type field of the AECP message.
-//
-// WithMessageType sets the messageType property and returns the receiver for chaining.
+// WithMessageType the message_type field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
 	return x
 }
 
-// @property	status @abstract	The status field of the AECP message.
-//
-// WithStatus sets the status property and returns the receiver for chaining.
+// WithStatus the status field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
-// @property	targetEntityID @abstract	The target_entity_id field of the AECP message.
-//
-// WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
+// WithTargetEntityID the target_entity_id field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetEntityID:"), targetEntityID)
 	return x
 }
 
-// @property	controllerEntityID @abstract	The controller_entity_id field of the AECP message.
-//
-// WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
+// WithControllerEntityID the controller_entity_id field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
 	return x
 }
 
-// @property	sequenceID @abstract	The sequence_id field of the AECP message.
-//
-// WithSequenceID sets the sequenceID property and returns the receiver for chaining.
+// WithSequenceID the sequence_id field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
 	return x
 }
 
-// @property	sourceMAC @abstract	The source_mac field of the AECP message.
-//
-// WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
+// WithSourceMAC the source_mac field of the AECP message.
 func (x *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
-	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return x
 }
 
-// CommandResponse calls the underlying CommandResponse.
-func (x *AVB17221AECPAVCMessage) CommandResponse() *foundation.NSData {
-	return x.inner.CommandResponse()
+// CommandResponse wraps the corresponding Objective-C method.
+func (x *AVB17221AECPAVCMessage) CommandResponse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandResponse"))
+	return obj.Wrap(_r)
 }
 
-// SetCommandResponse calls the underlying SetCommandResponse.
-func (x *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse *foundation.NSData) {
-	x.inner.SetCommandResponse(commandResponse)
-}
-
-func (x *AVB17221AECPAVCMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
-	return &x.inner.AVB17221AECPMessage
+// SetCommandResponse wraps the corresponding Objective-C method.
+func (x *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
 }
 
 // AVB17221AECPAVCMessageable is the interface implemented by [AVB17221AECPAVCMessage], for mocking and DI.
 type AVB17221AECPAVCMessageable interface {
-	Unwrap() *raw.AVB17221AECPAVCMessage
-	WithCommandResponse(commandResponse *foundation.NSData) *AVB17221AECPAVCMessage
+	obj.Object
+	WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage
 	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage
 	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage
 	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage
-	CommandResponse() *foundation.NSData
-	SetCommandResponse(commandResponse *foundation.NSData)
+	CommandResponse() obj.Object
+	SetCommandResponse(commandResponse obj.Object)
 }
 
 var _ AVB17221AECPAVCMessageable = (*AVB17221AECPAVCMessage)(nil)
+
+var _ AVB17221AECPMessageProvider = (*AVB17221AECPAVCMessage)(nil)

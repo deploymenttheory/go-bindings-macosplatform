@@ -5,171 +5,146 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A queue of payment transactions for the App Store to process.
+// PaymentQueue is an idiomatic wrapper over the Objective-C class SKPaymentQueue.
 //
-// PaymentQueue wraps [raw.SKPaymentQueue] with a fluent Go API.
+// A queue of payment transactions for the App Store to process.
 type PaymentQueue struct {
-	inner *raw.SKPaymentQueue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKPaymentQueue].
-func (x *PaymentQueue) Unwrap() *raw.SKPaymentQueue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentQueue) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentQueueFromID adopts an existing object pointer as a PaymentQueue (nil for 0).
+// PaymentQueueFromID adopts an existing Objective-C object as a PaymentQueue
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentQueueFromID(id objc.ID) *PaymentQueue {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentQueue{inner: raw.SKPaymentQueueFromID(id)}
-}
-
-// NewPaymentQueue creates a new [PaymentQueue].
-func NewPaymentQueue() *PaymentQueue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPaymentQueue")), objc.RegisterName("new"))
-	return &PaymentQueue{inner: raw.SKPaymentQueueFromID(_id)}
-}
-
-// A delegate that provides information needed to complete transactions.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PaymentQueue) WithDelegate(delegate raw.SKPaymentQueueDelegate) *PaymentQueue {
-	x.inner.SetDelegate(delegate)
+	x := &PaymentQueue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Adds a payment request to the queue.
-//
-// AddPayment calls the underlying AddPayment.
-func (x *PaymentQueue) AddPayment(payment *raw.SKPayment) {
-	x.inner.AddPayment(payment)
-}
-
-// Asks the payment queue to restore previously completed purchases.
-//
-// RestoreCompletedTransactions calls the underlying RestoreCompletedTransactions.
-func (x *PaymentQueue) RestoreCompletedTransactions() {
-	x.inner.RestoreCompletedTransactions()
-}
-
-// Asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
-//
-// RestoreCompletedTransactionsWithApplicationUsername calls the underlying RestoreCompletedTransactionsWithApplicationUsername.
-func (x *PaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username string) {
-	x.inner.RestoreCompletedTransactionsWithApplicationUsername(foundation.NSStringStringWithUTF8String(username))
-}
-
-// Notifies the App Store that the app finished processing the transaction.
-//
-// FinishTransaction calls the underlying FinishTransaction.
-func (x *PaymentQueue) FinishTransaction(transaction *raw.SKPaymentTransaction) {
-	x.inner.FinishTransaction(transaction)
-}
-
-// Adds a set of downloads to the download list.
-//
-// StartDownloads calls the underlying StartDownloads.
-func (x *PaymentQueue) StartDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
-	x.inner.StartDownloads(downloads)
-}
-
-// Pauses a set of downloads.
-//
-// PauseDownloads calls the underlying PauseDownloads.
-func (x *PaymentQueue) PauseDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
-	x.inner.PauseDownloads(downloads)
-}
-
-// Resumes a set of downloads.
-//
-// ResumeDownloads calls the underlying ResumeDownloads.
-func (x *PaymentQueue) ResumeDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
-	x.inner.ResumeDownloads(downloads)
-}
-
-// Removes a set of downloads from the download list.
-//
-// CancelDownloads calls the underlying CancelDownloads.
-func (x *PaymentQueue) CancelDownloads(downloads *foundation.NSArray[*raw.SKDownload]) {
-	x.inner.CancelDownloads(downloads)
-}
-
-// Adds an observer to the payment queue.
-//
-// AddTransactionObserver calls the underlying AddTransactionObserver.
-func (x *PaymentQueue) AddTransactionObserver(observer raw.SKPaymentTransactionObserver) {
-	x.inner.AddTransactionObserver(observer)
-}
-
-// Removes an observer from the payment queue.
-//
-// RemoveTransactionObserver calls the underlying RemoveTransactionObserver.
-func (x *PaymentQueue) RemoveTransactionObserver(observer raw.SKPaymentTransactionObserver) {
-	x.inner.RemoveTransactionObserver(observer)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *PaymentQueue) Delegate() raw.SKPaymentQueueDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *PaymentQueue) SetDelegate(delegate raw.SKPaymentQueueDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Storefront calls the underlying Storefront.
-func (x *PaymentQueue) Storefront() *Storefront {
-	_r := x.inner.Storefront()
-	if _r == nil {
+// paymentQueueAdopt wraps an Objective-C object that this code just created as a
+// PaymentQueue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentQueueAdopt(id objc.ID) *PaymentQueue {
+	if id == 0 {
 		return nil
 	}
-	return &Storefront{inner: _r}
+	x := &PaymentQueue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// TransactionObservers calls the underlying TransactionObservers.
-func (x *PaymentQueue) TransactionObservers() *foundation.NSArray[raw.SKPaymentTransactionObserver] {
-	return x.inner.TransactionObservers()
+// Description returns the object's -description text.
+func (x *PaymentQueue) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentQueue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentQueue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentQueue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentQueue creates a new PaymentQueue.
+func NewPaymentQueue() *PaymentQueue {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("new"))
+	return paymentQueueAdopt(_id)
+}
+
+// AddPayment adds a payment request to the queue.
+func (x *PaymentQueue) AddPayment(payment *Payment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPayment:"), objref.IDOf(payment))
+}
+
+// RestoreCompletedTransactions asks the payment queue to restore previously completed purchases.
+func (x *PaymentQueue) RestoreCompletedTransactions() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCompletedTransactions"))
+}
+
+// RestoreCompletedTransactionsWithApplicationUsername asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
+func (x *PaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreCompletedTransactionsWithApplicationUsername:"), purego.NSString(username))
+}
+
+// FinishTransaction notifies the App Store that the app finished processing the transaction.
+func (x *PaymentQueue) FinishTransaction(transaction *PaymentTransaction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishTransaction:"), objref.IDOf(transaction))
+}
+
+// StartDownloads adds a set of downloads to the download list.
+func (x *PaymentQueue) StartDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+}
+
+// PauseDownloads pauses a set of downloads.
+func (x *PaymentQueue) PauseDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+}
+
+// ResumeDownloads resumes a set of downloads.
+func (x *PaymentQueue) ResumeDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+}
+
+// CancelDownloads removes a set of downloads from the download list.
+func (x *PaymentQueue) CancelDownloads(downloads []*Download) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
+}
+
+// Storefront wraps the corresponding Objective-C method.
+func (x *PaymentQueue) Storefront() *Storefront {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storefront"))
+	return StorefrontFromID(_r)
+}
+
+// TransactionObservers wraps the corresponding Objective-C method.
+func (x *PaymentQueue) TransactionObservers() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionObservers"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// Transactions wraps the corresponding Objective-C method.
+//
 // Transactions returns the collection as a Go slice.
 func (x *PaymentQueue) Transactions() []*PaymentTransaction {
-	arr := x.inner.Transactions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentTransaction {
-		return &PaymentTransaction{inner: raw.SKPaymentTransactionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentTransaction { return PaymentTransactionFromID(_id) })
 }
 
 // PaymentQueueable is the interface implemented by [PaymentQueue], for mocking and DI.
 type PaymentQueueable interface {
-	Unwrap() *raw.SKPaymentQueue
-	WithDelegate(delegate raw.SKPaymentQueueDelegate) *PaymentQueue
-	AddPayment(payment *raw.SKPayment)
+	obj.Object
+	AddPayment(payment *Payment)
 	RestoreCompletedTransactions()
 	RestoreCompletedTransactionsWithApplicationUsername(username string)
-	FinishTransaction(transaction *raw.SKPaymentTransaction)
-	StartDownloads(downloads *foundation.NSArray[*raw.SKDownload])
-	PauseDownloads(downloads *foundation.NSArray[*raw.SKDownload])
-	ResumeDownloads(downloads *foundation.NSArray[*raw.SKDownload])
-	CancelDownloads(downloads *foundation.NSArray[*raw.SKDownload])
-	AddTransactionObserver(observer raw.SKPaymentTransactionObserver)
-	RemoveTransactionObserver(observer raw.SKPaymentTransactionObserver)
-	Delegate() raw.SKPaymentQueueDelegate
-	SetDelegate(delegate raw.SKPaymentQueueDelegate)
+	FinishTransaction(transaction *PaymentTransaction)
+	StartDownloads(downloads []*Download)
+	PauseDownloads(downloads []*Download)
+	ResumeDownloads(downloads []*Download)
+	CancelDownloads(downloads []*Download)
 	Storefront() *Storefront
-	TransactionObservers() *foundation.NSArray[raw.SKPaymentTransactionObserver]
+	TransactionObservers() []obj.Object
 	Transactions() []*PaymentTransaction
 }
 

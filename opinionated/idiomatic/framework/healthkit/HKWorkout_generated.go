@@ -5,151 +5,122 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A workout sample that stores information about a single physical activity.
+// Workout is an idiomatic wrapper over the Objective-C class HKWorkout.
 //
-// Workout wraps [raw.HKWorkout] with a fluent Go API.
+// It embeds [Sample], promoting that type's methods.
+//
+// A workout sample that stores information about a single physical activity.
 type Workout struct {
-	inner *raw.HKWorkout
+	Sample
 }
 
-// Unwrap returns the underlying [raw.HKWorkout].
-func (x *Workout) Unwrap() *raw.HKWorkout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Workout) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutFromID adopts an existing object pointer as a Workout (nil for 0).
+// WorkoutFromID adopts an existing Objective-C object as a Workout
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutFromID(id objc.ID) *Workout {
 	if id == 0 {
 		return nil
 	}
-	return &Workout{inner: raw.HKWorkoutFromID(id)}
+	x := &Workout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWorkout creates a new [Workout].
-func NewWorkout() *Workout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkout")), objc.RegisterName("new"))
-	return &Workout{inner: raw.HKWorkoutFromID(_id)}
-}
-
-// Returns the workout’s statistics for the provided quantity type.
-//
-// StatisticsForType calls the underlying StatisticsForType.
-func (x *Workout) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
-	_r := x.inner.StatisticsForType(quantityType)
-	if _r == nil {
+// workoutAdopt wraps an Objective-C object that this code just created as a
+// Workout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutAdopt(id objc.ID) *Workout {
+	if id == 0 {
 		return nil
 	}
-	return &Statistics{inner: _r}
+	x := &Workout{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property      workoutActivityType @abstract      Represents the activity that the user was performing during a workout
-//
-// WorkoutActivityType calls the underlying WorkoutActivityType.
-func (x *Workout) WorkoutActivityType() HKWorkoutActivityType {
-	return HKWorkoutActivityType(x.inner.WorkoutActivityType())
+// NewWorkout creates a new Workout.
+func NewWorkout() *Workout {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("new"))
+	return workoutAdopt(_id)
 }
 
-// @property      workoutEvents @abstract      An array of HKWorkoutEvents that occurred during a workout. @discussion    These events will be ordered by date in ascending order. All events must take place between the start date and end date of the workout. The first workout event should never be a resume event because it is assumed that the workout begins in a running state.
+// StatisticsForType returns the workout’s statistics for the provided quantity type.
+func (x *Workout) StatisticsForType(quantityType *QuantityType) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
+	return StatisticsFromID(_r)
+}
+
+// WorkoutActivityType represents the activity that the user was performing during a workout
+func (x *Workout) WorkoutActivityType() WorkoutActivityType {
+	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("workoutActivityType"))
+	return _r
+}
+
+// WorkoutEvents an array of HKWorkoutEvents that occurred during a workout. These events will be ordered by date in ascending order. All events must take place between the start date and end date of the workout. The first workout event should never be a resume event because it is assumed that the workout begins in a running state.
 //
 // WorkoutEvents returns the collection as a Go slice.
 func (x *Workout) WorkoutEvents() []*WorkoutEvent {
-	arr := x.inner.WorkoutEvents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutEvent {
-		return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutEvents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
-// @property      workoutActivities @abstract      An array of HKWorkoutActivities that were performed during a workout. @discussion    These activities will be ordered by date in ascending order. All activities must take place between the start date and end date of the workout.
+// WorkoutActivities an array of HKWorkoutActivities that were performed during a workout. These activities will be ordered by date in ascending order. All activities must take place between the start date and end date of the workout.
 //
 // WorkoutActivities returns the collection as a Go slice.
 func (x *Workout) WorkoutActivities() []*WorkoutActivity {
-	arr := x.inner.WorkoutActivities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutActivity {
-		return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutActivities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutActivity { return WorkoutActivityFromID(_id) })
 }
 
-// @property      duration @abstract      The length of time that a workout was recording @discussion    The duration is derived from the start and end dates of the workout and takes into account periods that the workout was paused. Periods that the workout was paused are based off of the workoutEvents property.
-//
-// Duration calls the underlying Duration.
+// Duration the length of time that a workout was recording The duration is derived from the start and end dates of the workout and takes into account periods that the workout was paused. Periods that the workout was paused are based off of the workoutEvents property.
 func (x *Workout) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// @property      totalEnergyBurned @abstract      The amount of energy that was burned during a workout @discussion    This metric should represent the total active energy burned during the course of the workout. It should be a quantity with a unit representing energy.
-//
-// TotalEnergyBurned calls the underlying TotalEnergyBurned.
+// TotalEnergyBurned the amount of energy that was burned during a workout This metric should represent the total active energy burned during the course of the workout. It should be a quantity with a unit representing energy.
 func (x *Workout) TotalEnergyBurned() *Quantity {
-	_r := x.inner.TotalEnergyBurned()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalEnergyBurned"))
+	return QuantityFromID(_r)
 }
 
-// @property      totalDistance @abstract      The total distance that was traveled during a workout @discussion    This metric should represent the total distance traveled during the course of the workout. It should be a quantity with a unit representing length.
-//
-// TotalDistance calls the underlying TotalDistance.
+// TotalDistance the total distance that was traveled during a workout This metric should represent the total distance traveled during the course of the workout. It should be a quantity with a unit representing length.
 func (x *Workout) TotalDistance() *Quantity {
-	_r := x.inner.TotalDistance()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDistance"))
+	return QuantityFromID(_r)
 }
 
-// @property      totalSwimmingStrokeCount @abstract      The total count of swimming strokes that was accumulated during a workout @discussion    This metric should represent the total count of swimming strokes accumulated during the course of the workout. It should be a quantity with a unit representing count.
-//
-// TotalSwimmingStrokeCount calls the underlying TotalSwimmingStrokeCount.
+// TotalSwimmingStrokeCount the total count of swimming strokes that was accumulated during a workout This metric should represent the total count of swimming strokes accumulated during the course of the workout. It should be a quantity with a unit representing count.
 func (x *Workout) TotalSwimmingStrokeCount() *Quantity {
-	_r := x.inner.TotalSwimmingStrokeCount()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalSwimmingStrokeCount"))
+	return QuantityFromID(_r)
 }
 
-// @property      totalFlightsClimbed @abstract      The total count of flights climbed during a workout @discussion    This metric should represent the total count of flights accumulated during the course of the workout. It should be a quantity with a unit representing count.
-//
-// TotalFlightsClimbed calls the underlying TotalFlightsClimbed.
+// TotalFlightsClimbed the total count of flights climbed during a workout This metric should represent the total count of flights accumulated during the course of the workout. It should be a quantity with a unit representing count.
 func (x *Workout) TotalFlightsClimbed() *Quantity {
-	_r := x.inner.TotalFlightsClimbed()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalFlightsClimbed"))
+	return QuantityFromID(_r)
 }
 
-// @property      allStatistics @abstract      A dictionary of statistics per quantity type during the workout @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout.
-//
-// AllStatistics calls the underlying AllStatistics.
-func (x *Workout) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
-	return x.inner.AllStatistics()
+// AllStatistics a dictionary of statistics per quantity type during the workout This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout.
+func (x *Workout) AllStatistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allStatistics"))
+	return obj.Wrap(_r)
 }
-
-func (x *Workout) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *Workout) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // Workoutable is the interface implemented by [Workout], for mocking and DI.
 type Workoutable interface {
-	Unwrap() *raw.HKWorkout
-	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
-	WorkoutActivityType() HKWorkoutActivityType
+	obj.Object
+	StatisticsForType(quantityType *QuantityType) *Statistics
+	WorkoutActivityType() WorkoutActivityType
 	WorkoutEvents() []*WorkoutEvent
 	WorkoutActivities() []*WorkoutActivity
 	Duration() float64
@@ -157,7 +128,11 @@ type Workoutable interface {
 	TotalDistance() *Quantity
 	TotalSwimmingStrokeCount() *Quantity
 	TotalFlightsClimbed() *Quantity
-	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
+	AllStatistics() obj.Object
 }
 
 var _ Workoutable = (*Workout)(nil)
+
+var _ SampleProvider = (*Workout)(nil)
+
+var _ ObjectProvider = (*Workout)(nil)

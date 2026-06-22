@@ -5,81 +5,87 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete subclass the Core Image Barcode Descriptor that represents an Aztec code symbol.
+// AztecCodeDescriptor is an idiomatic wrapper over the Objective-C class CIAztecCodeDescriptor.
 //
-// AztecCodeDescriptor wraps [raw.CIAztecCodeDescriptor] with a fluent Go API.
+// It embeds [BarcodeDescriptor], promoting that type's methods.
+//
+// A concrete subclass the Core Image Barcode Descriptor that represents an Aztec code symbol.
 type AztecCodeDescriptor struct {
-	inner *raw.CIAztecCodeDescriptor
+	BarcodeDescriptor
 }
 
-// Unwrap returns the underlying [raw.CIAztecCodeDescriptor].
-func (x *AztecCodeDescriptor) Unwrap() *raw.CIAztecCodeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AztecCodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AztecCodeDescriptorFromID adopts an existing object pointer as a AztecCodeDescriptor (nil for 0).
+// AztecCodeDescriptorFromID adopts an existing Objective-C object as a AztecCodeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AztecCodeDescriptorFromID(id objc.ID) *AztecCodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &AztecCodeDescriptor{inner: raw.CIAztecCodeDescriptorFromID(id)}
+	x := &AztecCodeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an Aztec code descriptor for the given payload and parameters.
-//
-// NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount creates a new [AztecCodeDescriptor].
-func NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIAztecCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:isCompact:layerCount:dataCodewordCount:"), errorCorrectedPayload.Ptr(), isCompact, layerCount, dataCodewordCount)
-	return &AztecCodeDescriptor{inner: raw.CIAztecCodeDescriptorFromID(_id)}
+// aztecCodeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// AztecCodeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aztecCodeDescriptorAdopt(id objc.ID) *AztecCodeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &AztecCodeDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The error-corrected payload that comprises the the Aztec code symbol. Aztec Codes are formally specified in ISO/IEC 24778:2008(E). The error corrected payload consists of the 6-, 8-, 10-, or 12-bit message codewords produced at the end of the step described in section 7.3.1.2 "Formation of data codewords", which exists immediately prior to adding error correction. These codewords have dummy bits inserted to ensure that an entire codeword isn't all 0's or all 1's. Clients will need to remove these extra bits as part of interpreting the payload.
-//
-// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
-func (x *AztecCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
-	return x.inner.ErrorCorrectedPayload()
+// NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount initializes an Aztec code descriptor for the given payload and parameters.
+func NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload obj.Object, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIAztecCodeDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:isCompact:layerCount:dataCodewordCount:"), objref.IDOf(errorCorrectedPayload), isCompact, layerCount, dataCodewordCount)
+	return aztecCodeDescriptorAdopt(_id)
 }
 
-// A Boolean value telling if the Aztec code is compact. Compact Aztec symbols use one-fewer ring in the central finder pattern than full-range Aztec symbols of the same number of data layers.
-//
-// IsCompact calls the underlying IsCompact.
+// ErrorCorrectedPayload the error-corrected payload that comprises the the Aztec code symbol. Aztec Codes are formally specified in ISO/IEC 24778:2008(E). The error corrected payload consists of the 6-, 8-, 10-, or 12-bit message codewords produced at the end of the step described in section 7.3.1.2 "Formation of data codewords", which exists immediately prior to adding error correction. These codewords have dummy bits inserted to ensure that an entire codeword isn't all 0's or all 1's. Clients will need to remove these extra bits as part of interpreting the payload.
+func (x *AztecCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+	return obj.Wrap(_r)
+}
+
+// IsCompact a Boolean value telling if the Aztec code is compact. Compact Aztec symbols use one-fewer ring in the central finder pattern than full-range Aztec symbols of the same number of data layers.
 func (x *AztecCodeDescriptor) IsCompact() bool {
-	return x.inner.IsCompact()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompact"))
+	return _r
 }
 
-// The number of data layers in the Aztec code symbol. Combined with “isCompact-property“, the number of data layers determines the number of modules in the Aztec Code symbol. Valid values range from 1 to 32. Compact symbols can have up to 4 data layers. The number of data layers also determines the number of bits in each data codeword of the message carried by the Aztec Code symbol.
-//
-// LayerCount calls the underlying LayerCount.
+// LayerCount the number of data layers in the Aztec code symbol. Combined with “isCompact-property“, the number of data layers determines the number of modules in the Aztec Code symbol. Valid values range from 1 to 32. Compact symbols can have up to 4 data layers. The number of data layers also determines the number of bits in each data codeword of the message carried by the Aztec Code symbol.
 func (x *AztecCodeDescriptor) LayerCount() int {
-	return x.inner.LayerCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
+	return _r
 }
 
-// The number of non-error-correction codewords carried by the Aztec code symbol. Used to determine the level of error correction in conjunction with the number of data layers. Valid values are 1 to 2048. Compact symbols can have up to 64 message codewords. > Note: this value can exceed the number of message codewords allowed by the number of data layers in this symbol. In this case, the actual number of message codewords is 1024 fewer than this value and the message payload is to be interpreted in an application-defined manner.
-//
-// DataCodewordCount calls the underlying DataCodewordCount.
+// DataCodewordCount the number of non-error-correction codewords carried by the Aztec code symbol. Used to determine the level of error correction in conjunction with the number of data layers. Valid values are 1 to 2048. Compact symbols can have up to 64 message codewords. > Note: this value can exceed the number of message codewords allowed by the number of data layers in this symbol. In this case, the actual number of message codewords is 1024 fewer than this value and the message payload is to be interpreted in an application-defined manner.
 func (x *AztecCodeDescriptor) DataCodewordCount() int {
-	return x.inner.DataCodewordCount()
-}
-
-func (x *AztecCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
-	return &x.inner.CIBarcodeDescriptor
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataCodewordCount"))
+	return _r
 }
 
 // AztecCodeDescriptorable is the interface implemented by [AztecCodeDescriptor], for mocking and DI.
 type AztecCodeDescriptorable interface {
-	Unwrap() *raw.CIAztecCodeDescriptor
-	ErrorCorrectedPayload() *foundation.NSData
+	obj.Object
+	ErrorCorrectedPayload() obj.Object
 	IsCompact() bool
 	LayerCount() int
 	DataCodewordCount() int
 }
 
 var _ AztecCodeDescriptorable = (*AztecCodeDescriptor)(nil)
+
+var _ BarcodeDescriptorProvider = (*AztecCodeDescriptor)(nil)

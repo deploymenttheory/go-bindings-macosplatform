@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a graphics display configuration.
+// GraphicsDisplayConfiguration is an idiomatic wrapper over the Objective-C class VZGraphicsDisplayConfiguration.
 //
-// GraphicsDisplayConfiguration wraps [raw.VZGraphicsDisplayConfiguration] with a fluent Go API.
+// GraphicsDisplayConfiguration is an abstract base — you do not construct it directly. Construct one of [MacGraphicsDisplayConfiguration], [VirtioGraphicsScanoutConfiguration] and pass it where a GraphicsDisplayConfiguration is accepted.
+//
+// The base class for a graphics display configuration.
 type GraphicsDisplayConfiguration struct {
-	inner *raw.VZGraphicsDisplayConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZGraphicsDisplayConfiguration].
-func (x *GraphicsDisplayConfiguration) Unwrap() *raw.VZGraphicsDisplayConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphicsDisplayConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphicsDisplayConfigurationFromID adopts an existing object pointer as a GraphicsDisplayConfiguration (nil for 0).
+// GraphicsDisplayConfigurationFromID adopts an existing Objective-C object as a GraphicsDisplayConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphicsDisplayConfigurationFromID(id objc.ID) *GraphicsDisplayConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &GraphicsDisplayConfiguration{inner: raw.VZGraphicsDisplayConfigurationFromID(id)}
+	x := &GraphicsDisplayConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphicsDisplayConfiguration creates a new [GraphicsDisplayConfiguration].
-func NewGraphicsDisplayConfiguration() *GraphicsDisplayConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZGraphicsDisplayConfiguration")), objc.RegisterName("new"))
-	return &GraphicsDisplayConfiguration{inner: raw.VZGraphicsDisplayConfigurationFromID(_id)}
+// graphicsDisplayConfigurationAdopt wraps an Objective-C object that this code just created as a
+// GraphicsDisplayConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphicsDisplayConfigurationAdopt(id objc.ID) *GraphicsDisplayConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphicsDisplayConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *GraphicsDisplayConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *GraphicsDisplayConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphicsDisplayConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphicsDisplayConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphicsDisplayConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // GraphicsDisplayConfigurationable is the interface implemented by [GraphicsDisplayConfiguration], for mocking and DI.
 type GraphicsDisplayConfigurationable interface {
-	Unwrap() *raw.VZGraphicsDisplayConfiguration
+	obj.Object
 }
 
 var _ GraphicsDisplayConfigurationable = (*GraphicsDisplayConfiguration)(nil)
+
+// isGraphicsDisplayConfiguration marks GraphicsDisplayConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the GraphicsDisplayConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphicsDisplayConfiguration) isGraphicsDisplayConfiguration() {}
+
+var _ GraphicsDisplayConfigurationProvider = (*GraphicsDisplayConfiguration)(nil)

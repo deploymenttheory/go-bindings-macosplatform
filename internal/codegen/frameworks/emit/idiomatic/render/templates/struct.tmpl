@@ -1,0 +1,9 @@
+{{define "struct" -}}
+{{range . -}}
+{{if .Doc}}{{comment .Doc}}
+{{end}}type {{.GoName}} struct {
+{{range .Fields}}{{.GoName}} {{.GoType}}
+{{end}}}
+
+{{end -}}
+{{end}}

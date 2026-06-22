@@ -5,63 +5,89 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of vertex buffer layout descriptor instances.
+// VertexBufferLayoutDescriptorArray is an idiomatic wrapper over the Objective-C class MTLVertexBufferLayoutDescriptorArray.
 //
-// VertexBufferLayoutDescriptorArray wraps [raw.MTLVertexBufferLayoutDescriptorArray] with a fluent Go API.
+// An array of vertex buffer layout descriptor instances.
 type VertexBufferLayoutDescriptorArray struct {
-	inner *raw.MTLVertexBufferLayoutDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVertexBufferLayoutDescriptorArray].
-func (x *VertexBufferLayoutDescriptorArray) Unwrap() *raw.MTLVertexBufferLayoutDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexBufferLayoutDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexBufferLayoutDescriptorArrayFromID adopts an existing object pointer as a VertexBufferLayoutDescriptorArray (nil for 0).
+// VertexBufferLayoutDescriptorArrayFromID adopts an existing Objective-C object as a VertexBufferLayoutDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexBufferLayoutDescriptorArrayFromID(id objc.ID) *VertexBufferLayoutDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &VertexBufferLayoutDescriptorArray{inner: raw.MTLVertexBufferLayoutDescriptorArrayFromID(id)}
+	x := &VertexBufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVertexBufferLayoutDescriptorArray creates a new [VertexBufferLayoutDescriptorArray].
-func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexBufferLayoutDescriptorArray")), objc.RegisterName("new"))
-	return &VertexBufferLayoutDescriptorArray{inner: raw.MTLVertexBufferLayoutDescriptorArrayFromID(_id)}
-}
-
-// Returns the state of the specified vertex buffer layout.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *VertexBufferLayoutDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(index)
-	if _r == nil {
+// vertexBufferLayoutDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// VertexBufferLayoutDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexBufferLayoutDescriptorArrayAdopt(id objc.ID) *VertexBufferLayoutDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &VertexBufferLayoutDescriptor{inner: _r}
+	x := &VertexBufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the state of the specified vertex buffer layout.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *raw.MTLVertexBufferLayoutDescriptor, index uint) {
-	x.inner.SetObjectAtIndexedSubscript(bufferDesc, index)
+// Description returns the object's -description text.
+func (x *VertexBufferLayoutDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexBufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexBufferLayoutDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexBufferLayoutDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVertexBufferLayoutDescriptorArray creates a new VertexBufferLayoutDescriptorArray.
+func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexBufferLayoutDescriptorArray")), objc.RegisterName("new"))
+	return vertexBufferLayoutDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript returns the state of the specified vertex buffer layout.
+func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+	return VertexBufferLayoutDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript sets the state of the specified vertex buffer layout.
+func (x *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }
 
 // VertexBufferLayoutDescriptorArrayable is the interface implemented by [VertexBufferLayoutDescriptorArray], for mocking and DI.
 type VertexBufferLayoutDescriptorArrayable interface {
-	Unwrap() *raw.MTLVertexBufferLayoutDescriptorArray
-	ObjectAtIndexedSubscript(index uint) *VertexBufferLayoutDescriptor
-	SetObjectAtIndexedSubscript(bufferDesc *raw.MTLVertexBufferLayoutDescriptor, index uint)
+	obj.Object
+	ObjectAtIndexedSubscript(index int) *VertexBufferLayoutDescriptor
+	SetObjectAtIndexedSubscript(bufferDesc *VertexBufferLayoutDescriptor, index int)
 }
 
 var _ VertexBufferLayoutDescriptorArrayable = (*VertexBufferLayoutDescriptorArray)(nil)

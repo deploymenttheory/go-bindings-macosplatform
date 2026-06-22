@@ -5,84 +5,81 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.
+// RidgedNoiseSource is an idiomatic wrapper over the Objective-C class GKRidgedNoiseSource.
 //
-// RidgedNoiseSource wraps [raw.GKRidgedNoiseSource] with a fluent Go API.
+// It embeds [CoherentNoiseSource], promoting that type's methods.
+//
+// A procedural noise generator whose output is a type of multifractal coherent noise with sharply defined features.
 type RidgedNoiseSource struct {
-	inner *raw.GKRidgedNoiseSource
+	CoherentNoiseSource
 }
 
-// Unwrap returns the underlying [raw.GKRidgedNoiseSource].
-func (x *RidgedNoiseSource) Unwrap() *raw.GKRidgedNoiseSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RidgedNoiseSource) ID() objc.ID { return x.inner.Ptr() }
-
-// RidgedNoiseSourceFromID adopts an existing object pointer as a RidgedNoiseSource (nil for 0).
+// RidgedNoiseSourceFromID adopts an existing Objective-C object as a RidgedNoiseSource
+// (nil for 0), retaining it and registering a release finalizer.
 func RidgedNoiseSourceFromID(id objc.ID) *RidgedNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	return &RidgedNoiseSource{inner: raw.GKRidgedNoiseSourceFromID(id)}
+	x := &RidgedNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a ridged noise source with the specified parameters.
-//
-// NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed creates a new [RidgedNoiseSource].
+// ridgedNoiseSourceAdopt wraps an Objective-C object that this code just created as a
+// RidgedNoiseSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ridgedNoiseSourceAdopt(id objc.ID) *RidgedNoiseSource {
+	if id == 0 {
+		return nil
+	}
+	x := &RidgedNoiseSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed initializes a ridged noise source with the specified parameters.
 func NewRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *RidgedNoiseSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRidgedNoiseSource")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRidgedNoiseSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:octaveCount:lacunarity:seed:"), frequency, octaveCount, lacunarity, seed)
-	return &RidgedNoiseSource{inner: raw.GKRidgedNoiseSourceFromID(_id)}
+	return ridgedNoiseSourceAdopt(_id)
 }
 
-// A value that determines the size and spacing of features in generated noise.
-//
-// WithFrequency sets the frequency property and returns the receiver for chaining.
+// WithFrequency a value that determines the size and spacing of features in generated noise.
 func (x *RidgedNoiseSource) WithFrequency(frequency float64) *RidgedNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The number of octaves of the underlying noise function to use for generating noise.
-//
-// WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
+// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
 func (x *RidgedNoiseSource) WithOctaveCount(octaveCount int) *RidgedNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 	return x
 }
 
-// The rate at which successive octaves of the noise function increase in frequency.
-//
-// WithLacunarity sets the lacunarity property and returns the receiver for chaining.
+// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
 func (x *RidgedNoiseSource) WithLacunarity(lacunarity float64) *RidgedNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 	return x
 }
 
-// The value that determines the specific configuration of noise produced by the noise source.
-//
-// WithSeed sets the seed property and returns the receiver for chaining.
+// WithSeed the value that determines the specific configuration of noise produced by the noise source.
 func (x *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetSeed(seed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
-}
-
-func (x *RidgedNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource {
-	return &x.inner.GKCoherentNoiseSource
-}
-
-func (x *RidgedNoiseSource) asNoiseSource() *raw.GKNoiseSource {
-	return &x.inner.GKCoherentNoiseSource.GKNoiseSource
 }
 
 // RidgedNoiseSourceable is the interface implemented by [RidgedNoiseSource], for mocking and DI.
 type RidgedNoiseSourceable interface {
-	Unwrap() *raw.GKRidgedNoiseSource
+	obj.Object
 	WithFrequency(frequency float64) *RidgedNoiseSource
 	WithOctaveCount(octaveCount int) *RidgedNoiseSource
 	WithLacunarity(lacunarity float64) *RidgedNoiseSource
@@ -90,3 +87,7 @@ type RidgedNoiseSourceable interface {
 }
 
 var _ RidgedNoiseSourceable = (*RidgedNoiseSource)(nil)
+
+var _ CoherentNoiseSourceProvider = (*RidgedNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*RidgedNoiseSource)(nil)

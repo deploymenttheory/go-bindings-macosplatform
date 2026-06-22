@@ -5,16 +5,16 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	"github.com/ebitengine/purego/objc"
 )
 
-// FingerprintForFileAtURL calls the underlying ICCameraFileFingerprintForFileAtURL.
+// FingerprintForFileAtURL generates a fingerprint given a URL date, or nil.
 func FingerprintForFileAtURL(url string) string {
-	_r := raw.ICCameraFileFingerprintForFileAtURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("ICCameraFile")), objc.RegisterName("fingerprintForFileAtURL:"), rt.FileURL(url))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }

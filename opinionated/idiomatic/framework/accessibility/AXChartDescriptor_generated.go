@@ -5,317 +5,239 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains all the semantic information about an accessible chart.
+// ChartDescriptor is an idiomatic wrapper over the Objective-C class AXChartDescriptor.
 //
-// ChartDescriptor wraps [raw.AXChartDescriptor] with a fluent Go API.
+// An object that contains all the semantic information about an accessible chart.
 type ChartDescriptor struct {
-	inner *raw.AXChartDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXChartDescriptor].
-func (x *ChartDescriptor) Unwrap() *raw.AXChartDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChartDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ChartDescriptorFromID adopts an existing object pointer as a ChartDescriptor (nil for 0).
+// ChartDescriptorFromID adopts an existing Objective-C object as a ChartDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ChartDescriptorFromID(id objc.ID) *ChartDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(id)}
+	x := &ChartDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
-//
-// NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries creates a new [ChartDescriptor].
-func NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries(title string, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:series:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSStringStringWithUTF8String(summary).Ptr(), xAxis, yAxis.Ptr(), series.Ptr())
-	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
+// chartDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ChartDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func chartDescriptorAdopt(id objc.ID) *ChartDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ChartDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, and array of data series.
-//
-// NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries creates a new [ChartDescriptor].
-func NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries(attributedTitle *foundation.NSAttributedString, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:series:"), attributedTitle.Ptr(), foundation.NSStringStringWithUTF8String(summary).Ptr(), xAxis, yAxis.Ptr(), series.Ptr())
-	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
+// Description returns the object's -description text.
+func (x *ChartDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
-//
-// NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries creates a new [ChartDescriptor].
-func NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(title string, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor], series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSStringStringWithUTF8String(summary).Ptr(), xAxis, yAxis.Ptr(), additionalAxes.Ptr(), series.Ptr())
-	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChartDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
-//
-// NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries creates a new [ChartDescriptor].
-func NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(attributedTitle *foundation.NSAttributedString, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor], series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:"), attributedTitle.Ptr(), foundation.NSStringStringWithUTF8String(summary).Ptr(), xAxis, yAxis.Ptr(), additionalAxes.Ptr(), series.Ptr())
-	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChartDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// The title of the chart.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChartDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewChartDescriptor creates a new ChartDescriptor.
+func NewChartDescriptor() *ChartDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("AXChartDescriptor")), objc.RegisterName("new"))
+	return chartDescriptorAdopt(_id)
+}
+
+// WithTitle the title of the chart.
 func (x *ChartDescriptor) WithTitle(title string) *ChartDescriptor {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// An attributed version of the chart title.
-//
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *ChartDescriptor) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ChartDescriptor {
-	x.inner.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle an attributed version of the chart title.
+func (x *ChartDescriptor) WithAttributedTitle(attributedTitle obj.Object) *ChartDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
-// A description of the key takeaways or features of the chart.
-//
-// WithSummary sets the summary property and returns the receiver for chaining.
+// WithSummary a description of the key takeaways or features of the chart.
 func (x *ChartDescriptor) WithSummary(summary string) *ChartDescriptor {
-	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 	return x
 }
 
-// The direction of the content in the chart.
-//
-// WithContentDirection sets the contentDirection property and returns the receiver for chaining.
-func (x *ChartDescriptor) WithContentDirection(contentDirection AXChartDescriptorContentDirection) *ChartDescriptor {
-	x.inner.SetContentDirection(raw.AXChartDescriptorContentDirection(contentDirection))
+// WithContentDirection the direction of the content in the chart.
+func (x *ChartDescriptor) WithContentDirection(contentDirection ChartDescriptorContentDirection) *ChartDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentDirection:"), contentDirection)
 	return x
 }
 
-// The bounds of the view, in screen coordinates, for visually rendering data values.
-//
-// WithContentFrame sets the contentFrame property and returns the receiver for chaining.
+// WithContentFrame the bounds of the view, in screen coordinates, for visually rendering data values.
 func (x *ChartDescriptor) WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor {
-	x.inner.SetContentFrame(contentFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFrame:"), contentFrame)
 	return x
 }
 
-// The descriptors for each data series in the chart.
-//
-// WithSeries sets the collection, converting the Go slice to an NSArray.
-func (x *ChartDescriptor) WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSeries(foundation.NSArrayFromID[*raw.AXDataSeriesDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AXDataSeriesDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSeries(_arr)
+// WithSeries the descriptors for each data series in the chart.
+func (x *ChartDescriptor) WithSeries(items ...*DataSeriesDescriptor) *ChartDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v *DataSeriesDescriptor) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeries:"), _arr)
 	return x
 }
 
-// The axis descriptor for the chart’s x-axis.
-//
-// WithXAxis sets the xAxis property and returns the receiver for chaining.
-func (x *ChartDescriptor) WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor {
-	x.inner.SetXAxis(xAxis)
-	return x
-}
-
-// The axis descriptor for the chart’s y-axis.
-//
-// WithYAxis sets the yAxis property and returns the receiver for chaining.
+// WithYAxis the axis descriptor for the chart’s y-axis.
 func (x *ChartDescriptor) WithYAxis(yAxis *NumericDataAxisDescriptor) *ChartDescriptor {
-	x.inner.SetYAxis(yAxis.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYAxis:"), objref.IDOf(yAxis))
 	return x
 }
 
-// The title of the chart.
-//
-// Title calls the underlying Title.
+// Title the title of the chart.
 func (x *ChartDescriptor) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ChartDescriptor) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// An attributed version of the title of the chart. When set, this will be used instead of `title`.
-//
-// AttributedTitle calls the underlying AttributedTitle.
-func (x *ChartDescriptor) AttributedTitle() *foundation.NSAttributedString {
-	return x.inner.AttributedTitle()
+// AttributedTitle an attributed version of the title of the chart. When set, this will be used instead of `title`.
+func (x *ChartDescriptor) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle calls the underlying SetAttributedTitle.
-func (x *ChartDescriptor) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	x.inner.SetAttributedTitle(attributedTitle)
+// SetAttributedTitle wraps the corresponding Objective-C method.
+func (x *ChartDescriptor) SetAttributedTitle(attributedTitle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
-// A natural language summary of the key message or features of the chart. e.g. "The chart shows that fuel efficiency decreases as vehicle weight increases."
-//
-// Summary calls the underlying Summary.
+// Summary a natural language summary of the key message or features of the chart. e.g. "The chart shows that fuel efficiency decreases as vehicle weight increases."
 func (x *ChartDescriptor) Summary() string {
-	_r := x.inner.Summary()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summary"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSummary calls the underlying SetSummary.
+// SetSummary wraps the corresponding Objective-C method.
 func (x *ChartDescriptor) SetSummary(summary string) {
-	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 }
 
-// The direction of the chart's X axis.
-//
-// ContentDirection calls the underlying ContentDirection.
-func (x *ChartDescriptor) ContentDirection() AXChartDescriptorContentDirection {
-	return AXChartDescriptorContentDirection(x.inner.ContentDirection())
+// ContentDirection the direction of the chart's X axis.
+func (x *ChartDescriptor) ContentDirection() ChartDescriptorContentDirection {
+	_r := objc.Send[ChartDescriptorContentDirection](objref.IDOf(x), objc.RegisterName("contentDirection"))
+	return _r
 }
 
-// SetContentDirection calls the underlying SetContentDirection.
-func (x *ChartDescriptor) SetContentDirection(contentDirection AXChartDescriptorContentDirection) {
-	x.inner.SetContentDirection(raw.AXChartDescriptorContentDirection(contentDirection))
+// SetContentDirection wraps the corresponding Objective-C method.
+func (x *ChartDescriptor) SetContentDirection(contentDirection ChartDescriptorContentDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentDirection:"), contentDirection)
 }
 
-// The bounds of the view area for visually rendering data values if applicable, provided in superview coordinates.
-//
-// ContentFrame calls the underlying ContentFrame.
+// ContentFrame the bounds of the view area for visually rendering data values if applicable, provided in superview coordinates.
 func (x *ChartDescriptor) ContentFrame() corefoundation.CGRect {
-	return x.inner.ContentFrame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentFrame"))
+	return _r
 }
 
-// SetContentFrame calls the underlying SetContentFrame.
+// SetContentFrame wraps the corresponding Objective-C method.
 func (x *ChartDescriptor) SetContentFrame(contentFrame corefoundation.CGRect) {
-	x.inner.SetContentFrame(contentFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFrame:"), contentFrame)
 }
 
-// A set of data series descriptors describing each series in the chart.
+// Series a set of data series descriptors describing each series in the chart.
 //
 // Series returns the collection as a Go slice.
 func (x *ChartDescriptor) Series() []*DataSeriesDescriptor {
-	arr := x.inner.Series()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DataSeriesDescriptor {
-		return &DataSeriesDescriptor{inner: raw.AXDataSeriesDescriptorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("series"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DataSeriesDescriptor { return DataSeriesDescriptorFromID(_id) })
 }
 
-// SetSeries calls the underlying SetSeries.
-func (x *ChartDescriptor) SetSeries(series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) {
-	x.inner.SetSeries(series)
+// SetSeries wraps the corresponding Objective-C method.
+func (x *ChartDescriptor) SetSeries(series []*DataSeriesDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeries:"), purego.SliceToNSArray(series, func(_v *DataSeriesDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The axis descriptor for the chart's X axis.
-//
-// XAxis calls the underlying XAxis.
-func (x *ChartDescriptor) XAxis() raw.AXDataAxisDescriptor {
-	return x.inner.XAxis()
-}
-
-// SetXAxis calls the underlying SetXAxis.
-func (x *ChartDescriptor) SetXAxis(xAxis raw.AXDataAxisDescriptor) {
-	x.inner.SetXAxis(xAxis)
-}
-
-// The axis descriptor for the chart's Y axis.
-//
-// YAxis calls the underlying YAxis.
+// YAxis the axis descriptor for the chart's Y axis.
 func (x *ChartDescriptor) YAxis() *NumericDataAxisDescriptor {
-	_r := x.inner.YAxis()
-	if _r == nil {
-		return nil
-	}
-	return &NumericDataAxisDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yAxis"))
+	return NumericDataAxisDescriptorFromID(_r)
 }
 
-// SetYAxis calls the underlying SetYAxis.
-func (x *ChartDescriptor) SetYAxis(yAxis *raw.AXNumericDataAxisDescriptor) {
-	x.inner.SetYAxis(yAxis)
+// SetYAxis wraps the corresponding Objective-C method.
+func (x *ChartDescriptor) SetYAxis(yAxis *NumericDataAxisDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYAxis:"), objref.IDOf(yAxis))
 }
 
-// Descriptors for additional categorical or numerical axes beyond x and y. For example, in a visual chart, these values might be represented by the size or color of data points.
-//
-// AdditionalAxes calls the underlying AdditionalAxes.
-func (x *ChartDescriptor) AdditionalAxes() *foundation.NSArray[raw.AXDataAxisDescriptor] {
-	return x.inner.AdditionalAxes()
+// AdditionalAxes descriptors for additional categorical or numerical axes beyond x and y. For example, in a visual chart, these values might be represented by the size or color of data points.
+func (x *ChartDescriptor) AdditionalAxes() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalAxes"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetAdditionalAxes calls the underlying SetAdditionalAxes.
-func (x *ChartDescriptor) SetAdditionalAxes(additionalAxes ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(additionalAxes))
-	for _i, _v := range additionalAxes {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.AXDataAxisDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.AXDataAxisDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.AXDataAxisDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetAdditionalAxes(_arg0)
+// SetAdditionalAxes wraps the corresponding Objective-C method.
+func (x *ChartDescriptor) SetAdditionalAxes(additionalAxes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalAxes:"), purego.SliceToNSArray(additionalAxes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ChartDescriptorable is the interface implemented by [ChartDescriptor], for mocking and DI.
 type ChartDescriptorable interface {
-	Unwrap() *raw.AXChartDescriptor
+	obj.Object
 	WithTitle(title string) *ChartDescriptor
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ChartDescriptor
+	WithAttributedTitle(attributedTitle obj.Object) *ChartDescriptor
 	WithSummary(summary string) *ChartDescriptor
-	WithContentDirection(contentDirection AXChartDescriptorContentDirection) *ChartDescriptor
+	WithContentDirection(contentDirection ChartDescriptorContentDirection) *ChartDescriptor
 	WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor
-	WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor
-	WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor
+	WithSeries(items ...*DataSeriesDescriptor) *ChartDescriptor
 	WithYAxis(yAxis *NumericDataAxisDescriptor) *ChartDescriptor
 	Title() string
 	SetTitle(title string)
-	AttributedTitle() *foundation.NSAttributedString
-	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	AttributedTitle() obj.Object
+	SetAttributedTitle(attributedTitle obj.Object)
 	Summary() string
 	SetSummary(summary string)
-	ContentDirection() AXChartDescriptorContentDirection
-	SetContentDirection(contentDirection AXChartDescriptorContentDirection)
+	ContentDirection() ChartDescriptorContentDirection
+	SetContentDirection(contentDirection ChartDescriptorContentDirection)
 	ContentFrame() corefoundation.CGRect
 	SetContentFrame(contentFrame corefoundation.CGRect)
 	Series() []*DataSeriesDescriptor
-	SetSeries(series *foundation.NSArray[*raw.AXDataSeriesDescriptor])
-	XAxis() raw.AXDataAxisDescriptor
-	SetXAxis(xAxis raw.AXDataAxisDescriptor)
+	SetSeries(series []*DataSeriesDescriptor)
 	YAxis() *NumericDataAxisDescriptor
-	SetYAxis(yAxis *raw.AXNumericDataAxisDescriptor)
-	AdditionalAxes() *foundation.NSArray[raw.AXDataAxisDescriptor]
-	SetAdditionalAxes(additionalAxes ...purego.IDer)
+	SetYAxis(yAxis *NumericDataAxisDescriptor)
+	AdditionalAxes() []obj.Object
+	SetAdditionalAxes(additionalAxes []obj.Object)
 }
 
 var _ ChartDescriptorable = (*ChartDescriptor)(nil)

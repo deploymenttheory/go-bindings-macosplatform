@@ -5,434 +5,729 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// NSAccessibilityActionDescription calls [raw.NSAccessibilityActionDescription] (C function NSAccessibilityActionDescription).
-func NSAccessibilityActionDescription(action *foundation.NSString) *foundation.NSString {
-	return raw.NSAccessibilityActionDescription(action)
+var _fnNSAccessibilityActionDescription func(objc.ID) objc.ID
+
+// NSAccessibilityActionDescription calls the AppKit framework function NSAccessibilityActionDescription.
+func NSAccessibilityActionDescription(action obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityActionDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityActionDescription, _lib, "NSAccessibilityActionDescription")
+	}
+	_ret := _fnNSAccessibilityActionDescription(objref.IDOf(action))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSAccessibilityFrameInView calls [raw.NSAccessibilityFrameInView] (C function NSAccessibilityFrameInView).
-func NSAccessibilityFrameInView(parentView *raw.NSView, frame corefoundation.CGRect) corefoundation.CGRect {
-	return raw.NSAccessibilityFrameInView(parentView, frame)
+var _fnNSAccessibilityFrameInView func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
+
+// NSAccessibilityFrameInView calls the AppKit framework function NSAccessibilityFrameInView.
+func NSAccessibilityFrameInView(parentView *View, frame corefoundation.CGRect) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityFrameInView == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityFrameInView, _lib, "NSAccessibilityFrameInView")
+	}
+	return _fnNSAccessibilityFrameInView(objref.IDOf(parentView), frame)
 }
 
-// NSAccessibilityPointInView calls [raw.NSAccessibilityPointInView] (C function NSAccessibilityPointInView).
-func NSAccessibilityPointInView(parentView *raw.NSView, point corefoundation.CGPoint) corefoundation.CGPoint {
-	return raw.NSAccessibilityPointInView(parentView, point)
+var _fnNSAccessibilityPointInView func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
+
+// NSAccessibilityPointInView calls the AppKit framework function NSAccessibilityPointInView.
+func NSAccessibilityPointInView(parentView *View, point corefoundation.CGPoint) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityPointInView == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPointInView, _lib, "NSAccessibilityPointInView")
+	}
+	return _fnNSAccessibilityPointInView(objref.IDOf(parentView), point)
 }
 
-// NSAccessibilityPostNotification calls [raw.NSAccessibilityPostNotification] (C function NSAccessibilityPostNotification).
-func NSAccessibilityPostNotification(element objc.ID, notification *foundation.NSString) {
-	raw.NSAccessibilityPostNotification(element, notification)
+var _fnNSAccessibilityPostNotification func(objc.ID, objc.ID)
+
+// NSAccessibilityPostNotification calls the AppKit framework function NSAccessibilityPostNotification.
+func NSAccessibilityPostNotification(element obj.Object, notification obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityPostNotification == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPostNotification, _lib, "NSAccessibilityPostNotification")
+	}
+	_fnNSAccessibilityPostNotification(objref.IDOf(element), objref.IDOf(notification))
 }
 
-// NSAccessibilityPostNotificationWithUserInfo calls [raw.NSAccessibilityPostNotificationWithUserInfo] (C function NSAccessibilityPostNotificationWithUserInfo).
-func NSAccessibilityPostNotificationWithUserInfo(element objc.ID, notification *foundation.NSString, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	raw.NSAccessibilityPostNotificationWithUserInfo(element, notification, userInfo)
+var _fnNSAccessibilityPostNotificationWithUserInfo func(objc.ID, objc.ID, objc.ID)
+
+// NSAccessibilityPostNotificationWithUserInfo calls the AppKit framework function NSAccessibilityPostNotificationWithUserInfo.
+func NSAccessibilityPostNotificationWithUserInfo(element obj.Object, notification obj.Object, userInfo obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityPostNotificationWithUserInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityPostNotificationWithUserInfo, _lib, "NSAccessibilityPostNotificationWithUserInfo")
+	}
+	_fnNSAccessibilityPostNotificationWithUserInfo(objref.IDOf(element), objref.IDOf(notification), objref.IDOf(userInfo))
 }
 
-// NSAccessibilityRaiseBadArgumentException calls [raw.NSAccessibilityRaiseBadArgumentException] (C function NSAccessibilityRaiseBadArgumentException).
-func NSAccessibilityRaiseBadArgumentException(element objc.ID, attribute *foundation.NSString, value objc.ID) {
-	raw.NSAccessibilityRaiseBadArgumentException(element, attribute, value)
+var _fnNSAccessibilityRaiseBadArgumentException func(objc.ID, objc.ID, objc.ID)
+
+// NSAccessibilityRaiseBadArgumentException calls the AppKit framework function NSAccessibilityRaiseBadArgumentException.
+func NSAccessibilityRaiseBadArgumentException(element obj.Object, attribute obj.Object, value obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityRaiseBadArgumentException == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityRaiseBadArgumentException, _lib, "NSAccessibilityRaiseBadArgumentException")
+	}
+	_fnNSAccessibilityRaiseBadArgumentException(objref.IDOf(element), objref.IDOf(attribute), objref.IDOf(value))
 }
 
-// NSAccessibilityRoleDescription calls [raw.NSAccessibilityRoleDescription] (C function NSAccessibilityRoleDescription).
-func NSAccessibilityRoleDescription(role *foundation.NSString, subrole *foundation.NSString) *foundation.NSString {
-	return raw.NSAccessibilityRoleDescription(role, subrole)
+var _fnNSAccessibilityRoleDescription func(objc.ID, objc.ID) objc.ID
+
+// NSAccessibilityRoleDescription calls the AppKit framework function NSAccessibilityRoleDescription.
+func NSAccessibilityRoleDescription(role obj.Object, subrole obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityRoleDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityRoleDescription, _lib, "NSAccessibilityRoleDescription")
+	}
+	_ret := _fnNSAccessibilityRoleDescription(objref.IDOf(role), objref.IDOf(subrole))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSAccessibilityRoleDescriptionForUIElement calls [raw.NSAccessibilityRoleDescriptionForUIElement] (C function NSAccessibilityRoleDescriptionForUIElement).
-func NSAccessibilityRoleDescriptionForUIElement(element objc.ID) *foundation.NSString {
-	return raw.NSAccessibilityRoleDescriptionForUIElement(element)
+var _fnNSAccessibilityRoleDescriptionForUIElement func(objc.ID) objc.ID
+
+// NSAccessibilityRoleDescriptionForUIElement calls the AppKit framework function NSAccessibilityRoleDescriptionForUIElement.
+func NSAccessibilityRoleDescriptionForUIElement(element obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityRoleDescriptionForUIElement == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityRoleDescriptionForUIElement, _lib, "NSAccessibilityRoleDescriptionForUIElement")
+	}
+	_ret := _fnNSAccessibilityRoleDescriptionForUIElement(objref.IDOf(element))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSAccessibilitySetMayContainProtectedContent calls [raw.NSAccessibilitySetMayContainProtectedContent] (C function NSAccessibilitySetMayContainProtectedContent).
+var _fnNSAccessibilitySetMayContainProtectedContent func(bool) bool
+
+// NSAccessibilitySetMayContainProtectedContent calls the AppKit framework function NSAccessibilitySetMayContainProtectedContent.
 func NSAccessibilitySetMayContainProtectedContent(flag bool) bool {
-	return raw.NSAccessibilitySetMayContainProtectedContent(flag)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilitySetMayContainProtectedContent == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilitySetMayContainProtectedContent, _lib, "NSAccessibilitySetMayContainProtectedContent")
+	}
+	return _fnNSAccessibilitySetMayContainProtectedContent(flag)
 }
 
-// NSAccessibilityUnignoredAncestor calls [raw.NSAccessibilityUnignoredAncestor] (C function NSAccessibilityUnignoredAncestor).
-func NSAccessibilityUnignoredAncestor(element objc.ID) objc.ID {
-	return raw.NSAccessibilityUnignoredAncestor(element)
+var _fnNSAccessibilityUnignoredAncestor func(objc.ID) objc.ID
+
+// NSAccessibilityUnignoredAncestor calls the AppKit framework function NSAccessibilityUnignoredAncestor.
+func NSAccessibilityUnignoredAncestor(element obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityUnignoredAncestor == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredAncestor, _lib, "NSAccessibilityUnignoredAncestor")
+	}
+	_ret := _fnNSAccessibilityUnignoredAncestor(objref.IDOf(element))
+	return obj.Wrap(_ret)
 }
 
-// NSAccessibilityUnignoredChildren calls [raw.NSAccessibilityUnignoredChildren] (C function NSAccessibilityUnignoredChildren).
-func NSAccessibilityUnignoredChildren(originalChildren *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	return raw.NSAccessibilityUnignoredChildren(originalChildren)
+var _fnNSAccessibilityUnignoredChildren func(objc.ID) objc.ID
+
+// NSAccessibilityUnignoredChildren calls the AppKit framework function NSAccessibilityUnignoredChildren.
+func NSAccessibilityUnignoredChildren(originalChildren obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityUnignoredChildren == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildren, _lib, "NSAccessibilityUnignoredChildren")
+	}
+	_ret := _fnNSAccessibilityUnignoredChildren(objref.IDOf(originalChildren))
+	return obj.Wrap(_ret)
 }
 
-// NSAccessibilityUnignoredChildrenForOnlyChild calls [raw.NSAccessibilityUnignoredChildrenForOnlyChild] (C function NSAccessibilityUnignoredChildrenForOnlyChild).
-func NSAccessibilityUnignoredChildrenForOnlyChild(originalChild objc.ID) *foundation.NSArray[objc.ID] {
-	return raw.NSAccessibilityUnignoredChildrenForOnlyChild(originalChild)
+var _fnNSAccessibilityUnignoredChildrenForOnlyChild func(objc.ID) objc.ID
+
+// NSAccessibilityUnignoredChildrenForOnlyChild calls the AppKit framework function NSAccessibilityUnignoredChildrenForOnlyChild.
+func NSAccessibilityUnignoredChildrenForOnlyChild(originalChild obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityUnignoredChildrenForOnlyChild == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredChildrenForOnlyChild, _lib, "NSAccessibilityUnignoredChildrenForOnlyChild")
+	}
+	_ret := _fnNSAccessibilityUnignoredChildrenForOnlyChild(objref.IDOf(originalChild))
+	return obj.Wrap(_ret)
 }
 
-// NSAccessibilityUnignoredDescendant calls [raw.NSAccessibilityUnignoredDescendant] (C function NSAccessibilityUnignoredDescendant).
-func NSAccessibilityUnignoredDescendant(element objc.ID) objc.ID {
-	return raw.NSAccessibilityUnignoredDescendant(element)
+var _fnNSAccessibilityUnignoredDescendant func(objc.ID) objc.ID
+
+// NSAccessibilityUnignoredDescendant calls the AppKit framework function NSAccessibilityUnignoredDescendant.
+func NSAccessibilityUnignoredDescendant(element obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAccessibilityUnignoredDescendant == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAccessibilityUnignoredDescendant, _lib, "NSAccessibilityUnignoredDescendant")
+	}
+	_ret := _fnNSAccessibilityUnignoredDescendant(objref.IDOf(element))
+	return obj.Wrap(_ret)
 }
 
-// NSApplicationLoad calls [raw.NSApplicationLoad] (C function NSApplicationLoad).
+var _fnNSApplicationLoad func() bool
+
+// NSApplicationLoad calls the AppKit framework function NSApplicationLoad.
 func NSApplicationLoad() bool {
-	return raw.NSApplicationLoad()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSApplicationLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnNSApplicationLoad, _lib, "NSApplicationLoad")
+	}
+	return _fnNSApplicationLoad()
 }
 
-// NSApplicationMain calls [raw.NSApplicationMain] (C function NSApplicationMain).
+var _fnNSApplicationMain func(int, string) int
+
+// NSApplicationMain calls the AppKit framework function NSApplicationMain.
 func NSApplicationMain(argc int, argv string) int {
-	return raw.NSApplicationMain(argc, argv)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSApplicationMain == nil {
+		ebipurego.RegisterLibFunc(&_fnNSApplicationMain, _lib, "NSApplicationMain")
+	}
+	return _fnNSApplicationMain(argc, argv)
 }
 
-// NSAvailableWindowDepths calls [raw.NSAvailableWindowDepths] (C function NSAvailableWindowDepths).
-func NSAvailableWindowDepths() *raw.NSWindowDepth {
-	return raw.NSAvailableWindowDepths()
-}
+var _fnNSBeep func()
 
-// NSBeep calls [raw.NSBeep] (C function NSBeep).
+// NSBeep calls the AppKit framework function NSBeep.
 func NSBeep() {
-	raw.NSBeep()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSBeep == nil {
+		ebipurego.RegisterLibFunc(&_fnNSBeep, _lib, "NSBeep")
+	}
+	_fnNSBeep()
 }
 
-// NSBeginInformationalAlertSheet calls [raw.NSBeginInformationalAlertSheet] (C function NSBeginInformationalAlertSheet).
-func NSBeginInformationalAlertSheet(title *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString, docWindow *raw.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, didDismissSelector objc.SEL, contextInfo unsafe.Pointer, msgFormat *foundation.NSString) {
-	raw.NSBeginInformationalAlertSheet(title, defaultButton, alternateButton, otherButton, docWindow, modalDelegate, didEndSelector, didDismissSelector, contextInfo, msgFormat)
+var _fnNSBitsPerPixelFromDepth func(WindowDepth) int
+
+// NSBitsPerPixelFromDepth calls the AppKit framework function NSBitsPerPixelFromDepth.
+func NSBitsPerPixelFromDepth(depth WindowDepth) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSBitsPerPixelFromDepth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSBitsPerPixelFromDepth, _lib, "NSBitsPerPixelFromDepth")
+	}
+	return _fnNSBitsPerPixelFromDepth(depth)
 }
 
-// NSBestDepth calls [raw.NSBestDepth] (C function NSBestDepth).
-func NSBestDepth(colorSpace *foundation.NSString, bps int, bpp int, planar bool, exactMatch *bool) NSWindowDepth {
-	return NSWindowDepth(raw.NSBestDepth(colorSpace, bps, bpp, planar, exactMatch))
+var _fnNSBitsPerSampleFromDepth func(WindowDepth) int
+
+// NSBitsPerSampleFromDepth calls the AppKit framework function NSBitsPerSampleFromDepth.
+func NSBitsPerSampleFromDepth(depth WindowDepth) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSBitsPerSampleFromDepth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSBitsPerSampleFromDepth, _lib, "NSBitsPerSampleFromDepth")
+	}
+	return _fnNSBitsPerSampleFromDepth(depth)
 }
 
-// NSBitsPerPixelFromDepth calls [raw.NSBitsPerPixelFromDepth] (C function NSBitsPerPixelFromDepth).
-func NSBitsPerPixelFromDepth(depth NSWindowDepth) int {
-	return raw.NSBitsPerPixelFromDepth(raw.NSWindowDepth(depth))
+var _fnNSColorSpaceFromDepth func(WindowDepth) objc.ID
+
+// NSColorSpaceFromDepth calls the AppKit framework function NSColorSpaceFromDepth.
+func NSColorSpaceFromDepth(depth WindowDepth) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSColorSpaceFromDepth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSColorSpaceFromDepth, _lib, "NSColorSpaceFromDepth")
+	}
+	_ret := _fnNSColorSpaceFromDepth(depth)
+	return obj.Wrap(_ret)
 }
 
-// NSBitsPerSampleFromDepth calls [raw.NSBitsPerSampleFromDepth] (C function NSBitsPerSampleFromDepth).
-func NSBitsPerSampleFromDepth(depth NSWindowDepth) int {
-	return raw.NSBitsPerSampleFromDepth(raw.NSWindowDepth(depth))
-}
+var _fnNSCopyBits func(int, corefoundation.CGRect, corefoundation.CGPoint)
 
-// NSColorSpaceFromDepth calls [raw.NSColorSpaceFromDepth] (C function NSColorSpaceFromDepth).
-func NSColorSpaceFromDepth(depth NSWindowDepth) *foundation.NSString {
-	return raw.NSColorSpaceFromDepth(raw.NSWindowDepth(depth))
-}
-
-// NSConvertGlyphsToPackedGlyphs calls [raw.NSConvertGlyphsToPackedGlyphs] (C function NSConvertGlyphsToPackedGlyphs).
-func NSConvertGlyphsToPackedGlyphs(glBuf *uint, count int, packing NSMultibyteGlyphPacking, packedGlyphs string) int {
-	return raw.NSConvertGlyphsToPackedGlyphs(glBuf, count, raw.NSMultibyteGlyphPacking(packing), packedGlyphs)
-}
-
-// NSCopyBits calls [raw.NSCopyBits] (C function NSCopyBits).
+// NSCopyBits calls the AppKit framework function NSCopyBits.
 func NSCopyBits(srcGState int, srcRect corefoundation.CGRect, destPoint corefoundation.CGPoint) {
-	raw.NSCopyBits(srcGState, srcRect, destPoint)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCopyBits == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCopyBits, _lib, "NSCopyBits")
+	}
+	_fnNSCopyBits(srcGState, srcRect, destPoint)
 }
 
-// NSCountWindows calls [raw.NSCountWindows] (C function NSCountWindows).
-func NSCountWindows(count *int64) {
-	raw.NSCountWindows(count)
+var _fnNSCreateFileContentsPboardType func(objc.ID) objc.ID
+
+// NSCreateFileContentsPboardType calls the AppKit framework function NSCreateFileContentsPboardType.
+func NSCreateFileContentsPboardType(fileType string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCreateFileContentsPboardType == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCreateFileContentsPboardType, _lib, "NSCreateFileContentsPboardType")
+	}
+	_ret := _fnNSCreateFileContentsPboardType(purego.NSString(fileType))
+	return obj.Wrap(_ret)
 }
 
-// NSCountWindowsForContext calls [raw.NSCountWindowsForContext] (C function NSCountWindowsForContext).
-func NSCountWindowsForContext(context_ int, count *int64) {
-	raw.NSCountWindowsForContext(context_, count)
+var _fnNSCreateFilenamePboardType func(objc.ID) objc.ID
+
+// NSCreateFilenamePboardType calls the AppKit framework function NSCreateFilenamePboardType.
+func NSCreateFilenamePboardType(fileType string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCreateFilenamePboardType == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCreateFilenamePboardType, _lib, "NSCreateFilenamePboardType")
+	}
+	_ret := _fnNSCreateFilenamePboardType(purego.NSString(fileType))
+	return obj.Wrap(_ret)
 }
 
-// NSCreateFileContentsPboardType calls [raw.NSCreateFileContentsPboardType] (C function NSCreateFileContentsPboardType).
-func NSCreateFileContentsPboardType(fileType *foundation.NSString) *foundation.NSString {
-	return raw.NSCreateFileContentsPboardType(fileType)
-}
+var _fnNSDisableScreenUpdates func()
 
-// NSCreateFilenamePboardType calls [raw.NSCreateFilenamePboardType] (C function NSCreateFilenamePboardType).
-func NSCreateFilenamePboardType(fileType *foundation.NSString) *foundation.NSString {
-	return raw.NSCreateFilenamePboardType(fileType)
-}
-
-// NSDirectionalEdgeInsetsMake calls [raw.NSDirectionalEdgeInsetsMake] (C function NSDirectionalEdgeInsetsMake).
-func NSDirectionalEdgeInsetsMake(top float64, leading float64, bottom float64, trailing float64) raw.NSDirectionalEdgeInsets {
-	return raw.NSDirectionalEdgeInsetsMake(top, leading, bottom, trailing)
-}
-
-// NSDisableScreenUpdates calls [raw.NSDisableScreenUpdates] (C function NSDisableScreenUpdates).
+// NSDisableScreenUpdates calls the AppKit framework function NSDisableScreenUpdates.
 func NSDisableScreenUpdates() {
-	raw.NSDisableScreenUpdates()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDisableScreenUpdates == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDisableScreenUpdates, _lib, "NSDisableScreenUpdates")
+	}
+	_fnNSDisableScreenUpdates()
 }
 
-// NSDottedFrameRect calls [raw.NSDottedFrameRect] (C function NSDottedFrameRect).
+var _fnNSDottedFrameRect func(corefoundation.CGRect)
+
+// NSDottedFrameRect calls the AppKit framework function NSDottedFrameRect.
 func NSDottedFrameRect(rect corefoundation.CGRect) {
-	raw.NSDottedFrameRect(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDottedFrameRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDottedFrameRect, _lib, "NSDottedFrameRect")
+	}
+	_fnNSDottedFrameRect(rect)
 }
 
-// NSDrawBitmap calls [raw.NSDrawBitmap] (C function NSDrawBitmap).
-func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName *foundation.NSString, data unsafe.Pointer) {
-	raw.NSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, colorSpaceName, data)
-}
+var _fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)
 
-// NSDrawButton calls [raw.NSDrawButton] (C function NSDrawButton).
+// NSDrawButton calls the AppKit framework function NSDrawButton.
 func NSDrawButton(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
-	raw.NSDrawButton(rect, clipRect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawButton == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawButton, _lib, "NSDrawButton")
+	}
+	_fnNSDrawButton(rect, clipRect)
 }
 
-// NSDrawColorTiledRects calls [raw.NSDrawColorTiledRects] (C function NSDrawColorTiledRects).
-func NSDrawColorTiledRects(boundsRect corefoundation.CGRect, clipRect corefoundation.CGRect, sides *foundation.NSRectEdge, colors *raw.NSColor, count int) corefoundation.CGRect {
-	return raw.NSDrawColorTiledRects(boundsRect, clipRect, sides, colors, count)
-}
+var _fnNSDrawDarkBezel func(corefoundation.CGRect, corefoundation.CGRect)
 
-// NSDrawDarkBezel calls [raw.NSDrawDarkBezel] (C function NSDrawDarkBezel).
+// NSDrawDarkBezel calls the AppKit framework function NSDrawDarkBezel.
 func NSDrawDarkBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
-	raw.NSDrawDarkBezel(rect, clipRect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawDarkBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawDarkBezel, _lib, "NSDrawDarkBezel")
+	}
+	_fnNSDrawDarkBezel(rect, clipRect)
 }
 
-// NSDrawGrayBezel calls [raw.NSDrawGrayBezel] (C function NSDrawGrayBezel).
+var _fnNSDrawGrayBezel func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawGrayBezel calls the AppKit framework function NSDrawGrayBezel.
 func NSDrawGrayBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
-	raw.NSDrawGrayBezel(rect, clipRect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawGrayBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawGrayBezel, _lib, "NSDrawGrayBezel")
+	}
+	_fnNSDrawGrayBezel(rect, clipRect)
 }
 
-// NSDrawGroove calls [raw.NSDrawGroove] (C function NSDrawGroove).
+var _fnNSDrawGroove func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawGroove calls the AppKit framework function NSDrawGroove.
 func NSDrawGroove(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
-	raw.NSDrawGroove(rect, clipRect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawGroove == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawGroove, _lib, "NSDrawGroove")
+	}
+	_fnNSDrawGroove(rect, clipRect)
 }
 
-// NSDrawLightBezel calls [raw.NSDrawLightBezel] (C function NSDrawLightBezel).
+var _fnNSDrawLightBezel func(corefoundation.CGRect, corefoundation.CGRect)
+
+// NSDrawLightBezel calls the AppKit framework function NSDrawLightBezel.
 func NSDrawLightBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
-	raw.NSDrawLightBezel(rect, clipRect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawLightBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawLightBezel, _lib, "NSDrawLightBezel")
+	}
+	_fnNSDrawLightBezel(rect, clipRect)
 }
 
-// NSDrawNinePartImage calls [raw.NSDrawNinePartImage] (C function NSDrawNinePartImage).
-func NSDrawNinePartImage(frame corefoundation.CGRect, topLeftCorner *raw.NSImage, topEdgeFill *raw.NSImage, topRightCorner *raw.NSImage, leftEdgeFill *raw.NSImage, centerFill *raw.NSImage, rightEdgeFill *raw.NSImage, bottomLeftCorner *raw.NSImage, bottomEdgeFill *raw.NSImage, bottomRightCorner *raw.NSImage, op NSCompositingOperation, alphaFraction float64, flipped bool) {
-	raw.NSDrawNinePartImage(frame, topLeftCorner, topEdgeFill, topRightCorner, leftEdgeFill, centerFill, rightEdgeFill, bottomLeftCorner, bottomEdgeFill, bottomRightCorner, raw.NSCompositingOperation(op), alphaFraction, flipped)
+var _fnNSDrawNinePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, CompositingOperation, float64, bool)
+
+// NSDrawNinePartImage calls the AppKit framework function NSDrawNinePartImage.
+func NSDrawNinePartImage(frame corefoundation.CGRect, topLeftCorner *Image, topEdgeFill *Image, topRightCorner *Image, leftEdgeFill *Image, centerFill *Image, rightEdgeFill *Image, bottomLeftCorner *Image, bottomEdgeFill *Image, bottomRightCorner *Image, op CompositingOperation, alphaFraction float64, flipped bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawNinePartImage == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawNinePartImage, _lib, "NSDrawNinePartImage")
+	}
+	_fnNSDrawNinePartImage(frame, objref.IDOf(topLeftCorner), objref.IDOf(topEdgeFill), objref.IDOf(topRightCorner), objref.IDOf(leftEdgeFill), objref.IDOf(centerFill), objref.IDOf(rightEdgeFill), objref.IDOf(bottomLeftCorner), objref.IDOf(bottomEdgeFill), objref.IDOf(bottomRightCorner), op, alphaFraction, flipped)
 }
 
-// NSDrawThreePartImage calls [raw.NSDrawThreePartImage] (C function NSDrawThreePartImage).
-func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *raw.NSImage, centerFill *raw.NSImage, endCap *raw.NSImage, vertical bool, op NSCompositingOperation, alphaFraction float64, flipped bool) {
-	raw.NSDrawThreePartImage(frame, startCap, centerFill, endCap, vertical, raw.NSCompositingOperation(op), alphaFraction, flipped)
+var _fnNSDrawThreePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, bool, CompositingOperation, float64, bool)
+
+// NSDrawThreePartImage calls the AppKit framework function NSDrawThreePartImage.
+func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *Image, centerFill *Image, endCap *Image, vertical bool, op CompositingOperation, alphaFraction float64, flipped bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawThreePartImage == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawThreePartImage, _lib, "NSDrawThreePartImage")
+	}
+	_fnNSDrawThreePartImage(frame, objref.IDOf(startCap), objref.IDOf(centerFill), objref.IDOf(endCap), vertical, op, alphaFraction, flipped)
 }
 
-// NSDrawTiledRects calls [raw.NSDrawTiledRects] (C function NSDrawTiledRects).
-func NSDrawTiledRects(boundsRect corefoundation.CGRect, clipRect corefoundation.CGRect, sides *foundation.NSRectEdge, grays *float64, count int) corefoundation.CGRect {
-	return raw.NSDrawTiledRects(boundsRect, clipRect, sides, grays, count)
-}
+var _fnNSDrawWhiteBezel func(corefoundation.CGRect, corefoundation.CGRect)
 
-// NSDrawWhiteBezel calls [raw.NSDrawWhiteBezel] (C function NSDrawWhiteBezel).
+// NSDrawWhiteBezel calls the AppKit framework function NSDrawWhiteBezel.
 func NSDrawWhiteBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
-	raw.NSDrawWhiteBezel(rect, clipRect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawWhiteBezel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawWhiteBezel, _lib, "NSDrawWhiteBezel")
+	}
+	_fnNSDrawWhiteBezel(rect, clipRect)
 }
 
-// NSDrawWindowBackground calls [raw.NSDrawWindowBackground] (C function NSDrawWindowBackground).
+var _fnNSDrawWindowBackground func(corefoundation.CGRect)
+
+// NSDrawWindowBackground calls the AppKit framework function NSDrawWindowBackground.
 func NSDrawWindowBackground(rect corefoundation.CGRect) {
-	raw.NSDrawWindowBackground(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawWindowBackground == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawWindowBackground, _lib, "NSDrawWindowBackground")
+	}
+	_fnNSDrawWindowBackground(rect)
 }
 
-// NSEnableScreenUpdates calls [raw.NSEnableScreenUpdates] (C function NSEnableScreenUpdates).
+var _fnNSEnableScreenUpdates func()
+
+// NSEnableScreenUpdates calls the AppKit framework function NSEnableScreenUpdates.
 func NSEnableScreenUpdates() {
-	raw.NSEnableScreenUpdates()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEnableScreenUpdates == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEnableScreenUpdates, _lib, "NSEnableScreenUpdates")
+	}
+	_fnNSEnableScreenUpdates()
 }
 
-// NSEraseRect calls [raw.NSEraseRect] (C function NSEraseRect).
+var _fnNSEraseRect func(corefoundation.CGRect)
+
+// NSEraseRect calls the AppKit framework function NSEraseRect.
 func NSEraseRect(rect corefoundation.CGRect) {
-	raw.NSEraseRect(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEraseRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEraseRect, _lib, "NSEraseRect")
+	}
+	_fnNSEraseRect(rect)
 }
 
-// NSEventMaskFromType calls [raw.NSEventMaskFromType] (C function NSEventMaskFromType).
-func NSEventMaskFromType(type_ NSEventType) NSEventMask {
-	return NSEventMask(raw.NSEventMaskFromType(raw.NSEventType(type_)))
+var _fnNSEventMaskFromType func(EventType) EventMask
+
+// NSEventMaskFromType calls the AppKit framework function NSEventMaskFromType.
+func NSEventMaskFromType(type_ EventType) EventMask {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEventMaskFromType == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEventMaskFromType, _lib, "NSEventMaskFromType")
+	}
+	return _fnNSEventMaskFromType(type_)
 }
 
-// NSFrameRect calls [raw.NSFrameRect] (C function NSFrameRect).
+var _fnNSFrameRect func(corefoundation.CGRect)
+
+// NSFrameRect calls the AppKit framework function NSFrameRect.
 func NSFrameRect(rect corefoundation.CGRect) {
-	raw.NSFrameRect(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFrameRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFrameRect, _lib, "NSFrameRect")
+	}
+	_fnNSFrameRect(rect)
 }
 
-// NSFrameRectWithWidth calls [raw.NSFrameRectWithWidth] (C function NSFrameRectWithWidth).
+var _fnNSFrameRectWithWidth func(corefoundation.CGRect, float64)
+
+// NSFrameRectWithWidth calls the AppKit framework function NSFrameRectWithWidth.
 func NSFrameRectWithWidth(rect corefoundation.CGRect, frameWidth float64) {
-	raw.NSFrameRectWithWidth(rect, frameWidth)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFrameRectWithWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFrameRectWithWidth, _lib, "NSFrameRectWithWidth")
+	}
+	_fnNSFrameRectWithWidth(rect, frameWidth)
 }
 
-// NSFrameRectWithWidthUsingOperation calls [raw.NSFrameRectWithWidthUsingOperation] (C function NSFrameRectWithWidthUsingOperation).
-func NSFrameRectWithWidthUsingOperation(rect corefoundation.CGRect, frameWidth float64, op NSCompositingOperation) {
-	raw.NSFrameRectWithWidthUsingOperation(rect, frameWidth, raw.NSCompositingOperation(op))
+var _fnNSFrameRectWithWidthUsingOperation func(corefoundation.CGRect, float64, CompositingOperation)
+
+// NSFrameRectWithWidthUsingOperation calls the AppKit framework function NSFrameRectWithWidthUsingOperation.
+func NSFrameRectWithWidthUsingOperation(rect corefoundation.CGRect, frameWidth float64, op CompositingOperation) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFrameRectWithWidthUsingOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFrameRectWithWidthUsingOperation, _lib, "NSFrameRectWithWidthUsingOperation")
+	}
+	_fnNSFrameRectWithWidthUsingOperation(rect, frameWidth, op)
 }
 
-// NSGetFileType calls [raw.NSGetFileType] (C function NSGetFileType).
-func NSGetFileType(pboardType *foundation.NSString) *foundation.NSString {
-	return raw.NSGetFileType(pboardType)
+var _fnNSGetFileType func(objc.ID) objc.ID
+
+// NSGetFileType calls the AppKit framework function NSGetFileType.
+func NSGetFileType(pboardType obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSGetFileType == nil {
+		ebipurego.RegisterLibFunc(&_fnNSGetFileType, _lib, "NSGetFileType")
+	}
+	_ret := _fnNSGetFileType(objref.IDOf(pboardType))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSGetFileTypes calls [raw.NSGetFileTypes] (C function NSGetFileTypes).
-func NSGetFileTypes(pboardTypes *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
-	return raw.NSGetFileTypes(pboardTypes)
+var _fnNSGetFileTypes func(objc.ID) objc.ID
+
+// NSGetFileTypes calls the AppKit framework function NSGetFileTypes.
+func NSGetFileTypes(pboardTypes []obj.Object) []string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSGetFileTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnNSGetFileTypes, _lib, "NSGetFileTypes")
+	}
+	_ret := _fnNSGetFileTypes(purego.SliceToNSArray(pboardTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NSGetInformationalAlertPanel calls [raw.NSGetInformationalAlertPanel] (C function NSGetInformationalAlertPanel).
-func NSGetInformationalAlertPanel(title *foundation.NSString, msgFormat *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString) objc.ID {
-	return raw.NSGetInformationalAlertPanel(title, msgFormat, defaultButton, alternateButton, otherButton)
+var _fnNSGetInformationalAlertPanel func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// NSGetInformationalAlertPanel calls the AppKit framework function NSGetInformationalAlertPanel.
+func NSGetInformationalAlertPanel(title string, msgFormat string, defaultButton string, alternateButton string, otherButton string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSGetInformationalAlertPanel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSGetInformationalAlertPanel, _lib, "NSGetInformationalAlertPanel")
+	}
+	_ret := _fnNSGetInformationalAlertPanel(purego.NSString(title), purego.NSString(msgFormat), purego.NSString(defaultButton), purego.NSString(alternateButton), purego.NSString(otherButton))
+	return obj.Wrap(_ret)
 }
 
-// NSGetWindowServerMemory calls [raw.NSGetWindowServerMemory] (C function NSGetWindowServerMemory).
-func NSGetWindowServerMemory(context_ int, virtualMemory *int64, windowBackingMemory *int64, windowDumpString *foundation.NSString) int {
-	return raw.NSGetWindowServerMemory(context_, virtualMemory, windowBackingMemory, windowDumpString)
-}
+var _fnNSHighlightRect func(corefoundation.CGRect)
 
-// NSHighlightRect calls [raw.NSHighlightRect] (C function NSHighlightRect).
+// NSHighlightRect calls the AppKit framework function NSHighlightRect.
 func NSHighlightRect(rect corefoundation.CGRect) {
-	raw.NSHighlightRect(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHighlightRect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHighlightRect, _lib, "NSHighlightRect")
+	}
+	_fnNSHighlightRect(rect)
 }
 
-// NSInterfaceStyleForKey calls [raw.NSInterfaceStyleForKey] (C function NSInterfaceStyleForKey).
-func NSInterfaceStyleForKey(key *foundation.NSString, responder *raw.NSResponder) uint {
-	return raw.NSInterfaceStyleForKey(key, responder)
+var _fnNSInterfaceStyleForKey func(objc.ID, objc.ID) int
+
+// NSInterfaceStyleForKey calls the AppKit framework function NSInterfaceStyleForKey.
+func NSInterfaceStyleForKey(key string, responder *Responder) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSInterfaceStyleForKey == nil {
+		ebipurego.RegisterLibFunc(&_fnNSInterfaceStyleForKey, _lib, "NSInterfaceStyleForKey")
+	}
+	return _fnNSInterfaceStyleForKey(purego.NSString(key), objref.IDOf(responder))
 }
 
-// NSIsControllerMarker calls [raw.NSIsControllerMarker] (C function NSIsControllerMarker).
-func NSIsControllerMarker(object objc.ID) bool {
-	return raw.NSIsControllerMarker(object)
+var _fnNSIsControllerMarker func(objc.ID) bool
+
+// NSIsControllerMarker calls the AppKit framework function NSIsControllerMarker.
+func NSIsControllerMarker(object obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIsControllerMarker == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIsControllerMarker, _lib, "NSIsControllerMarker")
+	}
+	return _fnNSIsControllerMarker(objref.IDOf(object))
 }
 
-// NSNumberOfColorComponents calls [raw.NSNumberOfColorComponents] (C function NSNumberOfColorComponents).
-func NSNumberOfColorComponents(colorSpaceName *foundation.NSString) int {
-	return raw.NSNumberOfColorComponents(colorSpaceName)
+var _fnNSNumberOfColorComponents func(objc.ID) int
+
+// NSNumberOfColorComponents calls the AppKit framework function NSNumberOfColorComponents.
+func NSNumberOfColorComponents(colorSpaceName obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSNumberOfColorComponents == nil {
+		ebipurego.RegisterLibFunc(&_fnNSNumberOfColorComponents, _lib, "NSNumberOfColorComponents")
+	}
+	return _fnNSNumberOfColorComponents(objref.IDOf(colorSpaceName))
 }
 
-// NSOpenGLGetOption calls [raw.NSOpenGLGetOption] (C function NSOpenGLGetOption).
-func NSOpenGLGetOption(pname NSOpenGLGlobalOption, param *int32) {
-	raw.NSOpenGLGetOption(raw.NSOpenGLGlobalOption(pname), param)
+var _fnNSOpenGLSetOption func(OpenGLGlobalOption, int32)
+
+// NSOpenGLSetOption calls the AppKit framework function NSOpenGLSetOption.
+func NSOpenGLSetOption(pname OpenGLGlobalOption, param int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSOpenGLSetOption == nil {
+		ebipurego.RegisterLibFunc(&_fnNSOpenGLSetOption, _lib, "NSOpenGLSetOption")
+	}
+	_fnNSOpenGLSetOption(pname, param)
 }
 
-// NSOpenGLGetVersion calls [raw.NSOpenGLGetVersion] (C function NSOpenGLGetVersion).
-func NSOpenGLGetVersion(major *int32, minor *int32) {
-	raw.NSOpenGLGetVersion(major, minor)
+var _fnNSPerformService func(objc.ID, objc.ID) bool
+
+// NSPerformService calls the AppKit framework function NSPerformService.
+func NSPerformService(itemName string, pboard *Pasteboard) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPerformService == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPerformService, _lib, "NSPerformService")
+	}
+	return _fnNSPerformService(purego.NSString(itemName), objref.IDOf(pboard))
 }
 
-// NSOpenGLSetOption calls [raw.NSOpenGLSetOption] (C function NSOpenGLSetOption).
-func NSOpenGLSetOption(pname NSOpenGLGlobalOption, param int32) {
-	raw.NSOpenGLSetOption(raw.NSOpenGLGlobalOption(pname), param)
+var _fnNSPlanarFromDepth func(WindowDepth) bool
+
+// NSPlanarFromDepth calls the AppKit framework function NSPlanarFromDepth.
+func NSPlanarFromDepth(depth WindowDepth) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPlanarFromDepth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPlanarFromDepth, _lib, "NSPlanarFromDepth")
+	}
+	return _fnNSPlanarFromDepth(depth)
 }
 
-// NSPerformService calls [raw.NSPerformService] (C function NSPerformService).
-func NSPerformService(itemName *foundation.NSString, pboard *raw.NSPasteboard) bool {
-	return raw.NSPerformService(itemName, pboard)
+var _fnNSReadPixel func(corefoundation.CGPoint) objc.ID
+
+// NSReadPixel calls the AppKit framework function NSReadPixel.
+func NSReadPixel(passedPoint corefoundation.CGPoint) *Color {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSReadPixel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSReadPixel, _lib, "NSReadPixel")
+	}
+	_ret := _fnNSReadPixel(passedPoint)
+	return ColorFromID(_ret)
 }
 
-// NSPlanarFromDepth calls [raw.NSPlanarFromDepth] (C function NSPlanarFromDepth).
-func NSPlanarFromDepth(depth NSWindowDepth) bool {
-	return raw.NSPlanarFromDepth(raw.NSWindowDepth(depth))
-}
+var _fnNSRectClip func(corefoundation.CGRect)
 
-// NSReadPixel calls [raw.NSReadPixel] (C function NSReadPixel).
-func NSReadPixel(passedPoint corefoundation.CGPoint) *raw.NSColor {
-	return raw.NSReadPixel(passedPoint)
-}
-
-// NSRectClip calls [raw.NSRectClip] (C function NSRectClip).
+// NSRectClip calls the AppKit framework function NSRectClip.
 func NSRectClip(rect corefoundation.CGRect) {
-	raw.NSRectClip(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectClip == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectClip, _lib, "NSRectClip")
+	}
+	_fnNSRectClip(rect)
 }
 
-// NSRectClipList calls [raw.NSRectClipList] (C function NSRectClipList).
-func NSRectClipList(rects *corefoundation.CGRect, count int) {
-	raw.NSRectClipList(rects, count)
-}
+var _fnNSRectFill func(corefoundation.CGRect)
 
-// NSRectFill calls [raw.NSRectFill] (C function NSRectFill).
+// NSRectFill calls the AppKit framework function NSRectFill.
 func NSRectFill(rect corefoundation.CGRect) {
-	raw.NSRectFill(rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFill == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFill, _lib, "NSRectFill")
+	}
+	_fnNSRectFill(rect)
 }
 
-// NSRectFillList calls [raw.NSRectFillList] (C function NSRectFillList).
-func NSRectFillList(rects *corefoundation.CGRect, count int) {
-	raw.NSRectFillList(rects, count)
+var _fnNSRectFillUsingOperation func(corefoundation.CGRect, CompositingOperation)
+
+// NSRectFillUsingOperation calls the AppKit framework function NSRectFillUsingOperation.
+func NSRectFillUsingOperation(rect corefoundation.CGRect, op CompositingOperation) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillUsingOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillUsingOperation, _lib, "NSRectFillUsingOperation")
+	}
+	_fnNSRectFillUsingOperation(rect, op)
 }
 
-// NSRectFillListUsingOperation calls [raw.NSRectFillListUsingOperation] (C function NSRectFillListUsingOperation).
-func NSRectFillListUsingOperation(rects *corefoundation.CGRect, count int, op NSCompositingOperation) {
-	raw.NSRectFillListUsingOperation(rects, count, raw.NSCompositingOperation(op))
+var _fnNSRegisterServicesProvider func(objc.ID, objc.ID)
+
+// NSRegisterServicesProvider calls the AppKit framework function NSRegisterServicesProvider.
+func NSRegisterServicesProvider(provider obj.Object, name obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRegisterServicesProvider == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRegisterServicesProvider, _lib, "NSRegisterServicesProvider")
+	}
+	_fnNSRegisterServicesProvider(objref.IDOf(provider), objref.IDOf(name))
 }
 
-// NSRectFillListWithColors calls [raw.NSRectFillListWithColors] (C function NSRectFillListWithColors).
-func NSRectFillListWithColors(rects *corefoundation.CGRect, colors unsafe.Pointer, num int) {
-	raw.NSRectFillListWithColors(rects, colors, num)
+var _fnNSReleaseAlertPanel func(objc.ID)
+
+// NSReleaseAlertPanel calls the AppKit framework function NSReleaseAlertPanel.
+func NSReleaseAlertPanel(panel obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSReleaseAlertPanel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSReleaseAlertPanel, _lib, "NSReleaseAlertPanel")
+	}
+	_fnNSReleaseAlertPanel(objref.IDOf(panel))
 }
 
-// NSRectFillListWithColorsUsingOperation calls [raw.NSRectFillListWithColorsUsingOperation] (C function NSRectFillListWithColorsUsingOperation).
-func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors unsafe.Pointer, num int, op NSCompositingOperation) {
-	raw.NSRectFillListWithColorsUsingOperation(rects, colors, num, raw.NSCompositingOperation(op))
+var _fnNSRunInformationalAlertPanel func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int
+
+// NSRunInformationalAlertPanel calls the AppKit framework function NSRunInformationalAlertPanel.
+func NSRunInformationalAlertPanel(title string, msgFormat string, defaultButton string, alternateButton string, otherButton string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRunInformationalAlertPanel == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRunInformationalAlertPanel, _lib, "NSRunInformationalAlertPanel")
+	}
+	return _fnNSRunInformationalAlertPanel(purego.NSString(title), purego.NSString(msgFormat), purego.NSString(defaultButton), purego.NSString(alternateButton), purego.NSString(otherButton))
 }
 
-// NSRectFillListWithGrays calls [raw.NSRectFillListWithGrays] (C function NSRectFillListWithGrays).
-func NSRectFillListWithGrays(rects *corefoundation.CGRect, grays *float64, num int) {
-	raw.NSRectFillListWithGrays(rects, grays, num)
+var _fnNSRunInformationalAlertPanelRelativeToWindow func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int
+
+// NSRunInformationalAlertPanelRelativeToWindow calls the AppKit framework function NSRunInformationalAlertPanelRelativeToWindow.
+func NSRunInformationalAlertPanelRelativeToWindow(title string, msgFormat string, defaultButton string, alternateButton string, otherButton string, docWindow *Window) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRunInformationalAlertPanelRelativeToWindow == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRunInformationalAlertPanelRelativeToWindow, _lib, "NSRunInformationalAlertPanelRelativeToWindow")
+	}
+	return _fnNSRunInformationalAlertPanelRelativeToWindow(purego.NSString(title), purego.NSString(msgFormat), purego.NSString(defaultButton), purego.NSString(alternateButton), purego.NSString(otherButton), objref.IDOf(docWindow))
 }
 
-// NSRectFillUsingOperation calls [raw.NSRectFillUsingOperation] (C function NSRectFillUsingOperation).
-func NSRectFillUsingOperation(rect corefoundation.CGRect, op NSCompositingOperation) {
-	raw.NSRectFillUsingOperation(rect, raw.NSCompositingOperation(op))
+var _fnNSSetFocusRingStyle func(FocusRingPlacement)
+
+// NSSetFocusRingStyle calls the AppKit framework function NSSetFocusRingStyle.
+func NSSetFocusRingStyle(placement FocusRingPlacement) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSetFocusRingStyle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSetFocusRingStyle, _lib, "NSSetFocusRingStyle")
+	}
+	_fnNSSetFocusRingStyle(placement)
 }
 
-// NSRegisterServicesProvider calls [raw.NSRegisterServicesProvider] (C function NSRegisterServicesProvider).
-func NSRegisterServicesProvider(provider objc.ID, name *foundation.NSString) {
-	raw.NSRegisterServicesProvider(provider, name)
+var _fnNSSetShowsServicesMenuItem func(objc.ID, bool) int
+
+// NSSetShowsServicesMenuItem calls the AppKit framework function NSSetShowsServicesMenuItem.
+func NSSetShowsServicesMenuItem(itemName string, enabled bool) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSetShowsServicesMenuItem == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSetShowsServicesMenuItem, _lib, "NSSetShowsServicesMenuItem")
+	}
+	return _fnNSSetShowsServicesMenuItem(purego.NSString(itemName), enabled)
 }
 
-// NSReleaseAlertPanel calls [raw.NSReleaseAlertPanel] (C function NSReleaseAlertPanel).
-func NSReleaseAlertPanel(panel objc.ID) {
-	raw.NSReleaseAlertPanel(panel)
+var _fnNSShowsServicesMenuItem func(objc.ID) bool
+
+// NSShowsServicesMenuItem calls the AppKit framework function NSShowsServicesMenuItem.
+func NSShowsServicesMenuItem(itemName string) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSShowsServicesMenuItem == nil {
+		ebipurego.RegisterLibFunc(&_fnNSShowsServicesMenuItem, _lib, "NSShowsServicesMenuItem")
+	}
+	return _fnNSShowsServicesMenuItem(purego.NSString(itemName))
 }
 
-// NSRunInformationalAlertPanel calls [raw.NSRunInformationalAlertPanel] (C function NSRunInformationalAlertPanel).
-func NSRunInformationalAlertPanel(title *foundation.NSString, msgFormat *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString) int {
-	return raw.NSRunInformationalAlertPanel(title, msgFormat, defaultButton, alternateButton, otherButton)
+var _fnNSTouchTypeMaskFromType func(TouchType) TouchTypeMask
+
+// NSTouchTypeMaskFromType calls the AppKit framework function NSTouchTypeMaskFromType.
+func NSTouchTypeMaskFromType(type_ TouchType) TouchTypeMask {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSTouchTypeMaskFromType == nil {
+		ebipurego.RegisterLibFunc(&_fnNSTouchTypeMaskFromType, _lib, "NSTouchTypeMaskFromType")
+	}
+	return _fnNSTouchTypeMaskFromType(type_)
 }
 
-// NSRunInformationalAlertPanelRelativeToWindow calls [raw.NSRunInformationalAlertPanelRelativeToWindow] (C function NSRunInformationalAlertPanelRelativeToWindow).
-func NSRunInformationalAlertPanelRelativeToWindow(title *foundation.NSString, msgFormat *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString, docWindow *raw.NSWindow) int {
-	return raw.NSRunInformationalAlertPanelRelativeToWindow(title, msgFormat, defaultButton, alternateButton, otherButton, docWindow)
+var _fnNSUnregisterServicesProvider func(objc.ID)
+
+// NSUnregisterServicesProvider calls the AppKit framework function NSUnregisterServicesProvider.
+func NSUnregisterServicesProvider(name obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSUnregisterServicesProvider == nil {
+		ebipurego.RegisterLibFunc(&_fnNSUnregisterServicesProvider, _lib, "NSUnregisterServicesProvider")
+	}
+	_fnNSUnregisterServicesProvider(objref.IDOf(name))
 }
 
-// NSSetFocusRingStyle calls [raw.NSSetFocusRingStyle] (C function NSSetFocusRingStyle).
-func NSSetFocusRingStyle(placement NSFocusRingPlacement) {
-	raw.NSSetFocusRingStyle(raw.NSFocusRingPlacement(placement))
-}
+var _fnNSUpdateDynamicServices func()
 
-// NSSetShowsServicesMenuItem calls [raw.NSSetShowsServicesMenuItem] (C function NSSetShowsServicesMenuItem).
-func NSSetShowsServicesMenuItem(itemName *foundation.NSString, enabled bool) int {
-	return raw.NSSetShowsServicesMenuItem(itemName, enabled)
-}
-
-// NSShowAnimationEffect calls [raw.NSShowAnimationEffect] (C function NSShowAnimationEffect).
-func NSShowAnimationEffect(animationEffect NSAnimationEffect, centerLocation corefoundation.CGPoint, size corefoundation.CGSize, animationDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	raw.NSShowAnimationEffect(raw.NSAnimationEffect(animationEffect), centerLocation, size, animationDelegate, didEndSelector, contextInfo)
-}
-
-// NSShowsServicesMenuItem calls [raw.NSShowsServicesMenuItem] (C function NSShowsServicesMenuItem).
-func NSShowsServicesMenuItem(itemName *foundation.NSString) bool {
-	return raw.NSShowsServicesMenuItem(itemName)
-}
-
-// NSTouchTypeMaskFromType calls [raw.NSTouchTypeMaskFromType] (C function NSTouchTypeMaskFromType).
-func NSTouchTypeMaskFromType(type_ NSTouchType) NSTouchTypeMask {
-	return NSTouchTypeMask(raw.NSTouchTypeMaskFromType(raw.NSTouchType(type_)))
-}
-
-// NSUnregisterServicesProvider calls [raw.NSUnregisterServicesProvider] (C function NSUnregisterServicesProvider).
-func NSUnregisterServicesProvider(name *foundation.NSString) {
-	raw.NSUnregisterServicesProvider(name)
-}
-
-// NSUpdateDynamicServices calls [raw.NSUpdateDynamicServices] (C function NSUpdateDynamicServices).
+// NSUpdateDynamicServices calls the AppKit framework function NSUpdateDynamicServices.
 func NSUpdateDynamicServices() {
-	raw.NSUpdateDynamicServices()
-}
-
-// NSWindowList calls [raw.NSWindowList] (C function NSWindowList).
-func NSWindowList(size int, list *int64) {
-	raw.NSWindowList(size, list)
-}
-
-// NSWindowListForContext calls [raw.NSWindowListForContext] (C function NSWindowListForContext).
-func NSWindowListForContext(context_ int, size int, list *int64) {
-	raw.NSWindowListForContext(context_, size, list)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSUpdateDynamicServices == nil {
+		ebipurego.RegisterLibFunc(&_fnNSUpdateDynamicServices, _lib, "NSUpdateDynamicServices")
+	}
+	_fnNSUpdateDynamicServices()
 }

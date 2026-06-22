@@ -6,143 +6,123 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An operation that uses the device’s contacts to search for discoverable iCloud users.
+// DiscoverAllUserIdentitiesOperation is an idiomatic wrapper over the Objective-C class CKDiscoverAllUserIdentitiesOperation.
 //
-// DiscoverAllUserIdentitiesOperation wraps [raw.CKDiscoverAllUserIdentitiesOperation] with a fluent Go API.
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that uses the device’s contacts to search for discoverable iCloud users.
 type DiscoverAllUserIdentitiesOperation struct {
-	inner *raw.CKDiscoverAllUserIdentitiesOperation
+	Operation
 }
 
-// Unwrap returns the underlying [raw.CKDiscoverAllUserIdentitiesOperation].
-func (x *DiscoverAllUserIdentitiesOperation) Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiscoverAllUserIdentitiesOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// DiscoverAllUserIdentitiesOperationFromID adopts an existing object pointer as a DiscoverAllUserIdentitiesOperation (nil for 0).
+// DiscoverAllUserIdentitiesOperationFromID adopts an existing Objective-C object as a DiscoverAllUserIdentitiesOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func DiscoverAllUserIdentitiesOperationFromID(id objc.ID) *DiscoverAllUserIdentitiesOperation {
 	if id == 0 {
 		return nil
 	}
-	return &DiscoverAllUserIdentitiesOperation{inner: raw.CKDiscoverAllUserIdentitiesOperationFromID(id)}
+	x := &DiscoverAllUserIdentitiesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDiscoverAllUserIdentitiesOperation creates a new [DiscoverAllUserIdentitiesOperation].
+// discoverAllUserIdentitiesOperationAdopt wraps an Objective-C object that this code just created as a
+// DiscoverAllUserIdentitiesOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func discoverAllUserIdentitiesOperationAdopt(id objc.ID) *DiscoverAllUserIdentitiesOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &DiscoverAllUserIdentitiesOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDiscoverAllUserIdentitiesOperation creates a new DiscoverAllUserIdentitiesOperation.
 func NewDiscoverAllUserIdentitiesOperation() *DiscoverAllUserIdentitiesOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDiscoverAllUserIdentitiesOperation")), objc.RegisterName("new"))
-	return &DiscoverAllUserIdentitiesOperation{inner: raw.CKDiscoverAllUserIdentitiesOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKDiscoverAllUserIdentitiesOperation")), objc.RegisterName("new"))
+	return discoverAllUserIdentitiesOperationAdopt(_id)
 }
 
-// The closure to execute for each user identity.
-//
-// WithUserIdentityDiscoveredBlock sets the userIdentityDiscoveredBlock property and returns the receiver for chaining.
-func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation {
-	x.inner.SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock)
+// WithUserIdentityDiscoveredBlock the closure to execute for each user identity.
+func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object)) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { userIdentityDiscoveredBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The closure to execute when the operation finishes.
-//
-// WithDiscoverAllUserIdentitiesCompletionBlock sets the discoverAllUserIdentitiesCompletionBlock property and returns the receiver for chaining.
-func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation {
-	x.inner.SetDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock)
-	return x
-}
-
-// The operation’s configuration.
-//
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration the operation’s configuration.
 func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup the operation’s group.
 func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
-//
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer the operation's container.
 func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
-//
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
-//
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
-//
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The closure to execute for each user identity. The closure doesn't return a value and takes the following parameter: - The user identity that matches an entry in the device's Contacts. The operation executes this closure one or more times for each user identity it discovers. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+// SetUserIdentityDiscoveredBlock wraps the corresponding Objective-C method.
 //
-// UserIdentityDiscoveredBlock calls the underlying UserIdentityDiscoveredBlock.
-func (x *DiscoverAllUserIdentitiesOperation) UserIdentityDiscoveredBlock() objc.Block {
-	return x.inner.UserIdentityDiscoveredBlock()
-}
-
 // SetUserIdentityDiscoveredBlock blocks until the operation completes or ctx is cancelled.
-func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error) {
+func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx context.Context) (result *UserIdentity, err error) {
 	type _result struct {
 		val *UserIdentity
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetUserIdentityDiscoveredBlock(func(_p0 *raw.CKUserIdentity) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &UserIdentity{inner: _p0}
-		}
+		_o.val = UserIdentityFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -152,23 +132,17 @@ func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx 
 	}
 }
 
-// The closure to execute when the operation finishes. The closure doesn't return a value and takes the following parameter: - An error if a problem occurs, or `nil` if CloudKit successfully fetches the user identities. This closure executes only once, after all of the individual discovery closures finish. The closure executes serially with respect to the operation's other closures. If you intend to use this closure to process results, update the property's value before you execute the operation or submit it to a queue.
+// SetDiscoverAllUserIdentitiesCompletionBlock wraps the corresponding Objective-C method.
 //
-// DiscoverAllUserIdentitiesCompletionBlock calls the underlying DiscoverAllUserIdentitiesCompletionBlock.
-func (x *DiscoverAllUserIdentitiesOperation) DiscoverAllUserIdentitiesCompletionBlock() objc.Block {
-	return x.inner.DiscoverAllUserIdentitiesCompletionBlock()
-}
-
 // SetDiscoverAllUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDiscoverAllUserIdentitiesCompletionBlock(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscoverAllUserIdentitiesCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -177,15 +151,10 @@ func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesComplet
 	}
 }
 
-func (x *DiscoverAllUserIdentitiesOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKOperation
-}
-
 // DiscoverAllUserIdentitiesOperationable is the interface implemented by [DiscoverAllUserIdentitiesOperation], for mocking and DI.
 type DiscoverAllUserIdentitiesOperationable interface {
-	Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation
-	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation
-	WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation
+	obj.Object
+	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object)) *DiscoverAllUserIdentitiesOperation
 	WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation
 	WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation
@@ -194,10 +163,10 @@ type DiscoverAllUserIdentitiesOperationable interface {
 	WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation
-	UserIdentityDiscoveredBlock() objc.Block
 	SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error)
-	DiscoverAllUserIdentitiesCompletionBlock() objc.Block
 	SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error
 }
 
 var _ DiscoverAllUserIdentitiesOperationable = (*DiscoverAllUserIdentitiesOperation)(nil)
+
+var _ OperationProvider = (*DiscoverAllUserIdentitiesOperation)(nil)

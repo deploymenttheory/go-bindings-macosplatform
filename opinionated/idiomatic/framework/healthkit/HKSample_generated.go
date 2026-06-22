@@ -5,76 +5,87 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A HealthKit sample represents a piece of data associated with a start and end time.
+// Sample is an idiomatic wrapper over the Objective-C class HKSample.
 //
-// Sample wraps [raw.HKSample] with a fluent Go API.
+// Sample is an abstract base — you do not construct it directly. Construct one of [AudiogramSample], [CategorySample], [ClinicalRecord], [Correlation], [DocumentSample], [Electrocardiogram], [MedicationDoseEvent], [QuantitySample], [ScoredAssessment], [SeriesSample], [StateOfMind], [VerifiableClinicalRecord], [VisionPrescription], [Workout] and pass it where a Sample is accepted.
+//
+// A HealthKit sample represents a piece of data associated with a start and end time.
 type Sample struct {
-	inner *raw.HKSample
+	Object
 }
 
-// Unwrap returns the underlying [raw.HKSample].
-func (x *Sample) Unwrap() *raw.HKSample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Sample) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleFromID adopts an existing object pointer as a Sample (nil for 0).
+// SampleFromID adopts an existing Objective-C object as a Sample
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleFromID(id objc.ID) *Sample {
 	if id == 0 {
 		return nil
 	}
-	return &Sample{inner: raw.HKSampleFromID(id)}
+	x := &Sample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSample creates a new [Sample].
-func NewSample() *Sample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSample")), objc.RegisterName("new"))
-	return &Sample{inner: raw.HKSampleFromID(_id)}
-}
-
-// SampleType calls the underlying SampleType.
-func (x *Sample) SampleType() *SampleType {
-	_r := x.inner.SampleType()
-	if _r == nil {
+// sampleAdopt wraps an Objective-C object that this code just created as a
+// Sample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleAdopt(id objc.ID) *Sample {
+	if id == 0 {
 		return nil
 	}
-	return &SampleType{inner: _r}
+	x := &Sample{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// StartDate calls the underlying StartDate.
-func (x *Sample) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// SampleType wraps the corresponding Objective-C method.
+func (x *Sample) SampleType() *SampleType {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
+	return SampleTypeFromID(_r)
 }
 
-// EndDate calls the underlying EndDate.
-func (x *Sample) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// StartDate wraps the corresponding Objective-C method.
+func (x *Sample) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      hasUndeterminedDuration @abstract      Indicates whether a sample has an undetermined duration. @discussion    Computed based on the endDate of a sample.
-//
-// HasUndeterminedDuration calls the underlying HasUndeterminedDuration.
+// EndDate wraps the corresponding Objective-C method.
+func (x *Sample) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
+}
+
+// HasUndeterminedDuration indicates whether a sample has an undetermined duration. Computed based on the endDate of a sample.
 func (x *Sample) HasUndeterminedDuration() bool {
-	return x.inner.HasUndeterminedDuration()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUndeterminedDuration"))
+	return _r
 }
-
-func (x *Sample) asSample() *raw.HKSample { return x.inner }
-
-func (x *Sample) asObject() *raw.HKObject { return &x.inner.HKObject }
 
 // Sampleable is the interface implemented by [Sample], for mocking and DI.
 type Sampleable interface {
-	Unwrap() *raw.HKSample
+	obj.Object
 	SampleType() *SampleType
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
+	StartDate() obj.Object
+	EndDate() obj.Object
 	HasUndeterminedDuration() bool
 }
 
 var _ Sampleable = (*Sample)(nil)
+
+// isSample marks Sample — and, by embedding promotion, its
+// subclasses — as a member of the Sample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Sample) isSample() {}
+
+var _ SampleProvider = (*Sample)(nil)
+
+var _ ObjectProvider = (*Sample)(nil)

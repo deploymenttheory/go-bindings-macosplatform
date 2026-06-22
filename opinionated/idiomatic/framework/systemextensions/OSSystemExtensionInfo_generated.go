@@ -5,73 +5,101 @@
 package systemextensions
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SystemExtensionInfo wraps [raw.OSSystemExtensionInfo] with a fluent Go API.
+// SystemExtensionInfo is an idiomatic wrapper over the Objective-C class OSSystemExtensionInfo.
 type SystemExtensionInfo struct {
-	inner *raw.OSSystemExtensionInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSSystemExtensionInfo].
-func (x *SystemExtensionInfo) Unwrap() *raw.OSSystemExtensionInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SystemExtensionInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// SystemExtensionInfoFromID adopts an existing object pointer as a SystemExtensionInfo (nil for 0).
+// SystemExtensionInfoFromID adopts an existing Objective-C object as a SystemExtensionInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func SystemExtensionInfoFromID(id objc.ID) *SystemExtensionInfo {
 	if id == 0 {
 		return nil
 	}
-	return &SystemExtensionInfo{inner: raw.OSSystemExtensionInfoFromID(id)}
+	x := &SystemExtensionInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSystemExtensionInfo creates a new [SystemExtensionInfo].
+// systemExtensionInfoAdopt wraps an Objective-C object that this code just created as a
+// SystemExtensionInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func systemExtensionInfoAdopt(id objc.ID) *SystemExtensionInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &SystemExtensionInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SystemExtensionInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SystemExtensionInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SystemExtensionInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemExtensionInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSystemExtensionInfo creates a new SystemExtensionInfo.
 func NewSystemExtensionInfo() *SystemExtensionInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionInfo")), objc.RegisterName("new"))
-	return &SystemExtensionInfo{inner: raw.OSSystemExtensionInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionInfo")), objc.RegisterName("new"))
+	return systemExtensionInfoAdopt(_id)
 }
 
-// @brief The bundle identifier of the extension (CFBundleIdentifier)
-//
-// BundleIdentifier calls the underlying BundleIdentifier.
+// BundleIdentifier the bundle identifier of the extension (CFBundleIdentifier)
 func (x *SystemExtensionInfo) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief The bundle version of the extension (CFBundleVersion)
-//
-// BundleVersion calls the underlying BundleVersion.
+// BundleVersion the bundle version of the extension (CFBundleVersion)
 func (x *SystemExtensionInfo) BundleVersion() string {
-	_r := x.inner.BundleVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief The bundle short version string of the extension (CFBundleShortVersionString)
-//
-// BundleShortVersion calls the underlying BundleShortVersion.
+// BundleShortVersion the bundle short version string of the extension (CFBundleShortVersionString)
 func (x *SystemExtensionInfo) BundleShortVersion() string {
-	_r := x.inner.BundleShortVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleShortVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // SystemExtensionInfoable is the interface implemented by [SystemExtensionInfo], for mocking and DI.
 type SystemExtensionInfoable interface {
-	Unwrap() *raw.OSSystemExtensionInfo
+	obj.Object
 	BundleIdentifier() string
 	BundleVersion() string
 	BundleShortVersion() string

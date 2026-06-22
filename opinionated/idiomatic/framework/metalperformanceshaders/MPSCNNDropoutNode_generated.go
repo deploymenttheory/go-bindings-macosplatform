@@ -5,99 +5,102 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a dropout filter.
+// CNNDropoutNode is an idiomatic wrapper over the Objective-C class MPSCNNDropoutNode.
 //
-// CNNDropoutNode wraps [raw.MPSCNNDropoutNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a dropout filter.
 type CNNDropoutNode struct {
-	inner *raw.MPSCNNDropoutNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDropoutNode].
-func (x *CNNDropoutNode) Unwrap() *raw.MPSCNNDropoutNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDropoutNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDropoutNodeFromID adopts an existing object pointer as a CNNDropoutNode (nil for 0).
+// CNNDropoutNodeFromID adopts an existing Objective-C object as a CNNDropoutNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDropoutNodeFromID(id objc.ID) *CNNDropoutNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDropoutNode{inner: raw.MPSCNNDropoutNodeFromID(id)}
-}
-
-// NewCNNDropoutNodeWithSource creates a new [CNNDropoutNode].
-func NewCNNDropoutNodeWithSource(source *mpsneuralnetwork.MPSNNImageNode) *CNNDropoutNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), source.Ptr())
-	return &CNNDropoutNode{inner: raw.MPSCNNDropoutNodeFromID(_id)}
-}
-
-// NewCNNDropoutNodeWithSourceKeepProbability creates a new [CNNDropoutNode].
-func NewCNNDropoutNodeWithSourceKeepProbability(source *mpsneuralnetwork.MPSNNImageNode, keepProbability float32) *CNNDropoutNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:"), source.Ptr(), keepProbability)
-	return &CNNDropoutNode{inner: raw.MPSCNNDropoutNodeFromID(_id)}
-}
-
-// NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels creates a new [CNNDropoutNode].
-func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *mpsneuralnetwork.MPSNNImageNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:seed:maskStrideInPixels:"), source.Ptr(), keepProbability, seed, maskStrideInPixels)
-	return &CNNDropoutNode{inner: raw.MPSCNNDropoutNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNDropoutNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDropoutNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNDropoutNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNDropoutNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNDropoutNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDropoutNodeAdopt(id objc.ID) *CNNDropoutNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDropoutNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNDropoutNodeWithSource creates a new CNNDropoutNode.
+func NewCNNDropoutNodeWithSource(source obj.Object) *CNNDropoutNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
+	return cNNDropoutNodeAdopt(_id)
+}
+
+// NewCNNDropoutNodeWithSourceKeepProbability creates a new CNNDropoutNode.
+func NewCNNDropoutNodeWithSourceKeepProbability(source obj.Object, keepProbability float32) *CNNDropoutNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:"), objref.IDOf(source), keepProbability)
+	return cNNDropoutNodeAdopt(_id)
+}
+
+// NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels creates a new CNNDropoutNode.
+func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source obj.Object, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(source), keepProbability, seed, maskStrideInPixels)
+	return cNNDropoutNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// KeepProbability calls the underlying KeepProbability.
+// KeepProbability wraps the corresponding Objective-C method.
 func (x *CNNDropoutNode) KeepProbability() float32 {
-	return x.inner.KeepProbability()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
+	return _r
 }
 
-// Seed calls the underlying Seed.
-func (x *CNNDropoutNode) Seed() uint {
-	return x.inner.Seed()
+// Seed wraps the corresponding Objective-C method.
+func (x *CNNDropoutNode) Seed() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
 
-// MaskStrideInPixels calls the underlying MaskStrideInPixels.
+// MaskStrideInPixels wraps the corresponding Objective-C method.
 func (x *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
-	return x.inner.MaskStrideInPixels()
-}
-
-func (x *CNNDropoutNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("maskStrideInPixels"))
+	return _r
 }
 
 // CNNDropoutNodeable is the interface implemented by [CNNDropoutNode], for mocking and DI.
 type CNNDropoutNodeable interface {
-	Unwrap() *raw.MPSCNNDropoutNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDropoutNode
+	obj.Object
 	WithLabel(label string) *CNNDropoutNode
 	KeepProbability() float32
-	Seed() uint
+	Seed() int
 	MaskStrideInPixels() metal.MTLSize
 }
 
 var _ CNNDropoutNodeable = (*CNNDropoutNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDropoutNode)(nil)

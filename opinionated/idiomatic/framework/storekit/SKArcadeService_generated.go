@@ -5,39 +5,74 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArcadeService wraps [raw.SKArcadeService] with a fluent Go API.
+// ArcadeService is an idiomatic wrapper over the Objective-C class SKArcadeService.
 type ArcadeService struct {
-	inner *raw.SKArcadeService
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKArcadeService].
-func (x *ArcadeService) Unwrap() *raw.SKArcadeService { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArcadeService) ID() objc.ID { return x.inner.Ptr() }
-
-// ArcadeServiceFromID adopts an existing object pointer as a ArcadeService (nil for 0).
+// ArcadeServiceFromID adopts an existing Objective-C object as a ArcadeService
+// (nil for 0), retaining it and registering a release finalizer.
 func ArcadeServiceFromID(id objc.ID) *ArcadeService {
 	if id == 0 {
 		return nil
 	}
-	return &ArcadeService{inner: raw.SKArcadeServiceFromID(id)}
+	x := &ArcadeService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewArcadeService creates a new [ArcadeService].
+// arcadeServiceAdopt wraps an Objective-C object that this code just created as a
+// ArcadeService (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arcadeServiceAdopt(id objc.ID) *ArcadeService {
+	if id == 0 {
+		return nil
+	}
+	x := &ArcadeService{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArcadeService) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArcadeService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArcadeService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ArcadeService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewArcadeService creates a new ArcadeService.
 func NewArcadeService() *ArcadeService {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKArcadeService")), objc.RegisterName("new"))
-	return &ArcadeService{inner: raw.SKArcadeServiceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKArcadeService")), objc.RegisterName("new"))
+	return arcadeServiceAdopt(_id)
 }
 
 // ArcadeServiceable is the interface implemented by [ArcadeService], for mocking and DI.
 type ArcadeServiceable interface {
-	Unwrap() *raw.SKArcadeService
+	obj.Object
 }
 
 var _ ArcadeServiceable = (*ArcadeService)(nil)

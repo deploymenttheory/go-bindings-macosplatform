@@ -5,58 +5,89 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TransformOrientOp wraps [raw.MDLTransformOrientOp] with a fluent Go API.
+// TransformOrientOp is an idiomatic wrapper over the Objective-C class MDLTransformOrientOp.
 type TransformOrientOp struct {
-	inner *raw.MDLTransformOrientOp
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTransformOrientOp].
-func (x *TransformOrientOp) Unwrap() *raw.MDLTransformOrientOp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformOrientOp) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformOrientOpFromID adopts an existing object pointer as a TransformOrientOp (nil for 0).
+// TransformOrientOpFromID adopts an existing Objective-C object as a TransformOrientOp
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformOrientOpFromID(id objc.ID) *TransformOrientOp {
 	if id == 0 {
 		return nil
 	}
-	return &TransformOrientOp{inner: raw.MDLTransformOrientOpFromID(id)}
+	x := &TransformOrientOp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTransformOrientOp creates a new [TransformOrientOp].
-func NewTransformOrientOp() *TransformOrientOp {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformOrientOp")), objc.RegisterName("new"))
-	return &TransformOrientOp{inner: raw.MDLTransformOrientOpFromID(_id)}
-}
-
-// Name calls the underlying Name.
-func (x *TransformOrientOp) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// AnimatedValue calls the underlying AnimatedValue.
-func (x *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
-	_r := x.inner.AnimatedValue()
-	if _r == nil {
+// transformOrientOpAdopt wraps an Objective-C object that this code just created as a
+// TransformOrientOp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformOrientOpAdopt(id objc.ID) *TransformOrientOp {
+	if id == 0 {
 		return nil
 	}
-	return &AnimatedQuaternion{inner: _r}
+	x := &TransformOrientOp{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TransformOrientOp) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TransformOrientOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TransformOrientOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TransformOrientOp) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTransformOrientOp creates a new TransformOrientOp.
+func NewTransformOrientOp() *TransformOrientOp {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformOrientOp")), objc.RegisterName("new"))
+	return transformOrientOpAdopt(_id)
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *TransformOrientOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// AnimatedValue wraps the corresponding Objective-C method.
+func (x *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+	return AnimatedQuaternionFromID(_r)
 }
 
 // TransformOrientOpable is the interface implemented by [TransformOrientOp], for mocking and DI.
 type TransformOrientOpable interface {
-	Unwrap() *raw.MDLTransformOrientOp
+	obj.Object
 	Name() string
 	AnimatedValue() *AnimatedQuaternion
 }

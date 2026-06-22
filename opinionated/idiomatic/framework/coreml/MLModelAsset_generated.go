@@ -6,60 +6,90 @@ package coreml
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstraction of a compiled Core ML model asset.
+// ModelAsset is an idiomatic wrapper over the Objective-C class MLModelAsset.
 //
-// ModelAsset wraps [raw.MLModelAsset] with a fluent Go API.
+// An abstraction of a compiled Core ML model asset.
 type ModelAsset struct {
-	inner *raw.MLModelAsset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelAsset].
-func (x *ModelAsset) Unwrap() *raw.MLModelAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelAsset) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelAssetFromID adopts an existing object pointer as a ModelAsset (nil for 0).
+// ModelAssetFromID adopts an existing Objective-C object as a ModelAsset
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelAssetFromID(id objc.ID) *ModelAsset {
 	if id == 0 {
 		return nil
 	}
-	return &ModelAsset{inner: raw.MLModelAssetFromID(id)}
+	x := &ModelAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewModelAsset creates a new [ModelAsset].
+// modelAssetAdopt wraps an Objective-C object that this code just created as a
+// ModelAsset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelAssetAdopt(id objc.ID) *ModelAsset {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelAsset{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelAsset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelAsset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelAsset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelAsset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModelAsset creates a new ModelAsset.
 func NewModelAsset() *ModelAsset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelAsset")), objc.RegisterName("new"))
-	return &ModelAsset{inner: raw.MLModelAssetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelAsset")), objc.RegisterName("new"))
+	return modelAssetAdopt(_id)
 }
 
-// The default model descripton.
+// ModelDescription the default model descripton.
 //
 // ModelDescription blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) ModelDescription(ctx context.Context) (*ModelDescription, error) {
+func (x *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescription, err error) {
 	type _result struct {
 		val *ModelDescription
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ModelDescriptionWithCompletionHandler(func(_p0 *raw.MLModelDescription, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ModelDescription{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ModelDescriptionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDescriptionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -69,25 +99,22 @@ func (x *ModelAsset) ModelDescription(ctx context.Context) (*ModelDescription, e
 	}
 }
 
-// The model descripton for a specified function.
+// ModelDescriptionOfFunctionNamed the model descripton for a specified function.
 //
 // ModelDescriptionOfFunctionNamed blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (*ModelDescription, error) {
+func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (result *ModelDescription, err error) {
 	type _result struct {
 		val *ModelDescription
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ModelDescriptionOfFunctionNamedCompletionHandler(foundation.NSStringStringWithUTF8String(functionName), func(_p0 *raw.MLModelDescription, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ModelDescription{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ModelDescriptionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDescriptionOfFunctionNamed:completionHandler:"), purego.NSString(functionName), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -97,38 +124,37 @@ func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functi
 	}
 }
 
-// The list of function names in the model asset.
+// FunctionNames the list of function names in the model asset.
 //
 // FunctionNames blocks until the operation completes or ctx is cancelled.
-func (x *ModelAsset) FunctionNames(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+func (x *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*foundation.NSString]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FunctionNamesWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionNamesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*foundation.NSString]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ModelAssetable is the interface implemented by [ModelAsset], for mocking and DI.
 type ModelAssetable interface {
-	Unwrap() *raw.MLModelAsset
+	obj.Object
 	ModelDescription(ctx context.Context) (*ModelDescription, error)
 	ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (*ModelDescription, error)
-	FunctionNames(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
+	FunctionNames(ctx context.Context) (obj.Object, error)
 }
 
 var _ ModelAssetable = (*ModelAsset)(nil)

@@ -5,43 +5,58 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tool for selecting stroked lines and shapes in a canvas view.
+// LassoTool is an idiomatic wrapper over the Objective-C class PKLassoTool.
 //
-// LassoTool wraps [raw.PKLassoTool] with a fluent Go API.
+// It embeds [Tool], promoting that type's methods.
+//
+// A tool for selecting stroked lines and shapes in a canvas view.
 type LassoTool struct {
-	inner *raw.PKLassoTool
+	Tool
 }
 
-// Unwrap returns the underlying [raw.PKLassoTool].
-func (x *LassoTool) Unwrap() *raw.PKLassoTool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LassoTool) ID() objc.ID { return x.inner.Ptr() }
-
-// LassoToolFromID adopts an existing object pointer as a LassoTool (nil for 0).
+// LassoToolFromID adopts an existing Objective-C object as a LassoTool
+// (nil for 0), retaining it and registering a release finalizer.
 func LassoToolFromID(id objc.ID) *LassoTool {
 	if id == 0 {
 		return nil
 	}
-	return &LassoTool{inner: raw.PKLassoToolFromID(id)}
+	x := &LassoTool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLassoTool creates a new [LassoTool].
+// lassoToolAdopt wraps an Objective-C object that this code just created as a
+// LassoTool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lassoToolAdopt(id objc.ID) *LassoTool {
+	if id == 0 {
+		return nil
+	}
+	x := &LassoTool{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewLassoTool creates a new LassoTool.
 func NewLassoTool() *LassoTool {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKLassoTool")), objc.RegisterName("new"))
-	return &LassoTool{inner: raw.PKLassoToolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKLassoTool")), objc.RegisterName("new"))
+	return lassoToolAdopt(_id)
 }
-
-func (x *LassoTool) asTool() *raw.PKTool { return &x.inner.PKTool }
 
 // LassoToolable is the interface implemented by [LassoTool], for mocking and DI.
 type LassoToolable interface {
-	Unwrap() *raw.PKLassoTool
+	obj.Object
 }
 
 var _ LassoToolable = (*LassoTool)(nil)
+
+var _ ToolProvider = (*LassoTool)(nil)

@@ -5,109 +5,100 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.
+// FriendRequestComposeViewController is an idiomatic wrapper over the Objective-C class GKFriendRequestComposeViewController.
 //
-// FriendRequestComposeViewController wraps [raw.GKFriendRequestComposeViewController] with a fluent Go API.
+// Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.
 type FriendRequestComposeViewController struct {
-	inner *raw.GKFriendRequestComposeViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKFriendRequestComposeViewController].
-func (x *FriendRequestComposeViewController) Unwrap() *raw.GKFriendRequestComposeViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FriendRequestComposeViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// FriendRequestComposeViewControllerFromID adopts an existing object pointer as a FriendRequestComposeViewController (nil for 0).
+// FriendRequestComposeViewControllerFromID adopts an existing Objective-C object as a FriendRequestComposeViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func FriendRequestComposeViewControllerFromID(id objc.ID) *FriendRequestComposeViewController {
 	if id == 0 {
 		return nil
 	}
-	return &FriendRequestComposeViewController{inner: raw.GKFriendRequestComposeViewControllerFromID(id)}
-}
-
-// NewFriendRequestComposeViewController creates a new [FriendRequestComposeViewController].
-func NewFriendRequestComposeViewController() *FriendRequestComposeViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKFriendRequestComposeViewController")), objc.RegisterName("new"))
-	return &FriendRequestComposeViewController{inner: raw.GKFriendRequestComposeViewControllerFromID(_id)}
-}
-
-// The view controller’s delegate
-//
-// WithComposeViewDelegate sets the composeViewDelegate property and returns the receiver for chaining.
-func (x *FriendRequestComposeViewController) WithComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) *FriendRequestComposeViewController {
-	x.inner.SetComposeViewDelegate(composeViewDelegate)
+	x := &FriendRequestComposeViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Sets the text message included in the friend invitation.
-//
-// SetMessage calls the underlying SetMessage.
+// friendRequestComposeViewControllerAdopt wraps an Objective-C object that this code just created as a
+// FriendRequestComposeViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func friendRequestComposeViewControllerAdopt(id objc.ID) *FriendRequestComposeViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &FriendRequestComposeViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FriendRequestComposeViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FriendRequestComposeViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FriendRequestComposeViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FriendRequestComposeViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFriendRequestComposeViewController creates a new FriendRequestComposeViewController.
+func NewFriendRequestComposeViewController() *FriendRequestComposeViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKFriendRequestComposeViewController")), objc.RegisterName("new"))
+	return friendRequestComposeViewControllerAdopt(_id)
+}
+
+// SetMessage sets the text message included in the friend invitation.
 func (x *FriendRequestComposeViewController) SetMessage(message string) {
-	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 }
 
-// Adds recipients based on their Game Center player identifiers.
-//
-// AddRecipientPlayers calls the underlying AddRecipientPlayers.
-func (x *FriendRequestComposeViewController) AddRecipientPlayers(players ...PlayerProvider) {
-	_ptrs := make([]objc.ID, len(players))
-	for _i, _v := range players {
-		_ptrs[_i] = _v.asPlayer().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.GKPlayer]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.AddRecipientPlayers(_arg0)
+// AddRecipientPlayers adds recipients based on their Game Center player identifiers.
+func (x *FriendRequestComposeViewController) AddRecipientPlayers(players []*Player) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Adds recipients based on their Game Center player identifiers.
-//
-// AddRecipientsWithPlayerIDs calls the underlying AddRecipientsWithPlayerIDs.
-func (x *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) {
-	x.inner.AddRecipientsWithPlayerIDs(playerIDs)
+// AddRecipientsWithPlayerIDs adds recipients based on their Game Center player identifiers.
+func (x *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Adds recipients based on their email addresses.
-//
-// AddRecipientsWithEmailAddresses calls the underlying AddRecipientsWithEmailAddresses.
-func (x *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString]) {
-	x.inner.AddRecipientsWithEmailAddresses(emailAddresses)
-}
-
-// ComposeViewDelegate calls the underlying ComposeViewDelegate.
-func (x *FriendRequestComposeViewController) ComposeViewDelegate() raw.GKFriendRequestComposeViewControllerDelegate {
-	return x.inner.ComposeViewDelegate()
-}
-
-// SetComposeViewDelegate calls the underlying SetComposeViewDelegate.
-func (x *FriendRequestComposeViewController) SetComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) {
-	x.inner.SetComposeViewDelegate(composeViewDelegate)
+// AddRecipientsWithEmailAddresses adds recipients based on their email addresses.
+func (x *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // FriendRequestComposeViewControllerable is the interface implemented by [FriendRequestComposeViewController], for mocking and DI.
 type FriendRequestComposeViewControllerable interface {
-	Unwrap() *raw.GKFriendRequestComposeViewController
-	WithComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) *FriendRequestComposeViewController
+	obj.Object
 	SetMessage(message string)
-	AddRecipientPlayers(players ...PlayerProvider)
-	AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString])
-	AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString])
-	ComposeViewDelegate() raw.GKFriendRequestComposeViewControllerDelegate
-	SetComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate)
+	AddRecipientPlayers(players []*Player)
+	AddRecipientsWithPlayerIDs(playerIDs []string)
+	AddRecipientsWithEmailAddresses(emailAddresses []string)
 }
 
 var _ FriendRequestComposeViewControllerable = (*FriendRequestComposeViewController)(nil)

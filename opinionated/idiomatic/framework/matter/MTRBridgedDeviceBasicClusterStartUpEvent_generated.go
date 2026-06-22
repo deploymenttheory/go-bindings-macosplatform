@@ -5,53 +5,63 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBridgedDeviceBasicClusterStartUpEvent wraps [raw.MTRBridgedDeviceBasicClusterStartUpEvent] with a fluent Go API.
+// MTRBridgedDeviceBasicClusterStartUpEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicClusterStartUpEvent.
+//
+// It embeds [MTRBridgedDeviceBasicInformationClusterStartUpEvent], promoting that type's methods.
 type MTRBridgedDeviceBasicClusterStartUpEvent struct {
-	inner *raw.MTRBridgedDeviceBasicClusterStartUpEvent
+	MTRBridgedDeviceBasicInformationClusterStartUpEvent
 }
 
-// Unwrap returns the underlying [raw.MTRBridgedDeviceBasicClusterStartUpEvent].
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) Unwrap() *raw.MTRBridgedDeviceBasicClusterStartUpEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBridgedDeviceBasicClusterStartUpEventFromID adopts an existing object pointer as a MTRBridgedDeviceBasicClusterStartUpEvent (nil for 0).
+// MTRBridgedDeviceBasicClusterStartUpEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicClusterStartUpEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBridgedDeviceBasicClusterStartUpEventFromID(id objc.ID) *MTRBridgedDeviceBasicClusterStartUpEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBridgedDeviceBasicClusterStartUpEvent{inner: raw.MTRBridgedDeviceBasicClusterStartUpEventFromID(id)}
-}
-
-// NewMTRBridgedDeviceBasicClusterStartUpEvent creates a new [MTRBridgedDeviceBasicClusterStartUpEvent].
-func NewMTRBridgedDeviceBasicClusterStartUpEvent() *MTRBridgedDeviceBasicClusterStartUpEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBridgedDeviceBasicClusterStartUpEvent")), objc.RegisterName("new"))
-	return &MTRBridgedDeviceBasicClusterStartUpEvent{inner: raw.MTRBridgedDeviceBasicClusterStartUpEventFromID(_id)}
-}
-
-// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBridgedDeviceBasicClusterStartUpEvent {
-	x.inner.MTRBridgedDeviceBasicInformationClusterStartUpEvent.SetSoftwareVersion(softwareVersion)
+	x := &MTRBridgedDeviceBasicClusterStartUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *MTRBridgedDeviceBasicClusterStartUpEvent) asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent {
-	return &x.inner.MTRBridgedDeviceBasicInformationClusterStartUpEvent
+// mTRBridgedDeviceBasicClusterStartUpEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBridgedDeviceBasicClusterStartUpEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBridgedDeviceBasicClusterStartUpEventAdopt(id objc.ID) *MTRBridgedDeviceBasicClusterStartUpEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBridgedDeviceBasicClusterStartUpEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRBridgedDeviceBasicClusterStartUpEvent creates a new MTRBridgedDeviceBasicClusterStartUpEvent.
+func NewMTRBridgedDeviceBasicClusterStartUpEvent() *MTRBridgedDeviceBasicClusterStartUpEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicClusterStartUpEvent")), objc.RegisterName("new"))
+	return mTRBridgedDeviceBasicClusterStartUpEventAdopt(_id)
+}
+
+// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+func (x *MTRBridgedDeviceBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicClusterStartUpEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return x
 }
 
 // MTRBridgedDeviceBasicClusterStartUpEventable is the interface implemented by [MTRBridgedDeviceBasicClusterStartUpEvent], for mocking and DI.
 type MTRBridgedDeviceBasicClusterStartUpEventable interface {
-	Unwrap() *raw.MTRBridgedDeviceBasicClusterStartUpEvent
-	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBridgedDeviceBasicClusterStartUpEvent
+	obj.Object
+	WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicClusterStartUpEvent
 }
 
 var _ MTRBridgedDeviceBasicClusterStartUpEventable = (*MTRBridgedDeviceBasicClusterStartUpEvent)(nil)
+
+var _ MTRBridgedDeviceBasicInformationClusterStartUpEventProvider = (*MTRBridgedDeviceBasicClusterStartUpEvent)(nil)

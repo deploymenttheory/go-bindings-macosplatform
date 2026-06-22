@@ -5,424 +5,419 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// MPErrorDomain returns the string constant MPErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MPErrorDomain() objc.ID {
-	return purego.CFConstant(raw.MPErrorDomain())
-}
+// MPErrorDomain returns the string constant MPErrorDomain, for use as a dictionary key or argument.
+func MPErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MPErrorDomain"))) }
 
-// MPMediaEntityPropertyPersistentID returns the string constant MPMediaEntityPropertyPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaEntityPropertyPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaEntityPropertyPersistentID())
+// MPMediaEntityPropertyPersistentID returns the string constant MPMediaEntityPropertyPersistentID, for use as a dictionary key or argument.
+func MPMediaEntityPropertyPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaEntityPropertyPersistentID")))
 }
 
-// MPMediaItemPropertyPersistentID returns the string constant MPMediaItemPropertyPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyPersistentID())
+// MPMediaItemPropertyPersistentID returns the string constant MPMediaItemPropertyPersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyPersistentID")))
 }
 
-// MPMediaItemPropertyMediaType returns the string constant MPMediaItemPropertyMediaType as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyMediaType() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyMediaType())
+// MPMediaItemPropertyMediaType returns the string constant MPMediaItemPropertyMediaType, for use as a dictionary key or argument.
+func MPMediaItemPropertyMediaType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyMediaType")))
 }
 
-// MPMediaItemPropertyTitle returns the string constant MPMediaItemPropertyTitle as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyTitle() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyTitle())
+// MPMediaItemPropertyTitle returns the string constant MPMediaItemPropertyTitle, for use as a dictionary key or argument.
+func MPMediaItemPropertyTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyTitle")))
 }
 
-// MPMediaItemPropertyAlbumTitle returns the string constant MPMediaItemPropertyAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAlbumTitle() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAlbumTitle())
+// MPMediaItemPropertyAlbumTitle returns the string constant MPMediaItemPropertyAlbumTitle, for use as a dictionary key or argument.
+func MPMediaItemPropertyAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAlbumTitle")))
 }
 
-// MPMediaItemPropertyAlbumPersistentID returns the string constant MPMediaItemPropertyAlbumPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAlbumPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAlbumPersistentID())
+// MPMediaItemPropertyAlbumPersistentID returns the string constant MPMediaItemPropertyAlbumPersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyAlbumPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAlbumPersistentID")))
 }
 
-// MPMediaItemPropertyArtist returns the string constant MPMediaItemPropertyArtist as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyArtist() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyArtist())
+// MPMediaItemPropertyArtist returns the string constant MPMediaItemPropertyArtist, for use as a dictionary key or argument.
+func MPMediaItemPropertyArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyArtist")))
 }
 
-// MPMediaItemPropertyArtistPersistentID returns the string constant MPMediaItemPropertyArtistPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyArtistPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyArtistPersistentID())
+// MPMediaItemPropertyArtistPersistentID returns the string constant MPMediaItemPropertyArtistPersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyArtistPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyArtistPersistentID")))
 }
 
-// MPMediaItemPropertyAlbumArtist returns the string constant MPMediaItemPropertyAlbumArtist as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAlbumArtist() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAlbumArtist())
+// MPMediaItemPropertyAlbumArtist returns the string constant MPMediaItemPropertyAlbumArtist, for use as a dictionary key or argument.
+func MPMediaItemPropertyAlbumArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAlbumArtist")))
 }
 
-// MPMediaItemPropertyAlbumArtistPersistentID returns the string constant MPMediaItemPropertyAlbumArtistPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAlbumArtistPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAlbumArtistPersistentID())
+// MPMediaItemPropertyAlbumArtistPersistentID returns the string constant MPMediaItemPropertyAlbumArtistPersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyAlbumArtistPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAlbumArtistPersistentID")))
 }
 
-// MPMediaItemPropertyGenre returns the string constant MPMediaItemPropertyGenre as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyGenre() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyGenre())
+// MPMediaItemPropertyGenre returns the string constant MPMediaItemPropertyGenre, for use as a dictionary key or argument.
+func MPMediaItemPropertyGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyGenre")))
 }
 
-// MPMediaItemPropertyGenrePersistentID returns the string constant MPMediaItemPropertyGenrePersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyGenrePersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyGenrePersistentID())
+// MPMediaItemPropertyGenrePersistentID returns the string constant MPMediaItemPropertyGenrePersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyGenrePersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyGenrePersistentID")))
 }
 
-// MPMediaItemPropertyComposer returns the string constant MPMediaItemPropertyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyComposer() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyComposer())
+// MPMediaItemPropertyComposer returns the string constant MPMediaItemPropertyComposer, for use as a dictionary key or argument.
+func MPMediaItemPropertyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyComposer")))
 }
 
-// MPMediaItemPropertyComposerPersistentID returns the string constant MPMediaItemPropertyComposerPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyComposerPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyComposerPersistentID())
+// MPMediaItemPropertyComposerPersistentID returns the string constant MPMediaItemPropertyComposerPersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyComposerPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyComposerPersistentID")))
 }
 
-// MPMediaItemPropertyPlaybackDuration returns the string constant MPMediaItemPropertyPlaybackDuration as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyPlaybackDuration() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyPlaybackDuration())
+// MPMediaItemPropertyPlaybackDuration returns the string constant MPMediaItemPropertyPlaybackDuration, for use as a dictionary key or argument.
+func MPMediaItemPropertyPlaybackDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyPlaybackDuration")))
 }
 
-// MPMediaItemPropertyAlbumTrackNumber returns the string constant MPMediaItemPropertyAlbumTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAlbumTrackNumber() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAlbumTrackNumber())
+// MPMediaItemPropertyAlbumTrackNumber returns the string constant MPMediaItemPropertyAlbumTrackNumber, for use as a dictionary key or argument.
+func MPMediaItemPropertyAlbumTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAlbumTrackNumber")))
 }
 
-// MPMediaItemPropertyAlbumTrackCount returns the string constant MPMediaItemPropertyAlbumTrackCount as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAlbumTrackCount() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAlbumTrackCount())
+// MPMediaItemPropertyAlbumTrackCount returns the string constant MPMediaItemPropertyAlbumTrackCount, for use as a dictionary key or argument.
+func MPMediaItemPropertyAlbumTrackCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAlbumTrackCount")))
 }
 
-// MPMediaItemPropertyDiscNumber returns the string constant MPMediaItemPropertyDiscNumber as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyDiscNumber() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyDiscNumber())
+// MPMediaItemPropertyDiscNumber returns the string constant MPMediaItemPropertyDiscNumber, for use as a dictionary key or argument.
+func MPMediaItemPropertyDiscNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyDiscNumber")))
 }
 
-// MPMediaItemPropertyDiscCount returns the string constant MPMediaItemPropertyDiscCount as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyDiscCount() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyDiscCount())
+// MPMediaItemPropertyDiscCount returns the string constant MPMediaItemPropertyDiscCount, for use as a dictionary key or argument.
+func MPMediaItemPropertyDiscCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyDiscCount")))
 }
 
-// MPMediaItemPropertyArtwork returns the string constant MPMediaItemPropertyArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyArtwork() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyArtwork())
+// MPMediaItemPropertyArtwork returns the string constant MPMediaItemPropertyArtwork, for use as a dictionary key or argument.
+func MPMediaItemPropertyArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyArtwork")))
 }
 
-// MPMediaItemPropertyIsExplicit returns the string constant MPMediaItemPropertyIsExplicit as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyIsExplicit() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyIsExplicit())
+// MPMediaItemPropertyIsExplicit returns the string constant MPMediaItemPropertyIsExplicit, for use as a dictionary key or argument.
+func MPMediaItemPropertyIsExplicit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyIsExplicit")))
 }
 
-// MPMediaItemPropertyLyrics returns the string constant MPMediaItemPropertyLyrics as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyLyrics() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyLyrics())
+// MPMediaItemPropertyLyrics returns the string constant MPMediaItemPropertyLyrics, for use as a dictionary key or argument.
+func MPMediaItemPropertyLyrics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyLyrics")))
 }
 
-// MPMediaItemPropertyIsCompilation returns the string constant MPMediaItemPropertyIsCompilation as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyIsCompilation() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyIsCompilation())
+// MPMediaItemPropertyIsCompilation returns the string constant MPMediaItemPropertyIsCompilation, for use as a dictionary key or argument.
+func MPMediaItemPropertyIsCompilation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyIsCompilation")))
 }
 
-// MPMediaItemPropertyReleaseDate returns the string constant MPMediaItemPropertyReleaseDate as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyReleaseDate() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyReleaseDate())
+// MPMediaItemPropertyReleaseDate returns the string constant MPMediaItemPropertyReleaseDate, for use as a dictionary key or argument.
+func MPMediaItemPropertyReleaseDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyReleaseDate")))
 }
 
-// MPMediaItemPropertyBeatsPerMinute returns the string constant MPMediaItemPropertyBeatsPerMinute as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyBeatsPerMinute() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyBeatsPerMinute())
+// MPMediaItemPropertyBeatsPerMinute returns the string constant MPMediaItemPropertyBeatsPerMinute, for use as a dictionary key or argument.
+func MPMediaItemPropertyBeatsPerMinute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyBeatsPerMinute")))
 }
 
-// MPMediaItemPropertyComments returns the string constant MPMediaItemPropertyComments as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyComments() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyComments())
+// MPMediaItemPropertyComments returns the string constant MPMediaItemPropertyComments, for use as a dictionary key or argument.
+func MPMediaItemPropertyComments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyComments")))
 }
 
-// MPMediaItemPropertyAssetURL returns the string constant MPMediaItemPropertyAssetURL as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyAssetURL() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyAssetURL())
+// MPMediaItemPropertyAssetURL returns the string constant MPMediaItemPropertyAssetURL, for use as a dictionary key or argument.
+func MPMediaItemPropertyAssetURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyAssetURL")))
 }
 
-// MPMediaItemPropertyIsCloudItem returns the string constant MPMediaItemPropertyIsCloudItem as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyIsCloudItem() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyIsCloudItem())
+// MPMediaItemPropertyIsCloudItem returns the string constant MPMediaItemPropertyIsCloudItem, for use as a dictionary key or argument.
+func MPMediaItemPropertyIsCloudItem() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyIsCloudItem")))
 }
 
-// MPMediaItemPropertyHasProtectedAsset returns the string constant MPMediaItemPropertyHasProtectedAsset as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyHasProtectedAsset() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyHasProtectedAsset())
+// MPMediaItemPropertyHasProtectedAsset returns the string constant MPMediaItemPropertyHasProtectedAsset, for use as a dictionary key or argument.
+func MPMediaItemPropertyHasProtectedAsset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyHasProtectedAsset")))
 }
 
-// MPMediaItemPropertyPodcastTitle returns the string constant MPMediaItemPropertyPodcastTitle as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyPodcastTitle() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyPodcastTitle())
+// MPMediaItemPropertyPodcastTitle returns the string constant MPMediaItemPropertyPodcastTitle, for use as a dictionary key or argument.
+func MPMediaItemPropertyPodcastTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyPodcastTitle")))
 }
 
-// MPMediaItemPropertyPodcastPersistentID returns the string constant MPMediaItemPropertyPodcastPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyPodcastPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyPodcastPersistentID())
+// MPMediaItemPropertyPodcastPersistentID returns the string constant MPMediaItemPropertyPodcastPersistentID, for use as a dictionary key or argument.
+func MPMediaItemPropertyPodcastPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyPodcastPersistentID")))
 }
 
-// MPMediaItemPropertyPlayCount returns the string constant MPMediaItemPropertyPlayCount as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyPlayCount() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyPlayCount())
+// MPMediaItemPropertyPlayCount returns the string constant MPMediaItemPropertyPlayCount, for use as a dictionary key or argument.
+func MPMediaItemPropertyPlayCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyPlayCount")))
 }
 
-// MPMediaItemPropertySkipCount returns the string constant MPMediaItemPropertySkipCount as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertySkipCount() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertySkipCount())
+// MPMediaItemPropertySkipCount returns the string constant MPMediaItemPropertySkipCount, for use as a dictionary key or argument.
+func MPMediaItemPropertySkipCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertySkipCount")))
 }
 
-// MPMediaItemPropertyRating returns the string constant MPMediaItemPropertyRating as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyRating() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyRating())
+// MPMediaItemPropertyRating returns the string constant MPMediaItemPropertyRating, for use as a dictionary key or argument.
+func MPMediaItemPropertyRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyRating")))
 }
 
-// MPMediaItemPropertyLastPlayedDate returns the string constant MPMediaItemPropertyLastPlayedDate as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyLastPlayedDate() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyLastPlayedDate())
+// MPMediaItemPropertyLastPlayedDate returns the string constant MPMediaItemPropertyLastPlayedDate, for use as a dictionary key or argument.
+func MPMediaItemPropertyLastPlayedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyLastPlayedDate")))
 }
 
-// MPMediaItemPropertyUserGrouping returns the string constant MPMediaItemPropertyUserGrouping as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyUserGrouping() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyUserGrouping())
+// MPMediaItemPropertyUserGrouping returns the string constant MPMediaItemPropertyUserGrouping, for use as a dictionary key or argument.
+func MPMediaItemPropertyUserGrouping() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyUserGrouping")))
 }
 
-// MPMediaItemPropertyBookmarkTime returns the string constant MPMediaItemPropertyBookmarkTime as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyBookmarkTime() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyBookmarkTime())
+// MPMediaItemPropertyBookmarkTime returns the string constant MPMediaItemPropertyBookmarkTime, for use as a dictionary key or argument.
+func MPMediaItemPropertyBookmarkTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyBookmarkTime")))
 }
 
-// MPMediaItemPropertyDateAdded returns the string constant MPMediaItemPropertyDateAdded as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyDateAdded() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyDateAdded())
+// MPMediaItemPropertyDateAdded returns the string constant MPMediaItemPropertyDateAdded, for use as a dictionary key or argument.
+func MPMediaItemPropertyDateAdded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyDateAdded")))
 }
 
-// MPMediaItemPropertyPlaybackStoreID returns the string constant MPMediaItemPropertyPlaybackStoreID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyPlaybackStoreID() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyPlaybackStoreID())
+// MPMediaItemPropertyPlaybackStoreID returns the string constant MPMediaItemPropertyPlaybackStoreID, for use as a dictionary key or argument.
+func MPMediaItemPropertyPlaybackStoreID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyPlaybackStoreID")))
 }
 
-// MPMediaItemPropertyIsPreorder returns the string constant MPMediaItemPropertyIsPreorder as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaItemPropertyIsPreorder() objc.ID {
-	return purego.CFConstant(raw.MPMediaItemPropertyIsPreorder())
+// MPMediaItemPropertyIsPreorder returns the string constant MPMediaItemPropertyIsPreorder, for use as a dictionary key or argument.
+func MPMediaItemPropertyIsPreorder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaItemPropertyIsPreorder")))
 }
 
-// MPMediaPlaylistPropertyPersistentID returns the string constant MPMediaPlaylistPropertyPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertyPersistentID() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertyPersistentID())
+// MPMediaPlaylistPropertyPersistentID returns the string constant MPMediaPlaylistPropertyPersistentID, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertyPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertyPersistentID")))
 }
 
-// MPMediaPlaylistPropertyCloudGlobalID returns the string constant MPMediaPlaylistPropertyCloudGlobalID as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertyCloudGlobalID() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertyCloudGlobalID())
+// MPMediaPlaylistPropertyCloudGlobalID returns the string constant MPMediaPlaylistPropertyCloudGlobalID, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertyCloudGlobalID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertyCloudGlobalID")))
 }
 
-// MPMediaPlaylistPropertyName returns the string constant MPMediaPlaylistPropertyName as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertyName() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertyName())
+// MPMediaPlaylistPropertyName returns the string constant MPMediaPlaylistPropertyName, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertyName")))
 }
 
-// MPMediaPlaylistPropertyPlaylistAttributes returns the string constant MPMediaPlaylistPropertyPlaylistAttributes as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertyPlaylistAttributes() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertyPlaylistAttributes())
+// MPMediaPlaylistPropertyPlaylistAttributes returns the string constant MPMediaPlaylistPropertyPlaylistAttributes, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertyPlaylistAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertyPlaylistAttributes")))
 }
 
-// MPMediaPlaylistPropertySeedItems returns the string constant MPMediaPlaylistPropertySeedItems as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertySeedItems() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertySeedItems())
+// MPMediaPlaylistPropertySeedItems returns the string constant MPMediaPlaylistPropertySeedItems, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertySeedItems() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertySeedItems")))
 }
 
-// MPMediaPlaylistPropertyDescriptionText returns the string constant MPMediaPlaylistPropertyDescriptionText as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertyDescriptionText() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertyDescriptionText())
+// MPMediaPlaylistPropertyDescriptionText returns the string constant MPMediaPlaylistPropertyDescriptionText, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertyDescriptionText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertyDescriptionText")))
 }
 
-// MPMediaPlaylistPropertyAuthorDisplayName returns the string constant MPMediaPlaylistPropertyAuthorDisplayName as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaylistPropertyAuthorDisplayName() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaylistPropertyAuthorDisplayName())
+// MPMediaPlaylistPropertyAuthorDisplayName returns the string constant MPMediaPlaylistPropertyAuthorDisplayName, for use as a dictionary key or argument.
+func MPMediaPlaylistPropertyAuthorDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaylistPropertyAuthorDisplayName")))
 }
 
-// MPMediaPlaybackIsPreparedToPlayDidChangeNotification returns the string constant MPMediaPlaybackIsPreparedToPlayDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func MPMediaPlaybackIsPreparedToPlayDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.MPMediaPlaybackIsPreparedToPlayDidChangeNotification())
+// MPMediaPlaybackIsPreparedToPlayDidChangeNotification returns the string constant MPMediaPlaybackIsPreparedToPlayDidChangeNotification, for use as a dictionary key or argument.
+func MPMediaPlaybackIsPreparedToPlayDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPMediaPlaybackIsPreparedToPlayDidChangeNotification")))
 }
 
-// MPNowPlayingInfoPropertyElapsedPlaybackTime returns the string constant MPNowPlayingInfoPropertyElapsedPlaybackTime as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyElapsedPlaybackTime() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyElapsedPlaybackTime())
+// MPNowPlayingInfoPropertyElapsedPlaybackTime returns the string constant MPNowPlayingInfoPropertyElapsedPlaybackTime, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyElapsedPlaybackTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyElapsedPlaybackTime")))
 }
 
-// MPNowPlayingInfoPropertyPlaybackRate returns the string constant MPNowPlayingInfoPropertyPlaybackRate as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyPlaybackRate() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyPlaybackRate())
+// MPNowPlayingInfoPropertyPlaybackRate returns the string constant MPNowPlayingInfoPropertyPlaybackRate, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyPlaybackRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyPlaybackRate")))
 }
 
-// MPNowPlayingInfoPropertyDefaultPlaybackRate returns the string constant MPNowPlayingInfoPropertyDefaultPlaybackRate as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyDefaultPlaybackRate() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyDefaultPlaybackRate())
+// MPNowPlayingInfoPropertyDefaultPlaybackRate returns the string constant MPNowPlayingInfoPropertyDefaultPlaybackRate, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyDefaultPlaybackRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyDefaultPlaybackRate")))
 }
 
-// MPNowPlayingInfoPropertyPlaybackQueueIndex returns the string constant MPNowPlayingInfoPropertyPlaybackQueueIndex as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyPlaybackQueueIndex() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyPlaybackQueueIndex())
+// MPNowPlayingInfoPropertyPlaybackQueueIndex returns the string constant MPNowPlayingInfoPropertyPlaybackQueueIndex, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyPlaybackQueueIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyPlaybackQueueIndex")))
 }
 
-// MPNowPlayingInfoPropertyPlaybackQueueCount returns the string constant MPNowPlayingInfoPropertyPlaybackQueueCount as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyPlaybackQueueCount() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyPlaybackQueueCount())
+// MPNowPlayingInfoPropertyPlaybackQueueCount returns the string constant MPNowPlayingInfoPropertyPlaybackQueueCount, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyPlaybackQueueCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyPlaybackQueueCount")))
 }
 
-// MPNowPlayingInfoPropertyChapterNumber returns the string constant MPNowPlayingInfoPropertyChapterNumber as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyChapterNumber() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyChapterNumber())
+// MPNowPlayingInfoPropertyChapterNumber returns the string constant MPNowPlayingInfoPropertyChapterNumber, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyChapterNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyChapterNumber")))
 }
 
-// MPNowPlayingInfoPropertyChapterCount returns the string constant MPNowPlayingInfoPropertyChapterCount as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyChapterCount() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyChapterCount())
+// MPNowPlayingInfoPropertyChapterCount returns the string constant MPNowPlayingInfoPropertyChapterCount, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyChapterCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyChapterCount")))
 }
 
-// MPNowPlayingInfoPropertyIsLiveStream returns the string constant MPNowPlayingInfoPropertyIsLiveStream as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyIsLiveStream() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyIsLiveStream())
+// MPNowPlayingInfoPropertyIsLiveStream returns the string constant MPNowPlayingInfoPropertyIsLiveStream, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyIsLiveStream() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyIsLiveStream")))
 }
 
-// MPNowPlayingInfoPropertyAvailableLanguageOptions returns the string constant MPNowPlayingInfoPropertyAvailableLanguageOptions as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyAvailableLanguageOptions() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyAvailableLanguageOptions())
+// MPNowPlayingInfoPropertyAvailableLanguageOptions returns the string constant MPNowPlayingInfoPropertyAvailableLanguageOptions, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyAvailableLanguageOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyAvailableLanguageOptions")))
 }
 
-// MPNowPlayingInfoPropertyCurrentLanguageOptions returns the string constant MPNowPlayingInfoPropertyCurrentLanguageOptions as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyCurrentLanguageOptions() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyCurrentLanguageOptions())
+// MPNowPlayingInfoPropertyCurrentLanguageOptions returns the string constant MPNowPlayingInfoPropertyCurrentLanguageOptions, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyCurrentLanguageOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyCurrentLanguageOptions")))
 }
 
-// MPNowPlayingInfoCollectionIdentifier returns the string constant MPNowPlayingInfoCollectionIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoCollectionIdentifier() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoCollectionIdentifier())
+// MPNowPlayingInfoCollectionIdentifier returns the string constant MPNowPlayingInfoCollectionIdentifier, for use as a dictionary key or argument.
+func MPNowPlayingInfoCollectionIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoCollectionIdentifier")))
 }
 
-// MPNowPlayingInfoPropertyExternalContentIdentifier returns the string constant MPNowPlayingInfoPropertyExternalContentIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyExternalContentIdentifier() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyExternalContentIdentifier())
+// MPNowPlayingInfoPropertyExternalContentIdentifier returns the string constant MPNowPlayingInfoPropertyExternalContentIdentifier, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyExternalContentIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyExternalContentIdentifier")))
 }
 
-// MPNowPlayingInfoPropertyExternalUserProfileIdentifier returns the string constant MPNowPlayingInfoPropertyExternalUserProfileIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyExternalUserProfileIdentifier() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyExternalUserProfileIdentifier())
+// MPNowPlayingInfoPropertyExternalUserProfileIdentifier returns the string constant MPNowPlayingInfoPropertyExternalUserProfileIdentifier, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyExternalUserProfileIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyExternalUserProfileIdentifier")))
 }
 
-// MPNowPlayingInfoPropertyServiceIdentifier returns the string constant MPNowPlayingInfoPropertyServiceIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyServiceIdentifier() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyServiceIdentifier())
+// MPNowPlayingInfoPropertyServiceIdentifier returns the string constant MPNowPlayingInfoPropertyServiceIdentifier, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyServiceIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyServiceIdentifier")))
 }
 
-// MPNowPlayingInfoPropertyPlaybackProgress returns the string constant MPNowPlayingInfoPropertyPlaybackProgress as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyPlaybackProgress() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyPlaybackProgress())
+// MPNowPlayingInfoPropertyPlaybackProgress returns the string constant MPNowPlayingInfoPropertyPlaybackProgress, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyPlaybackProgress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyPlaybackProgress")))
 }
 
-// MPNowPlayingInfoPropertyMediaType returns the string constant MPNowPlayingInfoPropertyMediaType as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyMediaType() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyMediaType())
+// MPNowPlayingInfoPropertyMediaType returns the string constant MPNowPlayingInfoPropertyMediaType, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyMediaType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyMediaType")))
 }
 
-// MPNowPlayingInfoPropertyAssetURL returns the string constant MPNowPlayingInfoPropertyAssetURL as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyAssetURL() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyAssetURL())
+// MPNowPlayingInfoPropertyAssetURL returns the string constant MPNowPlayingInfoPropertyAssetURL, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyAssetURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyAssetURL")))
 }
 
-// MPNowPlayingInfoPropertyCurrentPlaybackDate returns the string constant MPNowPlayingInfoPropertyCurrentPlaybackDate as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyCurrentPlaybackDate() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyCurrentPlaybackDate())
+// MPNowPlayingInfoPropertyCurrentPlaybackDate returns the string constant MPNowPlayingInfoPropertyCurrentPlaybackDate, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyCurrentPlaybackDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyCurrentPlaybackDate")))
 }
 
-// MPNowPlayingInfoPropertyAdTimeRanges returns the string constant MPNowPlayingInfoPropertyAdTimeRanges as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyAdTimeRanges() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyAdTimeRanges())
+// MPNowPlayingInfoPropertyAdTimeRanges returns the string constant MPNowPlayingInfoPropertyAdTimeRanges, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyAdTimeRanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyAdTimeRanges")))
 }
 
-// MPNowPlayingInfoPropertyCreditsStartTime returns the string constant MPNowPlayingInfoPropertyCreditsStartTime as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyCreditsStartTime() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyCreditsStartTime())
+// MPNowPlayingInfoPropertyCreditsStartTime returns the string constant MPNowPlayingInfoPropertyCreditsStartTime, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyCreditsStartTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyCreditsStartTime")))
 }
 
-// MPNowPlayingInfoPropertyInternationalStandardRecordingCode returns the string constant MPNowPlayingInfoPropertyInternationalStandardRecordingCode as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyInternationalStandardRecordingCode() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyInternationalStandardRecordingCode())
+// MPNowPlayingInfoPropertyInternationalStandardRecordingCode returns the string constant MPNowPlayingInfoPropertyInternationalStandardRecordingCode, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyInternationalStandardRecordingCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyInternationalStandardRecordingCode")))
 }
 
-// MPNowPlayingInfoPropertyExcludeFromSuggestions returns the string constant MPNowPlayingInfoPropertyExcludeFromSuggestions as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoPropertyExcludeFromSuggestions() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoPropertyExcludeFromSuggestions())
+// MPNowPlayingInfoPropertyExcludeFromSuggestions returns the string constant MPNowPlayingInfoPropertyExcludeFromSuggestions, for use as a dictionary key or argument.
+func MPNowPlayingInfoPropertyExcludeFromSuggestions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoPropertyExcludeFromSuggestions")))
 }
 
-// 1:1 (square) animated artwork for the current media item.
-// MPNowPlayingInfoProperty1x1AnimatedArtwork returns the string constant MPNowPlayingInfoProperty1x1AnimatedArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoProperty1x1AnimatedArtwork() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoProperty1x1AnimatedArtwork())
+// MPNowPlayingInfoProperty1x1AnimatedArtwork returns the string constant MPNowPlayingInfoProperty1x1AnimatedArtwork, for use as a dictionary key or argument.
+func MPNowPlayingInfoProperty1x1AnimatedArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoProperty1x1AnimatedArtwork")))
 }
 
-// 3:4 (tall) animated artwork for the current media item.
-// MPNowPlayingInfoProperty3x4AnimatedArtwork returns the string constant MPNowPlayingInfoProperty3x4AnimatedArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func MPNowPlayingInfoProperty3x4AnimatedArtwork() objc.ID {
-	return purego.CFConstant(raw.MPNowPlayingInfoProperty3x4AnimatedArtwork())
+// MPNowPlayingInfoProperty3x4AnimatedArtwork returns the string constant MPNowPlayingInfoProperty3x4AnimatedArtwork, for use as a dictionary key or argument.
+func MPNowPlayingInfoProperty3x4AnimatedArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPNowPlayingInfoProperty3x4AnimatedArtwork")))
 }
 
-// MPLanguageOptionCharacteristicIsMainProgramContent returns the string constant MPLanguageOptionCharacteristicIsMainProgramContent as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicIsMainProgramContent() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicIsMainProgramContent())
+// MPLanguageOptionCharacteristicIsMainProgramContent returns the string constant MPLanguageOptionCharacteristicIsMainProgramContent, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicIsMainProgramContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicIsMainProgramContent")))
 }
 
-// MPLanguageOptionCharacteristicIsAuxiliaryContent returns the string constant MPLanguageOptionCharacteristicIsAuxiliaryContent as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicIsAuxiliaryContent() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicIsAuxiliaryContent())
+// MPLanguageOptionCharacteristicIsAuxiliaryContent returns the string constant MPLanguageOptionCharacteristicIsAuxiliaryContent, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicIsAuxiliaryContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicIsAuxiliaryContent")))
 }
 
-// MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles returns the string constant MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles())
+// MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles returns the string constant MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles")))
 }
 
-// MPLanguageOptionCharacteristicTranscribesSpokenDialog returns the string constant MPLanguageOptionCharacteristicTranscribesSpokenDialog as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicTranscribesSpokenDialog() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicTranscribesSpokenDialog())
+// MPLanguageOptionCharacteristicTranscribesSpokenDialog returns the string constant MPLanguageOptionCharacteristicTranscribesSpokenDialog, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicTranscribesSpokenDialog() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicTranscribesSpokenDialog")))
 }
 
-// MPLanguageOptionCharacteristicDescribesMusicAndSound returns the string constant MPLanguageOptionCharacteristicDescribesMusicAndSound as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicDescribesMusicAndSound() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicDescribesMusicAndSound())
+// MPLanguageOptionCharacteristicDescribesMusicAndSound returns the string constant MPLanguageOptionCharacteristicDescribesMusicAndSound, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicDescribesMusicAndSound() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicDescribesMusicAndSound")))
 }
 
-// MPLanguageOptionCharacteristicEasyToRead returns the string constant MPLanguageOptionCharacteristicEasyToRead as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicEasyToRead() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicEasyToRead())
+// MPLanguageOptionCharacteristicEasyToRead returns the string constant MPLanguageOptionCharacteristicEasyToRead, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicEasyToRead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicEasyToRead")))
 }
 
-// MPLanguageOptionCharacteristicDescribesVideo returns the string constant MPLanguageOptionCharacteristicDescribesVideo as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicDescribesVideo() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicDescribesVideo())
+// MPLanguageOptionCharacteristicDescribesVideo returns the string constant MPLanguageOptionCharacteristicDescribesVideo, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicDescribesVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicDescribesVideo")))
 }
 
-// MPLanguageOptionCharacteristicLanguageTranslation returns the string constant MPLanguageOptionCharacteristicLanguageTranslation as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicLanguageTranslation() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicLanguageTranslation())
+// MPLanguageOptionCharacteristicLanguageTranslation returns the string constant MPLanguageOptionCharacteristicLanguageTranslation, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicLanguageTranslation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicLanguageTranslation")))
 }
 
-// MPLanguageOptionCharacteristicDubbedTranslation returns the string constant MPLanguageOptionCharacteristicDubbedTranslation as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicDubbedTranslation() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicDubbedTranslation())
+// MPLanguageOptionCharacteristicDubbedTranslation returns the string constant MPLanguageOptionCharacteristicDubbedTranslation, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicDubbedTranslation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicDubbedTranslation")))
 }
 
-// MPLanguageOptionCharacteristicVoiceOverTranslation returns the string constant MPLanguageOptionCharacteristicVoiceOverTranslation as an objc.ID, for use as a dictionary key or selector argument.
-func MPLanguageOptionCharacteristicVoiceOverTranslation() objc.ID {
-	return purego.CFConstant(raw.MPLanguageOptionCharacteristicVoiceOverTranslation())
+// MPLanguageOptionCharacteristicVoiceOverTranslation returns the string constant MPLanguageOptionCharacteristicVoiceOverTranslation, for use as a dictionary key or argument.
+func MPLanguageOptionCharacteristicVoiceOverTranslation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MPLanguageOptionCharacteristicVoiceOverTranslation")))
 }

@@ -5,219 +5,186 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that manages smooth transitions between a node’s base geometry and one or more target geometries.
+// Morpher is an idiomatic wrapper over the Objective-C class SCNMorpher.
 //
-// Morpher wraps [raw.SCNMorpher] with a fluent Go API.
+// An object that manages smooth transitions between a node’s base geometry and one or more target geometries.
 type Morpher struct {
-	inner *raw.SCNMorpher
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNMorpher].
-func (x *Morpher) Unwrap() *raw.SCNMorpher { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Morpher) ID() objc.ID { return x.inner.Ptr() }
-
-// MorpherFromID adopts an existing object pointer as a Morpher (nil for 0).
+// MorpherFromID adopts an existing Objective-C object as a Morpher
+// (nil for 0), retaining it and registering a release finalizer.
 func MorpherFromID(id objc.ID) *Morpher {
 	if id == 0 {
 		return nil
 	}
-	return &Morpher{inner: raw.SCNMorpherFromID(id)}
+	x := &Morpher{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMorpher creates a new [Morpher].
+// morpherAdopt wraps an Objective-C object that this code just created as a
+// Morpher (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func morpherAdopt(id objc.ID) *Morpher {
+	if id == 0 {
+		return nil
+	}
+	x := &Morpher{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Morpher) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Morpher) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Morpher) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Morpher) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMorpher creates a new Morpher.
 func NewMorpher() *Morpher {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNMorpher")), objc.RegisterName("new"))
-	return &Morpher{inner: raw.SCNMorpherFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNMorpher")), objc.RegisterName("new"))
+	return morpherAdopt(_id)
 }
 
-// The array of target geometries to morph between.
-//
-// WithTargets sets the collection, converting the Go slice to an NSArray.
+// WithTargets the array of target geometries to morph between.
 func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetTargets(foundation.NSArrayFromID[*raw.SCNGeometry](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGeometry().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNGeometry](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetTargets(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GeometryProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargets:"), _arr)
 	return x
 }
 
-// @property weights @abstract Access to all the weights of all the targets.
-//
-// WithWeights sets the collection, converting the Go slice to an NSArray.
-func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetWeights(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetWeights(_arr)
+// WithWeights access to all the weights of all the targets.
+func (x *Morpher) WithWeights(items ...obj.Object) *Morpher {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeights:"), _arr)
 	return x
 }
 
-// The interpolation formula for blending between target geometries.
-//
-// WithCalculationMode sets the calculationMode property and returns the receiver for chaining.
-func (x *Morpher) WithCalculationMode(calculationMode SCNMorpherCalculationMode) *Morpher {
-	x.inner.SetCalculationMode(raw.SCNMorpherCalculationMode(calculationMode))
+// WithCalculationMode the interpolation formula for blending between target geometries.
+func (x *Morpher) WithCalculationMode(calculationMode MorpherCalculationMode) *Morpher {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalculationMode:"), calculationMode)
 	return x
 }
 
-// @property unifiesNormals @abstract When set to YES the normals are not morphed but are recomputed after morphing the vertex instead. When set to NO, the morpher will morph the normals if the geometry targets have normals. Defaults to NO.
-//
-// WithUnifiesNormals sets the unifiesNormals property and returns the receiver for chaining.
+// WithUnifiesNormals when set to YES the normals are not morphed but are recomputed after morphing the vertex instead. When set to NO, the morpher will morph the normals if the geometry targets have normals. Defaults to NO.
 func (x *Morpher) WithUnifiesNormals(unifiesNormals bool) *Morpher {
-	x.inner.SetUnifiesNormals(unifiesNormals)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnifiesNormals:"), unifiesNormals)
 	return x
 }
 
-// Specifies a weight value at a specified target index.
-//
-// SetWeightForTargetAtIndex calls the underlying SetWeightForTargetAtIndex.
-func (x *Morpher) SetWeightForTargetAtIndex(weight float64, targetIndex uint) {
-	x.inner.SetWeightForTargetAtIndex(weight, targetIndex)
+// SetWeightForTargetAtIndex specifies a weight value at a specified target index.
+func (x *Morpher) SetWeightForTargetAtIndex(weight float64, targetIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forTargetAtIndex:"), weight, targetIndex)
 }
 
-// Returns the weight value for the specified target index.
-//
-// WeightForTargetAtIndex calls the underlying WeightForTargetAtIndex.
-func (x *Morpher) WeightForTargetAtIndex(targetIndex uint) float64 {
-	return x.inner.WeightForTargetAtIndex(targetIndex)
+// WeightForTargetAtIndex returns the weight value for the specified target index.
+func (x *Morpher) WeightForTargetAtIndex(targetIndex int) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weightForTargetAtIndex:"), targetIndex)
+	return _r
 }
 
-// @method setWeight:forTargetNamed: @abstract Sets the weight for the target with the specified name (targetName is the name of the target geometry).
-//
-// SetWeightForTargetNamed calls the underlying SetWeightForTargetNamed.
+// SetWeightForTargetNamed sets the weight for the target with the specified name (targetName is the name of the target geometry).
 func (x *Morpher) SetWeightForTargetNamed(weight float64, targetName string) {
-	x.inner.SetWeightForTargetNamed(weight, foundation.NSStringStringWithUTF8String(targetName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forTargetNamed:"), weight, purego.NSString(targetName))
 }
 
-// @method weightForTargetNamed: @abstract Retrieves the weight for the target with the specified name (targetName is the name of the target geometry).
-//
-// WeightForTargetNamed calls the underlying WeightForTargetNamed.
+// WeightForTargetNamed retrieves the weight for the target with the specified name (targetName is the name of the target geometry).
 func (x *Morpher) WeightForTargetNamed(targetName string) float64 {
-	return x.inner.WeightForTargetNamed(foundation.NSStringStringWithUTF8String(targetName))
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weightForTargetNamed:"), purego.NSString(targetName))
+	return _r
 }
 
-// @property targets @abstract Specifies the morph targets as an array of SCNGeometry. @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
+// Targets specifies the morph targets as an array of SCNGeometry. The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
 //
 // Targets returns the collection as a Go slice.
 func (x *Morpher) Targets() []*Geometry {
-	arr := x.inner.Targets()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Geometry {
-		return &Geometry{inner: raw.SCNGeometryFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targets"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Geometry { return GeometryFromID(_id) })
 }
 
-// SetTargets calls the underlying SetTargets.
-func (x *Morpher) SetTargets(targets ...GeometryProvider) {
-	_ptrs := make([]objc.ID, len(targets))
-	for _i, _v := range targets {
-		_ptrs[_i] = _v.asGeometry().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.SCNGeometry]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.SCNGeometry](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.SCNGeometry](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetTargets(_arg0)
+// SetTargets wraps the corresponding Objective-C method.
+func (x *Morpher) SetTargets(targets []*Geometry) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargets:"), purego.SliceToNSArray(targets, func(_v *Geometry) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property weights @abstract Access to all the weights of all the targets.
+// Weights access to all the weights of all the targets.
 //
 // Weights returns the collection as a Go slice.
-func (x *Morpher) Weights() []*foundation.NSNumber {
-	arr := x.inner.Weights()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *Morpher) Weights() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetWeights calls the underlying SetWeights.
-func (x *Morpher) SetWeights(weights *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetWeights(weights)
+// SetWeights wraps the corresponding Objective-C method.
+func (x *Morpher) SetWeights(weights []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeights:"), purego.SliceToNSArray(weights, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property calculationMode @abstract Specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.
-//
-// CalculationMode calls the underlying CalculationMode.
-func (x *Morpher) CalculationMode() SCNMorpherCalculationMode {
-	return SCNMorpherCalculationMode(x.inner.CalculationMode())
+// CalculationMode specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.
+func (x *Morpher) CalculationMode() MorpherCalculationMode {
+	_r := objc.Send[MorpherCalculationMode](objref.IDOf(x), objc.RegisterName("calculationMode"))
+	return _r
 }
 
-// SetCalculationMode calls the underlying SetCalculationMode.
-func (x *Morpher) SetCalculationMode(calculationMode SCNMorpherCalculationMode) {
-	x.inner.SetCalculationMode(raw.SCNMorpherCalculationMode(calculationMode))
+// SetCalculationMode wraps the corresponding Objective-C method.
+func (x *Morpher) SetCalculationMode(calculationMode MorpherCalculationMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalculationMode:"), calculationMode)
 }
 
-// @property unifiesNormals @abstract When set to YES the normals are not morphed but are recomputed after morphing the vertex instead. When set to NO, the morpher will morph the normals if the geometry targets have normals. Defaults to NO.
-//
-// UnifiesNormals calls the underlying UnifiesNormals.
+// UnifiesNormals when set to YES the normals are not morphed but are recomputed after morphing the vertex instead. When set to NO, the morpher will morph the normals if the geometry targets have normals. Defaults to NO.
 func (x *Morpher) UnifiesNormals() bool {
-	return x.inner.UnifiesNormals()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unifiesNormals"))
+	return _r
 }
 
-// SetUnifiesNormals calls the underlying SetUnifiesNormals.
+// SetUnifiesNormals wraps the corresponding Objective-C method.
 func (x *Morpher) SetUnifiesNormals(unifiesNormals bool) {
-	x.inner.SetUnifiesNormals(unifiesNormals)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnifiesNormals:"), unifiesNormals)
 }
 
 // Morpherable is the interface implemented by [Morpher], for mocking and DI.
 type Morpherable interface {
-	Unwrap() *raw.SCNMorpher
+	obj.Object
 	WithTargets(items ...GeometryProvider) *Morpher
-	WithWeights(items ...*foundation.NSNumber) *Morpher
-	WithCalculationMode(calculationMode SCNMorpherCalculationMode) *Morpher
+	WithWeights(items ...obj.Object) *Morpher
+	WithCalculationMode(calculationMode MorpherCalculationMode) *Morpher
 	WithUnifiesNormals(unifiesNormals bool) *Morpher
-	SetWeightForTargetAtIndex(weight float64, targetIndex uint)
-	WeightForTargetAtIndex(targetIndex uint) float64
+	SetWeightForTargetAtIndex(weight float64, targetIndex int)
+	WeightForTargetAtIndex(targetIndex int) float64
 	SetWeightForTargetNamed(weight float64, targetName string)
 	WeightForTargetNamed(targetName string) float64
 	Targets() []*Geometry
-	SetTargets(targets ...GeometryProvider)
-	Weights() []*foundation.NSNumber
-	SetWeights(weights *foundation.NSArray[*foundation.NSNumber])
-	CalculationMode() SCNMorpherCalculationMode
-	SetCalculationMode(calculationMode SCNMorpherCalculationMode)
+	SetTargets(targets []*Geometry)
+	Weights() []obj.Object
+	SetWeights(weights []obj.Object)
+	CalculationMode() MorpherCalculationMode
+	SetCalculationMode(calculationMode MorpherCalculationMode)
 	UnifiesNormals() bool
 	SetUnifiesNormals(unifiesNormals bool)
 }

@@ -5,71 +5,95 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ShareAccessRequester wraps [raw.CKShareAccessRequester] with a fluent Go API.
+// ShareAccessRequester is an idiomatic wrapper over the Objective-C class CKShareAccessRequester.
 type ShareAccessRequester struct {
-	inner *raw.CKShareAccessRequester
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKShareAccessRequester].
-func (x *ShareAccessRequester) Unwrap() *raw.CKShareAccessRequester { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareAccessRequester) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareAccessRequesterFromID adopts an existing object pointer as a ShareAccessRequester (nil for 0).
+// ShareAccessRequesterFromID adopts an existing Objective-C object as a ShareAccessRequester
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareAccessRequesterFromID(id objc.ID) *ShareAccessRequester {
 	if id == 0 {
 		return nil
 	}
-	return &ShareAccessRequester{inner: raw.CKShareAccessRequesterFromID(id)}
+	x := &ShareAccessRequester{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewShareAccessRequester creates a new [ShareAccessRequester].
+// shareAccessRequesterAdopt wraps an Objective-C object that this code just created as a
+// ShareAccessRequester (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareAccessRequesterAdopt(id objc.ID) *ShareAccessRequester {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareAccessRequester{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShareAccessRequester) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareAccessRequester) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareAccessRequester) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareAccessRequester) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShareAccessRequester creates a new ShareAccessRequester.
 func NewShareAccessRequester() *ShareAccessRequester {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareAccessRequester")), objc.RegisterName("new"))
-	return &ShareAccessRequester{inner: raw.CKShareAccessRequesterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKShareAccessRequester")), objc.RegisterName("new"))
+	return shareAccessRequesterAdopt(_id)
 }
 
-// The identity of the user requesting access to the share.
-//
-// UserIdentity calls the underlying UserIdentity.
+// UserIdentity the identity of the user requesting access to the share.
 func (x *ShareAccessRequester) UserIdentity() *UserIdentity {
-	_r := x.inner.UserIdentity()
-	if _r == nil {
-		return nil
-	}
-	return &UserIdentity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
+	return UserIdentityFromID(_r)
 }
 
-// Lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
-//
-// ParticipantLookupInfo calls the underlying ParticipantLookupInfo.
+// ParticipantLookupInfo lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
 func (x *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
-	_r := x.inner.ParticipantLookupInfo()
-	if _r == nil {
-		return nil
-	}
-	return &UserIdentityLookupInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participantLookupInfo"))
+	return UserIdentityLookupInfoFromID(_r)
 }
 
-// A displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
-//
-// Contact calls the underlying Contact.
-func (x *ShareAccessRequester) Contact() objc.ID {
-	return x.inner.Contact()
+// Contact a displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
+func (x *ShareAccessRequester) Contact() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+	return obj.Wrap(_r)
 }
 
 // ShareAccessRequesterable is the interface implemented by [ShareAccessRequester], for mocking and DI.
 type ShareAccessRequesterable interface {
-	Unwrap() *raw.CKShareAccessRequester
+	obj.Object
 	UserIdentity() *UserIdentity
 	ParticipantLookupInfo() *UserIdentityLookupInfo
-	Contact() objc.ID
+	Contact() obj.Object
 }
 
 var _ ShareAccessRequesterable = (*ShareAccessRequester)(nil)

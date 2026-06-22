@@ -5,33 +5,25 @@
 package scriptingbridge
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	"github.com/ebitengine/purego/objc"
 )
 
-// ApplicationWithBundleIdentifier calls the underlying SBApplicationApplicationWithBundleIdentifier.
+// ApplicationWithBundleIdentifier returns the shared instance representing the target application specified by its bundle identifier.
 func ApplicationWithBundleIdentifier(ident string) *Application {
-	_r := raw.SBApplicationApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(ident))
-	if _r == nil {
-		return nil
-	}
-	return &Application{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("applicationWithBundleIdentifier:"), purego.NSString(ident))
+	return ApplicationFromID(_r)
 }
 
-// ApplicationWithURL calls the underlying SBApplicationApplicationWithURL.
+// ApplicationWithURL returns the shared instance representing a target application specified by the given URL.
 func ApplicationWithURL(url string) *Application {
-	_r := raw.SBApplicationApplicationWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &Application{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("applicationWithURL:"), rt.FileURL(url))
+	return ApplicationFromID(_r)
 }
 
-// ApplicationWithProcessIdentifier calls the underlying SBApplicationApplicationWithProcessIdentifier.
+// ApplicationWithProcessIdentifier returns the shared instance representing a target application specified by its process identifier.
 func ApplicationWithProcessIdentifier(pid int) *Application {
-	_r := raw.SBApplicationApplicationWithProcessIdentifier(pid)
-	if _r == nil {
-		return nil
-	}
-	return &Application{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("applicationWithProcessIdentifier:"), pid)
+	return ApplicationFromID(_r)
 }

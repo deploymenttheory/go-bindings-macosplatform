@@ -5,80 +5,81 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that passes invocation to only one of its child nodes.
+// SwitchNodeDefinition is an idiomatic wrapper over the Objective-C class PHASESwitchNodeDefinition.
 //
-// SwitchNodeDefinition wraps [raw.PHASESwitchNodeDefinition] with a fluent Go API.
+// It embeds [SoundEventNodeDefinition], promoting that type's methods.
+//
+// A node that passes invocation to only one of its child nodes.
 type SwitchNodeDefinition struct {
-	inner *raw.PHASESwitchNodeDefinition
+	SoundEventNodeDefinition
 }
 
-// Unwrap returns the underlying [raw.PHASESwitchNodeDefinition].
-func (x *SwitchNodeDefinition) Unwrap() *raw.PHASESwitchNodeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SwitchNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// SwitchNodeDefinitionFromID adopts an existing object pointer as a SwitchNodeDefinition (nil for 0).
+// SwitchNodeDefinitionFromID adopts an existing Objective-C object as a SwitchNodeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func SwitchNodeDefinitionFromID(id objc.ID) *SwitchNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(id)}
+	x := &SwitchNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a named node that invokes a child node based on the value of the given parameter.
-//
-// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier creates a new [SwitchNodeDefinition].
-func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *raw.PHASEStringMetaParameterDefinition, identifier string) *SwitchNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:identifier:"), switchMetaParameterDefinition.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(_id)}
-}
-
-// Creates a node that invokes a child node based on the value of the given parameter.
-//
-// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition creates a new [SwitchNodeDefinition].
-func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *raw.PHASEStringMetaParameterDefinition) *SwitchNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:"), switchMetaParameterDefinition.Ptr())
-	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(_id)}
-}
-
-// Adds a child node with the given switch value.
-//
-// AddSubtreeSwitchValue calls the underlying AddSubtreeSwitchValue.
-func (x *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *raw.PHASESoundEventNodeDefinition, switchValue string) {
-	x.inner.AddSubtreeSwitchValue(subtree, foundation.NSStringStringWithUTF8String(switchValue))
-}
-
-// SwitchMetaParameterDefinition calls the underlying SwitchMetaParameterDefinition.
-func (x *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
-	_r := x.inner.SwitchMetaParameterDefinition()
-	if _r == nil {
+// switchNodeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// SwitchNodeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func switchNodeDefinitionAdopt(id objc.ID) *SwitchNodeDefinition {
+	if id == 0 {
 		return nil
 	}
-	return &StringMetaParameterDefinition{inner: _r}
+	x := &SwitchNodeDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SwitchNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
-	return &x.inner.PHASESoundEventNodeDefinition
+// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier creates a named node that invokes a child node based on the value of the given parameter.
+func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *StringMetaParameterDefinition, identifier string) *SwitchNodeDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:identifier:"), objref.IDOf(switchMetaParameterDefinition), purego.NSString(identifier))
+	return switchNodeDefinitionAdopt(_id)
 }
 
-func (x *SwitchNodeDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+// NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition creates a node that invokes a child node based on the value of the given parameter.
+func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *StringMetaParameterDefinition) *SwitchNodeDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSwitchMetaParameterDefinition:"), objref.IDOf(switchMetaParameterDefinition))
+	return switchNodeDefinitionAdopt(_id)
+}
+
+// AddSubtreeSwitchValue adds a child node with the given switch value.
+func (x *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:switchValue:"), objref.IDOf(subtree), purego.NSString(switchValue))
+}
+
+// SwitchMetaParameterDefinition wraps the corresponding Objective-C method.
+func (x *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("switchMetaParameterDefinition"))
+	return StringMetaParameterDefinitionFromID(_r)
 }
 
 // SwitchNodeDefinitionable is the interface implemented by [SwitchNodeDefinition], for mocking and DI.
 type SwitchNodeDefinitionable interface {
-	Unwrap() *raw.PHASESwitchNodeDefinition
-	AddSubtreeSwitchValue(subtree *raw.PHASESoundEventNodeDefinition, switchValue string)
+	obj.Object
+	AddSubtreeSwitchValue(subtree *SoundEventNodeDefinition, switchValue string)
 	SwitchMetaParameterDefinition() *StringMetaParameterDefinition
 }
 
 var _ SwitchNodeDefinitionable = (*SwitchNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*SwitchNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*SwitchNodeDefinition)(nil)

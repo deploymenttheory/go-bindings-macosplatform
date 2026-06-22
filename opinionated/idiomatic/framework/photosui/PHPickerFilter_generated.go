@@ -5,39 +5,74 @@
 package photosui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PickerFilter wraps [raw.PHPickerFilter] with a fluent Go API.
+// PickerFilter is an idiomatic wrapper over the Objective-C class PHPickerFilter.
 type PickerFilter struct {
-	inner *raw.PHPickerFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPickerFilter].
-func (x *PickerFilter) Unwrap() *raw.PHPickerFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PickerFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// PickerFilterFromID adopts an existing object pointer as a PickerFilter (nil for 0).
+// PickerFilterFromID adopts an existing Objective-C object as a PickerFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func PickerFilterFromID(id objc.ID) *PickerFilter {
 	if id == 0 {
 		return nil
 	}
-	return &PickerFilter{inner: raw.PHPickerFilterFromID(id)}
+	x := &PickerFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPickerFilter creates a new [PickerFilter].
+// pickerFilterAdopt wraps an Objective-C object that this code just created as a
+// PickerFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pickerFilterAdopt(id objc.ID) *PickerFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &PickerFilter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PickerFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PickerFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PickerFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPickerFilter creates a new PickerFilter.
 func NewPickerFilter() *PickerFilter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerFilter")), objc.RegisterName("new"))
-	return &PickerFilter{inner: raw.PHPickerFilterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("new"))
+	return pickerFilterAdopt(_id)
 }
 
 // PickerFilterable is the interface implemented by [PickerFilter], for mocking and DI.
 type PickerFilterable interface {
-	Unwrap() *raw.PHPickerFilter
+	obj.Object
 }
 
 var _ PickerFilterable = (*PickerFilter)(nil)

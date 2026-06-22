@@ -5,83 +5,67 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayLUTDequantize wraps [raw.MPSNDArrayLUTDequantize] with a fluent Go API.
+// NDArrayLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayLUTDequantize.
+//
+// It embeds [NDArrayMultiaryKernel], promoting that type's methods.
 type NDArrayLUTDequantize struct {
-	inner *raw.MPSNDArrayLUTDequantize
+	NDArrayMultiaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayLUTDequantize].
-func (x *NDArrayLUTDequantize) Unwrap() *raw.MPSNDArrayLUTDequantize { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayLUTDequantize) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayLUTDequantizeFromID adopts an existing object pointer as a NDArrayLUTDequantize (nil for 0).
+// NDArrayLUTDequantizeFromID adopts an existing Objective-C object as a NDArrayLUTDequantize
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayLUTDequantizeFromID(id objc.ID) *NDArrayLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(id)}
-}
-
-// NewNDArrayLUTDequantizeWithDevice creates a new [NDArrayLUTDequantize].
-func NewNDArrayLUTDequantizeWithDevice(device metal.MTLDevice) *NDArrayLUTDequantize {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayLUTDequantize")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NDArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayLUTDequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayLUTDequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// nDArrayLUTDequantizeAdopt wraps an Objective-C object that this code just created as a
+// NDArrayLUTDequantize (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayLUTDequantizeAdopt(id objc.ID) *NDArrayLUTDequantize {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayLUTDequantize{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNDArrayLUTDequantize creates a new NDArrayLUTDequantize.
+func NewNDArrayLUTDequantize() *NDArrayLUTDequantize {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayLUTDequantize")), objc.RegisterName("new"))
+	return nDArrayLUTDequantizeAdopt(_id)
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NDArrayLUTDequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayLUTDequantize) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayLUTDequantizeable is the interface implemented by [NDArrayLUTDequantize], for mocking and DI.
 type NDArrayLUTDequantizeable interface {
-	Unwrap() *raw.MPSNDArrayLUTDequantize
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayLUTDequantize
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayLUTDequantize
+	obj.Object
 	WithLabel(label string) *NDArrayLUTDequantize
 }
 
 var _ NDArrayLUTDequantizeable = (*NDArrayLUTDequantize)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayLUTDequantize)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayLUTDequantize)(nil)
+
+var _ KernelProvider = (*NDArrayLUTDequantize)(nil)

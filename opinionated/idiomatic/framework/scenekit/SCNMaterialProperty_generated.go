@@ -5,316 +5,317 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for the color or texture of one of a material’s visual properties.
+// MaterialProperty is an idiomatic wrapper over the Objective-C class SCNMaterialProperty.
 //
-// MaterialProperty wraps [raw.SCNMaterialProperty] with a fluent Go API.
+// A container for the color or texture of one of a material’s visual properties.
 type MaterialProperty struct {
-	inner *raw.SCNMaterialProperty
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNMaterialProperty].
-func (x *MaterialProperty) Unwrap() *raw.SCNMaterialProperty { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MaterialProperty) ID() objc.ID { return x.inner.Ptr() }
-
-// MaterialPropertyFromID adopts an existing object pointer as a MaterialProperty (nil for 0).
+// MaterialPropertyFromID adopts an existing Objective-C object as a MaterialProperty
+// (nil for 0), retaining it and registering a release finalizer.
 func MaterialPropertyFromID(id objc.ID) *MaterialProperty {
 	if id == 0 {
 		return nil
 	}
-	return &MaterialProperty{inner: raw.SCNMaterialPropertyFromID(id)}
+	x := &MaterialProperty{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMaterialProperty creates a new [MaterialProperty].
+// materialPropertyAdopt wraps an Objective-C object that this code just created as a
+// MaterialProperty (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func materialPropertyAdopt(id objc.ID) *MaterialProperty {
+	if id == 0 {
+		return nil
+	}
+	x := &MaterialProperty{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MaterialProperty) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MaterialProperty) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MaterialProperty) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MaterialProperty) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMaterialProperty creates a new MaterialProperty.
 func NewMaterialProperty() *MaterialProperty {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNMaterialProperty")), objc.RegisterName("new"))
-	return &MaterialProperty{inner: raw.SCNMaterialPropertyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("new"))
+	return materialPropertyAdopt(_id)
 }
 
-// The visual contents of the material property—a color, image, or source of animated content. Animatable.
-//
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *MaterialProperty) WithContents(contents objc.ID) *MaterialProperty {
-	x.inner.SetContents(contents)
+// WithContents the visual contents of the material property—a color, image, or source of animated content. Animatable.
+func (x *MaterialProperty) WithContents(contents obj.Object) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
-// A number between 0.0 and 1.0 that modulates the effect of the material property. Animatable.
-//
-// WithIntensity sets the intensity property and returns the receiver for chaining.
+// WithIntensity a number between 0.0 and 1.0 that modulates the effect of the material property. Animatable.
 func (x *MaterialProperty) WithIntensity(intensity float64) *MaterialProperty {
-	x.inner.SetIntensity(intensity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntensity:"), intensity)
 	return x
 }
 
-// Texture filtering for rendering the material property’s image contents at a size smaller than that of the original image.
-//
-// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
-func (x *MaterialProperty) WithMinificationFilter(minificationFilter SCNFilterMode) *MaterialProperty {
-	x.inner.SetMinificationFilter(raw.SCNFilterMode(minificationFilter))
+// WithMinificationFilter texture filtering for rendering the material property’s image contents at a size smaller than that of the original image.
+func (x *MaterialProperty) WithMinificationFilter(minificationFilter FilterMode) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), minificationFilter)
 	return x
 }
 
-// Texture filtering for rendering the material property’s image contents at a size larger than that of the original image.
-//
-// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
-func (x *MaterialProperty) WithMagnificationFilter(magnificationFilter SCNFilterMode) *MaterialProperty {
-	x.inner.SetMagnificationFilter(raw.SCNFilterMode(magnificationFilter))
+// WithMagnificationFilter texture filtering for rendering the material property’s image contents at a size larger than that of the original image.
+func (x *MaterialProperty) WithMagnificationFilter(magnificationFilter FilterMode) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), magnificationFilter)
 	return x
 }
 
-// Texture filtering for using mipmaps to render the material property’s image contents at a size smaller than that of the original image.
-//
-// WithMipFilter sets the mipFilter property and returns the receiver for chaining.
-func (x *MaterialProperty) WithMipFilter(mipFilter SCNFilterMode) *MaterialProperty {
-	x.inner.SetMipFilter(raw.SCNFilterMode(mipFilter))
+// WithMipFilter texture filtering for using mipmaps to render the material property’s image contents at a size smaller than that of the original image.
+func (x *MaterialProperty) WithMipFilter(mipFilter FilterMode) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipFilter:"), mipFilter)
 	return x
 }
 
-// The transformation applied to the material property’s visual contents. Animatable.
-//
-// WithContentsTransform sets the contentsTransform property and returns the receiver for chaining.
+// WithContentsTransform the transformation applied to the material property’s visual contents. Animatable.
 func (x *MaterialProperty) WithContentsTransform(contentsTransform quartzcore.CATransform3D) *MaterialProperty {
-	x.inner.SetContentsTransform(contentsTransform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsTransform:"), contentsTransform)
 	return x
 }
 
-// The wrapping behavior for the S texture coordinate.
-//
-// WithWrapS sets the wrapS property and returns the receiver for chaining.
-func (x *MaterialProperty) WithWrapS(wrapS SCNWrapMode) *MaterialProperty {
-	x.inner.SetWrapS(raw.SCNWrapMode(wrapS))
+// WithWrapS the wrapping behavior for the S texture coordinate.
+func (x *MaterialProperty) WithWrapS(wrapS WrapMode) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapS:"), wrapS)
 	return x
 }
 
-// The wrapping behavior for the T texture coordinate.
-//
-// WithWrapT sets the wrapT property and returns the receiver for chaining.
-func (x *MaterialProperty) WithWrapT(wrapT SCNWrapMode) *MaterialProperty {
-	x.inner.SetWrapT(raw.SCNWrapMode(wrapT))
+// WithWrapT the wrapping behavior for the T texture coordinate.
+func (x *MaterialProperty) WithWrapT(wrapT WrapMode) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapT:"), wrapT)
 	return x
 }
 
-// The source of texture coordinates for mapping the material property’s image contents.
-//
-// WithMappingChannel sets the mappingChannel property and returns the receiver for chaining.
+// WithMappingChannel the source of texture coordinates for mapping the material property’s image contents.
 func (x *MaterialProperty) WithMappingChannel(mappingChannel int) *MaterialProperty {
-	x.inner.SetMappingChannel(mappingChannel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMappingChannel:"), mappingChannel)
 	return x
 }
 
-// @property textureComponents @abstract Specifies the texture components to sample in the shader. Defaults to SCNColorMaskRed for displacement property, and to SCNColorMaskAll for other properties. @discussion Use this property to when using a texture that combine multiple informations in the different texture components. For example if you pack the roughness in red and metalness in blue etc... You can specify what component to use from the texture for this given material property. This property is only supported by Metal renderers.
-//
-// WithTextureComponents sets the textureComponents property and returns the receiver for chaining.
-func (x *MaterialProperty) WithTextureComponents(textureComponents SCNColorMask) *MaterialProperty {
-	x.inner.SetTextureComponents(raw.SCNColorMask(textureComponents))
+// WithTextureComponents specifies the texture components to sample in the shader. Defaults to SCNColorMaskRed for displacement property, and to SCNColorMaskAll for other properties. Use this property to when using a texture that combine multiple informations in the different texture components. For example if you pack the roughness in red and metalness in blue etc... You can specify what component to use from the texture for this given material property. This property is only supported by Metal renderers.
+func (x *MaterialProperty) WithTextureComponents(textureComponents ColorMask) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureComponents:"), textureComponents)
 	return x
 }
 
-// The amount of anisotropic texture filtering to be used when rendering the material property’s image contents.
-//
-// WithMaxAnisotropy sets the maxAnisotropy property and returns the receiver for chaining.
+// WithMaxAnisotropy the amount of anisotropic texture filtering to be used when rendering the material property’s image contents.
 func (x *MaterialProperty) WithMaxAnisotropy(maxAnisotropy float64) *MaterialProperty {
-	x.inner.SetMaxAnisotropy(maxAnisotropy)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAnisotropy:"), maxAnisotropy)
 	return x
 }
 
-// A color used to fill in areas of a material’s surface not covered by the material property’s image contents.
-//
-// WithBorderColor sets the borderColor property and returns the receiver for chaining.
-func (x *MaterialProperty) WithBorderColor(borderColor objc.ID) *MaterialProperty {
-	x.inner.SetBorderColor(borderColor)
+// WithBorderColor a color used to fill in areas of a material’s surface not covered by the material property’s image contents.
+func (x *MaterialProperty) WithBorderColor(borderColor obj.Object) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
-// @property contents @abstract Specifies the receiver's contents. This can be a color (NSColor, UIColor, CGColorRef), an image (NSImage, UIImage, CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene), a texture (SKTexture, id<MTLTexture> or GLKTextureInfo), or a floating value between 0 and 1 (NSNumber) for metalness and roughness properties. AVCaptureDevice is supported on iOS 11 and AVPlayer is supported on macOS 10.13, iOS 11 and tvOS 11. Animatable when set to a color. @discussion Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings. When a cube map is expected (e.g. SCNMaterial.reflective, SCNScene.background, SCNScene.lightingEnvironment) you can use 1. A horizontal strip image                          where `6 * image.height ==     image.width` 2. A vertical strip image                            where `    image.height == 6 * image.width` 3. A spherical projection image (latitude/longitude) where `2 * image.height ==     image.width` 4. A NSArray of 6 images. This array must contain images of the exact same dimensions, in the following order, in a left-handed coordinate system: +X, -X, +Y, -Y, +Z, -Z (or Right, Left, Top, Bottom, Front, Back).
-//
-// Contents calls the underlying Contents.
-func (x *MaterialProperty) Contents() objc.ID {
-	return x.inner.Contents()
+// Contents specifies the receiver's contents. This can be a color (NSColor, UIColor, CGColorRef), an image (NSImage, UIImage, CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene), a texture (SKTexture, id<MTLTexture> or GLKTextureInfo), or a floating value between 0 and 1 (NSNumber) for metalness and roughness properties. AVCaptureDevice is supported on iOS 11 and AVPlayer is supported on macOS 10.13, iOS 11 and tvOS 11. Animatable when set to a color. Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings. When a cube map is expected (e.g. SCNMaterial.reflective, SCNScene.background, SCNScene.lightingEnvironment) you can use 1. A horizontal strip image                          where `6 * image.height ==     image.width` 2. A vertical strip image                            where `    image.height == 6 * image.width` 3. A spherical projection image (latitude/longitude) where `2 * image.height ==     image.width` 4. A NSArray of 6 images. This array must contain images of the exact same dimensions, in the following order, in a left-handed coordinate system: +X, -X, +Y, -Y, +Z, -Z (or Right, Left, Top, Bottom, Front, Back).
+func (x *MaterialProperty) Contents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+	return obj.Wrap(_r)
 }
 
-// SetContents calls the underlying SetContents.
-func (x *MaterialProperty) SetContents(contents objc.ID) {
-	x.inner.SetContents(contents)
+// SetContents wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetContents(contents obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 }
 
-// @property intensity @abstract Determines the receiver's intensity. This intensity is used to modulate the properties in several ways. It dims the diffuse, specular and emission properties, it varies the bumpiness of the normal property and the filter property is blended with white. Default value is 1.0. Animatable.
-//
-// Intensity calls the underlying Intensity.
+// Intensity determines the receiver's intensity. This intensity is used to modulate the properties in several ways. It dims the diffuse, specular and emission properties, it varies the bumpiness of the normal property and the filter property is blended with white. Default value is 1.0. Animatable.
 func (x *MaterialProperty) Intensity() float64 {
-	return x.inner.Intensity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("intensity"))
+	return _r
 }
 
-// SetIntensity calls the underlying SetIntensity.
+// SetIntensity wraps the corresponding Objective-C method.
 func (x *MaterialProperty) SetIntensity(intensity float64) {
-	x.inner.SetIntensity(intensity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntensity:"), intensity)
 }
 
-// @property minificationFilter @abstract Specifies the filter type to use when rendering the contents (specified in the `contents' property). @discussion The minification filter is used when to reduce the size of image data. See above the list of available modes. Defaults to SCNFilterModeLinear.
-//
-// MinificationFilter calls the underlying MinificationFilter.
-func (x *MaterialProperty) MinificationFilter() SCNFilterMode {
-	return SCNFilterMode(x.inner.MinificationFilter())
+// MinificationFilter specifies the filter type to use when rendering the contents (specified in the `contents' property). The minification filter is used when to reduce the size of image data. See above the list of available modes. Defaults to SCNFilterModeLinear.
+func (x *MaterialProperty) MinificationFilter() FilterMode {
+	_r := objc.Send[FilterMode](objref.IDOf(x), objc.RegisterName("minificationFilter"))
+	return _r
 }
 
-// SetMinificationFilter calls the underlying SetMinificationFilter.
-func (x *MaterialProperty) SetMinificationFilter(minificationFilter SCNFilterMode) {
-	x.inner.SetMinificationFilter(raw.SCNFilterMode(minificationFilter))
+// SetMinificationFilter wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetMinificationFilter(minificationFilter FilterMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), minificationFilter)
 }
 
-// @property magnificationFilter @abstract Specifies the filter type to use when rendering the the contents (specified in the `contents' property). @discussion The magnification filter is used when to increase the size of image data. See above the list of available modes. Defaults to SCNFilterModeLinear.
-//
-// MagnificationFilter calls the underlying MagnificationFilter.
-func (x *MaterialProperty) MagnificationFilter() SCNFilterMode {
-	return SCNFilterMode(x.inner.MagnificationFilter())
+// MagnificationFilter specifies the filter type to use when rendering the the contents (specified in the `contents' property). The magnification filter is used when to increase the size of image data. See above the list of available modes. Defaults to SCNFilterModeLinear.
+func (x *MaterialProperty) MagnificationFilter() FilterMode {
+	_r := objc.Send[FilterMode](objref.IDOf(x), objc.RegisterName("magnificationFilter"))
+	return _r
 }
 
-// SetMagnificationFilter calls the underlying SetMagnificationFilter.
-func (x *MaterialProperty) SetMagnificationFilter(magnificationFilter SCNFilterMode) {
-	x.inner.SetMagnificationFilter(raw.SCNFilterMode(magnificationFilter))
+// SetMagnificationFilter wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetMagnificationFilter(magnificationFilter FilterMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), magnificationFilter)
 }
 
-// @property mipFilter @abstract Specifies the mipmap filter to use during minification. @discussion Defaults to SCNFilterModeNearest starting macOS 10.12, iOS 10, tvOS 10 and watchOS 3. Defaults to SCNFilterModeNone in previous versions.
-//
-// MipFilter calls the underlying MipFilter.
-func (x *MaterialProperty) MipFilter() SCNFilterMode {
-	return SCNFilterMode(x.inner.MipFilter())
+// MipFilter specifies the mipmap filter to use during minification. Defaults to SCNFilterModeNearest starting macOS 10.12, iOS 10, tvOS 10 and watchOS 3. Defaults to SCNFilterModeNone in previous versions.
+func (x *MaterialProperty) MipFilter() FilterMode {
+	_r := objc.Send[FilterMode](objref.IDOf(x), objc.RegisterName("mipFilter"))
+	return _r
 }
 
-// SetMipFilter calls the underlying SetMipFilter.
-func (x *MaterialProperty) SetMipFilter(mipFilter SCNFilterMode) {
-	x.inner.SetMipFilter(raw.SCNFilterMode(mipFilter))
+// SetMipFilter wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetMipFilter(mipFilter FilterMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipFilter:"), mipFilter)
 }
 
-// @property contentsTransform @abstract Determines the receiver's contents transform. Animatable.
-//
-// ContentsTransform calls the underlying ContentsTransform.
+// ContentsTransform determines the receiver's contents transform. Animatable.
 func (x *MaterialProperty) ContentsTransform() quartzcore.CATransform3D {
-	return x.inner.ContentsTransform()
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("contentsTransform"))
+	return _r
 }
 
-// SetContentsTransform calls the underlying SetContentsTransform.
+// SetContentsTransform wraps the corresponding Objective-C method.
 func (x *MaterialProperty) SetContentsTransform(contentsTransform quartzcore.CATransform3D) {
-	x.inner.SetContentsTransform(contentsTransform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsTransform:"), contentsTransform)
 }
 
-// @property wrapS @abstract Determines the receiver's wrap mode for the s texture coordinate. Defaults to SCNWrapModeClamp.
-//
-// WrapS calls the underlying WrapS.
-func (x *MaterialProperty) WrapS() SCNWrapMode {
-	return SCNWrapMode(x.inner.WrapS())
+// WrapS determines the receiver's wrap mode for the s texture coordinate. Defaults to SCNWrapModeClamp.
+func (x *MaterialProperty) WrapS() WrapMode {
+	_r := objc.Send[WrapMode](objref.IDOf(x), objc.RegisterName("wrapS"))
+	return _r
 }
 
-// SetWrapS calls the underlying SetWrapS.
-func (x *MaterialProperty) SetWrapS(wrapS SCNWrapMode) {
-	x.inner.SetWrapS(raw.SCNWrapMode(wrapS))
+// SetWrapS wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetWrapS(wrapS WrapMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapS:"), wrapS)
 }
 
-// @property wrapT @abstract Determines the receiver's wrap mode for the t texture coordinate. Defaults to SCNWrapModeClamp.
-//
-// WrapT calls the underlying WrapT.
-func (x *MaterialProperty) WrapT() SCNWrapMode {
-	return SCNWrapMode(x.inner.WrapT())
+// WrapT determines the receiver's wrap mode for the t texture coordinate. Defaults to SCNWrapModeClamp.
+func (x *MaterialProperty) WrapT() WrapMode {
+	_r := objc.Send[WrapMode](objref.IDOf(x), objc.RegisterName("wrapT"))
+	return _r
 }
 
-// SetWrapT calls the underlying SetWrapT.
-func (x *MaterialProperty) SetWrapT(wrapT SCNWrapMode) {
-	x.inner.SetWrapT(raw.SCNWrapMode(wrapT))
+// SetWrapT wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetWrapT(wrapT WrapMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapT:"), wrapT)
 }
 
-// @property mappingChannel @abstract Determines the receiver's mapping channel. Defaults to 0. @discussion Geometries potentially have multiple sources of texture coordinates. Every source has a unique mapping channel index. The mapping channel allows to select which source of texture coordinates is used to map the content of the receiver.
-//
-// MappingChannel calls the underlying MappingChannel.
+// MappingChannel determines the receiver's mapping channel. Defaults to 0. Geometries potentially have multiple sources of texture coordinates. Every source has a unique mapping channel index. The mapping channel allows to select which source of texture coordinates is used to map the content of the receiver.
 func (x *MaterialProperty) MappingChannel() int {
-	return x.inner.MappingChannel()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mappingChannel"))
+	return _r
 }
 
-// SetMappingChannel calls the underlying SetMappingChannel.
+// SetMappingChannel wraps the corresponding Objective-C method.
 func (x *MaterialProperty) SetMappingChannel(mappingChannel int) {
-	x.inner.SetMappingChannel(mappingChannel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMappingChannel:"), mappingChannel)
 }
 
-// @property textureComponents @abstract Specifies the texture components to sample in the shader. Defaults to SCNColorMaskRed for displacement property, and to SCNColorMaskAll for other properties. @discussion Use this property to when using a texture that combine multiple informations in the different texture components. For example if you pack the roughness in red and metalness in blue etc... You can specify what component to use from the texture for this given material property. This property is only supported by Metal renderers.
-//
-// TextureComponents calls the underlying TextureComponents.
-func (x *MaterialProperty) TextureComponents() SCNColorMask {
-	return SCNColorMask(x.inner.TextureComponents())
+// TextureComponents specifies the texture components to sample in the shader. Defaults to SCNColorMaskRed for displacement property, and to SCNColorMaskAll for other properties. Use this property to when using a texture that combine multiple informations in the different texture components. For example if you pack the roughness in red and metalness in blue etc... You can specify what component to use from the texture for this given material property. This property is only supported by Metal renderers.
+func (x *MaterialProperty) TextureComponents() ColorMask {
+	_r := objc.Send[ColorMask](objref.IDOf(x), objc.RegisterName("textureComponents"))
+	return _r
 }
 
-// SetTextureComponents calls the underlying SetTextureComponents.
-func (x *MaterialProperty) SetTextureComponents(textureComponents SCNColorMask) {
-	x.inner.SetTextureComponents(raw.SCNColorMask(textureComponents))
+// SetTextureComponents wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetTextureComponents(textureComponents ColorMask) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureComponents:"), textureComponents)
 }
 
-// @property maxAnisotropy @abstract Specifies the receiver's max anisotropy. Defaults to MAXFLOAT. @discussion Anisotropic filtering reduces blur and preserves detail at extreme viewing angles.
-//
-// MaxAnisotropy calls the underlying MaxAnisotropy.
+// MaxAnisotropy specifies the receiver's max anisotropy. Defaults to MAXFLOAT. Anisotropic filtering reduces blur and preserves detail at extreme viewing angles.
 func (x *MaterialProperty) MaxAnisotropy() float64 {
-	return x.inner.MaxAnisotropy()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxAnisotropy"))
+	return _r
 }
 
-// SetMaxAnisotropy calls the underlying SetMaxAnisotropy.
+// SetMaxAnisotropy wraps the corresponding Objective-C method.
 func (x *MaterialProperty) SetMaxAnisotropy(maxAnisotropy float64) {
-	x.inner.SetMaxAnisotropy(maxAnisotropy)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAnisotropy:"), maxAnisotropy)
 }
 
-// BorderColor calls the underlying BorderColor.
-func (x *MaterialProperty) BorderColor() objc.ID {
-	return x.inner.BorderColor()
+// BorderColor wraps the corresponding Objective-C method.
+func (x *MaterialProperty) BorderColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+	return obj.Wrap(_r)
 }
 
-// SetBorderColor calls the underlying SetBorderColor.
-func (x *MaterialProperty) SetBorderColor(borderColor objc.ID) {
-	x.inner.SetBorderColor(borderColor)
+// SetBorderColor wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetBorderColor(borderColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
 // MaterialPropertyable is the interface implemented by [MaterialProperty], for mocking and DI.
 type MaterialPropertyable interface {
-	Unwrap() *raw.SCNMaterialProperty
-	WithContents(contents objc.ID) *MaterialProperty
+	obj.Object
+	WithContents(contents obj.Object) *MaterialProperty
 	WithIntensity(intensity float64) *MaterialProperty
-	WithMinificationFilter(minificationFilter SCNFilterMode) *MaterialProperty
-	WithMagnificationFilter(magnificationFilter SCNFilterMode) *MaterialProperty
-	WithMipFilter(mipFilter SCNFilterMode) *MaterialProperty
+	WithMinificationFilter(minificationFilter FilterMode) *MaterialProperty
+	WithMagnificationFilter(magnificationFilter FilterMode) *MaterialProperty
+	WithMipFilter(mipFilter FilterMode) *MaterialProperty
 	WithContentsTransform(contentsTransform quartzcore.CATransform3D) *MaterialProperty
-	WithWrapS(wrapS SCNWrapMode) *MaterialProperty
-	WithWrapT(wrapT SCNWrapMode) *MaterialProperty
+	WithWrapS(wrapS WrapMode) *MaterialProperty
+	WithWrapT(wrapT WrapMode) *MaterialProperty
 	WithMappingChannel(mappingChannel int) *MaterialProperty
-	WithTextureComponents(textureComponents SCNColorMask) *MaterialProperty
+	WithTextureComponents(textureComponents ColorMask) *MaterialProperty
 	WithMaxAnisotropy(maxAnisotropy float64) *MaterialProperty
-	WithBorderColor(borderColor objc.ID) *MaterialProperty
-	Contents() objc.ID
-	SetContents(contents objc.ID)
+	WithBorderColor(borderColor obj.Object) *MaterialProperty
+	Contents() obj.Object
+	SetContents(contents obj.Object)
 	Intensity() float64
 	SetIntensity(intensity float64)
-	MinificationFilter() SCNFilterMode
-	SetMinificationFilter(minificationFilter SCNFilterMode)
-	MagnificationFilter() SCNFilterMode
-	SetMagnificationFilter(magnificationFilter SCNFilterMode)
-	MipFilter() SCNFilterMode
-	SetMipFilter(mipFilter SCNFilterMode)
+	MinificationFilter() FilterMode
+	SetMinificationFilter(minificationFilter FilterMode)
+	MagnificationFilter() FilterMode
+	SetMagnificationFilter(magnificationFilter FilterMode)
+	MipFilter() FilterMode
+	SetMipFilter(mipFilter FilterMode)
 	ContentsTransform() quartzcore.CATransform3D
 	SetContentsTransform(contentsTransform quartzcore.CATransform3D)
-	WrapS() SCNWrapMode
-	SetWrapS(wrapS SCNWrapMode)
-	WrapT() SCNWrapMode
-	SetWrapT(wrapT SCNWrapMode)
+	WrapS() WrapMode
+	SetWrapS(wrapS WrapMode)
+	WrapT() WrapMode
+	SetWrapT(wrapT WrapMode)
 	MappingChannel() int
 	SetMappingChannel(mappingChannel int)
-	TextureComponents() SCNColorMask
-	SetTextureComponents(textureComponents SCNColorMask)
+	TextureComponents() ColorMask
+	SetTextureComponents(textureComponents ColorMask)
 	MaxAnisotropy() float64
 	SetMaxAnisotropy(maxAnisotropy float64)
-	BorderColor() objc.ID
-	SetBorderColor(borderColor objc.ID)
+	BorderColor() obj.Object
+	SetBorderColor(borderColor obj.Object)
 }
 
 var _ MaterialPropertyable = (*MaterialProperty)(nil)

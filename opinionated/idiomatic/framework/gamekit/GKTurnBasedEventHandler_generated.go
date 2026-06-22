@@ -5,63 +5,96 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.
+// TurnBasedEventHandler is an idiomatic wrapper over the Objective-C class GKTurnBasedEventHandler.
 //
-// TurnBasedEventHandler wraps [raw.GKTurnBasedEventHandler] with a fluent Go API.
+// The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.
 type TurnBasedEventHandler struct {
-	inner *raw.GKTurnBasedEventHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKTurnBasedEventHandler].
-func (x *TurnBasedEventHandler) Unwrap() *raw.GKTurnBasedEventHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TurnBasedEventHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// TurnBasedEventHandlerFromID adopts an existing object pointer as a TurnBasedEventHandler (nil for 0).
+// TurnBasedEventHandlerFromID adopts an existing Objective-C object as a TurnBasedEventHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func TurnBasedEventHandlerFromID(id objc.ID) *TurnBasedEventHandler {
 	if id == 0 {
 		return nil
 	}
-	return &TurnBasedEventHandler{inner: raw.GKTurnBasedEventHandlerFromID(id)}
-}
-
-// NewTurnBasedEventHandler creates a new [TurnBasedEventHandler].
-func NewTurnBasedEventHandler() *TurnBasedEventHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedEventHandler")), objc.RegisterName("new"))
-	return &TurnBasedEventHandler{inner: raw.GKTurnBasedEventHandlerFromID(_id)}
-}
-
-// The delegate for the event handler.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TurnBasedEventHandler) WithDelegate(delegate *foundation.NSObject) *TurnBasedEventHandler {
-	x.inner.SetDelegate(delegate)
+	x := &TurnBasedEventHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *TurnBasedEventHandler) Delegate() *foundation.NSObject {
-	return x.inner.Delegate()
+// turnBasedEventHandlerAdopt wraps an Objective-C object that this code just created as a
+// TurnBasedEventHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func turnBasedEventHandlerAdopt(id objc.ID) *TurnBasedEventHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &TurnBasedEventHandler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *TurnBasedEventHandler) SetDelegate(delegate *foundation.NSObject) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *TurnBasedEventHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TurnBasedEventHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TurnBasedEventHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedEventHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTurnBasedEventHandler creates a new TurnBasedEventHandler.
+func NewTurnBasedEventHandler() *TurnBasedEventHandler {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedEventHandler")), objc.RegisterName("new"))
+	return turnBasedEventHandlerAdopt(_id)
+}
+
+// WithDelegate the delegate for the event handler.
+func (x *TurnBasedEventHandler) WithDelegate(delegate obj.Object) *TurnBasedEventHandler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return x
+}
+
+// Delegate wraps the corresponding Objective-C method.
+func (x *TurnBasedEventHandler) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
+}
+
+// SetDelegate wraps the corresponding Objective-C method.
+func (x *TurnBasedEventHandler) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // TurnBasedEventHandlerable is the interface implemented by [TurnBasedEventHandler], for mocking and DI.
 type TurnBasedEventHandlerable interface {
-	Unwrap() *raw.GKTurnBasedEventHandler
-	WithDelegate(delegate *foundation.NSObject) *TurnBasedEventHandler
-	Delegate() *foundation.NSObject
-	SetDelegate(delegate *foundation.NSObject)
+	obj.Object
+	WithDelegate(delegate obj.Object) *TurnBasedEventHandler
+	Delegate() obj.Object
+	SetDelegate(delegate obj.Object)
 }
 
 var _ TurnBasedEventHandlerable = (*TurnBasedEventHandler)(nil)

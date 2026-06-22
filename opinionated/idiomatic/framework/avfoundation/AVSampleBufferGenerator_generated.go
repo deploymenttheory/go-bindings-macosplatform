@@ -5,81 +5,115 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that creates sample buffers.
+// SampleBufferGenerator is an idiomatic wrapper over the Objective-C class AVSampleBufferGenerator.
 //
-// SampleBufferGenerator wraps [raw.AVSampleBufferGenerator] with a fluent Go API.
+// An object that creates sample buffers.
 type SampleBufferGenerator struct {
-	inner *raw.AVSampleBufferGenerator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSampleBufferGenerator].
-func (x *SampleBufferGenerator) Unwrap() *raw.AVSampleBufferGenerator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleBufferGenerator) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleBufferGeneratorFromID adopts an existing object pointer as a SampleBufferGenerator (nil for 0).
+// SampleBufferGeneratorFromID adopts an existing Objective-C object as a SampleBufferGenerator
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleBufferGeneratorFromID(id objc.ID) *SampleBufferGenerator {
 	if id == 0 {
 		return nil
 	}
-	return &SampleBufferGenerator{inner: raw.AVSampleBufferGeneratorFromID(id)}
+	x := &SampleBufferGenerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new sample buffer generator.
-//
-// NewSampleBufferGeneratorWithAssetTimebase creates a new [SampleBufferGenerator].
-func NewSampleBufferGeneratorWithAssetTimebase(asset *raw.AVAsset, timebase unsafe.Pointer) *SampleBufferGenerator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleBufferGenerator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:timebase:"), asset.Ptr(), timebase)
-	return &SampleBufferGenerator{inner: raw.AVSampleBufferGeneratorFromID(_id)}
-}
-
-// Creates a sample buffer, and attempts to load its data asynchronously if requested.
-//
-// CreateSampleBufferForRequestError calls the underlying CreateSampleBufferForRequestError.
-func (x *SampleBufferGenerator) CreateSampleBufferForRequestError(request *raw.AVSampleBufferRequest) (unsafe.Pointer, error) {
-	return x.inner.CreateSampleBufferForRequestError(request)
-}
-
-// Creates a new sample buffer reference for the specified buffer request.
-//
-// CreateSampleBufferForRequest calls the underlying CreateSampleBufferForRequest.
-func (x *SampleBufferGenerator) CreateSampleBufferForRequest(request *raw.AVSampleBufferRequest) unsafe.Pointer {
-	return x.inner.CreateSampleBufferForRequest(request)
-}
-
-// Creates a batch object to handle generating multiple sample buffers.
-//
-// MakeBatch calls the underlying MakeBatch.
-func (x *SampleBufferGenerator) MakeBatch() *SampleBufferGeneratorBatch {
-	_r := x.inner.MakeBatch()
-	if _r == nil {
+// sampleBufferGeneratorAdopt wraps an Objective-C object that this code just created as a
+// SampleBufferGenerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleBufferGeneratorAdopt(id objc.ID) *SampleBufferGenerator {
+	if id == 0 {
 		return nil
 	}
-	return &SampleBufferGeneratorBatch{inner: _r}
+	x := &SampleBufferGenerator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a sample buffer and attempts to defer I/O for its data.
-//
-// CreateSampleBufferForRequestAddingToBatchError calls the underlying CreateSampleBufferForRequestAddingToBatchError.
-func (x *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *raw.AVSampleBufferRequest, batch *raw.AVSampleBufferGeneratorBatch) (unsafe.Pointer, error) {
-	return x.inner.CreateSampleBufferForRequestAddingToBatchError(request, batch)
+// Description returns the object's -description text.
+func (x *SampleBufferGenerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleBufferGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleBufferGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferGenerator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleBufferGeneratorWithAssetTimebase creates a new sample buffer generator.
+func NewSampleBufferGeneratorWithAssetTimebase(asset *Asset, timebase obj.Object) *SampleBufferGenerator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferGenerator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:timebase:"), objref.IDOf(asset), objref.IDOf(timebase))
+	return sampleBufferGeneratorAdopt(_id)
+}
+
+// CreateSampleBufferForRequestError creates a sample buffer, and attempts to load its data asynchronously if requested.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequestError(request *SampleBufferRequest) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSampleBufferForRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
+}
+
+// CreateSampleBufferForRequest creates a new sample buffer reference for the specified buffer request.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequest(request *SampleBufferRequest) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSampleBufferForRequest:"), objref.IDOf(request))
+	return obj.Wrap(_r)
+}
+
+// MakeBatch creates a batch object to handle generating multiple sample buffers.
+func (x *SampleBufferGenerator) MakeBatch() *SampleBufferGeneratorBatch {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeBatch"))
+	return SampleBufferGeneratorBatchFromID(_r)
+}
+
+// CreateSampleBufferForRequestAddingToBatchError creates a sample buffer and attempts to defer I/O for its data.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSampleBufferForRequest:addingToBatch:error:"), objref.IDOf(request), objref.IDOf(batch), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // SampleBufferGeneratorable is the interface implemented by [SampleBufferGenerator], for mocking and DI.
 type SampleBufferGeneratorable interface {
-	Unwrap() *raw.AVSampleBufferGenerator
-	CreateSampleBufferForRequestError(request *raw.AVSampleBufferRequest) (unsafe.Pointer, error)
-	CreateSampleBufferForRequest(request *raw.AVSampleBufferRequest) unsafe.Pointer
+	obj.Object
+	CreateSampleBufferForRequestError(request *SampleBufferRequest) (result obj.Object, err error)
+	CreateSampleBufferForRequest(request *SampleBufferRequest) obj.Object
 	MakeBatch() *SampleBufferGeneratorBatch
-	CreateSampleBufferForRequestAddingToBatchError(request *raw.AVSampleBufferRequest, batch *raw.AVSampleBufferGeneratorBatch) (unsafe.Pointer, error)
+	CreateSampleBufferForRequestAddingToBatchError(request *SampleBufferRequest, batch *SampleBufferGeneratorBatch) (result obj.Object, err error)
 }
 
 var _ SampleBufferGeneratorable = (*SampleBufferGenerator)(nil)

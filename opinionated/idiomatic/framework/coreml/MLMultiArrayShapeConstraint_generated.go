@@ -5,67 +5,101 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The lists of shapes or ranges of shapes that constrain a multiarray feature.
+// MultiArrayShapeConstraint is an idiomatic wrapper over the Objective-C class MLMultiArrayShapeConstraint.
 //
-// MultiArrayShapeConstraint wraps [raw.MLMultiArrayShapeConstraint] with a fluent Go API.
+// The lists of shapes or ranges of shapes that constrain a multiarray feature.
 type MultiArrayShapeConstraint struct {
-	inner *raw.MLMultiArrayShapeConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLMultiArrayShapeConstraint].
-func (x *MultiArrayShapeConstraint) Unwrap() *raw.MLMultiArrayShapeConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiArrayShapeConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiArrayShapeConstraintFromID adopts an existing object pointer as a MultiArrayShapeConstraint (nil for 0).
+// MultiArrayShapeConstraintFromID adopts an existing Objective-C object as a MultiArrayShapeConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiArrayShapeConstraintFromID(id objc.ID) *MultiArrayShapeConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &MultiArrayShapeConstraint{inner: raw.MLMultiArrayShapeConstraintFromID(id)}
+	x := &MultiArrayShapeConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMultiArrayShapeConstraint creates a new [MultiArrayShapeConstraint].
-func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMultiArrayShapeConstraint")), objc.RegisterName("new"))
-	return &MultiArrayShapeConstraint{inner: raw.MLMultiArrayShapeConstraintFromID(_id)}
-}
-
-// Type calls the underlying Type.
-func (x *MultiArrayShapeConstraint) Type() MLMultiArrayShapeConstraintType {
-	return MLMultiArrayShapeConstraintType(x.inner.Type())
-}
-
-// SizeRangeForDimension returns the collection as a Go slice.
-func (x *MultiArrayShapeConstraint) SizeRangeForDimension() []*foundation.NSValue {
-	arr := x.inner.SizeRangeForDimension()
-	if arr == nil {
+// multiArrayShapeConstraintAdopt wraps an Objective-C object that this code just created as a
+// MultiArrayShapeConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiArrayShapeConstraintAdopt(id objc.ID) *MultiArrayShapeConstraint {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+	x := &MultiArrayShapeConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// EnumeratedShapes calls the underlying EnumeratedShapes.
-func (x *MultiArrayShapeConstraint) EnumeratedShapes() *foundation.NSArray[objc.ID] {
-	return x.inner.EnumeratedShapes()
+// Description returns the object's -description text.
+func (x *MultiArrayShapeConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiArrayShapeConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiArrayShapeConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MultiArrayShapeConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMultiArrayShapeConstraint creates a new MultiArrayShapeConstraint.
+func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLMultiArrayShapeConstraint")), objc.RegisterName("new"))
+	return multiArrayShapeConstraintAdopt(_id)
+}
+
+// Type wraps the corresponding Objective-C method.
+func (x *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
+	_r := objc.Send[MultiArrayShapeConstraintType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
+
+// SizeRangeForDimension wraps the corresponding Objective-C method.
+//
+// SizeRangeForDimension returns the collection as a Go slice.
+func (x *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeRangeForDimension"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// EnumeratedShapes wraps the corresponding Objective-C method.
+//
+// EnumeratedShapes returns the collection as a Go slice.
+func (x *MultiArrayShapeConstraint) EnumeratedShapes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedShapes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MultiArrayShapeConstraintable is the interface implemented by [MultiArrayShapeConstraint], for mocking and DI.
 type MultiArrayShapeConstraintable interface {
-	Unwrap() *raw.MLMultiArrayShapeConstraint
-	Type() MLMultiArrayShapeConstraintType
-	SizeRangeForDimension() []*foundation.NSValue
-	EnumeratedShapes() *foundation.NSArray[objc.ID]
+	obj.Object
+	Type() MultiArrayShapeConstraintType
+	SizeRangeForDimension() []obj.Object
+	EnumeratedShapes() []obj.Object
 }
 
 var _ MultiArrayShapeConstraintable = (*MultiArrayShapeConstraint)(nil)

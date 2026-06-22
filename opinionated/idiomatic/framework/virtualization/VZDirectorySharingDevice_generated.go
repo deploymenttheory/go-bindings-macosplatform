@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class that represents a directory sharing device in a VM.
+// DirectorySharingDevice is an idiomatic wrapper over the Objective-C class VZDirectorySharingDevice.
 //
-// DirectorySharingDevice wraps [raw.VZDirectorySharingDevice] with a fluent Go API.
+// DirectorySharingDevice is an abstract base — you do not construct it directly. Construct one of [VirtioFileSystemDevice] and pass it where a DirectorySharingDevice is accepted.
+//
+// The base class that represents a directory sharing device in a VM.
 type DirectorySharingDevice struct {
-	inner *raw.VZDirectorySharingDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZDirectorySharingDevice].
-func (x *DirectorySharingDevice) Unwrap() *raw.VZDirectorySharingDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectorySharingDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectorySharingDeviceFromID adopts an existing object pointer as a DirectorySharingDevice (nil for 0).
+// DirectorySharingDeviceFromID adopts an existing Objective-C object as a DirectorySharingDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectorySharingDeviceFromID(id objc.ID) *DirectorySharingDevice {
 	if id == 0 {
 		return nil
 	}
-	return &DirectorySharingDevice{inner: raw.VZDirectorySharingDeviceFromID(id)}
+	x := &DirectorySharingDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDirectorySharingDevice creates a new [DirectorySharingDevice].
-func NewDirectorySharingDevice() *DirectorySharingDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDirectorySharingDevice")), objc.RegisterName("new"))
-	return &DirectorySharingDevice{inner: raw.VZDirectorySharingDeviceFromID(_id)}
+// directorySharingDeviceAdopt wraps an Objective-C object that this code just created as a
+// DirectorySharingDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directorySharingDeviceAdopt(id objc.ID) *DirectorySharingDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectorySharingDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DirectorySharingDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice {
-	return x.inner
+// Description returns the object's -description text.
+func (x *DirectorySharingDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectorySharingDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectorySharingDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectorySharingDevice) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectorySharingDeviceable is the interface implemented by [DirectorySharingDevice], for mocking and DI.
 type DirectorySharingDeviceable interface {
-	Unwrap() *raw.VZDirectorySharingDevice
+	obj.Object
 }
 
 var _ DirectorySharingDeviceable = (*DirectorySharingDevice)(nil)
+
+// isDirectorySharingDevice marks DirectorySharingDevice — and, by embedding promotion, its
+// subclasses — as a member of the DirectorySharingDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectorySharingDevice) isDirectorySharingDevice() {}
+
+var _ DirectorySharingDeviceProvider = (*DirectorySharingDevice)(nil)

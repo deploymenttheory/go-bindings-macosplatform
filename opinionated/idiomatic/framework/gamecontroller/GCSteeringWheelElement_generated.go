@@ -5,46 +5,82 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The element that represents the wheel of a racing wheel controller.
+// SteeringWheelElement is an idiomatic wrapper over the Objective-C class GCSteeringWheelElement.
 //
-// SteeringWheelElement wraps [raw.GCSteeringWheelElement] with a fluent Go API.
+// The element that represents the wheel of a racing wheel controller.
 type SteeringWheelElement struct {
-	inner *raw.GCSteeringWheelElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCSteeringWheelElement].
-func (x *SteeringWheelElement) Unwrap() *raw.GCSteeringWheelElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SteeringWheelElement) ID() objc.ID { return x.inner.Ptr() }
-
-// SteeringWheelElementFromID adopts an existing object pointer as a SteeringWheelElement (nil for 0).
+// SteeringWheelElementFromID adopts an existing Objective-C object as a SteeringWheelElement
+// (nil for 0), retaining it and registering a release finalizer.
 func SteeringWheelElementFromID(id objc.ID) *SteeringWheelElement {
 	if id == 0 {
 		return nil
 	}
-	return &SteeringWheelElement{inner: raw.GCSteeringWheelElementFromID(id)}
+	x := &SteeringWheelElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSteeringWheelElement creates a new [SteeringWheelElement].
+// steeringWheelElementAdopt wraps an Objective-C object that this code just created as a
+// SteeringWheelElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func steeringWheelElementAdopt(id objc.ID) *SteeringWheelElement {
+	if id == 0 {
+		return nil
+	}
+	x := &SteeringWheelElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SteeringWheelElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SteeringWheelElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SteeringWheelElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SteeringWheelElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSteeringWheelElement creates a new SteeringWheelElement.
 func NewSteeringWheelElement() *SteeringWheelElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCSteeringWheelElement")), objc.RegisterName("new"))
-	return &SteeringWheelElement{inner: raw.GCSteeringWheelElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCSteeringWheelElement")), objc.RegisterName("new"))
+	return steeringWheelElementAdopt(_id)
 }
 
-// MaximumDegreesOfRotation calls the underlying MaximumDegreesOfRotation.
+// MaximumDegreesOfRotation wraps the corresponding Objective-C method.
 func (x *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
-	return x.inner.MaximumDegreesOfRotation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumDegreesOfRotation"))
+	return _r
 }
 
 // SteeringWheelElementable is the interface implemented by [SteeringWheelElement], for mocking and DI.
 type SteeringWheelElementable interface {
-	Unwrap() *raw.GCSteeringWheelElement
+	obj.Object
 	MaximumDegreesOfRotation() float32
 }
 

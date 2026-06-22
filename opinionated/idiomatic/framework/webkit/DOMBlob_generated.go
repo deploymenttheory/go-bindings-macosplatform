@@ -5,51 +5,66 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMBlob wraps [raw.DOMBlob] with a fluent Go API.
+// DOMBlob is an idiomatic wrapper over the Objective-C class DOMBlob.
+//
+// DOMBlob is an abstract base — you do not construct it directly. Construct one of [DOMFile] and pass it where a DOMBlob is accepted.
 type DOMBlob struct {
-	inner *raw.DOMBlob
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMBlob].
-func (x *DOMBlob) Unwrap() *raw.DOMBlob { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMBlob) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMBlobFromID adopts an existing object pointer as a DOMBlob (nil for 0).
+// DOMBlobFromID adopts an existing Objective-C object as a DOMBlob
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMBlobFromID(id objc.ID) *DOMBlob {
 	if id == 0 {
 		return nil
 	}
-	return &DOMBlob{inner: raw.DOMBlobFromID(id)}
+	x := &DOMBlob{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMBlob creates a new [DOMBlob].
-func NewDOMBlob() *DOMBlob {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMBlob")), objc.RegisterName("new"))
-	return &DOMBlob{inner: raw.DOMBlobFromID(_id)}
+// dOMBlobAdopt wraps an Objective-C object that this code just created as a
+// DOMBlob (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMBlobAdopt(id objc.ID) *DOMBlob {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMBlob{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Size calls the underlying Size.
+// Size wraps the corresponding Objective-C method.
 func (x *DOMBlob) Size() uint64 {
-	return x.inner.Size()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
-
-func (x *DOMBlob) asDOMBlob() *raw.DOMBlob { return x.inner }
-
-func (x *DOMBlob) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMBlob) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
 
 // DOMBlobable is the interface implemented by [DOMBlob], for mocking and DI.
 type DOMBlobable interface {
-	Unwrap() *raw.DOMBlob
+	obj.Object
 	Size() uint64
 }
 
 var _ DOMBlobable = (*DOMBlob)(nil)
+
+// isDOMBlob marks DOMBlob — and, by embedding promotion, its
+// subclasses — as a member of the DOMBlob hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMBlob) isDOMBlob() {}
+
+var _ DOMBlobProvider = (*DOMBlob)(nil)
+
+var _ DOMObjectProvider = (*DOMBlob)(nil)
+
+var _ WebScriptObjectProvider = (*DOMBlob)(nil)

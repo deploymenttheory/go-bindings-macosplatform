@@ -5,82 +5,105 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An NSData subclass that represents a UUID as defined in the Bluetooth SDP spec.
+// IOBluetoothSDPUUID is an idiomatic wrapper over the Objective-C class IOBluetoothSDPUUID.
 //
-// IOBluetoothSDPUUID wraps [raw.IOBluetoothSDPUUID] with a fluent Go API.
+// An NSData subclass that represents a UUID as defined in the Bluetooth SDP spec.
 type IOBluetoothSDPUUID struct {
-	inner *raw.IOBluetoothSDPUUID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothSDPUUID].
-func (x *IOBluetoothSDPUUID) Unwrap() *raw.IOBluetoothSDPUUID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothSDPUUID) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothSDPUUIDFromID adopts an existing object pointer as a IOBluetoothSDPUUID (nil for 0).
+// IOBluetoothSDPUUIDFromID adopts an existing Objective-C object as a IOBluetoothSDPUUID
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothSDPUUIDFromID(id objc.ID) *IOBluetoothSDPUUID {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(id)}
+	x := &IOBluetoothSDPUUID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
-//
-// NewIOBluetoothSDPUUIDWithUUID16 creates a new [IOBluetoothSDPUUID].
-func NewIOBluetoothSDPUUIDWithUUID16(uuid16 uint16) *IOBluetoothSDPUUID {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID16:"), uuid16)
-	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(_id)}
-}
-
-// Creates a new 32-bit IOBluetoothSDPUUID with the given UUID32
-//
-// NewIOBluetoothSDPUUIDWithUUID32 creates a new [IOBluetoothSDPUUID].
-func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID32:"), uuid32)
-	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(_id)}
-}
-
-// Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
-//
-// GetSDPUUIDRef calls the underlying GetSDPUUIDRef.
-func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() unsafe.Pointer {
-	return x.inner.GetSDPUUIDRef()
-}
-
-// Returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
-//
-// GetUUIDWithLength calls the underlying GetUUIDWithLength.
-func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength uint) *IOBluetoothSDPUUID {
-	_r := x.inner.GetUUIDWithLength(newLength)
-	if _r == nil {
+// iOBluetoothSDPUUIDAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothSDPUUID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothSDPUUIDAdopt(id objc.ID) *IOBluetoothSDPUUID {
+	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothSDPUUID{inner: _r}
+	x := &IOBluetoothSDPUUID{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Compares the target IOBluetoothSDPUUID object with the given otherUUID object.
-//
-// IsEqualToUUID calls the underlying IsEqualToUUID.
-func (x *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *raw.IOBluetoothSDPUUID) bool {
-	return x.inner.IsEqualToUUID(otherUUID)
+// Description returns the object's -description text.
+func (x *IOBluetoothSDPUUID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothSDPUUID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothSDPUUID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOBluetoothSDPUUID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIOBluetoothSDPUUIDWithUUID16 initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
+func NewIOBluetoothSDPUUIDWithUUID16(uuid16 uint16) *IOBluetoothSDPUUID {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID16:"), uuid16)
+	return iOBluetoothSDPUUIDAdopt(_id)
+}
+
+// NewIOBluetoothSDPUUIDWithUUID32 creates a new 32-bit IOBluetoothSDPUUID with the given UUID32
+func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID32:"), uuid32)
+	return iOBluetoothSDPUUIDAdopt(_id)
+}
+
+// GetSDPUUIDRef returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSDPUUIDRef"))
+	return obj.Wrap(_r)
+}
+
+// GetUUIDWithLength returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
+func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUUIDWithLength:"), newLength)
+	return IOBluetoothSDPUUIDFromID(_r)
+}
+
+// IsEqualToUUID compares the target IOBluetoothSDPUUID object with the given otherUUID object.
+func (x *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToUUID:"), objref.IDOf(otherUUID))
+	return _r
 }
 
 // IOBluetoothSDPUUIDable is the interface implemented by [IOBluetoothSDPUUID], for mocking and DI.
 type IOBluetoothSDPUUIDable interface {
-	Unwrap() *raw.IOBluetoothSDPUUID
-	GetSDPUUIDRef() unsafe.Pointer
-	GetUUIDWithLength(newLength uint) *IOBluetoothSDPUUID
-	IsEqualToUUID(otherUUID *raw.IOBluetoothSDPUUID) bool
+	obj.Object
+	GetSDPUUIDRef() obj.Object
+	GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID
+	IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool
 }
 
 var _ IOBluetoothSDPUUIDable = (*IOBluetoothSDPUUID)(nil)

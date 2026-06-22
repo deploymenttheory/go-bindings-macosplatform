@@ -5,57 +5,72 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result that Core Data returns when executing a batch-insertion request.
+// BatchInsertResult is an idiomatic wrapper over the Objective-C class NSBatchInsertResult.
 //
-// BatchInsertResult wraps [raw.NSBatchInsertResult] with a fluent Go API.
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// The result that Core Data returns when executing a batch-insertion request.
 type BatchInsertResult struct {
-	inner *raw.NSBatchInsertResult
+	PersistentStoreResult
 }
 
-// Unwrap returns the underlying [raw.NSBatchInsertResult].
-func (x *BatchInsertResult) Unwrap() *raw.NSBatchInsertResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BatchInsertResult) ID() objc.ID { return x.inner.Ptr() }
-
-// BatchInsertResultFromID adopts an existing object pointer as a BatchInsertResult (nil for 0).
+// BatchInsertResultFromID adopts an existing Objective-C object as a BatchInsertResult
+// (nil for 0), retaining it and registering a release finalizer.
 func BatchInsertResultFromID(id objc.ID) *BatchInsertResult {
 	if id == 0 {
 		return nil
 	}
-	return &BatchInsertResult{inner: raw.NSBatchInsertResultFromID(id)}
+	x := &BatchInsertResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBatchInsertResult creates a new [BatchInsertResult].
+// batchInsertResultAdopt wraps an Objective-C object that this code just created as a
+// BatchInsertResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func batchInsertResultAdopt(id objc.ID) *BatchInsertResult {
+	if id == 0 {
+		return nil
+	}
+	x := &BatchInsertResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBatchInsertResult creates a new BatchInsertResult.
 func NewBatchInsertResult() *BatchInsertResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchInsertResult")), objc.RegisterName("new"))
-	return &BatchInsertResult{inner: raw.NSBatchInsertResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertResult")), objc.RegisterName("new"))
+	return batchInsertResultAdopt(_id)
 }
 
-// Result calls the underlying Result.
-func (x *BatchInsertResult) Result() objc.ID {
-	return x.inner.Result()
+// Result wraps the corresponding Objective-C method.
+func (x *BatchInsertResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+	return obj.Wrap(_r)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *BatchInsertResult) ResultType() NSBatchInsertRequestResultType {
-	return NSBatchInsertRequestResultType(x.inner.ResultType())
-}
-
-func (x *BatchInsertResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return &x.inner.NSPersistentStoreResult
+// ResultType wraps the corresponding Objective-C method.
+func (x *BatchInsertResult) ResultType() BatchInsertRequestResultType {
+	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
 // BatchInsertResultable is the interface implemented by [BatchInsertResult], for mocking and DI.
 type BatchInsertResultable interface {
-	Unwrap() *raw.NSBatchInsertResult
-	Result() objc.ID
-	ResultType() NSBatchInsertRequestResultType
+	obj.Object
+	Result() obj.Object
+	ResultType() BatchInsertRequestResultType
 }
 
 var _ BatchInsertResultable = (*BatchInsertResult)(nil)
+
+var _ PersistentStoreResultProvider = (*BatchInsertResult)(nil)

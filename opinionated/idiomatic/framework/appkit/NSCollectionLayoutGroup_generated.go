@@ -5,156 +5,118 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A container for a set of items that lays out the items along a path.
+// CollectionLayoutGroup is an idiomatic wrapper over the Objective-C class NSCollectionLayoutGroup.
 //
-// CollectionLayoutGroup wraps [raw.NSCollectionLayoutGroup] with a fluent Go API.
+// It embeds [CollectionLayoutItem], promoting that type's methods.
+//
+// A container for a set of items that lays out the items along a path.
 type CollectionLayoutGroup struct {
-	inner *raw.NSCollectionLayoutGroup
+	CollectionLayoutItem
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutGroup].
-func (x *CollectionLayoutGroup) Unwrap() *raw.NSCollectionLayoutGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutGroupFromID adopts an existing object pointer as a CollectionLayoutGroup (nil for 0).
+// CollectionLayoutGroupFromID adopts an existing Objective-C object as a CollectionLayoutGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutGroupFromID(id objc.ID) *CollectionLayoutGroup {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutGroup{inner: raw.NSCollectionLayoutGroupFromID(id)}
+	x := &CollectionLayoutGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutGroup creates a new [CollectionLayoutGroup].
+// collectionLayoutGroupAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutGroupAdopt(id objc.ID) *CollectionLayoutGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCollectionLayoutGroup creates a new CollectionLayoutGroup.
 func NewCollectionLayoutGroup() *CollectionLayoutGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutGroup")), objc.RegisterName("new"))
-	return &CollectionLayoutGroup{inner: raw.NSCollectionLayoutGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("new"))
+	return collectionLayoutGroupAdopt(_id)
 }
 
-// An array of the supplementary items that are anchored to the group.
-//
-// WithSupplementaryItems sets the collection, converting the Go slice to an NSArray.
+// WithSupplementaryItems an array of the supplementary items that are anchored to the group.
 func (x *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSupplementaryItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asCollectionLayoutSupplementaryItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSupplementaryItems(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v CollectionLayoutSupplementaryItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementaryItems:"), _arr)
 	return x
 }
 
-// The amount of space between the items in the group.
-//
-// WithInterItemSpacing sets the interItemSpacing property and returns the receiver for chaining.
+// WithInterItemSpacing the amount of space between the items in the group.
 func (x *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup {
-	x.inner.SetInterItemSpacing(interItemSpacing.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterItemSpacing:"), objref.IDOf(interItemSpacing))
 	return x
 }
 
-// The amount of space added around the content of the item to adjust its final size after its position is computed.
-//
-// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
-func (x *CollectionLayoutGroup) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup {
-	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
-	return x
-}
-
-// The amount of space added around the boundaries of the item between other items and this item’s container.
-//
-// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
 func (x *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
-	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
-// Returns a string with an ASCII representation of the group.
-//
-// VisualDescription calls the underlying VisualDescription.
+// VisualDescription returns a string with an ASCII representation of the group.
 func (x *CollectionLayoutGroup) VisualDescription() string {
-	_r := x.inner.VisualDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("visualDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSupplementaryItems calls the underlying SetSupplementaryItems.
-func (x *CollectionLayoutGroup) SetSupplementaryItems(supplementaryItems ...CollectionLayoutSupplementaryItemProvider) {
-	_ptrs := make([]objc.ID, len(supplementaryItems))
-	for _i, _v := range supplementaryItems {
-		_ptrs[_i] = _v.asCollectionLayoutSupplementaryItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetSupplementaryItems(_arg0)
+// SetSupplementaryItems wraps the corresponding Objective-C method.
+func (x *CollectionLayoutGroup) SetSupplementaryItems(supplementaryItems []*CollectionLayoutSupplementaryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementaryItems:"), purego.SliceToNSArray(supplementaryItems, func(_v *CollectionLayoutSupplementaryItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// InterItemSpacing calls the underlying InterItemSpacing.
+// InterItemSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutGroup) InterItemSpacing() *CollectionLayoutSpacing {
-	_r := x.inner.InterItemSpacing()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutSpacing{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interItemSpacing"))
+	return CollectionLayoutSpacingFromID(_r)
 }
 
-// SetInterItemSpacing calls the underlying SetInterItemSpacing.
-func (x *CollectionLayoutGroup) SetInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing) {
-	x.inner.SetInterItemSpacing(interItemSpacing)
+// SetInterItemSpacing wraps the corresponding Objective-C method.
+func (x *CollectionLayoutGroup) SetInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterItemSpacing:"), objref.IDOf(interItemSpacing))
 }
 
+// Subitems wraps the corresponding Objective-C method.
+//
 // Subitems returns the collection as a Go slice.
 func (x *CollectionLayoutGroup) Subitems() []*CollectionLayoutItem {
-	arr := x.inner.Subitems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutItem {
-		return &CollectionLayoutItem{inner: raw.NSCollectionLayoutItemFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *CollectionLayoutGroup) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
-	return &x.inner.NSCollectionLayoutItem
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subitems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutItem { return CollectionLayoutItemFromID(_id) })
 }
 
 // CollectionLayoutGroupable is the interface implemented by [CollectionLayoutGroup], for mocking and DI.
 type CollectionLayoutGroupable interface {
-	Unwrap() *raw.NSCollectionLayoutGroup
+	obj.Object
 	WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup
 	WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup
-	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup
 	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup
 	VisualDescription() string
-	SetSupplementaryItems(supplementaryItems ...CollectionLayoutSupplementaryItemProvider)
+	SetSupplementaryItems(supplementaryItems []*CollectionLayoutSupplementaryItem)
 	InterItemSpacing() *CollectionLayoutSpacing
-	SetInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing)
+	SetInterItemSpacing(interItemSpacing *CollectionLayoutSpacing)
 	Subitems() []*CollectionLayoutItem
 }
 
 var _ CollectionLayoutGroupable = (*CollectionLayoutGroup)(nil)
+
+var _ CollectionLayoutItemProvider = (*CollectionLayoutGroup)(nil)

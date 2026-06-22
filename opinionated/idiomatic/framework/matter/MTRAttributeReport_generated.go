@@ -5,74 +5,95 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRAttributeReport wraps [raw.MTRAttributeReport] with a fluent Go API.
+// MTRAttributeReport is an idiomatic wrapper over the Objective-C class MTRAttributeReport.
 type MTRAttributeReport struct {
-	inner *raw.MTRAttributeReport
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAttributeReport].
-func (x *MTRAttributeReport) Unwrap() *raw.MTRAttributeReport { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAttributeReport) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAttributeReportFromID adopts an existing object pointer as a MTRAttributeReport (nil for 0).
+// MTRAttributeReportFromID adopts an existing Objective-C object as a MTRAttributeReport
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAttributeReportFromID(id objc.ID) *MTRAttributeReport {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAttributeReport{inner: raw.MTRAttributeReportFromID(id)}
+	x := &MTRAttributeReport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRAttributeReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an attribute response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/attribute combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
-//
-// NewMTRAttributeReportWithResponseValueError creates a new [MTRAttributeReport].
-func NewMTRAttributeReportWithResponseValueError(responseValue purego.IDer) (*MTRAttributeReport, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeReport")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRAttributeReport{inner: raw.MTRAttributeReportFromID(_id)}, nil
-}
-
-// Path calls the underlying Path.
-func (x *MTRAttributeReport) Path() *MTRAttributePath {
-	_r := x.inner.Path()
-	if _r == nil {
+// mTRAttributeReportAdopt wraps an Objective-C object that this code just created as a
+// MTRAttributeReport (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAttributeReportAdopt(id objc.ID) *MTRAttributeReport {
+	if id == 0 {
 		return nil
 	}
-	return &MTRAttributePath{inner: _r}
+	x := &MTRAttributeReport{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// value will be nil in the following cases: * There was an error.  In this case, "error" will not be nil. * The attribute is nullable and the value of the attribute is null. If value is not nil, the actual type of value will depend on the schema-defined (typically defined in the Matter specification) type of the attribute as follows: * list: NSArray of whatever type the list entries are. * struct: The corresponding structure interface defined by Matter.framework * octet string: NSData * string: NSString * discrete/analog types: NSNumber Derived types (in the Matter specification sense) are represented the same as the base type, except for "string" (which is a derived type of "octet string" in the specification).
-//
-// Value calls the underlying Value.
-func (x *MTRAttributeReport) Value() objc.ID {
-	return x.inner.Value()
+// Description returns the object's -description text.
+func (x *MTRAttributeReport) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// If this specific path resulted in an error, the error (in the MTRInteractionErrorDomain or MTRErrorDomain) that corresponds to this path.
-//
-// Error calls the underlying Error.
-func (x *MTRAttributeReport) Error() unsafe.Pointer {
-	return x.inner.Error()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAttributeReport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAttributeReport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAttributeReport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAttributeReportWithResponseValueError initialize an MTRAttributeReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an attribute response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/attribute combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
+func NewMTRAttributeReportWithResponseValueError(responseValue obj.Object) (result *MTRAttributeReport, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAttributeReport")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRAttributeReportAdopt(_id), nil
+}
+
+// Path wraps the corresponding Objective-C method.
+func (x *MTRAttributeReport) Path() *MTRAttributePath {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return MTRAttributePathFromID(_r)
+}
+
+// Value value will be nil in the following cases: * There was an error.  In this case, "error" will not be nil. * The attribute is nullable and the value of the attribute is null. If value is not nil, the actual type of value will depend on the schema-defined (typically defined in the Matter specification) type of the attribute as follows: * list: NSArray of whatever type the list entries are. * struct: The corresponding structure interface defined by Matter.framework * octet string: NSData * string: NSString * discrete/analog types: NSNumber Derived types (in the Matter specification sense) are represented the same as the base type, except for "string" (which is a derived type of "octet string" in the specification).
+func (x *MTRAttributeReport) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
 // MTRAttributeReportable is the interface implemented by [MTRAttributeReport], for mocking and DI.
 type MTRAttributeReportable interface {
-	Unwrap() *raw.MTRAttributeReport
+	obj.Object
 	Path() *MTRAttributePath
-	Value() objc.ID
-	Error() unsafe.Pointer
+	Value() obj.Object
 }
 
 var _ MTRAttributeReportable = (*MTRAttributeReport)(nil)

@@ -4,9 +4,10 @@
 
 package appkit
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-)
-
-// NSDirectionalEdgeInsets is a type alias for the raw NSDirectionalEdgeInsets value-type struct.
-type NSDirectionalEdgeInsets = raw.NSDirectionalEdgeInsets
+// The inset distances for views, taking the user interface layout direction into account.
+type NSDirectionalEdgeInsets struct {
+	Top      float64
+	Leading  float64
+	Bottom   float64
+	Trailing float64
+}

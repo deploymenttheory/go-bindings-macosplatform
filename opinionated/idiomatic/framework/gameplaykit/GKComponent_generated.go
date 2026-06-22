@@ -5,75 +5,93 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for creating objects that add specific gameplay functionality to an entity.
+// Component is an idiomatic wrapper over the Objective-C class GKComponent.
 //
-// Component wraps [raw.GKComponent] with a fluent Go API.
+// Component is an abstract base — you do not construct it directly. Construct one of [Agent], [SCNNodeComponent], [SKNodeComponent] and pass it where a Component is accepted.
+//
+// The abstract superclass for creating objects that add specific gameplay functionality to an entity.
 type Component struct {
-	inner *raw.GKComponent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKComponent].
-func (x *Component) Unwrap() *raw.GKComponent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Component) ID() objc.ID { return x.inner.Ptr() }
-
-// ComponentFromID adopts an existing object pointer as a Component (nil for 0).
+// ComponentFromID adopts an existing Objective-C object as a Component
+// (nil for 0), retaining it and registering a release finalizer.
 func ComponentFromID(id objc.ID) *Component {
 	if id == 0 {
 		return nil
 	}
-	return &Component{inner: raw.GKComponentFromID(id)}
+	x := &Component{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComponent creates a new [Component].
-func NewComponent() *Component {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKComponent")), objc.RegisterName("new"))
-	return &Component{inner: raw.GKComponentFromID(_id)}
-}
-
-// Performs any custom periodic actions defined by the component subclass.
-//
-// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
-func (x *Component) UpdateWithDeltaTime(seconds float64) {
-	x.inner.UpdateWithDeltaTime(seconds)
-}
-
-// Notifies the component that it has been assigned to an entity.
-//
-// DidAddToEntity calls the underlying DidAddToEntity.
-func (x *Component) DidAddToEntity() {
-	x.inner.DidAddToEntity()
-}
-
-// Notifies the component that it has been removed from an entity.
-//
-// WillRemoveFromEntity calls the underlying WillRemoveFromEntity.
-func (x *Component) WillRemoveFromEntity() {
-	x.inner.WillRemoveFromEntity()
-}
-
-// The entity that this component belongs to. Defaults to nil until the component is added to an entity.
-//
-// Entity calls the underlying Entity.
-func (x *Component) Entity() *Entity {
-	_r := x.inner.Entity()
-	if _r == nil {
+// componentAdopt wraps an Objective-C object that this code just created as a
+// Component (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func componentAdopt(id objc.ID) *Component {
+	if id == 0 {
 		return nil
 	}
-	return &Entity{inner: _r}
+	x := &Component{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *Component) asComponent() *raw.GKComponent { return x.inner }
+// Description returns the object's -description text.
+func (x *Component) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Component) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Component) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Component) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// UpdateWithDeltaTime performs any custom periodic actions defined by the component subclass.
+func (x *Component) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+}
+
+// DidAddToEntity notifies the component that it has been assigned to an entity.
+func (x *Component) DidAddToEntity() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAddToEntity"))
+}
+
+// WillRemoveFromEntity notifies the component that it has been removed from an entity.
+func (x *Component) WillRemoveFromEntity() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willRemoveFromEntity"))
+}
+
+// Entity the entity that this component belongs to. Defaults to nil until the component is added to an entity.
+func (x *Component) Entity() *Entity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+	return EntityFromID(_r)
+}
 
 // Componentable is the interface implemented by [Component], for mocking and DI.
 type Componentable interface {
-	Unwrap() *raw.GKComponent
+	obj.Object
 	UpdateWithDeltaTime(seconds float64)
 	DidAddToEntity()
 	WillRemoveFromEntity()
@@ -81,3 +99,10 @@ type Componentable interface {
 }
 
 var _ Componentable = (*Component)(nil)
+
+// isComponent marks Component — and, by embedding promotion, its
+// subclasses — as a member of the Component hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Component) isComponent() {}
+
+var _ ComponentProvider = (*Component)(nil)

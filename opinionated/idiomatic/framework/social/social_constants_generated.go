@@ -5,32 +5,31 @@
 package social
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/social"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SLServiceTypeTwitter returns the string constant SLServiceTypeTwitter as an objc.ID, for use as a dictionary key or selector argument.
-func SLServiceTypeTwitter() objc.ID {
-	return purego.CFConstant(raw.SLServiceTypeTwitter())
+// SLServiceTypeTwitter returns the string constant SLServiceTypeTwitter, for use as a dictionary key or argument.
+func SLServiceTypeTwitter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SLServiceTypeTwitter")))
 }
 
-// SLServiceTypeFacebook returns the string constant SLServiceTypeFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func SLServiceTypeFacebook() objc.ID {
-	return purego.CFConstant(raw.SLServiceTypeFacebook())
+// SLServiceTypeFacebook returns the string constant SLServiceTypeFacebook, for use as a dictionary key or argument.
+func SLServiceTypeFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SLServiceTypeFacebook")))
 }
 
-// SLServiceTypeSinaWeibo returns the string constant SLServiceTypeSinaWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func SLServiceTypeSinaWeibo() objc.ID {
-	return purego.CFConstant(raw.SLServiceTypeSinaWeibo())
+// SLServiceTypeSinaWeibo returns the string constant SLServiceTypeSinaWeibo, for use as a dictionary key or argument.
+func SLServiceTypeSinaWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SLServiceTypeSinaWeibo")))
 }
 
-// SLServiceTypeTencentWeibo returns the string constant SLServiceTypeTencentWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func SLServiceTypeTencentWeibo() objc.ID {
-	return purego.CFConstant(raw.SLServiceTypeTencentWeibo())
+// SLServiceTypeTencentWeibo returns the string constant SLServiceTypeTencentWeibo, for use as a dictionary key or argument.
+func SLServiceTypeTencentWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SLServiceTypeTencentWeibo")))
 }
 
-// SLServiceTypeLinkedIn returns the string constant SLServiceTypeLinkedIn as an objc.ID, for use as a dictionary key or selector argument.
-func SLServiceTypeLinkedIn() objc.ID {
-	return purego.CFConstant(raw.SLServiceTypeLinkedIn())
+// SLServiceTypeLinkedIn returns the string constant SLServiceTypeLinkedIn, for use as a dictionary key or argument.
+func SLServiceTypeLinkedIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SLServiceTypeLinkedIn")))
 }

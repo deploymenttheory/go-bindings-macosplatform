@@ -5,406 +5,333 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that configures capture behavior and coordinates the flow of data from input devices to capture outputs.
+// CaptureSession is an idiomatic wrapper over the Objective-C class AVCaptureSession.
 //
-// CaptureSession wraps [raw.AVCaptureSession] with a fluent Go API.
+// An object that configures capture behavior and coordinates the flow of data from input devices to capture outputs.
 type CaptureSession struct {
-	inner *raw.AVCaptureSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureSession].
-func (x *CaptureSession) Unwrap() *raw.AVCaptureSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureSession) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureSessionFromID adopts an existing object pointer as a CaptureSession (nil for 0).
+// CaptureSessionFromID adopts an existing Objective-C object as a CaptureSession
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureSessionFromID(id objc.ID) *CaptureSession {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureSession{inner: raw.AVCaptureSessionFromID(id)}
-}
-
-// NewCaptureSession creates a new [CaptureSession].
-func NewCaptureSession() *CaptureSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSession")), objc.RegisterName("new"))
-	return &CaptureSession{inner: raw.AVCaptureSessionFromID(_id)}
-}
-
-// A preset value that indicates the quality level or bit rate of the output.
-//
-// WithSessionPreset sets the sessionPreset property and returns the receiver for chaining.
-func (x *CaptureSession) WithSessionPreset(sessionPreset *foundation.NSString) *CaptureSession {
-	x.inner.SetSessionPreset(sessionPreset)
+	x := &CaptureSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether deferred start runs automatically.
-//
-// WithAutomaticallyRunsDeferredStart sets the automaticallyRunsDeferredStart property and returns the receiver for chaining.
-func (x *CaptureSession) WithAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart bool) *CaptureSession {
-	x.inner.SetAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart)
-	return x
-}
-
-// Determines whether you can configure a capture session with the specified preset.
-//
-// CanSetSessionPreset calls the underlying CanSetSessionPreset.
-func (x *CaptureSession) CanSetSessionPreset(preset *foundation.NSString) bool {
-	return x.inner.CanSetSessionPreset(preset)
-}
-
-// Determines whether you can add an input to a session.
-//
-// CanAddInput calls the underlying CanAddInput.
-func (x *CaptureSession) CanAddInput(input *raw.AVCaptureInput) bool {
-	return x.inner.CanAddInput(input)
-}
-
-// Adds a capture input to the session.
-//
-// AddInput calls the underlying AddInput.
-func (x *CaptureSession) AddInput(input *raw.AVCaptureInput) {
-	x.inner.AddInput(input)
-}
-
-// Removes an input from the session.
-//
-// RemoveInput calls the underlying RemoveInput.
-func (x *CaptureSession) RemoveInput(input *raw.AVCaptureInput) {
-	x.inner.RemoveInput(input)
-}
-
-// Determines whether you can add an output to a session.
-//
-// CanAddOutput calls the underlying CanAddOutput.
-func (x *CaptureSession) CanAddOutput(output *raw.AVCaptureOutput) bool {
-	return x.inner.CanAddOutput(output)
-}
-
-// Adds an output to the capture session.
-//
-// AddOutput calls the underlying AddOutput.
-func (x *CaptureSession) AddOutput(output *raw.AVCaptureOutput) {
-	x.inner.AddOutput(output)
-}
-
-// Removes an output from a capture session.
-//
-// RemoveOutput calls the underlying RemoveOutput.
-func (x *CaptureSession) RemoveOutput(output *raw.AVCaptureOutput) {
-	x.inner.RemoveOutput(output)
-}
-
-// Adds a capture input to a session without forming any connections.
-//
-// AddInputWithNoConnections calls the underlying AddInputWithNoConnections.
-func (x *CaptureSession) AddInputWithNoConnections(input *raw.AVCaptureInput) {
-	x.inner.AddInputWithNoConnections(input)
-}
-
-// Adds a capture output to the session without forming any connections.
-//
-// AddOutputWithNoConnections calls the underlying AddOutputWithNoConnections.
-func (x *CaptureSession) AddOutputWithNoConnections(output *raw.AVCaptureOutput) {
-	x.inner.AddOutputWithNoConnections(output)
-}
-
-// Determines whether a you can add a connection to a capture session.
-//
-// CanAddConnection calls the underlying CanAddConnection.
-func (x *CaptureSession) CanAddConnection(connection *raw.AVCaptureConnection) bool {
-	return x.inner.CanAddConnection(connection)
-}
-
-// Adds a connection to the capture session.
-//
-// AddConnection calls the underlying AddConnection.
-func (x *CaptureSession) AddConnection(connection *raw.AVCaptureConnection) {
-	x.inner.AddConnection(connection)
-}
-
-// Removes a capture connection from the session.
-//
-// RemoveConnection calls the underlying RemoveConnection.
-func (x *CaptureSession) RemoveConnection(connection *raw.AVCaptureConnection) {
-	x.inner.RemoveConnection(connection)
-}
-
-// Sets a delegate object for the system to call when it activates and presents controls.
-//
-// SetControlsDelegateQueue calls the underlying SetControlsDelegateQueue.
-func (x *CaptureSession) SetControlsDelegateQueue(controlsDelegate raw.AVCaptureSessionControlsDelegate, controlsDelegateCallbackQueue *foundation.NSObject) {
-	x.inner.SetControlsDelegateQueue(controlsDelegate, controlsDelegateCallbackQueue)
-}
-
-// Returns a Boolean value that indicates whether a capture session add the specified control.
-//
-// CanAddControl calls the underlying CanAddControl.
-func (x *CaptureSession) CanAddControl(control *raw.AVCaptureControl) bool {
-	return x.inner.CanAddControl(control)
-}
-
-// Adds a control to a capture session.
-//
-// AddControl calls the underlying AddControl.
-func (x *CaptureSession) AddControl(control *raw.AVCaptureControl) {
-	x.inner.AddControl(control)
-}
-
-// Removes a control from a capture session.
-//
-// RemoveControl calls the underlying RemoveControl.
-func (x *CaptureSession) RemoveControl(control *raw.AVCaptureControl) {
-	x.inner.RemoveControl(control)
-}
-
-// Marks the beginning of changes to a running capture session’s configuration to perform in a single atomic update.
-//
-// BeginConfiguration calls the underlying BeginConfiguration.
-func (x *CaptureSession) BeginConfiguration() {
-	x.inner.BeginConfiguration()
-}
-
-// Commits one or more changes to a running capture session’s configuration in a single atomic update.
-//
-// CommitConfiguration calls the underlying CommitConfiguration.
-func (x *CaptureSession) CommitConfiguration() {
-	x.inner.CommitConfiguration()
-}
-
-// Starts the flow of data through the capture pipeline.
-//
-// StartRunning calls the underlying StartRunning.
-func (x *CaptureSession) StartRunning() {
-	x.inner.StartRunning()
-}
-
-// Stops the flow of data through the capture pipeline.
-//
-// StopRunning calls the underlying StopRunning.
-func (x *CaptureSession) StopRunning() {
-	x.inner.StopRunning()
-}
-
-// Tells the session to run deferred start when appropriate.
-//
-// RunDeferredStartWhenNeeded calls the underlying RunDeferredStartWhenNeeded.
-func (x *CaptureSession) RunDeferredStartWhenNeeded() {
-	x.inner.RunDeferredStartWhenNeeded()
-}
-
-// Sets a delegate object for the session to call when performing deferred start.
-//
-// SetDeferredStartDelegateDeferredStartDelegateCallbackQueue calls the underlying SetDeferredStartDelegateDeferredStartDelegateCallbackQueue.
-func (x *CaptureSession) SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate raw.AVCaptureSessionDeferredStartDelegate, deferredStartDelegateCallbackQueue *foundation.NSObject) {
-	x.inner.SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate, deferredStartDelegateCallbackQueue)
-}
-
-// @property sessionPreset @abstract Indicates the session preset currently in use by the receiver. @discussion The value of this property is an AVCaptureSessionPreset indicating the current session preset in use by the receiver. The sessionPreset property may be set while the receiver is running.
-//
-// SessionPreset calls the underlying SessionPreset.
-func (x *CaptureSession) SessionPreset() string {
-	_r := x.inner.SessionPreset()
-	if _r == nil {
-		return ""
+// captureSessionAdopt wraps an Objective-C object that this code just created as a
+// CaptureSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureSessionAdopt(id objc.ID) *CaptureSession {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &CaptureSession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSessionPreset calls the underlying SetSessionPreset.
-func (x *CaptureSession) SetSessionPreset(sessionPreset *foundation.NSString) {
-	x.inner.SetSessionPreset(sessionPreset)
+// Description returns the object's -description text.
+func (x *CaptureSession) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property inputs @abstract An NSArray of AVCaptureInputs currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureInputs currently added to the receiver. Clients can add AVCaptureInputs to a session by calling -addInput:.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureSession creates a new CaptureSession.
+func NewCaptureSession() *CaptureSession {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureSession")), objc.RegisterName("new"))
+	return captureSessionAdopt(_id)
+}
+
+// WithSessionPreset a preset value that indicates the quality level or bit rate of the output.
+func (x *CaptureSession) WithSessionPreset(sessionPreset obj.Object) *CaptureSession {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionPreset:"), objref.IDOf(sessionPreset))
+	return x
+}
+
+// WithAutomaticallyRunsDeferredStart a Boolean value that indicates whether deferred start runs automatically.
+func (x *CaptureSession) WithAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart bool) *CaptureSession {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRunsDeferredStart:"), automaticallyRunsDeferredStart)
+	return x
+}
+
+// CanSetSessionPreset determines whether you can configure a capture session with the specified preset.
+func (x *CaptureSession) CanSetSessionPreset(preset obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSetSessionPreset:"), objref.IDOf(preset))
+	return _r
+}
+
+// CanAddInput determines whether you can add an input to a session.
+func (x *CaptureSession) CanAddInput(input *CaptureInput) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddInput:"), objref.IDOf(input))
+	return _r
+}
+
+// AddInput adds a capture input to the session.
+func (x *CaptureSession) AddInput(input *CaptureInput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addInput:"), objref.IDOf(input))
+}
+
+// RemoveInput removes an input from the session.
+func (x *CaptureSession) RemoveInput(input *CaptureInput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeInput:"), objref.IDOf(input))
+}
+
+// CanAddOutput determines whether you can add an output to a session.
+func (x *CaptureSession) CanAddOutput(output *CaptureOutput) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
+	return _r
+}
+
+// AddOutput adds an output to the capture session.
+func (x *CaptureSession) AddOutput(output *CaptureOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutput:"), objref.IDOf(output))
+}
+
+// RemoveOutput removes an output from a capture session.
+func (x *CaptureSession) RemoveOutput(output *CaptureOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeOutput:"), objref.IDOf(output))
+}
+
+// AddInputWithNoConnections adds a capture input to a session without forming any connections.
+func (x *CaptureSession) AddInputWithNoConnections(input *CaptureInput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addInputWithNoConnections:"), objref.IDOf(input))
+}
+
+// AddOutputWithNoConnections adds a capture output to the session without forming any connections.
+func (x *CaptureSession) AddOutputWithNoConnections(output *CaptureOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutputWithNoConnections:"), objref.IDOf(output))
+}
+
+// CanAddConnection determines whether a you can add a connection to a capture session.
+func (x *CaptureSession) CanAddConnection(connection *CaptureConnection) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddConnection:"), objref.IDOf(connection))
+	return _r
+}
+
+// AddConnection adds a connection to the capture session.
+func (x *CaptureSession) AddConnection(connection *CaptureConnection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnection:"), objref.IDOf(connection))
+}
+
+// RemoveConnection removes a capture connection from the session.
+func (x *CaptureSession) RemoveConnection(connection *CaptureConnection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnection:"), objref.IDOf(connection))
+}
+
+// CanAddControl returns a Boolean value that indicates whether a capture session add the specified control.
+func (x *CaptureSession) CanAddControl(control *CaptureControl) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddControl:"), objref.IDOf(control))
+	return _r
+}
+
+// AddControl adds a control to a capture session.
+func (x *CaptureSession) AddControl(control *CaptureControl) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addControl:"), objref.IDOf(control))
+}
+
+// RemoveControl removes a control from a capture session.
+func (x *CaptureSession) RemoveControl(control *CaptureControl) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeControl:"), objref.IDOf(control))
+}
+
+// BeginConfiguration marks the beginning of changes to a running capture session’s configuration to perform in a single atomic update.
+func (x *CaptureSession) BeginConfiguration() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginConfiguration"))
+}
+
+// CommitConfiguration commits one or more changes to a running capture session’s configuration in a single atomic update.
+func (x *CaptureSession) CommitConfiguration() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commitConfiguration"))
+}
+
+// StartRunning starts the flow of data through the capture pipeline.
+func (x *CaptureSession) StartRunning() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startRunning"))
+}
+
+// StopRunning stops the flow of data through the capture pipeline.
+func (x *CaptureSession) StopRunning() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRunning"))
+}
+
+// RunDeferredStartWhenNeeded tells the session to run deferred start when appropriate.
+func (x *CaptureSession) RunDeferredStartWhenNeeded() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runDeferredStartWhenNeeded"))
+}
+
+// SessionPreset indicates the session preset currently in use by the receiver. The value of this property is an AVCaptureSessionPreset indicating the current session preset in use by the receiver. The sessionPreset property may be set while the receiver is running.
+func (x *CaptureSession) SessionPreset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionPreset"))
+	return obj.Wrap(_r)
+}
+
+// SetSessionPreset wraps the corresponding Objective-C method.
+func (x *CaptureSession) SetSessionPreset(sessionPreset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionPreset:"), objref.IDOf(sessionPreset))
+}
+
+// Inputs an NSArray of AVCaptureInputs currently added to the receiver. The value of this property is an NSArray of AVCaptureInputs currently added to the receiver. Clients can add AVCaptureInputs to a session by calling -addInput:.
 //
 // Inputs returns the collection as a Go slice.
 func (x *CaptureSession) Inputs() []*CaptureInput {
-	arr := x.inner.Inputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureInput {
-		return &CaptureInput{inner: raw.AVCaptureInputFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureInput { return CaptureInputFromID(_id) })
 }
 
-// @property outputs @abstract An NSArray of AVCaptureOutputs currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureOutputs currently added to the receiver. Clients can add AVCaptureOutputs to a session by calling -addOutput:.
+// Outputs an NSArray of AVCaptureOutputs currently added to the receiver. The value of this property is an NSArray of AVCaptureOutputs currently added to the receiver. Clients can add AVCaptureOutputs to a session by calling -addOutput:.
 //
 // Outputs returns the collection as a Go slice.
 func (x *CaptureSession) Outputs() []*CaptureOutput {
-	arr := x.inner.Outputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureOutput {
-		return &CaptureOutput{inner: raw.AVCaptureOutputFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureOutput { return CaptureOutputFromID(_id) })
 }
 
-// @property connections @abstract An NSArray of AVCaptureConnections currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureConnections currently added to the receiver. Connections are formed implicitly by the receiver when a client calls -addInput: or -addOutput:. Connections are formed explicitly when a client calls -addConnection:.
+// Connections an NSArray of AVCaptureConnections currently added to the receiver. The value of this property is an NSArray of AVCaptureConnections currently added to the receiver. Connections are formed implicitly by the receiver when a client calls -addInput: or -addOutput:. Connections are formed explicitly when a client calls -addConnection:.
 //
 // Connections returns the collection as a Go slice.
 func (x *CaptureSession) Connections() []*CaptureConnection {
-	arr := x.inner.Connections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureConnection {
-		return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureConnection { return CaptureConnectionFromID(_id) })
 }
 
-// @property supportsControls @abstract Indicates whether session controls are supported on this platform. @discussion `AVCaptureControl`s are only supported on platforms with necessary hardware.
-//
-// SupportsControls calls the underlying SupportsControls.
+// SupportsControls indicates whether session controls are supported on this platform. `AVCaptureControl`s are only supported on platforms with necessary hardware.
 func (x *CaptureSession) SupportsControls() bool {
-	return x.inner.SupportsControls()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsControls"))
+	return _r
 }
 
-// @property maxControlsCount @abstract Specifies the maximum number of controls that can be added to a session.
-//
-// MaxControlsCount calls the underlying MaxControlsCount.
+// MaxControlsCount specifies the maximum number of controls that can be added to a session.
 func (x *CaptureSession) MaxControlsCount() int {
-	return x.inner.MaxControlsCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxControlsCount"))
+	return _r
 }
 
-// @property controlsDelegate @abstract The receiver's controls delegate. @discussion The value of this property is an object conforming to the `AVCaptureSessionControlsDelegate` protocol that receives events about the session's controls. The delegate is set using the `-setControlsDelegate:queue:` method. A controls delegate must be specified for controls to become active.
-//
-// ControlsDelegate calls the underlying ControlsDelegate.
-func (x *CaptureSession) ControlsDelegate() raw.AVCaptureSessionControlsDelegate {
-	return x.inner.ControlsDelegate()
+// ControlsDelegateCallbackQueue the dispatch queue on which all controls delegate methods will be called. The value of this property is a `dispatch_queue_t`. The queue is set using the `-setControlsDelegate:queue:` method.
+func (x *CaptureSession) ControlsDelegateCallbackQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlsDelegateCallbackQueue"))
+	return obj.Wrap(_r)
 }
 
-// @property controlsDelegateCallbackQueue @abstract The dispatch queue on which all controls delegate methods will be called. @discussion The value of this property is a `dispatch_queue_t`. The queue is set using the `-setControlsDelegate:queue:` method.
-//
-// ControlsDelegateCallbackQueue calls the underlying ControlsDelegateCallbackQueue.
-func (x *CaptureSession) ControlsDelegateCallbackQueue() *foundation.NSObject {
-	return x.inner.ControlsDelegateCallbackQueue()
-}
-
-// @property controls @abstract An `NSArray` of `AVCaptureControl`s currently added to the session. @discussion The value of this property is an `NSArray` of `AVCaptureControl`s currently added to the session. Clients can add `AVCaptureControl`s to a session by calling `-addControl:`.
+// Controls an `NSArray` of `AVCaptureControl`s currently added to the session. The value of this property is an `NSArray` of `AVCaptureControl`s currently added to the session. Clients can add `AVCaptureControl`s to a session by calling `-addControl:`.
 //
 // Controls returns the collection as a Go slice.
 func (x *CaptureSession) Controls() []*CaptureControl {
-	arr := x.inner.Controls()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureControl {
-		return &CaptureControl{inner: raw.AVCaptureControlFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controls"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureControl { return CaptureControlFromID(_id) })
 }
 
-// @property running @abstract Indicates whether the session is currently running. @discussion The value of this property is a BOOL indicating whether the receiver is running. Clients can key value observe the value of this property to be notified when the session automatically starts or stops running.
-//
-// IsRunning calls the underlying IsRunning.
+// IsRunning indicates whether the session is currently running. The value of this property is a BOOL indicating whether the receiver is running. Clients can key value observe the value of this property to be notified when the session automatically starts or stops running.
 func (x *CaptureSession) IsRunning() bool {
-	return x.inner.IsRunning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
-// @property synchronizationClock @abstract Provides the clock being used for synchronization. @discussion synchronizationClock is readonly. Use synchronizationClock to synchronize AVCaptureOutput data with external data sources (e.g motion samples). All capture output sample buffer timestamps are on the synchronizationClock timebase. For example, if you want to reverse synchronize the output timestamps to the original timestamps, you can do the following: In captureOutput:didOutputSampleBuffer:fromConnection: AVCaptureInputPort *port = [[connection inputPorts] objectAtIndex:0]; CMClockRef originalClock = [port clock]; CMTime syncedPTS = CMSampleBufferGetPresentationTime( sampleBuffer ); CMTime originalPTS = CMSyncConvertTime( syncedPTS, [session synchronizationClock], originalClock ); This property is key-value observable.
-//
-// SynchronizationClock calls the underlying SynchronizationClock.
-func (x *CaptureSession) SynchronizationClock() unsafe.Pointer {
-	return x.inner.SynchronizationClock()
+// SynchronizationClock provides the clock being used for synchronization. synchronizationClock is readonly. Use synchronizationClock to synchronize AVCaptureOutput data with external data sources (e.g motion samples). All capture output sample buffer timestamps are on the synchronizationClock timebase. For example, if you want to reverse synchronize the output timestamps to the original timestamps, you can do the following: In captureOutput:didOutputSampleBuffer:fromConnection: AVCaptureInputPort *port = [[connection inputPorts] objectAtIndex:0]; CMClockRef originalClock = [port clock]; CMTime syncedPTS = CMSampleBufferGetPresentationTime( sampleBuffer ); CMTime originalPTS = CMSyncConvertTime( syncedPTS, [session synchronizationClock], originalClock ); This property is key-value observable.
+func (x *CaptureSession) SynchronizationClock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizationClock"))
+	return obj.Wrap(_r)
 }
 
-// @property masterClock @abstract Provides the clock being used for synchronization. @discussion Deprecated. Please use synchronizationClock instead.
-//
-// MasterClock calls the underlying MasterClock.
-func (x *CaptureSession) MasterClock() unsafe.Pointer {
-	return x.inner.MasterClock()
+// MasterClock provides the clock being used for synchronization. Deprecated. Please use synchronizationClock instead.
+func (x *CaptureSession) MasterClock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("masterClock"))
+	return obj.Wrap(_r)
 }
 
-// A `BOOL` value that indicates whether the session supports manually running deferred start. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “deferredStartEnabled“ property is set to `true`, and starts it after the session is started. You can only set the “automaticallyRunsDeferredStart“ property value to `false` if the session supports manual deferred start.
-//
-// IsManualDeferredStartSupported calls the underlying IsManualDeferredStartSupported.
+// IsManualDeferredStartSupported a `BOOL` value that indicates whether the session supports manually running deferred start. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “deferredStartEnabled“ property is set to `true`, and starts it after the session is started. You can only set the “automaticallyRunsDeferredStart“ property value to `false` if the session supports manual deferred start.
 func (x *CaptureSession) IsManualDeferredStartSupported() bool {
-	return x.inner.IsManualDeferredStartSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isManualDeferredStartSupported"))
+	return _r
 }
 
-// A `BOOL` value that indicates whether deferred start runs automatically. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “AVCaptureOutput/deferredStartEnabled“ property is set to `true`, and starts it after the session is started. When this value is `true`, “AVCaptureSession“ automatically runs deferred start. If only “AVCaptureVideoPreviewLayer“ objects have “AVCaptureVideoPreviewLayer/deferredStartEnabled“ set to `false`, the session runs deferred start a short time after displaying the first frame. If there are “AVCaptureOutput“ objects that have “AVCaptureOutput/deferredStartEnabled“ set to `false`, then the session waits until each output that provides streaming data to your app sends its first frame. If you set this value to `false`, call “runDeferredStartWhenNeeded“ to indicate when to run deferred start. By default, for apps that are linked on or after iOS 26, this value is `true`. - Note: If “manualDeferredStartSupported“ is `false`, setting this property value to `false` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before committing the configuration.
-//
-// AutomaticallyRunsDeferredStart calls the underlying AutomaticallyRunsDeferredStart.
+// AutomaticallyRunsDeferredStart a `BOOL` value that indicates whether deferred start runs automatically. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “AVCaptureOutput/deferredStartEnabled“ property is set to `true`, and starts it after the session is started. When this value is `true`, “AVCaptureSession“ automatically runs deferred start. If only “AVCaptureVideoPreviewLayer“ objects have “AVCaptureVideoPreviewLayer/deferredStartEnabled“ set to `false`, the session runs deferred start a short time after displaying the first frame. If there are “AVCaptureOutput“ objects that have “AVCaptureOutput/deferredStartEnabled“ set to `false`, then the session waits until each output that provides streaming data to your app sends its first frame. If you set this value to `false`, call “runDeferredStartWhenNeeded“ to indicate when to run deferred start. By default, for apps that are linked on or after iOS 26, this value is `true`. - Note: If “manualDeferredStartSupported“ is `false`, setting this property value to `false` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before committing the configuration.
 func (x *CaptureSession) AutomaticallyRunsDeferredStart() bool {
-	return x.inner.AutomaticallyRunsDeferredStart()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyRunsDeferredStart"))
+	return _r
 }
 
-// SetAutomaticallyRunsDeferredStart calls the underlying SetAutomaticallyRunsDeferredStart.
+// SetAutomaticallyRunsDeferredStart wraps the corresponding Objective-C method.
 func (x *CaptureSession) SetAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart bool) {
-	x.inner.SetAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRunsDeferredStart:"), automaticallyRunsDeferredStart)
 }
 
-// A delegate object that observes events about deferred start. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to set the deferred start delegate for a session.
-//
-// DeferredStartDelegate calls the underlying DeferredStartDelegate.
-func (x *CaptureSession) DeferredStartDelegate() raw.AVCaptureSessionDeferredStartDelegate {
-	return x.inner.DeferredStartDelegate()
-}
-
-// The dispatch queue on which the session calls deferred start delegate methods. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to specify the dispatch queue on which to call the deferred start delegate methods.
-//
-// DeferredStartDelegateCallbackQueue calls the underlying DeferredStartDelegateCallbackQueue.
-func (x *CaptureSession) DeferredStartDelegateCallbackQueue() *foundation.NSObject {
-	return x.inner.DeferredStartDelegateCallbackQueue()
+// DeferredStartDelegateCallbackQueue the dispatch queue on which the session calls deferred start delegate methods. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to specify the dispatch queue on which to call the deferred start delegate methods.
+func (x *CaptureSession) DeferredStartDelegateCallbackQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredStartDelegateCallbackQueue"))
+	return obj.Wrap(_r)
 }
 
 // CaptureSessionable is the interface implemented by [CaptureSession], for mocking and DI.
 type CaptureSessionable interface {
-	Unwrap() *raw.AVCaptureSession
-	WithSessionPreset(sessionPreset *foundation.NSString) *CaptureSession
+	obj.Object
+	WithSessionPreset(sessionPreset obj.Object) *CaptureSession
 	WithAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart bool) *CaptureSession
-	CanSetSessionPreset(preset *foundation.NSString) bool
-	CanAddInput(input *raw.AVCaptureInput) bool
-	AddInput(input *raw.AVCaptureInput)
-	RemoveInput(input *raw.AVCaptureInput)
-	CanAddOutput(output *raw.AVCaptureOutput) bool
-	AddOutput(output *raw.AVCaptureOutput)
-	RemoveOutput(output *raw.AVCaptureOutput)
-	AddInputWithNoConnections(input *raw.AVCaptureInput)
-	AddOutputWithNoConnections(output *raw.AVCaptureOutput)
-	CanAddConnection(connection *raw.AVCaptureConnection) bool
-	AddConnection(connection *raw.AVCaptureConnection)
-	RemoveConnection(connection *raw.AVCaptureConnection)
-	SetControlsDelegateQueue(controlsDelegate raw.AVCaptureSessionControlsDelegate, controlsDelegateCallbackQueue *foundation.NSObject)
-	CanAddControl(control *raw.AVCaptureControl) bool
-	AddControl(control *raw.AVCaptureControl)
-	RemoveControl(control *raw.AVCaptureControl)
+	CanSetSessionPreset(preset obj.Object) bool
+	CanAddInput(input *CaptureInput) bool
+	AddInput(input *CaptureInput)
+	RemoveInput(input *CaptureInput)
+	CanAddOutput(output *CaptureOutput) bool
+	AddOutput(output *CaptureOutput)
+	RemoveOutput(output *CaptureOutput)
+	AddInputWithNoConnections(input *CaptureInput)
+	AddOutputWithNoConnections(output *CaptureOutput)
+	CanAddConnection(connection *CaptureConnection) bool
+	AddConnection(connection *CaptureConnection)
+	RemoveConnection(connection *CaptureConnection)
+	CanAddControl(control *CaptureControl) bool
+	AddControl(control *CaptureControl)
+	RemoveControl(control *CaptureControl)
 	BeginConfiguration()
 	CommitConfiguration()
 	StartRunning()
 	StopRunning()
 	RunDeferredStartWhenNeeded()
-	SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate raw.AVCaptureSessionDeferredStartDelegate, deferredStartDelegateCallbackQueue *foundation.NSObject)
-	SessionPreset() string
-	SetSessionPreset(sessionPreset *foundation.NSString)
+	SessionPreset() obj.Object
+	SetSessionPreset(sessionPreset obj.Object)
 	Inputs() []*CaptureInput
 	Outputs() []*CaptureOutput
 	Connections() []*CaptureConnection
 	SupportsControls() bool
 	MaxControlsCount() int
-	ControlsDelegate() raw.AVCaptureSessionControlsDelegate
-	ControlsDelegateCallbackQueue() *foundation.NSObject
+	ControlsDelegateCallbackQueue() obj.Object
 	Controls() []*CaptureControl
 	IsRunning() bool
-	SynchronizationClock() unsafe.Pointer
-	MasterClock() unsafe.Pointer
+	SynchronizationClock() obj.Object
+	MasterClock() obj.Object
 	IsManualDeferredStartSupported() bool
 	AutomaticallyRunsDeferredStart() bool
 	SetAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart bool)
-	DeferredStartDelegate() raw.AVCaptureSessionDeferredStartDelegate
-	DeferredStartDelegateCallbackQueue() *foundation.NSObject
+	DeferredStartDelegateCallbackQueue() obj.Object
 }
 
 var _ CaptureSessionable = (*CaptureSession)(nil)

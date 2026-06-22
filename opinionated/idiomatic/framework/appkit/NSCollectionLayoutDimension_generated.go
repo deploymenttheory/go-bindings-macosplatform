@@ -5,66 +5,106 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An individual dimension representing an item’s width or height in a collection view.
+// CollectionLayoutDimension is an idiomatic wrapper over the Objective-C class NSCollectionLayoutDimension.
 //
-// CollectionLayoutDimension wraps [raw.NSCollectionLayoutDimension] with a fluent Go API.
+// An individual dimension representing an item’s width or height in a collection view.
 type CollectionLayoutDimension struct {
-	inner *raw.NSCollectionLayoutDimension
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutDimension].
-func (x *CollectionLayoutDimension) Unwrap() *raw.NSCollectionLayoutDimension { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutDimension) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutDimensionFromID adopts an existing object pointer as a CollectionLayoutDimension (nil for 0).
+// CollectionLayoutDimensionFromID adopts an existing Objective-C object as a CollectionLayoutDimension
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutDimensionFromID(id objc.ID) *CollectionLayoutDimension {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutDimension{inner: raw.NSCollectionLayoutDimensionFromID(id)}
+	x := &CollectionLayoutDimension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutDimension creates a new [CollectionLayoutDimension].
+// collectionLayoutDimensionAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutDimension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutDimensionAdopt(id objc.ID) *CollectionLayoutDimension {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutDimension{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutDimension) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutDimension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutDimension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutDimension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollectionLayoutDimension creates a new CollectionLayoutDimension.
 func NewCollectionLayoutDimension() *CollectionLayoutDimension {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutDimension")), objc.RegisterName("new"))
-	return &CollectionLayoutDimension{inner: raw.NSCollectionLayoutDimensionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDimension")), objc.RegisterName("new"))
+	return collectionLayoutDimensionAdopt(_id)
 }
 
-// IsFractionalWidth calls the underlying IsFractionalWidth.
+// IsFractionalWidth wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsFractionalWidth() bool {
-	return x.inner.IsFractionalWidth()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalWidth"))
+	return _r
 }
 
-// IsFractionalHeight calls the underlying IsFractionalHeight.
+// IsFractionalHeight wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsFractionalHeight() bool {
-	return x.inner.IsFractionalHeight()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalHeight"))
+	return _r
 }
 
-// IsAbsolute calls the underlying IsAbsolute.
+// IsAbsolute wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsAbsolute() bool {
-	return x.inner.IsAbsolute()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsolute"))
+	return _r
 }
 
-// IsEstimated calls the underlying IsEstimated.
+// IsEstimated wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) IsEstimated() bool {
-	return x.inner.IsEstimated()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEstimated"))
+	return _r
 }
 
-// Dimension calls the underlying Dimension.
+// Dimension wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDimension) Dimension() float64 {
-	return x.inner.Dimension()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
 
 // CollectionLayoutDimensionable is the interface implemented by [CollectionLayoutDimension], for mocking and DI.
 type CollectionLayoutDimensionable interface {
-	Unwrap() *raw.NSCollectionLayoutDimension
+	obj.Object
 	IsFractionalWidth() bool
 	IsFractionalHeight() bool
 	IsAbsolute() bool

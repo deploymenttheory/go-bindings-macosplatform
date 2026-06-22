@@ -5,41 +5,74 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DiffableDataSourceSnapshot wraps [raw.NSDiffableDataSourceSnapshot] with a fluent Go API.
+// DiffableDataSourceSnapshot is an idiomatic wrapper over the Objective-C class NSDiffableDataSourceSnapshot.
 type DiffableDataSourceSnapshot struct {
-	inner *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDiffableDataSourceSnapshot].
-func (x *DiffableDataSourceSnapshot) Unwrap() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiffableDataSourceSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// DiffableDataSourceSnapshotFromID adopts an existing object pointer as a DiffableDataSourceSnapshot (nil for 0).
+// DiffableDataSourceSnapshotFromID adopts an existing Objective-C object as a DiffableDataSourceSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func DiffableDataSourceSnapshotFromID(id objc.ID) *DiffableDataSourceSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &DiffableDataSourceSnapshot{inner: raw.NSDiffableDataSourceSnapshotFromID[objc.ID, objc.ID](id)}
+	x := &DiffableDataSourceSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDiffableDataSourceSnapshot creates a new [DiffableDataSourceSnapshot].
+// diffableDataSourceSnapshotAdopt wraps an Objective-C object that this code just created as a
+// DiffableDataSourceSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diffableDataSourceSnapshotAdopt(id objc.ID) *DiffableDataSourceSnapshot {
+	if id == 0 {
+		return nil
+	}
+	x := &DiffableDataSourceSnapshot{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DiffableDataSourceSnapshot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DiffableDataSourceSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DiffableDataSourceSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DiffableDataSourceSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDiffableDataSourceSnapshot creates a new DiffableDataSourceSnapshot.
 func NewDiffableDataSourceSnapshot() *DiffableDataSourceSnapshot {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDiffableDataSourceSnapshot")), objc.RegisterName("new"))
-	return &DiffableDataSourceSnapshot{inner: raw.NSDiffableDataSourceSnapshotFromID[objc.ID, objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDiffableDataSourceSnapshot")), objc.RegisterName("new"))
+	return diffableDataSourceSnapshotAdopt(_id)
 }
 
 // DiffableDataSourceSnapshotable is the interface implemented by [DiffableDataSourceSnapshot], for mocking and DI.
 type DiffableDataSourceSnapshotable interface {
-	Unwrap() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
+	obj.Object
 }
 
 var _ DiffableDataSourceSnapshotable = (*DiffableDataSourceSnapshot)(nil)

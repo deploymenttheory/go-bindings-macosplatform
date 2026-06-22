@@ -5,74 +5,74 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSValue wraps [raw.DOMCSSValue] with a fluent Go API.
+// DOMCSSValue is an idiomatic wrapper over the Objective-C class DOMCSSValue.
+//
+// DOMCSSValue is an abstract base — you do not construct it directly. Construct one of [DOMCSSPrimitiveValue], [DOMCSSValueList] and pass it where a DOMCSSValue is accepted.
 type DOMCSSValue struct {
-	inner *raw.DOMCSSValue
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMCSSValue].
-func (x *DOMCSSValue) Unwrap() *raw.DOMCSSValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSValue) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSValueFromID adopts an existing object pointer as a DOMCSSValue (nil for 0).
+// DOMCSSValueFromID adopts an existing Objective-C object as a DOMCSSValue
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSValueFromID(id objc.ID) *DOMCSSValue {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSValue{inner: raw.DOMCSSValueFromID(id)}
-}
-
-// NewDOMCSSValue creates a new [DOMCSSValue].
-func NewDOMCSSValue() *DOMCSSValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSValue")), objc.RegisterName("new"))
-	return &DOMCSSValue{inner: raw.DOMCSSValueFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSValue) WithCssText(cssText string) *DOMCSSValue {
-	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// CssText calls the underlying CssText.
+// dOMCSSValueAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSValueAdopt(id objc.ID) *DOMCSSValue {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSValue) WithCssText(cssText string) *DOMCSSValue {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+// CssText wraps the corresponding Objective-C method.
 func (x *DOMCSSValue) CssText() string {
-	_r := x.inner.CssText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCssText calls the underlying SetCssText.
+// SetCssText wraps the corresponding Objective-C method.
 func (x *DOMCSSValue) SetCssText(cssText string) {
-	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 }
 
-// CssValueType calls the underlying CssValueType.
+// CssValueType wraps the corresponding Objective-C method.
 func (x *DOMCSSValue) CssValueType() uint16 {
-	return x.inner.CssValueType()
-}
-
-func (x *DOMCSSValue) asDOMCSSValue() *raw.DOMCSSValue { return x.inner }
-
-func (x *DOMCSSValue) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMCSSValue) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("cssValueType"))
+	return _r
 }
 
 // DOMCSSValueable is the interface implemented by [DOMCSSValue], for mocking and DI.
 type DOMCSSValueable interface {
-	Unwrap() *raw.DOMCSSValue
+	obj.Object
 	WithCssText(cssText string) *DOMCSSValue
 	CssText() string
 	SetCssText(cssText string)
@@ -80,3 +80,14 @@ type DOMCSSValueable interface {
 }
 
 var _ DOMCSSValueable = (*DOMCSSValue)(nil)
+
+// isDOMCSSValue marks DOMCSSValue — and, by embedding promotion, its
+// subclasses — as a member of the DOMCSSValue hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMCSSValue) isDOMCSSValue() {}
+
+var _ DOMCSSValueProvider = (*DOMCSSValue)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSValue)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSValue)(nil)

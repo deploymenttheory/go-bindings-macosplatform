@@ -5,62 +5,69 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that implements the client side of a custom link-layer packet tunneling protocol.
+// NEEthernetTunnelProvider is an idiomatic wrapper over the Objective-C class NEEthernetTunnelProvider.
 //
-// NEEthernetTunnelProvider wraps [raw.NEEthernetTunnelProvider] with a fluent Go API.
+// It embeds [NEPacketTunnelProvider], promoting that type's methods.
+//
+// A type that implements the client side of a custom link-layer packet tunneling protocol.
 type NEEthernetTunnelProvider struct {
-	inner *raw.NEEthernetTunnelProvider
+	NEPacketTunnelProvider
 }
 
-// Unwrap returns the underlying [raw.NEEthernetTunnelProvider].
-func (x *NEEthernetTunnelProvider) Unwrap() *raw.NEEthernetTunnelProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEEthernetTunnelProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NEEthernetTunnelProviderFromID adopts an existing object pointer as a NEEthernetTunnelProvider (nil for 0).
+// NEEthernetTunnelProviderFromID adopts an existing Objective-C object as a NEEthernetTunnelProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NEEthernetTunnelProviderFromID(id objc.ID) *NEEthernetTunnelProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NEEthernetTunnelProvider{inner: raw.NEEthernetTunnelProviderFromID(id)}
-}
-
-// NewNEEthernetTunnelProvider creates a new [NEEthernetTunnelProvider].
-func NewNEEthernetTunnelProvider() *NEEthernetTunnelProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEEthernetTunnelProvider")), objc.RegisterName("new"))
-	return &NEEthernetTunnelProvider{inner: raw.NEEthernetTunnelProviderFromID(_id)}
-}
-
-// Indicate to the system that the tunnel is being re-established.
-//
-// WithReasserting sets the reasserting property and returns the receiver for chaining.
-func (x *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernetTunnelProvider {
-	x.inner.NEPacketTunnelProvider.NETunnelProvider.SetReasserting(reasserting)
+	x := &NEEthernetTunnelProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *NEEthernetTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider {
-	return &x.inner.NEPacketTunnelProvider
+// nEEthernetTunnelProviderAdopt wraps an Objective-C object that this code just created as a
+// NEEthernetTunnelProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEEthernetTunnelProviderAdopt(id objc.ID) *NEEthernetTunnelProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &NEEthernetTunnelProvider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *NEEthernetTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider {
-	return &x.inner.NEPacketTunnelProvider.NETunnelProvider
+// NewNEEthernetTunnelProvider creates a new NEEthernetTunnelProvider.
+func NewNEEthernetTunnelProvider() *NEEthernetTunnelProvider {
+	_id := objc.Send[objc.ID](objc.ID(_class("NEEthernetTunnelProvider")), objc.RegisterName("new"))
+	return nEEthernetTunnelProviderAdopt(_id)
 }
 
-func (x *NEEthernetTunnelProvider) asNEProvider() *raw.NEProvider {
-	return &x.inner.NEPacketTunnelProvider.NETunnelProvider.NEProvider
+// WithReasserting indicate to the system that the tunnel is being re-established.
+func (x *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernetTunnelProvider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
+	return x
 }
 
 // NEEthernetTunnelProviderable is the interface implemented by [NEEthernetTunnelProvider], for mocking and DI.
 type NEEthernetTunnelProviderable interface {
-	Unwrap() *raw.NEEthernetTunnelProvider
+	obj.Object
 	WithReasserting(reasserting bool) *NEEthernetTunnelProvider
 }
 
 var _ NEEthernetTunnelProviderable = (*NEEthernetTunnelProvider)(nil)
+
+var _ NEPacketTunnelProviderProvider = (*NEEthernetTunnelProvider)(nil)
+
+var _ NETunnelProviderProvider = (*NEEthernetTunnelProvider)(nil)
+
+var _ NEProviderProvider = (*NEEthernetTunnelProvider)(nil)

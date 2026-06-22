@@ -5,94 +5,99 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for the model to use with Vision requests.
+// CoreMLModel is an idiomatic wrapper over the Objective-C class VNCoreMLModel.
 //
-// CoreMLModel wraps [raw.VNCoreMLModel] with a fluent Go API.
+// A container for the model to use with Vision requests.
 type CoreMLModel struct {
-	inner *raw.VNCoreMLModel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNCoreMLModel].
-func (x *CoreMLModel) Unwrap() *raw.VNCoreMLModel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CoreMLModel) ID() objc.ID { return x.inner.Ptr() }
-
-// CoreMLModelFromID adopts an existing object pointer as a CoreMLModel (nil for 0).
+// CoreMLModelFromID adopts an existing Objective-C object as a CoreMLModel
+// (nil for 0), retaining it and registering a release finalizer.
 func CoreMLModelFromID(id objc.ID) *CoreMLModel {
 	if id == 0 {
 		return nil
 	}
-	return &CoreMLModel{inner: raw.VNCoreMLModelFromID(id)}
+	x := &CoreMLModel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCoreMLModel creates a new [CoreMLModel].
+// coreMLModelAdopt wraps an Objective-C object that this code just created as a
+// CoreMLModel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coreMLModelAdopt(id objc.ID) *CoreMLModel {
+	if id == 0 {
+		return nil
+	}
+	x := &CoreMLModel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CoreMLModel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CoreMLModel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CoreMLModel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CoreMLModel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCoreMLModel creates a new CoreMLModel.
 func NewCoreMLModel() *CoreMLModel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCoreMLModel")), objc.RegisterName("new"))
-	return &CoreMLModel{inner: raw.VNCoreMLModelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNCoreMLModel")), objc.RegisterName("new"))
+	return coreMLModelAdopt(_id)
 }
 
-// The name of the feature value that Vision sets from the request handler.
-//
-// WithInputImageFeatureName sets the inputImageFeatureName property and returns the receiver for chaining.
+// WithInputImageFeatureName the name of the feature value that Vision sets from the request handler.
 func (x *CoreMLModel) WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel {
-	x.inner.SetInputImageFeatureName(foundation.NSStringStringWithUTF8String(inputImageFeatureName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
 	return x
 }
 
-// An optional object to support inputs outside Vision.
-//
-// WithFeatureProvider sets the featureProvider property and returns the receiver for chaining.
-func (x *CoreMLModel) WithFeatureProvider(featureProvider coreml.MLFeatureProvider) *CoreMLModel {
-	x.inner.SetFeatureProvider(featureProvider)
-	return x
-}
-
-// @brief The name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
-//
-// InputImageFeatureName calls the underlying InputImageFeatureName.
+// InputImageFeatureName the name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
 func (x *CoreMLModel) InputImageFeatureName() string {
-	_r := x.inner.InputImageFeatureName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImageFeatureName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetInputImageFeatureName calls the underlying SetInputImageFeatureName.
+// SetInputImageFeatureName wraps the corresponding Objective-C method.
 func (x *CoreMLModel) SetInputImageFeatureName(inputImageFeatureName string) {
-	x.inner.SetInputImageFeatureName(foundation.NSStringStringWithUTF8String(inputImageFeatureName))
-}
-
-// @brief An optional object conforming to the MLFeatureProvider protocol that is used by the model during the predict call to support inputs that are not supplied by Vision. Vision will provide the image for the inputImageFeatureName from the the VNRequestHandler. A feature provider is necessary for models that have more than one input and require those parameters to be set. Models that only have one image input will not use the feature provider as that input will be set by Vision.
-//
-// FeatureProvider calls the underlying FeatureProvider.
-func (x *CoreMLModel) FeatureProvider() coreml.MLFeatureProvider {
-	return x.inner.FeatureProvider()
-}
-
-// SetFeatureProvider calls the underlying SetFeatureProvider.
-func (x *CoreMLModel) SetFeatureProvider(featureProvider coreml.MLFeatureProvider) {
-	x.inner.SetFeatureProvider(featureProvider)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImageFeatureName:"), purego.NSString(inputImageFeatureName))
 }
 
 // CoreMLModelable is the interface implemented by [CoreMLModel], for mocking and DI.
 type CoreMLModelable interface {
-	Unwrap() *raw.VNCoreMLModel
+	obj.Object
 	WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel
-	WithFeatureProvider(featureProvider coreml.MLFeatureProvider) *CoreMLModel
 	InputImageFeatureName() string
 	SetInputImageFeatureName(inputImageFeatureName string)
-	FeatureProvider() coreml.MLFeatureProvider
-	SetFeatureProvider(featureProvider coreml.MLFeatureProvider)
 }
 
 var _ CoreMLModelable = (*CoreMLModel)(nil)

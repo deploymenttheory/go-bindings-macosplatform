@@ -5,93 +5,99 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together properties for creating a compiler context.
+// MTL4CompilerDescriptor is an idiomatic wrapper over the Objective-C class MTL4CompilerDescriptor.
 //
-// MTL4CompilerDescriptor wraps [raw.MTL4CompilerDescriptor] with a fluent Go API.
+// Groups together properties for creating a compiler context.
 type MTL4CompilerDescriptor struct {
-	inner *raw.MTL4CompilerDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4CompilerDescriptor].
-func (x *MTL4CompilerDescriptor) Unwrap() *raw.MTL4CompilerDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4CompilerDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4CompilerDescriptorFromID adopts an existing object pointer as a MTL4CompilerDescriptor (nil for 0).
+// MTL4CompilerDescriptorFromID adopts an existing Objective-C object as a MTL4CompilerDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4CompilerDescriptorFromID(id objc.ID) *MTL4CompilerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4CompilerDescriptor{inner: raw.MTL4CompilerDescriptorFromID(id)}
+	x := &MTL4CompilerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4CompilerDescriptor creates a new [MTL4CompilerDescriptor].
+// mTL4CompilerDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4CompilerDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4CompilerDescriptorAdopt(id objc.ID) *MTL4CompilerDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4CompilerDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4CompilerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4CompilerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4CompilerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CompilerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTL4CompilerDescriptor creates a new MTL4CompilerDescriptor.
 func NewMTL4CompilerDescriptor() *MTL4CompilerDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CompilerDescriptor")), objc.RegisterName("new"))
-	return &MTL4CompilerDescriptor{inner: raw.MTL4CompilerDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CompilerDescriptor")), objc.RegisterName("new"))
+	return mTL4CompilerDescriptorAdopt(_id)
 }
 
-// Assigns an optional descriptor label to the compiler for debugging purposes.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel assigns an optional descriptor label to the compiler for debugging purposes.
 func (x *MTL4CompilerDescriptor) WithLabel(label string) *MTL4CompilerDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Assigns a pipeline data set serializer into which this compiler stores data for all pipelines it creates.
-//
-// WithPipelineDataSetSerializer sets the pipelineDataSetSerializer property and returns the receiver for chaining.
-func (x *MTL4CompilerDescriptor) WithPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer) *MTL4CompilerDescriptor {
-	x.inner.SetPipelineDataSetSerializer(pipelineDataSetSerializer)
-	return x
-}
-
-// Assigns an optional descriptor label to the compiler for debugging purposes.
-//
-// Label calls the underlying Label.
+// Label assigns an optional descriptor label to the compiler for debugging purposes.
 func (x *MTL4CompilerDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTL4CompilerDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
-}
-
-// Assigns a pipeline data set serializer into which this compiler stores data for all pipelines it creates.
-//
-// PipelineDataSetSerializer calls the underlying PipelineDataSetSerializer.
-func (x *MTL4CompilerDescriptor) PipelineDataSetSerializer() raw.MTL4PipelineDataSetSerializer {
-	return x.inner.PipelineDataSetSerializer()
-}
-
-// SetPipelineDataSetSerializer calls the underlying SetPipelineDataSetSerializer.
-func (x *MTL4CompilerDescriptor) SetPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer) {
-	x.inner.SetPipelineDataSetSerializer(pipelineDataSetSerializer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // MTL4CompilerDescriptorable is the interface implemented by [MTL4CompilerDescriptor], for mocking and DI.
 type MTL4CompilerDescriptorable interface {
-	Unwrap() *raw.MTL4CompilerDescriptor
+	obj.Object
 	WithLabel(label string) *MTL4CompilerDescriptor
-	WithPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer) *MTL4CompilerDescriptor
 	Label() string
 	SetLabel(label string)
-	PipelineDataSetSerializer() raw.MTL4PipelineDataSetSerializer
-	SetPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer)
 }
 
 var _ MTL4CompilerDescriptorable = (*MTL4CompilerDescriptor)(nil)

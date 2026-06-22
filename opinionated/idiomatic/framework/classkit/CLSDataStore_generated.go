@@ -6,61 +6,85 @@ package classkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A container for all the ClassKit data in your app.
+// DataStore is an idiomatic wrapper over the Objective-C class CLSDataStore.
 //
-// DataStore wraps [raw.CLSDataStore] with a fluent Go API.
+// A container for all the ClassKit data in your app.
 type DataStore struct {
-	inner *raw.CLSDataStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLSDataStore].
-func (x *DataStore) Unwrap() *raw.CLSDataStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DataStore) ID() objc.ID { return x.inner.Ptr() }
-
-// DataStoreFromID adopts an existing object pointer as a DataStore (nil for 0).
+// DataStoreFromID adopts an existing Objective-C object as a DataStore
+// (nil for 0), retaining it and registering a release finalizer.
 func DataStoreFromID(id objc.ID) *DataStore {
 	if id == 0 {
 		return nil
 	}
-	return &DataStore{inner: raw.CLSDataStoreFromID(id)}
-}
-
-// NewDataStore creates a new [DataStore].
-func NewDataStore() *DataStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSDataStore")), objc.RegisterName("new"))
-	return &DataStore{inner: raw.CLSDataStoreFromID(_id)}
-}
-
-// The data store delegate instance.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *DataStore) WithDelegate(delegate raw.CLSDataStoreDelegate) *DataStore {
-	x.inner.SetDelegate(delegate)
+	x := &DataStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Saves any changes you’ve made in the data store.
+// dataStoreAdopt wraps an Objective-C object that this code just created as a
+// DataStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dataStoreAdopt(id objc.ID) *DataStore {
+	if id == 0 {
+		return nil
+	}
+	x := &DataStore{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DataStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DataStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DataStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDataStore creates a new DataStore.
+func NewDataStore() *DataStore {
+	_id := objc.Send[objc.ID](objc.ID(_class("CLSDataStore")), objc.RegisterName("new"))
+	return dataStoreAdopt(_id)
+}
+
+// SaveWithCompletion saves any changes you’ve made in the data store.
 //
 // SaveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SaveWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -69,136 +93,100 @@ func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 	}
 }
 
-// Marks all of the assigned and active activities for the given context path as complete.
-//
-// CompleteAllAssignedActivitiesMatching calls the underlying CompleteAllAssignedActivitiesMatching.
-func (x *DataStore) CompleteAllAssignedActivitiesMatching(contextPath *foundation.NSArray[*foundation.NSString]) {
-	x.inner.CompleteAllAssignedActivitiesMatching(contextPath)
+// CompleteAllAssignedActivitiesMatching marks all of the assigned and active activities for the given context path as complete.
+func (x *DataStore) CompleteAllAssignedActivitiesMatching(contextPath []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeAllAssignedActivitiesMatching:"), purego.SliceToNSArray(contextPath, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @abstract      Fetch the top level context for the current app. @discussion    The main context is automatically created. Add child contexts to this context to persist them in the data store.
-//
-// MainAppContext calls the underlying MainAppContext.
+// MainAppContext fetch the top level context for the current app. The main context is automatically created. Add child contexts to this context to persist them in the data store.
 func (x *DataStore) MainAppContext() *Context {
-	_r := x.inner.MainAppContext()
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainAppContext"))
+	return ContextFromID(_r)
 }
 
-// @abstract      Returns the context that is currently active. If no context is active, this will return nil.
-//
-// ActiveContext calls the underlying ActiveContext.
+// ActiveContext returns the context that is currently active. If no context is active, this will return nil.
 func (x *DataStore) ActiveContext() *Context {
-	_r := x.inner.ActiveContext()
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeContext"))
+	return ContextFromID(_r)
 }
 
-// @abstract      Returns the most recently started activity that is running.
-//
-// RunningActivity calls the underlying RunningActivity.
+// RunningActivity returns the most recently started activity that is running.
 func (x *DataStore) RunningActivity() *Activity {
-	_r := x.inner.RunningActivity()
-	if _r == nil {
-		return nil
-	}
-	return &Activity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runningActivity"))
+	return ActivityFromID(_r)
 }
 
-// @abstract      The data store delegate allows for easy population of the app's context hierarchy.
-//
-// Delegate calls the underlying Delegate.
-func (x *DataStore) Delegate() raw.CLSDataStoreDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *DataStore) SetDelegate(delegate raw.CLSDataStoreDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Fetches all the contexts matching a predicate.
+// ContextsMatchingPredicateCompletion fetches all the contexts matching a predicate.
 //
 // ContextsMatchingPredicateCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CLSContext], error) {
+func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CLSContext]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ContextsMatchingPredicateCompletion(predicate, func(_p0 *foundation.NSArray[*raw.CLSContext], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextsMatchingPredicate:completion:"), objref.IDOf(predicate), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CLSContext]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Fetches all the contexts along a given identifier path.
+// ContextsMatchingIdentifierPathCompletion fetches all the contexts along a given identifier path.
 //
 // ContextsMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.CLSContext], error) {
+func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CLSContext]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ContextsMatchingIdentifierPathCompletion(identifierPath, func(_p0 *foundation.NSArray[*raw.CLSContext], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextsMatchingIdentifierPath:completion:"), purego.SliceToNSArray(identifierPath, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CLSContext]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Marks a context for removal.
-//
-// RemoveContext calls the underlying RemoveContext.
-func (x *DataStore) RemoveContext(context_ *raw.CLSContext) {
-	x.inner.RemoveContext(context_)
+// RemoveContext marks a context for removal.
+func (x *DataStore) RemoveContext(context_ *Context) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContext:"), objref.IDOf(context_))
 }
 
-// Fetches an activity for a given document so you can record progress on the associated task.
+// FetchActivityForURLCompletion fetches an activity for a given document so you can record progress on the associated task.
 //
 // FetchActivityForURLCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (*Activity, error) {
+func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (result *Activity, err error) {
 	type _result struct {
 		val *Activity
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchActivityForURLCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 *raw.CLSActivity, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Activity{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ActivityFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchActivityForURL:completion:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -208,29 +196,18 @@ func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url strin
 	}
 }
 
-// @abstract      Determines whether a URL to the document was assigned to the student. @discussion    This method checks if the document at the specified URL is assigned to the current student signed into the device. This is particularly useful for implementing student-specific workflows, such as: - Showing submission UI only for assigned documents - Displaying assignment-specific metadata or instructions - Enabling special features or restrictions for assigned work The completion handler's `isAssignedDocument` parameter will be `YES` when: - The document URL corresponds to an active assigned document - The current user is authenticated as a student and assigned to this specific document The completion handler's `isAssignedDocument` parameter will be `NO` when: - The document is not part of any assigned document - The current user is not a student (e.g., teacher) - The document has been unassigned or deleted - The student does not have permission to access this assignment @note          This method is designed to be called from ClassKitUI clients and requires proper ClassKit entitlements. The completion handler may be called on a background thread, so dispatch to the main queue if you need to update UI based on the result. @param         documentURL         The file URL of the document to check. @param         completion          A block called when the check is complete. The block takes two parameters: - isAssignedDocument: A Boolean indicating whether the document is assigned to the current user. - error: An error object if the check failed, or nil if successful. @code [[CLSDataStore shared] checkIsAssignedDocument:documentURL completion:^(BOOL isAssignedDocument, NSError * _Nullable error) { dispatch_async(dispatch_get_main_queue(), ^{ if (error) { NSLog(@"Error checking assignment status: %@", error); return; } if (isAssignedDocument) { // Show UI with submission options [self showAssignedDocumentSubmissionUI]; } else { // Show standard document UI [self showStandardDocumentUI]; } }); }]; @endcode
-//
-// CheckIsAssignedDocumentCompletion calls the underlying CheckIsAssignedDocumentCompletion.
-func (x *DataStore) CheckIsAssignedDocumentCompletion(documentURL string, completion func(bool, unsafe.Pointer)) {
-	x.inner.CheckIsAssignedDocumentCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(documentURL)), completion)
-}
-
 // DataStoreable is the interface implemented by [DataStore], for mocking and DI.
 type DataStoreable interface {
-	Unwrap() *raw.CLSDataStore
-	WithDelegate(delegate raw.CLSDataStoreDelegate) *DataStore
+	obj.Object
 	SaveWithCompletion(ctx context.Context) error
-	CompleteAllAssignedActivitiesMatching(contextPath *foundation.NSArray[*foundation.NSString])
+	CompleteAllAssignedActivitiesMatching(contextPath []string)
 	MainAppContext() *Context
 	ActiveContext() *Context
 	RunningActivity() *Activity
-	Delegate() raw.CLSDataStoreDelegate
-	SetDelegate(delegate raw.CLSDataStoreDelegate)
-	ContextsMatchingPredicateCompletion(ctx context.Context, predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CLSContext], error)
-	ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.CLSContext], error)
-	RemoveContext(context_ *raw.CLSContext)
+	ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (obj.Object, error)
+	ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (obj.Object, error)
+	RemoveContext(context_ *Context)
 	FetchActivityForURLCompletion(ctx context.Context, url string) (*Activity, error)
-	CheckIsAssignedDocumentCompletion(documentURL string, completion func(bool, unsafe.Pointer))
 }
 
 var _ DataStoreable = (*DataStore)(nil)

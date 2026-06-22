@@ -5,71 +5,101 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages a collection of status items displayed within the system-wide menu bar.
+// StatusBar is an idiomatic wrapper over the Objective-C class NSStatusBar.
 //
-// StatusBar wraps [raw.NSStatusBar] with a fluent Go API.
+// An object that manages a collection of status items displayed within the system-wide menu bar.
 type StatusBar struct {
-	inner *raw.NSStatusBar
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStatusBar].
-func (x *StatusBar) Unwrap() *raw.NSStatusBar { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StatusBar) ID() objc.ID { return x.inner.Ptr() }
-
-// StatusBarFromID adopts an existing object pointer as a StatusBar (nil for 0).
+// StatusBarFromID adopts an existing Objective-C object as a StatusBar
+// (nil for 0), retaining it and registering a release finalizer.
 func StatusBarFromID(id objc.ID) *StatusBar {
 	if id == 0 {
 		return nil
 	}
-	return &StatusBar{inner: raw.NSStatusBarFromID(id)}
+	x := &StatusBar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStatusBar creates a new [StatusBar].
-func NewStatusBar() *StatusBar {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStatusBar")), objc.RegisterName("new"))
-	return &StatusBar{inner: raw.NSStatusBarFromID(_id)}
-}
-
-// Returns a newly created status item that has been allotted a specified space within the status bar.
-//
-// StatusItemWithLength calls the underlying StatusItemWithLength.
-func (x *StatusBar) StatusItemWithLength(length float64) *StatusItem {
-	_r := x.inner.StatusItemWithLength(length)
-	if _r == nil {
+// statusBarAdopt wraps an Objective-C object that this code just created as a
+// StatusBar (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func statusBarAdopt(id objc.ID) *StatusBar {
+	if id == 0 {
 		return nil
 	}
-	return &StatusItem{inner: _r}
+	x := &StatusBar{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Removes the specified status item from the receiver.
-//
-// RemoveStatusItem calls the underlying RemoveStatusItem.
-func (x *StatusBar) RemoveStatusItem(item *raw.NSStatusItem) {
-	x.inner.RemoveStatusItem(item)
+// Description returns the object's -description text.
+func (x *StatusBar) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// IsVertical calls the underlying IsVertical.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StatusBar) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StatusBar) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StatusBar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStatusBar creates a new StatusBar.
+func NewStatusBar() *StatusBar {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStatusBar")), objc.RegisterName("new"))
+	return statusBarAdopt(_id)
+}
+
+// StatusItemWithLength returns a newly created status item that has been allotted a specified space within the status bar.
+func (x *StatusBar) StatusItemWithLength(length float64) *StatusItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusItemWithLength:"), length)
+	return StatusItemFromID(_r)
+}
+
+// RemoveStatusItem removes the specified status item from the receiver.
+func (x *StatusBar) RemoveStatusItem(item *StatusItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeStatusItem:"), objref.IDOf(item))
+}
+
+// IsVertical wraps the corresponding Objective-C method.
 func (x *StatusBar) IsVertical() bool {
-	return x.inner.IsVertical()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+	return _r
 }
 
-// Thickness calls the underlying Thickness.
+// Thickness wraps the corresponding Objective-C method.
 func (x *StatusBar) Thickness() float64 {
-	return x.inner.Thickness()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("thickness"))
+	return _r
 }
 
 // StatusBarable is the interface implemented by [StatusBar], for mocking and DI.
 type StatusBarable interface {
-	Unwrap() *raw.NSStatusBar
+	obj.Object
 	StatusItemWithLength(length float64) *StatusItem
-	RemoveStatusItem(item *raw.NSStatusItem)
+	RemoveStatusItem(item *StatusItem)
 	IsVertical() bool
 	Thickness() float64
 }

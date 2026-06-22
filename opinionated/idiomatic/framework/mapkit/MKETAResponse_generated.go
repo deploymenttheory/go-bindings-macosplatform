@@ -5,93 +5,118 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The travel-time information that Apple servers return.
+// ETAResponse is an idiomatic wrapper over the Objective-C class MKETAResponse.
 //
-// ETAResponse wraps [raw.MKETAResponse] with a fluent Go API.
+// The travel-time information that Apple servers return.
 type ETAResponse struct {
-	inner *raw.MKETAResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKETAResponse].
-func (x *ETAResponse) Unwrap() *raw.MKETAResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ETAResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// ETAResponseFromID adopts an existing object pointer as a ETAResponse (nil for 0).
+// ETAResponseFromID adopts an existing Objective-C object as a ETAResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func ETAResponseFromID(id objc.ID) *ETAResponse {
 	if id == 0 {
 		return nil
 	}
-	return &ETAResponse{inner: raw.MKETAResponseFromID(id)}
+	x := &ETAResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewETAResponse creates a new [ETAResponse].
+// eTAResponseAdopt wraps an Objective-C object that this code just created as a
+// ETAResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eTAResponseAdopt(id objc.ID) *ETAResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &ETAResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ETAResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ETAResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ETAResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ETAResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewETAResponse creates a new ETAResponse.
 func NewETAResponse() *ETAResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKETAResponse")), objc.RegisterName("new"))
-	return &ETAResponse{inner: raw.MKETAResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKETAResponse")), objc.RegisterName("new"))
+	return eTAResponseAdopt(_id)
 }
 
-// Source calls the underlying Source.
+// Source wraps the corresponding Objective-C method.
 func (x *ETAResponse) Source() *MapItem {
-	_r := x.inner.Source()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	return MapItemFromID(_r)
 }
 
-// Destination calls the underlying Destination.
+// Destination wraps the corresponding Objective-C method.
 func (x *ETAResponse) Destination() *MapItem {
-	_r := x.inner.Destination()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+	return MapItemFromID(_r)
 }
 
-// ExpectedTravelTime calls the underlying ExpectedTravelTime.
+// ExpectedTravelTime wraps the corresponding Objective-C method.
 func (x *ETAResponse) ExpectedTravelTime() float64 {
-	return x.inner.ExpectedTravelTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("expectedTravelTime"))
+	return _r
 }
 
-// Distance calls the underlying Distance.
-func (x *ETAResponse) Distance() unsafe.Pointer {
-	return x.inner.Distance()
+// ExpectedArrivalDate wraps the corresponding Objective-C method.
+func (x *ETAResponse) ExpectedArrivalDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedArrivalDate"))
+	return obj.Wrap(_r)
 }
 
-// ExpectedArrivalDate calls the underlying ExpectedArrivalDate.
-func (x *ETAResponse) ExpectedArrivalDate() *foundation.NSDate {
-	return x.inner.ExpectedArrivalDate()
+// ExpectedDepartureDate wraps the corresponding Objective-C method.
+func (x *ETAResponse) ExpectedDepartureDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedDepartureDate"))
+	return obj.Wrap(_r)
 }
 
-// ExpectedDepartureDate calls the underlying ExpectedDepartureDate.
-func (x *ETAResponse) ExpectedDepartureDate() *foundation.NSDate {
-	return x.inner.ExpectedDepartureDate()
-}
-
-// TransportType calls the underlying TransportType.
-func (x *ETAResponse) TransportType() MKDirectionsTransportType {
-	return MKDirectionsTransportType(x.inner.TransportType())
+// TransportType wraps the corresponding Objective-C method.
+func (x *ETAResponse) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+	return _r
 }
 
 // ETAResponseable is the interface implemented by [ETAResponse], for mocking and DI.
 type ETAResponseable interface {
-	Unwrap() *raw.MKETAResponse
+	obj.Object
 	Source() *MapItem
 	Destination() *MapItem
 	ExpectedTravelTime() float64
-	Distance() unsafe.Pointer
-	ExpectedArrivalDate() *foundation.NSDate
-	ExpectedDepartureDate() *foundation.NSDate
-	TransportType() MKDirectionsTransportType
+	ExpectedArrivalDate() obj.Object
+	ExpectedDepartureDate() obj.Object
+	TransportType() DirectionsTransportType
 }
 
 var _ ETAResponseable = (*ETAResponse)(nil)

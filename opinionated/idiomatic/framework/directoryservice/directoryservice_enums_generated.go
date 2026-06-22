@@ -8,137 +8,7 @@ import (
 	"fmt"
 )
 
-type TDirPatternMatch int64
-
-const (
-	EDSNoMatch1                     TDirPatternMatch = 0
-	EDSAnyMatch                     TDirPatternMatch = 1
-	EDSBeginAppleReserve1           TDirPatternMatch = 2
-	EDSEndAppleReserve1             TDirPatternMatch = 8191
-	EDSExact                        TDirPatternMatch = 8193
-	EDSStartsWith                   TDirPatternMatch = 8194
-	EDSEndsWith                     TDirPatternMatch = 8195
-	EDSContains                     TDirPatternMatch = 8196
-	EDSLessThan                     TDirPatternMatch = 8197
-	EDSGreaterThan                  TDirPatternMatch = 8198
-	EDSLessEqual                    TDirPatternMatch = 8199
-	EDSGreaterEqual                 TDirPatternMatch = 8200
-	EDSWildCardPattern              TDirPatternMatch = 8201
-	EDSRegularExpression            TDirPatternMatch = 8202
-	EDSCompoundExpression           TDirPatternMatch = 8203
-	EDSiExact                       TDirPatternMatch = 8449
-	EDSiStartsWith                  TDirPatternMatch = 8450
-	EDSiEndsWith                    TDirPatternMatch = 8451
-	EDSiContains                    TDirPatternMatch = 8452
-	EDSiLessThan                    TDirPatternMatch = 8453
-	EDSiGreaterThan                 TDirPatternMatch = 8454
-	EDSiLessEqual                   TDirPatternMatch = 8455
-	EDSiGreaterEqual                TDirPatternMatch = 8456
-	EDSiWildCardPattern             TDirPatternMatch = 8457
-	EDSiRegularExpression           TDirPatternMatch = 8458
-	EDSiCompoundExpression          TDirPatternMatch = 8459
-	EDSLocalNodeNames               TDirPatternMatch = 8704
-	EDSSearchNodeName               TDirPatternMatch = 8705
-	EDSConfigNodeName               TDirPatternMatch = 8706
-	EDSLocalHostedNodes             TDirPatternMatch = 8707
-	EDSAuthenticationSearchNodeName TDirPatternMatch = 8705
-	EDSContactsSearchNodeName       TDirPatternMatch = 8708
-	EDSNetworkSearchNodeName        TDirPatternMatch = 8709
-	EDSDefaultNetworkNodes          TDirPatternMatch = 8710
-	EDSCacheNodeName                TDirPatternMatch = 8711
-	DDSBeginPlugInCustom            TDirPatternMatch = 12288
-	EDSEndPlugInCustom              TDirPatternMatch = 20479
-	EDSBeginAppleReserve2           TDirPatternMatch = 20480
-	EDSEndAppleReserve2             TDirPatternMatch = 65534
-	EDSNoMatch2                     TDirPatternMatch = 65535
-)
-
-func (e TDirPatternMatch) String() string {
-	switch e {
-	case EDSNoMatch1:
-		return "EDSNoMatch1"
-	case EDSAnyMatch:
-		return "EDSAnyMatch"
-	case EDSBeginAppleReserve1:
-		return "EDSBeginAppleReserve1"
-	case EDSEndAppleReserve1:
-		return "EDSEndAppleReserve1"
-	case EDSExact:
-		return "EDSExact"
-	case EDSStartsWith:
-		return "EDSStartsWith"
-	case EDSEndsWith:
-		return "EDSEndsWith"
-	case EDSContains:
-		return "EDSContains"
-	case EDSLessThan:
-		return "EDSLessThan"
-	case EDSGreaterThan:
-		return "EDSGreaterThan"
-	case EDSLessEqual:
-		return "EDSLessEqual"
-	case EDSGreaterEqual:
-		return "EDSGreaterEqual"
-	case EDSWildCardPattern:
-		return "EDSWildCardPattern"
-	case EDSRegularExpression:
-		return "EDSRegularExpression"
-	case EDSCompoundExpression:
-		return "EDSCompoundExpression"
-	case EDSiExact:
-		return "EDSiExact"
-	case EDSiStartsWith:
-		return "EDSiStartsWith"
-	case EDSiEndsWith:
-		return "EDSiEndsWith"
-	case EDSiContains:
-		return "EDSiContains"
-	case EDSiLessThan:
-		return "EDSiLessThan"
-	case EDSiGreaterThan:
-		return "EDSiGreaterThan"
-	case EDSiLessEqual:
-		return "EDSiLessEqual"
-	case EDSiGreaterEqual:
-		return "EDSiGreaterEqual"
-	case EDSiWildCardPattern:
-		return "EDSiWildCardPattern"
-	case EDSiRegularExpression:
-		return "EDSiRegularExpression"
-	case EDSiCompoundExpression:
-		return "EDSiCompoundExpression"
-	case EDSLocalNodeNames:
-		return "EDSLocalNodeNames"
-	case EDSSearchNodeName:
-		return "EDSSearchNodeName"
-	case EDSConfigNodeName:
-		return "EDSConfigNodeName"
-	case EDSLocalHostedNodes:
-		return "EDSLocalHostedNodes"
-	case EDSContactsSearchNodeName:
-		return "EDSContactsSearchNodeName"
-	case EDSNetworkSearchNodeName:
-		return "EDSNetworkSearchNodeName"
-	case EDSDefaultNetworkNodes:
-		return "EDSDefaultNetworkNodes"
-	case EDSCacheNodeName:
-		return "EDSCacheNodeName"
-	case DDSBeginPlugInCustom:
-		return "DDSBeginPlugInCustom"
-	case EDSEndPlugInCustom:
-		return "EDSEndPlugInCustom"
-	case EDSBeginAppleReserve2:
-		return "EDSBeginAppleReserve2"
-	case EDSEndAppleReserve2:
-		return "EDSEndAppleReserve2"
-	case EDSNoMatch2:
-		return "EDSNoMatch2"
-	default:
-		return fmt.Sprintf("TDirPatternMatch(%d)", int64(e))
-	}
-}
-
-// @enum tDirStatus @discussion Error codes returned from the Directory Services API. @constant eDSSchemaError The write operation failed because the result would conflict with the server's schema. For example, trying to remove a required attribute would return this error. @constant eDSAttributeValueNotFound	When using dsSetAttributeValue, dsRemoveAttributeValue, or dsGetAttributeValueByID the value with the specified ID was not found. @constant eDSVersionMismatch A configuration file version is not compatible with this version of Directory Services or the plug-in that loaded it. @constant eDSAuthNewPasswordRequired The administrator set a flag to force a password reset on the next login. @constant eDSAuthPasswordExpired The password expiration date has passed so it must be reset. @constant eDSAuthPasswordQualityCheckFailed New password rejected because it did not meet the password server�s quality requirements (for example, it was too short). This error only comes back when changing or setting the password, not when authenticating. @constant eDSAuthPasswordTooShort New password rejected because it did not meet the password server�s minimum length requirements. This error only comes back when changing or setting the password, not when authenticating. @constant eDSAuthPasswordTooLong New password rejected because it exceeded the password server�s maximum length limit. This error only comes back when changing or setting the password, not when authenticating. @constant eDSAuthPasswordNeedsLetter New password rejected because it did not meet the password server�s quality requirements (did not contain a letter). This error only comes back when changing or setting the password, not when authenticating. @constant eDSAuthPasswordNeedsDigit New password rejected because it did not meet the password server�s quality requirements (did not contain a digit). This error only comes back when changing or setting the password, not when authenticating. @constant eDSAuthAccountDisabled The administrator set a flag to disable the account. @constant eDSAuthAccountExpired The expiration date/time of the account passed so it is automatically disabled. @constant eDSAuthAccountInactive The account was unused for a preset amount of time so it was automatically disabled. @constant eDSAuthPrimaryUnreachable Unable to authenticate to make changes because the prmary server is unreachable.
+// Error codes returned from the Directory Services API.
 type TDirStatus int64
 
 const (
@@ -385,6 +255,8 @@ const (
 	EDSLastValue                       TDirStatus = -14999
 )
 
+// String returns the TDirStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e TDirStatus) String() string {
 	switch e {
 	case EDSNoErr:

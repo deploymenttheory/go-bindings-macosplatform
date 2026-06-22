@@ -5,181 +5,176 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLQuoteElement wraps [raw.DOMHTMLQuoteElement] with a fluent Go API.
+// DOMHTMLQuoteElement is an idiomatic wrapper over the Objective-C class DOMHTMLQuoteElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLQuoteElement struct {
-	inner *raw.DOMHTMLQuoteElement
+	DOMHTMLElement
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLQuoteElement].
-func (x *DOMHTMLQuoteElement) Unwrap() *raw.DOMHTMLQuoteElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLQuoteElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLQuoteElementFromID adopts an existing object pointer as a DOMHTMLQuoteElement (nil for 0).
+// DOMHTMLQuoteElementFromID adopts an existing Objective-C object as a DOMHTMLQuoteElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLQuoteElementFromID(id objc.ID) *DOMHTMLQuoteElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLQuoteElement{inner: raw.DOMHTMLQuoteElementFromID(id)}
+	x := &DOMHTMLQuoteElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLQuoteElement creates a new [DOMHTMLQuoteElement].
+// dOMHTMLQuoteElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLQuoteElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLQuoteElementAdopt(id objc.ID) *DOMHTMLQuoteElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLQuoteElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMHTMLQuoteElement creates a new DOMHTMLQuoteElement.
 func NewDOMHTMLQuoteElement() *DOMHTMLQuoteElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLQuoteElement")), objc.RegisterName("new"))
-	return &DOMHTMLQuoteElement{inner: raw.DOMHTMLQuoteElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLQuoteElement")), objc.RegisterName("new"))
+	return dOMHTMLQuoteElementAdopt(_id)
 }
 
-// WithCite sets the cite property and returns the receiver for chaining.
+// WithCite sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithCite(cite string) *DOMHTMLQuoteElement {
-	x.inner.SetCite(foundation.NSStringStringWithUTF8String(cite))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCite:"), purego.NSString(cite))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithTitle(title string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithLang(lang string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithDir(dir string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithTabIndex(tabIndex int) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithAccessKey(accessKey string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithInnerText(innerText string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithOuterText(outerText string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithContentEditable(contentEditable string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithIdName(idName string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithScrollLeft(scrollLeft int) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithScrollTop(scrollTop int) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithInnerHTML(innerHTML string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithOuterHTML(outerHTML string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithClassName(className string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithNodeValue(nodeValue string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithPrefix(prefix string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLQuoteElement) WithTextContent(textContent string) *DOMHTMLQuoteElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Cite calls the underlying Cite.
+// Cite wraps the corresponding Objective-C method.
 func (x *DOMHTMLQuoteElement) Cite() string {
-	_r := x.inner.Cite()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cite"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCite calls the underlying SetCite.
+// SetCite wraps the corresponding Objective-C method.
 func (x *DOMHTMLQuoteElement) SetCite(cite string) {
-	x.inner.SetCite(foundation.NSStringStringWithUTF8String(cite))
-}
-
-func (x *DOMHTMLQuoteElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLQuoteElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLQuoteElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLQuoteElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLQuoteElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCite:"), purego.NSString(cite))
 }
 
 // DOMHTMLQuoteElementable is the interface implemented by [DOMHTMLQuoteElement], for mocking and DI.
 type DOMHTMLQuoteElementable interface {
-	Unwrap() *raw.DOMHTMLQuoteElement
+	obj.Object
 	WithCite(cite string) *DOMHTMLQuoteElement
 	WithTitle(title string) *DOMHTMLQuoteElement
 	WithLang(lang string) *DOMHTMLQuoteElement
@@ -203,3 +198,13 @@ type DOMHTMLQuoteElementable interface {
 }
 
 var _ DOMHTMLQuoteElementable = (*DOMHTMLQuoteElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLQuoteElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLQuoteElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLQuoteElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLQuoteElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLQuoteElement)(nil)

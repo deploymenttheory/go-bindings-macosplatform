@@ -5,167 +5,164 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that lets you manage an Automator workflow in your app.
+// WorkflowController is an idiomatic wrapper over the Objective-C class AMWorkflowController.
 //
-// WorkflowController wraps [raw.AMWorkflowController] with a fluent Go API.
+// An object that lets you manage an Automator workflow in your app.
 type WorkflowController struct {
-	inner *raw.AMWorkflowController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AMWorkflowController].
-func (x *WorkflowController) Unwrap() *raw.AMWorkflowController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkflowController) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkflowControllerFromID adopts an existing object pointer as a WorkflowController (nil for 0).
+// WorkflowControllerFromID adopts an existing Objective-C object as a WorkflowController
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkflowControllerFromID(id objc.ID) *WorkflowController {
 	if id == 0 {
 		return nil
 	}
-	return &WorkflowController{inner: raw.AMWorkflowControllerFromID(id)}
+	x := &WorkflowController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWorkflowController creates a new [WorkflowController].
+// workflowControllerAdopt wraps an Objective-C object that this code just created as a
+// WorkflowController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workflowControllerAdopt(id objc.ID) *WorkflowController {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkflowController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkflowController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkflowController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkflowController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkflowController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWorkflowController creates a new WorkflowController.
 func NewWorkflowController() *WorkflowController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkflowController")), objc.RegisterName("new"))
-	return &WorkflowController{inner: raw.AMWorkflowControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AMWorkflowController")), objc.RegisterName("new"))
+	return workflowControllerAdopt(_id)
 }
 
-// The controller’s workflow.
-//
-// WithWorkflow sets the workflow property and returns the receiver for chaining.
+// WithWorkflow the controller’s workflow.
 func (x *WorkflowController) WithWorkflow(workflow *Workflow) *WorkflowController {
-	x.inner.SetWorkflow(workflow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflow:"), objref.IDOf(workflow))
 	return x
 }
 
-// The controller’s workflow view.
-//
-// WithWorkflowView sets the workflowView property and returns the receiver for chaining.
+// WithWorkflowView the controller’s workflow view.
 func (x *WorkflowController) WithWorkflowView(workflowView *WorkflowView) *WorkflowController {
-	x.inner.SetWorkflowView(workflowView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowView:"), objref.IDOf(workflowView))
 	return x
 }
 
-// The controller’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *WorkflowController) WithDelegate(delegate raw.AMWorkflowControllerDelegate) *WorkflowController {
-	x.inner.SetDelegate(delegate)
-	return x
+// Run runs the associated workflow, after first clearing any results stored by its actions during any previous run.
+func (x *WorkflowController) Run(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run:"), objref.IDOf(sender))
 }
 
-// Runs the associated workflow, after first clearing any results stored by its actions during any previous run.
-//
-// Run calls the underlying Run.
-func (x *WorkflowController) Run(sender objc.ID) {
-	x.inner.Run(sender)
+// Stop stops the associated workflow.
+func (x *WorkflowController) Stop(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
-// Stops the associated workflow.
-//
-// Stop calls the underlying Stop.
-func (x *WorkflowController) Stop(sender objc.ID) {
-	x.inner.Stop(sender)
+// Pause pauses a workflow that’s running.
+func (x *WorkflowController) Pause(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause:"), objref.IDOf(sender))
 }
 
-// Pauses a workflow that’s running.
-//
-// Pause calls the underlying Pause.
-func (x *WorkflowController) Pause(sender objc.ID) {
-	x.inner.Pause(sender)
+// Step in a paused workflow, runs the next action in the workflow and then pauses again.
+func (x *WorkflowController) Step(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("step:"), objref.IDOf(sender))
 }
 
-// In a paused workflow, runs the next action in the workflow and then pauses again.
-//
-// Step calls the underlying Step.
-func (x *WorkflowController) Step(sender objc.ID) {
-	x.inner.Step(sender)
+// Reset stops a workflow, clears any action results, and resets the workflow back to an un-run state.
+func (x *WorkflowController) Reset(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset:"), objref.IDOf(sender))
 }
 
-// Stops a workflow, clears any action results, and resets the workflow back to an un-run state.
-//
-// Reset calls the underlying Reset.
-func (x *WorkflowController) Reset(sender objc.ID) {
-	x.inner.Reset(sender)
-}
-
-// Workflow calls the underlying Workflow.
+// Workflow wraps the corresponding Objective-C method.
 func (x *WorkflowController) Workflow() *Workflow {
-	_r := x.inner.Workflow()
-	if _r == nil {
-		return nil
-	}
-	return &Workflow{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workflow"))
+	return WorkflowFromID(_r)
 }
 
-// SetWorkflow calls the underlying SetWorkflow.
-func (x *WorkflowController) SetWorkflow(workflow *raw.AMWorkflow) {
-	x.inner.SetWorkflow(workflow)
+// SetWorkflow wraps the corresponding Objective-C method.
+func (x *WorkflowController) SetWorkflow(workflow *Workflow) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflow:"), objref.IDOf(workflow))
 }
 
-// WorkflowView calls the underlying WorkflowView.
+// WorkflowView wraps the corresponding Objective-C method.
 func (x *WorkflowController) WorkflowView() *WorkflowView {
-	_r := x.inner.WorkflowView()
-	if _r == nil {
-		return nil
-	}
-	return &WorkflowView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workflowView"))
+	return WorkflowViewFromID(_r)
 }
 
-// SetWorkflowView calls the underlying SetWorkflowView.
-func (x *WorkflowController) SetWorkflowView(workflowView *raw.AMWorkflowView) {
-	x.inner.SetWorkflowView(workflowView)
+// SetWorkflowView wraps the corresponding Objective-C method.
+func (x *WorkflowController) SetWorkflowView(workflowView *WorkflowView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowView:"), objref.IDOf(workflowView))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *WorkflowController) Delegate() raw.AMWorkflowControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *WorkflowController) SetDelegate(delegate raw.AMWorkflowControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// CanRun calls the underlying CanRun.
+// CanRun wraps the corresponding Objective-C method.
 func (x *WorkflowController) CanRun() bool {
-	return x.inner.CanRun()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRun"))
+	return _r
 }
 
-// IsRunning calls the underlying IsRunning.
+// IsRunning wraps the corresponding Objective-C method.
 func (x *WorkflowController) IsRunning() bool {
-	return x.inner.IsRunning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
-// IsPaused calls the underlying IsPaused.
+// IsPaused wraps the corresponding Objective-C method.
 func (x *WorkflowController) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
 // WorkflowControllerable is the interface implemented by [WorkflowController], for mocking and DI.
 type WorkflowControllerable interface {
-	Unwrap() *raw.AMWorkflowController
+	obj.Object
 	WithWorkflow(workflow *Workflow) *WorkflowController
 	WithWorkflowView(workflowView *WorkflowView) *WorkflowController
-	WithDelegate(delegate raw.AMWorkflowControllerDelegate) *WorkflowController
-	Run(sender objc.ID)
-	Stop(sender objc.ID)
-	Pause(sender objc.ID)
-	Step(sender objc.ID)
-	Reset(sender objc.ID)
+	Run(sender obj.Object)
+	Stop(sender obj.Object)
+	Pause(sender obj.Object)
+	Step(sender obj.Object)
+	Reset(sender obj.Object)
 	Workflow() *Workflow
-	SetWorkflow(workflow *raw.AMWorkflow)
+	SetWorkflow(workflow *Workflow)
 	WorkflowView() *WorkflowView
-	SetWorkflowView(workflowView *raw.AMWorkflowView)
-	Delegate() raw.AMWorkflowControllerDelegate
-	SetDelegate(delegate raw.AMWorkflowControllerDelegate)
+	SetWorkflowView(workflowView *WorkflowView)
 	CanRun() bool
 	IsRunning() bool
 	IsPaused() bool

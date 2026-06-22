@@ -8,140 +8,89 @@ import (
 	"fmt"
 )
 
-// Possible actions to take after the haptic engine finishes execution.
-type CHHapticEngineFinishedAction int64
-
-const (
-	CHHapticEngineFinishedActionStopEngine         CHHapticEngineFinishedAction = 1
-	CHHapticEngineFinishedActionLeaveEngineRunning CHHapticEngineFinishedAction = 2
-)
-
-func (e CHHapticEngineFinishedAction) String() string {
-	switch e {
-	case CHHapticEngineFinishedActionStopEngine:
-		return "CHHapticEngineFinishedActionStopEngine"
-	case CHHapticEngineFinishedActionLeaveEngineRunning:
-		return "CHHapticEngineFinishedActionLeaveEngineRunning"
-	default:
-		return fmt.Sprintf("CHHapticEngineFinishedAction(%d)", int64(e))
-	}
-}
-
-// The enumeration of reasons the haptic engine stopped running.
-type CHHapticEngineStoppedReason int64
-
-const (
-	CHHapticEngineStoppedReasonAudioSessionInterrupt    CHHapticEngineStoppedReason = 1
-	CHHapticEngineStoppedReasonApplicationSuspended     CHHapticEngineStoppedReason = 2
-	CHHapticEngineStoppedReasonIdleTimeout              CHHapticEngineStoppedReason = 3
-	CHHapticEngineStoppedReasonNotifyWhenFinished       CHHapticEngineStoppedReason = 4
-	CHHapticEngineStoppedReasonEngineDestroyed          CHHapticEngineStoppedReason = 5
-	CHHapticEngineStoppedReasonGameControllerDisconnect CHHapticEngineStoppedReason = 6
-	CHHapticEngineStoppedReasonSystemError              CHHapticEngineStoppedReason = -1
-)
-
-func (e CHHapticEngineStoppedReason) String() string {
-	switch e {
-	case CHHapticEngineStoppedReasonAudioSessionInterrupt:
-		return "CHHapticEngineStoppedReasonAudioSessionInterrupt"
-	case CHHapticEngineStoppedReasonApplicationSuspended:
-		return "CHHapticEngineStoppedReasonApplicationSuspended"
-	case CHHapticEngineStoppedReasonIdleTimeout:
-		return "CHHapticEngineStoppedReasonIdleTimeout"
-	case CHHapticEngineStoppedReasonNotifyWhenFinished:
-		return "CHHapticEngineStoppedReasonNotifyWhenFinished"
-	case CHHapticEngineStoppedReasonEngineDestroyed:
-		return "CHHapticEngineStoppedReasonEngineDestroyed"
-	case CHHapticEngineStoppedReasonGameControllerDisconnect:
-		return "CHHapticEngineStoppedReasonGameControllerDisconnect"
-	case CHHapticEngineStoppedReasonSystemError:
-		return "CHHapticEngineStoppedReasonSystemError"
-	default:
-		return fmt.Sprintf("CHHapticEngineStoppedReason(%d)", int64(e))
-	}
-}
-
 // Error codes for framework operations.
-type CHHapticErrorCode int64
+type HapticErrorCode int64
 
 const (
-	CHHapticErrorCodeEngineNotRunning         CHHapticErrorCode = -4805
-	CHHapticErrorCodeOperationNotPermitted    CHHapticErrorCode = -4806
-	CHHapticErrorCodeEngineStartTimeout       CHHapticErrorCode = -4808
-	CHHapticErrorCodeNotSupported             CHHapticErrorCode = -4809
-	CHHapticErrorCodeServerInitFailed         CHHapticErrorCode = -4810
-	CHHapticErrorCodeServerInterrupted        CHHapticErrorCode = -4811
-	CHHapticErrorCodeInvalidPatternPlayer     CHHapticErrorCode = -4812
-	CHHapticErrorCodeInvalidPatternData       CHHapticErrorCode = -4813
-	CHHapticErrorCodeInvalidPatternDictionary CHHapticErrorCode = -4814
-	CHHapticErrorCodeInvalidAudioSession      CHHapticErrorCode = -4815
-	CHHapticErrorCodeInvalidEngineParameter   CHHapticErrorCode = -4816
-	CHHapticErrorCodeInvalidParameterType     CHHapticErrorCode = -4820
-	CHHapticErrorCodeInvalidEventType         CHHapticErrorCode = -4821
-	CHHapticErrorCodeInvalidEventTime         CHHapticErrorCode = -4822
-	CHHapticErrorCodeInvalidEventDuration     CHHapticErrorCode = -4823
-	CHHapticErrorCodeInvalidAudioResource     CHHapticErrorCode = -4824
-	CHHapticErrorCodeResourceNotAvailable     CHHapticErrorCode = -4825
-	CHHapticErrorCodeBadEventEntry            CHHapticErrorCode = -4830
-	CHHapticErrorCodeBadParameterEntry        CHHapticErrorCode = -4831
-	CHHapticErrorCodeInvalidTime              CHHapticErrorCode = -4840
-	CHHapticErrorCodeFileNotFound             CHHapticErrorCode = -4851
-	CHHapticErrorCodeInsufficientPower        CHHapticErrorCode = -4897
-	CHHapticErrorCodeUnknownError             CHHapticErrorCode = -4898
-	CHHapticErrorCodeMemoryError              CHHapticErrorCode = -4899
+	HapticErrorCodeEngineNotRunning         HapticErrorCode = -4805
+	HapticErrorCodeOperationNotPermitted    HapticErrorCode = -4806
+	HapticErrorCodeEngineStartTimeout       HapticErrorCode = -4808
+	HapticErrorCodeNotSupported             HapticErrorCode = -4809
+	HapticErrorCodeServerInitFailed         HapticErrorCode = -4810
+	HapticErrorCodeServerInterrupted        HapticErrorCode = -4811
+	HapticErrorCodeInvalidPatternPlayer     HapticErrorCode = -4812
+	HapticErrorCodeInvalidPatternData       HapticErrorCode = -4813
+	HapticErrorCodeInvalidPatternDictionary HapticErrorCode = -4814
+	HapticErrorCodeInvalidAudioSession      HapticErrorCode = -4815
+	HapticErrorCodeInvalidEngineParameter   HapticErrorCode = -4816
+	HapticErrorCodeInvalidParameterType     HapticErrorCode = -4820
+	HapticErrorCodeInvalidEventType         HapticErrorCode = -4821
+	HapticErrorCodeInvalidEventTime         HapticErrorCode = -4822
+	HapticErrorCodeInvalidEventDuration     HapticErrorCode = -4823
+	HapticErrorCodeInvalidAudioResource     HapticErrorCode = -4824
+	HapticErrorCodeResourceNotAvailable     HapticErrorCode = -4825
+	HapticErrorCodeBadEventEntry            HapticErrorCode = -4830
+	HapticErrorCodeBadParameterEntry        HapticErrorCode = -4831
+	HapticErrorCodeInvalidTime              HapticErrorCode = -4840
+	HapticErrorCodeFileNotFound             HapticErrorCode = -4851
+	HapticErrorCodeInsufficientPower        HapticErrorCode = -4897
+	HapticErrorCodeUnknownError             HapticErrorCode = -4898
+	HapticErrorCodeMemoryError              HapticErrorCode = -4899
 )
 
-func (e CHHapticErrorCode) String() string {
+// String returns the HapticErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HapticErrorCode) String() string {
 	switch e {
-	case CHHapticErrorCodeEngineNotRunning:
-		return "CHHapticErrorCodeEngineNotRunning"
-	case CHHapticErrorCodeOperationNotPermitted:
-		return "CHHapticErrorCodeOperationNotPermitted"
-	case CHHapticErrorCodeEngineStartTimeout:
-		return "CHHapticErrorCodeEngineStartTimeout"
-	case CHHapticErrorCodeNotSupported:
-		return "CHHapticErrorCodeNotSupported"
-	case CHHapticErrorCodeServerInitFailed:
-		return "CHHapticErrorCodeServerInitFailed"
-	case CHHapticErrorCodeServerInterrupted:
-		return "CHHapticErrorCodeServerInterrupted"
-	case CHHapticErrorCodeInvalidPatternPlayer:
-		return "CHHapticErrorCodeInvalidPatternPlayer"
-	case CHHapticErrorCodeInvalidPatternData:
-		return "CHHapticErrorCodeInvalidPatternData"
-	case CHHapticErrorCodeInvalidPatternDictionary:
-		return "CHHapticErrorCodeInvalidPatternDictionary"
-	case CHHapticErrorCodeInvalidAudioSession:
-		return "CHHapticErrorCodeInvalidAudioSession"
-	case CHHapticErrorCodeInvalidEngineParameter:
-		return "CHHapticErrorCodeInvalidEngineParameter"
-	case CHHapticErrorCodeInvalidParameterType:
-		return "CHHapticErrorCodeInvalidParameterType"
-	case CHHapticErrorCodeInvalidEventType:
-		return "CHHapticErrorCodeInvalidEventType"
-	case CHHapticErrorCodeInvalidEventTime:
-		return "CHHapticErrorCodeInvalidEventTime"
-	case CHHapticErrorCodeInvalidEventDuration:
-		return "CHHapticErrorCodeInvalidEventDuration"
-	case CHHapticErrorCodeInvalidAudioResource:
-		return "CHHapticErrorCodeInvalidAudioResource"
-	case CHHapticErrorCodeResourceNotAvailable:
-		return "CHHapticErrorCodeResourceNotAvailable"
-	case CHHapticErrorCodeBadEventEntry:
-		return "CHHapticErrorCodeBadEventEntry"
-	case CHHapticErrorCodeBadParameterEntry:
-		return "CHHapticErrorCodeBadParameterEntry"
-	case CHHapticErrorCodeInvalidTime:
-		return "CHHapticErrorCodeInvalidTime"
-	case CHHapticErrorCodeFileNotFound:
-		return "CHHapticErrorCodeFileNotFound"
-	case CHHapticErrorCodeInsufficientPower:
-		return "CHHapticErrorCodeInsufficientPower"
-	case CHHapticErrorCodeUnknownError:
-		return "CHHapticErrorCodeUnknownError"
-	case CHHapticErrorCodeMemoryError:
-		return "CHHapticErrorCodeMemoryError"
+	case HapticErrorCodeEngineNotRunning:
+		return "HapticErrorCodeEngineNotRunning"
+	case HapticErrorCodeOperationNotPermitted:
+		return "HapticErrorCodeOperationNotPermitted"
+	case HapticErrorCodeEngineStartTimeout:
+		return "HapticErrorCodeEngineStartTimeout"
+	case HapticErrorCodeNotSupported:
+		return "HapticErrorCodeNotSupported"
+	case HapticErrorCodeServerInitFailed:
+		return "HapticErrorCodeServerInitFailed"
+	case HapticErrorCodeServerInterrupted:
+		return "HapticErrorCodeServerInterrupted"
+	case HapticErrorCodeInvalidPatternPlayer:
+		return "HapticErrorCodeInvalidPatternPlayer"
+	case HapticErrorCodeInvalidPatternData:
+		return "HapticErrorCodeInvalidPatternData"
+	case HapticErrorCodeInvalidPatternDictionary:
+		return "HapticErrorCodeInvalidPatternDictionary"
+	case HapticErrorCodeInvalidAudioSession:
+		return "HapticErrorCodeInvalidAudioSession"
+	case HapticErrorCodeInvalidEngineParameter:
+		return "HapticErrorCodeInvalidEngineParameter"
+	case HapticErrorCodeInvalidParameterType:
+		return "HapticErrorCodeInvalidParameterType"
+	case HapticErrorCodeInvalidEventType:
+		return "HapticErrorCodeInvalidEventType"
+	case HapticErrorCodeInvalidEventTime:
+		return "HapticErrorCodeInvalidEventTime"
+	case HapticErrorCodeInvalidEventDuration:
+		return "HapticErrorCodeInvalidEventDuration"
+	case HapticErrorCodeInvalidAudioResource:
+		return "HapticErrorCodeInvalidAudioResource"
+	case HapticErrorCodeResourceNotAvailable:
+		return "HapticErrorCodeResourceNotAvailable"
+	case HapticErrorCodeBadEventEntry:
+		return "HapticErrorCodeBadEventEntry"
+	case HapticErrorCodeBadParameterEntry:
+		return "HapticErrorCodeBadParameterEntry"
+	case HapticErrorCodeInvalidTime:
+		return "HapticErrorCodeInvalidTime"
+	case HapticErrorCodeFileNotFound:
+		return "HapticErrorCodeFileNotFound"
+	case HapticErrorCodeInsufficientPower:
+		return "HapticErrorCodeInsufficientPower"
+	case HapticErrorCodeUnknownError:
+		return "HapticErrorCodeUnknownError"
+	case HapticErrorCodeMemoryError:
+		return "HapticErrorCodeMemoryError"
 	default:
-		return fmt.Sprintf("CHHapticErrorCode(%d)", int64(e))
+		return fmt.Sprintf("HapticErrorCode(%d)", int64(e))
 	}
 }

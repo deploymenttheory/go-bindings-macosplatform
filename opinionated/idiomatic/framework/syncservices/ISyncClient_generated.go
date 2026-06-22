@@ -5,223 +5,256 @@
 package syncservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ISyncClient wraps [raw.ISyncClient] with a fluent Go API.
+// ISyncClient is an idiomatic wrapper over the Objective-C class ISyncClient.
 type ISyncClient struct {
-	inner *raw.ISyncClient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ISyncClient].
-func (x *ISyncClient) Unwrap() *raw.ISyncClient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ISyncClient) ID() objc.ID { return x.inner.Ptr() }
-
-// ISyncClientFromID adopts an existing object pointer as a ISyncClient (nil for 0).
+// ISyncClientFromID adopts an existing Objective-C object as a ISyncClient
+// (nil for 0), retaining it and registering a release finalizer.
 func ISyncClientFromID(id objc.ID) *ISyncClient {
 	if id == 0 {
 		return nil
 	}
-	return &ISyncClient{inner: raw.ISyncClientFromID(id)}
+	x := &ISyncClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewISyncClient creates a new [ISyncClient].
+// iSyncClientAdopt wraps an Objective-C object that this code just created as a
+// ISyncClient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iSyncClientAdopt(id objc.ID) *ISyncClient {
+	if id == 0 {
+		return nil
+	}
+	x := &ISyncClient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ISyncClient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ISyncClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ISyncClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewISyncClient creates a new ISyncClient.
 func NewISyncClient() *ISyncClient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncClient")), objc.RegisterName("new"))
-	return &ISyncClient{inner: raw.ISyncClientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ISyncClient")), objc.RegisterName("new"))
+	return iSyncClientAdopt(_id)
 }
 
-// ClientIdentifier calls the underlying ClientIdentifier.
+// ClientIdentifier wraps the corresponding Objective-C method.
 func (x *ISyncClient) ClientIdentifier() string {
-	_r := x.inner.ClientIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ClientType calls the underlying ClientType.
+// ClientType wraps the corresponding Objective-C method.
 func (x *ISyncClient) ClientType() string {
-	_r := x.inner.ClientType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DisplayName calls the underlying DisplayName.
+// DisplayName wraps the corresponding Objective-C method.
 func (x *ISyncClient) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDisplayName calls the underlying SetDisplayName.
+// SetDisplayName wraps the corresponding Objective-C method.
 func (x *ISyncClient) SetDisplayName(displayName string) {
-	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 }
 
-// ImagePath calls the underlying ImagePath.
+// ImagePath wraps the corresponding Objective-C method.
 func (x *ISyncClient) ImagePath() string {
-	_r := x.inner.ImagePath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imagePath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetImagePath calls the underlying SetImagePath.
+// SetImagePath wraps the corresponding Objective-C method.
 func (x *ISyncClient) SetImagePath(path string) {
-	x.inner.SetImagePath(foundation.NSStringStringWithUTF8String(path))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePath:"), purego.NSString(path))
 }
 
-// SupportedEntityNames calls the underlying SupportedEntityNames.
-func (x *ISyncClient) SupportedEntityNames() *foundation.NSArray[objc.ID] {
-	return x.inner.SupportedEntityNames()
+// SupportedEntityNames wraps the corresponding Objective-C method.
+func (x *ISyncClient) SupportedEntityNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedEntityNames"))
+	return obj.Wrap(_r)
 }
 
-// CanPushChangesForEntityName calls the underlying CanPushChangesForEntityName.
+// CanPushChangesForEntityName wraps the corresponding Objective-C method.
 func (x *ISyncClient) CanPushChangesForEntityName(entityName string) bool {
-	return x.inner.CanPushChangesForEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPushChangesForEntityName:"), purego.NSString(entityName))
+	return _r
 }
 
-// CanPullChangesForEntityName calls the underlying CanPullChangesForEntityName.
+// CanPullChangesForEntityName wraps the corresponding Objective-C method.
 func (x *ISyncClient) CanPullChangesForEntityName(entityName string) bool {
-	return x.inner.CanPullChangesForEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPullChangesForEntityName:"), purego.NSString(entityName))
+	return _r
 }
 
-// LastSyncDateForEntityName calls the underlying LastSyncDateForEntityName.
-func (x *ISyncClient) LastSyncDateForEntityName(entityName string) *foundation.NSDate {
-	return x.inner.LastSyncDateForEntityName(foundation.NSStringStringWithUTF8String(entityName))
+// LastSyncDateForEntityName wraps the corresponding Objective-C method.
+func (x *ISyncClient) LastSyncDateForEntityName(entityName string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastSyncDateForEntityName:"), purego.NSString(entityName))
+	return obj.Wrap(_r)
 }
 
-// LastSyncStatusForEntityName calls the underlying LastSyncStatusForEntityName.
+// LastSyncStatusForEntityName wraps the corresponding Objective-C method.
 func (x *ISyncClient) LastSyncStatusForEntityName(entityName string) int {
-	return x.inner.LastSyncStatusForEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lastSyncStatusForEntityName:"), purego.NSString(entityName))
+	return _r
 }
 
-// EnabledEntityNames calls the underlying EnabledEntityNames.
-func (x *ISyncClient) EnabledEntityNames() *foundation.NSArray[objc.ID] {
-	return x.inner.EnabledEntityNames()
+// EnabledEntityNames wraps the corresponding Objective-C method.
+func (x *ISyncClient) EnabledEntityNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enabledEntityNames"))
+	return obj.Wrap(_r)
 }
 
-// IsEnabledForEntityName calls the underlying IsEnabledForEntityName.
+// IsEnabledForEntityName wraps the corresponding Objective-C method.
 func (x *ISyncClient) IsEnabledForEntityName(entityName string) bool {
-	return x.inner.IsEnabledForEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabledForEntityName:"), purego.NSString(entityName))
+	return _r
 }
 
-// SetEnabledForEntityNames calls the underlying SetEnabledForEntityNames.
-func (x *ISyncClient) SetEnabledForEntityNames(flag bool, entityNames *foundation.NSArray[objc.ID]) {
-	x.inner.SetEnabledForEntityNames(flag, entityNames)
+// SetEnabledForEntityNames wraps the corresponding Objective-C method.
+func (x *ISyncClient) SetEnabledForEntityNames(flag bool, entityNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:forEntityNames:"), flag, objref.IDOf(entityNames))
 }
 
-// FormatsRelationships calls the underlying FormatsRelationships.
+// FormatsRelationships wraps the corresponding Objective-C method.
 func (x *ISyncClient) FormatsRelationships() bool {
-	return x.inner.FormatsRelationships()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("formatsRelationships"))
+	return _r
 }
 
-// SetFormatsRelationships calls the underlying SetFormatsRelationships.
+// SetFormatsRelationships wraps the corresponding Objective-C method.
 func (x *ISyncClient) SetFormatsRelationships(flag bool) {
-	x.inner.SetFormatsRelationships(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatsRelationships:"), flag)
 }
 
-// ShouldReplaceClientRecordsForEntityName calls the underlying ShouldReplaceClientRecordsForEntityName.
+// ShouldReplaceClientRecordsForEntityName wraps the corresponding Objective-C method.
 func (x *ISyncClient) ShouldReplaceClientRecordsForEntityName(entityName string) bool {
-	return x.inner.ShouldReplaceClientRecordsForEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReplaceClientRecordsForEntityName:"), purego.NSString(entityName))
+	return _r
 }
 
-// SetShouldReplaceClientRecordsForEntityNames calls the underlying SetShouldReplaceClientRecordsForEntityNames.
-func (x *ISyncClient) SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames *foundation.NSArray[objc.ID]) {
-	x.inner.SetShouldReplaceClientRecordsForEntityNames(flag, entityNames)
+// SetShouldReplaceClientRecordsForEntityNames wraps the corresponding Objective-C method.
+func (x *ISyncClient) SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReplaceClientRecords:forEntityNames:"), flag, objref.IDOf(entityNames))
 }
 
-// ObjectForKey calls the underlying ObjectForKey.
-func (x *ISyncClient) ObjectForKey(key string) objc.ID {
-	return x.inner.ObjectForKey(foundation.NSStringStringWithUTF8String(key))
+// ObjectForKey wraps the corresponding Objective-C method.
+func (x *ISyncClient) ObjectForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// SetObjectForKey calls the underlying SetObjectForKey.
-func (x *ISyncClient) SetObjectForKey(value foundation.NSCoding, key string) {
-	x.inner.SetObjectForKey(value, foundation.NSStringStringWithUTF8String(key))
+// Filters wraps the corresponding Objective-C method.
+func (x *ISyncClient) Filters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filters"))
+	return obj.Wrap(_r)
 }
 
-// Filters calls the underlying Filters.
-func (x *ISyncClient) Filters() *foundation.NSArray[objc.ID] {
-	return x.inner.Filters()
+// SetFilters wraps the corresponding Objective-C method.
+func (x *ISyncClient) SetFilters(filters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), objref.IDOf(filters))
 }
 
-// SetFilters calls the underlying SetFilters.
-func (x *ISyncClient) SetFilters(filters *foundation.NSArray[objc.ID]) {
-	x.inner.SetFilters(filters)
-}
-
-// ShouldSynchronizeWithClientsOfType calls the underlying ShouldSynchronizeWithClientsOfType.
+// ShouldSynchronizeWithClientsOfType wraps the corresponding Objective-C method.
 func (x *ISyncClient) ShouldSynchronizeWithClientsOfType(clientType string) bool {
-	return x.inner.ShouldSynchronizeWithClientsOfType(foundation.NSStringStringWithUTF8String(clientType))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSynchronizeWithClientsOfType:"), purego.NSString(clientType))
+	return _r
 }
 
-// SetShouldSynchronizeWithClientsOfType calls the underlying SetShouldSynchronizeWithClientsOfType.
+// SetShouldSynchronizeWithClientsOfType wraps the corresponding Objective-C method.
 func (x *ISyncClient) SetShouldSynchronizeWithClientsOfType(flag bool, clientType string) {
-	x.inner.SetShouldSynchronizeWithClientsOfType(flag, foundation.NSStringStringWithUTF8String(clientType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSynchronize:withClientsOfType:"), flag, purego.NSString(clientType))
 }
 
-// SyncAlertToolPath calls the underlying SyncAlertToolPath.
+// SyncAlertToolPath wraps the corresponding Objective-C method.
 func (x *ISyncClient) SyncAlertToolPath() string {
-	_r := x.inner.SyncAlertToolPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("syncAlertToolPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSyncAlertToolPath calls the underlying SetSyncAlertToolPath.
+// SetSyncAlertToolPath wraps the corresponding Objective-C method.
 func (x *ISyncClient) SetSyncAlertToolPath(path string) {
-	x.inner.SetSyncAlertToolPath(foundation.NSStringStringWithUTF8String(path))
-}
-
-// SetSyncAlertHandlerSelector calls the underlying SetSyncAlertHandlerSelector.
-func (x *ISyncClient) SetSyncAlertHandlerSelector(handler objc.ID, selector objc.SEL) {
-	x.inner.SetSyncAlertHandlerSelector(handler, selector)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSyncAlertToolPath:"), purego.NSString(path))
 }
 
 // ISyncClientable is the interface implemented by [ISyncClient], for mocking and DI.
 type ISyncClientable interface {
-	Unwrap() *raw.ISyncClient
+	obj.Object
 	ClientIdentifier() string
 	ClientType() string
 	DisplayName() string
 	SetDisplayName(displayName string)
 	ImagePath() string
 	SetImagePath(path string)
-	SupportedEntityNames() *foundation.NSArray[objc.ID]
+	SupportedEntityNames() obj.Object
 	CanPushChangesForEntityName(entityName string) bool
 	CanPullChangesForEntityName(entityName string) bool
-	LastSyncDateForEntityName(entityName string) *foundation.NSDate
+	LastSyncDateForEntityName(entityName string) obj.Object
 	LastSyncStatusForEntityName(entityName string) int
-	EnabledEntityNames() *foundation.NSArray[objc.ID]
+	EnabledEntityNames() obj.Object
 	IsEnabledForEntityName(entityName string) bool
-	SetEnabledForEntityNames(flag bool, entityNames *foundation.NSArray[objc.ID])
+	SetEnabledForEntityNames(flag bool, entityNames obj.Object)
 	FormatsRelationships() bool
 	SetFormatsRelationships(flag bool)
 	ShouldReplaceClientRecordsForEntityName(entityName string) bool
-	SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames *foundation.NSArray[objc.ID])
-	ObjectForKey(key string) objc.ID
-	SetObjectForKey(value foundation.NSCoding, key string)
-	Filters() *foundation.NSArray[objc.ID]
-	SetFilters(filters *foundation.NSArray[objc.ID])
+	SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames obj.Object)
+	ObjectForKey(key string) obj.Object
+	Filters() obj.Object
+	SetFilters(filters obj.Object)
 	ShouldSynchronizeWithClientsOfType(clientType string) bool
 	SetShouldSynchronizeWithClientsOfType(flag bool, clientType string)
 	SyncAlertToolPath() string
 	SetSyncAlertToolPath(path string)
-	SetSyncAlertHandlerSelector(handler objc.ID, selector objc.SEL)
 }
 
 var _ ISyncClientable = (*ISyncClient)(nil)

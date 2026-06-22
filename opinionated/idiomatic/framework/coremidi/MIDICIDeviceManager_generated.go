@@ -5,53 +5,82 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CIDeviceManager wraps [raw.MIDICIDeviceManager] with a fluent Go API.
+// CIDeviceManager is an idiomatic wrapper over the Objective-C class MIDICIDeviceManager.
 type CIDeviceManager struct {
-	inner *raw.MIDICIDeviceManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIDeviceManager].
-func (x *CIDeviceManager) Unwrap() *raw.MIDICIDeviceManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIDeviceManager) ID() objc.ID { return x.inner.Ptr() }
-
-// CIDeviceManagerFromID adopts an existing object pointer as a CIDeviceManager (nil for 0).
+// CIDeviceManagerFromID adopts an existing Objective-C object as a CIDeviceManager
+// (nil for 0), retaining it and registering a release finalizer.
 func CIDeviceManagerFromID(id objc.ID) *CIDeviceManager {
 	if id == 0 {
 		return nil
 	}
-	return &CIDeviceManager{inner: raw.MIDICIDeviceManagerFromID(id)}
+	x := &CIDeviceManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCIDeviceManager creates a new [CIDeviceManager].
+// cIDeviceManagerAdopt wraps an Objective-C object that this code just created as a
+// CIDeviceManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIDeviceManagerAdopt(id objc.ID) *CIDeviceManager {
+	if id == 0 {
+		return nil
+	}
+	x := &CIDeviceManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CIDeviceManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIDeviceManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIDeviceManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDeviceManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIDeviceManager creates a new CIDeviceManager.
 func NewCIDeviceManager() *CIDeviceManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDeviceManager")), objc.RegisterName("new"))
-	return &CIDeviceManager{inner: raw.MIDICIDeviceManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceManager")), objc.RegisterName("new"))
+	return cIDeviceManagerAdopt(_id)
 }
 
-// @property	discoveredCIDevices @brief		A list of MIDICIDevices that responded to the last MIDI-CI discovery request.
+// DiscoveredCIDevices a list of MIDICIDevices that responded to the last MIDI-CI discovery request.
 //
 // DiscoveredCIDevices returns the collection as a Go slice.
 func (x *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {
-	arr := x.inner.DiscoveredCIDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CIDevice {
-		return &CIDevice{inner: raw.MIDICIDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveredCIDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIDevice { return CIDeviceFromID(_id) })
 }
 
 // CIDeviceManagerable is the interface implemented by [CIDeviceManager], for mocking and DI.
 type CIDeviceManagerable interface {
-	Unwrap() *raw.MIDICIDeviceManager
+	obj.Object
 	DiscoveredCIDevices() []*CIDevice
 }
 

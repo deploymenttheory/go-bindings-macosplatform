@@ -5,82 +5,88 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI program or patch change message.
+// MIDIProgramChangeEvent is an idiomatic wrapper over the Objective-C class AVMIDIProgramChangeEvent.
 //
-// MIDIProgramChangeEvent wraps [raw.AVMIDIProgramChangeEvent] with a fluent Go API.
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI program or patch change message.
 type MIDIProgramChangeEvent struct {
-	inner *raw.AVMIDIProgramChangeEvent
+	MIDIChannelEvent
 }
 
-// Unwrap returns the underlying [raw.AVMIDIProgramChangeEvent].
-func (x *MIDIProgramChangeEvent) Unwrap() *raw.AVMIDIProgramChangeEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIProgramChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIProgramChangeEventFromID adopts an existing object pointer as a MIDIProgramChangeEvent (nil for 0).
+// MIDIProgramChangeEventFromID adopts an existing Objective-C object as a MIDIProgramChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIProgramChangeEventFromID(id objc.ID) *MIDIProgramChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIProgramChangeEvent{inner: raw.AVMIDIProgramChangeEventFromID(id)}
+	x := &MIDIProgramChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a program change event with a channel and program number.
-//
-// NewMIDIProgramChangeEventWithChannelProgramNumber creates a new [MIDIProgramChangeEvent].
-func NewMIDIProgramChangeEventWithChannelProgramNumber(channel uint, programNumber uint) *MIDIProgramChangeEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIProgramChangeEvent")), objc.RegisterName("alloc"))
+// mIDIProgramChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIProgramChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIProgramChangeEventAdopt(id objc.ID) *MIDIProgramChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIProgramChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMIDIProgramChangeEventWithChannelProgramNumber creates a program change event with a channel and program number.
+func NewMIDIProgramChangeEventWithChannelProgramNumber(channel int, programNumber int) *MIDIProgramChangeEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIProgramChangeEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:programNumber:"), channel, programNumber)
-	return &MIDIProgramChangeEvent{inner: raw.AVMIDIProgramChangeEventFromID(_id)}
+	return mIDIProgramChangeEventAdopt(_id)
 }
 
-// The MIDI program number.
-//
-// WithProgramNumber sets the programNumber property and returns the receiver for chaining.
-func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber uint) *MIDIProgramChangeEvent {
-	x.inner.SetProgramNumber(programNumber)
+// WithProgramNumber the MIDI program number.
+func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber int) *MIDIProgramChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramNumber:"), programNumber)
 	return x
 }
 
-// The MIDI channel.
-//
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MIDIProgramChangeEvent) WithChannel(channel uint) *MIDIProgramChangeEvent {
-	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+// WithChannel the MIDI channel.
+func (x *MIDIProgramChangeEvent) WithChannel(channel int) *MIDIProgramChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
-// ProgramNumber calls the underlying ProgramNumber.
-func (x *MIDIProgramChangeEvent) ProgramNumber() uint {
-	return x.inner.ProgramNumber()
+// ProgramNumber wraps the corresponding Objective-C method.
+func (x *MIDIProgramChangeEvent) ProgramNumber() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("programNumber"))
+	return _r
 }
 
-// SetProgramNumber calls the underlying SetProgramNumber.
-func (x *MIDIProgramChangeEvent) SetProgramNumber(programNumber uint) {
-	x.inner.SetProgramNumber(programNumber)
-}
-
-func (x *MIDIProgramChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
-	return &x.inner.AVMIDIChannelEvent
-}
-
-func (x *MIDIProgramChangeEvent) asMusicEvent() *raw.AVMusicEvent {
-	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+// SetProgramNumber wraps the corresponding Objective-C method.
+func (x *MIDIProgramChangeEvent) SetProgramNumber(programNumber int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramNumber:"), programNumber)
 }
 
 // MIDIProgramChangeEventable is the interface implemented by [MIDIProgramChangeEvent], for mocking and DI.
 type MIDIProgramChangeEventable interface {
-	Unwrap() *raw.AVMIDIProgramChangeEvent
-	WithProgramNumber(programNumber uint) *MIDIProgramChangeEvent
-	WithChannel(channel uint) *MIDIProgramChangeEvent
-	ProgramNumber() uint
-	SetProgramNumber(programNumber uint)
+	obj.Object
+	WithProgramNumber(programNumber int) *MIDIProgramChangeEvent
+	WithChannel(channel int) *MIDIProgramChangeEvent
+	ProgramNumber() int
+	SetProgramNumber(programNumber int)
 }
 
 var _ MIDIProgramChangeEventable = (*MIDIProgramChangeEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIProgramChangeEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIProgramChangeEvent)(nil)

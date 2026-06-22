@@ -5,41 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSmokeCOAlarmClusterAllClearEvent wraps [raw.MTRSmokeCOAlarmClusterAllClearEvent] with a fluent Go API.
+// MTRSmokeCOAlarmClusterAllClearEvent is an idiomatic wrapper over the Objective-C class MTRSmokeCOAlarmClusterAllClearEvent.
 type MTRSmokeCOAlarmClusterAllClearEvent struct {
-	inner *raw.MTRSmokeCOAlarmClusterAllClearEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterAllClearEvent].
-func (x *MTRSmokeCOAlarmClusterAllClearEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterAllClearEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSmokeCOAlarmClusterAllClearEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSmokeCOAlarmClusterAllClearEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterAllClearEvent (nil for 0).
+// MTRSmokeCOAlarmClusterAllClearEventFromID adopts an existing Objective-C object as a MTRSmokeCOAlarmClusterAllClearEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSmokeCOAlarmClusterAllClearEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterAllClearEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSmokeCOAlarmClusterAllClearEvent{inner: raw.MTRSmokeCOAlarmClusterAllClearEventFromID(id)}
+	x := &MTRSmokeCOAlarmClusterAllClearEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRSmokeCOAlarmClusterAllClearEvent creates a new [MTRSmokeCOAlarmClusterAllClearEvent].
+// mTRSmokeCOAlarmClusterAllClearEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSmokeCOAlarmClusterAllClearEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSmokeCOAlarmClusterAllClearEventAdopt(id objc.ID) *MTRSmokeCOAlarmClusterAllClearEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSmokeCOAlarmClusterAllClearEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRSmokeCOAlarmClusterAllClearEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSmokeCOAlarmClusterAllClearEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSmokeCOAlarmClusterAllClearEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSmokeCOAlarmClusterAllClearEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRSmokeCOAlarmClusterAllClearEvent creates a new MTRSmokeCOAlarmClusterAllClearEvent.
 func NewMTRSmokeCOAlarmClusterAllClearEvent() *MTRSmokeCOAlarmClusterAllClearEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSmokeCOAlarmClusterAllClearEvent")), objc.RegisterName("new"))
-	return &MTRSmokeCOAlarmClusterAllClearEvent{inner: raw.MTRSmokeCOAlarmClusterAllClearEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterAllClearEvent")), objc.RegisterName("new"))
+	return mTRSmokeCOAlarmClusterAllClearEventAdopt(_id)
 }
 
 // MTRSmokeCOAlarmClusterAllClearEventable is the interface implemented by [MTRSmokeCOAlarmClusterAllClearEvent], for mocking and DI.
 type MTRSmokeCOAlarmClusterAllClearEventable interface {
-	Unwrap() *raw.MTRSmokeCOAlarmClusterAllClearEvent
+	obj.Object
 }
 
 var _ MTRSmokeCOAlarmClusterAllClearEventable = (*MTRSmokeCOAlarmClusterAllClearEvent)(nil)

@@ -5,101 +5,79 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageThresholdToZero wraps [raw.MPSImageThresholdToZero] with a fluent Go API.
+// ImageThresholdToZero is an idiomatic wrapper over the Objective-C class MPSImageThresholdToZero.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageThresholdToZero struct {
-	inner *raw.MPSImageThresholdToZero
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageThresholdToZero].
-func (x *ImageThresholdToZero) Unwrap() *raw.MPSImageThresholdToZero { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageThresholdToZero) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageThresholdToZeroFromID adopts an existing object pointer as a ImageThresholdToZero (nil for 0).
+// ImageThresholdToZeroFromID adopts an existing Objective-C object as a ImageThresholdToZero
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageThresholdToZeroFromID(id objc.ID) *ImageThresholdToZero {
 	if id == 0 {
 		return nil
 	}
-	return &ImageThresholdToZero{inner: raw.MPSImageThresholdToZeroFromID(id)}
+	x := &ImageThresholdToZero{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   initialize a MPSImageThresholdToZero filter @param      device          The device the filter will run on @param      thresholdValue  The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
-//
-// NewImageThresholdToZeroWithDeviceThresholdValueLinearGrayColorTransform creates a new [ImageThresholdToZero].
-func NewImageThresholdToZeroWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *ImageThresholdToZero {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdToZero")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:thresholdValue:linearGrayColorTransform:"), device, thresholdValue, transform)
-	return &ImageThresholdToZero{inner: raw.MPSImageThresholdToZeroFromID(_id)}
+// imageThresholdToZeroAdopt wraps an Objective-C object that this code just created as a
+// ImageThresholdToZero (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageThresholdToZeroAdopt(id objc.ID) *ImageThresholdToZero {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageThresholdToZero{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageThresholdToZeroWithCoderDevice creates a new [ImageThresholdToZero].
-func NewImageThresholdToZeroWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageThresholdToZero {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdToZero")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageThresholdToZero{inner: raw.MPSImageThresholdToZeroFromID(_id)}
+// NewImageThresholdToZero creates a new ImageThresholdToZero.
+func NewImageThresholdToZero() *ImageThresholdToZero {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageThresholdToZero")), objc.RegisterName("new"))
+	return imageThresholdToZeroAdopt(_id)
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (x *ImageThresholdToZero) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageThresholdToZero) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageThresholdToZero) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZero {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property thresholdValue @discussion The threshold value used to init the threshold filter
-//
-// ThresholdValue calls the underlying ThresholdValue.
+// ThresholdValue the threshold value used to init the threshold filter
 func (x *ImageThresholdToZero) ThresholdValue() float32 {
-	return x.inner.ThresholdValue()
-}
-
-// @property transform @discussion The color transform used to init the threshold filter
-//
-// Transform calls the underlying Transform.
-func (x *ImageThresholdToZero) Transform() *float32 {
-	return x.inner.Transform()
-}
-
-func (x *ImageThresholdToZero) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+	return _r
 }
 
 // ImageThresholdToZeroable is the interface implemented by [ImageThresholdToZero], for mocking and DI.
 type ImageThresholdToZeroable interface {
-	Unwrap() *raw.MPSImageThresholdToZero
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero
 	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZero
 	ThresholdValue() float32
-	Transform() *float32
 }
 
 var _ ImageThresholdToZeroable = (*ImageThresholdToZero)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageThresholdToZero)(nil)

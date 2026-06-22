@@ -5,70 +5,101 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that represents a display device.
+// Display is an idiomatic wrapper over the Objective-C class SCDisplay.
 //
-// Display wraps [raw.SCDisplay] with a fluent Go API.
+// An instance that represents a display device.
 type Display struct {
-	inner *raw.SCDisplay
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCDisplay].
-func (x *Display) Unwrap() *raw.SCDisplay { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Display) ID() objc.ID { return x.inner.Ptr() }
-
-// DisplayFromID adopts an existing object pointer as a Display (nil for 0).
+// DisplayFromID adopts an existing Objective-C object as a Display
+// (nil for 0), retaining it and registering a release finalizer.
 func DisplayFromID(id objc.ID) *Display {
 	if id == 0 {
 		return nil
 	}
-	return &Display{inner: raw.SCDisplayFromID(id)}
+	x := &Display{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDisplay creates a new [Display].
+// displayAdopt wraps an Objective-C object that this code just created as a
+// Display (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func displayAdopt(id objc.ID) *Display {
+	if id == 0 {
+		return nil
+	}
+	x := &Display{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Display) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Display) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Display) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Display) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDisplay creates a new Display.
 func NewDisplay() *Display {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCDisplay")), objc.RegisterName("new"))
-	return &Display{inner: raw.SCDisplayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCDisplay")), objc.RegisterName("new"))
+	return displayAdopt(_id)
 }
 
-// @abstract displayId the CGDirectDisplayID for the SCDisplay
-//
-// DisplayID calls the underlying DisplayID.
+// DisplayID displayId the CGDirectDisplayID for the SCDisplay
 func (x *Display) DisplayID() uint32 {
-	return x.inner.DisplayID()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("displayID"))
+	return _r
 }
 
-// @abstract width the width, in points, for the SCDisplay
-//
-// Width calls the underlying Width.
+// Width width the width, in points, for the SCDisplay
 func (x *Display) Width() int {
-	return x.inner.Width()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// @abstract height the height, in points, for the SCDisplay
-//
-// Height calls the underlying Height.
+// Height height the height, in points, for the SCDisplay
 func (x *Display) Height() int {
-	return x.inner.Height()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// @abstract frame the CGRect frame for the SCDisplay
-//
-// Frame calls the underlying Frame.
+// Frame frame the CGRect frame for the SCDisplay
 func (x *Display) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
 }
 
 // Displayable is the interface implemented by [Display], for mocking and DI.
 type Displayable interface {
-	Unwrap() *raw.SCDisplay
+	obj.Object
 	DisplayID() uint32
 	Width() int
 	Height() int

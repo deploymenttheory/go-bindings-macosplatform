@@ -5,187 +5,125 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A cropping and bilinear resizing filter.
+// NNCropAndResizeBilinear is an idiomatic wrapper over the Objective-C class MPSNNCropAndResizeBilinear.
 //
-// NNCropAndResizeBilinear wraps [raw.MPSNNCropAndResizeBilinear] with a fluent Go API.
+// It embeds [CNNKernel], promoting that type's methods.
+//
+// A cropping and bilinear resizing filter.
 type NNCropAndResizeBilinear struct {
-	inner *raw.MPSNNCropAndResizeBilinear
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNNCropAndResizeBilinear].
-func (x *NNCropAndResizeBilinear) Unwrap() *raw.MPSNNCropAndResizeBilinear { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNCropAndResizeBilinear) ID() objc.ID { return x.inner.Ptr() }
-
-// NNCropAndResizeBilinearFromID adopts an existing object pointer as a NNCropAndResizeBilinear (nil for 0).
+// NNCropAndResizeBilinearFromID adopts an existing Objective-C object as a NNCropAndResizeBilinear
+// (nil for 0), retaining it and registering a release finalizer.
 func NNCropAndResizeBilinearFromID(id objc.ID) *NNCropAndResizeBilinear {
 	if id == 0 {
 		return nil
 	}
-	return &NNCropAndResizeBilinear{inner: raw.MPSNNCropAndResizeBilinearFromID(id)}
+	x := &NNCropAndResizeBilinear{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract  Initialize the crop and resize bilinear filter. @param     device                   The device the filter will run on. @param     resizeWidth              The destination resize width in pixels @param     resizeHeight             The destination resize height in pixels @param     numberOfRegions          Specifies the number of bounding box i.e. regions to resize @param     regions                  This is a pointer to "numberOfRegions" boxes which specify the locations in the source image to use for each box/region to perform the resize operation. @return    A valid MPSNNCropAndResizeBilinear object or nil, if failure.
-//
-// NewNNCropAndResizeBilinearWithDeviceResizeWidthResizeHeightNumberOfRegionsRegions creates a new [NNCropAndResizeBilinear].
-func NewNNCropAndResizeBilinearWithDeviceResizeWidthResizeHeightNumberOfRegionsRegions(device metal.MTLDevice, resizeWidth uint, resizeHeight uint, numberOfRegions uint, regions *mpscore.MPSRegion) *NNCropAndResizeBilinear {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNCropAndResizeBilinear")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:resizeWidth:resizeHeight:numberOfRegions:regions:"), device, resizeWidth, resizeHeight, numberOfRegions, regions)
-	return &NNCropAndResizeBilinear{inner: raw.MPSNNCropAndResizeBilinearFromID(_id)}
+// nNCropAndResizeBilinearAdopt wraps an Objective-C object that this code just created as a
+// NNCropAndResizeBilinear (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNCropAndResizeBilinearAdopt(id objc.ID) *NNCropAndResizeBilinear {
+	if id == 0 {
+		return nil
+	}
+	x := &NNCropAndResizeBilinear{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSNNCropAndResizeBilinear @param      device      The MTLDevice on which to make the MPSNNCropAndResizeBilinear @return     A new MPSNNResizeBilinear object, or nil if failure.
-//
-// NewNNCropAndResizeBilinearWithCoderDevice creates a new [NNCropAndResizeBilinear].
-func NewNNCropAndResizeBilinearWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNCropAndResizeBilinear {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNCropAndResizeBilinear")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNCropAndResizeBilinear{inner: raw.MPSNNCropAndResizeBilinearFromID(_id)}
+// NewNNCropAndResizeBilinear creates a new NNCropAndResizeBilinear.
+func NewNNCropAndResizeBilinear() *NNCropAndResizeBilinear {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNCropAndResizeBilinear")), objc.RegisterName("new"))
+	return nNCropAndResizeBilinearAdopt(_id)
 }
 
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
 func (x *NNCropAndResizeBilinear) WithOffset(offset mpscore.MPSOffset) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *NNCropAndResizeBilinear) WithClipRect(clipRect metal.MTLRegion) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *NNCropAndResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNCropAndResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNCropAndResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNCropAndResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNCropAndResizeBilinear) WithOptions(options mpscore.MPSKernelOptions) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NNCropAndResizeBilinear) WithLabel(label string) *NNCropAndResizeBilinear {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   resizeWidth @abstract   The resize width.
-//
-// ResizeWidth calls the underlying ResizeWidth.
-func (x *NNCropAndResizeBilinear) ResizeWidth() uint {
-	return x.inner.ResizeWidth()
+// ResizeWidth the resize width.
+func (x *NNCropAndResizeBilinear) ResizeWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizeWidth"))
+	return _r
 }
 
-// @property   resizeHeight @abstract   The resize height.
-//
-// ResizeHeight calls the underlying ResizeHeight.
-func (x *NNCropAndResizeBilinear) ResizeHeight() uint {
-	return x.inner.ResizeHeight()
+// ResizeHeight the resize height.
+func (x *NNCropAndResizeBilinear) ResizeHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizeHeight"))
+	return _r
 }
 
-// @property   numberOfRegions @abstract   the number of bounding box i.e. regions to resize.
-//
-// NumberOfRegions calls the underlying NumberOfRegions.
-func (x *NNCropAndResizeBilinear) NumberOfRegions() uint {
-	return x.inner.NumberOfRegions()
-}
-
-// @property   regions @abstract   This is a pointer to "numberOfRegions" boxes which specify the locations in the source image to use for each box/region to perform the resize operation. The coordinates specified are normalized values.  A normalized region outside the [0, 1] range is allowed, in which case we use extrapolation_value to extrapolate the input image values.
-//
-// Regions calls the underlying Regions.
-func (x *NNCropAndResizeBilinear) Regions() *mpscore.MPSRegion {
-	return x.inner.Regions()
-}
-
-func (x *NNCropAndResizeBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNKernel
-}
-
-func (x *NNCropAndResizeBilinear) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNKernel.MPSKernel
+// NumberOfRegions the number of bounding box i.e. regions to resize.
+func (x *NNCropAndResizeBilinear) NumberOfRegions() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRegions"))
+	return _r
 }
 
 // NNCropAndResizeBilinearable is the interface implemented by [NNCropAndResizeBilinear], for mocking and DI.
 type NNCropAndResizeBilinearable interface {
-	Unwrap() *raw.MPSNNCropAndResizeBilinear
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *NNCropAndResizeBilinear
 	WithClipRect(clipRect metal.MTLRegion) *NNCropAndResizeBilinear
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCropAndResizeBilinear
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNCropAndResizeBilinear
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNCropAndResizeBilinear
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNCropAndResizeBilinear
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNCropAndResizeBilinear
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCropAndResizeBilinear
-	WithOptions(options mpscore.MPSKernelOptions) *NNCropAndResizeBilinear
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNCropAndResizeBilinear
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNCropAndResizeBilinear
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNCropAndResizeBilinear
 	WithLabel(label string) *NNCropAndResizeBilinear
-	ResizeWidth() uint
-	ResizeHeight() uint
-	NumberOfRegions() uint
-	Regions() *mpscore.MPSRegion
+	ResizeWidth() int
+	ResizeHeight() int
+	NumberOfRegions() int
 }
 
 var _ NNCropAndResizeBilinearable = (*NNCropAndResizeBilinear)(nil)
+
+var _ CNNKernelProvider = (*NNCropAndResizeBilinear)(nil)
+
+var _ KernelProvider = (*NNCropAndResizeBilinear)(nil)

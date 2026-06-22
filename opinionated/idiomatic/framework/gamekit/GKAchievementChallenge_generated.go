@@ -5,53 +5,65 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type of challenge where a player must earn another player’s achievement.
+// AchievementChallenge is an idiomatic wrapper over the Objective-C class GKAchievementChallenge.
 //
-// AchievementChallenge wraps [raw.GKAchievementChallenge] with a fluent Go API.
+// It embeds [Challenge], promoting that type's methods.
+//
+// A type of challenge where a player must earn another player’s achievement.
 type AchievementChallenge struct {
-	inner *raw.GKAchievementChallenge
+	Challenge
 }
 
-// Unwrap returns the underlying [raw.GKAchievementChallenge].
-func (x *AchievementChallenge) Unwrap() *raw.GKAchievementChallenge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AchievementChallenge) ID() objc.ID { return x.inner.Ptr() }
-
-// AchievementChallengeFromID adopts an existing object pointer as a AchievementChallenge (nil for 0).
+// AchievementChallengeFromID adopts an existing Objective-C object as a AchievementChallenge
+// (nil for 0), retaining it and registering a release finalizer.
 func AchievementChallengeFromID(id objc.ID) *AchievementChallenge {
 	if id == 0 {
 		return nil
 	}
-	return &AchievementChallenge{inner: raw.GKAchievementChallengeFromID(id)}
+	x := &AchievementChallenge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAchievementChallenge creates a new [AchievementChallenge].
-func NewAchievementChallenge() *AchievementChallenge {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievementChallenge")), objc.RegisterName("new"))
-	return &AchievementChallenge{inner: raw.GKAchievementChallengeFromID(_id)}
-}
-
-// Achievement calls the underlying Achievement.
-func (x *AchievementChallenge) Achievement() *Achievement {
-	_r := x.inner.Achievement()
-	if _r == nil {
+// achievementChallengeAdopt wraps an Objective-C object that this code just created as a
+// AchievementChallenge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func achievementChallengeAdopt(id objc.ID) *AchievementChallenge {
+	if id == 0 {
 		return nil
 	}
-	return &Achievement{inner: _r}
+	x := &AchievementChallenge{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *AchievementChallenge) asChallenge() *raw.GKChallenge { return &x.inner.GKChallenge }
+// NewAchievementChallenge creates a new AchievementChallenge.
+func NewAchievementChallenge() *AchievementChallenge {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKAchievementChallenge")), objc.RegisterName("new"))
+	return achievementChallengeAdopt(_id)
+}
+
+// Achievement wraps the corresponding Objective-C method.
+func (x *AchievementChallenge) Achievement() *Achievement {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("achievement"))
+	return AchievementFromID(_r)
+}
 
 // AchievementChallengeable is the interface implemented by [AchievementChallenge], for mocking and DI.
 type AchievementChallengeable interface {
-	Unwrap() *raw.GKAchievementChallenge
+	obj.Object
 	Achievement() *Achievement
 }
 
 var _ AchievementChallengeable = (*AchievementChallenge)(nil)
+
+var _ ChallengeProvider = (*AchievementChallenge)(nil)

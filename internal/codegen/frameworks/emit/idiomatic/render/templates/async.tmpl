@@ -1,0 +1,50 @@
+{{/*
+    async.tmpl — an Objective-C completion-handler method surfaced as a blocking,
+    ctx-aware call. The block parameters, marshaling expressions, and send call
+    are all resolved in the gather phase; the template assembles the block body
+    and the ctx-vs-result select with no string-built Go statements. Two shapes:
+    error-only and (R, error). The channel is buffered (size 1) so the block can
+    always send and nothing leaks.
+*/}}
+{{define "async"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} blocks until the operation completes or ctx is cancelled.
+{{if .HasResult -}}
+func {{.Recv}}{{.GoName}}({{.ParamStr}}) (result {{.ResultGoType}}, err error) {
+type _result struct {
+val {{.ResultGoType}}
+err error
+}
+_ch := make(chan _result, 1)
+_block := objc.NewBlock(func(_ objc.Block{{range .ClosureParams}}, {{.}}{{end}}) {
+var _o _result
+{{if .ErrConvExpr}}_o.err = {{.ErrConvExpr}}
+{{end}}_o.val = {{.ResultConvExpr}}
+_ch <- _o
+})
+{{.SendCall}}
+select {
+case _o := <-_ch:
+return _o.val, _o.err
+case <-ctx.Done():
+var _zero {{.ResultGoType}}
+return _zero, ctx.Err()
+}
+}
+{{else -}}
+func {{.Recv}}{{.GoName}}({{.ParamStr}}) error {
+_ch := make(chan error, 1)
+_block := objc.NewBlock(func(_ objc.Block{{range .ClosureParams}}, {{.}}{{end}}) {
+{{if .ErrConvExpr}}var _err error
+_err = {{.ErrConvExpr}}
+_ch <- _err{{else}}_ch <- nil{{end}}
+})
+{{.SendCall}}
+select {
+case err := <-_ch:
+return err
+case <-ctx.Done():
+return ctx.Err()
+}
+}
+{{end}}
+{{end}}

@@ -5,151 +5,186 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A column within a grid view.
+// GridColumn is an idiomatic wrapper over the Objective-C class NSGridColumn.
 //
-// GridColumn wraps [raw.NSGridColumn] with a fluent Go API.
+// A column within a grid view.
 type GridColumn struct {
-	inner *raw.NSGridColumn
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGridColumn].
-func (x *GridColumn) Unwrap() *raw.NSGridColumn { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GridColumn) ID() objc.ID { return x.inner.Ptr() }
-
-// GridColumnFromID adopts an existing object pointer as a GridColumn (nil for 0).
+// GridColumnFromID adopts an existing Objective-C object as a GridColumn
+// (nil for 0), retaining it and registering a release finalizer.
 func GridColumnFromID(id objc.ID) *GridColumn {
 	if id == 0 {
 		return nil
 	}
-	return &GridColumn{inner: raw.NSGridColumnFromID(id)}
+	x := &GridColumn{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGridColumn creates a new [GridColumn].
+// gridColumnAdopt wraps an Objective-C object that this code just created as a
+// GridColumn (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gridColumnAdopt(id objc.ID) *GridColumn {
+	if id == 0 {
+		return nil
+	}
+	x := &GridColumn{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GridColumn) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GridColumn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GridColumn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GridColumn) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGridColumn creates a new GridColumn.
 func NewGridColumn() *GridColumn {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridColumn")), objc.RegisterName("new"))
-	return &GridColumn{inner: raw.NSGridColumnFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGridColumn")), objc.RegisterName("new"))
+	return gridColumnAdopt(_id)
 }
 
-// WithXPlacement sets the xPlacement property and returns the receiver for chaining.
-func (x *GridColumn) WithXPlacement(xPlacement NSGridCellPlacement) *GridColumn {
-	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
+// WithXPlacement sets the property and returns the receiver so calls can be chained.
+func (x *GridColumn) WithXPlacement(xPlacement GridCellPlacement) *GridColumn {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 	return x
 }
 
-// WithWidth sets the width property and returns the receiver for chaining.
+// WithWidth sets the property and returns the receiver so calls can be chained.
 func (x *GridColumn) WithWidth(width float64) *GridColumn {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// WithLeadingPadding sets the leadingPadding property and returns the receiver for chaining.
+// WithLeadingPadding sets the property and returns the receiver so calls can be chained.
 func (x *GridColumn) WithLeadingPadding(leadingPadding float64) *GridColumn {
-	x.inner.SetLeadingPadding(leadingPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeadingPadding:"), leadingPadding)
 	return x
 }
 
-// WithTrailingPadding sets the trailingPadding property and returns the receiver for chaining.
+// WithTrailingPadding sets the property and returns the receiver so calls can be chained.
 func (x *GridColumn) WithTrailingPadding(trailingPadding float64) *GridColumn {
-	x.inner.SetTrailingPadding(trailingPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrailingPadding:"), trailingPadding)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *GridColumn) WithHidden(hidden bool) *GridColumn {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// CellAtIndex calls the underlying CellAtIndex.
+// CellAtIndex wraps the corresponding Objective-C method.
 func (x *GridColumn) CellAtIndex(index int) *GridCell {
-	_r := x.inner.CellAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &GridCell{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellAtIndex:"), index)
+	return GridCellFromID(_r)
 }
 
-// MergeCellsInRange calls the underlying MergeCellsInRange.
+// MergeCellsInRange wraps the corresponding Objective-C method.
 func (x *GridColumn) MergeCellsInRange(range_ foundation.NSRange) {
-	x.inner.MergeCellsInRange(range_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mergeCellsInRange:"), range_)
 }
 
-// GridView calls the underlying GridView.
+// GridView wraps the corresponding Objective-C method.
 func (x *GridColumn) GridView() *GridView {
-	_r := x.inner.GridView()
-	if _r == nil {
-		return nil
-	}
-	return &GridView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gridView"))
+	return GridViewFromID(_r)
 }
 
-// NumberOfCells calls the underlying NumberOfCells.
+// NumberOfCells wraps the corresponding Objective-C method.
 func (x *GridColumn) NumberOfCells() int {
-	return x.inner.NumberOfCells()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCells"))
+	return _r
 }
 
-// XPlacement calls the underlying XPlacement.
-func (x *GridColumn) XPlacement() NSGridCellPlacement {
-	return NSGridCellPlacement(x.inner.XPlacement())
+// XPlacement wraps the corresponding Objective-C method.
+func (x *GridColumn) XPlacement() GridCellPlacement {
+	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("xPlacement"))
+	return _r
 }
 
-// SetXPlacement calls the underlying SetXPlacement.
-func (x *GridColumn) SetXPlacement(xPlacement NSGridCellPlacement) {
-	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
+// SetXPlacement wraps the corresponding Objective-C method.
+func (x *GridColumn) SetXPlacement(xPlacement GridCellPlacement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 }
 
-// Width calls the underlying Width.
+// Width wraps the corresponding Objective-C method.
 func (x *GridColumn) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// SetWidth calls the underlying SetWidth.
+// SetWidth wraps the corresponding Objective-C method.
 func (x *GridColumn) SetWidth(width float64) {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// LeadingPadding calls the underlying LeadingPadding.
+// LeadingPadding wraps the corresponding Objective-C method.
 func (x *GridColumn) LeadingPadding() float64 {
-	return x.inner.LeadingPadding()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leadingPadding"))
+	return _r
 }
 
-// SetLeadingPadding calls the underlying SetLeadingPadding.
+// SetLeadingPadding wraps the corresponding Objective-C method.
 func (x *GridColumn) SetLeadingPadding(leadingPadding float64) {
-	x.inner.SetLeadingPadding(leadingPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeadingPadding:"), leadingPadding)
 }
 
-// TrailingPadding calls the underlying TrailingPadding.
+// TrailingPadding wraps the corresponding Objective-C method.
 func (x *GridColumn) TrailingPadding() float64 {
-	return x.inner.TrailingPadding()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("trailingPadding"))
+	return _r
 }
 
-// SetTrailingPadding calls the underlying SetTrailingPadding.
+// SetTrailingPadding wraps the corresponding Objective-C method.
 func (x *GridColumn) SetTrailingPadding(trailingPadding float64) {
-	x.inner.SetTrailingPadding(trailingPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrailingPadding:"), trailingPadding)
 }
 
-// IsHidden calls the underlying IsHidden.
+// IsHidden wraps the corresponding Objective-C method.
 func (x *GridColumn) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
+// SetHidden wraps the corresponding Objective-C method.
 func (x *GridColumn) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
 // GridColumnable is the interface implemented by [GridColumn], for mocking and DI.
 type GridColumnable interface {
-	Unwrap() *raw.NSGridColumn
-	WithXPlacement(xPlacement NSGridCellPlacement) *GridColumn
+	obj.Object
+	WithXPlacement(xPlacement GridCellPlacement) *GridColumn
 	WithWidth(width float64) *GridColumn
 	WithLeadingPadding(leadingPadding float64) *GridColumn
 	WithTrailingPadding(trailingPadding float64) *GridColumn
@@ -158,8 +193,8 @@ type GridColumnable interface {
 	MergeCellsInRange(range_ foundation.NSRange)
 	GridView() *GridView
 	NumberOfCells() int
-	XPlacement() NSGridCellPlacement
-	SetXPlacement(xPlacement NSGridCellPlacement)
+	XPlacement() GridCellPlacement
+	SetXPlacement(xPlacement GridCellPlacement)
 	Width() float64
 	SetWidth(width float64)
 	LeadingPadding() float64

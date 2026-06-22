@@ -5,94 +5,99 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a summary item for a payment that occurs at a later date, such as a pre-order.
+// DeferredPaymentSummaryItem is an idiomatic wrapper over the Objective-C class PKDeferredPaymentSummaryItem.
 //
-// DeferredPaymentSummaryItem wraps [raw.PKDeferredPaymentSummaryItem] with a fluent Go API.
+// It embeds [PaymentSummaryItem], promoting that type's methods.
+//
+// An object that defines a summary item for a payment that occurs at a later date, such as a pre-order.
 type DeferredPaymentSummaryItem struct {
-	inner *raw.PKDeferredPaymentSummaryItem
+	PaymentSummaryItem
 }
 
-// Unwrap returns the underlying [raw.PKDeferredPaymentSummaryItem].
-func (x *DeferredPaymentSummaryItem) Unwrap() *raw.PKDeferredPaymentSummaryItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeferredPaymentSummaryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// DeferredPaymentSummaryItemFromID adopts an existing object pointer as a DeferredPaymentSummaryItem (nil for 0).
+// DeferredPaymentSummaryItemFromID adopts an existing Objective-C object as a DeferredPaymentSummaryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func DeferredPaymentSummaryItemFromID(id objc.ID) *DeferredPaymentSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	return &DeferredPaymentSummaryItem{inner: raw.PKDeferredPaymentSummaryItemFromID(id)}
+	x := &DeferredPaymentSummaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDeferredPaymentSummaryItem creates a new [DeferredPaymentSummaryItem].
+// deferredPaymentSummaryItemAdopt wraps an Objective-C object that this code just created as a
+// DeferredPaymentSummaryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deferredPaymentSummaryItemAdopt(id objc.ID) *DeferredPaymentSummaryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &DeferredPaymentSummaryItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDeferredPaymentSummaryItem creates a new DeferredPaymentSummaryItem.
 func NewDeferredPaymentSummaryItem() *DeferredPaymentSummaryItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDeferredPaymentSummaryItem")), objc.RegisterName("new"))
-	return &DeferredPaymentSummaryItem{inner: raw.PKDeferredPaymentSummaryItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKDeferredPaymentSummaryItem")), objc.RegisterName("new"))
+	return deferredPaymentSummaryItemAdopt(_id)
 }
 
-// The date, in the future, of the payment.
-//
-// WithDeferredDate sets the deferredDate property and returns the receiver for chaining.
-func (x *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate *foundation.NSDate) *DeferredPaymentSummaryItem {
-	x.inner.SetDeferredDate(deferredDate)
+// WithDeferredDate the date, in the future, of the payment.
+func (x *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate obj.Object) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredDate:"), objref.IDOf(deferredDate))
 	return x
 }
 
-// A short, localized description of the item.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a short, localized description of the item.
 func (x *DeferredPaymentSummaryItem) WithLabel(label string) *DeferredPaymentSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The summary item’s amount.
-//
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *DeferredPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *DeferredPaymentSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+// WithAmount the summary item’s amount.
+func (x *DeferredPaymentSummaryItem) WithAmount(amount obj.Object) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// The summary item’s type that indicates whether the amount is final.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *DeferredPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *DeferredPaymentSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
+// WithType the summary item’s type that indicates whether the amount is final.
+func (x *DeferredPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// DeferredDate calls the underlying DeferredDate.
-func (x *DeferredPaymentSummaryItem) DeferredDate() *foundation.NSDate {
-	return x.inner.DeferredDate()
+// DeferredDate wraps the corresponding Objective-C method.
+func (x *DeferredPaymentSummaryItem) DeferredDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredDate"))
+	return obj.Wrap(_r)
 }
 
-// SetDeferredDate calls the underlying SetDeferredDate.
-func (x *DeferredPaymentSummaryItem) SetDeferredDate(deferredDate *foundation.NSDate) {
-	x.inner.SetDeferredDate(deferredDate)
-}
-
-func (x *DeferredPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
-	return &x.inner.PKPaymentSummaryItem
+// SetDeferredDate wraps the corresponding Objective-C method.
+func (x *DeferredPaymentSummaryItem) SetDeferredDate(deferredDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredDate:"), objref.IDOf(deferredDate))
 }
 
 // DeferredPaymentSummaryItemable is the interface implemented by [DeferredPaymentSummaryItem], for mocking and DI.
 type DeferredPaymentSummaryItemable interface {
-	Unwrap() *raw.PKDeferredPaymentSummaryItem
-	WithDeferredDate(deferredDate *foundation.NSDate) *DeferredPaymentSummaryItem
+	obj.Object
+	WithDeferredDate(deferredDate obj.Object) *DeferredPaymentSummaryItem
 	WithLabel(label string) *DeferredPaymentSummaryItem
-	WithAmount(amount *foundation.NSDecimalNumber) *DeferredPaymentSummaryItem
-	WithType(type_ PKPaymentSummaryItemType) *DeferredPaymentSummaryItem
-	DeferredDate() *foundation.NSDate
-	SetDeferredDate(deferredDate *foundation.NSDate)
+	WithAmount(amount obj.Object) *DeferredPaymentSummaryItem
+	WithType(type_ PaymentSummaryItemType) *DeferredPaymentSummaryItem
+	DeferredDate() obj.Object
+	SetDeferredDate(deferredDate obj.Object)
 }
 
 var _ DeferredPaymentSummaryItemable = (*DeferredPaymentSummaryItem)(nil)
+
+var _ PaymentSummaryItemProvider = (*DeferredPaymentSummaryItem)(nil)

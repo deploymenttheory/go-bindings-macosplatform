@@ -5,33 +5,21 @@
 package businesschat
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/businesschat"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Intent is used to help the support agent or business system identify the product, service, account, or other context when the customer tapped the button to send the message.
-// BCParameterNameIntent returns the string constant BCParameterNameIntent as an objc.ID, for use as a dictionary key or selector argument.
-func BCParameterNameIntent() objc.ID {
-	if _r := raw.BCParameterNameIntent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// BCParameterNameIntent returns the string constant BCParameterNameIntent, for use as a dictionary key or argument.
+func BCParameterNameIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BCParameterNameIntent")))
 }
 
-// Group is used to help the business or customer service platform route the message to the appropriate support agent group.
-// BCParameterNameGroup returns the string constant BCParameterNameGroup as an objc.ID, for use as a dictionary key or selector argument.
-func BCParameterNameGroup() objc.ID {
-	if _r := raw.BCParameterNameGroup(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// BCParameterNameGroup returns the string constant BCParameterNameGroup, for use as a dictionary key or argument.
+func BCParameterNameGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BCParameterNameGroup")))
 }
 
-// Body is used to help the customer by providing a pre-configured contextual message that the customer can tap to send to smooth the transition into Business Chat.
-// BCParameterNameBody returns the string constant BCParameterNameBody as an objc.ID, for use as a dictionary key or selector argument.
-func BCParameterNameBody() objc.ID {
-	if _r := raw.BCParameterNameBody(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// BCParameterNameBody returns the string constant BCParameterNameBody, for use as a dictionary key or argument.
+func BCParameterNameBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("BCParameterNameBody")))
 }

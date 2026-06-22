@@ -5,95 +5,122 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// QuartzFilterManager wraps [raw.QuartzFilterManager] with a fluent Go API.
+// QuartzFilterManager is an idiomatic wrapper over the Objective-C class QuartzFilterManager.
 type QuartzFilterManager struct {
-	inner *raw.QuartzFilterManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QuartzFilterManager].
-func (x *QuartzFilterManager) Unwrap() *raw.QuartzFilterManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuartzFilterManager) ID() objc.ID { return x.inner.Ptr() }
-
-// QuartzFilterManagerFromID adopts an existing object pointer as a QuartzFilterManager (nil for 0).
+// QuartzFilterManagerFromID adopts an existing Objective-C object as a QuartzFilterManager
+// (nil for 0), retaining it and registering a release finalizer.
 func QuartzFilterManagerFromID(id objc.ID) *QuartzFilterManager {
 	if id == 0 {
 		return nil
 	}
-	return &QuartzFilterManager{inner: raw.QuartzFilterManagerFromID(id)}
+	x := &QuartzFilterManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQuartzFilterManager creates a new [QuartzFilterManager].
+// quartzFilterManagerAdopt wraps an Objective-C object that this code just created as a
+// QuartzFilterManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quartzFilterManagerAdopt(id objc.ID) *QuartzFilterManager {
+	if id == 0 {
+		return nil
+	}
+	x := &QuartzFilterManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QuartzFilterManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuartzFilterManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuartzFilterManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuartzFilterManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQuartzFilterManager creates a new QuartzFilterManager.
 func NewQuartzFilterManager() *QuartzFilterManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QuartzFilterManager")), objc.RegisterName("new"))
-	return &QuartzFilterManager{inner: raw.QuartzFilterManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("new"))
+	return quartzFilterManagerAdopt(_id)
 }
 
-// FilterPanel calls the underlying FilterPanel.
-func (x *QuartzFilterManager) FilterPanel() *appkit.NSPanel {
-	return x.inner.FilterPanel()
+// FilterPanel wraps the corresponding Objective-C method.
+func (x *QuartzFilterManager) FilterPanel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterPanel"))
+	return obj.Wrap(_r)
 }
 
-// FilterView calls the underlying FilterView.
+// FilterView wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) FilterView() *QuartzFilterView {
-	_r := x.inner.FilterView()
-	if _r == nil {
-		return nil
-	}
-	return &QuartzFilterView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterView"))
+	return QuartzFilterViewFromID(_r)
 }
 
-// SelectedFilter calls the underlying SelectedFilter.
+// SelectedFilter wraps the corresponding Objective-C method.
 func (x *QuartzFilterManager) SelectedFilter() *QuartzFilter {
-	_r := x.inner.SelectedFilter()
-	if _r == nil {
-		return nil
-	}
-	return &QuartzFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedFilter"))
+	return QuartzFilterFromID(_r)
 }
 
-// SelectFilter calls the underlying SelectFilter.
-func (x *QuartzFilterManager) SelectFilter(filter *raw.QuartzFilter) bool {
-	return x.inner.SelectFilter(filter)
+// SelectFilter wraps the corresponding Objective-C method.
+func (x *QuartzFilterManager) SelectFilter(filter *QuartzFilter) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectFilter:"), objref.IDOf(filter))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *QuartzFilterManager) SetDelegate(aDelegate objc.ID) {
-	x.inner.SetDelegate(aDelegate)
+// SetDelegate wraps the corresponding Objective-C method.
+func (x *QuartzFilterManager) SetDelegate(aDelegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(aDelegate))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *QuartzFilterManager) Delegate() objc.ID {
-	return x.inner.Delegate()
+// Delegate wraps the corresponding Objective-C method.
+func (x *QuartzFilterManager) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// ImportFilter calls the underlying ImportFilter.
-func (x *QuartzFilterManager) ImportFilter(filterProperties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter {
-	_r := x.inner.ImportFilter(filterProperties)
-	if _r == nil {
-		return nil
-	}
-	return &QuartzFilter{inner: _r}
+// ImportFilter wraps the corresponding Objective-C method.
+func (x *QuartzFilterManager) ImportFilter(filterProperties obj.Object) *QuartzFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importFilter:"), objref.IDOf(filterProperties))
+	return QuartzFilterFromID(_r)
 }
 
 // QuartzFilterManagerable is the interface implemented by [QuartzFilterManager], for mocking and DI.
 type QuartzFilterManagerable interface {
-	Unwrap() *raw.QuartzFilterManager
-	FilterPanel() *appkit.NSPanel
+	obj.Object
+	FilterPanel() obj.Object
 	FilterView() *QuartzFilterView
 	SelectedFilter() *QuartzFilter
-	SelectFilter(filter *raw.QuartzFilter) bool
-	SetDelegate(aDelegate objc.ID)
-	Delegate() objc.ID
-	ImportFilter(filterProperties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter
+	SelectFilter(filter *QuartzFilter) bool
+	SetDelegate(aDelegate obj.Object)
+	Delegate() obj.Object
+	ImportFilter(filterProperties obj.Object) *QuartzFilter
 }
 
 var _ QuartzFilterManagerable = (*QuartzFilterManager)(nil)

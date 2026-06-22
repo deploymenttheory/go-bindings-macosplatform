@@ -5,118 +5,135 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A passkey registration credential.
+// PasskeyRegistrationCredential is an idiomatic wrapper over the Objective-C class ASPasskeyRegistrationCredential.
 //
-// PasskeyRegistrationCredential wraps [raw.ASPasskeyRegistrationCredential] with a fluent Go API.
+// A passkey registration credential.
 type PasskeyRegistrationCredential struct {
-	inner *raw.ASPasskeyRegistrationCredential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyRegistrationCredential].
-func (x *PasskeyRegistrationCredential) Unwrap() *raw.ASPasskeyRegistrationCredential { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyRegistrationCredential) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyRegistrationCredentialFromID adopts an existing object pointer as a PasskeyRegistrationCredential (nil for 0).
+// PasskeyRegistrationCredentialFromID adopts an existing Objective-C object as a PasskeyRegistrationCredential
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyRegistrationCredentialFromID(id objc.ID) *PasskeyRegistrationCredential {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(id)}
-}
-
-// Initializes a passkey registration credential object.
-//
-// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject creates a new [PasskeyRegistrationCredential].
-func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *PasskeyRegistrationCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:"), foundation.NSStringStringWithUTF8String(relyingParty).Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr())
-	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(_id)}
-}
-
-// Initializes a passkey registration credential object.
-//
-// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput creates a new [PasskeyRegistrationCredential].
-func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData, extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:"), foundation.NSStringStringWithUTF8String(relyingParty).Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr(), extensionOutput.Ptr())
-	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(_id)}
-}
-
-// An output from WebAuthn extensions.
-//
-// WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
-func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
-	x.inner.SetExtensionOutput(extensionOutput.Unwrap())
+	x := &PasskeyRegistrationCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract The relying party identifier associated with this passkey.
-//
-// RelyingParty calls the underlying RelyingParty.
-func (x *PasskeyRegistrationCredential) RelyingParty() string {
-	_r := x.inner.RelyingParty()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract The hash of the client data for this registration result.
-//
-// ClientDataHash calls the underlying ClientDataHash.
-func (x *PasskeyRegistrationCredential) ClientDataHash() *foundation.NSData {
-	return x.inner.ClientDataHash()
-}
-
-// @abstract The raw credential identifier of this passkey.
-//
-// CredentialID calls the underlying CredentialID.
-func (x *PasskeyRegistrationCredential) CredentialID() *foundation.NSData {
-	return x.inner.CredentialID()
-}
-
-// @abstract The attestation object for this passkey registration result.
-//
-// AttestationObject calls the underlying AttestationObject.
-func (x *PasskeyRegistrationCredential) AttestationObject() *foundation.NSData {
-	return x.inner.AttestationObject()
-}
-
-// @abstract The outputs for WebAuthn extensions processed by the credential provider.
-//
-// ExtensionOutput calls the underlying ExtensionOutput.
-func (x *PasskeyRegistrationCredential) ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput {
-	_r := x.inner.ExtensionOutput()
-	if _r == nil {
+// passkeyRegistrationCredentialAdopt wraps an Objective-C object that this code just created as a
+// PasskeyRegistrationCredential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyRegistrationCredentialAdopt(id objc.ID) *PasskeyRegistrationCredential {
+	if id == 0 {
 		return nil
 	}
-	return &PasskeyRegistrationCredentialExtensionOutput{inner: _r}
+	x := &PasskeyRegistrationCredential{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetExtensionOutput calls the underlying SetExtensionOutput.
-func (x *PasskeyRegistrationCredential) SetExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) {
-	x.inner.SetExtensionOutput(extensionOutput)
+// Description returns the object's -description text.
+func (x *PasskeyRegistrationCredential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyRegistrationCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyRegistrationCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyRegistrationCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject initializes a passkey registration credential object.
+func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash obj.Object, credentialID obj.Object, attestationObject obj.Object) *PasskeyRegistrationCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:"), purego.NSString(relyingParty), objref.IDOf(clientDataHash), objref.IDOf(credentialID), objref.IDOf(attestationObject))
+	return passkeyRegistrationCredentialAdopt(_id)
+}
+
+// NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput initializes a passkey registration credential object.
+func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty string, clientDataHash obj.Object, credentialID obj.Object, attestationObject obj.Object, extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:"), purego.NSString(relyingParty), objref.IDOf(clientDataHash), objref.IDOf(credentialID), objref.IDOf(attestationObject), objref.IDOf(extensionOutput))
+	return passkeyRegistrationCredentialAdopt(_id)
+}
+
+// WithExtensionOutput an output from WebAuthn extensions.
+func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionOutput:"), objref.IDOf(extensionOutput))
+	return x
+}
+
+// RelyingParty the relying party identifier associated with this passkey.
+func (x *PasskeyRegistrationCredential) RelyingParty() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingParty"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// ClientDataHash the hash of the client data for this registration result.
+func (x *PasskeyRegistrationCredential) ClientDataHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDataHash"))
+	return obj.Wrap(_r)
+}
+
+// CredentialID the raw credential identifier of this passkey.
+func (x *PasskeyRegistrationCredential) CredentialID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
+	return obj.Wrap(_r)
+}
+
+// AttestationObject the attestation object for this passkey registration result.
+func (x *PasskeyRegistrationCredential) AttestationObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationObject"))
+	return obj.Wrap(_r)
+}
+
+// ExtensionOutput the outputs for WebAuthn extensions processed by the credential provider.
+func (x *PasskeyRegistrationCredential) ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionOutput"))
+	return PasskeyRegistrationCredentialExtensionOutputFromID(_r)
+}
+
+// SetExtensionOutput wraps the corresponding Objective-C method.
+func (x *PasskeyRegistrationCredential) SetExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionOutput:"), objref.IDOf(extensionOutput))
 }
 
 // PasskeyRegistrationCredentialable is the interface implemented by [PasskeyRegistrationCredential], for mocking and DI.
 type PasskeyRegistrationCredentialable interface {
-	Unwrap() *raw.ASPasskeyRegistrationCredential
+	obj.Object
 	WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential
 	RelyingParty() string
-	ClientDataHash() *foundation.NSData
-	CredentialID() *foundation.NSData
-	AttestationObject() *foundation.NSData
+	ClientDataHash() obj.Object
+	CredentialID() obj.Object
+	AttestationObject() obj.Object
 	ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput
-	SetExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput)
+	SetExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput)
 }
 
 var _ PasskeyRegistrationCredentialable = (*PasskeyRegistrationCredential)(nil)

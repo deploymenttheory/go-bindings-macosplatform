@@ -5,88 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWaterHeaterManagementClusterCancelBoostParams wraps [raw.MTRWaterHeaterManagementClusterCancelBoostParams] with a fluent Go API.
+// MTRWaterHeaterManagementClusterCancelBoostParams is an idiomatic wrapper over the Objective-C class MTRWaterHeaterManagementClusterCancelBoostParams.
 type MTRWaterHeaterManagementClusterCancelBoostParams struct {
-	inner *raw.MTRWaterHeaterManagementClusterCancelBoostParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWaterHeaterManagementClusterCancelBoostParams].
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) Unwrap() *raw.MTRWaterHeaterManagementClusterCancelBoostParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWaterHeaterManagementClusterCancelBoostParamsFromID adopts an existing object pointer as a MTRWaterHeaterManagementClusterCancelBoostParams (nil for 0).
+// MTRWaterHeaterManagementClusterCancelBoostParamsFromID adopts an existing Objective-C object as a MTRWaterHeaterManagementClusterCancelBoostParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWaterHeaterManagementClusterCancelBoostParamsFromID(id objc.ID) *MTRWaterHeaterManagementClusterCancelBoostParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWaterHeaterManagementClusterCancelBoostParams{inner: raw.MTRWaterHeaterManagementClusterCancelBoostParamsFromID(id)}
+	x := &MTRWaterHeaterManagementClusterCancelBoostParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRWaterHeaterManagementClusterCancelBoostParams creates a new [MTRWaterHeaterManagementClusterCancelBoostParams].
+// mTRWaterHeaterManagementClusterCancelBoostParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRWaterHeaterManagementClusterCancelBoostParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWaterHeaterManagementClusterCancelBoostParamsAdopt(id objc.ID) *MTRWaterHeaterManagementClusterCancelBoostParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWaterHeaterManagementClusterCancelBoostParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWaterHeaterManagementClusterCancelBoostParams creates a new MTRWaterHeaterManagementClusterCancelBoostParams.
 func NewMTRWaterHeaterManagementClusterCancelBoostParams() *MTRWaterHeaterManagementClusterCancelBoostParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWaterHeaterManagementClusterCancelBoostParams")), objc.RegisterName("new"))
-	return &MTRWaterHeaterManagementClusterCancelBoostParams{inner: raw.MTRWaterHeaterManagementClusterCancelBoostParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterManagementClusterCancelBoostParams")), objc.RegisterName("new"))
+	return mTRWaterHeaterManagementClusterCancelBoostParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterManagementClusterCancelBoostParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterManagementClusterCancelBoostParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterManagementClusterCancelBoostParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterManagementClusterCancelBoostParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRWaterHeaterManagementClusterCancelBoostParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRWaterHeaterManagementClusterCancelBoostParamsable is the interface implemented by [MTRWaterHeaterManagementClusterCancelBoostParams], for mocking and DI.
 type MTRWaterHeaterManagementClusterCancelBoostParamsable interface {
-	Unwrap() *raw.MTRWaterHeaterManagementClusterCancelBoostParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterManagementClusterCancelBoostParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterManagementClusterCancelBoostParams
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterManagementClusterCancelBoostParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterManagementClusterCancelBoostParams
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRWaterHeaterManagementClusterCancelBoostParamsable = (*MTRWaterHeaterManagementClusterCancelBoostParams)(nil)

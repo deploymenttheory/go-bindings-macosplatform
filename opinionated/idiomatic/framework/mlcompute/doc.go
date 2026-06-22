@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package mlcompute provides a fluent Go API over the macOS MLCompute framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Graph: [InferenceGraph], [TrainingGraph]
+//   - Layer: [ActivationLayer], [ArithmeticLayer], [BatchNormalizationLayer], [ComparisonLayer], [ConcatenationLayer], [ConvolutionLayer], [DropoutLayer], [EmbeddingLayer], [FullyConnectedLayer], [GatherLayer], [GramMatrixLayer], [GroupNormalizationLayer], [InstanceNormalizationLayer], [LSTMLayer], [LayerNormalizationLayer], [LossLayer], [MatMulLayer], [MultiheadAttentionLayer], [PaddingLayer], [PoolingLayer], [ReductionLayer], [ReshapeLayer], [ScatterLayer], [SelectionLayer], [SliceLayer], [SoftmaxLayer], [SplitLayer], [TransposeLayer], [UpsampleLayer]
+//   - LossLayer: [YOLOLossLayer]
+//   - Optimizer: [AdamOptimizer], [AdamWOptimizer], [RMSPropOptimizer], [SGDOptimizer]
 package mlcompute

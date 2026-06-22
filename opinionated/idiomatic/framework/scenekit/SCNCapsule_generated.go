@@ -5,256 +5,208 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A right circular cylinder geometry whose ends are capped with hemispheres.
+// Capsule is an idiomatic wrapper over the Objective-C class SCNCapsule.
 //
-// Capsule wraps [raw.SCNCapsule] with a fluent Go API.
+// It embeds [Geometry], promoting that type's methods.
+//
+// A right circular cylinder geometry whose ends are capped with hemispheres.
 type Capsule struct {
-	inner *raw.SCNCapsule
+	Geometry
 }
 
-// Unwrap returns the underlying [raw.SCNCapsule].
-func (x *Capsule) Unwrap() *raw.SCNCapsule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Capsule) ID() objc.ID { return x.inner.Ptr() }
-
-// CapsuleFromID adopts an existing object pointer as a Capsule (nil for 0).
+// CapsuleFromID adopts an existing Objective-C object as a Capsule
+// (nil for 0), retaining it and registering a release finalizer.
 func CapsuleFromID(id objc.ID) *Capsule {
 	if id == 0 {
 		return nil
 	}
-	return &Capsule{inner: raw.SCNCapsuleFromID(id)}
+	x := &Capsule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCapsule creates a new [Capsule].
+// capsuleAdopt wraps an Objective-C object that this code just created as a
+// Capsule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func capsuleAdopt(id objc.ID) *Capsule {
+	if id == 0 {
+		return nil
+	}
+	x := &Capsule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCapsule creates a new Capsule.
 func NewCapsule() *Capsule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNCapsule")), objc.RegisterName("new"))
-	return &Capsule{inner: raw.SCNCapsuleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNCapsule")), objc.RegisterName("new"))
+	return capsuleAdopt(_id)
 }
 
-// The radius both of the capsule’s circular center cross section and of its hemispherical ends. Animatable.
-//
-// WithCapRadius sets the capRadius property and returns the receiver for chaining.
+// WithCapRadius the radius both of the capsule’s circular center cross section and of its hemispherical ends. Animatable.
 func (x *Capsule) WithCapRadius(capRadius float64) *Capsule {
-	x.inner.SetCapRadius(capRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapRadius:"), capRadius)
 	return x
 }
 
-// The extent of the capsule along its y-axis. Animatable.
-//
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight the extent of the capsule along its y-axis. Animatable.
 func (x *Capsule) WithHeight(height float64) *Capsule {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The number of subdivisions around the lateral circumference of the capsule. Animatable.
-//
-// WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
+// WithRadialSegmentCount the number of subdivisions around the lateral circumference of the capsule. Animatable.
 func (x *Capsule) WithRadialSegmentCount(radialSegmentCount int) *Capsule {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 	return x
 }
 
-// The number of subdivisions in the sides of the capsule along its y-axis. Animatable.
-//
-// WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
+// WithHeightSegmentCount the number of subdivisions in the sides of the capsule along its y-axis. Animatable.
 func (x *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
-// The number of subdivisions in the height of each hemispherical end of the capsule. Animatable.
-//
-// WithCapSegmentCount sets the capSegmentCount property and returns the receiver for chaining.
+// WithCapSegmentCount the number of subdivisions in the height of each hemispherical end of the capsule. Animatable.
 func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
-	x.inner.SetCapSegmentCount(capSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapSegmentCount:"), capSegmentCount)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a name associated with the geometry object.
 func (x *Capsule) WithName(name string) *Capsule {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (x *Capsule) WithMaterials(items ...*Material) *Capsule {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Capsule) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (x *Capsule) WithLevelsOfDetail(items ...*LevelOfDetail) *Capsule {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Capsule) WithSubdivisionLevel(subdivisionLevel uint) *Capsule {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (x *Capsule) WithSubdivisionLevel(subdivisionLevel int) *Capsule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property capRadius @abstract The cap radius of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
-//
-// CapRadius calls the underlying CapRadius.
+// CapRadius the cap radius of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (x *Capsule) CapRadius() float64 {
-	return x.inner.CapRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("capRadius"))
+	return _r
 }
 
-// SetCapRadius calls the underlying SetCapRadius.
+// SetCapRadius wraps the corresponding Objective-C method.
 func (x *Capsule) SetCapRadius(capRadius float64) {
-	x.inner.SetCapRadius(capRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapRadius:"), capRadius)
 }
 
-// @property height @abstract The height of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 2.
-//
-// Height calls the underlying Height.
+// Height the height of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 2.
 func (x *Capsule) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
+// SetHeight wraps the corresponding Objective-C method.
 func (x *Capsule) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
-//
-// RadialSegmentCount calls the underlying RadialSegmentCount.
+// RadialSegmentCount the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (x *Capsule) RadialSegmentCount() int {
-	return x.inner.RadialSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radialSegmentCount"))
+	return _r
 }
 
-// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
+// SetRadialSegmentCount wraps the corresponding Objective-C method.
 func (x *Capsule) SetRadialSegmentCount(radialSegmentCount int) {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// HeightSegmentCount calls the underlying HeightSegmentCount.
+// HeightSegmentCount the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Capsule) HeightSegmentCount() int {
-	return x.inner.HeightSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+	return _r
 }
 
-// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+// SetHeightSegmentCount wraps the corresponding Objective-C method.
 func (x *Capsule) SetHeightSegmentCount(heightSegmentCount int) {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
 
-// @property capSegmentCount @abstract The number of subdivisions in the cap. Animatable. @discussion If the value is less than 2, the behavior is undefined. The default value is 24.
-//
-// CapSegmentCount calls the underlying CapSegmentCount.
+// CapSegmentCount the number of subdivisions in the cap. Animatable. If the value is less than 2, the behavior is undefined. The default value is 24.
 func (x *Capsule) CapSegmentCount() int {
-	return x.inner.CapSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capSegmentCount"))
+	return _r
 }
 
-// SetCapSegmentCount calls the underlying SetCapSegmentCount.
+// SetCapSegmentCount wraps the corresponding Objective-C method.
 func (x *Capsule) SetCapSegmentCount(capSegmentCount int) {
-	x.inner.SetCapSegmentCount(capSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapSegmentCount:"), capSegmentCount)
 }
-
-func (x *Capsule) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Capsuleable is the interface implemented by [Capsule], for mocking and DI.
 type Capsuleable interface {
-	Unwrap() *raw.SCNCapsule
+	obj.Object
 	WithCapRadius(capRadius float64) *Capsule
 	WithHeight(height float64) *Capsule
 	WithRadialSegmentCount(radialSegmentCount int) *Capsule
 	WithHeightSegmentCount(heightSegmentCount int) *Capsule
 	WithCapSegmentCount(capSegmentCount int) *Capsule
 	WithName(name string) *Capsule
-	WithMaterials(items ...*raw.SCNMaterial) *Capsule
+	WithMaterials(items ...*Material) *Capsule
 	WithFirstMaterial(firstMaterial *Material) *Capsule
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Capsule
 	WithTessellator(tessellator *GeometryTessellator) *Capsule
-	WithSubdivisionLevel(subdivisionLevel uint) *Capsule
+	WithSubdivisionLevel(subdivisionLevel int) *Capsule
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule
@@ -271,3 +223,5 @@ type Capsuleable interface {
 }
 
 var _ Capsuleable = (*Capsule)(nil)
+
+var _ GeometryProvider = (*Capsule)(nil)

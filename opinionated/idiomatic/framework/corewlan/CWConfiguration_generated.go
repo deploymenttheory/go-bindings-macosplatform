@@ -5,97 +5,117 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an immutable configuration for an AirPort WLAN interface.
+// Configuration is an idiomatic wrapper over the Objective-C class CWConfiguration.
 //
-// Configuration wraps [raw.CWConfiguration] with a fluent Go API.
+// Configuration is an abstract base — you do not construct it directly. Construct one of [MutableConfiguration] and pass it where a Configuration is accepted.
+//
+// Encapsulates an immutable configuration for an AirPort WLAN interface.
 type Configuration struct {
-	inner *raw.CWConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CWConfiguration].
-func (x *Configuration) Unwrap() *raw.CWConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Configuration) ID() objc.ID { return x.inner.Ptr() }
-
-// ConfigurationFromID adopts an existing object pointer as a Configuration (nil for 0).
+// ConfigurationFromID adopts an existing Objective-C object as a Configuration
+// (nil for 0), retaining it and registering a release finalizer.
 func ConfigurationFromID(id objc.ID) *Configuration {
 	if id == 0 {
 		return nil
 	}
-	return &Configuration{inner: raw.CWConfigurationFromID(id)}
+	x := &Configuration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewConfiguration creates a new [Configuration].
-func NewConfiguration() *Configuration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CWConfiguration")), objc.RegisterName("new"))
-	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
+// configurationAdopt wraps an Objective-C object that this code just created as a
+// Configuration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func configurationAdopt(id objc.ID) *Configuration {
+	if id == 0 {
+		return nil
+	}
+	x := &Configuration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
-//
-// NewConfigurationWithConfiguration creates a new [Configuration].
-func NewConfigurationWithConfiguration(configuration *raw.CWConfiguration) *Configuration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CWConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), configuration.Ptr())
-	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
+// Description returns the object's -description text.
+func (x *Configuration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Determine CWConfiguration object equality.
-//
-// IsEqualToConfiguration calls the underlying IsEqualToConfiguration.
-func (x *Configuration) IsEqualToConfiguration(configuration *raw.CWConfiguration) bool {
-	return x.inner.IsEqualToConfiguration(configuration)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Configuration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property @result An NSOrderedSet of CWNetworkProfile objects. @abstract Returns the preferred networks list. @discussion The order of the ordered set corresponds to the order the preferred networks list.
-//
-// NetworkProfiles calls the underlying NetworkProfiles.
-func (x *Configuration) NetworkProfiles() *foundation.NSOrderedSet[*raw.CWNetworkProfile] {
-	return x.inner.NetworkProfiles()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Configuration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to require an administrator password to change networks. @discussion If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
-//
-// RequireAdministratorForAssociation calls the underlying RequireAdministratorForAssociation.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Configuration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewConfigurationWithConfiguration creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
+func NewConfigurationWithConfiguration(configuration *Configuration) *Configuration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+	return configurationAdopt(_id)
+}
+
+// IsEqualToConfiguration determine CWConfiguration object equality.
+func (x *Configuration) IsEqualToConfiguration(configuration *Configuration) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToConfiguration:"), objref.IDOf(configuration))
+	return _r
+}
+
+// NetworkProfiles returns the preferred networks list. The order of the ordered set corresponds to the order the preferred networks list.
+func (x *Configuration) NetworkProfiles() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkProfiles"))
+	return obj.Wrap(_r)
+}
+
+// RequireAdministratorForAssociation returns the preference to require an administrator password to change networks. If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
 func (x *Configuration) RequireAdministratorForAssociation() bool {
-	return x.inner.RequireAdministratorForAssociation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForAssociation"))
+	return _r
 }
 
-// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to require an administrator password to change the interface power state. @discussion If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
-//
-// RequireAdministratorForPower calls the underlying RequireAdministratorForPower.
+// RequireAdministratorForPower returns the preference to require an administrator password to change the interface power state. If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
 func (x *Configuration) RequireAdministratorForPower() bool {
-	return x.inner.RequireAdministratorForPower()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForPower"))
+	return _r
 }
 
-// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to require an administrator password to create a computer-to-computer network. @discussion If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
-//
-// RequireAdministratorForIBSSMode calls the underlying RequireAdministratorForIBSSMode.
+// RequireAdministratorForIBSSMode returns the preference to require an administrator password to create a computer-to-computer network. If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
 func (x *Configuration) RequireAdministratorForIBSSMode() bool {
-	return x.inner.RequireAdministratorForIBSSMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForIBSSMode"))
+	return _r
 }
 
-// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
-//
-// RememberJoinedNetworks calls the underlying RememberJoinedNetworks.
+// RememberJoinedNetworks returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
 func (x *Configuration) RememberJoinedNetworks() bool {
-	return x.inner.RememberJoinedNetworks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rememberJoinedNetworks"))
+	return _r
 }
-
-func (x *Configuration) asConfiguration() *raw.CWConfiguration { return x.inner }
 
 // Configurationable is the interface implemented by [Configuration], for mocking and DI.
 type Configurationable interface {
-	Unwrap() *raw.CWConfiguration
-	IsEqualToConfiguration(configuration *raw.CWConfiguration) bool
-	NetworkProfiles() *foundation.NSOrderedSet[*raw.CWNetworkProfile]
+	obj.Object
+	IsEqualToConfiguration(configuration *Configuration) bool
+	NetworkProfiles() obj.Object
 	RequireAdministratorForAssociation() bool
 	RequireAdministratorForPower() bool
 	RequireAdministratorForIBSSMode() bool
@@ -103,3 +123,10 @@ type Configurationable interface {
 }
 
 var _ Configurationable = (*Configuration)(nil)
+
+// isConfiguration marks Configuration — and, by embedding promotion, its
+// subclasses — as a member of the Configuration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Configuration) isConfiguration() {}
+
+var _ ConfigurationProvider = (*Configuration)(nil)

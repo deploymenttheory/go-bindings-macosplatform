@@ -5,62 +5,72 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the first action sent to an app when the user shares a collaboration.
+// StartCollaborationAction is an idiomatic wrapper over the Objective-C class SWStartCollaborationAction.
 //
-// StartCollaborationAction wraps [raw.SWStartCollaborationAction] with a fluent Go API.
+// It embeds [Action], promoting that type's methods.
+//
+// An object that represents the first action sent to an app when the user shares a collaboration.
 type StartCollaborationAction struct {
-	inner *raw.SWStartCollaborationAction
+	Action
 }
 
-// Unwrap returns the underlying [raw.SWStartCollaborationAction].
-func (x *StartCollaborationAction) Unwrap() *raw.SWStartCollaborationAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StartCollaborationAction) ID() objc.ID { return x.inner.Ptr() }
-
-// StartCollaborationActionFromID adopts an existing object pointer as a StartCollaborationAction (nil for 0).
+// StartCollaborationActionFromID adopts an existing Objective-C object as a StartCollaborationAction
+// (nil for 0), retaining it and registering a release finalizer.
 func StartCollaborationActionFromID(id objc.ID) *StartCollaborationAction {
 	if id == 0 {
 		return nil
 	}
-	return &StartCollaborationAction{inner: raw.SWStartCollaborationActionFromID(id)}
+	x := &StartCollaborationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStartCollaborationAction creates a new [StartCollaborationAction].
-func NewStartCollaborationAction() *StartCollaborationAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWStartCollaborationAction")), objc.RegisterName("new"))
-	return &StartCollaborationAction{inner: raw.SWStartCollaborationActionFromID(_id)}
-}
-
-// Informs an app to set up the universal link and device independent identifier to provide to the system.
-//
-// FulfillUsingURLCollaborationIdentifier calls the underlying FulfillUsingURLCollaborationIdentifier.
-func (x *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier *foundation.NSString) {
-	x.inner.FulfillUsingURLCollaborationIdentifier(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), collaborationIdentifier)
-}
-
-// CollaborationMetadata calls the underlying CollaborationMetadata.
-func (x *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
-	_r := x.inner.CollaborationMetadata()
-	if _r == nil {
+// startCollaborationActionAdopt wraps an Objective-C object that this code just created as a
+// StartCollaborationAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func startCollaborationActionAdopt(id objc.ID) *StartCollaborationAction {
+	if id == 0 {
 		return nil
 	}
-	return &CollaborationMetadata{inner: _r}
+	x := &StartCollaborationAction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *StartCollaborationAction) asAction() *raw.SWAction { return &x.inner.SWAction }
+// NewStartCollaborationAction creates a new StartCollaborationAction.
+func NewStartCollaborationAction() *StartCollaborationAction {
+	_id := objc.Send[objc.ID](objc.ID(_class("SWStartCollaborationAction")), objc.RegisterName("new"))
+	return startCollaborationActionAdopt(_id)
+}
+
+// FulfillUsingURLCollaborationIdentifier informs an app to set up the universal link and device independent identifier to provide to the system.
+func (x *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fulfillUsingURL:collaborationIdentifier:"), rt.FileURL(url), objref.IDOf(collaborationIdentifier))
+}
+
+// CollaborationMetadata wraps the corresponding Objective-C method.
+func (x *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationMetadata"))
+	return CollaborationMetadataFromID(_r)
+}
 
 // StartCollaborationActionable is the interface implemented by [StartCollaborationAction], for mocking and DI.
 type StartCollaborationActionable interface {
-	Unwrap() *raw.SWStartCollaborationAction
-	FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier *foundation.NSString)
+	obj.Object
+	FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object)
 	CollaborationMetadata() *CollaborationMetadata
 }
 
 var _ StartCollaborationActionable = (*StartCollaborationAction)(nil)
+
+var _ ActionProvider = (*StartCollaborationAction)(nil)

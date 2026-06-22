@@ -5,130 +5,120 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that provides the user interface for choosing assets from the photo library.
+// PickerViewController is an idiomatic wrapper over the Objective-C class PHPickerViewController.
 //
-// PickerViewController wraps [raw.PHPickerViewController] with a fluent Go API.
+// A view controller that provides the user interface for choosing assets from the photo library.
 type PickerViewController struct {
-	inner *raw.PHPickerViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPickerViewController].
-func (x *PickerViewController) Unwrap() *raw.PHPickerViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PickerViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// PickerViewControllerFromID adopts an existing object pointer as a PickerViewController (nil for 0).
+// PickerViewControllerFromID adopts an existing Objective-C object as a PickerViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func PickerViewControllerFromID(id objc.ID) *PickerViewController {
 	if id == 0 {
 		return nil
 	}
-	return &PickerViewController{inner: raw.PHPickerViewControllerFromID(id)}
-}
-
-// Creates a new picker view controller with the configuration you specify.
-//
-// NewPickerViewControllerWithConfiguration creates a new [PickerViewController].
-func NewPickerViewControllerWithConfiguration(configuration *raw.PHPickerConfiguration) *PickerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), configuration.Ptr())
-	return &PickerViewController{inner: raw.PHPickerViewControllerFromID(_id)}
-}
-
-// The picker’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PickerViewController) WithDelegate(delegate raw.PHPickerViewControllerDelegate) *PickerViewController {
-	x.inner.SetDelegate(delegate)
+	x := &PickerViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Customizes your app’s photo picker according to the given configuration.
-//
-// UpdatePickerUsingConfiguration calls the underlying UpdatePickerUsingConfiguration.
-func (x *PickerViewController) UpdatePickerUsingConfiguration(configuration *raw.PHPickerUpdateConfiguration) {
-	x.inner.UpdatePickerUsingConfiguration(configuration)
-}
-
-// Deselects assets that are in a selected state.
-//
-// DeselectAssetsWithIdentifiers calls the underlying DeselectAssetsWithIdentifiers.
-func (x *PickerViewController) DeselectAssetsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.DeselectAssetsWithIdentifiers(identifiers)
-}
-
-// Reorders assets that are in a selected state.
-//
-// MoveAssetWithIdentifierAfterAssetWithIdentifier calls the underlying MoveAssetWithIdentifierAfterAssetWithIdentifier.
-func (x *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
-	x.inner.MoveAssetWithIdentifierAfterAssetWithIdentifier(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(afterIdentifier))
-}
-
-// Resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
-//
-// ScrollToInitialPosition calls the underlying ScrollToInitialPosition.
-func (x *PickerViewController) ScrollToInitialPosition() {
-	x.inner.ScrollToInitialPosition()
-}
-
-// Changes the picker’s content scale by making the photo thumbnails larger in the view.
-//
-// ZoomIn calls the underlying ZoomIn.
-func (x *PickerViewController) ZoomIn() {
-	x.inner.ZoomIn()
-}
-
-// Changes the picker’s content scale by making the photo thumbnails smaller in the view.
-//
-// ZoomOut calls the underlying ZoomOut.
-func (x *PickerViewController) ZoomOut() {
-	x.inner.ZoomOut()
-}
-
-// The configuration passed in during initialization.
-//
-// Configuration calls the underlying Configuration.
-func (x *PickerViewController) Configuration() *PickerConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
+// pickerViewControllerAdopt wraps an Objective-C object that this code just created as a
+// PickerViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pickerViewControllerAdopt(id objc.ID) *PickerViewController {
+	if id == 0 {
 		return nil
 	}
-	return &PickerConfiguration{inner: _r}
+	x := &PickerViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The delegate to be notified.
-//
-// Delegate calls the underlying Delegate.
-func (x *PickerViewController) Delegate() raw.PHPickerViewControllerDelegate {
-	return x.inner.Delegate()
+// Description returns the object's -description text.
+func (x *PickerViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The delegate to be notified.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *PickerViewController) SetDelegate(delegate raw.PHPickerViewControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PickerViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PickerViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PickerViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPickerViewControllerWithConfiguration creates a new picker view controller with the configuration you specify.
+func NewPickerViewControllerWithConfiguration(configuration *PickerConfiguration) *PickerViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHPickerViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+	return pickerViewControllerAdopt(_id)
+}
+
+// UpdatePickerUsingConfiguration customizes your app’s photo picker according to the given configuration.
+func (x *PickerViewController) UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
+}
+
+// DeselectAssetsWithIdentifiers deselects assets that are in a selected state.
+func (x *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+}
+
+// MoveAssetWithIdentifierAfterAssetWithIdentifier reorders assets that are in a selected state.
+func (x *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
+}
+
+// ScrollToInitialPosition resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
+func (x *PickerViewController) ScrollToInitialPosition() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToInitialPosition"))
+}
+
+// ZoomIn changes the picker’s content scale by making the photo thumbnails larger in the view.
+func (x *PickerViewController) ZoomIn() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomIn"))
+}
+
+// ZoomOut changes the picker’s content scale by making the photo thumbnails smaller in the view.
+func (x *PickerViewController) ZoomOut() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomOut"))
+}
+
+// Configuration the configuration passed in during initialization.
+func (x *PickerViewController) Configuration() *PickerConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return PickerConfigurationFromID(_r)
 }
 
 // PickerViewControllerable is the interface implemented by [PickerViewController], for mocking and DI.
 type PickerViewControllerable interface {
-	Unwrap() *raw.PHPickerViewController
-	WithDelegate(delegate raw.PHPickerViewControllerDelegate) *PickerViewController
-	UpdatePickerUsingConfiguration(configuration *raw.PHPickerUpdateConfiguration)
-	DeselectAssetsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString])
+	obj.Object
+	UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration)
+	DeselectAssetsWithIdentifiers(identifiers []string)
 	MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string)
 	ScrollToInitialPosition()
 	ZoomIn()
 	ZoomOut()
 	Configuration() *PickerConfiguration
-	Delegate() raw.PHPickerViewControllerDelegate
-	SetDelegate(delegate raw.PHPickerViewControllerDelegate)
 }
 
 var _ PickerViewControllerable = (*PickerViewController)(nil)

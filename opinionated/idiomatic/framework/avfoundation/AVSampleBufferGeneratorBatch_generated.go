@@ -6,52 +6,85 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that generates sample buffers in a batch.
+// SampleBufferGeneratorBatch is an idiomatic wrapper over the Objective-C class AVSampleBufferGeneratorBatch.
 //
-// SampleBufferGeneratorBatch wraps [raw.AVSampleBufferGeneratorBatch] with a fluent Go API.
+// An object that generates sample buffers in a batch.
 type SampleBufferGeneratorBatch struct {
-	inner *raw.AVSampleBufferGeneratorBatch
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSampleBufferGeneratorBatch].
-func (x *SampleBufferGeneratorBatch) Unwrap() *raw.AVSampleBufferGeneratorBatch { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleBufferGeneratorBatch) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleBufferGeneratorBatchFromID adopts an existing object pointer as a SampleBufferGeneratorBatch (nil for 0).
+// SampleBufferGeneratorBatchFromID adopts an existing Objective-C object as a SampleBufferGeneratorBatch
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleBufferGeneratorBatchFromID(id objc.ID) *SampleBufferGeneratorBatch {
 	if id == 0 {
 		return nil
 	}
-	return &SampleBufferGeneratorBatch{inner: raw.AVSampleBufferGeneratorBatchFromID(id)}
+	x := &SampleBufferGeneratorBatch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSampleBufferGeneratorBatch creates a new [SampleBufferGeneratorBatch].
+// sampleBufferGeneratorBatchAdopt wraps an Objective-C object that this code just created as a
+// SampleBufferGeneratorBatch (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleBufferGeneratorBatchAdopt(id objc.ID) *SampleBufferGeneratorBatch {
+	if id == 0 {
+		return nil
+	}
+	x := &SampleBufferGeneratorBatch{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SampleBufferGeneratorBatch) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleBufferGeneratorBatch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleBufferGeneratorBatch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferGeneratorBatch) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleBufferGeneratorBatch creates a new SampleBufferGeneratorBatch.
 func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleBufferGeneratorBatch")), objc.RegisterName("new"))
-	return &SampleBufferGeneratorBatch{inner: raw.AVSampleBufferGeneratorBatchFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferGeneratorBatch")), objc.RegisterName("new"))
+	return sampleBufferGeneratorBatchAdopt(_id)
 }
 
-// Loads sample data asynchronously for all sample buffers within a batch.
+// MakeDataReady loads sample data asynchronously for all sample buffers within a batch.
 //
 // MakeDataReady blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.MakeDataReadyWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeDataReadyWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -60,16 +93,14 @@ func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	}
 }
 
-// Cancels any I/O for this batch.
-//
-// Cancel calls the underlying Cancel.
+// Cancel cancels any I/O for this batch.
 func (x *SampleBufferGeneratorBatch) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
 // SampleBufferGeneratorBatchable is the interface implemented by [SampleBufferGeneratorBatch], for mocking and DI.
 type SampleBufferGeneratorBatchable interface {
-	Unwrap() *raw.AVSampleBufferGeneratorBatch
+	obj.Object
 	MakeDataReady(ctx context.Context) error
 	Cancel()
 }

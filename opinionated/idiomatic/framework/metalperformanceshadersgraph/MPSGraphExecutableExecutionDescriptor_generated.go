@@ -5,135 +5,78 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A class that consists of all the levers to synchronize and schedule executable execution.
+// GraphExecutableExecutionDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphExecutableExecutionDescriptor.
 //
-// GraphExecutableExecutionDescriptor wraps [raw.MPSGraphExecutableExecutionDescriptor] with a fluent Go API.
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that consists of all the levers to synchronize and schedule executable execution.
 type GraphExecutableExecutionDescriptor struct {
-	inner *raw.MPSGraphExecutableExecutionDescriptor
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraphExecutableExecutionDescriptor].
-func (x *GraphExecutableExecutionDescriptor) Unwrap() *raw.MPSGraphExecutableExecutionDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphExecutableExecutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphExecutableExecutionDescriptorFromID adopts an existing object pointer as a GraphExecutableExecutionDescriptor (nil for 0).
+// GraphExecutableExecutionDescriptorFromID adopts an existing Objective-C object as a GraphExecutableExecutionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphExecutableExecutionDescriptorFromID(id objc.ID) *GraphExecutableExecutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphExecutableExecutionDescriptor{inner: raw.MPSGraphExecutableExecutionDescriptorFromID(id)}
+	x := &GraphExecutableExecutionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphExecutableExecutionDescriptor creates a new [GraphExecutableExecutionDescriptor].
+// graphExecutableExecutionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphExecutableExecutionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphExecutableExecutionDescriptorAdopt(id objc.ID) *GraphExecutableExecutionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphExecutableExecutionDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGraphExecutableExecutionDescriptor creates a new GraphExecutableExecutionDescriptor.
 func NewGraphExecutableExecutionDescriptor() *GraphExecutableExecutionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphExecutableExecutionDescriptor")), objc.RegisterName("new"))
-	return &GraphExecutableExecutionDescriptor{inner: raw.MPSGraphExecutableExecutionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutableExecutionDescriptor")), objc.RegisterName("new"))
+	return graphExecutableExecutionDescriptorAdopt(_id)
 }
 
-// A notification that appears when graph-executable execution is scheduled.
-//
-// WithScheduledHandler sets the scheduledHandler property and returns the receiver for chaining.
-func (x *GraphExecutableExecutionDescriptor) WithScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
-	x.inner.SetScheduledHandler(scheduledHandler)
-	return x
-}
-
-// A notification that appears when graph-executable execution is finished.
-//
-// WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
-func (x *GraphExecutableExecutionDescriptor) WithCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
-	x.inner.SetCompletionHandler(completionHandler)
-	return x
-}
-
-// Flag for the graph executable to wait till the execution has completed.
-//
-// WithWaitUntilCompleted sets the waitUntilCompleted property and returns the receiver for chaining.
+// WithWaitUntilCompleted flag for the graph executable to wait till the execution has completed.
 func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor {
-	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 	return x
 }
 
-// Waits on these shared events before scheduling execution on the HW.
-//
-// WaitForEventValue calls the underlying WaitForEventValue.
-func (x *GraphExecutableExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
-	x.inner.WaitForEventValue(event, value)
-}
-
-// Signals these shared events at execution stage and immediately proceeds.
-//
-// SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
-func (x *GraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {
-	x.inner.SignalEventAtExecutionEventValue(event, raw.MPSGraphExecutionStage(executionStage), value)
-}
-
-// A notification that appears when graph-executable execution is scheduled. Default value is nil.
-//
-// ScheduledHandler calls the underlying ScheduledHandler.
-func (x *GraphExecutableExecutionDescriptor) ScheduledHandler() objc.Block {
-	return x.inner.ScheduledHandler()
-}
-
-// SetScheduledHandler calls the underlying SetScheduledHandler.
-func (x *GraphExecutableExecutionDescriptor) SetScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) {
-	x.inner.SetScheduledHandler(scheduledHandler)
-}
-
-// A notification that appears when graph-executable execution is finished. Default value is nil.
-//
-// CompletionHandler calls the underlying CompletionHandler.
-func (x *GraphExecutableExecutionDescriptor) CompletionHandler() objc.Block {
-	return x.inner.CompletionHandler()
-}
-
-// SetCompletionHandler calls the underlying SetCompletionHandler.
-func (x *GraphExecutableExecutionDescriptor) SetCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) {
-	x.inner.SetCompletionHandler(completionHandler)
-}
-
-// Flag for the graph executable to wait till the execution has completed. Default value is false.
-//
-// WaitUntilCompleted calls the underlying WaitUntilCompleted.
+// WaitUntilCompleted flag for the graph executable to wait till the execution has completed. Default value is false.
 func (x *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
-	return x.inner.WaitUntilCompleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilCompleted"))
+	return _r
 }
 
-// SetWaitUntilCompleted calls the underlying SetWaitUntilCompleted.
+// SetWaitUntilCompleted wraps the corresponding Objective-C method.
 func (x *GraphExecutableExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
-	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
-}
-
-func (x *GraphExecutableExecutionDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 }
 
 // GraphExecutableExecutionDescriptorable is the interface implemented by [GraphExecutableExecutionDescriptor], for mocking and DI.
 type GraphExecutableExecutionDescriptorable interface {
-	Unwrap() *raw.MPSGraphExecutableExecutionDescriptor
-	WithScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor
-	WithCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor
+	obj.Object
 	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor
-	WaitForEventValue(event metal.MTLSharedEvent, value uint64)
-	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64)
-	ScheduledHandler() objc.Block
-	SetScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer))
-	CompletionHandler() objc.Block
-	SetCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer))
 	WaitUntilCompleted() bool
 	SetWaitUntilCompleted(waitUntilCompleted bool)
 }
 
 var _ GraphExecutableExecutionDescriptorable = (*GraphExecutableExecutionDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphExecutableExecutionDescriptor)(nil)

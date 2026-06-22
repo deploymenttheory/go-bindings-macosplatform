@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package ituneslibrary provides a fluent Go API over the macOS iTunesLibrary framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - LibMediaEntity: [LibMediaItem], [LibPlaylist]
 package ituneslibrary

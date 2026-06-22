@@ -5,15 +5,17 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// UMPEndpointProvider is implemented by UMPEndpoint and any idiomatic type wrapping a MIDIUMPEndpoint subclass.
+// UMPEndpointProvider is accepted wherever a MIDIUMPEndpoint (or one of its subclasses) is expected.
 type UMPEndpointProvider interface {
-	asUMPEndpoint() *raw.MIDIUMPEndpoint
+	objref.Object
+	isUMPEndpoint()
 }
 
-// UMPFunctionBlockProvider is implemented by UMPFunctionBlock and any idiomatic type wrapping a MIDIUMPFunctionBlock subclass.
+// UMPFunctionBlockProvider is accepted wherever a MIDIUMPFunctionBlock (or one of its subclasses) is expected.
 type UMPFunctionBlockProvider interface {
-	asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock
+	objref.Object
+	isUMPFunctionBlock()
 }

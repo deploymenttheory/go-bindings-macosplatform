@@ -5,97 +5,106 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.
+// Decision is an idiomatic wrapper over the Objective-C class CNDecision.
 //
-// Decision wraps [raw.CNDecision] with a fluent Go API.
+// An object that represents a decision to focus on a particular detection, or group of detections, at a particular time.
 type Decision struct {
-	inner *raw.CNDecision
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNDecision].
-func (x *Decision) Unwrap() *raw.CNDecision { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Decision) ID() objc.ID { return x.inner.Ptr() }
-
-// DecisionFromID adopts an existing object pointer as a Decision (nil for 0).
+// DecisionFromID adopts an existing Objective-C object as a Decision
+// (nil for 0), retaining it and registering a release finalizer.
 func DecisionFromID(id objc.ID) *Decision {
 	if id == 0 {
 		return nil
 	}
-	return &Decision{inner: raw.CNDecisionFromID(id)}
+	x := &Decision{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Make a decision to focus on the detection with the given detectionID. A strong decision keeps focus for as long as possible.
-//
-// NewDecisionWithTimeDetectionIDStrong creates a new [Decision].
-func NewDecisionWithTimeDetectionIDStrong(time_ coremedia.CMTime, detectionID int64, isStrong bool) *Decision {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDecision")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionID:strong:"), time_, detectionID, isStrong)
-	return &Decision{inner: raw.CNDecisionFromID(_id)}
+// decisionAdopt wraps an Objective-C object that this code just created as a
+// Decision (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decisionAdopt(id objc.ID) *Decision {
+	if id == 0 {
+		return nil
+	}
+	x := &Decision{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Make a decision to focus on the best among those detections with the same detectionGroupID. A strong decision keeps focus for as long as possible.
-//
-// NewDecisionWithTimeDetectionGroupIDStrong creates a new [Decision].
-func NewDecisionWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detectionGroupID int64, isStrong bool) *Decision {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDecision")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionGroupID:strong:"), time_, detectionGroupID, isStrong)
-	return &Decision{inner: raw.CNDecisionFromID(_id)}
+// Description returns the object's -description text.
+func (x *Decision) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The first presentation time at which the subject should be in focus. The rack focus transition to the subject occurs prior to this time.
-//
-// Time calls the underlying Time.
-func (x *Decision) Time() coremedia.CMTime {
-	return x.inner.Time()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Decision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The detectionID of the detection to focus on if this is not a group decision.
-//
-// DetectionID calls the underlying DetectionID.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Decision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Decision) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDecision creates a new Decision.
+func NewDecision() *Decision {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNDecision")), objc.RegisterName("new"))
+	return decisionAdopt(_id)
+}
+
+// DetectionID the detectionID of the detection to focus on if this is not a group decision.
 func (x *Decision) DetectionID() int64 {
-	return x.inner.DetectionID()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
+	return _r
 }
 
-// The detectionGroupID of the detection to focus on if this is a group decision.
-//
-// DetectionGroupID calls the underlying DetectionGroupID.
+// DetectionGroupID the detectionGroupID of the detection to focus on if this is a group decision.
 func (x *Decision) DetectionGroupID() int64 {
-	return x.inner.DetectionGroupID()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
+	return _r
 }
 
-// Whether this is a user-created decision, or a base decision.
-//
-// IsUserDecision calls the underlying IsUserDecision.
+// IsUserDecision whether this is a user-created decision, or a base decision.
 func (x *Decision) IsUserDecision() bool {
-	return x.inner.IsUserDecision()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserDecision"))
+	return _r
 }
 
-// Whether this is a group decision or not.
-//
-// IsGroupDecision calls the underlying IsGroupDecision.
+// IsGroupDecision whether this is a group decision or not.
 func (x *Decision) IsGroupDecision() bool {
-	return x.inner.IsGroupDecision()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGroupDecision"))
+	return _r
 }
 
-// Whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
-//
-// IsStrongDecision calls the underlying IsStrongDecision.
+// IsStrongDecision whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
 func (x *Decision) IsStrongDecision() bool {
-	return x.inner.IsStrongDecision()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStrongDecision"))
+	return _r
 }
 
 // Decisionable is the interface implemented by [Decision], for mocking and DI.
 type Decisionable interface {
-	Unwrap() *raw.CNDecision
-	Time() coremedia.CMTime
+	obj.Object
 	DetectionID() int64
 	DetectionGroupID() int64
 	IsUserDecision() bool

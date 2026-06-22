@@ -5,439 +5,262 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// VTCompressionSessionBeginPass calls [raw.VTCompressionSessionBeginPass] (C function VTCompressionSessionBeginPass).
-func VTCompressionSessionBeginPass(session unsafe.Pointer, beginPassFlags VTCompressionSessionOptionFlags, reserved *uint32) int {
-	return raw.VTCompressionSessionBeginPass(session, raw.VTCompressionSessionOptionFlags(beginPassFlags), reserved)
-}
+var _fnVTCompressionSessionGetPixelBufferPool func(objc.ID) objc.ID
 
-// VTCompressionSessionCompleteFrames calls [raw.VTCompressionSessionCompleteFrames] (C function VTCompressionSessionCompleteFrames).
-func VTCompressionSessionCompleteFrames(session unsafe.Pointer, completeUntilPresentationTimeStamp coremedia.CMTime) int {
-	return raw.VTCompressionSessionCompleteFrames(session, completeUntilPresentationTimeStamp)
-}
-
-// VTCompressionSessionCreate calls [raw.VTCompressionSessionCreate] (C function VTCompressionSessionCreate).
-func VTCompressionSessionCreate(allocator unsafe.Pointer, width int32, height int32, codecType uint, encoderSpecification unsafe.Pointer, sourceImageBufferAttributes unsafe.Pointer, compressedDataAllocator unsafe.Pointer, outputCallback unsafe.Pointer, outputCallbackRefCon unsafe.Pointer, compressionSessionOut unsafe.Pointer) int {
-	return raw.VTCompressionSessionCreate(allocator, width, height, codecType, encoderSpecification, sourceImageBufferAttributes, compressedDataAllocator, outputCallback, outputCallbackRefCon, compressionSessionOut)
-}
-
-// VTCompressionSessionEncodeFrame calls [raw.VTCompressionSessionEncodeFrame] (C function VTCompressionSessionEncodeFrame).
-func VTCompressionSessionEncodeFrame(session unsafe.Pointer, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, sourceFrameRefcon unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags) int {
-	var _infoFlagsOut raw.VTEncodeInfoFlags
-	_ret := raw.VTCompressionSessionEncodeFrame(session, imageBuffer, presentationTimeStamp, duration, frameProperties, sourceFrameRefcon, &_infoFlagsOut)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+// VTCompressionSessionGetPixelBufferPool calls the VideoToolbox framework function VTCompressionSessionGetPixelBufferPool.
+func VTCompressionSessionGetPixelBufferPool(session obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCompressionSessionGetPixelBufferPool == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionGetPixelBufferPool, _lib, "VTCompressionSessionGetPixelBufferPool")
 	}
-	return _ret
+	_ret := _fnVTCompressionSessionGetPixelBufferPool(objref.IDOf(session))
+	return obj.Wrap(_ret)
 }
 
-// VTCompressionSessionEncodeFrameWithOutputHandler calls [raw.VTCompressionSessionEncodeFrameWithOutputHandler] (C function VTCompressionSessionEncodeFrameWithOutputHandler).
-func VTCompressionSessionEncodeFrameWithOutputHandler(session unsafe.Pointer, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags, outputHandler func(int, VTEncodeInfoFlags, unsafe.Pointer)) int {
-	var _infoFlagsOut raw.VTEncodeInfoFlags
-	_ret := raw.VTCompressionSessionEncodeFrameWithOutputHandler(session, imageBuffer, presentationTimeStamp, duration, frameProperties, &_infoFlagsOut, func(_a0 int, _a1 raw.VTEncodeInfoFlags, _a2 unsafe.Pointer) {
-		outputHandler(_a0, VTEncodeInfoFlags(_a1), _a2)
-	})
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+var _fnVTCompressionSessionGetTypeID func() int
+
+// VTCompressionSessionGetTypeID calls the VideoToolbox framework function VTCompressionSessionGetTypeID.
+func VTCompressionSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCompressionSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionGetTypeID, _lib, "VTCompressionSessionGetTypeID")
 	}
-	return _ret
+	return _fnVTCompressionSessionGetTypeID()
 }
 
-// VTCompressionSessionEncodeMultiImageFrame calls [raw.VTCompressionSessionEncodeMultiImageFrame] (C function VTCompressionSessionEncodeMultiImageFrame).
-func VTCompressionSessionEncodeMultiImageFrame(session unsafe.Pointer, taggedBufferGroup unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, sourceFrameRefcon unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags) int {
-	var _infoFlagsOut raw.VTEncodeInfoFlags
-	_ret := raw.VTCompressionSessionEncodeMultiImageFrame(session, taggedBufferGroup, presentationTimeStamp, duration, frameProperties, sourceFrameRefcon, &_infoFlagsOut)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+var _fnVTCompressionSessionInvalidate func(objc.ID)
+
+// VTCompressionSessionInvalidate calls the VideoToolbox framework function VTCompressionSessionInvalidate.
+func VTCompressionSessionInvalidate(session obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCompressionSessionInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionInvalidate, _lib, "VTCompressionSessionInvalidate")
 	}
-	return _ret
+	_fnVTCompressionSessionInvalidate(objref.IDOf(session))
 }
 
-// VTCompressionSessionEncodeMultiImageFrameWithOutputHandler calls [raw.VTCompressionSessionEncodeMultiImageFrameWithOutputHandler] (C function VTCompressionSessionEncodeMultiImageFrameWithOutputHandler).
-func VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session unsafe.Pointer, taggedBufferGroup unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags, outputHandler func(int, VTEncodeInfoFlags, unsafe.Pointer)) int {
-	var _infoFlagsOut raw.VTEncodeInfoFlags
-	_ret := raw.VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session, taggedBufferGroup, presentationTimeStamp, duration, frameProperties, &_infoFlagsOut, func(_a0 int, _a1 raw.VTEncodeInfoFlags, _a2 unsafe.Pointer) {
-		outputHandler(_a0, VTEncodeInfoFlags(_a1), _a2)
-	})
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+var _fnVTDecompressionSessionCanAcceptFormatDescription func(objc.ID, objc.ID) uint8
+
+// VTDecompressionSessionCanAcceptFormatDescription calls the VideoToolbox framework function VTDecompressionSessionCanAcceptFormatDescription.
+func VTDecompressionSessionCanAcceptFormatDescription(session obj.Object, newFormatDesc obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTDecompressionSessionCanAcceptFormatDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionCanAcceptFormatDescription, _lib, "VTDecompressionSessionCanAcceptFormatDescription")
 	}
-	return _ret
+	return _fnVTDecompressionSessionCanAcceptFormatDescription(objref.IDOf(session), objref.IDOf(newFormatDesc))
 }
 
-// VTCompressionSessionEndPass calls [raw.VTCompressionSessionEndPass] (C function VTCompressionSessionEndPass).
-func VTCompressionSessionEndPass(session unsafe.Pointer, furtherPassesRequestedOut *uint8, reserved *uint32) int {
-	return raw.VTCompressionSessionEndPass(session, furtherPassesRequestedOut, reserved)
-}
+var _fnVTDecompressionSessionGetTypeID func() int
 
-// VTCompressionSessionGetPixelBufferPool calls [raw.VTCompressionSessionGetPixelBufferPool] (C function VTCompressionSessionGetPixelBufferPool).
-func VTCompressionSessionGetPixelBufferPool(session unsafe.Pointer) unsafe.Pointer {
-	return raw.VTCompressionSessionGetPixelBufferPool(session)
-}
-
-// VTCompressionSessionGetTimeRangesForNextPass calls [raw.VTCompressionSessionGetTimeRangesForNextPass] (C function VTCompressionSessionGetTimeRangesForNextPass).
-func VTCompressionSessionGetTimeRangesForNextPass(session unsafe.Pointer, timeRangeCountOut *int, timeRangeArrayOut *coremedia.CMTimeRange) int {
-	return raw.VTCompressionSessionGetTimeRangesForNextPass(session, timeRangeCountOut, timeRangeArrayOut)
-}
-
-// VTCompressionSessionGetTypeID calls [raw.VTCompressionSessionGetTypeID] (C function VTCompressionSessionGetTypeID).
-func VTCompressionSessionGetTypeID() uint {
-	return raw.VTCompressionSessionGetTypeID()
-}
-
-// VTCompressionSessionInvalidate calls [raw.VTCompressionSessionInvalidate] (C function VTCompressionSessionInvalidate).
-func VTCompressionSessionInvalidate(session unsafe.Pointer) {
-	raw.VTCompressionSessionInvalidate(session)
-}
-
-// VTCompressionSessionPrepareToEncodeFrames calls [raw.VTCompressionSessionPrepareToEncodeFrames] (C function VTCompressionSessionPrepareToEncodeFrames).
-func VTCompressionSessionPrepareToEncodeFrames(session unsafe.Pointer) int {
-	return raw.VTCompressionSessionPrepareToEncodeFrames(session)
-}
-
-// VTCopyRAWProcessorExtensionProperties calls [raw.VTCopyRAWProcessorExtensionProperties] (C function VTCopyRAWProcessorExtensionProperties).
-func VTCopyRAWProcessorExtensionProperties(formatDesc unsafe.Pointer, mediaExtensionPropertiesOut unsafe.Pointer) int {
-	return raw.VTCopyRAWProcessorExtensionProperties(formatDesc, mediaExtensionPropertiesOut)
-}
-
-// VTCopyVideoDecoderExtensionProperties calls [raw.VTCopyVideoDecoderExtensionProperties] (C function VTCopyVideoDecoderExtensionProperties).
-func VTCopyVideoDecoderExtensionProperties(formatDesc unsafe.Pointer, mediaExtensionPropertiesOut unsafe.Pointer) int {
-	return raw.VTCopyVideoDecoderExtensionProperties(formatDesc, mediaExtensionPropertiesOut)
-}
-
-// VTCreateCGImageFromCVPixelBuffer calls [raw.VTCreateCGImageFromCVPixelBuffer] (C function VTCreateCGImageFromCVPixelBuffer).
-func VTCreateCGImageFromCVPixelBuffer(pixelBuffer unsafe.Pointer, options unsafe.Pointer, imageOut unsafe.Pointer) int {
-	return raw.VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options, imageOut)
-}
-
-// VTDecompressionSessionCanAcceptFormatDescription calls [raw.VTDecompressionSessionCanAcceptFormatDescription] (C function VTDecompressionSessionCanAcceptFormatDescription).
-func VTDecompressionSessionCanAcceptFormatDescription(session unsafe.Pointer, newFormatDesc unsafe.Pointer) uint8 {
-	return raw.VTDecompressionSessionCanAcceptFormatDescription(session, newFormatDesc)
-}
-
-// VTDecompressionSessionCopyBlackPixelBuffer calls [raw.VTDecompressionSessionCopyBlackPixelBuffer] (C function VTDecompressionSessionCopyBlackPixelBuffer).
-func VTDecompressionSessionCopyBlackPixelBuffer(session unsafe.Pointer, pixelBufferOut unsafe.Pointer) int {
-	return raw.VTDecompressionSessionCopyBlackPixelBuffer(session, pixelBufferOut)
-}
-
-// VTDecompressionSessionCreate calls [raw.VTDecompressionSessionCreate] (C function VTDecompressionSessionCreate).
-func VTDecompressionSessionCreate(allocator unsafe.Pointer, videoFormatDescription unsafe.Pointer, videoDecoderSpecification unsafe.Pointer, destinationImageBufferAttributes unsafe.Pointer, outputCallback *raw.VTDecompressionOutputCallbackRecord, decompressionSessionOut unsafe.Pointer) int {
-	return raw.VTDecompressionSessionCreate(allocator, videoFormatDescription, videoDecoderSpecification, destinationImageBufferAttributes, outputCallback, decompressionSessionOut)
-}
-
-// VTDecompressionSessionDecodeFrame calls [raw.VTDecompressionSessionDecodeFrame] (C function VTDecompressionSessionDecodeFrame).
-func VTDecompressionSessionDecodeFrame(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, sourceFrameRefCon unsafe.Pointer, infoFlagsOut *VTDecodeInfoFlags) int {
-	var _infoFlagsOut raw.VTDecodeInfoFlags
-	_ret := raw.VTDecompressionSessionDecodeFrame(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), sourceFrameRefCon, &_infoFlagsOut)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+// VTDecompressionSessionGetTypeID calls the VideoToolbox framework function VTDecompressionSessionGetTypeID.
+func VTDecompressionSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTDecompressionSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionGetTypeID, _lib, "VTDecompressionSessionGetTypeID")
 	}
-	return _ret
+	return _fnVTDecompressionSessionGetTypeID()
 }
 
-// VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler calls [raw.VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler] (C function VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler).
-func VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, infoFlagsOut *VTDecodeInfoFlags, multiImageCapableOutputHandler objc.Block) int {
-	var _infoFlagsOut raw.VTDecodeInfoFlags
-	_ret := raw.VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), &_infoFlagsOut, multiImageCapableOutputHandler)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+var _fnVTDecompressionSessionInvalidate func(objc.ID)
+
+// VTDecompressionSessionInvalidate calls the VideoToolbox framework function VTDecompressionSessionInvalidate.
+func VTDecompressionSessionInvalidate(session obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTDecompressionSessionInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionInvalidate, _lib, "VTDecompressionSessionInvalidate")
 	}
-	return _ret
+	_fnVTDecompressionSessionInvalidate(objref.IDOf(session))
 }
 
-// VTDecompressionSessionDecodeFrameWithOptions calls [raw.VTDecompressionSessionDecodeFrameWithOptions] (C function VTDecompressionSessionDecodeFrameWithOptions).
-func VTDecompressionSessionDecodeFrameWithOptions(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, frameOptions unsafe.Pointer, sourceFrameRefCon unsafe.Pointer, infoFlagsOut *VTDecodeInfoFlags) int {
-	var _infoFlagsOut raw.VTDecodeInfoFlags
-	_ret := raw.VTDecompressionSessionDecodeFrameWithOptions(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), frameOptions, sourceFrameRefCon, &_infoFlagsOut)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+var _fnVTFrameSiloGetTypeID func() int
+
+// VTFrameSiloGetTypeID calls the VideoToolbox framework function VTFrameSiloGetTypeID.
+func VTFrameSiloGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTFrameSiloGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTFrameSiloGetTypeID, _lib, "VTFrameSiloGetTypeID")
 	}
-	return _ret
+	return _fnVTFrameSiloGetTypeID()
 }
 
-// VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler calls [raw.VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler] (C function VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler).
-func VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, frameOptions unsafe.Pointer, infoFlagsOut *VTDecodeInfoFlags, outputHandler objc.Block) int {
-	var _infoFlagsOut raw.VTDecodeInfoFlags
-	_ret := raw.VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), frameOptions, &_infoFlagsOut, outputHandler)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+var _fnVTHDRPerFrameMetadataGenerationSessionGetTypeID func() int
+
+// VTHDRPerFrameMetadataGenerationSessionGetTypeID calls the VideoToolbox framework function VTHDRPerFrameMetadataGenerationSessionGetTypeID.
+func VTHDRPerFrameMetadataGenerationSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTHDRPerFrameMetadataGenerationSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionGetTypeID, _lib, "VTHDRPerFrameMetadataGenerationSessionGetTypeID")
 	}
-	return _ret
+	return _fnVTHDRPerFrameMetadataGenerationSessionGetTypeID()
 }
 
-// VTDecompressionSessionDecodeFrameWithOutputHandler calls [raw.VTDecompressionSessionDecodeFrameWithOutputHandler] (C function VTDecompressionSessionDecodeFrameWithOutputHandler).
-func VTDecompressionSessionDecodeFrameWithOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, infoFlagsOut *VTDecodeInfoFlags, outputHandler objc.Block) int {
-	var _infoFlagsOut raw.VTDecodeInfoFlags
-	_ret := raw.VTDecompressionSessionDecodeFrameWithOutputHandler(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), &_infoFlagsOut, outputHandler)
-	if infoFlagsOut != nil {
-		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+var _fnVTIsHardwareDecodeSupported func(int) uint8
+
+// VTIsHardwareDecodeSupported calls the VideoToolbox framework function VTIsHardwareDecodeSupported.
+func VTIsHardwareDecodeSupported(codecType int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTIsHardwareDecodeSupported == nil {
+		ebipurego.RegisterLibFunc(&_fnVTIsHardwareDecodeSupported, _lib, "VTIsHardwareDecodeSupported")
 	}
-	return _ret
+	return _fnVTIsHardwareDecodeSupported(codecType)
 }
 
-// VTDecompressionSessionFinishDelayedFrames calls [raw.VTDecompressionSessionFinishDelayedFrames] (C function VTDecompressionSessionFinishDelayedFrames).
-func VTDecompressionSessionFinishDelayedFrames(session unsafe.Pointer) int {
-	return raw.VTDecompressionSessionFinishDelayedFrames(session)
-}
+var _fnVTIsStereoMVHEVCDecodeSupported func() uint8
 
-// VTDecompressionSessionGetTypeID calls [raw.VTDecompressionSessionGetTypeID] (C function VTDecompressionSessionGetTypeID).
-func VTDecompressionSessionGetTypeID() uint {
-	return raw.VTDecompressionSessionGetTypeID()
-}
-
-// VTDecompressionSessionInvalidate calls [raw.VTDecompressionSessionInvalidate] (C function VTDecompressionSessionInvalidate).
-func VTDecompressionSessionInvalidate(session unsafe.Pointer) {
-	raw.VTDecompressionSessionInvalidate(session)
-}
-
-// VTDecompressionSessionSetMultiImageCallback calls [raw.VTDecompressionSessionSetMultiImageCallback] (C function VTDecompressionSessionSetMultiImageCallback).
-func VTDecompressionSessionSetMultiImageCallback(decompressionSession unsafe.Pointer, outputMultiImageCallback unsafe.Pointer, outputMultiImageRefcon unsafe.Pointer) int {
-	return raw.VTDecompressionSessionSetMultiImageCallback(decompressionSession, outputMultiImageCallback, outputMultiImageRefcon)
-}
-
-// VTDecompressionSessionWaitForAsynchronousFrames calls [raw.VTDecompressionSessionWaitForAsynchronousFrames] (C function VTDecompressionSessionWaitForAsynchronousFrames).
-func VTDecompressionSessionWaitForAsynchronousFrames(session unsafe.Pointer) int {
-	return raw.VTDecompressionSessionWaitForAsynchronousFrames(session)
-}
-
-// VTFrameSiloAddSampleBuffer calls [raw.VTFrameSiloAddSampleBuffer] (C function VTFrameSiloAddSampleBuffer).
-func VTFrameSiloAddSampleBuffer(silo unsafe.Pointer, sampleBuffer unsafe.Pointer) int {
-	return raw.VTFrameSiloAddSampleBuffer(silo, sampleBuffer)
-}
-
-// VTFrameSiloCallBlockForEachSampleBuffer calls [raw.VTFrameSiloCallBlockForEachSampleBuffer] (C function VTFrameSiloCallBlockForEachSampleBuffer).
-func VTFrameSiloCallBlockForEachSampleBuffer(silo unsafe.Pointer, timeRange coremedia.CMTimeRange, handler func(unsafe.Pointer) unsafe.Pointer) int {
-	return raw.VTFrameSiloCallBlockForEachSampleBuffer(silo, timeRange, handler)
-}
-
-// VTFrameSiloCallFunctionForEachSampleBuffer calls [raw.VTFrameSiloCallFunctionForEachSampleBuffer] (C function VTFrameSiloCallFunctionForEachSampleBuffer).
-func VTFrameSiloCallFunctionForEachSampleBuffer(silo unsafe.Pointer, timeRange coremedia.CMTimeRange, refcon unsafe.Pointer, callback unsafe.Pointer) int {
-	return raw.VTFrameSiloCallFunctionForEachSampleBuffer(silo, timeRange, refcon, callback)
-}
-
-// VTFrameSiloCreate calls [raw.VTFrameSiloCreate] (C function VTFrameSiloCreate).
-func VTFrameSiloCreate(allocator unsafe.Pointer, fileURL unsafe.Pointer, timeRange coremedia.CMTimeRange, options unsafe.Pointer, frameSiloOut unsafe.Pointer) int {
-	return raw.VTFrameSiloCreate(allocator, fileURL, timeRange, options, frameSiloOut)
-}
-
-// VTFrameSiloGetProgressOfCurrentPass calls [raw.VTFrameSiloGetProgressOfCurrentPass] (C function VTFrameSiloGetProgressOfCurrentPass).
-func VTFrameSiloGetProgressOfCurrentPass(silo unsafe.Pointer, progressOut *float32) int {
-	return raw.VTFrameSiloGetProgressOfCurrentPass(silo, progressOut)
-}
-
-// VTFrameSiloGetTypeID calls [raw.VTFrameSiloGetTypeID] (C function VTFrameSiloGetTypeID).
-func VTFrameSiloGetTypeID() uint {
-	return raw.VTFrameSiloGetTypeID()
-}
-
-// VTFrameSiloSetTimeRangesForNextPass calls [raw.VTFrameSiloSetTimeRangesForNextPass] (C function VTFrameSiloSetTimeRangesForNextPass).
-func VTFrameSiloSetTimeRangesForNextPass(silo unsafe.Pointer, timeRangeCount int, timeRangeArray *coremedia.CMTimeRange) int {
-	return raw.VTFrameSiloSetTimeRangesForNextPass(silo, timeRangeCount, timeRangeArray)
-}
-
-// VTHDRPerFrameMetadataGenerationSessionAttachMetadata calls [raw.VTHDRPerFrameMetadataGenerationSessionAttachMetadata] (C function VTHDRPerFrameMetadataGenerationSessionAttachMetadata).
-func VTHDRPerFrameMetadataGenerationSessionAttachMetadata(hdrPerFrameMetadataGenerationSession unsafe.Pointer, pixelBuffer unsafe.Pointer, sceneChange uint8) int {
-	return raw.VTHDRPerFrameMetadataGenerationSessionAttachMetadata(hdrPerFrameMetadataGenerationSession, pixelBuffer, sceneChange)
-}
-
-// VTHDRPerFrameMetadataGenerationSessionCreate calls [raw.VTHDRPerFrameMetadataGenerationSessionCreate] (C function VTHDRPerFrameMetadataGenerationSessionCreate).
-func VTHDRPerFrameMetadataGenerationSessionCreate(allocator unsafe.Pointer, framesPerSecond float32, options unsafe.Pointer, hdrPerFrameMetadataGenerationSessionOut unsafe.Pointer) int {
-	return raw.VTHDRPerFrameMetadataGenerationSessionCreate(allocator, framesPerSecond, options, hdrPerFrameMetadataGenerationSessionOut)
-}
-
-// VTHDRPerFrameMetadataGenerationSessionGetTypeID calls [raw.VTHDRPerFrameMetadataGenerationSessionGetTypeID] (C function VTHDRPerFrameMetadataGenerationSessionGetTypeID).
-func VTHDRPerFrameMetadataGenerationSessionGetTypeID() uint {
-	return raw.VTHDRPerFrameMetadataGenerationSessionGetTypeID()
-}
-
-// VTIsHardwareDecodeSupported calls [raw.VTIsHardwareDecodeSupported] (C function VTIsHardwareDecodeSupported).
-func VTIsHardwareDecodeSupported(codecType uint) uint8 {
-	return raw.VTIsHardwareDecodeSupported(codecType)
-}
-
-// VTIsStereoMVHEVCDecodeSupported calls [raw.VTIsStereoMVHEVCDecodeSupported] (C function VTIsStereoMVHEVCDecodeSupported).
+// VTIsStereoMVHEVCDecodeSupported calls the VideoToolbox framework function VTIsStereoMVHEVCDecodeSupported.
 func VTIsStereoMVHEVCDecodeSupported() uint8 {
-	return raw.VTIsStereoMVHEVCDecodeSupported()
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTIsStereoMVHEVCDecodeSupported == nil {
+		ebipurego.RegisterLibFunc(&_fnVTIsStereoMVHEVCDecodeSupported, _lib, "VTIsStereoMVHEVCDecodeSupported")
+	}
+	return _fnVTIsStereoMVHEVCDecodeSupported()
 }
 
-// VTIsStereoMVHEVCEncodeSupported calls [raw.VTIsStereoMVHEVCEncodeSupported] (C function VTIsStereoMVHEVCEncodeSupported).
+var _fnVTIsStereoMVHEVCEncodeSupported func() uint8
+
+// VTIsStereoMVHEVCEncodeSupported calls the VideoToolbox framework function VTIsStereoMVHEVCEncodeSupported.
 func VTIsStereoMVHEVCEncodeSupported() uint8 {
-	return raw.VTIsStereoMVHEVCEncodeSupported()
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTIsStereoMVHEVCEncodeSupported == nil {
+		ebipurego.RegisterLibFunc(&_fnVTIsStereoMVHEVCEncodeSupported, _lib, "VTIsStereoMVHEVCEncodeSupported")
+	}
+	return _fnVTIsStereoMVHEVCEncodeSupported()
 }
 
-// VTMotionEstimationSessionCompleteFrames calls [raw.VTMotionEstimationSessionCompleteFrames] (C function VTMotionEstimationSessionCompleteFrames).
-func VTMotionEstimationSessionCompleteFrames(session unsafe.Pointer) int {
-	return raw.VTMotionEstimationSessionCompleteFrames(session)
+var _fnVTMotionEstimationSessionGetTypeID func() int
+
+// VTMotionEstimationSessionGetTypeID calls the VideoToolbox framework function VTMotionEstimationSessionGetTypeID.
+func VTMotionEstimationSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMotionEstimationSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionGetTypeID, _lib, "VTMotionEstimationSessionGetTypeID")
+	}
+	return _fnVTMotionEstimationSessionGetTypeID()
 }
 
-// VTMotionEstimationSessionCopySourcePixelBufferAttributes calls [raw.VTMotionEstimationSessionCopySourcePixelBufferAttributes] (C function VTMotionEstimationSessionCopySourcePixelBufferAttributes).
-func VTMotionEstimationSessionCopySourcePixelBufferAttributes(motionEstimationSession unsafe.Pointer, attributesOut unsafe.Pointer) int {
-	return raw.VTMotionEstimationSessionCopySourcePixelBufferAttributes(motionEstimationSession, attributesOut)
+var _fnVTMotionEstimationSessionInvalidate func(objc.ID)
+
+// VTMotionEstimationSessionInvalidate calls the VideoToolbox framework function VTMotionEstimationSessionInvalidate.
+func VTMotionEstimationSessionInvalidate(session obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMotionEstimationSessionInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionInvalidate, _lib, "VTMotionEstimationSessionInvalidate")
+	}
+	_fnVTMotionEstimationSessionInvalidate(objref.IDOf(session))
 }
 
-// VTMotionEstimationSessionCreate calls [raw.VTMotionEstimationSessionCreate] (C function VTMotionEstimationSessionCreate).
-func VTMotionEstimationSessionCreate(allocator unsafe.Pointer, motionVectorProcessorSelectionOptions unsafe.Pointer, width uint32, height uint32, motionEstimationSessionOut unsafe.Pointer) int {
-	return raw.VTMotionEstimationSessionCreate(allocator, motionVectorProcessorSelectionOptions, width, height, motionEstimationSessionOut)
+var _fnVTMultiPassStorageGetTypeID func() int
+
+// VTMultiPassStorageGetTypeID calls the VideoToolbox framework function VTMultiPassStorageGetTypeID.
+func VTMultiPassStorageGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMultiPassStorageGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMultiPassStorageGetTypeID, _lib, "VTMultiPassStorageGetTypeID")
+	}
+	return _fnVTMultiPassStorageGetTypeID()
 }
 
-// VTMotionEstimationSessionEstimateMotionVectors calls [raw.VTMotionEstimationSessionEstimateMotionVectors] (C function VTMotionEstimationSessionEstimateMotionVectors).
-func VTMotionEstimationSessionEstimateMotionVectors(session unsafe.Pointer, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags VTMotionEstimationFrameFlags, additionalFrameOptions unsafe.Pointer, outputHandler func(int, VTMotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) int {
-	return raw.VTMotionEstimationSessionEstimateMotionVectors(session, referenceImage, currentImage, raw.VTMotionEstimationFrameFlags(motionEstimationFrameFlags), additionalFrameOptions, func(_a0 int, _a1 raw.VTMotionEstimationInfoFlags, _a2 unsafe.Pointer, _a3 unsafe.Pointer) {
-		outputHandler(_a0, VTMotionEstimationInfoFlags(_a1), _a2, _a3)
-	})
+var _fnVTPixelRotationSessionGetTypeID func() int
+
+// VTPixelRotationSessionGetTypeID calls the VideoToolbox framework function VTPixelRotationSessionGetTypeID.
+func VTPixelRotationSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTPixelRotationSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTPixelRotationSessionGetTypeID, _lib, "VTPixelRotationSessionGetTypeID")
+	}
+	return _fnVTPixelRotationSessionGetTypeID()
 }
 
-// VTMotionEstimationSessionGetTypeID calls [raw.VTMotionEstimationSessionGetTypeID] (C function VTMotionEstimationSessionGetTypeID).
-func VTMotionEstimationSessionGetTypeID() uint {
-	return raw.VTMotionEstimationSessionGetTypeID()
+var _fnVTPixelRotationSessionInvalidate func(objc.ID)
+
+// VTPixelRotationSessionInvalidate calls the VideoToolbox framework function VTPixelRotationSessionInvalidate.
+func VTPixelRotationSessionInvalidate(session obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTPixelRotationSessionInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnVTPixelRotationSessionInvalidate, _lib, "VTPixelRotationSessionInvalidate")
+	}
+	_fnVTPixelRotationSessionInvalidate(objref.IDOf(session))
 }
 
-// VTMotionEstimationSessionInvalidate calls [raw.VTMotionEstimationSessionInvalidate] (C function VTMotionEstimationSessionInvalidate).
-func VTMotionEstimationSessionInvalidate(session unsafe.Pointer) {
-	raw.VTMotionEstimationSessionInvalidate(session)
+var _fnVTPixelTransferSessionGetTypeID func() int
+
+// VTPixelTransferSessionGetTypeID calls the VideoToolbox framework function VTPixelTransferSessionGetTypeID.
+func VTPixelTransferSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTPixelTransferSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTPixelTransferSessionGetTypeID, _lib, "VTPixelTransferSessionGetTypeID")
+	}
+	return _fnVTPixelTransferSessionGetTypeID()
 }
 
-// VTMultiPassStorageClose calls [raw.VTMultiPassStorageClose] (C function VTMultiPassStorageClose).
-func VTMultiPassStorageClose(multiPassStorage unsafe.Pointer) int {
-	return raw.VTMultiPassStorageClose(multiPassStorage)
+var _fnVTPixelTransferSessionInvalidate func(objc.ID)
+
+// VTPixelTransferSessionInvalidate calls the VideoToolbox framework function VTPixelTransferSessionInvalidate.
+func VTPixelTransferSessionInvalidate(session obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTPixelTransferSessionInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnVTPixelTransferSessionInvalidate, _lib, "VTPixelTransferSessionInvalidate")
+	}
+	_fnVTPixelTransferSessionInvalidate(objref.IDOf(session))
 }
 
-// VTMultiPassStorageCreate calls [raw.VTMultiPassStorageCreate] (C function VTMultiPassStorageCreate).
-func VTMultiPassStorageCreate(allocator unsafe.Pointer, fileURL unsafe.Pointer, timeRange coremedia.CMTimeRange, options unsafe.Pointer, multiPassStorageOut unsafe.Pointer) int {
-	return raw.VTMultiPassStorageCreate(allocator, fileURL, timeRange, options, multiPassStorageOut)
+var _fnVTRAWProcessingSessionGetTypeID func() int
+
+// VTRAWProcessingSessionGetTypeID calls the VideoToolbox framework function VTRAWProcessingSessionGetTypeID.
+func VTRAWProcessingSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionGetTypeID, _lib, "VTRAWProcessingSessionGetTypeID")
+	}
+	return _fnVTRAWProcessingSessionGetTypeID()
 }
 
-// VTMultiPassStorageGetTypeID calls [raw.VTMultiPassStorageGetTypeID] (C function VTMultiPassStorageGetTypeID).
-func VTMultiPassStorageGetTypeID() uint {
-	return raw.VTMultiPassStorageGetTypeID()
+var _fnVTRAWProcessingSessionInvalidate func(objc.ID)
+
+// VTRAWProcessingSessionInvalidate calls the VideoToolbox framework function VTRAWProcessingSessionInvalidate.
+func VTRAWProcessingSessionInvalidate(session obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionInvalidate, _lib, "VTRAWProcessingSessionInvalidate")
+	}
+	_fnVTRAWProcessingSessionInvalidate(objref.IDOf(session))
 }
 
-// VTPixelRotationSessionCreate calls [raw.VTPixelRotationSessionCreate] (C function VTPixelRotationSessionCreate).
-func VTPixelRotationSessionCreate(allocator unsafe.Pointer, pixelRotationSessionOut unsafe.Pointer) int {
-	return raw.VTPixelRotationSessionCreate(allocator, pixelRotationSessionOut)
-}
+var _fnVTRegisterProfessionalVideoWorkflowVideoDecoders func()
 
-// VTPixelRotationSessionGetTypeID calls [raw.VTPixelRotationSessionGetTypeID] (C function VTPixelRotationSessionGetTypeID).
-func VTPixelRotationSessionGetTypeID() uint {
-	return raw.VTPixelRotationSessionGetTypeID()
-}
-
-// VTPixelRotationSessionInvalidate calls [raw.VTPixelRotationSessionInvalidate] (C function VTPixelRotationSessionInvalidate).
-func VTPixelRotationSessionInvalidate(session unsafe.Pointer) {
-	raw.VTPixelRotationSessionInvalidate(session)
-}
-
-// VTPixelRotationSessionRotateImage calls [raw.VTPixelRotationSessionRotateImage] (C function VTPixelRotationSessionRotateImage).
-func VTPixelRotationSessionRotateImage(session unsafe.Pointer, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) int {
-	return raw.VTPixelRotationSessionRotateImage(session, sourceBuffer, destinationBuffer)
-}
-
-// VTPixelTransferSessionCreate calls [raw.VTPixelTransferSessionCreate] (C function VTPixelTransferSessionCreate).
-func VTPixelTransferSessionCreate(allocator unsafe.Pointer, pixelTransferSessionOut unsafe.Pointer) int {
-	return raw.VTPixelTransferSessionCreate(allocator, pixelTransferSessionOut)
-}
-
-// VTPixelTransferSessionGetTypeID calls [raw.VTPixelTransferSessionGetTypeID] (C function VTPixelTransferSessionGetTypeID).
-func VTPixelTransferSessionGetTypeID() uint {
-	return raw.VTPixelTransferSessionGetTypeID()
-}
-
-// VTPixelTransferSessionInvalidate calls [raw.VTPixelTransferSessionInvalidate] (C function VTPixelTransferSessionInvalidate).
-func VTPixelTransferSessionInvalidate(session unsafe.Pointer) {
-	raw.VTPixelTransferSessionInvalidate(session)
-}
-
-// VTPixelTransferSessionTransferImage calls [raw.VTPixelTransferSessionTransferImage] (C function VTPixelTransferSessionTransferImage).
-func VTPixelTransferSessionTransferImage(session unsafe.Pointer, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) int {
-	return raw.VTPixelTransferSessionTransferImage(session, sourceBuffer, destinationBuffer)
-}
-
-// VTRAWProcessingSessionCompleteFrames calls [raw.VTRAWProcessingSessionCompleteFrames] (C function VTRAWProcessingSessionCompleteFrames).
-func VTRAWProcessingSessionCompleteFrames(session unsafe.Pointer) int {
-	return raw.VTRAWProcessingSessionCompleteFrames(session)
-}
-
-// VTRAWProcessingSessionCopyProcessingParameters calls [raw.VTRAWProcessingSessionCopyProcessingParameters] (C function VTRAWProcessingSessionCopyProcessingParameters).
-func VTRAWProcessingSessionCopyProcessingParameters(session unsafe.Pointer, outParameterArray unsafe.Pointer) int {
-	return raw.VTRAWProcessingSessionCopyProcessingParameters(session, outParameterArray)
-}
-
-// VTRAWProcessingSessionCreate calls [raw.VTRAWProcessingSessionCreate] (C function VTRAWProcessingSessionCreate).
-func VTRAWProcessingSessionCreate(allocator unsafe.Pointer, formatDescription unsafe.Pointer, outputPixelBufferAttributes unsafe.Pointer, processingSessionOptions unsafe.Pointer, processingSessionOut unsafe.Pointer) int {
-	return raw.VTRAWProcessingSessionCreate(allocator, formatDescription, outputPixelBufferAttributes, processingSessionOptions, processingSessionOut)
-}
-
-// VTRAWProcessingSessionGetTypeID calls [raw.VTRAWProcessingSessionGetTypeID] (C function VTRAWProcessingSessionGetTypeID).
-func VTRAWProcessingSessionGetTypeID() uint {
-	return raw.VTRAWProcessingSessionGetTypeID()
-}
-
-// VTRAWProcessingSessionInvalidate calls [raw.VTRAWProcessingSessionInvalidate] (C function VTRAWProcessingSessionInvalidate).
-func VTRAWProcessingSessionInvalidate(session unsafe.Pointer) {
-	raw.VTRAWProcessingSessionInvalidate(session)
-}
-
-// VTRAWProcessingSessionProcessFrame calls [raw.VTRAWProcessingSessionProcessFrame] (C function VTRAWProcessingSessionProcessFrame).
-func VTRAWProcessingSessionProcessFrame(session unsafe.Pointer, inputPixelBuffer unsafe.Pointer, frameOptions unsafe.Pointer, outputHandler func(int, unsafe.Pointer)) int {
-	return raw.VTRAWProcessingSessionProcessFrame(session, inputPixelBuffer, frameOptions, outputHandler)
-}
-
-// VTRAWProcessingSessionSetParameterChangedHander calls [raw.VTRAWProcessingSessionSetParameterChangedHander] (C function VTRAWProcessingSessionSetParameterChangedHander).
-func VTRAWProcessingSessionSetParameterChangedHander(session unsafe.Pointer, parameterChangeHandler func(unsafe.Pointer)) int {
-	return raw.VTRAWProcessingSessionSetParameterChangedHander(session, parameterChangeHandler)
-}
-
-// VTRAWProcessingSessionSetParameterChangedHandler calls [raw.VTRAWProcessingSessionSetParameterChangedHandler] (C function VTRAWProcessingSessionSetParameterChangedHandler).
-func VTRAWProcessingSessionSetParameterChangedHandler(session unsafe.Pointer, parameterChangeHandler func(unsafe.Pointer)) int {
-	return raw.VTRAWProcessingSessionSetParameterChangedHandler(session, parameterChangeHandler)
-}
-
-// VTRAWProcessingSessionSetProcessingParameters calls [raw.VTRAWProcessingSessionSetProcessingParameters] (C function VTRAWProcessingSessionSetProcessingParameters).
-func VTRAWProcessingSessionSetProcessingParameters(session unsafe.Pointer, processingParameters unsafe.Pointer) int {
-	return raw.VTRAWProcessingSessionSetProcessingParameters(session, processingParameters)
-}
-
-// VTRegisterProfessionalVideoWorkflowVideoDecoders calls [raw.VTRegisterProfessionalVideoWorkflowVideoDecoders] (C function VTRegisterProfessionalVideoWorkflowVideoDecoders).
+// VTRegisterProfessionalVideoWorkflowVideoDecoders calls the VideoToolbox framework function VTRegisterProfessionalVideoWorkflowVideoDecoders.
 func VTRegisterProfessionalVideoWorkflowVideoDecoders() {
-	raw.VTRegisterProfessionalVideoWorkflowVideoDecoders()
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRegisterProfessionalVideoWorkflowVideoDecoders == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRegisterProfessionalVideoWorkflowVideoDecoders, _lib, "VTRegisterProfessionalVideoWorkflowVideoDecoders")
+	}
+	_fnVTRegisterProfessionalVideoWorkflowVideoDecoders()
 }
 
-// VTRegisterProfessionalVideoWorkflowVideoEncoders calls [raw.VTRegisterProfessionalVideoWorkflowVideoEncoders] (C function VTRegisterProfessionalVideoWorkflowVideoEncoders).
+var _fnVTRegisterProfessionalVideoWorkflowVideoEncoders func()
+
+// VTRegisterProfessionalVideoWorkflowVideoEncoders calls the VideoToolbox framework function VTRegisterProfessionalVideoWorkflowVideoEncoders.
 func VTRegisterProfessionalVideoWorkflowVideoEncoders() {
-	raw.VTRegisterProfessionalVideoWorkflowVideoEncoders()
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRegisterProfessionalVideoWorkflowVideoEncoders == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRegisterProfessionalVideoWorkflowVideoEncoders, _lib, "VTRegisterProfessionalVideoWorkflowVideoEncoders")
+	}
+	_fnVTRegisterProfessionalVideoWorkflowVideoEncoders()
 }
 
-// VTRegisterSupplementalVideoDecoderIfAvailable calls [raw.VTRegisterSupplementalVideoDecoderIfAvailable] (C function VTRegisterSupplementalVideoDecoderIfAvailable).
-func VTRegisterSupplementalVideoDecoderIfAvailable(codecType uint) {
-	raw.VTRegisterSupplementalVideoDecoderIfAvailable(codecType)
-}
+var _fnVTRegisterSupplementalVideoDecoderIfAvailable func(int)
 
-// VTSessionCopyProperty calls [raw.VTSessionCopyProperty] (C function VTSessionCopyProperty).
-func VTSessionCopyProperty(session unsafe.Pointer, propertyKey unsafe.Pointer, allocator unsafe.Pointer, propertyValueOut unsafe.Pointer) int {
-	return raw.VTSessionCopyProperty(session, propertyKey, allocator, propertyValueOut)
-}
-
-// VTSessionCopySerializableProperties calls [raw.VTSessionCopySerializableProperties] (C function VTSessionCopySerializableProperties).
-func VTSessionCopySerializableProperties(session unsafe.Pointer, allocator unsafe.Pointer, dictionaryOut unsafe.Pointer) int {
-	return raw.VTSessionCopySerializableProperties(session, allocator, dictionaryOut)
-}
-
-// VTSessionCopySupportedPropertyDictionary calls [raw.VTSessionCopySupportedPropertyDictionary] (C function VTSessionCopySupportedPropertyDictionary).
-func VTSessionCopySupportedPropertyDictionary(session unsafe.Pointer, supportedPropertyDictionaryOut unsafe.Pointer) int {
-	return raw.VTSessionCopySupportedPropertyDictionary(session, supportedPropertyDictionaryOut)
-}
-
-// VTSessionSetProperties calls [raw.VTSessionSetProperties] (C function VTSessionSetProperties).
-func VTSessionSetProperties(session unsafe.Pointer, propertyDictionary unsafe.Pointer) int {
-	return raw.VTSessionSetProperties(session, propertyDictionary)
-}
-
-// VTSessionSetProperty calls [raw.VTSessionSetProperty] (C function VTSessionSetProperty).
-func VTSessionSetProperty(session unsafe.Pointer, propertyKey unsafe.Pointer, propertyValue unsafe.Pointer) int {
-	return raw.VTSessionSetProperty(session, propertyKey, propertyValue)
+// VTRegisterSupplementalVideoDecoderIfAvailable calls the VideoToolbox framework function VTRegisterSupplementalVideoDecoderIfAvailable.
+func VTRegisterSupplementalVideoDecoderIfAvailable(codecType int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRegisterSupplementalVideoDecoderIfAvailable == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRegisterSupplementalVideoDecoderIfAvailable, _lib, "VTRegisterSupplementalVideoDecoderIfAvailable")
+	}
+	_fnVTRegisterSupplementalVideoDecoderIfAvailable(codecType)
 }

@@ -5,103 +5,100 @@
 package iousbhost
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The class for accessing USB-related services.
+// HostInterface is an idiomatic wrapper over the Objective-C class IOUSBHostInterface.
 //
-// HostInterface wraps [raw.IOUSBHostInterface] with a fluent Go API.
+// It embeds [HostObject], promoting that type's methods.
+//
+// The class for accessing USB-related services.
 type HostInterface struct {
-	inner *raw.IOUSBHostInterface
+	HostObject
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostInterface].
-func (x *HostInterface) Unwrap() *raw.IOUSBHostInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// HostInterfaceFromID adopts an existing object pointer as a HostInterface (nil for 0).
+// HostInterfaceFromID adopts an existing Objective-C object as a HostInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func HostInterfaceFromID(id objc.ID) *HostInterface {
 	if id == 0 {
 		return nil
 	}
-	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(id)}
+	x := &HostInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @brief      Initializes IOUSBHostInterface object along with user client @discussion See IOUSBHostObject for documentation.
-//
-// NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler creates a new [HostInterface].
-func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostInterface {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, raw.IOUSBHostObjectInitOptions(options), queue.Ptr(), error_, interestHandler)
-	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(_id)}
-}
-
-// Sets the desired idle suspend timeout for the interface.
-//
-// SetIdleTimeoutError calls the underlying SetIdleTimeoutError.
-func (x *HostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
-	return x.inner.SetIdleTimeoutError(idleTimeout)
-}
-
-// Selects an alternative setting for the interface.
-//
-// SelectAlternateSettingError calls the underlying SelectAlternateSettingError.
-func (x *HostInterface) SelectAlternateSettingError(alternateSetting uint) (bool, error) {
-	return x.inner.SelectAlternateSettingError(alternateSetting)
-}
-
-// Copies a pipe for a specific endpoint address.
-//
-// CopyPipeWithAddressError calls the underlying CopyPipeWithAddressError.
-func (x *HostInterface) CopyPipeWithAddressError(address uint) (*HostPipe, error) {
-	_r, _err := x.inner.CopyPipeWithAddressError(address)
-	if _err != nil {
-		return nil, _err
+// hostInterfaceAdopt wraps an Objective-C object that this code just created as a
+// HostInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostInterfaceAdopt(id objc.ID) *HostInterface {
+	if id == 0 {
+		return nil
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &HostPipe{inner: _r}, nil
+	x := &HostInterface{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief       Retrieve the current idle suspend timeout. See @link setIdleTimeout @/link @return      The amount of time after all pipes are idle to wait before suspending the device,
-//
-// IdleTimeout calls the underlying IdleTimeout.
+// NewHostInterface creates a new HostInterface.
+func NewHostInterface() *HostInterface {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostInterface")), objc.RegisterName("new"))
+	return hostInterfaceAdopt(_id)
+}
+
+// SetIdleTimeout sets the desired idle suspend timeout for the interface.
+func (x *HostInterface) SetIdleTimeout(idleTimeout float64) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// SelectAlternateSetting selects an alternative setting for the interface.
+func (x *HostInterface) SelectAlternateSetting(alternateSetting int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectAlternateSetting:error:"), alternateSetting, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// CopyPipeWithAddressError copies a pipe for a specific endpoint address.
+func (x *HostInterface) CopyPipeWithAddressError(address int) (result *HostPipe, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyPipeWithAddress:error:"), address, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return HostPipeFromID(_r), nil
+}
+
+// IdleTimeout retrieve the current idle suspend timeout. See
 func (x *HostInterface) IdleTimeout() float64 {
-	return x.inner.IdleTimeout()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("idleTimeout"))
+	return _r
 }
-
-// @brief       Retrieve the configuration descriptor associated with this interface @return      IOUSBConfigurationDescriptor pointer
-//
-// ConfigurationDescriptor calls the underlying ConfigurationDescriptor.
-func (x *HostInterface) ConfigurationDescriptor() unsafe.Pointer {
-	return x.inner.ConfigurationDescriptor()
-}
-
-// @brief       Retrieve the interface descriptor associated with this interface. @return      IOUSBInterfaceDescriptor pointer
-//
-// InterfaceDescriptor calls the underlying InterfaceDescriptor.
-func (x *HostInterface) InterfaceDescriptor() unsafe.Pointer {
-	return x.inner.InterfaceDescriptor()
-}
-
-func (x *HostInterface) asHostObject() *raw.IOUSBHostObject { return &x.inner.IOUSBHostObject }
 
 // HostInterfaceable is the interface implemented by [HostInterface], for mocking and DI.
 type HostInterfaceable interface {
-	Unwrap() *raw.IOUSBHostInterface
-	SetIdleTimeoutError(idleTimeout float64) (bool, error)
-	SelectAlternateSettingError(alternateSetting uint) (bool, error)
-	CopyPipeWithAddressError(address uint) (*HostPipe, error)
+	obj.Object
+	SetIdleTimeout(idleTimeout float64) error
+	SelectAlternateSetting(alternateSetting int) error
+	CopyPipeWithAddressError(address int) (result *HostPipe, err error)
 	IdleTimeout() float64
-	ConfigurationDescriptor() unsafe.Pointer
-	InterfaceDescriptor() unsafe.Pointer
 }
 
 var _ HostInterfaceable = (*HostInterface)(nil)
+
+var _ HostObjectProvider = (*HostInterface)(nil)

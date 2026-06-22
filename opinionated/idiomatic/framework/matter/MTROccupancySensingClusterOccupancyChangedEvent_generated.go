@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROccupancySensingClusterOccupancyChangedEvent wraps [raw.MTROccupancySensingClusterOccupancyChangedEvent] with a fluent Go API.
+// MTROccupancySensingClusterOccupancyChangedEvent is an idiomatic wrapper over the Objective-C class MTROccupancySensingClusterOccupancyChangedEvent.
 type MTROccupancySensingClusterOccupancyChangedEvent struct {
-	inner *raw.MTROccupancySensingClusterOccupancyChangedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROccupancySensingClusterOccupancyChangedEvent].
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) Unwrap() *raw.MTROccupancySensingClusterOccupancyChangedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROccupancySensingClusterOccupancyChangedEventFromID adopts an existing object pointer as a MTROccupancySensingClusterOccupancyChangedEvent (nil for 0).
+// MTROccupancySensingClusterOccupancyChangedEventFromID adopts an existing Objective-C object as a MTROccupancySensingClusterOccupancyChangedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROccupancySensingClusterOccupancyChangedEventFromID(id objc.ID) *MTROccupancySensingClusterOccupancyChangedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTROccupancySensingClusterOccupancyChangedEvent{inner: raw.MTROccupancySensingClusterOccupancyChangedEventFromID(id)}
-}
-
-// NewMTROccupancySensingClusterOccupancyChangedEvent creates a new [MTROccupancySensingClusterOccupancyChangedEvent].
-func NewMTROccupancySensingClusterOccupancyChangedEvent() *MTROccupancySensingClusterOccupancyChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROccupancySensingClusterOccupancyChangedEvent")), objc.RegisterName("new"))
-	return &MTROccupancySensingClusterOccupancyChangedEvent{inner: raw.MTROccupancySensingClusterOccupancyChangedEventFromID(_id)}
-}
-
-// WithOccupancy sets the occupancy property and returns the receiver for chaining.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy *foundation.NSNumber) *MTROccupancySensingClusterOccupancyChangedEvent {
-	x.inner.SetOccupancy(occupancy)
+	x := &MTROccupancySensingClusterOccupancyChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Occupancy calls the underlying Occupancy.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() *foundation.NSNumber {
-	return x.inner.Occupancy()
+// mTROccupancySensingClusterOccupancyChangedEventAdopt wraps an Objective-C object that this code just created as a
+// MTROccupancySensingClusterOccupancyChangedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROccupancySensingClusterOccupancyChangedEventAdopt(id objc.ID) *MTROccupancySensingClusterOccupancyChangedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROccupancySensingClusterOccupancyChangedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetOccupancy calls the underlying SetOccupancy.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) SetOccupancy(occupancy *foundation.NSNumber) {
-	x.inner.SetOccupancy(occupancy)
+// Description returns the object's -description text.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROccupancySensingClusterOccupancyChangedEvent creates a new MTROccupancySensingClusterOccupancyChangedEvent.
+func NewMTROccupancySensingClusterOccupancyChangedEvent() *MTROccupancySensingClusterOccupancyChangedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROccupancySensingClusterOccupancyChangedEvent")), objc.RegisterName("new"))
+	return mTROccupancySensingClusterOccupancyChangedEventAdopt(_id)
+}
+
+// WithOccupancy sets the property and returns the receiver so calls can be chained.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
+	return x
+}
+
+// Occupancy wraps the corresponding Objective-C method.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("occupancy"))
+	return obj.Wrap(_r)
+}
+
+// SetOccupancy wraps the corresponding Objective-C method.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) SetOccupancy(occupancy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
 }
 
 // MTROccupancySensingClusterOccupancyChangedEventable is the interface implemented by [MTROccupancySensingClusterOccupancyChangedEvent], for mocking and DI.
 type MTROccupancySensingClusterOccupancyChangedEventable interface {
-	Unwrap() *raw.MTROccupancySensingClusterOccupancyChangedEvent
-	WithOccupancy(occupancy *foundation.NSNumber) *MTROccupancySensingClusterOccupancyChangedEvent
-	Occupancy() *foundation.NSNumber
-	SetOccupancy(occupancy *foundation.NSNumber)
+	obj.Object
+	WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent
+	Occupancy() obj.Object
+	SetOccupancy(occupancy obj.Object)
 }
 
 var _ MTROccupancySensingClusterOccupancyChangedEventable = (*MTROccupancySensingClusterOccupancyChangedEvent)(nil)

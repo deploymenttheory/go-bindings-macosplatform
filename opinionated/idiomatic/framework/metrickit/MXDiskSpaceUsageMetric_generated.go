@@ -5,108 +5,114 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about your app’s disk space usage.
+// DiskSpaceUsageMetric is an idiomatic wrapper over the Objective-C class MXDiskSpaceUsageMetric.
 //
-// DiskSpaceUsageMetric wraps [raw.MXDiskSpaceUsageMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about your app’s disk space usage.
 type DiskSpaceUsageMetric struct {
-	inner *raw.MXDiskSpaceUsageMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXDiskSpaceUsageMetric].
-func (x *DiskSpaceUsageMetric) Unwrap() *raw.MXDiskSpaceUsageMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiskSpaceUsageMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// DiskSpaceUsageMetricFromID adopts an existing object pointer as a DiskSpaceUsageMetric (nil for 0).
+// DiskSpaceUsageMetricFromID adopts an existing Objective-C object as a DiskSpaceUsageMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func DiskSpaceUsageMetricFromID(id objc.ID) *DiskSpaceUsageMetric {
 	if id == 0 {
 		return nil
 	}
-	return &DiskSpaceUsageMetric{inner: raw.MXDiskSpaceUsageMetricFromID(id)}
+	x := &DiskSpaceUsageMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDiskSpaceUsageMetric creates a new [DiskSpaceUsageMetric].
+// diskSpaceUsageMetricAdopt wraps an Objective-C object that this code just created as a
+// DiskSpaceUsageMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diskSpaceUsageMetricAdopt(id objc.ID) *DiskSpaceUsageMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &DiskSpaceUsageMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDiskSpaceUsageMetric creates a new DiskSpaceUsageMetric.
 func NewDiskSpaceUsageMetric() *DiskSpaceUsageMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXDiskSpaceUsageMetric")), objc.RegisterName("new"))
-	return &DiskSpaceUsageMetric{inner: raw.MXDiskSpaceUsageMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXDiskSpaceUsageMetric")), objc.RegisterName("new"))
+	return diskSpaceUsageMetricAdopt(_id)
 }
 
-// @property      totalBinaryFileSize @abstract      Total fixed size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
-//
-// TotalBinaryFileSize calls the underlying TotalBinaryFileSize.
-func (x *DiskSpaceUsageMetric) TotalBinaryFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalBinaryFileSize()
+// TotalBinaryFileSize total fixed size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (x *DiskSpaceUsageMetric) TotalBinaryFileSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalBinaryFileSize"))
+	return obj.Wrap(_r)
 }
 
-// @property      totalBinaryFileCount @abstract      Total count of fixed files owned by the app.
-//
-// TotalBinaryFileCount calls the underlying TotalBinaryFileCount.
+// TotalBinaryFileCount total count of fixed files owned by the app.
 func (x *DiskSpaceUsageMetric) TotalBinaryFileCount() int {
-	return x.inner.TotalBinaryFileCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalBinaryFileCount"))
+	return _r
 }
 
-// @property      totalDataFileSize @abstract      Total data file size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
-//
-// TotalDataFileSize calls the underlying TotalDataFileSize.
-func (x *DiskSpaceUsageMetric) TotalDataFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalDataFileSize()
+// TotalDataFileSize total data file size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (x *DiskSpaceUsageMetric) TotalDataFileSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDataFileSize"))
+	return obj.Wrap(_r)
 }
 
-// @property      totalDataFileCount @abstract      Total count of data files owned by the app.
-//
-// TotalDataFileCount calls the underlying TotalDataFileCount.
+// TotalDataFileCount total count of data files owned by the app.
 func (x *DiskSpaceUsageMetric) TotalDataFileCount() int {
-	return x.inner.TotalDataFileCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalDataFileCount"))
+	return _r
 }
 
-// @property      totalCacheFolderSize @abstract      Total file size contained within the apps cache folder. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
-//
-// TotalCacheFolderSize calls the underlying TotalCacheFolderSize.
-func (x *DiskSpaceUsageMetric) TotalCacheFolderSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalCacheFolderSize()
+// TotalCacheFolderSize total file size contained within the apps cache folder. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (x *DiskSpaceUsageMetric) TotalCacheFolderSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCacheFolderSize"))
+	return obj.Wrap(_r)
 }
 
-// @property      totalCloneSize @abstract      Total clone size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
-//
-// TotalCloneSize calls the underlying TotalCloneSize.
-func (x *DiskSpaceUsageMetric) TotalCloneSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalCloneSize()
+// TotalCloneSize total clone size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (x *DiskSpaceUsageMetric) TotalCloneSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCloneSize"))
+	return obj.Wrap(_r)
 }
 
-// @property      totalDiskSpaceUsedSize @abstract      Total disk space used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
-//
-// TotalDiskSpaceUsedSize calls the underlying TotalDiskSpaceUsedSize.
-func (x *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalDiskSpaceUsedSize()
+// TotalDiskSpaceUsedSize total disk space used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (x *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDiskSpaceUsedSize"))
+	return obj.Wrap(_r)
 }
 
-// @property      totalDiskSpaceCapacity @abstract      Total disk space capacity of the device @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
-//
-// TotalDiskSpaceCapacity calls the underlying TotalDiskSpaceCapacity.
-func (x *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalDiskSpaceCapacity()
+// TotalDiskSpaceCapacity total disk space capacity of the device Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (x *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDiskSpaceCapacity"))
+	return obj.Wrap(_r)
 }
-
-func (x *DiskSpaceUsageMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // DiskSpaceUsageMetricable is the interface implemented by [DiskSpaceUsageMetric], for mocking and DI.
 type DiskSpaceUsageMetricable interface {
-	Unwrap() *raw.MXDiskSpaceUsageMetric
-	TotalBinaryFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	obj.Object
+	TotalBinaryFileSize() obj.Object
 	TotalBinaryFileCount() int
-	TotalDataFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	TotalDataFileSize() obj.Object
 	TotalDataFileCount() int
-	TotalCacheFolderSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	TotalCloneSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	TotalDiskSpaceUsedSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	TotalDiskSpaceCapacity() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	TotalCacheFolderSize() obj.Object
+	TotalCloneSize() obj.Object
+	TotalDiskSpaceUsedSize() obj.Object
+	TotalDiskSpaceCapacity() obj.Object
 }
 
 var _ DiskSpaceUsageMetricable = (*DiskSpaceUsageMetric)(nil)
+
+var _ MetricProvider = (*DiskSpaceUsageMetric)(nil)

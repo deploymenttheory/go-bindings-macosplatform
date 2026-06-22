@@ -5,107 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDishwasherAlarmClusterResetParams wraps [raw.MTRDishwasherAlarmClusterResetParams] with a fluent Go API.
+// MTRDishwasherAlarmClusterResetParams is an idiomatic wrapper over the Objective-C class MTRDishwasherAlarmClusterResetParams.
 type MTRDishwasherAlarmClusterResetParams struct {
-	inner *raw.MTRDishwasherAlarmClusterResetParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDishwasherAlarmClusterResetParams].
-func (x *MTRDishwasherAlarmClusterResetParams) Unwrap() *raw.MTRDishwasherAlarmClusterResetParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDishwasherAlarmClusterResetParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDishwasherAlarmClusterResetParamsFromID adopts an existing object pointer as a MTRDishwasherAlarmClusterResetParams (nil for 0).
+// MTRDishwasherAlarmClusterResetParamsFromID adopts an existing Objective-C object as a MTRDishwasherAlarmClusterResetParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDishwasherAlarmClusterResetParamsFromID(id objc.ID) *MTRDishwasherAlarmClusterResetParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDishwasherAlarmClusterResetParams{inner: raw.MTRDishwasherAlarmClusterResetParamsFromID(id)}
+	x := &MTRDishwasherAlarmClusterResetParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDishwasherAlarmClusterResetParams creates a new [MTRDishwasherAlarmClusterResetParams].
+// mTRDishwasherAlarmClusterResetParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDishwasherAlarmClusterResetParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDishwasherAlarmClusterResetParamsAdopt(id objc.ID) *MTRDishwasherAlarmClusterResetParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDishwasherAlarmClusterResetParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDishwasherAlarmClusterResetParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDishwasherAlarmClusterResetParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDishwasherAlarmClusterResetParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDishwasherAlarmClusterResetParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDishwasherAlarmClusterResetParams creates a new MTRDishwasherAlarmClusterResetParams.
 func NewMTRDishwasherAlarmClusterResetParams() *MTRDishwasherAlarmClusterResetParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDishwasherAlarmClusterResetParams")), objc.RegisterName("new"))
-	return &MTRDishwasherAlarmClusterResetParams{inner: raw.MTRDishwasherAlarmClusterResetParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDishwasherAlarmClusterResetParams")), objc.RegisterName("new"))
+	return mTRDishwasherAlarmClusterResetParamsAdopt(_id)
 }
 
-// WithAlarms sets the alarms property and returns the receiver for chaining.
-func (x *MTRDishwasherAlarmClusterResetParams) WithAlarms(alarms *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams {
-	x.inner.SetAlarms(alarms)
+// WithAlarms sets the property and returns the receiver so calls can be chained.
+func (x *MTRDishwasherAlarmClusterResetParams) WithAlarms(alarms obj.Object) *MTRDishwasherAlarmClusterResetParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), objref.IDOf(alarms))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDishwasherAlarmClusterResetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
+func (x *MTRDishwasherAlarmClusterResetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterResetParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRDishwasherAlarmClusterResetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
+func (x *MTRDishwasherAlarmClusterResetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterResetParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Alarms calls the underlying Alarms.
-func (x *MTRDishwasherAlarmClusterResetParams) Alarms() *foundation.NSNumber {
-	return x.inner.Alarms()
+// Alarms wraps the corresponding Objective-C method.
+func (x *MTRDishwasherAlarmClusterResetParams) Alarms() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarms"))
+	return obj.Wrap(_r)
 }
 
-// SetAlarms calls the underlying SetAlarms.
-func (x *MTRDishwasherAlarmClusterResetParams) SetAlarms(alarms *foundation.NSNumber) {
-	x.inner.SetAlarms(alarms)
+// SetAlarms wraps the corresponding Objective-C method.
+func (x *MTRDishwasherAlarmClusterResetParams) SetAlarms(alarms obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), objref.IDOf(alarms))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDishwasherAlarmClusterResetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRDishwasherAlarmClusterResetParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDishwasherAlarmClusterResetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRDishwasherAlarmClusterResetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRDishwasherAlarmClusterResetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRDishwasherAlarmClusterResetParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRDishwasherAlarmClusterResetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRDishwasherAlarmClusterResetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRDishwasherAlarmClusterResetParamsable is the interface implemented by [MTRDishwasherAlarmClusterResetParams], for mocking and DI.
 type MTRDishwasherAlarmClusterResetParamsable interface {
-	Unwrap() *raw.MTRDishwasherAlarmClusterResetParams
-	WithAlarms(alarms *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams
-	Alarms() *foundation.NSNumber
-	SetAlarms(alarms *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithAlarms(alarms obj.Object) *MTRDishwasherAlarmClusterResetParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterResetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterResetParams
+	Alarms() obj.Object
+	SetAlarms(alarms obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRDishwasherAlarmClusterResetParamsable = (*MTRDishwasherAlarmClusterResetParams)(nil)

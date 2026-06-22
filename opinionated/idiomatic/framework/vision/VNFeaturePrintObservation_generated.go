@@ -5,76 +5,93 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An observation that provides the recognized feature print.
+// FeaturePrintObservation is an idiomatic wrapper over the Objective-C class VNFeaturePrintObservation.
 //
-// FeaturePrintObservation wraps [raw.VNFeaturePrintObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// An observation that provides the recognized feature print.
 type FeaturePrintObservation struct {
-	inner *raw.VNFeaturePrintObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNFeaturePrintObservation].
-func (x *FeaturePrintObservation) Unwrap() *raw.VNFeaturePrintObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FeaturePrintObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// FeaturePrintObservationFromID adopts an existing object pointer as a FeaturePrintObservation (nil for 0).
+// FeaturePrintObservationFromID adopts an existing Objective-C object as a FeaturePrintObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func FeaturePrintObservationFromID(id objc.ID) *FeaturePrintObservation {
 	if id == 0 {
 		return nil
 	}
-	return &FeaturePrintObservation{inner: raw.VNFeaturePrintObservationFromID(id)}
+	x := &FeaturePrintObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFeaturePrintObservation creates a new [FeaturePrintObservation].
+// featurePrintObservationAdopt wraps an Objective-C object that this code just created as a
+// FeaturePrintObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func featurePrintObservationAdopt(id objc.ID) *FeaturePrintObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &FeaturePrintObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFeaturePrintObservation creates a new FeaturePrintObservation.
 func NewFeaturePrintObservation() *FeaturePrintObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNFeaturePrintObservation")), objc.RegisterName("new"))
-	return &FeaturePrintObservation{inner: raw.VNFeaturePrintObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNFeaturePrintObservation")), objc.RegisterName("new"))
+	return featurePrintObservationAdopt(_id)
 }
 
-// Computes the distance between two feature print observations.
-//
-// ComputeDistanceToFeaturePrintObservationError calls the underlying ComputeDistanceToFeaturePrintObservationError.
-func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error) {
-	return x.inner.ComputeDistanceToFeaturePrintObservationError(outDistance, featurePrint)
+// ComputeDistanceToFeaturePrintObservation computes the distance between two feature print observations.
+func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error) {
+	var _out0 float32
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("computeDistance:toFeaturePrintObservation:error:"), unsafe.Pointer(&_out0), objref.IDOf(featurePrint), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
 }
 
-// @brief The type of each element in the data.
-//
-// ElementType calls the underlying ElementType.
-func (x *FeaturePrintObservation) ElementType() VNElementType {
-	return VNElementType(x.inner.ElementType())
+// ElementType the type of each element in the data.
+func (x *FeaturePrintObservation) ElementType() ElementType {
+	_r := objc.Send[ElementType](objref.IDOf(x), objc.RegisterName("elementType"))
+	return _r
 }
 
-// @brief The total number of elements in the data.
-//
-// ElementCount calls the underlying ElementCount.
-func (x *FeaturePrintObservation) ElementCount() uint {
-	return x.inner.ElementCount()
+// ElementCount the total number of elements in the data.
+func (x *FeaturePrintObservation) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+	return _r
 }
 
-// @brief The feature print data.
-//
-// Data calls the underlying Data.
-func (x *FeaturePrintObservation) Data() *foundation.NSData {
-	return x.inner.Data()
+// Data the feature print data.
+func (x *FeaturePrintObservation) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
-
-func (x *FeaturePrintObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // FeaturePrintObservationable is the interface implemented by [FeaturePrintObservation], for mocking and DI.
 type FeaturePrintObservationable interface {
-	Unwrap() *raw.VNFeaturePrintObservation
-	ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error)
-	ElementType() VNElementType
-	ElementCount() uint
-	Data() *foundation.NSData
+	obj.Object
+	ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error)
+	ElementType() ElementType
+	ElementCount() int
+	Data() obj.Object
 }
 
 var _ FeaturePrintObservationable = (*FeaturePrintObservation)(nil)
+
+var _ ObservationProvider = (*FeaturePrintObservation)(nil)

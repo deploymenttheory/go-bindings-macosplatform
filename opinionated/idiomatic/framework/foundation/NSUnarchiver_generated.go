@@ -5,90 +5,95 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A decoder that restores data from an archive.
+// Unarchiver is an idiomatic wrapper over the Objective-C class NSUnarchiver.
 //
-// Unarchiver wraps [raw.NSUnarchiver] with a fluent Go API.
+// It embeds [Coder], promoting that type's methods.
+//
+// A decoder that restores data from an archive.
 type Unarchiver struct {
-	inner *raw.NSUnarchiver
+	Coder
 }
 
-// Unwrap returns the underlying [raw.NSUnarchiver].
-func (x *Unarchiver) Unwrap() *raw.NSUnarchiver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Unarchiver) ID() objc.ID { return x.inner.Ptr() }
-
-// UnarchiverFromID adopts an existing object pointer as a Unarchiver (nil for 0).
+// UnarchiverFromID adopts an existing Objective-C object as a Unarchiver
+// (nil for 0), retaining it and registering a release finalizer.
 func UnarchiverFromID(id objc.ID) *Unarchiver {
 	if id == 0 {
 		return nil
 	}
-	return &Unarchiver{inner: raw.NSUnarchiverFromID(id)}
-}
-
-// Returns an NSUnarchiver object initialized to read an archive from a given data object.
-//
-// NewUnarchiverForReadingWithData creates a new [Unarchiver].
-func NewUnarchiverForReadingWithData(data *raw.NSData) *Unarchiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnarchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), data.Ptr())
-	return &Unarchiver{inner: raw.NSUnarchiverFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Unarchiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Unarchiver {
-	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Unarchiver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Instructs the receiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
-//
-// DecodeClassNameAsClassName calls the underlying DecodeClassNameAsClassName.
-func (x *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
-	x.inner.DecodeClassNameAsClassName(foundation.NSStringStringWithUTF8String(inArchiveName), foundation.NSStringStringWithUTF8String(trueName))
-}
-
-// Returns the name of the class that will be used when instantiating objects whose ostensible class, according to the archived data, is a given name.
-//
-// ClassNameDecodedForArchiveClassName calls the underlying ClassNameDecodedForArchiveClassName.
-func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) *String {
-	_r := x.inner.ClassNameDecodedForArchiveClassName(foundation.NSStringStringWithUTF8String(inArchiveName))
-	if _r == nil {
+// unarchiverAdopt wraps an Objective-C object that this code just created as a
+// Unarchiver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unarchiverAdopt(id objc.ID) *Unarchiver {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &Unarchiver{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Causes the receiver to substitute one given object for another whenever the latter is extracted from the archive.
-//
-// ReplaceObjectWithObject calls the underlying ReplaceObjectWithObject.
-func (x *Unarchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
-	x.inner.ReplaceObjectWithObject(object, newObject)
+// NewUnarchiverForReadingWithData returns an NSUnarchiver object initialized to read an archive from a given data object.
+func NewUnarchiverForReadingWithData(data *Data) *Unarchiver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), objref.IDOf(data))
+	return unarchiverAdopt(_id)
 }
 
-// IsAtEnd calls the underlying IsAtEnd.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Unarchiver) WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// DecodeClassNameAsClassName instructs the receiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
+func (x *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeClassName:asClassName:"), purego.NSString(inArchiveName), purego.NSString(trueName))
+}
+
+// ClassNameDecodedForArchiveClassName returns the name of the class that will be used when instantiating objects whose ostensible class, according to the archived data, is a given name.
+func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classNameDecodedForArchiveClassName:"), purego.NSString(inArchiveName))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// ReplaceObjectWithObject causes the receiver to substitute one given object for another whenever the latter is extracted from the archive.
+func (x *Unarchiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
+}
+
+// IsAtEnd wraps the corresponding Objective-C method.
 func (x *Unarchiver) IsAtEnd() bool {
-	return x.inner.IsAtEnd()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAtEnd"))
+	return _r
 }
-
-func (x *Unarchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
-
-func (x *Unarchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 
 // Unarchiverable is the interface implemented by [Unarchiver], for mocking and DI.
 type Unarchiverable interface {
-	Unwrap() *raw.NSUnarchiver
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Unarchiver
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver
 	DecodeClassNameAsClassName(inArchiveName string, trueName string)
-	ClassNameDecodedForArchiveClassName(inArchiveName string) *String
-	ReplaceObjectWithObject(object objc.ID, newObject objc.ID)
+	ClassNameDecodedForArchiveClassName(inArchiveName string) string
+	ReplaceObjectWithObject(object obj.Object, newObject obj.Object)
 	IsAtEnd() bool
 }
 
 var _ Unarchiverable = (*Unarchiver)(nil)
+
+var _ CoderProvider = (*Unarchiver)(nil)

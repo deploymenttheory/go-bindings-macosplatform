@@ -5,51 +5,79 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the user adding, updating, or deleting a contact or group.
+// ChangeHistoryEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryEvent.
 //
-// ChangeHistoryEvent wraps [raw.CNChangeHistoryEvent] with a fluent Go API.
+// ChangeHistoryEvent is an abstract base — you do not construct it directly. Construct one of [ChangeHistoryAddContactEvent], [ChangeHistoryAddGroupEvent], [ChangeHistoryAddMemberToGroupEvent], [ChangeHistoryAddSubgroupToGroupEvent], [ChangeHistoryDeleteContactEvent], [ChangeHistoryDeleteGroupEvent], [ChangeHistoryDropEverythingEvent], [ChangeHistoryRemoveMemberFromGroupEvent], [ChangeHistoryRemoveSubgroupFromGroupEvent], [ChangeHistoryUpdateContactEvent], [ChangeHistoryUpdateGroupEvent] and pass it where a ChangeHistoryEvent is accepted.
+//
+// An object that represents the user adding, updating, or deleting a contact or group.
 type ChangeHistoryEvent struct {
-	inner *raw.CNChangeHistoryEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryEvent].
-func (x *ChangeHistoryEvent) Unwrap() *raw.CNChangeHistoryEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryEventFromID adopts an existing object pointer as a ChangeHistoryEvent (nil for 0).
+// ChangeHistoryEventFromID adopts an existing Objective-C object as a ChangeHistoryEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryEventFromID(id objc.ID) *ChangeHistoryEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryEvent{inner: raw.CNChangeHistoryEventFromID(id)}
+	x := &ChangeHistoryEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryEvent creates a new [ChangeHistoryEvent].
-func NewChangeHistoryEvent() *ChangeHistoryEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryEvent{inner: raw.CNChangeHistoryEventFromID(_id)}
+// changeHistoryEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryEventAdopt(id objc.ID) *ChangeHistoryEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Forwards the event to the delegate you provide to process the change-history event.
-//
-// AcceptEventVisitor calls the underlying AcceptEventVisitor.
-func (x *ChangeHistoryEvent) AcceptEventVisitor(visitor raw.CNChangeHistoryEventVisitor) {
-	x.inner.AcceptEventVisitor(visitor)
+// Description returns the object's -description text.
+func (x *ChangeHistoryEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *ChangeHistoryEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeHistoryEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeHistoryEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChangeHistoryEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // ChangeHistoryEventable is the interface implemented by [ChangeHistoryEvent], for mocking and DI.
 type ChangeHistoryEventable interface {
-	Unwrap() *raw.CNChangeHistoryEvent
-	AcceptEventVisitor(visitor raw.CNChangeHistoryEventVisitor)
+	obj.Object
 }
 
 var _ ChangeHistoryEventable = (*ChangeHistoryEvent)(nil)
+
+// isChangeHistoryEvent marks ChangeHistoryEvent — and, by embedding promotion, its
+// subclasses — as a member of the ChangeHistoryEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ChangeHistoryEvent) isChangeHistoryEvent() {}
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryEvent)(nil)

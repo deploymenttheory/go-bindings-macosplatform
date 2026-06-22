@@ -5,95 +5,113 @@
 package coremediaio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CMIODeviceProcessAVCCommand wraps [raw.CMIODeviceProcessAVCCommand], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIODeviceProcessAVCCommand(deviceID uint, ioAVCCommand *raw.CMIODeviceAVCCommand) error {
-	if _err := purego.NewOSStatus(raw.CMIODeviceProcessAVCCommand(deviceID, ioAVCCommand)).Err(); _err != nil {
+var _fnCMIODeviceStartStream func(int, int) int32
+
+// CMIODeviceStartStream reports an error if the CoreMediaIO framework function CMIODeviceStartStream fails.
+func CMIODeviceStartStream(deviceID int, streamID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIODeviceStartStream == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIODeviceStartStream, _lib, "CMIODeviceStartStream")
+	}
+	_rc := _fnCMIODeviceStartStream(deviceID, streamID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMIODeviceProcessRS422Command wraps [raw.CMIODeviceProcessRS422Command], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIODeviceProcessRS422Command(deviceID uint, ioRS422Command *raw.CMIODeviceRS422Command) error {
-	if _err := purego.NewOSStatus(raw.CMIODeviceProcessRS422Command(deviceID, ioRS422Command)).Err(); _err != nil {
+var _fnCMIODeviceStopStream func(int, int) int32
+
+// CMIODeviceStopStream reports an error if the CoreMediaIO framework function CMIODeviceStopStream fails.
+func CMIODeviceStopStream(deviceID int, streamID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIODeviceStopStream == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIODeviceStopStream, _lib, "CMIODeviceStopStream")
+	}
+	_rc := _fnCMIODeviceStopStream(deviceID, streamID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMIODeviceStartStream wraps [raw.CMIODeviceStartStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIODeviceStartStream(deviceID uint, streamID uint) error {
-	if _err := purego.NewOSStatus(raw.CMIODeviceStartStream(deviceID, streamID)).Err(); _err != nil {
+var _fnCMIOStreamClockInvalidate func(objc.ID) int32
+
+// CMIOStreamClockInvalidate reports an error if the CoreMediaIO framework function CMIOStreamClockInvalidate fails.
+func CMIOStreamClockInvalidate(clock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamClockInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockInvalidate, _lib, "CMIOStreamClockInvalidate")
+	}
+	_rc := _fnCMIOStreamClockInvalidate(objref.IDOf(clock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMIODeviceStopStream wraps [raw.CMIODeviceStopStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIODeviceStopStream(deviceID uint, streamID uint) error {
-	if _err := purego.NewOSStatus(raw.CMIODeviceStopStream(deviceID, streamID)).Err(); _err != nil {
+var _fnCMIOStreamDeckCueTo func(int, uint64, uint8) int32
+
+// CMIOStreamDeckCueTo reports an error if the CoreMediaIO framework function CMIOStreamDeckCueTo fails.
+func CMIOStreamDeckCueTo(streamID int, frameNumber uint64, playOnCue uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamDeckCueTo == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamDeckCueTo, _lib, "CMIOStreamDeckCueTo")
+	}
+	_rc := _fnCMIOStreamDeckCueTo(streamID, frameNumber, playOnCue)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMIOObjectIsPropertySettable wraps [raw.CMIOObjectIsPropertySettable], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOObjectIsPropertySettable(objectID uint, address *raw.CMIOObjectPropertyAddress, isSettable *uint8) error {
-	if _err := purego.NewOSStatus(raw.CMIOObjectIsPropertySettable(objectID, address, isSettable)).Err(); _err != nil {
+var _fnCMIOStreamDeckJog func(int, int) int32
+
+// CMIOStreamDeckJog reports an error if the CoreMediaIO framework function CMIOStreamDeckJog fails.
+func CMIOStreamDeckJog(streamID int, speed int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamDeckJog == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamDeckJog, _lib, "CMIOStreamDeckJog")
+	}
+	_rc := _fnCMIOStreamDeckJog(streamID, speed)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMIOStreamClockInvalidate wraps [raw.CMIOStreamClockInvalidate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOStreamClockInvalidate(clock objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CMIOStreamClockInvalidate(purego.CFRef(clock))).Err(); _err != nil {
+var _fnCMIOStreamDeckPlay func(int) int32
+
+// CMIOStreamDeckPlay reports an error if the CoreMediaIO framework function CMIOStreamDeckPlay fails.
+func CMIOStreamDeckPlay(streamID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamDeckPlay == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamDeckPlay, _lib, "CMIOStreamDeckPlay")
+	}
+	_rc := _fnCMIOStreamDeckPlay(streamID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMIOStreamClockPostTimingEvent wraps [raw.CMIOStreamClockPostTimingEvent], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOStreamClockPostTimingEvent(eventTime coremedia.CMTime, hostTime uint64, resynchronize uint8, clock objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CMIOStreamClockPostTimingEvent(eventTime, hostTime, resynchronize, purego.CFRef(clock))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnCMIOStreamDeckStop func(int) int32
 
-// CMIOStreamDeckCueTo wraps [raw.CMIOStreamDeckCueTo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOStreamDeckCueTo(streamID uint, frameNumber uint64, playOnCue uint8) error {
-	if _err := purego.NewOSStatus(raw.CMIOStreamDeckCueTo(streamID, frameNumber, playOnCue)).Err(); _err != nil {
-		return _err
+// CMIOStreamDeckStop reports an error if the CoreMediaIO framework function CMIOStreamDeckStop fails.
+func CMIOStreamDeckStop(streamID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamDeckStop == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamDeckStop, _lib, "CMIOStreamDeckStop")
 	}
-	return nil
-}
-
-// CMIOStreamDeckJog wraps [raw.CMIOStreamDeckJog], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOStreamDeckJog(streamID uint, speed int) error {
-	if _err := purego.NewOSStatus(raw.CMIOStreamDeckJog(streamID, speed)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// CMIOStreamDeckPlay wraps [raw.CMIOStreamDeckPlay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOStreamDeckPlay(streamID uint) error {
-	if _err := purego.NewOSStatus(raw.CMIOStreamDeckPlay(streamID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// CMIOStreamDeckStop wraps [raw.CMIOStreamDeckStop], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMIOStreamDeckStop(streamID uint) error {
-	if _err := purego.NewOSStatus(raw.CMIOStreamDeckStop(streamID)).Err(); _err != nil {
+	_rc := _fnCMIOStreamDeckStop(streamID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

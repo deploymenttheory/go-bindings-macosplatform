@@ -3,4 +3,17 @@
 //go:build darwin
 
 // Package intents provides a fluent Go API over the macOS Intents framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - CallRecordResolutionResult: [StartCallCallRecordToCallBackResolutionResult]
+//   - Intent: [AnswerCallIntent], [EditMessageIntent], [GetReservationDetailsIntent], [HangUpCallIntent], [SendMessageIntent], [ShareFocusStatusIntent], [StartCallIntent], [UnsendMessagesIntent]
+//   - IntentDonationMetadata: [SendMessageIntentDonationMetadata]
+//   - IntentResolutionResult: [BooleanResolutionResult], [CallCapabilityResolutionResult], [CallDestinationTypeResolutionResult], [CallRecordResolutionResult], [CallRecordTypeOptionsResolutionResult], [CallRecordTypeResolutionResult], [CurrencyAmountResolutionResult], [DateComponentsResolutionResult], [DoubleResolutionResult], [EnergyResolutionResult], [EnumResolutionResult], [FileResolutionResult], [IntegerResolutionResult], [LengthResolutionResult], [MassResolutionResult], [ObjectResolutionResult], [OutgoingMessageTypeResolutionResult], [PaymentMethodResolutionResult], [PersonResolutionResult], [PlacemarkResolutionResult], [SpeedResolutionResult], [StringResolutionResult], [TemperatureResolutionResult], [TimeIntervalResolutionResult], [URLResolutionResult], [VolumeResolutionResult]
+//   - IntentResponse: [AnswerCallIntentResponse], [EditMessageIntentResponse], [GetReservationDetailsIntentResponse], [HangUpCallIntentResponse], [SendMessageIntentResponse], [ShareFocusStatusIntentResponse], [UnsendMessagesIntentResponse]
+//   - PersonResolutionResult: [SendMessageRecipientResolutionResult]
+//   - Reservation: [BoatReservation], [BusReservation], [FlightReservation], [LodgingReservation], [RentalCarReservation], [RestaurantReservation], [TicketedEventReservation], [TrainReservation]
 package intents

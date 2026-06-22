@@ -5,62 +5,69 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A detected object observation with an array of classification labels that classify the recognized object.
+// RecognizedObjectObservation is an idiomatic wrapper over the Objective-C class VNRecognizedObjectObservation.
 //
-// RecognizedObjectObservation wraps [raw.VNRecognizedObjectObservation] with a fluent Go API.
+// It embeds [DetectedObjectObservation], promoting that type's methods.
+//
+// A detected object observation with an array of classification labels that classify the recognized object.
 type RecognizedObjectObservation struct {
-	inner *raw.VNRecognizedObjectObservation
+	DetectedObjectObservation
 }
 
-// Unwrap returns the underlying [raw.VNRecognizedObjectObservation].
-func (x *RecognizedObjectObservation) Unwrap() *raw.VNRecognizedObjectObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizedObjectObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizedObjectObservationFromID adopts an existing object pointer as a RecognizedObjectObservation (nil for 0).
+// RecognizedObjectObservationFromID adopts an existing Objective-C object as a RecognizedObjectObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizedObjectObservationFromID(id objc.ID) *RecognizedObjectObservation {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizedObjectObservation{inner: raw.VNRecognizedObjectObservationFromID(id)}
+	x := &RecognizedObjectObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizedObjectObservation creates a new [RecognizedObjectObservation].
-func NewRecognizedObjectObservation() *RecognizedObjectObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedObjectObservation")), objc.RegisterName("new"))
-	return &RecognizedObjectObservation{inner: raw.VNRecognizedObjectObservationFromID(_id)}
-}
-
-// Labels returns the collection as a Go slice.
-func (x *RecognizedObjectObservation) Labels() []*ClassificationObservation {
-	arr := x.inner.Labels()
-	if arr == nil {
+// recognizedObjectObservationAdopt wraps an Objective-C object that this code just created as a
+// RecognizedObjectObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizedObjectObservationAdopt(id objc.ID) *RecognizedObjectObservation {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ClassificationObservation {
-		return &ClassificationObservation{inner: raw.VNClassificationObservationFromID(purego.Retain(_id))}
-	})
+	x := &RecognizedObjectObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *RecognizedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return &x.inner.VNDetectedObjectObservation
+// NewRecognizedObjectObservation creates a new RecognizedObjectObservation.
+func NewRecognizedObjectObservation() *RecognizedObjectObservation {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedObjectObservation")), objc.RegisterName("new"))
+	return recognizedObjectObservationAdopt(_id)
 }
 
-func (x *RecognizedObjectObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNDetectedObjectObservation.VNObservation
+// Labels wraps the corresponding Objective-C method.
+//
+// Labels returns the collection as a Go slice.
+func (x *RecognizedObjectObservation) Labels() []*ClassificationObservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ClassificationObservation { return ClassificationObservationFromID(_id) })
 }
 
 // RecognizedObjectObservationable is the interface implemented by [RecognizedObjectObservation], for mocking and DI.
 type RecognizedObjectObservationable interface {
-	Unwrap() *raw.VNRecognizedObjectObservation
+	obj.Object
 	Labels() []*ClassificationObservation
 }
 
 var _ RecognizedObjectObservationable = (*RecognizedObjectObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*RecognizedObjectObservation)(nil)
+
+var _ ObservationProvider = (*RecognizedObjectObservation)(nil)

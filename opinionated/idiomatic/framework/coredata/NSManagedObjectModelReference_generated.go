@@ -5,91 +5,113 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a specific version of an object model.
+// ManagedObjectModelReference is an idiomatic wrapper over the Objective-C class NSManagedObjectModelReference.
 //
-// ManagedObjectModelReference wraps [raw.NSManagedObjectModelReference] with a fluent Go API.
+// An object that describes a specific version of an object model.
 type ManagedObjectModelReference struct {
-	inner *raw.NSManagedObjectModelReference
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSManagedObjectModelReference].
-func (x *ManagedObjectModelReference) Unwrap() *raw.NSManagedObjectModelReference { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ManagedObjectModelReference) ID() objc.ID { return x.inner.Ptr() }
-
-// ManagedObjectModelReferenceFromID adopts an existing object pointer as a ManagedObjectModelReference (nil for 0).
+// ManagedObjectModelReferenceFromID adopts an existing Objective-C object as a ManagedObjectModelReference
+// (nil for 0), retaining it and registering a release finalizer.
 func ManagedObjectModelReferenceFromID(id objc.ID) *ManagedObjectModelReference {
 	if id == 0 {
 		return nil
 	}
-	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(id)}
+	x := &ManagedObjectModelReference{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object model reference for the specified model.
-//
-// NewManagedObjectModelReferenceWithModelVersionChecksum creates a new [ManagedObjectModelReference].
-func NewManagedObjectModelReferenceWithModelVersionChecksum(model *raw.NSManagedObjectModel, versionChecksum string) *ManagedObjectModelReference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:versionChecksum:"), model.Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
-	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
-}
-
-// Creates an object model reference for the model at the specified file URL.
-//
-// NewManagedObjectModelReferenceWithFileURLVersionChecksum creates a new [ManagedObjectModelReference].
-func NewManagedObjectModelReferenceWithFileURLVersionChecksum(fileURL string, versionChecksum string) *ManagedObjectModelReference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileURL:versionChecksum:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
-	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
-}
-
-// Creates an object model reference with the entities corresponding to the specified entity version hashes.
-//
-// NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum creates a new [ManagedObjectModelReference].
-func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum(versionHash purego.IDer, bundle *foundation.NSBundle, versionChecksum string) *ManagedObjectModelReference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityVersionHashes:inBundle:versionChecksum:"), versionHash.ID(), bundle.Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
-	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
-}
-
-// Creates an object model reference for the named model in the specified bundle.
-//
-// NewManagedObjectModelReferenceWithNameInBundleVersionChecksum creates a new [ManagedObjectModelReference].
-func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName string, bundle *foundation.NSBundle, versionChecksum string) *ManagedObjectModelReference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:inBundle:versionChecksum:"), foundation.NSStringStringWithUTF8String(modelName).Ptr(), bundle.Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
-	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
-}
-
-// ResolvedModel calls the underlying ResolvedModel.
-func (x *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
-	_r := x.inner.ResolvedModel()
-	if _r == nil {
+// managedObjectModelReferenceAdopt wraps an Objective-C object that this code just created as a
+// ManagedObjectModelReference (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func managedObjectModelReferenceAdopt(id objc.ID) *ManagedObjectModelReference {
+	if id == 0 {
 		return nil
 	}
-	return &ManagedObjectModel{inner: _r}
+	x := &ManagedObjectModelReference{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// VersionChecksum calls the underlying VersionChecksum.
+// Description returns the object's -description text.
+func (x *ManagedObjectModelReference) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ManagedObjectModelReference) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ManagedObjectModelReference) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ManagedObjectModelReference) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewManagedObjectModelReferenceWithModelVersionChecksum creates an object model reference for the specified model.
+func NewManagedObjectModelReferenceWithModelVersionChecksum(model *ManagedObjectModel, versionChecksum string) *ManagedObjectModelReference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:versionChecksum:"), objref.IDOf(model), purego.NSString(versionChecksum))
+	return managedObjectModelReferenceAdopt(_id)
+}
+
+// NewManagedObjectModelReferenceWithFileURLVersionChecksum creates an object model reference for the model at the specified file URL.
+func NewManagedObjectModelReferenceWithFileURLVersionChecksum(fileURL string, versionChecksum string) *ManagedObjectModelReference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileURL:versionChecksum:"), rt.FileURL(fileURL), purego.NSString(versionChecksum))
+	return managedObjectModelReferenceAdopt(_id)
+}
+
+// NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum creates an object model reference with the entities corresponding to the specified entity version hashes.
+func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum(versionHash obj.Object, bundle obj.Object, versionChecksum string) *ManagedObjectModelReference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityVersionHashes:inBundle:versionChecksum:"), objref.IDOf(versionHash), objref.IDOf(bundle), purego.NSString(versionChecksum))
+	return managedObjectModelReferenceAdopt(_id)
+}
+
+// NewManagedObjectModelReferenceWithNameInBundleVersionChecksum creates an object model reference for the named model in the specified bundle.
+func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName string, bundle obj.Object, versionChecksum string) *ManagedObjectModelReference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:inBundle:versionChecksum:"), purego.NSString(modelName), objref.IDOf(bundle), purego.NSString(versionChecksum))
+	return managedObjectModelReferenceAdopt(_id)
+}
+
+// ResolvedModel wraps the corresponding Objective-C method.
+func (x *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedModel"))
+	return ManagedObjectModelFromID(_r)
+}
+
+// VersionChecksum wraps the corresponding Objective-C method.
 func (x *ManagedObjectModelReference) VersionChecksum() string {
-	_r := x.inner.VersionChecksum()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionChecksum"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ManagedObjectModelReferenceable is the interface implemented by [ManagedObjectModelReference], for mocking and DI.
 type ManagedObjectModelReferenceable interface {
-	Unwrap() *raw.NSManagedObjectModelReference
+	obj.Object
 	ResolvedModel() *ManagedObjectModel
 	VersionChecksum() string
 }

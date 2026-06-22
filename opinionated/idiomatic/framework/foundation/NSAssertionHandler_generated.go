@@ -5,50 +5,83 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that logs an assertion to the console.
+// AssertionHandler is an idiomatic wrapper over the Objective-C class NSAssertionHandler.
 //
-// AssertionHandler wraps [raw.NSAssertionHandler] with a fluent Go API.
+// An object that logs an assertion to the console.
 type AssertionHandler struct {
-	inner *raw.NSAssertionHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAssertionHandler].
-func (x *AssertionHandler) Unwrap() *raw.NSAssertionHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssertionHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// AssertionHandlerFromID adopts an existing object pointer as a AssertionHandler (nil for 0).
+// AssertionHandlerFromID adopts an existing Objective-C object as a AssertionHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func AssertionHandlerFromID(id objc.ID) *AssertionHandler {
 	if id == 0 {
 		return nil
 	}
-	return &AssertionHandler{inner: raw.NSAssertionHandlerFromID(id)}
-}
-
-// NewAssertionHandler creates a new [AssertionHandler].
-func NewAssertionHandler() *AssertionHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAssertionHandler")), objc.RegisterName("new"))
-	return &AssertionHandler{inner: raw.NSAssertionHandlerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *AssertionHandler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AssertionHandler {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &AssertionHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *AssertionHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
+// assertionHandlerAdopt wraps an Objective-C object that this code just created as a
+// AssertionHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assertionHandlerAdopt(id objc.ID) *AssertionHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &AssertionHandler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssertionHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssertionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssertionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssertionHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssertionHandler creates a new AssertionHandler.
+func NewAssertionHandler() *AssertionHandler {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAssertionHandler")), objc.RegisterName("new"))
+	return assertionHandlerAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *AssertionHandler) WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // AssertionHandlerable is the interface implemented by [AssertionHandler], for mocking and DI.
 type AssertionHandlerable interface {
-	Unwrap() *raw.NSAssertionHandler
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AssertionHandler
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler
 }
 
 var _ AssertionHandlerable = (*AssertionHandler)(nil)

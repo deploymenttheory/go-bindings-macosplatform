@@ -5,73 +5,88 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A utility object that computes directions and travel-time information based on the route information you provide.
+// Directions is an idiomatic wrapper over the Objective-C class MKDirections.
 //
-// Directions wraps [raw.MKDirections] with a fluent Go API.
+// A utility object that computes directions and travel-time information based on the route information you provide.
 type Directions struct {
-	inner *raw.MKDirections
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKDirections].
-func (x *Directions) Unwrap() *raw.MKDirections { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Directions) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectionsFromID adopts an existing object pointer as a Directions (nil for 0).
+// DirectionsFromID adopts an existing Objective-C object as a Directions
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectionsFromID(id objc.ID) *Directions {
 	if id == 0 {
 		return nil
 	}
-	return &Directions{inner: raw.MKDirectionsFromID(id)}
+	x := &Directions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a directions object using the specified request.
-//
-// NewDirectionsWithRequest creates a new [Directions].
-func NewDirectionsWithRequest(request *raw.MKDirectionsRequest) *Directions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKDirections")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), request.Ptr())
-	return &Directions{inner: raw.MKDirectionsFromID(_id)}
+// directionsAdopt wraps an Objective-C object that this code just created as a
+// Directions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directionsAdopt(id objc.ID) *Directions {
+	if id == 0 {
+		return nil
+	}
+	x := &Directions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Begins calculating the requested route information asynchronously.
-//
-// CalculateDirectionsWithCompletionHandler calls the underlying CalculateDirectionsWithCompletionHandler.
-func (x *Directions) CalculateDirectionsWithCompletionHandler(completionHandler func(*raw.MKDirectionsResponse, unsafe.Pointer)) {
-	x.inner.CalculateDirectionsWithCompletionHandler(completionHandler)
+// Description returns the object's -description text.
+func (x *Directions) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Begins calculating the requested travel-time information asynchronously.
-//
-// CalculateETAWithCompletionHandler calls the underlying CalculateETAWithCompletionHandler.
-func (x *Directions) CalculateETAWithCompletionHandler(completionHandler func(*raw.MKETAResponse, unsafe.Pointer)) {
-	x.inner.CalculateETAWithCompletionHandler(completionHandler)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Directions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Cancels a pending request.
-//
-// Cancel calls the underlying Cancel.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Directions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Directions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDirectionsWithRequest creates and returns a directions object using the specified request.
+func NewDirectionsWithRequest(request *DirectionsRequest) *Directions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKDirections")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
+	return directionsAdopt(_id)
+}
+
+// Cancel cancels a pending request.
 func (x *Directions) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// IsCalculating calls the underlying IsCalculating.
+// IsCalculating wraps the corresponding Objective-C method.
 func (x *Directions) IsCalculating() bool {
-	return x.inner.IsCalculating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCalculating"))
+	return _r
 }
 
 // Directionsable is the interface implemented by [Directions], for mocking and DI.
 type Directionsable interface {
-	Unwrap() *raw.MKDirections
-	CalculateDirectionsWithCompletionHandler(completionHandler func(*raw.MKDirectionsResponse, unsafe.Pointer))
-	CalculateETAWithCompletionHandler(completionHandler func(*raw.MKETAResponse, unsafe.Pointer))
+	obj.Object
 	Cancel()
 	IsCalculating() bool
 }

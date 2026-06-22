@@ -5,88 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that generates an instance mask of noticable objects to separate from the background.
+// GenerateForegroundInstanceMaskRequest is an idiomatic wrapper over the Objective-C class VNGenerateForegroundInstanceMaskRequest.
 //
-// GenerateForegroundInstanceMaskRequest wraps [raw.VNGenerateForegroundInstanceMaskRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that generates an instance mask of noticable objects to separate from the background.
 type GenerateForegroundInstanceMaskRequest struct {
-	inner *raw.VNGenerateForegroundInstanceMaskRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNGenerateForegroundInstanceMaskRequest].
-func (x *GenerateForegroundInstanceMaskRequest) Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GenerateForegroundInstanceMaskRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// GenerateForegroundInstanceMaskRequestFromID adopts an existing object pointer as a GenerateForegroundInstanceMaskRequest (nil for 0).
+// GenerateForegroundInstanceMaskRequestFromID adopts an existing Objective-C object as a GenerateForegroundInstanceMaskRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func GenerateForegroundInstanceMaskRequestFromID(id objc.ID) *GenerateForegroundInstanceMaskRequest {
 	if id == 0 {
 		return nil
 	}
-	return &GenerateForegroundInstanceMaskRequest{inner: raw.VNGenerateForegroundInstanceMaskRequestFromID(id)}
+	x := &GenerateForegroundInstanceMaskRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGenerateForegroundInstanceMaskRequest creates a new [GenerateForegroundInstanceMaskRequest].
+// generateForegroundInstanceMaskRequestAdopt wraps an Objective-C object that this code just created as a
+// GenerateForegroundInstanceMaskRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func generateForegroundInstanceMaskRequestAdopt(id objc.ID) *GenerateForegroundInstanceMaskRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &GenerateForegroundInstanceMaskRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGenerateForegroundInstanceMaskRequest creates a new GenerateForegroundInstanceMaskRequest.
 func NewGenerateForegroundInstanceMaskRequest() *GenerateForegroundInstanceMaskRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNGenerateForegroundInstanceMaskRequest")), objc.RegisterName("new"))
-	return &GenerateForegroundInstanceMaskRequest{inner: raw.VNGenerateForegroundInstanceMaskRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNGenerateForegroundInstanceMaskRequest")), objc.RegisterName("new"))
+	return generateForegroundInstanceMaskRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *GenerateForegroundInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateForegroundInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateForegroundInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision uint) *GenerateForegroundInstanceMaskRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision int) *GenerateForegroundInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *GenerateForegroundInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *GenerateForegroundInstanceMaskRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // GenerateForegroundInstanceMaskRequestable is the interface implemented by [GenerateForegroundInstanceMaskRequest], for mocking and DI.
 type GenerateForegroundInstanceMaskRequestable interface {
-	Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest
-	WithRevision(revision uint) *GenerateForegroundInstanceMaskRequest
+	WithRevision(revision int) *GenerateForegroundInstanceMaskRequest
 }
 
 var _ GenerateForegroundInstanceMaskRequestable = (*GenerateForegroundInstanceMaskRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateForegroundInstanceMaskRequest)(nil)
+
+var _ RequestProvider = (*GenerateForegroundInstanceMaskRequest)(nil)

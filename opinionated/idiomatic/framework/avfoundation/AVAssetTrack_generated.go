@@ -6,432 +6,330 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that models a track of media that an asset contains.
+// AssetTrack is an idiomatic wrapper over the Objective-C class AVAssetTrack.
 //
-// AssetTrack wraps [raw.AVAssetTrack] with a fluent Go API.
+// AssetTrack is an abstract base — you do not construct it directly. Construct one of [CompositionTrack], [FragmentedAssetTrack], [MovieTrack] and pass it where a AssetTrack is accepted.
+//
+// An object that models a track of media that an asset contains.
 type AssetTrack struct {
-	inner *raw.AVAssetTrack
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetTrack].
-func (x *AssetTrack) Unwrap() *raw.AVAssetTrack { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetTrack) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetTrackFromID adopts an existing object pointer as a AssetTrack (nil for 0).
+// AssetTrackFromID adopts an existing Objective-C object as a AssetTrack
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetTrackFromID(id objc.ID) *AssetTrack {
 	if id == 0 {
 		return nil
 	}
-	return &AssetTrack{inner: raw.AVAssetTrackFromID(id)}
+	x := &AssetTrack{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetTrack creates a new [AssetTrack].
-func NewAssetTrack() *AssetTrack {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetTrack")), objc.RegisterName("new"))
-	return &AssetTrack{inner: raw.AVAssetTrackFromID(_id)}
+// assetTrackAdopt wraps an Objective-C object that this code just created as a
+// AssetTrack (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetTrackAdopt(id objc.ID) *AssetTrack {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetTrack{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Provides a reference to the AVAsset of which the AVAssetTrack is a part
-//
-// Asset calls the underlying Asset.
+// Description returns the object's -description text.
+func (x *AssetTrack) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetTrack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetTrack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetTrack) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Asset provides a reference to the AVAsset of which the AVAssetTrack is a part
 func (x *AssetTrack) Asset() *Asset {
-	_r := x.inner.Asset()
-	if _r == nil {
-		return nil
-	}
-	return &Asset{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return AssetFromID(_r)
 }
 
-// Indicates the persistent unique identifier for this track of the asset
-//
-// TrackID calls the underlying TrackID.
+// TrackID indicates the persistent unique identifier for this track of the asset
 func (x *AssetTrack) TrackID() int32 {
-	return x.inner.TrackID()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
+	return _r
 }
 
-// Returns a Boolean value that indicates whether the track references media with the specified media characteristic.
-//
-// HasMediaCharacteristic calls the underlying HasMediaCharacteristic.
-func (x *AssetTrack) HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool {
-	return x.inner.HasMediaCharacteristic(mediaCharacteristic)
+// HasMediaCharacteristic returns a Boolean value that indicates whether the track references media with the specified media characteristic.
+func (x *AssetTrack) HasMediaCharacteristic(mediaCharacteristic obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMediaCharacteristic:"), objref.IDOf(mediaCharacteristic))
+	return _r
 }
 
-// Indicates the media type for this track, e.g. AVMediaTypeVideo, AVMediaTypeAudio, etc., as defined in AVMediaFormat.h.
-//
-// MediaType calls the underlying MediaType.
-func (x *AssetTrack) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// MediaType indicates the media type for this track, e.g. AVMediaTypeVideo, AVMediaTypeAudio, etc., as defined in AVMediaFormat.h.
+func (x *AssetTrack) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
 }
 
-// Provides an array of CMFormatDescriptions each of which indicates the format of media samples referenced by the track; a track that presents uniform media, e.g. encoded according to the same encoding settings, will provide an array with a count of 1.
-//
-// FormatDescriptions calls the underlying FormatDescriptions.
-func (x *AssetTrack) FormatDescriptions() *foundation.NSArray[objc.ID] {
-	return x.inner.FormatDescriptions()
+// FormatDescriptions provides an array of CMFormatDescriptions each of which indicates the format of media samples referenced by the track; a track that presents uniform media, e.g. encoded according to the same encoding settings, will provide an array with a count of 1.
+func (x *AssetTrack) FormatDescriptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescriptions"))
+	return obj.Wrap(_r)
 }
 
-// Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.
-//
-// IsPlayable calls the underlying IsPlayable.
+// IsPlayable indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.
 func (x *AssetTrack) IsPlayable() bool {
-	return x.inner.IsPlayable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayable"))
+	return _r
 }
 
-// Indicates whether the receiver is decodable in the current environment; if YES, the track can be decoded even though decoding may be too slow for real time playback.
-//
-// IsDecodable calls the underlying IsDecodable.
+// IsDecodable indicates whether the receiver is decodable in the current environment; if YES, the track can be decoded even though decoding may be too slow for real time playback.
 func (x *AssetTrack) IsDecodable() bool {
-	return x.inner.IsDecodable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDecodable"))
+	return _r
 }
 
-// Indicates whether the track is enabled according to state stored in its container or construct; note that its presentation state can be changed from this default via AVPlayerItemTrack
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled indicates whether the track is enabled according to state stored in its container or construct; note that its presentation state can be changed from this default via AVPlayerItemTrack
 func (x *AssetTrack) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// Indicates whether the track references sample data only within its storage container
-//
-// IsSelfContained calls the underlying IsSelfContained.
+// IsSelfContained indicates whether the track references sample data only within its storage container
 func (x *AssetTrack) IsSelfContained() bool {
-	return x.inner.IsSelfContained()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelfContained"))
+	return _r
 }
 
-// Indicates the total number of bytes of sample data required by the track
-//
-// TotalSampleDataLength calls the underlying TotalSampleDataLength.
+// TotalSampleDataLength indicates the total number of bytes of sample data required by the track
 func (x *AssetTrack) TotalSampleDataLength() int64 {
-	return x.inner.TotalSampleDataLength()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("totalSampleDataLength"))
+	return _r
 }
 
-// Indicates the timeRange of the track within the overall timeline of the asset; a track with CMTIME_COMPARE_INLINE(timeRange.start, >, kCMTimeZero) will initially present an empty interval.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *AssetTrack) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// Indicates a timescale in which time values for the track can be operated upon without extraneous numerical conversion
-//
-// NaturalTimeScale calls the underlying NaturalTimeScale.
+// NaturalTimeScale indicates a timescale in which time values for the track can be operated upon without extraneous numerical conversion
 func (x *AssetTrack) NaturalTimeScale() int32 {
-	return x.inner.NaturalTimeScale()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("naturalTimeScale"))
+	return _r
 }
 
-// Indicates the estimated data rate of the media data referenced by the track, in units of bits per second
-//
-// EstimatedDataRate calls the underlying EstimatedDataRate.
+// EstimatedDataRate indicates the estimated data rate of the media data referenced by the track, in units of bits per second
 func (x *AssetTrack) EstimatedDataRate() float32 {
-	return x.inner.EstimatedDataRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("estimatedDataRate"))
+	return _r
 }
 
-// Indicates the language associated with the track, as an ISO 639-2/T language code; may be nil if no language is indicated
-//
-// LanguageCode calls the underlying LanguageCode.
+// LanguageCode indicates the language associated with the track, as an ISO 639-2/T language code; may be nil if no language is indicated
 func (x *AssetTrack) LanguageCode() string {
-	_r := x.inner.LanguageCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier; may be nil if no language tag is indicated
-//
-// ExtendedLanguageTag calls the underlying ExtendedLanguageTag.
+// ExtendedLanguageTag indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier; may be nil if no language tag is indicated
 func (x *AssetTrack) ExtendedLanguageTag() string {
-	_r := x.inner.ExtendedLanguageTag()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLanguageTag"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Indicates the natural dimensions of the media data referenced by the track as a CGSize
-//
-// NaturalSize calls the underlying NaturalSize.
+// NaturalSize indicates the natural dimensions of the media data referenced by the track as a CGSize
 func (x *AssetTrack) NaturalSize() corefoundation.CGSize {
-	return x.inner.NaturalSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("naturalSize"))
+	return _r
 }
 
-// Indicates the transform specified in the track's storage container as the preferred transformation of the visual media data for display purposes; its value is often but not always CGAffineTransformIdentity
-//
-// PreferredTransform calls the underlying PreferredTransform.
+// PreferredTransform indicates the transform specified in the track's storage container as the preferred transformation of the visual media data for display purposes; its value is often but not always CGAffineTransformIdentity
 func (x *AssetTrack) PreferredTransform() corefoundation.CGAffineTransform {
-	return x.inner.PreferredTransform()
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+	return _r
 }
 
-// Indicates the volume specified in the track's storage container as the preferred volume of the audible media data
-//
-// PreferredVolume calls the underlying PreferredVolume.
+// PreferredVolume indicates the volume specified in the track's storage container as the preferred volume of the audible media data
 func (x *AssetTrack) PreferredVolume() float32 {
-	return x.inner.PreferredVolume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredVolume"))
+	return _r
 }
 
-// Indicates whether this audio track has dependencies (e.g. kAudioFormatMPEGD_USAC)
-//
-// HasAudioSampleDependencies calls the underlying HasAudioSampleDependencies.
+// HasAudioSampleDependencies indicates whether this audio track has dependencies (e.g. kAudioFormatMPEGD_USAC)
 func (x *AssetTrack) HasAudioSampleDependencies() bool {
-	return x.inner.HasAudioSampleDependencies()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAudioSampleDependencies"))
+	return _r
 }
 
-// For tracks that carry a full frame per media sample, indicates the frame rate of the track in units of frames per second. For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate.
-//
-// NominalFrameRate calls the underlying NominalFrameRate.
+// NominalFrameRate for tracks that carry a full frame per media sample, indicates the frame rate of the track in units of frames per second. For field-based video tracks that carry one field per media sample, the value of this property is the field rate, not the frame rate.
 func (x *AssetTrack) NominalFrameRate() float32 {
-	return x.inner.NominalFrameRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("nominalFrameRate"))
+	return _r
 }
 
-// Indicates the minimum duration of the track's frames; the value will be kCMTimeInvalid if the minimum frame duration is not known or cannot be calculated
-//
-// MinFrameDuration calls the underlying MinFrameDuration.
-func (x *AssetTrack) MinFrameDuration() coremedia.CMTime {
-	return x.inner.MinFrameDuration()
-}
-
-// Indicates whether samples in the track may have different values for their presentation and decode timestamps.
-//
-// RequiresFrameReordering calls the underlying RequiresFrameReordering.
+// RequiresFrameReordering indicates whether samples in the track may have different values for their presentation and decode timestamps.
 func (x *AssetTrack) RequiresFrameReordering() bool {
-	return x.inner.RequiresFrameReordering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresFrameReordering"))
+	return _r
 }
 
-// Retrieves a segment with a target time range that contains, or is closest to, the specified track time.
-//
-// SegmentForTrackTime calls the underlying SegmentForTrackTime.
-func (x *AssetTrack) SegmentForTrackTime(trackTime coremedia.CMTime) *AssetTrackSegment {
-	_r := x.inner.SegmentForTrackTime(trackTime)
-	if _r == nil {
-		return nil
-	}
-	return &AssetTrackSegment{inner: _r}
-}
-
-// Loads a segment with a target time range that contains, or is closest to, the specified track time.
-//
-// LoadSegmentForTrackTimeCompletionHandler calls the underlying LoadSegmentForTrackTimeCompletionHandler.
-func (x *AssetTrack) LoadSegmentForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.LoadSegmentForTrackTimeCompletionHandler(trackTime, completionHandler)
-}
-
-// Maps the specified track time through the appropriate time mapping and returns the resulting sample presentation time.
-//
-// SamplePresentationTimeForTrackTime calls the underlying SamplePresentationTimeForTrackTime.
-func (x *AssetTrack) SamplePresentationTimeForTrackTime(trackTime coremedia.CMTime) coremedia.CMTime {
-	return x.inner.SamplePresentationTimeForTrackTime(trackTime)
-}
-
-// Loads a sample presentation time that maps to the specified track time.
-//
-// LoadSamplePresentationTimeForTrackTimeCompletionHandler calls the underlying LoadSamplePresentationTimeForTrackTimeCompletionHandler.
-func (x *AssetTrack) LoadSamplePresentationTimeForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler objc.Block) {
-	x.inner.LoadSamplePresentationTimeForTrackTimeCompletionHandler(trackTime, completionHandler)
-}
-
-// Provides an array of AVAssetTrackSegments with time mappings from the timeline of the track's media samples to the timeline of the track. Empty edits, i.e. timeRanges for which no media data is available to be presented, have a value of AVAssetTrackSegment.empty equal to YES.
+// Segments provides an array of AVAssetTrackSegments with time mappings from the timeline of the track's media samples to the timeline of the track. Empty edits, i.e. timeRanges for which no media data is available to be presented, have a value of AVAssetTrackSegment.empty equal to YES.
 //
 // Segments returns the collection as a Go slice.
 func (x *AssetTrack) Segments() []*AssetTrackSegment {
-	arr := x.inner.Segments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrackSegment {
-		return &AssetTrackSegment{inner: raw.AVAssetTrackSegmentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrackSegment { return AssetTrackSegmentFromID(_id) })
 }
 
-// Returns metadata items that a track contains for the specified format.
-//
-// MetadataForFormat calls the underlying MetadataForFormat.
-func (x *AssetTrack) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem] {
-	return x.inner.MetadataForFormat(format)
+// MetadataForFormat returns metadata items that a track contains for the specified format.
+func (x *AssetTrack) MetadataForFormat(format obj.Object) []*MetadataItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataForFormat:"), objref.IDOf(format))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Loads metadata items that a track contains for the specified format.
+// LoadMetadataForFormat loads metadata items that a track contains for the specified format.
 //
 // LoadMetadataForFormat blocks until the operation completes or ctx is cancelled.
-func (x *AssetTrack) LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error) {
+func (x *AssetTrack) LoadMetadataForFormat(ctx context.Context, format obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVMetadataItem]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadMetadataForFormatCompletionHandler(format, func(_p0 *foundation.NSArray[*raw.AVMetadataItem], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadMetadataForFormat:completionHandler:"), objref.IDOf(format), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVMetadataItem]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Provides access to an array of AVMetadataItems for each common metadata key for which a value is available
+// CommonMetadata provides access to an array of AVMetadataItems for each common metadata key for which a value is available
 //
 // CommonMetadata returns the collection as a Go slice.
 func (x *AssetTrack) CommonMetadata() []*MetadataItem {
-	arr := x.inner.CommonMetadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonMetadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
+// Metadata provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 //
 // Metadata returns the collection as a Go slice.
 func (x *AssetTrack) Metadata() []*MetadataItem {
-	arr := x.inner.Metadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// Provides an NSArray of NSStrings, each representing a format of metadata that's available for the track (e.g. QuickTime userdata, etc.) Metadata formats are defined in AVMetadataItem.h.
+// AvailableMetadataFormats provides an NSArray of NSStrings, each representing a format of metadata that's available for the track (e.g. QuickTime userdata, etc.) Metadata formats are defined in AVMetadataItem.h.
 //
 // AvailableMetadataFormats returns the collection as a Go slice.
-func (x *AssetTrack) AvailableMetadataFormats() []*foundation.NSString {
-	arr := x.inner.AvailableMetadataFormats()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *AssetTrack) AvailableMetadataFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableMetadataFormats"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns an array of associated tracks that have the specified association type.
-//
-// AssociatedTracksOfType calls the underlying AssociatedTracksOfType.
-func (x *AssetTrack) AssociatedTracksOfType(trackAssociationType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack] {
-	return x.inner.AssociatedTracksOfType(trackAssociationType)
+// AssociatedTracksOfType returns an array of associated tracks that have the specified association type.
+func (x *AssetTrack) AssociatedTracksOfType(trackAssociationType obj.Object) []*AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associatedTracksOfType:"), objref.IDOf(trackAssociationType))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
-// Loads associated tracks that have the specified association type.
+// LoadAssociatedTracksOfType loads associated tracks that have the specified association type.
 //
 // LoadAssociatedTracksOfType blocks until the operation completes or ctx is cancelled.
-func (x *AssetTrack) LoadAssociatedTracksOfType(ctx context.Context, trackAssociationType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error) {
+func (x *AssetTrack) LoadAssociatedTracksOfType(ctx context.Context, trackAssociationType obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVAssetTrack]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadAssociatedTracksOfTypeCompletionHandler(trackAssociationType, func(_p0 *foundation.NSArray[*raw.AVAssetTrack], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadAssociatedTracksOfType:completionHandler:"), objref.IDOf(trackAssociationType), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVAssetTrack]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.). Track association types are defined immediately above.
+// AvailableTrackAssociationTypes provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.). Track association types are defined immediately above.
 //
 // AvailableTrackAssociationTypes returns the collection as a Go slice.
-func (x *AssetTrack) AvailableTrackAssociationTypes() []*foundation.NSString {
-	arr := x.inner.AvailableTrackAssociationTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *AssetTrack) AvailableTrackAssociationTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableTrackAssociationTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Creates a sample cursor and positions it at or near the specified presentation timestamp.
-//
-// MakeSampleCursorWithPresentationTimeStamp calls the underlying MakeSampleCursorWithPresentationTimeStamp.
-func (x *AssetTrack) MakeSampleCursorWithPresentationTimeStamp(presentationTimeStamp coremedia.CMTime) *SampleCursor {
-	_r := x.inner.MakeSampleCursorWithPresentationTimeStamp(presentationTimeStamp)
-	if _r == nil {
-		return nil
-	}
-	return &SampleCursor{inner: _r}
-}
-
-// Creates a sample cursor and positions it at the track’s first media sample in decode order.
-//
-// MakeSampleCursorAtFirstSampleInDecodeOrder calls the underlying MakeSampleCursorAtFirstSampleInDecodeOrder.
+// MakeSampleCursorAtFirstSampleInDecodeOrder creates a sample cursor and positions it at the track’s first media sample in decode order.
 func (x *AssetTrack) MakeSampleCursorAtFirstSampleInDecodeOrder() *SampleCursor {
-	_r := x.inner.MakeSampleCursorAtFirstSampleInDecodeOrder()
-	if _r == nil {
-		return nil
-	}
-	return &SampleCursor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSampleCursorAtFirstSampleInDecodeOrder"))
+	return SampleCursorFromID(_r)
 }
 
-// Creates a sample cursor and positions it at the track’s last media sample in decode order.
-//
-// MakeSampleCursorAtLastSampleInDecodeOrder calls the underlying MakeSampleCursorAtLastSampleInDecodeOrder.
+// MakeSampleCursorAtLastSampleInDecodeOrder creates a sample cursor and positions it at the track’s last media sample in decode order.
 func (x *AssetTrack) MakeSampleCursorAtLastSampleInDecodeOrder() *SampleCursor {
-	_r := x.inner.MakeSampleCursorAtLastSampleInDecodeOrder()
-	if _r == nil {
-		return nil
-	}
-	return &SampleCursor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSampleCursorAtLastSampleInDecodeOrder"))
+	return SampleCursorFromID(_r)
 }
 
-// Indicates whether the receiver can provide instances of AVSampleCursor for traversing its media samples and discovering information about them.
-//
-// CanProvideSampleCursors calls the underlying CanProvideSampleCursors.
+// CanProvideSampleCursors indicates whether the receiver can provide instances of AVSampleCursor for traversing its media samples and discovering information about them.
 func (x *AssetTrack) CanProvideSampleCursors() bool {
-	return x.inner.CanProvideSampleCursors()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProvideSampleCursors"))
+	return _r
 }
-
-func (x *AssetTrack) asAssetTrack() *raw.AVAssetTrack { return x.inner }
 
 // AssetTrackable is the interface implemented by [AssetTrack], for mocking and DI.
 type AssetTrackable interface {
-	Unwrap() *raw.AVAssetTrack
+	obj.Object
 	Asset() *Asset
 	TrackID() int32
-	HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool
-	MediaType() string
-	FormatDescriptions() *foundation.NSArray[objc.ID]
+	HasMediaCharacteristic(mediaCharacteristic obj.Object) bool
+	MediaType() obj.Object
+	FormatDescriptions() obj.Object
 	IsPlayable() bool
 	IsDecodable() bool
 	IsEnabled() bool
 	IsSelfContained() bool
 	TotalSampleDataLength() int64
-	TimeRange() coremedia.CMTimeRange
 	NaturalTimeScale() int32
 	EstimatedDataRate() float32
 	LanguageCode() string
@@ -441,25 +339,26 @@ type AssetTrackable interface {
 	PreferredVolume() float32
 	HasAudioSampleDependencies() bool
 	NominalFrameRate() float32
-	MinFrameDuration() coremedia.CMTime
 	RequiresFrameReordering() bool
-	SegmentForTrackTime(trackTime coremedia.CMTime) *AssetTrackSegment
-	LoadSegmentForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	SamplePresentationTimeForTrackTime(trackTime coremedia.CMTime) coremedia.CMTime
-	LoadSamplePresentationTimeForTrackTimeCompletionHandler(trackTime coremedia.CMTime, completionHandler objc.Block)
 	Segments() []*AssetTrackSegment
-	MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem]
-	LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error)
+	MetadataForFormat(format obj.Object) []*MetadataItem
+	LoadMetadataForFormat(ctx context.Context, format obj.Object) (obj.Object, error)
 	CommonMetadata() []*MetadataItem
 	Metadata() []*MetadataItem
-	AvailableMetadataFormats() []*foundation.NSString
-	AssociatedTracksOfType(trackAssociationType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack]
-	LoadAssociatedTracksOfType(ctx context.Context, trackAssociationType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error)
-	AvailableTrackAssociationTypes() []*foundation.NSString
-	MakeSampleCursorWithPresentationTimeStamp(presentationTimeStamp coremedia.CMTime) *SampleCursor
+	AvailableMetadataFormats() []obj.Object
+	AssociatedTracksOfType(trackAssociationType obj.Object) []*AssetTrack
+	LoadAssociatedTracksOfType(ctx context.Context, trackAssociationType obj.Object) (obj.Object, error)
+	AvailableTrackAssociationTypes() []obj.Object
 	MakeSampleCursorAtFirstSampleInDecodeOrder() *SampleCursor
 	MakeSampleCursorAtLastSampleInDecodeOrder() *SampleCursor
 	CanProvideSampleCursors() bool
 }
 
 var _ AssetTrackable = (*AssetTrack)(nil)
+
+// isAssetTrack marks AssetTrack — and, by embedding promotion, its
+// subclasses — as a member of the AssetTrack hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetTrack) isAssetTrack() {}
+
+var _ AssetTrackProvider = (*AssetTrack)(nil)

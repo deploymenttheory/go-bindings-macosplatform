@@ -5,65 +5,73 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator of texel data that computes a normal map from a supplied texture.
+// NormalMapTexture is an idiomatic wrapper over the Objective-C class MDLNormalMapTexture.
 //
-// NormalMapTexture wraps [raw.MDLNormalMapTexture] with a fluent Go API.
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that computes a normal map from a supplied texture.
 type NormalMapTexture struct {
-	inner *raw.MDLNormalMapTexture
+	Texture
 }
 
-// Unwrap returns the underlying [raw.MDLNormalMapTexture].
-func (x *NormalMapTexture) Unwrap() *raw.MDLNormalMapTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NormalMapTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// NormalMapTextureFromID adopts an existing object pointer as a NormalMapTexture (nil for 0).
+// NormalMapTextureFromID adopts an existing Objective-C object as a NormalMapTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func NormalMapTextureFromID(id objc.ID) *NormalMapTexture {
 	if id == 0 {
 		return nil
 	}
-	return &NormalMapTexture{inner: raw.MDLNormalMapTextureFromID(id)}
+	x := &NormalMapTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a normal map to be generated from the specified texture.
-//
-// NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast creates a new [NormalMapTexture].
-func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *raw.MDLTexture, name string, smoothness float32, contrast float32) *NormalMapTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNormalMapTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByGeneratingNormalMapWithTexture:name:smoothness:contrast:"), sourceTexture.Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr(), smoothness, contrast)
-	return &NormalMapTexture{inner: raw.MDLNormalMapTextureFromID(_id)}
+// normalMapTextureAdopt wraps an Objective-C object that this code just created as a
+// NormalMapTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func normalMapTextureAdopt(id objc.ID) *NormalMapTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &NormalMapTexture{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast initializes a normal map to be generated from the specified texture.
+func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *Texture, name string, smoothness float32, contrast float32) *NormalMapTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLNormalMapTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByGeneratingNormalMapWithTexture:name:smoothness:contrast:"), objref.IDOf(sourceTexture), purego.NSString(name), smoothness, contrast)
+	return normalMapTextureAdopt(_id)
+}
+
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *NormalMapTexture) WithIsCube(isCube bool) *NormalMapTexture {
-	x.inner.MDLTexture.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *NormalMapTexture) WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture {
-	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
-
-func (x *NormalMapTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // NormalMapTextureable is the interface implemented by [NormalMapTexture], for mocking and DI.
 type NormalMapTextureable interface {
-	Unwrap() *raw.MDLNormalMapTexture
+	obj.Object
 	WithIsCube(isCube bool) *NormalMapTexture
 	WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture
 }
 
 var _ NormalMapTextureable = (*NormalMapTexture)(nil)
+
+var _ TextureProvider = (*NormalMapTexture)(nil)

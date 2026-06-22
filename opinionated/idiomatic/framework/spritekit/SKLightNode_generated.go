@@ -5,386 +5,314 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A node that lights surrounding nodes.
+// LightNode is an idiomatic wrapper over the Objective-C class SKLightNode.
 //
-// LightNode wraps [raw.SKLightNode] with a fluent Go API.
+// It embeds [Node], promoting that type's methods.
+//
+// A node that lights surrounding nodes.
 type LightNode struct {
-	inner *raw.SKLightNode
+	Node
 }
 
-// Unwrap returns the underlying [raw.SKLightNode].
-func (x *LightNode) Unwrap() *raw.SKLightNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LightNode) ID() objc.ID { return x.inner.Ptr() }
-
-// LightNodeFromID adopts an existing object pointer as a LightNode (nil for 0).
+// LightNodeFromID adopts an existing Objective-C object as a LightNode
+// (nil for 0), retaining it and registering a release finalizer.
 func LightNodeFromID(id objc.ID) *LightNode {
 	if id == 0 {
 		return nil
 	}
-	return &LightNode{inner: raw.SKLightNodeFromID(id)}
+	x := &LightNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLightNode creates a new [LightNode].
+// lightNodeAdopt wraps an Objective-C object that this code just created as a
+// LightNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lightNodeAdopt(id objc.ID) *LightNode {
+	if id == 0 {
+		return nil
+	}
+	x := &LightNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewLightNode creates a new LightNode.
 func NewLightNode() *LightNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKLightNode")), objc.RegisterName("new"))
-	return &LightNode{inner: raw.SKLightNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKLightNode")), objc.RegisterName("new"))
+	return lightNodeAdopt(_id)
 }
 
-// A Boolean value that indicates whether the node is casting light.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the node is casting light.
 func (x *LightNode) WithEnabled(enabled bool) *LightNode {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The diffuse and specular color of the light source.
-//
-// WithLightColor sets the lightColor property and returns the receiver for chaining.
-func (x *LightNode) WithLightColor(lightColor *appkit.NSColor) *LightNode {
-	x.inner.SetLightColor(lightColor)
+// WithLightColor the diffuse and specular color of the light source.
+func (x *LightNode) WithLightColor(lightColor obj.Object) *LightNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightColor:"), objref.IDOf(lightColor))
 	return x
 }
 
-// The ambient color of the light.
-//
-// WithAmbientColor sets the ambientColor property and returns the receiver for chaining.
-func (x *LightNode) WithAmbientColor(ambientColor *appkit.NSColor) *LightNode {
-	x.inner.SetAmbientColor(ambientColor)
+// WithAmbientColor the ambient color of the light.
+func (x *LightNode) WithAmbientColor(ambientColor obj.Object) *LightNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmbientColor:"), objref.IDOf(ambientColor))
 	return x
 }
 
-// The color of any shadow cast by a sprite.
-//
-// WithShadowColor sets the shadowColor property and returns the receiver for chaining.
-func (x *LightNode) WithShadowColor(shadowColor *appkit.NSColor) *LightNode {
-	x.inner.SetShadowColor(shadowColor)
+// WithShadowColor the color of any shadow cast by a sprite.
+func (x *LightNode) WithShadowColor(shadowColor obj.Object) *LightNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return x
 }
 
-// The exponent for the rate of decay of the light source.
-//
-// WithFalloff sets the falloff property and returns the receiver for chaining.
+// WithFalloff the exponent for the rate of decay of the light source.
 func (x *LightNode) WithFalloff(falloff float64) *LightNode {
-	x.inner.SetFalloff(falloff)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFalloff:"), falloff)
 	return x
 }
 
-// A mask that defines which categories this light belongs to.
-//
-// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
+// WithCategoryBitMask a mask that defines which categories this light belongs to.
 func (x *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
+// WithPosition the position of the node in its parent’s coordinate system.
 func (x *LightNode) WithPosition(position corefoundation.CGPoint) *LightNode {
-	x.inner.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition the height of the node relative to its parent.
 func (x *LightNode) WithZPosition(zPosition float64) *LightNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *LightNode) WithZRotation(zRotation float64) *LightNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *LightNode) WithXScale(xScale float64) *LightNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *LightNode) WithYScale(yScale float64) *LightNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *LightNode) WithSpeed(speed float64) *LightNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *LightNode) WithAlpha(alpha float64) *LightNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *LightNode) WithPaused(paused bool) *LightNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *LightNode) WithHidden(hidden bool) *LightNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *LightNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the node’s assignable name.
 func (x *LightNode) WithName(name string) *LightNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody the physics body associated with the node.
 func (x *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *LightNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData a dictionary containing arbitrary data.
+func (x *LightNode) WithUserData(userData obj.Object) *LightNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *LightNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *LightNode) WithConstraints(items ...*raw.SKConstraint) *LightNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints a list of constraints to apply to the node.
+func (x *LightNode) WithConstraints(items ...*Constraint) *LightNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *LightNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
+func (x *LightNode) WithAttributeValues(attributeValues obj.Object) *LightNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *LightNode) WithAccessibilityElement(accessibilityElement bool) *LightNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *LightNode) WithAccessibilityRole(accessibilityRole string) *LightNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *LightNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LightNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *LightNode) WithAccessibilitySubrole(accessibilitySubrole string) *LightNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
 func (x *LightNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LightNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *LightNode) WithAccessibilityParent(accessibilityParent objc.ID) *LightNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent the user interface element that contains this element.
+func (x *LightNode) WithAccessibilityParent(accessibilityParent obj.Object) *LightNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *LightNode) WithAccessibilityHelp(accessibilityHelp string) *LightNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *LightNode) WithAccessibilityLabel(accessibilityLabel string) *LightNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *LightNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LightNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Enables or disables lighting contribution from this light node. Set to YES; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to NO; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is YES. @see lightColor @see falloff @see categoryBitMask
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled enables or disables lighting contribution from this light node. Set to YES; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to NO; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is YES.
 func (x *LightNode) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *LightNode) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting. @see SKUniform @see falloff
-//
-// LightColor calls the underlying LightColor.
-func (x *LightNode) LightColor() *appkit.NSColor {
-	return x.inner.LightColor()
+// LightColor diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting.
+func (x *LightNode) LightColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lightColor"))
+	return obj.Wrap(_r)
 }
 
-// SetLightColor calls the underlying SetLightColor.
-func (x *LightNode) SetLightColor(lightColor *appkit.NSColor) {
-	x.inner.SetLightColor(lightColor)
+// SetLightColor wraps the corresponding Objective-C method.
+func (x *LightNode) SetLightColor(lightColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightColor:"), objref.IDOf(lightColor))
 }
 
-// Ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals. @see lightColor
-//
-// AmbientColor calls the underlying AmbientColor.
-func (x *LightNode) AmbientColor() *appkit.NSColor {
-	return x.inner.AmbientColor()
+// AmbientColor ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals.
+func (x *LightNode) AmbientColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ambientColor"))
+	return obj.Wrap(_r)
 }
 
-// SetAmbientColor calls the underlying SetAmbientColor.
-func (x *LightNode) SetAmbientColor(ambientColor *appkit.NSColor) {
-	x.inner.SetAmbientColor(ambientColor)
+// SetAmbientColor wraps the corresponding Objective-C method.
+func (x *LightNode) SetAmbientColor(ambientColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmbientColor:"), objref.IDOf(ambientColor))
 }
 
-// Color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow. @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
-//
-// ShadowColor calls the underlying ShadowColor.
-func (x *LightNode) ShadowColor() *appkit.NSColor {
-	return x.inner.ShadowColor()
+// ShadowColor color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow.
+func (x *LightNode) ShadowColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowColor"))
+	return obj.Wrap(_r)
 }
 
-// SetShadowColor calls the underlying SetShadowColor.
-func (x *LightNode) SetShadowColor(shadowColor *appkit.NSColor) {
-	x.inner.SetShadowColor(shadowColor)
+// SetShadowColor wraps the corresponding Objective-C method.
+func (x *LightNode) SetShadowColor(shadowColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 }
 
-// Falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color. @see lightColor
-//
-// Falloff calls the underlying Falloff.
+// Falloff falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color.
 func (x *LightNode) Falloff() float64 {
-	return x.inner.Falloff()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("falloff"))
+	return _r
 }
 
-// SetFalloff calls the underlying SetFalloff.
+// SetFalloff wraps the corresponding Objective-C method.
 func (x *LightNode) SetFalloff(falloff float64) {
-	x.inner.SetFalloff(falloff)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFalloff:"), falloff)
 }
 
-// The category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light. @see SKSpriteNode.lightingBitMask @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
-//
-// CategoryBitMask calls the underlying CategoryBitMask.
+// CategoryBitMask the category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light.
 func (x *LightNode) CategoryBitMask() uint32 {
-	return x.inner.CategoryBitMask()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+	return _r
 }
 
-// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+// SetCategoryBitMask wraps the corresponding Objective-C method.
 func (x *LightNode) SetCategoryBitMask(categoryBitMask uint32) {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
-
-func (x *LightNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // LightNodeable is the interface implemented by [LightNode], for mocking and DI.
 type LightNodeable interface {
-	Unwrap() *raw.SKLightNode
+	obj.Object
 	WithEnabled(enabled bool) *LightNode
-	WithLightColor(lightColor *appkit.NSColor) *LightNode
-	WithAmbientColor(ambientColor *appkit.NSColor) *LightNode
-	WithShadowColor(shadowColor *appkit.NSColor) *LightNode
+	WithLightColor(lightColor obj.Object) *LightNode
+	WithAmbientColor(ambientColor obj.Object) *LightNode
+	WithShadowColor(shadowColor obj.Object) *LightNode
 	WithFalloff(falloff float64) *LightNode
 	WithCategoryBitMask(categoryBitMask uint32) *LightNode
 	WithPosition(position corefoundation.CGPoint) *LightNode
@@ -399,27 +327,27 @@ type LightNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode
 	WithName(name string) *LightNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *LightNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode
+	WithUserData(userData obj.Object) *LightNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *LightNode
-	WithConstraints(items ...*raw.SKConstraint) *LightNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode
+	WithConstraints(items ...*Constraint) *LightNode
+	WithAttributeValues(attributeValues obj.Object) *LightNode
 	WithAccessibilityElement(accessibilityElement bool) *LightNode
 	WithAccessibilityRole(accessibilityRole string) *LightNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LightNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *LightNode
 	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LightNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *LightNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *LightNode
 	WithAccessibilityHelp(accessibilityHelp string) *LightNode
 	WithAccessibilityLabel(accessibilityLabel string) *LightNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *LightNode
 	IsEnabled() bool
 	SetEnabled(enabled bool)
-	LightColor() *appkit.NSColor
-	SetLightColor(lightColor *appkit.NSColor)
-	AmbientColor() *appkit.NSColor
-	SetAmbientColor(ambientColor *appkit.NSColor)
-	ShadowColor() *appkit.NSColor
-	SetShadowColor(shadowColor *appkit.NSColor)
+	LightColor() obj.Object
+	SetLightColor(lightColor obj.Object)
+	AmbientColor() obj.Object
+	SetAmbientColor(ambientColor obj.Object)
+	ShadowColor() obj.Object
+	SetShadowColor(shadowColor obj.Object)
 	Falloff() float64
 	SetFalloff(falloff float64)
 	CategoryBitMask() uint32
@@ -427,3 +355,5 @@ type LightNodeable interface {
 }
 
 var _ LightNodeable = (*LightNode)(nil)
+
+var _ NodeProvider = (*LightNode)(nil)

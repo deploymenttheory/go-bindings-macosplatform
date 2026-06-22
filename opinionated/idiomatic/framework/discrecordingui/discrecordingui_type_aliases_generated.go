@@ -4,30 +4,8 @@
 
 package discrecordingui
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
-)
-
-// DRBurnSessionProgressCallbacks is a type alias for the raw DRBurnSessionProgressCallbacks value-type struct.
-type DRBurnSessionProgressCallbacks = raw.DRBurnSessionProgressCallbacks
-
-// DRBurnSessionProgressDialogOptions is a type alias for the raw DRBurnSessionProgressDialogOptions value-type struct.
-type DRBurnSessionProgressDialogOptions = raw.DRBurnSessionProgressDialogOptions
-
-// DRBurnSessionSetupCallbacks is a type alias for the raw DRBurnSessionSetupCallbacks value-type struct.
-type DRBurnSessionSetupCallbacks = raw.DRBurnSessionSetupCallbacks
-
-// DRBurnSessionSetupDialogOptions is a type alias for the raw DRBurnSessionSetupDialogOptions value-type struct.
-type DRBurnSessionSetupDialogOptions = raw.DRBurnSessionSetupDialogOptions
-
-// DREraseSessionProgressCallbacks is a type alias for the raw DREraseSessionProgressCallbacks value-type struct.
-type DREraseSessionProgressCallbacks = raw.DREraseSessionProgressCallbacks
-
-// DREraseSessionProgressDialogOptions is a type alias for the raw DREraseSessionProgressDialogOptions value-type struct.
-type DREraseSessionProgressDialogOptions = raw.DREraseSessionProgressDialogOptions
-
-// DREraseSessionSetupCallbacks is a type alias for the raw DREraseSessionSetupCallbacks value-type struct.
-type DREraseSessionSetupCallbacks = raw.DREraseSessionSetupCallbacks
-
-// DREraseSessionSetupDialogOptions is a type alias for the raw DREraseSessionSetupDialogOptions value-type struct.
-type DREraseSessionSetupDialogOptions = raw.DREraseSessionSetupDialogOptions
+// Options passed into the setup dialog to configure it.
+type DREraseSessionSetupDialogOptions struct {
+	Version           uint
+	DialogOptionFlags uint
+}

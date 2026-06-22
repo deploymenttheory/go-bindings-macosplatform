@@ -1,27 +1,26 @@
 {{/*
-    dict_augment.tmpl — hand-friendly builders emitted only on the
-    NSMutableDictionary wrapper, for building keyed argument dictionaries
-    (e.g. Security keychain queries, NSAboutPanelOption option dictionaries,
-    directory-share maps) without raw FFI.
+    dict_augment.tmpl adds small helpers to the mutable-dictionary wrapper for
+    building a dictionary of keyed values from Go, without dropping to lower-level
+    calls. Keys are given as Go strings; values are objects.
 */}}
-{{define "dict_augment"}}// Set inserts value for key (both object pointers, e.g. the CFStringRef
-// constant security.KSecClass()) and returns the receiver for chaining.
-func (x *{{.GoTypeName}}) Set(key, value objc.ID) *{{.GoTypeName}} {
-objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, key)
+{{define "dict_augment"}}// Set stores value under key (an object) and returns the receiver so calls can
+// be chained.
+func (x *{{.GoTypeName}}) Set(key, value obj.Object) *{{.GoTypeName}} {
+objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
 return x
 }
 
-// SetString inserts value under an NSString built from the Go string key and
-// returns the receiver for chaining.
-func (x *{{.GoTypeName}}) SetString(key string, value objc.ID) *{{.GoTypeName}} {
-objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, purego.NSString(key))
+// SetString stores value under the given string key and returns the receiver so
+// calls can be chained.
+func (x *{{.GoTypeName}}) SetString(key string, value obj.Object) *{{.GoTypeName}} {
+objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
 return x
 }
 
-// Get returns the value stored under the Go string key as an objc.ID, or 0 when
-// absent.
-func (x *{{.GoTypeName}}) Get(key string) objc.ID {
-return objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("objectForKey:"), purego.NSString(key))
+// Get returns the value stored under the given string key, or nil when there is
+// none.
+func (x *{{.GoTypeName}}) Get(key string) obj.Object {
+return obj.Wrap(objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(key)))
 }
 
 {{end}}

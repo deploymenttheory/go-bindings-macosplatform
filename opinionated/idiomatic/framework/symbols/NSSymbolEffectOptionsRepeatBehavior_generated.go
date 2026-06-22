@@ -5,43 +5,76 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The behavior of repetition to use when a symbol effect is animating.
+// SymbolEffectOptionsRepeatBehavior is an idiomatic wrapper over the Objective-C class NSSymbolEffectOptionsRepeatBehavior.
 //
-// SymbolEffectOptionsRepeatBehavior wraps [raw.NSSymbolEffectOptionsRepeatBehavior] with a fluent Go API.
+// The behavior of repetition to use when a symbol effect is animating.
 type SymbolEffectOptionsRepeatBehavior struct {
-	inner *raw.NSSymbolEffectOptionsRepeatBehavior
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolEffectOptionsRepeatBehavior].
-func (x *SymbolEffectOptionsRepeatBehavior) Unwrap() *raw.NSSymbolEffectOptionsRepeatBehavior {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolEffectOptionsRepeatBehavior) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolEffectOptionsRepeatBehaviorFromID adopts an existing object pointer as a SymbolEffectOptionsRepeatBehavior (nil for 0).
+// SymbolEffectOptionsRepeatBehaviorFromID adopts an existing Objective-C object as a SymbolEffectOptionsRepeatBehavior
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolEffectOptionsRepeatBehaviorFromID(id objc.ID) *SymbolEffectOptionsRepeatBehavior {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolEffectOptionsRepeatBehavior{inner: raw.NSSymbolEffectOptionsRepeatBehaviorFromID(id)}
+	x := &SymbolEffectOptionsRepeatBehavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolEffectOptionsRepeatBehavior creates a new [SymbolEffectOptionsRepeatBehavior].
+// symbolEffectOptionsRepeatBehaviorAdopt wraps an Objective-C object that this code just created as a
+// SymbolEffectOptionsRepeatBehavior (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolEffectOptionsRepeatBehaviorAdopt(id objc.ID) *SymbolEffectOptionsRepeatBehavior {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolEffectOptionsRepeatBehavior{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolEffectOptionsRepeatBehavior) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolEffectOptionsRepeatBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolEffectOptionsRepeatBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SymbolEffectOptionsRepeatBehavior) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSymbolEffectOptionsRepeatBehavior creates a new SymbolEffectOptionsRepeatBehavior.
 func NewSymbolEffectOptionsRepeatBehavior() *SymbolEffectOptionsRepeatBehavior {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("new"))
-	return &SymbolEffectOptionsRepeatBehavior{inner: raw.NSSymbolEffectOptionsRepeatBehaviorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("new"))
+	return symbolEffectOptionsRepeatBehaviorAdopt(_id)
 }
 
 // SymbolEffectOptionsRepeatBehaviorable is the interface implemented by [SymbolEffectOptionsRepeatBehavior], for mocking and DI.
 type SymbolEffectOptionsRepeatBehaviorable interface {
-	Unwrap() *raw.NSSymbolEffectOptionsRepeatBehavior
+	obj.Object
 }
 
 var _ SymbolEffectOptionsRepeatBehaviorable = (*SymbolEffectOptionsRepeatBehavior)(nil)

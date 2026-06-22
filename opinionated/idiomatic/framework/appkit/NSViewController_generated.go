@@ -6,391 +6,304 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A controller that manages a view, typically loaded from a nib file.
+// ViewController is an idiomatic wrapper over the Objective-C class NSViewController.
 //
-// ViewController wraps [raw.NSViewController] with a fluent Go API.
+// ViewController is an abstract base — you do not construct it directly. Construct one of [CollectionViewItem], [PageController], [SplitViewController], [SplitViewItemAccessoryViewController], [TabViewController], [TitlebarAccessoryViewController] and pass it where a ViewController is accepted.
+//
+// A controller that manages a view, typically loaded from a nib file.
 type ViewController struct {
-	inner *raw.NSViewController
+	Responder
 }
 
-// Unwrap returns the underlying [raw.NSViewController].
-func (x *ViewController) Unwrap() *raw.NSViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// ViewControllerFromID adopts an existing object pointer as a ViewController (nil for 0).
+// ViewControllerFromID adopts an existing Objective-C object as a ViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func ViewControllerFromID(id objc.ID) *ViewController {
 	if id == 0 {
 		return nil
 	}
-	return &ViewController{inner: raw.NSViewControllerFromID(id)}
-}
-
-// Returns a view controller object initialized to the nib file in the specified bundle.
-//
-// NewViewControllerWithNibNameBundle creates a new [ViewController].
-func NewViewControllerWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *ViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
-	return &ViewController{inner: raw.NSViewControllerFromID(_id)}
-}
-
-// NewViewControllerWithCoder creates a new [ViewController].
-func NewViewControllerWithCoder(coder *foundation.NSCoder) *ViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ViewController{inner: raw.NSViewControllerFromID(_id)}
-}
-
-// The object whose value is presented in the receiver’s primary view.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *ViewController) WithRepresentedObject(representedObject objc.ID) *ViewController {
-	x.inner.SetRepresentedObject(representedObject)
+	x := &ViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The localized title of the receiver’s primary view.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// viewControllerAdopt wraps an Objective-C object that this code just created as a
+// ViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func viewControllerAdopt(id objc.ID) *ViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &ViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewViewControllerWithNibNameBundle returns a view controller object initialized to the nib file in the specified bundle.
+func NewViewControllerWithNibNameBundle(nibNameOrNil obj.Object, nibBundleOrNil obj.Object) *ViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), objref.IDOf(nibNameOrNil), objref.IDOf(nibBundleOrNil))
+	return viewControllerAdopt(_id)
+}
+
+// NewViewControllerWithCoder creates a new ViewController.
+func NewViewControllerWithCoder(coder obj.Object) *ViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return viewControllerAdopt(_id)
+}
+
+// WithRepresentedObject the object whose value is presented in the receiver’s primary view.
+func (x *ViewController) WithRepresentedObject(representedObject obj.Object) *ViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return x
+}
+
+// WithTitle the localized title of the receiver’s primary view.
 func (x *ViewController) WithTitle(title string) *ViewController {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The view controller’s primary view.
-//
-// WithView sets the view property and returns the receiver for chaining.
+// WithView the view controller’s primary view.
 func (x *ViewController) WithView(view ViewProvider) *ViewController {
-	x.inner.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// The desired size of the view controller’s view, in screen units.
-//
-// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+// WithPreferredContentSize the desired size of the view controller’s view, in screen units.
 func (x *ViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *ViewController {
-	x.inner.SetPreferredContentSize(preferredContentSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
 	return x
 }
 
-// An array of view controllers that are hierarchical children of the view controller.
-//
-// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+// WithChildViewControllers an array of view controllers that are hierarchical children of the view controller.
 func (x *ViewController) WithChildViewControllers(items ...ViewControllerProvider) *ViewController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asViewController().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSViewController](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetChildViewControllers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
 	return x
 }
 
-// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+// WithSourceItemView sets the property and returns the receiver so calls can be chained.
 func (x *ViewController) WithSourceItemView(sourceItemView ViewProvider) *ViewController {
-	x.inner.SetSourceItemView(sourceItemView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return x
 }
 
-// For a view controller that is part of an app extension, the preferred screen origin.
-//
-// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+// WithPreferredScreenOrigin for a view controller that is part of an app extension, the preferred screen origin.
 func (x *ViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *ViewController {
-	x.inner.SetPreferredScreenOrigin(preferredScreenOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *ViewController) WithNextResponder(nextResponder ResponderProvider) *ViewController {
-	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *ViewController) WithMenu(menu *Menu) *ViewController {
-	x.inner.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *ViewController {
-	x.inner.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *ViewController) WithUserActivity(userActivity obj.Object) *ViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *ViewController) WithTouchBar(touchBar *TouchBar) *ViewController {
-	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Instantiates a view from a nib file and sets the value of the view property.
-//
-// LoadView calls the underlying LoadView.
+// LoadView instantiates a view from a nib file and sets the value of the view property.
 func (x *ViewController) LoadView() {
-	x.inner.LoadView()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadView"))
 }
 
-// LoadViewIfNeeded calls the underlying LoadViewIfNeeded.
+// LoadViewIfNeeded wraps the corresponding Objective-C method.
 func (x *ViewController) LoadViewIfNeeded() {
-	x.inner.LoadViewIfNeeded()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadViewIfNeeded"))
 }
 
-// Attempt to commit any currently edited results of the receiver.
-//
-// CommitEditingWithDelegateDidCommitSelectorContextInfo calls the underlying CommitEditingWithDelegateDidCommitSelectorContextInfo.
-func (x *ViewController) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate, didCommitSelector, contextInfo)
-}
-
-// Returns whether the receiver was able to commit any pending edits.
-//
-// CommitEditing calls the underlying CommitEditing.
+// CommitEditing returns whether the receiver was able to commit any pending edits.
 func (x *ViewController) CommitEditing() bool {
-	return x.inner.CommitEditing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commitEditing"))
+	return _r
 }
 
-// Causes the receiver to discard any changes, restoring the previous values.
-//
-// DiscardEditing calls the underlying DiscardEditing.
+// DiscardEditing causes the receiver to discard any changes, restoring the previous values.
 func (x *ViewController) DiscardEditing() {
-	x.inner.DiscardEditing()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEditing"))
 }
 
-// Called after the view controller’s view has been loaded into memory.
-//
-// ViewDidLoad calls the underlying ViewDidLoad.
+// ViewDidLoad called after the view controller’s view has been loaded into memory.
 func (x *ViewController) ViewDidLoad() {
-	x.inner.ViewDidLoad()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidLoad"))
 }
 
-// Called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
-//
-// ViewWillAppear calls the underlying ViewWillAppear.
+// ViewWillAppear called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
 func (x *ViewController) ViewWillAppear() {
-	x.inner.ViewWillAppear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillAppear"))
 }
 
-// Called when the view controller’s view is fully transitioned onto the screen.
-//
-// ViewDidAppear calls the underlying ViewDidAppear.
+// ViewDidAppear called when the view controller’s view is fully transitioned onto the screen.
 func (x *ViewController) ViewDidAppear() {
-	x.inner.ViewDidAppear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidAppear"))
 }
 
-// Called when the view controller’s view is about to be removed from the view hierarchy in the window.
-//
-// ViewWillDisappear calls the underlying ViewWillDisappear.
+// ViewWillDisappear called when the view controller’s view is about to be removed from the view hierarchy in the window.
 func (x *ViewController) ViewWillDisappear() {
-	x.inner.ViewWillDisappear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillDisappear"))
 }
 
-// Called after the view controller’s view is removed from the view hierarchy in a window.
-//
-// ViewDidDisappear calls the underlying ViewDidDisappear.
+// ViewDidDisappear called after the view controller’s view is removed from the view hierarchy in a window.
 func (x *ViewController) ViewDidDisappear() {
-	x.inner.ViewDidDisappear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidDisappear"))
 }
 
-// Called during Auto Layout constraint updating to enable the view controller to mediate the process.
-//
-// UpdateViewConstraints calls the underlying UpdateViewConstraints.
+// UpdateViewConstraints called during Auto Layout constraint updating to enable the view controller to mediate the process.
 func (x *ViewController) UpdateViewConstraints() {
-	x.inner.UpdateViewConstraints()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateViewConstraints"))
 }
 
-// Called just before the layout method of the view controller’s view is called.
-//
-// ViewWillLayout calls the underlying ViewWillLayout.
+// ViewWillLayout called just before the layout method of the view controller’s view is called.
 func (x *ViewController) ViewWillLayout() {
-	x.inner.ViewWillLayout()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillLayout"))
 }
 
-// Called immediately after the layout method of the view controller’s view is called.
-//
-// ViewDidLayout calls the underlying ViewDidLayout.
+// ViewDidLayout called immediately after the layout method of the view controller’s view is called.
 func (x *ViewController) ViewDidLayout() {
-	x.inner.ViewDidLayout()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidLayout"))
 }
 
-// NibName calls the underlying NibName.
-func (x *ViewController) NibName() string {
-	_r := x.inner.NibName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// NibName wraps the corresponding Objective-C method.
+func (x *ViewController) NibName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nibName"))
+	return obj.Wrap(_r)
 }
 
-// NibBundle calls the underlying NibBundle.
-func (x *ViewController) NibBundle() *foundation.NSBundle {
-	return x.inner.NibBundle()
+// NibBundle wraps the corresponding Objective-C method.
+func (x *ViewController) NibBundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nibBundle"))
+	return obj.Wrap(_r)
 }
 
-// RepresentedObject calls the underlying RepresentedObject.
-func (x *ViewController) RepresentedObject() objc.ID {
-	return x.inner.RepresentedObject()
+// RepresentedObject wraps the corresponding Objective-C method.
+func (x *ViewController) RepresentedObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedObject"))
+	return obj.Wrap(_r)
 }
 
-// SetRepresentedObject calls the underlying SetRepresentedObject.
-func (x *ViewController) SetRepresentedObject(representedObject objc.ID) {
-	x.inner.SetRepresentedObject(representedObject)
+// SetRepresentedObject wraps the corresponding Objective-C method.
+func (x *ViewController) SetRepresentedObject(representedObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *ViewController) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ViewController) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// View calls the underlying View.
+// View wraps the corresponding Objective-C method.
 func (x *ViewController) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
-// SetView calls the underlying SetView.
-func (x *ViewController) SetView(view *raw.NSView) {
-	x.inner.SetView(view)
+// SetView wraps the corresponding Objective-C method.
+func (x *ViewController) SetView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
-// ViewIfLoaded calls the underlying ViewIfLoaded.
+// ViewIfLoaded wraps the corresponding Objective-C method.
 func (x *ViewController) ViewIfLoaded() *View {
-	_r := x.inner.ViewIfLoaded()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewIfLoaded"))
+	return ViewFromID(_r)
 }
 
-// IsViewLoaded calls the underlying IsViewLoaded.
+// IsViewLoaded wraps the corresponding Objective-C method.
 func (x *ViewController) IsViewLoaded() bool {
-	return x.inner.IsViewLoaded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isViewLoaded"))
+	return _r
 }
 
-// PreferredContentSize calls the underlying PreferredContentSize.
+// PreferredContentSize wraps the corresponding Objective-C method.
 func (x *ViewController) PreferredContentSize() corefoundation.CGSize {
-	return x.inner.PreferredContentSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredContentSize"))
+	return _r
 }
 
-// SetPreferredContentSize calls the underlying SetPreferredContentSize.
+// SetPreferredContentSize wraps the corresponding Objective-C method.
 func (x *ViewController) SetPreferredContentSize(preferredContentSize corefoundation.CGSize) {
-	x.inner.SetPreferredContentSize(preferredContentSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
 }
 
-// Presents another view controller using a specified, custom animator for presentation and dismissal.
+// DismissViewController dismisses a presented view controller, using the same animator that presented it.
+func (x *ViewController) DismissViewController(viewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissViewController:"), objref.IDOf(viewController))
+}
+
+// DismissController wraps the corresponding Objective-C method.
+func (x *ViewController) DismissController(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissController:"), objref.IDOf(sender))
+}
+
+// PresentedViewControllers wraps the corresponding Objective-C method.
 //
-// PresentViewControllerAnimator calls the underlying PresentViewControllerAnimator.
-func (x *ViewController) PresentViewControllerAnimator(viewController *raw.NSViewController, animator raw.NSViewControllerPresentationAnimator) {
-	x.inner.PresentViewControllerAnimator(viewController, animator)
-}
-
-// Dismisses a presented view controller, using the same animator that presented it.
-//
-// DismissViewController calls the underlying DismissViewController.
-func (x *ViewController) DismissViewController(viewController *raw.NSViewController) {
-	x.inner.DismissViewController(viewController)
-}
-
-// DismissController calls the underlying DismissController.
-func (x *ViewController) DismissController(sender objc.ID) {
-	x.inner.DismissController(sender)
-}
-
 // PresentedViewControllers returns the collection as a Go slice.
 func (x *ViewController) PresentedViewControllers() []*ViewController {
-	arr := x.inner.PresentedViewControllers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
-		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentedViewControllers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// PresentingViewController calls the underlying PresentingViewController.
+// PresentingViewController wraps the corresponding Objective-C method.
 func (x *ViewController) PresentingViewController() *ViewController {
-	_r := x.inner.PresentingViewController()
-	if _r == nil {
-		return nil
-	}
-	return &ViewController{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentingViewController"))
+	return ViewControllerFromID(_r)
 }
 
-// Presents another view controller as a sheet.
-//
-// PresentViewControllerAsSheet calls the underlying PresentViewControllerAsSheet.
-func (x *ViewController) PresentViewControllerAsSheet(viewController *raw.NSViewController) {
-	x.inner.PresentViewControllerAsSheet(viewController)
+// PresentViewControllerAsSheet presents another view controller as a sheet.
+func (x *ViewController) PresentViewControllerAsSheet(viewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentViewControllerAsSheet:"), objref.IDOf(viewController))
 }
 
-// Presents another view controller as a modal window, also known as an alert.
-//
-// PresentViewControllerAsModalWindow calls the underlying PresentViewControllerAsModalWindow.
-func (x *ViewController) PresentViewControllerAsModalWindow(viewController *raw.NSViewController) {
-	x.inner.PresentViewControllerAsModalWindow(viewController)
+// PresentViewControllerAsModalWindow presents another view controller as a modal window, also known as an alert.
+func (x *ViewController) PresentViewControllerAsModalWindow(viewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentViewControllerAsModalWindow:"), objref.IDOf(viewController))
 }
 
-// Presents another view controller as a popover.
-//
-// PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior calls the underlying PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior.
-func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior) {
-	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController, positioningRect, positioningView, preferredEdge, raw.NSPopoverBehavior(behavior))
-}
-
-// PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent calls the underlying PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent.
-func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior, hasFullSizeContent bool) {
-	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController, positioningRect, positioningView, preferredEdge, raw.NSPopoverBehavior(behavior), hasFullSizeContent)
-}
-
-// Performs a transition between two sibling child view controllers of the view controller.
+// TransitionFromViewControllerToViewControllerOptions performs a transition between two sibling child view controllers of the view controller.
 //
 // TransitionFromViewControllerToViewControllerOptions blocks until the operation completes or ctx is cancelled.
-func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options NSViewControllerTransitionOptions) error {
+func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *ViewController, toViewController *ViewController, options ViewControllerTransitionOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.TransitionFromViewControllerToViewControllerOptionsCompletionHandler(fromViewController, toViewController, raw.NSViewControllerTransitionOptions(options), func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionFromViewController:toViewController:options:completionHandler:"), objref.IDOf(fromViewController), objref.IDOf(toViewController), options, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -399,140 +312,105 @@ func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx
 	}
 }
 
-// A convenience method for adding a child view controller at the end of the childViewControllers array.
-//
-// AddChildViewController calls the underlying AddChildViewController.
-func (x *ViewController) AddChildViewController(childViewController *raw.NSViewController) {
-	x.inner.AddChildViewController(childViewController)
+// AddChildViewController a convenience method for adding a child view controller at the end of the childViewControllers array.
+func (x *ViewController) AddChildViewController(childViewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChildViewController:"), objref.IDOf(childViewController))
 }
 
-// Removes the called view controller from its parent view controller.
-//
-// RemoveFromParentViewController calls the underlying RemoveFromParentViewController.
+// RemoveFromParentViewController removes the called view controller from its parent view controller.
 func (x *ViewController) RemoveFromParentViewController() {
-	x.inner.RemoveFromParentViewController()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParentViewController"))
 }
 
-// Inserts a specified child view controller into the childViewControllers array at a specified position.
-//
-// InsertChildViewControllerAtIndex calls the underlying InsertChildViewControllerAtIndex.
-func (x *ViewController) InsertChildViewControllerAtIndex(childViewController *raw.NSViewController, index int) {
-	x.inner.InsertChildViewControllerAtIndex(childViewController, index)
+// InsertChildViewControllerAtIndex inserts a specified child view controller into the childViewControllers array at a specified position.
+func (x *ViewController) InsertChildViewControllerAtIndex(childViewController *ViewController, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildViewController:atIndex:"), objref.IDOf(childViewController), index)
 }
 
-// Removes a specified child controller from the view controller.
-//
-// RemoveChildViewControllerAtIndex calls the underlying RemoveChildViewControllerAtIndex.
+// RemoveChildViewControllerAtIndex removes a specified child controller from the view controller.
 func (x *ViewController) RemoveChildViewControllerAtIndex(index int) {
-	x.inner.RemoveChildViewControllerAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildViewControllerAtIndex:"), index)
 }
 
-// Called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
-//
-// PreferredContentSizeDidChangeForViewController calls the underlying PreferredContentSizeDidChangeForViewController.
-func (x *ViewController) PreferredContentSizeDidChangeForViewController(viewController *raw.NSViewController) {
-	x.inner.PreferredContentSizeDidChangeForViewController(viewController)
+// PreferredContentSizeDidChangeForViewController called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
+func (x *ViewController) PreferredContentSizeDidChangeForViewController(viewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredContentSizeDidChangeForViewController:"), objref.IDOf(viewController))
 }
 
-// For a view controller that is part of an app extension, called when its view is about to be resized.
-//
-// ViewWillTransitionToSize calls the underlying ViewWillTransitionToSize.
+// ViewWillTransitionToSize for a view controller that is part of an app extension, called when its view is about to be resized.
 func (x *ViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize) {
-	x.inner.ViewWillTransitionToSize(newSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillTransitionToSize:"), newSize)
 }
 
-// ParentViewController calls the underlying ParentViewController.
+// ParentViewController wraps the corresponding Objective-C method.
 func (x *ViewController) ParentViewController() *ViewController {
-	_r := x.inner.ParentViewController()
-	if _r == nil {
-		return nil
-	}
-	return &ViewController{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentViewController"))
+	return ViewControllerFromID(_r)
 }
 
+// ChildViewControllers wraps the corresponding Objective-C method.
+//
 // ChildViewControllers returns the collection as a Go slice.
 func (x *ViewController) ChildViewControllers() []*ViewController {
-	arr := x.inner.ChildViewControllers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
-		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childViewControllers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// SetChildViewControllers calls the underlying SetChildViewControllers.
-func (x *ViewController) SetChildViewControllers(childViewControllers ...ViewControllerProvider) {
-	_ptrs := make([]objc.ID, len(childViewControllers))
-	for _i, _v := range childViewControllers {
-		_ptrs[_i] = _v.asViewController().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSViewController]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSViewController](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSViewController](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetChildViewControllers(_arg0)
+// SetChildViewControllers wraps the corresponding Objective-C method.
+func (x *ViewController) SetChildViewControllers(childViewControllers []*ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), purego.SliceToNSArray(childViewControllers, func(_v *ViewController) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Storyboard calls the underlying Storyboard.
+// Storyboard wraps the corresponding Objective-C method.
 func (x *ViewController) Storyboard() *Storyboard {
-	_r := x.inner.Storyboard()
-	if _r == nil {
-		return nil
-	}
-	return &Storyboard{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storyboard"))
+	return StoryboardFromID(_r)
 }
 
-// ExtensionContext calls the underlying ExtensionContext.
-func (x *ViewController) ExtensionContext() *foundation.NSExtensionContext {
-	return x.inner.ExtensionContext()
+// ExtensionContext wraps the corresponding Objective-C method.
+func (x *ViewController) ExtensionContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionContext"))
+	return obj.Wrap(_r)
 }
 
-// SourceItemView calls the underlying SourceItemView.
+// SourceItemView wraps the corresponding Objective-C method.
 func (x *ViewController) SourceItemView() *View {
-	_r := x.inner.SourceItemView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceItemView"))
+	return ViewFromID(_r)
 }
 
-// SetSourceItemView calls the underlying SetSourceItemView.
-func (x *ViewController) SetSourceItemView(sourceItemView *raw.NSView) {
-	x.inner.SetSourceItemView(sourceItemView)
+// SetSourceItemView wraps the corresponding Objective-C method.
+func (x *ViewController) SetSourceItemView(sourceItemView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 }
 
-// PreferredScreenOrigin calls the underlying PreferredScreenOrigin.
+// PreferredScreenOrigin wraps the corresponding Objective-C method.
 func (x *ViewController) PreferredScreenOrigin() corefoundation.CGPoint {
-	return x.inner.PreferredScreenOrigin()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("preferredScreenOrigin"))
+	return _r
 }
 
-// SetPreferredScreenOrigin calls the underlying SetPreferredScreenOrigin.
+// SetPreferredScreenOrigin wraps the corresponding Objective-C method.
 func (x *ViewController) SetPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) {
-	x.inner.SetPreferredScreenOrigin(preferredScreenOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
 }
 
-// PreferredMinimumSize calls the underlying PreferredMinimumSize.
+// PreferredMinimumSize wraps the corresponding Objective-C method.
 func (x *ViewController) PreferredMinimumSize() corefoundation.CGSize {
-	return x.inner.PreferredMinimumSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredMinimumSize"))
+	return _r
 }
 
-// PreferredMaximumSize calls the underlying PreferredMaximumSize.
+// PreferredMaximumSize wraps the corresponding Objective-C method.
 func (x *ViewController) PreferredMaximumSize() corefoundation.CGSize {
-	return x.inner.PreferredMaximumSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredMaximumSize"))
+	return _r
 }
-
-func (x *ViewController) asViewController() *raw.NSViewController { return x.inner }
-
-func (x *ViewController) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
 
 // ViewControllerable is the interface implemented by [ViewController], for mocking and DI.
 type ViewControllerable interface {
-	Unwrap() *raw.NSViewController
-	WithRepresentedObject(representedObject objc.ID) *ViewController
+	obj.Object
+	WithRepresentedObject(representedObject obj.Object) *ViewController
 	WithTitle(title string) *ViewController
 	WithView(view ViewProvider) *ViewController
 	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *ViewController
@@ -541,11 +419,10 @@ type ViewControllerable interface {
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *ViewController
 	WithNextResponder(nextResponder ResponderProvider) *ViewController
 	WithMenu(menu *Menu) *ViewController
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ViewController
+	WithUserActivity(userActivity obj.Object) *ViewController
 	WithTouchBar(touchBar *TouchBar) *ViewController
 	LoadView()
 	LoadViewIfNeeded()
-	CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer)
 	CommitEditing() bool
 	DiscardEditing()
 	ViewDidLoad()
@@ -556,41 +433,38 @@ type ViewControllerable interface {
 	UpdateViewConstraints()
 	ViewWillLayout()
 	ViewDidLayout()
-	NibName() string
-	NibBundle() *foundation.NSBundle
-	RepresentedObject() objc.ID
-	SetRepresentedObject(representedObject objc.ID)
+	NibName() obj.Object
+	NibBundle() obj.Object
+	RepresentedObject() obj.Object
+	SetRepresentedObject(representedObject obj.Object)
 	Title() string
 	SetTitle(title string)
 	View() *View
-	SetView(view *raw.NSView)
+	SetView(view *View)
 	ViewIfLoaded() *View
 	IsViewLoaded() bool
 	PreferredContentSize() corefoundation.CGSize
 	SetPreferredContentSize(preferredContentSize corefoundation.CGSize)
-	PresentViewControllerAnimator(viewController *raw.NSViewController, animator raw.NSViewControllerPresentationAnimator)
-	DismissViewController(viewController *raw.NSViewController)
-	DismissController(sender objc.ID)
+	DismissViewController(viewController *ViewController)
+	DismissController(sender obj.Object)
 	PresentedViewControllers() []*ViewController
 	PresentingViewController() *ViewController
-	PresentViewControllerAsSheet(viewController *raw.NSViewController)
-	PresentViewControllerAsModalWindow(viewController *raw.NSViewController)
-	PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior)
-	PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior, hasFullSizeContent bool)
-	TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options NSViewControllerTransitionOptions) error
-	AddChildViewController(childViewController *raw.NSViewController)
+	PresentViewControllerAsSheet(viewController *ViewController)
+	PresentViewControllerAsModalWindow(viewController *ViewController)
+	TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *ViewController, toViewController *ViewController, options ViewControllerTransitionOptions) error
+	AddChildViewController(childViewController *ViewController)
 	RemoveFromParentViewController()
-	InsertChildViewControllerAtIndex(childViewController *raw.NSViewController, index int)
+	InsertChildViewControllerAtIndex(childViewController *ViewController, index int)
 	RemoveChildViewControllerAtIndex(index int)
-	PreferredContentSizeDidChangeForViewController(viewController *raw.NSViewController)
+	PreferredContentSizeDidChangeForViewController(viewController *ViewController)
 	ViewWillTransitionToSize(newSize corefoundation.CGSize)
 	ParentViewController() *ViewController
 	ChildViewControllers() []*ViewController
-	SetChildViewControllers(childViewControllers ...ViewControllerProvider)
+	SetChildViewControllers(childViewControllers []*ViewController)
 	Storyboard() *Storyboard
-	ExtensionContext() *foundation.NSExtensionContext
+	ExtensionContext() obj.Object
 	SourceItemView() *View
-	SetSourceItemView(sourceItemView *raw.NSView)
+	SetSourceItemView(sourceItemView *View)
 	PreferredScreenOrigin() corefoundation.CGPoint
 	SetPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint)
 	PreferredMinimumSize() corefoundation.CGSize
@@ -598,3 +472,12 @@ type ViewControllerable interface {
 }
 
 var _ ViewControllerable = (*ViewController)(nil)
+
+// isViewController marks ViewController — and, by embedding promotion, its
+// subclasses — as a member of the ViewController hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ViewController) isViewController() {}
+
+var _ ViewControllerProvider = (*ViewController)(nil)
+
+var _ ResponderProvider = (*ViewController)(nil)

@@ -5,27 +5,26 @@
 package replaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// RPVideoSampleOrientationKey returns the string constant RPVideoSampleOrientationKey as an objc.ID, for use as a dictionary key or selector argument.
-func RPVideoSampleOrientationKey() objc.ID {
-	return purego.CFConstant(raw.RPVideoSampleOrientationKey())
+// RPVideoSampleOrientationKey returns the string constant RPVideoSampleOrientationKey, for use as a dictionary key or argument.
+func RPVideoSampleOrientationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("RPVideoSampleOrientationKey")))
 }
 
-// RPApplicationInfoBundleIdentifierKey returns the string constant RPApplicationInfoBundleIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func RPApplicationInfoBundleIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.RPApplicationInfoBundleIdentifierKey())
+// RPApplicationInfoBundleIdentifierKey returns the string constant RPApplicationInfoBundleIdentifierKey, for use as a dictionary key or argument.
+func RPApplicationInfoBundleIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("RPApplicationInfoBundleIdentifierKey")))
 }
 
-// RPRecordingErrorDomain returns the string constant RPRecordingErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func RPRecordingErrorDomain() objc.ID {
-	return purego.CFConstant(raw.RPRecordingErrorDomain())
+// RPRecordingErrorDomain returns the string constant RPRecordingErrorDomain, for use as a dictionary key or argument.
+func RPRecordingErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("RPRecordingErrorDomain")))
 }
 
-// SCStreamErrorDomain returns the string constant SCStreamErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SCStreamErrorDomain() objc.ID {
-	return purego.CFConstant(raw.SCStreamErrorDomain())
+// SCStreamErrorDomain returns the string constant SCStreamErrorDomain, for use as a dictionary key or argument.
+func SCStreamErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SCStreamErrorDomain")))
 }

@@ -9,196 +9,208 @@ import (
 )
 
 // The possible values for controller player indices.
-type GCControllerPlayerIndex int64
+type ControllerPlayerIndex int64
 
 const (
 	// The default index for a player on a controller.
-	GCControllerPlayerIndexUnset GCControllerPlayerIndex = -1
+	ControllerPlayerIndexUnset ControllerPlayerIndex = -1
 	// Player one is using the controller.
-	GCControllerPlayerIndex1 GCControllerPlayerIndex = 0
+	ControllerPlayerIndex1 ControllerPlayerIndex = 0
 	// Player two is using the controller.
-	GCControllerPlayerIndex2 GCControllerPlayerIndex = 1
+	ControllerPlayerIndex2 ControllerPlayerIndex = 1
 	// Player three is using the controller.
-	GCControllerPlayerIndex3 GCControllerPlayerIndex = 2
+	ControllerPlayerIndex3 ControllerPlayerIndex = 2
 	// Player four is using the controller.
-	GCControllerPlayerIndex4 GCControllerPlayerIndex = 3
+	ControllerPlayerIndex4 ControllerPlayerIndex = 3
 )
 
-func (e GCControllerPlayerIndex) String() string {
+// String returns the ControllerPlayerIndex constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControllerPlayerIndex) String() string {
 	switch e {
-	case GCControllerPlayerIndexUnset:
-		return "GCControllerPlayerIndexUnset"
-	case GCControllerPlayerIndex1:
-		return "GCControllerPlayerIndex1"
-	case GCControllerPlayerIndex2:
-		return "GCControllerPlayerIndex2"
-	case GCControllerPlayerIndex3:
-		return "GCControllerPlayerIndex3"
-	case GCControllerPlayerIndex4:
-		return "GCControllerPlayerIndex4"
+	case ControllerPlayerIndexUnset:
+		return "ControllerPlayerIndexUnset"
+	case ControllerPlayerIndex1:
+		return "ControllerPlayerIndex1"
+	case ControllerPlayerIndex2:
+		return "ControllerPlayerIndex2"
+	case ControllerPlayerIndex3:
+		return "ControllerPlayerIndex3"
+	case ControllerPlayerIndex4:
+		return "ControllerPlayerIndex4"
 	default:
-		return fmt.Sprintf("GCControllerPlayerIndex(%d)", int64(e))
+		return fmt.Sprintf("ControllerPlayerIndex(%d)", int64(e))
 	}
 }
 
 // A state that indicates whether a device’s battery has power and is charging.
-type GCDeviceBatteryState int64
+type DeviceBatteryState int64
 
 const (
-	GCDeviceBatteryStateUnknown     GCDeviceBatteryState = -1
-	GCDeviceBatteryStateDischarging GCDeviceBatteryState = 0
-	GCDeviceBatteryStateCharging    GCDeviceBatteryState = 1
-	GCDeviceBatteryStateFull        GCDeviceBatteryState = 2
+	DeviceBatteryStateUnknown     DeviceBatteryState = -1
+	DeviceBatteryStateDischarging DeviceBatteryState = 0
+	DeviceBatteryStateCharging    DeviceBatteryState = 1
+	DeviceBatteryStateFull        DeviceBatteryState = 2
 )
 
-func (e GCDeviceBatteryState) String() string {
+// String returns the DeviceBatteryState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceBatteryState) String() string {
 	switch e {
-	case GCDeviceBatteryStateUnknown:
-		return "GCDeviceBatteryStateUnknown"
-	case GCDeviceBatteryStateDischarging:
-		return "GCDeviceBatteryStateDischarging"
-	case GCDeviceBatteryStateCharging:
-		return "GCDeviceBatteryStateCharging"
-	case GCDeviceBatteryStateFull:
-		return "GCDeviceBatteryStateFull"
+	case DeviceBatteryStateUnknown:
+		return "DeviceBatteryStateUnknown"
+	case DeviceBatteryStateDischarging:
+		return "DeviceBatteryStateDischarging"
+	case DeviceBatteryStateCharging:
+		return "DeviceBatteryStateCharging"
+	case DeviceBatteryStateFull:
+		return "DeviceBatteryStateFull"
 	default:
-		return fmt.Sprintf("GCDeviceBatteryState(%d)", int64(e))
+		return fmt.Sprintf("DeviceBatteryState(%d)", int64(e))
 	}
 }
 
 // The possible modes of an adaptive trigger.
-type GCDualSenseAdaptiveTriggerMode int64
+type DualSenseAdaptiveTriggerMode int64
 
 const (
 	// The adaptive trigger effect is disabled.
-	GCDualSenseAdaptiveTriggerModeOff GCDualSenseAdaptiveTriggerMode = 0
+	DualSenseAdaptiveTriggerModeOff DualSenseAdaptiveTriggerMode = 0
 	// The adaptive trigger effect provides constant feedback from the start position onwards.
-	GCDualSenseAdaptiveTriggerModeFeedback GCDualSenseAdaptiveTriggerMode = 1
+	DualSenseAdaptiveTriggerModeFeedback DualSenseAdaptiveTriggerMode = 1
 	// The adaptive trigger effect provides feedback from the start position to the end position, emulating the feeling of pulling the trigger on a weapon.
-	GCDualSenseAdaptiveTriggerModeWeapon GCDualSenseAdaptiveTriggerMode = 2
+	DualSenseAdaptiveTriggerModeWeapon DualSenseAdaptiveTriggerMode = 2
 	// The adaptive trigger effect provides a constant vibration effect from the start position onwards.
-	GCDualSenseAdaptiveTriggerModeVibration GCDualSenseAdaptiveTriggerMode = 3
+	DualSenseAdaptiveTriggerModeVibration DualSenseAdaptiveTriggerMode = 3
 	// The adaptive trigger effect provides feedback from the start position to the end position, linearly interpolated between the start and end strengths.
-	GCDualSenseAdaptiveTriggerModeSlopeFeedback GCDualSenseAdaptiveTriggerMode = 4
+	DualSenseAdaptiveTriggerModeSlopeFeedback DualSenseAdaptiveTriggerMode = 4
 )
 
-func (e GCDualSenseAdaptiveTriggerMode) String() string {
+// String returns the DualSenseAdaptiveTriggerMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DualSenseAdaptiveTriggerMode) String() string {
 	switch e {
-	case GCDualSenseAdaptiveTriggerModeOff:
-		return "GCDualSenseAdaptiveTriggerModeOff"
-	case GCDualSenseAdaptiveTriggerModeFeedback:
-		return "GCDualSenseAdaptiveTriggerModeFeedback"
-	case GCDualSenseAdaptiveTriggerModeWeapon:
-		return "GCDualSenseAdaptiveTriggerModeWeapon"
-	case GCDualSenseAdaptiveTriggerModeVibration:
-		return "GCDualSenseAdaptiveTriggerModeVibration"
-	case GCDualSenseAdaptiveTriggerModeSlopeFeedback:
-		return "GCDualSenseAdaptiveTriggerModeSlopeFeedback"
+	case DualSenseAdaptiveTriggerModeOff:
+		return "DualSenseAdaptiveTriggerModeOff"
+	case DualSenseAdaptiveTriggerModeFeedback:
+		return "DualSenseAdaptiveTriggerModeFeedback"
+	case DualSenseAdaptiveTriggerModeWeapon:
+		return "DualSenseAdaptiveTriggerModeWeapon"
+	case DualSenseAdaptiveTriggerModeVibration:
+		return "DualSenseAdaptiveTriggerModeVibration"
+	case DualSenseAdaptiveTriggerModeSlopeFeedback:
+		return "DualSenseAdaptiveTriggerModeSlopeFeedback"
 	default:
-		return fmt.Sprintf("GCDualSenseAdaptiveTriggerMode(%d)", int64(e))
+		return fmt.Sprintf("DualSenseAdaptiveTriggerMode(%d)", int64(e))
 	}
 }
 
 // The possible states of an adaptive trigger.
-type GCDualSenseAdaptiveTriggerStatus int64
+type DualSenseAdaptiveTriggerStatus int64
 
 const (
 	// The adaptive trigger status cannot be determined.
-	GCDualSenseAdaptiveTriggerStatusUnknown GCDualSenseAdaptiveTriggerStatus = -1
+	DualSenseAdaptiveTriggerStatusUnknown DualSenseAdaptiveTriggerStatus = -1
 	// The adaptive trigger is in feedback mode, and a resistive load has not been applied yet.
-	GCDualSenseAdaptiveTriggerStatusFeedbackNoLoad GCDualSenseAdaptiveTriggerStatus = 0
+	DualSenseAdaptiveTriggerStatusFeedbackNoLoad DualSenseAdaptiveTriggerStatus = 0
 	// The adaptive trigger is in feedback mode, and a resistive load is applied.
-	GCDualSenseAdaptiveTriggerStatusFeedbackLoadApplied GCDualSenseAdaptiveTriggerStatus = 1
+	DualSenseAdaptiveTriggerStatusFeedbackLoadApplied DualSenseAdaptiveTriggerStatus = 1
 	// The adaptive trigger is in weapon mode, the trigger is ready to fire, and a resistive load has not been applied yet.
-	GCDualSenseAdaptiveTriggerStatusWeaponReady GCDualSenseAdaptiveTriggerStatus = 2
+	DualSenseAdaptiveTriggerStatusWeaponReady DualSenseAdaptiveTriggerStatus = 2
 	// The adaptive trigger is in weapon mode, the trigger is firing, and a resistive load is currently being applied.
-	GCDualSenseAdaptiveTriggerStatusWeaponFiring GCDualSenseAdaptiveTriggerStatus = 3
+	DualSenseAdaptiveTriggerStatusWeaponFiring DualSenseAdaptiveTriggerStatus = 3
 	// The adaptive trigger is in weapon mode, the trigger has fired, and a resistive load is no longer being applied.
-	GCDualSenseAdaptiveTriggerStatusWeaponFired GCDualSenseAdaptiveTriggerStatus = 4
+	DualSenseAdaptiveTriggerStatusWeaponFired DualSenseAdaptiveTriggerStatus = 4
 	// The adaptive trigger is in vibration mode, and the trigger is not vibrating.
-	GCDualSenseAdaptiveTriggerStatusVibrationNotVibrating GCDualSenseAdaptiveTriggerStatus = 5
+	DualSenseAdaptiveTriggerStatusVibrationNotVibrating DualSenseAdaptiveTriggerStatus = 5
 	// The adaptive trigger is in vibration mode, and the trigger is currently vibrating.
-	GCDualSenseAdaptiveTriggerStatusVibrationIsVibrating GCDualSenseAdaptiveTriggerStatus = 6
+	DualSenseAdaptiveTriggerStatusVibrationIsVibrating DualSenseAdaptiveTriggerStatus = 6
 	// The adaptive trigger is in slope feedback mode, the trigger is ready to apply a resistive load, but a resistive load has not been applied yet.
-	GCDualSenseAdaptiveTriggerStatusSlopeFeedbackReady GCDualSenseAdaptiveTriggerStatus = 7
+	DualSenseAdaptiveTriggerStatusSlopeFeedbackReady DualSenseAdaptiveTriggerStatus = 7
 	// The adaptive trigger is in slope feedback mode, and a resistive load is currently being applied to the trigger.
-	GCDualSenseAdaptiveTriggerStatusSlopeFeedbackApplyingLoad GCDualSenseAdaptiveTriggerStatus = 8
+	DualSenseAdaptiveTriggerStatusSlopeFeedbackApplyingLoad DualSenseAdaptiveTriggerStatus = 8
 	// The adaptive trigger is in slope feedback mode, a resistive load has previously been applied, but is no longer being applied.
-	GCDualSenseAdaptiveTriggerStatusSlopeFeedbackFinished GCDualSenseAdaptiveTriggerStatus = 9
+	DualSenseAdaptiveTriggerStatusSlopeFeedbackFinished DualSenseAdaptiveTriggerStatus = 9
 )
 
-func (e GCDualSenseAdaptiveTriggerStatus) String() string {
+// String returns the DualSenseAdaptiveTriggerStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DualSenseAdaptiveTriggerStatus) String() string {
 	switch e {
-	case GCDualSenseAdaptiveTriggerStatusUnknown:
-		return "GCDualSenseAdaptiveTriggerStatusUnknown"
-	case GCDualSenseAdaptiveTriggerStatusFeedbackNoLoad:
-		return "GCDualSenseAdaptiveTriggerStatusFeedbackNoLoad"
-	case GCDualSenseAdaptiveTriggerStatusFeedbackLoadApplied:
-		return "GCDualSenseAdaptiveTriggerStatusFeedbackLoadApplied"
-	case GCDualSenseAdaptiveTriggerStatusWeaponReady:
-		return "GCDualSenseAdaptiveTriggerStatusWeaponReady"
-	case GCDualSenseAdaptiveTriggerStatusWeaponFiring:
-		return "GCDualSenseAdaptiveTriggerStatusWeaponFiring"
-	case GCDualSenseAdaptiveTriggerStatusWeaponFired:
-		return "GCDualSenseAdaptiveTriggerStatusWeaponFired"
-	case GCDualSenseAdaptiveTriggerStatusVibrationNotVibrating:
-		return "GCDualSenseAdaptiveTriggerStatusVibrationNotVibrating"
-	case GCDualSenseAdaptiveTriggerStatusVibrationIsVibrating:
-		return "GCDualSenseAdaptiveTriggerStatusVibrationIsVibrating"
-	case GCDualSenseAdaptiveTriggerStatusSlopeFeedbackReady:
-		return "GCDualSenseAdaptiveTriggerStatusSlopeFeedbackReady"
-	case GCDualSenseAdaptiveTriggerStatusSlopeFeedbackApplyingLoad:
-		return "GCDualSenseAdaptiveTriggerStatusSlopeFeedbackApplyingLoad"
-	case GCDualSenseAdaptiveTriggerStatusSlopeFeedbackFinished:
-		return "GCDualSenseAdaptiveTriggerStatusSlopeFeedbackFinished"
+	case DualSenseAdaptiveTriggerStatusUnknown:
+		return "DualSenseAdaptiveTriggerStatusUnknown"
+	case DualSenseAdaptiveTriggerStatusFeedbackNoLoad:
+		return "DualSenseAdaptiveTriggerStatusFeedbackNoLoad"
+	case DualSenseAdaptiveTriggerStatusFeedbackLoadApplied:
+		return "DualSenseAdaptiveTriggerStatusFeedbackLoadApplied"
+	case DualSenseAdaptiveTriggerStatusWeaponReady:
+		return "DualSenseAdaptiveTriggerStatusWeaponReady"
+	case DualSenseAdaptiveTriggerStatusWeaponFiring:
+		return "DualSenseAdaptiveTriggerStatusWeaponFiring"
+	case DualSenseAdaptiveTriggerStatusWeaponFired:
+		return "DualSenseAdaptiveTriggerStatusWeaponFired"
+	case DualSenseAdaptiveTriggerStatusVibrationNotVibrating:
+		return "DualSenseAdaptiveTriggerStatusVibrationNotVibrating"
+	case DualSenseAdaptiveTriggerStatusVibrationIsVibrating:
+		return "DualSenseAdaptiveTriggerStatusVibrationIsVibrating"
+	case DualSenseAdaptiveTriggerStatusSlopeFeedbackReady:
+		return "DualSenseAdaptiveTriggerStatusSlopeFeedbackReady"
+	case DualSenseAdaptiveTriggerStatusSlopeFeedbackApplyingLoad:
+		return "DualSenseAdaptiveTriggerStatusSlopeFeedbackApplyingLoad"
+	case DualSenseAdaptiveTriggerStatusSlopeFeedbackFinished:
+		return "DualSenseAdaptiveTriggerStatusSlopeFeedbackFinished"
 	default:
-		return fmt.Sprintf("GCDualSenseAdaptiveTriggerStatus(%d)", int64(e))
+		return fmt.Sprintf("DualSenseAdaptiveTriggerStatus(%d)", int64(e))
 	}
 }
 
 // A state for handling input when an element is part of a system gesture.
-type GCSystemGestureState int64
+type SystemGestureState int64
 
 const (
 	// System gesture recognizers will run before input is sent to app, this is the default state
-	GCSystemGestureStateEnabled GCSystemGestureState = 0
+	SystemGestureStateEnabled SystemGestureState = 0
 	// Input is sent to app and processed by system gesture recognizers simultaneously
-	GCSystemGestureStateAlwaysReceive GCSystemGestureState = 1
+	SystemGestureStateAlwaysReceive SystemGestureState = 1
 	// System gesture recognizers will not run at all. Input is passed directly to app
-	GCSystemGestureStateDisabled GCSystemGestureState = 2
+	SystemGestureStateDisabled SystemGestureState = 2
 )
 
-func (e GCSystemGestureState) String() string {
+// String returns the SystemGestureState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SystemGestureState) String() string {
 	switch e {
-	case GCSystemGestureStateEnabled:
-		return "GCSystemGestureStateEnabled"
-	case GCSystemGestureStateAlwaysReceive:
-		return "GCSystemGestureStateAlwaysReceive"
-	case GCSystemGestureStateDisabled:
-		return "GCSystemGestureStateDisabled"
+	case SystemGestureStateEnabled:
+		return "SystemGestureStateEnabled"
+	case SystemGestureStateAlwaysReceive:
+		return "SystemGestureStateAlwaysReceive"
+	case SystemGestureStateDisabled:
+		return "SystemGestureStateDisabled"
 	default:
-		return fmt.Sprintf("GCSystemGestureState(%d)", int64(e))
+		return fmt.Sprintf("SystemGestureState(%d)", int64(e))
 	}
 }
 
 // The possible states of the user’s touch.
-type GCTouchState int64
+type TouchState int64
 
 const (
-	GCTouchStateUp     GCTouchState = 0
-	GCTouchStateDown   GCTouchState = 1
-	GCTouchStateMoving GCTouchState = 2
+	TouchStateUp     TouchState = 0
+	TouchStateDown   TouchState = 1
+	TouchStateMoving TouchState = 2
 )
 
-func (e GCTouchState) String() string {
+// String returns the TouchState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TouchState) String() string {
 	switch e {
-	case GCTouchStateUp:
-		return "GCTouchStateUp"
-	case GCTouchStateDown:
-		return "GCTouchStateDown"
-	case GCTouchStateMoving:
-		return "GCTouchStateMoving"
+	case TouchStateUp:
+		return "TouchStateUp"
+	case TouchStateDown:
+		return "TouchStateDown"
+	case TouchStateMoving:
+		return "TouchStateMoving"
 	default:
-		return fmt.Sprintf("GCTouchState(%d)", int64(e))
+		return fmt.Sprintf("TouchState(%d)", int64(e))
 	}
 }

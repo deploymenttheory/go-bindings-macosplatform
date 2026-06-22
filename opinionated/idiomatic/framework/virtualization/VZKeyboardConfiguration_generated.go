@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a configuring a keyboard.
+// KeyboardConfiguration is an idiomatic wrapper over the Objective-C class VZKeyboardConfiguration.
 //
-// KeyboardConfiguration wraps [raw.VZKeyboardConfiguration] with a fluent Go API.
+// KeyboardConfiguration is an abstract base — you do not construct it directly. Construct one of [MacKeyboardConfiguration], [USBKeyboardConfiguration] and pass it where a KeyboardConfiguration is accepted.
+//
+// The base class for a configuring a keyboard.
 type KeyboardConfiguration struct {
-	inner *raw.VZKeyboardConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZKeyboardConfiguration].
-func (x *KeyboardConfiguration) Unwrap() *raw.VZKeyboardConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyboardConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyboardConfigurationFromID adopts an existing object pointer as a KeyboardConfiguration (nil for 0).
+// KeyboardConfigurationFromID adopts an existing Objective-C object as a KeyboardConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyboardConfigurationFromID(id objc.ID) *KeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &KeyboardConfiguration{inner: raw.VZKeyboardConfigurationFromID(id)}
+	x := &KeyboardConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewKeyboardConfiguration creates a new [KeyboardConfiguration].
-func NewKeyboardConfiguration() *KeyboardConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZKeyboardConfiguration")), objc.RegisterName("new"))
-	return &KeyboardConfiguration{inner: raw.VZKeyboardConfigurationFromID(_id)}
+// keyboardConfigurationAdopt wraps an Objective-C object that this code just created as a
+// KeyboardConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyboardConfigurationAdopt(id objc.ID) *KeyboardConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &KeyboardConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *KeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *KeyboardConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyboardConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyboardConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeyboardConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // KeyboardConfigurationable is the interface implemented by [KeyboardConfiguration], for mocking and DI.
 type KeyboardConfigurationable interface {
-	Unwrap() *raw.VZKeyboardConfiguration
+	obj.Object
 }
 
 var _ KeyboardConfigurationable = (*KeyboardConfiguration)(nil)
+
+// isKeyboardConfiguration marks KeyboardConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the KeyboardConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *KeyboardConfiguration) isKeyboardConfiguration() {}
+
+var _ KeyboardConfigurationProvider = (*KeyboardConfiguration)(nil)

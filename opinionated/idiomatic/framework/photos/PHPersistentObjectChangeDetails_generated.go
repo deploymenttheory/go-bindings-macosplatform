@@ -5,66 +5,104 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the local identifiers that change between requests using a change token.
+// PersistentObjectChangeDetails is an idiomatic wrapper over the Objective-C class PHPersistentObjectChangeDetails.
 //
-// PersistentObjectChangeDetails wraps [raw.PHPersistentObjectChangeDetails] with a fluent Go API.
+// An object that represents the local identifiers that change between requests using a change token.
 type PersistentObjectChangeDetails struct {
-	inner *raw.PHPersistentObjectChangeDetails
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPersistentObjectChangeDetails].
-func (x *PersistentObjectChangeDetails) Unwrap() *raw.PHPersistentObjectChangeDetails { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentObjectChangeDetails) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentObjectChangeDetailsFromID adopts an existing object pointer as a PersistentObjectChangeDetails (nil for 0).
+// PersistentObjectChangeDetailsFromID adopts an existing Objective-C object as a PersistentObjectChangeDetails
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentObjectChangeDetailsFromID(id objc.ID) *PersistentObjectChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentObjectChangeDetails{inner: raw.PHPersistentObjectChangeDetailsFromID(id)}
+	x := &PersistentObjectChangeDetails{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentObjectChangeDetails creates a new [PersistentObjectChangeDetails].
+// persistentObjectChangeDetailsAdopt wraps an Objective-C object that this code just created as a
+// PersistentObjectChangeDetails (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentObjectChangeDetailsAdopt(id objc.ID) *PersistentObjectChangeDetails {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentObjectChangeDetails{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentObjectChangeDetails) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentObjectChangeDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentObjectChangeDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentObjectChangeDetails) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersistentObjectChangeDetails creates a new PersistentObjectChangeDetails.
 func NewPersistentObjectChangeDetails() *PersistentObjectChangeDetails {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPersistentObjectChangeDetails")), objc.RegisterName("new"))
-	return &PersistentObjectChangeDetails{inner: raw.PHPersistentObjectChangeDetailsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentObjectChangeDetails")), objc.RegisterName("new"))
+	return persistentObjectChangeDetailsAdopt(_id)
 }
 
-// ObjectType calls the underlying ObjectType.
-func (x *PersistentObjectChangeDetails) ObjectType() PHObjectType {
-	return PHObjectType(x.inner.ObjectType())
+// ObjectType wraps the corresponding Objective-C method.
+func (x *PersistentObjectChangeDetails) ObjectType() ObjectType {
+	_r := objc.Send[ObjectType](objref.IDOf(x), objc.RegisterName("objectType"))
+	return _r
 }
 
-// InsertedLocalIdentifiers calls the underlying InsertedLocalIdentifiers.
-func (x *PersistentObjectChangeDetails) InsertedLocalIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.InsertedLocalIdentifiers()
+// InsertedLocalIdentifiers wraps the corresponding Objective-C method.
+func (x *PersistentObjectChangeDetails) InsertedLocalIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedLocalIdentifiers"))
+	return obj.Wrap(_r)
 }
 
-// UpdatedLocalIdentifiers calls the underlying UpdatedLocalIdentifiers.
-func (x *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.UpdatedLocalIdentifiers()
+// UpdatedLocalIdentifiers wraps the corresponding Objective-C method.
+func (x *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedLocalIdentifiers"))
+	return obj.Wrap(_r)
 }
 
-// DeletedLocalIdentifiers calls the underlying DeletedLocalIdentifiers.
-func (x *PersistentObjectChangeDetails) DeletedLocalIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.DeletedLocalIdentifiers()
+// DeletedLocalIdentifiers wraps the corresponding Objective-C method.
+func (x *PersistentObjectChangeDetails) DeletedLocalIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedLocalIdentifiers"))
+	return obj.Wrap(_r)
 }
 
 // PersistentObjectChangeDetailsable is the interface implemented by [PersistentObjectChangeDetails], for mocking and DI.
 type PersistentObjectChangeDetailsable interface {
-	Unwrap() *raw.PHPersistentObjectChangeDetails
-	ObjectType() PHObjectType
-	InsertedLocalIdentifiers() *foundation.NSSet[*foundation.NSString]
-	UpdatedLocalIdentifiers() *foundation.NSSet[*foundation.NSString]
-	DeletedLocalIdentifiers() *foundation.NSSet[*foundation.NSString]
+	obj.Object
+	ObjectType() ObjectType
+	InsertedLocalIdentifiers() obj.Object
+	UpdatedLocalIdentifiers() obj.Object
+	DeletedLocalIdentifiers() obj.Object
 }
 
 var _ PersistentObjectChangeDetailsable = (*PersistentObjectChangeDetails)(nil)

@@ -5,57 +5,85 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the interface to query for the requirements of the current pass.
+// AssetWriterInputPassDescription is an idiomatic wrapper over the Objective-C class AVAssetWriterInputPassDescription.
 //
-// AssetWriterInputPassDescription wraps [raw.AVAssetWriterInputPassDescription] with a fluent Go API.
+// An object that defines the interface to query for the requirements of the current pass.
 type AssetWriterInputPassDescription struct {
-	inner *raw.AVAssetWriterInputPassDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetWriterInputPassDescription].
-func (x *AssetWriterInputPassDescription) Unwrap() *raw.AVAssetWriterInputPassDescription {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetWriterInputPassDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetWriterInputPassDescriptionFromID adopts an existing object pointer as a AssetWriterInputPassDescription (nil for 0).
+// AssetWriterInputPassDescriptionFromID adopts an existing Objective-C object as a AssetWriterInputPassDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetWriterInputPassDescriptionFromID(id objc.ID) *AssetWriterInputPassDescription {
 	if id == 0 {
 		return nil
 	}
-	return &AssetWriterInputPassDescription{inner: raw.AVAssetWriterInputPassDescriptionFromID(id)}
+	x := &AssetWriterInputPassDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetWriterInputPassDescription creates a new [AssetWriterInputPassDescription].
-func NewAssetWriterInputPassDescription() *AssetWriterInputPassDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputPassDescription")), objc.RegisterName("new"))
-	return &AssetWriterInputPassDescription{inner: raw.AVAssetWriterInputPassDescriptionFromID(_id)}
-}
-
-// SourceTimeRanges returns the collection as a Go slice.
-func (x *AssetWriterInputPassDescription) SourceTimeRanges() []*foundation.NSValue {
-	arr := x.inner.SourceTimeRanges()
-	if arr == nil {
+// assetWriterInputPassDescriptionAdopt wraps an Objective-C object that this code just created as a
+// AssetWriterInputPassDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetWriterInputPassDescriptionAdopt(id objc.ID) *AssetWriterInputPassDescription {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+	x := &AssetWriterInputPassDescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetWriterInputPassDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetWriterInputPassDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetWriterInputPassDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputPassDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputPassDescription creates a new AssetWriterInputPassDescription.
+func NewAssetWriterInputPassDescription() *AssetWriterInputPassDescription {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputPassDescription")), objc.RegisterName("new"))
+	return assetWriterInputPassDescriptionAdopt(_id)
+}
+
+// SourceTimeRanges wraps the corresponding Objective-C method.
+//
+// SourceTimeRanges returns the collection as a Go slice.
+func (x *AssetWriterInputPassDescription) SourceTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AssetWriterInputPassDescriptionable is the interface implemented by [AssetWriterInputPassDescription], for mocking and DI.
 type AssetWriterInputPassDescriptionable interface {
-	Unwrap() *raw.AVAssetWriterInputPassDescription
-	SourceTimeRanges() []*foundation.NSValue
+	obj.Object
+	SourceTimeRanges() []obj.Object
 }
 
 var _ AssetWriterInputPassDescriptionable = (*AssetWriterInputPassDescription)(nil)

@@ -5,67 +5,72 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port name server that takes and returns Mach port objects.
+// MachBootstrapServer is an idiomatic wrapper over the Objective-C class NSMachBootstrapServer.
 //
-// MachBootstrapServer wraps [raw.NSMachBootstrapServer] with a fluent Go API.
+// It embeds [PortNameServer], promoting that type's methods.
+//
+// A port name server that takes and returns Mach port objects.
 type MachBootstrapServer struct {
-	inner *raw.NSMachBootstrapServer
+	PortNameServer
 }
 
-// Unwrap returns the underlying [raw.NSMachBootstrapServer].
-func (x *MachBootstrapServer) Unwrap() *raw.NSMachBootstrapServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MachBootstrapServer) ID() objc.ID { return x.inner.Ptr() }
-
-// MachBootstrapServerFromID adopts an existing object pointer as a MachBootstrapServer (nil for 0).
+// MachBootstrapServerFromID adopts an existing Objective-C object as a MachBootstrapServer
+// (nil for 0), retaining it and registering a release finalizer.
 func MachBootstrapServerFromID(id objc.ID) *MachBootstrapServer {
 	if id == 0 {
 		return nil
 	}
-	return &MachBootstrapServer{inner: raw.NSMachBootstrapServerFromID(id)}
-}
-
-// NewMachBootstrapServer creates a new [MachBootstrapServer].
-func NewMachBootstrapServer() *MachBootstrapServer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMachBootstrapServer")), objc.RegisterName("new"))
-	return &MachBootstrapServer{inner: raw.NSMachBootstrapServerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MachBootstrapServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachBootstrapServer {
-	x.inner.NSPortNameServer.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MachBootstrapServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Looks up and returns the port for the vended service that is registered under the specified name.
-//
-// ServicePortWithName calls the underlying ServicePortWithName.
-func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
-	_r := x.inner.ServicePortWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
+// machBootstrapServerAdopt wraps an Objective-C object that this code just created as a
+// MachBootstrapServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func machBootstrapServerAdopt(id objc.ID) *MachBootstrapServer {
+	if id == 0 {
 		return nil
 	}
-	return &Port{inner: _r}
+	x := &MachBootstrapServer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MachBootstrapServer) asPortNameServer() *raw.NSPortNameServer {
-	return &x.inner.NSPortNameServer
+// NewMachBootstrapServer creates a new MachBootstrapServer.
+func NewMachBootstrapServer() *MachBootstrapServer {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMachBootstrapServer")), objc.RegisterName("new"))
+	return machBootstrapServerAdopt(_id)
 }
 
-func (x *MachBootstrapServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MachBootstrapServer) WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// ServicePortWithName looks up and returns the port for the vended service that is registered under the specified name.
+func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicePortWithName:"), purego.NSString(name))
+	return PortFromID(_r)
+}
 
 // MachBootstrapServerable is the interface implemented by [MachBootstrapServer], for mocking and DI.
 type MachBootstrapServerable interface {
-	Unwrap() *raw.NSMachBootstrapServer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachBootstrapServer
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer
 	ServicePortWithName(name string) *Port
 }
 
 var _ MachBootstrapServerable = (*MachBootstrapServer)(nil)
+
+var _ PortNameServerProvider = (*MachBootstrapServer)(nil)

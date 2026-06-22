@@ -4,15 +4,14 @@
 
 package hypervisor
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hypervisor"
-)
+// The structure that describes information about an exit from the virtual CPU (vCPU) to the host.
+type HvVcpuExitExceptionT struct {
+	Syndrome         uint64
+	Virtual_address  uint64
+	Physical_address uint64
+}
 
-// HvVcpuExitExceptionT is a type alias for the raw HvVcpuExitExceptionT value-type struct.
-type HvVcpuExitExceptionT = raw.HvVcpuExitExceptionT
-
-// HvVcpuExitT is a type alias for the raw HvVcpuExitT value-type struct.
-type HvVcpuExitT = raw.HvVcpuExitT
-
-// HvVcpuSmeStateT is a type alias for the raw HvVcpuSmeStateT value-type struct.
-type HvVcpuSmeStateT = raw.HvVcpuSmeStateT
+type HvVcpuSmeStateT struct {
+	Streaming_sve_mode_enabled bool
+	Za_storage_enabled         bool
+}

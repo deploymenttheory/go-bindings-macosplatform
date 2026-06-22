@@ -5,51 +5,65 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting that the player seek to a new position.
+// SeekCommandEvent is an idiomatic wrapper over the Objective-C class MPSeekCommandEvent.
 //
-// SeekCommandEvent wraps [raw.MPSeekCommandEvent] with a fluent Go API.
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting that the player seek to a new position.
 type SeekCommandEvent struct {
-	inner *raw.MPSeekCommandEvent
+	RemoteCommandEvent
 }
 
-// Unwrap returns the underlying [raw.MPSeekCommandEvent].
-func (x *SeekCommandEvent) Unwrap() *raw.MPSeekCommandEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SeekCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SeekCommandEventFromID adopts an existing object pointer as a SeekCommandEvent (nil for 0).
+// SeekCommandEventFromID adopts an existing Objective-C object as a SeekCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SeekCommandEventFromID(id objc.ID) *SeekCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SeekCommandEvent{inner: raw.MPSeekCommandEventFromID(id)}
+	x := &SeekCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSeekCommandEvent creates a new [SeekCommandEvent].
+// seekCommandEventAdopt wraps an Objective-C object that this code just created as a
+// SeekCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func seekCommandEventAdopt(id objc.ID) *SeekCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &SeekCommandEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSeekCommandEvent creates a new SeekCommandEvent.
 func NewSeekCommandEvent() *SeekCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSeekCommandEvent")), objc.RegisterName("new"))
-	return &SeekCommandEvent{inner: raw.MPSeekCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSeekCommandEvent")), objc.RegisterName("new"))
+	return seekCommandEventAdopt(_id)
 }
 
-// Type calls the underlying Type.
-func (x *SeekCommandEvent) Type() MPSeekCommandEventType {
-	return MPSeekCommandEventType(x.inner.Type())
-}
-
-func (x *SeekCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+// Type wraps the corresponding Objective-C method.
+func (x *SeekCommandEvent) Type() SeekCommandEventType {
+	_r := objc.Send[SeekCommandEventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // SeekCommandEventable is the interface implemented by [SeekCommandEvent], for mocking and DI.
 type SeekCommandEventable interface {
-	Unwrap() *raw.MPSeekCommandEvent
-	Type() MPSeekCommandEventType
+	obj.Object
+	Type() SeekCommandEventType
 }
 
 var _ SeekCommandEventable = (*SeekCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*SeekCommandEvent)(nil)

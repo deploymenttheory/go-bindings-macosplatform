@@ -5,71 +5,98 @@
 package pencilkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that represents an ink that specifies its type, color, and width.
+// Ink is an idiomatic wrapper over the Objective-C class PKInk.
 //
-// Ink wraps [raw.PKInk] with a fluent Go API.
+// A structure that represents an ink that specifies its type, color, and width.
 type Ink struct {
-	inner *raw.PKInk
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKInk].
-func (x *Ink) Unwrap() *raw.PKInk { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Ink) ID() objc.ID { return x.inner.Ptr() }
-
-// InkFromID adopts an existing object pointer as a Ink (nil for 0).
+// InkFromID adopts an existing Objective-C object as a Ink
+// (nil for 0), retaining it and registering a release finalizer.
 func InkFromID(id objc.ID) *Ink {
 	if id == 0 {
 		return nil
 	}
-	return &Ink{inner: raw.PKInkFromID(id)}
+	x := &Ink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewInkWithInkTypeColor creates a new [Ink].
-func NewInkWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSColor) *Ink {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInk")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), type_.Ptr(), color.Ptr())
-	return &Ink{inner: raw.PKInkFromID(_id)}
-}
-
-// The type of ink, eg. pen, pencil...
-//
-// InkType calls the underlying InkType.
-func (x *Ink) InkType() string {
-	_r := x.inner.InkType()
-	if _r == nil {
-		return ""
+// inkAdopt wraps an Objective-C object that this code just created as a
+// Ink (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inkAdopt(id objc.ID) *Ink {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &Ink{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Color calls the underlying Color.
-func (x *Ink) Color() *appkit.NSColor {
-	return x.inner.Color()
+// Description returns the object's -description text.
+func (x *Ink) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The PencilKit version required to use this ink.
-//
-// RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *Ink) RequiredContentVersion() PKContentVersion {
-	return PKContentVersion(x.inner.RequiredContentVersion())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Ink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Ink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Ink) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInkWithInkTypeColor creates a new Ink.
+func NewInkWithInkTypeColor(type_ obj.Object, color obj.Object) *Ink {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInk")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), objref.IDOf(type_), objref.IDOf(color))
+	return inkAdopt(_id)
+}
+
+// InkType the type of ink, eg. pen, pencil...
+func (x *Ink) InkType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkType"))
+	return obj.Wrap(_r)
+}
+
+// Color wraps the corresponding Objective-C method.
+func (x *Ink) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
+}
+
+// RequiredContentVersion the PencilKit version required to use this ink.
+func (x *Ink) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+	return _r
 }
 
 // Inkable is the interface implemented by [Ink], for mocking and DI.
 type Inkable interface {
-	Unwrap() *raw.PKInk
-	InkType() string
-	Color() *appkit.NSColor
-	RequiredContentVersion() PKContentVersion
+	obj.Object
+	InkType() obj.Object
+	Color() obj.Object
+	RequiredContentVersion() ContentVersion
 }
 
 var _ Inkable = (*Ink)(nil)

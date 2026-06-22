@@ -5,88 +5,116 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The options available when making a prediction.
+// PredictionOptions is an idiomatic wrapper over the Objective-C class MLPredictionOptions.
 //
-// PredictionOptions wraps [raw.MLPredictionOptions] with a fluent Go API.
+// The options available when making a prediction.
 type PredictionOptions struct {
-	inner *raw.MLPredictionOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLPredictionOptions].
-func (x *PredictionOptions) Unwrap() *raw.MLPredictionOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PredictionOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// PredictionOptionsFromID adopts an existing object pointer as a PredictionOptions (nil for 0).
+// PredictionOptionsFromID adopts an existing Objective-C object as a PredictionOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func PredictionOptionsFromID(id objc.ID) *PredictionOptions {
 	if id == 0 {
 		return nil
 	}
-	return &PredictionOptions{inner: raw.MLPredictionOptionsFromID(id)}
+	x := &PredictionOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPredictionOptions creates a new [PredictionOptions].
+// predictionOptionsAdopt wraps an Objective-C object that this code just created as a
+// PredictionOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func predictionOptionsAdopt(id objc.ID) *PredictionOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &PredictionOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PredictionOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PredictionOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PredictionOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PredictionOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPredictionOptions creates a new PredictionOptions.
 func NewPredictionOptions() *PredictionOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLPredictionOptions")), objc.RegisterName("new"))
-	return &PredictionOptions{inner: raw.MLPredictionOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLPredictionOptions")), objc.RegisterName("new"))
+	return predictionOptionsAdopt(_id)
 }
 
-// A Boolean value that indicates whether a prediction is computed using only the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean value that indicates whether a prediction is computed using only the CPU.
 func (x *PredictionOptions) WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions {
-	x.inner.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// A dictionary of feature names and client-allocated buffers.
-//
-// WithOutputBackings sets the outputBackings property and returns the receiver for chaining.
-func (x *PredictionOptions) WithOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PredictionOptions {
-	x.inner.SetOutputBackings(outputBackings)
+// WithOutputBackings a dictionary of feature names and client-allocated buffers.
+func (x *PredictionOptions) WithOutputBackings(outputBackings obj.Object) *PredictionOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
 	return x
 }
 
-// Set to YES to force computation to be on the CPU only
-//
-// UsesCPUOnly calls the underlying UsesCPUOnly.
+// UsesCPUOnly set to YES to force computation to be on the CPU only
 func (x *PredictionOptions) UsesCPUOnly() bool {
-	return x.inner.UsesCPUOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesCPUOnly"))
+	return _r
 }
 
-// SetUsesCPUOnly calls the underlying SetUsesCPUOnly.
+// SetUsesCPUOnly wraps the corresponding Objective-C method.
 func (x *PredictionOptions) SetUsesCPUOnly(usesCPUOnly bool) {
-	x.inner.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 }
 
-// @abstract Propose the model to use the specified backing objects for the output feature values. @discussion Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:@{@"outputImage" : (__bridge id)outputBacking}]; id<MLFeatureProvider> prediction = [model predictionFromFeatures:inputFeatures options:options error:&error]; if ([prediction featureValueForName:@"outputImage"].imageBufferValue == outputBacking) { // backing was used. } else { // backing was NOT used. } \endcode The backing object must be either CVPixelBuffer or MLMultiArray depending on the feature value type. Do not lock the base address of the CVPixelBuffer. In the case of a MLMultiArray backed by a pixel buffer, make sure not to lock the underlying pixel buffer by not calling any data methods such as `.dataPointer` and subscript methods before the prediction. The framework ignores a backing object with an unknown feature name. For the best performance, use page-aligned address in MLMultiArray. \code #import <mach/vm_page_size.h> : void *backingBuffer = aligned_alloc(vm_page_size, round_page(backingBufferSize)); if (backingBuffer == NULL) { ... error handling ... } MLMultiArray *outputBacking = [[MLMultiArray alloc] initWithDataPointer:(char *)backingBuffer ... deallocator:^(void *) { free(backingBuffer); } ... ]; \endcode For CVPixelBuffer backing, consider to use IOSurface-backed CVPixelBuffer created by CVPixelBufferPool because it is often the most efficient choice for memory footprint and performance, especially when the pixel buffers are subsequently used for playback or export. (See also AVSampleBufferDisplayLayer and AVAssetWriter.) The output backing object must satisfy the output feature description's `-isAllowedValue:` test, or the framework reporets an error at the prediction time. The exception is FP16 MLMultiArray backed by CVPixelBuffer, which may be accepted in Double or Float32 multi array output feature depending on the underlying inference engine.
-//
-// OutputBackings calls the underlying OutputBackings.
-func (x *PredictionOptions) OutputBackings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.OutputBackings()
+// OutputBackings propose the model to use the specified backing objects for the output feature values. Use the property to get the inference result directly into the client allocated buffer when possible for efficient memory management. The property is a dictionary of the feature name and the output backing object. The framework may not use the specified backing object and instead allocates one by itself if the outputBacking dictionary doesn't contain the entry for the feature name, the model doesn't support the user allocated buffers, or in the batch prediction mode. To check if the backing object was used, compare the output prediction and the backing object by object identity. \code CVPixelBufferRef outputBacking = ...; [options setOutputBackings:
+func (x *PredictionOptions) OutputBackings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputBackings"))
+	return obj.Wrap(_r)
 }
 
-// SetOutputBackings calls the underlying SetOutputBackings.
-func (x *PredictionOptions) SetOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetOutputBackings(outputBackings)
+// SetOutputBackings wraps the corresponding Objective-C method.
+func (x *PredictionOptions) SetOutputBackings(outputBackings obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBackings:"), objref.IDOf(outputBackings))
 }
 
 // PredictionOptionsable is the interface implemented by [PredictionOptions], for mocking and DI.
 type PredictionOptionsable interface {
-	Unwrap() *raw.MLPredictionOptions
+	obj.Object
 	WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions
-	WithOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PredictionOptions
+	WithOutputBackings(outputBackings obj.Object) *PredictionOptions
 	UsesCPUOnly() bool
 	SetUsesCPUOnly(usesCPUOnly bool)
-	OutputBackings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	OutputBackings() obj.Object
+	SetOutputBackings(outputBackings obj.Object)
 }
 
 var _ PredictionOptionsable = (*PredictionOptions)(nil)

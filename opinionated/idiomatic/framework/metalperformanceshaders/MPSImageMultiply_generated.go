@@ -5,166 +5,124 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the element-wise product of its two input images.
+// ImageMultiply is an idiomatic wrapper over the Objective-C class MPSImageMultiply.
 //
-// ImageMultiply wraps [raw.MPSImageMultiply] with a fluent Go API.
+// It embeds [ImageArithmetic], promoting that type's methods.
+//
+// A filter that returns the element-wise product of its two input images.
 type ImageMultiply struct {
-	inner *raw.MPSImageMultiply
+	ImageArithmetic
 }
 
-// Unwrap returns the underlying [raw.MPSImageMultiply].
-func (x *ImageMultiply) Unwrap() *raw.MPSImageMultiply { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageMultiply) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageMultiplyFromID adopts an existing object pointer as a ImageMultiply (nil for 0).
+// ImageMultiplyFromID adopts an existing Objective-C object as a ImageMultiply
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageMultiplyFromID(id objc.ID) *ImageMultiply {
 	if id == 0 {
 		return nil
 	}
-	return &ImageMultiply{inner: raw.MPSImageMultiplyFromID(id)}
+	x := &ImageMultiply{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract  Initialize the multiplication operator @param     device           The device the filter will run on. @return    A valid MPSImageMultiply object or nil, if failure.
-//
-// NewImageMultiplyWithDevice creates a new [ImageMultiply].
-func NewImageMultiplyWithDevice(device metal.MTLDevice) *ImageMultiply {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageMultiply")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageMultiply{inner: raw.MPSImageMultiplyFromID(_id)}
+// imageMultiplyAdopt wraps an Objective-C object that this code just created as a
+// ImageMultiply (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageMultiplyAdopt(id objc.ID) *ImageMultiply {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageMultiply{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// NewImageMultiply creates a new ImageMultiply.
+func NewImageMultiply() *ImageMultiply {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageMultiply")), objc.RegisterName("new"))
+	return imageMultiplyAdopt(_id)
+}
+
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageMultiply) WithPrimaryScale(primaryScale float32) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageMultiply) WithSecondaryScale(secondaryScale float32) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageMultiply) WithBias(bias float32) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property   primaryStrideInPixels @abstract   The secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithPrimaryStrideInPixels sets the primaryStrideInPixels property and returns the receiver for chaining.
+// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (x *ImageMultiply) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetPrimaryStrideInPixels(primaryStrideInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
 	return x
 }
 
-// @property   secondaryStrideInPixels @abstract   The secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithSecondaryStrideInPixels sets the secondaryStrideInPixels property and returns the receiver for chaining.
+// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (x *ImageMultiply) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetSecondaryStrideInPixels(secondaryStrideInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
 	return x
 }
 
-// @property   minimumValue @abstract   minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *ImageMultiply) WithMinimumValue(minimumValue float32) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// @property   maximumValue @abstract   maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *ImageMultiply) WithMaximumValue(maximumValue float32) *ImageMultiply {
-	x.inner.MPSImageArithmetic.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the primary source buffer.
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer.
 func (x *ImageMultiply) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the secondary source buffer.
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer.
 func (x *ImageMultiply) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of the primary source image.
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *ImageMultiply) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of the secondary source image.
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *ImageMultiply) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageMultiply) WithClipRect(clipRect metal.MTLRegion) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageMultiply) WithOptions(options mpscore.MPSKernelOptions) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageMultiply) WithLabel(label string) *ImageMultiply {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageMultiply) asImageArithmetic() *mpsimage.MPSImageArithmetic {
-	return &x.inner.MPSImageArithmetic
-}
-
-func (x *ImageMultiply) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel {
-	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
-}
-
-func (x *ImageMultiply) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel
 }
 
 // ImageMultiplyable is the interface implemented by [ImageMultiply], for mocking and DI.
 type ImageMultiplyable interface {
-	Unwrap() *raw.MPSImageMultiply
+	obj.Object
 	WithPrimaryScale(primaryScale float32) *ImageMultiply
 	WithSecondaryScale(secondaryScale float32) *ImageMultiply
 	WithBias(bias float32) *ImageMultiply
@@ -174,11 +132,14 @@ type ImageMultiplyable interface {
 	WithMaximumValue(maximumValue float32) *ImageMultiply
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageMultiply
 	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageMultiply
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageMultiply
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageMultiply
 	WithClipRect(clipRect metal.MTLRegion) *ImageMultiply
-	WithOptions(options mpscore.MPSKernelOptions) *ImageMultiply
 	WithLabel(label string) *ImageMultiply
 }
 
 var _ ImageMultiplyable = (*ImageMultiply)(nil)
+
+var _ ImageArithmeticProvider = (*ImageMultiply)(nil)
+
+var _ BinaryImageKernelProvider = (*ImageMultiply)(nil)
+
+var _ KernelProvider = (*ImageMultiply)(nil)

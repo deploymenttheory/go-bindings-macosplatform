@@ -5,97 +5,96 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A structured request to use when searching for points of interest.
+// LocalPointsOfInterestRequest is an idiomatic wrapper over the Objective-C class MKLocalPointsOfInterestRequest.
 //
-// LocalPointsOfInterestRequest wraps [raw.MKLocalPointsOfInterestRequest] with a fluent Go API.
+// A structured request to use when searching for points of interest.
 type LocalPointsOfInterestRequest struct {
-	inner *raw.MKLocalPointsOfInterestRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLocalPointsOfInterestRequest].
-func (x *LocalPointsOfInterestRequest) Unwrap() *raw.MKLocalPointsOfInterestRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalPointsOfInterestRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalPointsOfInterestRequestFromID adopts an existing object pointer as a LocalPointsOfInterestRequest (nil for 0).
+// LocalPointsOfInterestRequestFromID adopts an existing Objective-C object as a LocalPointsOfInterestRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalPointsOfInterestRequestFromID(id objc.ID) *LocalPointsOfInterestRequest {
 	if id == 0 {
 		return nil
 	}
-	return &LocalPointsOfInterestRequest{inner: raw.MKLocalPointsOfInterestRequestFromID(id)}
-}
-
-// Creates a points of interest search request centered on the provided coordinate with the provided radius.
-//
-// NewLocalPointsOfInterestRequestWithCenterCoordinateRadius creates a new [LocalPointsOfInterestRequest].
-func NewLocalPointsOfInterestRequestWithCenterCoordinateRadius(coordinate unsafe.Pointer, radius unsafe.Pointer) *LocalPointsOfInterestRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalPointsOfInterestRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenterCoordinate:radius:"), coordinate, radius)
-	return &LocalPointsOfInterestRequest{inner: raw.MKLocalPointsOfInterestRequestFromID(_id)}
-}
-
-// Creates a points of interest search request based on existing region.
-//
-// NewLocalPointsOfInterestRequestWithCoordinateRegion creates a new [LocalPointsOfInterestRequest].
-func NewLocalPointsOfInterestRequestWithCoordinateRegion(region raw.MKCoordinateRegion) *LocalPointsOfInterestRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalPointsOfInterestRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinateRegion:"), region)
-	return &LocalPointsOfInterestRequest{inner: raw.MKLocalPointsOfInterestRequestFromID(_id)}
-}
-
-// A filter that lists points of interest categories to include or exclude.
-//
-// WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
+	x := &LocalPointsOfInterestRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Coordinate calls the underlying Coordinate.
-func (x *LocalPointsOfInterestRequest) Coordinate() unsafe.Pointer {
-	return x.inner.Coordinate()
-}
-
-// Radius calls the underlying Radius.
-func (x *LocalPointsOfInterestRequest) Radius() unsafe.Pointer {
-	return x.inner.Radius()
-}
-
-// Region calls the underlying Region.
-func (x *LocalPointsOfInterestRequest) Region() raw.MKCoordinateRegion {
-	return x.inner.Region()
-}
-
-// PointOfInterestFilter calls the underlying PointOfInterestFilter.
-func (x *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := x.inner.PointOfInterestFilter()
-	if _r == nil {
+// localPointsOfInterestRequestAdopt wraps an Objective-C object that this code just created as a
+// LocalPointsOfInterestRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localPointsOfInterestRequestAdopt(id objc.ID) *LocalPointsOfInterestRequest {
+	if id == 0 {
 		return nil
 	}
-	return &PointOfInterestFilter{inner: _r}
+	x := &LocalPointsOfInterestRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
-func (x *LocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+// Description returns the object's -description text.
+func (x *LocalPointsOfInterestRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalPointsOfInterestRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalPointsOfInterestRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalPointsOfInterestRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalPointsOfInterestRequest creates a new LocalPointsOfInterestRequest.
+func NewLocalPointsOfInterestRequest() *LocalPointsOfInterestRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalPointsOfInterestRequest")), objc.RegisterName("new"))
+	return localPointsOfInterestRequestAdopt(_id)
+}
+
+// WithPointOfInterestFilter a filter that lists points of interest categories to include or exclude.
+func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return x
+}
+
+// PointOfInterestFilter wraps the corresponding Objective-C method.
+func (x *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+	return PointOfInterestFilterFromID(_r)
+}
+
+// SetPointOfInterestFilter wraps the corresponding Objective-C method.
+func (x *LocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
 // LocalPointsOfInterestRequestable is the interface implemented by [LocalPointsOfInterestRequest], for mocking and DI.
 type LocalPointsOfInterestRequestable interface {
-	Unwrap() *raw.MKLocalPointsOfInterestRequest
+	obj.Object
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest
-	Coordinate() unsafe.Pointer
-	Radius() unsafe.Pointer
-	Region() raw.MKCoordinateRegion
 	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
 }
 
 var _ LocalPointsOfInterestRequestable = (*LocalPointsOfInterestRequest)(nil)

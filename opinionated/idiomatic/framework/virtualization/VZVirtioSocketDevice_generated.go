@@ -6,73 +6,80 @@ package virtualization
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A device that manages port-based connections between the guest system and the host computer.
+// VirtioSocketDevice is an idiomatic wrapper over the Objective-C class VZVirtioSocketDevice.
 //
-// VirtioSocketDevice wraps [raw.VZVirtioSocketDevice] with a fluent Go API.
+// It embeds [SocketDevice], promoting that type's methods.
+//
+// A device that manages port-based connections between the guest system and the host computer.
 type VirtioSocketDevice struct {
-	inner *raw.VZVirtioSocketDevice
+	SocketDevice
 }
 
-// Unwrap returns the underlying [raw.VZVirtioSocketDevice].
-func (x *VirtioSocketDevice) Unwrap() *raw.VZVirtioSocketDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioSocketDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioSocketDeviceFromID adopts an existing object pointer as a VirtioSocketDevice (nil for 0).
+// VirtioSocketDeviceFromID adopts an existing Objective-C object as a VirtioSocketDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioSocketDeviceFromID(id objc.ID) *VirtioSocketDevice {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioSocketDevice{inner: raw.VZVirtioSocketDeviceFromID(id)}
+	x := &VirtioSocketDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioSocketDevice creates a new [VirtioSocketDevice].
+// virtioSocketDeviceAdopt wraps an Objective-C object that this code just created as a
+// VirtioSocketDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioSocketDeviceAdopt(id objc.ID) *VirtioSocketDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioSocketDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVirtioSocketDevice creates a new VirtioSocketDevice.
 func NewVirtioSocketDevice() *VirtioSocketDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioSocketDevice")), objc.RegisterName("new"))
-	return &VirtioSocketDevice{inner: raw.VZVirtioSocketDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSocketDevice")), objc.RegisterName("new"))
+	return virtioSocketDeviceAdopt(_id)
 }
 
-// Configures an object to monitor the specified port for new connections.
-//
-// SetSocketListenerForPort calls the underlying SetSocketListenerForPort.
-func (x *VirtioSocketDevice) SetSocketListenerForPort(listener *raw.VZVirtioSocketListener, port uint32) {
-	x.inner.SetSocketListenerForPort(listener, port)
+// SetSocketListenerForPort configures an object to monitor the specified port for new connections.
+func (x *VirtioSocketDevice) SetSocketListenerForPort(listener *VirtioSocketListener, port uint32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocketListener:forPort:"), objref.IDOf(listener), port)
 }
 
-// Removes the listener object from the specfied port.
-//
-// RemoveSocketListenerForPort calls the underlying RemoveSocketListenerForPort.
+// RemoveSocketListenerForPort removes the listener object from the specfied port.
 func (x *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
-	x.inner.RemoveSocketListenerForPort(port)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSocketListenerForPort:"), port)
 }
 
-// Initiates a connection to the specified port of the guest operating system.
+// ConnectToPort initiates a connection to the specified port of the guest operating system.
 //
 // ConnectToPort blocks until the operation completes or ctx is cancelled.
-func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error) {
+func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (result *VirtioSocketConnection, err error) {
 	type _result struct {
 		val *VirtioSocketConnection
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ConnectToPortCompletionHandler(port, func(_p0 *raw.VZVirtioSocketConnection, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &VirtioSocketConnection{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = VirtioSocketConnectionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectToPort:completionHandler:"), port, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -82,14 +89,14 @@ func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (*V
 	}
 }
 
-func (x *VirtioSocketDevice) asSocketDevice() *raw.VZSocketDevice { return &x.inner.VZSocketDevice }
-
 // VirtioSocketDeviceable is the interface implemented by [VirtioSocketDevice], for mocking and DI.
 type VirtioSocketDeviceable interface {
-	Unwrap() *raw.VZVirtioSocketDevice
-	SetSocketListenerForPort(listener *raw.VZVirtioSocketListener, port uint32)
+	obj.Object
+	SetSocketListenerForPort(listener *VirtioSocketListener, port uint32)
 	RemoveSocketListenerForPort(port uint32)
 	ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error)
 }
 
 var _ VirtioSocketDeviceable = (*VirtioSocketDevice)(nil)
+
+var _ SocketDeviceProvider = (*VirtioSocketDevice)(nil)

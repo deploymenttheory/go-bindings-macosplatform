@@ -5,103 +5,113 @@
 package automator
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an Automator action that’s a loadable bundle.
+// BundleAction is an idiomatic wrapper over the Objective-C class AMBundleAction.
 //
-// BundleAction wraps [raw.AMBundleAction] with a fluent Go API.
+// BundleAction is an abstract base — you do not construct it directly. Construct one of [AppleScriptAction], [ShellScriptAction] and pass it where a BundleAction is accepted.
+//
+// An object that represents an Automator action that’s a loadable bundle.
 type BundleAction struct {
-	inner *raw.AMBundleAction
+	Action
 }
 
-// Unwrap returns the underlying [raw.AMBundleAction].
-func (x *BundleAction) Unwrap() *raw.AMBundleAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BundleAction) ID() objc.ID { return x.inner.Ptr() }
-
-// BundleActionFromID adopts an existing object pointer as a BundleAction (nil for 0).
+// BundleActionFromID adopts an existing Objective-C object as a BundleAction
+// (nil for 0), retaining it and registering a release finalizer.
 func BundleActionFromID(id objc.ID) *BundleAction {
 	if id == 0 {
 		return nil
 	}
-	return &BundleAction{inner: raw.AMBundleActionFromID(id)}
-}
-
-// NewBundleAction creates a new [BundleAction].
-func NewBundleAction() *BundleAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMBundleAction")), objc.RegisterName("new"))
-	return &BundleAction{inner: raw.AMBundleActionFromID(_id)}
-}
-
-// The action’s parameters.
-//
-// WithParameters sets the parameters property and returns the receiver for chaining.
-func (x *BundleAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *BundleAction {
-	x.inner.SetParameters(parameters)
+	x := &BundleAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets the progressValue property and returns the receiver for chaining.
+// bundleActionAdopt wraps an Objective-C object that this code just created as a
+// BundleAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bundleActionAdopt(id objc.ID) *BundleAction {
+	if id == 0 {
+		return nil
+	}
+	x := &BundleAction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithParameters the action’s parameters.
+func (x *BundleAction) WithParameters(parameters obj.Object) *BundleAction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
+	return x
+}
+
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
 func (x *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
-	x.inner.AMAction.SetProgressValue(progressValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
-// Allows the action object to perform setup tasks requiring the presence of all bundle objects.
-//
-// AwakeFromBundle calls the underlying AwakeFromBundle.
+// AwakeFromBundle allows the action object to perform setup tasks requiring the presence of all bundle objects.
 func (x *BundleAction) AwakeFromBundle() {
-	x.inner.AwakeFromBundle()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromBundle"))
 }
 
-// HasView calls the underlying HasView.
+// HasView wraps the corresponding Objective-C method.
 func (x *BundleAction) HasView() bool {
-	return x.inner.HasView()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasView"))
+	return _r
 }
 
-// View calls the underlying View.
-func (x *BundleAction) View() *appkit.NSView {
-	return x.inner.View()
+// View wraps the corresponding Objective-C method.
+func (x *BundleAction) View() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return obj.Wrap(_r)
 }
 
-// Bundle calls the underlying Bundle.
-func (x *BundleAction) Bundle() *foundation.NSBundle {
-	return x.inner.Bundle()
+// Bundle wraps the corresponding Objective-C method.
+func (x *BundleAction) Bundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
+	return obj.Wrap(_r)
 }
 
-// Parameters calls the underlying Parameters.
-func (x *BundleAction) Parameters() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Parameters()
+// Parameters wraps the corresponding Objective-C method.
+func (x *BundleAction) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+	return obj.Wrap(_r)
 }
 
-// SetParameters calls the underlying SetParameters.
-func (x *BundleAction) SetParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetParameters(parameters)
+// SetParameters wraps the corresponding Objective-C method.
+func (x *BundleAction) SetParameters(parameters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 }
-
-func (x *BundleAction) asBundleAction() *raw.AMBundleAction { return x.inner }
-
-func (x *BundleAction) asAction() *raw.AMAction { return &x.inner.AMAction }
 
 // BundleActionable is the interface implemented by [BundleAction], for mocking and DI.
 type BundleActionable interface {
-	Unwrap() *raw.AMBundleAction
-	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *BundleAction
+	obj.Object
+	WithParameters(parameters obj.Object) *BundleAction
 	WithProgressValue(progressValue float64) *BundleAction
 	AwakeFromBundle()
 	HasView() bool
-	View() *appkit.NSView
-	Bundle() *foundation.NSBundle
-	Parameters() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
-	SetParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID])
+	View() obj.Object
+	Bundle() obj.Object
+	Parameters() obj.Object
+	SetParameters(parameters obj.Object)
 }
 
 var _ BundleActionable = (*BundleAction)(nil)
+
+// isBundleAction marks BundleAction — and, by embedding promotion, its
+// subclasses — as a member of the BundleAction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BundleAction) isBundleAction() {}
+
+var _ BundleActionProvider = (*BundleAction)(nil)
+
+var _ ActionProvider = (*BundleAction)(nil)

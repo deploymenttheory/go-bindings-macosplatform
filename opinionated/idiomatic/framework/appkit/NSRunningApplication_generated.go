@@ -5,199 +5,206 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can manipulate and provide information for a single instance of an app.
+// RunningApplication is an idiomatic wrapper over the Objective-C class NSRunningApplication.
 //
-// RunningApplication wraps [raw.NSRunningApplication] with a fluent Go API.
+// An object that can manipulate and provide information for a single instance of an app.
 type RunningApplication struct {
-	inner *raw.NSRunningApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSRunningApplication].
-func (x *RunningApplication) Unwrap() *raw.NSRunningApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RunningApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// RunningApplicationFromID adopts an existing object pointer as a RunningApplication (nil for 0).
+// RunningApplicationFromID adopts an existing Objective-C object as a RunningApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func RunningApplicationFromID(id objc.ID) *RunningApplication {
 	if id == 0 {
 		return nil
 	}
-	return &RunningApplication{inner: raw.NSRunningApplicationFromID(id)}
+	x := &RunningApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRunningApplication creates a new [RunningApplication].
-func NewRunningApplication() *RunningApplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRunningApplication")), objc.RegisterName("new"))
-	return &RunningApplication{inner: raw.NSRunningApplicationFromID(_id)}
-}
-
-// Attempts to hide or the application.
-//
-// Hide calls the underlying Hide.
-func (x *RunningApplication) Hide() bool {
-	return x.inner.Hide()
-}
-
-// Attempts to unhide or the application.
-//
-// Unhide calls the underlying Unhide.
-func (x *RunningApplication) Unhide() bool {
-	return x.inner.Unhide()
-}
-
-// Attempts to activate the application using the specified options.
-//
-// ActivateFromApplicationOptions calls the underlying ActivateFromApplicationOptions.
-func (x *RunningApplication) ActivateFromApplicationOptions(application *raw.NSRunningApplication, options NSApplicationActivationOptions) bool {
-	return x.inner.ActivateFromApplicationOptions(application, raw.NSApplicationActivationOptions(options))
-}
-
-// Attempts to activate the application using the specified options.
-//
-// ActivateWithOptions calls the underlying ActivateWithOptions.
-func (x *RunningApplication) ActivateWithOptions(options NSApplicationActivationOptions) bool {
-	return x.inner.ActivateWithOptions(raw.NSApplicationActivationOptions(options))
-}
-
-// Attempts to quit the receiver normally.
-//
-// Terminate calls the underlying Terminate.
-func (x *RunningApplication) Terminate() bool {
-	return x.inner.Terminate()
-}
-
-// Attempts to force the receiver to quit.
-//
-// ForceTerminate calls the underlying ForceTerminate.
-func (x *RunningApplication) ForceTerminate() bool {
-	return x.inner.ForceTerminate()
-}
-
-// Indicates that the process is an exited application. This is observable through KVO.
-//
-// IsTerminated calls the underlying IsTerminated.
-func (x *RunningApplication) IsTerminated() bool {
-	return x.inner.IsTerminated()
-}
-
-// Indicates that the process is finished launching, which corresponds to the @c NSApplicationDidFinishLaunching internal notification. This is observable through KVO. Some applications do not post this notification and so are never reported as finished launching.
-//
-// IsFinishedLaunching calls the underlying IsFinishedLaunching.
-func (x *RunningApplication) IsFinishedLaunching() bool {
-	return x.inner.IsFinishedLaunching()
-}
-
-// Indicates whether the application is currently hidden. This is observable through KVO.
-//
-// IsHidden calls the underlying IsHidden.
-func (x *RunningApplication) IsHidden() bool {
-	return x.inner.IsHidden()
-}
-
-// Indicates whether the application is currently frontmost. This is observable through KVO.
-//
-// IsActive calls the underlying IsActive.
-func (x *RunningApplication) IsActive() bool {
-	return x.inner.IsActive()
-}
-
-// Indicates whether the application currently owns the menu bar. This is observable through KVO.
-//
-// OwnsMenuBar calls the underlying OwnsMenuBar.
-func (x *RunningApplication) OwnsMenuBar() bool {
-	return x.inner.OwnsMenuBar()
-}
-
-// Indicates the activation policy of the application. This is observable through KVO (the type is usually fixed, but may be changed through a call to `-[NSApplication setActivationPolicy:]`).
-//
-// ActivationPolicy calls the underlying ActivationPolicy.
-func (x *RunningApplication) ActivationPolicy() NSApplicationActivationPolicy {
-	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
-}
-
-// Indicates the name of the application. This is dependent on the current localization of the referenced app, and is suitable for presentation to the user.
-//
-// LocalizedName calls the underlying LocalizedName.
-func (x *RunningApplication) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Indicates the `CFBundleIdentifier` of the application, or nil if the application does not have an `Info.plist`.
-//
-// BundleIdentifier calls the underlying BundleIdentifier.
-func (x *RunningApplication) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Indicates the URL to the application's bundle, or nil if the application does not have a bundle.
-//
-// BundleURL calls the underlying BundleURL.
-func (x *RunningApplication) BundleURL() *foundation.NSURL {
-	return x.inner.BundleURL()
-}
-
-// Indicates the URL to the application's executable.
-//
-// ExecutableURL calls the underlying ExecutableURL.
-func (x *RunningApplication) ExecutableURL() *foundation.NSURL {
-	return x.inner.ExecutableURL()
-}
-
-// Indicates the process identifier (pid) of the application. Do not rely on this for comparing processes.  Use `-isEqual:` instead. @note Not all applications have a pid.  Applications without a pid return -1 from this method. This is observable through KVO (an application's pid may change if it is automatically terminated).
-//
-// ProcessIdentifier calls the underlying ProcessIdentifier.
-func (x *RunningApplication) ProcessIdentifier() int {
-	return x.inner.ProcessIdentifier()
-}
-
-// Indicates the date when the application was launched. This property is not available for all applications. Specifically, it is not available for applications that were launched without going through `LaunchServices`.
-//
-// LaunchDate calls the underlying LaunchDate.
-func (x *RunningApplication) LaunchDate() *foundation.NSDate {
-	return x.inner.LaunchDate()
-}
-
-// @return The icon of the application.
-//
-// Icon calls the underlying Icon.
-func (x *RunningApplication) Icon() *Image {
-	_r := x.inner.Icon()
-	if _r == nil {
+// runningApplicationAdopt wraps an Objective-C object that this code just created as a
+// RunningApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func runningApplicationAdopt(id objc.ID) *RunningApplication {
+	if id == 0 {
 		return nil
 	}
-	return &Image{inner: _r}
+	x := &RunningApplication{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Indicates the executing processor architecture for the application, as an @c NSBundleExecutableArchitecture from `NSBundle.h`.
-//
-// ExecutableArchitecture calls the underlying ExecutableArchitecture.
+// Description returns the object's -description text.
+func (x *RunningApplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RunningApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RunningApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RunningApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRunningApplication creates a new RunningApplication.
+func NewRunningApplication() *RunningApplication {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSRunningApplication")), objc.RegisterName("new"))
+	return runningApplicationAdopt(_id)
+}
+
+// Hide attempts to hide or the application.
+func (x *RunningApplication) Hide() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hide"))
+	return _r
+}
+
+// Unhide attempts to unhide or the application.
+func (x *RunningApplication) Unhide() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unhide"))
+	return _r
+}
+
+// ActivateFromApplicationOptions attempts to activate the application using the specified options.
+func (x *RunningApplication) ActivateFromApplicationOptions(application *RunningApplication, options ApplicationActivationOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("activateFromApplication:options:"), objref.IDOf(application), options)
+	return _r
+}
+
+// ActivateWithOptions attempts to activate the application using the specified options.
+func (x *RunningApplication) ActivateWithOptions(options ApplicationActivationOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("activateWithOptions:"), options)
+	return _r
+}
+
+// Terminate attempts to quit the receiver normally.
+func (x *RunningApplication) Terminate() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("terminate"))
+	return _r
+}
+
+// ForceTerminate attempts to force the receiver to quit.
+func (x *RunningApplication) ForceTerminate() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("forceTerminate"))
+	return _r
+}
+
+// IsTerminated indicates that the process is an exited application. This is observable through KVO.
+func (x *RunningApplication) IsTerminated() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTerminated"))
+	return _r
+}
+
+// IsFinishedLaunching indicates that the process is finished launching, which corresponds to the
+func (x *RunningApplication) IsFinishedLaunching() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinishedLaunching"))
+	return _r
+}
+
+// IsHidden indicates whether the application is currently hidden. This is observable through KVO.
+func (x *RunningApplication) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
+}
+
+// IsActive indicates whether the application is currently frontmost. This is observable through KVO.
+func (x *RunningApplication) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
+}
+
+// OwnsMenuBar indicates whether the application currently owns the menu bar. This is observable through KVO.
+func (x *RunningApplication) OwnsMenuBar() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ownsMenuBar"))
+	return _r
+}
+
+// ActivationPolicy indicates the activation policy of the application. This is observable through KVO (the type is usually fixed, but may be changed through a call to `-[NSApplication setActivationPolicy:]`).
+func (x *RunningApplication) ActivationPolicy() ApplicationActivationPolicy {
+	_r := objc.Send[ApplicationActivationPolicy](objref.IDOf(x), objc.RegisterName("activationPolicy"))
+	return _r
+}
+
+// LocalizedName indicates the name of the application. This is dependent on the current localization of the referenced app, and is suitable for presentation to the user.
+func (x *RunningApplication) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// BundleIdentifier indicates the `CFBundleIdentifier` of the application, or nil if the application does not have an `Info.plist`.
+func (x *RunningApplication) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// BundleURL indicates the URL to the application's bundle, or nil if the application does not have a bundle.
+func (x *RunningApplication) BundleURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleURL"))
+	return obj.Wrap(_r)
+}
+
+// ExecutableURL indicates the URL to the application's executable.
+func (x *RunningApplication) ExecutableURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executableURL"))
+	return obj.Wrap(_r)
+}
+
+// ProcessIdentifier indicates the process identifier (pid) of the application. Do not rely on this for comparing processes.  Use `-isEqual:` instead.
+func (x *RunningApplication) ProcessIdentifier() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processIdentifier"))
+	return _r
+}
+
+// LaunchDate indicates the date when the application was launched. This property is not available for all applications. Specifically, it is not available for applications that were launched without going through `LaunchServices`.
+func (x *RunningApplication) LaunchDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchDate"))
+	return obj.Wrap(_r)
+}
+
+// Icon wraps the corresponding Objective-C method.
+func (x *RunningApplication) Icon() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+	return ImageFromID(_r)
+}
+
+// ExecutableArchitecture indicates the executing processor architecture for the application, as an
 func (x *RunningApplication) ExecutableArchitecture() int {
-	return x.inner.ExecutableArchitecture()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("executableArchitecture"))
+	return _r
 }
 
 // RunningApplicationable is the interface implemented by [RunningApplication], for mocking and DI.
 type RunningApplicationable interface {
-	Unwrap() *raw.NSRunningApplication
+	obj.Object
 	Hide() bool
 	Unhide() bool
-	ActivateFromApplicationOptions(application *raw.NSRunningApplication, options NSApplicationActivationOptions) bool
-	ActivateWithOptions(options NSApplicationActivationOptions) bool
+	ActivateFromApplicationOptions(application *RunningApplication, options ApplicationActivationOptions) bool
+	ActivateWithOptions(options ApplicationActivationOptions) bool
 	Terminate() bool
 	ForceTerminate() bool
 	IsTerminated() bool
@@ -205,13 +212,13 @@ type RunningApplicationable interface {
 	IsHidden() bool
 	IsActive() bool
 	OwnsMenuBar() bool
-	ActivationPolicy() NSApplicationActivationPolicy
+	ActivationPolicy() ApplicationActivationPolicy
 	LocalizedName() string
 	BundleIdentifier() string
-	BundleURL() *foundation.NSURL
-	ExecutableURL() *foundation.NSURL
+	BundleURL() obj.Object
+	ExecutableURL() obj.Object
 	ProcessIdentifier() int
-	LaunchDate() *foundation.NSDate
+	LaunchDate() obj.Object
 	Icon() *Image
 	ExecutableArchitecture() int
 }

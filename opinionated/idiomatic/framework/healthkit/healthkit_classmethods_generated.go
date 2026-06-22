@@ -5,1452 +5,1002 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata calls the underlying HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata.
-func AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints *foundation.NSArray[*raw.HKAudiogramSensitivityPoint], startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudiogramSample {
-	_r := raw.HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints, startDate, endDate, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &AudiogramSample{inner: _r}
+// AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata creates a new audiogram sample.
+func AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate obj.Object, endDate obj.Object, metadata obj.Object) *AudiogramSample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+	return AudiogramSampleFromID(_r)
 }
 
-// AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata calls the underlying HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata.
-func AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints *foundation.NSArray[*raw.HKAudiogramSensitivityPoint], startDate *foundation.NSDate, endDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudiogramSample {
-	_r := raw.HKAudiogramSampleAudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints, startDate, endDate, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &AudiogramSample{inner: _r}
+// AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata creates a new audiogram sample with the specified attributes.
+func AudiogramSampleWithSensitivityPointsStartDateEndDateDeviceMetadata(sensitivityPoints []*AudiogramSensitivityPoint, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *AudiogramSample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSample")), objc.RegisterName("audiogramSampleWithSensitivityPoints:startDate:endDate:device:metadata:"), purego.SliceToNSArray(sensitivityPoints, func(_v *AudiogramSensitivityPoint) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
+	return AudiogramSampleFromID(_r)
 }
 
-// SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError calls the underlying HKAudiogramSensitivityPointSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError.
-func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *raw.HKQuantity, leftEarSensitivity *raw.HKQuantity, rightEarSensitivity *raw.HKQuantity) (*AudiogramSensitivityPoint, error) {
-	_r, _err := raw.HKAudiogramSensitivityPointSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency, leftEarSensitivity, rightEarSensitivity)
-	if _err != nil {
-		return nil, _err
+// SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError creates a new sensitivity point.
+func SensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *Quantity, leftEarSensitivity *Quantity, rightEarSensitivity *Quantity) (result *AudiogramSensitivityPoint, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("sensitivityPointWithFrequency:leftEarSensitivity:rightEarSensitivity:error:"), objref.IDOf(frequency), objref.IDOf(leftEarSensitivity), objref.IDOf(rightEarSensitivity), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &AudiogramSensitivityPoint{inner: _r}, nil
+	return AudiogramSensitivityPointFromID(_r), nil
 }
 
-// SensitivityPointWithFrequencyTestsError calls the underlying HKAudiogramSensitivityPointSensitivityPointWithFrequencyTestsError.
-func SensitivityPointWithFrequencyTestsError(frequency *raw.HKQuantity, tests *foundation.NSArray[*raw.HKAudiogramSensitivityTest]) (*AudiogramSensitivityPoint, error) {
-	_r, _err := raw.HKAudiogramSensitivityPointSensitivityPointWithFrequencyTestsError(frequency, tests)
-	if _err != nil {
-		return nil, _err
+// SensitivityPointWithFrequencyTestsError creates a point that can be included in a audiogram.
+func SensitivityPointWithFrequencyTestsError(frequency *Quantity, tests []*AudiogramSensitivityTest) (result *AudiogramSensitivityPoint, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("sensitivityPointWithFrequency:tests:error:"), objref.IDOf(frequency), purego.SliceToNSArray(tests, func(_v *AudiogramSensitivityTest) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &AudiogramSensitivityPoint{inner: _r}, nil
+	return AudiogramSensitivityPointFromID(_r), nil
 }
 
-// ClampingRangeWithLowerBoundUpperBoundError calls the underlying HKAudiogramSensitivityPointClampingRangeClampingRangeWithLowerBoundUpperBoundError.
-func ClampingRangeWithLowerBoundUpperBoundError(lowerBound *foundation.NSNumber, upperBound *foundation.NSNumber) (*AudiogramSensitivityPointClampingRange, error) {
-	_r, _err := raw.HKAudiogramSensitivityPointClampingRangeClampingRangeWithLowerBoundUpperBoundError(lowerBound, upperBound)
-	if _err != nil {
-		return nil, _err
+// ClampingRangeWithLowerBoundUpperBoundError creates a clamping range from a given lower and upper bound. At least one bound must be specified. If both bounds are provided, the lower bound must be less than the upper bound.
+func ClampingRangeWithLowerBoundUpperBoundError(lowerBound obj.Object, upperBound obj.Object) (result *AudiogramSensitivityPointClampingRange, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPointClampingRange")), objc.RegisterName("clampingRangeWithLowerBound:upperBound:error:"), objref.IDOf(lowerBound), objref.IDOf(upperBound), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &AudiogramSensitivityPointClampingRange{inner: _r}, nil
+	return AudiogramSensitivityPointClampingRangeFromID(_r), nil
 }
 
-// CDADocumentSampleWithDataStartDateEndDateMetadataValidationError calls the underlying HKCDADocumentSampleCDADocumentSampleWithDataStartDateEndDateMetadataValidationError.
-func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData *foundation.NSData, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*CDADocumentSample, error) {
-	_r, _err := raw.HKCDADocumentSampleCDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData, startDate, endDate, metadata)
-	if _err != nil {
-		return nil, _err
+// CDADocumentSampleWithDataStartDateEndDateMetadataValidationError returns a CDA document sample containing the provided XML document and metadata.
+func CDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData obj.Object, startDate obj.Object, endDate obj.Object, metadata obj.Object) (result *CDADocumentSample, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCDADocumentSample")), objc.RegisterName("CDADocumentSampleWithData:startDate:endDate:metadata:validationError:"), objref.IDOf(documentData), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &CDADocumentSample{inner: _r}, nil
+	return CDADocumentSampleFromID(_r), nil
 }
 
-// CategorySampleWithTypeValueStartDateEndDateMetadata calls the underlying HKCategorySampleCategorySampleWithTypeValueStartDateEndDateMetadata.
-func CategorySampleWithTypeValueStartDateEndDateMetadata(type_ *raw.HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CategorySample {
-	_r := raw.HKCategorySampleCategorySampleWithTypeValueStartDateEndDateMetadata(type_, value, startDate, endDate, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &CategorySample{inner: _r}
+// CategorySampleWithTypeValueStartDateEndDateMetadata creates a newly instantiated category sample with the provided metadata.
+func CategorySampleWithTypeValueStartDateEndDateMetadata(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object, metadata obj.Object) *CategorySample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:metadata:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+	return CategorySampleFromID(_r)
 }
 
-// CategorySampleWithTypeValueStartDateEndDate calls the underlying HKCategorySampleCategorySampleWithTypeValueStartDateEndDate.
-func CategorySampleWithTypeValueStartDateEndDate(type_ *raw.HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate) *CategorySample {
-	_r := raw.HKCategorySampleCategorySampleWithTypeValueStartDateEndDate(type_, value, startDate, endDate)
-	if _r == nil {
-		return nil
-	}
-	return &CategorySample{inner: _r}
+// CategorySampleWithTypeValueStartDateEndDate creates a newly instantiated category sample.
+func CategorySampleWithTypeValueStartDateEndDate(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object) *CategorySample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate))
+	return CategorySampleFromID(_r)
 }
 
-// CategorySampleWithTypeValueStartDateEndDateDeviceMetadata calls the underlying HKCategorySampleCategorySampleWithTypeValueStartDateEndDateDeviceMetadata.
-func CategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *raw.HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CategorySample {
-	_r := raw.HKCategorySampleCategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_, value, startDate, endDate, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &CategorySample{inner: _r}
+// CategorySampleWithTypeValueStartDateEndDateDeviceMetadata creates a newly instantiated category sample including the provided device and metadata.
+func CategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *CategoryType, value int, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *CategorySample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("categorySampleWithType:value:startDate:endDate:device:metadata:"), objref.IDOf(type_), value, objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
+	return CategorySampleFromID(_r)
 }
 
-// PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata calls the underlying HKContactsPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata.
-func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *raw.HKContactsLensSpecification, leftEyeSpecification *raw.HKContactsLensSpecification, brand string, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ContactsPrescription {
-	_r := raw.HKContactsPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification, leftEyeSpecification, foundation.NSStringStringWithUTF8String(brand), dateIssued, expirationDate, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &ContactsPrescription{inner: _r}
+// PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata creates a new glasses prescription sample.
+func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *ContactsLensSpecification, leftEyeSpecification *ContactsLensSpecification, brand string, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *ContactsPrescription {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKContactsPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), purego.NSString(brand), objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
+	return ContactsPrescriptionFromID(_r)
 }
 
-// CorrelationWithTypeStartDateEndDateObjects calls the underlying HKCorrelationCorrelationWithTypeStartDateEndDateObjects.
-func CorrelationWithTypeStartDateEndDateObjects(correlationType *raw.HKCorrelationType, startDate *foundation.NSDate, endDate *foundation.NSDate, objects *foundation.NSSet[*raw.HKSample]) *Correlation {
-	_r := raw.HKCorrelationCorrelationWithTypeStartDateEndDateObjects(correlationType, startDate, endDate, objects)
-	if _r == nil {
-		return nil
-	}
-	return &Correlation{inner: _r}
+// CorrelationWithTypeStartDateEndDateObjects instantiates and returns a new correlation instance.
+func CorrelationWithTypeStartDateEndDateObjects(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object) *Correlation {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects))
+	return CorrelationFromID(_r)
 }
 
-// CorrelationWithTypeStartDateEndDateObjectsMetadata calls the underlying HKCorrelationCorrelationWithTypeStartDateEndDateObjectsMetadata.
-func CorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType *raw.HKCorrelationType, startDate *foundation.NSDate, endDate *foundation.NSDate, objects *foundation.NSSet[*raw.HKSample], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Correlation {
-	_r := raw.HKCorrelationCorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType, startDate, endDate, objects, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Correlation{inner: _r}
+// CorrelationWithTypeStartDateEndDateObjectsMetadata instantiates and returns a new correlation instance with the provided metadata.
+func CorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object, metadata obj.Object) *Correlation {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:metadata:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects), objref.IDOf(metadata))
+	return CorrelationFromID(_r)
 }
 
-// CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata calls the underlying HKCorrelationCorrelationWithTypeStartDateEndDateObjectsDeviceMetadata.
-func CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType *raw.HKCorrelationType, startDate *foundation.NSDate, endDate *foundation.NSDate, objects *foundation.NSSet[*raw.HKSample], device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Correlation {
-	_r := raw.HKCorrelationCorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType, startDate, endDate, objects, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Correlation{inner: _r}
+// CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata instantiates and returns a new correlation instance with the provided device and metadata.
+func CorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType *CorrelationType, startDate obj.Object, endDate obj.Object, objects obj.Object, device *Device, metadata obj.Object) *Correlation {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("correlationWithType:startDate:endDate:objects:device:metadata:"), objref.IDOf(correlationType), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(objects), objref.IDOf(device), objref.IDOf(metadata))
+	return CorrelationFromID(_r)
 }
 
-// LocalDevice calls the underlying HKDeviceLocalDevice.
+// LocalDevice returns a device object that represents the current device.
 func LocalDevice() *Device {
-	_r := raw.HKDeviceLocalDevice()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKDevice")), objc.RegisterName("localDevice"))
+	return DeviceFromID(_r)
 }
 
-// VersionFromVersionStringError calls the underlying HKFHIRVersionVersionFromVersionStringError.
-func VersionFromVersionStringError(versionString string) (*FHIRVersion, error) {
-	_r, _err := raw.HKFHIRVersionVersionFromVersionStringError(foundation.NSStringStringWithUTF8String(versionString))
-	if _err != nil {
-		return nil, _err
+// VersionFromVersionStringError creates an FHIR version object from a string representation of the version.
+func VersionFromVersionStringError(versionString string) (result *FHIRVersion, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("versionFromVersionString:error:"), purego.NSString(versionString), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &FHIRVersion{inner: _r}, nil
+	return FHIRVersionFromID(_r), nil
 }
 
-// PrimaryDSTU2Version calls the underlying HKFHIRVersionPrimaryDSTU2Version.
+// PrimaryDSTU2Version returns the primary Second Draft Standard for Trial Use (DSTU2) version.
 func PrimaryDSTU2Version() *FHIRVersion {
-	_r := raw.HKFHIRVersionPrimaryDSTU2Version()
-	if _r == nil {
-		return nil
-	}
-	return &FHIRVersion{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("primaryDSTU2Version"))
+	return FHIRVersionFromID(_r)
 }
 
-// PrimaryR4Version calls the underlying HKFHIRVersionPrimaryR4Version.
+// PrimaryR4Version returns the primary Release 4 (R4) version.
 func PrimaryR4Version() *FHIRVersion {
-	_r := raw.HKFHIRVersionPrimaryR4Version()
-	if _r == nil {
-		return nil
-	}
-	return &FHIRVersion{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("primaryR4Version"))
+	return FHIRVersionFromID(_r)
 }
 
-// AssessmentWithDateAnswers calls the underlying HKGAD7AssessmentAssessmentWithDateAnswers.
-func AssessmentWithDateAnswers(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber]) *GAD7Assessment {
-	_r := raw.HKGAD7AssessmentAssessmentWithDateAnswers(date, answers)
-	if _r == nil {
-		return nil
-	}
-	return &GAD7Assessment{inner: _r}
+// AssessmentWithDateAnswers creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
+func AssessmentWithDateAnswers(date obj.Object, answers []obj.Object) *GAD7Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return GAD7AssessmentFromID(_r)
 }
 
-// AssessmentWithDateAnswersMetadata calls the underlying HKGAD7AssessmentAssessmentWithDateAnswersMetadata.
-func AssessmentWithDateAnswersMetadata(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *GAD7Assessment {
-	_r := raw.HKGAD7AssessmentAssessmentWithDateAnswersMetadata(date, answers, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &GAD7Assessment{inner: _r}
+// AssessmentWithDateAnswersMetadata creates a new GAD-7 sample. There must be exactly 7 elements in answers, each answer must be of type `HKGAD7AssessmentAnswer`.
+func AssessmentWithDateAnswersMetadata(date obj.Object, answers []obj.Object, metadata obj.Object) *GAD7Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKGAD7Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+	return GAD7AssessmentFromID(_r)
 }
 
-// PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata calls the underlying HKGlassesPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata.
-func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *raw.HKGlassesLensSpecification, leftEyeSpecification *raw.HKGlassesLensSpecification, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *GlassesPrescription {
-	_r := raw.HKGlassesPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification, leftEyeSpecification, dateIssued, expirationDate, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &GlassesPrescription{inner: _r}
+// PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata creates a new glasses prescription sample.
+func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *GlassesLensSpecification, leftEyeSpecification *GlassesLensSpecification, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *GlassesPrescription {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKGlassesPrescription")), objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:dateIssued:expirationDate:device:metadata:"), objref.IDOf(rightEyeSpecification), objref.IDOf(leftEyeSpecification), objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
+	return GlassesPrescriptionFromID(_r)
 }
 
-// IsHealthDataAvailable calls the underlying HKHealthStoreIsHealthDataAvailable.
+// IsHealthDataAvailable returns a Boolean value that indicates whether HealthKit is available on this device.
 func IsHealthDataAvailable() bool {
-	return raw.HKHealthStoreIsHealthDataAvailable()
+	_r := objc.Send[bool](objc.ID(_class("HKHealthStore")), objc.RegisterName("isHealthDataAvailable"))
+	return _r
 }
 
-// MaximumCount calls the underlying HKHeartbeatSeriesBuilderMaximumCount.
-func MaximumCount() uint {
-	return raw.HKHeartbeatSeriesBuilderMaximumCount()
+// MaximumCount the maximum number of heartbeats that can be added to an HKHeartbeatSeriesBuilder. Any calls to addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion: once maximumCount has been reached will fail and an error will be returned in the completion handler.
+func MaximumCount() int {
+	_r := objc.Send[int](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("maximumCount"))
+	return _r
 }
 
-// QuantityTypeForIdentifier calls the underlying HKObjectTypeQuantityTypeForIdentifier.
-func QuantityTypeForIdentifier(identifier *foundation.NSString) *QuantityType {
-	_r := raw.HKObjectTypeQuantityTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &QuantityType{inner: _r}
+// QuantityTypeForIdentifier returns the shared quantity type for the provided identifier.
+func QuantityTypeForIdentifier(identifier obj.Object) *QuantityType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("quantityTypeForIdentifier:"), objref.IDOf(identifier))
+	return QuantityTypeFromID(_r)
 }
 
-// CategoryTypeForIdentifier calls the underlying HKObjectTypeCategoryTypeForIdentifier.
-func CategoryTypeForIdentifier(identifier *foundation.NSString) *CategoryType {
-	_r := raw.HKObjectTypeCategoryTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &CategoryType{inner: _r}
+// CategoryTypeForIdentifier returns the shared category type for the provided identifier.
+func CategoryTypeForIdentifier(identifier obj.Object) *CategoryType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("categoryTypeForIdentifier:"), objref.IDOf(identifier))
+	return CategoryTypeFromID(_r)
 }
 
-// CharacteristicTypeForIdentifier calls the underlying HKObjectTypeCharacteristicTypeForIdentifier.
-func CharacteristicTypeForIdentifier(identifier *foundation.NSString) *CharacteristicType {
-	_r := raw.HKObjectTypeCharacteristicTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &CharacteristicType{inner: _r}
+// CharacteristicTypeForIdentifier returns the shared characteristic type for the provided identifier.
+func CharacteristicTypeForIdentifier(identifier obj.Object) *CharacteristicType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("characteristicTypeForIdentifier:"), objref.IDOf(identifier))
+	return CharacteristicTypeFromID(_r)
 }
 
-// CorrelationTypeForIdentifier calls the underlying HKObjectTypeCorrelationTypeForIdentifier.
-func CorrelationTypeForIdentifier(identifier *foundation.NSString) *CorrelationType {
-	_r := raw.HKObjectTypeCorrelationTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &CorrelationType{inner: _r}
+// CorrelationTypeForIdentifier returns the shared correlation type for the provided identifier.
+func CorrelationTypeForIdentifier(identifier obj.Object) *CorrelationType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("correlationTypeForIdentifier:"), objref.IDOf(identifier))
+	return CorrelationTypeFromID(_r)
 }
 
-// DocumentTypeForIdentifier calls the underlying HKObjectTypeDocumentTypeForIdentifier.
-func DocumentTypeForIdentifier(identifier *foundation.NSString) *DocumentType {
-	_r := raw.HKObjectTypeDocumentTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &DocumentType{inner: _r}
+// DocumentTypeForIdentifier returns the shared document type for the provided identifier.
+func DocumentTypeForIdentifier(identifier obj.Object) *DocumentType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("documentTypeForIdentifier:"), objref.IDOf(identifier))
+	return DocumentTypeFromID(_r)
 }
 
-// ScoredAssessmentTypeForIdentifier calls the underlying HKObjectTypeScoredAssessmentTypeForIdentifier.
-func ScoredAssessmentTypeForIdentifier(identifier *foundation.NSString) *ScoredAssessmentType {
-	_r := raw.HKObjectTypeScoredAssessmentTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &ScoredAssessmentType{inner: _r}
+// ScoredAssessmentTypeForIdentifier wraps the corresponding Objective-C method.
+func ScoredAssessmentTypeForIdentifier(identifier obj.Object) *ScoredAssessmentType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("scoredAssessmentTypeForIdentifier:"), objref.IDOf(identifier))
+	return ScoredAssessmentTypeFromID(_r)
 }
 
-// SeriesTypeForIdentifier calls the underlying HKObjectTypeSeriesTypeForIdentifier.
+// SeriesTypeForIdentifier returns the shared series type for the provided identifier.
 func SeriesTypeForIdentifier(identifier string) *SeriesType {
-	_r := raw.HKObjectTypeSeriesTypeForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &SeriesType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("seriesTypeForIdentifier:"), purego.NSString(identifier))
+	return SeriesTypeFromID(_r)
 }
 
-// HKObjectTypeWorkoutType calls the underlying HKObjectTypeWorkoutType.
+// HKObjectTypeWorkoutType returns the shared HKWorkoutType object.
 func HKObjectTypeWorkoutType() *WorkoutType {
-	_r := raw.HKObjectTypeWorkoutType()
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("workoutType"))
+	return WorkoutTypeFromID(_r)
 }
 
-// HKObjectTypeActivitySummaryType calls the underlying HKObjectTypeActivitySummaryType.
+// HKObjectTypeActivitySummaryType returns the shared activity summary type.
 func HKObjectTypeActivitySummaryType() *ActivitySummaryType {
-	_r := raw.HKObjectTypeActivitySummaryType()
-	if _r == nil {
-		return nil
-	}
-	return &ActivitySummaryType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("activitySummaryType"))
+	return ActivitySummaryTypeFromID(_r)
 }
 
-// HKObjectTypeAudiogramSampleType calls the underlying HKObjectTypeAudiogramSampleType.
+// HKObjectTypeAudiogramSampleType returns an audiogram sample type.
 func HKObjectTypeAudiogramSampleType() *AudiogramSampleType {
-	_r := raw.HKObjectTypeAudiogramSampleType()
-	if _r == nil {
-		return nil
-	}
-	return &AudiogramSampleType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("audiogramSampleType"))
+	return AudiogramSampleTypeFromID(_r)
 }
 
-// HKObjectTypeElectrocardiogramType calls the underlying HKObjectTypeElectrocardiogramType.
+// HKObjectTypeElectrocardiogramType returns the shared electrocardiogram type.
 func HKObjectTypeElectrocardiogramType() *ElectrocardiogramType {
-	_r := raw.HKObjectTypeElectrocardiogramType()
-	if _r == nil {
-		return nil
-	}
-	return &ElectrocardiogramType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("electrocardiogramType"))
+	return ElectrocardiogramTypeFromID(_r)
 }
 
-// HKObjectTypeMedicationDoseEventType calls the underlying HKObjectTypeMedicationDoseEventType.
+// HKObjectTypeMedicationDoseEventType wraps the corresponding Objective-C method.
 func HKObjectTypeMedicationDoseEventType() *MedicationDoseEventType {
-	_r := raw.HKObjectTypeMedicationDoseEventType()
-	if _r == nil {
-		return nil
-	}
-	return &MedicationDoseEventType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("medicationDoseEventType"))
+	return MedicationDoseEventTypeFromID(_r)
 }
 
-// VisionPrescriptionType calls the underlying HKObjectTypeVisionPrescriptionType.
-func VisionPrescriptionType() *PrescriptionType {
-	_r := raw.HKObjectTypeVisionPrescriptionType()
-	if _r == nil {
-		return nil
-	}
-	return &PrescriptionType{inner: _r}
+// HKObjectTypeVisionPrescriptionType returns a shared vision prescription type object.
+func HKObjectTypeVisionPrescriptionType() *PrescriptionType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("visionPrescriptionType"))
+	return PrescriptionTypeFromID(_r)
 }
 
-// HKObjectTypeStateOfMindType calls the underlying HKObjectTypeStateOfMindType.
+// HKObjectTypeStateOfMindType wraps the corresponding Objective-C method.
 func HKObjectTypeStateOfMindType() *StateOfMindType {
-	_r := raw.HKObjectTypeStateOfMindType()
-	if _r == nil {
-		return nil
-	}
-	return &StateOfMindType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("stateOfMindType"))
+	return StateOfMindTypeFromID(_r)
 }
 
-// HKObjectTypeUserAnnotatedMedicationType calls the underlying HKObjectTypeUserAnnotatedMedicationType.
+// HKObjectTypeUserAnnotatedMedicationType wraps the corresponding Objective-C method.
 func HKObjectTypeUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
-	_r := raw.HKObjectTypeUserAnnotatedMedicationType()
-	if _r == nil {
-		return nil
-	}
-	return &UserAnnotatedMedicationType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("userAnnotatedMedicationType"))
+	return UserAnnotatedMedicationTypeFromID(_r)
 }
 
-// ClinicalTypeForIdentifier calls the underlying HKObjectTypeClinicalTypeForIdentifier.
-func ClinicalTypeForIdentifier(identifier *foundation.NSString) *ClinicalType {
-	_r := raw.HKObjectTypeClinicalTypeForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &ClinicalType{inner: _r}
+// ClinicalTypeForIdentifier returns the shared clinical type for the provided identifier.
+func ClinicalTypeForIdentifier(identifier obj.Object) *ClinicalType {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("clinicalTypeForIdentifier:"), objref.IDOf(identifier))
+	return ClinicalTypeFromID(_r)
 }
 
-// HKPHQ9AssessmentAssessmentWithDateAnswers calls the underlying HKPHQ9AssessmentAssessmentWithDateAnswers.
-func HKPHQ9AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber]) *PHQ9Assessment {
-	_r := raw.HKPHQ9AssessmentAssessmentWithDateAnswers(date, answers)
-	if _r == nil {
-		return nil
-	}
-	return &PHQ9Assessment{inner: _r}
+// HKPHQ9AssessmentAssessmentWithDateAnswers creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
+func HKPHQ9AssessmentAssessmentWithDateAnswers(date obj.Object, answers []obj.Object) *PHQ9Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PHQ9AssessmentFromID(_r)
 }
 
-// HKPHQ9AssessmentAssessmentWithDateAnswersMetadata calls the underlying HKPHQ9AssessmentAssessmentWithDateAnswersMetadata.
-func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PHQ9Assessment {
-	_r := raw.HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date, answers, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &PHQ9Assessment{inner: _r}
+// HKPHQ9AssessmentAssessmentWithDateAnswersMetadata creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
+func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date obj.Object, answers []obj.Object, metadata obj.Object) *PHQ9Assessment {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("assessmentWithDate:answers:metadata:"), objref.IDOf(date), purego.SliceToNSArray(answers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+	return PHQ9AssessmentFromID(_r)
 }
 
-// QuantityWithUnitDoubleValue calls the underlying HKQuantityQuantityWithUnitDoubleValue.
-func QuantityWithUnitDoubleValue(unit *raw.HKUnit, value float64) *Quantity {
-	_r := raw.HKQuantityQuantityWithUnitDoubleValue(unit, value)
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+// QuantityWithUnitDoubleValue instantiates and returns a new quantity object.
+func QuantityWithUnitDoubleValue(unit *Unit, value float64) *Quantity {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantity")), objc.RegisterName("quantityWithUnit:doubleValue:"), objref.IDOf(unit), value)
+	return QuantityFromID(_r)
 }
 
-// QuantitySampleWithTypeQuantityStartDateEndDate calls the underlying HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDate.
-func QuantitySampleWithTypeQuantityStartDateEndDate(quantityType *raw.HKQuantityType, quantity *raw.HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate) *QuantitySample {
-	_r := raw.HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDate(quantityType, quantity, startDate, endDate)
-	if _r == nil {
-		return nil
-	}
-	return &QuantitySample{inner: _r}
+// QuantitySampleWithTypeQuantityStartDateEndDate returns a sample containing a numeric measurement.
+func QuantitySampleWithTypeQuantityStartDateEndDate(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object) *QuantitySample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate))
+	return QuantitySampleFromID(_r)
 }
 
-// QuantitySampleWithTypeQuantityStartDateEndDateMetadata calls the underlying HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateMetadata.
-func QuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *raw.HKQuantityType, quantity *raw.HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *QuantitySample {
-	_r := raw.HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType, quantity, startDate, endDate, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &QuantitySample{inner: _r}
+// QuantitySampleWithTypeQuantityStartDateEndDateMetadata returns a sample containing a numeric measurement with the provided metadata.
+func QuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object, metadata obj.Object) *QuantitySample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+	return QuantitySampleFromID(_r)
 }
 
-// QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata calls the underlying HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata.
-func QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *raw.HKQuantityType, quantity *raw.HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *QuantitySample {
-	_r := raw.HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType, quantity, startDate, endDate, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &QuantitySample{inner: _r}
+// QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata returns a sample containing a numeric measurement with the provided device and metadata.
+func QuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *QuantityType, quantity *Quantity, startDate obj.Object, endDate obj.Object, device *Device, metadata obj.Object) *QuantitySample {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:device:metadata:"), objref.IDOf(quantityType), objref.IDOf(quantity), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(device), objref.IDOf(metadata))
+	return QuantitySampleFromID(_r)
 }
 
-// PredicateForObjectsWithMetadataKey calls the underlying HKQueryPredicateForObjectsWithMetadataKey.
-func PredicateForObjectsWithMetadataKey(key string) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsWithMetadataKey(foundation.NSStringStringWithUTF8String(key))
+// PredicateForObjectsWithMetadataKey returns a predicate that matches any object whose metadata contains the provided key.
+func PredicateForObjectsWithMetadataKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithMetadataKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsWithMetadataKeyAllowedValues calls the underlying HKQueryPredicateForObjectsWithMetadataKeyAllowedValues.
-func PredicateForObjectsWithMetadataKeyAllowedValues(key string, allowedValues *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsWithMetadataKeyAllowedValues(foundation.NSStringStringWithUTF8String(key), allowedValues)
+// PredicateForObjectsWithMetadataKeyAllowedValues returns a predicate that matches objects based on the provided metadata key and an array of target values.
+func PredicateForObjectsWithMetadataKeyAllowedValues(key string, allowedValues obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithMetadataKey:allowedValues:"), purego.NSString(key), objref.IDOf(allowedValues))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsWithMetadataKeyOperatorTypeValue calls the underlying HKQueryPredicateForObjectsWithMetadataKeyOperatorTypeValue.
-func PredicateForObjectsWithMetadataKeyOperatorTypeValue(key string, operatorType foundation.NSPredicateOperatorType, value objc.ID) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsWithMetadataKeyOperatorTypeValue(foundation.NSStringStringWithUTF8String(key), operatorType, value)
+// PredicateForObjectsFromSource returns a predicate that matches all the objects that were created by the provided source.
+func PredicateForObjectsFromSource(source *Source) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSource:"), objref.IDOf(source))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsFromSource calls the underlying HKQueryPredicateForObjectsFromSource.
-func PredicateForObjectsFromSource(source *raw.HKSource) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsFromSource(source)
+// PredicateForObjectsFromSources returns a predicate that matches all the objects that were created by any of the provided sources.
+func PredicateForObjectsFromSources(sources obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSources:"), objref.IDOf(sources))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsFromSources calls the underlying HKQueryPredicateForObjectsFromSources.
-func PredicateForObjectsFromSources(sources *foundation.NSSet[*raw.HKSource]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsFromSources(sources)
+// PredicateForObjectsFromSourceRevisions returns a predicate that matches all the objects that were created by any of the provided source revisions.
+func PredicateForObjectsFromSourceRevisions(sourceRevisions obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromSourceRevisions:"), objref.IDOf(sourceRevisions))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsFromSourceRevisions calls the underlying HKQueryPredicateForObjectsFromSourceRevisions.
-func PredicateForObjectsFromSourceRevisions(sourceRevisions *foundation.NSSet[*raw.HKSourceRevision]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsFromSourceRevisions(sourceRevisions)
+// PredicateForObjectsFromDevices returns a predicate that matches all the objects that were created by any of the provided devices.
+func PredicateForObjectsFromDevices(devices obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromDevices:"), objref.IDOf(devices))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsFromDevices calls the underlying HKQueryPredicateForObjectsFromDevices.
-func PredicateForObjectsFromDevices(devices *foundation.NSSet[*raw.HKDevice]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsFromDevices(devices)
+// PredicateForObjectsWithDevicePropertyAllowedValues returns a predicate that matches all objects created by devices with the specified properties.
+func PredicateForObjectsWithDevicePropertyAllowedValues(key string, allowedValues obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithDeviceProperty:allowedValues:"), purego.NSString(key), objref.IDOf(allowedValues))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsWithDevicePropertyAllowedValues calls the underlying HKQueryPredicateForObjectsWithDevicePropertyAllowedValues.
-func PredicateForObjectsWithDevicePropertyAllowedValues(key string, allowedValues *foundation.NSSet[*foundation.NSString]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsWithDevicePropertyAllowedValues(foundation.NSStringStringWithUTF8String(key), allowedValues)
+// PredicateForObjectWithUUID returns a predicate that matches an object with the specified universally unique identifier (UUID).
+func PredicateForObjectWithUUID(uUID obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectWithUUID:"), objref.IDOf(uUID))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectWithUUID calls the underlying HKQueryPredicateForObjectWithUUID.
-func PredicateForObjectWithUUID(uUID *foundation.NSUUID) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectWithUUID(uUID)
+// PredicateForObjectsWithUUIDs returns a predicate that matches the objects with the specified universally unique identifiers (UUIDs).
+func PredicateForObjectsWithUUIDs(uUIDs obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithUUIDs:"), objref.IDOf(uUIDs))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsWithUUIDs calls the underlying HKQueryPredicateForObjectsWithUUIDs.
-func PredicateForObjectsWithUUIDs(uUIDs *foundation.NSSet[*foundation.NSUUID]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsWithUUIDs(uUIDs)
+// PredicateForObjectsWithNoCorrelation returns a predicate that matches all objects that are not associated with a HealthKit correlation.
+func PredicateForObjectsWithNoCorrelation() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsWithNoCorrelation"))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsWithNoCorrelation calls the underlying HKQueryPredicateForObjectsWithNoCorrelation.
-func PredicateForObjectsWithNoCorrelation() *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsWithNoCorrelation()
+// PredicateForObjectsFromWorkout returns a predicate that matches any objects that have been associated with the provided workout.
+func PredicateForObjectsFromWorkout(workout *Workout) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsFromWorkout:"), objref.IDOf(workout))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsFromWorkout calls the underlying HKQueryPredicateForObjectsFromWorkout.
-func PredicateForObjectsFromWorkout(workout *raw.HKWorkout) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsFromWorkout(workout)
+// PredicateForObjectsAssociatedWithElectrocardiogram returns a predicate that matches symptom samples associated with the specified electrocardiogram.
+func PredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram *Electrocardiogram) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForObjectsAssociatedWithElectrocardiogram:"), objref.IDOf(electrocardiogram))
+	return obj.Wrap(_r)
 }
 
-// PredicateForObjectsAssociatedWithElectrocardiogram calls the underlying HKQueryPredicateForObjectsAssociatedWithElectrocardiogram.
-func PredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram *raw.HKElectrocardiogram) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForObjectsAssociatedWithElectrocardiogram(electrocardiogram)
+// PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches Workout Effort samples that have been related to the given workout
+func PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *Workout, activity *WorkoutActivity) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutEffortSamplesRelatedToWorkout:activity:"), objref.IDOf(workout), objref.IDOf(activity))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity calls the underlying HKQueryPredicateForWorkoutEffortSamplesRelatedToWorkoutActivity.
-func PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *raw.HKWorkout, activity *raw.HKWorkoutActivity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout, activity)
+// PredicateForSamplesWithStartDateEndDateOptions returns a predicate for samples whose start and end dates fall within the specified time interval.
+func PredicateForSamplesWithStartDateEndDateOptions(startDate obj.Object, endDate obj.Object, options QueryOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForSamplesWithStartDate:endDate:options:"), objref.IDOf(startDate), objref.IDOf(endDate), options)
+	return obj.Wrap(_r)
 }
 
-// PredicateForSamplesWithStartDateEndDateOptions calls the underlying HKQueryPredicateForSamplesWithStartDateEndDateOptions.
-func PredicateForSamplesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options HKQueryOptions) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForSamplesWithStartDateEndDateOptions(startDate, endDate, raw.HKQueryOptions(options))
+// PredicateForCategorySamplesEqualToValues a predicate that returns category samples with a matching value.
+func PredicateForCategorySamplesEqualToValues(values obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForCategorySamplesEqualToValues:"), objref.IDOf(values))
+	return obj.Wrap(_r)
 }
 
-// PredicateForQuantitySamplesWithOperatorTypeQuantity calls the underlying HKQueryPredicateForQuantitySamplesWithOperatorTypeQuantity.
-func PredicateForQuantitySamplesWithOperatorTypeQuantity(operatorType foundation.NSPredicateOperatorType, quantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForQuantitySamplesWithOperatorTypeQuantity(operatorType, quantity)
+// PredicateForWorkoutsWithWorkoutActivityType returns a predicate for matching workouts based on the type of activity.
+func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType WorkoutActivityType) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutsWithWorkoutActivityType:"), workoutActivityType)
+	return obj.Wrap(_r)
 }
 
-// PredicateForCategorySamplesWithOperatorTypeValue calls the underlying HKQueryPredicateForCategorySamplesWithOperatorTypeValue.
-func PredicateForCategorySamplesWithOperatorTypeValue(operatorType foundation.NSPredicateOperatorType, value int) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForCategorySamplesWithOperatorTypeValue(operatorType, value)
+// PredicateForWorkoutActivitiesWithWorkoutActivityType returns a predicate for workout activities based on the type of activity performed.
+func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType WorkoutActivityType) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithWorkoutActivityType:"), workoutActivityType)
+	return obj.Wrap(_r)
 }
 
-// PredicateForCategorySamplesEqualToValues calls the underlying HKQueryPredicateForCategorySamplesEqualToValues.
-func PredicateForCategorySamplesEqualToValues(values *foundation.NSSet[*foundation.NSNumber]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForCategorySamplesEqualToValues(values)
+// PredicateForWorkoutActivitiesWithStartDateEndDateOptions returns a predicate for workout activities that occur between the start and end date.
+func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate obj.Object, endDate obj.Object, options QueryOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutActivitiesWithStartDate:endDate:options:"), objref.IDOf(startDate), objref.IDOf(endDate), options)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithWorkoutActivityType calls the underlying HKQueryPredicateForWorkoutsWithWorkoutActivityType.
-func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType HKWorkoutActivityType) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithWorkoutActivityType(raw.HKWorkoutActivityType(workoutActivityType))
+// PredicateForWorkoutsWithActivityPredicate returns a predicate for matching workouts based on the associated workout activities.
+func PredicateForWorkoutsWithActivityPredicate(activityPredicate obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForWorkoutsWithActivityPredicate:"), objref.IDOf(activityPredicate))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeDuration calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeDuration.
-func PredicateForWorkoutsWithOperatorTypeDuration(operatorType foundation.NSPredicateOperatorType, duration float64) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeDuration(operatorType, duration)
+// PredicateForActivitySummaryWithDateComponents returns a predicate that matches the activity summary for the specified day.
+func PredicateForActivitySummaryWithDateComponents(dateComponents obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForActivitySummaryWithDateComponents:"), objref.IDOf(dateComponents))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeTotalEnergyBurned calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeTotalEnergyBurned.
-func PredicateForWorkoutsWithOperatorTypeTotalEnergyBurned(operatorType foundation.NSPredicateOperatorType, totalEnergyBurned *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeTotalEnergyBurned(operatorType, totalEnergyBurned)
+// PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents returns a predicate for matching all the activity summaries that fall between the days identified by the start and end date components.
+func PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForActivitySummariesBetweenStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeTotalDistance calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeTotalDistance.
-func PredicateForWorkoutsWithOperatorTypeTotalDistance(operatorType foundation.NSPredicateOperatorType, totalDistance *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeTotalDistance(operatorType, totalDistance)
+// PredicateForClinicalRecordsWithFHIRResourceType returns a predicate for a specific FHIR type.
+func PredicateForClinicalRecordsWithFHIRResourceType(resourceType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForClinicalRecordsWithFHIRResourceType:"), objref.IDOf(resourceType))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount.
-func PredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount(operatorType foundation.NSPredicateOperatorType, totalSwimmingStrokeCount *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeTotalSwimmingStrokeCount(operatorType, totalSwimmingStrokeCount)
+// PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier returns a predicate for a specific FHIR resource.
+func PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *Source, resourceType obj.Object, identifier string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForClinicalRecordsFromSource:FHIRResourceType:identifier:"), objref.IDOf(source), objref.IDOf(resourceType), purego.NSString(identifier))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed.
-func PredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed(operatorType foundation.NSPredicateOperatorType, totalFlightsClimbed *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeTotalFlightsClimbed(operatorType, totalFlightsClimbed)
+// PredicateForElectrocardiogramsWithClassification returns a predicate that matches electrocardiogram samples with the specified classification.
+func PredicateForElectrocardiogramsWithClassification(classification ElectrocardiogramClassification) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForElectrocardiogramsWithClassification:"), classification)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity.
-func PredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, sumQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeSumQuantity(operatorType, quantityType, sumQuantity)
+// PredicateForElectrocardiogramsWithSymptomsStatus returns a predicate that matches electrocardiogram samples with the specified symptom status.
+func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus ElectrocardiogramSymptomsStatus) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForElectrocardiogramsWithSymptomsStatus:"), symptomsStatus)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity.
-func PredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, minimumQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMinimumQuantity(operatorType, quantityType, minimumQuantity)
+// PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval returns a predicate that finds verifiable health records with a relevant date within the specified range.
+func PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval:"), objref.IDOf(dateInterval))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity.
-func PredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, maximumQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeMaximumQuantity(operatorType, quantityType, maximumQuantity)
+// PredicateForStatesOfMindWithKind creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified kind of feeling type.
+func PredicateForStatesOfMindWithKind(kind StateOfMindKind) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithKind:"), kind)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity.
-func PredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, averageQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity(operatorType, quantityType, averageQuantity)
+// PredicateForStatesOfMindWithLabel creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified label.
+func PredicateForStatesOfMindWithLabel(label StateOfMindLabel) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithLabel:"), label)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithWorkoutActivityType calls the underlying HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType.
-func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType HKWorkoutActivityType) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType(raw.HKWorkoutActivityType(workoutActivityType))
+// PredicateForStatesOfMindWithAssociation creates a predicate for use with HKStateOfMind Creates a query predicate that matches HKStateOfMind samples that have the specified association.
+func PredicateForStatesOfMindWithAssociation(association StateOfMindAssociation) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForStatesOfMindWithAssociation:"), association)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithOperatorTypeDuration calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeDuration.
-func PredicateForWorkoutActivitiesWithOperatorTypeDuration(operatorType foundation.NSPredicateOperatorType, duration float64) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithOperatorTypeDuration(operatorType, duration)
+// PredicateForMedicationDoseEventWithStatus creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the status specified.
+func PredicateForMedicationDoseEventWithStatus(status MedicationDoseEventLogStatus) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatus:"), status)
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithStartDateEndDateOptions calls the underlying HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions.
-func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options HKQueryOptions) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate, endDate, raw.HKQueryOptions(options))
+// PredicateForMedicationDoseEventWithStatuses creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the statuses specified.
+func PredicateForMedicationDoseEventWithStatuses(statuses obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithStatuses:"), objref.IDOf(statuses))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity.
-func PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, sumQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity(operatorType, quantityType, sumQuantity)
+// PredicateForMedicationDoseEventWithScheduledDate creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have the exact scheduled date specified.
+func PredicateForMedicationDoseEventWithScheduledDate(scheduledDate obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDate:"), objref.IDOf(scheduledDate))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuantity calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuantity.
-func PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, minimumQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMinimumQuantity(operatorType, quantityType, minimumQuantity)
+// PredicateForMedicationDoseEventWithScheduledDates creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the exact scheduled dates specified.
+func PredicateForMedicationDoseEventWithScheduledDates(scheduledDates obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledDates:"), objref.IDOf(scheduledDates))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuantity calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuantity.
-func PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, maximumQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeMaximumQuantity(operatorType, quantityType, maximumQuantity)
+// PredicateForMedicationDoseEventWithScheduledStartDateEndDate creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that have a scheduled date within a window of scheduled times. If nil is provided to either parameter, the respective side of the window is unbound.
+func PredicateForMedicationDoseEventWithScheduledStartDateEndDate(startDate obj.Object, endDate obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithScheduledStartDate:endDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuantity calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuantity.
-func PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuantity(operatorType foundation.NSPredicateOperatorType, quantityType *raw.HKQuantityType, averageQuantity *raw.HKQuantity) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeAverageQuantity(operatorType, quantityType, averageQuantity)
+// PredicateForMedicationDoseEventWithMedicationConceptIdentifier creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples that match a medication's concept identifier.
+func PredicateForMedicationDoseEventWithMedicationConceptIdentifier(medicationConceptIdentifier *HealthConceptIdentifier) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifier:"), objref.IDOf(medicationConceptIdentifier))
+	return obj.Wrap(_r)
 }
 
-// PredicateForWorkoutsWithActivityPredicate calls the underlying HKQueryPredicateForWorkoutsWithActivityPredicate.
-func PredicateForWorkoutsWithActivityPredicate(activityPredicate *foundation.NSPredicate) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithActivityPredicate(activityPredicate)
+// PredicateForMedicationDoseEventWithMedicationConceptIdentifiers creates a predicate for use with HKQuery subclasses. Creates a query predicate that matches HKMedicationDoseEvent samples generated by any medication in a set of medication concept identifiers.
+func PredicateForMedicationDoseEventWithMedicationConceptIdentifiers(medicationConceptIdentifiers obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForMedicationDoseEventWithMedicationConceptIdentifiers:"), objref.IDOf(medicationConceptIdentifiers))
+	return obj.Wrap(_r)
 }
 
-// PredicateForActivitySummaryWithDateComponents calls the underlying HKQueryPredicateForActivitySummaryWithDateComponents.
-func PredicateForActivitySummaryWithDateComponents(dateComponents *foundation.NSDateComponents) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForActivitySummaryWithDateComponents(dateComponents)
+// PredicateForUserAnnotatedMedicationsWithIsArchived creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that have the archived status specified.
+func PredicateForUserAnnotatedMedicationsWithIsArchived(isArchived bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForUserAnnotatedMedicationsWithIsArchived:"), isArchived)
+	return obj.Wrap(_r)
 }
 
-// PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents calls the underlying HKQueryPredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents.
-func PredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForActivitySummariesBetweenStartDateComponentsEndDateComponents(startDateComponents, endDateComponents)
+// PredicateForUserAnnotatedMedicationsWithHasSchedule creates a predicate for use with HKUserAnnotatedMedicationQuery. Creates a query predicate that matches HKUserAnnotatedMedication objects that match the schedule status specified.
+func PredicateForUserAnnotatedMedicationsWithHasSchedule(hasSchedule bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQuery")), objc.RegisterName("predicateForUserAnnotatedMedicationsWithHasSchedule:"), hasSchedule)
+	return obj.Wrap(_r)
 }
 
-// PredicateForClinicalRecordsWithFHIRResourceType calls the underlying HKQueryPredicateForClinicalRecordsWithFHIRResourceType.
-func PredicateForClinicalRecordsWithFHIRResourceType(resourceType *foundation.NSString) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForClinicalRecordsWithFHIRResourceType(resourceType)
+// AnchorFromValue returns an anchor object from the provided anchor value.
+func AnchorFromValue(value int) *QueryAnchor {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKQueryAnchor")), objc.RegisterName("anchorFromValue:"), value)
+	return QueryAnchorFromID(_r)
 }
 
-// PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier calls the underlying HKQueryPredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier.
-func PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *raw.HKSource, resourceType *foundation.NSString, identifier string) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source, resourceType, foundation.NSStringStringWithUTF8String(identifier))
-}
-
-// PredicateForElectrocardiogramsWithClassification calls the underlying HKQueryPredicateForElectrocardiogramsWithClassification.
-func PredicateForElectrocardiogramsWithClassification(classification HKElectrocardiogramClassification) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForElectrocardiogramsWithClassification(raw.HKElectrocardiogramClassification(classification))
-}
-
-// PredicateForElectrocardiogramsWithSymptomsStatus calls the underlying HKQueryPredicateForElectrocardiogramsWithSymptomsStatus.
-func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus HKElectrocardiogramSymptomsStatus) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForElectrocardiogramsWithSymptomsStatus(raw.HKElectrocardiogramSymptomsStatus(symptomsStatus))
-}
-
-// PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval calls the underlying HKQueryPredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval.
-func PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval *foundation.NSDateInterval) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval(dateInterval)
-}
-
-// PredicateForStatesOfMindWithValenceOperatorType calls the underlying HKQueryPredicateForStatesOfMindWithValenceOperatorType.
-func PredicateForStatesOfMindWithValenceOperatorType(valence float64, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithValenceOperatorType(valence, operatorType)
-}
-
-// PredicateForStatesOfMindWithKind calls the underlying HKQueryPredicateForStatesOfMindWithKind.
-func PredicateForStatesOfMindWithKind(kind HKStateOfMindKind) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithKind(raw.HKStateOfMindKind(kind))
-}
-
-// PredicateForStatesOfMindWithLabel calls the underlying HKQueryPredicateForStatesOfMindWithLabel.
-func PredicateForStatesOfMindWithLabel(label HKStateOfMindLabel) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithLabel(raw.HKStateOfMindLabel(label))
-}
-
-// PredicateForStatesOfMindWithAssociation calls the underlying HKQueryPredicateForStatesOfMindWithAssociation.
-func PredicateForStatesOfMindWithAssociation(association HKStateOfMindAssociation) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithAssociation(raw.HKStateOfMindAssociation(association))
-}
-
-// PredicateForMedicationDoseEventWithStatus calls the underlying HKQueryPredicateForMedicationDoseEventWithStatus.
-func PredicateForMedicationDoseEventWithStatus(status HKMedicationDoseEventLogStatus) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithStatus(raw.HKMedicationDoseEventLogStatus(status))
-}
-
-// PredicateForMedicationDoseEventWithStatuses calls the underlying HKQueryPredicateForMedicationDoseEventWithStatuses.
-func PredicateForMedicationDoseEventWithStatuses(statuses *foundation.NSSet[*foundation.NSNumber]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithStatuses(statuses)
-}
-
-// PredicateForMedicationDoseEventWithScheduledDate calls the underlying HKQueryPredicateForMedicationDoseEventWithScheduledDate.
-func PredicateForMedicationDoseEventWithScheduledDate(scheduledDate *foundation.NSDate) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithScheduledDate(scheduledDate)
-}
-
-// PredicateForMedicationDoseEventWithScheduledDates calls the underlying HKQueryPredicateForMedicationDoseEventWithScheduledDates.
-func PredicateForMedicationDoseEventWithScheduledDates(scheduledDates *foundation.NSSet[*foundation.NSDate]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithScheduledDates(scheduledDates)
-}
-
-// PredicateForMedicationDoseEventWithScheduledStartDateEndDate calls the underlying HKQueryPredicateForMedicationDoseEventWithScheduledStartDateEndDate.
-func PredicateForMedicationDoseEventWithScheduledStartDateEndDate(startDate *foundation.NSDate, endDate *foundation.NSDate) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithScheduledStartDateEndDate(startDate, endDate)
-}
-
-// PredicateForMedicationDoseEventWithMedicationConceptIdentifier calls the underlying HKQueryPredicateForMedicationDoseEventWithMedicationConceptIdentifier.
-func PredicateForMedicationDoseEventWithMedicationConceptIdentifier(medicationConceptIdentifier *raw.HKHealthConceptIdentifier) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithMedicationConceptIdentifier(medicationConceptIdentifier)
-}
-
-// PredicateForMedicationDoseEventWithMedicationConceptIdentifiers calls the underlying HKQueryPredicateForMedicationDoseEventWithMedicationConceptIdentifiers.
-func PredicateForMedicationDoseEventWithMedicationConceptIdentifiers(medicationConceptIdentifiers *foundation.NSSet[*raw.HKHealthConceptIdentifier]) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithMedicationConceptIdentifiers(medicationConceptIdentifiers)
-}
-
-// PredicateForUserAnnotatedMedicationsWithIsArchived calls the underlying HKQueryPredicateForUserAnnotatedMedicationsWithIsArchived.
-func PredicateForUserAnnotatedMedicationsWithIsArchived(isArchived bool) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForUserAnnotatedMedicationsWithIsArchived(isArchived)
-}
-
-// PredicateForUserAnnotatedMedicationsWithHasSchedule calls the underlying HKQueryPredicateForUserAnnotatedMedicationsWithHasSchedule.
-func PredicateForUserAnnotatedMedicationsWithHasSchedule(hasSchedule bool) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForUserAnnotatedMedicationsWithHasSchedule(hasSchedule)
-}
-
-// AnchorFromValue calls the underlying HKQueryAnchorAnchorFromValue.
-func AnchorFromValue(value uint) *QueryAnchor {
-	_r := raw.HKQueryAnchorAnchorFromValue(value)
-	if _r == nil {
-		return nil
-	}
-	return &QueryAnchor{inner: _r}
-}
-
-// WorkoutRouteType calls the underlying HKSeriesTypeWorkoutRouteType.
+// WorkoutRouteType returns a series type object for workout routes.
 func WorkoutRouteType() *SeriesType {
-	_r := raw.HKSeriesTypeWorkoutRouteType()
-	if _r == nil {
-		return nil
-	}
-	return &SeriesType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKSeriesType")), objc.RegisterName("workoutRouteType"))
+	return SeriesTypeFromID(_r)
 }
 
-// HeartbeatSeriesType calls the underlying HKSeriesTypeHeartbeatSeriesType.
+// HeartbeatSeriesType returns a series type object for heartbeat data.
 func HeartbeatSeriesType() *SeriesType {
-	_r := raw.HKSeriesTypeHeartbeatSeriesType()
-	if _r == nil {
-		return nil
-	}
-	return &SeriesType{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKSeriesType")), objc.RegisterName("heartbeatSeriesType"))
+	return SeriesTypeFromID(_r)
 }
 
-// DefaultSource calls the underlying HKSourceDefaultSource.
+// DefaultSource returns a source object for the current app.
 func DefaultSource() *Source {
-	_r := raw.HKSourceDefaultSource()
-	if _r == nil {
-		return nil
-	}
-	return &Source{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKSource")), objc.RegisterName("defaultSource"))
+	return SourceFromID(_r)
 }
 
-// StateOfMindWithDateKindValenceLabelsAssociations calls the underlying HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations.
-func StateOfMindWithDateKindValenceLabelsAssociations(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber]) *StateOfMind {
-	_r := raw.HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations(date, raw.HKStateOfMindKind(kind), valence, labels, associations)
-	if _r == nil {
-		return nil
-	}
-	return &StateOfMind{inner: _r}
+// StateOfMindWithDateKindValenceLabelsAssociations creates a new log describing an experienced emotion at a moment in time.
+func StateOfMindWithDateKindValenceLabelsAssociations(date obj.Object, kind StateOfMindKind, valence float64, labels []obj.Object, associations []obj.Object) *StateOfMind {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:"), objref.IDOf(date), kind, valence, purego.SliceToNSArray(labels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return StateOfMindFromID(_r)
 }
 
-// StateOfMindWithDateKindValenceLabelsAssociationsMetadata calls the underlying HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata.
-func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *StateOfMind {
-	_r := raw.HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata(date, raw.HKStateOfMindKind(kind), valence, labels, associations, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &StateOfMind{inner: _r}
+// StateOfMindWithDateKindValenceLabelsAssociationsMetadata creates a new log describing an experienced emotion at a moment in time.
+func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date obj.Object, kind StateOfMindKind, valence float64, labels []obj.Object, associations []obj.Object, metadata obj.Object) *StateOfMind {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:metadata:"), objref.IDOf(date), kind, valence, purego.SliceToNSArray(labels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(associations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(metadata))
+	return StateOfMindFromID(_r)
 }
 
-// UnitFromString calls the underlying HKUnitUnitFromString.
+// UnitFromString returns the unit instance described by the provided string.
 func UnitFromString(string_ string) *Unit {
-	_r := raw.HKUnitUnitFromString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("unitFromString:"), purego.NSString(string_))
+	return UnitFromID(_r)
 }
 
-// UnitFromMassFormatterUnit calls the underlying HKUnitUnitFromMassFormatterUnit.
-func UnitFromMassFormatterUnit(massFormatterUnit foundation.NSMassFormatterUnit) *Unit {
-	_r := raw.HKUnitUnitFromMassFormatterUnit(massFormatterUnit)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// GramUnitWithMetricPrefix returns a HealthKit unit for measuring mass, using gram units with the provided prefix.
+func GramUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("gramUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// MassFormatterUnitFromUnit calls the underlying HKUnitMassFormatterUnitFromUnit.
-func MassFormatterUnitFromUnit(unit *raw.HKUnit) foundation.NSMassFormatterUnit {
-	return raw.HKUnitMassFormatterUnitFromUnit(unit)
-}
-
-// UnitFromLengthFormatterUnit calls the underlying HKUnitUnitFromLengthFormatterUnit.
-func UnitFromLengthFormatterUnit(lengthFormatterUnit foundation.NSLengthFormatterUnit) *Unit {
-	_r := raw.HKUnitUnitFromLengthFormatterUnit(lengthFormatterUnit)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
-}
-
-// LengthFormatterUnitFromUnit calls the underlying HKUnitLengthFormatterUnitFromUnit.
-func LengthFormatterUnitFromUnit(unit *raw.HKUnit) foundation.NSLengthFormatterUnit {
-	return raw.HKUnitLengthFormatterUnitFromUnit(unit)
-}
-
-// UnitFromEnergyFormatterUnit calls the underlying HKUnitUnitFromEnergyFormatterUnit.
-func UnitFromEnergyFormatterUnit(energyFormatterUnit foundation.NSEnergyFormatterUnit) *Unit {
-	_r := raw.HKUnitUnitFromEnergyFormatterUnit(energyFormatterUnit)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
-}
-
-// EnergyFormatterUnitFromUnit calls the underlying HKUnitEnergyFormatterUnitFromUnit.
-func EnergyFormatterUnitFromUnit(unit *raw.HKUnit) foundation.NSEnergyFormatterUnit {
-	return raw.HKUnitEnergyFormatterUnitFromUnit(unit)
-}
-
-// GramUnitWithMetricPrefix calls the underlying HKUnitGramUnitWithMetricPrefix.
-func GramUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitGramUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
-}
-
-// GramUnit calls the underlying HKUnitGramUnit.
+// GramUnit returns a HealthKit unit for measuring mass in grams.
 func GramUnit() *Unit {
-	_r := raw.HKUnitGramUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("gramUnit"))
+	return UnitFromID(_r)
 }
 
-// OunceUnit calls the underlying HKUnitOunceUnit.
+// OunceUnit returns a HealthKit unit for measuring mass in ounces.
 func OunceUnit() *Unit {
-	_r := raw.HKUnitOunceUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("ounceUnit"))
+	return UnitFromID(_r)
 }
 
-// PoundUnit calls the underlying HKUnitPoundUnit.
+// PoundUnit returns a HealthKit unit for measuring mass in pounds.
 func PoundUnit() *Unit {
-	_r := raw.HKUnitPoundUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("poundUnit"))
+	return UnitFromID(_r)
 }
 
-// StoneUnit calls the underlying HKUnitStoneUnit.
+// StoneUnit returns a HealthKit unit for measuring mass in stones.
 func StoneUnit() *Unit {
-	_r := raw.HKUnitStoneUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("stoneUnit"))
+	return UnitFromID(_r)
 }
 
-// MoleUnitWithMetricPrefixMolarMass calls the underlying HKUnitMoleUnitWithMetricPrefixMolarMass.
-func MoleUnitWithMetricPrefixMolarMass(prefix HKMetricPrefix, gramsPerMole float64) *Unit {
-	_r := raw.HKUnitMoleUnitWithMetricPrefixMolarMass(raw.HKMetricPrefix(prefix), gramsPerMole)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// MoleUnitWithMetricPrefixMolarMass returns a HealthKit unit for measuring mass in moles, with the given prefix and molar mass.
+func MoleUnitWithMetricPrefixMolarMass(prefix MetricPrefix, gramsPerMole float64) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("moleUnitWithMetricPrefix:molarMass:"), prefix, gramsPerMole)
+	return UnitFromID(_r)
 }
 
-// MoleUnitWithMolarMass calls the underlying HKUnitMoleUnitWithMolarMass.
+// MoleUnitWithMolarMass returns a HealthKit unit for measuring mass in moles for a given molar mass.
 func MoleUnitWithMolarMass(gramsPerMole float64) *Unit {
-	_r := raw.HKUnitMoleUnitWithMolarMass(gramsPerMole)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("moleUnitWithMolarMass:"), gramsPerMole)
+	return UnitFromID(_r)
 }
 
-// MeterUnitWithMetricPrefix calls the underlying HKUnitMeterUnitWithMetricPrefix.
-func MeterUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitMeterUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// MeterUnitWithMetricPrefix returns a HealthKit unit for measuring length, using meter units with the provided prefix.
+func MeterUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("meterUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// MeterUnit calls the underlying HKUnitMeterUnit.
+// MeterUnit returns a HealthKit unit for measuring length in meters.
 func MeterUnit() *Unit {
-	_r := raw.HKUnitMeterUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("meterUnit"))
+	return UnitFromID(_r)
 }
 
-// InchUnit calls the underlying HKUnitInchUnit.
+// InchUnit returns a HealthKit unit for measuring length in inches.
 func InchUnit() *Unit {
-	_r := raw.HKUnitInchUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("inchUnit"))
+	return UnitFromID(_r)
 }
 
-// FootUnit calls the underlying HKUnitFootUnit.
+// FootUnit returns a HealthKit unit for measuring length in feet.
 func FootUnit() *Unit {
-	_r := raw.HKUnitFootUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("footUnit"))
+	return UnitFromID(_r)
 }
 
-// YardUnit calls the underlying HKUnitYardUnit.
+// YardUnit returns a HealthKit unit for measuring length in yards.
 func YardUnit() *Unit {
-	_r := raw.HKUnitYardUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("yardUnit"))
+	return UnitFromID(_r)
 }
 
-// MileUnit calls the underlying HKUnitMileUnit.
+// MileUnit returns a HealthKit unit for measuring length in miles.
 func MileUnit() *Unit {
-	_r := raw.HKUnitMileUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("mileUnit"))
+	return UnitFromID(_r)
 }
 
-// LiterUnitWithMetricPrefix calls the underlying HKUnitLiterUnitWithMetricPrefix.
-func LiterUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitLiterUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// LiterUnitWithMetricPrefix returns a HealthKit unit for measuring volume, using liter units with the provided prefix.
+func LiterUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("literUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// LiterUnit calls the underlying HKUnitLiterUnit.
+// LiterUnit returns a HealthKit unit for measuring volume in liters.
 func LiterUnit() *Unit {
-	_r := raw.HKUnitLiterUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("literUnit"))
+	return UnitFromID(_r)
 }
 
-// FluidOunceUSUnit calls the underlying HKUnitFluidOunceUSUnit.
+// FluidOunceUSUnit returns a HealthKit unit for measuring volume in US fluid ounces.
 func FluidOunceUSUnit() *Unit {
-	_r := raw.HKUnitFluidOunceUSUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("fluidOunceUSUnit"))
+	return UnitFromID(_r)
 }
 
-// FluidOunceImperialUnit calls the underlying HKUnitFluidOunceImperialUnit.
+// FluidOunceImperialUnit returns a HealthKit unit for measuring volume in imperial fluid ounces.
 func FluidOunceImperialUnit() *Unit {
-	_r := raw.HKUnitFluidOunceImperialUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("fluidOunceImperialUnit"))
+	return UnitFromID(_r)
 }
 
-// PintUSUnit calls the underlying HKUnitPintUSUnit.
+// PintUSUnit returns a HealthKit unit for measuring volume in US pints.
 func PintUSUnit() *Unit {
-	_r := raw.HKUnitPintUSUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pintUSUnit"))
+	return UnitFromID(_r)
 }
 
-// PintImperialUnit calls the underlying HKUnitPintImperialUnit.
+// PintImperialUnit returns a HealthKit unit for measuring volume in imperial pints.
 func PintImperialUnit() *Unit {
-	_r := raw.HKUnitPintImperialUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pintImperialUnit"))
+	return UnitFromID(_r)
 }
 
-// CupUSUnit calls the underlying HKUnitCupUSUnit.
+// CupUSUnit returns a HealthKit unit for measuring volume in US cups.
 func CupUSUnit() *Unit {
-	_r := raw.HKUnitCupUSUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("cupUSUnit"))
+	return UnitFromID(_r)
 }
 
-// CupImperialUnit calls the underlying HKUnitCupImperialUnit.
+// CupImperialUnit returns a HealthKit unit for measuring volume in imperial cups.
 func CupImperialUnit() *Unit {
-	_r := raw.HKUnitCupImperialUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("cupImperialUnit"))
+	return UnitFromID(_r)
 }
 
-// PascalUnitWithMetricPrefix calls the underlying HKUnitPascalUnitWithMetricPrefix.
-func PascalUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitPascalUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// PascalUnitWithMetricPrefix returns a HealthKit unit for measuring pressure, using pascal units with the provided prefix.
+func PascalUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pascalUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// PascalUnit calls the underlying HKUnitPascalUnit.
+// PascalUnit returns a HealthKit unit for measuring pressure in pascals.
 func PascalUnit() *Unit {
-	_r := raw.HKUnitPascalUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("pascalUnit"))
+	return UnitFromID(_r)
 }
 
-// MillimeterOfMercuryUnit calls the underlying HKUnitMillimeterOfMercuryUnit.
+// MillimeterOfMercuryUnit returns a HealthKit unit for measuring pressure in millimeters of mercury.
 func MillimeterOfMercuryUnit() *Unit {
-	_r := raw.HKUnitMillimeterOfMercuryUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("millimeterOfMercuryUnit"))
+	return UnitFromID(_r)
 }
 
-// CentimeterOfWaterUnit calls the underlying HKUnitCentimeterOfWaterUnit.
+// CentimeterOfWaterUnit returns a HealthKit unit for measuring pressure in centimeters of water.
 func CentimeterOfWaterUnit() *Unit {
-	_r := raw.HKUnitCentimeterOfWaterUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("centimeterOfWaterUnit"))
+	return UnitFromID(_r)
 }
 
-// AtmosphereUnit calls the underlying HKUnitAtmosphereUnit.
+// AtmosphereUnit returns a HealthKit unit for measuring pressure in atmospheres.
 func AtmosphereUnit() *Unit {
-	_r := raw.HKUnitAtmosphereUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("atmosphereUnit"))
+	return UnitFromID(_r)
 }
 
-// DecibelAWeightedSoundPressureLevelUnit calls the underlying HKUnitDecibelAWeightedSoundPressureLevelUnit.
+// DecibelAWeightedSoundPressureLevelUnit returns a HealthKit unit for measuring the difference between the local pressure and the ambient atmospheric pressure caused by sound.
 func DecibelAWeightedSoundPressureLevelUnit() *Unit {
-	_r := raw.HKUnitDecibelAWeightedSoundPressureLevelUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("decibelAWeightedSoundPressureLevelUnit"))
+	return UnitFromID(_r)
 }
 
-// InchesOfMercuryUnit calls the underlying HKUnitInchesOfMercuryUnit.
+// InchesOfMercuryUnit returns a HealthKit unit for measuring pressure in inches of mercury.
 func InchesOfMercuryUnit() *Unit {
-	_r := raw.HKUnitInchesOfMercuryUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("inchesOfMercuryUnit"))
+	return UnitFromID(_r)
 }
 
-// SecondUnitWithMetricPrefix calls the underlying HKUnitSecondUnitWithMetricPrefix.
-func SecondUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitSecondUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// SecondUnitWithMetricPrefix returns a HealthKit unit for measuring time, using second units with the provided prefix.
+func SecondUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("secondUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// SecondUnit calls the underlying HKUnitSecondUnit.
+// SecondUnit returns a HealthKit unit for measuring time in seconds.
 func SecondUnit() *Unit {
-	_r := raw.HKUnitSecondUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("secondUnit"))
+	return UnitFromID(_r)
 }
 
-// MinuteUnit calls the underlying HKUnitMinuteUnit.
+// MinuteUnit returns a HealthKit unit for measuring time in minutes.
 func MinuteUnit() *Unit {
-	_r := raw.HKUnitMinuteUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("minuteUnit"))
+	return UnitFromID(_r)
 }
 
-// HourUnit calls the underlying HKUnitHourUnit.
+// HourUnit returns a HealthKit unit for measuring time in hours.
 func HourUnit() *Unit {
-	_r := raw.HKUnitHourUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("hourUnit"))
+	return UnitFromID(_r)
 }
 
-// DayUnit calls the underlying HKUnitDayUnit.
+// DayUnit returns a HealthKit unit for measuring time in days.
 func DayUnit() *Unit {
-	_r := raw.HKUnitDayUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("dayUnit"))
+	return UnitFromID(_r)
 }
 
-// JouleUnitWithMetricPrefix calls the underlying HKUnitJouleUnitWithMetricPrefix.
-func JouleUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitJouleUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// JouleUnitWithMetricPrefix returns a HealthKit unit for measuring energy, using joule units with the provided prefix.
+func JouleUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("jouleUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// JouleUnit calls the underlying HKUnitJouleUnit.
+// JouleUnit returns a HealthKit unit for measuring energy in joules.
 func JouleUnit() *Unit {
-	_r := raw.HKUnitJouleUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("jouleUnit"))
+	return UnitFromID(_r)
 }
 
-// KilocalorieUnit calls the underlying HKUnitKilocalorieUnit.
+// KilocalorieUnit returns a HealthKit unit for measuring energy in kilocalories.
 func KilocalorieUnit() *Unit {
-	_r := raw.HKUnitKilocalorieUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("kilocalorieUnit"))
+	return UnitFromID(_r)
 }
 
-// SmallCalorieUnit calls the underlying HKUnitSmallCalorieUnit.
+// SmallCalorieUnit returns a HealthKit unit for measuring energy in small calories (cal).
 func SmallCalorieUnit() *Unit {
-	_r := raw.HKUnitSmallCalorieUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("smallCalorieUnit"))
+	return UnitFromID(_r)
 }
 
-// LargeCalorieUnit calls the underlying HKUnitLargeCalorieUnit.
+// LargeCalorieUnit returns a HealthKit unit for measuring energy in large calories (Cal).
 func LargeCalorieUnit() *Unit {
-	_r := raw.HKUnitLargeCalorieUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("largeCalorieUnit"))
+	return UnitFromID(_r)
 }
 
-// CalorieUnit calls the underlying HKUnitCalorieUnit.
+// CalorieUnit returns a HealthKit unit for measuring energy in calories.
 func CalorieUnit() *Unit {
-	_r := raw.HKUnitCalorieUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("calorieUnit"))
+	return UnitFromID(_r)
 }
 
-// DegreeCelsiusUnit calls the underlying HKUnitDegreeCelsiusUnit.
+// DegreeCelsiusUnit returns a HealthKit unit for measuring temperature in degrees Celsius.
 func DegreeCelsiusUnit() *Unit {
-	_r := raw.HKUnitDegreeCelsiusUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("degreeCelsiusUnit"))
+	return UnitFromID(_r)
 }
 
-// DegreeFahrenheitUnit calls the underlying HKUnitDegreeFahrenheitUnit.
+// DegreeFahrenheitUnit returns a HealthKit unit for measuring temperature in degrees Fahrenheit.
 func DegreeFahrenheitUnit() *Unit {
-	_r := raw.HKUnitDegreeFahrenheitUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("degreeFahrenheitUnit"))
+	return UnitFromID(_r)
 }
 
-// KelvinUnit calls the underlying HKUnitKelvinUnit.
+// KelvinUnit returns a HealthKit unit for measuring temperature in kelvins.
 func KelvinUnit() *Unit {
-	_r := raw.HKUnitKelvinUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("kelvinUnit"))
+	return UnitFromID(_r)
 }
 
-// SiemenUnitWithMetricPrefix calls the underlying HKUnitSiemenUnitWithMetricPrefix.
-func SiemenUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitSiemenUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// SiemenUnitWithMetricPrefix returns a HealthKit unit for measuring electrical conductance, using siemen units with the provided prefix.
+func SiemenUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("siemenUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// SiemenUnit calls the underlying HKUnitSiemenUnit.
+// SiemenUnit returns a HealthKit unit for measuring electrical conductance in siemens.
 func SiemenUnit() *Unit {
-	_r := raw.HKUnitSiemenUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("siemenUnit"))
+	return UnitFromID(_r)
 }
 
-// InternationalUnit calls the underlying HKUnitInternationalUnit.
+// InternationalUnit returns a HealthKit unit that measures the amount of a biologically active substance in international units (IU).
 func InternationalUnit() *Unit {
-	_r := raw.HKUnitInternationalUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("internationalUnit"))
+	return UnitFromID(_r)
 }
 
-// CountUnit calls the underlying HKUnitCountUnit.
+// CountUnit returns a HealthKit unit for measuring counts.
 func CountUnit() *Unit {
-	_r := raw.HKUnitCountUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("countUnit"))
+	return UnitFromID(_r)
 }
 
-// PercentUnit calls the underlying HKUnitPercentUnit.
+// PercentUnit returns a HealthKit unit for measuring percentages.
 func PercentUnit() *Unit {
-	_r := raw.HKUnitPercentUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("percentUnit"))
+	return UnitFromID(_r)
 }
 
-// DecibelHearingLevelUnit calls the underlying HKUnitDecibelHearingLevelUnit.
+// DecibelHearingLevelUnit returns a HealthKit unit for measuring the intensity of a sound.
 func DecibelHearingLevelUnit() *Unit {
-	_r := raw.HKUnitDecibelHearingLevelUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("decibelHearingLevelUnit"))
+	return UnitFromID(_r)
 }
 
-// HertzUnitWithMetricPrefix calls the underlying HKUnitHertzUnitWithMetricPrefix.
-func HertzUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitHertzUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// HertzUnitWithMetricPrefix returns a HealthKit unit for measuring frequency in hertz with the provided prefix.
+func HertzUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("hertzUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// HertzUnit calls the underlying HKUnitHertzUnit.
+// HertzUnit returns a HealthKit unit for measuring frequency in hertz.
 func HertzUnit() *Unit {
-	_r := raw.HKUnitHertzUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("hertzUnit"))
+	return UnitFromID(_r)
 }
 
-// VoltUnitWithMetricPrefix calls the underlying HKUnitVoltUnitWithMetricPrefix.
-func VoltUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitVoltUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// VoltUnitWithMetricPrefix returns a HealthKit unit for measuring the electrical potential difference in volts with the provided prefix.
+func VoltUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("voltUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// VoltUnit calls the underlying HKUnitVoltUnit.
+// VoltUnit returns a HealthKit unit for measuring the difference in electrical potential using volts.
 func VoltUnit() *Unit {
-	_r := raw.HKUnitVoltUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("voltUnit"))
+	return UnitFromID(_r)
 }
 
-// WattUnitWithMetricPrefix calls the underlying HKUnitWattUnitWithMetricPrefix.
-func WattUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitWattUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// WattUnitWithMetricPrefix returns a HealthKit unit for measuring power, using watt units with the provided prefix.
+func WattUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("wattUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// WattUnit calls the underlying HKUnitWattUnit.
+// WattUnit returns a HealthKit unit for measuring power in watts.
 func WattUnit() *Unit {
-	_r := raw.HKUnitWattUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("wattUnit"))
+	return UnitFromID(_r)
 }
 
-// DiopterUnit calls the underlying HKUnitDiopterUnit.
+// DiopterUnit returns a HealthKit unit for measuring the optical power of a lens using diopter units.
 func DiopterUnit() *Unit {
-	_r := raw.HKUnitDiopterUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("diopterUnit"))
+	return UnitFromID(_r)
 }
 
-// PrismDiopterUnit calls the underlying HKUnitPrismDiopterUnit.
+// PrismDiopterUnit returns a HealthKit unit for measuring the prismatic deviation of a lens using prism diopter units.
 func PrismDiopterUnit() *Unit {
-	_r := raw.HKUnitPrismDiopterUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("prismDiopterUnit"))
+	return UnitFromID(_r)
 }
 
-// RadianAngleUnitWithMetricPrefix calls the underlying HKUnitRadianAngleUnitWithMetricPrefix.
-func RadianAngleUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitRadianAngleUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// RadianAngleUnitWithMetricPrefix returns a HealthKit unit for measuring angles, using radian units with the provided prefix.
+func RadianAngleUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("radianAngleUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// RadianAngleUnit calls the underlying HKUnitRadianAngleUnit.
+// RadianAngleUnit returns a HealthKit unit for measuring angles using radians.
 func RadianAngleUnit() *Unit {
-	_r := raw.HKUnitRadianAngleUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("radianAngleUnit"))
+	return UnitFromID(_r)
 }
 
-// DegreeAngleUnit calls the underlying HKUnitDegreeAngleUnit.
+// DegreeAngleUnit returns a HealthKit unit for measuring angles using degrees.
 func DegreeAngleUnit() *Unit {
-	_r := raw.HKUnitDegreeAngleUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("degreeAngleUnit"))
+	return UnitFromID(_r)
 }
 
-// LuxUnitWithMetricPrefix calls the underlying HKUnitLuxUnitWithMetricPrefix.
-func LuxUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
-	_r := raw.HKUnitLuxUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+// LuxUnitWithMetricPrefix returns a HealthKit unit for measuring illuminance, using lux units with the provided prefix.
+func LuxUnitWithMetricPrefix(prefix MetricPrefix) *Unit {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("luxUnitWithMetricPrefix:"), prefix)
+	return UnitFromID(_r)
 }
 
-// LuxUnit calls the underlying HKUnitLuxUnit.
+// LuxUnit returns a HealthKit unit for measuring illuminance in lux.
 func LuxUnit() *Unit {
-	_r := raw.HKUnitLuxUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("luxUnit"))
+	return UnitFromID(_r)
 }
 
-// AppleEffortScoreUnit calls the underlying HKUnitAppleEffortScoreUnit.
+// AppleEffortScoreUnit wraps the corresponding Objective-C method.
 func AppleEffortScoreUnit() *Unit {
-	_r := raw.HKUnitAppleEffortScoreUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("appleEffortScoreUnit"))
+	return UnitFromID(_r)
 }
 
-// PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata calls the underlying HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata.
-func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ HKVisionPrescriptionType, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VisionPrescription {
-	_r := raw.HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(raw.HKVisionPrescriptionType(type_), dateIssued, expirationDate, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &VisionPrescription{inner: _r}
+// PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata creates a new vision prescription sample.
+func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ VisionPrescriptionType, dateIssued obj.Object, expirationDate obj.Object, device *Device, metadata obj.Object) *VisionPrescription {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKVisionPrescription")), objc.RegisterName("prescriptionWithType:dateIssued:expirationDate:device:metadata:"), type_, objref.IDOf(dateIssued), objref.IDOf(expirationDate), objref.IDOf(device), objref.IDOf(metadata))
+	return VisionPrescriptionFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDate calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDate.
-func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDate(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDate instantiates a new workout.
+func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata instantiates a new workout whose duration is calculated based on the start and end dates and the provided workout events.
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(metadata))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata instantiates a workout that includes both workout events and the device that produced the sample data.
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), objref.IDOf(metadata))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, duration, totalEnergyBurned, totalDistance, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata instantiates a new workout that includes the energy burned, distance, and metadata for the workout.
+func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, metadata obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(metadata))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, duration, totalEnergyBurned, totalDistance, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata instantiates a new workout activity that includes the device that produced the sample data.
+func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, duration float64, totalEnergyBurned *Quantity, totalDistance *Quantity, device *Device, metadata obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), duration, objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(device), objref.IDOf(metadata))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, totalSwimmingStrokeCount *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, totalSwimmingStrokeCount, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata instantiates a workout using a variety of data, including the number of strokes while swimming.
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalSwimmingStrokeCount *Quantity, device *Device, metadata obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalSwimmingStrokeCount:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalSwimmingStrokeCount), objref.IDOf(device), objref.IDOf(metadata))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, totalFlightsClimbed *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, totalFlightsClimbed, device, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+// WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata instantiates a workout using a variety of data, including the number of flights of stairs climbed.
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType WorkoutActivityType, startDate obj.Object, endDate obj.Object, workoutEvents []*WorkoutEvent, totalEnergyBurned *Quantity, totalDistance *Quantity, totalFlightsClimbed *Quantity, device *Device, metadata obj.Object) *Workout {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkout")), objc.RegisterName("workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalFlightsClimbed:device:metadata:"), workoutActivityType, objref.IDOf(startDate), objref.IDOf(endDate), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(totalEnergyBurned), objref.IDOf(totalDistance), objref.IDOf(totalFlightsClimbed), objref.IDOf(device), objref.IDOf(metadata))
+	return WorkoutFromID(_r)
 }
 
-// WorkoutEventWithTypeDate calls the underlying HKWorkoutEventWorkoutEventWithTypeDate.
-func WorkoutEventWithTypeDate(type_ HKWorkoutEventType, date *foundation.NSDate) *WorkoutEvent {
-	_r := raw.HKWorkoutEventWorkoutEventWithTypeDate(raw.HKWorkoutEventType(type_), date)
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutEvent{inner: _r}
+// WorkoutEventWithTypeDate instantiates and returns a new workout event with the specified type and date.
+func WorkoutEventWithTypeDate(type_ WorkoutEventType, date obj.Object) *WorkoutEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:"), type_, objref.IDOf(date))
+	return WorkoutEventFromID(_r)
 }
 
-// WorkoutEventWithTypeDateMetadata calls the underlying HKWorkoutEventWorkoutEventWithTypeDateMetadata.
-func WorkoutEventWithTypeDateMetadata(type_ HKWorkoutEventType, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutEvent {
-	_r := raw.HKWorkoutEventWorkoutEventWithTypeDateMetadata(raw.HKWorkoutEventType(type_), date, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutEvent{inner: _r}
+// WorkoutEventWithTypeDateMetadata instantiates and returns a new workout event with the specified type, date, and metadata.
+func WorkoutEventWithTypeDateMetadata(type_ WorkoutEventType, date obj.Object, metadata obj.Object) *WorkoutEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:date:metadata:"), type_, objref.IDOf(date), objref.IDOf(metadata))
+	return WorkoutEventFromID(_r)
 }
 
-// WorkoutEventWithTypeDateIntervalMetadata calls the underlying HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata.
-func WorkoutEventWithTypeDateIntervalMetadata(type_ HKWorkoutEventType, dateInterval *foundation.NSDateInterval, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutEvent {
-	_r := raw.HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata(raw.HKWorkoutEventType(type_), dateInterval, metadata)
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutEvent{inner: _r}
+// WorkoutEventWithTypeDateIntervalMetadata instantiates and returns a new workout event with the specified type, date interval, and metadata.
+func WorkoutEventWithTypeDateIntervalMetadata(type_ WorkoutEventType, dateInterval obj.Object, metadata obj.Object) *WorkoutEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("workoutEventWithType:dateInterval:metadata:"), type_, objref.IDOf(dateInterval), objref.IDOf(metadata))
+	return WorkoutEventFromID(_r)
 }

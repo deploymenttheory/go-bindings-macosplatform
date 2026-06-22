@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package authenticationservices provides a fluent Go API over the macOS AuthenticationServices framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AuthorizationOpenIDRequest: [AuthorizationAppleIDRequest], [AuthorizationSingleSignOnRequest]
+//   - AuthorizationRequest: [AuthorizationOpenIDRequest], [AuthorizationPasswordRequest], [AuthorizationPlatformPublicKeyCredentialAssertionRequest], [AuthorizationPlatformPublicKeyCredentialRegistrationRequest], [AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest], [AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest]
 package authenticationservices

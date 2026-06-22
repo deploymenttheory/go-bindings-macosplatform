@@ -5,75 +5,107 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Details about a recipient’s response to an exchange request.
+// TurnBasedExchangeReply is an idiomatic wrapper over the Objective-C class GKTurnBasedExchangeReply.
 //
-// TurnBasedExchangeReply wraps [raw.GKTurnBasedExchangeReply] with a fluent Go API.
+// Details about a recipient’s response to an exchange request.
 type TurnBasedExchangeReply struct {
-	inner *raw.GKTurnBasedExchangeReply
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKTurnBasedExchangeReply].
-func (x *TurnBasedExchangeReply) Unwrap() *raw.GKTurnBasedExchangeReply { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TurnBasedExchangeReply) ID() objc.ID { return x.inner.Ptr() }
-
-// TurnBasedExchangeReplyFromID adopts an existing object pointer as a TurnBasedExchangeReply (nil for 0).
+// TurnBasedExchangeReplyFromID adopts an existing Objective-C object as a TurnBasedExchangeReply
+// (nil for 0), retaining it and registering a release finalizer.
 func TurnBasedExchangeReplyFromID(id objc.ID) *TurnBasedExchangeReply {
 	if id == 0 {
 		return nil
 	}
-	return &TurnBasedExchangeReply{inner: raw.GKTurnBasedExchangeReplyFromID(id)}
+	x := &TurnBasedExchangeReply{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTurnBasedExchangeReply creates a new [TurnBasedExchangeReply].
-func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedExchangeReply")), objc.RegisterName("new"))
-	return &TurnBasedExchangeReply{inner: raw.GKTurnBasedExchangeReplyFromID(_id)}
-}
-
-// Recipient calls the underlying Recipient.
-func (x *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
-	_r := x.inner.Recipient()
-	if _r == nil {
+// turnBasedExchangeReplyAdopt wraps an Objective-C object that this code just created as a
+// TurnBasedExchangeReply (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func turnBasedExchangeReplyAdopt(id objc.ID) *TurnBasedExchangeReply {
+	if id == 0 {
 		return nil
 	}
-	return &TurnBasedParticipant{inner: _r}
+	x := &TurnBasedExchangeReply{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Message calls the underlying Message.
+// Description returns the object's -description text.
+func (x *TurnBasedExchangeReply) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TurnBasedExchangeReply) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TurnBasedExchangeReply) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedExchangeReply) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTurnBasedExchangeReply creates a new TurnBasedExchangeReply.
+func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedExchangeReply")), objc.RegisterName("new"))
+	return turnBasedExchangeReplyAdopt(_id)
+}
+
+// Recipient wraps the corresponding Objective-C method.
+func (x *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipient"))
+	return TurnBasedParticipantFromID(_r)
+}
+
+// Message wraps the corresponding Objective-C method.
 func (x *TurnBasedExchangeReply) Message() string {
-	_r := x.inner.Message()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Data calls the underlying Data.
-func (x *TurnBasedExchangeReply) Data() *foundation.NSData {
-	return x.inner.Data()
+// Data wraps the corresponding Objective-C method.
+func (x *TurnBasedExchangeReply) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// ReplyDate calls the underlying ReplyDate.
-func (x *TurnBasedExchangeReply) ReplyDate() *foundation.NSDate {
-	return x.inner.ReplyDate()
+// ReplyDate wraps the corresponding Objective-C method.
+func (x *TurnBasedExchangeReply) ReplyDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyDate"))
+	return obj.Wrap(_r)
 }
 
 // TurnBasedExchangeReplyable is the interface implemented by [TurnBasedExchangeReply], for mocking and DI.
 type TurnBasedExchangeReplyable interface {
-	Unwrap() *raw.GKTurnBasedExchangeReply
+	obj.Object
 	Recipient() *TurnBasedParticipant
 	Message() string
-	Data() *foundation.NSData
-	ReplyDate() *foundation.NSDate
+	Data() obj.Object
+	ReplyDate() obj.Object
 }
 
 var _ TurnBasedExchangeReplyable = (*TurnBasedExchangeReply)(nil)

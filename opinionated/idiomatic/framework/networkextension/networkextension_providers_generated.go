@@ -5,90 +5,107 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// NEAppProxyFlowProvider is implemented by NEAppProxyFlow and any idiomatic type wrapping a NEAppProxyFlow subclass.
+// NEAppProxyFlowProvider is accepted wherever a NEAppProxyFlow (or one of its subclasses) is expected.
 type NEAppProxyFlowProvider interface {
-	asNEAppProxyFlow() *raw.NEAppProxyFlow
+	objref.Object
+	isNEAppProxyFlow()
 }
 
-// NEAppProxyProviderProvider is implemented by NEAppProxyProvider and any idiomatic type wrapping a NEAppProxyProvider subclass.
+// NEAppProxyProviderProvider is accepted wherever a NEAppProxyProvider (or one of its subclasses) is expected.
 type NEAppProxyProviderProvider interface {
-	asNEAppProxyProvider() *raw.NEAppProxyProvider
+	objref.Object
+	isNEAppProxyProvider()
 }
 
-// NEDNSSettingsProvider is implemented by NEDNSSettings and any idiomatic type wrapping a NEDNSSettings subclass.
+// NEDNSSettingsProvider is accepted wherever a NEDNSSettings (or one of its subclasses) is expected.
 type NEDNSSettingsProvider interface {
-	asNEDNSSettings() *raw.NEDNSSettings
+	objref.Object
+	isNEDNSSettings()
 }
 
-// NEFilterFlowProvider is implemented by NEFilterFlow and any idiomatic type wrapping a NEFilterFlow subclass.
+// NEFilterFlowProvider is accepted wherever a NEFilterFlow (or one of its subclasses) is expected.
 type NEFilterFlowProvider interface {
-	asNEFilterFlow() *raw.NEFilterFlow
+	objref.Object
+	isNEFilterFlow()
 }
 
-// NEFilterProviderProvider is implemented by NEFilterProvider and any idiomatic type wrapping a NEFilterProvider subclass.
+// NEFilterProviderProvider is accepted wherever a NEFilterProvider (or one of its subclasses) is expected.
 type NEFilterProviderProvider interface {
-	asNEFilterProvider() *raw.NEFilterProvider
+	objref.Object
+	isNEFilterProvider()
 }
 
-// NEFilterVerdictProvider is implemented by NEFilterVerdict and any idiomatic type wrapping a NEFilterVerdict subclass.
+// NEFilterVerdictProvider is accepted wherever a NEFilterVerdict (or one of its subclasses) is expected.
 type NEFilterVerdictProvider interface {
-	asNEFilterVerdict() *raw.NEFilterVerdict
+	objref.Object
+	isNEFilterVerdict()
 }
 
-// NEOnDemandRuleProvider is implemented by NEOnDemandRule and any idiomatic type wrapping a NEOnDemandRule subclass.
+// NEOnDemandRuleProvider is accepted wherever a NEOnDemandRule (or one of its subclasses) is expected.
 type NEOnDemandRuleProvider interface {
-	asNEOnDemandRule() *raw.NEOnDemandRule
+	objref.Object
+	isNEOnDemandRule()
 }
 
-// NEPacketTunnelNetworkSettingsProvider is implemented by NEPacketTunnelNetworkSettings and any idiomatic type wrapping a NEPacketTunnelNetworkSettings subclass.
+// NEPacketTunnelNetworkSettingsProvider is accepted wherever a NEPacketTunnelNetworkSettings (or one of its subclasses) is expected.
 type NEPacketTunnelNetworkSettingsProvider interface {
-	asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings
+	objref.Object
+	isNEPacketTunnelNetworkSettings()
 }
 
-// NEPacketTunnelProviderProvider is implemented by NEPacketTunnelProvider and any idiomatic type wrapping a NEPacketTunnelProvider subclass.
+// NEPacketTunnelProviderProvider is accepted wherever a NEPacketTunnelProvider (or one of its subclasses) is expected.
 type NEPacketTunnelProviderProvider interface {
-	asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider
+	objref.Object
+	isNEPacketTunnelProvider()
 }
 
-// NEProviderProvider is implemented by NEProvider and any idiomatic type wrapping a NEProvider subclass.
+// NEProviderProvider is accepted wherever a NEProvider (or one of its subclasses) is expected.
 type NEProviderProvider interface {
-	asNEProvider() *raw.NEProvider
+	objref.Object
+	isNEProvider()
 }
 
-// NETunnelNetworkSettingsProvider is implemented by NETunnelNetworkSettings and any idiomatic type wrapping a NETunnelNetworkSettings subclass.
+// NETunnelNetworkSettingsProvider is accepted wherever a NETunnelNetworkSettings (or one of its subclasses) is expected.
 type NETunnelNetworkSettingsProvider interface {
-	asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings
+	objref.Object
+	isNETunnelNetworkSettings()
 }
 
-// NETunnelProviderProvider is implemented by NETunnelProvider and any idiomatic type wrapping a NETunnelProvider subclass.
+// NETunnelProviderProvider is accepted wherever a NETunnelProvider (or one of its subclasses) is expected.
 type NETunnelProviderProvider interface {
-	asNETunnelProvider() *raw.NETunnelProvider
+	objref.Object
+	isNETunnelProvider()
 }
 
-// NETunnelProviderManagerProvider is implemented by NETunnelProviderManager and any idiomatic type wrapping a NETunnelProviderManager subclass.
+// NETunnelProviderManagerProvider is accepted wherever a NETunnelProviderManager (or one of its subclasses) is expected.
 type NETunnelProviderManagerProvider interface {
-	asNETunnelProviderManager() *raw.NETunnelProviderManager
+	objref.Object
+	isNETunnelProviderManager()
 }
 
-// NEVPNConnectionProvider is implemented by NEVPNConnection and any idiomatic type wrapping a NEVPNConnection subclass.
+// NEVPNConnectionProvider is accepted wherever a NEVPNConnection (or one of its subclasses) is expected.
 type NEVPNConnectionProvider interface {
-	asNEVPNConnection() *raw.NEVPNConnection
+	objref.Object
+	isNEVPNConnection()
 }
 
-// NEVPNManagerProvider is implemented by NEVPNManager and any idiomatic type wrapping a NEVPNManager subclass.
+// NEVPNManagerProvider is accepted wherever a NEVPNManager (or one of its subclasses) is expected.
 type NEVPNManagerProvider interface {
-	asNEVPNManager() *raw.NEVPNManager
+	objref.Object
+	isNEVPNManager()
 }
 
-// NEVPNProtocolProvider is implemented by NEVPNProtocol and any idiomatic type wrapping a NEVPNProtocol subclass.
+// NEVPNProtocolProvider is accepted wherever a NEVPNProtocol (or one of its subclasses) is expected.
 type NEVPNProtocolProvider interface {
-	asNEVPNProtocol() *raw.NEVPNProtocol
+	objref.Object
+	isNEVPNProtocol()
 }
 
-// NEVPNProtocolIPSecProvider is implemented by NEVPNProtocolIPSec and any idiomatic type wrapping a NEVPNProtocolIPSec subclass.
+// NEVPNProtocolIPSecProvider is accepted wherever a NEVPNProtocolIPSec (or one of its subclasses) is expected.
 type NEVPNProtocolIPSecProvider interface {
-	asNEVPNProtocolIPSec() *raw.NEVPNProtocolIPSec
+	objref.Object
+	isNEVPNProtocolIPSec()
 }

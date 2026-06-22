@@ -5,84 +5,111 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A class that represents a graphics display in a VM.
+// GraphicsDisplay is an idiomatic wrapper over the Objective-C class VZGraphicsDisplay.
 //
-// GraphicsDisplay wraps [raw.VZGraphicsDisplay] with a fluent Go API.
+// GraphicsDisplay is an abstract base — you do not construct it directly. Construct one of [MacGraphicsDisplay], [VirtioGraphicsScanout] and pass it where a GraphicsDisplay is accepted.
+//
+// A class that represents a graphics display in a VM.
 type GraphicsDisplay struct {
-	inner *raw.VZGraphicsDisplay
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZGraphicsDisplay].
-func (x *GraphicsDisplay) Unwrap() *raw.VZGraphicsDisplay { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphicsDisplay) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphicsDisplayFromID adopts an existing object pointer as a GraphicsDisplay (nil for 0).
+// GraphicsDisplayFromID adopts an existing Objective-C object as a GraphicsDisplay
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphicsDisplayFromID(id objc.ID) *GraphicsDisplay {
 	if id == 0 {
 		return nil
 	}
-	return &GraphicsDisplay{inner: raw.VZGraphicsDisplayFromID(id)}
+	x := &GraphicsDisplay{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphicsDisplay creates a new [GraphicsDisplay].
-func NewGraphicsDisplay() *GraphicsDisplay {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZGraphicsDisplay")), objc.RegisterName("new"))
-	return &GraphicsDisplay{inner: raw.VZGraphicsDisplayFromID(_id)}
+// graphicsDisplayAdopt wraps an Objective-C object that this code just created as a
+// GraphicsDisplay (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphicsDisplayAdopt(id objc.ID) *GraphicsDisplay {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphicsDisplay{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Resize this display with the new dimensions you provide.
-//
-// ReconfigureWithSizeInPixelsError calls the underlying ReconfigureWithSizeInPixelsError.
-func (x *GraphicsDisplay) ReconfigureWithSizeInPixelsError(sizeInPixels corefoundation.CGSize) (bool, error) {
-	return x.inner.ReconfigureWithSizeInPixelsError(sizeInPixels)
+// Description returns the object's -description text.
+func (x *GraphicsDisplay) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Reconfigure this display with the new display configuration you provide.
-//
-// ReconfigureWithConfigurationError calls the underlying ReconfigureWithConfigurationError.
-func (x *GraphicsDisplay) ReconfigureWithConfigurationError(configuration *raw.VZGraphicsDisplayConfiguration) (bool, error) {
-	return x.inner.ReconfigureWithConfigurationError(configuration)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphicsDisplay) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Adds an observer to notify about display configuration changes.
-//
-// AddObserver calls the underlying AddObserver.
-func (x *GraphicsDisplay) AddObserver(observer raw.VZGraphicsDisplayObserver) {
-	x.inner.AddObserver(observer)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphicsDisplay) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Removes a display configuration change observer.
-//
-// RemoveObserver calls the underlying RemoveObserver.
-func (x *GraphicsDisplay) RemoveObserver(observer raw.VZGraphicsDisplayObserver) {
-	x.inner.RemoveObserver(observer)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphicsDisplay) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract The size of the display, in pixels.
-//
-// SizeInPixels calls the underlying SizeInPixels.
+// ReconfigureWithSizeInPixels resize this display with the new dimensions you provide.
+func (x *GraphicsDisplay) ReconfigureWithSizeInPixels(sizeInPixels corefoundation.CGSize) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("reconfigureWithSizeInPixels:error:"), sizeInPixels, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// ReconfigureWithConfiguration reconfigure this display with the new display configuration you provide.
+func (x *GraphicsDisplay) ReconfigureWithConfiguration(configuration *GraphicsDisplayConfiguration) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("reconfigureWithConfiguration:error:"), objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// SizeInPixels the size of the display, in pixels.
 func (x *GraphicsDisplay) SizeInPixels() corefoundation.CGSize {
-	return x.inner.SizeInPixels()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeInPixels"))
+	return _r
 }
-
-func (x *GraphicsDisplay) asGraphicsDisplay() *raw.VZGraphicsDisplay { return x.inner }
 
 // GraphicsDisplayable is the interface implemented by [GraphicsDisplay], for mocking and DI.
 type GraphicsDisplayable interface {
-	Unwrap() *raw.VZGraphicsDisplay
-	ReconfigureWithSizeInPixelsError(sizeInPixels corefoundation.CGSize) (bool, error)
-	ReconfigureWithConfigurationError(configuration *raw.VZGraphicsDisplayConfiguration) (bool, error)
-	AddObserver(observer raw.VZGraphicsDisplayObserver)
-	RemoveObserver(observer raw.VZGraphicsDisplayObserver)
+	obj.Object
+	ReconfigureWithSizeInPixels(sizeInPixels corefoundation.CGSize) error
+	ReconfigureWithConfiguration(configuration *GraphicsDisplayConfiguration) error
 	SizeInPixels() corefoundation.CGSize
 }
 
 var _ GraphicsDisplayable = (*GraphicsDisplay)(nil)
+
+// isGraphicsDisplay marks GraphicsDisplay — and, by embedding promotion, its
+// subclasses — as a member of the GraphicsDisplay hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphicsDisplay) isGraphicsDisplay() {}
+
+var _ GraphicsDisplayProvider = (*GraphicsDisplay)(nil)

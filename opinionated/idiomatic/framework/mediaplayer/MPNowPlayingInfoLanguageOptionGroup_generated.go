@@ -5,79 +5,97 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A grouped set of language options where only a single language option can be active at a time.
+// NowPlayingInfoLanguageOptionGroup is an idiomatic wrapper over the Objective-C class MPNowPlayingInfoLanguageOptionGroup.
 //
-// NowPlayingInfoLanguageOptionGroup wraps [raw.MPNowPlayingInfoLanguageOptionGroup] with a fluent Go API.
+// A grouped set of language options where only a single language option can be active at a time.
 type NowPlayingInfoLanguageOptionGroup struct {
-	inner *raw.MPNowPlayingInfoLanguageOptionGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPNowPlayingInfoLanguageOptionGroup].
-func (x *NowPlayingInfoLanguageOptionGroup) Unwrap() *raw.MPNowPlayingInfoLanguageOptionGroup {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NowPlayingInfoLanguageOptionGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// NowPlayingInfoLanguageOptionGroupFromID adopts an existing object pointer as a NowPlayingInfoLanguageOptionGroup (nil for 0).
+// NowPlayingInfoLanguageOptionGroupFromID adopts an existing Objective-C object as a NowPlayingInfoLanguageOptionGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func NowPlayingInfoLanguageOptionGroupFromID(id objc.ID) *NowPlayingInfoLanguageOptionGroup {
 	if id == 0 {
 		return nil
 	}
-	return &NowPlayingInfoLanguageOptionGroup{inner: raw.MPNowPlayingInfoLanguageOptionGroupFromID(id)}
+	x := &NowPlayingInfoLanguageOptionGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new language option group with the supplied language options.
-//
-// NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new [NowPlayingInfoLanguageOptionGroup].
-func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions *foundation.NSArray[*raw.MPNowPlayingInfoLanguageOption], defaultLanguageOption *raw.MPNowPlayingInfoLanguageOption, allowEmptySelection bool) *NowPlayingInfoLanguageOptionGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPNowPlayingInfoLanguageOptionGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageOptions:defaultLanguageOption:allowEmptySelection:"), languageOptions.Ptr(), defaultLanguageOption.Ptr(), allowEmptySelection)
-	return &NowPlayingInfoLanguageOptionGroup{inner: raw.MPNowPlayingInfoLanguageOptionGroupFromID(_id)}
+// nowPlayingInfoLanguageOptionGroupAdopt wraps an Objective-C object that this code just created as a
+// NowPlayingInfoLanguageOptionGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nowPlayingInfoLanguageOptionGroupAdopt(id objc.ID) *NowPlayingInfoLanguageOptionGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &NowPlayingInfoLanguageOptionGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The available language options within this group.
+// Description returns the object's -description text.
+func (x *NowPlayingInfoLanguageOptionGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NowPlayingInfoLanguageOptionGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NowPlayingInfoLanguageOptionGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NowPlayingInfoLanguageOptionGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new language option group with the supplied language options.
+func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions []*NowPlayingInfoLanguageOption, defaultLanguageOption *NowPlayingInfoLanguageOption, allowEmptySelection bool) *NowPlayingInfoLanguageOptionGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoLanguageOptionGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageOptions:defaultLanguageOption:allowEmptySelection:"), purego.SliceToNSArray(languageOptions, func(_v *NowPlayingInfoLanguageOption) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultLanguageOption), allowEmptySelection)
+	return nowPlayingInfoLanguageOptionGroupAdopt(_id)
+}
+
+// LanguageOptions the available language options within this group.
 //
 // LanguageOptions returns the collection as a Go slice.
 func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
-	arr := x.inner.LanguageOptions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NowPlayingInfoLanguageOption {
-		return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NowPlayingInfoLanguageOption { return NowPlayingInfoLanguageOptionFromID(_id) })
 }
 
-// The default language option, if any, within this group.
-//
-// DefaultLanguageOption calls the underlying DefaultLanguageOption.
+// DefaultLanguageOption the default language option, if any, within this group.
 func (x *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
-	_r := x.inner.DefaultLanguageOption()
-	if _r == nil {
-		return nil
-	}
-	return &NowPlayingInfoLanguageOption{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultLanguageOption"))
+	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
-// Indicates whether a selection in this group is required at all times.
-//
-// AllowEmptySelection calls the underlying AllowEmptySelection.
+// AllowEmptySelection indicates whether a selection in this group is required at all times.
 func (x *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
-	return x.inner.AllowEmptySelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowEmptySelection"))
+	return _r
 }
 
 // NowPlayingInfoLanguageOptionGroupable is the interface implemented by [NowPlayingInfoLanguageOptionGroup], for mocking and DI.
 type NowPlayingInfoLanguageOptionGroupable interface {
-	Unwrap() *raw.MPNowPlayingInfoLanguageOptionGroup
+	obj.Object
 	LanguageOptions() []*NowPlayingInfoLanguageOption
 	DefaultLanguageOption() *NowPlayingInfoLanguageOption
 	AllowEmptySelection() bool

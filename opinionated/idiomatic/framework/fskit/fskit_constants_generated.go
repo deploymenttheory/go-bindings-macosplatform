@@ -5,14 +5,9 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// FSKitErrorDomain returns the string constant FSKitErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func FSKitErrorDomain() objc.ID {
-	if _r := raw.FSKitErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// FSKitErrorDomain returns the string constant FSKitErrorDomain, for use as a dictionary key or argument.
+func FSKitErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("FSKitErrorDomain"))) }

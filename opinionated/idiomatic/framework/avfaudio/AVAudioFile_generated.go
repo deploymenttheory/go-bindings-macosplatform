@@ -5,194 +5,211 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents an audio file that the system can open for reading or writing.
+// AudioFile is an idiomatic wrapper over the Objective-C class AVAudioFile.
 //
-// AudioFile wraps [raw.AVAudioFile] with a fluent Go API.
+// An object that represents an audio file that the system can open for reading or writing.
 type AudioFile struct {
-	inner *raw.AVAudioFile
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioFile].
-func (x *AudioFile) Unwrap() *raw.AVAudioFile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioFile) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioFileFromID adopts an existing object pointer as a AudioFile (nil for 0).
+// AudioFileFromID adopts an existing Objective-C object as a AudioFile
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioFileFromID(id objc.ID) *AudioFile {
 	if id == 0 {
 		return nil
 	}
-	return &AudioFile{inner: raw.AVAudioFileFromID(id)}
-}
-
-// NewAudioFile creates a new [AudioFile].
-func NewAudioFile() *AudioFile {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("new"))
-	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}
-}
-
-// Opens a file for reading using the standard, deinterleaved floating point format.
-//
-// NewAudioFileForReadingError creates a new [AudioFile].
-func NewAudioFileForReadingError(fileURL string) (*AudioFile, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
-}
-
-// Opens a file for reading using the specified processing format.
-//
-// NewAudioFileForReadingCommonFormatInterleavedError creates a new [AudioFile].
-func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), raw.AVAudioCommonFormat(format), interleaved, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
-}
-
-// Opens a file for writing using the specified settings.
-//
-// NewAudioFileForWritingSettingsError creates a new [AudioFile].
-func NewAudioFileForWritingSettingsError(fileURL string, settings purego.IDer) (*AudioFile, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
-}
-
-// Opens a file for writing using a specified processing format and settings.
-//
-// NewAudioFileForWritingSettingsCommonFormatInterleavedError creates a new [AudioFile].
-func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings purego.IDer, format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.ID(), raw.AVAudioCommonFormat(format), interleaved, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AudioFile{inner: raw.AVAudioFileFromID(_id)}, nil
-}
-
-// The position in the file where the next read or write operation occurs.
-//
-// WithFramePosition sets the framePosition property and returns the receiver for chaining.
-func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
-	x.inner.SetFramePosition(framePosition)
+	x := &AudioFile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Closes the audio file.
-//
-// Close calls the underlying Close.
+// audioFileAdopt wraps an Objective-C object that this code just created as a
+// AudioFile (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioFileAdopt(id objc.ID) *AudioFile {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioFile{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioFile) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioFile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioFile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioFile) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioFile creates a new AudioFile.
+func NewAudioFile() *AudioFile {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("new"))
+	return audioFileAdopt(_id)
+}
+
+// NewAudioFileForReadingError opens a file for reading using the standard, deinterleaved floating point format.
+func NewAudioFileForReadingError(fileURL string) (result *AudioFile, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioFileAdopt(_id), nil
+}
+
+// NewAudioFileForReadingCommonFormatInterleavedError opens a file for reading using the specified processing format.
+func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format AudioCommonFormat, interleaved bool) (result *AudioFile, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:commonFormat:interleaved:error:"), rt.FileURL(fileURL), format, interleaved, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioFileAdopt(_id), nil
+}
+
+// NewAudioFileForWritingSettingsError opens a file for writing using the specified settings.
+func NewAudioFileForWritingSettingsError(fileURL string, settings obj.Object) (result *AudioFile, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:error:"), rt.FileURL(fileURL), objref.IDOf(settings), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioFileAdopt(_id), nil
+}
+
+// NewAudioFileForWritingSettingsCommonFormatInterleavedError opens a file for writing using a specified processing format and settings.
+func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings obj.Object, format AudioCommonFormat, interleaved bool) (result *AudioFile, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFile")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), rt.FileURL(fileURL), objref.IDOf(settings), format, interleaved, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioFileAdopt(_id), nil
+}
+
+// WithFramePosition the position in the file where the next read or write operation occurs.
+func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramePosition:"), framePosition)
+	return x
+}
+
+// Close closes the audio file.
 func (x *AudioFile) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Reads an entire audio buffer.
-//
-// ReadIntoBufferError calls the underlying ReadIntoBufferError.
-func (x *AudioFile) ReadIntoBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error) {
-	return x.inner.ReadIntoBufferError(buffer)
+// ReadIntoBuffer reads an entire audio buffer.
+func (x *AudioFile) ReadIntoBuffer(buffer *AudioPCMBuffer) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readIntoBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Reads a portion of an audio buffer using the number of frames you specify.
-//
-// ReadIntoBufferFrameCountError calls the underlying ReadIntoBufferFrameCountError.
-func (x *AudioFile) ReadIntoBufferFrameCountError(buffer *raw.AVAudioPCMBuffer, frames uint32) (bool, error) {
-	return x.inner.ReadIntoBufferFrameCountError(buffer, frames)
+// ReadIntoBufferFrameCount reads a portion of an audio buffer using the number of frames you specify.
+func (x *AudioFile) ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint32) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readIntoBuffer:frameCount:error:"), objref.IDOf(buffer), frames, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method writeFromBuffer:error: @abstract Write a buffer. @param buffer The buffer from which to write to the file. Its format must match the file's processing format. @param outError on exit, if an error occurs, a description of the error @return YES for success. @discussion Writes sequentially. The buffer's frameLength signifies how much of the buffer is to be written.
-//
-// WriteFromBufferError calls the underlying WriteFromBufferError.
-func (x *AudioFile) WriteFromBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error) {
-	return x.inner.WriteFromBufferError(buffer)
+// WriteFromBuffer write a buffer. Writes sequentially. The buffer's frameLength signifies how much of the buffer is to be written.
+func (x *AudioFile) WriteFromBuffer(buffer *AudioPCMBuffer) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeFromBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @property isOpen @abstract Whether the file is open or not.
-//
-// IsOpen calls the underlying IsOpen.
+// IsOpen whether the file is open or not.
 func (x *AudioFile) IsOpen() bool {
-	return x.inner.IsOpen()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
+	return _r
 }
 
-// @property url @abstract The URL the file is reading or writing.
-//
-// Url calls the underlying Url.
-func (x *AudioFile) Url() *foundation.NSURL {
-	return x.inner.Url()
+// Url the URL the file is reading or writing.
+func (x *AudioFile) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// @property fileFormat @abstract The on-disk format of the file.
-//
-// FileFormat calls the underlying FileFormat.
+// FileFormat the on-disk format of the file.
 func (x *AudioFile) FileFormat() *AudioFormat {
-	_r := x.inner.FileFormat()
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileFormat"))
+	return AudioFormatFromID(_r)
 }
 
-// @property processingFormat @abstract The processing format of the file.
-//
-// ProcessingFormat calls the underlying ProcessingFormat.
+// ProcessingFormat the processing format of the file.
 func (x *AudioFile) ProcessingFormat() *AudioFormat {
-	_r := x.inner.ProcessingFormat()
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processingFormat"))
+	return AudioFormatFromID(_r)
 }
 
-// @property length @abstract The number of sample frames in the file. @discussion Note: this can be expensive to compute for the first time.
-//
-// Length calls the underlying Length.
+// Length the number of sample frames in the file. Note: this can be expensive to compute for the first time.
 func (x *AudioFile) Length() int64 {
-	return x.inner.Length()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// @property framePosition @abstract The position in the file at which the next read or write will occur. @discussion Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
-//
-// FramePosition calls the underlying FramePosition.
+// FramePosition the position in the file at which the next read or write will occur. Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
 func (x *AudioFile) FramePosition() int64 {
-	return x.inner.FramePosition()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("framePosition"))
+	return _r
 }
 
-// SetFramePosition calls the underlying SetFramePosition.
+// SetFramePosition wraps the corresponding Objective-C method.
 func (x *AudioFile) SetFramePosition(framePosition int64) {
-	x.inner.SetFramePosition(framePosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramePosition:"), framePosition)
 }
 
 // AudioFileable is the interface implemented by [AudioFile], for mocking and DI.
 type AudioFileable interface {
-	Unwrap() *raw.AVAudioFile
+	obj.Object
 	WithFramePosition(framePosition int64) *AudioFile
 	Close()
-	ReadIntoBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error)
-	ReadIntoBufferFrameCountError(buffer *raw.AVAudioPCMBuffer, frames uint32) (bool, error)
-	WriteFromBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error)
+	ReadIntoBuffer(buffer *AudioPCMBuffer) error
+	ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint32) error
+	WriteFromBuffer(buffer *AudioPCMBuffer) error
 	IsOpen() bool
-	Url() *foundation.NSURL
+	Url() obj.Object
 	FileFormat() *AudioFormat
 	ProcessingFormat() *AudioFormat
 	Length() int64

@@ -5,140 +5,116 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageDivide wraps [raw.MPSImageDivide] with a fluent Go API.
+// ImageDivide is an idiomatic wrapper over the Objective-C class MPSImageDivide.
+//
+// It embeds [ImageArithmetic], promoting that type's methods.
 type ImageDivide struct {
-	inner *raw.MPSImageDivide
+	ImageArithmetic
 }
 
-// Unwrap returns the underlying [raw.MPSImageDivide].
-func (x *ImageDivide) Unwrap() *raw.MPSImageDivide { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageDivide) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageDivideFromID adopts an existing object pointer as a ImageDivide (nil for 0).
+// ImageDivideFromID adopts an existing Objective-C object as a ImageDivide
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageDivideFromID(id objc.ID) *ImageDivide {
 	if id == 0 {
 		return nil
 	}
-	return &ImageDivide{inner: raw.MPSImageDivideFromID(id)}
+	x := &ImageDivide{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract  Initialize the division operator @param     device           The device the filter will run on. @return    A valid MPSImageDivide object or nil, if failure.
-//
-// NewImageDivideWithDevice creates a new [ImageDivide].
-func NewImageDivideWithDevice(device metal.MTLDevice) *ImageDivide {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageDivide")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageDivide{inner: raw.MPSImageDivideFromID(_id)}
+// imageDivideAdopt wraps an Objective-C object that this code just created as a
+// ImageDivide (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageDivideAdopt(id objc.ID) *ImageDivide {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageDivide{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// NewImageDivide creates a new ImageDivide.
+func NewImageDivide() *ImageDivide {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageDivide")), objc.RegisterName("new"))
+	return imageDivideAdopt(_id)
+}
+
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageDivide) WithPrimaryScale(primaryScale float32) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageDivide) WithSecondaryScale(secondaryScale float32) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageDivide) WithBias(bias float32) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property   primaryStrideInPixels @abstract   The secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithPrimaryStrideInPixels sets the primaryStrideInPixels property and returns the receiver for chaining.
+// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (x *ImageDivide) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetPrimaryStrideInPixels(primaryStrideInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
 	return x
 }
 
-// @property   secondaryStrideInPixels @abstract   The secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithSecondaryStrideInPixels sets the secondaryStrideInPixels property and returns the receiver for chaining.
+// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
 func (x *ImageDivide) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetSecondaryStrideInPixels(secondaryStrideInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
 	return x
 }
 
-// @property   minimumValue @abstract   minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *ImageDivide) WithMinimumValue(minimumValue float32) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// @property   maximumValue @abstract   maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *ImageDivide) WithMaximumValue(maximumValue float32) *ImageDivide {
-	x.inner.MPSImageArithmetic.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
 func (x *ImageDivide) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
 func (x *ImageDivide) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *ImageDivide) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
-	return x
-}
-
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the secondary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *ImageDivide) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
-}
-
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageDivide) WithClipRect(clipRect metal.MTLRegion) *ImageDivide {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
-}
-
-func (x *ImageDivide) asImageArithmetic() *raw.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
-
-func (x *ImageDivide) asBinaryImageKernel() *raw.MPSBinaryImageKernel {
-	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
 }
 
 // ImageDivideable is the interface implemented by [ImageDivide], for mocking and DI.
 type ImageDivideable interface {
-	Unwrap() *raw.MPSImageDivide
+	obj.Object
 	WithPrimaryScale(primaryScale float32) *ImageDivide
 	WithSecondaryScale(secondaryScale float32) *ImageDivide
 	WithBias(bias float32) *ImageDivide
@@ -148,9 +124,11 @@ type ImageDivideable interface {
 	WithMaximumValue(maximumValue float32) *ImageDivide
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide
 	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide
 	WithClipRect(clipRect metal.MTLRegion) *ImageDivide
 }
 
 var _ ImageDivideable = (*ImageDivide)(nil)
+
+var _ ImageArithmeticProvider = (*ImageDivide)(nil)
+
+var _ BinaryImageKernelProvider = (*ImageDivide)(nil)

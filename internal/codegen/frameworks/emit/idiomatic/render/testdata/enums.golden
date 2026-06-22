@@ -1,0 +1,49 @@
+// VirtualMachineState describes the run state of a virtual machine.
+type VirtualMachineState int64
+
+const (
+	VirtualMachineStateStopped VirtualMachineState = 0
+	VirtualMachineStateRunning VirtualMachineState = 1
+	// VirtualMachineStatePaused is a paused machine.
+	VirtualMachineStatePaused VirtualMachineState = 2
+)
+
+// String returns the VirtualMachineState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMachineState) String() string {
+	switch e {
+	case VirtualMachineStateStopped:
+		return "VirtualMachineStateStopped"
+	case VirtualMachineStateRunning:
+		return "VirtualMachineStateRunning"
+	case VirtualMachineStatePaused:
+		return "VirtualMachineStatePaused"
+	default:
+		return fmt.Sprintf("VirtualMachineState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type ActivityOptions uint64
+
+const (
+	ActivityIdleDisplaySleepDisabled ActivityOptions = 1099511627776
+	ActivityIdleSystemSleepDisabled ActivityOptions = 1048576
+)
+
+// String returns the ActivityOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ActivityOptions) String() string {
+	var parts []string
+	if e&ActivityIdleDisplaySleepDisabled != 0 {
+		parts = append(parts, "ActivityIdleDisplaySleepDisabled")
+	}
+	if e&ActivityIdleSystemSleepDisabled != 0 {
+		parts = append(parts, "ActivityIdleSystemSleepDisabled")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+

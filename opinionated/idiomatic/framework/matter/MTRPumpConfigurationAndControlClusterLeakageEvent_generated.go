@@ -5,41 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterLeakageEvent wraps [raw.MTRPumpConfigurationAndControlClusterLeakageEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterLeakageEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterLeakageEvent.
 type MTRPumpConfigurationAndControlClusterLeakageEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterLeakageEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterLeakageEvent].
-func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterLeakageEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRPumpConfigurationAndControlClusterLeakageEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterLeakageEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterLeakageEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterLeakageEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterLeakageEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterLeakageEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterLeakageEvent{inner: raw.MTRPumpConfigurationAndControlClusterLeakageEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterLeakageEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterLeakageEvent creates a new [MTRPumpConfigurationAndControlClusterLeakageEvent].
+// mTRPumpConfigurationAndControlClusterLeakageEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterLeakageEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterLeakageEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterLeakageEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterLeakageEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterLeakageEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRPumpConfigurationAndControlClusterLeakageEvent creates a new MTRPumpConfigurationAndControlClusterLeakageEvent.
 func NewMTRPumpConfigurationAndControlClusterLeakageEvent() *MTRPumpConfigurationAndControlClusterLeakageEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterLeakageEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterLeakageEvent{inner: raw.MTRPumpConfigurationAndControlClusterLeakageEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterLeakageEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterLeakageEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterLeakageEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterLeakageEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterLeakageEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterLeakageEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterLeakageEventable = (*MTRPumpConfigurationAndControlClusterLeakageEvent)(nil)

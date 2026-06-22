@@ -5,107 +5,89 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbolic representation of a compute operation.
+// GraphOperation is an idiomatic wrapper over the Objective-C class MPSGraphOperation.
 //
-// GraphOperation wraps [raw.MPSGraphOperation] with a fluent Go API.
+// GraphOperation is an abstract base — you do not construct it directly. Construct one of [GraphVariableOp] and pass it where a GraphOperation is accepted.
+//
+// A symbolic representation of a compute operation.
 type GraphOperation struct {
-	inner *raw.MPSGraphOperation
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraphOperation].
-func (x *GraphOperation) Unwrap() *raw.MPSGraphOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphOperationFromID adopts an existing object pointer as a GraphOperation (nil for 0).
+// GraphOperationFromID adopts an existing Objective-C object as a GraphOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphOperationFromID(id objc.ID) *GraphOperation {
 	if id == 0 {
 		return nil
 	}
-	return &GraphOperation{inner: raw.MPSGraphOperationFromID(id)}
+	x := &GraphOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphOperation creates a new [GraphOperation].
-func NewGraphOperation() *GraphOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphOperation")), objc.RegisterName("new"))
-	return &GraphOperation{inner: raw.MPSGraphOperationFromID(_id)}
+// graphOperationAdopt wraps an Objective-C object that this code just created as a
+// GraphOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphOperationAdopt(id objc.ID) *GraphOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The input tensors of the operation.
+// InputTensors the input tensors of the operation.
 //
 // InputTensors returns the collection as a Go slice.
 func (x *GraphOperation) InputTensors() []*GraphTensor {
-	arr := x.inner.InputTensors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
-		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputTensors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// The output tensors of the operation.
+// OutputTensors the output tensors of the operation.
 //
 // OutputTensors returns the collection as a Go slice.
 func (x *GraphOperation) OutputTensors() []*GraphTensor {
-	arr := x.inner.OutputTensors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
-		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputTensors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// The set of operations guaranteed to execute before this operation.
+// ControlDependencies the set of operations guaranteed to execute before this operation.
 //
 // ControlDependencies returns the collection as a Go slice.
 func (x *GraphOperation) ControlDependencies() []*GraphOperation {
-	arr := x.inner.ControlDependencies()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphOperation {
-		return &GraphOperation{inner: raw.MPSGraphOperationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlDependencies"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphOperation { return GraphOperationFromID(_id) })
 }
 
-// The graph on which the operation is defined.
-//
-// Graph calls the underlying Graph.
+// Graph the graph on which the operation is defined.
 func (x *GraphOperation) Graph() *Graph {
-	_r := x.inner.Graph()
-	if _r == nil {
-		return nil
-	}
-	return &Graph{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graph"))
+	return GraphFromID(_r)
 }
 
-// Name of the operation.
-//
-// Name calls the underlying Name.
+// Name name of the operation.
 func (x *GraphOperation) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *GraphOperation) asGraphOperation() *raw.MPSGraphOperation { return x.inner }
-
-func (x *GraphOperation) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphOperationable is the interface implemented by [GraphOperation], for mocking and DI.
 type GraphOperationable interface {
-	Unwrap() *raw.MPSGraphOperation
+	obj.Object
 	InputTensors() []*GraphTensor
 	OutputTensors() []*GraphTensor
 	ControlDependencies() []*GraphOperation
@@ -114,3 +96,12 @@ type GraphOperationable interface {
 }
 
 var _ GraphOperationable = (*GraphOperation)(nil)
+
+// isGraphOperation marks GraphOperation — and, by embedding promotion, its
+// subclasses — as a member of the GraphOperation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphOperation) isGraphOperation() {}
+
+var _ GraphOperationProvider = (*GraphOperation)(nil)
+
+var _ GraphObjectProvider = (*GraphOperation)(nil)

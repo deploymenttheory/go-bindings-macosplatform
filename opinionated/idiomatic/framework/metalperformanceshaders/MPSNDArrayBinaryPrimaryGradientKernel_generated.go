@@ -5,97 +5,68 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayBinaryPrimaryGradientKernel wraps [raw.MPSNDArrayBinaryPrimaryGradientKernel] with a fluent Go API.
+// NDArrayBinaryPrimaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinaryPrimaryGradientKernel.
+//
+// NDArrayBinaryPrimaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [NDArrayGatherGradient] and pass it where a NDArrayBinaryPrimaryGradientKernel is accepted.
 type NDArrayBinaryPrimaryGradientKernel struct {
-	inner *raw.MPSNDArrayBinaryPrimaryGradientKernel
+	NDArrayMultiaryGradientKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayBinaryPrimaryGradientKernel].
-func (x *NDArrayBinaryPrimaryGradientKernel) Unwrap() *raw.MPSNDArrayBinaryPrimaryGradientKernel {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayBinaryPrimaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayBinaryPrimaryGradientKernelFromID adopts an existing object pointer as a NDArrayBinaryPrimaryGradientKernel (nil for 0).
+// NDArrayBinaryPrimaryGradientKernelFromID adopts an existing Objective-C object as a NDArrayBinaryPrimaryGradientKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayBinaryPrimaryGradientKernelFromID(id objc.ID) *NDArrayBinaryPrimaryGradientKernel {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayBinaryPrimaryGradientKernel{inner: raw.MPSNDArrayBinaryPrimaryGradientKernelFromID(id)}
-}
-
-// NewNDArrayBinaryPrimaryGradientKernelWithCoderDevice creates a new [NDArrayBinaryPrimaryGradientKernel].
-func NewNDArrayBinaryPrimaryGradientKernelWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *NDArrayBinaryPrimaryGradientKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayBinaryPrimaryGradientKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), coder.Ptr(), device)
-	return &NDArrayBinaryPrimaryGradientKernel{inner: raw.MPSNDArrayBinaryPrimaryGradientKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayBinaryPrimaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayBinaryPrimaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayBinaryPrimaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayBinaryPrimaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayBinaryPrimaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// nDArrayBinaryPrimaryGradientKernelAdopt wraps an Objective-C object that this code just created as a
+// NDArrayBinaryPrimaryGradientKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayBinaryPrimaryGradientKernelAdopt(id objc.ID) *NDArrayBinaryPrimaryGradientKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayBinaryPrimaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayBinaryPrimaryGradientKernel) WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState.
-func (x *NDArrayBinaryPrimaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state)
-}
-
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray.
-func (x *NDArrayBinaryPrimaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state, destination)
-}
-
-func (x *NDArrayBinaryPrimaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel
-}
-
-func (x *NDArrayBinaryPrimaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayBinaryPrimaryGradientKernel) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayBinaryPrimaryGradientKernelable is the interface implemented by [NDArrayBinaryPrimaryGradientKernel], for mocking and DI.
 type NDArrayBinaryPrimaryGradientKernelable interface {
-	Unwrap() *raw.MPSNDArrayBinaryPrimaryGradientKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayBinaryPrimaryGradientKernel
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayBinaryPrimaryGradientKernel
+	obj.Object
 	WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }
 
 var _ NDArrayBinaryPrimaryGradientKernelable = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+// isNDArrayBinaryPrimaryGradientKernel marks NDArrayBinaryPrimaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayBinaryPrimaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayBinaryPrimaryGradientKernel) isNDArrayBinaryPrimaryGradientKernel() {}
+
+var _ NDArrayBinaryPrimaryGradientKernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)
+
+var _ KernelProvider = (*NDArrayBinaryPrimaryGradientKernel)(nil)

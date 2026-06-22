@@ -5,122 +5,101 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that convolves an image with a subtractive Laplacian pyramid.
+// ImageLaplacianPyramidSubtract is an idiomatic wrapper over the Objective-C class MPSImageLaplacianPyramidSubtract.
 //
-// ImageLaplacianPyramidSubtract wraps [raw.MPSImageLaplacianPyramidSubtract] with a fluent Go API.
+// It embeds [ImageLaplacianPyramid], promoting that type's methods.
+//
+// A filter that convolves an image with a subtractive Laplacian pyramid.
 type ImageLaplacianPyramidSubtract struct {
-	inner *raw.MPSImageLaplacianPyramidSubtract
+	ImageLaplacianPyramid
 }
 
-// Unwrap returns the underlying [raw.MPSImageLaplacianPyramidSubtract].
-func (x *ImageLaplacianPyramidSubtract) Unwrap() *raw.MPSImageLaplacianPyramidSubtract {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageLaplacianPyramidSubtract) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageLaplacianPyramidSubtractFromID adopts an existing object pointer as a ImageLaplacianPyramidSubtract (nil for 0).
+// ImageLaplacianPyramidSubtractFromID adopts an existing Objective-C object as a ImageLaplacianPyramidSubtract
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageLaplacianPyramidSubtractFromID(id objc.ID) *ImageLaplacianPyramidSubtract {
 	if id == 0 {
 		return nil
 	}
-	return &ImageLaplacianPyramidSubtract{inner: raw.MPSImageLaplacianPyramidSubtractFromID(id)}
+	x := &ImageLaplacianPyramidSubtract{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageLaplacianPyramidSubtract creates a new [ImageLaplacianPyramidSubtract].
+// imageLaplacianPyramidSubtractAdopt wraps an Objective-C object that this code just created as a
+// ImageLaplacianPyramidSubtract (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageLaplacianPyramidSubtractAdopt(id objc.ID) *ImageLaplacianPyramidSubtract {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageLaplacianPyramidSubtract{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageLaplacianPyramidSubtract creates a new ImageLaplacianPyramidSubtract.
 func NewImageLaplacianPyramidSubtract() *ImageLaplacianPyramidSubtract {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageLaplacianPyramidSubtract")), objc.RegisterName("new"))
-	return &ImageLaplacianPyramidSubtract{inner: raw.MPSImageLaplacianPyramidSubtractFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageLaplacianPyramidSubtract")), objc.RegisterName("new"))
+	return imageLaplacianPyramidSubtractAdopt(_id)
 }
 
-// WithLaplacianBias sets the laplacianBias property and returns the receiver for chaining.
+// WithLaplacianBias sets the property and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramidSubtract) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.SetLaplacianBias(laplacianBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 	return x
 }
 
-// WithLaplacianScale sets the laplacianScale property and returns the receiver for chaining.
+// WithLaplacianScale sets the property and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramidSubtract) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.SetLaplacianScale(laplacianScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageLaplacianPyramidSubtract) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageLaplacianPyramidSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageLaplacianPyramidSubtract) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageLaplacianPyramidSubtract) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageLaplacianPyramidSubtract) WithLabel(label string) *ImageLaplacianPyramidSubtract {
-	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageLaplacianPyramidSubtract) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid {
-	return &x.inner.MPSImageLaplacianPyramid
-}
-
-func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *mpsimage.MPSImagePyramid {
-	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid
-}
-
-func (x *ImageLaplacianPyramidSubtract) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel
-}
-
-func (x *ImageLaplacianPyramidSubtract) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageLaplacianPyramidSubtractable is the interface implemented by [ImageLaplacianPyramidSubtract], for mocking and DI.
 type ImageLaplacianPyramidSubtractable interface {
-	Unwrap() *raw.MPSImageLaplacianPyramidSubtract
+	obj.Object
 	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract
 	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract
 	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract
 	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidSubtract
-	WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidSubtract
 	WithLabel(label string) *ImageLaplacianPyramidSubtract
 }
 
 var _ ImageLaplacianPyramidSubtractable = (*ImageLaplacianPyramidSubtract)(nil)
+
+var _ ImageLaplacianPyramidProvider = (*ImageLaplacianPyramidSubtract)(nil)
+
+var _ ImagePyramidProvider = (*ImageLaplacianPyramidSubtract)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLaplacianPyramidSubtract)(nil)
+
+var _ KernelProvider = (*ImageLaplacianPyramidSubtract)(nil)

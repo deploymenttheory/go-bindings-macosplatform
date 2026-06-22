@@ -5,83 +5,115 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRServerAttribute wraps [raw.MTRServerAttribute] with a fluent Go API.
+// MTRServerAttribute is an idiomatic wrapper over the Objective-C class MTRServerAttribute.
 type MTRServerAttribute struct {
-	inner *raw.MTRServerAttribute
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRServerAttribute].
-func (x *MTRServerAttribute) Unwrap() *raw.MTRServerAttribute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRServerAttribute) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRServerAttributeFromID adopts an existing object pointer as a MTRServerAttribute (nil for 0).
+// MTRServerAttributeFromID adopts an existing Objective-C object as a MTRServerAttribute
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 	if id == 0 {
 		return nil
 	}
-	return &MTRServerAttribute{inner: raw.MTRServerAttributeFromID(id)}
-}
-
-// Initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
-//
-// NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege creates a new [MTRServerAttribute].
-func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value purego.IDer, requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServerAttribute")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), attributeID.Ptr(), value.ID(), raw.MTRAccessControlEntryPrivilege(requiredPrivilege))
-	return &MTRServerAttribute{inner: raw.MTRServerAttributeFromID(_id)}
-}
-
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRServerAttribute) WithValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRServerAttribute {
-	x.inner.SetValue(value)
+	x := &MTRServerAttribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
-//
-// SetValue calls the underlying SetValue.
-func (x *MTRServerAttribute) SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return x.inner.SetValue(value)
+// mTRServerAttributeAdopt wraps an Objective-C object that this code just created as a
+// MTRServerAttribute (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRServerAttributeAdopt(id objc.ID) *MTRServerAttribute {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRServerAttribute{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// AttributeID calls the underlying AttributeID.
-func (x *MTRServerAttribute) AttributeID() *foundation.NSNumber {
-	return x.inner.AttributeID()
+// Description returns the object's -description text.
+func (x *MTRServerAttribute) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Value calls the underlying Value.
-func (x *MTRServerAttribute) Value() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Value()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRServerAttribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The privilege level necessary to read this attribute.
-//
-// RequiredReadPrivilege calls the underlying RequiredReadPrivilege.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRServerAttribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRServerAttribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
+func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID obj.Object, value obj.Object, requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRServerAttribute")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), objref.IDOf(attributeID), objref.IDOf(value), requiredPrivilege)
+	return mTRServerAttributeAdopt(_id)
+}
+
+// WithValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRServerAttribute) WithValue(value obj.Object) *MTRServerAttribute {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return x
+}
+
+// SetValue change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
+func (x *MTRServerAttribute) SetValue(value obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return _r
+}
+
+// AttributeID wraps the corresponding Objective-C method.
+func (x *MTRServerAttribute) AttributeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeID"))
+	return obj.Wrap(_r)
+}
+
+// Value wraps the corresponding Objective-C method.
+func (x *MTRServerAttribute) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
+}
+
+// RequiredReadPrivilege the privilege level necessary to read this attribute.
 func (x *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPrivilege {
-	return MTRAccessControlEntryPrivilege(x.inner.RequiredReadPrivilege())
+	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(x), objc.RegisterName("requiredReadPrivilege"))
+	return _r
 }
 
-// IsWritable calls the underlying IsWritable.
+// IsWritable wraps the corresponding Objective-C method.
 func (x *MTRServerAttribute) IsWritable() bool {
-	return x.inner.IsWritable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
+	return _r
 }
 
 // MTRServerAttributeable is the interface implemented by [MTRServerAttribute], for mocking and DI.
 type MTRServerAttributeable interface {
-	Unwrap() *raw.MTRServerAttribute
-	WithValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRServerAttribute
-	SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
-	AttributeID() *foundation.NSNumber
-	Value() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	WithValue(value obj.Object) *MTRServerAttribute
+	SetValue(value obj.Object) bool
+	AttributeID() obj.Object
+	Value() obj.Object
 	RequiredReadPrivilege() MTRAccessControlEntryPrivilege
 	IsWritable() bool
 }

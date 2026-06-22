@@ -5,45 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a mass associated with an intent.
+// MassResolutionResult is an idiomatic wrapper over the Objective-C class INMassResolutionResult.
 //
-// MassResolutionResult wraps [raw.INMassResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a mass associated with an intent.
 type MassResolutionResult struct {
-	inner *raw.INMassResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INMassResolutionResult].
-func (x *MassResolutionResult) Unwrap() *raw.INMassResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MassResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// MassResolutionResultFromID adopts an existing object pointer as a MassResolutionResult (nil for 0).
+// MassResolutionResultFromID adopts an existing Objective-C object as a MassResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func MassResolutionResultFromID(id objc.ID) *MassResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &MassResolutionResult{inner: raw.INMassResolutionResultFromID(id)}
+	x := &MassResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMassResolutionResult creates a new [MassResolutionResult].
+// massResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// MassResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func massResolutionResultAdopt(id objc.ID) *MassResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &MassResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMassResolutionResult creates a new MassResolutionResult.
 func NewMassResolutionResult() *MassResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INMassResolutionResult")), objc.RegisterName("new"))
-	return &MassResolutionResult{inner: raw.INMassResolutionResultFromID(_id)}
-}
-
-func (x *MassResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INMassResolutionResult")), objc.RegisterName("new"))
+	return massResolutionResultAdopt(_id)
 }
 
 // MassResolutionResultable is the interface implemented by [MassResolutionResult], for mocking and DI.
 type MassResolutionResultable interface {
-	Unwrap() *raw.INMassResolutionResult
+	obj.Object
 }
 
 var _ MassResolutionResultable = (*MassResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*MassResolutionResult)(nil)

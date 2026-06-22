@@ -5,140 +5,122 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A polygonal path that can be followed by an agent.
+// Path is an idiomatic wrapper over the Objective-C class GKPath.
 //
-// Path wraps [raw.GKPath] with a fluent Go API.
+// A polygonal path that can be followed by an agent.
 type Path struct {
-	inner *raw.GKPath
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKPath].
-func (x *Path) Unwrap() *raw.GKPath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Path) ID() objc.ID { return x.inner.Ptr() }
-
-// PathFromID adopts an existing object pointer as a Path (nil for 0).
+// PathFromID adopts an existing Objective-C object as a Path
+// (nil for 0), retaining it and registering a release finalizer.
 func PathFromID(id objc.ID) *Path {
 	if id == 0 {
 		return nil
 	}
-	return &Path{inner: raw.GKPathFromID(id)}
+	x := &Path{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a path with the specified array of 2D points.
-//
-// NewPathWithPointsCountRadiusCyclical creates a new [Path].
-func NewPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *Path {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPath")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPoints:count:radius:cyclical:"), points, count, radius, cyclical)
-	return &Path{inner: raw.GKPathFromID(_id)}
+// pathAdopt wraps an Objective-C object that this code just created as a
+// Path (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pathAdopt(id objc.ID) *Path {
+	if id == 0 {
+		return nil
+	}
+	x := &Path{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a path with the specified array of 3D points.
-//
-// NewPathWithFloat3PointsCountRadiusCyclical creates a new [Path].
-func NewPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *Path {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPath")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFloat3Points:count:radius:cyclical:"), points, count, radius, cyclical)
-	return &Path{inner: raw.GKPathFromID(_id)}
+// Description returns the object's -description text.
+func (x *Path) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Initializes a path using the positions of the specified graph nodes.
-//
-// NewPathWithGraphNodesRadius creates a new [Path].
-func NewPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*raw.GKGraphNode], radius float32) *Path {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPath")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGraphNodes:radius:"), graphNodes.Ptr(), radius)
-	return &Path{inner: raw.GKPathFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Path) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The radius of the path.
-//
-// WithRadius sets the radius property and returns the receiver for chaining.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Path) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Path) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPathWithGraphNodesRadius initializes a path using the positions of the specified graph nodes.
+func NewPathWithGraphNodesRadius(graphNodes []*GraphNode, radius float32) *Path {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGraphNodes:radius:"), purego.SliceToNSArray(graphNodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), radius)
+	return pathAdopt(_id)
+}
+
+// WithRadius the radius of the path.
 func (x *Path) WithRadius(radius float32) *Path {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// A Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
-//
-// WithCyclical sets the cyclical property and returns the receiver for chaining.
+// WithCyclical a Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
 func (x *Path) WithCyclical(cyclical bool) *Path {
-	x.inner.SetCyclical(cyclical)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCyclical:"), cyclical)
 	return x
 }
 
-// Returns the 2D point at the specified index in the path’s list of vertices.
-//
-// PointAtIndex calls the underlying PointAtIndex.
-func (x *Path) PointAtIndex(index uint) unsafe.Pointer {
-	return x.inner.PointAtIndex(index)
-}
-
-// Returns the 2D point at the specified index in the path’s list of vertices.
-//
-// Float2AtIndex calls the underlying Float2AtIndex.
-func (x *Path) Float2AtIndex(index uint) unsafe.Pointer {
-	return x.inner.Float2AtIndex(index)
-}
-
-// Returns the 3D point at the specified index in the path’s list of vertices.
-//
-// Float3AtIndex calls the underlying Float3AtIndex.
-func (x *Path) Float3AtIndex(index uint) unsafe.Pointer {
-	return x.inner.Float3AtIndex(index)
-}
-
-// Radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
-//
-// Radius calls the underlying Radius.
+// Radius radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
 func (x *Path) Radius() float32 {
-	return x.inner.Radius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
+// SetRadius wraps the corresponding Objective-C method.
 func (x *Path) SetRadius(radius float32) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
-// Number of points in this path
-//
-// NumPoints calls the underlying NumPoints.
-func (x *Path) NumPoints() uint {
-	return x.inner.NumPoints()
+// NumPoints number of points in this path
+func (x *Path) NumPoints() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numPoints"))
+	return _r
 }
 
-// Does this path loop back on itself, creating a cycle?
-//
-// IsCyclical calls the underlying IsCyclical.
+// IsCyclical does this path loop back on itself, creating a cycle?
 func (x *Path) IsCyclical() bool {
-	return x.inner.IsCyclical()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCyclical"))
+	return _r
 }
 
-// SetCyclical calls the underlying SetCyclical.
+// SetCyclical wraps the corresponding Objective-C method.
 func (x *Path) SetCyclical(cyclical bool) {
-	x.inner.SetCyclical(cyclical)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCyclical:"), cyclical)
 }
 
 // Pathable is the interface implemented by [Path], for mocking and DI.
 type Pathable interface {
-	Unwrap() *raw.GKPath
+	obj.Object
 	WithRadius(radius float32) *Path
 	WithCyclical(cyclical bool) *Path
-	PointAtIndex(index uint) unsafe.Pointer
-	Float2AtIndex(index uint) unsafe.Pointer
-	Float3AtIndex(index uint) unsafe.Pointer
 	Radius() float32
 	SetRadius(radius float32)
-	NumPoints() uint
+	NumPoints() int
 	IsCyclical() bool
 	SetCyclical(cyclical bool)
 }

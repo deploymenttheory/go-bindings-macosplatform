@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package iousbhost provides a fluent Go API over the macOS IOUSBHost framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - HostIOSource: [HostPipe], [HostStream]
+//   - HostObject: [HostDevice], [HostInterface]
 package iousbhost

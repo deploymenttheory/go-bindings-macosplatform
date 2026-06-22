@@ -5,1102 +5,603 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// NodeWithSourceGradientSourceImageGradientState calls the underlying MPSCNNBatchNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func NodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *CNNBatchNormalizationGradientNode {
-	_r := raw.MPSCNNBatchNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &CNNBatchNormalizationGradientNode{inner: _r}
+// NodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
+func NodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *CNNBatchNormalizationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNBatchNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return CNNBatchNormalizationGradientNodeFromID(_r)
 }
 
-// NodeWithSourceDataSource calls the underlying MPSCNNBatchNormalizationNodeNodeWithSourceDataSource.
-func NodeWithSourceDataSource(source *raw.MPSNNImageNode, dataSource raw.MPSCNNBatchNormalizationDataSource) *CNNBatchNormalizationNode {
-	_r := raw.MPSCNNBatchNormalizationNodeNodeWithSourceDataSource(source, dataSource)
-	if _r == nil {
-		return nil
-	}
-	return &CNNBatchNormalizationNode{inner: _r}
+// CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter this method is deprecated. Please use neuronType, neuronParameterA and neuronParameterB properites to fuse neuron with convolution.
+func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter(kernelWidth int, kernelHeight int, inputFeatureChannels int, outputFeatureChannels int, neuronFilter *CNNNeuron) *CNNConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionDescriptor")), objc.RegisterName("cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:neuronFilter:"), kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels, objref.IDOf(neuronFilter))
+	return CNNConvolutionDescriptorFromID(_r)
 }
 
-// NodeWithSourceWeightsScaleValueTypeFlags calls the underlying MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsScaleValueTypeFlags.
-func NodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
-	_r := raw.MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode, weights, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
-	if _r == nil {
-		return nil
-	}
-	return &CNNBinaryConvolutionNode{inner: _r}
+// CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels creates a convolution descriptor.
+func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels(kernelWidth int, kernelHeight int, inputFeatureChannels int, outputFeatureChannels int) *CNNConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionDescriptor")), objc.RegisterName("cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:"), kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels)
+	return CNNConvolutionDescriptorFromID(_r)
 }
 
-// NodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags calls the underlying MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags.
-func NodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
-	_r := raw.MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode, weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
-	if _r == nil {
-		return nil
-	}
-	return &CNNBinaryConvolutionNode{inner: _r}
-}
-
-// MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags calls the underlying MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags.
-func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
-	_r := raw.MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode, weights, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
-	if _r == nil {
-		return nil
-	}
-	return &CNNBinaryFullyConnectedNode{inner: _r}
-}
-
-// MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags calls the underlying MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags.
-func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
-	_r := raw.MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode, weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
-	if _r == nil {
-		return nil
-	}
-	return &CNNBinaryFullyConnectedNode{inner: _r}
-}
-
-// CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter calls the underlying MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter.
-func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter(kernelWidth uint, kernelHeight uint, inputFeatureChannels uint, outputFeatureChannels uint, neuronFilter *raw.MPSCNNNeuron) *CNNConvolutionDescriptor {
-	_r := raw.MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter(kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels, neuronFilter)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionDescriptor{inner: _r}
-}
-
-// CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels calls the underlying MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels.
-func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels(kernelWidth uint, kernelHeight uint, inputFeatureChannels uint, outputFeatureChannels uint) *CNNConvolutionDescriptor {
-	_r := raw.MPSCNNConvolutionDescriptorCnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannels(kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionDescriptor{inner: _r}
-}
-
-// SupportsSecureCoding calls the underlying MPSCNNConvolutionDescriptorSupportsSecureCoding.
+// SupportsSecureCoding <NSSecureCoding> support
 func SupportsSecureCoding() bool {
-	return raw.MPSCNNConvolutionDescriptorSupportsSecureCoding()
-}
-
-// NodeWithSourceGradientSourceImageConvolutionGradientStateWeights calls the underlying MPSCNNConvolutionGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights.
-func NodeWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSCNNConvolutionGradientStateNode, weights raw.MPSCNNConvolutionDataSource) *CNNConvolutionGradientNode {
-	_r := raw.MPSCNNConvolutionGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient, sourceImage, gradientState, weights)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionGradientNode{inner: _r}
-}
-
-// NodeWithSourceWeights calls the underlying MPSCNNConvolutionNodeNodeWithSourceWeights.
-func NodeWithSourceWeights(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource) *CNNConvolutionNode {
-	_r := raw.MPSCNNConvolutionNodeNodeWithSourceWeights(sourceNode, weights)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights calls the underlying MPSCNNConvolutionTransposeGradientNodeNodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights.
-func NodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSCNNConvolutionTransposeGradientStateNode, weights raw.MPSCNNConvolutionDataSource) *CNNConvolutionTransposeGradientNode {
-	_r := raw.MPSCNNConvolutionTransposeGradientNodeNodeWithSourceGradientSourceImageConvolutionTransposeGradientStateWeights(sourceGradient, sourceImage, gradientState, weights)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionTransposeGradientNode{inner: _r}
-}
-
-// NodeWithSourceConvolutionGradientStateWeights calls the underlying MPSCNNConvolutionTransposeNodeNodeWithSourceConvolutionGradientStateWeights.
-func NodeWithSourceConvolutionGradientStateWeights(sourceNode *raw.MPSNNImageNode, convolutionGradientState *raw.MPSCNNConvolutionGradientStateNode, weights raw.MPSCNNConvolutionDataSource) *CNNConvolutionTransposeNode {
-	_r := raw.MPSCNNConvolutionTransposeNodeNodeWithSourceConvolutionGradientStateWeights(sourceNode, convolutionGradientState, weights)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionTransposeNode{inner: _r}
-}
-
-// TemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor calls the underlying MPSCNNConvolutionWeightsAndBiasesStateTemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor.
-func TemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor(commandBuffer metal.MTLCommandBuffer, descriptor *raw.MPSCNNConvolutionDescriptor) *CNNConvolutionWeightsAndBiasesState {
-	_r := raw.MPSCNNConvolutionWeightsAndBiasesStateTemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor(commandBuffer, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &CNNConvolutionWeightsAndBiasesState{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateKernelSize calls the underlying MPSCNNCrossChannelNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize.
-func NodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, kernelSize uint) *CNNCrossChannelNormalizationGradientNode {
-	_r := raw.MPSCNNCrossChannelNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient, sourceImage, gradientState, kernelSize)
-	if _r == nil {
-		return nil
-	}
-	return &CNNCrossChannelNormalizationGradientNode{inner: _r}
-}
-
-// NodeWithSourceKernelSize calls the underlying MPSCNNCrossChannelNormalizationNodeNodeWithSourceKernelSize.
-func NodeWithSourceKernelSize(sourceNode *raw.MPSNNImageNode, kernelSize uint) *CNNCrossChannelNormalizationNode {
-	_r := raw.MPSCNNCrossChannelNormalizationNodeNodeWithSourceKernelSize(sourceNode, kernelSize)
-	if _r == nil {
-		return nil
-	}
-	return &CNNCrossChannelNormalizationNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY calls the underlying MPSCNNDilatedPoolingMaxGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY.
-func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *CNNDilatedPoolingMaxGradientNode {
-	_r := raw.MPSCNNDilatedPoolingMaxGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient, sourceImage, gradientState, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDilatedPoolingMaxGradientNode{inner: _r}
-}
-
-// NodeWithSourceFilterSize calls the underlying MPSCNNDilatedPoolingMaxNodeNodeWithSourceFilterSize.
-func NodeWithSourceFilterSize(sourceNode *raw.MPSNNImageNode, size uint) *CNNDilatedPoolingMaxNode {
-	_r := raw.MPSCNNDilatedPoolingMaxNodeNodeWithSourceFilterSize(sourceNode, size)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDilatedPoolingMaxNode{inner: _r}
-}
-
-// NodeWithSourceFilterSizeStrideDilationRate calls the underlying MPSCNNDilatedPoolingMaxNodeNodeWithSourceFilterSizeStrideDilationRate.
-func NodeWithSourceFilterSizeStrideDilationRate(sourceNode *raw.MPSNNImageNode, size uint, stride uint, dilationRate uint) *CNNDilatedPoolingMaxNode {
-	_r := raw.MPSCNNDilatedPoolingMaxNodeNodeWithSourceFilterSizeStrideDilationRate(sourceNode, size, stride, dilationRate)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDilatedPoolingMaxNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels calls the underlying MPSCNNDropoutGradientNodeNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels.
-func NodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *CNNDropoutGradientNode {
-	_r := raw.MPSCNNDropoutGradientNodeNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient, sourceImage, gradientState, keepProbability, seed, maskStrideInPixels)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDropoutGradientNode{inner: _r}
-}
+	_r := objc.Send[bool](objc.ID(_class("MPSCNNConvolutionDescriptor")), objc.RegisterName("supportsSecureCoding"))
+	return _r
+}
+
+// NodeWithSourceGradientSourceImageGradientStateKernelSize wraps the corresponding Objective-C method.
+func NodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelSize int) *CNNCrossChannelNormalizationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelSize:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelSize)
+	return CNNCrossChannelNormalizationGradientNodeFromID(_r)
+}
+
+// NodeWithSourceKernelSize wraps the corresponding Objective-C method.
+func NodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNCrossChannelNormalizationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("nodeWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
+	return CNNCrossChannelNormalizationNodeFromID(_r)
+}
+
+// NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY make a pooling gradient node It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
+func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
+	return CNNDilatedPoolingMaxGradientNodeFromID(_r)
+}
+
+// NodeWithSourceFilterSize convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels
+func NodeWithSourceFilterSize(sourceNode *NNImageNode, size int) *CNNDilatedPoolingMaxNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("nodeWithSource:filterSize:"), objref.IDOf(sourceNode), size)
+	return CNNDilatedPoolingMaxNodeFromID(_r)
+}
+
+// NodeWithSourceFilterSizeStrideDilationRate convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors
+func NodeWithSourceFilterSizeStrideDilationRate(sourceNode *NNImageNode, size int, stride int, dilationRate int) *CNNDilatedPoolingMaxNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("nodeWithSource:filterSize:stride:dilationRate:"), objref.IDOf(sourceNode), size, stride, dilationRate)
+	return CNNDilatedPoolingMaxNodeFromID(_r)
+}
+
+// NodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels create a new dropout gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
+func NodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), keepProbability, seed, maskStrideInPixels)
+	return CNNDropoutGradientNodeFromID(_r)
+}
+
+// NodeWithSource wraps the corresponding Objective-C method.
+func NodeWithSource(source *NNImageNode) *CNNDropoutNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(source))
+	return CNNDropoutNodeFromID(_r)
+}
+
+// NodeWithSourceKeepProbability wraps the corresponding Objective-C method.
+func NodeWithSourceKeepProbability(source *NNImageNode, keepProbability float32) *CNNDropoutNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("nodeWithSource:keepProbability:"), objref.IDOf(source), keepProbability)
+	return CNNDropoutNodeFromID(_r)
+}
+
+// NodeWithSourceKeepProbabilitySeedMaskStrideInPixels wraps the corresponding Objective-C method.
+func NodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *NNImageNode, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("nodeWithSource:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(source), keepProbability, seed, maskStrideInPixels)
+	return CNNDropoutNodeFromID(_r)
+}
+
+// MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
+func MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *CNNGroupNormalizationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNGroupNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return CNNGroupNormalizationGradientNodeFromID(_r)
+}
+
+// MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
+func MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *CNNInstanceNormalizationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNInstanceNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return CNNInstanceNormalizationGradientNodeFromID(_r)
+}
+
+// NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight wraps the corresponding Objective-C method.
+func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelWidth int, kernelHeight int) *CNNLocalContrastNormalizationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight)
+	return CNNLocalContrastNormalizationGradientNodeFromID(_r)
+}
+
+// MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize wraps the corresponding Objective-C method.
+func MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNLocalContrastNormalizationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationNode")), objc.RegisterName("nodeWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
+	return CNNLocalContrastNormalizationNodeFromID(_r)
+}
+
+// MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
+func MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *CNNLogSoftMaxGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return CNNLogSoftMaxGradientNodeFromID(_r)
+}
+
+// MPSCNNLogSoftMaxNodeNodeWithSource init a node representing a autoreleased MPSCNNLogSoftMax kernel
+func MPSCNNLogSoftMaxNodeNodeWithSource(sourceNode *NNImageNode) *CNNLogSoftMaxNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNLogSoftMaxNodeFromID(_r)
+}
+
+// CnnLossDescriptorWithTypeReductionType make a descriptor for a MPSCNNLoss or MPSNNLossGradient object.
+func CnnLossDescriptorWithTypeReductionType(lossType CNNLossType, reductionType CNNReductionType) *CNNLossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossDescriptor")), objc.RegisterName("cnnLossDescriptorWithType:reductionType:"), lossType, reductionType)
+	return CNNLossDescriptorFromID(_r)
+}
+
+// NodeWithSourceLossDescriptor wraps the corresponding Objective-C method.
+func NodeWithSourceLossDescriptor(source *NNImageNode, descriptor *CNNLossDescriptor) *CNNLossNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossNode")), objc.RegisterName("nodeWithSource:lossDescriptor:"), objref.IDOf(source), objref.IDOf(descriptor))
+	return CNNLossNodeFromID(_r)
+}
+
+// MPSCNNNeuronAbsoluteNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronAbsoluteNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronAbsoluteNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronAbsoluteNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronAbsoluteNodeFromID(_r)
+}
+
+// NodeWithSourceA wraps the corresponding Objective-C method.
+func NodeWithSourceA(sourceNode *NNImageNode, a float32) *CNNNeuronELUNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("nodeWithSource:a:"), objref.IDOf(sourceNode), a)
+	return CNNNeuronELUNodeFromID(_r)
+}
+
+// MPSCNNNeuronELUNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronELUNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronELUNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronELUNodeFromID(_r)
+}
+
+// NodeWithSourceABC wraps the corresponding Objective-C method.
+func NodeWithSourceABC(sourceNode *NNImageNode, a float32, b float32, c float32) *CNNNeuronExponentialNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronExponentialNode")), objc.RegisterName("nodeWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
+	return CNNNeuronExponentialNodeFromID(_r)
+}
+
+// MPSCNNNeuronExponentialNodeNodeWithSource create an autoreleased node with default values for parameters a, b, and c
+func MPSCNNNeuronExponentialNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronExponentialNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronExponentialNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronExponentialNodeFromID(_r)
+}
+
+// MPSCNNNeuronGeLUNodeNodeWithSource create an autoreleased node
+func MPSCNNNeuronGeLUNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronGeLUNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGeLUNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronGeLUNodeFromID(_r)
+}
+
+// NodeWithSourceGradientSourceImageGradientStateDescriptor create a new neuron gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
+func NodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, descriptor *NNNeuronDescriptor) *CNNNeuronGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:descriptor:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), objref.IDOf(descriptor))
+	return CNNNeuronGradientNodeFromID(_r)
+}
+
+// NodeWithSourceAB wraps the corresponding Objective-C method.
+func NodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronHardSigmoidNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
+	return CNNNeuronHardSigmoidNodeFromID(_r)
+}
+
+// MPSCNNNeuronHardSigmoidNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronHardSigmoidNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronHardSigmoidNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronHardSigmoidNodeFromID(_r)
+}
+
+// MPSCNNNeuronLinearNodeNodeWithSourceAB wraps the corresponding Objective-C method.
+func MPSCNNNeuronLinearNodeNodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronLinearNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLinearNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
+	return CNNNeuronLinearNodeFromID(_r)
+}
+
+// MPSCNNNeuronLinearNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronLinearNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronLinearNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLinearNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronLinearNodeFromID(_r)
+}
+
+// MPSCNNNeuronLogarithmNodeNodeWithSourceABC wraps the corresponding Objective-C method.
+func MPSCNNNeuronLogarithmNodeNodeWithSourceABC(sourceNode *NNImageNode, a float32, b float32, c float32) *CNNNeuronLogarithmNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLogarithmNode")), objc.RegisterName("nodeWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
+	return CNNNeuronLogarithmNodeFromID(_r)
+}
+
+// MPSCNNNeuronLogarithmNodeNodeWithSource create an autoreleased node with default values for parameters a, b, and c
+func MPSCNNNeuronLogarithmNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronLogarithmNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLogarithmNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronLogarithmNodeFromID(_r)
+}
+
+// NodeWithSourceDescriptor create a neuron node of the appropriate type with a MPSNNNeuronDescriptor
+func NodeWithSourceDescriptor(sourceNode *NNImageNode, descriptor *NNNeuronDescriptor) *CNNNeuronNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronNode")), objc.RegisterName("nodeWithSource:descriptor:"), objref.IDOf(sourceNode), objref.IDOf(descriptor))
+	return CNNNeuronNodeFromID(_r)
+}
+
+// NodeWithSourceAData wraps the corresponding Objective-C method.
+func NodeWithSourceAData(sourceNode *NNImageNode, aData obj.Object) *CNNNeuronPReLUNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPReLUNode")), objc.RegisterName("nodeWithSource:aData:"), objref.IDOf(sourceNode), objref.IDOf(aData))
+	return CNNNeuronPReLUNodeFromID(_r)
+}
+
+// MPSCNNNeuronPowerNodeNodeWithSourceABC wraps the corresponding Objective-C method.
+func MPSCNNNeuronPowerNodeNodeWithSourceABC(sourceNode *NNImageNode, a float32, b float32, c float32) *CNNNeuronPowerNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPowerNode")), objc.RegisterName("nodeWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
+	return CNNNeuronPowerNodeFromID(_r)
+}
+
+// MPSCNNNeuronPowerNodeNodeWithSource create an autoreleased node with default values for parameters a, b, and c
+func MPSCNNNeuronPowerNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronPowerNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPowerNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronPowerNodeFromID(_r)
+}
+
+// MPSCNNNeuronReLUNNodeNodeWithSourceAB wraps the corresponding Objective-C method.
+func MPSCNNNeuronReLUNNodeNodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronReLUNNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
+	return CNNNeuronReLUNNodeFromID(_r)
+}
+
+// MPSCNNNeuronReLUNNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronReLUNNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronReLUNNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronReLUNNodeFromID(_r)
+}
+
+// MPSCNNNeuronReLUNodeNodeWithSourceA wraps the corresponding Objective-C method.
+func MPSCNNNeuronReLUNodeNodeWithSourceA(sourceNode *NNImageNode, a float32) *CNNNeuronReLUNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNode")), objc.RegisterName("nodeWithSource:a:"), objref.IDOf(sourceNode), a)
+	return CNNNeuronReLUNodeFromID(_r)
+}
+
+// MPSCNNNeuronReLUNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronReLUNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronReLUNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronReLUNodeFromID(_r)
+}
+
+// MPSCNNNeuronSigmoidNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronSigmoidNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronSigmoidNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSigmoidNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronSigmoidNodeFromID(_r)
+}
+
+// MPSCNNNeuronSoftPlusNodeNodeWithSourceAB wraps the corresponding Objective-C method.
+func MPSCNNNeuronSoftPlusNodeNodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronSoftPlusNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSoftPlusNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
+	return CNNNeuronSoftPlusNodeFromID(_r)
+}
+
+// MPSCNNNeuronSoftPlusNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronSoftPlusNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronSoftPlusNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSoftPlusNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronSoftPlusNodeFromID(_r)
+}
+
+// MPSCNNNeuronSoftSignNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronSoftSignNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronSoftSignNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSoftSignNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronSoftSignNodeFromID(_r)
+}
+
+// MPSCNNNeuronTanHNodeNodeWithSourceAB wraps the corresponding Objective-C method.
+func MPSCNNNeuronTanHNodeNodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronTanHNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
+	return CNNNeuronTanHNodeFromID(_r)
+}
+
+// MPSCNNNeuronTanHNodeNodeWithSource create an autoreleased node with default values for parameters a & b
+func MPSCNNNeuronTanHNodeNodeWithSource(sourceNode *NNImageNode) *CNNNeuronTanHNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNeuronTanHNodeFromID(_r)
+}
+
+// MPSCNNNormalizationNodeNodeWithSource wraps the corresponding Objective-C method.
+func MPSCNNNormalizationNodeNodeWithSource(sourceNode *NNImageNode) *CNNNormalizationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNNormalizationNodeFromID(_r)
+}
+
+// MPSCNNPoolingNodeNodeWithSourceFilterSize convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels
+func MPSCNNPoolingNodeNodeWithSourceFilterSize(sourceNode *NNImageNode, size int) *CNNPoolingNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("nodeWithSource:filterSize:"), objref.IDOf(sourceNode), size)
+	return CNNPoolingNodeFromID(_r)
+}
+
+// NodeWithSourceFilterSizeStride convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels and a different stride
+func NodeWithSourceFilterSizeStride(sourceNode *NNImageNode, size int, stride int) *CNNPoolingNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("nodeWithSource:filterSize:stride:"), objref.IDOf(sourceNode), size, stride)
+	return CNNPoolingNodeFromID(_r)
+}
+
+// MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
+func MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *CNNSoftMaxGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSoftMaxGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return CNNSoftMaxGradientNodeFromID(_r)
+}
+
+// MPSCNNSoftMaxNodeNodeWithSource init a node representing a autoreleased MPSCNNSoftMax kernel
+func MPSCNNSoftMaxNodeNodeWithSource(sourceNode *NNImageNode) *CNNSoftMaxNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSoftMaxNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return CNNSoftMaxNodeFromID(_r)
+}
+
+// MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize wraps the corresponding Objective-C method.
+func MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelSize int) *CNNSpatialNormalizationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelSize:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelSize)
+	return CNNSpatialNormalizationGradientNodeFromID(_r)
+}
+
+// MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize wraps the corresponding Objective-C method.
+func MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNSpatialNormalizationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationNode")), objc.RegisterName("nodeWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
+	return CNNSpatialNormalizationNodeFromID(_r)
+}
+
+// NodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY a node to represent the gradient calculation for nearest upsampling training. [forwardFilter gradientFilterWithSources:] is a more convient way to do this.
+func NodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingBilinearGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), scaleFactorX, scaleFactorY)
+	return CNNUpsamplingBilinearGradientNodeFromID(_r)
+}
+
+// NodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel
+func NodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingBilinearNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
+	return CNNUpsamplingBilinearNodeFromID(_r)
+}
+
+// NodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel
+func NodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int, alignCorners bool) *CNNUpsamplingBilinearNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:alignCorners:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY, alignCorners)
+	return CNNUpsamplingBilinearNodeFromID(_r)
+}
+
+// MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY a node to represent the gradient calculation for nearest upsampling training. [forwardFilter gradientFilterWithSources:] is a more convient way to do this.
+func MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingNearestGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), scaleFactorX, scaleFactorY)
+	return CNNUpsamplingNearestGradientNodeFromID(_r)
+}
+
+// MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY convenience initializer for an autoreleased MPSCNNUpsamplingNearest nodes
+func MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *NNImageNode, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingNearestNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestNode")), objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
+	return CNNUpsamplingNearestNodeFromID(_r)
+}
+
+// CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes make a descriptor for a MPSCNNYOLOLoss object.
+func CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType CNNLossType, wHLossType CNNLossType, confidenceLossType CNNLossType, classesLossType CNNLossType, reductionType CNNReductionType, anchorBoxes obj.Object, numberOfAnchorBoxes int) *CNNYOLOLossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNYOLOLossDescriptor")), objc.RegisterName("cnnLossDescriptorWithXYLossType:WHLossType:confidenceLossType:classesLossType:reductionType:anchorBoxes:numberOfAnchorBoxes:"), xYLossType, wHLossType, confidenceLossType, classesLossType, reductionType, objref.IDOf(anchorBoxes), numberOfAnchorBoxes)
+	return CNNYOLOLossDescriptorFromID(_r)
+}
+
+// MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor wraps the corresponding Objective-C method.
+func MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor(source *NNImageNode, descriptor *CNNYOLOLossDescriptor) *CNNYOLOLossNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNYOLOLossNode")), objc.RegisterName("nodeWithSource:lossDescriptor:"), objref.IDOf(source), objref.IDOf(descriptor))
+	return CNNYOLOLossNodeFromID(_r)
+}
+
+// CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels creates a GRU descriptor.
+func CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels int, outputFeatureChannels int) *GRUDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGRUDescriptor")), objc.RegisterName("createGRUDescriptorWithInputFeatureChannels:outputFeatureChannels:"), inputFeatureChannels, outputFeatureChannels)
+	return GRUDescriptorFromID(_r)
+}
+
+// CreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels creates a LSTM descriptor.
+func CreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels int, outputFeatureChannels int) *LSTMDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSLSTMDescriptor")), objc.RegisterName("createLSTMDescriptorWithInputFeatureChannels:outputFeatureChannels:"), inputFeatureChannels, outputFeatureChannels)
+	return LSTMDescriptorFromID(_r)
+}
+
+// NodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
+func NodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNBinaryGradientStateNode, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:isSecondarySourceFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), isSecondarySourceFilter)
+	return NNArithmeticGradientNodeFromID(_r)
+}
+
+// NodeWithSources create an autoreleased arithemtic node with an array of sources
+func NodeWithSources(sourceNodes []*NNImageNode) *NNBinaryArithmeticNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryArithmeticNode")), objc.RegisterName("nodeWithSources:"), purego.SliceToNSArray(sourceNodes, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }))
+	return NNBinaryArithmeticNodeFromID(_r)
+}
+
+// NodeWithLeftSourceRightSource create an autoreleased arithemtic node with two sources
+func NodeWithLeftSourceRightSource(left *NNImageNode, right *NNImageNode) *NNBinaryArithmeticNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryArithmeticNode")), objc.RegisterName("nodeWithLeftSource:rightSource:"), objref.IDOf(left), objref.IDOf(right))
+	return NNBinaryArithmeticNodeFromID(_r)
+}
+
+// MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState create a MPSNNConcatenationGradientNode Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead.
+func MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState(gradientSourceNode *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNConcatenationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(gradientSourceNode), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return NNConcatenationGradientNodeFromID(_r)
+}
+
+// MPSNNConcatenationNodeNodeWithSources init a autoreleased node that concatenates feature channels from multiple images In some neural network designs, it is necessary to append feature channels from one neural network filter to the results of another. If we have three image nodes with M, N and O feature channels in them, passed to -initWithSources: as
+func MPSNNConcatenationNodeNodeWithSources(sourceNodes []*NNImageNode) *NNConcatenationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationNode")), objc.RegisterName("nodeWithSources:"), purego.SliceToNSArray(sourceNodes, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }))
+	return NNConcatenationNodeFromID(_r)
+}
+
+// PaddingWithMethod fetch a well known object that implements a non-custom padding method For custom padding methods, you will need to implement an object that conforms to the full MPSNNPadding protocol, including NSSecureCoding.
+func PaddingWithMethod(method NNPaddingMethod) *NNDefaultPadding {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingWithMethod:"), method)
+	return NNDefaultPaddingFromID(_r)
+}
 
-// NodeWithSource calls the underlying MPSCNNDropoutNodeNodeWithSource.
-func NodeWithSource(source *raw.MPSNNImageNode) *CNNDropoutNode {
-	_r := raw.MPSCNNDropoutNodeNodeWithSource(source)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDropoutNode{inner: _r}
-}
-
-// NodeWithSourceKeepProbability calls the underlying MPSCNNDropoutNodeNodeWithSourceKeepProbability.
-func NodeWithSourceKeepProbability(source *raw.MPSNNImageNode, keepProbability float32) *CNNDropoutNode {
-	_r := raw.MPSCNNDropoutNodeNodeWithSourceKeepProbability(source, keepProbability)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDropoutNode{inner: _r}
-}
-
-// NodeWithSourceKeepProbabilitySeedMaskStrideInPixels calls the underlying MPSCNNDropoutNodeNodeWithSourceKeepProbabilitySeedMaskStrideInPixels.
-func NodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *raw.MPSNNImageNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
-	_r := raw.MPSCNNDropoutNodeNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source, keepProbability, seed, maskStrideInPixels)
-	if _r == nil {
-		return nil
-	}
-	return &CNNDropoutNode{inner: _r}
-}
-
-// MPSCNNFullyConnectedGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights calls the underlying MPSCNNFullyConnectedGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights.
-func MPSCNNFullyConnectedGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSCNNConvolutionGradientStateNode, weights raw.MPSCNNConvolutionDataSource) *CNNFullyConnectedGradientNode {
-	_r := raw.MPSCNNFullyConnectedGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient, sourceImage, gradientState, weights)
-	if _r == nil {
-		return nil
-	}
-	return &CNNFullyConnectedGradientNode{inner: _r}
-}
-
-// MPSCNNFullyConnectedNodeNodeWithSourceWeights calls the underlying MPSCNNFullyConnectedNodeNodeWithSourceWeights.
-func MPSCNNFullyConnectedNodeNodeWithSourceWeights(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource) *CNNFullyConnectedNode {
-	_r := raw.MPSCNNFullyConnectedNodeNodeWithSourceWeights(sourceNode, weights)
-	if _r == nil {
-		return nil
-	}
-	return &CNNFullyConnectedNode{inner: _r}
-}
-
-// MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *CNNGroupNormalizationGradientNode {
-	_r := raw.MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &CNNGroupNormalizationGradientNode{inner: _r}
-}
-
-// MPSCNNGroupNormalizationNodeNodeWithSourceDataSource calls the underlying MPSCNNGroupNormalizationNodeNodeWithSourceDataSource.
-func MPSCNNGroupNormalizationNodeNodeWithSourceDataSource(source *raw.MPSNNImageNode, dataSource raw.MPSCNNGroupNormalizationDataSource) *CNNGroupNormalizationNode {
-	_r := raw.MPSCNNGroupNormalizationNodeNodeWithSourceDataSource(source, dataSource)
-	if _r == nil {
-		return nil
-	}
-	return &CNNGroupNormalizationNode{inner: _r}
-}
-
-// MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *CNNInstanceNormalizationGradientNode {
-	_r := raw.MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &CNNInstanceNormalizationGradientNode{inner: _r}
-}
-
-// MPSCNNInstanceNormalizationNodeNodeWithSourceDataSource calls the underlying MPSCNNInstanceNormalizationNodeNodeWithSourceDataSource.
-func MPSCNNInstanceNormalizationNodeNodeWithSourceDataSource(source *raw.MPSNNImageNode, dataSource raw.MPSCNNInstanceNormalizationDataSource) *CNNInstanceNormalizationNode {
-	_r := raw.MPSCNNInstanceNormalizationNodeNodeWithSourceDataSource(source, dataSource)
-	if _r == nil {
-		return nil
-	}
-	return &CNNInstanceNormalizationNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight calls the underlying MPSCNNLocalContrastNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight.
-func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint) *CNNLocalContrastNormalizationGradientNode {
-	_r := raw.MPSCNNLocalContrastNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient, sourceImage, gradientState, kernelWidth, kernelHeight)
-	if _r == nil {
-		return nil
-	}
-	return &CNNLocalContrastNormalizationGradientNode{inner: _r}
-}
-
-// MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize calls the underlying MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize.
-func MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize(sourceNode *raw.MPSNNImageNode, kernelSize uint) *CNNLocalContrastNormalizationNode {
-	_r := raw.MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize(sourceNode, kernelSize)
-	if _r == nil {
-		return nil
-	}
-	return &CNNLocalContrastNormalizationNode{inner: _r}
-}
-
-// MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *CNNLogSoftMaxGradientNode {
-	_r := raw.MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &CNNLogSoftMaxGradientNode{inner: _r}
-}
-
-// MPSCNNLogSoftMaxNodeNodeWithSource calls the underlying MPSCNNLogSoftMaxNodeNodeWithSource.
-func MPSCNNLogSoftMaxNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNLogSoftMaxNode {
-	_r := raw.MPSCNNLogSoftMaxNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNLogSoftMaxNode{inner: _r}
-}
-
-// CnnLossDataDescriptorWithDataLayoutSize calls the underlying MPSCNNLossDataDescriptorCnnLossDataDescriptorWithDataLayoutSize.
-func CnnLossDataDescriptorWithDataLayoutSize(data *foundation.NSData, layout mpscore.MPSDataLayout, size metal.MTLSize) *CNNLossDataDescriptor {
-	_r := raw.MPSCNNLossDataDescriptorCnnLossDataDescriptorWithDataLayoutSize(data, layout, size)
-	if _r == nil {
-		return nil
-	}
-	return &CNNLossDataDescriptor{inner: _r}
-}
-
-// CnnLossDescriptorWithTypeReductionType calls the underlying MPSCNNLossDescriptorCnnLossDescriptorWithTypeReductionType.
-func CnnLossDescriptorWithTypeReductionType(lossType MPSCNNLossType, reductionType MPSCNNReductionType) *CNNLossDescriptor {
-	_r := raw.MPSCNNLossDescriptorCnnLossDescriptorWithTypeReductionType(raw.MPSCNNLossType(lossType), raw.MPSCNNReductionType(reductionType))
-	if _r == nil {
-		return nil
-	}
-	return &CNNLossDescriptor{inner: _r}
-}
-
-// NodeWithSourceLossDescriptor calls the underlying MPSCNNLossNodeNodeWithSourceLossDescriptor.
-func NodeWithSourceLossDescriptor(source *raw.MPSNNImageNode, descriptor *raw.MPSCNNLossDescriptor) *CNNLossNode {
-	_r := raw.MPSCNNLossNodeNodeWithSourceLossDescriptor(source, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &CNNLossNode{inner: _r}
-}
-
-// MPSCNNNeuronAbsoluteNodeNodeWithSource calls the underlying MPSCNNNeuronAbsoluteNodeNodeWithSource.
-func MPSCNNNeuronAbsoluteNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronAbsoluteNode {
-	_r := raw.MPSCNNNeuronAbsoluteNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronAbsoluteNode{inner: _r}
-}
-
-// NodeWithSourceA calls the underlying MPSCNNNeuronELUNodeNodeWithSourceA.
-func NodeWithSourceA(sourceNode *raw.MPSNNImageNode, a float32) *CNNNeuronELUNode {
-	_r := raw.MPSCNNNeuronELUNodeNodeWithSourceA(sourceNode, a)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronELUNode{inner: _r}
-}
-
-// MPSCNNNeuronELUNodeNodeWithSource calls the underlying MPSCNNNeuronELUNodeNodeWithSource.
-func MPSCNNNeuronELUNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronELUNode {
-	_r := raw.MPSCNNNeuronELUNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronELUNode{inner: _r}
-}
-
-// NodeWithSourceABC calls the underlying MPSCNNNeuronExponentialNodeNodeWithSourceABC.
-func NodeWithSourceABC(sourceNode *raw.MPSNNImageNode, a float32, b float32, c float32) *CNNNeuronExponentialNode {
-	_r := raw.MPSCNNNeuronExponentialNodeNodeWithSourceABC(sourceNode, a, b, c)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronExponentialNode{inner: _r}
-}
-
-// MPSCNNNeuronExponentialNodeNodeWithSource calls the underlying MPSCNNNeuronExponentialNodeNodeWithSource.
-func MPSCNNNeuronExponentialNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronExponentialNode {
-	_r := raw.MPSCNNNeuronExponentialNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronExponentialNode{inner: _r}
-}
-
-// MPSCNNNeuronGeLUNodeNodeWithSource calls the underlying MPSCNNNeuronGeLUNodeNodeWithSource.
-func MPSCNNNeuronGeLUNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronGeLUNode {
-	_r := raw.MPSCNNNeuronGeLUNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronGeLUNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateDescriptor calls the underlying MPSCNNNeuronGradientNodeNodeWithSourceGradientSourceImageGradientStateDescriptor.
-func NodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, descriptor *raw.MPSNNNeuronDescriptor) *CNNNeuronGradientNode {
-	_r := raw.MPSCNNNeuronGradientNodeNodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient, sourceImage, gradientState, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronGradientNode{inner: _r}
-}
-
-// NodeWithSourceAB calls the underlying MPSCNNNeuronHardSigmoidNodeNodeWithSourceAB.
-func NodeWithSourceAB(sourceNode *raw.MPSNNImageNode, a float32, b float32) *CNNNeuronHardSigmoidNode {
-	_r := raw.MPSCNNNeuronHardSigmoidNodeNodeWithSourceAB(sourceNode, a, b)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronHardSigmoidNode{inner: _r}
-}
-
-// MPSCNNNeuronHardSigmoidNodeNodeWithSource calls the underlying MPSCNNNeuronHardSigmoidNodeNodeWithSource.
-func MPSCNNNeuronHardSigmoidNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronHardSigmoidNode {
-	_r := raw.MPSCNNNeuronHardSigmoidNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronHardSigmoidNode{inner: _r}
-}
-
-// MPSCNNNeuronLinearNodeNodeWithSourceAB calls the underlying MPSCNNNeuronLinearNodeNodeWithSourceAB.
-func MPSCNNNeuronLinearNodeNodeWithSourceAB(sourceNode *raw.MPSNNImageNode, a float32, b float32) *CNNNeuronLinearNode {
-	_r := raw.MPSCNNNeuronLinearNodeNodeWithSourceAB(sourceNode, a, b)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronLinearNode{inner: _r}
-}
-
-// MPSCNNNeuronLinearNodeNodeWithSource calls the underlying MPSCNNNeuronLinearNodeNodeWithSource.
-func MPSCNNNeuronLinearNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronLinearNode {
-	_r := raw.MPSCNNNeuronLinearNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronLinearNode{inner: _r}
-}
-
-// MPSCNNNeuronLogarithmNodeNodeWithSourceABC calls the underlying MPSCNNNeuronLogarithmNodeNodeWithSourceABC.
-func MPSCNNNeuronLogarithmNodeNodeWithSourceABC(sourceNode *raw.MPSNNImageNode, a float32, b float32, c float32) *CNNNeuronLogarithmNode {
-	_r := raw.MPSCNNNeuronLogarithmNodeNodeWithSourceABC(sourceNode, a, b, c)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronLogarithmNode{inner: _r}
-}
-
-// MPSCNNNeuronLogarithmNodeNodeWithSource calls the underlying MPSCNNNeuronLogarithmNodeNodeWithSource.
-func MPSCNNNeuronLogarithmNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronLogarithmNode {
-	_r := raw.MPSCNNNeuronLogarithmNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronLogarithmNode{inner: _r}
-}
-
-// NodeWithSourceDescriptor calls the underlying MPSCNNNeuronNodeNodeWithSourceDescriptor.
-func NodeWithSourceDescriptor(sourceNode *raw.MPSNNImageNode, descriptor *raw.MPSNNNeuronDescriptor) *CNNNeuronNode {
-	_r := raw.MPSCNNNeuronNodeNodeWithSourceDescriptor(sourceNode, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronNode{inner: _r}
-}
-
-// NodeWithSourceAData calls the underlying MPSCNNNeuronPReLUNodeNodeWithSourceAData.
-func NodeWithSourceAData(sourceNode *raw.MPSNNImageNode, aData *foundation.NSData) *CNNNeuronPReLUNode {
-	_r := raw.MPSCNNNeuronPReLUNodeNodeWithSourceAData(sourceNode, aData)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronPReLUNode{inner: _r}
-}
-
-// MPSCNNNeuronPowerNodeNodeWithSourceABC calls the underlying MPSCNNNeuronPowerNodeNodeWithSourceABC.
-func MPSCNNNeuronPowerNodeNodeWithSourceABC(sourceNode *raw.MPSNNImageNode, a float32, b float32, c float32) *CNNNeuronPowerNode {
-	_r := raw.MPSCNNNeuronPowerNodeNodeWithSourceABC(sourceNode, a, b, c)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronPowerNode{inner: _r}
-}
-
-// MPSCNNNeuronPowerNodeNodeWithSource calls the underlying MPSCNNNeuronPowerNodeNodeWithSource.
-func MPSCNNNeuronPowerNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronPowerNode {
-	_r := raw.MPSCNNNeuronPowerNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronPowerNode{inner: _r}
-}
-
-// MPSCNNNeuronReLUNNodeNodeWithSourceAB calls the underlying MPSCNNNeuronReLUNNodeNodeWithSourceAB.
-func MPSCNNNeuronReLUNNodeNodeWithSourceAB(sourceNode *raw.MPSNNImageNode, a float32, b float32) *CNNNeuronReLUNNode {
-	_r := raw.MPSCNNNeuronReLUNNodeNodeWithSourceAB(sourceNode, a, b)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronReLUNNode{inner: _r}
-}
-
-// MPSCNNNeuronReLUNNodeNodeWithSource calls the underlying MPSCNNNeuronReLUNNodeNodeWithSource.
-func MPSCNNNeuronReLUNNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronReLUNNode {
-	_r := raw.MPSCNNNeuronReLUNNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronReLUNNode{inner: _r}
-}
-
-// MPSCNNNeuronReLUNodeNodeWithSourceA calls the underlying MPSCNNNeuronReLUNodeNodeWithSourceA.
-func MPSCNNNeuronReLUNodeNodeWithSourceA(sourceNode *raw.MPSNNImageNode, a float32) *CNNNeuronReLUNode {
-	_r := raw.MPSCNNNeuronReLUNodeNodeWithSourceA(sourceNode, a)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronReLUNode{inner: _r}
-}
-
-// MPSCNNNeuronReLUNodeNodeWithSource calls the underlying MPSCNNNeuronReLUNodeNodeWithSource.
-func MPSCNNNeuronReLUNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronReLUNode {
-	_r := raw.MPSCNNNeuronReLUNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronReLUNode{inner: _r}
-}
-
-// MPSCNNNeuronSigmoidNodeNodeWithSource calls the underlying MPSCNNNeuronSigmoidNodeNodeWithSource.
-func MPSCNNNeuronSigmoidNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronSigmoidNode {
-	_r := raw.MPSCNNNeuronSigmoidNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronSigmoidNode{inner: _r}
-}
-
-// MPSCNNNeuronSoftPlusNodeNodeWithSourceAB calls the underlying MPSCNNNeuronSoftPlusNodeNodeWithSourceAB.
-func MPSCNNNeuronSoftPlusNodeNodeWithSourceAB(sourceNode *raw.MPSNNImageNode, a float32, b float32) *CNNNeuronSoftPlusNode {
-	_r := raw.MPSCNNNeuronSoftPlusNodeNodeWithSourceAB(sourceNode, a, b)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronSoftPlusNode{inner: _r}
-}
-
-// MPSCNNNeuronSoftPlusNodeNodeWithSource calls the underlying MPSCNNNeuronSoftPlusNodeNodeWithSource.
-func MPSCNNNeuronSoftPlusNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronSoftPlusNode {
-	_r := raw.MPSCNNNeuronSoftPlusNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronSoftPlusNode{inner: _r}
-}
-
-// MPSCNNNeuronSoftSignNodeNodeWithSource calls the underlying MPSCNNNeuronSoftSignNodeNodeWithSource.
-func MPSCNNNeuronSoftSignNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronSoftSignNode {
-	_r := raw.MPSCNNNeuronSoftSignNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronSoftSignNode{inner: _r}
-}
-
-// MPSCNNNeuronTanHNodeNodeWithSourceAB calls the underlying MPSCNNNeuronTanHNodeNodeWithSourceAB.
-func MPSCNNNeuronTanHNodeNodeWithSourceAB(sourceNode *raw.MPSNNImageNode, a float32, b float32) *CNNNeuronTanHNode {
-	_r := raw.MPSCNNNeuronTanHNodeNodeWithSourceAB(sourceNode, a, b)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronTanHNode{inner: _r}
-}
-
-// MPSCNNNeuronTanHNodeNodeWithSource calls the underlying MPSCNNNeuronTanHNodeNodeWithSource.
-func MPSCNNNeuronTanHNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuronTanHNode {
-	_r := raw.MPSCNNNeuronTanHNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNeuronTanHNode{inner: _r}
-}
-
-// TemporaryStateWithCommandBufferNumberOfFeatureChannels calls the underlying MPSCNNNormalizationGammaAndBetaStateTemporaryStateWithCommandBufferNumberOfFeatureChannels.
-func TemporaryStateWithCommandBufferNumberOfFeatureChannels(commandBuffer metal.MTLCommandBuffer, numberOfFeatureChannels uint) *CNNNormalizationGammaAndBetaState {
-	_r := raw.MPSCNNNormalizationGammaAndBetaStateTemporaryStateWithCommandBufferNumberOfFeatureChannels(commandBuffer, numberOfFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNormalizationGammaAndBetaState{inner: _r}
-}
-
-// MPSCNNNormalizationMeanAndVarianceStateTemporaryStateWithCommandBufferNumberOfFeatureChannels calls the underlying MPSCNNNormalizationMeanAndVarianceStateTemporaryStateWithCommandBufferNumberOfFeatureChannels.
-func MPSCNNNormalizationMeanAndVarianceStateTemporaryStateWithCommandBufferNumberOfFeatureChannels(commandBuffer metal.MTLCommandBuffer, numberOfFeatureChannels uint) *CNNNormalizationMeanAndVarianceState {
-	_r := raw.MPSCNNNormalizationMeanAndVarianceStateTemporaryStateWithCommandBufferNumberOfFeatureChannels(commandBuffer, numberOfFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNormalizationMeanAndVarianceState{inner: _r}
-}
-
-// MPSCNNNormalizationNodeNodeWithSource calls the underlying MPSCNNNormalizationNodeNodeWithSource.
-func MPSCNNNormalizationNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNormalizationNode {
-	_r := raw.MPSCNNNormalizationNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNNormalizationNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy calls the underlying MPSCNNPoolingGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy.
-func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, paddingPolicy raw.MPSNNPadding) *CNNPoolingGradientNode {
-	_r := raw.MPSCNNPoolingGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYPaddingPolicy(sourceGradient, sourceImage, gradientState, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, paddingPolicy)
-	if _r == nil {
-		return nil
-	}
-	return &CNNPoolingGradientNode{inner: _r}
-}
-
-// MPSCNNPoolingNodeNodeWithSourceFilterSize calls the underlying MPSCNNPoolingNodeNodeWithSourceFilterSize.
-func MPSCNNPoolingNodeNodeWithSourceFilterSize(sourceNode *raw.MPSNNImageNode, size uint) *CNNPoolingNode {
-	_r := raw.MPSCNNPoolingNodeNodeWithSourceFilterSize(sourceNode, size)
-	if _r == nil {
-		return nil
-	}
-	return &CNNPoolingNode{inner: _r}
-}
-
-// NodeWithSourceFilterSizeStride calls the underlying MPSCNNPoolingNodeNodeWithSourceFilterSizeStride.
-func NodeWithSourceFilterSizeStride(sourceNode *raw.MPSNNImageNode, size uint, stride uint) *CNNPoolingNode {
-	_r := raw.MPSCNNPoolingNodeNodeWithSourceFilterSizeStride(sourceNode, size, stride)
-	if _r == nil {
-		return nil
-	}
-	return &CNNPoolingNode{inner: _r}
-}
-
-// MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *CNNSoftMaxGradientNode {
-	_r := raw.MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &CNNSoftMaxGradientNode{inner: _r}
-}
-
-// MPSCNNSoftMaxNodeNodeWithSource calls the underlying MPSCNNSoftMaxNodeNodeWithSource.
-func MPSCNNSoftMaxNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNSoftMaxNode {
-	_r := raw.MPSCNNSoftMaxNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &CNNSoftMaxNode{inner: _r}
-}
-
-// MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize calls the underlying MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize.
-func MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, kernelSize uint) *CNNSpatialNormalizationGradientNode {
-	_r := raw.MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient, sourceImage, gradientState, kernelSize)
-	if _r == nil {
-		return nil
-	}
-	return &CNNSpatialNormalizationGradientNode{inner: _r}
-}
-
-// MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize calls the underlying MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize.
-func MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize(sourceNode *raw.MPSNNImageNode, kernelSize uint) *CNNSpatialNormalizationNode {
-	_r := raw.MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize(sourceNode, kernelSize)
-	if _r == nil {
-		return nil
-	}
-	return &CNNSpatialNormalizationNode{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY calls the underlying MPSCNNUpsamplingBilinearGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY.
-func NodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingBilinearGradientNode {
-	_r := raw.MPSCNNUpsamplingBilinearGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient, sourceImage, gradientState, scaleFactorX, scaleFactorY)
-	if _r == nil {
-		return nil
-	}
-	return &CNNUpsamplingBilinearGradientNode{inner: _r}
-}
-
-// NodeWithSourceIntegerScaleFactorXIntegerScaleFactorY calls the underlying MPSCNNUpsamplingBilinearNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY.
-func NodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *raw.MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *CNNUpsamplingBilinearNode {
-	_r := raw.MPSCNNUpsamplingBilinearNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode, integerScaleFactorX, integerScaleFactorY)
-	if _r == nil {
-		return nil
-	}
-	return &CNNUpsamplingBilinearNode{inner: _r}
-}
-
-// NodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners calls the underlying MPSCNNUpsamplingBilinearNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners.
-func NodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode *raw.MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint, alignCorners bool) *CNNUpsamplingBilinearNode {
-	_r := raw.MPSCNNUpsamplingBilinearNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode, integerScaleFactorX, integerScaleFactorY, alignCorners)
-	if _r == nil {
-		return nil
-	}
-	return &CNNUpsamplingBilinearNode{inner: _r}
-}
-
-// MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY calls the underlying MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY.
-func MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingNearestGradientNode {
-	_r := raw.MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient, sourceImage, gradientState, scaleFactorX, scaleFactorY)
-	if _r == nil {
-		return nil
-	}
-	return &CNNUpsamplingNearestGradientNode{inner: _r}
-}
-
-// MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY calls the underlying MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY.
-func MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *raw.MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *CNNUpsamplingNearestNode {
-	_r := raw.MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode, integerScaleFactorX, integerScaleFactorY)
-	if _r == nil {
-		return nil
-	}
-	return &CNNUpsamplingNearestNode{inner: _r}
-}
-
-// CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes calls the underlying MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes.
-func CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType MPSCNNLossType, wHLossType MPSCNNLossType, confidenceLossType MPSCNNLossType, classesLossType MPSCNNLossType, reductionType MPSCNNReductionType, anchorBoxes *foundation.NSData, numberOfAnchorBoxes uint) *CNNYOLOLossDescriptor {
-	_r := raw.MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(raw.MPSCNNLossType(xYLossType), raw.MPSCNNLossType(wHLossType), raw.MPSCNNLossType(confidenceLossType), raw.MPSCNNLossType(classesLossType), raw.MPSCNNReductionType(reductionType), anchorBoxes, numberOfAnchorBoxes)
-	if _r == nil {
-		return nil
-	}
-	return &CNNYOLOLossDescriptor{inner: _r}
-}
-
-// MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor calls the underlying MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor.
-func MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor(source *raw.MPSNNImageNode, descriptor *raw.MPSCNNYOLOLossDescriptor) *CNNYOLOLossNode {
-	_r := raw.MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor(source, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &CNNYOLOLossNode{inner: _r}
-}
-
-// CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels calls the underlying MPSGRUDescriptorCreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels.
-func CreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels uint, outputFeatureChannels uint) *GRUDescriptor {
-	_r := raw.MPSGRUDescriptorCreateGRUDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels, outputFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &GRUDescriptor{inner: _r}
-}
-
-// CreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels calls the underlying MPSLSTMDescriptorCreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels.
-func CreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels uint, outputFeatureChannels uint) *LSTMDescriptor {
-	_r := raw.MPSLSTMDescriptorCreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels, outputFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMDescriptor{inner: _r}
-}
-
-// NodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter calls the underlying MPSNNArithmeticGradientNodeNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter.
-func NodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNBinaryGradientStateNode, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
-	_r := raw.MPSNNArithmeticGradientNodeNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient, sourceImage, gradientState, isSecondarySourceFilter)
-	if _r == nil {
-		return nil
-	}
-	return &NNArithmeticGradientNode{inner: _r}
-}
-
-// NodeWithSources calls the underlying MPSNNBinaryArithmeticNodeNodeWithSources.
-func NodeWithSources(sourceNodes *foundation.NSArray[*raw.MPSNNImageNode]) *NNBinaryArithmeticNode {
-	_r := raw.MPSNNBinaryArithmeticNodeNodeWithSources(sourceNodes)
-	if _r == nil {
-		return nil
-	}
-	return &NNBinaryArithmeticNode{inner: _r}
-}
-
-// NodeWithLeftSourceRightSource calls the underlying MPSNNBinaryArithmeticNodeNodeWithLeftSourceRightSource.
-func NodeWithLeftSourceRightSource(left *raw.MPSNNImageNode, right *raw.MPSNNImageNode) *NNBinaryArithmeticNode {
-	_r := raw.MPSNNBinaryArithmeticNodeNodeWithLeftSourceRightSource(left, right)
-	if _r == nil {
-		return nil
-	}
-	return &NNBinaryArithmeticNode{inner: _r}
-}
-
-// MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState(gradientSourceNode *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *NNConcatenationGradientNode {
-	_r := raw.MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState(gradientSourceNode, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &NNConcatenationGradientNode{inner: _r}
-}
-
-// MPSNNConcatenationNodeNodeWithSources calls the underlying MPSNNConcatenationNodeNodeWithSources.
-func MPSNNConcatenationNodeNodeWithSources(sourceNodes *foundation.NSArray[*raw.MPSNNImageNode]) *NNConcatenationNode {
-	_r := raw.MPSNNConcatenationNodeNodeWithSources(sourceNodes)
-	if _r == nil {
-		return nil
-	}
-	return &NNConcatenationNode{inner: _r}
-}
-
-// PaddingWithMethod calls the underlying MPSNNDefaultPaddingPaddingWithMethod.
-func PaddingWithMethod(method MPSNNPaddingMethod) *NNDefaultPadding {
-	_r := raw.MPSNNDefaultPaddingPaddingWithMethod(raw.MPSNNPaddingMethod(method))
-	if _r == nil {
-		return nil
-	}
-	return &NNDefaultPadding{inner: _r}
-}
-
-// PaddingForTensorflowAveragePooling calls the underlying MPSNNDefaultPaddingPaddingForTensorflowAveragePooling.
+// PaddingForTensorflowAveragePooling a padding policy that attempts to reproduce TensorFlow behavior for average pooling Most TensorFlow padding is covered by the standard MPSNNPaddingMethod encodings. You can use +paddingWithMethod to get quick access to MPSNNPadding objects, when default filter behavior isn't enough. (It often is.)  However, the edging for max pooling in TensorFlow is a bit unusual. This padding method attempts to reproduce TensorFlow padding for average pooling. In addition to setting MPSNNPaddingMethodSizeSame | MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToBottomRight, it also configures the filter to run with MPSImageEdgeModeClamp, which (as a special case for average pooling only), normalizes the sum of contributing samples to the area of valid contributing pixels only.
 func PaddingForTensorflowAveragePooling() *NNDefaultPadding {
-	_r := raw.MPSNNDefaultPaddingPaddingForTensorflowAveragePooling()
-	if _r == nil {
-		return nil
-	}
-	return &NNDefaultPadding{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingForTensorflowAveragePooling"))
+	return NNDefaultPaddingFromID(_r)
 }
 
-// PaddingForTensorflowAveragePoolingValidOnly calls the underlying MPSNNDefaultPaddingPaddingForTensorflowAveragePoolingValidOnly.
+// PaddingForTensorflowAveragePoolingValidOnly typical pooling padding policy for valid only mode
 func PaddingForTensorflowAveragePoolingValidOnly() *NNDefaultPadding {
-	_r := raw.MPSNNDefaultPaddingPaddingForTensorflowAveragePoolingValidOnly()
-	if _r == nil {
-		return nil
-	}
-	return &NNDefaultPadding{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingForTensorflowAveragePoolingValidOnly"))
+	return NNDefaultPaddingFromID(_r)
 }
 
-// NodeWithSourceLabelsWeightsLossDescriptor calls the underlying MPSNNForwardLossNodeNodeWithSourceLabelsWeightsLossDescriptor.
-func NodeWithSourceLabelsWeightsLossDescriptor(source *raw.MPSNNImageNode, labels *raw.MPSNNImageNode, weights *raw.MPSNNImageNode, descriptor *raw.MPSCNNLossDescriptor) *NNForwardLossNode {
-	_r := raw.MPSNNForwardLossNodeNodeWithSourceLabelsWeightsLossDescriptor(source, labels, weights, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &NNForwardLossNode{inner: _r}
+// NodeWithSourceLabelsWeightsLossDescriptor wraps the corresponding Objective-C method.
+func NodeWithSourceLabelsWeightsLossDescriptor(source *NNImageNode, labels *NNImageNode, weights *NNImageNode, descriptor *CNNLossDescriptor) *NNForwardLossNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("nodeWithSource:labels:weights:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(descriptor))
+	return NNForwardLossNodeFromID(_r)
 }
 
-// NodeWithSourceLabelsLossDescriptor calls the underlying MPSNNForwardLossNodeNodeWithSourceLabelsLossDescriptor.
-func NodeWithSourceLabelsLossDescriptor(source *raw.MPSNNImageNode, labels *raw.MPSNNImageNode, descriptor *raw.MPSCNNLossDescriptor) *NNForwardLossNode {
-	_r := raw.MPSNNForwardLossNodeNodeWithSourceLabelsLossDescriptor(source, labels, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &NNForwardLossNode{inner: _r}
+// NodeWithSourceLabelsLossDescriptor wraps the corresponding Objective-C method.
+func NodeWithSourceLabelsLossDescriptor(source *NNImageNode, labels *NNImageNode, descriptor *CNNLossDescriptor) *NNForwardLossNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("nodeWithSource:labels:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(descriptor))
+	return NNForwardLossNodeFromID(_r)
 }
 
-// NodeWithSourcesLossDescriptor calls the underlying MPSNNForwardLossNodeNodeWithSourcesLossDescriptor.
-func NodeWithSourcesLossDescriptor(sourceNodes *foundation.NSArray[*raw.MPSNNImageNode], descriptor *raw.MPSCNNLossDescriptor) *NNForwardLossNode {
-	_r := raw.MPSNNForwardLossNodeNodeWithSourcesLossDescriptor(sourceNodes, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &NNForwardLossNode{inner: _r}
+// NodeWithSourcesLossDescriptor init a forward loss node from multiple images
+func NodeWithSourcesLossDescriptor(sourceNodes []*NNImageNode, descriptor *CNNLossDescriptor) *NNForwardLossNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("nodeWithSources:lossDescriptor:"), purego.SliceToNSArray(sourceNodes, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor))
+	return NNForwardLossNodeFromID(_r)
 }
 
-// MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *NNGramMatrixCalculationGradientNode {
-	_r := raw.MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &NNGramMatrixCalculationGradientNode{inner: _r}
+// MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
+func MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNGramMatrixCalculationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return NNGramMatrixCalculationGradientNodeFromID(_r)
 }
 
-// NodeWithSourceGradientSourceImageGradientStateAlpha calls the underlying MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientStateAlpha.
-func NodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, alpha float32) *NNGramMatrixCalculationGradientNode {
-	_r := raw.MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient, sourceImage, gradientState, alpha)
-	if _r == nil {
-		return nil
-	}
-	return &NNGramMatrixCalculationGradientNode{inner: _r}
+// NodeWithSourceGradientSourceImageGradientStateAlpha wraps the corresponding Objective-C method.
+func NodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, alpha float32) *NNGramMatrixCalculationGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:alpha:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), alpha)
+	return NNGramMatrixCalculationGradientNodeFromID(_r)
 }
 
-// MPSNNGramMatrixCalculationNodeNodeWithSource calls the underlying MPSNNGramMatrixCalculationNodeNodeWithSource.
-func MPSNNGramMatrixCalculationNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *NNGramMatrixCalculationNode {
-	_r := raw.MPSNNGramMatrixCalculationNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &NNGramMatrixCalculationNode{inner: _r}
+// MPSNNGramMatrixCalculationNodeNodeWithSource init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel.
+func MPSNNGramMatrixCalculationNodeNodeWithSource(sourceNode *NNImageNode) *NNGramMatrixCalculationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return NNGramMatrixCalculationNodeFromID(_r)
 }
 
-// NodeWithSourceAlpha calls the underlying MPSNNGramMatrixCalculationNodeNodeWithSourceAlpha.
-func NodeWithSourceAlpha(sourceNode *raw.MPSNNImageNode, alpha float32) *NNGramMatrixCalculationNode {
-	_r := raw.MPSNNGramMatrixCalculationNodeNodeWithSourceAlpha(sourceNode, alpha)
-	if _r == nil {
-		return nil
-	}
-	return &NNGramMatrixCalculationNode{inner: _r}
+// NodeWithSourceAlpha init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel.
+func NodeWithSourceAlpha(sourceNode *NNImageNode, alpha float32) *NNGramMatrixCalculationNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("nodeWithSource:alpha:"), objref.IDOf(sourceNode), alpha)
+	return NNGramMatrixCalculationNodeFromID(_r)
 }
 
-// GraphWithDeviceResultImageResultImageIsNeeded calls the underlying MPSNNGraphGraphWithDeviceResultImageResultImageIsNeeded.
-func GraphWithDeviceResultImageResultImageIsNeeded(device metal.MTLDevice, resultImage *raw.MPSNNImageNode, resultIsNeeded bool) *NNGraph {
-	_r := raw.MPSNNGraphGraphWithDeviceResultImageResultImageIsNeeded(device, resultImage, resultIsNeeded)
-	if _r == nil {
-		return nil
-	}
-	return &NNGraph{inner: _r}
+// NodeWithHandle wraps the corresponding Objective-C method.
+func NodeWithHandle(handle obj.Object) *NNImageNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNImageNode")), objc.RegisterName("nodeWithHandle:"), objref.IDOf(handle))
+	return NNImageNodeFromID(_r)
 }
 
-// GraphWithDeviceResultImagesResultsAreNeeded calls the underlying MPSNNGraphGraphWithDeviceResultImagesResultsAreNeeded.
-func GraphWithDeviceResultImagesResultsAreNeeded(device metal.MTLDevice, resultImages *foundation.NSArray[*raw.MPSNNImageNode], areResultsNeeded *bool) *NNGraph {
-	_r := raw.MPSNNGraphGraphWithDeviceResultImagesResultsAreNeeded(device, resultImages, areResultsNeeded)
-	if _r == nil {
-		return nil
-	}
-	return &NNGraph{inner: _r}
+// ExportedNodeWithHandle create a autoreleased MPSNNImageNode with exportFromGraph = YES. Note: image is still temporary. See MPSNNImageNode.imageAllocator parameter.
+func ExportedNodeWithHandle(handle obj.Object) *NNImageNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNImageNode")), objc.RegisterName("exportedNodeWithHandle:"), objref.IDOf(handle))
+	return NNImageNodeFromID(_r)
 }
 
-// GraphWithDeviceResultImage calls the underlying MPSNNGraphGraphWithDeviceResultImage.
-func GraphWithDeviceResultImage(device metal.MTLDevice, resultImage *raw.MPSNNImageNode) *NNGraph {
-	_r := raw.MPSNNGraphGraphWithDeviceResultImage(device, resultImage)
-	if _r == nil {
-		return nil
-	}
-	return &NNGraph{inner: _r}
+// MPSNNInitialGradientNodeNodeWithSource init a node representing a MPSNNInitialGradient MPSNNPad kernel
+func MPSNNInitialGradientNodeNodeWithSource(source *NNImageNode) *NNInitialGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNInitialGradientNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(source))
+	return NNInitialGradientNodeFromID(_r)
 }
 
-// NodeWithHandle calls the underlying MPSNNImageNodeNodeWithHandle.
-func NodeWithHandle(handle *foundation.NSObject) *NNImageNode {
-	_r := raw.MPSNNImageNodeNodeWithHandle(handle)
-	if _r == nil {
-		return nil
-	}
-	return &NNImageNode{inner: _r}
+// NodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter wraps the corresponding Objective-C method.
+func NodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *NNImageNode, sourceImage *NNImageNode, labels *NNImageNode, weights *NNImageNode, gradientState *NNGradientStateNode, descriptor *CNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
+	return NNLossGradientNodeFromID(_r)
 }
 
-// ExportedNodeWithHandle calls the underlying MPSNNImageNodeExportedNodeWithHandle.
-func ExportedNodeWithHandle(handle *foundation.NSObject) *NNImageNode {
-	_r := raw.MPSNNImageNodeExportedNodeWithHandle(handle)
-	if _r == nil {
-		return nil
-	}
-	return &NNImageNode{inner: _r}
+// NodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter wraps the corresponding Objective-C method.
+func NodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *NNImageNode, sourceImage *NNImageNode, labels *NNImageNode, gradientState *NNGradientStateNode, descriptor *CNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
+	return NNLossGradientNodeFromID(_r)
 }
 
-// MPSNNInitialGradientNodeNodeWithSource calls the underlying MPSNNInitialGradientNodeNodeWithSource.
-func MPSNNInitialGradientNodeNodeWithSource(source *raw.MPSNNImageNode) *NNInitialGradientNode {
-	_r := raw.MPSNNInitialGradientNodeNodeWithSource(source)
-	if _r == nil {
-		return nil
-	}
-	return &NNInitialGradientNode{inner: _r}
+// NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter init a gradient loss node from multiple images
+func NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes []*NNImageNode, gradientState *NNGradientStateNode, descriptor *CNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("nodeWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:"), purego.SliceToNSArray(sourceNodes, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
+	return NNLossGradientNodeFromID(_r)
 }
 
-// NodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter calls the underlying MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter.
-func NodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, labels *raw.MPSNNImageNode, weights *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, descriptor *raw.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
-	_r := raw.MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient, sourceImage, labels, weights, gradientState, descriptor, isLabelsGradientFilter)
-	if _r == nil {
-		return nil
-	}
-	return &NNLossGradientNode{inner: _r}
+// CnnNeuronDescriptorWithType make a descriptor for a MPSCNNNeuron object.
+func CnnNeuronDescriptorWithType(neuronType CNNNeuronType) *NNNeuronDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronDescriptorWithType:"), neuronType)
+	return NNNeuronDescriptorFromID(_r)
 }
 
-// NodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter calls the underlying MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter.
-func NodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, labels *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, descriptor *raw.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
-	_r := raw.MPSNNLossGradientNodeNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient, sourceImage, labels, gradientState, descriptor, isLabelsGradientFilter)
-	if _r == nil {
-		return nil
-	}
-	return &NNLossGradientNode{inner: _r}
+// CnnNeuronDescriptorWithTypeA make a descriptor for a MPSCNNNeuron object.
+func CnnNeuronDescriptorWithTypeA(neuronType CNNNeuronType, a float32) *NNNeuronDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronDescriptorWithType:a:"), neuronType, a)
+	return NNNeuronDescriptorFromID(_r)
 }
 
-// NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter calls the underlying MPSNNLossGradientNodeNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter.
-func NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes *foundation.NSArray[*raw.MPSNNImageNode], gradientState *raw.MPSNNGradientStateNode, descriptor *raw.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
-	_r := raw.MPSNNLossGradientNodeNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes, gradientState, descriptor, isLabelsGradientFilter)
-	if _r == nil {
-		return nil
-	}
-	return &NNLossGradientNode{inner: _r}
+// CnnNeuronDescriptorWithTypeAB initialize the neuron descriptor.
+func CnnNeuronDescriptorWithTypeAB(neuronType CNNNeuronType, a float32, b float32) *NNNeuronDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronDescriptorWithType:a:b:"), neuronType, a, b)
+	return NNNeuronDescriptorFromID(_r)
 }
 
-// CnnNeuronDescriptorWithType calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithType.
-func CnnNeuronDescriptorWithType(neuronType MPSCNNNeuronType) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithType(raw.MPSCNNNeuronType(neuronType))
-	if _r == nil {
-		return nil
-	}
-	return &NNNeuronDescriptor{inner: _r}
+// CnnNeuronDescriptorWithTypeABC make a descriptor for a MPSCNNNeuron object.
+func CnnNeuronDescriptorWithTypeABC(neuronType CNNNeuronType, a float32, b float32, c float32) *NNNeuronDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronDescriptorWithType:a:b:c:"), neuronType, a, b, c)
+	return NNNeuronDescriptorFromID(_r)
 }
 
-// CnnNeuronDescriptorWithTypeA calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeA.
-func CnnNeuronDescriptorWithTypeA(neuronType MPSCNNNeuronType, a float32) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeA(raw.MPSCNNNeuronType(neuronType), a)
-	if _r == nil {
-		return nil
-	}
-	return &NNNeuronDescriptor{inner: _r}
+// CnnNeuronPReLUDescriptorWithDataNoCopy make a descriptor for a neuron of type MPSCNNNeuronTypePReLU. The PReLU neuron is the same as a ReLU neuron, except parameter "a" is per feature channel.
+func CnnNeuronPReLUDescriptorWithDataNoCopy(data obj.Object, noCopy bool) *NNNeuronDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronPReLUDescriptorWithData:noCopy:"), objref.IDOf(data), noCopy)
+	return NNNeuronDescriptorFromID(_r)
 }
 
-// CnnNeuronDescriptorWithTypeAB calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeAB.
-func CnnNeuronDescriptorWithTypeAB(neuronType MPSCNNNeuronType, a float32, b float32) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeAB(raw.MPSCNNNeuronType(neuronType), a, b)
-	if _r == nil {
-		return nil
-	}
-	return &NNNeuronDescriptor{inner: _r}
+// OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale wraps the corresponding Objective-C method.
+func OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType NNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNOptimizerDescriptor")), objc.RegisterName("optimizerDescriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:"), learningRate, gradientRescale, regularizationType, regularizationScale)
+	return NNOptimizerDescriptorFromID(_r)
 }
 
-// CnnNeuronDescriptorWithTypeABC calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeABC.
-func CnnNeuronDescriptorWithTypeABC(neuronType MPSCNNNeuronType, a float32, b float32, c float32) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeABC(raw.MPSCNNNeuronType(neuronType), a, b, c)
-	if _r == nil {
-		return nil
-	}
-	return &NNNeuronDescriptor{inner: _r}
+// OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale wraps the corresponding Objective-C method.
+func OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType NNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNOptimizerDescriptor")), objc.RegisterName("optimizerDescriptorWithLearningRate:gradientRescale:applyGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:"), learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
+	return NNOptimizerDescriptorFromID(_r)
 }
 
-// CnnNeuronPReLUDescriptorWithDataNoCopy calls the underlying MPSNNNeuronDescriptorCnnNeuronPReLUDescriptorWithDataNoCopy.
-func CnnNeuronPReLUDescriptorWithDataNoCopy(data *foundation.NSData, noCopy bool) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronPReLUDescriptorWithDataNoCopy(data, noCopy)
-	if _r == nil {
-		return nil
-	}
-	return &NNNeuronDescriptor{inner: _r}
+// MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a padding node.
+func MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNPadGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNPadGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return NNPadGradientNodeFromID(_r)
 }
 
-// OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale calls the underlying MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale.
-func OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
-	_r := raw.MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate, gradientRescale, raw.MPSNNRegularizationType(regularizationType), regularizationScale)
-	if _r == nil {
-		return nil
-	}
-	return &NNOptimizerDescriptor{inner: _r}
+// MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a spatial mean reduction node.
+func MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNReductionSpatialMeanGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNReductionSpatialMeanGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return NNReductionSpatialMeanGradientNodeFromID(_r)
 }
 
-// OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale calls the underlying MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale.
-func OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
-	_r := raw.MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, raw.MPSNNRegularizationType(regularizationType), regularizationScale)
-	if _r == nil {
-		return nil
-	}
-	return &NNOptimizerDescriptor{inner: _r}
+// MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a reshape node.
+func MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNReshapeGradientNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return NNReshapeGradientNodeFromID(_r)
 }
 
-// MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *NNPadGradientNode {
-	_r := raw.MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &NNPadGradientNode{inner: _r}
+// NodeWithSourceResultWidthResultHeightResultFeatureChannels init a node representing a autoreleased MPSNNReshape kernel
+func NodeWithSourceResultWidthResultHeightResultFeatureChannels(source *NNImageNode, resultWidth int, resultHeight int, resultFeatureChannels int) *NNReshapeNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeNode")), objc.RegisterName("nodeWithSource:resultWidth:resultHeight:resultFeatureChannels:"), objref.IDOf(source), resultWidth, resultHeight, resultFeatureChannels)
+	return NNReshapeNodeFromID(_r)
 }
 
-// NodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode calls the underlying MPSNNPadNodeNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode.
-func NodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source *raw.MPSNNImageNode, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, edgeMode mpscore.MPSImageEdgeMode) *NNPadNode {
-	_r := raw.MPSNNPadNodeNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source, paddingSizeBefore, paddingSizeAfter, edgeMode)
-	if _r == nil {
-		return nil
-	}
-	return &NNPadNode{inner: _r}
+// NodeWithSourceOutputSize create an autoreleased node to convert a MPSImage to the desired size
+func NodeWithSourceOutputSize(sourceNode *NNImageNode, size metal.MTLSize) *NNScaleNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNScaleNode")), objc.RegisterName("nodeWithSource:outputSize:"), objref.IDOf(sourceNode), size)
+	return NNScaleNodeFromID(_r)
 }
 
-// MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *NNReductionSpatialMeanGradientNode {
-	_r := raw.MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &NNReductionSpatialMeanGradientNode{inner: _r}
+// MPSNNUnaryReductionNodeNodeWithSource create an autoreleased node representing an MPS reduction kernel.
+func MPSNNUnaryReductionNodeNodeWithSource(sourceNode *NNImageNode) *NNUnaryReductionNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNUnaryReductionNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
+	return NNUnaryReductionNodeFromID(_r)
 }
 
-// MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState calls the underlying MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState.
-func MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *NNReshapeGradientNode {
-	_r := raw.MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient, sourceImage, gradientState)
-	if _r == nil {
-		return nil
-	}
-	return &NNReshapeGradientNode{inner: _r}
-}
-
-// NodeWithSourceResultWidthResultHeightResultFeatureChannels calls the underlying MPSNNReshapeNodeNodeWithSourceResultWidthResultHeightResultFeatureChannels.
-func NodeWithSourceResultWidthResultHeightResultFeatureChannels(source *raw.MPSNNImageNode, resultWidth uint, resultHeight uint, resultFeatureChannels uint) *NNReshapeNode {
-	_r := raw.MPSNNReshapeNodeNodeWithSourceResultWidthResultHeightResultFeatureChannels(source, resultWidth, resultHeight, resultFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &NNReshapeNode{inner: _r}
-}
-
-// NodeWithSourceOutputSize calls the underlying MPSNNScaleNodeNodeWithSourceOutputSize.
-func NodeWithSourceOutputSize(sourceNode *raw.MPSNNImageNode, size metal.MTLSize) *NNScaleNode {
-	_r := raw.MPSNNScaleNodeNodeWithSourceOutputSize(sourceNode, size)
-	if _r == nil {
-		return nil
-	}
-	return &NNScaleNode{inner: _r}
-}
-
-// NodeWithSourceTransformProviderOutputSize calls the underlying MPSNNScaleNodeNodeWithSourceTransformProviderOutputSize.
-func NodeWithSourceTransformProviderOutputSize(sourceNode *raw.MPSNNImageNode, transformProvider raw.MPSImageTransformProvider, size metal.MTLSize) *NNScaleNode {
-	_r := raw.MPSNNScaleNodeNodeWithSourceTransformProviderOutputSize(sourceNode, transformProvider, size)
-	if _r == nil {
-		return nil
-	}
-	return &NNScaleNode{inner: _r}
-}
-
-// MPSNNUnaryReductionNodeNodeWithSource calls the underlying MPSNNUnaryReductionNodeNodeWithSource.
-func MPSNNUnaryReductionNodeNodeWithSource(sourceNode *raw.MPSNNImageNode) *NNUnaryReductionNode {
-	_r := raw.MPSNNUnaryReductionNodeNodeWithSource(sourceNode)
-	if _r == nil {
-		return nil
-	}
-	return &NNUnaryReductionNode{inner: _r}
-}
-
-// CreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels calls the underlying MPSRNNSingleGateDescriptorCreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels.
-func CreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels uint, outputFeatureChannels uint) *RNNSingleGateDescriptor {
-	_r := raw.MPSRNNSingleGateDescriptorCreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels, outputFeatureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &RNNSingleGateDescriptor{inner: _r}
+// CreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels creates a MPSRNNSingleGateDescriptor
+func CreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels int, outputFeatureChannels int) *RNNSingleGateDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSRNNSingleGateDescriptor")), objc.RegisterName("createRNNSingleGateDescriptorWithInputFeatureChannels:outputFeatureChannels:"), inputFeatureChannels, outputFeatureChannels)
+	return RNNSingleGateDescriptorFromID(_r)
 }

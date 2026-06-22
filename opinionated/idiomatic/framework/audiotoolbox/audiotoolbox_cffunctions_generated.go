@@ -5,381 +5,1095 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// AudioCodecAppendInputBufferList wraps [raw.AudioCodecAppendInputBufferList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioCodecAppendInputBufferList(inCodec *carboncore.ComponentInstanceRecord, inBufferList *coreaudiotypes.AudioBufferList, ioNumberPackets *uint, inPacketDescription *coreaudiotypes.AudioStreamPacketDescription, outBytesConsumed *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioCodecAppendInputBufferList(inCodec, inBufferList, ioNumberPackets, inPacketDescription, outBytesConsumed)).Err(); _err != nil {
+var _fnAUGraphClearConnections func(objc.ID) int32
+
+// AUGraphClearConnections reports an error if the AudioToolbox framework function AUGraphClearConnections fails.
+func AUGraphClearConnections(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphClearConnections == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphClearConnections, _lib, "AUGraphClearConnections")
+	}
+	_rc := _fnAUGraphClearConnections(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioCodecGetPropertyInfo wraps [raw.AudioCodecGetPropertyInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioCodecGetPropertyInfo(inCodec *carboncore.ComponentInstanceRecord, inPropertyID uint, outSize *uint, outWritable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioCodecGetPropertyInfo(inCodec, inPropertyID, outSize, outWritable)).Err(); _err != nil {
+var _fnAUGraphClose func(objc.ID) int32
+
+// AUGraphClose reports an error if the AudioToolbox framework function AUGraphClose fails.
+func AUGraphClose(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphClose == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphClose, _lib, "AUGraphClose")
+	}
+	_rc := _fnAUGraphClose(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioCodecProduceOutputBufferList wraps [raw.AudioCodecProduceOutputBufferList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioCodecProduceOutputBufferList(inCodec *carboncore.ComponentInstanceRecord, ioBufferList *coreaudiotypes.AudioBufferList, ioNumberPackets *uint, outPacketDescription *coreaudiotypes.AudioStreamPacketDescription, outStatus *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioCodecProduceOutputBufferList(inCodec, ioBufferList, ioNumberPackets, outPacketDescription, outStatus)).Err(); _err != nil {
+var _fnAUGraphConnectNodeInput func(objc.ID, int, int, int, int) int32
+
+// AUGraphConnectNodeInput reports an error if the AudioToolbox framework function AUGraphConnectNodeInput fails.
+func AUGraphConnectNodeInput(inGraph obj.Object, inSourceNode int, inSourceOutputNumber int, inDestNode int, inDestInputNumber int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphConnectNodeInput == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphConnectNodeInput, _lib, "AUGraphConnectNodeInput")
+	}
+	_rc := _fnAUGraphConnectNodeInput(objref.IDOf(inGraph), inSourceNode, inSourceOutputNumber, inDestNode, inDestInputNumber)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioCodecReset wraps [raw.AudioCodecReset], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioCodecReset(inCodec *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioCodecReset(inCodec)).Err(); _err != nil {
+var _fnAUGraphDisconnectNodeInput func(objc.ID, int, int) int32
+
+// AUGraphDisconnectNodeInput reports an error if the AudioToolbox framework function AUGraphDisconnectNodeInput fails.
+func AUGraphDisconnectNodeInput(inGraph obj.Object, inDestNode int, inDestInputNumber int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphDisconnectNodeInput == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphDisconnectNodeInput, _lib, "AUGraphDisconnectNodeInput")
+	}
+	_rc := _fnAUGraphDisconnectNodeInput(objref.IDOf(inGraph), inDestNode, inDestInputNumber)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioCodecUninitialize wraps [raw.AudioCodecUninitialize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioCodecUninitialize(inCodec *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioCodecUninitialize(inCodec)).Err(); _err != nil {
+var _fnAUGraphInitialize func(objc.ID) int32
+
+// AUGraphInitialize reports an error if the AudioToolbox framework function AUGraphInitialize fails.
+func AUGraphInitialize(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphInitialize, _lib, "AUGraphInitialize")
+	}
+	_rc := _fnAUGraphInitialize(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioComponentInstanceDispose wraps [raw.AudioComponentInstanceDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioComponentInstanceDispose(inInstance *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioComponentInstanceDispose(inInstance)).Err(); _err != nil {
+var _fnAUGraphOpen func(objc.ID) int32
+
+// AUGraphOpen reports an error if the AudioToolbox framework function AUGraphOpen fails.
+func AUGraphOpen(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphOpen == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphOpen, _lib, "AUGraphOpen")
+	}
+	_rc := _fnAUGraphOpen(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioFileComponentCloseFile wraps [raw.AudioFileComponentCloseFile], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentCloseFile(inComponent *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentCloseFile(inComponent)).Err(); _err != nil {
+var _fnAUGraphRemoveNode func(objc.ID, int) int32
+
+// AUGraphRemoveNode reports an error if the AudioToolbox framework function AUGraphRemoveNode fails.
+func AUGraphRemoveNode(inGraph obj.Object, inNode int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphRemoveNode == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphRemoveNode, _lib, "AUGraphRemoveNode")
+	}
+	_rc := _fnAUGraphRemoveNode(objref.IDOf(inGraph), inNode)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioFileComponentCountUserData wraps [raw.AudioFileComponentCountUserData], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentCountUserData(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, outNumberItems *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentCountUserData(inComponent, inUserDataID, outNumberItems)).Err(); _err != nil {
+var _fnAUGraphStart func(objc.ID) int32
+
+// AUGraphStart reports an error if the AudioToolbox framework function AUGraphStart fails.
+func AUGraphStart(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphStart == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphStart, _lib, "AUGraphStart")
+	}
+	_rc := _fnAUGraphStart(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioFileComponentCreate wraps [raw.AudioFileComponentCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentCreate(inComponent *carboncore.ComponentInstanceRecord, inParentRef *carboncore.FSRef, inFileName objc.ID, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags uint, outNewFileRef *carboncore.FSRef) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentCreate(inComponent, inParentRef, purego.CFRef(inFileName), inFormat, inFlags, outNewFileRef)).Err(); _err != nil {
+var _fnAUGraphStop func(objc.ID) int32
+
+// AUGraphStop reports an error if the AudioToolbox framework function AUGraphStop fails.
+func AUGraphStop(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphStop == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphStop, _lib, "AUGraphStop")
+	}
+	_rc := _fnAUGraphStop(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioFileComponentCreateURL wraps [raw.AudioFileComponentCreateURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentCreateURL(inComponent *carboncore.ComponentInstanceRecord, inFileRef objc.ID, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentCreateURL(inComponent, purego.CFRef(inFileRef), inFormat, inFlags)).Err(); _err != nil {
+var _fnAUGraphUninitialize func(objc.ID) int32
+
+// AUGraphUninitialize reports an error if the AudioToolbox framework function AUGraphUninitialize fails.
+func AUGraphUninitialize(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUGraphUninitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAUGraphUninitialize, _lib, "AUGraphUninitialize")
+	}
+	_rc := _fnAUGraphUninitialize(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioFileComponentExtensionIsThisFormat wraps [raw.AudioFileComponentExtensionIsThisFormat], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentExtensionIsThisFormat(inComponent *carboncore.ComponentInstanceRecord, inExtension objc.ID, outResult *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentExtensionIsThisFormat(inComponent, purego.CFRef(inExtension), outResult)).Err(); _err != nil {
+var _fnAUListenerDispose func(objc.ID) int32
+
+// AUListenerDispose reports an error if the AudioToolbox framework function AUListenerDispose fails.
+func AUListenerDispose(inListener obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAUListenerDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnAUListenerDispose, _lib, "AUListenerDispose")
+	}
+	_rc := _fnAUListenerDispose(objref.IDOf(inListener))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioFileComponentFileIsThisFormat wraps [raw.AudioFileComponentFileIsThisFormat], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentFileIsThisFormat(inComponent *carboncore.ComponentInstanceRecord, inFileRefNum int16, outResult *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentFileIsThisFormat(inComponent, inFileRefNum, outResult)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnAudioComponentCopyConfigurationInfo func(objc.ID, unsafe.Pointer) int32
 
-// AudioFileComponentGetPropertyInfo wraps [raw.AudioFileComponentGetPropertyInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentGetPropertyInfo(inComponent *carboncore.ComponentInstanceRecord, inPropertyID uint, outPropertySize *uint, outWritable *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentGetPropertyInfo(inComponent, inPropertyID, outPropertySize, outWritable)).Err(); _err != nil {
-		return _err
+// AudioComponentCopyConfigurationInfo reports an error if the AudioToolbox framework function AudioComponentCopyConfigurationInfo fails.
+func AudioComponentCopyConfigurationInfo(inComponent obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioComponentCopyConfigurationInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioComponentCopyConfigurationInfo, _lib, "AudioComponentCopyConfigurationInfo")
 	}
-	return nil
-}
-
-// AudioFileComponentGetUserDataSize wraps [raw.AudioFileComponentGetUserDataSize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentGetUserDataSize(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, inIndex uint, outUserDataSize *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentGetUserDataSize(inComponent, inUserDataID, inIndex, outUserDataSize)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioFileComponentGetUserDataSize64 wraps [raw.AudioFileComponentGetUserDataSize64], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentGetUserDataSize64(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, inIndex uint, outUserDataSize *uint64) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentGetUserDataSize64(inComponent, inUserDataID, inIndex, outUserDataSize)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioFileComponentInitialize wraps [raw.AudioFileComponentInitialize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentInitialize(inComponent *carboncore.ComponentInstanceRecord, inFileRef *carboncore.FSRef, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentInitialize(inComponent, inFileRef, inFormat, inFlags)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioFileComponentOpenFile wraps [raw.AudioFileComponentOpenFile], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentOpenFile(inComponent *carboncore.ComponentInstanceRecord, inFileRef *carboncore.FSRef, inPermissions int8, inRefNum int16) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentOpenFile(inComponent, inFileRef, inPermissions, inRefNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioFileComponentOpenURL wraps [raw.AudioFileComponentOpenURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentOpenURL(inComponent *carboncore.ComponentInstanceRecord, inFileRef objc.ID, inPermissions int8, inFileDescriptor int) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentOpenURL(inComponent, purego.CFRef(inFileRef), inPermissions, inFileDescriptor)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioFileComponentOptimize wraps [raw.AudioFileComponentOptimize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentOptimize(inComponent *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentOptimize(inComponent)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioFileComponentRemoveUserData wraps [raw.AudioFileComponentRemoveUserData], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioFileComponentRemoveUserData(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, inIndex uint) error {
-	if _err := purego.NewOSStatus(raw.AudioFileComponentRemoveUserData(inComponent, inUserDataID, inIndex)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareServiceIsPropertySettable wraps [raw.AudioHardwareServiceIsPropertySettable], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioHardwareServiceIsPropertySettable(inObjectID uint, inAddress *coreaudio.AudioObjectPropertyAddress, outIsSettable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareServiceIsPropertySettable(inObjectID, inAddress, outIsSettable)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioOutputUnitStart wraps [raw.AudioOutputUnitStart], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioOutputUnitStart(ci *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioOutputUnitStart(ci)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioOutputUnitStop wraps [raw.AudioOutputUnitStop], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioOutputUnitStop(ci *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioOutputUnitStop(ci)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioServicesCreateSystemSoundID wraps [raw.AudioServicesCreateSystemSoundID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioServicesCreateSystemSoundID(inFileURL objc.ID, outSystemSoundID *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioServicesCreateSystemSoundID(purego.CFRef(inFileURL), outSystemSoundID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioServicesDisposeSystemSoundID wraps [raw.AudioServicesDisposeSystemSoundID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioServicesDisposeSystemSoundID(inSystemSoundID uint) error {
-	if _err := purego.NewOSStatus(raw.AudioServicesDisposeSystemSoundID(inSystemSoundID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitExtensionSetComponentList wraps [raw.AudioUnitExtensionSetComponentList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitExtensionSetComponentList(extensionIdentifier objc.ID, audioComponentInfo objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitExtensionSetComponentList(purego.CFRef(extensionIdentifier), purego.CFRef(audioComponentInfo))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitGetParameter wraps [raw.AudioUnitGetParameter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitGetParameter(inUnit *carboncore.ComponentInstanceRecord, inID uint, inScope uint, inElement uint, outValue *float32) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitGetParameter(inUnit, inID, inScope, inElement, outValue)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitGetPropertyInfo wraps [raw.AudioUnitGetPropertyInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitGetPropertyInfo(inUnit *carboncore.ComponentInstanceRecord, inID uint, inScope uint, inElement uint, outDataSize *uint, outWritable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitGetPropertyInfo(inUnit, inID, inScope, inElement, outDataSize, outWritable)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitInitialize wraps [raw.AudioUnitInitialize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitInitialize(inUnit *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitInitialize(inUnit)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitProcess wraps [raw.AudioUnitProcess], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitProcess(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *raw.AudioUnitRenderActionFlags, inTimeStamp *coreaudiotypes.AudioTimeStamp, inNumberFrames uint, ioData *coreaudiotypes.AudioBufferList) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitProcess(inUnit, ioActionFlags, inTimeStamp, inNumberFrames, ioData)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitProcessMultiple wraps [raw.AudioUnitProcessMultiple], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitProcessMultiple(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *raw.AudioUnitRenderActionFlags, inTimeStamp *coreaudiotypes.AudioTimeStamp, inNumberFrames uint, inNumberInputBufferLists uint, inInputBufferLists *coreaudiotypes.AudioBufferList, inNumberOutputBufferLists uint, ioOutputBufferLists *coreaudiotypes.AudioBufferList) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitProcessMultiple(inUnit, ioActionFlags, inTimeStamp, inNumberFrames, inNumberInputBufferLists, inInputBufferLists, inNumberOutputBufferLists, ioOutputBufferLists)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitRender wraps [raw.AudioUnitRender], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitRender(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *raw.AudioUnitRenderActionFlags, inTimeStamp *coreaudiotypes.AudioTimeStamp, inOutputBusNumber uint, inNumberFrames uint, ioData *coreaudiotypes.AudioBufferList) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitRender(inUnit, ioActionFlags, inTimeStamp, inOutputBusNumber, inNumberFrames, ioData)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitReset wraps [raw.AudioUnitReset], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitReset(inUnit *carboncore.ComponentInstanceRecord, inScope uint, inElement uint) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitReset(inUnit, inScope, inElement)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitScheduleParameters wraps [raw.AudioUnitScheduleParameters], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitScheduleParameters(inUnit *carboncore.ComponentInstanceRecord, inParameterEvent *raw.AudioUnitParameterEvent, inNumParamEvents uint) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitScheduleParameters(inUnit, inParameterEvent, inNumParamEvents)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitSetParameter wraps [raw.AudioUnitSetParameter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitSetParameter(inUnit *carboncore.ComponentInstanceRecord, inID uint, inScope uint, inElement uint, inValue float32, inBufferOffsetInFrames uint) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitSetParameter(inUnit, inID, inScope, inElement, inValue, inBufferOffsetInFrames)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioUnitUninitialize wraps [raw.AudioUnitUninitialize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioUnitUninitialize(inUnit *carboncore.ComponentInstanceRecord) error {
-	if _err := purego.NewOSStatus(raw.AudioUnitUninitialize(inUnit)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// CopyInstrumentInfoFromSoundBank wraps [raw.CopyInstrumentInfoFromSoundBank], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CopyInstrumentInfoFromSoundBank(inURL objc.ID) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CopyInstrumentInfoFromSoundBank(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnAudioComponentCopyConfigurationInfo(objref.IDOf(inComponent), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CopyNameFromSoundBank wraps [raw.CopyNameFromSoundBank], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CopyNameFromSoundBank(inURL objc.ID) (objc.ID, error) {
+var _fnAudioComponentCopyName func(objc.ID, unsafe.Pointer) int32
+
+// AudioComponentCopyName reports an error if the AudioToolbox framework function AudioComponentCopyName fails.
+func AudioComponentCopyName(inComponent obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioComponentCopyName == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioComponentCopyName, _lib, "AudioComponentCopyName")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CopyNameFromSoundBank(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnAudioComponentCopyName(objref.IDOf(inComponent), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// GetNameFromSoundBank wraps [raw.GetNameFromSoundBank], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func GetNameFromSoundBank(inSoundBankRef *carboncore.FSRef) (objc.ID, error) {
+var _fnAudioComponentValidateWithResults func(objc.ID, objc.ID, objc.ID) int32
+
+// AudioComponentValidateWithResults reports an error if the AudioToolbox framework function AudioComponentValidateWithResults fails.
+func AudioComponentValidateWithResults(inComponent obj.Object, inValidationParameters obj.Object, inCompletionHandler obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioComponentValidateWithResults == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioComponentValidateWithResults, _lib, "AudioComponentValidateWithResults")
+	}
+	_rc := _fnAudioComponentValidateWithResults(objref.IDOf(inComponent), objref.IDOf(inValidationParameters), objref.IDOf(inCompletionHandler))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioConverterDispose func(objc.ID) int32
+
+// AudioConverterDispose reports an error if the AudioToolbox framework function AudioConverterDispose fails.
+func AudioConverterDispose(inAudioConverter obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterDispose, _lib, "AudioConverterDispose")
+	}
+	_rc := _fnAudioConverterDispose(objref.IDOf(inAudioConverter))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioConverterReset func(objc.ID) int32
+
+// AudioConverterReset reports an error if the AudioToolbox framework function AudioConverterReset fails.
+func AudioConverterReset(inAudioConverter obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterReset == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterReset, _lib, "AudioConverterReset")
+	}
+	_rc := _fnAudioConverterReset(objref.IDOf(inAudioConverter))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioFileStreamClose func(objc.ID) int32
+
+// AudioFileStreamClose reports an error if the AudioToolbox framework function AudioFileStreamClose fails.
+func AudioFileStreamClose(inAudioFileStream obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileStreamClose == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileStreamClose, _lib, "AudioFileStreamClose")
+	}
+	_rc := _fnAudioFileStreamClose(objref.IDOf(inAudioFileStream))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueDispose func(objc.ID, uint8) int32
+
+// AudioQueueDispose reports an error if the AudioToolbox framework function AudioQueueDispose fails.
+func AudioQueueDispose(inAQ obj.Object, inImmediate uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueDispose, _lib, "AudioQueueDispose")
+	}
+	_rc := _fnAudioQueueDispose(objref.IDOf(inAQ), inImmediate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueDisposeTimeline func(objc.ID, objc.ID) int32
+
+// AudioQueueDisposeTimeline reports an error if the AudioToolbox framework function AudioQueueDisposeTimeline fails.
+func AudioQueueDisposeTimeline(inAQ obj.Object, inTimeline obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueDisposeTimeline == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueDisposeTimeline, _lib, "AudioQueueDisposeTimeline")
+	}
+	_rc := _fnAudioQueueDisposeTimeline(objref.IDOf(inAQ), objref.IDOf(inTimeline))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueFlush func(objc.ID) int32
+
+// AudioQueueFlush reports an error if the AudioToolbox framework function AudioQueueFlush fails.
+func AudioQueueFlush(inAQ obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueFlush, _lib, "AudioQueueFlush")
+	}
+	_rc := _fnAudioQueueFlush(objref.IDOf(inAQ))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueuePause func(objc.ID) int32
+
+// AudioQueuePause reports an error if the AudioToolbox framework function AudioQueuePause fails.
+func AudioQueuePause(inAQ obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueuePause == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueuePause, _lib, "AudioQueuePause")
+	}
+	_rc := _fnAudioQueuePause(objref.IDOf(inAQ))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueProcessingTapDispose func(objc.ID) int32
+
+// AudioQueueProcessingTapDispose reports an error if the AudioToolbox framework function AudioQueueProcessingTapDispose fails.
+func AudioQueueProcessingTapDispose(inAQTap obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueProcessingTapDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapDispose, _lib, "AudioQueueProcessingTapDispose")
+	}
+	_rc := _fnAudioQueueProcessingTapDispose(objref.IDOf(inAQTap))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueReset func(objc.ID) int32
+
+// AudioQueueReset reports an error if the AudioToolbox framework function AudioQueueReset fails.
+func AudioQueueReset(inAQ obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueReset == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueReset, _lib, "AudioQueueReset")
+	}
+	_rc := _fnAudioQueueReset(objref.IDOf(inAQ))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueSetParameter func(objc.ID, int, float32) int32
+
+// AudioQueueSetParameter reports an error if the AudioToolbox framework function AudioQueueSetParameter fails.
+func AudioQueueSetParameter(inAQ obj.Object, inParamID int, inValue float32) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueSetParameter == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueSetParameter, _lib, "AudioQueueSetParameter")
+	}
+	_rc := _fnAudioQueueSetParameter(objref.IDOf(inAQ), inParamID, inValue)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioQueueStop func(objc.ID, uint8) int32
+
+// AudioQueueStop reports an error if the AudioToolbox framework function AudioQueueStop fails.
+func AudioQueueStop(inAQ obj.Object, inImmediate uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueStop == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueStop, _lib, "AudioQueueStop")
+	}
+	_rc := _fnAudioQueueStop(objref.IDOf(inAQ), inImmediate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioServicesDisposeSystemSoundID func(int) int32
+
+// AudioServicesDisposeSystemSoundID reports an error if the AudioToolbox framework function AudioServicesDisposeSystemSoundID fails.
+func AudioServicesDisposeSystemSoundID(inSystemSoundID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioServicesDisposeSystemSoundID == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioServicesDisposeSystemSoundID, _lib, "AudioServicesDisposeSystemSoundID")
+	}
+	_rc := _fnAudioServicesDisposeSystemSoundID(inSystemSoundID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioUnitExtensionSetComponentList func(objc.ID, objc.ID) int32
+
+// AudioUnitExtensionSetComponentList reports an error if the AudioToolbox framework function AudioUnitExtensionSetComponentList fails.
+func AudioUnitExtensionSetComponentList(extensionIdentifier obj.Object, audioComponentInfo obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioUnitExtensionSetComponentList == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioUnitExtensionSetComponentList, _lib, "AudioUnitExtensionSetComponentList")
+	}
+	_rc := _fnAudioUnitExtensionSetComponentList(objref.IDOf(extensionIdentifier), objref.IDOf(audioComponentInfo))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockArm func(objc.ID) int32
+
+// CAClockArm reports an error if the AudioToolbox framework function CAClockArm fails.
+func CAClockArm(inCAClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockArm == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockArm, _lib, "CAClockArm")
+	}
+	_rc := _fnCAClockArm(objref.IDOf(inCAClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockDisarm func(objc.ID) int32
+
+// CAClockDisarm reports an error if the AudioToolbox framework function CAClockDisarm fails.
+func CAClockDisarm(inCAClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockDisarm == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockDisarm, _lib, "CAClockDisarm")
+	}
+	_rc := _fnCAClockDisarm(objref.IDOf(inCAClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockDispose func(objc.ID) int32
+
+// CAClockDispose reports an error if the AudioToolbox framework function CAClockDispose fails.
+func CAClockDispose(inCAClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockDispose, _lib, "CAClockDispose")
+	}
+	_rc := _fnCAClockDispose(objref.IDOf(inCAClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockParseMIDI func(objc.ID, objc.ID) int32
+
+// CAClockParseMIDI reports an error if the AudioToolbox framework function CAClockParseMIDI fails.
+func CAClockParseMIDI(inCAClock obj.Object, inMIDIPacketList obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockParseMIDI == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockParseMIDI, _lib, "CAClockParseMIDI")
+	}
+	_rc := _fnCAClockParseMIDI(objref.IDOf(inCAClock), objref.IDOf(inMIDIPacketList))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockSetPlayRate func(objc.ID, float64) int32
+
+// CAClockSetPlayRate reports an error if the AudioToolbox framework function CAClockSetPlayRate fails.
+func CAClockSetPlayRate(inCAClock obj.Object, inPlayRate float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockSetPlayRate == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockSetPlayRate, _lib, "CAClockSetPlayRate")
+	}
+	_rc := _fnCAClockSetPlayRate(objref.IDOf(inCAClock), inPlayRate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockStart func(objc.ID) int32
+
+// CAClockStart reports an error if the AudioToolbox framework function CAClockStart fails.
+func CAClockStart(inCAClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockStart == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockStart, _lib, "CAClockStart")
+	}
+	_rc := _fnCAClockStart(objref.IDOf(inCAClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCAClockStop func(objc.ID) int32
+
+// CAClockStop reports an error if the AudioToolbox framework function CAClockStop fails.
+func CAClockStop(inCAClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAClockStop == nil {
+		ebipurego.RegisterLibFunc(&_fnCAClockStop, _lib, "CAClockStop")
+	}
+	_rc := _fnCAClockStop(objref.IDOf(inCAClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCopyInstrumentInfoFromSoundBank func(objc.ID, unsafe.Pointer) int32
+
+// CopyInstrumentInfoFromSoundBank reports an error if the AudioToolbox framework function CopyInstrumentInfoFromSoundBank fails.
+func CopyInstrumentInfoFromSoundBank(inURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCopyInstrumentInfoFromSoundBank == nil {
+		ebipurego.RegisterLibFunc(&_fnCopyInstrumentInfoFromSoundBank, _lib, "CopyInstrumentInfoFromSoundBank")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.GetNameFromSoundBank(inSoundBankRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnCopyInstrumentInfoFromSoundBank(objref.IDOf(inURL), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MusicDeviceMIDIEvent wraps [raw.MusicDeviceMIDIEvent], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDeviceMIDIEvent(inUnit *carboncore.ComponentInstanceRecord, inStatus uint, inData1 uint, inData2 uint, inOffsetSampleFrame uint) error {
-	if _err := purego.NewOSStatus(raw.MusicDeviceMIDIEvent(inUnit, inStatus, inData1, inData2, inOffsetSampleFrame)).Err(); _err != nil {
+var _fnCopyNameFromSoundBank func(objc.ID, unsafe.Pointer) int32
+
+// CopyNameFromSoundBank reports an error if the AudioToolbox framework function CopyNameFromSoundBank fails.
+func CopyNameFromSoundBank(inURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCopyNameFromSoundBank == nil {
+		ebipurego.RegisterLibFunc(&_fnCopyNameFromSoundBank, _lib, "CopyNameFromSoundBank")
+	}
+	var _out0 uintptr
+	_rc := _fnCopyNameFromSoundBank(objref.IDOf(inURL), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnDisposeAUGraph func(objc.ID) int32
+
+// DisposeAUGraph reports an error if the AudioToolbox framework function DisposeAUGraph fails.
+func DisposeAUGraph(inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeAUGraph == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeAUGraph, _lib, "DisposeAUGraph")
+	}
+	_rc := _fnDisposeAUGraph(objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MusicDeviceMIDIEventList wraps [raw.MusicDeviceMIDIEventList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDeviceMIDIEventList(inUnit *carboncore.ComponentInstanceRecord, inOffsetSampleFrame uint, evtList objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MusicDeviceMIDIEventList(inUnit, inOffsetSampleFrame, evtList)).Err(); _err != nil {
+var _fnDisposeMusicEventIterator func(objc.ID) int32
+
+// DisposeMusicEventIterator reports an error if the AudioToolbox framework function DisposeMusicEventIterator fails.
+func DisposeMusicEventIterator(inIterator obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeMusicEventIterator == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeMusicEventIterator, _lib, "DisposeMusicEventIterator")
+	}
+	_rc := _fnDisposeMusicEventIterator(objref.IDOf(inIterator))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MusicDevicePrepareInstrument wraps [raw.MusicDevicePrepareInstrument], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDevicePrepareInstrument(inUnit *carboncore.ComponentInstanceRecord, inInstrument uint) error {
-	if _err := purego.NewOSStatus(raw.MusicDevicePrepareInstrument(inUnit, inInstrument)).Err(); _err != nil {
+var _fnDisposeMusicPlayer func(objc.ID) int32
+
+// DisposeMusicPlayer reports an error if the AudioToolbox framework function DisposeMusicPlayer fails.
+func DisposeMusicPlayer(inPlayer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeMusicPlayer == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeMusicPlayer, _lib, "DisposeMusicPlayer")
+	}
+	_rc := _fnDisposeMusicPlayer(objref.IDOf(inPlayer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MusicDeviceReleaseInstrument wraps [raw.MusicDeviceReleaseInstrument], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDeviceReleaseInstrument(inUnit *carboncore.ComponentInstanceRecord, inInstrument uint) error {
-	if _err := purego.NewOSStatus(raw.MusicDeviceReleaseInstrument(inUnit, inInstrument)).Err(); _err != nil {
+var _fnDisposeMusicSequence func(objc.ID) int32
+
+// DisposeMusicSequence reports an error if the AudioToolbox framework function DisposeMusicSequence fails.
+func DisposeMusicSequence(inSequence obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeMusicSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeMusicSequence, _lib, "DisposeMusicSequence")
+	}
+	_rc := _fnDisposeMusicSequence(objref.IDOf(inSequence))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MusicDeviceStartNote wraps [raw.MusicDeviceStartNote], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDeviceStartNote(inUnit *carboncore.ComponentInstanceRecord, inInstrument uint, inGroupID uint, outNoteInstanceID *uint, inOffsetSampleFrame uint, inParams *raw.MusicDeviceNoteParams) error {
-	if _err := purego.NewOSStatus(raw.MusicDeviceStartNote(inUnit, inInstrument, inGroupID, outNoteInstanceID, inOffsetSampleFrame, inParams)).Err(); _err != nil {
+var _fnExtAudioFileDispose func(objc.ID) int32
+
+// ExtAudioFileDispose reports an error if the AudioToolbox framework function ExtAudioFileDispose fails.
+func ExtAudioFileDispose(inExtAudioFile obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnExtAudioFileDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnExtAudioFileDispose, _lib, "ExtAudioFileDispose")
+	}
+	_rc := _fnExtAudioFileDispose(objref.IDOf(inExtAudioFile))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MusicDeviceStopNote wraps [raw.MusicDeviceStopNote], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDeviceStopNote(inUnit *carboncore.ComponentInstanceRecord, inGroupID uint, inNoteInstanceID uint, inOffsetSampleFrame uint) error {
-	if _err := purego.NewOSStatus(raw.MusicDeviceStopNote(inUnit, inGroupID, inNoteInstanceID, inOffsetSampleFrame)).Err(); _err != nil {
+var _fnExtAudioFileSeek func(objc.ID, int64) int32
+
+// ExtAudioFileSeek reports an error if the AudioToolbox framework function ExtAudioFileSeek fails.
+func ExtAudioFileSeek(inExtAudioFile obj.Object, inFrameOffset int64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnExtAudioFileSeek == nil {
+		ebipurego.RegisterLibFunc(&_fnExtAudioFileSeek, _lib, "ExtAudioFileSeek")
+	}
+	_rc := _fnExtAudioFileSeek(objref.IDOf(inExtAudioFile), inFrameOffset)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MusicDeviceSysEx wraps [raw.MusicDeviceSysEx], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MusicDeviceSysEx(inUnit *carboncore.ComponentInstanceRecord, inData *uint8, inLength uint) error {
-	if _err := purego.NewOSStatus(raw.MusicDeviceSysEx(inUnit, inData, inLength)).Err(); _err != nil {
+var _fnMusicEventIteratorDeleteEvent func(objc.ID) int32
+
+// MusicEventIteratorDeleteEvent reports an error if the AudioToolbox framework function MusicEventIteratorDeleteEvent fails.
+func MusicEventIteratorDeleteEvent(inIterator obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicEventIteratorDeleteEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorDeleteEvent, _lib, "MusicEventIteratorDeleteEvent")
+	}
+	_rc := _fnMusicEventIteratorDeleteEvent(objref.IDOf(inIterator))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicEventIteratorNextEvent func(objc.ID) int32
+
+// MusicEventIteratorNextEvent reports an error if the AudioToolbox framework function MusicEventIteratorNextEvent fails.
+func MusicEventIteratorNextEvent(inIterator obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicEventIteratorNextEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorNextEvent, _lib, "MusicEventIteratorNextEvent")
+	}
+	_rc := _fnMusicEventIteratorNextEvent(objref.IDOf(inIterator))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicEventIteratorPreviousEvent func(objc.ID) int32
+
+// MusicEventIteratorPreviousEvent reports an error if the AudioToolbox framework function MusicEventIteratorPreviousEvent fails.
+func MusicEventIteratorPreviousEvent(inIterator obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicEventIteratorPreviousEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorPreviousEvent, _lib, "MusicEventIteratorPreviousEvent")
+	}
+	_rc := _fnMusicEventIteratorPreviousEvent(objref.IDOf(inIterator))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicEventIteratorSeek func(objc.ID, float64) int32
+
+// MusicEventIteratorSeek reports an error if the AudioToolbox framework function MusicEventIteratorSeek fails.
+func MusicEventIteratorSeek(inIterator obj.Object, inTimeStamp float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicEventIteratorSeek == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorSeek, _lib, "MusicEventIteratorSeek")
+	}
+	_rc := _fnMusicEventIteratorSeek(objref.IDOf(inIterator), inTimeStamp)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicEventIteratorSetEventTime func(objc.ID, float64) int32
+
+// MusicEventIteratorSetEventTime reports an error if the AudioToolbox framework function MusicEventIteratorSetEventTime fails.
+func MusicEventIteratorSetEventTime(inIterator obj.Object, inTimeStamp float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicEventIteratorSetEventTime == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorSetEventTime, _lib, "MusicEventIteratorSetEventTime")
+	}
+	_rc := _fnMusicEventIteratorSetEventTime(objref.IDOf(inIterator), inTimeStamp)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicPlayerPreroll func(objc.ID) int32
+
+// MusicPlayerPreroll reports an error if the AudioToolbox framework function MusicPlayerPreroll fails.
+func MusicPlayerPreroll(inPlayer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicPlayerPreroll == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicPlayerPreroll, _lib, "MusicPlayerPreroll")
+	}
+	_rc := _fnMusicPlayerPreroll(objref.IDOf(inPlayer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicPlayerSetPlayRateScalar func(objc.ID, float64) int32
+
+// MusicPlayerSetPlayRateScalar reports an error if the AudioToolbox framework function MusicPlayerSetPlayRateScalar fails.
+func MusicPlayerSetPlayRateScalar(inPlayer obj.Object, inScaleRate float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicPlayerSetPlayRateScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicPlayerSetPlayRateScalar, _lib, "MusicPlayerSetPlayRateScalar")
+	}
+	_rc := _fnMusicPlayerSetPlayRateScalar(objref.IDOf(inPlayer), inScaleRate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicPlayerSetSequence func(objc.ID, objc.ID) int32
+
+// MusicPlayerSetSequence reports an error if the AudioToolbox framework function MusicPlayerSetSequence fails.
+func MusicPlayerSetSequence(inPlayer obj.Object, inSequence obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicPlayerSetSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicPlayerSetSequence, _lib, "MusicPlayerSetSequence")
+	}
+	_rc := _fnMusicPlayerSetSequence(objref.IDOf(inPlayer), objref.IDOf(inSequence))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicPlayerSetTime func(objc.ID, float64) int32
+
+// MusicPlayerSetTime reports an error if the AudioToolbox framework function MusicPlayerSetTime fails.
+func MusicPlayerSetTime(inPlayer obj.Object, inTime float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicPlayerSetTime == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicPlayerSetTime, _lib, "MusicPlayerSetTime")
+	}
+	_rc := _fnMusicPlayerSetTime(objref.IDOf(inPlayer), inTime)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicPlayerStart func(objc.ID) int32
+
+// MusicPlayerStart reports an error if the AudioToolbox framework function MusicPlayerStart fails.
+func MusicPlayerStart(inPlayer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicPlayerStart == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicPlayerStart, _lib, "MusicPlayerStart")
+	}
+	_rc := _fnMusicPlayerStart(objref.IDOf(inPlayer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicPlayerStop func(objc.ID) int32
+
+// MusicPlayerStop reports an error if the AudioToolbox framework function MusicPlayerStop fails.
+func MusicPlayerStop(inPlayer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicPlayerStop == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicPlayerStop, _lib, "MusicPlayerStop")
+	}
+	_rc := _fnMusicPlayerStop(objref.IDOf(inPlayer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceDisposeTrack func(objc.ID, objc.ID) int32
+
+// MusicSequenceDisposeTrack reports an error if the AudioToolbox framework function MusicSequenceDisposeTrack fails.
+func MusicSequenceDisposeTrack(inSequence obj.Object, inTrack obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceDisposeTrack == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceDisposeTrack, _lib, "MusicSequenceDisposeTrack")
+	}
+	_rc := _fnMusicSequenceDisposeTrack(objref.IDOf(inSequence), objref.IDOf(inTrack))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceFileCreate func(objc.ID, objc.ID, MusicSequenceFileTypeID, MusicSequenceFileFlags, int16) int32
+
+// MusicSequenceFileCreate reports an error if the AudioToolbox framework function MusicSequenceFileCreate fails.
+func MusicSequenceFileCreate(inSequence obj.Object, inFileRef obj.Object, inFileType MusicSequenceFileTypeID, inFlags MusicSequenceFileFlags, inResolution int16) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceFileCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceFileCreate, _lib, "MusicSequenceFileCreate")
+	}
+	_rc := _fnMusicSequenceFileCreate(objref.IDOf(inSequence), objref.IDOf(inFileRef), inFileType, inFlags, inResolution)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceFileCreateData func(objc.ID, MusicSequenceFileTypeID, MusicSequenceFileFlags, int16, unsafe.Pointer) int32
+
+// MusicSequenceFileCreateData reports an error if the AudioToolbox framework function MusicSequenceFileCreateData fails.
+func MusicSequenceFileCreateData(inSequence obj.Object, inFileType MusicSequenceFileTypeID, inFlags MusicSequenceFileFlags, inResolution int16) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceFileCreateData == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceFileCreateData, _lib, "MusicSequenceFileCreateData")
+	}
+	var _out0 uintptr
+	_rc := _fnMusicSequenceFileCreateData(objref.IDOf(inSequence), inFileType, inFlags, inResolution, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnMusicSequenceFileLoad func(objc.ID, objc.ID, MusicSequenceFileTypeID, MusicSequenceLoadFlags) int32
+
+// MusicSequenceFileLoad reports an error if the AudioToolbox framework function MusicSequenceFileLoad fails.
+func MusicSequenceFileLoad(inSequence obj.Object, inFileRef obj.Object, inFileTypeHint MusicSequenceFileTypeID, inFlags MusicSequenceLoadFlags) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceFileLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceFileLoad, _lib, "MusicSequenceFileLoad")
+	}
+	_rc := _fnMusicSequenceFileLoad(objref.IDOf(inSequence), objref.IDOf(inFileRef), inFileTypeHint, inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceFileLoadData func(objc.ID, objc.ID, MusicSequenceFileTypeID, MusicSequenceLoadFlags) int32
+
+// MusicSequenceFileLoadData reports an error if the AudioToolbox framework function MusicSequenceFileLoadData fails.
+func MusicSequenceFileLoadData(inSequence obj.Object, inData obj.Object, inFileTypeHint MusicSequenceFileTypeID, inFlags MusicSequenceLoadFlags) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceFileLoadData == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceFileLoadData, _lib, "MusicSequenceFileLoadData")
+	}
+	_rc := _fnMusicSequenceFileLoadData(objref.IDOf(inSequence), objref.IDOf(inData), inFileTypeHint, inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceLoadSMFDataWithFlags func(objc.ID, objc.ID, MusicSequenceLoadFlags) int32
+
+// MusicSequenceLoadSMFDataWithFlags reports an error if the AudioToolbox framework function MusicSequenceLoadSMFDataWithFlags fails.
+func MusicSequenceLoadSMFDataWithFlags(inSequence obj.Object, inData obj.Object, inFlags MusicSequenceLoadFlags) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceLoadSMFDataWithFlags == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceLoadSMFDataWithFlags, _lib, "MusicSequenceLoadSMFDataWithFlags")
+	}
+	_rc := _fnMusicSequenceLoadSMFDataWithFlags(objref.IDOf(inSequence), objref.IDOf(inData), inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceReverse func(objc.ID) int32
+
+// MusicSequenceReverse reports an error if the AudioToolbox framework function MusicSequenceReverse fails.
+func MusicSequenceReverse(inSequence obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceReverse == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceReverse, _lib, "MusicSequenceReverse")
+	}
+	_rc := _fnMusicSequenceReverse(objref.IDOf(inSequence))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceSaveSMFData func(objc.ID, unsafe.Pointer, uint16) int32
+
+// MusicSequenceSaveSMFData reports an error if the AudioToolbox framework function MusicSequenceSaveSMFData fails.
+func MusicSequenceSaveSMFData(inSequence obj.Object, inResolution uint16) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceSaveSMFData == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceSaveSMFData, _lib, "MusicSequenceSaveSMFData")
+	}
+	var _out0 uintptr
+	_rc := _fnMusicSequenceSaveSMFData(objref.IDOf(inSequence), unsafe.Pointer(&_out0), inResolution)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnMusicSequenceSetAUGraph func(objc.ID, objc.ID) int32
+
+// MusicSequenceSetAUGraph reports an error if the AudioToolbox framework function MusicSequenceSetAUGraph fails.
+func MusicSequenceSetAUGraph(inSequence obj.Object, inGraph obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceSetAUGraph == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceSetAUGraph, _lib, "MusicSequenceSetAUGraph")
+	}
+	_rc := _fnMusicSequenceSetAUGraph(objref.IDOf(inSequence), objref.IDOf(inGraph))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceSetMIDIEndpoint func(objc.ID, int) int32
+
+// MusicSequenceSetMIDIEndpoint reports an error if the AudioToolbox framework function MusicSequenceSetMIDIEndpoint fails.
+func MusicSequenceSetMIDIEndpoint(inSequence obj.Object, inEndpoint int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceSetMIDIEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceSetMIDIEndpoint, _lib, "MusicSequenceSetMIDIEndpoint")
+	}
+	_rc := _fnMusicSequenceSetMIDIEndpoint(objref.IDOf(inSequence), inEndpoint)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicSequenceSetSequenceType func(objc.ID, MusicSequenceType) int32
+
+// MusicSequenceSetSequenceType reports an error if the AudioToolbox framework function MusicSequenceSetSequenceType fails.
+func MusicSequenceSetSequenceType(inSequence obj.Object, inType MusicSequenceType) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicSequenceSetSequenceType == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicSequenceSetSequenceType, _lib, "MusicSequenceSetSequenceType")
+	}
+	_rc := _fnMusicSequenceSetSequenceType(objref.IDOf(inSequence), inType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackClear func(objc.ID, float64, float64) int32
+
+// MusicTrackClear reports an error if the AudioToolbox framework function MusicTrackClear fails.
+func MusicTrackClear(inTrack obj.Object, inStartTime float64, inEndTime float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackClear == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackClear, _lib, "MusicTrackClear")
+	}
+	_rc := _fnMusicTrackClear(objref.IDOf(inTrack), inStartTime, inEndTime)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackCopyInsert func(objc.ID, float64, float64, objc.ID, float64) int32
+
+// MusicTrackCopyInsert reports an error if the AudioToolbox framework function MusicTrackCopyInsert fails.
+func MusicTrackCopyInsert(inSourceTrack obj.Object, inSourceStartTime float64, inSourceEndTime float64, inDestTrack obj.Object, inDestInsertTime float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackCopyInsert == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackCopyInsert, _lib, "MusicTrackCopyInsert")
+	}
+	_rc := _fnMusicTrackCopyInsert(objref.IDOf(inSourceTrack), inSourceStartTime, inSourceEndTime, objref.IDOf(inDestTrack), inDestInsertTime)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackCut func(objc.ID, float64, float64) int32
+
+// MusicTrackCut reports an error if the AudioToolbox framework function MusicTrackCut fails.
+func MusicTrackCut(inTrack obj.Object, inStartTime float64, inEndTime float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackCut == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackCut, _lib, "MusicTrackCut")
+	}
+	_rc := _fnMusicTrackCut(objref.IDOf(inTrack), inStartTime, inEndTime)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackMerge func(objc.ID, float64, float64, objc.ID, float64) int32
+
+// MusicTrackMerge reports an error if the AudioToolbox framework function MusicTrackMerge fails.
+func MusicTrackMerge(inSourceTrack obj.Object, inSourceStartTime float64, inSourceEndTime float64, inDestTrack obj.Object, inDestInsertTime float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackMerge == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackMerge, _lib, "MusicTrackMerge")
+	}
+	_rc := _fnMusicTrackMerge(objref.IDOf(inSourceTrack), inSourceStartTime, inSourceEndTime, objref.IDOf(inDestTrack), inDestInsertTime)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackMoveEvents func(objc.ID, float64, float64, float64) int32
+
+// MusicTrackMoveEvents reports an error if the AudioToolbox framework function MusicTrackMoveEvents fails.
+func MusicTrackMoveEvents(inTrack obj.Object, inStartTime float64, inEndTime float64, inMoveTime float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackMoveEvents == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackMoveEvents, _lib, "MusicTrackMoveEvents")
+	}
+	_rc := _fnMusicTrackMoveEvents(objref.IDOf(inTrack), inStartTime, inEndTime, inMoveTime)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackNewExtendedTempoEvent func(objc.ID, float64, float64) int32
+
+// MusicTrackNewExtendedTempoEvent reports an error if the AudioToolbox framework function MusicTrackNewExtendedTempoEvent fails.
+func MusicTrackNewExtendedTempoEvent(inTrack obj.Object, inTimeStamp float64, inBPM float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackNewExtendedTempoEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackNewExtendedTempoEvent, _lib, "MusicTrackNewExtendedTempoEvent")
+	}
+	_rc := _fnMusicTrackNewExtendedTempoEvent(objref.IDOf(inTrack), inTimeStamp, inBPM)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackSetDestMIDIEndpoint func(objc.ID, int) int32
+
+// MusicTrackSetDestMIDIEndpoint reports an error if the AudioToolbox framework function MusicTrackSetDestMIDIEndpoint fails.
+func MusicTrackSetDestMIDIEndpoint(inTrack obj.Object, inEndpoint int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackSetDestMIDIEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackSetDestMIDIEndpoint, _lib, "MusicTrackSetDestMIDIEndpoint")
+	}
+	_rc := _fnMusicTrackSetDestMIDIEndpoint(objref.IDOf(inTrack), inEndpoint)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMusicTrackSetDestNode func(objc.ID, int) int32
+
+// MusicTrackSetDestNode reports an error if the AudioToolbox framework function MusicTrackSetDestNode fails.
+func MusicTrackSetDestNode(inTrack obj.Object, inNode int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackSetDestNode == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackSetDestNode, _lib, "MusicTrackSetDestNode")
+	}
+	_rc := _fnMusicTrackSetDestNode(objref.IDOf(inTrack), inNode)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

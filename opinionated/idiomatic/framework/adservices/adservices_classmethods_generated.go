@@ -5,18 +5,21 @@
 package adservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/adservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// AttributionTokenWithError calls the underlying AAAttributionAttributionTokenWithError.
-func AttributionTokenWithError() (string, error) {
-	_r, _err := raw.AAAttributionAttributionTokenWithError()
-	if _err != nil {
-		return "", _err
+// AttributionTokenWithError generates a token.
+func AttributionTokenWithError() (result string, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("AAAttribution")), objc.RegisterName("attributionTokenWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
+	if _r == 0 {
 		return "", nil
 	}
-	return purego.GoString(_r.Ptr()), nil
+	return purego.GoString(_r), nil
 }

@@ -5,94 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents the initial state for whether playback is likely to continue without stalling.
+// MetricPlayerItemInitialLikelyToKeepUpEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemInitialLikelyToKeepUpEvent.
 //
-// MetricPlayerItemInitialLikelyToKeepUpEvent wraps [raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent] with a fluent Go API.
+// It embeds [MetricPlayerItemLikelyToKeepUpEvent], promoting that type's methods.
+//
+// An event that represents the initial state for whether playback is likely to continue without stalling.
 type MetricPlayerItemInitialLikelyToKeepUpEvent struct {
-	inner *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent
+	MetricPlayerItemLikelyToKeepUpEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent].
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) Unwrap() *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemInitialLikelyToKeepUpEventFromID adopts an existing object pointer as a MetricPlayerItemInitialLikelyToKeepUpEvent (nil for 0).
+// MetricPlayerItemInitialLikelyToKeepUpEventFromID adopts an existing Objective-C object as a MetricPlayerItemInitialLikelyToKeepUpEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemInitialLikelyToKeepUpEventFromID(id objc.ID) *MetricPlayerItemInitialLikelyToKeepUpEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemInitialLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemInitialLikelyToKeepUpEventFromID(id)}
+	x := &MetricPlayerItemInitialLikelyToKeepUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemInitialLikelyToKeepUpEvent creates a new [MetricPlayerItemInitialLikelyToKeepUpEvent].
+// metricPlayerItemInitialLikelyToKeepUpEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemInitialLikelyToKeepUpEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemInitialLikelyToKeepUpEventAdopt(id objc.ID) *MetricPlayerItemInitialLikelyToKeepUpEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricPlayerItemInitialLikelyToKeepUpEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMetricPlayerItemInitialLikelyToKeepUpEvent creates a new MetricPlayerItemInitialLikelyToKeepUpEvent.
 func NewMetricPlayerItemInitialLikelyToKeepUpEvent() *MetricPlayerItemInitialLikelyToKeepUpEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemInitialLikelyToKeepUpEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemInitialLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemInitialLikelyToKeepUpEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemInitialLikelyToKeepUpEvent")), objc.RegisterName("new"))
+	return metricPlayerItemInitialLikelyToKeepUpEventAdopt(_id)
 }
 
-// Returns the playlist request events required to reach likely to keep up.
+// PlaylistRequestEvents returns the playlist request events required to reach likely to keep up.
 //
 // PlaylistRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
-	arr := x.inner.PlaylistRequestEvents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricHLSPlaylistRequestEvent {
-		return &MetricHLSPlaylistRequestEvent{inner: raw.AVMetricHLSPlaylistRequestEventFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playlistRequestEvents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSPlaylistRequestEvent { return MetricHLSPlaylistRequestEventFromID(_id) })
 }
 
-// Returns the media segment request events required to reach likely to keep up.
+// MediaSegmentRequestEvents returns the media segment request events required to reach likely to keep up.
 //
 // MediaSegmentRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
-	arr := x.inner.MediaSegmentRequestEvents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricHLSMediaSegmentRequestEvent {
-		return &MetricHLSMediaSegmentRequestEvent{inner: raw.AVMetricHLSMediaSegmentRequestEventFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSegmentRequestEvents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricHLSMediaSegmentRequestEvent {
+		return MetricHLSMediaSegmentRequestEventFromID(_id)
 	})
 }
 
-// Returns the content key request required to reach likely to keep up.
+// ContentKeyRequestEvents returns the content key request required to reach likely to keep up.
 //
 // ContentKeyRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
-	arr := x.inner.ContentKeyRequestEvents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricContentKeyRequestEvent {
-		return &MetricContentKeyRequestEvent{inner: raw.AVMetricContentKeyRequestEventFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent {
-	return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent
-}
-
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent.AVMetricEvent
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeyRequestEvents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricContentKeyRequestEvent { return MetricContentKeyRequestEventFromID(_id) })
 }
 
 // MetricPlayerItemInitialLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemInitialLikelyToKeepUpEvent], for mocking and DI.
 type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent
+	obj.Object
 	PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent
 	MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent
 	ContentKeyRequestEvents() []*MetricContentKeyRequestEvent
 }
 
 var _ MetricPlayerItemInitialLikelyToKeepUpEventable = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
+
+var _ MetricPlayerItemLikelyToKeepUpEventProvider = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)

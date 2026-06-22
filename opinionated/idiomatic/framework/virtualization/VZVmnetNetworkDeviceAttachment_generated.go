@@ -5,55 +5,66 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A network device attachment that allows a custom network topology.
+// VmnetNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZVmnetNetworkDeviceAttachment.
 //
-// VmnetNetworkDeviceAttachment wraps [raw.VZVmnetNetworkDeviceAttachment] with a fluent Go API.
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A network device attachment that allows a custom network topology.
 type VmnetNetworkDeviceAttachment struct {
-	inner *raw.VZVmnetNetworkDeviceAttachment
+	NetworkDeviceAttachment
 }
 
-// Unwrap returns the underlying [raw.VZVmnetNetworkDeviceAttachment].
-func (x *VmnetNetworkDeviceAttachment) Unwrap() *raw.VZVmnetNetworkDeviceAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VmnetNetworkDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// VmnetNetworkDeviceAttachmentFromID adopts an existing object pointer as a VmnetNetworkDeviceAttachment (nil for 0).
+// VmnetNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a VmnetNetworkDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func VmnetNetworkDeviceAttachmentFromID(id objc.ID) *VmnetNetworkDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &VmnetNetworkDeviceAttachment{inner: raw.VZVmnetNetworkDeviceAttachmentFromID(id)}
+	x := &VmnetNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates the attachment and configures it with the specified data.
-//
-// NewVmnetNetworkDeviceAttachmentWithNetwork creates a new [VmnetNetworkDeviceAttachment].
-func NewVmnetNetworkDeviceAttachmentWithNetwork(network unsafe.Pointer) *VmnetNetworkDeviceAttachment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVmnetNetworkDeviceAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetwork:"), network)
-	return &VmnetNetworkDeviceAttachment{inner: raw.VZVmnetNetworkDeviceAttachmentFromID(_id)}
+// vmnetNetworkDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// VmnetNetworkDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vmnetNetworkDeviceAttachmentAdopt(id objc.ID) *VmnetNetworkDeviceAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &VmnetNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Network calls the underlying Network.
-func (x *VmnetNetworkDeviceAttachment) Network() unsafe.Pointer {
-	return x.inner.Network()
+// NewVmnetNetworkDeviceAttachmentWithNetwork creates the attachment and configures it with the specified data.
+func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetworkDeviceAttachment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVmnetNetworkDeviceAttachment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetwork:"), objref.IDOf(network))
+	return vmnetNetworkDeviceAttachmentAdopt(_id)
 }
 
-func (x *VmnetNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
-	return &x.inner.VZNetworkDeviceAttachment
+// Network wraps the corresponding Objective-C method.
+func (x *VmnetNetworkDeviceAttachment) Network() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("network"))
+	return obj.Wrap(_r)
 }
 
 // VmnetNetworkDeviceAttachmentable is the interface implemented by [VmnetNetworkDeviceAttachment], for mocking and DI.
 type VmnetNetworkDeviceAttachmentable interface {
-	Unwrap() *raw.VZVmnetNetworkDeviceAttachment
-	Network() unsafe.Pointer
+	obj.Object
+	Network() obj.Object
 }
 
 var _ VmnetNetworkDeviceAttachmentable = (*VmnetNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*VmnetNetworkDeviceAttachment)(nil)

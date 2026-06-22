@@ -5,188 +5,221 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRDiagnosticLogsClusterRetrieveLogsResponseParams wraps [raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams] with a fluent Go API.
+// MTRDiagnosticLogsClusterRetrieveLogsResponseParams is an idiomatic wrapper over the Objective-C class MTRDiagnosticLogsClusterRetrieveLogsResponseParams.
 type MTRDiagnosticLogsClusterRetrieveLogsResponseParams struct {
-	inner *raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams].
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID adopts an existing object pointer as a MTRDiagnosticLogsClusterRetrieveLogsResponseParams (nil for 0).
+// MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID adopts an existing Objective-C object as a MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID(id objc.ID) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDiagnosticLogsClusterRetrieveLogsResponseParams{inner: raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID(id)}
+	x := &MTRDiagnosticLogsClusterRetrieveLogsResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRDiagnosticLogsClusterRetrieveLogsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRDiagnosticLogsClusterRetrieveLogsResponseParamsWithResponseValueError creates a new [MTRDiagnosticLogsClusterRetrieveLogsResponseParams].
-func NewMTRDiagnosticLogsClusterRetrieveLogsResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDiagnosticLogsClusterRetrieveLogsResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRDiagnosticLogsClusterRetrieveLogsResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDiagnosticLogsClusterRetrieveLogsResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDiagnosticLogsClusterRetrieveLogsResponseParamsAdopt(id objc.ID) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRDiagnosticLogsClusterRetrieveLogsResponseParams{inner: raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParamsFromID(_id)}, nil
-}
-
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithStatus(status *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetStatus(status)
+	x := &MTRDiagnosticLogsClusterRetrieveLogsResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithLogContent sets the logContent property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithLogContent(logContent *foundation.NSData) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetLogContent(logContent)
+// Description returns the object's -description text.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDiagnosticLogsClusterRetrieveLogsResponseParamsWithResponseValueError initialize an MTRDiagnosticLogsClusterRetrieveLogsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDiagnosticLogsClusterRetrieveLogsResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDiagnosticLogsClusterRetrieveLogsResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDiagnosticLogsClusterRetrieveLogsResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRDiagnosticLogsClusterRetrieveLogsResponseParamsAdopt(_id), nil
+}
+
+// WithStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithStatus(status obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithUtcTimeStamp sets the utcTimeStamp property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithUtcTimeStamp(utcTimeStamp *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetUtcTimeStamp(utcTimeStamp)
+// WithLogContent sets the property and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithLogContent(logContent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogContent:"), objref.IDOf(logContent))
 	return x
 }
 
-// WithTimeSinceBoot sets the timeSinceBoot property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeSinceBoot(timeSinceBoot *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetTimeSinceBoot(timeSinceBoot)
+// WithUtcTimeStamp sets the property and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithUtcTimeStamp(utcTimeStamp obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUtcTimeStamp:"), objref.IDOf(utcTimeStamp))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimeSinceBoot sets the property and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeSinceBoot(timeSinceBoot obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeSinceBoot:"), objref.IDOf(timeSinceBoot))
 	return x
 }
 
-// WithContent sets the content property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithContent(content *foundation.NSData) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetContent(content)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// WithTimeStamp sets the timeStamp property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeStamp(timeStamp *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
-	x.inner.SetTimeStamp(timeStamp)
+// WithContent sets the property and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithContent(content obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Status() *foundation.NSNumber {
-	return x.inner.Status()
+// WithTimeStamp sets the property and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeStamp(timeStamp obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStamp:"), objref.IDOf(timeStamp))
+	return x
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetStatus(status *foundation.NSNumber) {
-	x.inner.SetStatus(status)
+// Status wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
 }
 
-// LogContent calls the underlying LogContent.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) LogContent() *foundation.NSData {
-	return x.inner.LogContent()
+// SetStatus wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetStatus(status obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
-// SetLogContent calls the underlying SetLogContent.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetLogContent(logContent *foundation.NSData) {
-	x.inner.SetLogContent(logContent)
+// LogContent wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) LogContent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logContent"))
+	return obj.Wrap(_r)
 }
 
-// UtcTimeStamp calls the underlying UtcTimeStamp.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) UtcTimeStamp() *foundation.NSNumber {
-	return x.inner.UtcTimeStamp()
+// SetLogContent wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetLogContent(logContent obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogContent:"), objref.IDOf(logContent))
 }
 
-// SetUtcTimeStamp calls the underlying SetUtcTimeStamp.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetUtcTimeStamp(utcTimeStamp *foundation.NSNumber) {
-	x.inner.SetUtcTimeStamp(utcTimeStamp)
+// UtcTimeStamp wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) UtcTimeStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("utcTimeStamp"))
+	return obj.Wrap(_r)
 }
 
-// TimeSinceBoot calls the underlying TimeSinceBoot.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeSinceBoot() *foundation.NSNumber {
-	return x.inner.TimeSinceBoot()
+// SetUtcTimeStamp wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetUtcTimeStamp(utcTimeStamp obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUtcTimeStamp:"), objref.IDOf(utcTimeStamp))
 }
 
-// SetTimeSinceBoot calls the underlying SetTimeSinceBoot.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeSinceBoot(timeSinceBoot *foundation.NSNumber) {
-	x.inner.SetTimeSinceBoot(timeSinceBoot)
+// TimeSinceBoot wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeSinceBoot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeSinceBoot"))
+	return obj.Wrap(_r)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// SetTimeSinceBoot wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeSinceBoot(timeSinceBoot obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeSinceBoot:"), objref.IDOf(timeSinceBoot))
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// Content calls the underlying Content.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Content() *foundation.NSData {
-	return x.inner.Content()
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// SetContent calls the underlying SetContent.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetContent(content *foundation.NSData) {
-	x.inner.SetContent(content)
+// Content wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Content() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+	return obj.Wrap(_r)
 }
 
-// TimeStamp calls the underlying TimeStamp.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeStamp() *foundation.NSNumber {
-	return x.inner.TimeStamp()
+// SetContent wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetContent(content obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
 }
 
-// SetTimeStamp calls the underlying SetTimeStamp.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeStamp(timeStamp *foundation.NSNumber) {
-	x.inner.SetTimeStamp(timeStamp)
+// TimeStamp wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStamp"))
+	return obj.Wrap(_r)
+}
+
+// SetTimeStamp wraps the corresponding Objective-C method.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeStamp(timeStamp obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStamp:"), objref.IDOf(timeStamp))
 }
 
 // MTRDiagnosticLogsClusterRetrieveLogsResponseParamsable is the interface implemented by [MTRDiagnosticLogsClusterRetrieveLogsResponseParams], for mocking and DI.
 type MTRDiagnosticLogsClusterRetrieveLogsResponseParamsable interface {
-	Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithLogContent(logContent *foundation.NSData) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithUtcTimeStamp(utcTimeStamp *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithTimeSinceBoot(timeSinceBoot *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithContent(content *foundation.NSData) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	WithTimeStamp(timeStamp *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
-	Status() *foundation.NSNumber
-	SetStatus(status *foundation.NSNumber)
-	LogContent() *foundation.NSData
-	SetLogContent(logContent *foundation.NSData)
-	UtcTimeStamp() *foundation.NSNumber
-	SetUtcTimeStamp(utcTimeStamp *foundation.NSNumber)
-	TimeSinceBoot() *foundation.NSNumber
-	SetTimeSinceBoot(timeSinceBoot *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	Content() *foundation.NSData
-	SetContent(content *foundation.NSData)
-	TimeStamp() *foundation.NSNumber
-	SetTimeStamp(timeStamp *foundation.NSNumber)
+	obj.Object
+	WithStatus(status obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithLogContent(logContent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithUtcTimeStamp(utcTimeStamp obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithTimeSinceBoot(timeSinceBoot obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithContent(content obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithTimeStamp(timeStamp obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	Status() obj.Object
+	SetStatus(status obj.Object)
+	LogContent() obj.Object
+	SetLogContent(logContent obj.Object)
+	UtcTimeStamp() obj.Object
+	SetUtcTimeStamp(utcTimeStamp obj.Object)
+	TimeSinceBoot() obj.Object
+	SetTimeSinceBoot(timeSinceBoot obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	Content() obj.Object
+	SetContent(content obj.Object)
+	TimeStamp() obj.Object
+	SetTimeStamp(timeStamp obj.Object)
 }
 
 var _ MTRDiagnosticLogsClusterRetrieveLogsResponseParamsable = (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams)(nil)

@@ -5,45 +5,77 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A custom phrase to be resolved by an Intents extension.
+// SpeakableString is an idiomatic wrapper over the Objective-C class INSpeakableString.
 //
-// SpeakableString wraps [raw.INSpeakableString] with a fluent Go API.
+// A custom phrase to be resolved by an Intents extension.
 type SpeakableString struct {
-	inner *raw.INSpeakableString
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INSpeakableString].
-func (x *SpeakableString) Unwrap() *raw.INSpeakableString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeakableString) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeakableStringFromID adopts an existing object pointer as a SpeakableString (nil for 0).
+// SpeakableStringFromID adopts an existing Objective-C object as a SpeakableString
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeakableStringFromID(id objc.ID) *SpeakableString {
 	if id == 0 {
 		return nil
 	}
-	return &SpeakableString{inner: raw.INSpeakableStringFromID(id)}
+	x := &SpeakableString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes the string with a phrase from your app’s vocabulary.
-//
-// NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint creates a new [SpeakableString].
+// speakableStringAdopt wraps an Objective-C object that this code just created as a
+// SpeakableString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speakableStringAdopt(id objc.ID) *SpeakableString {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeakableString{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeakableString) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeakableString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeakableString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeakableString) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint initializes the string with a phrase from your app’s vocabulary.
 func NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint(vocabularyIdentifier string, spokenPhrase string, pronunciationHint string) *SpeakableString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSpeakableString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVocabularyIdentifier:spokenPhrase:pronunciationHint:"), foundation.NSStringStringWithUTF8String(vocabularyIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(spokenPhrase).Ptr(), foundation.NSStringStringWithUTF8String(pronunciationHint).Ptr())
-	return &SpeakableString{inner: raw.INSpeakableStringFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INSpeakableString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVocabularyIdentifier:spokenPhrase:pronunciationHint:"), purego.NSString(vocabularyIdentifier), purego.NSString(spokenPhrase), purego.NSString(pronunciationHint))
+	return speakableStringAdopt(_id)
 }
 
 // SpeakableStringable is the interface implemented by [SpeakableString], for mocking and DI.
 type SpeakableStringable interface {
-	Unwrap() *raw.INSpeakableString
+	obj.Object
 }
 
 var _ SpeakableStringable = (*SpeakableString)(nil)

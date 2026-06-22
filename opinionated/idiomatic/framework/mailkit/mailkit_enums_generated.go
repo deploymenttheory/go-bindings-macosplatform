@@ -8,191 +8,205 @@ import (
 	"fmt"
 )
 
-type MEComposeSessionErrorCode int64
+type ComposeSessionErrorCode int64
 
 const (
-	MEComposeSessionErrorCodeInvalidRecipients MEComposeSessionErrorCode = 0
-	MEComposeSessionErrorCodeInvalidHeaders    MEComposeSessionErrorCode = 1
-	MEComposeSessionErrorCodeInvalidBody       MEComposeSessionErrorCode = 2
+	ComposeSessionErrorCodeInvalidRecipients ComposeSessionErrorCode = 0
+	ComposeSessionErrorCodeInvalidHeaders    ComposeSessionErrorCode = 1
+	ComposeSessionErrorCodeInvalidBody       ComposeSessionErrorCode = 2
 )
 
-func (e MEComposeSessionErrorCode) String() string {
+// String returns the ComposeSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ComposeSessionErrorCode) String() string {
 	switch e {
-	case MEComposeSessionErrorCodeInvalidRecipients:
-		return "MEComposeSessionErrorCodeInvalidRecipients"
-	case MEComposeSessionErrorCodeInvalidHeaders:
-		return "MEComposeSessionErrorCodeInvalidHeaders"
-	case MEComposeSessionErrorCodeInvalidBody:
-		return "MEComposeSessionErrorCodeInvalidBody"
+	case ComposeSessionErrorCodeInvalidRecipients:
+		return "ComposeSessionErrorCodeInvalidRecipients"
+	case ComposeSessionErrorCodeInvalidHeaders:
+		return "ComposeSessionErrorCodeInvalidHeaders"
+	case ComposeSessionErrorCodeInvalidBody:
+		return "ComposeSessionErrorCodeInvalidBody"
 	default:
-		return fmt.Sprintf("MEComposeSessionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ComposeSessionErrorCode(%d)", int64(e))
 	}
 }
 
-type MEComposeUserAction int64
+type ComposeUserAction int64
 
 const (
 	// Compose a new message.
-	MEComposeUserActionNewMessage MEComposeUserAction = 1
+	ComposeUserActionNewMessage ComposeUserAction = 1
 	// Reply to the sender of an original email.
-	MEComposeUserActionReply MEComposeUserAction = 2
+	ComposeUserActionReply ComposeUserAction = 2
 	// Reply to the sender and all the recipeients of original email.
-	MEComposeUserActionReplyAll MEComposeUserAction = 3
+	ComposeUserActionReplyAll ComposeUserAction = 3
 	// Forward an original message.
-	MEComposeUserActionForward MEComposeUserAction = 4
+	ComposeUserActionForward ComposeUserAction = 4
 )
 
-func (e MEComposeUserAction) String() string {
+// String returns the ComposeUserAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ComposeUserAction) String() string {
 	switch e {
-	case MEComposeUserActionNewMessage:
-		return "MEComposeUserActionNewMessage"
-	case MEComposeUserActionReply:
-		return "MEComposeUserActionReply"
-	case MEComposeUserActionReplyAll:
-		return "MEComposeUserActionReplyAll"
-	case MEComposeUserActionForward:
-		return "MEComposeUserActionForward"
+	case ComposeUserActionNewMessage:
+		return "ComposeUserActionNewMessage"
+	case ComposeUserActionReply:
+		return "ComposeUserActionReply"
+	case ComposeUserActionReplyAll:
+		return "ComposeUserActionReplyAll"
+	case ComposeUserActionForward:
+		return "ComposeUserActionForward"
 	default:
-		return fmt.Sprintf("MEComposeUserAction(%d)", int64(e))
+		return fmt.Sprintf("ComposeUserAction(%d)", int64(e))
 	}
 }
 
-type MEMessageActionFlag int64
+type MessageActionFlag int64
 
 const (
-	MEMessageActionFlagNone         MEMessageActionFlag = 0
-	MEMessageActionFlagDefaultColor MEMessageActionFlag = 1
-	MEMessageActionFlagRed          MEMessageActionFlag = 2
-	MEMessageActionFlagOrange       MEMessageActionFlag = 3
-	MEMessageActionFlagYellow       MEMessageActionFlag = 4
-	MEMessageActionFlagGreen        MEMessageActionFlag = 5
-	MEMessageActionFlagBlue         MEMessageActionFlag = 6
-	MEMessageActionFlagPurple       MEMessageActionFlag = 7
-	MEMessageActionFlagGray         MEMessageActionFlag = 8
+	MessageActionFlagNone         MessageActionFlag = 0
+	MessageActionFlagDefaultColor MessageActionFlag = 1
+	MessageActionFlagRed          MessageActionFlag = 2
+	MessageActionFlagOrange       MessageActionFlag = 3
+	MessageActionFlagYellow       MessageActionFlag = 4
+	MessageActionFlagGreen        MessageActionFlag = 5
+	MessageActionFlagBlue         MessageActionFlag = 6
+	MessageActionFlagPurple       MessageActionFlag = 7
+	MessageActionFlagGray         MessageActionFlag = 8
 )
 
-func (e MEMessageActionFlag) String() string {
+// String returns the MessageActionFlag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MessageActionFlag) String() string {
 	switch e {
-	case MEMessageActionFlagNone:
-		return "MEMessageActionFlagNone"
-	case MEMessageActionFlagDefaultColor:
-		return "MEMessageActionFlagDefaultColor"
-	case MEMessageActionFlagRed:
-		return "MEMessageActionFlagRed"
-	case MEMessageActionFlagOrange:
-		return "MEMessageActionFlagOrange"
-	case MEMessageActionFlagYellow:
-		return "MEMessageActionFlagYellow"
-	case MEMessageActionFlagGreen:
-		return "MEMessageActionFlagGreen"
-	case MEMessageActionFlagBlue:
-		return "MEMessageActionFlagBlue"
-	case MEMessageActionFlagPurple:
-		return "MEMessageActionFlagPurple"
-	case MEMessageActionFlagGray:
-		return "MEMessageActionFlagGray"
+	case MessageActionFlagNone:
+		return "MessageActionFlagNone"
+	case MessageActionFlagDefaultColor:
+		return "MessageActionFlagDefaultColor"
+	case MessageActionFlagRed:
+		return "MessageActionFlagRed"
+	case MessageActionFlagOrange:
+		return "MessageActionFlagOrange"
+	case MessageActionFlagYellow:
+		return "MessageActionFlagYellow"
+	case MessageActionFlagGreen:
+		return "MessageActionFlagGreen"
+	case MessageActionFlagBlue:
+		return "MessageActionFlagBlue"
+	case MessageActionFlagPurple:
+		return "MessageActionFlagPurple"
+	case MessageActionFlagGray:
+		return "MessageActionFlagGray"
 	default:
-		return fmt.Sprintf("MEMessageActionFlag(%d)", int64(e))
+		return fmt.Sprintf("MessageActionFlag(%d)", int64(e))
 	}
 }
 
 // A color that the system uses to display a message in the message list.
-type MEMessageActionMessageColor int64
+type MessageActionMessageColor int64
 
 const (
-	MEMessageActionMessageColorNone   MEMessageActionMessageColor = 0
-	MEMessageActionMessageColorGreen  MEMessageActionMessageColor = 1
-	MEMessageActionMessageColorYellow MEMessageActionMessageColor = 2
-	MEMessageActionMessageColorOrange MEMessageActionMessageColor = 3
-	MEMessageActionMessageColorRed    MEMessageActionMessageColor = 4
-	MEMessageActionMessageColorPurple MEMessageActionMessageColor = 5
-	MEMessageActionMessageColorBlue   MEMessageActionMessageColor = 6
-	MEMessageActionMessageColorGray   MEMessageActionMessageColor = 7
+	MessageActionMessageColorNone   MessageActionMessageColor = 0
+	MessageActionMessageColorGreen  MessageActionMessageColor = 1
+	MessageActionMessageColorYellow MessageActionMessageColor = 2
+	MessageActionMessageColorOrange MessageActionMessageColor = 3
+	MessageActionMessageColorRed    MessageActionMessageColor = 4
+	MessageActionMessageColorPurple MessageActionMessageColor = 5
+	MessageActionMessageColorBlue   MessageActionMessageColor = 6
+	MessageActionMessageColorGray   MessageActionMessageColor = 7
 )
 
-func (e MEMessageActionMessageColor) String() string {
+// String returns the MessageActionMessageColor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MessageActionMessageColor) String() string {
 	switch e {
-	case MEMessageActionMessageColorNone:
-		return "MEMessageActionMessageColorNone"
-	case MEMessageActionMessageColorGreen:
-		return "MEMessageActionMessageColorGreen"
-	case MEMessageActionMessageColorYellow:
-		return "MEMessageActionMessageColorYellow"
-	case MEMessageActionMessageColorOrange:
-		return "MEMessageActionMessageColorOrange"
-	case MEMessageActionMessageColorRed:
-		return "MEMessageActionMessageColorRed"
-	case MEMessageActionMessageColorPurple:
-		return "MEMessageActionMessageColorPurple"
-	case MEMessageActionMessageColorBlue:
-		return "MEMessageActionMessageColorBlue"
-	case MEMessageActionMessageColorGray:
-		return "MEMessageActionMessageColorGray"
+	case MessageActionMessageColorNone:
+		return "MessageActionMessageColorNone"
+	case MessageActionMessageColorGreen:
+		return "MessageActionMessageColorGreen"
+	case MessageActionMessageColorYellow:
+		return "MessageActionMessageColorYellow"
+	case MessageActionMessageColorOrange:
+		return "MessageActionMessageColorOrange"
+	case MessageActionMessageColorRed:
+		return "MessageActionMessageColorRed"
+	case MessageActionMessageColorPurple:
+		return "MessageActionMessageColorPurple"
+	case MessageActionMessageColorBlue:
+		return "MessageActionMessageColorBlue"
+	case MessageActionMessageColorGray:
+		return "MessageActionMessageColorGray"
 	default:
-		return fmt.Sprintf("MEMessageActionMessageColor(%d)", int64(e))
+		return fmt.Sprintf("MessageActionMessageColor(%d)", int64(e))
 	}
 }
 
-type MEMessageEncryptionState int64
+type MessageEncryptionState int64
 
 const (
-	MEMessageEncryptionStateUnknown      MEMessageEncryptionState = 0
-	MEMessageEncryptionStateNotEncrypted MEMessageEncryptionState = 1
-	MEMessageEncryptionStateEncrypted    MEMessageEncryptionState = 2
+	MessageEncryptionStateUnknown      MessageEncryptionState = 0
+	MessageEncryptionStateNotEncrypted MessageEncryptionState = 1
+	MessageEncryptionStateEncrypted    MessageEncryptionState = 2
 )
 
-func (e MEMessageEncryptionState) String() string {
+// String returns the MessageEncryptionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MessageEncryptionState) String() string {
 	switch e {
-	case MEMessageEncryptionStateUnknown:
-		return "MEMessageEncryptionStateUnknown"
-	case MEMessageEncryptionStateNotEncrypted:
-		return "MEMessageEncryptionStateNotEncrypted"
-	case MEMessageEncryptionStateEncrypted:
-		return "MEMessageEncryptionStateEncrypted"
+	case MessageEncryptionStateUnknown:
+		return "MessageEncryptionStateUnknown"
+	case MessageEncryptionStateNotEncrypted:
+		return "MessageEncryptionStateNotEncrypted"
+	case MessageEncryptionStateEncrypted:
+		return "MessageEncryptionStateEncrypted"
 	default:
-		return fmt.Sprintf("MEMessageEncryptionState(%d)", int64(e))
+		return fmt.Sprintf("MessageEncryptionState(%d)", int64(e))
 	}
 }
 
-type MEMessageSecurityErrorCode int64
+type MessageSecurityErrorCode int64
 
 const (
-	MEMessageSecurityEncodingError MEMessageSecurityErrorCode = 0
-	MEMessageSecurityDecodingError MEMessageSecurityErrorCode = 1
+	MessageSecurityEncodingError MessageSecurityErrorCode = 0
+	MessageSecurityDecodingError MessageSecurityErrorCode = 1
 )
 
-func (e MEMessageSecurityErrorCode) String() string {
+// String returns the MessageSecurityErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MessageSecurityErrorCode) String() string {
 	switch e {
-	case MEMessageSecurityEncodingError:
-		return "MEMessageSecurityEncodingError"
-	case MEMessageSecurityDecodingError:
-		return "MEMessageSecurityDecodingError"
+	case MessageSecurityEncodingError:
+		return "MessageSecurityEncodingError"
+	case MessageSecurityDecodingError:
+		return "MessageSecurityDecodingError"
 	default:
-		return fmt.Sprintf("MEMessageSecurityErrorCode(%d)", int64(e))
+		return fmt.Sprintf("MessageSecurityErrorCode(%d)", int64(e))
 	}
 }
 
 // The state of a message: sent, unsent, or received.
-type MEMessageState int64
+type MessageState int64
 
 const (
 	// A state that indicates the system has received and stored the message.
-	MEMessageStateReceived MEMessageState = 0
+	MessageStateReceived MessageState = 0
 	// A state that indicates the user is composing the message, and hasn’t sent it yet.
-	MEMessageStateDraft MEMessageState = 1
+	MessageStateDraft MessageState = 1
 	// A state that indicates the system is in the process of sending the message.
-	MEMessageStateSending MEMessageState = 2
+	MessageStateSending MessageState = 2
 )
 
-func (e MEMessageState) String() string {
+// String returns the MessageState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MessageState) String() string {
 	switch e {
-	case MEMessageStateReceived:
-		return "MEMessageStateReceived"
-	case MEMessageStateDraft:
-		return "MEMessageStateDraft"
-	case MEMessageStateSending:
-		return "MEMessageStateSending"
+	case MessageStateReceived:
+		return "MessageStateReceived"
+	case MessageStateDraft:
+		return "MessageStateDraft"
+	case MessageStateSending:
+		return "MessageStateSending"
 	default:
-		return fmt.Sprintf("MEMessageState(%d)", int64(e))
+		return fmt.Sprintf("MessageState(%d)", int64(e))
 	}
 }

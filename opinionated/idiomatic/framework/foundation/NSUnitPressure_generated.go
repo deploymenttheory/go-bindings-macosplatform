@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for pressure.
+// UnitPressure is an idiomatic wrapper over the Objective-C class NSUnitPressure.
 //
-// UnitPressure wraps [raw.NSUnitPressure] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for pressure.
 type UnitPressure struct {
-	inner *raw.NSUnitPressure
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitPressure].
-func (x *UnitPressure) Unwrap() *raw.NSUnitPressure { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitPressure) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitPressureFromID adopts an existing object pointer as a UnitPressure (nil for 0).
+// UnitPressureFromID adopts an existing Objective-C object as a UnitPressure
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitPressureFromID(id objc.ID) *UnitPressure {
 	if id == 0 {
 		return nil
 	}
-	return &UnitPressure{inner: raw.NSUnitPressureFromID(id)}
-}
-
-// NewUnitPressure creates a new [UnitPressure].
-func NewUnitPressure() *UnitPressure {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitPressure")), objc.RegisterName("new"))
-	return &UnitPressure{inner: raw.NSUnitPressureFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitPressure) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPressure {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitPressure{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitPressure) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitPressureAdopt wraps an Objective-C object that this code just created as a
+// UnitPressure (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitPressureAdopt(id objc.ID) *UnitPressure {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitPressure{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitPressure) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitPressure creates a new UnitPressure.
+func NewUnitPressure() *UnitPressure {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("new"))
+	return unitPressureAdopt(_id)
+}
 
-func (x *UnitPressure) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitPressure) WithScriptingProperties(scriptingProperties obj.Object) *UnitPressure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitPressureable is the interface implemented by [UnitPressure], for mocking and DI.
 type UnitPressureable interface {
-	Unwrap() *raw.NSUnitPressure
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPressure
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitPressure
 }
 
 var _ UnitPressureable = (*UnitPressure)(nil)
+
+var _ DimensionProvider = (*UnitPressure)(nil)
+
+var _ UnitProvider = (*UnitPressure)(nil)

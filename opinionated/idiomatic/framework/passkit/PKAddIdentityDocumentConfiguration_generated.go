@@ -5,76 +5,79 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration to define the identity document.
+// AddIdentityDocumentConfiguration is an idiomatic wrapper over the Objective-C class PKAddIdentityDocumentConfiguration.
 //
-// AddIdentityDocumentConfiguration wraps [raw.PKAddIdentityDocumentConfiguration] with a fluent Go API.
+// It embeds [AddSecureElementPassConfiguration], promoting that type's methods.
+//
+// Configuration to define the identity document.
 type AddIdentityDocumentConfiguration struct {
-	inner *raw.PKAddIdentityDocumentConfiguration
+	AddSecureElementPassConfiguration
 }
 
-// Unwrap returns the underlying [raw.PKAddIdentityDocumentConfiguration].
-func (x *AddIdentityDocumentConfiguration) Unwrap() *raw.PKAddIdentityDocumentConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddIdentityDocumentConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AddIdentityDocumentConfigurationFromID adopts an existing object pointer as a AddIdentityDocumentConfiguration (nil for 0).
+// AddIdentityDocumentConfigurationFromID adopts an existing Objective-C object as a AddIdentityDocumentConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AddIdentityDocumentConfigurationFromID(id objc.ID) *AddIdentityDocumentConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(id)}
-}
-
-// NewAddIdentityDocumentConfiguration creates a new [AddIdentityDocumentConfiguration].
-func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddIdentityDocumentConfiguration")), objc.RegisterName("new"))
-	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(_id)}
-}
-
-// An opaque value for the configuration.
-//
-// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
-func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
-	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	x := &AddIdentityDocumentConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The configuration’s localized description.
-//
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
-func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
-	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-	return x
-}
-
-// Metadata calls the underlying Metadata.
-func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
-	_r := x.inner.Metadata()
-	if _r == nil {
+// addIdentityDocumentConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AddIdentityDocumentConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addIdentityDocumentConfigurationAdopt(id objc.ID) *AddIdentityDocumentConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &IdentityDocumentMetadata{inner: _r}
+	x := &AddIdentityDocumentConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *AddIdentityDocumentConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
-	return &x.inner.PKAddSecureElementPassConfiguration
+// NewAddIdentityDocumentConfiguration creates a new AddIdentityDocumentConfiguration.
+func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("PKAddIdentityDocumentConfiguration")), objc.RegisterName("new"))
+	return addIdentityDocumentConfigurationAdopt(_id)
+}
+
+// WithIssuerIdentifier an opaque value for the configuration.
+func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
+	return x
+}
+
+// WithLocalizedDescription the configuration’s localized description.
+func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return x
+}
+
+// Metadata wraps the corresponding Objective-C method.
+func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return IdentityDocumentMetadataFromID(_r)
 }
 
 // AddIdentityDocumentConfigurationable is the interface implemented by [AddIdentityDocumentConfiguration], for mocking and DI.
 type AddIdentityDocumentConfigurationable interface {
-	Unwrap() *raw.PKAddIdentityDocumentConfiguration
+	obj.Object
 	WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration
 	WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration
 	Metadata() *IdentityDocumentMetadata
 }
 
 var _ AddIdentityDocumentConfigurationable = (*AddIdentityDocumentConfiguration)(nil)
+
+var _ AddSecureElementPassConfigurationProvider = (*AddIdentityDocumentConfiguration)(nil)

@@ -6,141 +6,147 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A remote player who the local player running your game can invite and communicate with through Game Center.
+// Player is an idiomatic wrapper over the Objective-C class GKPlayer.
 //
-// Player wraps [raw.GKPlayer] with a fluent Go API.
+// Player is an abstract base — you do not construct it directly. Construct one of [LocalPlayer] and pass it where a Player is accepted.
+//
+// A remote player who the local player running your game can invite and communicate with through Game Center.
 type Player struct {
-	inner *raw.GKPlayer
+	BasePlayer
 }
 
-// Unwrap returns the underlying [raw.GKPlayer].
-func (x *Player) Unwrap() *raw.GKPlayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Player) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerFromID adopts an existing object pointer as a Player (nil for 0).
+// PlayerFromID adopts an existing Objective-C object as a Player
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerFromID(id objc.ID) *Player {
 	if id == 0 {
 		return nil
 	}
-	return &Player{inner: raw.GKPlayerFromID(id)}
+	x := &Player{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayer creates a new [Player].
-func NewPlayer() *Player {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPlayer")), objc.RegisterName("new"))
-	return &Player{inner: raw.GKPlayerFromID(_id)}
+// playerAdopt wraps an Objective-C object that this code just created as a
+// Player (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerAdopt(id objc.ID) *Player {
+	if id == 0 {
+		return nil
+	}
+	x := &Player{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
-//
-// ScopedIDsArePersistent calls the underlying ScopedIDsArePersistent.
+// ScopedIDsArePersistent returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
 func (x *Player) ScopedIDsArePersistent() bool {
-	return x.inner.ScopedIDsArePersistent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scopedIDsArePersistent"))
+	return _r
 }
 
-// This is the player's unique and persistent ID that is scoped to this application.
-//
-// GamePlayerID calls the underlying GamePlayerID.
+// GamePlayerID this is the player's unique and persistent ID that is scoped to this application.
 func (x *Player) GamePlayerID() string {
-	_r := x.inner.GamePlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamePlayerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// This is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
-//
-// TeamPlayerID calls the underlying TeamPlayerID.
+// TeamPlayerID this is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
 func (x *Player) TeamPlayerID() string {
-	_r := x.inner.TeamPlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("teamPlayerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
-//
-// Alias calls the underlying Alias.
+// Alias the alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
 func (x *Player) Alias() string {
-	_r := x.inner.Alias()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alias"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GuestIdentifier calls the underlying GuestIdentifier.
+// GuestIdentifier wraps the corresponding Objective-C method.
 func (x *Player) GuestIdentifier() string {
-	_r := x.inner.GuestIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("guestIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsInvitable calls the underlying IsInvitable.
+// IsInvitable wraps the corresponding Objective-C method.
 func (x *Player) IsInvitable() bool {
-	return x.inner.IsInvitable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInvitable"))
+	return _r
 }
 
-// Loads a photo of the player from Game Center.
+// LoadPhotoForSize loads a photo of the player from Game Center.
 //
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
-func (x *Player) LoadPhotoForSize(ctx context.Context, size GKPhotoSize) (*appkit.NSImage, error) {
+func (x *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result obj.Object, err error) {
 	type _result struct {
-		val *appkit.NSImage
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadPhotoForSizeWithCompletionHandler(raw.GKPhotoSize(size), func(_p0 *appkit.NSImage, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadPhotoForSize:withCompletionHandler:"), size, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *appkit.NSImage
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// IsFriend calls the underlying IsFriend.
+// IsFriend wraps the corresponding Objective-C method.
 func (x *Player) IsFriend() bool {
-	return x.inner.IsFriend()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFriend"))
+	return _r
 }
-
-func (x *Player) asPlayer() *raw.GKPlayer { return x.inner }
-
-func (x *Player) asBasePlayer() *raw.GKBasePlayer { return &x.inner.GKBasePlayer }
 
 // Playerable is the interface implemented by [Player], for mocking and DI.
 type Playerable interface {
-	Unwrap() *raw.GKPlayer
+	obj.Object
 	ScopedIDsArePersistent() bool
 	GamePlayerID() string
 	TeamPlayerID() string
 	Alias() string
 	GuestIdentifier() string
 	IsInvitable() bool
-	LoadPhotoForSize(ctx context.Context, size GKPhotoSize) (*appkit.NSImage, error)
+	LoadPhotoForSize(ctx context.Context, size PhotoSize) (obj.Object, error)
 	IsFriend() bool
 }
 
 var _ Playerable = (*Player)(nil)
+
+// isPlayer marks Player — and, by embedding promotion, its
+// subclasses — as a member of the Player hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Player) isPlayer() {}
+
+var _ PlayerProvider = (*Player)(nil)
+
+var _ BasePlayerProvider = (*Player)(nil)

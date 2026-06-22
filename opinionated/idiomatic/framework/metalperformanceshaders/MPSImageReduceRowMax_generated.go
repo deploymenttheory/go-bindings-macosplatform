@@ -5,112 +5,92 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that returns the maximum value for each row in an image.
+// ImageReduceRowMax is an idiomatic wrapper over the Objective-C class MPSImageReduceRowMax.
 //
-// ImageReduceRowMax wraps [raw.MPSImageReduceRowMax] with a fluent Go API.
+// It embeds [ImageReduceUnary], promoting that type's methods.
+//
+// A filter that returns the maximum value for each row in an image.
 type ImageReduceRowMax struct {
-	inner *raw.MPSImageReduceRowMax
+	ImageReduceUnary
 }
 
-// Unwrap returns the underlying [raw.MPSImageReduceRowMax].
-func (x *ImageReduceRowMax) Unwrap() *raw.MPSImageReduceRowMax { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageReduceRowMax) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageReduceRowMaxFromID adopts an existing object pointer as a ImageReduceRowMax (nil for 0).
+// ImageReduceRowMaxFromID adopts an existing Objective-C object as a ImageReduceRowMax
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageReduceRowMaxFromID(id objc.ID) *ImageReduceRowMax {
 	if id == 0 {
 		return nil
 	}
-	return &ImageReduceRowMax{inner: raw.MPSImageReduceRowMaxFromID(id)}
+	x := &ImageReduceRowMax{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageReduceRowMaxWithDevice creates a new [ImageReduceRowMax].
-func NewImageReduceRowMaxWithDevice(device metal.MTLDevice) *ImageReduceRowMax {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageReduceRowMax")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageReduceRowMax{inner: raw.MPSImageReduceRowMaxFromID(_id)}
+// imageReduceRowMaxAdopt wraps an Objective-C object that this code just created as a
+// ImageReduceRowMax (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageReduceRowMaxAdopt(id objc.ID) *ImageReduceRowMax {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageReduceRowMax{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// NewImageReduceRowMax creates a new ImageReduceRowMax.
+func NewImageReduceRowMax() *ImageReduceRowMax {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageReduceRowMax")), objc.RegisterName("new"))
+	return imageReduceRowMaxAdopt(_id)
+}
+
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (x *ImageReduceRowMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMax {
-	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageReduceRowMax) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMax {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageReduceRowMax) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMax {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageReduceRowMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMax {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageReduceRowMax) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowMax {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageReduceRowMax) WithLabel(label string) *ImageReduceRowMax {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageReduceRowMax) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
-	return &x.inner.MPSImageReduceUnary
-}
-
-func (x *ImageReduceRowMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
-}
-
-func (x *ImageReduceRowMax) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageReduceRowMaxable is the interface implemented by [ImageReduceRowMax], for mocking and DI.
 type ImageReduceRowMaxable interface {
-	Unwrap() *raw.MPSImageReduceRowMax
+	obj.Object
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMax
 	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMax
 	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMax
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMax
-	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowMax
 	WithLabel(label string) *ImageReduceRowMax
 }
 
 var _ ImageReduceRowMaxable = (*ImageReduceRowMax)(nil)
+
+var _ ImageReduceUnaryProvider = (*ImageReduceRowMax)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageReduceRowMax)(nil)
+
+var _ KernelProvider = (*ImageReduceRowMax)(nil)

@@ -5,145 +5,174 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROnOffClusterOnWithTimedOffParams wraps [raw.MTROnOffClusterOnWithTimedOffParams] with a fluent Go API.
+// MTROnOffClusterOnWithTimedOffParams is an idiomatic wrapper over the Objective-C class MTROnOffClusterOnWithTimedOffParams.
 type MTROnOffClusterOnWithTimedOffParams struct {
-	inner *raw.MTROnOffClusterOnWithTimedOffParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROnOffClusterOnWithTimedOffParams].
-func (x *MTROnOffClusterOnWithTimedOffParams) Unwrap() *raw.MTROnOffClusterOnWithTimedOffParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROnOffClusterOnWithTimedOffParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROnOffClusterOnWithTimedOffParamsFromID adopts an existing object pointer as a MTROnOffClusterOnWithTimedOffParams (nil for 0).
+// MTROnOffClusterOnWithTimedOffParamsFromID adopts an existing Objective-C object as a MTROnOffClusterOnWithTimedOffParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROnOffClusterOnWithTimedOffParamsFromID(id objc.ID) *MTROnOffClusterOnWithTimedOffParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROnOffClusterOnWithTimedOffParams{inner: raw.MTROnOffClusterOnWithTimedOffParamsFromID(id)}
+	x := &MTROnOffClusterOnWithTimedOffParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTROnOffClusterOnWithTimedOffParams creates a new [MTROnOffClusterOnWithTimedOffParams].
+// mTROnOffClusterOnWithTimedOffParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROnOffClusterOnWithTimedOffParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROnOffClusterOnWithTimedOffParamsAdopt(id objc.ID) *MTROnOffClusterOnWithTimedOffParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROnOffClusterOnWithTimedOffParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROnOffClusterOnWithTimedOffParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROnOffClusterOnWithTimedOffParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROnOffClusterOnWithTimedOffParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROnOffClusterOnWithTimedOffParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROnOffClusterOnWithTimedOffParams creates a new MTROnOffClusterOnWithTimedOffParams.
 func NewMTROnOffClusterOnWithTimedOffParams() *MTROnOffClusterOnWithTimedOffParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROnOffClusterOnWithTimedOffParams")), objc.RegisterName("new"))
-	return &MTROnOffClusterOnWithTimedOffParams{inner: raw.MTROnOffClusterOnWithTimedOffParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROnOffClusterOnWithTimedOffParams")), objc.RegisterName("new"))
+	return mTROnOffClusterOnWithTimedOffParamsAdopt(_id)
 }
 
-// WithOnOffControl sets the onOffControl property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithTimedOffParams) WithOnOffControl(onOffControl *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams {
-	x.inner.SetOnOffControl(onOffControl)
+// WithOnOffControl sets the property and returns the receiver so calls can be chained.
+func (x *MTROnOffClusterOnWithTimedOffParams) WithOnOffControl(onOffControl obj.Object) *MTROnOffClusterOnWithTimedOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnOffControl:"), objref.IDOf(onOffControl))
 	return x
 }
 
-// WithOnTime sets the onTime property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithTimedOffParams) WithOnTime(onTime *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams {
-	x.inner.SetOnTime(onTime)
+// WithOnTime sets the property and returns the receiver so calls can be chained.
+func (x *MTROnOffClusterOnWithTimedOffParams) WithOnTime(onTime obj.Object) *MTROnOffClusterOnWithTimedOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnTime:"), objref.IDOf(onTime))
 	return x
 }
 
-// WithOffWaitTime sets the offWaitTime property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithTimedOffParams) WithOffWaitTime(offWaitTime *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams {
-	x.inner.SetOffWaitTime(offWaitTime)
+// WithOffWaitTime sets the property and returns the receiver so calls can be chained.
+func (x *MTROnOffClusterOnWithTimedOffParams) WithOffWaitTime(offWaitTime obj.Object) *MTROnOffClusterOnWithTimedOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffWaitTime:"), objref.IDOf(offWaitTime))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithTimedOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROnOffClusterOnWithTimedOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROnOffClusterOnWithTimedOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithTimedOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROnOffClusterOnWithTimedOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROnOffClusterOnWithTimedOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// OnOffControl calls the underlying OnOffControl.
-func (x *MTROnOffClusterOnWithTimedOffParams) OnOffControl() *foundation.NSNumber {
-	return x.inner.OnOffControl()
+// OnOffControl wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) OnOffControl() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("onOffControl"))
+	return obj.Wrap(_r)
 }
 
-// SetOnOffControl calls the underlying SetOnOffControl.
-func (x *MTROnOffClusterOnWithTimedOffParams) SetOnOffControl(onOffControl *foundation.NSNumber) {
-	x.inner.SetOnOffControl(onOffControl)
+// SetOnOffControl wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetOnOffControl(onOffControl obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnOffControl:"), objref.IDOf(onOffControl))
 }
 
-// OnTime calls the underlying OnTime.
-func (x *MTROnOffClusterOnWithTimedOffParams) OnTime() *foundation.NSNumber {
-	return x.inner.OnTime()
+// OnTime wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) OnTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("onTime"))
+	return obj.Wrap(_r)
 }
 
-// SetOnTime calls the underlying SetOnTime.
-func (x *MTROnOffClusterOnWithTimedOffParams) SetOnTime(onTime *foundation.NSNumber) {
-	x.inner.SetOnTime(onTime)
+// SetOnTime wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetOnTime(onTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnTime:"), objref.IDOf(onTime))
 }
 
-// OffWaitTime calls the underlying OffWaitTime.
-func (x *MTROnOffClusterOnWithTimedOffParams) OffWaitTime() *foundation.NSNumber {
-	return x.inner.OffWaitTime()
+// OffWaitTime wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) OffWaitTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offWaitTime"))
+	return obj.Wrap(_r)
 }
 
-// SetOffWaitTime calls the underlying SetOffWaitTime.
-func (x *MTROnOffClusterOnWithTimedOffParams) SetOffWaitTime(offWaitTime *foundation.NSNumber) {
-	x.inner.SetOffWaitTime(offWaitTime)
+// SetOffWaitTime wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetOffWaitTime(offWaitTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffWaitTime:"), objref.IDOf(offWaitTime))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTROnOffClusterOnWithTimedOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROnOffClusterOnWithTimedOffParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTROnOffClusterOnWithTimedOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTROnOffClusterOnWithTimedOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROnOffClusterOnWithTimedOffParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTROnOffClusterOnWithTimedOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTROnOffClusterOnWithTimedOffParamsable is the interface implemented by [MTROnOffClusterOnWithTimedOffParams], for mocking and DI.
 type MTROnOffClusterOnWithTimedOffParamsable interface {
-	Unwrap() *raw.MTROnOffClusterOnWithTimedOffParams
-	WithOnOffControl(onOffControl *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
-	WithOnTime(onTime *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
-	WithOffWaitTime(offWaitTime *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
-	OnOffControl() *foundation.NSNumber
-	SetOnOffControl(onOffControl *foundation.NSNumber)
-	OnTime() *foundation.NSNumber
-	SetOnTime(onTime *foundation.NSNumber)
-	OffWaitTime() *foundation.NSNumber
-	SetOffWaitTime(offWaitTime *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithOnOffControl(onOffControl obj.Object) *MTROnOffClusterOnWithTimedOffParams
+	WithOnTime(onTime obj.Object) *MTROnOffClusterOnWithTimedOffParams
+	WithOffWaitTime(offWaitTime obj.Object) *MTROnOffClusterOnWithTimedOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROnOffClusterOnWithTimedOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROnOffClusterOnWithTimedOffParams
+	OnOffControl() obj.Object
+	SetOnOffControl(onOffControl obj.Object)
+	OnTime() obj.Object
+	SetOnTime(onTime obj.Object)
+	OffWaitTime() obj.Object
+	SetOffWaitTime(offWaitTime obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTROnOffClusterOnWithTimedOffParamsable = (*MTROnOffClusterOnWithTimedOffParams)(nil)

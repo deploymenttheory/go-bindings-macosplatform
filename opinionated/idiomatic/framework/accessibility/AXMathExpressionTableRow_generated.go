@@ -5,70 +5,66 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MathExpressionTableRow wraps [raw.AXMathExpressionTableRow] with a fluent Go API.
+// MathExpressionTableRow is an idiomatic wrapper over the Objective-C class AXMathExpressionTableRow.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionTableRow struct {
-	inner *raw.AXMathExpressionTableRow
+	MathExpression
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionTableRow].
-func (x *MathExpressionTableRow) Unwrap() *raw.AXMathExpressionTableRow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionTableRow) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionTableRowFromID adopts an existing object pointer as a MathExpressionTableRow (nil for 0).
+// MathExpressionTableRowFromID adopts an existing Objective-C object as a MathExpressionTableRow
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionTableRowFromID(id objc.ID) *MathExpressionTableRow {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionTableRow{inner: raw.AXMathExpressionTableRowFromID(id)}
+	x := &MathExpressionTableRow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionTableRowWithExpressions creates a new [MathExpressionTableRow].
-func NewMathExpressionTableRowWithExpressions(expressions ...MathExpressionProvider) *MathExpressionTableRow {
-	_ptrs := make([]objc.ID, len(expressions))
-	for _i, _v := range expressions {
-		_ptrs[_i] = _v.asMathExpression().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AXMathExpression]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionTableRow")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressions:"), _arg0.Ptr())
-	return &MathExpressionTableRow{inner: raw.AXMathExpressionTableRowFromID(_id)}
-}
-
-// Expressions returns the collection as a Go slice.
-func (x *MathExpressionTableRow) Expressions() []*MathExpression {
-	arr := x.inner.Expressions()
-	if arr == nil {
+// mathExpressionTableRowAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionTableRow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionTableRowAdopt(id objc.ID) *MathExpressionTableRow {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
-		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
-	})
+	x := &MathExpressionTableRow{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MathExpressionTableRow) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+// NewMathExpressionTableRowWithExpressions creates a new MathExpressionTableRow.
+func NewMathExpressionTableRowWithExpressions(expressions []*MathExpression) *MathExpressionTableRow {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionTableRow")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressions:"), purego.SliceToNSArray(expressions, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }))
+	return mathExpressionTableRowAdopt(_id)
+}
+
+// Expressions wraps the corresponding Objective-C method.
+//
+// Expressions returns the collection as a Go slice.
+func (x *MathExpressionTableRow) Expressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // MathExpressionTableRowable is the interface implemented by [MathExpressionTableRow], for mocking and DI.
 type MathExpressionTableRowable interface {
-	Unwrap() *raw.AXMathExpressionTableRow
+	obj.Object
 	Expressions() []*MathExpression
 }
 
 var _ MathExpressionTableRowable = (*MathExpressionTableRow)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionTableRow)(nil)

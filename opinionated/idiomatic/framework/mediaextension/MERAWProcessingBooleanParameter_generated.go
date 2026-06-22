@@ -5,120 +5,128 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// RAWProcessingBooleanParameter wraps [raw.MERAWProcessingBooleanParameter] with a fluent Go API.
+// RAWProcessingBooleanParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingBooleanParameter.
+//
+// It embeds [RAWProcessingParameter], promoting that type's methods.
 type RAWProcessingBooleanParameter struct {
-	inner *raw.MERAWProcessingBooleanParameter
+	RAWProcessingParameter
 }
 
-// Unwrap returns the underlying [raw.MERAWProcessingBooleanParameter].
-func (x *RAWProcessingBooleanParameter) Unwrap() *raw.MERAWProcessingBooleanParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RAWProcessingBooleanParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// RAWProcessingBooleanParameterFromID adopts an existing object pointer as a RAWProcessingBooleanParameter (nil for 0).
+// RAWProcessingBooleanParameterFromID adopts an existing Objective-C object as a RAWProcessingBooleanParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func RAWProcessingBooleanParameterFromID(id objc.ID) *RAWProcessingBooleanParameter {
 	if id == 0 {
 		return nil
 	}
-	return &RAWProcessingBooleanParameter{inner: raw.MERAWProcessingBooleanParameterFromID(id)}
+	x := &RAWProcessingBooleanParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRAWProcessingBooleanParameter creates a new [RAWProcessingBooleanParameter].
+// rAWProcessingBooleanParameterAdopt wraps an Objective-C object that this code just created as a
+// RAWProcessingBooleanParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rAWProcessingBooleanParameterAdopt(id objc.ID) *RAWProcessingBooleanParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &RAWProcessingBooleanParameter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRAWProcessingBooleanParameter creates a new RAWProcessingBooleanParameter.
 func NewRAWProcessingBooleanParameter() *RAWProcessingBooleanParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingBooleanParameter")), objc.RegisterName("new"))
-	return &RAWProcessingBooleanParameter{inner: raw.MERAWProcessingBooleanParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingBooleanParameter")), objc.RegisterName("new"))
+	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValue creates a new [RAWProcessingBooleanParameter].
+// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValue creates a new RAWProcessingBooleanParameter.
 func NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValue(name string, key string, description string, initialValue bool) *RAWProcessingBooleanParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue)
-	return &RAWProcessingBooleanParameter{inner: raw.MERAWProcessingBooleanParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue)
+	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralValue creates a new [RAWProcessingBooleanParameter].
+// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralValue creates a new RAWProcessingBooleanParameter.
 func NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralValue(name string, key string, description string, initialValue bool, neutralValue bool) *RAWProcessingBooleanParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:neutralValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, neutralValue)
-	return &RAWProcessingBooleanParameter{inner: raw.MERAWProcessingBooleanParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:neutralValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, neutralValue)
+	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueCameraValue creates a new [RAWProcessingBooleanParameter].
+// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueCameraValue creates a new RAWProcessingBooleanParameter.
 func NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueCameraValue(name string, key string, description string, initialValue bool, cameraValue bool) *RAWProcessingBooleanParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:cameraValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, cameraValue)
-	return &RAWProcessingBooleanParameter{inner: raw.MERAWProcessingBooleanParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:cameraValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, cameraValue)
+	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralValueCameraValue creates a new [RAWProcessingBooleanParameter].
+// NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralValueCameraValue creates a new RAWProcessingBooleanParameter.
 func NewRAWProcessingBooleanParameterWithNameKeyDescriptionInitialValueNeutralValueCameraValue(name string, key string, description string, initialValue bool, neutralValue bool, cameraValue bool) *RAWProcessingBooleanParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:neutralValue:cameraValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, neutralValue, cameraValue)
-	return &RAWProcessingBooleanParameter{inner: raw.MERAWProcessingBooleanParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingBooleanParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:neutralValue:cameraValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, neutralValue, cameraValue)
+	return rAWProcessingBooleanParameterAdopt(_id)
 }
 
-// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion	This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// WithCurrentValue sets the currentValue property and returns the receiver for chaining.
+// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingBooleanParameter) WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter {
-	x.inner.SetCurrentValue(currentValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 	return x
 }
 
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
 func (x *RAWProcessingBooleanParameter) WithEnabled(enabled bool) *RAWProcessingBooleanParameter {
-	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// @property		hasNeutralValue @abstract		Return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Neutral value. @discussion	If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to NO.
-//
-// HasNeutralValue calls the underlying HasNeutralValue.
-func (x *RAWProcessingBooleanParameter) HasNeutralValue(outNeutralValue *bool) bool {
-	return x.inner.HasNeutralValue(outNeutralValue)
+// HasNeutralValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to NO.
+func (x *RAWProcessingBooleanParameter) HasNeutralValue() (ok bool, outNeutralValue bool) {
+	var _out0 bool
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// @property		hasCameraValue @abstract		Return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Camera value. @discussion	If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to NO.
-//
-// HasCameraValue calls the underlying HasCameraValue.
-func (x *RAWProcessingBooleanParameter) HasCameraValue(outCameraValue *bool) bool {
-	return x.inner.HasCameraValue(outCameraValue)
+// HasCameraValue return value indicates whether the MERAWProcessingBooleanParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to NO.
+func (x *RAWProcessingBooleanParameter) HasCameraValue() (ok bool, outCameraValue bool) {
+	var _out0 bool
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion	This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// CurrentValue calls the underlying CurrentValue.
+// CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingBooleanParameter) CurrentValue() bool {
-	return x.inner.CurrentValue()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("currentValue"))
+	return _r
 }
 
-// SetCurrentValue calls the underlying SetCurrentValue.
+// SetCurrentValue wraps the corresponding Objective-C method.
 func (x *RAWProcessingBooleanParameter) SetCurrentValue(currentValue bool) {
-	x.inner.SetCurrentValue(currentValue)
-}
-
-func (x *RAWProcessingBooleanParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
-	return &x.inner.MERAWProcessingParameter
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 }
 
 // RAWProcessingBooleanParameterable is the interface implemented by [RAWProcessingBooleanParameter], for mocking and DI.
 type RAWProcessingBooleanParameterable interface {
-	Unwrap() *raw.MERAWProcessingBooleanParameter
+	obj.Object
 	WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter
 	WithEnabled(enabled bool) *RAWProcessingBooleanParameter
-	HasNeutralValue(outNeutralValue *bool) bool
-	HasCameraValue(outCameraValue *bool) bool
+	HasNeutralValue() (ok bool, outNeutralValue bool)
+	HasCameraValue() (ok bool, outCameraValue bool)
 	CurrentValue() bool
 	SetCurrentValue(currentValue bool)
 }
 
 var _ RAWProcessingBooleanParameterable = (*RAWProcessingBooleanParameter)(nil)
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingBooleanParameter)(nil)

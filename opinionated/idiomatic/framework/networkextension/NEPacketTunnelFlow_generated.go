@@ -6,90 +6,121 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to read and write packets to and from the tunnel’s virtual interface.
+// NEPacketTunnelFlow is an idiomatic wrapper over the Objective-C class NEPacketTunnelFlow.
 //
-// NEPacketTunnelFlow wraps [raw.NEPacketTunnelFlow] with a fluent Go API.
+// An object you use to read and write packets to and from the tunnel’s virtual interface.
 type NEPacketTunnelFlow struct {
-	inner *raw.NEPacketTunnelFlow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEPacketTunnelFlow].
-func (x *NEPacketTunnelFlow) Unwrap() *raw.NEPacketTunnelFlow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEPacketTunnelFlow) ID() objc.ID { return x.inner.Ptr() }
-
-// NEPacketTunnelFlowFromID adopts an existing object pointer as a NEPacketTunnelFlow (nil for 0).
+// NEPacketTunnelFlowFromID adopts an existing Objective-C object as a NEPacketTunnelFlow
+// (nil for 0), retaining it and registering a release finalizer.
 func NEPacketTunnelFlowFromID(id objc.ID) *NEPacketTunnelFlow {
 	if id == 0 {
 		return nil
 	}
-	return &NEPacketTunnelFlow{inner: raw.NEPacketTunnelFlowFromID(id)}
+	x := &NEPacketTunnelFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEPacketTunnelFlow creates a new [NEPacketTunnelFlow].
+// nEPacketTunnelFlowAdopt wraps an Objective-C object that this code just created as a
+// NEPacketTunnelFlow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEPacketTunnelFlowAdopt(id objc.ID) *NEPacketTunnelFlow {
+	if id == 0 {
+		return nil
+	}
+	x := &NEPacketTunnelFlow{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEPacketTunnelFlow) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEPacketTunnelFlow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEPacketTunnelFlow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEPacketTunnelFlow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEPacketTunnelFlow creates a new NEPacketTunnelFlow.
 func NewNEPacketTunnelFlow() *NEPacketTunnelFlow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEPacketTunnelFlow")), objc.RegisterName("new"))
-	return &NEPacketTunnelFlow{inner: raw.NEPacketTunnelFlowFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEPacketTunnelFlow")), objc.RegisterName("new"))
+	return nEPacketTunnelFlowAdopt(_id)
 }
 
-// Reads IP packets from the TUN interface.
-//
-// ReadPacketsWithCompletionHandler calls the underlying ReadPacketsWithCompletionHandler.
-func (x *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[*foundation.NSNumber])) {
-	x.inner.ReadPacketsWithCompletionHandler(completionHandler)
+// ReadPacketsWithCompletionHandler reads IP packets from the TUN interface.
+func (x *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler func(obj.Object, obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readPacketsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { completionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 }
 
-// Writes IP packets to the TUN interface.
-//
-// WritePacketsWithProtocols calls the underlying WritePacketsWithProtocols.
-func (x *NEPacketTunnelFlow) WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool {
-	return x.inner.WritePacketsWithProtocols(packets, protocols)
+// WritePacketsWithProtocols writes IP packets to the TUN interface.
+func (x *NEPacketTunnelFlow) WritePacketsWithProtocols(packets []obj.Object, protocols []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writePackets:withProtocols:"), purego.SliceToNSArray(packets, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(protocols, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Read multiple IP packets from the TUN interface.
+// ReadPacketObjects read multiple IP packets from the TUN interface.
 //
 // ReadPacketObjects blocks until the operation completes or ctx is cancelled.
-func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error) {
+func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.NEPacket]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadPacketObjectsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NEPacket]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readPacketObjectsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.NEPacket]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Write multiple IP packets to the TUN interface.
-//
-// WritePacketObjects calls the underlying WritePacketObjects.
-func (x *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool {
-	return x.inner.WritePacketObjects(packets)
+// WritePacketObjects write multiple IP packets to the TUN interface.
+func (x *NEPacketTunnelFlow) WritePacketObjects(packets []*NEPacket) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writePacketObjects:"), purego.SliceToNSArray(packets, func(_v *NEPacket) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
 // NEPacketTunnelFlowable is the interface implemented by [NEPacketTunnelFlow], for mocking and DI.
 type NEPacketTunnelFlowable interface {
-	Unwrap() *raw.NEPacketTunnelFlow
-	ReadPacketsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[*foundation.NSNumber]))
-	WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool
-	ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error)
-	WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool
+	obj.Object
+	ReadPacketsWithCompletionHandler(completionHandler func(obj.Object, obj.Object))
+	WritePacketsWithProtocols(packets []obj.Object, protocols []obj.Object) bool
+	ReadPacketObjects(ctx context.Context) (obj.Object, error)
+	WritePacketObjects(packets []*NEPacket) bool
 }
 
 var _ NEPacketTunnelFlowable = (*NEPacketTunnelFlow)(nil)

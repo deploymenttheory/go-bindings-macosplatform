@@ -5,61 +5,90 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the deletion of a record zone.
+// SyncEngineFetchedZoneDeletion is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchedZoneDeletion.
 //
-// SyncEngineFetchedZoneDeletion wraps [raw.CKSyncEngineFetchedZoneDeletion] with a fluent Go API.
+// An object that describes the deletion of a record zone.
 type SyncEngineFetchedZoneDeletion struct {
-	inner *raw.CKSyncEngineFetchedZoneDeletion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFetchedZoneDeletion].
-func (x *SyncEngineFetchedZoneDeletion) Unwrap() *raw.CKSyncEngineFetchedZoneDeletion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFetchedZoneDeletion) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFetchedZoneDeletionFromID adopts an existing object pointer as a SyncEngineFetchedZoneDeletion (nil for 0).
+// SyncEngineFetchedZoneDeletionFromID adopts an existing Objective-C object as a SyncEngineFetchedZoneDeletion
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFetchedZoneDeletionFromID(id objc.ID) *SyncEngineFetchedZoneDeletion {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchedZoneDeletion{inner: raw.CKSyncEngineFetchedZoneDeletionFromID(id)}
+	x := &SyncEngineFetchedZoneDeletion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineFetchedZoneDeletion creates a new [SyncEngineFetchedZoneDeletion].
-func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchedZoneDeletion")), objc.RegisterName("new"))
-	return &SyncEngineFetchedZoneDeletion{inner: raw.CKSyncEngineFetchedZoneDeletionFromID(_id)}
-}
-
-// The identifier of the deleted record zone.
-//
-// ZoneID calls the underlying ZoneID.
-func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
-	_r := x.inner.ZoneID()
-	if _r == nil {
+// syncEngineFetchedZoneDeletionAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFetchedZoneDeletion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFetchedZoneDeletionAdopt(id objc.ID) *SyncEngineFetchedZoneDeletion {
+	if id == 0 {
 		return nil
 	}
-	return &RecordZoneID{inner: _r}
+	x := &SyncEngineFetchedZoneDeletion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The reason for the deletion.
-//
-// Reason calls the underlying Reason.
-func (x *SyncEngineFetchedZoneDeletion) Reason() CKSyncEngineZoneDeletionReason {
-	return CKSyncEngineZoneDeletionReason(x.inner.Reason())
+// Description returns the object's -description text.
+func (x *SyncEngineFetchedZoneDeletion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFetchedZoneDeletion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFetchedZoneDeletion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchedZoneDeletion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineFetchedZoneDeletion creates a new SyncEngineFetchedZoneDeletion.
+func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchedZoneDeletion")), objc.RegisterName("new"))
+	return syncEngineFetchedZoneDeletionAdopt(_id)
+}
+
+// ZoneID the identifier of the deleted record zone.
+func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+	return RecordZoneIDFromID(_r)
+}
+
+// Reason the reason for the deletion.
+func (x *SyncEngineFetchedZoneDeletion) Reason() SyncEngineZoneDeletionReason {
+	_r := objc.Send[SyncEngineZoneDeletionReason](objref.IDOf(x), objc.RegisterName("reason"))
+	return _r
 }
 
 // SyncEngineFetchedZoneDeletionable is the interface implemented by [SyncEngineFetchedZoneDeletion], for mocking and DI.
 type SyncEngineFetchedZoneDeletionable interface {
-	Unwrap() *raw.CKSyncEngineFetchedZoneDeletion
+	obj.Object
 	ZoneID() *RecordZoneID
-	Reason() CKSyncEngineZoneDeletionReason
+	Reason() SyncEngineZoneDeletionReason
 }
 
 var _ SyncEngineFetchedZoneDeletionable = (*SyncEngineFetchedZoneDeletion)(nil)

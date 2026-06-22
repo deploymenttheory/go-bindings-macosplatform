@@ -5,71 +5,83 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reports the state of a reaction effect performed on a capture device.
+// CaptureReactionEffectState is an idiomatic wrapper over the Objective-C class AVCaptureReactionEffectState.
 //
-// CaptureReactionEffectState wraps [raw.AVCaptureReactionEffectState] with a fluent Go API.
+// An object that reports the state of a reaction effect performed on a capture device.
 type CaptureReactionEffectState struct {
-	inner *raw.AVCaptureReactionEffectState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureReactionEffectState].
-func (x *CaptureReactionEffectState) Unwrap() *raw.AVCaptureReactionEffectState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureReactionEffectState) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureReactionEffectStateFromID adopts an existing object pointer as a CaptureReactionEffectState (nil for 0).
+// CaptureReactionEffectStateFromID adopts an existing Objective-C object as a CaptureReactionEffectState
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureReactionEffectStateFromID(id objc.ID) *CaptureReactionEffectState {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureReactionEffectState{inner: raw.AVCaptureReactionEffectStateFromID(id)}
+	x := &CaptureReactionEffectState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureReactionEffectState creates a new [CaptureReactionEffectState].
-func NewCaptureReactionEffectState() *CaptureReactionEffectState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureReactionEffectState")), objc.RegisterName("new"))
-	return &CaptureReactionEffectState{inner: raw.AVCaptureReactionEffectStateFromID(_id)}
-}
-
-// @property reactionType @abstract Indicates the reaction which is running. @discussion There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
-//
-// ReactionType calls the underlying ReactionType.
-func (x *CaptureReactionEffectState) ReactionType() string {
-	_r := x.inner.ReactionType()
-	if _r == nil {
-		return ""
+// captureReactionEffectStateAdopt wraps an Objective-C object that this code just created as a
+// CaptureReactionEffectState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureReactionEffectStateAdopt(id objc.ID) *CaptureReactionEffectState {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &CaptureReactionEffectState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property startTime @abstract Provides the presentation time of the first frame where the effect is being rendered.
-//
-// StartTime calls the underlying StartTime.
-func (x *CaptureReactionEffectState) StartTime() coremedia.CMTime {
-	return x.inner.StartTime()
+// Description returns the object's -description text.
+func (x *CaptureReactionEffectState) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property endTime @abstract Provides the presentation time of the frame following the last frame where the effect is seen. @discussion Will be kCMTimeInvalid while the effect is in progress, but will be updated to a valid time when the reaction effect completes and the AVCaptureReactionEffectState is removed from -[AVCaptureDevice reactionEffectsInProgress]. (If using NSKeyValueObservingOptionOld, you can access completed effects with valid end times via NSKeyValueChangeOldKey.)
-//
-// EndTime calls the underlying EndTime.
-func (x *CaptureReactionEffectState) EndTime() coremedia.CMTime {
-	return x.inner.EndTime()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureReactionEffectState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureReactionEffectState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureReactionEffectState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureReactionEffectState creates a new CaptureReactionEffectState.
+func NewCaptureReactionEffectState() *CaptureReactionEffectState {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureReactionEffectState")), objc.RegisterName("new"))
+	return captureReactionEffectStateAdopt(_id)
+}
+
+// ReactionType indicates the reaction which is running. There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
+func (x *CaptureReactionEffectState) ReactionType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reactionType"))
+	return obj.Wrap(_r)
 }
 
 // CaptureReactionEffectStateable is the interface implemented by [CaptureReactionEffectState], for mocking and DI.
 type CaptureReactionEffectStateable interface {
-	Unwrap() *raw.AVCaptureReactionEffectState
-	ReactionType() string
-	StartTime() coremedia.CMTime
-	EndTime() coremedia.CMTime
+	obj.Object
+	ReactionType() obj.Object
 }
 
 var _ CaptureReactionEffectStateable = (*CaptureReactionEffectState)(nil)

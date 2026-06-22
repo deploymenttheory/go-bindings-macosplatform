@@ -5,72 +5,78 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The Linux directory share for Rosetta.
+// LinuxRosettaDirectoryShare is an idiomatic wrapper over the Objective-C class VZLinuxRosettaDirectoryShare.
 //
-// LinuxRosettaDirectoryShare wraps [raw.VZLinuxRosettaDirectoryShare] with a fluent Go API.
+// It embeds [DirectoryShare], promoting that type's methods.
+//
+// The Linux directory share for Rosetta.
 type LinuxRosettaDirectoryShare struct {
-	inner *raw.VZLinuxRosettaDirectoryShare
+	DirectoryShare
 }
 
-// Unwrap returns the underlying [raw.VZLinuxRosettaDirectoryShare].
-func (x *LinuxRosettaDirectoryShare) Unwrap() *raw.VZLinuxRosettaDirectoryShare { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinuxRosettaDirectoryShare) ID() objc.ID { return x.inner.Ptr() }
-
-// LinuxRosettaDirectoryShareFromID adopts an existing object pointer as a LinuxRosettaDirectoryShare (nil for 0).
+// LinuxRosettaDirectoryShareFromID adopts an existing Objective-C object as a LinuxRosettaDirectoryShare
+// (nil for 0), retaining it and registering a release finalizer.
 func LinuxRosettaDirectoryShareFromID(id objc.ID) *LinuxRosettaDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	return &LinuxRosettaDirectoryShare{inner: raw.VZLinuxRosettaDirectoryShareFromID(id)}
-}
-
-// NewLinuxRosettaDirectoryShare creates a new [LinuxRosettaDirectoryShare].
-func NewLinuxRosettaDirectoryShare() *LinuxRosettaDirectoryShare {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaDirectoryShare")), objc.RegisterName("new"))
-	return &LinuxRosettaDirectoryShare{inner: raw.VZLinuxRosettaDirectoryShareFromID(_id)}
-}
-
-// The value that enables translation caching and configures the socket communication type for Rosetta.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare {
-	x.inner.SetOptions(options.asLinuxRosettaCachingOptions())
+	x := &LinuxRosettaDirectoryShare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract Enable translation caching and configure the socket communication type for Rosetta.
-//
-// Options calls the underlying Options.
-func (x *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
-	_r := x.inner.Options()
-	if _r == nil {
+// linuxRosettaDirectoryShareAdopt wraps an Objective-C object that this code just created as a
+// LinuxRosettaDirectoryShare (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linuxRosettaDirectoryShareAdopt(id objc.ID) *LinuxRosettaDirectoryShare {
+	if id == 0 {
 		return nil
 	}
-	return &LinuxRosettaCachingOptions{inner: _r}
+	x := &LinuxRosettaDirectoryShare{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetOptions calls the underlying SetOptions.
-func (x *LinuxRosettaDirectoryShare) SetOptions(options *raw.VZLinuxRosettaCachingOptions) {
-	x.inner.SetOptions(options)
+// NewLinuxRosettaDirectoryShare creates a new LinuxRosettaDirectoryShare.
+func NewLinuxRosettaDirectoryShare() *LinuxRosettaDirectoryShare {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaDirectoryShare")), objc.RegisterName("new"))
+	return linuxRosettaDirectoryShareAdopt(_id)
 }
 
-func (x *LinuxRosettaDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare {
-	return &x.inner.VZDirectoryShare
+// WithOptions the value that enables translation caching and configures the socket communication type for Rosetta.
+func (x *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
+	return x
+}
+
+// Options enable translation caching and configure the socket communication type for Rosetta.
+func (x *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return LinuxRosettaCachingOptionsFromID(_r)
+}
+
+// SetOptions wraps the corresponding Objective-C method.
+func (x *LinuxRosettaDirectoryShare) SetOptions(options *LinuxRosettaCachingOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 }
 
 // LinuxRosettaDirectoryShareable is the interface implemented by [LinuxRosettaDirectoryShare], for mocking and DI.
 type LinuxRosettaDirectoryShareable interface {
-	Unwrap() *raw.VZLinuxRosettaDirectoryShare
+	obj.Object
 	WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare
 	Options() *LinuxRosettaCachingOptions
-	SetOptions(options *raw.VZLinuxRosettaCachingOptions)
+	SetOptions(options *LinuxRosettaCachingOptions)
 }
 
 var _ LinuxRosettaDirectoryShareable = (*LinuxRosettaDirectoryShare)(nil)
+
+var _ DirectoryShareProvider = (*LinuxRosettaDirectoryShare)(nil)

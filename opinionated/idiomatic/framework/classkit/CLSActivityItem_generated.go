@@ -5,82 +5,79 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for gathering information about an activity.
+// ActivityItem is an idiomatic wrapper over the Objective-C class CLSActivityItem.
 //
-// ActivityItem wraps [raw.CLSActivityItem] with a fluent Go API.
+// ActivityItem is an abstract base — you do not construct it directly. Construct one of [BinaryItem], [QuantityItem], [ScoreItem] and pass it where a ActivityItem is accepted.
+//
+// An abstract base class for gathering information about an activity.
 type ActivityItem struct {
-	inner *raw.CLSActivityItem
+	Object
 }
 
-// Unwrap returns the underlying [raw.CLSActivityItem].
-func (x *ActivityItem) Unwrap() *raw.CLSActivityItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActivityItem) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivityItemFromID adopts an existing object pointer as a ActivityItem (nil for 0).
+// ActivityItemFromID adopts an existing Objective-C object as a ActivityItem
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivityItemFromID(id objc.ID) *ActivityItem {
 	if id == 0 {
 		return nil
 	}
-	return &ActivityItem{inner: raw.CLSActivityItemFromID(id)}
-}
-
-// NewActivityItem creates a new [ActivityItem].
-func NewActivityItem() *ActivityItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSActivityItem")), objc.RegisterName("new"))
-	return &ActivityItem{inner: raw.CLSActivityItemFromID(_id)}
-}
-
-// A human readable name for the activity item.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *ActivityItem) WithTitle(title string) *ActivityItem {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	x := &ActivityItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
-//
-// Title calls the underlying Title.
+// activityItemAdopt wraps an Objective-C object that this code just created as a
+// ActivityItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activityItemAdopt(id objc.ID) *ActivityItem {
+	if id == 0 {
+		return nil
+	}
+	x := &ActivityItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithTitle a human readable name for the activity item.
+func (x *ActivityItem) WithTitle(title string) *ActivityItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+// Title title of what this ActivityItem represents. This will be the title associated with the activity item in the generated progress report.
 func (x *ActivityItem) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ActivityItem) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// @abstract      An identifier that is unique within its owning activity @discussion    The identifier can be used to look up existing activityItems in a given activity.
-//
-// Identifier calls the underlying Identifier.
+// Identifier an identifier that is unique within its owning activity The identifier can be used to look up existing activityItems in a given activity.
 func (x *ActivityItem) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *ActivityItem) asActivityItem() *raw.CLSActivityItem { return x.inner }
-
-func (x *ActivityItem) asObject() *raw.CLSObject { return &x.inner.CLSObject }
 
 // ActivityItemable is the interface implemented by [ActivityItem], for mocking and DI.
 type ActivityItemable interface {
-	Unwrap() *raw.CLSActivityItem
+	obj.Object
 	WithTitle(title string) *ActivityItem
 	Title() string
 	SetTitle(title string)
@@ -88,3 +85,12 @@ type ActivityItemable interface {
 }
 
 var _ ActivityItemable = (*ActivityItem)(nil)
+
+// isActivityItem marks ActivityItem — and, by embedding promotion, its
+// subclasses — as a member of the ActivityItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ActivityItem) isActivityItem() {}
+
+var _ ActivityItemProvider = (*ActivityItem)(nil)
+
+var _ ObjectProvider = (*ActivityItem)(nil)

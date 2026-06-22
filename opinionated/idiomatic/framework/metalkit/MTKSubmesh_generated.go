@@ -5,116 +5,117 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for the index data of a Model I/O submesh, suitable for use in a Metal app.
+// Submesh is an idiomatic wrapper over the Objective-C class MTKSubmesh.
 //
-// Submesh wraps [raw.MTKSubmesh] with a fluent Go API.
+// A container for the index data of a Model I/O submesh, suitable for use in a Metal app.
 type Submesh struct {
-	inner *raw.MTKSubmesh
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTKSubmesh].
-func (x *Submesh) Unwrap() *raw.MTKSubmesh { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Submesh) ID() objc.ID { return x.inner.Ptr() }
-
-// SubmeshFromID adopts an existing object pointer as a Submesh (nil for 0).
+// SubmeshFromID adopts an existing Objective-C object as a Submesh
+// (nil for 0), retaining it and registering a release finalizer.
 func SubmeshFromID(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil
 	}
-	return &Submesh{inner: raw.MTKSubmeshFromID(id)}
-}
-
-// NewSubmesh creates a new [Submesh].
-func NewSubmesh() *Submesh {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKSubmesh")), objc.RegisterName("new"))
-	return &Submesh{inner: raw.MTKSubmeshFromID(_id)}
-}
-
-// The name of the submesh.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *Submesh) WithName(name string) *Submesh {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	x := &Submesh{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property primitiveType @abstract Metal primitive type with which to draw this object. @discussion Value to use for primitiveType parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
-//
-// PrimitiveType calls the underlying PrimitiveType.
-func (x *Submesh) PrimitiveType() metal.MTLPrimitiveType {
-	return x.inner.PrimitiveType()
+// submeshAdopt wraps an Objective-C object that this code just created as a
+// Submesh (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func submeshAdopt(id objc.ID) *Submesh {
+	if id == 0 {
+		return nil
+	}
+	x := &Submesh{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property indexType @abstract Metal index type of data in indexBuffer. @discussion Value to use for indexType parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
-//
-// IndexType calls the underlying IndexType.
-func (x *Submesh) IndexType() metal.MTLIndexType {
-	return x.inner.IndexType()
+// Description returns the object's -description text.
+func (x *Submesh) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property indexBuffer @abstract IndexBuffer (including indexCount) to render the object. @discussion The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
-//
-// IndexBuffer calls the underlying IndexBuffer.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Submesh) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Submesh) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Submesh) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSubmesh creates a new Submesh.
+func NewSubmesh() *Submesh {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTKSubmesh")), objc.RegisterName("new"))
+	return submeshAdopt(_id)
+}
+
+// WithName the name of the submesh.
+func (x *Submesh) WithName(name string) *Submesh {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// IndexBuffer indexBuffer (including indexCount) to render the object. The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
 func (x *Submesh) IndexBuffer() *MeshBuffer {
-	_r := x.inner.IndexBuffer()
-	if _r == nil {
-		return nil
-	}
-	return &MeshBuffer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexBuffer"))
+	return MeshBufferFromID(_r)
 }
 
-// @property indexCount @abstract Number of indicies in indexBuffer. @discussion Value to use for indexCount parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
-//
-// IndexCount calls the underlying IndexCount.
-func (x *Submesh) IndexCount() uint {
-	return x.inner.IndexCount()
+// IndexCount number of indicies in indexBuffer. Value to use for indexCount parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+func (x *Submesh) IndexCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexCount"))
+	return _r
 }
 
-// @property mesh @abstract Parent MTKMesh object containing vertex data of this object. @discussion The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
-//
-// Mesh calls the underlying Mesh.
+// Mesh parent MTKMesh object containing vertex data of this object. The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
 func (x *Submesh) Mesh() *Mesh {
-	_r := x.inner.Mesh()
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mesh"))
+	return MeshFromID(_r)
 }
 
-// @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
-//
-// Name calls the underlying Name.
+// Name name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
 func (x *Submesh) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *Submesh) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Submeshable is the interface implemented by [Submesh], for mocking and DI.
 type Submeshable interface {
-	Unwrap() *raw.MTKSubmesh
+	obj.Object
 	WithName(name string) *Submesh
-	PrimitiveType() metal.MTLPrimitiveType
-	IndexType() metal.MTLIndexType
 	IndexBuffer() *MeshBuffer
-	IndexCount() uint
+	IndexCount() int
 	Mesh() *Mesh
 	Name() string
 	SetName(name string)

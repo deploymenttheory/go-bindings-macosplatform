@@ -5,63 +5,65 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that executes AppleScript scripts.
+// UserAppleScriptTask is an idiomatic wrapper over the Objective-C class NSUserAppleScriptTask.
 //
-// UserAppleScriptTask wraps [raw.NSUserAppleScriptTask] with a fluent Go API.
+// It embeds [UserScriptTask], promoting that type's methods.
+//
+// An object that executes AppleScript scripts.
 type UserAppleScriptTask struct {
-	inner *raw.NSUserAppleScriptTask
+	UserScriptTask
 }
 
-// Unwrap returns the underlying [raw.NSUserAppleScriptTask].
-func (x *UserAppleScriptTask) Unwrap() *raw.NSUserAppleScriptTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserAppleScriptTask) ID() objc.ID { return x.inner.Ptr() }
-
-// UserAppleScriptTaskFromID adopts an existing object pointer as a UserAppleScriptTask (nil for 0).
+// UserAppleScriptTaskFromID adopts an existing Objective-C object as a UserAppleScriptTask
+// (nil for 0), retaining it and registering a release finalizer.
 func UserAppleScriptTaskFromID(id objc.ID) *UserAppleScriptTask {
 	if id == 0 {
 		return nil
 	}
-	return &UserAppleScriptTask{inner: raw.NSUserAppleScriptTaskFromID(id)}
-}
-
-// NewUserAppleScriptTask creates a new [UserAppleScriptTask].
-func NewUserAppleScriptTask() *UserAppleScriptTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserAppleScriptTask")), objc.RegisterName("new"))
-	return &UserAppleScriptTask{inner: raw.NSUserAppleScriptTaskFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UserAppleScriptTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAppleScriptTask {
-	x.inner.NSUserScriptTask.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UserAppleScriptTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Execute the AppleScript script by sending it the specified Apple event.
-//
-// ExecuteWithAppleEventCompletionHandler calls the underlying ExecuteWithAppleEventCompletionHandler.
-func (x *UserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer)) {
-	x.inner.ExecuteWithAppleEventCompletionHandler(event, handler)
+// userAppleScriptTaskAdopt wraps an Objective-C object that this code just created as a
+// UserAppleScriptTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userAppleScriptTaskAdopt(id objc.ID) *UserAppleScriptTask {
+	if id == 0 {
+		return nil
+	}
+	x := &UserAppleScriptTask{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *UserAppleScriptTask) asUserScriptTask() *raw.NSUserScriptTask {
-	return &x.inner.NSUserScriptTask
+// NewUserAppleScriptTask creates a new UserAppleScriptTask.
+func NewUserAppleScriptTask() *UserAppleScriptTask {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUserAppleScriptTask")), objc.RegisterName("new"))
+	return userAppleScriptTaskAdopt(_id)
 }
 
-func (x *UserAppleScriptTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UserAppleScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAppleScriptTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UserAppleScriptTaskable is the interface implemented by [UserAppleScriptTask], for mocking and DI.
 type UserAppleScriptTaskable interface {
-	Unwrap() *raw.NSUserAppleScriptTask
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAppleScriptTask
-	ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer))
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UserAppleScriptTask
 }
 
 var _ UserAppleScriptTaskable = (*UserAppleScriptTask)(nil)
+
+var _ UserScriptTaskProvider = (*UserAppleScriptTask)(nil)

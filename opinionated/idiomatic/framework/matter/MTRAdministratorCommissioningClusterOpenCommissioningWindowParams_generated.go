@@ -5,204 +5,234 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAdministratorCommissioningClusterOpenCommissioningWindowParams wraps [raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams] with a fluent Go API.
+// MTRAdministratorCommissioningClusterOpenCommissioningWindowParams is an idiomatic wrapper over the Objective-C class MTRAdministratorCommissioningClusterOpenCommissioningWindowParams.
 type MTRAdministratorCommissioningClusterOpenCommissioningWindowParams struct {
-	inner *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams].
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Unwrap() *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID adopts an existing object pointer as a MTRAdministratorCommissioningClusterOpenCommissioningWindowParams (nil for 0).
+// MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID adopts an existing Objective-C object as a MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID(id objc.ID) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAdministratorCommissioningClusterOpenCommissioningWindowParams{inner: raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID(id)}
+	x := &MTRAdministratorCommissioningClusterOpenCommissioningWindowParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAdministratorCommissioningClusterOpenCommissioningWindowParams creates a new [MTRAdministratorCommissioningClusterOpenCommissioningWindowParams].
+// mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRAdministratorCommissioningClusterOpenCommissioningWindowParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsAdopt(id objc.ID) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAdministratorCommissioningClusterOpenCommissioningWindowParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAdministratorCommissioningClusterOpenCommissioningWindowParams creates a new MTRAdministratorCommissioningClusterOpenCommissioningWindowParams.
 func NewMTRAdministratorCommissioningClusterOpenCommissioningWindowParams() *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAdministratorCommissioningClusterOpenCommissioningWindowParams")), objc.RegisterName("new"))
-	return &MTRAdministratorCommissioningClusterOpenCommissioningWindowParams{inner: raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAdministratorCommissioningClusterOpenCommissioningWindowParams")), objc.RegisterName("new"))
+	return mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsAdopt(_id)
 }
 
-// WithCommissioningTimeout sets the commissioningTimeout property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetCommissioningTimeout(commissioningTimeout)
+// WithCommissioningTimeout sets the property and returns the receiver so calls can be chained.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 	return x
 }
 
-// WithPakePasscodeVerifier sets the pakePasscodeVerifier property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetPakePasscodeVerifier(pakePasscodeVerifier)
+// WithPakePasscodeVerifier sets the property and returns the receiver so calls can be chained.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
 	return x
 }
 
-// WithDiscriminator sets the discriminator property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithDiscriminator(discriminator *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetDiscriminator(discriminator)
+// WithDiscriminator sets the property and returns the receiver so calls can be chained.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithDiscriminator(discriminator obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 	return x
 }
 
-// WithIterations sets the iterations property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithIterations(iterations *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetIterations(iterations)
+// WithIterations sets the property and returns the receiver so calls can be chained.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithIterations(iterations obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
 	return x
 }
 
-// WithSalt sets the salt property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithSalt(salt *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetSalt(salt)
+// WithSalt sets the property and returns the receiver so calls can be chained.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithSalt(salt obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalt:"), objref.IDOf(salt))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// WithPakeVerifier sets the pakeVerifier property and returns the receiver for chaining.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakeVerifier(pakeVerifier *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	x.inner.SetPakeVerifier(pakeVerifier)
+// WithPakeVerifier sets the property and returns the receiver so calls can be chained.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakeVerifier(pakeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakeVerifier:"), objref.IDOf(pakeVerifier))
 	return x
 }
 
-// CommissioningTimeout calls the underlying CommissioningTimeout.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() *foundation.NSNumber {
-	return x.inner.CommissioningTimeout()
+// CommissioningTimeout wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetCommissioningTimeout calls the underlying SetCommissioningTimeout.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber) {
-	x.inner.SetCommissioningTimeout(commissioningTimeout)
+// SetCommissioningTimeout wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 }
 
-// PakePasscodeVerifier calls the underlying PakePasscodeVerifier.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() *foundation.NSData {
-	return x.inner.PakePasscodeVerifier()
+// PakePasscodeVerifier wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pakePasscodeVerifier"))
+	return obj.Wrap(_r)
 }
 
-// SetPakePasscodeVerifier calls the underlying SetPakePasscodeVerifier.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) {
-	x.inner.SetPakePasscodeVerifier(pakePasscodeVerifier)
+// SetPakePasscodeVerifier wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakePasscodeVerifier(pakePasscodeVerifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
 }
 
-// Discriminator calls the underlying Discriminator.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() *foundation.NSNumber {
-	return x.inner.Discriminator()
+// Discriminator wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
+	return obj.Wrap(_r)
 }
 
-// SetDiscriminator calls the underlying SetDiscriminator.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetDiscriminator(discriminator *foundation.NSNumber) {
-	x.inner.SetDiscriminator(discriminator)
+// SetDiscriminator wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetDiscriminator(discriminator obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 }
 
-// Iterations calls the underlying Iterations.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() *foundation.NSNumber {
-	return x.inner.Iterations()
+// Iterations wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iterations"))
+	return obj.Wrap(_r)
 }
 
-// SetIterations calls the underlying SetIterations.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetIterations(iterations *foundation.NSNumber) {
-	x.inner.SetIterations(iterations)
+// SetIterations wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetIterations(iterations obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
 }
 
-// Salt calls the underlying Salt.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() *foundation.NSData {
-	return x.inner.Salt()
+// Salt wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("salt"))
+	return obj.Wrap(_r)
 }
 
-// SetSalt calls the underlying SetSalt.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetSalt(salt *foundation.NSData) {
-	x.inner.SetSalt(salt)
+// SetSalt wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetSalt(salt obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalt:"), objref.IDOf(salt))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
-// PakeVerifier calls the underlying PakeVerifier.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() *foundation.NSData {
-	return x.inner.PakeVerifier()
+// PakeVerifier wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pakeVerifier"))
+	return obj.Wrap(_r)
 }
 
-// SetPakeVerifier calls the underlying SetPakeVerifier.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakeVerifier(pakeVerifier *foundation.NSData) {
-	x.inner.SetPakeVerifier(pakeVerifier)
+// SetPakeVerifier wraps the corresponding Objective-C method.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakeVerifier(pakeVerifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakeVerifier:"), objref.IDOf(pakeVerifier))
 }
 
 // MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable is the interface implemented by [MTRAdministratorCommissioningClusterOpenCommissioningWindowParams], for mocking and DI.
 type MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable interface {
-	Unwrap() *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithCommissioningTimeout(commissioningTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithDiscriminator(discriminator *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithIterations(iterations *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithSalt(salt *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithPakeVerifier(pakeVerifier *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	CommissioningTimeout() *foundation.NSNumber
-	SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber)
-	PakePasscodeVerifier() *foundation.NSData
-	SetPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData)
-	Discriminator() *foundation.NSNumber
-	SetDiscriminator(discriminator *foundation.NSNumber)
-	Iterations() *foundation.NSNumber
-	SetIterations(iterations *foundation.NSNumber)
-	Salt() *foundation.NSData
-	SetSalt(salt *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
-	PakeVerifier() *foundation.NSData
-	SetPakeVerifier(pakeVerifier *foundation.NSData)
+	obj.Object
+	WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithDiscriminator(discriminator obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithIterations(iterations obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithSalt(salt obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithPakeVerifier(pakeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	CommissioningTimeout() obj.Object
+	SetCommissioningTimeout(commissioningTimeout obj.Object)
+	PakePasscodeVerifier() obj.Object
+	SetPakePasscodeVerifier(pakePasscodeVerifier obj.Object)
+	Discriminator() obj.Object
+	SetDiscriminator(discriminator obj.Object)
+	Iterations() obj.Object
+	SetIterations(iterations obj.Object)
+	Salt() obj.Object
+	SetSalt(salt obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
+	PakeVerifier() obj.Object
+	SetPakeVerifier(pakeVerifier obj.Object)
 }
 
 var _ MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable = (*MTRAdministratorCommissioningClusterOpenCommissioningWindowParams)(nil)

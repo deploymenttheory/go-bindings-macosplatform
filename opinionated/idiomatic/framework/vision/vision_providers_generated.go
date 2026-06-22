@@ -5,105 +5,125 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// DetectedObjectObservationProvider is implemented by DetectedObjectObservation and any idiomatic type wrapping a VNDetectedObjectObservation subclass.
+// DetectedObjectObservationProvider is accepted wherever a VNDetectedObjectObservation (or one of its subclasses) is expected.
 type DetectedObjectObservationProvider interface {
-	asDetectedObjectObservation() *raw.VNDetectedObjectObservation
+	objref.Object
+	isDetectedObjectObservation()
 }
 
-// DetectedPointProvider is implemented by DetectedPoint and any idiomatic type wrapping a VNDetectedPoint subclass.
+// DetectedPointProvider is accepted wherever a VNDetectedPoint (or one of its subclasses) is expected.
 type DetectedPointProvider interface {
-	asDetectedPoint() *raw.VNDetectedPoint
+	objref.Object
+	isDetectedPoint()
 }
 
-// FaceLandmarkRegionProvider is implemented by FaceLandmarkRegion and any idiomatic type wrapping a VNFaceLandmarkRegion subclass.
+// FaceLandmarkRegionProvider is accepted wherever a VNFaceLandmarkRegion (or one of its subclasses) is expected.
 type FaceLandmarkRegionProvider interface {
-	asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion
+	objref.Object
+	isFaceLandmarkRegion()
 }
 
-// FaceLandmarksProvider is implemented by FaceLandmarks and any idiomatic type wrapping a VNFaceLandmarks subclass.
+// FaceLandmarksProvider is accepted wherever a VNFaceLandmarks (or one of its subclasses) is expected.
 type FaceLandmarksProvider interface {
-	asFaceLandmarks() *raw.VNFaceLandmarks
+	objref.Object
+	isFaceLandmarks()
 }
 
-// ImageAlignmentObservationProvider is implemented by ImageAlignmentObservation and any idiomatic type wrapping a VNImageAlignmentObservation subclass.
+// ImageAlignmentObservationProvider is accepted wherever a VNImageAlignmentObservation (or one of its subclasses) is expected.
 type ImageAlignmentObservationProvider interface {
-	asImageAlignmentObservation() *raw.VNImageAlignmentObservation
+	objref.Object
+	isImageAlignmentObservation()
 }
 
-// ImageBasedRequestProvider is implemented by ImageBasedRequest and any idiomatic type wrapping a VNImageBasedRequest subclass.
+// ImageBasedRequestProvider is accepted wherever a VNImageBasedRequest (or one of its subclasses) is expected.
 type ImageBasedRequestProvider interface {
-	asImageBasedRequest() *raw.VNImageBasedRequest
+	objref.Object
+	isImageBasedRequest()
 }
 
-// ImageRegistrationRequestProvider is implemented by ImageRegistrationRequest and any idiomatic type wrapping a VNImageRegistrationRequest subclass.
+// ImageRegistrationRequestProvider is accepted wherever a VNImageRegistrationRequest (or one of its subclasses) is expected.
 type ImageRegistrationRequestProvider interface {
-	asImageRegistrationRequest() *raw.VNImageRegistrationRequest
+	objref.Object
+	isImageRegistrationRequest()
 }
 
-// ObservationProvider is implemented by Observation and any idiomatic type wrapping a VNObservation subclass.
+// ObservationProvider is accepted wherever a VNObservation (or one of its subclasses) is expected.
 type ObservationProvider interface {
-	asObservation() *raw.VNObservation
+	objref.Object
+	isObservation()
 }
 
-// PixelBufferObservationProvider is implemented by PixelBufferObservation and any idiomatic type wrapping a VNPixelBufferObservation subclass.
+// PixelBufferObservationProvider is accepted wherever a VNPixelBufferObservation (or one of its subclasses) is expected.
 type PixelBufferObservationProvider interface {
-	asPixelBufferObservation() *raw.VNPixelBufferObservation
+	objref.Object
+	isPixelBufferObservation()
 }
 
-// PointProvider is implemented by Point and any idiomatic type wrapping a VNPoint subclass.
+// PointProvider is accepted wherever a VNPoint (or one of its subclasses) is expected.
 type PointProvider interface {
-	asPoint() *raw.VNPoint
+	objref.Object
+	isPoint()
 }
 
-// Point3DProvider is implemented by Point3D and any idiomatic type wrapping a VNPoint3D subclass.
+// Point3DProvider is accepted wherever a VNPoint3D (or one of its subclasses) is expected.
 type Point3DProvider interface {
-	asPoint3D() *raw.VNPoint3D
+	objref.Object
+	isPoint3D()
 }
 
-// RecognizedPoint3DProvider is implemented by RecognizedPoint3D and any idiomatic type wrapping a VNRecognizedPoint3D subclass.
+// RecognizedPoint3DProvider is accepted wherever a VNRecognizedPoint3D (or one of its subclasses) is expected.
 type RecognizedPoint3DProvider interface {
-	asRecognizedPoint3D() *raw.VNRecognizedPoint3D
+	objref.Object
+	isRecognizedPoint3D()
 }
 
-// RecognizedPoints3DObservationProvider is implemented by RecognizedPoints3DObservation and any idiomatic type wrapping a VNRecognizedPoints3DObservation subclass.
+// RecognizedPoints3DObservationProvider is accepted wherever a VNRecognizedPoints3DObservation (or one of its subclasses) is expected.
 type RecognizedPoints3DObservationProvider interface {
-	asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation
+	objref.Object
+	isRecognizedPoints3DObservation()
 }
 
-// RecognizedPointsObservationProvider is implemented by RecognizedPointsObservation and any idiomatic type wrapping a VNRecognizedPointsObservation subclass.
+// RecognizedPointsObservationProvider is accepted wherever a VNRecognizedPointsObservation (or one of its subclasses) is expected.
 type RecognizedPointsObservationProvider interface {
-	asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation
+	objref.Object
+	isRecognizedPointsObservation()
 }
 
-// RectangleObservationProvider is implemented by RectangleObservation and any idiomatic type wrapping a VNRectangleObservation subclass.
+// RectangleObservationProvider is accepted wherever a VNRectangleObservation (or one of its subclasses) is expected.
 type RectangleObservationProvider interface {
-	asRectangleObservation() *raw.VNRectangleObservation
+	objref.Object
+	isRectangleObservation()
 }
 
-// RequestProvider is implemented by Request and any idiomatic type wrapping a VNRequest subclass.
+// RequestProvider is accepted wherever a VNRequest (or one of its subclasses) is expected.
 type RequestProvider interface {
-	asRequest() *raw.VNRequest
+	objref.Object
+	isRequest()
 }
 
-// StatefulRequestProvider is implemented by StatefulRequest and any idiomatic type wrapping a VNStatefulRequest subclass.
+// StatefulRequestProvider is accepted wherever a VNStatefulRequest (or one of its subclasses) is expected.
 type StatefulRequestProvider interface {
-	asStatefulRequest() *raw.VNStatefulRequest
+	objref.Object
+	isStatefulRequest()
 }
 
-// TargetedImageRequestProvider is implemented by TargetedImageRequest and any idiomatic type wrapping a VNTargetedImageRequest subclass.
+// TargetedImageRequestProvider is accepted wherever a VNTargetedImageRequest (or one of its subclasses) is expected.
 type TargetedImageRequestProvider interface {
-	asTargetedImageRequest() *raw.VNTargetedImageRequest
+	objref.Object
+	isTargetedImageRequest()
 }
 
-// TrackingRequestProvider is implemented by TrackingRequest and any idiomatic type wrapping a VNTrackingRequest subclass.
+// TrackingRequestProvider is accepted wherever a VNTrackingRequest (or one of its subclasses) is expected.
 type TrackingRequestProvider interface {
-	asTrackingRequest() *raw.VNTrackingRequest
+	objref.Object
+	isTrackingRequest()
 }
 
-// VideoProcessorCadenceProvider is implemented by VideoProcessorCadence and any idiomatic type wrapping a VNVideoProcessorCadence subclass.
+// VideoProcessorCadenceProvider is accepted wherever a VNVideoProcessorCadence (or one of its subclasses) is expected.
 type VideoProcessorCadenceProvider interface {
-	asVideoProcessorCadence() *raw.VNVideoProcessorCadence
+	objref.Object
+	isVideoProcessorCadence()
 }

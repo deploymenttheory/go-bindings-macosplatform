@@ -5,115 +5,98 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that connects each input to each output within its layer.
+// FullyConnectedLayer is an idiomatic wrapper over the Objective-C class MLCFullyConnectedLayer.
 //
-// FullyConnectedLayer wraps [raw.MLCFullyConnectedLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that connects each input to each output within its layer.
 type FullyConnectedLayer struct {
-	inner *raw.MLCFullyConnectedLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCFullyConnectedLayer].
-func (x *FullyConnectedLayer) Unwrap() *raw.MLCFullyConnectedLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FullyConnectedLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// FullyConnectedLayerFromID adopts an existing object pointer as a FullyConnectedLayer (nil for 0).
+// FullyConnectedLayerFromID adopts an existing Objective-C object as a FullyConnectedLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func FullyConnectedLayerFromID(id objc.ID) *FullyConnectedLayer {
 	if id == 0 {
 		return nil
 	}
-	return &FullyConnectedLayer{inner: raw.MLCFullyConnectedLayerFromID(id)}
+	x := &FullyConnectedLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFullyConnectedLayer creates a new [FullyConnectedLayer].
+// fullyConnectedLayerAdopt wraps an Objective-C object that this code just created as a
+// FullyConnectedLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fullyConnectedLayerAdopt(id objc.ID) *FullyConnectedLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &FullyConnectedLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFullyConnectedLayer creates a new FullyConnectedLayer.
 func NewFullyConnectedLayer() *FullyConnectedLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCFullyConnectedLayer")), objc.RegisterName("new"))
-	return &FullyConnectedLayer{inner: raw.MLCFullyConnectedLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCFullyConnectedLayer")), objc.RegisterName("new"))
+	return fullyConnectedLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *FullyConnectedLayer) WithLabel(label string) *FullyConnectedLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *FullyConnectedLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   descriptor @abstract   The convolution descriptor
-//
-// Descriptor calls the underlying Descriptor.
+// Descriptor the convolution descriptor
 func (x *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// @property   weights @abstract   The weights tensor used by the convolution layer
-//
-// Weights calls the underlying Weights.
+// Weights the weights tensor used by the convolution layer
 func (x *FullyConnectedLayer) Weights() *Tensor {
-	_r := x.inner.Weights()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+	return TensorFromID(_r)
 }
 
-// @property   biases @abstract   The bias tensor used by the convolution layer
-//
-// Biases calls the underlying Biases.
+// Biases the bias tensor used by the convolution layer
 func (x *FullyConnectedLayer) Biases() *Tensor {
-	_r := x.inner.Biases()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
+	return TensorFromID(_r)
 }
 
-// @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
-//
-// WeightsParameter calls the underlying WeightsParameter.
+// WeightsParameter the weights tensor parameter used for optimizer update
 func (x *FullyConnectedLayer) WeightsParameter() *TensorParameter {
-	_r := x.inner.WeightsParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   biasesParameter @abstract   The bias tensor parameter used for optimizer update
-//
-// BiasesParameter calls the underlying BiasesParameter.
+// BiasesParameter the bias tensor parameter used for optimizer update
 func (x *FullyConnectedLayer) BiasesParameter() *TensorParameter {
-	_r := x.inner.BiasesParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameter"))
+	return TensorParameterFromID(_r)
 }
-
-func (x *FullyConnectedLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // FullyConnectedLayerable is the interface implemented by [FullyConnectedLayer], for mocking and DI.
 type FullyConnectedLayerable interface {
-	Unwrap() *raw.MLCFullyConnectedLayer
+	obj.Object
 	WithLabel(label string) *FullyConnectedLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer
 	Descriptor() *ConvolutionDescriptor
@@ -124,3 +107,5 @@ type FullyConnectedLayerable interface {
 }
 
 var _ FullyConnectedLayerable = (*FullyConnectedLayer)(nil)
+
+var _ LayerProvider = (*FullyConnectedLayer)(nil)

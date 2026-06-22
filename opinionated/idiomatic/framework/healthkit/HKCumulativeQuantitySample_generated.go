@@ -5,67 +5,70 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that represents a cumulative quantity.
+// CumulativeQuantitySample is an idiomatic wrapper over the Objective-C class HKCumulativeQuantitySample.
 //
-// CumulativeQuantitySample wraps [raw.HKCumulativeQuantitySample] with a fluent Go API.
+// CumulativeQuantitySample is an abstract base — you do not construct it directly. Construct one of [CumulativeQuantitySeriesSample] and pass it where a CumulativeQuantitySample is accepted.
+//
+// A sample that represents a cumulative quantity.
 type CumulativeQuantitySample struct {
-	inner *raw.HKCumulativeQuantitySample
+	QuantitySample
 }
 
-// Unwrap returns the underlying [raw.HKCumulativeQuantitySample].
-func (x *CumulativeQuantitySample) Unwrap() *raw.HKCumulativeQuantitySample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CumulativeQuantitySample) ID() objc.ID { return x.inner.Ptr() }
-
-// CumulativeQuantitySampleFromID adopts an existing object pointer as a CumulativeQuantitySample (nil for 0).
+// CumulativeQuantitySampleFromID adopts an existing Objective-C object as a CumulativeQuantitySample
+// (nil for 0), retaining it and registering a release finalizer.
 func CumulativeQuantitySampleFromID(id objc.ID) *CumulativeQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	return &CumulativeQuantitySample{inner: raw.HKCumulativeQuantitySampleFromID(id)}
+	x := &CumulativeQuantitySample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCumulativeQuantitySample creates a new [CumulativeQuantitySample].
-func NewCumulativeQuantitySample() *CumulativeQuantitySample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCumulativeQuantitySample")), objc.RegisterName("new"))
-	return &CumulativeQuantitySample{inner: raw.HKCumulativeQuantitySampleFromID(_id)}
-}
-
-// SumQuantity calls the underlying SumQuantity.
-func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
-	_r := x.inner.SumQuantity()
-	if _r == nil {
+// cumulativeQuantitySampleAdopt wraps an Objective-C object that this code just created as a
+// CumulativeQuantitySample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cumulativeQuantitySampleAdopt(id objc.ID) *CumulativeQuantitySample {
+	if id == 0 {
 		return nil
 	}
-	return &Quantity{inner: _r}
+	x := &CumulativeQuantitySample{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *CumulativeQuantitySample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample {
-	return x.inner
-}
-
-func (x *CumulativeQuantitySample) asQuantitySample() *raw.HKQuantitySample {
-	return &x.inner.HKQuantitySample
-}
-
-func (x *CumulativeQuantitySample) asSample() *raw.HKSample {
-	return &x.inner.HKQuantitySample.HKSample
-}
-
-func (x *CumulativeQuantitySample) asObject() *raw.HKObject {
-	return &x.inner.HKQuantitySample.HKSample.HKObject
+// SumQuantity wraps the corresponding Objective-C method.
+func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sumQuantity"))
+	return QuantityFromID(_r)
 }
 
 // CumulativeQuantitySampleable is the interface implemented by [CumulativeQuantitySample], for mocking and DI.
 type CumulativeQuantitySampleable interface {
-	Unwrap() *raw.HKCumulativeQuantitySample
+	obj.Object
 	SumQuantity() *Quantity
 }
 
 var _ CumulativeQuantitySampleable = (*CumulativeQuantitySample)(nil)
+
+// isCumulativeQuantitySample marks CumulativeQuantitySample — and, by embedding promotion, its
+// subclasses — as a member of the CumulativeQuantitySample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CumulativeQuantitySample) isCumulativeQuantitySample() {}
+
+var _ CumulativeQuantitySampleProvider = (*CumulativeQuantitySample)(nil)
+
+var _ QuantitySampleProvider = (*CumulativeQuantitySample)(nil)
+
+var _ SampleProvider = (*CumulativeQuantitySample)(nil)
+
+var _ ObjectProvider = (*CumulativeQuantitySample)(nil)

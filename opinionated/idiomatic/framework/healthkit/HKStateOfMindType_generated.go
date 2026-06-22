@@ -5,43 +5,58 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// StateOfMindType wraps [raw.HKStateOfMindType] with a fluent Go API.
+// StateOfMindType is an idiomatic wrapper over the Objective-C class HKStateOfMindType.
+//
+// It embeds [SampleType], promoting that type's methods.
 type StateOfMindType struct {
-	inner *raw.HKStateOfMindType
+	SampleType
 }
 
-// Unwrap returns the underlying [raw.HKStateOfMindType].
-func (x *StateOfMindType) Unwrap() *raw.HKStateOfMindType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StateOfMindType) ID() objc.ID { return x.inner.Ptr() }
-
-// StateOfMindTypeFromID adopts an existing object pointer as a StateOfMindType (nil for 0).
+// StateOfMindTypeFromID adopts an existing Objective-C object as a StateOfMindType
+// (nil for 0), retaining it and registering a release finalizer.
 func StateOfMindTypeFromID(id objc.ID) *StateOfMindType {
 	if id == 0 {
 		return nil
 	}
-	return &StateOfMindType{inner: raw.HKStateOfMindTypeFromID(id)}
+	x := &StateOfMindType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStateOfMindType creates a new [StateOfMindType].
+// stateOfMindTypeAdopt wraps an Objective-C object that this code just created as a
+// StateOfMindType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateOfMindTypeAdopt(id objc.ID) *StateOfMindType {
+	if id == 0 {
+		return nil
+	}
+	x := &StateOfMindType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewStateOfMindType creates a new StateOfMindType.
 func NewStateOfMindType() *StateOfMindType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStateOfMindType")), objc.RegisterName("new"))
-	return &StateOfMindType{inner: raw.HKStateOfMindTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKStateOfMindType")), objc.RegisterName("new"))
+	return stateOfMindTypeAdopt(_id)
 }
-
-func (x *StateOfMindType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *StateOfMindType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
 // StateOfMindTypeable is the interface implemented by [StateOfMindType], for mocking and DI.
 type StateOfMindTypeable interface {
-	Unwrap() *raw.HKStateOfMindType
+	obj.Object
 }
 
 var _ StateOfMindTypeable = (*StateOfMindType)(nil)
+
+var _ SampleTypeProvider = (*StateOfMindType)(nil)
+
+var _ ObjectTypeProvider = (*StateOfMindType)(nil)

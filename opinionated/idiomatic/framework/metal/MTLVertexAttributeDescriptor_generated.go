@@ -5,104 +5,136 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that determines how to store attribute data in memory and map it to the arguments of a vertex function.
+// VertexAttributeDescriptor is an idiomatic wrapper over the Objective-C class MTLVertexAttributeDescriptor.
 //
-// VertexAttributeDescriptor wraps [raw.MTLVertexAttributeDescriptor] with a fluent Go API.
+// An object that determines how to store attribute data in memory and map it to the arguments of a vertex function.
 type VertexAttributeDescriptor struct {
-	inner *raw.MTLVertexAttributeDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVertexAttributeDescriptor].
-func (x *VertexAttributeDescriptor) Unwrap() *raw.MTLVertexAttributeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexAttributeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexAttributeDescriptorFromID adopts an existing object pointer as a VertexAttributeDescriptor (nil for 0).
+// VertexAttributeDescriptorFromID adopts an existing Objective-C object as a VertexAttributeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexAttributeDescriptorFromID(id objc.ID) *VertexAttributeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VertexAttributeDescriptor{inner: raw.MTLVertexAttributeDescriptorFromID(id)}
+	x := &VertexAttributeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVertexAttributeDescriptor creates a new [VertexAttributeDescriptor].
+// vertexAttributeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VertexAttributeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexAttributeDescriptorAdopt(id objc.ID) *VertexAttributeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VertexAttributeDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VertexAttributeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexAttributeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexAttributeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttributeDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVertexAttributeDescriptor creates a new VertexAttributeDescriptor.
 func NewVertexAttributeDescriptor() *VertexAttributeDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexAttributeDescriptor")), objc.RegisterName("new"))
-	return &VertexAttributeDescriptor{inner: raw.MTLVertexAttributeDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexAttributeDescriptor")), objc.RegisterName("new"))
+	return vertexAttributeDescriptorAdopt(_id)
 }
 
-// The format of the vertex attribute.
-//
-// WithFormat sets the format property and returns the receiver for chaining.
-func (x *VertexAttributeDescriptor) WithFormat(format MTLVertexFormat) *VertexAttributeDescriptor {
-	x.inner.SetFormat(raw.MTLVertexFormat(format))
+// WithFormat the format of the vertex attribute.
+func (x *VertexAttributeDescriptor) WithFormat(format VertexFormat) *VertexAttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 	return x
 }
 
-// The location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *VertexAttributeDescriptor) WithOffset(offset uint) *VertexAttributeDescriptor {
-	x.inner.SetOffset(offset)
+// WithOffset the location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
+func (x *VertexAttributeDescriptor) WithOffset(offset int) *VertexAttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// The index in the argument table for the associated vertex buffer.
-//
-// WithBufferIndex sets the bufferIndex property and returns the receiver for chaining.
-func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex uint) *VertexAttributeDescriptor {
-	x.inner.SetBufferIndex(bufferIndex)
+// WithBufferIndex the index in the argument table for the associated vertex buffer.
+func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex int) *VertexAttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 	return x
 }
 
-// Format calls the underlying Format.
-func (x *VertexAttributeDescriptor) Format() MTLVertexFormat {
-	return MTLVertexFormat(x.inner.Format())
+// Format wraps the corresponding Objective-C method.
+func (x *VertexAttributeDescriptor) Format() VertexFormat {
+	_r := objc.Send[VertexFormat](objref.IDOf(x), objc.RegisterName("format"))
+	return _r
 }
 
-// SetFormat calls the underlying SetFormat.
-func (x *VertexAttributeDescriptor) SetFormat(format MTLVertexFormat) {
-	x.inner.SetFormat(raw.MTLVertexFormat(format))
+// SetFormat wraps the corresponding Objective-C method.
+func (x *VertexAttributeDescriptor) SetFormat(format VertexFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
-// Offset calls the underlying Offset.
-func (x *VertexAttributeDescriptor) Offset() uint {
-	return x.inner.Offset()
+// Offset wraps the corresponding Objective-C method.
+func (x *VertexAttributeDescriptor) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
-// SetOffset calls the underlying SetOffset.
-func (x *VertexAttributeDescriptor) SetOffset(offset uint) {
-	x.inner.SetOffset(offset)
+// SetOffset wraps the corresponding Objective-C method.
+func (x *VertexAttributeDescriptor) SetOffset(offset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
-// BufferIndex calls the underlying BufferIndex.
-func (x *VertexAttributeDescriptor) BufferIndex() uint {
-	return x.inner.BufferIndex()
+// BufferIndex wraps the corresponding Objective-C method.
+func (x *VertexAttributeDescriptor) BufferIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
+	return _r
 }
 
-// SetBufferIndex calls the underlying SetBufferIndex.
-func (x *VertexAttributeDescriptor) SetBufferIndex(bufferIndex uint) {
-	x.inner.SetBufferIndex(bufferIndex)
+// SetBufferIndex wraps the corresponding Objective-C method.
+func (x *VertexAttributeDescriptor) SetBufferIndex(bufferIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 }
 
 // VertexAttributeDescriptorable is the interface implemented by [VertexAttributeDescriptor], for mocking and DI.
 type VertexAttributeDescriptorable interface {
-	Unwrap() *raw.MTLVertexAttributeDescriptor
-	WithFormat(format MTLVertexFormat) *VertexAttributeDescriptor
-	WithOffset(offset uint) *VertexAttributeDescriptor
-	WithBufferIndex(bufferIndex uint) *VertexAttributeDescriptor
-	Format() MTLVertexFormat
-	SetFormat(format MTLVertexFormat)
-	Offset() uint
-	SetOffset(offset uint)
-	BufferIndex() uint
-	SetBufferIndex(bufferIndex uint)
+	obj.Object
+	WithFormat(format VertexFormat) *VertexAttributeDescriptor
+	WithOffset(offset int) *VertexAttributeDescriptor
+	WithBufferIndex(bufferIndex int) *VertexAttributeDescriptor
+	Format() VertexFormat
+	SetFormat(format VertexFormat)
+	Offset() int
+	SetOffset(offset int)
+	BufferIndex() int
+	SetBufferIndex(bufferIndex int)
 }
 
 var _ VertexAttributeDescriptorable = (*VertexAttributeDescriptor)(nil)

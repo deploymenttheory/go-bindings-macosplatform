@@ -5,190 +5,182 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLLabelElement wraps [raw.DOMHTMLLabelElement] with a fluent Go API.
+// DOMHTMLLabelElement is an idiomatic wrapper over the Objective-C class DOMHTMLLabelElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLLabelElement struct {
-	inner *raw.DOMHTMLLabelElement
+	DOMHTMLElement
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLLabelElement].
-func (x *DOMHTMLLabelElement) Unwrap() *raw.DOMHTMLLabelElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLLabelElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLLabelElementFromID adopts an existing object pointer as a DOMHTMLLabelElement (nil for 0).
+// DOMHTMLLabelElementFromID adopts an existing Objective-C object as a DOMHTMLLabelElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLLabelElementFromID(id objc.ID) *DOMHTMLLabelElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLLabelElement{inner: raw.DOMHTMLLabelElementFromID(id)}
-}
-
-// NewDOMHTMLLabelElement creates a new [DOMHTMLLabelElement].
-func NewDOMHTMLLabelElement() *DOMHTMLLabelElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLLabelElement")), objc.RegisterName("new"))
-	return &DOMHTMLLabelElement{inner: raw.DOMHTMLLabelElementFromID(_id)}
-}
-
-// WithHtmlFor sets the htmlFor property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithHtmlFor(htmlFor string) *DOMHTMLLabelElement {
-	x.inner.SetHtmlFor(foundation.NSStringStringWithUTF8String(htmlFor))
+	x := &DOMHTMLLabelElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithTitle(title string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
-	return x
-}
-
-// WithLang sets the lang property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithLang(lang string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
-	return x
-}
-
-// WithDir sets the dir property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithDir(dir string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
-	return x
-}
-
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithTabIndex(tabIndex int) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
-	return x
-}
-
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithAccessKey(accessKey string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
-	return x
-}
-
-// WithInnerText sets the innerText property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithInnerText(innerText string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
-	return x
-}
-
-// WithOuterText sets the outerText property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithOuterText(outerText string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
-	return x
-}
-
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithContentEditable(contentEditable string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
-	return x
-}
-
-// WithIdName sets the idName property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithIdName(idName string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
-	return x
-}
-
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithScrollLeft(scrollLeft int) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
-	return x
-}
-
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithScrollTop(scrollTop int) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
-	return x
-}
-
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithInnerHTML(innerHTML string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
-	return x
-}
-
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithOuterHTML(outerHTML string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
-	return x
-}
-
-// WithClassName sets the className property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithClassName(className string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
-	return x
-}
-
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithNodeValue(nodeValue string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
-	return x
-}
-
-// WithPrefix sets the prefix property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithPrefix(prefix string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
-	return x
-}
-
-// WithTextContent sets the textContent property and returns the receiver for chaining.
-func (x *DOMHTMLLabelElement) WithTextContent(textContent string) *DOMHTMLLabelElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
-	return x
-}
-
-// Form calls the underlying Form.
-func (x *DOMHTMLLabelElement) Form() *DOMHTMLFormElement {
-	_r := x.inner.Form()
-	if _r == nil {
+// dOMHTMLLabelElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLLabelElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLLabelElementAdopt(id objc.ID) *DOMHTMLLabelElement {
+	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLFormElement{inner: _r}
+	x := &DOMHTMLLabelElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// HtmlFor calls the underlying HtmlFor.
+// NewDOMHTMLLabelElement creates a new DOMHTMLLabelElement.
+func NewDOMHTMLLabelElement() *DOMHTMLLabelElement {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLLabelElement")), objc.RegisterName("new"))
+	return dOMHTMLLabelElementAdopt(_id)
+}
+
+// WithHtmlFor sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithHtmlFor(htmlFor string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHtmlFor:"), purego.NSString(htmlFor))
+	return x
+}
+
+// WithTitle sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithTitle(title string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+// WithLang sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithLang(lang string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return x
+}
+
+// WithDir sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithDir(dir string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return x
+}
+
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithTabIndex(tabIndex int) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
+	return x
+}
+
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithAccessKey(accessKey string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return x
+}
+
+// WithInnerText sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithInnerText(innerText string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return x
+}
+
+// WithOuterText sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithOuterText(outerText string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return x
+}
+
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithContentEditable(contentEditable string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return x
+}
+
+// WithIdName sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithIdName(idName string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return x
+}
+
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithScrollLeft(scrollLeft int) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithScrollTop(scrollTop int) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithInnerHTML(innerHTML string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithOuterHTML(outerHTML string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return x
+}
+
+// WithClassName sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithClassName(className string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return x
+}
+
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithNodeValue(nodeValue string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return x
+}
+
+// WithPrefix sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithPrefix(prefix string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return x
+}
+
+// WithTextContent sets the property and returns the receiver so calls can be chained.
+func (x *DOMHTMLLabelElement) WithTextContent(textContent string) *DOMHTMLLabelElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return x
+}
+
+// Form wraps the corresponding Objective-C method.
+func (x *DOMHTMLLabelElement) Form() *DOMHTMLFormElement {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("form"))
+	return DOMHTMLFormElementFromID(_r)
+}
+
+// HtmlFor wraps the corresponding Objective-C method.
 func (x *DOMHTMLLabelElement) HtmlFor() string {
-	_r := x.inner.HtmlFor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("htmlFor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHtmlFor calls the underlying SetHtmlFor.
+// SetHtmlFor wraps the corresponding Objective-C method.
 func (x *DOMHTMLLabelElement) SetHtmlFor(htmlFor string) {
-	x.inner.SetHtmlFor(foundation.NSStringStringWithUTF8String(htmlFor))
-}
-
-func (x *DOMHTMLLabelElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLLabelElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLLabelElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLLabelElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLLabelElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHtmlFor:"), purego.NSString(htmlFor))
 }
 
 // DOMHTMLLabelElementable is the interface implemented by [DOMHTMLLabelElement], for mocking and DI.
 type DOMHTMLLabelElementable interface {
-	Unwrap() *raw.DOMHTMLLabelElement
+	obj.Object
 	WithHtmlFor(htmlFor string) *DOMHTMLLabelElement
 	WithTitle(title string) *DOMHTMLLabelElement
 	WithLang(lang string) *DOMHTMLLabelElement
@@ -213,3 +205,13 @@ type DOMHTMLLabelElementable interface {
 }
 
 var _ DOMHTMLLabelElementable = (*DOMHTMLLabelElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLLabelElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLLabelElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLLabelElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLLabelElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLLabelElement)(nil)

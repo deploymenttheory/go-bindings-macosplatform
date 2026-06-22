@@ -5,68 +5,99 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that detects available media playback routes.
+// RouteDetector is an idiomatic wrapper over the Objective-C class AVRouteDetector.
 //
-// RouteDetector wraps [raw.AVRouteDetector] with a fluent Go API.
+// An object that detects available media playback routes.
 type RouteDetector struct {
-	inner *raw.AVRouteDetector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVRouteDetector].
-func (x *RouteDetector) Unwrap() *raw.AVRouteDetector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RouteDetector) ID() objc.ID { return x.inner.Ptr() }
-
-// RouteDetectorFromID adopts an existing object pointer as a RouteDetector (nil for 0).
+// RouteDetectorFromID adopts an existing Objective-C object as a RouteDetector
+// (nil for 0), retaining it and registering a release finalizer.
 func RouteDetectorFromID(id objc.ID) *RouteDetector {
 	if id == 0 {
 		return nil
 	}
-	return &RouteDetector{inner: raw.AVRouteDetectorFromID(id)}
-}
-
-// NewRouteDetector creates a new [RouteDetector].
-func NewRouteDetector() *RouteDetector {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVRouteDetector")), objc.RegisterName("new"))
-	return &RouteDetector{inner: raw.AVRouteDetectorFromID(_id)}
-}
-
-// A Boolean value that indicates whether route detection is in an enabled state.
-//
-// WithRouteDetectionEnabled sets the routeDetectionEnabled property and returns the receiver for chaining.
-func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {
-	x.inner.SetRouteDetectionEnabled(routeDetectionEnabled)
+	x := &RouteDetector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property	routeDetectionEnabled @abstract	Whether or not route detection is enabled. The default value is NO. @discussion Route detection significantly increases power consumption and must be turned off when it's no longer needed.
-//
-// IsRouteDetectionEnabled calls the underlying IsRouteDetectionEnabled.
+// routeDetectorAdopt wraps an Objective-C object that this code just created as a
+// RouteDetector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func routeDetectorAdopt(id objc.ID) *RouteDetector {
+	if id == 0 {
+		return nil
+	}
+	x := &RouteDetector{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RouteDetector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RouteDetector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RouteDetector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RouteDetector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRouteDetector creates a new RouteDetector.
+func NewRouteDetector() *RouteDetector {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVRouteDetector")), objc.RegisterName("new"))
+	return routeDetectorAdopt(_id)
+}
+
+// WithRouteDetectionEnabled a Boolean value that indicates whether route detection is in an enabled state.
+func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
+	return x
+}
+
+// IsRouteDetectionEnabled whether or not route detection is enabled. The default value is NO. Route detection significantly increases power consumption and must be turned off when it's no longer needed.
 func (x *RouteDetector) IsRouteDetectionEnabled() bool {
-	return x.inner.IsRouteDetectionEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRouteDetectionEnabled"))
+	return _r
 }
 
-// SetRouteDetectionEnabled calls the underlying SetRouteDetectionEnabled.
+// SetRouteDetectionEnabled wraps the corresponding Objective-C method.
 func (x *RouteDetector) SetRouteDetectionEnabled(routeDetectionEnabled bool) {
-	x.inner.SetRouteDetectionEnabled(routeDetectionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouteDetectionEnabled:"), routeDetectionEnabled)
 }
 
-// @property	multipleRoutesDetected @abstract	This property is YES if, in addition to the local playback route, at least one more playback route has been detected. @discussion If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
-//
-// MultipleRoutesDetected calls the underlying MultipleRoutesDetected.
+// MultipleRoutesDetected this property is YES if, in addition to the local playback route, at least one more playback route has been detected. If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
 func (x *RouteDetector) MultipleRoutesDetected() bool {
-	return x.inner.MultipleRoutesDetected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multipleRoutesDetected"))
+	return _r
 }
 
 // RouteDetectorable is the interface implemented by [RouteDetector], for mocking and DI.
 type RouteDetectorable interface {
-	Unwrap() *raw.AVRouteDetector
+	obj.Object
 	WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector
 	IsRouteDetectionEnabled() bool
 	SetRouteDetectionEnabled(routeDetectionEnabled bool)

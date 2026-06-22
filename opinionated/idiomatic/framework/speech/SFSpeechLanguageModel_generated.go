@@ -5,41 +5,76 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A language model built from custom training data.
+// SpeechLanguageModel is an idiomatic wrapper over the Objective-C class SFSpeechLanguageModel.
 //
-// SpeechLanguageModel wraps [raw.SFSpeechLanguageModel] with a fluent Go API.
+// A language model built from custom training data.
 type SpeechLanguageModel struct {
-	inner *raw.SFSpeechLanguageModel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSpeechLanguageModel].
-func (x *SpeechLanguageModel) Unwrap() *raw.SFSpeechLanguageModel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechLanguageModel) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechLanguageModelFromID adopts an existing object pointer as a SpeechLanguageModel (nil for 0).
+// SpeechLanguageModelFromID adopts an existing Objective-C object as a SpeechLanguageModel
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechLanguageModelFromID(id objc.ID) *SpeechLanguageModel {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechLanguageModel{inner: raw.SFSpeechLanguageModelFromID(id)}
+	x := &SpeechLanguageModel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechLanguageModel creates a new [SpeechLanguageModel].
+// speechLanguageModelAdopt wraps an Objective-C object that this code just created as a
+// SpeechLanguageModel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechLanguageModelAdopt(id objc.ID) *SpeechLanguageModel {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechLanguageModel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechLanguageModel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechLanguageModel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechLanguageModel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechLanguageModel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechLanguageModel creates a new SpeechLanguageModel.
 func NewSpeechLanguageModel() *SpeechLanguageModel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModel")), objc.RegisterName("new"))
-	return &SpeechLanguageModel{inner: raw.SFSpeechLanguageModelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModel")), objc.RegisterName("new"))
+	return speechLanguageModelAdopt(_id)
 }
 
 // SpeechLanguageModelable is the interface implemented by [SpeechLanguageModel], for mocking and DI.
 type SpeechLanguageModelable interface {
-	Unwrap() *raw.SFSpeechLanguageModel
+	obj.Object
 }
 
 var _ SpeechLanguageModelable = (*SpeechLanguageModel)(nil)

@@ -5,76 +5,108 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of metadata items associated with a timeline segment.
+// MetadataGroup is an idiomatic wrapper over the Objective-C class AVMetadataGroup.
 //
-// MetadataGroup wraps [raw.AVMetadataGroup] with a fluent Go API.
+// MetadataGroup is an abstract base — you do not construct it directly. Construct one of [DateRangeMetadataGroup], [TimedMetadataGroup] and pass it where a MetadataGroup is accepted.
+//
+// A collection of metadata items associated with a timeline segment.
 type MetadataGroup struct {
-	inner *raw.AVMetadataGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataGroup].
-func (x *MetadataGroup) Unwrap() *raw.AVMetadataGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataGroupFromID adopts an existing object pointer as a MetadataGroup (nil for 0).
+// MetadataGroupFromID adopts an existing Objective-C object as a MetadataGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataGroupFromID(id objc.ID) *MetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataGroup{inner: raw.AVMetadataGroupFromID(id)}
+	x := &MetadataGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataGroup creates a new [MetadataGroup].
-func NewMetadataGroup() *MetadataGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataGroup")), objc.RegisterName("new"))
-	return &MetadataGroup{inner: raw.AVMetadataGroupFromID(_id)}
-}
-
-// Items returns the collection as a Go slice.
-func (x *MetadataGroup) Items() []*MetadataItem {
-	arr := x.inner.Items()
-	if arr == nil {
+// metadataGroupAdopt wraps an Objective-C object that this code just created as a
+// MetadataGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataGroupAdopt(id objc.ID) *MetadataGroup {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	x := &MetadataGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ClassifyingLabel calls the underlying ClassifyingLabel.
+// Description returns the object's -description text.
+func (x *MetadataGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Items wraps the corresponding Objective-C method.
+//
+// Items returns the collection as a Go slice.
+func (x *MetadataGroup) Items() []*MetadataItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
+}
+
+// ClassifyingLabel wraps the corresponding Objective-C method.
 func (x *MetadataGroup) ClassifyingLabel() string {
-	_r := x.inner.ClassifyingLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classifyingLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// UniqueID calls the underlying UniqueID.
+// UniqueID wraps the corresponding Objective-C method.
 func (x *MetadataGroup) UniqueID() string {
-	_r := x.inner.UniqueID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return x.inner }
 
 // MetadataGroupable is the interface implemented by [MetadataGroup], for mocking and DI.
 type MetadataGroupable interface {
-	Unwrap() *raw.AVMetadataGroup
+	obj.Object
 	Items() []*MetadataItem
 	ClassifyingLabel() string
 	UniqueID() string
 }
 
 var _ MetadataGroupable = (*MetadataGroup)(nil)
+
+// isMetadataGroup marks MetadataGroup — and, by embedding promotion, its
+// subclasses — as a member of the MetadataGroup hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetadataGroup) isMetadataGroup() {}
+
+var _ MetadataGroupProvider = (*MetadataGroup)(nil)

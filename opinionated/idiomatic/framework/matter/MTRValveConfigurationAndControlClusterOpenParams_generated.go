@@ -5,126 +5,154 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRValveConfigurationAndControlClusterOpenParams wraps [raw.MTRValveConfigurationAndControlClusterOpenParams] with a fluent Go API.
+// MTRValveConfigurationAndControlClusterOpenParams is an idiomatic wrapper over the Objective-C class MTRValveConfigurationAndControlClusterOpenParams.
 type MTRValveConfigurationAndControlClusterOpenParams struct {
-	inner *raw.MTRValveConfigurationAndControlClusterOpenParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRValveConfigurationAndControlClusterOpenParams].
-func (x *MTRValveConfigurationAndControlClusterOpenParams) Unwrap() *raw.MTRValveConfigurationAndControlClusterOpenParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRValveConfigurationAndControlClusterOpenParamsFromID adopts an existing object pointer as a MTRValveConfigurationAndControlClusterOpenParams (nil for 0).
+// MTRValveConfigurationAndControlClusterOpenParamsFromID adopts an existing Objective-C object as a MTRValveConfigurationAndControlClusterOpenParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRValveConfigurationAndControlClusterOpenParamsFromID(id objc.ID) *MTRValveConfigurationAndControlClusterOpenParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRValveConfigurationAndControlClusterOpenParams{inner: raw.MTRValveConfigurationAndControlClusterOpenParamsFromID(id)}
+	x := &MTRValveConfigurationAndControlClusterOpenParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRValveConfigurationAndControlClusterOpenParams creates a new [MTRValveConfigurationAndControlClusterOpenParams].
+// mTRValveConfigurationAndControlClusterOpenParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRValveConfigurationAndControlClusterOpenParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRValveConfigurationAndControlClusterOpenParamsAdopt(id objc.ID) *MTRValveConfigurationAndControlClusterOpenParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRValveConfigurationAndControlClusterOpenParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRValveConfigurationAndControlClusterOpenParams creates a new MTRValveConfigurationAndControlClusterOpenParams.
 func NewMTRValveConfigurationAndControlClusterOpenParams() *MTRValveConfigurationAndControlClusterOpenParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRValveConfigurationAndControlClusterOpenParams")), objc.RegisterName("new"))
-	return &MTRValveConfigurationAndControlClusterOpenParams{inner: raw.MTRValveConfigurationAndControlClusterOpenParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRValveConfigurationAndControlClusterOpenParams")), objc.RegisterName("new"))
+	return mTRValveConfigurationAndControlClusterOpenParamsAdopt(_id)
 }
 
-// WithOpenDuration sets the openDuration property and returns the receiver for chaining.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) WithOpenDuration(openDuration *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams {
-	x.inner.SetOpenDuration(openDuration)
+// WithOpenDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) WithOpenDuration(openDuration obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenDuration:"), objref.IDOf(openDuration))
 	return x
 }
 
-// WithTargetLevel sets the targetLevel property and returns the receiver for chaining.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) WithTargetLevel(targetLevel *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams {
-	x.inner.SetTargetLevel(targetLevel)
+// WithTargetLevel sets the property and returns the receiver so calls can be chained.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) WithTargetLevel(targetLevel obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetLevel:"), objref.IDOf(targetLevel))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// OpenDuration calls the underlying OpenDuration.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) OpenDuration() *foundation.NSNumber {
-	return x.inner.OpenDuration()
+// OpenDuration wraps the corresponding Objective-C method.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) OpenDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openDuration"))
+	return obj.Wrap(_r)
 }
 
-// SetOpenDuration calls the underlying SetOpenDuration.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) SetOpenDuration(openDuration *foundation.NSNumber) {
-	x.inner.SetOpenDuration(openDuration)
+// SetOpenDuration wraps the corresponding Objective-C method.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetOpenDuration(openDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenDuration:"), objref.IDOf(openDuration))
 }
 
-// TargetLevel calls the underlying TargetLevel.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) TargetLevel() *foundation.NSNumber {
-	return x.inner.TargetLevel()
+// TargetLevel wraps the corresponding Objective-C method.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) TargetLevel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetLevel"))
+	return obj.Wrap(_r)
 }
 
-// SetTargetLevel calls the underlying SetTargetLevel.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) SetTargetLevel(targetLevel *foundation.NSNumber) {
-	x.inner.SetTargetLevel(targetLevel)
+// SetTargetLevel wraps the corresponding Objective-C method.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetTargetLevel(targetLevel obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetLevel:"), objref.IDOf(targetLevel))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRValveConfigurationAndControlClusterOpenParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRValveConfigurationAndControlClusterOpenParamsable is the interface implemented by [MTRValveConfigurationAndControlClusterOpenParams], for mocking and DI.
 type MTRValveConfigurationAndControlClusterOpenParamsable interface {
-	Unwrap() *raw.MTRValveConfigurationAndControlClusterOpenParams
-	WithOpenDuration(openDuration *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
-	WithTargetLevel(targetLevel *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
-	OpenDuration() *foundation.NSNumber
-	SetOpenDuration(openDuration *foundation.NSNumber)
-	TargetLevel() *foundation.NSNumber
-	SetTargetLevel(targetLevel *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithOpenDuration(openDuration obj.Object) *MTRValveConfigurationAndControlClusterOpenParams
+	WithTargetLevel(targetLevel obj.Object) *MTRValveConfigurationAndControlClusterOpenParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRValveConfigurationAndControlClusterOpenParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRValveConfigurationAndControlClusterOpenParams
+	OpenDuration() obj.Object
+	SetOpenDuration(openDuration obj.Object)
+	TargetLevel() obj.Object
+	SetTargetLevel(targetLevel obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRValveConfigurationAndControlClusterOpenParamsable = (*MTRValveConfigurationAndControlClusterOpenParams)(nil)

@@ -5,46 +5,81 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CompositionPickerPanel wraps [raw.QCCompositionPickerPanel] with a fluent Go API.
+// CompositionPickerPanel is an idiomatic wrapper over the Objective-C class QCCompositionPickerPanel.
 type CompositionPickerPanel struct {
-	inner *raw.QCCompositionPickerPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionPickerPanel].
-func (x *CompositionPickerPanel) Unwrap() *raw.QCCompositionPickerPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositionPickerPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionPickerPanelFromID adopts an existing object pointer as a CompositionPickerPanel (nil for 0).
+// CompositionPickerPanelFromID adopts an existing Objective-C object as a CompositionPickerPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionPickerPanelFromID(id objc.ID) *CompositionPickerPanel {
 	if id == 0 {
 		return nil
 	}
-	return &CompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(id)}
+	x := &CompositionPickerPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCompositionPickerPanel creates a new [CompositionPickerPanel].
+// compositionPickerPanelAdopt wraps an Objective-C object that this code just created as a
+// CompositionPickerPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionPickerPanelAdopt(id objc.ID) *CompositionPickerPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositionPickerPanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompositionPickerPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositionPickerPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositionPickerPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionPickerPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCompositionPickerPanel creates a new CompositionPickerPanel.
 func NewCompositionPickerPanel() *CompositionPickerPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionPickerPanel")), objc.RegisterName("new"))
-	return &CompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("new"))
+	return compositionPickerPanelAdopt(_id)
 }
 
-// CompositionPickerView calls the underlying CompositionPickerView.
-func (x *CompositionPickerPanel) CompositionPickerView() *quartz.QCCompositionPickerView {
-	return x.inner.CompositionPickerView()
+// CompositionPickerView wraps the corresponding Objective-C method.
+func (x *CompositionPickerPanel) CompositionPickerView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionPickerView"))
+	return obj.Wrap(_r)
 }
 
 // CompositionPickerPanelable is the interface implemented by [CompositionPickerPanel], for mocking and DI.
 type CompositionPickerPanelable interface {
-	Unwrap() *raw.QCCompositionPickerPanel
-	CompositionPickerView() *quartz.QCCompositionPickerView
+	obj.Object
+	CompositionPickerView() obj.Object
 }
 
 var _ CompositionPickerPanelable = (*CompositionPickerPanel)(nil)

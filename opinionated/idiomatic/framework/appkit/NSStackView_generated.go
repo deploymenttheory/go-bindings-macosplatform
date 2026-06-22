@@ -5,743 +5,588 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A view that arranges an array of views horizontally or vertically and updates their placement and sizing when the window size changes.
+// StackView is an idiomatic wrapper over the Objective-C class NSStackView.
 //
-// StackView wraps [raw.NSStackView] with a fluent Go API.
+// It embeds [View], promoting that type's methods.
+//
+// A view that arranges an array of views horizontally or vertically and updates their placement and sizing when the window size changes.
 type StackView struct {
-	inner *raw.NSStackView
+	View
 }
 
-// Unwrap returns the underlying [raw.NSStackView].
-func (x *StackView) Unwrap() *raw.NSStackView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StackView) ID() objc.ID { return x.inner.Ptr() }
-
-// StackViewFromID adopts an existing object pointer as a StackView (nil for 0).
+// StackViewFromID adopts an existing Objective-C object as a StackView
+// (nil for 0), retaining it and registering a release finalizer.
 func StackViewFromID(id objc.ID) *StackView {
 	if id == 0 {
 		return nil
 	}
-	return &StackView{inner: raw.NSStackViewFromID(id)}
+	x := &StackView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStackView creates a new [StackView].
+// stackViewAdopt wraps an Objective-C object that this code just created as a
+// StackView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stackViewAdopt(id objc.ID) *StackView {
+	if id == 0 {
+		return nil
+	}
+	x := &StackView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewStackView creates a new StackView.
 func NewStackView() *StackView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStackView")), objc.RegisterName("new"))
-	return &StackView{inner: raw.NSStackViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStackView")), objc.RegisterName("new"))
+	return stackViewAdopt(_id)
 }
 
-// The delegate object for the stack view.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *StackView) WithDelegate(delegate raw.NSStackViewDelegate) *StackView {
-	x.inner.SetDelegate(delegate)
+// WithOrientation the horizontal or vertical layout direction of the stack view.
+func (x *StackView) WithOrientation(orientation UserInterfaceLayoutOrientation) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
 	return x
 }
 
-// The horizontal or vertical layout direction of the stack view.
-//
-// WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *StackView) WithOrientation(orientation NSUserInterfaceLayoutOrientation) *StackView {
-	x.inner.SetOrientation(raw.NSUserInterfaceLayoutOrientation(orientation))
+// WithAlignment the view alignment within the stack view.
+func (x *StackView) WithAlignment(alignment LayoutAttribute) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The view alignment within the stack view.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *StackView) WithAlignment(alignment NSLayoutAttribute) *StackView {
-	x.inner.SetAlignment(raw.NSLayoutAttribute(alignment))
-	return x
-}
-
-// The geometric padding, in points, inside the stack view, surrounding its views.
-//
-// WithEdgeInsets sets the edgeInsets property and returns the receiver for chaining.
+// WithEdgeInsets the geometric padding, in points, inside the stack view, surrounding its views.
 func (x *StackView) WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackView {
-	x.inner.SetEdgeInsets(edgeInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeInsets:"), edgeInsets)
 	return x
 }
 
-// The spacing and sizing distribution of stacked views along the primary axis.
-//
-// WithDistribution sets the distribution property and returns the receiver for chaining.
-func (x *StackView) WithDistribution(distribution NSStackViewDistribution) *StackView {
-	x.inner.SetDistribution(raw.NSStackViewDistribution(distribution))
+// WithDistribution the spacing and sizing distribution of stacked views along the primary axis.
+func (x *StackView) WithDistribution(distribution StackViewDistribution) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistribution:"), distribution)
 	return x
 }
 
-// The minimum spacing, in points, between adjacent views in the stack view.
-//
-// WithSpacing sets the spacing property and returns the receiver for chaining.
+// WithSpacing the minimum spacing, in points, between adjacent views in the stack view.
 func (x *StackView) WithSpacing(spacing float64) *StackView {
-	x.inner.SetSpacing(spacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpacing:"), spacing)
 	return x
 }
 
-// A Boolean value that indicates whether the stack view removes hidden views from its view hierarchy.
-//
-// WithDetachesHiddenViews sets the detachesHiddenViews property and returns the receiver for chaining.
+// WithDetachesHiddenViews a Boolean value that indicates whether the stack view removes hidden views from its view hierarchy.
 func (x *StackView) WithDetachesHiddenViews(detachesHiddenViews bool) *StackView {
-	x.inner.SetDetachesHiddenViews(detachesHiddenViews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetachesHiddenViews:"), detachesHiddenViews)
 	return x
 }
 
-// A Boolean value that indicates whether the spacing between adjacent views should be equal to each other.
-//
-// WithHasEqualSpacing sets the hasEqualSpacing property and returns the receiver for chaining.
+// WithHasEqualSpacing a Boolean value that indicates whether the spacing between adjacent views should be equal to each other.
 func (x *StackView) WithHasEqualSpacing(hasEqualSpacing bool) *StackView {
-	x.inner.SetHasEqualSpacing(hasEqualSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasEqualSpacing:"), hasEqualSpacing)
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithSubviews(items ...ViewProvider) *StackView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithHidden(hidden bool) *StackView {
-	x.inner.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithAutoresizesSubviews(autoresizesSubviews bool) *StackView {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *StackView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StackView {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (x *StackView) WithFrame(frame corefoundation.CGRect) *StackView {
-	x.inner.NSView.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithFrameRotation(frameRotation float64) *StackView {
-	x.inner.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithFrameCenterRotation(frameCenterRotation float64) *StackView {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithBoundsRotation(boundsRotation float64) *StackView {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (x *StackView) WithBounds(bounds corefoundation.CGRect) *StackView {
-	x.inner.NSView.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithCanDrawConcurrently(canDrawConcurrently bool) *StackView {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *StackView) WithNeedsDisplay(needsDisplay bool) *StackView {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithWantsRestingTouches(wantsRestingTouches bool) *StackView {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StackView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *StackView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StackView {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithWantsLayer(wantsLayer bool) *StackView {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *StackView) WithLayer(layer *quartzcore.CALayer) *StackView {
-	x.inner.NSView.SetLayer(layer)
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithLayer(layer obj.Object) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithNeedsLayout(needsLayout bool) *StackView {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithAlphaValue(alphaValue float64) *StackView {
-	x.inner.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StackView {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *StackView) WithBackgroundFilters(items ...*coreimage.CIFilter) *StackView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithBackgroundFilters(items ...obj.Object) *StackView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *StackView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StackView {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithCompositingFilter(compositingFilter obj.Object) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *StackView) WithContentFilters(items ...*coreimage.CIFilter) *StackView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithContentFilters(items ...obj.Object) *StackView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithShadow(shadow *Shadow) *StackView {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithClipsToBounds(clipsToBounds bool) *StackView {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithToolTip(toolTip string) *StackView {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StackView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return x
 }
 
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithNextKeyView(nextKeyView ViewProvider) *StackView {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *StackView) WithFocusRingType(focusRingType NSFocusRingType) *StackView {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithFocusRingType(focusRingType FocusRingType) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *StackView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StackView {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *StackView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *StackView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StackView {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StackView {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StackView {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StackView {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StackView {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *StackView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StackView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *StackView) WithNextResponder(nextResponder ResponderProvider) *StackView {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *StackView) WithMenu(menu *Menu) *StackView {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *StackView) WithUserActivity(userActivity *foundation.NSUserActivity) *StackView {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *StackView) WithUserActivity(userActivity obj.Object) *StackView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *StackView) WithTouchBar(touchBar *TouchBar) *StackView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Specifies the custom spacing, in points, between a specified view and the view that follows it in the stack view.
-//
-// SetCustomSpacingAfterView calls the underlying SetCustomSpacingAfterView.
-func (x *StackView) SetCustomSpacingAfterView(spacing float64, view *raw.NSView) {
-	x.inner.SetCustomSpacingAfterView(spacing, view)
+// SetCustomSpacingAfterView specifies the custom spacing, in points, between a specified view and the view that follows it in the stack view.
+func (x *StackView) SetCustomSpacingAfterView(spacing float64, view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomSpacing:afterView:"), spacing, objref.IDOf(view))
 }
 
-// Returns the custom spacing, in points, between a specified view in the stack view and the view that follows it.
-//
-// CustomSpacingAfterView calls the underlying CustomSpacingAfterView.
-func (x *StackView) CustomSpacingAfterView(view *raw.NSView) float64 {
-	return x.inner.CustomSpacingAfterView(view)
+// CustomSpacingAfterView returns the custom spacing, in points, between a specified view in the stack view and the view that follows it.
+func (x *StackView) CustomSpacingAfterView(view *View) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("customSpacingAfterView:"), objref.IDOf(view))
+	return _r
 }
 
-// Adds the specified view to the end of the arranged subviews list.
-//
-// AddArrangedSubview calls the underlying AddArrangedSubview.
-func (x *StackView) AddArrangedSubview(view *raw.NSView) {
-	x.inner.AddArrangedSubview(view)
+// AddArrangedSubview adds the specified view to the end of the arranged subviews list.
+func (x *StackView) AddArrangedSubview(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
 }
 
-// Adds the provided view to the array of arranged subviews at the specified index.
-//
-// InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
-func (x *StackView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
-	x.inner.InsertArrangedSubviewAtIndex(view, index)
+// InsertArrangedSubviewAtIndex adds the provided view to the array of arranged subviews at the specified index.
+func (x *StackView) InsertArrangedSubviewAtIndex(view *View, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
 }
 
-// Removes the provided view from the stack’s array of arranged subviews.
-//
-// RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
-func (x *StackView) RemoveArrangedSubview(view *raw.NSView) {
-	x.inner.RemoveArrangedSubview(view)
+// RemoveArrangedSubview removes the provided view from the stack’s array of arranged subviews.
+func (x *StackView) RemoveArrangedSubview(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
 }
 
-// Sets the Auto Layout priority for a view to remain attached to the stack view when Auto Layout reduces the stack view’s size.
-//
-// SetVisibilityPriorityForView calls the underlying SetVisibilityPriorityForView.
-func (x *StackView) SetVisibilityPriorityForView(priority float32, view *raw.NSView) {
-	x.inner.SetVisibilityPriorityForView(priority, view)
+// SetVisibilityPriorityForView sets the Auto Layout priority for a view to remain attached to the stack view when Auto Layout reduces the stack view’s size.
+func (x *StackView) SetVisibilityPriorityForView(priority float32, view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:forView:"), priority, objref.IDOf(view))
 }
 
-// Returns the visibility priority for a specified view in the stack view.
-//
-// VisibilityPriorityForView calls the underlying VisibilityPriorityForView.
-func (x *StackView) VisibilityPriorityForView(view *raw.NSView) float32 {
-	return x.inner.VisibilityPriorityForView(view)
+// VisibilityPriorityForView returns the visibility priority for a specified view in the stack view.
+func (x *StackView) VisibilityPriorityForView(view *View) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("visibilityPriorityForView:"), objref.IDOf(view))
+	return _r
 }
 
-// Returns the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
-//
-// ClippingResistancePriorityForOrientation calls the underlying ClippingResistancePriorityForOrientation.
-func (x *StackView) ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
-	return x.inner.ClippingResistancePriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
+// ClippingResistancePriorityForOrientation returns the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
+func (x *StackView) ClippingResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("clippingResistancePriorityForOrientation:"), orientation)
+	return _r
 }
 
-// Sets the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
-//
-// SetClippingResistancePriorityForOrientation calls the underlying SetClippingResistancePriorityForOrientation.
-func (x *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation) {
-	x.inner.SetClippingResistancePriorityForOrientation(clippingResistancePriority, raw.NSLayoutConstraintOrientation(orientation))
+// SetClippingResistancePriorityForOrientation sets the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
+func (x *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation LayoutConstraintOrientation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClippingResistancePriority:forOrientation:"), clippingResistancePriority, orientation)
 }
 
-// Returns the Auto Layout priority for the stack view to minimize its size to fit its contained views as closely as possible, for a specified user interface axis.
-//
-// HuggingPriorityForOrientation calls the underlying HuggingPriorityForOrientation.
-func (x *StackView) HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
-	return x.inner.HuggingPriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
+// HuggingPriorityForOrientation returns the Auto Layout priority for the stack view to minimize its size to fit its contained views as closely as possible, for a specified user interface axis.
+func (x *StackView) HuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("huggingPriorityForOrientation:"), orientation)
+	return _r
 }
 
-// Sets the Auto Layout priority for the stack view to minimize its size, for a specified user interface axis.
-//
-// SetHuggingPriorityForOrientation calls the underlying SetHuggingPriorityForOrientation.
-func (x *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation) {
-	x.inner.SetHuggingPriorityForOrientation(huggingPriority, raw.NSLayoutConstraintOrientation(orientation))
+// SetHuggingPriorityForOrientation sets the Auto Layout priority for the stack view to minimize its size, for a specified user interface axis.
+func (x *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation LayoutConstraintOrientation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHuggingPriority:forOrientation:"), huggingPriority, orientation)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *StackView) Delegate() raw.NSStackViewDelegate {
-	return x.inner.Delegate()
+// Orientation orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
+func (x *StackView) Orientation() UserInterfaceLayoutOrientation {
+	_r := objc.Send[UserInterfaceLayoutOrientation](objref.IDOf(x), objc.RegisterName("orientation"))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *StackView) SetDelegate(delegate raw.NSStackViewDelegate) {
-	x.inner.SetDelegate(delegate)
+// SetOrientation orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
+func (x *StackView) SetOrientation(orientation UserInterfaceLayoutOrientation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
 }
 
-// Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
-//
-// Orientation calls the underlying Orientation.
-func (x *StackView) Orientation() NSUserInterfaceLayoutOrientation {
-	return NSUserInterfaceLayoutOrientation(x.inner.Orientation())
+// Alignment describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
+func (x *StackView) Alignment() LayoutAttribute {
+	_r := objc.Send[LayoutAttribute](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
-// Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
-//
-// SetOrientation calls the underlying SetOrientation.
-func (x *StackView) SetOrientation(orientation NSUserInterfaceLayoutOrientation) {
-	x.inner.SetOrientation(raw.NSUserInterfaceLayoutOrientation(orientation))
+// SetAlignment describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
+func (x *StackView) SetAlignment(alignment LayoutAttribute) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 }
 
-// Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
-//
-// Alignment calls the underlying Alignment.
-func (x *StackView) Alignment() NSLayoutAttribute {
-	return NSLayoutAttribute(x.inner.Alignment())
-}
-
-// Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
-//
-// SetAlignment calls the underlying SetAlignment.
-func (x *StackView) SetAlignment(alignment NSLayoutAttribute) {
-	x.inner.SetAlignment(raw.NSLayoutAttribute(alignment))
-}
-
-// Default padding inside the StackView, around all of the subviews.
-//
-// EdgeInsets calls the underlying EdgeInsets.
+// EdgeInsets default padding inside the StackView, around all of the subviews.
 func (x *StackView) EdgeInsets() foundation.NSEdgeInsets {
-	return x.inner.EdgeInsets()
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("edgeInsets"))
+	return _r
 }
 
-// Default padding inside the StackView, around all of the subviews.
-//
-// SetEdgeInsets calls the underlying SetEdgeInsets.
+// SetEdgeInsets default padding inside the StackView, around all of the subviews.
 func (x *StackView) SetEdgeInsets(edgeInsets foundation.NSEdgeInsets) {
-	x.inner.SetEdgeInsets(edgeInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeInsets:"), edgeInsets)
 }
 
-// The spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
-//
-// Distribution calls the underlying Distribution.
-func (x *StackView) Distribution() NSStackViewDistribution {
-	return NSStackViewDistribution(x.inner.Distribution())
+// Distribution the spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
+func (x *StackView) Distribution() StackViewDistribution {
+	_r := objc.Send[StackViewDistribution](objref.IDOf(x), objc.RegisterName("distribution"))
+	return _r
 }
 
-// The spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
-//
-// SetDistribution calls the underlying SetDistribution.
-func (x *StackView) SetDistribution(distribution NSStackViewDistribution) {
-	x.inner.SetDistribution(raw.NSStackViewDistribution(distribution))
+// SetDistribution the spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
+func (x *StackView) SetDistribution(distribution StackViewDistribution) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistribution:"), distribution)
 }
 
-// Default (minimum) spacing between each view
-//
-// Spacing calls the underlying Spacing.
+// Spacing default (minimum) spacing between each view
 func (x *StackView) Spacing() float64 {
-	return x.inner.Spacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spacing"))
+	return _r
 }
 
-// Default (minimum) spacing between each view
-//
-// SetSpacing calls the underlying SetSpacing.
+// SetSpacing default (minimum) spacing between each view
 func (x *StackView) SetSpacing(spacing float64) {
-	x.inner.SetSpacing(spacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpacing:"), spacing)
 }
 
-// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
-//
-// DetachesHiddenViews calls the underlying DetachesHiddenViews.
+// DetachesHiddenViews if YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
 func (x *StackView) DetachesHiddenViews() bool {
-	return x.inner.DetachesHiddenViews()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detachesHiddenViews"))
+	return _r
 }
 
-// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
-//
-// SetDetachesHiddenViews calls the underlying SetDetachesHiddenViews.
+// SetDetachesHiddenViews if YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
 func (x *StackView) SetDetachesHiddenViews(detachesHiddenViews bool) {
-	x.inner.SetDetachesHiddenViews(detachesHiddenViews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetachesHiddenViews:"), detachesHiddenViews)
 }
 
-// The list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
+// ArrangedSubviews the list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
 //
 // ArrangedSubviews returns the collection as a Go slice.
 func (x *StackView) ArrangedSubviews() []*View {
-	arr := x.inner.ArrangedSubviews()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
-		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedSubviews"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// The arrangedSubviews that are currently detached/hidden.
+// DetachedViews the arrangedSubviews that are currently detached/hidden.
 //
 // DetachedViews returns the collection as a Go slice.
 func (x *StackView) DetachedViews() []*View {
-	arr := x.inner.DetachedViews()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
-		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detachedViews"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// Adds a view to the end of the stack view gravity area.
+// AddViewInGravity adds a view to the end of the stack view gravity area.
+func (x *StackView) AddViewInGravity(view *View, gravity StackViewGravity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addView:inGravity:"), objref.IDOf(view), gravity)
+}
+
+// InsertViewAtIndexInGravity adds a view to a stack view gravity area at a specified index position.
+func (x *StackView) InsertViewAtIndexInGravity(view *View, index int, gravity StackViewGravity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertView:atIndex:inGravity:"), objref.IDOf(view), index, gravity)
+}
+
+// RemoveView removes a specified view from the stack view.
+func (x *StackView) RemoveView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeView:"), objref.IDOf(view))
+}
+
+// ViewsInGravity returns the array of views in the specified gravity area in the stack view.
+func (x *StackView) ViewsInGravity(gravity StackViewGravity) []*View {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewsInGravity:"), gravity)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *View { return ViewFromID(_id) })
+}
+
+// SetViewsInGravity specifies an array of views for a specified gravity area in the stack view, replacing any previous views in that area.
+func (x *StackView) SetViewsInGravity(views []*View, gravity StackViewGravity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViews:inGravity:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }), gravity)
+}
+
+// Views wraps the corresponding Objective-C method.
 //
-// AddViewInGravity calls the underlying AddViewInGravity.
-func (x *StackView) AddViewInGravity(view *raw.NSView, gravity NSStackViewGravity) {
-	x.inner.AddViewInGravity(view, raw.NSStackViewGravity(gravity))
-}
-
-// Adds a view to a stack view gravity area at a specified index position.
-//
-// InsertViewAtIndexInGravity calls the underlying InsertViewAtIndexInGravity.
-func (x *StackView) InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity NSStackViewGravity) {
-	x.inner.InsertViewAtIndexInGravity(view, index, raw.NSStackViewGravity(gravity))
-}
-
-// Removes a specified view from the stack view.
-//
-// RemoveView calls the underlying RemoveView.
-func (x *StackView) RemoveView(view *raw.NSView) {
-	x.inner.RemoveView(view)
-}
-
-// Returns the array of views in the specified gravity area in the stack view.
-//
-// ViewsInGravity calls the underlying ViewsInGravity.
-func (x *StackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*raw.NSView] {
-	return x.inner.ViewsInGravity(raw.NSStackViewGravity(gravity))
-}
-
-// Specifies an array of views for a specified gravity area in the stack view, replacing any previous views in that area.
-//
-// SetViewsInGravity calls the underlying SetViewsInGravity.
-func (x *StackView) SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity NSStackViewGravity) {
-	x.inner.SetViewsInGravity(views, raw.NSStackViewGravity(gravity))
-}
-
 // Views returns the collection as a Go slice.
 func (x *StackView) Views() []*View {
-	arr := x.inner.Views()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
-		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("views"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// HasEqualSpacing calls the underlying HasEqualSpacing.
+// HasEqualSpacing wraps the corresponding Objective-C method.
 func (x *StackView) HasEqualSpacing() bool {
-	return x.inner.HasEqualSpacing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasEqualSpacing"))
+	return _r
 }
 
-// SetHasEqualSpacing calls the underlying SetHasEqualSpacing.
+// SetHasEqualSpacing wraps the corresponding Objective-C method.
 func (x *StackView) SetHasEqualSpacing(hasEqualSpacing bool) {
-	x.inner.SetHasEqualSpacing(hasEqualSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasEqualSpacing:"), hasEqualSpacing)
 }
-
-func (x *StackView) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *StackView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // StackViewable is the interface implemented by [StackView], for mocking and DI.
 type StackViewable interface {
-	Unwrap() *raw.NSStackView
-	WithDelegate(delegate raw.NSStackViewDelegate) *StackView
-	WithOrientation(orientation NSUserInterfaceLayoutOrientation) *StackView
-	WithAlignment(alignment NSLayoutAttribute) *StackView
+	obj.Object
+	WithOrientation(orientation UserInterfaceLayoutOrientation) *StackView
+	WithAlignment(alignment LayoutAttribute) *StackView
 	WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackView
-	WithDistribution(distribution NSStackViewDistribution) *StackView
+	WithDistribution(distribution StackViewDistribution) *StackView
 	WithSpacing(spacing float64) *StackView
 	WithDetachesHiddenViews(detachesHiddenViews bool) *StackView
 	WithHasEqualSpacing(hasEqualSpacing bool) *StackView
@@ -749,7 +594,7 @@ type StackViewable interface {
 	WithHidden(hidden bool) *StackView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *StackView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StackView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *StackView
 	WithFrame(frame corefoundation.CGRect) *StackView
 	WithFrameRotation(frameRotation float64) *StackView
 	WithFrameCenterRotation(frameCenterRotation float64) *StackView
@@ -759,27 +604,27 @@ type StackViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *StackView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView
 	WithWantsRestingTouches(wantsRestingTouches bool) *StackView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StackView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StackView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *StackView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *StackView
 	WithWantsLayer(wantsLayer bool) *StackView
-	WithLayer(layer *quartzcore.CALayer) *StackView
+	WithLayer(layer obj.Object) *StackView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView
 	WithNeedsLayout(needsLayout bool) *StackView
 	WithAlphaValue(alphaValue float64) *StackView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StackView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *StackView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StackView
-	WithContentFilters(items ...*coreimage.CIFilter) *StackView
+	WithBackgroundFilters(items ...obj.Object) *StackView
+	WithCompositingFilter(compositingFilter obj.Object) *StackView
+	WithContentFilters(items ...obj.Object) *StackView
 	WithShadow(shadow *Shadow) *StackView
 	WithClipsToBounds(clipsToBounds bool) *StackView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView
 	WithToolTip(toolTip string) *StackView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StackView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StackView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView
 	WithNextKeyView(nextKeyView ViewProvider) *StackView
-	WithFocusRingType(focusRingType NSFocusRingType) *StackView
+	WithFocusRingType(focusRingType FocusRingType) *StackView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StackView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StackView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView
@@ -792,43 +637,45 @@ type StackViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StackView
 	WithNextResponder(nextResponder ResponderProvider) *StackView
 	WithMenu(menu *Menu) *StackView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *StackView
+	WithUserActivity(userActivity obj.Object) *StackView
 	WithTouchBar(touchBar *TouchBar) *StackView
-	SetCustomSpacingAfterView(spacing float64, view *raw.NSView)
-	CustomSpacingAfterView(view *raw.NSView) float64
-	AddArrangedSubview(view *raw.NSView)
-	InsertArrangedSubviewAtIndex(view *raw.NSView, index int)
-	RemoveArrangedSubview(view *raw.NSView)
-	SetVisibilityPriorityForView(priority float32, view *raw.NSView)
-	VisibilityPriorityForView(view *raw.NSView) float32
-	ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32
-	SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation)
-	HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32
-	SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation)
-	Delegate() raw.NSStackViewDelegate
-	SetDelegate(delegate raw.NSStackViewDelegate)
-	Orientation() NSUserInterfaceLayoutOrientation
-	SetOrientation(orientation NSUserInterfaceLayoutOrientation)
-	Alignment() NSLayoutAttribute
-	SetAlignment(alignment NSLayoutAttribute)
+	SetCustomSpacingAfterView(spacing float64, view *View)
+	CustomSpacingAfterView(view *View) float64
+	AddArrangedSubview(view *View)
+	InsertArrangedSubviewAtIndex(view *View, index int)
+	RemoveArrangedSubview(view *View)
+	SetVisibilityPriorityForView(priority float32, view *View)
+	VisibilityPriorityForView(view *View) float32
+	ClippingResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32
+	SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation LayoutConstraintOrientation)
+	HuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32
+	SetHuggingPriorityForOrientation(huggingPriority float32, orientation LayoutConstraintOrientation)
+	Orientation() UserInterfaceLayoutOrientation
+	SetOrientation(orientation UserInterfaceLayoutOrientation)
+	Alignment() LayoutAttribute
+	SetAlignment(alignment LayoutAttribute)
 	EdgeInsets() foundation.NSEdgeInsets
 	SetEdgeInsets(edgeInsets foundation.NSEdgeInsets)
-	Distribution() NSStackViewDistribution
-	SetDistribution(distribution NSStackViewDistribution)
+	Distribution() StackViewDistribution
+	SetDistribution(distribution StackViewDistribution)
 	Spacing() float64
 	SetSpacing(spacing float64)
 	DetachesHiddenViews() bool
 	SetDetachesHiddenViews(detachesHiddenViews bool)
 	ArrangedSubviews() []*View
 	DetachedViews() []*View
-	AddViewInGravity(view *raw.NSView, gravity NSStackViewGravity)
-	InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity NSStackViewGravity)
-	RemoveView(view *raw.NSView)
-	ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*raw.NSView]
-	SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity NSStackViewGravity)
+	AddViewInGravity(view *View, gravity StackViewGravity)
+	InsertViewAtIndexInGravity(view *View, index int, gravity StackViewGravity)
+	RemoveView(view *View)
+	ViewsInGravity(gravity StackViewGravity) []*View
+	SetViewsInGravity(views []*View, gravity StackViewGravity)
 	Views() []*View
 	HasEqualSpacing() bool
 	SetHasEqualSpacing(hasEqualSpacing bool)
 }
 
 var _ StackViewable = (*StackView)(nil)
+
+var _ ViewProvider = (*StackView)(nil)
+
+var _ ResponderProvider = (*StackView)(nil)

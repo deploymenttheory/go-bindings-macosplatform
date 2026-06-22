@@ -5,30 +5,83 @@
 package commonpanels
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// FCAddCollection wraps [raw.FCAddCollection], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FCAddCollection(iCollection objc.ID, iCollectionOptions uint) error {
-	if _err := purego.NewOSStatus(raw.FCAddCollection(purego.CFRef(iCollection), iCollectionOptions)).Err(); _err != nil {
+var _fnFCAddCollection func(objc.ID, int) int32
+
+// FCAddCollection reports an error if the CommonPanels framework function FCAddCollection fails.
+func FCAddCollection(iCollection obj.Object, iCollectionOptions int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCAddCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnFCAddCollection, _lib, "FCAddCollection")
+	}
+	_rc := _fnFCAddCollection(objref.IDOf(iCollection), iCollectionOptions)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FCRemoveCollection wraps [raw.FCRemoveCollection], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FCRemoveCollection(iCollection objc.ID) error {
-	if _err := purego.NewOSStatus(raw.FCRemoveCollection(purego.CFRef(iCollection))).Err(); _err != nil {
+var _fnFCAddFontDescriptorToCollection func(objc.ID, objc.ID) int32
+
+// FCAddFontDescriptorToCollection reports an error if the CommonPanels framework function FCAddFontDescriptorToCollection fails.
+func FCAddFontDescriptorToCollection(iDescriptor obj.Object, iCollection obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCAddFontDescriptorToCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnFCAddFontDescriptorToCollection, _lib, "FCAddFontDescriptorToCollection")
+	}
+	_rc := _fnFCAddFontDescriptorToCollection(objref.IDOf(iDescriptor), objref.IDOf(iCollection))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FPShowHideFontPanel wraps [raw.FPShowHideFontPanel], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnFCRemoveCollection func(objc.ID) int32
+
+// FCRemoveCollection reports an error if the CommonPanels framework function FCRemoveCollection fails.
+func FCRemoveCollection(iCollection obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCRemoveCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnFCRemoveCollection, _lib, "FCRemoveCollection")
+	}
+	_rc := _fnFCRemoveCollection(objref.IDOf(iCollection))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFCRemoveFontDescriptorFromCollection func(objc.ID, objc.ID) int32
+
+// FCRemoveFontDescriptorFromCollection reports an error if the CommonPanels framework function FCRemoveFontDescriptorFromCollection fails.
+func FCRemoveFontDescriptorFromCollection(iDescriptor obj.Object, iCollection obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCRemoveFontDescriptorFromCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnFCRemoveFontDescriptorFromCollection, _lib, "FCRemoveFontDescriptorFromCollection")
+	}
+	_rc := _fnFCRemoveFontDescriptorFromCollection(objref.IDOf(iDescriptor), objref.IDOf(iCollection))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFPShowHideFontPanel func() int32
+
+// FPShowHideFontPanel reports an error if the CommonPanels framework function FPShowHideFontPanel fails.
 func FPShowHideFontPanel() error {
-	if _err := purego.NewOSStatus(raw.FPShowHideFontPanel()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFPShowHideFontPanel == nil {
+		ebipurego.RegisterLibFunc(&_fnFPShowHideFontPanel, _lib, "FPShowHideFontPanel")
+	}
+	_rc := _fnFPShowHideFontPanel()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

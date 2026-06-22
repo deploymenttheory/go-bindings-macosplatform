@@ -5,76 +5,86 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about network transfers.
+// NetworkTransferMetric is an idiomatic wrapper over the Objective-C class MXNetworkTransferMetric.
 //
-// NetworkTransferMetric wraps [raw.MXNetworkTransferMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about network transfers.
 type NetworkTransferMetric struct {
-	inner *raw.MXNetworkTransferMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXNetworkTransferMetric].
-func (x *NetworkTransferMetric) Unwrap() *raw.MXNetworkTransferMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetworkTransferMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkTransferMetricFromID adopts an existing object pointer as a NetworkTransferMetric (nil for 0).
+// NetworkTransferMetricFromID adopts an existing Objective-C object as a NetworkTransferMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkTransferMetricFromID(id objc.ID) *NetworkTransferMetric {
 	if id == 0 {
 		return nil
 	}
-	return &NetworkTransferMetric{inner: raw.MXNetworkTransferMetricFromID(id)}
+	x := &NetworkTransferMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNetworkTransferMetric creates a new [NetworkTransferMetric].
+// networkTransferMetricAdopt wraps an Objective-C object that this code just created as a
+// NetworkTransferMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkTransferMetricAdopt(id objc.ID) *NetworkTransferMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &NetworkTransferMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNetworkTransferMetric creates a new NetworkTransferMetric.
 func NewNetworkTransferMetric() *NetworkTransferMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXNetworkTransferMetric")), objc.RegisterName("new"))
-	return &NetworkTransferMetric{inner: raw.MXNetworkTransferMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXNetworkTransferMetric")), objc.RegisterName("new"))
+	return networkTransferMetricAdopt(_id)
 }
 
-// @property      cumulativeWifiUpload @abstract      Cumulative amount of data uploaded over WiFi. @discussion    Dimensioned as NSUnitInformationStorage.
-//
-// CumulativeWifiUpload calls the underlying CumulativeWifiUpload.
-func (x *NetworkTransferMetric) CumulativeWifiUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.CumulativeWifiUpload()
+// CumulativeWifiUpload cumulative amount of data uploaded over WiFi. Dimensioned as NSUnitInformationStorage.
+func (x *NetworkTransferMetric) CumulativeWifiUpload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeWifiUpload"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeWifiDownload @abstract      Cumulative amount of data downloaded over WiFi. @discussion    Dimensioned as NSUnitInformationStorage.
-//
-// CumulativeWifiDownload calls the underlying CumulativeWifiDownload.
-func (x *NetworkTransferMetric) CumulativeWifiDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.CumulativeWifiDownload()
+// CumulativeWifiDownload cumulative amount of data downloaded over WiFi. Dimensioned as NSUnitInformationStorage.
+func (x *NetworkTransferMetric) CumulativeWifiDownload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeWifiDownload"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeCellularUpload @abstract      Cumulative amount of data uploaded over cellular networks. @discussion    This data is radio access technology agnostic. @discussion    Dimensioned as NSUnitInformationStorage.
-//
-// CumulativeCellularUpload calls the underlying CumulativeCellularUpload.
-func (x *NetworkTransferMetric) CumulativeCellularUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.CumulativeCellularUpload()
+// CumulativeCellularUpload cumulative amount of data uploaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
+func (x *NetworkTransferMetric) CumulativeCellularUpload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCellularUpload"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeCellularDownload @abstract      Cumulative amount of data downloaded over cellular networks. @discussion    This data is radio access technology agnostic. @discussion    Dimensioned as NSUnitInformationStorage.
-//
-// CumulativeCellularDownload calls the underlying CumulativeCellularDownload.
-func (x *NetworkTransferMetric) CumulativeCellularDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.CumulativeCellularDownload()
+// CumulativeCellularDownload cumulative amount of data downloaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
+func (x *NetworkTransferMetric) CumulativeCellularDownload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCellularDownload"))
+	return obj.Wrap(_r)
 }
-
-func (x *NetworkTransferMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // NetworkTransferMetricable is the interface implemented by [NetworkTransferMetric], for mocking and DI.
 type NetworkTransferMetricable interface {
-	Unwrap() *raw.MXNetworkTransferMetric
-	CumulativeWifiUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	CumulativeWifiDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	CumulativeCellularUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	CumulativeCellularDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	obj.Object
+	CumulativeWifiUpload() obj.Object
+	CumulativeWifiDownload() obj.Object
+	CumulativeCellularUpload() obj.Object
+	CumulativeCellularDownload() obj.Object
 }
 
 var _ NetworkTransferMetricable = (*NetworkTransferMetric)(nil)
+
+var _ MetricProvider = (*NetworkTransferMetric)(nil)

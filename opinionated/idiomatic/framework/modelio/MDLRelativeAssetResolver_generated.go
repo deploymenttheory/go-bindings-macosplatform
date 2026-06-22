@@ -5,63 +5,95 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RelativeAssetResolver wraps [raw.MDLRelativeAssetResolver] with a fluent Go API.
+// RelativeAssetResolver is an idiomatic wrapper over the Objective-C class MDLRelativeAssetResolver.
 type RelativeAssetResolver struct {
-	inner *raw.MDLRelativeAssetResolver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLRelativeAssetResolver].
-func (x *RelativeAssetResolver) Unwrap() *raw.MDLRelativeAssetResolver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RelativeAssetResolver) ID() objc.ID { return x.inner.Ptr() }
-
-// RelativeAssetResolverFromID adopts an existing object pointer as a RelativeAssetResolver (nil for 0).
+// RelativeAssetResolverFromID adopts an existing Objective-C object as a RelativeAssetResolver
+// (nil for 0), retaining it and registering a release finalizer.
 func RelativeAssetResolverFromID(id objc.ID) *RelativeAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	return &RelativeAssetResolver{inner: raw.MDLRelativeAssetResolverFromID(id)}
-}
-
-// NewRelativeAssetResolverWithAsset creates a new [RelativeAssetResolver].
-func NewRelativeAssetResolverWithAsset(asset *raw.MDLAsset) *RelativeAssetResolver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLRelativeAssetResolver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), asset.Ptr())
-	return &RelativeAssetResolver{inner: raw.MDLRelativeAssetResolverFromID(_id)}
-}
-
-// WithAsset sets the asset property and returns the receiver for chaining.
-func (x *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
-	x.inner.SetAsset(asset.Unwrap())
+	x := &RelativeAssetResolver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Asset calls the underlying Asset.
-func (x *RelativeAssetResolver) Asset() *Asset {
-	_r := x.inner.Asset()
-	if _r == nil {
+// relativeAssetResolverAdopt wraps an Objective-C object that this code just created as a
+// RelativeAssetResolver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func relativeAssetResolverAdopt(id objc.ID) *RelativeAssetResolver {
+	if id == 0 {
 		return nil
 	}
-	return &Asset{inner: _r}
+	x := &RelativeAssetResolver{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetAsset calls the underlying SetAsset.
-func (x *RelativeAssetResolver) SetAsset(asset *raw.MDLAsset) {
-	x.inner.SetAsset(asset)
+// Description returns the object's -description text.
+func (x *RelativeAssetResolver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RelativeAssetResolver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RelativeAssetResolver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RelativeAssetResolver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRelativeAssetResolverWithAsset creates a new RelativeAssetResolver.
+func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLRelativeAssetResolver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), objref.IDOf(asset))
+	return relativeAssetResolverAdopt(_id)
+}
+
+// WithAsset sets the property and returns the receiver so calls can be chained.
+func (x *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsset:"), objref.IDOf(asset))
+	return x
+}
+
+// Asset wraps the corresponding Objective-C method.
+func (x *RelativeAssetResolver) Asset() *Asset {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return AssetFromID(_r)
+}
+
+// SetAsset wraps the corresponding Objective-C method.
+func (x *RelativeAssetResolver) SetAsset(asset *Asset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsset:"), objref.IDOf(asset))
 }
 
 // RelativeAssetResolverable is the interface implemented by [RelativeAssetResolver], for mocking and DI.
 type RelativeAssetResolverable interface {
-	Unwrap() *raw.MDLRelativeAssetResolver
+	obj.Object
 	WithAsset(asset *Asset) *RelativeAssetResolver
 	Asset() *Asset
-	SetAsset(asset *raw.MDLAsset)
+	SetAsset(asset *Asset)
 }
 
 var _ RelativeAssetResolverable = (*RelativeAssetResolver)(nil)

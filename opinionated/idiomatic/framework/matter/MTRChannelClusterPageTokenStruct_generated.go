@@ -5,104 +5,136 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterPageTokenStruct wraps [raw.MTRChannelClusterPageTokenStruct] with a fluent Go API.
+// MTRChannelClusterPageTokenStruct is an idiomatic wrapper over the Objective-C class MTRChannelClusterPageTokenStruct.
 type MTRChannelClusterPageTokenStruct struct {
-	inner *raw.MTRChannelClusterPageTokenStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterPageTokenStruct].
-func (x *MTRChannelClusterPageTokenStruct) Unwrap() *raw.MTRChannelClusterPageTokenStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterPageTokenStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterPageTokenStructFromID adopts an existing object pointer as a MTRChannelClusterPageTokenStruct (nil for 0).
+// MTRChannelClusterPageTokenStructFromID adopts an existing Objective-C object as a MTRChannelClusterPageTokenStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterPageTokenStructFromID(id objc.ID) *MTRChannelClusterPageTokenStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterPageTokenStruct{inner: raw.MTRChannelClusterPageTokenStructFromID(id)}
+	x := &MTRChannelClusterPageTokenStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterPageTokenStruct creates a new [MTRChannelClusterPageTokenStruct].
+// mTRChannelClusterPageTokenStructAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterPageTokenStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterPageTokenStructAdopt(id objc.ID) *MTRChannelClusterPageTokenStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterPageTokenStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterPageTokenStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterPageTokenStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterPageTokenStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterPageTokenStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRChannelClusterPageTokenStruct creates a new MTRChannelClusterPageTokenStruct.
 func NewMTRChannelClusterPageTokenStruct() *MTRChannelClusterPageTokenStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterPageTokenStruct")), objc.RegisterName("new"))
-	return &MTRChannelClusterPageTokenStruct{inner: raw.MTRChannelClusterPageTokenStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterPageTokenStruct")), objc.RegisterName("new"))
+	return mTRChannelClusterPageTokenStructAdopt(_id)
 }
 
-// WithLimit sets the limit property and returns the receiver for chaining.
-func (x *MTRChannelClusterPageTokenStruct) WithLimit(limit *foundation.NSNumber) *MTRChannelClusterPageTokenStruct {
-	x.inner.SetLimit(limit)
+// WithLimit sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterPageTokenStruct) WithLimit(limit obj.Object) *MTRChannelClusterPageTokenStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimit:"), objref.IDOf(limit))
 	return x
 }
 
-// WithAfter sets the after property and returns the receiver for chaining.
+// WithAfter sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterPageTokenStruct) WithAfter(after string) *MTRChannelClusterPageTokenStruct {
-	x.inner.SetAfter(foundation.NSStringStringWithUTF8String(after))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAfter:"), purego.NSString(after))
 	return x
 }
 
-// WithBefore sets the before property and returns the receiver for chaining.
+// WithBefore sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterPageTokenStruct) WithBefore(before string) *MTRChannelClusterPageTokenStruct {
-	x.inner.SetBefore(foundation.NSStringStringWithUTF8String(before))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBefore:"), purego.NSString(before))
 	return x
 }
 
-// Limit calls the underlying Limit.
-func (x *MTRChannelClusterPageTokenStruct) Limit() *foundation.NSNumber {
-	return x.inner.Limit()
+// Limit wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterPageTokenStruct) Limit() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("limit"))
+	return obj.Wrap(_r)
 }
 
-// SetLimit calls the underlying SetLimit.
-func (x *MTRChannelClusterPageTokenStruct) SetLimit(limit *foundation.NSNumber) {
-	x.inner.SetLimit(limit)
+// SetLimit wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterPageTokenStruct) SetLimit(limit obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimit:"), objref.IDOf(limit))
 }
 
-// After calls the underlying After.
+// After wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterPageTokenStruct) After() string {
-	_r := x.inner.After()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("after"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAfter calls the underlying SetAfter.
+// SetAfter wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterPageTokenStruct) SetAfter(after string) {
-	x.inner.SetAfter(foundation.NSStringStringWithUTF8String(after))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAfter:"), purego.NSString(after))
 }
 
-// Before calls the underlying Before.
+// Before wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterPageTokenStruct) Before() string {
-	_r := x.inner.Before()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("before"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBefore calls the underlying SetBefore.
+// SetBefore wraps the corresponding Objective-C method.
 func (x *MTRChannelClusterPageTokenStruct) SetBefore(before string) {
-	x.inner.SetBefore(foundation.NSStringStringWithUTF8String(before))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBefore:"), purego.NSString(before))
 }
 
 // MTRChannelClusterPageTokenStructable is the interface implemented by [MTRChannelClusterPageTokenStruct], for mocking and DI.
 type MTRChannelClusterPageTokenStructable interface {
-	Unwrap() *raw.MTRChannelClusterPageTokenStruct
-	WithLimit(limit *foundation.NSNumber) *MTRChannelClusterPageTokenStruct
+	obj.Object
+	WithLimit(limit obj.Object) *MTRChannelClusterPageTokenStruct
 	WithAfter(after string) *MTRChannelClusterPageTokenStruct
 	WithBefore(before string) *MTRChannelClusterPageTokenStruct
-	Limit() *foundation.NSNumber
-	SetLimit(limit *foundation.NSNumber)
+	Limit() obj.Object
+	SetLimit(limit obj.Object)
 	After() string
 	SetAfter(after string)
 	Before() string

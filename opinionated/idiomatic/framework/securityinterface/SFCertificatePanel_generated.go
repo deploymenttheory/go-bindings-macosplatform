@@ -5,152 +5,140 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A panel or sheet that displays one or more certificates.
+// CertificatePanel is an idiomatic wrapper over the Objective-C class SFCertificatePanel.
 //
-// CertificatePanel wraps [raw.SFCertificatePanel] with a fluent Go API.
+// CertificatePanel is an abstract base — you do not construct it directly. Construct one of [CertificateTrustPanel] and pass it where a CertificatePanel is accepted.
+//
+// A panel or sheet that displays one or more certificates.
 type CertificatePanel struct {
-	inner *raw.SFCertificatePanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFCertificatePanel].
-func (x *CertificatePanel) Unwrap() *raw.SFCertificatePanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CertificatePanel) ID() objc.ID { return x.inner.Ptr() }
-
-// CertificatePanelFromID adopts an existing object pointer as a CertificatePanel (nil for 0).
+// CertificatePanelFromID adopts an existing Objective-C object as a CertificatePanel
+// (nil for 0), retaining it and registering a release finalizer.
 func CertificatePanelFromID(id objc.ID) *CertificatePanel {
 	if id == 0 {
 		return nil
 	}
-	return &CertificatePanel{inner: raw.SFCertificatePanelFromID(id)}
+	x := &CertificatePanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCertificatePanel creates a new [CertificatePanel].
-func NewCertificatePanel() *CertificatePanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFCertificatePanel")), objc.RegisterName("new"))
-	return &CertificatePanel{inner: raw.SFCertificatePanelFromID(_id)}
-}
-
-// Displays a certificate chain in a modal panel.
-//
-// RunModalForTrustShowGroup calls the underlying RunModalForTrustShowGroup.
-func (x *CertificatePanel) RunModalForTrustShowGroup(trust unsafe.Pointer, showGroup bool) int {
-	return x.inner.RunModalForTrustShowGroup(trust, showGroup)
-}
-
-// Displays one or more specified certificates in a modal panel.
-//
-// RunModalForCertificatesShowGroup calls the underlying RunModalForCertificatesShowGroup.
-func (x *CertificatePanel) RunModalForCertificatesShowGroup(certificates *foundation.NSArray[objc.ID], showGroup bool) int {
-	return x.inner.RunModalForCertificatesShowGroup(certificates, showGroup)
-}
-
-// Displays a certificate chain in a modal sheet.
-//
-// BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup.
-func (x *CertificatePanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, showGroup bool) {
-	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup(docWindow, delegate, didEndSelector, contextInfo, trust, showGroup)
-}
-
-// Displays one or more certificates in a modal sheet.
-//
-// BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup.
-func (x *CertificatePanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, certificates *foundation.NSArray[objc.ID], showGroup bool) {
-	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup(docWindow, delegate, didEndSelector, contextInfo, certificates, showGroup)
-}
-
-// Specifies one or more policies that apply to the displayed certificates.
-//
-// SetPolicies calls the underlying SetPolicies.
-func (x *CertificatePanel) SetPolicies(policies objc.ID) {
-	x.inner.SetPolicies(policies)
-}
-
-// Returns an array of policies used to evaluate the status of the displayed certificates.
-//
-// Policies calls the underlying Policies.
-func (x *CertificatePanel) Policies() *foundation.NSArray[objc.ID] {
-	return x.inner.Policies()
-}
-
-// Customizes the title of the default button.
-//
-// SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
-func (x *CertificatePanel) SetDefaultButtonTitle(title string) {
-	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(title))
-}
-
-// Customizes the title of the alternate button.
-//
-// SetAlternateButtonTitle calls the underlying SetAlternateButtonTitle.
-func (x *CertificatePanel) SetAlternateButtonTitle(title string) {
-	x.inner.SetAlternateButtonTitle(foundation.NSStringStringWithUTF8String(title))
-}
-
-// Displays a Help button in the sheet or panel.
-//
-// SetShowsHelp calls the underlying SetShowsHelp.
-func (x *CertificatePanel) SetShowsHelp(showsHelp bool) {
-	x.inner.SetShowsHelp(showsHelp)
-}
-
-// Indicates whether the help button is currently set to be displayed.
-//
-// ShowsHelp calls the underlying ShowsHelp.
-func (x *CertificatePanel) ShowsHelp() bool {
-	return x.inner.ShowsHelp()
-}
-
-// Sets the help anchor string for the sheet or modal panel.
-//
-// SetHelpAnchor calls the underlying SetHelpAnchor.
-func (x *CertificatePanel) SetHelpAnchor(anchor string) {
-	x.inner.SetHelpAnchor(foundation.NSStringStringWithUTF8String(anchor))
-}
-
-// Returns the current help anchor string for the sheet or panel.
-//
-// HelpAnchor calls the underlying HelpAnchor.
-func (x *CertificatePanel) HelpAnchor() string {
-	_r := x.inner.HelpAnchor()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Returns the certificate view for the modal panel.
-//
-// CertificateView calls the underlying CertificateView.
-func (x *CertificatePanel) CertificateView() *CertificateView {
-	_r := x.inner.CertificateView()
-	if _r == nil {
+// certificatePanelAdopt wraps an Objective-C object that this code just created as a
+// CertificatePanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func certificatePanelAdopt(id objc.ID) *CertificatePanel {
+	if id == 0 {
 		return nil
 	}
-	return &CertificateView{inner: _r}
+	x := &CertificatePanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *CertificatePanel) asCertificatePanel() *raw.SFCertificatePanel { return x.inner }
+// Description returns the object's -description text.
+func (x *CertificatePanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CertificatePanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CertificatePanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CertificatePanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// RunModalForTrustShowGroup displays a certificate chain in a modal panel.
+func (x *CertificatePanel) RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForTrust:showGroup:"), objref.IDOf(trust), showGroup)
+	return _r
+}
+
+// RunModalForCertificatesShowGroup displays one or more specified certificates in a modal panel.
+func (x *CertificatePanel) RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForCertificates:showGroup:"), objref.IDOf(certificates), showGroup)
+	return _r
+}
+
+// SetPolicies specifies one or more policies that apply to the displayed certificates.
+func (x *CertificatePanel) SetPolicies(policies obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
+}
+
+// Policies returns an array of policies used to evaluate the status of the displayed certificates.
+func (x *CertificatePanel) Policies() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
+	return obj.Wrap(_r)
+}
+
+// SetDefaultButtonTitle customizes the title of the default button.
+func (x *CertificatePanel) SetDefaultButtonTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+}
+
+// SetAlternateButtonTitle customizes the title of the alternate button.
+func (x *CertificatePanel) SetAlternateButtonTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
+}
+
+// SetShowsHelp displays a Help button in the sheet or panel.
+func (x *CertificatePanel) SetShowsHelp(showsHelp bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
+}
+
+// ShowsHelp indicates whether the help button is currently set to be displayed.
+func (x *CertificatePanel) ShowsHelp() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsHelp"))
+	return _r
+}
+
+// SetHelpAnchor sets the help anchor string for the sheet or modal panel.
+func (x *CertificatePanel) SetHelpAnchor(anchor string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
+}
+
+// HelpAnchor returns the current help anchor string for the sheet or panel.
+func (x *CertificatePanel) HelpAnchor() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// CertificateView returns the certificate view for the modal panel.
+func (x *CertificatePanel) CertificateView() *CertificateView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateView"))
+	return CertificateViewFromID(_r)
+}
 
 // CertificatePanelable is the interface implemented by [CertificatePanel], for mocking and DI.
 type CertificatePanelable interface {
-	Unwrap() *raw.SFCertificatePanel
-	RunModalForTrustShowGroup(trust unsafe.Pointer, showGroup bool) int
-	RunModalForCertificatesShowGroup(certificates *foundation.NSArray[objc.ID], showGroup bool) int
-	BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, showGroup bool)
-	BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, certificates *foundation.NSArray[objc.ID], showGroup bool)
-	SetPolicies(policies objc.ID)
-	Policies() *foundation.NSArray[objc.ID]
+	obj.Object
+	RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int
+	RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int
+	SetPolicies(policies obj.Object)
+	Policies() obj.Object
 	SetDefaultButtonTitle(title string)
 	SetAlternateButtonTitle(title string)
 	SetShowsHelp(showsHelp bool)
@@ -161,3 +149,10 @@ type CertificatePanelable interface {
 }
 
 var _ CertificatePanelable = (*CertificatePanel)(nil)
+
+// isCertificatePanel marks CertificatePanel — and, by embedding promotion, its
+// subclasses — as a member of the CertificatePanel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CertificatePanel) isCertificatePanel() {}
+
+var _ CertificatePanelProvider = (*CertificatePanel)(nil)

@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEClusterEVConnectedEvent wraps [raw.MTREnergyEVSEClusterEVConnectedEvent] with a fluent Go API.
+// MTREnergyEVSEClusterEVConnectedEvent is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterEVConnectedEvent.
 type MTREnergyEVSEClusterEVConnectedEvent struct {
-	inner *raw.MTREnergyEVSEClusterEVConnectedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEClusterEVConnectedEvent].
-func (x *MTREnergyEVSEClusterEVConnectedEvent) Unwrap() *raw.MTREnergyEVSEClusterEVConnectedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEClusterEVConnectedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEClusterEVConnectedEventFromID adopts an existing object pointer as a MTREnergyEVSEClusterEVConnectedEvent (nil for 0).
+// MTREnergyEVSEClusterEVConnectedEventFromID adopts an existing Objective-C object as a MTREnergyEVSEClusterEVConnectedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEClusterEVConnectedEventFromID(id objc.ID) *MTREnergyEVSEClusterEVConnectedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEClusterEVConnectedEvent{inner: raw.MTREnergyEVSEClusterEVConnectedEventFromID(id)}
-}
-
-// NewMTREnergyEVSEClusterEVConnectedEvent creates a new [MTREnergyEVSEClusterEVConnectedEvent].
-func NewMTREnergyEVSEClusterEVConnectedEvent() *MTREnergyEVSEClusterEVConnectedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEClusterEVConnectedEvent")), objc.RegisterName("new"))
-	return &MTREnergyEVSEClusterEVConnectedEvent{inner: raw.MTREnergyEVSEClusterEVConnectedEventFromID(_id)}
-}
-
-// WithSessionID sets the sessionID property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterEVConnectedEvent) WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEVConnectedEvent {
-	x.inner.SetSessionID(sessionID)
+	x := &MTREnergyEVSEClusterEVConnectedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SessionID calls the underlying SessionID.
-func (x *MTREnergyEVSEClusterEVConnectedEvent) SessionID() *foundation.NSNumber {
-	return x.inner.SessionID()
+// mTREnergyEVSEClusterEVConnectedEventAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEClusterEVConnectedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEClusterEVConnectedEventAdopt(id objc.ID) *MTREnergyEVSEClusterEVConnectedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEClusterEVConnectedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSessionID calls the underlying SetSessionID.
-func (x *MTREnergyEVSEClusterEVConnectedEvent) SetSessionID(sessionID *foundation.NSNumber) {
-	x.inner.SetSessionID(sessionID)
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEClusterEVConnectedEvent creates a new MTREnergyEVSEClusterEVConnectedEvent.
+func NewMTREnergyEVSEClusterEVConnectedEvent() *MTREnergyEVSEClusterEVConnectedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterEVConnectedEvent")), objc.RegisterName("new"))
+	return mTREnergyEVSEClusterEVConnectedEventAdopt(_id)
+}
+
+// WithSessionID sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVConnectedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
+	return x
+}
+
+// SessionID wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) SessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+	return obj.Wrap(_r)
+}
+
+// SetSessionID wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) SetSessionID(sessionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }
 
 // MTREnergyEVSEClusterEVConnectedEventable is the interface implemented by [MTREnergyEVSEClusterEVConnectedEvent], for mocking and DI.
 type MTREnergyEVSEClusterEVConnectedEventable interface {
-	Unwrap() *raw.MTREnergyEVSEClusterEVConnectedEvent
-	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEVConnectedEvent
-	SessionID() *foundation.NSNumber
-	SetSessionID(sessionID *foundation.NSNumber)
+	obj.Object
+	WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVConnectedEvent
+	SessionID() obj.Object
+	SetSessionID(sessionID obj.Object)
 }
 
 var _ MTREnergyEVSEClusterEVConnectedEventable = (*MTREnergyEVSEClusterEVConnectedEvent)(nil)

@@ -5,436 +5,392 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// AVFormatIDKey returns the string constant AVFormatIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVFormatIDKey() objc.ID {
-	return purego.CFConstant(raw.AVFormatIDKey())
-}
+// AVFormatIDKey returns the string constant AVFormatIDKey, for use as a dictionary key or argument.
+func AVFormatIDKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFormatIDKey"))) }
 
-// AVSampleRateKey returns the string constant AVSampleRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleRateKey() objc.ID {
-	return purego.CFConstant(raw.AVSampleRateKey())
-}
+// AVSampleRateKey returns the string constant AVSampleRateKey, for use as a dictionary key or argument.
+func AVSampleRateKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateKey"))) }
 
-// AVNumberOfChannelsKey returns the string constant AVNumberOfChannelsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVNumberOfChannelsKey() objc.ID {
-	return purego.CFConstant(raw.AVNumberOfChannelsKey())
+// AVNumberOfChannelsKey returns the string constant AVNumberOfChannelsKey, for use as a dictionary key or argument.
+func AVNumberOfChannelsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVNumberOfChannelsKey")))
 }
 
-// AVLinearPCMBitDepthKey returns the string constant AVLinearPCMBitDepthKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVLinearPCMBitDepthKey() objc.ID {
-	return purego.CFConstant(raw.AVLinearPCMBitDepthKey())
+// AVLinearPCMBitDepthKey returns the string constant AVLinearPCMBitDepthKey, for use as a dictionary key or argument.
+func AVLinearPCMBitDepthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLinearPCMBitDepthKey")))
 }
 
-// AVLinearPCMIsBigEndianKey returns the string constant AVLinearPCMIsBigEndianKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVLinearPCMIsBigEndianKey() objc.ID {
-	return purego.CFConstant(raw.AVLinearPCMIsBigEndianKey())
+// AVLinearPCMIsBigEndianKey returns the string constant AVLinearPCMIsBigEndianKey, for use as a dictionary key or argument.
+func AVLinearPCMIsBigEndianKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLinearPCMIsBigEndianKey")))
 }
 
-// AVLinearPCMIsFloatKey returns the string constant AVLinearPCMIsFloatKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVLinearPCMIsFloatKey() objc.ID {
-	return purego.CFConstant(raw.AVLinearPCMIsFloatKey())
+// AVLinearPCMIsFloatKey returns the string constant AVLinearPCMIsFloatKey, for use as a dictionary key or argument.
+func AVLinearPCMIsFloatKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLinearPCMIsFloatKey")))
 }
 
-// AVLinearPCMIsNonInterleaved returns the string constant AVLinearPCMIsNonInterleaved as an objc.ID, for use as a dictionary key or selector argument.
-func AVLinearPCMIsNonInterleaved() objc.ID {
-	return purego.CFConstant(raw.AVLinearPCMIsNonInterleaved())
+// AVLinearPCMIsNonInterleaved returns the string constant AVLinearPCMIsNonInterleaved, for use as a dictionary key or argument.
+func AVLinearPCMIsNonInterleaved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLinearPCMIsNonInterleaved")))
 }
 
-// AVAudioFileTypeKey returns the string constant AVAudioFileTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioFileTypeKey() objc.ID {
-	return purego.CFConstant(raw.AVAudioFileTypeKey())
+// AVAudioFileTypeKey returns the string constant AVAudioFileTypeKey, for use as a dictionary key or argument.
+func AVAudioFileTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioFileTypeKey")))
 }
 
-// AVEncoderAudioQualityKey returns the string constant AVEncoderAudioQualityKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderAudioQualityKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderAudioQualityKey())
+// AVEncoderAudioQualityKey returns the string constant AVEncoderAudioQualityKey, for use as a dictionary key or argument.
+func AVEncoderAudioQualityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderAudioQualityKey")))
 }
 
-// AVEncoderAudioQualityForVBRKey returns the string constant AVEncoderAudioQualityForVBRKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderAudioQualityForVBRKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderAudioQualityForVBRKey())
+// AVEncoderAudioQualityForVBRKey returns the string constant AVEncoderAudioQualityForVBRKey, for use as a dictionary key or argument.
+func AVEncoderAudioQualityForVBRKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderAudioQualityForVBRKey")))
 }
 
-// AVEncoderBitRateKey returns the string constant AVEncoderBitRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderBitRateKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderBitRateKey())
+// AVEncoderBitRateKey returns the string constant AVEncoderBitRateKey, for use as a dictionary key or argument.
+func AVEncoderBitRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderBitRateKey")))
 }
 
-// AVEncoderBitRatePerChannelKey returns the string constant AVEncoderBitRatePerChannelKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderBitRatePerChannelKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderBitRatePerChannelKey())
+// AVEncoderBitRatePerChannelKey returns the string constant AVEncoderBitRatePerChannelKey, for use as a dictionary key or argument.
+func AVEncoderBitRatePerChannelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderBitRatePerChannelKey")))
 }
 
-// AVEncoderBitRateStrategyKey returns the string constant AVEncoderBitRateStrategyKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderBitRateStrategyKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderBitRateStrategyKey())
+// AVEncoderBitRateStrategyKey returns the string constant AVEncoderBitRateStrategyKey, for use as a dictionary key or argument.
+func AVEncoderBitRateStrategyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderBitRateStrategyKey")))
 }
 
-// AVEncoderBitDepthHintKey returns the string constant AVEncoderBitDepthHintKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderBitDepthHintKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderBitDepthHintKey())
+// AVEncoderBitDepthHintKey returns the string constant AVEncoderBitDepthHintKey, for use as a dictionary key or argument.
+func AVEncoderBitDepthHintKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderBitDepthHintKey")))
 }
 
-// AVEncoderDynamicRangeControlConfigurationKey returns the string constant AVEncoderDynamicRangeControlConfigurationKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderDynamicRangeControlConfigurationKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderDynamicRangeControlConfigurationKey())
+// AVEncoderDynamicRangeControlConfigurationKey returns the string constant AVEncoderDynamicRangeControlConfigurationKey, for use as a dictionary key or argument.
+func AVEncoderDynamicRangeControlConfigurationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderDynamicRangeControlConfigurationKey")))
 }
 
-// AVEncoderContentSourceKey returns the string constant AVEncoderContentSourceKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderContentSourceKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderContentSourceKey())
+// AVEncoderContentSourceKey returns the string constant AVEncoderContentSourceKey, for use as a dictionary key or argument.
+func AVEncoderContentSourceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderContentSourceKey")))
 }
 
-// AVEncoderASPFrequencyKey returns the string constant AVEncoderASPFrequencyKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVEncoderASPFrequencyKey() objc.ID {
-	return purego.CFConstant(raw.AVEncoderASPFrequencyKey())
+// AVEncoderASPFrequencyKey returns the string constant AVEncoderASPFrequencyKey, for use as a dictionary key or argument.
+func AVEncoderASPFrequencyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVEncoderASPFrequencyKey")))
 }
 
-// AVSampleRateConverterAlgorithmKey returns the string constant AVSampleRateConverterAlgorithmKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleRateConverterAlgorithmKey() objc.ID {
-	return purego.CFConstant(raw.AVSampleRateConverterAlgorithmKey())
+// AVSampleRateConverterAlgorithmKey returns the string constant AVSampleRateConverterAlgorithmKey, for use as a dictionary key or argument.
+func AVSampleRateConverterAlgorithmKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateConverterAlgorithmKey")))
 }
 
-// AVSampleRateConverterAudioQualityKey returns the string constant AVSampleRateConverterAudioQualityKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleRateConverterAudioQualityKey() objc.ID {
-	return purego.CFConstant(raw.AVSampleRateConverterAudioQualityKey())
+// AVSampleRateConverterAudioQualityKey returns the string constant AVSampleRateConverterAudioQualityKey, for use as a dictionary key or argument.
+func AVSampleRateConverterAudioQualityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateConverterAudioQualityKey")))
 }
 
-// AVChannelLayoutKey returns the string constant AVChannelLayoutKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVChannelLayoutKey() objc.ID {
-	return purego.CFConstant(raw.AVChannelLayoutKey())
+// AVChannelLayoutKey returns the string constant AVChannelLayoutKey, for use as a dictionary key or argument.
+func AVChannelLayoutKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVChannelLayoutKey")))
 }
 
-// AVAudioBitRateStrategy_Constant returns the string constant AVAudioBitRateStrategy_Constant as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioBitRateStrategy_Constant() objc.ID {
-	return purego.CFConstant(raw.AVAudioBitRateStrategy_Constant())
+// AVAudioBitRateStrategy_Constant returns the string constant AVAudioBitRateStrategy_Constant, for use as a dictionary key or argument.
+func AVAudioBitRateStrategy_Constant() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioBitRateStrategy_Constant")))
 }
 
-// AVAudioBitRateStrategy_LongTermAverage returns the string constant AVAudioBitRateStrategy_LongTermAverage as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioBitRateStrategy_LongTermAverage() objc.ID {
-	return purego.CFConstant(raw.AVAudioBitRateStrategy_LongTermAverage())
+// AVAudioBitRateStrategy_LongTermAverage returns the string constant AVAudioBitRateStrategy_LongTermAverage, for use as a dictionary key or argument.
+func AVAudioBitRateStrategy_LongTermAverage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioBitRateStrategy_LongTermAverage")))
 }
 
-// AVAudioBitRateStrategy_VariableConstrained returns the string constant AVAudioBitRateStrategy_VariableConstrained as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioBitRateStrategy_VariableConstrained() objc.ID {
-	return purego.CFConstant(raw.AVAudioBitRateStrategy_VariableConstrained())
+// AVAudioBitRateStrategy_VariableConstrained returns the string constant AVAudioBitRateStrategy_VariableConstrained, for use as a dictionary key or argument.
+func AVAudioBitRateStrategy_VariableConstrained() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioBitRateStrategy_VariableConstrained")))
 }
 
-// AVAudioBitRateStrategy_Variable returns the string constant AVAudioBitRateStrategy_Variable as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioBitRateStrategy_Variable() objc.ID {
-	return purego.CFConstant(raw.AVAudioBitRateStrategy_Variable())
+// AVAudioBitRateStrategy_Variable returns the string constant AVAudioBitRateStrategy_Variable, for use as a dictionary key or argument.
+func AVAudioBitRateStrategy_Variable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioBitRateStrategy_Variable")))
 }
 
-// AVSampleRateConverterAlgorithm_Normal returns the string constant AVSampleRateConverterAlgorithm_Normal as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleRateConverterAlgorithm_Normal() objc.ID {
-	return purego.CFConstant(raw.AVSampleRateConverterAlgorithm_Normal())
+// AVSampleRateConverterAlgorithm_Normal returns the string constant AVSampleRateConverterAlgorithm_Normal, for use as a dictionary key or argument.
+func AVSampleRateConverterAlgorithm_Normal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateConverterAlgorithm_Normal")))
 }
 
-// AVSampleRateConverterAlgorithm_Mastering returns the string constant AVSampleRateConverterAlgorithm_Mastering as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleRateConverterAlgorithm_Mastering() objc.ID {
-	return purego.CFConstant(raw.AVSampleRateConverterAlgorithm_Mastering())
+// AVSampleRateConverterAlgorithm_Mastering returns the string constant AVSampleRateConverterAlgorithm_Mastering, for use as a dictionary key or argument.
+func AVSampleRateConverterAlgorithm_Mastering() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateConverterAlgorithm_Mastering")))
 }
 
-// AVSampleRateConverterAlgorithm_MinimumPhase returns the string constant AVSampleRateConverterAlgorithm_MinimumPhase as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleRateConverterAlgorithm_MinimumPhase() objc.ID {
-	return purego.CFConstant(raw.AVSampleRateConverterAlgorithm_MinimumPhase())
+// AVSampleRateConverterAlgorithm_MinimumPhase returns the string constant AVSampleRateConverterAlgorithm_MinimumPhase, for use as a dictionary key or argument.
+func AVSampleRateConverterAlgorithm_MinimumPhase() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleRateConverterAlgorithm_MinimumPhase")))
 }
 
-// @constant AVAudioEngineConfigurationChangeNotification @abstract A notification generated on engine configuration changes when rendering to/from an audio device. Register for this notification on your engine instances, as follows: ``` [[NSNotificationCenter defaultCenter] addObserver: myObject selector:    @selector(handleInterruption:) name:        AVAudioEngineConfigurationChangeNotification object:      engine]; ``` When the engine's I/O unit observes a change to the audio input or output hardware's channel count or sample rate, the engine stops itself (see `AVAudioEngine(stop)`), and issues this notification. The nodes remain attached and connected with previously set formats. However, the app must reestablish connections if the connection formats need to change (e.g. in an input node chain, connections must follow the hardware sample rate, while in an output only chain, the output node supports rate conversion). Note that the engine must not be deallocated from within the client's notification handler because the callback happens on an internal dispatch queue and can deadlock while trying to synchronously teardown the engine.
-// AVAudioEngineConfigurationChangeNotification returns the string constant AVAudioEngineConfigurationChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioEngineConfigurationChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAudioEngineConfigurationChangeNotification())
+// AVAudioEngineConfigurationChangeNotification returns the string constant AVAudioEngineConfigurationChangeNotification, for use as a dictionary key or argument.
+func AVAudioEngineConfigurationChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioEngineConfigurationChangeNotification")))
 }
 
-// Only present in begin interruption events, where the interruption is a direct result of the application being suspended by the operating sytem. Value is a boolean NSNumber, where a true value indicates that the interruption is the result of the application being suspended, rather than being interrupted by another audio session. Starting in iOS 10, the system will deactivate the audio session of most apps in response to the app process being suspended. When the app starts running again, it will receive the notification that its session has been deactivated by the system. Note that the notification is necessarily delayed in time, due to the fact that the application was suspended at the time the session was deactivated by the system and the notification can only be delivered once the app is running again.
-// AVAudioSessionInterruptionWasSuspendedKey returns the string constant AVAudioSessionInterruptionWasSuspendedKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionInterruptionWasSuspendedKey() objc.ID {
-	return purego.CFConstant(raw.AVAudioSessionInterruptionWasSuspendedKey())
+// AVAudioSessionInterruptionWasSuspendedKey returns the string constant AVAudioSessionInterruptionWasSuspendedKey, for use as a dictionary key or argument.
+func AVAudioSessionInterruptionWasSuspendedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionInterruptionWasSuspendedKey")))
 }
 
-// AVAudioSessionLocationUpper returns the string constant AVAudioSessionLocationUpper as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionLocationUpper() objc.ID {
-	if _r := raw.AVAudioSessionLocationUpper(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionLocationUpper returns the string constant AVAudioSessionLocationUpper, for use as a dictionary key or argument.
+func AVAudioSessionLocationUpper() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionLocationUpper")))
 }
 
-// AVAudioSessionLocationLower returns the string constant AVAudioSessionLocationLower as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionLocationLower() objc.ID {
-	if _r := raw.AVAudioSessionLocationLower(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionLocationLower returns the string constant AVAudioSessionLocationLower, for use as a dictionary key or argument.
+func AVAudioSessionLocationLower() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionLocationLower")))
 }
 
-// AVAudioSessionOrientationTop returns the string constant AVAudioSessionOrientationTop as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionOrientationTop() objc.ID {
-	if _r := raw.AVAudioSessionOrientationTop(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionOrientationTop returns the string constant AVAudioSessionOrientationTop, for use as a dictionary key or argument.
+func AVAudioSessionOrientationTop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionOrientationTop")))
 }
 
-// AVAudioSessionOrientationBottom returns the string constant AVAudioSessionOrientationBottom as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionOrientationBottom() objc.ID {
-	if _r := raw.AVAudioSessionOrientationBottom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionOrientationBottom returns the string constant AVAudioSessionOrientationBottom, for use as a dictionary key or argument.
+func AVAudioSessionOrientationBottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionOrientationBottom")))
 }
 
-// AVAudioSessionOrientationFront returns the string constant AVAudioSessionOrientationFront as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionOrientationFront() objc.ID {
-	if _r := raw.AVAudioSessionOrientationFront(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionOrientationFront returns the string constant AVAudioSessionOrientationFront, for use as a dictionary key or argument.
+func AVAudioSessionOrientationFront() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionOrientationFront")))
 }
 
-// AVAudioSessionOrientationBack returns the string constant AVAudioSessionOrientationBack as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionOrientationBack() objc.ID {
-	if _r := raw.AVAudioSessionOrientationBack(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionOrientationBack returns the string constant AVAudioSessionOrientationBack, for use as a dictionary key or argument.
+func AVAudioSessionOrientationBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionOrientationBack")))
 }
 
-// AVAudioSessionOrientationLeft returns the string constant AVAudioSessionOrientationLeft as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionOrientationLeft() objc.ID {
-	if _r := raw.AVAudioSessionOrientationLeft(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionOrientationLeft returns the string constant AVAudioSessionOrientationLeft, for use as a dictionary key or argument.
+func AVAudioSessionOrientationLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionOrientationLeft")))
 }
 
-// AVAudioSessionOrientationRight returns the string constant AVAudioSessionOrientationRight as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionOrientationRight() objc.ID {
-	if _r := raw.AVAudioSessionOrientationRight(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionOrientationRight returns the string constant AVAudioSessionOrientationRight, for use as a dictionary key or argument.
+func AVAudioSessionOrientationRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionOrientationRight")))
 }
 
-// AVAudioSessionPolarPatternOmnidirectional returns the string constant AVAudioSessionPolarPatternOmnidirectional as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionPolarPatternOmnidirectional() objc.ID {
-	if _r := raw.AVAudioSessionPolarPatternOmnidirectional(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionPolarPatternOmnidirectional returns the string constant AVAudioSessionPolarPatternOmnidirectional, for use as a dictionary key or argument.
+func AVAudioSessionPolarPatternOmnidirectional() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionPolarPatternOmnidirectional")))
 }
 
-// AVAudioSessionPolarPatternCardioid returns the string constant AVAudioSessionPolarPatternCardioid as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionPolarPatternCardioid() objc.ID {
-	if _r := raw.AVAudioSessionPolarPatternCardioid(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionPolarPatternCardioid returns the string constant AVAudioSessionPolarPatternCardioid, for use as a dictionary key or argument.
+func AVAudioSessionPolarPatternCardioid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionPolarPatternCardioid")))
 }
 
-// AVAudioSessionPolarPatternSubcardioid returns the string constant AVAudioSessionPolarPatternSubcardioid as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSessionPolarPatternSubcardioid() objc.ID {
-	if _r := raw.AVAudioSessionPolarPatternSubcardioid(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAudioSessionPolarPatternSubcardioid returns the string constant AVAudioSessionPolarPatternSubcardioid, for use as a dictionary key or argument.
+func AVAudioSessionPolarPatternSubcardioid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSessionPolarPatternSubcardioid")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyAlbum returns the string constant AVAudioSequencerInfoDictionaryKeyAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyAlbum() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyAlbum())
+// AVAudioSequencerInfoDictionaryKeyAlbum returns the string constant AVAudioSequencerInfoDictionaryKeyAlbum, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyAlbum")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds returns the string constant AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds())
+// AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds returns the string constant AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyApproximateDurationInSeconds")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyArtist returns the string constant AVAudioSequencerInfoDictionaryKeyArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyArtist() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyArtist())
+// AVAudioSequencerInfoDictionaryKeyArtist returns the string constant AVAudioSequencerInfoDictionaryKeyArtist, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyArtist")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyChannelLayout returns the string constant AVAudioSequencerInfoDictionaryKeyChannelLayout as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyChannelLayout() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyChannelLayout())
+// AVAudioSequencerInfoDictionaryKeyChannelLayout returns the string constant AVAudioSequencerInfoDictionaryKeyChannelLayout, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyChannelLayout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyChannelLayout")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyComments returns the string constant AVAudioSequencerInfoDictionaryKeyComments as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyComments() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyComments())
+// AVAudioSequencerInfoDictionaryKeyComments returns the string constant AVAudioSequencerInfoDictionaryKeyComments, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyComments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyComments")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyComposer returns the string constant AVAudioSequencerInfoDictionaryKeyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyComposer() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyComposer())
+// AVAudioSequencerInfoDictionaryKeyComposer returns the string constant AVAudioSequencerInfoDictionaryKeyComposer, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyComposer")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyCopyright returns the string constant AVAudioSequencerInfoDictionaryKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyCopyright() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyCopyright())
+// AVAudioSequencerInfoDictionaryKeyCopyright returns the string constant AVAudioSequencerInfoDictionaryKeyCopyright, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyCopyright")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyEncodingApplication returns the string constant AVAudioSequencerInfoDictionaryKeyEncodingApplication as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyEncodingApplication() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyEncodingApplication())
+// AVAudioSequencerInfoDictionaryKeyEncodingApplication returns the string constant AVAudioSequencerInfoDictionaryKeyEncodingApplication, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyEncodingApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyEncodingApplication")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyGenre returns the string constant AVAudioSequencerInfoDictionaryKeyGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyGenre() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyGenre())
+// AVAudioSequencerInfoDictionaryKeyGenre returns the string constant AVAudioSequencerInfoDictionaryKeyGenre, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyGenre")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyISRC returns the string constant AVAudioSequencerInfoDictionaryKeyISRC as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyISRC() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyISRC())
+// AVAudioSequencerInfoDictionaryKeyISRC returns the string constant AVAudioSequencerInfoDictionaryKeyISRC, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyISRC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyISRC")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyKeySignature returns the string constant AVAudioSequencerInfoDictionaryKeyKeySignature as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyKeySignature() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyKeySignature())
+// AVAudioSequencerInfoDictionaryKeyKeySignature returns the string constant AVAudioSequencerInfoDictionaryKeyKeySignature, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyKeySignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyKeySignature")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyLyricist returns the string constant AVAudioSequencerInfoDictionaryKeyLyricist as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyLyricist() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyLyricist())
+// AVAudioSequencerInfoDictionaryKeyLyricist returns the string constant AVAudioSequencerInfoDictionaryKeyLyricist, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyLyricist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyLyricist")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyNominalBitRate returns the string constant AVAudioSequencerInfoDictionaryKeyNominalBitRate as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyNominalBitRate() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyNominalBitRate())
+// AVAudioSequencerInfoDictionaryKeyNominalBitRate returns the string constant AVAudioSequencerInfoDictionaryKeyNominalBitRate, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyNominalBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyNominalBitRate")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyRecordedDate returns the string constant AVAudioSequencerInfoDictionaryKeyRecordedDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyRecordedDate() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyRecordedDate())
+// AVAudioSequencerInfoDictionaryKeyRecordedDate returns the string constant AVAudioSequencerInfoDictionaryKeyRecordedDate, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyRecordedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyRecordedDate")))
 }
 
-// AVAudioSequencerInfoDictionaryKeySourceBitDepth returns the string constant AVAudioSequencerInfoDictionaryKeySourceBitDepth as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeySourceBitDepth() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeySourceBitDepth())
+// AVAudioSequencerInfoDictionaryKeySourceBitDepth returns the string constant AVAudioSequencerInfoDictionaryKeySourceBitDepth, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeySourceBitDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeySourceBitDepth")))
 }
 
-// AVAudioSequencerInfoDictionaryKeySourceEncoder returns the string constant AVAudioSequencerInfoDictionaryKeySourceEncoder as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeySourceEncoder() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeySourceEncoder())
+// AVAudioSequencerInfoDictionaryKeySourceEncoder returns the string constant AVAudioSequencerInfoDictionaryKeySourceEncoder, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeySourceEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeySourceEncoder")))
 }
 
-// AVAudioSequencerInfoDictionaryKeySubTitle returns the string constant AVAudioSequencerInfoDictionaryKeySubTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeySubTitle() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeySubTitle())
+// AVAudioSequencerInfoDictionaryKeySubTitle returns the string constant AVAudioSequencerInfoDictionaryKeySubTitle, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeySubTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeySubTitle")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyTempo returns the string constant AVAudioSequencerInfoDictionaryKeyTempo as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyTempo() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyTempo())
+// AVAudioSequencerInfoDictionaryKeyTempo returns the string constant AVAudioSequencerInfoDictionaryKeyTempo, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyTempo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyTempo")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyTimeSignature returns the string constant AVAudioSequencerInfoDictionaryKeyTimeSignature as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyTimeSignature() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyTimeSignature())
+// AVAudioSequencerInfoDictionaryKeyTimeSignature returns the string constant AVAudioSequencerInfoDictionaryKeyTimeSignature, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyTimeSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyTimeSignature")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyTitle returns the string constant AVAudioSequencerInfoDictionaryKeyTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyTitle() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyTitle())
+// AVAudioSequencerInfoDictionaryKeyTitle returns the string constant AVAudioSequencerInfoDictionaryKeyTitle, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyTitle")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyTrackNumber returns the string constant AVAudioSequencerInfoDictionaryKeyTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyTrackNumber() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyTrackNumber())
+// AVAudioSequencerInfoDictionaryKeyTrackNumber returns the string constant AVAudioSequencerInfoDictionaryKeyTrackNumber, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyTrackNumber")))
 }
 
-// AVAudioSequencerInfoDictionaryKeyYear returns the string constant AVAudioSequencerInfoDictionaryKeyYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioSequencerInfoDictionaryKeyYear() objc.ID {
-	return purego.CFConstant(raw.AVAudioSequencerInfoDictionaryKeyYear())
+// AVAudioSequencerInfoDictionaryKeyYear returns the string constant AVAudioSequencerInfoDictionaryKeyYear, for use as a dictionary key or argument.
+func AVAudioSequencerInfoDictionaryKeyYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioSequencerInfoDictionaryKeyYear")))
 }
 
-// AVAudioUnitTypeOutput returns the string constant AVAudioUnitTypeOutput as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeOutput() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeOutput())
+// AVAudioUnitTypeOutput returns the string constant AVAudioUnitTypeOutput, for use as a dictionary key or argument.
+func AVAudioUnitTypeOutput() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeOutput")))
 }
 
-// AVAudioUnitTypeMusicDevice returns the string constant AVAudioUnitTypeMusicDevice as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeMusicDevice() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeMusicDevice())
+// AVAudioUnitTypeMusicDevice returns the string constant AVAudioUnitTypeMusicDevice, for use as a dictionary key or argument.
+func AVAudioUnitTypeMusicDevice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeMusicDevice")))
 }
 
-// AVAudioUnitTypeMusicEffect returns the string constant AVAudioUnitTypeMusicEffect as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeMusicEffect() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeMusicEffect())
+// AVAudioUnitTypeMusicEffect returns the string constant AVAudioUnitTypeMusicEffect, for use as a dictionary key or argument.
+func AVAudioUnitTypeMusicEffect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeMusicEffect")))
 }
 
-// AVAudioUnitTypeFormatConverter returns the string constant AVAudioUnitTypeFormatConverter as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeFormatConverter() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeFormatConverter())
+// AVAudioUnitTypeFormatConverter returns the string constant AVAudioUnitTypeFormatConverter, for use as a dictionary key or argument.
+func AVAudioUnitTypeFormatConverter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeFormatConverter")))
 }
 
-// AVAudioUnitTypeEffect returns the string constant AVAudioUnitTypeEffect as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeEffect() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeEffect())
+// AVAudioUnitTypeEffect returns the string constant AVAudioUnitTypeEffect, for use as a dictionary key or argument.
+func AVAudioUnitTypeEffect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeEffect")))
 }
 
-// AVAudioUnitTypeMixer returns the string constant AVAudioUnitTypeMixer as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeMixer() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeMixer())
+// AVAudioUnitTypeMixer returns the string constant AVAudioUnitTypeMixer, for use as a dictionary key or argument.
+func AVAudioUnitTypeMixer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeMixer")))
 }
 
-// AVAudioUnitTypePanner returns the string constant AVAudioUnitTypePanner as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypePanner() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypePanner())
+// AVAudioUnitTypePanner returns the string constant AVAudioUnitTypePanner, for use as a dictionary key or argument.
+func AVAudioUnitTypePanner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypePanner")))
 }
 
-// AVAudioUnitTypeGenerator returns the string constant AVAudioUnitTypeGenerator as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeGenerator() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeGenerator())
+// AVAudioUnitTypeGenerator returns the string constant AVAudioUnitTypeGenerator, for use as a dictionary key or argument.
+func AVAudioUnitTypeGenerator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeGenerator")))
 }
 
-// AVAudioUnitTypeOfflineEffect returns the string constant AVAudioUnitTypeOfflineEffect as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeOfflineEffect() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeOfflineEffect())
+// AVAudioUnitTypeOfflineEffect returns the string constant AVAudioUnitTypeOfflineEffect, for use as a dictionary key or argument.
+func AVAudioUnitTypeOfflineEffect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeOfflineEffect")))
 }
 
-// AVAudioUnitTypeMIDIProcessor returns the string constant AVAudioUnitTypeMIDIProcessor as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitTypeMIDIProcessor() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitTypeMIDIProcessor())
+// AVAudioUnitTypeMIDIProcessor returns the string constant AVAudioUnitTypeMIDIProcessor, for use as a dictionary key or argument.
+func AVAudioUnitTypeMIDIProcessor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitTypeMIDIProcessor")))
 }
 
-// AVAudioUnitManufacturerNameApple returns the string constant AVAudioUnitManufacturerNameApple as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitManufacturerNameApple() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitManufacturerNameApple())
+// AVAudioUnitManufacturerNameApple returns the string constant AVAudioUnitManufacturerNameApple, for use as a dictionary key or argument.
+func AVAudioUnitManufacturerNameApple() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitManufacturerNameApple")))
 }
 
-// AVAudioUnitComponentTagsDidChangeNotification returns the string constant AVAudioUnitComponentTagsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioUnitComponentTagsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAudioUnitComponentTagsDidChangeNotification())
+// AVAudioUnitComponentTagsDidChangeNotification returns the string constant AVAudioUnitComponentTagsDidChangeNotification, for use as a dictionary key or argument.
+func AVAudioUnitComponentTagsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioUnitComponentTagsDidChangeNotification")))
 }
 
-// AVSpeechSynthesisVoiceIdentifierAlex returns the string constant AVSpeechSynthesisVoiceIdentifierAlex as an objc.ID, for use as a dictionary key or selector argument.
-func AVSpeechSynthesisVoiceIdentifierAlex() objc.ID {
-	return purego.CFConstant(raw.AVSpeechSynthesisVoiceIdentifierAlex())
+// AVSpeechSynthesisVoiceIdentifierAlex returns the string constant AVSpeechSynthesisVoiceIdentifierAlex, for use as a dictionary key or argument.
+func AVSpeechSynthesisVoiceIdentifierAlex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSpeechSynthesisVoiceIdentifierAlex")))
 }
 
-// AVSpeechSynthesisIPANotationAttribute returns the string constant AVSpeechSynthesisIPANotationAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func AVSpeechSynthesisIPANotationAttribute() objc.ID {
-	return purego.CFConstant(raw.AVSpeechSynthesisIPANotationAttribute())
+// AVSpeechSynthesisIPANotationAttribute returns the string constant AVSpeechSynthesisIPANotationAttribute, for use as a dictionary key or argument.
+func AVSpeechSynthesisIPANotationAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSpeechSynthesisIPANotationAttribute")))
 }
 
-// AVSpeechSynthesisAvailableVoicesDidChangeNotification returns the string constant AVSpeechSynthesisAvailableVoicesDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVSpeechSynthesisAvailableVoicesDidChangeNotification() objc.ID {
-	if _r := raw.AVSpeechSynthesisAvailableVoicesDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSpeechSynthesisAvailableVoicesDidChangeNotification returns the string constant AVSpeechSynthesisAvailableVoicesDidChangeNotification, for use as a dictionary key or argument.
+func AVSpeechSynthesisAvailableVoicesDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSpeechSynthesisAvailableVoicesDidChangeNotification")))
 }
 
-// Keys for AVAudioApplicationInputMuteStateChangeNotification Value is NSNumber type with boolean value 0 for unmuted or value 1 for muted (samples zeroed out)
-// AVAudioApplicationMuteStateKey returns the string constant AVAudioApplicationMuteStateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioApplicationMuteStateKey() objc.ID {
-	return purego.CFConstant(raw.AVAudioApplicationMuteStateKey())
+// AVAudioApplicationMuteStateKey returns the string constant AVAudioApplicationMuteStateKey, for use as a dictionary key or argument.
+func AVAudioApplicationMuteStateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioApplicationMuteStateKey")))
 }

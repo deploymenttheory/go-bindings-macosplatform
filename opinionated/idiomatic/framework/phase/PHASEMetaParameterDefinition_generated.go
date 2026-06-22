@@ -5,55 +5,66 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification for a named parameter with a constant value.
+// MetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASEMetaParameterDefinition.
 //
-// MetaParameterDefinition wraps [raw.PHASEMetaParameterDefinition] with a fluent Go API.
+// MetaParameterDefinition is an abstract base — you do not construct it directly. Construct one of [NumberMetaParameterDefinition], [StringMetaParameterDefinition] and pass it where a MetaParameterDefinition is accepted.
+//
+// A specification for a named parameter with a constant value.
 type MetaParameterDefinition struct {
-	inner *raw.PHASEMetaParameterDefinition
+	Definition
 }
 
-// Unwrap returns the underlying [raw.PHASEMetaParameterDefinition].
-func (x *MetaParameterDefinition) Unwrap() *raw.PHASEMetaParameterDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetaParameterDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// MetaParameterDefinitionFromID adopts an existing object pointer as a MetaParameterDefinition (nil for 0).
+// MetaParameterDefinitionFromID adopts an existing Objective-C object as a MetaParameterDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func MetaParameterDefinitionFromID(id objc.ID) *MetaParameterDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &MetaParameterDefinition{inner: raw.PHASEMetaParameterDefinitionFromID(id)}
+	x := &MetaParameterDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetaParameterDefinition creates a new [MetaParameterDefinition].
-func NewMetaParameterDefinition() *MetaParameterDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMetaParameterDefinition")), objc.RegisterName("new"))
-	return &MetaParameterDefinition{inner: raw.PHASEMetaParameterDefinitionFromID(_id)}
+// metaParameterDefinitionAdopt wraps an Objective-C object that this code just created as a
+// MetaParameterDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metaParameterDefinitionAdopt(id objc.ID) *MetaParameterDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &MetaParameterDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Value calls the underlying Value.
-func (x *MetaParameterDefinition) Value() objc.ID {
-	return x.inner.Value()
-}
-
-func (x *MetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
-	return x.inner
-}
-
-func (x *MetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEDefinition
+// Value wraps the corresponding Objective-C method.
+func (x *MetaParameterDefinition) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
 // MetaParameterDefinitionable is the interface implemented by [MetaParameterDefinition], for mocking and DI.
 type MetaParameterDefinitionable interface {
-	Unwrap() *raw.PHASEMetaParameterDefinition
-	Value() objc.ID
+	obj.Object
+	Value() obj.Object
 }
 
 var _ MetaParameterDefinitionable = (*MetaParameterDefinition)(nil)
+
+// isMetaParameterDefinition marks MetaParameterDefinition — and, by embedding promotion, its
+// subclasses — as a member of the MetaParameterDefinition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetaParameterDefinition) isMetaParameterDefinition() {}
+
+var _ MetaParameterDefinitionProvider = (*MetaParameterDefinition)(nil)
+
+var _ DefinitionProvider = (*MetaParameterDefinition)(nil)

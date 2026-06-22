@@ -5,183 +5,214 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROperationalCredentialsClusterAddNOCParams wraps [raw.MTROperationalCredentialsClusterAddNOCParams] with a fluent Go API.
+// MTROperationalCredentialsClusterAddNOCParams is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterAddNOCParams.
 type MTROperationalCredentialsClusterAddNOCParams struct {
-	inner *raw.MTROperationalCredentialsClusterAddNOCParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalCredentialsClusterAddNOCParams].
-func (x *MTROperationalCredentialsClusterAddNOCParams) Unwrap() *raw.MTROperationalCredentialsClusterAddNOCParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterAddNOCParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalCredentialsClusterAddNOCParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterAddNOCParams (nil for 0).
+// MTROperationalCredentialsClusterAddNOCParamsFromID adopts an existing Objective-C object as a MTROperationalCredentialsClusterAddNOCParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalCredentialsClusterAddNOCParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAddNOCParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalCredentialsClusterAddNOCParams{inner: raw.MTROperationalCredentialsClusterAddNOCParamsFromID(id)}
+	x := &MTROperationalCredentialsClusterAddNOCParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTROperationalCredentialsClusterAddNOCParams creates a new [MTROperationalCredentialsClusterAddNOCParams].
+// mTROperationalCredentialsClusterAddNOCParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalCredentialsClusterAddNOCParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalCredentialsClusterAddNOCParamsAdopt(id objc.ID) *MTROperationalCredentialsClusterAddNOCParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROperationalCredentialsClusterAddNOCParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROperationalCredentialsClusterAddNOCParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalCredentialsClusterAddNOCParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalCredentialsClusterAddNOCParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalCredentialsClusterAddNOCParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROperationalCredentialsClusterAddNOCParams creates a new MTROperationalCredentialsClusterAddNOCParams.
 func NewMTROperationalCredentialsClusterAddNOCParams() *MTROperationalCredentialsClusterAddNOCParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterAddNOCParams")), objc.RegisterName("new"))
-	return &MTROperationalCredentialsClusterAddNOCParams{inner: raw.MTROperationalCredentialsClusterAddNOCParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterAddNOCParams")), objc.RegisterName("new"))
+	return mTROperationalCredentialsClusterAddNOCParamsAdopt(_id)
 }
 
-// WithNocValue sets the nocValue property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithNocValue(nocValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetNocValue(nocValue)
+// WithNocValue sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithNocValue(nocValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNocValue:"), objref.IDOf(nocValue))
 	return x
 }
 
-// WithIcacValue sets the icacValue property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithIcacValue(icacValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetIcacValue(icacValue)
+// WithIcacValue sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithIcacValue(icacValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcacValue:"), objref.IDOf(icacValue))
 	return x
 }
 
-// WithIpkValue sets the ipkValue property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithIpkValue(ipkValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetIpkValue(ipkValue)
+// WithIpkValue sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithIpkValue(ipkValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpkValue:"), objref.IDOf(ipkValue))
 	return x
 }
 
-// WithCaseAdminSubject sets the caseAdminSubject property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithCaseAdminSubject(caseAdminSubject *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetCaseAdminSubject(caseAdminSubject)
+// WithCaseAdminSubject sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithCaseAdminSubject(caseAdminSubject obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseAdminSubject:"), objref.IDOf(caseAdminSubject))
 	return x
 }
 
-// WithAdminVendorId sets the adminVendorId property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithAdminVendorId(adminVendorId *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetAdminVendorId(adminVendorId)
+// WithAdminVendorId sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithAdminVendorId(adminVendorId obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminVendorId:"), objref.IDOf(adminVendorId))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAddNOCParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROperationalCredentialsClusterAddNOCParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// NocValue calls the underlying NocValue.
-func (x *MTROperationalCredentialsClusterAddNOCParams) NocValue() *foundation.NSData {
-	return x.inner.NocValue()
+// NocValue wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) NocValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nocValue"))
+	return obj.Wrap(_r)
 }
 
-// SetNocValue calls the underlying SetNocValue.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetNocValue(nocValue *foundation.NSData) {
-	x.inner.SetNocValue(nocValue)
+// SetNocValue wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetNocValue(nocValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNocValue:"), objref.IDOf(nocValue))
 }
 
-// IcacValue calls the underlying IcacValue.
-func (x *MTROperationalCredentialsClusterAddNOCParams) IcacValue() *foundation.NSData {
-	return x.inner.IcacValue()
+// IcacValue wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) IcacValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icacValue"))
+	return obj.Wrap(_r)
 }
 
-// SetIcacValue calls the underlying SetIcacValue.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetIcacValue(icacValue *foundation.NSData) {
-	x.inner.SetIcacValue(icacValue)
+// SetIcacValue wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetIcacValue(icacValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcacValue:"), objref.IDOf(icacValue))
 }
 
-// IpkValue calls the underlying IpkValue.
-func (x *MTROperationalCredentialsClusterAddNOCParams) IpkValue() *foundation.NSData {
-	return x.inner.IpkValue()
+// IpkValue wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) IpkValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ipkValue"))
+	return obj.Wrap(_r)
 }
 
-// SetIpkValue calls the underlying SetIpkValue.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetIpkValue(ipkValue *foundation.NSData) {
-	x.inner.SetIpkValue(ipkValue)
+// SetIpkValue wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetIpkValue(ipkValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpkValue:"), objref.IDOf(ipkValue))
 }
 
-// CaseAdminSubject calls the underlying CaseAdminSubject.
-func (x *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() *foundation.NSNumber {
-	return x.inner.CaseAdminSubject()
+// CaseAdminSubject wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseAdminSubject"))
+	return obj.Wrap(_r)
 }
 
-// SetCaseAdminSubject calls the underlying SetCaseAdminSubject.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetCaseAdminSubject(caseAdminSubject *foundation.NSNumber) {
-	x.inner.SetCaseAdminSubject(caseAdminSubject)
+// SetCaseAdminSubject wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetCaseAdminSubject(caseAdminSubject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseAdminSubject:"), objref.IDOf(caseAdminSubject))
 }
 
-// AdminVendorId calls the underlying AdminVendorId.
-func (x *MTROperationalCredentialsClusterAddNOCParams) AdminVendorId() *foundation.NSNumber {
-	return x.inner.AdminVendorId()
+// AdminVendorId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) AdminVendorId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adminVendorId"))
+	return obj.Wrap(_r)
 }
 
-// SetAdminVendorId calls the underlying SetAdminVendorId.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetAdminVendorId(adminVendorId *foundation.NSNumber) {
-	x.inner.SetAdminVendorId(adminVendorId)
+// SetAdminVendorId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetAdminVendorId(adminVendorId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminVendorId:"), objref.IDOf(adminVendorId))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterAddNOCParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROperationalCredentialsClusterAddNOCParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTROperationalCredentialsClusterAddNOCParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROperationalCredentialsClusterAddNOCParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTROperationalCredentialsClusterAddNOCParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTROperationalCredentialsClusterAddNOCParamsable is the interface implemented by [MTROperationalCredentialsClusterAddNOCParams], for mocking and DI.
 type MTROperationalCredentialsClusterAddNOCParamsable interface {
-	Unwrap() *raw.MTROperationalCredentialsClusterAddNOCParams
-	WithNocValue(nocValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams
-	WithIcacValue(icacValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams
-	WithIpkValue(ipkValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams
-	WithCaseAdminSubject(caseAdminSubject *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
-	WithAdminVendorId(adminVendorId *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
-	NocValue() *foundation.NSData
-	SetNocValue(nocValue *foundation.NSData)
-	IcacValue() *foundation.NSData
-	SetIcacValue(icacValue *foundation.NSData)
-	IpkValue() *foundation.NSData
-	SetIpkValue(ipkValue *foundation.NSData)
-	CaseAdminSubject() *foundation.NSNumber
-	SetCaseAdminSubject(caseAdminSubject *foundation.NSNumber)
-	AdminVendorId() *foundation.NSNumber
-	SetAdminVendorId(adminVendorId *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithNocValue(nocValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	WithIcacValue(icacValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	WithIpkValue(ipkValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	WithCaseAdminSubject(caseAdminSubject obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	WithAdminVendorId(adminVendorId obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAddNOCParams
+	NocValue() obj.Object
+	SetNocValue(nocValue obj.Object)
+	IcacValue() obj.Object
+	SetIcacValue(icacValue obj.Object)
+	IpkValue() obj.Object
+	SetIpkValue(ipkValue obj.Object)
+	CaseAdminSubject() obj.Object
+	SetCaseAdminSubject(caseAdminSubject obj.Object)
+	AdminVendorId() obj.Object
+	SetAdminVendorId(adminVendorId obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTROperationalCredentialsClusterAddNOCParamsable = (*MTROperationalCredentialsClusterAddNOCParams)(nil)

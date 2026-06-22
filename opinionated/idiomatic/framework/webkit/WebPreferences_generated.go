@@ -5,645 +5,583 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebPreferences encapsulates the preferences you can change per WebView object. These preferences include font, text encoding, and image settings. Normally a WebView object uses the standard preferences returned by the standardPreferences class method. However, you can modify the preferences for individual WebView instances too. Use the preferencesIdentifier WebView method to change a WebView object’s preferences, or to share preferences between WebView objects. Use the autosaves method to specify if the preferences object should be automatically saved to the user defaults database.
+// WebPreferences is an idiomatic wrapper over the Objective-C class WebPreferences.
 //
-// WebPreferences wraps [raw.WebPreferences] with a fluent Go API.
+// WebPreferences encapsulates the preferences you can change per WebView object. These preferences include font, text encoding, and image settings. Normally a WebView object uses the standard preferences returned by the standardPreferences class method. However, you can modify the preferences for individual WebView instances too. Use the preferencesIdentifier WebView method to change a WebView object’s preferences, or to share preferences between WebView objects. Use the autosaves method to specify if the preferences object should be automatically saved to the user defaults database.
 type WebPreferences struct {
-	inner *raw.WebPreferences
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebPreferences].
-func (x *WebPreferences) Unwrap() *raw.WebPreferences { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebPreferences) ID() objc.ID { return x.inner.Ptr() }
-
-// WebPreferencesFromID adopts an existing object pointer as a WebPreferences (nil for 0).
+// WebPreferencesFromID adopts an existing Objective-C object as a WebPreferences
+// (nil for 0), retaining it and registering a release finalizer.
 func WebPreferencesFromID(id objc.ID) *WebPreferences {
 	if id == 0 {
 		return nil
 	}
-	return &WebPreferences{inner: raw.WebPreferencesFromID(id)}
+	x := &WebPreferences{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns an initialized WebPreferences object, creating one if it does not exist.
-//
-// NewWebPreferencesWithIdentifier creates a new [WebPreferences].
+// webPreferencesAdopt wraps an Objective-C object that this code just created as a
+// WebPreferences (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webPreferencesAdopt(id objc.ID) *WebPreferences {
+	if id == 0 {
+		return nil
+	}
+	x := &WebPreferences{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebPreferences) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebPreferences) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebPreferences) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebPreferences) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebPreferencesWithIdentifier returns an initialized WebPreferences object, creating one if it does not exist.
 func NewWebPreferencesWithIdentifier(anIdentifier string) *WebPreferences {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebPreferences")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(anIdentifier).Ptr())
-	return &WebPreferences{inner: raw.WebPreferencesFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WebPreferences")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(anIdentifier))
+	return webPreferencesAdopt(_id)
 }
 
-// The standard font family of the web view.
-//
-// WithStandardFontFamily sets the standardFontFamily property and returns the receiver for chaining.
+// WithStandardFontFamily the standard font family of the web view.
 func (x *WebPreferences) WithStandardFontFamily(standardFontFamily string) *WebPreferences {
-	x.inner.SetStandardFontFamily(foundation.NSStringStringWithUTF8String(standardFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardFontFamily:"), purego.NSString(standardFontFamily))
 	return x
 }
 
-// The fixed font family of the web view.
-//
-// WithFixedFontFamily sets the fixedFontFamily property and returns the receiver for chaining.
+// WithFixedFontFamily the fixed font family of the web view.
 func (x *WebPreferences) WithFixedFontFamily(fixedFontFamily string) *WebPreferences {
-	x.inner.SetFixedFontFamily(foundation.NSStringStringWithUTF8String(fixedFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedFontFamily:"), purego.NSString(fixedFontFamily))
 	return x
 }
 
-// The serif font family of the web view.
-//
-// WithSerifFontFamily sets the serifFontFamily property and returns the receiver for chaining.
+// WithSerifFontFamily the serif font family of the web view.
 func (x *WebPreferences) WithSerifFontFamily(serifFontFamily string) *WebPreferences {
-	x.inner.SetSerifFontFamily(foundation.NSStringStringWithUTF8String(serifFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerifFontFamily:"), purego.NSString(serifFontFamily))
 	return x
 }
 
-// The sans serif font family of the web view.
-//
-// WithSansSerifFontFamily sets the sansSerifFontFamily property and returns the receiver for chaining.
+// WithSansSerifFontFamily the sans serif font family of the web view.
 func (x *WebPreferences) WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences {
-	x.inner.SetSansSerifFontFamily(foundation.NSStringStringWithUTF8String(sansSerifFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSansSerifFontFamily:"), purego.NSString(sansSerifFontFamily))
 	return x
 }
 
-// The cursive font family of the web view.
-//
-// WithCursiveFontFamily sets the cursiveFontFamily property and returns the receiver for chaining.
+// WithCursiveFontFamily the cursive font family of the web view.
 func (x *WebPreferences) WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences {
-	x.inner.SetCursiveFontFamily(foundation.NSStringStringWithUTF8String(cursiveFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursiveFontFamily:"), purego.NSString(cursiveFontFamily))
 	return x
 }
 
-// The fantasy font family of the web view.
-//
-// WithFantasyFontFamily sets the fantasyFontFamily property and returns the receiver for chaining.
+// WithFantasyFontFamily the fantasy font family of the web view.
 func (x *WebPreferences) WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences {
-	x.inner.SetFantasyFontFamily(foundation.NSStringStringWithUTF8String(fantasyFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFantasyFontFamily:"), purego.NSString(fantasyFontFamily))
 	return x
 }
 
-// The default font size of the web view.
-//
-// WithDefaultFontSize sets the defaultFontSize property and returns the receiver for chaining.
+// WithDefaultFontSize the default font size of the web view.
 func (x *WebPreferences) WithDefaultFontSize(defaultFontSize int) *WebPreferences {
-	x.inner.SetDefaultFontSize(defaultFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFontSize:"), defaultFontSize)
 	return x
 }
 
-// The default fixed font size of the web view.
-//
-// WithDefaultFixedFontSize sets the defaultFixedFontSize property and returns the receiver for chaining.
+// WithDefaultFixedFontSize the default fixed font size of the web view.
 func (x *WebPreferences) WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences {
-	x.inner.SetDefaultFixedFontSize(defaultFixedFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFixedFontSize:"), defaultFixedFontSize)
 	return x
 }
 
-// The minimum font size of the web view.
-//
-// WithMinimumFontSize sets the minimumFontSize property and returns the receiver for chaining.
+// WithMinimumFontSize the minimum font size of the web view.
 func (x *WebPreferences) WithMinimumFontSize(minimumFontSize int) *WebPreferences {
-	x.inner.SetMinimumFontSize(minimumFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
 	return x
 }
 
-// The minimum logical font size of the web view.
-//
-// WithMinimumLogicalFontSize sets the minimumLogicalFontSize property and returns the receiver for chaining.
+// WithMinimumLogicalFontSize the minimum logical font size of the web view.
 func (x *WebPreferences) WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences {
-	x.inner.SetMinimumLogicalFontSize(minimumLogicalFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLogicalFontSize:"), minimumLogicalFontSize)
 	return x
 }
 
-// The default text encoding of the web view.
-//
-// WithDefaultTextEncodingName sets the defaultTextEncodingName property and returns the receiver for chaining.
+// WithDefaultTextEncodingName the default text encoding of the web view.
 func (x *WebPreferences) WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences {
-	x.inner.SetDefaultTextEncodingName(foundation.NSStringStringWithUTF8String(defaultTextEncodingName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTextEncodingName:"), purego.NSString(defaultTextEncodingName))
 	return x
 }
 
-// A Boolean that indicates whether or not user style sheets are enabled in the web view.
-//
-// WithUserStyleSheetEnabled sets the userStyleSheetEnabled property and returns the receiver for chaining.
+// WithUserStyleSheetEnabled a Boolean that indicates whether or not user style sheets are enabled in the web view.
 func (x *WebPreferences) WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences {
-	x.inner.SetUserStyleSheetEnabled(userStyleSheetEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetEnabled:"), userStyleSheetEnabled)
 	return x
 }
 
-// @property userStyleSheetLocation @abstract The location of the user style sheet.
-//
-// WithUserStyleSheetLocation sets the userStyleSheetLocation property and returns the receiver for chaining.
+// WithUserStyleSheetLocation the location of the user style sheet.
 func (x *WebPreferences) WithUserStyleSheetLocation(userStyleSheetLocation string) *WebPreferences {
-	x.inner.SetUserStyleSheetLocation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(userStyleSheetLocation)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetLocation:"), rt.FileURL(userStyleSheetLocation))
 	return x
 }
 
-// A Boolean that indicates whether or not the web view allows Java.
-//
-// WithJavaEnabled sets the javaEnabled property and returns the receiver for chaining.
+// WithJavaEnabled a Boolean that indicates whether or not the web view allows Java.
 func (x *WebPreferences) WithJavaEnabled(javaEnabled bool) *WebPreferences {
-	x.inner.SetJavaEnabled(javaEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaEnabled:"), javaEnabled)
 	return x
 }
 
-// A Boolean that indicates whether or not the web view allows JavaScript.
-//
-// WithJavaScriptEnabled sets the javaScriptEnabled property and returns the receiver for chaining.
+// WithJavaScriptEnabled a Boolean that indicates whether or not the web view allows JavaScript.
 func (x *WebPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences {
-	x.inner.SetJavaScriptEnabled(javaScriptEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
 	return x
 }
 
-// A Boolean that indicates whether or not the web view allows JavaScript to open windows automatically.
-//
-// WithJavaScriptCanOpenWindowsAutomatically sets the javaScriptCanOpenWindowsAutomatically property and returns the receiver for chaining.
+// WithJavaScriptCanOpenWindowsAutomatically a Boolean that indicates whether or not the web view allows JavaScript to open windows automatically.
 func (x *WebPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences {
-	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
 	return x
 }
 
-// A Boolean that indicates whether or not the web view allows plug-ins.
-//
-// WithPlugInsEnabled sets the plugInsEnabled property and returns the receiver for chaining.
+// WithPlugInsEnabled a Boolean that indicates whether or not the web view allows plug-ins.
 func (x *WebPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences {
-	x.inner.SetPlugInsEnabled(plugInsEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
 	return x
 }
 
-// A Boolean that indicates whether or not the receiver allows animated images.
-//
-// WithAllowsAnimatedImages sets the allowsAnimatedImages property and returns the receiver for chaining.
+// WithAllowsAnimatedImages a Boolean that indicates whether or not the receiver allows animated images.
 func (x *WebPreferences) WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences {
-	x.inner.SetAllowsAnimatedImages(allowsAnimatedImages)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImages:"), allowsAnimatedImages)
 	return x
 }
 
-// A Boolean that indicates whether or not the receiver allows animated images to loop.
-//
-// WithAllowsAnimatedImageLooping sets the allowsAnimatedImageLooping property and returns the receiver for chaining.
+// WithAllowsAnimatedImageLooping a Boolean that indicates whether or not the receiver allows animated images to loop.
 func (x *WebPreferences) WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences {
-	x.inner.SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImageLooping:"), allowsAnimatedImageLooping)
 	return x
 }
 
-// A Boolean that indicates whether or not the web view allows images to be loaded automatically.
-//
-// WithLoadsImagesAutomatically sets the loadsImagesAutomatically property and returns the receiver for chaining.
+// WithLoadsImagesAutomatically a Boolean that indicates whether or not the web view allows images to be loaded automatically.
 func (x *WebPreferences) WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences {
-	x.inner.SetLoadsImagesAutomatically(loadsImagesAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadsImagesAutomatically:"), loadsImagesAutomatically)
 	return x
 }
 
-// A Boolean that indicates whether or not the receiver’s attributes are automatically stored in the user defaults database.
-//
-// WithAutosaves sets the autosaves property and returns the receiver for chaining.
+// WithAutosaves a Boolean that indicates whether or not the receiver’s attributes are automatically stored in the user defaults database.
 func (x *WebPreferences) WithAutosaves(autosaves bool) *WebPreferences {
-	x.inner.SetAutosaves(autosaves)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaves:"), autosaves)
 	return x
 }
 
-// A Boolean that indicates whether or not the web view should include backgrounds when printing.
-//
-// WithShouldPrintBackgrounds sets the shouldPrintBackgrounds property and returns the receiver for chaining.
+// WithShouldPrintBackgrounds a Boolean that indicates whether or not the web view should include backgrounds when printing.
 func (x *WebPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences {
-	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
 	return x
 }
 
-// A Boolean that indicates whether or not private browsing is enabled.
-//
-// WithPrivateBrowsingEnabled sets the privateBrowsingEnabled property and returns the receiver for chaining.
+// WithPrivateBrowsingEnabled a Boolean that indicates whether or not private browsing is enabled.
 func (x *WebPreferences) WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences {
-	x.inner.SetPrivateBrowsingEnabled(privateBrowsingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateBrowsingEnabled:"), privateBrowsingEnabled)
 	return x
 }
 
-// A Boolean that indicates whether or not the tab key will focus links.
-//
-// WithTabsToLinks sets the tabsToLinks property and returns the receiver for chaining.
+// WithTabsToLinks a Boolean that indicates whether or not the tab key will focus links.
 func (x *WebPreferences) WithTabsToLinks(tabsToLinks bool) *WebPreferences {
-	x.inner.SetTabsToLinks(tabsToLinks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabsToLinks:"), tabsToLinks)
 	return x
 }
 
-// A Boolean that indicates whether the web views associated with the receiver should use the shared page cache.
-//
-// WithUsesPageCache sets the usesPageCache property and returns the receiver for chaining.
+// WithUsesPageCache a Boolean that indicates whether the web views associated with the receiver should use the shared page cache.
 func (x *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
-	x.inner.SetUsesPageCache(usesPageCache)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesPageCache:"), usesPageCache)
 	return x
 }
 
-// The cache model for the web views associated with the receiver.
-//
-// WithCacheModel sets the cacheModel property and returns the receiver for chaining.
+// WithCacheModel the cache model for the web views associated with the receiver.
 func (x *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreferences {
-	x.inner.SetCacheModel(raw.WebCacheModel(cacheModel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheModel:"), cacheModel)
 	return x
 }
 
-// A Boolean that indicates whether incremental rendering should be suppressed.
-//
-// WithSuppressesIncrementalRendering sets the suppressesIncrementalRendering property and returns the receiver for chaining.
+// WithSuppressesIncrementalRendering a Boolean that indicates whether incremental rendering should be suppressed.
 func (x *WebPreferences) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences {
-	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
 	return x
 }
 
-// @property allowsAirPlayForMediaPlayback
-//
-// WithAllowsAirPlayForMediaPlayback sets the allowsAirPlayForMediaPlayback property and returns the receiver for chaining.
+// WithAllowsAirPlayForMediaPlayback sets the property and returns the receiver so calls can be chained.
 func (x *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences {
-	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
 	return x
 }
 
-// @property identifier @result Returns the identifier for this WebPreferences.
-//
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *WebPreferences) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property standardFontFamily
-//
-// StandardFontFamily calls the underlying StandardFontFamily.
+// StandardFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) StandardFontFamily() string {
-	_r := x.inner.StandardFontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardFontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetStandardFontFamily calls the underlying SetStandardFontFamily.
+// SetStandardFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetStandardFontFamily(standardFontFamily string) {
-	x.inner.SetStandardFontFamily(foundation.NSStringStringWithUTF8String(standardFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardFontFamily:"), purego.NSString(standardFontFamily))
 }
 
-// @property fixedFontFamily
-//
-// FixedFontFamily calls the underlying FixedFontFamily.
+// FixedFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) FixedFontFamily() string {
-	_r := x.inner.FixedFontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fixedFontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFixedFontFamily calls the underlying SetFixedFontFamily.
+// SetFixedFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetFixedFontFamily(fixedFontFamily string) {
-	x.inner.SetFixedFontFamily(foundation.NSStringStringWithUTF8String(fixedFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedFontFamily:"), purego.NSString(fixedFontFamily))
 }
 
-// @property serifFontFamily
-//
-// SerifFontFamily calls the underlying SerifFontFamily.
+// SerifFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SerifFontFamily() string {
-	_r := x.inner.SerifFontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serifFontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSerifFontFamily calls the underlying SetSerifFontFamily.
+// SetSerifFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetSerifFontFamily(serifFontFamily string) {
-	x.inner.SetSerifFontFamily(foundation.NSStringStringWithUTF8String(serifFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerifFontFamily:"), purego.NSString(serifFontFamily))
 }
 
-// @property sansSerifFontFamily
-//
-// SansSerifFontFamily calls the underlying SansSerifFontFamily.
+// SansSerifFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SansSerifFontFamily() string {
-	_r := x.inner.SansSerifFontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sansSerifFontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSansSerifFontFamily calls the underlying SetSansSerifFontFamily.
+// SetSansSerifFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetSansSerifFontFamily(sansSerifFontFamily string) {
-	x.inner.SetSansSerifFontFamily(foundation.NSStringStringWithUTF8String(sansSerifFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSansSerifFontFamily:"), purego.NSString(sansSerifFontFamily))
 }
 
-// @property cursiveFontFamily
-//
-// CursiveFontFamily calls the underlying CursiveFontFamily.
+// CursiveFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) CursiveFontFamily() string {
-	_r := x.inner.CursiveFontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cursiveFontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCursiveFontFamily calls the underlying SetCursiveFontFamily.
+// SetCursiveFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetCursiveFontFamily(cursiveFontFamily string) {
-	x.inner.SetCursiveFontFamily(foundation.NSStringStringWithUTF8String(cursiveFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursiveFontFamily:"), purego.NSString(cursiveFontFamily))
 }
 
-// @property fantasyFontFamily
-//
-// FantasyFontFamily calls the underlying FantasyFontFamily.
+// FantasyFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) FantasyFontFamily() string {
-	_r := x.inner.FantasyFontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fantasyFontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFantasyFontFamily calls the underlying SetFantasyFontFamily.
+// SetFantasyFontFamily wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetFantasyFontFamily(fantasyFontFamily string) {
-	x.inner.SetFantasyFontFamily(foundation.NSStringStringWithUTF8String(fantasyFontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFantasyFontFamily:"), purego.NSString(fantasyFontFamily))
 }
 
-// @property defaultFontSize
-//
-// DefaultFontSize calls the underlying DefaultFontSize.
+// DefaultFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) DefaultFontSize() int {
-	return x.inner.DefaultFontSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultFontSize"))
+	return _r
 }
 
-// SetDefaultFontSize calls the underlying SetDefaultFontSize.
+// SetDefaultFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetDefaultFontSize(defaultFontSize int) {
-	x.inner.SetDefaultFontSize(defaultFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFontSize:"), defaultFontSize)
 }
 
-// @property defaultFixedFontSize
-//
-// DefaultFixedFontSize calls the underlying DefaultFixedFontSize.
+// DefaultFixedFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) DefaultFixedFontSize() int {
-	return x.inner.DefaultFixedFontSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultFixedFontSize"))
+	return _r
 }
 
-// SetDefaultFixedFontSize calls the underlying SetDefaultFixedFontSize.
+// SetDefaultFixedFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetDefaultFixedFontSize(defaultFixedFontSize int) {
-	x.inner.SetDefaultFixedFontSize(defaultFixedFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFixedFontSize:"), defaultFixedFontSize)
 }
 
-// @property minimumFontSize
-//
-// MinimumFontSize calls the underlying MinimumFontSize.
+// MinimumFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) MinimumFontSize() int {
-	return x.inner.MinimumFontSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumFontSize"))
+	return _r
 }
 
-// SetMinimumFontSize calls the underlying SetMinimumFontSize.
+// SetMinimumFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetMinimumFontSize(minimumFontSize int) {
-	x.inner.SetMinimumFontSize(minimumFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
 }
 
-// @property minimumLogicalFontSize
-//
-// MinimumLogicalFontSize calls the underlying MinimumLogicalFontSize.
+// MinimumLogicalFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) MinimumLogicalFontSize() int {
-	return x.inner.MinimumLogicalFontSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumLogicalFontSize"))
+	return _r
 }
 
-// SetMinimumLogicalFontSize calls the underlying SetMinimumLogicalFontSize.
+// SetMinimumLogicalFontSize wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetMinimumLogicalFontSize(minimumLogicalFontSize int) {
-	x.inner.SetMinimumLogicalFontSize(minimumLogicalFontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLogicalFontSize:"), minimumLogicalFontSize)
 }
 
-// @property defaultTextEncodingName
-//
-// DefaultTextEncodingName calls the underlying DefaultTextEncodingName.
+// DefaultTextEncodingName wraps the corresponding Objective-C method.
 func (x *WebPreferences) DefaultTextEncodingName() string {
-	_r := x.inner.DefaultTextEncodingName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultTextEncodingName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDefaultTextEncodingName calls the underlying SetDefaultTextEncodingName.
+// SetDefaultTextEncodingName wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetDefaultTextEncodingName(defaultTextEncodingName string) {
-	x.inner.SetDefaultTextEncodingName(foundation.NSStringStringWithUTF8String(defaultTextEncodingName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTextEncodingName:"), purego.NSString(defaultTextEncodingName))
 }
 
-// @property userStyleSheetEnabled
-//
-// UserStyleSheetEnabled calls the underlying UserStyleSheetEnabled.
+// UserStyleSheetEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) UserStyleSheetEnabled() bool {
-	return x.inner.UserStyleSheetEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("userStyleSheetEnabled"))
+	return _r
 }
 
-// SetUserStyleSheetEnabled calls the underlying SetUserStyleSheetEnabled.
+// SetUserStyleSheetEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetUserStyleSheetEnabled(userStyleSheetEnabled bool) {
-	x.inner.SetUserStyleSheetEnabled(userStyleSheetEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetEnabled:"), userStyleSheetEnabled)
 }
 
-// @property userStyleSheetLocation @abstract The location of the user style sheet.
-//
-// UserStyleSheetLocation calls the underlying UserStyleSheetLocation.
-func (x *WebPreferences) UserStyleSheetLocation() *foundation.NSURL {
-	return x.inner.UserStyleSheetLocation()
+// UserStyleSheetLocation the location of the user style sheet.
+func (x *WebPreferences) UserStyleSheetLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userStyleSheetLocation"))
+	return obj.Wrap(_r)
 }
 
-// SetUserStyleSheetLocation calls the underlying SetUserStyleSheetLocation.
+// SetUserStyleSheetLocation wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetUserStyleSheetLocation(userStyleSheetLocation string) {
-	x.inner.SetUserStyleSheetLocation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(userStyleSheetLocation)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStyleSheetLocation:"), rt.FileURL(userStyleSheetLocation))
 }
 
-// @property javaEnabled @discussion Deprecated function that does nothing and always returns false.
-//
-// IsJavaEnabled calls the underlying IsJavaEnabled.
+// IsJavaEnabled deprecated function that does nothing and always returns false.
 func (x *WebPreferences) IsJavaEnabled() bool {
-	return x.inner.IsJavaEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isJavaEnabled"))
+	return _r
 }
 
-// SetJavaEnabled calls the underlying SetJavaEnabled.
+// SetJavaEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetJavaEnabled(javaEnabled bool) {
-	x.inner.SetJavaEnabled(javaEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaEnabled:"), javaEnabled)
 }
 
-// @property javaScriptEnabled
-//
-// IsJavaScriptEnabled calls the underlying IsJavaScriptEnabled.
+// IsJavaScriptEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) IsJavaScriptEnabled() bool {
-	return x.inner.IsJavaScriptEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isJavaScriptEnabled"))
+	return _r
 }
 
-// SetJavaScriptEnabled calls the underlying SetJavaScriptEnabled.
+// SetJavaScriptEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetJavaScriptEnabled(javaScriptEnabled bool) {
-	x.inner.SetJavaScriptEnabled(javaScriptEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
 }
 
-// @property javaScriptCanOpenWindowsAutomatically
-//
-// JavaScriptCanOpenWindowsAutomatically calls the underlying JavaScriptCanOpenWindowsAutomatically.
+// JavaScriptCanOpenWindowsAutomatically wraps the corresponding Objective-C method.
 func (x *WebPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
-	return x.inner.JavaScriptCanOpenWindowsAutomatically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
+	return _r
 }
 
-// SetJavaScriptCanOpenWindowsAutomatically calls the underlying SetJavaScriptCanOpenWindowsAutomatically.
+// SetJavaScriptCanOpenWindowsAutomatically wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) {
-	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
 }
 
-// @property plugInsEnabled
-//
-// ArePlugInsEnabled calls the underlying ArePlugInsEnabled.
+// ArePlugInsEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) ArePlugInsEnabled() bool {
-	return x.inner.ArePlugInsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("arePlugInsEnabled"))
+	return _r
 }
 
-// SetPlugInsEnabled calls the underlying SetPlugInsEnabled.
+// SetPlugInsEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetPlugInsEnabled(plugInsEnabled bool) {
-	x.inner.SetPlugInsEnabled(plugInsEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
 }
 
-// @property allowsAnimatedImages
-//
-// AllowsAnimatedImages calls the underlying AllowsAnimatedImages.
+// AllowsAnimatedImages wraps the corresponding Objective-C method.
 func (x *WebPreferences) AllowsAnimatedImages() bool {
-	return x.inner.AllowsAnimatedImages()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAnimatedImages"))
+	return _r
 }
 
-// SetAllowsAnimatedImages calls the underlying SetAllowsAnimatedImages.
+// SetAllowsAnimatedImages wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetAllowsAnimatedImages(allowsAnimatedImages bool) {
-	x.inner.SetAllowsAnimatedImages(allowsAnimatedImages)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImages:"), allowsAnimatedImages)
 }
 
-// @property allowsAnimatedImageLooping
-//
-// AllowsAnimatedImageLooping calls the underlying AllowsAnimatedImageLooping.
+// AllowsAnimatedImageLooping wraps the corresponding Objective-C method.
 func (x *WebPreferences) AllowsAnimatedImageLooping() bool {
-	return x.inner.AllowsAnimatedImageLooping()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAnimatedImageLooping"))
+	return _r
 }
 
-// SetAllowsAnimatedImageLooping calls the underlying SetAllowsAnimatedImageLooping.
+// SetAllowsAnimatedImageLooping wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) {
-	x.inner.SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAnimatedImageLooping:"), allowsAnimatedImageLooping)
 }
 
-// @property willLoadImagesAutomatically
-//
-// LoadsImagesAutomatically calls the underlying LoadsImagesAutomatically.
+// LoadsImagesAutomatically wraps the corresponding Objective-C method.
 func (x *WebPreferences) LoadsImagesAutomatically() bool {
-	return x.inner.LoadsImagesAutomatically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadsImagesAutomatically"))
+	return _r
 }
 
-// SetLoadsImagesAutomatically calls the underlying SetLoadsImagesAutomatically.
+// SetLoadsImagesAutomatically wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetLoadsImagesAutomatically(loadsImagesAutomatically bool) {
-	x.inner.SetLoadsImagesAutomatically(loadsImagesAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadsImagesAutomatically:"), loadsImagesAutomatically)
 }
 
-// @property autosaves @discussion If autosaves is YES the settings represented by WebPreferences will be stored in the user defaults database.
-//
-// Autosaves calls the underlying Autosaves.
+// Autosaves if autosaves is YES the settings represented by WebPreferences will be stored in the user defaults database.
 func (x *WebPreferences) Autosaves() bool {
-	return x.inner.Autosaves()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autosaves"))
+	return _r
 }
 
-// SetAutosaves calls the underlying SetAutosaves.
+// SetAutosaves wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetAutosaves(autosaves bool) {
-	x.inner.SetAutosaves(autosaves)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaves:"), autosaves)
 }
 
-// @property shouldPrintBackgrounds
-//
-// ShouldPrintBackgrounds calls the underlying ShouldPrintBackgrounds.
+// ShouldPrintBackgrounds wraps the corresponding Objective-C method.
 func (x *WebPreferences) ShouldPrintBackgrounds() bool {
-	return x.inner.ShouldPrintBackgrounds()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPrintBackgrounds"))
+	return _r
 }
 
-// SetShouldPrintBackgrounds calls the underlying SetShouldPrintBackgrounds.
+// SetShouldPrintBackgrounds wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetShouldPrintBackgrounds(shouldPrintBackgrounds bool) {
-	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
 }
 
-// @property privateBrowsingEnabled: @abstract If private browsing is enabled, WebKit will not store information about sites the user visits.
-//
-// PrivateBrowsingEnabled calls the underlying PrivateBrowsingEnabled.
+// PrivateBrowsingEnabled if private browsing is enabled, WebKit will not store information about sites the user visits.
 func (x *WebPreferences) PrivateBrowsingEnabled() bool {
-	return x.inner.PrivateBrowsingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("privateBrowsingEnabled"))
+	return _r
 }
 
-// SetPrivateBrowsingEnabled calls the underlying SetPrivateBrowsingEnabled.
+// SetPrivateBrowsingEnabled wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetPrivateBrowsingEnabled(privateBrowsingEnabled bool) {
-	x.inner.SetPrivateBrowsingEnabled(privateBrowsingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateBrowsingEnabled:"), privateBrowsingEnabled)
 }
 
-// @property tabsToLinks @abstract If tabsToLinks is YES, the tab key will focus links and form controls. The option key temporarily reverses this preference.
-//
-// TabsToLinks calls the underlying TabsToLinks.
+// TabsToLinks if tabsToLinks is YES, the tab key will focus links and form controls. The option key temporarily reverses this preference.
 func (x *WebPreferences) TabsToLinks() bool {
-	return x.inner.TabsToLinks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tabsToLinks"))
+	return _r
 }
 
-// SetTabsToLinks calls the underlying SetTabsToLinks.
+// SetTabsToLinks wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetTabsToLinks(tabsToLinks bool) {
-	x.inner.SetTabsToLinks(tabsToLinks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabsToLinks:"), tabsToLinks)
 }
 
-// @property usesPageCache @abstract Whether the receiver's associated WebViews use the shared page cache. @discussion Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
-//
-// UsesPageCache calls the underlying UsesPageCache.
+// UsesPageCache whether the receiver's associated WebViews use the shared page cache. Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
 func (x *WebPreferences) UsesPageCache() bool {
-	return x.inner.UsesPageCache()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesPageCache"))
+	return _r
 }
 
-// SetUsesPageCache calls the underlying SetUsesPageCache.
+// SetUsesPageCache wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetUsesPageCache(usesPageCache bool) {
-	x.inner.SetUsesPageCache(usesPageCache)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesPageCache:"), usesPageCache)
 }
 
-// @property cacheModel @abstract Specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. @discussion Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
-//
-// CacheModel calls the underlying CacheModel.
+// CacheModel specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
 func (x *WebPreferences) CacheModel() WebCacheModel {
-	return WebCacheModel(x.inner.CacheModel())
+	_r := objc.Send[WebCacheModel](objref.IDOf(x), objc.RegisterName("cacheModel"))
+	return _r
 }
 
-// SetCacheModel calls the underlying SetCacheModel.
+// SetCacheModel wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetCacheModel(cacheModel WebCacheModel) {
-	x.inner.SetCacheModel(raw.WebCacheModel(cacheModel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCacheModel:"), cacheModel)
 }
 
-// @property suppressesIncrementalRendering
-//
-// SuppressesIncrementalRendering calls the underlying SuppressesIncrementalRendering.
+// SuppressesIncrementalRendering wraps the corresponding Objective-C method.
 func (x *WebPreferences) SuppressesIncrementalRendering() bool {
-	return x.inner.SuppressesIncrementalRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressesIncrementalRendering"))
+	return _r
 }
 
-// SetSuppressesIncrementalRendering calls the underlying SetSuppressesIncrementalRendering.
+// SetSuppressesIncrementalRendering wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool) {
-	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesIncrementalRendering:"), suppressesIncrementalRendering)
 }
 
-// @property allowsAirPlayForMediaPlayback
-//
-// AllowsAirPlayForMediaPlayback calls the underlying AllowsAirPlayForMediaPlayback.
+// AllowsAirPlayForMediaPlayback wraps the corresponding Objective-C method.
 func (x *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
-	return x.inner.AllowsAirPlayForMediaPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAirPlayForMediaPlayback"))
+	return _r
 }
 
-// SetAllowsAirPlayForMediaPlayback calls the underlying SetAllowsAirPlayForMediaPlayback.
+// SetAllowsAirPlayForMediaPlayback wraps the corresponding Objective-C method.
 func (x *WebPreferences) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
-	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
 }
 
 // WebPreferencesable is the interface implemented by [WebPreferences], for mocking and DI.
 type WebPreferencesable interface {
-	Unwrap() *raw.WebPreferences
+	obj.Object
 	WithStandardFontFamily(standardFontFamily string) *WebPreferences
 	WithFixedFontFamily(fixedFontFamily string) *WebPreferences
 	WithSerifFontFamily(serifFontFamily string) *WebPreferences
@@ -697,7 +635,7 @@ type WebPreferencesable interface {
 	SetDefaultTextEncodingName(defaultTextEncodingName string)
 	UserStyleSheetEnabled() bool
 	SetUserStyleSheetEnabled(userStyleSheetEnabled bool)
-	UserStyleSheetLocation() *foundation.NSURL
+	UserStyleSheetLocation() obj.Object
 	SetUserStyleSheetLocation(userStyleSheetLocation string)
 	IsJavaEnabled() bool
 	SetJavaEnabled(javaEnabled bool)

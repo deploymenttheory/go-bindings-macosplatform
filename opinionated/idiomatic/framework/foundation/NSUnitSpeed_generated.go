@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for speed.
+// UnitSpeed is an idiomatic wrapper over the Objective-C class NSUnitSpeed.
 //
-// UnitSpeed wraps [raw.NSUnitSpeed] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for speed.
 type UnitSpeed struct {
-	inner *raw.NSUnitSpeed
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitSpeed].
-func (x *UnitSpeed) Unwrap() *raw.NSUnitSpeed { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitSpeed) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitSpeedFromID adopts an existing object pointer as a UnitSpeed (nil for 0).
+// UnitSpeedFromID adopts an existing Objective-C object as a UnitSpeed
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitSpeedFromID(id objc.ID) *UnitSpeed {
 	if id == 0 {
 		return nil
 	}
-	return &UnitSpeed{inner: raw.NSUnitSpeedFromID(id)}
-}
-
-// NewUnitSpeed creates a new [UnitSpeed].
-func NewUnitSpeed() *UnitSpeed {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitSpeed")), objc.RegisterName("new"))
-	return &UnitSpeed{inner: raw.NSUnitSpeedFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitSpeed) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitSpeed {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitSpeed{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitSpeed) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitSpeedAdopt wraps an Objective-C object that this code just created as a
+// UnitSpeed (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitSpeedAdopt(id objc.ID) *UnitSpeed {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitSpeed{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitSpeed) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitSpeed creates a new UnitSpeed.
+func NewUnitSpeed() *UnitSpeed {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("new"))
+	return unitSpeedAdopt(_id)
+}
 
-func (x *UnitSpeed) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitSpeed) WithScriptingProperties(scriptingProperties obj.Object) *UnitSpeed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitSpeedable is the interface implemented by [UnitSpeed], for mocking and DI.
 type UnitSpeedable interface {
-	Unwrap() *raw.NSUnitSpeed
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitSpeed
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitSpeed
 }
 
 var _ UnitSpeedable = (*UnitSpeed)(nil)
+
+var _ DimensionProvider = (*UnitSpeed)(nil)
+
+var _ UnitProvider = (*UnitSpeed)(nil)

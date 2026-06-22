@@ -5,87 +5,110 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRCertificateInfo wraps [raw.MTRCertificateInfo] with a fluent Go API.
+// MTRCertificateInfo is an idiomatic wrapper over the Objective-C class MTRCertificateInfo.
 type MTRCertificateInfo struct {
-	inner *raw.MTRCertificateInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCertificateInfo].
-func (x *MTRCertificateInfo) Unwrap() *raw.MTRCertificateInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCertificateInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCertificateInfoFromID adopts an existing object pointer as a MTRCertificateInfo (nil for 0).
+// MTRCertificateInfoFromID adopts an existing Objective-C object as a MTRCertificateInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCertificateInfoFromID(id objc.ID) *MTRCertificateInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCertificateInfo{inner: raw.MTRCertificateInfoFromID(id)}
+	x := &MTRCertificateInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
-//
-// NewMTRCertificateInfoWithTLVBytes creates a new [MTRCertificateInfo].
-func NewMTRCertificateInfoWithTLVBytes(bytes_ *foundation.NSData) *MTRCertificateInfo {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCertificateInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTLVBytes:"), bytes_.Ptr())
-	return &MTRCertificateInfo{inner: raw.MTRCertificateInfoFromID(_id)}
+// mTRCertificateInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRCertificateInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCertificateInfoAdopt(id objc.ID) *MTRCertificateInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCertificateInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
-//
-// Issuer calls the underlying Issuer.
+// Description returns the object's -description text.
+func (x *MTRCertificateInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCertificateInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCertificateInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRCertificateInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRCertificateInfoWithTLVBytes initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
+func NewMTRCertificateInfoWithTLVBytes(bytes_ obj.Object) *MTRCertificateInfo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRCertificateInfo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTLVBytes:"), objref.IDOf(bytes_))
+	return mTRCertificateInfoAdopt(_id)
+}
+
+// Issuer the Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
 func (x *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
-	_r := x.inner.Issuer()
-	if _r == nil {
-		return nil
-	}
-	return &MTRDistinguishedNameInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuer"))
+	return MTRDistinguishedNameInfoFromID(_r)
 }
 
-// The Distinguished Name of the entity represented by the certificate.
-//
-// Subject calls the underlying Subject.
+// Subject the Distinguished Name of the entity represented by the certificate.
 func (x *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
-	_r := x.inner.Subject()
-	if _r == nil {
-		return nil
-	}
-	return &MTRDistinguishedNameInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
+	return MTRDistinguishedNameInfoFromID(_r)
 }
 
-// NotBefore calls the underlying NotBefore.
-func (x *MTRCertificateInfo) NotBefore() *foundation.NSDate {
-	return x.inner.NotBefore()
+// NotBefore wraps the corresponding Objective-C method.
+func (x *MTRCertificateInfo) NotBefore() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notBefore"))
+	return obj.Wrap(_r)
 }
 
-// NotAfter calls the underlying NotAfter.
-func (x *MTRCertificateInfo) NotAfter() *foundation.NSDate {
-	return x.inner.NotAfter()
+// NotAfter wraps the corresponding Objective-C method.
+func (x *MTRCertificateInfo) NotAfter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notAfter"))
+	return obj.Wrap(_r)
 }
 
-// Public key data for this certificate
-//
-// PublicKeyData calls the underlying PublicKeyData.
-func (x *MTRCertificateInfo) PublicKeyData() *foundation.NSData {
-	return x.inner.PublicKeyData()
+// PublicKeyData public key data for this certificate
+func (x *MTRCertificateInfo) PublicKeyData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyData"))
+	return obj.Wrap(_r)
 }
 
 // MTRCertificateInfoable is the interface implemented by [MTRCertificateInfo], for mocking and DI.
 type MTRCertificateInfoable interface {
-	Unwrap() *raw.MTRCertificateInfo
+	obj.Object
 	Issuer() *MTRDistinguishedNameInfo
 	Subject() *MTRDistinguishedNameInfo
-	NotBefore() *foundation.NSDate
-	NotAfter() *foundation.NSDate
-	PublicKeyData() *foundation.NSData
+	NotBefore() obj.Object
+	NotAfter() obj.Object
+	PublicKeyData() obj.Object
 }
 
 var _ MTRCertificateInfoable = (*MTRCertificateInfo)(nil)

@@ -5,73 +5,88 @@
 package mediaaccessibility
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that reports information about the Music Haptics feature.
+// MusicHapticsManager is an idiomatic wrapper over the Objective-C class MAMusicHapticsManager.
 //
-// MusicHapticsManager wraps [raw.MAMusicHapticsManager] with a fluent Go API.
+// A class that reports information about the Music Haptics feature.
 type MusicHapticsManager struct {
-	inner *raw.MAMusicHapticsManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MAMusicHapticsManager].
-func (x *MusicHapticsManager) Unwrap() *raw.MAMusicHapticsManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MusicHapticsManager) ID() objc.ID { return x.inner.Ptr() }
-
-// MusicHapticsManagerFromID adopts an existing object pointer as a MusicHapticsManager (nil for 0).
+// MusicHapticsManagerFromID adopts an existing Objective-C object as a MusicHapticsManager
+// (nil for 0), retaining it and registering a release finalizer.
 func MusicHapticsManagerFromID(id objc.ID) *MusicHapticsManager {
 	if id == 0 {
 		return nil
 	}
-	return &MusicHapticsManager{inner: raw.MAMusicHapticsManagerFromID(id)}
+	x := &MusicHapticsManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMusicHapticsManager creates a new [MusicHapticsManager].
+// musicHapticsManagerAdopt wraps an Objective-C object that this code just created as a
+// MusicHapticsManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func musicHapticsManagerAdopt(id objc.ID) *MusicHapticsManager {
+	if id == 0 {
+		return nil
+	}
+	x := &MusicHapticsManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MusicHapticsManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MusicHapticsManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MusicHapticsManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MusicHapticsManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMusicHapticsManager creates a new MusicHapticsManager.
 func NewMusicHapticsManager() *MusicHapticsManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MAMusicHapticsManager")), objc.RegisterName("new"))
-	return &MusicHapticsManager{inner: raw.MAMusicHapticsManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MAMusicHapticsManager")), objc.RegisterName("new"))
+	return musicHapticsManagerAdopt(_id)
 }
 
-// Checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
-//
-// CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler calls the underlying CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler.
+// CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
 func (x *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
-	x.inner.CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(foundation.NSStringStringWithUTF8String(internationalStandardRecordingCode), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:"), purego.NSString(internationalStandardRecordingCode), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Adds an observer to monitor the status of haptic playback for the Now Playing song.
-//
-// AddStatusObserver calls the underlying AddStatusObserver.
-func (x *MusicHapticsManager) AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying {
-	return x.inner.AddStatusObserver(statusHandler)
-}
-
-// Removes the observer monitoring the status of haptic playback for the Now Playing song.
-//
-// RemoveStatusObserver calls the underlying RemoveStatusObserver.
-func (x *MusicHapticsManager) RemoveStatusObserver(registrationToken foundation.NSCopying) {
-	x.inner.RemoveStatusObserver(registrationToken)
-}
-
-// @abstract Whether the user setting to indicate Music Haptics are currently active. @result A boolean result.
-//
-// IsActive calls the underlying IsActive.
+// IsActive whether the user setting to indicate Music Haptics are currently active.
 func (x *MusicHapticsManager) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
 // MusicHapticsManagerable is the interface implemented by [MusicHapticsManager], for mocking and DI.
 type MusicHapticsManagerable interface {
-	Unwrap() *raw.MAMusicHapticsManager
+	obj.Object
 	CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool))
-	AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying
-	RemoveStatusObserver(registrationToken foundation.NSCopying)
 	IsActive() bool
 }
 

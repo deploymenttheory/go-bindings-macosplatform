@@ -5,69 +5,96 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data source that automatically provides live data from an active workout session.
+// LiveWorkoutDataSource is an idiomatic wrapper over the Objective-C class HKLiveWorkoutDataSource.
 //
-// LiveWorkoutDataSource wraps [raw.HKLiveWorkoutDataSource] with a fluent Go API.
+// A data source that automatically provides live data from an active workout session.
 type LiveWorkoutDataSource struct {
-	inner *raw.HKLiveWorkoutDataSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKLiveWorkoutDataSource].
-func (x *LiveWorkoutDataSource) Unwrap() *raw.HKLiveWorkoutDataSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LiveWorkoutDataSource) ID() objc.ID { return x.inner.Ptr() }
-
-// LiveWorkoutDataSourceFromID adopts an existing object pointer as a LiveWorkoutDataSource (nil for 0).
+// LiveWorkoutDataSourceFromID adopts an existing Objective-C object as a LiveWorkoutDataSource
+// (nil for 0), retaining it and registering a release finalizer.
 func LiveWorkoutDataSourceFromID(id objc.ID) *LiveWorkoutDataSource {
 	if id == 0 {
 		return nil
 	}
-	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(id)}
+	x := &LiveWorkoutDataSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new data source based on the provided workout configuration.
-//
-// NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new [LiveWorkoutDataSource].
-func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *raw.HKHealthStore, configuration *raw.HKWorkoutConfiguration) *LiveWorkoutDataSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKLiveWorkoutDataSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:workoutConfiguration:"), healthStore.Ptr(), configuration.Ptr())
-	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(_id)}
+// liveWorkoutDataSourceAdopt wraps an Objective-C object that this code just created as a
+// LiveWorkoutDataSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func liveWorkoutDataSourceAdopt(id objc.ID) *LiveWorkoutDataSource {
+	if id == 0 {
+		return nil
+	}
+	x := &LiveWorkoutDataSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Begins automatically calculating statistics for samples that match the quantity type and predicate.
-//
-// EnableCollectionForTypePredicate calls the underlying EnableCollectionForTypePredicate.
-func (x *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate) {
-	x.inner.EnableCollectionForTypePredicate(quantityType, predicate)
+// Description returns the object's -description text.
+func (x *LiveWorkoutDataSource) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Stops automatically calculating statistics for the quantity type.
-//
-// DisableCollectionForType calls the underlying DisableCollectionForType.
-func (x *LiveWorkoutDataSource) DisableCollectionForType(quantityType *raw.HKQuantityType) {
-	x.inner.DisableCollectionForType(quantityType)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LiveWorkoutDataSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property      typesToCollect @abstract      The quantity types the receiver is collecting.
-//
-// TypesToCollect calls the underlying TypesToCollect.
-func (x *LiveWorkoutDataSource) TypesToCollect() *foundation.NSSet[*raw.HKQuantityType] {
-	return x.inner.TypesToCollect()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LiveWorkoutDataSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LiveWorkoutDataSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new data source based on the provided workout configuration.
+func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *HealthStore, configuration *WorkoutConfiguration) *LiveWorkoutDataSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKLiveWorkoutDataSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:workoutConfiguration:"), objref.IDOf(healthStore), objref.IDOf(configuration))
+	return liveWorkoutDataSourceAdopt(_id)
+}
+
+// EnableCollectionForTypePredicate begins automatically calculating statistics for samples that match the quantity type and predicate.
+func (x *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *QuantityType, predicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableCollectionForType:predicate:"), objref.IDOf(quantityType), objref.IDOf(predicate))
+}
+
+// DisableCollectionForType stops automatically calculating statistics for the quantity type.
+func (x *LiveWorkoutDataSource) DisableCollectionForType(quantityType *QuantityType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableCollectionForType:"), objref.IDOf(quantityType))
+}
+
+// TypesToCollect the quantity types the receiver is collecting.
+func (x *LiveWorkoutDataSource) TypesToCollect() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typesToCollect"))
+	return obj.Wrap(_r)
 }
 
 // LiveWorkoutDataSourceable is the interface implemented by [LiveWorkoutDataSource], for mocking and DI.
 type LiveWorkoutDataSourceable interface {
-	Unwrap() *raw.HKLiveWorkoutDataSource
-	EnableCollectionForTypePredicate(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate)
-	DisableCollectionForType(quantityType *raw.HKQuantityType)
-	TypesToCollect() *foundation.NSSet[*raw.HKQuantityType]
+	obj.Object
+	EnableCollectionForTypePredicate(quantityType *QuantityType, predicate obj.Object)
+	DisableCollectionForType(quantityType *QuantityType)
+	TypesToCollect() obj.Object
 }
 
 var _ LiveWorkoutDataSourceable = (*LiveWorkoutDataSource)(nil)

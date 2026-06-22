@@ -5,72 +5,81 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A password-based authentication operation.
+// TokenPasswordAuthOperation is an idiomatic wrapper over the Objective-C class TKTokenPasswordAuthOperation.
 //
-// TokenPasswordAuthOperation wraps [raw.TKTokenPasswordAuthOperation] with a fluent Go API.
+// It embeds [TokenAuthOperation], promoting that type's methods.
+//
+// A password-based authentication operation.
 type TokenPasswordAuthOperation struct {
-	inner *raw.TKTokenPasswordAuthOperation
+	TokenAuthOperation
 }
 
-// Unwrap returns the underlying [raw.TKTokenPasswordAuthOperation].
-func (x *TokenPasswordAuthOperation) Unwrap() *raw.TKTokenPasswordAuthOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenPasswordAuthOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenPasswordAuthOperationFromID adopts an existing object pointer as a TokenPasswordAuthOperation (nil for 0).
+// TokenPasswordAuthOperationFromID adopts an existing Objective-C object as a TokenPasswordAuthOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenPasswordAuthOperationFromID(id objc.ID) *TokenPasswordAuthOperation {
 	if id == 0 {
 		return nil
 	}
-	return &TokenPasswordAuthOperation{inner: raw.TKTokenPasswordAuthOperationFromID(id)}
-}
-
-// NewTokenPasswordAuthOperation creates a new [TokenPasswordAuthOperation].
-func NewTokenPasswordAuthOperation() *TokenPasswordAuthOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenPasswordAuthOperation")), objc.RegisterName("new"))
-	return &TokenPasswordAuthOperation{inner: raw.TKTokenPasswordAuthOperationFromID(_id)}
-}
-
-// The password to be filled in when the finishWithError: is called.
-//
-// WithPassword sets the password property and returns the receiver for chaining.
-func (x *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswordAuthOperation {
-	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+	x := &TokenPasswordAuthOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Password calls the underlying Password.
+// tokenPasswordAuthOperationAdopt wraps an Objective-C object that this code just created as a
+// TokenPasswordAuthOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenPasswordAuthOperationAdopt(id objc.ID) *TokenPasswordAuthOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenPasswordAuthOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTokenPasswordAuthOperation creates a new TokenPasswordAuthOperation.
+func NewTokenPasswordAuthOperation() *TokenPasswordAuthOperation {
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenPasswordAuthOperation")), objc.RegisterName("new"))
+	return tokenPasswordAuthOperationAdopt(_id)
+}
+
+// WithPassword the password to be filled in when the finishWithError: is called.
+func (x *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswordAuthOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
+	return x
+}
+
+// Password wraps the corresponding Objective-C method.
 func (x *TokenPasswordAuthOperation) Password() string {
-	_r := x.inner.Password()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPassword calls the underlying SetPassword.
+// SetPassword wraps the corresponding Objective-C method.
 func (x *TokenPasswordAuthOperation) SetPassword(password string) {
-	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
-}
-
-func (x *TokenPasswordAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation {
-	return &x.inner.TKTokenAuthOperation
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
 }
 
 // TokenPasswordAuthOperationable is the interface implemented by [TokenPasswordAuthOperation], for mocking and DI.
 type TokenPasswordAuthOperationable interface {
-	Unwrap() *raw.TKTokenPasswordAuthOperation
+	obj.Object
 	WithPassword(password string) *TokenPasswordAuthOperation
 	Password() string
 	SetPassword(password string)
 }
 
 var _ TokenPasswordAuthOperationable = (*TokenPasswordAuthOperation)(nil)
+
+var _ TokenAuthOperationProvider = (*TokenPasswordAuthOperation)(nil)

@@ -5,54 +5,61 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the redial capabilities of a missed call.
+// StartCallCallRecordToCallBackResolutionResult is an idiomatic wrapper over the Objective-C class INStartCallCallRecordToCallBackResolutionResult.
 //
-// StartCallCallRecordToCallBackResolutionResult wraps [raw.INStartCallCallRecordToCallBackResolutionResult] with a fluent Go API.
+// It embeds [CallRecordResolutionResult], promoting that type's methods.
+//
+// A resolution result for the redial capabilities of a missed call.
 type StartCallCallRecordToCallBackResolutionResult struct {
-	inner *raw.INStartCallCallRecordToCallBackResolutionResult
+	CallRecordResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INStartCallCallRecordToCallBackResolutionResult].
-func (x *StartCallCallRecordToCallBackResolutionResult) Unwrap() *raw.INStartCallCallRecordToCallBackResolutionResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StartCallCallRecordToCallBackResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// StartCallCallRecordToCallBackResolutionResultFromID adopts an existing object pointer as a StartCallCallRecordToCallBackResolutionResult (nil for 0).
+// StartCallCallRecordToCallBackResolutionResultFromID adopts an existing Objective-C object as a StartCallCallRecordToCallBackResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func StartCallCallRecordToCallBackResolutionResultFromID(id objc.ID) *StartCallCallRecordToCallBackResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &StartCallCallRecordToCallBackResolutionResult{inner: raw.INStartCallCallRecordToCallBackResolutionResultFromID(id)}
+	x := &StartCallCallRecordToCallBackResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object whose resolution involves successfully redialing a call.
-//
-// NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult creates a new [StartCallCallRecordToCallBackResolutionResult].
-func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult(callRecordResolutionResult *raw.INCallRecordResolutionResult) *StartCallCallRecordToCallBackResolutionResult {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INStartCallCallRecordToCallBackResolutionResult")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordResolutionResult:"), callRecordResolutionResult.Ptr())
-	return &StartCallCallRecordToCallBackResolutionResult{inner: raw.INStartCallCallRecordToCallBackResolutionResultFromID(_id)}
+// startCallCallRecordToCallBackResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// StartCallCallRecordToCallBackResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func startCallCallRecordToCallBackResolutionResultAdopt(id objc.ID) *StartCallCallRecordToCallBackResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &StartCallCallRecordToCallBackResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *StartCallCallRecordToCallBackResolutionResult) asCallRecordResolutionResult() *raw.INCallRecordResolutionResult {
-	return &x.inner.INCallRecordResolutionResult
-}
-
-func (x *StartCallCallRecordToCallBackResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INCallRecordResolutionResult.INIntentResolutionResult
+// NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult creates an object whose resolution involves successfully redialing a call.
+func NewStartCallCallRecordToCallBackResolutionResultWithCallRecordResolutionResult(callRecordResolutionResult *CallRecordResolutionResult) *StartCallCallRecordToCallBackResolutionResult {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INStartCallCallRecordToCallBackResolutionResult")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordResolutionResult:"), objref.IDOf(callRecordResolutionResult))
+	return startCallCallRecordToCallBackResolutionResultAdopt(_id)
 }
 
 // StartCallCallRecordToCallBackResolutionResultable is the interface implemented by [StartCallCallRecordToCallBackResolutionResult], for mocking and DI.
 type StartCallCallRecordToCallBackResolutionResultable interface {
-	Unwrap() *raw.INStartCallCallRecordToCallBackResolutionResult
+	obj.Object
 }
 
 var _ StartCallCallRecordToCallBackResolutionResultable = (*StartCallCallRecordToCallBackResolutionResult)(nil)
+
+var _ CallRecordResolutionResultProvider = (*StartCallCallRecordToCallBackResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*StartCallCallRecordToCallBackResolutionResult)(nil)

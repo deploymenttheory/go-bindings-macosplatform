@@ -5,62 +5,94 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a matrix multiplication layer.
+// MatMulDescriptor is an idiomatic wrapper over the Objective-C class MLCMatMulDescriptor.
 //
-// MatMulDescriptor wraps [raw.MLCMatMulDescriptor] with a fluent Go API.
+// A configuration object you use to create a matrix multiplication layer.
 type MatMulDescriptor struct {
-	inner *raw.MLCMatMulDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCMatMulDescriptor].
-func (x *MatMulDescriptor) Unwrap() *raw.MLCMatMulDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatMulDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MatMulDescriptorFromID adopts an existing object pointer as a MatMulDescriptor (nil for 0).
+// MatMulDescriptorFromID adopts an existing Objective-C object as a MatMulDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MatMulDescriptorFromID(id objc.ID) *MatMulDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MatMulDescriptor{inner: raw.MLCMatMulDescriptorFromID(id)}
+	x := &MatMulDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatMulDescriptor creates a new [MatMulDescriptor].
+// matMulDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MatMulDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matMulDescriptorAdopt(id objc.ID) *MatMulDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MatMulDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatMulDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatMulDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatMulDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatMulDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMatMulDescriptor creates a new MatMulDescriptor.
 func NewMatMulDescriptor() *MatMulDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCMatMulDescriptor")), objc.RegisterName("new"))
-	return &MatMulDescriptor{inner: raw.MLCMatMulDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCMatMulDescriptor")), objc.RegisterName("new"))
+	return matMulDescriptorAdopt(_id)
 }
 
-// @brief a scalar to scale the result in C=alpha x X x Y. Default = 1.0
-//
-// Alpha calls the underlying Alpha.
+// Alpha a scalar to scale the result in C=alpha x X x Y. Default = 1.0
 func (x *MatMulDescriptor) Alpha() float32 {
-	return x.inner.Alpha()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// @brief if true, transposes the last two dimensions of X. Default = False
-//
-// TransposesX calls the underlying TransposesX.
+// TransposesX if true, transposes the last two dimensions of X. Default = False
 func (x *MatMulDescriptor) TransposesX() bool {
-	return x.inner.TransposesX()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transposesX"))
+	return _r
 }
 
-// @brief if true, transposes the last two dimensions of Y. Default = False
-//
-// TransposesY calls the underlying TransposesY.
+// TransposesY if true, transposes the last two dimensions of Y. Default = False
 func (x *MatMulDescriptor) TransposesY() bool {
-	return x.inner.TransposesY()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transposesY"))
+	return _r
 }
 
 // MatMulDescriptorable is the interface implemented by [MatMulDescriptor], for mocking and DI.
 type MatMulDescriptorable interface {
-	Unwrap() *raw.MLCMatMulDescriptor
+	obj.Object
 	Alpha() float32
 	TransposesX() bool
 	TransposesY() bool

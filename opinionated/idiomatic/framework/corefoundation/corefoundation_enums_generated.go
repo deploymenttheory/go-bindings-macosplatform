@@ -51,6 +51,8 @@ const (
 	KCFCalendarUnitDayOfYear         CFCalendarUnit = 65536
 )
 
+// String returns the CFCalendarUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFCalendarUnit) String() string {
 	var parts []string
 	if e&KCFCalendarUnitEra != 0 {
@@ -140,6 +142,8 @@ const (
 	KCFCharacterSetIllegal CFCharacterSetPredefinedSet = 12
 )
 
+// String returns the CFCharacterSetPredefinedSet constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFCharacterSetPredefinedSet) String() string {
 	switch e {
 	case KCFCharacterSetControl:
@@ -189,6 +193,8 @@ const (
 	KCFCompareGreaterThan CFComparisonResult = 1
 )
 
+// String returns the CFComparisonResult constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFComparisonResult) String() string {
 	switch e {
 	case KCFCompareLessThan:
@@ -200,29 +206,6 @@ func (e CFComparisonResult) String() string {
 	default:
 		return fmt.Sprintf("CFComparisonResult(%d)", int64(e))
 	}
-}
-
-// A CFOptionFlags type for specifying options for searching.
-// Bitmask — values may be combined with |.
-type CFDataSearchFlags int64
-
-const (
-	KCFDataSearchBackwards CFDataSearchFlags = 1
-	KCFDataSearchAnchored  CFDataSearchFlags = 2
-)
-
-func (e CFDataSearchFlags) String() string {
-	var parts []string
-	if e&KCFDataSearchBackwards != 0 {
-		parts = append(parts, "KCFDataSearchBackwards")
-	}
-	if e&KCFDataSearchAnchored != 0 {
-		parts = append(parts, "KCFDataSearchAnchored")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Data type for predefined date and time format styles.
@@ -241,6 +224,8 @@ const (
 	KCFDateFormatterFullStyle CFDateFormatterStyle = 4
 )
 
+// String returns the CFDateFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFDateFormatterStyle) String() string {
 	switch e {
 	case KCFDateFormatterNoStyle:
@@ -276,6 +261,8 @@ const (
 	KCFFileSecurityClearAccessControlList CFFileSecurityClearOptions = 32
 )
 
+// String returns the CFFileSecurityClearOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFFileSecurityClearOptions) String() string {
 	var parts []string
 	if e&KCFFileSecurityClearOwner != 0 {
@@ -322,6 +309,8 @@ const (
 	KCFISO8601DateFormatWithInternetDateTime         CFISO8601DateFormatOptions = 1907
 )
 
+// String returns the CFISO8601DateFormatOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFISO8601DateFormatOptions) String() string {
 	var parts []string
 	if e&KCFISO8601DateFormatWithYear != 0 {
@@ -383,6 +372,8 @@ const (
 	KCFLocaleLanguageDirectionBottomToTop CFLocaleLanguageDirection = 4
 )
 
+// String returns the CFLocaleLanguageDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFLocaleLanguageDirection) String() string {
 	switch e {
 	case KCFLocaleLanguageDirectionUnknown:
@@ -397,35 +388,6 @@ func (e CFLocaleLanguageDirection) String() string {
 		return "KCFLocaleLanguageDirectionBottomToTop"
 	default:
 		return fmt.Sprintf("CFLocaleLanguageDirection(%d)", int64(e))
-	}
-}
-
-// Suspension flags that indicate how distributed notifications should be handled when the receiving application is in the background.
-type CFNotificationSuspensionBehavior int64
-
-const (
-	// The server will not queue any notifications of the specified name and object while the receiving application is in the background.
-	CFNotificationSuspensionBehaviorDrop CFNotificationSuspensionBehavior = 1
-	// The server will only queue the last notification of the specified name and object; earlier notifications are dropped.
-	CFNotificationSuspensionBehaviorCoalesce CFNotificationSuspensionBehavior = 2
-	// The server will hold all matching notifications until the queue has been filled (queue size determined by the server) at which point the server may flush queued notifications.
-	CFNotificationSuspensionBehaviorHold CFNotificationSuspensionBehavior = 3
-	// The server will deliver notifications of the specified name and object whether or not the application is in the background. When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.
-	CFNotificationSuspensionBehaviorDeliverImmediately CFNotificationSuspensionBehavior = 4
-)
-
-func (e CFNotificationSuspensionBehavior) String() string {
-	switch e {
-	case CFNotificationSuspensionBehaviorDrop:
-		return "CFNotificationSuspensionBehaviorDrop"
-	case CFNotificationSuspensionBehaviorCoalesce:
-		return "CFNotificationSuspensionBehaviorCoalesce"
-	case CFNotificationSuspensionBehaviorHold:
-		return "CFNotificationSuspensionBehaviorHold"
-	case CFNotificationSuspensionBehaviorDeliverImmediately:
-		return "CFNotificationSuspensionBehaviorDeliverImmediately"
-	default:
-		return fmt.Sprintf("CFNotificationSuspensionBehavior(%d)", int64(e))
 	}
 }
 
@@ -451,6 +413,8 @@ const (
 	KCFNumberFormatterCurrencyAccountingStyle CFNumberFormatterStyle = 10
 )
 
+// String returns the CFNumberFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFNumberFormatterStyle) String() string {
 	switch e {
 	case KCFNumberFormatterNoStyle:
@@ -518,6 +482,8 @@ const (
 	KCFNumberMaxType CFNumberType = 16
 )
 
+// String returns the CFNumberType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFNumberType) String() string {
 	switch e {
 	case KCFNumberSInt8Type:
@@ -569,6 +535,8 @@ const (
 	KCFPropertyListBinaryFormat_v1_0 CFPropertyListFormat = 200
 )
 
+// String returns the CFPropertyListFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFPropertyListFormat) String() string {
 	switch e {
 	case KCFPropertyListOpenStepFormat:
@@ -579,83 +547,6 @@ func (e CFPropertyListFormat) String() string {
 		return "KCFPropertyListBinaryFormat_v1_0"
 	default:
 		return fmt.Sprintf("CFPropertyListFormat(%d)", int64(e))
-	}
-}
-
-// Run loop activity stages in which run loop observers can be scheduled.
-// Bitmask — values may be combined with |.
-type CFRunLoopActivity int64
-
-const (
-	// The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
-	KCFRunLoopEntry CFRunLoopActivity = 1
-	// Inside the event processing loop before any timers are processed.
-	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
-	// Inside the event processing loop before any sources are processed.
-	KCFRunLoopBeforeSources CFRunLoopActivity = 4
-	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
-	// Inside the event processing loop after the run loop wakes up, but before processing the event that woke it up. This activity occurs only if the run loop did in fact go to sleep during the current loop.
-	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
-	// The exit of the run loop, after exiting the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
-	KCFRunLoopExit CFRunLoopActivity = 128
-	// A combination of all the preceding stages.
-	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
-)
-
-func (e CFRunLoopActivity) String() string {
-	var parts []string
-	if e&KCFRunLoopEntry != 0 {
-		parts = append(parts, "KCFRunLoopEntry")
-	}
-	if e&KCFRunLoopBeforeTimers != 0 {
-		parts = append(parts, "KCFRunLoopBeforeTimers")
-	}
-	if e&KCFRunLoopBeforeSources != 0 {
-		parts = append(parts, "KCFRunLoopBeforeSources")
-	}
-	if e&KCFRunLoopBeforeWaiting != 0 {
-		parts = append(parts, "KCFRunLoopBeforeWaiting")
-	}
-	if e&KCFRunLoopAfterWaiting != 0 {
-		parts = append(parts, "KCFRunLoopAfterWaiting")
-	}
-	if e&KCFRunLoopExit != 0 {
-		parts = append(parts, "KCFRunLoopExit")
-	}
-	if e&KCFRunLoopAllActivities != 0 {
-		parts = append(parts, "KCFRunLoopAllActivities")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type CFRunLoopRunResult int64
-
-const (
-	// The running run loop mode has no sources or timers to process.
-	KCFRunLoopRunFinished CFRunLoopRunResult = 1
-	// CFRunLoopStop was called on the run loop.
-	KCFRunLoopRunStopped CFRunLoopRunResult = 2
-	// The specified time interval for running the run loop has passed.
-	KCFRunLoopRunTimedOut CFRunLoopRunResult = 3
-	// A source has been processed. This value is returned only if the run loop was told to run only until a source was processed.
-	KCFRunLoopRunHandledSource CFRunLoopRunResult = 4
-)
-
-func (e CFRunLoopRunResult) String() string {
-	switch e {
-	case KCFRunLoopRunFinished:
-		return "KCFRunLoopRunFinished"
-	case KCFRunLoopRunStopped:
-		return "KCFRunLoopRunStopped"
-	case KCFRunLoopRunTimedOut:
-		return "KCFRunLoopRunTimedOut"
-	case KCFRunLoopRunHandledSource:
-		return "KCFRunLoopRunHandledSource"
-	default:
-		return fmt.Sprintf("CFRunLoopRunResult(%d)", int64(e))
 	}
 }
 
@@ -671,6 +562,8 @@ const (
 	KCFSocketTimeout CFSocketError = -2
 )
 
+// String returns the CFSocketError constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFSocketError) String() string {
 	switch e {
 	case KCFSocketSuccess:
@@ -706,6 +599,8 @@ const (
 	KCFStreamStatusError CFStreamStatus = 7
 )
 
+// String returns the CFStreamStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStreamStatus) String() string {
 	switch e {
 	case KCFStreamStatusNotOpen:
@@ -754,6 +649,8 @@ const (
 	KCFCompareForcedOrdering CFStringCompareFlags = 512
 )
 
+// String returns the CFStringCompareFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStringCompareFlags) String() string {
 	var parts []string
 	if e&KCFCompareCaseInsensitive != 0 {
@@ -803,6 +700,8 @@ const (
 	KCFStringNormalizationFormKC CFStringNormalizationForm = 3
 )
 
+// String returns the CFStringNormalizationForm constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStringNormalizationForm) String() string {
 	switch e {
 	case KCFStringNormalizationFormD:
@@ -839,6 +738,8 @@ const (
 	KCFStringTokenizerTokenIsCJWordMask CFStringTokenizerTokenType = 32
 )
 
+// String returns the CFStringTokenizerTokenType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFStringTokenizerTokenType) String() string {
 	var parts []string
 	if e&KCFStringTokenizerTokenNormal != 0 {
@@ -883,6 +784,8 @@ const (
 	KCFTimeZoneNameStyleShortGeneric CFTimeZoneNameStyle = 5
 )
 
+// String returns the CFTimeZoneNameStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFTimeZoneNameStyle) String() string {
 	switch e {
 	case KCFTimeZoneNameStyleStandard:
@@ -922,6 +825,8 @@ const (
 	KCFURLBookmarkCreationPreferFileIDResolutionMask CFURLBookmarkCreationOptions = 256
 )
 
+// String returns the CFURLBookmarkCreationOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLBookmarkCreationOptions) String() string {
 	var parts []string
 	if e&KCFURLBookmarkCreationMinimalBookmarkMask != 0 {
@@ -964,6 +869,8 @@ const (
 	KCFBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
 )
 
+// String returns the CFURLBookmarkResolutionOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLBookmarkResolutionOptions) String() string {
 	var parts []string
 	if e&KCFURLBookmarkResolutionWithoutUIMask != 0 {
@@ -1020,6 +927,8 @@ const (
 	KCFURLComponentFragment CFURLComponentType = 12
 )
 
+// String returns the CFURLComponentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLComponentType) String() string {
 	switch e {
 	case KCFURLComponentScheme:
@@ -1073,6 +982,8 @@ const (
 	KCFURLEnumeratorGenerateRelativePathURLs    CFURLEnumeratorOptions = 64
 )
 
+// String returns the CFURLEnumeratorOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLEnumeratorOptions) String() string {
 	var parts []string
 	if e&KCFURLEnumeratorDescendRecursively != 0 {
@@ -1118,6 +1029,8 @@ const (
 	KCFURLWindowsPathStyle CFURLPathStyle = 2
 )
 
+// String returns the CFURLPathStyle constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFURLPathStyle) String() string {
 	switch e {
 	case KCFURLPOSIXPathStyle:
@@ -1167,6 +1080,8 @@ const (
 	KCFXMLNodeTypeAttributeListDeclaration CFXMLNodeTypeCode = 15
 )
 
+// String returns the CFXMLNodeTypeCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFXMLNodeTypeCode) String() string {
 	switch e {
 	case KCFXMLNodeTypeDocument:
@@ -1247,6 +1162,8 @@ const (
 	KCFXMLErrorNoData CFXMLParserStatusCode = 15
 )
 
+// String returns the CFXMLParserStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CFXMLParserStatusCode) String() string {
 	var parts []string
 	if e&KCFXMLStatusParseNotBegun != 0 {

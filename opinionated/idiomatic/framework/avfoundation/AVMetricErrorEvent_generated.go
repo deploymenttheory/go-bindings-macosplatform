@@ -5,60 +5,65 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a metric event when an error occurs.
+// MetricErrorEvent is an idiomatic wrapper over the Objective-C class AVMetricErrorEvent.
 //
-// MetricErrorEvent wraps [raw.AVMetricErrorEvent] with a fluent Go API.
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An object that represents a metric event when an error occurs.
 type MetricErrorEvent struct {
-	inner *raw.AVMetricErrorEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricErrorEvent].
-func (x *MetricErrorEvent) Unwrap() *raw.AVMetricErrorEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricErrorEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricErrorEventFromID adopts an existing object pointer as a MetricErrorEvent (nil for 0).
+// MetricErrorEventFromID adopts an existing Objective-C object as a MetricErrorEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricErrorEventFromID(id objc.ID) *MetricErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricErrorEvent{inner: raw.AVMetricErrorEventFromID(id)}
+	x := &MetricErrorEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricErrorEvent creates a new [MetricErrorEvent].
+// metricErrorEventAdopt wraps an Objective-C object that this code just created as a
+// MetricErrorEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricErrorEventAdopt(id objc.ID) *MetricErrorEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricErrorEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMetricErrorEvent creates a new MetricErrorEvent.
 func NewMetricErrorEvent() *MetricErrorEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricErrorEvent")), objc.RegisterName("new"))
-	return &MetricErrorEvent{inner: raw.AVMetricErrorEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricErrorEvent")), objc.RegisterName("new"))
+	return metricErrorEventAdopt(_id)
 }
 
-// Returns whether the error was recoverable.
-//
-// DidRecover calls the underlying DidRecover.
+// DidRecover returns whether the error was recoverable.
 func (x *MetricErrorEvent) DidRecover() bool {
-	return x.inner.DidRecover()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didRecover"))
+	return _r
 }
-
-// Returns the error encountered.
-//
-// Error calls the underlying Error.
-func (x *MetricErrorEvent) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-func (x *MetricErrorEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
 
 // MetricErrorEventable is the interface implemented by [MetricErrorEvent], for mocking and DI.
 type MetricErrorEventable interface {
-	Unwrap() *raw.AVMetricErrorEvent
+	obj.Object
 	DidRecover() bool
-	Error() unsafe.Pointer
 }
 
 var _ MetricErrorEventable = (*MetricErrorEvent)(nil)
+
+var _ MetricEventProvider = (*MetricErrorEvent)(nil)

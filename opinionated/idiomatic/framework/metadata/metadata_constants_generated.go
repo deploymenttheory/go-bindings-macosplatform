@@ -5,709 +5,909 @@
 package metadata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metadata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KMDItemAttributeChangeDate returns the value of the CoreFoundation reference constant kMDItemAttributeChangeDate as an objc.ID.
-func KMDItemAttributeChangeDate() objc.ID { return purego.CFConstant(raw.KMDItemAttributeChangeDate()) }
-
-// KMDItemContentType returns the value of the CoreFoundation reference constant kMDItemContentType as an objc.ID.
-func KMDItemContentType() objc.ID { return purego.CFConstant(raw.KMDItemContentType()) }
-
-// KMDItemContentTypeTree returns the value of the CoreFoundation reference constant kMDItemContentTypeTree as an objc.ID.
-func KMDItemContentTypeTree() objc.ID { return purego.CFConstant(raw.KMDItemContentTypeTree()) }
-
-// KMDItemKeywords returns the value of the CoreFoundation reference constant kMDItemKeywords as an objc.ID.
-func KMDItemKeywords() objc.ID { return purego.CFConstant(raw.KMDItemKeywords()) }
-
-// KMDItemTitle returns the value of the CoreFoundation reference constant kMDItemTitle as an objc.ID.
-func KMDItemTitle() objc.ID { return purego.CFConstant(raw.KMDItemTitle()) }
-
-// KMDItemAuthors returns the value of the CoreFoundation reference constant kMDItemAuthors as an objc.ID.
-func KMDItemAuthors() objc.ID { return purego.CFConstant(raw.KMDItemAuthors()) }
-
-// KMDItemEditors returns the value of the CoreFoundation reference constant kMDItemEditors as an objc.ID.
-func KMDItemEditors() objc.ID { return purego.CFConstant(raw.KMDItemEditors()) }
-
-// KMDItemParticipants returns the value of the CoreFoundation reference constant kMDItemParticipants as an objc.ID.
-func KMDItemParticipants() objc.ID { return purego.CFConstant(raw.KMDItemParticipants()) }
-
-// KMDItemProjects returns the value of the CoreFoundation reference constant kMDItemProjects as an objc.ID.
-func KMDItemProjects() objc.ID { return purego.CFConstant(raw.KMDItemProjects()) }
-
-// KMDItemDownloadedDate returns the value of the CoreFoundation reference constant kMDItemDownloadedDate as an objc.ID.
-func KMDItemDownloadedDate() objc.ID { return purego.CFConstant(raw.KMDItemDownloadedDate()) }
-
-// KMDItemWhereFroms returns the value of the CoreFoundation reference constant kMDItemWhereFroms as an objc.ID.
-func KMDItemWhereFroms() objc.ID { return purego.CFConstant(raw.KMDItemWhereFroms()) }
-
-// KMDItemComment returns the value of the CoreFoundation reference constant kMDItemComment as an objc.ID.
-func KMDItemComment() objc.ID { return purego.CFConstant(raw.KMDItemComment()) }
-
-// KMDItemCopyright returns the value of the CoreFoundation reference constant kMDItemCopyright as an objc.ID.
-func KMDItemCopyright() objc.ID { return purego.CFConstant(raw.KMDItemCopyright()) }
-
-// KMDItemLastUsedDate returns the value of the CoreFoundation reference constant kMDItemLastUsedDate as an objc.ID.
-func KMDItemLastUsedDate() objc.ID { return purego.CFConstant(raw.KMDItemLastUsedDate()) }
-
-// KMDItemContentCreationDate returns the value of the CoreFoundation reference constant kMDItemContentCreationDate as an objc.ID.
-func KMDItemContentCreationDate() objc.ID { return purego.CFConstant(raw.KMDItemContentCreationDate()) }
-
-// KMDItemContentModificationDate returns the value of the CoreFoundation reference constant kMDItemContentModificationDate as an objc.ID.
-func KMDItemContentModificationDate() objc.ID {
-	return purego.CFConstant(raw.KMDItemContentModificationDate())
+// KMDItemAttributeChangeDate returns the value of the constant kMDItemAttributeChangeDate.
+func KMDItemAttributeChangeDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAttributeChangeDate")))
 }
 
-// KMDItemDateAdded returns the value of the CoreFoundation reference constant kMDItemDateAdded as an objc.ID.
-func KMDItemDateAdded() objc.ID { return purego.CFConstant(raw.KMDItemDateAdded()) }
-
-// KMDItemDurationSeconds returns the value of the CoreFoundation reference constant kMDItemDurationSeconds as an objc.ID.
-func KMDItemDurationSeconds() objc.ID { return purego.CFConstant(raw.KMDItemDurationSeconds()) }
-
-// KMDItemContactKeywords returns the value of the CoreFoundation reference constant kMDItemContactKeywords as an objc.ID.
-func KMDItemContactKeywords() objc.ID { return purego.CFConstant(raw.KMDItemContactKeywords()) }
-
-// KMDItemVersion returns the value of the CoreFoundation reference constant kMDItemVersion as an objc.ID.
-func KMDItemVersion() objc.ID { return purego.CFConstant(raw.KMDItemVersion()) }
-
-// KMDItemPixelHeight returns the value of the CoreFoundation reference constant kMDItemPixelHeight as an objc.ID.
-func KMDItemPixelHeight() objc.ID { return purego.CFConstant(raw.KMDItemPixelHeight()) }
-
-// KMDItemXMPCredit returns the value of the CoreFoundation reference constant kMDItemXMPCredit as an objc.ID.
-func KMDItemXMPCredit() objc.ID { return purego.CFConstant(raw.KMDItemXMPCredit()) }
-
-// KMDItemXMPDigitalSourceType returns the value of the CoreFoundation reference constant kMDItemXMPDigitalSourceType as an objc.ID.
-func KMDItemXMPDigitalSourceType() objc.ID {
-	return purego.CFConstant(raw.KMDItemXMPDigitalSourceType())
+// KMDItemContentType returns the value of the constant kMDItemContentType.
+func KMDItemContentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemContentType")))
 }
 
-// KMDItemPixelWidth returns the value of the CoreFoundation reference constant kMDItemPixelWidth as an objc.ID.
-func KMDItemPixelWidth() objc.ID { return purego.CFConstant(raw.KMDItemPixelWidth()) }
-
-// KMDItemPixelCount returns the value of the CoreFoundation reference constant kMDItemPixelCount as an objc.ID.
-func KMDItemPixelCount() objc.ID { return purego.CFConstant(raw.KMDItemPixelCount()) }
-
-// KMDItemColorSpace returns the value of the CoreFoundation reference constant kMDItemColorSpace as an objc.ID.
-func KMDItemColorSpace() objc.ID { return purego.CFConstant(raw.KMDItemColorSpace()) }
-
-// KMDItemBitsPerSample returns the value of the CoreFoundation reference constant kMDItemBitsPerSample as an objc.ID.
-func KMDItemBitsPerSample() objc.ID { return purego.CFConstant(raw.KMDItemBitsPerSample()) }
-
-// KMDItemFlashOnOff returns the value of the CoreFoundation reference constant kMDItemFlashOnOff as an objc.ID.
-func KMDItemFlashOnOff() objc.ID { return purego.CFConstant(raw.KMDItemFlashOnOff()) }
-
-// KMDItemFocalLength returns the value of the CoreFoundation reference constant kMDItemFocalLength as an objc.ID.
-func KMDItemFocalLength() objc.ID { return purego.CFConstant(raw.KMDItemFocalLength()) }
-
-// KMDItemAcquisitionMake returns the value of the CoreFoundation reference constant kMDItemAcquisitionMake as an objc.ID.
-func KMDItemAcquisitionMake() objc.ID { return purego.CFConstant(raw.KMDItemAcquisitionMake()) }
-
-// KMDItemAcquisitionModel returns the value of the CoreFoundation reference constant kMDItemAcquisitionModel as an objc.ID.
-func KMDItemAcquisitionModel() objc.ID { return purego.CFConstant(raw.KMDItemAcquisitionModel()) }
-
-// KMDItemISOSpeed returns the value of the CoreFoundation reference constant kMDItemISOSpeed as an objc.ID.
-func KMDItemISOSpeed() objc.ID { return purego.CFConstant(raw.KMDItemISOSpeed()) }
-
-// KMDItemOrientation returns the value of the CoreFoundation reference constant kMDItemOrientation as an objc.ID.
-func KMDItemOrientation() objc.ID { return purego.CFConstant(raw.KMDItemOrientation()) }
-
-// KMDItemLayerNames returns the value of the CoreFoundation reference constant kMDItemLayerNames as an objc.ID.
-func KMDItemLayerNames() objc.ID { return purego.CFConstant(raw.KMDItemLayerNames()) }
-
-// KMDItemWhiteBalance returns the value of the CoreFoundation reference constant kMDItemWhiteBalance as an objc.ID.
-func KMDItemWhiteBalance() objc.ID { return purego.CFConstant(raw.KMDItemWhiteBalance()) }
-
-// KMDItemAperture returns the value of the CoreFoundation reference constant kMDItemAperture as an objc.ID.
-func KMDItemAperture() objc.ID { return purego.CFConstant(raw.KMDItemAperture()) }
-
-// KMDItemProfileName returns the value of the CoreFoundation reference constant kMDItemProfileName as an objc.ID.
-func KMDItemProfileName() objc.ID { return purego.CFConstant(raw.KMDItemProfileName()) }
-
-// KMDItemResolutionWidthDPI returns the value of the CoreFoundation reference constant kMDItemResolutionWidthDPI as an objc.ID.
-func KMDItemResolutionWidthDPI() objc.ID { return purego.CFConstant(raw.KMDItemResolutionWidthDPI()) }
-
-// KMDItemResolutionHeightDPI returns the value of the CoreFoundation reference constant kMDItemResolutionHeightDPI as an objc.ID.
-func KMDItemResolutionHeightDPI() objc.ID { return purego.CFConstant(raw.KMDItemResolutionHeightDPI()) }
-
-// KMDItemExposureMode returns the value of the CoreFoundation reference constant kMDItemExposureMode as an objc.ID.
-func KMDItemExposureMode() objc.ID { return purego.CFConstant(raw.KMDItemExposureMode()) }
-
-// KMDItemExposureTimeSeconds returns the value of the CoreFoundation reference constant kMDItemExposureTimeSeconds as an objc.ID.
-func KMDItemExposureTimeSeconds() objc.ID { return purego.CFConstant(raw.KMDItemExposureTimeSeconds()) }
-
-// KMDItemEXIFVersion returns the value of the CoreFoundation reference constant kMDItemEXIFVersion as an objc.ID.
-func KMDItemEXIFVersion() objc.ID { return purego.CFConstant(raw.KMDItemEXIFVersion()) }
-
-// KMDItemCameraOwner returns the value of the CoreFoundation reference constant kMDItemCameraOwner as an objc.ID.
-func KMDItemCameraOwner() objc.ID { return purego.CFConstant(raw.KMDItemCameraOwner()) }
-
-// KMDItemFocalLength35mm returns the value of the CoreFoundation reference constant kMDItemFocalLength35mm as an objc.ID.
-func KMDItemFocalLength35mm() objc.ID { return purego.CFConstant(raw.KMDItemFocalLength35mm()) }
-
-// KMDItemLensModel returns the value of the CoreFoundation reference constant kMDItemLensModel as an objc.ID.
-func KMDItemLensModel() objc.ID { return purego.CFConstant(raw.KMDItemLensModel()) }
-
-// KMDItemEXIFGPSVersion returns the value of the CoreFoundation reference constant kMDItemEXIFGPSVersion as an objc.ID.
-func KMDItemEXIFGPSVersion() objc.ID { return purego.CFConstant(raw.KMDItemEXIFGPSVersion()) }
-
-// KMDItemAltitude returns the value of the CoreFoundation reference constant kMDItemAltitude as an objc.ID.
-func KMDItemAltitude() objc.ID { return purego.CFConstant(raw.KMDItemAltitude()) }
-
-// KMDItemLatitude returns the value of the CoreFoundation reference constant kMDItemLatitude as an objc.ID.
-func KMDItemLatitude() objc.ID { return purego.CFConstant(raw.KMDItemLatitude()) }
-
-// KMDItemLongitude returns the value of the CoreFoundation reference constant kMDItemLongitude as an objc.ID.
-func KMDItemLongitude() objc.ID { return purego.CFConstant(raw.KMDItemLongitude()) }
-
-// KMDItemSpeed returns the value of the CoreFoundation reference constant kMDItemSpeed as an objc.ID.
-func KMDItemSpeed() objc.ID { return purego.CFConstant(raw.KMDItemSpeed()) }
-
-// KMDItemTimestamp returns the value of the CoreFoundation reference constant kMDItemTimestamp as an objc.ID.
-func KMDItemTimestamp() objc.ID { return purego.CFConstant(raw.KMDItemTimestamp()) }
-
-// KMDItemGPSTrack returns the value of the CoreFoundation reference constant kMDItemGPSTrack as an objc.ID.
-func KMDItemGPSTrack() objc.ID { return purego.CFConstant(raw.KMDItemGPSTrack()) }
-
-// KMDItemImageDirection returns the value of the CoreFoundation reference constant kMDItemImageDirection as an objc.ID.
-func KMDItemImageDirection() objc.ID { return purego.CFConstant(raw.KMDItemImageDirection()) }
-
-// KMDItemNamedLocation returns the value of the CoreFoundation reference constant kMDItemNamedLocation as an objc.ID.
-func KMDItemNamedLocation() objc.ID { return purego.CFConstant(raw.KMDItemNamedLocation()) }
-
-// KMDItemGPSStatus returns the value of the CoreFoundation reference constant kMDItemGPSStatus as an objc.ID.
-func KMDItemGPSStatus() objc.ID { return purego.CFConstant(raw.KMDItemGPSStatus()) }
-
-// KMDItemGPSMeasureMode returns the value of the CoreFoundation reference constant kMDItemGPSMeasureMode as an objc.ID.
-func KMDItemGPSMeasureMode() objc.ID { return purego.CFConstant(raw.KMDItemGPSMeasureMode()) }
-
-// KMDItemGPSDOP returns the value of the CoreFoundation reference constant kMDItemGPSDOP as an objc.ID.
-func KMDItemGPSDOP() objc.ID { return purego.CFConstant(raw.KMDItemGPSDOP()) }
-
-// KMDItemGPSMapDatum returns the value of the CoreFoundation reference constant kMDItemGPSMapDatum as an objc.ID.
-func KMDItemGPSMapDatum() objc.ID { return purego.CFConstant(raw.KMDItemGPSMapDatum()) }
-
-// KMDItemGPSDestLatitude returns the value of the CoreFoundation reference constant kMDItemGPSDestLatitude as an objc.ID.
-func KMDItemGPSDestLatitude() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestLatitude()) }
-
-// KMDItemGPSDestLongitude returns the value of the CoreFoundation reference constant kMDItemGPSDestLongitude as an objc.ID.
-func KMDItemGPSDestLongitude() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestLongitude()) }
-
-// KMDItemGPSDestBearing returns the value of the CoreFoundation reference constant kMDItemGPSDestBearing as an objc.ID.
-func KMDItemGPSDestBearing() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestBearing()) }
-
-// KMDItemGPSDestDistance returns the value of the CoreFoundation reference constant kMDItemGPSDestDistance as an objc.ID.
-func KMDItemGPSDestDistance() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestDistance()) }
-
-// KMDItemGPSProcessingMethod returns the value of the CoreFoundation reference constant kMDItemGPSProcessingMethod as an objc.ID.
-func KMDItemGPSProcessingMethod() objc.ID { return purego.CFConstant(raw.KMDItemGPSProcessingMethod()) }
-
-// KMDItemGPSAreaInformation returns the value of the CoreFoundation reference constant kMDItemGPSAreaInformation as an objc.ID.
-func KMDItemGPSAreaInformation() objc.ID { return purego.CFConstant(raw.KMDItemGPSAreaInformation()) }
-
-// KMDItemGPSDateStamp returns the value of the CoreFoundation reference constant kMDItemGPSDateStamp as an objc.ID.
-func KMDItemGPSDateStamp() objc.ID { return purego.CFConstant(raw.KMDItemGPSDateStamp()) }
-
-// KMDItemGPSDifferental returns the value of the CoreFoundation reference constant kMDItemGPSDifferental as an objc.ID.
-func KMDItemGPSDifferental() objc.ID { return purego.CFConstant(raw.KMDItemGPSDifferental()) }
-
-// KMDItemMediaExtensions returns the value of the CoreFoundation reference constant kMDItemMediaExtensions as an objc.ID.
-func KMDItemMediaExtensions() objc.ID { return purego.CFConstant(raw.KMDItemMediaExtensions()) }
-
-// KMDItemCodecs returns the value of the CoreFoundation reference constant kMDItemCodecs as an objc.ID.
-func KMDItemCodecs() objc.ID { return purego.CFConstant(raw.KMDItemCodecs()) }
-
-// KMDItemMediaTypes returns the value of the CoreFoundation reference constant kMDItemMediaTypes as an objc.ID.
-func KMDItemMediaTypes() objc.ID { return purego.CFConstant(raw.KMDItemMediaTypes()) }
-
-// KMDItemStreamable returns the value of the CoreFoundation reference constant kMDItemStreamable as an objc.ID.
-func KMDItemStreamable() objc.ID { return purego.CFConstant(raw.KMDItemStreamable()) }
-
-// KMDItemTotalBitRate returns the value of the CoreFoundation reference constant kMDItemTotalBitRate as an objc.ID.
-func KMDItemTotalBitRate() objc.ID { return purego.CFConstant(raw.KMDItemTotalBitRate()) }
-
-// KMDItemVideoBitRate returns the value of the CoreFoundation reference constant kMDItemVideoBitRate as an objc.ID.
-func KMDItemVideoBitRate() objc.ID { return purego.CFConstant(raw.KMDItemVideoBitRate()) }
-
-// KMDItemAudioBitRate returns the value of the CoreFoundation reference constant kMDItemAudioBitRate as an objc.ID.
-func KMDItemAudioBitRate() objc.ID { return purego.CFConstant(raw.KMDItemAudioBitRate()) }
-
-// KMDItemDeliveryType returns the value of the CoreFoundation reference constant kMDItemDeliveryType as an objc.ID.
-func KMDItemDeliveryType() objc.ID { return purego.CFConstant(raw.KMDItemDeliveryType()) }
-
-// KMDItemAlbum returns the value of the CoreFoundation reference constant kMDItemAlbum as an objc.ID.
-func KMDItemAlbum() objc.ID { return purego.CFConstant(raw.KMDItemAlbum()) }
-
-// KMDItemHasAlphaChannel returns the value of the CoreFoundation reference constant kMDItemHasAlphaChannel as an objc.ID.
-func KMDItemHasAlphaChannel() objc.ID { return purego.CFConstant(raw.KMDItemHasAlphaChannel()) }
-
-// KMDItemRedEyeOnOff returns the value of the CoreFoundation reference constant kMDItemRedEyeOnOff as an objc.ID.
-func KMDItemRedEyeOnOff() objc.ID { return purego.CFConstant(raw.KMDItemRedEyeOnOff()) }
-
-// KMDItemMeteringMode returns the value of the CoreFoundation reference constant kMDItemMeteringMode as an objc.ID.
-func KMDItemMeteringMode() objc.ID { return purego.CFConstant(raw.KMDItemMeteringMode()) }
-
-// KMDItemMaxAperture returns the value of the CoreFoundation reference constant kMDItemMaxAperture as an objc.ID.
-func KMDItemMaxAperture() objc.ID { return purego.CFConstant(raw.KMDItemMaxAperture()) }
-
-// KMDItemFNumber returns the value of the CoreFoundation reference constant kMDItemFNumber as an objc.ID.
-func KMDItemFNumber() objc.ID { return purego.CFConstant(raw.KMDItemFNumber()) }
-
-// KMDItemExposureProgram returns the value of the CoreFoundation reference constant kMDItemExposureProgram as an objc.ID.
-func KMDItemExposureProgram() objc.ID { return purego.CFConstant(raw.KMDItemExposureProgram()) }
-
-// KMDItemExposureTimeString returns the value of the CoreFoundation reference constant kMDItemExposureTimeString as an objc.ID.
-func KMDItemExposureTimeString() objc.ID { return purego.CFConstant(raw.KMDItemExposureTimeString()) }
-
-// KMDItemHeadline returns the value of the CoreFoundation reference constant kMDItemHeadline as an objc.ID.
-func KMDItemHeadline() objc.ID { return purego.CFConstant(raw.KMDItemHeadline()) }
-
-// KMDItemInstructions returns the value of the CoreFoundation reference constant kMDItemInstructions as an objc.ID.
-func KMDItemInstructions() objc.ID { return purego.CFConstant(raw.KMDItemInstructions()) }
-
-// KMDItemCity returns the value of the CoreFoundation reference constant kMDItemCity as an objc.ID.
-func KMDItemCity() objc.ID { return purego.CFConstant(raw.KMDItemCity()) }
-
-// KMDItemStateOrProvince returns the value of the CoreFoundation reference constant kMDItemStateOrProvince as an objc.ID.
-func KMDItemStateOrProvince() objc.ID { return purego.CFConstant(raw.KMDItemStateOrProvince()) }
-
-// KMDItemCountry returns the value of the CoreFoundation reference constant kMDItemCountry as an objc.ID.
-func KMDItemCountry() objc.ID { return purego.CFConstant(raw.KMDItemCountry()) }
-
-// KMDItemFSName returns the value of the CoreFoundation reference constant kMDItemFSName as an objc.ID.
-func KMDItemFSName() objc.ID { return purego.CFConstant(raw.KMDItemFSName()) }
-
-// KMDItemDisplayName returns the value of the CoreFoundation reference constant kMDItemDisplayName as an objc.ID.
-func KMDItemDisplayName() objc.ID { return purego.CFConstant(raw.KMDItemDisplayName()) }
-
-// KMDItemPath returns the value of the CoreFoundation reference constant kMDItemPath as an objc.ID.
-func KMDItemPath() objc.ID { return purego.CFConstant(raw.KMDItemPath()) }
-
-// KMDItemFSSize returns the value of the CoreFoundation reference constant kMDItemFSSize as an objc.ID.
-func KMDItemFSSize() objc.ID { return purego.CFConstant(raw.KMDItemFSSize()) }
-
-// KMDItemFSCreationDate returns the value of the CoreFoundation reference constant kMDItemFSCreationDate as an objc.ID.
-func KMDItemFSCreationDate() objc.ID { return purego.CFConstant(raw.KMDItemFSCreationDate()) }
-
-// KMDItemFSContentChangeDate returns the value of the CoreFoundation reference constant kMDItemFSContentChangeDate as an objc.ID.
-func KMDItemFSContentChangeDate() objc.ID { return purego.CFConstant(raw.KMDItemFSContentChangeDate()) }
-
-// KMDItemFSOwnerUserID returns the value of the CoreFoundation reference constant kMDItemFSOwnerUserID as an objc.ID.
-func KMDItemFSOwnerUserID() objc.ID { return purego.CFConstant(raw.KMDItemFSOwnerUserID()) }
-
-// KMDItemFSOwnerGroupID returns the value of the CoreFoundation reference constant kMDItemFSOwnerGroupID as an objc.ID.
-func KMDItemFSOwnerGroupID() objc.ID { return purego.CFConstant(raw.KMDItemFSOwnerGroupID()) }
-
-// KMDItemFSExists returns the value of the CoreFoundation reference constant kMDItemFSExists as an objc.ID.
-func KMDItemFSExists() objc.ID { return purego.CFConstant(raw.KMDItemFSExists()) }
-
-// KMDItemFSIsReadable returns the value of the CoreFoundation reference constant kMDItemFSIsReadable as an objc.ID.
-func KMDItemFSIsReadable() objc.ID { return purego.CFConstant(raw.KMDItemFSIsReadable()) }
-
-// KMDItemFSIsWriteable returns the value of the CoreFoundation reference constant kMDItemFSIsWriteable as an objc.ID.
-func KMDItemFSIsWriteable() objc.ID { return purego.CFConstant(raw.KMDItemFSIsWriteable()) }
-
-// KMDItemFSHasCustomIcon returns the value of the CoreFoundation reference constant kMDItemFSHasCustomIcon as an objc.ID.
-func KMDItemFSHasCustomIcon() objc.ID { return purego.CFConstant(raw.KMDItemFSHasCustomIcon()) }
-
-// KMDItemFSIsExtensionHidden returns the value of the CoreFoundation reference constant kMDItemFSIsExtensionHidden as an objc.ID.
-func KMDItemFSIsExtensionHidden() objc.ID { return purego.CFConstant(raw.KMDItemFSIsExtensionHidden()) }
-
-// KMDItemFSIsStationery returns the value of the CoreFoundation reference constant kMDItemFSIsStationery as an objc.ID.
-func KMDItemFSIsStationery() objc.ID { return purego.CFConstant(raw.KMDItemFSIsStationery()) }
-
-// KMDItemFSInvisible returns the value of the CoreFoundation reference constant kMDItemFSInvisible as an objc.ID.
-func KMDItemFSInvisible() objc.ID { return purego.CFConstant(raw.KMDItemFSInvisible()) }
-
-// KMDItemFSLabel returns the value of the CoreFoundation reference constant kMDItemFSLabel as an objc.ID.
-func KMDItemFSLabel() objc.ID { return purego.CFConstant(raw.KMDItemFSLabel()) }
-
-// KMDItemFSNodeCount returns the value of the CoreFoundation reference constant kMDItemFSNodeCount as an objc.ID.
-func KMDItemFSNodeCount() objc.ID { return purego.CFConstant(raw.KMDItemFSNodeCount()) }
-
-// KMDItemHTMLContent returns the value of the CoreFoundation reference constant kMDItemHTMLContent as an objc.ID.
-func KMDItemHTMLContent() objc.ID { return purego.CFConstant(raw.KMDItemHTMLContent()) }
-
-// KMDItemTextContent returns the value of the CoreFoundation reference constant kMDItemTextContent as an objc.ID.
-func KMDItemTextContent() objc.ID { return purego.CFConstant(raw.KMDItemTextContent()) }
-
-// KMDItemAudioSampleRate returns the value of the CoreFoundation reference constant kMDItemAudioSampleRate as an objc.ID.
-func KMDItemAudioSampleRate() objc.ID { return purego.CFConstant(raw.KMDItemAudioSampleRate()) }
-
-// KMDItemAudioChannelCount returns the value of the CoreFoundation reference constant kMDItemAudioChannelCount as an objc.ID.
-func KMDItemAudioChannelCount() objc.ID { return purego.CFConstant(raw.KMDItemAudioChannelCount()) }
-
-// KMDItemTempo returns the value of the CoreFoundation reference constant kMDItemTempo as an objc.ID.
-func KMDItemTempo() objc.ID { return purego.CFConstant(raw.KMDItemTempo()) }
-
-// KMDItemKeySignature returns the value of the CoreFoundation reference constant kMDItemKeySignature as an objc.ID.
-func KMDItemKeySignature() objc.ID { return purego.CFConstant(raw.KMDItemKeySignature()) }
-
-// KMDItemTimeSignature returns the value of the CoreFoundation reference constant kMDItemTimeSignature as an objc.ID.
-func KMDItemTimeSignature() objc.ID { return purego.CFConstant(raw.KMDItemTimeSignature()) }
-
-// KMDItemAudioEncodingApplication returns the value of the CoreFoundation reference constant kMDItemAudioEncodingApplication as an objc.ID.
-func KMDItemAudioEncodingApplication() objc.ID {
-	return purego.CFConstant(raw.KMDItemAudioEncodingApplication())
+// KMDItemContentTypeTree returns the value of the constant kMDItemContentTypeTree.
+func KMDItemContentTypeTree() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemContentTypeTree")))
 }
 
-// KMDItemComposer returns the value of the CoreFoundation reference constant kMDItemComposer as an objc.ID.
-func KMDItemComposer() objc.ID { return purego.CFConstant(raw.KMDItemComposer()) }
+// KMDItemKeywords returns the value of the constant kMDItemKeywords.
+func KMDItemKeywords() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemKeywords"))) }
 
-// KMDItemLyricist returns the value of the CoreFoundation reference constant kMDItemLyricist as an objc.ID.
-func KMDItemLyricist() objc.ID { return purego.CFConstant(raw.KMDItemLyricist()) }
+// KMDItemTitle returns the value of the constant kMDItemTitle.
+func KMDItemTitle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemTitle"))) }
 
-// KMDItemAudioTrackNumber returns the value of the CoreFoundation reference constant kMDItemAudioTrackNumber as an objc.ID.
-func KMDItemAudioTrackNumber() objc.ID { return purego.CFConstant(raw.KMDItemAudioTrackNumber()) }
+// KMDItemAuthors returns the value of the constant kMDItemAuthors.
+func KMDItemAuthors() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemAuthors"))) }
 
-// KMDItemRecordingDate returns the value of the CoreFoundation reference constant kMDItemRecordingDate as an objc.ID.
-func KMDItemRecordingDate() objc.ID { return purego.CFConstant(raw.KMDItemRecordingDate()) }
+// KMDItemEditors returns the value of the constant kMDItemEditors.
+func KMDItemEditors() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemEditors"))) }
 
-// KMDItemMusicalGenre returns the value of the CoreFoundation reference constant kMDItemMusicalGenre as an objc.ID.
-func KMDItemMusicalGenre() objc.ID { return purego.CFConstant(raw.KMDItemMusicalGenre()) }
-
-// KMDItemIsGeneralMIDISequence returns the value of the CoreFoundation reference constant kMDItemIsGeneralMIDISequence as an objc.ID.
-func KMDItemIsGeneralMIDISequence() objc.ID {
-	return purego.CFConstant(raw.KMDItemIsGeneralMIDISequence())
+// KMDItemParticipants returns the value of the constant kMDItemParticipants.
+func KMDItemParticipants() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemParticipants")))
 }
 
-// KMDItemRecordingYear returns the value of the CoreFoundation reference constant kMDItemRecordingYear as an objc.ID.
-func KMDItemRecordingYear() objc.ID { return purego.CFConstant(raw.KMDItemRecordingYear()) }
+// KMDItemProjects returns the value of the constant kMDItemProjects.
+func KMDItemProjects() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemProjects"))) }
 
-// KMDItemOrganizations returns the value of the CoreFoundation reference constant kMDItemOrganizations as an objc.ID.
-func KMDItemOrganizations() objc.ID { return purego.CFConstant(raw.KMDItemOrganizations()) }
-
-// KMDItemLanguages returns the value of the CoreFoundation reference constant kMDItemLanguages as an objc.ID.
-func KMDItemLanguages() objc.ID { return purego.CFConstant(raw.KMDItemLanguages()) }
-
-// KMDItemRights returns the value of the CoreFoundation reference constant kMDItemRights as an objc.ID.
-func KMDItemRights() objc.ID { return purego.CFConstant(raw.KMDItemRights()) }
-
-// KMDItemPublishers returns the value of the CoreFoundation reference constant kMDItemPublishers as an objc.ID.
-func KMDItemPublishers() objc.ID { return purego.CFConstant(raw.KMDItemPublishers()) }
-
-// KMDItemContributors returns the value of the CoreFoundation reference constant kMDItemContributors as an objc.ID.
-func KMDItemContributors() objc.ID { return purego.CFConstant(raw.KMDItemContributors()) }
-
-// KMDItemCoverage returns the value of the CoreFoundation reference constant kMDItemCoverage as an objc.ID.
-func KMDItemCoverage() objc.ID { return purego.CFConstant(raw.KMDItemCoverage()) }
-
-// KMDItemSubject returns the value of the CoreFoundation reference constant kMDItemSubject as an objc.ID.
-func KMDItemSubject() objc.ID { return purego.CFConstant(raw.KMDItemSubject()) }
-
-// KMDItemTheme returns the value of the CoreFoundation reference constant kMDItemTheme as an objc.ID.
-func KMDItemTheme() objc.ID { return purego.CFConstant(raw.KMDItemTheme()) }
-
-// KMDItemDescription returns the value of the CoreFoundation reference constant kMDItemDescription as an objc.ID.
-func KMDItemDescription() objc.ID { return purego.CFConstant(raw.KMDItemDescription()) }
-
-// KMDItemIdentifier returns the value of the CoreFoundation reference constant kMDItemIdentifier as an objc.ID.
-func KMDItemIdentifier() objc.ID { return purego.CFConstant(raw.KMDItemIdentifier()) }
-
-// KMDItemAudiences returns the value of the CoreFoundation reference constant kMDItemAudiences as an objc.ID.
-func KMDItemAudiences() objc.ID { return purego.CFConstant(raw.KMDItemAudiences()) }
-
-// KMDItemNumberOfPages returns the value of the CoreFoundation reference constant kMDItemNumberOfPages as an objc.ID.
-func KMDItemNumberOfPages() objc.ID { return purego.CFConstant(raw.KMDItemNumberOfPages()) }
-
-// KMDItemPageWidth returns the value of the CoreFoundation reference constant kMDItemPageWidth as an objc.ID.
-func KMDItemPageWidth() objc.ID { return purego.CFConstant(raw.KMDItemPageWidth()) }
-
-// KMDItemPageHeight returns the value of the CoreFoundation reference constant kMDItemPageHeight as an objc.ID.
-func KMDItemPageHeight() objc.ID { return purego.CFConstant(raw.KMDItemPageHeight()) }
-
-// KMDItemSecurityMethod returns the value of the CoreFoundation reference constant kMDItemSecurityMethod as an objc.ID.
-func KMDItemSecurityMethod() objc.ID { return purego.CFConstant(raw.KMDItemSecurityMethod()) }
-
-// KMDItemCreator returns the value of the CoreFoundation reference constant kMDItemCreator as an objc.ID.
-func KMDItemCreator() objc.ID { return purego.CFConstant(raw.KMDItemCreator()) }
-
-// KMDItemEncodingApplications returns the value of the CoreFoundation reference constant kMDItemEncodingApplications as an objc.ID.
-func KMDItemEncodingApplications() objc.ID {
-	return purego.CFConstant(raw.KMDItemEncodingApplications())
+// KMDItemDownloadedDate returns the value of the constant kMDItemDownloadedDate.
+func KMDItemDownloadedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemDownloadedDate")))
 }
 
-// KMDItemDueDate returns the value of the CoreFoundation reference constant kMDItemDueDate as an objc.ID.
-func KMDItemDueDate() objc.ID { return purego.CFConstant(raw.KMDItemDueDate()) }
+// KMDItemWhereFroms returns the value of the constant kMDItemWhereFroms.
+func KMDItemWhereFroms() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemWhereFroms"))) }
 
-// KMDItemStarRating returns the value of the CoreFoundation reference constant kMDItemStarRating as an objc.ID.
-func KMDItemStarRating() objc.ID { return purego.CFConstant(raw.KMDItemStarRating()) }
+// KMDItemComment returns the value of the constant kMDItemComment.
+func KMDItemComment() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemComment"))) }
 
-// KMDItemPhoneNumbers returns the value of the CoreFoundation reference constant kMDItemPhoneNumbers as an objc.ID.
-func KMDItemPhoneNumbers() objc.ID { return purego.CFConstant(raw.KMDItemPhoneNumbers()) }
+// KMDItemCopyright returns the value of the constant kMDItemCopyright.
+func KMDItemCopyright() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemCopyright"))) }
 
-// KMDItemEmailAddresses returns the value of the CoreFoundation reference constant kMDItemEmailAddresses as an objc.ID.
-func KMDItemEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemEmailAddresses()) }
-
-// KMDItemInstantMessageAddresses returns the value of the CoreFoundation reference constant kMDItemInstantMessageAddresses as an objc.ID.
-func KMDItemInstantMessageAddresses() objc.ID {
-	return purego.CFConstant(raw.KMDItemInstantMessageAddresses())
+// KMDItemLastUsedDate returns the value of the constant kMDItemLastUsedDate.
+func KMDItemLastUsedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemLastUsedDate")))
 }
 
-// KMDItemKind returns the value of the CoreFoundation reference constant kMDItemKind as an objc.ID.
-func KMDItemKind() objc.ID { return purego.CFConstant(raw.KMDItemKind()) }
-
-// KMDItemRecipients returns the value of the CoreFoundation reference constant kMDItemRecipients as an objc.ID.
-func KMDItemRecipients() objc.ID { return purego.CFConstant(raw.KMDItemRecipients()) }
-
-// KMDItemFinderComment returns the value of the CoreFoundation reference constant kMDItemFinderComment as an objc.ID.
-func KMDItemFinderComment() objc.ID { return purego.CFConstant(raw.KMDItemFinderComment()) }
-
-// KMDItemFonts returns the value of the CoreFoundation reference constant kMDItemFonts as an objc.ID.
-func KMDItemFonts() objc.ID { return purego.CFConstant(raw.KMDItemFonts()) }
-
-// KMDItemAppleLoopsRootKey returns the value of the CoreFoundation reference constant kMDItemAppleLoopsRootKey as an objc.ID.
-func KMDItemAppleLoopsRootKey() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsRootKey()) }
-
-// KMDItemAppleLoopsKeyFilterType returns the value of the CoreFoundation reference constant kMDItemAppleLoopsKeyFilterType as an objc.ID.
-func KMDItemAppleLoopsKeyFilterType() objc.ID {
-	return purego.CFConstant(raw.KMDItemAppleLoopsKeyFilterType())
+// KMDItemContentCreationDate returns the value of the constant kMDItemContentCreationDate.
+func KMDItemContentCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemContentCreationDate")))
 }
 
-// KMDItemAppleLoopsLoopMode returns the value of the CoreFoundation reference constant kMDItemAppleLoopsLoopMode as an objc.ID.
-func KMDItemAppleLoopsLoopMode() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsLoopMode()) }
-
-// KMDItemAppleLoopDescriptors returns the value of the CoreFoundation reference constant kMDItemAppleLoopDescriptors as an objc.ID.
-func KMDItemAppleLoopDescriptors() objc.ID {
-	return purego.CFConstant(raw.KMDItemAppleLoopDescriptors())
+// KMDItemContentModificationDate returns the value of the constant kMDItemContentModificationDate.
+func KMDItemContentModificationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemContentModificationDate")))
 }
 
-// KMDItemMusicalInstrumentCategory returns the value of the CoreFoundation reference constant kMDItemMusicalInstrumentCategory as an objc.ID.
-func KMDItemMusicalInstrumentCategory() objc.ID {
-	return purego.CFConstant(raw.KMDItemMusicalInstrumentCategory())
+// KMDItemDateAdded returns the value of the constant kMDItemDateAdded.
+func KMDItemDateAdded() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemDateAdded"))) }
+
+// KMDItemDurationSeconds returns the value of the constant kMDItemDurationSeconds.
+func KMDItemDurationSeconds() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemDurationSeconds")))
 }
 
-// KMDItemMusicalInstrumentName returns the value of the CoreFoundation reference constant kMDItemMusicalInstrumentName as an objc.ID.
-func KMDItemMusicalInstrumentName() objc.ID {
-	return purego.CFConstant(raw.KMDItemMusicalInstrumentName())
+// KMDItemContactKeywords returns the value of the constant kMDItemContactKeywords.
+func KMDItemContactKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemContactKeywords")))
 }
 
-// KMDItemCFBundleIdentifier returns the value of the CoreFoundation reference constant kMDItemCFBundleIdentifier as an objc.ID.
-func KMDItemCFBundleIdentifier() objc.ID { return purego.CFConstant(raw.KMDItemCFBundleIdentifier()) }
+// KMDItemVersion returns the value of the constant kMDItemVersion.
+func KMDItemVersion() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemVersion"))) }
 
-// KMDItemSupportFileType returns the value of the CoreFoundation reference constant kMDItemSupportFileType as an objc.ID.
-func KMDItemSupportFileType() objc.ID { return purego.CFConstant(raw.KMDItemSupportFileType()) }
-
-// @const kMDItemInformation Information about the item @const kMDItemDirector Director of the movie @const kMDItemProducer Producer of the content @const kMDItemGenre Genre of the movie @const kMDItemPerformers Performers in the movie @const kMDItemOriginalFormat Original format of the movie @const kMDItemOriginalSource Original source of the movie @const kMDItemAuthorEmailAddresses This attribute indicates the author of the emails message addresses. (This is always the email address, and not the human readable version) @const kMDItemRecipientEmailAddresses This attribute indicates the recipients email addresses. (This is always the email address,  and not the human readable version). @const kMDItemAuthorAddresses This attribute indicates the author addresses of the document. @const kMDItemRecipientAddresses This attribute indicates the recipient addresses of the document. @const kMDItemURL Url of the item @const kMDItemIsLikelyJunk This attribute indicates if the document is likely to be considered junk. @const kMDItemExecutableArchitectures Array of executables architectures the item contains. @const kMDItemExecutablePlatform Indicates platform required to execute this application. @const kMDItemApplicationCategories Array of categories the item application is a member of.
-// KMDItemInformation returns the value of the CoreFoundation reference constant kMDItemInformation as an objc.ID.
-func KMDItemInformation() objc.ID { return purego.CFConstant(raw.KMDItemInformation()) }
-
-// KMDItemDirector returns the value of the CoreFoundation reference constant kMDItemDirector as an objc.ID.
-func KMDItemDirector() objc.ID { return purego.CFConstant(raw.KMDItemDirector()) }
-
-// KMDItemProducer returns the value of the CoreFoundation reference constant kMDItemProducer as an objc.ID.
-func KMDItemProducer() objc.ID { return purego.CFConstant(raw.KMDItemProducer()) }
-
-// KMDItemGenre returns the value of the CoreFoundation reference constant kMDItemGenre as an objc.ID.
-func KMDItemGenre() objc.ID { return purego.CFConstant(raw.KMDItemGenre()) }
-
-// KMDItemPerformers returns the value of the CoreFoundation reference constant kMDItemPerformers as an objc.ID.
-func KMDItemPerformers() objc.ID { return purego.CFConstant(raw.KMDItemPerformers()) }
-
-// KMDItemOriginalFormat returns the value of the CoreFoundation reference constant kMDItemOriginalFormat as an objc.ID.
-func KMDItemOriginalFormat() objc.ID { return purego.CFConstant(raw.KMDItemOriginalFormat()) }
-
-// KMDItemOriginalSource returns the value of the CoreFoundation reference constant kMDItemOriginalSource as an objc.ID.
-func KMDItemOriginalSource() objc.ID { return purego.CFConstant(raw.KMDItemOriginalSource()) }
-
-// KMDItemAuthorEmailAddresses returns the value of the CoreFoundation reference constant kMDItemAuthorEmailAddresses as an objc.ID.
-func KMDItemAuthorEmailAddresses() objc.ID {
-	return purego.CFConstant(raw.KMDItemAuthorEmailAddresses())
+// KMDItemPixelHeight returns the value of the constant kMDItemPixelHeight.
+func KMDItemPixelHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemPixelHeight")))
 }
 
-// KMDItemRecipientEmailAddresses returns the value of the CoreFoundation reference constant kMDItemRecipientEmailAddresses as an objc.ID.
-func KMDItemRecipientEmailAddresses() objc.ID {
-	return purego.CFConstant(raw.KMDItemRecipientEmailAddresses())
+// KMDItemXMPCredit returns the value of the constant kMDItemXMPCredit.
+func KMDItemXMPCredit() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemXMPCredit"))) }
+
+// KMDItemXMPDigitalSourceType returns the value of the constant kMDItemXMPDigitalSourceType.
+func KMDItemXMPDigitalSourceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemXMPDigitalSourceType")))
 }
 
-// KMDItemAuthorAddresses returns the value of the CoreFoundation reference constant kMDItemAuthorAddresses as an objc.ID.
-func KMDItemAuthorAddresses() objc.ID { return purego.CFConstant(raw.KMDItemAuthorAddresses()) }
+// KMDItemPixelWidth returns the value of the constant kMDItemPixelWidth.
+func KMDItemPixelWidth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPixelWidth"))) }
 
-// KMDItemRecipientAddresses returns the value of the CoreFoundation reference constant kMDItemRecipientAddresses as an objc.ID.
-func KMDItemRecipientAddresses() objc.ID { return purego.CFConstant(raw.KMDItemRecipientAddresses()) }
+// KMDItemPixelCount returns the value of the constant kMDItemPixelCount.
+func KMDItemPixelCount() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPixelCount"))) }
 
-// KMDItemURL returns the value of the CoreFoundation reference constant kMDItemURL as an objc.ID.
-func KMDItemURL() objc.ID { return purego.CFConstant(raw.KMDItemURL()) }
+// KMDItemColorSpace returns the value of the constant kMDItemColorSpace.
+func KMDItemColorSpace() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemColorSpace"))) }
 
-// KMDItemLabelIcon returns the value of the CoreFoundation reference constant kMDItemLabelIcon as an objc.ID.
-func KMDItemLabelIcon() objc.ID { return purego.CFConstant(raw.KMDItemLabelIcon()) }
-
-// KMDItemLabelID returns the value of the CoreFoundation reference constant kMDItemLabelID as an objc.ID.
-func KMDItemLabelID() objc.ID { return purego.CFConstant(raw.KMDItemLabelID()) }
-
-// KMDItemLabelKind returns the value of the CoreFoundation reference constant kMDItemLabelKind as an objc.ID.
-func KMDItemLabelKind() objc.ID { return purego.CFConstant(raw.KMDItemLabelKind()) }
-
-// KMDItemLabelUUID returns the value of the CoreFoundation reference constant kMDItemLabelUUID as an objc.ID.
-func KMDItemLabelUUID() objc.ID { return purego.CFConstant(raw.KMDItemLabelUUID()) }
-
-// KMDItemIsLikelyJunk returns the value of the CoreFoundation reference constant kMDItemIsLikelyJunk as an objc.ID.
-func KMDItemIsLikelyJunk() objc.ID { return purego.CFConstant(raw.KMDItemIsLikelyJunk()) }
-
-// KMDItemExecutableArchitectures returns the value of the CoreFoundation reference constant kMDItemExecutableArchitectures as an objc.ID.
-func KMDItemExecutableArchitectures() objc.ID {
-	return purego.CFConstant(raw.KMDItemExecutableArchitectures())
+// KMDItemBitsPerSample returns the value of the constant kMDItemBitsPerSample.
+func KMDItemBitsPerSample() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemBitsPerSample")))
 }
 
-// KMDItemExecutablePlatform returns the value of the CoreFoundation reference constant kMDItemExecutablePlatform as an objc.ID.
-func KMDItemExecutablePlatform() objc.ID { return purego.CFConstant(raw.KMDItemExecutablePlatform()) }
+// KMDItemFlashOnOff returns the value of the constant kMDItemFlashOnOff.
+func KMDItemFlashOnOff() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFlashOnOff"))) }
 
-// KMDItemApplicationCategories returns the value of the CoreFoundation reference constant kMDItemApplicationCategories as an objc.ID.
-func KMDItemApplicationCategories() objc.ID {
-	return purego.CFConstant(raw.KMDItemApplicationCategories())
+// KMDItemFocalLength returns the value of the constant kMDItemFocalLength.
+func KMDItemFocalLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFocalLength")))
 }
 
-// KMDItemIsApplicationManaged returns the value of the CoreFoundation reference constant kMDItemIsApplicationManaged as an objc.ID.
-func KMDItemIsApplicationManaged() objc.ID {
-	return purego.CFConstant(raw.KMDItemIsApplicationManaged())
+// KMDItemAcquisitionMake returns the value of the constant kMDItemAcquisitionMake.
+func KMDItemAcquisitionMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAcquisitionMake")))
 }
 
-// @constant kMDQueryProgressNotification The name of the notification sent to indicate changes to the query's results list during the initial gathering phase of a query's execution. Mostly adds will occur during this phase, but removals and changes can also occur, as in any update. This info dictionary parameter of the notification can carry the kMDQueryUpdateChangedItems and kMDQueryUpdateRemovedItems keys. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. For performance reasons, added results are not indicated in progress notifications (to avoid the cost of creating the result objects). These notifications are sent out by a query before the kMDQueryDidFinishNotification.
-// KMDQueryProgressNotification returns the value of the CoreFoundation reference constant kMDQueryProgressNotification as an objc.ID.
-func KMDQueryProgressNotification() objc.ID {
-	return purego.CFConstant(raw.KMDQueryProgressNotification())
+// KMDItemAcquisitionModel returns the value of the constant kMDItemAcquisitionModel.
+func KMDItemAcquisitionModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAcquisitionModel")))
 }
 
-// @constant kMDQueryDidFinishNotification The name of the notification sent to indicate that the query has finished with the initial result-gathering phase, and may now proceed into the live-update phase (if that option was chosen when the query was executed). This notification often shortly follows after the last progress notification. It is usually not necessary to update any displayed UI in response to this notification, since it doesn't indicate any change in the result list of a query.
-// KMDQueryDidFinishNotification returns the value of the CoreFoundation reference constant kMDQueryDidFinishNotification as an objc.ID.
-func KMDQueryDidFinishNotification() objc.ID {
-	return purego.CFConstant(raw.KMDQueryDidFinishNotification())
+// KMDItemISOSpeed returns the value of the constant kMDItemISOSpeed.
+func KMDItemISOSpeed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemISOSpeed"))) }
+
+// KMDItemOrientation returns the value of the constant kMDItemOrientation.
+func KMDItemOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemOrientation")))
 }
 
-// @constant kMDQueryDidUpdateNotification The name of the notification sent to indicate changes to the query's results list during the second, live-update, phase of a query's execution. This notification can carry the kMDQueryUpdateAddedItems, kMDQueryUpdateChangedItems, and kMDQueryUpdateRemovedItems keys in the info dictionary parameter of the notification. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. These notifications are sent out by a query after the kMDQueryDidUpdateNotification.
-// KMDQueryDidUpdateNotification returns the value of the CoreFoundation reference constant kMDQueryDidUpdateNotification as an objc.ID.
-func KMDQueryDidUpdateNotification() objc.ID {
-	return purego.CFConstant(raw.KMDQueryDidUpdateNotification())
+// KMDItemLayerNames returns the value of the constant kMDItemLayerNames.
+func KMDItemLayerNames() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLayerNames"))) }
+
+// KMDItemWhiteBalance returns the value of the constant kMDItemWhiteBalance.
+func KMDItemWhiteBalance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemWhiteBalance")))
 }
 
-// @constant kMDQueryUpdateAddedItems The name of the key in a query notification's info dictionary which identifies the list of added results. A result is added if the file contents or some metadata attribute of it is changed, and it now matches the query. Result objects are created for the newly added results, to be put in the list.
-// KMDQueryUpdateAddedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateAddedItems as an objc.ID.
-func KMDQueryUpdateAddedItems() objc.ID { return purego.CFConstant(raw.KMDQueryUpdateAddedItems()) }
+// KMDItemAperture returns the value of the constant kMDItemAperture.
+func KMDItemAperture() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemAperture"))) }
 
-// @constant kMDQueryUpdateChangedItems The name of the key in a query notification's info dictionary which identifies the list of changed results. A result is changed if the file contents or some metadata attribute of it is changed, but it still matches the query. The list only contains result objects which have previously been created, and does not indicate results which have been changed for which result objects have not been created. [[This is for performance reasons, to avoid creating result objects just to represent a change of a result which has not been looked at, but this semantic may change.]]
-// KMDQueryUpdateChangedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateChangedItems as an objc.ID.
-func KMDQueryUpdateChangedItems() objc.ID { return purego.CFConstant(raw.KMDQueryUpdateChangedItems()) }
-
-// @constant kMDQueryUpdateRemovedItems The name of the key in a query notification's info dictionary which identifies the list of removed results. A result can be removed if it no longer matches the query. The list only contains result objects which have previously been created, and does not indicate results which have been removed for which result objects have not been created. [[This is for performance reasons, to avoid creating temporary result objects just to represent the deletion of the result, but this semantic may change.]]
-// KMDQueryUpdateRemovedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateRemovedItems as an objc.ID.
-func KMDQueryUpdateRemovedItems() objc.ID { return purego.CFConstant(raw.KMDQueryUpdateRemovedItems()) }
-
-// @constant kMDQueryResultContentRelevance The name of a query-specific attribute for use in sorting. The relevance of an item is a CFNumberRef with a floating point value. This is the relevance for content searches. The maximum and minimum values for a particular search cannot be determined until all of the results have been returned.  If there are multiple kMDItemTextContent predicates in the query, no relevance is returned. This is an attribute of a result item that is specific to the item in the context of the query. Also, the relevance does not compare the result relative to the other results of a query, but is computed just on the result item itself. Finally, this is only the relevance value for content, not a relevance for the item as a whole. The relevance attribute may not even be computed for an item if the item is found to match the query through evaluation of other attributes of the item than its contents. If the value is not computed, it is treated as an attribute on the item which does not exist (for sorting purposes, for example).
-// KMDQueryResultContentRelevance returns the value of the CoreFoundation reference constant kMDQueryResultContentRelevance as an objc.ID.
-func KMDQueryResultContentRelevance() objc.ID {
-	return purego.CFConstant(raw.KMDQueryResultContentRelevance())
+// KMDItemProfileName returns the value of the constant kMDItemProfileName.
+func KMDItemProfileName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemProfileName")))
 }
 
-// @constant kMDQueryScopeHome A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to the volume and directory that contains the current user's home directory
-// KMDQueryScopeHome returns the value of the CoreFoundation reference constant kMDQueryScopeHome as an objc.ID.
-func KMDQueryScopeHome() objc.ID { return purego.CFConstant(raw.KMDQueryScopeHome()) }
-
-// @constant kMDQueryScopeComputer A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to all locally mounted volumes, plus the user's home directory (which may be on a remote volume).
-// KMDQueryScopeComputer returns the value of the CoreFoundation reference constant kMDQueryScopeComputer as an objc.ID.
-func KMDQueryScopeComputer() objc.ID { return purego.CFConstant(raw.KMDQueryScopeComputer()) }
-
-// @constant kMDQueryScopeNetwork A constant, which can be passed in the scopeDirectories array, to specify that the search should include all user mounted remote volumes.
-// KMDQueryScopeNetwork returns the value of the CoreFoundation reference constant kMDQueryScopeNetwork as an objc.ID.
-func KMDQueryScopeNetwork() objc.ID { return purego.CFConstant(raw.KMDQueryScopeNetwork()) }
-
-// @constant kMDQueryScopeAllIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes and indexed user mounted remote volumes, plus the user's home directory.
-// KMDQueryScopeAllIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeAllIndexed as an objc.ID.
-func KMDQueryScopeAllIndexed() objc.ID { return purego.CFConstant(raw.KMDQueryScopeAllIndexed()) }
-
-// @constant kMDQueryScopeComputerIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes, plus the user's home directory (which may be on a remote volume).
-// KMDQueryScopeComputerIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeComputerIndexed as an objc.ID.
-func KMDQueryScopeComputerIndexed() objc.ID {
-	return purego.CFConstant(raw.KMDQueryScopeComputerIndexed())
+// KMDItemResolutionWidthDPI returns the value of the constant kMDItemResolutionWidthDPI.
+func KMDItemResolutionWidthDPI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemResolutionWidthDPI")))
 }
 
-// @constant kMDQueryScopeNetworkIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should include indexed user mounted remote volumes.
-// KMDQueryScopeNetworkIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeNetworkIndexed as an objc.ID.
-func KMDQueryScopeNetworkIndexed() objc.ID {
-	return purego.CFConstant(raw.KMDQueryScopeNetworkIndexed())
+// KMDItemResolutionHeightDPI returns the value of the constant kMDItemResolutionHeightDPI.
+func KMDItemResolutionHeightDPI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemResolutionHeightDPI")))
 }
 
-// @constant kMDLabelBundleURL @abstract This is the bundle URL for the label. Type is a CFURL. This attribute is read-only. @constant kMDLabelContentChangeDate @abstract This is the date the the label content last changed. Type is a CFDate. This attribute is read-only, but its value will be altered by setting any of the writable attributes described below. @constant kMDLabelDisplayName @abstract This is the localized name of the label. Type is a CFString. @constant kMDLabelIconData @abstract This is the data that should be used to create an icon image source for the label. Pass this data to the ImageIO framework to create a CGImageSourceRef. To reset a label's icon to its default image, set kMDLabelIconData to kCFNull. Type is a CFData. @constant kMDLabelIconUUID @abstract This is the UUID of the icon image source for the label. Labels that share the same icon image source will have the same icon UUID. Type is a CFUUID. This attribute is read-only, but its value may be altered by setting the kMDLabelIconData attribute described above. @constant kMDLabelIsMutuallyExclusiveSetMember @abstract This attribute is true if the label kind specifies a mutually-exclusive set of labels. Type is a CFBoolean. This attribute is read-only. @constant kMDLabelKind @abstract This is the kind string for the label. The label kind is the name of the bundle the label is defined in. Type is a CFString. This attribute is read-only. @constant kMDLabelSetsFinderColor @abstract This attribute is optional and applicable only to labels with "Public" visibility. If it is present, then when the label is set on a file the file's Finder color will be set to the specified value (0 - 7). If the label is later removed, the file's Finder color will be reverted either to the color specified by the most-recently-set label with this attribute that remains set on the file, or to 0 (none). Type is a CFNumber. This attribute is ignored for unless the label's visibility is "Public". @constant kMDLabelUUID @abstract This is the UUID of the label. Type is a CFUUID. This attribute is read-only. @constant kMDLabelVisibility @abstract This is a constant describing the label's visibility, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility). Type is a CFString. This attribute is read-only.
-// KMDLabelBundleURL returns the value of the CoreFoundation reference constant kMDLabelBundleURL as an objc.ID.
-func KMDLabelBundleURL() objc.ID { return purego.CFConstant(raw.KMDLabelBundleURL()) }
-
-// KMDLabelContentChangeDate returns the value of the CoreFoundation reference constant kMDLabelContentChangeDate as an objc.ID.
-func KMDLabelContentChangeDate() objc.ID { return purego.CFConstant(raw.KMDLabelContentChangeDate()) }
-
-// KMDLabelDisplayName returns the value of the CoreFoundation reference constant kMDLabelDisplayName as an objc.ID.
-func KMDLabelDisplayName() objc.ID { return purego.CFConstant(raw.KMDLabelDisplayName()) }
-
-// KMDLabelIconData returns the value of the CoreFoundation reference constant kMDLabelIconData as an objc.ID.
-func KMDLabelIconData() objc.ID { return purego.CFConstant(raw.KMDLabelIconData()) }
-
-// KMDLabelIconUUID returns the value of the CoreFoundation reference constant kMDLabelIconUUID as an objc.ID.
-func KMDLabelIconUUID() objc.ID { return purego.CFConstant(raw.KMDLabelIconUUID()) }
-
-// KMDLabelIsMutuallyExclusiveSetMember returns the value of the CoreFoundation reference constant kMDLabelIsMutuallyExclusiveSetMember as an objc.ID.
-func KMDLabelIsMutuallyExclusiveSetMember() objc.ID {
-	return purego.CFConstant(raw.KMDLabelIsMutuallyExclusiveSetMember())
+// KMDItemExposureMode returns the value of the constant kMDItemExposureMode.
+func KMDItemExposureMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemExposureMode")))
 }
 
-// KMDLabelKind returns the value of the CoreFoundation reference constant kMDLabelKind as an objc.ID.
-func KMDLabelKind() objc.ID { return purego.CFConstant(raw.KMDLabelKind()) }
-
-// KMDLabelSetsFinderColor returns the value of the CoreFoundation reference constant kMDLabelSetsFinderColor as an objc.ID.
-func KMDLabelSetsFinderColor() objc.ID { return purego.CFConstant(raw.KMDLabelSetsFinderColor()) }
-
-// KMDLabelUUID returns the value of the CoreFoundation reference constant kMDLabelUUID as an objc.ID.
-func KMDLabelUUID() objc.ID { return purego.CFConstant(raw.KMDLabelUUID()) }
-
-// KMDLabelVisibility returns the value of the CoreFoundation reference constant kMDLabelVisibility as an objc.ID.
-func KMDLabelVisibility() objc.ID { return purego.CFConstant(raw.KMDLabelVisibility()) }
-
-// @constant kMDLabelKindIsMutuallyExclusiveSetKey @abstract This key is used in the Info.plist file of a label bundle to specify that the label kind constitutes a mutually exclusive set. The value is a CFBoolean. @constant kMDLabelKindVisibilityKey @abstract This key is used in the Info.plist file of a label bundle to specify the visibility of the labels defined by the bundle. The value is a CFString constant, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility).
-// KMDLabelKindIsMutuallyExclusiveSetKey returns the value of the CoreFoundation reference constant kMDLabelKindIsMutuallyExclusiveSetKey as an objc.ID.
-func KMDLabelKindIsMutuallyExclusiveSetKey() objc.ID {
-	return purego.CFConstant(raw.KMDLabelKindIsMutuallyExclusiveSetKey())
+// KMDItemExposureTimeSeconds returns the value of the constant kMDItemExposureTimeSeconds.
+func KMDItemExposureTimeSeconds() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemExposureTimeSeconds")))
 }
 
-// KMDLabelKindVisibilityKey returns the value of the CoreFoundation reference constant kMDLabelKindVisibilityKey as an objc.ID.
-func KMDLabelKindVisibilityKey() objc.ID { return purego.CFConstant(raw.KMDLabelKindVisibilityKey()) }
-
-// KMDPrivateVisibility returns the value of the CoreFoundation reference constant kMDPrivateVisibility as an objc.ID.
-func KMDPrivateVisibility() objc.ID { return purego.CFConstant(raw.KMDPrivateVisibility()) }
-
-// KMDPublicVisibility returns the value of the CoreFoundation reference constant kMDPublicVisibility as an objc.ID.
-func KMDPublicVisibility() objc.ID { return purego.CFConstant(raw.KMDPublicVisibility()) }
-
-// @constant kMDLabelAddedNotification @abstract The name of the notification sent when a label has been added. The notification object is the subject MDLabelRef. All label notifications are distributed to processes owned by the same uid that have initialized the Metadata framework label APIs.
-// KMDLabelAddedNotification returns the value of the CoreFoundation reference constant kMDLabelAddedNotification as an objc.ID.
-func KMDLabelAddedNotification() objc.ID { return purego.CFConstant(raw.KMDLabelAddedNotification()) }
-
-// @constant kMDLabelChangedNotification @abstract The name of the notification sent when a label has been changed. The notification object is the subject MDLabelRef. The label's new attributes can be retrieved using MDLabelCopyAttribute().
-// KMDLabelChangedNotification returns the value of the CoreFoundation reference constant kMDLabelChangedNotification as an objc.ID.
-func KMDLabelChangedNotification() objc.ID {
-	return purego.CFConstant(raw.KMDLabelChangedNotification())
+// KMDItemEXIFVersion returns the value of the constant kMDItemEXIFVersion.
+func KMDItemEXIFVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemEXIFVersion")))
 }
 
-// @constant kMDLabelRemovedNotification @abstract The name of the notification sent when a label has been deleted. The notification object is the subject MDLabelRef. The label's kMDLabelIconUUID, kMDLabelKind, kMDLabelKindBundleURL and kMDLabelUUID attributes can still be retrieved using MDLabelCopyAttribute(), and the label may still be passed to MDLabelCopyAttributeName().
-// KMDLabelRemovedNotification returns the value of the CoreFoundation reference constant kMDLabelRemovedNotification as an objc.ID.
-func KMDLabelRemovedNotification() objc.ID {
-	return purego.CFConstant(raw.KMDLabelRemovedNotification())
+// KMDItemCameraOwner returns the value of the constant kMDItemCameraOwner.
+func KMDItemCameraOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemCameraOwner")))
 }
 
-// KMDAttributeDisplayValues returns the value of the CoreFoundation reference constant kMDAttributeDisplayValues as an objc.ID.
-func KMDAttributeDisplayValues() objc.ID { return purego.CFConstant(raw.KMDAttributeDisplayValues()) }
+// KMDItemFocalLength35mm returns the value of the constant kMDItemFocalLength35mm.
+func KMDItemFocalLength35mm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFocalLength35mm")))
+}
 
-// KMDAttributeAllValues returns the value of the CoreFoundation reference constant kMDAttributeAllValues as an objc.ID.
-func KMDAttributeAllValues() objc.ID { return purego.CFConstant(raw.KMDAttributeAllValues()) }
+// KMDItemLensModel returns the value of the constant kMDItemLensModel.
+func KMDItemLensModel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLensModel"))) }
 
-// KMDAttributeReadOnlyValues returns the value of the CoreFoundation reference constant kMDAttributeReadOnlyValues as an objc.ID.
-func KMDAttributeReadOnlyValues() objc.ID { return purego.CFConstant(raw.KMDAttributeReadOnlyValues()) }
+// KMDItemEXIFGPSVersion returns the value of the constant kMDItemEXIFGPSVersion.
+func KMDItemEXIFGPSVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemEXIFGPSVersion")))
+}
 
-// KMDExporterAvaliable returns the value of the CoreFoundation reference constant kMDExporterAvaliable as an objc.ID.
-func KMDExporterAvaliable() objc.ID { return purego.CFConstant(raw.KMDExporterAvaliable()) }
+// KMDItemAltitude returns the value of the constant kMDItemAltitude.
+func KMDItemAltitude() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemAltitude"))) }
 
-// KMDAttributeName returns the value of the CoreFoundation reference constant kMDAttributeName as an objc.ID.
-func KMDAttributeName() objc.ID { return purego.CFConstant(raw.KMDAttributeName()) }
+// KMDItemLatitude returns the value of the constant kMDItemLatitude.
+func KMDItemLatitude() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLatitude"))) }
 
-// KMDAttributeType returns the value of the CoreFoundation reference constant kMDAttributeType as an objc.ID.
-func KMDAttributeType() objc.ID { return purego.CFConstant(raw.KMDAttributeType()) }
+// KMDItemLongitude returns the value of the constant kMDItemLongitude.
+func KMDItemLongitude() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLongitude"))) }
 
-// KMDAttributeMultiValued returns the value of the CoreFoundation reference constant kMDAttributeMultiValued as an objc.ID.
-func KMDAttributeMultiValued() objc.ID { return purego.CFConstant(raw.KMDAttributeMultiValued()) }
+// KMDItemSpeed returns the value of the constant kMDItemSpeed.
+func KMDItemSpeed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemSpeed"))) }
+
+// KMDItemTimestamp returns the value of the constant kMDItemTimestamp.
+func KMDItemTimestamp() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemTimestamp"))) }
+
+// KMDItemGPSTrack returns the value of the constant kMDItemGPSTrack.
+func KMDItemGPSTrack() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSTrack"))) }
+
+// KMDItemImageDirection returns the value of the constant kMDItemImageDirection.
+func KMDItemImageDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemImageDirection")))
+}
+
+// KMDItemNamedLocation returns the value of the constant kMDItemNamedLocation.
+func KMDItemNamedLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemNamedLocation")))
+}
+
+// KMDItemGPSStatus returns the value of the constant kMDItemGPSStatus.
+func KMDItemGPSStatus() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSStatus"))) }
+
+// KMDItemGPSMeasureMode returns the value of the constant kMDItemGPSMeasureMode.
+func KMDItemGPSMeasureMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSMeasureMode")))
+}
+
+// KMDItemGPSDOP returns the value of the constant kMDItemGPSDOP.
+func KMDItemGPSDOP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDOP"))) }
+
+// KMDItemGPSMapDatum returns the value of the constant kMDItemGPSMapDatum.
+func KMDItemGPSMapDatum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSMapDatum")))
+}
+
+// KMDItemGPSDestLatitude returns the value of the constant kMDItemGPSDestLatitude.
+func KMDItemGPSDestLatitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDestLatitude")))
+}
+
+// KMDItemGPSDestLongitude returns the value of the constant kMDItemGPSDestLongitude.
+func KMDItemGPSDestLongitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDestLongitude")))
+}
+
+// KMDItemGPSDestBearing returns the value of the constant kMDItemGPSDestBearing.
+func KMDItemGPSDestBearing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDestBearing")))
+}
+
+// KMDItemGPSDestDistance returns the value of the constant kMDItemGPSDestDistance.
+func KMDItemGPSDestDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDestDistance")))
+}
+
+// KMDItemGPSProcessingMethod returns the value of the constant kMDItemGPSProcessingMethod.
+func KMDItemGPSProcessingMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSProcessingMethod")))
+}
+
+// KMDItemGPSAreaInformation returns the value of the constant kMDItemGPSAreaInformation.
+func KMDItemGPSAreaInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSAreaInformation")))
+}
+
+// KMDItemGPSDateStamp returns the value of the constant kMDItemGPSDateStamp.
+func KMDItemGPSDateStamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDateStamp")))
+}
+
+// KMDItemGPSDifferental returns the value of the constant kMDItemGPSDifferental.
+func KMDItemGPSDifferental() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemGPSDifferental")))
+}
+
+// KMDItemMediaExtensions returns the value of the constant kMDItemMediaExtensions.
+func KMDItemMediaExtensions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemMediaExtensions")))
+}
+
+// KMDItemCodecs returns the value of the constant kMDItemCodecs.
+func KMDItemCodecs() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemCodecs"))) }
+
+// KMDItemMediaTypes returns the value of the constant kMDItemMediaTypes.
+func KMDItemMediaTypes() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemMediaTypes"))) }
+
+// KMDItemStreamable returns the value of the constant kMDItemStreamable.
+func KMDItemStreamable() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemStreamable"))) }
+
+// KMDItemTotalBitRate returns the value of the constant kMDItemTotalBitRate.
+func KMDItemTotalBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemTotalBitRate")))
+}
+
+// KMDItemVideoBitRate returns the value of the constant kMDItemVideoBitRate.
+func KMDItemVideoBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemVideoBitRate")))
+}
+
+// KMDItemAudioBitRate returns the value of the constant kMDItemAudioBitRate.
+func KMDItemAudioBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAudioBitRate")))
+}
+
+// KMDItemDeliveryType returns the value of the constant kMDItemDeliveryType.
+func KMDItemDeliveryType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemDeliveryType")))
+}
+
+// KMDItemAlbum returns the value of the constant kMDItemAlbum.
+func KMDItemAlbum() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemAlbum"))) }
+
+// KMDItemHasAlphaChannel returns the value of the constant kMDItemHasAlphaChannel.
+func KMDItemHasAlphaChannel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemHasAlphaChannel")))
+}
+
+// KMDItemRedEyeOnOff returns the value of the constant kMDItemRedEyeOnOff.
+func KMDItemRedEyeOnOff() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemRedEyeOnOff")))
+}
+
+// KMDItemMeteringMode returns the value of the constant kMDItemMeteringMode.
+func KMDItemMeteringMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemMeteringMode")))
+}
+
+// KMDItemMaxAperture returns the value of the constant kMDItemMaxAperture.
+func KMDItemMaxAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemMaxAperture")))
+}
+
+// KMDItemFNumber returns the value of the constant kMDItemFNumber.
+func KMDItemFNumber() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFNumber"))) }
+
+// KMDItemExposureProgram returns the value of the constant kMDItemExposureProgram.
+func KMDItemExposureProgram() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemExposureProgram")))
+}
+
+// KMDItemExposureTimeString returns the value of the constant kMDItemExposureTimeString.
+func KMDItemExposureTimeString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemExposureTimeString")))
+}
+
+// KMDItemHeadline returns the value of the constant kMDItemHeadline.
+func KMDItemHeadline() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemHeadline"))) }
+
+// KMDItemInstructions returns the value of the constant kMDItemInstructions.
+func KMDItemInstructions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemInstructions")))
+}
+
+// KMDItemCity returns the value of the constant kMDItemCity.
+func KMDItemCity() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemCity"))) }
+
+// KMDItemStateOrProvince returns the value of the constant kMDItemStateOrProvince.
+func KMDItemStateOrProvince() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemStateOrProvince")))
+}
+
+// KMDItemCountry returns the value of the constant kMDItemCountry.
+func KMDItemCountry() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemCountry"))) }
+
+// KMDItemFSName returns the value of the constant kMDItemFSName.
+func KMDItemFSName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSName"))) }
+
+// KMDItemDisplayName returns the value of the constant kMDItemDisplayName.
+func KMDItemDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemDisplayName")))
+}
+
+// KMDItemPath returns the value of the constant kMDItemPath.
+func KMDItemPath() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPath"))) }
+
+// KMDItemFSSize returns the value of the constant kMDItemFSSize.
+func KMDItemFSSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSSize"))) }
+
+// KMDItemFSCreationDate returns the value of the constant kMDItemFSCreationDate.
+func KMDItemFSCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSCreationDate")))
+}
+
+// KMDItemFSContentChangeDate returns the value of the constant kMDItemFSContentChangeDate.
+func KMDItemFSContentChangeDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSContentChangeDate")))
+}
+
+// KMDItemFSOwnerUserID returns the value of the constant kMDItemFSOwnerUserID.
+func KMDItemFSOwnerUserID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSOwnerUserID")))
+}
+
+// KMDItemFSOwnerGroupID returns the value of the constant kMDItemFSOwnerGroupID.
+func KMDItemFSOwnerGroupID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSOwnerGroupID")))
+}
+
+// KMDItemFSExists returns the value of the constant kMDItemFSExists.
+func KMDItemFSExists() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSExists"))) }
+
+// KMDItemFSIsReadable returns the value of the constant kMDItemFSIsReadable.
+func KMDItemFSIsReadable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSIsReadable")))
+}
+
+// KMDItemFSIsWriteable returns the value of the constant kMDItemFSIsWriteable.
+func KMDItemFSIsWriteable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSIsWriteable")))
+}
+
+// KMDItemFSHasCustomIcon returns the value of the constant kMDItemFSHasCustomIcon.
+func KMDItemFSHasCustomIcon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSHasCustomIcon")))
+}
+
+// KMDItemFSIsExtensionHidden returns the value of the constant kMDItemFSIsExtensionHidden.
+func KMDItemFSIsExtensionHidden() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSIsExtensionHidden")))
+}
+
+// KMDItemFSIsStationery returns the value of the constant kMDItemFSIsStationery.
+func KMDItemFSIsStationery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSIsStationery")))
+}
+
+// KMDItemFSInvisible returns the value of the constant kMDItemFSInvisible.
+func KMDItemFSInvisible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSInvisible")))
+}
+
+// KMDItemFSLabel returns the value of the constant kMDItemFSLabel.
+func KMDItemFSLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSLabel"))) }
+
+// KMDItemFSNodeCount returns the value of the constant kMDItemFSNodeCount.
+func KMDItemFSNodeCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFSNodeCount")))
+}
+
+// KMDItemHTMLContent returns the value of the constant kMDItemHTMLContent.
+func KMDItemHTMLContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemHTMLContent")))
+}
+
+// KMDItemTextContent returns the value of the constant kMDItemTextContent.
+func KMDItemTextContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemTextContent")))
+}
+
+// KMDItemAudioSampleRate returns the value of the constant kMDItemAudioSampleRate.
+func KMDItemAudioSampleRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAudioSampleRate")))
+}
+
+// KMDItemAudioChannelCount returns the value of the constant kMDItemAudioChannelCount.
+func KMDItemAudioChannelCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAudioChannelCount")))
+}
+
+// KMDItemTempo returns the value of the constant kMDItemTempo.
+func KMDItemTempo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemTempo"))) }
+
+// KMDItemKeySignature returns the value of the constant kMDItemKeySignature.
+func KMDItemKeySignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemKeySignature")))
+}
+
+// KMDItemTimeSignature returns the value of the constant kMDItemTimeSignature.
+func KMDItemTimeSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemTimeSignature")))
+}
+
+// KMDItemAudioEncodingApplication returns the value of the constant kMDItemAudioEncodingApplication.
+func KMDItemAudioEncodingApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAudioEncodingApplication")))
+}
+
+// KMDItemComposer returns the value of the constant kMDItemComposer.
+func KMDItemComposer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemComposer"))) }
+
+// KMDItemLyricist returns the value of the constant kMDItemLyricist.
+func KMDItemLyricist() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLyricist"))) }
+
+// KMDItemAudioTrackNumber returns the value of the constant kMDItemAudioTrackNumber.
+func KMDItemAudioTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAudioTrackNumber")))
+}
+
+// KMDItemRecordingDate returns the value of the constant kMDItemRecordingDate.
+func KMDItemRecordingDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemRecordingDate")))
+}
+
+// KMDItemMusicalGenre returns the value of the constant kMDItemMusicalGenre.
+func KMDItemMusicalGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemMusicalGenre")))
+}
+
+// KMDItemIsGeneralMIDISequence returns the value of the constant kMDItemIsGeneralMIDISequence.
+func KMDItemIsGeneralMIDISequence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemIsGeneralMIDISequence")))
+}
+
+// KMDItemRecordingYear returns the value of the constant kMDItemRecordingYear.
+func KMDItemRecordingYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemRecordingYear")))
+}
+
+// KMDItemOrganizations returns the value of the constant kMDItemOrganizations.
+func KMDItemOrganizations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemOrganizations")))
+}
+
+// KMDItemLanguages returns the value of the constant kMDItemLanguages.
+func KMDItemLanguages() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLanguages"))) }
+
+// KMDItemRights returns the value of the constant kMDItemRights.
+func KMDItemRights() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemRights"))) }
+
+// KMDItemPublishers returns the value of the constant kMDItemPublishers.
+func KMDItemPublishers() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPublishers"))) }
+
+// KMDItemContributors returns the value of the constant kMDItemContributors.
+func KMDItemContributors() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemContributors")))
+}
+
+// KMDItemCoverage returns the value of the constant kMDItemCoverage.
+func KMDItemCoverage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemCoverage"))) }
+
+// KMDItemSubject returns the value of the constant kMDItemSubject.
+func KMDItemSubject() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemSubject"))) }
+
+// KMDItemTheme returns the value of the constant kMDItemTheme.
+func KMDItemTheme() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemTheme"))) }
+
+// KMDItemDescription returns the value of the constant kMDItemDescription.
+func KMDItemDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemDescription")))
+}
+
+// KMDItemIdentifier returns the value of the constant kMDItemIdentifier.
+func KMDItemIdentifier() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemIdentifier"))) }
+
+// KMDItemAudiences returns the value of the constant kMDItemAudiences.
+func KMDItemAudiences() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemAudiences"))) }
+
+// KMDItemNumberOfPages returns the value of the constant kMDItemNumberOfPages.
+func KMDItemNumberOfPages() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemNumberOfPages")))
+}
+
+// KMDItemPageWidth returns the value of the constant kMDItemPageWidth.
+func KMDItemPageWidth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPageWidth"))) }
+
+// KMDItemPageHeight returns the value of the constant kMDItemPageHeight.
+func KMDItemPageHeight() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPageHeight"))) }
+
+// KMDItemSecurityMethod returns the value of the constant kMDItemSecurityMethod.
+func KMDItemSecurityMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemSecurityMethod")))
+}
+
+// KMDItemCreator returns the value of the constant kMDItemCreator.
+func KMDItemCreator() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemCreator"))) }
+
+// KMDItemEncodingApplications returns the value of the constant kMDItemEncodingApplications.
+func KMDItemEncodingApplications() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemEncodingApplications")))
+}
+
+// KMDItemDueDate returns the value of the constant kMDItemDueDate.
+func KMDItemDueDate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemDueDate"))) }
+
+// KMDItemStarRating returns the value of the constant kMDItemStarRating.
+func KMDItemStarRating() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemStarRating"))) }
+
+// KMDItemPhoneNumbers returns the value of the constant kMDItemPhoneNumbers.
+func KMDItemPhoneNumbers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemPhoneNumbers")))
+}
+
+// KMDItemEmailAddresses returns the value of the constant kMDItemEmailAddresses.
+func KMDItemEmailAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemEmailAddresses")))
+}
+
+// KMDItemInstantMessageAddresses returns the value of the constant kMDItemInstantMessageAddresses.
+func KMDItemInstantMessageAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemInstantMessageAddresses")))
+}
+
+// KMDItemKind returns the value of the constant kMDItemKind.
+func KMDItemKind() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemKind"))) }
+
+// KMDItemRecipients returns the value of the constant kMDItemRecipients.
+func KMDItemRecipients() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemRecipients"))) }
+
+// KMDItemFinderComment returns the value of the constant kMDItemFinderComment.
+func KMDItemFinderComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemFinderComment")))
+}
+
+// KMDItemFonts returns the value of the constant kMDItemFonts.
+func KMDItemFonts() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemFonts"))) }
+
+// KMDItemAppleLoopsRootKey returns the value of the constant kMDItemAppleLoopsRootKey.
+func KMDItemAppleLoopsRootKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAppleLoopsRootKey")))
+}
+
+// KMDItemAppleLoopsKeyFilterType returns the value of the constant kMDItemAppleLoopsKeyFilterType.
+func KMDItemAppleLoopsKeyFilterType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAppleLoopsKeyFilterType")))
+}
+
+// KMDItemAppleLoopsLoopMode returns the value of the constant kMDItemAppleLoopsLoopMode.
+func KMDItemAppleLoopsLoopMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAppleLoopsLoopMode")))
+}
+
+// KMDItemAppleLoopDescriptors returns the value of the constant kMDItemAppleLoopDescriptors.
+func KMDItemAppleLoopDescriptors() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAppleLoopDescriptors")))
+}
+
+// KMDItemMusicalInstrumentCategory returns the value of the constant kMDItemMusicalInstrumentCategory.
+func KMDItemMusicalInstrumentCategory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemMusicalInstrumentCategory")))
+}
+
+// KMDItemMusicalInstrumentName returns the value of the constant kMDItemMusicalInstrumentName.
+func KMDItemMusicalInstrumentName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemMusicalInstrumentName")))
+}
+
+// KMDItemCFBundleIdentifier returns the value of the constant kMDItemCFBundleIdentifier.
+func KMDItemCFBundleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemCFBundleIdentifier")))
+}
+
+// KMDItemSupportFileType returns the value of the constant kMDItemSupportFileType.
+func KMDItemSupportFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemSupportFileType")))
+}
+
+// KMDItemInformation returns the value of the constant kMDItemInformation.
+func KMDItemInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemInformation")))
+}
+
+// KMDItemDirector returns the value of the constant kMDItemDirector.
+func KMDItemDirector() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemDirector"))) }
+
+// KMDItemProducer returns the value of the constant kMDItemProducer.
+func KMDItemProducer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemProducer"))) }
+
+// KMDItemGenre returns the value of the constant kMDItemGenre.
+func KMDItemGenre() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemGenre"))) }
+
+// KMDItemPerformers returns the value of the constant kMDItemPerformers.
+func KMDItemPerformers() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemPerformers"))) }
+
+// KMDItemOriginalFormat returns the value of the constant kMDItemOriginalFormat.
+func KMDItemOriginalFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemOriginalFormat")))
+}
+
+// KMDItemOriginalSource returns the value of the constant kMDItemOriginalSource.
+func KMDItemOriginalSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemOriginalSource")))
+}
+
+// KMDItemAuthorEmailAddresses returns the value of the constant kMDItemAuthorEmailAddresses.
+func KMDItemAuthorEmailAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAuthorEmailAddresses")))
+}
+
+// KMDItemRecipientEmailAddresses returns the value of the constant kMDItemRecipientEmailAddresses.
+func KMDItemRecipientEmailAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemRecipientEmailAddresses")))
+}
+
+// KMDItemAuthorAddresses returns the value of the constant kMDItemAuthorAddresses.
+func KMDItemAuthorAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemAuthorAddresses")))
+}
+
+// KMDItemRecipientAddresses returns the value of the constant kMDItemRecipientAddresses.
+func KMDItemRecipientAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemRecipientAddresses")))
+}
+
+// KMDItemURL returns the value of the constant kMDItemURL.
+func KMDItemURL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemURL"))) }
+
+// KMDItemLabelIcon returns the value of the constant kMDItemLabelIcon.
+func KMDItemLabelIcon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLabelIcon"))) }
+
+// KMDItemLabelID returns the value of the constant kMDItemLabelID.
+func KMDItemLabelID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLabelID"))) }
+
+// KMDItemLabelKind returns the value of the constant kMDItemLabelKind.
+func KMDItemLabelKind() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLabelKind"))) }
+
+// KMDItemLabelUUID returns the value of the constant kMDItemLabelUUID.
+func KMDItemLabelUUID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDItemLabelUUID"))) }
+
+// KMDItemIsLikelyJunk returns the value of the constant kMDItemIsLikelyJunk.
+func KMDItemIsLikelyJunk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemIsLikelyJunk")))
+}
+
+// KMDItemExecutableArchitectures returns the value of the constant kMDItemExecutableArchitectures.
+func KMDItemExecutableArchitectures() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemExecutableArchitectures")))
+}
+
+// KMDItemExecutablePlatform returns the value of the constant kMDItemExecutablePlatform.
+func KMDItemExecutablePlatform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemExecutablePlatform")))
+}
+
+// KMDItemApplicationCategories returns the value of the constant kMDItemApplicationCategories.
+func KMDItemApplicationCategories() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemApplicationCategories")))
+}
+
+// KMDItemIsApplicationManaged returns the value of the constant kMDItemIsApplicationManaged.
+func KMDItemIsApplicationManaged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDItemIsApplicationManaged")))
+}
+
+// KMDQueryProgressNotification returns the value of the constant kMDQueryProgressNotification.
+func KMDQueryProgressNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryProgressNotification")))
+}
+
+// KMDQueryDidFinishNotification returns the value of the constant kMDQueryDidFinishNotification.
+func KMDQueryDidFinishNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryDidFinishNotification")))
+}
+
+// KMDQueryDidUpdateNotification returns the value of the constant kMDQueryDidUpdateNotification.
+func KMDQueryDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryDidUpdateNotification")))
+}
+
+// KMDQueryUpdateAddedItems returns the value of the constant kMDQueryUpdateAddedItems.
+func KMDQueryUpdateAddedItems() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryUpdateAddedItems")))
+}
+
+// KMDQueryUpdateChangedItems returns the value of the constant kMDQueryUpdateChangedItems.
+func KMDQueryUpdateChangedItems() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryUpdateChangedItems")))
+}
+
+// KMDQueryUpdateRemovedItems returns the value of the constant kMDQueryUpdateRemovedItems.
+func KMDQueryUpdateRemovedItems() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryUpdateRemovedItems")))
+}
+
+// KMDQueryResultContentRelevance returns the value of the constant kMDQueryResultContentRelevance.
+func KMDQueryResultContentRelevance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryResultContentRelevance")))
+}
+
+// KMDQueryScopeHome returns the value of the constant kMDQueryScopeHome.
+func KMDQueryScopeHome() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeHome"))) }
+
+// KMDQueryScopeComputer returns the value of the constant kMDQueryScopeComputer.
+func KMDQueryScopeComputer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeComputer")))
+}
+
+// KMDQueryScopeNetwork returns the value of the constant kMDQueryScopeNetwork.
+func KMDQueryScopeNetwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeNetwork")))
+}
+
+// KMDQueryScopeAllIndexed returns the value of the constant kMDQueryScopeAllIndexed.
+func KMDQueryScopeAllIndexed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeAllIndexed")))
+}
+
+// KMDQueryScopeComputerIndexed returns the value of the constant kMDQueryScopeComputerIndexed.
+func KMDQueryScopeComputerIndexed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeComputerIndexed")))
+}
+
+// KMDQueryScopeNetworkIndexed returns the value of the constant kMDQueryScopeNetworkIndexed.
+func KMDQueryScopeNetworkIndexed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDQueryScopeNetworkIndexed")))
+}
+
+// KMDLabelBundleURL returns the value of the constant kMDLabelBundleURL.
+func KMDLabelBundleURL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDLabelBundleURL"))) }
+
+// KMDLabelContentChangeDate returns the value of the constant kMDLabelContentChangeDate.
+func KMDLabelContentChangeDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelContentChangeDate")))
+}
+
+// KMDLabelDisplayName returns the value of the constant kMDLabelDisplayName.
+func KMDLabelDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelDisplayName")))
+}
+
+// KMDLabelIconData returns the value of the constant kMDLabelIconData.
+func KMDLabelIconData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDLabelIconData"))) }
+
+// KMDLabelIconUUID returns the value of the constant kMDLabelIconUUID.
+func KMDLabelIconUUID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDLabelIconUUID"))) }
+
+// KMDLabelIsMutuallyExclusiveSetMember returns the value of the constant kMDLabelIsMutuallyExclusiveSetMember.
+func KMDLabelIsMutuallyExclusiveSetMember() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelIsMutuallyExclusiveSetMember")))
+}
+
+// KMDLabelKind returns the value of the constant kMDLabelKind.
+func KMDLabelKind() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDLabelKind"))) }
+
+// KMDLabelSetsFinderColor returns the value of the constant kMDLabelSetsFinderColor.
+func KMDLabelSetsFinderColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelSetsFinderColor")))
+}
+
+// KMDLabelUUID returns the value of the constant kMDLabelUUID.
+func KMDLabelUUID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDLabelUUID"))) }
+
+// KMDLabelVisibility returns the value of the constant kMDLabelVisibility.
+func KMDLabelVisibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelVisibility")))
+}
+
+// KMDLabelKindIsMutuallyExclusiveSetKey returns the value of the constant kMDLabelKindIsMutuallyExclusiveSetKey.
+func KMDLabelKindIsMutuallyExclusiveSetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelKindIsMutuallyExclusiveSetKey")))
+}
+
+// KMDLabelKindVisibilityKey returns the value of the constant kMDLabelKindVisibilityKey.
+func KMDLabelKindVisibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelKindVisibilityKey")))
+}
+
+// KMDPrivateVisibility returns the value of the constant kMDPrivateVisibility.
+func KMDPrivateVisibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDPrivateVisibility")))
+}
+
+// KMDPublicVisibility returns the value of the constant kMDPublicVisibility.
+func KMDPublicVisibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDPublicVisibility")))
+}
+
+// KMDLabelAddedNotification returns the value of the constant kMDLabelAddedNotification.
+func KMDLabelAddedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelAddedNotification")))
+}
+
+// KMDLabelChangedNotification returns the value of the constant kMDLabelChangedNotification.
+func KMDLabelChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelChangedNotification")))
+}
+
+// KMDLabelRemovedNotification returns the value of the constant kMDLabelRemovedNotification.
+func KMDLabelRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDLabelRemovedNotification")))
+}
+
+// KMDAttributeDisplayValues returns the value of the constant kMDAttributeDisplayValues.
+func KMDAttributeDisplayValues() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDAttributeDisplayValues")))
+}
+
+// KMDAttributeAllValues returns the value of the constant kMDAttributeAllValues.
+func KMDAttributeAllValues() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDAttributeAllValues")))
+}
+
+// KMDAttributeReadOnlyValues returns the value of the constant kMDAttributeReadOnlyValues.
+func KMDAttributeReadOnlyValues() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDAttributeReadOnlyValues")))
+}
+
+// KMDExporterAvaliable returns the value of the constant kMDExporterAvaliable.
+func KMDExporterAvaliable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDExporterAvaliable")))
+}
+
+// KMDAttributeName returns the value of the constant kMDAttributeName.
+func KMDAttributeName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDAttributeName"))) }
+
+// KMDAttributeType returns the value of the constant kMDAttributeType.
+func KMDAttributeType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMDAttributeType"))) }
+
+// KMDAttributeMultiValued returns the value of the constant kMDAttributeMultiValued.
+func KMDAttributeMultiValued() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMDAttributeMultiValued")))
+}

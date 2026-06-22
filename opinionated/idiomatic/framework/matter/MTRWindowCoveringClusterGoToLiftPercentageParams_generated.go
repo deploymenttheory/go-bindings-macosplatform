@@ -5,107 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWindowCoveringClusterGoToLiftPercentageParams wraps [raw.MTRWindowCoveringClusterGoToLiftPercentageParams] with a fluent Go API.
+// MTRWindowCoveringClusterGoToLiftPercentageParams is an idiomatic wrapper over the Objective-C class MTRWindowCoveringClusterGoToLiftPercentageParams.
 type MTRWindowCoveringClusterGoToLiftPercentageParams struct {
-	inner *raw.MTRWindowCoveringClusterGoToLiftPercentageParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWindowCoveringClusterGoToLiftPercentageParams].
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) Unwrap() *raw.MTRWindowCoveringClusterGoToLiftPercentageParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWindowCoveringClusterGoToLiftPercentageParamsFromID adopts an existing object pointer as a MTRWindowCoveringClusterGoToLiftPercentageParams (nil for 0).
+// MTRWindowCoveringClusterGoToLiftPercentageParamsFromID adopts an existing Objective-C object as a MTRWindowCoveringClusterGoToLiftPercentageParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWindowCoveringClusterGoToLiftPercentageParamsFromID(id objc.ID) *MTRWindowCoveringClusterGoToLiftPercentageParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWindowCoveringClusterGoToLiftPercentageParams{inner: raw.MTRWindowCoveringClusterGoToLiftPercentageParamsFromID(id)}
+	x := &MTRWindowCoveringClusterGoToLiftPercentageParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRWindowCoveringClusterGoToLiftPercentageParams creates a new [MTRWindowCoveringClusterGoToLiftPercentageParams].
+// mTRWindowCoveringClusterGoToLiftPercentageParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRWindowCoveringClusterGoToLiftPercentageParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWindowCoveringClusterGoToLiftPercentageParamsAdopt(id objc.ID) *MTRWindowCoveringClusterGoToLiftPercentageParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWindowCoveringClusterGoToLiftPercentageParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWindowCoveringClusterGoToLiftPercentageParams creates a new MTRWindowCoveringClusterGoToLiftPercentageParams.
 func NewMTRWindowCoveringClusterGoToLiftPercentageParams() *MTRWindowCoveringClusterGoToLiftPercentageParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWindowCoveringClusterGoToLiftPercentageParams")), objc.RegisterName("new"))
-	return &MTRWindowCoveringClusterGoToLiftPercentageParams{inner: raw.MTRWindowCoveringClusterGoToLiftPercentageParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWindowCoveringClusterGoToLiftPercentageParams")), objc.RegisterName("new"))
+	return mTRWindowCoveringClusterGoToLiftPercentageParamsAdopt(_id)
 }
 
-// WithLiftPercent100thsValue sets the liftPercent100thsValue property and returns the receiver for chaining.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams {
-	x.inner.SetLiftPercent100thsValue(liftPercent100thsValue)
+// WithLiftPercent100thsValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithLiftPercent100thsValue(liftPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLiftPercent100thsValue:"), objref.IDOf(liftPercent100thsValue))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// LiftPercent100thsValue calls the underlying LiftPercent100thsValue.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) LiftPercent100thsValue() *foundation.NSNumber {
-	return x.inner.LiftPercent100thsValue()
+// LiftPercent100thsValue wraps the corresponding Objective-C method.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) LiftPercent100thsValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("liftPercent100thsValue"))
+	return obj.Wrap(_r)
 }
 
-// SetLiftPercent100thsValue calls the underlying SetLiftPercent100thsValue.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber) {
-	x.inner.SetLiftPercent100thsValue(liftPercent100thsValue)
+// SetLiftPercent100thsValue wraps the corresponding Objective-C method.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetLiftPercent100thsValue(liftPercent100thsValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLiftPercent100thsValue:"), objref.IDOf(liftPercent100thsValue))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRWindowCoveringClusterGoToLiftPercentageParamsable is the interface implemented by [MTRWindowCoveringClusterGoToLiftPercentageParams], for mocking and DI.
 type MTRWindowCoveringClusterGoToLiftPercentageParamsable interface {
-	Unwrap() *raw.MTRWindowCoveringClusterGoToLiftPercentageParams
-	WithLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams
-	LiftPercent100thsValue() *foundation.NSNumber
-	SetLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithLiftPercent100thsValue(liftPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams
+	LiftPercent100thsValue() obj.Object
+	SetLiftPercent100thsValue(liftPercent100thsValue obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRWindowCoveringClusterGoToLiftPercentageParamsable = (*MTRWindowCoveringClusterGoToLiftPercentageParams)(nil)

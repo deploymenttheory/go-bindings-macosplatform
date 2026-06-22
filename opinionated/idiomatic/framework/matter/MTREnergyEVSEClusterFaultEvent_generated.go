@@ -5,116 +5,154 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEClusterFaultEvent wraps [raw.MTREnergyEVSEClusterFaultEvent] with a fluent Go API.
+// MTREnergyEVSEClusterFaultEvent is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterFaultEvent.
 type MTREnergyEVSEClusterFaultEvent struct {
-	inner *raw.MTREnergyEVSEClusterFaultEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEClusterFaultEvent].
-func (x *MTREnergyEVSEClusterFaultEvent) Unwrap() *raw.MTREnergyEVSEClusterFaultEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEClusterFaultEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEClusterFaultEventFromID adopts an existing object pointer as a MTREnergyEVSEClusterFaultEvent (nil for 0).
+// MTREnergyEVSEClusterFaultEventFromID adopts an existing Objective-C object as a MTREnergyEVSEClusterFaultEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEClusterFaultEventFromID(id objc.ID) *MTREnergyEVSEClusterFaultEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEClusterFaultEvent{inner: raw.MTREnergyEVSEClusterFaultEventFromID(id)}
+	x := &MTREnergyEVSEClusterFaultEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTREnergyEVSEClusterFaultEvent creates a new [MTREnergyEVSEClusterFaultEvent].
+// mTREnergyEVSEClusterFaultEventAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEClusterFaultEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEClusterFaultEventAdopt(id objc.ID) *MTREnergyEVSEClusterFaultEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEClusterFaultEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEClusterFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEClusterFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEClusterFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterFaultEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEClusterFaultEvent creates a new MTREnergyEVSEClusterFaultEvent.
 func NewMTREnergyEVSEClusterFaultEvent() *MTREnergyEVSEClusterFaultEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEClusterFaultEvent")), objc.RegisterName("new"))
-	return &MTREnergyEVSEClusterFaultEvent{inner: raw.MTREnergyEVSEClusterFaultEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterFaultEvent")), objc.RegisterName("new"))
+	return mTREnergyEVSEClusterFaultEventAdopt(_id)
 }
 
-// WithSessionID sets the sessionID property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterFaultEvent) WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent {
-	x.inner.SetSessionID(sessionID)
+// WithSessionID sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterFaultEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return x
 }
 
-// WithState sets the state property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterFaultEvent) WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent {
-	x.inner.SetState(state)
+// WithState sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterFaultEvent) WithState(state obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 	return x
 }
 
-// WithFaultStatePreviousState sets the faultStatePreviousState property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterFaultEvent) WithFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent {
-	x.inner.SetFaultStatePreviousState(faultStatePreviousState)
+// WithFaultStatePreviousState sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterFaultEvent) WithFaultStatePreviousState(faultStatePreviousState obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultStatePreviousState:"), objref.IDOf(faultStatePreviousState))
 	return x
 }
 
-// WithFaultStateCurrentState sets the faultStateCurrentState property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterFaultEvent) WithFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent {
-	x.inner.SetFaultStateCurrentState(faultStateCurrentState)
+// WithFaultStateCurrentState sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterFaultEvent) WithFaultStateCurrentState(faultStateCurrentState obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultStateCurrentState:"), objref.IDOf(faultStateCurrentState))
 	return x
 }
 
-// SessionID calls the underlying SessionID.
-func (x *MTREnergyEVSEClusterFaultEvent) SessionID() *foundation.NSNumber {
-	return x.inner.SessionID()
+// SessionID wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) SessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+	return obj.Wrap(_r)
 }
 
-// SetSessionID calls the underlying SetSessionID.
-func (x *MTREnergyEVSEClusterFaultEvent) SetSessionID(sessionID *foundation.NSNumber) {
-	x.inner.SetSessionID(sessionID)
+// SetSessionID wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) SetSessionID(sessionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }
 
-// State calls the underlying State.
-func (x *MTREnergyEVSEClusterFaultEvent) State() *foundation.NSNumber {
-	return x.inner.State()
+// State wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) State() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	return obj.Wrap(_r)
 }
 
-// SetState calls the underlying SetState.
-func (x *MTREnergyEVSEClusterFaultEvent) SetState(state *foundation.NSNumber) {
-	x.inner.SetState(state)
+// SetState wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) SetState(state obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 }
 
-// FaultStatePreviousState calls the underlying FaultStatePreviousState.
-func (x *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() *foundation.NSNumber {
-	return x.inner.FaultStatePreviousState()
+// FaultStatePreviousState wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("faultStatePreviousState"))
+	return obj.Wrap(_r)
 }
 
-// SetFaultStatePreviousState calls the underlying SetFaultStatePreviousState.
-func (x *MTREnergyEVSEClusterFaultEvent) SetFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber) {
-	x.inner.SetFaultStatePreviousState(faultStatePreviousState)
+// SetFaultStatePreviousState wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) SetFaultStatePreviousState(faultStatePreviousState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultStatePreviousState:"), objref.IDOf(faultStatePreviousState))
 }
 
-// FaultStateCurrentState calls the underlying FaultStateCurrentState.
-func (x *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() *foundation.NSNumber {
-	return x.inner.FaultStateCurrentState()
+// FaultStateCurrentState wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("faultStateCurrentState"))
+	return obj.Wrap(_r)
 }
 
-// SetFaultStateCurrentState calls the underlying SetFaultStateCurrentState.
-func (x *MTREnergyEVSEClusterFaultEvent) SetFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber) {
-	x.inner.SetFaultStateCurrentState(faultStateCurrentState)
+// SetFaultStateCurrentState wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterFaultEvent) SetFaultStateCurrentState(faultStateCurrentState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaultStateCurrentState:"), objref.IDOf(faultStateCurrentState))
 }
 
 // MTREnergyEVSEClusterFaultEventable is the interface implemented by [MTREnergyEVSEClusterFaultEvent], for mocking and DI.
 type MTREnergyEVSEClusterFaultEventable interface {
-	Unwrap() *raw.MTREnergyEVSEClusterFaultEvent
-	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
-	WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
-	WithFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
-	WithFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
-	SessionID() *foundation.NSNumber
-	SetSessionID(sessionID *foundation.NSNumber)
-	State() *foundation.NSNumber
-	SetState(state *foundation.NSNumber)
-	FaultStatePreviousState() *foundation.NSNumber
-	SetFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber)
-	FaultStateCurrentState() *foundation.NSNumber
-	SetFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber)
+	obj.Object
+	WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterFaultEvent
+	WithState(state obj.Object) *MTREnergyEVSEClusterFaultEvent
+	WithFaultStatePreviousState(faultStatePreviousState obj.Object) *MTREnergyEVSEClusterFaultEvent
+	WithFaultStateCurrentState(faultStateCurrentState obj.Object) *MTREnergyEVSEClusterFaultEvent
+	SessionID() obj.Object
+	SetSessionID(sessionID obj.Object)
+	State() obj.Object
+	SetState(state obj.Object)
+	FaultStatePreviousState() obj.Object
+	SetFaultStatePreviousState(faultStatePreviousState obj.Object)
+	FaultStateCurrentState() obj.Object
+	SetFaultStateCurrentState(faultStateCurrentState obj.Object)
 }
 
 var _ MTREnergyEVSEClusterFaultEventable = (*MTREnergyEVSEClusterFaultEvent)(nil)

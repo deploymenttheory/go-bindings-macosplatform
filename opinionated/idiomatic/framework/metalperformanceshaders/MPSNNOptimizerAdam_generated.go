@@ -5,216 +5,122 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimization layer that performs an Adam pdate.
+// NNOptimizerAdam is an idiomatic wrapper over the Objective-C class MPSNNOptimizerAdam.
 //
-// NNOptimizerAdam wraps [raw.MPSNNOptimizerAdam] with a fluent Go API.
+// It embeds [NNOptimizer], promoting that type's methods.
+//
+// An optimization layer that performs an Adam pdate.
 type NNOptimizerAdam struct {
-	inner *raw.MPSNNOptimizerAdam
+	NNOptimizer
 }
 
-// Unwrap returns the underlying [raw.MPSNNOptimizerAdam].
-func (x *NNOptimizerAdam) Unwrap() *raw.MPSNNOptimizerAdam { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNOptimizerAdam) ID() objc.ID { return x.inner.Ptr() }
-
-// NNOptimizerAdamFromID adopts an existing object pointer as a NNOptimizerAdam (nil for 0).
+// NNOptimizerAdamFromID adopts an existing Objective-C object as a NNOptimizerAdam
+// (nil for 0), retaining it and registering a release finalizer.
 func NNOptimizerAdamFromID(id objc.ID) *NNOptimizerAdam {
 	if id == 0 {
 		return nil
 	}
-	return &NNOptimizerAdam{inner: raw.MPSNNOptimizerAdamFromID(id)}
-}
-
-// @abstract   Convenience initialization for the adam update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate at which we will update values @return     A valid MPSNNOptimizerAdam object or nil, if failure.
-//
-// NewNNOptimizerAdamWithDeviceLearningRate creates a new [NNOptimizerAdam].
-func NewNNOptimizerAdamWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *NNOptimizerAdam {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerAdam")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:learningRate:"), device, learningRate)
-	return &NNOptimizerAdam{inner: raw.MPSNNOptimizerAdamFromID(_id)}
-}
-
-// @abstract   Full initialization for the adam update @param      device                     The device on which the kernel will execute. @param      beta1                      The beta1 to update values @param      beta2                      The beta2 to update values @param      epsilon                    The epsilon at which we update values @param      timeStep                   The timeStep at which values will start updating @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerAdam object or nil, if failure.
-//
-// NewNNOptimizerAdamWithDeviceBeta1Beta2EpsilonTimeStepOptimizerDescriptor creates a new [NNOptimizerAdam].
-func NewNNOptimizerAdamWithDeviceBeta1Beta2EpsilonTimeStepOptimizerDescriptor(device metal.MTLDevice, beta1 float64, beta2 float64, epsilon float32, timeStep uint, optimizerDescriptor *mpsneuralnetwork.MPSNNOptimizerDescriptor) *NNOptimizerAdam {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerAdam")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:beta1:beta2:epsilon:timeStep:optimizerDescriptor:"), device, beta1, beta2, epsilon, timeStep, optimizerDescriptor.Ptr())
-	return &NNOptimizerAdam{inner: raw.MPSNNOptimizerAdamFromID(_id)}
-}
-
-// @property   timeStep @abstract   Current timeStep for the update, number of times update has occurred
-//
-// WithTimeStep sets the timeStep property and returns the receiver for chaining.
-func (x *NNOptimizerAdam) WithTimeStep(timeStep uint) *NNOptimizerAdam {
-	x.inner.SetTimeStep(timeStep)
+	x := &NNOptimizerAdam{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
-//
-// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+// nNOptimizerAdamAdopt wraps an Objective-C object that this code just created as a
+// NNOptimizerAdam (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNOptimizerAdamAdopt(id objc.ID) *NNOptimizerAdam {
+	if id == 0 {
+		return nil
+	}
+	x := &NNOptimizerAdam{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNOptimizerAdam creates a new NNOptimizerAdam.
+func NewNNOptimizerAdam() *NNOptimizerAdam {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNOptimizerAdam")), objc.RegisterName("new"))
+	return nNOptimizerAdamAdopt(_id)
+}
+
+// WithTimeStep current timeStep for the update, number of times update has occurred
+func (x *NNOptimizerAdam) WithTimeStep(timeStep int) *NNOptimizerAdam {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
+	return x
+}
+
+// WithLearningRate the learningRate at which we update values The default value is 1e-3
 func (x *NNOptimizerAdam) WithLearningRate(learningRate float32) *NNOptimizerAdam {
-	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
-//
-// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
 func (x *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam {
-	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNOptimizerAdam) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerAdam {
-	x.inner.MPSNNOptimizer.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NNOptimizerAdam) WithLabel(label string) *NNOptimizerAdam {
-	x.inner.MPSNNOptimizer.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update @param      commandBuffer          A valid MTLCommandBuffer to receive the encoded kernel. @param      inputGradientVector    A valid MPSVector object which specifies the input vector of gradients for this update. @param      inputValuesVector      A valid MPSVector object which specifies the input vector of values to be updated. @param      inputMomentumVector    A valid MPSVector object which specifies the gradient momentum vector which will be updated and overwritten. @param      inputVelocityVector    A valid MPSVector object which specifies the gradient velocity vector which will be updated and overwritten. @param      resultValuesVector     A valid MPSVector object which specifies the resultValues vector which will be updated and overwritten. @discussion The following operations would be applied t = t + 1 lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t) m[t]     = beta1 * m[t-1] + (1 - beta1) * g v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2) variable = variable - lr[t] * m[t] / (sqrt(v[t]) + epsilon)
-//
-// EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector.
-func (x *NNOptimizerAdam) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, inputVelocityVector, resultValuesVector)
-}
-
-// EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix calls the underlying EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix.
-func (x *NNOptimizerAdam) EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, inputVelocityMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputMomentumMatrix, inputVelocityMatrix, resultValuesMatrix)
-}
-
-// @abstract   Encode an AMSGrad variant of MPSNNOptimizerAdam object to a command buffer to perform out of place update @param      commandBuffer          A valid MTLCommandBuffer to receive the encoded kernel. @param      inputGradientVector    A valid MPSVector object which specifies the input vector of gradients for this update. @param      inputValuesVector      A valid MPSVector object which specifies the input vector of values to be updated. @param      inputMomentumVector    A valid MPSVector object which specifies the gradient momentum vector which will be updated and overwritten. @param      inputVelocityVector    A valid MPSVector object which specifies the gradient velocity vector which will be updated and overwritten. @param      maximumVelocityVector  A valid MPSVector object which specifies the maximum velocity vector which will be updated and overwritten. May be nil, if nil then normal Adam optimizer behaviour is followed. @param      resultValuesVector     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied At update time: t = t + 1 lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t) m[t]     = beta1 * m[t-1] + (1 - beta1) * g v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2) maxVel[t] = max(maxVel[t-1],v[t]) variable = variable - lr[t] * m[t] / (sqrt(maxVel[t]) + epsilon)
-//
-// EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector.
-func (x *NNOptimizerAdam) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, maximumVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, inputVelocityVector, maximumVelocityVector, resultValuesVector)
-}
-
-// EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix calls the underlying EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix.
-func (x *NNOptimizerAdam) EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, inputVelocityMatrix *mpscore.MPSMatrix, maximumVelocityMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputMomentumMatrix, inputVelocityMatrix, maximumVelocityMatrix, resultValuesMatrix)
-}
-
-// @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      convolutionGradientState   A valid MPSCNNConvolutionGradientState object which specifies the input state with gradients for this update. @param      convolutionSourceState     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the input state with values to be updated. @param      inputMomentumVectors       An array MPSVector object which specifies the gradient momentum vectors which will be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of size 1 in which case biases won't be updated @param      inputVelocityVectors       An array MPSVector object which specifies the gradient velocity vectors which will be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of size 1 in which case biases won't be updated @param      resultState                A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied t = t + 1 lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t) m[t]     = beta1 * m[t-1] + (1 - beta1) * g v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2) variable = variable - lr[t] * m[t] / (sqrt(v[t]) + epsilon)
-//
-// EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState.
-func (x *NNOptimizerAdam) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
-	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputMomentumVectors, inputVelocityVectors, resultState)
-}
-
-// EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState.
-func (x *NNOptimizerAdam) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], maximumVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
-	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputMomentumVectors, inputVelocityVectors, maximumVelocityVectors, resultState)
-}
-
-// @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationState                    A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients and original gamma/beta for this update. @param      inputMomentumVectors                       An array MPSVector object which specifies the gradient momentum vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      inputVelocityVectors                       An array MPSVector object which specifies the gradient velocity vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied t = t + 1 lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t) m[t]     = beta1 * m[t-1] + (1 - beta1) * g v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2) variable = variable - lr[t] * m[t] / (sqrt(v[t]) + epsilon)
-//
-// EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState.
-func (x *NNOptimizerAdam) EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer, batchNormalizationState, inputMomentumVectors, inputVelocityVectors, resultState)
-}
-
-// EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState.
-func (x *NNOptimizerAdam) EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], maximumVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer, batchNormalizationState, inputMomentumVectors, inputVelocityVectors, maximumVelocityVectors, resultState)
-}
-
-// @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationGradientState            A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients for this update. @param      batchNormalizationSourceState              A valid MPSCNNBatchNormalizationState object which specifies the input state with original gamma/beta for this update. @param      inputMomentumVectors                       An array MPSVector object which specifies the gradient momentum vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      inputVelocityVectors                       An array MPSVector object which specifies the gradient velocity vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied t = t + 1 lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t) m[t]     = beta1 * m[t-1] + (1 - beta1) * g v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2) variable = variable - lr[t] * m[t] / (sqrt(v[t]) + epsilon)
-//
-// EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState.
-func (x *NNOptimizerAdam) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputMomentumVectors, inputVelocityVectors, resultState)
-}
-
-// EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState.
-func (x *NNOptimizerAdam) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], maximumVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputMomentumVectors, inputVelocityVectors, maximumVelocityVectors, resultState)
-}
-
-// @property   beta1 @abstract   The beta1 at which we update values @discussion Default value is 0.9
-//
-// Beta1 calls the underlying Beta1.
+// Beta1 the beta1 at which we update values Default value is 0.9
 func (x *NNOptimizerAdam) Beta1() float64 {
-	return x.inner.Beta1()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta1"))
+	return _r
 }
 
-// @property   beta2 @abstract   The beta2 at which we update values @discussion Default value is 0.999
-//
-// Beta2 calls the underlying Beta2.
+// Beta2 the beta2 at which we update values Default value is 0.999
 func (x *NNOptimizerAdam) Beta2() float64 {
-	return x.inner.Beta2()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta2"))
+	return _r
 }
 
-// @property   epsilon @abstract   The epsilon at which we update values @discussion This value is usually used to ensure to avoid divide by 0, default value is 1e-8
-//
-// Epsilon calls the underlying Epsilon.
+// Epsilon the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
 func (x *NNOptimizerAdam) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// @property   timeStep @abstract   Current timeStep for the update, number of times update has occurred
-//
-// TimeStep calls the underlying TimeStep.
-func (x *NNOptimizerAdam) TimeStep() uint {
-	return x.inner.TimeStep()
+// TimeStep current timeStep for the update, number of times update has occurred
+func (x *NNOptimizerAdam) TimeStep() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
+	return _r
 }
 
-// SetTimeStep calls the underlying SetTimeStep.
-func (x *NNOptimizerAdam) SetTimeStep(timeStep uint) {
-	x.inner.SetTimeStep(timeStep)
+// SetTimeStep wraps the corresponding Objective-C method.
+func (x *NNOptimizerAdam) SetTimeStep(timeStep int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
 }
-
-func (x *NNOptimizerAdam) asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer {
-	return &x.inner.MPSNNOptimizer
-}
-
-func (x *NNOptimizerAdam) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNOptimizer.MPSKernel }
 
 // NNOptimizerAdamable is the interface implemented by [NNOptimizerAdam], for mocking and DI.
 type NNOptimizerAdamable interface {
-	Unwrap() *raw.MPSNNOptimizerAdam
-	WithTimeStep(timeStep uint) *NNOptimizerAdam
+	obj.Object
+	WithTimeStep(timeStep int) *NNOptimizerAdam
 	WithLearningRate(learningRate float32) *NNOptimizerAdam
 	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam
-	WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerAdam
 	WithLabel(label string) *NNOptimizerAdam
-	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
-	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, inputVelocityMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
-	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, maximumVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
-	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixMaximumVelocityMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, inputVelocityMatrix *mpscore.MPSMatrix, maximumVelocityMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
-	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)
-	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], maximumVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)
-	EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
-	EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], maximumVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
-	EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
-	EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsInputVelocityVectorsMaximumVelocityVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], inputVelocityVectors *foundation.NSArray[*mpscore.MPSVector], maximumVelocityVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
 	Beta1() float64
 	Beta2() float64
 	Epsilon() float32
-	TimeStep() uint
-	SetTimeStep(timeStep uint)
+	TimeStep() int
+	SetTimeStep(timeStep int)
 }
 
 var _ NNOptimizerAdamable = (*NNOptimizerAdam)(nil)
+
+var _ NNOptimizerProvider = (*NNOptimizerAdam)(nil)
+
+var _ KernelProvider = (*NNOptimizerAdam)(nil)

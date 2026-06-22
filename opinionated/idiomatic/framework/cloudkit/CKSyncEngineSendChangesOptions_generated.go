@@ -5,98 +5,117 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options to use with a send operation.
+// SyncEngineSendChangesOptions is an idiomatic wrapper over the Objective-C class CKSyncEngineSendChangesOptions.
 //
-// SyncEngineSendChangesOptions wraps [raw.CKSyncEngineSendChangesOptions] with a fluent Go API.
+// A set of options to use with a send operation.
 type SyncEngineSendChangesOptions struct {
-	inner *raw.CKSyncEngineSendChangesOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineSendChangesOptions].
-func (x *SyncEngineSendChangesOptions) Unwrap() *raw.CKSyncEngineSendChangesOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineSendChangesOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineSendChangesOptionsFromID adopts an existing object pointer as a SyncEngineSendChangesOptions (nil for 0).
+// SyncEngineSendChangesOptionsFromID adopts an existing Objective-C object as a SyncEngineSendChangesOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineSendChangesOptionsFromID(id objc.ID) *SyncEngineSendChangesOptions {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineSendChangesOptions{inner: raw.CKSyncEngineSendChangesOptionsFromID(id)}
+	x := &SyncEngineSendChangesOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a set of options with the specific scope.
-//
-// NewSyncEngineSendChangesOptionsWithScope creates a new [SyncEngineSendChangesOptions].
-func NewSyncEngineSendChangesOptionsWithScope(scope *raw.CKSyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineSendChangesOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), scope.Ptr())
-	return &SyncEngineSendChangesOptions{inner: raw.CKSyncEngineSendChangesOptionsFromID(_id)}
+// syncEngineSendChangesOptionsAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineSendChangesOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineSendChangesOptionsAdopt(id objc.ID) *SyncEngineSendChangesOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineSendChangesOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The scope in which to send changes to the server.
-//
-// WithScope sets the scope property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *SyncEngineSendChangesOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineSendChangesOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineSendChangesOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineSendChangesOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineSendChangesOptionsWithScope initializes a set of options with the specific scope.
+func NewSyncEngineSendChangesOptionsWithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), objref.IDOf(scope))
+	return syncEngineSendChangesOptionsAdopt(_id)
+}
+
+// WithScope the scope in which to send changes to the server.
 func (x *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
-	x.inner.SetScope(scope.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 	return x
 }
 
-// The operation group to use for the underlying CloudKit operations.
-//
-// WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
+// WithOperationGroup the operation group to use for the underlying CloudKit operations.
 func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
-	x.inner.SetOperationGroup(operationGroup.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 	return x
 }
 
-// The scope in which to send changes to the server.
-//
-// Scope calls the underlying Scope.
+// Scope the scope in which to send changes to the server.
 func (x *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
-	_r := x.inner.Scope()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineSendChangesScope{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
+	return SyncEngineSendChangesScopeFromID(_r)
 }
 
-// SetScope calls the underlying SetScope.
-func (x *SyncEngineSendChangesOptions) SetScope(scope *raw.CKSyncEngineSendChangesScope) {
-	x.inner.SetScope(scope)
+// SetScope wraps the corresponding Objective-C method.
+func (x *SyncEngineSendChangesOptions) SetScope(scope *SyncEngineSendChangesScope) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 }
 
-// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
-//
-// OperationGroup calls the underlying OperationGroup.
+// OperationGroup the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
 func (x *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
-	_r := x.inner.OperationGroup()
-	if _r == nil {
-		return nil
-	}
-	return &OperationGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroup"))
+	return OperationGroupFromID(_r)
 }
 
-// SetOperationGroup calls the underlying SetOperationGroup.
-func (x *SyncEngineSendChangesOptions) SetOperationGroup(operationGroup *raw.CKOperationGroup) {
-	x.inner.SetOperationGroup(operationGroup)
+// SetOperationGroup wraps the corresponding Objective-C method.
+func (x *SyncEngineSendChangesOptions) SetOperationGroup(operationGroup *OperationGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 }
 
 // SyncEngineSendChangesOptionsable is the interface implemented by [SyncEngineSendChangesOptions], for mocking and DI.
 type SyncEngineSendChangesOptionsable interface {
-	Unwrap() *raw.CKSyncEngineSendChangesOptions
+	obj.Object
 	WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions
 	WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions
 	Scope() *SyncEngineSendChangesScope
-	SetScope(scope *raw.CKSyncEngineSendChangesScope)
+	SetScope(scope *SyncEngineSendChangesScope)
 	OperationGroup() *OperationGroup
-	SetOperationGroup(operationGroup *raw.CKOperationGroup)
+	SetOperationGroup(operationGroup *OperationGroup)
 }
 
 var _ SyncEngineSendChangesOptionsable = (*SyncEngineSendChangesOptions)(nil)

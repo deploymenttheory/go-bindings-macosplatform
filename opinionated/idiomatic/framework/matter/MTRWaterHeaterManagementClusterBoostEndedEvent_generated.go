@@ -5,41 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWaterHeaterManagementClusterBoostEndedEvent wraps [raw.MTRWaterHeaterManagementClusterBoostEndedEvent] with a fluent Go API.
+// MTRWaterHeaterManagementClusterBoostEndedEvent is an idiomatic wrapper over the Objective-C class MTRWaterHeaterManagementClusterBoostEndedEvent.
 type MTRWaterHeaterManagementClusterBoostEndedEvent struct {
-	inner *raw.MTRWaterHeaterManagementClusterBoostEndedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWaterHeaterManagementClusterBoostEndedEvent].
-func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) Unwrap() *raw.MTRWaterHeaterManagementClusterBoostEndedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWaterHeaterManagementClusterBoostEndedEventFromID adopts an existing object pointer as a MTRWaterHeaterManagementClusterBoostEndedEvent (nil for 0).
+// MTRWaterHeaterManagementClusterBoostEndedEventFromID adopts an existing Objective-C object as a MTRWaterHeaterManagementClusterBoostEndedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWaterHeaterManagementClusterBoostEndedEventFromID(id objc.ID) *MTRWaterHeaterManagementClusterBoostEndedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWaterHeaterManagementClusterBoostEndedEvent{inner: raw.MTRWaterHeaterManagementClusterBoostEndedEventFromID(id)}
+	x := &MTRWaterHeaterManagementClusterBoostEndedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRWaterHeaterManagementClusterBoostEndedEvent creates a new [MTRWaterHeaterManagementClusterBoostEndedEvent].
+// mTRWaterHeaterManagementClusterBoostEndedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRWaterHeaterManagementClusterBoostEndedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWaterHeaterManagementClusterBoostEndedEventAdopt(id objc.ID) *MTRWaterHeaterManagementClusterBoostEndedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWaterHeaterManagementClusterBoostEndedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWaterHeaterManagementClusterBoostEndedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWaterHeaterManagementClusterBoostEndedEvent creates a new MTRWaterHeaterManagementClusterBoostEndedEvent.
 func NewMTRWaterHeaterManagementClusterBoostEndedEvent() *MTRWaterHeaterManagementClusterBoostEndedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWaterHeaterManagementClusterBoostEndedEvent")), objc.RegisterName("new"))
-	return &MTRWaterHeaterManagementClusterBoostEndedEvent{inner: raw.MTRWaterHeaterManagementClusterBoostEndedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterManagementClusterBoostEndedEvent")), objc.RegisterName("new"))
+	return mTRWaterHeaterManagementClusterBoostEndedEventAdopt(_id)
 }
 
 // MTRWaterHeaterManagementClusterBoostEndedEventable is the interface implemented by [MTRWaterHeaterManagementClusterBoostEndedEvent], for mocking and DI.
 type MTRWaterHeaterManagementClusterBoostEndedEventable interface {
-	Unwrap() *raw.MTRWaterHeaterManagementClusterBoostEndedEvent
+	obj.Object
 }
 
 var _ MTRWaterHeaterManagementClusterBoostEndedEventable = (*MTRWaterHeaterManagementClusterBoostEndedEvent)(nil)

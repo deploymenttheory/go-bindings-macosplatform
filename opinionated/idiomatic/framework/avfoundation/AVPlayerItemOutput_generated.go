@@ -5,90 +5,99 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the common interface to output media data from a player item.
+// PlayerItemOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemOutput.
 //
-// PlayerItemOutput wraps [raw.AVPlayerItemOutput] with a fluent Go API.
+// PlayerItemOutput is an abstract base — you do not construct it directly. Construct one of [PlayerItemLegibleOutput], [PlayerItemMetadataOutput], [PlayerItemRenderedLegibleOutput], [PlayerItemVideoOutput] and pass it where a PlayerItemOutput is accepted.
+//
+// An abstract class that defines the common interface to output media data from a player item.
 type PlayerItemOutput struct {
-	inner *raw.AVPlayerItemOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemOutput].
-func (x *PlayerItemOutput) Unwrap() *raw.AVPlayerItemOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemOutputFromID adopts an existing object pointer as a PlayerItemOutput (nil for 0).
+// PlayerItemOutputFromID adopts an existing Objective-C object as a PlayerItemOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemOutputFromID(id objc.ID) *PlayerItemOutput {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemOutput{inner: raw.AVPlayerItemOutputFromID(id)}
-}
-
-// NewPlayerItemOutput creates a new [PlayerItemOutput].
-func NewPlayerItemOutput() *PlayerItemOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemOutput")), objc.RegisterName("new"))
-	return &PlayerItemOutput{inner: raw.AVPlayerItemOutputFromID(_id)}
-}
-
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
-func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
-	x.inner.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	x := &PlayerItemOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Converts a host time, specified in seconds, to the item’s timebase.
-//
-// ItemTimeForHostTime calls the underlying ItemTimeForHostTime.
-func (x *PlayerItemOutput) ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime {
-	return x.inner.ItemTimeForHostTime(hostTimeInSeconds)
+// playerItemOutputAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemOutputAdopt(id objc.ID) *PlayerItemOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Converts a Mach host time to the item’s timebase.
-//
-// ItemTimeForMachAbsoluteTime calls the underlying ItemTimeForMachAbsoluteTime.
-func (x *PlayerItemOutput) ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime {
-	return x.inner.ItemTimeForMachAbsoluteTime(machAbsoluteTime)
+// Description returns the object's -description text.
+func (x *PlayerItemOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Converts a Core Video timestamp to the item’s timebase.
-//
-// ItemTimeForCVTimeStamp calls the underlying ItemTimeForCVTimeStamp.
-func (x *PlayerItemOutput) ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime {
-	return x.inner.ItemTimeForCVTimeStamp(timestamp)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SuppressesPlayerRendering calls the underlying SuppressesPlayerRendering.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
+func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return x
+}
+
+// SuppressesPlayerRendering wraps the corresponding Objective-C method.
 func (x *PlayerItemOutput) SuppressesPlayerRendering() bool {
-	return x.inner.SuppressesPlayerRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressesPlayerRendering"))
+	return _r
 }
 
-// SetSuppressesPlayerRendering calls the underlying SetSuppressesPlayerRendering.
+// SetSuppressesPlayerRendering wraps the corresponding Objective-C method.
 func (x *PlayerItemOutput) SetSuppressesPlayerRendering(suppressesPlayerRendering bool) {
-	x.inner.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 }
-
-func (x *PlayerItemOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return x.inner }
 
 // PlayerItemOutputable is the interface implemented by [PlayerItemOutput], for mocking and DI.
 type PlayerItemOutputable interface {
-	Unwrap() *raw.AVPlayerItemOutput
+	obj.Object
 	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput
-	ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime
-	ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime
-	ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime
 	SuppressesPlayerRendering() bool
 	SetSuppressesPlayerRendering(suppressesPlayerRendering bool)
 }
 
 var _ PlayerItemOutputable = (*PlayerItemOutput)(nil)
+
+// isPlayerItemOutput marks PlayerItemOutput — and, by embedding promotion, its
+// subclasses — as a member of the PlayerItemOutput hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlayerItemOutput) isPlayerItemOutput() {}
+
+var _ PlayerItemOutputProvider = (*PlayerItemOutput)(nil)

@@ -5,212 +5,128 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a scanner.
+// ScannerDevice is an idiomatic wrapper over the Objective-C class ICScannerDevice.
 //
-// ScannerDevice wraps [raw.ICScannerDevice] with a fluent Go API.
+// It embeds [Device], promoting that type's methods.
+//
+// An object that represents a scanner.
 type ScannerDevice struct {
-	inner *raw.ICScannerDevice
+	Device
 }
 
-// Unwrap returns the underlying [raw.ICScannerDevice].
-func (x *ScannerDevice) Unwrap() *raw.ICScannerDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerDeviceFromID adopts an existing object pointer as a ScannerDevice (nil for 0).
+// ScannerDeviceFromID adopts an existing Objective-C object as a ScannerDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerDeviceFromID(id objc.ID) *ScannerDevice {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerDevice{inner: raw.ICScannerDeviceFromID(id)}
+	x := &ScannerDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScannerDevice creates a new [ScannerDevice].
+// scannerDeviceAdopt wraps an Objective-C object that this code just created as a
+// ScannerDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerDeviceAdopt(id objc.ID) *ScannerDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewScannerDevice creates a new ScannerDevice.
 func NewScannerDevice() *ScannerDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerDevice")), objc.RegisterName("new"))
-	return &ScannerDevice{inner: raw.ICScannerDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerDevice")), objc.RegisterName("new"))
+	return scannerDeviceAdopt(_id)
 }
 
-// The transfer mode for the scanned document.
-//
-// WithTransferMode sets the transferMode property and returns the receiver for chaining.
-func (x *ScannerDevice) WithTransferMode(transferMode ICScannerTransferMode) *ScannerDevice {
-	x.inner.SetTransferMode(raw.ICScannerTransferMode(transferMode))
+// WithTransferMode the transfer mode for the scanned document.
+func (x *ScannerDevice) WithTransferMode(transferMode ScannerTransferMode) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
 	return x
 }
 
-// The total maximum band size requested when performing a memory-based transfer.
-//
-// WithMaxMemoryBandSize sets the maxMemoryBandSize property and returns the receiver for chaining.
-func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice {
-	x.inner.SetMaxMemoryBandSize(maxMemoryBandSize)
+// WithMaxMemoryBandSize the total maximum band size requested when performing a memory-based transfer.
+func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
 	return x
 }
 
-// The delegate to receive messages once a session is opened on the device.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ScannerDevice) WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice {
-	x.inner.ICDevice.SetDelegate(delegate)
-	return x
-}
-
-// Opens a session on the protected device with the authorized username and passcode.
-//
-// RequestOpenSessionWithCredentialsPassword calls the underlying RequestOpenSessionWithCredentialsPassword.
+// RequestOpenSessionWithCredentialsPassword opens a session on the protected device with the authorized username and passcode.
 func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
-	x.inner.RequestOpenSessionWithCredentialsPassword(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSessionWithCredentials:password:"), purego.NSString(username), purego.NSString(password))
 }
 
-// Requests to select a functional unit on the scanner.
-//
-// RequestSelectFunctionalUnit calls the underlying RequestSelectFunctionalUnit.
-func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType) {
-	x.inner.RequestSelectFunctionalUnit(raw.ICScannerFunctionalUnitType(type_))
+// RequestSelectFunctionalUnit requests to select a functional unit on the scanner.
+func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestSelectFunctionalUnit:"), type_)
 }
 
-// Starts an overview scan on the selected functional unit.
-//
-// RequestOverviewScan calls the underlying RequestOverviewScan.
+// RequestOverviewScan starts an overview scan on the selected functional unit.
 func (x *ScannerDevice) RequestOverviewScan() {
-	x.inner.RequestOverviewScan()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOverviewScan"))
 }
 
-// Starts a scan on the selected functional unit.
-//
-// RequestScan calls the underlying RequestScan.
+// RequestScan starts a scan on the selected functional unit.
 func (x *ScannerDevice) RequestScan() {
-	x.inner.RequestScan()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestScan"))
 }
 
-// Cancels the current scan.
-//
-// CancelScan calls the underlying CancelScan.
+// CancelScan cancels the current scan.
 func (x *ScannerDevice) CancelScan() {
-	x.inner.CancelScan()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelScan"))
 }
 
-// @property availableFunctionalUnitTypes @abstract ￼An array of functional unit types available on this scanner device. This is an array of NSNumber objects whose values are of type ICScannerFunctionalUnitType.
-//
-// AvailableFunctionalUnitTypes calls the underlying AvailableFunctionalUnitTypes.
-func (x *ScannerDevice) AvailableFunctionalUnitTypes() unsafe.Pointer {
-	return x.inner.AvailableFunctionalUnitTypes()
+// TransferMode ￼The transfer mode for scanned document.
+func (x *ScannerDevice) TransferMode() ScannerTransferMode {
+	_r := objc.Send[ScannerTransferMode](objref.IDOf(x), objc.RegisterName("transferMode"))
+	return _r
 }
 
-// @property selectedFunctionalUnit @abstract ￼The currently selected functional unit on the scanner device.
-//
-// SelectedFunctionalUnit calls the underlying SelectedFunctionalUnit.
-func (x *ScannerDevice) SelectedFunctionalUnit() unsafe.Pointer {
-	return x.inner.SelectedFunctionalUnit()
+// SetTransferMode wraps the corresponding Objective-C method.
+func (x *ScannerDevice) SetTransferMode(transferMode ScannerTransferMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
 }
 
-// @property transferMode @abstract ￼The transfer mode for scanned document.
-//
-// TransferMode calls the underlying TransferMode.
-func (x *ScannerDevice) TransferMode() ICScannerTransferMode {
-	return ICScannerTransferMode(x.inner.TransferMode())
+// MaxMemoryBandSize ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+func (x *ScannerDevice) MaxMemoryBandSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxMemoryBandSize"))
+	return _r
 }
 
-// SetTransferMode calls the underlying SetTransferMode.
-func (x *ScannerDevice) SetTransferMode(transferMode ICScannerTransferMode) {
-	x.inner.SetTransferMode(raw.ICScannerTransferMode(transferMode))
+// SetMaxMemoryBandSize wraps the corresponding Objective-C method.
+func (x *ScannerDevice) SetMaxMemoryBandSize(maxMemoryBandSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
 }
-
-// @property maxMemoryBandSize @abstract ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
-//
-// MaxMemoryBandSize calls the underlying MaxMemoryBandSize.
-func (x *ScannerDevice) MaxMemoryBandSize() uint {
-	return x.inner.MaxMemoryBandSize()
-}
-
-// SetMaxMemoryBandSize calls the underlying SetMaxMemoryBandSize.
-func (x *ScannerDevice) SetMaxMemoryBandSize(maxMemoryBandSize uint) {
-	x.inner.SetMaxMemoryBandSize(maxMemoryBandSize)
-}
-
-// @property downloadsDirectory @abstract ￼The downloads directory.
-//
-// DownloadsDirectory calls the underlying DownloadsDirectory.
-func (x *ScannerDevice) DownloadsDirectory() unsafe.Pointer {
-	return x.inner.DownloadsDirectory()
-}
-
-// SetDownloadsDirectory calls the underlying SetDownloadsDirectory.
-func (x *ScannerDevice) SetDownloadsDirectory(downloadsDirectory unsafe.Pointer) {
-	x.inner.SetDownloadsDirectory(downloadsDirectory)
-}
-
-// @property documentName @abstract ￼The document name.
-//
-// DocumentName calls the underlying DocumentName.
-func (x *ScannerDevice) DocumentName() unsafe.Pointer {
-	return x.inner.DocumentName()
-}
-
-// SetDocumentName calls the underlying SetDocumentName.
-func (x *ScannerDevice) SetDocumentName(documentName unsafe.Pointer) {
-	x.inner.SetDocumentName(documentName)
-}
-
-// @property documentUTI @abstract ￼The document UTI. Currently supported UTIs are: kUTTypeJPEG, kUTTypeJPEG2000, kUTTypeTIFF, kUTTypePNG etc.
-//
-// DocumentUTI calls the underlying DocumentUTI.
-func (x *ScannerDevice) DocumentUTI() unsafe.Pointer {
-	return x.inner.DocumentUTI()
-}
-
-// SetDocumentUTI calls the underlying SetDocumentUTI.
-func (x *ScannerDevice) SetDocumentUTI(documentUTI unsafe.Pointer) {
-	x.inner.SetDocumentUTI(documentUTI)
-}
-
-// @property defaultUsername @abstract If the device is protected, instead of prompting the user for a username, this property can be set to default to a specific username as a convience.  The value will persist until reset by setting it to nil.
-//
-// DefaultUsername calls the underlying DefaultUsername.
-func (x *ScannerDevice) DefaultUsername() unsafe.Pointer {
-	return x.inner.DefaultUsername()
-}
-
-// SetDefaultUsername calls the underlying SetDefaultUsername.
-func (x *ScannerDevice) SetDefaultUsername(defaultUsername unsafe.Pointer) {
-	x.inner.SetDefaultUsername(defaultUsername)
-}
-
-func (x *ScannerDevice) asDevice() *raw.ICDevice { return &x.inner.ICDevice }
 
 // ScannerDeviceable is the interface implemented by [ScannerDevice], for mocking and DI.
 type ScannerDeviceable interface {
-	Unwrap() *raw.ICScannerDevice
-	WithTransferMode(transferMode ICScannerTransferMode) *ScannerDevice
-	WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice
-	WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice
+	obj.Object
+	WithTransferMode(transferMode ScannerTransferMode) *ScannerDevice
+	WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice
 	RequestOpenSessionWithCredentialsPassword(username string, password string)
-	RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType)
+	RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType)
 	RequestOverviewScan()
 	RequestScan()
 	CancelScan()
-	AvailableFunctionalUnitTypes() unsafe.Pointer
-	SelectedFunctionalUnit() unsafe.Pointer
-	TransferMode() ICScannerTransferMode
-	SetTransferMode(transferMode ICScannerTransferMode)
-	MaxMemoryBandSize() uint
-	SetMaxMemoryBandSize(maxMemoryBandSize uint)
-	DownloadsDirectory() unsafe.Pointer
-	SetDownloadsDirectory(downloadsDirectory unsafe.Pointer)
-	DocumentName() unsafe.Pointer
-	SetDocumentName(documentName unsafe.Pointer)
-	DocumentUTI() unsafe.Pointer
-	SetDocumentUTI(documentUTI unsafe.Pointer)
-	DefaultUsername() unsafe.Pointer
-	SetDefaultUsername(defaultUsername unsafe.Pointer)
+	TransferMode() ScannerTransferMode
+	SetTransferMode(transferMode ScannerTransferMode)
+	MaxMemoryBandSize() int
+	SetMaxMemoryBandSize(maxMemoryBandSize int)
 }
 
 var _ ScannerDeviceable = (*ScannerDevice)(nil)
+
+var _ DeviceProvider = (*ScannerDevice)(nil)

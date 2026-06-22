@@ -5,88 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that generates a heat map that identifies the parts of an image most likely to represent objects.
+// GenerateObjectnessBasedSaliencyImageRequest is an idiomatic wrapper over the Objective-C class VNGenerateObjectnessBasedSaliencyImageRequest.
 //
-// GenerateObjectnessBasedSaliencyImageRequest wraps [raw.VNGenerateObjectnessBasedSaliencyImageRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that generates a heat map that identifies the parts of an image most likely to represent objects.
 type GenerateObjectnessBasedSaliencyImageRequest struct {
-	inner *raw.VNGenerateObjectnessBasedSaliencyImageRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNGenerateObjectnessBasedSaliencyImageRequest].
-func (x *GenerateObjectnessBasedSaliencyImageRequest) Unwrap() *raw.VNGenerateObjectnessBasedSaliencyImageRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// GenerateObjectnessBasedSaliencyImageRequestFromID adopts an existing object pointer as a GenerateObjectnessBasedSaliencyImageRequest (nil for 0).
+// GenerateObjectnessBasedSaliencyImageRequestFromID adopts an existing Objective-C object as a GenerateObjectnessBasedSaliencyImageRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func GenerateObjectnessBasedSaliencyImageRequestFromID(id objc.ID) *GenerateObjectnessBasedSaliencyImageRequest {
 	if id == 0 {
 		return nil
 	}
-	return &GenerateObjectnessBasedSaliencyImageRequest{inner: raw.VNGenerateObjectnessBasedSaliencyImageRequestFromID(id)}
+	x := &GenerateObjectnessBasedSaliencyImageRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGenerateObjectnessBasedSaliencyImageRequest creates a new [GenerateObjectnessBasedSaliencyImageRequest].
+// generateObjectnessBasedSaliencyImageRequestAdopt wraps an Objective-C object that this code just created as a
+// GenerateObjectnessBasedSaliencyImageRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func generateObjectnessBasedSaliencyImageRequestAdopt(id objc.ID) *GenerateObjectnessBasedSaliencyImageRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &GenerateObjectnessBasedSaliencyImageRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGenerateObjectnessBasedSaliencyImageRequest creates a new GenerateObjectnessBasedSaliencyImageRequest.
 func NewGenerateObjectnessBasedSaliencyImageRequest() *GenerateObjectnessBasedSaliencyImageRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNGenerateObjectnessBasedSaliencyImageRequest")), objc.RegisterName("new"))
-	return &GenerateObjectnessBasedSaliencyImageRequest{inner: raw.VNGenerateObjectnessBasedSaliencyImageRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNGenerateObjectnessBasedSaliencyImageRequest")), objc.RegisterName("new"))
+	return generateObjectnessBasedSaliencyImageRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateObjectnessBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateObjectnessBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision uint) *GenerateObjectnessBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *GenerateObjectnessBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *GenerateObjectnessBasedSaliencyImageRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // GenerateObjectnessBasedSaliencyImageRequestable is the interface implemented by [GenerateObjectnessBasedSaliencyImageRequest], for mocking and DI.
 type GenerateObjectnessBasedSaliencyImageRequestable interface {
-	Unwrap() *raw.VNGenerateObjectnessBasedSaliencyImageRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest
-	WithRevision(revision uint) *GenerateObjectnessBasedSaliencyImageRequest
+	WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest
 }
 
 var _ GenerateObjectnessBasedSaliencyImageRequestable = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
+
+var _ RequestProvider = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)

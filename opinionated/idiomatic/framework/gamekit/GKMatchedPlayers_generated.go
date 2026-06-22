@@ -5,68 +5,92 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.
+// MatchedPlayers is an idiomatic wrapper over the Objective-C class GKMatchedPlayers.
 //
-// MatchedPlayers wraps [raw.GKMatchedPlayers] with a fluent Go API.
+// An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.
 type MatchedPlayers struct {
-	inner *raw.GKMatchedPlayers
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKMatchedPlayers].
-func (x *MatchedPlayers) Unwrap() *raw.GKMatchedPlayers { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchedPlayers) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchedPlayersFromID adopts an existing object pointer as a MatchedPlayers (nil for 0).
+// MatchedPlayersFromID adopts an existing Objective-C object as a MatchedPlayers
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchedPlayersFromID(id objc.ID) *MatchedPlayers {
 	if id == 0 {
 		return nil
 	}
-	return &MatchedPlayers{inner: raw.GKMatchedPlayersFromID(id)}
+	x := &MatchedPlayers{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatchedPlayers creates a new [MatchedPlayers].
-func NewMatchedPlayers() *MatchedPlayers {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMatchedPlayers")), objc.RegisterName("new"))
-	return &MatchedPlayers{inner: raw.GKMatchedPlayersFromID(_id)}
-}
-
-// Properties calls the underlying Properties.
-func (x *MatchedPlayers) Properties() unsafe.Pointer {
-	return x.inner.Properties()
-}
-
-// Players returns the collection as a Go slice.
-func (x *MatchedPlayers) Players() []*Player {
-	arr := x.inner.Players()
-	if arr == nil {
+// matchedPlayersAdopt wraps an Objective-C object that this code just created as a
+// MatchedPlayers (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchedPlayersAdopt(id objc.ID) *MatchedPlayers {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
-		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
-	})
+	x := &MatchedPlayers{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PlayerProperties calls the underlying PlayerProperties.
-func (x *MatchedPlayers) PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID] {
-	return x.inner.PlayerProperties()
+// Description returns the object's -description text.
+func (x *MatchedPlayers) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatchedPlayers) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatchedPlayers) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatchedPlayers) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMatchedPlayers creates a new MatchedPlayers.
+func NewMatchedPlayers() *MatchedPlayers {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKMatchedPlayers")), objc.RegisterName("new"))
+	return matchedPlayersAdopt(_id)
+}
+
+// Players wraps the corresponding Objective-C method.
+//
+// Players returns the collection as a Go slice.
+func (x *MatchedPlayers) Players() []*Player {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
+}
+
+// PlayerProperties wraps the corresponding Objective-C method.
+func (x *MatchedPlayers) PlayerProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerProperties"))
+	return obj.Wrap(_r)
 }
 
 // MatchedPlayersable is the interface implemented by [MatchedPlayers], for mocking and DI.
 type MatchedPlayersable interface {
-	Unwrap() *raw.GKMatchedPlayers
-	Properties() unsafe.Pointer
+	obj.Object
 	Players() []*Player
-	PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID]
+	PlayerProperties() obj.Object
 }
 
 var _ MatchedPlayersable = (*MatchedPlayers)(nil)

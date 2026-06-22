@@ -5,63 +5,89 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of render pass color attachment descriptor objects.
+// RenderPassColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLRenderPassColorAttachmentDescriptorArray.
 //
-// RenderPassColorAttachmentDescriptorArray wraps [raw.MTLRenderPassColorAttachmentDescriptorArray] with a fluent Go API.
+// An array of render pass color attachment descriptor objects.
 type RenderPassColorAttachmentDescriptorArray struct {
-	inner *raw.MTLRenderPassColorAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRenderPassColorAttachmentDescriptorArray].
-func (x *RenderPassColorAttachmentDescriptorArray) Unwrap() *raw.MTLRenderPassColorAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderPassColorAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderPassColorAttachmentDescriptorArrayFromID adopts an existing object pointer as a RenderPassColorAttachmentDescriptorArray (nil for 0).
+// RenderPassColorAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a RenderPassColorAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderPassColorAttachmentDescriptorArrayFromID(id objc.ID) *RenderPassColorAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &RenderPassColorAttachmentDescriptorArray{inner: raw.MTLRenderPassColorAttachmentDescriptorArrayFromID(id)}
+	x := &RenderPassColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderPassColorAttachmentDescriptorArray creates a new [RenderPassColorAttachmentDescriptorArray].
-func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRenderPassColorAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &RenderPassColorAttachmentDescriptorArray{inner: raw.MTLRenderPassColorAttachmentDescriptorArrayFromID(_id)}
-}
-
-// Returns the descriptor object for the specified color attachment.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassColorAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
+// renderPassColorAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// RenderPassColorAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderPassColorAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPassColorAttachmentDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &RenderPassColorAttachmentDescriptor{inner: _r}
+	x := &RenderPassColorAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the descriptor for the specified color attachment.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+// Description returns the object's -description text.
+func (x *RenderPassColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderPassColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderPassColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPassColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderPassColorAttachmentDescriptorArray creates a new RenderPassColorAttachmentDescriptorArray.
+func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassColorAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return renderPassColorAttachmentDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript returns the descriptor object for the specified color attachment.
+func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return RenderPassColorAttachmentDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript sets the descriptor for the specified color attachment.
+func (x *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // RenderPassColorAttachmentDescriptorArrayable is the interface implemented by [RenderPassColorAttachmentDescriptorArray], for mocking and DI.
 type RenderPassColorAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLRenderPassColorAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ RenderPassColorAttachmentDescriptorArrayable = (*RenderPassColorAttachmentDescriptorArray)(nil)

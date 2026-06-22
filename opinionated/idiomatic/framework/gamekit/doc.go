@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package gamekit provides a fluent Go API over the macOS GameKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - BasePlayer: [CloudPlayer], [Player]
+//   - Challenge: [AchievementChallenge], [ScoreChallenge]
+//   - GameCenterViewController: [AchievementViewController], [LeaderboardViewController]
+//   - Player: [LocalPlayer]
 package gamekit

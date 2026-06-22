@@ -5,203 +5,163 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A request that detects the trajectories of shapes moving along a parabolic path.
+// DetectTrajectoriesRequest is an idiomatic wrapper over the Objective-C class VNDetectTrajectoriesRequest.
 //
-// DetectTrajectoriesRequest wraps [raw.VNDetectTrajectoriesRequest] with a fluent Go API.
+// It embeds [StatefulRequest], promoting that type's methods.
+//
+// A request that detects the trajectories of shapes moving along a parabolic path.
 type DetectTrajectoriesRequest struct {
-	inner *raw.VNDetectTrajectoriesRequest
+	StatefulRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectTrajectoriesRequest].
-func (x *DetectTrajectoriesRequest) Unwrap() *raw.VNDetectTrajectoriesRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectTrajectoriesRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectTrajectoriesRequestFromID adopts an existing object pointer as a DetectTrajectoriesRequest (nil for 0).
+// DetectTrajectoriesRequestFromID adopts an existing Objective-C object as a DetectTrajectoriesRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectTrajectoriesRequestFromID(id objc.ID) *DetectTrajectoriesRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectTrajectoriesRequest{inner: raw.VNDetectTrajectoriesRequestFromID(id)}
+	x := &DetectTrajectoriesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new request to detect trajectories.
-//
-// NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler creates a new [DetectTrajectoriesRequest].
-func NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler(frameAnalysisSpacing coremedia.CMTime, trajectoryLength int, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *DetectTrajectoriesRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectTrajectoriesRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameAnalysisSpacing:trajectoryLength:completionHandler:"), frameAnalysisSpacing, trajectoryLength, completionHandler)
-	return &DetectTrajectoriesRequest{inner: raw.VNDetectTrajectoriesRequestFromID(_id)}
+// detectTrajectoriesRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectTrajectoriesRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectTrajectoriesRequestAdopt(id objc.ID) *DetectTrajectoriesRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectTrajectoriesRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The minimum radius of the bounding circle of the object to track.
-//
-// WithObjectMinimumNormalizedRadius sets the objectMinimumNormalizedRadius property and returns the receiver for chaining.
+// NewDetectTrajectoriesRequest creates a new DetectTrajectoriesRequest.
+func NewDetectTrajectoriesRequest() *DetectTrajectoriesRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectTrajectoriesRequest")), objc.RegisterName("new"))
+	return detectTrajectoriesRequestAdopt(_id)
+}
+
+// WithObjectMinimumNormalizedRadius the minimum radius of the bounding circle of the object to track.
 func (x *DetectTrajectoriesRequest) WithObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32) *DetectTrajectoriesRequest {
-	x.inner.SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectMinimumNormalizedRadius:"), objectMinimumNormalizedRadius)
 	return x
 }
 
-// The minimum radius of the tracked shape’s bounding circle.
-//
-// WithMinimumObjectSize sets the minimumObjectSize property and returns the receiver for chaining.
+// WithMinimumObjectSize the minimum radius of the tracked shape’s bounding circle.
 func (x *DetectTrajectoriesRequest) WithMinimumObjectSize(minimumObjectSize float32) *DetectTrajectoriesRequest {
-	x.inner.SetMinimumObjectSize(minimumObjectSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumObjectSize:"), minimumObjectSize)
 	return x
 }
 
-// The maximum radius of the bounding circle of the object to track.
-//
-// WithObjectMaximumNormalizedRadius sets the objectMaximumNormalizedRadius property and returns the receiver for chaining.
+// WithObjectMaximumNormalizedRadius the maximum radius of the bounding circle of the object to track.
 func (x *DetectTrajectoriesRequest) WithObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) *DetectTrajectoriesRequest {
-	x.inner.SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectMaximumNormalizedRadius:"), objectMaximumNormalizedRadius)
 	return x
 }
 
-// The maximum radius of the tracked shape’s bounding circle.
-//
-// WithMaximumObjectSize sets the maximumObjectSize property and returns the receiver for chaining.
+// WithMaximumObjectSize the maximum radius of the tracked shape’s bounding circle.
 func (x *DetectTrajectoriesRequest) WithMaximumObjectSize(maximumObjectSize float32) *DetectTrajectoriesRequest {
-	x.inner.SetMaximumObjectSize(maximumObjectSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumObjectSize:"), maximumObjectSize)
 	return x
 }
 
-// The requested target frame time for processing trajectory detection.
-//
-// WithTargetFrameTime sets the targetFrameTime property and returns the receiver for chaining.
-func (x *DetectTrajectoriesRequest) WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest {
-	x.inner.SetTargetFrameTime(targetFrameTime)
-	return x
-}
-
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectTrajectoriesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTrajectoriesRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectTrajectoriesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTrajectoriesRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectTrajectoriesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectTrajectoriesRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectTrajectoriesRequest) WithRevision(revision uint) *DetectTrajectoriesRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectTrajectoriesRequest) WithRevision(revision int) *DetectTrajectoriesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// @brief The number of points required to analyze a parabola that indicates a trajectory.
-//
-// TrajectoryLength calls the underlying TrajectoryLength.
+// TrajectoryLength the number of points required to analyze a parabola that indicates a trajectory.
 func (x *DetectTrajectoriesRequest) TrajectoryLength() int {
-	return x.inner.TrajectoryLength()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trajectoryLength"))
+	return _r
 }
 
-// @brief Specifies the minimum radius of the bounding circle of the object to be tracked. This can be used to filter out noise and small objects. The default is 0.0, which means no filtering is applied. Changing the property from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The value is specified in normalized coordinates.
-//
-// ObjectMinimumNormalizedRadius calls the underlying ObjectMinimumNormalizedRadius.
+// ObjectMinimumNormalizedRadius specifies the minimum radius of the bounding circle of the object to be tracked. This can be used to filter out noise and small objects. The default is 0.0, which means no filtering is applied. Changing the property from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The value is specified in normalized coordinates.
 func (x *DetectTrajectoriesRequest) ObjectMinimumNormalizedRadius() float32 {
-	return x.inner.ObjectMinimumNormalizedRadius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("objectMinimumNormalizedRadius"))
+	return _r
 }
 
-// SetObjectMinimumNormalizedRadius calls the underlying SetObjectMinimumNormalizedRadius.
+// SetObjectMinimumNormalizedRadius wraps the corresponding Objective-C method.
 func (x *DetectTrajectoriesRequest) SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32) {
-	x.inner.SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectMinimumNormalizedRadius:"), objectMinimumNormalizedRadius)
 }
 
-// MinimumObjectSize calls the underlying MinimumObjectSize.
+// MinimumObjectSize wraps the corresponding Objective-C method.
 func (x *DetectTrajectoriesRequest) MinimumObjectSize() float32 {
-	return x.inner.MinimumObjectSize()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumObjectSize"))
+	return _r
 }
 
-// SetMinimumObjectSize calls the underlying SetMinimumObjectSize.
+// SetMinimumObjectSize wraps the corresponding Objective-C method.
 func (x *DetectTrajectoriesRequest) SetMinimumObjectSize(minimumObjectSize float32) {
-	x.inner.SetMinimumObjectSize(minimumObjectSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumObjectSize:"), minimumObjectSize)
 }
 
-// @brief Specifies the maximum radius of the bounding circle of the object to be tracked. This can be used to filter out unwanted trajectories from larger objects moving through the scene. The default is 1.0, which means no filtering is applied. Changing the maximum from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The size is specified in normalized coordinates.
-//
-// ObjectMaximumNormalizedRadius calls the underlying ObjectMaximumNormalizedRadius.
+// ObjectMaximumNormalizedRadius specifies the maximum radius of the bounding circle of the object to be tracked. This can be used to filter out unwanted trajectories from larger objects moving through the scene. The default is 1.0, which means no filtering is applied. Changing the maximum from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The size is specified in normalized coordinates.
 func (x *DetectTrajectoriesRequest) ObjectMaximumNormalizedRadius() float32 {
-	return x.inner.ObjectMaximumNormalizedRadius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("objectMaximumNormalizedRadius"))
+	return _r
 }
 
-// SetObjectMaximumNormalizedRadius calls the underlying SetObjectMaximumNormalizedRadius.
+// SetObjectMaximumNormalizedRadius wraps the corresponding Objective-C method.
 func (x *DetectTrajectoriesRequest) SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) {
-	x.inner.SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectMaximumNormalizedRadius:"), objectMaximumNormalizedRadius)
 }
 
-// MaximumObjectSize calls the underlying MaximumObjectSize.
+// MaximumObjectSize wraps the corresponding Objective-C method.
 func (x *DetectTrajectoriesRequest) MaximumObjectSize() float32 {
-	return x.inner.MaximumObjectSize()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumObjectSize"))
+	return _r
 }
 
-// SetMaximumObjectSize calls the underlying SetMaximumObjectSize.
+// SetMaximumObjectSize wraps the corresponding Objective-C method.
 func (x *DetectTrajectoriesRequest) SetMaximumObjectSize(maximumObjectSize float32) {
-	x.inner.SetMaximumObjectSize(maximumObjectSize)
-}
-
-// @brief Specifies the desired target frame time for processing trajectory detection. This can be used for real-time processing of frames, which requires execution with a specific amount of time. The target frame time is evaluated from frame-to-frame. If processing takes longer than this target frame time for the currect frame, it will attempt to reduce the amount of time taken by reducing the accuracy (down to a set minimum) for the next frame. If a frame takes less time than this target, then accuracy of the next frame will be increased (up to a set maximum). The default value is kCMTimeIndefinite, meaning accuracy stays at the predefined maximum.
-//
-// TargetFrameTime calls the underlying TargetFrameTime.
-func (x *DetectTrajectoriesRequest) TargetFrameTime() coremedia.CMTime {
-	return x.inner.TargetFrameTime()
-}
-
-// SetTargetFrameTime calls the underlying SetTargetFrameTime.
-func (x *DetectTrajectoriesRequest) SetTargetFrameTime(targetFrameTime coremedia.CMTime) {
-	x.inner.SetTargetFrameTime(targetFrameTime)
-}
-
-func (x *DetectTrajectoriesRequest) asStatefulRequest() *raw.VNStatefulRequest {
-	return &x.inner.VNStatefulRequest
-}
-
-func (x *DetectTrajectoriesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest
-}
-
-func (x *DetectTrajectoriesRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumObjectSize:"), maximumObjectSize)
 }
 
 // DetectTrajectoriesRequestable is the interface implemented by [DetectTrajectoriesRequest], for mocking and DI.
 type DetectTrajectoriesRequestable interface {
-	Unwrap() *raw.VNDetectTrajectoriesRequest
+	obj.Object
 	WithObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32) *DetectTrajectoriesRequest
 	WithMinimumObjectSize(minimumObjectSize float32) *DetectTrajectoriesRequest
 	WithObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) *DetectTrajectoriesRequest
 	WithMaximumObjectSize(maximumObjectSize float32) *DetectTrajectoriesRequest
-	WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTrajectoriesRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTrajectoriesRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectTrajectoriesRequest
-	WithRevision(revision uint) *DetectTrajectoriesRequest
+	WithRevision(revision int) *DetectTrajectoriesRequest
 	TrajectoryLength() int
 	ObjectMinimumNormalizedRadius() float32
 	SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32)
@@ -211,8 +171,12 @@ type DetectTrajectoriesRequestable interface {
 	SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32)
 	MaximumObjectSize() float32
 	SetMaximumObjectSize(maximumObjectSize float32)
-	TargetFrameTime() coremedia.CMTime
-	SetTargetFrameTime(targetFrameTime coremedia.CMTime)
 }
 
 var _ DetectTrajectoriesRequestable = (*DetectTrajectoriesRequest)(nil)
+
+var _ StatefulRequestProvider = (*DetectTrajectoriesRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectTrajectoriesRequest)(nil)
+
+var _ RequestProvider = (*DetectTrajectoriesRequest)(nil)

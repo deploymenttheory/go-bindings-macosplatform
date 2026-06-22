@@ -5,60 +5,72 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the use of the CPU.
+// CPUMetric is an idiomatic wrapper over the Objective-C class MXCPUMetric.
 //
-// CPUMetric wraps [raw.MXCPUMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the use of the CPU.
 type CPUMetric struct {
-	inner *raw.MXCPUMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXCPUMetric].
-func (x *CPUMetric) Unwrap() *raw.MXCPUMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CPUMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// CPUMetricFromID adopts an existing object pointer as a CPUMetric (nil for 0).
+// CPUMetricFromID adopts an existing Objective-C object as a CPUMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func CPUMetricFromID(id objc.ID) *CPUMetric {
 	if id == 0 {
 		return nil
 	}
-	return &CPUMetric{inner: raw.MXCPUMetricFromID(id)}
+	x := &CPUMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCPUMetric creates a new [CPUMetric].
+// cPUMetricAdopt wraps an Objective-C object that this code just created as a
+// CPUMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cPUMetricAdopt(id objc.ID) *CPUMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &CPUMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCPUMetric creates a new CPUMetric.
 func NewCPUMetric() *CPUMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXCPUMetric")), objc.RegisterName("new"))
-	return &CPUMetric{inner: raw.MXCPUMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXCPUMetric")), objc.RegisterName("new"))
+	return cPUMetricAdopt(_id)
 }
 
-// @property      cumulativeCPUTime @abstract      CPU time aggregated cumulatively. @discussion    The data here represents the total CPU time an application consumed over the date range of the containing payload. @discussion    Dimensioned as NSUnitDuration.
-//
-// CumulativeCPUTime calls the underlying CumulativeCPUTime.
-func (x *CPUMetric) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeCPUTime()
+// CumulativeCPUTime CPU time aggregated cumulatively. The data here represents the total CPU time an application consumed over the date range of the containing payload. Dimensioned as NSUnitDuration.
+func (x *CPUMetric) CumulativeCPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUTime"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeCPUInstructions @abstract      CPU instructions retired aggregated cumulatively. @discussion    The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. @discussion    Dimensionless.
-//
-// CumulativeCPUInstructions calls the underlying CumulativeCPUInstructions.
-func (x *CPUMetric) CumulativeCPUInstructions() *foundation.NSMeasurement[*foundation.NSUnit] {
-	return x.inner.CumulativeCPUInstructions()
+// CumulativeCPUInstructions CPU instructions retired aggregated cumulatively. The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. Dimensionless.
+func (x *CPUMetric) CumulativeCPUInstructions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUInstructions"))
+	return obj.Wrap(_r)
 }
-
-func (x *CPUMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // CPUMetricable is the interface implemented by [CPUMetric], for mocking and DI.
 type CPUMetricable interface {
-	Unwrap() *raw.MXCPUMetric
-	CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
-	CumulativeCPUInstructions() *foundation.NSMeasurement[*foundation.NSUnit]
+	obj.Object
+	CumulativeCPUTime() obj.Object
+	CumulativeCPUInstructions() obj.Object
 }
 
 var _ CPUMetricable = (*CPUMetric)(nil)
+
+var _ MetricProvider = (*CPUMetric)(nil)

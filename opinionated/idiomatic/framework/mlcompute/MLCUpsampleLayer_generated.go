@@ -5,93 +5,95 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that applies upsampling with the shape you specify.
+// UpsampleLayer is an idiomatic wrapper over the Objective-C class MLCUpsampleLayer.
 //
-// UpsampleLayer wraps [raw.MLCUpsampleLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that applies upsampling with the shape you specify.
 type UpsampleLayer struct {
-	inner *raw.MLCUpsampleLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCUpsampleLayer].
-func (x *UpsampleLayer) Unwrap() *raw.MLCUpsampleLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UpsampleLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// UpsampleLayerFromID adopts an existing object pointer as a UpsampleLayer (nil for 0).
+// UpsampleLayerFromID adopts an existing Objective-C object as a UpsampleLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func UpsampleLayerFromID(id objc.ID) *UpsampleLayer {
 	if id == 0 {
 		return nil
 	}
-	return &UpsampleLayer{inner: raw.MLCUpsampleLayerFromID(id)}
-}
-
-// NewUpsampleLayer creates a new [UpsampleLayer].
-func NewUpsampleLayer() *UpsampleLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCUpsampleLayer")), objc.RegisterName("new"))
-	return &UpsampleLayer{inner: raw.MLCUpsampleLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &UpsampleLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   shape @abstract   A NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
-//
-// Shape returns the collection as a Go slice.
-func (x *UpsampleLayer) Shape() []*foundation.NSNumber {
-	arr := x.inner.Shape()
-	if arr == nil {
+// upsampleLayerAdopt wraps an Objective-C object that this code just created as a
+// UpsampleLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func upsampleLayerAdopt(id objc.ID) *UpsampleLayer {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &UpsampleLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   sampleMode @abstract   The sampling mode to use when performing the upsample.
-//
-// SampleMode calls the underlying SampleMode.
-func (x *UpsampleLayer) SampleMode() MLCSampleMode {
-	return MLCSampleMode(x.inner.SampleMode())
+// NewUpsampleLayer creates a new UpsampleLayer.
+func NewUpsampleLayer() *UpsampleLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("new"))
+	return upsampleLayerAdopt(_id)
 }
 
-// @property   alignsCorners @abstract   A boolean that specifies whether the corner pixels of the source and result tensors are aligned. @discussion If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is NO.
+// WithLabel a string that helps identify this layer.
+func (x *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// Shape a NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
 //
-// AlignsCorners calls the underlying AlignsCorners.
+// Shape returns the collection as a Go slice.
+func (x *UpsampleLayer) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SampleMode the sampling mode to use when performing the upsample.
+func (x *UpsampleLayer) SampleMode() SampleMode {
+	_r := objc.Send[SampleMode](objref.IDOf(x), objc.RegisterName("sampleMode"))
+	return _r
+}
+
+// AlignsCorners a boolean that specifies whether the corner pixels of the source and result tensors are aligned. If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is NO.
 func (x *UpsampleLayer) AlignsCorners() bool {
-	return x.inner.AlignsCorners()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsCorners"))
+	return _r
 }
-
-func (x *UpsampleLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // UpsampleLayerable is the interface implemented by [UpsampleLayer], for mocking and DI.
 type UpsampleLayerable interface {
-	Unwrap() *raw.MLCUpsampleLayer
+	obj.Object
 	WithLabel(label string) *UpsampleLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer
-	Shape() []*foundation.NSNumber
-	SampleMode() MLCSampleMode
+	Shape() []obj.Object
+	SampleMode() SampleMode
 	AlignsCorners() bool
 }
 
 var _ UpsampleLayerable = (*UpsampleLayer)(nil)
+
+var _ LayerProvider = (*UpsampleLayer)(nil)

@@ -5,54 +5,87 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAttributeValueWaiter wraps [raw.MTRAttributeValueWaiter] with a fluent Go API.
+// MTRAttributeValueWaiter is an idiomatic wrapper over the Objective-C class MTRAttributeValueWaiter.
 type MTRAttributeValueWaiter struct {
-	inner *raw.MTRAttributeValueWaiter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAttributeValueWaiter].
-func (x *MTRAttributeValueWaiter) Unwrap() *raw.MTRAttributeValueWaiter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAttributeValueWaiter) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAttributeValueWaiterFromID adopts an existing object pointer as a MTRAttributeValueWaiter (nil for 0).
+// MTRAttributeValueWaiterFromID adopts an existing Objective-C object as a MTRAttributeValueWaiter
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAttributeValueWaiterFromID(id objc.ID) *MTRAttributeValueWaiter {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAttributeValueWaiter{inner: raw.MTRAttributeValueWaiterFromID(id)}
+	x := &MTRAttributeValueWaiter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAttributeValueWaiter creates a new [MTRAttributeValueWaiter].
+// mTRAttributeValueWaiterAdopt wraps an Objective-C object that this code just created as a
+// MTRAttributeValueWaiter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAttributeValueWaiterAdopt(id objc.ID) *MTRAttributeValueWaiter {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAttributeValueWaiter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAttributeValueWaiter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAttributeValueWaiter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAttributeValueWaiter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAttributeValueWaiter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAttributeValueWaiter creates a new MTRAttributeValueWaiter.
 func NewMTRAttributeValueWaiter() *MTRAttributeValueWaiter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeValueWaiter")), objc.RegisterName("new"))
-	return &MTRAttributeValueWaiter{inner: raw.MTRAttributeValueWaiterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributeValueWaiter")), objc.RegisterName("new"))
+	return mTRAttributeValueWaiterAdopt(_id)
 }
 
-// Cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
-//
-// Cancel calls the underlying Cancel.
+// Cancel cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
 func (x *MTRAttributeValueWaiter) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// UUID calls the underlying UUID.
-func (x *MTRAttributeValueWaiter) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+// UUID wraps the corresponding Objective-C method.
+func (x *MTRAttributeValueWaiter) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
 // MTRAttributeValueWaiterable is the interface implemented by [MTRAttributeValueWaiter], for mocking and DI.
 type MTRAttributeValueWaiterable interface {
-	Unwrap() *raw.MTRAttributeValueWaiter
+	obj.Object
 	Cancel()
-	UUID() *foundation.NSUUID
+	UUID() obj.Object
 }
 
 var _ MTRAttributeValueWaiterable = (*MTRAttributeValueWaiter)(nil)

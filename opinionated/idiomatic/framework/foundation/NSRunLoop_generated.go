@@ -6,118 +6,147 @@ package foundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The programmatic interface to objects that manage input sources.
+// RunLoop is an idiomatic wrapper over the Objective-C class NSRunLoop.
 //
-// RunLoop wraps [raw.NSRunLoop] with a fluent Go API.
+// The programmatic interface to objects that manage input sources.
 type RunLoop struct {
-	inner *raw.NSRunLoop
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSRunLoop].
-func (x *RunLoop) Unwrap() *raw.NSRunLoop { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RunLoop) ID() objc.ID { return x.inner.Ptr() }
-
-// RunLoopFromID adopts an existing object pointer as a RunLoop (nil for 0).
+// RunLoopFromID adopts an existing Objective-C object as a RunLoop
+// (nil for 0), retaining it and registering a release finalizer.
 func RunLoopFromID(id objc.ID) *RunLoop {
 	if id == 0 {
 		return nil
 	}
-	return &RunLoop{inner: raw.NSRunLoopFromID(id)}
-}
-
-// NewRunLoop creates a new [RunLoop].
-func NewRunLoop() *RunLoop {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRunLoop")), objc.RegisterName("new"))
-	return &RunLoop{inner: raw.NSRunLoopFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *RunLoop) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RunLoop {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &RunLoop{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// GetCFRunLoop calls the underlying GetCFRunLoop.
-func (x *RunLoop) GetCFRunLoop() unsafe.Pointer {
-	return x.inner.GetCFRunLoop()
-}
-
-// AddTimerForMode calls the underlying AddTimerForMode.
-func (x *RunLoop) AddTimerForMode(timer *raw.NSTimer, mode *raw.NSString) {
-	x.inner.AddTimerForMode(timer, mode)
-}
-
-// AddPortForMode calls the underlying AddPortForMode.
-func (x *RunLoop) AddPortForMode(aPort *raw.NSPort, mode *raw.NSString) {
-	x.inner.AddPortForMode(aPort, mode)
-}
-
-// RemovePortForMode calls the underlying RemovePortForMode.
-func (x *RunLoop) RemovePortForMode(aPort *raw.NSPort, mode *raw.NSString) {
-	x.inner.RemovePortForMode(aPort, mode)
-}
-
-// LimitDateForMode calls the underlying LimitDateForMode.
-func (x *RunLoop) LimitDateForMode(mode *raw.NSString) *Date {
-	_r := x.inner.LimitDateForMode(mode)
-	if _r == nil {
+// runLoopAdopt wraps an Objective-C object that this code just created as a
+// RunLoop (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func runLoopAdopt(id objc.ID) *RunLoop {
+	if id == 0 {
 		return nil
 	}
-	return &Date{inner: _r}
+	x := &RunLoop{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// AcceptInputForModeBeforeDate calls the underlying AcceptInputForModeBeforeDate.
-func (x *RunLoop) AcceptInputForModeBeforeDate(mode *raw.NSString, limitDate *raw.NSDate) {
-	x.inner.AcceptInputForModeBeforeDate(mode, limitDate)
+// Description returns the object's -description text.
+func (x *RunLoop) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// CurrentMode calls the underlying CurrentMode.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RunLoop) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RunLoop) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RunLoop) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRunLoop creates a new RunLoop.
+func NewRunLoop() *RunLoop {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("new"))
+	return runLoopAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *RunLoop) WithScriptingProperties(scriptingProperties obj.Object) *RunLoop {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// GetCFRunLoop wraps the corresponding Objective-C method.
+func (x *RunLoop) GetCFRunLoop() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCFRunLoop"))
+	return obj.Wrap(_r)
+}
+
+// AddTimerForMode wraps the corresponding Objective-C method.
+func (x *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTimer:forMode:"), objref.IDOf(timer), objref.IDOf(mode))
+}
+
+// AddPortForMode wraps the corresponding Objective-C method.
+func (x *RunLoop) AddPortForMode(aPort *Port, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
+}
+
+// RemovePortForMode wraps the corresponding Objective-C method.
+func (x *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
+}
+
+// LimitDateForMode wraps the corresponding Objective-C method.
+func (x *RunLoop) LimitDateForMode(mode *String) *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("limitDateForMode:"), objref.IDOf(mode))
+	return DateFromID(_r)
+}
+
+// AcceptInputForModeBeforeDate wraps the corresponding Objective-C method.
+func (x *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
+}
+
+// CurrentMode wraps the corresponding Objective-C method.
 func (x *RunLoop) CurrentMode() *String {
-	_r := x.inner.CurrentMode()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentMode"))
+	return StringFromID(_r)
 }
 
-// Run calls the underlying Run.
+// Run wraps the corresponding Objective-C method.
 func (x *RunLoop) Run() {
-	x.inner.Run()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
 }
 
-// RunUntilDate calls the underlying RunUntilDate.
-func (x *RunLoop) RunUntilDate(limitDate *raw.NSDate) {
-	x.inner.RunUntilDate(limitDate)
+// RunUntilDate wraps the corresponding Objective-C method.
+func (x *RunLoop) RunUntilDate(limitDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runUntilDate:"), objref.IDOf(limitDate))
 }
 
-// RunModeBeforeDate calls the underlying RunModeBeforeDate.
-func (x *RunLoop) RunModeBeforeDate(mode *raw.NSString, limitDate *raw.NSDate) bool {
-	return x.inner.RunModeBeforeDate(mode, limitDate)
+// RunModeBeforeDate wraps the corresponding Objective-C method.
+func (x *RunLoop) RunModeBeforeDate(mode *String, limitDate *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("runMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
+	return _r
 }
 
-// Deprecated. Does nothing.
-//
-// ConfigureAsServer calls the underlying ConfigureAsServer.
+// ConfigureAsServer deprecated. Does nothing.
 func (x *RunLoop) ConfigureAsServer() {
-	x.inner.ConfigureAsServer()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configureAsServer"))
 }
 
-// Schedules the execution of a block on the target run loop in given modes. - parameter: modes   An array of input modes for which the block may be executed. - parameter: block   The block to execute
+// PerformInModesBlock schedules the execution of a block on the target run loop in given modes. - parameter: modes   An array of input modes for which the block may be executed. - parameter: block   The block to execute
 //
 // PerformInModesBlock blocks until the operation completes or ctx is cancelled.
-func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes *raw.NSArray[*raw.NSString]) error {
+func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes []*String) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformInModesBlock(modes, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performInModes:block:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -126,14 +155,15 @@ func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes *raw.NSArray[*r
 	}
 }
 
-// Schedules the execution of a block on the target run loop. - parameter: block   The block to execute
+// PerformBlock schedules the execution of a block on the target run loop. - parameter: block   The block to execute
 //
 // PerformBlock blocks until the operation completes or ctx is cancelled.
 func (x *RunLoop) PerformBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -142,54 +172,29 @@ func (x *RunLoop) PerformBlock(ctx context.Context) error {
 	}
 }
 
-// PerformSelectorTargetArgumentOrderModes calls the underlying PerformSelectorTargetArgumentOrderModes.
-func (x *RunLoop) PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, target objc.ID, arg objc.ID, order uint, modes ...StringProvider) {
-	_ptrs := make([]objc.ID, len(modes))
-	for _i, _v := range modes {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg4 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.PerformSelectorTargetArgumentOrderModes(aSelector, target, arg, order, _arg4)
+// CancelPerformSelectorsWithTarget wraps the corresponding Objective-C method.
+func (x *RunLoop) CancelPerformSelectorsWithTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPerformSelectorsWithTarget:"), objref.IDOf(target))
 }
-
-// CancelPerformSelectorTargetArgument calls the underlying CancelPerformSelectorTargetArgument.
-func (x *RunLoop) CancelPerformSelectorTargetArgument(aSelector objc.SEL, target objc.ID, arg objc.ID) {
-	x.inner.CancelPerformSelectorTargetArgument(aSelector, target, arg)
-}
-
-// CancelPerformSelectorsWithTarget calls the underlying CancelPerformSelectorsWithTarget.
-func (x *RunLoop) CancelPerformSelectorsWithTarget(target objc.ID) {
-	x.inner.CancelPerformSelectorsWithTarget(target)
-}
-
-func (x *RunLoop) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // RunLoopable is the interface implemented by [RunLoop], for mocking and DI.
 type RunLoopable interface {
-	Unwrap() *raw.NSRunLoop
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RunLoop
-	GetCFRunLoop() unsafe.Pointer
-	AddTimerForMode(timer *raw.NSTimer, mode *raw.NSString)
-	AddPortForMode(aPort *raw.NSPort, mode *raw.NSString)
-	RemovePortForMode(aPort *raw.NSPort, mode *raw.NSString)
-	LimitDateForMode(mode *raw.NSString) *Date
-	AcceptInputForModeBeforeDate(mode *raw.NSString, limitDate *raw.NSDate)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *RunLoop
+	GetCFRunLoop() obj.Object
+	AddTimerForMode(timer *Timer, mode *String)
+	AddPortForMode(aPort *Port, mode *String)
+	RemovePortForMode(aPort *Port, mode *String)
+	LimitDateForMode(mode *String) *Date
+	AcceptInputForModeBeforeDate(mode *String, limitDate *Date)
 	CurrentMode() *String
 	Run()
-	RunUntilDate(limitDate *raw.NSDate)
-	RunModeBeforeDate(mode *raw.NSString, limitDate *raw.NSDate) bool
+	RunUntilDate(limitDate *Date)
+	RunModeBeforeDate(mode *String, limitDate *Date) bool
 	ConfigureAsServer()
-	PerformInModesBlock(ctx context.Context, modes *raw.NSArray[*raw.NSString]) error
+	PerformInModesBlock(ctx context.Context, modes []*String) error
 	PerformBlock(ctx context.Context) error
-	PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, target objc.ID, arg objc.ID, order uint, modes ...StringProvider)
-	CancelPerformSelectorTargetArgument(aSelector objc.SEL, target objc.ID, arg objc.ID)
-	CancelPerformSelectorsWithTarget(target objc.ID)
+	CancelPerformSelectorsWithTarget(target obj.Object)
 }
 
 var _ RunLoopable = (*RunLoop)(nil)

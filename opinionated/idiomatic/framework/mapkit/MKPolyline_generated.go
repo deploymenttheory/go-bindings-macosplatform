@@ -5,66 +5,75 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An open polygon overlay consisting of one or more connected line segments.
+// Polyline is an idiomatic wrapper over the Objective-C class MKPolyline.
 //
-// Polyline wraps [raw.MKPolyline] with a fluent Go API.
+// Polyline is an abstract base — you do not construct it directly. Construct one of [GeodesicPolyline] and pass it where a Polyline is accepted.
+//
+// An open polygon overlay consisting of one or more connected line segments.
 type Polyline struct {
-	inner *raw.MKPolyline
+	MultiPoint
 }
 
-// Unwrap returns the underlying [raw.MKPolyline].
-func (x *Polyline) Unwrap() *raw.MKPolyline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Polyline) ID() objc.ID { return x.inner.Ptr() }
-
-// PolylineFromID adopts an existing object pointer as a Polyline (nil for 0).
+// PolylineFromID adopts an existing Objective-C object as a Polyline
+// (nil for 0), retaining it and registering a release finalizer.
 func PolylineFromID(id objc.ID) *Polyline {
 	if id == 0 {
 		return nil
 	}
-	return &Polyline{inner: raw.MKPolylineFromID(id)}
+	x := &Polyline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPolyline creates a new [Polyline].
-func NewPolyline() *Polyline {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPolyline")), objc.RegisterName("new"))
-	return &Polyline{inner: raw.MKPolylineFromID(_id)}
+// polylineAdopt wraps an Objective-C object that this code just created as a
+// Polyline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func polylineAdopt(id objc.ID) *Polyline {
+	if id == 0 {
+		return nil
+	}
+	x := &Polyline{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the title of the shape annotation.
 func (x *Polyline) WithTitle(title string) *Polyline {
-	x.inner.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *Polyline) WithSubtitle(subtitle string) *Polyline {
-	x.inner.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
-
-func (x *Polyline) asPolyline() *raw.MKPolyline { return x.inner }
-
-func (x *Polyline) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKMultiPoint }
-
-func (x *Polyline) asShape() *raw.MKShape { return &x.inner.MKMultiPoint.MKShape }
 
 // Polylineable is the interface implemented by [Polyline], for mocking and DI.
 type Polylineable interface {
-	Unwrap() *raw.MKPolyline
+	obj.Object
 	WithTitle(title string) *Polyline
 	WithSubtitle(subtitle string) *Polyline
 }
 
 var _ Polylineable = (*Polyline)(nil)
+
+// isPolyline marks Polyline — and, by embedding promotion, its
+// subclasses — as a member of the Polyline hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Polyline) isPolyline() {}
+
+var _ PolylineProvider = (*Polyline)(nil)
+
+var _ MultiPointProvider = (*Polyline)(nil)
+
+var _ ShapeProvider = (*Polyline)(nil)

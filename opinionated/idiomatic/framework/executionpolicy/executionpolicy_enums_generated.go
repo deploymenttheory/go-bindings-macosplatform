@@ -8,26 +8,28 @@ import (
 	"fmt"
 )
 
-type EPDeveloperToolStatus int64
+type DeveloperToolStatus int64
 
 const (
-	EPDeveloperToolStatusNotDetermined EPDeveloperToolStatus = 0
-	EPDeveloperToolStatusRestricted    EPDeveloperToolStatus = 1
-	EPDeveloperToolStatusDenied        EPDeveloperToolStatus = 2
-	EPDeveloperToolStatusAuthorized    EPDeveloperToolStatus = 3
+	DeveloperToolStatusNotDetermined DeveloperToolStatus = 0
+	DeveloperToolStatusRestricted    DeveloperToolStatus = 1
+	DeveloperToolStatusDenied        DeveloperToolStatus = 2
+	DeveloperToolStatusAuthorized    DeveloperToolStatus = 3
 )
 
-func (e EPDeveloperToolStatus) String() string {
+// String returns the DeveloperToolStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeveloperToolStatus) String() string {
 	switch e {
-	case EPDeveloperToolStatusNotDetermined:
-		return "EPDeveloperToolStatusNotDetermined"
-	case EPDeveloperToolStatusRestricted:
-		return "EPDeveloperToolStatusRestricted"
-	case EPDeveloperToolStatusDenied:
-		return "EPDeveloperToolStatusDenied"
-	case EPDeveloperToolStatusAuthorized:
-		return "EPDeveloperToolStatusAuthorized"
+	case DeveloperToolStatusNotDetermined:
+		return "DeveloperToolStatusNotDetermined"
+	case DeveloperToolStatusRestricted:
+		return "DeveloperToolStatusRestricted"
+	case DeveloperToolStatusDenied:
+		return "DeveloperToolStatusDenied"
+	case DeveloperToolStatusAuthorized:
+		return "DeveloperToolStatusAuthorized"
 	default:
-		return fmt.Sprintf("EPDeveloperToolStatus(%d)", int64(e))
+		return fmt.Sprintf("DeveloperToolStatus(%d)", int64(e))
 	}
 }

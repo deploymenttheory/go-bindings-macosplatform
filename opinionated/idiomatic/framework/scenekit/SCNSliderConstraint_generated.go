@@ -5,137 +5,117 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SliderConstraint wraps [raw.SCNSliderConstraint] with a fluent Go API.
+// SliderConstraint is an idiomatic wrapper over the Objective-C class SCNSliderConstraint.
+//
+// It embeds [Constraint], promoting that type's methods.
 type SliderConstraint struct {
-	inner *raw.SCNSliderConstraint
+	Constraint
 }
 
-// Unwrap returns the underlying [raw.SCNSliderConstraint].
-func (x *SliderConstraint) Unwrap() *raw.SCNSliderConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SliderConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// SliderConstraintFromID adopts an existing object pointer as a SliderConstraint (nil for 0).
+// SliderConstraintFromID adopts an existing Objective-C object as a SliderConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func SliderConstraintFromID(id objc.ID) *SliderConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &SliderConstraint{inner: raw.SCNSliderConstraintFromID(id)}
+	x := &SliderConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSliderConstraint creates a new [SliderConstraint].
+// sliderConstraintAdopt wraps an Objective-C object that this code just created as a
+// SliderConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sliderConstraintAdopt(id objc.ID) *SliderConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &SliderConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSliderConstraint creates a new SliderConstraint.
 func NewSliderConstraint() *SliderConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSliderConstraint")), objc.RegisterName("new"))
-	return &SliderConstraint{inner: raw.SCNSliderConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNSliderConstraint")), objc.RegisterName("new"))
+	return sliderConstraintAdopt(_id)
 }
 
-// @property collisionCategoryBitMask @abstract Defines the category of node to collide against. Defaults to 0.
-//
-// WithCollisionCategoryBitMask sets the collisionCategoryBitMask property and returns the receiver for chaining.
-func (x *SliderConstraint) WithCollisionCategoryBitMask(collisionCategoryBitMask uint) *SliderConstraint {
-	x.inner.SetCollisionCategoryBitMask(collisionCategoryBitMask)
+// WithCollisionCategoryBitMask defines the category of node to collide against. Defaults to 0.
+func (x *SliderConstraint) WithCollisionCategoryBitMask(collisionCategoryBitMask int) *SliderConstraint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionCategoryBitMask:"), collisionCategoryBitMask)
 	return x
 }
 
-// @property radius @abstract Defines the radius of the slider. Defaults to 1.
-//
-// WithRadius sets the radius property and returns the receiver for chaining.
+// WithRadius defines the radius of the slider. Defaults to 1.
 func (x *SliderConstraint) WithRadius(radius float64) *SliderConstraint {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// @property offset @abstract Defines the offset of the slider. Defaults to (0,0,0).
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *SliderConstraint) WithOffset(offset raw.SCNVector3) *SliderConstraint {
-	x.inner.SetOffset(offset)
-	return x
-}
-
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *SliderConstraint) WithEnabled(enabled bool) *SliderConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *SliderConstraint) WithInfluenceFactor(influenceFactor float64) *SliderConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *SliderConstraint) WithIncremental(incremental bool) *SliderConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// @property collisionCategoryBitMask @abstract Defines the category of node to collide against. Defaults to 0.
-//
-// CollisionCategoryBitMask calls the underlying CollisionCategoryBitMask.
-func (x *SliderConstraint) CollisionCategoryBitMask() uint {
-	return x.inner.CollisionCategoryBitMask()
+// CollisionCategoryBitMask defines the category of node to collide against. Defaults to 0.
+func (x *SliderConstraint) CollisionCategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("collisionCategoryBitMask"))
+	return _r
 }
 
-// SetCollisionCategoryBitMask calls the underlying SetCollisionCategoryBitMask.
-func (x *SliderConstraint) SetCollisionCategoryBitMask(collisionCategoryBitMask uint) {
-	x.inner.SetCollisionCategoryBitMask(collisionCategoryBitMask)
+// SetCollisionCategoryBitMask wraps the corresponding Objective-C method.
+func (x *SliderConstraint) SetCollisionCategoryBitMask(collisionCategoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionCategoryBitMask:"), collisionCategoryBitMask)
 }
 
-// @property radius @abstract Defines the radius of the slider. Defaults to 1.
-//
-// Radius calls the underlying Radius.
+// Radius defines the radius of the slider. Defaults to 1.
 func (x *SliderConstraint) Radius() float64 {
-	return x.inner.Radius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
+// SetRadius wraps the corresponding Objective-C method.
 func (x *SliderConstraint) SetRadius(radius float64) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
-
-// @property offset @abstract Defines the offset of the slider. Defaults to (0,0,0).
-//
-// Offset calls the underlying Offset.
-func (x *SliderConstraint) Offset() raw.SCNVector3 {
-	return x.inner.Offset()
-}
-
-// SetOffset calls the underlying SetOffset.
-func (x *SliderConstraint) SetOffset(offset raw.SCNVector3) {
-	x.inner.SetOffset(offset)
-}
-
-func (x *SliderConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // SliderConstraintable is the interface implemented by [SliderConstraint], for mocking and DI.
 type SliderConstraintable interface {
-	Unwrap() *raw.SCNSliderConstraint
-	WithCollisionCategoryBitMask(collisionCategoryBitMask uint) *SliderConstraint
+	obj.Object
+	WithCollisionCategoryBitMask(collisionCategoryBitMask int) *SliderConstraint
 	WithRadius(radius float64) *SliderConstraint
-	WithOffset(offset raw.SCNVector3) *SliderConstraint
 	WithEnabled(enabled bool) *SliderConstraint
 	WithInfluenceFactor(influenceFactor float64) *SliderConstraint
 	WithIncremental(incremental bool) *SliderConstraint
-	CollisionCategoryBitMask() uint
-	SetCollisionCategoryBitMask(collisionCategoryBitMask uint)
+	CollisionCategoryBitMask() int
+	SetCollisionCategoryBitMask(collisionCategoryBitMask int)
 	Radius() float64
 	SetRadius(radius float64)
-	Offset() raw.SCNVector3
-	SetOffset(offset raw.SCNVector3)
 }
 
 var _ SliderConstraintable = (*SliderConstraint)(nil)
+
+var _ ConstraintProvider = (*SliderConstraint)(nil)

@@ -5,446 +5,360 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MIDI1UPChannelPressure calls [raw.MIDI1UPChannelPressure] (C function MIDI1UPChannelPressure).
-func MIDI1UPChannelPressure(group uint8, channel uint8, value uint8) uint {
-	return raw.MIDI1UPChannelPressure(group, channel, value)
-}
-
-// MIDI1UPChannelVoiceMessage calls [raw.MIDI1UPChannelVoiceMessage] (C function MIDI1UPChannelVoiceMessage).
-func MIDI1UPChannelVoiceMessage(group uint8, status uint8, channel uint8, data1 uint8, data2 uint8) uint {
-	return raw.MIDI1UPChannelVoiceMessage(group, status, channel, data1, data2)
-}
-
-// MIDI1UPControlChange calls [raw.MIDI1UPControlChange] (C function MIDI1UPControlChange).
-func MIDI1UPControlChange(group uint8, channel uint8, index uint8, data uint8) uint {
-	return raw.MIDI1UPControlChange(group, channel, index, data)
-}
-
-// MIDI1UPNoteOff calls [raw.MIDI1UPNoteOff] (C function MIDI1UPNoteOff).
-func MIDI1UPNoteOff(group uint8, channel uint8, noteNumber uint8, velocity uint8) uint {
-	return raw.MIDI1UPNoteOff(group, channel, noteNumber, velocity)
-}
-
-// MIDI1UPNoteOn calls [raw.MIDI1UPNoteOn] (C function MIDI1UPNoteOn).
-func MIDI1UPNoteOn(group uint8, channel uint8, noteNumber uint8, velocity uint8) uint {
-	return raw.MIDI1UPNoteOn(group, channel, noteNumber, velocity)
-}
-
-// MIDI1UPPitchBend calls [raw.MIDI1UPPitchBend] (C function MIDI1UPPitchBend).
-func MIDI1UPPitchBend(group uint8, channel uint8, lsb uint8, msb uint8) uint {
-	return raw.MIDI1UPPitchBend(group, channel, lsb, msb)
-}
-
-// MIDI1UPPolyPressure calls [raw.MIDI1UPPolyPressure] (C function MIDI1UPPolyPressure).
-func MIDI1UPPolyPressure(group uint8, channel uint8, noteNumber uint8, pressure uint8) uint {
-	return raw.MIDI1UPPolyPressure(group, channel, noteNumber, pressure)
-}
-
-// MIDI1UPProgramChange calls [raw.MIDI1UPProgramChange] (C function MIDI1UPProgramChange).
-func MIDI1UPProgramChange(group uint8, channel uint8, program uint8) uint {
-	return raw.MIDI1UPProgramChange(group, channel, program)
-}
-
-// MIDI1UPSysEx calls [raw.MIDI1UPSysEx] (C function MIDI1UPSysEx).
-func MIDI1UPSysEx(group uint8, status uint8, bytesUsed uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8) raw.MIDIMessage_64 {
-	return raw.MIDI1UPSysEx(group, status, bytesUsed, byte1, byte2, byte3, byte4, byte5, byte6)
-}
-
-// MIDI1UPSysExArray calls [raw.MIDI1UPSysExArray] (C function MIDI1UPSysExArray).
-func MIDI1UPSysExArray(group uint8, status uint8, begin *uint8, end *uint8) raw.MIDIMessage_64 {
-	return raw.MIDI1UPSysExArray(group, status, begin, end)
-}
-
-// MIDI1UPSystemCommon calls [raw.MIDI1UPSystemCommon] (C function MIDI1UPSystemCommon).
-func MIDI1UPSystemCommon(group uint8, status uint8, byte1 uint8, byte2 uint8) uint {
-	return raw.MIDI1UPSystemCommon(group, status, byte1, byte2)
-}
-
-// MIDI2AssignableControl calls [raw.MIDI2AssignableControl] (C function MIDI2AssignableControl).
-func MIDI2AssignableControl(group uint8, channel uint8, bank uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2AssignableControl(group, channel, bank, index, value)
-}
-
-// MIDI2AssignablePNC calls [raw.MIDI2AssignablePNC] (C function MIDI2AssignablePNC).
-func MIDI2AssignablePNC(group uint8, channel uint8, noteNumber uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2AssignablePNC(group, channel, noteNumber, index, value)
-}
-
-// MIDI2ChannelPressure calls [raw.MIDI2ChannelPressure] (C function MIDI2ChannelPressure).
-func MIDI2ChannelPressure(group uint8, channel uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2ChannelPressure(group, channel, value)
-}
-
-// MIDI2ChannelVoiceMessage calls [raw.MIDI2ChannelVoiceMessage] (C function MIDI2ChannelVoiceMessage).
-func MIDI2ChannelVoiceMessage(group uint8, status uint8, channel uint8, index uint16, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2ChannelVoiceMessage(group, status, channel, index, value)
-}
-
-// MIDI2ControlChange calls [raw.MIDI2ControlChange] (C function MIDI2ControlChange).
-func MIDI2ControlChange(group uint8, channel uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2ControlChange(group, channel, index, value)
-}
-
-// MIDI2EndOfClipMessage calls [raw.MIDI2EndOfClipMessage] (C function MIDI2EndOfClipMessage).
-func MIDI2EndOfClipMessage() raw.MIDIMessage_128 {
-	return raw.MIDI2EndOfClipMessage()
-}
-
-// MIDI2EndpointDeviceIdentityNotificationMessage calls [raw.MIDI2EndpointDeviceIdentityNotificationMessage] (C function MIDI2EndpointDeviceIdentityNotificationMessage).
-func MIDI2EndpointDeviceIdentityNotificationMessage(deviceManufacturer1 uint8, deviceManufacturer2 uint8, deviceManufacturer3 uint8, deviceFamily uint16, deviceFamilyModel uint16, revisionLevel uint) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointDeviceIdentityNotificationMessage(deviceManufacturer1, deviceManufacturer2, deviceManufacturer3, deviceFamily, deviceFamilyModel, revisionLevel)
-}
-
-// MIDI2EndpointDiscoveryMessage calls [raw.MIDI2EndpointDiscoveryMessage] (C function MIDI2EndpointDiscoveryMessage).
-func MIDI2EndpointDiscoveryMessage(versionMajor uint8, versionMinor uint8, endpointInfoRequest bool, deviceIdentityRequest bool, endpointNameRequest bool, productInstanceIDRequest bool, streamConfigurationRequest bool) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointDiscoveryMessage(versionMajor, versionMinor, endpointInfoRequest, deviceIdentityRequest, endpointNameRequest, productInstanceIDRequest, streamConfigurationRequest)
-}
-
-// MIDI2EndpointInfoNotificationMessage calls [raw.MIDI2EndpointInfoNotificationMessage] (C function MIDI2EndpointInfoNotificationMessage).
-func MIDI2EndpointInfoNotificationMessage(versionMajor uint8, versionMinor uint8, staticFunctionBlocks bool, numberOfFunctionBlocks uint8, m1 bool, m2 bool, receiveJRTimestamp bool, transmitJRTimestamp bool) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointInfoNotificationMessage(versionMajor, versionMinor, staticFunctionBlocks, numberOfFunctionBlocks, m1, m2, receiveJRTimestamp, transmitJRTimestamp)
-}
-
-// MIDI2EndpointNameNotificationMessage calls [raw.MIDI2EndpointNameNotificationMessage] (C function MIDI2EndpointNameNotificationMessage).
-func MIDI2EndpointNameNotificationMessage(format UMPStreamMessageFormat, data string, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointNameNotificationMessage(raw.UMPStreamMessageFormat(format), data, length)
-}
-
-// MIDI2EndpointProductInstanceIDNotificationMessage calls [raw.MIDI2EndpointProductInstanceIDNotificationMessage] (C function MIDI2EndpointProductInstanceIDNotificationMessage).
-func MIDI2EndpointProductInstanceIDNotificationMessage(format UMPStreamMessageFormat, data string, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointProductInstanceIDNotificationMessage(raw.UMPStreamMessageFormat(format), data, length)
-}
-
-// MIDI2FlexDataMessage calls [raw.MIDI2FlexDataMessage] (C function MIDI2FlexDataMessage).
-func MIDI2FlexDataMessage(group uint8, format uint8, address uint8, channel uint8, statusBank uint8, status uint8, data1 uint, data2 uint, data3 uint) raw.MIDIMessage_128 {
-	return raw.MIDI2FlexDataMessage(group, format, address, channel, statusBank, status, data1, data2, data3)
-}
+var _fnMIDI1UPChannelPressure func(uint8, uint8, uint8) int
 
-// MIDI2FunctionBlockDiscoveryMessage calls [raw.MIDI2FunctionBlockDiscoveryMessage] (C function MIDI2FunctionBlockDiscoveryMessage).
-func MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber uint8, infoRequest bool, nameRequest bool) raw.MIDIMessage_128 {
-	return raw.MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber, infoRequest, nameRequest)
+// MIDI1UPChannelPressure calls the CoreMIDI framework function MIDI1UPChannelPressure.
+func MIDI1UPChannelPressure(group uint8, channel uint8, value uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPChannelPressure == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPChannelPressure, _lib, "MIDI1UPChannelPressure")
+	}
+	return _fnMIDI1UPChannelPressure(group, channel, value)
 }
 
-// MIDI2FunctionBlockInfoNotificationMessage calls [raw.MIDI2FunctionBlockInfoNotificationMessage] (C function MIDI2FunctionBlockInfoNotificationMessage).
-func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uIHint MIDIUMPFunctionBlockUIHint, mIDI1 MIDIUMPFunctionBlockMIDI1Info, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, cIVersion uint8, maxSysex8Streams uint8) raw.MIDIMessage_128 {
-	return raw.MIDI2FunctionBlockInfoNotificationMessage(active, blockNumber, raw.MIDIUMPFunctionBlockUIHint(uIHint), raw.MIDIUMPFunctionBlockMIDI1Info(mIDI1), raw.MIDIUMPFunctionBlockDirection(direction), firstGroup, numberOfGroupsSpanned, cIVersion, maxSysex8Streams)
-}
-
-// MIDI2FunctionBlockNameNotificationMessage calls [raw.MIDI2FunctionBlockNameNotificationMessage] (C function MIDI2FunctionBlockNameNotificationMessage).
-func MIDI2FunctionBlockNameNotificationMessage(format UMPStreamMessageFormat, blockNumber uint8, data string, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2FunctionBlockNameNotificationMessage(raw.UMPStreamMessageFormat(format), blockNumber, data, length)
-}
-
-// MIDI2NoteOff calls [raw.MIDI2NoteOff] (C function MIDI2NoteOff).
-func MIDI2NoteOff(group uint8, channel uint8, noteNumber uint8, attributeType uint8, attributeData uint16, velocity uint16) raw.MIDIMessage_64 {
-	return raw.MIDI2NoteOff(group, channel, noteNumber, attributeType, attributeData, velocity)
-}
+var _fnMIDI1UPChannelVoiceMessage func(uint8, uint8, uint8, uint8, uint8) int
 
-// MIDI2NoteOn calls [raw.MIDI2NoteOn] (C function MIDI2NoteOn).
-func MIDI2NoteOn(group uint8, channel uint8, noteNumber uint8, attributeType uint8, attributeData uint16, velocity uint16) raw.MIDIMessage_64 {
-	return raw.MIDI2NoteOn(group, channel, noteNumber, attributeType, attributeData, velocity)
+// MIDI1UPChannelVoiceMessage calls the CoreMIDI framework function MIDI1UPChannelVoiceMessage.
+func MIDI1UPChannelVoiceMessage(group uint8, status uint8, channel uint8, data1 uint8, data2 uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPChannelVoiceMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPChannelVoiceMessage, _lib, "MIDI1UPChannelVoiceMessage")
+	}
+	return _fnMIDI1UPChannelVoiceMessage(group, status, channel, data1, data2)
 }
 
-// MIDI2PerNoteManagment calls [raw.MIDI2PerNoteManagment] (C function MIDI2PerNoteManagment).
-func MIDI2PerNoteManagment(group uint8, channel uint8, noteNumber uint8, detachPNCs bool, resetPNCsToDefault bool) raw.MIDIMessage_64 {
-	return raw.MIDI2PerNoteManagment(group, channel, noteNumber, detachPNCs, resetPNCsToDefault)
-}
+var _fnMIDI1UPControlChange func(uint8, uint8, uint8, uint8) int
 
-// MIDI2PerNotePitchBend calls [raw.MIDI2PerNotePitchBend] (C function MIDI2PerNotePitchBend).
-func MIDI2PerNotePitchBend(group uint8, channel uint8, noteNumber uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2PerNotePitchBend(group, channel, noteNumber, value)
+// MIDI1UPControlChange calls the CoreMIDI framework function MIDI1UPControlChange.
+func MIDI1UPControlChange(group uint8, channel uint8, index uint8, data uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPControlChange == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPControlChange, _lib, "MIDI1UPControlChange")
+	}
+	return _fnMIDI1UPControlChange(group, channel, index, data)
 }
 
-// MIDI2PitchBend calls [raw.MIDI2PitchBend] (C function MIDI2PitchBend).
-func MIDI2PitchBend(group uint8, channel uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2PitchBend(group, channel, value)
-}
+var _fnMIDI1UPNoteOff func(uint8, uint8, uint8, uint8) int
 
-// MIDI2PolyPressure calls [raw.MIDI2PolyPressure] (C function MIDI2PolyPressure).
-func MIDI2PolyPressure(group uint8, channel uint8, noteNumber uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2PolyPressure(group, channel, noteNumber, value)
+// MIDI1UPNoteOff calls the CoreMIDI framework function MIDI1UPNoteOff.
+func MIDI1UPNoteOff(group uint8, channel uint8, noteNumber uint8, velocity uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPNoteOff == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPNoteOff, _lib, "MIDI1UPNoteOff")
+	}
+	return _fnMIDI1UPNoteOff(group, channel, noteNumber, velocity)
 }
 
-// MIDI2ProgramChange calls [raw.MIDI2ProgramChange] (C function MIDI2ProgramChange).
-func MIDI2ProgramChange(group uint8, channel uint8, bankIsValid bool, program uint8, bank_msb uint8, bank_lsb uint8) raw.MIDIMessage_64 {
-	return raw.MIDI2ProgramChange(group, channel, bankIsValid, program, bank_msb, bank_lsb)
-}
+var _fnMIDI1UPNoteOn func(uint8, uint8, uint8, uint8) int
 
-// MIDI2RegisteredControl calls [raw.MIDI2RegisteredControl] (C function MIDI2RegisteredControl).
-func MIDI2RegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2RegisteredControl(group, channel, bank, index, value)
+// MIDI1UPNoteOn calls the CoreMIDI framework function MIDI1UPNoteOn.
+func MIDI1UPNoteOn(group uint8, channel uint8, noteNumber uint8, velocity uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPNoteOn == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPNoteOn, _lib, "MIDI1UPNoteOn")
+	}
+	return _fnMIDI1UPNoteOn(group, channel, noteNumber, velocity)
 }
 
-// MIDI2RegisteredPNC calls [raw.MIDI2RegisteredPNC] (C function MIDI2RegisteredPNC).
-func MIDI2RegisteredPNC(group uint8, channel uint8, noteNumber uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2RegisteredPNC(group, channel, noteNumber, index, value)
-}
+var _fnMIDI1UPPitchBend func(uint8, uint8, uint8, uint8) int
 
-// MIDI2RelAssignableControl calls [raw.MIDI2RelAssignableControl] (C function MIDI2RelAssignableControl).
-func MIDI2RelAssignableControl(group uint8, channel uint8, bank uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2RelAssignableControl(group, channel, bank, index, value)
+// MIDI1UPPitchBend calls the CoreMIDI framework function MIDI1UPPitchBend.
+func MIDI1UPPitchBend(group uint8, channel uint8, lsb uint8, msb uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPPitchBend == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPPitchBend, _lib, "MIDI1UPPitchBend")
+	}
+	return _fnMIDI1UPPitchBend(group, channel, lsb, msb)
 }
 
-// MIDI2RelRegisteredControl calls [raw.MIDI2RelRegisteredControl] (C function MIDI2RelRegisteredControl).
-func MIDI2RelRegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value uint) raw.MIDIMessage_64 {
-	return raw.MIDI2RelRegisteredControl(group, channel, bank, index, value)
-}
+var _fnMIDI1UPPolyPressure func(uint8, uint8, uint8, uint8) int
 
-// MIDI2StartOfClipMessage calls [raw.MIDI2StartOfClipMessage] (C function MIDI2StartOfClipMessage).
-func MIDI2StartOfClipMessage() raw.MIDIMessage_128 {
-	return raw.MIDI2StartOfClipMessage()
+// MIDI1UPPolyPressure calls the CoreMIDI framework function MIDI1UPPolyPressure.
+func MIDI1UPPolyPressure(group uint8, channel uint8, noteNumber uint8, pressure uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPPolyPressure == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPPolyPressure, _lib, "MIDI1UPPolyPressure")
+	}
+	return _fnMIDI1UPPolyPressure(group, channel, noteNumber, pressure)
 }
 
-// MIDI2StreamConfigurationNotificationMessage calls [raw.MIDI2StreamConfigurationNotificationMessage] (C function MIDI2StreamConfigurationNotificationMessage).
-func MIDI2StreamConfigurationNotificationMessage(protocol uint8, receiveJRTimestamp bool, transmitJRTimestamp bool) raw.MIDIMessage_128 {
-	return raw.MIDI2StreamConfigurationNotificationMessage(protocol, receiveJRTimestamp, transmitJRTimestamp)
-}
+var _fnMIDI1UPProgramChange func(uint8, uint8, uint8) int
 
-// MIDI2StreamConfigurationRequestMessage calls [raw.MIDI2StreamConfigurationRequestMessage] (C function MIDI2StreamConfigurationRequestMessage).
-func MIDI2StreamConfigurationRequestMessage(protocol uint8, receiveJRTimestamp bool, transmitJRTimestamp bool) raw.MIDIMessage_128 {
-	return raw.MIDI2StreamConfigurationRequestMessage(protocol, receiveJRTimestamp, transmitJRTimestamp)
+// MIDI1UPProgramChange calls the CoreMIDI framework function MIDI1UPProgramChange.
+func MIDI1UPProgramChange(group uint8, channel uint8, program uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPProgramChange == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPProgramChange, _lib, "MIDI1UPProgramChange")
+	}
+	return _fnMIDI1UPProgramChange(group, channel, program)
 }
 
-// MIDI2StreamMessage calls [raw.MIDI2StreamMessage] (C function MIDI2StreamMessage).
-func MIDI2StreamMessage(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data1 uint16, data2 uint, data3 uint, data4 uint) raw.MIDIMessage_128 {
-	return raw.MIDI2StreamMessage(raw.UMPStreamMessageFormat(format), raw.UMPStreamMessageStatus(status), data1, data2, data3, data4)
-}
+var _fnMIDI1UPSystemCommon func(uint8, uint8, uint8, uint8) int
 
-// MIDI2StreamMessageFromData calls [raw.MIDI2StreamMessageFromData] (C function MIDI2StreamMessageFromData).
-func MIDI2StreamMessageFromData(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data *uint8, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2StreamMessageFromData(raw.UMPStreamMessageFormat(format), raw.UMPStreamMessageStatus(status), data, length)
+// MIDI1UPSystemCommon calls the CoreMIDI framework function MIDI1UPSystemCommon.
+func MIDI1UPSystemCommon(group uint8, status uint8, byte1 uint8, byte2 uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDI1UPSystemCommon == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDI1UPSystemCommon, _lib, "MIDI1UPSystemCommon")
+	}
+	return _fnMIDI1UPSystemCommon(group, status, byte1, byte2)
 }
 
-// MIDIClientCreate calls [raw.MIDIClientCreate] (C function MIDIClientCreate).
-func MIDIClientCreate(name unsafe.Pointer, notifyProc unsafe.Pointer, notifyRefCon unsafe.Pointer, outClient *uint) int {
-	return raw.MIDIClientCreate(name, notifyProc, notifyRefCon, outClient)
-}
+var _fnMIDIDeltaClockstampTicksPerQuarterNoteMessage func(uint16) int
 
-// MIDIClientCreateWithBlock calls [raw.MIDIClientCreateWithBlock] (C function MIDIClientCreateWithBlock).
-func MIDIClientCreateWithBlock(name unsafe.Pointer, outClient *uint, notifyBlock func(*raw.MIDINotification)) int {
-	return raw.MIDIClientCreateWithBlock(name, outClient, notifyBlock)
+// MIDIDeltaClockstampTicksPerQuarterNoteMessage calls the CoreMIDI framework function MIDIDeltaClockstampTicksPerQuarterNoteMessage.
+func MIDIDeltaClockstampTicksPerQuarterNoteMessage(ticksPerQuarterNote uint16) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeltaClockstampTicksPerQuarterNoteMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeltaClockstampTicksPerQuarterNoteMessage, _lib, "MIDIDeltaClockstampTicksPerQuarterNoteMessage")
+	}
+	return _fnMIDIDeltaClockstampTicksPerQuarterNoteMessage(ticksPerQuarterNote)
 }
 
-// MIDIDeltaClockstampTicksPerQuarterNoteMessage calls [raw.MIDIDeltaClockstampTicksPerQuarterNoteMessage] (C function MIDIDeltaClockstampTicksPerQuarterNoteMessage).
-func MIDIDeltaClockstampTicksPerQuarterNoteMessage(ticksPerQuarterNote uint16) uint {
-	return raw.MIDIDeltaClockstampTicksPerQuarterNoteMessage(ticksPerQuarterNote)
-}
+var _fnMIDIDeviceGetEntity func(int, int) int
 
-// MIDIDestinationCreate calls [raw.MIDIDestinationCreate] (C function MIDIDestinationCreate).
-func MIDIDestinationCreate(client uint, name unsafe.Pointer, readProc unsafe.Pointer, refCon unsafe.Pointer, outDest *uint) int {
-	return raw.MIDIDestinationCreate(client, name, readProc, refCon, outDest)
+// MIDIDeviceGetEntity calls the CoreMIDI framework function MIDIDeviceGetEntity.
+func MIDIDeviceGetEntity(device int, entityIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceGetEntity == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceGetEntity, _lib, "MIDIDeviceGetEntity")
+	}
+	return _fnMIDIDeviceGetEntity(device, entityIndex0)
 }
 
-// MIDIDestinationCreateWithBlock calls [raw.MIDIDestinationCreateWithBlock] (C function MIDIDestinationCreateWithBlock).
-func MIDIDestinationCreateWithBlock(client uint, name unsafe.Pointer, outDest *uint, readBlock func(*raw.MIDIPacketList, unsafe.Pointer)) int {
-	return raw.MIDIDestinationCreateWithBlock(client, name, outDest, readBlock)
-}
+var _fnMIDIDeviceGetNumberOfEntities func(int) int
 
-// MIDIDestinationCreateWithProtocol calls [raw.MIDIDestinationCreateWithProtocol] (C function MIDIDestinationCreateWithProtocol).
-func MIDIDestinationCreateWithProtocol(client uint, name unsafe.Pointer, protocol MIDIProtocolID, outDest *uint, readBlock func(*raw.MIDIEventList, unsafe.Pointer)) int {
-	return raw.MIDIDestinationCreateWithProtocol(client, name, raw.MIDIProtocolID(protocol), outDest, readBlock)
+// MIDIDeviceGetNumberOfEntities calls the CoreMIDI framework function MIDIDeviceGetNumberOfEntities.
+func MIDIDeviceGetNumberOfEntities(device int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceGetNumberOfEntities == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceGetNumberOfEntities, _lib, "MIDIDeviceGetNumberOfEntities")
+	}
+	return _fnMIDIDeviceGetNumberOfEntities(device)
 }
 
-// MIDIDeviceGetEntity calls [raw.MIDIDeviceGetEntity] (C function MIDIDeviceGetEntity).
-func MIDIDeviceGetEntity(device uint, entityIndex0 uint) uint {
-	return raw.MIDIDeviceGetEntity(device, entityIndex0)
-}
+var _fnMIDIDeviceListGetDevice func(int, int) int
 
-// MIDIDeviceGetNumberOfEntities calls [raw.MIDIDeviceGetNumberOfEntities] (C function MIDIDeviceGetNumberOfEntities).
-func MIDIDeviceGetNumberOfEntities(device uint) uint {
-	return raw.MIDIDeviceGetNumberOfEntities(device)
+// MIDIDeviceListGetDevice calls the CoreMIDI framework function MIDIDeviceListGetDevice.
+func MIDIDeviceListGetDevice(devList int, index0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceListGetDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceListGetDevice, _lib, "MIDIDeviceListGetDevice")
+	}
+	return _fnMIDIDeviceListGetDevice(devList, index0)
 }
 
-// MIDIDeviceListGetDevice calls [raw.MIDIDeviceListGetDevice] (C function MIDIDeviceListGetDevice).
-func MIDIDeviceListGetDevice(devList uint, index0 uint) uint {
-	return raw.MIDIDeviceListGetDevice(devList, index0)
-}
+var _fnMIDIDeviceListGetNumberOfDevices func(int) int
 
-// MIDIDeviceListGetNumberOfDevices calls [raw.MIDIDeviceListGetNumberOfDevices] (C function MIDIDeviceListGetNumberOfDevices).
-func MIDIDeviceListGetNumberOfDevices(devList uint) uint {
-	return raw.MIDIDeviceListGetNumberOfDevices(devList)
+// MIDIDeviceListGetNumberOfDevices calls the CoreMIDI framework function MIDIDeviceListGetNumberOfDevices.
+func MIDIDeviceListGetNumberOfDevices(devList int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceListGetNumberOfDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceListGetNumberOfDevices, _lib, "MIDIDeviceListGetNumberOfDevices")
+	}
+	return _fnMIDIDeviceListGetNumberOfDevices(devList)
 }
 
-// MIDIEndpointGetRefCons calls [raw.MIDIEndpointGetRefCons] (C function MIDIEndpointGetRefCons).
-func MIDIEndpointGetRefCons(endpt uint, ref1 unsafe.Pointer, ref2 unsafe.Pointer) int {
-	return raw.MIDIEndpointGetRefCons(endpt, ref1, ref2)
-}
+var _fnMIDIEntityGetDestination func(int, int) int
 
-// MIDIEndpointSetRefCons calls [raw.MIDIEndpointSetRefCons] (C function MIDIEndpointSetRefCons).
-func MIDIEndpointSetRefCons(endpt uint, ref1 unsafe.Pointer, ref2 unsafe.Pointer) int {
-	return raw.MIDIEndpointSetRefCons(endpt, ref1, ref2)
+// MIDIEntityGetDestination calls the CoreMIDI framework function MIDIEntityGetDestination.
+func MIDIEntityGetDestination(entity int, destIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEntityGetDestination == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetDestination, _lib, "MIDIEntityGetDestination")
+	}
+	return _fnMIDIEntityGetDestination(entity, destIndex0)
 }
 
-// MIDIEntityGetDestination calls [raw.MIDIEntityGetDestination] (C function MIDIEntityGetDestination).
-func MIDIEntityGetDestination(entity uint, destIndex0 uint) uint {
-	return raw.MIDIEntityGetDestination(entity, destIndex0)
-}
+var _fnMIDIEntityGetNumberOfDestinations func(int) int
 
-// MIDIEntityGetNumberOfDestinations calls [raw.MIDIEntityGetNumberOfDestinations] (C function MIDIEntityGetNumberOfDestinations).
-func MIDIEntityGetNumberOfDestinations(entity uint) uint {
-	return raw.MIDIEntityGetNumberOfDestinations(entity)
+// MIDIEntityGetNumberOfDestinations calls the CoreMIDI framework function MIDIEntityGetNumberOfDestinations.
+func MIDIEntityGetNumberOfDestinations(entity int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEntityGetNumberOfDestinations == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetNumberOfDestinations, _lib, "MIDIEntityGetNumberOfDestinations")
+	}
+	return _fnMIDIEntityGetNumberOfDestinations(entity)
 }
 
-// MIDIEntityGetNumberOfSources calls [raw.MIDIEntityGetNumberOfSources] (C function MIDIEntityGetNumberOfSources).
-func MIDIEntityGetNumberOfSources(entity uint) uint {
-	return raw.MIDIEntityGetNumberOfSources(entity)
-}
+var _fnMIDIEntityGetNumberOfSources func(int) int
 
-// MIDIEntityGetSource calls [raw.MIDIEntityGetSource] (C function MIDIEntityGetSource).
-func MIDIEntityGetSource(entity uint, sourceIndex0 uint) uint {
-	return raw.MIDIEntityGetSource(entity, sourceIndex0)
+// MIDIEntityGetNumberOfSources calls the CoreMIDI framework function MIDIEntityGetNumberOfSources.
+func MIDIEntityGetNumberOfSources(entity int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEntityGetNumberOfSources == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetNumberOfSources, _lib, "MIDIEntityGetNumberOfSources")
+	}
+	return _fnMIDIEntityGetNumberOfSources(entity)
 }
 
-// MIDIEventListAdd calls [raw.MIDIEventListAdd] (C function MIDIEventListAdd).
-func MIDIEventListAdd(evtlist *raw.MIDIEventList, listSize uint, curPacket *raw.MIDIEventPacket, time_ uint64, wordCount uint, words *uint) *raw.MIDIEventPacket {
-	return raw.MIDIEventListAdd(evtlist, listSize, curPacket, time_, wordCount, words)
-}
+var _fnMIDIEntityGetSource func(int, int) int
 
-// MIDIEventListForEachEvent calls [raw.MIDIEventListForEachEvent] (C function MIDIEventListForEachEvent).
-func MIDIEventListForEachEvent(evtlist *raw.MIDIEventList, visitor unsafe.Pointer, visitorContext unsafe.Pointer) {
-	raw.MIDIEventListForEachEvent(evtlist, visitor, visitorContext)
+// MIDIEntityGetSource calls the CoreMIDI framework function MIDIEntityGetSource.
+func MIDIEntityGetSource(entity int, sourceIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEntityGetSource == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetSource, _lib, "MIDIEntityGetSource")
+	}
+	return _fnMIDIEntityGetSource(entity, sourceIndex0)
 }
 
-// MIDIEventListInit calls [raw.MIDIEventListInit] (C function MIDIEventListInit).
-func MIDIEventListInit(evtlist *raw.MIDIEventList, protocol MIDIProtocolID) *raw.MIDIEventPacket {
-	return raw.MIDIEventListInit(evtlist, raw.MIDIProtocolID(protocol))
-}
+var _fnMIDIGetDestination func(int) int
 
-// MIDIEventPacketNext calls [raw.MIDIEventPacketNext] (C function MIDIEventPacketNext).
-func MIDIEventPacketNext(pkt *raw.MIDIEventPacket) *raw.MIDIEventPacket {
-	return raw.MIDIEventPacketNext(pkt)
+// MIDIGetDestination calls the CoreMIDI framework function MIDIGetDestination.
+func MIDIGetDestination(destIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetDestination == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetDestination, _lib, "MIDIGetDestination")
+	}
+	return _fnMIDIGetDestination(destIndex0)
 }
 
-// MIDIGetDestination calls [raw.MIDIGetDestination] (C function MIDIGetDestination).
-func MIDIGetDestination(destIndex0 uint) uint {
-	return raw.MIDIGetDestination(destIndex0)
-}
+var _fnMIDIGetDevice func(int) int
 
-// MIDIGetDevice calls [raw.MIDIGetDevice] (C function MIDIGetDevice).
-func MIDIGetDevice(deviceIndex0 uint) uint {
-	return raw.MIDIGetDevice(deviceIndex0)
+// MIDIGetDevice calls the CoreMIDI framework function MIDIGetDevice.
+func MIDIGetDevice(deviceIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetDevice, _lib, "MIDIGetDevice")
+	}
+	return _fnMIDIGetDevice(deviceIndex0)
 }
 
-// MIDIGetDriverDeviceList calls [raw.MIDIGetDriverDeviceList] (C function MIDIGetDriverDeviceList).
-func MIDIGetDriverDeviceList(driver *raw.MIDIDriverInterface) uint {
-	return raw.MIDIGetDriverDeviceList(driver)
-}
+var _fnMIDIGetDriverIORunLoop func() objc.ID
 
-// MIDIGetDriverIORunLoop calls [raw.MIDIGetDriverIORunLoop] (C function MIDIGetDriverIORunLoop).
-func MIDIGetDriverIORunLoop() unsafe.Pointer {
-	return raw.MIDIGetDriverIORunLoop()
+// MIDIGetDriverIORunLoop calls the CoreMIDI framework function MIDIGetDriverIORunLoop.
+func MIDIGetDriverIORunLoop() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetDriverIORunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetDriverIORunLoop, _lib, "MIDIGetDriverIORunLoop")
+	}
+	_ret := _fnMIDIGetDriverIORunLoop()
+	return obj.Wrap(_ret)
 }
 
-// MIDIGetExternalDevice calls [raw.MIDIGetExternalDevice] (C function MIDIGetExternalDevice).
-func MIDIGetExternalDevice(deviceIndex0 uint) uint {
-	return raw.MIDIGetExternalDevice(deviceIndex0)
-}
+var _fnMIDIGetExternalDevice func(int) int
 
-// MIDIGetNumberOfDestinations calls [raw.MIDIGetNumberOfDestinations] (C function MIDIGetNumberOfDestinations).
-func MIDIGetNumberOfDestinations() uint {
-	return raw.MIDIGetNumberOfDestinations()
+// MIDIGetExternalDevice calls the CoreMIDI framework function MIDIGetExternalDevice.
+func MIDIGetExternalDevice(deviceIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetExternalDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetExternalDevice, _lib, "MIDIGetExternalDevice")
+	}
+	return _fnMIDIGetExternalDevice(deviceIndex0)
 }
 
-// MIDIGetNumberOfDevices calls [raw.MIDIGetNumberOfDevices] (C function MIDIGetNumberOfDevices).
-func MIDIGetNumberOfDevices() uint {
-	return raw.MIDIGetNumberOfDevices()
-}
+var _fnMIDIGetNumberOfDestinations func() int
 
-// MIDIGetNumberOfExternalDevices calls [raw.MIDIGetNumberOfExternalDevices] (C function MIDIGetNumberOfExternalDevices).
-func MIDIGetNumberOfExternalDevices() uint {
-	return raw.MIDIGetNumberOfExternalDevices()
+// MIDIGetNumberOfDestinations calls the CoreMIDI framework function MIDIGetNumberOfDestinations.
+func MIDIGetNumberOfDestinations() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetNumberOfDestinations == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetNumberOfDestinations, _lib, "MIDIGetNumberOfDestinations")
+	}
+	return _fnMIDIGetNumberOfDestinations()
 }
 
-// MIDIGetNumberOfSources calls [raw.MIDIGetNumberOfSources] (C function MIDIGetNumberOfSources).
-func MIDIGetNumberOfSources() uint {
-	return raw.MIDIGetNumberOfSources()
-}
+var _fnMIDIGetNumberOfDevices func() int
 
-// MIDIGetSource calls [raw.MIDIGetSource] (C function MIDIGetSource).
-func MIDIGetSource(sourceIndex0 uint) uint {
-	return raw.MIDIGetSource(sourceIndex0)
+// MIDIGetNumberOfDevices calls the CoreMIDI framework function MIDIGetNumberOfDevices.
+func MIDIGetNumberOfDevices() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetNumberOfDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetNumberOfDevices, _lib, "MIDIGetNumberOfDevices")
+	}
+	return _fnMIDIGetNumberOfDevices()
 }
 
-// MIDIInputPortCreate calls [raw.MIDIInputPortCreate] (C function MIDIInputPortCreate).
-func MIDIInputPortCreate(client uint, portName unsafe.Pointer, readProc unsafe.Pointer, refCon unsafe.Pointer, outPort *uint) int {
-	return raw.MIDIInputPortCreate(client, portName, readProc, refCon, outPort)
-}
+var _fnMIDIGetNumberOfExternalDevices func() int
 
-// MIDIInputPortCreateWithBlock calls [raw.MIDIInputPortCreateWithBlock] (C function MIDIInputPortCreateWithBlock).
-func MIDIInputPortCreateWithBlock(client uint, portName unsafe.Pointer, outPort *uint, readBlock func(*raw.MIDIPacketList, unsafe.Pointer)) int {
-	return raw.MIDIInputPortCreateWithBlock(client, portName, outPort, readBlock)
+// MIDIGetNumberOfExternalDevices calls the CoreMIDI framework function MIDIGetNumberOfExternalDevices.
+func MIDIGetNumberOfExternalDevices() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetNumberOfExternalDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetNumberOfExternalDevices, _lib, "MIDIGetNumberOfExternalDevices")
+	}
+	return _fnMIDIGetNumberOfExternalDevices()
 }
 
-// MIDIInputPortCreateWithProtocol calls [raw.MIDIInputPortCreateWithProtocol] (C function MIDIInputPortCreateWithProtocol).
-func MIDIInputPortCreateWithProtocol(client uint, portName unsafe.Pointer, protocol MIDIProtocolID, outPort *uint, receiveBlock func(*raw.MIDIEventList, unsafe.Pointer)) int {
-	return raw.MIDIInputPortCreateWithProtocol(client, portName, raw.MIDIProtocolID(protocol), outPort, receiveBlock)
-}
+var _fnMIDIGetNumberOfSources func() int
 
-// MIDIJitterReductionClockMessage calls [raw.MIDIJitterReductionClockMessage] (C function MIDIJitterReductionClockMessage).
-func MIDIJitterReductionClockMessage(senderClockTime uint16) uint {
-	return raw.MIDIJitterReductionClockMessage(senderClockTime)
+// MIDIGetNumberOfSources calls the CoreMIDI framework function MIDIGetNumberOfSources.
+func MIDIGetNumberOfSources() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetNumberOfSources == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetNumberOfSources, _lib, "MIDIGetNumberOfSources")
+	}
+	return _fnMIDIGetNumberOfSources()
 }
 
-// MIDIJitterReductionTimestampMessage calls [raw.MIDIJitterReductionTimestampMessage] (C function MIDIJitterReductionTimestampMessage).
-func MIDIJitterReductionTimestampMessage(senderClockTimestamp uint16) uint {
-	return raw.MIDIJitterReductionTimestampMessage(senderClockTimestamp)
-}
+var _fnMIDIGetSource func(int) int
 
-// MIDIMessageTypeForUPWord calls [raw.MIDIMessageTypeForUPWord] (C function MIDIMessageTypeForUPWord).
-func MIDIMessageTypeForUPWord(word uint) MIDIMessageType {
-	return MIDIMessageType(raw.MIDIMessageTypeForUPWord(word))
+// MIDIGetSource calls the CoreMIDI framework function MIDIGetSource.
+func MIDIGetSource(sourceIndex0 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetSource == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetSource, _lib, "MIDIGetSource")
+	}
+	return _fnMIDIGetSource(sourceIndex0)
 }
 
-// MIDINoOpMessage calls [raw.MIDINoOpMessage] (C function MIDINoOpMessage).
-func MIDINoOpMessage() uint {
-	return raw.MIDINoOpMessage()
-}
+var _fnMIDIJitterReductionClockMessage func(uint16) int
 
-// MIDIPacketListAdd calls [raw.MIDIPacketListAdd] (C function MIDIPacketListAdd).
-func MIDIPacketListAdd(pktlist *raw.MIDIPacketList, listSize uint, curPacket *raw.MIDIPacket, time_ uint64, nData uint, data *uint8) *raw.MIDIPacket {
-	return raw.MIDIPacketListAdd(pktlist, listSize, curPacket, time_, nData, data)
+// MIDIJitterReductionClockMessage calls the CoreMIDI framework function MIDIJitterReductionClockMessage.
+func MIDIJitterReductionClockMessage(senderClockTime uint16) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIJitterReductionClockMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIJitterReductionClockMessage, _lib, "MIDIJitterReductionClockMessage")
+	}
+	return _fnMIDIJitterReductionClockMessage(senderClockTime)
 }
 
-// MIDIPacketListInit calls [raw.MIDIPacketListInit] (C function MIDIPacketListInit).
-func MIDIPacketListInit(pktlist *raw.MIDIPacketList) *raw.MIDIPacket {
-	return raw.MIDIPacketListInit(pktlist)
-}
+var _fnMIDIJitterReductionTimestampMessage func(uint16) int
 
-// MIDIPacketNext calls [raw.MIDIPacketNext] (C function MIDIPacketNext).
-func MIDIPacketNext(pkt *raw.MIDIPacket) *raw.MIDIPacket {
-	return raw.MIDIPacketNext(pkt)
+// MIDIJitterReductionTimestampMessage calls the CoreMIDI framework function MIDIJitterReductionTimestampMessage.
+func MIDIJitterReductionTimestampMessage(senderClockTimestamp uint16) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIJitterReductionTimestampMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIJitterReductionTimestampMessage, _lib, "MIDIJitterReductionTimestampMessage")
+	}
+	return _fnMIDIJitterReductionTimestampMessage(senderClockTimestamp)
 }
 
-// MIDIPortConnectSource calls [raw.MIDIPortConnectSource] (C function MIDIPortConnectSource).
-func MIDIPortConnectSource(port uint, source uint, connRefCon unsafe.Pointer) int {
-	return raw.MIDIPortConnectSource(port, source, connRefCon)
-}
+var _fnMIDIMessageTypeForUPWord func(int) MessageType
 
-// MIDIThruConnectionParamsInitialize calls [raw.MIDIThruConnectionParamsInitialize] (C function MIDIThruConnectionParamsInitialize).
-func MIDIThruConnectionParamsInitialize(inConnectionParams *raw.MIDIThruConnectionParams) {
-	raw.MIDIThruConnectionParamsInitialize(inConnectionParams)
+// MIDIMessageTypeForUPWord calls the CoreMIDI framework function MIDIMessageTypeForUPWord.
+func MIDIMessageTypeForUPWord(word int) MessageType {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIMessageTypeForUPWord == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIMessageTypeForUPWord, _lib, "MIDIMessageTypeForUPWord")
+	}
+	return _fnMIDIMessageTypeForUPWord(word)
 }
 
-// MIDIThruConnectionParamsSize calls [raw.MIDIThruConnectionParamsSize] (C function MIDIThruConnectionParamsSize).
-func MIDIThruConnectionParamsSize(ptr *raw.MIDIThruConnectionParams) uint {
-	return raw.MIDIThruConnectionParamsSize(ptr)
-}
+var _fnMIDINoOpMessage func() int
 
-// MIDITicksSinceLastEventMessage calls [raw.MIDITicksSinceLastEventMessage] (C function MIDITicksSinceLastEventMessage).
-func MIDITicksSinceLastEventMessage(ticksSinceLastEvent uint) uint {
-	return raw.MIDITicksSinceLastEventMessage(ticksSinceLastEvent)
+// MIDINoOpMessage calls the CoreMIDI framework function MIDINoOpMessage.
+func MIDINoOpMessage() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDINoOpMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDINoOpMessage, _lib, "MIDINoOpMessage")
+	}
+	return _fnMIDINoOpMessage()
 }
 
-// BuiltinMemcpyChk calls [raw.BuiltinMemcpyChk] (C function __builtin___memcpy_chk).
-func BuiltinMemcpyChk(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint, arg4 uint) unsafe.Pointer {
-	return raw.BuiltinMemcpyChk(arg, arg2, arg3, arg4)
-}
+var _fnMIDITicksSinceLastEventMessage func(int) int
 
-// BuiltinObjectSize calls [raw.BuiltinObjectSize] (C function __builtin_object_size).
-func BuiltinObjectSize(arg unsafe.Pointer, arg2 int) uint {
-	return raw.BuiltinObjectSize(arg, arg2)
+// MIDITicksSinceLastEventMessage calls the CoreMIDI framework function MIDITicksSinceLastEventMessage.
+func MIDITicksSinceLastEventMessage(ticksSinceLastEvent int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDITicksSinceLastEventMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDITicksSinceLastEventMessage, _lib, "MIDITicksSinceLastEventMessage")
+	}
+	return _fnMIDITicksSinceLastEventMessage(ticksSinceLastEvent)
 }

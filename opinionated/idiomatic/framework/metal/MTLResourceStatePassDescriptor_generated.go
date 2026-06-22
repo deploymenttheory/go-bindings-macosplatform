@@ -5,50 +5,82 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration for a resource state pass, used to create a resource state command encoder.
+// ResourceStatePassDescriptor is an idiomatic wrapper over the Objective-C class MTLResourceStatePassDescriptor.
 //
-// ResourceStatePassDescriptor wraps [raw.MTLResourceStatePassDescriptor] with a fluent Go API.
+// A configuration for a resource state pass, used to create a resource state command encoder.
 type ResourceStatePassDescriptor struct {
-	inner *raw.MTLResourceStatePassDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLResourceStatePassDescriptor].
-func (x *ResourceStatePassDescriptor) Unwrap() *raw.MTLResourceStatePassDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ResourceStatePassDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ResourceStatePassDescriptorFromID adopts an existing object pointer as a ResourceStatePassDescriptor (nil for 0).
+// ResourceStatePassDescriptorFromID adopts an existing Objective-C object as a ResourceStatePassDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ResourceStatePassDescriptorFromID(id objc.ID) *ResourceStatePassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ResourceStatePassDescriptor{inner: raw.MTLResourceStatePassDescriptorFromID(id)}
+	x := &ResourceStatePassDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewResourceStatePassDescriptor creates a new [ResourceStatePassDescriptor].
-func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLResourceStatePassDescriptor")), objc.RegisterName("new"))
-	return &ResourceStatePassDescriptor{inner: raw.MTLResourceStatePassDescriptorFromID(_id)}
-}
-
-// SampleBufferAttachments calls the underlying SampleBufferAttachments.
-func (x *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
-	_r := x.inner.SampleBufferAttachments()
-	if _r == nil {
+// resourceStatePassDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ResourceStatePassDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func resourceStatePassDescriptorAdopt(id objc.ID) *ResourceStatePassDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return &ResourceStatePassSampleBufferAttachmentDescriptorArray{inner: _r}
+	x := &ResourceStatePassDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ResourceStatePassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ResourceStatePassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ResourceStatePassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ResourceStatePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewResourceStatePassDescriptor creates a new ResourceStatePassDescriptor.
+func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLResourceStatePassDescriptor")), objc.RegisterName("new"))
+	return resourceStatePassDescriptorAdopt(_id)
+}
+
+// SampleBufferAttachments wraps the corresponding Objective-C method.
+func (x *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+	return ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
 
 // ResourceStatePassDescriptorable is the interface implemented by [ResourceStatePassDescriptor], for mocking and DI.
 type ResourceStatePassDescriptorable interface {
-	Unwrap() *raw.MTLResourceStatePassDescriptor
+	obj.Object
 	SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray
 }
 

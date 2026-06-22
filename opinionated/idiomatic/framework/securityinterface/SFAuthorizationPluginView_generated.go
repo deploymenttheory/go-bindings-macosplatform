@@ -5,166 +5,151 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Allows authorization plug-in developers to create a custom view their plug-in can display.
+// AuthorizationPluginView is an idiomatic wrapper over the Objective-C class SFAuthorizationPluginView.
 //
-// AuthorizationPluginView wraps [raw.SFAuthorizationPluginView] with a fluent Go API.
+// Allows authorization plug-in developers to create a custom view their plug-in can display.
 type AuthorizationPluginView struct {
-	inner *raw.SFAuthorizationPluginView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFAuthorizationPluginView].
-func (x *AuthorizationPluginView) Unwrap() *raw.SFAuthorizationPluginView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPluginView) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPluginViewFromID adopts an existing object pointer as a AuthorizationPluginView (nil for 0).
+// AuthorizationPluginViewFromID adopts an existing Objective-C object as a AuthorizationPluginView
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPluginViewFromID(id objc.ID) *AuthorizationPluginView {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPluginView{inner: raw.SFAuthorizationPluginViewFromID(id)}
+	x := &AuthorizationPluginView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new authorization plug-in view with the specified callbacks and authorization engine handle.
-//
-// NewAuthorizationPluginViewWithCallbacksAndEngineRef creates a new [AuthorizationPluginView].
-func NewAuthorizationPluginViewWithCallbacksAndEngineRef(callbacks unsafe.Pointer, engineRef unsafe.Pointer) *AuthorizationPluginView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFAuthorizationPluginView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallbacks:andEngineRef:"), callbacks, engineRef)
-	return &AuthorizationPluginView{inner: raw.SFAuthorizationPluginViewFromID(_id)}
+// authorizationPluginViewAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPluginView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPluginViewAdopt(id objc.ID) *AuthorizationPluginView {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPluginView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the authorization engine handle with which this instance was initialized.
-//
-// EngineRef calls the underlying EngineRef.
-func (x *AuthorizationPluginView) EngineRef() unsafe.Pointer {
-	return x.inner.EngineRef()
+// Description returns the object's -description text.
+func (x *AuthorizationPluginView) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the authorization callbacks structure with which this instance was initialized.
-//
-// Callbacks calls the underlying Callbacks.
-func (x *AuthorizationPluginView) Callbacks() unsafe.Pointer {
-	return x.inner.Callbacks()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPluginView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Tells the authorization plug-in that the user pressed a button in the custom view.
-//
-// ButtonPressed calls the underlying ButtonPressed.
-func (x *AuthorizationPluginView) ButtonPressed(inButtonType SFButtonType) {
-	x.inner.ButtonPressed(raw.SFButtonType(inButtonType))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPluginView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns the last error that occurred during evaluation.
-//
-// LastError calls the underlying LastError.
-func (x *AuthorizationPluginView) LastError() unsafe.Pointer {
-	return x.inner.LastError()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPluginView) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Tells the authorization plug-in when its user interface has become active.
-//
-// DidActivate calls the underlying DidActivate.
+// NewAuthorizationPluginView creates a new AuthorizationPluginView.
+func NewAuthorizationPluginView() *AuthorizationPluginView {
+	_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationPluginView")), objc.RegisterName("new"))
+	return authorizationPluginViewAdopt(_id)
+}
+
+// ButtonPressed tells the authorization plug-in that the user pressed a button in the custom view.
+func (x *AuthorizationPluginView) ButtonPressed(inButtonType ButtonType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonPressed:"), inButtonType)
+}
+
+// DidActivate tells the authorization plug-in when its user interface has become active.
 func (x *AuthorizationPluginView) DidActivate() {
-	x.inner.DidActivate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didActivate"))
 }
 
-// Tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.
-//
-// WillActivateWithUser calls the underlying WillActivateWithUser.
-func (x *AuthorizationPluginView) WillActivateWithUser(inUserInformation *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.WillActivateWithUser(inUserInformation)
+// WillActivateWithUser tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.
+func (x *AuthorizationPluginView) WillActivateWithUser(inUserInformation obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willActivateWithUser:"), objref.IDOf(inUserInformation))
 }
 
-// Tells the authorization plug-in that its user interface has been deactivated.
-//
-// DidDeactivate calls the underlying DidDeactivate.
+// DidDeactivate tells the authorization plug-in that its user interface has been deactivated.
 func (x *AuthorizationPluginView) DidDeactivate() {
-	x.inner.DidDeactivate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didDeactivate"))
 }
 
-// Returns the first view in the keyboard loop of the view.
-//
-// FirstKeyView calls the underlying FirstKeyView.
-func (x *AuthorizationPluginView) FirstKeyView() *appkit.NSView {
-	return x.inner.FirstKeyView()
+// FirstKeyView returns the first view in the keyboard loop of the view.
+func (x *AuthorizationPluginView) FirstKeyView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstKeyView"))
+	return obj.Wrap(_r)
 }
 
-// Returns the view that should get focus for keyboard events.
-//
-// FirstResponder calls the underlying FirstResponder.
-func (x *AuthorizationPluginView) FirstResponder() *appkit.NSResponder {
-	return x.inner.FirstResponder()
+// FirstResponder returns the view that should get focus for keyboard events.
+func (x *AuthorizationPluginView) FirstResponder() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstResponder"))
+	return obj.Wrap(_r)
 }
 
-// Returns the last view in the keyboard loop of the view.
-//
-// LastKeyView calls the underlying LastKeyView.
-func (x *AuthorizationPluginView) LastKeyView() *appkit.NSView {
-	return x.inner.LastKeyView()
+// LastKeyView returns the last view in the keyboard loop of the view.
+func (x *AuthorizationPluginView) LastKeyView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastKeyView"))
+	return obj.Wrap(_r)
 }
 
-// Enables or disables the controls in the authorization plug-in’s view.
-//
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled enables or disables the controls in the authorization plug-in’s view.
 func (x *AuthorizationPluginView) SetEnabled(inEnabled bool) {
-	x.inner.SetEnabled(inEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), inEnabled)
 }
 
-// Returns the appropriate view object for the specified view type.
-//
-// ViewForType calls the underlying ViewForType.
-func (x *AuthorizationPluginView) ViewForType(inType SFViewType) *appkit.NSView {
-	return x.inner.ViewForType(raw.SFViewType(inType))
+// ViewForType returns the appropriate view object for the specified view type.
+func (x *AuthorizationPluginView) ViewForType(inType ViewType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewForType:"), inType)
+	return obj.Wrap(_r)
 }
 
-// Displays the user interface provided by the authorization plug-in view subclass.
-//
-// DisplayView calls the underlying DisplayView.
+// DisplayView displays the user interface provided by the authorization plug-in view subclass.
 func (x *AuthorizationPluginView) DisplayView() {
-	x.inner.DisplayView()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayView"))
 }
 
-// Enables or disables a button in the authorization plug-in’s user interface.
-//
-// SetButtonEnabled calls the underlying SetButtonEnabled.
-func (x *AuthorizationPluginView) SetButtonEnabled(inButtonType SFButtonType, inEnabled bool) {
-	x.inner.SetButtonEnabled(raw.SFButtonType(inButtonType), inEnabled)
+// SetButtonEnabled enables or disables a button in the authorization plug-in’s user interface.
+func (x *AuthorizationPluginView) SetButtonEnabled(inButtonType ButtonType, inEnabled bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButton:enabled:"), inButtonType, inEnabled)
 }
 
-// Tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.
-//
-// UpdateView calls the underlying UpdateView.
+// UpdateView tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.
 func (x *AuthorizationPluginView) UpdateView() {
-	x.inner.UpdateView()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateView"))
 }
 
 // AuthorizationPluginViewable is the interface implemented by [AuthorizationPluginView], for mocking and DI.
 type AuthorizationPluginViewable interface {
-	Unwrap() *raw.SFAuthorizationPluginView
-	EngineRef() unsafe.Pointer
-	Callbacks() unsafe.Pointer
-	ButtonPressed(inButtonType SFButtonType)
-	LastError() unsafe.Pointer
+	obj.Object
+	ButtonPressed(inButtonType ButtonType)
 	DidActivate()
-	WillActivateWithUser(inUserInformation *foundation.NSDictionary[objc.ID, objc.ID])
+	WillActivateWithUser(inUserInformation obj.Object)
 	DidDeactivate()
-	FirstKeyView() *appkit.NSView
-	FirstResponder() *appkit.NSResponder
-	LastKeyView() *appkit.NSView
+	FirstKeyView() obj.Object
+	FirstResponder() obj.Object
+	LastKeyView() obj.Object
 	SetEnabled(inEnabled bool)
-	ViewForType(inType SFViewType) *appkit.NSView
+	ViewForType(inType ViewType) obj.Object
 	DisplayView()
-	SetButtonEnabled(inButtonType SFButtonType, inEnabled bool)
+	SetButtonEnabled(inButtonType ButtonType, inEnabled bool)
 	UpdateView()
 }
 

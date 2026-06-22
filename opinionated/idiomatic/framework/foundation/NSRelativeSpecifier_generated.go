@@ -5,176 +5,162 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specifier that indicates an object in a collection by its position relative to another object.
+// RelativeSpecifier is an idiomatic wrapper over the Objective-C class NSRelativeSpecifier.
 //
-// RelativeSpecifier wraps [raw.NSRelativeSpecifier] with a fluent Go API.
+// It embeds [ScriptObjectSpecifier], promoting that type's methods.
+//
+// A specifier that indicates an object in a collection by its position relative to another object.
 type RelativeSpecifier struct {
-	inner *raw.NSRelativeSpecifier
+	ScriptObjectSpecifier
 }
 
-// Unwrap returns the underlying [raw.NSRelativeSpecifier].
-func (x *RelativeSpecifier) Unwrap() *raw.NSRelativeSpecifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RelativeSpecifier) ID() objc.ID { return x.inner.Ptr() }
-
-// RelativeSpecifierFromID adopts an existing object pointer as a RelativeSpecifier (nil for 0).
+// RelativeSpecifierFromID adopts an existing Objective-C object as a RelativeSpecifier
+// (nil for 0), retaining it and registering a release finalizer.
 func RelativeSpecifierFromID(id objc.ID) *RelativeSpecifier {
 	if id == 0 {
 		return nil
 	}
-	return &RelativeSpecifier{inner: raw.NSRelativeSpecifierFromID(id)}
-}
-
-// NewRelativeSpecifierWithCoder creates a new [RelativeSpecifier].
-func NewRelativeSpecifierWithCoder(inCoder *raw.NSCoder) *RelativeSpecifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRelativeSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), inCoder.Ptr())
-	return &RelativeSpecifier{inner: raw.NSRelativeSpecifierFromID(_id)}
-}
-
-// Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and initializes the relative position and base specifier to relPos and baseSpecifier.
-//
-// NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier creates a new [RelativeSpecifier].
-func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, relPos NSRelativePosition, baseSpecifier *raw.NSScriptObjectSpecifier) *RelativeSpecifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRelativeSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:"), classDesc.Ptr(), container.Ptr(), foundation.NSStringStringWithUTF8String(property).Ptr(), raw.NSRelativePosition(relPos), baseSpecifier.Ptr())
-	return &RelativeSpecifier{inner: raw.NSRelativeSpecifierFromID(_id)}
-}
-
-// Sets the relative position encapsulated by the receiver.
-//
-// WithRelativePosition sets the relativePosition property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithRelativePosition(relativePosition NSRelativePosition) *RelativeSpecifier {
-	x.inner.SetRelativePosition(raw.NSRelativePosition(relativePosition))
+	x := &RelativeSpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Sets the specifier for the base object.
-//
-// WithBaseSpecifier sets the baseSpecifier property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
-	x.inner.SetBaseSpecifier(baseSpecifier.asScriptObjectSpecifier())
-	return x
-}
-
-// Sets the receiver’s child reference.
-//
-// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
-	return x
-}
-
-// Sets the container specifier of the receiver.
-//
-// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
-	return x
-}
-
-// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
-//
-// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
-	return x
-}
-
-// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
-//
-// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
-	return x
-}
-
-// Sets the key of the receiver.
-//
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithKey(key string) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
-	return x
-}
-
-// Sets the class description of the receiver’s container specifier to a given specifier.
-//
-// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
-	return x
-}
-
-// Sets the value of the evaluation error.
-//
-// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// RelativePosition calls the underlying RelativePosition.
-func (x *RelativeSpecifier) RelativePosition() NSRelativePosition {
-	return NSRelativePosition(x.inner.RelativePosition())
-}
-
-// SetRelativePosition calls the underlying SetRelativePosition.
-func (x *RelativeSpecifier) SetRelativePosition(relativePosition NSRelativePosition) {
-	x.inner.SetRelativePosition(raw.NSRelativePosition(relativePosition))
-}
-
-// BaseSpecifier calls the underlying BaseSpecifier.
-func (x *RelativeSpecifier) BaseSpecifier() *ScriptObjectSpecifier {
-	_r := x.inner.BaseSpecifier()
-	if _r == nil {
+// relativeSpecifierAdopt wraps an Objective-C object that this code just created as a
+// RelativeSpecifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func relativeSpecifierAdopt(id objc.ID) *RelativeSpecifier {
+	if id == 0 {
 		return nil
 	}
-	return &ScriptObjectSpecifier{inner: _r}
+	x := &RelativeSpecifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetBaseSpecifier calls the underlying SetBaseSpecifier.
-func (x *RelativeSpecifier) SetBaseSpecifier(baseSpecifier *raw.NSScriptObjectSpecifier) {
-	x.inner.SetBaseSpecifier(baseSpecifier)
+// NewRelativeSpecifierWithCoder creates a new RelativeSpecifier.
+func NewRelativeSpecifierWithCoder(inCoder *Coder) *RelativeSpecifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRelativeSpecifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
+	return relativeSpecifierAdopt(_id)
 }
 
-func (x *RelativeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
-	return &x.inner.NSScriptObjectSpecifier
+// NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and initializes the relative position and base specifier to relPos and baseSpecifier.
+func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, relPos RelativePosition, baseSpecifier *ScriptObjectSpecifier) *RelativeSpecifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRelativeSpecifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), relPos, objref.IDOf(baseSpecifier))
+	return relativeSpecifierAdopt(_id)
 }
 
-func (x *RelativeSpecifier) asObject() *raw.NSObject {
-	return &x.inner.NSScriptObjectSpecifier.NSObject
+// WithRelativePosition sets the relative position encapsulated by the receiver.
+func (x *RelativeSpecifier) WithRelativePosition(relativePosition RelativePosition) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePosition:"), relativePosition)
+	return x
+}
+
+// WithBaseSpecifier sets the specifier for the base object.
+func (x *RelativeSpecifier) WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseSpecifier:"), objref.IDOf(baseSpecifier))
+	return x
+}
+
+// WithChildSpecifier sets the receiver’s child reference.
+func (x *RelativeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
+	return x
+}
+
+// WithContainerSpecifier sets the container specifier of the receiver.
+func (x *RelativeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+func (x *RelativeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+func (x *RelativeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key of the receiver.
+func (x *RelativeSpecifier) WithKey(key StringProvider) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
+	return x
+}
+
+// WithContainerClassDescription sets the class description of the receiver’s container specifier to a given specifier.
+func (x *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
+	return x
+}
+
+// WithEvaluationErrorNumber sets the value of the evaluation error.
+func (x *RelativeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *RelativeSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *RelativeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// RelativePosition wraps the corresponding Objective-C method.
+func (x *RelativeSpecifier) RelativePosition() RelativePosition {
+	_r := objc.Send[RelativePosition](objref.IDOf(x), objc.RegisterName("relativePosition"))
+	return _r
+}
+
+// SetRelativePosition wraps the corresponding Objective-C method.
+func (x *RelativeSpecifier) SetRelativePosition(relativePosition RelativePosition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePosition:"), relativePosition)
+}
+
+// BaseSpecifier wraps the corresponding Objective-C method.
+func (x *RelativeSpecifier) BaseSpecifier() *ScriptObjectSpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseSpecifier"))
+	return ScriptObjectSpecifierFromID(_r)
+}
+
+// SetBaseSpecifier wraps the corresponding Objective-C method.
+func (x *RelativeSpecifier) SetBaseSpecifier(baseSpecifier *ScriptObjectSpecifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseSpecifier:"), objref.IDOf(baseSpecifier))
 }
 
 // RelativeSpecifierable is the interface implemented by [RelativeSpecifier], for mocking and DI.
 type RelativeSpecifierable interface {
-	Unwrap() *raw.NSRelativeSpecifier
-	WithRelativePosition(relativePosition NSRelativePosition) *RelativeSpecifier
+	obj.Object
+	WithRelativePosition(relativePosition RelativePosition) *RelativeSpecifier
 	WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
 	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
 	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier
-	WithKey(key string) *RelativeSpecifier
+	WithKey(key StringProvider) *RelativeSpecifier
 	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeSpecifier
-	RelativePosition() NSRelativePosition
-	SetRelativePosition(relativePosition NSRelativePosition)
+	WithScriptingProperties(scriptingProperties obj.Object) *RelativeSpecifier
+	RelativePosition() RelativePosition
+	SetRelativePosition(relativePosition RelativePosition)
 	BaseSpecifier() *ScriptObjectSpecifier
-	SetBaseSpecifier(baseSpecifier *raw.NSScriptObjectSpecifier)
+	SetBaseSpecifier(baseSpecifier *ScriptObjectSpecifier)
 }
 
 var _ RelativeSpecifierable = (*RelativeSpecifier)(nil)
+
+var _ ScriptObjectSpecifierProvider = (*RelativeSpecifier)(nil)

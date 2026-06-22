@@ -5,90 +5,63 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNInstanceNormalizationGradientState wraps [raw.MPSCNNInstanceNormalizationGradientState] with a fluent Go API.
+// CNNInstanceNormalizationGradientState is an idiomatic wrapper over the Objective-C class MPSCNNInstanceNormalizationGradientState.
+//
+// It embeds [NNGradientState], promoting that type's methods.
 type CNNInstanceNormalizationGradientState struct {
-	inner *raw.MPSCNNInstanceNormalizationGradientState
+	NNGradientState
 }
 
-// Unwrap returns the underlying [raw.MPSCNNInstanceNormalizationGradientState].
-func (x *CNNInstanceNormalizationGradientState) Unwrap() *raw.MPSCNNInstanceNormalizationGradientState {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNInstanceNormalizationGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNInstanceNormalizationGradientStateFromID adopts an existing object pointer as a CNNInstanceNormalizationGradientState (nil for 0).
+// CNNInstanceNormalizationGradientStateFromID adopts an existing Objective-C object as a CNNInstanceNormalizationGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNInstanceNormalizationGradientStateFromID(id objc.ID) *CNNInstanceNormalizationGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNInstanceNormalizationGradientState{inner: raw.MPSCNNInstanceNormalizationGradientStateFromID(id)}
+	x := &CNNInstanceNormalizationGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNInstanceNormalizationGradientState creates a new [CNNInstanceNormalizationGradientState].
-func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNInstanceNormalizationGradientState")), objc.RegisterName("new"))
-	return &CNNInstanceNormalizationGradientState{inner: raw.MPSCNNInstanceNormalizationGradientStateFromID(_id)}
-}
-
-// @abstract The MPSCNNInstanceNormalization object that created this state object.
-//
-// InstanceNormalization calls the underlying InstanceNormalization.
-func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *CNNInstanceNormalization {
-	_r := x.inner.InstanceNormalization()
-	if _r == nil {
+// cNNInstanceNormalizationGradientStateAdopt wraps an Objective-C object that this code just created as a
+// CNNInstanceNormalizationGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNInstanceNormalizationGradientStateAdopt(id objc.ID) *CNNInstanceNormalizationGradientState {
+	if id == 0 {
 		return nil
 	}
-	return &CNNInstanceNormalization{inner: _r}
+	x := &CNNInstanceNormalizationGradientState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Return an MTLBuffer object with the state's current gamma values.
-//
-// Gamma calls the underlying Gamma.
-func (x *CNNInstanceNormalizationGradientState) Gamma() metal.MTLBuffer {
-	return x.inner.Gamma()
+// NewCNNInstanceNormalizationGradientState creates a new CNNInstanceNormalizationGradientState.
+func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradientState {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNInstanceNormalizationGradientState")), objc.RegisterName("new"))
+	return cNNInstanceNormalizationGradientStateAdopt(_id)
 }
 
-// @abstract   Return an MTLBuffer object with the state's current beta values..
-//
-// Beta calls the underlying Beta.
-func (x *CNNInstanceNormalizationGradientState) Beta() metal.MTLBuffer {
-	return x.inner.Beta()
-}
-
-// @property   The MTLBuffer containing the gradient values for gamma.
-//
-// GradientForGamma calls the underlying GradientForGamma.
-func (x *CNNInstanceNormalizationGradientState) GradientForGamma() metal.MTLBuffer {
-	return x.inner.GradientForGamma()
-}
-
-// @property   The MTLBuffer containing the gradient values for beta.
-//
-// GradientForBeta calls the underlying GradientForBeta.
-func (x *CNNInstanceNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
-	return x.inner.GradientForBeta()
-}
-
-func (x *CNNInstanceNormalizationGradientState) asNNGradientState() *raw.MPSNNGradientState {
-	return &x.inner.MPSNNGradientState
+// InstanceNormalization the MPSCNNInstanceNormalization object that created this state object.
+func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *CNNInstanceNormalization {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceNormalization"))
+	return CNNInstanceNormalizationFromID(_r)
 }
 
 // CNNInstanceNormalizationGradientStateable is the interface implemented by [CNNInstanceNormalizationGradientState], for mocking and DI.
 type CNNInstanceNormalizationGradientStateable interface {
-	Unwrap() *raw.MPSCNNInstanceNormalizationGradientState
+	obj.Object
 	InstanceNormalization() *CNNInstanceNormalization
-	Gamma() metal.MTLBuffer
-	Beta() metal.MTLBuffer
-	GradientForGamma() metal.MTLBuffer
-	GradientForBeta() metal.MTLBuffer
 }
 
 var _ CNNInstanceNormalizationGradientStateable = (*CNNInstanceNormalizationGradientState)(nil)
+
+var _ NNGradientStateProvider = (*CNNInstanceNormalizationGradientState)(nil)

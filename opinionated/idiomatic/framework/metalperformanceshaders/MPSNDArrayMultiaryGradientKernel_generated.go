@@ -5,95 +5,66 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayMultiaryGradientKernel wraps [raw.MPSNDArrayMultiaryGradientKernel] with a fluent Go API.
+// NDArrayMultiaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryGradientKernel.
+//
+// NDArrayMultiaryGradientKernel is an abstract base — you do not construct it directly. Construct one of [NDArrayBinaryPrimaryGradientKernel], [NDArrayBinarySecondaryGradientKernel], [NDArrayUnaryGradientKernel] and pass it where a NDArrayMultiaryGradientKernel is accepted.
 type NDArrayMultiaryGradientKernel struct {
-	inner *raw.MPSNDArrayMultiaryGradientKernel
+	NDArrayMultiaryBase
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayMultiaryGradientKernel].
-func (x *NDArrayMultiaryGradientKernel) Unwrap() *raw.MPSNDArrayMultiaryGradientKernel {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayMultiaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayMultiaryGradientKernelFromID adopts an existing object pointer as a NDArrayMultiaryGradientKernel (nil for 0).
+// NDArrayMultiaryGradientKernelFromID adopts an existing Objective-C object as a NDArrayMultiaryGradientKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayMultiaryGradientKernelFromID(id objc.ID) *NDArrayMultiaryGradientKernel {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(id)}
-}
-
-// @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device                The device on which the kernel will run @param      count                 The maximum number of NDArrays read by the kernel @param      sourceGradientIndex   The source index for which gradient will be calculated @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
-//
-// NewNDArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex creates a new [NDArrayMultiaryGradientKernel].
-func NewNDArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(device metal.MTLDevice, count uint, sourceGradientIndex uint) *NDArrayMultiaryGradientKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryGradientKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:sourceCount:sourceGradientIndex:"), device, count, sourceGradientIndex)
-	return &NDArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayMultiaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayMultiaryGradientKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayMultiaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// nDArrayMultiaryGradientKernelAdopt wraps an Objective-C object that this code just created as a
+// NDArrayMultiaryGradientKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayMultiaryGradientKernelAdopt(id objc.ID) *NDArrayMultiaryGradientKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayMultiaryGradientKernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayMultiaryGradientKernel) WithLabel(label string) *NDArrayMultiaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// EncodeToCommandBufferSourceArraysSourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraysSourceGradientGradientState.
-func (x *NDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf, sources, gradient, state)
-}
-
-// EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray.
-func (x *NDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf, sources, gradient, state, destination)
-}
-
-func (x *NDArrayMultiaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayMultiaryGradientKernel) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayMultiaryGradientKernelable is the interface implemented by [NDArrayMultiaryGradientKernel], for mocking and DI.
 type NDArrayMultiaryGradientKernelable interface {
-	Unwrap() *raw.MPSNDArrayMultiaryGradientKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryGradientKernel
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryGradientKernel
+	obj.Object
 	WithLabel(label string) *NDArrayMultiaryGradientKernel
-	EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }
 
 var _ NDArrayMultiaryGradientKernelable = (*NDArrayMultiaryGradientKernel)(nil)
+
+// isNDArrayMultiaryGradientKernel marks NDArrayMultiaryGradientKernel — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayMultiaryGradientKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayMultiaryGradientKernel) isNDArrayMultiaryGradientKernel() {}
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayMultiaryGradientKernel)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayMultiaryGradientKernel)(nil)
+
+var _ KernelProvider = (*NDArrayMultiaryGradientKernel)(nil)

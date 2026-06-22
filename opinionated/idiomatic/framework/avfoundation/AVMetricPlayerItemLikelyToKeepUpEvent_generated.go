@@ -5,87 +5,82 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when playback is likely to continue without stalling.
+// MetricPlayerItemLikelyToKeepUpEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemLikelyToKeepUpEvent.
 //
-// MetricPlayerItemLikelyToKeepUpEvent wraps [raw.AVMetricPlayerItemLikelyToKeepUpEvent] with a fluent Go API.
+// MetricPlayerItemLikelyToKeepUpEvent is an abstract base — you do not construct it directly. Construct one of [MetricPlayerItemInitialLikelyToKeepUpEvent] and pass it where a MetricPlayerItemLikelyToKeepUpEvent is accepted.
+//
+// An event that represents when playback is likely to continue without stalling.
 type MetricPlayerItemLikelyToKeepUpEvent struct {
-	inner *raw.AVMetricPlayerItemLikelyToKeepUpEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemLikelyToKeepUpEvent].
-func (x *MetricPlayerItemLikelyToKeepUpEvent) Unwrap() *raw.AVMetricPlayerItemLikelyToKeepUpEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemLikelyToKeepUpEventFromID adopts an existing object pointer as a MetricPlayerItemLikelyToKeepUpEvent (nil for 0).
+// MetricPlayerItemLikelyToKeepUpEventFromID adopts an existing Objective-C object as a MetricPlayerItemLikelyToKeepUpEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemLikelyToKeepUpEventFromID(id objc.ID) *MetricPlayerItemLikelyToKeepUpEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemLikelyToKeepUpEventFromID(id)}
+	x := &MetricPlayerItemLikelyToKeepUpEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemLikelyToKeepUpEvent creates a new [MetricPlayerItemLikelyToKeepUpEvent].
-func NewMetricPlayerItemLikelyToKeepUpEvent() *MetricPlayerItemLikelyToKeepUpEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemLikelyToKeepUpEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemLikelyToKeepUpEventFromID(_id)}
-}
-
-// Returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
-//
-// Variant calls the underlying Variant.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
-	_r := x.inner.Variant()
-	if _r == nil {
+// metricPlayerItemLikelyToKeepUpEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemLikelyToKeepUpEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemLikelyToKeepUpEventAdopt(id objc.ID) *MetricPlayerItemLikelyToKeepUpEvent {
+	if id == 0 {
 		return nil
 	}
-	return &AssetVariant{inner: _r}
+	x := &MetricPlayerItemLikelyToKeepUpEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the total time taken to reach likely to keep up.
-//
-// TimeTaken calls the underlying TimeTaken.
+// Variant returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
+func (x *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variant"))
+	return AssetVariantFromID(_r)
+}
+
+// TimeTaken returns the total time taken to reach likely to keep up.
 func (x *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
-	return x.inner.TimeTaken()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeTaken"))
+	return _r
 }
 
-// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []*foundation.NSValue {
-	arr := x.inner.LoadedTimeRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
-}
-
-func (x *MetricPlayerItemLikelyToKeepUpEvent) asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent {
-	return x.inner
-}
-
-func (x *MetricPlayerItemLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+func (x *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MetricPlayerItemLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemLikelyToKeepUpEvent], for mocking and DI.
 type MetricPlayerItemLikelyToKeepUpEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemLikelyToKeepUpEvent
+	obj.Object
 	Variant() *AssetVariant
 	TimeTaken() float64
-	LoadedTimeRanges() []*foundation.NSValue
+	LoadedTimeRanges() []obj.Object
 }
 
 var _ MetricPlayerItemLikelyToKeepUpEventable = (*MetricPlayerItemLikelyToKeepUpEvent)(nil)
+
+// isMetricPlayerItemLikelyToKeepUpEvent marks MetricPlayerItemLikelyToKeepUpEvent — and, by embedding promotion, its
+// subclasses — as a member of the MetricPlayerItemLikelyToKeepUpEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetricPlayerItemLikelyToKeepUpEvent) isMetricPlayerItemLikelyToKeepUpEvent() {}
+
+var _ MetricPlayerItemLikelyToKeepUpEventProvider = (*MetricPlayerItemLikelyToKeepUpEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemLikelyToKeepUpEvent)(nil)

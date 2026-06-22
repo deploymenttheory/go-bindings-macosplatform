@@ -5,10 +5,11 @@
 package mediaextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// RAWProcessingParameterProvider is implemented by RAWProcessingParameter and any idiomatic type wrapping a MERAWProcessingParameter subclass.
+// RAWProcessingParameterProvider is accepted wherever a MERAWProcessingParameter (or one of its subclasses) is expected.
 type RAWProcessingParameterProvider interface {
-	asRAWProcessingParameter() *raw.MERAWProcessingParameter
+	objref.Object
+	isRAWProcessingParameter()
 }

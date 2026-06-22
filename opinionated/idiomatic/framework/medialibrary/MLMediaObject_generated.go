@@ -5,142 +5,179 @@
 package medialibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.
+// MediaObject is an idiomatic wrapper over the Objective-C class MLMediaObject.
 //
-// MediaObject wraps [raw.MLMediaObject] with a fluent Go API.
+// The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.
 type MediaObject struct {
-	inner *raw.MLMediaObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLMediaObject].
-func (x *MediaObject) Unwrap() *raw.MLMediaObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaObjectFromID adopts an existing object pointer as a MediaObject (nil for 0).
+// MediaObjectFromID adopts an existing Objective-C object as a MediaObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaObjectFromID(id objc.ID) *MediaObject {
 	if id == 0 {
 		return nil
 	}
-	return &MediaObject{inner: raw.MLMediaObjectFromID(id)}
+	x := &MediaObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMediaObject creates a new [MediaObject].
-func NewMediaObject() *MediaObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMediaObject")), objc.RegisterName("new"))
-	return &MediaObject{inner: raw.MLMediaObjectFromID(_id)}
-}
-
-// MediaLibrary calls the underlying MediaLibrary.
-func (x *MediaObject) MediaLibrary() *MediaLibrary {
-	_r := x.inner.MediaLibrary()
-	if _r == nil {
+// mediaObjectAdopt wraps an Objective-C object that this code just created as a
+// MediaObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaObjectAdopt(id objc.ID) *MediaObject {
+	if id == 0 {
 		return nil
 	}
-	return &MediaLibrary{inner: _r}
+	x := &MediaObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Identifier calls the underlying Identifier.
+// Description returns the object's -description text.
+func (x *MediaObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaObject creates a new MediaObject.
+func NewMediaObject() *MediaObject {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLMediaObject")), objc.RegisterName("new"))
+	return mediaObjectAdopt(_id)
+}
+
+// MediaLibrary wraps the corresponding Objective-C method.
+func (x *MediaObject) MediaLibrary() *MediaLibrary {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
+	return MediaLibraryFromID(_r)
+}
+
+// Identifier wraps the corresponding Objective-C method.
 func (x *MediaObject) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// MediaSourceIdentifier calls the underlying MediaSourceIdentifier.
+// MediaSourceIdentifier wraps the corresponding Objective-C method.
 func (x *MediaObject) MediaSourceIdentifier() string {
-	_r := x.inner.MediaSourceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Attributes calls the underlying Attributes.
-func (x *MediaObject) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Attributes()
+// Attributes wraps the corresponding Objective-C method.
+func (x *MediaObject) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
-// MediaType calls the underlying MediaType.
-func (x *MediaObject) MediaType() MLMediaType {
-	return MLMediaType(x.inner.MediaType())
+// MediaType wraps the corresponding Objective-C method.
+func (x *MediaObject) MediaType() MediaType {
+	_r := objc.Send[MediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return _r
 }
 
-// ContentType calls the underlying ContentType.
+// ContentType wraps the corresponding Objective-C method.
 func (x *MediaObject) ContentType() string {
-	_r := x.inner.ContentType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MediaObject) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// URL calls the underlying URL.
-func (x *MediaObject) URL() *foundation.NSURL {
-	return x.inner.URL()
+// URL wraps the corresponding Objective-C method.
+func (x *MediaObject) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// OriginalURL calls the underlying OriginalURL.
-func (x *MediaObject) OriginalURL() *foundation.NSURL {
-	return x.inner.OriginalURL()
+// OriginalURL wraps the corresponding Objective-C method.
+func (x *MediaObject) OriginalURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalURL"))
+	return obj.Wrap(_r)
 }
 
-// FileSize calls the underlying FileSize.
-func (x *MediaObject) FileSize() uint {
-	return x.inner.FileSize()
+// FileSize wraps the corresponding Objective-C method.
+func (x *MediaObject) FileSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileSize"))
+	return _r
 }
 
-// ModificationDate calls the underlying ModificationDate.
-func (x *MediaObject) ModificationDate() *foundation.NSDate {
-	return x.inner.ModificationDate()
+// ModificationDate wraps the corresponding Objective-C method.
+func (x *MediaObject) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return obj.Wrap(_r)
 }
 
-// ThumbnailURL calls the underlying ThumbnailURL.
-func (x *MediaObject) ThumbnailURL() *foundation.NSURL {
-	return x.inner.ThumbnailURL()
+// ThumbnailURL wraps the corresponding Objective-C method.
+func (x *MediaObject) ThumbnailURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailURL"))
+	return obj.Wrap(_r)
 }
 
-// ArtworkImage calls the underlying ArtworkImage.
-func (x *MediaObject) ArtworkImage() *appkit.NSImage {
-	return x.inner.ArtworkImage()
+// ArtworkImage wraps the corresponding Objective-C method.
+func (x *MediaObject) ArtworkImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkImage"))
+	return obj.Wrap(_r)
 }
 
 // MediaObjectable is the interface implemented by [MediaObject], for mocking and DI.
 type MediaObjectable interface {
-	Unwrap() *raw.MLMediaObject
+	obj.Object
 	MediaLibrary() *MediaLibrary
 	Identifier() string
 	MediaSourceIdentifier() string
-	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	MediaType() MLMediaType
+	Attributes() obj.Object
+	MediaType() MediaType
 	ContentType() string
 	Name() string
-	URL() *foundation.NSURL
-	OriginalURL() *foundation.NSURL
-	FileSize() uint
-	ModificationDate() *foundation.NSDate
-	ThumbnailURL() *foundation.NSURL
-	ArtworkImage() *appkit.NSImage
+	URL() obj.Object
+	OriginalURL() obj.Object
+	FileSize() int
+	ModificationDate() obj.Object
+	ThumbnailURL() obj.Object
+	ArtworkImage() obj.Object
 }
 
 var _ MediaObjectable = (*MediaObject)(nil)

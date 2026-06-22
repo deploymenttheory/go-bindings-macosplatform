@@ -5,86 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that finds faces within an image.
+// DetectFaceRectanglesRequest is an idiomatic wrapper over the Objective-C class VNDetectFaceRectanglesRequest.
 //
-// DetectFaceRectanglesRequest wraps [raw.VNDetectFaceRectanglesRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that finds faces within an image.
 type DetectFaceRectanglesRequest struct {
-	inner *raw.VNDetectFaceRectanglesRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectFaceRectanglesRequest].
-func (x *DetectFaceRectanglesRequest) Unwrap() *raw.VNDetectFaceRectanglesRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectFaceRectanglesRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectFaceRectanglesRequestFromID adopts an existing object pointer as a DetectFaceRectanglesRequest (nil for 0).
+// DetectFaceRectanglesRequestFromID adopts an existing Objective-C object as a DetectFaceRectanglesRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectFaceRectanglesRequestFromID(id objc.ID) *DetectFaceRectanglesRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectFaceRectanglesRequest{inner: raw.VNDetectFaceRectanglesRequestFromID(id)}
+	x := &DetectFaceRectanglesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectFaceRectanglesRequest creates a new [DetectFaceRectanglesRequest].
+// detectFaceRectanglesRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectFaceRectanglesRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectFaceRectanglesRequestAdopt(id objc.ID) *DetectFaceRectanglesRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectFaceRectanglesRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectFaceRectanglesRequest creates a new DetectFaceRectanglesRequest.
 func NewDetectFaceRectanglesRequest() *DetectFaceRectanglesRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectFaceRectanglesRequest")), objc.RegisterName("new"))
-	return &DetectFaceRectanglesRequest{inner: raw.VNDetectFaceRectanglesRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectFaceRectanglesRequest")), objc.RegisterName("new"))
+	return detectFaceRectanglesRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectFaceRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectFaceRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectFaceRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectFaceRectanglesRequest) WithRevision(revision uint) *DetectFaceRectanglesRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectFaceRectanglesRequest) WithRevision(revision int) *DetectFaceRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *DetectFaceRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectFaceRectanglesRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // DetectFaceRectanglesRequestable is the interface implemented by [DetectFaceRectanglesRequest], for mocking and DI.
 type DetectFaceRectanglesRequestable interface {
-	Unwrap() *raw.VNDetectFaceRectanglesRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceRectanglesRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceRectanglesRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceRectanglesRequest
-	WithRevision(revision uint) *DetectFaceRectanglesRequest
+	WithRevision(revision int) *DetectFaceRectanglesRequest
 }
 
 var _ DetectFaceRectanglesRequestable = (*DetectFaceRectanglesRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectFaceRectanglesRequest)(nil)
+
+var _ RequestProvider = (*DetectFaceRectanglesRequest)(nil)

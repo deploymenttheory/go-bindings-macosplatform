@@ -5,95 +5,110 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Cluster Microwave Oven Mode Attributes and commands for selecting a mode from a list of supported options.
+// MTRClusterMicrowaveOvenMode is an idiomatic wrapper over the Objective-C class MTRClusterMicrowaveOvenMode.
 //
-// MTRClusterMicrowaveOvenMode wraps [raw.MTRClusterMicrowaveOvenMode] with a fluent Go API.
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Microwave Oven Mode Attributes and commands for selecting a mode from a list of supported options.
 type MTRClusterMicrowaveOvenMode struct {
-	inner *raw.MTRClusterMicrowaveOvenMode
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterMicrowaveOvenMode].
-func (x *MTRClusterMicrowaveOvenMode) Unwrap() *raw.MTRClusterMicrowaveOvenMode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterMicrowaveOvenMode) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterMicrowaveOvenModeFromID adopts an existing object pointer as a MTRClusterMicrowaveOvenMode (nil for 0).
+// MTRClusterMicrowaveOvenModeFromID adopts an existing Objective-C object as a MTRClusterMicrowaveOvenMode
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterMicrowaveOvenModeFromID(id objc.ID) *MTRClusterMicrowaveOvenMode {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterMicrowaveOvenMode{inner: raw.MTRClusterMicrowaveOvenModeFromID(id)}
+	x := &MTRClusterMicrowaveOvenMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue creates a new [MTRClusterMicrowaveOvenMode].
-func NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMicrowaveOvenMode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMicrowaveOvenMode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterMicrowaveOvenMode{inner: raw.MTRClusterMicrowaveOvenModeFromID(_id)}
+// mTRClusterMicrowaveOvenModeAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterMicrowaveOvenMode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterMicrowaveOvenModeAdopt(id objc.ID) *MTRClusterMicrowaveOvenMode {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterMicrowaveOvenMode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ReadAttributeSupportedModesWithParams calls the underlying ReadAttributeSupportedModesWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedModesWithParams(params)
+// NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterMicrowaveOvenModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMicrowaveOvenMode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMicrowaveOvenMode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterMicrowaveOvenModeAdopt(_id)
 }
 
-// ReadAttributeCurrentModeWithParams calls the underlying ReadAttributeCurrentModeWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentModeWithParams(params)
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterMicrowaveOvenMode) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterMicrowaveOvenMode) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterMicrowaveOvenMode) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMicrowaveOvenMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterMicrowaveOvenModeable is the interface implemented by [MTRClusterMicrowaveOvenMode], for mocking and DI.
 type MTRClusterMicrowaveOvenModeable interface {
-	Unwrap() *raw.MTRClusterMicrowaveOvenMode
-	ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterMicrowaveOvenModeable = (*MTRClusterMicrowaveOvenMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterMicrowaveOvenMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterMicrowaveOvenMode)(nil)

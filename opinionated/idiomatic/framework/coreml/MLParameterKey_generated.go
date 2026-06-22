@@ -5,56 +5,65 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The keys for the parameter dictionary in a model configuration or a model update context.
+// ParameterKey is an idiomatic wrapper over the Objective-C class MLParameterKey.
 //
-// ParameterKey wraps [raw.MLParameterKey] with a fluent Go API.
+// It embeds [Key], promoting that type's methods.
+//
+// The keys for the parameter dictionary in a model configuration or a model update context.
 type ParameterKey struct {
-	inner *raw.MLParameterKey
+	Key
 }
 
-// Unwrap returns the underlying [raw.MLParameterKey].
-func (x *ParameterKey) Unwrap() *raw.MLParameterKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ParameterKey) ID() objc.ID { return x.inner.Ptr() }
-
-// ParameterKeyFromID adopts an existing object pointer as a ParameterKey (nil for 0).
+// ParameterKeyFromID adopts an existing Objective-C object as a ParameterKey
+// (nil for 0), retaining it and registering a release finalizer.
 func ParameterKeyFromID(id objc.ID) *ParameterKey {
 	if id == 0 {
 		return nil
 	}
-	return &ParameterKey{inner: raw.MLParameterKeyFromID(id)}
+	x := &ParameterKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewParameterKey creates a new [ParameterKey].
-func NewParameterKey() *ParameterKey {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLParameterKey")), objc.RegisterName("new"))
-	return &ParameterKey{inner: raw.MLParameterKeyFromID(_id)}
-}
-
-// Creates a copy of a parameter key and adds the scope to it.
-//
-// ScopedTo calls the underlying ScopedTo.
-func (x *ParameterKey) ScopedTo(scope string) *ParameterKey {
-	_r := x.inner.ScopedTo(foundation.NSStringStringWithUTF8String(scope))
-	if _r == nil {
+// parameterKeyAdopt wraps an Objective-C object that this code just created as a
+// ParameterKey (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func parameterKeyAdopt(id objc.ID) *ParameterKey {
+	if id == 0 {
 		return nil
 	}
-	return &ParameterKey{inner: _r}
+	x := &ParameterKey{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ParameterKey) asKey() *raw.MLKey { return &x.inner.MLKey }
+// NewParameterKey creates a new ParameterKey.
+func NewParameterKey() *ParameterKey {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("new"))
+	return parameterKeyAdopt(_id)
+}
+
+// ScopedTo creates a copy of a parameter key and adds the scope to it.
+func (x *ParameterKey) ScopedTo(scope string) *ParameterKey {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scopedTo:"), purego.NSString(scope))
+	return ParameterKeyFromID(_r)
+}
 
 // ParameterKeyable is the interface implemented by [ParameterKey], for mocking and DI.
 type ParameterKeyable interface {
-	Unwrap() *raw.MLParameterKey
+	obj.Object
 	ScopedTo(scope string) *ParameterKey
 }
 
 var _ ParameterKeyable = (*ParameterKey)(nil)
+
+var _ KeyProvider = (*ParameterKey)(nil)

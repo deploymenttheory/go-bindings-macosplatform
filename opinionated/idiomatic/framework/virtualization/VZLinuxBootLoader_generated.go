@@ -5,115 +5,116 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that loads and configures a Linux kernel as the guest system of your VM.
+// LinuxBootLoader is an idiomatic wrapper over the Objective-C class VZLinuxBootLoader.
 //
-// LinuxBootLoader wraps [raw.VZLinuxBootLoader] with a fluent Go API.
+// It embeds [BootLoader], promoting that type's methods.
+//
+// An object that loads and configures a Linux kernel as the guest system of your VM.
 type LinuxBootLoader struct {
-	inner *raw.VZLinuxBootLoader
+	BootLoader
 }
 
-// Unwrap returns the underlying [raw.VZLinuxBootLoader].
-func (x *LinuxBootLoader) Unwrap() *raw.VZLinuxBootLoader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinuxBootLoader) ID() objc.ID { return x.inner.Ptr() }
-
-// LinuxBootLoaderFromID adopts an existing object pointer as a LinuxBootLoader (nil for 0).
+// LinuxBootLoaderFromID adopts an existing Objective-C object as a LinuxBootLoader
+// (nil for 0), retaining it and registering a release finalizer.
 func LinuxBootLoaderFromID(id objc.ID) *LinuxBootLoader {
 	if id == 0 {
 		return nil
 	}
-	return &LinuxBootLoader{inner: raw.VZLinuxBootLoaderFromID(id)}
+	x := &LinuxBootLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLinuxBootLoader creates a new [LinuxBootLoader].
+// linuxBootLoaderAdopt wraps an Objective-C object that this code just created as a
+// LinuxBootLoader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linuxBootLoaderAdopt(id objc.ID) *LinuxBootLoader {
+	if id == 0 {
+		return nil
+	}
+	x := &LinuxBootLoader{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewLinuxBootLoader creates a new LinuxBootLoader.
 func NewLinuxBootLoader() *LinuxBootLoader {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxBootLoader")), objc.RegisterName("new"))
-	return &LinuxBootLoader{inner: raw.VZLinuxBootLoaderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZLinuxBootLoader")), objc.RegisterName("new"))
+	return linuxBootLoaderAdopt(_id)
 }
 
-// Creates a boot loader that launches the Linux kernel at the specified URL.
-//
-// NewLinuxBootLoaderWithKernelURL creates a new [LinuxBootLoader].
+// NewLinuxBootLoaderWithKernelURL creates a boot loader that launches the Linux kernel at the specified URL.
 func NewLinuxBootLoaderWithKernelURL(kernelURL string) *LinuxBootLoader {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxBootLoader")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKernelURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(kernelURL)).Ptr())
-	return &LinuxBootLoader{inner: raw.VZLinuxBootLoaderFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxBootLoader")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKernelURL:"), rt.FileURL(kernelURL))
+	return linuxBootLoaderAdopt(_id)
 }
 
-// The URL of the Linux kernel file.
-//
-// WithKernelURL sets the kernelURL property and returns the receiver for chaining.
+// WithKernelURL the URL of the Linux kernel file.
 func (x *LinuxBootLoader) WithKernelURL(kernelURL string) *LinuxBootLoader {
-	x.inner.SetKernelURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(kernelURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelURL:"), rt.FileURL(kernelURL))
 	return x
 }
 
-// The command-line parameters to pass to the Linux kernel at boot time.
-//
-// WithCommandLine sets the commandLine property and returns the receiver for chaining.
+// WithCommandLine the command-line parameters to pass to the Linux kernel at boot time.
 func (x *LinuxBootLoader) WithCommandLine(commandLine string) *LinuxBootLoader {
-	x.inner.SetCommandLine(foundation.NSStringStringWithUTF8String(commandLine))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandLine:"), purego.NSString(commandLine))
 	return x
 }
 
-// The location of an optional RAM disk, which the boot loader maps into memory before it boots the Linux kernel.
-//
-// WithInitialRamdiskURL sets the initialRamdiskURL property and returns the receiver for chaining.
+// WithInitialRamdiskURL the location of an optional RAM disk, which the boot loader maps into memory before it boots the Linux kernel.
 func (x *LinuxBootLoader) WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader {
-	x.inner.SetInitialRamdiskURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(initialRamdiskURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialRamdiskURL:"), rt.FileURL(initialRamdiskURL))
 	return x
 }
 
-// @abstract URL of the Linux kernel.
-//
-// KernelURL calls the underlying KernelURL.
-func (x *LinuxBootLoader) KernelURL() *foundation.NSURL {
-	return x.inner.KernelURL()
+// KernelURL URL of the Linux kernel.
+func (x *LinuxBootLoader) KernelURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kernelURL"))
+	return obj.Wrap(_r)
 }
 
-// SetKernelURL calls the underlying SetKernelURL.
+// SetKernelURL wraps the corresponding Objective-C method.
 func (x *LinuxBootLoader) SetKernelURL(kernelURL string) {
-	x.inner.SetKernelURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(kernelURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelURL:"), rt.FileURL(kernelURL))
 }
 
-// @abstract Define the command-line parameters passed to the kernel on boot. @link https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
-//
-// CommandLine calls the underlying CommandLine.
+// CommandLine define the command-line parameters passed to the kernel on boot.
 func (x *LinuxBootLoader) CommandLine() string {
-	_r := x.inner.CommandLine()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandLine"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCommandLine calls the underlying SetCommandLine.
+// SetCommandLine wraps the corresponding Objective-C method.
 func (x *LinuxBootLoader) SetCommandLine(commandLine string) {
-	x.inner.SetCommandLine(foundation.NSStringStringWithUTF8String(commandLine))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandLine:"), purego.NSString(commandLine))
 }
 
-// SetInitialRamdiskURL calls the underlying SetInitialRamdiskURL.
+// SetInitialRamdiskURL wraps the corresponding Objective-C method.
 func (x *LinuxBootLoader) SetInitialRamdiskURL(initialRamdiskURL string) {
-	x.inner.SetInitialRamdiskURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(initialRamdiskURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialRamdiskURL:"), rt.FileURL(initialRamdiskURL))
 }
-
-func (x *LinuxBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBootLoader }
 
 // LinuxBootLoaderable is the interface implemented by [LinuxBootLoader], for mocking and DI.
 type LinuxBootLoaderable interface {
-	Unwrap() *raw.VZLinuxBootLoader
+	obj.Object
 	WithKernelURL(kernelURL string) *LinuxBootLoader
 	WithCommandLine(commandLine string) *LinuxBootLoader
 	WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader
-	KernelURL() *foundation.NSURL
+	KernelURL() obj.Object
 	SetKernelURL(kernelURL string)
 	CommandLine() string
 	SetCommandLine(commandLine string)
@@ -121,3 +122,5 @@ type LinuxBootLoaderable interface {
 }
 
 var _ LinuxBootLoaderable = (*LinuxBootLoader)(nil)
+
+var _ BootLoaderProvider = (*LinuxBootLoader)(nil)

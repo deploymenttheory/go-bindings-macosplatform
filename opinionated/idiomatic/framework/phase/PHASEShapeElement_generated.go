@@ -5,66 +5,96 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the characteristics of a physical surface.
+// ShapeElement is an idiomatic wrapper over the Objective-C class PHASEShapeElement.
 //
-// ShapeElement wraps [raw.PHASEShapeElement] with a fluent Go API.
+// An object that describes the characteristics of a physical surface.
 type ShapeElement struct {
-	inner *raw.PHASEShapeElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEShapeElement].
-func (x *ShapeElement) Unwrap() *raw.PHASEShapeElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShapeElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ShapeElementFromID adopts an existing object pointer as a ShapeElement (nil for 0).
+// ShapeElementFromID adopts an existing Objective-C object as a ShapeElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ShapeElementFromID(id objc.ID) *ShapeElement {
 	if id == 0 {
 		return nil
 	}
-	return &ShapeElement{inner: raw.PHASEShapeElementFromID(id)}
-}
-
-// NewShapeElement creates a new [ShapeElement].
-func NewShapeElement() *ShapeElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEShapeElement")), objc.RegisterName("new"))
-	return &ShapeElement{inner: raw.PHASEShapeElementFromID(_id)}
-}
-
-// @property material @abstract The shape's material defines the acoustical properties of this element.
-//
-// WithMaterial sets the material property and returns the receiver for chaining.
-func (x *ShapeElement) WithMaterial(material *Material) *ShapeElement {
-	x.inner.SetMaterial(material.Unwrap())
+	x := &ShapeElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Material calls the underlying Material.
-func (x *ShapeElement) Material() *Material {
-	_r := x.inner.Material()
-	if _r == nil {
+// shapeElementAdopt wraps an Objective-C object that this code just created as a
+// ShapeElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shapeElementAdopt(id objc.ID) *ShapeElement {
+	if id == 0 {
 		return nil
 	}
-	return &Material{inner: _r}
+	x := &ShapeElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMaterial calls the underlying SetMaterial.
-func (x *ShapeElement) SetMaterial(material *raw.PHASEMaterial) {
-	x.inner.SetMaterial(material)
+// Description returns the object's -description text.
+func (x *ShapeElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShapeElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShapeElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShapeElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShapeElement creates a new ShapeElement.
+func NewShapeElement() *ShapeElement {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEShapeElement")), objc.RegisterName("new"))
+	return shapeElementAdopt(_id)
+}
+
+// WithMaterial the shape's material defines the acoustical properties of this element.
+func (x *ShapeElement) WithMaterial(material *Material) *ShapeElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
+	return x
+}
+
+// Material wraps the corresponding Objective-C method.
+func (x *ShapeElement) Material() *Material {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("material"))
+	return MaterialFromID(_r)
+}
+
+// SetMaterial wraps the corresponding Objective-C method.
+func (x *ShapeElement) SetMaterial(material *Material) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 }
 
 // ShapeElementable is the interface implemented by [ShapeElement], for mocking and DI.
 type ShapeElementable interface {
-	Unwrap() *raw.PHASEShapeElement
+	obj.Object
 	WithMaterial(material *Material) *ShapeElement
 	Material() *Material
-	SetMaterial(material *raw.PHASEMaterial)
+	SetMaterial(material *Material)
 }
 
 var _ ShapeElementable = (*ShapeElement)(nil)

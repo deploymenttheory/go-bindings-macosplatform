@@ -5,102 +5,107 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a hardware-based cryptographic token.
+// Token is an idiomatic wrapper over the Objective-C class TKToken.
 //
-// Token wraps [raw.TKToken] with a fluent Go API.
+// Token is an abstract base — you do not construct it directly. Construct one of [SmartCardToken] and pass it where a Token is accepted.
+//
+// A representation of a hardware-based cryptographic token.
 type Token struct {
-	inner *raw.TKToken
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKToken].
-func (x *Token) Unwrap() *raw.TKToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Token) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenFromID adopts an existing object pointer as a Token (nil for 0).
+// TokenFromID adopts an existing Objective-C object as a Token
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenFromID(id objc.ID) *Token {
 	if id == 0 {
 		return nil
 	}
-	return &Token{inner: raw.TKTokenFromID(id)}
-}
-
-// Initializes a token with the driver you specify.
-//
-// NewTokenWithTokenDriverInstanceID creates a new [Token].
-func NewTokenWithTokenDriverInstanceID(tokenDriver *raw.TKTokenDriver, instanceID *foundation.NSString) *Token {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKToken")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTokenDriver:instanceID:"), tokenDriver.Ptr(), instanceID.Ptr())
-	return &Token{inner: raw.TKTokenFromID(_id)}
-}
-
-// The token delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Token) WithDelegate(delegate raw.TKTokenDelegate) *Token {
-	x.inner.SetDelegate(delegate)
+	x := &Token{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// TokenDriver calls the underlying TokenDriver.
+// tokenAdopt wraps an Objective-C object that this code just created as a
+// Token (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenAdopt(id objc.ID) *Token {
+	if id == 0 {
+		return nil
+	}
+	x := &Token{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Token) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Token) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Token) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Token) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTokenWithTokenDriverInstanceID initializes a token with the driver you specify.
+func NewTokenWithTokenDriverInstanceID(tokenDriver *TokenDriver, instanceID obj.Object) *Token {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKToken")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTokenDriver:instanceID:"), objref.IDOf(tokenDriver), objref.IDOf(instanceID))
+	return tokenAdopt(_id)
+}
+
+// TokenDriver wraps the corresponding Objective-C method.
 func (x *Token) TokenDriver() *TokenDriver {
-	_r := x.inner.TokenDriver()
-	if _r == nil {
-		return nil
-	}
-	return &TokenDriver{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenDriver"))
+	return TokenDriverFromID(_r)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Token) Delegate() raw.TKTokenDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Token) SetDelegate(delegate raw.TKTokenDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Token configuration associated with this token instance.
-//
-// Configuration calls the underlying Configuration.
+// Configuration token configuration associated with this token instance.
 func (x *Token) Configuration() *TokenConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
-		return nil
-	}
-	return &TokenConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return TokenConfigurationFromID(_r)
 }
 
-// @discussion Keychain contents (certificate and key items) representing this token.
-//
-// KeychainContents calls the underlying KeychainContents.
+// KeychainContents keychain contents (certificate and key items) representing this token.
 func (x *Token) KeychainContents() *TokenKeychainContents {
-	_r := x.inner.KeychainContents()
-	if _r == nil {
-		return nil
-	}
-	return &TokenKeychainContents{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychainContents"))
+	return TokenKeychainContentsFromID(_r)
 }
-
-func (x *Token) asToken() *raw.TKToken { return x.inner }
 
 // Tokenable is the interface implemented by [Token], for mocking and DI.
 type Tokenable interface {
-	Unwrap() *raw.TKToken
-	WithDelegate(delegate raw.TKTokenDelegate) *Token
+	obj.Object
 	TokenDriver() *TokenDriver
-	Delegate() raw.TKTokenDelegate
-	SetDelegate(delegate raw.TKTokenDelegate)
 	Configuration() *TokenConfiguration
 	KeychainContents() *TokenKeychainContents
 }
 
 var _ Tokenable = (*Token)(nil)
+
+// isToken marks Token — and, by embedding promotion, its
+// subclasses — as a member of the Token hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Token) isToken() {}
+
+var _ TokenProvider = (*Token)(nil)

@@ -5,98 +5,94 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a dilated max pooling filter.
+// CNNDilatedPoolingMaxNode is an idiomatic wrapper over the Objective-C class MPSCNNDilatedPoolingMaxNode.
 //
-// CNNDilatedPoolingMaxNode wraps [raw.MPSCNNDilatedPoolingMaxNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a dilated max pooling filter.
 type CNNDilatedPoolingMaxNode struct {
-	inner *raw.MPSCNNDilatedPoolingMaxNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDilatedPoolingMaxNode].
-func (x *CNNDilatedPoolingMaxNode) Unwrap() *raw.MPSCNNDilatedPoolingMaxNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDilatedPoolingMaxNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDilatedPoolingMaxNodeFromID adopts an existing object pointer as a CNNDilatedPoolingMaxNode (nil for 0).
+// CNNDilatedPoolingMaxNodeFromID adopts an existing Objective-C object as a CNNDilatedPoolingMaxNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDilatedPoolingMaxNodeFromID(id objc.ID) *CNNDilatedPoolingMaxNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSCNNPooling kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      kernelWidth             The width of the max filter window @param      kernelHeight            The height of the max filter window @param      strideInPixelsX         The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY         The output stride (downsampling factor) in the y dimension. @param      dilationRateX           The dilation factor in the x dimension. @param      dilationRateY           The dilation factor in the y dimension. @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
-//
-// NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY creates a new [CNNDilatedPoolingMaxNode].
-func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceNode *mpsneuralnetwork.MPSNNImageNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *CNNDilatedPoolingMaxNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), sourceNode.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
-	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
-}
-
-// @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = size @param      stride          strideInPixelsX = strideInPixelsY = stride @param      dilationRate    dilationRateX = dilationRateY = stride @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
-//
-// NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate creates a new [CNNDilatedPoolingMaxNode].
-func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNode *mpsneuralnetwork.MPSNNImageNode, size uint, stride uint, dilationRate uint) *CNNDilatedPoolingMaxNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:stride:dilationRate:"), sourceNode.Ptr(), size, stride, dilationRate)
-	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
-}
-
-// @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = strideInPixelsX = strideInPixelsY = dilationRateX = dilationRateY = size @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
-//
-// NewCNNDilatedPoolingMaxNodeWithSourceFilterSize creates a new [CNNDilatedPoolingMaxNode].
-func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode *mpsneuralnetwork.MPSNNImageNode, size uint) *CNNDilatedPoolingMaxNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:"), sourceNode.Ptr(), size)
-	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDilatedPoolingMaxNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNDilatedPoolingMaxNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNDilatedPoolingMaxNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNDilatedPoolingMaxNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDilatedPoolingMaxNodeAdopt(id objc.ID) *CNNDilatedPoolingMaxNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDilatedPoolingMaxNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY init a node representing a MPSCNNPooling kernel
+func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceNode obj.Object, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceNode), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
+	return cNNDilatedPoolingMaxNodeAdopt(_id)
+}
+
+// NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors
+func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNode obj.Object, size int, stride int, dilationRate int) *CNNDilatedPoolingMaxNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:stride:dilationRate:"), objref.IDOf(sourceNode), size, stride, dilationRate)
+	return cNNDilatedPoolingMaxNodeAdopt(_id)
+}
+
+// NewCNNDilatedPoolingMaxNodeWithSourceFilterSize convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels
+func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode obj.Object, size int) *CNNDilatedPoolingMaxNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:"), objref.IDOf(sourceNode), size)
+	return cNNDilatedPoolingMaxNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolingMaxNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// DilationRateX calls the underlying DilationRateX.
-func (x *CNNDilatedPoolingMaxNode) DilationRateX() uint {
-	return x.inner.DilationRateX()
+// DilationRateX wraps the corresponding Objective-C method.
+func (x *CNNDilatedPoolingMaxNode) DilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
+	return _r
 }
 
-// DilationRateY calls the underlying DilationRateY.
-func (x *CNNDilatedPoolingMaxNode) DilationRateY() uint {
-	return x.inner.DilationRateY()
-}
-
-func (x *CNNDilatedPoolingMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+// DilationRateY wraps the corresponding Objective-C method.
+func (x *CNNDilatedPoolingMaxNode) DilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
+	return _r
 }
 
 // CNNDilatedPoolingMaxNodeable is the interface implemented by [CNNDilatedPoolingMaxNode], for mocking and DI.
 type CNNDilatedPoolingMaxNodeable interface {
-	Unwrap() *raw.MPSCNNDilatedPoolingMaxNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDilatedPoolingMaxNode
+	obj.Object
 	WithLabel(label string) *CNNDilatedPoolingMaxNode
-	DilationRateX() uint
-	DilationRateY() uint
+	DilationRateX() int
+	DilationRateY() int
 }
 
 var _ CNNDilatedPoolingMaxNodeable = (*CNNDilatedPoolingMaxNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDilatedPoolingMaxNode)(nil)

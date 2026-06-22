@@ -5,41 +5,76 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface that implements an index-maintenance app extension.
+// IndexExtensionRequestHandler is an idiomatic wrapper over the Objective-C class CSIndexExtensionRequestHandler.
 //
-// IndexExtensionRequestHandler wraps [raw.CSIndexExtensionRequestHandler] with a fluent Go API.
+// An interface that implements an index-maintenance app extension.
 type IndexExtensionRequestHandler struct {
-	inner *raw.CSIndexExtensionRequestHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSIndexExtensionRequestHandler].
-func (x *IndexExtensionRequestHandler) Unwrap() *raw.CSIndexExtensionRequestHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IndexExtensionRequestHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// IndexExtensionRequestHandlerFromID adopts an existing object pointer as a IndexExtensionRequestHandler (nil for 0).
+// IndexExtensionRequestHandlerFromID adopts an existing Objective-C object as a IndexExtensionRequestHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func IndexExtensionRequestHandlerFromID(id objc.ID) *IndexExtensionRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	return &IndexExtensionRequestHandler{inner: raw.CSIndexExtensionRequestHandlerFromID(id)}
+	x := &IndexExtensionRequestHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIndexExtensionRequestHandler creates a new [IndexExtensionRequestHandler].
+// indexExtensionRequestHandlerAdopt wraps an Objective-C object that this code just created as a
+// IndexExtensionRequestHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func indexExtensionRequestHandlerAdopt(id objc.ID) *IndexExtensionRequestHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &IndexExtensionRequestHandler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IndexExtensionRequestHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IndexExtensionRequestHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IndexExtensionRequestHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IndexExtensionRequestHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIndexExtensionRequestHandler creates a new IndexExtensionRequestHandler.
 func NewIndexExtensionRequestHandler() *IndexExtensionRequestHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSIndexExtensionRequestHandler")), objc.RegisterName("new"))
-	return &IndexExtensionRequestHandler{inner: raw.CSIndexExtensionRequestHandlerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CSIndexExtensionRequestHandler")), objc.RegisterName("new"))
+	return indexExtensionRequestHandlerAdopt(_id)
 }
 
 // IndexExtensionRequestHandlerable is the interface implemented by [IndexExtensionRequestHandler], for mocking and DI.
 type IndexExtensionRequestHandlerable interface {
-	Unwrap() *raw.CSIndexExtensionRequestHandler
+	obj.Object
 }
 
 var _ IndexExtensionRequestHandlerable = (*IndexExtensionRequestHandler)(nil)

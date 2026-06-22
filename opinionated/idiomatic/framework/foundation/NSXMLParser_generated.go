@@ -5,229 +5,243 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An event driven parser of XML documents (including DTD declarations).
+// XMLParser is an idiomatic wrapper over the Objective-C class NSXMLParser.
 //
-// XMLParser wraps [raw.NSXMLParser] with a fluent Go API.
+// An event driven parser of XML documents (including DTD declarations).
 type XMLParser struct {
-	inner *raw.NSXMLParser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSXMLParser].
-func (x *XMLParser) Unwrap() *raw.NSXMLParser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XMLParser) ID() objc.ID { return x.inner.Ptr() }
-
-// XMLParserFromID adopts an existing object pointer as a XMLParser (nil for 0).
+// XMLParserFromID adopts an existing Objective-C object as a XMLParser
+// (nil for 0), retaining it and registering a release finalizer.
 func XMLParserFromID(id objc.ID) *XMLParser {
 	if id == 0 {
 		return nil
 	}
-	return &XMLParser{inner: raw.NSXMLParserFromID(id)}
+	x := &XMLParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewXMLParserWithContentsOfURL creates a new [XMLParser].
+// xMLParserAdopt wraps an Objective-C object that this code just created as a
+// XMLParser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xMLParserAdopt(id objc.ID) *XMLParser {
+	if id == 0 {
+		return nil
+	}
+	x := &XMLParser{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *XMLParser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XMLParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XMLParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *XMLParser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewXMLParserWithContentsOfURL creates a new XMLParser.
 func NewXMLParserWithContentsOfURL(url string) *XMLParser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLParser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &XMLParser{inner: raw.NSXMLParserFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
+	return xMLParserAdopt(_id)
 }
 
-// NewXMLParserWithData creates a new [XMLParser].
-func NewXMLParserWithData(data *raw.NSData) *XMLParser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLParser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &XMLParser{inner: raw.NSXMLParserFromID(_id)}
+// NewXMLParserWithData creates a new XMLParser.
+func NewXMLParserWithData(data *Data) *XMLParser {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return xMLParserAdopt(_id)
 }
 
-// NewXMLParserWithStream creates a new [XMLParser].
-func NewXMLParserWithStream(stream *raw.NSInputStream) *XMLParser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLParser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStream:"), stream.Ptr())
-	return &XMLParser{inner: raw.NSXMLParserFromID(_id)}
+// NewXMLParserWithStream creates a new XMLParser.
+func NewXMLParserWithStream(stream *InputStream) *XMLParser {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLParser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStream:"), objref.IDOf(stream))
+	return xMLParserAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *XMLParser) WithDelegate(delegate raw.NSXMLParserDelegate) *XMLParser {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// WithShouldProcessNamespaces sets the shouldProcessNamespaces property and returns the receiver for chaining.
+// WithShouldProcessNamespaces sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser {
-	x.inner.SetShouldProcessNamespaces(shouldProcessNamespaces)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldProcessNamespaces:"), shouldProcessNamespaces)
 	return x
 }
 
-// WithShouldReportNamespacePrefixes sets the shouldReportNamespacePrefixes property and returns the receiver for chaining.
+// WithShouldReportNamespacePrefixes sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser {
-	x.inner.SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportNamespacePrefixes:"), shouldReportNamespacePrefixes)
 	return x
 }
 
-// WithExternalEntityResolvingPolicy sets the externalEntityResolvingPolicy property and returns the receiver for chaining.
-func (x *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy) *XMLParser {
-	x.inner.SetExternalEntityResolvingPolicy(raw.NSXMLParserExternalEntityResolvingPolicy(externalEntityResolvingPolicy))
+// WithExternalEntityResolvingPolicy sets the property and returns the receiver so calls can be chained.
+func (x *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) *XMLParser {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalEntityResolvingPolicy:"), externalEntityResolvingPolicy)
 	return x
 }
 
-// WithAllowedExternalEntityURLs sets the allowedExternalEntityURLs property and returns the receiver for chaining.
-func (x *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) *XMLParser {
-	x.inner.SetAllowedExternalEntityURLs(allowedExternalEntityURLs)
+// WithAllowedExternalEntityURLs sets the property and returns the receiver so calls can be chained.
+func (x *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) *XMLParser {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedExternalEntityURLs:"), objref.IDOf(allowedExternalEntityURLs))
 	return x
 }
 
-// WithShouldResolveExternalEntities sets the shouldResolveExternalEntities property and returns the receiver for chaining.
+// WithShouldResolveExternalEntities sets the property and returns the receiver so calls can be chained.
 func (x *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser {
-	x.inner.SetShouldResolveExternalEntities(shouldResolveExternalEntities)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XMLParser) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLParser {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *XMLParser) WithScriptingProperties(scriptingProperties obj.Object) *XMLParser {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Parse calls the underlying Parse.
+// Parse wraps the corresponding Objective-C method.
 func (x *XMLParser) Parse() bool {
-	return x.inner.Parse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("parse"))
+	return _r
 }
 
-// AbortParsing calls the underlying AbortParsing.
+// AbortParsing wraps the corresponding Objective-C method.
 func (x *XMLParser) AbortParsing() {
-	x.inner.AbortParsing()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abortParsing"))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *XMLParser) Delegate() raw.NSXMLParserDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *XMLParser) SetDelegate(delegate raw.NSXMLParserDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// ShouldProcessNamespaces calls the underlying ShouldProcessNamespaces.
+// ShouldProcessNamespaces wraps the corresponding Objective-C method.
 func (x *XMLParser) ShouldProcessNamespaces() bool {
-	return x.inner.ShouldProcessNamespaces()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldProcessNamespaces"))
+	return _r
 }
 
-// SetShouldProcessNamespaces calls the underlying SetShouldProcessNamespaces.
+// SetShouldProcessNamespaces wraps the corresponding Objective-C method.
 func (x *XMLParser) SetShouldProcessNamespaces(shouldProcessNamespaces bool) {
-	x.inner.SetShouldProcessNamespaces(shouldProcessNamespaces)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldProcessNamespaces:"), shouldProcessNamespaces)
 }
 
-// ShouldReportNamespacePrefixes calls the underlying ShouldReportNamespacePrefixes.
+// ShouldReportNamespacePrefixes wraps the corresponding Objective-C method.
 func (x *XMLParser) ShouldReportNamespacePrefixes() bool {
-	return x.inner.ShouldReportNamespacePrefixes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReportNamespacePrefixes"))
+	return _r
 }
 
-// SetShouldReportNamespacePrefixes calls the underlying SetShouldReportNamespacePrefixes.
+// SetShouldReportNamespacePrefixes wraps the corresponding Objective-C method.
 func (x *XMLParser) SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) {
-	x.inner.SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportNamespacePrefixes:"), shouldReportNamespacePrefixes)
 }
 
-// ExternalEntityResolvingPolicy calls the underlying ExternalEntityResolvingPolicy.
-func (x *XMLParser) ExternalEntityResolvingPolicy() NSXMLParserExternalEntityResolvingPolicy {
-	return NSXMLParserExternalEntityResolvingPolicy(x.inner.ExternalEntityResolvingPolicy())
+// ExternalEntityResolvingPolicy wraps the corresponding Objective-C method.
+func (x *XMLParser) ExternalEntityResolvingPolicy() XMLParserExternalEntityResolvingPolicy {
+	_r := objc.Send[XMLParserExternalEntityResolvingPolicy](objref.IDOf(x), objc.RegisterName("externalEntityResolvingPolicy"))
+	return _r
 }
 
-// SetExternalEntityResolvingPolicy calls the underlying SetExternalEntityResolvingPolicy.
-func (x *XMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy) {
-	x.inner.SetExternalEntityResolvingPolicy(raw.NSXMLParserExternalEntityResolvingPolicy(externalEntityResolvingPolicy))
+// SetExternalEntityResolvingPolicy wraps the corresponding Objective-C method.
+func (x *XMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalEntityResolvingPolicy:"), externalEntityResolvingPolicy)
 }
 
-// AllowedExternalEntityURLs calls the underlying AllowedExternalEntityURLs.
-func (x *XMLParser) AllowedExternalEntityURLs() *raw.NSSet[*raw.NSURL] {
-	return x.inner.AllowedExternalEntityURLs()
+// AllowedExternalEntityURLs wraps the corresponding Objective-C method.
+func (x *XMLParser) AllowedExternalEntityURLs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedExternalEntityURLs"))
+	return obj.Wrap(_r)
 }
 
-// SetAllowedExternalEntityURLs calls the underlying SetAllowedExternalEntityURLs.
-func (x *XMLParser) SetAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) {
-	x.inner.SetAllowedExternalEntityURLs(allowedExternalEntityURLs)
+// SetAllowedExternalEntityURLs wraps the corresponding Objective-C method.
+func (x *XMLParser) SetAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedExternalEntityURLs:"), objref.IDOf(allowedExternalEntityURLs))
 }
 
-// ParserError calls the underlying ParserError.
-func (x *XMLParser) ParserError() unsafe.Pointer {
-	return x.inner.ParserError()
-}
-
-// ShouldResolveExternalEntities calls the underlying ShouldResolveExternalEntities.
+// ShouldResolveExternalEntities wraps the corresponding Objective-C method.
 func (x *XMLParser) ShouldResolveExternalEntities() bool {
-	return x.inner.ShouldResolveExternalEntities()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldResolveExternalEntities"))
+	return _r
 }
 
-// SetShouldResolveExternalEntities calls the underlying SetShouldResolveExternalEntities.
+// SetShouldResolveExternalEntities wraps the corresponding Objective-C method.
 func (x *XMLParser) SetShouldResolveExternalEntities(shouldResolveExternalEntities bool) {
-	x.inner.SetShouldResolveExternalEntities(shouldResolveExternalEntities)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
 }
 
-// PublicID calls the underlying PublicID.
-func (x *XMLParser) PublicID() *String {
-	_r := x.inner.PublicID()
-	if _r == nil {
-		return nil
+// PublicID wraps the corresponding Objective-C method.
+func (x *XMLParser) PublicID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicID"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SystemID calls the underlying SystemID.
-func (x *XMLParser) SystemID() *String {
-	_r := x.inner.SystemID()
-	if _r == nil {
-		return nil
+// SystemID wraps the corresponding Objective-C method.
+func (x *XMLParser) SystemID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemID"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LineNumber calls the underlying LineNumber.
+// LineNumber wraps the corresponding Objective-C method.
 func (x *XMLParser) LineNumber() int {
-	return x.inner.LineNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lineNumber"))
+	return _r
 }
 
-// ColumnNumber calls the underlying ColumnNumber.
+// ColumnNumber wraps the corresponding Objective-C method.
 func (x *XMLParser) ColumnNumber() int {
-	return x.inner.ColumnNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnNumber"))
+	return _r
 }
-
-func (x *XMLParser) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // XMLParserable is the interface implemented by [XMLParser], for mocking and DI.
 type XMLParserable interface {
-	Unwrap() *raw.NSXMLParser
-	WithDelegate(delegate raw.NSXMLParserDelegate) *XMLParser
+	obj.Object
 	WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser
 	WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser
-	WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy) *XMLParser
-	WithAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) *XMLParser
+	WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) *XMLParser
+	WithAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) *XMLParser
 	WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLParser
+	WithScriptingProperties(scriptingProperties obj.Object) *XMLParser
 	Parse() bool
 	AbortParsing()
-	Delegate() raw.NSXMLParserDelegate
-	SetDelegate(delegate raw.NSXMLParserDelegate)
 	ShouldProcessNamespaces() bool
 	SetShouldProcessNamespaces(shouldProcessNamespaces bool)
 	ShouldReportNamespacePrefixes() bool
 	SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool)
-	ExternalEntityResolvingPolicy() NSXMLParserExternalEntityResolvingPolicy
-	SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy)
-	AllowedExternalEntityURLs() *raw.NSSet[*raw.NSURL]
-	SetAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL])
-	ParserError() unsafe.Pointer
+	ExternalEntityResolvingPolicy() XMLParserExternalEntityResolvingPolicy
+	SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy)
+	AllowedExternalEntityURLs() obj.Object
+	SetAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object)
 	ShouldResolveExternalEntities() bool
 	SetShouldResolveExternalEntities(shouldResolveExternalEntities bool)
-	PublicID() *String
-	SystemID() *String
+	PublicID() string
+	SystemID() string
 	LineNumber() int
 	ColumnNumber() int
 }

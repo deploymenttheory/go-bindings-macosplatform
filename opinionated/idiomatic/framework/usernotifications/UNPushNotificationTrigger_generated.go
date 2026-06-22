@@ -5,45 +5,58 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A trigger condition that indicates Apple Push Notification Service (APNs) has sent the notification.
+// PushNotificationTrigger is an idiomatic wrapper over the Objective-C class UNPushNotificationTrigger.
 //
-// PushNotificationTrigger wraps [raw.UNPushNotificationTrigger] with a fluent Go API.
+// It embeds [NotificationTrigger], promoting that type's methods.
+//
+// A trigger condition that indicates Apple Push Notification Service (APNs) has sent the notification.
 type PushNotificationTrigger struct {
-	inner *raw.UNPushNotificationTrigger
+	NotificationTrigger
 }
 
-// Unwrap returns the underlying [raw.UNPushNotificationTrigger].
-func (x *PushNotificationTrigger) Unwrap() *raw.UNPushNotificationTrigger { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PushNotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
-
-// PushNotificationTriggerFromID adopts an existing object pointer as a PushNotificationTrigger (nil for 0).
+// PushNotificationTriggerFromID adopts an existing Objective-C object as a PushNotificationTrigger
+// (nil for 0), retaining it and registering a release finalizer.
 func PushNotificationTriggerFromID(id objc.ID) *PushNotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	return &PushNotificationTrigger{inner: raw.UNPushNotificationTriggerFromID(id)}
+	x := &PushNotificationTrigger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPushNotificationTrigger creates a new [PushNotificationTrigger].
+// pushNotificationTriggerAdopt wraps an Objective-C object that this code just created as a
+// PushNotificationTrigger (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pushNotificationTriggerAdopt(id objc.ID) *PushNotificationTrigger {
+	if id == 0 {
+		return nil
+	}
+	x := &PushNotificationTrigger{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPushNotificationTrigger creates a new PushNotificationTrigger.
 func NewPushNotificationTrigger() *PushNotificationTrigger {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNPushNotificationTrigger")), objc.RegisterName("new"))
-	return &PushNotificationTrigger{inner: raw.UNPushNotificationTriggerFromID(_id)}
-}
-
-func (x *PushNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger {
-	return &x.inner.UNNotificationTrigger
+	_id := objc.Send[objc.ID](objc.ID(_class("UNPushNotificationTrigger")), objc.RegisterName("new"))
+	return pushNotificationTriggerAdopt(_id)
 }
 
 // PushNotificationTriggerable is the interface implemented by [PushNotificationTrigger], for mocking and DI.
 type PushNotificationTriggerable interface {
-	Unwrap() *raw.UNPushNotificationTrigger
+	obj.Object
 }
 
 var _ PushNotificationTriggerable = (*PushNotificationTrigger)(nil)
+
+var _ NotificationTriggerProvider = (*PushNotificationTrigger)(nil)

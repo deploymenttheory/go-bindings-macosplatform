@@ -5,49 +5,86 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for containers of face landmark information.
+// FaceLandmarks is an idiomatic wrapper over the Objective-C class VNFaceLandmarks.
 //
-// FaceLandmarks wraps [raw.VNFaceLandmarks] with a fluent Go API.
+// FaceLandmarks is an abstract base — you do not construct it directly. Construct one of [FaceLandmarks2D] and pass it where a FaceLandmarks is accepted.
+//
+// The abstract superclass for containers of face landmark information.
 type FaceLandmarks struct {
-	inner *raw.VNFaceLandmarks
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNFaceLandmarks].
-func (x *FaceLandmarks) Unwrap() *raw.VNFaceLandmarks { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FaceLandmarks) ID() objc.ID { return x.inner.Ptr() }
-
-// FaceLandmarksFromID adopts an existing object pointer as a FaceLandmarks (nil for 0).
+// FaceLandmarksFromID adopts an existing Objective-C object as a FaceLandmarks
+// (nil for 0), retaining it and registering a release finalizer.
 func FaceLandmarksFromID(id objc.ID) *FaceLandmarks {
 	if id == 0 {
 		return nil
 	}
-	return &FaceLandmarks{inner: raw.VNFaceLandmarksFromID(id)}
+	x := &FaceLandmarks{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFaceLandmarks creates a new [FaceLandmarks].
-func NewFaceLandmarks() *FaceLandmarks {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNFaceLandmarks")), objc.RegisterName("new"))
-	return &FaceLandmarks{inner: raw.VNFaceLandmarksFromID(_id)}
+// faceLandmarksAdopt wraps an Objective-C object that this code just created as a
+// FaceLandmarks (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func faceLandmarksAdopt(id objc.ID) *FaceLandmarks {
+	if id == 0 {
+		return nil
+	}
+	x := &FaceLandmarks{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Confidence calls the underlying Confidence.
+// Description returns the object's -description text.
+func (x *FaceLandmarks) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FaceLandmarks) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FaceLandmarks) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FaceLandmarks) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Confidence wraps the corresponding Objective-C method.
 func (x *FaceLandmarks) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
-
-func (x *FaceLandmarks) asFaceLandmarks() *raw.VNFaceLandmarks { return x.inner }
 
 // FaceLandmarksable is the interface implemented by [FaceLandmarks], for mocking and DI.
 type FaceLandmarksable interface {
-	Unwrap() *raw.VNFaceLandmarks
+	obj.Object
 	Confidence() float32
 }
 
 var _ FaceLandmarksable = (*FaceLandmarks)(nil)
+
+// isFaceLandmarks marks FaceLandmarks — and, by embedding promotion, its
+// subclasses — as a member of the FaceLandmarks hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FaceLandmarks) isFaceLandmarks() {}
+
+var _ FaceLandmarksProvider = (*FaceLandmarks)(nil)

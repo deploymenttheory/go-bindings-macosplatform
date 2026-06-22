@@ -5,62 +5,70 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// VolumeIdentifier wraps [raw.FSVolumeIdentifier] with a fluent Go API.
+// VolumeIdentifier is an idiomatic wrapper over the Objective-C class FSVolumeIdentifier.
+//
+// It embeds [EntityIdentifier], promoting that type's methods.
 type VolumeIdentifier struct {
-	inner *raw.FSVolumeIdentifier
+	EntityIdentifier
 }
 
-// Unwrap returns the underlying [raw.FSVolumeIdentifier].
-func (x *VolumeIdentifier) Unwrap() *raw.FSVolumeIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VolumeIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// VolumeIdentifierFromID adopts an existing object pointer as a VolumeIdentifier (nil for 0).
+// VolumeIdentifierFromID adopts an existing Objective-C object as a VolumeIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func VolumeIdentifierFromID(id objc.ID) *VolumeIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &VolumeIdentifier{inner: raw.FSVolumeIdentifierFromID(id)}
+	x := &VolumeIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVolumeIdentifier creates a new [VolumeIdentifier].
+// volumeIdentifierAdopt wraps an Objective-C object that this code just created as a
+// VolumeIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func volumeIdentifierAdopt(id objc.ID) *VolumeIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &VolumeIdentifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVolumeIdentifier creates a new VolumeIdentifier.
 func NewVolumeIdentifier() *VolumeIdentifier {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSVolumeIdentifier")), objc.RegisterName("new"))
-	return &VolumeIdentifier{inner: raw.FSVolumeIdentifierFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSVolumeIdentifier")), objc.RegisterName("new"))
+	return volumeIdentifierAdopt(_id)
 }
 
-// A UUID to uniquely identify this entity.
-//
-// WithUuid sets the uuid property and returns the receiver for chaining.
-func (x *VolumeIdentifier) WithUuid(uuid *foundation.NSUUID) *VolumeIdentifier {
-	x.inner.FSEntityIdentifier.SetUuid(uuid)
+// WithUuid a UUID to uniquely identify this entity.
+func (x *VolumeIdentifier) WithUuid(uuid obj.Object) *VolumeIdentifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return x
 }
 
-// An optional piece of data to distinguish entities that otherwise share the same UUID.
-//
-// WithQualifier sets the qualifier property and returns the receiver for chaining.
-func (x *VolumeIdentifier) WithQualifier(qualifier *foundation.NSData) *VolumeIdentifier {
-	x.inner.FSEntityIdentifier.SetQualifier(qualifier)
+// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
+func (x *VolumeIdentifier) WithQualifier(qualifier obj.Object) *VolumeIdentifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
 	return x
-}
-
-func (x *VolumeIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier {
-	return &x.inner.FSEntityIdentifier
 }
 
 // VolumeIdentifierable is the interface implemented by [VolumeIdentifier], for mocking and DI.
 type VolumeIdentifierable interface {
-	Unwrap() *raw.FSVolumeIdentifier
-	WithUuid(uuid *foundation.NSUUID) *VolumeIdentifier
-	WithQualifier(qualifier *foundation.NSData) *VolumeIdentifier
+	obj.Object
+	WithUuid(uuid obj.Object) *VolumeIdentifier
+	WithQualifier(qualifier obj.Object) *VolumeIdentifier
 }
 
 var _ VolumeIdentifierable = (*VolumeIdentifier)(nil)
+
+var _ EntityIdentifierProvider = (*VolumeIdentifier)(nil)

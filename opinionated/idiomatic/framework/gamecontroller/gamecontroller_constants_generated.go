@@ -5,937 +5,657 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// GCProductCategoryDualSense returns the string constant GCProductCategoryDualSense as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryDualSense() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryDualSense())
+// GCProductCategoryDualSense returns the string constant GCProductCategoryDualSense, for use as a dictionary key or argument.
+func GCProductCategoryDualSense() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryDualSense")))
 }
 
-// GCProductCategoryDualShock4 returns the string constant GCProductCategoryDualShock4 as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryDualShock4() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryDualShock4())
+// GCProductCategoryDualShock4 returns the string constant GCProductCategoryDualShock4, for use as a dictionary key or argument.
+func GCProductCategoryDualShock4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryDualShock4")))
 }
 
-// GCProductCategoryMFi returns the string constant GCProductCategoryMFi as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryMFi() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryMFi())
+// GCProductCategoryMFi returns the string constant GCProductCategoryMFi, for use as a dictionary key or argument.
+func GCProductCategoryMFi() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryMFi")))
 }
 
-// GCProductCategoryXboxOne returns the string constant GCProductCategoryXboxOne as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryXboxOne() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryXboxOne())
+// GCProductCategoryXboxOne returns the string constant GCProductCategoryXboxOne, for use as a dictionary key or argument.
+func GCProductCategoryXboxOne() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryXboxOne")))
 }
 
-// GCProductCategoryHID returns the string constant GCProductCategoryHID as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryHID() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryHID())
+// GCProductCategoryHID returns the string constant GCProductCategoryHID, for use as a dictionary key or argument.
+func GCProductCategoryHID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryHID")))
 }
 
-// The category for game controller products that support 6DoF tracking on visionOS.
-// GCProductCategorySpatialController returns the string constant GCProductCategorySpatialController as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategorySpatialController() objc.ID {
-	return purego.CFConstant(raw.GCProductCategorySpatialController())
+// GCProductCategorySpatialController returns the string constant GCProductCategorySpatialController, for use as a dictionary key or argument.
+func GCProductCategorySpatialController() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategorySpatialController")))
 }
 
-// GCProductCategoryArcadeStick returns the string constant GCProductCategoryArcadeStick as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryArcadeStick() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryArcadeStick())
+// GCProductCategoryArcadeStick returns the string constant GCProductCategoryArcadeStick, for use as a dictionary key or argument.
+func GCProductCategoryArcadeStick() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryArcadeStick")))
 }
 
-// The Siri Remote (1st generation), or Apple TV Remote (1st generation), was first introduced in 2015. It features a Touch surface for touch navigation, and supports device motion.
-// GCProductCategorySiriRemote1stGen returns the string constant GCProductCategorySiriRemote1stGen as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategorySiriRemote1stGen() objc.ID {
-	return purego.CFConstant(raw.GCProductCategorySiriRemote1stGen())
+// GCProductCategorySiriRemote1stGen returns the string constant GCProductCategorySiriRemote1stGen, for use as a dictionary key or argument.
+func GCProductCategorySiriRemote1stGen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategorySiriRemote1stGen")))
 }
 
-// The Siri Remote (2nd generation), or Apple TV Remote (2nd generation), was first introduced in 2021. It features a touch-enabled clickpad for navigation.
-// GCProductCategorySiriRemote2ndGen returns the string constant GCProductCategorySiriRemote2ndGen as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategorySiriRemote2ndGen() objc.ID {
-	return purego.CFConstant(raw.GCProductCategorySiriRemote2ndGen())
+// GCProductCategorySiriRemote2ndGen returns the string constant GCProductCategorySiriRemote2ndGen, for use as a dictionary key or argument.
+func GCProductCategorySiriRemote2ndGen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategorySiriRemote2ndGen")))
 }
 
-// Users can use Apple TV Remote controls in Control Center on an iOS or iPadOS device.
-// GCProductCategoryControlCenterRemote returns the string constant GCProductCategoryControlCenterRemote as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryControlCenterRemote() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryControlCenterRemote())
+// GCProductCategoryControlCenterRemote returns the string constant GCProductCategoryControlCenterRemote, for use as a dictionary key or argument.
+func GCProductCategoryControlCenterRemote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryControlCenterRemote")))
 }
 
-// The Universal Electronics remote is an infrared and Bluetooth Low Energy remote designed to work with the Apple TV.
-// GCProductCategoryUniversalElectronicsRemote returns the string constant GCProductCategoryUniversalElectronicsRemote as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryUniversalElectronicsRemote() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryUniversalElectronicsRemote())
+// GCProductCategoryUniversalElectronicsRemote returns the string constant GCProductCategoryUniversalElectronicsRemote, for use as a dictionary key or argument.
+func GCProductCategoryUniversalElectronicsRemote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryUniversalElectronicsRemote")))
 }
 
-// If multiple remotes have been combined into one, the device will have the GCProductCategoryCoalescedRemote product category. @discussion By default, the Game Controller framework will try to coalesce, or combine, the physical Apple TV Remote and the virtual Control Center remote and treat them as a single GCDevice instance. By setting GCSupportsMultipleMicroGamepads in your app's plist to true, you can disable this behavior.
-// GCProductCategoryCoalescedRemote returns the string constant GCProductCategoryCoalescedRemote as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryCoalescedRemote() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryCoalescedRemote())
+// GCProductCategoryCoalescedRemote returns the string constant GCProductCategoryCoalescedRemote, for use as a dictionary key or argument.
+func GCProductCategoryCoalescedRemote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryCoalescedRemote")))
 }
 
-// GCProductCategoryMouse returns the string constant GCProductCategoryMouse as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryMouse() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryMouse())
+// GCProductCategoryMouse returns the string constant GCProductCategoryMouse, for use as a dictionary key or argument.
+func GCProductCategoryMouse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryMouse")))
 }
 
-// GCProductCategoryKeyboard returns the string constant GCProductCategoryKeyboard as an objc.ID, for use as a dictionary key or selector argument.
-func GCProductCategoryKeyboard() objc.ID {
-	return purego.CFConstant(raw.GCProductCategoryKeyboard())
+// GCProductCategoryKeyboard returns the string constant GCProductCategoryKeyboard, for use as a dictionary key or argument.
+func GCProductCategoryKeyboard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryKeyboard")))
 }
 
-// GCKeyA returns the string constant GCKeyA as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyA() objc.ID {
-	return purego.CFConstant(raw.GCKeyA())
-}
+// GCKeyA returns the string constant GCKeyA, for use as a dictionary key or argument.
+func GCKeyA() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyA"))) }
 
-// GCKeyB returns the string constant GCKeyB as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyB() objc.ID {
-	return purego.CFConstant(raw.GCKeyB())
-}
+// GCKeyB returns the string constant GCKeyB, for use as a dictionary key or argument.
+func GCKeyB() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyB"))) }
 
-// GCKeyC returns the string constant GCKeyC as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyC() objc.ID {
-	return purego.CFConstant(raw.GCKeyC())
-}
+// GCKeyC returns the string constant GCKeyC, for use as a dictionary key or argument.
+func GCKeyC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyC"))) }
 
-// GCKeyD returns the string constant GCKeyD as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyD() objc.ID {
-	return purego.CFConstant(raw.GCKeyD())
-}
+// GCKeyD returns the string constant GCKeyD, for use as a dictionary key or argument.
+func GCKeyD() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyD"))) }
 
-// GCKeyE returns the string constant GCKeyE as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyE() objc.ID {
-	return purego.CFConstant(raw.GCKeyE())
-}
+// GCKeyE returns the string constant GCKeyE, for use as a dictionary key or argument.
+func GCKeyE() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyE"))) }
 
-// GCKeyF returns the string constant GCKeyF as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF() objc.ID {
-	return purego.CFConstant(raw.GCKeyF())
-}
+// GCKeyF returns the string constant GCKeyF, for use as a dictionary key or argument.
+func GCKeyF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF"))) }
 
-// GCKeyG returns the string constant GCKeyG as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyG() objc.ID {
-	return purego.CFConstant(raw.GCKeyG())
-}
+// GCKeyG returns the string constant GCKeyG, for use as a dictionary key or argument.
+func GCKeyG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyG"))) }
 
-// GCKeyH returns the string constant GCKeyH as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyH() objc.ID {
-	return purego.CFConstant(raw.GCKeyH())
-}
+// GCKeyH returns the string constant GCKeyH, for use as a dictionary key or argument.
+func GCKeyH() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyH"))) }
 
-// GCKeyI returns the string constant GCKeyI as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyI() objc.ID {
-	return purego.CFConstant(raw.GCKeyI())
-}
+// GCKeyI returns the string constant GCKeyI, for use as a dictionary key or argument.
+func GCKeyI() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyI"))) }
 
-// GCKeyJ returns the string constant GCKeyJ as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyJ() objc.ID {
-	return purego.CFConstant(raw.GCKeyJ())
-}
+// GCKeyJ returns the string constant GCKeyJ, for use as a dictionary key or argument.
+func GCKeyJ() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyJ"))) }
 
-// GCKeyK returns the string constant GCKeyK as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyK() objc.ID {
-	return purego.CFConstant(raw.GCKeyK())
-}
+// GCKeyK returns the string constant GCKeyK, for use as a dictionary key or argument.
+func GCKeyK() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyK"))) }
 
-// GCKeyL returns the string constant GCKeyL as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyL() objc.ID {
-	return purego.CFConstant(raw.GCKeyL())
-}
+// GCKeyL returns the string constant GCKeyL, for use as a dictionary key or argument.
+func GCKeyL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyL"))) }
 
-// GCKeyM returns the string constant GCKeyM as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyM() objc.ID {
-	return purego.CFConstant(raw.GCKeyM())
-}
+// GCKeyM returns the string constant GCKeyM, for use as a dictionary key or argument.
+func GCKeyM() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyM"))) }
 
-// GCKeyN returns the string constant GCKeyN as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyN() objc.ID {
-	return purego.CFConstant(raw.GCKeyN())
-}
+// GCKeyN returns the string constant GCKeyN, for use as a dictionary key or argument.
+func GCKeyN() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyN"))) }
 
-// GCKeyO returns the string constant GCKeyO as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyO() objc.ID {
-	return purego.CFConstant(raw.GCKeyO())
-}
+// GCKeyO returns the string constant GCKeyO, for use as a dictionary key or argument.
+func GCKeyO() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyO"))) }
 
-// GCKeyP returns the string constant GCKeyP as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyP() objc.ID {
-	return purego.CFConstant(raw.GCKeyP())
-}
+// GCKeyP returns the string constant GCKeyP, for use as a dictionary key or argument.
+func GCKeyP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyP"))) }
 
-// GCKeyQ returns the string constant GCKeyQ as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyQ() objc.ID {
-	return purego.CFConstant(raw.GCKeyQ())
-}
+// GCKeyQ returns the string constant GCKeyQ, for use as a dictionary key or argument.
+func GCKeyQ() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyQ"))) }
 
-// GCKeyR returns the string constant GCKeyR as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyR() objc.ID {
-	return purego.CFConstant(raw.GCKeyR())
-}
+// GCKeyR returns the string constant GCKeyR, for use as a dictionary key or argument.
+func GCKeyR() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyR"))) }
 
-// GCKeyS returns the string constant GCKeyS as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyS() objc.ID {
-	return purego.CFConstant(raw.GCKeyS())
-}
+// GCKeyS returns the string constant GCKeyS, for use as a dictionary key or argument.
+func GCKeyS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyS"))) }
 
-// GCKeyT returns the string constant GCKeyT as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyT() objc.ID {
-	return purego.CFConstant(raw.GCKeyT())
-}
+// GCKeyT returns the string constant GCKeyT, for use as a dictionary key or argument.
+func GCKeyT() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyT"))) }
 
-// GCKeyU returns the string constant GCKeyU as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyU() objc.ID {
-	return purego.CFConstant(raw.GCKeyU())
-}
+// GCKeyU returns the string constant GCKeyU, for use as a dictionary key or argument.
+func GCKeyU() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyU"))) }
 
-// GCKeyV returns the string constant GCKeyV as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyV() objc.ID {
-	return purego.CFConstant(raw.GCKeyV())
-}
+// GCKeyV returns the string constant GCKeyV, for use as a dictionary key or argument.
+func GCKeyV() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyV"))) }
 
-// GCKeyW returns the string constant GCKeyW as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyW() objc.ID {
-	return purego.CFConstant(raw.GCKeyW())
-}
+// GCKeyW returns the string constant GCKeyW, for use as a dictionary key or argument.
+func GCKeyW() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyW"))) }
 
-// GCKeyX returns the string constant GCKeyX as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyX() objc.ID {
-	return purego.CFConstant(raw.GCKeyX())
-}
+// GCKeyX returns the string constant GCKeyX, for use as a dictionary key or argument.
+func GCKeyX() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyX"))) }
 
-// GCKeyY returns the string constant GCKeyY as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyY() objc.ID {
-	return purego.CFConstant(raw.GCKeyY())
-}
+// GCKeyY returns the string constant GCKeyY, for use as a dictionary key or argument.
+func GCKeyY() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyY"))) }
 
-// GCKeyZ returns the string constant GCKeyZ as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyZ() objc.ID {
-	return purego.CFConstant(raw.GCKeyZ())
-}
+// GCKeyZ returns the string constant GCKeyZ, for use as a dictionary key or argument.
+func GCKeyZ() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyZ"))) }
 
-// GCKeyOne returns the string constant GCKeyOne as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyOne() objc.ID {
-	return purego.CFConstant(raw.GCKeyOne())
-}
+// GCKeyOne returns the string constant GCKeyOne, for use as a dictionary key or argument.
+func GCKeyOne() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyOne"))) }
 
-// GCKeyTwo returns the string constant GCKeyTwo as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyTwo() objc.ID {
-	return purego.CFConstant(raw.GCKeyTwo())
-}
+// GCKeyTwo returns the string constant GCKeyTwo, for use as a dictionary key or argument.
+func GCKeyTwo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyTwo"))) }
 
-// GCKeyThree returns the string constant GCKeyThree as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyThree() objc.ID {
-	return purego.CFConstant(raw.GCKeyThree())
-}
+// GCKeyThree returns the string constant GCKeyThree, for use as a dictionary key or argument.
+func GCKeyThree() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyThree"))) }
 
-// GCKeyFour returns the string constant GCKeyFour as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyFour() objc.ID {
-	return purego.CFConstant(raw.GCKeyFour())
-}
+// GCKeyFour returns the string constant GCKeyFour, for use as a dictionary key or argument.
+func GCKeyFour() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyFour"))) }
 
-// GCKeyFive returns the string constant GCKeyFive as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyFive() objc.ID {
-	return purego.CFConstant(raw.GCKeyFive())
-}
+// GCKeyFive returns the string constant GCKeyFive, for use as a dictionary key or argument.
+func GCKeyFive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyFive"))) }
 
-// GCKeySix returns the string constant GCKeySix as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeySix() objc.ID {
-	return purego.CFConstant(raw.GCKeySix())
-}
+// GCKeySix returns the string constant GCKeySix, for use as a dictionary key or argument.
+func GCKeySix() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeySix"))) }
 
-// GCKeySeven returns the string constant GCKeySeven as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeySeven() objc.ID {
-	return purego.CFConstant(raw.GCKeySeven())
-}
+// GCKeySeven returns the string constant GCKeySeven, for use as a dictionary key or argument.
+func GCKeySeven() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeySeven"))) }
 
-// GCKeyEight returns the string constant GCKeyEight as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyEight() objc.ID {
-	return purego.CFConstant(raw.GCKeyEight())
-}
+// GCKeyEight returns the string constant GCKeyEight, for use as a dictionary key or argument.
+func GCKeyEight() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyEight"))) }
 
-// GCKeyNine returns the string constant GCKeyNine as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyNine() objc.ID {
-	return purego.CFConstant(raw.GCKeyNine())
-}
+// GCKeyNine returns the string constant GCKeyNine, for use as a dictionary key or argument.
+func GCKeyNine() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyNine"))) }
 
-// GCKeyZero returns the string constant GCKeyZero as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyZero() objc.ID {
-	return purego.CFConstant(raw.GCKeyZero())
-}
+// GCKeyZero returns the string constant GCKeyZero, for use as a dictionary key or argument.
+func GCKeyZero() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyZero"))) }
 
-// GCKeyReturnOrEnter returns the string constant GCKeyReturnOrEnter as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyReturnOrEnter() objc.ID {
-	return purego.CFConstant(raw.GCKeyReturnOrEnter())
+// GCKeyReturnOrEnter returns the string constant GCKeyReturnOrEnter, for use as a dictionary key or argument.
+func GCKeyReturnOrEnter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyReturnOrEnter")))
 }
 
-// GCKeyEscape returns the string constant GCKeyEscape as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyEscape() objc.ID {
-	return purego.CFConstant(raw.GCKeyEscape())
-}
+// GCKeyEscape returns the string constant GCKeyEscape, for use as a dictionary key or argument.
+func GCKeyEscape() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyEscape"))) }
 
-// GCKeyDeleteOrBackspace returns the string constant GCKeyDeleteOrBackspace as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyDeleteOrBackspace() objc.ID {
-	return purego.CFConstant(raw.GCKeyDeleteOrBackspace())
+// GCKeyDeleteOrBackspace returns the string constant GCKeyDeleteOrBackspace, for use as a dictionary key or argument.
+func GCKeyDeleteOrBackspace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyDeleteOrBackspace")))
 }
 
-// GCKeyTab returns the string constant GCKeyTab as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyTab() objc.ID {
-	return purego.CFConstant(raw.GCKeyTab())
-}
+// GCKeyTab returns the string constant GCKeyTab, for use as a dictionary key or argument.
+func GCKeyTab() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyTab"))) }
 
-// GCKeySpacebar returns the string constant GCKeySpacebar as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeySpacebar() objc.ID {
-	return purego.CFConstant(raw.GCKeySpacebar())
-}
+// GCKeySpacebar returns the string constant GCKeySpacebar, for use as a dictionary key or argument.
+func GCKeySpacebar() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeySpacebar"))) }
 
-// GCKeyHyphen returns the string constant GCKeyHyphen as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyHyphen() objc.ID {
-	return purego.CFConstant(raw.GCKeyHyphen())
-}
+// GCKeyHyphen returns the string constant GCKeyHyphen, for use as a dictionary key or argument.
+func GCKeyHyphen() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyHyphen"))) }
 
-// GCKeyEqualSign returns the string constant GCKeyEqualSign as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyEqualSign() objc.ID {
-	return purego.CFConstant(raw.GCKeyEqualSign())
-}
+// GCKeyEqualSign returns the string constant GCKeyEqualSign, for use as a dictionary key or argument.
+func GCKeyEqualSign() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyEqualSign"))) }
 
-// GCKeyOpenBracket returns the string constant GCKeyOpenBracket as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyOpenBracket() objc.ID {
-	return purego.CFConstant(raw.GCKeyOpenBracket())
-}
+// GCKeyOpenBracket returns the string constant GCKeyOpenBracket, for use as a dictionary key or argument.
+func GCKeyOpenBracket() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyOpenBracket"))) }
 
-// GCKeyCloseBracket returns the string constant GCKeyCloseBracket as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyCloseBracket() objc.ID {
-	return purego.CFConstant(raw.GCKeyCloseBracket())
-}
+// GCKeyCloseBracket returns the string constant GCKeyCloseBracket, for use as a dictionary key or argument.
+func GCKeyCloseBracket() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyCloseBracket"))) }
 
-// GCKeyBackslash returns the string constant GCKeyBackslash as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyBackslash() objc.ID {
-	return purego.CFConstant(raw.GCKeyBackslash())
-}
+// GCKeyBackslash returns the string constant GCKeyBackslash, for use as a dictionary key or argument.
+func GCKeyBackslash() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyBackslash"))) }
 
-// GCKeyNonUSPound returns the string constant GCKeyNonUSPound as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyNonUSPound() objc.ID {
-	return purego.CFConstant(raw.GCKeyNonUSPound())
-}
+// GCKeyNonUSPound returns the string constant GCKeyNonUSPound, for use as a dictionary key or argument.
+func GCKeyNonUSPound() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyNonUSPound"))) }
 
-// GCKeySemicolon returns the string constant GCKeySemicolon as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeySemicolon() objc.ID {
-	return purego.CFConstant(raw.GCKeySemicolon())
-}
+// GCKeySemicolon returns the string constant GCKeySemicolon, for use as a dictionary key or argument.
+func GCKeySemicolon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeySemicolon"))) }
 
-// GCKeyQuote returns the string constant GCKeyQuote as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyQuote() objc.ID {
-	return purego.CFConstant(raw.GCKeyQuote())
-}
+// GCKeyQuote returns the string constant GCKeyQuote, for use as a dictionary key or argument.
+func GCKeyQuote() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyQuote"))) }
 
-// GCKeyGraveAccentAndTilde returns the string constant GCKeyGraveAccentAndTilde as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyGraveAccentAndTilde() objc.ID {
-	return purego.CFConstant(raw.GCKeyGraveAccentAndTilde())
+// GCKeyGraveAccentAndTilde returns the string constant GCKeyGraveAccentAndTilde, for use as a dictionary key or argument.
+func GCKeyGraveAccentAndTilde() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyGraveAccentAndTilde")))
 }
 
-// GCKeyComma returns the string constant GCKeyComma as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyComma() objc.ID {
-	return purego.CFConstant(raw.GCKeyComma())
-}
+// GCKeyComma returns the string constant GCKeyComma, for use as a dictionary key or argument.
+func GCKeyComma() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyComma"))) }
 
-// GCKeyPeriod returns the string constant GCKeyPeriod as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyPeriod() objc.ID {
-	return purego.CFConstant(raw.GCKeyPeriod())
-}
+// GCKeyPeriod returns the string constant GCKeyPeriod, for use as a dictionary key or argument.
+func GCKeyPeriod() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyPeriod"))) }
 
-// GCKeySlash returns the string constant GCKeySlash as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeySlash() objc.ID {
-	return purego.CFConstant(raw.GCKeySlash())
-}
+// GCKeySlash returns the string constant GCKeySlash, for use as a dictionary key or argument.
+func GCKeySlash() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeySlash"))) }
 
-// GCKeyCapsLock returns the string constant GCKeyCapsLock as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyCapsLock() objc.ID {
-	return purego.CFConstant(raw.GCKeyCapsLock())
-}
+// GCKeyCapsLock returns the string constant GCKeyCapsLock, for use as a dictionary key or argument.
+func GCKeyCapsLock() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyCapsLock"))) }
 
-// GCKeyF1 returns the string constant GCKeyF1 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF1() objc.ID {
-	return purego.CFConstant(raw.GCKeyF1())
-}
+// GCKeyF1 returns the string constant GCKeyF1, for use as a dictionary key or argument.
+func GCKeyF1() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF1"))) }
 
-// GCKeyF2 returns the string constant GCKeyF2 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF2() objc.ID {
-	return purego.CFConstant(raw.GCKeyF2())
-}
+// GCKeyF2 returns the string constant GCKeyF2, for use as a dictionary key or argument.
+func GCKeyF2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF2"))) }
 
-// GCKeyF3 returns the string constant GCKeyF3 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF3() objc.ID {
-	return purego.CFConstant(raw.GCKeyF3())
-}
+// GCKeyF3 returns the string constant GCKeyF3, for use as a dictionary key or argument.
+func GCKeyF3() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF3"))) }
 
-// GCKeyF4 returns the string constant GCKeyF4 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF4() objc.ID {
-	return purego.CFConstant(raw.GCKeyF4())
-}
+// GCKeyF4 returns the string constant GCKeyF4, for use as a dictionary key or argument.
+func GCKeyF4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF4"))) }
 
-// GCKeyF5 returns the string constant GCKeyF5 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF5() objc.ID {
-	return purego.CFConstant(raw.GCKeyF5())
-}
+// GCKeyF5 returns the string constant GCKeyF5, for use as a dictionary key or argument.
+func GCKeyF5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF5"))) }
 
-// GCKeyF6 returns the string constant GCKeyF6 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF6() objc.ID {
-	return purego.CFConstant(raw.GCKeyF6())
-}
+// GCKeyF6 returns the string constant GCKeyF6, for use as a dictionary key or argument.
+func GCKeyF6() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF6"))) }
 
-// GCKeyF7 returns the string constant GCKeyF7 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF7() objc.ID {
-	return purego.CFConstant(raw.GCKeyF7())
-}
+// GCKeyF7 returns the string constant GCKeyF7, for use as a dictionary key or argument.
+func GCKeyF7() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF7"))) }
 
-// GCKeyF8 returns the string constant GCKeyF8 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF8() objc.ID {
-	return purego.CFConstant(raw.GCKeyF8())
-}
+// GCKeyF8 returns the string constant GCKeyF8, for use as a dictionary key or argument.
+func GCKeyF8() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF8"))) }
 
-// GCKeyF9 returns the string constant GCKeyF9 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF9() objc.ID {
-	return purego.CFConstant(raw.GCKeyF9())
-}
+// GCKeyF9 returns the string constant GCKeyF9, for use as a dictionary key or argument.
+func GCKeyF9() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF9"))) }
 
-// GCKeyF10 returns the string constant GCKeyF10 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF10() objc.ID {
-	return purego.CFConstant(raw.GCKeyF10())
-}
+// GCKeyF10 returns the string constant GCKeyF10, for use as a dictionary key or argument.
+func GCKeyF10() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF10"))) }
 
-// GCKeyF11 returns the string constant GCKeyF11 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF11() objc.ID {
-	return purego.CFConstant(raw.GCKeyF11())
-}
+// GCKeyF11 returns the string constant GCKeyF11, for use as a dictionary key or argument.
+func GCKeyF11() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF11"))) }
 
-// GCKeyF12 returns the string constant GCKeyF12 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF12() objc.ID {
-	return purego.CFConstant(raw.GCKeyF12())
-}
+// GCKeyF12 returns the string constant GCKeyF12, for use as a dictionary key or argument.
+func GCKeyF12() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF12"))) }
 
-// GCKeyF13 returns the string constant GCKeyF13 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF13() objc.ID {
-	return purego.CFConstant(raw.GCKeyF13())
-}
+// GCKeyF13 returns the string constant GCKeyF13, for use as a dictionary key or argument.
+func GCKeyF13() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF13"))) }
 
-// GCKeyF14 returns the string constant GCKeyF14 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF14() objc.ID {
-	return purego.CFConstant(raw.GCKeyF14())
-}
+// GCKeyF14 returns the string constant GCKeyF14, for use as a dictionary key or argument.
+func GCKeyF14() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF14"))) }
 
-// GCKeyF15 returns the string constant GCKeyF15 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF15() objc.ID {
-	return purego.CFConstant(raw.GCKeyF15())
-}
+// GCKeyF15 returns the string constant GCKeyF15, for use as a dictionary key or argument.
+func GCKeyF15() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF15"))) }
 
-// GCKeyF16 returns the string constant GCKeyF16 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF16() objc.ID {
-	return purego.CFConstant(raw.GCKeyF16())
-}
+// GCKeyF16 returns the string constant GCKeyF16, for use as a dictionary key or argument.
+func GCKeyF16() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF16"))) }
 
-// GCKeyF17 returns the string constant GCKeyF17 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF17() objc.ID {
-	return purego.CFConstant(raw.GCKeyF17())
-}
+// GCKeyF17 returns the string constant GCKeyF17, for use as a dictionary key or argument.
+func GCKeyF17() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF17"))) }
 
-// GCKeyF18 returns the string constant GCKeyF18 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF18() objc.ID {
-	return purego.CFConstant(raw.GCKeyF18())
-}
+// GCKeyF18 returns the string constant GCKeyF18, for use as a dictionary key or argument.
+func GCKeyF18() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF18"))) }
 
-// GCKeyF19 returns the string constant GCKeyF19 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF19() objc.ID {
-	return purego.CFConstant(raw.GCKeyF19())
-}
+// GCKeyF19 returns the string constant GCKeyF19, for use as a dictionary key or argument.
+func GCKeyF19() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF19"))) }
 
-// GCKeyF20 returns the string constant GCKeyF20 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyF20() objc.ID {
-	return purego.CFConstant(raw.GCKeyF20())
-}
+// GCKeyF20 returns the string constant GCKeyF20, for use as a dictionary key or argument.
+func GCKeyF20() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyF20"))) }
 
-// GCKeyPrintScreen returns the string constant GCKeyPrintScreen as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyPrintScreen() objc.ID {
-	return purego.CFConstant(raw.GCKeyPrintScreen())
-}
+// GCKeyPrintScreen returns the string constant GCKeyPrintScreen, for use as a dictionary key or argument.
+func GCKeyPrintScreen() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyPrintScreen"))) }
 
-// GCKeyScrollLock returns the string constant GCKeyScrollLock as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyScrollLock() objc.ID {
-	return purego.CFConstant(raw.GCKeyScrollLock())
-}
+// GCKeyScrollLock returns the string constant GCKeyScrollLock, for use as a dictionary key or argument.
+func GCKeyScrollLock() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyScrollLock"))) }
 
-// GCKeyPause returns the string constant GCKeyPause as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyPause() objc.ID {
-	return purego.CFConstant(raw.GCKeyPause())
-}
+// GCKeyPause returns the string constant GCKeyPause, for use as a dictionary key or argument.
+func GCKeyPause() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyPause"))) }
 
-// GCKeyInsert returns the string constant GCKeyInsert as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInsert() objc.ID {
-	return purego.CFConstant(raw.GCKeyInsert())
-}
+// GCKeyInsert returns the string constant GCKeyInsert, for use as a dictionary key or argument.
+func GCKeyInsert() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyInsert"))) }
 
-// GCKeyHome returns the string constant GCKeyHome as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyHome() objc.ID {
-	return purego.CFConstant(raw.GCKeyHome())
-}
+// GCKeyHome returns the string constant GCKeyHome, for use as a dictionary key or argument.
+func GCKeyHome() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyHome"))) }
 
-// GCKeyPageUp returns the string constant GCKeyPageUp as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyPageUp() objc.ID {
-	return purego.CFConstant(raw.GCKeyPageUp())
-}
+// GCKeyPageUp returns the string constant GCKeyPageUp, for use as a dictionary key or argument.
+func GCKeyPageUp() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyPageUp"))) }
 
-// GCKeyDeleteForward returns the string constant GCKeyDeleteForward as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyDeleteForward() objc.ID {
-	return purego.CFConstant(raw.GCKeyDeleteForward())
+// GCKeyDeleteForward returns the string constant GCKeyDeleteForward, for use as a dictionary key or argument.
+func GCKeyDeleteForward() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyDeleteForward")))
 }
 
-// GCKeyEnd returns the string constant GCKeyEnd as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyEnd() objc.ID {
-	return purego.CFConstant(raw.GCKeyEnd())
-}
+// GCKeyEnd returns the string constant GCKeyEnd, for use as a dictionary key or argument.
+func GCKeyEnd() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyEnd"))) }
 
-// GCKeyPageDown returns the string constant GCKeyPageDown as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyPageDown() objc.ID {
-	return purego.CFConstant(raw.GCKeyPageDown())
-}
+// GCKeyPageDown returns the string constant GCKeyPageDown, for use as a dictionary key or argument.
+func GCKeyPageDown() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyPageDown"))) }
 
-// GCKeyRightArrow returns the string constant GCKeyRightArrow as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyRightArrow() objc.ID {
-	return purego.CFConstant(raw.GCKeyRightArrow())
-}
+// GCKeyRightArrow returns the string constant GCKeyRightArrow, for use as a dictionary key or argument.
+func GCKeyRightArrow() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyRightArrow"))) }
 
-// GCKeyLeftArrow returns the string constant GCKeyLeftArrow as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLeftArrow() objc.ID {
-	return purego.CFConstant(raw.GCKeyLeftArrow())
-}
+// GCKeyLeftArrow returns the string constant GCKeyLeftArrow, for use as a dictionary key or argument.
+func GCKeyLeftArrow() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLeftArrow"))) }
 
-// GCKeyDownArrow returns the string constant GCKeyDownArrow as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyDownArrow() objc.ID {
-	return purego.CFConstant(raw.GCKeyDownArrow())
-}
+// GCKeyDownArrow returns the string constant GCKeyDownArrow, for use as a dictionary key or argument.
+func GCKeyDownArrow() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyDownArrow"))) }
 
-// GCKeyUpArrow returns the string constant GCKeyUpArrow as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyUpArrow() objc.ID {
-	return purego.CFConstant(raw.GCKeyUpArrow())
-}
+// GCKeyUpArrow returns the string constant GCKeyUpArrow, for use as a dictionary key or argument.
+func GCKeyUpArrow() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyUpArrow"))) }
 
-// GCKeyKeypadNumLock returns the string constant GCKeyKeypadNumLock as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadNumLock() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadNumLock())
+// GCKeyKeypadNumLock returns the string constant GCKeyKeypadNumLock, for use as a dictionary key or argument.
+func GCKeyKeypadNumLock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadNumLock")))
 }
 
-// GCKeyKeypadSlash returns the string constant GCKeyKeypadSlash as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadSlash() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadSlash())
-}
+// GCKeyKeypadSlash returns the string constant GCKeyKeypadSlash, for use as a dictionary key or argument.
+func GCKeyKeypadSlash() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadSlash"))) }
 
-// GCKeyKeypadAsterisk returns the string constant GCKeyKeypadAsterisk as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadAsterisk() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadAsterisk())
+// GCKeyKeypadAsterisk returns the string constant GCKeyKeypadAsterisk, for use as a dictionary key or argument.
+func GCKeyKeypadAsterisk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadAsterisk")))
 }
 
-// GCKeyKeypadHyphen returns the string constant GCKeyKeypadHyphen as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadHyphen() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadHyphen())
-}
+// GCKeyKeypadHyphen returns the string constant GCKeyKeypadHyphen, for use as a dictionary key or argument.
+func GCKeyKeypadHyphen() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadHyphen"))) }
 
-// GCKeyKeypadPlus returns the string constant GCKeyKeypadPlus as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadPlus() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadPlus())
-}
+// GCKeyKeypadPlus returns the string constant GCKeyKeypadPlus, for use as a dictionary key or argument.
+func GCKeyKeypadPlus() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadPlus"))) }
 
-// GCKeyKeypadEnter returns the string constant GCKeyKeypadEnter as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadEnter() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadEnter())
-}
+// GCKeyKeypadEnter returns the string constant GCKeyKeypadEnter, for use as a dictionary key or argument.
+func GCKeyKeypadEnter() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadEnter"))) }
 
-// GCKeyKeypad1 returns the string constant GCKeyKeypad1 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad1() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad1())
-}
+// GCKeyKeypad1 returns the string constant GCKeyKeypad1, for use as a dictionary key or argument.
+func GCKeyKeypad1() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad1"))) }
 
-// GCKeyKeypad2 returns the string constant GCKeyKeypad2 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad2() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad2())
-}
+// GCKeyKeypad2 returns the string constant GCKeyKeypad2, for use as a dictionary key or argument.
+func GCKeyKeypad2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad2"))) }
 
-// GCKeyKeypad3 returns the string constant GCKeyKeypad3 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad3() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad3())
-}
+// GCKeyKeypad3 returns the string constant GCKeyKeypad3, for use as a dictionary key or argument.
+func GCKeyKeypad3() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad3"))) }
 
-// GCKeyKeypad4 returns the string constant GCKeyKeypad4 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad4() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad4())
-}
+// GCKeyKeypad4 returns the string constant GCKeyKeypad4, for use as a dictionary key or argument.
+func GCKeyKeypad4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad4"))) }
 
-// GCKeyKeypad5 returns the string constant GCKeyKeypad5 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad5() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad5())
-}
+// GCKeyKeypad5 returns the string constant GCKeyKeypad5, for use as a dictionary key or argument.
+func GCKeyKeypad5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad5"))) }
 
-// GCKeyKeypad6 returns the string constant GCKeyKeypad6 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad6() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad6())
-}
+// GCKeyKeypad6 returns the string constant GCKeyKeypad6, for use as a dictionary key or argument.
+func GCKeyKeypad6() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad6"))) }
 
-// GCKeyKeypad7 returns the string constant GCKeyKeypad7 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad7() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad7())
-}
+// GCKeyKeypad7 returns the string constant GCKeyKeypad7, for use as a dictionary key or argument.
+func GCKeyKeypad7() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad7"))) }
 
-// GCKeyKeypad8 returns the string constant GCKeyKeypad8 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad8() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad8())
-}
+// GCKeyKeypad8 returns the string constant GCKeyKeypad8, for use as a dictionary key or argument.
+func GCKeyKeypad8() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad8"))) }
 
-// GCKeyKeypad9 returns the string constant GCKeyKeypad9 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad9() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad9())
-}
+// GCKeyKeypad9 returns the string constant GCKeyKeypad9, for use as a dictionary key or argument.
+func GCKeyKeypad9() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad9"))) }
 
-// GCKeyKeypad0 returns the string constant GCKeyKeypad0 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypad0() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypad0())
-}
+// GCKeyKeypad0 returns the string constant GCKeyKeypad0, for use as a dictionary key or argument.
+func GCKeyKeypad0() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypad0"))) }
 
-// GCKeyKeypadPeriod returns the string constant GCKeyKeypadPeriod as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadPeriod() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadPeriod())
-}
+// GCKeyKeypadPeriod returns the string constant GCKeyKeypadPeriod, for use as a dictionary key or argument.
+func GCKeyKeypadPeriod() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadPeriod"))) }
 
-// GCKeyKeypadEqualSign returns the string constant GCKeyKeypadEqualSign as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyKeypadEqualSign() objc.ID {
-	return purego.CFConstant(raw.GCKeyKeypadEqualSign())
+// GCKeyKeypadEqualSign returns the string constant GCKeyKeypadEqualSign, for use as a dictionary key or argument.
+func GCKeyKeypadEqualSign() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyKeypadEqualSign")))
 }
 
-// GCKeyNonUSBackslash returns the string constant GCKeyNonUSBackslash as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyNonUSBackslash() objc.ID {
-	return purego.CFConstant(raw.GCKeyNonUSBackslash())
+// GCKeyNonUSBackslash returns the string constant GCKeyNonUSBackslash, for use as a dictionary key or argument.
+func GCKeyNonUSBackslash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyNonUSBackslash")))
 }
 
-// GCKeyApplication returns the string constant GCKeyApplication as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyApplication() objc.ID {
-	return purego.CFConstant(raw.GCKeyApplication())
-}
+// GCKeyApplication returns the string constant GCKeyApplication, for use as a dictionary key or argument.
+func GCKeyApplication() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyApplication"))) }
 
-// GCKeyPower returns the string constant GCKeyPower as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyPower() objc.ID {
-	return purego.CFConstant(raw.GCKeyPower())
-}
+// GCKeyPower returns the string constant GCKeyPower, for use as a dictionary key or argument.
+func GCKeyPower() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyPower"))) }
 
-// GCKeyInternational1 returns the string constant GCKeyInternational1 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational1() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational1())
+// GCKeyInternational1 returns the string constant GCKeyInternational1, for use as a dictionary key or argument.
+func GCKeyInternational1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational1")))
 }
 
-// GCKeyInternational2 returns the string constant GCKeyInternational2 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational2() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational2())
+// GCKeyInternational2 returns the string constant GCKeyInternational2, for use as a dictionary key or argument.
+func GCKeyInternational2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational2")))
 }
 
-// GCKeyInternational3 returns the string constant GCKeyInternational3 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational3() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational3())
+// GCKeyInternational3 returns the string constant GCKeyInternational3, for use as a dictionary key or argument.
+func GCKeyInternational3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational3")))
 }
 
-// GCKeyInternational4 returns the string constant GCKeyInternational4 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational4() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational4())
+// GCKeyInternational4 returns the string constant GCKeyInternational4, for use as a dictionary key or argument.
+func GCKeyInternational4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational4")))
 }
 
-// GCKeyInternational5 returns the string constant GCKeyInternational5 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational5() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational5())
+// GCKeyInternational5 returns the string constant GCKeyInternational5, for use as a dictionary key or argument.
+func GCKeyInternational5() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational5")))
 }
 
-// GCKeyInternational6 returns the string constant GCKeyInternational6 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational6() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational6())
+// GCKeyInternational6 returns the string constant GCKeyInternational6, for use as a dictionary key or argument.
+func GCKeyInternational6() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational6")))
 }
 
-// GCKeyInternational7 returns the string constant GCKeyInternational7 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational7() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational7())
+// GCKeyInternational7 returns the string constant GCKeyInternational7, for use as a dictionary key or argument.
+func GCKeyInternational7() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational7")))
 }
 
-// GCKeyInternational8 returns the string constant GCKeyInternational8 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational8() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational8())
+// GCKeyInternational8 returns the string constant GCKeyInternational8, for use as a dictionary key or argument.
+func GCKeyInternational8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational8")))
 }
 
-// GCKeyInternational9 returns the string constant GCKeyInternational9 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyInternational9() objc.ID {
-	return purego.CFConstant(raw.GCKeyInternational9())
+// GCKeyInternational9 returns the string constant GCKeyInternational9, for use as a dictionary key or argument.
+func GCKeyInternational9() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyInternational9")))
 }
 
-// GCKeyLANG1 returns the string constant GCKeyLANG1 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG1() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG1())
-}
+// GCKeyLANG1 returns the string constant GCKeyLANG1, for use as a dictionary key or argument.
+func GCKeyLANG1() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG1"))) }
 
-// GCKeyLANG2 returns the string constant GCKeyLANG2 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG2() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG2())
-}
+// GCKeyLANG2 returns the string constant GCKeyLANG2, for use as a dictionary key or argument.
+func GCKeyLANG2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG2"))) }
 
-// GCKeyLANG3 returns the string constant GCKeyLANG3 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG3() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG3())
-}
+// GCKeyLANG3 returns the string constant GCKeyLANG3, for use as a dictionary key or argument.
+func GCKeyLANG3() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG3"))) }
 
-// GCKeyLANG4 returns the string constant GCKeyLANG4 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG4() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG4())
-}
+// GCKeyLANG4 returns the string constant GCKeyLANG4, for use as a dictionary key or argument.
+func GCKeyLANG4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG4"))) }
 
-// GCKeyLANG5 returns the string constant GCKeyLANG5 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG5() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG5())
-}
+// GCKeyLANG5 returns the string constant GCKeyLANG5, for use as a dictionary key or argument.
+func GCKeyLANG5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG5"))) }
 
-// GCKeyLANG6 returns the string constant GCKeyLANG6 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG6() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG6())
-}
+// GCKeyLANG6 returns the string constant GCKeyLANG6, for use as a dictionary key or argument.
+func GCKeyLANG6() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG6"))) }
 
-// GCKeyLANG7 returns the string constant GCKeyLANG7 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG7() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG7())
-}
+// GCKeyLANG7 returns the string constant GCKeyLANG7, for use as a dictionary key or argument.
+func GCKeyLANG7() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG7"))) }
 
-// GCKeyLANG8 returns the string constant GCKeyLANG8 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG8() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG8())
-}
+// GCKeyLANG8 returns the string constant GCKeyLANG8, for use as a dictionary key or argument.
+func GCKeyLANG8() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG8"))) }
 
-// GCKeyLANG9 returns the string constant GCKeyLANG9 as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLANG9() objc.ID {
-	return purego.CFConstant(raw.GCKeyLANG9())
-}
+// GCKeyLANG9 returns the string constant GCKeyLANG9, for use as a dictionary key or argument.
+func GCKeyLANG9() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLANG9"))) }
 
-// GCKeyLeftControl returns the string constant GCKeyLeftControl as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLeftControl() objc.ID {
-	return purego.CFConstant(raw.GCKeyLeftControl())
-}
+// GCKeyLeftControl returns the string constant GCKeyLeftControl, for use as a dictionary key or argument.
+func GCKeyLeftControl() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLeftControl"))) }
 
-// GCKeyLeftShift returns the string constant GCKeyLeftShift as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLeftShift() objc.ID {
-	return purego.CFConstant(raw.GCKeyLeftShift())
-}
+// GCKeyLeftShift returns the string constant GCKeyLeftShift, for use as a dictionary key or argument.
+func GCKeyLeftShift() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLeftShift"))) }
 
-// GCKeyLeftAlt returns the string constant GCKeyLeftAlt as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLeftAlt() objc.ID {
-	return purego.CFConstant(raw.GCKeyLeftAlt())
-}
+// GCKeyLeftAlt returns the string constant GCKeyLeftAlt, for use as a dictionary key or argument.
+func GCKeyLeftAlt() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLeftAlt"))) }
 
-// GCKeyLeftGUI returns the string constant GCKeyLeftGUI as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyLeftGUI() objc.ID {
-	return purego.CFConstant(raw.GCKeyLeftGUI())
-}
+// GCKeyLeftGUI returns the string constant GCKeyLeftGUI, for use as a dictionary key or argument.
+func GCKeyLeftGUI() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyLeftGUI"))) }
 
-// GCKeyRightControl returns the string constant GCKeyRightControl as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyRightControl() objc.ID {
-	return purego.CFConstant(raw.GCKeyRightControl())
-}
+// GCKeyRightControl returns the string constant GCKeyRightControl, for use as a dictionary key or argument.
+func GCKeyRightControl() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyRightControl"))) }
 
-// GCKeyRightShift returns the string constant GCKeyRightShift as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyRightShift() objc.ID {
-	return purego.CFConstant(raw.GCKeyRightShift())
-}
+// GCKeyRightShift returns the string constant GCKeyRightShift, for use as a dictionary key or argument.
+func GCKeyRightShift() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyRightShift"))) }
 
-// GCKeyRightAlt returns the string constant GCKeyRightAlt as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyRightAlt() objc.ID {
-	return purego.CFConstant(raw.GCKeyRightAlt())
-}
+// GCKeyRightAlt returns the string constant GCKeyRightAlt, for use as a dictionary key or argument.
+func GCKeyRightAlt() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyRightAlt"))) }
 
-// GCKeyRightGUI returns the string constant GCKeyRightGUI as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyRightGUI() objc.ID {
-	return purego.CFConstant(raw.GCKeyRightGUI())
-}
+// GCKeyRightGUI returns the string constant GCKeyRightGUI, for use as a dictionary key or argument.
+func GCKeyRightGUI() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyRightGUI"))) }
 
-// The primary directional input surface for the directional gamepad @note Equivalent to microgamepad.dpad @note For the 1st generation and 2nd generation Siri Remotes, this represents touching anywhere on the entire touch surface.
-// GCInputMicroGamepadDpad returns the string constant GCInputMicroGamepadDpad as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputMicroGamepadDpad() objc.ID {
-	return purego.CFConstant(raw.GCInputMicroGamepadDpad())
+// GCInputMicroGamepadDpad returns the string constant GCInputMicroGamepadDpad, for use as a dictionary key or argument.
+func GCInputMicroGamepadDpad() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadDpad")))
 }
 
-// The primary button for the microgamepad @note For the 1st generation and 2nd generation Siri Remotes, this represents pressing anywhere on the touch surface.
-// GCInputMicroGamepadButtonA returns the string constant GCInputMicroGamepadButtonA as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputMicroGamepadButtonA() objc.ID {
-	return purego.CFConstant(raw.GCInputMicroGamepadButtonA())
+// GCInputMicroGamepadButtonA returns the string constant GCInputMicroGamepadButtonA, for use as a dictionary key or argument.
+func GCInputMicroGamepadButtonA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadButtonA")))
 }
 
-// The secondary button for the microgamepad @note Equivalent to microgamepad.buttonX @note For the 1st and 2nd generation Siri Remotes, this represents pressing the play/pause button.
-// GCInputMicroGamepadButtonX returns the string constant GCInputMicroGamepadButtonX as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputMicroGamepadButtonX() objc.ID {
-	return purego.CFConstant(raw.GCInputMicroGamepadButtonX())
+// GCInputMicroGamepadButtonX returns the string constant GCInputMicroGamepadButtonX, for use as a dictionary key or argument.
+func GCInputMicroGamepadButtonX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadButtonX")))
 }
 
-// The primary menu button for the microgamepad @note Equivalent to microgamepad.buttonMenu @note For the 1st generation Siri Remote, this represents pressing the play/pause button. For the 2nd generation Siri Remote, this represents pressing the back button. @note You should avoid polling this button every frame. tvOS will run a gesture recognizer on events before forwarding them to your application that can reduce the window to poll button changes. Instead, register a pressedChangedHandler or a valueChangedHandler.
-// GCInputMicroGamepadButtonMenu returns the string constant GCInputMicroGamepadButtonMenu as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputMicroGamepadButtonMenu() objc.ID {
-	return purego.CFConstant(raw.GCInputMicroGamepadButtonMenu())
+// GCInputMicroGamepadButtonMenu returns the string constant GCInputMicroGamepadButtonMenu, for use as a dictionary key or argument.
+func GCInputMicroGamepadButtonMenu() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputMicroGamepadButtonMenu")))
 }
 
-// The primary directional input surface for the directional gamepad @note Equivalent to microgamepad.dpad @note For the 2021 2nd generation Siri Remote, this represents touching anywhere on the entire touch surface - including the inner and outer rings.
-// GCInputDirectionalDpad returns the string constant GCInputDirectionalDpad as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputDirectionalDpad() objc.ID {
-	return purego.CFConstant(raw.GCInputDirectionalDpad())
+// GCInputDirectionalDpad returns the string constant GCInputDirectionalDpad, for use as a dictionary key or argument.
+func GCInputDirectionalDpad() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalDpad")))
 }
 
-// The button corresponding to pressing anywhere on the primary directional input surface for the directional gamepad @note Equivalent to microgamepad.buttonA @note For the 2021 2nd generation Siri Remote, this represents pressing anywhere the entire touch surface - including the inner and outer rings.
-// GCInputDirectionalTouchSurfaceButton returns the string constant GCInputDirectionalTouchSurfaceButton as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputDirectionalTouchSurfaceButton() objc.ID {
-	return purego.CFConstant(raw.GCInputDirectionalTouchSurfaceButton())
+// GCInputDirectionalTouchSurfaceButton returns the string constant GCInputDirectionalTouchSurfaceButton, for use as a dictionary key or argument.
+func GCInputDirectionalTouchSurfaceButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalTouchSurfaceButton")))
 }
 
-// An optional secondary directional input surface for the directional gamepad. This input is guaranteed to be an 8-way digital dpad with physical Up, Down, Left, Right butttons. @note For the 2021 2nd generation Siri Remote, this represents pressing on the outer ring of the touch surface.
-// GCInputDirectionalCardinalDpad returns the string constant GCInputDirectionalCardinalDpad as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputDirectionalCardinalDpad() objc.ID {
-	return purego.CFConstant(raw.GCInputDirectionalCardinalDpad())
+// GCInputDirectionalCardinalDpad returns the string constant GCInputDirectionalCardinalDpad, for use as a dictionary key or argument.
+func GCInputDirectionalCardinalDpad() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalCardinalDpad")))
 }
 
-// An optional button for the directional gamepad. This input represents the center button of the cardinal dpad. @note For the 2021 2nd generation Siri Remote, this represents pressing anywhere on the inner ring of the touch surface.
-// GCInputDirectionalCenterButton returns the string constant GCInputDirectionalCenterButton as an objc.ID, for use as a dictionary key or selector argument.
-func GCInputDirectionalCenterButton() objc.ID {
-	return purego.CFConstant(raw.GCInputDirectionalCenterButton())
+// GCInputDirectionalCenterButton returns the string constant GCInputDirectionalCenterButton, for use as a dictionary key or argument.
+func GCInputDirectionalCenterButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionalCenterButton")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCControllerDidConnectNotification for observing connections of controllers. Use GCControllerDidDisconnectNotification for observing disconnections of controllers. Connections and disconnections of controllers will also be reflected in the controllers array of the GCController class. The 'object' property of the notification will contain the GCController that was connected or disconnected. For example: - (void)controllerDidConnect:(NSNotification *)note { GCController *controller = note.object; .... } @see NSNotificationCenter @see GCController.controllers
-// GCControllerDidConnectNotification returns the string constant GCControllerDidConnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCControllerDidConnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCControllerDidConnectNotification())
+// GCControllerDidConnectNotification returns the string constant GCControllerDidConnectNotification, for use as a dictionary key or argument.
+func GCControllerDidConnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidConnectNotification")))
 }
 
-// GCControllerDidDisconnectNotification returns the string constant GCControllerDidDisconnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCControllerDidDisconnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCControllerDidDisconnectNotification())
+// GCControllerDidDisconnectNotification returns the string constant GCControllerDidDisconnectNotification, for use as a dictionary key or argument.
+func GCControllerDidDisconnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidDisconnectNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used controller. This is a good time to swap out UI to match the new current controller, and unregister any handlers with the old current controller. The 'object' property of the notification will contain the GCController that became the current controller. For example: - (void)controllerDidBecomeCurrent:(NSNotification *)note { GCController *controller = note.object; ... } @see NSNotificationCenter @see GCController.controllers
-// GCControllerDidBecomeCurrentNotification returns the string constant GCControllerDidBecomeCurrentNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCControllerDidBecomeCurrentNotification() objc.ID {
-	return purego.CFConstant(raw.GCControllerDidBecomeCurrentNotification())
+// GCControllerDidBecomeCurrentNotification returns the string constant GCControllerDidBecomeCurrentNotification, for use as a dictionary key or argument.
+func GCControllerDidBecomeCurrentNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidBecomeCurrentNotification")))
 }
 
-// GCControllerDidStopBeingCurrentNotification returns the string constant GCControllerDidStopBeingCurrentNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCControllerDidStopBeingCurrentNotification() objc.ID {
-	return purego.CFConstant(raw.GCControllerDidStopBeingCurrentNotification())
+// GCControllerDidStopBeingCurrentNotification returns the string constant GCControllerDidStopBeingCurrentNotification, for use as a dictionary key or argument.
+func GCControllerDidStopBeingCurrentNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCControllerDidStopBeingCurrentNotification")))
 }
 
-// Use this constant with NSNotificationCenter to listen to controller user customization events. When a user customizes the button mappings or other settings of a controller this notification will be posted. This is a good time to swap out UI to match the new user settings. Users can modify game controller settings through the Settings app on iOS, tvOS, and macOS. The 'object' property of the notification will contain the GCController that was customized. For example: - (void)controllerDidConnect:(NSNotification *)note { GCController *controller = note.object; .... } @see NSNotificationCenter @see GCController.controllers
-// GCControllerUserCustomizationsDidChangeNotification returns the string constant GCControllerUserCustomizationsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCControllerUserCustomizationsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.GCControllerUserCustomizationsDidChangeNotification())
+// GCControllerUserCustomizationsDidChangeNotification returns the string constant GCControllerUserCustomizationsDidChangeNotification, for use as a dictionary key or argument.
+func GCControllerUserCustomizationsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCControllerUserCustomizationsDidChangeNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events Use GCKeyboardDidConnectNotification for observing keyboard connection Use GCKeyboardDidDisconnectNotification for observing keyboard disconnection The 'object' property of the notification will contain the GCKeyboard that was connected or disconnected. @see NSNotificationCetner @note All connected keyboards are coalesced into one keyboard object, so notification about connection/disconnection will only be delivered once until last keyboard disconnects.
-// GCKeyboardDidConnectNotification returns the string constant GCKeyboardDidConnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyboardDidConnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCKeyboardDidConnectNotification())
+// GCKeyboardDidConnectNotification returns the string constant GCKeyboardDidConnectNotification, for use as a dictionary key or argument.
+func GCKeyboardDidConnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyboardDidConnectNotification")))
 }
 
-// GCKeyboardDidDisconnectNotification returns the string constant GCKeyboardDidDisconnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCKeyboardDidDisconnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCKeyboardDidDisconnectNotification())
+// GCKeyboardDidDisconnectNotification returns the string constant GCKeyboardDidDisconnectNotification, for use as a dictionary key or argument.
+func GCKeyboardDidDisconnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCKeyboardDidDisconnectNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCMouseDidConnectNotification for observing connections of mice. Use GCMouserDidDisconnectNotification for observing disconnections of mice. Connections and disconnections of mice will also be reflected in the mice array of the GCMouse class. The 'object' property of the notification will contain the GCMouse that was connected or disconnected. For example: - (void)controllerDidConnect:(NSNotification *)note { GCMouse *mouse = note.object; .... } @see NSNotificationCenter @see GCMouse.mice
-// GCMouseDidConnectNotification returns the string constant GCMouseDidConnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCMouseDidConnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCMouseDidConnectNotification())
+// GCMouseDidConnectNotification returns the string constant GCMouseDidConnectNotification, for use as a dictionary key or argument.
+func GCMouseDidConnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidConnectNotification")))
 }
 
-// GCMouseDidDisconnectNotification returns the string constant GCMouseDidDisconnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCMouseDidDisconnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCMouseDidDisconnectNotification())
+// GCMouseDidDisconnectNotification returns the string constant GCMouseDidDisconnectNotification, for use as a dictionary key or argument.
+func GCMouseDidDisconnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidDisconnectNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used mouse. This is a good time to swap out UI to match the new current mouse, and unregister any handlers with the old current controller. The 'object' property of the notification will contain the GCMouse that became the current one. For example: - (void)mouseDidBecomeCurrent:(NSNotification *)note { GCMouse *mouse = note.object; ... } @see NSNotificationCenter @see GCMouse.mice @see GCMouse.current
-// GCMouseDidBecomeCurrentNotification returns the string constant GCMouseDidBecomeCurrentNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCMouseDidBecomeCurrentNotification() objc.ID {
-	return purego.CFConstant(raw.GCMouseDidBecomeCurrentNotification())
+// GCMouseDidBecomeCurrentNotification returns the string constant GCMouseDidBecomeCurrentNotification, for use as a dictionary key or argument.
+func GCMouseDidBecomeCurrentNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidBecomeCurrentNotification")))
 }
 
-// GCMouseDidStopBeingCurrentNotification returns the string constant GCMouseDidStopBeingCurrentNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCMouseDidStopBeingCurrentNotification() objc.ID {
-	return purego.CFConstant(raw.GCMouseDidStopBeingCurrentNotification())
+// GCMouseDidStopBeingCurrentNotification returns the string constant GCMouseDidStopBeingCurrentNotification, for use as a dictionary key or argument.
+func GCMouseDidStopBeingCurrentNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCMouseDidStopBeingCurrentNotification")))
 }
 
-// Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCRacingWheelDidConnectNotification for observing connections of racing wheels. Use GCRacingWheelDidDisconnectNotification for observing disconnections of racing wheels. Connections and disconnections of racing wheels will also be reflected in the connectedRacingWheels array of the GCRacingWheel class. The 'object' property of the notification will contain the GCRacingWheel that was connected or disconnected. For example: - (void)wheelDidConnect:(NSNotification *)note { GCRacingWheel *controller = note.object; .... } @see NSNotificationCenter @see GCRacingWheel.connectedRacingWheels
-// GCRacingWheelDidConnectNotification returns the string constant GCRacingWheelDidConnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCRacingWheelDidConnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCRacingWheelDidConnectNotification())
+// GCRacingWheelDidConnectNotification returns the string constant GCRacingWheelDidConnectNotification, for use as a dictionary key or argument.
+func GCRacingWheelDidConnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCRacingWheelDidConnectNotification")))
 }
 
-// GCRacingWheelDidDisconnectNotification returns the string constant GCRacingWheelDidDisconnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func GCRacingWheelDidDisconnectNotification() objc.ID {
-	return purego.CFConstant(raw.GCRacingWheelDidDisconnectNotification())
+// GCRacingWheelDidDisconnectNotification returns the string constant GCRacingWheelDidDisconnectNotification, for use as a dictionary key or argument.
+func GCRacingWheelDidDisconnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCRacingWheelDidDisconnectNotification")))
 }
 
-// GCHapticsLocalityDefault returns the string constant GCHapticsLocalityDefault as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityDefault() objc.ID {
-	if _r := raw.GCHapticsLocalityDefault(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityDefault returns the string constant GCHapticsLocalityDefault, for use as a dictionary key or argument.
+func GCHapticsLocalityDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityDefault")))
 }
 
-// GCHapticsLocalityAll returns the string constant GCHapticsLocalityAll as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityAll() objc.ID {
-	if _r := raw.GCHapticsLocalityAll(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityAll returns the string constant GCHapticsLocalityAll, for use as a dictionary key or argument.
+func GCHapticsLocalityAll() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityAll")))
 }
 
-// GCHapticsLocalityHandles returns the string constant GCHapticsLocalityHandles as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityHandles() objc.ID {
-	if _r := raw.GCHapticsLocalityHandles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityHandles returns the string constant GCHapticsLocalityHandles, for use as a dictionary key or argument.
+func GCHapticsLocalityHandles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityHandles")))
 }
 
-// GCHapticsLocalityLeftHandle returns the string constant GCHapticsLocalityLeftHandle as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityLeftHandle() objc.ID {
-	if _r := raw.GCHapticsLocalityLeftHandle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityLeftHandle returns the string constant GCHapticsLocalityLeftHandle, for use as a dictionary key or argument.
+func GCHapticsLocalityLeftHandle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityLeftHandle")))
 }
 
-// GCHapticsLocalityRightHandle returns the string constant GCHapticsLocalityRightHandle as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityRightHandle() objc.ID {
-	if _r := raw.GCHapticsLocalityRightHandle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityRightHandle returns the string constant GCHapticsLocalityRightHandle, for use as a dictionary key or argument.
+func GCHapticsLocalityRightHandle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightHandle")))
 }
 
-// GCHapticsLocalityTriggers returns the string constant GCHapticsLocalityTriggers as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityTriggers() objc.ID {
-	if _r := raw.GCHapticsLocalityTriggers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityTriggers returns the string constant GCHapticsLocalityTriggers, for use as a dictionary key or argument.
+func GCHapticsLocalityTriggers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityTriggers")))
 }
 
-// GCHapticsLocalityLeftTrigger returns the string constant GCHapticsLocalityLeftTrigger as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityLeftTrigger() objc.ID {
-	if _r := raw.GCHapticsLocalityLeftTrigger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityLeftTrigger returns the string constant GCHapticsLocalityLeftTrigger, for use as a dictionary key or argument.
+func GCHapticsLocalityLeftTrigger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityLeftTrigger")))
 }
 
-// GCHapticsLocalityRightTrigger returns the string constant GCHapticsLocalityRightTrigger as an objc.ID, for use as a dictionary key or selector argument.
-func GCHapticsLocalityRightTrigger() objc.ID {
-	if _r := raw.GCHapticsLocalityRightTrigger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GCHapticsLocalityRightTrigger returns the string constant GCHapticsLocalityRightTrigger, for use as a dictionary key or argument.
+func GCHapticsLocalityRightTrigger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightTrigger")))
 }

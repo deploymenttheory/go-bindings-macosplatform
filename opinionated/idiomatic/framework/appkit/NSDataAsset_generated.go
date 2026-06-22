@@ -5,86 +5,107 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object from a data set type stored in an asset catalog.
+// DataAsset is an idiomatic wrapper over the Objective-C class NSDataAsset.
 //
-// DataAsset wraps [raw.NSDataAsset] with a fluent Go API.
+// An object from a data set type stored in an asset catalog.
 type DataAsset struct {
-	inner *raw.NSDataAsset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDataAsset].
-func (x *DataAsset) Unwrap() *raw.NSDataAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DataAsset) ID() objc.ID { return x.inner.Ptr() }
-
-// DataAssetFromID adopts an existing object pointer as a DataAsset (nil for 0).
+// DataAssetFromID adopts an existing Objective-C object as a DataAsset
+// (nil for 0), retaining it and registering a release finalizer.
 func DataAssetFromID(id objc.ID) *DataAsset {
 	if id == 0 {
 		return nil
 	}
-	return &DataAsset{inner: raw.NSDataAssetFromID(id)}
+	x := &DataAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns an object with a reference to the named data asset in an asset catalog.
-//
-// NewDataAssetWithName creates a new [DataAsset].
-func NewDataAssetWithName(name *foundation.NSString) *DataAsset {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDataAsset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), name.Ptr())
-	return &DataAsset{inner: raw.NSDataAssetFromID(_id)}
-}
-
-// Initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
-//
-// NewDataAssetWithNameBundle creates a new [DataAsset].
-func NewDataAssetWithNameBundle(name *foundation.NSString, bundle *foundation.NSBundle) *DataAsset {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDataAsset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundle:"), name.Ptr(), bundle.Ptr())
-	return &DataAsset{inner: raw.NSDataAssetFromID(_id)}
-}
-
-// The name used to reference the data asset
-//
-// Name calls the underlying Name.
-func (x *DataAsset) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
+// dataAssetAdopt wraps an Objective-C object that this code just created as a
+// DataAsset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dataAssetAdopt(id objc.ID) *DataAsset {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &DataAsset{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The data for this asset, as stored in the asset catalog
-//
-// Data calls the underlying Data.
-func (x *DataAsset) Data() *foundation.NSData {
-	return x.inner.Data()
+// Description returns the object's -description text.
+func (x *DataAsset) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The Uniform Type Identifier for this data object.
-//
-// TypeIdentifier calls the underlying TypeIdentifier.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DataAsset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DataAsset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataAsset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDataAssetWithName initializes and returns an object with a reference to the named data asset in an asset catalog.
+func NewDataAssetWithName(name obj.Object) *DataAsset {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataAsset")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), objref.IDOf(name))
+	return dataAssetAdopt(_id)
+}
+
+// NewDataAssetWithNameBundle initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
+func NewDataAssetWithNameBundle(name obj.Object, bundle obj.Object) *DataAsset {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataAsset")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
+	return dataAssetAdopt(_id)
+}
+
+// Name the name used to reference the data asset
+func (x *DataAsset) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return obj.Wrap(_r)
+}
+
+// Data the data for this asset, as stored in the asset catalog
+func (x *DataAsset) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
+}
+
+// TypeIdentifier the Uniform Type Identifier for this data object.
 func (x *DataAsset) TypeIdentifier() string {
-	_r := x.inner.TypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // DataAssetable is the interface implemented by [DataAsset], for mocking and DI.
 type DataAssetable interface {
-	Unwrap() *raw.NSDataAsset
-	Name() string
-	Data() *foundation.NSData
+	obj.Object
+	Name() obj.Object
+	Data() obj.Object
 	TypeIdentifier() string
 }
 

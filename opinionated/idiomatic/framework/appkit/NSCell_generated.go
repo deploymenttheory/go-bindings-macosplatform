@@ -5,1308 +5,1167 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A mechanism for displaying text or images in a view object without the overhead of a full NSView subclass.
+// Cell is an idiomatic wrapper over the Objective-C class NSCell.
 //
-// Cell wraps [raw.NSCell] with a fluent Go API.
+// Cell is an abstract base — you do not construct it directly. Construct one of [ActionCell], [BrowserCell], [ImageCell], [TextAttachmentCell] and pass it where a Cell is accepted.
+//
+// A mechanism for displaying text or images in a view object without the overhead of a full NSView subclass.
 type Cell struct {
-	inner *raw.NSCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCell].
-func (x *Cell) Unwrap() *raw.NSCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Cell) ID() objc.ID { return x.inner.Ptr() }
-
-// CellFromID adopts an existing object pointer as a Cell (nil for 0).
+// CellFromID adopts an existing Objective-C object as a Cell
+// (nil for 0), retaining it and registering a release finalizer.
 func CellFromID(id objc.ID) *Cell {
 	if id == 0 {
 		return nil
 	}
-	return &Cell{inner: raw.NSCellFromID(id)}
+	x := &Cell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCell creates a new [Cell].
-func NewCell() *Cell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCell")), objc.RegisterName("new"))
-	return &Cell{inner: raw.NSCellFromID(_id)}
+// cellAdopt wraps an Objective-C object that this code just created as a
+// Cell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cellAdopt(id objc.ID) *Cell {
+	if id == 0 {
+		return nil
+	}
+	x := &Cell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns an NSCell object initialized with the specified string and set to have the cell’s default menu.
-//
-// NewCellTextCell creates a new [Cell].
+// Description returns the object's -description text.
+func (x *Cell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Cell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Cell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Cell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCellTextCell returns an NSCell object initialized with the specified string and set to have the cell’s default menu.
 func NewCellTextCell(string_ string) *Cell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &Cell{inner: raw.NSCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return cellAdopt(_id)
 }
 
-// Returns an NSCell object initialized with the specified image and set to have the cell’s default menu.
-//
-// NewCellImageCell creates a new [Cell].
-func NewCellImageCell(image *raw.NSImage) *Cell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), image.Ptr())
-	return &Cell{inner: raw.NSCellFromID(_id)}
+// NewCellImageCell returns an NSCell object initialized with the specified image and set to have the cell’s default menu.
+func NewCellImageCell(image *Image) *Cell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
+	return cellAdopt(_id)
 }
 
-// NewCellWithCoder creates a new [Cell].
-func NewCellWithCoder(coder *foundation.NSCoder) *Cell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Cell{inner: raw.NSCellFromID(_id)}
+// NewCellWithCoder creates a new Cell.
+func NewCellWithCoder(coder obj.Object) *Cell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return cellAdopt(_id)
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *Cell) WithControlView(controlView ViewProvider) *Cell {
-	x.inner.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *Cell) WithType(type_ NSCellType) *Cell {
-	x.inner.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *Cell) WithType(type_ CellType) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *Cell) WithState(state int) *Cell {
-	x.inner.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *Cell) WithTarget(target objc.ID) *Cell {
-	x.inner.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *Cell) WithTarget(target obj.Object) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *Cell) WithAction(action objc.SEL) *Cell {
-	x.inner.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *Cell) WithTag(tag int) *Cell {
-	x.inner.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *Cell) WithTitle(title string) *Cell {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *Cell) WithEnabled(enabled bool) *Cell {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *Cell) WithContinuous(continuous bool) *Cell {
-	x.inner.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *Cell) WithEditable(editable bool) *Cell {
-	x.inner.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *Cell) WithSelectable(selectable bool) *Cell {
-	x.inner.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *Cell) WithBordered(bordered bool) *Cell {
-	x.inner.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *Cell) WithBezeled(bezeled bool) *Cell {
-	x.inner.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *Cell) WithScrollable(scrollable bool) *Cell {
-	x.inner.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *Cell) WithHighlighted(highlighted bool) *Cell {
-	x.inner.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Cell) WithAlignment(alignment NSTextAlignment) *Cell {
-	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *Cell) WithAlignment(alignment TextAlignment) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *Cell) WithWraps(wraps bool) *Cell {
-	x.inner.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *Cell) WithFont(font *Font) *Cell {
-	x.inner.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *Cell) WithFormatter(formatter *foundation.NSFormatter) *Cell {
-	x.inner.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *Cell) WithFormatter(formatter obj.Object) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *Cell) WithObjectValue(objectValue objc.ID) *Cell {
-	x.inner.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *Cell) WithObjectValue(objectValue obj.Object) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *Cell) WithStringValue(stringValue string) *Cell {
-	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *Cell) WithIntValue(intValue int) *Cell {
-	x.inner.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *Cell) WithFloatValue(floatValue float32) *Cell {
-	x.inner.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *Cell) WithDoubleValue(doubleValue float64) *Cell {
-	x.inner.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *Cell) WithIntegerValue(integerValue int) *Cell {
-	x.inner.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *Cell) WithImage(image *Image) *Cell {
-	x.inner.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Cell) WithControlSize(controlSize NSControlSize) *Cell {
-	x.inner.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *Cell) WithControlSize(controlSize ControlSize) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *Cell) WithRepresentedObject(representedObject objc.ID) *Cell {
-	x.inner.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *Cell) WithRepresentedObject(representedObject obj.Object) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *Cell) WithMenu(menu *Menu) *Cell {
-	x.inner.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *Cell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Cell {
-	x.inner.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Cell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Cell {
-	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *Cell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Cell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Cell {
-	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *Cell) WithLineBreakMode(lineBreakMode LineBreakMode) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *Cell) WithAllowsUndo(allowsUndo bool) *Cell {
-	x.inner.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *Cell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *Cell {
-	x.inner.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Cell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Cell {
-	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *Cell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *Cell) WithUsesSingleLineMode(usesSingleLineMode bool) *Cell {
-	x.inner.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *Cell) WithRefusesFirstResponder(refusesFirstResponder bool) *Cell {
-	x.inner.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *Cell) WithShowsFirstResponder(showsFirstResponder bool) *Cell {
-	x.inner.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Cell) WithFocusRingType(focusRingType NSFocusRingType) *Cell {
-	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *Cell) WithFocusRingType(focusRingType FocusRingType) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *Cell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Cell {
-	x.inner.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *Cell) WithAttributedStringValue(attributedStringValue obj.Object) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *Cell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *Cell {
-	x.inner.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *Cell) WithImportsGraphics(importsGraphics bool) *Cell {
-	x.inner.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *Cell) WithAllowsMixedState(allowsMixedState bool) *Cell {
-	x.inner.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *Cell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *Cell {
-	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *Cell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *Cell) WithControlTint(controlTint NSControlTint) *Cell {
-	x.inner.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *Cell) WithControlTint(controlTint ControlTint) *Cell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Sets the conditions on which the receiver sends action messages to its target.
-//
-// SendActionOn calls the underlying SendActionOn.
-func (x *Cell) SendActionOn(mask NSEventMask) int {
-	return x.inner.SendActionOn(raw.NSEventMask(mask))
+// SendActionOn sets the conditions on which the receiver sends action messages to its target.
+func (x *Cell) SendActionOn(mask EventMask) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendActionOn:"), mask)
+	return _r
 }
 
-// Compares the string values of the receiver another cell, disregarding case.
-//
-// Compare calls the underlying Compare.
-func (x *Cell) Compare(otherCell objc.ID) foundation.NSComparisonResult {
-	return x.inner.Compare(otherCell)
+// TakeIntValueFrom sets the value of the receiver’s cell to an integer value obtained from the specified object.
+func (x *Cell) TakeIntValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeIntValueFrom:"), objref.IDOf(sender))
 }
 
-// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
-//
-// TakeIntValueFrom calls the underlying TakeIntValueFrom.
-func (x *Cell) TakeIntValueFrom(sender objc.ID) {
-	x.inner.TakeIntValueFrom(sender)
+// TakeFloatValueFrom sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
+func (x *Cell) TakeFloatValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeFloatValueFrom:"), objref.IDOf(sender))
 }
 
-// Sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
-//
-// TakeFloatValueFrom calls the underlying TakeFloatValueFrom.
-func (x *Cell) TakeFloatValueFrom(sender objc.ID) {
-	x.inner.TakeFloatValueFrom(sender)
+// TakeDoubleValueFrom sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
+func (x *Cell) TakeDoubleValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeDoubleValueFrom:"), objref.IDOf(sender))
 }
 
-// Sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
-//
-// TakeDoubleValueFrom calls the underlying TakeDoubleValueFrom.
-func (x *Cell) TakeDoubleValueFrom(sender objc.ID) {
-	x.inner.TakeDoubleValueFrom(sender)
+// TakeStringValueFrom sets the value of the receiver’s cell to the string value obtained from the specified object.
+func (x *Cell) TakeStringValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeStringValueFrom:"), objref.IDOf(sender))
 }
 
-// Sets the value of the receiver’s cell to the string value obtained from the specified object.
-//
-// TakeStringValueFrom calls the underlying TakeStringValueFrom.
-func (x *Cell) TakeStringValueFrom(sender objc.ID) {
-	x.inner.TakeStringValueFrom(sender)
+// TakeObjectValueFrom sets the value of the receiver’s cell to the object value obtained from the specified object.
+func (x *Cell) TakeObjectValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeObjectValueFrom:"), objref.IDOf(sender))
 }
 
-// Sets the value of the receiver’s cell to the object value obtained from the specified object.
-//
-// TakeObjectValueFrom calls the underlying TakeObjectValueFrom.
-func (x *Cell) TakeObjectValueFrom(sender objc.ID) {
-	x.inner.TakeObjectValueFrom(sender)
+// TakeIntegerValueFrom sets the value of the receiver’s cell to an integer value obtained from the specified object.
+func (x *Cell) TakeIntegerValueFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeIntegerValueFrom:"), objref.IDOf(sender))
 }
 
-// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
-//
-// TakeIntegerValueFrom calls the underlying TakeIntegerValueFrom.
-func (x *Cell) TakeIntegerValueFrom(sender objc.ID) {
-	x.inner.TakeIntegerValueFrom(sender)
+// CellAttribute returns the value for the specified cell attribute.
+func (x *Cell) CellAttribute(parameter CellAttribute) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cellAttribute:"), parameter)
+	return _r
 }
 
-// Returns the value for the specified cell attribute.
-//
-// CellAttribute calls the underlying CellAttribute.
-func (x *Cell) CellAttribute(parameter NSCellAttribute) int {
-	return x.inner.CellAttribute(raw.NSCellAttribute(parameter))
+// SetCellAttributeTo sets the value for the specified cell attribute.
+func (x *Cell) SetCellAttributeTo(parameter CellAttribute, value int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellAttribute:to:"), parameter, value)
 }
 
-// Sets the value for the specified cell attribute.
-//
-// SetCellAttributeTo calls the underlying SetCellAttributeTo.
-func (x *Cell) SetCellAttributeTo(parameter NSCellAttribute, value int) {
-	x.inner.SetCellAttributeTo(raw.NSCellAttribute(parameter), value)
-}
-
-// Returns the rectangle in which the receiver draws its image.
-//
-// ImageRectForBounds calls the underlying ImageRectForBounds.
+// ImageRectForBounds returns the rectangle in which the receiver draws its image.
 func (x *Cell) ImageRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.ImageRectForBounds(rect)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageRectForBounds:"), rect)
+	return _r
 }
 
-// Returns the rectangle in which the receiver draws its title text.
-//
-// TitleRectForBounds calls the underlying TitleRectForBounds.
+// TitleRectForBounds returns the rectangle in which the receiver draws its title text.
 func (x *Cell) TitleRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.TitleRectForBounds(rect)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("titleRectForBounds:"), rect)
+	return _r
 }
 
-// Returns the rectangle within which the receiver draws itself
-//
-// DrawingRectForBounds calls the underlying DrawingRectForBounds.
+// DrawingRectForBounds returns the rectangle within which the receiver draws itself
 func (x *Cell) DrawingRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.DrawingRectForBounds(rect)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("drawingRectForBounds:"), rect)
+	return _r
 }
 
-// Returns the minimum size needed to display the receiver, constraining it to the specified rectangle.
-//
-// CellSizeForBounds calls the underlying CellSizeForBounds.
+// CellSizeForBounds returns the minimum size needed to display the receiver, constraining it to the specified rectangle.
 func (x *Cell) CellSizeForBounds(rect corefoundation.CGRect) corefoundation.CGSize {
-	return x.inner.CellSizeForBounds(rect)
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("cellSizeForBounds:"), rect)
+	return _r
 }
 
-// Returns the color the receiver uses when drawing the selection highlight.
-//
-// HighlightColorWithFrameInView calls the underlying HighlightColorWithFrameInView.
-func (x *Cell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) *Color {
-	_r := x.inner.HighlightColorWithFrameInView(cellFrame, controlView)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+// HighlightColorWithFrameInView returns the color the receiver uses when drawing the selection highlight.
+func (x *Cell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightColorWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	return ColorFromID(_r)
 }
 
-// Recalculates the cell geometry.
-//
-// CalcDrawInfo calls the underlying CalcDrawInfo.
+// CalcDrawInfo recalculates the cell geometry.
 func (x *Cell) CalcDrawInfo(rect corefoundation.CGRect) {
-	x.inner.CalcDrawInfo(rect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calcDrawInfo:"), rect)
 }
 
-// Configures the textual and background attributes of the receiver’s field editor.
-//
-// SetUpFieldEditorAttributes calls the underlying SetUpFieldEditorAttributes.
-func (x *Cell) SetUpFieldEditorAttributes(textObj *raw.NSText) *Text {
-	_r := x.inner.SetUpFieldEditorAttributes(textObj)
-	if _r == nil {
-		return nil
-	}
-	return &Text{inner: _r}
+// SetUpFieldEditorAttributes configures the textual and background attributes of the receiver’s field editor.
+func (x *Cell) SetUpFieldEditorAttributes(textObj *Text) *Text {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpFieldEditorAttributes:"), objref.IDOf(textObj))
+	return TextFromID(_r)
 }
 
-// Draws the interior portion of the receiver, which includes the image or text portion but does not include the border.
-//
-// DrawInteriorWithFrameInView calls the underlying DrawInteriorWithFrameInView.
-func (x *Cell) DrawInteriorWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawInteriorWithFrameInView(cellFrame, controlView)
+// DrawInteriorWithFrameInView draws the interior portion of the receiver, which includes the image or text portion but does not include the border.
+func (x *Cell) DrawInteriorWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInteriorWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
-// Draws the receiver’s border and then draws the interior of the cell.
-//
-// DrawWithFrameInView calls the underlying DrawWithFrameInView.
-func (x *Cell) DrawWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawWithFrameInView(cellFrame, controlView)
+// DrawWithFrameInView draws the receiver’s border and then draws the interior of the cell.
+func (x *Cell) DrawWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
-// Redraws the receiver with the specified highlight setting.
-//
-// HighlightWithFrameInView calls the underlying HighlightWithFrameInView.
-func (x *Cell) HighlightWithFrameInView(flag bool, cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.HighlightWithFrameInView(flag, cellFrame, controlView)
+// HighlightWithFrameInView redraws the receiver with the specified highlight setting.
+func (x *Cell) HighlightWithFrameInView(flag bool, cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlight:withFrame:inView:"), flag, cellFrame, objref.IDOf(controlView))
 }
 
-// Returns the initial delay and repeat values for continuous sending of action messages to target objects.
-//
-// GetPeriodicDelayInterval calls the underlying GetPeriodicDelayInterval.
-func (x *Cell) GetPeriodicDelayInterval(delay *float32, interval *float32) {
-	x.inner.GetPeriodicDelayInterval(delay, interval)
+// GetPeriodicDelayInterval returns the initial delay and repeat values for continuous sending of action messages to target objects.
+func (x *Cell) GetPeriodicDelayInterval() (delay float32, interval float32) {
+	var _out0 float32
+	var _out1 float32
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPeriodicDelay:interval:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
 }
 
-// Begins tracking mouse events within the receiver.
-//
-// StartTrackingAtInView calls the underlying StartTrackingAtInView.
-func (x *Cell) StartTrackingAtInView(startPoint corefoundation.CGPoint, controlView *raw.NSView) bool {
-	return x.inner.StartTrackingAtInView(startPoint, controlView)
+// StartTrackingAtInView begins tracking mouse events within the receiver.
+func (x *Cell) StartTrackingAtInView(startPoint corefoundation.CGPoint, controlView *View) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startTrackingAt:inView:"), startPoint, objref.IDOf(controlView))
+	return _r
 }
 
-// Returns a Boolean value that indicates whether mouse tracking should continue in the receiving cell.
-//
-// ContinueTrackingAtInView calls the underlying ContinueTrackingAtInView.
-func (x *Cell) ContinueTrackingAtInView(lastPoint corefoundation.CGPoint, currentPoint corefoundation.CGPoint, controlView *raw.NSView) bool {
-	return x.inner.ContinueTrackingAtInView(lastPoint, currentPoint, controlView)
+// ContinueTrackingAtInView returns a Boolean value that indicates whether mouse tracking should continue in the receiving cell.
+func (x *Cell) ContinueTrackingAtInView(lastPoint corefoundation.CGPoint, currentPoint corefoundation.CGPoint, controlView *View) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("continueTracking:at:inView:"), lastPoint, currentPoint, objref.IDOf(controlView))
+	return _r
 }
 
-// Stops tracking mouse events within the receiver.
-//
-// StopTrackingAtInViewMouseIsUp calls the underlying StopTrackingAtInViewMouseIsUp.
-func (x *Cell) StopTrackingAtInViewMouseIsUp(lastPoint corefoundation.CGPoint, stopPoint corefoundation.CGPoint, controlView *raw.NSView, flag bool) {
-	x.inner.StopTrackingAtInViewMouseIsUp(lastPoint, stopPoint, controlView, flag)
+// StopTrackingAtInViewMouseIsUp stops tracking mouse events within the receiver.
+func (x *Cell) StopTrackingAtInViewMouseIsUp(lastPoint corefoundation.CGPoint, stopPoint corefoundation.CGPoint, controlView *View, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTracking:at:inView:mouseIsUp:"), lastPoint, stopPoint, objref.IDOf(controlView), flag)
 }
 
-// Initiates the mouse tracking behavior in a cell.
-//
-// TrackMouseInRectOfViewUntilMouseUp calls the underlying TrackMouseInRectOfViewUntilMouseUp.
-func (x *Cell) TrackMouseInRectOfViewUntilMouseUp(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView, flag bool) bool {
-	return x.inner.TrackMouseInRectOfViewUntilMouseUp(event, cellFrame, controlView, flag)
+// TrackMouseInRectOfViewUntilMouseUp initiates the mouse tracking behavior in a cell.
+func (x *Cell) TrackMouseInRectOfViewUntilMouseUp(event *Event, cellFrame corefoundation.CGRect, controlView *View, flag bool) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trackMouse:inRect:ofView:untilMouseUp:"), objref.IDOf(event), cellFrame, objref.IDOf(controlView), flag)
+	return _r
 }
 
-// Begins editing of the receiver’s text using the specified field editor.
-//
-// EditWithFrameInViewEditorDelegateEvent calls the underlying EditWithFrameInViewEditorDelegateEvent.
-func (x *Cell) EditWithFrameInViewEditorDelegateEvent(rect corefoundation.CGRect, controlView *raw.NSView, textObj *raw.NSText, delegate objc.ID, event *raw.NSEvent) {
-	x.inner.EditWithFrameInViewEditorDelegateEvent(rect, controlView, textObj, delegate, event)
+// EditWithFrameInViewEditorDelegateEvent begins editing of the receiver’s text using the specified field editor.
+func (x *Cell) EditWithFrameInViewEditorDelegateEvent(rect corefoundation.CGRect, controlView *View, textObj *Text, delegate obj.Object, event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editWithFrame:inView:editor:delegate:event:"), rect, objref.IDOf(controlView), objref.IDOf(textObj), objref.IDOf(delegate), objref.IDOf(event))
 }
 
-// Selects the specified text range in the cell’s field editor.
-//
-// SelectWithFrameInViewEditorDelegateStartLength calls the underlying SelectWithFrameInViewEditorDelegateStartLength.
-func (x *Cell) SelectWithFrameInViewEditorDelegateStartLength(rect corefoundation.CGRect, controlView *raw.NSView, textObj *raw.NSText, delegate objc.ID, selStart int, selLength int) {
-	x.inner.SelectWithFrameInViewEditorDelegateStartLength(rect, controlView, textObj, delegate, selStart, selLength)
+// SelectWithFrameInViewEditorDelegateStartLength selects the specified text range in the cell’s field editor.
+func (x *Cell) SelectWithFrameInViewEditorDelegateStartLength(rect corefoundation.CGRect, controlView *View, textObj *Text, delegate obj.Object, selStart int, selLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectWithFrame:inView:editor:delegate:start:length:"), rect, objref.IDOf(controlView), objref.IDOf(textObj), objref.IDOf(delegate), selStart, selLength)
 }
 
-// Ends the editing of text in the receiver using the specified field editor.
-//
-// EndEditing calls the underlying EndEditing.
-func (x *Cell) EndEditing(textObj *raw.NSText) {
-	x.inner.EndEditing(textObj)
+// EndEditing ends the editing of text in the receiver using the specified field editor.
+func (x *Cell) EndEditing(textObj *Text) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endEditing:"), objref.IDOf(textObj))
 }
 
-// Sets the receiver to show the I-beam cursor while it tracks the mouse.
-//
-// ResetCursorRectInView calls the underlying ResetCursorRectInView.
-func (x *Cell) ResetCursorRectInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.ResetCursorRectInView(cellFrame, controlView)
+// ResetCursorRectInView sets the receiver to show the I-beam cursor while it tracks the mouse.
+func (x *Cell) ResetCursorRectInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetCursorRect:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
-// Returns the menu associated with the cell and related to the specified event and frame.
-//
-// MenuForEventInRectOfView calls the underlying MenuForEventInRectOfView.
-func (x *Cell) MenuForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, view *raw.NSView) *Menu {
-	_r := x.inner.MenuForEventInRectOfView(event, cellFrame, view)
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+// MenuForEventInRectOfView returns the menu associated with the cell and related to the specified event and frame.
+func (x *Cell) MenuForEventInRectOfView(event *Event, cellFrame corefoundation.CGRect, view *View) *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuForEvent:inRect:ofView:"), objref.IDOf(event), cellFrame, objref.IDOf(view))
+	return MenuFromID(_r)
 }
 
-// Returns a custom field editor for editing in the view.
-//
-// FieldEditorForView calls the underlying FieldEditorForView.
-func (x *Cell) FieldEditorForView(controlView *raw.NSView) *TextView {
-	_r := x.inner.FieldEditorForView(controlView)
-	if _r == nil {
-		return nil
-	}
-	return &TextView{inner: _r}
+// FieldEditorForView returns a custom field editor for editing in the view.
+func (x *Cell) FieldEditorForView(controlView *View) *TextView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fieldEditorForView:"), objref.IDOf(controlView))
+	return TextViewFromID(_r)
 }
 
-// Generates dragging image components with the specified frame in the view.
-//
-// DraggingImageComponentsWithFrameInView calls the underlying DraggingImageComponentsWithFrameInView.
-func (x *Cell) DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *raw.NSView) *foundation.NSArray[*raw.NSDraggingImageComponent] {
-	return x.inner.DraggingImageComponentsWithFrameInView(frame, view)
+// DraggingImageComponentsWithFrameInView generates dragging image components with the specified frame in the view.
+func (x *Cell) DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *View) []*DraggingImageComponent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draggingImageComponentsWithFrame:inView:"), frame, objref.IDOf(view))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
 }
 
-// ControlView calls the underlying ControlView.
+// ControlView wraps the corresponding Objective-C method.
 func (x *Cell) ControlView() *View {
-	_r := x.inner.ControlView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlView"))
+	return ViewFromID(_r)
 }
 
-// SetControlView calls the underlying SetControlView.
-func (x *Cell) SetControlView(controlView *raw.NSView) {
-	x.inner.SetControlView(controlView)
+// SetControlView wraps the corresponding Objective-C method.
+func (x *Cell) SetControlView(controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 }
 
-// Type calls the underlying Type.
-func (x *Cell) Type() NSCellType {
-	return NSCellType(x.inner.Type())
+// Type wraps the corresponding Objective-C method.
+func (x *Cell) Type() CellType {
+	_r := objc.Send[CellType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetType calls the underlying SetType.
-func (x *Cell) SetType(type_ NSCellType) {
-	x.inner.SetType(raw.NSCellType(type_))
+// SetType wraps the corresponding Objective-C method.
+func (x *Cell) SetType(type_ CellType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// State calls the underlying State.
+// State wraps the corresponding Objective-C method.
 func (x *Cell) State() int {
-	return x.inner.State()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// SetState calls the underlying SetState.
+// SetState wraps the corresponding Objective-C method.
 func (x *Cell) SetState(state int) {
-	x.inner.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 }
 
-// Target calls the underlying Target.
-func (x *Cell) Target() objc.ID {
-	return x.inner.Target()
+// Target wraps the corresponding Objective-C method.
+func (x *Cell) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return obj.Wrap(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *Cell) SetTarget(target objc.ID) {
-	x.inner.SetTarget(target)
+// SetTarget wraps the corresponding Objective-C method.
+func (x *Cell) SetTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// Action calls the underlying Action.
-func (x *Cell) Action() objc.SEL {
-	return x.inner.Action()
-}
-
-// SetAction calls the underlying SetAction.
-func (x *Cell) SetAction(action objc.SEL) {
-	x.inner.SetAction(action)
-}
-
-// Tag calls the underlying Tag.
+// Tag wraps the corresponding Objective-C method.
 func (x *Cell) Tag() int {
-	return x.inner.Tag()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tag"))
+	return _r
 }
 
-// SetTag calls the underlying SetTag.
+// SetTag wraps the corresponding Objective-C method.
 func (x *Cell) SetTag(tag int) {
-	x.inner.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *Cell) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *Cell) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// IsOpaque calls the underlying IsOpaque.
+// IsOpaque wraps the corresponding Objective-C method.
 func (x *Cell) IsOpaque() bool {
-	return x.inner.IsOpaque()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
+	return _r
 }
 
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *Cell) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *Cell) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// IsContinuous calls the underlying IsContinuous.
+// IsContinuous wraps the corresponding Objective-C method.
 func (x *Cell) IsContinuous() bool {
-	return x.inner.IsContinuous()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContinuous"))
+	return _r
 }
 
-// SetContinuous calls the underlying SetContinuous.
+// SetContinuous wraps the corresponding Objective-C method.
 func (x *Cell) SetContinuous(continuous bool) {
-	x.inner.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 }
 
-// IsEditable calls the underlying IsEditable.
+// IsEditable wraps the corresponding Objective-C method.
 func (x *Cell) IsEditable() bool {
-	return x.inner.IsEditable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+	return _r
 }
 
-// SetEditable calls the underlying SetEditable.
+// SetEditable wraps the corresponding Objective-C method.
 func (x *Cell) SetEditable(editable bool) {
-	x.inner.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
-// IsSelectable calls the underlying IsSelectable.
+// IsSelectable wraps the corresponding Objective-C method.
 func (x *Cell) IsSelectable() bool {
-	return x.inner.IsSelectable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectable"))
+	return _r
 }
 
-// SetSelectable calls the underlying SetSelectable.
+// SetSelectable wraps the corresponding Objective-C method.
 func (x *Cell) SetSelectable(selectable bool) {
-	x.inner.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 }
 
-// IsBordered calls the underlying IsBordered.
+// IsBordered wraps the corresponding Objective-C method.
 func (x *Cell) IsBordered() bool {
-	return x.inner.IsBordered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBordered"))
+	return _r
 }
 
-// SetBordered calls the underlying SetBordered.
+// SetBordered wraps the corresponding Objective-C method.
 func (x *Cell) SetBordered(bordered bool) {
-	x.inner.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 }
 
-// IsBezeled calls the underlying IsBezeled.
+// IsBezeled wraps the corresponding Objective-C method.
 func (x *Cell) IsBezeled() bool {
-	return x.inner.IsBezeled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBezeled"))
+	return _r
 }
 
-// SetBezeled calls the underlying SetBezeled.
+// SetBezeled wraps the corresponding Objective-C method.
 func (x *Cell) SetBezeled(bezeled bool) {
-	x.inner.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 }
 
-// IsScrollable calls the underlying IsScrollable.
+// IsScrollable wraps the corresponding Objective-C method.
 func (x *Cell) IsScrollable() bool {
-	return x.inner.IsScrollable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isScrollable"))
+	return _r
 }
 
-// SetScrollable calls the underlying SetScrollable.
+// SetScrollable wraps the corresponding Objective-C method.
 func (x *Cell) SetScrollable(scrollable bool) {
-	x.inner.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 }
 
-// IsHighlighted calls the underlying IsHighlighted.
+// IsHighlighted wraps the corresponding Objective-C method.
 func (x *Cell) IsHighlighted() bool {
-	return x.inner.IsHighlighted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlighted"))
+	return _r
 }
 
-// SetHighlighted calls the underlying SetHighlighted.
+// SetHighlighted wraps the corresponding Objective-C method.
 func (x *Cell) SetHighlighted(highlighted bool) {
-	x.inner.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 }
 
-// Alignment calls the underlying Alignment.
-func (x *Cell) Alignment() NSTextAlignment {
-	return NSTextAlignment(x.inner.Alignment())
+// Alignment wraps the corresponding Objective-C method.
+func (x *Cell) Alignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
-// SetAlignment calls the underlying SetAlignment.
-func (x *Cell) SetAlignment(alignment NSTextAlignment) {
-	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
+// SetAlignment wraps the corresponding Objective-C method.
+func (x *Cell) SetAlignment(alignment TextAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 }
 
-// Wraps calls the underlying Wraps.
+// Wraps wraps the corresponding Objective-C method.
 func (x *Cell) Wraps() bool {
-	return x.inner.Wraps()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wraps"))
+	return _r
 }
 
-// SetWraps calls the underlying SetWraps.
+// SetWraps wraps the corresponding Objective-C method.
 func (x *Cell) SetWraps(wraps bool) {
-	x.inner.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 }
 
-// Font calls the underlying Font.
+// Font wraps the corresponding Objective-C method.
 func (x *Cell) Font() *Font {
-	_r := x.inner.Font()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+	return FontFromID(_r)
 }
 
-// SetFont calls the underlying SetFont.
-func (x *Cell) SetFont(font *raw.NSFont) {
-	x.inner.SetFont(font)
+// SetFont wraps the corresponding Objective-C method.
+func (x *Cell) SetFont(font *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 }
 
-// KeyEquivalent calls the underlying KeyEquivalent.
+// KeyEquivalent wraps the corresponding Objective-C method.
 func (x *Cell) KeyEquivalent() string {
-	_r := x.inner.KeyEquivalent()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyEquivalent"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Formatter calls the underlying Formatter.
-func (x *Cell) Formatter() *foundation.NSFormatter {
-	return x.inner.Formatter()
+// Formatter wraps the corresponding Objective-C method.
+func (x *Cell) Formatter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatter"))
+	return obj.Wrap(_r)
 }
 
-// SetFormatter calls the underlying SetFormatter.
-func (x *Cell) SetFormatter(formatter *foundation.NSFormatter) {
-	x.inner.SetFormatter(formatter)
+// SetFormatter wraps the corresponding Objective-C method.
+func (x *Cell) SetFormatter(formatter obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 }
 
-// ObjectValue calls the underlying ObjectValue.
-func (x *Cell) ObjectValue() objc.ID {
-	return x.inner.ObjectValue()
+// ObjectValue wraps the corresponding Objective-C method.
+func (x *Cell) ObjectValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectValue"))
+	return obj.Wrap(_r)
 }
 
-// SetObjectValue calls the underlying SetObjectValue.
-func (x *Cell) SetObjectValue(objectValue objc.ID) {
-	x.inner.SetObjectValue(objectValue)
+// SetObjectValue wraps the corresponding Objective-C method.
+func (x *Cell) SetObjectValue(objectValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 }
 
-// HasValidObjectValue calls the underlying HasValidObjectValue.
+// HasValidObjectValue wraps the corresponding Objective-C method.
 func (x *Cell) HasValidObjectValue() bool {
-	return x.inner.HasValidObjectValue()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasValidObjectValue"))
+	return _r
 }
 
-// StringValue calls the underlying StringValue.
+// StringValue wraps the corresponding Objective-C method.
 func (x *Cell) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetStringValue calls the underlying SetStringValue.
+// SetStringValue wraps the corresponding Objective-C method.
 func (x *Cell) SetStringValue(stringValue string) {
-	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 }
 
-// IntValue calls the underlying IntValue.
+// IntValue wraps the corresponding Objective-C method.
 func (x *Cell) IntValue() int {
-	return x.inner.IntValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intValue"))
+	return _r
 }
 
-// SetIntValue calls the underlying SetIntValue.
+// SetIntValue wraps the corresponding Objective-C method.
 func (x *Cell) SetIntValue(intValue int) {
-	x.inner.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 }
 
-// FloatValue calls the underlying FloatValue.
+// FloatValue wraps the corresponding Objective-C method.
 func (x *Cell) FloatValue() float32 {
-	return x.inner.FloatValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+	return _r
 }
 
-// SetFloatValue calls the underlying SetFloatValue.
+// SetFloatValue wraps the corresponding Objective-C method.
 func (x *Cell) SetFloatValue(floatValue float32) {
-	x.inner.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }
 
-// DoubleValue calls the underlying DoubleValue.
+// DoubleValue wraps the corresponding Objective-C method.
 func (x *Cell) DoubleValue() float64 {
-	return x.inner.DoubleValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+	return _r
 }
 
-// SetDoubleValue calls the underlying SetDoubleValue.
+// SetDoubleValue wraps the corresponding Objective-C method.
 func (x *Cell) SetDoubleValue(doubleValue float64) {
-	x.inner.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 }
 
-// IntegerValue calls the underlying IntegerValue.
+// IntegerValue wraps the corresponding Objective-C method.
 func (x *Cell) IntegerValue() int {
-	return x.inner.IntegerValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("integerValue"))
+	return _r
 }
 
-// SetIntegerValue calls the underlying SetIntegerValue.
+// SetIntegerValue wraps the corresponding Objective-C method.
 func (x *Cell) SetIntegerValue(integerValue int) {
-	x.inner.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 }
 
-// Image calls the underlying Image.
+// Image wraps the corresponding Objective-C method.
 func (x *Cell) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
-// SetImage calls the underlying SetImage.
-func (x *Cell) SetImage(image *raw.NSImage) {
-	x.inner.SetImage(image)
+// SetImage wraps the corresponding Objective-C method.
+func (x *Cell) SetImage(image *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// ControlSize calls the underlying ControlSize.
-func (x *Cell) ControlSize() NSControlSize {
-	return NSControlSize(x.inner.ControlSize())
+// ControlSize wraps the corresponding Objective-C method.
+func (x *Cell) ControlSize() ControlSize {
+	_r := objc.Send[ControlSize](objref.IDOf(x), objc.RegisterName("controlSize"))
+	return _r
 }
 
-// SetControlSize calls the underlying SetControlSize.
-func (x *Cell) SetControlSize(controlSize NSControlSize) {
-	x.inner.SetControlSize(raw.NSControlSize(controlSize))
+// SetControlSize wraps the corresponding Objective-C method.
+func (x *Cell) SetControlSize(controlSize ControlSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 }
 
-// RepresentedObject calls the underlying RepresentedObject.
-func (x *Cell) RepresentedObject() objc.ID {
-	return x.inner.RepresentedObject()
+// RepresentedObject wraps the corresponding Objective-C method.
+func (x *Cell) RepresentedObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedObject"))
+	return obj.Wrap(_r)
 }
 
-// SetRepresentedObject calls the underlying SetRepresentedObject.
-func (x *Cell) SetRepresentedObject(representedObject objc.ID) {
-	x.inner.SetRepresentedObject(representedObject)
+// SetRepresentedObject wraps the corresponding Objective-C method.
+func (x *Cell) SetRepresentedObject(representedObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 }
 
-// CellSize calls the underlying CellSize.
+// CellSize wraps the corresponding Objective-C method.
 func (x *Cell) CellSize() corefoundation.CGSize {
-	return x.inner.CellSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("cellSize"))
+	return _r
 }
 
-// MouseDownFlags calls the underlying MouseDownFlags.
+// MouseDownFlags wraps the corresponding Objective-C method.
 func (x *Cell) MouseDownFlags() int {
-	return x.inner.MouseDownFlags()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mouseDownFlags"))
+	return _r
 }
 
-// Menu calls the underlying Menu.
+// Menu wraps the corresponding Objective-C method.
 func (x *Cell) Menu() *Menu {
-	_r := x.inner.Menu()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
+	return MenuFromID(_r)
 }
 
-// SetMenu calls the underlying SetMenu.
-func (x *Cell) SetMenu(menu *raw.NSMenu) {
-	x.inner.SetMenu(menu)
+// SetMenu wraps the corresponding Objective-C method.
+func (x *Cell) SetMenu(menu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 }
 
-// SendsActionOnEndEditing calls the underlying SendsActionOnEndEditing.
+// SendsActionOnEndEditing wraps the corresponding Objective-C method.
 func (x *Cell) SendsActionOnEndEditing() bool {
-	return x.inner.SendsActionOnEndEditing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsActionOnEndEditing"))
+	return _r
 }
 
-// SetSendsActionOnEndEditing calls the underlying SetSendsActionOnEndEditing.
+// SetSendsActionOnEndEditing wraps the corresponding Objective-C method.
 func (x *Cell) SetSendsActionOnEndEditing(sendsActionOnEndEditing bool) {
-	x.inner.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 }
 
-// BaseWritingDirection calls the underlying BaseWritingDirection.
-func (x *Cell) BaseWritingDirection() NSWritingDirection {
-	return NSWritingDirection(x.inner.BaseWritingDirection())
+// BaseWritingDirection wraps the corresponding Objective-C method.
+func (x *Cell) BaseWritingDirection() WritingDirection {
+	_r := objc.Send[WritingDirection](objref.IDOf(x), objc.RegisterName("baseWritingDirection"))
+	return _r
 }
 
-// SetBaseWritingDirection calls the underlying SetBaseWritingDirection.
-func (x *Cell) SetBaseWritingDirection(baseWritingDirection NSWritingDirection) {
-	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// SetBaseWritingDirection wraps the corresponding Objective-C method.
+func (x *Cell) SetBaseWritingDirection(baseWritingDirection WritingDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 }
 
-// LineBreakMode calls the underlying LineBreakMode.
-func (x *Cell) LineBreakMode() NSLineBreakMode {
-	return NSLineBreakMode(x.inner.LineBreakMode())
+// LineBreakMode wraps the corresponding Objective-C method.
+func (x *Cell) LineBreakMode() LineBreakMode {
+	_r := objc.Send[LineBreakMode](objref.IDOf(x), objc.RegisterName("lineBreakMode"))
+	return _r
 }
 
-// SetLineBreakMode calls the underlying SetLineBreakMode.
-func (x *Cell) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
-	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// SetLineBreakMode wraps the corresponding Objective-C method.
+func (x *Cell) SetLineBreakMode(lineBreakMode LineBreakMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 }
 
-// AllowsUndo calls the underlying AllowsUndo.
+// AllowsUndo wraps the corresponding Objective-C method.
 func (x *Cell) AllowsUndo() bool {
-	return x.inner.AllowsUndo()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsUndo"))
+	return _r
 }
 
-// SetAllowsUndo calls the underlying SetAllowsUndo.
+// SetAllowsUndo wraps the corresponding Objective-C method.
 func (x *Cell) SetAllowsUndo(allowsUndo bool) {
-	x.inner.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 }
 
-// TruncatesLastVisibleLine calls the underlying TruncatesLastVisibleLine.
+// TruncatesLastVisibleLine wraps the corresponding Objective-C method.
 func (x *Cell) TruncatesLastVisibleLine() bool {
-	return x.inner.TruncatesLastVisibleLine()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("truncatesLastVisibleLine"))
+	return _r
 }
 
-// SetTruncatesLastVisibleLine calls the underlying SetTruncatesLastVisibleLine.
+// SetTruncatesLastVisibleLine wraps the corresponding Objective-C method.
 func (x *Cell) SetTruncatesLastVisibleLine(truncatesLastVisibleLine bool) {
-	x.inner.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 }
 
-// UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
-func (x *Cell) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
-	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
+// UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+func (x *Cell) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("userInterfaceLayoutDirection"))
+	return _r
 }
 
-// SetUserInterfaceLayoutDirection calls the underlying SetUserInterfaceLayoutDirection.
-func (x *Cell) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
-	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// SetUserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+func (x *Cell) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 }
 
-// UsesSingleLineMode calls the underlying UsesSingleLineMode.
+// UsesSingleLineMode wraps the corresponding Objective-C method.
 func (x *Cell) UsesSingleLineMode() bool {
-	return x.inner.UsesSingleLineMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesSingleLineMode"))
+	return _r
 }
 
-// SetUsesSingleLineMode calls the underlying SetUsesSingleLineMode.
+// SetUsesSingleLineMode wraps the corresponding Objective-C method.
 func (x *Cell) SetUsesSingleLineMode(usesSingleLineMode bool) {
-	x.inner.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 }
 
-// Simulates a single mouse click on the receiver.
-//
-// PerformClick calls the underlying PerformClick.
-func (x *Cell) PerformClick(sender objc.ID) {
-	x.inner.PerformClick(sender)
+// PerformClick simulates a single mouse click on the receiver.
+func (x *Cell) PerformClick(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performClick:"), objref.IDOf(sender))
 }
 
-// Draws the focus ring for the control.
-//
-// DrawFocusRingMaskWithFrameInView calls the underlying DrawFocusRingMaskWithFrameInView.
-func (x *Cell) DrawFocusRingMaskWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawFocusRingMaskWithFrameInView(cellFrame, controlView)
+// DrawFocusRingMaskWithFrameInView draws the focus ring for the control.
+func (x *Cell) DrawFocusRingMaskWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawFocusRingMaskWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
-// Returns the bounds of the focus ring mask.
-//
-// FocusRingMaskBoundsForFrameInView calls the underlying FocusRingMaskBoundsForFrameInView.
-func (x *Cell) FocusRingMaskBoundsForFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect {
-	return x.inner.FocusRingMaskBoundsForFrameInView(cellFrame, controlView)
+// FocusRingMaskBoundsForFrameInView returns the bounds of the focus ring mask.
+func (x *Cell) FocusRingMaskBoundsForFrameInView(cellFrame corefoundation.CGRect, controlView *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("focusRingMaskBoundsForFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	return _r
 }
 
-// RefusesFirstResponder calls the underlying RefusesFirstResponder.
+// RefusesFirstResponder wraps the corresponding Objective-C method.
 func (x *Cell) RefusesFirstResponder() bool {
-	return x.inner.RefusesFirstResponder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("refusesFirstResponder"))
+	return _r
 }
 
-// SetRefusesFirstResponder calls the underlying SetRefusesFirstResponder.
+// SetRefusesFirstResponder wraps the corresponding Objective-C method.
 func (x *Cell) SetRefusesFirstResponder(refusesFirstResponder bool) {
-	x.inner.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 }
 
-// AcceptsFirstResponder calls the underlying AcceptsFirstResponder.
+// AcceptsFirstResponder wraps the corresponding Objective-C method.
 func (x *Cell) AcceptsFirstResponder() bool {
-	return x.inner.AcceptsFirstResponder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsFirstResponder"))
+	return _r
 }
 
-// ShowsFirstResponder calls the underlying ShowsFirstResponder.
+// ShowsFirstResponder wraps the corresponding Objective-C method.
 func (x *Cell) ShowsFirstResponder() bool {
-	return x.inner.ShowsFirstResponder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFirstResponder"))
+	return _r
 }
 
-// SetShowsFirstResponder calls the underlying SetShowsFirstResponder.
+// SetShowsFirstResponder wraps the corresponding Objective-C method.
 func (x *Cell) SetShowsFirstResponder(showsFirstResponder bool) {
-	x.inner.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 }
 
-// FocusRingType calls the underlying FocusRingType.
-func (x *Cell) FocusRingType() NSFocusRingType {
-	return NSFocusRingType(x.inner.FocusRingType())
+// FocusRingType wraps the corresponding Objective-C method.
+func (x *Cell) FocusRingType() FocusRingType {
+	_r := objc.Send[FocusRingType](objref.IDOf(x), objc.RegisterName("focusRingType"))
+	return _r
 }
 
-// SetFocusRingType calls the underlying SetFocusRingType.
-func (x *Cell) SetFocusRingType(focusRingType NSFocusRingType) {
-	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// SetFocusRingType wraps the corresponding Objective-C method.
+func (x *Cell) SetFocusRingType(focusRingType FocusRingType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 }
 
-// WantsNotificationForMarkedText calls the underlying WantsNotificationForMarkedText.
+// WantsNotificationForMarkedText wraps the corresponding Objective-C method.
 func (x *Cell) WantsNotificationForMarkedText() bool {
-	return x.inner.WantsNotificationForMarkedText()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsNotificationForMarkedText"))
+	return _r
 }
 
-// AttributedStringValue calls the underlying AttributedStringValue.
-func (x *Cell) AttributedStringValue() *foundation.NSAttributedString {
-	return x.inner.AttributedStringValue()
+// AttributedStringValue wraps the corresponding Objective-C method.
+func (x *Cell) AttributedStringValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringValue"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedStringValue calls the underlying SetAttributedStringValue.
-func (x *Cell) SetAttributedStringValue(attributedStringValue *foundation.NSAttributedString) {
-	x.inner.SetAttributedStringValue(attributedStringValue)
+// SetAttributedStringValue wraps the corresponding Objective-C method.
+func (x *Cell) SetAttributedStringValue(attributedStringValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 }
 
-// AllowsEditingTextAttributes calls the underlying AllowsEditingTextAttributes.
+// AllowsEditingTextAttributes wraps the corresponding Objective-C method.
 func (x *Cell) AllowsEditingTextAttributes() bool {
-	return x.inner.AllowsEditingTextAttributes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEditingTextAttributes"))
+	return _r
 }
 
-// SetAllowsEditingTextAttributes calls the underlying SetAllowsEditingTextAttributes.
+// SetAllowsEditingTextAttributes wraps the corresponding Objective-C method.
 func (x *Cell) SetAllowsEditingTextAttributes(allowsEditingTextAttributes bool) {
-	x.inner.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 }
 
-// ImportsGraphics calls the underlying ImportsGraphics.
+// ImportsGraphics wraps the corresponding Objective-C method.
 func (x *Cell) ImportsGraphics() bool {
-	return x.inner.ImportsGraphics()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("importsGraphics"))
+	return _r
 }
 
-// SetImportsGraphics calls the underlying SetImportsGraphics.
+// SetImportsGraphics wraps the corresponding Objective-C method.
 func (x *Cell) SetImportsGraphics(importsGraphics bool) {
-	x.inner.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 }
 
-// Changes cell’s state to the next value in the sequence.
-//
-// SetNextState calls the underlying SetNextState.
+// SetNextState changes cell’s state to the next value in the sequence.
 func (x *Cell) SetNextState() {
-	x.inner.SetNextState()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextState"))
 }
 
-// AllowsMixedState calls the underlying AllowsMixedState.
+// AllowsMixedState wraps the corresponding Objective-C method.
 func (x *Cell) AllowsMixedState() bool {
-	return x.inner.AllowsMixedState()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMixedState"))
+	return _r
 }
 
-// SetAllowsMixedState calls the underlying SetAllowsMixedState.
+// SetAllowsMixedState wraps the corresponding Objective-C method.
 func (x *Cell) SetAllowsMixedState(allowsMixedState bool) {
-	x.inner.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 }
 
-// NextState calls the underlying NextState.
+// NextState wraps the corresponding Objective-C method.
 func (x *Cell) NextState() int {
-	return x.inner.NextState()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextState"))
+	return _r
 }
 
-// Returns hit testing information for the receiver.
-//
-// HitTestForEventInRectOfView calls the underlying HitTestForEventInRectOfView.
-func (x *Cell) HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) NSCellHitResult {
-	return NSCellHitResult(x.inner.HitTestForEventInRectOfView(event, cellFrame, controlView))
+// HitTestForEventInRectOfView returns hit testing information for the receiver.
+func (x *Cell) HitTestForEventInRectOfView(event *Event, cellFrame corefoundation.CGRect, controlView *View) CellHitResult {
+	_r := objc.Send[CellHitResult](objref.IDOf(x), objc.RegisterName("hitTestForEvent:inRect:ofView:"), objref.IDOf(event), cellFrame, objref.IDOf(controlView))
+	return _r
 }
 
-// Returns the expansion cell frame for the receiver.
-//
-// ExpansionFrameWithFrameInView calls the underlying ExpansionFrameWithFrameInView.
-func (x *Cell) ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect {
-	return x.inner.ExpansionFrameWithFrameInView(cellFrame, view)
+// ExpansionFrameWithFrameInView returns the expansion cell frame for the receiver.
+func (x *Cell) ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("expansionFrameWithFrame:inView:"), cellFrame, objref.IDOf(view))
+	return _r
 }
 
-// Instructs the receiver to draw in an expansion frame.
-//
-// DrawWithExpansionFrameInView calls the underlying DrawWithExpansionFrameInView.
-func (x *Cell) DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView) {
-	x.inner.DrawWithExpansionFrameInView(cellFrame, view)
+// DrawWithExpansionFrameInView instructs the receiver to draw in an expansion frame.
+func (x *Cell) DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithExpansionFrame:inView:"), cellFrame, objref.IDOf(view))
 }
 
-// BackgroundStyle calls the underlying BackgroundStyle.
-func (x *Cell) BackgroundStyle() NSBackgroundStyle {
-	return NSBackgroundStyle(x.inner.BackgroundStyle())
+// BackgroundStyle wraps the corresponding Objective-C method.
+func (x *Cell) BackgroundStyle() BackgroundStyle {
+	_r := objc.Send[BackgroundStyle](objref.IDOf(x), objc.RegisterName("backgroundStyle"))
+	return _r
 }
 
-// SetBackgroundStyle calls the underlying SetBackgroundStyle.
-func (x *Cell) SetBackgroundStyle(backgroundStyle NSBackgroundStyle) {
-	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// SetBackgroundStyle wraps the corresponding Objective-C method.
+func (x *Cell) SetBackgroundStyle(backgroundStyle BackgroundStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 }
 
-// InteriorBackgroundStyle calls the underlying InteriorBackgroundStyle.
-func (x *Cell) InteriorBackgroundStyle() NSBackgroundStyle {
-	return NSBackgroundStyle(x.inner.InteriorBackgroundStyle())
+// InteriorBackgroundStyle wraps the corresponding Objective-C method.
+func (x *Cell) InteriorBackgroundStyle() BackgroundStyle {
+	_r := objc.Send[BackgroundStyle](objref.IDOf(x), objc.RegisterName("interiorBackgroundStyle"))
+	return _r
 }
 
-// Returns the type of data the user can type into the receiver.
-//
-// EntryType calls the underlying EntryType.
+// EntryType returns the type of data the user can type into the receiver.
 func (x *Cell) EntryType() int {
-	return x.inner.EntryType()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("entryType"))
+	return _r
 }
 
-// Sets how numeric data is formatted in the receiver and places restrictions on acceptable input.
-//
-// SetEntryType calls the underlying SetEntryType.
+// SetEntryType sets how numeric data is formatted in the receiver and places restrictions on acceptable input.
 func (x *Cell) SetEntryType(type_ int) {
-	x.inner.SetEntryType(type_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntryType:"), type_)
 }
 
-// Returns whether a string representing a numeric or date value is formatted in a suitable way for the cell’s entry type.
-//
-// IsEntryAcceptable calls the underlying IsEntryAcceptable.
+// IsEntryAcceptable returns whether a string representing a numeric or date value is formatted in a suitable way for the cell’s entry type.
 func (x *Cell) IsEntryAcceptable(string_ string) bool {
-	return x.inner.IsEntryAcceptable(foundation.NSStringStringWithUTF8String(string_))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEntryAcceptable:"), purego.NSString(string_))
+	return _r
 }
 
-// Sets the auto-ranging and floating point number format of the receiver’s cell.
-//
-// SetFloatingPointFormatLeftRight calls the underlying SetFloatingPointFormatLeftRight.
-func (x *Cell) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
-	x.inner.SetFloatingPointFormatLeftRight(autoRange, leftDigits, rightDigits)
+// SetFloatingPointFormatLeftRight sets the auto-ranging and floating point number format of the receiver’s cell.
+func (x *Cell) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPointFormat:left:right:"), autoRange, leftDigits, rightDigits)
 }
 
-// Sets the character of the receiver’s title to be used as a mnemonic character.
-//
-// SetMnemonicLocation calls the underlying SetMnemonicLocation.
-func (x *Cell) SetMnemonicLocation(location uint) {
-	x.inner.SetMnemonicLocation(location)
+// SetMnemonicLocation sets the character of the receiver’s title to be used as a mnemonic character.
+func (x *Cell) SetMnemonicLocation(location int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMnemonicLocation:"), location)
 }
 
-// Returns the position of the underlined mnemonic character in the receiver’s title.
-//
-// MnemonicLocation calls the underlying MnemonicLocation.
-func (x *Cell) MnemonicLocation() uint {
-	return x.inner.MnemonicLocation()
+// MnemonicLocation returns the position of the underlined mnemonic character in the receiver’s title.
+func (x *Cell) MnemonicLocation() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mnemonicLocation"))
+	return _r
 }
 
-// Returns the character in the receiver’s title that appears underlined for use as a mnemonic.
-//
-// Mnemonic calls the underlying Mnemonic.
+// Mnemonic returns the character in the receiver’s title that appears underlined for use as a mnemonic.
 func (x *Cell) Mnemonic() string {
-	_r := x.inner.Mnemonic()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mnemonic"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Sets the title of the receiver with one character in the string denoted as an access key.
-//
-// SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
+// SetTitleWithMnemonic sets the title of the receiver with one character in the string denoted as an access key.
 func (x *Cell) SetTitleWithMnemonic(stringWithAmpersand string) {
-	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
 
-// ControlTint calls the underlying ControlTint.
-func (x *Cell) ControlTint() NSControlTint {
-	return NSControlTint(x.inner.ControlTint())
+// ControlTint wraps the corresponding Objective-C method.
+func (x *Cell) ControlTint() ControlTint {
+	_r := objc.Send[ControlTint](objref.IDOf(x), objc.RegisterName("controlTint"))
+	return _r
 }
 
-// SetControlTint calls the underlying SetControlTint.
-func (x *Cell) SetControlTint(controlTint NSControlTint) {
-	x.inner.SetControlTint(raw.NSControlTint(controlTint))
+// SetControlTint wraps the corresponding Objective-C method.
+func (x *Cell) SetControlTint(controlTint ControlTint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 }
-
-func (x *Cell) asCell() *raw.NSCell { return x.inner }
 
 // Cellable is the interface implemented by [Cell], for mocking and DI.
 type Cellable interface {
-	Unwrap() *raw.NSCell
+	obj.Object
 	WithControlView(controlView ViewProvider) *Cell
-	WithType(type_ NSCellType) *Cell
+	WithType(type_ CellType) *Cell
 	WithState(state int) *Cell
-	WithTarget(target objc.ID) *Cell
-	WithAction(action objc.SEL) *Cell
+	WithTarget(target obj.Object) *Cell
 	WithTag(tag int) *Cell
 	WithTitle(title string) *Cell
 	WithEnabled(enabled bool) *Cell
@@ -1317,78 +1176,75 @@ type Cellable interface {
 	WithBezeled(bezeled bool) *Cell
 	WithScrollable(scrollable bool) *Cell
 	WithHighlighted(highlighted bool) *Cell
-	WithAlignment(alignment NSTextAlignment) *Cell
+	WithAlignment(alignment TextAlignment) *Cell
 	WithWraps(wraps bool) *Cell
 	WithFont(font *Font) *Cell
-	WithFormatter(formatter *foundation.NSFormatter) *Cell
-	WithObjectValue(objectValue objc.ID) *Cell
+	WithFormatter(formatter obj.Object) *Cell
+	WithObjectValue(objectValue obj.Object) *Cell
 	WithStringValue(stringValue string) *Cell
 	WithIntValue(intValue int) *Cell
 	WithFloatValue(floatValue float32) *Cell
 	WithDoubleValue(doubleValue float64) *Cell
 	WithIntegerValue(integerValue int) *Cell
 	WithImage(image *Image) *Cell
-	WithControlSize(controlSize NSControlSize) *Cell
-	WithRepresentedObject(representedObject objc.ID) *Cell
+	WithControlSize(controlSize ControlSize) *Cell
+	WithRepresentedObject(representedObject obj.Object) *Cell
 	WithMenu(menu *Menu) *Cell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Cell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Cell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Cell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Cell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *Cell
 	WithAllowsUndo(allowsUndo bool) *Cell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *Cell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Cell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Cell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Cell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Cell
 	WithShowsFirstResponder(showsFirstResponder bool) *Cell
-	WithFocusRingType(focusRingType NSFocusRingType) *Cell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Cell
+	WithFocusRingType(focusRingType FocusRingType) *Cell
+	WithAttributedStringValue(attributedStringValue obj.Object) *Cell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *Cell
 	WithImportsGraphics(importsGraphics bool) *Cell
 	WithAllowsMixedState(allowsMixedState bool) *Cell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *Cell
-	WithControlTint(controlTint NSControlTint) *Cell
-	SendActionOn(mask NSEventMask) int
-	Compare(otherCell objc.ID) foundation.NSComparisonResult
-	TakeIntValueFrom(sender objc.ID)
-	TakeFloatValueFrom(sender objc.ID)
-	TakeDoubleValueFrom(sender objc.ID)
-	TakeStringValueFrom(sender objc.ID)
-	TakeObjectValueFrom(sender objc.ID)
-	TakeIntegerValueFrom(sender objc.ID)
-	CellAttribute(parameter NSCellAttribute) int
-	SetCellAttributeTo(parameter NSCellAttribute, value int)
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *Cell
+	WithControlTint(controlTint ControlTint) *Cell
+	SendActionOn(mask EventMask) int
+	TakeIntValueFrom(sender obj.Object)
+	TakeFloatValueFrom(sender obj.Object)
+	TakeDoubleValueFrom(sender obj.Object)
+	TakeStringValueFrom(sender obj.Object)
+	TakeObjectValueFrom(sender obj.Object)
+	TakeIntegerValueFrom(sender obj.Object)
+	CellAttribute(parameter CellAttribute) int
+	SetCellAttributeTo(parameter CellAttribute, value int)
 	ImageRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 	TitleRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 	DrawingRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 	CellSizeForBounds(rect corefoundation.CGRect) corefoundation.CGSize
-	HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) *Color
+	HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) *Color
 	CalcDrawInfo(rect corefoundation.CGRect)
-	SetUpFieldEditorAttributes(textObj *raw.NSText) *Text
-	DrawInteriorWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	DrawWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	HighlightWithFrameInView(flag bool, cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	GetPeriodicDelayInterval(delay *float32, interval *float32)
-	StartTrackingAtInView(startPoint corefoundation.CGPoint, controlView *raw.NSView) bool
-	ContinueTrackingAtInView(lastPoint corefoundation.CGPoint, currentPoint corefoundation.CGPoint, controlView *raw.NSView) bool
-	StopTrackingAtInViewMouseIsUp(lastPoint corefoundation.CGPoint, stopPoint corefoundation.CGPoint, controlView *raw.NSView, flag bool)
-	TrackMouseInRectOfViewUntilMouseUp(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView, flag bool) bool
-	EditWithFrameInViewEditorDelegateEvent(rect corefoundation.CGRect, controlView *raw.NSView, textObj *raw.NSText, delegate objc.ID, event *raw.NSEvent)
-	SelectWithFrameInViewEditorDelegateStartLength(rect corefoundation.CGRect, controlView *raw.NSView, textObj *raw.NSText, delegate objc.ID, selStart int, selLength int)
-	EndEditing(textObj *raw.NSText)
-	ResetCursorRectInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	MenuForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, view *raw.NSView) *Menu
-	FieldEditorForView(controlView *raw.NSView) *TextView
-	DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *raw.NSView) *foundation.NSArray[*raw.NSDraggingImageComponent]
+	SetUpFieldEditorAttributes(textObj *Text) *Text
+	DrawInteriorWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	DrawWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	HighlightWithFrameInView(flag bool, cellFrame corefoundation.CGRect, controlView *View)
+	GetPeriodicDelayInterval() (delay float32, interval float32)
+	StartTrackingAtInView(startPoint corefoundation.CGPoint, controlView *View) bool
+	ContinueTrackingAtInView(lastPoint corefoundation.CGPoint, currentPoint corefoundation.CGPoint, controlView *View) bool
+	StopTrackingAtInViewMouseIsUp(lastPoint corefoundation.CGPoint, stopPoint corefoundation.CGPoint, controlView *View, flag bool)
+	TrackMouseInRectOfViewUntilMouseUp(event *Event, cellFrame corefoundation.CGRect, controlView *View, flag bool) bool
+	EditWithFrameInViewEditorDelegateEvent(rect corefoundation.CGRect, controlView *View, textObj *Text, delegate obj.Object, event *Event)
+	SelectWithFrameInViewEditorDelegateStartLength(rect corefoundation.CGRect, controlView *View, textObj *Text, delegate obj.Object, selStart int, selLength int)
+	EndEditing(textObj *Text)
+	ResetCursorRectInView(cellFrame corefoundation.CGRect, controlView *View)
+	MenuForEventInRectOfView(event *Event, cellFrame corefoundation.CGRect, view *View) *Menu
+	FieldEditorForView(controlView *View) *TextView
+	DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *View) []*DraggingImageComponent
 	ControlView() *View
-	SetControlView(controlView *raw.NSView)
-	Type() NSCellType
-	SetType(type_ NSCellType)
+	SetControlView(controlView *View)
+	Type() CellType
+	SetType(type_ CellType)
 	State() int
 	SetState(state int)
-	Target() objc.ID
-	SetTarget(target objc.ID)
-	Action() objc.SEL
-	SetAction(action objc.SEL)
+	Target() obj.Object
+	SetTarget(target obj.Object)
 	Tag() int
 	SetTag(tag int)
 	Title() string
@@ -1410,17 +1266,17 @@ type Cellable interface {
 	SetScrollable(scrollable bool)
 	IsHighlighted() bool
 	SetHighlighted(highlighted bool)
-	Alignment() NSTextAlignment
-	SetAlignment(alignment NSTextAlignment)
+	Alignment() TextAlignment
+	SetAlignment(alignment TextAlignment)
 	Wraps() bool
 	SetWraps(wraps bool)
 	Font() *Font
-	SetFont(font *raw.NSFont)
+	SetFont(font *Font)
 	KeyEquivalent() string
-	Formatter() *foundation.NSFormatter
-	SetFormatter(formatter *foundation.NSFormatter)
-	ObjectValue() objc.ID
-	SetObjectValue(objectValue objc.ID)
+	Formatter() obj.Object
+	SetFormatter(formatter obj.Object)
+	ObjectValue() obj.Object
+	SetObjectValue(objectValue obj.Object)
 	HasValidObjectValue() bool
 	StringValue() string
 	SetStringValue(stringValue string)
@@ -1433,42 +1289,42 @@ type Cellable interface {
 	IntegerValue() int
 	SetIntegerValue(integerValue int)
 	Image() *Image
-	SetImage(image *raw.NSImage)
-	ControlSize() NSControlSize
-	SetControlSize(controlSize NSControlSize)
-	RepresentedObject() objc.ID
-	SetRepresentedObject(representedObject objc.ID)
+	SetImage(image *Image)
+	ControlSize() ControlSize
+	SetControlSize(controlSize ControlSize)
+	RepresentedObject() obj.Object
+	SetRepresentedObject(representedObject obj.Object)
 	CellSize() corefoundation.CGSize
 	MouseDownFlags() int
 	Menu() *Menu
-	SetMenu(menu *raw.NSMenu)
+	SetMenu(menu *Menu)
 	SendsActionOnEndEditing() bool
 	SetSendsActionOnEndEditing(sendsActionOnEndEditing bool)
-	BaseWritingDirection() NSWritingDirection
-	SetBaseWritingDirection(baseWritingDirection NSWritingDirection)
-	LineBreakMode() NSLineBreakMode
-	SetLineBreakMode(lineBreakMode NSLineBreakMode)
+	BaseWritingDirection() WritingDirection
+	SetBaseWritingDirection(baseWritingDirection WritingDirection)
+	LineBreakMode() LineBreakMode
+	SetLineBreakMode(lineBreakMode LineBreakMode)
 	AllowsUndo() bool
 	SetAllowsUndo(allowsUndo bool)
 	TruncatesLastVisibleLine() bool
 	SetTruncatesLastVisibleLine(truncatesLastVisibleLine bool)
-	UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
-	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection)
+	UserInterfaceLayoutDirection() UserInterfaceLayoutDirection
+	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection)
 	UsesSingleLineMode() bool
 	SetUsesSingleLineMode(usesSingleLineMode bool)
-	PerformClick(sender objc.ID)
-	DrawFocusRingMaskWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	FocusRingMaskBoundsForFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect
+	PerformClick(sender obj.Object)
+	DrawFocusRingMaskWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
+	FocusRingMaskBoundsForFrameInView(cellFrame corefoundation.CGRect, controlView *View) corefoundation.CGRect
 	RefusesFirstResponder() bool
 	SetRefusesFirstResponder(refusesFirstResponder bool)
 	AcceptsFirstResponder() bool
 	ShowsFirstResponder() bool
 	SetShowsFirstResponder(showsFirstResponder bool)
-	FocusRingType() NSFocusRingType
-	SetFocusRingType(focusRingType NSFocusRingType)
+	FocusRingType() FocusRingType
+	SetFocusRingType(focusRingType FocusRingType)
 	WantsNotificationForMarkedText() bool
-	AttributedStringValue() *foundation.NSAttributedString
-	SetAttributedStringValue(attributedStringValue *foundation.NSAttributedString)
+	AttributedStringValue() obj.Object
+	SetAttributedStringValue(attributedStringValue obj.Object)
 	AllowsEditingTextAttributes() bool
 	SetAllowsEditingTextAttributes(allowsEditingTextAttributes bool)
 	ImportsGraphics() bool
@@ -1477,22 +1333,29 @@ type Cellable interface {
 	AllowsMixedState() bool
 	SetAllowsMixedState(allowsMixedState bool)
 	NextState() int
-	HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) NSCellHitResult
-	ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect
-	DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView)
-	BackgroundStyle() NSBackgroundStyle
-	SetBackgroundStyle(backgroundStyle NSBackgroundStyle)
-	InteriorBackgroundStyle() NSBackgroundStyle
+	HitTestForEventInRectOfView(event *Event, cellFrame corefoundation.CGRect, controlView *View) CellHitResult
+	ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *View) corefoundation.CGRect
+	DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *View)
+	BackgroundStyle() BackgroundStyle
+	SetBackgroundStyle(backgroundStyle BackgroundStyle)
+	InteriorBackgroundStyle() BackgroundStyle
 	EntryType() int
 	SetEntryType(type_ int)
 	IsEntryAcceptable(string_ string) bool
-	SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint)
-	SetMnemonicLocation(location uint)
-	MnemonicLocation() uint
+	SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int)
+	SetMnemonicLocation(location int)
+	MnemonicLocation() int
 	Mnemonic() string
 	SetTitleWithMnemonic(stringWithAmpersand string)
-	ControlTint() NSControlTint
-	SetControlTint(controlTint NSControlTint)
+	ControlTint() ControlTint
+	SetControlTint(controlTint ControlTint)
 }
 
 var _ Cellable = (*Cell)(nil)
+
+// isCell marks Cell — and, by embedding promotion, its
+// subclasses — as a member of the Cell hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Cell) isCell() {}
+
+var _ CellProvider = (*Cell)(nil)

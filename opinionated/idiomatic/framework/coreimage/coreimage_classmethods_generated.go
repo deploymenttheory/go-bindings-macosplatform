@@ -5,1484 +5,1004 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// DescriptorWithPayloadIsCompactLayerCountDataCodewordCount calls the underlying CIAztecCodeDescriptorDescriptorWithPayloadIsCompactLayerCountDataCodewordCount.
-func DescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {
-	_r := raw.CIAztecCodeDescriptorDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload, isCompact, layerCount, dataCodewordCount)
-	if _r == nil {
-		return nil
-	}
-	return &AztecCodeDescriptor{inner: _r}
+// DescriptorWithPayloadIsCompactLayerCountDataCodewordCount creates an Aztec code descriptor for the given payload and parameters.
+func DescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload obj.Object, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIAztecCodeDescriptor")), objc.RegisterName("descriptorWithPayload:isCompact:layerCount:dataCodewordCount:"), objref.IDOf(errorCorrectedPayload), isCompact, layerCount, dataCodewordCount)
+	return AztecCodeDescriptorFromID(_r)
 }
 
-// KernelWithString calls the underlying CIBlendKernelKernelWithString.
+// KernelWithString creates a custom blend kernel from a program string.
 func KernelWithString(string_ string) *BlendKernel {
-	_r := raw.CIBlendKernelKernelWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+	return BlendKernelFromID(_r)
 }
 
-// ComponentAdd calls the underlying CIBlendKernelComponentAdd.
+// ComponentAdd wraps the corresponding Objective-C method.
 func ComponentAdd() *BlendKernel {
-	_r := raw.CIBlendKernelComponentAdd()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentAdd"))
+	return BlendKernelFromID(_r)
 }
 
-// ComponentMultiply calls the underlying CIBlendKernelComponentMultiply.
+// ComponentMultiply wraps the corresponding Objective-C method.
 func ComponentMultiply() *BlendKernel {
-	_r := raw.CIBlendKernelComponentMultiply()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentMultiply"))
+	return BlendKernelFromID(_r)
 }
 
-// ComponentMin calls the underlying CIBlendKernelComponentMin.
+// ComponentMin wraps the corresponding Objective-C method.
 func ComponentMin() *BlendKernel {
-	_r := raw.CIBlendKernelComponentMin()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentMin"))
+	return BlendKernelFromID(_r)
 }
 
-// ComponentMax calls the underlying CIBlendKernelComponentMax.
+// ComponentMax wraps the corresponding Objective-C method.
 func ComponentMax() *BlendKernel {
-	_r := raw.CIBlendKernelComponentMax()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentMax"))
+	return BlendKernelFromID(_r)
 }
 
-// Clear calls the underlying CIBlendKernelClear.
+// Clear wraps the corresponding Objective-C method.
 func Clear() *BlendKernel {
-	_r := raw.CIBlendKernelClear()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("clear"))
+	return BlendKernelFromID(_r)
 }
 
-// Source calls the underlying CIBlendKernelSource.
+// Source wraps the corresponding Objective-C method.
 func Source() *BlendKernel {
-	_r := raw.CIBlendKernelSource()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("source"))
+	return BlendKernelFromID(_r)
 }
 
-// Destination calls the underlying CIBlendKernelDestination.
+// Destination wraps the corresponding Objective-C method.
 func Destination() *BlendKernel {
-	_r := raw.CIBlendKernelDestination()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destination"))
+	return BlendKernelFromID(_r)
 }
 
-// SourceOver calls the underlying CIBlendKernelSourceOver.
+// SourceOver wraps the corresponding Objective-C method.
 func SourceOver() *BlendKernel {
-	_r := raw.CIBlendKernelSourceOver()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceOver"))
+	return BlendKernelFromID(_r)
 }
 
-// DestinationOver calls the underlying CIBlendKernelDestinationOver.
+// DestinationOver wraps the corresponding Objective-C method.
 func DestinationOver() *BlendKernel {
-	_r := raw.CIBlendKernelDestinationOver()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationOver"))
+	return BlendKernelFromID(_r)
 }
 
-// SourceIn calls the underlying CIBlendKernelSourceIn.
+// SourceIn wraps the corresponding Objective-C method.
 func SourceIn() *BlendKernel {
-	_r := raw.CIBlendKernelSourceIn()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceIn"))
+	return BlendKernelFromID(_r)
 }
 
-// DestinationIn calls the underlying CIBlendKernelDestinationIn.
+// DestinationIn wraps the corresponding Objective-C method.
 func DestinationIn() *BlendKernel {
-	_r := raw.CIBlendKernelDestinationIn()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationIn"))
+	return BlendKernelFromID(_r)
 }
 
-// SourceOut calls the underlying CIBlendKernelSourceOut.
+// SourceOut wraps the corresponding Objective-C method.
 func SourceOut() *BlendKernel {
-	_r := raw.CIBlendKernelSourceOut()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceOut"))
+	return BlendKernelFromID(_r)
 }
 
-// DestinationOut calls the underlying CIBlendKernelDestinationOut.
+// DestinationOut wraps the corresponding Objective-C method.
 func DestinationOut() *BlendKernel {
-	_r := raw.CIBlendKernelDestinationOut()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationOut"))
+	return BlendKernelFromID(_r)
 }
 
-// SourceAtop calls the underlying CIBlendKernelSourceAtop.
+// SourceAtop wraps the corresponding Objective-C method.
 func SourceAtop() *BlendKernel {
-	_r := raw.CIBlendKernelSourceAtop()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceAtop"))
+	return BlendKernelFromID(_r)
 }
 
-// DestinationAtop calls the underlying CIBlendKernelDestinationAtop.
+// DestinationAtop wraps the corresponding Objective-C method.
 func DestinationAtop() *BlendKernel {
-	_r := raw.CIBlendKernelDestinationAtop()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationAtop"))
+	return BlendKernelFromID(_r)
 }
 
-// ExclusiveOr calls the underlying CIBlendKernelExclusiveOr.
+// ExclusiveOr wraps the corresponding Objective-C method.
 func ExclusiveOr() *BlendKernel {
-	_r := raw.CIBlendKernelExclusiveOr()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("exclusiveOr"))
+	return BlendKernelFromID(_r)
 }
 
-// Multiply calls the underlying CIBlendKernelMultiply.
+// Multiply wraps the corresponding Objective-C method.
 func Multiply() *BlendKernel {
-	_r := raw.CIBlendKernelMultiply()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("multiply"))
+	return BlendKernelFromID(_r)
 }
 
-// Screen calls the underlying CIBlendKernelScreen.
+// Screen wraps the corresponding Objective-C method.
 func Screen() *BlendKernel {
-	_r := raw.CIBlendKernelScreen()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("screen"))
+	return BlendKernelFromID(_r)
 }
 
-// Overlay calls the underlying CIBlendKernelOverlay.
+// Overlay wraps the corresponding Objective-C method.
 func Overlay() *BlendKernel {
-	_r := raw.CIBlendKernelOverlay()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("overlay"))
+	return BlendKernelFromID(_r)
 }
 
-// Darken calls the underlying CIBlendKernelDarken.
+// Darken wraps the corresponding Objective-C method.
 func Darken() *BlendKernel {
-	_r := raw.CIBlendKernelDarken()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("darken"))
+	return BlendKernelFromID(_r)
 }
 
-// Lighten calls the underlying CIBlendKernelLighten.
+// Lighten wraps the corresponding Objective-C method.
 func Lighten() *BlendKernel {
-	_r := raw.CIBlendKernelLighten()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("lighten"))
+	return BlendKernelFromID(_r)
 }
 
-// ColorDodge calls the underlying CIBlendKernelColorDodge.
+// ColorDodge wraps the corresponding Objective-C method.
 func ColorDodge() *BlendKernel {
-	_r := raw.CIBlendKernelColorDodge()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("colorDodge"))
+	return BlendKernelFromID(_r)
 }
 
-// ColorBurn calls the underlying CIBlendKernelColorBurn.
+// ColorBurn wraps the corresponding Objective-C method.
 func ColorBurn() *BlendKernel {
-	_r := raw.CIBlendKernelColorBurn()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("colorBurn"))
+	return BlendKernelFromID(_r)
 }
 
-// HardLight calls the underlying CIBlendKernelHardLight.
+// HardLight wraps the corresponding Objective-C method.
 func HardLight() *BlendKernel {
-	_r := raw.CIBlendKernelHardLight()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("hardLight"))
+	return BlendKernelFromID(_r)
 }
 
-// SoftLight calls the underlying CIBlendKernelSoftLight.
+// SoftLight wraps the corresponding Objective-C method.
 func SoftLight() *BlendKernel {
-	_r := raw.CIBlendKernelSoftLight()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("softLight"))
+	return BlendKernelFromID(_r)
 }
 
-// Difference calls the underlying CIBlendKernelDifference.
+// Difference wraps the corresponding Objective-C method.
 func Difference() *BlendKernel {
-	_r := raw.CIBlendKernelDifference()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("difference"))
+	return BlendKernelFromID(_r)
 }
 
-// Exclusion calls the underlying CIBlendKernelExclusion.
+// Exclusion wraps the corresponding Objective-C method.
 func Exclusion() *BlendKernel {
-	_r := raw.CIBlendKernelExclusion()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("exclusion"))
+	return BlendKernelFromID(_r)
 }
 
-// Hue calls the underlying CIBlendKernelHue.
+// Hue wraps the corresponding Objective-C method.
 func Hue() *BlendKernel {
-	_r := raw.CIBlendKernelHue()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("hue"))
+	return BlendKernelFromID(_r)
 }
 
-// Saturation calls the underlying CIBlendKernelSaturation.
+// Saturation wraps the corresponding Objective-C method.
 func Saturation() *BlendKernel {
-	_r := raw.CIBlendKernelSaturation()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("saturation"))
+	return BlendKernelFromID(_r)
 }
 
-// CIBlendKernelColor calls the underlying CIBlendKernelColor.
+// CIBlendKernelColor wraps the corresponding Objective-C method.
 func CIBlendKernelColor() *BlendKernel {
-	_r := raw.CIBlendKernelColor()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("color"))
+	return BlendKernelFromID(_r)
 }
 
-// Luminosity calls the underlying CIBlendKernelLuminosity.
+// Luminosity wraps the corresponding Objective-C method.
 func Luminosity() *BlendKernel {
-	_r := raw.CIBlendKernelLuminosity()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("luminosity"))
+	return BlendKernelFromID(_r)
 }
 
-// Subtract calls the underlying CIBlendKernelSubtract.
+// Subtract wraps the corresponding Objective-C method.
 func Subtract() *BlendKernel {
-	_r := raw.CIBlendKernelSubtract()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("subtract"))
+	return BlendKernelFromID(_r)
 }
 
-// Divide calls the underlying CIBlendKernelDivide.
+// Divide wraps the corresponding Objective-C method.
 func Divide() *BlendKernel {
-	_r := raw.CIBlendKernelDivide()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("divide"))
+	return BlendKernelFromID(_r)
 }
 
-// LinearBurn calls the underlying CIBlendKernelLinearBurn.
+// LinearBurn wraps the corresponding Objective-C method.
 func LinearBurn() *BlendKernel {
-	_r := raw.CIBlendKernelLinearBurn()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("linearBurn"))
+	return BlendKernelFromID(_r)
 }
 
-// LinearDodge calls the underlying CIBlendKernelLinearDodge.
+// LinearDodge wraps the corresponding Objective-C method.
 func LinearDodge() *BlendKernel {
-	_r := raw.CIBlendKernelLinearDodge()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("linearDodge"))
+	return BlendKernelFromID(_r)
 }
 
-// VividLight calls the underlying CIBlendKernelVividLight.
+// VividLight wraps the corresponding Objective-C method.
 func VividLight() *BlendKernel {
-	_r := raw.CIBlendKernelVividLight()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("vividLight"))
+	return BlendKernelFromID(_r)
 }
 
-// LinearLight calls the underlying CIBlendKernelLinearLight.
+// LinearLight wraps the corresponding Objective-C method.
 func LinearLight() *BlendKernel {
-	_r := raw.CIBlendKernelLinearLight()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("linearLight"))
+	return BlendKernelFromID(_r)
 }
 
-// PinLight calls the underlying CIBlendKernelPinLight.
+// PinLight wraps the corresponding Objective-C method.
 func PinLight() *BlendKernel {
-	_r := raw.CIBlendKernelPinLight()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("pinLight"))
+	return BlendKernelFromID(_r)
 }
 
-// HardMix calls the underlying CIBlendKernelHardMix.
+// HardMix wraps the corresponding Objective-C method.
 func HardMix() *BlendKernel {
-	_r := raw.CIBlendKernelHardMix()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("hardMix"))
+	return BlendKernelFromID(_r)
 }
 
-// DarkerColor calls the underlying CIBlendKernelDarkerColor.
+// DarkerColor wraps the corresponding Objective-C method.
 func DarkerColor() *BlendKernel {
-	_r := raw.CIBlendKernelDarkerColor()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("darkerColor"))
+	return BlendKernelFromID(_r)
 }
 
-// LighterColor calls the underlying CIBlendKernelLighterColor.
+// LighterColor wraps the corresponding Objective-C method.
 func LighterColor() *BlendKernel {
-	_r := raw.CIBlendKernelLighterColor()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("lighterColor"))
+	return BlendKernelFromID(_r)
 }
 
-// ColorWithCGColor calls the underlying CIColorColorWithCGColor.
-func ColorWithCGColor(color unsafe.Pointer) *Color {
-	_r := raw.CIColorColorWithCGColor(color)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+// ColorWithCGColor create a Core Image color object with a Core Graphics color object.
+func ColorWithCGColor(color obj.Object) *Color {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(color))
+	return ColorFromID(_r)
 }
 
-// ColorWithRedGreenBlueAlpha calls the underlying CIColorColorWithRedGreenBlueAlpha.
+// ColorWithRedGreenBlueAlpha create a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values.
 func ColorWithRedGreenBlueAlpha(red float64, green float64, blue float64, alpha float64) *Color {
-	_r := raw.CIColorColorWithRedGreenBlueAlpha(red, green, blue, alpha)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:alpha:"), red, green, blue, alpha)
+	return ColorFromID(_r)
 }
 
-// ColorWithRedGreenBlue calls the underlying CIColorColorWithRedGreenBlue.
+// ColorWithRedGreenBlue create a Core Image color object in the sRGB color space with the specified red, green, and blue component values.
 func ColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
-	_r := raw.CIColorColorWithRedGreenBlue(red, green, blue)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:"), red, green, blue)
+	return ColorFromID(_r)
 }
 
-// ColorWithRedGreenBlueAlphaColorSpace calls the underlying CIColorColorWithRedGreenBlueAlphaColorSpace.
-func ColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace unsafe.Pointer) *Color {
-	_r := raw.CIColorColorWithRedGreenBlueAlphaColorSpace(red, green, blue, alpha, colorSpace)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+// ColorWithRedGreenBlueAlphaColorSpace create a Core Image color object with the specified red, green, blue, and alpha component values as measured in the specified color space.
+func ColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace obj.Object) *Color {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace))
+	return ColorFromID(_r)
 }
 
-// ColorWithRedGreenBlueColorSpace calls the underlying CIColorColorWithRedGreenBlueColorSpace.
-func ColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace unsafe.Pointer) *Color {
-	_r := raw.CIColorColorWithRedGreenBlueColorSpace(red, green, blue, colorSpace)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+// ColorWithRedGreenBlueColorSpace create a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
+func ColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace obj.Object) *Color {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace))
+	return ColorFromID(_r)
 }
 
-// ColorWithString calls the underlying CIColorColorWithString.
+// ColorWithString create a Core Image color object in the sRGB color space using a string containing the RGBA color component values.
 func ColorWithString(representation string) *Color {
-	_r := raw.CIColorColorWithString(foundation.NSStringStringWithUTF8String(representation))
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithString:"), purego.NSString(representation))
+	return ColorFromID(_r)
 }
 
-// BlackColor calls the underlying CIColorBlackColor.
+// BlackColor returns a singleton Core Image color instance in the sRGB color space with RGB values `0,0,0` and alpha value `1`.
 func BlackColor() *Color {
-	_r := raw.CIColorBlackColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("blackColor"))
+	return ColorFromID(_r)
 }
 
-// WhiteColor calls the underlying CIColorWhiteColor.
+// WhiteColor returns a singleton Core Image color instance in the sRGB color space with RGB values `1,1,1` and alpha value `1`.
 func WhiteColor() *Color {
-	_r := raw.CIColorWhiteColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("whiteColor"))
+	return ColorFromID(_r)
 }
 
-// GrayColor calls the underlying CIColorGrayColor.
+// GrayColor returns a singleton Core Image color instance in the sRGB color space with RGB values `0.5,0.5,0.5` and alpha value `1`.
 func GrayColor() *Color {
-	_r := raw.CIColorGrayColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("grayColor"))
+	return ColorFromID(_r)
 }
 
-// RedColor calls the underlying CIColorRedColor.
+// RedColor returns a singleton Core Image color instance in the sRGB color space with RGB values `1,0,0` and alpha value `1`.
 func RedColor() *Color {
-	_r := raw.CIColorRedColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("redColor"))
+	return ColorFromID(_r)
 }
 
-// GreenColor calls the underlying CIColorGreenColor.
+// GreenColor returns a singleton Core Image color instance in the sRGB color space with RGB values `0,1,0` and alpha value `1`.
 func GreenColor() *Color {
-	_r := raw.CIColorGreenColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("greenColor"))
+	return ColorFromID(_r)
 }
 
-// BlueColor calls the underlying CIColorBlueColor.
+// BlueColor returns a singleton Core Image color instance in the sRGB color space with RGB values `0,0,1` and alpha value `1`.
 func BlueColor() *Color {
-	_r := raw.CIColorBlueColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("blueColor"))
+	return ColorFromID(_r)
 }
 
-// CyanColor calls the underlying CIColorCyanColor.
+// CyanColor returns a singleton Core Image color instance in the sRGB color space with RGB values `0,1,1` and alpha value `1`.
 func CyanColor() *Color {
-	_r := raw.CIColorCyanColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("cyanColor"))
+	return ColorFromID(_r)
 }
 
-// MagentaColor calls the underlying CIColorMagentaColor.
+// MagentaColor returns a singleton Core Image color instance in the sRGB color space with RGB values `1,0,1` and alpha value `1`.
 func MagentaColor() *Color {
-	_r := raw.CIColorMagentaColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("magentaColor"))
+	return ColorFromID(_r)
 }
 
-// YellowColor calls the underlying CIColorYellowColor.
+// YellowColor returns a singleton Core Image color instance in the sRGB color space with RGB values `1,1,0` and alpha value `1`.
 func YellowColor() *Color {
-	_r := raw.CIColorYellowColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("yellowColor"))
+	return ColorFromID(_r)
 }
 
-// ClearColor calls the underlying CIColorClearColor.
+// ClearColor returns a singleton Core Image color instance in the sRGB color space with RGB values `0,0,0` and alpha value `0`.
 func ClearColor() *Color {
-	_r := raw.CIColorClearColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("clearColor"))
+	return ColorFromID(_r)
 }
 
-// CIColorKernelKernelWithString calls the underlying CIColorKernelKernelWithString.
+// CIColorKernelKernelWithString creates a color kernel object from the specified kernel source code.
 func CIColorKernelKernelWithString(string_ string) *ColorKernel {
-	_r := raw.CIColorKernelKernelWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &ColorKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColorKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+	return ColorKernelFromID(_r)
 }
 
-// ContextWithCGLContextPixelFormatColorSpaceOptions calls the underlying CIContextContextWithCGLContextPixelFormatColorSpaceOptions.
-func ContextWithCGLContextPixelFormatColorSpaceOptions(cglctx unsafe.Pointer, pixelFormat unsafe.Pointer, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
-	_r := raw.CIContextContextWithCGLContextPixelFormatColorSpaceOptions(cglctx, pixelFormat, colorSpace, options)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextWithCGLContextPixelFormatColorSpaceOptions creates a Core Image context from a CGL context, using the specified options, color space, and pixel format object.
+func ContextWithCGLContextPixelFormatColorSpaceOptions(cglctx obj.Object, pixelFormat obj.Object, colorSpace obj.Object, options obj.Object) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGLContext:pixelFormat:colorSpace:options:"), objref.IDOf(cglctx), objref.IDOf(pixelFormat), objref.IDOf(colorSpace), objref.IDOf(options))
+	return ContextFromID(_r)
 }
 
-// ContextWithCGLContextPixelFormatOptions calls the underlying CIContextContextWithCGLContextPixelFormatOptions.
-func ContextWithCGLContextPixelFormatOptions(cglctx unsafe.Pointer, pixelFormat unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
-	_r := raw.CIContextContextWithCGLContextPixelFormatOptions(cglctx, pixelFormat, options)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextWithCGLContextPixelFormatOptions creates a Core Image context from a CGL context, using the specified options and pixel format object.
+func ContextWithCGLContextPixelFormatOptions(cglctx obj.Object, pixelFormat obj.Object, options obj.Object) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGLContext:pixelFormat:options:"), objref.IDOf(cglctx), objref.IDOf(pixelFormat), objref.IDOf(options))
+	return ContextFromID(_r)
 }
 
-// ContextWithCGContextOptions calls the underlying CIContextContextWithCGContextOptions.
-func ContextWithCGContextOptions(cgctx unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
-	_r := raw.CIContextContextWithCGContextOptions(cgctx, options)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextWithCGContextOptions creates a Core Image context from a Quartz context, using the specified options.
+func ContextWithCGContextOptions(cgctx obj.Object, options obj.Object) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGContext:options:"), objref.IDOf(cgctx), objref.IDOf(options))
+	return ContextFromID(_r)
 }
 
-// ContextWithOptions calls the underlying CIContextContextWithOptions.
-func ContextWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
-	_r := raw.CIContextContextWithOptions(options)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextWithOptions initializes a context without a specific rendering destination, using the specified options.
+func ContextWithOptions(options obj.Object) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithOptions:"), objref.IDOf(options))
+	return ContextFromID(_r)
 }
 
-// CIContextContext calls the underlying CIContextContext.
+// CIContextContext creates a context without a specific rendering destination, using default options.
 func CIContextContext() *Context {
-	_r := raw.CIContextContext()
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("context"))
+	return ContextFromID(_r)
 }
 
-// ContextWithMTLDevice calls the underlying CIContextContextWithMTLDevice.
-func ContextWithMTLDevice(device metal.MTLDevice) *Context {
-	_r := raw.CIContextContextWithMTLDevice(device)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// OfflineGPUCount returns the number of GPUs not currently driving a display.
+func OfflineGPUCount() int {
+	_r := objc.Send[int](objc.ID(_class("CIContext")), objc.RegisterName("offlineGPUCount"))
+	return _r
 }
 
-// ContextWithMTLDeviceOptions calls the underlying CIContextContextWithMTLDeviceOptions.
-func ContextWithMTLDeviceOptions(device metal.MTLDevice, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
-	_r := raw.CIContextContextWithMTLDeviceOptions(device, options)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextForOfflineGPUAtIndex wraps the corresponding Objective-C method.
+func ContextForOfflineGPUAtIndex(index int) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextForOfflineGPUAtIndex:"), index)
+	return ContextFromID(_r)
 }
 
-// ContextWithMTLCommandQueue calls the underlying CIContextContextWithMTLCommandQueue.
-func ContextWithMTLCommandQueue(commandQueue metal.MTLCommandQueue) *Context {
-	_r := raw.CIContextContextWithMTLCommandQueue(commandQueue)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext wraps the corresponding Objective-C method.
+func ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index int, colorSpace obj.Object, options obj.Object, sharedContext obj.Object) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextForOfflineGPUAtIndex:colorSpace:options:sharedContext:"), index, objref.IDOf(colorSpace), objref.IDOf(options), objref.IDOf(sharedContext))
+	return ContextFromID(_r)
 }
 
-// ContextWithMTLCommandQueueOptions calls the underlying CIContextContextWithMTLCommandQueueOptions.
-func ContextWithMTLCommandQueueOptions(commandQueue metal.MTLCommandQueue, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
-	_r := raw.CIContextContextWithMTLCommandQueueOptions(commandQueue, options)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// DescriptorWithPayloadRowCountColumnCountEccVersion creates a Data Matrix code descriptor for the given payload and parameters.
+func DescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload obj.Object, rowCount int, columnCount int, eccVersion DataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIDataMatrixCodeDescriptor")), objc.RegisterName("descriptorWithPayload:rowCount:columnCount:eccVersion:"), objref.IDOf(errorCorrectedPayload), rowCount, columnCount, eccVersion)
+	return DataMatrixCodeDescriptorFromID(_r)
 }
 
-// OfflineGPUCount calls the underlying CIContextOfflineGPUCount.
-func OfflineGPUCount() uint {
-	return raw.CIContextOfflineGPUCount()
+// DetectorOfTypeContextOptions creates and returns a configured detector.
+func DetectorOfTypeContextOptions(type_ string, context_ *Context, options obj.Object) *Detector {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIDetector")), objc.RegisterName("detectorOfType:context:options:"), purego.NSString(type_), objref.IDOf(context_), objref.IDOf(options))
+	return DetectorFromID(_r)
 }
 
-// ContextForOfflineGPUAtIndex calls the underlying CIContextContextForOfflineGPUAtIndex.
-func ContextForOfflineGPUAtIndex(index uint) *Context {
-	_r := raw.CIContextContextForOfflineGPUAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
-}
-
-// ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext calls the underlying CIContextContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext.
-func ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index uint, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], sharedContext unsafe.Pointer) *Context {
-	_r := raw.CIContextContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index, colorSpace, options, sharedContext)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
-}
-
-// DescriptorWithPayloadRowCountColumnCountEccVersion calls the underlying CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion.
-func DescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
-	_r := raw.CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload, rowCount, columnCount, raw.CIDataMatrixCodeECCVersion(eccVersion))
-	if _r == nil {
-		return nil
-	}
-	return &DataMatrixCodeDescriptor{inner: _r}
-}
-
-// DetectorOfTypeContextOptions calls the underlying CIDetectorDetectorOfTypeContextOptions.
-func DetectorOfTypeContextOptions(type_ string, context_ *raw.CIContext, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Detector {
-	_r := raw.CIDetectorDetectorOfTypeContextOptions(foundation.NSStringStringWithUTF8String(type_), context_, options)
-	if _r == nil {
-		return nil
-	}
-	return &Detector{inner: _r}
-}
-
-// FilterWithName calls the underlying CIFilterFilterWithName.
+// FilterWithName creates a new filter of type 'name'. On OSX, all input values will be undefined. On iOS, all input values will be set to default values.
 func FilterWithName(name string) *Filter {
-	_r := raw.CIFilterFilterWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Filter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithName:"), purego.NSString(name))
+	return FilterFromID(_r)
 }
 
-// FilterWithNameWithInputParameters calls the underlying CIFilterFilterWithNameWithInputParameters.
-func FilterWithNameWithInputParameters(name string, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Filter {
-	_r := raw.CIFilterFilterWithNameWithInputParameters(foundation.NSStringStringWithUTF8String(name), params)
-	if _r == nil {
-		return nil
-	}
-	return &Filter{inner: _r}
+// FilterWithNameWithInputParameters creates a new filter of type 'name'. The filter's input parameters are set from the dictionary of key-value pairs. On OSX, any of the filter input parameters not specified in the dictionary will be undefined. On iOS, any of the filter input parameters not specified in the dictionary will be set to default values.
+func FilterWithNameWithInputParameters(name string, params obj.Object) *Filter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithName:withInputParameters:"), purego.NSString(name), objref.IDOf(params))
+	return FilterFromID(_r)
 }
 
-// FilterNamesInCategory calls the underlying CIFilterFilterNamesInCategory.
-func FilterNamesInCategory(category string) *foundation.NSArray[*foundation.NSString] {
-	return raw.CIFilterFilterNamesInCategory(foundation.NSStringStringWithUTF8String(category))
+// FilterNamesInCategory returns an array containing all published filter names in a category.
+func FilterNamesInCategory(category string) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterNamesInCategory:"), purego.NSString(category))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// FilterNamesInCategories calls the underlying CIFilterFilterNamesInCategories.
-func FilterNamesInCategories(categories *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
-	return raw.CIFilterFilterNamesInCategories(categories)
+// FilterNamesInCategories returns an array containing all published filter names that belong to all listed categories.
+func FilterNamesInCategories(categories []string) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterNamesInCategories:"), purego.SliceToNSArray(categories, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RegisterFilterNameConstructorClassAttributes calls the underlying CIFilterRegisterFilterNameConstructorClassAttributes.
-func RegisterFilterNameConstructorClassAttributes(name string, anObject raw.CIFilterConstructor, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	raw.CIFilterRegisterFilterNameConstructorClassAttributes(foundation.NSStringStringWithUTF8String(name), anObject, attributes)
-}
-
-// LocalizedNameForFilterName calls the underlying CIFilterLocalizedNameForFilterName.
+// LocalizedNameForFilterName returns the localized name of a filter for display in the UI.
 func LocalizedNameForFilterName(filterName string) string {
-	_r := raw.CIFilterLocalizedNameForFilterName(foundation.NSStringStringWithUTF8String(filterName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("localizedNameForFilterName:"), purego.NSString(filterName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LocalizedNameForCategory calls the underlying CIFilterLocalizedNameForCategory.
+// LocalizedNameForCategory returns the localized name of a category for display in the UI.
 func LocalizedNameForCategory(category string) string {
-	_r := raw.CIFilterLocalizedNameForCategory(foundation.NSStringStringWithUTF8String(category))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("localizedNameForCategory:"), purego.NSString(category))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LocalizedDescriptionForFilterName calls the underlying CIFilterLocalizedDescriptionForFilterName.
+// LocalizedDescriptionForFilterName returns the localized description of a filter for display in the UI.
 func LocalizedDescriptionForFilterName(filterName string) string {
-	_r := raw.CIFilterLocalizedDescriptionForFilterName(foundation.NSStringStringWithUTF8String(filterName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("localizedDescriptionForFilterName:"), purego.NSString(filterName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LocalizedReferenceDocumentationForFilterName calls the underlying CIFilterLocalizedReferenceDocumentationForFilterName.
-func LocalizedReferenceDocumentationForFilterName(filterName string) *foundation.NSURL {
-	return raw.CIFilterLocalizedReferenceDocumentationForFilterName(foundation.NSStringStringWithUTF8String(filterName))
+// LocalizedReferenceDocumentationForFilterName returns the URL to the localized reference documentation describing the filter. The URL can be a local file or a remote document on a webserver. It is possible, that this method returns nil (like filters that predate this feature). A client of this API has to handle this case gracefully.
+func LocalizedReferenceDocumentationForFilterName(filterName string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("localizedReferenceDocumentationForFilterName:"), purego.NSString(filterName))
+	return obj.Wrap(_r)
 }
 
-// SerializedXMPFromFiltersInputImageExtent calls the underlying CIFilterSerializedXMPFromFiltersInputImageExtent.
-func SerializedXMPFromFiltersInputImageExtent(filters *foundation.NSArray[*raw.CIFilter], extent corefoundation.CGRect) *foundation.NSData {
-	return raw.CIFilterSerializedXMPFromFiltersInputImageExtent(filters, extent)
+// SerializedXMPFromFiltersInputImageExtent wraps the corresponding Objective-C method.
+func SerializedXMPFromFiltersInputImageExtent(filters []*Filter, extent corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("serializedXMPFromFilters:inputImageExtent:"), purego.SliceToNSArray(filters, func(_v *Filter) objc.ID { return objref.IDOf(_v) }), extent)
+	return obj.Wrap(_r)
 }
 
-// FilterArrayFromSerializedXMPInputImageExtentError calls the underlying CIFilterFilterArrayFromSerializedXMPInputImageExtentError.
-func FilterArrayFromSerializedXMPInputImageExtentError(xmpData *foundation.NSData, extent corefoundation.CGRect) (*foundation.NSArray[*raw.CIFilter], error) {
-	return raw.CIFilterFilterArrayFromSerializedXMPInputImageExtentError(xmpData, extent)
-}
-
-// FilterWithImageURLOptions calls the underlying CIFilterFilterWithImageURLOptions.
-func FilterWithImageURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Filter {
-	_r := raw.CIFilterFilterWithImageURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
-	if _r == nil {
-		return nil
+// FilterArrayFromSerializedXMPInputImageExtentError wraps the corresponding Objective-C method.
+func FilterArrayFromSerializedXMPInputImageExtentError(xmpData obj.Object, extent corefoundation.CGRect) (result []*Filter, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterArrayFromSerializedXMP:inputImageExtent:error:"), objref.IDOf(xmpData), extent, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Filter{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Filter { return FilterFromID(_id) }), nil
 }
 
-// FilterWithImageDataOptions calls the underlying CIFilterFilterWithImageDataOptions.
-func FilterWithImageDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Filter {
-	_r := raw.CIFilterFilterWithImageDataOptions(data, options)
-	if _r == nil {
-		return nil
-	}
-	return &Filter{inner: _r}
+// FilterWithImageURLOptions returns a CIFilter that will in turn return a properly processed CIImage as "outputImage".
+func FilterWithImageURLOptions(url string, options obj.Object) *Filter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithImageURL:options:"), rt.FileURL(url), objref.IDOf(options))
+	return FilterFromID(_r)
 }
 
-// FilterWithCVPixelBufferPropertiesOptions calls the underlying CIFilterFilterWithCVPixelBufferPropertiesOptions.
-func FilterWithCVPixelBufferPropertiesOptions(pixelBuffer unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Filter {
-	_r := raw.CIFilterFilterWithCVPixelBufferPropertiesOptions(pixelBuffer, properties, options)
-	if _r == nil {
-		return nil
-	}
-	return &Filter{inner: _r}
+// FilterWithImageDataOptions returns a CIFilter that will in turn return a properly processed CIImage as "outputImage". Note that when using this initializer, you should pass in a source type identifier hint (kCGImageSourceTypeIdentifierHint) key/value pair in order to help the decoder determine the file type, as otherwise confusion and incorrect results are possible.
+func FilterWithImageDataOptions(data obj.Object, options obj.Object) *Filter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithImageData:options:"), objref.IDOf(data), objref.IDOf(options))
+	return FilterFromID(_r)
 }
 
+// SupportedRawCameraModels returns a NSArray containing the names of all supported RAW cameras.
+//
 // SupportedRawCameraModels returns the collection as a Go slice.
 func SupportedRawCameraModels() []string {
-	arr := raw.CIFilterSupportedRawCameraModels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("supportedRawCameraModels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CIFilterGeneratorFilterGenerator calls the underlying CIFilterGeneratorFilterGenerator.
+// CIFilterGeneratorFilterGenerator creates and returns an empty filter generator object.
 func CIFilterGeneratorFilterGenerator() *FilterGenerator {
-	_r := raw.CIFilterGeneratorFilterGenerator()
-	if _r == nil {
-		return nil
-	}
-	return &FilterGenerator{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilterGenerator")), objc.RegisterName("filterGenerator"))
+	return FilterGeneratorFromID(_r)
 }
 
-// FilterGeneratorWithContentsOfURL calls the underlying CIFilterGeneratorFilterGeneratorWithContentsOfURL.
+// FilterGeneratorWithContentsOfURL creates and returns a filter generator object and initializes it with the contents of a filter generator file.
 func FilterGeneratorWithContentsOfURL(aURL string) *FilterGenerator {
-	_r := raw.CIFilterGeneratorFilterGeneratorWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(aURL)))
-	if _r == nil {
-		return nil
-	}
-	return &FilterGenerator{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilterGenerator")), objc.RegisterName("filterGeneratorWithContentsOfURL:"), rt.FileURL(aURL))
+	return FilterGeneratorFromID(_r)
 }
 
-// ShapeWithRect calls the underlying CIFilterShapeShapeWithRect.
+// ShapeWithRect creates a filter shape object and initializes it with a rectangle.
 func ShapeWithRect(r corefoundation.CGRect) *FilterShape {
-	_r := raw.CIFilterShapeShapeWithRect(r)
-	if _r == nil {
-		return nil
-	}
-	return &FilterShape{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilterShape")), objc.RegisterName("shapeWithRect:"), r)
+	return FilterShapeFromID(_r)
 }
 
-// ImageWithCGImage calls the underlying CIImageImageWithCGImage.
-func ImageWithCGImage(image unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithCGImage(image)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithCGImage creates and returns an image object from a Quartz 2D image.
+func ImageWithCGImage(image obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:"), objref.IDOf(image))
+	return ImageFromID(_r)
 }
 
-// ImageWithCGImageOptions calls the underlying CIImageImageWithCGImageOptions.
-func ImageWithCGImageOptions(image unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithCGImageOptions(image, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithCGImageOptions creates and returns an image object from a Quartz 2D image using the specified options.
+func ImageWithCGImageOptions(image obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithCGImageSourceIndexOptions calls the underlying CIImageImageWithCGImageSourceIndexOptions.
-func ImageWithCGImageSourceIndexOptions(source unsafe.Pointer, index uint, dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithCGImageSourceIndexOptions(source, index, dict)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithCGImageSourceIndexOptions wraps the corresponding Objective-C method.
+func ImageWithCGImageSourceIndexOptions(source obj.Object, index int, dict obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImageSource:index:options:"), objref.IDOf(source), index, objref.IDOf(dict))
+	return ImageFromID(_r)
 }
 
-// ImageWithCGLayer calls the underlying CIImageImageWithCGLayer.
-func ImageWithCGLayer(layer unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithCGLayer(layer)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithCGLayer creates and returns an image object from the contents supplied by a CGLayer object.
+func ImageWithCGLayer(layer obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:"), objref.IDOf(layer))
+	return ImageFromID(_r)
 }
 
-// ImageWithCGLayerOptions calls the underlying CIImageImageWithCGLayerOptions.
-func ImageWithCGLayerOptions(layer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithCGLayerOptions(layer, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithCGLayerOptions creates and returns an image object from the contents supplied by a CGLayer object, using the specified options.
+func ImageWithCGLayerOptions(layer obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:options:"), objref.IDOf(layer), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithBitmapDataBytesPerRowSizeFormatColorSpace calls the underlying CIImageImageWithBitmapDataBytesPerRowSizeFormatColorSpace.
-func ImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data *foundation.NSData, bytesPerRow uint, size corefoundation.CGSize, format int, colorSpace unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data, bytesPerRow, size, format, colorSpace)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithBitmapDataBytesPerRowSizeFormatColorSpace creates and returns an image object from bitmap data.
+func ImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data obj.Object, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithBitmapData:bytesPerRow:size:format:colorSpace:"), objref.IDOf(data), bytesPerRow, size, format, objref.IDOf(colorSpace))
+	return ImageFromID(_r)
 }
 
-// ImageWithTextureSizeFlippedColorSpace calls the underlying CIImageImageWithTextureSizeFlippedColorSpace.
-func ImageWithTextureSizeFlippedColorSpace(name uint, size corefoundation.CGSize, flipped bool, colorSpace unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithTextureSizeFlippedColorSpace(name, size, flipped, colorSpace)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithTextureSizeFlippedColorSpace creates and returns an image object initialized with data supplied by an OpenGL texture.
+func ImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace))
+	return ImageFromID(_r)
 }
 
-// ImageWithTextureSizeFlippedOptions calls the underlying CIImageImageWithTextureSizeFlippedOptions.
-func ImageWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize, flipped bool, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithTextureSizeFlippedOptions(name, size, flipped, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithTextureSizeFlippedOptions creates and returns an image object initialized with data supplied by an OpenGL texture.
+func ImageWithTextureSizeFlippedOptions(name int, size corefoundation.CGSize, flipped bool, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithTexture:size:flipped:options:"), name, size, flipped, objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithMTLTextureOptions calls the underlying CIImageImageWithMTLTextureOptions.
-func ImageWithMTLTextureOptions(texture metal.MTLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithMTLTextureOptions(texture, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
-}
-
-// ImageWithContentsOfURL calls the underlying CIImageImageWithContentsOfURL.
+// ImageWithContentsOfURL creates and returns an image object from the contents of a file.
 func ImageWithContentsOfURL(url string) *Image {
-	_r := raw.CIImageImageWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithContentsOfURL:"), rt.FileURL(url))
+	return ImageFromID(_r)
 }
 
-// ImageWithContentsOfURLOptions calls the underlying CIImageImageWithContentsOfURLOptions.
-func ImageWithContentsOfURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithContentsOfURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithContentsOfURLOptions creates and returns an image object from the contents of a file, using the specified options.
+func ImageWithContentsOfURLOptions(url string, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithContentsOfURL:options:"), rt.FileURL(url), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithData calls the underlying CIImageImageWithData.
-func ImageWithData(data *foundation.NSData) *Image {
-	_r := raw.CIImageImageWithData(data)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithData creates and returns an image object initialized with the supplied image data.
+func ImageWithData(data obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:"), objref.IDOf(data))
+	return ImageFromID(_r)
 }
 
-// ImageWithDataOptions calls the underlying CIImageImageWithDataOptions.
-func ImageWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithDataOptions(data, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithDataOptions creates and returns an image object initialized with the supplied image data, using the specified options.
+func ImageWithDataOptions(data obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithCVImageBuffer calls the underlying CIImageImageWithCVImageBuffer.
-func ImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithCVImageBuffer(imageBuffer)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithIOSurface creates and returns an image from the contents of an IOSurface.
+func ImageWithIOSurface(surface obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:"), objref.IDOf(surface))
+	return ImageFromID(_r)
 }
 
-// ImageWithCVImageBufferOptions calls the underlying CIImageImageWithCVImageBufferOptions.
-func ImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithCVImageBufferOptions(imageBuffer, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithIOSurfaceOptions creates, using the specified options, and returns an image from the contents of an IOSurface.
+func ImageWithIOSurfaceOptions(surface obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:options:"), objref.IDOf(surface), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithCVPixelBuffer calls the underlying CIImageImageWithCVPixelBuffer.
-func ImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithCVPixelBuffer(pixelBuffer)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithColor creates and returns an image of infinite extent whose entire content is the specified color.
+func ImageWithColor(color *Color) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithColor:"), objref.IDOf(color))
+	return ImageFromID(_r)
 }
 
-// ImageWithCVPixelBufferOptions calls the underlying CIImageImageWithCVPixelBufferOptions.
-func ImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithCVPixelBufferOptions(pixelBuffer, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
-}
-
-// ImageWithIOSurface calls the underlying CIImageImageWithIOSurface.
-func ImageWithIOSurface(surface unsafe.Pointer) *Image {
-	_r := raw.CIImageImageWithIOSurface(surface)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
-}
-
-// ImageWithIOSurfaceOptions calls the underlying CIImageImageWithIOSurfaceOptions.
-func ImageWithIOSurfaceOptions(surface unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithIOSurfaceOptions(surface, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
-}
-
-// ImageWithColor calls the underlying CIImageImageWithColor.
-func ImageWithColor(color *raw.CIColor) *Image {
-	_r := raw.CIImageImageWithColor(color)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
-}
-
-// EmptyImage calls the underlying CIImageEmptyImage.
+// EmptyImage creates and returns an empty image object.
 func EmptyImage() *Image {
-	_r := raw.CIImageEmptyImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("emptyImage"))
+	return ImageFromID(_r)
 }
 
-// BlackImage calls the underlying CIImageBlackImage.
+// BlackImage wraps the corresponding Objective-C method.
 func BlackImage() *Image {
-	_r := raw.CIImageBlackImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("blackImage"))
+	return ImageFromID(_r)
 }
 
-// WhiteImage calls the underlying CIImageWhiteImage.
+// WhiteImage wraps the corresponding Objective-C method.
 func WhiteImage() *Image {
-	_r := raw.CIImageWhiteImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("whiteImage"))
+	return ImageFromID(_r)
 }
 
-// GrayImage calls the underlying CIImageGrayImage.
+// GrayImage wraps the corresponding Objective-C method.
 func GrayImage() *Image {
-	_r := raw.CIImageGrayImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("grayImage"))
+	return ImageFromID(_r)
 }
 
-// RedImage calls the underlying CIImageRedImage.
+// RedImage wraps the corresponding Objective-C method.
 func RedImage() *Image {
-	_r := raw.CIImageRedImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("redImage"))
+	return ImageFromID(_r)
 }
 
-// GreenImage calls the underlying CIImageGreenImage.
+// GreenImage wraps the corresponding Objective-C method.
 func GreenImage() *Image {
-	_r := raw.CIImageGreenImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("greenImage"))
+	return ImageFromID(_r)
 }
 
-// BlueImage calls the underlying CIImageBlueImage.
+// BlueImage wraps the corresponding Objective-C method.
 func BlueImage() *Image {
-	_r := raw.CIImageBlueImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("blueImage"))
+	return ImageFromID(_r)
 }
 
-// CyanImage calls the underlying CIImageCyanImage.
+// CyanImage wraps the corresponding Objective-C method.
 func CyanImage() *Image {
-	_r := raw.CIImageCyanImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("cyanImage"))
+	return ImageFromID(_r)
 }
 
-// MagentaImage calls the underlying CIImageMagentaImage.
+// MagentaImage wraps the corresponding Objective-C method.
 func MagentaImage() *Image {
-	_r := raw.CIImageMagentaImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("magentaImage"))
+	return ImageFromID(_r)
 }
 
-// YellowImage calls the underlying CIImageYellowImage.
+// YellowImage wraps the corresponding Objective-C method.
 func YellowImage() *Image {
-	_r := raw.CIImageYellowImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("yellowImage"))
+	return ImageFromID(_r)
 }
 
-// ClearImage calls the underlying CIImageClearImage.
+// ClearImage wraps the corresponding Objective-C method.
 func ClearImage() *Image {
-	_r := raw.CIImageClearImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("clearImage"))
+	return ImageFromID(_r)
 }
 
-// ImageWithDepthDataOptions calls the underlying CIImageImageWithDepthDataOptions.
-func ImageWithDepthDataOptions(data *avfoundation.AVDepthData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithDepthDataOptions(data, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithDepthDataOptions wraps the corresponding Objective-C method.
+func ImageWithDepthDataOptions(data obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithDepthData:options:"), objref.IDOf(data), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithDepthData calls the underlying CIImageImageWithDepthData.
-func ImageWithDepthData(data *avfoundation.AVDepthData) *Image {
-	_r := raw.CIImageImageWithDepthData(data)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithDepthData wraps the corresponding Objective-C method.
+func ImageWithDepthData(data obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithDepthData:"), objref.IDOf(data))
+	return ImageFromID(_r)
 }
 
-// ImageWithPortaitEffectsMatteOptions calls the underlying CIImageImageWithPortaitEffectsMatteOptions.
-func ImageWithPortaitEffectsMatteOptions(matte *avfoundation.AVPortraitEffectsMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithPortaitEffectsMatteOptions(matte, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithPortaitEffectsMatteOptions wraps the corresponding Objective-C method.
+func ImageWithPortaitEffectsMatteOptions(matte obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithPortaitEffectsMatte:options:"), objref.IDOf(matte), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithPortaitEffectsMatte calls the underlying CIImageImageWithPortaitEffectsMatte.
-func ImageWithPortaitEffectsMatte(matte *avfoundation.AVPortraitEffectsMatte) *Image {
-	_r := raw.CIImageImageWithPortaitEffectsMatte(matte)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithPortaitEffectsMatte wraps the corresponding Objective-C method.
+func ImageWithPortaitEffectsMatte(matte obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithPortaitEffectsMatte:"), objref.IDOf(matte))
+	return ImageFromID(_r)
 }
 
-// ImageWithSemanticSegmentationMatteOptions calls the underlying CIImageImageWithSemanticSegmentationMatteOptions.
-func ImageWithSemanticSegmentationMatteOptions(matte *avfoundation.AVSemanticSegmentationMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithSemanticSegmentationMatteOptions(matte, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithSemanticSegmentationMatteOptions wraps the corresponding Objective-C method.
+func ImageWithSemanticSegmentationMatteOptions(matte obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithSemanticSegmentationMatte:options:"), objref.IDOf(matte), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageWithSemanticSegmentationMatte calls the underlying CIImageImageWithSemanticSegmentationMatte.
-func ImageWithSemanticSegmentationMatte(matte *avfoundation.AVSemanticSegmentationMatte) *Image {
-	_r := raw.CIImageImageWithSemanticSegmentationMatte(matte)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithSemanticSegmentationMatte wraps the corresponding Objective-C method.
+func ImageWithSemanticSegmentationMatte(matte obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithSemanticSegmentationMatte:"), objref.IDOf(matte))
+	return ImageFromID(_r)
 }
 
-// ImageWithImageProviderSizeFormatColorSpaceOptions calls the underlying CIImageImageWithImageProviderSizeFormatColorSpaceOptions.
-func ImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, width uint, height uint, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
-	_r := raw.CIImageImageWithImageProviderSizeFormatColorSpaceOptions(provider, width, height, format, colorSpace, options)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// ImageWithImageProviderSizeFormatColorSpaceOptions create an image object based on pixels from an image provider object.
+func ImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace obj.Object, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace), objref.IDOf(options))
+	return ImageFromID(_r)
 }
 
-// ImageAccumulatorWithExtentFormat calls the underlying CIImageAccumulatorImageAccumulatorWithExtentFormat.
+// ImageAccumulatorWithExtentFormat creates an image accumulator with the specified extent and pixel format.
 func ImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) *ImageAccumulator {
-	_r := raw.CIImageAccumulatorImageAccumulatorWithExtentFormat(extent, format)
-	if _r == nil {
-		return nil
-	}
-	return &ImageAccumulator{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("imageAccumulatorWithExtent:format:"), extent, format)
+	return ImageAccumulatorFromID(_r)
 }
 
-// ImageAccumulatorWithExtentFormatColorSpace calls the underlying CIImageAccumulatorImageAccumulatorWithExtentFormatColorSpace.
-func ImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *ImageAccumulator {
-	_r := raw.CIImageAccumulatorImageAccumulatorWithExtentFormatColorSpace(extent, format, colorSpace)
-	if _r == nil {
-		return nil
-	}
-	return &ImageAccumulator{inner: _r}
+// ImageAccumulatorWithExtentFormatColorSpace creates an image accumulator with the specified extent, pixel format, and color space.
+func ImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace obj.Object) *ImageAccumulator {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("imageAccumulatorWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace))
+	return ImageAccumulatorFromID(_r)
 }
 
-// ProcessWithInputsArgumentsOutputError calls the underlying CIImageProcessorKernelProcessWithInputsArgumentsOutputError.
-func ProcessWithInputsArgumentsOutputError(inputs *foundation.NSArray[raw.CIImageProcessorInput], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], output raw.CIImageProcessorOutput) (bool, error) {
-	return raw.CIImageProcessorKernelProcessWithInputsArgumentsOutputError(inputs, arguments, output)
+// RoiForInputArgumentsOutputRect override this class method to implement your processor’s ROI callback.
+func RoiForInputArgumentsOutputRect(inputIndex int, arguments obj.Object, outputRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("roiForInput:arguments:outputRect:"), inputIndex, objref.IDOf(arguments), outputRect)
+	return _r
 }
 
-// RoiForInputArgumentsOutputRect calls the underlying CIImageProcessorKernelRoiForInputArgumentsOutputRect.
-func RoiForInputArgumentsOutputRect(inputIndex int, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputRect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.CIImageProcessorKernelRoiForInputArgumentsOutputRect(inputIndex, arguments, outputRect)
+// RoiTileArrayForInputArgumentsOutputRect override this class method to implement your processor’s tiled ROI callback.
+func RoiTileArrayForInputArgumentsOutputRect(inputIndex int, arguments obj.Object, outputRect corefoundation.CGRect) []*Vector {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("roiTileArrayForInput:arguments:outputRect:"), inputIndex, objref.IDOf(arguments), outputRect)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Vector { return VectorFromID(_id) })
 }
 
-// RoiTileArrayForInputArgumentsOutputRect calls the underlying CIImageProcessorKernelRoiTileArrayForInputArgumentsOutputRect.
-func RoiTileArrayForInputArgumentsOutputRect(inputIndex int, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputRect corefoundation.CGRect) *foundation.NSArray[*raw.CIVector] {
-	return raw.CIImageProcessorKernelRoiTileArrayForInputArgumentsOutputRect(inputIndex, arguments, outputRect)
-}
-
-// FormatForInputAtIndex calls the underlying CIImageProcessorKernelFormatForInputAtIndex.
+// FormatForInputAtIndex override this class method if you want your any of the inputs to be in a specific pixel format.
 func FormatForInputAtIndex(inputIndex int) int {
-	return raw.CIImageProcessorKernelFormatForInputAtIndex(inputIndex)
+	_r := objc.Send[int](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("formatForInputAtIndex:"), inputIndex)
+	return _r
 }
 
-// ApplyWithExtentInputsArgumentsError calls the underlying CIImageProcessorKernelApplyWithExtentInputsArgumentsError.
-func ApplyWithExtentInputsArgumentsError(extent corefoundation.CGRect, inputs *foundation.NSArray[*raw.CIImage], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Image, error) {
-	_r, _err := raw.CIImageProcessorKernelApplyWithExtentInputsArgumentsError(extent, inputs, arguments)
-	if _err != nil {
-		return nil, _err
+// ApplyWithExtentInputsArgumentsError call this method on your Core Image Processor Kernel subclass to create a new image of the specified extent.
+func ApplyWithExtentInputsArgumentsError(extent corefoundation.CGRect, inputs []*Image, arguments obj.Object) (result *Image, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithExtent:inputs:arguments:error:"), extent, purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), objref.IDOf(arguments), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Image{inner: _r}, nil
+	return ImageFromID(_r), nil
 }
 
-// OutputFormat calls the underlying CIImageProcessorKernelOutputFormat.
+// OutputFormat override this class property if you want your processor's output to be in a specific pixel format. The format must be one of `kCIFormatBGRA8`, `kCIFormatRGBAh`, `kCIFormatRGBAf` or `kCIFormatR8`. On iOS 12 and macOS 10.14, the formats `kCIFormatRh` and `kCIFormatRf` are also supported. If the outputFormat is `0`, then the output will be a supported format that best matches the rendering context's “/CIContext/workingFormat“. If a processor returns data in a color space other than the context working color space, then call “/CIImage/imageByColorMatchingColorSpaceToWorkingSpace:“ on the processor output. If a processor returns data as alpha-unpremultiplied RGBA data, then call, “/CIImage/imageByPremultiplyingAlpha“ on the processor output.
 func OutputFormat() int {
-	return raw.CIImageProcessorKernelOutputFormat()
+	_r := objc.Send[int](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputFormat"))
+	return _r
 }
 
-// OutputIsOpaque calls the underlying CIImageProcessorKernelOutputIsOpaque.
+// OutputIsOpaque override this class property if your processor's output stores 1.0 into the alpha channel of all pixels within the output extent. If not overridden, false is returned.
 func OutputIsOpaque() bool {
-	return raw.CIImageProcessorKernelOutputIsOpaque()
+	_r := objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputIsOpaque"))
+	return _r
 }
 
-// SynchronizeInputs calls the underlying CIImageProcessorKernelSynchronizeInputs.
+// SynchronizeInputs override this class property to return false if you want your processor to be given input objects that have not been synchronized for CPU access. Generally, if your subclass uses the GPU your should override this method to return false. If not overridden, true is returned.
 func SynchronizeInputs() bool {
-	return raw.CIImageProcessorKernelSynchronizeInputs()
+	_r := objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("synchronizeInputs"))
+	return _r
 }
 
-// ProcessWithInputsArgumentsOutputsError calls the underlying CIImageProcessorKernelProcessWithInputsArgumentsOutputsError.
-func ProcessWithInputsArgumentsOutputsError(inputs *foundation.NSArray[raw.CIImageProcessorInput], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputs ...purego.IDer) (bool, error) {
-	_ptrs := make([]objc.ID, len(outputs))
-	for _i, _v := range outputs {
-		_ptrs[_i] = _v.ID()
+// ProcessWithInputsArgumentsOutputs override this class method of your Core Image Processor Kernel subclass if it needs to produce multiple outputs.
+func ProcessWithInputsArgumentsOutputs(inputs []obj.Object, arguments obj.Object, outputs []obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("processWithInputs:arguments:outputs:error:"), purego.SliceToNSArray(inputs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(arguments), purego.SliceToNSArray(outputs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg2 *foundation.NSArray[raw.CIImageProcessorOutput]
-	if len(_ptrs) > 0 {
-		_arg2 = foundation.NSArrayFromID[raw.CIImageProcessorOutput](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = foundation.NSArrayFromID[raw.CIImageProcessorOutput](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
+	return nil
+}
+
+// OutputFormatAtIndexArguments override this class method if your processor has more than one output and you want your processor’s output to be in a specific supported CIPixelFormat.
+func OutputFormatAtIndexArguments(outputIndex int, arguments obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("outputFormatAtIndex:arguments:"), outputIndex, objref.IDOf(arguments))
+	return _r
+}
+
+// ApplyWithExtentsInputsArgumentsError call this method on your multiple-output Core Image Processor Kernel subclass to create an array of new image objects given the specified array of extents.
+func ApplyWithExtentsInputsArgumentsError(extents []*Vector, inputs []*Image, arguments obj.Object) (result []*Image, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("applyWithExtents:inputs:arguments:error:"), purego.SliceToNSArray(extents, func(_v *Vector) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(inputs, func(_v *Image) objc.ID { return objref.IDOf(_v) }), objref.IDOf(arguments), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-
-	return raw.CIImageProcessorKernelProcessWithInputsArgumentsOutputsError(inputs, arguments, _arg2)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Image { return ImageFromID(_id) }), nil
 }
 
-// OutputFormatAtIndexArguments calls the underlying CIImageProcessorKernelOutputFormatAtIndexArguments.
-func OutputFormatAtIndexArguments(outputIndex int, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID]) int {
-	return raw.CIImageProcessorKernelOutputFormatAtIndexArguments(outputIndex, arguments)
+// KernelsWithString creates and returns and array of CIKernel objects.
+func KernelsWithString(string_ string) []*Kernel {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelsWithString:"), purego.NSString(string_))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Kernel { return KernelFromID(_id) })
 }
 
-// ApplyWithExtentsInputsArgumentsError calls the underlying CIImageProcessorKernelApplyWithExtentsInputsArgumentsError.
-func ApplyWithExtentsInputsArgumentsError(extents *foundation.NSArray[*raw.CIVector], inputs *foundation.NSArray[*raw.CIImage], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[*raw.CIImage], error) {
-	return raw.CIImageProcessorKernelApplyWithExtentsInputsArgumentsError(extents, inputs, arguments)
+// KernelsWithMetalStringError load kernels from a Metal language string.
+func KernelsWithMetalStringError(source string) (result []*Kernel, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelsWithMetalString:error:"), purego.NSString(source), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Kernel { return KernelFromID(_id) }), nil
 }
 
-// KernelsWithString calls the underlying CIKernelKernelsWithString.
-func KernelsWithString(string_ string) *foundation.NSArray[*raw.CIKernel] {
-	return raw.CIKernelKernelsWithString(foundation.NSStringStringWithUTF8String(string_))
-}
-
-// KernelsWithMetalStringError calls the underlying CIKernelKernelsWithMetalStringError.
-func KernelsWithMetalStringError(source string) (*foundation.NSArray[*raw.CIKernel], error) {
-	return raw.CIKernelKernelsWithMetalStringError(foundation.NSStringStringWithUTF8String(source))
-}
-
-// CIKernelKernelWithString calls the underlying CIKernelKernelWithString.
+// CIKernelKernelWithString creates a single kernel object.
 func CIKernelKernelWithString(string_ string) *Kernel {
-	_r := raw.CIKernelKernelWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &Kernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+	return KernelFromID(_r)
 }
 
-// KernelWithFunctionNameFromMetalLibraryDataError calls the underlying CIKernelKernelWithFunctionNameFromMetalLibraryDataError.
-func KernelWithFunctionNameFromMetalLibraryDataError(name string, data *foundation.NSData) (*Kernel, error) {
-	_r, _err := raw.CIKernelKernelWithFunctionNameFromMetalLibraryDataError(foundation.NSStringStringWithUTF8String(name), data)
-	if _err != nil {
-		return nil, _err
+// KernelWithFunctionNameFromMetalLibraryDataError creates a single kernel object using a Metal Shading Language (MSL) kernel function.
+func KernelWithFunctionNameFromMetalLibraryDataError(name string, data obj.Object) (result *Kernel, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:error:"), purego.NSString(name), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Kernel{inner: _r}, nil
+	return KernelFromID(_r), nil
 }
 
-// KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError calls the underlying CIKernelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError.
-func KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(name string, data *foundation.NSData, format int) (*Kernel, error) {
-	_r, _err := raw.CIKernelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(foundation.NSStringStringWithUTF8String(name), data, format)
-	if _err != nil {
-		return nil, _err
+// KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError creates a single kernel object using a Metal Shading Language kernel function with optional pixel format.
+func KernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(name string, data obj.Object, format int) (result *Kernel, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:"), purego.NSString(name), objref.IDOf(data), format, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Kernel{inner: _r}, nil
+	return KernelFromID(_r), nil
 }
 
-// KernelNamesFromMetalLibraryData calls the underlying CIKernelKernelNamesFromMetalLibraryData.
-func KernelNamesFromMetalLibraryData(data *foundation.NSData) *foundation.NSArray[*foundation.NSString] {
-	return raw.CIKernelKernelNamesFromMetalLibraryData(data)
+// KernelNamesFromMetalLibraryData return an array of strings containing the names of all of the kernels contained in the Metal library.
+func KernelNamesFromMetalLibraryData(data obj.Object) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIKernel")), objc.RegisterName("kernelNamesFromMetalLibraryData:"), objref.IDOf(data))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DescriptorWithPayloadIsCompactRowCountColumnCount calls the underlying CIPDF417CodeDescriptorDescriptorWithPayloadIsCompactRowCountColumnCount.
-func DescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
-	_r := raw.CIPDF417CodeDescriptorDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload, isCompact, rowCount, columnCount)
-	if _r == nil {
-		return nil
-	}
-	return &PDF417CodeDescriptor{inner: _r}
+// DescriptorWithPayloadIsCompactRowCountColumnCount creates an PDF417 code descriptor for the given payload and parameters.
+func DescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload obj.Object, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIPDF417CodeDescriptor")), objc.RegisterName("descriptorWithPayload:isCompact:rowCount:columnCount:"), objref.IDOf(errorCorrectedPayload), isCompact, rowCount, columnCount)
+	return PDF417CodeDescriptorFromID(_r)
 }
 
-// LoadAllPlugIns calls the underlying CIPlugInLoadAllPlugIns.
+// LoadAllPlugIns scans directories for files that have the .plugin extension and then loads the image units.
 func LoadAllPlugIns() {
-	raw.CIPlugInLoadAllPlugIns()
+	objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("loadAllPlugIns"))
 }
 
-// LoadNonExecutablePlugIns calls the underlying CIPlugInLoadNonExecutablePlugIns.
+// LoadNonExecutablePlugIns scans directories for plugins.
 func LoadNonExecutablePlugIns() {
-	raw.CIPlugInLoadNonExecutablePlugIns()
+	objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("loadNonExecutablePlugIns"))
 }
 
-// LoadPlugInAllowNonExecutable calls the underlying CIPlugInLoadPlugInAllowNonExecutable.
+// LoadPlugInAllowNonExecutable loads filters from an image unit that have the appropriate executable status.
 func LoadPlugInAllowNonExecutable(url string, allowNonExecutable bool) {
-	raw.CIPlugInLoadPlugInAllowNonExecutable(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), allowNonExecutable)
+	objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("loadPlugIn:allowNonExecutable:"), rt.FileURL(url), allowNonExecutable)
 }
 
-// LoadPlugInAllowExecutableCode calls the underlying CIPlugInLoadPlugInAllowExecutableCode.
+// LoadPlugInAllowExecutableCode loads filters from an image unit that have the appropriate executable status.
 func LoadPlugInAllowExecutableCode(url string, allowExecutableCode bool) {
-	raw.CIPlugInLoadPlugInAllowExecutableCode(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), allowExecutableCode)
+	objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("loadPlugIn:allowExecutableCode:"), rt.FileURL(url), allowExecutableCode)
 }
 
-// LoadNonExecutablePlugIn calls the underlying CIPlugInLoadNonExecutablePlugIn.
+// LoadNonExecutablePlugIn loads a non-executable plug-in specified by its URL.
 func LoadNonExecutablePlugIn(url string) {
-	raw.CIPlugInLoadNonExecutablePlugIn(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("loadNonExecutablePlugIn:"), rt.FileURL(url))
 }
 
-// DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel calls the underlying CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel.
-func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {
-	_r := raw.CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload, symbolVersion, maskPattern, raw.CIQRCodeErrorCorrectionLevel(errorCorrectionLevel))
-	if _r == nil {
-		return nil
-	}
-	return &QRCodeDescriptor{inner: _r}
+// DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a QR code descriptor for the given payload and parameters.
+func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload obj.Object, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("descriptorWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), objref.IDOf(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
+	return QRCodeDescriptorFromID(_r)
 }
 
-// FilterWithImageURL calls the underlying CIRAWFilterFilterWithImageURL.
+// FilterWithImageURL creates a RAW filter from the image at the URL location that you specify.
 func FilterWithImageURL(url string) *RAWFilter {
-	_r := raw.CIRAWFilterFilterWithImageURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &RAWFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithImageURL:"), rt.FileURL(url))
+	return RAWFilterFromID(_r)
 }
 
-// FilterWithImageDataIdentifierHint calls the underlying CIRAWFilterFilterWithImageDataIdentifierHint.
-func FilterWithImageDataIdentifierHint(data *foundation.NSData, identifierHint string) *RAWFilter {
-	_r := raw.CIRAWFilterFilterWithImageDataIdentifierHint(data, foundation.NSStringStringWithUTF8String(identifierHint))
-	if _r == nil {
-		return nil
-	}
-	return &RAWFilter{inner: _r}
+// FilterWithImageDataIdentifierHint creates a RAW filter from the image data and type hint that you specify.
+func FilterWithImageDataIdentifierHint(data obj.Object, identifierHint string) *RAWFilter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithImageData:identifierHint:"), objref.IDOf(data), purego.NSString(identifierHint))
+	return RAWFilterFromID(_r)
 }
 
-// FilterWithCVPixelBufferProperties calls the underlying CIRAWFilterFilterWithCVPixelBufferProperties.
-func FilterWithCVPixelBufferProperties(buffer unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID]) *RAWFilter {
-	_r := raw.CIRAWFilterFilterWithCVPixelBufferProperties(buffer, properties)
-	if _r == nil {
-		return nil
-	}
-	return &RAWFilter{inner: _r}
-}
-
+// SupportedCameraModels wraps the corresponding Objective-C method.
+//
 // SupportedCameraModels returns the collection as a Go slice.
 func SupportedCameraModels() []string {
-	arr := raw.CIRAWFilterSupportedCameraModels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("supportedCameraModels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SamplerWithImage calls the underlying CISamplerSamplerWithImage.
-func SamplerWithImage(im *raw.CIImage) *Sampler {
-	_r := raw.CISamplerSamplerWithImage(im)
-	if _r == nil {
-		return nil
-	}
-	return &Sampler{inner: _r}
+// SamplerWithImage creates and returns a sampler that references an image.
+func SamplerWithImage(im *Image) *Sampler {
+	_r := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("samplerWithImage:"), objref.IDOf(im))
+	return SamplerFromID(_r)
 }
 
-// SamplerWithImageOptions calls the underlying CISamplerSamplerWithImageOptions.
-func SamplerWithImageOptions(im *raw.CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *Sampler {
-	_r := raw.CISamplerSamplerWithImageOptions(im, dict)
-	if _r == nil {
-		return nil
-	}
-	return &Sampler{inner: _r}
+// SamplerWithImageOptions creates and returns a sampler that references an image using options specified in a dictionary.
+func SamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
+	_r := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("samplerWithImage:options:"), objref.IDOf(im), objref.IDOf(dict))
+	return SamplerFromID(_r)
 }
 
-// VectorWithValuesCount calls the underlying CIVectorVectorWithValuesCount.
-func VectorWithValuesCount(values *float64, count uint) *Vector {
-	_r := raw.CIVectorVectorWithValuesCount(values, count)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+// VectorWithValuesCount create a Core Image vector object that is initialized with the specified values.
+func VectorWithValuesCount(count int) (result *Vector, values float64) {
+	var _out0 float64
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithValues:count:"), unsafe.Pointer(&_out0), count)
+	_v := VectorFromID(_r)
+	return _v, _out0
 }
 
-// VectorWithX calls the underlying CIVectorVectorWithX.
+// VectorWithX create a Core Image vector object that is initialized with one value.
 func VectorWithX(x_ float64) *Vector {
-	_r := raw.CIVectorVectorWithX(x_)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithX:"), x_)
+	return VectorFromID(_r)
 }
 
-// VectorWithXY calls the underlying CIVectorVectorWithXY.
+// VectorWithXY create a Core Image vector object that is initialized with two values.
 func VectorWithXY(x_ float64, y float64) *Vector {
-	_r := raw.CIVectorVectorWithXY(x_, y)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithX:Y:"), x_, y)
+	return VectorFromID(_r)
 }
 
-// VectorWithXYZ calls the underlying CIVectorVectorWithXYZ.
+// VectorWithXYZ create a Core Image vector object that is initialized with three values.
 func VectorWithXYZ(x_ float64, y float64, z float64) *Vector {
-	_r := raw.CIVectorVectorWithXYZ(x_, y, z)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithX:Y:Z:"), x_, y, z)
+	return VectorFromID(_r)
 }
 
-// VectorWithXYZW calls the underlying CIVectorVectorWithXYZW.
+// VectorWithXYZW create a Core Image vector object that is initialized with four values.
 func VectorWithXYZW(x_ float64, y float64, z float64, w float64) *Vector {
-	_r := raw.CIVectorVectorWithXYZW(x_, y, z, w)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithX:Y:Z:W:"), x_, y, z, w)
+	return VectorFromID(_r)
 }
 
-// VectorWithCGPoint calls the underlying CIVectorVectorWithCGPoint.
+// VectorWithCGPoint create a Core Image vector object that is initialized with two values provided by a CGPoint structure.
 func VectorWithCGPoint(p corefoundation.CGPoint) *Vector {
-	_r := raw.CIVectorVectorWithCGPoint(p)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithCGPoint:"), p)
+	return VectorFromID(_r)
 }
 
-// VectorWithCGRect calls the underlying CIVectorVectorWithCGRect.
+// VectorWithCGRect create a Core Image vector object that is initialized with four values provided by a CGRect structure.
 func VectorWithCGRect(r corefoundation.CGRect) *Vector {
-	_r := raw.CIVectorVectorWithCGRect(r)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithCGRect:"), r)
+	return VectorFromID(_r)
 }
 
-// VectorWithCGAffineTransform calls the underlying CIVectorVectorWithCGAffineTransform.
+// VectorWithCGAffineTransform create a Core Image vector object that is initialized with six values provided by a CGAffineTransform structure.
 func VectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *Vector {
-	_r := raw.CIVectorVectorWithCGAffineTransform(t)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithCGAffineTransform:"), t)
+	return VectorFromID(_r)
 }
 
-// VectorWithString calls the underlying CIVectorVectorWithString.
+// VectorWithString create a Core Image vector object with values provided in a string representation.
 func VectorWithString(representation string) *Vector {
-	_r := raw.CIVectorVectorWithString(foundation.NSStringStringWithUTF8String(representation))
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("vectorWithString:"), purego.NSString(representation))
+	return VectorFromID(_r)
 }
 
-// CIWarpKernelKernelWithString calls the underlying CIWarpKernelKernelWithString.
+// CIWarpKernelKernelWithString creates a warp kernel object from the specified kernel source code.
 func CIWarpKernelKernelWithString(string_ string) *WarpKernel {
-	_r := raw.CIWarpKernelKernelWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &WarpKernel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CIWarpKernel")), objc.RegisterName("kernelWithString:"), purego.NSString(string_))
+	return WarpKernelFromID(_r)
 }

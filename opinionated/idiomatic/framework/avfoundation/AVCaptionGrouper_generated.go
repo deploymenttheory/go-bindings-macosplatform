@@ -5,59 +5,82 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that analyzes the temporal overlaps of caption objects to create caption groups for each span of concurrent captions.
+// CaptionGrouper is an idiomatic wrapper over the Objective-C class AVCaptionGrouper.
 //
-// CaptionGrouper wraps [raw.AVCaptionGrouper] with a fluent Go API.
+// An object that analyzes the temporal overlaps of caption objects to create caption groups for each span of concurrent captions.
 type CaptionGrouper struct {
-	inner *raw.AVCaptionGrouper
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionGrouper].
-func (x *CaptionGrouper) Unwrap() *raw.AVCaptionGrouper { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionGrouper) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionGrouperFromID adopts an existing object pointer as a CaptionGrouper (nil for 0).
+// CaptionGrouperFromID adopts an existing Objective-C object as a CaptionGrouper
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionGrouperFromID(id objc.ID) *CaptionGrouper {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionGrouper{inner: raw.AVCaptionGrouperFromID(id)}
+	x := &CaptionGrouper{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionGrouper creates a new [CaptionGrouper].
+// captionGrouperAdopt wraps an Objective-C object that this code just created as a
+// CaptionGrouper (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionGrouperAdopt(id objc.ID) *CaptionGrouper {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionGrouper{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionGrouper) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionGrouper) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionGrouper) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionGrouper) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptionGrouper creates a new CaptionGrouper.
 func NewCaptionGrouper() *CaptionGrouper {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionGrouper")), objc.RegisterName("new"))
-	return &CaptionGrouper{inner: raw.AVCaptionGrouperFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionGrouper")), objc.RegisterName("new"))
+	return captionGrouperAdopt(_id)
 }
 
-// Adds a caption to the pending group.
-//
-// AddCaption calls the underlying AddCaption.
-func (x *CaptionGrouper) AddCaption(input *raw.AVCaption) {
-	x.inner.AddCaption(input)
-}
-
-// Creates caption groups for the captions you enqueue up to the time.
-//
-// FlushAddedCaptionsIntoGroupsUpToTime calls the underlying FlushAddedCaptionsIntoGroupsUpToTime.
-func (x *CaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*raw.AVCaptionGroup] {
-	return x.inner.FlushAddedCaptionsIntoGroupsUpToTime(upToTime)
+// AddCaption adds a caption to the pending group.
+func (x *CaptionGrouper) AddCaption(input *Caption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCaption:"), objref.IDOf(input))
 }
 
 // CaptionGrouperable is the interface implemented by [CaptionGrouper], for mocking and DI.
 type CaptionGrouperable interface {
-	Unwrap() *raw.AVCaptionGrouper
-	AddCaption(input *raw.AVCaption)
-	FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*raw.AVCaptionGroup]
+	obj.Object
+	AddCaption(input *Caption)
 }
 
 var _ CaptionGrouperable = (*CaptionGrouper)(nil)

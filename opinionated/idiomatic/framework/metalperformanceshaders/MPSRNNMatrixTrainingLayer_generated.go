@@ -5,242 +5,155 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A layer for training recurrent neural networks on Metal Performance Shaders matrices.
+// RNNMatrixTrainingLayer is an idiomatic wrapper over the Objective-C class MPSRNNMatrixTrainingLayer.
 //
-// RNNMatrixTrainingLayer wraps [raw.MPSRNNMatrixTrainingLayer] with a fluent Go API.
+// It embeds [Kernel], promoting that type's methods.
+//
+// A layer for training recurrent neural networks on Metal Performance Shaders matrices.
 type RNNMatrixTrainingLayer struct {
-	inner *raw.MPSRNNMatrixTrainingLayer
+	Kernel
 }
 
-// Unwrap returns the underlying [raw.MPSRNNMatrixTrainingLayer].
-func (x *RNNMatrixTrainingLayer) Unwrap() *raw.MPSRNNMatrixTrainingLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNMatrixTrainingLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNMatrixTrainingLayerFromID adopts an existing object pointer as a RNNMatrixTrainingLayer (nil for 0).
+// RNNMatrixTrainingLayerFromID adopts an existing Objective-C object as a RNNMatrixTrainingLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNMatrixTrainingLayerFromID(id objc.ID) *RNNMatrixTrainingLayer {
 	if id == 0 {
 		return nil
 	}
-	return &RNNMatrixTrainingLayer{inner: raw.MPSRNNMatrixTrainingLayerFromID(id)}
-}
-
-// @abstract   Initializes a linear (fully connected) RNN kernel for training @param      device                      The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptor               The descriptor that defines the RNN layer @param      trainableWeights            An array where to store the weights of the layer as MPSMatrices. NOTE: The exact layout and number of matrices may vary between platforms and therefore you should not save out these weights directly, but instead use the function encodeCopyWeightsToCommandBuffer to identify the weights and biases for serialization. Typically you should pass here an initialized but empty NSMutableArray and when this function returns the array will have been populated with the weight matrices needed in the encode-calls, by using initial values from the datasources in rnnDescriptor. @return     A valid MPSRNNMatrixTrainingLayer object or nil, if failure.
-//
-// NewRNNMatrixTrainingLayerWithDeviceRnnDescriptorTrainableWeights creates a new [RNNMatrixTrainingLayer].
-func NewRNNMatrixTrainingLayerWithDeviceRnnDescriptorTrainableWeights(device metal.MTLDevice, rnnDescriptor *mpsneuralnetwork.MPSRNNDescriptor, trainableWeights *foundation.NSMutableArray[*mpscore.MPSMatrix]) *RNNMatrixTrainingLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNMatrixTrainingLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:rnnDescriptor:trainableWeights:"), device, rnnDescriptor.Ptr(), trainableWeights.Ptr())
-	return &RNNMatrixTrainingLayer{inner: raw.MPSRNNMatrixTrainingLayerFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixTrainingLayer @param      device      The MTLDevice on which to make the MPSRNNMatrixTrainingLayer @return     A new MPSRNNMatrixTrainingLayer object, or nil if failure.
-//
-// NewRNNMatrixTrainingLayerWithCoderDevice creates a new [RNNMatrixTrainingLayer].
-func NewRNNMatrixTrainingLayerWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *RNNMatrixTrainingLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNMatrixTrainingLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &RNNMatrixTrainingLayer{inner: raw.MPSRNNMatrixTrainingLayerFromID(_id)}
-}
-
-// @property   storeAllIntermediateStates @abstract   If YES then calls to functions @ref encodeForwardSequenceToCommandBuffer and @ref encodeGradientSequenceToCommandBuffer return every recurrent state in the array: recurrentOutputStates. Defaults to NO.
-//
-// WithStoreAllIntermediateStates sets the storeAllIntermediateStates property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixTrainingLayer {
-	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
+	x := &RNNMatrixTrainingLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property   recurrentOutputIsTemporary @abstract   How recurrent output states from @ref encodeForwardSequenceToCommandBuffer and encodeGradientSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// WithRecurrentOutputIsTemporary sets the recurrentOutputIsTemporary property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixTrainingLayer {
-	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
-	return x
-}
-
-// @property   trainingStateIsTemporary @abstract   How training output states from @ref encodeForwardSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// WithTrainingStateIsTemporary sets the trainingStateIsTemporary property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingLayer) WithTrainingStateIsTemporary(trainingStateIsTemporary bool) *RNNMatrixTrainingLayer {
-	x.inner.SetTrainingStateIsTemporary(trainingStateIsTemporary)
-	return x
-}
-
-// @property   accumulateWeightGradients @abstract   If yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
-//
-// WithAccumulateWeightGradients sets the accumulateWeightGradients property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeightGradients bool) *RNNMatrixTrainingLayer {
-	x.inner.SetAccumulateWeightGradients(accumulateWeightGradients)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixTrainingLayer {
-	x.inner.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingLayer) WithLabel(label string) *RNNMatrixTrainingLayer {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
-	return x
-}
-
-// @abstract   Initializes a set of matrices that can be used in training for weight and bias gradient outputs in @see encodeBackwardSequenceToCommandBuffer. Can be also used to easily create auxiliary matrices for example for ADAM and other advanced optimization schemes. The layout and number of matrices is the same as for the outputs of @see initWithDevice, but the data type may differ. NOTE: These matrices cannot be used as weight matrices in the forward and backward encode calls, but matrices from initWithDevice() or createWeightMatrices() should be used instead. @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero. @param      dataType                    Datatype for the entries - currently MPSDataTypeFloat32 and MPSDataTypeFloat16 are supported.
-//
-// CreateWeightGradientMatricesDataType calls the underlying CreateWeightGradientMatricesDataType.
-func (x *RNNMatrixTrainingLayer) CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType) {
-	x.inner.CreateWeightGradientMatricesDataType(matricesOut, dataType)
-}
-
-// @abstract   As @ref createWeightGradientMatrices, but the matrices will be temporary with readCount = 1, which means that they become invalid after the first encode call that reads them. Note also that as the matrices are temporary, their storage mode will be private which means that you can only access the data using a kernel on the GPU. @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero. @param      dataType                    Datatype for the entries - currently MPSDataTypeFloat32 and MPSDataTypeFloat16 are supported. @param      commandBuffer               The command buffer that the temporary matrices will live on.
-//
-// CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer calls the underlying CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer.
-func (x *RNNMatrixTrainingLayer) CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType, commandBuffer metal.MTLCommandBuffer) {
-	x.inner.CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut, dataType, commandBuffer)
-}
-
-// @abstract   Initializes a set of matrices that can be used in training for weight and bias matrices in the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of @see initWithDevice. @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero.
-//
-// CreateWeightMatrices calls the underlying CreateWeightMatrices.
-func (x *RNNMatrixTrainingLayer) CreateWeightMatrices(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix]) {
-	x.inner.CreateWeightMatrices(matricesOut)
-}
-
-// EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset calls the underlying EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset.
-func (x *RNNMatrixTrainingLayer) EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer metal.MTLCommandBuffer, weights *foundation.NSArray[*mpscore.MPSMatrix], matrixId mpsneuralnetwork.MPSRNNMatrixId, matrix *mpscore.MPSMatrix, copyFromWeightsToMatrix bool, matrixOffset metal.MTLOrigin) {
-	x.inner.EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer, weights, matrixId, matrix, copyFromWeightsToMatrix, matrixOffset)
-}
-
-// EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights calls the underlying EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights.
-func (x *RNNMatrixTrainingLayer) EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, trainingStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	x.inner.EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, trainingStates, recurrentInputState, recurrentOutputStates, weights)
-}
-
-// EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights calls the underlying EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights.
-func (x *RNNMatrixTrainingLayer) EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	x.inner.EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer, sourceMatrices, destinationMatrices, trainingStates, weights)
-}
-
-// EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights calls the underlying EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights.
-func (x *RNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], forwardSourceOffsets *uint, sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], sourceGradientOffsets *uint, destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	x.inner.EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer, forwardSources, forwardSourceOffsets, sourceGradients, sourceGradientOffsets, destinationGradients, destinationOffsets, weightGradients, trainingStates, recurrentInputState, recurrentOutputStates, weights)
-}
-
-// EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights calls the underlying EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights.
-func (x *RNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	x.inner.EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer, forwardSources, sourceGradients, destinationGradients, weightGradients, trainingStates, weights)
-}
-
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *RNNMatrixTrainingLayer) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RNNMatrixTrainingLayer {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
+// rNNMatrixTrainingLayerAdopt wraps an Objective-C object that this code just created as a
+// RNNMatrixTrainingLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNMatrixTrainingLayerAdopt(id objc.ID) *RNNMatrixTrainingLayer {
+	if id == 0 {
 		return nil
 	}
-	return &RNNMatrixTrainingLayer{inner: _r}
+	x := &RNNMatrixTrainingLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels input vector/matrix.
-//
-// InputFeatureChannels calls the underlying InputFeatureChannels.
-func (x *RNNMatrixTrainingLayer) InputFeatureChannels() uint {
-	return x.inner.InputFeatureChannels()
+// NewRNNMatrixTrainingLayer creates a new RNNMatrixTrainingLayer.
+func NewRNNMatrixTrainingLayer() *RNNMatrixTrainingLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNMatrixTrainingLayer")), objc.RegisterName("new"))
+	return rNNMatrixTrainingLayerAdopt(_id)
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels in the output vector/matrix.
-//
-// OutputFeatureChannels calls the underlying OutputFeatureChannels.
-func (x *RNNMatrixTrainingLayer) OutputFeatureChannels() uint {
-	return x.inner.OutputFeatureChannels()
+// WithStoreAllIntermediateStates if YES then calls to functions
+func (x *RNNMatrixTrainingLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixTrainingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
+	return x
 }
 
-// @property   storeAllIntermediateStates @abstract   If YES then calls to functions @ref encodeForwardSequenceToCommandBuffer and @ref encodeGradientSequenceToCommandBuffer return every recurrent state in the array: recurrentOutputStates. Defaults to NO.
-//
-// StoreAllIntermediateStates calls the underlying StoreAllIntermediateStates.
+// WithRecurrentOutputIsTemporary how recurrent output states from
+func (x *RNNMatrixTrainingLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixTrainingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
+	return x
+}
+
+// WithTrainingStateIsTemporary how training output states from
+func (x *RNNMatrixTrainingLayer) WithTrainingStateIsTemporary(trainingStateIsTemporary bool) *RNNMatrixTrainingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStateIsTemporary:"), trainingStateIsTemporary)
+	return x
+}
+
+// WithAccumulateWeightGradients if yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
+func (x *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeightGradients bool) *RNNMatrixTrainingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulateWeightGradients:"), accumulateWeightGradients)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
+func (x *RNNMatrixTrainingLayer) WithLabel(label string) *RNNMatrixTrainingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// CreateWeightMatrices initializes a set of matrices that can be used in training for weight and bias matrices in the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of
+func (x *RNNMatrixTrainingLayer) CreateWeightMatrices(matricesOut []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createWeightMatrices:"), purego.SliceToNSArray(matricesOut, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// InputFeatureChannels the number of feature channels input vector/matrix.
+func (x *RNNMatrixTrainingLayer) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+	return _r
+}
+
+// OutputFeatureChannels the number of feature channels in the output vector/matrix.
+func (x *RNNMatrixTrainingLayer) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+	return _r
+}
+
+// StoreAllIntermediateStates if YES then calls to functions
 func (x *RNNMatrixTrainingLayer) StoreAllIntermediateStates() bool {
-	return x.inner.StoreAllIntermediateStates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
+	return _r
 }
 
-// SetStoreAllIntermediateStates calls the underlying SetStoreAllIntermediateStates.
+// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
-	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
 
-// @property   recurrentOutputIsTemporary @abstract   How recurrent output states from @ref encodeForwardSequenceToCommandBuffer and encodeGradientSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// RecurrentOutputIsTemporary calls the underlying RecurrentOutputIsTemporary.
+// RecurrentOutputIsTemporary how recurrent output states from
 func (x *RNNMatrixTrainingLayer) RecurrentOutputIsTemporary() bool {
-	return x.inner.RecurrentOutputIsTemporary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
+	return _r
 }
 
-// SetRecurrentOutputIsTemporary calls the underlying SetRecurrentOutputIsTemporary.
+// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
-	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// @property   trainingStateIsTemporary @abstract   How training output states from @ref encodeForwardSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// TrainingStateIsTemporary calls the underlying TrainingStateIsTemporary.
+// TrainingStateIsTemporary how training output states from
 func (x *RNNMatrixTrainingLayer) TrainingStateIsTemporary() bool {
-	return x.inner.TrainingStateIsTemporary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trainingStateIsTemporary"))
+	return _r
 }
 
-// SetTrainingStateIsTemporary calls the underlying SetTrainingStateIsTemporary.
+// SetTrainingStateIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetTrainingStateIsTemporary(trainingStateIsTemporary bool) {
-	x.inner.SetTrainingStateIsTemporary(trainingStateIsTemporary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStateIsTemporary:"), trainingStateIsTemporary)
 }
 
-// @property   accumulateWeightGradients @abstract   If yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
-//
-// AccumulateWeightGradients calls the underlying AccumulateWeightGradients.
+// AccumulateWeightGradients if yes then the computed weight gradients are accumulated on top of existing values in calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer. Defaults to NO.
 func (x *RNNMatrixTrainingLayer) AccumulateWeightGradients() bool {
-	return x.inner.AccumulateWeightGradients()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accumulateWeightGradients"))
+	return _r
 }
 
-// SetAccumulateWeightGradients calls the underlying SetAccumulateWeightGradients.
+// SetAccumulateWeightGradients wraps the corresponding Objective-C method.
 func (x *RNNMatrixTrainingLayer) SetAccumulateWeightGradients(accumulateWeightGradients bool) {
-	x.inner.SetAccumulateWeightGradients(accumulateWeightGradients)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulateWeightGradients:"), accumulateWeightGradients)
 }
-
-func (x *RNNMatrixTrainingLayer) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // RNNMatrixTrainingLayerable is the interface implemented by [RNNMatrixTrainingLayer], for mocking and DI.
 type RNNMatrixTrainingLayerable interface {
-	Unwrap() *raw.MPSRNNMatrixTrainingLayer
+	obj.Object
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixTrainingLayer
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixTrainingLayer
 	WithTrainingStateIsTemporary(trainingStateIsTemporary bool) *RNNMatrixTrainingLayer
 	WithAccumulateWeightGradients(accumulateWeightGradients bool) *RNNMatrixTrainingLayer
-	WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixTrainingLayer
 	WithLabel(label string) *RNNMatrixTrainingLayer
-	CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType)
-	CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType, commandBuffer metal.MTLCommandBuffer)
-	CreateWeightMatrices(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix])
-	EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer metal.MTLCommandBuffer, weights *foundation.NSArray[*mpscore.MPSMatrix], matrixId mpsneuralnetwork.MPSRNNMatrixId, matrix *mpscore.MPSMatrix, copyFromWeightsToMatrix bool, matrixOffset metal.MTLOrigin)
-	EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, trainingStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix])
-	EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix])
-	EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], forwardSourceOffsets *uint, sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], sourceGradientOffsets *uint, destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix])
-	EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix])
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RNNMatrixTrainingLayer
-	InputFeatureChannels() uint
-	OutputFeatureChannels() uint
+	CreateWeightMatrices(matricesOut []obj.Object)
+	InputFeatureChannels() int
+	OutputFeatureChannels() int
 	StoreAllIntermediateStates() bool
 	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
 	RecurrentOutputIsTemporary() bool
@@ -252,3 +165,5 @@ type RNNMatrixTrainingLayerable interface {
 }
 
 var _ RNNMatrixTrainingLayerable = (*RNNMatrixTrainingLayer)(nil)
+
+var _ KernelProvider = (*RNNMatrixTrainingLayer)(nil)

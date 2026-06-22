@@ -15,6 +15,8 @@ const (
 	RB_IO_WAIT_WRITABLE Rb_io_wait_readwrite = 1
 )
 
+// String returns the Rb_io_wait_readwrite constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Rb_io_wait_readwrite) String() string {
 	switch e {
 	case RB_IO_WAIT_READABLE:

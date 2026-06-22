@@ -5,48 +5,76 @@
 package externalaccessory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The object you use to identify connected accessories, and begin delivery of connection and disconnection notifications.
+// AccessoryManager is an idiomatic wrapper over the Objective-C class EAAccessoryManager.
 //
-// AccessoryManager wraps [raw.EAAccessoryManager] with a fluent Go API.
+// The object you use to identify connected accessories, and begin delivery of connection and disconnection notifications.
 type AccessoryManager struct {
-	inner *raw.EAAccessoryManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EAAccessoryManager].
-func (x *AccessoryManager) Unwrap() *raw.EAAccessoryManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccessoryManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessoryManagerFromID adopts an existing object pointer as a AccessoryManager (nil for 0).
+// AccessoryManagerFromID adopts an existing Objective-C object as a AccessoryManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessoryManagerFromID(id objc.ID) *AccessoryManager {
 	if id == 0 {
 		return nil
 	}
-	return &AccessoryManager{inner: raw.EAAccessoryManagerFromID(id)}
+	x := &AccessoryManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAccessoryManager creates a new [AccessoryManager].
+// accessoryManagerAdopt wraps an Objective-C object that this code just created as a
+// AccessoryManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessoryManagerAdopt(id objc.ID) *AccessoryManager {
+	if id == 0 {
+		return nil
+	}
+	x := &AccessoryManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccessoryManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccessoryManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccessoryManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccessoryManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccessoryManager creates a new AccessoryManager.
 func NewAccessoryManager() *AccessoryManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EAAccessoryManager")), objc.RegisterName("new"))
-	return &AccessoryManager{inner: raw.EAAccessoryManagerFromID(_id)}
-}
-
-// ConnectedAccessories calls the underlying ConnectedAccessories.
-func (x *AccessoryManager) ConnectedAccessories() unsafe.Pointer {
-	return x.inner.ConnectedAccessories()
+	_id := objc.Send[objc.ID](objc.ID(_class("EAAccessoryManager")), objc.RegisterName("new"))
+	return accessoryManagerAdopt(_id)
 }
 
 // AccessoryManagerable is the interface implemented by [AccessoryManager], for mocking and DI.
 type AccessoryManagerable interface {
-	Unwrap() *raw.EAAccessoryManager
-	ConnectedAccessories() unsafe.Pointer
+	obj.Object
 }
 
 var _ AccessoryManagerable = (*AccessoryManager)(nil)

@@ -5,118 +5,135 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enables the frame rate conversion on a frame processing session.
+// FrameRateConversionConfiguration is an idiomatic wrapper over the Objective-C class VTFrameRateConversionConfiguration.
 //
-// FrameRateConversionConfiguration wraps [raw.VTFrameRateConversionConfiguration] with a fluent Go API.
+// An object that enables the frame rate conversion on a frame processing session.
 type FrameRateConversionConfiguration struct {
-	inner *raw.VTFrameRateConversionConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTFrameRateConversionConfiguration].
-func (x *FrameRateConversionConfiguration) Unwrap() *raw.VTFrameRateConversionConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FrameRateConversionConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// FrameRateConversionConfigurationFromID adopts an existing object pointer as a FrameRateConversionConfiguration (nil for 0).
+// FrameRateConversionConfigurationFromID adopts an existing Objective-C object as a FrameRateConversionConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func FrameRateConversionConfigurationFromID(id objc.ID) *FrameRateConversionConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(id)}
+	x := &FrameRateConversionConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new frame rate conversion configuration with specified flow width and height.
-//
-// NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [FrameRateConversionConfiguration].
-func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTFrameRateConversionConfigurationQualityPrioritization, revision VTFrameRateConversionConfigurationRevision) *FrameRateConversionConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameRateConversionConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, raw.VTFrameRateConversionConfigurationQualityPrioritization(qualityPrioritization), raw.VTFrameRateConversionConfigurationRevision(revision))
-	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(_id)}
-}
-
-// Width of source frame in pixels.
-//
-// FrameWidth calls the underlying FrameWidth.
-func (x *FrameRateConversionConfiguration) FrameWidth() int {
-	return x.inner.FrameWidth()
-}
-
-// Height of source frame in pixels.
-//
-// FrameHeight calls the underlying FrameHeight.
-func (x *FrameRateConversionConfiguration) FrameHeight() int {
-	return x.inner.FrameHeight()
-}
-
-// Indicates that caller provides optical flow.
-//
-// UsePrecomputedFlow calls the underlying UsePrecomputedFlow.
-func (x *FrameRateConversionConfiguration) UsePrecomputedFlow() bool {
-	return x.inner.UsePrecomputedFlow()
-}
-
-// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“.
-//
-// QualityPrioritization calls the underlying QualityPrioritization.
-func (x *FrameRateConversionConfiguration) QualityPrioritization() VTFrameRateConversionConfigurationQualityPrioritization {
-	return VTFrameRateConversionConfigurationQualityPrioritization(x.inner.QualityPrioritization())
-}
-
-// The specific algorithm or configuration revision you use to perform the request.
-//
-// Revision calls the underlying Revision.
-func (x *FrameRateConversionConfiguration) Revision() VTFrameRateConversionConfigurationRevision {
-	return VTFrameRateConversionConfigurationRevision(x.inner.Revision())
-}
-
-// Supported pixel formats available for source frames for current configuration.
-//
-// FrameSupportedPixelFormats returns the collection as a Go slice.
-func (x *FrameRateConversionConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
-	arr := x.inner.FrameSupportedPixelFormats()
-	if arr == nil {
+// frameRateConversionConfigurationAdopt wraps an Objective-C object that this code just created as a
+// FrameRateConversionConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func frameRateConversionConfigurationAdopt(id objc.ID) *FrameRateConversionConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &FrameRateConversionConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-//
-// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
-func (x *FrameRateConversionConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.SourcePixelBufferAttributes()
+// Description returns the object's -description text.
+func (x *FrameRateConversionConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FrameRateConversionConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FrameRateConversionConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FrameRateConversionConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new frame rate conversion configuration with specified flow width and height.
+func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization FrameRateConversionConfigurationQualityPrioritization, revision FrameRateConversionConfigurationRevision) *FrameRateConversionConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
+	return frameRateConversionConfigurationAdopt(_id)
+}
+
+// FrameWidth width of source frame in pixels.
+func (x *FrameRateConversionConfiguration) FrameWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
+	return _r
+}
+
+// FrameHeight height of source frame in pixels.
+func (x *FrameRateConversionConfiguration) FrameHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
+	return _r
+}
+
+// UsePrecomputedFlow indicates that caller provides optical flow.
+func (x *FrameRateConversionConfiguration) UsePrecomputedFlow() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usePrecomputedFlow"))
+	return _r
+}
+
+// QualityPrioritization a parameter you use to control quality and performance levels. For more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“.
+func (x *FrameRateConversionConfiguration) QualityPrioritization() FrameRateConversionConfigurationQualityPrioritization {
+	_r := objc.Send[FrameRateConversionConfigurationQualityPrioritization](objref.IDOf(x), objc.RegisterName("qualityPrioritization"))
+	return _r
+}
+
+// Revision the specific algorithm or configuration revision you use to perform the request.
+func (x *FrameRateConversionConfiguration) Revision() FrameRateConversionConfigurationRevision {
+	_r := objc.Send[FrameRateConversionConfigurationRevision](objref.IDOf(x), objc.RegisterName("revision"))
+	return _r
+}
+
+// FrameSupportedPixelFormats supported pixel formats available for source frames for current configuration.
 //
-// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
-func (x *FrameRateConversionConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.DestinationPixelBufferAttributes()
+// FrameSupportedPixelFormats returns the collection as a Go slice.
+func (x *FrameRateConversionConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameSupportedPixelFormats"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (x *FrameRateConversionConfiguration) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+	return obj.Wrap(_r)
+}
+
+// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (x *FrameRateConversionConfiguration) DestinationPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
+	return obj.Wrap(_r)
 }
 
 // FrameRateConversionConfigurationable is the interface implemented by [FrameRateConversionConfiguration], for mocking and DI.
 type FrameRateConversionConfigurationable interface {
-	Unwrap() *raw.VTFrameRateConversionConfiguration
+	obj.Object
 	FrameWidth() int
 	FrameHeight() int
 	UsePrecomputedFlow() bool
-	QualityPrioritization() VTFrameRateConversionConfigurationQualityPrioritization
-	Revision() VTFrameRateConversionConfigurationRevision
-	FrameSupportedPixelFormats() []*foundation.NSNumber
-	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	QualityPrioritization() FrameRateConversionConfigurationQualityPrioritization
+	Revision() FrameRateConversionConfigurationRevision
+	FrameSupportedPixelFormats() []obj.Object
+	SourcePixelBufferAttributes() obj.Object
+	DestinationPixelBufferAttributes() obj.Object
 }
 
 var _ FrameRateConversionConfigurationable = (*FrameRateConversionConfiguration)(nil)

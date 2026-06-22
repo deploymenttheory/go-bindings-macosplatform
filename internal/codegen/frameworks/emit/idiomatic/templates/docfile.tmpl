@@ -1,11 +1,25 @@
 {{/*
     docfile.tmpl — the package doc.go: header, build constraint, and the package
-    doc comment immediately preceding the package clause.
+    doc comment immediately preceding the package clause. When the framework has
+    provider bases, a "Types" section indexes each base to its concrete subtypes
+    as godoc links, so `go doc <pkg>` reads as a map of which type to build for a
+    given role.
 */}}
 {{define "docfile"}}{{.Header}}
 
 {{.BuildTag}}
 
 // Package {{.PkgName}} provides a fluent Go API over the macOS {{.Framework}} framework.
+{{- if .Groups}}
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+{{- range .Groups}}
+//   - {{.Title}}: {{.Links}}
+{{- end}}
+{{- end}}
 package {{.PkgName}}
 {{end}}

@@ -5,82 +5,99 @@
 package gamesave
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamesave"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Represents the state and its associated properties of the directory
+// SyncedDirectoryState is an idiomatic wrapper over the Objective-C class GSSyncedDirectoryState.
 //
-// SyncedDirectoryState wraps [raw.GSSyncedDirectoryState] with a fluent Go API.
+// Represents the state and its associated properties of the directory
 type SyncedDirectoryState struct {
-	inner *raw.GSSyncedDirectoryState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GSSyncedDirectoryState].
-func (x *SyncedDirectoryState) Unwrap() *raw.GSSyncedDirectoryState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncedDirectoryState) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncedDirectoryStateFromID adopts an existing object pointer as a SyncedDirectoryState (nil for 0).
+// SyncedDirectoryStateFromID adopts an existing Objective-C object as a SyncedDirectoryState
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncedDirectoryStateFromID(id objc.ID) *SyncedDirectoryState {
 	if id == 0 {
 		return nil
 	}
-	return &SyncedDirectoryState{inner: raw.GSSyncedDirectoryStateFromID(id)}
+	x := &SyncedDirectoryState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncedDirectoryState creates a new [SyncedDirectoryState].
+// syncedDirectoryStateAdopt wraps an Objective-C object that this code just created as a
+// SyncedDirectoryState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncedDirectoryStateAdopt(id objc.ID) *SyncedDirectoryState {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncedDirectoryState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncedDirectoryState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncedDirectoryState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncedDirectoryState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncedDirectoryState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncedDirectoryState creates a new SyncedDirectoryState.
 func NewSyncedDirectoryState() *SyncedDirectoryState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GSSyncedDirectoryState")), objc.RegisterName("new"))
-	return &SyncedDirectoryState{inner: raw.GSSyncedDirectoryStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectoryState")), objc.RegisterName("new"))
+	return syncedDirectoryStateAdopt(_id)
 }
 
-// Specifies the current state of the directory
-//
-// State calls the underlying State.
-func (x *SyncedDirectoryState) State() GSSyncState {
-	return GSSyncState(x.inner.State())
+// State specifies the current state of the directory
+func (x *SyncedDirectoryState) State() SyncState {
+	_r := objc.Send[SyncState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// The URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
-//
-// Url calls the underlying Url.
-func (x *SyncedDirectoryState) Url() *foundation.NSURL {
-	return x.inner.Url()
+// Url the URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
+func (x *SyncedDirectoryState) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// The conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
+// ConflictedVersions the conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
 //
 // ConflictedVersions returns the collection as a Go slice.
 func (x *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
-	arr := x.inner.ConflictedVersions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncedDirectoryVersion {
-		return &SyncedDirectoryVersion{inner: raw.GSSyncedDirectoryVersionFromID(purego.Retain(_id))}
-	})
-}
-
-// The error preventing you from using the directory. This property's value is `nil` unless the state is `GSSyncStateError`.
-//
-// Error calls the underlying Error.
-func (x *SyncedDirectoryState) Error() unsafe.Pointer {
-	return x.inner.Error()
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conflictedVersions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncedDirectoryVersion { return SyncedDirectoryVersionFromID(_id) })
 }
 
 // SyncedDirectoryStateable is the interface implemented by [SyncedDirectoryState], for mocking and DI.
 type SyncedDirectoryStateable interface {
-	Unwrap() *raw.GSSyncedDirectoryState
-	State() GSSyncState
-	Url() *foundation.NSURL
+	obj.Object
+	State() SyncState
+	Url() obj.Object
 	ConflictedVersions() []*SyncedDirectoryVersion
-	Error() unsafe.Pointer
 }
 
 var _ SyncedDirectoryStateable = (*SyncedDirectoryState)(nil)

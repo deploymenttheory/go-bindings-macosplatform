@@ -4,15 +4,8 @@
 
 package mpsimage
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
-)
-
-// MPSImageHistogramInfo is a type alias for the raw MPSImageHistogramInfo value-type struct.
-type MPSImageHistogramInfo = raw.MPSImageHistogramInfo
-
-// MPSImageKeypointData is a type alias for the raw MPSImageKeypointData value-type struct.
-type MPSImageKeypointData = raw.MPSImageKeypointData
-
-// MPSImageKeypointRangeInfo is a type alias for the raw MPSImageKeypointRangeInfo value-type struct.
-type MPSImageKeypointRangeInfo = raw.MPSImageKeypointRangeInfo
+// Specifies information to find the keypoints in an image.
+type MPSImageKeypointRangeInfo struct {
+	MaximumKeypoints      uint
+	MinimumThresholdValue float32
+}

@@ -4,9 +4,8 @@
 
 package fileprovider
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-)
-
-// NSFileProviderTypeAndCreator is a type alias for the raw NSFileProviderTypeAndCreator value-type struct.
-type NSFileProviderTypeAndCreator = raw.NSFileProviderTypeAndCreator
+// A structure that contains the file type and file creator codes for an item.
+type NSFileProviderTypeAndCreator struct {
+	Type    uint
+	Creator uint
+}

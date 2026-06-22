@@ -5,74 +5,66 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A collection of metadata items that are valid for use during a specific time range.
+// TimedMetadataGroup is an idiomatic wrapper over the Objective-C class AVTimedMetadataGroup.
 //
-// TimedMetadataGroup wraps [raw.AVTimedMetadataGroup] with a fluent Go API.
+// TimedMetadataGroup is an abstract base — you do not construct it directly. Construct one of [MutableTimedMetadataGroup] and pass it where a TimedMetadataGroup is accepted.
+//
+// A collection of metadata items that are valid for use during a specific time range.
 type TimedMetadataGroup struct {
-	inner *raw.AVTimedMetadataGroup
+	MetadataGroup
 }
 
-// Unwrap returns the underlying [raw.AVTimedMetadataGroup].
-func (x *TimedMetadataGroup) Unwrap() *raw.AVTimedMetadataGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TimedMetadataGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// TimedMetadataGroupFromID adopts an existing object pointer as a TimedMetadataGroup (nil for 0).
+// TimedMetadataGroupFromID adopts an existing Objective-C object as a TimedMetadataGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func TimedMetadataGroupFromID(id objc.ID) *TimedMetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(id)}
+	x := &TimedMetadataGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a timed metadata group initialized with the given metadata items.
-//
-// NewTimedMetadataGroupWithItemsTimeRange creates a new [TimedMetadataGroup].
-func NewTimedMetadataGroupWithItemsTimeRange(items *foundation.NSArray[*raw.AVMetadataItem], timeRange coremedia.CMTimeRange) *TimedMetadataGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:timeRange:"), items.Ptr(), timeRange)
-	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(_id)}
+// timedMetadataGroupAdopt wraps an Objective-C object that this code just created as a
+// TimedMetadataGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func timedMetadataGroupAdopt(id objc.ID) *TimedMetadataGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &TimedMetadataGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method		initWithSampleBuffer: @abstract	Initializes an instance of AVTimedMetadataGroup with a sample buffer. @param		sampleBuffer A CMSampleBuffer with media type kCMMediaType_Metadata. @result		An instance of AVTimedMetadataGroup.
-//
-// NewTimedMetadataGroupWithSampleBuffer creates a new [TimedMetadataGroup].
-func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer unsafe.Pointer) *TimedMetadataGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:"), sampleBuffer)
-	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(_id)}
+// NewTimedMetadataGroupWithSampleBuffer initializes an instance of AVTimedMetadataGroup with a sample buffer.
+func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer obj.Object) *TimedMetadataGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:"), objref.IDOf(sampleBuffer))
+	return timedMetadataGroupAdopt(_id)
 }
-
-// TimeRange calls the underlying TimeRange.
-func (x *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// Creates a format description based on the receiver’s items.
-//
-// CopyFormatDescription calls the underlying CopyFormatDescription.
-func (x *TimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {
-	return x.inner.CopyFormatDescription()
-}
-
-func (x *TimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup { return x.inner }
-
-func (x *TimedMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVMetadataGroup }
 
 // TimedMetadataGroupable is the interface implemented by [TimedMetadataGroup], for mocking and DI.
 type TimedMetadataGroupable interface {
-	Unwrap() *raw.AVTimedMetadataGroup
-	TimeRange() coremedia.CMTimeRange
-	CopyFormatDescription() unsafe.Pointer
+	obj.Object
 }
 
 var _ TimedMetadataGroupable = (*TimedMetadataGroup)(nil)
+
+// isTimedMetadataGroup marks TimedMetadataGroup — and, by embedding promotion, its
+// subclasses — as a member of the TimedMetadataGroup hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TimedMetadataGroup) isTimedMetadataGroup() {}
+
+var _ TimedMetadataGroupProvider = (*TimedMetadataGroup)(nil)
+
+var _ MetadataGroupProvider = (*TimedMetadataGroup)(nil)

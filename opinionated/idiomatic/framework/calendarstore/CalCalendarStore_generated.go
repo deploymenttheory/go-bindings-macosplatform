@@ -5,124 +5,184 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// CalCalendarStore wraps [raw.CalCalendarStore] with a fluent Go API.
+// CalCalendarStore is an idiomatic wrapper over the Objective-C class CalCalendarStore.
 type CalCalendarStore struct {
-	inner *raw.CalCalendarStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalCalendarStore].
-func (x *CalCalendarStore) Unwrap() *raw.CalCalendarStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalCalendarStore) ID() objc.ID { return x.inner.Ptr() }
-
-// CalCalendarStoreFromID adopts an existing object pointer as a CalCalendarStore (nil for 0).
+// CalCalendarStoreFromID adopts an existing Objective-C object as a CalCalendarStore
+// (nil for 0), retaining it and registering a release finalizer.
 func CalCalendarStoreFromID(id objc.ID) *CalCalendarStore {
 	if id == 0 {
 		return nil
 	}
-	return &CalCalendarStore{inner: raw.CalCalendarStoreFromID(id)}
+	x := &CalCalendarStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCalCalendarStore creates a new [CalCalendarStore].
+// calCalendarStoreAdopt wraps an Objective-C object that this code just created as a
+// CalCalendarStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calCalendarStoreAdopt(id objc.ID) *CalCalendarStore {
+	if id == 0 {
+		return nil
+	}
+	x := &CalCalendarStore{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalCalendarStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalCalendarStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalCalendarStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalCalendarStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCalCalendarStore creates a new CalCalendarStore.
 func NewCalCalendarStore() *CalCalendarStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalCalendarStore")), objc.RegisterName("new"))
-	return &CalCalendarStore{inner: raw.CalCalendarStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("new"))
+	return calCalendarStoreAdopt(_id)
 }
 
-// Calendars calls the underlying Calendars.
-func (x *CalCalendarStore) Calendars() *foundation.NSArray[objc.ID] {
-	return x.inner.Calendars()
+// Calendars wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) Calendars() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendars"))
+	return obj.Wrap(_r)
 }
 
-// CalendarWithUID calls the underlying CalendarWithUID.
+// CalendarWithUID wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) CalendarWithUID(uID string) *CalCalendar {
-	_r := x.inner.CalendarWithUID(foundation.NSStringStringWithUTF8String(uID))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarWithUID:"), purego.NSString(uID))
+	return CalCalendarFromID(_r)
+}
+
+// SaveCalendar wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &CalCalendar{inner: _r}
+	return nil
 }
 
-// SaveCalendarError calls the underlying SaveCalendarError.
-func (x *CalCalendarStore) SaveCalendarError(calendar *raw.CalCalendar) (bool, error) {
-	return x.inner.SaveCalendarError(calendar)
-}
-
-// RemoveCalendarError calls the underlying RemoveCalendarError.
-func (x *CalCalendarStore) RemoveCalendarError(calendar *raw.CalCalendar) (bool, error) {
-	return x.inner.RemoveCalendarError(calendar)
-}
-
-// EventsWithPredicate calls the underlying EventsWithPredicate.
-func (x *CalCalendarStore) EventsWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID] {
-	return x.inner.EventsWithPredicate(predicate)
-}
-
-// EventWithUIDOccurrence calls the underlying EventWithUIDOccurrence.
-func (x *CalCalendarStore) EventWithUIDOccurrence(uid string, date *foundation.NSDate) *CalEvent {
-	_r := x.inner.EventWithUIDOccurrence(foundation.NSStringStringWithUTF8String(uid), date)
-	if _r == nil {
-		return nil
+// RemoveCalendar wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) RemoveCalendar(calendar *CalCalendar) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &CalEvent{inner: _r}
+	return nil
 }
 
-// TasksWithPredicate calls the underlying TasksWithPredicate.
-func (x *CalCalendarStore) TasksWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID] {
-	return x.inner.TasksWithPredicate(predicate)
+// EventsWithPredicate wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) EventsWithPredicate(predicate obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventsWithPredicate:"), objref.IDOf(predicate))
+	return obj.Wrap(_r)
 }
 
-// TaskWithUID calls the underlying TaskWithUID.
+// EventWithUIDOccurrence wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) EventWithUIDOccurrence(uid string, date obj.Object) *CalEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventWithUID:occurrence:"), purego.NSString(uid), objref.IDOf(date))
+	return CalEventFromID(_r)
+}
+
+// TasksWithPredicate wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) TasksWithPredicate(predicate obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tasksWithPredicate:"), objref.IDOf(predicate))
+	return obj.Wrap(_r)
+}
+
+// TaskWithUID wraps the corresponding Objective-C method.
 func (x *CalCalendarStore) TaskWithUID(uid string) *CalTask {
-	_r := x.inner.TaskWithUID(foundation.NSStringStringWithUTF8String(uid))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskWithUID:"), purego.NSString(uid))
+	return CalTaskFromID(_r)
+}
+
+// SaveEventSpan wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &CalTask{inner: _r}
+	return nil
 }
 
-// SaveEventSpanError calls the underlying SaveEventSpanError.
-func (x *CalCalendarStore) SaveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error) {
-	return x.inner.SaveEventSpanError(event, raw.CalSpan(span))
+// RemoveEventSpan wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// RemoveEventSpanError calls the underlying RemoveEventSpanError.
-func (x *CalCalendarStore) RemoveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error) {
-	return x.inner.RemoveEventSpanError(event, raw.CalSpan(span))
+// SaveTask wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) SaveTask(task *CalTask) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// SaveTaskError calls the underlying SaveTaskError.
-func (x *CalCalendarStore) SaveTaskError(task *raw.CalTask) (bool, error) {
-	return x.inner.SaveTaskError(task)
-}
-
-// RemoveTaskError calls the underlying RemoveTaskError.
-func (x *CalCalendarStore) RemoveTaskError(task *raw.CalTask) (bool, error) {
-	return x.inner.RemoveTaskError(task)
+// RemoveTask wraps the corresponding Objective-C method.
+func (x *CalCalendarStore) RemoveTask(task *CalTask) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // CalCalendarStoreable is the interface implemented by [CalCalendarStore], for mocking and DI.
 type CalCalendarStoreable interface {
-	Unwrap() *raw.CalCalendarStore
-	Calendars() *foundation.NSArray[objc.ID]
+	obj.Object
+	Calendars() obj.Object
 	CalendarWithUID(uID string) *CalCalendar
-	SaveCalendarError(calendar *raw.CalCalendar) (bool, error)
-	RemoveCalendarError(calendar *raw.CalCalendar) (bool, error)
-	EventsWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID]
-	EventWithUIDOccurrence(uid string, date *foundation.NSDate) *CalEvent
-	TasksWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID]
+	SaveCalendar(calendar *CalCalendar) error
+	RemoveCalendar(calendar *CalCalendar) error
+	EventsWithPredicate(predicate obj.Object) obj.Object
+	EventWithUIDOccurrence(uid string, date obj.Object) *CalEvent
+	TasksWithPredicate(predicate obj.Object) obj.Object
 	TaskWithUID(uid string) *CalTask
-	SaveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error)
-	RemoveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error)
-	SaveTaskError(task *raw.CalTask) (bool, error)
-	RemoveTaskError(task *raw.CalTask) (bool, error)
+	SaveEventSpan(event *CalEvent, span CalSpan) error
+	RemoveEventSpan(event *CalEvent, span CalSpan) error
+	SaveTask(task *CalTask) error
+	RemoveTask(task *CalTask) error
 }
 
 var _ CalCalendarStoreable = (*CalCalendarStore)(nil)

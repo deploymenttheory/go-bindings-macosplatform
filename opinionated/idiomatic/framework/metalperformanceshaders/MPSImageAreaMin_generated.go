@@ -5,100 +5,85 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that finds the minimum pixel value in a rectangular region centered around each pixel in the source image.
+// ImageAreaMin is an idiomatic wrapper over the Objective-C class MPSImageAreaMin.
 //
-// ImageAreaMin wraps [raw.MPSImageAreaMin] with a fluent Go API.
+// It embeds [ImageAreaMax], promoting that type's methods.
+//
+// A filter that finds the minimum pixel value in a rectangular region centered around each pixel in the source image.
 type ImageAreaMin struct {
-	inner *raw.MPSImageAreaMin
+	ImageAreaMax
 }
 
-// Unwrap returns the underlying [raw.MPSImageAreaMin].
-func (x *ImageAreaMin) Unwrap() *raw.MPSImageAreaMin { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAreaMin) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAreaMinFromID adopts an existing object pointer as a ImageAreaMin (nil for 0).
+// ImageAreaMinFromID adopts an existing Objective-C object as a ImageAreaMin
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAreaMinFromID(id objc.ID) *ImageAreaMin {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(id)}
+	x := &ImageAreaMin{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageAreaMin creates a new [ImageAreaMin].
+// imageAreaMinAdopt wraps an Objective-C object that this code just created as a
+// ImageAreaMin (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAreaMinAdopt(id objc.ID) *ImageAreaMin {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAreaMin{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageAreaMin creates a new ImageAreaMin.
 func NewImageAreaMin() *ImageAreaMin {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAreaMin")), objc.RegisterName("new"))
-	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageAreaMin")), objc.RegisterName("new"))
+	return imageAreaMinAdopt(_id)
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageAreaMin) WithOffset(offset mpscore.MPSOffset) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageAreaMin) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageAreaMin) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageAreaMin) WithLabel(label string) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageAreaMin) asImageAreaMax() *mpsimage.MPSImageAreaMax { return &x.inner.MPSImageAreaMax }
-
-func (x *ImageAreaMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel
-}
-
-func (x *ImageAreaMin) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
 type ImageAreaMinable interface {
-	Unwrap() *raw.MPSImageAreaMin
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageAreaMin
 	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin
-	WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMin
 	WithLabel(label string) *ImageAreaMin
 }
 
 var _ ImageAreaMinable = (*ImageAreaMin)(nil)
+
+var _ ImageAreaMaxProvider = (*ImageAreaMin)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageAreaMin)(nil)
+
+var _ KernelProvider = (*ImageAreaMin)(nil)

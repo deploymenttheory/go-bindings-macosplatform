@@ -5,64 +5,96 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specification of how to create an intersection function table.
+// IntersectionFunctionTableDescriptor is an idiomatic wrapper over the Objective-C class MTLIntersectionFunctionTableDescriptor.
 //
-// IntersectionFunctionTableDescriptor wraps [raw.MTLIntersectionFunctionTableDescriptor] with a fluent Go API.
+// A specification of how to create an intersection function table.
 type IntersectionFunctionTableDescriptor struct {
-	inner *raw.MTLIntersectionFunctionTableDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLIntersectionFunctionTableDescriptor].
-func (x *IntersectionFunctionTableDescriptor) Unwrap() *raw.MTLIntersectionFunctionTableDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IntersectionFunctionTableDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// IntersectionFunctionTableDescriptorFromID adopts an existing object pointer as a IntersectionFunctionTableDescriptor (nil for 0).
+// IntersectionFunctionTableDescriptorFromID adopts an existing Objective-C object as a IntersectionFunctionTableDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func IntersectionFunctionTableDescriptorFromID(id objc.ID) *IntersectionFunctionTableDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &IntersectionFunctionTableDescriptor{inner: raw.MTLIntersectionFunctionTableDescriptorFromID(id)}
-}
-
-// NewIntersectionFunctionTableDescriptor creates a new [IntersectionFunctionTableDescriptor].
-func NewIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLIntersectionFunctionTableDescriptor")), objc.RegisterName("new"))
-	return &IntersectionFunctionTableDescriptor{inner: raw.MTLIntersectionFunctionTableDescriptorFromID(_id)}
-}
-
-// The number of entries in the intersection function table.
-//
-// WithFunctionCount sets the functionCount property and returns the receiver for chaining.
-func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount uint) *IntersectionFunctionTableDescriptor {
-	x.inner.SetFunctionCount(functionCount)
+	x := &IntersectionFunctionTableDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// FunctionCount calls the underlying FunctionCount.
-func (x *IntersectionFunctionTableDescriptor) FunctionCount() uint {
-	return x.inner.FunctionCount()
+// intersectionFunctionTableDescriptorAdopt wraps an Objective-C object that this code just created as a
+// IntersectionFunctionTableDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func intersectionFunctionTableDescriptorAdopt(id objc.ID) *IntersectionFunctionTableDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &IntersectionFunctionTableDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetFunctionCount calls the underlying SetFunctionCount.
-func (x *IntersectionFunctionTableDescriptor) SetFunctionCount(functionCount uint) {
-	x.inner.SetFunctionCount(functionCount)
+// Description returns the object's -description text.
+func (x *IntersectionFunctionTableDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IntersectionFunctionTableDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IntersectionFunctionTableDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IntersectionFunctionTableDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIntersectionFunctionTableDescriptor creates a new IntersectionFunctionTableDescriptor.
+func NewIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLIntersectionFunctionTableDescriptor")), objc.RegisterName("new"))
+	return intersectionFunctionTableDescriptorAdopt(_id)
+}
+
+// WithFunctionCount the number of entries in the intersection function table.
+func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount int) *IntersectionFunctionTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
+	return x
+}
+
+// FunctionCount wraps the corresponding Objective-C method.
+func (x *IntersectionFunctionTableDescriptor) FunctionCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("functionCount"))
+	return _r
+}
+
+// SetFunctionCount wraps the corresponding Objective-C method.
+func (x *IntersectionFunctionTableDescriptor) SetFunctionCount(functionCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 }
 
 // IntersectionFunctionTableDescriptorable is the interface implemented by [IntersectionFunctionTableDescriptor], for mocking and DI.
 type IntersectionFunctionTableDescriptorable interface {
-	Unwrap() *raw.MTLIntersectionFunctionTableDescriptor
-	WithFunctionCount(functionCount uint) *IntersectionFunctionTableDescriptor
-	FunctionCount() uint
-	SetFunctionCount(functionCount uint)
+	obj.Object
+	WithFunctionCount(functionCount int) *IntersectionFunctionTableDescriptor
+	FunctionCount() int
+	SetFunctionCount(functionCount int)
 }
 
 var _ IntersectionFunctionTableDescriptorable = (*IntersectionFunctionTableDescriptor)(nil)

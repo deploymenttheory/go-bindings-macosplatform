@@ -5,62 +5,89 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides decorative accessory views for selected and highlighted items within a scrubber control.
+// ScrubberSelectionStyle is an idiomatic wrapper over the Objective-C class NSScrubberSelectionStyle.
 //
-// ScrubberSelectionStyle wraps [raw.NSScrubberSelectionStyle] with a fluent Go API.
+// An abstract class that provides decorative accessory views for selected and highlighted items within a scrubber control.
 type ScrubberSelectionStyle struct {
-	inner *raw.NSScrubberSelectionStyle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScrubberSelectionStyle].
-func (x *ScrubberSelectionStyle) Unwrap() *raw.NSScrubberSelectionStyle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrubberSelectionStyle) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrubberSelectionStyleFromID adopts an existing object pointer as a ScrubberSelectionStyle (nil for 0).
+// ScrubberSelectionStyleFromID adopts an existing Objective-C object as a ScrubberSelectionStyle
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrubberSelectionStyleFromID(id objc.ID) *ScrubberSelectionStyle {
 	if id == 0 {
 		return nil
 	}
-	return &ScrubberSelectionStyle{inner: raw.NSScrubberSelectionStyleFromID(id)}
+	x := &ScrubberSelectionStyle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScrubberSelectionStyle creates a new [ScrubberSelectionStyle].
-func NewScrubberSelectionStyle() *ScrubberSelectionStyle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberSelectionStyle")), objc.RegisterName("new"))
-	return &ScrubberSelectionStyle{inner: raw.NSScrubberSelectionStyleFromID(_id)}
-}
-
-// Initializes a scrubber selection style when included from a nib or Storyboard.
-//
-// NewScrubberSelectionStyleWithCoder creates a new [ScrubberSelectionStyle].
-func NewScrubberSelectionStyleWithCoder(coder *foundation.NSCoder) *ScrubberSelectionStyle {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberSelectionStyle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ScrubberSelectionStyle{inner: raw.NSScrubberSelectionStyleFromID(_id)}
-}
-
-// Provides an opportunity to create a customized scrubber selection style.
-//
-// MakeSelectionView calls the underlying MakeSelectionView.
-func (x *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
-	_r := x.inner.MakeSelectionView()
-	if _r == nil {
+// scrubberSelectionStyleAdopt wraps an Objective-C object that this code just created as a
+// ScrubberSelectionStyle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrubberSelectionStyleAdopt(id objc.ID) *ScrubberSelectionStyle {
+	if id == 0 {
 		return nil
 	}
-	return &ScrubberSelectionView{inner: _r}
+	x := &ScrubberSelectionStyle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScrubberSelectionStyle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScrubberSelectionStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScrubberSelectionStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScrubberSelectionStyle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScrubberSelectionStyle creates a new ScrubberSelectionStyle.
+func NewScrubberSelectionStyle() *ScrubberSelectionStyle {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("new"))
+	return scrubberSelectionStyleAdopt(_id)
+}
+
+// NewScrubberSelectionStyleWithCoder initializes a scrubber selection style when included from a nib or Storyboard.
+func NewScrubberSelectionStyleWithCoder(coder obj.Object) *ScrubberSelectionStyle {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return scrubberSelectionStyleAdopt(_id)
+}
+
+// MakeSelectionView provides an opportunity to create a customized scrubber selection style.
+func (x *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSelectionView"))
+	return ScrubberSelectionViewFromID(_r)
 }
 
 // ScrubberSelectionStyleable is the interface implemented by [ScrubberSelectionStyle], for mocking and DI.
 type ScrubberSelectionStyleable interface {
-	Unwrap() *raw.NSScrubberSelectionStyle
+	obj.Object
 	MakeSelectionView() *ScrubberSelectionView
 }
 

@@ -5,69 +5,98 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a client of the extension.
+// ExtensionClient is an idiomatic wrapper over the Objective-C class CMIOExtensionClient.
 //
-// ExtensionClient wraps [raw.CMIOExtensionClient] with a fluent Go API.
+// An object that represents a client of the extension.
 type ExtensionClient struct {
-	inner *raw.CMIOExtensionClient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionClient].
-func (x *ExtensionClient) Unwrap() *raw.CMIOExtensionClient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionClient) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionClientFromID adopts an existing object pointer as a ExtensionClient (nil for 0).
+// ExtensionClientFromID adopts an existing Objective-C object as a ExtensionClient
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionClientFromID(id objc.ID) *ExtensionClient {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(id)}
+	x := &ExtensionClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewExtensionClient creates a new [ExtensionClient].
+// extensionClientAdopt wraps an Objective-C object that this code just created as a
+// ExtensionClient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionClientAdopt(id objc.ID) *ExtensionClient {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionClient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionClient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionClient creates a new ExtensionClient.
 func NewExtensionClient() *ExtensionClient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionClient")), objc.RegisterName("new"))
-	return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionClient")), objc.RegisterName("new"))
+	return extensionClientAdopt(_id)
 }
 
-// @property clientID @abstract The client unique identifier.
-//
-// ClientID calls the underlying ClientID.
-func (x *ExtensionClient) ClientID() *foundation.NSUUID {
-	return x.inner.ClientID()
+// ClientID the client unique identifier.
+func (x *ExtensionClient) ClientID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientID"))
+	return obj.Wrap(_r)
 }
 
-// @property signingID @abstract The client's signing identifier.
-//
-// SigningID calls the underlying SigningID.
+// SigningID the client's signing identifier.
 func (x *ExtensionClient) SigningID() string {
-	_r := x.inner.SigningID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signingID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property pid @abstract The pid of the client application.
-//
-// Pid calls the underlying Pid.
+// Pid the pid of the client application.
 func (x *ExtensionClient) Pid() int {
-	return x.inner.Pid()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pid"))
+	return _r
 }
 
 // ExtensionClientable is the interface implemented by [ExtensionClient], for mocking and DI.
 type ExtensionClientable interface {
-	Unwrap() *raw.CMIOExtensionClient
-	ClientID() *foundation.NSUUID
+	obj.Object
+	ClientID() obj.Object
 	SigningID() string
 	Pid() int
 }

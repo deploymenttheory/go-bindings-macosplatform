@@ -5,73 +5,73 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of the state created to record the properties of a binary gradient kernel.
+// NNBinaryGradientStateNode is an idiomatic wrapper over the Objective-C class MPSNNBinaryGradientStateNode.
 //
-// NNBinaryGradientStateNode wraps [raw.MPSNNBinaryGradientStateNode] with a fluent Go API.
+// NNBinaryGradientStateNode is an abstract base — you do not construct it directly. Construct one of [NNArithmeticGradientStateNode] and pass it where a NNBinaryGradientStateNode is accepted.
+//
+// A representation of the state created to record the properties of a binary gradient kernel.
 type NNBinaryGradientStateNode struct {
-	inner *raw.MPSNNBinaryGradientStateNode
+	NNStateNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNBinaryGradientStateNode].
-func (x *NNBinaryGradientStateNode) Unwrap() *raw.MPSNNBinaryGradientStateNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNBinaryGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNBinaryGradientStateNodeFromID adopts an existing object pointer as a NNBinaryGradientStateNode (nil for 0).
+// NNBinaryGradientStateNodeFromID adopts an existing Objective-C object as a NNBinaryGradientStateNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNBinaryGradientStateNodeFromID(id objc.ID) *NNBinaryGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNBinaryGradientStateNode{inner: raw.MPSNNBinaryGradientStateNodeFromID(id)}
-}
-
-// NewNNBinaryGradientStateNode creates a new [NNBinaryGradientStateNode].
-func NewNNBinaryGradientStateNode() *NNBinaryGradientStateNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNBinaryGradientStateNode")), objc.RegisterName("new"))
-	return &NNBinaryGradientStateNode{inner: raw.MPSNNBinaryGradientStateNodeFromID(_id)}
-}
-
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
-//
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNBinaryGradientStateNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNBinaryGradientStateNode {
-	x.inner.MPSNNStateNode.SetHandle(handle)
+	x := &NNBinaryGradientStateNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// nNBinaryGradientStateNodeAdopt wraps an Objective-C object that this code just created as a
+// NNBinaryGradientStateNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNBinaryGradientStateNodeAdopt(id objc.ID) *NNBinaryGradientStateNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNBinaryGradientStateNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNBinaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode {
-	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
-//
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (x *NNBinaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode {
-	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
-}
-
-func (x *NNBinaryGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode {
-	return &x.inner.MPSNNStateNode
 }
 
 // NNBinaryGradientStateNodeable is the interface implemented by [NNBinaryGradientStateNode], for mocking and DI.
 type NNBinaryGradientStateNodeable interface {
-	Unwrap() *raw.MPSNNBinaryGradientStateNode
-	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNBinaryGradientStateNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode
 	WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode
 }
 
 var _ NNBinaryGradientStateNodeable = (*NNBinaryGradientStateNode)(nil)
+
+// isNNBinaryGradientStateNode marks NNBinaryGradientStateNode — and, by embedding promotion, its
+// subclasses — as a member of the NNBinaryGradientStateNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNBinaryGradientStateNode) isNNBinaryGradientStateNode() {}
+
+var _ NNBinaryGradientStateNodeProvider = (*NNBinaryGradientStateNode)(nil)
+
+var _ NNStateNodeProvider = (*NNBinaryGradientStateNode)(nil)

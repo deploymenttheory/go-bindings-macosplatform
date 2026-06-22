@@ -5,107 +5,80 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a @ref MPSNNGramMatrixCalculation kernel
+// NNGramMatrixCalculationNode is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculationNode.
 //
-// NNGramMatrixCalculationNode wraps [raw.MPSNNGramMatrixCalculationNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// Node representing a
 type NNGramMatrixCalculationNode struct {
-	inner *raw.MPSNNGramMatrixCalculationNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNGramMatrixCalculationNode].
-func (x *NNGramMatrixCalculationNode) Unwrap() *raw.MPSNNGramMatrixCalculationNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGramMatrixCalculationNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGramMatrixCalculationNodeFromID adopts an existing object pointer as a NNGramMatrixCalculationNode (nil for 0).
+// NNGramMatrixCalculationNodeFromID adopts an existing Objective-C object as a NNGramMatrixCalculationNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGramMatrixCalculationNodeFromID(id objc.ID) *NNGramMatrixCalculationNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNGramMatrixCalculationNode{inner: raw.MPSNNGramMatrixCalculationNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSNNGramMatrixCalculationNode kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter. @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
-//
-// NewNNGramMatrixCalculationNodeWithSource creates a new [NNGramMatrixCalculationNode].
-func NewNNGramMatrixCalculationNodeWithSource(sourceNode *raw.MPSNNImageNode) *NNGramMatrixCalculationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &NNGramMatrixCalculationNode{inner: raw.MPSNNGramMatrixCalculationNodeFromID(_id)}
-}
-
-// @abstract   Init a node representing a MPSNNGramMatrixCalculationNode kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter. @param      alpha                   Scaling factor for the output. @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
-//
-// NewNNGramMatrixCalculationNodeWithSourceAlpha creates a new [NNGramMatrixCalculationNode].
-func NewNNGramMatrixCalculationNodeWithSourceAlpha(sourceNode *raw.MPSNNImageNode, alpha float32) *NNGramMatrixCalculationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:alpha:"), sourceNode.Ptr(), alpha)
-	return &NNGramMatrixCalculationNode{inner: raw.MPSNNGramMatrixCalculationNodeFromID(_id)}
-}
-
-// @property   propertyCallBack @abstract   Optional callback option - setting this allows the alpha value to be changed dynamically at encode time. Default value: nil.
-//
-// WithPropertyCallBack sets the propertyCallBack property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationNode) WithPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback) *NNGramMatrixCalculationNode {
-	x.inner.SetPropertyCallBack(propertyCallBack)
+	x := &NNGramMatrixCalculationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGramMatrixCalculationNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+// nNGramMatrixCalculationNodeAdopt wraps an Objective-C object that this code just created as a
+// NNGramMatrixCalculationNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGramMatrixCalculationNodeAdopt(id objc.ID) *NNGramMatrixCalculationNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGramMatrixCalculationNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNNGramMatrixCalculationNodeWithSource init a node representing a MPSNNGramMatrixCalculationNode kernel.
+func NewNNGramMatrixCalculationNodeWithSource(sourceNode *NNImageNode) *NNGramMatrixCalculationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return nNGramMatrixCalculationNodeAdopt(_id)
+}
+
+// NewNNGramMatrixCalculationNodeWithSourceAlpha init a node representing a MPSNNGramMatrixCalculationNode kernel.
+func NewNNGramMatrixCalculationNodeWithSourceAlpha(sourceNode *NNImageNode, alpha float32) *NNGramMatrixCalculationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:alpha:"), objref.IDOf(sourceNode), alpha)
+	return nNGramMatrixCalculationNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNGramMatrixCalculationNode) WithLabel(label string) *NNGramMatrixCalculationNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @abstract   Scaling factor for the output. Default: 1.0f.
-//
-// Alpha calls the underlying Alpha.
+// Alpha scaling factor for the output. Default: 1.0f.
 func (x *NNGramMatrixCalculationNode) Alpha() float32 {
-	return x.inner.Alpha()
-}
-
-// @property   propertyCallBack @abstract   Optional callback option - setting this allows the alpha value to be changed dynamically at encode time. Default value: nil.
-//
-// PropertyCallBack calls the underlying PropertyCallBack.
-func (x *NNGramMatrixCalculationNode) PropertyCallBack() raw.MPSNNGramMatrixCallback {
-	return x.inner.PropertyCallBack()
-}
-
-// SetPropertyCallBack calls the underlying SetPropertyCallBack.
-func (x *NNGramMatrixCalculationNode) SetPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback) {
-	x.inner.SetPropertyCallBack(propertyCallBack)
-}
-
-func (x *NNGramMatrixCalculationNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
 // NNGramMatrixCalculationNodeable is the interface implemented by [NNGramMatrixCalculationNode], for mocking and DI.
 type NNGramMatrixCalculationNodeable interface {
-	Unwrap() *raw.MPSNNGramMatrixCalculationNode
-	WithPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback) *NNGramMatrixCalculationNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGramMatrixCalculationNode
+	obj.Object
 	WithLabel(label string) *NNGramMatrixCalculationNode
 	Alpha() float32
-	PropertyCallBack() raw.MPSNNGramMatrixCallback
-	SetPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback)
 }
 
 var _ NNGramMatrixCalculationNodeable = (*NNGramMatrixCalculationNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNGramMatrixCalculationNode)(nil)

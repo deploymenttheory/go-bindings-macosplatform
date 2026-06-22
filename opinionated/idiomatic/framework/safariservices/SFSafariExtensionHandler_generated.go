@@ -5,41 +5,76 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that you subclass to handle events in your Safari app extension.
+// SafariExtensionHandler is an idiomatic wrapper over the Objective-C class SFSafariExtensionHandler.
 //
-// SafariExtensionHandler wraps [raw.SFSafariExtensionHandler] with a fluent Go API.
+// A base class that you subclass to handle events in your Safari app extension.
 type SafariExtensionHandler struct {
-	inner *raw.SFSafariExtensionHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariExtensionHandler].
-func (x *SafariExtensionHandler) Unwrap() *raw.SFSafariExtensionHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariExtensionHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariExtensionHandlerFromID adopts an existing object pointer as a SafariExtensionHandler (nil for 0).
+// SafariExtensionHandlerFromID adopts an existing Objective-C object as a SafariExtensionHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariExtensionHandlerFromID(id objc.ID) *SafariExtensionHandler {
 	if id == 0 {
 		return nil
 	}
-	return &SafariExtensionHandler{inner: raw.SFSafariExtensionHandlerFromID(id)}
+	x := &SafariExtensionHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSafariExtensionHandler creates a new [SafariExtensionHandler].
+// safariExtensionHandlerAdopt wraps an Objective-C object that this code just created as a
+// SafariExtensionHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariExtensionHandlerAdopt(id objc.ID) *SafariExtensionHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariExtensionHandler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariExtensionHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariExtensionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariExtensionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtensionHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSafariExtensionHandler creates a new SafariExtensionHandler.
 func NewSafariExtensionHandler() *SafariExtensionHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariExtensionHandler")), objc.RegisterName("new"))
-	return &SafariExtensionHandler{inner: raw.SFSafariExtensionHandlerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionHandler")), objc.RegisterName("new"))
+	return safariExtensionHandlerAdopt(_id)
 }
 
 // SafariExtensionHandlerable is the interface implemented by [SafariExtensionHandler], for mocking and DI.
 type SafariExtensionHandlerable interface {
-	Unwrap() *raw.SFSafariExtensionHandler
+	obj.Object
 }
 
 var _ SafariExtensionHandlerable = (*SafariExtensionHandler)(nil)

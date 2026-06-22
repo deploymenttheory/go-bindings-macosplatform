@@ -5,58 +5,90 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that defines the end of a recurrence rule.
+// RecurrenceEnd is an idiomatic wrapper over the Objective-C class EKRecurrenceEnd.
 //
-// RecurrenceEnd wraps [raw.EKRecurrenceEnd] with a fluent Go API.
+// A class that defines the end of a recurrence rule.
 type RecurrenceEnd struct {
-	inner *raw.EKRecurrenceEnd
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKRecurrenceEnd].
-func (x *RecurrenceEnd) Unwrap() *raw.EKRecurrenceEnd { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecurrenceEnd) ID() objc.ID { return x.inner.Ptr() }
-
-// RecurrenceEndFromID adopts an existing object pointer as a RecurrenceEnd (nil for 0).
+// RecurrenceEndFromID adopts an existing Objective-C object as a RecurrenceEnd
+// (nil for 0), retaining it and registering a release finalizer.
 func RecurrenceEndFromID(id objc.ID) *RecurrenceEnd {
 	if id == 0 {
 		return nil
 	}
-	return &RecurrenceEnd{inner: raw.EKRecurrenceEndFromID(id)}
+	x := &RecurrenceEnd{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecurrenceEnd creates a new [RecurrenceEnd].
+// recurrenceEndAdopt wraps an Objective-C object that this code just created as a
+// RecurrenceEnd (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recurrenceEndAdopt(id objc.ID) *RecurrenceEnd {
+	if id == 0 {
+		return nil
+	}
+	x := &RecurrenceEnd{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RecurrenceEnd) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecurrenceEnd) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecurrenceEnd) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecurrenceEnd) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRecurrenceEnd creates a new RecurrenceEnd.
 func NewRecurrenceEnd() *RecurrenceEnd {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceEnd")), objc.RegisterName("new"))
-	return &RecurrenceEnd{inner: raw.EKRecurrenceEndFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("new"))
+	return recurrenceEndAdopt(_id)
 }
 
-// @property   endDate @abstract   The end date of this recurrence, or nil if it's count-based.
-//
-// EndDate calls the underlying EndDate.
-func (x *RecurrenceEnd) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// EndDate the end date of this recurrence, or nil if it's count-based.
+func (x *RecurrenceEnd) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// @property   occurrenceCount @abstract   The maximum occurrence count, or 0 if it's date-based.
-//
-// OccurrenceCount calls the underlying OccurrenceCount.
-func (x *RecurrenceEnd) OccurrenceCount() uint {
-	return x.inner.OccurrenceCount()
+// OccurrenceCount the maximum occurrence count, or 0 if it's date-based.
+func (x *RecurrenceEnd) OccurrenceCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occurrenceCount"))
+	return _r
 }
 
 // RecurrenceEndable is the interface implemented by [RecurrenceEnd], for mocking and DI.
 type RecurrenceEndable interface {
-	Unwrap() *raw.EKRecurrenceEnd
-	EndDate() *foundation.NSDate
-	OccurrenceCount() uint
+	obj.Object
+	EndDate() obj.Object
+	OccurrenceCount() int
 }
 
 var _ RecurrenceEndable = (*RecurrenceEnd)(nil)

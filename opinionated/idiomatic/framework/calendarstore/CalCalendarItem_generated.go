@@ -5,195 +5,231 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CalCalendarItem wraps [raw.CalCalendarItem] with a fluent Go API.
+// CalCalendarItem is an idiomatic wrapper over the Objective-C class CalCalendarItem.
+//
+// CalCalendarItem is an abstract base — you do not construct it directly. Construct one of [CalEvent], [CalTask] and pass it where a CalCalendarItem is accepted.
 type CalCalendarItem struct {
-	inner *raw.CalCalendarItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalCalendarItem].
-func (x *CalCalendarItem) Unwrap() *raw.CalCalendarItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalCalendarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CalCalendarItemFromID adopts an existing object pointer as a CalCalendarItem (nil for 0).
+// CalCalendarItemFromID adopts an existing Objective-C object as a CalCalendarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CalCalendarItemFromID(id objc.ID) *CalCalendarItem {
 	if id == 0 {
 		return nil
 	}
-	return &CalCalendarItem{inner: raw.CalCalendarItemFromID(id)}
-}
-
-// NewCalCalendarItem creates a new [CalCalendarItem].
-func NewCalCalendarItem() *CalCalendarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalCalendarItem")), objc.RegisterName("new"))
-	return &CalCalendarItem{inner: raw.CalCalendarItemFromID(_id)}
-}
-
-// WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *CalCalendarItem) WithCalendar(calendar *CalCalendar) *CalCalendarItem {
-	x.inner.SetCalendar(calendar.Unwrap())
+	x := &CalCalendarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithNotes sets the notes property and returns the receiver for chaining.
-func (x *CalCalendarItem) WithNotes(notes string) *CalCalendarItem {
-	x.inner.SetNotes(foundation.NSStringStringWithUTF8String(notes))
-	return x
-}
-
-// WithUrl sets the url property and returns the receiver for chaining.
-func (x *CalCalendarItem) WithUrl(url string) *CalCalendarItem {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	return x
-}
-
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *CalCalendarItem) WithTitle(title string) *CalCalendarItem {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
-	return x
-}
-
-// HasAlarm calls the underlying HasAlarm.
-func (x *CalCalendarItem) HasAlarm() bool {
-	return x.inner.HasAlarm()
-}
-
-// NextAlarmDate calls the underlying NextAlarmDate.
-func (x *CalCalendarItem) NextAlarmDate() *foundation.NSDate {
-	return x.inner.NextAlarmDate()
-}
-
-// AddAlarm calls the underlying AddAlarm.
-func (x *CalCalendarItem) AddAlarm(alarm *raw.CalAlarm) {
-	x.inner.AddAlarm(alarm)
-}
-
-// AddAlarms calls the underlying AddAlarms.
-func (x *CalCalendarItem) AddAlarms(alarms *foundation.NSArray[objc.ID]) {
-	x.inner.AddAlarms(alarms)
-}
-
-// RemoveAlarm calls the underlying RemoveAlarm.
-func (x *CalCalendarItem) RemoveAlarm(alarm *raw.CalAlarm) {
-	x.inner.RemoveAlarm(alarm)
-}
-
-// RemoveAlarms calls the underlying RemoveAlarms.
-func (x *CalCalendarItem) RemoveAlarms(alarms *foundation.NSArray[objc.ID]) {
-	x.inner.RemoveAlarms(alarms)
-}
-
-// Calendar calls the underlying Calendar.
-func (x *CalCalendarItem) Calendar() *CalCalendar {
-	_r := x.inner.Calendar()
-	if _r == nil {
+// calCalendarItemAdopt wraps an Objective-C object that this code just created as a
+// CalCalendarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calCalendarItemAdopt(id objc.ID) *CalCalendarItem {
+	if id == 0 {
 		return nil
 	}
-	return &CalCalendar{inner: _r}
+	x := &CalCalendarItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetCalendar calls the underlying SetCalendar.
-func (x *CalCalendarItem) SetCalendar(calendar *raw.CalCalendar) {
-	x.inner.SetCalendar(calendar)
+// Description returns the object's -description text.
+func (x *CalCalendarItem) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Notes calls the underlying Notes.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalCalendarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalCalendarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalCalendarItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithCalendar sets the property and returns the receiver so calls can be chained.
+func (x *CalCalendarItem) WithCalendar(calendar *CalCalendar) *CalCalendarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	return x
+}
+
+// WithNotes sets the property and returns the receiver so calls can be chained.
+func (x *CalCalendarItem) WithNotes(notes string) *CalCalendarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
+	return x
+}
+
+// WithUrl sets the property and returns the receiver so calls can be chained.
+func (x *CalCalendarItem) WithUrl(url string) *CalCalendarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
+	return x
+}
+
+// WithTitle sets the property and returns the receiver so calls can be chained.
+func (x *CalCalendarItem) WithTitle(title string) *CalCalendarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+// HasAlarm wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) HasAlarm() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAlarm"))
+	return _r
+}
+
+// NextAlarmDate wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) NextAlarmDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextAlarmDate"))
+	return obj.Wrap(_r)
+}
+
+// AddAlarm wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) AddAlarm(alarm *CalAlarm) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAlarm:"), objref.IDOf(alarm))
+}
+
+// AddAlarms wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) AddAlarms(alarms obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAlarms:"), objref.IDOf(alarms))
+}
+
+// RemoveAlarm wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) RemoveAlarm(alarm *CalAlarm) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAlarm:"), objref.IDOf(alarm))
+}
+
+// RemoveAlarms wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) RemoveAlarms(alarms obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAlarms:"), objref.IDOf(alarms))
+}
+
+// Calendar wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) Calendar() *CalCalendar {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
+	return CalCalendarFromID(_r)
+}
+
+// SetCalendar wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) SetCalendar(calendar *CalCalendar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+}
+
+// Notes wraps the corresponding Objective-C method.
 func (x *CalCalendarItem) Notes() string {
-	_r := x.inner.Notes()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notes"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetNotes calls the underlying SetNotes.
+// SetNotes wraps the corresponding Objective-C method.
 func (x *CalCalendarItem) SetNotes(notes string) {
-	x.inner.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 }
 
-// Url calls the underlying Url.
-func (x *CalCalendarItem) Url() *foundation.NSURL {
-	return x.inner.Url()
+// Url wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// SetUrl calls the underlying SetUrl.
+// SetUrl wraps the corresponding Objective-C method.
 func (x *CalCalendarItem) SetUrl(url string) {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *CalCalendarItem) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *CalCalendarItem) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Uid calls the underlying Uid.
+// Uid wraps the corresponding Objective-C method.
 func (x *CalCalendarItem) Uid() string {
-	_r := x.inner.Uid()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uid"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DateStamp calls the underlying DateStamp.
-func (x *CalCalendarItem) DateStamp() *foundation.NSDate {
-	return x.inner.DateStamp()
+// DateStamp wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) DateStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateStamp"))
+	return obj.Wrap(_r)
 }
 
-// Alarms calls the underlying Alarms.
-func (x *CalCalendarItem) Alarms() *foundation.NSArray[objc.ID] {
-	return x.inner.Alarms()
+// Alarms wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) Alarms() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarms"))
+	return obj.Wrap(_r)
 }
 
-// SetAlarms calls the underlying SetAlarms.
-func (x *CalCalendarItem) SetAlarms(alarms *foundation.NSArray[objc.ID]) {
-	x.inner.SetAlarms(alarms)
+// SetAlarms wraps the corresponding Objective-C method.
+func (x *CalCalendarItem) SetAlarms(alarms obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), objref.IDOf(alarms))
 }
-
-func (x *CalCalendarItem) asCalCalendarItem() *raw.CalCalendarItem { return x.inner }
 
 // CalCalendarItemable is the interface implemented by [CalCalendarItem], for mocking and DI.
 type CalCalendarItemable interface {
-	Unwrap() *raw.CalCalendarItem
+	obj.Object
 	WithCalendar(calendar *CalCalendar) *CalCalendarItem
 	WithNotes(notes string) *CalCalendarItem
 	WithUrl(url string) *CalCalendarItem
 	WithTitle(title string) *CalCalendarItem
 	HasAlarm() bool
-	NextAlarmDate() *foundation.NSDate
-	AddAlarm(alarm *raw.CalAlarm)
-	AddAlarms(alarms *foundation.NSArray[objc.ID])
-	RemoveAlarm(alarm *raw.CalAlarm)
-	RemoveAlarms(alarms *foundation.NSArray[objc.ID])
+	NextAlarmDate() obj.Object
+	AddAlarm(alarm *CalAlarm)
+	AddAlarms(alarms obj.Object)
+	RemoveAlarm(alarm *CalAlarm)
+	RemoveAlarms(alarms obj.Object)
 	Calendar() *CalCalendar
-	SetCalendar(calendar *raw.CalCalendar)
+	SetCalendar(calendar *CalCalendar)
 	Notes() string
 	SetNotes(notes string)
-	Url() *foundation.NSURL
+	Url() obj.Object
 	SetUrl(url string)
 	Title() string
 	SetTitle(title string)
 	Uid() string
-	DateStamp() *foundation.NSDate
-	Alarms() *foundation.NSArray[objc.ID]
-	SetAlarms(alarms *foundation.NSArray[objc.ID])
+	DateStamp() obj.Object
+	Alarms() obj.Object
+	SetAlarms(alarms obj.Object)
 }
 
 var _ CalCalendarItemable = (*CalCalendarItem)(nil)
+
+// isCalCalendarItem marks CalCalendarItem — and, by embedding promotion, its
+// subclasses — as a member of the CalCalendarItem hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CalCalendarItem) isCalCalendarItem() {}
+
+var _ CalCalendarItemProvider = (*CalCalendarItem)(nil)

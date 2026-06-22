@@ -5,63 +5,72 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A command that indicates to pause playback.
+// DelegatingPlaybackCoordinatorPauseCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorPauseCommand.
 //
-// DelegatingPlaybackCoordinatorPauseCommand wraps [raw.AVDelegatingPlaybackCoordinatorPauseCommand] with a fluent Go API.
+// It embeds [DelegatingPlaybackCoordinatorPlaybackControlCommand], promoting that type's methods.
+//
+// A command that indicates to pause playback.
 type DelegatingPlaybackCoordinatorPauseCommand struct {
-	inner *raw.AVDelegatingPlaybackCoordinatorPauseCommand
+	DelegatingPlaybackCoordinatorPlaybackControlCommand
 }
 
-// Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorPauseCommand].
-func (x *DelegatingPlaybackCoordinatorPauseCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPauseCommand {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DelegatingPlaybackCoordinatorPauseCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// DelegatingPlaybackCoordinatorPauseCommandFromID adopts an existing object pointer as a DelegatingPlaybackCoordinatorPauseCommand (nil for 0).
+// DelegatingPlaybackCoordinatorPauseCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorPauseCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func DelegatingPlaybackCoordinatorPauseCommandFromID(id objc.ID) *DelegatingPlaybackCoordinatorPauseCommand {
 	if id == 0 {
 		return nil
 	}
-	return &DelegatingPlaybackCoordinatorPauseCommand{inner: raw.AVDelegatingPlaybackCoordinatorPauseCommandFromID(id)}
+	x := &DelegatingPlaybackCoordinatorPauseCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDelegatingPlaybackCoordinatorPauseCommand creates a new [DelegatingPlaybackCoordinatorPauseCommand].
+// delegatingPlaybackCoordinatorPauseCommandAdopt wraps an Objective-C object that this code just created as a
+// DelegatingPlaybackCoordinatorPauseCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func delegatingPlaybackCoordinatorPauseCommandAdopt(id objc.ID) *DelegatingPlaybackCoordinatorPauseCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &DelegatingPlaybackCoordinatorPauseCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDelegatingPlaybackCoordinatorPauseCommand creates a new DelegatingPlaybackCoordinatorPauseCommand.
 func NewDelegatingPlaybackCoordinatorPauseCommand() *DelegatingPlaybackCoordinatorPauseCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDelegatingPlaybackCoordinatorPauseCommand")), objc.RegisterName("new"))
-	return &DelegatingPlaybackCoordinatorPauseCommand{inner: raw.AVDelegatingPlaybackCoordinatorPauseCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorPauseCommand")), objc.RegisterName("new"))
+	return delegatingPlaybackCoordinatorPauseCommandAdopt(_id)
 }
 
-// Indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is YES, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
-//
-// ShouldBufferInAnticipationOfPlayback calls the underlying ShouldBufferInAnticipationOfPlayback.
+// ShouldBufferInAnticipationOfPlayback indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is YES, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
 func (x *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
-	return x.inner.ShouldBufferInAnticipationOfPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
+	return _r
 }
 
-// The rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
-//
-// AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
+// AnticipatedPlaybackRate the rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
 func (x *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
-	return x.inner.AnticipatedPlaybackRate()
-}
-
-func (x *DelegatingPlaybackCoordinatorPauseCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
-	return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
+	return _r
 }
 
 // DelegatingPlaybackCoordinatorPauseCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPauseCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorPauseCommandable interface {
-	Unwrap() *raw.AVDelegatingPlaybackCoordinatorPauseCommand
+	obj.Object
 	ShouldBufferInAnticipationOfPlayback() bool
 	AnticipatedPlaybackRate() float32
 }
 
 var _ DelegatingPlaybackCoordinatorPauseCommandable = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)
+
+var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)

@@ -5,41 +5,76 @@
 package sharedwithyou
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An alert that prompts the user to remove a participant from a Messages group.
+// RemoveParticipantAlert is an idiomatic wrapper over the Objective-C class SWRemoveParticipantAlert.
 //
-// RemoveParticipantAlert wraps [raw.SWRemoveParticipantAlert] with a fluent Go API.
+// An alert that prompts the user to remove a participant from a Messages group.
 type RemoveParticipantAlert struct {
-	inner *raw.SWRemoveParticipantAlert
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWRemoveParticipantAlert].
-func (x *RemoveParticipantAlert) Unwrap() *raw.SWRemoveParticipantAlert { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RemoveParticipantAlert) ID() objc.ID { return x.inner.Ptr() }
-
-// RemoveParticipantAlertFromID adopts an existing object pointer as a RemoveParticipantAlert (nil for 0).
+// RemoveParticipantAlertFromID adopts an existing Objective-C object as a RemoveParticipantAlert
+// (nil for 0), retaining it and registering a release finalizer.
 func RemoveParticipantAlertFromID(id objc.ID) *RemoveParticipantAlert {
 	if id == 0 {
 		return nil
 	}
-	return &RemoveParticipantAlert{inner: raw.SWRemoveParticipantAlertFromID(id)}
+	x := &RemoveParticipantAlert{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRemoveParticipantAlert creates a new [RemoveParticipantAlert].
+// removeParticipantAlertAdopt wraps an Objective-C object that this code just created as a
+// RemoveParticipantAlert (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func removeParticipantAlertAdopt(id objc.ID) *RemoveParticipantAlert {
+	if id == 0 {
+		return nil
+	}
+	x := &RemoveParticipantAlert{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RemoveParticipantAlert) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RemoveParticipantAlert) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RemoveParticipantAlert) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoveParticipantAlert) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRemoveParticipantAlert creates a new RemoveParticipantAlert.
 func NewRemoveParticipantAlert() *RemoveParticipantAlert {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWRemoveParticipantAlert")), objc.RegisterName("new"))
-	return &RemoveParticipantAlert{inner: raw.SWRemoveParticipantAlertFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SWRemoveParticipantAlert")), objc.RegisterName("new"))
+	return removeParticipantAlertAdopt(_id)
 }
 
 // RemoveParticipantAlertable is the interface implemented by [RemoveParticipantAlert], for mocking and DI.
 type RemoveParticipantAlertable interface {
-	Unwrap() *raw.SWRemoveParticipantAlert
+	obj.Object
 }
 
 var _ RemoveParticipantAlertable = (*RemoveParticipantAlert)(nil)

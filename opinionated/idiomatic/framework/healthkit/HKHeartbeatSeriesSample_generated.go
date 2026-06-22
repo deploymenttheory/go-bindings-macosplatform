@@ -5,49 +5,62 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that represents a series of heartbeats.
+// HeartbeatSeriesSample is an idiomatic wrapper over the Objective-C class HKHeartbeatSeriesSample.
 //
-// HeartbeatSeriesSample wraps [raw.HKHeartbeatSeriesSample] with a fluent Go API.
+// It embeds [SeriesSample], promoting that type's methods.
+//
+// A sample that represents a series of heartbeats.
 type HeartbeatSeriesSample struct {
-	inner *raw.HKHeartbeatSeriesSample
+	SeriesSample
 }
 
-// Unwrap returns the underlying [raw.HKHeartbeatSeriesSample].
-func (x *HeartbeatSeriesSample) Unwrap() *raw.HKHeartbeatSeriesSample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HeartbeatSeriesSample) ID() objc.ID { return x.inner.Ptr() }
-
-// HeartbeatSeriesSampleFromID adopts an existing object pointer as a HeartbeatSeriesSample (nil for 0).
+// HeartbeatSeriesSampleFromID adopts an existing Objective-C object as a HeartbeatSeriesSample
+// (nil for 0), retaining it and registering a release finalizer.
 func HeartbeatSeriesSampleFromID(id objc.ID) *HeartbeatSeriesSample {
 	if id == 0 {
 		return nil
 	}
-	return &HeartbeatSeriesSample{inner: raw.HKHeartbeatSeriesSampleFromID(id)}
+	x := &HeartbeatSeriesSample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHeartbeatSeriesSample creates a new [HeartbeatSeriesSample].
+// heartbeatSeriesSampleAdopt wraps an Objective-C object that this code just created as a
+// HeartbeatSeriesSample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func heartbeatSeriesSampleAdopt(id objc.ID) *HeartbeatSeriesSample {
+	if id == 0 {
+		return nil
+	}
+	x := &HeartbeatSeriesSample{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewHeartbeatSeriesSample creates a new HeartbeatSeriesSample.
 func NewHeartbeatSeriesSample() *HeartbeatSeriesSample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKHeartbeatSeriesSample")), objc.RegisterName("new"))
-	return &HeartbeatSeriesSample{inner: raw.HKHeartbeatSeriesSampleFromID(_id)}
-}
-
-func (x *HeartbeatSeriesSample) asSeriesSample() *raw.HKSeriesSample { return &x.inner.HKSeriesSample }
-
-func (x *HeartbeatSeriesSample) asSample() *raw.HKSample { return &x.inner.HKSeriesSample.HKSample }
-
-func (x *HeartbeatSeriesSample) asObject() *raw.HKObject {
-	return &x.inner.HKSeriesSample.HKSample.HKObject
+	_id := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesSample")), objc.RegisterName("new"))
+	return heartbeatSeriesSampleAdopt(_id)
 }
 
 // HeartbeatSeriesSampleable is the interface implemented by [HeartbeatSeriesSample], for mocking and DI.
 type HeartbeatSeriesSampleable interface {
-	Unwrap() *raw.HKHeartbeatSeriesSample
+	obj.Object
 }
 
 var _ HeartbeatSeriesSampleable = (*HeartbeatSeriesSample)(nil)
+
+var _ SeriesSampleProvider = (*HeartbeatSeriesSample)(nil)
+
+var _ SampleProvider = (*HeartbeatSeriesSample)(nil)
+
+var _ ObjectProvider = (*HeartbeatSeriesSample)(nil)

@@ -5,85 +5,112 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for information broadcast through a notification center to all registered observers.
+// Notification is an idiomatic wrapper over the Objective-C class NSNotification.
 //
-// Notification wraps [raw.NSNotification] with a fluent Go API.
+// A container for information broadcast through a notification center to all registered observers.
 type Notification struct {
-	inner *raw.NSNotification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSNotification].
-func (x *Notification) Unwrap() *raw.NSNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Notification) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationFromID adopts an existing object pointer as a Notification (nil for 0).
+// NotificationFromID adopts an existing Objective-C object as a Notification
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationFromID(id objc.ID) *Notification {
 	if id == 0 {
 		return nil
 	}
-	return &Notification{inner: raw.NSNotificationFromID(id)}
-}
-
-// Initializes a notification with a specified name, object, and user information.
-//
-// NewNotificationWithNameObjectUserInfo creates a new [Notification].
-func NewNotificationWithNameObjectUserInfo(name *raw.NSString, object objc.ID, userInfo purego.IDer) *Notification {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNotification")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:object:userInfo:"), name.Ptr(), object, userInfo.ID())
-	return &Notification{inner: raw.NSNotificationFromID(_id)}
-}
-
-// Initializes a notification with the data from an unarchiver.
-//
-// NewNotificationWithCoder creates a new [Notification].
-func NewNotificationWithCoder(coder *raw.NSCoder) *Notification {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNotification")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Notification{inner: raw.NSNotificationFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Notification) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Notification {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Notification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Name calls the underlying Name.
-func (x *Notification) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
+// notificationAdopt wraps an Objective-C object that this code just created as a
+// Notification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationAdopt(id objc.ID) *Notification {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &Notification{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Object calls the underlying Object.
-func (x *Notification) Object() objc.ID {
-	return x.inner.Object()
+// Description returns the object's -description text.
+func (x *Notification) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *Notification) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Notification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *Notification) asObject() *raw.NSObject { return &x.inner.NSObject }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Notification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Notification) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotificationWithNameObjectUserInfo initializes a notification with a specified name, object, and user information.
+func NewNotificationWithNameObjectUserInfo(name *String, object obj.Object, userInfo obj.Object) *Notification {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:object:userInfo:"), objref.IDOf(name), objref.IDOf(object), objref.IDOf(userInfo))
+	return notificationAdopt(_id)
+}
+
+// NewNotificationWithCoder initializes a notification with the data from an unarchiver.
+func NewNotificationWithCoder(coder *Coder) *Notification {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return notificationAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Notification) WithScriptingProperties(scriptingProperties obj.Object) *Notification {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *Notification) Name() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return StringFromID(_r)
+}
+
+// Object wraps the corresponding Objective-C method.
+func (x *Notification) Object() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
+	return obj.Wrap(_r)
+}
+
+// UserInfo wraps the corresponding Objective-C method.
+func (x *Notification) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
+}
 
 // Notificationable is the interface implemented by [Notification], for mocking and DI.
 type Notificationable interface {
-	Unwrap() *raw.NSNotification
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Notification
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Notification
 	Name() *String
-	Object() objc.ID
-	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+	Object() obj.Object
+	UserInfo() obj.Object
 }
 
 var _ Notificationable = (*Notification)(nil)

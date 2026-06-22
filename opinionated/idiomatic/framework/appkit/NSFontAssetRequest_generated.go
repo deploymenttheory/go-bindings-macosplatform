@@ -5,67 +5,91 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// FontAssetRequest wraps [raw.NSFontAssetRequest] with a fluent Go API.
+// FontAssetRequest is an idiomatic wrapper over the Objective-C class NSFontAssetRequest.
 type FontAssetRequest struct {
-	inner *raw.NSFontAssetRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFontAssetRequest].
-func (x *FontAssetRequest) Unwrap() *raw.NSFontAssetRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FontAssetRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FontAssetRequestFromID adopts an existing object pointer as a FontAssetRequest (nil for 0).
+// FontAssetRequestFromID adopts an existing Objective-C object as a FontAssetRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FontAssetRequestFromID(id objc.ID) *FontAssetRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FontAssetRequest{inner: raw.NSFontAssetRequestFromID(id)}
+	x := &FontAssetRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFontAssetRequestWithFontDescriptorsOptions creates a new [FontAssetRequest].
-func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors *foundation.NSArray[*raw.NSFontDescriptor], options NSFontAssetRequestOptions) *FontAssetRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFontAssetRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontDescriptors:options:"), fontDescriptors.Ptr(), raw.NSFontAssetRequestOptions(options))
-	return &FontAssetRequest{inner: raw.NSFontAssetRequestFromID(_id)}
-}
-
-// DownloadFontAssetsWithCompletionHandler calls the underlying DownloadFontAssetsWithCompletionHandler.
-func (x *FontAssetRequest) DownloadFontAssetsWithCompletionHandler(completionHandler func(unsafe.Pointer) bool) {
-	x.inner.DownloadFontAssetsWithCompletionHandler(completionHandler)
-}
-
-// DownloadedFontDescriptors returns the collection as a Go slice.
-func (x *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
-	arr := x.inner.DownloadedFontDescriptors()
-	if arr == nil {
+// fontAssetRequestAdopt wraps an Objective-C object that this code just created as a
+// FontAssetRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fontAssetRequestAdopt(id objc.ID) *FontAssetRequest {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FontDescriptor {
-		return &FontDescriptor{inner: raw.NSFontDescriptorFromID(purego.Retain(_id))}
-	})
+	x := &FontAssetRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Progress calls the underlying Progress.
-func (x *FontAssetRequest) Progress() *foundation.NSProgress {
-	return x.inner.Progress()
+// Description returns the object's -description text.
+func (x *FontAssetRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FontAssetRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FontAssetRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FontAssetRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFontAssetRequestWithFontDescriptorsOptions creates a new FontAssetRequest.
+func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescriptor, options FontAssetRequestOptions) *FontAssetRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFontAssetRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontDescriptors:options:"), purego.SliceToNSArray(fontDescriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }), options)
+	return fontAssetRequestAdopt(_id)
+}
+
+// DownloadedFontDescriptors wraps the corresponding Objective-C method.
+//
+// DownloadedFontDescriptors returns the collection as a Go slice.
+func (x *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadedFontDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
+}
+
+// Progress wraps the corresponding Objective-C method.
+func (x *FontAssetRequest) Progress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
+	return obj.Wrap(_r)
 }
 
 // FontAssetRequestable is the interface implemented by [FontAssetRequest], for mocking and DI.
 type FontAssetRequestable interface {
-	Unwrap() *raw.NSFontAssetRequest
-	DownloadFontAssetsWithCompletionHandler(completionHandler func(unsafe.Pointer) bool)
+	obj.Object
 	DownloadedFontDescriptors() []*FontDescriptor
-	Progress() *foundation.NSProgress
+	Progress() obj.Object
 }
 
 var _ FontAssetRequestable = (*FontAssetRequest)(nil)

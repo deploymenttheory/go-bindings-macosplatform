@@ -5,123 +5,119 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The base class for encapsulating user interaction with a Smart Card reader.
+// SmartCardUserInteraction is an idiomatic wrapper over the Objective-C class TKSmartCardUserInteraction.
 //
-// SmartCardUserInteraction wraps [raw.TKSmartCardUserInteraction] with a fluent Go API.
+// SmartCardUserInteraction is an abstract base — you do not construct it directly. Construct one of [SmartCardUserInteractionForPINOperation] and pass it where a SmartCardUserInteraction is accepted.
+//
+// The base class for encapsulating user interaction with a Smart Card reader.
 type SmartCardUserInteraction struct {
-	inner *raw.TKSmartCardUserInteraction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardUserInteraction].
-func (x *SmartCardUserInteraction) Unwrap() *raw.TKSmartCardUserInteraction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardUserInteraction) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardUserInteractionFromID adopts an existing object pointer as a SmartCardUserInteraction (nil for 0).
+// SmartCardUserInteractionFromID adopts an existing Objective-C object as a SmartCardUserInteraction
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardUserInteractionFromID(id objc.ID) *SmartCardUserInteraction {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardUserInteraction{inner: raw.TKSmartCardUserInteractionFromID(id)}
-}
-
-// NewSmartCardUserInteraction creates a new [SmartCardUserInteraction].
-func NewSmartCardUserInteraction() *SmartCardUserInteraction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardUserInteraction")), objc.RegisterName("new"))
-	return &SmartCardUserInteraction{inner: raw.TKSmartCardUserInteractionFromID(_id)}
-}
-
-// The delegate for observing events that occur during the user interaction.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SmartCardUserInteraction) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteraction {
-	x.inner.SetDelegate(delegate)
+	x := &SmartCardUserInteraction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
-//
-// WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
+// smartCardUserInteractionAdopt wraps an Objective-C object that this code just created as a
+// SmartCardUserInteraction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardUserInteractionAdopt(id objc.ID) *SmartCardUserInteraction {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardUserInteraction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardUserInteraction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardUserInteraction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardUserInteraction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardUserInteraction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithInitialTimeout the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
 func (x *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction {
-	x.inner.SetInitialTimeout(initialTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
 	return x
 }
 
-// The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
-//
-// WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
+// WithInteractionTimeout the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
 func (x *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction {
-	x.inner.SetInteractionTimeout(interactionTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
 	return x
 }
 
-// Runs the user interaction and asynchronously receives a reply.
-//
-// RunWithReply calls the underlying RunWithReply.
-func (x *SmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointer)) {
-	x.inner.RunWithReply(reply)
-}
-
-// Attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
-//
-// Cancel calls the underlying Cancel.
+// Cancel attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
 func (x *SmartCardUserInteraction) Cancel() bool {
-	return x.inner.Cancel()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancel"))
+	return _r
 }
 
-// Delegate for state observing of the interaction.
-//
-// Delegate calls the underlying Delegate.
-func (x *SmartCardUserInteraction) Delegate() raw.TKSmartCardUserInteractionDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SmartCardUserInteraction) SetDelegate(delegate raw.TKSmartCardUserInteractionDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// SetInitialTimeout calls the underlying SetInitialTimeout.
+// SetInitialTimeout wraps the corresponding Objective-C method.
 func (x *SmartCardUserInteraction) SetInitialTimeout(initialTimeout float64) {
-	x.inner.SetInitialTimeout(initialTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
 }
 
-// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
-//
-// InteractionTimeout calls the underlying InteractionTimeout.
+// InteractionTimeout timeout after the first key stroke. If set to 0, the reader-defined default timeout is used.
 func (x *SmartCardUserInteraction) InteractionTimeout() float64 {
-	return x.inner.InteractionTimeout()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interactionTimeout"))
+	return _r
 }
 
-// SetInteractionTimeout calls the underlying SetInteractionTimeout.
+// SetInteractionTimeout wraps the corresponding Objective-C method.
 func (x *SmartCardUserInteraction) SetInteractionTimeout(interactionTimeout float64) {
-	x.inner.SetInteractionTimeout(interactionTimeout)
-}
-
-func (x *SmartCardUserInteraction) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
 }
 
 // SmartCardUserInteractionable is the interface implemented by [SmartCardUserInteraction], for mocking and DI.
 type SmartCardUserInteractionable interface {
-	Unwrap() *raw.TKSmartCardUserInteraction
-	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteraction
+	obj.Object
 	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction
 	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction
-	RunWithReply(reply func(bool, unsafe.Pointer))
 	Cancel() bool
-	Delegate() raw.TKSmartCardUserInteractionDelegate
-	SetDelegate(delegate raw.TKSmartCardUserInteractionDelegate)
 	SetInitialTimeout(initialTimeout float64)
 	InteractionTimeout() float64
 	SetInteractionTimeout(interactionTimeout float64)
 }
 
 var _ SmartCardUserInteractionable = (*SmartCardUserInteraction)(nil)
+
+// isSmartCardUserInteraction marks SmartCardUserInteraction — and, by embedding promotion, its
+// subclasses — as a member of the SmartCardUserInteraction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SmartCardUserInteraction) isSmartCardUserInteraction() {}
+
+var _ SmartCardUserInteractionProvider = (*SmartCardUserInteraction)(nil)

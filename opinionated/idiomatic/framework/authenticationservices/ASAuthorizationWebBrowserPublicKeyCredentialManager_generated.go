@@ -6,84 +6,108 @@ package authenticationservices
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.
+// AuthorizationWebBrowserPublicKeyCredentialManager is an idiomatic wrapper over the Objective-C class ASAuthorizationWebBrowserPublicKeyCredentialManager.
 //
-// AuthorizationWebBrowserPublicKeyCredentialManager wraps [raw.ASAuthorizationWebBrowserPublicKeyCredentialManager] with a fluent Go API.
+// A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.
 type AuthorizationWebBrowserPublicKeyCredentialManager struct {
-	inner *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationWebBrowserPublicKeyCredentialManager].
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) Unwrap() *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationWebBrowserPublicKeyCredentialManagerFromID adopts an existing object pointer as a AuthorizationWebBrowserPublicKeyCredentialManager (nil for 0).
+// AuthorizationWebBrowserPublicKeyCredentialManagerFromID adopts an existing Objective-C object as a AuthorizationWebBrowserPublicKeyCredentialManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationWebBrowserPublicKeyCredentialManagerFromID(id objc.ID) *AuthorizationWebBrowserPublicKeyCredentialManager {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationWebBrowserPublicKeyCredentialManager{inner: raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(id)}
+	x := &AuthorizationWebBrowserPublicKeyCredentialManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationWebBrowserPublicKeyCredentialManager creates a new [AuthorizationWebBrowserPublicKeyCredentialManager].
+// authorizationWebBrowserPublicKeyCredentialManagerAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationWebBrowserPublicKeyCredentialManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationWebBrowserPublicKeyCredentialManagerAdopt(id objc.ID) *AuthorizationWebBrowserPublicKeyCredentialManager {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationWebBrowserPublicKeyCredentialManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationWebBrowserPublicKeyCredentialManager creates a new AuthorizationWebBrowserPublicKeyCredentialManager.
 func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBrowserPublicKeyCredentialManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationWebBrowserPublicKeyCredentialManager")), objc.RegisterName("new"))
-	return &AuthorizationWebBrowserPublicKeyCredentialManager{inner: raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationWebBrowserPublicKeyCredentialManager")), objc.RegisterName("new"))
+	return authorizationWebBrowserPublicKeyCredentialManagerAdopt(_id)
 }
 
-// Requests a person’s permission to use their passkeys.
-//
-// RequestAuthorizationForPublicKeyCredentials calls the underlying RequestAuthorizationForPublicKeyCredentials.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
-	x.inner.RequestAuthorizationForPublicKeyCredentials(func(_a0 raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) {
-		completionHandler(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState(_a0))
-	})
-}
-
-// Gets a list of passkeys available for authenticating with the given relying party.
+// PlatformCredentialsForRelyingParty gets a list of passkeys available for authenticating with the given relying party.
 //
 // PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (*foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential], error) {
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PlatformCredentialsForRelyingPartyCompletionHandler(foundation.NSStringStringWithUTF8String(relyingParty), func(_p0 *foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("platformCredentialsForRelyingParty:completionHandler:"), purego.NSString(relyingParty), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// AuthorizationStateForPlatformCredentials calls the underlying AuthorizationStateForPlatformCredentials.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
-	return ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState(x.inner.AuthorizationStateForPlatformCredentials())
+// AuthorizationStateForPlatformCredentials wraps the corresponding Objective-C method.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
+	_r := objc.Send[AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState](objref.IDOf(x), objc.RegisterName("authorizationStateForPlatformCredentials"))
+	return _r
 }
 
 // AuthorizationWebBrowserPublicKeyCredentialManagerable is the interface implemented by [AuthorizationWebBrowserPublicKeyCredentialManager], for mocking and DI.
 type AuthorizationWebBrowserPublicKeyCredentialManagerable interface {
-	Unwrap() *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager
-	RequestAuthorizationForPublicKeyCredentials(completionHandler func(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState))
-	PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (*foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential], error)
-	AuthorizationStateForPlatformCredentials() ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState
+	obj.Object
+	PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (obj.Object, error)
+	AuthorizationStateForPlatformCredentials() AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState
 }
 
 var _ AuthorizationWebBrowserPublicKeyCredentialManagerable = (*AuthorizationWebBrowserPublicKeyCredentialManager)(nil)

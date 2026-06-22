@@ -4,90 +4,82 @@
 
 package tk
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/tk"
-)
+type XArc struct {
+	X      int16
+	Y      int16
+	Width  uint16
+	Height uint16
+	Angle1 int16
+	Angle2 int16
+}
 
-// Depth is a type alias for the raw Depth value-type struct.
-type Depth = raw.Depth
+type XChar2b struct {
+	Byte1 uint8
+	Byte2 uint8
+}
 
-// ScreenFormat is a type alias for the raw ScreenFormat value-type struct.
-type ScreenFormat = raw.ScreenFormat
+type XCharStruct struct {
+	Lbearing   int16
+	Rbearing   int16
+	Width      int16
+	Ascent     int16
+	Descent    int16
+	Attributes uint16
+}
 
-// TkStubHooks is a type alias for the raw TkStubHooks value-type struct.
-type TkStubHooks = raw.TkStubHooks
+type XColor struct {
+	Pixel uint
+	Red   uint16
+	Green uint16
+	Blue  uint16
+	Flags int8
+	Pad   int8
+}
 
-// TkStubs is a type alias for the raw TkStubs value-type struct.
-type TkStubs = raw.TkStubs
+type XExtCodes struct {
+	Extension    int
+	Major_opcode int
+	First_event  int
+	First_error  int
+}
 
-// XArc is a type alias for the raw XArc value-type struct.
-type XArc = raw.XArc
+type XFontSetExtents struct {
+	Max_ink_extent     XRectangle
+	Max_logical_extent XRectangle
+}
 
-// XChar2b is a type alias for the raw XChar2b value-type struct.
-type XChar2b = raw.XChar2b
+type XKeyboardControl struct {
+	Key_click_percent int
+	Bell_percent      int
+	Bell_pitch        int
+	Bell_duration     int
+	Led               int
+	Led_mode          int
+	Key               int
+	Auto_repeat_mode  int
+}
 
-// XCharStruct is a type alias for the raw XCharStruct value-type struct.
-type XCharStruct = raw.XCharStruct
+type XPixmapFormatValues struct {
+	Depth          int
+	Bits_per_pixel int
+	Scanline_pad   int
+}
 
-// XColor is a type alias for the raw XColor value-type struct.
-type XColor = raw.XColor
+type XPoint struct {
+	X int16
+	Y int16
+}
 
-// XExtCodes is a type alias for the raw XExtCodes value-type struct.
-type XExtCodes = raw.XExtCodes
+type XRectangle struct {
+	X      int16
+	Y      int16
+	Width  uint16
+	Height uint16
+}
 
-// XFontSetExtents is a type alias for the raw XFontSetExtents value-type struct.
-type XFontSetExtents = raw.XFontSetExtents
-
-// XHostAddress is a type alias for the raw XHostAddress value-type struct.
-type XHostAddress = raw.XHostAddress
-
-// XIMCallback is a type alias for the raw XIMCallback value-type struct.
-type XIMCallback = raw.XIMCallback
-
-// XIMStyles is a type alias for the raw XIMStyles value-type struct.
-type XIMStyles = raw.XIMStyles
-
-// XKeyboardControl is a type alias for the raw XKeyboardControl value-type struct.
-type XKeyboardControl = raw.XKeyboardControl
-
-// XKeyboardState is a type alias for the raw XKeyboardState value-type struct.
-type XKeyboardState = raw.XKeyboardState
-
-// XPixmapFormatValues is a type alias for the raw XPixmapFormatValues value-type struct.
-type XPixmapFormatValues = raw.XPixmapFormatValues
-
-// XPoint is a type alias for the raw XPoint value-type struct.
-type XPoint = raw.XPoint
-
-// XRectangle is a type alias for the raw XRectangle value-type struct.
-type XRectangle = raw.XRectangle
-
-// XSegment is a type alias for the raw XSegment value-type struct.
-type XSegment = raw.XSegment
-
-// XmbTextItem is a type alias for the raw XmbTextItem value-type struct.
-type XmbTextItem = raw.XmbTextItem
-
-// XwcTextItem is a type alias for the raw XwcTextItem value-type struct.
-type XwcTextItem = raw.XwcTextItem
-
-// XDisplay is a type alias for the raw XDisplay value-type struct.
-type XDisplay = raw.XDisplay
-
-// XExtData is a type alias for the raw XExtData value-type struct.
-type XExtData = raw.XExtData
-
-// XIMPreeditCaretCallbackStruct is a type alias for the raw XIMPreeditCaretCallbackStruct value-type struct.
-type XIMPreeditCaretCallbackStruct = raw.XIMPreeditCaretCallbackStruct
-
-// XIMPreeditDrawCallbackStruct is a type alias for the raw XIMPreeditDrawCallbackStruct value-type struct.
-type XIMPreeditDrawCallbackStruct = raw.XIMPreeditDrawCallbackStruct
-
-// XIMStatusDrawCallbackStruct is a type alias for the raw XIMStatusDrawCallbackStruct value-type struct.
-type XIMStatusDrawCallbackStruct = raw.XIMStatusDrawCallbackStruct
-
-// XIMText is a type alias for the raw XIMText value-type struct.
-type XIMText = raw.XIMText
-
-// XImage is a type alias for the raw XImage value-type struct.
-type XImage = raw.XImage
+type XSegment struct {
+	X1 int16
+	Y1 int16
+	X2 int16
+	Y2 int16
+}

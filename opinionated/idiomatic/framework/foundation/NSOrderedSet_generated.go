@@ -5,479 +5,413 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A static, ordered collection of unique objects.
+// OrderedSet is an idiomatic wrapper over the Objective-C class NSOrderedSet.
 //
-// OrderedSet wraps [raw.NSOrderedSet] with a fluent Go API.
+// OrderedSet is an abstract base — you do not construct it directly. Construct one of [MutableOrderedSet] and pass it where a OrderedSet is accepted.
+//
+// A static, ordered collection of unique objects.
 type OrderedSet struct {
-	inner *raw.NSOrderedSet[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOrderedSet].
-func (x *OrderedSet) Unwrap() *raw.NSOrderedSet[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OrderedSet) ID() objc.ID { return x.inner.Ptr() }
-
-// OrderedSetFromID adopts an existing object pointer as a OrderedSet (nil for 0).
+// OrderedSetFromID adopts an existing Objective-C object as a OrderedSet
+// (nil for 0), retaining it and registering a release finalizer.
 func OrderedSetFromID(id objc.ID) *OrderedSet {
 	if id == 0 {
 		return nil
 	}
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](id)}
-}
-
-// NewOrderedSet creates a new [OrderedSet].
-func NewOrderedSet() *OrderedSet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("new"))
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated set with a specified number of objects from a given C array of objects.
-//
-// NewOrderedSetWithObjectsCount creates a new [OrderedSet].
-func NewOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:count:"), objects, cnt)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// NewOrderedSetWithCoder creates a new [OrderedSet].
-func NewOrderedSetWithCoder(coder *raw.NSCoder) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a new ordered set with the object.
-//
-// NewOrderedSetWithObject creates a new [OrderedSet].
-func NewOrderedSetWithObject(object objc.ID) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:"), object)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated set with members taken from the specified list of objects.
-//
-// NewOrderedSetWithObjects creates a new [OrderedSet].
-func NewOrderedSetWithObjects(firstObj objc.ID) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:"), firstObj)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a new ordered set with the contents of a set.
-//
-// NewOrderedSetWithOrderedSet creates a new [OrderedSet].
-func NewOrderedSetWithOrderedSet(set *raw.NSOrderedSet[objc.ID]) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:"), set.Ptr())
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a new ordered set with the contents of a set, optionally copying the items.
-//
-// NewOrderedSetWithOrderedSetCopyItems creates a new [OrderedSet].
-func NewOrderedSetWithOrderedSetCopyItems(set *raw.NSOrderedSet[objc.ID], flag bool) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:copyItems:"), set.Ptr(), flag)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a new ordered set with the contents of an ordered set, optionally copying the items.
-//
-// NewOrderedSetWithOrderedSetRangeCopyItems creates a new [OrderedSet].
-func NewOrderedSetWithOrderedSetRangeCopyItems(set *raw.NSOrderedSet[objc.ID], range_ raw.NSRange, flag bool) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:range:copyItems:"), set.Ptr(), range_, flag)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated set with the objects that are contained in a given array.
-//
-// NewOrderedSetWithArray creates a new [OrderedSet].
-func NewOrderedSetWithArray(array *raw.NSArray[objc.ID]) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), array.Ptr())
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated set with the objects that are contained in a given array, optionally copying the items.
-//
-// NewOrderedSetWithArrayCopyItems creates a new [OrderedSet].
-func NewOrderedSetWithArrayCopyItems(set *raw.NSArray[objc.ID], flag bool) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:copyItems:"), set.Ptr(), flag)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated set with the objects that are contained in the specified range of an array, optionally copying the items.
-//
-// NewOrderedSetWithArrayRangeCopyItems creates a new [OrderedSet].
-func NewOrderedSetWithArrayRangeCopyItems(set *raw.NSArray[objc.ID], range_ raw.NSRange, flag bool) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:range:copyItems:"), set.Ptr(), range_, flag)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a new ordered set with the contents of a set.
-//
-// NewOrderedSetWithSet creates a new [OrderedSet].
-func NewOrderedSetWithSet(set *raw.NSSet[objc.ID]) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), set.Ptr())
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// Initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
-//
-// NewOrderedSetWithSetCopyItems creates a new [OrderedSet].
-func NewOrderedSetWithSetCopyItems(set *raw.NSSet[objc.ID], flag bool) *OrderedSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:copyItems:"), set.Ptr(), flag)
-	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *OrderedSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedSet {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &OrderedSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns the object at the specified index of the set.
-//
-// ObjectAtIndex calls the underlying ObjectAtIndex.
-func (x *OrderedSet) ObjectAtIndex(idx uint) objc.ID {
-	return x.inner.ObjectAtIndex(idx)
-}
-
-// Returns the index of the specified object.
-//
-// IndexOfObject calls the underlying IndexOfObject.
-func (x *OrderedSet) IndexOfObject(object objc.ID) uint {
-	return x.inner.IndexOfObject(object)
-}
-
-// Count calls the underlying Count.
-func (x *OrderedSet) Count() uint {
-	return x.inner.Count()
-}
-
-// Copies the objects contained in the ordered set that fall within the specified range to objects.
-//
-// GetObjectsRange calls the underlying GetObjectsRange.
-func (x *OrderedSet) GetObjectsRange(objects unsafe.Pointer, range_ raw.NSRange) {
-	x.inner.GetObjectsRange(objects, range_)
-}
-
-// Returns the objects in the ordered set at the specified indexes.
-//
-// ObjectsAtIndexes calls the underlying ObjectsAtIndexes.
-func (x *OrderedSet) ObjectsAtIndexes(indexes *raw.NSIndexSet) *raw.NSArray[objc.ID] {
-	return x.inner.ObjectsAtIndexes(indexes)
-}
-
-// Compares the receiving ordered set to another ordered set.
-//
-// IsEqualToOrderedSet calls the underlying IsEqualToOrderedSet.
-func (x *OrderedSet) IsEqualToOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool {
-	return x.inner.IsEqualToOrderedSet(other)
-}
-
-// Returns a Boolean value that indicates whether a given object is present in the ordered set.
-//
-// ContainsObject calls the underlying ContainsObject.
-func (x *OrderedSet) ContainsObject(object objc.ID) bool {
-	return x.inner.ContainsObject(object)
-}
-
-// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
-//
-// IntersectsOrderedSet calls the underlying IntersectsOrderedSet.
-func (x *OrderedSet) IntersectsOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool {
-	return x.inner.IntersectsOrderedSet(other)
-}
-
-// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
-//
-// IntersectsSet calls the underlying IntersectsSet.
-func (x *OrderedSet) IntersectsSet(set *raw.NSSet[objc.ID]) bool {
-	return x.inner.IntersectsSet(set)
-}
-
-// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
-//
-// IsSubsetOfOrderedSet calls the underlying IsSubsetOfOrderedSet.
-func (x *OrderedSet) IsSubsetOfOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool {
-	return x.inner.IsSubsetOfOrderedSet(other)
-}
-
-// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
-//
-// IsSubsetOfSet calls the underlying IsSubsetOfSet.
-func (x *OrderedSet) IsSubsetOfSet(set *raw.NSSet[objc.ID]) bool {
-	return x.inner.IsSubsetOfSet(set)
-}
-
-// Returns the object at the specified index of the set.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *OrderedSet) ObjectAtIndexedSubscript(idx uint) objc.ID {
-	return x.inner.ObjectAtIndexedSubscript(idx)
-}
-
-// Returns an enumerator object that lets you access each object in the ordered set.
-//
-// ObjectEnumerator calls the underlying ObjectEnumerator.
-func (x *OrderedSet) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
-	return x.inner.ObjectEnumerator()
-}
-
-// Returns an enumerator object that lets you access each object in the ordered set.
-//
-// ReverseObjectEnumerator calls the underlying ReverseObjectEnumerator.
-func (x *OrderedSet) ReverseObjectEnumerator() *raw.NSEnumerator[objc.ID] {
-	return x.inner.ReverseObjectEnumerator()
-}
-
-// Executes a given block using each object in the ordered set.
-//
-// EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
-func (x *OrderedSet) EnumerateObjectsUsing(block objc.Block) {
-	x.inner.EnumerateObjectsUsing(block)
-}
-
-// Executes a given block using each object in the set, using the specified enumeration options.
-//
-// EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
-func (x *OrderedSet) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
-}
-
-// Executes a given block using the objects in the ordered set at the specified indexes.
-//
-// EnumerateObjectsAtIndexesOptionsUsing calls the underlying EnumerateObjectsAtIndexesOptionsUsing.
-func (x *OrderedSet) EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, raw.NSEnumerationOptions(opts), block)
-}
-
-// Returns the index of the object in the ordered set that passes a test in a given block.
-//
-// IndexOfObjectPassingTest calls the underlying IndexOfObjectPassingTest.
-func (x *OrderedSet) IndexOfObjectPassingTest(predicate objc.Block) uint {
-	return x.inner.IndexOfObjectPassingTest(predicate)
-}
-
-// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
-//
-// IndexOfObjectWithOptionsPassingTest calls the underlying IndexOfObjectWithOptionsPassingTest.
-func (x *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint {
-	return x.inner.IndexOfObjectWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
-}
-
-// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
-//
-// IndexOfObjectAtIndexesOptionsPassingTest calls the underlying IndexOfObjectAtIndexesOptionsPassingTest.
-func (x *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint {
-	return x.inner.IndexOfObjectAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
-}
-
-// Returns the index of the object in the ordered set that passes a test in a given block.
-//
-// IndexesOfObjectsPassingTest calls the underlying IndexesOfObjectsPassingTest.
-func (x *OrderedSet) IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsPassingTest(predicate)
-	if _r == nil {
+// orderedSetAdopt wraps an Objective-C object that this code just created as a
+// OrderedSet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func orderedSetAdopt(id objc.ID) *OrderedSet {
+	if id == 0 {
 		return nil
 	}
-	return &IndexSet{inner: _r}
+	x := &OrderedSet{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
-//
-// IndexesOfObjectsWithOptionsPassingTest calls the underlying IndexesOfObjectsWithOptionsPassingTest.
-func (x *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
-	if _r == nil {
-		return nil
+// Description returns the object's -description text.
+func (x *OrderedSet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OrderedSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OrderedSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OrderedSet) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewOrderedSetWithCoder creates a new OrderedSet.
+func NewOrderedSetWithCoder(coder *Coder) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithObject initializes a new ordered set with the object.
+func NewOrderedSetWithObject(object obj.Object) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:"), objref.IDOf(object))
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithObjects initializes a newly allocated set with members taken from the specified list of objects.
+func NewOrderedSetWithObjects(firstObj obj.Object) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:"), objref.IDOf(firstObj))
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithOrderedSet initializes a new ordered set with the contents of a set.
+func NewOrderedSetWithOrderedSet(set obj.Object) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:"), objref.IDOf(set))
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithOrderedSetCopyItems initializes a new ordered set with the contents of a set, optionally copying the items.
+func NewOrderedSetWithOrderedSetCopyItems(set obj.Object, flag bool) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderedSet:copyItems:"), objref.IDOf(set), flag)
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithArray initializes a newly allocated set with the objects that are contained in a given array.
+func NewOrderedSetWithArray(array []obj.Object) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithArrayCopyItems initializes a newly allocated set with the objects that are contained in a given array, optionally copying the items.
+func NewOrderedSetWithArrayCopyItems(set []obj.Object, flag bool) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:copyItems:"), purego.SliceToNSArray(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), flag)
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithSet initializes a new ordered set with the contents of a set.
+func NewOrderedSetWithSet(set obj.Object) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), objref.IDOf(set))
+	return orderedSetAdopt(_id)
+}
+
+// NewOrderedSetWithSetCopyItems initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
+func NewOrderedSetWithSetCopyItems(set obj.Object, flag bool) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:copyItems:"), objref.IDOf(set), flag)
+	return orderedSetAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *OrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *OrderedSet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// ObjectAtIndex returns the object at the specified index of the set.
+func (x *OrderedSet) ObjectAtIndex(idx int) obj.Object {
+	errkit.CheckIndex(idx, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), idx)
+	return obj.Wrap(_r)
+}
+
+// IndexOfObject returns the index of the specified object.
+func (x *OrderedSet) IndexOfObject(object obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:"), objref.IDOf(object))
+	return _r
+}
+
+// Count wraps the corresponding Objective-C method.
+func (x *OrderedSet) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
+}
+
+// ObjectsAtIndexes returns the objects in the ordered set at the specified indexes.
+func (x *OrderedSet) ObjectsAtIndexes(indexes *IndexSet) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// IsEqualToOrderedSet compares the receiving ordered set to another ordered set.
+func (x *OrderedSet) IsEqualToOrderedSet(other obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToOrderedSet:"), objref.IDOf(other))
+	return _r
+}
+
+// ContainsObject returns a Boolean value that indicates whether a given object is present in the ordered set.
+func (x *OrderedSet) ContainsObject(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(object))
+	return _r
+}
+
+// IntersectsOrderedSet returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
+func (x *OrderedSet) IntersectsOrderedSet(other obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsOrderedSet:"), objref.IDOf(other))
+	return _r
+}
+
+// IntersectsSet returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
+func (x *OrderedSet) IntersectsSet(set obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsSet:"), objref.IDOf(set))
+	return _r
+}
+
+// IsSubsetOfOrderedSet returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
+func (x *OrderedSet) IsSubsetOfOrderedSet(other obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfOrderedSet:"), objref.IDOf(other))
+	return _r
+}
+
+// IsSubsetOfSet returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
+func (x *OrderedSet) IsSubsetOfSet(set obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfSet:"), objref.IDOf(set))
+	return _r
+}
+
+// ObjectAtIndexedSubscript returns the object at the specified index of the set.
+func (x *OrderedSet) ObjectAtIndexedSubscript(idx int) obj.Object {
+	errkit.CheckIndex(idx, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+	return obj.Wrap(_r)
+}
+
+// ObjectEnumerator returns an enumerator object that lets you access each object in the ordered set.
+func (x *OrderedSet) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+	return obj.Wrap(_r)
+}
+
+// ReverseObjectEnumerator returns an enumerator object that lets you access each object in the ordered set.
+func (x *OrderedSet) ReverseObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseObjectEnumerator"))
+	return obj.Wrap(_r)
+}
+
+// EnumerateObjectsUsing executes a given block using each object in the ordered set.
+func (x *OrderedSet) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+}
+
+// EnumerateObjectsWithOptionsUsing executes a given block using each object in the set, using the specified enumeration options.
+func (x *OrderedSet) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+}
+
+// EnumerateObjectsAtIndexesOptionsUsing executes a given block using the objects in the ordered set at the specified indexes.
+func (x *OrderedSet) EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+}
+
+// IndexOfObjectPassingTest returns the index of the object in the ordered set that passes a test in a given block.
+func (x *OrderedSet) IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return _r
+}
+
+// IndexOfObjectWithOptionsPassingTest returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
+func (x *OrderedSet) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return _r
+}
+
+// IndexOfObjectAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
+func (x *OrderedSet) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return _r
+}
+
+// IndexesOfObjectsPassingTest returns the index of the object in the ordered set that passes a test in a given block.
+func (x *OrderedSet) IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return IndexSetFromID(_r)
+}
+
+// IndexesOfObjectsWithOptionsPassingTest returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
+func (x *OrderedSet) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return IndexSetFromID(_r)
+}
+
+// IndexesOfObjectsAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
+func (x *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return IndexSetFromID(_r)
+}
+
+// DescriptionWithLocale returns a string that represents the contents of the ordered set, formatted as a property list.
+func (x *OrderedSet) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+	if _r == 0 {
+		return ""
 	}
-	return &IndexSet{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
-//
-// IndexesOfObjectsAtIndexesOptionsPassingTest calls the underlying IndexesOfObjectsAtIndexesOptionsPassingTest.
-func (x *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
-	if _r == nil {
-		return nil
+// DescriptionWithLocaleIndent returns a string that represents the contents of the ordered set, formatted as a property list.
+func (x *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
+	if _r == 0 {
+		return ""
 	}
-	return &IndexSet{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the index, within a specified range, of an object compared with elements in the ordered set using a given NSComparator block.
-//
-// IndexOfObjectInSortedRangeOptionsUsingComparator calls the underlying IndexOfObjectInSortedRangeOptionsUsingComparator.
-func (x *OrderedSet) IndexOfObjectInSortedRangeOptionsUsingComparator(object objc.ID, range_ raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint {
-	return x.inner.IndexOfObjectInSortedRangeOptionsUsingComparator(object, range_, raw.NSBinarySearchingOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmp(_a0, _a1)) })
+// FirstObject wraps the corresponding Objective-C method.
+func (x *OrderedSet) FirstObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObject"))
+	return obj.Wrap(_r)
 }
 
-// Returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block
-//
-// SortedArrayUsingComparator calls the underlying SortedArrayUsingComparator.
-func (x *OrderedSet) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
+// LastObject wraps the corresponding Objective-C method.
+func (x *OrderedSet) LastObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastObject"))
+	return obj.Wrap(_r)
 }
 
-// Returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
-//
-// SortedArrayWithOptionsUsingComparator calls the underlying SortedArrayWithOptionsUsingComparator.
-func (x *OrderedSet) SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
+// ReversedOrderedSet wraps the corresponding Objective-C method.
+func (x *OrderedSet) ReversedOrderedSet() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedOrderedSet"))
+	return obj.Wrap(_r)
 }
 
-// Returns a string that represents the contents of the ordered set, formatted as a property list.
-//
-// DescriptionWithLocale calls the underlying DescriptionWithLocale.
-func (x *OrderedSet) DescriptionWithLocale(locale objc.ID) *String {
-	_r := x.inner.DescriptionWithLocale(locale)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// Array wraps the corresponding Objective-C method.
+func (x *OrderedSet) Array() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("array"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns a string that represents the contents of the ordered set, formatted as a property list.
-//
-// DescriptionWithLocaleIndent calls the underlying DescriptionWithLocaleIndent.
-func (x *OrderedSet) DescriptionWithLocaleIndent(locale objc.ID, level uint) *String {
-	_r := x.inner.DescriptionWithLocaleIndent(locale, level)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// Set wraps the corresponding Objective-C method.
+func (x *OrderedSet) Set() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+	return obj.Wrap(_r)
 }
 
-// FirstObject calls the underlying FirstObject.
-func (x *OrderedSet) FirstObject() objc.ID {
-	return x.inner.FirstObject()
+// DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
+func (x *OrderedSet) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromOrderedSet:withOptions:usingEquivalenceTest:"), objref.IDOf(other), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return obj.Wrap(_r)
 }
 
-// LastObject calls the underlying LastObject.
-func (x *OrderedSet) LastObject() objc.ID {
-	return x.inner.LastObject()
+// DifferenceFromOrderedSetWithOptions compares two ordered sets, with options, to create a difference object that represents the changes between them.
+func (x *OrderedSet) DifferenceFromOrderedSetWithOptions(other obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromOrderedSet:withOptions:"), objref.IDOf(other), options)
+	return obj.Wrap(_r)
 }
 
-// ReversedOrderedSet calls the underlying ReversedOrderedSet.
-func (x *OrderedSet) ReversedOrderedSet() *raw.NSOrderedSet[objc.ID] {
-	return x.inner.ReversedOrderedSet()
+// DifferenceFromOrderedSet compares two ordered sets to create a difference object that represents the changes between them.
+func (x *OrderedSet) DifferenceFromOrderedSet(other obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromOrderedSet:"), objref.IDOf(other))
+	return obj.Wrap(_r)
 }
 
-// Array calls the underlying Array.
-func (x *OrderedSet) Array() *raw.NSArray[objc.ID] {
-	return x.inner.Array()
+// OrderedSetByApplyingDifference creates a new ordered set by applying a difference object to an existing ordered set.
+func (x *OrderedSet) OrderedSetByApplyingDifference(difference obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedSetByApplyingDifference:"), objref.IDOf(difference))
+	return obj.Wrap(_r)
 }
 
-// Set calls the underlying Set.
-func (x *OrderedSet) Set() *raw.NSSet[objc.ID] {
-	return x.inner.Set()
+// SortedArrayUsingDescriptors returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
+func (x *OrderedSet) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
-//
-// DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest calls the underlying DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest.
-func (x *OrderedSet) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other *raw.NSOrderedSet[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options), block)
+// FilteredOrderedSetUsingPredicate evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
+func (x *OrderedSet) FilteredOrderedSetUsingPredicate(p *Predicate) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filteredOrderedSetUsingPredicate:"), objref.IDOf(p))
+	return obj.Wrap(_r)
 }
-
-// Compares two ordered sets, with options, to create a difference object that represents the changes between them.
-//
-// DifferenceFromOrderedSetWithOptions calls the underlying DifferenceFromOrderedSetWithOptions.
-func (x *OrderedSet) DifferenceFromOrderedSetWithOptions(other *raw.NSOrderedSet[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromOrderedSetWithOptions(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options))
-}
-
-// Compares two ordered sets to create a difference object that represents the changes between them.
-//
-// DifferenceFromOrderedSet calls the underlying DifferenceFromOrderedSet.
-func (x *OrderedSet) DifferenceFromOrderedSet(other *raw.NSOrderedSet[objc.ID]) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromOrderedSet(other)
-}
-
-// Creates a new ordered set by applying a difference object to an existing ordered set.
-//
-// OrderedSetByApplyingDifference calls the underlying OrderedSetByApplyingDifference.
-func (x *OrderedSet) OrderedSetByApplyingDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) *raw.NSOrderedSet[objc.ID] {
-	return x.inner.OrderedSetByApplyingDifference(difference)
-}
-
-// Returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
-//
-// SortedArrayUsingDescriptors calls the underlying SortedArrayUsingDescriptors.
-func (x *OrderedSet) SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingDescriptors(sortDescriptors)
-}
-
-// Evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
-//
-// FilteredOrderedSetUsingPredicate calls the underlying FilteredOrderedSetUsingPredicate.
-func (x *OrderedSet) FilteredOrderedSetUsingPredicate(p *raw.NSPredicate) *raw.NSOrderedSet[objc.ID] {
-	return x.inner.FilteredOrderedSetUsingPredicate(p)
-}
-
-func (x *OrderedSet) asOrderedSet() *raw.NSOrderedSet[objc.ID] { return x.inner }
-
-func (x *OrderedSet) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // OrderedSetable is the interface implemented by [OrderedSet], for mocking and DI.
 type OrderedSetable interface {
-	Unwrap() *raw.NSOrderedSet[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedSet
-	ObjectAtIndex(idx uint) objc.ID
-	IndexOfObject(object objc.ID) uint
-	Count() uint
-	GetObjectsRange(objects unsafe.Pointer, range_ raw.NSRange)
-	ObjectsAtIndexes(indexes *raw.NSIndexSet) *raw.NSArray[objc.ID]
-	IsEqualToOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool
-	ContainsObject(object objc.ID) bool
-	IntersectsOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool
-	IntersectsSet(set *raw.NSSet[objc.ID]) bool
-	IsSubsetOfOrderedSet(other *raw.NSOrderedSet[objc.ID]) bool
-	IsSubsetOfSet(set *raw.NSSet[objc.ID]) bool
-	ObjectAtIndexedSubscript(idx uint) objc.ID
-	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
-	ReverseObjectEnumerator() *raw.NSEnumerator[objc.ID]
-	EnumerateObjectsUsing(block objc.Block)
-	EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block)
-	EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block)
-	IndexOfObjectPassingTest(predicate objc.Block) uint
-	IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint
-	IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint
-	IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet
-	IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet
-	IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet
-	IndexOfObjectInSortedRangeOptionsUsingComparator(object objc.ID, range_ raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint
-	SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
-	SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
-	DescriptionWithLocale(locale objc.ID) *String
-	DescriptionWithLocaleIndent(locale objc.ID, level uint) *String
-	FirstObject() objc.ID
-	LastObject() objc.ID
-	ReversedOrderedSet() *raw.NSOrderedSet[objc.ID]
-	Array() *raw.NSArray[objc.ID]
-	Set() *raw.NSSet[objc.ID]
-	DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other *raw.NSOrderedSet[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
-	DifferenceFromOrderedSetWithOptions(other *raw.NSOrderedSet[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID]
-	DifferenceFromOrderedSet(other *raw.NSOrderedSet[objc.ID]) *raw.NSOrderedCollectionDifference[objc.ID]
-	OrderedSetByApplyingDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) *raw.NSOrderedSet[objc.ID]
-	SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID]
-	FilteredOrderedSetUsingPredicate(p *raw.NSPredicate) *raw.NSOrderedSet[objc.ID]
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *OrderedSet
+	ObjectAtIndex(idx int) obj.Object
+	IndexOfObject(object obj.Object) int
+	Count() int
+	ObjectsAtIndexes(indexes *IndexSet) []obj.Object
+	IsEqualToOrderedSet(other obj.Object) bool
+	ContainsObject(object obj.Object) bool
+	IntersectsOrderedSet(other obj.Object) bool
+	IntersectsSet(set obj.Object) bool
+	IsSubsetOfOrderedSet(other obj.Object) bool
+	IsSubsetOfSet(set obj.Object) bool
+	ObjectAtIndexedSubscript(idx int) obj.Object
+	ObjectEnumerator() obj.Object
+	ReverseObjectEnumerator() obj.Object
+	EnumerateObjectsUsing(block func(obj.Object, int, *bool))
+	EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool))
+	EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool))
+	IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int
+	IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int
+	IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int
+	IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet
+	IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet
+	IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet
+	DescriptionWithLocale(locale obj.Object) string
+	DescriptionWithLocaleIndent(locale obj.Object, level int) string
+	FirstObject() obj.Object
+	LastObject() obj.Object
+	ReversedOrderedSet() obj.Object
+	Array() []obj.Object
+	Set() obj.Object
+	DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object
+	DifferenceFromOrderedSetWithOptions(other obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object
+	DifferenceFromOrderedSet(other obj.Object) obj.Object
+	OrderedSetByApplyingDifference(difference obj.Object) obj.Object
+	SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object
+	FilteredOrderedSetUsingPredicate(p *Predicate) obj.Object
 }
 
 var _ OrderedSetable = (*OrderedSet)(nil)
+
+// isOrderedSet marks OrderedSet — and, by embedding promotion, its
+// subclasses — as a member of the OrderedSet hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *OrderedSet) isOrderedSet() {}
+
+var _ OrderedSetProvider = (*OrderedSet)(nil)

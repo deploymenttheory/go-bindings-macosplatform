@@ -5,68 +5,95 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A clinical coding that represents a medical concept using a standardized coding system.
+// ClinicalCoding is an idiomatic wrapper over the Objective-C class HKClinicalCoding.
 //
-// ClinicalCoding wraps [raw.HKClinicalCoding] with a fluent Go API.
+// A clinical coding that represents a medical concept using a standardized coding system.
 type ClinicalCoding struct {
-	inner *raw.HKClinicalCoding
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKClinicalCoding].
-func (x *ClinicalCoding) Unwrap() *raw.HKClinicalCoding { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClinicalCoding) ID() objc.ID { return x.inner.Ptr() }
-
-// ClinicalCodingFromID adopts an existing object pointer as a ClinicalCoding (nil for 0).
+// ClinicalCodingFromID adopts an existing Objective-C object as a ClinicalCoding
+// (nil for 0), retaining it and registering a release finalizer.
 func ClinicalCodingFromID(id objc.ID) *ClinicalCoding {
 	if id == 0 {
 		return nil
 	}
-	return &ClinicalCoding{inner: raw.HKClinicalCodingFromID(id)}
+	x := &ClinicalCoding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a clinical coding with the specified system, version, and code.
-//
-// NewClinicalCodingWithSystemVersionCode creates a new [ClinicalCoding].
+// clinicalCodingAdopt wraps an Objective-C object that this code just created as a
+// ClinicalCoding (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func clinicalCodingAdopt(id objc.ID) *ClinicalCoding {
+	if id == 0 {
+		return nil
+	}
+	x := &ClinicalCoding{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ClinicalCoding) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ClinicalCoding) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ClinicalCoding) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClinicalCoding) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewClinicalCodingWithSystemVersionCode creates a clinical coding with the specified system, version, and code.
 func NewClinicalCodingWithSystemVersionCode(system string, version string, code string) *ClinicalCoding {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKClinicalCoding")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSystem:version:code:"), foundation.NSStringStringWithUTF8String(system).Ptr(), foundation.NSStringStringWithUTF8String(version).Ptr(), foundation.NSStringStringWithUTF8String(code).Ptr())
-	return &ClinicalCoding{inner: raw.HKClinicalCodingFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKClinicalCoding")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSystem:version:code:"), purego.NSString(system), purego.NSString(version), purego.NSString(code))
+	return clinicalCodingAdopt(_id)
 }
 
-// The string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
-//
-// System calls the underlying System.
+// System the string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
 func (x *ClinicalCoding) System() string {
-	_r := x.inner.System()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("system"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
-//
-// Code calls the underlying Code.
+// Code the clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
 func (x *ClinicalCoding) Code() string {
-	_r := x.inner.Code()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ClinicalCodingable is the interface implemented by [ClinicalCoding], for mocking and DI.
 type ClinicalCodingable interface {
-	Unwrap() *raw.HKClinicalCoding
+	obj.Object
 	System() string
 	Code() string
 }

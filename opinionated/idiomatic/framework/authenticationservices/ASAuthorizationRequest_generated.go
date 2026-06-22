@@ -5,51 +5,79 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for different kinds of authorization requests.
+// AuthorizationRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationRequest.
 //
-// AuthorizationRequest wraps [raw.ASAuthorizationRequest] with a fluent Go API.
+// AuthorizationRequest is an abstract base — you do not construct it directly. Construct one of [AuthorizationOpenIDRequest], [AuthorizationPasswordRequest], [AuthorizationPlatformPublicKeyCredentialAssertionRequest], [AuthorizationPlatformPublicKeyCredentialRegistrationRequest], [AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest], [AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest] and pass it where a AuthorizationRequest is accepted.
+//
+// A base class for different kinds of authorization requests.
 type AuthorizationRequest struct {
-	inner *raw.ASAuthorizationRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationRequest].
-func (x *AuthorizationRequest) Unwrap() *raw.ASAuthorizationRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationRequestFromID adopts an existing object pointer as a AuthorizationRequest (nil for 0).
+// AuthorizationRequestFromID adopts an existing Objective-C object as a AuthorizationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationRequestFromID(id objc.ID) *AuthorizationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationRequest{inner: raw.ASAuthorizationRequestFromID(id)}
+	x := &AuthorizationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationRequest creates a new [AuthorizationRequest].
-func NewAuthorizationRequest() *AuthorizationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationRequest")), objc.RegisterName("new"))
-	return &AuthorizationRequest{inner: raw.ASAuthorizationRequestFromID(_id)}
+// authorizationRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationRequestAdopt(id objc.ID) *AuthorizationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract The provider object that is being used to service this request
-//
-// Provider calls the underlying Provider.
-func (x *AuthorizationRequest) Provider() raw.ASAuthorizationProvider {
-	return x.inner.Provider()
+// Description returns the object's -description text.
+func (x *AuthorizationRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *AuthorizationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // AuthorizationRequestable is the interface implemented by [AuthorizationRequest], for mocking and DI.
 type AuthorizationRequestable interface {
-	Unwrap() *raw.ASAuthorizationRequest
-	Provider() raw.ASAuthorizationProvider
+	obj.Object
 }
 
 var _ AuthorizationRequestable = (*AuthorizationRequest)(nil)
+
+// isAuthorizationRequest marks AuthorizationRequest — and, by embedding promotion, its
+// subclasses — as a member of the AuthorizationRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AuthorizationRequest) isAuthorizationRequest() {}
+
+var _ AuthorizationRequestProvider = (*AuthorizationRequest)(nil)

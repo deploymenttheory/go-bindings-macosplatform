@@ -5,166 +5,203 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRUnitTestingClusterTestStructArrayArgumentResponseParams wraps [raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams] with a fluent Go API.
+// MTRUnitTestingClusterTestStructArrayArgumentResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestStructArrayArgumentResponseParams.
+//
+// MTRUnitTestingClusterTestStructArrayArgumentResponseParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestStructArrayArgumentResponseParams] and pass it where a MTRUnitTestingClusterTestStructArrayArgumentResponseParams is accepted.
 type MTRUnitTestingClusterTestStructArrayArgumentResponseParams struct {
-	inner *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams].
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestStructArrayArgumentResponseParams (nil for 0).
+// MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID adopts an existing Objective-C object as a MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterTestStructArrayArgumentResponseParams{inner: raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID(id)}
+	x := &MTRUnitTestingClusterTestStructArrayArgumentResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRUnitTestingClusterTestStructArrayArgumentResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRUnitTestingClusterTestStructArrayArgumentResponseParamsWithResponseValueError creates a new [MTRUnitTestingClusterTestStructArrayArgumentResponseParams].
-func NewMTRUnitTestingClusterTestStructArrayArgumentResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestStructArrayArgumentResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRUnitTestingClusterTestStructArrayArgumentResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterTestStructArrayArgumentResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterTestStructArrayArgumentResponseParamsAdopt(id objc.ID) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRUnitTestingClusterTestStructArrayArgumentResponseParams{inner: raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID(_id)}, nil
-}
-
-// WithArg5 sets the arg5 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithArg5(arg5 *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
-	x.inner.SetArg5(arg5)
+	x := &MTRUnitTestingClusterTestStructArrayArgumentResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithArg6 sets the arg6 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithArg6(arg6 *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
-	x.inner.SetArg6(arg6)
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRUnitTestingClusterTestStructArrayArgumentResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestStructArrayArgumentResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterTestStructArrayArgumentResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterTestStructArrayArgumentResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestStructArrayArgumentResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRUnitTestingClusterTestStructArrayArgumentResponseParamsAdopt(_id), nil
+}
+
+// WithArg5 sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithArg5(arg5 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithArg6 sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithArg6(arg6 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 	return x
 }
 
-// Arg1 calls the underlying Arg1.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg1() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg1()
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
 }
 
-// SetArg1 calls the underlying SetArg1.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg1(arg1)
+// Arg1 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+	return obj.Wrap(_r)
 }
 
-// Arg2 calls the underlying Arg2.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg2() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg2()
+// SetArg1 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg1(arg1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
-// SetArg2 calls the underlying SetArg2.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg2(arg2 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg2(arg2)
+// Arg2 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg2"))
+	return obj.Wrap(_r)
 }
 
-// Arg3 calls the underlying Arg3.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg3() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg3()
+// SetArg2 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg2(arg2 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 }
 
-// SetArg3 calls the underlying SetArg3.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg3(arg3 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg3(arg3)
+// Arg3 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg3() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg3"))
+	return obj.Wrap(_r)
 }
 
-// Arg4 calls the underlying Arg4.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg4() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg4()
+// SetArg3 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg3(arg3 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 }
 
-// SetArg4 calls the underlying SetArg4.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg4(arg4 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg4(arg4)
+// Arg4 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg4() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg4"))
+	return obj.Wrap(_r)
 }
 
-// Arg5 calls the underlying Arg5.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg5() *foundation.NSNumber {
-	return x.inner.Arg5()
+// SetArg4 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg4(arg4 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 }
 
-// SetArg5 calls the underlying SetArg5.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg5(arg5 *foundation.NSNumber) {
-	x.inner.SetArg5(arg5)
+// Arg5 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg5() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg5"))
+	return obj.Wrap(_r)
 }
 
-// Arg6 calls the underlying Arg6.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg6() *foundation.NSNumber {
-	return x.inner.Arg6()
+// SetArg5 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg5(arg5 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
 }
 
-// SetArg6 calls the underlying SetArg6.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg6(arg6 *foundation.NSNumber) {
-	x.inner.SetArg6(arg6)
+// Arg6 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg6() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg6"))
+	return obj.Wrap(_r)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// SetArg6 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetArg6(arg6 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) asMTRUnitTestingClusterTestStructArrayArgumentResponseParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
-	return x.inner
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRUnitTestingClusterTestStructArrayArgumentResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestStructArrayArgumentResponseParams], for mocking and DI.
 type MTRUnitTestingClusterTestStructArrayArgumentResponseParamsable interface {
-	Unwrap() *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams
-	WithArg5(arg5 *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
-	WithArg6(arg6 *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
-	Arg1() *foundation.NSArray[objc.ID]
-	SetArg1(arg1 *foundation.NSArray[objc.ID])
-	Arg2() *foundation.NSArray[objc.ID]
-	SetArg2(arg2 *foundation.NSArray[objc.ID])
-	Arg3() *foundation.NSArray[objc.ID]
-	SetArg3(arg3 *foundation.NSArray[objc.ID])
-	Arg4() *foundation.NSArray[objc.ID]
-	SetArg4(arg4 *foundation.NSArray[objc.ID])
-	Arg5() *foundation.NSNumber
-	SetArg5(arg5 *foundation.NSNumber)
-	Arg6() *foundation.NSNumber
-	SetArg6(arg6 *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	obj.Object
+	WithArg5(arg5 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+	WithArg6(arg6 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+	Arg1() obj.Object
+	SetArg1(arg1 obj.Object)
+	Arg2() obj.Object
+	SetArg2(arg2 obj.Object)
+	Arg3() obj.Object
+	SetArg3(arg3 obj.Object)
+	Arg4() obj.Object
+	SetArg4(arg4 obj.Object)
+	Arg5() obj.Object
+	SetArg5(arg5 obj.Object)
+	Arg6() obj.Object
+	SetArg6(arg6 obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRUnitTestingClusterTestStructArrayArgumentResponseParamsable = (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams)(nil)
+
+// isMTRUnitTestingClusterTestStructArrayArgumentResponseParams marks MTRUnitTestingClusterTestStructArrayArgumentResponseParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestStructArrayArgumentResponseParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) isMTRUnitTestingClusterTestStructArrayArgumentResponseParams() {
+}
+
+var _ MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider = (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams)(nil)

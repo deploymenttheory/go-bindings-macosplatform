@@ -5,94 +5,92 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for image-analysis requests that align images according to their content.
+// ImageRegistrationRequest is an idiomatic wrapper over the Objective-C class VNImageRegistrationRequest.
 //
-// ImageRegistrationRequest wraps [raw.VNImageRegistrationRequest] with a fluent Go API.
+// ImageRegistrationRequest is an abstract base — you do not construct it directly. Construct one of [HomographicImageRegistrationRequest], [TranslationalImageRegistrationRequest] and pass it where a ImageRegistrationRequest is accepted.
+//
+// The abstract superclass for image-analysis requests that align images according to their content.
 type ImageRegistrationRequest struct {
-	inner *raw.VNImageRegistrationRequest
+	TargetedImageRequest
 }
 
-// Unwrap returns the underlying [raw.VNImageRegistrationRequest].
-func (x *ImageRegistrationRequest) Unwrap() *raw.VNImageRegistrationRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageRegistrationRequestFromID adopts an existing object pointer as a ImageRegistrationRequest (nil for 0).
+// ImageRegistrationRequestFromID adopts an existing Objective-C object as a ImageRegistrationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageRegistrationRequestFromID(id objc.ID) *ImageRegistrationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ImageRegistrationRequest{inner: raw.VNImageRegistrationRequestFromID(id)}
+	x := &ImageRegistrationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageRegistrationRequest creates a new [ImageRegistrationRequest].
-func NewImageRegistrationRequest() *ImageRegistrationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageRegistrationRequest")), objc.RegisterName("new"))
-	return &ImageRegistrationRequest{inner: raw.VNImageRegistrationRequestFromID(_id)}
+// imageRegistrationRequestAdopt wraps an Objective-C object that this code just created as a
+// ImageRegistrationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageRegistrationRequestAdopt(id objc.ID) *ImageRegistrationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageRegistrationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *ImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest {
-	x.inner.VNTargetedImageRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *ImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest {
-	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *ImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest {
-	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *ImageRegistrationRequest) WithRevision(revision uint) *ImageRegistrationRequest {
-	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *ImageRegistrationRequest) WithRevision(revision int) *ImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *ImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest {
-	return x.inner
-}
-
-func (x *ImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest {
-	return &x.inner.VNTargetedImageRequest
-}
-
-func (x *ImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNTargetedImageRequest.VNImageBasedRequest
-}
-
-func (x *ImageRegistrationRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest
 }
 
 // ImageRegistrationRequestable is the interface implemented by [ImageRegistrationRequest], for mocking and DI.
 type ImageRegistrationRequestable interface {
-	Unwrap() *raw.VNImageRegistrationRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest
-	WithRevision(revision uint) *ImageRegistrationRequest
+	WithRevision(revision int) *ImageRegistrationRequest
 }
 
 var _ ImageRegistrationRequestable = (*ImageRegistrationRequest)(nil)
+
+// isImageRegistrationRequest marks ImageRegistrationRequest — and, by embedding promotion, its
+// subclasses — as a member of the ImageRegistrationRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImageRegistrationRequest) isImageRegistrationRequest() {}
+
+var _ ImageRegistrationRequestProvider = (*ImageRegistrationRequest)(nil)
+
+var _ TargetedImageRequestProvider = (*ImageRegistrationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*ImageRegistrationRequest)(nil)
+
+var _ RequestProvider = (*ImageRegistrationRequest)(nil)

@@ -1,0 +1,23 @@
+// Load blocks until the operation completes or ctx is cancelled.
+func (x *Loader) Load(ctx context.Context) (result obj.Object, err error) {
+type _result struct {
+val obj.Object
+err error
+}
+_ch := make(chan _result, 1)
+_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+var _o _result
+_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+_o.val = obj.Wrap(_p0)
+_ch <- _o
+})
+objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadWithCompletionHandler:"), _block)
+select {
+case _o := <-_ch:
+return _o.val, _o.err
+case <-ctx.Done():
+var _zero obj.Object
+return _zero, ctx.Err()
+}
+}
+

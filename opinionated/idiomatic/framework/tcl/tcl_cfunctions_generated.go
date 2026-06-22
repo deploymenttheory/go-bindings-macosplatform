@@ -5,2936 +5,1311 @@
 package tcl
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/tcl"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// FreeObj calls [raw.TclFreeObj] (C function TclFreeObj).
-func FreeObj(objPtr *raw.Tcl_Obj) {
-	raw.TclFreeObj(objPtr)
-}
+var _fnTcl_Access func(string, int) int
 
-// TomMathInitializeStubs calls [raw.TclTomMathInitializeStubs] (C function TclTomMathInitializeStubs).
-func TomMathInitializeStubs(interp *raw.Tcl_Interp, version string, epoch int, revision int) string {
-	return raw.TclTomMathInitializeStubs(interp, version, epoch, revision)
-}
-
-// Tcl_Access calls [raw.Tcl_Access] (C function Tcl_Access).
+// Tcl_Access calls the Tcl framework function Tcl_Access.
 func Tcl_Access(path string, mode int) int {
-	return raw.Tcl_Access(path, mode)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Access == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Access, _lib, "Tcl_Access")
+	}
+	return _fnTcl_Access(path, mode)
 }
 
-// Tcl_AddErrorInfo calls [raw.Tcl_AddErrorInfo] (C function Tcl_AddErrorInfo).
-func Tcl_AddErrorInfo(interp *raw.Tcl_Interp, message string) {
-	raw.Tcl_AddErrorInfo(interp, message)
+var _fnTcl_Alloc func(int) string
+
+// Tcl_Alloc calls the Tcl framework function Tcl_Alloc.
+func Tcl_Alloc(size int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Alloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Alloc, _lib, "Tcl_Alloc")
+	}
+	return _fnTcl_Alloc(size)
 }
 
-// Tcl_AddObjErrorInfo calls [raw.Tcl_AddObjErrorInfo] (C function Tcl_AddObjErrorInfo).
-func Tcl_AddObjErrorInfo(interp *raw.Tcl_Interp, message string, length int) {
-	raw.Tcl_AddObjErrorInfo(interp, message, length)
+var _fnTcl_AsyncDelete func(objc.ID)
+
+// Tcl_AsyncDelete calls the Tcl framework function Tcl_AsyncDelete.
+func Tcl_AsyncDelete(async obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AsyncDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AsyncDelete, _lib, "Tcl_AsyncDelete")
+	}
+	_fnTcl_AsyncDelete(objref.IDOf(async))
 }
 
-// Tcl_AlertNotifier calls [raw.Tcl_AlertNotifier] (C function Tcl_AlertNotifier).
-func Tcl_AlertNotifier(clientData unsafe.Pointer) {
-	raw.Tcl_AlertNotifier(clientData)
+var _fnTcl_AsyncMark func(objc.ID)
+
+// Tcl_AsyncMark calls the Tcl framework function Tcl_AsyncMark.
+func Tcl_AsyncMark(async obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AsyncMark == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AsyncMark, _lib, "Tcl_AsyncMark")
+	}
+	_fnTcl_AsyncMark(objref.IDOf(async))
 }
 
-// Tcl_Alloc calls [raw.Tcl_Alloc] (C function Tcl_Alloc).
-func Tcl_Alloc(size uint) string {
-	return raw.Tcl_Alloc(size)
-}
+var _fnTcl_AsyncReady func() int
 
-// Tcl_AllocStatBuf calls [raw.Tcl_AllocStatBuf] (C function Tcl_AllocStatBuf).
-func Tcl_AllocStatBuf() unsafe.Pointer {
-	return raw.Tcl_AllocStatBuf()
-}
-
-// Tcl_AllowExceptions calls [raw.Tcl_AllowExceptions] (C function Tcl_AllowExceptions).
-func Tcl_AllowExceptions(interp *raw.Tcl_Interp) {
-	raw.Tcl_AllowExceptions(interp)
-}
-
-// Tcl_AppInit calls [raw.Tcl_AppInit] (C function Tcl_AppInit).
-func Tcl_AppInit(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_AppInit(interp)
-}
-
-// Tcl_AppendAllObjTypes calls [raw.Tcl_AppendAllObjTypes] (C function Tcl_AppendAllObjTypes).
-func Tcl_AppendAllObjTypes(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_AppendAllObjTypes(interp, objPtr)
-}
-
-// Tcl_AppendElement calls [raw.Tcl_AppendElement] (C function Tcl_AppendElement).
-func Tcl_AppendElement(interp *raw.Tcl_Interp, element string) {
-	raw.Tcl_AppendElement(interp, element)
-}
-
-// Tcl_AppendExportList calls [raw.Tcl_AppendExportList] (C function Tcl_AppendExportList).
-func Tcl_AppendExportList(interp *raw.Tcl_Interp, nsPtr *raw.Tcl_Namespace, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_AppendExportList(interp, nsPtr, objPtr)
-}
-
-// Tcl_AppendFormatToObj calls [raw.Tcl_AppendFormatToObj] (C function Tcl_AppendFormatToObj).
-func Tcl_AppendFormatToObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, format string, objc int, objv unsafe.Pointer) int {
-	return raw.Tcl_AppendFormatToObj(interp, objPtr, format, objc, objv)
-}
-
-// Tcl_AppendLimitedToObj calls [raw.Tcl_AppendLimitedToObj] (C function Tcl_AppendLimitedToObj).
-func Tcl_AppendLimitedToObj(objPtr *raw.Tcl_Obj, bytes_ string, length int, limit int, ellipsis string) {
-	raw.Tcl_AppendLimitedToObj(objPtr, bytes_, length, limit, ellipsis)
-}
-
-// Tcl_AppendObjToErrorInfo calls [raw.Tcl_AppendObjToErrorInfo] (C function Tcl_AppendObjToErrorInfo).
-func Tcl_AppendObjToErrorInfo(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj) {
-	raw.Tcl_AppendObjToErrorInfo(interp, objPtr)
-}
-
-// Tcl_AppendObjToObj calls [raw.Tcl_AppendObjToObj] (C function Tcl_AppendObjToObj).
-func Tcl_AppendObjToObj(objPtr *raw.Tcl_Obj, appendObjPtr *raw.Tcl_Obj) {
-	raw.Tcl_AppendObjToObj(objPtr, appendObjPtr)
-}
-
-// Tcl_AppendPrintfToObj calls [raw.Tcl_AppendPrintfToObj] (C function Tcl_AppendPrintfToObj).
-func Tcl_AppendPrintfToObj(objPtr *raw.Tcl_Obj, format string) {
-	raw.Tcl_AppendPrintfToObj(objPtr, format)
-}
-
-// Tcl_AppendResultVA calls [raw.Tcl_AppendResultVA] (C function Tcl_AppendResultVA).
-func Tcl_AppendResultVA(interp *raw.Tcl_Interp, argList string) {
-	raw.Tcl_AppendResultVA(interp, argList)
-}
-
-// Tcl_AppendStringsToObjVA calls [raw.Tcl_AppendStringsToObjVA] (C function Tcl_AppendStringsToObjVA).
-func Tcl_AppendStringsToObjVA(objPtr *raw.Tcl_Obj, argList string) {
-	raw.Tcl_AppendStringsToObjVA(objPtr, argList)
-}
-
-// Tcl_AppendToObj calls [raw.Tcl_AppendToObj] (C function Tcl_AppendToObj).
-func Tcl_AppendToObj(objPtr *raw.Tcl_Obj, bytes_ string, length int) {
-	raw.Tcl_AppendToObj(objPtr, bytes_, length)
-}
-
-// Tcl_AppendUnicodeToObj calls [raw.Tcl_AppendUnicodeToObj] (C function Tcl_AppendUnicodeToObj).
-func Tcl_AppendUnicodeToObj(objPtr *raw.Tcl_Obj, unicode *uint16, length int) {
-	raw.Tcl_AppendUnicodeToObj(objPtr, unicode, length)
-}
-
-// Tcl_AsyncCreate calls [raw.Tcl_AsyncCreate] (C function Tcl_AsyncCreate).
-func Tcl_AsyncCreate(proc unsafe.Pointer, clientData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_AsyncCreate(proc, clientData)
-}
-
-// Tcl_AsyncDelete calls [raw.Tcl_AsyncDelete] (C function Tcl_AsyncDelete).
-func Tcl_AsyncDelete(async unsafe.Pointer) {
-	raw.Tcl_AsyncDelete(async)
-}
-
-// Tcl_AsyncInvoke calls [raw.Tcl_AsyncInvoke] (C function Tcl_AsyncInvoke).
-func Tcl_AsyncInvoke(interp *raw.Tcl_Interp, code int) int {
-	return raw.Tcl_AsyncInvoke(interp, code)
-}
-
-// Tcl_AsyncMark calls [raw.Tcl_AsyncMark] (C function Tcl_AsyncMark).
-func Tcl_AsyncMark(async unsafe.Pointer) {
-	raw.Tcl_AsyncMark(async)
-}
-
-// Tcl_AsyncReady calls [raw.Tcl_AsyncReady] (C function Tcl_AsyncReady).
+// Tcl_AsyncReady calls the Tcl framework function Tcl_AsyncReady.
 func Tcl_AsyncReady() int {
-	return raw.Tcl_AsyncReady()
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AsyncReady == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AsyncReady, _lib, "Tcl_AsyncReady")
+	}
+	return _fnTcl_AsyncReady()
 }
 
-// Tcl_AttemptAlloc calls [raw.Tcl_AttemptAlloc] (C function Tcl_AttemptAlloc).
-func Tcl_AttemptAlloc(size uint) string {
-	return raw.Tcl_AttemptAlloc(size)
+var _fnTcl_AttemptAlloc func(int) string
+
+// Tcl_AttemptAlloc calls the Tcl framework function Tcl_AttemptAlloc.
+func Tcl_AttemptAlloc(size int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AttemptAlloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AttemptAlloc, _lib, "Tcl_AttemptAlloc")
+	}
+	return _fnTcl_AttemptAlloc(size)
 }
 
-// Tcl_AttemptDbCkalloc calls [raw.Tcl_AttemptDbCkalloc] (C function Tcl_AttemptDbCkalloc).
-func Tcl_AttemptDbCkalloc(size uint, file string, line int) string {
-	return raw.Tcl_AttemptDbCkalloc(size, file, line)
+var _fnTcl_AttemptDbCkalloc func(int, string, int) string
+
+// Tcl_AttemptDbCkalloc calls the Tcl framework function Tcl_AttemptDbCkalloc.
+func Tcl_AttemptDbCkalloc(size int, file string, line int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AttemptDbCkalloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AttemptDbCkalloc, _lib, "Tcl_AttemptDbCkalloc")
+	}
+	return _fnTcl_AttemptDbCkalloc(size, file, line)
 }
 
-// Tcl_AttemptDbCkrealloc calls [raw.Tcl_AttemptDbCkrealloc] (C function Tcl_AttemptDbCkrealloc).
-func Tcl_AttemptDbCkrealloc(ptr string, size uint, file string, line int) string {
-	return raw.Tcl_AttemptDbCkrealloc(ptr, size, file, line)
+var _fnTcl_AttemptDbCkrealloc func(string, int, string, int) string
+
+// Tcl_AttemptDbCkrealloc calls the Tcl framework function Tcl_AttemptDbCkrealloc.
+func Tcl_AttemptDbCkrealloc(ptr string, size int, file string, line int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AttemptDbCkrealloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AttemptDbCkrealloc, _lib, "Tcl_AttemptDbCkrealloc")
+	}
+	return _fnTcl_AttemptDbCkrealloc(ptr, size, file, line)
 }
 
-// Tcl_AttemptRealloc calls [raw.Tcl_AttemptRealloc] (C function Tcl_AttemptRealloc).
-func Tcl_AttemptRealloc(ptr string, size uint) string {
-	return raw.Tcl_AttemptRealloc(ptr, size)
+var _fnTcl_AttemptRealloc func(string, int) string
+
+// Tcl_AttemptRealloc calls the Tcl framework function Tcl_AttemptRealloc.
+func Tcl_AttemptRealloc(ptr string, size int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AttemptRealloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AttemptRealloc, _lib, "Tcl_AttemptRealloc")
+	}
+	return _fnTcl_AttemptRealloc(ptr, size)
 }
 
-// Tcl_AttemptSetObjLength calls [raw.Tcl_AttemptSetObjLength] (C function Tcl_AttemptSetObjLength).
-func Tcl_AttemptSetObjLength(objPtr *raw.Tcl_Obj, length int) int {
-	return raw.Tcl_AttemptSetObjLength(objPtr, length)
+var _fnTcl_ChannelBuffered func(objc.ID) int
+
+// Tcl_ChannelBuffered calls the Tcl framework function Tcl_ChannelBuffered.
+func Tcl_ChannelBuffered(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelBuffered == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelBuffered, _lib, "Tcl_ChannelBuffered")
+	}
+	return _fnTcl_ChannelBuffered(objref.IDOf(chan_))
 }
 
-// Tcl_BackgroundError calls [raw.Tcl_BackgroundError] (C function Tcl_BackgroundError).
-func Tcl_BackgroundError(interp *raw.Tcl_Interp) {
-	raw.Tcl_BackgroundError(interp)
-}
+var _fnTcl_Chdir func(string) int
 
-// Tcl_Backslash calls [raw.Tcl_Backslash] (C function Tcl_Backslash).
-func Tcl_Backslash(src string, readPtr *int32) int8 {
-	return raw.Tcl_Backslash(src, readPtr)
-}
-
-// Tcl_BadChannelOption calls [raw.Tcl_BadChannelOption] (C function Tcl_BadChannelOption).
-func Tcl_BadChannelOption(interp *raw.Tcl_Interp, optionName string, optionList string) int {
-	return raw.Tcl_BadChannelOption(interp, optionName, optionList)
-}
-
-// Tcl_CallWhenDeleted calls [raw.Tcl_CallWhenDeleted] (C function Tcl_CallWhenDeleted).
-func Tcl_CallWhenDeleted(interp *raw.Tcl_Interp, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CallWhenDeleted(interp, proc, clientData)
-}
-
-// Tcl_CancelIdleCall calls [raw.Tcl_CancelIdleCall] (C function Tcl_CancelIdleCall).
-func Tcl_CancelIdleCall(idleProc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CancelIdleCall(idleProc, clientData)
-}
-
-// Tcl_ChannelBlockModeProc calls [raw.Tcl_ChannelBlockModeProc] (C function Tcl_ChannelBlockModeProc).
-func Tcl_ChannelBlockModeProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelBlockModeProc(chanTypePtr)
-}
-
-// Tcl_ChannelBuffered calls [raw.Tcl_ChannelBuffered] (C function Tcl_ChannelBuffered).
-func Tcl_ChannelBuffered(chan_ unsafe.Pointer) int {
-	return raw.Tcl_ChannelBuffered(chan_)
-}
-
-// Tcl_ChannelClose2Proc calls [raw.Tcl_ChannelClose2Proc] (C function Tcl_ChannelClose2Proc).
-func Tcl_ChannelClose2Proc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelClose2Proc(chanTypePtr)
-}
-
-// Tcl_ChannelCloseProc calls [raw.Tcl_ChannelCloseProc] (C function Tcl_ChannelCloseProc).
-func Tcl_ChannelCloseProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelCloseProc(chanTypePtr)
-}
-
-// Tcl_ChannelFlushProc calls [raw.Tcl_ChannelFlushProc] (C function Tcl_ChannelFlushProc).
-func Tcl_ChannelFlushProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelFlushProc(chanTypePtr)
-}
-
-// Tcl_ChannelGetHandleProc calls [raw.Tcl_ChannelGetHandleProc] (C function Tcl_ChannelGetHandleProc).
-func Tcl_ChannelGetHandleProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelGetHandleProc(chanTypePtr)
-}
-
-// Tcl_ChannelGetOptionProc calls [raw.Tcl_ChannelGetOptionProc] (C function Tcl_ChannelGetOptionProc).
-func Tcl_ChannelGetOptionProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelGetOptionProc(chanTypePtr)
-}
-
-// Tcl_ChannelHandlerProc calls [raw.Tcl_ChannelHandlerProc] (C function Tcl_ChannelHandlerProc).
-func Tcl_ChannelHandlerProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelHandlerProc(chanTypePtr)
-}
-
-// Tcl_ChannelInputProc calls [raw.Tcl_ChannelInputProc] (C function Tcl_ChannelInputProc).
-func Tcl_ChannelInputProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelInputProc(chanTypePtr)
-}
-
-// Tcl_ChannelName calls [raw.Tcl_ChannelName] (C function Tcl_ChannelName).
-func Tcl_ChannelName(chanTypePtr *raw.Tcl_ChannelType) string {
-	return raw.Tcl_ChannelName(chanTypePtr)
-}
-
-// Tcl_ChannelOutputProc calls [raw.Tcl_ChannelOutputProc] (C function Tcl_ChannelOutputProc).
-func Tcl_ChannelOutputProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelOutputProc(chanTypePtr)
-}
-
-// Tcl_ChannelSeekProc calls [raw.Tcl_ChannelSeekProc] (C function Tcl_ChannelSeekProc).
-func Tcl_ChannelSeekProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelSeekProc(chanTypePtr)
-}
-
-// Tcl_ChannelSetOptionProc calls [raw.Tcl_ChannelSetOptionProc] (C function Tcl_ChannelSetOptionProc).
-func Tcl_ChannelSetOptionProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelSetOptionProc(chanTypePtr)
-}
-
-// Tcl_ChannelThreadActionProc calls [raw.Tcl_ChannelThreadActionProc] (C function Tcl_ChannelThreadActionProc).
-func Tcl_ChannelThreadActionProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelThreadActionProc(chanTypePtr)
-}
-
-// Tcl_ChannelTruncateProc calls [raw.Tcl_ChannelTruncateProc] (C function Tcl_ChannelTruncateProc).
-func Tcl_ChannelTruncateProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelTruncateProc(chanTypePtr)
-}
-
-// Tcl_ChannelVersion calls [raw.Tcl_ChannelVersion] (C function Tcl_ChannelVersion).
-func Tcl_ChannelVersion(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelVersion(chanTypePtr)
-}
-
-// Tcl_ChannelWatchProc calls [raw.Tcl_ChannelWatchProc] (C function Tcl_ChannelWatchProc).
-func Tcl_ChannelWatchProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelWatchProc(chanTypePtr)
-}
-
-// Tcl_ChannelWideSeekProc calls [raw.Tcl_ChannelWideSeekProc] (C function Tcl_ChannelWideSeekProc).
-func Tcl_ChannelWideSeekProc(chanTypePtr *raw.Tcl_ChannelType) unsafe.Pointer {
-	return raw.Tcl_ChannelWideSeekProc(chanTypePtr)
-}
-
-// Tcl_Chdir calls [raw.Tcl_Chdir] (C function Tcl_Chdir).
+// Tcl_Chdir calls the Tcl framework function Tcl_Chdir.
 func Tcl_Chdir(dirName string) int {
-	return raw.Tcl_Chdir(dirName)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Chdir == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Chdir, _lib, "Tcl_Chdir")
+	}
+	return _fnTcl_Chdir(dirName)
 }
 
-// Tcl_ClearChannelHandlers calls [raw.Tcl_ClearChannelHandlers] (C function Tcl_ClearChannelHandlers).
-func Tcl_ClearChannelHandlers(channel unsafe.Pointer) {
-	raw.Tcl_ClearChannelHandlers(channel)
+var _fnTcl_ClearChannelHandlers func(objc.ID)
+
+// Tcl_ClearChannelHandlers calls the Tcl framework function Tcl_ClearChannelHandlers.
+func Tcl_ClearChannelHandlers(channel obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ClearChannelHandlers == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ClearChannelHandlers, _lib, "Tcl_ClearChannelHandlers")
+	}
+	_fnTcl_ClearChannelHandlers(objref.IDOf(channel))
 }
 
-// Tcl_Close calls [raw.Tcl_Close] (C function Tcl_Close).
-func Tcl_Close(interp *raw.Tcl_Interp, chan_ unsafe.Pointer) int {
-	return raw.Tcl_Close(interp, chan_)
-}
+var _fnTcl_CommandComplete func(string) int
 
-// Tcl_CommandComplete calls [raw.Tcl_CommandComplete] (C function Tcl_CommandComplete).
+// Tcl_CommandComplete calls the Tcl framework function Tcl_CommandComplete.
 func Tcl_CommandComplete(cmd string) int {
-	return raw.Tcl_CommandComplete(cmd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CommandComplete == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CommandComplete, _lib, "Tcl_CommandComplete")
+	}
+	return _fnTcl_CommandComplete(cmd)
 }
 
-// Tcl_CommandTraceInfo calls [raw.Tcl_CommandTraceInfo] (C function Tcl_CommandTraceInfo).
-func Tcl_CommandTraceInfo(interp *raw.Tcl_Interp, varName string, flags int, procPtr unsafe.Pointer, prevClientData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_CommandTraceInfo(interp, varName, flags, procPtr, prevClientData)
-}
+var _fnTcl_ConvertCountedElement func(string, int, string, int) int
 
-// Tcl_Concat calls [raw.Tcl_Concat] (C function Tcl_Concat).
-func Tcl_Concat(argc int, argv unsafe.Pointer) string {
-	return raw.Tcl_Concat(argc, argv)
-}
-
-// Tcl_ConcatObj calls [raw.Tcl_ConcatObj] (C function Tcl_ConcatObj).
-func Tcl_ConcatObj(objc int, objv unsafe.Pointer) *raw.Tcl_Obj {
-	return raw.Tcl_ConcatObj(objc, objv)
-}
-
-// Tcl_ConditionFinalize calls [raw.Tcl_ConditionFinalize] (C function Tcl_ConditionFinalize).
-func Tcl_ConditionFinalize(condPtr unsafe.Pointer) {
-	raw.Tcl_ConditionFinalize(condPtr)
-}
-
-// Tcl_ConditionNotify calls [raw.Tcl_ConditionNotify] (C function Tcl_ConditionNotify).
-func Tcl_ConditionNotify(condPtr unsafe.Pointer) {
-	raw.Tcl_ConditionNotify(condPtr)
-}
-
-// Tcl_ConditionWait calls [raw.Tcl_ConditionWait] (C function Tcl_ConditionWait).
-func Tcl_ConditionWait(condPtr unsafe.Pointer, mutexPtr unsafe.Pointer, timePtr *raw.Tcl_Time) {
-	raw.Tcl_ConditionWait(condPtr, mutexPtr, timePtr)
-}
-
-// Tcl_ConvertCountedElement calls [raw.Tcl_ConvertCountedElement] (C function Tcl_ConvertCountedElement).
+// Tcl_ConvertCountedElement calls the Tcl framework function Tcl_ConvertCountedElement.
 func Tcl_ConvertCountedElement(src string, length int, dst string, flags int) int {
-	return raw.Tcl_ConvertCountedElement(src, length, dst, flags)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ConvertCountedElement == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ConvertCountedElement, _lib, "Tcl_ConvertCountedElement")
+	}
+	return _fnTcl_ConvertCountedElement(src, length, dst, flags)
 }
 
-// Tcl_ConvertElement calls [raw.Tcl_ConvertElement] (C function Tcl_ConvertElement).
+var _fnTcl_ConvertElement func(string, string, int) int
+
+// Tcl_ConvertElement calls the Tcl framework function Tcl_ConvertElement.
 func Tcl_ConvertElement(src string, dst string, flags int) int {
-	return raw.Tcl_ConvertElement(src, dst, flags)
-}
-
-// Tcl_ConvertToType calls [raw.Tcl_ConvertToType] (C function Tcl_ConvertToType).
-func Tcl_ConvertToType(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, typePtr *raw.Tcl_ObjType) int {
-	return raw.Tcl_ConvertToType(interp, objPtr, typePtr)
-}
-
-// Tcl_CreateAlias calls [raw.Tcl_CreateAlias] (C function Tcl_CreateAlias).
-func Tcl_CreateAlias(slave *raw.Tcl_Interp, slaveCmd string, target *raw.Tcl_Interp, targetCmd string, argc int, argv unsafe.Pointer) int {
-	return raw.Tcl_CreateAlias(slave, slaveCmd, target, targetCmd, argc, argv)
-}
-
-// Tcl_CreateAliasObj calls [raw.Tcl_CreateAliasObj] (C function Tcl_CreateAliasObj).
-func Tcl_CreateAliasObj(slave *raw.Tcl_Interp, slaveCmd string, target *raw.Tcl_Interp, targetCmd string, objc int, objv unsafe.Pointer) int {
-	return raw.Tcl_CreateAliasObj(slave, slaveCmd, target, targetCmd, objc, objv)
-}
-
-// Tcl_CreateChannel calls [raw.Tcl_CreateChannel] (C function Tcl_CreateChannel).
-func Tcl_CreateChannel(typePtr *raw.Tcl_ChannelType, chanName string, instanceData unsafe.Pointer, mask int) unsafe.Pointer {
-	return raw.Tcl_CreateChannel(typePtr, chanName, instanceData, mask)
-}
-
-// Tcl_CreateChannelHandler calls [raw.Tcl_CreateChannelHandler] (C function Tcl_CreateChannelHandler).
-func Tcl_CreateChannelHandler(chan_ unsafe.Pointer, mask int, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateChannelHandler(chan_, mask, proc, clientData)
-}
-
-// Tcl_CreateCloseHandler calls [raw.Tcl_CreateCloseHandler] (C function Tcl_CreateCloseHandler).
-func Tcl_CreateCloseHandler(chan_ unsafe.Pointer, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateCloseHandler(chan_, proc, clientData)
-}
-
-// Tcl_CreateCommand calls [raw.Tcl_CreateCommand] (C function Tcl_CreateCommand).
-func Tcl_CreateCommand(interp *raw.Tcl_Interp, cmdName string, proc unsafe.Pointer, clientData unsafe.Pointer, deleteProc unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_CreateCommand(interp, cmdName, proc, clientData, deleteProc)
-}
-
-// Tcl_CreateEncoding calls [raw.Tcl_CreateEncoding] (C function Tcl_CreateEncoding).
-func Tcl_CreateEncoding(typePtr *raw.Tcl_EncodingType) unsafe.Pointer {
-	return raw.Tcl_CreateEncoding(typePtr)
-}
-
-// Tcl_CreateEnsemble calls [raw.Tcl_CreateEnsemble] (C function Tcl_CreateEnsemble).
-func Tcl_CreateEnsemble(interp *raw.Tcl_Interp, name string, namespacePtr *raw.Tcl_Namespace, flags int) unsafe.Pointer {
-	return raw.Tcl_CreateEnsemble(interp, name, namespacePtr, flags)
-}
-
-// Tcl_CreateEventSource calls [raw.Tcl_CreateEventSource] (C function Tcl_CreateEventSource).
-func Tcl_CreateEventSource(setupProc unsafe.Pointer, checkProc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateEventSource(setupProc, checkProc, clientData)
-}
-
-// Tcl_CreateExitHandler calls [raw.Tcl_CreateExitHandler] (C function Tcl_CreateExitHandler).
-func Tcl_CreateExitHandler(proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateExitHandler(proc, clientData)
-}
-
-// Tcl_CreateFileHandler calls [raw.Tcl_CreateFileHandler] (C function Tcl_CreateFileHandler).
-func Tcl_CreateFileHandler(fd int, mask int, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateFileHandler(fd, mask, proc, clientData)
-}
-
-// Tcl_CreateHashEntry calls [raw.Tcl_CreateHashEntry] (C function Tcl_CreateHashEntry).
-func Tcl_CreateHashEntry(tablePtr *raw.Tcl_HashTable, key string, newPtr *int32) *raw.Tcl_HashEntry {
-	return raw.Tcl_CreateHashEntry(tablePtr, key, newPtr)
-}
-
-// Tcl_CreateInterp calls [raw.Tcl_CreateInterp] (C function Tcl_CreateInterp).
-func Tcl_CreateInterp() *raw.Tcl_Interp {
-	return raw.Tcl_CreateInterp()
-}
-
-// Tcl_CreateMathFunc calls [raw.Tcl_CreateMathFunc] (C function Tcl_CreateMathFunc).
-func Tcl_CreateMathFunc(interp *raw.Tcl_Interp, name string, numArgs int, argTypes *Tcl_ValueType, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	var _argTypes raw.Tcl_ValueType
-	raw.Tcl_CreateMathFunc(interp, name, numArgs, &_argTypes, proc, clientData)
-	if argTypes != nil {
-		*argTypes = Tcl_ValueType(_argTypes)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ConvertElement == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ConvertElement, _lib, "Tcl_ConvertElement")
 	}
-
+	return _fnTcl_ConvertElement(src, dst, flags)
 }
 
-// Tcl_CreateNamespace calls [raw.Tcl_CreateNamespace] (C function Tcl_CreateNamespace).
-func Tcl_CreateNamespace(interp *raw.Tcl_Interp, name string, clientData unsafe.Pointer, deleteProc unsafe.Pointer) *raw.Tcl_Namespace {
-	return raw.Tcl_CreateNamespace(interp, name, clientData, deleteProc)
+var _fnTcl_CutChannel func(objc.ID)
+
+// Tcl_CutChannel calls the Tcl framework function Tcl_CutChannel.
+func Tcl_CutChannel(channel obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CutChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CutChannel, _lib, "Tcl_CutChannel")
+	}
+	_fnTcl_CutChannel(objref.IDOf(channel))
 }
 
-// Tcl_CreateObjCommand calls [raw.Tcl_CreateObjCommand] (C function Tcl_CreateObjCommand).
-func Tcl_CreateObjCommand(interp *raw.Tcl_Interp, cmdName string, proc unsafe.Pointer, clientData unsafe.Pointer, deleteProc unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_CreateObjCommand(interp, cmdName, proc, clientData, deleteProc)
+var _fnTcl_DbCkalloc func(int, string, int) string
+
+// Tcl_DbCkalloc calls the Tcl framework function Tcl_DbCkalloc.
+func Tcl_DbCkalloc(size int, file string, line int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbCkalloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbCkalloc, _lib, "Tcl_DbCkalloc")
+	}
+	return _fnTcl_DbCkalloc(size, file, line)
 }
 
-// Tcl_CreateObjTrace calls [raw.Tcl_CreateObjTrace] (C function Tcl_CreateObjTrace).
-func Tcl_CreateObjTrace(interp *raw.Tcl_Interp, level int, flags int, objProc unsafe.Pointer, clientData unsafe.Pointer, delProc unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_CreateObjTrace(interp, level, flags, objProc, clientData, delProc)
-}
+var _fnTcl_DbCkfree func(string, string, int) int
 
-// Tcl_CreateSlave calls [raw.Tcl_CreateSlave] (C function Tcl_CreateSlave).
-func Tcl_CreateSlave(interp *raw.Tcl_Interp, slaveName string, isSafe int) *raw.Tcl_Interp {
-	return raw.Tcl_CreateSlave(interp, slaveName, isSafe)
-}
-
-// Tcl_CreateThread calls [raw.Tcl_CreateThread] (C function Tcl_CreateThread).
-func Tcl_CreateThread(idPtr unsafe.Pointer, proc unsafe.Pointer, clientData unsafe.Pointer, stackSize int, flags int) int {
-	return raw.Tcl_CreateThread(idPtr, proc, clientData, stackSize, flags)
-}
-
-// Tcl_CreateThreadExitHandler calls [raw.Tcl_CreateThreadExitHandler] (C function Tcl_CreateThreadExitHandler).
-func Tcl_CreateThreadExitHandler(proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateThreadExitHandler(proc, clientData)
-}
-
-// Tcl_CreateTimerHandler calls [raw.Tcl_CreateTimerHandler] (C function Tcl_CreateTimerHandler).
-func Tcl_CreateTimerHandler(milliseconds int, proc unsafe.Pointer, clientData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_CreateTimerHandler(milliseconds, proc, clientData)
-}
-
-// Tcl_CreateTrace calls [raw.Tcl_CreateTrace] (C function Tcl_CreateTrace).
-func Tcl_CreateTrace(interp *raw.Tcl_Interp, level int, proc unsafe.Pointer, clientData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_CreateTrace(interp, level, proc, clientData)
-}
-
-// Tcl_CutChannel calls [raw.Tcl_CutChannel] (C function Tcl_CutChannel).
-func Tcl_CutChannel(channel unsafe.Pointer) {
-	raw.Tcl_CutChannel(channel)
-}
-
-// Tcl_DStringAppend calls [raw.Tcl_DStringAppend] (C function Tcl_DStringAppend).
-func Tcl_DStringAppend(dsPtr *raw.Tcl_DString, bytes_ string, length int) string {
-	return raw.Tcl_DStringAppend(dsPtr, bytes_, length)
-}
-
-// Tcl_DStringAppendElement calls [raw.Tcl_DStringAppendElement] (C function Tcl_DStringAppendElement).
-func Tcl_DStringAppendElement(dsPtr *raw.Tcl_DString, element string) string {
-	return raw.Tcl_DStringAppendElement(dsPtr, element)
-}
-
-// Tcl_DStringEndSublist calls [raw.Tcl_DStringEndSublist] (C function Tcl_DStringEndSublist).
-func Tcl_DStringEndSublist(dsPtr *raw.Tcl_DString) {
-	raw.Tcl_DStringEndSublist(dsPtr)
-}
-
-// Tcl_DStringFree calls [raw.Tcl_DStringFree] (C function Tcl_DStringFree).
-func Tcl_DStringFree(dsPtr *raw.Tcl_DString) {
-	raw.Tcl_DStringFree(dsPtr)
-}
-
-// Tcl_DStringGetResult calls [raw.Tcl_DStringGetResult] (C function Tcl_DStringGetResult).
-func Tcl_DStringGetResult(interp *raw.Tcl_Interp, dsPtr *raw.Tcl_DString) {
-	raw.Tcl_DStringGetResult(interp, dsPtr)
-}
-
-// Tcl_DStringInit calls [raw.Tcl_DStringInit] (C function Tcl_DStringInit).
-func Tcl_DStringInit(dsPtr *raw.Tcl_DString) {
-	raw.Tcl_DStringInit(dsPtr)
-}
-
-// Tcl_DStringResult calls [raw.Tcl_DStringResult] (C function Tcl_DStringResult).
-func Tcl_DStringResult(interp *raw.Tcl_Interp, dsPtr *raw.Tcl_DString) {
-	raw.Tcl_DStringResult(interp, dsPtr)
-}
-
-// Tcl_DStringSetLength calls [raw.Tcl_DStringSetLength] (C function Tcl_DStringSetLength).
-func Tcl_DStringSetLength(dsPtr *raw.Tcl_DString, length int) {
-	raw.Tcl_DStringSetLength(dsPtr, length)
-}
-
-// Tcl_DStringStartSublist calls [raw.Tcl_DStringStartSublist] (C function Tcl_DStringStartSublist).
-func Tcl_DStringStartSublist(dsPtr *raw.Tcl_DString) {
-	raw.Tcl_DStringStartSublist(dsPtr)
-}
-
-// Tcl_DbCkalloc calls [raw.Tcl_DbCkalloc] (C function Tcl_DbCkalloc).
-func Tcl_DbCkalloc(size uint, file string, line int) string {
-	return raw.Tcl_DbCkalloc(size, file, line)
-}
-
-// Tcl_DbCkfree calls [raw.Tcl_DbCkfree] (C function Tcl_DbCkfree).
+// Tcl_DbCkfree calls the Tcl framework function Tcl_DbCkfree.
 func Tcl_DbCkfree(ptr string, file string, line int) int {
-	return raw.Tcl_DbCkfree(ptr, file, line)
-}
-
-// Tcl_DbCkrealloc calls [raw.Tcl_DbCkrealloc] (C function Tcl_DbCkrealloc).
-func Tcl_DbCkrealloc(ptr string, size uint, file string, line int) string {
-	return raw.Tcl_DbCkrealloc(ptr, size, file, line)
-}
-
-// Tcl_DbDecrRefCount calls [raw.Tcl_DbDecrRefCount] (C function Tcl_DbDecrRefCount).
-func Tcl_DbDecrRefCount(objPtr *raw.Tcl_Obj, file string, line int) {
-	raw.Tcl_DbDecrRefCount(objPtr, file, line)
-}
-
-// Tcl_DbIncrRefCount calls [raw.Tcl_DbIncrRefCount] (C function Tcl_DbIncrRefCount).
-func Tcl_DbIncrRefCount(objPtr *raw.Tcl_Obj, file string, line int) {
-	raw.Tcl_DbIncrRefCount(objPtr, file, line)
-}
-
-// Tcl_DbIsShared calls [raw.Tcl_DbIsShared] (C function Tcl_DbIsShared).
-func Tcl_DbIsShared(objPtr *raw.Tcl_Obj, file string, line int) int {
-	return raw.Tcl_DbIsShared(objPtr, file, line)
-}
-
-// Tcl_DbNewBignumObj calls [raw.Tcl_DbNewBignumObj] (C function Tcl_DbNewBignumObj).
-func Tcl_DbNewBignumObj(value unsafe.Pointer, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewBignumObj(value, file, line)
-}
-
-// Tcl_DbNewBooleanObj calls [raw.Tcl_DbNewBooleanObj] (C function Tcl_DbNewBooleanObj).
-func Tcl_DbNewBooleanObj(boolValue int, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewBooleanObj(boolValue, file, line)
-}
-
-// Tcl_DbNewByteArrayObj calls [raw.Tcl_DbNewByteArrayObj] (C function Tcl_DbNewByteArrayObj).
-func Tcl_DbNewByteArrayObj(bytes_ *uint8, length int, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewByteArrayObj(bytes_, length, file, line)
-}
-
-// Tcl_DbNewDictObj calls [raw.Tcl_DbNewDictObj] (C function Tcl_DbNewDictObj).
-func Tcl_DbNewDictObj(file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewDictObj(file, line)
-}
-
-// Tcl_DbNewDoubleObj calls [raw.Tcl_DbNewDoubleObj] (C function Tcl_DbNewDoubleObj).
-func Tcl_DbNewDoubleObj(doubleValue float64, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewDoubleObj(doubleValue, file, line)
-}
-
-// Tcl_DbNewListObj calls [raw.Tcl_DbNewListObj] (C function Tcl_DbNewListObj).
-func Tcl_DbNewListObj(objc int, objv unsafe.Pointer, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewListObj(objc, objv, file, line)
-}
-
-// Tcl_DbNewLongObj calls [raw.Tcl_DbNewLongObj] (C function Tcl_DbNewLongObj).
-func Tcl_DbNewLongObj(longValue int, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewLongObj(longValue, file, line)
-}
-
-// Tcl_DbNewObj calls [raw.Tcl_DbNewObj] (C function Tcl_DbNewObj).
-func Tcl_DbNewObj(file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewObj(file, line)
-}
-
-// Tcl_DbNewStringObj calls [raw.Tcl_DbNewStringObj] (C function Tcl_DbNewStringObj).
-func Tcl_DbNewStringObj(bytes_ string, length int, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewStringObj(bytes_, length, file, line)
-}
-
-// Tcl_DbNewWideIntObj calls [raw.Tcl_DbNewWideIntObj] (C function Tcl_DbNewWideIntObj).
-func Tcl_DbNewWideIntObj(wideValue int, file string, line int) *raw.Tcl_Obj {
-	return raw.Tcl_DbNewWideIntObj(wideValue, file, line)
-}
-
-// Tcl_DecrRefCount calls [raw.Tcl_DecrRefCount] (C function Tcl_DecrRefCount).
-func Tcl_DecrRefCount(objPtr *raw.Tcl_Obj) {
-	raw.Tcl_DecrRefCount(objPtr)
-}
-
-// Tcl_DeleteAssocData calls [raw.Tcl_DeleteAssocData] (C function Tcl_DeleteAssocData).
-func Tcl_DeleteAssocData(interp *raw.Tcl_Interp, name string) {
-	raw.Tcl_DeleteAssocData(interp, name)
-}
-
-// Tcl_DeleteChannelHandler calls [raw.Tcl_DeleteChannelHandler] (C function Tcl_DeleteChannelHandler).
-func Tcl_DeleteChannelHandler(chan_ unsafe.Pointer, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DeleteChannelHandler(chan_, proc, clientData)
-}
-
-// Tcl_DeleteCloseHandler calls [raw.Tcl_DeleteCloseHandler] (C function Tcl_DeleteCloseHandler).
-func Tcl_DeleteCloseHandler(chan_ unsafe.Pointer, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DeleteCloseHandler(chan_, proc, clientData)
-}
-
-// Tcl_DeleteCommand calls [raw.Tcl_DeleteCommand] (C function Tcl_DeleteCommand).
-func Tcl_DeleteCommand(interp *raw.Tcl_Interp, cmdName string) int {
-	return raw.Tcl_DeleteCommand(interp, cmdName)
-}
-
-// Tcl_DeleteCommandFromToken calls [raw.Tcl_DeleteCommandFromToken] (C function Tcl_DeleteCommandFromToken).
-func Tcl_DeleteCommandFromToken(interp *raw.Tcl_Interp, command unsafe.Pointer) int {
-	return raw.Tcl_DeleteCommandFromToken(interp, command)
-}
-
-// Tcl_DeleteEventSource calls [raw.Tcl_DeleteEventSource] (C function Tcl_DeleteEventSource).
-func Tcl_DeleteEventSource(setupProc unsafe.Pointer, checkProc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DeleteEventSource(setupProc, checkProc, clientData)
-}
-
-// Tcl_DeleteEvents calls [raw.Tcl_DeleteEvents] (C function Tcl_DeleteEvents).
-func Tcl_DeleteEvents(proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DeleteEvents(proc, clientData)
-}
-
-// Tcl_DeleteExitHandler calls [raw.Tcl_DeleteExitHandler] (C function Tcl_DeleteExitHandler).
-func Tcl_DeleteExitHandler(proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DeleteExitHandler(proc, clientData)
-}
-
-// Tcl_DeleteFileHandler calls [raw.Tcl_DeleteFileHandler] (C function Tcl_DeleteFileHandler).
-func Tcl_DeleteFileHandler(fd int) {
-	raw.Tcl_DeleteFileHandler(fd)
-}
-
-// Tcl_DeleteHashEntry calls [raw.Tcl_DeleteHashEntry] (C function Tcl_DeleteHashEntry).
-func Tcl_DeleteHashEntry(entryPtr *raw.Tcl_HashEntry) {
-	raw.Tcl_DeleteHashEntry(entryPtr)
-}
-
-// Tcl_DeleteHashTable calls [raw.Tcl_DeleteHashTable] (C function Tcl_DeleteHashTable).
-func Tcl_DeleteHashTable(tablePtr *raw.Tcl_HashTable) {
-	raw.Tcl_DeleteHashTable(tablePtr)
-}
-
-// Tcl_DeleteInterp calls [raw.Tcl_DeleteInterp] (C function Tcl_DeleteInterp).
-func Tcl_DeleteInterp(interp *raw.Tcl_Interp) {
-	raw.Tcl_DeleteInterp(interp)
-}
-
-// Tcl_DeleteNamespace calls [raw.Tcl_DeleteNamespace] (C function Tcl_DeleteNamespace).
-func Tcl_DeleteNamespace(nsPtr *raw.Tcl_Namespace) {
-	raw.Tcl_DeleteNamespace(nsPtr)
-}
-
-// Tcl_DeleteThreadExitHandler calls [raw.Tcl_DeleteThreadExitHandler] (C function Tcl_DeleteThreadExitHandler).
-func Tcl_DeleteThreadExitHandler(proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DeleteThreadExitHandler(proc, clientData)
-}
-
-// Tcl_DeleteTimerHandler calls [raw.Tcl_DeleteTimerHandler] (C function Tcl_DeleteTimerHandler).
-func Tcl_DeleteTimerHandler(token unsafe.Pointer) {
-	raw.Tcl_DeleteTimerHandler(token)
-}
-
-// Tcl_DeleteTrace calls [raw.Tcl_DeleteTrace] (C function Tcl_DeleteTrace).
-func Tcl_DeleteTrace(interp *raw.Tcl_Interp, trace unsafe.Pointer) {
-	raw.Tcl_DeleteTrace(interp, trace)
-}
-
-// Tcl_DetachChannel calls [raw.Tcl_DetachChannel] (C function Tcl_DetachChannel).
-func Tcl_DetachChannel(interp *raw.Tcl_Interp, channel unsafe.Pointer) int {
-	return raw.Tcl_DetachChannel(interp, channel)
-}
-
-// Tcl_DetachPids calls [raw.Tcl_DetachPids] (C function Tcl_DetachPids).
-func Tcl_DetachPids(numPids int, pidPtr unsafe.Pointer) {
-	raw.Tcl_DetachPids(numPids, pidPtr)
-}
-
-// Tcl_DictObjDone calls [raw.Tcl_DictObjDone] (C function Tcl_DictObjDone).
-func Tcl_DictObjDone(searchPtr *raw.Tcl_DictSearch) {
-	raw.Tcl_DictObjDone(searchPtr)
-}
-
-// Tcl_DictObjFirst calls [raw.Tcl_DictObjFirst] (C function Tcl_DictObjFirst).
-func Tcl_DictObjFirst(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, searchPtr *raw.Tcl_DictSearch, keyPtrPtr *raw.Tcl_Obj, valuePtrPtr *raw.Tcl_Obj, donePtr *int32) int {
-	return raw.Tcl_DictObjFirst(interp, dictPtr, searchPtr, keyPtrPtr, valuePtrPtr, donePtr)
-}
-
-// Tcl_DictObjGet calls [raw.Tcl_DictObjGet] (C function Tcl_DictObjGet).
-func Tcl_DictObjGet(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, keyPtr *raw.Tcl_Obj, valuePtrPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_DictObjGet(interp, dictPtr, keyPtr, valuePtrPtr)
-}
-
-// Tcl_DictObjNext calls [raw.Tcl_DictObjNext] (C function Tcl_DictObjNext).
-func Tcl_DictObjNext(searchPtr *raw.Tcl_DictSearch, keyPtrPtr *raw.Tcl_Obj, valuePtrPtr *raw.Tcl_Obj, donePtr *int32) {
-	raw.Tcl_DictObjNext(searchPtr, keyPtrPtr, valuePtrPtr, donePtr)
-}
-
-// Tcl_DictObjPut calls [raw.Tcl_DictObjPut] (C function Tcl_DictObjPut).
-func Tcl_DictObjPut(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, keyPtr *raw.Tcl_Obj, valuePtr *raw.Tcl_Obj) int {
-	return raw.Tcl_DictObjPut(interp, dictPtr, keyPtr, valuePtr)
-}
-
-// Tcl_DictObjPutKeyList calls [raw.Tcl_DictObjPutKeyList] (C function Tcl_DictObjPutKeyList).
-func Tcl_DictObjPutKeyList(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, keyc int, keyv unsafe.Pointer, valuePtr *raw.Tcl_Obj) int {
-	return raw.Tcl_DictObjPutKeyList(interp, dictPtr, keyc, keyv, valuePtr)
-}
-
-// Tcl_DictObjRemove calls [raw.Tcl_DictObjRemove] (C function Tcl_DictObjRemove).
-func Tcl_DictObjRemove(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, keyPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_DictObjRemove(interp, dictPtr, keyPtr)
-}
-
-// Tcl_DictObjRemoveKeyList calls [raw.Tcl_DictObjRemoveKeyList] (C function Tcl_DictObjRemoveKeyList).
-func Tcl_DictObjRemoveKeyList(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, keyc int, keyv unsafe.Pointer) int {
-	return raw.Tcl_DictObjRemoveKeyList(interp, dictPtr, keyc, keyv)
-}
-
-// Tcl_DictObjSize calls [raw.Tcl_DictObjSize] (C function Tcl_DictObjSize).
-func Tcl_DictObjSize(interp *raw.Tcl_Interp, dictPtr *raw.Tcl_Obj, sizePtr *int32) int {
-	return raw.Tcl_DictObjSize(interp, dictPtr, sizePtr)
-}
-
-// Tcl_DiscardInterpState calls [raw.Tcl_DiscardInterpState] (C function Tcl_DiscardInterpState).
-func Tcl_DiscardInterpState(state unsafe.Pointer) {
-	raw.Tcl_DiscardInterpState(state)
-}
-
-// Tcl_DiscardResult calls [raw.Tcl_DiscardResult] (C function Tcl_DiscardResult).
-func Tcl_DiscardResult(statePtr *raw.Tcl_SavedResult) {
-	raw.Tcl_DiscardResult(statePtr)
-}
-
-// Tcl_DoOneEvent calls [raw.Tcl_DoOneEvent] (C function Tcl_DoOneEvent).
-func Tcl_DoOneEvent(flags int) int {
-	return raw.Tcl_DoOneEvent(flags)
-}
-
-// Tcl_DoWhenIdle calls [raw.Tcl_DoWhenIdle] (C function Tcl_DoWhenIdle).
-func Tcl_DoWhenIdle(proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DoWhenIdle(proc, clientData)
-}
-
-// Tcl_DontCallWhenDeleted calls [raw.Tcl_DontCallWhenDeleted] (C function Tcl_DontCallWhenDeleted).
-func Tcl_DontCallWhenDeleted(interp *raw.Tcl_Interp, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_DontCallWhenDeleted(interp, proc, clientData)
-}
-
-// Tcl_DumpActiveMemory calls [raw.Tcl_DumpActiveMemory] (C function Tcl_DumpActiveMemory).
-func Tcl_DumpActiveMemory(fileName string) int {
-	return raw.Tcl_DumpActiveMemory(fileName)
-}
-
-// Tcl_DuplicateObj calls [raw.Tcl_DuplicateObj] (C function Tcl_DuplicateObj).
-func Tcl_DuplicateObj(objPtr *raw.Tcl_Obj) *raw.Tcl_Obj {
-	return raw.Tcl_DuplicateObj(objPtr)
-}
-
-// Tcl_Eof calls [raw.Tcl_Eof] (C function Tcl_Eof).
-func Tcl_Eof(chan_ unsafe.Pointer) int {
-	return raw.Tcl_Eof(chan_)
-}
-
-// Tcl_ErrnoId calls [raw.Tcl_ErrnoId] (C function Tcl_ErrnoId).
-func Tcl_ErrnoId() string {
-	return raw.Tcl_ErrnoId()
-}
-
-// Tcl_ErrnoMsg calls [raw.Tcl_ErrnoMsg] (C function Tcl_ErrnoMsg).
-func Tcl_ErrnoMsg(err int) string {
-	return raw.Tcl_ErrnoMsg(err)
-}
-
-// Tcl_Eval calls [raw.Tcl_Eval] (C function Tcl_Eval).
-func Tcl_Eval(interp *raw.Tcl_Interp, script string) int {
-	return raw.Tcl_Eval(interp, script)
-}
-
-// Tcl_EvalEx calls [raw.Tcl_EvalEx] (C function Tcl_EvalEx).
-func Tcl_EvalEx(interp *raw.Tcl_Interp, script string, numBytes int, flags int) int {
-	return raw.Tcl_EvalEx(interp, script, numBytes, flags)
-}
-
-// Tcl_EvalFile calls [raw.Tcl_EvalFile] (C function Tcl_EvalFile).
-func Tcl_EvalFile(interp *raw.Tcl_Interp, fileName string) int {
-	return raw.Tcl_EvalFile(interp, fileName)
-}
-
-// Tcl_EvalObj calls [raw.Tcl_EvalObj] (C function Tcl_EvalObj).
-func Tcl_EvalObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_EvalObj(interp, objPtr)
-}
-
-// Tcl_EvalObjEx calls [raw.Tcl_EvalObjEx] (C function Tcl_EvalObjEx).
-func Tcl_EvalObjEx(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, flags int) int {
-	return raw.Tcl_EvalObjEx(interp, objPtr, flags)
-}
-
-// Tcl_EvalObjv calls [raw.Tcl_EvalObjv] (C function Tcl_EvalObjv).
-func Tcl_EvalObjv(interp *raw.Tcl_Interp, objc int, objv unsafe.Pointer, flags int) int {
-	return raw.Tcl_EvalObjv(interp, objc, objv, flags)
-}
-
-// Tcl_EvalTokens calls [raw.Tcl_EvalTokens] (C function Tcl_EvalTokens).
-func Tcl_EvalTokens(interp *raw.Tcl_Interp, tokenPtr *raw.Tcl_Token, count int) *raw.Tcl_Obj {
-	return raw.Tcl_EvalTokens(interp, tokenPtr, count)
-}
-
-// Tcl_EvalTokensStandard calls [raw.Tcl_EvalTokensStandard] (C function Tcl_EvalTokensStandard).
-func Tcl_EvalTokensStandard(interp *raw.Tcl_Interp, tokenPtr *raw.Tcl_Token, count int) int {
-	return raw.Tcl_EvalTokensStandard(interp, tokenPtr, count)
-}
-
-// Tcl_EventuallyFree calls [raw.Tcl_EventuallyFree] (C function Tcl_EventuallyFree).
-func Tcl_EventuallyFree(clientData unsafe.Pointer, freeProc unsafe.Pointer) {
-	raw.Tcl_EventuallyFree(clientData, freeProc)
-}
-
-// Tcl_Exit calls [raw.Tcl_Exit] (C function Tcl_Exit).
-func Tcl_Exit(status int) {
-	raw.Tcl_Exit(status)
-}
-
-// Tcl_ExitThread calls [raw.Tcl_ExitThread] (C function Tcl_ExitThread).
-func Tcl_ExitThread(status int) {
-	raw.Tcl_ExitThread(status)
-}
-
-// Tcl_Export calls [raw.Tcl_Export] (C function Tcl_Export).
-func Tcl_Export(interp *raw.Tcl_Interp, nsPtr *raw.Tcl_Namespace, pattern string, resetListFirst int) int {
-	return raw.Tcl_Export(interp, nsPtr, pattern, resetListFirst)
-}
-
-// Tcl_ExposeCommand calls [raw.Tcl_ExposeCommand] (C function Tcl_ExposeCommand).
-func Tcl_ExposeCommand(interp *raw.Tcl_Interp, hiddenCmdToken string, cmdName string) int {
-	return raw.Tcl_ExposeCommand(interp, hiddenCmdToken, cmdName)
-}
-
-// Tcl_ExprBoolean calls [raw.Tcl_ExprBoolean] (C function Tcl_ExprBoolean).
-func Tcl_ExprBoolean(interp *raw.Tcl_Interp, expr string, ptr *int32) int {
-	return raw.Tcl_ExprBoolean(interp, expr, ptr)
-}
-
-// Tcl_ExprBooleanObj calls [raw.Tcl_ExprBooleanObj] (C function Tcl_ExprBooleanObj).
-func Tcl_ExprBooleanObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, ptr *int32) int {
-	return raw.Tcl_ExprBooleanObj(interp, objPtr, ptr)
-}
-
-// Tcl_ExprDouble calls [raw.Tcl_ExprDouble] (C function Tcl_ExprDouble).
-func Tcl_ExprDouble(interp *raw.Tcl_Interp, expr string, ptr *float64) int {
-	return raw.Tcl_ExprDouble(interp, expr, ptr)
-}
-
-// Tcl_ExprDoubleObj calls [raw.Tcl_ExprDoubleObj] (C function Tcl_ExprDoubleObj).
-func Tcl_ExprDoubleObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, ptr *float64) int {
-	return raw.Tcl_ExprDoubleObj(interp, objPtr, ptr)
-}
-
-// Tcl_ExprLong calls [raw.Tcl_ExprLong] (C function Tcl_ExprLong).
-func Tcl_ExprLong(interp *raw.Tcl_Interp, expr string, ptr *int64) int {
-	return raw.Tcl_ExprLong(interp, expr, ptr)
-}
-
-// Tcl_ExprLongObj calls [raw.Tcl_ExprLongObj] (C function Tcl_ExprLongObj).
-func Tcl_ExprLongObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, ptr *int64) int {
-	return raw.Tcl_ExprLongObj(interp, objPtr, ptr)
-}
-
-// Tcl_ExprObj calls [raw.Tcl_ExprObj] (C function Tcl_ExprObj).
-func Tcl_ExprObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, resultPtrPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_ExprObj(interp, objPtr, resultPtrPtr)
-}
-
-// Tcl_ExprString calls [raw.Tcl_ExprString] (C function Tcl_ExprString).
-func Tcl_ExprString(interp *raw.Tcl_Interp, expr string) int {
-	return raw.Tcl_ExprString(interp, expr)
-}
-
-// Tcl_ExternalToUtf calls [raw.Tcl_ExternalToUtf] (C function Tcl_ExternalToUtf).
-func Tcl_ExternalToUtf(interp *raw.Tcl_Interp, encoding unsafe.Pointer, src string, srcLen int, flags int, statePtr unsafe.Pointer, dst string, dstLen int, srcReadPtr *int32, dstWrotePtr *int32, dstCharsPtr *int32) int {
-	return raw.Tcl_ExternalToUtf(interp, encoding, src, srcLen, flags, statePtr, dst, dstLen, srcReadPtr, dstWrotePtr, dstCharsPtr)
-}
-
-// Tcl_ExternalToUtfDString calls [raw.Tcl_ExternalToUtfDString] (C function Tcl_ExternalToUtfDString).
-func Tcl_ExternalToUtfDString(encoding unsafe.Pointer, src string, srcLen int, dsPtr *raw.Tcl_DString) string {
-	return raw.Tcl_ExternalToUtfDString(encoding, src, srcLen, dsPtr)
-}
-
-// Tcl_FSAccess calls [raw.Tcl_FSAccess] (C function Tcl_FSAccess).
-func Tcl_FSAccess(pathPtr *raw.Tcl_Obj, mode int) int {
-	return raw.Tcl_FSAccess(pathPtr, mode)
-}
-
-// Tcl_FSChdir calls [raw.Tcl_FSChdir] (C function Tcl_FSChdir).
-func Tcl_FSChdir(pathPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSChdir(pathPtr)
-}
-
-// Tcl_FSConvertToPathType calls [raw.Tcl_FSConvertToPathType] (C function Tcl_FSConvertToPathType).
-func Tcl_FSConvertToPathType(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSConvertToPathType(interp, pathPtr)
-}
-
-// Tcl_FSCopyDirectory calls [raw.Tcl_FSCopyDirectory] (C function Tcl_FSCopyDirectory).
-func Tcl_FSCopyDirectory(srcPathPtr *raw.Tcl_Obj, destPathPtr *raw.Tcl_Obj, errorPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSCopyDirectory(srcPathPtr, destPathPtr, errorPtr)
-}
-
-// Tcl_FSCopyFile calls [raw.Tcl_FSCopyFile] (C function Tcl_FSCopyFile).
-func Tcl_FSCopyFile(srcPathPtr *raw.Tcl_Obj, destPathPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSCopyFile(srcPathPtr, destPathPtr)
-}
-
-// Tcl_FSCreateDirectory calls [raw.Tcl_FSCreateDirectory] (C function Tcl_FSCreateDirectory).
-func Tcl_FSCreateDirectory(pathPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSCreateDirectory(pathPtr)
-}
-
-// Tcl_FSData calls [raw.Tcl_FSData] (C function Tcl_FSData).
-func Tcl_FSData(fsPtr *raw.Tcl_Filesystem) unsafe.Pointer {
-	return raw.Tcl_FSData(fsPtr)
-}
-
-// Tcl_FSDeleteFile calls [raw.Tcl_FSDeleteFile] (C function Tcl_FSDeleteFile).
-func Tcl_FSDeleteFile(pathPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSDeleteFile(pathPtr)
-}
-
-// Tcl_FSEqualPaths calls [raw.Tcl_FSEqualPaths] (C function Tcl_FSEqualPaths).
-func Tcl_FSEqualPaths(firstPtr *raw.Tcl_Obj, secondPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSEqualPaths(firstPtr, secondPtr)
-}
-
-// Tcl_FSEvalFile calls [raw.Tcl_FSEvalFile] (C function Tcl_FSEvalFile).
-func Tcl_FSEvalFile(interp *raw.Tcl_Interp, fileName *raw.Tcl_Obj) int {
-	return raw.Tcl_FSEvalFile(interp, fileName)
-}
-
-// Tcl_FSEvalFileEx calls [raw.Tcl_FSEvalFileEx] (C function Tcl_FSEvalFileEx).
-func Tcl_FSEvalFileEx(interp *raw.Tcl_Interp, fileName *raw.Tcl_Obj, encodingName string) int {
-	return raw.Tcl_FSEvalFileEx(interp, fileName, encodingName)
-}
-
-// Tcl_FSFileAttrStrings calls [raw.Tcl_FSFileAttrStrings] (C function Tcl_FSFileAttrStrings).
-func Tcl_FSFileAttrStrings(pathPtr *raw.Tcl_Obj, objPtrRef *raw.Tcl_Obj) string {
-	return raw.Tcl_FSFileAttrStrings(pathPtr, objPtrRef)
-}
-
-// Tcl_FSFileAttrsGet calls [raw.Tcl_FSFileAttrsGet] (C function Tcl_FSFileAttrsGet).
-func Tcl_FSFileAttrsGet(interp *raw.Tcl_Interp, index int, pathPtr *raw.Tcl_Obj, objPtrRef *raw.Tcl_Obj) int {
-	return raw.Tcl_FSFileAttrsGet(interp, index, pathPtr, objPtrRef)
-}
-
-// Tcl_FSFileAttrsSet calls [raw.Tcl_FSFileAttrsSet] (C function Tcl_FSFileAttrsSet).
-func Tcl_FSFileAttrsSet(interp *raw.Tcl_Interp, index int, pathPtr *raw.Tcl_Obj, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSFileAttrsSet(interp, index, pathPtr, objPtr)
-}
-
-// Tcl_FSFileSystemInfo calls [raw.Tcl_FSFileSystemInfo] (C function Tcl_FSFileSystemInfo).
-func Tcl_FSFileSystemInfo(pathPtr *raw.Tcl_Obj) *raw.Tcl_Obj {
-	return raw.Tcl_FSFileSystemInfo(pathPtr)
-}
-
-// Tcl_FSGetCwd calls [raw.Tcl_FSGetCwd] (C function Tcl_FSGetCwd).
-func Tcl_FSGetCwd(interp *raw.Tcl_Interp) *raw.Tcl_Obj {
-	return raw.Tcl_FSGetCwd(interp)
-}
-
-// Tcl_FSGetFileSystemForPath calls [raw.Tcl_FSGetFileSystemForPath] (C function Tcl_FSGetFileSystemForPath).
-func Tcl_FSGetFileSystemForPath(pathPtr *raw.Tcl_Obj) *raw.Tcl_Filesystem {
-	return raw.Tcl_FSGetFileSystemForPath(pathPtr)
-}
-
-// Tcl_FSGetInternalRep calls [raw.Tcl_FSGetInternalRep] (C function Tcl_FSGetInternalRep).
-func Tcl_FSGetInternalRep(pathPtr *raw.Tcl_Obj, fsPtr *raw.Tcl_Filesystem) unsafe.Pointer {
-	return raw.Tcl_FSGetInternalRep(pathPtr, fsPtr)
-}
-
-// Tcl_FSGetNativePath calls [raw.Tcl_FSGetNativePath] (C function Tcl_FSGetNativePath).
-func Tcl_FSGetNativePath(pathPtr *raw.Tcl_Obj) string {
-	return raw.Tcl_FSGetNativePath(pathPtr)
-}
-
-// Tcl_FSGetNormalizedPath calls [raw.Tcl_FSGetNormalizedPath] (C function Tcl_FSGetNormalizedPath).
-func Tcl_FSGetNormalizedPath(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj) *raw.Tcl_Obj {
-	return raw.Tcl_FSGetNormalizedPath(interp, pathPtr)
-}
-
-// Tcl_FSGetPathType calls [raw.Tcl_FSGetPathType] (C function Tcl_FSGetPathType).
-func Tcl_FSGetPathType(pathPtr *raw.Tcl_Obj) Tcl_PathType {
-	return Tcl_PathType(raw.Tcl_FSGetPathType(pathPtr))
-}
-
-// Tcl_FSGetTranslatedPath calls [raw.Tcl_FSGetTranslatedPath] (C function Tcl_FSGetTranslatedPath).
-func Tcl_FSGetTranslatedPath(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj) *raw.Tcl_Obj {
-	return raw.Tcl_FSGetTranslatedPath(interp, pathPtr)
-}
-
-// Tcl_FSGetTranslatedStringPath calls [raw.Tcl_FSGetTranslatedStringPath] (C function Tcl_FSGetTranslatedStringPath).
-func Tcl_FSGetTranslatedStringPath(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj) string {
-	return raw.Tcl_FSGetTranslatedStringPath(interp, pathPtr)
-}
-
-// Tcl_FSJoinPath calls [raw.Tcl_FSJoinPath] (C function Tcl_FSJoinPath).
-func Tcl_FSJoinPath(listObj *raw.Tcl_Obj, elements int) *raw.Tcl_Obj {
-	return raw.Tcl_FSJoinPath(listObj, elements)
-}
-
-// Tcl_FSJoinToPath calls [raw.Tcl_FSJoinToPath] (C function Tcl_FSJoinToPath).
-func Tcl_FSJoinToPath(pathPtr *raw.Tcl_Obj, objc int, objv unsafe.Pointer) *raw.Tcl_Obj {
-	return raw.Tcl_FSJoinToPath(pathPtr, objc, objv)
-}
-
-// Tcl_FSLink calls [raw.Tcl_FSLink] (C function Tcl_FSLink).
-func Tcl_FSLink(pathPtr *raw.Tcl_Obj, toPtr *raw.Tcl_Obj, linkAction int) *raw.Tcl_Obj {
-	return raw.Tcl_FSLink(pathPtr, toPtr, linkAction)
-}
-
-// Tcl_FSListVolumes calls [raw.Tcl_FSListVolumes] (C function Tcl_FSListVolumes).
-func Tcl_FSListVolumes() *raw.Tcl_Obj {
-	return raw.Tcl_FSListVolumes()
-}
-
-// Tcl_FSLoadFile calls [raw.Tcl_FSLoadFile] (C function Tcl_FSLoadFile).
-func Tcl_FSLoadFile(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj, sym1 string, sym2 string, proc1Ptr unsafe.Pointer, proc2Ptr unsafe.Pointer, handlePtr unsafe.Pointer, unloadProcPtr unsafe.Pointer) int {
-	return raw.Tcl_FSLoadFile(interp, pathPtr, sym1, sym2, proc1Ptr, proc2Ptr, handlePtr, unloadProcPtr)
-}
-
-// Tcl_FSLstat calls [raw.Tcl_FSLstat] (C function Tcl_FSLstat).
-func Tcl_FSLstat(pathPtr *raw.Tcl_Obj, buf unsafe.Pointer) int {
-	return raw.Tcl_FSLstat(pathPtr, buf)
-}
-
-// Tcl_FSMatchInDirectory calls [raw.Tcl_FSMatchInDirectory] (C function Tcl_FSMatchInDirectory).
-func Tcl_FSMatchInDirectory(interp *raw.Tcl_Interp, result *raw.Tcl_Obj, pathPtr *raw.Tcl_Obj, pattern string, types *raw.Tcl_GlobTypeData) int {
-	return raw.Tcl_FSMatchInDirectory(interp, result, pathPtr, pattern, types)
-}
-
-// Tcl_FSMountsChanged calls [raw.Tcl_FSMountsChanged] (C function Tcl_FSMountsChanged).
-func Tcl_FSMountsChanged(fsPtr *raw.Tcl_Filesystem) {
-	raw.Tcl_FSMountsChanged(fsPtr)
-}
-
-// Tcl_FSNewNativePath calls [raw.Tcl_FSNewNativePath] (C function Tcl_FSNewNativePath).
-func Tcl_FSNewNativePath(fromFilesystem *raw.Tcl_Filesystem, clientData unsafe.Pointer) *raw.Tcl_Obj {
-	return raw.Tcl_FSNewNativePath(fromFilesystem, clientData)
-}
-
-// Tcl_FSOpenFileChannel calls [raw.Tcl_FSOpenFileChannel] (C function Tcl_FSOpenFileChannel).
-func Tcl_FSOpenFileChannel(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj, modeString string, permissions int) unsafe.Pointer {
-	return raw.Tcl_FSOpenFileChannel(interp, pathPtr, modeString, permissions)
-}
-
-// Tcl_FSPathSeparator calls [raw.Tcl_FSPathSeparator] (C function Tcl_FSPathSeparator).
-func Tcl_FSPathSeparator(pathPtr *raw.Tcl_Obj) *raw.Tcl_Obj {
-	return raw.Tcl_FSPathSeparator(pathPtr)
-}
-
-// Tcl_FSRegister calls [raw.Tcl_FSRegister] (C function Tcl_FSRegister).
-func Tcl_FSRegister(clientData unsafe.Pointer, fsPtr *raw.Tcl_Filesystem) int {
-	return raw.Tcl_FSRegister(clientData, fsPtr)
-}
-
-// Tcl_FSRemoveDirectory calls [raw.Tcl_FSRemoveDirectory] (C function Tcl_FSRemoveDirectory).
-func Tcl_FSRemoveDirectory(pathPtr *raw.Tcl_Obj, recursive int, errorPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSRemoveDirectory(pathPtr, recursive, errorPtr)
-}
-
-// Tcl_FSRenameFile calls [raw.Tcl_FSRenameFile] (C function Tcl_FSRenameFile).
-func Tcl_FSRenameFile(srcPathPtr *raw.Tcl_Obj, destPathPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_FSRenameFile(srcPathPtr, destPathPtr)
-}
-
-// Tcl_FSSplitPath calls [raw.Tcl_FSSplitPath] (C function Tcl_FSSplitPath).
-func Tcl_FSSplitPath(pathPtr *raw.Tcl_Obj, lenPtr *int32) *raw.Tcl_Obj {
-	return raw.Tcl_FSSplitPath(pathPtr, lenPtr)
-}
-
-// Tcl_FSStat calls [raw.Tcl_FSStat] (C function Tcl_FSStat).
-func Tcl_FSStat(pathPtr *raw.Tcl_Obj, buf unsafe.Pointer) int {
-	return raw.Tcl_FSStat(pathPtr, buf)
-}
-
-// Tcl_FSUnregister calls [raw.Tcl_FSUnregister] (C function Tcl_FSUnregister).
-func Tcl_FSUnregister(fsPtr *raw.Tcl_Filesystem) int {
-	return raw.Tcl_FSUnregister(fsPtr)
-}
-
-// Tcl_FSUtime calls [raw.Tcl_FSUtime] (C function Tcl_FSUtime).
-func Tcl_FSUtime(pathPtr *raw.Tcl_Obj, tval unsafe.Pointer) int {
-	return raw.Tcl_FSUtime(pathPtr, tval)
-}
-
-// Tcl_Finalize calls [raw.Tcl_Finalize] (C function Tcl_Finalize).
-func Tcl_Finalize() {
-	raw.Tcl_Finalize()
-}
-
-// Tcl_FinalizeNotifier calls [raw.Tcl_FinalizeNotifier] (C function Tcl_FinalizeNotifier).
-func Tcl_FinalizeNotifier(clientData unsafe.Pointer) {
-	raw.Tcl_FinalizeNotifier(clientData)
-}
-
-// Tcl_FinalizeThread calls [raw.Tcl_FinalizeThread] (C function Tcl_FinalizeThread).
-func Tcl_FinalizeThread() {
-	raw.Tcl_FinalizeThread()
-}
-
-// Tcl_FindCommand calls [raw.Tcl_FindCommand] (C function Tcl_FindCommand).
-func Tcl_FindCommand(interp *raw.Tcl_Interp, name string, contextNsPtr *raw.Tcl_Namespace, flags int) unsafe.Pointer {
-	return raw.Tcl_FindCommand(interp, name, contextNsPtr, flags)
-}
-
-// Tcl_FindEnsemble calls [raw.Tcl_FindEnsemble] (C function Tcl_FindEnsemble).
-func Tcl_FindEnsemble(interp *raw.Tcl_Interp, cmdNameObj *raw.Tcl_Obj, flags int) unsafe.Pointer {
-	return raw.Tcl_FindEnsemble(interp, cmdNameObj, flags)
-}
-
-// Tcl_FindExecutable calls [raw.Tcl_FindExecutable] (C function Tcl_FindExecutable).
-func Tcl_FindExecutable(argv0 string) {
-	raw.Tcl_FindExecutable(argv0)
-}
-
-// Tcl_FindHashEntry calls [raw.Tcl_FindHashEntry] (C function Tcl_FindHashEntry).
-func Tcl_FindHashEntry(tablePtr *raw.Tcl_HashTable, key string) *raw.Tcl_HashEntry {
-	return raw.Tcl_FindHashEntry(tablePtr, key)
-}
-
-// Tcl_FindNamespace calls [raw.Tcl_FindNamespace] (C function Tcl_FindNamespace).
-func Tcl_FindNamespace(interp *raw.Tcl_Interp, name string, contextNsPtr *raw.Tcl_Namespace, flags int) *raw.Tcl_Namespace {
-	return raw.Tcl_FindNamespace(interp, name, contextNsPtr, flags)
-}
-
-// Tcl_FirstHashEntry calls [raw.Tcl_FirstHashEntry] (C function Tcl_FirstHashEntry).
-func Tcl_FirstHashEntry(tablePtr *raw.Tcl_HashTable, searchPtr *raw.Tcl_HashSearch) *raw.Tcl_HashEntry {
-	return raw.Tcl_FirstHashEntry(tablePtr, searchPtr)
-}
-
-// Tcl_Flush calls [raw.Tcl_Flush] (C function Tcl_Flush).
-func Tcl_Flush(chan_ unsafe.Pointer) int {
-	return raw.Tcl_Flush(chan_)
-}
-
-// Tcl_ForgetImport calls [raw.Tcl_ForgetImport] (C function Tcl_ForgetImport).
-func Tcl_ForgetImport(interp *raw.Tcl_Interp, nsPtr *raw.Tcl_Namespace, pattern string) int {
-	return raw.Tcl_ForgetImport(interp, nsPtr, pattern)
-}
-
-// Tcl_Format calls [raw.Tcl_Format] (C function Tcl_Format).
-func Tcl_Format(interp *raw.Tcl_Interp, format string, objc int, objv unsafe.Pointer) *raw.Tcl_Obj {
-	return raw.Tcl_Format(interp, format, objc, objv)
-}
-
-// Tcl_Free calls [raw.Tcl_Free] (C function Tcl_Free).
-func Tcl_Free(ptr string) {
-	raw.Tcl_Free(ptr)
-}
-
-// Tcl_FreeEncoding calls [raw.Tcl_FreeEncoding] (C function Tcl_FreeEncoding).
-func Tcl_FreeEncoding(encoding unsafe.Pointer) {
-	raw.Tcl_FreeEncoding(encoding)
-}
-
-// Tcl_FreeParse calls [raw.Tcl_FreeParse] (C function Tcl_FreeParse).
-func Tcl_FreeParse(parsePtr *raw.Tcl_Parse) {
-	raw.Tcl_FreeParse(parsePtr)
-}
-
-// Tcl_FreeResult calls [raw.Tcl_FreeResult] (C function Tcl_FreeResult).
-func Tcl_FreeResult(interp *raw.Tcl_Interp) {
-	raw.Tcl_FreeResult(interp)
-}
-
-// Tcl_GetAlias calls [raw.Tcl_GetAlias] (C function Tcl_GetAlias).
-func Tcl_GetAlias(interp *raw.Tcl_Interp, slaveCmd string, targetInterpPtr *raw.Tcl_Interp, targetCmdPtr string, argcPtr *int32, argvPtr string) int {
-	return raw.Tcl_GetAlias(interp, slaveCmd, targetInterpPtr, targetCmdPtr, argcPtr, argvPtr)
-}
-
-// Tcl_GetAliasObj calls [raw.Tcl_GetAliasObj] (C function Tcl_GetAliasObj).
-func Tcl_GetAliasObj(interp *raw.Tcl_Interp, slaveCmd string, targetInterpPtr *raw.Tcl_Interp, targetCmdPtr string, objcPtr *int32, objv *raw.Tcl_Obj) int {
-	return raw.Tcl_GetAliasObj(interp, slaveCmd, targetInterpPtr, targetCmdPtr, objcPtr, objv)
-}
-
-// Tcl_GetAllocMutex calls [raw.Tcl_GetAllocMutex] (C function Tcl_GetAllocMutex).
-func Tcl_GetAllocMutex() unsafe.Pointer {
-	return raw.Tcl_GetAllocMutex()
-}
-
-// Tcl_GetAssocData calls [raw.Tcl_GetAssocData] (C function Tcl_GetAssocData).
-func Tcl_GetAssocData(interp *raw.Tcl_Interp, name string, procPtr unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_GetAssocData(interp, name, procPtr)
-}
-
-// Tcl_GetBignumFromObj calls [raw.Tcl_GetBignumFromObj] (C function Tcl_GetBignumFromObj).
-func Tcl_GetBignumFromObj(interp *raw.Tcl_Interp, obj *raw.Tcl_Obj, value unsafe.Pointer) int {
-	return raw.Tcl_GetBignumFromObj(interp, obj, value)
-}
-
-// Tcl_GetBoolean calls [raw.Tcl_GetBoolean] (C function Tcl_GetBoolean).
-func Tcl_GetBoolean(interp *raw.Tcl_Interp, src string, boolPtr *int32) int {
-	return raw.Tcl_GetBoolean(interp, src, boolPtr)
-}
-
-// Tcl_GetBooleanFromObj calls [raw.Tcl_GetBooleanFromObj] (C function Tcl_GetBooleanFromObj).
-func Tcl_GetBooleanFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, boolPtr *int32) int {
-	return raw.Tcl_GetBooleanFromObj(interp, objPtr, boolPtr)
-}
-
-// Tcl_GetByteArrayFromObj calls [raw.Tcl_GetByteArrayFromObj] (C function Tcl_GetByteArrayFromObj).
-func Tcl_GetByteArrayFromObj(objPtr *raw.Tcl_Obj, lengthPtr *int32) unsafe.Pointer {
-	return raw.Tcl_GetByteArrayFromObj(objPtr, lengthPtr)
-}
-
-// Tcl_GetChannel calls [raw.Tcl_GetChannel] (C function Tcl_GetChannel).
-func Tcl_GetChannel(interp *raw.Tcl_Interp, chanName string, modePtr *int32) unsafe.Pointer {
-	return raw.Tcl_GetChannel(interp, chanName, modePtr)
-}
-
-// Tcl_GetChannelBufferSize calls [raw.Tcl_GetChannelBufferSize] (C function Tcl_GetChannelBufferSize).
-func Tcl_GetChannelBufferSize(chan_ unsafe.Pointer) int {
-	return raw.Tcl_GetChannelBufferSize(chan_)
-}
-
-// Tcl_GetChannelError calls [raw.Tcl_GetChannelError] (C function Tcl_GetChannelError).
-func Tcl_GetChannelError(chan_ unsafe.Pointer, msg *raw.Tcl_Obj) {
-	raw.Tcl_GetChannelError(chan_, msg)
-}
-
-// Tcl_GetChannelErrorInterp calls [raw.Tcl_GetChannelErrorInterp] (C function Tcl_GetChannelErrorInterp).
-func Tcl_GetChannelErrorInterp(interp *raw.Tcl_Interp, msg *raw.Tcl_Obj) {
-	raw.Tcl_GetChannelErrorInterp(interp, msg)
-}
-
-// Tcl_GetChannelHandle calls [raw.Tcl_GetChannelHandle] (C function Tcl_GetChannelHandle).
-func Tcl_GetChannelHandle(chan_ unsafe.Pointer, direction int, handlePtr unsafe.Pointer) int {
-	return raw.Tcl_GetChannelHandle(chan_, direction, handlePtr)
-}
-
-// Tcl_GetChannelInstanceData calls [raw.Tcl_GetChannelInstanceData] (C function Tcl_GetChannelInstanceData).
-func Tcl_GetChannelInstanceData(chan_ unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_GetChannelInstanceData(chan_)
-}
-
-// Tcl_GetChannelMode calls [raw.Tcl_GetChannelMode] (C function Tcl_GetChannelMode).
-func Tcl_GetChannelMode(chan_ unsafe.Pointer) int {
-	return raw.Tcl_GetChannelMode(chan_)
-}
-
-// Tcl_GetChannelName calls [raw.Tcl_GetChannelName] (C function Tcl_GetChannelName).
-func Tcl_GetChannelName(chan_ unsafe.Pointer) string {
-	return raw.Tcl_GetChannelName(chan_)
-}
-
-// Tcl_GetChannelNames calls [raw.Tcl_GetChannelNames] (C function Tcl_GetChannelNames).
-func Tcl_GetChannelNames(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_GetChannelNames(interp)
-}
-
-// Tcl_GetChannelNamesEx calls [raw.Tcl_GetChannelNamesEx] (C function Tcl_GetChannelNamesEx).
-func Tcl_GetChannelNamesEx(interp *raw.Tcl_Interp, pattern string) int {
-	return raw.Tcl_GetChannelNamesEx(interp, pattern)
-}
-
-// Tcl_GetChannelOption calls [raw.Tcl_GetChannelOption] (C function Tcl_GetChannelOption).
-func Tcl_GetChannelOption(interp *raw.Tcl_Interp, chan_ unsafe.Pointer, optionName string, dsPtr *raw.Tcl_DString) int {
-	return raw.Tcl_GetChannelOption(interp, chan_, optionName, dsPtr)
-}
-
-// Tcl_GetChannelThread calls [raw.Tcl_GetChannelThread] (C function Tcl_GetChannelThread).
-func Tcl_GetChannelThread(channel unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_GetChannelThread(channel)
-}
-
-// Tcl_GetChannelType calls [raw.Tcl_GetChannelType] (C function Tcl_GetChannelType).
-func Tcl_GetChannelType(chan_ unsafe.Pointer) *raw.Tcl_ChannelType {
-	return raw.Tcl_GetChannelType(chan_)
-}
-
-// Tcl_GetCharLength calls [raw.Tcl_GetCharLength] (C function Tcl_GetCharLength).
-func Tcl_GetCharLength(objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_GetCharLength(objPtr)
-}
-
-// Tcl_GetCommandFromObj calls [raw.Tcl_GetCommandFromObj] (C function Tcl_GetCommandFromObj).
-func Tcl_GetCommandFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj) unsafe.Pointer {
-	return raw.Tcl_GetCommandFromObj(interp, objPtr)
-}
-
-// Tcl_GetCommandFullName calls [raw.Tcl_GetCommandFullName] (C function Tcl_GetCommandFullName).
-func Tcl_GetCommandFullName(interp *raw.Tcl_Interp, command unsafe.Pointer, objPtr *raw.Tcl_Obj) {
-	raw.Tcl_GetCommandFullName(interp, command, objPtr)
-}
-
-// Tcl_GetCommandInfo calls [raw.Tcl_GetCommandInfo] (C function Tcl_GetCommandInfo).
-func Tcl_GetCommandInfo(interp *raw.Tcl_Interp, cmdName string, infoPtr *raw.Tcl_CmdInfo) int {
-	return raw.Tcl_GetCommandInfo(interp, cmdName, infoPtr)
-}
-
-// Tcl_GetCommandInfoFromToken calls [raw.Tcl_GetCommandInfoFromToken] (C function Tcl_GetCommandInfoFromToken).
-func Tcl_GetCommandInfoFromToken(token unsafe.Pointer, infoPtr *raw.Tcl_CmdInfo) int {
-	return raw.Tcl_GetCommandInfoFromToken(token, infoPtr)
-}
-
-// Tcl_GetCommandName calls [raw.Tcl_GetCommandName] (C function Tcl_GetCommandName).
-func Tcl_GetCommandName(interp *raw.Tcl_Interp, command unsafe.Pointer) string {
-	return raw.Tcl_GetCommandName(interp, command)
-}
-
-// Tcl_GetCurrentNamespace calls [raw.Tcl_GetCurrentNamespace] (C function Tcl_GetCurrentNamespace).
-func Tcl_GetCurrentNamespace(interp *raw.Tcl_Interp) *raw.Tcl_Namespace {
-	return raw.Tcl_GetCurrentNamespace(interp)
-}
-
-// Tcl_GetCurrentThread calls [raw.Tcl_GetCurrentThread] (C function Tcl_GetCurrentThread).
-func Tcl_GetCurrentThread() unsafe.Pointer {
-	return raw.Tcl_GetCurrentThread()
-}
-
-// Tcl_GetCwd calls [raw.Tcl_GetCwd] (C function Tcl_GetCwd).
-func Tcl_GetCwd(interp *raw.Tcl_Interp, cwdPtr *raw.Tcl_DString) string {
-	return raw.Tcl_GetCwd(interp, cwdPtr)
-}
-
-// Tcl_GetDefaultEncodingDir calls [raw.Tcl_GetDefaultEncodingDir] (C function Tcl_GetDefaultEncodingDir).
-func Tcl_GetDefaultEncodingDir() string {
-	return raw.Tcl_GetDefaultEncodingDir()
-}
-
-// Tcl_GetDouble calls [raw.Tcl_GetDouble] (C function Tcl_GetDouble).
-func Tcl_GetDouble(interp *raw.Tcl_Interp, src string, doublePtr *float64) int {
-	return raw.Tcl_GetDouble(interp, src, doublePtr)
-}
-
-// Tcl_GetDoubleFromObj calls [raw.Tcl_GetDoubleFromObj] (C function Tcl_GetDoubleFromObj).
-func Tcl_GetDoubleFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, doublePtr *float64) int {
-	return raw.Tcl_GetDoubleFromObj(interp, objPtr, doublePtr)
-}
-
-// Tcl_GetEncoding calls [raw.Tcl_GetEncoding] (C function Tcl_GetEncoding).
-func Tcl_GetEncoding(interp *raw.Tcl_Interp, name string) unsafe.Pointer {
-	return raw.Tcl_GetEncoding(interp, name)
-}
-
-// Tcl_GetEncodingFromObj calls [raw.Tcl_GetEncodingFromObj] (C function Tcl_GetEncodingFromObj).
-func Tcl_GetEncodingFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, encodingPtr unsafe.Pointer) int {
-	return raw.Tcl_GetEncodingFromObj(interp, objPtr, encodingPtr)
-}
-
-// Tcl_GetEncodingName calls [raw.Tcl_GetEncodingName] (C function Tcl_GetEncodingName).
-func Tcl_GetEncodingName(encoding unsafe.Pointer) string {
-	return raw.Tcl_GetEncodingName(encoding)
-}
-
-// Tcl_GetEncodingNameFromEnvironment calls [raw.Tcl_GetEncodingNameFromEnvironment] (C function Tcl_GetEncodingNameFromEnvironment).
-func Tcl_GetEncodingNameFromEnvironment(bufPtr *raw.Tcl_DString) string {
-	return raw.Tcl_GetEncodingNameFromEnvironment(bufPtr)
-}
-
-// Tcl_GetEncodingNames calls [raw.Tcl_GetEncodingNames] (C function Tcl_GetEncodingNames).
-func Tcl_GetEncodingNames(interp *raw.Tcl_Interp) {
-	raw.Tcl_GetEncodingNames(interp)
-}
-
-// Tcl_GetEncodingSearchPath calls [raw.Tcl_GetEncodingSearchPath] (C function Tcl_GetEncodingSearchPath).
-func Tcl_GetEncodingSearchPath() *raw.Tcl_Obj {
-	return raw.Tcl_GetEncodingSearchPath()
-}
-
-// Tcl_GetEnsembleFlags calls [raw.Tcl_GetEnsembleFlags] (C function Tcl_GetEnsembleFlags).
-func Tcl_GetEnsembleFlags(interp *raw.Tcl_Interp, token unsafe.Pointer, flagsPtr *int32) int {
-	return raw.Tcl_GetEnsembleFlags(interp, token, flagsPtr)
-}
-
-// Tcl_GetEnsembleMappingDict calls [raw.Tcl_GetEnsembleMappingDict] (C function Tcl_GetEnsembleMappingDict).
-func Tcl_GetEnsembleMappingDict(interp *raw.Tcl_Interp, token unsafe.Pointer, mapDictPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_GetEnsembleMappingDict(interp, token, mapDictPtr)
-}
-
-// Tcl_GetEnsembleNamespace calls [raw.Tcl_GetEnsembleNamespace] (C function Tcl_GetEnsembleNamespace).
-func Tcl_GetEnsembleNamespace(interp *raw.Tcl_Interp, token unsafe.Pointer, namespacePtrPtr *raw.Tcl_Namespace) int {
-	return raw.Tcl_GetEnsembleNamespace(interp, token, namespacePtrPtr)
-}
-
-// Tcl_GetEnsembleSubcommandList calls [raw.Tcl_GetEnsembleSubcommandList] (C function Tcl_GetEnsembleSubcommandList).
-func Tcl_GetEnsembleSubcommandList(interp *raw.Tcl_Interp, token unsafe.Pointer, subcmdListPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_GetEnsembleSubcommandList(interp, token, subcmdListPtr)
-}
-
-// Tcl_GetEnsembleUnknownHandler calls [raw.Tcl_GetEnsembleUnknownHandler] (C function Tcl_GetEnsembleUnknownHandler).
-func Tcl_GetEnsembleUnknownHandler(interp *raw.Tcl_Interp, token unsafe.Pointer, unknownListPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_GetEnsembleUnknownHandler(interp, token, unknownListPtr)
-}
-
-// Tcl_GetErrno calls [raw.Tcl_GetErrno] (C function Tcl_GetErrno).
-func Tcl_GetErrno() int {
-	return raw.Tcl_GetErrno()
-}
-
-// Tcl_GetGlobalNamespace calls [raw.Tcl_GetGlobalNamespace] (C function Tcl_GetGlobalNamespace).
-func Tcl_GetGlobalNamespace(interp *raw.Tcl_Interp) *raw.Tcl_Namespace {
-	return raw.Tcl_GetGlobalNamespace(interp)
-}
-
-// Tcl_GetHostName calls [raw.Tcl_GetHostName] (C function Tcl_GetHostName).
-func Tcl_GetHostName() string {
-	return raw.Tcl_GetHostName()
-}
-
-// Tcl_GetIndexFromObj calls [raw.Tcl_GetIndexFromObj] (C function Tcl_GetIndexFromObj).
-func Tcl_GetIndexFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, tablePtr string, msg string, flags int, indexPtr *int32) int {
-	return raw.Tcl_GetIndexFromObj(interp, objPtr, tablePtr, msg, flags, indexPtr)
-}
-
-// Tcl_GetIndexFromObjStruct calls [raw.Tcl_GetIndexFromObjStruct] (C function Tcl_GetIndexFromObjStruct).
-func Tcl_GetIndexFromObjStruct(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, tablePtr unsafe.Pointer, offset int, msg string, flags int, indexPtr *int32) int {
-	return raw.Tcl_GetIndexFromObjStruct(interp, objPtr, tablePtr, offset, msg, flags, indexPtr)
-}
-
-// Tcl_GetInt calls [raw.Tcl_GetInt] (C function Tcl_GetInt).
-func Tcl_GetInt(interp *raw.Tcl_Interp, src string, intPtr *int32) int {
-	return raw.Tcl_GetInt(interp, src, intPtr)
-}
-
-// Tcl_GetIntFromObj calls [raw.Tcl_GetIntFromObj] (C function Tcl_GetIntFromObj).
-func Tcl_GetIntFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, intPtr *int32) int {
-	return raw.Tcl_GetIntFromObj(interp, objPtr, intPtr)
-}
-
-// Tcl_GetInterpPath calls [raw.Tcl_GetInterpPath] (C function Tcl_GetInterpPath).
-func Tcl_GetInterpPath(askInterp *raw.Tcl_Interp, slaveInterp *raw.Tcl_Interp) int {
-	return raw.Tcl_GetInterpPath(askInterp, slaveInterp)
-}
-
-// Tcl_GetLongFromObj calls [raw.Tcl_GetLongFromObj] (C function Tcl_GetLongFromObj).
-func Tcl_GetLongFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, longPtr *int64) int {
-	return raw.Tcl_GetLongFromObj(interp, objPtr, longPtr)
-}
-
-// Tcl_GetMaster calls [raw.Tcl_GetMaster] (C function Tcl_GetMaster).
-func Tcl_GetMaster(interp *raw.Tcl_Interp) *raw.Tcl_Interp {
-	return raw.Tcl_GetMaster(interp)
-}
-
-// Tcl_GetMathFuncInfo calls [raw.Tcl_GetMathFuncInfo] (C function Tcl_GetMathFuncInfo).
-func Tcl_GetMathFuncInfo(interp *raw.Tcl_Interp, name string, numArgsPtr *int32, argTypesPtr *Tcl_ValueType, procPtr unsafe.Pointer, clientDataPtr unsafe.Pointer) int {
-	var _argTypesPtr raw.Tcl_ValueType
-	_ret := raw.Tcl_GetMathFuncInfo(interp, name, numArgsPtr, &_argTypesPtr, procPtr, clientDataPtr)
-	if argTypesPtr != nil {
-		*argTypesPtr = Tcl_ValueType(_argTypesPtr)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbCkfree == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbCkfree, _lib, "Tcl_DbCkfree")
 	}
-	return _ret
+	return _fnTcl_DbCkfree(ptr, file, line)
 }
 
-// Tcl_GetMemoryInfo calls [raw.Tcl_GetMemoryInfo] (C function Tcl_GetMemoryInfo).
-func Tcl_GetMemoryInfo(dsPtr *raw.Tcl_DString) {
-	raw.Tcl_GetMemoryInfo(dsPtr)
+var _fnTcl_DbCkrealloc func(string, int, string, int) string
+
+// Tcl_DbCkrealloc calls the Tcl framework function Tcl_DbCkrealloc.
+func Tcl_DbCkrealloc(ptr string, size int, file string, line int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbCkrealloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbCkrealloc, _lib, "Tcl_DbCkrealloc")
+	}
+	return _fnTcl_DbCkrealloc(ptr, size, file, line)
 }
 
-// Tcl_GetNameOfExecutable calls [raw.Tcl_GetNameOfExecutable] (C function Tcl_GetNameOfExecutable).
+var _fnTcl_DeleteFileHandler func(int)
+
+// Tcl_DeleteFileHandler calls the Tcl framework function Tcl_DeleteFileHandler.
+func Tcl_DeleteFileHandler(fd int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DeleteFileHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DeleteFileHandler, _lib, "Tcl_DeleteFileHandler")
+	}
+	_fnTcl_DeleteFileHandler(fd)
+}
+
+var _fnTcl_DeleteTimerHandler func(objc.ID)
+
+// Tcl_DeleteTimerHandler calls the Tcl framework function Tcl_DeleteTimerHandler.
+func Tcl_DeleteTimerHandler(token obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DeleteTimerHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DeleteTimerHandler, _lib, "Tcl_DeleteTimerHandler")
+	}
+	_fnTcl_DeleteTimerHandler(objref.IDOf(token))
+}
+
+var _fnTcl_DiscardInterpState func(objc.ID)
+
+// Tcl_DiscardInterpState calls the Tcl framework function Tcl_DiscardInterpState.
+func Tcl_DiscardInterpState(state obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DiscardInterpState == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DiscardInterpState, _lib, "Tcl_DiscardInterpState")
+	}
+	_fnTcl_DiscardInterpState(objref.IDOf(state))
+}
+
+var _fnTcl_DoOneEvent func(int) int
+
+// Tcl_DoOneEvent calls the Tcl framework function Tcl_DoOneEvent.
+func Tcl_DoOneEvent(flags int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DoOneEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DoOneEvent, _lib, "Tcl_DoOneEvent")
+	}
+	return _fnTcl_DoOneEvent(flags)
+}
+
+var _fnTcl_DumpActiveMemory func(string) int
+
+// Tcl_DumpActiveMemory calls the Tcl framework function Tcl_DumpActiveMemory.
+func Tcl_DumpActiveMemory(fileName string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DumpActiveMemory == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DumpActiveMemory, _lib, "Tcl_DumpActiveMemory")
+	}
+	return _fnTcl_DumpActiveMemory(fileName)
+}
+
+var _fnTcl_Eof func(objc.ID) int
+
+// Tcl_Eof calls the Tcl framework function Tcl_Eof.
+func Tcl_Eof(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Eof == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Eof, _lib, "Tcl_Eof")
+	}
+	return _fnTcl_Eof(objref.IDOf(chan_))
+}
+
+var _fnTcl_ErrnoId func() string
+
+// Tcl_ErrnoId calls the Tcl framework function Tcl_ErrnoId.
+func Tcl_ErrnoId() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ErrnoId == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ErrnoId, _lib, "Tcl_ErrnoId")
+	}
+	return _fnTcl_ErrnoId()
+}
+
+var _fnTcl_ErrnoMsg func(int) string
+
+// Tcl_ErrnoMsg calls the Tcl framework function Tcl_ErrnoMsg.
+func Tcl_ErrnoMsg(err int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ErrnoMsg == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ErrnoMsg, _lib, "Tcl_ErrnoMsg")
+	}
+	return _fnTcl_ErrnoMsg(err)
+}
+
+var _fnTcl_Exit func(int)
+
+// Tcl_Exit calls the Tcl framework function Tcl_Exit.
+func Tcl_Exit(status int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Exit == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Exit, _lib, "Tcl_Exit")
+	}
+	_fnTcl_Exit(status)
+}
+
+var _fnTcl_ExitThread func(int)
+
+// Tcl_ExitThread calls the Tcl framework function Tcl_ExitThread.
+func Tcl_ExitThread(status int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ExitThread == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ExitThread, _lib, "Tcl_ExitThread")
+	}
+	_fnTcl_ExitThread(status)
+}
+
+var _fnTcl_Finalize func()
+
+// Tcl_Finalize calls the Tcl framework function Tcl_Finalize.
+func Tcl_Finalize() {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Finalize == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Finalize, _lib, "Tcl_Finalize")
+	}
+	_fnTcl_Finalize()
+}
+
+var _fnTcl_FinalizeThread func()
+
+// Tcl_FinalizeThread calls the Tcl framework function Tcl_FinalizeThread.
+func Tcl_FinalizeThread() {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FinalizeThread == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FinalizeThread, _lib, "Tcl_FinalizeThread")
+	}
+	_fnTcl_FinalizeThread()
+}
+
+var _fnTcl_FindExecutable func(string)
+
+// Tcl_FindExecutable calls the Tcl framework function Tcl_FindExecutable.
+func Tcl_FindExecutable(argv0 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FindExecutable == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FindExecutable, _lib, "Tcl_FindExecutable")
+	}
+	_fnTcl_FindExecutable(argv0)
+}
+
+var _fnTcl_Flush func(objc.ID) int
+
+// Tcl_Flush calls the Tcl framework function Tcl_Flush.
+func Tcl_Flush(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Flush == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Flush, _lib, "Tcl_Flush")
+	}
+	return _fnTcl_Flush(objref.IDOf(chan_))
+}
+
+var _fnTcl_Free func(string)
+
+// Tcl_Free calls the Tcl framework function Tcl_Free.
+func Tcl_Free(ptr string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Free == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Free, _lib, "Tcl_Free")
+	}
+	_fnTcl_Free(ptr)
+}
+
+var _fnTcl_FreeEncoding func(objc.ID)
+
+// Tcl_FreeEncoding calls the Tcl framework function Tcl_FreeEncoding.
+func Tcl_FreeEncoding(encoding obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FreeEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FreeEncoding, _lib, "Tcl_FreeEncoding")
+	}
+	_fnTcl_FreeEncoding(objref.IDOf(encoding))
+}
+
+var _fnTcl_GetChannelBufferSize func(objc.ID) int
+
+// Tcl_GetChannelBufferSize calls the Tcl framework function Tcl_GetChannelBufferSize.
+func Tcl_GetChannelBufferSize(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetChannelBufferSize == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelBufferSize, _lib, "Tcl_GetChannelBufferSize")
+	}
+	return _fnTcl_GetChannelBufferSize(objref.IDOf(chan_))
+}
+
+var _fnTcl_GetChannelMode func(objc.ID) int
+
+// Tcl_GetChannelMode calls the Tcl framework function Tcl_GetChannelMode.
+func Tcl_GetChannelMode(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetChannelMode == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelMode, _lib, "Tcl_GetChannelMode")
+	}
+	return _fnTcl_GetChannelMode(objref.IDOf(chan_))
+}
+
+var _fnTcl_GetChannelName func(objc.ID) string
+
+// Tcl_GetChannelName calls the Tcl framework function Tcl_GetChannelName.
+func Tcl_GetChannelName(chan_ obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetChannelName == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelName, _lib, "Tcl_GetChannelName")
+	}
+	return _fnTcl_GetChannelName(objref.IDOf(chan_))
+}
+
+var _fnTcl_GetChannelThread func(objc.ID) objc.ID
+
+// Tcl_GetChannelThread calls the Tcl framework function Tcl_GetChannelThread.
+func Tcl_GetChannelThread(channel obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetChannelThread == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelThread, _lib, "Tcl_GetChannelThread")
+	}
+	_ret := _fnTcl_GetChannelThread(objref.IDOf(channel))
+	return obj.Wrap(_ret)
+}
+
+var _fnTcl_GetCurrentThread func() objc.ID
+
+// Tcl_GetCurrentThread calls the Tcl framework function Tcl_GetCurrentThread.
+func Tcl_GetCurrentThread() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetCurrentThread == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetCurrentThread, _lib, "Tcl_GetCurrentThread")
+	}
+	_ret := _fnTcl_GetCurrentThread()
+	return obj.Wrap(_ret)
+}
+
+var _fnTcl_GetDefaultEncodingDir func() string
+
+// Tcl_GetDefaultEncodingDir calls the Tcl framework function Tcl_GetDefaultEncodingDir.
+func Tcl_GetDefaultEncodingDir() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetDefaultEncodingDir == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetDefaultEncodingDir, _lib, "Tcl_GetDefaultEncodingDir")
+	}
+	return _fnTcl_GetDefaultEncodingDir()
+}
+
+var _fnTcl_GetEncodingName func(objc.ID) string
+
+// Tcl_GetEncodingName calls the Tcl framework function Tcl_GetEncodingName.
+func Tcl_GetEncodingName(encoding obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetEncodingName == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetEncodingName, _lib, "Tcl_GetEncodingName")
+	}
+	return _fnTcl_GetEncodingName(objref.IDOf(encoding))
+}
+
+var _fnTcl_GetErrno func() int
+
+// Tcl_GetErrno calls the Tcl framework function Tcl_GetErrno.
+func Tcl_GetErrno() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetErrno == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetErrno, _lib, "Tcl_GetErrno")
+	}
+	return _fnTcl_GetErrno()
+}
+
+var _fnTcl_GetHostName func() string
+
+// Tcl_GetHostName calls the Tcl framework function Tcl_GetHostName.
+func Tcl_GetHostName() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetHostName == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetHostName, _lib, "Tcl_GetHostName")
+	}
+	return _fnTcl_GetHostName()
+}
+
+var _fnTcl_GetNameOfExecutable func() string
+
+// Tcl_GetNameOfExecutable calls the Tcl framework function Tcl_GetNameOfExecutable.
 func Tcl_GetNameOfExecutable() string {
-	return raw.Tcl_GetNameOfExecutable()
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetNameOfExecutable == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetNameOfExecutable, _lib, "Tcl_GetNameOfExecutable")
+	}
+	return _fnTcl_GetNameOfExecutable()
 }
 
-// Tcl_GetNamespaceUnknownHandler calls [raw.Tcl_GetNamespaceUnknownHandler] (C function Tcl_GetNamespaceUnknownHandler).
-func Tcl_GetNamespaceUnknownHandler(interp *raw.Tcl_Interp, nsPtr *raw.Tcl_Namespace) *raw.Tcl_Obj {
-	return raw.Tcl_GetNamespaceUnknownHandler(interp, nsPtr)
-}
+var _fnTcl_GetPathType func(string) Tcl_PathType
 
-// Tcl_GetObjResult calls [raw.Tcl_GetObjResult] (C function Tcl_GetObjResult).
-func Tcl_GetObjResult(interp *raw.Tcl_Interp) *raw.Tcl_Obj {
-	return raw.Tcl_GetObjResult(interp)
-}
-
-// Tcl_GetObjType calls [raw.Tcl_GetObjType] (C function Tcl_GetObjType).
-func Tcl_GetObjType(typeName string) *raw.Tcl_ObjType {
-	return raw.Tcl_GetObjType(typeName)
-}
-
-// Tcl_GetOpenFile calls [raw.Tcl_GetOpenFile] (C function Tcl_GetOpenFile).
-func Tcl_GetOpenFile(interp *raw.Tcl_Interp, chanID string, forWriting int, checkUsage int, filePtr unsafe.Pointer) int {
-	return raw.Tcl_GetOpenFile(interp, chanID, forWriting, checkUsage, filePtr)
-}
-
-// Tcl_GetPathType calls [raw.Tcl_GetPathType] (C function Tcl_GetPathType).
+// Tcl_GetPathType calls the Tcl framework function Tcl_GetPathType.
 func Tcl_GetPathType(path string) Tcl_PathType {
-	return Tcl_PathType(raw.Tcl_GetPathType(path))
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetPathType == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetPathType, _lib, "Tcl_GetPathType")
+	}
+	return _fnTcl_GetPathType(path)
 }
 
-// Tcl_GetRange calls [raw.Tcl_GetRange] (C function Tcl_GetRange).
-func Tcl_GetRange(objPtr *raw.Tcl_Obj, first int, last int) *raw.Tcl_Obj {
-	return raw.Tcl_GetRange(objPtr, first, last)
-}
+var _fnTcl_GetServiceMode func() int
 
-// Tcl_GetRegExpFromObj calls [raw.Tcl_GetRegExpFromObj] (C function Tcl_GetRegExpFromObj).
-func Tcl_GetRegExpFromObj(interp *raw.Tcl_Interp, patObj *raw.Tcl_Obj, flags int) unsafe.Pointer {
-	return raw.Tcl_GetRegExpFromObj(interp, patObj, flags)
-}
-
-// Tcl_GetReturnOptions calls [raw.Tcl_GetReturnOptions] (C function Tcl_GetReturnOptions).
-func Tcl_GetReturnOptions(interp *raw.Tcl_Interp, result int) *raw.Tcl_Obj {
-	return raw.Tcl_GetReturnOptions(interp, result)
-}
-
-// Tcl_GetServiceMode calls [raw.Tcl_GetServiceMode] (C function Tcl_GetServiceMode).
+// Tcl_GetServiceMode calls the Tcl framework function Tcl_GetServiceMode.
 func Tcl_GetServiceMode() int {
-	return raw.Tcl_GetServiceMode()
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetServiceMode == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetServiceMode, _lib, "Tcl_GetServiceMode")
+	}
+	return _fnTcl_GetServiceMode()
 }
 
-// Tcl_GetSlave calls [raw.Tcl_GetSlave] (C function Tcl_GetSlave).
-func Tcl_GetSlave(interp *raw.Tcl_Interp, slaveName string) *raw.Tcl_Interp {
-	return raw.Tcl_GetSlave(interp, slaveName)
+var _fnTcl_GetStackedChannel func(objc.ID) objc.ID
+
+// Tcl_GetStackedChannel calls the Tcl framework function Tcl_GetStackedChannel.
+func Tcl_GetStackedChannel(chan_ obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetStackedChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetStackedChannel, _lib, "Tcl_GetStackedChannel")
+	}
+	_ret := _fnTcl_GetStackedChannel(objref.IDOf(chan_))
+	return obj.Wrap(_ret)
 }
 
-// Tcl_GetStackedChannel calls [raw.Tcl_GetStackedChannel] (C function Tcl_GetStackedChannel).
-func Tcl_GetStackedChannel(chan_ unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_GetStackedChannel(chan_)
+var _fnTcl_GetStdChannel func(int) objc.ID
+
+// Tcl_GetStdChannel calls the Tcl framework function Tcl_GetStdChannel.
+func Tcl_GetStdChannel(type_ int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetStdChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetStdChannel, _lib, "Tcl_GetStdChannel")
+	}
+	_ret := _fnTcl_GetStdChannel(type_)
+	return obj.Wrap(_ret)
 }
 
-// Tcl_GetStdChannel calls [raw.Tcl_GetStdChannel] (C function Tcl_GetStdChannel).
-func Tcl_GetStdChannel(type_ int) unsafe.Pointer {
-	return raw.Tcl_GetStdChannel(type_)
+var _fnTcl_GetTopChannel func(objc.ID) objc.ID
+
+// Tcl_GetTopChannel calls the Tcl framework function Tcl_GetTopChannel.
+func Tcl_GetTopChannel(chan_ obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetTopChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetTopChannel, _lib, "Tcl_GetTopChannel")
+	}
+	_ret := _fnTcl_GetTopChannel(objref.IDOf(chan_))
+	return obj.Wrap(_ret)
 }
 
-// Tcl_GetString calls [raw.Tcl_GetString] (C function Tcl_GetString).
-func Tcl_GetString(objPtr *raw.Tcl_Obj) string {
-	return raw.Tcl_GetString(objPtr)
+var _fnTcl_InputBlocked func(objc.ID) int
+
+// Tcl_InputBlocked calls the Tcl framework function Tcl_InputBlocked.
+func Tcl_InputBlocked(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_InputBlocked == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_InputBlocked, _lib, "Tcl_InputBlocked")
+	}
+	return _fnTcl_InputBlocked(objref.IDOf(chan_))
 }
 
-// Tcl_GetStringFromObj calls [raw.Tcl_GetStringFromObj] (C function Tcl_GetStringFromObj).
-func Tcl_GetStringFromObj(objPtr *raw.Tcl_Obj, lengthPtr *int32) string {
-	return raw.Tcl_GetStringFromObj(objPtr, lengthPtr)
+var _fnTcl_InputBuffered func(objc.ID) int
+
+// Tcl_InputBuffered calls the Tcl framework function Tcl_InputBuffered.
+func Tcl_InputBuffered(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_InputBuffered == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_InputBuffered, _lib, "Tcl_InputBuffered")
+	}
+	return _fnTcl_InputBuffered(objref.IDOf(chan_))
 }
 
-// Tcl_GetStringResult calls [raw.Tcl_GetStringResult] (C function Tcl_GetStringResult).
-func Tcl_GetStringResult(interp *raw.Tcl_Interp) string {
-	return raw.Tcl_GetStringResult(interp)
-}
+var _fnTcl_IsChannelExisting func(string) int
 
-// Tcl_GetThreadData calls [raw.Tcl_GetThreadData] (C function Tcl_GetThreadData).
-func Tcl_GetThreadData(keyPtr unsafe.Pointer, size int) unsafe.Pointer {
-	return raw.Tcl_GetThreadData(keyPtr, size)
-}
-
-// Tcl_GetTime calls [raw.Tcl_GetTime] (C function Tcl_GetTime).
-func Tcl_GetTime(timeBuf *raw.Tcl_Time) {
-	raw.Tcl_GetTime(timeBuf)
-}
-
-// Tcl_GetTopChannel calls [raw.Tcl_GetTopChannel] (C function Tcl_GetTopChannel).
-func Tcl_GetTopChannel(chan_ unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_GetTopChannel(chan_)
-}
-
-// Tcl_GetUniChar calls [raw.Tcl_GetUniChar] (C function Tcl_GetUniChar).
-func Tcl_GetUniChar(objPtr *raw.Tcl_Obj, index int) uint16 {
-	return raw.Tcl_GetUniChar(objPtr, index)
-}
-
-// Tcl_GetUnicode calls [raw.Tcl_GetUnicode] (C function Tcl_GetUnicode).
-func Tcl_GetUnicode(objPtr *raw.Tcl_Obj) *uint16 {
-	return raw.Tcl_GetUnicode(objPtr)
-}
-
-// Tcl_GetUnicodeFromObj calls [raw.Tcl_GetUnicodeFromObj] (C function Tcl_GetUnicodeFromObj).
-func Tcl_GetUnicodeFromObj(objPtr *raw.Tcl_Obj, lengthPtr *int32) *uint16 {
-	return raw.Tcl_GetUnicodeFromObj(objPtr, lengthPtr)
-}
-
-// Tcl_GetVar calls [raw.Tcl_GetVar] (C function Tcl_GetVar).
-func Tcl_GetVar(interp *raw.Tcl_Interp, varName string, flags int) string {
-	return raw.Tcl_GetVar(interp, varName, flags)
-}
-
-// Tcl_GetVar2 calls [raw.Tcl_GetVar2] (C function Tcl_GetVar2).
-func Tcl_GetVar2(interp *raw.Tcl_Interp, part1 string, part2 string, flags int) string {
-	return raw.Tcl_GetVar2(interp, part1, part2, flags)
-}
-
-// Tcl_GetVar2Ex calls [raw.Tcl_GetVar2Ex] (C function Tcl_GetVar2Ex).
-func Tcl_GetVar2Ex(interp *raw.Tcl_Interp, part1 string, part2 string, flags int) *raw.Tcl_Obj {
-	return raw.Tcl_GetVar2Ex(interp, part1, part2, flags)
-}
-
-// Tcl_GetVersion calls [raw.Tcl_GetVersion] (C function Tcl_GetVersion).
-func Tcl_GetVersion(major *int32, minor *int32, patchLevel *int32, type_ *int32) {
-	raw.Tcl_GetVersion(major, minor, patchLevel, type_)
-}
-
-// Tcl_GetWideIntFromObj calls [raw.Tcl_GetWideIntFromObj] (C function Tcl_GetWideIntFromObj).
-func Tcl_GetWideIntFromObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, widePtr *int) int {
-	return raw.Tcl_GetWideIntFromObj(interp, objPtr, widePtr)
-}
-
-// Tcl_Gets calls [raw.Tcl_Gets] (C function Tcl_Gets).
-func Tcl_Gets(chan_ unsafe.Pointer, dsPtr *raw.Tcl_DString) int {
-	return raw.Tcl_Gets(chan_, dsPtr)
-}
-
-// Tcl_GetsObj calls [raw.Tcl_GetsObj] (C function Tcl_GetsObj).
-func Tcl_GetsObj(chan_ unsafe.Pointer, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_GetsObj(chan_, objPtr)
-}
-
-// Tcl_GlobalEval calls [raw.Tcl_GlobalEval] (C function Tcl_GlobalEval).
-func Tcl_GlobalEval(interp *raw.Tcl_Interp, command string) int {
-	return raw.Tcl_GlobalEval(interp, command)
-}
-
-// Tcl_GlobalEvalObj calls [raw.Tcl_GlobalEvalObj] (C function Tcl_GlobalEvalObj).
-func Tcl_GlobalEvalObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_GlobalEvalObj(interp, objPtr)
-}
-
-// Tcl_HashStats calls [raw.Tcl_HashStats] (C function Tcl_HashStats).
-func Tcl_HashStats(tablePtr *raw.Tcl_HashTable) string {
-	return raw.Tcl_HashStats(tablePtr)
-}
-
-// Tcl_HideCommand calls [raw.Tcl_HideCommand] (C function Tcl_HideCommand).
-func Tcl_HideCommand(interp *raw.Tcl_Interp, cmdName string, hiddenCmdToken string) int {
-	return raw.Tcl_HideCommand(interp, cmdName, hiddenCmdToken)
-}
-
-// Tcl_Import calls [raw.Tcl_Import] (C function Tcl_Import).
-func Tcl_Import(interp *raw.Tcl_Interp, nsPtr *raw.Tcl_Namespace, pattern string, allowOverwrite int) int {
-	return raw.Tcl_Import(interp, nsPtr, pattern, allowOverwrite)
-}
-
-// Tcl_IncrRefCount calls [raw.Tcl_IncrRefCount] (C function Tcl_IncrRefCount).
-func Tcl_IncrRefCount(objPtr *raw.Tcl_Obj) {
-	raw.Tcl_IncrRefCount(objPtr)
-}
-
-// Tcl_Init calls [raw.Tcl_Init] (C function Tcl_Init).
-func Tcl_Init(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_Init(interp)
-}
-
-// Tcl_InitBignumFromDouble calls [raw.Tcl_InitBignumFromDouble] (C function Tcl_InitBignumFromDouble).
-func Tcl_InitBignumFromDouble(interp *raw.Tcl_Interp, initval float64, toInit unsafe.Pointer) int {
-	return raw.Tcl_InitBignumFromDouble(interp, initval, toInit)
-}
-
-// Tcl_InitCustomHashTable calls [raw.Tcl_InitCustomHashTable] (C function Tcl_InitCustomHashTable).
-func Tcl_InitCustomHashTable(tablePtr *raw.Tcl_HashTable, keyType int, typePtr *raw.Tcl_HashKeyType) {
-	raw.Tcl_InitCustomHashTable(tablePtr, keyType, typePtr)
-}
-
-// Tcl_InitHashTable calls [raw.Tcl_InitHashTable] (C function Tcl_InitHashTable).
-func Tcl_InitHashTable(tablePtr *raw.Tcl_HashTable, keyType int) {
-	raw.Tcl_InitHashTable(tablePtr, keyType)
-}
-
-// Tcl_InitMemory calls [raw.Tcl_InitMemory] (C function Tcl_InitMemory).
-func Tcl_InitMemory(interp *raw.Tcl_Interp) {
-	raw.Tcl_InitMemory(interp)
-}
-
-// Tcl_InitNotifier calls [raw.Tcl_InitNotifier] (C function Tcl_InitNotifier).
-func Tcl_InitNotifier() unsafe.Pointer {
-	return raw.Tcl_InitNotifier()
-}
-
-// Tcl_InitObjHashTable calls [raw.Tcl_InitObjHashTable] (C function Tcl_InitObjHashTable).
-func Tcl_InitObjHashTable(tablePtr *raw.Tcl_HashTable) {
-	raw.Tcl_InitObjHashTable(tablePtr)
-}
-
-// Tcl_InitStubs calls [raw.Tcl_InitStubs] (C function Tcl_InitStubs).
-func Tcl_InitStubs(interp *raw.Tcl_Interp, version string, exact int) string {
-	return raw.Tcl_InitStubs(interp, version, exact)
-}
-
-// Tcl_InputBlocked calls [raw.Tcl_InputBlocked] (C function Tcl_InputBlocked).
-func Tcl_InputBlocked(chan_ unsafe.Pointer) int {
-	return raw.Tcl_InputBlocked(chan_)
-}
-
-// Tcl_InputBuffered calls [raw.Tcl_InputBuffered] (C function Tcl_InputBuffered).
-func Tcl_InputBuffered(chan_ unsafe.Pointer) int {
-	return raw.Tcl_InputBuffered(chan_)
-}
-
-// Tcl_InterpDeleted calls [raw.Tcl_InterpDeleted] (C function Tcl_InterpDeleted).
-func Tcl_InterpDeleted(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_InterpDeleted(interp)
-}
-
-// Tcl_InvalidateStringRep calls [raw.Tcl_InvalidateStringRep] (C function Tcl_InvalidateStringRep).
-func Tcl_InvalidateStringRep(objPtr *raw.Tcl_Obj) {
-	raw.Tcl_InvalidateStringRep(objPtr)
-}
-
-// Tcl_IsChannelExisting calls [raw.Tcl_IsChannelExisting] (C function Tcl_IsChannelExisting).
+// Tcl_IsChannelExisting calls the Tcl framework function Tcl_IsChannelExisting.
 func Tcl_IsChannelExisting(channelName string) int {
-	return raw.Tcl_IsChannelExisting(channelName)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_IsChannelExisting == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_IsChannelExisting, _lib, "Tcl_IsChannelExisting")
+	}
+	return _fnTcl_IsChannelExisting(channelName)
 }
 
-// Tcl_IsChannelRegistered calls [raw.Tcl_IsChannelRegistered] (C function Tcl_IsChannelRegistered).
-func Tcl_IsChannelRegistered(interp *raw.Tcl_Interp, channel unsafe.Pointer) int {
-	return raw.Tcl_IsChannelRegistered(interp, channel)
+var _fnTcl_IsChannelShared func(objc.ID) int
+
+// Tcl_IsChannelShared calls the Tcl framework function Tcl_IsChannelShared.
+func Tcl_IsChannelShared(channel obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_IsChannelShared == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_IsChannelShared, _lib, "Tcl_IsChannelShared")
+	}
+	return _fnTcl_IsChannelShared(objref.IDOf(channel))
 }
 
-// Tcl_IsChannelShared calls [raw.Tcl_IsChannelShared] (C function Tcl_IsChannelShared).
-func Tcl_IsChannelShared(channel unsafe.Pointer) int {
-	return raw.Tcl_IsChannelShared(channel)
+var _fnTcl_IsEnsemble func(objc.ID) int
+
+// Tcl_IsEnsemble calls the Tcl framework function Tcl_IsEnsemble.
+func Tcl_IsEnsemble(token obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_IsEnsemble == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_IsEnsemble, _lib, "Tcl_IsEnsemble")
+	}
+	return _fnTcl_IsEnsemble(objref.IDOf(token))
 }
 
-// Tcl_IsEnsemble calls [raw.Tcl_IsEnsemble] (C function Tcl_IsEnsemble).
-func Tcl_IsEnsemble(token unsafe.Pointer) int {
-	return raw.Tcl_IsEnsemble(token)
+var _fnTcl_IsStandardChannel func(objc.ID) int
+
+// Tcl_IsStandardChannel calls the Tcl framework function Tcl_IsStandardChannel.
+func Tcl_IsStandardChannel(channel obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_IsStandardChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_IsStandardChannel, _lib, "Tcl_IsStandardChannel")
+	}
+	return _fnTcl_IsStandardChannel(objref.IDOf(channel))
 }
 
-// Tcl_IsSafe calls [raw.Tcl_IsSafe] (C function Tcl_IsSafe).
-func Tcl_IsSafe(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_IsSafe(interp)
+var _fnTcl_NotifyChannel func(objc.ID, int)
+
+// Tcl_NotifyChannel calls the Tcl framework function Tcl_NotifyChannel.
+func Tcl_NotifyChannel(channel obj.Object, mask int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NotifyChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NotifyChannel, _lib, "Tcl_NotifyChannel")
+	}
+	_fnTcl_NotifyChannel(objref.IDOf(channel), mask)
 }
 
-// Tcl_IsShared calls [raw.Tcl_IsShared] (C function Tcl_IsShared).
-func Tcl_IsShared(objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_IsShared(objPtr)
-}
+var _fnTcl_NumUtfChars func(string, int) int
 
-// Tcl_IsStandardChannel calls [raw.Tcl_IsStandardChannel] (C function Tcl_IsStandardChannel).
-func Tcl_IsStandardChannel(channel unsafe.Pointer) int {
-	return raw.Tcl_IsStandardChannel(channel)
-}
-
-// Tcl_JoinPath calls [raw.Tcl_JoinPath] (C function Tcl_JoinPath).
-func Tcl_JoinPath(argc int, argv unsafe.Pointer, resultPtr *raw.Tcl_DString) string {
-	return raw.Tcl_JoinPath(argc, argv, resultPtr)
-}
-
-// Tcl_JoinThread calls [raw.Tcl_JoinThread] (C function Tcl_JoinThread).
-func Tcl_JoinThread(threadId unsafe.Pointer, result *int32) int {
-	return raw.Tcl_JoinThread(threadId, result)
-}
-
-// Tcl_LimitAddHandler calls [raw.Tcl_LimitAddHandler] (C function Tcl_LimitAddHandler).
-func Tcl_LimitAddHandler(interp *raw.Tcl_Interp, type_ int, handlerProc unsafe.Pointer, clientData unsafe.Pointer, deleteProc unsafe.Pointer) {
-	raw.Tcl_LimitAddHandler(interp, type_, handlerProc, clientData, deleteProc)
-}
-
-// Tcl_LimitCheck calls [raw.Tcl_LimitCheck] (C function Tcl_LimitCheck).
-func Tcl_LimitCheck(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_LimitCheck(interp)
-}
-
-// Tcl_LimitExceeded calls [raw.Tcl_LimitExceeded] (C function Tcl_LimitExceeded).
-func Tcl_LimitExceeded(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_LimitExceeded(interp)
-}
-
-// Tcl_LimitGetCommands calls [raw.Tcl_LimitGetCommands] (C function Tcl_LimitGetCommands).
-func Tcl_LimitGetCommands(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_LimitGetCommands(interp)
-}
-
-// Tcl_LimitGetGranularity calls [raw.Tcl_LimitGetGranularity] (C function Tcl_LimitGetGranularity).
-func Tcl_LimitGetGranularity(interp *raw.Tcl_Interp, type_ int) int {
-	return raw.Tcl_LimitGetGranularity(interp, type_)
-}
-
-// Tcl_LimitGetTime calls [raw.Tcl_LimitGetTime] (C function Tcl_LimitGetTime).
-func Tcl_LimitGetTime(interp *raw.Tcl_Interp, timeLimitPtr *raw.Tcl_Time) {
-	raw.Tcl_LimitGetTime(interp, timeLimitPtr)
-}
-
-// Tcl_LimitReady calls [raw.Tcl_LimitReady] (C function Tcl_LimitReady).
-func Tcl_LimitReady(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_LimitReady(interp)
-}
-
-// Tcl_LimitRemoveHandler calls [raw.Tcl_LimitRemoveHandler] (C function Tcl_LimitRemoveHandler).
-func Tcl_LimitRemoveHandler(interp *raw.Tcl_Interp, type_ int, handlerProc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_LimitRemoveHandler(interp, type_, handlerProc, clientData)
-}
-
-// Tcl_LimitSetCommands calls [raw.Tcl_LimitSetCommands] (C function Tcl_LimitSetCommands).
-func Tcl_LimitSetCommands(interp *raw.Tcl_Interp, commandLimit int) {
-	raw.Tcl_LimitSetCommands(interp, commandLimit)
-}
-
-// Tcl_LimitSetGranularity calls [raw.Tcl_LimitSetGranularity] (C function Tcl_LimitSetGranularity).
-func Tcl_LimitSetGranularity(interp *raw.Tcl_Interp, type_ int, granularity int) {
-	raw.Tcl_LimitSetGranularity(interp, type_, granularity)
-}
-
-// Tcl_LimitSetTime calls [raw.Tcl_LimitSetTime] (C function Tcl_LimitSetTime).
-func Tcl_LimitSetTime(interp *raw.Tcl_Interp, timeLimitPtr *raw.Tcl_Time) {
-	raw.Tcl_LimitSetTime(interp, timeLimitPtr)
-}
-
-// Tcl_LimitTypeEnabled calls [raw.Tcl_LimitTypeEnabled] (C function Tcl_LimitTypeEnabled).
-func Tcl_LimitTypeEnabled(interp *raw.Tcl_Interp, type_ int) int {
-	return raw.Tcl_LimitTypeEnabled(interp, type_)
-}
-
-// Tcl_LimitTypeExceeded calls [raw.Tcl_LimitTypeExceeded] (C function Tcl_LimitTypeExceeded).
-func Tcl_LimitTypeExceeded(interp *raw.Tcl_Interp, type_ int) int {
-	return raw.Tcl_LimitTypeExceeded(interp, type_)
-}
-
-// Tcl_LimitTypeReset calls [raw.Tcl_LimitTypeReset] (C function Tcl_LimitTypeReset).
-func Tcl_LimitTypeReset(interp *raw.Tcl_Interp, type_ int) {
-	raw.Tcl_LimitTypeReset(interp, type_)
-}
-
-// Tcl_LimitTypeSet calls [raw.Tcl_LimitTypeSet] (C function Tcl_LimitTypeSet).
-func Tcl_LimitTypeSet(interp *raw.Tcl_Interp, type_ int) {
-	raw.Tcl_LimitTypeSet(interp, type_)
-}
-
-// Tcl_LinkVar calls [raw.Tcl_LinkVar] (C function Tcl_LinkVar).
-func Tcl_LinkVar(interp *raw.Tcl_Interp, varName string, addr string, type_ int) int {
-	return raw.Tcl_LinkVar(interp, varName, addr, type_)
-}
-
-// Tcl_ListMathFuncs calls [raw.Tcl_ListMathFuncs] (C function Tcl_ListMathFuncs).
-func Tcl_ListMathFuncs(interp *raw.Tcl_Interp, pattern string) *raw.Tcl_Obj {
-	return raw.Tcl_ListMathFuncs(interp, pattern)
-}
-
-// Tcl_ListObjAppendElement calls [raw.Tcl_ListObjAppendElement] (C function Tcl_ListObjAppendElement).
-func Tcl_ListObjAppendElement(interp *raw.Tcl_Interp, listPtr *raw.Tcl_Obj, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_ListObjAppendElement(interp, listPtr, objPtr)
-}
-
-// Tcl_ListObjAppendList calls [raw.Tcl_ListObjAppendList] (C function Tcl_ListObjAppendList).
-func Tcl_ListObjAppendList(interp *raw.Tcl_Interp, listPtr *raw.Tcl_Obj, elemListPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_ListObjAppendList(interp, listPtr, elemListPtr)
-}
-
-// Tcl_ListObjGetElements calls [raw.Tcl_ListObjGetElements] (C function Tcl_ListObjGetElements).
-func Tcl_ListObjGetElements(interp *raw.Tcl_Interp, listPtr *raw.Tcl_Obj, objcPtr *int32, objvPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_ListObjGetElements(interp, listPtr, objcPtr, objvPtr)
-}
-
-// Tcl_ListObjIndex calls [raw.Tcl_ListObjIndex] (C function Tcl_ListObjIndex).
-func Tcl_ListObjIndex(interp *raw.Tcl_Interp, listPtr *raw.Tcl_Obj, index int, objPtrPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_ListObjIndex(interp, listPtr, index, objPtrPtr)
-}
-
-// Tcl_ListObjLength calls [raw.Tcl_ListObjLength] (C function Tcl_ListObjLength).
-func Tcl_ListObjLength(interp *raw.Tcl_Interp, listPtr *raw.Tcl_Obj, lengthPtr *int32) int {
-	return raw.Tcl_ListObjLength(interp, listPtr, lengthPtr)
-}
-
-// Tcl_ListObjReplace calls [raw.Tcl_ListObjReplace] (C function Tcl_ListObjReplace).
-func Tcl_ListObjReplace(interp *raw.Tcl_Interp, listPtr *raw.Tcl_Obj, first int, count int, objc int, objv unsafe.Pointer) int {
-	return raw.Tcl_ListObjReplace(interp, listPtr, first, count, objc, objv)
-}
-
-// Tcl_LogCommandInfo calls [raw.Tcl_LogCommandInfo] (C function Tcl_LogCommandInfo).
-func Tcl_LogCommandInfo(interp *raw.Tcl_Interp, script string, command string, length int) {
-	raw.Tcl_LogCommandInfo(interp, script, command, length)
-}
-
-// Tcl_MacOSXOpenBundleResources calls [raw.Tcl_MacOSXOpenBundleResources] (C function Tcl_MacOSXOpenBundleResources).
-func Tcl_MacOSXOpenBundleResources(interp *raw.Tcl_Interp, bundleName string, hasResourceFile int, maxPathLen int, libraryPath string) int {
-	return raw.Tcl_MacOSXOpenBundleResources(interp, bundleName, hasResourceFile, maxPathLen, libraryPath)
-}
-
-// Tcl_MacOSXOpenVersionedBundleResources calls [raw.Tcl_MacOSXOpenVersionedBundleResources] (C function Tcl_MacOSXOpenVersionedBundleResources).
-func Tcl_MacOSXOpenVersionedBundleResources(interp *raw.Tcl_Interp, bundleName string, bundleVersion string, hasResourceFile int, maxPathLen int, libraryPath string) int {
-	return raw.Tcl_MacOSXOpenVersionedBundleResources(interp, bundleName, bundleVersion, hasResourceFile, maxPathLen, libraryPath)
-}
-
-// Tcl_Main calls [raw.Tcl_Main] (C function Tcl_Main).
-func Tcl_Main(argc int, argv string, appInitProc unsafe.Pointer) {
-	raw.Tcl_Main(argc, argv, appInitProc)
-}
-
-// Tcl_MakeFileChannel calls [raw.Tcl_MakeFileChannel] (C function Tcl_MakeFileChannel).
-func Tcl_MakeFileChannel(handle unsafe.Pointer, mode int) unsafe.Pointer {
-	return raw.Tcl_MakeFileChannel(handle, mode)
-}
-
-// Tcl_MakeSafe calls [raw.Tcl_MakeSafe] (C function Tcl_MakeSafe).
-func Tcl_MakeSafe(interp *raw.Tcl_Interp) int {
-	return raw.Tcl_MakeSafe(interp)
-}
-
-// Tcl_MakeTcpClientChannel calls [raw.Tcl_MakeTcpClientChannel] (C function Tcl_MakeTcpClientChannel).
-func Tcl_MakeTcpClientChannel(tcpSocket unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_MakeTcpClientChannel(tcpSocket)
-}
-
-// Tcl_Merge calls [raw.Tcl_Merge] (C function Tcl_Merge).
-func Tcl_Merge(argc int, argv unsafe.Pointer) string {
-	return raw.Tcl_Merge(argc, argv)
-}
-
-// Tcl_MutexFinalize calls [raw.Tcl_MutexFinalize] (C function Tcl_MutexFinalize).
-func Tcl_MutexFinalize(mutex unsafe.Pointer) {
-	raw.Tcl_MutexFinalize(mutex)
-}
-
-// Tcl_MutexLock calls [raw.Tcl_MutexLock] (C function Tcl_MutexLock).
-func Tcl_MutexLock(mutexPtr unsafe.Pointer) {
-	raw.Tcl_MutexLock(mutexPtr)
-}
-
-// Tcl_MutexUnlock calls [raw.Tcl_MutexUnlock] (C function Tcl_MutexUnlock).
-func Tcl_MutexUnlock(mutexPtr unsafe.Pointer) {
-	raw.Tcl_MutexUnlock(mutexPtr)
-}
-
-// Tcl_NewBignumObj calls [raw.Tcl_NewBignumObj] (C function Tcl_NewBignumObj).
-func Tcl_NewBignumObj(value unsafe.Pointer) *raw.Tcl_Obj {
-	return raw.Tcl_NewBignumObj(value)
-}
-
-// Tcl_NewBooleanObj calls [raw.Tcl_NewBooleanObj] (C function Tcl_NewBooleanObj).
-func Tcl_NewBooleanObj(boolValue int) *raw.Tcl_Obj {
-	return raw.Tcl_NewBooleanObj(boolValue)
-}
-
-// Tcl_NewByteArrayObj calls [raw.Tcl_NewByteArrayObj] (C function Tcl_NewByteArrayObj).
-func Tcl_NewByteArrayObj(bytes_ *uint8, length int) *raw.Tcl_Obj {
-	return raw.Tcl_NewByteArrayObj(bytes_, length)
-}
-
-// Tcl_NewDictObj calls [raw.Tcl_NewDictObj] (C function Tcl_NewDictObj).
-func Tcl_NewDictObj() *raw.Tcl_Obj {
-	return raw.Tcl_NewDictObj()
-}
-
-// Tcl_NewDoubleObj calls [raw.Tcl_NewDoubleObj] (C function Tcl_NewDoubleObj).
-func Tcl_NewDoubleObj(doubleValue float64) *raw.Tcl_Obj {
-	return raw.Tcl_NewDoubleObj(doubleValue)
-}
-
-// Tcl_NewIntObj calls [raw.Tcl_NewIntObj] (C function Tcl_NewIntObj).
-func Tcl_NewIntObj(intValue int) *raw.Tcl_Obj {
-	return raw.Tcl_NewIntObj(intValue)
-}
-
-// Tcl_NewListObj calls [raw.Tcl_NewListObj] (C function Tcl_NewListObj).
-func Tcl_NewListObj(objc int, objv unsafe.Pointer) *raw.Tcl_Obj {
-	return raw.Tcl_NewListObj(objc, objv)
-}
-
-// Tcl_NewLongObj calls [raw.Tcl_NewLongObj] (C function Tcl_NewLongObj).
-func Tcl_NewLongObj(longValue int) *raw.Tcl_Obj {
-	return raw.Tcl_NewLongObj(longValue)
-}
-
-// Tcl_NewObj calls [raw.Tcl_NewObj] (C function Tcl_NewObj).
-func Tcl_NewObj() *raw.Tcl_Obj {
-	return raw.Tcl_NewObj()
-}
-
-// Tcl_NewStringObj calls [raw.Tcl_NewStringObj] (C function Tcl_NewStringObj).
-func Tcl_NewStringObj(bytes_ string, length int) *raw.Tcl_Obj {
-	return raw.Tcl_NewStringObj(bytes_, length)
-}
-
-// Tcl_NewUnicodeObj calls [raw.Tcl_NewUnicodeObj] (C function Tcl_NewUnicodeObj).
-func Tcl_NewUnicodeObj(unicode *uint16, numChars int) *raw.Tcl_Obj {
-	return raw.Tcl_NewUnicodeObj(unicode, numChars)
-}
-
-// Tcl_NewWideIntObj calls [raw.Tcl_NewWideIntObj] (C function Tcl_NewWideIntObj).
-func Tcl_NewWideIntObj(wideValue int) *raw.Tcl_Obj {
-	return raw.Tcl_NewWideIntObj(wideValue)
-}
-
-// Tcl_NextHashEntry calls [raw.Tcl_NextHashEntry] (C function Tcl_NextHashEntry).
-func Tcl_NextHashEntry(searchPtr *raw.Tcl_HashSearch) *raw.Tcl_HashEntry {
-	return raw.Tcl_NextHashEntry(searchPtr)
-}
-
-// Tcl_NotifyChannel calls [raw.Tcl_NotifyChannel] (C function Tcl_NotifyChannel).
-func Tcl_NotifyChannel(channel unsafe.Pointer, mask int) {
-	raw.Tcl_NotifyChannel(channel, mask)
-}
-
-// Tcl_NumUtfChars calls [raw.Tcl_NumUtfChars] (C function Tcl_NumUtfChars).
+// Tcl_NumUtfChars calls the Tcl framework function Tcl_NumUtfChars.
 func Tcl_NumUtfChars(src string, length int) int {
-	return raw.Tcl_NumUtfChars(src, length)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NumUtfChars == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NumUtfChars, _lib, "Tcl_NumUtfChars")
+	}
+	return _fnTcl_NumUtfChars(src, length)
 }
 
-// Tcl_ObjGetVar2 calls [raw.Tcl_ObjGetVar2] (C function Tcl_ObjGetVar2).
-func Tcl_ObjGetVar2(interp *raw.Tcl_Interp, part1Ptr *raw.Tcl_Obj, part2Ptr *raw.Tcl_Obj, flags int) *raw.Tcl_Obj {
-	return raw.Tcl_ObjGetVar2(interp, part1Ptr, part2Ptr, flags)
+var _fnTcl_OutputBuffered func(objc.ID) int
+
+// Tcl_OutputBuffered calls the Tcl framework function Tcl_OutputBuffered.
+func Tcl_OutputBuffered(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_OutputBuffered == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_OutputBuffered, _lib, "Tcl_OutputBuffered")
+	}
+	return _fnTcl_OutputBuffered(objref.IDOf(chan_))
 }
 
-// Tcl_ObjPrintf calls [raw.Tcl_ObjPrintf] (C function Tcl_ObjPrintf).
-func Tcl_ObjPrintf(format string) *raw.Tcl_Obj {
-	return raw.Tcl_ObjPrintf(format)
-}
+var _fnTcl_PanicVA func(string, string)
 
-// Tcl_ObjSetVar2 calls [raw.Tcl_ObjSetVar2] (C function Tcl_ObjSetVar2).
-func Tcl_ObjSetVar2(interp *raw.Tcl_Interp, part1Ptr *raw.Tcl_Obj, part2Ptr *raw.Tcl_Obj, newValuePtr *raw.Tcl_Obj, flags int) *raw.Tcl_Obj {
-	return raw.Tcl_ObjSetVar2(interp, part1Ptr, part2Ptr, newValuePtr, flags)
-}
-
-// Tcl_OpenCommandChannel calls [raw.Tcl_OpenCommandChannel] (C function Tcl_OpenCommandChannel).
-func Tcl_OpenCommandChannel(interp *raw.Tcl_Interp, argc int, argv string, flags int) unsafe.Pointer {
-	return raw.Tcl_OpenCommandChannel(interp, argc, argv, flags)
-}
-
-// Tcl_OpenFileChannel calls [raw.Tcl_OpenFileChannel] (C function Tcl_OpenFileChannel).
-func Tcl_OpenFileChannel(interp *raw.Tcl_Interp, fileName string, modeString string, permissions int) unsafe.Pointer {
-	return raw.Tcl_OpenFileChannel(interp, fileName, modeString, permissions)
-}
-
-// Tcl_OpenTcpClient calls [raw.Tcl_OpenTcpClient] (C function Tcl_OpenTcpClient).
-func Tcl_OpenTcpClient(interp *raw.Tcl_Interp, port int, address string, myaddr string, myport int, async int) unsafe.Pointer {
-	return raw.Tcl_OpenTcpClient(interp, port, address, myaddr, myport, async)
-}
-
-// Tcl_OpenTcpServer calls [raw.Tcl_OpenTcpServer] (C function Tcl_OpenTcpServer).
-func Tcl_OpenTcpServer(interp *raw.Tcl_Interp, port int, host string, acceptProc unsafe.Pointer, callbackData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_OpenTcpServer(interp, port, host, acceptProc, callbackData)
-}
-
-// Tcl_OutputBuffered calls [raw.Tcl_OutputBuffered] (C function Tcl_OutputBuffered).
-func Tcl_OutputBuffered(chan_ unsafe.Pointer) int {
-	return raw.Tcl_OutputBuffered(chan_)
-}
-
-// Tcl_PanicVA calls [raw.Tcl_PanicVA] (C function Tcl_PanicVA).
+// Tcl_PanicVA calls the Tcl framework function Tcl_PanicVA.
 func Tcl_PanicVA(format string, argList string) {
-	raw.Tcl_PanicVA(format, argList)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_PanicVA == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_PanicVA, _lib, "Tcl_PanicVA")
+	}
+	_fnTcl_PanicVA(format, argList)
 }
 
-// Tcl_ParseBraces calls [raw.Tcl_ParseBraces] (C function Tcl_ParseBraces).
-func Tcl_ParseBraces(interp *raw.Tcl_Interp, start string, numBytes int, parsePtr *raw.Tcl_Parse, append_ int, termPtr string) int {
-	return raw.Tcl_ParseBraces(interp, start, numBytes, parsePtr, append_, termPtr)
-}
+var _fnTcl_PutEnv func(string) int
 
-// Tcl_ParseCommand calls [raw.Tcl_ParseCommand] (C function Tcl_ParseCommand).
-func Tcl_ParseCommand(interp *raw.Tcl_Interp, start string, numBytes int, nested int, parsePtr *raw.Tcl_Parse) int {
-	return raw.Tcl_ParseCommand(interp, start, numBytes, nested, parsePtr)
-}
-
-// Tcl_ParseExpr calls [raw.Tcl_ParseExpr] (C function Tcl_ParseExpr).
-func Tcl_ParseExpr(interp *raw.Tcl_Interp, start string, numBytes int, parsePtr *raw.Tcl_Parse) int {
-	return raw.Tcl_ParseExpr(interp, start, numBytes, parsePtr)
-}
-
-// Tcl_ParseQuotedString calls [raw.Tcl_ParseQuotedString] (C function Tcl_ParseQuotedString).
-func Tcl_ParseQuotedString(interp *raw.Tcl_Interp, start string, numBytes int, parsePtr *raw.Tcl_Parse, append_ int, termPtr string) int {
-	return raw.Tcl_ParseQuotedString(interp, start, numBytes, parsePtr, append_, termPtr)
-}
-
-// Tcl_ParseVar calls [raw.Tcl_ParseVar] (C function Tcl_ParseVar).
-func Tcl_ParseVar(interp *raw.Tcl_Interp, start string, termPtr string) string {
-	return raw.Tcl_ParseVar(interp, start, termPtr)
-}
-
-// Tcl_ParseVarName calls [raw.Tcl_ParseVarName] (C function Tcl_ParseVarName).
-func Tcl_ParseVarName(interp *raw.Tcl_Interp, start string, numBytes int, parsePtr *raw.Tcl_Parse, append_ int) int {
-	return raw.Tcl_ParseVarName(interp, start, numBytes, parsePtr, append_)
-}
-
-// Tcl_PkgInitStubsCheck calls [raw.Tcl_PkgInitStubsCheck] (C function Tcl_PkgInitStubsCheck).
-func Tcl_PkgInitStubsCheck(interp *raw.Tcl_Interp, version string, exact int) string {
-	return raw.Tcl_PkgInitStubsCheck(interp, version, exact)
-}
-
-// Tcl_PkgPresent calls [raw.Tcl_PkgPresent] (C function Tcl_PkgPresent).
-func Tcl_PkgPresent(interp *raw.Tcl_Interp, name string, version string, exact int) string {
-	return raw.Tcl_PkgPresent(interp, name, version, exact)
-}
-
-// Tcl_PkgPresentEx calls [raw.Tcl_PkgPresentEx] (C function Tcl_PkgPresentEx).
-func Tcl_PkgPresentEx(interp *raw.Tcl_Interp, name string, version string, exact int, clientDataPtr unsafe.Pointer) string {
-	return raw.Tcl_PkgPresentEx(interp, name, version, exact, clientDataPtr)
-}
-
-// Tcl_PkgProvide calls [raw.Tcl_PkgProvide] (C function Tcl_PkgProvide).
-func Tcl_PkgProvide(interp *raw.Tcl_Interp, name string, version string) int {
-	return raw.Tcl_PkgProvide(interp, name, version)
-}
-
-// Tcl_PkgProvideEx calls [raw.Tcl_PkgProvideEx] (C function Tcl_PkgProvideEx).
-func Tcl_PkgProvideEx(interp *raw.Tcl_Interp, name string, version string, clientData unsafe.Pointer) int {
-	return raw.Tcl_PkgProvideEx(interp, name, version, clientData)
-}
-
-// Tcl_PkgRequire calls [raw.Tcl_PkgRequire] (C function Tcl_PkgRequire).
-func Tcl_PkgRequire(interp *raw.Tcl_Interp, name string, version string, exact int) string {
-	return raw.Tcl_PkgRequire(interp, name, version, exact)
-}
-
-// Tcl_PkgRequireEx calls [raw.Tcl_PkgRequireEx] (C function Tcl_PkgRequireEx).
-func Tcl_PkgRequireEx(interp *raw.Tcl_Interp, name string, version string, exact int, clientDataPtr unsafe.Pointer) string {
-	return raw.Tcl_PkgRequireEx(interp, name, version, exact, clientDataPtr)
-}
-
-// Tcl_PkgRequireProc calls [raw.Tcl_PkgRequireProc] (C function Tcl_PkgRequireProc).
-func Tcl_PkgRequireProc(interp *raw.Tcl_Interp, name string, objc int, objv unsafe.Pointer, clientDataPtr unsafe.Pointer) int {
-	return raw.Tcl_PkgRequireProc(interp, name, objc, objv, clientDataPtr)
-}
-
-// Tcl_PosixError calls [raw.Tcl_PosixError] (C function Tcl_PosixError).
-func Tcl_PosixError(interp *raw.Tcl_Interp) string {
-	return raw.Tcl_PosixError(interp)
-}
-
-// Tcl_Preserve calls [raw.Tcl_Preserve] (C function Tcl_Preserve).
-func Tcl_Preserve(data unsafe.Pointer) {
-	raw.Tcl_Preserve(data)
-}
-
-// Tcl_PrintDouble calls [raw.Tcl_PrintDouble] (C function Tcl_PrintDouble).
-func Tcl_PrintDouble(interp *raw.Tcl_Interp, value float64, dst string) {
-	raw.Tcl_PrintDouble(interp, value, dst)
-}
-
-// Tcl_ProcObjCmd calls [raw.Tcl_ProcObjCmd] (C function Tcl_ProcObjCmd).
-func Tcl_ProcObjCmd(clientData unsafe.Pointer, interp *raw.Tcl_Interp, objc int, objv unsafe.Pointer) int {
-	return raw.Tcl_ProcObjCmd(clientData, interp, objc, objv)
-}
-
-// Tcl_PutEnv calls [raw.Tcl_PutEnv] (C function Tcl_PutEnv).
+// Tcl_PutEnv calls the Tcl framework function Tcl_PutEnv.
 func Tcl_PutEnv(assignment string) int {
-	return raw.Tcl_PutEnv(assignment)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_PutEnv == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_PutEnv, _lib, "Tcl_PutEnv")
+	}
+	return _fnTcl_PutEnv(assignment)
 }
 
-// Tcl_QueryTimeProc calls [raw.Tcl_QueryTimeProc] (C function Tcl_QueryTimeProc).
-func Tcl_QueryTimeProc(getProc unsafe.Pointer, scaleProc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_QueryTimeProc(getProc, scaleProc, clientData)
+var _fnTcl_Read func(objc.ID, string, int) int
+
+// Tcl_Read calls the Tcl framework function Tcl_Read.
+func Tcl_Read(chan_ obj.Object, bufPtr string, toRead int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Read == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Read, _lib, "Tcl_Read")
+	}
+	return _fnTcl_Read(objref.IDOf(chan_), bufPtr, toRead)
 }
 
-// Tcl_QueueEvent calls [raw.Tcl_QueueEvent] (C function Tcl_QueueEvent).
-func Tcl_QueueEvent(evPtr *raw.Tcl_Event, position Tcl_QueuePosition) {
-	raw.Tcl_QueueEvent(evPtr, raw.Tcl_QueuePosition(position))
+var _fnTcl_ReadRaw func(objc.ID, string, int) int
+
+// Tcl_ReadRaw calls the Tcl framework function Tcl_ReadRaw.
+func Tcl_ReadRaw(chan_ obj.Object, dst string, bytesToRead int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ReadRaw == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ReadRaw, _lib, "Tcl_ReadRaw")
+	}
+	return _fnTcl_ReadRaw(objref.IDOf(chan_), dst, bytesToRead)
 }
 
-// Tcl_Read calls [raw.Tcl_Read] (C function Tcl_Read).
-func Tcl_Read(chan_ unsafe.Pointer, bufPtr string, toRead int) int {
-	return raw.Tcl_Read(chan_, bufPtr, toRead)
+var _fnTcl_Realloc func(string, int) string
+
+// Tcl_Realloc calls the Tcl framework function Tcl_Realloc.
+func Tcl_Realloc(ptr string, size int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Realloc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Realloc, _lib, "Tcl_Realloc")
+	}
+	return _fnTcl_Realloc(ptr, size)
 }
 
-// Tcl_ReadChars calls [raw.Tcl_ReadChars] (C function Tcl_ReadChars).
-func Tcl_ReadChars(channel unsafe.Pointer, objPtr *raw.Tcl_Obj, charsToRead int, appendFlag int) int {
-	return raw.Tcl_ReadChars(channel, objPtr, charsToRead, appendFlag)
-}
+var _fnTcl_ReapDetachedProcs func()
 
-// Tcl_ReadRaw calls [raw.Tcl_ReadRaw] (C function Tcl_ReadRaw).
-func Tcl_ReadRaw(chan_ unsafe.Pointer, dst string, bytesToRead int) int {
-	return raw.Tcl_ReadRaw(chan_, dst, bytesToRead)
-}
-
-// Tcl_Realloc calls [raw.Tcl_Realloc] (C function Tcl_Realloc).
-func Tcl_Realloc(ptr string, size uint) string {
-	return raw.Tcl_Realloc(ptr, size)
-}
-
-// Tcl_ReapDetachedProcs calls [raw.Tcl_ReapDetachedProcs] (C function Tcl_ReapDetachedProcs).
+// Tcl_ReapDetachedProcs calls the Tcl framework function Tcl_ReapDetachedProcs.
 func Tcl_ReapDetachedProcs() {
-	raw.Tcl_ReapDetachedProcs()
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ReapDetachedProcs == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ReapDetachedProcs, _lib, "Tcl_ReapDetachedProcs")
+	}
+	_fnTcl_ReapDetachedProcs()
 }
 
-// Tcl_RecordAndEval calls [raw.Tcl_RecordAndEval] (C function Tcl_RecordAndEval).
-func Tcl_RecordAndEval(interp *raw.Tcl_Interp, cmd string, flags int) int {
-	return raw.Tcl_RecordAndEval(interp, cmd, flags)
+var _fnTcl_RegExpRange func(objc.ID, int, string, string)
+
+// Tcl_RegExpRange calls the Tcl framework function Tcl_RegExpRange.
+func Tcl_RegExpRange(regexp obj.Object, index int, startPtr string, endPtr string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_RegExpRange == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_RegExpRange, _lib, "Tcl_RegExpRange")
+	}
+	_fnTcl_RegExpRange(objref.IDOf(regexp), index, startPtr, endPtr)
 }
 
-// Tcl_RecordAndEvalObj calls [raw.Tcl_RecordAndEvalObj] (C function Tcl_RecordAndEvalObj).
-func Tcl_RecordAndEvalObj(interp *raw.Tcl_Interp, cmdPtr *raw.Tcl_Obj, flags int) int {
-	return raw.Tcl_RecordAndEvalObj(interp, cmdPtr, flags)
+var _fnTcl_Seek func(objc.ID, int, int) int
+
+// Tcl_Seek calls the Tcl framework function Tcl_Seek.
+func Tcl_Seek(chan_ obj.Object, offset int, mode int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Seek == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Seek, _lib, "Tcl_Seek")
+	}
+	return _fnTcl_Seek(objref.IDOf(chan_), offset, mode)
 }
 
-// Tcl_RegExpCompile calls [raw.Tcl_RegExpCompile] (C function Tcl_RegExpCompile).
-func Tcl_RegExpCompile(interp *raw.Tcl_Interp, pattern string) unsafe.Pointer {
-	return raw.Tcl_RegExpCompile(interp, pattern)
+var _fnTcl_SeekOld func(objc.ID, int, int) int
+
+// Tcl_SeekOld calls the Tcl framework function Tcl_SeekOld.
+func Tcl_SeekOld(chan_ obj.Object, offset int, mode int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SeekOld == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SeekOld, _lib, "Tcl_SeekOld")
+	}
+	return _fnTcl_SeekOld(objref.IDOf(chan_), offset, mode)
 }
 
-// Tcl_RegExpExec calls [raw.Tcl_RegExpExec] (C function Tcl_RegExpExec).
-func Tcl_RegExpExec(interp *raw.Tcl_Interp, regexp unsafe.Pointer, text string, start string) int {
-	return raw.Tcl_RegExpExec(interp, regexp, text, start)
-}
+var _fnTcl_ServiceAll func() int
 
-// Tcl_RegExpExecObj calls [raw.Tcl_RegExpExecObj] (C function Tcl_RegExpExecObj).
-func Tcl_RegExpExecObj(interp *raw.Tcl_Interp, regexp unsafe.Pointer, textObj *raw.Tcl_Obj, offset int, nmatches int, flags int) int {
-	return raw.Tcl_RegExpExecObj(interp, regexp, textObj, offset, nmatches, flags)
-}
-
-// Tcl_RegExpGetInfo calls [raw.Tcl_RegExpGetInfo] (C function Tcl_RegExpGetInfo).
-func Tcl_RegExpGetInfo(regexp unsafe.Pointer, infoPtr *raw.Tcl_RegExpInfo) {
-	raw.Tcl_RegExpGetInfo(regexp, infoPtr)
-}
-
-// Tcl_RegExpMatch calls [raw.Tcl_RegExpMatch] (C function Tcl_RegExpMatch).
-func Tcl_RegExpMatch(interp *raw.Tcl_Interp, text string, pattern string) int {
-	return raw.Tcl_RegExpMatch(interp, text, pattern)
-}
-
-// Tcl_RegExpMatchObj calls [raw.Tcl_RegExpMatchObj] (C function Tcl_RegExpMatchObj).
-func Tcl_RegExpMatchObj(interp *raw.Tcl_Interp, textObj *raw.Tcl_Obj, patternObj *raw.Tcl_Obj) int {
-	return raw.Tcl_RegExpMatchObj(interp, textObj, patternObj)
-}
-
-// Tcl_RegExpRange calls [raw.Tcl_RegExpRange] (C function Tcl_RegExpRange).
-func Tcl_RegExpRange(regexp unsafe.Pointer, index int, startPtr string, endPtr string) {
-	raw.Tcl_RegExpRange(regexp, index, startPtr, endPtr)
-}
-
-// Tcl_RegisterChannel calls [raw.Tcl_RegisterChannel] (C function Tcl_RegisterChannel).
-func Tcl_RegisterChannel(interp *raw.Tcl_Interp, chan_ unsafe.Pointer) {
-	raw.Tcl_RegisterChannel(interp, chan_)
-}
-
-// Tcl_RegisterConfig calls [raw.Tcl_RegisterConfig] (C function Tcl_RegisterConfig).
-func Tcl_RegisterConfig(interp *raw.Tcl_Interp, pkgName string, configuration *raw.Tcl_Config, valEncoding string) {
-	raw.Tcl_RegisterConfig(interp, pkgName, configuration, valEncoding)
-}
-
-// Tcl_RegisterObjType calls [raw.Tcl_RegisterObjType] (C function Tcl_RegisterObjType).
-func Tcl_RegisterObjType(typePtr *raw.Tcl_ObjType) {
-	raw.Tcl_RegisterObjType(typePtr)
-}
-
-// Tcl_Release calls [raw.Tcl_Release] (C function Tcl_Release).
-func Tcl_Release(clientData unsafe.Pointer) {
-	raw.Tcl_Release(clientData)
-}
-
-// Tcl_ResetResult calls [raw.Tcl_ResetResult] (C function Tcl_ResetResult).
-func Tcl_ResetResult(interp *raw.Tcl_Interp) {
-	raw.Tcl_ResetResult(interp)
-}
-
-// Tcl_RestoreInterpState calls [raw.Tcl_RestoreInterpState] (C function Tcl_RestoreInterpState).
-func Tcl_RestoreInterpState(interp *raw.Tcl_Interp, state unsafe.Pointer) int {
-	return raw.Tcl_RestoreInterpState(interp, state)
-}
-
-// Tcl_RestoreResult calls [raw.Tcl_RestoreResult] (C function Tcl_RestoreResult).
-func Tcl_RestoreResult(interp *raw.Tcl_Interp, statePtr *raw.Tcl_SavedResult) {
-	raw.Tcl_RestoreResult(interp, statePtr)
-}
-
-// Tcl_SaveInterpState calls [raw.Tcl_SaveInterpState] (C function Tcl_SaveInterpState).
-func Tcl_SaveInterpState(interp *raw.Tcl_Interp, status int) unsafe.Pointer {
-	return raw.Tcl_SaveInterpState(interp, status)
-}
-
-// Tcl_SaveResult calls [raw.Tcl_SaveResult] (C function Tcl_SaveResult).
-func Tcl_SaveResult(interp *raw.Tcl_Interp, statePtr *raw.Tcl_SavedResult) {
-	raw.Tcl_SaveResult(interp, statePtr)
-}
-
-// Tcl_ScanCountedElement calls [raw.Tcl_ScanCountedElement] (C function Tcl_ScanCountedElement).
-func Tcl_ScanCountedElement(str string, length int, flagPtr *int32) int {
-	return raw.Tcl_ScanCountedElement(str, length, flagPtr)
-}
-
-// Tcl_ScanElement calls [raw.Tcl_ScanElement] (C function Tcl_ScanElement).
-func Tcl_ScanElement(str string, flagPtr *int32) int {
-	return raw.Tcl_ScanElement(str, flagPtr)
-}
-
-// Tcl_Seek calls [raw.Tcl_Seek] (C function Tcl_Seek).
-func Tcl_Seek(chan_ unsafe.Pointer, offset int, mode int) int {
-	return raw.Tcl_Seek(chan_, offset, mode)
-}
-
-// Tcl_SeekOld calls [raw.Tcl_SeekOld] (C function Tcl_SeekOld).
-func Tcl_SeekOld(chan_ unsafe.Pointer, offset int, mode int) int {
-	return raw.Tcl_SeekOld(chan_, offset, mode)
-}
-
-// Tcl_ServiceAll calls [raw.Tcl_ServiceAll] (C function Tcl_ServiceAll).
+// Tcl_ServiceAll calls the Tcl framework function Tcl_ServiceAll.
 func Tcl_ServiceAll() int {
-	return raw.Tcl_ServiceAll()
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ServiceAll == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ServiceAll, _lib, "Tcl_ServiceAll")
+	}
+	return _fnTcl_ServiceAll()
 }
 
-// Tcl_ServiceEvent calls [raw.Tcl_ServiceEvent] (C function Tcl_ServiceEvent).
+var _fnTcl_ServiceEvent func(int) int
+
+// Tcl_ServiceEvent calls the Tcl framework function Tcl_ServiceEvent.
 func Tcl_ServiceEvent(flags int) int {
-	return raw.Tcl_ServiceEvent(flags)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ServiceEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ServiceEvent, _lib, "Tcl_ServiceEvent")
+	}
+	return _fnTcl_ServiceEvent(flags)
 }
 
-// Tcl_ServiceModeHook calls [raw.Tcl_ServiceModeHook] (C function Tcl_ServiceModeHook).
+var _fnTcl_ServiceModeHook func(int)
+
+// Tcl_ServiceModeHook calls the Tcl framework function Tcl_ServiceModeHook.
 func Tcl_ServiceModeHook(mode int) {
-	raw.Tcl_ServiceModeHook(mode)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ServiceModeHook == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ServiceModeHook, _lib, "Tcl_ServiceModeHook")
+	}
+	_fnTcl_ServiceModeHook(mode)
 }
 
-// Tcl_SetAssocData calls [raw.Tcl_SetAssocData] (C function Tcl_SetAssocData).
-func Tcl_SetAssocData(interp *raw.Tcl_Interp, name string, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_SetAssocData(interp, name, proc, clientData)
+var _fnTcl_SetChannelBufferSize func(objc.ID, int)
+
+// Tcl_SetChannelBufferSize calls the Tcl framework function Tcl_SetChannelBufferSize.
+func Tcl_SetChannelBufferSize(chan_ obj.Object, sz int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetChannelBufferSize == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetChannelBufferSize, _lib, "Tcl_SetChannelBufferSize")
+	}
+	_fnTcl_SetChannelBufferSize(objref.IDOf(chan_), sz)
 }
 
-// Tcl_SetBignumObj calls [raw.Tcl_SetBignumObj] (C function Tcl_SetBignumObj).
-func Tcl_SetBignumObj(obj *raw.Tcl_Obj, value unsafe.Pointer) {
-	raw.Tcl_SetBignumObj(obj, value)
-}
+var _fnTcl_SetDefaultEncodingDir func(string)
 
-// Tcl_SetBooleanObj calls [raw.Tcl_SetBooleanObj] (C function Tcl_SetBooleanObj).
-func Tcl_SetBooleanObj(objPtr *raw.Tcl_Obj, boolValue int) {
-	raw.Tcl_SetBooleanObj(objPtr, boolValue)
-}
-
-// Tcl_SetByteArrayLength calls [raw.Tcl_SetByteArrayLength] (C function Tcl_SetByteArrayLength).
-func Tcl_SetByteArrayLength(objPtr *raw.Tcl_Obj, length int) unsafe.Pointer {
-	return raw.Tcl_SetByteArrayLength(objPtr, length)
-}
-
-// Tcl_SetByteArrayObj calls [raw.Tcl_SetByteArrayObj] (C function Tcl_SetByteArrayObj).
-func Tcl_SetByteArrayObj(objPtr *raw.Tcl_Obj, bytes_ *uint8, length int) {
-	raw.Tcl_SetByteArrayObj(objPtr, bytes_, length)
-}
-
-// Tcl_SetChannelBufferSize calls [raw.Tcl_SetChannelBufferSize] (C function Tcl_SetChannelBufferSize).
-func Tcl_SetChannelBufferSize(chan_ unsafe.Pointer, sz int) {
-	raw.Tcl_SetChannelBufferSize(chan_, sz)
-}
-
-// Tcl_SetChannelError calls [raw.Tcl_SetChannelError] (C function Tcl_SetChannelError).
-func Tcl_SetChannelError(chan_ unsafe.Pointer, msg *raw.Tcl_Obj) {
-	raw.Tcl_SetChannelError(chan_, msg)
-}
-
-// Tcl_SetChannelErrorInterp calls [raw.Tcl_SetChannelErrorInterp] (C function Tcl_SetChannelErrorInterp).
-func Tcl_SetChannelErrorInterp(interp *raw.Tcl_Interp, msg *raw.Tcl_Obj) {
-	raw.Tcl_SetChannelErrorInterp(interp, msg)
-}
-
-// Tcl_SetChannelOption calls [raw.Tcl_SetChannelOption] (C function Tcl_SetChannelOption).
-func Tcl_SetChannelOption(interp *raw.Tcl_Interp, chan_ unsafe.Pointer, optionName string, newValue string) int {
-	return raw.Tcl_SetChannelOption(interp, chan_, optionName, newValue)
-}
-
-// Tcl_SetCommandInfo calls [raw.Tcl_SetCommandInfo] (C function Tcl_SetCommandInfo).
-func Tcl_SetCommandInfo(interp *raw.Tcl_Interp, cmdName string, infoPtr *raw.Tcl_CmdInfo) int {
-	return raw.Tcl_SetCommandInfo(interp, cmdName, infoPtr)
-}
-
-// Tcl_SetCommandInfoFromToken calls [raw.Tcl_SetCommandInfoFromToken] (C function Tcl_SetCommandInfoFromToken).
-func Tcl_SetCommandInfoFromToken(token unsafe.Pointer, infoPtr *raw.Tcl_CmdInfo) int {
-	return raw.Tcl_SetCommandInfoFromToken(token, infoPtr)
-}
-
-// Tcl_SetDefaultEncodingDir calls [raw.Tcl_SetDefaultEncodingDir] (C function Tcl_SetDefaultEncodingDir).
+// Tcl_SetDefaultEncodingDir calls the Tcl framework function Tcl_SetDefaultEncodingDir.
 func Tcl_SetDefaultEncodingDir(path string) {
-	raw.Tcl_SetDefaultEncodingDir(path)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetDefaultEncodingDir == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetDefaultEncodingDir, _lib, "Tcl_SetDefaultEncodingDir")
+	}
+	_fnTcl_SetDefaultEncodingDir(path)
 }
 
-// Tcl_SetDoubleObj calls [raw.Tcl_SetDoubleObj] (C function Tcl_SetDoubleObj).
-func Tcl_SetDoubleObj(objPtr *raw.Tcl_Obj, doubleValue float64) {
-	raw.Tcl_SetDoubleObj(objPtr, doubleValue)
-}
+var _fnTcl_SetErrno func(int)
 
-// Tcl_SetEncodingSearchPath calls [raw.Tcl_SetEncodingSearchPath] (C function Tcl_SetEncodingSearchPath).
-func Tcl_SetEncodingSearchPath(searchPath *raw.Tcl_Obj) int {
-	return raw.Tcl_SetEncodingSearchPath(searchPath)
-}
-
-// Tcl_SetEnsembleFlags calls [raw.Tcl_SetEnsembleFlags] (C function Tcl_SetEnsembleFlags).
-func Tcl_SetEnsembleFlags(interp *raw.Tcl_Interp, token unsafe.Pointer, flags int) int {
-	return raw.Tcl_SetEnsembleFlags(interp, token, flags)
-}
-
-// Tcl_SetEnsembleMappingDict calls [raw.Tcl_SetEnsembleMappingDict] (C function Tcl_SetEnsembleMappingDict).
-func Tcl_SetEnsembleMappingDict(interp *raw.Tcl_Interp, token unsafe.Pointer, mapDict *raw.Tcl_Obj) int {
-	return raw.Tcl_SetEnsembleMappingDict(interp, token, mapDict)
-}
-
-// Tcl_SetEnsembleSubcommandList calls [raw.Tcl_SetEnsembleSubcommandList] (C function Tcl_SetEnsembleSubcommandList).
-func Tcl_SetEnsembleSubcommandList(interp *raw.Tcl_Interp, token unsafe.Pointer, subcmdList *raw.Tcl_Obj) int {
-	return raw.Tcl_SetEnsembleSubcommandList(interp, token, subcmdList)
-}
-
-// Tcl_SetEnsembleUnknownHandler calls [raw.Tcl_SetEnsembleUnknownHandler] (C function Tcl_SetEnsembleUnknownHandler).
-func Tcl_SetEnsembleUnknownHandler(interp *raw.Tcl_Interp, token unsafe.Pointer, unknownList *raw.Tcl_Obj) int {
-	return raw.Tcl_SetEnsembleUnknownHandler(interp, token, unknownList)
-}
-
-// Tcl_SetErrno calls [raw.Tcl_SetErrno] (C function Tcl_SetErrno).
+// Tcl_SetErrno calls the Tcl framework function Tcl_SetErrno.
 func Tcl_SetErrno(err int) {
-	raw.Tcl_SetErrno(err)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetErrno == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetErrno, _lib, "Tcl_SetErrno")
+	}
+	_fnTcl_SetErrno(err)
 }
 
-// Tcl_SetErrorCodeVA calls [raw.Tcl_SetErrorCodeVA] (C function Tcl_SetErrorCodeVA).
-func Tcl_SetErrorCodeVA(interp *raw.Tcl_Interp, argList string) {
-	raw.Tcl_SetErrorCodeVA(interp, argList)
-}
+var _fnTcl_SetServiceMode func(int) int
 
-// Tcl_SetExitProc calls [raw.Tcl_SetExitProc] (C function Tcl_SetExitProc).
-func Tcl_SetExitProc(proc unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_SetExitProc(proc)
-}
-
-// Tcl_SetIntObj calls [raw.Tcl_SetIntObj] (C function Tcl_SetIntObj).
-func Tcl_SetIntObj(objPtr *raw.Tcl_Obj, intValue int) {
-	raw.Tcl_SetIntObj(objPtr, intValue)
-}
-
-// Tcl_SetListObj calls [raw.Tcl_SetListObj] (C function Tcl_SetListObj).
-func Tcl_SetListObj(objPtr *raw.Tcl_Obj, objc int, objv unsafe.Pointer) {
-	raw.Tcl_SetListObj(objPtr, objc, objv)
-}
-
-// Tcl_SetLongObj calls [raw.Tcl_SetLongObj] (C function Tcl_SetLongObj).
-func Tcl_SetLongObj(objPtr *raw.Tcl_Obj, longValue int) {
-	raw.Tcl_SetLongObj(objPtr, longValue)
-}
-
-// Tcl_SetMainLoop calls [raw.Tcl_SetMainLoop] (C function Tcl_SetMainLoop).
-func Tcl_SetMainLoop(proc unsafe.Pointer) {
-	raw.Tcl_SetMainLoop(proc)
-}
-
-// Tcl_SetMaxBlockTime calls [raw.Tcl_SetMaxBlockTime] (C function Tcl_SetMaxBlockTime).
-func Tcl_SetMaxBlockTime(timePtr *raw.Tcl_Time) {
-	raw.Tcl_SetMaxBlockTime(timePtr)
-}
-
-// Tcl_SetNamespaceUnknownHandler calls [raw.Tcl_SetNamespaceUnknownHandler] (C function Tcl_SetNamespaceUnknownHandler).
-func Tcl_SetNamespaceUnknownHandler(interp *raw.Tcl_Interp, nsPtr *raw.Tcl_Namespace, handlerPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_SetNamespaceUnknownHandler(interp, nsPtr, handlerPtr)
-}
-
-// Tcl_SetNotifier calls [raw.Tcl_SetNotifier] (C function Tcl_SetNotifier).
-func Tcl_SetNotifier(notifierProcPtr *raw.Tcl_NotifierProcs) {
-	raw.Tcl_SetNotifier(notifierProcPtr)
-}
-
-// Tcl_SetObjErrorCode calls [raw.Tcl_SetObjErrorCode] (C function Tcl_SetObjErrorCode).
-func Tcl_SetObjErrorCode(interp *raw.Tcl_Interp, errorObjPtr *raw.Tcl_Obj) {
-	raw.Tcl_SetObjErrorCode(interp, errorObjPtr)
-}
-
-// Tcl_SetObjLength calls [raw.Tcl_SetObjLength] (C function Tcl_SetObjLength).
-func Tcl_SetObjLength(objPtr *raw.Tcl_Obj, length int) {
-	raw.Tcl_SetObjLength(objPtr, length)
-}
-
-// Tcl_SetObjResult calls [raw.Tcl_SetObjResult] (C function Tcl_SetObjResult).
-func Tcl_SetObjResult(interp *raw.Tcl_Interp, resultObjPtr *raw.Tcl_Obj) {
-	raw.Tcl_SetObjResult(interp, resultObjPtr)
-}
-
-// Tcl_SetPanicProc calls [raw.Tcl_SetPanicProc] (C function Tcl_SetPanicProc).
-func Tcl_SetPanicProc(panicProc unsafe.Pointer) {
-	raw.Tcl_SetPanicProc(panicProc)
-}
-
-// Tcl_SetRecursionLimit calls [raw.Tcl_SetRecursionLimit] (C function Tcl_SetRecursionLimit).
-func Tcl_SetRecursionLimit(interp *raw.Tcl_Interp, depth int) int {
-	return raw.Tcl_SetRecursionLimit(interp, depth)
-}
-
-// Tcl_SetResult calls [raw.Tcl_SetResult] (C function Tcl_SetResult).
-func Tcl_SetResult(interp *raw.Tcl_Interp, result string, freeProc unsafe.Pointer) {
-	raw.Tcl_SetResult(interp, result, freeProc)
-}
-
-// Tcl_SetReturnOptions calls [raw.Tcl_SetReturnOptions] (C function Tcl_SetReturnOptions).
-func Tcl_SetReturnOptions(interp *raw.Tcl_Interp, options *raw.Tcl_Obj) int {
-	return raw.Tcl_SetReturnOptions(interp, options)
-}
-
-// Tcl_SetServiceMode calls [raw.Tcl_SetServiceMode] (C function Tcl_SetServiceMode).
+// Tcl_SetServiceMode calls the Tcl framework function Tcl_SetServiceMode.
 func Tcl_SetServiceMode(mode int) int {
-	return raw.Tcl_SetServiceMode(mode)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetServiceMode == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetServiceMode, _lib, "Tcl_SetServiceMode")
+	}
+	return _fnTcl_SetServiceMode(mode)
 }
 
-// Tcl_SetStdChannel calls [raw.Tcl_SetStdChannel] (C function Tcl_SetStdChannel).
-func Tcl_SetStdChannel(channel unsafe.Pointer, type_ int) {
-	raw.Tcl_SetStdChannel(channel, type_)
+var _fnTcl_SetStdChannel func(objc.ID, int)
+
+// Tcl_SetStdChannel calls the Tcl framework function Tcl_SetStdChannel.
+func Tcl_SetStdChannel(channel obj.Object, type_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetStdChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetStdChannel, _lib, "Tcl_SetStdChannel")
+	}
+	_fnTcl_SetStdChannel(objref.IDOf(channel), type_)
 }
 
-// Tcl_SetStringObj calls [raw.Tcl_SetStringObj] (C function Tcl_SetStringObj).
-func Tcl_SetStringObj(objPtr *raw.Tcl_Obj, bytes_ string, length int) {
-	raw.Tcl_SetStringObj(objPtr, bytes_, length)
-}
+var _fnTcl_SignalId func(int) string
 
-// Tcl_SetSystemEncoding calls [raw.Tcl_SetSystemEncoding] (C function Tcl_SetSystemEncoding).
-func Tcl_SetSystemEncoding(interp *raw.Tcl_Interp, name string) int {
-	return raw.Tcl_SetSystemEncoding(interp, name)
-}
-
-// Tcl_SetTimeProc calls [raw.Tcl_SetTimeProc] (C function Tcl_SetTimeProc).
-func Tcl_SetTimeProc(getProc unsafe.Pointer, scaleProc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_SetTimeProc(getProc, scaleProc, clientData)
-}
-
-// Tcl_SetTimer calls [raw.Tcl_SetTimer] (C function Tcl_SetTimer).
-func Tcl_SetTimer(timePtr *raw.Tcl_Time) {
-	raw.Tcl_SetTimer(timePtr)
-}
-
-// Tcl_SetUnicodeObj calls [raw.Tcl_SetUnicodeObj] (C function Tcl_SetUnicodeObj).
-func Tcl_SetUnicodeObj(objPtr *raw.Tcl_Obj, unicode *uint16, numChars int) {
-	raw.Tcl_SetUnicodeObj(objPtr, unicode, numChars)
-}
-
-// Tcl_SetVar calls [raw.Tcl_SetVar] (C function Tcl_SetVar).
-func Tcl_SetVar(interp *raw.Tcl_Interp, varName string, newValue string, flags int) string {
-	return raw.Tcl_SetVar(interp, varName, newValue, flags)
-}
-
-// Tcl_SetVar2 calls [raw.Tcl_SetVar2] (C function Tcl_SetVar2).
-func Tcl_SetVar2(interp *raw.Tcl_Interp, part1 string, part2 string, newValue string, flags int) string {
-	return raw.Tcl_SetVar2(interp, part1, part2, newValue, flags)
-}
-
-// Tcl_SetVar2Ex calls [raw.Tcl_SetVar2Ex] (C function Tcl_SetVar2Ex).
-func Tcl_SetVar2Ex(interp *raw.Tcl_Interp, part1 string, part2 string, newValuePtr *raw.Tcl_Obj, flags int) *raw.Tcl_Obj {
-	return raw.Tcl_SetVar2Ex(interp, part1, part2, newValuePtr, flags)
-}
-
-// Tcl_SetWideIntObj calls [raw.Tcl_SetWideIntObj] (C function Tcl_SetWideIntObj).
-func Tcl_SetWideIntObj(objPtr *raw.Tcl_Obj, wideValue int) {
-	raw.Tcl_SetWideIntObj(objPtr, wideValue)
-}
-
-// Tcl_SignalId calls [raw.Tcl_SignalId] (C function Tcl_SignalId).
+// Tcl_SignalId calls the Tcl framework function Tcl_SignalId.
 func Tcl_SignalId(sig int) string {
-	return raw.Tcl_SignalId(sig)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SignalId == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SignalId, _lib, "Tcl_SignalId")
+	}
+	return _fnTcl_SignalId(sig)
 }
 
-// Tcl_SignalMsg calls [raw.Tcl_SignalMsg] (C function Tcl_SignalMsg).
+var _fnTcl_SignalMsg func(int) string
+
+// Tcl_SignalMsg calls the Tcl framework function Tcl_SignalMsg.
 func Tcl_SignalMsg(sig int) string {
-	return raw.Tcl_SignalMsg(sig)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SignalMsg == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SignalMsg, _lib, "Tcl_SignalMsg")
+	}
+	return _fnTcl_SignalMsg(sig)
 }
 
-// Tcl_Sleep calls [raw.Tcl_Sleep] (C function Tcl_Sleep).
+var _fnTcl_Sleep func(int)
+
+// Tcl_Sleep calls the Tcl framework function Tcl_Sleep.
 func Tcl_Sleep(ms int) {
-	raw.Tcl_Sleep(ms)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Sleep == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Sleep, _lib, "Tcl_Sleep")
+	}
+	_fnTcl_Sleep(ms)
 }
 
-// Tcl_SourceRCFile calls [raw.Tcl_SourceRCFile] (C function Tcl_SourceRCFile).
-func Tcl_SourceRCFile(interp *raw.Tcl_Interp) {
-	raw.Tcl_SourceRCFile(interp)
+var _fnTcl_SpliceChannel func(objc.ID)
+
+// Tcl_SpliceChannel calls the Tcl framework function Tcl_SpliceChannel.
+func Tcl_SpliceChannel(channel obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SpliceChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SpliceChannel, _lib, "Tcl_SpliceChannel")
+	}
+	_fnTcl_SpliceChannel(objref.IDOf(channel))
 }
 
-// Tcl_SpliceChannel calls [raw.Tcl_SpliceChannel] (C function Tcl_SpliceChannel).
-func Tcl_SpliceChannel(channel unsafe.Pointer) {
-	raw.Tcl_SpliceChannel(channel)
-}
+var _fnTcl_StringCaseMatch func(string, string, int) int
 
-// Tcl_SplitList calls [raw.Tcl_SplitList] (C function Tcl_SplitList).
-func Tcl_SplitList(interp *raw.Tcl_Interp, listStr string, argcPtr *int32, argvPtr string) int {
-	return raw.Tcl_SplitList(interp, listStr, argcPtr, argvPtr)
-}
-
-// Tcl_SplitPath calls [raw.Tcl_SplitPath] (C function Tcl_SplitPath).
-func Tcl_SplitPath(path string, argcPtr *int32, argvPtr string) {
-	raw.Tcl_SplitPath(path, argcPtr, argvPtr)
-}
-
-// Tcl_StackChannel calls [raw.Tcl_StackChannel] (C function Tcl_StackChannel).
-func Tcl_StackChannel(interp *raw.Tcl_Interp, typePtr *raw.Tcl_ChannelType, instanceData unsafe.Pointer, mask int, prevChan unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_StackChannel(interp, typePtr, instanceData, mask, prevChan)
-}
-
-// Tcl_Stat calls [raw.Tcl_Stat] (C function Tcl_Stat).
-func Tcl_Stat(path string, bufPtr unsafe.Pointer) int {
-	return raw.Tcl_Stat(path, bufPtr)
-}
-
-// Tcl_StaticPackage calls [raw.Tcl_StaticPackage] (C function Tcl_StaticPackage).
-func Tcl_StaticPackage(interp *raw.Tcl_Interp, pkgName string, initProc unsafe.Pointer, safeInitProc unsafe.Pointer) {
-	raw.Tcl_StaticPackage(interp, pkgName, initProc, safeInitProc)
-}
-
-// Tcl_StringCaseMatch calls [raw.Tcl_StringCaseMatch] (C function Tcl_StringCaseMatch).
+// Tcl_StringCaseMatch calls the Tcl framework function Tcl_StringCaseMatch.
 func Tcl_StringCaseMatch(str string, pattern string, nocase int) int {
-	return raw.Tcl_StringCaseMatch(str, pattern, nocase)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_StringCaseMatch == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_StringCaseMatch, _lib, "Tcl_StringCaseMatch")
+	}
+	return _fnTcl_StringCaseMatch(str, pattern, nocase)
 }
 
-// Tcl_StringMatch calls [raw.Tcl_StringMatch] (C function Tcl_StringMatch).
+var _fnTcl_StringMatch func(string, string) int
+
+// Tcl_StringMatch calls the Tcl framework function Tcl_StringMatch.
 func Tcl_StringMatch(str string, pattern string) int {
-	return raw.Tcl_StringMatch(str, pattern)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_StringMatch == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_StringMatch, _lib, "Tcl_StringMatch")
+	}
+	return _fnTcl_StringMatch(str, pattern)
 }
 
-// Tcl_SubstObj calls [raw.Tcl_SubstObj] (C function Tcl_SubstObj).
-func Tcl_SubstObj(interp *raw.Tcl_Interp, objPtr *raw.Tcl_Obj, flags int) *raw.Tcl_Obj {
-	return raw.Tcl_SubstObj(interp, objPtr, flags)
+var _fnTcl_Tell func(objc.ID) int
+
+// Tcl_Tell calls the Tcl framework function Tcl_Tell.
+func Tcl_Tell(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Tell == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Tell, _lib, "Tcl_Tell")
+	}
+	return _fnTcl_Tell(objref.IDOf(chan_))
 }
 
-// Tcl_TakeBignumFromObj calls [raw.Tcl_TakeBignumFromObj] (C function Tcl_TakeBignumFromObj).
-func Tcl_TakeBignumFromObj(interp *raw.Tcl_Interp, obj *raw.Tcl_Obj, value unsafe.Pointer) int {
-	return raw.Tcl_TakeBignumFromObj(interp, obj, value)
+var _fnTcl_TellOld func(objc.ID) int
+
+// Tcl_TellOld calls the Tcl framework function Tcl_TellOld.
+func Tcl_TellOld(chan_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_TellOld == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_TellOld, _lib, "Tcl_TellOld")
+	}
+	return _fnTcl_TellOld(objref.IDOf(chan_))
 }
 
-// Tcl_Tell calls [raw.Tcl_Tell] (C function Tcl_Tell).
-func Tcl_Tell(chan_ unsafe.Pointer) int {
-	return raw.Tcl_Tell(chan_)
+var _fnTcl_ThreadAlert func(objc.ID)
+
+// Tcl_ThreadAlert calls the Tcl framework function Tcl_ThreadAlert.
+func Tcl_ThreadAlert(threadId obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ThreadAlert == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ThreadAlert, _lib, "Tcl_ThreadAlert")
+	}
+	_fnTcl_ThreadAlert(objref.IDOf(threadId))
 }
 
-// Tcl_TellOld calls [raw.Tcl_TellOld] (C function Tcl_TellOld).
-func Tcl_TellOld(chan_ unsafe.Pointer) int {
-	return raw.Tcl_TellOld(chan_)
+var _fnTcl_TruncateChannel func(objc.ID, int) int
+
+// Tcl_TruncateChannel calls the Tcl framework function Tcl_TruncateChannel.
+func Tcl_TruncateChannel(chan_ obj.Object, length int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_TruncateChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_TruncateChannel, _lib, "Tcl_TruncateChannel")
+	}
+	return _fnTcl_TruncateChannel(objref.IDOf(chan_), length)
 }
 
-// Tcl_ThreadAlert calls [raw.Tcl_ThreadAlert] (C function Tcl_ThreadAlert).
-func Tcl_ThreadAlert(threadId unsafe.Pointer) {
-	raw.Tcl_ThreadAlert(threadId)
+var _fnTcl_Ungets func(objc.ID, string, int, int) int
+
+// Tcl_Ungets calls the Tcl framework function Tcl_Ungets.
+func Tcl_Ungets(chan_ obj.Object, str string, len_ int, atHead int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Ungets == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Ungets, _lib, "Tcl_Ungets")
+	}
+	return _fnTcl_Ungets(objref.IDOf(chan_), str, len_, atHead)
 }
 
-// Tcl_ThreadQueueEvent calls [raw.Tcl_ThreadQueueEvent] (C function Tcl_ThreadQueueEvent).
-func Tcl_ThreadQueueEvent(threadId unsafe.Pointer, evPtr *raw.Tcl_Event, position Tcl_QueuePosition) {
-	raw.Tcl_ThreadQueueEvent(threadId, evPtr, raw.Tcl_QueuePosition(position))
-}
+var _fnTcl_UniCharAtIndex func(string, int) uint16
 
-// Tcl_TraceCommand calls [raw.Tcl_TraceCommand] (C function Tcl_TraceCommand).
-func Tcl_TraceCommand(interp *raw.Tcl_Interp, varName string, flags int, proc unsafe.Pointer, clientData unsafe.Pointer) int {
-	return raw.Tcl_TraceCommand(interp, varName, flags, proc, clientData)
-}
-
-// Tcl_TraceVar calls [raw.Tcl_TraceVar] (C function Tcl_TraceVar).
-func Tcl_TraceVar(interp *raw.Tcl_Interp, varName string, flags int, proc unsafe.Pointer, clientData unsafe.Pointer) int {
-	return raw.Tcl_TraceVar(interp, varName, flags, proc, clientData)
-}
-
-// Tcl_TraceVar2 calls [raw.Tcl_TraceVar2] (C function Tcl_TraceVar2).
-func Tcl_TraceVar2(interp *raw.Tcl_Interp, part1 string, part2 string, flags int, proc unsafe.Pointer, clientData unsafe.Pointer) int {
-	return raw.Tcl_TraceVar2(interp, part1, part2, flags, proc, clientData)
-}
-
-// Tcl_TranslateFileName calls [raw.Tcl_TranslateFileName] (C function Tcl_TranslateFileName).
-func Tcl_TranslateFileName(interp *raw.Tcl_Interp, name string, bufferPtr *raw.Tcl_DString) string {
-	return raw.Tcl_TranslateFileName(interp, name, bufferPtr)
-}
-
-// Tcl_TruncateChannel calls [raw.Tcl_TruncateChannel] (C function Tcl_TruncateChannel).
-func Tcl_TruncateChannel(chan_ unsafe.Pointer, length int) int {
-	return raw.Tcl_TruncateChannel(chan_, length)
-}
-
-// Tcl_Ungets calls [raw.Tcl_Ungets] (C function Tcl_Ungets).
-func Tcl_Ungets(chan_ unsafe.Pointer, str string, len_ int, atHead int) int {
-	return raw.Tcl_Ungets(chan_, str, len_, atHead)
-}
-
-// Tcl_UniCharAtIndex calls [raw.Tcl_UniCharAtIndex] (C function Tcl_UniCharAtIndex).
+// Tcl_UniCharAtIndex calls the Tcl framework function Tcl_UniCharAtIndex.
 func Tcl_UniCharAtIndex(src string, index int) uint16 {
-	return raw.Tcl_UniCharAtIndex(src, index)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharAtIndex, _lib, "Tcl_UniCharAtIndex")
+	}
+	return _fnTcl_UniCharAtIndex(src, index)
 }
 
-// Tcl_UniCharCaseMatch calls [raw.Tcl_UniCharCaseMatch] (C function Tcl_UniCharCaseMatch).
-func Tcl_UniCharCaseMatch(uniStr *uint16, uniPattern *uint16, nocase int) int {
-	return raw.Tcl_UniCharCaseMatch(uniStr, uniPattern, nocase)
-}
+var _fnTcl_UniCharIsAlnum func(int) int
 
-// Tcl_UniCharIsAlnum calls [raw.Tcl_UniCharIsAlnum] (C function Tcl_UniCharIsAlnum).
+// Tcl_UniCharIsAlnum calls the Tcl framework function Tcl_UniCharIsAlnum.
 func Tcl_UniCharIsAlnum(ch int) int {
-	return raw.Tcl_UniCharIsAlnum(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsAlnum == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsAlnum, _lib, "Tcl_UniCharIsAlnum")
+	}
+	return _fnTcl_UniCharIsAlnum(ch)
 }
 
-// Tcl_UniCharIsAlpha calls [raw.Tcl_UniCharIsAlpha] (C function Tcl_UniCharIsAlpha).
+var _fnTcl_UniCharIsAlpha func(int) int
+
+// Tcl_UniCharIsAlpha calls the Tcl framework function Tcl_UniCharIsAlpha.
 func Tcl_UniCharIsAlpha(ch int) int {
-	return raw.Tcl_UniCharIsAlpha(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsAlpha == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsAlpha, _lib, "Tcl_UniCharIsAlpha")
+	}
+	return _fnTcl_UniCharIsAlpha(ch)
 }
 
-// Tcl_UniCharIsControl calls [raw.Tcl_UniCharIsControl] (C function Tcl_UniCharIsControl).
+var _fnTcl_UniCharIsControl func(int) int
+
+// Tcl_UniCharIsControl calls the Tcl framework function Tcl_UniCharIsControl.
 func Tcl_UniCharIsControl(ch int) int {
-	return raw.Tcl_UniCharIsControl(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsControl == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsControl, _lib, "Tcl_UniCharIsControl")
+	}
+	return _fnTcl_UniCharIsControl(ch)
 }
 
-// Tcl_UniCharIsDigit calls [raw.Tcl_UniCharIsDigit] (C function Tcl_UniCharIsDigit).
+var _fnTcl_UniCharIsDigit func(int) int
+
+// Tcl_UniCharIsDigit calls the Tcl framework function Tcl_UniCharIsDigit.
 func Tcl_UniCharIsDigit(ch int) int {
-	return raw.Tcl_UniCharIsDigit(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsDigit == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsDigit, _lib, "Tcl_UniCharIsDigit")
+	}
+	return _fnTcl_UniCharIsDigit(ch)
 }
 
-// Tcl_UniCharIsGraph calls [raw.Tcl_UniCharIsGraph] (C function Tcl_UniCharIsGraph).
+var _fnTcl_UniCharIsGraph func(int) int
+
+// Tcl_UniCharIsGraph calls the Tcl framework function Tcl_UniCharIsGraph.
 func Tcl_UniCharIsGraph(ch int) int {
-	return raw.Tcl_UniCharIsGraph(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsGraph == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsGraph, _lib, "Tcl_UniCharIsGraph")
+	}
+	return _fnTcl_UniCharIsGraph(ch)
 }
 
-// Tcl_UniCharIsLower calls [raw.Tcl_UniCharIsLower] (C function Tcl_UniCharIsLower).
+var _fnTcl_UniCharIsLower func(int) int
+
+// Tcl_UniCharIsLower calls the Tcl framework function Tcl_UniCharIsLower.
 func Tcl_UniCharIsLower(ch int) int {
-	return raw.Tcl_UniCharIsLower(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsLower == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsLower, _lib, "Tcl_UniCharIsLower")
+	}
+	return _fnTcl_UniCharIsLower(ch)
 }
 
-// Tcl_UniCharIsPrint calls [raw.Tcl_UniCharIsPrint] (C function Tcl_UniCharIsPrint).
+var _fnTcl_UniCharIsPrint func(int) int
+
+// Tcl_UniCharIsPrint calls the Tcl framework function Tcl_UniCharIsPrint.
 func Tcl_UniCharIsPrint(ch int) int {
-	return raw.Tcl_UniCharIsPrint(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsPrint == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsPrint, _lib, "Tcl_UniCharIsPrint")
+	}
+	return _fnTcl_UniCharIsPrint(ch)
 }
 
-// Tcl_UniCharIsPunct calls [raw.Tcl_UniCharIsPunct] (C function Tcl_UniCharIsPunct).
+var _fnTcl_UniCharIsPunct func(int) int
+
+// Tcl_UniCharIsPunct calls the Tcl framework function Tcl_UniCharIsPunct.
 func Tcl_UniCharIsPunct(ch int) int {
-	return raw.Tcl_UniCharIsPunct(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsPunct == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsPunct, _lib, "Tcl_UniCharIsPunct")
+	}
+	return _fnTcl_UniCharIsPunct(ch)
 }
 
-// Tcl_UniCharIsSpace calls [raw.Tcl_UniCharIsSpace] (C function Tcl_UniCharIsSpace).
+var _fnTcl_UniCharIsSpace func(int) int
+
+// Tcl_UniCharIsSpace calls the Tcl framework function Tcl_UniCharIsSpace.
 func Tcl_UniCharIsSpace(ch int) int {
-	return raw.Tcl_UniCharIsSpace(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsSpace, _lib, "Tcl_UniCharIsSpace")
+	}
+	return _fnTcl_UniCharIsSpace(ch)
 }
 
-// Tcl_UniCharIsUpper calls [raw.Tcl_UniCharIsUpper] (C function Tcl_UniCharIsUpper).
+var _fnTcl_UniCharIsUpper func(int) int
+
+// Tcl_UniCharIsUpper calls the Tcl framework function Tcl_UniCharIsUpper.
 func Tcl_UniCharIsUpper(ch int) int {
-	return raw.Tcl_UniCharIsUpper(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsUpper == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsUpper, _lib, "Tcl_UniCharIsUpper")
+	}
+	return _fnTcl_UniCharIsUpper(ch)
 }
 
-// Tcl_UniCharIsWordChar calls [raw.Tcl_UniCharIsWordChar] (C function Tcl_UniCharIsWordChar).
+var _fnTcl_UniCharIsWordChar func(int) int
+
+// Tcl_UniCharIsWordChar calls the Tcl framework function Tcl_UniCharIsWordChar.
 func Tcl_UniCharIsWordChar(ch int) int {
-	return raw.Tcl_UniCharIsWordChar(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharIsWordChar == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharIsWordChar, _lib, "Tcl_UniCharIsWordChar")
+	}
+	return _fnTcl_UniCharIsWordChar(ch)
 }
 
-// Tcl_UniCharLen calls [raw.Tcl_UniCharLen] (C function Tcl_UniCharLen).
-func Tcl_UniCharLen(uniStr *uint16) int {
-	return raw.Tcl_UniCharLen(uniStr)
-}
+var _fnTcl_UniCharToLower func(int) uint16
 
-// Tcl_UniCharNcasecmp calls [raw.Tcl_UniCharNcasecmp] (C function Tcl_UniCharNcasecmp).
-func Tcl_UniCharNcasecmp(ucs *uint16, uct *uint16, numChars uint) int {
-	return raw.Tcl_UniCharNcasecmp(ucs, uct, numChars)
-}
-
-// Tcl_UniCharNcmp calls [raw.Tcl_UniCharNcmp] (C function Tcl_UniCharNcmp).
-func Tcl_UniCharNcmp(ucs *uint16, uct *uint16, numChars uint) int {
-	return raw.Tcl_UniCharNcmp(ucs, uct, numChars)
-}
-
-// Tcl_UniCharToLower calls [raw.Tcl_UniCharToLower] (C function Tcl_UniCharToLower).
+// Tcl_UniCharToLower calls the Tcl framework function Tcl_UniCharToLower.
 func Tcl_UniCharToLower(ch int) uint16 {
-	return raw.Tcl_UniCharToLower(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharToLower == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharToLower, _lib, "Tcl_UniCharToLower")
+	}
+	return _fnTcl_UniCharToLower(ch)
 }
 
-// Tcl_UniCharToTitle calls [raw.Tcl_UniCharToTitle] (C function Tcl_UniCharToTitle).
+var _fnTcl_UniCharToTitle func(int) uint16
+
+// Tcl_UniCharToTitle calls the Tcl framework function Tcl_UniCharToTitle.
 func Tcl_UniCharToTitle(ch int) uint16 {
-	return raw.Tcl_UniCharToTitle(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharToTitle == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharToTitle, _lib, "Tcl_UniCharToTitle")
+	}
+	return _fnTcl_UniCharToTitle(ch)
 }
 
-// Tcl_UniCharToUpper calls [raw.Tcl_UniCharToUpper] (C function Tcl_UniCharToUpper).
+var _fnTcl_UniCharToUpper func(int) uint16
+
+// Tcl_UniCharToUpper calls the Tcl framework function Tcl_UniCharToUpper.
 func Tcl_UniCharToUpper(ch int) uint16 {
-	return raw.Tcl_UniCharToUpper(ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharToUpper == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharToUpper, _lib, "Tcl_UniCharToUpper")
+	}
+	return _fnTcl_UniCharToUpper(ch)
 }
 
-// Tcl_UniCharToUtf calls [raw.Tcl_UniCharToUtf] (C function Tcl_UniCharToUtf).
+var _fnTcl_UniCharToUtf func(int, string) int
+
+// Tcl_UniCharToUtf calls the Tcl framework function Tcl_UniCharToUtf.
 func Tcl_UniCharToUtf(ch int, buf string) int {
-	return raw.Tcl_UniCharToUtf(ch, buf)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UniCharToUtf == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UniCharToUtf, _lib, "Tcl_UniCharToUtf")
+	}
+	return _fnTcl_UniCharToUtf(ch, buf)
 }
 
-// Tcl_UniCharToUtfDString calls [raw.Tcl_UniCharToUtfDString] (C function Tcl_UniCharToUtfDString).
-func Tcl_UniCharToUtfDString(uniStr *uint16, uniLength int, dsPtr *raw.Tcl_DString) string {
-	return raw.Tcl_UniCharToUtfDString(uniStr, uniLength, dsPtr)
-}
+var _fnTcl_UtfAtIndex func(string, int) string
 
-// Tcl_UnlinkVar calls [raw.Tcl_UnlinkVar] (C function Tcl_UnlinkVar).
-func Tcl_UnlinkVar(interp *raw.Tcl_Interp, varName string) {
-	raw.Tcl_UnlinkVar(interp, varName)
-}
-
-// Tcl_UnregisterChannel calls [raw.Tcl_UnregisterChannel] (C function Tcl_UnregisterChannel).
-func Tcl_UnregisterChannel(interp *raw.Tcl_Interp, chan_ unsafe.Pointer) int {
-	return raw.Tcl_UnregisterChannel(interp, chan_)
-}
-
-// Tcl_UnsetVar calls [raw.Tcl_UnsetVar] (C function Tcl_UnsetVar).
-func Tcl_UnsetVar(interp *raw.Tcl_Interp, varName string, flags int) int {
-	return raw.Tcl_UnsetVar(interp, varName, flags)
-}
-
-// Tcl_UnsetVar2 calls [raw.Tcl_UnsetVar2] (C function Tcl_UnsetVar2).
-func Tcl_UnsetVar2(interp *raw.Tcl_Interp, part1 string, part2 string, flags int) int {
-	return raw.Tcl_UnsetVar2(interp, part1, part2, flags)
-}
-
-// Tcl_UnstackChannel calls [raw.Tcl_UnstackChannel] (C function Tcl_UnstackChannel).
-func Tcl_UnstackChannel(interp *raw.Tcl_Interp, chan_ unsafe.Pointer) int {
-	return raw.Tcl_UnstackChannel(interp, chan_)
-}
-
-// Tcl_UntraceCommand calls [raw.Tcl_UntraceCommand] (C function Tcl_UntraceCommand).
-func Tcl_UntraceCommand(interp *raw.Tcl_Interp, varName string, flags int, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_UntraceCommand(interp, varName, flags, proc, clientData)
-}
-
-// Tcl_UntraceVar calls [raw.Tcl_UntraceVar] (C function Tcl_UntraceVar).
-func Tcl_UntraceVar(interp *raw.Tcl_Interp, varName string, flags int, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_UntraceVar(interp, varName, flags, proc, clientData)
-}
-
-// Tcl_UntraceVar2 calls [raw.Tcl_UntraceVar2] (C function Tcl_UntraceVar2).
-func Tcl_UntraceVar2(interp *raw.Tcl_Interp, part1 string, part2 string, flags int, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_UntraceVar2(interp, part1, part2, flags, proc, clientData)
-}
-
-// Tcl_UpVar calls [raw.Tcl_UpVar] (C function Tcl_UpVar).
-func Tcl_UpVar(interp *raw.Tcl_Interp, frameName string, varName string, localName string, flags int) int {
-	return raw.Tcl_UpVar(interp, frameName, varName, localName, flags)
-}
-
-// Tcl_UpVar2 calls [raw.Tcl_UpVar2] (C function Tcl_UpVar2).
-func Tcl_UpVar2(interp *raw.Tcl_Interp, frameName string, part1 string, part2 string, localName string, flags int) int {
-	return raw.Tcl_UpVar2(interp, frameName, part1, part2, localName, flags)
-}
-
-// Tcl_UpdateLinkedVar calls [raw.Tcl_UpdateLinkedVar] (C function Tcl_UpdateLinkedVar).
-func Tcl_UpdateLinkedVar(interp *raw.Tcl_Interp, varName string) {
-	raw.Tcl_UpdateLinkedVar(interp, varName)
-}
-
-// Tcl_UtfAtIndex calls [raw.Tcl_UtfAtIndex] (C function Tcl_UtfAtIndex).
+// Tcl_UtfAtIndex calls the Tcl framework function Tcl_UtfAtIndex.
 func Tcl_UtfAtIndex(src string, index int) string {
-	return raw.Tcl_UtfAtIndex(src, index)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfAtIndex, _lib, "Tcl_UtfAtIndex")
+	}
+	return _fnTcl_UtfAtIndex(src, index)
 }
 
-// Tcl_UtfBackslash calls [raw.Tcl_UtfBackslash] (C function Tcl_UtfBackslash).
-func Tcl_UtfBackslash(src string, readPtr *int32, dst string) int {
-	return raw.Tcl_UtfBackslash(src, readPtr, dst)
-}
+var _fnTcl_UtfCharComplete func(string, int) int
 
-// Tcl_UtfCharComplete calls [raw.Tcl_UtfCharComplete] (C function Tcl_UtfCharComplete).
+// Tcl_UtfCharComplete calls the Tcl framework function Tcl_UtfCharComplete.
 func Tcl_UtfCharComplete(src string, length int) int {
-	return raw.Tcl_UtfCharComplete(src, length)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfCharComplete == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfCharComplete, _lib, "Tcl_UtfCharComplete")
+	}
+	return _fnTcl_UtfCharComplete(src, length)
 }
 
-// Tcl_UtfFindFirst calls [raw.Tcl_UtfFindFirst] (C function Tcl_UtfFindFirst).
+var _fnTcl_UtfFindFirst func(string, int) string
+
+// Tcl_UtfFindFirst calls the Tcl framework function Tcl_UtfFindFirst.
 func Tcl_UtfFindFirst(src string, ch int) string {
-	return raw.Tcl_UtfFindFirst(src, ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfFindFirst == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfFindFirst, _lib, "Tcl_UtfFindFirst")
+	}
+	return _fnTcl_UtfFindFirst(src, ch)
 }
 
-// Tcl_UtfFindLast calls [raw.Tcl_UtfFindLast] (C function Tcl_UtfFindLast).
+var _fnTcl_UtfFindLast func(string, int) string
+
+// Tcl_UtfFindLast calls the Tcl framework function Tcl_UtfFindLast.
 func Tcl_UtfFindLast(src string, ch int) string {
-	return raw.Tcl_UtfFindLast(src, ch)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfFindLast == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfFindLast, _lib, "Tcl_UtfFindLast")
+	}
+	return _fnTcl_UtfFindLast(src, ch)
 }
 
-// Tcl_UtfNcasecmp calls [raw.Tcl_UtfNcasecmp] (C function Tcl_UtfNcasecmp).
-func Tcl_UtfNcasecmp(s1 string, s2 string, n uint) int {
-	return raw.Tcl_UtfNcasecmp(s1, s2, n)
+var _fnTcl_UtfNcasecmp func(string, string, int) int
+
+// Tcl_UtfNcasecmp calls the Tcl framework function Tcl_UtfNcasecmp.
+func Tcl_UtfNcasecmp(s1 string, s2 string, n int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfNcasecmp == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfNcasecmp, _lib, "Tcl_UtfNcasecmp")
+	}
+	return _fnTcl_UtfNcasecmp(s1, s2, n)
 }
 
-// Tcl_UtfNcmp calls [raw.Tcl_UtfNcmp] (C function Tcl_UtfNcmp).
-func Tcl_UtfNcmp(s1 string, s2 string, n uint) int {
-	return raw.Tcl_UtfNcmp(s1, s2, n)
+var _fnTcl_UtfNcmp func(string, string, int) int
+
+// Tcl_UtfNcmp calls the Tcl framework function Tcl_UtfNcmp.
+func Tcl_UtfNcmp(s1 string, s2 string, n int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfNcmp == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfNcmp, _lib, "Tcl_UtfNcmp")
+	}
+	return _fnTcl_UtfNcmp(s1, s2, n)
 }
 
-// Tcl_UtfNext calls [raw.Tcl_UtfNext] (C function Tcl_UtfNext).
+var _fnTcl_UtfNext func(string) string
+
+// Tcl_UtfNext calls the Tcl framework function Tcl_UtfNext.
 func Tcl_UtfNext(src string) string {
-	return raw.Tcl_UtfNext(src)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfNext == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfNext, _lib, "Tcl_UtfNext")
+	}
+	return _fnTcl_UtfNext(src)
 }
 
-// Tcl_UtfPrev calls [raw.Tcl_UtfPrev] (C function Tcl_UtfPrev).
+var _fnTcl_UtfPrev func(string, string) string
+
+// Tcl_UtfPrev calls the Tcl framework function Tcl_UtfPrev.
 func Tcl_UtfPrev(src string, start string) string {
-	return raw.Tcl_UtfPrev(src, start)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfPrev == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfPrev, _lib, "Tcl_UtfPrev")
+	}
+	return _fnTcl_UtfPrev(src, start)
 }
 
-// Tcl_UtfToExternal calls [raw.Tcl_UtfToExternal] (C function Tcl_UtfToExternal).
-func Tcl_UtfToExternal(interp *raw.Tcl_Interp, encoding unsafe.Pointer, src string, srcLen int, flags int, statePtr unsafe.Pointer, dst string, dstLen int, srcReadPtr *int32, dstWrotePtr *int32, dstCharsPtr *int32) int {
-	return raw.Tcl_UtfToExternal(interp, encoding, src, srcLen, flags, statePtr, dst, dstLen, srcReadPtr, dstWrotePtr, dstCharsPtr)
-}
+var _fnTcl_UtfToLower func(string) int
 
-// Tcl_UtfToExternalDString calls [raw.Tcl_UtfToExternalDString] (C function Tcl_UtfToExternalDString).
-func Tcl_UtfToExternalDString(encoding unsafe.Pointer, src string, srcLen int, dsPtr *raw.Tcl_DString) string {
-	return raw.Tcl_UtfToExternalDString(encoding, src, srcLen, dsPtr)
-}
-
-// Tcl_UtfToLower calls [raw.Tcl_UtfToLower] (C function Tcl_UtfToLower).
+// Tcl_UtfToLower calls the Tcl framework function Tcl_UtfToLower.
 func Tcl_UtfToLower(src string) int {
-	return raw.Tcl_UtfToLower(src)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfToLower == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfToLower, _lib, "Tcl_UtfToLower")
+	}
+	return _fnTcl_UtfToLower(src)
 }
 
-// Tcl_UtfToTitle calls [raw.Tcl_UtfToTitle] (C function Tcl_UtfToTitle).
+var _fnTcl_UtfToTitle func(string) int
+
+// Tcl_UtfToTitle calls the Tcl framework function Tcl_UtfToTitle.
 func Tcl_UtfToTitle(src string) int {
-	return raw.Tcl_UtfToTitle(src)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfToTitle == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfToTitle, _lib, "Tcl_UtfToTitle")
+	}
+	return _fnTcl_UtfToTitle(src)
 }
 
-// Tcl_UtfToUniChar calls [raw.Tcl_UtfToUniChar] (C function Tcl_UtfToUniChar).
-func Tcl_UtfToUniChar(src string, chPtr *uint16) int {
-	return raw.Tcl_UtfToUniChar(src, chPtr)
-}
+var _fnTcl_UtfToUpper func(string) int
 
-// Tcl_UtfToUniCharDString calls [raw.Tcl_UtfToUniCharDString] (C function Tcl_UtfToUniCharDString).
-func Tcl_UtfToUniCharDString(src string, length int, dsPtr *raw.Tcl_DString) *uint16 {
-	return raw.Tcl_UtfToUniCharDString(src, length, dsPtr)
-}
-
-// Tcl_UtfToUpper calls [raw.Tcl_UtfToUpper] (C function Tcl_UtfToUpper).
+// Tcl_UtfToUpper calls the Tcl framework function Tcl_UtfToUpper.
 func Tcl_UtfToUpper(src string) int {
-	return raw.Tcl_UtfToUpper(src)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfToUpper == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfToUpper, _lib, "Tcl_UtfToUpper")
+	}
+	return _fnTcl_UtfToUpper(src)
 }
 
-// Tcl_ValidateAllMemory calls [raw.Tcl_ValidateAllMemory] (C function Tcl_ValidateAllMemory).
+var _fnTcl_ValidateAllMemory func(string, int)
+
+// Tcl_ValidateAllMemory calls the Tcl framework function Tcl_ValidateAllMemory.
 func Tcl_ValidateAllMemory(file string, line int) {
-	raw.Tcl_ValidateAllMemory(file, line)
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ValidateAllMemory == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ValidateAllMemory, _lib, "Tcl_ValidateAllMemory")
+	}
+	_fnTcl_ValidateAllMemory(file, line)
 }
 
-// Tcl_VarEvalVA calls [raw.Tcl_VarEvalVA] (C function Tcl_VarEvalVA).
-func Tcl_VarEvalVA(interp *raw.Tcl_Interp, argList string) int {
-	return raw.Tcl_VarEvalVA(interp, argList)
+var _fnTcl_Write func(objc.ID, string, int) int
+
+// Tcl_Write calls the Tcl framework function Tcl_Write.
+func Tcl_Write(chan_ obj.Object, s string, slen int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Write == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Write, _lib, "Tcl_Write")
+	}
+	return _fnTcl_Write(objref.IDOf(chan_), s, slen)
 }
 
-// Tcl_VarTraceInfo calls [raw.Tcl_VarTraceInfo] (C function Tcl_VarTraceInfo).
-func Tcl_VarTraceInfo(interp *raw.Tcl_Interp, varName string, flags int, procPtr unsafe.Pointer, prevClientData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_VarTraceInfo(interp, varName, flags, procPtr, prevClientData)
+var _fnTcl_WriteChars func(objc.ID, string, int) int
+
+// Tcl_WriteChars calls the Tcl framework function Tcl_WriteChars.
+func Tcl_WriteChars(chan_ obj.Object, src string, srcLen int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_WriteChars == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_WriteChars, _lib, "Tcl_WriteChars")
+	}
+	return _fnTcl_WriteChars(objref.IDOf(chan_), src, srcLen)
 }
 
-// Tcl_VarTraceInfo2 calls [raw.Tcl_VarTraceInfo2] (C function Tcl_VarTraceInfo2).
-func Tcl_VarTraceInfo2(interp *raw.Tcl_Interp, part1 string, part2 string, flags int, procPtr unsafe.Pointer, prevClientData unsafe.Pointer) unsafe.Pointer {
-	return raw.Tcl_VarTraceInfo2(interp, part1, part2, flags, procPtr, prevClientData)
-}
+var _fnTcl_WriteRaw func(objc.ID, string, int) int
 
-// Tcl_WaitForEvent calls [raw.Tcl_WaitForEvent] (C function Tcl_WaitForEvent).
-func Tcl_WaitForEvent(timePtr *raw.Tcl_Time) int {
-	return raw.Tcl_WaitForEvent(timePtr)
-}
-
-// Tcl_WaitPid calls [raw.Tcl_WaitPid] (C function Tcl_WaitPid).
-func Tcl_WaitPid(pid unsafe.Pointer, statPtr *int32, options int) unsafe.Pointer {
-	return raw.Tcl_WaitPid(pid, statPtr, options)
-}
-
-// Tcl_Write calls [raw.Tcl_Write] (C function Tcl_Write).
-func Tcl_Write(chan_ unsafe.Pointer, s string, slen int) int {
-	return raw.Tcl_Write(chan_, s, slen)
-}
-
-// Tcl_WriteChars calls [raw.Tcl_WriteChars] (C function Tcl_WriteChars).
-func Tcl_WriteChars(chan_ unsafe.Pointer, src string, srcLen int) int {
-	return raw.Tcl_WriteChars(chan_, src, srcLen)
-}
-
-// Tcl_WriteObj calls [raw.Tcl_WriteObj] (C function Tcl_WriteObj).
-func Tcl_WriteObj(chan_ unsafe.Pointer, objPtr *raw.Tcl_Obj) int {
-	return raw.Tcl_WriteObj(chan_, objPtr)
-}
-
-// Tcl_WriteRaw calls [raw.Tcl_WriteRaw] (C function Tcl_WriteRaw).
-func Tcl_WriteRaw(chan_ unsafe.Pointer, src string, srcLen int) int {
-	return raw.Tcl_WriteRaw(chan_, src, srcLen)
-}
-
-// Tcl_WrongNumArgs calls [raw.Tcl_WrongNumArgs] (C function Tcl_WrongNumArgs).
-func Tcl_WrongNumArgs(interp *raw.Tcl_Interp, objc int, objv unsafe.Pointer, message string) {
-	raw.Tcl_WrongNumArgs(interp, objc, objv, message)
+// Tcl_WriteRaw calls the Tcl framework function Tcl_WriteRaw.
+func Tcl_WriteRaw(chan_ obj.Object, src string, srcLen int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_WriteRaw == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_WriteRaw, _lib, "Tcl_WriteRaw")
+	}
+	return _fnTcl_WriteRaw(objref.IDOf(chan_), src, srcLen)
 }

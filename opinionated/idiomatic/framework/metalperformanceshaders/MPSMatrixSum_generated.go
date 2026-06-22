@@ -5,174 +5,127 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel for performing a pointwise summation of a matrix.
+// MatrixSum is an idiomatic wrapper over the Objective-C class MPSMatrixSum.
 //
-// MatrixSum wraps [raw.MPSMatrixSum] with a fluent Go API.
+// It embeds [Kernel], promoting that type's methods.
+//
+// A kernel for performing a pointwise summation of a matrix.
 type MatrixSum struct {
-	inner *raw.MPSMatrixSum
+	Kernel
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixSum].
-func (x *MatrixSum) Unwrap() *raw.MPSMatrixSum { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixSum) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixSumFromID adopts an existing object pointer as a MatrixSum (nil for 0).
+// MatrixSumFromID adopts an existing Objective-C object as a MatrixSum
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixSumFromID(id objc.ID) *MatrixSum {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixSum{inner: raw.MPSMatrixSumFromID(id)}
+	x := &MatrixSum{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a MPSMatrixSum kernel. @param      device                      The device on which to initialize the kernel. @param      count                       The number of matrices to be summed. @param      rows                        The number of rows to use in the input matrices. @param      columns                     The number of columns to use in the input matrices. @param      transpose                   If YES the result of the summation is to be transposed prior to applying the bias and activation.
-//
-// NewMatrixSumWithDeviceCountRowsColumnsTranspose creates a new [MatrixSum].
-func NewMatrixSumWithDeviceCountRowsColumnsTranspose(device metal.MTLDevice, count uint, rows uint, columns uint, transpose bool) *MatrixSum {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSum")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:count:rows:columns:transpose:"), device, count, rows, columns, transpose)
-	return &MatrixSum{inner: raw.MPSMatrixSumFromID(_id)}
+// matrixSumAdopt wraps an Objective-C object that this code just created as a
+// MatrixSum (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixSumAdopt(id objc.ID) *MatrixSum {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixSum{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixSum kernel. @param      device      The MTLDevice on which to make the MPSMatrixSum object. @return     A new MPSMatrixSum object, or nil if failure.
-//
-// NewMatrixSumWithCoderDevice creates a new [MatrixSum].
-func NewMatrixSumWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixSum {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSum")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixSum{inner: raw.MPSMatrixSumFromID(_id)}
+// NewMatrixSum creates a new MatrixSum.
+func NewMatrixSum() *MatrixSum {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixSum")), objc.RegisterName("new"))
+	return matrixSumAdopt(_id)
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
-//
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
 func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum {
-	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixSum) WithOptions(options mpscore.MPSKernelOptions) *MatrixSum {
-	x.inner.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixSum) WithLabel(label string) *MatrixSum {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Specifies a neuron activation function to be used. @discussion This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixSum kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone. @param      neuronType      Type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all output values. @param      parameterB      parameterB of neuron activation that is shared across all output values. @param      parameterC      parameterC of neuron activation that is shared across all output values.
-//
-// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+// Rows the number of rows to sum.
+func (x *MatrixSum) Rows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+	return _r
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronType calls the underlying NeuronType.
-func (x *MatrixSum) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+// Columns the number of columns to sum.
+func (x *MatrixSum) Columns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+	return _r
 }
 
-// @abstract   Encode the operations to the command buffer @param          buffer              The command buffer in which to encode the operation. @param          sourceMatrices      A list of matrices from which the matrix data is read. @param          resultMatrix        The result matrix. @param          scaleVector         A MPSVector of type MPSDataTypeFloat32 containing the list of scale factors, specified in single precision. @param          offsetVector        A MPSVector of type MPSDataTypeUInt32 containing the list of offsets, stored as a packed array of MPSMatrixOffset values. @param          biasVector          A MPSVector containing the bias terms to add to the result prior to applying the neuron function, if any.  May be nil. @param          startIndex          The starting index into the scale and offset vectors.
-//
-// EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex calls the underlying EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex.
-func (x *MatrixSum) EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint) {
-	x.inner.EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer, sourceMatrices, resultMatrix, scaleVector, offsetVector, biasVector, startIndex)
+// Count the number of matrices to sum.
+func (x *MatrixSum) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// @abstract   The number of rows to sum.
-//
-// Rows calls the underlying Rows.
-func (x *MatrixSum) Rows() uint {
-	return x.inner.Rows()
-}
-
-// @abstract   The number of columns to sum.
-//
-// Columns calls the underlying Columns.
-func (x *MatrixSum) Columns() uint {
-	return x.inner.Columns()
-}
-
-// @abstract   The number of matrices to sum.
-//
-// Count calls the underlying Count.
-func (x *MatrixSum) Count() uint {
-	return x.inner.Count()
-}
-
-// @abstract   The transposition used to initialize the kernel.
-//
-// Transpose calls the underlying Transpose.
+// Transpose the transposition used to initialize the kernel.
 func (x *MatrixSum) Transpose() bool {
-	return x.inner.Transpose()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transpose"))
+	return _r
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
-//
-// ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
+// ResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
 func (x *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
-	return x.inner.ResultMatrixOrigin()
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("resultMatrixOrigin"))
+	return _r
 }
 
-// SetResultMatrixOrigin calls the underlying SetResultMatrixOrigin.
+// SetResultMatrixOrigin wraps the corresponding Objective-C method.
 func (x *MatrixSum) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
-	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
 }
 
-// @abstract      Neuron parameter A.
-//
-// NeuronParameterA calls the underlying NeuronParameterA.
+// NeuronParameterA neuron parameter A.
 func (x *MatrixSum) NeuronParameterA() float32 {
-	return x.inner.NeuronParameterA()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+	return _r
 }
 
-// @abstract      Neuron parameter B.
-//
-// NeuronParameterB calls the underlying NeuronParameterB.
+// NeuronParameterB neuron parameter B.
 func (x *MatrixSum) NeuronParameterB() float32 {
-	return x.inner.NeuronParameterB()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+	return _r
 }
 
-// @abstract      Neuron parameter C.
-//
-// NeuronParameterC calls the underlying NeuronParameterC.
+// NeuronParameterC neuron parameter C.
 func (x *MatrixSum) NeuronParameterC() float32 {
-	return x.inner.NeuronParameterC()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+	return _r
 }
-
-func (x *MatrixSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // MatrixSumable is the interface implemented by [MatrixSum], for mocking and DI.
 type MatrixSumable interface {
-	Unwrap() *raw.MPSMatrixSum
+	obj.Object
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixSum
 	WithLabel(label string) *MatrixSum
-	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
-	EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint)
-	Rows() uint
-	Columns() uint
-	Count() uint
+	Rows() int
+	Columns() int
+	Count() int
 	Transpose() bool
 	ResultMatrixOrigin() metal.MTLOrigin
 	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
@@ -182,3 +135,5 @@ type MatrixSumable interface {
 }
 
 var _ MatrixSumable = (*MatrixSum)(nil)
+
+var _ KernelProvider = (*MatrixSum)(nil)

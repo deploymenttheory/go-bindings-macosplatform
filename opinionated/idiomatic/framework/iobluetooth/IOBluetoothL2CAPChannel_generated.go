@@ -5,235 +5,198 @@
 package iobluetooth
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An instance of IOBluetoothL2CAPChannel represents a single open L2CAP channel.
+// IOBluetoothL2CAPChannel is an idiomatic wrapper over the Objective-C class IOBluetoothL2CAPChannel.
 //
-// IOBluetoothL2CAPChannel wraps [raw.IOBluetoothL2CAPChannel] with a fluent Go API.
+// It embeds [IOBluetoothObject], promoting that type's methods.
+//
+// An instance of IOBluetoothL2CAPChannel represents a single open L2CAP channel.
 type IOBluetoothL2CAPChannel struct {
-	inner *raw.IOBluetoothL2CAPChannel
+	IOBluetoothObject
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothL2CAPChannel].
-func (x *IOBluetoothL2CAPChannel) Unwrap() *raw.IOBluetoothL2CAPChannel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothL2CAPChannel) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothL2CAPChannelFromID adopts an existing object pointer as a IOBluetoothL2CAPChannel (nil for 0).
+// IOBluetoothL2CAPChannelFromID adopts an existing Objective-C object as a IOBluetoothL2CAPChannel
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothL2CAPChannelFromID(id objc.ID) *IOBluetoothL2CAPChannel {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothL2CAPChannel{inner: raw.IOBluetoothL2CAPChannelFromID(id)}
+	x := &IOBluetoothL2CAPChannel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIOBluetoothL2CAPChannel creates a new [IOBluetoothL2CAPChannel].
+// iOBluetoothL2CAPChannelAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothL2CAPChannel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothL2CAPChannelAdopt(id objc.ID) *IOBluetoothL2CAPChannel {
+	if id == 0 {
+		return nil
+	}
+	x := &IOBluetoothL2CAPChannel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewIOBluetoothL2CAPChannel creates a new IOBluetoothL2CAPChannel.
 func NewIOBluetoothL2CAPChannel() *IOBluetoothL2CAPChannel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothL2CAPChannel")), objc.RegisterName("new"))
-	return &IOBluetoothL2CAPChannel{inner: raw.IOBluetoothL2CAPChannelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothL2CAPChannel")), objc.RegisterName("new"))
+	return iOBluetoothL2CAPChannelAdopt(_id)
 }
 
-// Initiates the close process on an open L2CAP channel.
-//
-// CloseChannel calls the underlying CloseChannel.
+// CloseChannel initiates the close process on an open L2CAP channel.
 func (x *IOBluetoothL2CAPChannel) CloseChannel() int {
-	return x.inner.CloseChannel()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("closeChannel"))
+	return _r
 }
 
-// Returns the current outgoing MTU for the L2CAP channel.
-//
-// GetOutgoingMTU calls the underlying GetOutgoingMTU.
+// GetOutgoingMTU returns the current outgoing MTU for the L2CAP channel.
 func (x *IOBluetoothL2CAPChannel) GetOutgoingMTU() uint16 {
-	return x.inner.GetOutgoingMTU()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getOutgoingMTU"))
+	return _r
 }
 
-// Returns the current incoming MTU for the L2CAP channel.
-//
-// GetIncomingMTU calls the underlying GetIncomingMTU.
+// GetIncomingMTU returns the current incoming MTU for the L2CAP channel.
 func (x *IOBluetoothL2CAPChannel) GetIncomingMTU() uint16 {
-	return x.inner.GetIncomingMTU()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getIncomingMTU"))
+	return _r
 }
 
-// Initiates the process to reconfigure the L2CAP channel with a new outgoing MTU.
-//
-// RequestRemoteMTU calls the underlying RequestRemoteMTU.
+// RequestRemoteMTU initiates the process to reconfigure the L2CAP channel with a new outgoing MTU.
 func (x *IOBluetoothL2CAPChannel) RequestRemoteMTU(remoteMTU uint16) int {
-	return x.inner.RequestRemoteMTU(remoteMTU)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestRemoteMTU:"), remoteMTU)
+	return _r
 }
 
-// WriteAsyncTrapLengthRefcon calls the underlying WriteAsyncTrapLengthRefcon.
-func (x *IOBluetoothL2CAPChannel) WriteAsyncTrapLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
-	return x.inner.WriteAsyncTrapLengthRefcon(data, length, refcon)
+// SetDelegate allows an object to register itself as client of the L2CAP channel.
+func (x *IOBluetoothL2CAPChannel) SetDelegate(channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(channelDelegate))
+	return _r
 }
 
-// Writes the given data over the target L2CAP channel asynchronously to the remote device.
-//
-// WriteAsyncLengthRefcon calls the underlying WriteAsyncLengthRefcon.
-func (x *IOBluetoothL2CAPChannel) WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
-	return x.inner.WriteAsyncLengthRefcon(data, length, refcon)
+// SetDelegateWithConfiguration allows an object to register itself as client of the L2CAP channel.
+func (x *IOBluetoothL2CAPChannel) SetDelegateWithConfiguration(channelDelegate obj.Object, channelConfiguration obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setDelegate:withConfiguration:"), objref.IDOf(channelDelegate), objref.IDOf(channelConfiguration))
+	return _r
 }
 
-// Writes the given data synchronously over the target L2CAP channel to the remote device.
-//
-// WriteSyncLength calls the underlying WriteSyncLength.
-func (x *IOBluetoothL2CAPChannel) WriteSyncLength(data unsafe.Pointer, length uint16) int {
-	return x.inner.WriteSyncLength(data, length)
+// Delegate returns the currently assigned delegate
+func (x *IOBluetoothL2CAPChannel) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// Allows an object to register itself as client of the L2CAP channel.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *IOBluetoothL2CAPChannel) SetDelegate(channelDelegate objc.ID) int {
-	return x.inner.SetDelegate(channelDelegate)
-}
-
-// Allows an object to register itself as client of the L2CAP channel.
-//
-// SetDelegateWithConfiguration calls the underlying SetDelegateWithConfiguration.
-func (x *IOBluetoothL2CAPChannel) SetDelegateWithConfiguration(channelDelegate objc.ID, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID]) int {
-	return x.inner.SetDelegateWithConfiguration(channelDelegate, channelConfiguration)
-}
-
-// Returns the currently assigned delegate
-//
-// Delegate calls the underlying Delegate.
-func (x *IOBluetoothL2CAPChannel) Delegate() objc.ID {
-	return x.inner.Delegate()
-}
-
-// Returns the IOBluetoothDevice to which the target L2CAP channel is open.
-//
-// GetDevice calls the underlying GetDevice.
+// GetDevice returns the IOBluetoothDevice to which the target L2CAP channel is open.
 func (x *IOBluetoothL2CAPChannel) GetDevice() *IOBluetoothDevice {
-	_r := x.inner.GetDevice()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
+	return IOBluetoothDeviceFromID(_r)
 }
 
-// Returns the IOBluetoothObjectID of the given IOBluetoothL2CAPChannel.
-//
-// GetObjectID calls the underlying GetObjectID.
-func (x *IOBluetoothL2CAPChannel) GetObjectID() uint {
-	return x.inner.GetObjectID()
+// GetObjectID returns the IOBluetoothObjectID of the given IOBluetoothL2CAPChannel.
+func (x *IOBluetoothL2CAPChannel) GetObjectID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getObjectID"))
+	return _r
 }
 
-// Returns the PSM for the target L2CAP channel.
-//
-// GetPSM calls the underlying GetPSM.
+// GetPSM returns the PSM for the target L2CAP channel.
 func (x *IOBluetoothL2CAPChannel) GetPSM() uint16 {
-	return x.inner.GetPSM()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getPSM"))
+	return _r
 }
 
-// Returns the local L2CAP channel ID for the target L2CAP channel.
-//
-// GetLocalChannelID calls the underlying GetLocalChannelID.
+// GetLocalChannelID returns the local L2CAP channel ID for the target L2CAP channel.
 func (x *IOBluetoothL2CAPChannel) GetLocalChannelID() uint16 {
-	return x.inner.GetLocalChannelID()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getLocalChannelID"))
+	return _r
 }
 
-// Returns the remote L2CAP channel ID for the target L2CAP channel.
-//
-// GetRemoteChannelID calls the underlying GetRemoteChannelID.
+// GetRemoteChannelID returns the remote L2CAP channel ID for the target L2CAP channel.
 func (x *IOBluetoothL2CAPChannel) GetRemoteChannelID() uint16 {
-	return x.inner.GetRemoteChannelID()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getRemoteChannelID"))
+	return _r
 }
 
-// Returns TRUE if the channel is an incoming channel.
-//
-// IsIncoming calls the underlying IsIncoming.
+// IsIncoming returns TRUE if the channel is an incoming channel.
 func (x *IOBluetoothL2CAPChannel) IsIncoming() bool {
-	return x.inner.IsIncoming()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncoming"))
+	return _r
 }
 
-// Allows a client to register for a channel close notification.
-//
-// RegisterForChannelCloseNotificationSelector calls the underlying RegisterForChannelCloseNotificationSelector.
-func (x *IOBluetoothL2CAPChannel) RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
-	_r := x.inner.RegisterForChannelCloseNotificationSelector(observer, inSelector)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
-}
-
-// OutgoingMTU calls the underlying OutgoingMTU.
+// OutgoingMTU wraps the corresponding Objective-C method.
 func (x *IOBluetoothL2CAPChannel) OutgoingMTU() uint16 {
-	return x.inner.OutgoingMTU()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("outgoingMTU"))
+	return _r
 }
 
-// IncomingMTU calls the underlying IncomingMTU.
+// IncomingMTU wraps the corresponding Objective-C method.
 func (x *IOBluetoothL2CAPChannel) IncomingMTU() uint16 {
-	return x.inner.IncomingMTU()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("incomingMTU"))
+	return _r
 }
 
-// Device calls the underlying Device.
+// Device wraps the corresponding Objective-C method.
 func (x *IOBluetoothL2CAPChannel) Device() *IOBluetoothDevice {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return IOBluetoothDeviceFromID(_r)
 }
 
-// ObjectID calls the underlying ObjectID.
-func (x *IOBluetoothL2CAPChannel) ObjectID() uint {
-	return x.inner.ObjectID()
+// ObjectID wraps the corresponding Objective-C method.
+func (x *IOBluetoothL2CAPChannel) ObjectID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("objectID"))
+	return _r
 }
 
-// PSM calls the underlying PSM.
+// PSM wraps the corresponding Objective-C method.
 func (x *IOBluetoothL2CAPChannel) PSM() uint16 {
-	return x.inner.PSM()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("PSM"))
+	return _r
 }
 
-// LocalChannelID calls the underlying LocalChannelID.
+// LocalChannelID wraps the corresponding Objective-C method.
 func (x *IOBluetoothL2CAPChannel) LocalChannelID() uint16 {
-	return x.inner.LocalChannelID()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("localChannelID"))
+	return _r
 }
 
-// RemoteChannelID calls the underlying RemoteChannelID.
+// RemoteChannelID wraps the corresponding Objective-C method.
 func (x *IOBluetoothL2CAPChannel) RemoteChannelID() uint16 {
-	return x.inner.RemoteChannelID()
-}
-
-func (x *IOBluetoothL2CAPChannel) asIOBluetoothObject() *raw.IOBluetoothObject {
-	return &x.inner.IOBluetoothObject
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("remoteChannelID"))
+	return _r
 }
 
 // IOBluetoothL2CAPChannelable is the interface implemented by [IOBluetoothL2CAPChannel], for mocking and DI.
 type IOBluetoothL2CAPChannelable interface {
-	Unwrap() *raw.IOBluetoothL2CAPChannel
+	obj.Object
 	CloseChannel() int
 	GetOutgoingMTU() uint16
 	GetIncomingMTU() uint16
 	RequestRemoteMTU(remoteMTU uint16) int
-	WriteAsyncTrapLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int
-	WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int
-	WriteSyncLength(data unsafe.Pointer, length uint16) int
-	SetDelegate(channelDelegate objc.ID) int
-	SetDelegateWithConfiguration(channelDelegate objc.ID, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID]) int
-	Delegate() objc.ID
+	SetDelegate(channelDelegate obj.Object) int
+	SetDelegateWithConfiguration(channelDelegate obj.Object, channelConfiguration obj.Object) int
+	Delegate() obj.Object
 	GetDevice() *IOBluetoothDevice
-	GetObjectID() uint
+	GetObjectID() int
 	GetPSM() uint16
 	GetLocalChannelID() uint16
 	GetRemoteChannelID() uint16
 	IsIncoming() bool
-	RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification
 	OutgoingMTU() uint16
 	IncomingMTU() uint16
 	Device() *IOBluetoothDevice
-	ObjectID() uint
+	ObjectID() int
 	PSM() uint16
 	LocalChannelID() uint16
 	RemoteChannelID() uint16
 }
 
 var _ IOBluetoothL2CAPChannelable = (*IOBluetoothL2CAPChannel)(nil)
+
+var _ IOBluetoothObjectProvider = (*IOBluetoothL2CAPChannel)(nil)

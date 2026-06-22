@@ -5,255 +5,245 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A URL load request that is independent of protocol or URL scheme.
+// URLRequest is an idiomatic wrapper over the Objective-C class NSURLRequest.
 //
-// URLRequest wraps [raw.NSURLRequest] with a fluent Go API.
+// URLRequest is an abstract base — you do not construct it directly. Construct one of [MutableURLRequest] and pass it where a URLRequest is accepted.
+//
+// A URL load request that is independent of protocol or URL scheme.
 type URLRequest struct {
-	inner *raw.NSURLRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLRequest].
-func (x *URLRequest) Unwrap() *raw.NSURLRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// URLRequestFromID adopts an existing object pointer as a URLRequest (nil for 0).
+// URLRequestFromID adopts an existing Objective-C object as a URLRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func URLRequestFromID(id objc.ID) *URLRequest {
 	if id == 0 {
 		return nil
 	}
-	return &URLRequest{inner: raw.NSURLRequestFromID(id)}
-}
-
-// Creates a URL request for a specified URL.
-//
-// NewURLRequestWithURL creates a new [URLRequest].
-func NewURLRequestWithURL(uRL string) *URLRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
-}
-
-// Creates a URL request with the specified URL, cache policy, and timeout values.
-//
-// NewURLRequestWithURLCachePolicyTimeoutInterval creates a new [URLRequest].
-func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), raw.NSURLRequestCachePolicy(cachePolicy), timeoutInterval)
-	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLRequest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLRequest {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract Returns the URL of the receiver. @result The URL of the receiver.
-//
-// URL calls the underlying URL.
+// uRLRequestAdopt wraps an Objective-C object that this code just created as a
+// URLRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLRequestAdopt(id objc.ID) *URLRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &URLRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLRequestWithURL creates a URL request for a specified URL.
+func NewURLRequestWithURL(uRL string) *URLRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	return uRLRequestAdopt(_id)
+}
+
+// NewURLRequestWithURLCachePolicyTimeoutInterval creates a URL request with the specified URL, cache policy, and timeout values.
+func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLRequestCachePolicy, timeoutInterval float64) *URLRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:"), rt.FileURL(uRL), cachePolicy, timeoutInterval)
+	return uRLRequestAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLRequest) WithScriptingProperties(scriptingProperties obj.Object) *URLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// URL returns the URL of the receiver.
 func (x *URLRequest) URL() *URL {
-	_r := x.inner.URL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return URLFromID(_r)
 }
 
-// @abstract Returns the cache policy of the receiver. @result The cache policy of the receiver.
-//
-// CachePolicy calls the underlying CachePolicy.
-func (x *URLRequest) CachePolicy() NSURLRequestCachePolicy {
-	return NSURLRequestCachePolicy(x.inner.CachePolicy())
+// CachePolicy returns the cache policy of the receiver.
+func (x *URLRequest) CachePolicy() URLRequestCachePolicy {
+	_r := objc.Send[URLRequestCachePolicy](objref.IDOf(x), objc.RegisterName("cachePolicy"))
+	return _r
 }
 
-// @abstract Returns the timeout interval of the receiver. @discussion The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds. @result The timeout interval of the receiver.
-//
-// TimeoutInterval calls the underlying TimeoutInterval.
+// TimeoutInterval returns the timeout interval of the receiver. The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds.
 func (x *URLRequest) TimeoutInterval() float64 {
-	return x.inner.TimeoutInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutInterval"))
+	return _r
 }
 
-// @abstract The main document URL associated with this load. @discussion This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL: @result The main document URL.
-//
-// MainDocumentURL calls the underlying MainDocumentURL.
+// MainDocumentURL the main document URL associated with this load. This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL:
 func (x *URLRequest) MainDocumentURL() *URL {
-	_r := x.inner.MainDocumentURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainDocumentURL"))
+	return URLFromID(_r)
 }
 
-// @abstract Returns the NSURLRequestNetworkServiceType associated with this request. @discussion  This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method). @result The NSURLRequestNetworkServiceType associated with this request.
-//
-// NetworkServiceType calls the underlying NetworkServiceType.
-func (x *URLRequest) NetworkServiceType() NSURLRequestNetworkServiceType {
-	return NSURLRequestNetworkServiceType(x.inner.NetworkServiceType())
+// NetworkServiceType returns the NSURLRequestNetworkServiceType associated with this request. This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method).
+func (x *URLRequest) NetworkServiceType() URLRequestNetworkServiceType {
+	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(x), objc.RegisterName("networkServiceType"))
+	return _r
 }
 
-// @abstract returns whether a connection created with this request is allowed to use the built in cellular radios (if present). @result YES if the receiver is allowed to use the built in cellular radios to satisfy the request, NO otherwise.
-//
-// AllowsCellularAccess calls the underlying AllowsCellularAccess.
+// AllowsCellularAccess returns whether a connection created with this request is allowed to use the built in cellular radios (if present).
 func (x *URLRequest) AllowsCellularAccess() bool {
-	return x.inner.AllowsCellularAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
+	return _r
 }
 
-// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as expensive. @result YES if the receiver is allowed to use an interface marked as expensive to satisfy the request, NO otherwise.
-//
-// AllowsExpensiveNetworkAccess calls the underlying AllowsExpensiveNetworkAccess.
+// AllowsExpensiveNetworkAccess returns whether a connection created with this request is allowed to use network interfaces which have been marked as expensive.
 func (x *URLRequest) AllowsExpensiveNetworkAccess() bool {
-	return x.inner.AllowsExpensiveNetworkAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExpensiveNetworkAccess"))
+	return _r
 }
 
-// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as constrained. @result YES if the receiver is allowed to use an interface marked as constrained to satisfy the request, NO otherwise.
-//
-// AllowsConstrainedNetworkAccess calls the underlying AllowsConstrainedNetworkAccess.
+// AllowsConstrainedNetworkAccess returns whether a connection created with this request is allowed to use network interfaces which have been marked as constrained.
 func (x *URLRequest) AllowsConstrainedNetworkAccess() bool {
-	return x.inner.AllowsConstrainedNetworkAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsConstrainedNetworkAccess"))
+	return _r
 }
 
-// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained. @result YES if the receiver is allowed to use an interface marked as ultra constrained to satisfy the request, NO otherwise.
-//
-// AllowsUltraConstrainedNetworkAccess calls the underlying AllowsUltraConstrainedNetworkAccess.
+// AllowsUltraConstrainedNetworkAccess returns whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
 func (x *URLRequest) AllowsUltraConstrainedNetworkAccess() bool {
-	return x.inner.AllowsUltraConstrainedNetworkAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsUltraConstrainedNetworkAccess"))
+	return _r
 }
 
-// @abstract returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery. @result YES if server endpoint is known to support HTTP/3. Defaults to NO. The default may be YES in a future OS update.
-//
-// AssumesHTTP3Capable calls the underlying AssumesHTTP3Capable.
+// AssumesHTTP3Capable returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery.
 func (x *URLRequest) AssumesHTTP3Capable() bool {
-	return x.inner.AssumesHTTP3Capable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assumesHTTP3Capable"))
+	return _r
 }
 
-// @abstract Returns the NSURLRequestAttribution associated with this request. @discussion This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution. @result The NSURLRequestAttribution associated with this request.
-//
-// Attribution calls the underlying Attribution.
-func (x *URLRequest) Attribution() NSURLRequestAttribution {
-	return NSURLRequestAttribution(x.inner.Attribution())
+// Attribution returns the NSURLRequestAttribution associated with this request. This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution.
+func (x *URLRequest) Attribution() URLRequestAttribution {
+	_r := objc.Send[URLRequestAttribution](objref.IDOf(x), objc.RegisterName("attribution"))
+	return _r
 }
 
-// @abstract sets whether a request is required to do DNSSEC validation during DNS lookup. @discussion YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
-//
-// RequiresDNSSECValidation calls the underlying RequiresDNSSECValidation.
+// RequiresDNSSECValidation sets whether a request is required to do DNSSEC validation during DNS lookup. YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
 func (x *URLRequest) RequiresDNSSECValidation() bool {
-	return x.inner.RequiresDNSSECValidation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresDNSSECValidation"))
+	return _r
 }
 
-// @abstract Allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. @discussion YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
-//
-// AllowsPersistentDNS calls the underlying AllowsPersistentDNS.
+// AllowsPersistentDNS allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
 func (x *URLRequest) AllowsPersistentDNS() bool {
-	return x.inner.AllowsPersistentDNS()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPersistentDNS"))
+	return _r
 }
 
-// CookiePartitionIdentifier calls the underlying CookiePartitionIdentifier.
-func (x *URLRequest) CookiePartitionIdentifier() *String {
-	_r := x.inner.CookiePartitionIdentifier()
-	if _r == nil {
-		return nil
+// CookiePartitionIdentifier wraps the corresponding Objective-C method.
+func (x *URLRequest) CookiePartitionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookiePartitionIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the value of the specified HTTP header field.
-//
-// ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
-func (x *URLRequest) ValueForHTTPHeaderField(field string) *String {
-	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
-	if _r == nil {
-		return nil
+// ValueForHTTPHeaderField returns the value of the specified HTTP header field.
+func (x *URLRequest) ValueForHTTPHeaderField(field string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns the HTTP request method of the receiver. @result the HTTP request method of the receiver.
-//
-// HTTPMethod calls the underlying HTTPMethod.
-func (x *URLRequest) HTTPMethod() *String {
-	_r := x.inner.HTTPMethod()
-	if _r == nil {
-		return nil
+// HTTPMethod returns the HTTP request method of the receiver.
+func (x *URLRequest) HTTPMethod() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPMethod"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @result a dictionary containing all the HTTP header fields of the receiver.
-//
-// AllHTTPHeaderFields calls the underlying AllHTTPHeaderFields.
-func (x *URLRequest) AllHTTPHeaderFields() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return x.inner.AllHTTPHeaderFields()
+// AllHTTPHeaderFields returns a dictionary containing all the HTTP header fields of the receiver.
+func (x *URLRequest) AllHTTPHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHTTPHeaderFields"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Returns the request body data of the receiver. @discussion This data is sent as the message body of the request, as in done in an HTTP POST request. @result The request body data of the receiver.
-//
-// HTTPBody calls the underlying HTTPBody.
+// HTTPBody returns the request body data of the receiver. This data is sent as the message body of the request, as in done in an HTTP POST request.
 func (x *URLRequest) HTTPBody() *Data {
-	_r := x.inner.HTTPBody()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPBody"))
+	return DataFromID(_r)
 }
 
-// @abstract Returns the request body stream of the receiver if any has been set @discussion The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol @result The request body stream of the receiver.
-//
-// HTTPBodyStream calls the underlying HTTPBodyStream.
+// HTTPBodyStream returns the request body stream of the receiver if any has been set The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol
 func (x *URLRequest) HTTPBodyStream() *InputStream {
-	_r := x.inner.HTTPBodyStream()
-	if _r == nil {
-		return nil
-	}
-	return &InputStream{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPBodyStream"))
+	return InputStreamFromID(_r)
 }
 
-// @abstract Determine whether default cookie handling will happen for this request. @discussion NOTE: This value is not used prior to 10.3 @result YES if cookies will be sent with and set for this request; otherwise NO.
-//
-// HTTPShouldHandleCookies calls the underlying HTTPShouldHandleCookies.
+// HTTPShouldHandleCookies determine whether default cookie handling will happen for this request. NOTE: This value is not used prior to 10.3
 func (x *URLRequest) HTTPShouldHandleCookies() bool {
-	return x.inner.HTTPShouldHandleCookies()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPShouldHandleCookies"))
+	return _r
 }
 
-// @abstract Reports whether the receiver is not expected to wait for the previous response before transmitting. @result YES if the receiver should transmit before the previous response is received.  NO if the receiver should wait for the previous response before transmitting.
-//
-// HTTPShouldUsePipelining calls the underlying HTTPShouldUsePipelining.
+// HTTPShouldUsePipelining reports whether the receiver is not expected to wait for the previous response before transmitting.
 func (x *URLRequest) HTTPShouldUsePipelining() bool {
-	return x.inner.HTTPShouldUsePipelining()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPShouldUsePipelining"))
+	return _r
 }
-
-func (x *URLRequest) asURLRequest() *raw.NSURLRequest { return x.inner }
-
-func (x *URLRequest) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLRequestable is the interface implemented by [URLRequest], for mocking and DI.
 type URLRequestable interface {
-	Unwrap() *raw.NSURLRequest
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLRequest
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLRequest
 	URL() *URL
-	CachePolicy() NSURLRequestCachePolicy
+	CachePolicy() URLRequestCachePolicy
 	TimeoutInterval() float64
 	MainDocumentURL() *URL
-	NetworkServiceType() NSURLRequestNetworkServiceType
+	NetworkServiceType() URLRequestNetworkServiceType
 	AllowsCellularAccess() bool
 	AllowsExpensiveNetworkAccess() bool
 	AllowsConstrainedNetworkAccess() bool
 	AllowsUltraConstrainedNetworkAccess() bool
 	AssumesHTTP3Capable() bool
-	Attribution() NSURLRequestAttribution
+	Attribution() URLRequestAttribution
 	RequiresDNSSECValidation() bool
 	AllowsPersistentDNS() bool
-	CookiePartitionIdentifier() *String
-	ValueForHTTPHeaderField(field string) *String
-	HTTPMethod() *String
-	AllHTTPHeaderFields() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	CookiePartitionIdentifier() string
+	ValueForHTTPHeaderField(field string) string
+	HTTPMethod() string
+	AllHTTPHeaderFields() obj.Object
 	HTTPBody() *Data
 	HTTPBodyStream() *InputStream
 	HTTPShouldHandleCookies() bool
@@ -261,3 +251,10 @@ type URLRequestable interface {
 }
 
 var _ URLRequestable = (*URLRequest)(nil)
+
+// isURLRequest marks URLRequest — and, by embedding promotion, its
+// subclasses — as a member of the URLRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *URLRequest) isURLRequest() {}
+
+var _ URLRequestProvider = (*URLRequest)(nil)

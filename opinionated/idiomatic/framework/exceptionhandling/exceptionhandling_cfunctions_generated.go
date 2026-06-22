@@ -5,10 +5,16 @@
 package exceptionhandling
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/exceptionhandling"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// NSExceptionHandlerResume calls [raw.NSExceptionHandlerResume] (C function NSExceptionHandlerResume).
+var _fnNSExceptionHandlerResume func()
+
+// NSExceptionHandlerResume calls the ExceptionHandling framework function NSExceptionHandlerResume.
 func NSExceptionHandlerResume() {
-	raw.NSExceptionHandlerResume()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSExceptionHandlerResume == nil {
+		ebipurego.RegisterLibFunc(&_fnNSExceptionHandlerResume, _lib, "NSExceptionHandlerResume")
+	}
+	_fnNSExceptionHandlerResume()
 }

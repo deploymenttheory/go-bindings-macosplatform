@@ -5,76 +5,86 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Alarm calls the underlying CalAlarmAlarm.
-func Alarm() objc.ID {
-	return raw.CalAlarmAlarm()
+// Alarm wraps the corresponding Objective-C method.
+func Alarm() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalAlarm")), objc.RegisterName("alarm"))
+	return obj.Wrap(_r)
 }
 
-// Calendar calls the underlying CalCalendarCalendar.
-func Calendar() objc.ID {
-	return raw.CalCalendarCalendar()
+// Calendar wraps the corresponding Objective-C method.
+func Calendar() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendar")), objc.RegisterName("calendar"))
+	return obj.Wrap(_r)
 }
 
-// DefaultCalendarStore calls the underlying CalCalendarStoreDefaultCalendarStore.
+// DefaultCalendarStore wraps the corresponding Objective-C method.
 func DefaultCalendarStore() *CalCalendarStore {
-	_r := raw.CalCalendarStoreDefaultCalendarStore()
-	if _r == nil {
-		return nil
-	}
-	return &CalCalendarStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("defaultCalendarStore"))
+	return CalCalendarStoreFromID(_r)
 }
 
-// EventPredicateWithStartDateEndDateCalendars calls the underlying CalCalendarStoreEventPredicateWithStartDateEndDateCalendars.
-func EventPredicateWithStartDateEndDateCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.CalCalendarStoreEventPredicateWithStartDateEndDateCalendars(startDate, endDate, calendars)
+// EventPredicateWithStartDateEndDateCalendars wraps the corresponding Objective-C method.
+func EventPredicateWithStartDateEndDateCalendars(startDate obj.Object, endDate obj.Object, calendars obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("eventPredicateWithStartDate:endDate:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(calendars))
+	return obj.Wrap(_r)
 }
 
-// EventPredicateWithStartDateEndDateUIDCalendars calls the underlying CalCalendarStoreEventPredicateWithStartDateEndDateUIDCalendars.
-func EventPredicateWithStartDateEndDateUIDCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, uID string, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.CalCalendarStoreEventPredicateWithStartDateEndDateUIDCalendars(startDate, endDate, foundation.NSStringStringWithUTF8String(uID), calendars)
+// EventPredicateWithStartDateEndDateUIDCalendars wraps the corresponding Objective-C method.
+func EventPredicateWithStartDateEndDateUIDCalendars(startDate obj.Object, endDate obj.Object, uID string, calendars obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("eventPredicateWithStartDate:endDate:UID:calendars:"), objref.IDOf(startDate), objref.IDOf(endDate), purego.NSString(uID), objref.IDOf(calendars))
+	return obj.Wrap(_r)
 }
 
-// TaskPredicateWithCalendars calls the underlying CalCalendarStoreTaskPredicateWithCalendars.
-func TaskPredicateWithCalendars(calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.CalCalendarStoreTaskPredicateWithCalendars(calendars)
+// TaskPredicateWithCalendars wraps the corresponding Objective-C method.
+func TaskPredicateWithCalendars(calendars obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithCalendars:"), objref.IDOf(calendars))
+	return obj.Wrap(_r)
 }
 
-// TaskPredicateWithUncompletedTasks calls the underlying CalCalendarStoreTaskPredicateWithUncompletedTasks.
-func TaskPredicateWithUncompletedTasks(calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.CalCalendarStoreTaskPredicateWithUncompletedTasks(calendars)
+// TaskPredicateWithUncompletedTasks wraps the corresponding Objective-C method.
+func TaskPredicateWithUncompletedTasks(calendars obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithUncompletedTasks:"), objref.IDOf(calendars))
+	return obj.Wrap(_r)
 }
 
-// TaskPredicateWithUncompletedTasksDueBeforeCalendars calls the underlying CalCalendarStoreTaskPredicateWithUncompletedTasksDueBeforeCalendars.
-func TaskPredicateWithUncompletedTasksDueBeforeCalendars(dueDate *foundation.NSDate, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.CalCalendarStoreTaskPredicateWithUncompletedTasksDueBeforeCalendars(dueDate, calendars)
+// TaskPredicateWithUncompletedTasksDueBeforeCalendars wraps the corresponding Objective-C method.
+func TaskPredicateWithUncompletedTasksDueBeforeCalendars(dueDate obj.Object, calendars obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithUncompletedTasksDueBefore:calendars:"), objref.IDOf(dueDate), objref.IDOf(calendars))
+	return obj.Wrap(_r)
 }
 
-// TaskPredicateWithTasksCompletedSinceCalendars calls the underlying CalCalendarStoreTaskPredicateWithTasksCompletedSinceCalendars.
-func TaskPredicateWithTasksCompletedSinceCalendars(completedSince *foundation.NSDate, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
-	return raw.CalCalendarStoreTaskPredicateWithTasksCompletedSinceCalendars(completedSince, calendars)
+// TaskPredicateWithTasksCompletedSinceCalendars wraps the corresponding Objective-C method.
+func TaskPredicateWithTasksCompletedSinceCalendars(completedSince obj.Object, calendars obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("taskPredicateWithTasksCompletedSince:calendars:"), objref.IDOf(completedSince), objref.IDOf(calendars))
+	return obj.Wrap(_r)
 }
 
-// Event calls the underlying CalEventEvent.
-func Event() objc.ID {
-	return raw.CalEventEvent()
+// Event wraps the corresponding Objective-C method.
+func Event() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalEvent")), objc.RegisterName("event"))
+	return obj.Wrap(_r)
 }
 
-// RecurrenceEndWithEndDate calls the underlying CalRecurrenceEndRecurrenceEndWithEndDate.
-func RecurrenceEndWithEndDate(endDate *foundation.NSDate) objc.ID {
-	return raw.CalRecurrenceEndRecurrenceEndWithEndDate(endDate)
+// RecurrenceEndWithEndDate wraps the corresponding Objective-C method.
+func RecurrenceEndWithEndDate(endDate obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceEnd")), objc.RegisterName("recurrenceEndWithEndDate:"), objref.IDOf(endDate))
+	return obj.Wrap(_r)
 }
 
-// RecurrenceEndWithOccurrenceCount calls the underlying CalRecurrenceEndRecurrenceEndWithOccurrenceCount.
-func RecurrenceEndWithOccurrenceCount(occurrenceCount uint) objc.ID {
-	return raw.CalRecurrenceEndRecurrenceEndWithOccurrenceCount(occurrenceCount)
+// RecurrenceEndWithOccurrenceCount wraps the corresponding Objective-C method.
+func RecurrenceEndWithOccurrenceCount(occurrenceCount int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalRecurrenceEnd")), objc.RegisterName("recurrenceEndWithOccurrenceCount:"), occurrenceCount)
+	return obj.Wrap(_r)
 }
 
-// Task calls the underlying CalTaskTask.
-func Task() objc.ID {
-	return raw.CalTaskTask()
+// Task wraps the corresponding Objective-C method.
+func Task() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CalTask")), objc.RegisterName("task"))
+	return obj.Wrap(_r)
 }

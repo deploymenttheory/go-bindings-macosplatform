@@ -5,47 +5,83 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The constraint on the keys for a dictionary feature.
+// DictionaryConstraint is an idiomatic wrapper over the Objective-C class MLDictionaryConstraint.
 //
-// DictionaryConstraint wraps [raw.MLDictionaryConstraint] with a fluent Go API.
+// The constraint on the keys for a dictionary feature.
 type DictionaryConstraint struct {
-	inner *raw.MLDictionaryConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLDictionaryConstraint].
-func (x *DictionaryConstraint) Unwrap() *raw.MLDictionaryConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DictionaryConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// DictionaryConstraintFromID adopts an existing object pointer as a DictionaryConstraint (nil for 0).
+// DictionaryConstraintFromID adopts an existing Objective-C object as a DictionaryConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func DictionaryConstraintFromID(id objc.ID) *DictionaryConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &DictionaryConstraint{inner: raw.MLDictionaryConstraintFromID(id)}
+	x := &DictionaryConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDictionaryConstraint creates a new [DictionaryConstraint].
+// dictionaryConstraintAdopt wraps an Objective-C object that this code just created as a
+// DictionaryConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dictionaryConstraintAdopt(id objc.ID) *DictionaryConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &DictionaryConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DictionaryConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DictionaryConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DictionaryConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DictionaryConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDictionaryConstraint creates a new DictionaryConstraint.
 func NewDictionaryConstraint() *DictionaryConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLDictionaryConstraint")), objc.RegisterName("new"))
-	return &DictionaryConstraint{inner: raw.MLDictionaryConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLDictionaryConstraint")), objc.RegisterName("new"))
+	return dictionaryConstraintAdopt(_id)
 }
 
-// KeyType calls the underlying KeyType.
-func (x *DictionaryConstraint) KeyType() MLFeatureType {
-	return MLFeatureType(x.inner.KeyType())
+// KeyType wraps the corresponding Objective-C method.
+func (x *DictionaryConstraint) KeyType() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("keyType"))
+	return _r
 }
 
 // DictionaryConstraintable is the interface implemented by [DictionaryConstraint], for mocking and DI.
 type DictionaryConstraintable interface {
-	Unwrap() *raw.MLDictionaryConstraint
-	KeyType() MLFeatureType
+	obj.Object
+	KeyType() FeatureType
 }
 
 var _ DictionaryConstraintable = (*DictionaryConstraint)(nil)

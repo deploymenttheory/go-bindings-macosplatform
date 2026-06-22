@@ -5,120 +5,133 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enables you to start and stop URL requests.
+// URLConnection is an idiomatic wrapper over the Objective-C class NSURLConnection.
 //
-// URLConnection wraps [raw.NSURLConnection] with a fluent Go API.
+// An object that enables you to start and stop URL requests.
 type URLConnection struct {
-	inner *raw.NSURLConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLConnection].
-func (x *URLConnection) Unwrap() *raw.NSURLConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLConnection) ID() objc.ID { return x.inner.Ptr() }
-
-// URLConnectionFromID adopts an existing object pointer as a URLConnection (nil for 0).
+// URLConnectionFromID adopts an existing Objective-C object as a URLConnection
+// (nil for 0), retaining it and registering a release finalizer.
 func URLConnectionFromID(id objc.ID) *URLConnection {
 	if id == 0 {
 		return nil
 	}
-	return &URLConnection{inner: raw.NSURLConnectionFromID(id)}
-}
-
-// Returns an initialized URL connection and begins to load the data for the URL request, if specified.
-//
-// NewURLConnectionWithRequestDelegateStartImmediately creates a new [URLConnection].
-func NewURLConnectionWithRequestDelegateStartImmediately(request *raw.NSURLRequest, delegate objc.ID, startImmediately bool) *URLConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:delegate:startImmediately:"), request.Ptr(), delegate, startImmediately)
-	return &URLConnection{inner: raw.NSURLConnectionFromID(_id)}
-}
-
-// Returns an initialized URL connection and begins to load the data for the URL request.
-//
-// NewURLConnectionWithRequestDelegate creates a new [URLConnection].
-func NewURLConnectionWithRequestDelegate(request *raw.NSURLRequest, delegate objc.ID) *URLConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:delegate:"), request.Ptr(), delegate)
-	return &URLConnection{inner: raw.NSURLConnectionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLConnection) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLConnection {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Causes the connection to begin loading data, if it has not already.
-//
-// Start calls the underlying Start.
+// uRLConnectionAdopt wraps an Objective-C object that this code just created as a
+// URLConnection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLConnectionAdopt(id objc.ID) *URLConnection {
+	if id == 0 {
+		return nil
+	}
+	x := &URLConnection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLConnection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLConnection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLConnectionWithRequestDelegateStartImmediately returns an initialized URL connection and begins to load the data for the URL request, if specified.
+func NewURLConnectionWithRequestDelegateStartImmediately(request *URLRequest, delegate obj.Object, startImmediately bool) *URLConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:delegate:startImmediately:"), objref.IDOf(request), objref.IDOf(delegate), startImmediately)
+	return uRLConnectionAdopt(_id)
+}
+
+// NewURLConnectionWithRequestDelegate returns an initialized URL connection and begins to load the data for the URL request.
+func NewURLConnectionWithRequestDelegate(request *URLRequest, delegate obj.Object) *URLConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:delegate:"), objref.IDOf(request), objref.IDOf(delegate))
+	return uRLConnectionAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLConnection) WithScriptingProperties(scriptingProperties obj.Object) *URLConnection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Start causes the connection to begin loading data, if it has not already.
 func (x *URLConnection) Start() {
-	x.inner.Start()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
-// Cancels an asynchronous load of a request.
-//
-// Cancel calls the underlying Cancel.
+// Cancel cancels an asynchronous load of a request.
 func (x *URLConnection) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Determines the run loop and mode that the connection uses to call methods on its delegate.
-//
-// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
-func (x *URLConnection) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
+// ScheduleInRunLoopForMode determines the run loop and mode that the connection uses to call methods on its delegate.
+func (x *URLConnection) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// Causes the connection to stop calling delegate methods in the specified run loop and mode.
-//
-// UnscheduleFromRunLoopForMode calls the underlying UnscheduleFromRunLoopForMode.
-func (x *URLConnection) UnscheduleFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.UnscheduleFromRunLoopForMode(aRunLoop, mode)
+// UnscheduleFromRunLoopForMode causes the connection to stop calling delegate methods in the specified run loop and mode.
+func (x *URLConnection) UnscheduleFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unscheduleFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// Determines the operation queue that is used to call methods on the connection’s delegate.
-//
-// SetDelegateQueue calls the underlying SetDelegateQueue.
-func (x *URLConnection) SetDelegateQueue(queue *raw.NSOperationQueue) {
-	x.inner.SetDelegateQueue(queue)
+// SetDelegateQueue determines the operation queue that is used to call methods on the connection’s delegate.
+func (x *URLConnection) SetDelegateQueue(queue *OperationQueue) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegateQueue:"), objref.IDOf(queue))
 }
 
-// OriginalRequest calls the underlying OriginalRequest.
+// OriginalRequest wraps the corresponding Objective-C method.
 func (x *URLConnection) OriginalRequest() *URLRequest {
-	_r := x.inner.OriginalRequest()
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalRequest"))
+	return URLRequestFromID(_r)
 }
 
-// CurrentRequest calls the underlying CurrentRequest.
+// CurrentRequest wraps the corresponding Objective-C method.
 func (x *URLConnection) CurrentRequest() *URLRequest {
-	_r := x.inner.CurrentRequest()
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentRequest"))
+	return URLRequestFromID(_r)
 }
-
-func (x *URLConnection) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLConnectionable is the interface implemented by [URLConnection], for mocking and DI.
 type URLConnectionable interface {
-	Unwrap() *raw.NSURLConnection
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLConnection
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLConnection
 	Start()
 	Cancel()
-	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
-	UnscheduleFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
-	SetDelegateQueue(queue *raw.NSOperationQueue)
+	ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String)
+	UnscheduleFromRunLoopForMode(aRunLoop *RunLoop, mode *String)
+	SetDelegateQueue(queue *OperationQueue)
 	OriginalRequest() *URLRequest
 	CurrentRequest() *URLRequest
 }

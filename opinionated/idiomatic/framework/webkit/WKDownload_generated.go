@@ -5,101 +5,108 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the download of a web resource.
+// WKDownload is an idiomatic wrapper over the Objective-C class WKDownload.
 //
-// WKDownload wraps [raw.WKDownload] with a fluent Go API.
+// An object that represents the download of a web resource.
 type WKDownload struct {
-	inner *raw.WKDownload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKDownload].
-func (x *WKDownload) Unwrap() *raw.WKDownload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKDownload) ID() objc.ID { return x.inner.Ptr() }
-
-// WKDownloadFromID adopts an existing object pointer as a WKDownload (nil for 0).
+// WKDownloadFromID adopts an existing Objective-C object as a WKDownload
+// (nil for 0), retaining it and registering a release finalizer.
 func WKDownloadFromID(id objc.ID) *WKDownload {
 	if id == 0 {
 		return nil
 	}
-	return &WKDownload{inner: raw.WKDownloadFromID(id)}
-}
-
-// NewWKDownload creates a new [WKDownload].
-func NewWKDownload() *WKDownload {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKDownload")), objc.RegisterName("new"))
-	return &WKDownload{inner: raw.WKDownloadFromID(_id)}
-}
-
-// An object you use to track download progress and handle redirects, authentication challenges, and failures.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *WKDownload) WithDelegate(delegate raw.WKDownloadDelegate) *WKDownload {
-	x.inner.SetDelegate(delegate)
+	x := &WKDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Cancels the download, and optionally captures data so that you can resume the download later.
-//
-// Cancel calls the underlying Cancel.
-func (x *WKDownload) Cancel(completionHandler func(*foundation.NSData)) {
-	x.inner.Cancel(completionHandler)
+// wKDownloadAdopt wraps an Objective-C object that this code just created as a
+// WKDownload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKDownloadAdopt(id objc.ID) *WKDownload {
+	if id == 0 {
+		return nil
+	}
+	x := &WKDownload{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// OriginalRequest calls the underlying OriginalRequest.
-func (x *WKDownload) OriginalRequest() *foundation.NSURLRequest {
-	return x.inner.OriginalRequest()
+// Description returns the object's -description text.
+func (x *WKDownload) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WebView calls the underlying WebView.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKDownload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKDownload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKDownload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKDownload creates a new WKDownload.
+func NewWKDownload() *WKDownload {
+	_id := objc.Send[objc.ID](objc.ID(_class("WKDownload")), objc.RegisterName("new"))
+	return wKDownloadAdopt(_id)
+}
+
+// Cancel cancels the download, and optionally captures data so that you can resume the download later.
+func (x *WKDownload) Cancel(completionHandler func(obj.Object) int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+}
+
+// OriginalRequest wraps the corresponding Objective-C method.
+func (x *WKDownload) OriginalRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalRequest"))
+	return obj.Wrap(_r)
+}
+
+// WebView wraps the corresponding Objective-C method.
 func (x *WKDownload) WebView() *WKWebView {
-	_r := x.inner.WebView()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
+	return WKWebViewFromID(_r)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *WKDownload) Delegate() raw.WKDownloadDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *WKDownload) SetDelegate(delegate raw.WKDownloadDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IsUserInitiated calls the underlying IsUserInitiated.
+// IsUserInitiated wraps the corresponding Objective-C method.
 func (x *WKDownload) IsUserInitiated() bool {
-	return x.inner.IsUserInitiated()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInitiated"))
+	return _r
 }
 
-// OriginatingFrame calls the underlying OriginatingFrame.
+// OriginatingFrame wraps the corresponding Objective-C method.
 func (x *WKDownload) OriginatingFrame() *WKFrameInfo {
-	_r := x.inner.OriginatingFrame()
-	if _r == nil {
-		return nil
-	}
-	return &WKFrameInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originatingFrame"))
+	return WKFrameInfoFromID(_r)
 }
 
 // WKDownloadable is the interface implemented by [WKDownload], for mocking and DI.
 type WKDownloadable interface {
-	Unwrap() *raw.WKDownload
-	WithDelegate(delegate raw.WKDownloadDelegate) *WKDownload
-	Cancel(completionHandler func(*foundation.NSData))
-	OriginalRequest() *foundation.NSURLRequest
+	obj.Object
+	Cancel(completionHandler func(obj.Object) int)
+	OriginalRequest() obj.Object
 	WebView() *WKWebView
-	Delegate() raw.WKDownloadDelegate
-	SetDelegate(delegate raw.WKDownloadDelegate)
 	IsUserInitiated() bool
 	OriginatingFrame() *WKFrameInfo
 }

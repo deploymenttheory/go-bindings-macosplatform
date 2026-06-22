@@ -5,98 +5,110 @@
 package iousbhost
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// The class responsible for sending stream data for function drivers.
+// HostStream is an idiomatic wrapper over the Objective-C class IOUSBHostStream.
 //
-// HostStream wraps [raw.IOUSBHostStream] with a fluent Go API.
+// It embeds [HostIOSource], promoting that type's methods.
+//
+// The class responsible for sending stream data for function drivers.
 type HostStream struct {
-	inner *raw.IOUSBHostStream
+	HostIOSource
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostStream].
-func (x *HostStream) Unwrap() *raw.IOUSBHostStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostStream) ID() objc.ID { return x.inner.Ptr() }
-
-// HostStreamFromID adopts an existing object pointer as a HostStream (nil for 0).
+// HostStreamFromID adopts an existing Objective-C object as a HostStream
+// (nil for 0), retaining it and registering a release finalizer.
 func HostStreamFromID(id objc.ID) *HostStream {
 	if id == 0 {
 		return nil
 	}
-	return &HostStream{inner: raw.IOUSBHostStreamFromID(id)}
+	x := &HostStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHostStream creates a new [HostStream].
-func NewHostStream() *HostStream {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostStream")), objc.RegisterName("new"))
-	return &HostStream{inner: raw.IOUSBHostStreamFromID(_id)}
-}
-
-// Aborts pending input/output requests.
-//
-// AbortWithOptionError calls the underlying AbortWithOptionError.
-func (x *HostStream) AbortWithOptionError(option IOUSBHostAbortOption) (bool, error) {
-	return x.inner.AbortWithOptionError(raw.IOUSBHostAbortOption(option))
-}
-
-// Aborts pending input/output requests synchronously.
-//
-// Abort returns any validation error.
-func (x *HostStream) Abort() error {
-	_, err := x.inner.AbortWithError()
-	return err
-}
-
-// Sends an input/output request on the stream.
-//
-// SendIORequestWithDataBytesTransferredError calls the underlying SendIORequestWithDataBytesTransferredError.
-func (x *HostStream) SendIORequestWithDataBytesTransferredError(data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
-	return x.inner.SendIORequestWithDataBytesTransferredError(data, bytesTransferred)
-}
-
-// Enqueues an input/output request on the stream.
-//
-// EnqueueIORequestWithDataErrorCompletionHandler calls the underlying EnqueueIORequestWithDataErrorCompletionHandler.
-func (x *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	return x.inner.EnqueueIORequestWithDataErrorCompletionHandler(data, error_, completionHandler)
-}
-
-// @brief   Returns the IOUSBHostPipe this stream was created from @return  IOUSBHostPipe pointer
-//
-// HostPipe calls the underlying HostPipe.
-func (x *HostStream) HostPipe() *HostPipe {
-	_r := x.inner.HostPipe()
-	if _r == nil {
+// hostStreamAdopt wraps an Objective-C object that this code just created as a
+// HostStream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostStreamAdopt(id objc.ID) *HostStream {
+	if id == 0 {
 		return nil
 	}
-	return &HostPipe{inner: _r}
+	x := &HostStream{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief   Returns streamID associated with this IOUSBHostStream. @return  streamID
+// NewHostStream creates a new HostStream.
+func NewHostStream() *HostStream {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostStream")), objc.RegisterName("new"))
+	return hostStreamAdopt(_id)
+}
+
+// AbortWithOption aborts pending input/output requests.
+func (x *HostStream) AbortWithOption(option HostAbortOption) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Abort aborts pending input/output requests synchronously.
 //
-// StreamID calls the underlying StreamID.
-func (x *HostStream) StreamID() uint {
-	return x.inner.StreamID()
+// Abort returns an error if the operation did not succeed.
+func (x *HostStream) Abort() error {
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-func (x *HostStream) asHostIOSource() *raw.IOUSBHostIOSource { return &x.inner.IOUSBHostIOSource }
+// SendIORequestWithDataBytesTransferred sends an input/output request on the stream.
+func (x *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendIORequestWithData:bytesTransferred:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// HostPipe returns the IOUSBHostPipe this stream was created from
+func (x *HostStream) HostPipe() *HostPipe {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostPipe"))
+	return HostPipeFromID(_r)
+}
+
+// StreamID returns streamID associated with this IOUSBHostStream.
+func (x *HostStream) StreamID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("streamID"))
+	return _r
+}
 
 // HostStreamable is the interface implemented by [HostStream], for mocking and DI.
 type HostStreamable interface {
-	Unwrap() *raw.IOUSBHostStream
-	AbortWithOptionError(option IOUSBHostAbortOption) (bool, error)
+	obj.Object
+	AbortWithOption(option HostAbortOption) error
 	Abort() error
-	SendIORequestWithDataBytesTransferredError(data *foundation.NSMutableData, bytesTransferred *uint) (bool, error)
-	EnqueueIORequestWithDataErrorCompletionHandler(data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
+	SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error)
 	HostPipe() *HostPipe
-	StreamID() uint
+	StreamID() int
 }
 
 var _ HostStreamable = (*HostStream)(nil)
+
+var _ HostIOSourceProvider = (*HostStream)(nil)

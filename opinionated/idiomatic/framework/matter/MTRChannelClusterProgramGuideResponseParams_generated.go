@@ -5,86 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRChannelClusterProgramGuideResponseParams wraps [raw.MTRChannelClusterProgramGuideResponseParams] with a fluent Go API.
+// MTRChannelClusterProgramGuideResponseParams is an idiomatic wrapper over the Objective-C class MTRChannelClusterProgramGuideResponseParams.
 type MTRChannelClusterProgramGuideResponseParams struct {
-	inner *raw.MTRChannelClusterProgramGuideResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterProgramGuideResponseParams].
-func (x *MTRChannelClusterProgramGuideResponseParams) Unwrap() *raw.MTRChannelClusterProgramGuideResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterProgramGuideResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterProgramGuideResponseParamsFromID adopts an existing object pointer as a MTRChannelClusterProgramGuideResponseParams (nil for 0).
+// MTRChannelClusterProgramGuideResponseParamsFromID adopts an existing Objective-C object as a MTRChannelClusterProgramGuideResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterProgramGuideResponseParamsFromID(id objc.ID) *MTRChannelClusterProgramGuideResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterProgramGuideResponseParams{inner: raw.MTRChannelClusterProgramGuideResponseParamsFromID(id)}
-}
-
-// Initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError creates a new [MTRChannelClusterProgramGuideResponseParams].
-func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRChannelClusterProgramGuideResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterProgramGuideResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRChannelClusterProgramGuideResponseParams{inner: raw.MTRChannelClusterProgramGuideResponseParamsFromID(_id)}, nil
-}
-
-// WithPaging sets the paging property and returns the receiver for chaining.
-func (x *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
-	x.inner.SetPaging(paging.Unwrap())
+	x := &MTRChannelClusterProgramGuideResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Paging calls the underlying Paging.
-func (x *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
-	_r := x.inner.Paging()
-	if _r == nil {
+// mTRChannelClusterProgramGuideResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterProgramGuideResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterProgramGuideResponseParamsAdopt(id objc.ID) *MTRChannelClusterProgramGuideResponseParams {
+	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterChannelPagingStruct{inner: _r}
+	x := &MTRChannelClusterProgramGuideResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPaging calls the underlying SetPaging.
-func (x *MTRChannelClusterProgramGuideResponseParams) SetPaging(paging *raw.MTRChannelClusterChannelPagingStruct) {
-	x.inner.SetPaging(paging)
+// Description returns the object's -description text.
+func (x *MTRChannelClusterProgramGuideResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ProgramList calls the underlying ProgramList.
-func (x *MTRChannelClusterProgramGuideResponseParams) ProgramList() *foundation.NSArray[objc.ID] {
-	return x.inner.ProgramList()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterProgramGuideResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetProgramList calls the underlying SetProgramList.
-func (x *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList *foundation.NSArray[objc.ID]) {
-	x.inner.SetProgramList(programList)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterProgramGuideResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterProgramGuideResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterProgramGuideResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRChannelClusterProgramGuideResponseParamsAdopt(_id), nil
+}
+
+// WithPaging sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaging:"), objref.IDOf(paging))
+	return x
+}
+
+// Paging wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paging"))
+	return MTRChannelClusterChannelPagingStructFromID(_r)
+}
+
+// SetPaging wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramGuideResponseParams) SetPaging(paging *MTRChannelClusterChannelPagingStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaging:"), objref.IDOf(paging))
+}
+
+// ProgramList wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramGuideResponseParams) ProgramList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("programList"))
+	return obj.Wrap(_r)
+}
+
+// SetProgramList wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramList:"), objref.IDOf(programList))
 }
 
 // MTRChannelClusterProgramGuideResponseParamsable is the interface implemented by [MTRChannelClusterProgramGuideResponseParams], for mocking and DI.
 type MTRChannelClusterProgramGuideResponseParamsable interface {
-	Unwrap() *raw.MTRChannelClusterProgramGuideResponseParams
+	obj.Object
 	WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams
 	Paging() *MTRChannelClusterChannelPagingStruct
-	SetPaging(paging *raw.MTRChannelClusterChannelPagingStruct)
-	ProgramList() *foundation.NSArray[objc.ID]
-	SetProgramList(programList *foundation.NSArray[objc.ID])
+	SetPaging(paging *MTRChannelClusterChannelPagingStruct)
+	ProgramList() obj.Object
+	SetProgramList(programList obj.Object)
 }
 
 var _ MTRChannelClusterProgramGuideResponseParamsable = (*MTRChannelClusterProgramGuideResponseParams)(nil)

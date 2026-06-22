@@ -5,156 +5,227 @@
 package latentsemanticmapping
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/latentsemanticmapping"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// LSMMapAddCategory calls [raw.LSMMapAddCategory] (C function LSMMapAddCategory).
-func LSMMapAddCategory(mapref unsafe.Pointer) uint32 {
-	return raw.LSMMapAddCategory(mapref)
+var _fnLSMMapAddCategory func(objc.ID) uint32
+
+// LSMMapAddCategory calls the LatentSemanticMapping framework function LSMMapAddCategory.
+func LSMMapAddCategory(mapref obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapAddCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapAddCategory, _lib, "LSMMapAddCategory")
+	}
+	return _fnLSMMapAddCategory(objref.IDOf(mapref))
 }
 
-// LSMMapAddText calls [raw.LSMMapAddText] (C function LSMMapAddText).
-func LSMMapAddText(mapref unsafe.Pointer, textref unsafe.Pointer, category uint32) int {
-	return raw.LSMMapAddText(mapref, textref, category)
+var _fnLSMMapCreate func(objc.ID, int) objc.ID
+
+// LSMMapCreate calls the LatentSemanticMapping framework function LSMMapCreate.
+func LSMMapCreate(alloc obj.Object, flags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapCreate, _lib, "LSMMapCreate")
+	}
+	_ret := _fnLSMMapCreate(objref.IDOf(alloc), flags)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapAddTextWithWeight calls [raw.LSMMapAddTextWithWeight] (C function LSMMapAddTextWithWeight).
-func LSMMapAddTextWithWeight(mapref unsafe.Pointer, textref unsafe.Pointer, category uint32, weight float32) int {
-	return raw.LSMMapAddTextWithWeight(mapref, textref, category, weight)
+var _fnLSMMapCreateClusters func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
+
+// LSMMapCreateClusters calls the LatentSemanticMapping framework function LSMMapCreateClusters.
+func LSMMapCreateClusters(alloc obj.Object, mapref obj.Object, subset obj.Object, numClusters int, flags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapCreateClusters == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapCreateClusters, _lib, "LSMMapCreateClusters")
+	}
+	_ret := _fnLSMMapCreateClusters(objref.IDOf(alloc), objref.IDOf(mapref), objref.IDOf(subset), numClusters, flags)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapApplyClusters calls [raw.LSMMapApplyClusters] (C function LSMMapApplyClusters).
-func LSMMapApplyClusters(mapref unsafe.Pointer, clusters unsafe.Pointer) int {
-	return raw.LSMMapApplyClusters(mapref, clusters)
+var _fnLSMMapCreateFromURL func(objc.ID, objc.ID, int) objc.ID
+
+// LSMMapCreateFromURL calls the LatentSemanticMapping framework function LSMMapCreateFromURL.
+func LSMMapCreateFromURL(alloc obj.Object, file obj.Object, flags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapCreateFromURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapCreateFromURL, _lib, "LSMMapCreateFromURL")
+	}
+	_ret := _fnLSMMapCreateFromURL(objref.IDOf(alloc), objref.IDOf(file), flags)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapCompile calls [raw.LSMMapCompile] (C function LSMMapCompile).
-func LSMMapCompile(mapref unsafe.Pointer) int {
-	return raw.LSMMapCompile(mapref)
+var _fnLSMMapGetCategoryCount func(objc.ID) int
+
+// LSMMapGetCategoryCount calls the LatentSemanticMapping framework function LSMMapGetCategoryCount.
+func LSMMapGetCategoryCount(mapref obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapGetCategoryCount == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapGetCategoryCount, _lib, "LSMMapGetCategoryCount")
+	}
+	return _fnLSMMapGetCategoryCount(objref.IDOf(mapref))
 }
 
-// LSMMapCreate calls [raw.LSMMapCreate] (C function LSMMapCreate).
-func LSMMapCreate(alloc unsafe.Pointer, flags uint) unsafe.Pointer {
-	return raw.LSMMapCreate(alloc, flags)
+var _fnLSMMapGetProperties func(objc.ID) objc.ID
+
+// LSMMapGetProperties calls the LatentSemanticMapping framework function LSMMapGetProperties.
+func LSMMapGetProperties(mapref obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapGetProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapGetProperties, _lib, "LSMMapGetProperties")
+	}
+	_ret := _fnLSMMapGetProperties(objref.IDOf(mapref))
+	return obj.Wrap(_ret)
 }
 
-// LSMMapCreateClusters calls [raw.LSMMapCreateClusters] (C function LSMMapCreateClusters).
-func LSMMapCreateClusters(alloc unsafe.Pointer, mapref unsafe.Pointer, subset unsafe.Pointer, numClusters int, flags uint) unsafe.Pointer {
-	return raw.LSMMapCreateClusters(alloc, mapref, subset, numClusters, flags)
+var _fnLSMMapGetTypeID func() int
+
+// LSMMapGetTypeID calls the LatentSemanticMapping framework function LSMMapGetTypeID.
+func LSMMapGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapGetTypeID, _lib, "LSMMapGetTypeID")
+	}
+	return _fnLSMMapGetTypeID()
 }
 
-// LSMMapCreateFromURL calls [raw.LSMMapCreateFromURL] (C function LSMMapCreateFromURL).
-func LSMMapCreateFromURL(alloc unsafe.Pointer, file unsafe.Pointer, flags uint) unsafe.Pointer {
-	return raw.LSMMapCreateFromURL(alloc, file, flags)
+var _fnLSMMapSetProperties func(objc.ID, objc.ID)
+
+// LSMMapSetProperties calls the LatentSemanticMapping framework function LSMMapSetProperties.
+func LSMMapSetProperties(mapref obj.Object, properties obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMMapSetProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMMapSetProperties, _lib, "LSMMapSetProperties")
+	}
+	_fnLSMMapSetProperties(objref.IDOf(mapref), objref.IDOf(properties))
 }
 
-// LSMMapGetCategoryCount calls [raw.LSMMapGetCategoryCount] (C function LSMMapGetCategoryCount).
-func LSMMapGetCategoryCount(mapref unsafe.Pointer) int {
-	return raw.LSMMapGetCategoryCount(mapref)
+var _fnLSMResultCopyToken func(objc.ID, int) objc.ID
+
+// LSMResultCopyToken calls the LatentSemanticMapping framework function LSMResultCopyToken.
+func LSMResultCopyToken(result obj.Object, n int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultCopyToken == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultCopyToken, _lib, "LSMResultCopyToken")
+	}
+	_ret := _fnLSMResultCopyToken(objref.IDOf(result), n)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapGetProperties calls [raw.LSMMapGetProperties] (C function LSMMapGetProperties).
-func LSMMapGetProperties(mapref unsafe.Pointer) unsafe.Pointer {
-	return raw.LSMMapGetProperties(mapref)
+var _fnLSMResultCopyTokenCluster func(objc.ID, int) objc.ID
+
+// LSMResultCopyTokenCluster calls the LatentSemanticMapping framework function LSMResultCopyTokenCluster.
+func LSMResultCopyTokenCluster(result obj.Object, n int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultCopyTokenCluster == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultCopyTokenCluster, _lib, "LSMResultCopyTokenCluster")
+	}
+	_ret := _fnLSMResultCopyTokenCluster(objref.IDOf(result), n)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapGetTypeID calls [raw.LSMMapGetTypeID] (C function LSMMapGetTypeID).
-func LSMMapGetTypeID() uint {
-	return raw.LSMMapGetTypeID()
+var _fnLSMResultCopyWord func(objc.ID, int) objc.ID
+
+// LSMResultCopyWord calls the LatentSemanticMapping framework function LSMResultCopyWord.
+func LSMResultCopyWord(result obj.Object, n int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultCopyWord == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultCopyWord, _lib, "LSMResultCopyWord")
+	}
+	_ret := _fnLSMResultCopyWord(objref.IDOf(result), n)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapSetProperties calls [raw.LSMMapSetProperties] (C function LSMMapSetProperties).
-func LSMMapSetProperties(mapref unsafe.Pointer, properties unsafe.Pointer) {
-	raw.LSMMapSetProperties(mapref, properties)
+var _fnLSMResultCopyWordCluster func(objc.ID, int) objc.ID
+
+// LSMResultCopyWordCluster calls the LatentSemanticMapping framework function LSMResultCopyWordCluster.
+func LSMResultCopyWordCluster(result obj.Object, n int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultCopyWordCluster == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultCopyWordCluster, _lib, "LSMResultCopyWordCluster")
+	}
+	_ret := _fnLSMResultCopyWordCluster(objref.IDOf(result), n)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapSetStopWords calls [raw.LSMMapSetStopWords] (C function LSMMapSetStopWords).
-func LSMMapSetStopWords(mapref unsafe.Pointer, textref unsafe.Pointer) int {
-	return raw.LSMMapSetStopWords(mapref, textref)
+var _fnLSMResultCreate func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
+
+// LSMResultCreate calls the LatentSemanticMapping framework function LSMResultCreate.
+func LSMResultCreate(alloc obj.Object, mapref obj.Object, textref obj.Object, numResults int, flags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultCreate, _lib, "LSMResultCreate")
+	}
+	_ret := _fnLSMResultCreate(objref.IDOf(alloc), objref.IDOf(mapref), objref.IDOf(textref), numResults, flags)
+	return obj.Wrap(_ret)
 }
 
-// LSMMapStartTraining calls [raw.LSMMapStartTraining] (C function LSMMapStartTraining).
-func LSMMapStartTraining(mapref unsafe.Pointer) int {
-	return raw.LSMMapStartTraining(mapref)
+var _fnLSMResultGetCategory func(objc.ID, int) uint32
+
+// LSMResultGetCategory calls the LatentSemanticMapping framework function LSMResultGetCategory.
+func LSMResultGetCategory(result obj.Object, n int) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultGetCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultGetCategory, _lib, "LSMResultGetCategory")
+	}
+	return _fnLSMResultGetCategory(objref.IDOf(result), n)
 }
 
-// LSMMapWriteToStream calls [raw.LSMMapWriteToStream] (C function LSMMapWriteToStream).
-func LSMMapWriteToStream(mapref unsafe.Pointer, textref unsafe.Pointer, stream unsafe.Pointer, options uint) int {
-	return raw.LSMMapWriteToStream(mapref, textref, stream, options)
+var _fnLSMResultGetCount func(objc.ID) int
+
+// LSMResultGetCount calls the LatentSemanticMapping framework function LSMResultGetCount.
+func LSMResultGetCount(result obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultGetCount, _lib, "LSMResultGetCount")
+	}
+	return _fnLSMResultGetCount(objref.IDOf(result))
 }
 
-// LSMMapWriteToURL calls [raw.LSMMapWriteToURL] (C function LSMMapWriteToURL).
-func LSMMapWriteToURL(mapref unsafe.Pointer, file unsafe.Pointer, flags uint) int {
-	return raw.LSMMapWriteToURL(mapref, file, flags)
+var _fnLSMResultGetScore func(objc.ID, int) float32
+
+// LSMResultGetScore calls the LatentSemanticMapping framework function LSMResultGetScore.
+func LSMResultGetScore(result obj.Object, n int) float32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultGetScore == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultGetScore, _lib, "LSMResultGetScore")
+	}
+	return _fnLSMResultGetScore(objref.IDOf(result), n)
 }
 
-// LSMResultCopyToken calls [raw.LSMResultCopyToken] (C function LSMResultCopyToken).
-func LSMResultCopyToken(result unsafe.Pointer, n int) unsafe.Pointer {
-	return raw.LSMResultCopyToken(result, n)
+var _fnLSMResultGetTypeID func() int
+
+// LSMResultGetTypeID calls the LatentSemanticMapping framework function LSMResultGetTypeID.
+func LSMResultGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMResultGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMResultGetTypeID, _lib, "LSMResultGetTypeID")
+	}
+	return _fnLSMResultGetTypeID()
 }
 
-// LSMResultCopyTokenCluster calls [raw.LSMResultCopyTokenCluster] (C function LSMResultCopyTokenCluster).
-func LSMResultCopyTokenCluster(result unsafe.Pointer, n int) unsafe.Pointer {
-	return raw.LSMResultCopyTokenCluster(result, n)
+var _fnLSMTextCreate func(objc.ID, objc.ID) objc.ID
+
+// LSMTextCreate calls the LatentSemanticMapping framework function LSMTextCreate.
+func LSMTextCreate(alloc obj.Object, mapref obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMTextCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMTextCreate, _lib, "LSMTextCreate")
+	}
+	_ret := _fnLSMTextCreate(objref.IDOf(alloc), objref.IDOf(mapref))
+	return obj.Wrap(_ret)
 }
 
-// LSMResultCopyWord calls [raw.LSMResultCopyWord] (C function LSMResultCopyWord).
-func LSMResultCopyWord(result unsafe.Pointer, n int) unsafe.Pointer {
-	return raw.LSMResultCopyWord(result, n)
-}
+var _fnLSMTextGetTypeID func() int
 
-// LSMResultCopyWordCluster calls [raw.LSMResultCopyWordCluster] (C function LSMResultCopyWordCluster).
-func LSMResultCopyWordCluster(result unsafe.Pointer, n int) unsafe.Pointer {
-	return raw.LSMResultCopyWordCluster(result, n)
-}
-
-// LSMResultCreate calls [raw.LSMResultCreate] (C function LSMResultCreate).
-func LSMResultCreate(alloc unsafe.Pointer, mapref unsafe.Pointer, textref unsafe.Pointer, numResults int, flags uint) unsafe.Pointer {
-	return raw.LSMResultCreate(alloc, mapref, textref, numResults, flags)
-}
-
-// LSMResultGetCategory calls [raw.LSMResultGetCategory] (C function LSMResultGetCategory).
-func LSMResultGetCategory(result unsafe.Pointer, n int) uint32 {
-	return raw.LSMResultGetCategory(result, n)
-}
-
-// LSMResultGetCount calls [raw.LSMResultGetCount] (C function LSMResultGetCount).
-func LSMResultGetCount(result unsafe.Pointer) int {
-	return raw.LSMResultGetCount(result)
-}
-
-// LSMResultGetScore calls [raw.LSMResultGetScore] (C function LSMResultGetScore).
-func LSMResultGetScore(result unsafe.Pointer, n int) float32 {
-	return raw.LSMResultGetScore(result, n)
-}
-
-// LSMResultGetTypeID calls [raw.LSMResultGetTypeID] (C function LSMResultGetTypeID).
-func LSMResultGetTypeID() uint {
-	return raw.LSMResultGetTypeID()
-}
-
-// LSMTextAddToken calls [raw.LSMTextAddToken] (C function LSMTextAddToken).
-func LSMTextAddToken(textref unsafe.Pointer, token unsafe.Pointer) int {
-	return raw.LSMTextAddToken(textref, token)
-}
-
-// LSMTextAddWord calls [raw.LSMTextAddWord] (C function LSMTextAddWord).
-func LSMTextAddWord(textref unsafe.Pointer, word unsafe.Pointer) int {
-	return raw.LSMTextAddWord(textref, word)
-}
-
-// LSMTextAddWords calls [raw.LSMTextAddWords] (C function LSMTextAddWords).
-func LSMTextAddWords(textref unsafe.Pointer, words unsafe.Pointer, locale unsafe.Pointer, flags uint) int {
-	return raw.LSMTextAddWords(textref, words, locale, flags)
-}
-
-// LSMTextCreate calls [raw.LSMTextCreate] (C function LSMTextCreate).
-func LSMTextCreate(alloc unsafe.Pointer, mapref unsafe.Pointer) unsafe.Pointer {
-	return raw.LSMTextCreate(alloc, mapref)
-}
-
-// LSMTextGetTypeID calls [raw.LSMTextGetTypeID] (C function LSMTextGetTypeID).
-func LSMTextGetTypeID() uint {
-	return raw.LSMTextGetTypeID()
+// LSMTextGetTypeID calls the LatentSemanticMapping framework function LSMTextGetTypeID.
+func LSMTextGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSMTextGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnLSMTextGetTypeID, _lib, "LSMTextGetTypeID")
+	}
+	return _fnLSMTextGetTypeID()
 }

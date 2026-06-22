@@ -5,70 +5,98 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.
+// PointOfInterestFilter is an idiomatic wrapper over the Objective-C class MKPointOfInterestFilter.
 //
-// PointOfInterestFilter wraps [raw.MKPointOfInterestFilter] with a fluent Go API.
+// A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.
 type PointOfInterestFilter struct {
-	inner *raw.MKPointOfInterestFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKPointOfInterestFilter].
-func (x *PointOfInterestFilter) Unwrap() *raw.MKPointOfInterestFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PointOfInterestFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// PointOfInterestFilterFromID adopts an existing object pointer as a PointOfInterestFilter (nil for 0).
+// PointOfInterestFilterFromID adopts an existing Objective-C object as a PointOfInterestFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func PointOfInterestFilterFromID(id objc.ID) *PointOfInterestFilter {
 	if id == 0 {
 		return nil
 	}
-	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(id)}
+	x := &PointOfInterestFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize the point of interest filter with a list of categories to include.
-//
-// NewPointOfInterestFilterIncludingCategories creates a new [PointOfInterestFilter].
-func NewPointOfInterestFilterIncludingCategories(categories *foundation.NSArray[*foundation.NSString]) *PointOfInterestFilter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingCategories:"), categories.Ptr())
-	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(_id)}
+// pointOfInterestFilterAdopt wraps an Objective-C object that this code just created as a
+// PointOfInterestFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointOfInterestFilterAdopt(id objc.ID) *PointOfInterestFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &PointOfInterestFilter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initialize the point of interest filter with a list of categories to exclude.
-//
-// NewPointOfInterestFilterExcludingCategories creates a new [PointOfInterestFilter].
-func NewPointOfInterestFilterExcludingCategories(categories *foundation.NSArray[*foundation.NSString]) *PointOfInterestFilter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingCategories:"), categories.Ptr())
-	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(_id)}
+// Description returns the object's -description text.
+func (x *PointOfInterestFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a Boolean value indicating whether the filter includes the point of interest category.
-//
-// IncludesCategory calls the underlying IncludesCategory.
-func (x *PointOfInterestFilter) IncludesCategory(category *foundation.NSString) bool {
-	return x.inner.IncludesCategory(category)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PointOfInterestFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns a Boolean value indicating whether the filter excludes the point of interest category.
-//
-// ExcludesCategory calls the underlying ExcludesCategory.
-func (x *PointOfInterestFilter) ExcludesCategory(category *foundation.NSString) bool {
-	return x.inner.ExcludesCategory(category)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PointOfInterestFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PointOfInterestFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPointOfInterestFilterIncludingCategories initialize the point of interest filter with a list of categories to include.
+func NewPointOfInterestFilterIncludingCategories(categories []obj.Object) *PointOfInterestFilter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingCategories:"), purego.SliceToNSArray(categories, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return pointOfInterestFilterAdopt(_id)
+}
+
+// NewPointOfInterestFilterExcludingCategories initialize the point of interest filter with a list of categories to exclude.
+func NewPointOfInterestFilterExcludingCategories(categories []obj.Object) *PointOfInterestFilter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingCategories:"), purego.SliceToNSArray(categories, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return pointOfInterestFilterAdopt(_id)
+}
+
+// IncludesCategory returns a Boolean value indicating whether the filter includes the point of interest category.
+func (x *PointOfInterestFilter) IncludesCategory(category obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesCategory:"), objref.IDOf(category))
+	return _r
+}
+
+// ExcludesCategory returns a Boolean value indicating whether the filter excludes the point of interest category.
+func (x *PointOfInterestFilter) ExcludesCategory(category obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesCategory:"), objref.IDOf(category))
+	return _r
 }
 
 // PointOfInterestFilterable is the interface implemented by [PointOfInterestFilter], for mocking and DI.
 type PointOfInterestFilterable interface {
-	Unwrap() *raw.MKPointOfInterestFilter
-	IncludesCategory(category *foundation.NSString) bool
-	ExcludesCategory(category *foundation.NSString) bool
+	obj.Object
+	IncludesCategory(category obj.Object) bool
+	ExcludesCategory(category obj.Object) bool
 }
 
 var _ PointOfInterestFilterable = (*PointOfInterestFilter)(nil)

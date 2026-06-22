@@ -5,50 +5,83 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents reflection information for a machine learning pipeline state.
+// MTL4MachineLearningPipelineReflection is an idiomatic wrapper over the Objective-C class MTL4MachineLearningPipelineReflection.
 //
-// MTL4MachineLearningPipelineReflection wraps [raw.MTL4MachineLearningPipelineReflection] with a fluent Go API.
+// Represents reflection information for a machine learning pipeline state.
 type MTL4MachineLearningPipelineReflection struct {
-	inner *raw.MTL4MachineLearningPipelineReflection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4MachineLearningPipelineReflection].
-func (x *MTL4MachineLearningPipelineReflection) Unwrap() *raw.MTL4MachineLearningPipelineReflection {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4MachineLearningPipelineReflection) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4MachineLearningPipelineReflectionFromID adopts an existing object pointer as a MTL4MachineLearningPipelineReflection (nil for 0).
+// MTL4MachineLearningPipelineReflectionFromID adopts an existing Objective-C object as a MTL4MachineLearningPipelineReflection
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4MachineLearningPipelineReflectionFromID(id objc.ID) *MTL4MachineLearningPipelineReflection {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4MachineLearningPipelineReflection{inner: raw.MTL4MachineLearningPipelineReflectionFromID(id)}
+	x := &MTL4MachineLearningPipelineReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4MachineLearningPipelineReflection creates a new [MTL4MachineLearningPipelineReflection].
+// mTL4MachineLearningPipelineReflectionAdopt wraps an Objective-C object that this code just created as a
+// MTL4MachineLearningPipelineReflection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4MachineLearningPipelineReflectionAdopt(id objc.ID) *MTL4MachineLearningPipelineReflection {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4MachineLearningPipelineReflection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4MachineLearningPipelineReflection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4MachineLearningPipelineReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4MachineLearningPipelineReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4MachineLearningPipelineReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTL4MachineLearningPipelineReflection creates a new MTL4MachineLearningPipelineReflection.
 func NewMTL4MachineLearningPipelineReflection() *MTL4MachineLearningPipelineReflection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4MachineLearningPipelineReflection")), objc.RegisterName("new"))
-	return &MTL4MachineLearningPipelineReflection{inner: raw.MTL4MachineLearningPipelineReflectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4MachineLearningPipelineReflection")), objc.RegisterName("new"))
+	return mTL4MachineLearningPipelineReflectionAdopt(_id)
 }
 
-// Bindings calls the underlying Bindings.
-func (x *MTL4MachineLearningPipelineReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.Bindings()
+// Bindings wraps the corresponding Objective-C method.
+func (x *MTL4MachineLearningPipelineReflection) Bindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MTL4MachineLearningPipelineReflectionable is the interface implemented by [MTL4MachineLearningPipelineReflection], for mocking and DI.
 type MTL4MachineLearningPipelineReflectionable interface {
-	Unwrap() *raw.MTL4MachineLearningPipelineReflection
-	Bindings() *foundation.NSArray[raw.MTLBinding]
+	obj.Object
+	Bindings() []obj.Object
 }
 
 var _ MTL4MachineLearningPipelineReflectionable = (*MTL4MachineLearningPipelineReflection)(nil)

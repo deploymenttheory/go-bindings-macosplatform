@@ -5,43 +5,79 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for contact fetch requests.
+// FetchRequest is an idiomatic wrapper over the Objective-C class CNFetchRequest.
 //
-// FetchRequest wraps [raw.CNFetchRequest] with a fluent Go API.
+// FetchRequest is an abstract base — you do not construct it directly. Construct one of [ChangeHistoryFetchRequest], [ContactFetchRequest] and pass it where a FetchRequest is accepted.
+//
+// The base class for contact fetch requests.
 type FetchRequest struct {
-	inner *raw.CNFetchRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNFetchRequest].
-func (x *FetchRequest) Unwrap() *raw.CNFetchRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchRequestFromID adopts an existing object pointer as a FetchRequest (nil for 0).
+// FetchRequestFromID adopts an existing Objective-C object as a FetchRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchRequestFromID(id objc.ID) *FetchRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FetchRequest{inner: raw.CNFetchRequestFromID(id)}
+	x := &FetchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFetchRequest creates a new [FetchRequest].
-func NewFetchRequest() *FetchRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFetchRequest")), objc.RegisterName("new"))
-	return &FetchRequest{inner: raw.CNFetchRequestFromID(_id)}
+// fetchRequestAdopt wraps an Objective-C object that this code just created as a
+// FetchRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchRequestAdopt(id objc.ID) *FetchRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *FetchRequest) asFetchRequest() *raw.CNFetchRequest { return x.inner }
+// Description returns the object's -description text.
+func (x *FetchRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
 type FetchRequestable interface {
-	Unwrap() *raw.CNFetchRequest
+	obj.Object
 }
 
 var _ FetchRequestable = (*FetchRequest)(nil)
+
+// isFetchRequest marks FetchRequest — and, by embedding promotion, its
+// subclasses — as a member of the FetchRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FetchRequest) isFetchRequest() {}
+
+var _ FetchRequestProvider = (*FetchRequest)(nil)

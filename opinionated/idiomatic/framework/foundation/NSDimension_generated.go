@@ -5,66 +5,80 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class representing a dimensional unit of measure.
+// Dimension is an idiomatic wrapper over the Objective-C class NSDimension.
 //
-// Dimension wraps [raw.NSDimension] with a fluent Go API.
+// Dimension is an abstract base — you do not construct it directly. Construct one of [UnitAcceleration], [UnitAngle], [UnitArea], [UnitConcentrationMass], [UnitDispersion], [UnitDuration], [UnitElectricCharge], [UnitElectricCurrent], [UnitElectricPotentialDifference], [UnitElectricResistance], [UnitEnergy], [UnitFrequency], [UnitFuelEfficiency], [UnitIlluminance], [UnitInformationStorage], [UnitLength], [UnitMass], [UnitPower], [UnitPressure], [UnitSpeed], [UnitTemperature], [UnitVolume] and pass it where a Dimension is accepted.
+//
+// An abstract class representing a dimensional unit of measure.
 type Dimension struct {
-	inner *raw.NSDimension
+	Unit
 }
 
-// Unwrap returns the underlying [raw.NSDimension].
-func (x *Dimension) Unwrap() *raw.NSDimension { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Dimension) ID() objc.ID { return x.inner.Ptr() }
-
-// DimensionFromID adopts an existing object pointer as a Dimension (nil for 0).
+// DimensionFromID adopts an existing Objective-C object as a Dimension
+// (nil for 0), retaining it and registering a release finalizer.
 func DimensionFromID(id objc.ID) *Dimension {
 	if id == 0 {
 		return nil
 	}
-	return &Dimension{inner: raw.NSDimensionFromID(id)}
-}
-
-// NewDimensionWithSymbolConverter creates a new [Dimension].
-func NewDimensionWithSymbolConverter(symbol string, converter *raw.NSUnitConverter) *Dimension {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDimension")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSymbol:converter:"), foundation.NSStringStringWithUTF8String(symbol).Ptr(), converter.Ptr())
-	return &Dimension{inner: raw.NSDimensionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Dimension) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Dimension {
-	x.inner.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Dimension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Converter calls the underlying Converter.
-func (x *Dimension) Converter() *UnitConverter {
-	_r := x.inner.Converter()
-	if _r == nil {
+// dimensionAdopt wraps an Objective-C object that this code just created as a
+// Dimension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dimensionAdopt(id objc.ID) *Dimension {
+	if id == 0 {
 		return nil
 	}
-	return &UnitConverter{inner: _r}
+	x := &Dimension{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *Dimension) asDimension() *raw.NSDimension { return x.inner }
+// NewDimensionWithSymbolConverter creates a new Dimension.
+func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *Dimension {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSymbol:converter:"), purego.NSString(symbol), objref.IDOf(converter))
+	return dimensionAdopt(_id)
+}
 
-func (x *Dimension) asUnit() *raw.NSUnit { return &x.inner.NSUnit }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Dimension) WithScriptingProperties(scriptingProperties obj.Object) *Dimension {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
-func (x *Dimension) asObject() *raw.NSObject { return &x.inner.NSUnit.NSObject }
+// Converter wraps the corresponding Objective-C method.
+func (x *Dimension) Converter() *UnitConverter {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("converter"))
+	return UnitConverterFromID(_r)
+}
 
 // Dimensionable is the interface implemented by [Dimension], for mocking and DI.
 type Dimensionable interface {
-	Unwrap() *raw.NSDimension
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Dimension
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Dimension
 	Converter() *UnitConverter
 }
 
 var _ Dimensionable = (*Dimension)(nil)
+
+// isDimension marks Dimension — and, by embedding promotion, its
+// subclasses — as a member of the Dimension hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Dimension) isDimension() {}
+
+var _ DimensionProvider = (*Dimension)(nil)
+
+var _ UnitProvider = (*Dimension)(nil)

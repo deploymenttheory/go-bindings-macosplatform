@@ -6,75 +6,95 @@ package passkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that presents a sheet that prompts the user to authorize a payment request.
+// PaymentAuthorizationController is an idiomatic wrapper over the Objective-C class PKPaymentAuthorizationController.
 //
-// PaymentAuthorizationController wraps [raw.PKPaymentAuthorizationController] with a fluent Go API.
+// An object that presents a sheet that prompts the user to authorize a payment request.
 type PaymentAuthorizationController struct {
-	inner *raw.PKPaymentAuthorizationController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentAuthorizationController].
-func (x *PaymentAuthorizationController) Unwrap() *raw.PKPaymentAuthorizationController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentAuthorizationController) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentAuthorizationControllerFromID adopts an existing object pointer as a PaymentAuthorizationController (nil for 0).
+// PaymentAuthorizationControllerFromID adopts an existing Objective-C object as a PaymentAuthorizationController
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentAuthorizationControllerFromID(id objc.ID) *PaymentAuthorizationController {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentAuthorizationController{inner: raw.PKPaymentAuthorizationControllerFromID(id)}
-}
-
-// Initializes and returns a payment authorization controller.
-//
-// NewPaymentAuthorizationControllerWithPaymentRequest creates a new [PaymentAuthorizationController].
-func NewPaymentAuthorizationControllerWithPaymentRequest(request *raw.PKPaymentRequest) *PaymentAuthorizationController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), request.Ptr())
-	return &PaymentAuthorizationController{inner: raw.PKPaymentAuthorizationControllerFromID(_id)}
-}
-
-// Creates a new payment authorization controller with the disbursement request you provide.
-//
-// NewPaymentAuthorizationControllerWithDisbursementRequest creates a new [PaymentAuthorizationController].
-func NewPaymentAuthorizationControllerWithDisbursementRequest(request *raw.PKDisbursementRequest) *PaymentAuthorizationController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), request.Ptr())
-	return &PaymentAuthorizationController{inner: raw.PKPaymentAuthorizationControllerFromID(_id)}
-}
-
-// The controller’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PaymentAuthorizationController) WithDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate) *PaymentAuthorizationController {
-	x.inner.SetDelegate(delegate)
+	x := &PaymentAuthorizationController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Presents the payment sheet modally over your app.
-//
-// PresentWithCompletion calls the underlying PresentWithCompletion.
-func (x *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
-	x.inner.PresentWithCompletion(completion)
+// paymentAuthorizationControllerAdopt wraps an Objective-C object that this code just created as a
+// PaymentAuthorizationController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentAuthorizationControllerAdopt(id objc.ID) *PaymentAuthorizationController {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentAuthorizationController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Dismisses the payment sheet.
+// Description returns the object's -description text.
+func (x *PaymentAuthorizationController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentAuthorizationController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentAuthorizationController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentAuthorizationController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentAuthorizationControllerWithPaymentRequest initializes and returns a payment authorization controller.
+func NewPaymentAuthorizationControllerWithPaymentRequest(request *PaymentRequest) *PaymentAuthorizationController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), objref.IDOf(request))
+	return paymentAuthorizationControllerAdopt(_id)
+}
+
+// NewPaymentAuthorizationControllerWithDisbursementRequest creates a new payment authorization controller with the disbursement request you provide.
+func NewPaymentAuthorizationControllerWithDisbursementRequest(request *DisbursementRequest) *PaymentAuthorizationController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))
+	return paymentAuthorizationControllerAdopt(_id)
+}
+
+// PresentWithCompletion presents the payment sheet modally over your app.
+func (x *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+}
+
+// DismissWithCompletion dismisses the payment sheet.
 //
 // DismissWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.DismissWithCompletion(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -83,24 +103,11 @@ func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Conte
 	}
 }
 
-// Delegate calls the underlying Delegate.
-func (x *PaymentAuthorizationController) Delegate() raw.PKPaymentAuthorizationControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *PaymentAuthorizationController) SetDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
 // PaymentAuthorizationControllerable is the interface implemented by [PaymentAuthorizationController], for mocking and DI.
 type PaymentAuthorizationControllerable interface {
-	Unwrap() *raw.PKPaymentAuthorizationController
-	WithDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate) *PaymentAuthorizationController
+	obj.Object
 	PresentWithCompletion(completion func(bool))
 	DismissWithCompletion(ctx context.Context) error
-	Delegate() raw.PKPaymentAuthorizationControllerDelegate
-	SetDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate)
 }
 
 var _ PaymentAuthorizationControllerable = (*PaymentAuthorizationController)(nil)

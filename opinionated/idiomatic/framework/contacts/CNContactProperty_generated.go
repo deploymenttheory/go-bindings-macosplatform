@@ -5,94 +5,118 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a property of a contact.
+// ContactProperty is an idiomatic wrapper over the Objective-C class CNContactProperty.
 //
-// ContactProperty wraps [raw.CNContactProperty] with a fluent Go API.
+// An object that represents a property of a contact.
 type ContactProperty struct {
-	inner *raw.CNContactProperty
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactProperty].
-func (x *ContactProperty) Unwrap() *raw.CNContactProperty { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactProperty) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactPropertyFromID adopts an existing object pointer as a ContactProperty (nil for 0).
+// ContactPropertyFromID adopts an existing Objective-C object as a ContactProperty
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactPropertyFromID(id objc.ID) *ContactProperty {
 	if id == 0 {
 		return nil
 	}
-	return &ContactProperty{inner: raw.CNContactPropertyFromID(id)}
+	x := &ContactProperty{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContactProperty creates a new [ContactProperty].
-func NewContactProperty() *ContactProperty {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactProperty")), objc.RegisterName("new"))
-	return &ContactProperty{inner: raw.CNContactPropertyFromID(_id)}
-}
-
-// Contact calls the underlying Contact.
-func (x *ContactProperty) Contact() *Contact {
-	_r := x.inner.Contact()
-	if _r == nil {
+// contactPropertyAdopt wraps an Objective-C object that this code just created as a
+// ContactProperty (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactPropertyAdopt(id objc.ID) *ContactProperty {
+	if id == 0 {
 		return nil
 	}
-	return &Contact{inner: _r}
+	x := &ContactProperty{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract The key of the contact property, as defined in CNContact.h.
-//
-// Key calls the underlying Key.
+// Description returns the object's -description text.
+func (x *ContactProperty) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactProperty) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactProperty) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactProperty) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContactProperty creates a new ContactProperty.
+func NewContactProperty() *ContactProperty {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactProperty")), objc.RegisterName("new"))
+	return contactPropertyAdopt(_id)
+}
+
+// Contact wraps the corresponding Objective-C method.
+func (x *ContactProperty) Contact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+	return ContactFromID(_r)
+}
+
+// Key the key of the contact property, as defined in CNContact.h.
 func (x *ContactProperty) Key() string {
-	_r := x.inner.Key()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The value of the property.
-//
-// Value calls the underlying Value.
-func (x *ContactProperty) Value() objc.ID {
-	return x.inner.Value()
+// Value the value of the property.
+func (x *ContactProperty) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
-//
-// Identifier calls the underlying Identifier.
+// Identifier the identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (x *ContactProperty) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The label of the labeled value if the property is an array of labeled values, otherwise is nil.
-//
-// Label calls the underlying Label.
+// Label the label of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (x *ContactProperty) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ContactPropertyable is the interface implemented by [ContactProperty], for mocking and DI.
 type ContactPropertyable interface {
-	Unwrap() *raw.CNContactProperty
+	obj.Object
 	Contact() *Contact
 	Key() string
-	Value() objc.ID
+	Value() obj.Object
 	Identifier() string
 	Label() string
 }

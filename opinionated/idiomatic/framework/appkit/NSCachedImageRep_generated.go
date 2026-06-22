@@ -5,149 +5,137 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that stores image data in a form that can be readily transferred to the screen.
+// CachedImageRep is an idiomatic wrapper over the Objective-C class NSCachedImageRep.
 //
-// CachedImageRep wraps [raw.NSCachedImageRep] with a fluent Go API.
+// It embeds [ImageRep], promoting that type's methods.
+//
+// An object that stores image data in a form that can be readily transferred to the screen.
 type CachedImageRep struct {
-	inner *raw.NSCachedImageRep
+	ImageRep
 }
 
-// Unwrap returns the underlying [raw.NSCachedImageRep].
-func (x *CachedImageRep) Unwrap() *raw.NSCachedImageRep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CachedImageRep) ID() objc.ID { return x.inner.Ptr() }
-
-// CachedImageRepFromID adopts an existing object pointer as a CachedImageRep (nil for 0).
+// CachedImageRepFromID adopts an existing Objective-C object as a CachedImageRep
+// (nil for 0), retaining it and registering a release finalizer.
 func CachedImageRepFromID(id objc.ID) *CachedImageRep {
 	if id == 0 {
 		return nil
 	}
-	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(id)}
-}
-
-// Returns a cached image representation initialized for drawing in the specified window.
-//
-// NewCachedImageRepWithWindowRect creates a new [CachedImageRep].
-func NewCachedImageRepWithWindowRect(win *raw.NSWindow, rect corefoundation.CGRect) *CachedImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindow:rect:"), win.Ptr(), rect)
-	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
-}
-
-// Returns a cached image representation initialized with the specified image characteristics.
-//
-// NewCachedImageRepWithSizeDepthSeparateAlpha creates a new [CachedImageRep].
-func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, depth NSWindowDepth, flag bool, alpha bool) *CachedImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:depth:separate:alpha:"), size, raw.NSWindowDepth(depth), flag, alpha)
-	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
-}
-
-// The size of the image representation, measured in points in the user coordinate space.
-//
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *CachedImageRep) WithSize(size corefoundation.CGSize) *CachedImageRep {
-	x.inner.NSImageRep.SetSize(size)
+	x := &CachedImageRep{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether the image data has an alpha channel.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
-func (x *CachedImageRep) WithAlpha(alpha bool) *CachedImageRep {
-	x.inner.NSImageRep.SetAlpha(alpha)
-	return x
-}
-
-// A Boolean value that indicates whether the image is opaque.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
-func (x *CachedImageRep) WithOpaque(opaque bool) *CachedImageRep {
-	x.inner.NSImageRep.SetOpaque(opaque)
-	return x
-}
-
-// The name of the color space used by the image data.
-//
-// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
-func (x *CachedImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CachedImageRep {
-	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
-	return x
-}
-
-// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-//
-// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
-func (x *CachedImageRep) WithBitsPerSample(bitsPerSample int) *CachedImageRep {
-	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
-	return x
-}
-
-// The width of the image, measured in pixels.
-//
-// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
-func (x *CachedImageRep) WithPixelsWide(pixelsWide int) *CachedImageRep {
-	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
-	return x
-}
-
-// The height of the image, measured in pixels.
-//
-// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
-func (x *CachedImageRep) WithPixelsHigh(pixelsHigh int) *CachedImageRep {
-	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
-	return x
-}
-
-// The layout direction for the image.
-//
-// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *CachedImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CachedImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
-	return x
-}
-
-// Returns the window where the representation is cached.
-//
-// Window calls the underlying Window.
-func (x *CachedImageRep) Window() *Window {
-	_r := x.inner.Window()
-	if _r == nil {
+// cachedImageRepAdopt wraps an Objective-C object that this code just created as a
+// CachedImageRep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cachedImageRepAdopt(id objc.ID) *CachedImageRep {
+	if id == 0 {
 		return nil
 	}
-	return &Window{inner: _r}
+	x := &CachedImageRep{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the rectangle where the representation is cached.
-//
-// Rect calls the underlying Rect.
+// NewCachedImageRepWithWindowRect returns a cached image representation initialized for drawing in the specified window.
+func NewCachedImageRepWithWindowRect(win *Window, rect corefoundation.CGRect) *CachedImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindow:rect:"), objref.IDOf(win), rect)
+	return cachedImageRepAdopt(_id)
+}
+
+// NewCachedImageRepWithSizeDepthSeparateAlpha returns a cached image representation initialized with the specified image characteristics.
+func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, depth WindowDepth, flag bool, alpha bool) *CachedImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:depth:separate:alpha:"), size, depth, flag, alpha)
+	return cachedImageRepAdopt(_id)
+}
+
+// WithSize the size of the image representation, measured in points in the user coordinate space.
+func (x *CachedImageRep) WithSize(size corefoundation.CGSize) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
+	return x
+}
+
+// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
+func (x *CachedImageRep) WithAlpha(alpha bool) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
+	return x
+}
+
+// WithOpaque a Boolean value that indicates whether the image is opaque.
+func (x *CachedImageRep) WithOpaque(opaque bool) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
+	return x
+}
+
+// WithColorSpaceName the name of the color space used by the image data.
+func (x *CachedImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return x
+}
+
+// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (x *CachedImageRep) WithBitsPerSample(bitsPerSample int) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return x
+}
+
+// WithPixelsWide the width of the image, measured in pixels.
+func (x *CachedImageRep) WithPixelsWide(pixelsWide int) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return x
+}
+
+// WithPixelsHigh the height of the image, measured in pixels.
+func (x *CachedImageRep) WithPixelsHigh(pixelsHigh int) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection the layout direction for the image.
+func (x *CachedImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CachedImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return x
+}
+
+// Window returns the window where the representation is cached.
+func (x *CachedImageRep) Window() *Window {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))
+	return WindowFromID(_r)
+}
+
+// Rect returns the rectangle where the representation is cached.
 func (x *CachedImageRep) Rect() corefoundation.CGRect {
-	return x.inner.Rect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rect"))
+	return _r
 }
-
-func (x *CachedImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 
 // CachedImageRepable is the interface implemented by [CachedImageRep], for mocking and DI.
 type CachedImageRepable interface {
-	Unwrap() *raw.NSCachedImageRep
+	obj.Object
 	WithSize(size corefoundation.CGSize) *CachedImageRep
 	WithAlpha(alpha bool) *CachedImageRep
 	WithOpaque(opaque bool) *CachedImageRep
-	WithColorSpaceName(colorSpaceName *foundation.NSString) *CachedImageRep
+	WithColorSpaceName(colorSpaceName obj.Object) *CachedImageRep
 	WithBitsPerSample(bitsPerSample int) *CachedImageRep
 	WithPixelsWide(pixelsWide int) *CachedImageRep
 	WithPixelsHigh(pixelsHigh int) *CachedImageRep
-	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CachedImageRep
+	WithLayoutDirection(layoutDirection ImageLayoutDirection) *CachedImageRep
 	Window() *Window
 	Rect() corefoundation.CGRect
 }
 
 var _ CachedImageRepable = (*CachedImageRep)(nil)
+
+var _ ImageRepProvider = (*CachedImageRep)(nil)

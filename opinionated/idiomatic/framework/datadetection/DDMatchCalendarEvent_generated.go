@@ -5,84 +5,93 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a calendar date or date range that the data detection system matches.
+// MatchCalendarEvent is an idiomatic wrapper over the Objective-C class DDMatchCalendarEvent.
 //
-// MatchCalendarEvent wraps [raw.DDMatchCalendarEvent] with a fluent Go API.
+// It embeds [Match], promoting that type's methods.
+//
+// An object that represents a calendar date or date range that the data detection system matches.
 type MatchCalendarEvent struct {
-	inner *raw.DDMatchCalendarEvent
+	Match
 }
 
-// Unwrap returns the underlying [raw.DDMatchCalendarEvent].
-func (x *MatchCalendarEvent) Unwrap() *raw.DDMatchCalendarEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchCalendarEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchCalendarEventFromID adopts an existing object pointer as a MatchCalendarEvent (nil for 0).
+// MatchCalendarEventFromID adopts an existing Objective-C object as a MatchCalendarEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchCalendarEventFromID(id objc.ID) *MatchCalendarEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MatchCalendarEvent{inner: raw.DDMatchCalendarEventFromID(id)}
+	x := &MatchCalendarEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatchCalendarEvent creates a new [MatchCalendarEvent].
+// matchCalendarEventAdopt wraps an Objective-C object that this code just created as a
+// MatchCalendarEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchCalendarEventAdopt(id objc.ID) *MatchCalendarEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchCalendarEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatchCalendarEvent creates a new MatchCalendarEvent.
 func NewMatchCalendarEvent() *MatchCalendarEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchCalendarEvent")), objc.RegisterName("new"))
-	return &MatchCalendarEvent{inner: raw.DDMatchCalendarEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchCalendarEvent")), objc.RegisterName("new"))
+	return matchCalendarEventAdopt(_id)
 }
 
-// A Boolean value that indicates whether the event is an all-day event.
-//
-// IsAllDay calls the underlying IsAllDay.
+// IsAllDay a Boolean value that indicates whether the event is an all-day event.
 func (x *MatchCalendarEvent) IsAllDay() bool {
-	return x.inner.IsAllDay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllDay"))
+	return _r
 }
 
-// A date that represents the start of the event.
-//
-// StartDate calls the underlying StartDate.
-func (x *MatchCalendarEvent) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// StartDate a date that represents the start of the event.
+func (x *MatchCalendarEvent) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// The time zone for the event’s start date.
-//
-// StartTimeZone calls the underlying StartTimeZone.
-func (x *MatchCalendarEvent) StartTimeZone() *foundation.NSTimeZone {
-	return x.inner.StartTimeZone()
+// StartTimeZone the time zone for the event’s start date.
+func (x *MatchCalendarEvent) StartTimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTimeZone"))
+	return obj.Wrap(_r)
 }
 
-// A date that represents the end of the event.
-//
-// EndDate calls the underlying EndDate.
-func (x *MatchCalendarEvent) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// EndDate a date that represents the end of the event.
+func (x *MatchCalendarEvent) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// The time zone for the event’s end date.
-//
-// EndTimeZone calls the underlying EndTimeZone.
-func (x *MatchCalendarEvent) EndTimeZone() *foundation.NSTimeZone {
-	return x.inner.EndTimeZone()
+// EndTimeZone the time zone for the event’s end date.
+func (x *MatchCalendarEvent) EndTimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimeZone"))
+	return obj.Wrap(_r)
 }
-
-func (x *MatchCalendarEvent) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchCalendarEventable is the interface implemented by [MatchCalendarEvent], for mocking and DI.
 type MatchCalendarEventable interface {
-	Unwrap() *raw.DDMatchCalendarEvent
+	obj.Object
 	IsAllDay() bool
-	StartDate() *foundation.NSDate
-	StartTimeZone() *foundation.NSTimeZone
-	EndDate() *foundation.NSDate
-	EndTimeZone() *foundation.NSTimeZone
+	StartDate() obj.Object
+	StartTimeZone() obj.Object
+	EndDate() obj.Object
+	EndTimeZone() obj.Object
 }
 
 var _ MatchCalendarEventable = (*MatchCalendarEvent)(nil)
+
+var _ MatchProvider = (*MatchCalendarEvent)(nil)

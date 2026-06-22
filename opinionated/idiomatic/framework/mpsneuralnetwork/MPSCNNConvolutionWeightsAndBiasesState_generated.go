@@ -5,95 +5,88 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNConvolutionWeightsAndBiasesState wraps [raw.MPSCNNConvolutionWeightsAndBiasesState] with a fluent Go API.
+// CNNConvolutionWeightsAndBiasesState is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionWeightsAndBiasesState.
 type CNNConvolutionWeightsAndBiasesState struct {
-	inner *raw.MPSCNNConvolutionWeightsAndBiasesState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionWeightsAndBiasesState].
-func (x *CNNConvolutionWeightsAndBiasesState) Unwrap() *raw.MPSCNNConvolutionWeightsAndBiasesState {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionWeightsAndBiasesState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionWeightsAndBiasesStateFromID adopts an existing object pointer as a CNNConvolutionWeightsAndBiasesState (nil for 0).
+// CNNConvolutionWeightsAndBiasesStateFromID adopts an existing Objective-C object as a CNNConvolutionWeightsAndBiasesState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionWeightsAndBiasesStateFromID(id objc.ID) *CNNConvolutionWeightsAndBiasesState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(id)}
+	x := &CNNConvolutionWeightsAndBiasesState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided weights and biases buffers. @discussion  This is the convinience API when buffers of exact size i.e. [weights length] =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise and [biases length]  =  outputFeatureChannels*sizeof(float)
-//
-// NewCNNConvolutionWeightsAndBiasesStateWithWeightsBiases creates a new [CNNConvolutionWeightsAndBiasesState].
-func NewCNNConvolutionWeightsAndBiasesStateWithWeightsBiases(weights metal.MTLBuffer, biases metal.MTLBuffer) *CNNConvolutionWeightsAndBiasesState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWeights:biases:"), weights, biases)
-	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
+// cNNConvolutionWeightsAndBiasesStateAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionWeightsAndBiasesState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionWeightsAndBiasesStateAdopt(id objc.ID) *CNNConvolutionWeightsAndBiasesState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNConvolutionWeightsAndBiasesState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided convolution descriptor @discussion  Create weights and biases buffers of appropriate size
-//
-// NewCNNConvolutionWeightsAndBiasesStateWithDeviceCnnConvolutionDescriptor creates a new [CNNConvolutionWeightsAndBiasesState].
-func NewCNNConvolutionWeightsAndBiasesStateWithDeviceCnnConvolutionDescriptor(device metal.MTLDevice, descriptor *raw.MPSCNNConvolutionDescriptor) *CNNConvolutionWeightsAndBiasesState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:cnnConvolutionDescriptor:"), device, descriptor.Ptr())
-	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
+// Description returns the object's -description text.
+func (x *CNNConvolutionWeightsAndBiasesState) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided weights and biases buffers. @discussion  It gives finer allocation control to application e.g. application can pass same buffer for weights and biases with appropriate offsets. Or offset into some larger buffer from application managed heap etc. Number of weights and biases or the length of weights and biases buffer this object owns (will read or write to), starting at offset is determined by MPSCNNConvolutionDescriptor passed in. weightsLength =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise biasesLength  =  outputFeatureChannels*sizeof(float) Thus filters operating on this object will read or write to NSRange(weightsOffset, weightsLength) of weights buffer and NSRange(biasesOffset, biasesLength) of biases buffer. Thus sizes of buffers provided must be such that weightsOffset + weightsLength <= [weights length] and     biasesOffset + biasesLength <= [biases length] Offsets must of sizeof(float) aligned i.e. multiple of 4.
-//
-// NewCNNConvolutionWeightsAndBiasesStateWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor creates a new [CNNConvolutionWeightsAndBiasesState].
-func NewCNNConvolutionWeightsAndBiasesStateWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor(weights metal.MTLBuffer, weightsOffset uint, biases metal.MTLBuffer, biasesOffset uint, descriptor *raw.MPSCNNConvolutionDescriptor) *CNNConvolutionWeightsAndBiasesState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWeights:weightsOffset:biases:biasesOffset:cnnConvolutionDescriptor:"), weights, weightsOffset, biases, biasesOffset, descriptor.Ptr())
-	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNConvolutionWeightsAndBiasesState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property   weights @abstract   A buffer that contains the weights. Each value in the buffer is a float. The layout of the weights with respect to the weights is the same as the weights layout provided by data source i.e. it can be interpreted as 4D array weights[outputFeatureChannels][kernelHeight][kernelWidth][inputFeatureChannels/groups] for regular convolution. For depthwise convolution weights[outputFeatureChannels][kernelHeight][kernelWidth] as we currently only support channel multiplier of 1.
-//
-// Weights calls the underlying Weights.
-func (x *CNNConvolutionWeightsAndBiasesState) Weights() metal.MTLBuffer {
-	return x.inner.Weights()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNConvolutionWeightsAndBiasesState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property   biases @abstract   A buffer that contains the biases. Each value is float and there are ouputFeatureChannels values.
-//
-// Biases calls the underlying Biases.
-func (x *CNNConvolutionWeightsAndBiasesState) Biases() metal.MTLBuffer {
-	return x.inner.Biases()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNConvolutionWeightsAndBiasesState) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property   weightsOffset @discussion Offset at which weights start in weights buffer Default value is 0.
-//
-// WeightsOffset calls the underlying WeightsOffset.
-func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() uint {
-	return x.inner.WeightsOffset()
+// NewCNNConvolutionWeightsAndBiasesState creates a new CNNConvolutionWeightsAndBiasesState.
+func NewCNNConvolutionWeightsAndBiasesState() *CNNConvolutionWeightsAndBiasesState {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("new"))
+	return cNNConvolutionWeightsAndBiasesStateAdopt(_id)
 }
 
-// @property   biasesOffset @discussion Offset at which weights start in biases buffer Default value is 0.
-//
-// BiasesOffset calls the underlying BiasesOffset.
-func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() uint {
-	return x.inner.BiasesOffset()
+// WeightsOffset offset at which weights start in weights buffer Default value is 0.
+func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weightsOffset"))
+	return _r
+}
+
+// BiasesOffset offset at which weights start in biases buffer Default value is 0.
+func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("biasesOffset"))
+	return _r
 }
 
 // CNNConvolutionWeightsAndBiasesStateable is the interface implemented by [CNNConvolutionWeightsAndBiasesState], for mocking and DI.
 type CNNConvolutionWeightsAndBiasesStateable interface {
-	Unwrap() *raw.MPSCNNConvolutionWeightsAndBiasesState
-	Weights() metal.MTLBuffer
-	Biases() metal.MTLBuffer
-	WeightsOffset() uint
-	BiasesOffset() uint
+	obj.Object
+	WeightsOffset() int
+	BiasesOffset() int
 }
 
 var _ CNNConvolutionWeightsAndBiasesStateable = (*CNNConvolutionWeightsAndBiasesState)(nil)

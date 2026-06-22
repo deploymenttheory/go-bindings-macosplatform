@@ -5,45 +5,79 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for objects that direct sound.
+// DirectivityModelParameters is an idiomatic wrapper over the Objective-C class PHASEDirectivityModelParameters.
 //
-// DirectivityModelParameters wraps [raw.PHASEDirectivityModelParameters] with a fluent Go API.
+// DirectivityModelParameters is an abstract base — you do not construct it directly. Construct one of [CardioidDirectivityModelParameters], [ConeDirectivityModelParameters] and pass it where a DirectivityModelParameters is accepted.
+//
+// A base class for objects that direct sound.
 type DirectivityModelParameters struct {
-	inner *raw.PHASEDirectivityModelParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEDirectivityModelParameters].
-func (x *DirectivityModelParameters) Unwrap() *raw.PHASEDirectivityModelParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectivityModelParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectivityModelParametersFromID adopts an existing object pointer as a DirectivityModelParameters (nil for 0).
+// DirectivityModelParametersFromID adopts an existing Objective-C object as a DirectivityModelParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectivityModelParametersFromID(id objc.ID) *DirectivityModelParameters {
 	if id == 0 {
 		return nil
 	}
-	return &DirectivityModelParameters{inner: raw.PHASEDirectivityModelParametersFromID(id)}
+	x := &DirectivityModelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDirectivityModelParameters creates a new [DirectivityModelParameters].
-func NewDirectivityModelParameters() *DirectivityModelParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDirectivityModelParameters")), objc.RegisterName("new"))
-	return &DirectivityModelParameters{inner: raw.PHASEDirectivityModelParametersFromID(_id)}
+// directivityModelParametersAdopt wraps an Objective-C object that this code just created as a
+// DirectivityModelParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directivityModelParametersAdopt(id objc.ID) *DirectivityModelParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectivityModelParameters{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters {
-	return x.inner
+// Description returns the object's -description text.
+func (x *DirectivityModelParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectivityModelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectivityModelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectivityModelParameters) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectivityModelParametersable is the interface implemented by [DirectivityModelParameters], for mocking and DI.
 type DirectivityModelParametersable interface {
-	Unwrap() *raw.PHASEDirectivityModelParameters
+	obj.Object
 }
 
 var _ DirectivityModelParametersable = (*DirectivityModelParameters)(nil)
+
+// isDirectivityModelParameters marks DirectivityModelParameters — and, by embedding promotion, its
+// subclasses — as a member of the DirectivityModelParameters hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectivityModelParameters) isDirectivityModelParameters() {}
+
+var _ DirectivityModelParametersProvider = (*DirectivityModelParameters)(nil)

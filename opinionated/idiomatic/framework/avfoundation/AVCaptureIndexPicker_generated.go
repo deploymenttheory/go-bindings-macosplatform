@@ -5,173 +5,148 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control for selecting from a set of mutually exclusive values by index.
+// CaptureIndexPicker is an idiomatic wrapper over the Objective-C class AVCaptureIndexPicker.
 //
-// CaptureIndexPicker wraps [raw.AVCaptureIndexPicker] with a fluent Go API.
+// It embeds [CaptureControl], promoting that type's methods.
+//
+// A control for selecting from a set of mutually exclusive values by index.
 type CaptureIndexPicker struct {
-	inner *raw.AVCaptureIndexPicker
+	CaptureControl
 }
 
-// Unwrap returns the underlying [raw.AVCaptureIndexPicker].
-func (x *CaptureIndexPicker) Unwrap() *raw.AVCaptureIndexPicker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureIndexPicker) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureIndexPickerFromID adopts an existing object pointer as a CaptureIndexPicker (nil for 0).
+// CaptureIndexPickerFromID adopts an existing Objective-C object as a CaptureIndexPicker
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureIndexPickerFromID(id objc.ID) *CaptureIndexPicker {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(id)}
+	x := &CaptureIndexPicker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a control to pick a value from the specified number of indexes.
-//
-// NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexes creates a new [CaptureIndexPicker].
+// captureIndexPickerAdopt wraps an Objective-C object that this code just created as a
+// CaptureIndexPicker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureIndexPickerAdopt(id objc.ID) *CaptureIndexPicker {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureIndexPicker{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexes creates a control to pick a value from the specified number of indexes.
 func NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexes(localizedTitle string, symbolName string, numberOfIndexes int) *CaptureIndexPicker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureIndexPicker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:numberOfIndexes:"), foundation.NSStringStringWithUTF8String(localizedTitle).Ptr(), foundation.NSStringStringWithUTF8String(symbolName).Ptr(), numberOfIndexes)
-	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureIndexPicker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:numberOfIndexes:"), purego.NSString(localizedTitle), purego.NSString(symbolName), numberOfIndexes)
+	return captureIndexPickerAdopt(_id)
 }
 
-// Creates a control to pick a value from the specified number of indices.
-//
-// NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform creates a new [CaptureIndexPicker].
-func NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform(localizedTitle string, symbolName string, numberOfIndexes int, localizedTitleTransform objc.Block) *CaptureIndexPicker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureIndexPicker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:numberOfIndexes:localizedTitleTransform:"), foundation.NSStringStringWithUTF8String(localizedTitle).Ptr(), foundation.NSStringStringWithUTF8String(symbolName).Ptr(), numberOfIndexes, localizedTitleTransform)
-	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(_id)}
+// NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles creates an object to select an index from a set of values.
+func NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles(localizedTitle string, symbolName string, localizedIndexTitles []string) *CaptureIndexPicker {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureIndexPicker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:localizedIndexTitles:"), purego.NSString(localizedTitle), purego.NSString(symbolName), purego.SliceToNSArray(localizedIndexTitles, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return captureIndexPickerAdopt(_id)
 }
 
-// Creates an object to select an index from a set of values.
-//
-// NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles creates a new [CaptureIndexPicker].
-func NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles(localizedTitle string, symbolName string, localizedIndexTitles *foundation.NSArray[*foundation.NSString]) *CaptureIndexPicker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureIndexPicker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:localizedIndexTitles:"), foundation.NSStringStringWithUTF8String(localizedTitle).Ptr(), foundation.NSStringStringWithUTF8String(symbolName).Ptr(), localizedIndexTitles.Ptr())
-	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(_id)}
-}
-
-// The currently selected index.
-//
-// WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
+// WithSelectedIndex the currently selected index.
 func (x *CaptureIndexPicker) WithSelectedIndex(selectedIndex int) *CaptureIndexPicker {
-	x.inner.SetSelectedIndex(selectedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return x
 }
 
-// A string identifier for this control.
-//
-// WithAccessibilityIdentifier sets the accessibilityIdentifier property and returns the receiver for chaining.
+// WithAccessibilityIdentifier a string identifier for this control.
 func (x *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker {
-	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether this control supports user interaction.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether this control supports user interaction.
 func (x *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
-	x.inner.AVCaptureControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Sets the action to perform on the specified dispatch queue when the control’s value changes.
-//
-// SetActionQueueAction calls the underlying SetActionQueueAction.
-func (x *CaptureIndexPicker) SetActionQueueAction(actionQueue *foundation.NSObject, action func(int)) {
-	x.inner.SetActionQueueAction(actionQueue, action)
+// SetActionQueueAction sets the action to perform on the specified dispatch queue when the control’s value changes.
+func (x *CaptureIndexPicker) SetActionQueueAction(actionQueue obj.Object, action func(int)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 int) { action(_b0) }))
 }
 
-// @property selectedIndex @abstract The currently selected index. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `selectedIndex` must be changed on `actionQueue` – the queue provided to `setActionQueue:action:`. The default value is 0. An index may only be set if it is greater than 0 or less than `numberOfIndexes`, otherwise an `NSInvalidArgumentException` is thrown.
-//
-// SelectedIndex calls the underlying SelectedIndex.
+// SelectedIndex the currently selected index. Because the camera system may be independent from the main thread or `
 func (x *CaptureIndexPicker) SelectedIndex() int {
-	return x.inner.SelectedIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
+	return _r
 }
 
-// SetSelectedIndex calls the underlying SetSelectedIndex.
+// SetSelectedIndex wraps the corresponding Objective-C method.
 func (x *CaptureIndexPicker) SetSelectedIndex(selectedIndex int) {
-	x.inner.SetSelectedIndex(selectedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 }
 
-// @property localizedTitle @abstract A localized string that describes the picker's `action`.
-//
-// LocalizedTitle calls the underlying LocalizedTitle.
+// LocalizedTitle a localized string that describes the picker's `action`.
 func (x *CaptureIndexPicker) LocalizedTitle() string {
-	_r := x.inner.LocalizedTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property symbolName @abstract The name of a symbol to represent the picker.
-//
-// SymbolName calls the underlying SymbolName.
+// SymbolName the name of a symbol to represent the picker.
 func (x *CaptureIndexPicker) SymbolName() string {
-	_r := x.inner.SymbolName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property numberOfIndexes @abstract The number of indexes to pick between.
-//
-// NumberOfIndexes calls the underlying NumberOfIndexes.
+// NumberOfIndexes the number of indexes to pick between.
 func (x *CaptureIndexPicker) NumberOfIndexes() int {
-	return x.inner.NumberOfIndexes()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfIndexes"))
+	return _r
 }
 
-// @property localizedIndexTitles @abstract The titles used for each index.
+// LocalizedIndexTitles the titles used for each index.
 //
 // LocalizedIndexTitles returns the collection as a Go slice.
 func (x *CaptureIndexPicker) LocalizedIndexTitles() []string {
-	arr := x.inner.LocalizedIndexTitles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedIndexTitles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property accessibilityIdentifier @abstract A string that identifies the picker.
-//
-// AccessibilityIdentifier calls the underlying AccessibilityIdentifier.
+// AccessibilityIdentifier a string that identifies the picker.
 func (x *CaptureIndexPicker) AccessibilityIdentifier() string {
-	_r := x.inner.AccessibilityIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAccessibilityIdentifier calls the underlying SetAccessibilityIdentifier.
+// SetAccessibilityIdentifier wraps the corresponding Objective-C method.
 func (x *CaptureIndexPicker) SetAccessibilityIdentifier(accessibilityIdentifier string) {
-	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
-}
-
-func (x *CaptureIndexPicker) asCaptureControl() *raw.AVCaptureControl {
-	return &x.inner.AVCaptureControl
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
 }
 
 // CaptureIndexPickerable is the interface implemented by [CaptureIndexPicker], for mocking and DI.
 type CaptureIndexPickerable interface {
-	Unwrap() *raw.AVCaptureIndexPicker
+	obj.Object
 	WithSelectedIndex(selectedIndex int) *CaptureIndexPicker
 	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker
 	WithEnabled(enabled bool) *CaptureIndexPicker
-	SetActionQueueAction(actionQueue *foundation.NSObject, action func(int))
+	SetActionQueueAction(actionQueue obj.Object, action func(int))
 	SelectedIndex() int
 	SetSelectedIndex(selectedIndex int)
 	LocalizedTitle() string
@@ -183,3 +158,5 @@ type CaptureIndexPickerable interface {
 }
 
 var _ CaptureIndexPickerable = (*CaptureIndexPicker)(nil)
+
+var _ CaptureControlProvider = (*CaptureIndexPicker)(nil)

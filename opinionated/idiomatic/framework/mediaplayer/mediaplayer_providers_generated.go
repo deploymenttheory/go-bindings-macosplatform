@@ -5,15 +5,17 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// RemoteCommandProvider is implemented by RemoteCommand and any idiomatic type wrapping a MPRemoteCommand subclass.
+// RemoteCommandProvider is accepted wherever a MPRemoteCommand (or one of its subclasses) is expected.
 type RemoteCommandProvider interface {
-	asRemoteCommand() *raw.MPRemoteCommand
+	objref.Object
+	isRemoteCommand()
 }
 
-// RemoteCommandEventProvider is implemented by RemoteCommandEvent and any idiomatic type wrapping a MPRemoteCommandEvent subclass.
+// RemoteCommandEventProvider is accepted wherever a MPRemoteCommandEvent (or one of its subclasses) is expected.
 type RemoteCommandEventProvider interface {
-	asRemoteCommandEvent() *raw.MPRemoteCommandEvent
+	objref.Object
+	isRemoteCommandEvent()
 }

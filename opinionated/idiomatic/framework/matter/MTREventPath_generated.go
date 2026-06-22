@@ -5,48 +5,63 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREventPath wraps [raw.MTREventPath] with a fluent Go API.
+// MTREventPath is an idiomatic wrapper over the Objective-C class MTREventPath.
+//
+// It embeds [MTRClusterPath], promoting that type's methods.
 type MTREventPath struct {
-	inner *raw.MTREventPath
+	MTRClusterPath
 }
 
-// Unwrap returns the underlying [raw.MTREventPath].
-func (x *MTREventPath) Unwrap() *raw.MTREventPath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREventPath) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREventPathFromID adopts an existing object pointer as a MTREventPath (nil for 0).
+// MTREventPathFromID adopts an existing Objective-C object as a MTREventPath
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREventPathFromID(id objc.ID) *MTREventPath {
 	if id == 0 {
 		return nil
 	}
-	return &MTREventPath{inner: raw.MTREventPathFromID(id)}
+	x := &MTREventPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTREventPath creates a new [MTREventPath].
+// mTREventPathAdopt wraps an Objective-C object that this code just created as a
+// MTREventPath (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREventPathAdopt(id objc.ID) *MTREventPath {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREventPath{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTREventPath creates a new MTREventPath.
 func NewMTREventPath() *MTREventPath {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREventPath")), objc.RegisterName("new"))
-	return &MTREventPath{inner: raw.MTREventPathFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREventPath")), objc.RegisterName("new"))
+	return mTREventPathAdopt(_id)
 }
 
-// Event calls the underlying Event.
-func (x *MTREventPath) Event() *foundation.NSNumber {
-	return x.inner.Event()
+// Event wraps the corresponding Objective-C method.
+func (x *MTREventPath) Event() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
+	return obj.Wrap(_r)
 }
-
-func (x *MTREventPath) asMTRClusterPath() *raw.MTRClusterPath { return &x.inner.MTRClusterPath }
 
 // MTREventPathable is the interface implemented by [MTREventPath], for mocking and DI.
 type MTREventPathable interface {
-	Unwrap() *raw.MTREventPath
-	Event() *foundation.NSNumber
+	obj.Object
+	Event() obj.Object
 }
 
 var _ MTREventPathable = (*MTREventPath)(nil)
+
+var _ MTRClusterPathProvider = (*MTREventPath)(nil)

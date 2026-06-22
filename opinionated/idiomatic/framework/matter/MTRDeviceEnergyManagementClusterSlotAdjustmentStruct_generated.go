@@ -5,99 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterSlotAdjustmentStruct wraps [raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStruct] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterSlotAdjustmentStruct is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterSlotAdjustmentStruct.
 type MTRDeviceEnergyManagementClusterSlotAdjustmentStruct struct {
-	inner *raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStruct].
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterSlotAdjustmentStruct (nil for 0).
+// MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{inner: raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID(id)}
+	x := &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct creates a new [MTRDeviceEnergyManagementClusterSlotAdjustmentStruct].
+// mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterSlotAdjustmentStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct creates a new MTRDeviceEnergyManagementClusterSlotAdjustmentStruct.
 func NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct() *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterSlotAdjustmentStruct")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterSlotAdjustmentStruct{inner: raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterSlotAdjustmentStruct")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(_id)
 }
 
-// WithSlotIndex sets the slotIndex property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	x.inner.SetSlotIndex(slotIndex)
+// WithSlotIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 	return x
 }
 
-// WithNominalPower sets the nominalPower property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	x.inner.SetNominalPower(nominalPower)
+// WithNominalPower sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return x
 }
 
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
-	x.inner.SetDuration(duration)
+// WithDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// SlotIndex calls the underlying SlotIndex.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() *foundation.NSNumber {
-	return x.inner.SlotIndex()
+// SlotIndex wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetSlotIndex calls the underlying SetSlotIndex.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetSlotIndex(slotIndex *foundation.NSNumber) {
-	x.inner.SetSlotIndex(slotIndex)
+// SetSlotIndex wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetSlotIndex(slotIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 }
 
-// NominalPower calls the underlying NominalPower.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() *foundation.NSNumber {
-	return x.inner.NominalPower()
+// NominalPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalPower"))
+	return obj.Wrap(_r)
 }
 
-// SetNominalPower calls the underlying SetNominalPower.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetNominalPower(nominalPower *foundation.NSNumber) {
-	x.inner.SetNominalPower(nominalPower)
+// SetNominalPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetNominalPower(nominalPower obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 }
 
-// Duration calls the underlying Duration.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() *foundation.NSNumber {
-	return x.inner.Duration()
+// Duration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+	return obj.Wrap(_r)
 }
 
-// SetDuration calls the underlying SetDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetDuration(duration *foundation.NSNumber) {
-	x.inner.SetDuration(duration)
+// SetDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetDuration(duration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
 // MTRDeviceEnergyManagementClusterSlotAdjustmentStructable is the interface implemented by [MTRDeviceEnergyManagementClusterSlotAdjustmentStruct], for mocking and DI.
 type MTRDeviceEnergyManagementClusterSlotAdjustmentStructable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	WithSlotIndex(slotIndex *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
-	SlotIndex() *foundation.NSNumber
-	SetSlotIndex(slotIndex *foundation.NSNumber)
-	NominalPower() *foundation.NSNumber
-	SetNominalPower(nominalPower *foundation.NSNumber)
-	Duration() *foundation.NSNumber
-	SetDuration(duration *foundation.NSNumber)
+	obj.Object
+	WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	SlotIndex() obj.Object
+	SetSlotIndex(slotIndex obj.Object)
+	NominalPower() obj.Object
+	SetNominalPower(nominalPower obj.Object)
+	Duration() obj.Object
+	SetDuration(duration obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterSlotAdjustmentStructable = (*MTRDeviceEnergyManagementClusterSlotAdjustmentStruct)(nil)

@@ -5,156 +5,165 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A formatter that provides localized representations of units and measurements.
+// MeasurementFormatter is an idiomatic wrapper over the Objective-C class NSMeasurementFormatter.
 //
-// MeasurementFormatter wraps [raw.NSMeasurementFormatter] with a fluent Go API.
+// It embeds [Formatter], promoting that type's methods.
+//
+// A formatter that provides localized representations of units and measurements.
 type MeasurementFormatter struct {
-	inner *raw.NSMeasurementFormatter
+	Formatter
 }
 
-// Unwrap returns the underlying [raw.NSMeasurementFormatter].
-func (x *MeasurementFormatter) Unwrap() *raw.NSMeasurementFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeasurementFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// MeasurementFormatterFromID adopts an existing object pointer as a MeasurementFormatter (nil for 0).
+// MeasurementFormatterFromID adopts an existing Objective-C object as a MeasurementFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func MeasurementFormatterFromID(id objc.ID) *MeasurementFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &MeasurementFormatter{inner: raw.NSMeasurementFormatterFromID(id)}
+	x := &MeasurementFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMeasurementFormatter creates a new [MeasurementFormatter].
+// measurementFormatterAdopt wraps an Objective-C object that this code just created as a
+// MeasurementFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func measurementFormatterAdopt(id objc.ID) *MeasurementFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &MeasurementFormatter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMeasurementFormatter creates a new MeasurementFormatter.
 func NewMeasurementFormatter() *MeasurementFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMeasurementFormatter")), objc.RegisterName("new"))
-	return &MeasurementFormatter{inner: raw.NSMeasurementFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMeasurementFormatter")), objc.RegisterName("new"))
+	return measurementFormatterAdopt(_id)
 }
 
-// WithUnitOptions sets the unitOptions property and returns the receiver for chaining.
-func (x *MeasurementFormatter) WithUnitOptions(unitOptions NSMeasurementFormatterUnitOptions) *MeasurementFormatter {
-	x.inner.SetUnitOptions(raw.NSMeasurementFormatterUnitOptions(unitOptions))
+// WithUnitOptions sets the property and returns the receiver so calls can be chained.
+func (x *MeasurementFormatter) WithUnitOptions(unitOptions MeasurementFormatterUnitOptions) *MeasurementFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitOptions:"), unitOptions)
 	return x
 }
 
-// WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *MeasurementFormatter) WithUnitStyle(unitStyle NSFormattingUnitStyle) *MeasurementFormatter {
-	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
+// WithUnitStyle sets the property and returns the receiver so calls can be chained.
+func (x *MeasurementFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MeasurementFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
-// WithLocale sets the locale property and returns the receiver for chaining.
+// WithLocale sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithLocale(locale *Locale) *MeasurementFormatter {
-	x.inner.SetLocale(locale.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithNumberFormatter sets the numberFormatter property and returns the receiver for chaining.
+// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
 func (x *MeasurementFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter {
-	x.inner.SetNumberFormatter(numberFormatter.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MeasurementFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MeasurementFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MeasurementFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MeasurementFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// StringFromMeasurement calls the underlying StringFromMeasurement.
-func (x *MeasurementFormatter) StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String {
-	_r := x.inner.StringFromMeasurement(measurement)
-	if _r == nil {
-		return nil
+// StringFromMeasurement wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) StringFromMeasurement(measurement obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromMeasurement:"), objref.IDOf(measurement))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// StringFromUnit calls the underlying StringFromUnit.
-func (x *MeasurementFormatter) StringFromUnit(unit *raw.NSUnit) *String {
-	_r := x.inner.StringFromUnit(unit)
-	if _r == nil {
-		return nil
+// StringFromUnit wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) StringFromUnit(unit *Unit) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromUnit:"), objref.IDOf(unit))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// UnitOptions calls the underlying UnitOptions.
-func (x *MeasurementFormatter) UnitOptions() NSMeasurementFormatterUnitOptions {
-	return NSMeasurementFormatterUnitOptions(x.inner.UnitOptions())
+// UnitOptions wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) UnitOptions() MeasurementFormatterUnitOptions {
+	_r := objc.Send[MeasurementFormatterUnitOptions](objref.IDOf(x), objc.RegisterName("unitOptions"))
+	return _r
 }
 
-// SetUnitOptions calls the underlying SetUnitOptions.
-func (x *MeasurementFormatter) SetUnitOptions(unitOptions NSMeasurementFormatterUnitOptions) {
-	x.inner.SetUnitOptions(raw.NSMeasurementFormatterUnitOptions(unitOptions))
+// SetUnitOptions wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) SetUnitOptions(unitOptions MeasurementFormatterUnitOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitOptions:"), unitOptions)
 }
 
-// UnitStyle calls the underlying UnitStyle.
-func (x *MeasurementFormatter) UnitStyle() NSFormattingUnitStyle {
-	return NSFormattingUnitStyle(x.inner.UnitStyle())
+// UnitStyle wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) UnitStyle() FormattingUnitStyle {
+	_r := objc.Send[FormattingUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
+	return _r
 }
 
-// SetUnitStyle calls the underlying SetUnitStyle.
-func (x *MeasurementFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
-	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
+// SetUnitStyle wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) SetUnitStyle(unitStyle FormattingUnitStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }
 
-// Locale calls the underlying Locale.
+// Locale wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) Locale() *Locale {
-	_r := x.inner.Locale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return LocaleFromID(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *MeasurementFormatter) SetLocale(locale *raw.NSLocale) {
-	x.inner.SetLocale(locale)
+// SetLocale wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) SetLocale(locale *Locale) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
-// NumberFormatter calls the underlying NumberFormatter.
+// NumberFormatter wraps the corresponding Objective-C method.
 func (x *MeasurementFormatter) NumberFormatter() *NumberFormatter {
-	_r := x.inner.NumberFormatter()
-	if _r == nil {
-		return nil
-	}
-	return &NumberFormatter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberFormatter"))
+	return NumberFormatterFromID(_r)
 }
 
-// SetNumberFormatter calls the underlying SetNumberFormatter.
-func (x *MeasurementFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatter) {
-	x.inner.SetNumberFormatter(numberFormatter)
+// SetNumberFormatter wraps the corresponding Objective-C method.
+func (x *MeasurementFormatter) SetNumberFormatter(numberFormatter *NumberFormatter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 }
-
-func (x *MeasurementFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *MeasurementFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
 
 // MeasurementFormatterable is the interface implemented by [MeasurementFormatter], for mocking and DI.
 type MeasurementFormatterable interface {
-	Unwrap() *raw.NSMeasurementFormatter
-	WithUnitOptions(unitOptions NSMeasurementFormatterUnitOptions) *MeasurementFormatter
-	WithUnitStyle(unitStyle NSFormattingUnitStyle) *MeasurementFormatter
+	obj.Object
+	WithUnitOptions(unitOptions MeasurementFormatterUnitOptions) *MeasurementFormatter
+	WithUnitStyle(unitStyle FormattingUnitStyle) *MeasurementFormatter
 	WithLocale(locale *Locale) *MeasurementFormatter
 	WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MeasurementFormatter
-	StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String
-	StringFromUnit(unit *raw.NSUnit) *String
-	UnitOptions() NSMeasurementFormatterUnitOptions
-	SetUnitOptions(unitOptions NSMeasurementFormatterUnitOptions)
-	UnitStyle() NSFormattingUnitStyle
-	SetUnitStyle(unitStyle NSFormattingUnitStyle)
+	WithScriptingProperties(scriptingProperties obj.Object) *MeasurementFormatter
+	StringFromMeasurement(measurement obj.Object) string
+	StringFromUnit(unit *Unit) string
+	UnitOptions() MeasurementFormatterUnitOptions
+	SetUnitOptions(unitOptions MeasurementFormatterUnitOptions)
+	UnitStyle() FormattingUnitStyle
+	SetUnitStyle(unitStyle FormattingUnitStyle)
 	Locale() *Locale
-	SetLocale(locale *raw.NSLocale)
+	SetLocale(locale *Locale)
 	NumberFormatter() *NumberFormatter
-	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
+	SetNumberFormatter(numberFormatter *NumberFormatter)
 }
 
 var _ MeasurementFormatterable = (*MeasurementFormatter)(nil)
+
+var _ FormatterProvider = (*MeasurementFormatter)(nil)

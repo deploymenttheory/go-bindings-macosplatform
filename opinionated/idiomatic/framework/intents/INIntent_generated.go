@@ -5,137 +5,147 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to fulfill in your app or Intents extension.
+// Intent is an idiomatic wrapper over the Objective-C class INIntent.
 //
-// Intent wraps [raw.INIntent] with a fluent Go API.
+// Intent is an abstract base — you do not construct it directly. Construct one of [AnswerCallIntent], [EditMessageIntent], [GetReservationDetailsIntent], [HangUpCallIntent], [SendMessageIntent], [ShareFocusStatusIntent], [StartCallIntent], [UnsendMessagesIntent] and pass it where a Intent is accepted.
+//
+// A request to fulfill in your app or Intents extension.
 type Intent struct {
-	inner *raw.INIntent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INIntent].
-func (x *Intent) Unwrap() *raw.INIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Intent) ID() objc.ID { return x.inner.Ptr() }
-
-// IntentFromID adopts an existing object pointer as a Intent (nil for 0).
+// IntentFromID adopts an existing Objective-C object as a Intent
+// (nil for 0), retaining it and registering a release finalizer.
 func IntentFromID(id objc.ID) *Intent {
 	if id == 0 {
 		return nil
 	}
-	return &Intent{inner: raw.INIntentFromID(id)}
+	x := &Intent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIntent creates a new [Intent].
-func NewIntent() *Intent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INIntent")), objc.RegisterName("new"))
-	return &Intent{inner: raw.INIntentFromID(_id)}
+// intentAdopt wraps an Objective-C object that this code just created as a
+// Intent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func intentAdopt(id objc.ID) *Intent {
+	if id == 0 {
+		return nil
+	}
+	x := &Intent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *Intent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Intent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Intent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Intent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithSuggestedInvocationPhrase the intent’s display name.
 func (x *Intent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *Intent {
-	x.inner.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
 func (x *Intent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *Intent {
-	x.inner.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
-// Sets the image to use for the specified parameter.
-//
-// SetImageForParameterNamed calls the underlying SetImageForParameterNamed.
-func (x *Intent) SetImageForParameterNamed(image *raw.INImage, parameterName string) {
-	x.inner.SetImageForParameterNamed(image, foundation.NSStringStringWithUTF8String(parameterName))
+// SetImageForParameterNamed sets the image to use for the specified parameter.
+func (x *Intent) SetImageForParameterNamed(image *Image, parameterName string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:forParameterNamed:"), objref.IDOf(image), purego.NSString(parameterName))
 }
 
-// Returns the image associated with the specified parameter.
-//
-// ImageForParameterNamed calls the underlying ImageForParameterNamed.
+// ImageForParameterNamed returns the image associated with the specified parameter.
 func (x *Intent) ImageForParameterNamed(parameterName string) *Image {
-	_r := x.inner.ImageForParameterNamed(foundation.NSStringStringWithUTF8String(parameterName))
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageForParameterNamed:"), purego.NSString(parameterName))
+	return ImageFromID(_r)
 }
 
-// The most relevant image to display to the user.
-//
-// KeyImage calls the underlying KeyImage.
+// KeyImage the most relevant image to display to the user.
 func (x *Intent) KeyImage() *Image {
-	_r := x.inner.KeyImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyImage"))
+	return ImageFromID(_r)
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *Intent) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IntentDescription calls the underlying IntentDescription.
+// IntentDescription wraps the corresponding Objective-C method.
 func (x *Intent) IntentDescription() string {
-	_r := x.inner.IntentDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intentDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SuggestedInvocationPhrase calls the underlying SuggestedInvocationPhrase.
+// SuggestedInvocationPhrase wraps the corresponding Objective-C method.
 func (x *Intent) SuggestedInvocationPhrase() string {
-	_r := x.inner.SuggestedInvocationPhrase()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suggestedInvocationPhrase"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSuggestedInvocationPhrase calls the underlying SetSuggestedInvocationPhrase.
+// SetSuggestedInvocationPhrase wraps the corresponding Objective-C method.
 func (x *Intent) SetSuggestedInvocationPhrase(suggestedInvocationPhrase string) {
-	x.inner.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 }
 
-// DonationMetadata calls the underlying DonationMetadata.
+// DonationMetadata wraps the corresponding Objective-C method.
 func (x *Intent) DonationMetadata() *IntentDonationMetadata {
-	_r := x.inner.DonationMetadata()
-	if _r == nil {
-		return nil
-	}
-	return &IntentDonationMetadata{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("donationMetadata"))
+	return IntentDonationMetadataFromID(_r)
 }
 
-// SetDonationMetadata calls the underlying SetDonationMetadata.
-func (x *Intent) SetDonationMetadata(donationMetadata *raw.INIntentDonationMetadata) {
-	x.inner.SetDonationMetadata(donationMetadata)
+// SetDonationMetadata wraps the corresponding Objective-C method.
+func (x *Intent) SetDonationMetadata(donationMetadata *IntentDonationMetadata) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 }
-
-func (x *Intent) asIntent() *raw.INIntent { return x.inner }
 
 // Intentable is the interface implemented by [Intent], for mocking and DI.
 type Intentable interface {
-	Unwrap() *raw.INIntent
+	obj.Object
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *Intent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *Intent
-	SetImageForParameterNamed(image *raw.INImage, parameterName string)
+	SetImageForParameterNamed(image *Image, parameterName string)
 	ImageForParameterNamed(parameterName string) *Image
 	KeyImage() *Image
 	Identifier() string
@@ -143,7 +153,14 @@ type Intentable interface {
 	SuggestedInvocationPhrase() string
 	SetSuggestedInvocationPhrase(suggestedInvocationPhrase string)
 	DonationMetadata() *IntentDonationMetadata
-	SetDonationMetadata(donationMetadata *raw.INIntentDonationMetadata)
+	SetDonationMetadata(donationMetadata *IntentDonationMetadata)
 }
 
 var _ Intentable = (*Intent)(nil)
+
+// isIntent marks Intent — and, by embedding promotion, its
+// subclasses — as a member of the Intent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Intent) isIntent() {}
+
+var _ IntentProvider = (*Intent)(nil)

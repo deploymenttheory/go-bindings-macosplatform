@@ -19,6 +19,8 @@ const (
 	KCVAttachmentMode_ShouldPropagate CVAttachmentMode = 1
 )
 
+// String returns the CVAttachmentMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CVAttachmentMode) String() string {
 	switch e {
 	case KCVAttachmentMode_ShouldNotPropagate:
@@ -30,26 +32,6 @@ func (e CVAttachmentMode) String() string {
 	}
 }
 
-// The flags to pass to CVPixelBufferLockBaseAddress and CVPixelBufferUnlockBaseAddress.
-// Bitmask — values may be combined with |.
-type CVPixelBufferLockFlags int64
-
-const (
-	// A read-only buffer.
-	KCVPixelBufferLock_ReadOnly CVPixelBufferLockFlags = 1
-)
-
-func (e CVPixelBufferLockFlags) String() string {
-	var parts []string
-	if e&KCVPixelBufferLock_ReadOnly != 0 {
-		parts = append(parts, "KCVPixelBufferLock_ReadOnly")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
 // The flags to pass to flush the pool.
 // Bitmask — values may be combined with |.
 type CVPixelBufferPoolFlushFlags int64
@@ -59,6 +41,8 @@ const (
 	KCVPixelBufferPoolFlushExcessBuffers CVPixelBufferPoolFlushFlags = 1
 )
 
+// String returns the CVPixelBufferPoolFlushFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CVPixelBufferPoolFlushFlags) String() string {
 	var parts []string
 	if e&KCVPixelBufferPoolFlushExcessBuffers != 0 {

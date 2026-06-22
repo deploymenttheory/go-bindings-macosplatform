@@ -5,125 +5,146 @@
 package oslog
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The message arguments for a particular entry.
+// LogMessageComponent is an idiomatic wrapper over the Objective-C class OSLogMessageComponent.
 //
-// LogMessageComponent wraps [raw.OSLogMessageComponent] with a fluent Go API.
+// The message arguments for a particular entry.
 type LogMessageComponent struct {
-	inner *raw.OSLogMessageComponent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogMessageComponent].
-func (x *LogMessageComponent) Unwrap() *raw.OSLogMessageComponent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogMessageComponent) ID() objc.ID { return x.inner.Ptr() }
-
-// LogMessageComponentFromID adopts an existing object pointer as a LogMessageComponent (nil for 0).
+// LogMessageComponentFromID adopts an existing Objective-C object as a LogMessageComponent
+// (nil for 0), retaining it and registering a release finalizer.
 func LogMessageComponentFromID(id objc.ID) *LogMessageComponent {
 	if id == 0 {
 		return nil
 	}
-	return &LogMessageComponent{inner: raw.OSLogMessageComponentFromID(id)}
+	x := &LogMessageComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLogMessageComponent creates a new [LogMessageComponent].
+// logMessageComponentAdopt wraps an Objective-C object that this code just created as a
+// LogMessageComponent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logMessageComponentAdopt(id objc.ID) *LogMessageComponent {
+	if id == 0 {
+		return nil
+	}
+	x := &LogMessageComponent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogMessageComponent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogMessageComponent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogMessageComponent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogMessageComponent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLogMessageComponent creates a new LogMessageComponent.
 func NewLogMessageComponent() *LogMessageComponent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogMessageComponent")), objc.RegisterName("new"))
-	return &LogMessageComponent{inner: raw.OSLogMessageComponentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogMessageComponent")), objc.RegisterName("new"))
+	return logMessageComponentAdopt(_id)
 }
 
-// @property formatSubstring @abstract The text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
-//
-// FormatSubstring calls the underlying FormatSubstring.
+// FormatSubstring the text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
 func (x *LogMessageComponent) FormatSubstring() string {
-	_r := x.inner.FormatSubstring()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatSubstring"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property placeholder @abstract The placeholder text. Is empty for is the last component.
-//
-// Placeholder calls the underlying Placeholder.
+// Placeholder the placeholder text. Is empty for is the last component.
 func (x *LogMessageComponent) Placeholder() string {
-	_r := x.inner.Placeholder()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholder"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property argumentCategory @abstract The type of argument corresponding to the placeholder; see OSLogMessageComponentArgumentCategory.
-//
-// ArgumentCategory calls the underlying ArgumentCategory.
-func (x *LogMessageComponent) ArgumentCategory() OSLogMessageComponentArgumentCategory {
-	return OSLogMessageComponentArgumentCategory(x.inner.ArgumentCategory())
+// ArgumentCategory the type of argument corresponding to the placeholder; see OSLogMessageComponentArgumentCategory.
+func (x *LogMessageComponent) ArgumentCategory() LogMessageComponentArgumentCategory {
+	_r := objc.Send[LogMessageComponentArgumentCategory](objref.IDOf(x), objc.RegisterName("argumentCategory"))
+	return _r
 }
 
-// @property argumentDataValue @abstract The argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
-//
-// ArgumentDataValue calls the underlying ArgumentDataValue.
-func (x *LogMessageComponent) ArgumentDataValue() *foundation.NSData {
-	return x.inner.ArgumentDataValue()
+// ArgumentDataValue the argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+func (x *LogMessageComponent) ArgumentDataValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentDataValue"))
+	return obj.Wrap(_r)
 }
 
-// @property argumentDoubleValue @abstract The argument as a double-precision floating point number; the value is undefined if the argument cannot be decoded or if this is the last component.
-//
-// ArgumentDoubleValue calls the underlying ArgumentDoubleValue.
+// ArgumentDoubleValue the argument as a double-precision floating point number; the value is undefined if the argument cannot be decoded or if this is the last component.
 func (x *LogMessageComponent) ArgumentDoubleValue() float64 {
-	return x.inner.ArgumentDoubleValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("argumentDoubleValue"))
+	return _r
 }
 
-// @property argumentInt64Value @abstract The argument as a 64-bit signed integer; the value is undefined if it cannot be decoded or if this is the last component.
-//
-// ArgumentInt64Value calls the underlying ArgumentInt64Value.
+// ArgumentInt64Value the argument as a 64-bit signed integer; the value is undefined if it cannot be decoded or if this is the last component.
 func (x *LogMessageComponent) ArgumentInt64Value() int64 {
-	return x.inner.ArgumentInt64Value()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("argumentInt64Value"))
+	return _r
 }
 
-// @property argumentNumberValue @abstract The argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
-//
-// ArgumentNumberValue calls the underlying ArgumentNumberValue.
-func (x *LogMessageComponent) ArgumentNumberValue() *foundation.NSNumber {
-	return x.inner.ArgumentNumberValue()
+// ArgumentNumberValue the argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+func (x *LogMessageComponent) ArgumentNumberValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentNumberValue"))
+	return obj.Wrap(_r)
 }
 
-// @property argumentStringValue @abstract The argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
-//
-// ArgumentStringValue calls the underlying ArgumentStringValue.
+// ArgumentStringValue the argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
 func (x *LogMessageComponent) ArgumentStringValue() string {
-	_r := x.inner.ArgumentStringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentStringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property argumentUInt64Value @abstract The argument as a 64-bit unsigned integer; the value is undefined if the argument cannot be decoded or if this is the last component.
-//
-// ArgumentUInt64Value calls the underlying ArgumentUInt64Value.
+// ArgumentUInt64Value the argument as a 64-bit unsigned integer; the value is undefined if the argument cannot be decoded or if this is the last component.
 func (x *LogMessageComponent) ArgumentUInt64Value() uint64 {
-	return x.inner.ArgumentUInt64Value()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("argumentUInt64Value"))
+	return _r
 }
 
 // LogMessageComponentable is the interface implemented by [LogMessageComponent], for mocking and DI.
 type LogMessageComponentable interface {
-	Unwrap() *raw.OSLogMessageComponent
+	obj.Object
 	FormatSubstring() string
 	Placeholder() string
-	ArgumentCategory() OSLogMessageComponentArgumentCategory
-	ArgumentDataValue() *foundation.NSData
+	ArgumentCategory() LogMessageComponentArgumentCategory
+	ArgumentDataValue() obj.Object
 	ArgumentDoubleValue() float64
 	ArgumentInt64Value() int64
-	ArgumentNumberValue() *foundation.NSNumber
+	ArgumentNumberValue() obj.Object
 	ArgumentStringValue() string
 	ArgumentUInt64Value() uint64
 }

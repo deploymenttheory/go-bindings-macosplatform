@@ -5,56 +5,67 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpressionIdentifier wraps [raw.AXMathExpressionIdentifier] with a fluent Go API.
+// MathExpressionIdentifier is an idiomatic wrapper over the Objective-C class AXMathExpressionIdentifier.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionIdentifier struct {
-	inner *raw.AXMathExpressionIdentifier
+	MathExpression
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionIdentifier].
-func (x *MathExpressionIdentifier) Unwrap() *raw.AXMathExpressionIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionIdentifierFromID adopts an existing object pointer as a MathExpressionIdentifier (nil for 0).
+// MathExpressionIdentifierFromID adopts an existing Objective-C object as a MathExpressionIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionIdentifierFromID(id objc.ID) *MathExpressionIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionIdentifier{inner: raw.AXMathExpressionIdentifierFromID(id)}
+	x := &MathExpressionIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionIdentifierWithContent creates a new [MathExpressionIdentifier].
+// mathExpressionIdentifierAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionIdentifierAdopt(id objc.ID) *MathExpressionIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &MathExpressionIdentifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMathExpressionIdentifierWithContent creates a new MathExpressionIdentifier.
 func NewMathExpressionIdentifierWithContent(content string) *MathExpressionIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), foundation.NSStringStringWithUTF8String(content).Ptr())
-	return &MathExpressionIdentifier{inner: raw.AXMathExpressionIdentifierFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), purego.NSString(content))
+	return mathExpressionIdentifierAdopt(_id)
 }
 
-// Content calls the underlying Content.
+// Content wraps the corresponding Objective-C method.
 func (x *MathExpressionIdentifier) Content() string {
-	_r := x.inner.Content()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *MathExpressionIdentifier) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	return purego.GoString(_r)
 }
 
 // MathExpressionIdentifierable is the interface implemented by [MathExpressionIdentifier], for mocking and DI.
 type MathExpressionIdentifierable interface {
-	Unwrap() *raw.AXMathExpressionIdentifier
+	obj.Object
 	Content() string
 }
 
 var _ MathExpressionIdentifierable = (*MathExpressionIdentifier)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionIdentifier)(nil)

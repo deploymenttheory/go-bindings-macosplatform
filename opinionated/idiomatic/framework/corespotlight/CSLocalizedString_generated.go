@@ -5,56 +5,86 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays localized text in search results related to your app.
+// LocalizedString is an idiomatic wrapper over the Objective-C class CSLocalizedString.
 //
-// LocalizedString wraps [raw.CSLocalizedString] with a fluent Go API.
+// An object that displays localized text in search results related to your app.
 type LocalizedString struct {
-	inner *raw.CSLocalizedString
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSLocalizedString].
-func (x *LocalizedString) Unwrap() *raw.CSLocalizedString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalizedString) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalizedStringFromID adopts an existing object pointer as a LocalizedString (nil for 0).
+// LocalizedStringFromID adopts an existing Objective-C object as a LocalizedString
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalizedStringFromID(id objc.ID) *LocalizedString {
 	if id == 0 {
 		return nil
 	}
-	return &LocalizedString{inner: raw.CSLocalizedStringFromID(id)}
+	x := &LocalizedString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a CSLocalizedString object with the specified dictionary of localized strings.
-//
-// NewLocalizedStringWithLocalizedStrings creates a new [LocalizedString].
-func NewLocalizedStringWithLocalizedStrings(localizedStrings purego.IDer) *LocalizedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSLocalizedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), localizedStrings.ID())
-	return &LocalizedString{inner: raw.CSLocalizedStringFromID(_id)}
+// localizedStringAdopt wraps an Objective-C object that this code just created as a
+// LocalizedString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localizedStringAdopt(id objc.ID) *LocalizedString {
+	if id == 0 {
+		return nil
+	}
+	x := &LocalizedString{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the localized string for the current language.
-//
-// LocalizedString calls the underlying LocalizedString.
+// Description returns the object's -description text.
+func (x *LocalizedString) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalizedString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalizedString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalizedString) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalizedStringWithLocalizedStrings initializes a CSLocalizedString object with the specified dictionary of localized strings.
+func NewLocalizedStringWithLocalizedStrings(localizedStrings obj.Object) *LocalizedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CSLocalizedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), objref.IDOf(localizedStrings))
+	return localizedStringAdopt(_id)
+}
+
+// LocalizedString returns the localized string for the current language.
 func (x *LocalizedString) LocalizedString() string {
-	_r := x.inner.LocalizedString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // LocalizedStringable is the interface implemented by [LocalizedString], for mocking and DI.
 type LocalizedStringable interface {
-	Unwrap() *raw.CSLocalizedString
+	obj.Object
 	LocalizedString() string
 }
 

@@ -5,305 +5,248 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A six-sided polyhedron geometry whose faces are all rectangles, optionally with rounded edges and corners.
+// Box is an idiomatic wrapper over the Objective-C class SCNBox.
 //
-// Box wraps [raw.SCNBox] with a fluent Go API.
+// It embeds [Geometry], promoting that type's methods.
+//
+// A six-sided polyhedron geometry whose faces are all rectangles, optionally with rounded edges and corners.
 type Box struct {
-	inner *raw.SCNBox
+	Geometry
 }
 
-// Unwrap returns the underlying [raw.SCNBox].
-func (x *Box) Unwrap() *raw.SCNBox { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Box) ID() objc.ID { return x.inner.Ptr() }
-
-// BoxFromID adopts an existing object pointer as a Box (nil for 0).
+// BoxFromID adopts an existing Objective-C object as a Box
+// (nil for 0), retaining it and registering a release finalizer.
 func BoxFromID(id objc.ID) *Box {
 	if id == 0 {
 		return nil
 	}
-	return &Box{inner: raw.SCNBoxFromID(id)}
+	x := &Box{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBox creates a new [Box].
+// boxAdopt wraps an Objective-C object that this code just created as a
+// Box (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func boxAdopt(id objc.ID) *Box {
+	if id == 0 {
+		return nil
+	}
+	x := &Box{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBox creates a new Box.
 func NewBox() *Box {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNBox")), objc.RegisterName("new"))
-	return &Box{inner: raw.SCNBoxFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNBox")), objc.RegisterName("new"))
+	return boxAdopt(_id)
 }
 
-// The extent of the box along its x-axis. Animatable.
-//
-// WithWidth sets the width property and returns the receiver for chaining.
+// WithWidth the extent of the box along its x-axis. Animatable.
 func (x *Box) WithWidth(width float64) *Box {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// The extent of the box along its y-axis. Animatable.
-//
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight the extent of the box along its y-axis. Animatable.
 func (x *Box) WithHeight(height float64) *Box {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The extent of the box along its z-axis. Animatable.
-//
-// WithLength sets the length property and returns the receiver for chaining.
+// WithLength the extent of the box along its z-axis. Animatable.
 func (x *Box) WithLength(length float64) *Box {
-	x.inner.SetLength(length)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// The radius of curvature for the edges and corners of the box. Animatable.
-//
-// WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
+// WithChamferRadius the radius of curvature for the edges and corners of the box. Animatable.
 func (x *Box) WithChamferRadius(chamferRadius float64) *Box {
-	x.inner.SetChamferRadius(chamferRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferRadius:"), chamferRadius)
 	return x
 }
 
-// The number of subdivisions in each face of the box along its x-axis. Animatable.
-//
-// WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
+// WithWidthSegmentCount the number of subdivisions in each face of the box along its x-axis. Animatable.
 func (x *Box) WithWidthSegmentCount(widthSegmentCount int) *Box {
-	x.inner.SetWidthSegmentCount(widthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthSegmentCount:"), widthSegmentCount)
 	return x
 }
 
-// The number of subdivisions in each face of the box along its y-axis. Animatable.
-//
-// WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
+// WithHeightSegmentCount the number of subdivisions in each face of the box along its y-axis. Animatable.
 func (x *Box) WithHeightSegmentCount(heightSegmentCount int) *Box {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
-// The number of subdivisions in each face of the box along its z-axis. Animatable.
-//
-// WithLengthSegmentCount sets the lengthSegmentCount property and returns the receiver for chaining.
+// WithLengthSegmentCount the number of subdivisions in each face of the box along its z-axis. Animatable.
 func (x *Box) WithLengthSegmentCount(lengthSegmentCount int) *Box {
-	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthSegmentCount:"), lengthSegmentCount)
 	return x
 }
 
-// The number of line segments used to create each rounded edge of the box. Animatable.
-//
-// WithChamferSegmentCount sets the chamferSegmentCount property and returns the receiver for chaining.
+// WithChamferSegmentCount the number of line segments used to create each rounded edge of the box. Animatable.
 func (x *Box) WithChamferSegmentCount(chamferSegmentCount int) *Box {
-	x.inner.SetChamferSegmentCount(chamferSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferSegmentCount:"), chamferSegmentCount)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a name associated with the geometry object.
 func (x *Box) WithName(name string) *Box {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (x *Box) WithMaterials(items ...*Material) *Box {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Box) WithFirstMaterial(firstMaterial *Material) *Box {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Box) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (x *Box) WithLevelsOfDetail(items ...*LevelOfDetail) *Box {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Box) WithTessellator(tessellator *GeometryTessellator) *Box {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Box) WithSubdivisionLevel(subdivisionLevel uint) *Box {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (x *Box) WithSubdivisionLevel(subdivisionLevel int) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Box) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Box) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property width @abstract The width of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Width calls the underlying Width.
+// Width the width of the box. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Box) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// SetWidth calls the underlying SetWidth.
+// SetWidth wraps the corresponding Objective-C method.
 func (x *Box) SetWidth(width float64) {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// @property height @abstract The height of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Height calls the underlying Height.
+// Height the height of the box. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Box) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
+// SetHeight wraps the corresponding Objective-C method.
 func (x *Box) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @property length @abstract The length of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Length calls the underlying Length.
+// Length the length of the box. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Box) Length() float64 {
-	return x.inner.Length()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// SetLength calls the underlying SetLength.
+// SetLength wraps the corresponding Objective-C method.
 func (x *Box) SetLength(length float64) {
-	x.inner.SetLength(length)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
 
-// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
-//
-// ChamferRadius calls the underlying ChamferRadius.
+// ChamferRadius the chamfer radius. Animatable. If the value is strictly less than 0, the geometry is empty. The default value is 0.
 func (x *Box) ChamferRadius() float64 {
-	return x.inner.ChamferRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("chamferRadius"))
+	return _r
 }
 
-// SetChamferRadius calls the underlying SetChamferRadius.
+// SetChamferRadius wraps the corresponding Objective-C method.
 func (x *Box) SetChamferRadius(chamferRadius float64) {
-	x.inner.SetChamferRadius(chamferRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferRadius:"), chamferRadius)
 }
 
-// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// WidthSegmentCount calls the underlying WidthSegmentCount.
+// WidthSegmentCount the number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Box) WidthSegmentCount() int {
-	return x.inner.WidthSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthSegmentCount"))
+	return _r
 }
 
-// SetWidthSegmentCount calls the underlying SetWidthSegmentCount.
+// SetWidthSegmentCount wraps the corresponding Objective-C method.
 func (x *Box) SetWidthSegmentCount(widthSegmentCount int) {
-	x.inner.SetWidthSegmentCount(widthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthSegmentCount:"), widthSegmentCount)
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// HeightSegmentCount calls the underlying HeightSegmentCount.
+// HeightSegmentCount the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Box) HeightSegmentCount() int {
-	return x.inner.HeightSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+	return _r
 }
 
-// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+// SetHeightSegmentCount wraps the corresponding Objective-C method.
 func (x *Box) SetHeightSegmentCount(heightSegmentCount int) {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
 
-// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// LengthSegmentCount calls the underlying LengthSegmentCount.
+// LengthSegmentCount the number of subdivisions along the Z axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Box) LengthSegmentCount() int {
-	return x.inner.LengthSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthSegmentCount"))
+	return _r
 }
 
-// SetLengthSegmentCount calls the underlying SetLengthSegmentCount.
+// SetLengthSegmentCount wraps the corresponding Objective-C method.
 func (x *Box) SetLengthSegmentCount(lengthSegmentCount int) {
-	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthSegmentCount:"), lengthSegmentCount)
 }
 
-// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
-//
-// ChamferSegmentCount calls the underlying ChamferSegmentCount.
+// ChamferSegmentCount the number of chamfer subdivisions. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
 func (x *Box) ChamferSegmentCount() int {
-	return x.inner.ChamferSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("chamferSegmentCount"))
+	return _r
 }
 
-// SetChamferSegmentCount calls the underlying SetChamferSegmentCount.
+// SetChamferSegmentCount wraps the corresponding Objective-C method.
 func (x *Box) SetChamferSegmentCount(chamferSegmentCount int) {
-	x.inner.SetChamferSegmentCount(chamferSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferSegmentCount:"), chamferSegmentCount)
 }
-
-func (x *Box) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Boxable is the interface implemented by [Box], for mocking and DI.
 type Boxable interface {
-	Unwrap() *raw.SCNBox
+	obj.Object
 	WithWidth(width float64) *Box
 	WithHeight(height float64) *Box
 	WithLength(length float64) *Box
@@ -313,11 +256,11 @@ type Boxable interface {
 	WithLengthSegmentCount(lengthSegmentCount int) *Box
 	WithChamferSegmentCount(chamferSegmentCount int) *Box
 	WithName(name string) *Box
-	WithMaterials(items ...*raw.SCNMaterial) *Box
+	WithMaterials(items ...*Material) *Box
 	WithFirstMaterial(firstMaterial *Material) *Box
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Box
 	WithTessellator(tessellator *GeometryTessellator) *Box
-	WithSubdivisionLevel(subdivisionLevel uint) *Box
+	WithSubdivisionLevel(subdivisionLevel int) *Box
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box
@@ -340,3 +283,5 @@ type Boxable interface {
 }
 
 var _ Boxable = (*Box)(nil)
+
+var _ GeometryProvider = (*Box)(nil)

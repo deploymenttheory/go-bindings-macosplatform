@@ -5,51 +5,65 @@
 package oslog
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A log entry.
+// LogEntryLog is an idiomatic wrapper over the Objective-C class OSLogEntryLog.
 //
-// LogEntryLog wraps [raw.OSLogEntryLog] with a fluent Go API.
+// It embeds [LogEntry], promoting that type's methods.
+//
+// A log entry.
 type LogEntryLog struct {
-	inner *raw.OSLogEntryLog
+	LogEntry
 }
 
-// Unwrap returns the underlying [raw.OSLogEntryLog].
-func (x *LogEntryLog) Unwrap() *raw.OSLogEntryLog { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogEntryLog) ID() objc.ID { return x.inner.Ptr() }
-
-// LogEntryLogFromID adopts an existing object pointer as a LogEntryLog (nil for 0).
+// LogEntryLogFromID adopts an existing Objective-C object as a LogEntryLog
+// (nil for 0), retaining it and registering a release finalizer.
 func LogEntryLogFromID(id objc.ID) *LogEntryLog {
 	if id == 0 {
 		return nil
 	}
-	return &LogEntryLog{inner: raw.OSLogEntryLogFromID(id)}
+	x := &LogEntryLog{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLogEntryLog creates a new [LogEntryLog].
+// logEntryLogAdopt wraps an Objective-C object that this code just created as a
+// LogEntryLog (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logEntryLogAdopt(id objc.ID) *LogEntryLog {
+	if id == 0 {
+		return nil
+	}
+	x := &LogEntryLog{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewLogEntryLog creates a new LogEntryLog.
 func NewLogEntryLog() *LogEntryLog {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogEntryLog")), objc.RegisterName("new"))
-	return &LogEntryLog{inner: raw.OSLogEntryLogFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEntryLog")), objc.RegisterName("new"))
+	return logEntryLogAdopt(_id)
 }
 
-// @property level @abstract The level of the entry, e.g., info, debug.
-//
-// Level calls the underlying Level.
-func (x *LogEntryLog) Level() OSLogEntryLogLevel {
-	return OSLogEntryLogLevel(x.inner.Level())
+// Level the level of the entry, e.g., info, debug.
+func (x *LogEntryLog) Level() LogEntryLogLevel {
+	_r := objc.Send[LogEntryLogLevel](objref.IDOf(x), objc.RegisterName("level"))
+	return _r
 }
-
-func (x *LogEntryLog) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
 
 // LogEntryLogable is the interface implemented by [LogEntryLog], for mocking and DI.
 type LogEntryLogable interface {
-	Unwrap() *raw.OSLogEntryLog
-	Level() OSLogEntryLogLevel
+	obj.Object
+	Level() LogEntryLogLevel
 }
 
 var _ LogEntryLogable = (*LogEntryLog)(nil)
+
+var _ LogEntryProvider = (*LogEntryLog)(nil)

@@ -5,130 +5,131 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WKWebExtensionCommand wraps [raw.WKWebExtensionCommand] with a fluent Go API.
+// WKWebExtensionCommand is an idiomatic wrapper over the Objective-C class WKWebExtensionCommand.
 type WKWebExtensionCommand struct {
-	inner *raw.WKWebExtensionCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKWebExtensionCommand].
-func (x *WKWebExtensionCommand) Unwrap() *raw.WKWebExtensionCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKWebExtensionCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// WKWebExtensionCommandFromID adopts an existing object pointer as a WKWebExtensionCommand (nil for 0).
+// WKWebExtensionCommandFromID adopts an existing Objective-C object as a WKWebExtensionCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func WKWebExtensionCommandFromID(id objc.ID) *WKWebExtensionCommand {
 	if id == 0 {
 		return nil
 	}
-	return &WKWebExtensionCommand{inner: raw.WKWebExtensionCommandFromID(id)}
-}
-
-// NewWKWebExtensionCommand creates a new [WKWebExtensionCommand].
-func NewWKWebExtensionCommand() *WKWebExtensionCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionCommand")), objc.RegisterName("new"))
-	return &WKWebExtensionCommand{inner: raw.WKWebExtensionCommandFromID(_id)}
-}
-
-// @abstract The primary key used to trigger the command, distinct from any modifier flags. @discussion This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
-//
-// WithActivationKey sets the activationKey property and returns the receiver for chaining.
-func (x *WKWebExtensionCommand) WithActivationKey(activationKey string) *WKWebExtensionCommand {
-	x.inner.SetActivationKey(foundation.NSStringStringWithUTF8String(activationKey))
+	x := &WKWebExtensionCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithModifierFlags sets the modifierFlags property and returns the receiver for chaining.
-func (x *WKWebExtensionCommand) WithModifierFlags(modifierFlags appkit.NSEventModifierFlags) *WKWebExtensionCommand {
-	x.inner.SetModifierFlags(modifierFlags)
-	return x
-}
-
-// @abstract The web extension context associated with the command.
-//
-// WebExtensionContext calls the underlying WebExtensionContext.
-func (x *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
-	_r := x.inner.WebExtensionContext()
-	if _r == nil {
+// wKWebExtensionCommandAdopt wraps an Objective-C object that this code just created as a
+// WKWebExtensionCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKWebExtensionCommandAdopt(id objc.ID) *WKWebExtensionCommand {
+	if id == 0 {
 		return nil
 	}
-	return &WKWebExtensionContext{inner: _r}
+	x := &WKWebExtensionCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract A unique identifier for the command.
-//
-// Identifier calls the underlying Identifier.
+// Description returns the object's -description text.
+func (x *WKWebExtensionCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKWebExtensionCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKWebExtensionCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebExtensionCommand) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKWebExtensionCommand creates a new WKWebExtensionCommand.
+func NewWKWebExtensionCommand() *WKWebExtensionCommand {
+	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionCommand")), objc.RegisterName("new"))
+	return wKWebExtensionCommandAdopt(_id)
+}
+
+// WithActivationKey the primary key used to trigger the command, distinct from any modifier flags. This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
+func (x *WKWebExtensionCommand) WithActivationKey(activationKey string) *WKWebExtensionCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivationKey:"), purego.NSString(activationKey))
+	return x
+}
+
+// WebExtensionContext the web extension context associated with the command.
+func (x *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webExtensionContext"))
+	return WKWebExtensionContextFromID(_r)
+}
+
+// Identifier a unique identifier for the command.
 func (x *WKWebExtensionCommand) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Descriptive title for the command aiding discoverability. @discussion This title can be displayed in user interface elements such as keyboard shortcuts lists or menu items to help users understand its purpose.
-//
-// Title calls the underlying Title.
+// Title descriptive title for the command aiding discoverability. This title can be displayed in user interface elements such as keyboard shortcuts lists or menu items to help users understand its purpose.
 func (x *WKWebExtensionCommand) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The primary key used to trigger the command, distinct from any modifier flags. @discussion This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
-//
-// ActivationKey calls the underlying ActivationKey.
+// ActivationKey the primary key used to trigger the command, distinct from any modifier flags. This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
 func (x *WKWebExtensionCommand) ActivationKey() string {
-	_r := x.inner.ActivationKey()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activationKey"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetActivationKey calls the underlying SetActivationKey.
+// SetActivationKey wraps the corresponding Objective-C method.
 func (x *WKWebExtensionCommand) SetActivationKey(activationKey string) {
-	x.inner.SetActivationKey(foundation.NSStringStringWithUTF8String(activationKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivationKey:"), purego.NSString(activationKey))
 }
 
-// ModifierFlags calls the underlying ModifierFlags.
-func (x *WKWebExtensionCommand) ModifierFlags() appkit.NSEventModifierFlags {
-	return x.inner.ModifierFlags()
-}
-
-// SetModifierFlags calls the underlying SetModifierFlags.
-func (x *WKWebExtensionCommand) SetModifierFlags(modifierFlags appkit.NSEventModifierFlags) {
-	x.inner.SetModifierFlags(modifierFlags)
-}
-
-// MenuItem calls the underlying MenuItem.
-func (x *WKWebExtensionCommand) MenuItem() *appkit.NSMenuItem {
-	return x.inner.MenuItem()
+// MenuItem wraps the corresponding Objective-C method.
+func (x *WKWebExtensionCommand) MenuItem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItem"))
+	return obj.Wrap(_r)
 }
 
 // WKWebExtensionCommandable is the interface implemented by [WKWebExtensionCommand], for mocking and DI.
 type WKWebExtensionCommandable interface {
-	Unwrap() *raw.WKWebExtensionCommand
+	obj.Object
 	WithActivationKey(activationKey string) *WKWebExtensionCommand
-	WithModifierFlags(modifierFlags appkit.NSEventModifierFlags) *WKWebExtensionCommand
 	WebExtensionContext() *WKWebExtensionContext
 	Identifier() string
 	Title() string
 	ActivationKey() string
 	SetActivationKey(activationKey string)
-	ModifierFlags() appkit.NSEventModifierFlags
-	SetModifierFlags(modifierFlags appkit.NSEventModifierFlags)
-	MenuItem() *appkit.NSMenuItem
+	MenuItem() obj.Object
 }
 
 var _ WKWebExtensionCommandable = (*WKWebExtensionCommand)(nil)

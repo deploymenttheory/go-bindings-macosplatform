@@ -5,104 +5,99 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable representation of inspectable details of an integrated timeline object.
+// PlayerItemIntegratedTimelineSnapshot is an idiomatic wrapper over the Objective-C class AVPlayerItemIntegratedTimelineSnapshot.
 //
-// PlayerItemIntegratedTimelineSnapshot wraps [raw.AVPlayerItemIntegratedTimelineSnapshot] with a fluent Go API.
+// An immutable representation of inspectable details of an integrated timeline object.
 type PlayerItemIntegratedTimelineSnapshot struct {
-	inner *raw.AVPlayerItemIntegratedTimelineSnapshot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemIntegratedTimelineSnapshot].
-func (x *PlayerItemIntegratedTimelineSnapshot) Unwrap() *raw.AVPlayerItemIntegratedTimelineSnapshot {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemIntegratedTimelineSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemIntegratedTimelineSnapshotFromID adopts an existing object pointer as a PlayerItemIntegratedTimelineSnapshot (nil for 0).
+// PlayerItemIntegratedTimelineSnapshotFromID adopts an existing Objective-C object as a PlayerItemIntegratedTimelineSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemIntegratedTimelineSnapshotFromID(id objc.ID) *PlayerItemIntegratedTimelineSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemIntegratedTimelineSnapshot{inner: raw.AVPlayerItemIntegratedTimelineSnapshotFromID(id)}
+	x := &PlayerItemIntegratedTimelineSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemIntegratedTimelineSnapshot creates a new [PlayerItemIntegratedTimelineSnapshot].
-func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnapshot {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemIntegratedTimelineSnapshot")), objc.RegisterName("new"))
-	return &PlayerItemIntegratedTimelineSnapshot{inner: raw.AVPlayerItemIntegratedTimelineSnapshotFromID(_id)}
-}
-
-// @method 	mapTime @abstract	Provides mapping from time to AVPlayerItemSegment and offset in segment. @param		time Time represented in the integrated time domain. @param		timeSegmentOut Output parameter for segment. @param		segmentOffsetOut Output parameter for offset in segment. @discussion Provides mapping from time to segment and offset in the segment's timeMapping target. For time that correlates to the start of multiple segments, this will return the first one.
-//
-// MapTimeToSegmentAtSegmentOffset calls the underlying MapTimeToSegmentAtSegmentOffset.
-func (x *PlayerItemIntegratedTimelineSnapshot) MapTimeToSegmentAtSegmentOffset(time_ coremedia.CMTime, timeSegmentOut *raw.AVPlayerItemSegment, segmentOffsetOut *coremedia.CMTime) {
-	x.inner.MapTimeToSegmentAtSegmentOffset(time_, timeSegmentOut, segmentOffsetOut)
-}
-
-// @property	duration @abstract	Returns the duration totaling the primary item and scheduled interstitial events. @discussion This property returns the duration totaling the primary item and scheduled interstitial events and taking into account the interstitial event's playoutLimit and resumption offset. Before loading the duration of the primary item, the value of this property is kCMTimeInvalid. For livestreams, this value will be kCMTimeIndefinite.
-//
-// Duration calls the underlying Duration.
-func (x *PlayerItemIntegratedTimelineSnapshot) Duration() coremedia.CMTime {
-	return x.inner.Duration()
-}
-
-// @property	currentSegment @abstract	Returns the current AVPlayerItemSegment playback is traversing.
-//
-// CurrentSegment calls the underlying CurrentSegment.
-func (x *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
-	_r := x.inner.CurrentSegment()
-	if _r == nil {
+// playerItemIntegratedTimelineSnapshotAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemIntegratedTimelineSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemIntegratedTimelineSnapshotAdopt(id objc.ID) *PlayerItemIntegratedTimelineSnapshot {
+	if id == 0 {
 		return nil
 	}
-	return &PlayerItemSegment{inner: _r}
+	x := &PlayerItemIntegratedTimelineSnapshot{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property	segments @abstract	Returns an array of AVPlayerItemSegment for the snapshot. @discussion Returns an array of AVPlayerItemSegment. The segments are presented in chronological order, contiguous from the previous element, and non-overlapping.
+// Description returns the object's -description text.
+func (x *PlayerItemIntegratedTimelineSnapshot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemIntegratedTimelineSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemIntegratedTimelineSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemIntegratedTimelineSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerItemIntegratedTimelineSnapshot creates a new PlayerItemIntegratedTimelineSnapshot.
+func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnapshot {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemIntegratedTimelineSnapshot")), objc.RegisterName("new"))
+	return playerItemIntegratedTimelineSnapshotAdopt(_id)
+}
+
+// CurrentSegment returns the current AVPlayerItemSegment playback is traversing.
+func (x *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSegment"))
+	return PlayerItemSegmentFromID(_r)
+}
+
+// Segments returns an array of AVPlayerItemSegment for the snapshot. Returns an array of AVPlayerItemSegment. The segments are presented in chronological order, contiguous from the previous element, and non-overlapping.
 //
 // Segments returns the collection as a Go slice.
 func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
-	arr := x.inner.Segments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemSegment {
-		return &PlayerItemSegment{inner: raw.AVPlayerItemSegmentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemSegment { return PlayerItemSegmentFromID(_id) })
 }
 
-// @property	currentTime @abstract	Returns the current time on the integrated timeline when the snapshot was taken. @discussion Returns the current time on the integrated timeline when the snapshot was taken. CurrentTime will not change as playback progresses.
-//
-// CurrentTime calls the underlying CurrentTime.
-func (x *PlayerItemIntegratedTimelineSnapshot) CurrentTime() coremedia.CMTime {
-	return x.inner.CurrentTime()
-}
-
-// @property	currentDate @abstract	Returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
-//
-// CurrentDate calls the underlying CurrentDate.
-func (x *PlayerItemIntegratedTimelineSnapshot) CurrentDate() *foundation.NSDate {
-	return x.inner.CurrentDate()
+// CurrentDate returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
+func (x *PlayerItemIntegratedTimelineSnapshot) CurrentDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
+	return obj.Wrap(_r)
 }
 
 // PlayerItemIntegratedTimelineSnapshotable is the interface implemented by [PlayerItemIntegratedTimelineSnapshot], for mocking and DI.
 type PlayerItemIntegratedTimelineSnapshotable interface {
-	Unwrap() *raw.AVPlayerItemIntegratedTimelineSnapshot
-	MapTimeToSegmentAtSegmentOffset(time_ coremedia.CMTime, timeSegmentOut *raw.AVPlayerItemSegment, segmentOffsetOut *coremedia.CMTime)
-	Duration() coremedia.CMTime
+	obj.Object
 	CurrentSegment() *PlayerItemSegment
 	Segments() []*PlayerItemSegment
-	CurrentTime() coremedia.CMTime
-	CurrentDate() *foundation.NSDate
+	CurrentDate() obj.Object
 }
 
 var _ PlayerItemIntegratedTimelineSnapshotable = (*PlayerItemIntegratedTimelineSnapshot)(nil)

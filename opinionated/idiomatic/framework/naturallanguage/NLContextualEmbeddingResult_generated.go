@@ -5,91 +5,90 @@
 package naturallanguage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the embedding vector result from applying a contextual embedding to a string.
+// ContextualEmbeddingResult is an idiomatic wrapper over the Objective-C class NLContextualEmbeddingResult.
 //
-// ContextualEmbeddingResult wraps [raw.NLContextualEmbeddingResult] with a fluent Go API.
+// An object that represents the embedding vector result from applying a contextual embedding to a string.
 type ContextualEmbeddingResult struct {
-	inner *raw.NLContextualEmbeddingResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NLContextualEmbeddingResult].
-func (x *ContextualEmbeddingResult) Unwrap() *raw.NLContextualEmbeddingResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContextualEmbeddingResult) ID() objc.ID { return x.inner.Ptr() }
-
-// ContextualEmbeddingResultFromID adopts an existing object pointer as a ContextualEmbeddingResult (nil for 0).
+// ContextualEmbeddingResultFromID adopts an existing Objective-C object as a ContextualEmbeddingResult
+// (nil for 0), retaining it and registering a release finalizer.
 func ContextualEmbeddingResultFromID(id objc.ID) *ContextualEmbeddingResult {
 	if id == 0 {
 		return nil
 	}
-	return &ContextualEmbeddingResult{inner: raw.NLContextualEmbeddingResultFromID(id)}
+	x := &ContextualEmbeddingResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContextualEmbeddingResult creates a new [ContextualEmbeddingResult].
-func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NLContextualEmbeddingResult")), objc.RegisterName("new"))
-	return &ContextualEmbeddingResult{inner: raw.NLContextualEmbeddingResultFromID(_id)}
+// contextualEmbeddingResultAdopt wraps an Objective-C object that this code just created as a
+// ContextualEmbeddingResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contextualEmbeddingResultAdopt(id objc.ID) *ContextualEmbeddingResult {
+	if id == 0 {
+		return nil
+	}
+	x := &ContextualEmbeddingResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Iterates over the embedding vectors corresponding to the subword tokens within the specified range of the input string.
-//
-// EnumerateTokenVectorsInRangeUsing calls the underlying EnumerateTokenVectorsInRangeUsing.
-func (x *ContextualEmbeddingResult) EnumerateTokenVectorsInRangeUsing(range_ foundation.NSRange, block objc.Block) {
-	x.inner.EnumerateTokenVectorsInRangeUsing(range_, block)
+// Description returns the object's -description text.
+func (x *ContextualEmbeddingResult) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a token vector at the specified character index.
-//
-// TokenVectorAtIndexTokenRange calls the underlying TokenVectorAtIndexTokenRange.
-func (x *ContextualEmbeddingResult) TokenVectorAtIndexTokenRange(characterIndex uint, tokenRange *foundation.NSRange) *foundation.NSArray[*foundation.NSNumber] {
-	return x.inner.TokenVectorAtIndexTokenRange(characterIndex, tokenRange)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContextualEmbeddingResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// A copy of the input string used to generate the embedding vectors.
-//
-// String calls the underlying String.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContextualEmbeddingResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
 func (x *ContextualEmbeddingResult) String() string {
-	_r := x.inner.String()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+	return rt.Description(objref.IDOf(x))
 }
 
-// The language that the framework identified or used when processing the input string.
-//
-// Language calls the underlying Language.
-func (x *ContextualEmbeddingResult) Language() string {
-	_r := x.inner.Language()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// NewContextualEmbeddingResult creates a new ContextualEmbeddingResult.
+func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
+	_id := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbeddingResult")), objc.RegisterName("new"))
+	return contextualEmbeddingResultAdopt(_id)
 }
 
-// The number of embedding vectors the request generates.
-//
-// SequenceLength calls the underlying SequenceLength.
-func (x *ContextualEmbeddingResult) SequenceLength() uint {
-	return x.inner.SequenceLength()
+// Language the language that the framework identified or used when processing the input string.
+func (x *ContextualEmbeddingResult) Language() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	return obj.Wrap(_r)
+}
+
+// SequenceLength the number of embedding vectors the request generates.
+func (x *ContextualEmbeddingResult) SequenceLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sequenceLength"))
+	return _r
 }
 
 // ContextualEmbeddingResultable is the interface implemented by [ContextualEmbeddingResult], for mocking and DI.
 type ContextualEmbeddingResultable interface {
-	Unwrap() *raw.NLContextualEmbeddingResult
-	EnumerateTokenVectorsInRangeUsing(range_ foundation.NSRange, block objc.Block)
-	TokenVectorAtIndexTokenRange(characterIndex uint, tokenRange *foundation.NSRange) *foundation.NSArray[*foundation.NSNumber]
-	String() string
-	Language() string
-	SequenceLength() uint
+	obj.Object
+	Language() obj.Object
+	SequenceLength() int
 }
 
 var _ ContextualEmbeddingResultable = (*ContextualEmbeddingResult)(nil)

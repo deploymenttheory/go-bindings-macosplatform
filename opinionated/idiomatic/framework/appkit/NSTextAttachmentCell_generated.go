@@ -5,409 +5,324 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements the functionality of the text attachment cell protocol.
+// TextAttachmentCell is an idiomatic wrapper over the Objective-C class NSTextAttachmentCell.
 //
-// TextAttachmentCell wraps [raw.NSTextAttachmentCell] with a fluent Go API.
+// It embeds [Cell], promoting that type's methods.
+//
+// An object that implements the functionality of the text attachment cell protocol.
 type TextAttachmentCell struct {
-	inner *raw.NSTextAttachmentCell
+	Cell
 }
 
-// Unwrap returns the underlying [raw.NSTextAttachmentCell].
-func (x *TextAttachmentCell) Unwrap() *raw.NSTextAttachmentCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextAttachmentCell) ID() objc.ID { return x.inner.Ptr() }
-
-// TextAttachmentCellFromID adopts an existing object pointer as a TextAttachmentCell (nil for 0).
+// TextAttachmentCellFromID adopts an existing Objective-C object as a TextAttachmentCell
+// (nil for 0), retaining it and registering a release finalizer.
 func TextAttachmentCellFromID(id objc.ID) *TextAttachmentCell {
 	if id == 0 {
 		return nil
 	}
-	return &TextAttachmentCell{inner: raw.NSTextAttachmentCellFromID(id)}
+	x := &TextAttachmentCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextAttachmentCell creates a new [TextAttachmentCell].
+// textAttachmentCellAdopt wraps an Objective-C object that this code just created as a
+// TextAttachmentCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textAttachmentCellAdopt(id objc.ID) *TextAttachmentCell {
+	if id == 0 {
+		return nil
+	}
+	x := &TextAttachmentCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTextAttachmentCell creates a new TextAttachmentCell.
 func NewTextAttachmentCell() *TextAttachmentCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextAttachmentCell")), objc.RegisterName("new"))
-	return &TextAttachmentCell{inner: raw.NSTextAttachmentCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTextAttachmentCell")), objc.RegisterName("new"))
+	return textAttachmentCellAdopt(_id)
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *TextAttachmentCell) WithControlView(controlView ViewProvider) *TextAttachmentCell {
-	x.inner.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithType(type_ NSCellType) *TextAttachmentCell {
-	x.inner.NSCell.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *TextAttachmentCell) WithType(type_ CellType) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *TextAttachmentCell) WithState(state int) *TextAttachmentCell {
-	x.inner.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithTarget(target objc.ID) *TextAttachmentCell {
-	x.inner.NSCell.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *TextAttachmentCell) WithTarget(target obj.Object) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithAction(action objc.SEL) *TextAttachmentCell {
-	x.inner.NSCell.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *TextAttachmentCell) WithTag(tag int) *TextAttachmentCell {
-	x.inner.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *TextAttachmentCell) WithTitle(title string) *TextAttachmentCell {
-	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *TextAttachmentCell) WithEnabled(enabled bool) *TextAttachmentCell {
-	x.inner.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *TextAttachmentCell) WithContinuous(continuous bool) *TextAttachmentCell {
-	x.inner.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *TextAttachmentCell) WithEditable(editable bool) *TextAttachmentCell {
-	x.inner.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *TextAttachmentCell) WithSelectable(selectable bool) *TextAttachmentCell {
-	x.inner.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *TextAttachmentCell) WithBordered(bordered bool) *TextAttachmentCell {
-	x.inner.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *TextAttachmentCell) WithBezeled(bezeled bool) *TextAttachmentCell {
-	x.inner.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *TextAttachmentCell) WithScrollable(scrollable bool) *TextAttachmentCell {
-	x.inner.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *TextAttachmentCell) WithHighlighted(highlighted bool) *TextAttachmentCell {
-	x.inner.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithAlignment(alignment NSTextAlignment) *TextAttachmentCell {
-	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *TextAttachmentCell) WithAlignment(alignment TextAlignment) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *TextAttachmentCell) WithWraps(wraps bool) *TextAttachmentCell {
-	x.inner.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *TextAttachmentCell) WithFont(font *Font) *TextAttachmentCell {
-	x.inner.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithFormatter(formatter *foundation.NSFormatter) *TextAttachmentCell {
-	x.inner.NSCell.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *TextAttachmentCell) WithFormatter(formatter obj.Object) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithObjectValue(objectValue objc.ID) *TextAttachmentCell {
-	x.inner.NSCell.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *TextAttachmentCell) WithObjectValue(objectValue obj.Object) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *TextAttachmentCell) WithStringValue(stringValue string) *TextAttachmentCell {
-	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *TextAttachmentCell) WithIntValue(intValue int) *TextAttachmentCell {
-	x.inner.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *TextAttachmentCell) WithFloatValue(floatValue float32) *TextAttachmentCell {
-	x.inner.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *TextAttachmentCell) WithDoubleValue(doubleValue float64) *TextAttachmentCell {
-	x.inner.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *TextAttachmentCell) WithIntegerValue(integerValue int) *TextAttachmentCell {
-	x.inner.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *TextAttachmentCell) WithImage(image *Image) *TextAttachmentCell {
-	x.inner.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithControlSize(controlSize NSControlSize) *TextAttachmentCell {
-	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *TextAttachmentCell) WithControlSize(controlSize ControlSize) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithRepresentedObject(representedObject objc.ID) *TextAttachmentCell {
-	x.inner.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *TextAttachmentCell) WithRepresentedObject(representedObject obj.Object) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *TextAttachmentCell) WithMenu(menu *Menu) *TextAttachmentCell {
-	x.inner.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *TextAttachmentCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextAttachmentCell {
-	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextAttachmentCell {
-	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *TextAttachmentCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextAttachmentCell {
-	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *TextAttachmentCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *TextAttachmentCell) WithAllowsUndo(allowsUndo bool) *TextAttachmentCell {
-	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *TextAttachmentCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextAttachmentCell {
-	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextAttachmentCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *TextAttachmentCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *TextAttachmentCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextAttachmentCell {
-	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *TextAttachmentCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextAttachmentCell {
-	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *TextAttachmentCell) WithShowsFirstResponder(showsFirstResponder bool) *TextAttachmentCell {
-	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithFocusRingType(focusRingType NSFocusRingType) *TextAttachmentCell {
-	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *TextAttachmentCell) WithFocusRingType(focusRingType FocusRingType) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextAttachmentCell {
-	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *TextAttachmentCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *TextAttachmentCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextAttachmentCell {
-	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *TextAttachmentCell) WithImportsGraphics(importsGraphics bool) *TextAttachmentCell {
-	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *TextAttachmentCell) WithAllowsMixedState(allowsMixedState bool) *TextAttachmentCell {
-	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TextAttachmentCell {
-	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *TextAttachmentCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TextAttachmentCell) WithControlTint(controlTint NSControlTint) *TextAttachmentCell {
-	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *TextAttachmentCell) WithControlTint(controlTint ControlTint) *TextAttachmentCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
-
-func (x *TextAttachmentCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 
 // TextAttachmentCellable is the interface implemented by [TextAttachmentCell], for mocking and DI.
 type TextAttachmentCellable interface {
-	Unwrap() *raw.NSTextAttachmentCell
+	obj.Object
 	WithControlView(controlView ViewProvider) *TextAttachmentCell
-	WithType(type_ NSCellType) *TextAttachmentCell
+	WithType(type_ CellType) *TextAttachmentCell
 	WithState(state int) *TextAttachmentCell
-	WithTarget(target objc.ID) *TextAttachmentCell
-	WithAction(action objc.SEL) *TextAttachmentCell
+	WithTarget(target obj.Object) *TextAttachmentCell
 	WithTag(tag int) *TextAttachmentCell
 	WithTitle(title string) *TextAttachmentCell
 	WithEnabled(enabled bool) *TextAttachmentCell
@@ -418,36 +333,38 @@ type TextAttachmentCellable interface {
 	WithBezeled(bezeled bool) *TextAttachmentCell
 	WithScrollable(scrollable bool) *TextAttachmentCell
 	WithHighlighted(highlighted bool) *TextAttachmentCell
-	WithAlignment(alignment NSTextAlignment) *TextAttachmentCell
+	WithAlignment(alignment TextAlignment) *TextAttachmentCell
 	WithWraps(wraps bool) *TextAttachmentCell
 	WithFont(font *Font) *TextAttachmentCell
-	WithFormatter(formatter *foundation.NSFormatter) *TextAttachmentCell
-	WithObjectValue(objectValue objc.ID) *TextAttachmentCell
+	WithFormatter(formatter obj.Object) *TextAttachmentCell
+	WithObjectValue(objectValue obj.Object) *TextAttachmentCell
 	WithStringValue(stringValue string) *TextAttachmentCell
 	WithIntValue(intValue int) *TextAttachmentCell
 	WithFloatValue(floatValue float32) *TextAttachmentCell
 	WithDoubleValue(doubleValue float64) *TextAttachmentCell
 	WithIntegerValue(integerValue int) *TextAttachmentCell
 	WithImage(image *Image) *TextAttachmentCell
-	WithControlSize(controlSize NSControlSize) *TextAttachmentCell
-	WithRepresentedObject(representedObject objc.ID) *TextAttachmentCell
+	WithControlSize(controlSize ControlSize) *TextAttachmentCell
+	WithRepresentedObject(representedObject obj.Object) *TextAttachmentCell
 	WithMenu(menu *Menu) *TextAttachmentCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextAttachmentCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextAttachmentCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextAttachmentCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextAttachmentCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *TextAttachmentCell
 	WithAllowsUndo(allowsUndo bool) *TextAttachmentCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextAttachmentCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextAttachmentCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextAttachmentCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TextAttachmentCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TextAttachmentCell
 	WithShowsFirstResponder(showsFirstResponder bool) *TextAttachmentCell
-	WithFocusRingType(focusRingType NSFocusRingType) *TextAttachmentCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextAttachmentCell
+	WithFocusRingType(focusRingType FocusRingType) *TextAttachmentCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *TextAttachmentCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextAttachmentCell
 	WithImportsGraphics(importsGraphics bool) *TextAttachmentCell
 	WithAllowsMixedState(allowsMixedState bool) *TextAttachmentCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TextAttachmentCell
-	WithControlTint(controlTint NSControlTint) *TextAttachmentCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextAttachmentCell
+	WithControlTint(controlTint ControlTint) *TextAttachmentCell
 }
 
 var _ TextAttachmentCellable = (*TextAttachmentCell)(nil)
+
+var _ CellProvider = (*TextAttachmentCell)(nil)

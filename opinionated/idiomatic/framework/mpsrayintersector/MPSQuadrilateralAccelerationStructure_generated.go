@@ -5,199 +5,135 @@
 package mpsrayintersector
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// QuadrilateralAccelerationStructure wraps [raw.MPSQuadrilateralAccelerationStructure] with a fluent Go API.
+// QuadrilateralAccelerationStructure is an idiomatic wrapper over the Objective-C class MPSQuadrilateralAccelerationStructure.
+//
+// It embeds [PolygonAccelerationStructure], promoting that type's methods.
 type QuadrilateralAccelerationStructure struct {
-	inner *raw.MPSQuadrilateralAccelerationStructure
+	PolygonAccelerationStructure
 }
 
-// Unwrap returns the underlying [raw.MPSQuadrilateralAccelerationStructure].
-func (x *QuadrilateralAccelerationStructure) Unwrap() *raw.MPSQuadrilateralAccelerationStructure {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuadrilateralAccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
-
-// QuadrilateralAccelerationStructureFromID adopts an existing object pointer as a QuadrilateralAccelerationStructure (nil for 0).
+// QuadrilateralAccelerationStructureFromID adopts an existing Objective-C object as a QuadrilateralAccelerationStructure
+// (nil for 0), retaining it and registering a release finalizer.
 func QuadrilateralAccelerationStructureFromID(id objc.ID) *QuadrilateralAccelerationStructure {
 	if id == 0 {
 		return nil
 	}
-	return &QuadrilateralAccelerationStructure{inner: raw.MPSQuadrilateralAccelerationStructureFromID(id)}
+	x := &QuadrilateralAccelerationStructure{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQuadrilateralAccelerationStructure creates a new [QuadrilateralAccelerationStructure].
+// quadrilateralAccelerationStructureAdopt wraps an Objective-C object that this code just created as a
+// QuadrilateralAccelerationStructure (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quadrilateralAccelerationStructureAdopt(id objc.ID) *QuadrilateralAccelerationStructure {
+	if id == 0 {
+		return nil
+	}
+	x := &QuadrilateralAccelerationStructure{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewQuadrilateralAccelerationStructure creates a new QuadrilateralAccelerationStructure.
 func NewQuadrilateralAccelerationStructure() *QuadrilateralAccelerationStructure {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSQuadrilateralAccelerationStructure")), objc.RegisterName("new"))
-	return &QuadrilateralAccelerationStructure{inner: raw.MPSQuadrilateralAccelerationStructureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSQuadrilateralAccelerationStructure")), objc.RegisterName("new"))
+	return quadrilateralAccelerationStructureAdopt(_id)
 }
 
-// @brief Number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
-//
-// WithQuadrilateralCount sets the quadrilateralCount property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilateralCount uint) *QuadrilateralAccelerationStructure {
-	x.inner.SetQuadrilateralCount(quadrilateralCount)
+// WithQuadrilateralCount number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
+func (x *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilateralCount int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralCount:"), quadrilateralCount)
 	return x
 }
 
-// @brief The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
-//
-// WithPolygonType sets the polygonType property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithPolygonType(polygonType MPSPolygonType) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(raw.MPSPolygonType(polygonType))
+// WithPolygonType the type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
+func (x *QuadrilateralAccelerationStructure) WithPolygonType(polygonType PolygonType) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonType:"), polygonType)
 	return x
 }
 
-// @brief Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. @discussion This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
-//
-// WithVertexStride sets the vertexStride property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithVertexStride(vertexStride uint) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetVertexStride(vertexStride)
+// WithVertexStride offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
+func (x *QuadrilateralAccelerationStructure) WithVertexStride(vertexStride int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
 	return x
 }
 
-// @brief Index type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and MPSDataTypeUInt32 are supported.
-//
-// WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithIndexType(indexType mpscore.MPSDataType) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetIndexType(indexType)
+// WithVertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *QuadrilateralAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 	return x
 }
 
-// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex. This is an alias for polygonBuffers[0].vertexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetVertexBuffer(vertexBuffer)
+// WithIndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *QuadrilateralAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
 	return x
 }
 
-// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset uint) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetVertexBufferOffset(vertexBufferOffset)
+// WithMaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *QuadrilateralAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 	return x
 }
 
-// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil. This is an alias for polygonBuffers[0].indexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithIndexBuffer(indexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetIndexBuffer(indexBuffer)
+// WithPolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *QuadrilateralAccelerationStructure) WithPolygonCount(polygonCount int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 	return x
 }
 
-// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithIndexBufferOffset(indexBufferOffset uint) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetIndexBufferOffset(indexBufferOffset)
+// WithPolygonBuffers array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
+func (x *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...*PolygonBuffer) *QuadrilateralAccelerationStructure {
+	_arr := purego.SliceToNSArray(items, func(_v *PolygonBuffer) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonBuffers:"), _arr)
 	return x
 }
 
-// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used. This is an alias for polygonBuffers[0].maskBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithMaskBuffer(maskBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetMaskBuffer(maskBuffer)
+// WithUsage acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
+func (x *QuadrilateralAccelerationStructure) WithUsage(usage AccelerationStructureUsage) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithMaskBufferOffset(maskBufferOffset uint) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetMaskBufferOffset(maskBufferOffset)
-	return x
+// QuadrilateralCount number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
+func (x *QuadrilateralAccelerationStructure) QuadrilateralCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quadrilateralCount"))
+	return _r
 }
 
-// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithPolygonCount(polygonCount uint) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonCount(polygonCount)
-	return x
-}
-
-// @brief Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
-//
-// WithPolygonBuffers sets the collection, converting the Go slice to an NSArray.
-func (x *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *QuadrilateralAccelerationStructure {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(_arr)
-	return x
-}
-
-// @brief Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
-	return x
-}
-
-// @brief Number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
-//
-// QuadrilateralCount calls the underlying QuadrilateralCount.
-func (x *QuadrilateralAccelerationStructure) QuadrilateralCount() uint {
-	return x.inner.QuadrilateralCount()
-}
-
-// SetQuadrilateralCount calls the underlying SetQuadrilateralCount.
-func (x *QuadrilateralAccelerationStructure) SetQuadrilateralCount(quadrilateralCount uint) {
-	x.inner.SetQuadrilateralCount(quadrilateralCount)
-}
-
-func (x *QuadrilateralAccelerationStructure) asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure {
-	return &x.inner.MPSPolygonAccelerationStructure
-}
-
-func (x *QuadrilateralAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure {
-	return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure
+// SetQuadrilateralCount wraps the corresponding Objective-C method.
+func (x *QuadrilateralAccelerationStructure) SetQuadrilateralCount(quadrilateralCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralCount:"), quadrilateralCount)
 }
 
 // QuadrilateralAccelerationStructureable is the interface implemented by [QuadrilateralAccelerationStructure], for mocking and DI.
 type QuadrilateralAccelerationStructureable interface {
-	Unwrap() *raw.MPSQuadrilateralAccelerationStructure
-	WithQuadrilateralCount(quadrilateralCount uint) *QuadrilateralAccelerationStructure
-	WithPolygonType(polygonType MPSPolygonType) *QuadrilateralAccelerationStructure
-	WithVertexStride(vertexStride uint) *QuadrilateralAccelerationStructure
-	WithIndexType(indexType mpscore.MPSDataType) *QuadrilateralAccelerationStructure
-	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
-	WithVertexBufferOffset(vertexBufferOffset uint) *QuadrilateralAccelerationStructure
-	WithIndexBuffer(indexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
-	WithIndexBufferOffset(indexBufferOffset uint) *QuadrilateralAccelerationStructure
-	WithMaskBuffer(maskBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
-	WithMaskBufferOffset(maskBufferOffset uint) *QuadrilateralAccelerationStructure
-	WithPolygonCount(polygonCount uint) *QuadrilateralAccelerationStructure
-	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *QuadrilateralAccelerationStructure
-	WithUsage(usage MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure
-	QuadrilateralCount() uint
-	SetQuadrilateralCount(quadrilateralCount uint)
+	obj.Object
+	WithQuadrilateralCount(quadrilateralCount int) *QuadrilateralAccelerationStructure
+	WithPolygonType(polygonType PolygonType) *QuadrilateralAccelerationStructure
+	WithVertexStride(vertexStride int) *QuadrilateralAccelerationStructure
+	WithVertexBufferOffset(vertexBufferOffset int) *QuadrilateralAccelerationStructure
+	WithIndexBufferOffset(indexBufferOffset int) *QuadrilateralAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset int) *QuadrilateralAccelerationStructure
+	WithPolygonCount(polygonCount int) *QuadrilateralAccelerationStructure
+	WithPolygonBuffers(items ...*PolygonBuffer) *QuadrilateralAccelerationStructure
+	WithUsage(usage AccelerationStructureUsage) *QuadrilateralAccelerationStructure
+	QuadrilateralCount() int
+	SetQuadrilateralCount(quadrilateralCount int)
 }
 
 var _ QuadrilateralAccelerationStructureable = (*QuadrilateralAccelerationStructure)(nil)
+
+var _ PolygonAccelerationStructureProvider = (*QuadrilateralAccelerationStructure)(nil)
+
+var _ AccelerationStructureProvider = (*QuadrilateralAccelerationStructure)(nil)

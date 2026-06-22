@@ -5,72 +5,67 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNPoolingAverageGradientNode wraps [raw.MPSCNNPoolingAverageGradientNode] with a fluent Go API.
+// CNNPoolingAverageGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingAverageGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
 type CNNPoolingAverageGradientNode struct {
-	inner *raw.MPSCNNPoolingAverageGradientNode
+	CNNPoolingGradientNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNPoolingAverageGradientNode].
-func (x *CNNPoolingAverageGradientNode) Unwrap() *raw.MPSCNNPoolingAverageGradientNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNPoolingAverageGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNPoolingAverageGradientNodeFromID adopts an existing object pointer as a CNNPoolingAverageGradientNode (nil for 0).
+// CNNPoolingAverageGradientNodeFromID adopts an existing Objective-C object as a CNNPoolingAverageGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNPoolingAverageGradientNodeFromID(id objc.ID) *CNNPoolingAverageGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNPoolingAverageGradientNode{inner: raw.MPSCNNPoolingAverageGradientNodeFromID(id)}
+	x := &CNNPoolingAverageGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNPoolingAverageGradientNode creates a new [CNNPoolingAverageGradientNode].
+// cNNPoolingAverageGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNPoolingAverageGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNPoolingAverageGradientNodeAdopt(id objc.ID) *CNNPoolingAverageGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNPoolingAverageGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNPoolingAverageGradientNode creates a new CNNPoolingAverageGradientNode.
 func NewCNNPoolingAverageGradientNode() *CNNPoolingAverageGradientNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNPoolingAverageGradientNode")), objc.RegisterName("new"))
-	return &CNNPoolingAverageGradientNode{inner: raw.MPSCNNPoolingAverageGradientNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingAverageGradientNode")), objc.RegisterName("new"))
+	return cNNPoolingAverageGradientNodeAdopt(_id)
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNPoolingAverageGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingAverageGradientNode {
-	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingAverageGradientNode) WithLabel(label string) *CNNPoolingAverageGradientNode {
-	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNPoolingAverageGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode {
-	return &x.inner.MPSCNNPoolingGradientNode
-}
-
-func (x *CNNPoolingAverageGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode
-}
-
-func (x *CNNPoolingAverageGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // CNNPoolingAverageGradientNodeable is the interface implemented by [CNNPoolingAverageGradientNode], for mocking and DI.
 type CNNPoolingAverageGradientNodeable interface {
-	Unwrap() *raw.MPSCNNPoolingAverageGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingAverageGradientNode
+	obj.Object
 	WithLabel(label string) *CNNPoolingAverageGradientNode
 }
 
 var _ CNNPoolingAverageGradientNodeable = (*CNNPoolingAverageGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNPoolingAverageGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNPoolingAverageGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingAverageGradientNode)(nil)

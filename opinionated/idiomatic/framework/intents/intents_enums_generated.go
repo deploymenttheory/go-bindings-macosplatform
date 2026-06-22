@@ -9,239 +9,251 @@ import (
 	"strings"
 )
 
-type INAnswerCallIntentResponseCode int64
+type AnswerCallIntentResponseCode int64
 
 const (
-	INAnswerCallIntentResponseCodeUnspecified               INAnswerCallIntentResponseCode = 0
-	INAnswerCallIntentResponseCodeReady                     INAnswerCallIntentResponseCode = 1
-	INAnswerCallIntentResponseCodeContinueInApp             INAnswerCallIntentResponseCode = 2
-	INAnswerCallIntentResponseCodeInProgress                INAnswerCallIntentResponseCode = 3
-	INAnswerCallIntentResponseCodeSuccess                   INAnswerCallIntentResponseCode = 4
-	INAnswerCallIntentResponseCodeFailure                   INAnswerCallIntentResponseCode = 5
-	INAnswerCallIntentResponseCodeFailureRequiringAppLaunch INAnswerCallIntentResponseCode = 6
+	AnswerCallIntentResponseCodeUnspecified               AnswerCallIntentResponseCode = 0
+	AnswerCallIntentResponseCodeReady                     AnswerCallIntentResponseCode = 1
+	AnswerCallIntentResponseCodeContinueInApp             AnswerCallIntentResponseCode = 2
+	AnswerCallIntentResponseCodeInProgress                AnswerCallIntentResponseCode = 3
+	AnswerCallIntentResponseCodeSuccess                   AnswerCallIntentResponseCode = 4
+	AnswerCallIntentResponseCodeFailure                   AnswerCallIntentResponseCode = 5
+	AnswerCallIntentResponseCodeFailureRequiringAppLaunch AnswerCallIntentResponseCode = 6
 )
 
-func (e INAnswerCallIntentResponseCode) String() string {
+// String returns the AnswerCallIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AnswerCallIntentResponseCode) String() string {
 	switch e {
-	case INAnswerCallIntentResponseCodeUnspecified:
-		return "INAnswerCallIntentResponseCodeUnspecified"
-	case INAnswerCallIntentResponseCodeReady:
-		return "INAnswerCallIntentResponseCodeReady"
-	case INAnswerCallIntentResponseCodeContinueInApp:
-		return "INAnswerCallIntentResponseCodeContinueInApp"
-	case INAnswerCallIntentResponseCodeInProgress:
-		return "INAnswerCallIntentResponseCodeInProgress"
-	case INAnswerCallIntentResponseCodeSuccess:
-		return "INAnswerCallIntentResponseCodeSuccess"
-	case INAnswerCallIntentResponseCodeFailure:
-		return "INAnswerCallIntentResponseCodeFailure"
-	case INAnswerCallIntentResponseCodeFailureRequiringAppLaunch:
-		return "INAnswerCallIntentResponseCodeFailureRequiringAppLaunch"
+	case AnswerCallIntentResponseCodeUnspecified:
+		return "AnswerCallIntentResponseCodeUnspecified"
+	case AnswerCallIntentResponseCodeReady:
+		return "AnswerCallIntentResponseCodeReady"
+	case AnswerCallIntentResponseCodeContinueInApp:
+		return "AnswerCallIntentResponseCodeContinueInApp"
+	case AnswerCallIntentResponseCodeInProgress:
+		return "AnswerCallIntentResponseCodeInProgress"
+	case AnswerCallIntentResponseCodeSuccess:
+		return "AnswerCallIntentResponseCodeSuccess"
+	case AnswerCallIntentResponseCodeFailure:
+		return "AnswerCallIntentResponseCodeFailure"
+	case AnswerCallIntentResponseCodeFailureRequiringAppLaunch:
+		return "AnswerCallIntentResponseCodeFailureRequiringAppLaunch"
 	default:
-		return fmt.Sprintf("INAnswerCallIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("AnswerCallIntentResponseCode(%d)", int64(e))
 	}
 }
 
 // Constants that describe the audio route for the call.
-type INCallAudioRoute int64
+type CallAudioRoute int64
 
 const (
 	// An unknown audio route.
-	INCallAudioRouteUnknown INCallAudioRoute = 0
+	CallAudioRouteUnknown CallAudioRoute = 0
 	// The device’s speakerphone mode.
-	INCallAudioRouteSpeakerphoneAudioRoute INCallAudioRoute = 1
+	CallAudioRouteSpeakerphoneAudioRoute CallAudioRoute = 1
 	// A connected Bluetooth device.
-	INCallAudioRouteBluetoothAudioRoute INCallAudioRoute = 2
+	CallAudioRouteBluetoothAudioRoute CallAudioRoute = 2
 )
 
-func (e INCallAudioRoute) String() string {
+// String returns the CallAudioRoute constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CallAudioRoute) String() string {
 	switch e {
-	case INCallAudioRouteUnknown:
-		return "INCallAudioRouteUnknown"
-	case INCallAudioRouteSpeakerphoneAudioRoute:
-		return "INCallAudioRouteSpeakerphoneAudioRoute"
-	case INCallAudioRouteBluetoothAudioRoute:
-		return "INCallAudioRouteBluetoothAudioRoute"
+	case CallAudioRouteUnknown:
+		return "CallAudioRouteUnknown"
+	case CallAudioRouteSpeakerphoneAudioRoute:
+		return "CallAudioRouteSpeakerphoneAudioRoute"
+	case CallAudioRouteBluetoothAudioRoute:
+		return "CallAudioRouteBluetoothAudioRoute"
 	default:
-		return fmt.Sprintf("INCallAudioRoute(%d)", int64(e))
+		return fmt.Sprintf("CallAudioRoute(%d)", int64(e))
 	}
 }
 
 // Constants indicating the capabilities of the call.
-type INCallCapability int64
+type CallCapability int64
 
 const (
 	// An unknown type of call.
-	INCallCapabilityUnknown INCallCapability = 0
+	CallCapabilityUnknown CallCapability = 0
 	// An audio call.
-	INCallCapabilityAudioCall INCallCapability = 1
+	CallCapabilityAudioCall CallCapability = 1
 	// A video call.
-	INCallCapabilityVideoCall INCallCapability = 2
+	CallCapabilityVideoCall CallCapability = 2
 )
 
-func (e INCallCapability) String() string {
+// String returns the CallCapability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CallCapability) String() string {
 	switch e {
-	case INCallCapabilityUnknown:
-		return "INCallCapabilityUnknown"
-	case INCallCapabilityAudioCall:
-		return "INCallCapabilityAudioCall"
-	case INCallCapabilityVideoCall:
-		return "INCallCapabilityVideoCall"
+	case CallCapabilityUnknown:
+		return "CallCapabilityUnknown"
+	case CallCapabilityAudioCall:
+		return "CallCapabilityAudioCall"
+	case CallCapabilityVideoCall:
+		return "CallCapabilityVideoCall"
 	default:
-		return fmt.Sprintf("INCallCapability(%d)", int64(e))
+		return fmt.Sprintf("CallCapability(%d)", int64(e))
 	}
 }
 
 // Constants describing the destination of a call.
-type INCallDestinationType int64
+type CallDestinationType int64
 
 const (
 	// An unknown call destination.
-	INCallDestinationTypeUnknown INCallDestinationType = 0
+	CallDestinationTypeUnknown CallDestinationType = 0
 	// A call routed to its expected destination.
-	INCallDestinationTypeNormal INCallDestinationType = 1
+	CallDestinationTypeNormal CallDestinationType = 1
 	// A call routed to an emergency number.
-	INCallDestinationTypeEmergency INCallDestinationType = 2
+	CallDestinationTypeEmergency CallDestinationType = 2
 	// A call routed to the user’s voicemail.
-	INCallDestinationTypeVoicemail INCallDestinationType = 3
+	CallDestinationTypeVoicemail CallDestinationType = 3
 	// A call that was the result of redialing a previous call.
-	INCallDestinationTypeRedial INCallDestinationType = 4
+	CallDestinationTypeRedial CallDestinationType = 4
 	// A call that was the result of a call back.
-	INCallDestinationTypeCallBack INCallDestinationType = 5
+	CallDestinationTypeCallBack CallDestinationType = 5
 	// A call routed to its expected destination.
 	//
 	// Deprecated: Use INCallDestinationTypeNormal instead
-	INCallDestinationTypeNormalDestination INCallDestinationType = 1
+	CallDestinationTypeNormalDestination CallDestinationType = 1
 	// A call routed to an emergency number.
 	//
 	// Deprecated: Use INCallDestinationTypeEmergency instead
-	INCallDestinationTypeEmergencyDestination INCallDestinationType = 2
+	CallDestinationTypeEmergencyDestination CallDestinationType = 2
 	// A call routed to the user’s voicemail.
 	//
 	// Deprecated: Use INCallDestinationTypeVoicemail instead
-	INCallDestinationTypeVoicemailDestination INCallDestinationType = 3
+	CallDestinationTypeVoicemailDestination CallDestinationType = 3
 	// A call that was the result of redialing a previous call.
 	//
 	// Deprecated: Use INCallDestinationTypeRedial instead
-	INCallDestinationTypeRedialDestination INCallDestinationType = 4
+	CallDestinationTypeRedialDestination CallDestinationType = 4
 )
 
-func (e INCallDestinationType) String() string {
+// String returns the CallDestinationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CallDestinationType) String() string {
 	switch e {
-	case INCallDestinationTypeUnknown:
-		return "INCallDestinationTypeUnknown"
-	case INCallDestinationTypeNormal:
-		return "INCallDestinationTypeNormal"
-	case INCallDestinationTypeEmergency:
-		return "INCallDestinationTypeEmergency"
-	case INCallDestinationTypeVoicemail:
-		return "INCallDestinationTypeVoicemail"
-	case INCallDestinationTypeRedial:
-		return "INCallDestinationTypeRedial"
-	case INCallDestinationTypeCallBack:
-		return "INCallDestinationTypeCallBack"
+	case CallDestinationTypeUnknown:
+		return "CallDestinationTypeUnknown"
+	case CallDestinationTypeNormal:
+		return "CallDestinationTypeNormal"
+	case CallDestinationTypeEmergency:
+		return "CallDestinationTypeEmergency"
+	case CallDestinationTypeVoicemail:
+		return "CallDestinationTypeVoicemail"
+	case CallDestinationTypeRedial:
+		return "CallDestinationTypeRedial"
+	case CallDestinationTypeCallBack:
+		return "CallDestinationTypeCallBack"
 	default:
-		return fmt.Sprintf("INCallDestinationType(%d)", int64(e))
+		return fmt.Sprintf("CallDestinationType(%d)", int64(e))
 	}
 }
 
 // Constants describing the type of the call.
-type INCallRecordType int64
+type CallRecordType int64
 
 const (
 	// An unknown type of call.
-	INCallRecordTypeUnknown INCallRecordType = 0
+	CallRecordTypeUnknown CallRecordType = 0
 	// A call initiated by the current user.
-	INCallRecordTypeOutgoing INCallRecordType = 1
+	CallRecordTypeOutgoing CallRecordType = 1
 	// A received call that the user did not answer.
-	INCallRecordTypeMissed INCallRecordType = 2
+	CallRecordTypeMissed CallRecordType = 2
 	// A received call that the user answered.
-	INCallRecordTypeReceived INCallRecordType = 3
+	CallRecordTypeReceived CallRecordType = 3
 	// The most recent call involving the user.
-	INCallRecordTypeLatest INCallRecordType = 4
+	CallRecordTypeLatest CallRecordType = 4
 	// A voicemail left from a missed call.
-	INCallRecordTypeVoicemail INCallRecordType = 5
+	CallRecordTypeVoicemail CallRecordType = 5
 	// An incoming call that is currently causing the user’s phone to ring.
-	INCallRecordTypeRinging INCallRecordType = 6
+	CallRecordTypeRinging CallRecordType = 6
 	// A received call that is currently in progress.
-	INCallRecordTypeInProgress INCallRecordType = 7
+	CallRecordTypeInProgress CallRecordType = 7
 	// A received call that the user has put on hold.
-	INCallRecordTypeOnHold INCallRecordType = 8
+	CallRecordTypeOnHold CallRecordType = 8
 )
 
-func (e INCallRecordType) String() string {
+// String returns the CallRecordType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CallRecordType) String() string {
 	switch e {
-	case INCallRecordTypeUnknown:
-		return "INCallRecordTypeUnknown"
-	case INCallRecordTypeOutgoing:
-		return "INCallRecordTypeOutgoing"
-	case INCallRecordTypeMissed:
-		return "INCallRecordTypeMissed"
-	case INCallRecordTypeReceived:
-		return "INCallRecordTypeReceived"
-	case INCallRecordTypeLatest:
-		return "INCallRecordTypeLatest"
-	case INCallRecordTypeVoicemail:
-		return "INCallRecordTypeVoicemail"
-	case INCallRecordTypeRinging:
-		return "INCallRecordTypeRinging"
-	case INCallRecordTypeInProgress:
-		return "INCallRecordTypeInProgress"
-	case INCallRecordTypeOnHold:
-		return "INCallRecordTypeOnHold"
+	case CallRecordTypeUnknown:
+		return "CallRecordTypeUnknown"
+	case CallRecordTypeOutgoing:
+		return "CallRecordTypeOutgoing"
+	case CallRecordTypeMissed:
+		return "CallRecordTypeMissed"
+	case CallRecordTypeReceived:
+		return "CallRecordTypeReceived"
+	case CallRecordTypeLatest:
+		return "CallRecordTypeLatest"
+	case CallRecordTypeVoicemail:
+		return "CallRecordTypeVoicemail"
+	case CallRecordTypeRinging:
+		return "CallRecordTypeRinging"
+	case CallRecordTypeInProgress:
+		return "CallRecordTypeInProgress"
+	case CallRecordTypeOnHold:
+		return "CallRecordTypeOnHold"
 	default:
-		return fmt.Sprintf("INCallRecordType(%d)", int64(e))
+		return fmt.Sprintf("CallRecordType(%d)", int64(e))
 	}
 }
 
 // Constants describing the types of calls to include during a search.
 // Bitmask — values may be combined with |.
-type INCallRecordTypeOptions uint64
+type CallRecordTypeOptions uint64
 
 const (
 	// A call initiated by the user.
-	INCallRecordTypeOptionOutgoing INCallRecordTypeOptions = 1
+	CallRecordTypeOptionOutgoing CallRecordTypeOptions = 1
 	// A call received by the user that went unanswered.
-	INCallRecordTypeOptionMissed INCallRecordTypeOptions = 2
+	CallRecordTypeOptionMissed CallRecordTypeOptions = 2
 	// A received call that the user answered.
-	INCallRecordTypeOptionReceived INCallRecordTypeOptions = 4
+	CallRecordTypeOptionReceived CallRecordTypeOptions = 4
 	// The most recent call involving the user.
-	INCallRecordTypeOptionLatest INCallRecordTypeOptions = 8
+	CallRecordTypeOptionLatest CallRecordTypeOptions = 8
 	// A voicemail left from a missed call.
-	INCallRecordTypeOptionVoicemail INCallRecordTypeOptions = 16
+	CallRecordTypeOptionVoicemail CallRecordTypeOptions = 16
 	// An incoming call that is currently causing the user’s phone to ring.
-	INCallRecordTypeOptionRinging INCallRecordTypeOptions = 32
+	CallRecordTypeOptionRinging CallRecordTypeOptions = 32
 	// A received call that is currently in progress.
-	INCallRecordTypeOptionInProgress INCallRecordTypeOptions = 64
+	CallRecordTypeOptionInProgress CallRecordTypeOptions = 64
 	// A received call that the user has put on hold.
-	INCallRecordTypeOptionOnHold INCallRecordTypeOptions = 128
+	CallRecordTypeOptionOnHold CallRecordTypeOptions = 128
 )
 
-func (e INCallRecordTypeOptions) String() string {
+// String returns the CallRecordTypeOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CallRecordTypeOptions) String() string {
 	var parts []string
-	if e&INCallRecordTypeOptionOutgoing != 0 {
-		parts = append(parts, "INCallRecordTypeOptionOutgoing")
+	if e&CallRecordTypeOptionOutgoing != 0 {
+		parts = append(parts, "CallRecordTypeOptionOutgoing")
 	}
-	if e&INCallRecordTypeOptionMissed != 0 {
-		parts = append(parts, "INCallRecordTypeOptionMissed")
+	if e&CallRecordTypeOptionMissed != 0 {
+		parts = append(parts, "CallRecordTypeOptionMissed")
 	}
-	if e&INCallRecordTypeOptionReceived != 0 {
-		parts = append(parts, "INCallRecordTypeOptionReceived")
+	if e&CallRecordTypeOptionReceived != 0 {
+		parts = append(parts, "CallRecordTypeOptionReceived")
 	}
-	if e&INCallRecordTypeOptionLatest != 0 {
-		parts = append(parts, "INCallRecordTypeOptionLatest")
+	if e&CallRecordTypeOptionLatest != 0 {
+		parts = append(parts, "CallRecordTypeOptionLatest")
 	}
-	if e&INCallRecordTypeOptionVoicemail != 0 {
-		parts = append(parts, "INCallRecordTypeOptionVoicemail")
+	if e&CallRecordTypeOptionVoicemail != 0 {
+		parts = append(parts, "CallRecordTypeOptionVoicemail")
 	}
-	if e&INCallRecordTypeOptionRinging != 0 {
-		parts = append(parts, "INCallRecordTypeOptionRinging")
+	if e&CallRecordTypeOptionRinging != 0 {
+		parts = append(parts, "CallRecordTypeOptionRinging")
 	}
-	if e&INCallRecordTypeOptionInProgress != 0 {
-		parts = append(parts, "INCallRecordTypeOptionInProgress")
+	if e&CallRecordTypeOptionInProgress != 0 {
+		parts = append(parts, "CallRecordTypeOptionInProgress")
 	}
-	if e&INCallRecordTypeOptionOnHold != 0 {
-		parts = append(parts, "INCallRecordTypeOptionOnHold")
+	if e&CallRecordTypeOptionOnHold != 0 {
+		parts = append(parts, "CallRecordTypeOptionOnHold")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -249,755 +261,797 @@ func (e INCallRecordTypeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type INEditMessageIntentResponseCode int64
+type EditMessageIntentResponseCode int64
 
 const (
-	INEditMessageIntentResponseCodeUnspecified                         INEditMessageIntentResponseCode = 0
-	INEditMessageIntentResponseCodeReady                               INEditMessageIntentResponseCode = 1
-	INEditMessageIntentResponseCodeInProgress                          INEditMessageIntentResponseCode = 2
-	INEditMessageIntentResponseCodeSuccess                             INEditMessageIntentResponseCode = 3
-	INEditMessageIntentResponseCodeFailure                             INEditMessageIntentResponseCode = 4
-	INEditMessageIntentResponseCodeFailureRequiringAppLaunch           INEditMessageIntentResponseCode = 5
-	INEditMessageIntentResponseCodeFailureMessageNotFound              INEditMessageIntentResponseCode = 6
-	INEditMessageIntentResponseCodeFailurePastEditTimeLimit            INEditMessageIntentResponseCode = 7
-	INEditMessageIntentResponseCodeFailureMessageTypeUnsupported       INEditMessageIntentResponseCode = 8
-	INEditMessageIntentResponseCodeFailureUnsupportedOnService         INEditMessageIntentResponseCode = 9
-	INEditMessageIntentResponseCodeFailureMessageServiceNotAvailable   INEditMessageIntentResponseCode = 10
-	INEditMessageIntentResponseCodeFailureRequiringInAppAuthentication INEditMessageIntentResponseCode = 11
+	EditMessageIntentResponseCodeUnspecified                         EditMessageIntentResponseCode = 0
+	EditMessageIntentResponseCodeReady                               EditMessageIntentResponseCode = 1
+	EditMessageIntentResponseCodeInProgress                          EditMessageIntentResponseCode = 2
+	EditMessageIntentResponseCodeSuccess                             EditMessageIntentResponseCode = 3
+	EditMessageIntentResponseCodeFailure                             EditMessageIntentResponseCode = 4
+	EditMessageIntentResponseCodeFailureRequiringAppLaunch           EditMessageIntentResponseCode = 5
+	EditMessageIntentResponseCodeFailureMessageNotFound              EditMessageIntentResponseCode = 6
+	EditMessageIntentResponseCodeFailurePastEditTimeLimit            EditMessageIntentResponseCode = 7
+	EditMessageIntentResponseCodeFailureMessageTypeUnsupported       EditMessageIntentResponseCode = 8
+	EditMessageIntentResponseCodeFailureUnsupportedOnService         EditMessageIntentResponseCode = 9
+	EditMessageIntentResponseCodeFailureMessageServiceNotAvailable   EditMessageIntentResponseCode = 10
+	EditMessageIntentResponseCodeFailureRequiringInAppAuthentication EditMessageIntentResponseCode = 11
 )
 
-func (e INEditMessageIntentResponseCode) String() string {
+// String returns the EditMessageIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EditMessageIntentResponseCode) String() string {
 	switch e {
-	case INEditMessageIntentResponseCodeUnspecified:
-		return "INEditMessageIntentResponseCodeUnspecified"
-	case INEditMessageIntentResponseCodeReady:
-		return "INEditMessageIntentResponseCodeReady"
-	case INEditMessageIntentResponseCodeInProgress:
-		return "INEditMessageIntentResponseCodeInProgress"
-	case INEditMessageIntentResponseCodeSuccess:
-		return "INEditMessageIntentResponseCodeSuccess"
-	case INEditMessageIntentResponseCodeFailure:
-		return "INEditMessageIntentResponseCodeFailure"
-	case INEditMessageIntentResponseCodeFailureRequiringAppLaunch:
-		return "INEditMessageIntentResponseCodeFailureRequiringAppLaunch"
-	case INEditMessageIntentResponseCodeFailureMessageNotFound:
-		return "INEditMessageIntentResponseCodeFailureMessageNotFound"
-	case INEditMessageIntentResponseCodeFailurePastEditTimeLimit:
-		return "INEditMessageIntentResponseCodeFailurePastEditTimeLimit"
-	case INEditMessageIntentResponseCodeFailureMessageTypeUnsupported:
-		return "INEditMessageIntentResponseCodeFailureMessageTypeUnsupported"
-	case INEditMessageIntentResponseCodeFailureUnsupportedOnService:
-		return "INEditMessageIntentResponseCodeFailureUnsupportedOnService"
-	case INEditMessageIntentResponseCodeFailureMessageServiceNotAvailable:
-		return "INEditMessageIntentResponseCodeFailureMessageServiceNotAvailable"
-	case INEditMessageIntentResponseCodeFailureRequiringInAppAuthentication:
-		return "INEditMessageIntentResponseCodeFailureRequiringInAppAuthentication"
+	case EditMessageIntentResponseCodeUnspecified:
+		return "EditMessageIntentResponseCodeUnspecified"
+	case EditMessageIntentResponseCodeReady:
+		return "EditMessageIntentResponseCodeReady"
+	case EditMessageIntentResponseCodeInProgress:
+		return "EditMessageIntentResponseCodeInProgress"
+	case EditMessageIntentResponseCodeSuccess:
+		return "EditMessageIntentResponseCodeSuccess"
+	case EditMessageIntentResponseCodeFailure:
+		return "EditMessageIntentResponseCodeFailure"
+	case EditMessageIntentResponseCodeFailureRequiringAppLaunch:
+		return "EditMessageIntentResponseCodeFailureRequiringAppLaunch"
+	case EditMessageIntentResponseCodeFailureMessageNotFound:
+		return "EditMessageIntentResponseCodeFailureMessageNotFound"
+	case EditMessageIntentResponseCodeFailurePastEditTimeLimit:
+		return "EditMessageIntentResponseCodeFailurePastEditTimeLimit"
+	case EditMessageIntentResponseCodeFailureMessageTypeUnsupported:
+		return "EditMessageIntentResponseCodeFailureMessageTypeUnsupported"
+	case EditMessageIntentResponseCodeFailureUnsupportedOnService:
+		return "EditMessageIntentResponseCodeFailureUnsupportedOnService"
+	case EditMessageIntentResponseCodeFailureMessageServiceNotAvailable:
+		return "EditMessageIntentResponseCodeFailureMessageServiceNotAvailable"
+	case EditMessageIntentResponseCodeFailureRequiringInAppAuthentication:
+		return "EditMessageIntentResponseCodeFailureRequiringInAppAuthentication"
 	default:
-		return fmt.Sprintf("INEditMessageIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("EditMessageIntentResponseCode(%d)", int64(e))
 	}
 }
 
 // A constant that indicates whether your app has authorization to access the user’s focus status.
-type INFocusStatusAuthorizationStatus int64
+type FocusStatusAuthorizationStatus int64
 
 const (
 	// The user hasn’t chosen whether to grant your app access to their focus status yet.
-	INFocusStatusAuthorizationStatusNotDetermined INFocusStatusAuthorizationStatus = 0
+	FocusStatusAuthorizationStatusNotDetermined FocusStatusAuthorizationStatus = 0
 	// A restriction prevents your app from accessing the user’s focus status.
-	INFocusStatusAuthorizationStatusRestricted INFocusStatusAuthorizationStatus = 1
+	FocusStatusAuthorizationStatusRestricted FocusStatusAuthorizationStatus = 1
 	// The user has denied your app access to their focus status.
-	INFocusStatusAuthorizationStatusDenied INFocusStatusAuthorizationStatus = 2
+	FocusStatusAuthorizationStatusDenied FocusStatusAuthorizationStatus = 2
 	// Your app has authorization to access the user’s focus status.
-	INFocusStatusAuthorizationStatusAuthorized INFocusStatusAuthorizationStatus = 3
+	FocusStatusAuthorizationStatusAuthorized FocusStatusAuthorizationStatus = 3
 )
 
-func (e INFocusStatusAuthorizationStatus) String() string {
+// String returns the FocusStatusAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FocusStatusAuthorizationStatus) String() string {
 	switch e {
-	case INFocusStatusAuthorizationStatusNotDetermined:
-		return "INFocusStatusAuthorizationStatusNotDetermined"
-	case INFocusStatusAuthorizationStatusRestricted:
-		return "INFocusStatusAuthorizationStatusRestricted"
-	case INFocusStatusAuthorizationStatusDenied:
-		return "INFocusStatusAuthorizationStatusDenied"
-	case INFocusStatusAuthorizationStatusAuthorized:
-		return "INFocusStatusAuthorizationStatusAuthorized"
+	case FocusStatusAuthorizationStatusNotDetermined:
+		return "FocusStatusAuthorizationStatusNotDetermined"
+	case FocusStatusAuthorizationStatusRestricted:
+		return "FocusStatusAuthorizationStatusRestricted"
+	case FocusStatusAuthorizationStatusDenied:
+		return "FocusStatusAuthorizationStatusDenied"
+	case FocusStatusAuthorizationStatusAuthorized:
+		return "FocusStatusAuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("INFocusStatusAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("FocusStatusAuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the status of the request for reservations details.
-type INGetReservationDetailsIntentResponseCode int64
+type GetReservationDetailsIntentResponseCode int64
 
 const (
 	// The response code is unspecified.
-	INGetReservationDetailsIntentResponseCodeUnspecified INGetReservationDetailsIntentResponseCode = 0
+	GetReservationDetailsIntentResponseCodeUnspecified GetReservationDetailsIntentResponseCode = 0
 	// Your app is ready to handle the intent.
-	INGetReservationDetailsIntentResponseCodeReady INGetReservationDetailsIntentResponseCode = 1
+	GetReservationDetailsIntentResponseCodeReady GetReservationDetailsIntentResponseCode = 1
 	// Your app is processing the request for reservation details.
-	INGetReservationDetailsIntentResponseCodeInProgress INGetReservationDetailsIntentResponseCode = 2
+	GetReservationDetailsIntentResponseCodeInProgress GetReservationDetailsIntentResponseCode = 2
 	// Your app successfully handled the intent.
-	INGetReservationDetailsIntentResponseCodeSuccess INGetReservationDetailsIntentResponseCode = 3
+	GetReservationDetailsIntentResponseCodeSuccess GetReservationDetailsIntentResponseCode = 3
 	// Your app is unable to retrieve the reservation details.
-	INGetReservationDetailsIntentResponseCodeFailure INGetReservationDetailsIntentResponseCode = 4
+	GetReservationDetailsIntentResponseCodeFailure GetReservationDetailsIntentResponseCode = 4
 	// The user must launch your app to retrieve the reservation details.
-	INGetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch INGetReservationDetailsIntentResponseCode = 5
+	GetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch GetReservationDetailsIntentResponseCode = 5
 )
 
-func (e INGetReservationDetailsIntentResponseCode) String() string {
+// String returns the GetReservationDetailsIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GetReservationDetailsIntentResponseCode) String() string {
 	switch e {
-	case INGetReservationDetailsIntentResponseCodeUnspecified:
-		return "INGetReservationDetailsIntentResponseCodeUnspecified"
-	case INGetReservationDetailsIntentResponseCodeReady:
-		return "INGetReservationDetailsIntentResponseCodeReady"
-	case INGetReservationDetailsIntentResponseCodeInProgress:
-		return "INGetReservationDetailsIntentResponseCodeInProgress"
-	case INGetReservationDetailsIntentResponseCodeSuccess:
-		return "INGetReservationDetailsIntentResponseCodeSuccess"
-	case INGetReservationDetailsIntentResponseCodeFailure:
-		return "INGetReservationDetailsIntentResponseCodeFailure"
-	case INGetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch:
-		return "INGetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch"
+	case GetReservationDetailsIntentResponseCodeUnspecified:
+		return "GetReservationDetailsIntentResponseCodeUnspecified"
+	case GetReservationDetailsIntentResponseCodeReady:
+		return "GetReservationDetailsIntentResponseCodeReady"
+	case GetReservationDetailsIntentResponseCodeInProgress:
+		return "GetReservationDetailsIntentResponseCodeInProgress"
+	case GetReservationDetailsIntentResponseCodeSuccess:
+		return "GetReservationDetailsIntentResponseCodeSuccess"
+	case GetReservationDetailsIntentResponseCodeFailure:
+		return "GetReservationDetailsIntentResponseCodeFailure"
+	case GetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch:
+		return "GetReservationDetailsIntentResponseCodeFailureRequiringAppLaunch"
 	default:
-		return fmt.Sprintf("INGetReservationDetailsIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("GetReservationDetailsIntentResponseCode(%d)", int64(e))
 	}
 }
 
-type INHangUpCallIntentResponseCode int64
+type HangUpCallIntentResponseCode int64
 
 const (
-	INHangUpCallIntentResponseCodeUnspecified               INHangUpCallIntentResponseCode = 0
-	INHangUpCallIntentResponseCodeReady                     INHangUpCallIntentResponseCode = 1
-	INHangUpCallIntentResponseCodeInProgress                INHangUpCallIntentResponseCode = 2
-	INHangUpCallIntentResponseCodeSuccess                   INHangUpCallIntentResponseCode = 3
-	INHangUpCallIntentResponseCodeFailure                   INHangUpCallIntentResponseCode = 4
-	INHangUpCallIntentResponseCodeFailureRequiringAppLaunch INHangUpCallIntentResponseCode = 5
-	INHangUpCallIntentResponseCodeFailureNoCallToHangUp     INHangUpCallIntentResponseCode = 6
+	HangUpCallIntentResponseCodeUnspecified               HangUpCallIntentResponseCode = 0
+	HangUpCallIntentResponseCodeReady                     HangUpCallIntentResponseCode = 1
+	HangUpCallIntentResponseCodeInProgress                HangUpCallIntentResponseCode = 2
+	HangUpCallIntentResponseCodeSuccess                   HangUpCallIntentResponseCode = 3
+	HangUpCallIntentResponseCodeFailure                   HangUpCallIntentResponseCode = 4
+	HangUpCallIntentResponseCodeFailureRequiringAppLaunch HangUpCallIntentResponseCode = 5
+	HangUpCallIntentResponseCodeFailureNoCallToHangUp     HangUpCallIntentResponseCode = 6
 )
 
-func (e INHangUpCallIntentResponseCode) String() string {
+// String returns the HangUpCallIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HangUpCallIntentResponseCode) String() string {
 	switch e {
-	case INHangUpCallIntentResponseCodeUnspecified:
-		return "INHangUpCallIntentResponseCodeUnspecified"
-	case INHangUpCallIntentResponseCodeReady:
-		return "INHangUpCallIntentResponseCodeReady"
-	case INHangUpCallIntentResponseCodeInProgress:
-		return "INHangUpCallIntentResponseCodeInProgress"
-	case INHangUpCallIntentResponseCodeSuccess:
-		return "INHangUpCallIntentResponseCodeSuccess"
-	case INHangUpCallIntentResponseCodeFailure:
-		return "INHangUpCallIntentResponseCodeFailure"
-	case INHangUpCallIntentResponseCodeFailureRequiringAppLaunch:
-		return "INHangUpCallIntentResponseCodeFailureRequiringAppLaunch"
-	case INHangUpCallIntentResponseCodeFailureNoCallToHangUp:
-		return "INHangUpCallIntentResponseCodeFailureNoCallToHangUp"
+	case HangUpCallIntentResponseCodeUnspecified:
+		return "HangUpCallIntentResponseCodeUnspecified"
+	case HangUpCallIntentResponseCodeReady:
+		return "HangUpCallIntentResponseCodeReady"
+	case HangUpCallIntentResponseCodeInProgress:
+		return "HangUpCallIntentResponseCodeInProgress"
+	case HangUpCallIntentResponseCodeSuccess:
+		return "HangUpCallIntentResponseCodeSuccess"
+	case HangUpCallIntentResponseCodeFailure:
+		return "HangUpCallIntentResponseCodeFailure"
+	case HangUpCallIntentResponseCodeFailureRequiringAppLaunch:
+		return "HangUpCallIntentResponseCodeFailureRequiringAppLaunch"
+	case HangUpCallIntentResponseCodeFailureNoCallToHangUp:
+		return "HangUpCallIntentResponseCodeFailureNoCallToHangUp"
 	default:
-		return fmt.Sprintf("INHangUpCallIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("HangUpCallIntentResponseCode(%d)", int64(e))
 	}
 }
 
-type INIntentErrorCode int64
+type IntentErrorCode int64
 
 const (
-	INIntentErrorInteractionOperationNotSupported         INIntentErrorCode = 1900
-	INIntentErrorDonatingInteraction                      INIntentErrorCode = 1901
-	INIntentErrorDeletingAllInteractions                  INIntentErrorCode = 1902
-	INIntentErrorDeletingInteractionWithIdentifiers       INIntentErrorCode = 1903
-	INIntentErrorDeletingInteractionWithGroupIdentifier   INIntentErrorCode = 1904
-	INIntentErrorIntentSupportedByMultipleExtension       INIntentErrorCode = 2001
-	INIntentErrorRestrictedIntentsNotSupportedByExtension INIntentErrorCode = 2002
-	INIntentErrorNoHandlerProvidedForIntent               INIntentErrorCode = 2003
-	INIntentErrorInvalidIntentName                        INIntentErrorCode = 2004
-	INIntentErrorNoAppAvailable                           INIntentErrorCode = 2005
-	INIntentErrorRequestTimedOut                          INIntentErrorCode = 3001
-	INIntentErrorMissingInformation                       INIntentErrorCode = 3002
-	INIntentErrorInvalidUserVocabularyFileLocation        INIntentErrorCode = 4000
-	INIntentErrorExtensionLaunchingTimeout                INIntentErrorCode = 5000
-	INIntentErrorExtensionBringUpFailed                   INIntentErrorCode = 5001
-	INIntentErrorImageGeneric                             INIntentErrorCode = 6000
-	INIntentErrorImageNoServiceAvailable                  INIntentErrorCode = 6001
-	INIntentErrorImageStorageFailed                       INIntentErrorCode = 6002
-	INIntentErrorImageLoadingFailed                       INIntentErrorCode = 6003
-	INIntentErrorImageRetrievalFailed                     INIntentErrorCode = 6004
-	INIntentErrorImageProxyLoop                           INIntentErrorCode = 6005
-	INIntentErrorImageProxyInvalid                        INIntentErrorCode = 6006
-	INIntentErrorImageProxyTimeout                        INIntentErrorCode = 6007
-	INIntentErrorImageServiceFailure                      INIntentErrorCode = 6008
-	INIntentErrorImageScalingFailed                       INIntentErrorCode = 6009
-	INIntentErrorPermissionDenied                         INIntentErrorCode = 6010
-	INIntentErrorVoiceShortcutCreationFailed              INIntentErrorCode = 7000
-	INIntentErrorVoiceShortcutGetFailed                   INIntentErrorCode = 7001
-	INIntentErrorVoiceShortcutDeleteFailed                INIntentErrorCode = 7002
-	INIntentErrorEncodingGeneric                          INIntentErrorCode = 8000
-	INIntentErrorEncodingFailed                           INIntentErrorCode = 8001
-	INIntentErrorDecodingGeneric                          INIntentErrorCode = 9000
-	INIntentErrorUnableToCreateAppIntentRepresentation    INIntentErrorCode = 10000
-	INIntentErrorNoAppIntent                              INIntentErrorCode = 10001
+	IntentErrorInteractionOperationNotSupported         IntentErrorCode = 1900
+	IntentErrorDonatingInteraction                      IntentErrorCode = 1901
+	IntentErrorDeletingAllInteractions                  IntentErrorCode = 1902
+	IntentErrorDeletingInteractionWithIdentifiers       IntentErrorCode = 1903
+	IntentErrorDeletingInteractionWithGroupIdentifier   IntentErrorCode = 1904
+	IntentErrorIntentSupportedByMultipleExtension       IntentErrorCode = 2001
+	IntentErrorRestrictedIntentsNotSupportedByExtension IntentErrorCode = 2002
+	IntentErrorNoHandlerProvidedForIntent               IntentErrorCode = 2003
+	IntentErrorInvalidIntentName                        IntentErrorCode = 2004
+	IntentErrorNoAppAvailable                           IntentErrorCode = 2005
+	IntentErrorRequestTimedOut                          IntentErrorCode = 3001
+	IntentErrorMissingInformation                       IntentErrorCode = 3002
+	IntentErrorInvalidUserVocabularyFileLocation        IntentErrorCode = 4000
+	IntentErrorExtensionLaunchingTimeout                IntentErrorCode = 5000
+	IntentErrorExtensionBringUpFailed                   IntentErrorCode = 5001
+	IntentErrorImageGeneric                             IntentErrorCode = 6000
+	IntentErrorImageNoServiceAvailable                  IntentErrorCode = 6001
+	IntentErrorImageStorageFailed                       IntentErrorCode = 6002
+	IntentErrorImageLoadingFailed                       IntentErrorCode = 6003
+	IntentErrorImageRetrievalFailed                     IntentErrorCode = 6004
+	IntentErrorImageProxyLoop                           IntentErrorCode = 6005
+	IntentErrorImageProxyInvalid                        IntentErrorCode = 6006
+	IntentErrorImageProxyTimeout                        IntentErrorCode = 6007
+	IntentErrorImageServiceFailure                      IntentErrorCode = 6008
+	IntentErrorImageScalingFailed                       IntentErrorCode = 6009
+	IntentErrorPermissionDenied                         IntentErrorCode = 6010
+	IntentErrorVoiceShortcutCreationFailed              IntentErrorCode = 7000
+	IntentErrorVoiceShortcutGetFailed                   IntentErrorCode = 7001
+	IntentErrorVoiceShortcutDeleteFailed                IntentErrorCode = 7002
+	IntentErrorEncodingGeneric                          IntentErrorCode = 8000
+	IntentErrorEncodingFailed                           IntentErrorCode = 8001
+	IntentErrorDecodingGeneric                          IntentErrorCode = 9000
+	IntentErrorUnableToCreateAppIntentRepresentation    IntentErrorCode = 10000
+	IntentErrorNoAppIntent                              IntentErrorCode = 10001
 )
 
-func (e INIntentErrorCode) String() string {
+// String returns the IntentErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IntentErrorCode) String() string {
 	switch e {
-	case INIntentErrorInteractionOperationNotSupported:
-		return "INIntentErrorInteractionOperationNotSupported"
-	case INIntentErrorDonatingInteraction:
-		return "INIntentErrorDonatingInteraction"
-	case INIntentErrorDeletingAllInteractions:
-		return "INIntentErrorDeletingAllInteractions"
-	case INIntentErrorDeletingInteractionWithIdentifiers:
-		return "INIntentErrorDeletingInteractionWithIdentifiers"
-	case INIntentErrorDeletingInteractionWithGroupIdentifier:
-		return "INIntentErrorDeletingInteractionWithGroupIdentifier"
-	case INIntentErrorIntentSupportedByMultipleExtension:
-		return "INIntentErrorIntentSupportedByMultipleExtension"
-	case INIntentErrorRestrictedIntentsNotSupportedByExtension:
-		return "INIntentErrorRestrictedIntentsNotSupportedByExtension"
-	case INIntentErrorNoHandlerProvidedForIntent:
-		return "INIntentErrorNoHandlerProvidedForIntent"
-	case INIntentErrorInvalidIntentName:
-		return "INIntentErrorInvalidIntentName"
-	case INIntentErrorNoAppAvailable:
-		return "INIntentErrorNoAppAvailable"
-	case INIntentErrorRequestTimedOut:
-		return "INIntentErrorRequestTimedOut"
-	case INIntentErrorMissingInformation:
-		return "INIntentErrorMissingInformation"
-	case INIntentErrorInvalidUserVocabularyFileLocation:
-		return "INIntentErrorInvalidUserVocabularyFileLocation"
-	case INIntentErrorExtensionLaunchingTimeout:
-		return "INIntentErrorExtensionLaunchingTimeout"
-	case INIntentErrorExtensionBringUpFailed:
-		return "INIntentErrorExtensionBringUpFailed"
-	case INIntentErrorImageGeneric:
-		return "INIntentErrorImageGeneric"
-	case INIntentErrorImageNoServiceAvailable:
-		return "INIntentErrorImageNoServiceAvailable"
-	case INIntentErrorImageStorageFailed:
-		return "INIntentErrorImageStorageFailed"
-	case INIntentErrorImageLoadingFailed:
-		return "INIntentErrorImageLoadingFailed"
-	case INIntentErrorImageRetrievalFailed:
-		return "INIntentErrorImageRetrievalFailed"
-	case INIntentErrorImageProxyLoop:
-		return "INIntentErrorImageProxyLoop"
-	case INIntentErrorImageProxyInvalid:
-		return "INIntentErrorImageProxyInvalid"
-	case INIntentErrorImageProxyTimeout:
-		return "INIntentErrorImageProxyTimeout"
-	case INIntentErrorImageServiceFailure:
-		return "INIntentErrorImageServiceFailure"
-	case INIntentErrorImageScalingFailed:
-		return "INIntentErrorImageScalingFailed"
-	case INIntentErrorPermissionDenied:
-		return "INIntentErrorPermissionDenied"
-	case INIntentErrorVoiceShortcutCreationFailed:
-		return "INIntentErrorVoiceShortcutCreationFailed"
-	case INIntentErrorVoiceShortcutGetFailed:
-		return "INIntentErrorVoiceShortcutGetFailed"
-	case INIntentErrorVoiceShortcutDeleteFailed:
-		return "INIntentErrorVoiceShortcutDeleteFailed"
-	case INIntentErrorEncodingGeneric:
-		return "INIntentErrorEncodingGeneric"
-	case INIntentErrorEncodingFailed:
-		return "INIntentErrorEncodingFailed"
-	case INIntentErrorDecodingGeneric:
-		return "INIntentErrorDecodingGeneric"
-	case INIntentErrorUnableToCreateAppIntentRepresentation:
-		return "INIntentErrorUnableToCreateAppIntentRepresentation"
-	case INIntentErrorNoAppIntent:
-		return "INIntentErrorNoAppIntent"
+	case IntentErrorInteractionOperationNotSupported:
+		return "IntentErrorInteractionOperationNotSupported"
+	case IntentErrorDonatingInteraction:
+		return "IntentErrorDonatingInteraction"
+	case IntentErrorDeletingAllInteractions:
+		return "IntentErrorDeletingAllInteractions"
+	case IntentErrorDeletingInteractionWithIdentifiers:
+		return "IntentErrorDeletingInteractionWithIdentifiers"
+	case IntentErrorDeletingInteractionWithGroupIdentifier:
+		return "IntentErrorDeletingInteractionWithGroupIdentifier"
+	case IntentErrorIntentSupportedByMultipleExtension:
+		return "IntentErrorIntentSupportedByMultipleExtension"
+	case IntentErrorRestrictedIntentsNotSupportedByExtension:
+		return "IntentErrorRestrictedIntentsNotSupportedByExtension"
+	case IntentErrorNoHandlerProvidedForIntent:
+		return "IntentErrorNoHandlerProvidedForIntent"
+	case IntentErrorInvalidIntentName:
+		return "IntentErrorInvalidIntentName"
+	case IntentErrorNoAppAvailable:
+		return "IntentErrorNoAppAvailable"
+	case IntentErrorRequestTimedOut:
+		return "IntentErrorRequestTimedOut"
+	case IntentErrorMissingInformation:
+		return "IntentErrorMissingInformation"
+	case IntentErrorInvalidUserVocabularyFileLocation:
+		return "IntentErrorInvalidUserVocabularyFileLocation"
+	case IntentErrorExtensionLaunchingTimeout:
+		return "IntentErrorExtensionLaunchingTimeout"
+	case IntentErrorExtensionBringUpFailed:
+		return "IntentErrorExtensionBringUpFailed"
+	case IntentErrorImageGeneric:
+		return "IntentErrorImageGeneric"
+	case IntentErrorImageNoServiceAvailable:
+		return "IntentErrorImageNoServiceAvailable"
+	case IntentErrorImageStorageFailed:
+		return "IntentErrorImageStorageFailed"
+	case IntentErrorImageLoadingFailed:
+		return "IntentErrorImageLoadingFailed"
+	case IntentErrorImageRetrievalFailed:
+		return "IntentErrorImageRetrievalFailed"
+	case IntentErrorImageProxyLoop:
+		return "IntentErrorImageProxyLoop"
+	case IntentErrorImageProxyInvalid:
+		return "IntentErrorImageProxyInvalid"
+	case IntentErrorImageProxyTimeout:
+		return "IntentErrorImageProxyTimeout"
+	case IntentErrorImageServiceFailure:
+		return "IntentErrorImageServiceFailure"
+	case IntentErrorImageScalingFailed:
+		return "IntentErrorImageScalingFailed"
+	case IntentErrorPermissionDenied:
+		return "IntentErrorPermissionDenied"
+	case IntentErrorVoiceShortcutCreationFailed:
+		return "IntentErrorVoiceShortcutCreationFailed"
+	case IntentErrorVoiceShortcutGetFailed:
+		return "IntentErrorVoiceShortcutGetFailed"
+	case IntentErrorVoiceShortcutDeleteFailed:
+		return "IntentErrorVoiceShortcutDeleteFailed"
+	case IntentErrorEncodingGeneric:
+		return "IntentErrorEncodingGeneric"
+	case IntentErrorEncodingFailed:
+		return "IntentErrorEncodingFailed"
+	case IntentErrorDecodingGeneric:
+		return "IntentErrorDecodingGeneric"
+	case IntentErrorUnableToCreateAppIntentRepresentation:
+		return "IntentErrorUnableToCreateAppIntentRepresentation"
+	case IntentErrorNoAppIntent:
+		return "IntentErrorNoAppIntent"
 	default:
-		return fmt.Sprintf("INIntentErrorCode(%d)", int64(e))
+		return fmt.Sprintf("IntentErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants indicating the current state of the interaction.
-type INIntentHandlingStatus int64
+type IntentHandlingStatus int64
 
 const (
 	// The status of the interaction is unknown. This is the default value.
-	INIntentHandlingStatusUnspecified INIntentHandlingStatus = 0
+	IntentHandlingStatusUnspecified IntentHandlingStatus = 0
 	// The intent is ready to be handled, but has not yet been handled.
-	INIntentHandlingStatusReady INIntentHandlingStatus = 1
+	IntentHandlingStatusReady IntentHandlingStatus = 1
 	// The Intents extension is in the process of handling the intent.
-	INIntentHandlingStatusInProgress INIntentHandlingStatus = 2
+	IntentHandlingStatusInProgress IntentHandlingStatus = 2
 	// The Intents extension successfully handled the intent.
-	INIntentHandlingStatusSuccess INIntentHandlingStatus = 3
+	IntentHandlingStatusSuccess IntentHandlingStatus = 3
 	// The Intents extension encountered an unrecoverable problem when handling the intent.
-	INIntentHandlingStatusFailure INIntentHandlingStatus = 4
+	IntentHandlingStatusFailure IntentHandlingStatus = 4
 	// The Intents extension asked its associated app to handle the intent.
-	INIntentHandlingStatusDeferredToApplication    INIntentHandlingStatus = 5
-	INIntentHandlingStatusUserConfirmationRequired INIntentHandlingStatus = 6
+	IntentHandlingStatusDeferredToApplication    IntentHandlingStatus = 5
+	IntentHandlingStatusUserConfirmationRequired IntentHandlingStatus = 6
 )
 
-func (e INIntentHandlingStatus) String() string {
+// String returns the IntentHandlingStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IntentHandlingStatus) String() string {
 	switch e {
-	case INIntentHandlingStatusUnspecified:
-		return "INIntentHandlingStatusUnspecified"
-	case INIntentHandlingStatusReady:
-		return "INIntentHandlingStatusReady"
-	case INIntentHandlingStatusInProgress:
-		return "INIntentHandlingStatusInProgress"
-	case INIntentHandlingStatusSuccess:
-		return "INIntentHandlingStatusSuccess"
-	case INIntentHandlingStatusFailure:
-		return "INIntentHandlingStatusFailure"
-	case INIntentHandlingStatusDeferredToApplication:
-		return "INIntentHandlingStatusDeferredToApplication"
-	case INIntentHandlingStatusUserConfirmationRequired:
-		return "INIntentHandlingStatusUserConfirmationRequired"
+	case IntentHandlingStatusUnspecified:
+		return "IntentHandlingStatusUnspecified"
+	case IntentHandlingStatusReady:
+		return "IntentHandlingStatusReady"
+	case IntentHandlingStatusInProgress:
+		return "IntentHandlingStatusInProgress"
+	case IntentHandlingStatusSuccess:
+		return "IntentHandlingStatusSuccess"
+	case IntentHandlingStatusFailure:
+		return "IntentHandlingStatusFailure"
+	case IntentHandlingStatusDeferredToApplication:
+		return "IntentHandlingStatusDeferredToApplication"
+	case IntentHandlingStatusUserConfirmationRequired:
+		return "IntentHandlingStatusUserConfirmationRequired"
 	default:
-		return fmt.Sprintf("INIntentHandlingStatus(%d)", int64(e))
+		return fmt.Sprintf("IntentHandlingStatus(%d)", int64(e))
 	}
 }
 
 // Constants indicating whether the app is providing or receiving information.
-type INInteractionDirection int64
+type InteractionDirection int64
 
 const (
 	// An unspecified direction.
-	INInteractionDirectionUnspecified INInteractionDirection = 0
+	InteractionDirectionUnspecified InteractionDirection = 0
 	// An interaction in which information is sent from the device.
-	INInteractionDirectionOutgoing INInteractionDirection = 1
+	InteractionDirectionOutgoing InteractionDirection = 1
 	// An interaction in which information is received on the device.
-	INInteractionDirectionIncoming INInteractionDirection = 2
+	InteractionDirectionIncoming InteractionDirection = 2
 )
 
-func (e INInteractionDirection) String() string {
+// String returns the InteractionDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InteractionDirection) String() string {
 	switch e {
-	case INInteractionDirectionUnspecified:
-		return "INInteractionDirectionUnspecified"
-	case INInteractionDirectionOutgoing:
-		return "INInteractionDirectionOutgoing"
-	case INInteractionDirectionIncoming:
-		return "INInteractionDirectionIncoming"
+	case InteractionDirectionUnspecified:
+		return "InteractionDirectionUnspecified"
+	case InteractionDirectionOutgoing:
+		return "InteractionDirectionOutgoing"
+	case InteractionDirectionIncoming:
+		return "InteractionDirectionIncoming"
 	default:
-		return fmt.Sprintf("INInteractionDirection(%d)", int64(e))
+		return fmt.Sprintf("InteractionDirection(%d)", int64(e))
 	}
 }
 
-type INMessageReactionType int64
+type MessageReactionType int64
 
 const (
-	INMessageReactionTypeUnknown INMessageReactionType = 0
-	INMessageReactionTypeEmoji   INMessageReactionType = 1
-	INMessageReactionTypeGeneric INMessageReactionType = 2
+	MessageReactionTypeUnknown MessageReactionType = 0
+	MessageReactionTypeEmoji   MessageReactionType = 1
+	MessageReactionTypeGeneric MessageReactionType = 2
 )
 
-func (e INMessageReactionType) String() string {
+// String returns the MessageReactionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MessageReactionType) String() string {
 	switch e {
-	case INMessageReactionTypeUnknown:
-		return "INMessageReactionTypeUnknown"
-	case INMessageReactionTypeEmoji:
-		return "INMessageReactionTypeEmoji"
-	case INMessageReactionTypeGeneric:
-		return "INMessageReactionTypeGeneric"
+	case MessageReactionTypeUnknown:
+		return "MessageReactionTypeUnknown"
+	case MessageReactionTypeEmoji:
+		return "MessageReactionTypeEmoji"
+	case MessageReactionTypeGeneric:
+		return "MessageReactionTypeGeneric"
 	default:
-		return fmt.Sprintf("INMessageReactionType(%d)", int64(e))
+		return fmt.Sprintf("MessageReactionType(%d)", int64(e))
 	}
 }
 
 // The format of the message.
-type INOutgoingMessageType int64
+type OutgoingMessageType int64
 
 const (
 	// An unspecified message format.
-	INOutgoingMessageTypeUnknown INOutgoingMessageType = 0
+	OutgoingMessageTypeUnknown OutgoingMessageType = 0
 	// Plain text.
-	INOutgoingMessageTypeOutgoingMessageText INOutgoingMessageType = 1
+	OutgoingMessageTypeOutgoingMessageText OutgoingMessageType = 1
 	// An audio recording.
-	INOutgoingMessageTypeOutgoingMessageAudio INOutgoingMessageType = 2
+	OutgoingMessageTypeOutgoingMessageAudio OutgoingMessageType = 2
 )
 
-func (e INOutgoingMessageType) String() string {
+// String returns the OutgoingMessageType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OutgoingMessageType) String() string {
 	switch e {
-	case INOutgoingMessageTypeUnknown:
-		return "INOutgoingMessageTypeUnknown"
-	case INOutgoingMessageTypeOutgoingMessageText:
-		return "INOutgoingMessageTypeOutgoingMessageText"
-	case INOutgoingMessageTypeOutgoingMessageAudio:
-		return "INOutgoingMessageTypeOutgoingMessageAudio"
+	case OutgoingMessageTypeUnknown:
+		return "OutgoingMessageTypeUnknown"
+	case OutgoingMessageTypeOutgoingMessageText:
+		return "OutgoingMessageTypeOutgoingMessageText"
+	case OutgoingMessageTypeOutgoingMessageAudio:
+		return "OutgoingMessageTypeOutgoingMessageAudio"
 	default:
-		return fmt.Sprintf("INOutgoingMessageType(%d)", int64(e))
+		return fmt.Sprintf("OutgoingMessageType(%d)", int64(e))
 	}
 }
 
 // Constants describing the available payment options.
-type INPaymentMethodType int64
+type PaymentMethodType int64
 
 const (
 	// An unspecified payment type.
-	INPaymentMethodTypeUnknown INPaymentMethodType = 0
+	PaymentMethodTypeUnknown PaymentMethodType = 0
 	// Payment from a checking account.
-	INPaymentMethodTypeChecking INPaymentMethodType = 1
+	PaymentMethodTypeChecking PaymentMethodType = 1
 	// Payment from a savings account.
-	INPaymentMethodTypeSavings INPaymentMethodType = 2
+	PaymentMethodTypeSavings PaymentMethodType = 2
 	// Payment from a brokerage account.
-	INPaymentMethodTypeBrokerage INPaymentMethodType = 3
+	PaymentMethodTypeBrokerage PaymentMethodType = 3
 	// Payment using a debit card.
-	INPaymentMethodTypeDebit INPaymentMethodType = 4
+	PaymentMethodTypeDebit PaymentMethodType = 4
 	// Payment using a credit card.
-	INPaymentMethodTypeCredit INPaymentMethodType = 5
+	PaymentMethodTypeCredit PaymentMethodType = 5
 	// Payment using a prepaid card or account.
-	INPaymentMethodTypePrepaid INPaymentMethodType = 6
+	PaymentMethodTypePrepaid PaymentMethodType = 6
 	// Payment using a store charge card.
-	INPaymentMethodTypeStore INPaymentMethodType = 7
+	PaymentMethodTypeStore PaymentMethodType = 7
 	// Payment using Apple Pay.
-	INPaymentMethodTypeApplePay INPaymentMethodType = 8
+	PaymentMethodTypeApplePay PaymentMethodType = 8
 )
 
-func (e INPaymentMethodType) String() string {
+// String returns the PaymentMethodType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentMethodType) String() string {
 	switch e {
-	case INPaymentMethodTypeUnknown:
-		return "INPaymentMethodTypeUnknown"
-	case INPaymentMethodTypeChecking:
-		return "INPaymentMethodTypeChecking"
-	case INPaymentMethodTypeSavings:
-		return "INPaymentMethodTypeSavings"
-	case INPaymentMethodTypeBrokerage:
-		return "INPaymentMethodTypeBrokerage"
-	case INPaymentMethodTypeDebit:
-		return "INPaymentMethodTypeDebit"
-	case INPaymentMethodTypeCredit:
-		return "INPaymentMethodTypeCredit"
-	case INPaymentMethodTypePrepaid:
-		return "INPaymentMethodTypePrepaid"
-	case INPaymentMethodTypeStore:
-		return "INPaymentMethodTypeStore"
-	case INPaymentMethodTypeApplePay:
-		return "INPaymentMethodTypeApplePay"
+	case PaymentMethodTypeUnknown:
+		return "PaymentMethodTypeUnknown"
+	case PaymentMethodTypeChecking:
+		return "PaymentMethodTypeChecking"
+	case PaymentMethodTypeSavings:
+		return "PaymentMethodTypeSavings"
+	case PaymentMethodTypeBrokerage:
+		return "PaymentMethodTypeBrokerage"
+	case PaymentMethodTypeDebit:
+		return "PaymentMethodTypeDebit"
+	case PaymentMethodTypeCredit:
+		return "PaymentMethodTypeCredit"
+	case PaymentMethodTypePrepaid:
+		return "PaymentMethodTypePrepaid"
+	case PaymentMethodTypeStore:
+		return "PaymentMethodTypeStore"
+	case PaymentMethodTypeApplePay:
+		return "PaymentMethodTypeApplePay"
 	default:
-		return fmt.Sprintf("INPaymentMethodType(%d)", int64(e))
+		return fmt.Sprintf("PaymentMethodType(%d)", int64(e))
 	}
 }
 
 // Constants indicating the types of data that can be associated with a person handle.
-type INPersonHandleType int64
+type PersonHandleType int64
 
 const (
 	// An unknown type of data. Use this type if the identifier data is unique to your app.
-	INPersonHandleTypeUnknown INPersonHandleType = 0
+	PersonHandleTypeUnknown PersonHandleType = 0
 	// An email address.
-	INPersonHandleTypeEmailAddress INPersonHandleType = 1
+	PersonHandleTypeEmailAddress PersonHandleType = 1
 	// A phone number.
-	INPersonHandleTypePhoneNumber INPersonHandleType = 2
+	PersonHandleTypePhoneNumber PersonHandleType = 2
 )
 
-func (e INPersonHandleType) String() string {
+// String returns the PersonHandleType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PersonHandleType) String() string {
 	switch e {
-	case INPersonHandleTypeUnknown:
-		return "INPersonHandleTypeUnknown"
-	case INPersonHandleTypeEmailAddress:
-		return "INPersonHandleTypeEmailAddress"
-	case INPersonHandleTypePhoneNumber:
-		return "INPersonHandleTypePhoneNumber"
+	case PersonHandleTypeUnknown:
+		return "PersonHandleTypeUnknown"
+	case PersonHandleTypeEmailAddress:
+		return "PersonHandleTypeEmailAddress"
+	case PersonHandleTypePhoneNumber:
+		return "PersonHandleTypePhoneNumber"
 	default:
-		return fmt.Sprintf("INPersonHandleType(%d)", int64(e))
+		return fmt.Sprintf("PersonHandleType(%d)", int64(e))
 	}
 }
 
 // Constants indicating how to display the person’s identity.
-type INPersonSuggestionType int64
+type PersonSuggestionType int64
 
 const (
 	// No contact information to donate.
-	INPersonSuggestionTypeNone INPersonSuggestionType = 0
+	PersonSuggestionTypeNone PersonSuggestionType = 0
 	// A social media account.
-	INPersonSuggestionTypeSocialProfile INPersonSuggestionType = 1
+	PersonSuggestionTypeSocialProfile PersonSuggestionType = 1
 	// An instant messaging address.
-	INPersonSuggestionTypeInstantMessageAddress INPersonSuggestionType = 2
+	PersonSuggestionTypeInstantMessageAddress PersonSuggestionType = 2
 )
 
-func (e INPersonSuggestionType) String() string {
+// String returns the PersonSuggestionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PersonSuggestionType) String() string {
 	switch e {
-	case INPersonSuggestionTypeNone:
-		return "INPersonSuggestionTypeNone"
-	case INPersonSuggestionTypeSocialProfile:
-		return "INPersonSuggestionTypeSocialProfile"
-	case INPersonSuggestionTypeInstantMessageAddress:
-		return "INPersonSuggestionTypeInstantMessageAddress"
+	case PersonSuggestionTypeNone:
+		return "PersonSuggestionTypeNone"
+	case PersonSuggestionTypeSocialProfile:
+		return "PersonSuggestionTypeSocialProfile"
+	case PersonSuggestionTypeInstantMessageAddress:
+		return "PersonSuggestionTypeInstantMessageAddress"
 	default:
-		return fmt.Sprintf("INPersonSuggestionType(%d)", int64(e))
+		return fmt.Sprintf("PersonSuggestionType(%d)", int64(e))
 	}
 }
 
 // Constants that describe the type of reservation action.
-type INReservationActionType int64
+type ReservationActionType int64
 
 const (
 	// An unknown state.
-	INReservationActionTypeUnknown INReservationActionType = 0
+	ReservationActionTypeUnknown ReservationActionType = 0
 	// A check-in action.
-	INReservationActionTypeCheckIn INReservationActionType = 1
+	ReservationActionTypeCheckIn ReservationActionType = 1
 )
 
-func (e INReservationActionType) String() string {
+// String returns the ReservationActionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReservationActionType) String() string {
 	switch e {
-	case INReservationActionTypeUnknown:
-		return "INReservationActionTypeUnknown"
-	case INReservationActionTypeCheckIn:
-		return "INReservationActionTypeCheckIn"
+	case ReservationActionTypeUnknown:
+		return "ReservationActionTypeUnknown"
+	case ReservationActionTypeCheckIn:
+		return "ReservationActionTypeCheckIn"
 	default:
-		return fmt.Sprintf("INReservationActionType(%d)", int64(e))
+		return fmt.Sprintf("ReservationActionType(%d)", int64(e))
 	}
 }
 
 // Constants that describe the current status of the reservation.
-type INReservationStatus int64
+type ReservationStatus int64
 
 const (
 	// The current reservation is unknown.
-	INReservationStatusUnknown INReservationStatus = 0
+	ReservationStatusUnknown ReservationStatus = 0
 	// The user or business canceled the reservation.
-	INReservationStatusCanceled INReservationStatus = 1
+	ReservationStatusCanceled ReservationStatus = 1
 	// The reservation confirmation is pending.
-	INReservationStatusPending INReservationStatus = 2
+	ReservationStatusPending ReservationStatus = 2
 	// The reservation is on hold.
-	INReservationStatusHold INReservationStatus = 3
+	ReservationStatusHold ReservationStatus = 3
 	// The reservation is confirmed.
-	INReservationStatusConfirmed INReservationStatus = 4
+	ReservationStatusConfirmed ReservationStatus = 4
 )
 
-func (e INReservationStatus) String() string {
+// String returns the ReservationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReservationStatus) String() string {
 	switch e {
-	case INReservationStatusUnknown:
-		return "INReservationStatusUnknown"
-	case INReservationStatusCanceled:
-		return "INReservationStatusCanceled"
-	case INReservationStatusPending:
-		return "INReservationStatusPending"
-	case INReservationStatusHold:
-		return "INReservationStatusHold"
-	case INReservationStatusConfirmed:
-		return "INReservationStatusConfirmed"
+	case ReservationStatusUnknown:
+		return "ReservationStatusUnknown"
+	case ReservationStatusCanceled:
+		return "ReservationStatusCanceled"
+	case ReservationStatusPending:
+		return "ReservationStatusPending"
+	case ReservationStatusHold:
+		return "ReservationStatusHold"
+	case ReservationStatusConfirmed:
+		return "ReservationStatusConfirmed"
 	default:
-		return fmt.Sprintf("INReservationStatus(%d)", int64(e))
+		return fmt.Sprintf("ReservationStatus(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the response state.
-type INSendMessageIntentResponseCode int64
+type SendMessageIntentResponseCode int64
 
 const (
 	// The response code isn’t specified.
-	INSendMessageIntentResponseCodeUnspecified INSendMessageIntentResponseCode = 0
+	SendMessageIntentResponseCodeUnspecified SendMessageIntentResponseCode = 0
 	// You are ready to handle the intent.
-	INSendMessageIntentResponseCodeReady INSendMessageIntentResponseCode = 1
+	SendMessageIntentResponseCodeReady SendMessageIntentResponseCode = 1
 	// You are in the process of sending the message but have not yet done so.
-	INSendMessageIntentResponseCodeInProgress INSendMessageIntentResponseCode = 2
+	SendMessageIntentResponseCodeInProgress SendMessageIntentResponseCode = 2
 	// You successfully handled the intent.
-	INSendMessageIntentResponseCodeSuccess INSendMessageIntentResponseCode = 3
+	SendMessageIntentResponseCodeSuccess SendMessageIntentResponseCode = 3
 	// You are unable to send the message.
-	INSendMessageIntentResponseCodeFailure INSendMessageIntentResponseCode = 4
+	SendMessageIntentResponseCodeFailure SendMessageIntentResponseCode = 4
 	// The user must launch your app before they can send the message.
-	INSendMessageIntentResponseCodeFailureRequiringAppLaunch INSendMessageIntentResponseCode = 5
+	SendMessageIntentResponseCodeFailureRequiringAppLaunch SendMessageIntentResponseCode = 5
 	// You were unable to send the message because your message service is currently unavailable.
-	INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable   INSendMessageIntentResponseCode = 6
-	INSendMessageIntentResponseCodeFailureRequiringInAppAuthentication INSendMessageIntentResponseCode = 7
+	SendMessageIntentResponseCodeFailureMessageServiceNotAvailable   SendMessageIntentResponseCode = 6
+	SendMessageIntentResponseCodeFailureRequiringInAppAuthentication SendMessageIntentResponseCode = 7
 )
 
-func (e INSendMessageIntentResponseCode) String() string {
+// String returns the SendMessageIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SendMessageIntentResponseCode) String() string {
 	switch e {
-	case INSendMessageIntentResponseCodeUnspecified:
-		return "INSendMessageIntentResponseCodeUnspecified"
-	case INSendMessageIntentResponseCodeReady:
-		return "INSendMessageIntentResponseCodeReady"
-	case INSendMessageIntentResponseCodeInProgress:
-		return "INSendMessageIntentResponseCodeInProgress"
-	case INSendMessageIntentResponseCodeSuccess:
-		return "INSendMessageIntentResponseCodeSuccess"
-	case INSendMessageIntentResponseCodeFailure:
-		return "INSendMessageIntentResponseCodeFailure"
-	case INSendMessageIntentResponseCodeFailureRequiringAppLaunch:
-		return "INSendMessageIntentResponseCodeFailureRequiringAppLaunch"
-	case INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable:
-		return "INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable"
-	case INSendMessageIntentResponseCodeFailureRequiringInAppAuthentication:
-		return "INSendMessageIntentResponseCodeFailureRequiringInAppAuthentication"
+	case SendMessageIntentResponseCodeUnspecified:
+		return "SendMessageIntentResponseCodeUnspecified"
+	case SendMessageIntentResponseCodeReady:
+		return "SendMessageIntentResponseCodeReady"
+	case SendMessageIntentResponseCodeInProgress:
+		return "SendMessageIntentResponseCodeInProgress"
+	case SendMessageIntentResponseCodeSuccess:
+		return "SendMessageIntentResponseCodeSuccess"
+	case SendMessageIntentResponseCodeFailure:
+		return "SendMessageIntentResponseCodeFailure"
+	case SendMessageIntentResponseCodeFailureRequiringAppLaunch:
+		return "SendMessageIntentResponseCodeFailureRequiringAppLaunch"
+	case SendMessageIntentResponseCodeFailureMessageServiceNotAvailable:
+		return "SendMessageIntentResponseCodeFailureMessageServiceNotAvailable"
+	case SendMessageIntentResponseCodeFailureRequiringInAppAuthentication:
+		return "SendMessageIntentResponseCodeFailureRequiringInAppAuthentication"
 	default:
-		return fmt.Sprintf("INSendMessageIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("SendMessageIntentResponseCode(%d)", int64(e))
 	}
 }
 
 // Constants indicating the reason why a recipient is not supported.
-type INSendMessageRecipientUnsupportedReason int64
+type SendMessageRecipientUnsupportedReason int64
 
 const (
 	// A recipient without an account.
-	INSendMessageRecipientUnsupportedReasonNoAccount INSendMessageRecipientUnsupportedReason = 1
+	SendMessageRecipientUnsupportedReasonNoAccount SendMessageRecipientUnsupportedReason = 1
 	// An offline recipient.
-	INSendMessageRecipientUnsupportedReasonOffline INSendMessageRecipientUnsupportedReason = 2
+	SendMessageRecipientUnsupportedReasonOffline SendMessageRecipientUnsupportedReason = 2
 	// A recipient for whom messaging is not enabled.
-	INSendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient INSendMessageRecipientUnsupportedReason = 3
+	SendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient SendMessageRecipientUnsupportedReason = 3
 	// A recipient for whom there is no valid handle.
-	INSendMessageRecipientUnsupportedReasonNoValidHandle INSendMessageRecipientUnsupportedReason = 4
+	SendMessageRecipientUnsupportedReasonNoValidHandle SendMessageRecipientUnsupportedReason = 4
 	// A recipient for whom the requested handle is invalid.
-	INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid INSendMessageRecipientUnsupportedReason = 5
+	SendMessageRecipientUnsupportedReasonRequestedHandleInvalid SendMessageRecipientUnsupportedReason = 5
 	// A recipient for whom there is no handle for the provided label.
-	INSendMessageRecipientUnsupportedReasonNoHandleForLabel             INSendMessageRecipientUnsupportedReason = 6
-	INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication INSendMessageRecipientUnsupportedReason = 7
+	SendMessageRecipientUnsupportedReasonNoHandleForLabel             SendMessageRecipientUnsupportedReason = 6
+	SendMessageRecipientUnsupportedReasonRequiringInAppAuthentication SendMessageRecipientUnsupportedReason = 7
 )
 
-func (e INSendMessageRecipientUnsupportedReason) String() string {
+// String returns the SendMessageRecipientUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SendMessageRecipientUnsupportedReason) String() string {
 	switch e {
-	case INSendMessageRecipientUnsupportedReasonNoAccount:
-		return "INSendMessageRecipientUnsupportedReasonNoAccount"
-	case INSendMessageRecipientUnsupportedReasonOffline:
-		return "INSendMessageRecipientUnsupportedReasonOffline"
-	case INSendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient:
-		return "INSendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient"
-	case INSendMessageRecipientUnsupportedReasonNoValidHandle:
-		return "INSendMessageRecipientUnsupportedReasonNoValidHandle"
-	case INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid:
-		return "INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid"
-	case INSendMessageRecipientUnsupportedReasonNoHandleForLabel:
-		return "INSendMessageRecipientUnsupportedReasonNoHandleForLabel"
-	case INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication:
-		return "INSendMessageRecipientUnsupportedReasonRequiringInAppAuthentication"
+	case SendMessageRecipientUnsupportedReasonNoAccount:
+		return "SendMessageRecipientUnsupportedReasonNoAccount"
+	case SendMessageRecipientUnsupportedReasonOffline:
+		return "SendMessageRecipientUnsupportedReasonOffline"
+	case SendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient:
+		return "SendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient"
+	case SendMessageRecipientUnsupportedReasonNoValidHandle:
+		return "SendMessageRecipientUnsupportedReasonNoValidHandle"
+	case SendMessageRecipientUnsupportedReasonRequestedHandleInvalid:
+		return "SendMessageRecipientUnsupportedReasonRequestedHandleInvalid"
+	case SendMessageRecipientUnsupportedReasonNoHandleForLabel:
+		return "SendMessageRecipientUnsupportedReasonNoHandleForLabel"
+	case SendMessageRecipientUnsupportedReasonRequiringInAppAuthentication:
+		return "SendMessageRecipientUnsupportedReasonRequiringInAppAuthentication"
 	default:
-		return fmt.Sprintf("INSendMessageRecipientUnsupportedReason(%d)", int64(e))
+		return fmt.Sprintf("SendMessageRecipientUnsupportedReason(%d)", int64(e))
 	}
 }
 
 // A constant that indicates your app’s ability to handle an intent to share the user’s focus status.
-type INShareFocusStatusIntentResponseCode int64
+type ShareFocusStatusIntentResponseCode int64
 
 const (
 	// An unspecified response code.
-	INShareFocusStatusIntentResponseCodeUnspecified INShareFocusStatusIntentResponseCode = 0
+	ShareFocusStatusIntentResponseCodeUnspecified ShareFocusStatusIntentResponseCode = 0
 	// Your intent handler is ready to handle the intent.
-	INShareFocusStatusIntentResponseCodeReady INShareFocusStatusIntentResponseCode = 1
+	ShareFocusStatusIntentResponseCodeReady ShareFocusStatusIntentResponseCode = 1
 	// Your intent handler is handling the intent, but it may take some time.
-	INShareFocusStatusIntentResponseCodeInProgress INShareFocusStatusIntentResponseCode = 2
+	ShareFocusStatusIntentResponseCodeInProgress ShareFocusStatusIntentResponseCode = 2
 	// Your intent handler successfully updated the user’s communication status.
-	INShareFocusStatusIntentResponseCodeSuccess INShareFocusStatusIntentResponseCode = 3
+	ShareFocusStatusIntentResponseCodeSuccess ShareFocusStatusIntentResponseCode = 3
 	// Your intent handler is unable to handle the intent.
-	INShareFocusStatusIntentResponseCodeFailure INShareFocusStatusIntentResponseCode = 4
+	ShareFocusStatusIntentResponseCodeFailure ShareFocusStatusIntentResponseCode = 4
 	// The user needs to launch your app to update their focus status.
-	INShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch INShareFocusStatusIntentResponseCode = 5
+	ShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch ShareFocusStatusIntentResponseCode = 5
 )
 
-func (e INShareFocusStatusIntentResponseCode) String() string {
+// String returns the ShareFocusStatusIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShareFocusStatusIntentResponseCode) String() string {
 	switch e {
-	case INShareFocusStatusIntentResponseCodeUnspecified:
-		return "INShareFocusStatusIntentResponseCodeUnspecified"
-	case INShareFocusStatusIntentResponseCodeReady:
-		return "INShareFocusStatusIntentResponseCodeReady"
-	case INShareFocusStatusIntentResponseCodeInProgress:
-		return "INShareFocusStatusIntentResponseCodeInProgress"
-	case INShareFocusStatusIntentResponseCodeSuccess:
-		return "INShareFocusStatusIntentResponseCodeSuccess"
-	case INShareFocusStatusIntentResponseCodeFailure:
-		return "INShareFocusStatusIntentResponseCodeFailure"
-	case INShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch:
-		return "INShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch"
+	case ShareFocusStatusIntentResponseCodeUnspecified:
+		return "ShareFocusStatusIntentResponseCodeUnspecified"
+	case ShareFocusStatusIntentResponseCodeReady:
+		return "ShareFocusStatusIntentResponseCodeReady"
+	case ShareFocusStatusIntentResponseCodeInProgress:
+		return "ShareFocusStatusIntentResponseCodeInProgress"
+	case ShareFocusStatusIntentResponseCodeSuccess:
+		return "ShareFocusStatusIntentResponseCodeSuccess"
+	case ShareFocusStatusIntentResponseCodeFailure:
+		return "ShareFocusStatusIntentResponseCodeFailure"
+	case ShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch:
+		return "ShareFocusStatusIntentResponseCodeFailureRequiringAppLaunch"
 	default:
-		return fmt.Sprintf("INShareFocusStatusIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("ShareFocusStatusIntentResponseCode(%d)", int64(e))
 	}
 }
 
 // A reason why your app can’t use a record to call a person back.
-type INStartCallCallRecordToCallBackUnsupportedReason int64
+type StartCallCallRecordToCallBackUnsupportedReason int64
 
 const (
 	// A reason indicating that no call record matches the intent’s parameter.
-	INStartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall INStartCallCallRecordToCallBackUnsupportedReason = 1
+	StartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall StartCallCallRecordToCallBackUnsupportedReason = 1
 )
 
-func (e INStartCallCallRecordToCallBackUnsupportedReason) String() string {
+// String returns the StartCallCallRecordToCallBackUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StartCallCallRecordToCallBackUnsupportedReason) String() string {
 	switch e {
-	case INStartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall:
-		return "INStartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall"
+	case StartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall:
+		return "StartCallCallRecordToCallBackUnsupportedReasonNoMatchingCall"
 	default:
-		return fmt.Sprintf("INStartCallCallRecordToCallBackUnsupportedReason(%d)", int64(e))
+		return fmt.Sprintf("StartCallCallRecordToCallBackUnsupportedReason(%d)", int64(e))
 	}
 }
 
-type INStickerType int64
+type StickerType int64
 
 const (
-	INStickerTypeUnknown INStickerType = 0
-	INStickerTypeEmoji   INStickerType = 1
-	INStickerTypeGeneric INStickerType = 2
+	StickerTypeUnknown StickerType = 0
+	StickerTypeEmoji   StickerType = 1
+	StickerTypeGeneric StickerType = 2
 )
 
-func (e INStickerType) String() string {
+// String returns the StickerType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StickerType) String() string {
 	switch e {
-	case INStickerTypeUnknown:
-		return "INStickerTypeUnknown"
-	case INStickerTypeEmoji:
-		return "INStickerTypeEmoji"
-	case INStickerTypeGeneric:
-		return "INStickerTypeGeneric"
+	case StickerTypeUnknown:
+		return "StickerTypeUnknown"
+	case StickerTypeEmoji:
+		return "StickerTypeEmoji"
+	case StickerTypeGeneric:
+		return "StickerTypeGeneric"
 	default:
-		return fmt.Sprintf("INStickerType(%d)", int64(e))
+		return fmt.Sprintf("StickerType(%d)", int64(e))
 	}
 }
 
 // Constants that define the type of ticketed event.
-type INTicketedEventCategory int64
+type TicketedEventCategory int64
 
 const (
 	// The ticketed event category is unknown.
-	INTicketedEventCategoryUnknown INTicketedEventCategory = 0
+	TicketedEventCategoryUnknown TicketedEventCategory = 0
 	// The ticketed event is a movie.
-	INTicketedEventCategoryMovie INTicketedEventCategory = 1
+	TicketedEventCategoryMovie TicketedEventCategory = 1
 )
 
-func (e INTicketedEventCategory) String() string {
+// String returns the TicketedEventCategory constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TicketedEventCategory) String() string {
 	switch e {
-	case INTicketedEventCategoryUnknown:
-		return "INTicketedEventCategoryUnknown"
-	case INTicketedEventCategoryMovie:
-		return "INTicketedEventCategoryMovie"
+	case TicketedEventCategoryUnknown:
+		return "TicketedEventCategoryUnknown"
+	case TicketedEventCategoryMovie:
+		return "TicketedEventCategoryMovie"
 	default:
-		return fmt.Sprintf("INTicketedEventCategory(%d)", int64(e))
+		return fmt.Sprintf("TicketedEventCategory(%d)", int64(e))
 	}
 }
 
-type INUnsendMessagesIntentResponseCode int64
+type UnsendMessagesIntentResponseCode int64
 
 const (
-	INUnsendMessagesIntentResponseCodeUnspecified                         INUnsendMessagesIntentResponseCode = 0
-	INUnsendMessagesIntentResponseCodeReady                               INUnsendMessagesIntentResponseCode = 1
-	INUnsendMessagesIntentResponseCodeInProgress                          INUnsendMessagesIntentResponseCode = 2
-	INUnsendMessagesIntentResponseCodeSuccess                             INUnsendMessagesIntentResponseCode = 3
-	INUnsendMessagesIntentResponseCodeFailure                             INUnsendMessagesIntentResponseCode = 4
-	INUnsendMessagesIntentResponseCodeFailureRequiringAppLaunch           INUnsendMessagesIntentResponseCode = 5
-	INUnsendMessagesIntentResponseCodeFailureMessageNotFound              INUnsendMessagesIntentResponseCode = 6
-	INUnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit          INUnsendMessagesIntentResponseCode = 7
-	INUnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported       INUnsendMessagesIntentResponseCode = 8
-	INUnsendMessagesIntentResponseCodeFailureUnsupportedOnService         INUnsendMessagesIntentResponseCode = 9
-	INUnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable   INUnsendMessagesIntentResponseCode = 10
-	INUnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication INUnsendMessagesIntentResponseCode = 11
+	UnsendMessagesIntentResponseCodeUnspecified                         UnsendMessagesIntentResponseCode = 0
+	UnsendMessagesIntentResponseCodeReady                               UnsendMessagesIntentResponseCode = 1
+	UnsendMessagesIntentResponseCodeInProgress                          UnsendMessagesIntentResponseCode = 2
+	UnsendMessagesIntentResponseCodeSuccess                             UnsendMessagesIntentResponseCode = 3
+	UnsendMessagesIntentResponseCodeFailure                             UnsendMessagesIntentResponseCode = 4
+	UnsendMessagesIntentResponseCodeFailureRequiringAppLaunch           UnsendMessagesIntentResponseCode = 5
+	UnsendMessagesIntentResponseCodeFailureMessageNotFound              UnsendMessagesIntentResponseCode = 6
+	UnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit          UnsendMessagesIntentResponseCode = 7
+	UnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported       UnsendMessagesIntentResponseCode = 8
+	UnsendMessagesIntentResponseCodeFailureUnsupportedOnService         UnsendMessagesIntentResponseCode = 9
+	UnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable   UnsendMessagesIntentResponseCode = 10
+	UnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication UnsendMessagesIntentResponseCode = 11
 )
 
-func (e INUnsendMessagesIntentResponseCode) String() string {
+// String returns the UnsendMessagesIntentResponseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UnsendMessagesIntentResponseCode) String() string {
 	switch e {
-	case INUnsendMessagesIntentResponseCodeUnspecified:
-		return "INUnsendMessagesIntentResponseCodeUnspecified"
-	case INUnsendMessagesIntentResponseCodeReady:
-		return "INUnsendMessagesIntentResponseCodeReady"
-	case INUnsendMessagesIntentResponseCodeInProgress:
-		return "INUnsendMessagesIntentResponseCodeInProgress"
-	case INUnsendMessagesIntentResponseCodeSuccess:
-		return "INUnsendMessagesIntentResponseCodeSuccess"
-	case INUnsendMessagesIntentResponseCodeFailure:
-		return "INUnsendMessagesIntentResponseCodeFailure"
-	case INUnsendMessagesIntentResponseCodeFailureRequiringAppLaunch:
-		return "INUnsendMessagesIntentResponseCodeFailureRequiringAppLaunch"
-	case INUnsendMessagesIntentResponseCodeFailureMessageNotFound:
-		return "INUnsendMessagesIntentResponseCodeFailureMessageNotFound"
-	case INUnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit:
-		return "INUnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit"
-	case INUnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported:
-		return "INUnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported"
-	case INUnsendMessagesIntentResponseCodeFailureUnsupportedOnService:
-		return "INUnsendMessagesIntentResponseCodeFailureUnsupportedOnService"
-	case INUnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable:
-		return "INUnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable"
-	case INUnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication:
-		return "INUnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication"
+	case UnsendMessagesIntentResponseCodeUnspecified:
+		return "UnsendMessagesIntentResponseCodeUnspecified"
+	case UnsendMessagesIntentResponseCodeReady:
+		return "UnsendMessagesIntentResponseCodeReady"
+	case UnsendMessagesIntentResponseCodeInProgress:
+		return "UnsendMessagesIntentResponseCodeInProgress"
+	case UnsendMessagesIntentResponseCodeSuccess:
+		return "UnsendMessagesIntentResponseCodeSuccess"
+	case UnsendMessagesIntentResponseCodeFailure:
+		return "UnsendMessagesIntentResponseCodeFailure"
+	case UnsendMessagesIntentResponseCodeFailureRequiringAppLaunch:
+		return "UnsendMessagesIntentResponseCodeFailureRequiringAppLaunch"
+	case UnsendMessagesIntentResponseCodeFailureMessageNotFound:
+		return "UnsendMessagesIntentResponseCodeFailureMessageNotFound"
+	case UnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit:
+		return "UnsendMessagesIntentResponseCodeFailurePastUnsendTimeLimit"
+	case UnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported:
+		return "UnsendMessagesIntentResponseCodeFailureMessageTypeUnsupported"
+	case UnsendMessagesIntentResponseCodeFailureUnsupportedOnService:
+		return "UnsendMessagesIntentResponseCodeFailureUnsupportedOnService"
+	case UnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable:
+		return "UnsendMessagesIntentResponseCodeFailureMessageServiceNotAvailable"
+	case UnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication:
+		return "UnsendMessagesIntentResponseCodeFailureRequiringInAppAuthentication"
 	default:
-		return fmt.Sprintf("INUnsendMessagesIntentResponseCode(%d)", int64(e))
+		return fmt.Sprintf("UnsendMessagesIntentResponseCode(%d)", int64(e))
 	}
 }

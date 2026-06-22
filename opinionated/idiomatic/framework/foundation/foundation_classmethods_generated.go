@@ -6,4221 +6,2941 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// Transform calls the underlying NSAffineTransformTransform.
+// Transform creates a new affine transform initialized to the identity matrix.
 func Transform() *AffineTransform {
-	_r := raw.NSAffineTransformTransform()
-	if _r == nil {
-		return nil
-	}
-	return &AffineTransform{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAffineTransform")), objc.RegisterName("transform"))
+	return AffineTransformFromID(_r)
 }
 
-// NullDescriptor calls the underlying NSAppleEventDescriptorNullDescriptor.
+// NullDescriptor creates and initializes a descriptor with no parameter or attribute values set.
 func NullDescriptor() *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorNullDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("nullDescriptor"))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithDescriptorTypeBytesLength calls the underlying NSAppleEventDescriptorDescriptorWithDescriptorTypeBytesLength.
-func DescriptorWithDescriptorTypeBytesLength(descriptorType uint, bytes_ unsafe.Pointer, byteCount uint) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithDescriptorTypeBytesLength(descriptorType, bytes_, byteCount)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+// DescriptorWithDescriptorTypeData creates a descriptor initialized with the specified event type that stores the specified data (from an instance of NSData).
+func DescriptorWithDescriptorTypeData(descriptorType int, data *Data) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:data:"), descriptorType, objref.IDOf(data))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithDescriptorTypeData calls the underlying NSAppleEventDescriptorDescriptorWithDescriptorTypeData.
-func DescriptorWithDescriptorTypeData(descriptorType uint, data *raw.NSData) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithDescriptorTypeData(descriptorType, data)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
-}
-
-// DescriptorWithBoolean calls the underlying NSAppleEventDescriptorDescriptorWithBoolean.
+// DescriptorWithBoolean creates a descriptor initialized with type typeBoolean that stores the specified Boolean value.
 func DescriptorWithBoolean(boolean uint8) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithBoolean(boolean)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithBoolean:"), boolean)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithEnumCode calls the underlying NSAppleEventDescriptorDescriptorWithEnumCode.
-func DescriptorWithEnumCode(enumerator uint) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithEnumCode(enumerator)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+// DescriptorWithEnumCode creates a descriptor initialized with type typeEnumerated that stores the specified enumerator data type value.
+func DescriptorWithEnumCode(enumerator int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithEnumCode:"), enumerator)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithInt32 calls the underlying NSAppleEventDescriptorDescriptorWithInt32.
+// DescriptorWithInt32 creates a descriptor initialized with Apple event type typeSInt32 that stores the specified integer value.
 func DescriptorWithInt32(signedInt int) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithInt32(signedInt)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithInt32:"), signedInt)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithDouble calls the underlying NSAppleEventDescriptorDescriptorWithDouble.
+// DescriptorWithDouble creates a descriptor initialized with Apple event type typeIEEE64BitFloatingPoint that stores the specified double value.
 func DescriptorWithDouble(doubleValue float64) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithDouble(doubleValue)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDouble:"), doubleValue)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeCode calls the underlying NSAppleEventDescriptorDescriptorWithTypeCode.
-func DescriptorWithTypeCode(typeCode uint) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithTypeCode(typeCode)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+// DescriptorWithTypeCode creates a descriptor initialized with type typeType that stores the specified type value.
+func DescriptorWithTypeCode(typeCode int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithTypeCode:"), typeCode)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithString calls the underlying NSAppleEventDescriptorDescriptorWithString.
+// DescriptorWithString creates a descriptor initialized with type typeUnicodeText that stores the text from the specified string.
 func DescriptorWithString(string_ string) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithString:"), purego.NSString(string_))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithDate calls the underlying NSAppleEventDescriptorDescriptorWithDate.
-func DescriptorWithDate(date *raw.NSDate) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithDate(date)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+// DescriptorWithDate creates a descriptor that stores the specified date value.
+func DescriptorWithDate(date *Date) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDate:"), objref.IDOf(date))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithFileURL calls the underlying NSAppleEventDescriptorDescriptorWithFileURL.
+// DescriptorWithFileURL creates a descriptor that stores the specified file URL.
 func DescriptorWithFileURL(fileURL string) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithFileURL:"), rt.FileURL(fileURL))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// AppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID calls the underlying NSAppleEventDescriptorAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID.
-func AppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass uint, eventID uint, targetDescriptor *raw.NSAppleEventDescriptor, returnID int16, transactionID int) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorAppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass, eventID, targetDescriptor, returnID, transactionID)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+// AppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID creates a descriptor that represents an Apple event, initialized according to the specified information.
+func AppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass int, eventID int, targetDescriptor *AppleEventDescriptor, returnID int16, transactionID int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("appleEventWithEventClass:eventID:targetDescriptor:returnID:transactionID:"), eventClass, eventID, objref.IDOf(targetDescriptor), returnID, transactionID)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// ListDescriptor calls the underlying NSAppleEventDescriptorListDescriptor.
+// ListDescriptor creates and initializes an empty list descriptor.
 func ListDescriptor() *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorListDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("listDescriptor"))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// RecordDescriptor calls the underlying NSAppleEventDescriptorRecordDescriptor.
+// RecordDescriptor creates and initializes a descriptor for an Apple event record whose data has yet to be set.
 func RecordDescriptor() *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorRecordDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("recordDescriptor"))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// CurrentProcessDescriptor calls the underlying NSAppleEventDescriptorCurrentProcessDescriptor.
+// CurrentProcessDescriptor creates and returns an application address descriptor using the current process.
 func CurrentProcessDescriptor() *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorCurrentProcessDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("currentProcessDescriptor"))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithProcessIdentifier calls the underlying NSAppleEventDescriptorDescriptorWithProcessIdentifier.
+// DescriptorWithProcessIdentifier creates and returns an application address descriptor using the specified process identifier.
 func DescriptorWithProcessIdentifier(processIdentifier int) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithProcessIdentifier(processIdentifier)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithProcessIdentifier:"), processIdentifier)
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithBundleIdentifier calls the underlying NSAppleEventDescriptorDescriptorWithBundleIdentifier.
+// DescriptorWithBundleIdentifier creates and returns an application address descriptor using the specified bundle identifier.
 func DescriptorWithBundleIdentifier(bundleIdentifier string) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorWithApplicationURL calls the underlying NSAppleEventDescriptorDescriptorWithApplicationURL.
+// DescriptorWithApplicationURL creates and returns an application address descriptor using the specified application URL.
 func DescriptorWithApplicationURL(applicationURL string) *AppleEventDescriptor {
-	_r := raw.NSAppleEventDescriptorDescriptorWithApplicationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)))
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithApplicationURL:"), rt.FileURL(applicationURL))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// SharedAppleEventManager calls the underlying NSAppleEventManagerSharedAppleEventManager.
+// SharedAppleEventManager returns the single instance of NSAppleEventManager, creating it first if it doesn’t exist.
 func SharedAppleEventManager() *AppleEventManager {
-	_r := raw.NSAppleEventManagerSharedAppleEventManager()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventManager")), objc.RegisterName("sharedAppleEventManager"))
+	return AppleEventManagerFromID(_r)
+}
+
+// ArchivedDataWithRootObject returns a data object containing the encoded form of the object graph whose root object is given.
+func ArchivedDataWithRootObject(rootObject obj.Object) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArchiver")), objc.RegisterName("archivedDataWithRootObject:"), objref.IDOf(rootObject))
+	return DataFromID(_r)
+}
+
+// ArchiveRootObjectToFile creates a temporary instance of NSArchiver and archives an object graph by encoding it into a data object and writing the resulting data object to a specified file.
+func ArchiveRootObjectToFile(rootObject obj.Object, path string) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSArchiver")), objc.RegisterName("archiveRootObject:toFile:"), objref.IDOf(rootObject), purego.NSString(path))
+	return _r
+}
+
+// NSArrayArray creates and returns an empty array.
+func NSArrayArray() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("array"))
+	return obj.Wrap(_r)
+}
+
+// ArrayWithObject creates and returns an array containing a given object.
+func ArrayWithObject(anObject obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithObject:"), objref.IDOf(anObject))
+	return obj.Wrap(_r)
+}
+
+// ArrayWithArray creates and returns an array containing the objects in another given array.
+func ArrayWithArray(array []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
+}
+
+// ArrayWithContentsOfURLError wraps the corresponding Objective-C method.
+func ArrayWithContentsOfURLError(url string) (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &AppleEventManager{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// ArchivedDataWithRootObject calls the underlying NSArchiverArchivedDataWithRootObject.
-func ArchivedDataWithRootObject(rootObject objc.ID) *Data {
-	_r := raw.NSArchiverArchivedDataWithRootObject(rootObject)
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+// ArrayWithContentsOfFile creates and returns an array containing the contents of the file specified by a given path.
+func ArrayWithContentsOfFile(path string) []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithContentsOfFile:"), purego.NSString(path))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ArchiveRootObjectToFile calls the underlying NSArchiverArchiveRootObjectToFile.
-func ArchiveRootObjectToFile(rootObject objc.ID, path string) bool {
-	return raw.NSArchiverArchiveRootObjectToFile(rootObject, foundation.NSStringStringWithUTF8String(path))
+// ArrayWithContentsOfURL creates and returns an array containing the contents specified by a given URL.
+func ArrayWithContentsOfURL(url string) []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithContentsOfURL:"), rt.FileURL(url))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NSArrayArray calls the underlying NSArrayArray.
-func NSArrayArray() *raw.NSArray[objc.ID] {
-	return raw.NSArrayArray()
-}
-
-// ArrayWithObject calls the underlying NSArrayArrayWithObject.
-func ArrayWithObject(anObject objc.ID) *raw.NSArray[objc.ID] {
-	return raw.NSArrayArrayWithObject(anObject)
-}
-
-// ArrayWithObjectsCount calls the underlying NSArrayArrayWithObjectsCount.
-func ArrayWithObjectsCount(objects unsafe.Pointer, cnt uint) *raw.NSArray[objc.ID] {
-	return raw.NSArrayArrayWithObjectsCount(objects, cnt)
-}
-
-// ArrayWithArray calls the underlying NSArrayArrayWithArray.
-func ArrayWithArray(array *raw.NSArray[objc.ID]) *raw.NSArray[objc.ID] {
-	return raw.NSArrayArrayWithArray(array)
-}
-
-// ArrayWithContentsOfURLError calls the underlying NSArrayArrayWithContentsOfURLError.
-func ArrayWithContentsOfURLError(url string) (*raw.NSArray[objc.ID], error) {
-	return raw.NSArrayArrayWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// ArrayWithContentsOfFile calls the underlying NSArrayArrayWithContentsOfFile.
-func ArrayWithContentsOfFile(path string) *raw.NSArray[objc.ID] {
-	return raw.NSArrayArrayWithContentsOfFile(foundation.NSStringStringWithUTF8String(path))
-}
-
-// ArrayWithContentsOfURL calls the underlying NSArrayArrayWithContentsOfURL.
-func ArrayWithContentsOfURL(url string) *raw.NSArray[objc.ID] {
-	return raw.NSArrayArrayWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// CurrentHandler calls the underlying NSAssertionHandlerCurrentHandler.
+// CurrentHandler wraps the corresponding Objective-C method.
 func CurrentHandler() *AssertionHandler {
-	_r := raw.NSAssertionHandlerCurrentHandler()
-	if _r == nil {
-		return nil
-	}
-	return &AssertionHandler{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAssertionHandler")), objc.RegisterName("currentHandler"))
+	return AssertionHandlerFromID(_r)
 }
 
-// LocalizedAttributedStringWithFormat calls the underlying NSAttributedStringLocalizedAttributedStringWithFormat.
-func LocalizedAttributedStringWithFormat(format *raw.NSAttributedString) *AttributedString {
-	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormat(format)
-	if _r == nil {
-		return nil
-	}
-	return &AttributedString{inner: _r}
+// LocalizedAttributedStringWithFormat formats the string using the current locale and default options.
+func LocalizedAttributedStringWithFormat(format *AttributedString) *AttributedString {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:"), objref.IDOf(format))
+	return AttributedStringFromID(_r)
 }
 
-// LocalizedAttributedStringWithFormatOptions calls the underlying NSAttributedStringLocalizedAttributedStringWithFormatOptions.
-func LocalizedAttributedStringWithFormatOptions(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions) *AttributedString {
-	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatOptions(format, raw.NSAttributedStringFormattingOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &AttributedString{inner: _r}
+// LocalizedAttributedStringWithFormatOptions formats the string using the current locale and the specified options.
+func LocalizedAttributedStringWithFormatOptions(format *AttributedString, options AttributedStringFormattingOptions) *AttributedString {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:options:"), objref.IDOf(format), options)
+	return AttributedStringFromID(_r)
 }
 
-// LocalizedAttributedStringWithFormatContext calls the underlying NSAttributedStringLocalizedAttributedStringWithFormatContext.
-func LocalizedAttributedStringWithFormatContext(format *raw.NSAttributedString, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
-	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatContext(format, context_)
-	if _r == nil {
-		return nil
-	}
-	return &AttributedString{inner: _r}
+// LocalizedAttributedStringWithFormatContext formats the string using the current locale and default options.
+func LocalizedAttributedStringWithFormatContext(format *AttributedString, context_ obj.Object) *AttributedString {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:context:"), objref.IDOf(format), objref.IDOf(context_))
+	return AttributedStringFromID(_r)
 }
 
-// LocalizedAttributedStringWithFormatOptionsContext calls the underlying NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext.
-func LocalizedAttributedStringWithFormatOptionsContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
-	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext(format, raw.NSAttributedStringFormattingOptions(options), context_)
-	if _r == nil {
-		return nil
-	}
-	return &AttributedString{inner: _r}
+// LocalizedAttributedStringWithFormatOptionsContext formats the string using the current locale and the specified options.
+func LocalizedAttributedStringWithFormatOptionsContext(format *AttributedString, options AttributedStringFormattingOptions, context_ obj.Object) *AttributedString {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:options:context:"), objref.IDOf(format), options, objref.IDOf(context_))
+	return AttributedStringFromID(_r)
 }
 
-// AddObject calls the underlying NSAutoreleasePoolAddObject.
-func AddObject(anObject objc.ID) {
-	raw.NSAutoreleasePoolAddObject(anObject)
+// AddObject adds a given object to the active autorelease pool in the current thread.
+func AddObject(anObject obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("NSAutoreleasePool")), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
-// BlockOperationWith calls the underlying NSBlockOperationBlockOperationWith.
+// BlockOperationWith wraps the corresponding Objective-C method.
 func BlockOperationWith(block func()) *BlockOperation {
-	_r := raw.NSBlockOperationBlockOperationWith(block)
-	if _r == nil {
-		return nil
-	}
-	return &BlockOperation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBlockOperation")), objc.RegisterName("blockOperationWithBlock:"), objc.NewBlock(func(_ objc.Block) { block() }))
+	return BlockOperationFromID(_r)
 }
 
-// BundleWithPath calls the underlying NSBundleBundleWithPath.
+// BundleWithPath returns an NSBundle object that corresponds to the specified directory.
 func BundleWithPath(path string) *Bundle {
-	_r := raw.NSBundleBundleWithPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Bundle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("bundleWithPath:"), purego.NSString(path))
+	return BundleFromID(_r)
 }
 
-// BundleWithURL calls the underlying NSBundleBundleWithURL.
+// BundleWithURL wraps the corresponding Objective-C method.
 func BundleWithURL(url string) *Bundle {
-	_r := raw.NSBundleBundleWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &Bundle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("bundleWithURL:"), rt.FileURL(url))
+	return BundleFromID(_r)
 }
 
-// BundleForClass calls the underlying NSBundleBundleForClass.
-func BundleForClass(aClass objc.Class) *Bundle {
-	_r := raw.NSBundleBundleForClass(aClass)
-	if _r == nil {
-		return nil
-	}
-	return &Bundle{inner: _r}
-}
-
-// BundleWithIdentifier calls the underlying NSBundleBundleWithIdentifier.
+// BundleWithIdentifier wraps the corresponding Objective-C method.
 func BundleWithIdentifier(identifier string) *Bundle {
-	_r := raw.NSBundleBundleWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &Bundle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("bundleWithIdentifier:"), purego.NSString(identifier))
+	return BundleFromID(_r)
 }
 
-// URLForResourceWithExtensionSubdirectoryInBundleWithURL calls the underlying NSBundleURLForResourceWithExtensionSubdirectoryInBundleWithURL.
+// URLForResourceWithExtensionSubdirectoryInBundleWithURL wraps the corresponding Objective-C method.
 func URLForResourceWithExtensionSubdirectoryInBundleWithURL(name string, ext string, subpath string, bundleURL string) *URL {
-	_r := raw.NSBundleURLForResourceWithExtensionSubdirectoryInBundleWithURL(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(bundleURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("URLForResource:withExtension:subdirectory:inBundleWithURL:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), rt.FileURL(bundleURL))
+	return URLFromID(_r)
 }
 
-// URLsForResourcesWithExtensionSubdirectoryInBundleWithURL calls the underlying NSBundleURLsForResourcesWithExtensionSubdirectoryInBundleWithURL.
-func URLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext string, subpath string, bundleURL string) *raw.NSArray[*raw.NSURL] {
-	return raw.NSBundleURLsForResourcesWithExtensionSubdirectoryInBundleWithURL(foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(bundleURL)))
+// URLsForResourcesWithExtensionSubdirectoryInBundleWithURL wraps the corresponding Objective-C method.
+func URLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext string, subpath string, bundleURL string) []*URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:inBundleWithURL:"), purego.NSString(ext), purego.NSString(subpath), rt.FileURL(bundleURL))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) })
 }
 
-// PathForResourceOfTypeInDirectory calls the underlying NSBundlePathForResourceOfTypeInDirectory.
-func PathForResourceOfTypeInDirectory(name string, ext string, bundlePath string) *String {
-	_r := raw.NSBundlePathForResourceOfTypeInDirectory(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(bundlePath))
-	if _r == nil {
-		return nil
+// PathForResourceOfTypeInDirectory wraps the corresponding Objective-C method.
+func PathForResourceOfTypeInDirectory(name string, ext string, bundlePath string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("pathForResource:ofType:inDirectory:"), purego.NSString(name), purego.NSString(ext), purego.NSString(bundlePath))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// PathsForResourcesOfTypeInDirectory calls the underlying NSBundlePathsForResourcesOfTypeInDirectory.
-func PathsForResourcesOfTypeInDirectory(ext string, bundlePath string) *raw.NSArray[*raw.NSString] {
-	return raw.NSBundlePathsForResourcesOfTypeInDirectory(foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(bundlePath))
+// PathsForResourcesOfTypeInDirectory wraps the corresponding Objective-C method.
+func PathsForResourcesOfTypeInDirectory(ext string, bundlePath string) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("pathsForResourcesOfType:inDirectory:"), purego.NSString(ext), purego.NSString(bundlePath))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredLocalizationsFromArray calls the underlying NSBundlePreferredLocalizationsFromArray.
-func PreferredLocalizationsFromArray(localizationsArray ...StringProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(localizationsArray))
-	for _i, _v := range localizationsArray {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return raw.NSBundlePreferredLocalizationsFromArray(_arg0)
+// PreferredLocalizationsFromArray wraps the corresponding Objective-C method.
+func PreferredLocalizationsFromArray(localizationsArray []string) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("preferredLocalizationsFromArray:"), purego.SliceToNSArray(localizationsArray, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredLocalizationsFromArrayForPreferences calls the underlying NSBundlePreferredLocalizationsFromArrayForPreferences.
-func PreferredLocalizationsFromArrayForPreferences(localizationsArray *raw.NSArray[*raw.NSString], preferencesArray ...StringProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(preferencesArray))
-	for _i, _v := range preferencesArray {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg1 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return raw.NSBundlePreferredLocalizationsFromArrayForPreferences(localizationsArray, _arg1)
+// PreferredLocalizationsFromArrayForPreferences wraps the corresponding Objective-C method.
+func PreferredLocalizationsFromArrayForPreferences(localizationsArray []string, preferencesArray []string) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("preferredLocalizationsFromArray:forPreferences:"), purego.SliceToNSArray(localizationsArray, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(preferencesArray, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// MainBundle calls the underlying NSBundleMainBundle.
+// MainBundle wraps the corresponding Objective-C method.
 func MainBundle() *Bundle {
-	_r := raw.NSBundleMainBundle()
-	if _r == nil {
-		return nil
-	}
-	return &Bundle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("mainBundle"))
+	return BundleFromID(_r)
 }
 
+// AllBundles wraps the corresponding Objective-C method.
+//
 // AllBundles returns the collection as a Go slice.
 func AllBundles() []*Bundle {
-	arr := raw.NSBundleAllBundles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Bundle {
-		return &Bundle{inner: raw.NSBundleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("allBundles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Bundle { return BundleFromID(_id) })
 }
 
+// AllFrameworks wraps the corresponding Objective-C method.
+//
 // AllFrameworks returns the collection as a Go slice.
 func AllFrameworks() []*Bundle {
-	arr := raw.NSBundleAllFrameworks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Bundle {
-		return &Bundle{inner: raw.NSBundleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("allFrameworks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Bundle { return BundleFromID(_id) })
 }
 
-// StringFromByteCountCountStyle calls the underlying NSByteCountFormatterStringFromByteCountCountStyle.
-func StringFromByteCountCountStyle(byteCount int64, countStyle NSByteCountFormatterCountStyle) *String {
-	_r := raw.NSByteCountFormatterStringFromByteCountCountStyle(byteCount, raw.NSByteCountFormatterCountStyle(countStyle))
-	if _r == nil {
-		return nil
+// StringFromByteCountCountStyle wraps the corresponding Objective-C method.
+func StringFromByteCountCountStyle(byteCount int64, countStyle ByteCountFormatterCountStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSByteCountFormatter")), objc.RegisterName("stringFromByteCount:countStyle:"), byteCount, countStyle)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// StringFromMeasurementCountStyle calls the underlying NSByteCountFormatterStringFromMeasurementCountStyle.
-func StringFromMeasurementCountStyle(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage], countStyle NSByteCountFormatterCountStyle) *String {
-	_r := raw.NSByteCountFormatterStringFromMeasurementCountStyle(measurement, raw.NSByteCountFormatterCountStyle(countStyle))
-	if _r == nil {
-		return nil
+// StringFromMeasurementCountStyle wraps the corresponding Objective-C method.
+func StringFromMeasurementCountStyle(measurement obj.Object, countStyle ByteCountFormatterCountStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSByteCountFormatter")), objc.RegisterName("stringFromMeasurement:countStyle:"), objref.IDOf(measurement), countStyle)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CalendarWithIdentifier calls the underlying NSCalendarCalendarWithIdentifier.
-func CalendarWithIdentifier(calendarIdentifierConstant *raw.NSString) *Calendar {
-	_r := raw.NSCalendarCalendarWithIdentifier(calendarIdentifierConstant)
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+// CalendarWithIdentifier creates a new calendar specified by a given identifier.
+func CalendarWithIdentifier(calendarIdentifierConstant *String) *Calendar {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("calendarWithIdentifier:"), objref.IDOf(calendarIdentifierConstant))
+	return CalendarFromID(_r)
 }
 
-// CurrentCalendar calls the underlying NSCalendarCurrentCalendar.
+// CurrentCalendar wraps the corresponding Objective-C method.
 func CurrentCalendar() *Calendar {
-	_r := raw.NSCalendarCurrentCalendar()
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("currentCalendar"))
+	return CalendarFromID(_r)
 }
 
-// AutoupdatingCurrentCalendar calls the underlying NSCalendarAutoupdatingCurrentCalendar.
+// AutoupdatingCurrentCalendar wraps the corresponding Objective-C method.
 func AutoupdatingCurrentCalendar() *Calendar {
-	_r := raw.NSCalendarAutoupdatingCurrentCalendar()
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("autoupdatingCurrentCalendar"))
+	return CalendarFromID(_r)
 }
 
-// NSCalendarDateCalendarDate calls the underlying NSCalendarDateCalendarDate.
-func NSCalendarDateCalendarDate() objc.ID {
-	return raw.NSCalendarDateCalendarDate()
+// NSCalendarDateCalendarDate wraps the corresponding Objective-C method.
+func NSCalendarDateCalendarDate() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("calendarDate"))
+	return obj.Wrap(_r)
 }
 
-// DateWithStringCalendarFormatLocale calls the underlying NSCalendarDateDateWithStringCalendarFormatLocale.
-func DateWithStringCalendarFormatLocale(description string, format string, locale objc.ID) objc.ID {
-	return raw.NSCalendarDateDateWithStringCalendarFormatLocale(foundation.NSStringStringWithUTF8String(description), foundation.NSStringStringWithUTF8String(format), locale)
+// DateWithStringCalendarFormatLocale wraps the corresponding Objective-C method.
+func DateWithStringCalendarFormatLocale(description string, format string, locale obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("dateWithString:calendarFormat:locale:"), purego.NSString(description), purego.NSString(format), objref.IDOf(locale))
+	return obj.Wrap(_r)
 }
 
-// DateWithStringCalendarFormat calls the underlying NSCalendarDateDateWithStringCalendarFormat.
-func DateWithStringCalendarFormat(description string, format string) objc.ID {
-	return raw.NSCalendarDateDateWithStringCalendarFormat(foundation.NSStringStringWithUTF8String(description), foundation.NSStringStringWithUTF8String(format))
+// DateWithStringCalendarFormat wraps the corresponding Objective-C method.
+func DateWithStringCalendarFormat(description string, format string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("dateWithString:calendarFormat:"), purego.NSString(description), purego.NSString(format))
+	return obj.Wrap(_r)
 }
 
-// DateWithYearMonthDayHourMinuteSecondTimeZone calls the underlying NSCalendarDateDateWithYearMonthDayHourMinuteSecondTimeZone.
-func DateWithYearMonthDayHourMinuteSecondTimeZone(year int, month uint, day uint, hour uint, minute uint, second uint, aTimeZone *raw.NSTimeZone) objc.ID {
-	return raw.NSCalendarDateDateWithYearMonthDayHourMinuteSecondTimeZone(year, month, day, hour, minute, second, aTimeZone)
+// DateWithYearMonthDayHourMinuteSecondTimeZone wraps the corresponding Objective-C method.
+func DateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int, day int, hour int, minute int, second int, aTimeZone *TimeZone) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("dateWithYear:month:day:hour:minute:second:timeZone:"), year, month, day, hour, minute, second, objref.IDOf(aTimeZone))
+	return obj.Wrap(_r)
 }
 
-// DistantFuture calls the underlying NSCalendarDateDistantFuture.
+// DistantFuture wraps the corresponding Objective-C method.
 func DistantFuture() *CalendarDate {
-	_r := raw.NSCalendarDateDistantFuture()
-	if _r == nil {
-		return nil
-	}
-	return &CalendarDate{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("distantFuture"))
+	return CalendarDateFromID(_r)
 }
 
-// DistantPast calls the underlying NSCalendarDateDistantPast.
+// DistantPast wraps the corresponding Objective-C method.
 func DistantPast() *CalendarDate {
-	_r := raw.NSCalendarDateDistantPast()
-	if _r == nil {
-		return nil
-	}
-	return &CalendarDate{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("distantPast"))
+	return CalendarDateFromID(_r)
 }
 
-// CharacterSetWithRange calls the underlying NSCharacterSetCharacterSetWithRange.
-func CharacterSetWithRange(aRange raw.NSRange) *CharacterSet {
-	_r := raw.NSCharacterSetCharacterSetWithRange(aRange)
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
-}
-
-// CharacterSetWithCharactersInString calls the underlying NSCharacterSetCharacterSetWithCharactersInString.
+// CharacterSetWithCharactersInString returns a character set containing the characters in a given string.
 func CharacterSetWithCharactersInString(aString string) *CharacterSet {
-	_r := raw.NSCharacterSetCharacterSetWithCharactersInString(foundation.NSStringStringWithUTF8String(aString))
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithCharactersInString:"), purego.NSString(aString))
+	return CharacterSetFromID(_r)
 }
 
-// CharacterSetWithBitmapRepresentation calls the underlying NSCharacterSetCharacterSetWithBitmapRepresentation.
-func CharacterSetWithBitmapRepresentation(data *raw.NSData) *CharacterSet {
-	_r := raw.NSCharacterSetCharacterSetWithBitmapRepresentation(data)
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+// CharacterSetWithBitmapRepresentation returns a character set containing characters determined by a given bitmap representation.
+func CharacterSetWithBitmapRepresentation(data *Data) *CharacterSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithBitmapRepresentation:"), objref.IDOf(data))
+	return CharacterSetFromID(_r)
 }
 
-// CharacterSetWithContentsOfFile calls the underlying NSCharacterSetCharacterSetWithContentsOfFile.
+// CharacterSetWithContentsOfFile returns a character set read from the bitmap representation stored in the file a given path.
 func CharacterSetWithContentsOfFile(fName string) *CharacterSet {
-	_r := raw.NSCharacterSetCharacterSetWithContentsOfFile(foundation.NSStringStringWithUTF8String(fName))
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithContentsOfFile:"), purego.NSString(fName))
+	return CharacterSetFromID(_r)
 }
 
-// ControlCharacterSet calls the underlying NSCharacterSetControlCharacterSet.
+// ControlCharacterSet wraps the corresponding Objective-C method.
 func ControlCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetControlCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("controlCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// WhitespaceCharacterSet calls the underlying NSCharacterSetWhitespaceCharacterSet.
+// WhitespaceCharacterSet wraps the corresponding Objective-C method.
 func WhitespaceCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetWhitespaceCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("whitespaceCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// WhitespaceAndNewlineCharacterSet calls the underlying NSCharacterSetWhitespaceAndNewlineCharacterSet.
+// WhitespaceAndNewlineCharacterSet wraps the corresponding Objective-C method.
 func WhitespaceAndNewlineCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetWhitespaceAndNewlineCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("whitespaceAndNewlineCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// DecimalDigitCharacterSet calls the underlying NSCharacterSetDecimalDigitCharacterSet.
+// DecimalDigitCharacterSet wraps the corresponding Objective-C method.
 func DecimalDigitCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetDecimalDigitCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("decimalDigitCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// LetterCharacterSet calls the underlying NSCharacterSetLetterCharacterSet.
+// LetterCharacterSet wraps the corresponding Objective-C method.
 func LetterCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("letterCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// LowercaseLetterCharacterSet calls the underlying NSCharacterSetLowercaseLetterCharacterSet.
+// LowercaseLetterCharacterSet wraps the corresponding Objective-C method.
 func LowercaseLetterCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetLowercaseLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("lowercaseLetterCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// UppercaseLetterCharacterSet calls the underlying NSCharacterSetUppercaseLetterCharacterSet.
+// UppercaseLetterCharacterSet wraps the corresponding Objective-C method.
 func UppercaseLetterCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetUppercaseLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("uppercaseLetterCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// NonBaseCharacterSet calls the underlying NSCharacterSetNonBaseCharacterSet.
+// NonBaseCharacterSet wraps the corresponding Objective-C method.
 func NonBaseCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetNonBaseCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("nonBaseCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// AlphanumericCharacterSet calls the underlying NSCharacterSetAlphanumericCharacterSet.
+// AlphanumericCharacterSet wraps the corresponding Objective-C method.
 func AlphanumericCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetAlphanumericCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("alphanumericCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// DecomposableCharacterSet calls the underlying NSCharacterSetDecomposableCharacterSet.
+// DecomposableCharacterSet wraps the corresponding Objective-C method.
 func DecomposableCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetDecomposableCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("decomposableCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// IllegalCharacterSet calls the underlying NSCharacterSetIllegalCharacterSet.
+// IllegalCharacterSet wraps the corresponding Objective-C method.
 func IllegalCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetIllegalCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("illegalCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// PunctuationCharacterSet calls the underlying NSCharacterSetPunctuationCharacterSet.
+// PunctuationCharacterSet wraps the corresponding Objective-C method.
 func PunctuationCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetPunctuationCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("punctuationCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// CapitalizedLetterCharacterSet calls the underlying NSCharacterSetCapitalizedLetterCharacterSet.
+// CapitalizedLetterCharacterSet wraps the corresponding Objective-C method.
 func CapitalizedLetterCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetCapitalizedLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("capitalizedLetterCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// SymbolCharacterSet calls the underlying NSCharacterSetSymbolCharacterSet.
+// SymbolCharacterSet wraps the corresponding Objective-C method.
 func SymbolCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetSymbolCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("symbolCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// NewlineCharacterSet calls the underlying NSCharacterSetNewlineCharacterSet.
+// NewlineCharacterSet wraps the corresponding Objective-C method.
 func NewlineCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetNewlineCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("newlineCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// URLUserAllowedCharacterSet calls the underlying NSCharacterSetURLUserAllowedCharacterSet.
+// URLUserAllowedCharacterSet wraps the corresponding Objective-C method.
 func URLUserAllowedCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetURLUserAllowedCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLUserAllowedCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// URLPasswordAllowedCharacterSet calls the underlying NSCharacterSetURLPasswordAllowedCharacterSet.
+// URLPasswordAllowedCharacterSet wraps the corresponding Objective-C method.
 func URLPasswordAllowedCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetURLPasswordAllowedCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLPasswordAllowedCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// URLHostAllowedCharacterSet calls the underlying NSCharacterSetURLHostAllowedCharacterSet.
+// URLHostAllowedCharacterSet wraps the corresponding Objective-C method.
 func URLHostAllowedCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetURLHostAllowedCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLHostAllowedCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// URLPathAllowedCharacterSet calls the underlying NSCharacterSetURLPathAllowedCharacterSet.
+// URLPathAllowedCharacterSet wraps the corresponding Objective-C method.
 func URLPathAllowedCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetURLPathAllowedCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLPathAllowedCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// URLQueryAllowedCharacterSet calls the underlying NSCharacterSetURLQueryAllowedCharacterSet.
+// URLQueryAllowedCharacterSet wraps the corresponding Objective-C method.
 func URLQueryAllowedCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetURLQueryAllowedCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLQueryAllowedCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// URLFragmentAllowedCharacterSet calls the underlying NSCharacterSetURLFragmentAllowedCharacterSet.
+// URLFragmentAllowedCharacterSet wraps the corresponding Objective-C method.
 func URLFragmentAllowedCharacterSet() *CharacterSet {
-	_r := raw.NSCharacterSetURLFragmentAllowedCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLFragmentAllowedCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// RegisterClassDescriptionForClass calls the underlying NSClassDescriptionRegisterClassDescriptionForClass.
-func RegisterClassDescriptionForClass(description *raw.NSClassDescription, aClass objc.Class) {
-	raw.NSClassDescriptionRegisterClassDescriptionForClass(description, aClass)
-}
-
-// InvalidateClassDescriptionCache calls the underlying NSClassDescriptionInvalidateClassDescriptionCache.
+// InvalidateClassDescriptionCache removes all NSClassDescription objects from the cache.
 func InvalidateClassDescriptionCache() {
-	raw.NSClassDescriptionInvalidateClassDescriptionCache()
+	objc.Send[objc.ID](objc.ID(_class("NSClassDescription")), objc.RegisterName("invalidateClassDescriptionCache"))
 }
 
-// ClassDescriptionForClass calls the underlying NSClassDescriptionClassDescriptionForClass.
-func ClassDescriptionForClass(aClass objc.Class) *ClassDescription {
-	_r := raw.NSClassDescriptionClassDescriptionForClass(aClass)
-	if _r == nil {
-		return nil
-	}
-	return &ClassDescription{inner: _r}
+// PredicateWithLeftExpressionRightExpressionModifierTypeOptions creates and returns a predicate of a given type formed by combining given left and right expressions using a given modifier and options.
+func PredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *Expression, rhs *Expression, modifier ComparisonPredicateModifier, type_ PredicateOperatorType, options ComparisonPredicateOptions) *ComparisonPredicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSComparisonPredicate")), objc.RegisterName("predicateWithLeftExpression:rightExpression:modifier:type:options:"), objref.IDOf(lhs), objref.IDOf(rhs), modifier, type_, options)
+	return ComparisonPredicateFromID(_r)
 }
 
-// PredicateWithLeftExpressionRightExpressionModifierTypeOptions calls the underlying NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions.
-func PredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *ComparisonPredicate {
-	_r := raw.NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs, rhs, raw.NSComparisonPredicateModifier(modifier), raw.NSPredicateOperatorType(type_), raw.NSComparisonPredicateOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &ComparisonPredicate{inner: _r}
+// AndPredicateWithSubpredicates returns a new predicate that you form using an AND operation on the predicates in a specified array.
+func AndPredicateWithSubpredicates(subpredicates []*Predicate) *CompoundPredicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("andPredicateWithSubpredicates:"), purego.SliceToNSArray(subpredicates, func(_v *Predicate) objc.ID { return objref.IDOf(_v) }))
+	return CompoundPredicateFromID(_r)
 }
 
-// PredicateWithLeftExpressionRightExpressionCustomSelector calls the underlying NSComparisonPredicatePredicateWithLeftExpressionRightExpressionCustomSelector.
-func PredicateWithLeftExpressionRightExpressionCustomSelector(lhs *raw.NSExpression, rhs *raw.NSExpression, selector objc.SEL) *ComparisonPredicate {
-	_r := raw.NSComparisonPredicatePredicateWithLeftExpressionRightExpressionCustomSelector(lhs, rhs, selector)
-	if _r == nil {
-		return nil
-	}
-	return &ComparisonPredicate{inner: _r}
+// OrPredicateWithSubpredicates returns a new predicate that you form using an OR operation on the predicates in a specified array.
+func OrPredicateWithSubpredicates(subpredicates []*Predicate) *CompoundPredicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("orPredicateWithSubpredicates:"), purego.SliceToNSArray(subpredicates, func(_v *Predicate) objc.ID { return objref.IDOf(_v) }))
+	return CompoundPredicateFromID(_r)
 }
 
-// AndPredicateWithSubpredicates calls the underlying NSCompoundPredicateAndPredicateWithSubpredicates.
-func AndPredicateWithSubpredicates(subpredicates ...PredicateProvider) *CompoundPredicate {
-	_ptrs := make([]objc.ID, len(subpredicates))
-	for _i, _v := range subpredicates {
-		_ptrs[_i] = _v.asPredicate().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSPredicate]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSCompoundPredicateAndPredicateWithSubpredicates(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &CompoundPredicate{inner: _r}
+// NotPredicateWithSubpredicate returns a new predicate that you form using a NOT operation on a specified predicate.
+func NotPredicateWithSubpredicate(predicate *Predicate) *CompoundPredicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("notPredicateWithSubpredicate:"), objref.IDOf(predicate))
+	return CompoundPredicateFromID(_r)
 }
 
-// OrPredicateWithSubpredicates calls the underlying NSCompoundPredicateOrPredicateWithSubpredicates.
-func OrPredicateWithSubpredicates(subpredicates ...PredicateProvider) *CompoundPredicate {
-	_ptrs := make([]objc.ID, len(subpredicates))
-	for _i, _v := range subpredicates {
-		_ptrs[_i] = _v.asPredicate().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSPredicate]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSCompoundPredicateOrPredicateWithSubpredicates(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &CompoundPredicate{inner: _r}
-}
-
-// NotPredicateWithSubpredicate calls the underlying NSCompoundPredicateNotPredicateWithSubpredicate.
-func NotPredicateWithSubpredicate(predicate *raw.NSPredicate) *CompoundPredicate {
-	_r := raw.NSCompoundPredicateNotPredicateWithSubpredicate(predicate)
-	if _r == nil {
-		return nil
-	}
-	return &CompoundPredicate{inner: _r}
-}
-
+// AllConnections returns all valid NSConnection objects in the process.
+//
 // AllConnections returns the collection as a Go slice.
 func AllConnections() []*Connection {
-	arr := raw.NSConnectionAllConnections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Connection {
-		return &Connection{inner: raw.NSConnectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("allConnections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Connection { return ConnectionFromID(_id) })
 }
 
-// DefaultConnection calls the underlying NSConnectionDefaultConnection.
+// DefaultConnection returns the default NSConnection object for the current thread.
 func DefaultConnection() *Connection {
-	_r := raw.NSConnectionDefaultConnection()
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("defaultConnection"))
+	return ConnectionFromID(_r)
 }
 
-// ConnectionWithRegisteredNameHost calls the underlying NSConnectionConnectionWithRegisteredNameHost.
+// ConnectionWithRegisteredNameHost returns the NSConnection object whose send port links it to the NSConnection object registered with the default NSPortNameServer under a given name on a given host.
 func ConnectionWithRegisteredNameHost(name string, hostName string) *Connection {
-	_r := raw.NSConnectionConnectionWithRegisteredNameHost(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(hostName))
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("connectionWithRegisteredName:host:"), purego.NSString(name), purego.NSString(hostName))
+	return ConnectionFromID(_r)
 }
 
-// ConnectionWithRegisteredNameHostUsingNameServer calls the underlying NSConnectionConnectionWithRegisteredNameHostUsingNameServer.
-func ConnectionWithRegisteredNameHostUsingNameServer(name string, hostName string, server *raw.NSPortNameServer) *Connection {
-	_r := raw.NSConnectionConnectionWithRegisteredNameHostUsingNameServer(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(hostName), server)
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+// ConnectionWithRegisteredNameHostUsingNameServer returns the NSConnection object whose send port links it to the NSConnection object registered under a given name with a given server on a given host.
+func ConnectionWithRegisteredNameHostUsingNameServer(name string, hostName string, server *PortNameServer) *Connection {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("connectionWithRegisteredName:host:usingNameServer:"), purego.NSString(name), purego.NSString(hostName), objref.IDOf(server))
+	return ConnectionFromID(_r)
 }
 
-// RootProxyForConnectionWithRegisteredNameHost calls the underlying NSConnectionRootProxyForConnectionWithRegisteredNameHost.
+// RootProxyForConnectionWithRegisteredNameHost returns a proxy for the root object of the NSConnection object registered with the default NSPortNameServer under a given name on a given host.
 func RootProxyForConnectionWithRegisteredNameHost(name string, hostName string) *DistantObject {
-	_r := raw.NSConnectionRootProxyForConnectionWithRegisteredNameHost(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(hostName))
-	if _r == nil {
-		return nil
-	}
-	return &DistantObject{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("rootProxyForConnectionWithRegisteredName:host:"), purego.NSString(name), purego.NSString(hostName))
+	return DistantObjectFromID(_r)
 }
 
-// RootProxyForConnectionWithRegisteredNameHostUsingNameServer calls the underlying NSConnectionRootProxyForConnectionWithRegisteredNameHostUsingNameServer.
-func RootProxyForConnectionWithRegisteredNameHostUsingNameServer(name string, hostName string, server *raw.NSPortNameServer) *DistantObject {
-	_r := raw.NSConnectionRootProxyForConnectionWithRegisteredNameHostUsingNameServer(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(hostName), server)
-	if _r == nil {
-		return nil
-	}
-	return &DistantObject{inner: _r}
+// RootProxyForConnectionWithRegisteredNameHostUsingNameServer returns a proxy for the root object of the NSConnection object registered with server under name on a given host.
+func RootProxyForConnectionWithRegisteredNameHostUsingNameServer(name string, hostName string, server *PortNameServer) *DistantObject {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("rootProxyForConnectionWithRegisteredName:host:usingNameServer:"), purego.NSString(name), purego.NSString(hostName), objref.IDOf(server))
+	return DistantObjectFromID(_r)
 }
 
-// ServiceConnectionWithNameRootObjectUsingNameServer calls the underlying NSConnectionServiceConnectionWithNameRootObjectUsingNameServer.
-func ServiceConnectionWithNameRootObjectUsingNameServer(name string, root objc.ID, server *raw.NSPortNameServer) *Connection {
-	_r := raw.NSConnectionServiceConnectionWithNameRootObjectUsingNameServer(foundation.NSStringStringWithUTF8String(name), root, server)
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+// ServiceConnectionWithNameRootObjectUsingNameServer creates and returns a new connection object representing a vended service on the specified port name server.
+func ServiceConnectionWithNameRootObjectUsingNameServer(name string, root obj.Object, server *PortNameServer) *Connection {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("serviceConnectionWithName:rootObject:usingNameServer:"), purego.NSString(name), objref.IDOf(root), objref.IDOf(server))
+	return ConnectionFromID(_r)
 }
 
-// ServiceConnectionWithNameRootObject calls the underlying NSConnectionServiceConnectionWithNameRootObject.
-func ServiceConnectionWithNameRootObject(name string, root objc.ID) *Connection {
-	_r := raw.NSConnectionServiceConnectionWithNameRootObject(foundation.NSStringStringWithUTF8String(name), root)
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+// ServiceConnectionWithNameRootObject creates and returns a new connection object representing a vended service on the default system port name server.
+func ServiceConnectionWithNameRootObject(name string, root obj.Object) *Connection {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("serviceConnectionWithName:rootObject:"), purego.NSString(name), objref.IDOf(root))
+	return ConnectionFromID(_r)
 }
 
-// ConnectionWithReceivePortSendPort calls the underlying NSConnectionConnectionWithReceivePortSendPort.
-func ConnectionWithReceivePortSendPort(receivePort *raw.NSPort, sendPort *raw.NSPort) *Connection {
-	_r := raw.NSConnectionConnectionWithReceivePortSendPort(receivePort, sendPort)
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+// ConnectionWithReceivePortSendPort returns an NSConnection object that communicates using given send and receive ports.
+func ConnectionWithReceivePortSendPort(receivePort *Port, sendPort *Port) *Connection {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("connectionWithReceivePort:sendPort:"), objref.IDOf(receivePort), objref.IDOf(sendPort))
+	return ConnectionFromID(_r)
 }
 
-// CurrentConversation calls the underlying NSConnectionCurrentConversation.
-func CurrentConversation() objc.ID {
-	return raw.NSConnectionCurrentConversation()
+// CurrentConversation returns a token object representing any conversation in progress in the current thread.
+func CurrentConversation() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("currentConversation"))
+	return obj.Wrap(_r)
 }
 
-// NSDataData calls the underlying NSDataData.
+// NSDataData creates an empty data object.
 func NSDataData() *Data {
-	_r := raw.NSDataData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("data"))
+	return DataFromID(_r)
 }
 
-// DataWithBytesLength calls the underlying NSDataDataWithBytesLength.
-func DataWithBytesLength(bytes_ unsafe.Pointer, length uint) *Data {
-	_r := raw.NSDataDataWithBytesLength(bytes_, length)
-	if _r == nil {
-		return nil
+// DataWithContentsOfFileOptionsError creates a data object by reading every byte from the file at a given path.
+func DataWithContentsOfFileOptionsError(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfFile:options:error:"), purego.NSString(path), readOptionsMask, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}
+	return DataFromID(_r), nil
 }
 
-// DataWithBytesNoCopyLength calls the underlying NSDataDataWithBytesNoCopyLength.
-func DataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *Data {
-	_r := raw.NSDataDataWithBytesNoCopyLength(bytes_, length)
-	if _r == nil {
-		return nil
+// DataWithContentsOfURLOptionsError creates a data object from the data at the provided file URL using specific reading options.
+func DataWithContentsOfURLOptionsError(url string, readOptionsMask DataReadingOptions) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfURL:options:error:"), rt.FileURL(url), readOptionsMask, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}
+	return DataFromID(_r), nil
 }
 
-// DataWithBytesNoCopyLengthFreeWhenDone calls the underlying NSDataDataWithBytesNoCopyLengthFreeWhenDone.
-func DataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b bool) *Data {
-	_r := raw.NSDataDataWithBytesNoCopyLengthFreeWhenDone(bytes_, length, b)
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
-}
-
-// DataWithContentsOfFileOptionsError calls the underlying NSDataDataWithContentsOfFileOptionsError.
-func DataWithContentsOfFileOptionsError(path string, readOptionsMask NSDataReadingOptions) (*Data, error) {
-	_r, _err := raw.NSDataDataWithContentsOfFileOptionsError(foundation.NSStringStringWithUTF8String(path), raw.NSDataReadingOptions(readOptionsMask))
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Data{inner: _r}, nil
-}
-
-// DataWithContentsOfURLOptionsError calls the underlying NSDataDataWithContentsOfURLOptionsError.
-func DataWithContentsOfURLOptionsError(url string, readOptionsMask NSDataReadingOptions) (*Data, error) {
-	_r, _err := raw.NSDataDataWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSDataReadingOptions(readOptionsMask))
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Data{inner: _r}, nil
-}
-
-// DataWithContentsOfFile calls the underlying NSDataDataWithContentsOfFile.
+// DataWithContentsOfFile creates a data object by reading every byte from the file at a given path.
 func DataWithContentsOfFile(path string) *Data {
-	_r := raw.NSDataDataWithContentsOfFile(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfFile:"), purego.NSString(path))
+	return DataFromID(_r)
 }
 
-// DataWithContentsOfURL calls the underlying NSDataDataWithContentsOfURL.
+// DataWithContentsOfURL creates a data object from the data at the specified file URL.
 func DataWithContentsOfURL(url string) *Data {
-	_r := raw.NSDataDataWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfURL:"), rt.FileURL(url))
+	return DataFromID(_r)
 }
 
-// DataWithData calls the underlying NSDataDataWithData.
-func DataWithData(data *raw.NSData) *Data {
-	_r := raw.NSDataDataWithData(data)
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+// DataWithData creates a data object containing the contents of another data object.
+func DataWithData(data *Data) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithData:"), objref.IDOf(data))
+	return DataFromID(_r)
 }
 
-// DataWithContentsOfMappedFile calls the underlying NSDataDataWithContentsOfMappedFile.
-func DataWithContentsOfMappedFile(path string) objc.ID {
-	return raw.NSDataDataWithContentsOfMappedFile(foundation.NSStringStringWithUTF8String(path))
+// DataWithContentsOfMappedFile creates a data object from the mapped file at a given path.
+func DataWithContentsOfMappedFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfMappedFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// DataDetectorWithTypesError calls the underlying NSDataDetectorDataDetectorWithTypesError.
-func DataDetectorWithTypesError(checkingTypes uint64) (*DataDetector, error) {
-	_r, _err := raw.NSDataDetectorDataDetectorWithTypesError(checkingTypes)
-	if _err != nil {
-		return nil, _err
+// DataDetectorWithTypesError creates and returns a new data detector instance.
+func DataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDataDetector")), objc.RegisterName("dataDetectorWithTypes:error:"), checkingTypes, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &DataDetector{inner: _r}, nil
+	return DataDetectorFromID(_r), nil
 }
 
-// TimeIntervalSinceReferenceDate calls the underlying NSDateTimeIntervalSinceReferenceDate.
+// TimeIntervalSinceReferenceDate wraps the corresponding Objective-C method.
 func TimeIntervalSinceReferenceDate() float64 {
-	return raw.NSDateTimeIntervalSinceReferenceDate()
+	_r := objc.Send[float64](objc.ID(_class("NSDate")), objc.RegisterName("timeIntervalSinceReferenceDate"))
+	return _r
 }
 
-// NSDateDate calls the underlying NSDateDate.
+// NSDateDate creates and returns a new date object set to the current date and time.
 func NSDateDate() *Date {
-	_r := raw.NSDateDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("date"))
+	return DateFromID(_r)
 }
 
-// DateWithTimeIntervalSinceNow calls the underlying NSDateDateWithTimeIntervalSinceNow.
+// DateWithTimeIntervalSinceNow creates and returns a date object set to a given number of seconds from the current date and time.
 func DateWithTimeIntervalSinceNow(secs float64) *Date {
-	_r := raw.NSDateDateWithTimeIntervalSinceNow(secs)
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithTimeIntervalSinceNow:"), secs)
+	return DateFromID(_r)
 }
 
-// DateWithTimeIntervalSinceReferenceDate calls the underlying NSDateDateWithTimeIntervalSinceReferenceDate.
+// DateWithTimeIntervalSinceReferenceDate creates and returns a date object set to a given number of seconds from 00:00:00 UTC on 1 January 2001.
 func DateWithTimeIntervalSinceReferenceDate(ti float64) *Date {
-	_r := raw.NSDateDateWithTimeIntervalSinceReferenceDate(ti)
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithTimeIntervalSinceReferenceDate:"), ti)
+	return DateFromID(_r)
 }
 
-// DateWithTimeIntervalSince1970 calls the underlying NSDateDateWithTimeIntervalSince1970.
+// DateWithTimeIntervalSince1970 creates and returns a date object set to the given number of seconds from 00:00:00 UTC on 1 January 1970.
 func DateWithTimeIntervalSince1970(secs float64) *Date {
-	_r := raw.NSDateDateWithTimeIntervalSince1970(secs)
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithTimeIntervalSince1970:"), secs)
+	return DateFromID(_r)
 }
 
-// DateWithTimeIntervalSinceDate calls the underlying NSDateDateWithTimeIntervalSinceDate.
-func DateWithTimeIntervalSinceDate(secsToBeAdded float64, date *raw.NSDate) *Date {
-	_r := raw.NSDateDateWithTimeIntervalSinceDate(secsToBeAdded, date)
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+// DateWithTimeIntervalSinceDate creates and returns a date object set to a given number of seconds from the specified date.
+func DateWithTimeIntervalSinceDate(secsToBeAdded float64, date *Date) *Date {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithTimeInterval:sinceDate:"), secsToBeAdded, objref.IDOf(date))
+	return DateFromID(_r)
 }
 
-// NSDateDistantFuture calls the underlying NSDateDistantFuture.
+// NSDateDistantFuture wraps the corresponding Objective-C method.
 func NSDateDistantFuture() *Date {
-	_r := raw.NSDateDistantFuture()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantFuture"))
+	return DateFromID(_r)
 }
 
-// NSDateDistantPast calls the underlying NSDateDistantPast.
+// NSDateDistantPast wraps the corresponding Objective-C method.
 func NSDateDistantPast() *Date {
-	_r := raw.NSDateDistantPast()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantPast"))
+	return DateFromID(_r)
 }
 
-// Now calls the underlying NSDateNow.
+// Now wraps the corresponding Objective-C method.
 func Now() *Date {
-	_r := raw.NSDateNow()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("now"))
+	return DateFromID(_r)
+}
+
+// DateWithNaturalLanguageStringLocale creates and returns a date object set to the date and time specified by a given string.
+func DateWithNaturalLanguageStringLocale(string_ string, locale obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithNaturalLanguageString:locale:"), purego.NSString(string_), objref.IDOf(locale))
+	return obj.Wrap(_r)
+}
+
+// DateWithNaturalLanguageString creates and returns a date object set to the date and time specified by a given string.
+func DateWithNaturalLanguageString(string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithNaturalLanguageString:"), purego.NSString(string_))
+	return obj.Wrap(_r)
+}
+
+// DateWithString creates and returns a date object with a date and time value specified by a given string in the international string representation format (YYYY-MM-DD HH:MM:SS ±HHMM).
+func DateWithString(aString string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithString:"), purego.NSString(aString))
+	return obj.Wrap(_r)
+}
+
+// LocalizedStringFromDateComponentsUnitsStyle wraps the corresponding Objective-C method.
+func LocalizedStringFromDateComponentsUnitsStyle(components *DateComponents, unitsStyle DateComponentsFormatterUnitsStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDateComponentsFormatter")), objc.RegisterName("localizedStringFromDateComponents:unitsStyle:"), objref.IDOf(components), unitsStyle)
+	if _r == 0 {
+		return ""
 	}
-	return &Date{inner: _r}
+	return purego.GoString(_r)
 }
 
-// DateWithNaturalLanguageStringLocale calls the underlying NSDateDateWithNaturalLanguageStringLocale.
-func DateWithNaturalLanguageStringLocale(string_ string, locale objc.ID) objc.ID {
-	return raw.NSDateDateWithNaturalLanguageStringLocale(foundation.NSStringStringWithUTF8String(string_), locale)
-}
-
-// DateWithNaturalLanguageString calls the underlying NSDateDateWithNaturalLanguageString.
-func DateWithNaturalLanguageString(string_ string) objc.ID {
-	return raw.NSDateDateWithNaturalLanguageString(foundation.NSStringStringWithUTF8String(string_))
-}
-
-// DateWithString calls the underlying NSDateDateWithString.
-func DateWithString(aString string) objc.ID {
-	return raw.NSDateDateWithString(foundation.NSStringStringWithUTF8String(aString))
-}
-
-// LocalizedStringFromDateComponentsUnitsStyle calls the underlying NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle.
-func LocalizedStringFromDateComponentsUnitsStyle(components *raw.NSDateComponents, unitsStyle NSDateComponentsFormatterUnitsStyle) *String {
-	_r := raw.NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle(components, raw.NSDateComponentsFormatterUnitsStyle(unitsStyle))
-	if _r == nil {
-		return nil
+// LocalizedStringFromDateDateStyleTimeStyle wraps the corresponding Objective-C method.
+func LocalizedStringFromDateDateStyleTimeStyle(date *Date, dstyle DateFormatterStyle, tstyle DateFormatterStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("localizedStringFromDate:dateStyle:timeStyle:"), objref.IDOf(date), dstyle, tstyle)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedStringFromDateDateStyleTimeStyle calls the underlying NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle.
-func LocalizedStringFromDateDateStyleTimeStyle(date *raw.NSDate, dstyle NSDateFormatterStyle, tstyle NSDateFormatterStyle) *String {
-	_r := raw.NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle(date, raw.NSDateFormatterStyle(dstyle), raw.NSDateFormatterStyle(tstyle))
-	if _r == nil {
-		return nil
+// DateFormatFromTemplateOptionsLocale wraps the corresponding Objective-C method.
+func DateFormatFromTemplateOptionsLocale(tmplate string, opts int, locale *Locale) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("dateFormatFromTemplate:options:locale:"), purego.NSString(tmplate), opts, objref.IDOf(locale))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// DateFormatFromTemplateOptionsLocale calls the underlying NSDateFormatterDateFormatFromTemplateOptionsLocale.
-func DateFormatFromTemplateOptionsLocale(tmplate string, opts uint, locale *raw.NSLocale) *String {
-	_r := raw.NSDateFormatterDateFormatFromTemplateOptionsLocale(foundation.NSStringStringWithUTF8String(tmplate), opts, locale)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// DefaultFormatterBehavior wraps the corresponding Objective-C method.
+func DefaultFormatterBehavior() DateFormatterBehavior {
+	_r := objc.Send[DateFormatterBehavior](objc.ID(_class("NSDateFormatter")), objc.RegisterName("defaultFormatterBehavior"))
+	return _r
 }
 
-// DefaultFormatterBehavior calls the underlying NSDateFormatterDefaultFormatterBehavior.
-func DefaultFormatterBehavior() NSDateFormatterBehavior {
-	return NSDateFormatterBehavior(raw.NSDateFormatterDefaultFormatterBehavior())
+// SetDefaultFormatterBehavior wraps the corresponding Objective-C method.
+func SetDefaultFormatterBehavior(defaultFormatterBehavior DateFormatterBehavior) {
+	objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("setDefaultFormatterBehavior:"), defaultFormatterBehavior)
 }
 
-// SetDefaultFormatterBehavior calls the underlying NSDateFormatterSetDefaultFormatterBehavior.
-func SetDefaultFormatterBehavior(defaultFormatterBehavior NSDateFormatterBehavior) {
-	raw.NSDateFormatterSetDefaultFormatterBehavior(raw.NSDateFormatterBehavior(defaultFormatterBehavior))
-}
-
-// DecimalNumberWithMantissaExponentIsNegative calls the underlying NSDecimalNumberDecimalNumberWithMantissaExponentIsNegative.
+// DecimalNumberWithMantissaExponentIsNegative creates and returns a decimal number equivalent to the number specified by the arguments.
 func DecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *DecimalNumber {
-	_r := raw.NSDecimalNumberDecimalNumberWithMantissaExponentIsNegative(mantissa, exponent, flag)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("decimalNumberWithMantissa:exponent:isNegative:"), mantissa, exponent, flag)
+	return DecimalNumberFromID(_r)
 }
 
-// DecimalNumberWithDecimal calls the underlying NSDecimalNumberDecimalNumberWithDecimal.
-func DecimalNumberWithDecimal(dcm raw.NSDecimal) *DecimalNumber {
-	_r := raw.NSDecimalNumberDecimalNumberWithDecimal(dcm)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
-}
-
-// DecimalNumberWithString calls the underlying NSDecimalNumberDecimalNumberWithString.
+// DecimalNumberWithString creates a decimal number whose value is equivalent to that in a given numeric string.
 func DecimalNumberWithString(numberValue string) *DecimalNumber {
-	_r := raw.NSDecimalNumberDecimalNumberWithString(foundation.NSStringStringWithUTF8String(numberValue))
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("decimalNumberWithString:"), purego.NSString(numberValue))
+	return DecimalNumberFromID(_r)
 }
 
-// DecimalNumberWithStringLocale calls the underlying NSDecimalNumberDecimalNumberWithStringLocale.
-func DecimalNumberWithStringLocale(numberValue string, locale objc.ID) *DecimalNumber {
-	_r := raw.NSDecimalNumberDecimalNumberWithStringLocale(foundation.NSStringStringWithUTF8String(numberValue), locale)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// DecimalNumberWithStringLocale creates a decimal number whose value is equivalent to that in a given numeric string, interpreted using a given locale.
+func DecimalNumberWithStringLocale(numberValue string, locale obj.Object) *DecimalNumber {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("decimalNumberWithString:locale:"), purego.NSString(numberValue), objref.IDOf(locale))
+	return DecimalNumberFromID(_r)
 }
 
-// Zero calls the underlying NSDecimalNumberZero.
+// Zero wraps the corresponding Objective-C method.
 func Zero() *DecimalNumber {
-	_r := raw.NSDecimalNumberZero()
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("zero"))
+	return DecimalNumberFromID(_r)
 }
 
-// One calls the underlying NSDecimalNumberOne.
+// One wraps the corresponding Objective-C method.
 func One() *DecimalNumber {
-	_r := raw.NSDecimalNumberOne()
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("one"))
+	return DecimalNumberFromID(_r)
 }
 
-// MinimumDecimalNumber calls the underlying NSDecimalNumberMinimumDecimalNumber.
+// MinimumDecimalNumber wraps the corresponding Objective-C method.
 func MinimumDecimalNumber() *DecimalNumber {
-	_r := raw.NSDecimalNumberMinimumDecimalNumber()
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("minimumDecimalNumber"))
+	return DecimalNumberFromID(_r)
 }
 
-// MaximumDecimalNumber calls the underlying NSDecimalNumberMaximumDecimalNumber.
+// MaximumDecimalNumber wraps the corresponding Objective-C method.
 func MaximumDecimalNumber() *DecimalNumber {
-	_r := raw.NSDecimalNumberMaximumDecimalNumber()
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("maximumDecimalNumber"))
+	return DecimalNumberFromID(_r)
 }
 
-// NotANumber calls the underlying NSDecimalNumberNotANumber.
+// NotANumber wraps the corresponding Objective-C method.
 func NotANumber() *DecimalNumber {
-	_r := raw.NSDecimalNumberNotANumber()
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("notANumber"))
+	return DecimalNumberFromID(_r)
 }
 
-// DefaultBehavior calls the underlying NSDecimalNumberDefaultBehavior.
-func DefaultBehavior() raw.NSDecimalNumberBehaviors {
-	return raw.NSDecimalNumberDefaultBehavior()
+// DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero returns an NSDecimalNumberHandler object with customized behavior.
+func DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode RoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("decimalNumberHandlerWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), roundingMode, scale, exact, overflow, underflow, divideByZero)
+	return DecimalNumberHandlerFromID(_r)
 }
 
-// SetDefaultBehavior calls the underlying NSDecimalNumberSetDefaultBehavior.
-func SetDefaultBehavior(defaultBehavior raw.NSDecimalNumberBehaviors) {
-	raw.NSDecimalNumberSetDefaultBehavior(defaultBehavior)
-}
-
-// DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero calls the underlying NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero.
-func DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
-	_r := raw.NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(raw.NSRoundingMode(roundingMode), scale, exact, overflow, underflow, divideByZero)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumberHandler{inner: _r}
-}
-
-// DefaultDecimalNumberHandler calls the underlying NSDecimalNumberHandlerDefaultDecimalNumberHandler.
+// DefaultDecimalNumberHandler wraps the corresponding Objective-C method.
 func DefaultDecimalNumberHandler() *DecimalNumberHandler {
-	_r := raw.NSDecimalNumberHandlerDefaultDecimalNumberHandler()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("defaultDecimalNumberHandler"))
+	return DecimalNumberHandlerFromID(_r)
+}
+
+// DictionaryWithContentsOfFile creates a dictionary using the keys and values found in a file specified by a given path.
+func DictionaryWithContentsOfFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithContentsOfFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
+}
+
+// DictionaryWithContentsOfURL creates a dictionary using the keys and values found in a resource specified by a given URL.
+func DictionaryWithContentsOfURL(url string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithContentsOfURL:"), rt.FileURL(url))
+	return obj.Wrap(_r)
+}
+
+// NSDictionaryDictionary creates an empty dictionary.
+func NSDictionaryDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionary"))
+	return obj.Wrap(_r)
+}
+
+// DictionaryWithDictionary creates a dictionary containing the keys and values from another given dictionary.
+func DictionaryWithDictionary(dict obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithDictionary:"), objref.IDOf(dict))
+	return obj.Wrap(_r)
+}
+
+// DictionaryWithObjectsForKeys creates a dictionary containing entries constructed from the contents of an array of keys and an array of values.
+func DictionaryWithObjectsForKeys(objects []obj.Object, keys []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithObjects:forKeys:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
+}
+
+// DictionaryWithContentsOfURLError creates a dictionary using the keys and values found in a resource specified by a given URL.
+func DictionaryWithContentsOfURLError(url string) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &DecimalNumberHandler{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// DictionaryWithContentsOfFile calls the underlying NSDictionaryDictionaryWithContentsOfFile.
-func DictionaryWithContentsOfFile(path string) *raw.NSDictionary[objc.ID, objc.ID] {
-	return raw.NSDictionaryDictionaryWithContentsOfFile(foundation.NSStringStringWithUTF8String(path))
+// SharedKeySetForKeys creates a shared key set object for the specified keys.
+func SharedKeySetForKeys(keys []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("sharedKeySetForKeys:"), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// DictionaryWithContentsOfURL calls the underlying NSDictionaryDictionaryWithContentsOfURL.
-func DictionaryWithContentsOfURL(url string) *raw.NSDictionary[objc.ID, objc.ID] {
-	return raw.NSDictionaryDictionaryWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// NSDictionaryDictionary calls the underlying NSDictionaryDictionary.
-func NSDictionaryDictionary() *raw.NSDictionary[objc.ID, objc.ID] {
-	return raw.NSDictionaryDictionary()
-}
-
-// DictionaryWithObjectForKey calls the underlying NSDictionaryDictionaryWithObjectForKey.
-func DictionaryWithObjectForKey(object objc.ID, key raw.NSCopying) *raw.NSDictionary[objc.ID, objc.ID] {
-	return raw.NSDictionaryDictionaryWithObjectForKey(object, key)
-}
-
-// DictionaryWithObjectsForKeysCount calls the underlying NSDictionaryDictionaryWithObjectsForKeysCount.
-func DictionaryWithObjectsForKeysCount(objects unsafe.Pointer, keys raw.NSCopying, cnt uint) *raw.NSDictionary[objc.ID, objc.ID] {
-	return raw.NSDictionaryDictionaryWithObjectsForKeysCount(objects, keys, cnt)
-}
-
-// DictionaryWithDictionary calls the underlying NSDictionaryDictionaryWithDictionary.
-func DictionaryWithDictionary(dict *raw.NSDictionary[objc.ID, objc.ID]) *raw.NSDictionary[objc.ID, objc.ID] {
-	return raw.NSDictionaryDictionaryWithDictionary(dict)
-}
-
-// DictionaryWithObjectsForKeys calls the underlying NSDictionaryDictionaryWithObjectsForKeys.
-func DictionaryWithObjectsForKeys(objects *raw.NSArray[objc.ID], keys ...purego.IDer) *raw.NSDictionary[objc.ID, objc.ID] {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg1 *raw.NSArray[raw.NSCopying]
-	if len(_ptrs) > 0 {
-		_arg1 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return raw.NSDictionaryDictionaryWithObjectsForKeys(objects, _arg1)
-}
-
-// DictionaryWithContentsOfURLError calls the underlying NSDictionaryDictionaryWithContentsOfURLError.
-func DictionaryWithContentsOfURLError(url string) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	return raw.NSDictionaryDictionaryWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// SharedKeySetForKeys calls the underlying NSDictionarySharedKeySetForKeys.
-func SharedKeySetForKeys(keys ...purego.IDer) objc.ID {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *raw.NSArray[raw.NSCopying]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return raw.NSDictionarySharedKeySetForKeys(_arg0)
-}
-
-// BaseUnit calls the underlying NSDimensionBaseUnit.
+// BaseUnit wraps the corresponding Objective-C method.
 func BaseUnit() *Dimension {
-	_r := raw.NSDimensionBaseUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Dimension{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("baseUnit"))
+	return DimensionFromID(_r)
 }
 
-// ProxyWithTargetConnection calls the underlying NSDistantObjectProxyWithTargetConnection.
-func ProxyWithTargetConnection(target objc.ID, connection *raw.NSConnection) objc.ID {
-	return raw.NSDistantObjectProxyWithTargetConnection(target, connection)
+// ProxyWithTargetConnection returns a remote proxy for a given object and connection, creating the proxy if necessary.
+func ProxyWithTargetConnection(target obj.Object, connection *Connection) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("proxyWithTarget:connection:"), objref.IDOf(target), objref.IDOf(connection))
+	return obj.Wrap(_r)
 }
 
-// ProxyWithLocalConnection calls the underlying NSDistantObjectProxyWithLocalConnection.
-func ProxyWithLocalConnection(target objc.ID, connection *raw.NSConnection) objc.ID {
-	return raw.NSDistantObjectProxyWithLocalConnection(target, connection)
+// ProxyWithLocalConnection returns a local proxy for a given object and connection, creating the proxy if necessary.
+func ProxyWithLocalConnection(target obj.Object, connection *Connection) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("proxyWithLocal:connection:"), objref.IDOf(target), objref.IDOf(connection))
+	return obj.Wrap(_r)
 }
 
-// LockWithPath calls the underlying NSDistributedLockLockWithPath.
+// LockWithPath returns an NSDistributedLock object initialized to use as the locking object the file-system entry specified by a given path.
 func LockWithPath(path string) *DistributedLock {
-	_r := raw.NSDistributedLockLockWithPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &DistributedLock{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedLock")), objc.RegisterName("lockWithPath:"), purego.NSString(path))
+	return DistributedLockFromID(_r)
 }
 
-// NotificationCenterForType calls the underlying NSDistributedNotificationCenterNotificationCenterForType.
-func NotificationCenterForType(notificationCenterType *raw.NSString) *DistributedNotificationCenter {
-	_r := raw.NSDistributedNotificationCenterNotificationCenterForType(notificationCenterType)
-	if _r == nil {
-		return nil
-	}
-	return &DistributedNotificationCenter{inner: _r}
+// NotificationCenterForType wraps the corresponding Objective-C method.
+func NotificationCenterForType(notificationCenterType *String) *DistributedNotificationCenter {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("notificationCenterForType:"), objref.IDOf(notificationCenterType))
+	return DistributedNotificationCenterFromID(_r)
 }
 
-// DefaultCenter calls the underlying NSDistributedNotificationCenterDefaultCenter.
+// DefaultCenter wraps the corresponding Objective-C method.
 func DefaultCenter() *DistributedNotificationCenter {
-	_r := raw.NSDistributedNotificationCenterDefaultCenter()
-	if _r == nil {
-		return nil
-	}
-	return &DistributedNotificationCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("defaultCenter"))
+	return DistributedNotificationCenterFromID(_r)
 }
 
-// ErrorWithDomainCodeUserInfo calls the underlying NSErrorErrorWithDomainCodeUserInfo.
-func ErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict *raw.NSDictionary[*raw.NSString, objc.ID]) *Error {
-	_r := raw.NSErrorErrorWithDomainCodeUserInfo(domain, code, dict)
-	if _r == nil {
-		return nil
-	}
-	return &Error{inner: _r}
+// ErrorWithDomainCodeUserInfo creates and initializes an NSError object for a given domain and code with a given userInfo dictionary.
+func ErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *Error {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("errorWithDomain:code:userInfo:"), objref.IDOf(domain), code, objref.IDOf(dict))
+	return ErrorFromID(_r)
 }
 
-// SetUserInfoValueProviderForDomainProvider calls the underlying NSErrorSetUserInfoValueProviderForDomainProvider.
-func SetUserInfoValueProviderForDomainProvider(errorDomain *raw.NSString, provider func(unsafe.Pointer, *raw.NSString) objc.ID) {
-	raw.NSErrorSetUserInfoValueProviderForDomainProvider(errorDomain, provider)
+// ExceptionWithNameReasonUserInfo creates and returns an exception object .
+func ExceptionWithNameReasonUserInfo(name *String, reason string, userInfo obj.Object) *Exception {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("exceptionWithName:reason:userInfo:"), objref.IDOf(name), purego.NSString(reason), objref.IDOf(userInfo))
+	return ExceptionFromID(_r)
 }
 
-// UserInfoValueProviderForDomain calls the underlying NSErrorUserInfoValueProviderForDomain.
-func UserInfoValueProviderForDomain(errorDomain *raw.NSString) objc.Block {
-	return raw.NSErrorUserInfoValueProviderForDomain(errorDomain)
+// RaiseFormat a convenience method that creates and raises an exception.
+func RaiseFormat(name *String, format string) {
+	objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("raise:format:"), objref.IDOf(name), purego.NSString(format))
 }
 
-// ExceptionWithNameReasonUserInfo calls the underlying NSExceptionExceptionWithNameReasonUserInfo.
-func ExceptionWithNameReasonUserInfo(name *raw.NSString, reason string, userInfo *raw.NSDictionary[objc.ID, objc.ID]) *Exception {
-	_r := raw.NSExceptionExceptionWithNameReasonUserInfo(name, foundation.NSStringStringWithUTF8String(reason), userInfo)
-	if _r == nil {
-		return nil
-	}
-	return &Exception{inner: _r}
+// RaiseFormatArguments creates and raises an exception with the specified name, reason, and arguments.
+func RaiseFormatArguments(name *String, format string, argList string) {
+	objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("raise:format:arguments:"), objref.IDOf(name), purego.NSString(format), argList)
 }
 
-// RaiseFormat calls the underlying NSExceptionRaiseFormat.
-func RaiseFormat(name *raw.NSString, format string) {
-	raw.NSExceptionRaiseFormat(name, foundation.NSStringStringWithUTF8String(format))
+// ExpressionWithFormatArgumentArray creates the expression with the specified expression format and array of arguments.
+func ExpressionWithFormatArgumentArray(expressionFormat string, arguments obj.Object) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionWithFormat:argumentArray:"), purego.NSString(expressionFormat), objref.IDOf(arguments))
+	return ExpressionFromID(_r)
 }
 
-// RaiseFormatArguments calls the underlying NSExceptionRaiseFormatArguments.
-func RaiseFormatArguments(name *raw.NSString, format string, argList string) {
-	raw.NSExceptionRaiseFormatArguments(name, foundation.NSStringStringWithUTF8String(format), argList)
-}
-
-// ExpressionWithFormatArgumentArray calls the underlying NSExpressionExpressionWithFormatArgumentArray.
-func ExpressionWithFormatArgumentArray(expressionFormat string, arguments *raw.NSArray[objc.ID]) *Expression {
-	_r := raw.NSExpressionExpressionWithFormatArgumentArray(foundation.NSStringStringWithUTF8String(expressionFormat), arguments)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
-}
-
-// ExpressionWithFormat calls the underlying NSExpressionExpressionWithFormat.
+// ExpressionWithFormat creates the expression with the specified expression arguments.
 func ExpressionWithFormat(expressionFormat string) *Expression {
-	_r := raw.NSExpressionExpressionWithFormat(foundation.NSStringStringWithUTF8String(expressionFormat))
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionWithFormat:"), purego.NSString(expressionFormat))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionWithFormatArguments calls the underlying NSExpressionExpressionWithFormatArguments.
+// ExpressionWithFormatArguments creates the expression with the specified expression format and arguments list.
 func ExpressionWithFormatArguments(expressionFormat string, argList string) *Expression {
-	_r := raw.NSExpressionExpressionWithFormatArguments(foundation.NSStringStringWithUTF8String(expressionFormat), argList)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionWithFormat:arguments:"), purego.NSString(expressionFormat), argList)
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForConstantValue calls the underlying NSExpressionExpressionForConstantValue.
-func ExpressionForConstantValue(obj objc.ID) *Expression {
-	_r := raw.NSExpressionExpressionForConstantValue(obj)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForConstantValue creates an expression that represents a specified constant value.
+func ExpressionForConstantValue(obj_ obj.Object) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForConstantValue:"), objref.IDOf(obj_))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForEvaluatedObject calls the underlying NSExpressionExpressionForEvaluatedObject.
+// ExpressionForEvaluatedObject creates an expression that represents the object you’re evaluating.
 func ExpressionForEvaluatedObject() *Expression {
-	_r := raw.NSExpressionExpressionForEvaluatedObject()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForEvaluatedObject"))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForVariable calls the underlying NSExpressionExpressionForVariable.
+// ExpressionForVariable creates an expression that extracts a value from the variable bindings dictionary for a specified key.
 func ExpressionForVariable(string_ string) *Expression {
-	_r := raw.NSExpressionExpressionForVariable(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForVariable:"), purego.NSString(string_))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForKeyPath calls the underlying NSExpressionExpressionForKeyPath.
+// ExpressionForKeyPath creates an expression that invokes the value function with a specified key path.
 func ExpressionForKeyPath(keyPath string) *Expression {
-	_r := raw.NSExpressionExpressionForKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForKeyPath:"), purego.NSString(keyPath))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForFunctionArguments calls the underlying NSExpressionExpressionForFunctionArguments.
-func ExpressionForFunctionArguments(name string, parameters *raw.NSArray[objc.ID]) *Expression {
-	_r := raw.NSExpressionExpressionForFunctionArguments(foundation.NSStringStringWithUTF8String(name), parameters)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForFunctionArguments creates an expression that invokes one of the predefined functions.
+func ExpressionForFunctionArguments(name string, parameters obj.Object) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForFunction:arguments:"), purego.NSString(name), objref.IDOf(parameters))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForAggregate calls the underlying NSExpressionExpressionForAggregate.
-func ExpressionForAggregate(subexpressions *raw.NSArray[*raw.NSExpression]) *Expression {
-	_r := raw.NSExpressionExpressionForAggregate(subexpressions)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForAggregate creates an aggregate expression for a specified collection.
+func ExpressionForAggregate(subexpressions []*Expression) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForAggregate:"), purego.SliceToNSArray(subexpressions, func(_v *Expression) objc.ID { return objref.IDOf(_v) }))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForUnionSetWith calls the underlying NSExpressionExpressionForUnionSetWith.
-func ExpressionForUnionSetWith(left *raw.NSExpression, right *raw.NSExpression) *Expression {
-	_r := raw.NSExpressionExpressionForUnionSetWith(left, right)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForUnionSetWith creates an expression object that represents the union of a specified set and collection.
+func ExpressionForUnionSetWith(left *Expression, right *Expression) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForUnionSet:with:"), objref.IDOf(left), objref.IDOf(right))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForIntersectSetWith calls the underlying NSExpressionExpressionForIntersectSetWith.
-func ExpressionForIntersectSetWith(left *raw.NSExpression, right *raw.NSExpression) *Expression {
-	_r := raw.NSExpressionExpressionForIntersectSetWith(left, right)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForIntersectSetWith creates an expression object that represents the intersection of a specified set and collection.
+func ExpressionForIntersectSetWith(left *Expression, right *Expression) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForIntersectSet:with:"), objref.IDOf(left), objref.IDOf(right))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForMinusSetWith calls the underlying NSExpressionExpressionForMinusSetWith.
-func ExpressionForMinusSetWith(left *raw.NSExpression, right *raw.NSExpression) *Expression {
-	_r := raw.NSExpressionExpressionForMinusSetWith(left, right)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForMinusSetWith creates an expression object that represents the subtraction of a specified collection from a specified set.
+func ExpressionForMinusSetWith(left *Expression, right *Expression) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForMinusSet:with:"), objref.IDOf(left), objref.IDOf(right))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForSubqueryUsingIteratorVariablePredicate calls the underlying NSExpressionExpressionForSubqueryUsingIteratorVariablePredicate.
-func ExpressionForSubqueryUsingIteratorVariablePredicate(expression *raw.NSExpression, variable string, predicate *raw.NSPredicate) *Expression {
-	_r := raw.NSExpressionExpressionForSubqueryUsingIteratorVariablePredicate(expression, foundation.NSStringStringWithUTF8String(variable), predicate)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForSubqueryUsingIteratorVariablePredicate creates an expression that filters a collection by storing elements in the collection in a specified variable and keeping the elements that the qualifier returns as true.
+func ExpressionForSubqueryUsingIteratorVariablePredicate(expression *Expression, variable string, predicate *Predicate) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForSubquery:usingIteratorVariable:predicate:"), objref.IDOf(expression), purego.NSString(variable), objref.IDOf(predicate))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForFunctionSelectorNameArguments calls the underlying NSExpressionExpressionForFunctionSelectorNameArguments.
-func ExpressionForFunctionSelectorNameArguments(target *raw.NSExpression, name string, parameters *raw.NSArray[objc.ID]) *Expression {
-	_r := raw.NSExpressionExpressionForFunctionSelectorNameArguments(target, foundation.NSStringStringWithUTF8String(name), parameters)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForFunctionSelectorNameArguments creates an expression that returns the result of invoking a selector with a specified name using specified arguments.
+func ExpressionForFunctionSelectorNameArguments(target *Expression, name string, parameters obj.Object) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForFunction:selectorName:arguments:"), objref.IDOf(target), purego.NSString(name), objref.IDOf(parameters))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForAnyKey calls the underlying NSExpressionExpressionForAnyKey.
+// ExpressionForAnyKey creates an expression that represents any key for a Spotlight query.
 func ExpressionForAnyKey() *Expression {
-	_r := raw.NSExpressionExpressionForAnyKey()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForAnyKey"))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForBlockArguments calls the underlying NSExpressionExpressionForBlockArguments.
-func ExpressionForBlockArguments(block func(objc.ID, *raw.NSArray[*raw.NSExpression], *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID, arguments *raw.NSArray[*raw.NSExpression]) *Expression {
-	_r := raw.NSExpressionExpressionForBlockArguments(block, arguments)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForBlockArguments creates an expression object that uses the block for evaluating objects.
+func ExpressionForBlockArguments(block func(obj.Object, obj.Object, obj.Object) int, arguments []*Expression) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForBlock:arguments:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) int {
+		return block(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
+	}), purego.SliceToNSArray(arguments, func(_v *Expression) objc.ID { return objref.IDOf(_v) }))
+	return ExpressionFromID(_r)
 }
 
-// ExpressionForConditionalTrueExpressionFalseExpression calls the underlying NSExpressionExpressionForConditionalTrueExpressionFalseExpression.
-func ExpressionForConditionalTrueExpressionFalseExpression(predicate *raw.NSPredicate, trueExpression *raw.NSExpression, falseExpression *raw.NSExpression) *Expression {
-	_r := raw.NSExpressionExpressionForConditionalTrueExpressionFalseExpression(predicate, trueExpression, falseExpression)
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+// ExpressionForConditionalTrueExpressionFalseExpression creates an expression that returns a result, depending on the value of predicate.
+func ExpressionForConditionalTrueExpressionFalseExpression(predicate *Predicate, trueExpression *Expression, falseExpression *Expression) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForConditional:trueExpression:falseExpression:"), objref.IDOf(predicate), objref.IDOf(trueExpression), objref.IDOf(falseExpression))
+	return ExpressionFromID(_r)
 }
 
-// ReadingIntentWithURLOptions calls the underlying NSFileAccessIntentReadingIntentWithURLOptions.
-func ReadingIntentWithURLOptions(url string, options NSFileCoordinatorReadingOptions) *FileAccessIntent {
-	_r := raw.NSFileAccessIntentReadingIntentWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorReadingOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &FileAccessIntent{inner: _r}
+// ReadingIntentWithURLOptions returns a file access intent object for reading the given URL with the provided options.
+func ReadingIntentWithURLOptions(url string, options FileCoordinatorReadingOptions) *FileAccessIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileAccessIntent")), objc.RegisterName("readingIntentWithURL:options:"), rt.FileURL(url), options)
+	return FileAccessIntentFromID(_r)
 }
 
-// WritingIntentWithURLOptions calls the underlying NSFileAccessIntentWritingIntentWithURLOptions.
-func WritingIntentWithURLOptions(url string, options NSFileCoordinatorWritingOptions) *FileAccessIntent {
-	_r := raw.NSFileAccessIntentWritingIntentWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorWritingOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &FileAccessIntent{inner: _r}
+// WritingIntentWithURLOptions returns a file access intent object for writing to the given URL with the provided options.
+func WritingIntentWithURLOptions(url string, options FileCoordinatorWritingOptions) *FileAccessIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileAccessIntent")), objc.RegisterName("writingIntentWithURL:options:"), rt.FileURL(url), options)
+	return FileAccessIntentFromID(_r)
 }
 
-// AddFilePresenter calls the underlying NSFileCoordinatorAddFilePresenter.
-func AddFilePresenter(filePresenter raw.NSFilePresenter) {
-	raw.NSFileCoordinatorAddFilePresenter(filePresenter)
+// FilePresenters wraps the corresponding Objective-C method.
+func FilePresenters() []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileCoordinator")), objc.RegisterName("filePresenters"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RemoveFilePresenter calls the underlying NSFileCoordinatorRemoveFilePresenter.
-func RemoveFilePresenter(filePresenter raw.NSFilePresenter) {
-	raw.NSFileCoordinatorRemoveFilePresenter(filePresenter)
-}
-
-// FilePresenters calls the underlying NSFileCoordinatorFilePresenters.
-func FilePresenters() *raw.NSArray[raw.NSFilePresenter] {
-	return raw.NSFileCoordinatorFilePresenters()
-}
-
-// FileHandleForReadingAtPath calls the underlying NSFileHandleFileHandleForReadingAtPath.
+// FileHandleForReadingAtPath wraps the corresponding Objective-C method.
 func FileHandleForReadingAtPath(path string) *FileHandle {
-	_r := raw.NSFileHandleFileHandleForReadingAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForReadingAtPath:"), purego.NSString(path))
+	return FileHandleFromID(_r)
 }
 
-// FileHandleForWritingAtPath calls the underlying NSFileHandleFileHandleForWritingAtPath.
+// FileHandleForWritingAtPath wraps the corresponding Objective-C method.
 func FileHandleForWritingAtPath(path string) *FileHandle {
-	_r := raw.NSFileHandleFileHandleForWritingAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForWritingAtPath:"), purego.NSString(path))
+	return FileHandleFromID(_r)
 }
 
-// FileHandleForUpdatingAtPath calls the underlying NSFileHandleFileHandleForUpdatingAtPath.
+// FileHandleForUpdatingAtPath wraps the corresponding Objective-C method.
 func FileHandleForUpdatingAtPath(path string) *FileHandle {
-	_r := raw.NSFileHandleFileHandleForUpdatingAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForUpdatingAtPath:"), purego.NSString(path))
+	return FileHandleFromID(_r)
 }
 
-// FileHandleForReadingFromURLError calls the underlying NSFileHandleFileHandleForReadingFromURLError.
-func FileHandleForReadingFromURLError(url string) (*FileHandle, error) {
-	_r, _err := raw.NSFileHandleFileHandleForReadingFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+// FileHandleForReadingFromURLError wraps the corresponding Objective-C method.
+func FileHandleForReadingFromURLError(url string) (result *FileHandle, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForReadingFromURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &FileHandle{inner: _r}, nil
+	return FileHandleFromID(_r), nil
 }
 
-// FileHandleForWritingToURLError calls the underlying NSFileHandleFileHandleForWritingToURLError.
-func FileHandleForWritingToURLError(url string) (*FileHandle, error) {
-	_r, _err := raw.NSFileHandleFileHandleForWritingToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+// FileHandleForWritingToURLError wraps the corresponding Objective-C method.
+func FileHandleForWritingToURLError(url string) (result *FileHandle, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForWritingToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &FileHandle{inner: _r}, nil
+	return FileHandleFromID(_r), nil
 }
 
-// FileHandleForUpdatingURLError calls the underlying NSFileHandleFileHandleForUpdatingURLError.
-func FileHandleForUpdatingURLError(url string) (*FileHandle, error) {
-	_r, _err := raw.NSFileHandleFileHandleForUpdatingURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+// FileHandleForUpdatingURLError wraps the corresponding Objective-C method.
+func FileHandleForUpdatingURLError(url string) (result *FileHandle, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForUpdatingURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &FileHandle{inner: _r}, nil
+	return FileHandleFromID(_r), nil
 }
 
-// FileHandleWithStandardInput calls the underlying NSFileHandleFileHandleWithStandardInput.
+// FileHandleWithStandardInput wraps the corresponding Objective-C method.
 func FileHandleWithStandardInput() *FileHandle {
-	_r := raw.NSFileHandleFileHandleWithStandardInput()
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardInput"))
+	return FileHandleFromID(_r)
 }
 
-// FileHandleWithStandardOutput calls the underlying NSFileHandleFileHandleWithStandardOutput.
+// FileHandleWithStandardOutput wraps the corresponding Objective-C method.
 func FileHandleWithStandardOutput() *FileHandle {
-	_r := raw.NSFileHandleFileHandleWithStandardOutput()
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardOutput"))
+	return FileHandleFromID(_r)
 }
 
-// FileHandleWithStandardError calls the underlying NSFileHandleFileHandleWithStandardError.
+// FileHandleWithStandardError wraps the corresponding Objective-C method.
 func FileHandleWithStandardError() *FileHandle {
-	_r := raw.NSFileHandleFileHandleWithStandardError()
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardError"))
+	return FileHandleFromID(_r)
 }
 
-// FileHandleWithNullDevice calls the underlying NSFileHandleFileHandleWithNullDevice.
+// FileHandleWithNullDevice wraps the corresponding Objective-C method.
 func FileHandleWithNullDevice() *FileHandle {
-	_r := raw.NSFileHandleFileHandleWithNullDevice()
-	if _r == nil {
-		return nil
-	}
-	return &FileHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithNullDevice"))
+	return FileHandleFromID(_r)
 }
 
-// DefaultManager calls the underlying NSFileManagerDefaultManager.
+// DefaultManager wraps the corresponding Objective-C method.
 func DefaultManager() *FileManager {
-	_r := raw.NSFileManagerDefaultManager()
-	if _r == nil {
-		return nil
-	}
-	return &FileManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileManager")), objc.RegisterName("defaultManager"))
+	return FileManagerFromID(_r)
 }
 
-// CurrentVersionOfItemAtURL calls the underlying NSFileVersionCurrentVersionOfItemAtURL.
+// CurrentVersionOfItemAtURL returns the most recent version object for the file at the specified URL.
 func CurrentVersionOfItemAtURL(url string) *FileVersion {
-	_r := raw.NSFileVersionCurrentVersionOfItemAtURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &FileVersion{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("currentVersionOfItemAtURL:"), rt.FileURL(url))
+	return FileVersionFromID(_r)
 }
 
-// OtherVersionsOfItemAtURL calls the underlying NSFileVersionOtherVersionsOfItemAtURL.
-func OtherVersionsOfItemAtURL(url string) *raw.NSArray[*raw.NSFileVersion] {
-	return raw.NSFileVersionOtherVersionsOfItemAtURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// OtherVersionsOfItemAtURL returns all versions of the specified file except the current version.
+func OtherVersionsOfItemAtURL(url string) []*FileVersion {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("otherVersionsOfItemAtURL:"), rt.FileURL(url))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FileVersion { return FileVersionFromID(_id) })
 }
 
-// UnresolvedConflictVersionsOfItemAtURL calls the underlying NSFileVersionUnresolvedConflictVersionsOfItemAtURL.
-func UnresolvedConflictVersionsOfItemAtURL(url string) *raw.NSArray[*raw.NSFileVersion] {
-	return raw.NSFileVersionUnresolvedConflictVersionsOfItemAtURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// UnresolvedConflictVersionsOfItemAtURL returns an array of version objects that are currently in conflict for the specified URL.
+func UnresolvedConflictVersionsOfItemAtURL(url string) []*FileVersion {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("unresolvedConflictVersionsOfItemAtURL:"), rt.FileURL(url))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FileVersion { return FileVersionFromID(_id) })
 }
 
+// GetNonlocalVersionsOfItemAtURL asynchronously returns an array of NSFileVersions associated with the file located by the given URL, or nil if there is no such file or another error occurs.
+//
 // GetNonlocalVersionsOfItemAtURL blocks until the operation completes or ctx is cancelled.
-func GetNonlocalVersionsOfItemAtURL(ctx context.Context, url string) (*raw.NSArray[*raw.NSFileVersion], error) {
+func GetNonlocalVersionsOfItemAtURL(ctx context.Context, url string) (result obj.Object, err error) {
 	type _result struct {
-		val *raw.NSArray[*raw.NSFileVersion]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.NSFileVersionGetNonlocalVersionsOfItemAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 *raw.NSArray[*raw.NSFileVersion], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("getNonlocalVersionsOfItemAtURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *raw.NSArray[*raw.NSFileVersion]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// VersionOfItemAtURLForPersistentIdentifier calls the underlying NSFileVersionVersionOfItemAtURLForPersistentIdentifier.
-func VersionOfItemAtURLForPersistentIdentifier(url string, persistentIdentifier objc.ID) *FileVersion {
-	_r := raw.NSFileVersionVersionOfItemAtURLForPersistentIdentifier(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), persistentIdentifier)
-	if _r == nil {
-		return nil
-	}
-	return &FileVersion{inner: _r}
+// VersionOfItemAtURLForPersistentIdentifier returns the version of the file that has the specified persistent ID.
+func VersionOfItemAtURLForPersistentIdentifier(url string, persistentIdentifier obj.Object) *FileVersion {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("versionOfItemAtURL:forPersistentIdentifier:"), rt.FileURL(url), objref.IDOf(persistentIdentifier))
+	return FileVersionFromID(_r)
 }
 
-// AddVersionOfItemAtURLWithContentsOfURLOptionsError calls the underlying NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError.
-func AddVersionOfItemAtURLWithContentsOfURLOptionsError(url string, contentsURL string, options NSFileVersionAddingOptions) (*FileVersion, error) {
-	_r, _err := raw.NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)), raw.NSFileVersionAddingOptions(options))
-	if _err != nil {
-		return nil, _err
+// AddVersionOfItemAtURLWithContentsOfURLOptionsError creates a version of the file at the specified location.
+func AddVersionOfItemAtURLWithContentsOfURLOptionsError(url string, contentsURL string, options FileVersionAddingOptions) (result *FileVersion, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("addVersionOfItemAtURL:withContentsOfURL:options:error:"), rt.FileURL(url), rt.FileURL(contentsURL), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &FileVersion{inner: _r}, nil
+	return FileVersionFromID(_r), nil
 }
 
-// TemporaryDirectoryURLForNewVersionOfItemAtURL calls the underlying NSFileVersionTemporaryDirectoryURLForNewVersionOfItemAtURL.
+// TemporaryDirectoryURLForNewVersionOfItemAtURL creates and returns a temporary directory to use for saving the contents of the file.
 func TemporaryDirectoryURLForNewVersionOfItemAtURL(url string) *URL {
-	_r := raw.NSFileVersionTemporaryDirectoryURLForNewVersionOfItemAtURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("temporaryDirectoryURLForNewVersionOfItemAtURL:"), rt.FileURL(url))
+	return URLFromID(_r)
+}
+
+// RemoveOtherVersionsOfItemAtURL removes all versions of a file, except the current one, from the version store.
+func RemoveOtherVersionsOfItemAtURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("NSFileVersion")), objc.RegisterName("removeOtherVersionsOfItemAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &URL{inner: _r}
+	return nil
 }
 
-// RemoveOtherVersionsOfItemAtURLError calls the underlying NSFileVersionRemoveOtherVersionsOfItemAtURLError.
-func RemoveOtherVersionsOfItemAtURLError(url string) (bool, error) {
-	return raw.NSFileVersionRemoveOtherVersionsOfItemAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// DefaultCollector returns the default garbage collector.
+func DefaultCollector() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGarbageCollector")), objc.RegisterName("defaultCollector"))
+	return obj.Wrap(_r)
 }
 
-// DefaultCollector calls the underlying NSGarbageCollectorDefaultCollector.
-func DefaultCollector() objc.ID {
-	return raw.NSGarbageCollectorDefaultCollector()
+// CookieWithProperties creates and initializes an HTTP cookie object using the provided properties.
+func CookieWithProperties(properties obj.Object) *HTTPCookie {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookieWithProperties:"), objref.IDOf(properties))
+	return HTTPCookieFromID(_r)
 }
 
-// CookieWithProperties calls the underlying NSHTTPCookieCookieWithProperties.
-func CookieWithProperties(properties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookie {
-	_r := raw.NSHTTPCookieCookieWithProperties(properties)
-	if _r == nil {
-		return nil
-	}
-	return &HTTPCookie{inner: _r}
+// RequestHeaderFieldsWithCookies return a dictionary of header fields that can be used to add the specified cookies to the request.
+func RequestHeaderFieldsWithCookies(cookies []*HTTPCookie) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("requestHeaderFieldsWithCookies:"), purego.SliceToNSArray(cookies, func(_v *HTTPCookie) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// RequestHeaderFieldsWithCookies calls the underlying NSHTTPCookieRequestHeaderFieldsWithCookies.
-func RequestHeaderFieldsWithCookies(cookies *raw.NSArray[*raw.NSHTTPCookie]) *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return raw.NSHTTPCookieRequestHeaderFieldsWithCookies(cookies)
+// CookiesWithResponseHeaderFieldsForURL return an array of cookies parsed from the specified response header fields and URL. This method will ignore irrelevant header fields so you can pass a dictionary containing data other than cookie data.
+func CookiesWithResponseHeaderFieldsForURL(headerFields obj.Object, uRL string) []*HTTPCookie {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookiesWithResponseHeaderFields:forURL:"), objref.IDOf(headerFields), rt.FileURL(uRL))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HTTPCookie { return HTTPCookieFromID(_id) })
 }
 
-// CookiesWithResponseHeaderFieldsForURL calls the underlying NSHTTPCookieCookiesWithResponseHeaderFieldsForURL.
-func CookiesWithResponseHeaderFieldsForURL(headerFields *raw.NSDictionary[*raw.NSString, *raw.NSString], uRL string) *raw.NSArray[*raw.NSHTTPCookie] {
-	return raw.NSHTTPCookieCookiesWithResponseHeaderFieldsForURL(headerFields, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
-}
-
-// SharedCookieStorageForGroupContainerIdentifier calls the underlying NSHTTPCookieStorageSharedCookieStorageForGroupContainerIdentifier.
+// SharedCookieStorageForGroupContainerIdentifier get the cookie storage for the container associated with the specified application group identifier By default, applications and associated app extensions have different data containers, which means that the sharedHTTPCookieStorage singleton will refer to different persistent cookie stores in an application and any app extensions that it contains. This method allows clients to create a persistent cookie storage that can be shared among all applications and extensions with access to the same application group. Subsequent calls to this method with the same identifier will return the same cookie storage instance.
 func SharedCookieStorageForGroupContainerIdentifier(identifier string) *HTTPCookieStorage {
-	_r := raw.NSHTTPCookieStorageSharedCookieStorageForGroupContainerIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &HTTPCookieStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookieStorage")), objc.RegisterName("sharedCookieStorageForGroupContainerIdentifier:"), purego.NSString(identifier))
+	return HTTPCookieStorageFromID(_r)
 }
 
-// SharedHTTPCookieStorage calls the underlying NSHTTPCookieStorageSharedHTTPCookieStorage.
+// SharedHTTPCookieStorage get the shared cookie storage in the default location. Starting in OS X 10.11, each app has its own sharedHTTPCookieStorage singleton, which will not be shared with other applications.
 func SharedHTTPCookieStorage() *HTTPCookieStorage {
-	_r := raw.NSHTTPCookieStorageSharedHTTPCookieStorage()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookieStorage")), objc.RegisterName("sharedHTTPCookieStorage"))
+	return HTTPCookieStorageFromID(_r)
+}
+
+// LocalizedStringForStatusCode convenience method which returns a localized string corresponding to the status code for this response.
+func LocalizedStringForStatusCode(statusCode int) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("localizedStringForStatusCode:"), statusCode)
+	if _r == 0 {
+		return ""
 	}
-	return &HTTPCookieStorage{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedStringForStatusCode calls the underlying NSHTTPURLResponseLocalizedStringForStatusCode.
-func LocalizedStringForStatusCode(statusCode int) *String {
-	_r := raw.NSHTTPURLResponseLocalizedStringForStatusCode(statusCode)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// HashTableWithOptions returns a hash table with given pointer functions options.
+func HashTableWithOptions(options PointerFunctionsOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("hashTableWithOptions:"), options)
+	return obj.Wrap(_r)
 }
 
-// HashTableWithOptions calls the underlying NSHashTableHashTableWithOptions.
-func HashTableWithOptions(options NSPointerFunctionsOptions) *raw.NSHashTable[objc.ID] {
-	return raw.NSHashTableHashTableWithOptions(raw.NSPointerFunctionsOptions(options))
+// HashTableWithWeakObjects returns a new hash table for storing weak references to its contents.
+func HashTableWithWeakObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("hashTableWithWeakObjects"))
+	return obj.Wrap(_r)
 }
 
-// HashTableWithWeakObjects calls the underlying NSHashTableHashTableWithWeakObjects.
-func HashTableWithWeakObjects() objc.ID {
-	return raw.NSHashTableHashTableWithWeakObjects()
+// WeakObjectsHashTable returns a new hash table for storing weak references to its contents.
+func WeakObjectsHashTable() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("weakObjectsHashTable"))
+	return obj.Wrap(_r)
 }
 
-// WeakObjectsHashTable calls the underlying NSHashTableWeakObjectsHashTable.
-func WeakObjectsHashTable() *raw.NSHashTable[objc.ID] {
-	return raw.NSHashTableWeakObjectsHashTable()
-}
-
-// CurrentHost calls the underlying NSHostCurrentHost.
+// CurrentHost wraps the corresponding Objective-C method.
 func CurrentHost() *Host {
-	_r := raw.NSHostCurrentHost()
-	if _r == nil {
-		return nil
-	}
-	return &Host{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("currentHost"))
+	return HostFromID(_r)
 }
 
-// HostWithName calls the underlying NSHostHostWithName.
+// HostWithName wraps the corresponding Objective-C method.
 func HostWithName(name string) *Host {
-	_r := raw.NSHostHostWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Host{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("hostWithName:"), purego.NSString(name))
+	return HostFromID(_r)
 }
 
-// HostWithAddress calls the underlying NSHostHostWithAddress.
+// HostWithAddress wraps the corresponding Objective-C method.
 func HostWithAddress(address string) *Host {
-	_r := raw.NSHostHostWithAddress(foundation.NSStringStringWithUTF8String(address))
-	if _r == nil {
-		return nil
-	}
-	return &Host{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("hostWithAddress:"), purego.NSString(address))
+	return HostFromID(_r)
 }
 
-// SetHostCacheEnabled calls the underlying NSHostSetHostCacheEnabled.
+// SetHostCacheEnabled specifies whether the receiver is to cache instances as it creates them to avoid creating duplicate instances.
 func SetHostCacheEnabled(flag bool) {
-	raw.NSHostSetHostCacheEnabled(flag)
+	objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("setHostCacheEnabled:"), flag)
 }
 
-// IsHostCacheEnabled calls the underlying NSHostIsHostCacheEnabled.
+// IsHostCacheEnabled indicates whether caching is turned on or off.
 func IsHostCacheEnabled() bool {
-	return raw.NSHostIsHostCacheEnabled()
+	_r := objc.Send[bool](objc.ID(_class("NSHost")), objc.RegisterName("isHostCacheEnabled"))
+	return _r
 }
 
-// FlushHostCache calls the underlying NSHostFlushHostCache.
+// FlushHostCache releases the cache of existing NSHost objects so subsequent requests for NSHost objects create new ones.
 func FlushHostCache() {
-	raw.NSHostFlushHostCache()
+	objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("flushHostCache"))
 }
 
-// StringFromDateTimeZoneFormatOptions calls the underlying NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions.
-func StringFromDateTimeZoneFormatOptions(date *raw.NSDate, timeZone *raw.NSTimeZone, formatOptions NSISO8601DateFormatOptions) *String {
-	_r := raw.NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions(date, timeZone, raw.NSISO8601DateFormatOptions(formatOptions))
-	if _r == nil {
-		return nil
+// StringFromDateTimeZoneFormatOptions wraps the corresponding Objective-C method.
+func StringFromDateTimeZoneFormatOptions(date *Date, timeZone *TimeZone, formatOptions ISO8601DateFormatOptions) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSISO8601DateFormatter")), objc.RegisterName("stringFromDate:timeZone:formatOptions:"), objref.IDOf(date), objref.IDOf(timeZone), formatOptions)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// IndexPathWithIndex calls the underlying NSIndexPathIndexPathWithIndex.
-func IndexPathWithIndex(index uint) *IndexPath {
-	_r := raw.NSIndexPathIndexPathWithIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &IndexPath{inner: _r}
+// IndexPathWithIndex creates a one-node index path.
+func IndexPathWithIndex(index int) *IndexPath {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSIndexPath")), objc.RegisterName("indexPathWithIndex:"), index)
+	return IndexPathFromID(_r)
 }
 
-// IndexPathWithIndexesLength calls the underlying NSIndexPathIndexPathWithIndexesLength.
-func IndexPathWithIndexesLength(indexes *uint, length uint) *IndexPath {
-	_r := raw.NSIndexPathIndexPathWithIndexesLength(indexes, length)
-	if _r == nil {
-		return nil
-	}
-	return &IndexPath{inner: _r}
+// IndexPathWithIndexesLength creates an index path with one or more nodes.
+func IndexPathWithIndexesLength(length int) (result *IndexPath, indexes int) {
+	var _out0 int
+	_r := objc.Send[objc.ID](objc.ID(_class("NSIndexPath")), objc.RegisterName("indexPathWithIndexes:length:"), unsafe.Pointer(&_out0), length)
+	_v := IndexPathFromID(_r)
+	return _v, _out0
 }
 
-// NSIndexSetIndexSet calls the underlying NSIndexSetIndexSet.
+// NSIndexSetIndexSet creates an empty index set.
 func NSIndexSetIndexSet() *IndexSet {
-	_r := raw.NSIndexSetIndexSet()
-	if _r == nil {
-		return nil
-	}
-	return &IndexSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("indexSet"))
+	return IndexSetFromID(_r)
 }
 
-// IndexSetWithIndex calls the underlying NSIndexSetIndexSetWithIndex.
-func IndexSetWithIndex(value uint) *IndexSet {
-	_r := raw.NSIndexSetIndexSetWithIndex(value)
-	if _r == nil {
-		return nil
-	}
-	return &IndexSet{inner: _r}
+// IndexSetWithIndex creates an index set with an index.
+func IndexSetWithIndex(value int) *IndexSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSIndexSet")), objc.RegisterName("indexSetWithIndex:"), value)
+	return IndexSetFromID(_r)
 }
 
-// IndexSetWithIndexesInRange calls the underlying NSIndexSetIndexSetWithIndexesInRange.
-func IndexSetWithIndexesInRange(range_ raw.NSRange) *IndexSet {
-	_r := raw.NSIndexSetIndexSetWithIndexesInRange(range_)
-	if _r == nil {
-		return nil
-	}
-	return &IndexSet{inner: _r}
-}
-
-// AutomaticRule calls the underlying NSInflectionRuleAutomaticRule.
+// AutomaticRule wraps the corresponding Objective-C method.
 func AutomaticRule() *InflectionRule {
-	_r := raw.NSInflectionRuleAutomaticRule()
-	if _r == nil {
-		return nil
-	}
-	return &InflectionRule{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSInflectionRule")), objc.RegisterName("automaticRule"))
+	return InflectionRuleFromID(_r)
 }
 
-// CanInflectLanguage calls the underlying NSInflectionRuleCanInflectLanguage.
+// CanInflectLanguage returns a Boolean value that indicates whether the rule can inflect a given language.
 func CanInflectLanguage(language string) bool {
-	return raw.NSInflectionRuleCanInflectLanguage(foundation.NSStringStringWithUTF8String(language))
+	_r := objc.Send[bool](objc.ID(_class("NSInflectionRule")), objc.RegisterName("canInflectLanguage:"), purego.NSString(language))
+	return _r
 }
 
-// CanInflectPreferredLocalization calls the underlying NSInflectionRuleCanInflectPreferredLocalization.
+// CanInflectPreferredLocalization wraps the corresponding Objective-C method.
 func CanInflectPreferredLocalization() bool {
-	return raw.NSInflectionRuleCanInflectPreferredLocalization()
+	_r := objc.Send[bool](objc.ID(_class("NSInflectionRule")), objc.RegisterName("canInflectPreferredLocalization"))
+	return _r
 }
 
-// InputStreamWithData calls the underlying NSInputStreamInputStreamWithData.
-func InputStreamWithData(data *raw.NSData) *InputStream {
-	_r := raw.NSInputStreamInputStreamWithData(data)
-	if _r == nil {
-		return nil
-	}
-	return &InputStream{inner: _r}
+// InputStreamWithData creates and returns an initialized NSInputStream object for reading from a given NSData object.
+func InputStreamWithData(data *Data) *InputStream {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithData:"), objref.IDOf(data))
+	return InputStreamFromID(_r)
 }
 
-// InputStreamWithFileAtPath calls the underlying NSInputStreamInputStreamWithFileAtPath.
+// InputStreamWithFileAtPath creates and returns an initialized NSInputStream object that reads data from the file at a given path.
 func InputStreamWithFileAtPath(path string) *InputStream {
-	_r := raw.NSInputStreamInputStreamWithFileAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &InputStream{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithFileAtPath:"), purego.NSString(path))
+	return InputStreamFromID(_r)
 }
 
-// InputStreamWithURL calls the underlying NSInputStreamInputStreamWithURL.
+// InputStreamWithURL creates and returns an initialized NSInputStream object that reads data from the file at a given URL.
 func InputStreamWithURL(url string) *InputStream {
-	_r := raw.NSInputStreamInputStreamWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithURL:"), rt.FileURL(url))
+	return InputStreamFromID(_r)
+}
+
+// InvocationWithMethodSignature returns an NSInvocation object able to construct messages using a given method signature.
+func InvocationWithMethodSignature(sig *MethodSignature) *Invocation {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSInvocation")), objc.RegisterName("invocationWithMethodSignature:"), objref.IDOf(sig))
+	return InvocationFromID(_r)
+}
+
+// IsValidJSONObject wraps the corresponding Objective-C method.
+func IsValidJSONObject(obj_ obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("isValidJSONObject:"), objref.IDOf(obj_))
+	return _r
+}
+
+// DataWithJSONObjectOptionsError wraps the corresponding Objective-C method.
+func DataWithJSONObjectOptionsError(obj_ obj.Object, opt JSONWritingOptions) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("dataWithJSONObject:options:error:"), objref.IDOf(obj_), opt, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &InputStream{inner: _r}
+	return DataFromID(_r), nil
 }
 
-// InvocationWithMethodSignature calls the underlying NSInvocationInvocationWithMethodSignature.
-func InvocationWithMethodSignature(sig *raw.NSMethodSignature) *Invocation {
-	_r := raw.NSInvocationInvocationWithMethodSignature(sig)
-	if _r == nil {
-		return nil
+// JSONObjectWithDataOptionsError wraps the corresponding Objective-C method.
+func JSONObjectWithDataOptionsError(data *Data, opt JSONReadingOptions) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("JSONObjectWithData:options:error:"), objref.IDOf(data), opt, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Invocation{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// IsValidJSONObject calls the underlying NSJSONSerializationIsValidJSONObject.
-func IsValidJSONObject(obj objc.ID) bool {
-	return raw.NSJSONSerializationIsValidJSONObject(obj)
-}
-
-// DataWithJSONObjectOptionsError calls the underlying NSJSONSerializationDataWithJSONObjectOptionsError.
-func DataWithJSONObjectOptionsError(obj objc.ID, opt NSJSONWritingOptions) (*Data, error) {
-	_r, _err := raw.NSJSONSerializationDataWithJSONObjectOptionsError(obj, raw.NSJSONWritingOptions(opt))
-	if _err != nil {
-		return nil, _err
+// WriteJSONObjectToStreamOptionsError wraps the corresponding Objective-C method.
+func WriteJSONObjectToStreamOptionsError(obj_ obj.Object, stream *OutputStream, opt JSONWritingOptions) (result int, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[int](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("writeJSONObject:toStream:options:error:"), objref.IDOf(obj_), objref.IDOf(stream), opt, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return _r, nil
+}
+
+// JSONObjectWithStreamOptionsError wraps the corresponding Objective-C method.
+func JSONObjectWithStreamOptionsError(stream *InputStream, opt JSONReadingOptions) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("JSONObjectWithStream:options:error:"), objref.IDOf(stream), opt, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}, nil
+	return obj.Wrap(_r), nil
 }
 
-// JSONObjectWithDataOptionsError calls the underlying NSJSONSerializationJSONObjectWithDataOptionsError.
-func JSONObjectWithDataOptionsError(data *raw.NSData, opt NSJSONReadingOptions) (objc.ID, error) {
-	return raw.NSJSONSerializationJSONObjectWithDataOptionsError(data, raw.NSJSONReadingOptions(opt))
-}
-
-// WriteJSONObjectToStreamOptionsError calls the underlying NSJSONSerializationWriteJSONObjectToStreamOptionsError.
-func WriteJSONObjectToStreamOptionsError(obj objc.ID, stream *raw.NSOutputStream, opt NSJSONWritingOptions) (int, error) {
-	return raw.NSJSONSerializationWriteJSONObjectToStreamOptionsError(obj, stream, raw.NSJSONWritingOptions(opt))
-}
-
-// JSONObjectWithStreamOptionsError calls the underlying NSJSONSerializationJSONObjectWithStreamOptionsError.
-func JSONObjectWithStreamOptionsError(stream *raw.NSInputStream, opt NSJSONReadingOptions) (objc.ID, error) {
-	return raw.NSJSONSerializationJSONObjectWithStreamOptionsError(stream, raw.NSJSONReadingOptions(opt))
-}
-
-// ArchivedDataWithRootObjectRequiringSecureCodingError calls the underlying NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError.
-func ArchivedDataWithRootObjectRequiringSecureCodingError(object objc.ID, requiresSecureCoding bool) (*Data, error) {
-	_r, _err := raw.NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError(object, requiresSecureCoding)
-	if _err != nil {
-		return nil, _err
+// ArchivedDataWithRootObjectRequiringSecureCodingError encodes an object graph with the given root object into a data representation, optionally requiring secure coding.
+func ArchivedDataWithRootObjectRequiringSecureCodingError(object obj.Object, requiresSecureCoding bool) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("archivedDataWithRootObject:requiringSecureCoding:error:"), objref.IDOf(object), requiresSecureCoding, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return DataFromID(_r), nil
+}
+
+// NSKeyedArchiverArchivedDataWithRootObject returns a data object that contains the encoded form of the object graph formed by the given root object.
+func NSKeyedArchiverArchivedDataWithRootObject(rootObject obj.Object) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("archivedDataWithRootObject:"), objref.IDOf(rootObject))
+	return DataFromID(_r)
+}
+
+// NSKeyedArchiverArchiveRootObjectToFile archives an object graph rooted at a given object to a file at a given path.
+func NSKeyedArchiverArchiveRootObjectToFile(rootObject obj.Object, path string) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("archiveRootObject:toFile:"), objref.IDOf(rootObject), purego.NSString(path))
+	return _r
+}
+
+// UnarchivedObjectOfClassesFromDataError decodes a previously-archived object graph, returning the root object as one of the specified classes.
+func UnarchivedObjectOfClassesFromDataError(classes obj.Object, data *Data) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedObjectOfClasses:fromData:error:"), objref.IDOf(classes), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}, nil
+	return obj.Wrap(_r), nil
 }
 
-// NSKeyedArchiverArchivedDataWithRootObject calls the underlying NSKeyedArchiverArchivedDataWithRootObject.
-func NSKeyedArchiverArchivedDataWithRootObject(rootObject objc.ID) *Data {
-	_r := raw.NSKeyedArchiverArchivedDataWithRootObject(rootObject)
-	if _r == nil {
-		return nil
+// UnarchivedArrayOfObjectsOfClassesFromDataError decodes the \c NSArray root object from \c data which should be an \c NSArray, containing the given non-collection classes in \c classes (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+func UnarchivedArrayOfObjectsOfClassesFromDataError(classes obj.Object, data *Data) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedArrayOfObjectsOfClasses:fromData:error:"), objref.IDOf(classes), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// NSKeyedArchiverArchiveRootObjectToFile calls the underlying NSKeyedArchiverArchiveRootObjectToFile.
-func NSKeyedArchiverArchiveRootObjectToFile(rootObject objc.ID, path string) bool {
-	return raw.NSKeyedArchiverArchiveRootObjectToFile(rootObject, foundation.NSStringStringWithUTF8String(path))
-}
-
-// SetClassNameForClass calls the underlying NSKeyedArchiverSetClassNameForClass.
-func SetClassNameForClass(codedName string, cls objc.Class) {
-	raw.NSKeyedArchiverSetClassNameForClass(foundation.NSStringStringWithUTF8String(codedName), cls)
-}
-
-// ClassNameForClass calls the underlying NSKeyedArchiverClassNameForClass.
-func ClassNameForClass(cls objc.Class) *String {
-	_r := raw.NSKeyedArchiverClassNameForClass(cls)
-	if _r == nil {
-		return nil
+// UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+func UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError(keyClasses obj.Object, valueClasses obj.Object, data *Data) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedDictionaryWithKeysOfClasses:objectsOfClasses:fromData:error:"), objref.IDOf(keyClasses), objref.IDOf(valueClasses), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// UnarchivedObjectOfClassFromDataError calls the underlying NSKeyedUnarchiverUnarchivedObjectOfClassFromDataError.
-func UnarchivedObjectOfClassFromDataError(cls objc.Class, data *raw.NSData) (objc.ID, error) {
-	return raw.NSKeyedUnarchiverUnarchivedObjectOfClassFromDataError(cls, data)
+// UnarchiveObjectWithData decodes and returns the object graph previously encoded by NSKeyedArchiver and stored in a given NSData object.
+func UnarchiveObjectWithData(data *Data) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveObjectWithData:"), objref.IDOf(data))
+	return obj.Wrap(_r)
 }
 
-// UnarchivedArrayOfObjectsOfClassFromDataError calls the underlying NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassFromDataError.
-func UnarchivedArrayOfObjectsOfClassFromDataError(cls objc.Class, data *raw.NSData) (*raw.NSArray[objc.ID], error) {
-	return raw.NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassFromDataError(cls, data)
-}
-
-// UnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError calls the underlying NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError.
-func UnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError(keyCls objc.Class, valueCls objc.Class, data *raw.NSData) (*raw.NSDictionary[objc.ID, objc.ID], error) {
-	return raw.NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError(keyCls, valueCls, data)
-}
-
-// UnarchivedObjectOfClassesFromDataError calls the underlying NSKeyedUnarchiverUnarchivedObjectOfClassesFromDataError.
-func UnarchivedObjectOfClassesFromDataError(classes *raw.NSSet[objc.Class], data *raw.NSData) (objc.ID, error) {
-	return raw.NSKeyedUnarchiverUnarchivedObjectOfClassesFromDataError(classes, data)
-}
-
-// UnarchivedArrayOfObjectsOfClassesFromDataError calls the underlying NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassesFromDataError.
-func UnarchivedArrayOfObjectsOfClassesFromDataError(classes *raw.NSSet[objc.Class], data *raw.NSData) (*raw.NSArray[objc.ID], error) {
-	return raw.NSKeyedUnarchiverUnarchivedArrayOfObjectsOfClassesFromDataError(classes, data)
-}
-
-// UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError calls the underlying NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError.
-func UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError(keyClasses *raw.NSSet[objc.Class], valueClasses *raw.NSSet[objc.Class], data *raw.NSData) (*raw.NSDictionary[objc.ID, objc.ID], error) {
-	return raw.NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError(keyClasses, valueClasses, data)
-}
-
-// UnarchiveObjectWithData calls the underlying NSKeyedUnarchiverUnarchiveObjectWithData.
-func UnarchiveObjectWithData(data *raw.NSData) objc.ID {
-	return raw.NSKeyedUnarchiverUnarchiveObjectWithData(data)
-}
-
-// UnarchiveTopLevelObjectWithDataError calls the underlying NSKeyedUnarchiverUnarchiveTopLevelObjectWithDataError.
-func UnarchiveTopLevelObjectWithDataError(data *raw.NSData) (objc.ID, error) {
-	return raw.NSKeyedUnarchiverUnarchiveTopLevelObjectWithDataError(data)
-}
-
-// UnarchiveObjectWithFile calls the underlying NSKeyedUnarchiverUnarchiveObjectWithFile.
-func UnarchiveObjectWithFile(path string) objc.ID {
-	return raw.NSKeyedUnarchiverUnarchiveObjectWithFile(foundation.NSStringStringWithUTF8String(path))
-}
-
-// SetClassForClassName calls the underlying NSKeyedUnarchiverSetClassForClassName.
-func SetClassForClassName(cls objc.Class, codedName string) {
-	raw.NSKeyedUnarchiverSetClassForClassName(cls, foundation.NSStringStringWithUTF8String(codedName))
-}
-
-// ClassForClassName calls the underlying NSKeyedUnarchiverClassForClassName.
-func ClassForClassName(codedName string) objc.Class {
-	return raw.NSKeyedUnarchiverClassForClassName(foundation.NSStringStringWithUTF8String(codedName))
-}
-
-// AvailableTagSchemesForUnitLanguage calls the underlying NSLinguisticTaggerAvailableTagSchemesForUnitLanguage.
-func AvailableTagSchemesForUnitLanguage(unit NSLinguisticTaggerUnit, language string) *raw.NSArray[*raw.NSString] {
-	return raw.NSLinguisticTaggerAvailableTagSchemesForUnitLanguage(raw.NSLinguisticTaggerUnit(unit), foundation.NSStringStringWithUTF8String(language))
-}
-
-// AvailableTagSchemesForLanguage calls the underlying NSLinguisticTaggerAvailableTagSchemesForLanguage.
-func AvailableTagSchemesForLanguage(language string) *raw.NSArray[*raw.NSString] {
-	return raw.NSLinguisticTaggerAvailableTagSchemesForLanguage(foundation.NSStringStringWithUTF8String(language))
-}
-
-// DominantLanguageForString calls the underlying NSLinguisticTaggerDominantLanguageForString.
-func DominantLanguageForString(string_ string) *String {
-	_r := raw.NSLinguisticTaggerDominantLanguageForString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
+// UnarchiveTopLevelObjectWithDataError decodes a previously-archived object graph, returning the root object.
+func UnarchiveTopLevelObjectWithDataError(data *Data) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveTopLevelObjectWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// TagForStringAtIndexUnitSchemeOrthographyTokenRange calls the underlying NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange.
-func TagForStringAtIndexUnitSchemeOrthographyTokenRange(string_ string, charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, orthography *raw.NSOrthography, tokenRange *raw.NSRange) *String {
-	_r := raw.NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange(foundation.NSStringStringWithUTF8String(string_), charIndex, raw.NSLinguisticTaggerUnit(unit), scheme, orthography, tokenRange)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// UnarchiveObjectWithFile decodes and returns the object graph previously encoded by NSKeyedArchiver written to the file at a given path.
+func UnarchiveObjectWithFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveObjectWithFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges calls the underlying NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges.
-func TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(string_ string, range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(tokenRanges))
-	for _i, _v := range tokenRanges {
-		_ptrs[_i] = _v.asValue().Ptr()
-	}
-	var _arg6 *raw.NSArray[*raw.NSValue]
-	if len(_ptrs) > 0 {
-		_arg6 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg6 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return raw.NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(foundation.NSStringStringWithUTF8String(string_), range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), orthography, _arg6)
+// AvailableTagSchemesForUnitLanguage returns the tag schemes available for a particular unit and language on the current device.
+func AvailableTagSchemesForUnitLanguage(unit LinguisticTaggerUnit, language string) []*String {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("availableTagSchemesForUnit:language:"), unit, purego.NSString(language))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// EnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing calls the underlying NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing.
-func EnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(string_ string, range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
-	raw.NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(foundation.NSStringStringWithUTF8String(string_), range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), orthography, block)
+// AvailableTagSchemesForLanguage returns the tag schemes available for a particular language on the current device.
+func AvailableTagSchemesForLanguage(language string) []*String {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("availableTagSchemesForLanguage:"), purego.NSString(language))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// LocalizedStringByJoiningStrings calls the underlying NSListFormatterLocalizedStringByJoiningStrings.
-func LocalizedStringByJoiningStrings(strings_ ...StringProvider) *String {
-	_ptrs := make([]objc.ID, len(strings_))
-	for _i, _v := range strings_ {
-		_ptrs[_i] = _v.asString().Ptr()
+// DominantLanguageForString returns the dominant language for the specified string.
+func DominantLanguageForString(string_ string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("dominantLanguageForString:"), purego.NSString(string_))
+	if _r == 0 {
+		return ""
 	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSListFormatterLocalizedStringByJoiningStrings(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocaleWithLocaleIdentifier calls the underlying NSLocaleLocaleWithLocaleIdentifier.
+// LocalizedStringByJoiningStrings wraps the corresponding Objective-C method.
+func LocalizedStringByJoiningStrings(strings_ []string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSListFormatter")), objc.RegisterName("localizedStringByJoiningStrings:"), purego.SliceToNSArray(strings_, func(_v string) objc.ID { return purego.NSString(_v) }))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// LocaleWithLocaleIdentifier returns a locale initialized using the given locale identifier.
 func LocaleWithLocaleIdentifier(ident string) *Locale {
-	_r := raw.NSLocaleLocaleWithLocaleIdentifier(foundation.NSStringStringWithUTF8String(ident))
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("localeWithLocaleIdentifier:"), purego.NSString(ident))
+	return LocaleFromID(_r)
 }
 
-// AutoupdatingCurrentLocale calls the underlying NSLocaleAutoupdatingCurrentLocale.
+// AutoupdatingCurrentLocale wraps the corresponding Objective-C method.
 func AutoupdatingCurrentLocale() *Locale {
-	_r := raw.NSLocaleAutoupdatingCurrentLocale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("autoupdatingCurrentLocale"))
+	return LocaleFromID(_r)
 }
 
-// CurrentLocale calls the underlying NSLocaleCurrentLocale.
+// CurrentLocale wraps the corresponding Objective-C method.
 func CurrentLocale() *Locale {
-	_r := raw.NSLocaleCurrentLocale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("currentLocale"))
+	return LocaleFromID(_r)
 }
 
-// SystemLocale calls the underlying NSLocaleSystemLocale.
+// SystemLocale wraps the corresponding Objective-C method.
 func SystemLocale() *Locale {
-	_r := raw.NSLocaleSystemLocale()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("systemLocale"))
+	return LocaleFromID(_r)
+}
+
+// ComponentsFromLocaleIdentifier returns a dictionary that is the result of parsing a locale ID.
+func ComponentsFromLocaleIdentifier(string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("componentsFromLocaleIdentifier:"), purego.NSString(string_))
+	return obj.Wrap(_r)
+}
+
+// LocaleIdentifierFromComponents returns a locale identifier from the components specified in a given dictionary.
+func LocaleIdentifierFromComponents(dict obj.Object) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("localeIdentifierFromComponents:"), objref.IDOf(dict))
+	if _r == 0 {
+		return ""
 	}
-	return &Locale{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ComponentsFromLocaleIdentifier calls the underlying NSLocaleComponentsFromLocaleIdentifier.
-func ComponentsFromLocaleIdentifier(string_ string) *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return raw.NSLocaleComponentsFromLocaleIdentifier(foundation.NSStringStringWithUTF8String(string_))
-}
-
-// LocaleIdentifierFromComponents calls the underlying NSLocaleLocaleIdentifierFromComponents.
-func LocaleIdentifierFromComponents(dict *raw.NSDictionary[*raw.NSString, *raw.NSString]) *String {
-	_r := raw.NSLocaleLocaleIdentifierFromComponents(dict)
-	if _r == nil {
-		return nil
+// CanonicalLocaleIdentifierFromString returns the canonical identifier for a given locale identification string.
+func CanonicalLocaleIdentifierFromString(string_ string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("canonicalLocaleIdentifierFromString:"), purego.NSString(string_))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CanonicalLocaleIdentifierFromString calls the underlying NSLocaleCanonicalLocaleIdentifierFromString.
-func CanonicalLocaleIdentifierFromString(string_ string) *String {
-	_r := raw.NSLocaleCanonicalLocaleIdentifierFromString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
+// CanonicalLanguageIdentifierFromString returns a canonical language identifier by mapping an arbitrary locale identification string to the canonical identifier.
+func CanonicalLanguageIdentifierFromString(string_ string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("canonicalLanguageIdentifierFromString:"), purego.NSString(string_))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CanonicalLanguageIdentifierFromString calls the underlying NSLocaleCanonicalLanguageIdentifierFromString.
-func CanonicalLanguageIdentifierFromString(string_ string) *String {
-	_r := raw.NSLocaleCanonicalLanguageIdentifierFromString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
+// LocaleIdentifierFromWindowsLocaleCode returns a locale identifier from a Windows locale code.
+func LocaleIdentifierFromWindowsLocaleCode(lcid uint32) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("localeIdentifierFromWindowsLocaleCode:"), lcid)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocaleIdentifierFromWindowsLocaleCode calls the underlying NSLocaleLocaleIdentifierFromWindowsLocaleCode.
-func LocaleIdentifierFromWindowsLocaleCode(lcid uint32) *String {
-	_r := raw.NSLocaleLocaleIdentifierFromWindowsLocaleCode(lcid)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// WindowsLocaleCodeFromLocaleIdentifier calls the underlying NSLocaleWindowsLocaleCodeFromLocaleIdentifier.
+// WindowsLocaleCodeFromLocaleIdentifier returns a Window locale code from the locale identifier.
 func WindowsLocaleCodeFromLocaleIdentifier(localeIdentifier string) uint32 {
-	return raw.NSLocaleWindowsLocaleCodeFromLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
+	_r := objc.Send[uint32](objc.ID(_class("NSLocale")), objc.RegisterName("windowsLocaleCodeFromLocaleIdentifier:"), purego.NSString(localeIdentifier))
+	return _r
 }
 
-// CharacterDirectionForLanguage calls the underlying NSLocaleCharacterDirectionForLanguage.
-func CharacterDirectionForLanguage(isoLangCode string) NSLocaleLanguageDirection {
-	return NSLocaleLanguageDirection(raw.NSLocaleCharacterDirectionForLanguage(foundation.NSStringStringWithUTF8String(isoLangCode)))
+// CharacterDirectionForLanguage returns the direction of the sequence of characters in a line for the specified ISO language code.
+func CharacterDirectionForLanguage(isoLangCode string) LocaleLanguageDirection {
+	_r := objc.Send[LocaleLanguageDirection](objc.ID(_class("NSLocale")), objc.RegisterName("characterDirectionForLanguage:"), purego.NSString(isoLangCode))
+	return _r
 }
 
-// LineDirectionForLanguage calls the underlying NSLocaleLineDirectionForLanguage.
-func LineDirectionForLanguage(isoLangCode string) NSLocaleLanguageDirection {
-	return NSLocaleLanguageDirection(raw.NSLocaleLineDirectionForLanguage(foundation.NSStringStringWithUTF8String(isoLangCode)))
+// LineDirectionForLanguage returns the direction of the sequence of lines for the specified ISO language code.
+func LineDirectionForLanguage(isoLangCode string) LocaleLanguageDirection {
+	_r := objc.Send[LocaleLanguageDirection](objc.ID(_class("NSLocale")), objc.RegisterName("lineDirectionForLanguage:"), purego.NSString(isoLangCode))
+	return _r
 }
 
+// AvailableLocaleIdentifiers wraps the corresponding Objective-C method.
+//
 // AvailableLocaleIdentifiers returns the collection as a Go slice.
 func AvailableLocaleIdentifiers() []string {
-	arr := raw.NSLocaleAvailableLocaleIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("availableLocaleIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// ISOLanguageCodes wraps the corresponding Objective-C method.
+//
 // ISOLanguageCodes returns the collection as a Go slice.
 func ISOLanguageCodes() []string {
-	arr := raw.NSLocaleISOLanguageCodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("ISOLanguageCodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// ISOCountryCodes wraps the corresponding Objective-C method.
+//
 // ISOCountryCodes returns the collection as a Go slice.
 func ISOCountryCodes() []string {
-	arr := raw.NSLocaleISOCountryCodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("ISOCountryCodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// ISOCurrencyCodes wraps the corresponding Objective-C method.
+//
 // ISOCurrencyCodes returns the collection as a Go slice.
 func ISOCurrencyCodes() []string {
-	arr := raw.NSLocaleISOCurrencyCodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("ISOCurrencyCodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// CommonISOCurrencyCodes wraps the corresponding Objective-C method.
+//
 // CommonISOCurrencyCodes returns the collection as a Go slice.
 func CommonISOCurrencyCodes() []string {
-	arr := raw.NSLocaleCommonISOCurrencyCodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("commonISOCurrencyCodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// PreferredLanguages wraps the corresponding Objective-C method.
+//
 // PreferredLanguages returns the collection as a Go slice.
 func PreferredLanguages() []string {
-	arr := raw.NSLocalePreferredLanguages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("preferredLanguages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Automatic calls the underlying NSLocalizedNumberFormatRuleAutomatic.
+// Automatic wraps the corresponding Objective-C method.
 func Automatic() *LocalizedNumberFormatRule {
-	_r := raw.NSLocalizedNumberFormatRuleAutomatic()
-	if _r == nil {
-		return nil
-	}
-	return &LocalizedNumberFormatRule{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocalizedNumberFormatRule")), objc.RegisterName("automatic"))
+	return LocalizedNumberFormatRuleFromID(_r)
 }
 
-// SharedInstance calls the underlying NSMachBootstrapServerSharedInstance.
-func SharedInstance() objc.ID {
-	return raw.NSMachBootstrapServerSharedInstance()
+// SharedInstance returns the shared instance of the bootstrap server.
+func SharedInstance() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMachBootstrapServer")), objc.RegisterName("sharedInstance"))
+	return obj.Wrap(_r)
 }
 
-// PortWithMachPort calls the underlying NSMachPortPortWithMachPort.
+// PortWithMachPort creates and returns a port object configured with the given Mach port.
 func PortWithMachPort(machPort uint32) *Port {
-	_r := raw.NSMachPortPortWithMachPort(machPort)
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("portWithMachPort:"), machPort)
+	return PortFromID(_r)
 }
 
-// PortWithMachPortOptions calls the underlying NSMachPortPortWithMachPortOptions.
-func PortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *Port {
-	_r := raw.NSMachPortPortWithMachPortOptions(machPort, raw.NSMachPortOptions(f))
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+// PortWithMachPortOptions creates and returns a port object configured with the specified options and the given Mach port.
+func PortWithMachPortOptions(machPort uint32, f MachPortOptions) *Port {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("portWithMachPort:options:"), machPort, f)
+	return PortFromID(_r)
 }
 
-// MapTableWithKeyOptionsValueOptions calls the underlying NSMapTableMapTableWithKeyOptionsValueOptions.
-func MapTableWithKeyOptionsValueOptions(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions) *raw.NSMapTable[objc.ID, objc.ID] {
-	return raw.NSMapTableMapTableWithKeyOptionsValueOptions(raw.NSPointerFunctionsOptions(keyOptions), raw.NSPointerFunctionsOptions(valueOptions))
+// MapTableWithKeyOptionsValueOptions returns a new map table, initialized with the given options
+func MapTableWithKeyOptionsValueOptions(keyOptions PointerFunctionsOptions, valueOptions PointerFunctionsOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("mapTableWithKeyOptions:valueOptions:"), keyOptions, valueOptions)
+	return obj.Wrap(_r)
 }
 
-// MapTableWithStrongToStrongObjects calls the underlying NSMapTableMapTableWithStrongToStrongObjects.
-func MapTableWithStrongToStrongObjects() objc.ID {
-	return raw.NSMapTableMapTableWithStrongToStrongObjects()
+// MapTableWithStrongToStrongObjects returns a new map table object which has strong references to the keys and values.
+func MapTableWithStrongToStrongObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("mapTableWithStrongToStrongObjects"))
+	return obj.Wrap(_r)
 }
 
-// MapTableWithWeakToStrongObjects calls the underlying NSMapTableMapTableWithWeakToStrongObjects.
-func MapTableWithWeakToStrongObjects() objc.ID {
-	return raw.NSMapTableMapTableWithWeakToStrongObjects()
+// MapTableWithWeakToStrongObjects returns a new map table object which has weak references to the keys and strong references to the values.
+func MapTableWithWeakToStrongObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("mapTableWithWeakToStrongObjects"))
+	return obj.Wrap(_r)
 }
 
-// MapTableWithStrongToWeakObjects calls the underlying NSMapTableMapTableWithStrongToWeakObjects.
-func MapTableWithStrongToWeakObjects() objc.ID {
-	return raw.NSMapTableMapTableWithStrongToWeakObjects()
+// MapTableWithStrongToWeakObjects returns a new map table object which has strong references to the keys and weak references to the values.
+func MapTableWithStrongToWeakObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("mapTableWithStrongToWeakObjects"))
+	return obj.Wrap(_r)
 }
 
-// MapTableWithWeakToWeakObjects calls the underlying NSMapTableMapTableWithWeakToWeakObjects.
-func MapTableWithWeakToWeakObjects() objc.ID {
-	return raw.NSMapTableMapTableWithWeakToWeakObjects()
+// MapTableWithWeakToWeakObjects returns a new map table object which has weak references to the keys and values.
+func MapTableWithWeakToWeakObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("mapTableWithWeakToWeakObjects"))
+	return obj.Wrap(_r)
 }
 
-// StrongToStrongObjectsMapTable calls the underlying NSMapTableStrongToStrongObjectsMapTable.
-func StrongToStrongObjectsMapTable() *raw.NSMapTable[objc.ID, objc.ID] {
-	return raw.NSMapTableStrongToStrongObjectsMapTable()
+// StrongToStrongObjectsMapTable returns a new map table object which has strong references to the keys and values.
+func StrongToStrongObjectsMapTable() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("strongToStrongObjectsMapTable"))
+	return obj.Wrap(_r)
 }
 
-// WeakToStrongObjectsMapTable calls the underlying NSMapTableWeakToStrongObjectsMapTable.
-func WeakToStrongObjectsMapTable() *raw.NSMapTable[objc.ID, objc.ID] {
-	return raw.NSMapTableWeakToStrongObjectsMapTable()
+// WeakToStrongObjectsMapTable returns a new map table object which has weak references to the keys and strong references to the values.
+func WeakToStrongObjectsMapTable() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("weakToStrongObjectsMapTable"))
+	return obj.Wrap(_r)
 }
 
-// StrongToWeakObjectsMapTable calls the underlying NSMapTableStrongToWeakObjectsMapTable.
-func StrongToWeakObjectsMapTable() *raw.NSMapTable[objc.ID, objc.ID] {
-	return raw.NSMapTableStrongToWeakObjectsMapTable()
+// StrongToWeakObjectsMapTable returns a new map table object which has strong references to the keys and weak references to the values.
+func StrongToWeakObjectsMapTable() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("strongToWeakObjectsMapTable"))
+	return obj.Wrap(_r)
 }
 
-// WeakToWeakObjectsMapTable calls the underlying NSMapTableWeakToWeakObjectsMapTable.
-func WeakToWeakObjectsMapTable() *raw.NSMapTable[objc.ID, objc.ID] {
-	return raw.NSMapTableWeakToWeakObjectsMapTable()
+// WeakToWeakObjectsMapTable returns a new map table object which has weak references to the keys and values.
+func WeakToWeakObjectsMapTable() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("weakToWeakObjectsMapTable"))
+	return obj.Wrap(_r)
 }
 
-// NSMessagePortNameServerSharedInstance calls the underlying NSMessagePortNameServerSharedInstance.
-func NSMessagePortNameServerSharedInstance() objc.ID {
-	return raw.NSMessagePortNameServerSharedInstance()
+// NSMessagePortNameServerSharedInstance returns the singleton instance of NSMessagePortNameServer.
+func NSMessagePortNameServerSharedInstance() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMessagePortNameServer")), objc.RegisterName("sharedInstance"))
+	return obj.Wrap(_r)
 }
 
-// SignatureWithObjCTypes calls the underlying NSMethodSignatureSignatureWithObjCTypes.
+// SignatureWithObjCTypes returns an NSMethodSignature object for the given Objective-C method type string.
 func SignatureWithObjCTypes(types string) *MethodSignature {
-	_r := raw.NSMethodSignatureSignatureWithObjCTypes(types)
-	if _r == nil {
-		return nil
-	}
-	return &MethodSignature{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMethodSignature")), objc.RegisterName("signatureWithObjCTypes:"), types)
+	return MethodSignatureFromID(_r)
 }
 
-// UserMorphology calls the underlying NSMorphologyUserMorphology.
+// UserMorphology wraps the corresponding Objective-C method.
 func UserMorphology() *Morphology {
-	_r := raw.NSMorphologyUserMorphology()
-	if _r == nil {
-		return nil
-	}
-	return &Morphology{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMorphology")), objc.RegisterName("userMorphology"))
+	return MorphologyFromID(_r)
 }
 
-// IsSupportedForLanguage calls the underlying NSMorphologyCustomPronounIsSupportedForLanguage.
+// IsSupportedForLanguage returns a Boolean value that indicates whether the given language supports setting custom pronouns.
 func IsSupportedForLanguage(language string) bool {
-	return raw.NSMorphologyCustomPronounIsSupportedForLanguage(foundation.NSStringStringWithUTF8String(language))
+	_r := objc.Send[bool](objc.ID(_class("NSMorphologyCustomPronoun")), objc.RegisterName("isSupportedForLanguage:"), purego.NSString(language))
+	return _r
 }
 
-// RequiredKeysForLanguage calls the underlying NSMorphologyCustomPronounRequiredKeysForLanguage.
-func RequiredKeysForLanguage(language string) *raw.NSArray[*raw.NSString] {
-	return raw.NSMorphologyCustomPronounRequiredKeysForLanguage(foundation.NSStringStringWithUTF8String(language))
+// RequiredKeysForLanguage returns a collection of the custom pronoun keys required by this language.
+func RequiredKeysForLanguage(language string) []string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMorphologyCustomPronoun")), objc.RegisterName("requiredKeysForLanguage:"), purego.NSString(language))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ArrayWithCapacity calls the underlying NSMutableArrayArrayWithCapacity.
-func ArrayWithCapacity(numItems uint) *raw.NSMutableArray[objc.ID] {
-	return raw.NSMutableArrayArrayWithCapacity(numItems)
+// ArrayWithCapacity creates and returns an NSMutableArray object with enough allocated memory to initially hold a given number of objects.
+func ArrayWithCapacity(numItems int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("arrayWithCapacity:"), numItems)
+	return obj.Wrap(_r)
 }
 
-// NSMutableArrayArrayWithContentsOfFile calls the underlying NSMutableArrayArrayWithContentsOfFile.
-func NSMutableArrayArrayWithContentsOfFile(path string) *raw.NSMutableArray[objc.ID] {
-	return raw.NSMutableArrayArrayWithContentsOfFile(foundation.NSStringStringWithUTF8String(path))
+// NSMutableArrayArrayWithContentsOfFile creates and returns a mutable array containing the contents of the file specified by the given path.
+func NSMutableArrayArrayWithContentsOfFile(path string) []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("arrayWithContentsOfFile:"), purego.NSString(path))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NSMutableArrayArrayWithContentsOfURL calls the underlying NSMutableArrayArrayWithContentsOfURL.
-func NSMutableArrayArrayWithContentsOfURL(url string) *raw.NSMutableArray[objc.ID] {
-	return raw.NSMutableArrayArrayWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// NSMutableArrayArrayWithContentsOfURL creates and returns a mutable array containing the contents specified by a given URL.
+func NSMutableArrayArrayWithContentsOfURL(url string) []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("arrayWithContentsOfURL:"), rt.FileURL(url))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NSMutableCharacterSetControlCharacterSet calls the underlying NSMutableCharacterSetControlCharacterSet.
+// NSMutableCharacterSetControlCharacterSet returns a character set containing the characters in Unicode General Category Cc and Cf.
 func NSMutableCharacterSetControlCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetControlCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("controlCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetWhitespaceCharacterSet calls the underlying NSMutableCharacterSetWhitespaceCharacterSet.
+// NSMutableCharacterSetWhitespaceCharacterSet returns a character set containing the characters in Unicode General Category Zs and CHARACTER TABULATION (U+0009).
 func NSMutableCharacterSetWhitespaceCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetWhitespaceCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("whitespaceCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetWhitespaceAndNewlineCharacterSet calls the underlying NSMutableCharacterSetWhitespaceAndNewlineCharacterSet.
+// NSMutableCharacterSetWhitespaceAndNewlineCharacterSet returns a character set containing characters in Unicode General Category Z*, U+000A ~ U+000D, and U+0085.
 func NSMutableCharacterSetWhitespaceAndNewlineCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetWhitespaceAndNewlineCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("whitespaceAndNewlineCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetDecimalDigitCharacterSet calls the underlying NSMutableCharacterSetDecimalDigitCharacterSet.
+// NSMutableCharacterSetDecimalDigitCharacterSet returns a character set containing the characters in the category of decimal numbers.
 func NSMutableCharacterSetDecimalDigitCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetDecimalDigitCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("decimalDigitCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetLetterCharacterSet calls the underlying NSMutableCharacterSetLetterCharacterSet.
+// NSMutableCharacterSetLetterCharacterSet returns a character set containing the characters in Unicode General Category L* & M*.
 func NSMutableCharacterSetLetterCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("letterCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetLowercaseLetterCharacterSet calls the underlying NSMutableCharacterSetLowercaseLetterCharacterSet.
+// NSMutableCharacterSetLowercaseLetterCharacterSet returns a character set containing the characters in Unicode General Category Ll.
 func NSMutableCharacterSetLowercaseLetterCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetLowercaseLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("lowercaseLetterCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetUppercaseLetterCharacterSet calls the underlying NSMutableCharacterSetUppercaseLetterCharacterSet.
+// NSMutableCharacterSetUppercaseLetterCharacterSet returns a character set containing the characters in Unicode General Category Lu and Lt.
 func NSMutableCharacterSetUppercaseLetterCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetUppercaseLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("uppercaseLetterCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetNonBaseCharacterSet calls the underlying NSMutableCharacterSetNonBaseCharacterSet.
+// NSMutableCharacterSetNonBaseCharacterSet returns a character set containing the characters in Unicode General Category M*.
 func NSMutableCharacterSetNonBaseCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetNonBaseCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("nonBaseCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetAlphanumericCharacterSet calls the underlying NSMutableCharacterSetAlphanumericCharacterSet.
+// NSMutableCharacterSetAlphanumericCharacterSet returns a character set containing the characters in Unicode General Categories L*, M*, and N*.
 func NSMutableCharacterSetAlphanumericCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetAlphanumericCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("alphanumericCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetDecomposableCharacterSet calls the underlying NSMutableCharacterSetDecomposableCharacterSet.
+// NSMutableCharacterSetDecomposableCharacterSet returns a character set containing individual Unicode characters that can also be represented as composed character sequences (such as for letters with accents), by the definition of “standard decomposition” in version 3.2 of the Unicode character encoding standard.
 func NSMutableCharacterSetDecomposableCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetDecomposableCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("decomposableCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetIllegalCharacterSet calls the underlying NSMutableCharacterSetIllegalCharacterSet.
+// NSMutableCharacterSetIllegalCharacterSet returns a character set containing values in the category of Non-Characters or that have not yet been defined in version 3.2 of the Unicode standard.
 func NSMutableCharacterSetIllegalCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetIllegalCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("illegalCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetPunctuationCharacterSet calls the underlying NSMutableCharacterSetPunctuationCharacterSet.
+// NSMutableCharacterSetPunctuationCharacterSet returns a character set containing the characters in Unicode General Category P*.
 func NSMutableCharacterSetPunctuationCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetPunctuationCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("punctuationCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetCapitalizedLetterCharacterSet calls the underlying NSMutableCharacterSetCapitalizedLetterCharacterSet.
+// NSMutableCharacterSetCapitalizedLetterCharacterSet returns a character set containing the characters in Unicode General Category Lt.
 func NSMutableCharacterSetCapitalizedLetterCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetCapitalizedLetterCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("capitalizedLetterCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetSymbolCharacterSet calls the underlying NSMutableCharacterSetSymbolCharacterSet.
+// NSMutableCharacterSetSymbolCharacterSet returns a character set containing the characters in Unicode General Category S*.
 func NSMutableCharacterSetSymbolCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetSymbolCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("symbolCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetNewlineCharacterSet calls the underlying NSMutableCharacterSetNewlineCharacterSet.
+// NSMutableCharacterSetNewlineCharacterSet returns a character set containing the newline characters (U+000A ~ U+000D, U+0085, U+2028, and U+2029).
 func NSMutableCharacterSetNewlineCharacterSet() *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetNewlineCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("newlineCharacterSet"))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetCharacterSetWithRange calls the underlying NSMutableCharacterSetCharacterSetWithRange.
-func NSMutableCharacterSetCharacterSetWithRange(aRange raw.NSRange) *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetCharacterSetWithRange(aRange)
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
-}
-
-// NSMutableCharacterSetCharacterSetWithCharactersInString calls the underlying NSMutableCharacterSetCharacterSetWithCharactersInString.
+// NSMutableCharacterSetCharacterSetWithCharactersInString returns a character set containing the characters in a given string.
 func NSMutableCharacterSetCharacterSetWithCharactersInString(aString string) *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetCharacterSetWithCharactersInString(foundation.NSStringStringWithUTF8String(aString))
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("characterSetWithCharactersInString:"), purego.NSString(aString))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetCharacterSetWithBitmapRepresentation calls the underlying NSMutableCharacterSetCharacterSetWithBitmapRepresentation.
-func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data *raw.NSData) *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data)
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+// NSMutableCharacterSetCharacterSetWithBitmapRepresentation returns a character set containing characters determined by a given bitmap representation.
+func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data *Data) *MutableCharacterSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("characterSetWithBitmapRepresentation:"), objref.IDOf(data))
+	return MutableCharacterSetFromID(_r)
 }
 
-// NSMutableCharacterSetCharacterSetWithContentsOfFile calls the underlying NSMutableCharacterSetCharacterSetWithContentsOfFile.
+// NSMutableCharacterSetCharacterSetWithContentsOfFile returns a character set read from the bitmap representation stored in the file a given path.
 func NSMutableCharacterSetCharacterSetWithContentsOfFile(fName string) *MutableCharacterSet {
-	_r := raw.NSMutableCharacterSetCharacterSetWithContentsOfFile(foundation.NSStringStringWithUTF8String(fName))
-	if _r == nil {
-		return nil
-	}
-	return &MutableCharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("characterSetWithContentsOfFile:"), purego.NSString(fName))
+	return MutableCharacterSetFromID(_r)
 }
 
-// DataWithCapacity calls the underlying NSMutableDataDataWithCapacity.
-func DataWithCapacity(aNumItems uint) *MutableData {
-	_r := raw.NSMutableDataDataWithCapacity(aNumItems)
-	if _r == nil {
-		return nil
-	}
-	return &MutableData{inner: _r}
+// DataWithCapacity creates and returns a mutable data object capable of holding the specified number of bytes.
+func DataWithCapacity(aNumItems int) *MutableData {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableData")), objc.RegisterName("dataWithCapacity:"), aNumItems)
+	return MutableDataFromID(_r)
 }
 
-// DataWithLength calls the underlying NSMutableDataDataWithLength.
-func DataWithLength(length uint) *MutableData {
-	_r := raw.NSMutableDataDataWithLength(length)
-	if _r == nil {
-		return nil
-	}
-	return &MutableData{inner: _r}
+// DataWithLength creates and returns an mutable data object containing a given number of zeroed bytes.
+func DataWithLength(length int) *MutableData {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableData")), objc.RegisterName("dataWithLength:"), length)
+	return MutableDataFromID(_r)
 }
 
-// DictionaryWithCapacity calls the underlying NSMutableDictionaryDictionaryWithCapacity.
-func DictionaryWithCapacity(numItems uint) *raw.NSMutableDictionary[objc.ID, objc.ID] {
-	return raw.NSMutableDictionaryDictionaryWithCapacity(numItems)
+// DictionaryWithCapacity creates and returns a mutable dictionary, initially giving it enough allocated memory to hold a given number of entries.
+func DictionaryWithCapacity(numItems int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("dictionaryWithCapacity:"), numItems)
+	return obj.Wrap(_r)
 }
 
-// NSMutableDictionaryDictionaryWithContentsOfFile calls the underlying NSMutableDictionaryDictionaryWithContentsOfFile.
-func NSMutableDictionaryDictionaryWithContentsOfFile(path string) *raw.NSMutableDictionary[objc.ID, objc.ID] {
-	return raw.NSMutableDictionaryDictionaryWithContentsOfFile(foundation.NSStringStringWithUTF8String(path))
+// NSMutableDictionaryDictionaryWithContentsOfFile wraps the corresponding Objective-C method.
+func NSMutableDictionaryDictionaryWithContentsOfFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("dictionaryWithContentsOfFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// NSMutableDictionaryDictionaryWithContentsOfURL calls the underlying NSMutableDictionaryDictionaryWithContentsOfURL.
-func NSMutableDictionaryDictionaryWithContentsOfURL(url string) *raw.NSMutableDictionary[objc.ID, objc.ID] {
-	return raw.NSMutableDictionaryDictionaryWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// NSMutableDictionaryDictionaryWithContentsOfURL wraps the corresponding Objective-C method.
+func NSMutableDictionaryDictionaryWithContentsOfURL(url string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("dictionaryWithContentsOfURL:"), rt.FileURL(url))
+	return obj.Wrap(_r)
 }
 
-// DictionaryWithSharedKeySet calls the underlying NSMutableDictionaryDictionaryWithSharedKeySet.
-func DictionaryWithSharedKeySet(keyset objc.ID) *raw.NSMutableDictionary[objc.ID, objc.ID] {
-	return raw.NSMutableDictionaryDictionaryWithSharedKeySet(keyset)
+// DictionaryWithSharedKeySet creates a mutable dictionary which is optimized for dealing with a known set of keys.
+func DictionaryWithSharedKeySet(keyset obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("dictionaryWithSharedKeySet:"), objref.IDOf(keyset))
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithCapacity calls the underlying NSMutableOrderedSetOrderedSetWithCapacity.
-func OrderedSetWithCapacity(numItems uint) *raw.NSMutableOrderedSet[objc.ID] {
-	return raw.NSMutableOrderedSetOrderedSetWithCapacity(numItems)
+// OrderedSetWithCapacity creates and returns an mutable ordered set with a given initial capacity.
+func OrderedSetWithCapacity(numItems int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableOrderedSet")), objc.RegisterName("orderedSetWithCapacity:"), numItems)
+	return obj.Wrap(_r)
 }
 
-// SetWithCapacity calls the underlying NSMutableSetSetWithCapacity.
-func SetWithCapacity(numItems uint) *raw.NSMutableSet[objc.ID] {
-	return raw.NSMutableSetSetWithCapacity(numItems)
+// SetWithCapacity creates and returns a mutable set with a given initial capacity.
+func SetWithCapacity(numItems int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableSet")), objc.RegisterName("setWithCapacity:"), numItems)
+	return obj.Wrap(_r)
 }
 
-// StringWithCapacity calls the underlying NSMutableStringStringWithCapacity.
-func StringWithCapacity(capacity uint) *MutableString {
-	_r := raw.NSMutableStringStringWithCapacity(capacity)
-	if _r == nil {
-		return nil
-	}
-	return &MutableString{inner: _r}
+// StringWithCapacity returns an empty NSMutableString object with initial storage for a given number of characters.
+func StringWithCapacity(capacity int) *MutableString {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableString")), objc.RegisterName("stringWithCapacity:"), capacity)
+	return MutableStringFromID(_r)
 }
 
-// DictionaryFromTXTRecordData calls the underlying NSNetServiceDictionaryFromTXTRecordData.
-func DictionaryFromTXTRecordData(txtData *raw.NSData) *raw.NSDictionary[*raw.NSString, *raw.NSData] {
-	return raw.NSNetServiceDictionaryFromTXTRecordData(txtData)
+// DictionaryFromTXTRecordData wraps the corresponding Objective-C method.
+func DictionaryFromTXTRecordData(txtData *Data) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dictionaryFromTXTRecordData:"), objref.IDOf(txtData))
+	return obj.Wrap(_r)
 }
 
-// DataFromTXTRecordDictionary calls the underlying NSNetServiceDataFromTXTRecordDictionary.
-func DataFromTXTRecordDictionary(txtDictionary *raw.NSDictionary[*raw.NSString, *raw.NSData]) *Data {
-	_r := raw.NSNetServiceDataFromTXTRecordDictionary(txtDictionary)
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+// DataFromTXTRecordDictionary wraps the corresponding Objective-C method.
+func DataFromTXTRecordDictionary(txtDictionary obj.Object) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dataFromTXTRecordDictionary:"), objref.IDOf(txtDictionary))
+	return DataFromID(_r)
 }
 
-// NotificationWithNameObject calls the underlying NSNotificationNotificationWithNameObject.
-func NotificationWithNameObject(aName *raw.NSString, anObject objc.ID) *Notification {
-	_r := raw.NSNotificationNotificationWithNameObject(aName, anObject)
-	if _r == nil {
-		return nil
-	}
-	return &Notification{inner: _r}
+// NotificationWithNameObject returns a new notification object with a specified name and object.
+func NotificationWithNameObject(aName *String, anObject obj.Object) *Notification {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("notificationWithName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
+	return NotificationFromID(_r)
 }
 
-// NotificationWithNameObjectUserInfo calls the underlying NSNotificationNotificationWithNameObjectUserInfo.
-func NotificationWithNameObjectUserInfo(aName *raw.NSString, anObject objc.ID, aUserInfo *raw.NSDictionary[objc.ID, objc.ID]) *Notification {
-	_r := raw.NSNotificationNotificationWithNameObjectUserInfo(aName, anObject, aUserInfo)
-	if _r == nil {
-		return nil
-	}
-	return &Notification{inner: _r}
+// NotificationWithNameObjectUserInfo returns a notification object with a specified name, object, and user information.
+func NotificationWithNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) *Notification {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("notificationWithName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
+	return NotificationFromID(_r)
 }
 
-// NSNotificationCenterDefaultCenter calls the underlying NSNotificationCenterDefaultCenter.
+// NSNotificationCenterDefaultCenter wraps the corresponding Objective-C method.
 func NSNotificationCenterDefaultCenter() *NotificationCenter {
-	_r := raw.NSNotificationCenterDefaultCenter()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNotificationCenter")), objc.RegisterName("defaultCenter"))
+	return NotificationCenterFromID(_r)
 }
 
-// DefaultQueue calls the underlying NSNotificationQueueDefaultQueue.
+// DefaultQueue wraps the corresponding Objective-C method.
 func DefaultQueue() *NotificationQueue {
-	_r := raw.NSNotificationQueueDefaultQueue()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationQueue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNotificationQueue")), objc.RegisterName("defaultQueue"))
+	return NotificationQueueFromID(_r)
 }
 
-// NSNullNull calls the underlying NSNullNull.
+// NSNullNull returns the singleton instance of NSNull.
 func NSNullNull() *Null {
-	_r := raw.NSNullNull()
-	if _r == nil {
-		return nil
-	}
-	return &Null{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNull")), objc.RegisterName("null"))
+	return NullFromID(_r)
 }
 
-// NumberWithChar calls the underlying NSNumberNumberWithChar.
+// NumberWithChar creates and returns an NSNumber object containing a given value, treating it as a signed char.
 func NumberWithChar(value int8) *Number {
-	_r := raw.NSNumberNumberWithChar(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithChar:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithUnsignedChar calls the underlying NSNumberNumberWithUnsignedChar.
+// NumberWithUnsignedChar creates and returns an NSNumber object containing a given value, treating it as an unsigned char.
 func NumberWithUnsignedChar(value uint8) *Number {
-	_r := raw.NSNumberNumberWithUnsignedChar(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithUnsignedChar:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithShort calls the underlying NSNumberNumberWithShort.
+// NumberWithShort creates and returns an NSNumber object containing value, treating it as a signed short.
 func NumberWithShort(value int16) *Number {
-	_r := raw.NSNumberNumberWithShort(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithShort:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithUnsignedShort calls the underlying NSNumberNumberWithUnsignedShort.
+// NumberWithUnsignedShort creates and returns an NSNumber object containing a given value, treating it as an unsigned short.
 func NumberWithUnsignedShort(value uint16) *Number {
-	_r := raw.NSNumberNumberWithUnsignedShort(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithUnsignedShort:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithInt calls the underlying NSNumberNumberWithInt.
+// NumberWithInt creates and returns an NSNumber object containing a given value, treating it as a signed int.
 func NumberWithInt(value int) *Number {
-	_r := raw.NSNumberNumberWithInt(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithInt:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithUnsignedInt calls the underlying NSNumberNumberWithUnsignedInt.
-func NumberWithUnsignedInt(value uint) *Number {
-	_r := raw.NSNumberNumberWithUnsignedInt(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+// NumberWithUnsignedInt creates and returns an NSNumber object containing a given value, treating it as an unsigned int.
+func NumberWithUnsignedInt(value int) *Number {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithUnsignedInt:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithLong calls the underlying NSNumberNumberWithLong.
+// NumberWithLong creates and returns an NSNumber object containing a given value, treating it as a signed long.
 func NumberWithLong(value int) *Number {
-	_r := raw.NSNumberNumberWithLong(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithLong:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithUnsignedLong calls the underlying NSNumberNumberWithUnsignedLong.
-func NumberWithUnsignedLong(value uint) *Number {
-	_r := raw.NSNumberNumberWithUnsignedLong(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+// NumberWithUnsignedLong creates and returns an NSNumber object containing a given value, treating it as an unsigned long.
+func NumberWithUnsignedLong(value int) *Number {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithUnsignedLong:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithLongLong calls the underlying NSNumberNumberWithLongLong.
+// NumberWithLongLong creates and returns an NSNumber object containing a given value, treating it as a signed long long.
 func NumberWithLongLong(value int64) *Number {
-	_r := raw.NSNumberNumberWithLongLong(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithLongLong:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithUnsignedLongLong calls the underlying NSNumberNumberWithUnsignedLongLong.
+// NumberWithUnsignedLongLong creates and returns an NSNumber object containing a given value, treating it as an unsigned long long.
 func NumberWithUnsignedLongLong(value uint64) *Number {
-	_r := raw.NSNumberNumberWithUnsignedLongLong(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithUnsignedLongLong:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithFloat calls the underlying NSNumberNumberWithFloat.
+// NumberWithFloat creates and returns an NSNumber object containing a given value, treating it as a float.
 func NumberWithFloat(value float32) *Number {
-	_r := raw.NSNumberNumberWithFloat(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithFloat:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithDouble calls the underlying NSNumberNumberWithDouble.
+// NumberWithDouble creates and returns an NSNumber object containing a given value, treating it as a double.
 func NumberWithDouble(value float64) *Number {
-	_r := raw.NSNumberNumberWithDouble(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithDouble:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithBool calls the underlying NSNumberNumberWithBool.
+// NumberWithBool creates and returns an NSNumber object containing a given value, treating it as a BOOL.
 func NumberWithBool(value bool) *Number {
-	_r := raw.NSNumberNumberWithBool(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithBool:"), value)
+	return NumberFromID(_r)
 }
 
-// NumberWithInteger calls the underlying NSNumberNumberWithInteger.
+// NumberWithInteger creates and returns an NSNumber object containing a given value, treating it as an NSInteger.
 func NumberWithInteger(value int) *Number {
-	_r := raw.NSNumberNumberWithInteger(value)
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithInteger:"), value)
+	return NumberFromID(_r)
+}
+
+// NumberWithUnsignedInteger creates and returns an NSNumber object containing a given value, treating it as an NSUInteger.
+func NumberWithUnsignedInteger(value int) *Number {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("numberWithUnsignedInteger:"), value)
+	return NumberFromID(_r)
+}
+
+// LocalizedStringFromNumberNumberStyle wraps the corresponding Objective-C method.
+func LocalizedStringFromNumberNumberStyle(num *Number, nstyle NumberFormatterStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("localizedStringFromNumber:numberStyle:"), objref.IDOf(num), nstyle)
+	if _r == 0 {
+		return ""
 	}
-	return &Number{inner: _r}
+	return purego.GoString(_r)
 }
 
-// NumberWithUnsignedInteger calls the underlying NSNumberNumberWithUnsignedInteger.
-func NumberWithUnsignedInteger(value uint) *Number {
-	_r := raw.NSNumberNumberWithUnsignedInteger(value)
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+// NSNumberFormatterDefaultFormatterBehavior wraps the corresponding Objective-C method.
+func NSNumberFormatterDefaultFormatterBehavior() NumberFormatterBehavior {
+	_r := objc.Send[NumberFormatterBehavior](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("defaultFormatterBehavior"))
+	return _r
 }
 
-// LocalizedStringFromNumberNumberStyle calls the underlying NSNumberFormatterLocalizedStringFromNumberNumberStyle.
-func LocalizedStringFromNumberNumberStyle(num *raw.NSNumber, nstyle NSNumberFormatterStyle) *String {
-	_r := raw.NSNumberFormatterLocalizedStringFromNumberNumberStyle(num, raw.NSNumberFormatterStyle(nstyle))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// NSNumberFormatterSetDefaultFormatterBehavior wraps the corresponding Objective-C method.
+func NSNumberFormatterSetDefaultFormatterBehavior(behavior NumberFormatterBehavior) {
+	objc.Send[objc.ID](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("setDefaultFormatterBehavior:"), behavior)
 }
 
-// NSNumberFormatterDefaultFormatterBehavior calls the underlying NSNumberFormatterDefaultFormatterBehavior.
-func NSNumberFormatterDefaultFormatterBehavior() NSNumberFormatterBehavior {
-	return NSNumberFormatterBehavior(raw.NSNumberFormatterDefaultFormatterBehavior())
-}
-
-// NSNumberFormatterSetDefaultFormatterBehavior calls the underlying NSNumberFormatterSetDefaultFormatterBehavior.
-func NSNumberFormatterSetDefaultFormatterBehavior(behavior NSNumberFormatterBehavior) {
-	raw.NSNumberFormatterSetDefaultFormatterBehavior(raw.NSNumberFormatterBehavior(behavior))
-}
-
-// New calls the underlying NSObjectNew.
+// New wraps the corresponding Objective-C method.
 func New() *Object {
-	_r := raw.NSObjectNew()
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("new"))
+	return ObjectFromID(_r)
 }
 
-// AllocWithZone calls the underlying NSObjectAllocWithZone.
-func AllocWithZone(zone unsafe.Pointer) *Object {
-	_r := raw.NSObjectAllocWithZone(zone)
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
-}
-
-// Alloc calls the underlying NSObjectAlloc.
+// Alloc wraps the corresponding Objective-C method.
 func Alloc() *Object {
-	_r := raw.NSObjectAlloc()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("alloc"))
+	return ObjectFromID(_r)
+}
+
+// Hash wraps the corresponding Objective-C method.
+func Hash() int {
+	_r := objc.Send[int](objc.ID(_class("NSObject")), objc.RegisterName("hash"))
+	return _r
+}
+
+// Description wraps the corresponding Objective-C method.
+func Description() string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("description"))
+	if _r == 0 {
+		return ""
 	}
-	return &Object{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CopyWithZone calls the underlying NSObjectCopyWithZone.
-func CopyWithZone(zone unsafe.Pointer) objc.ID {
-	return raw.NSObjectCopyWithZone(zone)
-}
-
-// MutableCopyWithZone calls the underlying NSObjectMutableCopyWithZone.
-func MutableCopyWithZone(zone unsafe.Pointer) objc.ID {
-	return raw.NSObjectMutableCopyWithZone(zone)
-}
-
-// InstancesRespondToSelector calls the underlying NSObjectInstancesRespondToSelector.
-func InstancesRespondToSelector(aSelector objc.SEL) bool {
-	return raw.NSObjectInstancesRespondToSelector(aSelector)
-}
-
-// ConformsToProtocol calls the underlying NSObjectConformsToProtocol.
-func ConformsToProtocol(protocol unsafe.Pointer) bool {
-	return raw.NSObjectConformsToProtocol(protocol)
-}
-
-// InstanceMethodForSelector calls the underlying NSObjectInstanceMethodForSelector.
-func InstanceMethodForSelector(aSelector objc.SEL) unsafe.Pointer {
-	return raw.NSObjectInstanceMethodForSelector(aSelector)
-}
-
-// InstanceMethodSignatureForSelector calls the underlying NSObjectInstanceMethodSignatureForSelector.
-func InstanceMethodSignatureForSelector(aSelector objc.SEL) *MethodSignature {
-	_r := raw.NSObjectInstanceMethodSignatureForSelector(aSelector)
-	if _r == nil {
-		return nil
+// DebugDescription wraps the corresponding Objective-C method.
+func DebugDescription() string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("debugDescription"))
+	if _r == 0 {
+		return ""
 	}
-	return &MethodSignature{inner: _r}
+	return purego.GoString(_r)
 }
 
-// IsSubclassOfClass calls the underlying NSObjectIsSubclassOfClass.
-func IsSubclassOfClass(aClass objc.Class) bool {
-	return raw.NSObjectIsSubclassOfClass(aClass)
-}
-
-// ResolveClassMethod calls the underlying NSObjectResolveClassMethod.
-func ResolveClassMethod(sel objc.SEL) bool {
-	return raw.NSObjectResolveClassMethod(sel)
-}
-
-// ResolveInstanceMethod calls the underlying NSObjectResolveInstanceMethod.
-func ResolveInstanceMethod(sel objc.SEL) bool {
-	return raw.NSObjectResolveInstanceMethod(sel)
-}
-
-// Hash calls the underlying NSObjectHash.
-func Hash() uint {
-	return raw.NSObjectHash()
-}
-
-// Superclass calls the underlying NSObjectSuperclass.
-func Superclass() objc.Class {
-	return raw.NSObjectSuperclass()
-}
-
-// Class calls the underlying NSObjectClass.
-func Class() objc.Class {
-	return raw.NSObjectClass()
-}
-
-// Description calls the underlying NSObjectDescription.
-func Description() *String {
-	_r := raw.NSObjectDescription()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// DebugDescription calls the underlying NSObjectDebugDescription.
-func DebugDescription() *String {
-	_r := raw.NSObjectDebugDescription()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// Version calls the underlying NSObjectVersion.
+// Version wraps the corresponding Objective-C method.
 func Version() int {
-	return raw.NSObjectVersion()
+	_r := objc.Send[int](objc.ID(_class("NSObject")), objc.RegisterName("version"))
+	return _r
 }
 
-// SetVersion calls the underlying NSObjectSetVersion.
+// SetVersion wraps the corresponding Objective-C method.
 func SetVersion(aVersion int) {
-	raw.NSObjectSetVersion(aVersion)
+	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("setVersion:"), aVersion)
 }
 
-// CancelPreviousPerformRequestsWithTargetSelectorObject calls the underlying NSObjectCancelPreviousPerformRequestsWithTargetSelectorObject.
-func CancelPreviousPerformRequestsWithTargetSelectorObject(aTarget objc.ID, aSelector objc.SEL, anArgument objc.ID) {
-	raw.NSObjectCancelPreviousPerformRequestsWithTargetSelectorObject(aTarget, aSelector, anArgument)
+// CancelPreviousPerformRequestsWithTarget wraps the corresponding Objective-C method.
+func CancelPreviousPerformRequestsWithTarget(aTarget obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("cancelPreviousPerformRequestsWithTarget:"), objref.IDOf(aTarget))
 }
 
-// CancelPreviousPerformRequestsWithTarget calls the underlying NSObjectCancelPreviousPerformRequestsWithTarget.
-func CancelPreviousPerformRequestsWithTarget(aTarget objc.ID) {
-	raw.NSObjectCancelPreviousPerformRequestsWithTarget(aTarget)
-}
-
-// AccessInstanceVariablesDirectly calls the underlying NSObjectAccessInstanceVariablesDirectly.
+// AccessInstanceVariablesDirectly wraps the corresponding Objective-C method.
 func AccessInstanceVariablesDirectly() bool {
-	return raw.NSObjectAccessInstanceVariablesDirectly()
+	_r := objc.Send[bool](objc.ID(_class("NSObject")), objc.RegisterName("accessInstanceVariablesDirectly"))
+	return _r
 }
 
-// UseStoredAccessor calls the underlying NSObjectUseStoredAccessor.
+// UseStoredAccessor wraps the corresponding Objective-C method.
 func UseStoredAccessor() bool {
-	return raw.NSObjectUseStoredAccessor()
+	_r := objc.Send[bool](objc.ID(_class("NSObject")), objc.RegisterName("useStoredAccessor"))
+	return _r
 }
 
-// KeyPathsForValuesAffectingValueForKey calls the underlying NSObjectKeyPathsForValuesAffectingValueForKey.
-func KeyPathsForValuesAffectingValueForKey(key string) *raw.NSSet[*raw.NSString] {
-	return raw.NSObjectKeyPathsForValuesAffectingValueForKey(foundation.NSStringStringWithUTF8String(key))
+// KeyPathsForValuesAffectingValueForKey wraps the corresponding Objective-C method.
+func KeyPathsForValuesAffectingValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("keyPathsForValuesAffectingValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// AutomaticallyNotifiesObserversForKey calls the underlying NSObjectAutomaticallyNotifiesObserversForKey.
+// AutomaticallyNotifiesObserversForKey wraps the corresponding Objective-C method.
 func AutomaticallyNotifiesObserversForKey(key string) bool {
-	return raw.NSObjectAutomaticallyNotifiesObserversForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objc.ID(_class("NSObject")), objc.RegisterName("automaticallyNotifiesObserversForKey:"), purego.NSString(key))
+	return _r
 }
 
-// SetKeysTriggerChangeNotificationsForDependentKey calls the underlying NSObjectSetKeysTriggerChangeNotificationsForDependentKey.
-func SetKeysTriggerChangeNotificationsForDependentKey(keys *raw.NSArray[objc.ID], dependentKey string) {
-	raw.NSObjectSetKeysTriggerChangeNotificationsForDependentKey(keys, foundation.NSStringStringWithUTF8String(dependentKey))
+// SetKeysTriggerChangeNotificationsForDependentKey wraps the corresponding Objective-C method.
+func SetKeysTriggerChangeNotificationsForDependentKey(keys obj.Object, dependentKey string) {
+	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("setKeys:triggerChangeNotificationsForDependentKey:"), objref.IDOf(keys), purego.NSString(dependentKey))
 }
 
+// ClassFallbacksForKeyedArchiver wraps the corresponding Objective-C method.
+//
 // ClassFallbacksForKeyedArchiver returns the collection as a Go slice.
 func ClassFallbacksForKeyedArchiver() []string {
-	arr := raw.NSObjectClassFallbacksForKeyedArchiver()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("classFallbacksForKeyedArchiver"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ClassForKeyedUnarchiver calls the underlying NSObjectClassForKeyedUnarchiver.
-func ClassForKeyedUnarchiver() objc.Class {
-	return raw.NSObjectClassForKeyedUnarchiver()
-}
-
-// CurrentQueue calls the underlying NSOperationQueueCurrentQueue.
+// CurrentQueue wraps the corresponding Objective-C method.
 func CurrentQueue() *OperationQueue {
-	_r := raw.NSOperationQueueCurrentQueue()
-	if _r == nil {
-		return nil
-	}
-	return &OperationQueue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("currentQueue"))
+	return OperationQueueFromID(_r)
 }
 
-// MainQueue calls the underlying NSOperationQueueMainQueue.
+// MainQueue wraps the corresponding Objective-C method.
 func MainQueue() *OperationQueue {
-	_r := raw.NSOperationQueueMainQueue()
-	if _r == nil {
-		return nil
-	}
-	return &OperationQueue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("mainQueue"))
+	return OperationQueueFromID(_r)
 }
 
-// ChangeWithObjectTypeIndex calls the underlying NSOrderedCollectionChangeChangeWithObjectTypeIndex.
-func ChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *raw.NSOrderedCollectionChange[objc.ID] {
-	return raw.NSOrderedCollectionChangeChangeWithObjectTypeIndex(anObject, raw.NSCollectionChangeType(type_), index)
+// ChangeWithObjectTypeIndex creates an change object that represents inserting or removing an object from an ordered collection at a specific index.
+func ChangeWithObjectTypeIndex(anObject obj.Object, type_ CollectionChangeType, index int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("changeWithObject:type:index:"), objref.IDOf(anObject), type_, index)
+	return obj.Wrap(_r)
 }
 
-// ChangeWithObjectTypeIndexAssociatedIndex calls the underlying NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex.
-func ChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *raw.NSOrderedCollectionChange[objc.ID] {
-	return raw.NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex(anObject, raw.NSCollectionChangeType(type_), index, associatedIndex)
+// ChangeWithObjectTypeIndexAssociatedIndex creates an change object that represents inserting or removing an object from an ordered collection at a specific index, matched with an associated location that infers a move within the collection.
+func ChangeWithObjectTypeIndexAssociatedIndex(anObject obj.Object, type_ CollectionChangeType, index int, associatedIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("changeWithObject:type:index:associatedIndex:"), objref.IDOf(anObject), type_, index, associatedIndex)
+	return obj.Wrap(_r)
 }
 
-// NSOrderedSetOrderedSet calls the underlying NSOrderedSetOrderedSet.
-func NSOrderedSetOrderedSet() *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSet()
+// NSOrderedSetOrderedSet creates and returns an empty ordered set
+func NSOrderedSetOrderedSet() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSet"))
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithObject calls the underlying NSOrderedSetOrderedSetWithObject.
-func OrderedSetWithObject(object objc.ID) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithObject(object)
+// OrderedSetWithObject creates and returns a ordered set that contains a single given object.
+func OrderedSetWithObject(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithObjectsCount calls the underlying NSOrderedSetOrderedSetWithObjectsCount.
-func OrderedSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithObjectsCount(objects, cnt)
+// OrderedSetWithOrderedSet creates and returns an ordered set containing the objects from another ordered set.
+func OrderedSetWithOrderedSet(set obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithOrderedSet:"), objref.IDOf(set))
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithOrderedSet calls the underlying NSOrderedSetOrderedSetWithOrderedSet.
-func OrderedSetWithOrderedSet(set *raw.NSOrderedSet[objc.ID]) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithOrderedSet(set)
+// OrderedSetWithArray creates and returns a set containing a uniqued collection of the objects contained in a given array.
+func OrderedSetWithArray(array []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithOrderedSetRangeCopyItems calls the underlying NSOrderedSetOrderedSetWithOrderedSetRangeCopyItems.
-func OrderedSetWithOrderedSetRangeCopyItems(set *raw.NSOrderedSet[objc.ID], range_ raw.NSRange, flag bool) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithOrderedSetRangeCopyItems(set, range_, flag)
+// OrderedSetWithSet creates and returns an ordered set with the contents of a set.
+func OrderedSetWithSet(set obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithSet:"), objref.IDOf(set))
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithArray calls the underlying NSOrderedSetOrderedSetWithArray.
-func OrderedSetWithArray(array *raw.NSArray[objc.ID]) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithArray(array)
+// OrderedSetWithSetCopyItems creates and returns an ordered set with the contents of a set, optionally copying the items.
+func OrderedSetWithSetCopyItems(set obj.Object, flag bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithSet:copyItems:"), objref.IDOf(set), flag)
+	return obj.Wrap(_r)
 }
 
-// OrderedSetWithArrayRangeCopyItems calls the underlying NSOrderedSetOrderedSetWithArrayRangeCopyItems.
-func OrderedSetWithArrayRangeCopyItems(array *raw.NSArray[objc.ID], range_ raw.NSRange, flag bool) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithArrayRangeCopyItems(array, range_, flag)
-}
-
-// OrderedSetWithSet calls the underlying NSOrderedSetOrderedSetWithSet.
-func OrderedSetWithSet(set *raw.NSSet[objc.ID]) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithSet(set)
-}
-
-// OrderedSetWithSetCopyItems calls the underlying NSOrderedSetOrderedSetWithSetCopyItems.
-func OrderedSetWithSetCopyItems(set *raw.NSSet[objc.ID], flag bool) *raw.NSOrderedSet[objc.ID] {
-	return raw.NSOrderedSetOrderedSetWithSetCopyItems(set, flag)
-}
-
-// DefaultOrthographyForLanguage calls the underlying NSOrthographyDefaultOrthographyForLanguage.
+// DefaultOrthographyForLanguage creates and returns an orthography object with the default language map for the specified language.
 func DefaultOrthographyForLanguage(language string) *Orthography {
-	_r := raw.NSOrthographyDefaultOrthographyForLanguage(foundation.NSStringStringWithUTF8String(language))
-	if _r == nil {
-		return nil
-	}
-	return &Orthography{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("defaultOrthographyForLanguage:"), purego.NSString(language))
+	return OrthographyFromID(_r)
 }
 
-// OrthographyWithDominantScriptLanguageMap calls the underlying NSOrthographyOrthographyWithDominantScriptLanguageMap.
-func OrthographyWithDominantScriptLanguageMap(script string, map_ *raw.NSDictionary[*raw.NSString, objc.ID]) *Orthography {
-	_r := raw.NSOrthographyOrthographyWithDominantScriptLanguageMap(foundation.NSStringStringWithUTF8String(script), map_)
-	if _r == nil {
-		return nil
-	}
-	return &Orthography{inner: _r}
+// OrthographyWithDominantScriptLanguageMap creates and returns an orthography object with the specified dominant script and language map.
+func OrthographyWithDominantScriptLanguageMap(script string, map_ obj.Object) *Orthography {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("orthographyWithDominantScript:languageMap:"), purego.NSString(script), objref.IDOf(map_))
+	return OrthographyFromID(_r)
 }
 
-// OutputStreamToMemory calls the underlying NSOutputStreamOutputStreamToMemory.
+// OutputStreamToMemory wraps the corresponding Objective-C method.
 func OutputStreamToMemory() *OutputStream {
-	_r := raw.NSOutputStreamOutputStreamToMemory()
-	if _r == nil {
-		return nil
-	}
-	return &OutputStream{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToMemory"))
+	return OutputStreamFromID(_r)
 }
 
-// OutputStreamToBufferCapacity calls the underlying NSOutputStreamOutputStreamToBufferCapacity.
-func OutputStreamToBufferCapacity(buffer *uint8, capacity uint) *OutputStream {
-	_r := raw.NSOutputStreamOutputStreamToBufferCapacity(buffer, capacity)
-	if _r == nil {
-		return nil
-	}
-	return &OutputStream{inner: _r}
+// OutputStreamToBufferCapacity creates and returns an initialized output stream that can write to a provided buffer.
+func OutputStreamToBufferCapacity(capacity int) (result *OutputStream, buffer uint8) {
+	var _out0 uint8
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToBuffer:capacity:"), unsafe.Pointer(&_out0), capacity)
+	_v := OutputStreamFromID(_r)
+	return _v, _out0
 }
 
-// OutputStreamToFileAtPathAppend calls the underlying NSOutputStreamOutputStreamToFileAtPathAppend.
+// OutputStreamToFileAtPathAppend creates and returns an initialized output stream for writing to a specified file.
 func OutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputStream {
-	_r := raw.NSOutputStreamOutputStreamToFileAtPathAppend(foundation.NSStringStringWithUTF8String(path), shouldAppend)
-	if _r == nil {
-		return nil
-	}
-	return &OutputStream{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToFileAtPath:append:"), purego.NSString(path), shouldAppend)
+	return OutputStreamFromID(_r)
 }
 
-// OutputStreamWithURLAppend calls the underlying NSOutputStreamOutputStreamWithURLAppend.
+// OutputStreamWithURLAppend creates and returns an initialized output stream for writing to a specified URL.
 func OutputStreamWithURLAppend(url string, shouldAppend bool) *OutputStream {
-	_r := raw.NSOutputStreamOutputStreamWithURLAppend(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), shouldAppend)
-	if _r == nil {
-		return nil
-	}
-	return &OutputStream{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamWithURL:append:"), rt.FileURL(url), shouldAppend)
+	return OutputStreamFromID(_r)
 }
 
-// LocalizedStringFromPersonNameComponentsStyleOptions calls the underlying NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions.
-func LocalizedStringFromPersonNameComponentsStyleOptions(components *raw.NSPersonNameComponents, nameFormatStyle NSPersonNameComponentsFormatterStyle, nameOptions NSPersonNameComponentsFormatterOptions) *String {
-	_r := raw.NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions(components, raw.NSPersonNameComponentsFormatterStyle(nameFormatStyle), raw.NSPersonNameComponentsFormatterOptions(nameOptions))
-	if _r == nil {
-		return nil
+// LocalizedStringFromPersonNameComponentsStyleOptions wraps the corresponding Objective-C method.
+func LocalizedStringFromPersonNameComponentsStyleOptions(components *PersonNameComponents, nameFormatStyle PersonNameComponentsFormatterStyle, nameOptions PersonNameComponentsFormatterOptions) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPersonNameComponentsFormatter")), objc.RegisterName("localizedStringFromPersonNameComponents:style:options:"), objref.IDOf(components), nameFormatStyle, nameOptions)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// NSPipePipe calls the underlying NSPipePipe.
+// NSPipePipe returns an NSPipe object.
 func NSPipePipe() *Pipe {
-	_r := raw.NSPipePipe()
-	if _r == nil {
-		return nil
-	}
-	return &Pipe{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPipe")), objc.RegisterName("pipe"))
+	return PipeFromID(_r)
 }
 
-// PointerArrayWithOptions calls the underlying NSPointerArrayPointerArrayWithOptions.
-func PointerArrayWithOptions(options NSPointerFunctionsOptions) *PointerArray {
-	_r := raw.NSPointerArrayPointerArrayWithOptions(raw.NSPointerFunctionsOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &PointerArray{inner: _r}
+// PointerArrayWithOptions returns a new pointer array initialized to use the given options.
+func PointerArrayWithOptions(options PointerFunctionsOptions) *PointerArray {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("pointerArrayWithOptions:"), options)
+	return PointerArrayFromID(_r)
 }
 
-// PointerArrayWithPointerFunctions calls the underlying NSPointerArrayPointerArrayWithPointerFunctions.
-func PointerArrayWithPointerFunctions(functions *raw.NSPointerFunctions) *PointerArray {
-	_r := raw.NSPointerArrayPointerArrayWithPointerFunctions(functions)
-	if _r == nil {
-		return nil
-	}
-	return &PointerArray{inner: _r}
+// PointerArrayWithPointerFunctions a new pointer array initialized to use the given functions.
+func PointerArrayWithPointerFunctions(functions *PointerFunctions) *PointerArray {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("pointerArrayWithPointerFunctions:"), objref.IDOf(functions))
+	return PointerArrayFromID(_r)
 }
 
-// PointerArrayWithStrongObjects calls the underlying NSPointerArrayPointerArrayWithStrongObjects.
-func PointerArrayWithStrongObjects() objc.ID {
-	return raw.NSPointerArrayPointerArrayWithStrongObjects()
+// PointerArrayWithStrongObjects returns a new pointer array that maintains strong references to its elements.
+func PointerArrayWithStrongObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("pointerArrayWithStrongObjects"))
+	return obj.Wrap(_r)
 }
 
-// PointerArrayWithWeakObjects calls the underlying NSPointerArrayPointerArrayWithWeakObjects.
-func PointerArrayWithWeakObjects() objc.ID {
-	return raw.NSPointerArrayPointerArrayWithWeakObjects()
+// PointerArrayWithWeakObjects returns a new pointer array that maintains weak references to its elements.
+func PointerArrayWithWeakObjects() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("pointerArrayWithWeakObjects"))
+	return obj.Wrap(_r)
 }
 
-// StrongObjectsPointerArray calls the underlying NSPointerArrayStrongObjectsPointerArray.
+// StrongObjectsPointerArray returns a new pointer array that maintains strong references to its elements.
 func StrongObjectsPointerArray() *PointerArray {
-	_r := raw.NSPointerArrayStrongObjectsPointerArray()
-	if _r == nil {
-		return nil
-	}
-	return &PointerArray{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("strongObjectsPointerArray"))
+	return PointerArrayFromID(_r)
 }
 
-// WeakObjectsPointerArray calls the underlying NSPointerArrayWeakObjectsPointerArray.
+// WeakObjectsPointerArray returns a new pointer array that maintains weak references to its elements.
 func WeakObjectsPointerArray() *PointerArray {
-	_r := raw.NSPointerArrayWeakObjectsPointerArray()
-	if _r == nil {
-		return nil
-	}
-	return &PointerArray{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("weakObjectsPointerArray"))
+	return PointerArrayFromID(_r)
 }
 
-// PointerFunctionsWithOptions calls the underlying NSPointerFunctionsPointerFunctionsWithOptions.
-func PointerFunctionsWithOptions(options NSPointerFunctionsOptions) *PointerFunctions {
-	_r := raw.NSPointerFunctionsPointerFunctionsWithOptions(raw.NSPointerFunctionsOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &PointerFunctions{inner: _r}
+// PointerFunctionsWithOptions returns a new NSPointerFunctions object initialized with the given options.
+func PointerFunctionsWithOptions(options PointerFunctionsOptions) *PointerFunctions {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerFunctions")), objc.RegisterName("pointerFunctionsWithOptions:"), options)
+	return PointerFunctionsFromID(_r)
 }
 
-// NSPortPort calls the underlying NSPortPort.
+// NSPortPort creates and returns a new NSPort object capable of both sending and receiving messages.
 func NSPortPort() *Port {
-	_r := raw.NSPortPort()
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPort")), objc.RegisterName("port"))
+	return PortFromID(_r)
 }
 
-// PortCoderWithReceivePortSendPortComponents calls the underlying NSPortCoderPortCoderWithReceivePortSendPortComponents.
-func PortCoderWithReceivePortSendPortComponents(rcvPort *raw.NSPort, sndPort *raw.NSPort, comps *raw.NSArray[objc.ID]) objc.ID {
-	return raw.NSPortCoderPortCoderWithReceivePortSendPortComponents(rcvPort, sndPort, comps)
+// PortCoderWithReceivePortSendPortComponents creates and returns a new NSPortCoder object.
+func PortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port, comps obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPortCoder")), objc.RegisterName("portCoderWithReceivePort:sendPort:components:"), objref.IDOf(rcvPort), objref.IDOf(sndPort), objref.IDOf(comps))
+	return obj.Wrap(_r)
 }
 
-// SystemDefaultPortNameServer calls the underlying NSPortNameServerSystemDefaultPortNameServer.
+// SystemDefaultPortNameServer returns the single instance of NSPortNameServer for the application.
 func SystemDefaultPortNameServer() *PortNameServer {
-	_r := raw.NSPortNameServerSystemDefaultPortNameServer()
-	if _r == nil {
-		return nil
-	}
-	return &PortNameServer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPortNameServer")), objc.RegisterName("systemDefaultPortNameServer"))
+	return PortNameServerFromID(_r)
 }
 
-// PredicateWithFormatArgumentArray calls the underlying NSPredicatePredicateWithFormatArgumentArray.
-func PredicateWithFormatArgumentArray(predicateFormat string, arguments *raw.NSArray[objc.ID]) *Predicate {
-	_r := raw.NSPredicatePredicateWithFormatArgumentArray(foundation.NSStringStringWithUTF8String(predicateFormat), arguments)
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+// PredicateWithFormatArgumentArray creates a predicate by substituting the values in a specified array into a format string and parsing the result.
+func PredicateWithFormatArgumentArray(predicateFormat string, arguments obj.Object) *Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateWithFormat:argumentArray:"), purego.NSString(predicateFormat), objref.IDOf(arguments))
+	return PredicateFromID(_r)
 }
 
-// PredicateWithFormat calls the underlying NSPredicatePredicateWithFormat.
+// PredicateWithFormat creates and returns a new predicate formed by creating a new string with a specified format and parsing the result.
 func PredicateWithFormat(predicateFormat string) *Predicate {
-	_r := raw.NSPredicatePredicateWithFormat(foundation.NSStringStringWithUTF8String(predicateFormat))
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateWithFormat:"), purego.NSString(predicateFormat))
+	return PredicateFromID(_r)
 }
 
-// PredicateWithFormatArguments calls the underlying NSPredicatePredicateWithFormatArguments.
+// PredicateWithFormatArguments creates a predicate by substituting the values in an argument list into a format string and parsing the result.
 func PredicateWithFormatArguments(predicateFormat string, argList string) *Predicate {
-	_r := raw.NSPredicatePredicateWithFormatArguments(foundation.NSStringStringWithUTF8String(predicateFormat), argList)
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateWithFormat:arguments:"), purego.NSString(predicateFormat), argList)
+	return PredicateFromID(_r)
 }
 
-// PredicateFromMetadataQueryString calls the underlying NSPredicatePredicateFromMetadataQueryString.
+// PredicateFromMetadataQueryString creates a predicate with a metadata query string.
 func PredicateFromMetadataQueryString(queryString string) *Predicate {
-	_r := raw.NSPredicatePredicateFromMetadataQueryString(foundation.NSStringStringWithUTF8String(queryString))
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateFromMetadataQueryString:"), purego.NSString(queryString))
+	return PredicateFromID(_r)
 }
 
-// PredicateWithValue calls the underlying NSPredicatePredicateWithValue.
+// PredicateWithValue creates and returns a predicate that always evaluates to a specified Boolean value.
 func PredicateWithValue(value bool) *Predicate {
-	_r := raw.NSPredicatePredicateWithValue(value)
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateWithValue:"), value)
+	return PredicateFromID(_r)
 }
 
-// PredicateWith calls the underlying NSPredicatePredicateWith.
-func PredicateWith(block func(objc.ID, *raw.NSDictionary[*raw.NSString, objc.ID]) bool) *Predicate {
-	_r := raw.NSPredicatePredicateWith(block)
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+// PredicateWith creates a predicate that evaluates using a specified block object and bindings dictionary.
+func PredicateWith(block func(obj.Object, obj.Object) bool) *Predicate {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return PredicateFromID(_r)
 }
 
-// ParagraphIntentWithIdentityNestedInsideIntent calls the underlying NSPresentationIntentParagraphIntentWithIdentityNestedInsideIntent.
-func ParagraphIntentWithIdentityNestedInsideIntent(identity int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentParagraphIntentWithIdentityNestedInsideIntent(identity, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// ParagraphIntentWithIdentityNestedInsideIntent creates a paragraph intent with the provided information.
+func ParagraphIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("paragraphIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// HeaderIntentWithIdentityLevelNestedInsideIntent calls the underlying NSPresentationIntentHeaderIntentWithIdentityLevelNestedInsideIntent.
-func HeaderIntentWithIdentityLevelNestedInsideIntent(identity int, level int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentHeaderIntentWithIdentityLevelNestedInsideIntent(identity, level, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// HeaderIntentWithIdentityLevelNestedInsideIntent creates a header intent with the provided information.
+func HeaderIntentWithIdentityLevelNestedInsideIntent(identity int, level int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("headerIntentWithIdentity:level:nestedInsideIntent:"), identity, level, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// CodeBlockIntentWithIdentityLanguageHintNestedInsideIntent calls the underlying NSPresentationIntentCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent.
-func CodeBlockIntentWithIdentityLanguageHintNestedInsideIntent(identity int, languageHint string, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentCodeBlockIntentWithIdentityLanguageHintNestedInsideIntent(identity, foundation.NSStringStringWithUTF8String(languageHint), parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// CodeBlockIntentWithIdentityLanguageHintNestedInsideIntent creates an code-block intent with the provided information.
+func CodeBlockIntentWithIdentityLanguageHintNestedInsideIntent(identity int, languageHint string, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("codeBlockIntentWithIdentity:languageHint:nestedInsideIntent:"), identity, purego.NSString(languageHint), objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// ThematicBreakIntentWithIdentityNestedInsideIntent calls the underlying NSPresentationIntentThematicBreakIntentWithIdentityNestedInsideIntent.
-func ThematicBreakIntentWithIdentityNestedInsideIntent(identity int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentThematicBreakIntentWithIdentityNestedInsideIntent(identity, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// ThematicBreakIntentWithIdentityNestedInsideIntent creates a thematic break intent with the provided information.
+func ThematicBreakIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("thematicBreakIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// OrderedListIntentWithIdentityNestedInsideIntent calls the underlying NSPresentationIntentOrderedListIntentWithIdentityNestedInsideIntent.
-func OrderedListIntentWithIdentityNestedInsideIntent(identity int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentOrderedListIntentWithIdentityNestedInsideIntent(identity, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// OrderedListIntentWithIdentityNestedInsideIntent creates an ordered-list intent with the provided information.
+func OrderedListIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("orderedListIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// UnorderedListIntentWithIdentityNestedInsideIntent calls the underlying NSPresentationIntentUnorderedListIntentWithIdentityNestedInsideIntent.
-func UnorderedListIntentWithIdentityNestedInsideIntent(identity int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentUnorderedListIntentWithIdentityNestedInsideIntent(identity, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// UnorderedListIntentWithIdentityNestedInsideIntent creates an unordered-list intent with the provided information.
+func UnorderedListIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("unorderedListIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// ListItemIntentWithIdentityOrdinalNestedInsideIntent calls the underlying NSPresentationIntentListItemIntentWithIdentityOrdinalNestedInsideIntent.
-func ListItemIntentWithIdentityOrdinalNestedInsideIntent(identity int, ordinal int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentListItemIntentWithIdentityOrdinalNestedInsideIntent(identity, ordinal, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// ListItemIntentWithIdentityOrdinalNestedInsideIntent creates an item for an ordered list with the provided information.
+func ListItemIntentWithIdentityOrdinalNestedInsideIntent(identity int, ordinal int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("listItemIntentWithIdentity:ordinal:nestedInsideIntent:"), identity, ordinal, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// BlockQuoteIntentWithIdentityNestedInsideIntent calls the underlying NSPresentationIntentBlockQuoteIntentWithIdentityNestedInsideIntent.
-func BlockQuoteIntentWithIdentityNestedInsideIntent(identity int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentBlockQuoteIntentWithIdentityNestedInsideIntent(identity, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// BlockQuoteIntentWithIdentityNestedInsideIntent creates a block-quote intent with the provided information.
+func BlockQuoteIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("blockQuoteIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// TableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent calls the underlying NSPresentationIntentTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent.
-func TableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent(identity int, columnCount int, alignments *raw.NSArray[*raw.NSNumber], parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentTableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent(identity, columnCount, alignments, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// TableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent creates a table intent with the provided information.
+func TableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent(identity int, columnCount int, alignments []*Number, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableIntentWithIdentity:columnCount:alignments:nestedInsideIntent:"), identity, columnCount, purego.SliceToNSArray(alignments, func(_v *Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// TableHeaderRowIntentWithIdentityNestedInsideIntent calls the underlying NSPresentationIntentTableHeaderRowIntentWithIdentityNestedInsideIntent.
-func TableHeaderRowIntentWithIdentityNestedInsideIntent(identity int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentTableHeaderRowIntentWithIdentityNestedInsideIntent(identity, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// TableHeaderRowIntentWithIdentityNestedInsideIntent creates a table header intent with the provided information.
+func TableHeaderRowIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableHeaderRowIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// TableRowIntentWithIdentityRowNestedInsideIntent calls the underlying NSPresentationIntentTableRowIntentWithIdentityRowNestedInsideIntent.
-func TableRowIntentWithIdentityRowNestedInsideIntent(identity int, row int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentTableRowIntentWithIdentityRowNestedInsideIntent(identity, row, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// TableRowIntentWithIdentityRowNestedInsideIntent creates a table row intent with the provided information.
+func TableRowIntentWithIdentityRowNestedInsideIntent(identity int, row int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableRowIntentWithIdentity:row:nestedInsideIntent:"), identity, row, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// TableCellIntentWithIdentityColumnNestedInsideIntent calls the underlying NSPresentationIntentTableCellIntentWithIdentityColumnNestedInsideIntent.
-func TableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column int, parent *raw.NSPresentationIntent) *PresentationIntent {
-	_r := raw.NSPresentationIntentTableCellIntentWithIdentityColumnNestedInsideIntent(identity, column, parent)
-	if _r == nil {
-		return nil
-	}
-	return &PresentationIntent{inner: _r}
+// TableCellIntentWithIdentityColumnNestedInsideIntent creates a table cell intent with the provided information.
+func TableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column int, parent *PresentationIntent) *PresentationIntent {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableCellIntentWithIdentity:column:nestedInsideIntent:"), identity, column, objref.IDOf(parent))
+	return PresentationIntentFromID(_r)
 }
 
-// NSProcessInfoProcessInfo calls the underlying NSProcessInfoProcessInfo.
+// NSProcessInfoProcessInfo wraps the corresponding Objective-C method.
 func NSProcessInfoProcessInfo() *ProcessInfo {
-	_r := raw.NSProcessInfoProcessInfo()
-	if _r == nil {
-		return nil
-	}
-	return &ProcessInfo{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProcessInfo")), objc.RegisterName("processInfo"))
+	return ProcessInfoFromID(_r)
 }
 
-// CurrentProgress calls the underlying NSProgressCurrentProgress.
+// CurrentProgress wraps the corresponding Objective-C method.
 func CurrentProgress() *Progress {
-	_r := raw.NSProgressCurrentProgress()
-	if _r == nil {
-		return nil
-	}
-	return &Progress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("currentProgress"))
+	return ProgressFromID(_r)
 }
 
-// ProgressWithTotalUnitCount calls the underlying NSProgressProgressWithTotalUnitCount.
+// ProgressWithTotalUnitCount wraps the corresponding Objective-C method.
 func ProgressWithTotalUnitCount(unitCount int64) *Progress {
-	_r := raw.NSProgressProgressWithTotalUnitCount(unitCount)
-	if _r == nil {
-		return nil
-	}
-	return &Progress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("progressWithTotalUnitCount:"), unitCount)
+	return ProgressFromID(_r)
 }
 
-// DiscreteProgressWithTotalUnitCount calls the underlying NSProgressDiscreteProgressWithTotalUnitCount.
+// DiscreteProgressWithTotalUnitCount wraps the corresponding Objective-C method.
 func DiscreteProgressWithTotalUnitCount(unitCount int64) *Progress {
-	_r := raw.NSProgressDiscreteProgressWithTotalUnitCount(unitCount)
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("discreteProgressWithTotalUnitCount:"), unitCount)
+	return ProgressFromID(_r)
+}
+
+// ProgressWithTotalUnitCountParentPendingUnitCount wraps the corresponding Objective-C method.
+func ProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *Progress, portionOfParentTotalUnitCount int64) *Progress {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("progressWithTotalUnitCount:parent:pendingUnitCount:"), unitCount, objref.IDOf(parent), portionOfParentTotalUnitCount)
+	return ProgressFromID(_r)
+}
+
+// RemoveSubscriber wraps the corresponding Objective-C method.
+func RemoveSubscriber(subscriber obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("removeSubscriber:"), objref.IDOf(subscriber))
+}
+
+// PropertyListIsValidForFormat wraps the corresponding Objective-C method.
+func PropertyListIsValidForFormat(plist obj.Object, format PropertyListFormat) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyList:isValidForFormat:"), objref.IDOf(plist), format)
+	return _r
+}
+
+// DataWithPropertyListFormatOptionsError wraps the corresponding Objective-C method.
+func DataWithPropertyListFormatOptionsError(plist obj.Object, format PropertyListFormat, opt int) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("dataWithPropertyList:format:options:error:"), objref.IDOf(plist), format, opt, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Progress{inner: _r}
+	return DataFromID(_r), nil
 }
 
-// ProgressWithTotalUnitCountParentPendingUnitCount calls the underlying NSProgressProgressWithTotalUnitCountParentPendingUnitCount.
-func ProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *raw.NSProgress, portionOfParentTotalUnitCount int64) *Progress {
-	_r := raw.NSProgressProgressWithTotalUnitCountParentPendingUnitCount(unitCount, parent, portionOfParentTotalUnitCount)
-	if _r == nil {
-		return nil
+// WritePropertyListToStreamFormatOptionsError wraps the corresponding Objective-C method.
+func WritePropertyListToStreamFormatOptionsError(plist obj.Object, stream *OutputStream, format PropertyListFormat, opt int) (result int, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[int](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("writePropertyList:toStream:format:options:error:"), objref.IDOf(plist), objref.IDOf(stream), format, opt, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Progress{inner: _r}
+	return _r, nil
 }
 
-// AddSubscriberForFileURLWithPublishingHandler calls the underlying NSProgressAddSubscriberForFileURLWithPublishingHandler.
-func AddSubscriberForFileURLWithPublishingHandler(url string, publishingHandler objc.Block) objc.ID {
-	return raw.NSProgressAddSubscriberForFileURLWithPublishingHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), publishingHandler)
-}
-
-// RemoveSubscriber calls the underlying NSProgressRemoveSubscriber.
-func RemoveSubscriber(subscriber objc.ID) {
-	raw.NSProgressRemoveSubscriber(subscriber)
-}
-
-// PropertyListIsValidForFormat calls the underlying NSPropertyListSerializationPropertyListIsValidForFormat.
-func PropertyListIsValidForFormat(plist objc.ID, format NSPropertyListFormat) bool {
-	return raw.NSPropertyListSerializationPropertyListIsValidForFormat(plist, raw.NSPropertyListFormat(format))
-}
-
-// DataWithPropertyListFormatOptionsError calls the underlying NSPropertyListSerializationDataWithPropertyListFormatOptionsError.
-func DataWithPropertyListFormatOptionsError(plist objc.ID, format NSPropertyListFormat, opt uint) (*Data, error) {
-	_r, _err := raw.NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist, raw.NSPropertyListFormat(format), opt)
-	if _err != nil {
-		return nil, _err
+// PropertyListWithDataOptionsFormatError wraps the corresponding Objective-C method.
+func PropertyListWithDataOptionsFormatError(data *Data, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
+	var _out0 PropertyListFormat
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListWithData:options:format:error:"), objref.IDOf(data), opt, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_v := obj.Wrap(_r)
+	if _nsErr != 0 {
+		return nil, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return _v, _out0, nil
+}
+
+// PropertyListWithStreamOptionsFormatError wraps the corresponding Objective-C method.
+func PropertyListWithStreamOptionsFormatError(stream *InputStream, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
+	var _out0 PropertyListFormat
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListWithStream:options:format:error:"), objref.IDOf(stream), opt, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_v := obj.Wrap(_r)
+	if _nsErr != 0 {
+		return nil, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}, nil
+	return _v, _out0, nil
 }
 
-// WritePropertyListToStreamFormatOptionsError calls the underlying NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError.
-func WritePropertyListToStreamFormatOptionsError(plist objc.ID, stream *raw.NSOutputStream, format NSPropertyListFormat, opt uint) (int, error) {
-	return raw.NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError(plist, stream, raw.NSPropertyListFormat(format), opt)
+// DataFromPropertyListFormatErrorDescription wraps the corresponding Objective-C method.
+func DataFromPropertyListFormatErrorDescription(plist obj.Object, format PropertyListFormat, errorString string) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("dataFromPropertyList:format:errorDescription:"), objref.IDOf(plist), format, purego.NSString(errorString))
+	return DataFromID(_r)
 }
 
-// PropertyListWithDataOptionsFormatError calls the underlying NSPropertyListSerializationPropertyListWithDataOptionsFormatError.
-func PropertyListWithDataOptionsFormatError(data *raw.NSData, opt NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat) (objc.ID, error) {
-	return raw.NSPropertyListSerializationPropertyListWithDataOptionsFormatError(data, raw.NSPropertyListMutabilityOptions(opt), format)
+// PropertyListFromDataMutabilityOptionFormatErrorDescription wraps the corresponding Objective-C method.
+func PropertyListFromDataMutabilityOptionFormatErrorDescription(data *Data, opt PropertyListMutabilityOptions, errorString string) (result obj.Object, format PropertyListFormat) {
+	var _out0 PropertyListFormat
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListFromData:mutabilityOption:format:errorDescription:"), objref.IDOf(data), opt, unsafe.Pointer(&_out0), purego.NSString(errorString))
+	_v := obj.Wrap(_r)
+	return _v, _out0
 }
 
-// PropertyListWithStreamOptionsFormatError calls the underlying NSPropertyListSerializationPropertyListWithStreamOptionsFormatError.
-func PropertyListWithStreamOptionsFormatError(stream *raw.NSInputStream, opt NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat) (objc.ID, error) {
-	return raw.NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream, raw.NSPropertyListMutabilityOptions(opt), format)
+// NSProxyAlloc returns a new instance of the receiving class
+func NSProxyAlloc() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProxy")), objc.RegisterName("alloc"))
+	return obj.Wrap(_r)
 }
 
-// DataFromPropertyListFormatErrorDescription calls the underlying NSPropertyListSerializationDataFromPropertyListFormatErrorDescription.
-func DataFromPropertyListFormatErrorDescription(plist objc.ID, format NSPropertyListFormat, errorString string) *Data {
-	_r := raw.NSPropertyListSerializationDataFromPropertyListFormatErrorDescription(plist, raw.NSPropertyListFormat(format), foundation.NSStringStringWithUTF8String(errorString))
-	if _r == nil {
-		return nil
+// RegularExpressionWithPatternOptionsError creates an NSRegularExpression instance with the specified regular expression pattern and options.
+func RegularExpressionWithPatternOptionsError(pattern string, options RegularExpressionOptions) (result *RegularExpression, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("regularExpressionWithPattern:options:error:"), purego.NSString(pattern), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Data{inner: _r}
+	return RegularExpressionFromID(_r), nil
 }
 
-// PropertyListFromDataMutabilityOptionFormatErrorDescription calls the underlying NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorDescription.
-func PropertyListFromDataMutabilityOptionFormatErrorDescription(data *raw.NSData, opt NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat, errorString string) objc.ID {
-	return raw.NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorDescription(data, raw.NSPropertyListMutabilityOptions(opt), format, foundation.NSStringStringWithUTF8String(errorString))
-}
-
-// ProtocolCheckerWithTargetProtocol calls the underlying NSProtocolCheckerProtocolCheckerWithTargetProtocol.
-func ProtocolCheckerWithTargetProtocol(anObject *raw.NSObject, aProtocol unsafe.Pointer) *ProtocolChecker {
-	_r := raw.NSProtocolCheckerProtocolCheckerWithTargetProtocol(anObject, aProtocol)
-	if _r == nil {
-		return nil
+// EscapedPatternForString returns a string by adding backslash escapes as necessary to protect any characters that would match as pattern metacharacters.
+func EscapedPatternForString(string_ string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("escapedPatternForString:"), purego.NSString(string_))
+	if _r == 0 {
+		return ""
 	}
-	return &ProtocolChecker{inner: _r}
+	return purego.GoString(_r)
 }
 
-// NSProxyAlloc calls the underlying NSProxyAlloc.
-func NSProxyAlloc() objc.ID {
-	return raw.NSProxyAlloc()
-}
-
-// NSProxyAllocWithZone calls the underlying NSProxyAllocWithZone.
-func NSProxyAllocWithZone(zone unsafe.Pointer) objc.ID {
-	return raw.NSProxyAllocWithZone(zone)
-}
-
-// NSProxyClass calls the underlying NSProxyClass.
-func NSProxyClass() objc.Class {
-	return raw.NSProxyClass()
-}
-
-// RespondsToSelector calls the underlying NSProxyRespondsToSelector.
-func RespondsToSelector(aSelector objc.SEL) bool {
-	return raw.NSProxyRespondsToSelector(aSelector)
-}
-
-// RegularExpressionWithPatternOptionsError calls the underlying NSRegularExpressionRegularExpressionWithPatternOptionsError.
-func RegularExpressionWithPatternOptionsError(pattern string, options NSRegularExpressionOptions) (*RegularExpression, error) {
-	_r, _err := raw.NSRegularExpressionRegularExpressionWithPatternOptionsError(foundation.NSStringStringWithUTF8String(pattern), raw.NSRegularExpressionOptions(options))
-	if _err != nil {
-		return nil, _err
+// EscapedTemplateForString returns a template string by adding backslash escapes as necessary to protect any characters that would match as pattern metacharacters
+func EscapedTemplateForString(string_ string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("escapedTemplateForString:"), purego.NSString(string_))
+	if _r == 0 {
+		return ""
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &RegularExpression{inner: _r}, nil
+	return purego.GoString(_r)
 }
 
-// EscapedPatternForString calls the underlying NSRegularExpressionEscapedPatternForString.
-func EscapedPatternForString(string_ string) *String {
-	_r := raw.NSRegularExpressionEscapedPatternForString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// EscapedTemplateForString calls the underlying NSRegularExpressionEscapedTemplateForString.
-func EscapedTemplateForString(string_ string) *String {
-	_r := raw.NSRegularExpressionEscapedTemplateForString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// CurrentRunLoop calls the underlying NSRunLoopCurrentRunLoop.
+// CurrentRunLoop wraps the corresponding Objective-C method.
 func CurrentRunLoop() *RunLoop {
-	_r := raw.NSRunLoopCurrentRunLoop()
-	if _r == nil {
-		return nil
-	}
-	return &RunLoop{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("currentRunLoop"))
+	return RunLoopFromID(_r)
 }
 
-// MainRunLoop calls the underlying NSRunLoopMainRunLoop.
+// MainRunLoop wraps the corresponding Objective-C method.
 func MainRunLoop() *RunLoop {
-	_r := raw.NSRunLoopMainRunLoop()
-	if _r == nil {
-		return nil
-	}
-	return &RunLoop{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("mainRunLoop"))
+	return RunLoopFromID(_r)
 }
 
-// ScannerWithString calls the underlying NSScannerScannerWithString.
+// ScannerWithString returns an NSScanner object that scans a given string.
 func ScannerWithString(string_ string) *Scanner {
-	_r := raw.NSScannerScannerWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &Scanner{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("scannerWithString:"), purego.NSString(string_))
+	return ScannerFromID(_r)
 }
 
-// LocalizedScannerWithString calls the underlying NSScannerLocalizedScannerWithString.
-func LocalizedScannerWithString(string_ string) objc.ID {
-	return raw.NSScannerLocalizedScannerWithString(foundation.NSStringStringWithUTF8String(string_))
+// LocalizedScannerWithString wraps the corresponding Objective-C method.
+func LocalizedScannerWithString(string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("localizedScannerWithString:"), purego.NSString(string_))
+	return obj.Wrap(_r)
 }
 
-// NSScriptClassDescriptionClassDescriptionForClass calls the underlying NSScriptClassDescriptionClassDescriptionForClass.
-func NSScriptClassDescriptionClassDescriptionForClass(aClass objc.Class) *ScriptClassDescription {
-	_r := raw.NSScriptClassDescriptionClassDescriptionForClass(aClass)
-	if _r == nil {
-		return nil
-	}
-	return &ScriptClassDescription{inner: _r}
-}
-
-// SharedCoercionHandler calls the underlying NSScriptCoercionHandlerSharedCoercionHandler.
+// SharedCoercionHandler returns the shared NSScriptCoercionHandler for the application.
 func SharedCoercionHandler() *ScriptCoercionHandler {
-	_r := raw.NSScriptCoercionHandlerSharedCoercionHandler()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptCoercionHandler{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptCoercionHandler")), objc.RegisterName("sharedCoercionHandler"))
+	return ScriptCoercionHandlerFromID(_r)
 }
 
-// CurrentCommand calls the underlying NSScriptCommandCurrentCommand.
+// CurrentCommand if a command is being executed in the current thread by Cocoa scripting’s built-in Apple event handling, return the command.
 func CurrentCommand() *ScriptCommand {
-	_r := raw.NSScriptCommandCurrentCommand()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptCommand{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptCommand")), objc.RegisterName("currentCommand"))
+	return ScriptCommandFromID(_r)
 }
 
-// SharedScriptExecutionContext calls the underlying NSScriptExecutionContextSharedScriptExecutionContext.
+// SharedScriptExecutionContext returns the shared NSScriptExecutionContext instance.
 func SharedScriptExecutionContext() *ScriptExecutionContext {
-	_r := raw.NSScriptExecutionContextSharedScriptExecutionContext()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptExecutionContext{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptExecutionContext")), objc.RegisterName("sharedScriptExecutionContext"))
+	return ScriptExecutionContextFromID(_r)
 }
 
-// ObjectSpecifierWithDescriptor calls the underlying NSScriptObjectSpecifierObjectSpecifierWithDescriptor.
-func ObjectSpecifierWithDescriptor(descriptor *raw.NSAppleEventDescriptor) *ScriptObjectSpecifier {
-	_r := raw.NSScriptObjectSpecifierObjectSpecifierWithDescriptor(descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &ScriptObjectSpecifier{inner: _r}
+// ObjectSpecifierWithDescriptor returns a new object specifier for an Apple event descriptor.
+func ObjectSpecifierWithDescriptor(descriptor *AppleEventDescriptor) *ScriptObjectSpecifier {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptObjectSpecifier")), objc.RegisterName("objectSpecifierWithDescriptor:"), objref.IDOf(descriptor))
+	return ScriptObjectSpecifierFromID(_r)
 }
 
-// SharedScriptSuiteRegistry calls the underlying NSScriptSuiteRegistrySharedScriptSuiteRegistry.
+// SharedScriptSuiteRegistry returns the single, shared instance of NSScriptSuiteRegistry, creating it first if it doesn’t exist.
 func SharedScriptSuiteRegistry() *ScriptSuiteRegistry {
-	_r := raw.NSScriptSuiteRegistrySharedScriptSuiteRegistry()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptSuiteRegistry{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptSuiteRegistry")), objc.RegisterName("sharedScriptSuiteRegistry"))
+	return ScriptSuiteRegistryFromID(_r)
 }
 
-// SetSharedScriptSuiteRegistry calls the underlying NSScriptSuiteRegistrySetSharedScriptSuiteRegistry.
-func SetSharedScriptSuiteRegistry(registry *raw.NSScriptSuiteRegistry) {
-	raw.NSScriptSuiteRegistrySetSharedScriptSuiteRegistry(registry)
+// SetSharedScriptSuiteRegistry sets the single, shared instance of NSScriptSuiteRegistry to registry.
+func SetSharedScriptSuiteRegistry(registry *ScriptSuiteRegistry) {
+	objc.Send[objc.ID](objc.ID(_class("NSScriptSuiteRegistry")), objc.RegisterName("setSharedScriptSuiteRegistry:"), objref.IDOf(registry))
 }
 
-// AllowedTopLevelClasses calls the underlying NSSecureUnarchiveFromDataTransformerAllowedTopLevelClasses.
-func AllowedTopLevelClasses() *raw.NSArray[objc.Class] {
-	return raw.NSSecureUnarchiveFromDataTransformerAllowedTopLevelClasses()
+// AllowedTopLevelClasses wraps the corresponding Objective-C method.
+func AllowedTopLevelClasses() []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSecureUnarchiveFromDataTransformer")), objc.RegisterName("allowedTopLevelClasses"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NSSetSet calls the underlying NSSetSet.
-func NSSetSet() *raw.NSSet[objc.ID] {
-	return raw.NSSetSet()
+// NSSetSet creates and returns an empty set.
+func NSSetSet() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("set"))
+	return obj.Wrap(_r)
 }
 
-// SetWithObject calls the underlying NSSetSetWithObject.
-func SetWithObject(object objc.ID) *raw.NSSet[objc.ID] {
-	return raw.NSSetSetWithObject(object)
+// SetWithObject creates and returns a set that contains a single given object.
+func SetWithObject(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
 }
 
-// SetWithObjectsCount calls the underlying NSSetSetWithObjectsCount.
-func SetWithObjectsCount(objects unsafe.Pointer, cnt uint) *raw.NSSet[objc.ID] {
-	return raw.NSSetSetWithObjectsCount(objects, cnt)
+// SetWithSet creates and returns a set containing the objects from another set.
+func SetWithSet(set obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithSet:"), objref.IDOf(set))
+	return obj.Wrap(_r)
 }
 
-// SetWithSet calls the underlying NSSetSetWithSet.
-func SetWithSet(set *raw.NSSet[objc.ID]) *raw.NSSet[objc.ID] {
-	return raw.NSSetSetWithSet(set)
+// SetWithArray creates and returns a set containing a uniqued collection of the objects contained in a given array.
+func SetWithArray(array []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// SetWithArray calls the underlying NSSetSetWithArray.
-func SetWithArray(array *raw.NSArray[objc.ID]) *raw.NSSet[objc.ID] {
-	return raw.NSSetSetWithArray(array)
+// NSSocketPortNameServerSharedInstance returns the shared socket port name server.
+func NSSocketPortNameServerSharedInstance() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSocketPortNameServer")), objc.RegisterName("sharedInstance"))
+	return obj.Wrap(_r)
 }
 
-// NSSocketPortNameServerSharedInstance calls the underlying NSSocketPortNameServerSharedInstance.
-func NSSocketPortNameServerSharedInstance() objc.ID {
-	return raw.NSSocketPortNameServerSharedInstance()
-}
-
-// SortDescriptorWithKeyAscending calls the underlying NSSortDescriptorSortDescriptorWithKeyAscending.
+// SortDescriptorWithKeyAscending creates and returns a sort descriptor with the specified key path and ordering.
 func SortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor {
-	_r := raw.NSSortDescriptorSortDescriptorWithKeyAscending(foundation.NSStringStringWithUTF8String(key), ascending)
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("sortDescriptorWithKey:ascending:"), purego.NSString(key), ascending)
+	return SortDescriptorFromID(_r)
+}
+
+// GetStreamsToHostWithNamePortInputStreamOutputStream wraps the corresponding Objective-C method.
+func GetStreamsToHostWithNamePortInputStreamOutputStream(hostname string, port int, inputStream *InputStream, outputStream *OutputStream) {
+	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getStreamsToHostWithName:port:inputStream:outputStream:"), purego.NSString(hostname), port, objref.IDOf(inputStream), objref.IDOf(outputStream))
+}
+
+// GetStreamsToHostPortInputStreamOutputStream wraps the corresponding Objective-C method.
+func GetStreamsToHostPortInputStreamOutputStream(host *Host, port int, inputStream *InputStream, outputStream *OutputStream) {
+	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getStreamsToHost:port:inputStream:outputStream:"), objref.IDOf(host), port, objref.IDOf(inputStream), objref.IDOf(outputStream))
+}
+
+// GetBoundStreamsWithBufferSizeInputStreamOutputStream wraps the corresponding Objective-C method.
+func GetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize int, inputStream *InputStream, outputStream *OutputStream) {
+	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getBoundStreamsWithBufferSize:inputStream:outputStream:"), bufferSize, objref.IDOf(inputStream), objref.IDOf(outputStream))
+}
+
+// LocalizedNameOfStringEncoding returns a human-readable string giving the name of a given encoding.
+func LocalizedNameOfStringEncoding(encoding int) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("localizedNameOfStringEncoding:"), encoding)
+	if _r == 0 {
+		return ""
 	}
-	return &SortDescriptor{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SortDescriptorWithKeyAscendingSelector calls the underlying NSSortDescriptorSortDescriptorWithKeyAscendingSelector.
-func SortDescriptorWithKeyAscendingSelector(key string, ascending bool, selector objc.SEL) *SortDescriptor {
-	_r := raw.NSSortDescriptorSortDescriptorWithKeyAscendingSelector(foundation.NSStringStringWithUTF8String(key), ascending, selector)
-	if _r == nil {
-		return nil
-	}
-	return &SortDescriptor{inner: _r}
-}
-
-// SortDescriptorWithKeyAscendingComparator calls the underlying NSSortDescriptorSortDescriptorWithKeyAscendingComparator.
-func SortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *SortDescriptor {
-	_r := raw.NSSortDescriptorSortDescriptorWithKeyAscendingComparator(foundation.NSStringStringWithUTF8String(key), ascending, func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
-	if _r == nil {
-		return nil
-	}
-	return &SortDescriptor{inner: _r}
-}
-
-// GetStreamsToHostWithNamePortInputStreamOutputStream calls the underlying NSStreamGetStreamsToHostWithNamePortInputStreamOutputStream.
-func GetStreamsToHostWithNamePortInputStreamOutputStream(hostname string, port int, inputStream *raw.NSInputStream, outputStream *raw.NSOutputStream) {
-	raw.NSStreamGetStreamsToHostWithNamePortInputStreamOutputStream(foundation.NSStringStringWithUTF8String(hostname), port, inputStream, outputStream)
-}
-
-// GetStreamsToHostPortInputStreamOutputStream calls the underlying NSStreamGetStreamsToHostPortInputStreamOutputStream.
-func GetStreamsToHostPortInputStreamOutputStream(host *raw.NSHost, port int, inputStream *raw.NSInputStream, outputStream *raw.NSOutputStream) {
-	raw.NSStreamGetStreamsToHostPortInputStreamOutputStream(host, port, inputStream, outputStream)
-}
-
-// GetBoundStreamsWithBufferSizeInputStreamOutputStream calls the underlying NSStreamGetBoundStreamsWithBufferSizeInputStreamOutputStream.
-func GetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize uint, inputStream *raw.NSInputStream, outputStream *raw.NSOutputStream) {
-	raw.NSStreamGetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize, inputStream, outputStream)
-}
-
-// LocalizedNameOfStringEncoding calls the underlying NSStringLocalizedNameOfStringEncoding.
-func LocalizedNameOfStringEncoding(encoding uint) *String {
-	_r := raw.NSStringLocalizedNameOfStringEncoding(encoding)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// NSStringString calls the underlying NSStringString.
+// NSStringString returns an empty string.
 func NSStringString() *String {
-	_r := raw.NSStringString()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("string"))
+	return StringFromID(_r)
 }
 
-// StringWithString calls the underlying NSStringStringWithString.
+// StringWithString returns a string created by copying the characters from another given string.
 func StringWithString(string_ string) *String {
-	_r := raw.NSStringStringWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithString:"), purego.NSString(string_))
+	return StringFromID(_r)
 }
 
-// StringWithCharactersLength calls the underlying NSStringStringWithCharactersLength.
-func StringWithCharactersLength(characters *uint16, length uint) *String {
-	_r := raw.NSStringStringWithCharactersLength(characters, length)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// StringWithCharactersLength returns a string containing a given number of characters taken from a given C array of UTF-16 code units.
+func StringWithCharactersLength(length int) (result *String, characters uint16) {
+	var _out0 uint16
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCharacters:length:"), unsafe.Pointer(&_out0), length)
+	_v := StringFromID(_r)
+	return _v, _out0
 }
 
-// StringWithUTF8String calls the underlying NSStringStringWithUTF8String.
+// StringWithUTF8String returns a string created by copying the data from a given C array of UTF8-encoded bytes.
 func StringWithUTF8String(nullTerminatedCString string) *String {
-	_r := raw.NSStringStringWithUTF8String(nullTerminatedCString)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithUTF8String:"), nullTerminatedCString)
+	return StringFromID(_r)
 }
 
-// StringWithFormat calls the underlying NSStringStringWithFormat.
+// StringWithFormat returns a string created by using a given format string as a template into which the remaining argument values are substituted.
 func StringWithFormat(format string) *String {
-	_r := raw.NSStringStringWithFormat(foundation.NSStringStringWithUTF8String(format))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithFormat:"), purego.NSString(format))
+	return StringFromID(_r)
 }
 
-// LocalizedStringWithFormat calls the underlying NSStringLocalizedStringWithFormat.
+// LocalizedStringWithFormat returns a string created by using a given format string as a template into which the remaining argument values are substituted according to the current locale.
 func LocalizedStringWithFormat(format string) *String {
-	_r := raw.NSStringLocalizedStringWithFormat(foundation.NSStringStringWithUTF8String(format))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("localizedStringWithFormat:"), purego.NSString(format))
+	return StringFromID(_r)
 }
 
-// StringWithValidatedFormatValidFormatSpecifiersError calls the underlying NSStringStringWithValidatedFormatValidFormatSpecifiersError.
-func StringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (*String, error) {
-	_r, _err := raw.NSStringStringWithValidatedFormatValidFormatSpecifiersError(foundation.NSStringStringWithUTF8String(format), foundation.NSStringStringWithUTF8String(validFormatSpecifiers))
-	if _err != nil {
-		return nil, _err
+// StringWithValidatedFormatValidFormatSpecifiersError wraps the corresponding Objective-C method.
+func StringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (result *String, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithValidatedFormat:validFormatSpecifiers:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &String{inner: _r}, nil
+	return StringFromID(_r), nil
 }
 
-// LocalizedStringWithValidatedFormatValidFormatSpecifiersError calls the underlying NSStringLocalizedStringWithValidatedFormatValidFormatSpecifiersError.
-func LocalizedStringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (*String, error) {
-	_r, _err := raw.NSStringLocalizedStringWithValidatedFormatValidFormatSpecifiersError(foundation.NSStringStringWithUTF8String(format), foundation.NSStringStringWithUTF8String(validFormatSpecifiers))
-	if _err != nil {
-		return nil, _err
+// LocalizedStringWithValidatedFormatValidFormatSpecifiersError wraps the corresponding Objective-C method.
+func LocalizedStringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (result *String, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("localizedStringWithValidatedFormat:validFormatSpecifiers:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &String{inner: _r}, nil
+	return StringFromID(_r), nil
 }
 
-// StringWithCStringEncoding calls the underlying NSStringStringWithCStringEncoding.
-func StringWithCStringEncoding(cString string, enc uint) *String {
-	_r := raw.NSStringStringWithCStringEncoding(cString, enc)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// StringWithCStringEncoding returns a string containing the bytes in a given C array, interpreted according to a given encoding.
+func StringWithCStringEncoding(cString string, enc int) *String {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:encoding:"), cString, enc)
+	return StringFromID(_r)
 }
 
-// StringWithContentsOfURLEncodingError calls the underlying NSStringStringWithContentsOfURLEncodingError.
-func StringWithContentsOfURLEncodingError(url string, enc uint) (*String, error) {
-	_r, _err := raw.NSStringStringWithContentsOfURLEncodingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), enc)
-	if _err != nil {
-		return nil, _err
+// StringWithContentsOfURLEncodingError returns a string created by reading data from the file at a given path interpreted using a given encoding.
+func StringWithContentsOfURLEncodingError(url string, enc int) (result *String, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfURL:encoding:error:"), rt.FileURL(url), enc, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &String{inner: _r}, nil
+	return StringFromID(_r), nil
 }
 
-// StringWithContentsOfFileEncodingError calls the underlying NSStringStringWithContentsOfFileEncodingError.
-func StringWithContentsOfFileEncodingError(path string, enc uint) (*String, error) {
-	_r, _err := raw.NSStringStringWithContentsOfFileEncodingError(foundation.NSStringStringWithUTF8String(path), enc)
-	if _err != nil {
-		return nil, _err
+// StringWithContentsOfFileEncodingError returns a string created by reading data from the file at a given path interpreted using a given encoding.
+func StringWithContentsOfFileEncodingError(path string, enc int) (result *String, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfFile:encoding:error:"), purego.NSString(path), enc, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &String{inner: _r}, nil
+	return StringFromID(_r), nil
 }
 
-// StringWithContentsOfURLUsedEncodingError calls the underlying NSStringStringWithContentsOfURLUsedEncodingError.
-func StringWithContentsOfURLUsedEncodingError(url string, enc *uint) (*String, error) {
-	_r, _err := raw.NSStringStringWithContentsOfURLUsedEncodingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), enc)
-	if _err != nil {
-		return nil, _err
+// StringWithContentsOfURLUsedEncodingError returns a string created by reading data from the file at a given URL and returns by reference the encoding used to interpret the data.
+func StringWithContentsOfURLUsedEncodingError(url string) (result *String, enc int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfURL:usedEncoding:error:"), rt.FileURL(url), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_v := StringFromID(_r)
+	if _nsErr != 0 {
+		return nil, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return _v, _out0, nil
+}
+
+// StringWithContentsOfFileUsedEncodingError returns a string created by reading data from the file at a given path and returns by reference the encoding used to interpret the file.
+func StringWithContentsOfFileUsedEncodingError(path string) (result *String, enc int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfFile:usedEncoding:error:"), purego.NSString(path), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_v := StringFromID(_r)
+	if _nsErr != 0 {
+		return nil, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}, nil
+	return _v, _out0, nil
 }
 
-// StringWithContentsOfFileUsedEncodingError calls the underlying NSStringStringWithContentsOfFileUsedEncodingError.
-func StringWithContentsOfFileUsedEncodingError(path string, enc *uint) (*String, error) {
-	_r, _err := raw.NSStringStringWithContentsOfFileUsedEncodingError(foundation.NSStringStringWithUTF8String(path), enc)
-	if _err != nil {
-		return nil, _err
+// DefaultCStringEncoding wraps the corresponding Objective-C method.
+func DefaultCStringEncoding() int {
+	_r := objc.Send[int](objc.ID(_class("NSString")), objc.RegisterName("defaultCStringEncoding"))
+	return _r
+}
+
+// StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion returns the string encoding for the given data as detected by attempting to create a string according to the specified encoding options.
+func StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data *Data, opts obj.Object, string_ string) (result int, usedLossyConversion bool) {
+	var _out0 bool
+	_r := objc.Send[int](objc.ID(_class("NSString")), objc.RegisterName("stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:"), objref.IDOf(data), objref.IDOf(opts), purego.NSString(string_), unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// StringWithContentsOfFile returns a string created by reading data from the file named by a given path.
+func StringWithContentsOfFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
+}
+
+// StringWithContentsOfURL returns a string created by reading data from the file named by a given URL.
+func StringWithContentsOfURL(url string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfURL:"), rt.FileURL(url))
+	return obj.Wrap(_r)
+}
+
+// StringWithCStringLength returns a string containing the characters in a given C-string.
+func StringWithCStringLength(bytes_ string, length int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:length:"), bytes_, length)
+	return obj.Wrap(_r)
+}
+
+// StringWithCString creates a new string using a given C-string.
+func StringWithCString(bytes_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:"), bytes_)
+	return obj.Wrap(_r)
+}
+
+// PathWithComponents returns a string built from the strings in a given array by concatenating them with a path separator between each pair.
+func PathWithComponents(components []string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("pathWithComponents:"), purego.SliceToNSArray(components, func(_v string) objc.ID { return purego.NSString(_v) }))
+	if _r == 0 {
+		return ""
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &String{inner: _r}, nil
+	return purego.GoString(_r)
 }
 
-// AvailableStringEncodings calls the underlying NSStringAvailableStringEncodings.
-func AvailableStringEncodings() *uint {
-	return raw.NSStringAvailableStringEncodings()
+// LaunchedTaskWithLaunchPathArguments wraps the corresponding Objective-C method.
+func LaunchedTaskWithLaunchPathArguments(path string, arguments []string) *Task {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("launchedTaskWithLaunchPath:arguments:"), purego.NSString(path), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return TaskFromID(_r)
 }
 
-// DefaultCStringEncoding calls the underlying NSStringDefaultCStringEncoding.
-func DefaultCStringEncoding() uint {
-	return raw.NSStringDefaultCStringEncoding()
-}
-
-// StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion calls the underlying NSStringStringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion.
-func StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data *raw.NSData, opts *raw.NSDictionary[*raw.NSString, objc.ID], string_ string, usedLossyConversion *bool) uint {
-	return raw.NSStringStringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data, opts, foundation.NSStringStringWithUTF8String(string_), usedLossyConversion)
-}
-
-// StringWithContentsOfFile calls the underlying NSStringStringWithContentsOfFile.
-func StringWithContentsOfFile(path string) objc.ID {
-	return raw.NSStringStringWithContentsOfFile(foundation.NSStringStringWithUTF8String(path))
-}
-
-// StringWithContentsOfURL calls the underlying NSStringStringWithContentsOfURL.
-func StringWithContentsOfURL(url string) objc.ID {
-	return raw.NSStringStringWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// StringWithCStringLength calls the underlying NSStringStringWithCStringLength.
-func StringWithCStringLength(bytes_ string, length uint) objc.ID {
-	return raw.NSStringStringWithCStringLength(bytes_, length)
-}
-
-// StringWithCString calls the underlying NSStringStringWithCString.
-func StringWithCString(bytes_ string) objc.ID {
-	return raw.NSStringStringWithCString(bytes_)
-}
-
-// PathWithComponents calls the underlying NSStringPathWithComponents.
-func PathWithComponents(components ...StringProvider) *String {
-	_ptrs := make([]objc.ID, len(components))
-	for _i, _v := range components {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSStringPathWithComponents(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler calls the underlying NSTaskLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler.
-func LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url string, arguments *raw.NSArray[*raw.NSString], error_ unsafe.Pointer, terminationHandler func(*raw.NSTask)) *Task {
-	_r := raw.NSTaskLaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), arguments, error_, terminationHandler)
-	if _r == nil {
-		return nil
-	}
-	return &Task{inner: _r}
-}
-
-// LaunchedTaskWithLaunchPathArguments calls the underlying NSTaskLaunchedTaskWithLaunchPathArguments.
-func LaunchedTaskWithLaunchPathArguments(path string, arguments ...StringProvider) *Task {
-	_ptrs := make([]objc.ID, len(arguments))
-	for _i, _v := range arguments {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg1 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSTaskLaunchedTaskWithLaunchPathArguments(foundation.NSStringStringWithUTF8String(path), _arg1)
-	if _r == nil {
-		return nil
-	}
-	return &Task{inner: _r}
-}
-
-// Neutral calls the underlying NSTermOfAddressNeutral.
+// Neutral term of address that uses gender-neutral pronouns (e.g. they/them/theirs in English), and an epicene grammatical gender when inflecting verbs and adjectives referring to the person
 func Neutral() *TermOfAddress {
-	_r := raw.NSTermOfAddressNeutral()
-	if _r == nil {
-		return nil
-	}
-	return &TermOfAddress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("neutral"))
+	return TermOfAddressFromID(_r)
 }
 
-// Feminine calls the underlying NSTermOfAddressFeminine.
+// Feminine term of address that uses feminine pronouns (e.g. she/her/hers in English), and a feminine grammatical gender when inflecting verbs and adjectives referring to the person
 func Feminine() *TermOfAddress {
-	_r := raw.NSTermOfAddressFeminine()
-	if _r == nil {
-		return nil
-	}
-	return &TermOfAddress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("feminine"))
+	return TermOfAddressFromID(_r)
 }
 
-// Masculine calls the underlying NSTermOfAddressMasculine.
+// Masculine term of address that uses masculine pronouns (e.g. he/him/his in English), and a masculine grammatical gender when inflecting verbs and adjectives referring to the person
 func Masculine() *TermOfAddress {
-	_r := raw.NSTermOfAddressMasculine()
-	if _r == nil {
-		return nil
-	}
-	return &TermOfAddress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("masculine"))
+	return TermOfAddressFromID(_r)
 }
 
-// CurrentUser calls the underlying NSTermOfAddressCurrentUser.
+// CurrentUser the term of address that should be used for addressing the user
 func CurrentUser() *TermOfAddress {
-	_r := raw.NSTermOfAddressCurrentUser()
-	if _r == nil {
-		return nil
-	}
-	return &TermOfAddress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("currentUser"))
+	return TermOfAddressFromID(_r)
 }
 
-// LocalizedForLanguageIdentifierWithPronouns calls the underlying NSTermOfAddressLocalizedForLanguageIdentifierWithPronouns.
-func LocalizedForLanguageIdentifierWithPronouns(language string, pronouns *raw.NSArray[*raw.NSMorphologyPronoun]) *TermOfAddress {
-	_r := raw.NSTermOfAddressLocalizedForLanguageIdentifierWithPronouns(foundation.NSStringStringWithUTF8String(language), pronouns)
-	if _r == nil {
-		return nil
-	}
-	return &TermOfAddress{inner: _r}
+// LocalizedForLanguageIdentifierWithPronouns a term of address restricted to a given language
+func LocalizedForLanguageIdentifierWithPronouns(language string, pronouns []*MorphologyPronoun) *TermOfAddress {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("localizedForLanguageIdentifier:withPronouns:"), purego.NSString(language), purego.SliceToNSArray(pronouns, func(_v *MorphologyPronoun) objc.ID { return objref.IDOf(_v) }))
+	return TermOfAddressFromID(_r)
 }
 
-// OrthographyCheckingResultWithRangeOrthography calls the underlying NSTextCheckingResultOrthographyCheckingResultWithRangeOrthography.
-func OrthographyCheckingResultWithRangeOrthography(range_ raw.NSRange, orthography *raw.NSOrthography) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultOrthographyCheckingResultWithRangeOrthography(range_, orthography)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// SpellCheckingResultWithRange calls the underlying NSTextCheckingResultSpellCheckingResultWithRange.
-func SpellCheckingResultWithRange(range_ raw.NSRange) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultSpellCheckingResultWithRange(range_)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// GrammarCheckingResultWithRangeDetails calls the underlying NSTextCheckingResultGrammarCheckingResultWithRangeDetails.
-func GrammarCheckingResultWithRangeDetails(range_ raw.NSRange, details *raw.NSArray[objc.ID]) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultGrammarCheckingResultWithRangeDetails(range_, details)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// DateCheckingResultWithRangeDate calls the underlying NSTextCheckingResultDateCheckingResultWithRangeDate.
-func DateCheckingResultWithRangeDate(range_ raw.NSRange, date *raw.NSDate) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultDateCheckingResultWithRangeDate(range_, date)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// DateCheckingResultWithRangeDateTimeZoneDuration calls the underlying NSTextCheckingResultDateCheckingResultWithRangeDateTimeZoneDuration.
-func DateCheckingResultWithRangeDateTimeZoneDuration(range_ raw.NSRange, date *raw.NSDate, timeZone *raw.NSTimeZone, duration float64) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultDateCheckingResultWithRangeDateTimeZoneDuration(range_, date, timeZone, duration)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// AddressCheckingResultWithRangeComponents calls the underlying NSTextCheckingResultAddressCheckingResultWithRangeComponents.
-func AddressCheckingResultWithRangeComponents(range_ raw.NSRange, components *raw.NSDictionary[*raw.NSString, *raw.NSString]) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultAddressCheckingResultWithRangeComponents(range_, components)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// LinkCheckingResultWithRangeURL calls the underlying NSTextCheckingResultLinkCheckingResultWithRangeURL.
-func LinkCheckingResultWithRangeURL(range_ raw.NSRange, url string) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultLinkCheckingResultWithRangeURL(range_, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// QuoteCheckingResultWithRangeReplacementString calls the underlying NSTextCheckingResultQuoteCheckingResultWithRangeReplacementString.
-func QuoteCheckingResultWithRangeReplacementString(range_ raw.NSRange, replacementString string) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultQuoteCheckingResultWithRangeReplacementString(range_, foundation.NSStringStringWithUTF8String(replacementString))
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// DashCheckingResultWithRangeReplacementString calls the underlying NSTextCheckingResultDashCheckingResultWithRangeReplacementString.
-func DashCheckingResultWithRangeReplacementString(range_ raw.NSRange, replacementString string) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultDashCheckingResultWithRangeReplacementString(range_, foundation.NSStringStringWithUTF8String(replacementString))
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// ReplacementCheckingResultWithRangeReplacementString calls the underlying NSTextCheckingResultReplacementCheckingResultWithRangeReplacementString.
-func ReplacementCheckingResultWithRangeReplacementString(range_ raw.NSRange, replacementString string) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultReplacementCheckingResultWithRangeReplacementString(range_, foundation.NSStringStringWithUTF8String(replacementString))
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// CorrectionCheckingResultWithRangeReplacementString calls the underlying NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementString.
-func CorrectionCheckingResultWithRangeReplacementString(range_ raw.NSRange, replacementString string) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementString(range_, foundation.NSStringStringWithUTF8String(replacementString))
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// CorrectionCheckingResultWithRangeReplacementStringAlternativeStrings calls the underlying NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementStringAlternativeStrings.
-func CorrectionCheckingResultWithRangeReplacementStringAlternativeStrings(range_ raw.NSRange, replacementString string, alternativeStrings ...StringProvider) *TextCheckingResult {
-	_ptrs := make([]objc.ID, len(alternativeStrings))
-	for _i, _v := range alternativeStrings {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg2 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg2 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementStringAlternativeStrings(range_, foundation.NSStringStringWithUTF8String(replacementString), _arg2)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// RegularExpressionCheckingResultWithRangesCountRegularExpression calls the underlying NSTextCheckingResultRegularExpressionCheckingResultWithRangesCountRegularExpression.
-func RegularExpressionCheckingResultWithRangesCountRegularExpression(ranges *raw.NSRange, count uint, regularExpression *raw.NSRegularExpression) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultRegularExpressionCheckingResultWithRangesCountRegularExpression(ranges, count, regularExpression)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// PhoneNumberCheckingResultWithRangePhoneNumber calls the underlying NSTextCheckingResultPhoneNumberCheckingResultWithRangePhoneNumber.
-func PhoneNumberCheckingResultWithRangePhoneNumber(range_ raw.NSRange, phoneNumber string) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultPhoneNumberCheckingResultWithRangePhoneNumber(range_, foundation.NSStringStringWithUTF8String(phoneNumber))
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// TransitInformationCheckingResultWithRangeComponents calls the underlying NSTextCheckingResultTransitInformationCheckingResultWithRangeComponents.
-func TransitInformationCheckingResultWithRangeComponents(range_ raw.NSRange, components *raw.NSDictionary[*raw.NSString, *raw.NSString]) *TextCheckingResult {
-	_r := raw.NSTextCheckingResultTransitInformationCheckingResultWithRangeComponents(range_, components)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
+// DetachNewThreadWith wraps the corresponding Objective-C method.
+//
 // DetachNewThreadWith blocks until the operation completes or ctx is cancelled.
 func DetachNewThreadWith(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.NSThreadDetachNewThreadWith(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("detachNewThreadWithBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -4229,2645 +2949,1809 @@ func DetachNewThreadWith(ctx context.Context) error {
 	}
 }
 
-// DetachNewThreadSelectorToTargetWithObject calls the underlying NSThreadDetachNewThreadSelectorToTargetWithObject.
-func DetachNewThreadSelectorToTargetWithObject(selector objc.SEL, target objc.ID, argument objc.ID) {
-	raw.NSThreadDetachNewThreadSelectorToTargetWithObject(selector, target, argument)
-}
-
-// IsMultiThreaded calls the underlying NSThreadIsMultiThreaded.
+// IsMultiThreaded wraps the corresponding Objective-C method.
 func IsMultiThreaded() bool {
-	return raw.NSThreadIsMultiThreaded()
+	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("isMultiThreaded"))
+	return _r
 }
 
-// SleepUntilDate calls the underlying NSThreadSleepUntilDate.
-func SleepUntilDate(date *raw.NSDate) {
-	raw.NSThreadSleepUntilDate(date)
+// SleepUntilDate wraps the corresponding Objective-C method.
+func SleepUntilDate(date *Date) {
+	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("sleepUntilDate:"), objref.IDOf(date))
 }
 
-// SleepForTimeInterval calls the underlying NSThreadSleepForTimeInterval.
+// SleepForTimeInterval wraps the corresponding Objective-C method.
 func SleepForTimeInterval(ti float64) {
-	raw.NSThreadSleepForTimeInterval(ti)
+	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("sleepForTimeInterval:"), ti)
 }
 
-// Exit calls the underlying NSThreadExit.
+// Exit wraps the corresponding Objective-C method.
 func Exit() {
-	raw.NSThreadExit()
+	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("exit"))
 }
 
-// ThreadPriority calls the underlying NSThreadThreadPriority.
+// ThreadPriority wraps the corresponding Objective-C method.
 func ThreadPriority() float64 {
-	return raw.NSThreadThreadPriority()
+	_r := objc.Send[float64](objc.ID(_class("NSThread")), objc.RegisterName("threadPriority"))
+	return _r
 }
 
-// SetThreadPriority calls the underlying NSThreadSetThreadPriority.
+// SetThreadPriority wraps the corresponding Objective-C method.
 func SetThreadPriority(p float64) bool {
-	return raw.NSThreadSetThreadPriority(p)
+	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("setThreadPriority:"), p)
+	return _r
 }
 
-// CurrentThread calls the underlying NSThreadCurrentThread.
+// CurrentThread wraps the corresponding Objective-C method.
 func CurrentThread() *Thread {
-	_r := raw.NSThreadCurrentThread()
-	if _r == nil {
-		return nil
-	}
-	return &Thread{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("currentThread"))
+	return ThreadFromID(_r)
 }
 
+// CallStackReturnAddresses wraps the corresponding Objective-C method.
+//
 // CallStackReturnAddresses returns the collection as a Go slice.
 func CallStackReturnAddresses() []*Number {
-	arr := raw.NSThreadCallStackReturnAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
-		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("callStackReturnAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
+// CallStackSymbols wraps the corresponding Objective-C method.
+//
 // CallStackSymbols returns the collection as a Go slice.
 func CallStackSymbols() []string {
-	arr := raw.NSThreadCallStackSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("callStackSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsMainThread calls the underlying NSThreadIsMainThread.
+// IsMainThread wraps the corresponding Objective-C method.
 func IsMainThread() bool {
-	return raw.NSThreadIsMainThread()
+	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("isMainThread"))
+	return _r
 }
 
-// MainThread calls the underlying NSThreadMainThread.
+// MainThread wraps the corresponding Objective-C method.
 func MainThread() *Thread {
-	_r := raw.NSThreadMainThread()
-	if _r == nil {
-		return nil
-	}
-	return &Thread{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("mainThread"))
+	return ThreadFromID(_r)
 }
 
-// ResetSystemTimeZone calls the underlying NSTimeZoneResetSystemTimeZone.
+// ResetSystemTimeZone clears any time zone value cached for the systemTimeZone property.
 func ResetSystemTimeZone() {
-	raw.NSTimeZoneResetSystemTimeZone()
+	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("resetSystemTimeZone"))
 }
 
-// AbbreviationDictionary calls the underlying NSTimeZoneAbbreviationDictionary.
-func AbbreviationDictionary() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return raw.NSTimeZoneAbbreviationDictionary()
+// AbbreviationDictionary wraps the corresponding Objective-C method.
+func AbbreviationDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("abbreviationDictionary"))
+	return obj.Wrap(_r)
 }
 
-// SystemTimeZone calls the underlying NSTimeZoneSystemTimeZone.
+// SystemTimeZone wraps the corresponding Objective-C method.
 func SystemTimeZone() *TimeZone {
-	_r := raw.NSTimeZoneSystemTimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("systemTimeZone"))
+	return TimeZoneFromID(_r)
 }
 
-// DefaultTimeZone calls the underlying NSTimeZoneDefaultTimeZone.
+// DefaultTimeZone wraps the corresponding Objective-C method.
 func DefaultTimeZone() *TimeZone {
-	_r := raw.NSTimeZoneDefaultTimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("defaultTimeZone"))
+	return TimeZoneFromID(_r)
 }
 
-// SetDefaultTimeZone calls the underlying NSTimeZoneSetDefaultTimeZone.
-func SetDefaultTimeZone(defaultTimeZone *raw.NSTimeZone) {
-	raw.NSTimeZoneSetDefaultTimeZone(defaultTimeZone)
+// SetDefaultTimeZone wraps the corresponding Objective-C method.
+func SetDefaultTimeZone(defaultTimeZone *TimeZone) {
+	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setDefaultTimeZone:"), objref.IDOf(defaultTimeZone))
 }
 
-// LocalTimeZone calls the underlying NSTimeZoneLocalTimeZone.
+// LocalTimeZone wraps the corresponding Objective-C method.
 func LocalTimeZone() *TimeZone {
-	_r := raw.NSTimeZoneLocalTimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("localTimeZone"))
+	return TimeZoneFromID(_r)
 }
 
+// KnownTimeZoneNames wraps the corresponding Objective-C method.
+//
 // KnownTimeZoneNames returns the collection as a Go slice.
 func KnownTimeZoneNames() []string {
-	arr := raw.NSTimeZoneKnownTimeZoneNames()
-	if arr == nil {
-		return nil
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("knownTimeZoneNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// SetAbbreviationDictionary wraps the corresponding Objective-C method.
+func SetAbbreviationDictionary(abbreviationDictionary obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setAbbreviationDictionary:"), objref.IDOf(abbreviationDictionary))
+}
+
+// TimeZoneDataVersion wraps the corresponding Objective-C method.
+func TimeZoneDataVersion() string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneDataVersion"))
+	if _r == 0 {
+		return ""
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	return purego.GoString(_r)
 }
 
-// SetAbbreviationDictionary calls the underlying NSTimeZoneSetAbbreviationDictionary.
-func SetAbbreviationDictionary(abbreviationDictionary *raw.NSDictionary[*raw.NSString, *raw.NSString]) {
-	raw.NSTimeZoneSetAbbreviationDictionary(abbreviationDictionary)
-}
-
-// TimeZoneDataVersion calls the underlying NSTimeZoneTimeZoneDataVersion.
-func TimeZoneDataVersion() *String {
-	_r := raw.NSTimeZoneTimeZoneDataVersion()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// TimeZoneWithName calls the underlying NSTimeZoneTimeZoneWithName.
+// TimeZoneWithName returns the time zone object identified by a given identifier.
 func TimeZoneWithName(tzName string) *TimeZone {
-	_r := raw.NSTimeZoneTimeZoneWithName(foundation.NSStringStringWithUTF8String(tzName))
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneWithName:"), purego.NSString(tzName))
+	return TimeZoneFromID(_r)
 }
 
-// TimeZoneWithNameData calls the underlying NSTimeZoneTimeZoneWithNameData.
-func TimeZoneWithNameData(tzName string, aData *raw.NSData) *TimeZone {
-	_r := raw.NSTimeZoneTimeZoneWithNameData(foundation.NSStringStringWithUTF8String(tzName), aData)
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+// TimeZoneWithNameData returns the time zone with a given identifier whose data has been initialized using given data.
+func TimeZoneWithNameData(tzName string, aData *Data) *TimeZone {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneWithName:data:"), purego.NSString(tzName), objref.IDOf(aData))
+	return TimeZoneFromID(_r)
 }
 
-// TimeZoneForSecondsFromGMT calls the underlying NSTimeZoneTimeZoneForSecondsFromGMT.
+// TimeZoneForSecondsFromGMT returns a time zone object offset from Greenwich Mean Time by a given number of seconds.
 func TimeZoneForSecondsFromGMT(seconds int) *TimeZone {
-	_r := raw.NSTimeZoneTimeZoneForSecondsFromGMT(seconds)
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneForSecondsFromGMT:"), seconds)
+	return TimeZoneFromID(_r)
 }
 
-// TimeZoneWithAbbreviation calls the underlying NSTimeZoneTimeZoneWithAbbreviation.
+// TimeZoneWithAbbreviation returns the time zone object identified by a given abbreviation.
 func TimeZoneWithAbbreviation(abbreviation string) *TimeZone {
-	_r := raw.NSTimeZoneTimeZoneWithAbbreviation(foundation.NSStringStringWithUTF8String(abbreviation))
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneWithAbbreviation:"), purego.NSString(abbreviation))
+	return TimeZoneFromID(_r)
 }
 
-// TimerWithTimeIntervalInvocationRepeats calls the underlying NSTimerTimerWithTimeIntervalInvocationRepeats.
-func TimerWithTimeIntervalInvocationRepeats(ti float64, invocation *raw.NSInvocation, yesOrNo bool) *Timer {
-	_r := raw.NSTimerTimerWithTimeIntervalInvocationRepeats(ti, invocation, yesOrNo)
-	if _r == nil {
-		return nil
-	}
-	return &Timer{inner: _r}
+// TimerWithTimeIntervalInvocationRepeats wraps the corresponding Objective-C method.
+func TimerWithTimeIntervalInvocationRepeats(ti float64, invocation *Invocation, yesOrNo bool) *Timer {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("timerWithTimeInterval:invocation:repeats:"), ti, objref.IDOf(invocation), yesOrNo)
+	return TimerFromID(_r)
 }
 
-// ScheduledTimerWithTimeIntervalInvocationRepeats calls the underlying NSTimerScheduledTimerWithTimeIntervalInvocationRepeats.
-func ScheduledTimerWithTimeIntervalInvocationRepeats(ti float64, invocation *raw.NSInvocation, yesOrNo bool) *Timer {
-	_r := raw.NSTimerScheduledTimerWithTimeIntervalInvocationRepeats(ti, invocation, yesOrNo)
-	if _r == nil {
-		return nil
-	}
-	return &Timer{inner: _r}
+// ScheduledTimerWithTimeIntervalInvocationRepeats wraps the corresponding Objective-C method.
+func ScheduledTimerWithTimeIntervalInvocationRepeats(ti float64, invocation *Invocation, yesOrNo bool) *Timer {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("scheduledTimerWithTimeInterval:invocation:repeats:"), ti, objref.IDOf(invocation), yesOrNo)
+	return TimerFromID(_r)
 }
 
-// TimerWithTimeIntervalTargetSelectorUserInfoRepeats calls the underlying NSTimerTimerWithTimeIntervalTargetSelectorUserInfoRepeats.
-func TimerWithTimeIntervalTargetSelectorUserInfoRepeats(ti float64, aTarget objc.ID, aSelector objc.SEL, userInfo objc.ID, yesOrNo bool) *Timer {
-	_r := raw.NSTimerTimerWithTimeIntervalTargetSelectorUserInfoRepeats(ti, aTarget, aSelector, userInfo, yesOrNo)
-	if _r == nil {
-		return nil
-	}
-	return &Timer{inner: _r}
+// TimerWithTimeIntervalRepeatsBlock creates and returns a new NSTimer object initialized with the specified block object. This timer needs to be scheduled on a run loop (via -[NSRunLoop addTimer:]) before it will fire. - parameter:  timeInterval  The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
+func TimerWithTimeIntervalRepeatsBlock(interval float64, repeats bool, block func(obj.Object)) *Timer {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("timerWithTimeInterval:repeats:block:"), interval, repeats, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
+	return TimerFromID(_r)
 }
 
-// ScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats calls the underlying NSTimerScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats.
-func ScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats(ti float64, aTarget objc.ID, aSelector objc.SEL, userInfo objc.ID, yesOrNo bool) *Timer {
-	_r := raw.NSTimerScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats(ti, aTarget, aSelector, userInfo, yesOrNo)
-	if _r == nil {
-		return nil
-	}
-	return &Timer{inner: _r}
+// ScheduledTimerWithTimeIntervalRepeatsBlock creates and returns a new NSTimer object initialized with the specified block object and schedules it on the current run loop in the default mode. - parameter:  ti    The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
+func ScheduledTimerWithTimeIntervalRepeatsBlock(interval float64, repeats bool, block func(obj.Object)) *Timer {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("scheduledTimerWithTimeInterval:repeats:block:"), interval, repeats, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
+	return TimerFromID(_r)
 }
 
-// TimerWithTimeIntervalRepeatsBlock calls the underlying NSTimerTimerWithTimeIntervalRepeatsBlock.
-func TimerWithTimeIntervalRepeatsBlock(interval float64, repeats bool, block func(*raw.NSTimer)) *Timer {
-	_r := raw.NSTimerTimerWithTimeIntervalRepeatsBlock(interval, repeats, block)
-	if _r == nil {
-		return nil
-	}
-	return &Timer{inner: _r}
-}
-
-// ScheduledTimerWithTimeIntervalRepeatsBlock calls the underlying NSTimerScheduledTimerWithTimeIntervalRepeatsBlock.
-func ScheduledTimerWithTimeIntervalRepeatsBlock(interval float64, repeats bool, block func(*raw.NSTimer)) *Timer {
-	_r := raw.NSTimerScheduledTimerWithTimeIntervalRepeatsBlock(interval, repeats, block)
-	if _r == nil {
-		return nil
-	}
-	return &Timer{inner: _r}
-}
-
-// FileURLWithPathIsDirectoryRelativeToURL calls the underlying NSURLFileURLWithPathIsDirectoryRelativeToURL.
+// FileURLWithPathIsDirectoryRelativeToURL initializes and returns a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 func FileURLWithPathIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
-	_r := raw.NSURLFileURLWithPathIsDirectoryRelativeToURL(foundation.NSStringStringWithUTF8String(path), isDir, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:isDirectory:relativeToURL:"), purego.NSString(path), isDir, rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// FileURLWithPathRelativeToURL calls the underlying NSURLFileURLWithPathRelativeToURL.
+// FileURLWithPathRelativeToURL initializes and returns a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 func FileURLWithPathRelativeToURL(path string, baseURL string) *URL {
-	_r := raw.NSURLFileURLWithPathRelativeToURL(foundation.NSStringStringWithUTF8String(path), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:relativeToURL:"), purego.NSString(path), rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// FileURLWithPathIsDirectory calls the underlying NSURLFileURLWithPathIsDirectory.
+// FileURLWithPathIsDirectory initializes and returns a newly created NSURL object as a file URL with a specified path.
 func FileURLWithPathIsDirectory(path string, isDir bool) *URL {
-	_r := raw.NSURLFileURLWithPathIsDirectory(foundation.NSStringStringWithUTF8String(path), isDir)
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:isDirectory:"), purego.NSString(path), isDir)
+	return URLFromID(_r)
 }
 
-// FileURLWithPath calls the underlying NSURLFileURLWithPath.
+// FileURLWithPath initializes and returns a newly created NSURL object as a file URL with a specified path.
 func FileURLWithPath(path string) *URL {
-	_r := raw.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:"), purego.NSString(path))
+	return URLFromID(_r)
 }
 
-// FileURLWithFileSystemRepresentationIsDirectoryRelativeToURL calls the underlying NSURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL.
+// FileURLWithFileSystemRepresentationIsDirectoryRelativeToURL returns a new URL object initialized with a C string representing a local file system path.
 func FileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
-	_r := raw.NSURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path, isDir, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithFileSystemRepresentation:isDirectory:relativeToURL:"), path, isDir, rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// URLWithString calls the underlying NSURLURLWithString.
+// URLWithString creates and returns an NSURL object initialized with a provided URL string.
 func URLWithString(uRLString string) *URL {
-	_r := raw.NSURLURLWithString(foundation.NSStringStringWithUTF8String(uRLString))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:"), purego.NSString(uRLString))
+	return URLFromID(_r)
 }
 
-// URLWithStringRelativeToURL calls the underlying NSURLURLWithStringRelativeToURL.
+// URLWithStringRelativeToURL creates and returns an NSURL object initialized with a base URL and a relative string.
 func URLWithStringRelativeToURL(uRLString string, baseURL string) *URL {
-	_r := raw.NSURLURLWithStringRelativeToURL(foundation.NSStringStringWithUTF8String(uRLString), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:relativeToURL:"), purego.NSString(uRLString), rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// URLWithStringEncodingInvalidCharacters calls the underlying NSURLURLWithStringEncodingInvalidCharacters.
+// URLWithStringEncodingInvalidCharacters creates and returns an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 func URLWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URL {
-	_r := raw.NSURLURLWithStringEncodingInvalidCharacters(foundation.NSStringStringWithUTF8String(uRLString), encodingInvalidCharacters)
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:encodingInvalidCharacters:"), purego.NSString(uRLString), encodingInvalidCharacters)
+	return URLFromID(_r)
 }
 
-// URLWithDataRepresentationRelativeToURL calls the underlying NSURLURLWithDataRepresentationRelativeToURL.
-func URLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string) *URL {
-	_r := raw.NSURLURLWithDataRepresentationRelativeToURL(data, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+// URLWithDataRepresentationRelativeToURL initializes and returns a newly created NSURL using the contents of the given data, relative to a base URL.
+func URLWithDataRepresentationRelativeToURL(data *Data, baseURL string) *URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithDataRepresentation:relativeToURL:"), objref.IDOf(data), rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// AbsoluteURLWithDataRepresentationRelativeToURL calls the underlying NSURLAbsoluteURLWithDataRepresentationRelativeToURL.
-func AbsoluteURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string) *URL {
-	_r := raw.NSURLAbsoluteURLWithDataRepresentationRelativeToURL(data, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+// AbsoluteURLWithDataRepresentationRelativeToURL initializes and returns a newly created absolute NSURL using the contents of the given data, relative to a base URL.
+func AbsoluteURLWithDataRepresentationRelativeToURL(data *Data, baseURL string) *URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("absoluteURLWithDataRepresentation:relativeToURL:"), objref.IDOf(data), rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError calls the underlying NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError.
-func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
-	_r, _err := raw.NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData, raw.NSURLBookmarkResolutionOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)), isStale)
-	if _err != nil {
-		return nil, _err
+// URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError returns a new URL made by resolving bookmark data.
+func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *Data, options URLBookmarkResolutionOptions, relativeURL string) (result *URL, isStale bool, err error) {
+	var _out0 bool
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:"), objref.IDOf(bookmarkData), options, rt.FileURL(relativeURL), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_v := URLFromID(_r)
+	if _nsErr != 0 {
+		return nil, false, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &URL{inner: _r}, nil
+	return _v, _out0, nil
 }
 
-// ResourceValuesForKeysFromBookmarkData calls the underlying NSURLResourceValuesForKeysFromBookmarkData.
-func ResourceValuesForKeysFromBookmarkData(keys *raw.NSArray[*raw.NSString], bookmarkData *raw.NSData) *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return raw.NSURLResourceValuesForKeysFromBookmarkData(keys, bookmarkData)
+// ResourceValuesForKeysFromBookmarkData returns the resource values for properties identified by a specified array of keys contained in specified bookmark data.
+func ResourceValuesForKeysFromBookmarkData(keys []*String, bookmarkData *Data) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("resourceValuesForKeys:fromBookmarkData:"), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), objref.IDOf(bookmarkData))
+	return obj.Wrap(_r)
 }
 
-// WriteBookmarkDataToURLOptionsError calls the underlying NSURLWriteBookmarkDataToURLOptionsError.
-func WriteBookmarkDataToURLOptionsError(bookmarkData *raw.NSData, bookmarkFileURL string, options uint) (bool, error) {
-	return raw.NSURLWriteBookmarkDataToURLOptionsError(bookmarkData, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(bookmarkFileURL)), options)
+// WriteBookmarkDataToURLOptions creates an alias file on disk at a specified location with specified bookmark data.
+func WriteBookmarkDataToURLOptions(bookmarkData *Data, bookmarkFileURL string, options int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("NSURL")), objc.RegisterName("writeBookmarkData:toURL:options:error:"), objref.IDOf(bookmarkData), rt.FileURL(bookmarkFileURL), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// BookmarkDataWithContentsOfURLError calls the underlying NSURLBookmarkDataWithContentsOfURLError.
-func BookmarkDataWithContentsOfURLError(bookmarkFileURL string) (*Data, error) {
-	_r, _err := raw.NSURLBookmarkDataWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(bookmarkFileURL)))
-	if _err != nil {
-		return nil, _err
+// BookmarkDataWithContentsOfURLError initializes and returns bookmark data derived from an alias file pointed to by a specified URL.
+func BookmarkDataWithContentsOfURLError(bookmarkFileURL string) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("bookmarkDataWithContentsOfURL:error:"), rt.FileURL(bookmarkFileURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Data{inner: _r}, nil
+	return DataFromID(_r), nil
 }
 
-// URLByResolvingAliasFileAtURLOptionsError calls the underlying NSURLURLByResolvingAliasFileAtURLOptionsError.
-func URLByResolvingAliasFileAtURLOptionsError(url string, options NSURLBookmarkResolutionOptions) (*URL, error) {
-	_r, _err := raw.NSURLURLByResolvingAliasFileAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSURLBookmarkResolutionOptions(options))
-	if _err != nil {
-		return nil, _err
+// URLByResolvingAliasFileAtURLOptionsError returns a new URL made by resolving the alias file at url.
+func URLByResolvingAliasFileAtURLOptionsError(url string, options URLBookmarkResolutionOptions) (result *URL, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLByResolvingAliasFileAtURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &URL{inner: _r}, nil
+	return URLFromID(_r), nil
 }
 
-// FileURLWithPathComponents calls the underlying NSURLFileURLWithPathComponents.
-func FileURLWithPathComponents(components ...StringProvider) *URL {
-	_ptrs := make([]objc.ID, len(components))
-	for _i, _v := range components {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.NSURLFileURLWithPathComponents(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+// FileURLWithPathComponents initializes and returns a newly created NSURL object as a file URL with specified path components.
+func FileURLWithPathComponents(components []string) *URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPathComponents:"), purego.SliceToNSArray(components, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return URLFromID(_r)
 }
 
-// SharedURLCache calls the underlying NSURLCacheSharedURLCache.
+// SharedURLCache returns the shared NSURLCache instance or sets the NSURLCache instance shared by all clients of the current process. This will be the new object returned when calls to the <tt>sharedURLCache</tt> method are made. Unless set explicitly through a call to <tt>+setSharedURLCache:</tt>, this method returns an NSURLCache instance created with the following default values: <ul> <li>Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) <li>Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) <li>Disk path: <nobr>(user home directory)/Library/Caches/(application bundle id)</nobr> </ul> <p>Users who do not have special caching requirements or constraints should find the default shared cache instance acceptable. If this default shared cache instance is not acceptable, <tt>+setSharedURLCache:</tt> can be called to set a different NSURLCache instance to be returned from this method. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache. This is to prevent storing cache data from becoming unexpectedly unretrievable.
 func SharedURLCache() *URLCache {
-	_r := raw.NSURLCacheSharedURLCache()
-	if _r == nil {
-		return nil
-	}
-	return &URLCache{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCache")), objc.RegisterName("sharedURLCache"))
+	return URLCacheFromID(_r)
 }
 
-// SetSharedURLCache calls the underlying NSURLCacheSetSharedURLCache.
-func SetSharedURLCache(sharedURLCache *raw.NSURLCache) {
-	raw.NSURLCacheSetSharedURLCache(sharedURLCache)
+// SetSharedURLCache wraps the corresponding Objective-C method.
+func SetSharedURLCache(sharedURLCache *URLCache) {
+	objc.Send[objc.ID](objc.ID(_class("NSURLCache")), objc.RegisterName("setSharedURLCache:"), objref.IDOf(sharedURLCache))
 }
 
-// ComponentsWithURLResolvingAgainstBaseURL calls the underlying NSURLComponentsComponentsWithURLResolvingAgainstBaseURL.
+// ComponentsWithURLResolvingAgainstBaseURL returns a URL components object by parsing the URL from an NSURL object.
 func ComponentsWithURLResolvingAgainstBaseURL(url string, resolve bool) *URLComponents {
-	_r := raw.NSURLComponentsComponentsWithURLResolvingAgainstBaseURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), resolve)
-	if _r == nil {
-		return nil
-	}
-	return &URLComponents{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithURL:resolvingAgainstBaseURL:"), rt.FileURL(url), resolve)
+	return URLComponentsFromID(_r)
 }
 
-// ComponentsWithString calls the underlying NSURLComponentsComponentsWithString.
+// ComponentsWithString returns a URL components object by parsing a URL in string form.
 func ComponentsWithString(uRLString string) *URLComponents {
-	_r := raw.NSURLComponentsComponentsWithString(foundation.NSStringStringWithUTF8String(uRLString))
-	if _r == nil {
-		return nil
-	}
-	return &URLComponents{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithString:"), purego.NSString(uRLString))
+	return URLComponentsFromID(_r)
 }
 
-// ComponentsWithStringEncodingInvalidCharacters calls the underlying NSURLComponentsComponentsWithStringEncodingInvalidCharacters.
+// ComponentsWithStringEncodingInvalidCharacters returns a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 func ComponentsWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URLComponents {
-	_r := raw.NSURLComponentsComponentsWithStringEncodingInvalidCharacters(foundation.NSStringStringWithUTF8String(uRLString), encodingInvalidCharacters)
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithString:encodingInvalidCharacters:"), purego.NSString(uRLString), encodingInvalidCharacters)
+	return URLComponentsFromID(_r)
+}
+
+// ConnectionWithRequestDelegate creates and returns an initialized URL connection and begins to load the data for the URL request.
+func ConnectionWithRequestDelegate(request *URLRequest, delegate obj.Object) *URLConnection {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("connectionWithRequest:delegate:"), objref.IDOf(request), objref.IDOf(delegate))
+	return URLConnectionFromID(_r)
+}
+
+// CanHandleRequest returns whether a request can be handled based on a preflight evaluation.
+func CanHandleRequest(request *URLRequest) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSURLConnection")), objc.RegisterName("canHandleRequest:"), objref.IDOf(request))
+	return _r
+}
+
+// SendSynchronousRequestReturningResponseError performs a synchronous load of the specified URL request.
+func SendSynchronousRequestReturningResponseError(request *URLRequest, response *URLResponse) (result *Data, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("sendSynchronousRequest:returningResponse:error:"), objref.IDOf(request), objref.IDOf(response), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &URLComponents{inner: _r}
+	return DataFromID(_r), nil
 }
 
-// ConnectionWithRequestDelegate calls the underlying NSURLConnectionConnectionWithRequestDelegate.
-func ConnectionWithRequestDelegate(request *raw.NSURLRequest, delegate objc.ID) *URLConnection {
-	_r := raw.NSURLConnectionConnectionWithRequestDelegate(request, delegate)
-	if _r == nil {
-		return nil
-	}
-	return &URLConnection{inner: _r}
+// CredentialWithUserPasswordPersistence creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.
+func CredentialWithUserPasswordPersistence(user string, password string, persistence URLCredentialPersistence) *URLCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialWithUser:password:persistence:"), purego.NSString(user), purego.NSString(password), persistence)
+	return URLCredentialFromID(_r)
 }
 
-// CanHandleRequest calls the underlying NSURLConnectionCanHandleRequest.
-func CanHandleRequest(request *raw.NSURLRequest) bool {
-	return raw.NSURLConnectionCanHandleRequest(request)
+// CredentialWithIdentityCertificatesPersistence creates a URL credential instance for resolving a client certificate authentication challenge.
+func CredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialWithIdentity:certificates:persistence:"), objref.IDOf(identity), objref.IDOf(certArray), persistence)
+	return URLCredentialFromID(_r)
 }
 
-// SendSynchronousRequestReturningResponseError calls the underlying NSURLConnectionSendSynchronousRequestReturningResponseError.
-func SendSynchronousRequestReturningResponseError(request *raw.NSURLRequest, response *raw.NSURLResponse) (*Data, error) {
-	_r, _err := raw.NSURLConnectionSendSynchronousRequestReturningResponseError(request, response)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Data{inner: _r}, nil
+// CredentialForTrust creates a URL credential instance for server trust authentication with a given accepted trust.
+func CredentialForTrust(trust obj.Object) *URLCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialForTrust:"), objref.IDOf(trust))
+	return URLCredentialFromID(_r)
 }
 
-// SendAsynchronousRequestQueueCompletionHandler calls the underlying NSURLConnectionSendAsynchronousRequestQueueCompletionHandler.
-func SendAsynchronousRequestQueueCompletionHandler(request *raw.NSURLRequest, queue *raw.NSOperationQueue, handler func(*raw.NSURLResponse, *raw.NSData, unsafe.Pointer)) {
-	raw.NSURLConnectionSendAsynchronousRequestQueueCompletionHandler(request, queue, handler)
-}
-
-// CredentialWithUserPasswordPersistence calls the underlying NSURLCredentialCredentialWithUserPasswordPersistence.
-func CredentialWithUserPasswordPersistence(user string, password string, persistence NSURLCredentialPersistence) *URLCredential {
-	_r := raw.NSURLCredentialCredentialWithUserPasswordPersistence(foundation.NSStringStringWithUTF8String(user), foundation.NSStringStringWithUTF8String(password), raw.NSURLCredentialPersistence(persistence))
-	if _r == nil {
-		return nil
-	}
-	return &URLCredential{inner: _r}
-}
-
-// CredentialWithIdentityCertificatesPersistence calls the underlying NSURLCredentialCredentialWithIdentityCertificatesPersistence.
-func CredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence NSURLCredentialPersistence) *URLCredential {
-	_r := raw.NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity, certArray, raw.NSURLCredentialPersistence(persistence))
-	if _r == nil {
-		return nil
-	}
-	return &URLCredential{inner: _r}
-}
-
-// CredentialForTrust calls the underlying NSURLCredentialCredentialForTrust.
-func CredentialForTrust(trust unsafe.Pointer) *URLCredential {
-	_r := raw.NSURLCredentialCredentialForTrust(trust)
-	if _r == nil {
-		return nil
-	}
-	return &URLCredential{inner: _r}
-}
-
-// SharedCredentialStorage calls the underlying NSURLCredentialStorageSharedCredentialStorage.
+// SharedCredentialStorage get the shared singleton authentication storage
 func SharedCredentialStorage() *URLCredentialStorage {
-	_r := raw.NSURLCredentialStorageSharedCredentialStorage()
-	if _r == nil {
-		return nil
-	}
-	return &URLCredentialStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredentialStorage")), objc.RegisterName("sharedCredentialStorage"))
+	return URLCredentialStorageFromID(_r)
 }
 
-// CanResumeDownloadDecodedWithEncodingMIMEType calls the underlying NSURLDownloadCanResumeDownloadDecodedWithEncodingMIMEType.
+// CanResumeDownloadDecodedWithEncodingMIMEType returns whether a URL download object can resume a download that was decoded with the specified MIME type.
 func CanResumeDownloadDecodedWithEncodingMIMEType(mIMEType string) bool {
-	return raw.NSURLDownloadCanResumeDownloadDecodedWithEncodingMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
+	_r := objc.Send[bool](objc.ID(_class("NSURLDownload")), objc.RegisterName("canResumeDownloadDecodedWithEncodingMIMEType:"), purego.NSString(mIMEType))
+	return _r
 }
 
-// RegisterURLHandleClass calls the underlying NSURLHandleRegisterURLHandleClass.
-func RegisterURLHandleClass(anURLHandleSubclass objc.Class) {
-	raw.NSURLHandleRegisterURLHandleClass(anURLHandleSubclass)
-}
-
-// URLHandleClassForURL calls the underlying NSURLHandleURLHandleClassForURL.
-func URLHandleClassForURL(anURL string) objc.Class {
-	return raw.NSURLHandleURLHandleClassForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(anURL)))
-}
-
-// CanInitWithURL calls the underlying NSURLHandleCanInitWithURL.
+// CanInitWithURL returns whether a URL handle can be initialized with a given URL.
 func CanInitWithURL(anURL string) bool {
-	return raw.NSURLHandleCanInitWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(anURL)))
+	_r := objc.Send[bool](objc.ID(_class("NSURLHandle")), objc.RegisterName("canInitWithURL:"), rt.FileURL(anURL))
+	return _r
 }
 
-// CachedHandleForURL calls the underlying NSURLHandleCachedHandleForURL.
+// CachedHandleForURL returns the URL handle from the cache that has serviced the specified URL or another identical URL.
 func CachedHandleForURL(anURL string) *URLHandle {
-	_r := raw.NSURLHandleCachedHandleForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(anURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URLHandle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLHandle")), objc.RegisterName("cachedHandleForURL:"), rt.FileURL(anURL))
+	return URLHandleFromID(_r)
 }
 
-// CanInitWithRequest calls the underlying NSURLProtocolCanInitWithRequest.
-func CanInitWithRequest(request *raw.NSURLRequest) bool {
-	return raw.NSURLProtocolCanInitWithRequest(request)
+// CanInitWithRequest this method determines whether this protocol can handle the given request. A concrete subclass should inspect the given request and determine whether or not the implementation can perform a load with that request. This is an abstract method. Subclasses must provide an implementation.
+func CanInitWithRequest(request *URLRequest) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canInitWithRequest:"), objref.IDOf(request))
+	return _r
 }
 
-// CanonicalRequestForRequest calls the underlying NSURLProtocolCanonicalRequestForRequest.
-func CanonicalRequestForRequest(request *raw.NSURLRequest) *URLRequest {
-	_r := raw.NSURLProtocolCanonicalRequestForRequest(request)
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+// CanonicalRequestForRequest this method returns a canonical version of the given request. It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between NSURLRequest objects. <p> This is an abstract method; subclasses must provide an implementation.
+func CanonicalRequestForRequest(request *URLRequest) *URLRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canonicalRequestForRequest:"), objref.IDOf(request))
+	return URLRequestFromID(_r)
 }
 
-// RequestIsCacheEquivalentToRequest calls the underlying NSURLProtocolRequestIsCacheEquivalentToRequest.
-func RequestIsCacheEquivalentToRequest(a *raw.NSURLRequest, b *raw.NSURLRequest) bool {
-	return raw.NSURLProtocolRequestIsCacheEquivalentToRequest(a, b)
+// RequestIsCacheEquivalentToRequest compares two requests for equivalence with regard to caching. Requests are considered equivalent for cache purposes if and only if they would be handled by the same protocol AND that protocol declares them equivalent after performing implementation-specific checks.
+func RequestIsCacheEquivalentToRequest(a *URLRequest, b *URLRequest) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("requestIsCacheEquivalent:toRequest:"), objref.IDOf(a), objref.IDOf(b))
+	return _r
 }
 
-// PropertyForKeyInRequest calls the underlying NSURLProtocolPropertyForKeyInRequest.
-func PropertyForKeyInRequest(key string, request *raw.NSURLRequest) objc.ID {
-	return raw.NSURLProtocolPropertyForKeyInRequest(foundation.NSStringStringWithUTF8String(key), request)
+// PropertyForKeyInRequest returns the property in the given request previously stored with the given key. The purpose of this method is to provide an interface for protocol implementors to access protocol-specific information associated with NSURLRequest objects.
+func PropertyForKeyInRequest(key string, request *URLRequest) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("propertyForKey:inRequest:"), purego.NSString(key), objref.IDOf(request))
+	return obj.Wrap(_r)
 }
 
-// SetPropertyForKeyInRequest calls the underlying NSURLProtocolSetPropertyForKeyInRequest.
-func SetPropertyForKeyInRequest(value objc.ID, key string, request *raw.NSMutableURLRequest) {
-	raw.NSURLProtocolSetPropertyForKeyInRequest(value, foundation.NSStringStringWithUTF8String(key), request)
+// SetPropertyForKeyInRequest stores the given property in the given request using the given key. The purpose of this method is to provide an interface for protocol implementors to customize protocol-specific information associated with NSMutableURLRequest objects.
+func SetPropertyForKeyInRequest(value obj.Object, key string, request *MutableURLRequest) {
+	objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("setProperty:forKey:inRequest:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(request))
 }
 
-// RemovePropertyForKeyInRequest calls the underlying NSURLProtocolRemovePropertyForKeyInRequest.
-func RemovePropertyForKeyInRequest(key string, request *raw.NSMutableURLRequest) {
-	raw.NSURLProtocolRemovePropertyForKeyInRequest(foundation.NSStringStringWithUTF8String(key), request)
+// RemovePropertyForKeyInRequest remove any property stored under the given key Like setProperty:forKey:inRequest: above, the purpose of this method is to give protocol implementors the ability to store protocol-specific information in an NSURLRequest
+func RemovePropertyForKeyInRequest(key string, request *MutableURLRequest) {
+	objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("removePropertyForKey:inRequest:"), purego.NSString(key), objref.IDOf(request))
 }
 
-// RegisterClass calls the underlying NSURLProtocolRegisterClass.
-func RegisterClass(protocolClass objc.Class) bool {
-	return raw.NSURLProtocolRegisterClass(protocolClass)
+// CanInitWithTask wraps the corresponding Objective-C method.
+func CanInitWithTask(task *URLSessionTask) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canInitWithTask:"), objref.IDOf(task))
+	return _r
 }
 
-// UnregisterClass calls the underlying NSURLProtocolUnregisterClass.
-func UnregisterClass(protocolClass objc.Class) {
-	raw.NSURLProtocolUnregisterClass(protocolClass)
-}
-
-// CanInitWithTask calls the underlying NSURLProtocolCanInitWithTask.
-func CanInitWithTask(task *raw.NSURLSessionTask) bool {
-	return raw.NSURLProtocolCanInitWithTask(task)
-}
-
-// QueryItemWithNameValue calls the underlying NSURLQueryItemQueryItemWithNameValue.
+// QueryItemWithNameValue creates a new query item with the specified name and value.
 func QueryItemWithNameValue(name string, value string) *URLQueryItem {
-	_r := raw.NSURLQueryItemQueryItemWithNameValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(value))
-	if _r == nil {
-		return nil
-	}
-	return &URLQueryItem{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLQueryItem")), objc.RegisterName("queryItemWithName:value:"), purego.NSString(name), purego.NSString(value))
+	return URLQueryItemFromID(_r)
 }
 
-// RequestWithURL calls the underlying NSURLRequestRequestWithURL.
+// RequestWithURL creates and returns a URL request for a specified URL.
 func RequestWithURL(uRL string) *URLRequest {
-	_r := raw.NSURLRequestRequestWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("requestWithURL:"), rt.FileURL(uRL))
+	return URLRequestFromID(_r)
 }
 
-// RequestWithURLCachePolicyTimeoutInterval calls the underlying NSURLRequestRequestWithURLCachePolicyTimeoutInterval.
-func RequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
-	_r := raw.NSURLRequestRequestWithURLCachePolicyTimeoutInterval(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), raw.NSURLRequestCachePolicy(cachePolicy), timeoutInterval)
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+// RequestWithURLCachePolicyTimeoutInterval creates and returns an initialized URL request with specified URL, cache policy, and timeout values.
+func RequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLRequestCachePolicy, timeoutInterval float64) *URLRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("requestWithURL:cachePolicy:timeoutInterval:"), rt.FileURL(uRL), cachePolicy, timeoutInterval)
+	return URLRequestFromID(_r)
 }
 
-// SupportsSecureCoding calls the underlying NSURLRequestSupportsSecureCoding.
+// SupportsSecureCoding indicates that NSURLRequest implements the NSSecureCoding protocol.
 func SupportsSecureCoding() bool {
-	return raw.NSURLRequestSupportsSecureCoding()
+	_r := objc.Send[bool](objc.ID(_class("NSURLRequest")), objc.RegisterName("supportsSecureCoding"))
+	return _r
 }
 
-// SessionWithConfiguration calls the underlying NSURLSessionSessionWithConfiguration.
-func SessionWithConfiguration(configuration *raw.NSURLSessionConfiguration) *URLSession {
-	_r := raw.NSURLSessionSessionWithConfiguration(configuration)
-	if _r == nil {
-		return nil
-	}
-	return &URLSession{inner: _r}
+// SessionWithConfiguration wraps the corresponding Objective-C method.
+func SessionWithConfiguration(configuration *URLSessionConfiguration) *URLSession {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("sessionWithConfiguration:"), objref.IDOf(configuration))
+	return URLSessionFromID(_r)
 }
 
-// SessionWithConfigurationDelegateDelegateQueue calls the underlying NSURLSessionSessionWithConfigurationDelegateDelegateQueue.
-func SessionWithConfigurationDelegateDelegateQueue(configuration *raw.NSURLSessionConfiguration, delegate raw.NSURLSessionDelegate, queue *raw.NSOperationQueue) *URLSession {
-	_r := raw.NSURLSessionSessionWithConfigurationDelegateDelegateQueue(configuration, delegate, queue)
-	if _r == nil {
-		return nil
-	}
-	return &URLSession{inner: _r}
-}
-
-// NSURLSessionNew calls the underlying NSURLSessionNew.
+// NSURLSessionNew wraps the corresponding Objective-C method.
 func NSURLSessionNew() *URLSession {
-	_r := raw.NSURLSessionNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSession{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("new"))
+	return URLSessionFromID(_r)
 }
 
-// SharedSession calls the underlying NSURLSessionSharedSession.
+// SharedSession wraps the corresponding Objective-C method.
 func SharedSession() *URLSession {
-	_r := raw.NSURLSessionSharedSession()
-	if _r == nil {
-		return nil
-	}
-	return &URLSession{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("sharedSession"))
+	return URLSessionFromID(_r)
 }
 
-// BackgroundSessionConfigurationWithIdentifier calls the underlying NSURLSessionConfigurationBackgroundSessionConfigurationWithIdentifier.
+// BackgroundSessionConfigurationWithIdentifier wraps the corresponding Objective-C method.
 func BackgroundSessionConfigurationWithIdentifier(identifier string) *URLSessionConfiguration {
-	_r := raw.NSURLSessionConfigurationBackgroundSessionConfigurationWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("backgroundSessionConfigurationWithIdentifier:"), purego.NSString(identifier))
+	return URLSessionConfigurationFromID(_r)
 }
 
-// NSURLSessionConfigurationNew calls the underlying NSURLSessionConfigurationNew.
+// NSURLSessionConfigurationNew wraps the corresponding Objective-C method.
 func NSURLSessionConfigurationNew() *URLSessionConfiguration {
-	_r := raw.NSURLSessionConfigurationNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("new"))
+	return URLSessionConfigurationFromID(_r)
 }
 
-// DefaultSessionConfiguration calls the underlying NSURLSessionConfigurationDefaultSessionConfiguration.
+// DefaultSessionConfiguration wraps the corresponding Objective-C method.
 func DefaultSessionConfiguration() *URLSessionConfiguration {
-	_r := raw.NSURLSessionConfigurationDefaultSessionConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("defaultSessionConfiguration"))
+	return URLSessionConfigurationFromID(_r)
 }
 
-// EphemeralSessionConfiguration calls the underlying NSURLSessionConfigurationEphemeralSessionConfiguration.
+// EphemeralSessionConfiguration wraps the corresponding Objective-C method.
 func EphemeralSessionConfiguration() *URLSessionConfiguration {
-	_r := raw.NSURLSessionConfigurationEphemeralSessionConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("ephemeralSessionConfiguration"))
+	return URLSessionConfigurationFromID(_r)
 }
 
-// BackgroundSessionConfiguration calls the underlying NSURLSessionConfigurationBackgroundSessionConfiguration.
+// BackgroundSessionConfiguration wraps the corresponding Objective-C method.
 func BackgroundSessionConfiguration(identifier string) *URLSessionConfiguration {
-	_r := raw.NSURLSessionConfigurationBackgroundSessionConfiguration(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("backgroundSessionConfiguration:"), purego.NSString(identifier))
+	return URLSessionConfigurationFromID(_r)
 }
 
-// NSURLSessionDataTaskNew calls the underlying NSURLSessionDataTaskNew.
+// NSURLSessionDataTaskNew wraps the corresponding Objective-C method.
 func NSURLSessionDataTaskNew() *URLSessionDataTask {
-	_r := raw.NSURLSessionDataTaskNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionDataTask{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDataTask")), objc.RegisterName("new"))
+	return URLSessionDataTaskFromID(_r)
 }
 
-// NSURLSessionDownloadTaskNew calls the underlying NSURLSessionDownloadTaskNew.
+// NSURLSessionDownloadTaskNew wraps the corresponding Objective-C method.
 func NSURLSessionDownloadTaskNew() *URLSessionDownloadTask {
-	_r := raw.NSURLSessionDownloadTaskNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionDownloadTask{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDownloadTask")), objc.RegisterName("new"))
+	return URLSessionDownloadTaskFromID(_r)
 }
 
-// NSURLSessionStreamTaskNew calls the underlying NSURLSessionStreamTaskNew.
+// NSURLSessionStreamTaskNew wraps the corresponding Objective-C method.
 func NSURLSessionStreamTaskNew() *URLSessionStreamTask {
-	_r := raw.NSURLSessionStreamTaskNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionStreamTask{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionStreamTask")), objc.RegisterName("new"))
+	return URLSessionStreamTaskFromID(_r)
 }
 
-// NSURLSessionTaskNew calls the underlying NSURLSessionTaskNew.
+// NSURLSessionTaskNew wraps the corresponding Objective-C method.
 func NSURLSessionTaskNew() *URLSessionTask {
-	_r := raw.NSURLSessionTaskNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionTask{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTask")), objc.RegisterName("new"))
+	return URLSessionTaskFromID(_r)
 }
 
-// NSURLSessionTaskMetricsNew calls the underlying NSURLSessionTaskMetricsNew.
+// NSURLSessionTaskMetricsNew wraps the corresponding Objective-C method.
 func NSURLSessionTaskMetricsNew() *URLSessionTaskMetrics {
-	_r := raw.NSURLSessionTaskMetricsNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionTaskMetrics{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskMetrics")), objc.RegisterName("new"))
+	return URLSessionTaskMetricsFromID(_r)
 }
 
-// NSURLSessionTaskTransactionMetricsNew calls the underlying NSURLSessionTaskTransactionMetricsNew.
+// NSURLSessionTaskTransactionMetricsNew wraps the corresponding Objective-C method.
 func NSURLSessionTaskTransactionMetricsNew() *URLSessionTaskTransactionMetrics {
-	_r := raw.NSURLSessionTaskTransactionMetricsNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionTaskTransactionMetrics{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskTransactionMetrics")), objc.RegisterName("new"))
+	return URLSessionTaskTransactionMetricsFromID(_r)
 }
 
-// NSURLSessionUploadTaskNew calls the underlying NSURLSessionUploadTaskNew.
+// NSURLSessionUploadTaskNew wraps the corresponding Objective-C method.
 func NSURLSessionUploadTaskNew() *URLSessionUploadTask {
-	_r := raw.NSURLSessionUploadTaskNew()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionUploadTask{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionUploadTask")), objc.RegisterName("new"))
+	return URLSessionUploadTaskFromID(_r)
 }
 
-// NSUUIDUUID calls the underlying NSUUIDUUID.
+// NSUUIDUUID create and returns a new UUID with RFC 4122 version 4 random bytes.
 func NSUUIDUUID() *UUID {
-	_r := raw.NSUUIDUUID()
-	if _r == nil {
-		return nil
-	}
-	return &UUID{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUUID")), objc.RegisterName("UUID"))
+	return UUIDFromID(_r)
 }
 
-// DefaultStore calls the underlying NSUbiquitousKeyValueStoreDefaultStore.
+// DefaultStore wraps the corresponding Objective-C method.
 func DefaultStore() *UbiquitousKeyValueStore {
-	_r := raw.NSUbiquitousKeyValueStoreDefaultStore()
-	if _r == nil {
-		return nil
-	}
-	return &UbiquitousKeyValueStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUbiquitousKeyValueStore")), objc.RegisterName("defaultStore"))
+	return UbiquitousKeyValueStoreFromID(_r)
 }
 
-// NSUnarchiverUnarchiveObjectWithData calls the underlying NSUnarchiverUnarchiveObjectWithData.
-func NSUnarchiverUnarchiveObjectWithData(data *raw.NSData) objc.ID {
-	return raw.NSUnarchiverUnarchiveObjectWithData(data)
+// NSUnarchiverUnarchiveObjectWithData decodes and returns the object archived in a given NSData object.
+func NSUnarchiverUnarchiveObjectWithData(data *Data) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("unarchiveObjectWithData:"), objref.IDOf(data))
+	return obj.Wrap(_r)
 }
 
-// NSUnarchiverUnarchiveObjectWithFile calls the underlying NSUnarchiverUnarchiveObjectWithFile.
-func NSUnarchiverUnarchiveObjectWithFile(path string) objc.ID {
-	return raw.NSUnarchiverUnarchiveObjectWithFile(foundation.NSStringStringWithUTF8String(path))
+// NSUnarchiverUnarchiveObjectWithFile decodes and returns the object archived in the file path.
+func NSUnarchiverUnarchiveObjectWithFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("unarchiveObjectWithFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// DecodeClassNameAsClassName calls the underlying NSUnarchiverDecodeClassNameAsClassName.
+// DecodeClassNameAsClassName instructs instances of NSUnarchiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
 func DecodeClassNameAsClassName(inArchiveName string, trueName string) {
-	raw.NSUnarchiverDecodeClassNameAsClassName(foundation.NSStringStringWithUTF8String(inArchiveName), foundation.NSStringStringWithUTF8String(trueName))
+	objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("decodeClassName:asClassName:"), purego.NSString(inArchiveName), purego.NSString(trueName))
 }
 
-// ClassNameDecodedForArchiveClassName calls the underlying NSUnarchiverClassNameDecodedForArchiveClassName.
-func ClassNameDecodedForArchiveClassName(inArchiveName string) *String {
-	_r := raw.NSUnarchiverClassNameDecodedForArchiveClassName(foundation.NSStringStringWithUTF8String(inArchiveName))
-	if _r == nil {
-		return nil
+// ClassNameDecodedForArchiveClassName returns the name of the class used when instantiating objects whose ostensible class, according to the archived data, is a given name.
+func ClassNameDecodedForArchiveClassName(inArchiveName string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("classNameDecodedForArchiveClassName:"), purego.NSString(inArchiveName))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// MetersPerSecondSquared calls the underlying NSUnitAccelerationMetersPerSecondSquared.
+// MetersPerSecondSquared wraps the corresponding Objective-C method.
 func MetersPerSecondSquared() *UnitAcceleration {
-	_r := raw.NSUnitAccelerationMetersPerSecondSquared()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAcceleration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("metersPerSecondSquared"))
+	return UnitAccelerationFromID(_r)
 }
 
-// Gravity calls the underlying NSUnitAccelerationGravity.
+// Gravity wraps the corresponding Objective-C method.
 func Gravity() *UnitAcceleration {
-	_r := raw.NSUnitAccelerationGravity()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAcceleration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("gravity"))
+	return UnitAccelerationFromID(_r)
 }
 
-// Degrees calls the underlying NSUnitAngleDegrees.
+// Degrees wraps the corresponding Objective-C method.
 func Degrees() *UnitAngle {
-	_r := raw.NSUnitAngleDegrees()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAngle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("degrees"))
+	return UnitAngleFromID(_r)
 }
 
-// ArcMinutes calls the underlying NSUnitAngleArcMinutes.
+// ArcMinutes wraps the corresponding Objective-C method.
 func ArcMinutes() *UnitAngle {
-	_r := raw.NSUnitAngleArcMinutes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAngle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("arcMinutes"))
+	return UnitAngleFromID(_r)
 }
 
-// ArcSeconds calls the underlying NSUnitAngleArcSeconds.
+// ArcSeconds wraps the corresponding Objective-C method.
 func ArcSeconds() *UnitAngle {
-	_r := raw.NSUnitAngleArcSeconds()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAngle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("arcSeconds"))
+	return UnitAngleFromID(_r)
 }
 
-// Radians calls the underlying NSUnitAngleRadians.
+// Radians wraps the corresponding Objective-C method.
 func Radians() *UnitAngle {
-	_r := raw.NSUnitAngleRadians()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAngle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("radians"))
+	return UnitAngleFromID(_r)
 }
 
-// Gradians calls the underlying NSUnitAngleGradians.
+// Gradians wraps the corresponding Objective-C method.
 func Gradians() *UnitAngle {
-	_r := raw.NSUnitAngleGradians()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAngle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("gradians"))
+	return UnitAngleFromID(_r)
 }
 
-// Revolutions calls the underlying NSUnitAngleRevolutions.
+// Revolutions wraps the corresponding Objective-C method.
 func Revolutions() *UnitAngle {
-	_r := raw.NSUnitAngleRevolutions()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAngle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("revolutions"))
+	return UnitAngleFromID(_r)
 }
 
-// SquareMegameters calls the underlying NSUnitAreaSquareMegameters.
+// SquareMegameters wraps the corresponding Objective-C method.
 func SquareMegameters() *UnitArea {
-	_r := raw.NSUnitAreaSquareMegameters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMegameters"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareKilometers calls the underlying NSUnitAreaSquareKilometers.
+// SquareKilometers wraps the corresponding Objective-C method.
 func SquareKilometers() *UnitArea {
-	_r := raw.NSUnitAreaSquareKilometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareKilometers"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareMeters calls the underlying NSUnitAreaSquareMeters.
+// SquareMeters wraps the corresponding Objective-C method.
 func SquareMeters() *UnitArea {
-	_r := raw.NSUnitAreaSquareMeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMeters"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareCentimeters calls the underlying NSUnitAreaSquareCentimeters.
+// SquareCentimeters wraps the corresponding Objective-C method.
 func SquareCentimeters() *UnitArea {
-	_r := raw.NSUnitAreaSquareCentimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareCentimeters"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareMillimeters calls the underlying NSUnitAreaSquareMillimeters.
+// SquareMillimeters wraps the corresponding Objective-C method.
 func SquareMillimeters() *UnitArea {
-	_r := raw.NSUnitAreaSquareMillimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMillimeters"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareMicrometers calls the underlying NSUnitAreaSquareMicrometers.
+// SquareMicrometers wraps the corresponding Objective-C method.
 func SquareMicrometers() *UnitArea {
-	_r := raw.NSUnitAreaSquareMicrometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMicrometers"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareNanometers calls the underlying NSUnitAreaSquareNanometers.
+// SquareNanometers wraps the corresponding Objective-C method.
 func SquareNanometers() *UnitArea {
-	_r := raw.NSUnitAreaSquareNanometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareNanometers"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareInches calls the underlying NSUnitAreaSquareInches.
+// SquareInches wraps the corresponding Objective-C method.
 func SquareInches() *UnitArea {
-	_r := raw.NSUnitAreaSquareInches()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareInches"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareFeet calls the underlying NSUnitAreaSquareFeet.
+// SquareFeet wraps the corresponding Objective-C method.
 func SquareFeet() *UnitArea {
-	_r := raw.NSUnitAreaSquareFeet()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareFeet"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareYards calls the underlying NSUnitAreaSquareYards.
+// SquareYards wraps the corresponding Objective-C method.
 func SquareYards() *UnitArea {
-	_r := raw.NSUnitAreaSquareYards()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareYards"))
+	return UnitAreaFromID(_r)
 }
 
-// SquareMiles calls the underlying NSUnitAreaSquareMiles.
+// SquareMiles wraps the corresponding Objective-C method.
 func SquareMiles() *UnitArea {
-	_r := raw.NSUnitAreaSquareMiles()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMiles"))
+	return UnitAreaFromID(_r)
 }
 
-// Acres calls the underlying NSUnitAreaAcres.
+// Acres wraps the corresponding Objective-C method.
 func Acres() *UnitArea {
-	_r := raw.NSUnitAreaAcres()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("acres"))
+	return UnitAreaFromID(_r)
 }
 
-// Ares calls the underlying NSUnitAreaAres.
+// Ares wraps the corresponding Objective-C method.
 func Ares() *UnitArea {
-	_r := raw.NSUnitAreaAres()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("ares"))
+	return UnitAreaFromID(_r)
 }
 
-// Hectares calls the underlying NSUnitAreaHectares.
+// Hectares wraps the corresponding Objective-C method.
 func Hectares() *UnitArea {
-	_r := raw.NSUnitAreaHectares()
-	if _r == nil {
-		return nil
-	}
-	return &UnitArea{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("hectares"))
+	return UnitAreaFromID(_r)
 }
 
-// MillimolesPerLiterWithGramsPerMole calls the underlying NSUnitConcentrationMassMillimolesPerLiterWithGramsPerMole.
+// MillimolesPerLiterWithGramsPerMole wraps the corresponding Objective-C method.
 func MillimolesPerLiterWithGramsPerMole(gramsPerMole float64) *UnitConcentrationMass {
-	_r := raw.NSUnitConcentrationMassMillimolesPerLiterWithGramsPerMole(gramsPerMole)
-	if _r == nil {
-		return nil
-	}
-	return &UnitConcentrationMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("millimolesPerLiterWithGramsPerMole:"), gramsPerMole)
+	return UnitConcentrationMassFromID(_r)
 }
 
-// GramsPerLiter calls the underlying NSUnitConcentrationMassGramsPerLiter.
+// GramsPerLiter wraps the corresponding Objective-C method.
 func GramsPerLiter() *UnitConcentrationMass {
-	_r := raw.NSUnitConcentrationMassGramsPerLiter()
-	if _r == nil {
-		return nil
-	}
-	return &UnitConcentrationMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("gramsPerLiter"))
+	return UnitConcentrationMassFromID(_r)
 }
 
-// MilligramsPerDeciliter calls the underlying NSUnitConcentrationMassMilligramsPerDeciliter.
+// MilligramsPerDeciliter wraps the corresponding Objective-C method.
 func MilligramsPerDeciliter() *UnitConcentrationMass {
-	_r := raw.NSUnitConcentrationMassMilligramsPerDeciliter()
-	if _r == nil {
-		return nil
-	}
-	return &UnitConcentrationMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("milligramsPerDeciliter"))
+	return UnitConcentrationMassFromID(_r)
 }
 
-// PartsPerMillion calls the underlying NSUnitDispersionPartsPerMillion.
+// PartsPerMillion wraps the corresponding Objective-C method.
 func PartsPerMillion() *UnitDispersion {
-	_r := raw.NSUnitDispersionPartsPerMillion()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDispersion{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDispersion")), objc.RegisterName("partsPerMillion"))
+	return UnitDispersionFromID(_r)
 }
 
-// Hours calls the underlying NSUnitDurationHours.
+// Hours wraps the corresponding Objective-C method.
 func Hours() *UnitDuration {
-	_r := raw.NSUnitDurationHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("hours"))
+	return UnitDurationFromID(_r)
 }
 
-// Minutes calls the underlying NSUnitDurationMinutes.
+// Minutes wraps the corresponding Objective-C method.
 func Minutes() *UnitDuration {
-	_r := raw.NSUnitDurationMinutes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("minutes"))
+	return UnitDurationFromID(_r)
 }
 
-// Seconds calls the underlying NSUnitDurationSeconds.
+// Seconds wraps the corresponding Objective-C method.
 func Seconds() *UnitDuration {
-	_r := raw.NSUnitDurationSeconds()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("seconds"))
+	return UnitDurationFromID(_r)
 }
 
-// Milliseconds calls the underlying NSUnitDurationMilliseconds.
+// Milliseconds wraps the corresponding Objective-C method.
 func Milliseconds() *UnitDuration {
-	_r := raw.NSUnitDurationMilliseconds()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("milliseconds"))
+	return UnitDurationFromID(_r)
 }
 
-// Microseconds calls the underlying NSUnitDurationMicroseconds.
+// Microseconds wraps the corresponding Objective-C method.
 func Microseconds() *UnitDuration {
-	_r := raw.NSUnitDurationMicroseconds()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("microseconds"))
+	return UnitDurationFromID(_r)
 }
 
-// Nanoseconds calls the underlying NSUnitDurationNanoseconds.
+// Nanoseconds wraps the corresponding Objective-C method.
 func Nanoseconds() *UnitDuration {
-	_r := raw.NSUnitDurationNanoseconds()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("nanoseconds"))
+	return UnitDurationFromID(_r)
 }
 
-// Picoseconds calls the underlying NSUnitDurationPicoseconds.
+// Picoseconds wraps the corresponding Objective-C method.
 func Picoseconds() *UnitDuration {
-	_r := raw.NSUnitDurationPicoseconds()
-	if _r == nil {
-		return nil
-	}
-	return &UnitDuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("picoseconds"))
+	return UnitDurationFromID(_r)
 }
 
-// Coulombs calls the underlying NSUnitElectricChargeCoulombs.
+// Coulombs wraps the corresponding Objective-C method.
 func Coulombs() *UnitElectricCharge {
-	_r := raw.NSUnitElectricChargeCoulombs()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCharge{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("coulombs"))
+	return UnitElectricChargeFromID(_r)
 }
 
-// MegaampereHours calls the underlying NSUnitElectricChargeMegaampereHours.
+// MegaampereHours wraps the corresponding Objective-C method.
 func MegaampereHours() *UnitElectricCharge {
-	_r := raw.NSUnitElectricChargeMegaampereHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCharge{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("megaampereHours"))
+	return UnitElectricChargeFromID(_r)
 }
 
-// KiloampereHours calls the underlying NSUnitElectricChargeKiloampereHours.
+// KiloampereHours wraps the corresponding Objective-C method.
 func KiloampereHours() *UnitElectricCharge {
-	_r := raw.NSUnitElectricChargeKiloampereHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCharge{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("kiloampereHours"))
+	return UnitElectricChargeFromID(_r)
 }
 
-// AmpereHours calls the underlying NSUnitElectricChargeAmpereHours.
+// AmpereHours wraps the corresponding Objective-C method.
 func AmpereHours() *UnitElectricCharge {
-	_r := raw.NSUnitElectricChargeAmpereHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCharge{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("ampereHours"))
+	return UnitElectricChargeFromID(_r)
 }
 
-// MilliampereHours calls the underlying NSUnitElectricChargeMilliampereHours.
+// MilliampereHours wraps the corresponding Objective-C method.
 func MilliampereHours() *UnitElectricCharge {
-	_r := raw.NSUnitElectricChargeMilliampereHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCharge{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("milliampereHours"))
+	return UnitElectricChargeFromID(_r)
 }
 
-// MicroampereHours calls the underlying NSUnitElectricChargeMicroampereHours.
+// MicroampereHours wraps the corresponding Objective-C method.
 func MicroampereHours() *UnitElectricCharge {
-	_r := raw.NSUnitElectricChargeMicroampereHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCharge{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("microampereHours"))
+	return UnitElectricChargeFromID(_r)
 }
 
-// Megaamperes calls the underlying NSUnitElectricCurrentMegaamperes.
+// Megaamperes wraps the corresponding Objective-C method.
 func Megaamperes() *UnitElectricCurrent {
-	_r := raw.NSUnitElectricCurrentMegaamperes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCurrent{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("megaamperes"))
+	return UnitElectricCurrentFromID(_r)
 }
 
-// Kiloamperes calls the underlying NSUnitElectricCurrentKiloamperes.
+// Kiloamperes wraps the corresponding Objective-C method.
 func Kiloamperes() *UnitElectricCurrent {
-	_r := raw.NSUnitElectricCurrentKiloamperes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCurrent{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("kiloamperes"))
+	return UnitElectricCurrentFromID(_r)
 }
 
-// Amperes calls the underlying NSUnitElectricCurrentAmperes.
+// Amperes wraps the corresponding Objective-C method.
 func Amperes() *UnitElectricCurrent {
-	_r := raw.NSUnitElectricCurrentAmperes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCurrent{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("amperes"))
+	return UnitElectricCurrentFromID(_r)
 }
 
-// Milliamperes calls the underlying NSUnitElectricCurrentMilliamperes.
+// Milliamperes wraps the corresponding Objective-C method.
 func Milliamperes() *UnitElectricCurrent {
-	_r := raw.NSUnitElectricCurrentMilliamperes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCurrent{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("milliamperes"))
+	return UnitElectricCurrentFromID(_r)
 }
 
-// Microamperes calls the underlying NSUnitElectricCurrentMicroamperes.
+// Microamperes wraps the corresponding Objective-C method.
 func Microamperes() *UnitElectricCurrent {
-	_r := raw.NSUnitElectricCurrentMicroamperes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricCurrent{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("microamperes"))
+	return UnitElectricCurrentFromID(_r)
 }
 
-// Megavolts calls the underlying NSUnitElectricPotentialDifferenceMegavolts.
+// Megavolts wraps the corresponding Objective-C method.
 func Megavolts() *UnitElectricPotentialDifference {
-	_r := raw.NSUnitElectricPotentialDifferenceMegavolts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricPotentialDifference{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("megavolts"))
+	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Kilovolts calls the underlying NSUnitElectricPotentialDifferenceKilovolts.
+// Kilovolts wraps the corresponding Objective-C method.
 func Kilovolts() *UnitElectricPotentialDifference {
-	_r := raw.NSUnitElectricPotentialDifferenceKilovolts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricPotentialDifference{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("kilovolts"))
+	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Volts calls the underlying NSUnitElectricPotentialDifferenceVolts.
+// Volts wraps the corresponding Objective-C method.
 func Volts() *UnitElectricPotentialDifference {
-	_r := raw.NSUnitElectricPotentialDifferenceVolts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricPotentialDifference{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("volts"))
+	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Millivolts calls the underlying NSUnitElectricPotentialDifferenceMillivolts.
+// Millivolts wraps the corresponding Objective-C method.
 func Millivolts() *UnitElectricPotentialDifference {
-	_r := raw.NSUnitElectricPotentialDifferenceMillivolts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricPotentialDifference{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("millivolts"))
+	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Microvolts calls the underlying NSUnitElectricPotentialDifferenceMicrovolts.
+// Microvolts wraps the corresponding Objective-C method.
 func Microvolts() *UnitElectricPotentialDifference {
-	_r := raw.NSUnitElectricPotentialDifferenceMicrovolts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricPotentialDifference{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("microvolts"))
+	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Megaohms calls the underlying NSUnitElectricResistanceMegaohms.
+// Megaohms wraps the corresponding Objective-C method.
 func Megaohms() *UnitElectricResistance {
-	_r := raw.NSUnitElectricResistanceMegaohms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricResistance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("megaohms"))
+	return UnitElectricResistanceFromID(_r)
 }
 
-// Kiloohms calls the underlying NSUnitElectricResistanceKiloohms.
+// Kiloohms wraps the corresponding Objective-C method.
 func Kiloohms() *UnitElectricResistance {
-	_r := raw.NSUnitElectricResistanceKiloohms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricResistance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("kiloohms"))
+	return UnitElectricResistanceFromID(_r)
 }
 
-// Ohms calls the underlying NSUnitElectricResistanceOhms.
+// Ohms wraps the corresponding Objective-C method.
 func Ohms() *UnitElectricResistance {
-	_r := raw.NSUnitElectricResistanceOhms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricResistance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("ohms"))
+	return UnitElectricResistanceFromID(_r)
 }
 
-// Milliohms calls the underlying NSUnitElectricResistanceMilliohms.
+// Milliohms wraps the corresponding Objective-C method.
 func Milliohms() *UnitElectricResistance {
-	_r := raw.NSUnitElectricResistanceMilliohms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricResistance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("milliohms"))
+	return UnitElectricResistanceFromID(_r)
 }
 
-// Microohms calls the underlying NSUnitElectricResistanceMicroohms.
+// Microohms wraps the corresponding Objective-C method.
 func Microohms() *UnitElectricResistance {
-	_r := raw.NSUnitElectricResistanceMicroohms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitElectricResistance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("microohms"))
+	return UnitElectricResistanceFromID(_r)
 }
 
-// Kilojoules calls the underlying NSUnitEnergyKilojoules.
+// Kilojoules wraps the corresponding Objective-C method.
 func Kilojoules() *UnitEnergy {
-	_r := raw.NSUnitEnergyKilojoules()
-	if _r == nil {
-		return nil
-	}
-	return &UnitEnergy{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilojoules"))
+	return UnitEnergyFromID(_r)
 }
 
-// Joules calls the underlying NSUnitEnergyJoules.
+// Joules wraps the corresponding Objective-C method.
 func Joules() *UnitEnergy {
-	_r := raw.NSUnitEnergyJoules()
-	if _r == nil {
-		return nil
-	}
-	return &UnitEnergy{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("joules"))
+	return UnitEnergyFromID(_r)
 }
 
-// Kilocalories calls the underlying NSUnitEnergyKilocalories.
+// Kilocalories wraps the corresponding Objective-C method.
 func Kilocalories() *UnitEnergy {
-	_r := raw.NSUnitEnergyKilocalories()
-	if _r == nil {
-		return nil
-	}
-	return &UnitEnergy{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilocalories"))
+	return UnitEnergyFromID(_r)
 }
 
-// Calories calls the underlying NSUnitEnergyCalories.
+// Calories wraps the corresponding Objective-C method.
 func Calories() *UnitEnergy {
-	_r := raw.NSUnitEnergyCalories()
-	if _r == nil {
-		return nil
-	}
-	return &UnitEnergy{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("calories"))
+	return UnitEnergyFromID(_r)
 }
 
-// KilowattHours calls the underlying NSUnitEnergyKilowattHours.
+// KilowattHours wraps the corresponding Objective-C method.
 func KilowattHours() *UnitEnergy {
-	_r := raw.NSUnitEnergyKilowattHours()
-	if _r == nil {
-		return nil
-	}
-	return &UnitEnergy{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilowattHours"))
+	return UnitEnergyFromID(_r)
 }
 
-// Terahertz calls the underlying NSUnitFrequencyTerahertz.
+// Terahertz wraps the corresponding Objective-C method.
 func Terahertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyTerahertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("terahertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Gigahertz calls the underlying NSUnitFrequencyGigahertz.
+// Gigahertz wraps the corresponding Objective-C method.
 func Gigahertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyGigahertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("gigahertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Megahertz calls the underlying NSUnitFrequencyMegahertz.
+// Megahertz wraps the corresponding Objective-C method.
 func Megahertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyMegahertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("megahertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Kilohertz calls the underlying NSUnitFrequencyKilohertz.
+// Kilohertz wraps the corresponding Objective-C method.
 func Kilohertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyKilohertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("kilohertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Hertz calls the underlying NSUnitFrequencyHertz.
+// Hertz wraps the corresponding Objective-C method.
 func Hertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyHertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("hertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Millihertz calls the underlying NSUnitFrequencyMillihertz.
+// Millihertz wraps the corresponding Objective-C method.
 func Millihertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyMillihertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("millihertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Microhertz calls the underlying NSUnitFrequencyMicrohertz.
+// Microhertz wraps the corresponding Objective-C method.
 func Microhertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyMicrohertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("microhertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// Nanohertz calls the underlying NSUnitFrequencyNanohertz.
+// Nanohertz wraps the corresponding Objective-C method.
 func Nanohertz() *UnitFrequency {
-	_r := raw.NSUnitFrequencyNanohertz()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("nanohertz"))
+	return UnitFrequencyFromID(_r)
 }
 
-// FramesPerSecond calls the underlying NSUnitFrequencyFramesPerSecond.
+// FramesPerSecond wraps the corresponding Objective-C method.
 func FramesPerSecond() *UnitFrequency {
-	_r := raw.NSUnitFrequencyFramesPerSecond()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFrequency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("framesPerSecond"))
+	return UnitFrequencyFromID(_r)
 }
 
-// LitersPer100Kilometers calls the underlying NSUnitFuelEfficiencyLitersPer100Kilometers.
+// LitersPer100Kilometers wraps the corresponding Objective-C method.
 func LitersPer100Kilometers() *UnitFuelEfficiency {
-	_r := raw.NSUnitFuelEfficiencyLitersPer100Kilometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFuelEfficiency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("litersPer100Kilometers"))
+	return UnitFuelEfficiencyFromID(_r)
 }
 
-// MilesPerImperialGallon calls the underlying NSUnitFuelEfficiencyMilesPerImperialGallon.
+// MilesPerImperialGallon wraps the corresponding Objective-C method.
 func MilesPerImperialGallon() *UnitFuelEfficiency {
-	_r := raw.NSUnitFuelEfficiencyMilesPerImperialGallon()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFuelEfficiency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("milesPerImperialGallon"))
+	return UnitFuelEfficiencyFromID(_r)
 }
 
-// MilesPerGallon calls the underlying NSUnitFuelEfficiencyMilesPerGallon.
+// MilesPerGallon wraps the corresponding Objective-C method.
 func MilesPerGallon() *UnitFuelEfficiency {
-	_r := raw.NSUnitFuelEfficiencyMilesPerGallon()
-	if _r == nil {
-		return nil
-	}
-	return &UnitFuelEfficiency{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("milesPerGallon"))
+	return UnitFuelEfficiencyFromID(_r)
 }
 
-// Lux calls the underlying NSUnitIlluminanceLux.
+// Lux wraps the corresponding Objective-C method.
 func Lux() *UnitIlluminance {
-	_r := raw.NSUnitIlluminanceLux()
-	if _r == nil {
-		return nil
-	}
-	return &UnitIlluminance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitIlluminance")), objc.RegisterName("lux"))
+	return UnitIlluminanceFromID(_r)
 }
 
-// Bytes calls the underlying NSUnitInformationStorageBytes.
+// Bytes wraps the corresponding Objective-C method.
 func Bytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageBytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("bytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Bits calls the underlying NSUnitInformationStorageBits.
+// Bits wraps the corresponding Objective-C method.
 func Bits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageBits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("bits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Nibbles calls the underlying NSUnitInformationStorageNibbles.
+// Nibbles wraps the corresponding Objective-C method.
 func Nibbles() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageNibbles()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("nibbles"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Yottabytes calls the underlying NSUnitInformationStorageYottabytes.
+// Yottabytes wraps the corresponding Objective-C method.
 func Yottabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageYottabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yottabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Zettabytes calls the underlying NSUnitInformationStorageZettabytes.
+// Zettabytes wraps the corresponding Objective-C method.
 func Zettabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageZettabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zettabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Exabytes calls the underlying NSUnitInformationStorageExabytes.
+// Exabytes wraps the corresponding Objective-C method.
 func Exabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageExabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Petabytes calls the underlying NSUnitInformationStoragePetabytes.
+// Petabytes wraps the corresponding Objective-C method.
 func Petabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStoragePetabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("petabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Terabytes calls the underlying NSUnitInformationStorageTerabytes.
+// Terabytes wraps the corresponding Objective-C method.
 func Terabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageTerabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("terabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Gigabytes calls the underlying NSUnitInformationStorageGigabytes.
+// Gigabytes wraps the corresponding Objective-C method.
 func Gigabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageGigabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gigabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Megabytes calls the underlying NSUnitInformationStorageMegabytes.
+// Megabytes wraps the corresponding Objective-C method.
 func Megabytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageMegabytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("megabytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Kilobytes calls the underlying NSUnitInformationStorageKilobytes.
+// Kilobytes wraps the corresponding Objective-C method.
 func Kilobytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageKilobytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kilobytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Yottabits calls the underlying NSUnitInformationStorageYottabits.
+// Yottabits wraps the corresponding Objective-C method.
 func Yottabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageYottabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yottabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Zettabits calls the underlying NSUnitInformationStorageZettabits.
+// Zettabits wraps the corresponding Objective-C method.
 func Zettabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageZettabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zettabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Exabits calls the underlying NSUnitInformationStorageExabits.
+// Exabits wraps the corresponding Objective-C method.
 func Exabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageExabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Petabits calls the underlying NSUnitInformationStoragePetabits.
+// Petabits wraps the corresponding Objective-C method.
 func Petabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStoragePetabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("petabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Terabits calls the underlying NSUnitInformationStorageTerabits.
+// Terabits wraps the corresponding Objective-C method.
 func Terabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageTerabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("terabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Gigabits calls the underlying NSUnitInformationStorageGigabits.
+// Gigabits wraps the corresponding Objective-C method.
 func Gigabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageGigabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gigabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Megabits calls the underlying NSUnitInformationStorageMegabits.
+// Megabits wraps the corresponding Objective-C method.
 func Megabits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageMegabits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("megabits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Kilobits calls the underlying NSUnitInformationStorageKilobits.
+// Kilobits wraps the corresponding Objective-C method.
 func Kilobits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageKilobits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kilobits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Yobibytes calls the underlying NSUnitInformationStorageYobibytes.
+// Yobibytes wraps the corresponding Objective-C method.
 func Yobibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageYobibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yobibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Zebibytes calls the underlying NSUnitInformationStorageZebibytes.
+// Zebibytes wraps the corresponding Objective-C method.
 func Zebibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageZebibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zebibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Exbibytes calls the underlying NSUnitInformationStorageExbibytes.
+// Exbibytes wraps the corresponding Objective-C method.
 func Exbibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageExbibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exbibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Pebibytes calls the underlying NSUnitInformationStoragePebibytes.
+// Pebibytes wraps the corresponding Objective-C method.
 func Pebibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStoragePebibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("pebibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Tebibytes calls the underlying NSUnitInformationStorageTebibytes.
+// Tebibytes wraps the corresponding Objective-C method.
 func Tebibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageTebibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("tebibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Gibibytes calls the underlying NSUnitInformationStorageGibibytes.
+// Gibibytes wraps the corresponding Objective-C method.
 func Gibibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageGibibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gibibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Mebibytes calls the underlying NSUnitInformationStorageMebibytes.
+// Mebibytes wraps the corresponding Objective-C method.
 func Mebibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageMebibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("mebibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Kibibytes calls the underlying NSUnitInformationStorageKibibytes.
+// Kibibytes wraps the corresponding Objective-C method.
 func Kibibytes() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageKibibytes()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kibibytes"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Yobibits calls the underlying NSUnitInformationStorageYobibits.
+// Yobibits wraps the corresponding Objective-C method.
 func Yobibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageYobibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yobibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Zebibits calls the underlying NSUnitInformationStorageZebibits.
+// Zebibits wraps the corresponding Objective-C method.
 func Zebibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageZebibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zebibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Exbibits calls the underlying NSUnitInformationStorageExbibits.
+// Exbibits wraps the corresponding Objective-C method.
 func Exbibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageExbibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exbibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Pebibits calls the underlying NSUnitInformationStoragePebibits.
+// Pebibits wraps the corresponding Objective-C method.
 func Pebibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStoragePebibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("pebibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Tebibits calls the underlying NSUnitInformationStorageTebibits.
+// Tebibits wraps the corresponding Objective-C method.
 func Tebibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageTebibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("tebibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Gibibits calls the underlying NSUnitInformationStorageGibibits.
+// Gibibits wraps the corresponding Objective-C method.
 func Gibibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageGibibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gibibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Mebibits calls the underlying NSUnitInformationStorageMebibits.
+// Mebibits wraps the corresponding Objective-C method.
 func Mebibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageMebibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("mebibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Kibibits calls the underlying NSUnitInformationStorageKibibits.
+// Kibibits wraps the corresponding Objective-C method.
 func Kibibits() *UnitInformationStorage {
-	_r := raw.NSUnitInformationStorageKibibits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitInformationStorage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kibibits"))
+	return UnitInformationStorageFromID(_r)
 }
 
-// Megameters calls the underlying NSUnitLengthMegameters.
+// Megameters wraps the corresponding Objective-C method.
 func Megameters() *UnitLength {
-	_r := raw.NSUnitLengthMegameters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("megameters"))
+	return UnitLengthFromID(_r)
 }
 
-// Kilometers calls the underlying NSUnitLengthKilometers.
+// Kilometers wraps the corresponding Objective-C method.
 func Kilometers() *UnitLength {
-	_r := raw.NSUnitLengthKilometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("kilometers"))
+	return UnitLengthFromID(_r)
 }
 
-// Hectometers calls the underlying NSUnitLengthHectometers.
+// Hectometers wraps the corresponding Objective-C method.
 func Hectometers() *UnitLength {
-	_r := raw.NSUnitLengthHectometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("hectometers"))
+	return UnitLengthFromID(_r)
 }
 
-// Decameters calls the underlying NSUnitLengthDecameters.
+// Decameters wraps the corresponding Objective-C method.
 func Decameters() *UnitLength {
-	_r := raw.NSUnitLengthDecameters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("decameters"))
+	return UnitLengthFromID(_r)
 }
 
-// Meters calls the underlying NSUnitLengthMeters.
+// Meters wraps the corresponding Objective-C method.
 func Meters() *UnitLength {
-	_r := raw.NSUnitLengthMeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("meters"))
+	return UnitLengthFromID(_r)
 }
 
-// Decimeters calls the underlying NSUnitLengthDecimeters.
+// Decimeters wraps the corresponding Objective-C method.
 func Decimeters() *UnitLength {
-	_r := raw.NSUnitLengthDecimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("decimeters"))
+	return UnitLengthFromID(_r)
 }
 
-// Centimeters calls the underlying NSUnitLengthCentimeters.
+// Centimeters wraps the corresponding Objective-C method.
 func Centimeters() *UnitLength {
-	_r := raw.NSUnitLengthCentimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("centimeters"))
+	return UnitLengthFromID(_r)
 }
 
-// Millimeters calls the underlying NSUnitLengthMillimeters.
+// Millimeters wraps the corresponding Objective-C method.
 func Millimeters() *UnitLength {
-	_r := raw.NSUnitLengthMillimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("millimeters"))
+	return UnitLengthFromID(_r)
 }
 
-// Micrometers calls the underlying NSUnitLengthMicrometers.
+// Micrometers wraps the corresponding Objective-C method.
 func Micrometers() *UnitLength {
-	_r := raw.NSUnitLengthMicrometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("micrometers"))
+	return UnitLengthFromID(_r)
 }
 
-// Nanometers calls the underlying NSUnitLengthNanometers.
+// Nanometers wraps the corresponding Objective-C method.
 func Nanometers() *UnitLength {
-	_r := raw.NSUnitLengthNanometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("nanometers"))
+	return UnitLengthFromID(_r)
 }
 
-// Picometers calls the underlying NSUnitLengthPicometers.
+// Picometers wraps the corresponding Objective-C method.
 func Picometers() *UnitLength {
-	_r := raw.NSUnitLengthPicometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("picometers"))
+	return UnitLengthFromID(_r)
 }
 
-// Inches calls the underlying NSUnitLengthInches.
+// Inches wraps the corresponding Objective-C method.
 func Inches() *UnitLength {
-	_r := raw.NSUnitLengthInches()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("inches"))
+	return UnitLengthFromID(_r)
 }
 
-// Feet calls the underlying NSUnitLengthFeet.
+// Feet wraps the corresponding Objective-C method.
 func Feet() *UnitLength {
-	_r := raw.NSUnitLengthFeet()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("feet"))
+	return UnitLengthFromID(_r)
 }
 
-// Yards calls the underlying NSUnitLengthYards.
+// Yards wraps the corresponding Objective-C method.
 func Yards() *UnitLength {
-	_r := raw.NSUnitLengthYards()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("yards"))
+	return UnitLengthFromID(_r)
 }
 
-// Miles calls the underlying NSUnitLengthMiles.
+// Miles wraps the corresponding Objective-C method.
 func Miles() *UnitLength {
-	_r := raw.NSUnitLengthMiles()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("miles"))
+	return UnitLengthFromID(_r)
 }
 
-// ScandinavianMiles calls the underlying NSUnitLengthScandinavianMiles.
+// ScandinavianMiles wraps the corresponding Objective-C method.
 func ScandinavianMiles() *UnitLength {
-	_r := raw.NSUnitLengthScandinavianMiles()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("scandinavianMiles"))
+	return UnitLengthFromID(_r)
 }
 
-// Lightyears calls the underlying NSUnitLengthLightyears.
+// Lightyears wraps the corresponding Objective-C method.
 func Lightyears() *UnitLength {
-	_r := raw.NSUnitLengthLightyears()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("lightyears"))
+	return UnitLengthFromID(_r)
 }
 
-// NauticalMiles calls the underlying NSUnitLengthNauticalMiles.
+// NauticalMiles wraps the corresponding Objective-C method.
 func NauticalMiles() *UnitLength {
-	_r := raw.NSUnitLengthNauticalMiles()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("nauticalMiles"))
+	return UnitLengthFromID(_r)
 }
 
-// Fathoms calls the underlying NSUnitLengthFathoms.
+// Fathoms wraps the corresponding Objective-C method.
 func Fathoms() *UnitLength {
-	_r := raw.NSUnitLengthFathoms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("fathoms"))
+	return UnitLengthFromID(_r)
 }
 
-// Furlongs calls the underlying NSUnitLengthFurlongs.
+// Furlongs wraps the corresponding Objective-C method.
 func Furlongs() *UnitLength {
-	_r := raw.NSUnitLengthFurlongs()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("furlongs"))
+	return UnitLengthFromID(_r)
 }
 
-// AstronomicalUnits calls the underlying NSUnitLengthAstronomicalUnits.
+// AstronomicalUnits wraps the corresponding Objective-C method.
 func AstronomicalUnits() *UnitLength {
-	_r := raw.NSUnitLengthAstronomicalUnits()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("astronomicalUnits"))
+	return UnitLengthFromID(_r)
 }
 
-// Parsecs calls the underlying NSUnitLengthParsecs.
+// Parsecs wraps the corresponding Objective-C method.
 func Parsecs() *UnitLength {
-	_r := raw.NSUnitLengthParsecs()
-	if _r == nil {
-		return nil
-	}
-	return &UnitLength{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("parsecs"))
+	return UnitLengthFromID(_r)
 }
 
-// Kilograms calls the underlying NSUnitMassKilograms.
+// Kilograms wraps the corresponding Objective-C method.
 func Kilograms() *UnitMass {
-	_r := raw.NSUnitMassKilograms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("kilograms"))
+	return UnitMassFromID(_r)
 }
 
-// Grams calls the underlying NSUnitMassGrams.
+// Grams wraps the corresponding Objective-C method.
 func Grams() *UnitMass {
-	_r := raw.NSUnitMassGrams()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("grams"))
+	return UnitMassFromID(_r)
 }
 
-// Decigrams calls the underlying NSUnitMassDecigrams.
+// Decigrams wraps the corresponding Objective-C method.
 func Decigrams() *UnitMass {
-	_r := raw.NSUnitMassDecigrams()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("decigrams"))
+	return UnitMassFromID(_r)
 }
 
-// Centigrams calls the underlying NSUnitMassCentigrams.
+// Centigrams wraps the corresponding Objective-C method.
 func Centigrams() *UnitMass {
-	_r := raw.NSUnitMassCentigrams()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("centigrams"))
+	return UnitMassFromID(_r)
 }
 
-// Milligrams calls the underlying NSUnitMassMilligrams.
+// Milligrams wraps the corresponding Objective-C method.
 func Milligrams() *UnitMass {
-	_r := raw.NSUnitMassMilligrams()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("milligrams"))
+	return UnitMassFromID(_r)
 }
 
-// Micrograms calls the underlying NSUnitMassMicrograms.
+// Micrograms wraps the corresponding Objective-C method.
 func Micrograms() *UnitMass {
-	_r := raw.NSUnitMassMicrograms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("micrograms"))
+	return UnitMassFromID(_r)
 }
 
-// Nanograms calls the underlying NSUnitMassNanograms.
+// Nanograms wraps the corresponding Objective-C method.
 func Nanograms() *UnitMass {
-	_r := raw.NSUnitMassNanograms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("nanograms"))
+	return UnitMassFromID(_r)
 }
 
-// Picograms calls the underlying NSUnitMassPicograms.
+// Picograms wraps the corresponding Objective-C method.
 func Picograms() *UnitMass {
-	_r := raw.NSUnitMassPicograms()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("picograms"))
+	return UnitMassFromID(_r)
 }
 
-// Ounces calls the underlying NSUnitMassOunces.
+// Ounces wraps the corresponding Objective-C method.
 func Ounces() *UnitMass {
-	_r := raw.NSUnitMassOunces()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("ounces"))
+	return UnitMassFromID(_r)
 }
 
-// PoundsMass calls the underlying NSUnitMassPoundsMass.
+// PoundsMass wraps the corresponding Objective-C method.
 func PoundsMass() *UnitMass {
-	_r := raw.NSUnitMassPoundsMass()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("poundsMass"))
+	return UnitMassFromID(_r)
 }
 
-// Stones calls the underlying NSUnitMassStones.
+// Stones wraps the corresponding Objective-C method.
 func Stones() *UnitMass {
-	_r := raw.NSUnitMassStones()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("stones"))
+	return UnitMassFromID(_r)
 }
 
-// MetricTons calls the underlying NSUnitMassMetricTons.
+// MetricTons wraps the corresponding Objective-C method.
 func MetricTons() *UnitMass {
-	_r := raw.NSUnitMassMetricTons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("metricTons"))
+	return UnitMassFromID(_r)
 }
 
-// ShortTons calls the underlying NSUnitMassShortTons.
+// ShortTons wraps the corresponding Objective-C method.
 func ShortTons() *UnitMass {
-	_r := raw.NSUnitMassShortTons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("shortTons"))
+	return UnitMassFromID(_r)
 }
 
-// Carats calls the underlying NSUnitMassCarats.
+// Carats wraps the corresponding Objective-C method.
 func Carats() *UnitMass {
-	_r := raw.NSUnitMassCarats()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("carats"))
+	return UnitMassFromID(_r)
 }
 
-// OuncesTroy calls the underlying NSUnitMassOuncesTroy.
+// OuncesTroy wraps the corresponding Objective-C method.
 func OuncesTroy() *UnitMass {
-	_r := raw.NSUnitMassOuncesTroy()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("ouncesTroy"))
+	return UnitMassFromID(_r)
 }
 
-// Slugs calls the underlying NSUnitMassSlugs.
+// Slugs wraps the corresponding Objective-C method.
 func Slugs() *UnitMass {
-	_r := raw.NSUnitMassSlugs()
-	if _r == nil {
-		return nil
-	}
-	return &UnitMass{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("slugs"))
+	return UnitMassFromID(_r)
 }
 
-// Terawatts calls the underlying NSUnitPowerTerawatts.
+// Terawatts wraps the corresponding Objective-C method.
 func Terawatts() *UnitPower {
-	_r := raw.NSUnitPowerTerawatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("terawatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Gigawatts calls the underlying NSUnitPowerGigawatts.
+// Gigawatts wraps the corresponding Objective-C method.
 func Gigawatts() *UnitPower {
-	_r := raw.NSUnitPowerGigawatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("gigawatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Megawatts calls the underlying NSUnitPowerMegawatts.
+// Megawatts wraps the corresponding Objective-C method.
 func Megawatts() *UnitPower {
-	_r := raw.NSUnitPowerMegawatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("megawatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Kilowatts calls the underlying NSUnitPowerKilowatts.
+// Kilowatts wraps the corresponding Objective-C method.
 func Kilowatts() *UnitPower {
-	_r := raw.NSUnitPowerKilowatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("kilowatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Watts calls the underlying NSUnitPowerWatts.
+// Watts wraps the corresponding Objective-C method.
 func Watts() *UnitPower {
-	_r := raw.NSUnitPowerWatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("watts"))
+	return UnitPowerFromID(_r)
 }
 
-// Milliwatts calls the underlying NSUnitPowerMilliwatts.
+// Milliwatts wraps the corresponding Objective-C method.
 func Milliwatts() *UnitPower {
-	_r := raw.NSUnitPowerMilliwatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("milliwatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Microwatts calls the underlying NSUnitPowerMicrowatts.
+// Microwatts wraps the corresponding Objective-C method.
 func Microwatts() *UnitPower {
-	_r := raw.NSUnitPowerMicrowatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("microwatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Nanowatts calls the underlying NSUnitPowerNanowatts.
+// Nanowatts wraps the corresponding Objective-C method.
 func Nanowatts() *UnitPower {
-	_r := raw.NSUnitPowerNanowatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("nanowatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Picowatts calls the underlying NSUnitPowerPicowatts.
+// Picowatts wraps the corresponding Objective-C method.
 func Picowatts() *UnitPower {
-	_r := raw.NSUnitPowerPicowatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("picowatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Femtowatts calls the underlying NSUnitPowerFemtowatts.
+// Femtowatts wraps the corresponding Objective-C method.
 func Femtowatts() *UnitPower {
-	_r := raw.NSUnitPowerFemtowatts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("femtowatts"))
+	return UnitPowerFromID(_r)
 }
 
-// Horsepower calls the underlying NSUnitPowerHorsepower.
+// Horsepower wraps the corresponding Objective-C method.
 func Horsepower() *UnitPower {
-	_r := raw.NSUnitPowerHorsepower()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPower{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("horsepower"))
+	return UnitPowerFromID(_r)
 }
 
-// NewtonsPerMetersSquared calls the underlying NSUnitPressureNewtonsPerMetersSquared.
+// NewtonsPerMetersSquared wraps the corresponding Objective-C method.
 func NewtonsPerMetersSquared() *UnitPressure {
-	_r := raw.NSUnitPressureNewtonsPerMetersSquared()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("newtonsPerMetersSquared"))
+	return UnitPressureFromID(_r)
 }
 
-// Gigapascals calls the underlying NSUnitPressureGigapascals.
+// Gigapascals wraps the corresponding Objective-C method.
 func Gigapascals() *UnitPressure {
-	_r := raw.NSUnitPressureGigapascals()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("gigapascals"))
+	return UnitPressureFromID(_r)
 }
 
-// Megapascals calls the underlying NSUnitPressureMegapascals.
+// Megapascals wraps the corresponding Objective-C method.
 func Megapascals() *UnitPressure {
-	_r := raw.NSUnitPressureMegapascals()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("megapascals"))
+	return UnitPressureFromID(_r)
 }
 
-// Kilopascals calls the underlying NSUnitPressureKilopascals.
+// Kilopascals wraps the corresponding Objective-C method.
 func Kilopascals() *UnitPressure {
-	_r := raw.NSUnitPressureKilopascals()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("kilopascals"))
+	return UnitPressureFromID(_r)
 }
 
-// Hectopascals calls the underlying NSUnitPressureHectopascals.
+// Hectopascals wraps the corresponding Objective-C method.
 func Hectopascals() *UnitPressure {
-	_r := raw.NSUnitPressureHectopascals()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("hectopascals"))
+	return UnitPressureFromID(_r)
 }
 
-// InchesOfMercury calls the underlying NSUnitPressureInchesOfMercury.
+// InchesOfMercury wraps the corresponding Objective-C method.
 func InchesOfMercury() *UnitPressure {
-	_r := raw.NSUnitPressureInchesOfMercury()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("inchesOfMercury"))
+	return UnitPressureFromID(_r)
 }
 
-// Bars calls the underlying NSUnitPressureBars.
+// Bars wraps the corresponding Objective-C method.
 func Bars() *UnitPressure {
-	_r := raw.NSUnitPressureBars()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("bars"))
+	return UnitPressureFromID(_r)
 }
 
-// Millibars calls the underlying NSUnitPressureMillibars.
+// Millibars wraps the corresponding Objective-C method.
 func Millibars() *UnitPressure {
-	_r := raw.NSUnitPressureMillibars()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("millibars"))
+	return UnitPressureFromID(_r)
 }
 
-// MillimetersOfMercury calls the underlying NSUnitPressureMillimetersOfMercury.
+// MillimetersOfMercury wraps the corresponding Objective-C method.
 func MillimetersOfMercury() *UnitPressure {
-	_r := raw.NSUnitPressureMillimetersOfMercury()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("millimetersOfMercury"))
+	return UnitPressureFromID(_r)
 }
 
-// PoundsForcePerSquareInch calls the underlying NSUnitPressurePoundsForcePerSquareInch.
+// PoundsForcePerSquareInch wraps the corresponding Objective-C method.
 func PoundsForcePerSquareInch() *UnitPressure {
-	_r := raw.NSUnitPressurePoundsForcePerSquareInch()
-	if _r == nil {
-		return nil
-	}
-	return &UnitPressure{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("poundsForcePerSquareInch"))
+	return UnitPressureFromID(_r)
 }
 
-// MetersPerSecond calls the underlying NSUnitSpeedMetersPerSecond.
+// MetersPerSecond wraps the corresponding Objective-C method.
 func MetersPerSecond() *UnitSpeed {
-	_r := raw.NSUnitSpeedMetersPerSecond()
-	if _r == nil {
-		return nil
-	}
-	return &UnitSpeed{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("metersPerSecond"))
+	return UnitSpeedFromID(_r)
 }
 
-// KilometersPerHour calls the underlying NSUnitSpeedKilometersPerHour.
+// KilometersPerHour wraps the corresponding Objective-C method.
 func KilometersPerHour() *UnitSpeed {
-	_r := raw.NSUnitSpeedKilometersPerHour()
-	if _r == nil {
-		return nil
-	}
-	return &UnitSpeed{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("kilometersPerHour"))
+	return UnitSpeedFromID(_r)
 }
 
-// MilesPerHour calls the underlying NSUnitSpeedMilesPerHour.
+// MilesPerHour wraps the corresponding Objective-C method.
 func MilesPerHour() *UnitSpeed {
-	_r := raw.NSUnitSpeedMilesPerHour()
-	if _r == nil {
-		return nil
-	}
-	return &UnitSpeed{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("milesPerHour"))
+	return UnitSpeedFromID(_r)
 }
 
-// Knots calls the underlying NSUnitSpeedKnots.
+// Knots wraps the corresponding Objective-C method.
 func Knots() *UnitSpeed {
-	_r := raw.NSUnitSpeedKnots()
-	if _r == nil {
-		return nil
-	}
-	return &UnitSpeed{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("knots"))
+	return UnitSpeedFromID(_r)
 }
 
-// Kelvin calls the underlying NSUnitTemperatureKelvin.
+// Kelvin wraps the corresponding Objective-C method.
 func Kelvin() *UnitTemperature {
-	_r := raw.NSUnitTemperatureKelvin()
-	if _r == nil {
-		return nil
-	}
-	return &UnitTemperature{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("kelvin"))
+	return UnitTemperatureFromID(_r)
 }
 
-// Celsius calls the underlying NSUnitTemperatureCelsius.
+// Celsius wraps the corresponding Objective-C method.
 func Celsius() *UnitTemperature {
-	_r := raw.NSUnitTemperatureCelsius()
-	if _r == nil {
-		return nil
-	}
-	return &UnitTemperature{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("celsius"))
+	return UnitTemperatureFromID(_r)
 }
 
-// Fahrenheit calls the underlying NSUnitTemperatureFahrenheit.
+// Fahrenheit wraps the corresponding Objective-C method.
 func Fahrenheit() *UnitTemperature {
-	_r := raw.NSUnitTemperatureFahrenheit()
-	if _r == nil {
-		return nil
-	}
-	return &UnitTemperature{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("fahrenheit"))
+	return UnitTemperatureFromID(_r)
 }
 
-// Megaliters calls the underlying NSUnitVolumeMegaliters.
+// Megaliters wraps the corresponding Objective-C method.
 func Megaliters() *UnitVolume {
-	_r := raw.NSUnitVolumeMegaliters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("megaliters"))
+	return UnitVolumeFromID(_r)
 }
 
-// Kiloliters calls the underlying NSUnitVolumeKiloliters.
+// Kiloliters wraps the corresponding Objective-C method.
 func Kiloliters() *UnitVolume {
-	_r := raw.NSUnitVolumeKiloliters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("kiloliters"))
+	return UnitVolumeFromID(_r)
 }
 
-// Liters calls the underlying NSUnitVolumeLiters.
+// Liters wraps the corresponding Objective-C method.
 func Liters() *UnitVolume {
-	_r := raw.NSUnitVolumeLiters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("liters"))
+	return UnitVolumeFromID(_r)
 }
 
-// Deciliters calls the underlying NSUnitVolumeDeciliters.
+// Deciliters wraps the corresponding Objective-C method.
 func Deciliters() *UnitVolume {
-	_r := raw.NSUnitVolumeDeciliters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("deciliters"))
+	return UnitVolumeFromID(_r)
 }
 
-// Centiliters calls the underlying NSUnitVolumeCentiliters.
+// Centiliters wraps the corresponding Objective-C method.
 func Centiliters() *UnitVolume {
-	_r := raw.NSUnitVolumeCentiliters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("centiliters"))
+	return UnitVolumeFromID(_r)
 }
 
-// Milliliters calls the underlying NSUnitVolumeMilliliters.
+// Milliliters wraps the corresponding Objective-C method.
 func Milliliters() *UnitVolume {
-	_r := raw.NSUnitVolumeMilliliters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("milliliters"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicKilometers calls the underlying NSUnitVolumeCubicKilometers.
+// CubicKilometers wraps the corresponding Objective-C method.
 func CubicKilometers() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicKilometers()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicKilometers"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicMeters calls the underlying NSUnitVolumeCubicMeters.
+// CubicMeters wraps the corresponding Objective-C method.
 func CubicMeters() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicMeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMeters"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicDecimeters calls the underlying NSUnitVolumeCubicDecimeters.
+// CubicDecimeters wraps the corresponding Objective-C method.
 func CubicDecimeters() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicDecimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicDecimeters"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicCentimeters calls the underlying NSUnitVolumeCubicCentimeters.
+// CubicCentimeters wraps the corresponding Objective-C method.
 func CubicCentimeters() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicCentimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicCentimeters"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicMillimeters calls the underlying NSUnitVolumeCubicMillimeters.
+// CubicMillimeters wraps the corresponding Objective-C method.
 func CubicMillimeters() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicMillimeters()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMillimeters"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicInches calls the underlying NSUnitVolumeCubicInches.
+// CubicInches wraps the corresponding Objective-C method.
 func CubicInches() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicInches()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicInches"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicFeet calls the underlying NSUnitVolumeCubicFeet.
+// CubicFeet wraps the corresponding Objective-C method.
 func CubicFeet() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicFeet()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicFeet"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicYards calls the underlying NSUnitVolumeCubicYards.
+// CubicYards wraps the corresponding Objective-C method.
 func CubicYards() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicYards()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicYards"))
+	return UnitVolumeFromID(_r)
 }
 
-// CubicMiles calls the underlying NSUnitVolumeCubicMiles.
+// CubicMiles wraps the corresponding Objective-C method.
 func CubicMiles() *UnitVolume {
-	_r := raw.NSUnitVolumeCubicMiles()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMiles"))
+	return UnitVolumeFromID(_r)
 }
 
-// AcreFeet calls the underlying NSUnitVolumeAcreFeet.
+// AcreFeet wraps the corresponding Objective-C method.
 func AcreFeet() *UnitVolume {
-	_r := raw.NSUnitVolumeAcreFeet()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("acreFeet"))
+	return UnitVolumeFromID(_r)
 }
 
-// Bushels calls the underlying NSUnitVolumeBushels.
+// Bushels wraps the corresponding Objective-C method.
 func Bushels() *UnitVolume {
-	_r := raw.NSUnitVolumeBushels()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("bushels"))
+	return UnitVolumeFromID(_r)
 }
 
-// Teaspoons calls the underlying NSUnitVolumeTeaspoons.
+// Teaspoons wraps the corresponding Objective-C method.
 func Teaspoons() *UnitVolume {
-	_r := raw.NSUnitVolumeTeaspoons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("teaspoons"))
+	return UnitVolumeFromID(_r)
 }
 
-// Tablespoons calls the underlying NSUnitVolumeTablespoons.
+// Tablespoons wraps the corresponding Objective-C method.
 func Tablespoons() *UnitVolume {
-	_r := raw.NSUnitVolumeTablespoons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("tablespoons"))
+	return UnitVolumeFromID(_r)
 }
 
-// FluidOunces calls the underlying NSUnitVolumeFluidOunces.
+// FluidOunces wraps the corresponding Objective-C method.
 func FluidOunces() *UnitVolume {
-	_r := raw.NSUnitVolumeFluidOunces()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("fluidOunces"))
+	return UnitVolumeFromID(_r)
 }
 
-// Cups calls the underlying NSUnitVolumeCups.
+// Cups wraps the corresponding Objective-C method.
 func Cups() *UnitVolume {
-	_r := raw.NSUnitVolumeCups()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cups"))
+	return UnitVolumeFromID(_r)
 }
 
-// Pints calls the underlying NSUnitVolumePints.
+// Pints wraps the corresponding Objective-C method.
 func Pints() *UnitVolume {
-	_r := raw.NSUnitVolumePints()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("pints"))
+	return UnitVolumeFromID(_r)
 }
 
-// Quarts calls the underlying NSUnitVolumeQuarts.
+// Quarts wraps the corresponding Objective-C method.
 func Quarts() *UnitVolume {
-	_r := raw.NSUnitVolumeQuarts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("quarts"))
+	return UnitVolumeFromID(_r)
 }
 
-// Gallons calls the underlying NSUnitVolumeGallons.
+// Gallons wraps the corresponding Objective-C method.
 func Gallons() *UnitVolume {
-	_r := raw.NSUnitVolumeGallons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("gallons"))
+	return UnitVolumeFromID(_r)
 }
 
-// ImperialTeaspoons calls the underlying NSUnitVolumeImperialTeaspoons.
+// ImperialTeaspoons wraps the corresponding Objective-C method.
 func ImperialTeaspoons() *UnitVolume {
-	_r := raw.NSUnitVolumeImperialTeaspoons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialTeaspoons"))
+	return UnitVolumeFromID(_r)
 }
 
-// ImperialTablespoons calls the underlying NSUnitVolumeImperialTablespoons.
+// ImperialTablespoons wraps the corresponding Objective-C method.
 func ImperialTablespoons() *UnitVolume {
-	_r := raw.NSUnitVolumeImperialTablespoons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialTablespoons"))
+	return UnitVolumeFromID(_r)
 }
 
-// ImperialFluidOunces calls the underlying NSUnitVolumeImperialFluidOunces.
+// ImperialFluidOunces wraps the corresponding Objective-C method.
 func ImperialFluidOunces() *UnitVolume {
-	_r := raw.NSUnitVolumeImperialFluidOunces()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialFluidOunces"))
+	return UnitVolumeFromID(_r)
 }
 
-// ImperialPints calls the underlying NSUnitVolumeImperialPints.
+// ImperialPints wraps the corresponding Objective-C method.
 func ImperialPints() *UnitVolume {
-	_r := raw.NSUnitVolumeImperialPints()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialPints"))
+	return UnitVolumeFromID(_r)
 }
 
-// ImperialQuarts calls the underlying NSUnitVolumeImperialQuarts.
+// ImperialQuarts wraps the corresponding Objective-C method.
 func ImperialQuarts() *UnitVolume {
-	_r := raw.NSUnitVolumeImperialQuarts()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialQuarts"))
+	return UnitVolumeFromID(_r)
 }
 
-// ImperialGallons calls the underlying NSUnitVolumeImperialGallons.
+// ImperialGallons wraps the corresponding Objective-C method.
 func ImperialGallons() *UnitVolume {
-	_r := raw.NSUnitVolumeImperialGallons()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialGallons"))
+	return UnitVolumeFromID(_r)
 }
 
-// MetricCups calls the underlying NSUnitVolumeMetricCups.
+// MetricCups wraps the corresponding Objective-C method.
 func MetricCups() *UnitVolume {
-	_r := raw.NSUnitVolumeMetricCups()
-	if _r == nil {
-		return nil
-	}
-	return &UnitVolume{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("metricCups"))
+	return UnitVolumeFromID(_r)
 }
 
+// DeleteSavedUserActivitiesWithPersistentIdentifiers deletes user activities created by your app that have the specified persistent identifiers.
+//
 // DeleteSavedUserActivitiesWithPersistentIdentifiers blocks until the operation completes or ctx is cancelled.
-func DeleteSavedUserActivitiesWithPersistentIdentifiers(ctx context.Context, persistentIdentifiers *raw.NSArray[*raw.NSString]) error {
+func DeleteSavedUserActivitiesWithPersistentIdentifiers(ctx context.Context, persistentIdentifiers []*String) error {
 	_ch := make(chan error, 1)
-	raw.NSUserActivityDeleteSavedUserActivitiesWithPersistentIdentifiersCompletionHandler(persistentIdentifiers, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSUserActivity")), objc.RegisterName("deleteSavedUserActivitiesWithPersistentIdentifiers:completionHandler:"), purego.SliceToNSArray(persistentIdentifiers, func(_v *String) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -6876,12 +4760,15 @@ func DeleteSavedUserActivitiesWithPersistentIdentifiers(ctx context.Context, per
 	}
 }
 
+// DeleteAllSavedUserActivities deletes all user activities created by your app.
+//
 // DeleteAllSavedUserActivities blocks until the operation completes or ctx is cancelled.
 func DeleteAllSavedUserActivities(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.NSUserActivityDeleteAllSavedUserActivitiesWithCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSUserActivity")), objc.RegisterName("deleteAllSavedUserActivitiesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -6890,303 +4777,200 @@ func DeleteAllSavedUserActivities(ctx context.Context) error {
 	}
 }
 
-// ResetStandardUserDefaults calls the underlying NSUserDefaultsResetStandardUserDefaults.
+// ResetStandardUserDefaults +resetStandardUserDefaults releases the standardUserDefaults and sets it to nil. A new standardUserDefaults will be created the next time it's accessed. The only visible effect this has is that all KVO observers of the previous standardUserDefaults will no longer be observing it.
 func ResetStandardUserDefaults() {
-	raw.NSUserDefaultsResetStandardUserDefaults()
+	objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("resetStandardUserDefaults"))
 }
 
-// StandardUserDefaults calls the underlying NSUserDefaultsStandardUserDefaults.
+// StandardUserDefaults +standardUserDefaults returns a global instance of NSUserDefaults configured to search the current application's search list.
 func StandardUserDefaults() *UserDefaults {
-	_r := raw.NSUserDefaultsStandardUserDefaults()
-	if _r == nil {
-		return nil
-	}
-	return &UserDefaults{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("standardUserDefaults"))
+	return UserDefaultsFromID(_r)
 }
 
-// ActionWithIdentifierTitle calls the underlying NSUserNotificationActionActionWithIdentifierTitle.
+// ActionWithIdentifierTitle creates a user notification action with a specified identifier and title.
 func ActionWithIdentifierTitle(identifier string, title string) *UserNotificationAction {
-	_r := raw.NSUserNotificationActionActionWithIdentifierTitle(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &UserNotificationAction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationAction")), objc.RegisterName("actionWithIdentifier:title:"), purego.NSString(identifier), purego.NSString(title))
+	return UserNotificationActionFromID(_r)
 }
 
-// DefaultUserNotificationCenter calls the underlying NSUserNotificationCenterDefaultUserNotificationCenter.
+// DefaultUserNotificationCenter wraps the corresponding Objective-C method.
 func DefaultUserNotificationCenter() *UserNotificationCenter {
-	_r := raw.NSUserNotificationCenterDefaultUserNotificationCenter()
-	if _r == nil {
-		return nil
-	}
-	return &UserNotificationCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationCenter")), objc.RegisterName("defaultUserNotificationCenter"))
+	return UserNotificationCenterFromID(_r)
 }
 
-// ValueWithBytesObjCType calls the underlying NSValueValueWithBytesObjCType.
-func ValueWithBytesObjCType(value unsafe.Pointer, type_ string) *Value {
-	_r := raw.NSValueValueWithBytesObjCType(value, type_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNonretainedObject creates a value object containing the specified object.
+func ValueWithNonretainedObject(anObject obj.Object) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithNonretainedObject:"), objref.IDOf(anObject))
+	return ValueFromID(_r)
 }
 
-// ValueWithObjCType calls the underlying NSValueValueWithObjCType.
-func ValueWithObjCType(value unsafe.Pointer, type_ string) *Value {
-	_r := raw.NSValueValueWithObjCType(value, type_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
-}
-
-// ValueWithNonretainedObject calls the underlying NSValueValueWithNonretainedObject.
-func ValueWithNonretainedObject(anObject objc.ID) *Value {
-	_r := raw.NSValueValueWithNonretainedObject(anObject)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
-}
-
-// ValueWithPointer calls the underlying NSValueValueWithPointer.
-func ValueWithPointer(pointer unsafe.Pointer) *Value {
-	_r := raw.NSValueValueWithPointer(pointer)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
-}
-
-// ValueWithRange calls the underlying NSValueValueWithRange.
-func ValueWithRange(range_ raw.NSRange) *Value {
-	_r := raw.NSValueValueWithRange(range_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
-}
-
-// ValueWithPoint calls the underlying NSValueValueWithPoint.
+// ValueWithPoint creates a new value object containing the specified Foundation point structure.
 func ValueWithPoint(point corefoundation.CGPoint) *Value {
-	_r := raw.NSValueValueWithPoint(point)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithPoint:"), point)
+	return ValueFromID(_r)
 }
 
-// ValueWithSize calls the underlying NSValueValueWithSize.
+// ValueWithSize creates a new value object containing the specified Foundation size structure.
 func ValueWithSize(size corefoundation.CGSize) *Value {
-	_r := raw.NSValueValueWithSize(size)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithSize:"), size)
+	return ValueFromID(_r)
 }
 
-// ValueWithRect calls the underlying NSValueValueWithRect.
+// ValueWithRect creates a new value object containing the specified Foundation rectangle structure.
 func ValueWithRect(rect corefoundation.CGRect) *Value {
-	_r := raw.NSValueValueWithRect(rect)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithRect:"), rect)
+	return ValueFromID(_r)
 }
 
-// ValueWithEdgeInsets calls the underlying NSValueValueWithEdgeInsets.
-func ValueWithEdgeInsets(insets raw.NSEdgeInsets) *Value {
-	_r := raw.NSValueValueWithEdgeInsets(insets)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// SetValueTransformerForName wraps the corresponding Objective-C method.
+func SetValueTransformerForName(transformer *ValueTransformer, name *String) {
+	objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("setValueTransformer:forName:"), objref.IDOf(transformer), objref.IDOf(name))
 }
 
-// SetValueTransformerForName calls the underlying NSValueTransformerSetValueTransformerForName.
-func SetValueTransformerForName(transformer *raw.NSValueTransformer, name *raw.NSString) {
-	raw.NSValueTransformerSetValueTransformerForName(transformer, name)
+// ValueTransformerForName wraps the corresponding Objective-C method.
+func ValueTransformerForName(name *String) *ValueTransformer {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("valueTransformerForName:"), objref.IDOf(name))
+	return ValueTransformerFromID(_r)
 }
 
-// ValueTransformerForName calls the underlying NSValueTransformerValueTransformerForName.
-func ValueTransformerForName(name *raw.NSString) *ValueTransformer {
-	_r := raw.NSValueTransformerValueTransformerForName(name)
-	if _r == nil {
-		return nil
-	}
-	return &ValueTransformer{inner: _r}
-}
-
+// ValueTransformerNames wraps the corresponding Objective-C method.
+//
 // ValueTransformerNames returns the collection as a Go slice.
 func ValueTransformerNames() []*String {
-	arr := raw.NSValueTransformerValueTransformerNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *String {
-		return &String{inner: raw.NSStringFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("valueTransformerNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// TransformedValueClass calls the underlying NSValueTransformerTransformedValueClass.
-func TransformedValueClass() objc.Class {
-	return raw.NSValueTransformerTransformedValueClass()
-}
-
-// AllowsReverseTransformation calls the underlying NSValueTransformerAllowsReverseTransformation.
+// AllowsReverseTransformation wraps the corresponding Objective-C method.
 func AllowsReverseTransformation() bool {
-	return raw.NSValueTransformerAllowsReverseTransformation()
+	_r := objc.Send[bool](objc.ID(_class("NSValueTransformer")), objc.RegisterName("allowsReverseTransformation"))
+	return _r
 }
 
-// PredefinedEntityDeclarationForName calls the underlying NSXMLDTDPredefinedEntityDeclarationForName.
+// PredefinedEntityDeclarationForName returns the predefined entity declaration matching this name. The five predefined entities are <ul><li>&amp;lt; - &lt;</li><li>&amp;gt; - &gt;</li><li>&amp;amp; - &amp;</li><li>&amp;quot; - &quot;</li><li>&amp;apos; - &amp;</li></ul>
 func PredefinedEntityDeclarationForName(name string) *XMLDTDNode {
-	_r := raw.NSXMLDTDPredefinedEntityDeclarationForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLDTD")), objc.RegisterName("predefinedEntityDeclarationForName:"), purego.NSString(name))
+	return XMLDTDNodeFromID(_r)
+}
+
+// Document returns an empty document.
+func Document() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("document"))
+	return obj.Wrap(_r)
+}
+
+// DocumentWithRootElement returns a document
+func DocumentWithRootElement(element *XMLElement) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("documentWithRootElement:"), objref.IDOf(element))
+	return obj.Wrap(_r)
+}
+
+// ElementWithName returns an element <tt>&lt;name>&lt;/name></tt>.
+func ElementWithName(name string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:"), purego.NSString(name))
+	return obj.Wrap(_r)
+}
+
+// ElementWithNameURI returns an element whose full QName is specified.
+func ElementWithNameURI(name string, uRI string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:URI:"), purego.NSString(name), purego.NSString(uRI))
+	return obj.Wrap(_r)
+}
+
+// ElementWithNameStringValue returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
+func ElementWithNameStringValue(name string, string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:stringValue:"), purego.NSString(name), purego.NSString(string_))
+	return obj.Wrap(_r)
+}
+
+// ElementWithNameChildrenAttributes returns an element children and attributes <tt>&lt;name attr1="foo" attr2="bar">&lt;-- child1 -->child2&lt;/name></tt>.
+func ElementWithNameChildrenAttributes(name string, children []*XMLNode, attributes []*XMLNode) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:children:attributes:"), purego.NSString(name), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(attributes, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
+}
+
+// AttributeWithNameStringValue returns an attribute <tt>name="stringValue"</tt>.
+func AttributeWithNameStringValue(name string, stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("attributeWithName:stringValue:"), purego.NSString(name), purego.NSString(stringValue))
+	return obj.Wrap(_r)
+}
+
+// AttributeWithNameURIStringValue returns an attribute whose full QName is specified.
+func AttributeWithNameURIStringValue(name string, uRI string, stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("attributeWithName:URI:stringValue:"), purego.NSString(name), purego.NSString(uRI), purego.NSString(stringValue))
+	return obj.Wrap(_r)
+}
+
+// NamespaceWithNameStringValue returns a namespace <tt>xmlns:name="stringValue"</tt>.
+func NamespaceWithNameStringValue(name string, stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("namespaceWithName:stringValue:"), purego.NSString(name), purego.NSString(stringValue))
+	return obj.Wrap(_r)
+}
+
+// ProcessingInstructionWithNameStringValue returns a processing instruction <tt>&lt;?name stringValue></tt>.
+func ProcessingInstructionWithNameStringValue(name string, stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("processingInstructionWithName:stringValue:"), purego.NSString(name), purego.NSString(stringValue))
+	return obj.Wrap(_r)
+}
+
+// CommentWithStringValue returns a comment <tt>&lt;--stringValue--></tt>.
+func CommentWithStringValue(stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("commentWithStringValue:"), purego.NSString(stringValue))
+	return obj.Wrap(_r)
+}
+
+// TextWithStringValue returns a text node.
+func TextWithStringValue(stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("textWithStringValue:"), purego.NSString(stringValue))
+	return obj.Wrap(_r)
+}
+
+// DTDNodeWithXMLString returns an element, attribute, entity, or notation DTD node based on the full XML string.
+func DTDNodeWithXMLString(string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("DTDNodeWithXMLString:"), purego.NSString(string_))
+	return obj.Wrap(_r)
+}
+
+// LocalNameForName returns the local name bar in foo:bar.
+func LocalNameForName(name string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("localNameForName:"), purego.NSString(name))
+	if _r == 0 {
+		return ""
 	}
-	return &XMLDTDNode{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ReplacementClassForClass calls the underlying NSXMLDocumentReplacementClassForClass.
-func ReplacementClassForClass(cls objc.Class) objc.Class {
-	return raw.NSXMLDocumentReplacementClassForClass(cls)
-}
-
-// Document calls the underlying NSXMLNodeDocument.
-func Document() objc.ID {
-	return raw.NSXMLNodeDocument()
-}
-
-// DocumentWithRootElement calls the underlying NSXMLNodeDocumentWithRootElement.
-func DocumentWithRootElement(element *raw.NSXMLElement) objc.ID {
-	return raw.NSXMLNodeDocumentWithRootElement(element)
-}
-
-// ElementWithName calls the underlying NSXMLNodeElementWithName.
-func ElementWithName(name string) objc.ID {
-	return raw.NSXMLNodeElementWithName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// ElementWithNameURI calls the underlying NSXMLNodeElementWithNameURI.
-func ElementWithNameURI(name string, uRI string) objc.ID {
-	return raw.NSXMLNodeElementWithNameURI(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(uRI))
-}
-
-// ElementWithNameStringValue calls the underlying NSXMLNodeElementWithNameStringValue.
-func ElementWithNameStringValue(name string, string_ string) objc.ID {
-	return raw.NSXMLNodeElementWithNameStringValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(string_))
-}
-
-// ElementWithNameChildrenAttributes calls the underlying NSXMLNodeElementWithNameChildrenAttributes.
-func ElementWithNameChildrenAttributes(name string, children *raw.NSArray[*raw.NSXMLNode], attributes ...XMLNodeProvider) objc.ID {
-	_ptrs := make([]objc.ID, len(attributes))
-	for _i, _v := range attributes {
-		_ptrs[_i] = _v.asXMLNode().Ptr()
+// PrefixForName returns the prefix foo in the name foo:bar.
+func PrefixForName(name string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("prefixForName:"), purego.NSString(name))
+	if _r == 0 {
+		return ""
 	}
-	var _arg2 *raw.NSArray[*raw.NSXMLNode]
-	if len(_ptrs) > 0 {
-		_arg2 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return raw.NSXMLNodeElementWithNameChildrenAttributes(foundation.NSStringStringWithUTF8String(name), children, _arg2)
+	return purego.GoString(_r)
 }
 
-// AttributeWithNameStringValue calls the underlying NSXMLNodeAttributeWithNameStringValue.
-func AttributeWithNameStringValue(name string, stringValue string) objc.ID {
-	return raw.NSXMLNodeAttributeWithNameStringValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// AttributeWithNameURIStringValue calls the underlying NSXMLNodeAttributeWithNameURIStringValue.
-func AttributeWithNameURIStringValue(name string, uRI string, stringValue string) objc.ID {
-	return raw.NSXMLNodeAttributeWithNameURIStringValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(uRI), foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// NamespaceWithNameStringValue calls the underlying NSXMLNodeNamespaceWithNameStringValue.
-func NamespaceWithNameStringValue(name string, stringValue string) objc.ID {
-	return raw.NSXMLNodeNamespaceWithNameStringValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// ProcessingInstructionWithNameStringValue calls the underlying NSXMLNodeProcessingInstructionWithNameStringValue.
-func ProcessingInstructionWithNameStringValue(name string, stringValue string) objc.ID {
-	return raw.NSXMLNodeProcessingInstructionWithNameStringValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// CommentWithStringValue calls the underlying NSXMLNodeCommentWithStringValue.
-func CommentWithStringValue(stringValue string) objc.ID {
-	return raw.NSXMLNodeCommentWithStringValue(foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// TextWithStringValue calls the underlying NSXMLNodeTextWithStringValue.
-func TextWithStringValue(stringValue string) objc.ID {
-	return raw.NSXMLNodeTextWithStringValue(foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// DTDNodeWithXMLString calls the underlying NSXMLNodeDTDNodeWithXMLString.
-func DTDNodeWithXMLString(string_ string) objc.ID {
-	return raw.NSXMLNodeDTDNodeWithXMLString(foundation.NSStringStringWithUTF8String(string_))
-}
-
-// LocalNameForName calls the underlying NSXMLNodeLocalNameForName.
-func LocalNameForName(name string) *String {
-	_r := raw.NSXMLNodeLocalNameForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// PrefixForName calls the underlying NSXMLNodePrefixForName.
-func PrefixForName(name string) *String {
-	_r := raw.NSXMLNodePrefixForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// PredefinedNamespaceForPrefix calls the underlying NSXMLNodePredefinedNamespaceForPrefix.
+// PredefinedNamespaceForPrefix returns the namespace belonging to one of the predefined namespaces xml, xs, or xsi
 func PredefinedNamespaceForPrefix(name string) *XMLNode {
-	_r := raw.NSXMLNodePredefinedNamespaceForPrefix(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &XMLNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("predefinedNamespaceForPrefix:"), purego.NSString(name))
+	return XMLNodeFromID(_r)
 }
 
-// CurrentConnection calls the underlying NSXPCConnectionCurrentConnection.
+// CurrentConnection returns the current connection, in the context of a call to a method on your exported object.
 func CurrentConnection() *XPCConnection {
-	_r := raw.NSXPCConnectionCurrentConnection()
-	if _r == nil {
-		return nil
-	}
-	return &XPCConnection{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXPCConnection")), objc.RegisterName("currentConnection"))
+	return XPCConnectionFromID(_r)
 }
 
-// InterfaceWithProtocol calls the underlying NSXPCInterfaceInterfaceWithProtocol.
-func InterfaceWithProtocol(protocol unsafe.Pointer) *XPCInterface {
-	_r := raw.NSXPCInterfaceInterfaceWithProtocol(protocol)
-	if _r == nil {
-		return nil
-	}
-	return &XPCInterface{inner: _r}
-}
-
-// ServiceListener calls the underlying NSXPCListenerServiceListener.
+// ServiceListener returns the singleton listener used to listen for incoming connections in an XPC service.
 func ServiceListener() *XPCListener {
-	_r := raw.NSXPCListenerServiceListener()
-	if _r == nil {
-		return nil
-	}
-	return &XPCListener{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXPCListener")), objc.RegisterName("serviceListener"))
+	return XPCListenerFromID(_r)
 }
 
-// AnonymousListener calls the underlying NSXPCListenerAnonymousListener.
+// AnonymousListener returns a new anonymous listener connection.
 func AnonymousListener() *XPCListener {
-	_r := raw.NSXPCListenerAnonymousListener()
-	if _r == nil {
-		return nil
-	}
-	return &XPCListener{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXPCListener")), objc.RegisterName("anonymousListener"))
+	return XPCListenerFromID(_r)
 }

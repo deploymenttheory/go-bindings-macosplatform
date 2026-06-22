@@ -5,47 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the message’s format.
+// OutgoingMessageTypeResolutionResult is an idiomatic wrapper over the Objective-C class INOutgoingMessageTypeResolutionResult.
 //
-// OutgoingMessageTypeResolutionResult wraps [raw.INOutgoingMessageTypeResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for the message’s format.
 type OutgoingMessageTypeResolutionResult struct {
-	inner *raw.INOutgoingMessageTypeResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INOutgoingMessageTypeResolutionResult].
-func (x *OutgoingMessageTypeResolutionResult) Unwrap() *raw.INOutgoingMessageTypeResolutionResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OutgoingMessageTypeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// OutgoingMessageTypeResolutionResultFromID adopts an existing object pointer as a OutgoingMessageTypeResolutionResult (nil for 0).
+// OutgoingMessageTypeResolutionResultFromID adopts an existing Objective-C object as a OutgoingMessageTypeResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func OutgoingMessageTypeResolutionResultFromID(id objc.ID) *OutgoingMessageTypeResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &OutgoingMessageTypeResolutionResult{inner: raw.INOutgoingMessageTypeResolutionResultFromID(id)}
+	x := &OutgoingMessageTypeResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewOutgoingMessageTypeResolutionResult creates a new [OutgoingMessageTypeResolutionResult].
+// outgoingMessageTypeResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// OutgoingMessageTypeResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func outgoingMessageTypeResolutionResultAdopt(id objc.ID) *OutgoingMessageTypeResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &OutgoingMessageTypeResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewOutgoingMessageTypeResolutionResult creates a new OutgoingMessageTypeResolutionResult.
 func NewOutgoingMessageTypeResolutionResult() *OutgoingMessageTypeResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INOutgoingMessageTypeResolutionResult")), objc.RegisterName("new"))
-	return &OutgoingMessageTypeResolutionResult{inner: raw.INOutgoingMessageTypeResolutionResultFromID(_id)}
-}
-
-func (x *OutgoingMessageTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INOutgoingMessageTypeResolutionResult")), objc.RegisterName("new"))
+	return outgoingMessageTypeResolutionResultAdopt(_id)
 }
 
 // OutgoingMessageTypeResolutionResultable is the interface implemented by [OutgoingMessageTypeResolutionResult], for mocking and DI.
 type OutgoingMessageTypeResolutionResultable interface {
-	Unwrap() *raw.INOutgoingMessageTypeResolutionResult
+	obj.Object
 }
 
 var _ OutgoingMessageTypeResolutionResultable = (*OutgoingMessageTypeResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*OutgoingMessageTypeResolutionResult)(nil)

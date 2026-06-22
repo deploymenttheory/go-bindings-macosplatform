@@ -5,357 +5,499 @@
 package searchkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/searchkit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SKDocumentCopyURL calls [raw.SKDocumentCopyURL] (C function SKDocumentCopyURL).
-func SKDocumentCopyURL(inDocument unsafe.Pointer) unsafe.Pointer {
-	return raw.SKDocumentCopyURL(inDocument)
+var _fnSKDocumentGetTypeID func() int
+
+// SKDocumentGetTypeID calls the SearchKit framework function SKDocumentGetTypeID.
+func SKDocumentGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKDocumentGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKDocumentGetTypeID, _lib, "SKDocumentGetTypeID")
+	}
+	return _fnSKDocumentGetTypeID()
 }
 
-// SKDocumentCreate calls [raw.SKDocumentCreate] (C function SKDocumentCreate).
-func SKDocumentCreate(inScheme unsafe.Pointer, inParent unsafe.Pointer, inName unsafe.Pointer) unsafe.Pointer {
-	return raw.SKDocumentCreate(inScheme, inParent, inName)
+var _fnSKIndexClose func(objc.ID)
+
+// SKIndexClose calls the SearchKit framework function SKIndexClose.
+func SKIndexClose(inIndex obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexClose == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexClose, _lib, "SKIndexClose")
+	}
+	_fnSKIndexClose(objref.IDOf(inIndex))
 }
 
-// SKDocumentCreateWithURL calls [raw.SKDocumentCreateWithURL] (C function SKDocumentCreateWithURL).
-func SKDocumentCreateWithURL(inURL unsafe.Pointer) unsafe.Pointer {
-	return raw.SKDocumentCreateWithURL(inURL)
+var _fnSKIndexCompact func(objc.ID) uint8
+
+// SKIndexCompact calls the SearchKit framework function SKIndexCompact.
+func SKIndexCompact(inIndex obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCompact == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCompact, _lib, "SKIndexCompact")
+	}
+	return _fnSKIndexCompact(objref.IDOf(inIndex))
 }
 
-// SKDocumentGetName calls [raw.SKDocumentGetName] (C function SKDocumentGetName).
-func SKDocumentGetName(inDocument unsafe.Pointer) unsafe.Pointer {
-	return raw.SKDocumentGetName(inDocument)
+var _fnSKIndexCopyDocumentIDArrayForTermID func(objc.ID, int) objc.ID
+
+// SKIndexCopyDocumentIDArrayForTermID calls the SearchKit framework function SKIndexCopyDocumentIDArrayForTermID.
+func SKIndexCopyDocumentIDArrayForTermID(inIndex obj.Object, inTermID int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCopyDocumentIDArrayForTermID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCopyDocumentIDArrayForTermID, _lib, "SKIndexCopyDocumentIDArrayForTermID")
+	}
+	_ret := _fnSKIndexCopyDocumentIDArrayForTermID(objref.IDOf(inIndex), inTermID)
+	return obj.Wrap(_ret)
 }
 
-// SKDocumentGetParent calls [raw.SKDocumentGetParent] (C function SKDocumentGetParent).
-func SKDocumentGetParent(inDocument unsafe.Pointer) unsafe.Pointer {
-	return raw.SKDocumentGetParent(inDocument)
+var _fnSKIndexCopyTermIDArrayForDocumentID func(objc.ID, int) objc.ID
+
+// SKIndexCopyTermIDArrayForDocumentID calls the SearchKit framework function SKIndexCopyTermIDArrayForDocumentID.
+func SKIndexCopyTermIDArrayForDocumentID(inIndex obj.Object, inDocumentID int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCopyTermIDArrayForDocumentID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCopyTermIDArrayForDocumentID, _lib, "SKIndexCopyTermIDArrayForDocumentID")
+	}
+	_ret := _fnSKIndexCopyTermIDArrayForDocumentID(objref.IDOf(inIndex), inDocumentID)
+	return obj.Wrap(_ret)
 }
 
-// SKDocumentGetSchemeName calls [raw.SKDocumentGetSchemeName] (C function SKDocumentGetSchemeName).
-func SKDocumentGetSchemeName(inDocument unsafe.Pointer) unsafe.Pointer {
-	return raw.SKDocumentGetSchemeName(inDocument)
+var _fnSKIndexCopyTermStringForTermID func(objc.ID, int) objc.ID
+
+// SKIndexCopyTermStringForTermID calls the SearchKit framework function SKIndexCopyTermStringForTermID.
+func SKIndexCopyTermStringForTermID(inIndex obj.Object, inTermID int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCopyTermStringForTermID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCopyTermStringForTermID, _lib, "SKIndexCopyTermStringForTermID")
+	}
+	_ret := _fnSKIndexCopyTermStringForTermID(objref.IDOf(inIndex), inTermID)
+	return obj.Wrap(_ret)
 }
 
-// SKDocumentGetTypeID calls [raw.SKDocumentGetTypeID] (C function SKDocumentGetTypeID).
-func SKDocumentGetTypeID() uint {
-	return raw.SKDocumentGetTypeID()
+var _fnSKIndexCreateWithMutableData func(objc.ID, objc.ID, SKIndexType, objc.ID) objc.ID
+
+// SKIndexCreateWithMutableData calls the SearchKit framework function SKIndexCreateWithMutableData.
+func SKIndexCreateWithMutableData(inData obj.Object, inIndexName obj.Object, inIndexType SKIndexType, inAnalysisProperties obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCreateWithMutableData == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCreateWithMutableData, _lib, "SKIndexCreateWithMutableData")
+	}
+	_ret := _fnSKIndexCreateWithMutableData(objref.IDOf(inData), objref.IDOf(inIndexName), inIndexType, objref.IDOf(inAnalysisProperties))
+	return obj.Wrap(_ret)
 }
 
-// SKIndexAddDocument calls [raw.SKIndexAddDocument] (C function SKIndexAddDocument).
-func SKIndexAddDocument(inIndex unsafe.Pointer, inDocument unsafe.Pointer, inMIMETypeHint unsafe.Pointer, inCanReplace uint8) uint8 {
-	return raw.SKIndexAddDocument(inIndex, inDocument, inMIMETypeHint, inCanReplace)
+var _fnSKIndexCreateWithURL func(objc.ID, objc.ID, SKIndexType, objc.ID) objc.ID
+
+// SKIndexCreateWithURL calls the SearchKit framework function SKIndexCreateWithURL.
+func SKIndexCreateWithURL(inURL obj.Object, inIndexName obj.Object, inIndexType SKIndexType, inAnalysisProperties obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCreateWithURL, _lib, "SKIndexCreateWithURL")
+	}
+	_ret := _fnSKIndexCreateWithURL(objref.IDOf(inURL), objref.IDOf(inIndexName), inIndexType, objref.IDOf(inAnalysisProperties))
+	return obj.Wrap(_ret)
 }
 
-// SKIndexAddDocumentWithText calls [raw.SKIndexAddDocumentWithText] (C function SKIndexAddDocumentWithText).
-func SKIndexAddDocumentWithText(inIndex unsafe.Pointer, inDocument unsafe.Pointer, inDocumentText unsafe.Pointer, inCanReplace uint8) uint8 {
-	return raw.SKIndexAddDocumentWithText(inIndex, inDocument, inDocumentText, inCanReplace)
+var _fnSKIndexDocumentIteratorGetTypeID func() int
+
+// SKIndexDocumentIteratorGetTypeID calls the SearchKit framework function SKIndexDocumentIteratorGetTypeID.
+func SKIndexDocumentIteratorGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexDocumentIteratorGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexDocumentIteratorGetTypeID, _lib, "SKIndexDocumentIteratorGetTypeID")
+	}
+	return _fnSKIndexDocumentIteratorGetTypeID()
 }
 
-// SKIndexClose calls [raw.SKIndexClose] (C function SKIndexClose).
-func SKIndexClose(inIndex unsafe.Pointer) {
-	raw.SKIndexClose(inIndex)
+var _fnSKIndexFlush func(objc.ID) uint8
+
+// SKIndexFlush calls the SearchKit framework function SKIndexFlush.
+func SKIndexFlush(inIndex obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexFlush, _lib, "SKIndexFlush")
+	}
+	return _fnSKIndexFlush(objref.IDOf(inIndex))
 }
 
-// SKIndexCompact calls [raw.SKIndexCompact] (C function SKIndexCompact).
-func SKIndexCompact(inIndex unsafe.Pointer) uint8 {
-	return raw.SKIndexCompact(inIndex)
+var _fnSKIndexGetAnalysisProperties func(objc.ID) objc.ID
+
+// SKIndexGetAnalysisProperties calls the SearchKit framework function SKIndexGetAnalysisProperties.
+func SKIndexGetAnalysisProperties(inIndex obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetAnalysisProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetAnalysisProperties, _lib, "SKIndexGetAnalysisProperties")
+	}
+	_ret := _fnSKIndexGetAnalysisProperties(objref.IDOf(inIndex))
+	return obj.Wrap(_ret)
 }
 
-// SKIndexCopyDocumentForDocumentID calls [raw.SKIndexCopyDocumentForDocumentID] (C function SKIndexCopyDocumentForDocumentID).
-func SKIndexCopyDocumentForDocumentID(inIndex unsafe.Pointer, inDocumentID int) unsafe.Pointer {
-	return raw.SKIndexCopyDocumentForDocumentID(inIndex, inDocumentID)
+var _fnSKIndexGetDocumentCount func(objc.ID) int
+
+// SKIndexGetDocumentCount calls the SearchKit framework function SKIndexGetDocumentCount.
+func SKIndexGetDocumentCount(inIndex obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetDocumentCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetDocumentCount, _lib, "SKIndexGetDocumentCount")
+	}
+	return _fnSKIndexGetDocumentCount(objref.IDOf(inIndex))
 }
 
-// SKIndexCopyDocumentIDArrayForTermID calls [raw.SKIndexCopyDocumentIDArrayForTermID] (C function SKIndexCopyDocumentIDArrayForTermID).
-func SKIndexCopyDocumentIDArrayForTermID(inIndex unsafe.Pointer, inTermID int) unsafe.Pointer {
-	return raw.SKIndexCopyDocumentIDArrayForTermID(inIndex, inTermID)
+var _fnSKIndexGetDocumentTermCount func(objc.ID, int) int
+
+// SKIndexGetDocumentTermCount calls the SearchKit framework function SKIndexGetDocumentTermCount.
+func SKIndexGetDocumentTermCount(inIndex obj.Object, inDocumentID int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetDocumentTermCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetDocumentTermCount, _lib, "SKIndexGetDocumentTermCount")
+	}
+	return _fnSKIndexGetDocumentTermCount(objref.IDOf(inIndex), inDocumentID)
 }
 
-// SKIndexCopyDocumentProperties calls [raw.SKIndexCopyDocumentProperties] (C function SKIndexCopyDocumentProperties).
-func SKIndexCopyDocumentProperties(inIndex unsafe.Pointer, inDocument unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexCopyDocumentProperties(inIndex, inDocument)
+var _fnSKIndexGetDocumentTermFrequency func(objc.ID, int, int) int
+
+// SKIndexGetDocumentTermFrequency calls the SearchKit framework function SKIndexGetDocumentTermFrequency.
+func SKIndexGetDocumentTermFrequency(inIndex obj.Object, inDocumentID int, inTermID int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetDocumentTermFrequency == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetDocumentTermFrequency, _lib, "SKIndexGetDocumentTermFrequency")
+	}
+	return _fnSKIndexGetDocumentTermFrequency(objref.IDOf(inIndex), inDocumentID, inTermID)
 }
 
-// SKIndexCopyDocumentRefsForDocumentIDs calls [raw.SKIndexCopyDocumentRefsForDocumentIDs] (C function SKIndexCopyDocumentRefsForDocumentIDs).
-func SKIndexCopyDocumentRefsForDocumentIDs(inIndex unsafe.Pointer, inCount int, inDocumentIDsArray *int, outDocumentRefsArray unsafe.Pointer) {
-	raw.SKIndexCopyDocumentRefsForDocumentIDs(inIndex, inCount, inDocumentIDsArray, outDocumentRefsArray)
+var _fnSKIndexGetIndexType func(objc.ID) SKIndexType
+
+// SKIndexGetIndexType calls the SearchKit framework function SKIndexGetIndexType.
+func SKIndexGetIndexType(inIndex obj.Object) SKIndexType {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetIndexType == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetIndexType, _lib, "SKIndexGetIndexType")
+	}
+	return _fnSKIndexGetIndexType(objref.IDOf(inIndex))
 }
 
-// SKIndexCopyDocumentURLsForDocumentIDs calls [raw.SKIndexCopyDocumentURLsForDocumentIDs] (C function SKIndexCopyDocumentURLsForDocumentIDs).
-func SKIndexCopyDocumentURLsForDocumentIDs(inIndex unsafe.Pointer, inCount int, inDocumentIDsArray *int, outDocumentURLsArray unsafe.Pointer) {
-	raw.SKIndexCopyDocumentURLsForDocumentIDs(inIndex, inCount, inDocumentIDsArray, outDocumentURLsArray)
+var _fnSKIndexGetMaximumBytesBeforeFlush func(objc.ID) int
+
+// SKIndexGetMaximumBytesBeforeFlush calls the SearchKit framework function SKIndexGetMaximumBytesBeforeFlush.
+func SKIndexGetMaximumBytesBeforeFlush(inIndex obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetMaximumBytesBeforeFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetMaximumBytesBeforeFlush, _lib, "SKIndexGetMaximumBytesBeforeFlush")
+	}
+	return _fnSKIndexGetMaximumBytesBeforeFlush(objref.IDOf(inIndex))
 }
 
-// SKIndexCopyInfoForDocumentIDs calls [raw.SKIndexCopyInfoForDocumentIDs] (C function SKIndexCopyInfoForDocumentIDs).
-func SKIndexCopyInfoForDocumentIDs(inIndex unsafe.Pointer, inCount int, inDocumentIDsArray *int, outNamesArray unsafe.Pointer, outParentIDsArray *int) {
-	raw.SKIndexCopyInfoForDocumentIDs(inIndex, inCount, inDocumentIDsArray, outNamesArray, outParentIDsArray)
+var _fnSKIndexGetMaximumDocumentID func(objc.ID) int
+
+// SKIndexGetMaximumDocumentID calls the SearchKit framework function SKIndexGetMaximumDocumentID.
+func SKIndexGetMaximumDocumentID(inIndex obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetMaximumDocumentID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetMaximumDocumentID, _lib, "SKIndexGetMaximumDocumentID")
+	}
+	return _fnSKIndexGetMaximumDocumentID(objref.IDOf(inIndex))
 }
 
-// SKIndexCopyTermIDArrayForDocumentID calls [raw.SKIndexCopyTermIDArrayForDocumentID] (C function SKIndexCopyTermIDArrayForDocumentID).
-func SKIndexCopyTermIDArrayForDocumentID(inIndex unsafe.Pointer, inDocumentID int) unsafe.Pointer {
-	return raw.SKIndexCopyTermIDArrayForDocumentID(inIndex, inDocumentID)
+var _fnSKIndexGetMaximumTermID func(objc.ID) int
+
+// SKIndexGetMaximumTermID calls the SearchKit framework function SKIndexGetMaximumTermID.
+func SKIndexGetMaximumTermID(inIndex obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetMaximumTermID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetMaximumTermID, _lib, "SKIndexGetMaximumTermID")
+	}
+	return _fnSKIndexGetMaximumTermID(objref.IDOf(inIndex))
 }
 
-// SKIndexCopyTermStringForTermID calls [raw.SKIndexCopyTermStringForTermID] (C function SKIndexCopyTermStringForTermID).
-func SKIndexCopyTermStringForTermID(inIndex unsafe.Pointer, inTermID int) unsafe.Pointer {
-	return raw.SKIndexCopyTermStringForTermID(inIndex, inTermID)
+var _fnSKIndexGetTermDocumentCount func(objc.ID, int) int
+
+// SKIndexGetTermDocumentCount calls the SearchKit framework function SKIndexGetTermDocumentCount.
+func SKIndexGetTermDocumentCount(inIndex obj.Object, inTermID int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetTermDocumentCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetTermDocumentCount, _lib, "SKIndexGetTermDocumentCount")
+	}
+	return _fnSKIndexGetTermDocumentCount(objref.IDOf(inIndex), inTermID)
 }
 
-// SKIndexCreateWithMutableData calls [raw.SKIndexCreateWithMutableData] (C function SKIndexCreateWithMutableData).
-func SKIndexCreateWithMutableData(inData unsafe.Pointer, inIndexName unsafe.Pointer, inIndexType SKIndexType, inAnalysisProperties unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexCreateWithMutableData(inData, inIndexName, raw.SKIndexType(inIndexType), inAnalysisProperties)
+var _fnSKIndexGetTermIDForTermString func(objc.ID, objc.ID) int
+
+// SKIndexGetTermIDForTermString calls the SearchKit framework function SKIndexGetTermIDForTermString.
+func SKIndexGetTermIDForTermString(inIndex obj.Object, inTermString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetTermIDForTermString == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetTermIDForTermString, _lib, "SKIndexGetTermIDForTermString")
+	}
+	return _fnSKIndexGetTermIDForTermString(objref.IDOf(inIndex), objref.IDOf(inTermString))
 }
 
-// SKIndexCreateWithURL calls [raw.SKIndexCreateWithURL] (C function SKIndexCreateWithURL).
-func SKIndexCreateWithURL(inURL unsafe.Pointer, inIndexName unsafe.Pointer, inIndexType SKIndexType, inAnalysisProperties unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexCreateWithURL(inURL, inIndexName, raw.SKIndexType(inIndexType), inAnalysisProperties)
+var _fnSKIndexGetTypeID func() int
+
+// SKIndexGetTypeID calls the SearchKit framework function SKIndexGetTypeID.
+func SKIndexGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexGetTypeID, _lib, "SKIndexGetTypeID")
+	}
+	return _fnSKIndexGetTypeID()
 }
 
-// SKIndexDocumentIteratorCopyNext calls [raw.SKIndexDocumentIteratorCopyNext] (C function SKIndexDocumentIteratorCopyNext).
-func SKIndexDocumentIteratorCopyNext(inIterator unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexDocumentIteratorCopyNext(inIterator)
+var _fnSKIndexOpenWithData func(objc.ID, objc.ID) objc.ID
+
+// SKIndexOpenWithData calls the SearchKit framework function SKIndexOpenWithData.
+func SKIndexOpenWithData(inData obj.Object, inIndexName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexOpenWithData == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexOpenWithData, _lib, "SKIndexOpenWithData")
+	}
+	_ret := _fnSKIndexOpenWithData(objref.IDOf(inData), objref.IDOf(inIndexName))
+	return obj.Wrap(_ret)
 }
 
-// SKIndexDocumentIteratorCreate calls [raw.SKIndexDocumentIteratorCreate] (C function SKIndexDocumentIteratorCreate).
-func SKIndexDocumentIteratorCreate(inIndex unsafe.Pointer, inParentDocument unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexDocumentIteratorCreate(inIndex, inParentDocument)
+var _fnSKIndexOpenWithMutableData func(objc.ID, objc.ID) objc.ID
+
+// SKIndexOpenWithMutableData calls the SearchKit framework function SKIndexOpenWithMutableData.
+func SKIndexOpenWithMutableData(inData obj.Object, inIndexName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexOpenWithMutableData == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexOpenWithMutableData, _lib, "SKIndexOpenWithMutableData")
+	}
+	_ret := _fnSKIndexOpenWithMutableData(objref.IDOf(inData), objref.IDOf(inIndexName))
+	return obj.Wrap(_ret)
 }
 
-// SKIndexDocumentIteratorGetTypeID calls [raw.SKIndexDocumentIteratorGetTypeID] (C function SKIndexDocumentIteratorGetTypeID).
-func SKIndexDocumentIteratorGetTypeID() uint {
-	return raw.SKIndexDocumentIteratorGetTypeID()
+var _fnSKIndexOpenWithURL func(objc.ID, objc.ID, uint8) objc.ID
+
+// SKIndexOpenWithURL calls the SearchKit framework function SKIndexOpenWithURL.
+func SKIndexOpenWithURL(inURL obj.Object, inIndexName obj.Object, inWriteAccess uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexOpenWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexOpenWithURL, _lib, "SKIndexOpenWithURL")
+	}
+	_ret := _fnSKIndexOpenWithURL(objref.IDOf(inURL), objref.IDOf(inIndexName), inWriteAccess)
+	return obj.Wrap(_ret)
 }
 
-// SKIndexFlush calls [raw.SKIndexFlush] (C function SKIndexFlush).
-func SKIndexFlush(inIndex unsafe.Pointer) uint8 {
-	return raw.SKIndexFlush(inIndex)
+var _fnSKIndexSetMaximumBytesBeforeFlush func(objc.ID, int)
+
+// SKIndexSetMaximumBytesBeforeFlush calls the SearchKit framework function SKIndexSetMaximumBytesBeforeFlush.
+func SKIndexSetMaximumBytesBeforeFlush(inIndex obj.Object, inBytesForUpdate int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexSetMaximumBytesBeforeFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexSetMaximumBytesBeforeFlush, _lib, "SKIndexSetMaximumBytesBeforeFlush")
+	}
+	_fnSKIndexSetMaximumBytesBeforeFlush(objref.IDOf(inIndex), inBytesForUpdate)
 }
 
-// SKIndexGetAnalysisProperties calls [raw.SKIndexGetAnalysisProperties] (C function SKIndexGetAnalysisProperties).
-func SKIndexGetAnalysisProperties(inIndex unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexGetAnalysisProperties(inIndex)
-}
+var _fnSKLoadDefaultExtractorPlugIns func()
 
-// SKIndexGetDocumentCount calls [raw.SKIndexGetDocumentCount] (C function SKIndexGetDocumentCount).
-func SKIndexGetDocumentCount(inIndex unsafe.Pointer) int {
-	return raw.SKIndexGetDocumentCount(inIndex)
-}
-
-// SKIndexGetDocumentID calls [raw.SKIndexGetDocumentID] (C function SKIndexGetDocumentID).
-func SKIndexGetDocumentID(inIndex unsafe.Pointer, inDocument unsafe.Pointer) int {
-	return raw.SKIndexGetDocumentID(inIndex, inDocument)
-}
-
-// SKIndexGetDocumentState calls [raw.SKIndexGetDocumentState] (C function SKIndexGetDocumentState).
-func SKIndexGetDocumentState(inIndex unsafe.Pointer, inDocument unsafe.Pointer) SKDocumentIndexState {
-	return SKDocumentIndexState(raw.SKIndexGetDocumentState(inIndex, inDocument))
-}
-
-// SKIndexGetDocumentTermCount calls [raw.SKIndexGetDocumentTermCount] (C function SKIndexGetDocumentTermCount).
-func SKIndexGetDocumentTermCount(inIndex unsafe.Pointer, inDocumentID int) int {
-	return raw.SKIndexGetDocumentTermCount(inIndex, inDocumentID)
-}
-
-// SKIndexGetDocumentTermFrequency calls [raw.SKIndexGetDocumentTermFrequency] (C function SKIndexGetDocumentTermFrequency).
-func SKIndexGetDocumentTermFrequency(inIndex unsafe.Pointer, inDocumentID int, inTermID int) int {
-	return raw.SKIndexGetDocumentTermFrequency(inIndex, inDocumentID, inTermID)
-}
-
-// SKIndexGetIndexType calls [raw.SKIndexGetIndexType] (C function SKIndexGetIndexType).
-func SKIndexGetIndexType(inIndex unsafe.Pointer) SKIndexType {
-	return SKIndexType(raw.SKIndexGetIndexType(inIndex))
-}
-
-// SKIndexGetMaximumBytesBeforeFlush calls [raw.SKIndexGetMaximumBytesBeforeFlush] (C function SKIndexGetMaximumBytesBeforeFlush).
-func SKIndexGetMaximumBytesBeforeFlush(inIndex unsafe.Pointer) int {
-	return raw.SKIndexGetMaximumBytesBeforeFlush(inIndex)
-}
-
-// SKIndexGetMaximumDocumentID calls [raw.SKIndexGetMaximumDocumentID] (C function SKIndexGetMaximumDocumentID).
-func SKIndexGetMaximumDocumentID(inIndex unsafe.Pointer) int {
-	return raw.SKIndexGetMaximumDocumentID(inIndex)
-}
-
-// SKIndexGetMaximumTermID calls [raw.SKIndexGetMaximumTermID] (C function SKIndexGetMaximumTermID).
-func SKIndexGetMaximumTermID(inIndex unsafe.Pointer) int {
-	return raw.SKIndexGetMaximumTermID(inIndex)
-}
-
-// SKIndexGetTermDocumentCount calls [raw.SKIndexGetTermDocumentCount] (C function SKIndexGetTermDocumentCount).
-func SKIndexGetTermDocumentCount(inIndex unsafe.Pointer, inTermID int) int {
-	return raw.SKIndexGetTermDocumentCount(inIndex, inTermID)
-}
-
-// SKIndexGetTermIDForTermString calls [raw.SKIndexGetTermIDForTermString] (C function SKIndexGetTermIDForTermString).
-func SKIndexGetTermIDForTermString(inIndex unsafe.Pointer, inTermString unsafe.Pointer) int {
-	return raw.SKIndexGetTermIDForTermString(inIndex, inTermString)
-}
-
-// SKIndexGetTypeID calls [raw.SKIndexGetTypeID] (C function SKIndexGetTypeID).
-func SKIndexGetTypeID() uint {
-	return raw.SKIndexGetTypeID()
-}
-
-// SKIndexMoveDocument calls [raw.SKIndexMoveDocument] (C function SKIndexMoveDocument).
-func SKIndexMoveDocument(inIndex unsafe.Pointer, inDocument unsafe.Pointer, inNewParent unsafe.Pointer) uint8 {
-	return raw.SKIndexMoveDocument(inIndex, inDocument, inNewParent)
-}
-
-// SKIndexOpenWithData calls [raw.SKIndexOpenWithData] (C function SKIndexOpenWithData).
-func SKIndexOpenWithData(inData unsafe.Pointer, inIndexName unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexOpenWithData(inData, inIndexName)
-}
-
-// SKIndexOpenWithMutableData calls [raw.SKIndexOpenWithMutableData] (C function SKIndexOpenWithMutableData).
-func SKIndexOpenWithMutableData(inData unsafe.Pointer, inIndexName unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexOpenWithMutableData(inData, inIndexName)
-}
-
-// SKIndexOpenWithURL calls [raw.SKIndexOpenWithURL] (C function SKIndexOpenWithURL).
-func SKIndexOpenWithURL(inURL unsafe.Pointer, inIndexName unsafe.Pointer, inWriteAccess uint8) unsafe.Pointer {
-	return raw.SKIndexOpenWithURL(inURL, inIndexName, inWriteAccess)
-}
-
-// SKIndexRemoveDocument calls [raw.SKIndexRemoveDocument] (C function SKIndexRemoveDocument).
-func SKIndexRemoveDocument(inIndex unsafe.Pointer, inDocument unsafe.Pointer) uint8 {
-	return raw.SKIndexRemoveDocument(inIndex, inDocument)
-}
-
-// SKIndexRenameDocument calls [raw.SKIndexRenameDocument] (C function SKIndexRenameDocument).
-func SKIndexRenameDocument(inIndex unsafe.Pointer, inDocument unsafe.Pointer, inNewName unsafe.Pointer) uint8 {
-	return raw.SKIndexRenameDocument(inIndex, inDocument, inNewName)
-}
-
-// SKIndexSetDocumentProperties calls [raw.SKIndexSetDocumentProperties] (C function SKIndexSetDocumentProperties).
-func SKIndexSetDocumentProperties(inIndex unsafe.Pointer, inDocument unsafe.Pointer, inProperties unsafe.Pointer) {
-	raw.SKIndexSetDocumentProperties(inIndex, inDocument, inProperties)
-}
-
-// SKIndexSetMaximumBytesBeforeFlush calls [raw.SKIndexSetMaximumBytesBeforeFlush] (C function SKIndexSetMaximumBytesBeforeFlush).
-func SKIndexSetMaximumBytesBeforeFlush(inIndex unsafe.Pointer, inBytesForUpdate int) {
-	raw.SKIndexSetMaximumBytesBeforeFlush(inIndex, inBytesForUpdate)
-}
-
-// SKLoadDefaultExtractorPlugIns calls [raw.SKLoadDefaultExtractorPlugIns] (C function SKLoadDefaultExtractorPlugIns).
+// SKLoadDefaultExtractorPlugIns calls the SearchKit framework function SKLoadDefaultExtractorPlugIns.
 func SKLoadDefaultExtractorPlugIns() {
-	raw.SKLoadDefaultExtractorPlugIns()
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKLoadDefaultExtractorPlugIns == nil {
+		ebipurego.RegisterLibFunc(&_fnSKLoadDefaultExtractorPlugIns, _lib, "SKLoadDefaultExtractorPlugIns")
+	}
+	_fnSKLoadDefaultExtractorPlugIns()
 }
 
-// SKSearchCancel calls [raw.SKSearchCancel] (C function SKSearchCancel).
-func SKSearchCancel(inSearch unsafe.Pointer) {
-	raw.SKSearchCancel(inSearch)
+var _fnSKSearchCancel func(objc.ID)
+
+// SKSearchCancel calls the SearchKit framework function SKSearchCancel.
+func SKSearchCancel(inSearch obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchCancel == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchCancel, _lib, "SKSearchCancel")
+	}
+	_fnSKSearchCancel(objref.IDOf(inSearch))
 }
 
-// SKSearchCreate calls [raw.SKSearchCreate] (C function SKSearchCreate).
-func SKSearchCreate(inIndex unsafe.Pointer, inQuery unsafe.Pointer, inSearchOptions uint) unsafe.Pointer {
-	return raw.SKSearchCreate(inIndex, inQuery, inSearchOptions)
+var _fnSKSearchCreate func(objc.ID, objc.ID, int) objc.ID
+
+// SKSearchCreate calls the SearchKit framework function SKSearchCreate.
+func SKSearchCreate(inIndex obj.Object, inQuery obj.Object, inSearchOptions int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchCreate, _lib, "SKSearchCreate")
+	}
+	_ret := _fnSKSearchCreate(objref.IDOf(inIndex), objref.IDOf(inQuery), inSearchOptions)
+	return obj.Wrap(_ret)
 }
 
-// SKSearchFindMatches calls [raw.SKSearchFindMatches] (C function SKSearchFindMatches).
-func SKSearchFindMatches(inSearch unsafe.Pointer, inMaximumCount int, outDocumentIDsArray *int, outScoresArray *float32, maximumTime float64, outFoundCount *int) uint8 {
-	return raw.SKSearchFindMatches(inSearch, inMaximumCount, outDocumentIDsArray, outScoresArray, maximumTime, outFoundCount)
+var _fnSKSearchGetTypeID func() int
+
+// SKSearchGetTypeID calls the SearchKit framework function SKSearchGetTypeID.
+func SKSearchGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchGetTypeID, _lib, "SKSearchGetTypeID")
+	}
+	return _fnSKSearchGetTypeID()
 }
 
-// SKSearchGetTypeID calls [raw.SKSearchGetTypeID] (C function SKSearchGetTypeID).
-func SKSearchGetTypeID() uint {
-	return raw.SKSearchGetTypeID()
+var _fnSKSearchGroupCopyIndexes func(objc.ID) objc.ID
+
+// SKSearchGroupCopyIndexes calls the SearchKit framework function SKSearchGroupCopyIndexes.
+func SKSearchGroupCopyIndexes(inSearchGroup obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchGroupCopyIndexes == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchGroupCopyIndexes, _lib, "SKSearchGroupCopyIndexes")
+	}
+	_ret := _fnSKSearchGroupCopyIndexes(objref.IDOf(inSearchGroup))
+	return obj.Wrap(_ret)
 }
 
-// SKSearchGroupCopyIndexes calls [raw.SKSearchGroupCopyIndexes] (C function SKSearchGroupCopyIndexes).
-func SKSearchGroupCopyIndexes(inSearchGroup unsafe.Pointer) unsafe.Pointer {
-	return raw.SKSearchGroupCopyIndexes(inSearchGroup)
+var _fnSKSearchGroupCreate func(objc.ID) objc.ID
+
+// SKSearchGroupCreate calls the SearchKit framework function SKSearchGroupCreate.
+func SKSearchGroupCreate(inArrayOfInIndexes obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchGroupCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchGroupCreate, _lib, "SKSearchGroupCreate")
+	}
+	_ret := _fnSKSearchGroupCreate(objref.IDOf(inArrayOfInIndexes))
+	return obj.Wrap(_ret)
 }
 
-// SKSearchGroupCreate calls [raw.SKSearchGroupCreate] (C function SKSearchGroupCreate).
-func SKSearchGroupCreate(inArrayOfInIndexes unsafe.Pointer) unsafe.Pointer {
-	return raw.SKSearchGroupCreate(inArrayOfInIndexes)
+var _fnSKSearchGroupGetTypeID func() int
+
+// SKSearchGroupGetTypeID calls the SearchKit framework function SKSearchGroupGetTypeID.
+func SKSearchGroupGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchGroupGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchGroupGetTypeID, _lib, "SKSearchGroupGetTypeID")
+	}
+	return _fnSKSearchGroupGetTypeID()
 }
 
-// SKSearchGroupGetTypeID calls [raw.SKSearchGroupGetTypeID] (C function SKSearchGroupGetTypeID).
-func SKSearchGroupGetTypeID() uint {
-	return raw.SKSearchGroupGetTypeID()
+var _fnSKSearchResultsCopyMatchingTerms func(objc.ID, int) objc.ID
+
+// SKSearchResultsCopyMatchingTerms calls the SearchKit framework function SKSearchResultsCopyMatchingTerms.
+func SKSearchResultsCopyMatchingTerms(inSearchResults obj.Object, inItem int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchResultsCopyMatchingTerms == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchResultsCopyMatchingTerms, _lib, "SKSearchResultsCopyMatchingTerms")
+	}
+	_ret := _fnSKSearchResultsCopyMatchingTerms(objref.IDOf(inSearchResults), inItem)
+	return obj.Wrap(_ret)
 }
 
-// SKSearchResultsCopyMatchingTerms calls [raw.SKSearchResultsCopyMatchingTerms] (C function SKSearchResultsCopyMatchingTerms).
-func SKSearchResultsCopyMatchingTerms(inSearchResults unsafe.Pointer, inItem int) unsafe.Pointer {
-	return raw.SKSearchResultsCopyMatchingTerms(inSearchResults, inItem)
+var _fnSKSearchResultsGetCount func(objc.ID) int
+
+// SKSearchResultsGetCount calls the SearchKit framework function SKSearchResultsGetCount.
+func SKSearchResultsGetCount(inSearchResults obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchResultsGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchResultsGetCount, _lib, "SKSearchResultsGetCount")
+	}
+	return _fnSKSearchResultsGetCount(objref.IDOf(inSearchResults))
 }
 
-// SKSearchResultsCreateWithDocuments calls [raw.SKSearchResultsCreateWithDocuments] (C function SKSearchResultsCreateWithDocuments).
-func SKSearchResultsCreateWithDocuments(inSearchGroup unsafe.Pointer, inExampleDocuments unsafe.Pointer, inMaxFoundDocuments int, inContext unsafe.Pointer, inFilterCallBack unsafe.Pointer) unsafe.Pointer {
-	return raw.SKSearchResultsCreateWithDocuments(inSearchGroup, inExampleDocuments, inMaxFoundDocuments, inContext, inFilterCallBack)
+var _fnSKSearchResultsGetTypeID func() int
+
+// SKSearchResultsGetTypeID calls the SearchKit framework function SKSearchResultsGetTypeID.
+func SKSearchResultsGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSearchResultsGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSearchResultsGetTypeID, _lib, "SKSearchResultsGetTypeID")
+	}
+	return _fnSKSearchResultsGetTypeID()
 }
 
-// SKSearchResultsCreateWithQuery calls [raw.SKSearchResultsCreateWithQuery] (C function SKSearchResultsCreateWithQuery).
-func SKSearchResultsCreateWithQuery(inSearchGroup unsafe.Pointer, inQuery unsafe.Pointer, inSearchType SKSearchType, inMaxFoundDocuments int, inContext unsafe.Pointer, inFilterCallBack unsafe.Pointer) unsafe.Pointer {
-	return raw.SKSearchResultsCreateWithQuery(inSearchGroup, inQuery, raw.SKSearchType(inSearchType), inMaxFoundDocuments, inContext, inFilterCallBack)
+var _fnSKSummaryCopyParagraphAtIndex func(objc.ID, int) objc.ID
+
+// SKSummaryCopyParagraphAtIndex calls the SearchKit framework function SKSummaryCopyParagraphAtIndex.
+func SKSummaryCopyParagraphAtIndex(summary obj.Object, i int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryCopyParagraphAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryCopyParagraphAtIndex, _lib, "SKSummaryCopyParagraphAtIndex")
+	}
+	_ret := _fnSKSummaryCopyParagraphAtIndex(objref.IDOf(summary), i)
+	return obj.Wrap(_ret)
 }
 
-// SKSearchResultsGetCount calls [raw.SKSearchResultsGetCount] (C function SKSearchResultsGetCount).
-func SKSearchResultsGetCount(inSearchResults unsafe.Pointer) int {
-	return raw.SKSearchResultsGetCount(inSearchResults)
+var _fnSKSummaryCopyParagraphSummaryString func(objc.ID, int) objc.ID
+
+// SKSummaryCopyParagraphSummaryString calls the SearchKit framework function SKSummaryCopyParagraphSummaryString.
+func SKSummaryCopyParagraphSummaryString(summary obj.Object, numParagraphs int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryCopyParagraphSummaryString == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryCopyParagraphSummaryString, _lib, "SKSummaryCopyParagraphSummaryString")
+	}
+	_ret := _fnSKSummaryCopyParagraphSummaryString(objref.IDOf(summary), numParagraphs)
+	return obj.Wrap(_ret)
 }
 
-// SKSearchResultsGetInfoInRange calls [raw.SKSearchResultsGetInfoInRange] (C function SKSearchResultsGetInfoInRange).
-func SKSearchResultsGetInfoInRange(inSearchResults unsafe.Pointer, inRange corefoundation.CFRange, outDocumentsArray unsafe.Pointer, outIndexesArray unsafe.Pointer, outScoresArray *float32) int {
-	return raw.SKSearchResultsGetInfoInRange(inSearchResults, inRange, outDocumentsArray, outIndexesArray, outScoresArray)
+var _fnSKSummaryCopySentenceAtIndex func(objc.ID, int) objc.ID
+
+// SKSummaryCopySentenceAtIndex calls the SearchKit framework function SKSummaryCopySentenceAtIndex.
+func SKSummaryCopySentenceAtIndex(summary obj.Object, i int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryCopySentenceAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryCopySentenceAtIndex, _lib, "SKSummaryCopySentenceAtIndex")
+	}
+	_ret := _fnSKSummaryCopySentenceAtIndex(objref.IDOf(summary), i)
+	return obj.Wrap(_ret)
 }
 
-// SKSearchResultsGetTypeID calls [raw.SKSearchResultsGetTypeID] (C function SKSearchResultsGetTypeID).
-func SKSearchResultsGetTypeID() uint {
-	return raw.SKSearchResultsGetTypeID()
+var _fnSKSummaryCopySentenceSummaryString func(objc.ID, int) objc.ID
+
+// SKSummaryCopySentenceSummaryString calls the SearchKit framework function SKSummaryCopySentenceSummaryString.
+func SKSummaryCopySentenceSummaryString(summary obj.Object, numSentences int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryCopySentenceSummaryString == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryCopySentenceSummaryString, _lib, "SKSummaryCopySentenceSummaryString")
+	}
+	_ret := _fnSKSummaryCopySentenceSummaryString(objref.IDOf(summary), numSentences)
+	return obj.Wrap(_ret)
 }
 
-// SKSummaryCopyParagraphAtIndex calls [raw.SKSummaryCopyParagraphAtIndex] (C function SKSummaryCopyParagraphAtIndex).
-func SKSummaryCopyParagraphAtIndex(summary unsafe.Pointer, i int) unsafe.Pointer {
-	return raw.SKSummaryCopyParagraphAtIndex(summary, i)
+var _fnSKSummaryCreateWithString func(objc.ID) objc.ID
+
+// SKSummaryCreateWithString calls the SearchKit framework function SKSummaryCreateWithString.
+func SKSummaryCreateWithString(inString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryCreateWithString == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryCreateWithString, _lib, "SKSummaryCreateWithString")
+	}
+	_ret := _fnSKSummaryCreateWithString(objref.IDOf(inString))
+	return obj.Wrap(_ret)
 }
 
-// SKSummaryCopyParagraphSummaryString calls [raw.SKSummaryCopyParagraphSummaryString] (C function SKSummaryCopyParagraphSummaryString).
-func SKSummaryCopyParagraphSummaryString(summary unsafe.Pointer, numParagraphs int) unsafe.Pointer {
-	return raw.SKSummaryCopyParagraphSummaryString(summary, numParagraphs)
+var _fnSKSummaryGetParagraphCount func(objc.ID) int
+
+// SKSummaryGetParagraphCount calls the SearchKit framework function SKSummaryGetParagraphCount.
+func SKSummaryGetParagraphCount(summary obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryGetParagraphCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryGetParagraphCount, _lib, "SKSummaryGetParagraphCount")
+	}
+	return _fnSKSummaryGetParagraphCount(objref.IDOf(summary))
 }
 
-// SKSummaryCopySentenceAtIndex calls [raw.SKSummaryCopySentenceAtIndex] (C function SKSummaryCopySentenceAtIndex).
-func SKSummaryCopySentenceAtIndex(summary unsafe.Pointer, i int) unsafe.Pointer {
-	return raw.SKSummaryCopySentenceAtIndex(summary, i)
+var _fnSKSummaryGetSentenceCount func(objc.ID) int
+
+// SKSummaryGetSentenceCount calls the SearchKit framework function SKSummaryGetSentenceCount.
+func SKSummaryGetSentenceCount(summary obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryGetSentenceCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryGetSentenceCount, _lib, "SKSummaryGetSentenceCount")
+	}
+	return _fnSKSummaryGetSentenceCount(objref.IDOf(summary))
 }
 
-// SKSummaryCopySentenceSummaryString calls [raw.SKSummaryCopySentenceSummaryString] (C function SKSummaryCopySentenceSummaryString).
-func SKSummaryCopySentenceSummaryString(summary unsafe.Pointer, numSentences int) unsafe.Pointer {
-	return raw.SKSummaryCopySentenceSummaryString(summary, numSentences)
-}
+var _fnSKSummaryGetTypeID func() int
 
-// SKSummaryCreateWithString calls [raw.SKSummaryCreateWithString] (C function SKSummaryCreateWithString).
-func SKSummaryCreateWithString(inString unsafe.Pointer) unsafe.Pointer {
-	return raw.SKSummaryCreateWithString(inString)
-}
-
-// SKSummaryGetParagraphCount calls [raw.SKSummaryGetParagraphCount] (C function SKSummaryGetParagraphCount).
-func SKSummaryGetParagraphCount(summary unsafe.Pointer) int {
-	return raw.SKSummaryGetParagraphCount(summary)
-}
-
-// SKSummaryGetParagraphSummaryInfo calls [raw.SKSummaryGetParagraphSummaryInfo] (C function SKSummaryGetParagraphSummaryInfo).
-func SKSummaryGetParagraphSummaryInfo(summary unsafe.Pointer, numParagraphsInSummary int, outRankOrderOfParagraphs *int, outParagraphIndexOfParagraphs *int) int {
-	return raw.SKSummaryGetParagraphSummaryInfo(summary, numParagraphsInSummary, outRankOrderOfParagraphs, outParagraphIndexOfParagraphs)
-}
-
-// SKSummaryGetSentenceCount calls [raw.SKSummaryGetSentenceCount] (C function SKSummaryGetSentenceCount).
-func SKSummaryGetSentenceCount(summary unsafe.Pointer) int {
-	return raw.SKSummaryGetSentenceCount(summary)
-}
-
-// SKSummaryGetSentenceSummaryInfo calls [raw.SKSummaryGetSentenceSummaryInfo] (C function SKSummaryGetSentenceSummaryInfo).
-func SKSummaryGetSentenceSummaryInfo(summary unsafe.Pointer, numSentencesInSummary int, outRankOrderOfSentences *int, outSentenceIndexOfSentences *int, outParagraphIndexOfSentences *int) int {
-	return raw.SKSummaryGetSentenceSummaryInfo(summary, numSentencesInSummary, outRankOrderOfSentences, outSentenceIndexOfSentences, outParagraphIndexOfSentences)
-}
-
-// SKSummaryGetTypeID calls [raw.SKSummaryGetTypeID] (C function SKSummaryGetTypeID).
-func SKSummaryGetTypeID() uint {
-	return raw.SKSummaryGetTypeID()
+// SKSummaryGetTypeID calls the SearchKit framework function SKSummaryGetTypeID.
+func SKSummaryGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKSummaryGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKSummaryGetTypeID, _lib, "SKSummaryGetTypeID")
+	}
+	return _fnSKSummaryGetTypeID()
 }

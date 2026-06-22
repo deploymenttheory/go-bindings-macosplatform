@@ -5,88 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that detects rectangular regions that contain text in the input image.
+// DetectDocumentSegmentationRequest is an idiomatic wrapper over the Objective-C class VNDetectDocumentSegmentationRequest.
 //
-// DetectDocumentSegmentationRequest wraps [raw.VNDetectDocumentSegmentationRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An object that detects rectangular regions that contain text in the input image.
 type DetectDocumentSegmentationRequest struct {
-	inner *raw.VNDetectDocumentSegmentationRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectDocumentSegmentationRequest].
-func (x *DetectDocumentSegmentationRequest) Unwrap() *raw.VNDetectDocumentSegmentationRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectDocumentSegmentationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectDocumentSegmentationRequestFromID adopts an existing object pointer as a DetectDocumentSegmentationRequest (nil for 0).
+// DetectDocumentSegmentationRequestFromID adopts an existing Objective-C object as a DetectDocumentSegmentationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectDocumentSegmentationRequestFromID(id objc.ID) *DetectDocumentSegmentationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectDocumentSegmentationRequest{inner: raw.VNDetectDocumentSegmentationRequestFromID(id)}
+	x := &DetectDocumentSegmentationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectDocumentSegmentationRequest creates a new [DetectDocumentSegmentationRequest].
+// detectDocumentSegmentationRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectDocumentSegmentationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectDocumentSegmentationRequestAdopt(id objc.ID) *DetectDocumentSegmentationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectDocumentSegmentationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectDocumentSegmentationRequest creates a new DetectDocumentSegmentationRequest.
 func NewDetectDocumentSegmentationRequest() *DetectDocumentSegmentationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectDocumentSegmentationRequest")), objc.RegisterName("new"))
-	return &DetectDocumentSegmentationRequest{inner: raw.VNDetectDocumentSegmentationRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectDocumentSegmentationRequest")), objc.RegisterName("new"))
+	return detectDocumentSegmentationRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectDocumentSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectDocumentSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectDocumentSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectDocumentSegmentationRequest) WithRevision(revision uint) *DetectDocumentSegmentationRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectDocumentSegmentationRequest) WithRevision(revision int) *DetectDocumentSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *DetectDocumentSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectDocumentSegmentationRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // DetectDocumentSegmentationRequestable is the interface implemented by [DetectDocumentSegmentationRequest], for mocking and DI.
 type DetectDocumentSegmentationRequestable interface {
-	Unwrap() *raw.VNDetectDocumentSegmentationRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectDocumentSegmentationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectDocumentSegmentationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectDocumentSegmentationRequest
-	WithRevision(revision uint) *DetectDocumentSegmentationRequest
+	WithRevision(revision int) *DetectDocumentSegmentationRequest
 }
 
 var _ DetectDocumentSegmentationRequestable = (*DetectDocumentSegmentationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectDocumentSegmentationRequest)(nil)
+
+var _ RequestProvider = (*DetectDocumentSegmentationRequest)(nil)

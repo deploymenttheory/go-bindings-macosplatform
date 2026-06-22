@@ -5,73 +5,81 @@
 package collaboration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object of the CBGroupIdentity class represents a group identity and is used for viewing the attributes of group identities from an identity authority. The principal attributes of a CBGroupIdentity object are a POSIX group identifier (GID) and a list of members.
+// GroupIdentity is an idiomatic wrapper over the Objective-C class CBGroupIdentity.
 //
-// GroupIdentity wraps [raw.CBGroupIdentity] with a fluent Go API.
+// It embeds [Identity], promoting that type's methods.
+//
+// An object of the CBGroupIdentity class represents a group identity and is used for viewing the attributes of group identities from an identity authority. The principal attributes of a CBGroupIdentity object are a POSIX group identifier (GID) and a list of members.
 type GroupIdentity struct {
-	inner *raw.CBGroupIdentity
+	Identity
 }
 
-// Unwrap returns the underlying [raw.CBGroupIdentity].
-func (x *GroupIdentity) Unwrap() *raw.CBGroupIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GroupIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupIdentityFromID adopts an existing object pointer as a GroupIdentity (nil for 0).
+// GroupIdentityFromID adopts an existing Objective-C object as a GroupIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupIdentityFromID(id objc.ID) *GroupIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &GroupIdentity{inner: raw.CBGroupIdentityFromID(id)}
+	x := &GroupIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGroupIdentity creates a new [GroupIdentity].
-func NewGroupIdentity() *GroupIdentity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBGroupIdentity")), objc.RegisterName("new"))
-	return &GroupIdentity{inner: raw.CBGroupIdentityFromID(_id)}
-}
-
-// Returns the POSIX GID of the identity. The POSIX GID is an integer that can identify a group within an identity authority. GIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX GID of the group identity.
-//
-// PosixGID calls the underlying PosixGID.
-func (x *GroupIdentity) PosixGID() uint {
-	return x.inner.PosixGID()
-}
-
-// Returns the members of the group. This method only returns direct members of a group, it does not return members of members. Both user and group identities can be members of a group, but a group cannot be a member of itself. You also cannot have “circular” membership, i.e. a group be a member of another group that is a member of the first group. - Returns: An array of `CBIdentity` objects each representing a member of the group identity.
-//
-// Members calls the underlying Members.
-func (x *GroupIdentity) Members() *foundation.NSArray[objc.ID] {
-	return x.inner.Members()
-}
-
-// MemberIdentities returns the collection as a Go slice.
-func (x *GroupIdentity) MemberIdentities() []*Identity {
-	arr := x.inner.MemberIdentities()
-	if arr == nil {
+// groupIdentityAdopt wraps an Objective-C object that this code just created as a
+// GroupIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupIdentityAdopt(id objc.ID) *GroupIdentity {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Identity {
-		return &Identity{inner: raw.CBIdentityFromID(purego.Retain(_id))}
-	})
+	x := &GroupIdentity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *GroupIdentity) asIdentity() *raw.CBIdentity { return &x.inner.CBIdentity }
+// NewGroupIdentity creates a new GroupIdentity.
+func NewGroupIdentity() *GroupIdentity {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBGroupIdentity")), objc.RegisterName("new"))
+	return groupIdentityAdopt(_id)
+}
+
+// PosixGID returns the POSIX GID of the identity. The POSIX GID is an integer that can identify a group within an identity authority. GIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX GID of the group identity.
+func (x *GroupIdentity) PosixGID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("posixGID"))
+	return _r
+}
+
+// Members returns the members of the group. This method only returns direct members of a group, it does not return members of members. Both user and group identities can be members of a group, but a group cannot be a member of itself. You also cannot have “circular” membership, i.e. a group be a member of another group that is a member of the first group. - Returns: An array of `CBIdentity` objects each representing a member of the group identity.
+func (x *GroupIdentity) Members() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
+	return obj.Wrap(_r)
+}
+
+// MemberIdentities wraps the corresponding Objective-C method.
+//
+// MemberIdentities returns the collection as a Go slice.
+func (x *GroupIdentity) MemberIdentities() []*Identity {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberIdentities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Identity { return IdentityFromID(_id) })
+}
 
 // GroupIdentityable is the interface implemented by [GroupIdentity], for mocking and DI.
 type GroupIdentityable interface {
-	Unwrap() *raw.CBGroupIdentity
-	PosixGID() uint
-	Members() *foundation.NSArray[objc.ID]
+	obj.Object
+	PosixGID() int
+	Members() obj.Object
 	MemberIdentities() []*Identity
 }
 
 var _ GroupIdentityable = (*GroupIdentity)(nil)
+
+var _ IdentityProvider = (*GroupIdentity)(nil)

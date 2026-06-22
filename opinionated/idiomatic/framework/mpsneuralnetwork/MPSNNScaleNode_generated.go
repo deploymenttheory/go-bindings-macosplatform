@@ -5,75 +5,72 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNScaleNode wraps [raw.MPSNNScaleNode] with a fluent Go API.
+// NNScaleNode is an idiomatic wrapper over the Objective-C class MPSNNScaleNode.
+//
+// NNScaleNode is an abstract base — you do not construct it directly. Construct one of [NNBilinearScaleNode], [NNLanczosScaleNode] and pass it where a NNScaleNode is accepted.
 type NNScaleNode struct {
-	inner *raw.MPSNNScaleNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNScaleNode].
-func (x *NNScaleNode) Unwrap() *raw.MPSNNScaleNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNScaleNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNScaleNodeFromID adopts an existing object pointer as a NNScaleNode (nil for 0).
+// NNScaleNodeFromID adopts an existing Objective-C object as a NNScaleNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNScaleNodeFromID(id objc.ID) *NNScaleNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNScaleNode{inner: raw.MPSNNScaleNodeFromID(id)}
-}
-
-// @abstract init a node to convert a MPSImage to the desired size @param  sourceNode    A valid MPSNNImageNode @param  size          The size of the output image {width, height, depth}
-//
-// NewNNScaleNodeWithSourceOutputSize creates a new [NNScaleNode].
-func NewNNScaleNodeWithSourceOutputSize(sourceNode *raw.MPSNNImageNode, size metal.MTLSize) *NNScaleNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNScaleNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:outputSize:"), sourceNode.Ptr(), size)
-	return &NNScaleNode{inner: raw.MPSNNScaleNodeFromID(_id)}
-}
-
-// @abstract init a node to convert a MPSImage to the desired size for a region of interest @param  sourceNode           A valid MPSNNImageNode @param  transformProvider    If non-nil, a valid MPSImageTransformProvider that provides the region of interest @param  size                 The size of the output image {width, height, depth}
-//
-// NewNNScaleNodeWithSourceTransformProviderOutputSize creates a new [NNScaleNode].
-func NewNNScaleNodeWithSourceTransformProviderOutputSize(sourceNode *raw.MPSNNImageNode, transformProvider raw.MPSImageTransformProvider, size metal.MTLSize) *NNScaleNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNScaleNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:transformProvider:outputSize:"), sourceNode.Ptr(), transformProvider, size)
-	return &NNScaleNode{inner: raw.MPSNNScaleNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNScaleNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNScaleNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &NNScaleNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// nNScaleNodeAdopt wraps an Objective-C object that this code just created as a
+// NNScaleNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNScaleNodeAdopt(id objc.ID) *NNScaleNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNScaleNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNScaleNodeWithSourceOutputSize init a node to convert a MPSImage to the desired size
+func NewNNScaleNodeWithSourceOutputSize(sourceNode *NNImageNode, size metal.MTLSize) *NNScaleNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNScaleNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:outputSize:"), objref.IDOf(sourceNode), size)
+	return nNScaleNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNScaleNode) WithLabel(label string) *NNScaleNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-func (x *NNScaleNode) asNNScaleNode() *raw.MPSNNScaleNode { return x.inner }
-
-func (x *NNScaleNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // NNScaleNodeable is the interface implemented by [NNScaleNode], for mocking and DI.
 type NNScaleNodeable interface {
-	Unwrap() *raw.MPSNNScaleNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNScaleNode
+	obj.Object
 	WithLabel(label string) *NNScaleNode
 }
 
 var _ NNScaleNodeable = (*NNScaleNode)(nil)
+
+// isNNScaleNode marks NNScaleNode — and, by embedding promotion, its
+// subclasses — as a member of the NNScaleNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNScaleNode) isNNScaleNode() {}
+
+var _ NNScaleNodeProvider = (*NNScaleNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNScaleNode)(nil)

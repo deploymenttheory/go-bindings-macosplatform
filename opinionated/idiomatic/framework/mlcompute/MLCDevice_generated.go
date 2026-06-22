@@ -5,65 +5,97 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.
+// Device is an idiomatic wrapper over the Objective-C class MLCDevice.
 //
-// Device wraps [raw.MLCDevice] with a fluent Go API.
+// An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.
 type Device struct {
-	inner *raw.MLCDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCDevice].
-func (x *Device) Unwrap() *raw.MLCDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Device) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceFromID adopts an existing object pointer as a Device (nil for 0).
+// DeviceFromID adopts an existing Objective-C object as a Device
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	return &Device{inner: raw.MLCDeviceFromID(id)}
+	x := &Device{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDevice creates a new [Device].
+// deviceAdopt wraps an Objective-C object that this code just created as a
+// Device (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceAdopt(id objc.ID) *Device {
+	if id == 0 {
+		return nil
+	}
+	x := &Device{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Device) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Device) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDevice creates a new Device.
 func NewDevice() *Device {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCDevice")), objc.RegisterName("new"))
-	return &Device{inner: raw.MLCDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("new"))
+	return deviceAdopt(_id)
 }
 
-// @property   type @abstract   The type specified when the device is created @discussion Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
-//
-// Type calls the underlying Type.
-func (x *Device) Type() MLCDeviceType {
-	return MLCDeviceType(x.inner.Type())
+// Type the type specified when the device is created Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
+func (x *Device) Type() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @property   actualDeviceType @abstract   The specific device selected. @discussion This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
-//
-// ActualDeviceType calls the underlying ActualDeviceType.
-func (x *Device) ActualDeviceType() MLCDeviceType {
-	return MLCDeviceType(x.inner.ActualDeviceType())
+// ActualDeviceType the specific device selected. This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
+func (x *Device) ActualDeviceType() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("actualDeviceType"))
+	return _r
 }
 
-// GpuDevices calls the underlying GpuDevices.
-func (x *Device) GpuDevices() *foundation.NSArray[metal.MTLDevice] {
-	return x.inner.GpuDevices()
+// GpuDevices wraps the corresponding Objective-C method.
+func (x *Device) GpuDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpuDevices"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Deviceable is the interface implemented by [Device], for mocking and DI.
 type Deviceable interface {
-	Unwrap() *raw.MLCDevice
-	Type() MLCDeviceType
-	ActualDeviceType() MLCDeviceType
-	GpuDevices() *foundation.NSArray[metal.MTLDevice]
+	obj.Object
+	Type() DeviceType
+	ActualDeviceType() DeviceType
+	GpuDevices() []obj.Object
 }
 
 var _ Deviceable = (*Device)(nil)

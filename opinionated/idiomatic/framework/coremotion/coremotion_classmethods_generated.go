@@ -5,35 +5,41 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AuthorizationStatus calls the underlying CMHeadphoneActivityManagerAuthorizationStatus.
-func AuthorizationStatus() CMAuthorizationStatus {
-	return CMAuthorizationStatus(raw.CMHeadphoneActivityManagerAuthorizationStatus())
+// CMHeadphoneActivityManagerAuthorizationStatus returns the authorization status for monitoring headphone activity.
+func CMHeadphoneActivityManagerAuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objc.ID(_class("CMHeadphoneActivityManager")), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
-// CMHeadphoneMotionManagerAuthorizationStatus calls the underlying CMHeadphoneMotionManagerAuthorizationStatus.
-func CMHeadphoneMotionManagerAuthorizationStatus() CMAuthorizationStatus {
-	return CMAuthorizationStatus(raw.CMHeadphoneMotionManagerAuthorizationStatus())
+// CMHeadphoneMotionManagerAuthorizationStatus returns the authorization status for monitoring headphone motion.
+func CMHeadphoneMotionManagerAuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objc.ID(_class("CMHeadphoneMotionManager")), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
-// IsStepCountingAvailable calls the underlying CMPedometerIsStepCountingAvailable.
+// IsStepCountingAvailable returns a Boolean value indicating whether step counting is available on the current device.
 func IsStepCountingAvailable() bool {
-	return raw.CMPedometerIsStepCountingAvailable()
+	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isStepCountingAvailable"))
+	return _r
 }
 
-// IsDistanceAvailable calls the underlying CMPedometerIsDistanceAvailable.
+// IsDistanceAvailable returns a Boolean value indicating whether distance estimation is available on the current device.
 func IsDistanceAvailable() bool {
-	return raw.CMPedometerIsDistanceAvailable()
+	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isDistanceAvailable"))
+	return _r
 }
 
-// IsFloorCountingAvailable calls the underlying CMPedometerIsFloorCountingAvailable.
+// IsFloorCountingAvailable returns a Boolean value indicating whether floor counting is available on the current device.
 func IsFloorCountingAvailable() bool {
-	return raw.CMPedometerIsFloorCountingAvailable()
+	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isFloorCountingAvailable"))
+	return _r
 }
 
-// IsPaceAvailable calls the underlying CMPedometerIsPaceAvailable.
+// IsPaceAvailable returns a Boolean value indicating whether pace information is available on the current device.
 func IsPaceAvailable() bool {
-	return raw.CMPedometerIsPaceAvailable()
+	_r := objc.Send[bool](objc.ID(_class("CMPedometer")), objc.RegisterName("isPaceAvailable"))
+	return _r
 }

@@ -5,141 +5,140 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of material properties that describes a basic shading model for materials, and the superclass for more complex shading models.
+// ScatteringFunction is an idiomatic wrapper over the Objective-C class MDLScatteringFunction.
 //
-// ScatteringFunction wraps [raw.MDLScatteringFunction] with a fluent Go API.
+// ScatteringFunction is an abstract base — you do not construct it directly. Construct one of [PhysicallyPlausibleScatteringFunction] and pass it where a ScatteringFunction is accepted.
+//
+// A set of material properties that describes a basic shading model for materials, and the superclass for more complex shading models.
 type ScatteringFunction struct {
-	inner *raw.MDLScatteringFunction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLScatteringFunction].
-func (x *ScatteringFunction) Unwrap() *raw.MDLScatteringFunction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScatteringFunction) ID() objc.ID { return x.inner.Ptr() }
-
-// ScatteringFunctionFromID adopts an existing object pointer as a ScatteringFunction (nil for 0).
+// ScatteringFunctionFromID adopts an existing Objective-C object as a ScatteringFunction
+// (nil for 0), retaining it and registering a release finalizer.
 func ScatteringFunctionFromID(id objc.ID) *ScatteringFunction {
 	if id == 0 {
 		return nil
 	}
-	return &ScatteringFunction{inner: raw.MDLScatteringFunctionFromID(id)}
-}
-
-// NewScatteringFunction creates a new [ScatteringFunction].
-func NewScatteringFunction() *ScatteringFunction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLScatteringFunction")), objc.RegisterName("new"))
-	return &ScatteringFunction{inner: raw.MDLScatteringFunctionFromID(_id)}
-}
-
-// A descriptive name for the scattering function.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *ScatteringFunction) WithName(name string) *ScatteringFunction {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	x := &ScatteringFunction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @see MDLNamed
-//
-// Name calls the underlying Name.
+// scatteringFunctionAdopt wraps an Objective-C object that this code just created as a
+// ScatteringFunction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scatteringFunctionAdopt(id objc.ID) *ScatteringFunction {
+	if id == 0 {
+		return nil
+	}
+	x := &ScatteringFunction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScatteringFunction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScatteringFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScatteringFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScatteringFunction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithName a descriptive name for the scattering function.
+func (x *ScatteringFunction) WithName(name string) *ScatteringFunction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// Name wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// BaseColor calls the underlying BaseColor.
+// BaseColor wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) BaseColor() *MaterialProperty {
-	_r := x.inner.BaseColor()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseColor"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Emission calls the underlying Emission.
+// Emission wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) Emission() *MaterialProperty {
-	_r := x.inner.Emission()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emission"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Specular calls the underlying Specular.
+// Specular wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) Specular() *MaterialProperty {
-	_r := x.inner.Specular()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specular"))
+	return MaterialPropertyFromID(_r)
 }
 
-// MaterialIndexOfRefraction calls the underlying MaterialIndexOfRefraction.
+// MaterialIndexOfRefraction wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) MaterialIndexOfRefraction() *MaterialProperty {
-	_r := x.inner.MaterialIndexOfRefraction()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("materialIndexOfRefraction"))
+	return MaterialPropertyFromID(_r)
 }
 
-// InterfaceIndexOfRefraction calls the underlying InterfaceIndexOfRefraction.
+// InterfaceIndexOfRefraction wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) InterfaceIndexOfRefraction() *MaterialProperty {
-	_r := x.inner.InterfaceIndexOfRefraction()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceIndexOfRefraction"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Normal calls the underlying Normal.
+// Normal wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) Normal() *MaterialProperty {
-	_r := x.inner.Normal()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normal"))
+	return MaterialPropertyFromID(_r)
 }
 
-// AmbientOcclusion calls the underlying AmbientOcclusion.
+// AmbientOcclusion wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) AmbientOcclusion() *MaterialProperty {
-	_r := x.inner.AmbientOcclusion()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ambientOcclusion"))
+	return MaterialPropertyFromID(_r)
 }
 
-// AmbientOcclusionScale calls the underlying AmbientOcclusionScale.
+// AmbientOcclusionScale wraps the corresponding Objective-C method.
 func (x *ScatteringFunction) AmbientOcclusionScale() *MaterialProperty {
-	_r := x.inner.AmbientOcclusionScale()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ambientOcclusionScale"))
+	return MaterialPropertyFromID(_r)
 }
-
-func (x *ScatteringFunction) asScatteringFunction() *raw.MDLScatteringFunction { return x.inner }
 
 // ScatteringFunctionable is the interface implemented by [ScatteringFunction], for mocking and DI.
 type ScatteringFunctionable interface {
-	Unwrap() *raw.MDLScatteringFunction
+	obj.Object
 	WithName(name string) *ScatteringFunction
 	Name() string
 	SetName(name string)
@@ -154,3 +153,10 @@ type ScatteringFunctionable interface {
 }
 
 var _ ScatteringFunctionable = (*ScatteringFunction)(nil)
+
+// isScatteringFunction marks ScatteringFunction — and, by embedding promotion, its
+// subclasses — as a member of the ScatteringFunction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScatteringFunction) isScatteringFunction() {}
+
+var _ ScatteringFunctionProvider = (*ScatteringFunction)(nil)

@@ -36,6 +36,8 @@ const (
 	KCMTagCategory_StereoViewInterpretation CMTagCategory = 1702455664
 )
 
+// String returns the CMTagCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMTagCategory) String() string {
 	switch e {
 	case KCMTagCategory_Undefined:
@@ -65,39 +67,6 @@ func (e CMTagCategory) String() string {
 	}
 }
 
-// The data type of a tag’s value.
-type CMTagDataType int64
-
-const (
-	// The tag value isn’t associated with any known data type.
-	KCMTagDataType_Invalid CMTagDataType = 0
-	// The tag value is a signed 64-bit integer.
-	KCMTagDataType_SInt64 CMTagDataType = 2
-	// The tag value is a 64-bit floating point number.
-	KCMTagDataType_Float64 CMTagDataType = 3
-	// The tag value is a 64-bit identifier used by the operating system.
-	KCMTagDataType_OSType CMTagDataType = 5
-	// The tag value is a 64-bit wide bitflag field.
-	KCMTagDataType_Flags CMTagDataType = 7
-)
-
-func (e CMTagDataType) String() string {
-	switch e {
-	case KCMTagDataType_Invalid:
-		return "KCMTagDataType_Invalid"
-	case KCMTagDataType_SInt64:
-		return "KCMTagDataType_SInt64"
-	case KCMTagDataType_Float64:
-		return "KCMTagDataType_Float64"
-	case KCMTagDataType_OSType:
-		return "KCMTagDataType_OSType"
-	case KCMTagDataType_Flags:
-		return "KCMTagDataType_Flags"
-	default:
-		return fmt.Sprintf("CMTagDataType(%d)", int64(e))
-	}
-}
-
 // An enumeration of rounding methods to use when performing time calculations.
 type CMTimeRoundingMethod int64
 
@@ -118,6 +87,8 @@ const (
 	KCMTimeRoundingMethod_Default CMTimeRoundingMethod = 1
 )
 
+// String returns the CMTimeRoundingMethod constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CMTimeRoundingMethod) String() string {
 	switch e {
 	case KCMTimeRoundingMethod_RoundHalfAwayFromZero:

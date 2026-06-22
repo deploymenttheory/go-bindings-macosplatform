@@ -5,73 +5,104 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that contains information the boot loader needs for booting macOS as a guest operating system.
+// MacAuxiliaryStorage is an idiomatic wrapper over the Objective-C class VZMacAuxiliaryStorage.
 //
-// MacAuxiliaryStorage wraps [raw.VZMacAuxiliaryStorage] with a fluent Go API.
+// An object that contains information the boot loader needs for booting macOS as a guest operating system.
 type MacAuxiliaryStorage struct {
-	inner *raw.VZMacAuxiliaryStorage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacAuxiliaryStorage].
-func (x *MacAuxiliaryStorage) Unwrap() *raw.VZMacAuxiliaryStorage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacAuxiliaryStorage) ID() objc.ID { return x.inner.Ptr() }
-
-// MacAuxiliaryStorageFromID adopts an existing object pointer as a MacAuxiliaryStorage (nil for 0).
+// MacAuxiliaryStorageFromID adopts an existing Objective-C object as a MacAuxiliaryStorage
+// (nil for 0), retaining it and registering a release finalizer.
 func MacAuxiliaryStorageFromID(id objc.ID) *MacAuxiliaryStorage {
 	if id == 0 {
 		return nil
 	}
-	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(id)}
+	x := &MacAuxiliaryStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an auxiliary storage object with data from the location at the URL you provide.
-//
-// NewMacAuxiliaryStorageWithURL creates a new [MacAuxiliaryStorage].
-func NewMacAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(_id)}
-}
-
-// Creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
-//
-// NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates a new [MacAuxiliaryStorage].
-func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *raw.VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*MacAuxiliaryStorage, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), hardwareModel.Ptr(), raw.VZMacAuxiliaryStorageInitializationOptions(options), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// macAuxiliaryStorageAdopt wraps an Objective-C object that this code just created as a
+// MacAuxiliaryStorage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macAuxiliaryStorageAdopt(id objc.ID) *MacAuxiliaryStorage {
+	if id == 0 {
+		return nil
 	}
-	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(_id)}, nil
+	x := &MacAuxiliaryStorage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMacAuxiliaryStorageWithContentsOfURL creates a new [MacAuxiliaryStorage].
+// Description returns the object's -description text.
+func (x *MacAuxiliaryStorage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacAuxiliaryStorage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacAuxiliaryStorage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacAuxiliaryStorage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMacAuxiliaryStorageWithURL initializes an auxiliary storage object with data from the location at the URL you provide.
+func NewMacAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	return macAuxiliaryStorageAdopt(_id)
+}
+
+// NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
+func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *MacHardwareModel, options MacAuxiliaryStorageInitializationOptions) (result *MacAuxiliaryStorage, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), rt.FileURL(uRL), objref.IDOf(hardwareModel), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return macAuxiliaryStorageAdopt(_id), nil
+}
+
+// NewMacAuxiliaryStorageWithContentsOfURL creates a new MacAuxiliaryStorage.
 func NewMacAuxiliaryStorageWithContentsOfURL(uRL string) *MacAuxiliaryStorage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(uRL))
+	return macAuxiliaryStorageAdopt(_id)
 }
 
-// URL calls the underlying URL.
-func (x *MacAuxiliaryStorage) URL() *foundation.NSURL {
-	return x.inner.URL()
+// URL wraps the corresponding Objective-C method.
+func (x *MacAuxiliaryStorage) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
 // MacAuxiliaryStorageable is the interface implemented by [MacAuxiliaryStorage], for mocking and DI.
 type MacAuxiliaryStorageable interface {
-	Unwrap() *raw.VZMacAuxiliaryStorage
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 }
 
 var _ MacAuxiliaryStorageable = (*MacAuxiliaryStorage)(nil)

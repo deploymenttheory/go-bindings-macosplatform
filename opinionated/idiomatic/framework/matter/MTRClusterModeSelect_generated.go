@@ -5,161 +5,167 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterModeSelect wraps [raw.MTRClusterModeSelect] with a fluent Go API.
+// MTRClusterModeSelect is an idiomatic wrapper over the Objective-C class MTRClusterModeSelect.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterModeSelect struct {
-	inner *raw.MTRClusterModeSelect
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterModeSelect].
-func (x *MTRClusterModeSelect) Unwrap() *raw.MTRClusterModeSelect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterModeSelect) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterModeSelectFromID adopts an existing object pointer as a MTRClusterModeSelect (nil for 0).
+// MTRClusterModeSelectFromID adopts an existing Objective-C object as a MTRClusterModeSelect
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterModeSelectFromID(id objc.ID) *MTRClusterModeSelect {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterModeSelect{inner: raw.MTRClusterModeSelectFromID(id)}
+	x := &MTRClusterModeSelect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterModeSelectWithDeviceEndpointIDQueue creates a new [MTRClusterModeSelect].
-func NewMTRClusterModeSelectWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterModeSelect {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterModeSelect")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterModeSelect{inner: raw.MTRClusterModeSelectFromID(_id)}
+// mTRClusterModeSelectAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterModeSelect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterModeSelectAdopt(id objc.ID) *MTRClusterModeSelect {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterModeSelect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterModeSelectWithDeviceEndpointQueue creates a new [MTRClusterModeSelect].
-func NewMTRClusterModeSelectWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterModeSelect {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterModeSelect")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterModeSelect{inner: raw.MTRClusterModeSelectFromID(_id)}
+// NewMTRClusterModeSelectWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterModeSelectWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterModeSelect {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterModeSelect")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterModeSelectAdopt(_id)
 }
 
-// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterModeSelect) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRModeSelectClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterModeSelectWithDeviceEndpointQueue creates a new MTRClusterModeSelect.
+func NewMTRClusterModeSelectWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterModeSelect {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterModeSelect")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterModeSelectAdopt(_id)
 }
 
-// ReadAttributeDescriptionWithParams calls the underlying ReadAttributeDescriptionWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDescriptionWithParams(params)
+// ReadAttributeDescriptionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeStandardNamespaceWithParams calls the underlying ReadAttributeStandardNamespaceWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeStandardNamespaceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStandardNamespaceWithParams(params)
+// ReadAttributeStandardNamespaceWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeStandardNamespaceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStandardNamespaceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedModesWithParams calls the underlying ReadAttributeSupportedModesWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedModesWithParams(params)
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentModeWithParams calls the underlying ReadAttributeCurrentModeWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentModeWithParams(params)
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeStartUpModeWithParams calls the underlying ReadAttributeStartUpModeWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeStartUpModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStartUpModeWithParams(params)
+// ReadAttributeStartUpModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeStartUpModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeStartUpModeWithValueExpectedValueInterval calls the underlying WriteAttributeStartUpModeWithValueExpectedValueInterval.
-func (x *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// WriteAttributeStartUpModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeStartUpModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeStartUpModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeStartUpModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeOnModeWithParams calls the underlying ReadAttributeOnModeWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeOnModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOnModeWithParams(params)
+// ReadAttributeOnModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeOnModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnModeWithValueExpectedValueInterval calls the underlying WriteAttributeOnModeWithValueExpectedValueInterval.
-func (x *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// WriteAttributeOnModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeOnModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOnModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeOnModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterModeSelect) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterModeSelect) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRModeSelectClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterModeSelect) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterModeSelect) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterModeSelect) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterModeSelectable is the interface implemented by [MTRClusterModeSelect], for mocking and DI.
 type MTRClusterModeSelectable interface {
-	Unwrap() *raw.MTRClusterModeSelect
-	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRModeSelectClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeStandardNamespaceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeStartUpModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOnModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRModeSelectClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeStandardNamespaceWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeStartUpModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOnModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterModeSelectable = (*MTRClusterModeSelect)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterModeSelect)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterModeSelect)(nil)

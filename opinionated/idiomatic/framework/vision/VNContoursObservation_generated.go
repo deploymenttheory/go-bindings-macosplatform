@@ -5,114 +5,112 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents the detected contours in an image.
+// ContoursObservation is an idiomatic wrapper over the Objective-C class VNContoursObservation.
 //
-// ContoursObservation wraps [raw.VNContoursObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents the detected contours in an image.
 type ContoursObservation struct {
-	inner *raw.VNContoursObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNContoursObservation].
-func (x *ContoursObservation) Unwrap() *raw.VNContoursObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContoursObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ContoursObservationFromID adopts an existing object pointer as a ContoursObservation (nil for 0).
+// ContoursObservationFromID adopts an existing Objective-C object as a ContoursObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ContoursObservationFromID(id objc.ID) *ContoursObservation {
 	if id == 0 {
 		return nil
 	}
-	return &ContoursObservation{inner: raw.VNContoursObservationFromID(id)}
+	x := &ContoursObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContoursObservation creates a new [ContoursObservation].
+// contoursObservationAdopt wraps an Objective-C object that this code just created as a
+// ContoursObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contoursObservationAdopt(id objc.ID) *ContoursObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &ContoursObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewContoursObservation creates a new ContoursObservation.
 func NewContoursObservation() *ContoursObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNContoursObservation")), objc.RegisterName("new"))
-	return &ContoursObservation{inner: raw.VNContoursObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNContoursObservation")), objc.RegisterName("new"))
+	return contoursObservationAdopt(_id)
 }
 
-// Retrieves the contour object at the specified index, irrespective of hierarchy.
-//
-// ContourAtIndexError calls the underlying ContourAtIndexError.
-func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, error) {
-	_r, _err := x.inner.ContourAtIndexError(contourIndex)
-	if _err != nil {
-		return nil, _err
+// ContourAtIndexError retrieves the contour object at the specified index, irrespective of hierarchy.
+func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (result *Contour, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contourAtIndex:error:"), contourIndex, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Contour{inner: _r}, nil
+	return ContourFromID(_r), nil
 }
 
-// Retrieves the contour object at the specified index path.
-//
-// ContourAtIndexPathError calls the underlying ContourAtIndexPathError.
-func (x *ContoursObservation) ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*Contour, error) {
-	_r, _err := x.inner.ContourAtIndexPathError(indexPath)
-	if _err != nil {
-		return nil, _err
+// ContourAtIndexPathError retrieves the contour object at the specified index path.
+func (x *ContoursObservation) ContourAtIndexPathError(indexPath obj.Object) (result *Contour, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contourAtIndexPath:error:"), objref.IDOf(indexPath), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Contour{inner: _r}, nil
+	return ContourFromID(_r), nil
 }
 
-// @brief The total number of contours detected.
-//
-// ContourCount calls the underlying ContourCount.
+// ContourCount the total number of contours detected.
 func (x *ContoursObservation) ContourCount() int {
-	return x.inner.ContourCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contourCount"))
+	return _r
 }
 
-// @brief The total number of top-level contours detected.
-//
-// TopLevelContourCount calls the underlying TopLevelContourCount.
+// TopLevelContourCount the total number of top-level contours detected.
 func (x *ContoursObservation) TopLevelContourCount() int {
-	return x.inner.TopLevelContourCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("topLevelContourCount"))
+	return _r
 }
 
-// @brief An array of the top level contours (i.e. contours that are not enclosed inside another contour),. @details This array constitutes the top of the contour hierarchy. Each contour object can be further iterated to determine its children. @see VNContour for more information.
+// TopLevelContours an array of the top level contours (i.e. contours that are not enclosed inside another contour),. This array constitutes the top of the contour hierarchy. Each contour object can be further iterated to determine its children.
 //
 // TopLevelContours returns the collection as a Go slice.
 func (x *ContoursObservation) TopLevelContours() []*Contour {
-	arr := x.inner.TopLevelContours()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Contour {
-		return &Contour{inner: raw.VNContourFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topLevelContours"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Contour { return ContourFromID(_id) })
 }
 
-// @brief Obtain all of the contours represented as a CGPath in normalized coordinates. @details The path is owned by the observation and therefore will be alive as long as the the observation is alive.
-//
-// NormalizedPath calls the underlying NormalizedPath.
-func (x *ContoursObservation) NormalizedPath() unsafe.Pointer {
-	return x.inner.NormalizedPath()
+// NormalizedPath obtain all of the contours represented as a CGPath in normalized coordinates. The path is owned by the observation and therefore will be alive as long as the the observation is alive.
+func (x *ContoursObservation) NormalizedPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizedPath"))
+	return obj.Wrap(_r)
 }
-
-func (x *ContoursObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // ContoursObservationable is the interface implemented by [ContoursObservation], for mocking and DI.
 type ContoursObservationable interface {
-	Unwrap() *raw.VNContoursObservation
-	ContourAtIndexError(contourIndex int) (*Contour, error)
-	ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*Contour, error)
+	obj.Object
+	ContourAtIndexError(contourIndex int) (result *Contour, err error)
+	ContourAtIndexPathError(indexPath obj.Object) (result *Contour, err error)
 	ContourCount() int
 	TopLevelContourCount() int
 	TopLevelContours() []*Contour
-	NormalizedPath() unsafe.Pointer
+	NormalizedPath() obj.Object
 }
 
 var _ ContoursObservationable = (*ContoursObservation)(nil)
+
+var _ ObservationProvider = (*ContoursObservation)(nil)

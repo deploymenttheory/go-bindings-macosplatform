@@ -5,121 +5,116 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents the combined metrics for the entire playback session.
+// MetricPlayerItemPlaybackSummaryEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemPlaybackSummaryEvent.
 //
-// MetricPlayerItemPlaybackSummaryEvent wraps [raw.AVMetricPlayerItemPlaybackSummaryEvent] with a fluent Go API.
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents the combined metrics for the entire playback session.
 type MetricPlayerItemPlaybackSummaryEvent struct {
-	inner *raw.AVMetricPlayerItemPlaybackSummaryEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemPlaybackSummaryEvent].
-func (x *MetricPlayerItemPlaybackSummaryEvent) Unwrap() *raw.AVMetricPlayerItemPlaybackSummaryEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemPlaybackSummaryEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemPlaybackSummaryEventFromID adopts an existing object pointer as a MetricPlayerItemPlaybackSummaryEvent (nil for 0).
+// MetricPlayerItemPlaybackSummaryEventFromID adopts an existing Objective-C object as a MetricPlayerItemPlaybackSummaryEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemPlaybackSummaryEventFromID(id objc.ID) *MetricPlayerItemPlaybackSummaryEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemPlaybackSummaryEvent{inner: raw.AVMetricPlayerItemPlaybackSummaryEventFromID(id)}
+	x := &MetricPlayerItemPlaybackSummaryEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemPlaybackSummaryEvent creates a new [MetricPlayerItemPlaybackSummaryEvent].
-func NewMetricPlayerItemPlaybackSummaryEvent() *MetricPlayerItemPlaybackSummaryEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemPlaybackSummaryEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemPlaybackSummaryEvent{inner: raw.AVMetricPlayerItemPlaybackSummaryEventFromID(_id)}
-}
-
-// Returns the error event if any. If no value is available, returns nil.
-//
-// ErrorEvent calls the underlying ErrorEvent.
-func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
-	_r := x.inner.ErrorEvent()
-	if _r == nil {
+// metricPlayerItemPlaybackSummaryEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemPlaybackSummaryEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemPlaybackSummaryEventAdopt(id objc.ID) *MetricPlayerItemPlaybackSummaryEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MetricErrorEvent{inner: _r}
+	x := &MetricPlayerItemPlaybackSummaryEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
-//
-// RecoverableErrorCount calls the underlying RecoverableErrorCount.
+// NewMetricPlayerItemPlaybackSummaryEvent creates a new MetricPlayerItemPlaybackSummaryEvent.
+func NewMetricPlayerItemPlaybackSummaryEvent() *MetricPlayerItemPlaybackSummaryEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemPlaybackSummaryEvent")), objc.RegisterName("new"))
+	return metricPlayerItemPlaybackSummaryEventAdopt(_id)
+}
+
+// ErrorEvent returns the error event if any. If no value is available, returns nil.
+func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
+	return MetricErrorEventFromID(_r)
+}
+
+// RecoverableErrorCount returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
 func (x *MetricPlayerItemPlaybackSummaryEvent) RecoverableErrorCount() int {
-	return x.inner.RecoverableErrorCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recoverableErrorCount"))
+	return _r
 }
 
-// Returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
-//
-// StallCount calls the underlying StallCount.
+// StallCount returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
 func (x *MetricPlayerItemPlaybackSummaryEvent) StallCount() int {
-	return x.inner.StallCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stallCount"))
+	return _r
 }
 
-// Returns the total count of variant switch encountered during playback.
-//
-// VariantSwitchCount calls the underlying VariantSwitchCount.
+// VariantSwitchCount returns the total count of variant switch encountered during playback.
 func (x *MetricPlayerItemPlaybackSummaryEvent) VariantSwitchCount() int {
-	return x.inner.VariantSwitchCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("variantSwitchCount"))
+	return _r
 }
 
-// Returns the total duration of playback in seconds.
-//
-// PlaybackDuration calls the underlying PlaybackDuration.
+// PlaybackDuration returns the total duration of playback in seconds.
 func (x *MetricPlayerItemPlaybackSummaryEvent) PlaybackDuration() int {
-	return x.inner.PlaybackDuration()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playbackDuration"))
+	return _r
 }
 
-// Returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
-//
-// MediaResourceRequestCount calls the underlying MediaResourceRequestCount.
+// MediaResourceRequestCount returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
 func (x *MetricPlayerItemPlaybackSummaryEvent) MediaResourceRequestCount() int {
-	return x.inner.MediaResourceRequestCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaResourceRequestCount"))
+	return _r
 }
 
-// Returns the total time spent recovering from a stall event.
-//
-// TimeSpentRecoveringFromStall calls the underlying TimeSpentRecoveringFromStall.
+// TimeSpentRecoveringFromStall returns the total time spent recovering from a stall event.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentRecoveringFromStall() float64 {
-	return x.inner.TimeSpentRecoveringFromStall()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSpentRecoveringFromStall"))
+	return _r
 }
 
-// Returns the total time spent in initial startup of playback.
-//
-// TimeSpentInInitialStartup calls the underlying TimeSpentInInitialStartup.
+// TimeSpentInInitialStartup returns the total time spent in initial startup of playback.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentInInitialStartup() float64 {
-	return x.inner.TimeSpentInInitialStartup()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSpentInInitialStartup"))
+	return _r
 }
 
-// Returns the playtime weighted average bitrate played in bits / second.
-//
-// TimeWeightedAverageBitrate calls the underlying TimeWeightedAverageBitrate.
+// TimeWeightedAverageBitrate returns the playtime weighted average bitrate played in bits / second.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedAverageBitrate() int {
-	return x.inner.TimeWeightedAverageBitrate()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeWeightedAverageBitrate"))
+	return _r
 }
 
-// Returns the playtime weighted peak bitrate played in bits / second.
-//
-// TimeWeightedPeakBitrate calls the underlying TimeWeightedPeakBitrate.
+// TimeWeightedPeakBitrate returns the playtime weighted peak bitrate played in bits / second.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
-	return x.inner.TimeWeightedPeakBitrate()
-}
-
-func (x *MetricPlayerItemPlaybackSummaryEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeWeightedPeakBitrate"))
+	return _r
 }
 
 // MetricPlayerItemPlaybackSummaryEventable is the interface implemented by [MetricPlayerItemPlaybackSummaryEvent], for mocking and DI.
 type MetricPlayerItemPlaybackSummaryEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemPlaybackSummaryEvent
+	obj.Object
 	ErrorEvent() *MetricErrorEvent
 	RecoverableErrorCount() int
 	StallCount() int
@@ -133,3 +128,5 @@ type MetricPlayerItemPlaybackSummaryEventable interface {
 }
 
 var _ MetricPlayerItemPlaybackSummaryEventable = (*MetricPlayerItemPlaybackSummaryEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemPlaybackSummaryEvent)(nil)

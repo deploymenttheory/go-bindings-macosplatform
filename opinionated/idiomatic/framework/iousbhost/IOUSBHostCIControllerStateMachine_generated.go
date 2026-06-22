@@ -5,99 +5,107 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// @class   IOUSBHostCIControllerStateMachine @brief   The object representing the state of a user-mode USB host controller @details This class assists with tracking internal state transitions of a user-mode USB host controller, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses. IOUSBHostCIControllerStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
+// HostCIControllerStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIControllerStateMachine.
 //
-// HostCIControllerStateMachine wraps [raw.IOUSBHostCIControllerStateMachine] with a fluent Go API.
+// The object representing the state of a user-mode USB host controller This class assists with tracking internal state transitions of a user-mode USB host controller, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses. IOUSBHostCIControllerStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
 type HostCIControllerStateMachine struct {
-	inner *raw.IOUSBHostCIControllerStateMachine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostCIControllerStateMachine].
-func (x *HostCIControllerStateMachine) Unwrap() *raw.IOUSBHostCIControllerStateMachine {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostCIControllerStateMachine) ID() objc.ID { return x.inner.Ptr() }
-
-// HostCIControllerStateMachineFromID adopts an existing object pointer as a HostCIControllerStateMachine (nil for 0).
+// HostCIControllerStateMachineFromID adopts an existing Objective-C object as a HostCIControllerStateMachine
+// (nil for 0), retaining it and registering a release finalizer.
 func HostCIControllerStateMachineFromID(id objc.ID) *HostCIControllerStateMachine {
 	if id == 0 {
 		return nil
 	}
-	return &HostCIControllerStateMachine{inner: raw.IOUSBHostCIControllerStateMachineFromID(id)}
+	x := &HostCIControllerStateMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @brief       Initializes an IOUSBHostCIControllerStateMachine object @discussion  The IOUSBHostCIControllerStateMachine defaults to the IOUSBHostCIControllerStateOff state. @param       interface IOUSBHostControllerInterface which will be used to send command responses. @return      IOUSBHostCIControllerStateMachine instance, to be released by the caller.
-//
-// NewHostCIControllerStateMachineWithInterfaceError creates a new [HostCIControllerStateMachine].
-func NewHostCIControllerStateMachineWithInterfaceError(interface_ *raw.IOUSBHostControllerInterface) (*HostCIControllerStateMachine, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostCIControllerStateMachine")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:error:"), interface_.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &HostCIControllerStateMachine{inner: raw.IOUSBHostCIControllerStateMachineFromID(_id)}, nil
-}
-
-// @brief       Inspect an IOUSBHostCIMessage command @discussion  The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @return      BOOL YES if the command is targeting a controller, and can be handled in the current state BOOL NO if the command does not target a controller, or cannot be handled in the current state
-//
-// InspectCommandError calls the underlying InspectCommandError.
-func (x *HostCIControllerStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
-	return x.inner.InspectCommandError(command)
-}
-
-// @brief       Advance the state machine and respond to an IOUSBHostCIMessage command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
-//
-// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
-func (x *HostCIControllerStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
-	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
-}
-
-// @brief       Advance the state machine and respond to an IOUSBHostCIMessageTypeControllerFrameNumber command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, enqueueUpdatedFrame:timestamp:error is called with the supplied parameters, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, enqueueUpdatedFrame:timestamp:error is not called but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver.  The Type field must be IOUSBHostCIMessageTypeControllerFrameNumber @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @param       frame uint64_t containing the number of 1ms frames that have elapsed since the controller began counting frames @param       timestamp uint64_t containing the mach_absolute_time() correlated to the beginning of the frameNumber @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
-//
-// RespondToCommandStatusFrameTimestampError calls the underlying RespondToCommandStatusFrameTimestampError.
-func (x *HostCIControllerStateMachine) RespondToCommandStatusFrameTimestampError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, frame uint64, timestamp uint64) (bool, error) {
-	return x.inner.RespondToCommandStatusFrameTimestampError(command, raw.IOUSBHostCIMessageStatus(status), frame, timestamp)
-}
-
-// @brief       Enqueue frame and timestamp messages for delivery to the kernel driver @discussion  If the controller interface is in the IOUSBHostCIControllerStateActive state, messages with the type IOUSBHostCIMessageTypeFrameNumberUpdate and IOUSBHostCIMessageTypeFrameTimestampUpdate will be generated using the provided inputs, and enqueued for delivery to the kernel driver. The frame and timestamp information provided effectively measure the duration of the controller's 1ms frame in terms of system time.  A 1% frame duration variation is permitted.  A larger frame duration variation will result in a IOUSBHostCIExceptionTypeFrameUpdateError. @param       frame uint64_t containing the number of 1ms frames that have elapsed since the controller began counting frames @param       timestamp uint64_t containing the mach_absolute_time() correlated to the beginning of the frameNumber @return      BOOL YES if the messages were enqueued for delivery to the kernel. BOOL NO if the messages were not enqueued for delivery to the kernel.
-//
-// EnqueueUpdatedFrameTimestampError calls the underlying EnqueueUpdatedFrameTimestampError.
-func (x *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestampError(frame uint64, timestamp uint64) (bool, error) {
-	return x.inner.EnqueueUpdatedFrameTimestampError(frame, timestamp)
-}
-
-// ControllerState calls the underlying ControllerState.
-func (x *HostCIControllerStateMachine) ControllerState() IOUSBHostCIControllerState {
-	return IOUSBHostCIControllerState(x.inner.ControllerState())
-}
-
-// ControllerInterface calls the underlying ControllerInterface.
-func (x *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := x.inner.ControllerInterface()
-	if _r == nil {
+// hostCIControllerStateMachineAdopt wraps an Objective-C object that this code just created as a
+// HostCIControllerStateMachine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostCIControllerStateMachineAdopt(id objc.ID) *HostCIControllerStateMachine {
+	if id == 0 {
 		return nil
 	}
-	return &HostControllerInterface{inner: _r}
+	x := &HostCIControllerStateMachine{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HostCIControllerStateMachine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostCIControllerStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostCIControllerStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostCIControllerStateMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHostCIControllerStateMachineWithInterfaceError initializes an IOUSBHostCIControllerStateMachine object The IOUSBHostCIControllerStateMachine defaults to the IOUSBHostCIControllerStateOff state.
+func NewHostCIControllerStateMachineWithInterfaceError(interface_ *HostControllerInterface) (result *HostCIControllerStateMachine, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIControllerStateMachine")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:error:"), objref.IDOf(interface_), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return hostCIControllerStateMachineAdopt(_id), nil
+}
+
+// EnqueueUpdatedFrameTimestamp enqueue frame and timestamp messages for delivery to the kernel driver If the controller interface is in the IOUSBHostCIControllerStateActive state, messages with the type IOUSBHostCIMessageTypeFrameNumberUpdate and IOUSBHostCIMessageTypeFrameTimestampUpdate will be generated using the provided inputs, and enqueued for delivery to the kernel driver. The frame and timestamp information provided effectively measure the duration of the controller's 1ms frame in terms of system time.  A 1% frame duration variation is permitted.  A larger frame duration variation will result in a IOUSBHostCIExceptionTypeFrameUpdateError.
+func (x *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enqueueUpdatedFrame:timestamp:error:"), frame, timestamp, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// ControllerState wraps the corresponding Objective-C method.
+func (x *HostCIControllerStateMachine) ControllerState() HostCIControllerState {
+	_r := objc.Send[HostCIControllerState](objref.IDOf(x), objc.RegisterName("controllerState"))
+	return _r
+}
+
+// ControllerInterface wraps the corresponding Objective-C method.
+func (x *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+	return HostControllerInterfaceFromID(_r)
 }
 
 // HostCIControllerStateMachineable is the interface implemented by [HostCIControllerStateMachine], for mocking and DI.
 type HostCIControllerStateMachineable interface {
-	Unwrap() *raw.IOUSBHostCIControllerStateMachine
-	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
-	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error)
-	RespondToCommandStatusFrameTimestampError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, frame uint64, timestamp uint64) (bool, error)
-	EnqueueUpdatedFrameTimestampError(frame uint64, timestamp uint64) (bool, error)
-	ControllerState() IOUSBHostCIControllerState
+	obj.Object
+	EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error
+	ControllerState() HostCIControllerState
 	ControllerInterface() *HostControllerInterface
 }
 

@@ -6,66 +6,76 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterKeypadInput wraps [raw.MTRClusterKeypadInput] with a fluent Go API.
+// MTRClusterKeypadInput is an idiomatic wrapper over the Objective-C class MTRClusterKeypadInput.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterKeypadInput struct {
-	inner *raw.MTRClusterKeypadInput
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterKeypadInput].
-func (x *MTRClusterKeypadInput) Unwrap() *raw.MTRClusterKeypadInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterKeypadInput) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterKeypadInputFromID adopts an existing object pointer as a MTRClusterKeypadInput (nil for 0).
+// MTRClusterKeypadInputFromID adopts an existing Objective-C object as a MTRClusterKeypadInput
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterKeypadInputFromID(id objc.ID) *MTRClusterKeypadInput {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterKeypadInput{inner: raw.MTRClusterKeypadInputFromID(id)}
+	x := &MTRClusterKeypadInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+// mTRClusterKeypadInputAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterKeypadInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterKeypadInputAdopt(id objc.ID) *MTRClusterKeypadInput {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterKeypadInput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRClusterKeypadInputWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterKeypadInputWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterKeypadInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterKeypadInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterKeypadInputAdopt(_id)
+}
+
+// NewMTRClusterKeypadInputWithDeviceEndpointQueue creates a new MTRClusterKeypadInput.
+func NewMTRClusterKeypadInputWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterKeypadInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterKeypadInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterKeypadInputAdopt(_id)
+}
+
+// SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
-// NewMTRClusterKeypadInputWithDeviceEndpointIDQueue creates a new [MTRClusterKeypadInput].
-func NewMTRClusterKeypadInputWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterKeypadInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterKeypadInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterKeypadInput{inner: raw.MTRClusterKeypadInputFromID(_id)}
-}
-
-// NewMTRClusterKeypadInputWithDeviceEndpointQueue creates a new [MTRClusterKeypadInput].
-func NewMTRClusterKeypadInputWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterKeypadInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterKeypadInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterKeypadInput{inner: raw.MTRClusterKeypadInputFromID(_id)}
-}
-
 // SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error) {
+func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRKeypadInputClusterSendKeyResponseParams, err error) {
 	type _result struct {
 		val *MTRKeypadInputClusterSendKeyResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRKeypadInputClusterSendKeyResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRKeypadInputClusterSendKeyResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRKeypadInputClusterSendKeyResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendKeyWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -75,48 +85,52 @@ func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInte
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterKeypadInput) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterKeypadInput) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterKeypadInput) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterKeypadInput) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterKeypadInput) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterKeypadInput) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterKeypadInput) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterKeypadInput) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterKeypadInput) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterKeypadInput) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
+// SendKeyWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // SendKeyWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error) {
+func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRKeypadInputClusterSendKeyResponseParams, err error) {
 	type _result struct {
 		val *MTRKeypadInputClusterSendKeyResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRKeypadInputClusterSendKeyResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRKeypadInputClusterSendKeyResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRKeypadInputClusterSendKeyResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendKeyWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -124,26 +138,22 @@ func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInte
 		var _zero *MTRKeypadInputClusterSendKeyResponseParams
 		return _zero, ctx.Err()
 	}
-}
-
-func (x *MTRClusterKeypadInput) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterKeypadInput) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
 }
 
 // MTRClusterKeypadInputable is the interface implemented by [MTRClusterKeypadInput], for mocking and DI.
 type MTRClusterKeypadInputable interface {
-	Unwrap() *raw.MTRClusterKeypadInput
-	SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SendKeyWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error)
+	obj.Object
+	SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRKeypadInputClusterSendKeyResponseParams, error)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	SendKeyWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRKeypadInputClusterSendKeyResponseParams, error)
 }
 
 var _ MTRClusterKeypadInputable = (*MTRClusterKeypadInput)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterKeypadInput)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterKeypadInput)(nil)

@@ -5,51 +5,65 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the feedback setting.
+// FeedbackCommandEvent is an idiomatic wrapper over the Objective-C class MPFeedbackCommandEvent.
 //
-// FeedbackCommandEvent wraps [raw.MPFeedbackCommandEvent] with a fluent Go API.
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the feedback setting.
 type FeedbackCommandEvent struct {
-	inner *raw.MPFeedbackCommandEvent
+	RemoteCommandEvent
 }
 
-// Unwrap returns the underlying [raw.MPFeedbackCommandEvent].
-func (x *FeedbackCommandEvent) Unwrap() *raw.MPFeedbackCommandEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FeedbackCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// FeedbackCommandEventFromID adopts an existing object pointer as a FeedbackCommandEvent (nil for 0).
+// FeedbackCommandEventFromID adopts an existing Objective-C object as a FeedbackCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func FeedbackCommandEventFromID(id objc.ID) *FeedbackCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &FeedbackCommandEvent{inner: raw.MPFeedbackCommandEventFromID(id)}
+	x := &FeedbackCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFeedbackCommandEvent creates a new [FeedbackCommandEvent].
+// feedbackCommandEventAdopt wraps an Objective-C object that this code just created as a
+// FeedbackCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func feedbackCommandEventAdopt(id objc.ID) *FeedbackCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &FeedbackCommandEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFeedbackCommandEvent creates a new FeedbackCommandEvent.
 func NewFeedbackCommandEvent() *FeedbackCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPFeedbackCommandEvent")), objc.RegisterName("new"))
-	return &FeedbackCommandEvent{inner: raw.MPFeedbackCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPFeedbackCommandEvent")), objc.RegisterName("new"))
+	return feedbackCommandEventAdopt(_id)
 }
 
-// IsNegative calls the underlying IsNegative.
+// IsNegative wraps the corresponding Objective-C method.
 func (x *FeedbackCommandEvent) IsNegative() bool {
-	return x.inner.IsNegative()
-}
-
-func (x *FeedbackCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNegative"))
+	return _r
 }
 
 // FeedbackCommandEventable is the interface implemented by [FeedbackCommandEvent], for mocking and DI.
 type FeedbackCommandEventable interface {
-	Unwrap() *raw.MPFeedbackCommandEvent
+	obj.Object
 	IsNegative() bool
 }
 
 var _ FeedbackCommandEventable = (*FeedbackCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*FeedbackCommandEvent)(nil)

@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for mass.
+// UnitMass is an idiomatic wrapper over the Objective-C class NSUnitMass.
 //
-// UnitMass wraps [raw.NSUnitMass] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for mass.
 type UnitMass struct {
-	inner *raw.NSUnitMass
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitMass].
-func (x *UnitMass) Unwrap() *raw.NSUnitMass { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitMass) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitMassFromID adopts an existing object pointer as a UnitMass (nil for 0).
+// UnitMassFromID adopts an existing Objective-C object as a UnitMass
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitMassFromID(id objc.ID) *UnitMass {
 	if id == 0 {
 		return nil
 	}
-	return &UnitMass{inner: raw.NSUnitMassFromID(id)}
-}
-
-// NewUnitMass creates a new [UnitMass].
-func NewUnitMass() *UnitMass {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitMass")), objc.RegisterName("new"))
-	return &UnitMass{inner: raw.NSUnitMassFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitMass) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitMass {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitMass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitMass) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitMassAdopt wraps an Objective-C object that this code just created as a
+// UnitMass (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitMassAdopt(id objc.ID) *UnitMass {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitMass{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitMass) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitMass creates a new UnitMass.
+func NewUnitMass() *UnitMass {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("new"))
+	return unitMassAdopt(_id)
+}
 
-func (x *UnitMass) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitMass {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitMassable is the interface implemented by [UnitMass], for mocking and DI.
 type UnitMassable interface {
-	Unwrap() *raw.NSUnitMass
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitMass
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitMass
 }
 
 var _ UnitMassable = (*UnitMass)(nil)
+
+var _ DimensionProvider = (*UnitMass)(nil)
+
+var _ UnitProvider = (*UnitMass)(nil)

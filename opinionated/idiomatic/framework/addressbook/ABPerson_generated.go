@@ -5,93 +5,94 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates all information about a person in the Address Book database.
+// Person is an idiomatic wrapper over the Objective-C class ABPerson.
 //
-// Person wraps [raw.ABPerson] with a fluent Go API.
+// It embeds [Record], promoting that type's methods.
+//
+// An object that encapsulates all information about a person in the Address Book database.
 type Person struct {
-	inner *raw.ABPerson
+	Record
 }
 
-// Unwrap returns the underlying [raw.ABPerson].
-func (x *Person) Unwrap() *raw.ABPerson { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Person) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonFromID adopts an existing object pointer as a Person (nil for 0).
+// PersonFromID adopts an existing Objective-C object as a Person
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	return &Person{inner: raw.ABPersonFromID(id)}
+	x := &Person{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPersonWithVCardRepresentation creates a new [Person].
-func NewPersonWithVCardRepresentation(vCardData *foundation.NSData) *Person {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ABPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVCardRepresentation:"), vCardData.Ptr())
-	return &Person{inner: raw.ABPersonFromID(_id)}
+// personAdopt wraps an Objective-C object that this code just created as a
+// Person (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personAdopt(id objc.ID) *Person {
+	if id == 0 {
+		return nil
+	}
+	x := &Person{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns an array of the address book groups that this person belongs to.
-//
-// ParentGroups calls the underlying ParentGroups.
-func (x *Person) ParentGroups() *foundation.NSArray[objc.ID] {
-	return x.inner.ParentGroups()
+// NewPersonWithVCardRepresentation creates a new Person.
+func NewPersonWithVCardRepresentation(vCardData obj.Object) *Person {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVCardRepresentation:"), objref.IDOf(vCardData))
+	return personAdopt(_id)
 }
 
-// Returns the array of all person records that are linked to the person this record represents.
-//
-// LinkedPeople calls the underlying LinkedPeople.
-func (x *Person) LinkedPeople() *foundation.NSArray[objc.ID] {
-	return x.inner.LinkedPeople()
+// ParentGroups returns an array of the address book groups that this person belongs to.
+func (x *Person) ParentGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentGroups"))
+	return obj.Wrap(_r)
 }
 
-// Returns the vCard representation of the person record as a data object in vCard format.
-//
-// VCardRepresentation calls the underlying VCardRepresentation.
-func (x *Person) VCardRepresentation() *foundation.NSData {
-	return x.inner.VCardRepresentation()
+// LinkedPeople returns the array of all person records that are linked to the person this record represents.
+func (x *Person) LinkedPeople() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkedPeople"))
+	return obj.Wrap(_r)
 }
 
-// Sets the image for this person to the given data.
-//
-// SetImageData calls the underlying SetImageData.
-func (x *Person) SetImageData(data *foundation.NSData) bool {
-	return x.inner.SetImageData(data)
+// VCardRepresentation returns the vCard representation of the person record as a data object in vCard format.
+func (x *Person) VCardRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vCardRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// Returns data that contains a picture of this person.
-//
-// ImageData calls the underlying ImageData.
-func (x *Person) ImageData() *foundation.NSData {
-	return x.inner.ImageData()
+// SetImageData sets the image for this person to the given data.
+func (x *Person) SetImageData(data obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setImageData:"), objref.IDOf(data))
+	return _r
 }
 
-// Starts an asynchronous fetch for image data in all locations
-//
-// BeginLoadingImageDataForClient calls the underlying BeginLoadingImageDataForClient.
-func (x *Person) BeginLoadingImageDataForClient(client raw.ABImageClient) int {
-	return x.inner.BeginLoadingImageDataForClient(client)
+// ImageData returns data that contains a picture of this person.
+func (x *Person) ImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
+	return obj.Wrap(_r)
 }
-
-func (x *Person) asRecord() *raw.ABRecord { return &x.inner.ABRecord }
 
 // Personable is the interface implemented by [Person], for mocking and DI.
 type Personable interface {
-	Unwrap() *raw.ABPerson
-	ParentGroups() *foundation.NSArray[objc.ID]
-	LinkedPeople() *foundation.NSArray[objc.ID]
-	VCardRepresentation() *foundation.NSData
-	SetImageData(data *foundation.NSData) bool
-	ImageData() *foundation.NSData
-	BeginLoadingImageDataForClient(client raw.ABImageClient) int
+	obj.Object
+	ParentGroups() obj.Object
+	LinkedPeople() obj.Object
+	VCardRepresentation() obj.Object
+	SetImageData(data obj.Object) bool
+	ImageData() obj.Object
 }
 
 var _ Personable = (*Person)(nil)
+
+var _ RecordProvider = (*Person)(nil)

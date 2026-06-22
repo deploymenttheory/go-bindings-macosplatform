@@ -5,55 +5,86 @@
 package multipeerconnectivity
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An MCPeerID object represents a peer in a multipeer session.
+// PeerID is an idiomatic wrapper over the Objective-C class MCPeerID.
 //
-// PeerID wraps [raw.MCPeerID] with a fluent Go API.
+// An MCPeerID object represents a peer in a multipeer session.
 type PeerID struct {
-	inner *raw.MCPeerID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MCPeerID].
-func (x *PeerID) Unwrap() *raw.MCPeerID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PeerID) ID() objc.ID { return x.inner.Ptr() }
-
-// PeerIDFromID adopts an existing object pointer as a PeerID (nil for 0).
+// PeerIDFromID adopts an existing Objective-C object as a PeerID
+// (nil for 0), retaining it and registering a release finalizer.
 func PeerIDFromID(id objc.ID) *PeerID {
 	if id == 0 {
 		return nil
 	}
-	return &PeerID{inner: raw.MCPeerIDFromID(id)}
+	x := &PeerID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a peer.
-//
-// NewPeerIDWithDisplayName creates a new [PeerID].
+// peerIDAdopt wraps an Objective-C object that this code just created as a
+// PeerID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func peerIDAdopt(id objc.ID) *PeerID {
+	if id == 0 {
+		return nil
+	}
+	x := &PeerID{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PeerID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PeerID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PeerID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PeerID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPeerIDWithDisplayName initializes a peer.
 func NewPeerIDWithDisplayName(myDisplayName string) *PeerID {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCPeerID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:"), foundation.NSStringStringWithUTF8String(myDisplayName).Ptr())
-	return &PeerID{inner: raw.MCPeerIDFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MCPeerID")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:"), purego.NSString(myDisplayName))
+	return peerIDAdopt(_id)
 }
 
-// DisplayName calls the underlying DisplayName.
+// DisplayName wraps the corresponding Objective-C method.
 func (x *PeerID) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PeerIDable is the interface implemented by [PeerID], for mocking and DI.
 type PeerIDable interface {
-	Unwrap() *raw.MCPeerID
+	obj.Object
 	DisplayName() string
 }
 

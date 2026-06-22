@@ -5,65 +5,74 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSFontFaceRule wraps [raw.DOMCSSFontFaceRule] with a fluent Go API.
+// DOMCSSFontFaceRule is an idiomatic wrapper over the Objective-C class DOMCSSFontFaceRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSFontFaceRule struct {
-	inner *raw.DOMCSSFontFaceRule
+	DOMCSSRule
 }
 
-// Unwrap returns the underlying [raw.DOMCSSFontFaceRule].
-func (x *DOMCSSFontFaceRule) Unwrap() *raw.DOMCSSFontFaceRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSFontFaceRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSFontFaceRuleFromID adopts an existing object pointer as a DOMCSSFontFaceRule (nil for 0).
+// DOMCSSFontFaceRuleFromID adopts an existing Objective-C object as a DOMCSSFontFaceRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSFontFaceRuleFromID(id objc.ID) *DOMCSSFontFaceRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSFontFaceRule{inner: raw.DOMCSSFontFaceRuleFromID(id)}
-}
-
-// NewDOMCSSFontFaceRule creates a new [DOMCSSFontFaceRule].
-func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSFontFaceRule")), objc.RegisterName("new"))
-	return &DOMCSSFontFaceRule{inner: raw.DOMCSSFontFaceRuleFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSFontFaceRule) WithCssText(cssText string) *DOMCSSFontFaceRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSFontFaceRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Style calls the underlying Style.
-func (x *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
-	_r := x.inner.Style()
-	if _r == nil {
+// dOMCSSFontFaceRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSFontFaceRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSFontFaceRuleAdopt(id objc.ID) *DOMCSSFontFaceRule {
+	if id == 0 {
 		return nil
 	}
-	return &DOMCSSStyleDeclaration{inner: _r}
+	x := &DOMCSSFontFaceRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DOMCSSFontFaceRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
+// NewDOMCSSFontFaceRule creates a new DOMCSSFontFaceRule.
+func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSFontFaceRule")), objc.RegisterName("new"))
+	return dOMCSSFontFaceRuleAdopt(_id)
+}
 
-func (x *DOMCSSFontFaceRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSFontFaceRule) WithCssText(cssText string) *DOMCSSFontFaceRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
 
-func (x *DOMCSSFontFaceRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+// Style wraps the corresponding Objective-C method.
+func (x *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
 // DOMCSSFontFaceRuleable is the interface implemented by [DOMCSSFontFaceRule], for mocking and DI.
 type DOMCSSFontFaceRuleable interface {
-	Unwrap() *raw.DOMCSSFontFaceRule
+	obj.Object
 	WithCssText(cssText string) *DOMCSSFontFaceRule
 	Style() *DOMCSSStyleDeclaration
 }
 
 var _ DOMCSSFontFaceRuleable = (*DOMCSSFontFaceRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSFontFaceRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSFontFaceRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSFontFaceRule)(nil)

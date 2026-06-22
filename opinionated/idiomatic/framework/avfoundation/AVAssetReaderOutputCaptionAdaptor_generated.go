@@ -5,100 +5,98 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reads caption group objects from an asset track that contains timed text.
+// AssetReaderOutputCaptionAdaptor is an idiomatic wrapper over the Objective-C class AVAssetReaderOutputCaptionAdaptor.
 //
-// AssetReaderOutputCaptionAdaptor wraps [raw.AVAssetReaderOutputCaptionAdaptor] with a fluent Go API.
+// An object that reads caption group objects from an asset track that contains timed text.
 type AssetReaderOutputCaptionAdaptor struct {
-	inner *raw.AVAssetReaderOutputCaptionAdaptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetReaderOutputCaptionAdaptor].
-func (x *AssetReaderOutputCaptionAdaptor) Unwrap() *raw.AVAssetReaderOutputCaptionAdaptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReaderOutputCaptionAdaptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderOutputCaptionAdaptorFromID adopts an existing object pointer as a AssetReaderOutputCaptionAdaptor (nil for 0).
+// AssetReaderOutputCaptionAdaptorFromID adopts an existing Objective-C object as a AssetReaderOutputCaptionAdaptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderOutputCaptionAdaptorFromID(id objc.ID) *AssetReaderOutputCaptionAdaptor {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReaderOutputCaptionAdaptor{inner: raw.AVAssetReaderOutputCaptionAdaptorFromID(id)}
-}
-
-// Creates a caption adaptor that reads from a track output.
-//
-// NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a new [AssetReaderOutputCaptionAdaptor].
-func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *raw.AVAssetReaderTrackOutput) *AssetReaderOutputCaptionAdaptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderOutputCaptionAdaptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), trackOutput.Ptr())
-	return &AssetReaderOutputCaptionAdaptor{inner: raw.AVAssetReaderOutputCaptionAdaptorFromID(_id)}
-}
-
-// A delegate object that handles callbacks to the caption adaptor.
-//
-// WithValidationDelegate sets the validationDelegate property and returns the receiver for chaining.
-func (x *AssetReaderOutputCaptionAdaptor) WithValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling) *AssetReaderOutputCaptionAdaptor {
-	x.inner.SetValidationDelegate(validationDelegate)
+	x := &AssetReaderOutputCaptionAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns the next caption group.
-//
-// NextCaptionGroup calls the underlying NextCaptionGroup.
+// assetReaderOutputCaptionAdaptorAdopt wraps an Objective-C object that this code just created as a
+// AssetReaderOutputCaptionAdaptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderOutputCaptionAdaptorAdopt(id objc.ID) *AssetReaderOutputCaptionAdaptor {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetReaderOutputCaptionAdaptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetReaderOutputCaptionAdaptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetReaderOutputCaptionAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetReaderOutputCaptionAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReaderOutputCaptionAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a caption adaptor that reads from a track output.
+func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputCaptionAdaptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputCaptionAdaptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
+	return assetReaderOutputCaptionAdaptorAdopt(_id)
+}
+
+// NextCaptionGroup returns the next caption group.
 func (x *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
-	_r := x.inner.NextCaptionGroup()
-	if _r == nil {
-		return nil
-	}
-	return &CaptionGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextCaptionGroup"))
+	return CaptionGroupFromID(_r)
 }
 
-// Returns the set of captions in the caption group that weren’t vended by the adaptor.
-//
-// CaptionsNotPresentInPreviousGroupsInCaptionGroup calls the underlying CaptionsNotPresentInPreviousGroupsInCaptionGroup.
-func (x *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *raw.AVCaptionGroup) *foundation.NSArray[*raw.AVCaption] {
-	return x.inner.CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup)
+// CaptionsNotPresentInPreviousGroupsInCaptionGroup returns the set of captions in the caption group that weren’t vended by the adaptor.
+func (x *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:"), objref.IDOf(captionGroup))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// @property assetReaderTrackOutput @abstract The track output used to create the receiver.
-//
-// AssetReaderTrackOutput calls the underlying AssetReaderTrackOutput.
+// AssetReaderTrackOutput the track output used to create the receiver.
 func (x *AssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
-	_r := x.inner.AssetReaderTrackOutput()
-	if _r == nil {
-		return nil
-	}
-	return &AssetReaderTrackOutput{inner: _r}
-}
-
-// ValidationDelegate calls the underlying ValidationDelegate.
-func (x *AssetReaderOutputCaptionAdaptor) ValidationDelegate() raw.AVAssetReaderCaptionValidationHandling {
-	return x.inner.ValidationDelegate()
-}
-
-// SetValidationDelegate calls the underlying SetValidationDelegate.
-func (x *AssetReaderOutputCaptionAdaptor) SetValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling) {
-	x.inner.SetValidationDelegate(validationDelegate)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderTrackOutput"))
+	return AssetReaderTrackOutputFromID(_r)
 }
 
 // AssetReaderOutputCaptionAdaptorable is the interface implemented by [AssetReaderOutputCaptionAdaptor], for mocking and DI.
 type AssetReaderOutputCaptionAdaptorable interface {
-	Unwrap() *raw.AVAssetReaderOutputCaptionAdaptor
-	WithValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling) *AssetReaderOutputCaptionAdaptor
+	obj.Object
 	NextCaptionGroup() *CaptionGroup
-	CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *raw.AVCaptionGroup) *foundation.NSArray[*raw.AVCaption]
+	CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption
 	AssetReaderTrackOutput() *AssetReaderTrackOutput
-	ValidationDelegate() raw.AVAssetReaderCaptionValidationHandling
-	SetValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling)
 }
 
 var _ AssetReaderOutputCaptionAdaptorable = (*AssetReaderOutputCaptionAdaptor)(nil)

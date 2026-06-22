@@ -5,83 +5,90 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.
+// CollectionList is an idiomatic wrapper over the Objective-C class PHCollectionList.
 //
-// CollectionList wraps [raw.PHCollectionList] with a fluent Go API.
+// It embeds [Collection], promoting that type's methods.
+//
+// A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.
 type CollectionList struct {
-	inner *raw.PHCollectionList
+	Collection
 }
 
-// Unwrap returns the underlying [raw.PHCollectionList].
-func (x *CollectionList) Unwrap() *raw.PHCollectionList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionList) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionListFromID adopts an existing object pointer as a CollectionList (nil for 0).
+// CollectionListFromID adopts an existing Objective-C object as a CollectionList
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionListFromID(id objc.ID) *CollectionList {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionList{inner: raw.PHCollectionListFromID(id)}
+	x := &CollectionList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionList creates a new [CollectionList].
-func NewCollectionList() *CollectionList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCollectionList")), objc.RegisterName("new"))
-	return &CollectionList{inner: raw.PHCollectionListFromID(_id)}
-}
-
-// CollectionListType calls the underlying CollectionListType.
-func (x *CollectionList) CollectionListType() raw.PHCollectionListType {
-	return x.inner.CollectionListType()
-}
-
-// CollectionListSubtype calls the underlying CollectionListSubtype.
-func (x *CollectionList) CollectionListSubtype() PHCollectionListSubtype {
-	return PHCollectionListSubtype(x.inner.CollectionListSubtype())
-}
-
-// StartDate calls the underlying StartDate.
-func (x *CollectionList) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
-}
-
-// EndDate calls the underlying EndDate.
-func (x *CollectionList) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
-}
-
-// LocalizedLocationNames returns the collection as a Go slice.
-func (x *CollectionList) LocalizedLocationNames() []string {
-	arr := x.inner.LocalizedLocationNames()
-	if arr == nil {
+// collectionListAdopt wraps an Objective-C object that this code just created as a
+// CollectionList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionListAdopt(id objc.ID) *CollectionList {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	x := &CollectionList{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *CollectionList) asCollection() *raw.PHCollection { return &x.inner.PHCollection }
+// NewCollectionList creates a new CollectionList.
+func NewCollectionList() *CollectionList {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("new"))
+	return collectionListAdopt(_id)
+}
 
-func (x *CollectionList) asObject() *raw.PHObject { return &x.inner.PHCollection.PHObject }
+// CollectionListSubtype wraps the corresponding Objective-C method.
+func (x *CollectionList) CollectionListSubtype() CollectionListSubtype {
+	_r := objc.Send[CollectionListSubtype](objref.IDOf(x), objc.RegisterName("collectionListSubtype"))
+	return _r
+}
+
+// StartDate wraps the corresponding Objective-C method.
+func (x *CollectionList) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
+}
+
+// EndDate wraps the corresponding Objective-C method.
+func (x *CollectionList) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
+}
+
+// LocalizedLocationNames wraps the corresponding Objective-C method.
+//
+// LocalizedLocationNames returns the collection as a Go slice.
+func (x *CollectionList) LocalizedLocationNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLocationNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
 
 // CollectionListable is the interface implemented by [CollectionList], for mocking and DI.
 type CollectionListable interface {
-	Unwrap() *raw.PHCollectionList
-	CollectionListType() raw.PHCollectionListType
-	CollectionListSubtype() PHCollectionListSubtype
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
+	obj.Object
+	CollectionListSubtype() CollectionListSubtype
+	StartDate() obj.Object
+	EndDate() obj.Object
 	LocalizedLocationNames() []string
 }
 
 var _ CollectionListable = (*CollectionList)(nil)
+
+var _ CollectionProvider = (*CollectionList)(nil)
+
+var _ ObjectProvider = (*CollectionList)(nil)

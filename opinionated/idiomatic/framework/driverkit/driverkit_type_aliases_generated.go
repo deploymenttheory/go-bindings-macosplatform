@@ -4,105 +4,94 @@
 
 package driverkit
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/driverkit"
-)
+// A structure that describes the location and size of a block of memory.
+type IOAddressSegment struct {
+	Address uint64
+	Length  uint64
+}
 
-// IOAddressSegment is a type alias for the raw IOAddressSegment value-type struct.
-type IOAddressSegment = raw.IOAddressSegment
+// Structure to test whether block has completed or not.
+type IOCallOnceFlag struct {
+	Opaque int
+}
 
-// IOCallOnceFlag is a type alias for the raw IOCallOnceFlag value-type struct.
-type IOCallOnceFlag = raw.IOCallOnceFlag
+type IOHistogramReportValues struct {
+	Bucket_hits uint64
+	Bucket_min  int64
+	Bucket_max  int64
+	Bucket_sum  int64
+}
 
-// IODMACommandSpecification is a type alias for the raw IODMACommandSpecification value-type struct.
-type IODMACommandSpecification = raw.IODMACommandSpecification
+type IOHistogramSegmentConfig struct {
+	Base_bucket_width    uint32
+	Scale_flag           uint32
+	Segment_idx          uint32
+	Segment_bucket_count uint32
+}
 
-// IOHistogramReportValues is a type alias for the raw IOHistogramReportValues value-type struct.
-type IOHistogramReportValues = raw.IOHistogramReportValues
+// A private structure for an interrupt dispatch source.
+type IOInterruptDispatchSourcePayload struct {
+	Time  uint64
+	Count uint64
+}
 
-// IOHistogramSegmentConfig is a type alias for the raw IOHistogramSegmentConfig value-type struct.
-type IOHistogramSegmentConfig = raw.IOHistogramSegmentConfig
+type IOMDPrivateState struct {
+	Length  uint64
+	Options uint64
+}
 
-// IOInterruptDispatchSourcePayload is a type alias for the raw IOInterruptDispatchSourcePayload value-type struct.
-type IOInterruptDispatchSourcePayload = raw.IOInterruptDispatchSourcePayload
+type IOMemoryMapPrivateState struct {
+	Length  uint64
+	Offset  uint64
+	Options uint64
+	Address uint64
+}
 
-// IONamedValue is a type alias for the raw IONamedValue value-type struct.
-type IONamedValue = raw.IONamedValue
+type IONormDistReportValues struct {
+	Samples  uint64
+	Mean     uint64
+	Variance uint64
+	Reserved uint64
+}
 
-// IONormDistReportValues is a type alias for the raw IONormDistReportValues value-type struct.
-type IONormDistReportValues = raw.IONormDistReportValues
+type IOPhysicalRange struct {
+	Address uint64
+	Length  uint64
+}
 
-// IOPhysicalRange is a type alias for the raw IOPhysicalRange value-type struct.
-type IOPhysicalRange = raw.IOPhysicalRange
+type IOReportChannel struct {
+	Channel_id   uint64
+	Channel_type IOReportChannelType
+}
 
-// IORPC is a type alias for the raw IORPC value-type struct.
-type IORPC = raw.IORPC
+type IOReportChannelType struct {
+	Report_format uint8
+	Reserved      uint8
+	Categories    uint16
+	Nelements     uint16
+	Element_idx   int16
+}
 
-// IORPCMessage is a type alias for the raw IORPCMessage value-type struct.
-type IORPCMessage = raw.IORPCMessage
+type IOReportInterest struct {
+	Provider_id uint64
+	Channel     IOReportChannel
+}
 
-// IORPCMessageErrorReturn is a type alias for the raw IORPCMessageErrorReturn value-type struct.
-type IORPCMessageErrorReturn = raw.IORPCMessageErrorReturn
+type IOSimpleReportValues struct {
+	Simple_value int64
+	Reserved1    uint64
+	Reserved2    uint64
+	Reserved3    uint64
+}
 
-// IORPCMessageErrorReturnContent is a type alias for the raw IORPCMessageErrorReturnContent value-type struct.
-type IORPCMessageErrorReturnContent = raw.IORPCMessageErrorReturnContent
+type IOStateReportValues struct {
+	State_id          uint64
+	Intransitions     uint64
+	Upticks           uint64
+	Last_intransition uint64
+}
 
-// IORPCMessageMach is a type alias for the raw IORPCMessageMach value-type struct.
-type IORPCMessageMach = raw.IORPCMessageMach
-
-// IOReportChannel is a type alias for the raw IOReportChannel value-type struct.
-type IOReportChannel = raw.IOReportChannel
-
-// IOReportChannelList is a type alias for the raw IOReportChannelList value-type struct.
-type IOReportChannelList = raw.IOReportChannelList
-
-// IOReportChannelType is a type alias for the raw IOReportChannelType value-type struct.
-type IOReportChannelType = raw.IOReportChannelType
-
-// IOReportElement is a type alias for the raw IOReportElement value-type struct.
-type IOReportElement = raw.IOReportElement
-
-// IOReportElementValues is a type alias for the raw IOReportElementValues value-type struct.
-type IOReportElementValues = raw.IOReportElementValues
-
-// IOReportInterest is a type alias for the raw IOReportInterest value-type struct.
-type IOReportInterest = raw.IOReportInterest
-
-// IOReportInterestList is a type alias for the raw IOReportInterestList value-type struct.
-type IOReportInterestList = raw.IOReportInterestList
-
-// IOSimpleArrayReportValues is a type alias for the raw IOSimpleArrayReportValues value-type struct.
-type IOSimpleArrayReportValues = raw.IOSimpleArrayReportValues
-
-// IOSimpleReportValues is a type alias for the raw IOSimpleReportValues value-type struct.
-type IOSimpleReportValues = raw.IOSimpleReportValues
-
-// IOStateReportValues is a type alias for the raw IOStateReportValues value-type struct.
-type IOStateReportValues = raw.IOStateReportValues
-
-// IOUserClientMethodArguments is a type alias for the raw IOUserClientMethodArguments value-type struct.
-type IOUserClientMethodArguments = raw.IOUserClientMethodArguments
-
-// IOUserClientMethodDispatch is a type alias for the raw IOUserClientMethodDispatch value-type struct.
-type IOUserClientMethodDispatch = raw.IOUserClientMethodDispatch
-
-// IOVirtualRange is a type alias for the raw IOVirtualRange value-type struct.
-type IOVirtualRange = raw.IOVirtualRange
-
-// OSClassDescription is a type alias for the raw OSClassDescription value-type struct.
-type OSClassDescription = raw.OSClassDescription
-
-// OSClassLoadInformation is a type alias for the raw OSClassLoadInformation value-type struct.
-type OSClassLoadInformation = raw.OSClassLoadInformation
-
-// IOMDPrivateState is a type alias for the raw IOMDPrivateState value-type struct.
-type IOMDPrivateState = raw.IOMDPrivateState
-
-// IOMemoryMapPrivateState is a type alias for the raw IOMemoryMapPrivateState value-type struct.
-type IOMemoryMapPrivateState = raw.IOMemoryMapPrivateState
-
-// OSStringStatic is a type alias for the raw OSStringStatic value-type struct.
-type OSStringStatic = raw.OSStringStatic
-
-// QueueEntry is a type alias for the raw QueueEntry value-type struct.
-type QueueEntry = raw.QueueEntry
+type IOVirtualRange struct {
+	Address uint64
+	Length  uint64
+}

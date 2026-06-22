@@ -5,81 +5,75 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a hard sigmoid neuron filter.
+// CNNNeuronHardSigmoidNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronHardSigmoidNode.
 //
-// CNNNeuronHardSigmoidNode wraps [raw.MPSCNNNeuronHardSigmoidNode] with a fluent Go API.
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a hard sigmoid neuron filter.
 type CNNNeuronHardSigmoidNode struct {
-	inner *raw.MPSCNNNeuronHardSigmoidNode
+	CNNNeuronNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNeuronHardSigmoidNode].
-func (x *CNNNeuronHardSigmoidNode) Unwrap() *raw.MPSCNNNeuronHardSigmoidNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNeuronHardSigmoidNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNeuronHardSigmoidNodeFromID adopts an existing object pointer as a CNNNeuronHardSigmoidNode (nil for 0).
+// CNNNeuronHardSigmoidNodeFromID adopts an existing Objective-C object as a CNNNeuronHardSigmoidNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNeuronHardSigmoidNodeFromID(id objc.ID) *CNNNeuronHardSigmoidNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNeuronHardSigmoidNode{inner: raw.MPSCNNNeuronHardSigmoidNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSCNNNeuronHardSigmoid kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      a                       See discussion above. @param      b                       See discussion above. @return     A new MPSNNFilter node for a MPSCNNNeuronHardSigmoid kernel.
-//
-// NewCNNNeuronHardSigmoidNodeWithSourceAB creates a new [CNNNeuronHardSigmoidNode].
-func NewCNNNeuronHardSigmoidNodeWithSourceAB(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32, b float32) *CNNNeuronHardSigmoidNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), sourceNode.Ptr(), a, b)
-	return &CNNNeuronHardSigmoidNode{inner: raw.MPSCNNNeuronHardSigmoidNodeFromID(_id)}
-}
-
-// @abstract Init a node with default values for parameters a & b
-//
-// NewCNNNeuronHardSigmoidNodeWithSource creates a new [CNNNeuronHardSigmoidNode].
-func NewCNNNeuronHardSigmoidNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *CNNNeuronHardSigmoidNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &CNNNeuronHardSigmoidNode{inner: raw.MPSCNNNeuronHardSigmoidNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNNeuronHardSigmoidNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronHardSigmoidNode {
-	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNNeuronHardSigmoidNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNNeuronHardSigmoidNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNNeuronHardSigmoidNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNeuronHardSigmoidNodeAdopt(id objc.ID) *CNNNeuronHardSigmoidNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNeuronHardSigmoidNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNNeuronHardSigmoidNodeWithSourceAB init a node representing a MPSCNNNeuronHardSigmoid kernel
+func NewCNNNeuronHardSigmoidNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronHardSigmoidNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
+	return cNNNeuronHardSigmoidNodeAdopt(_id)
+}
+
+// NewCNNNeuronHardSigmoidNodeWithSource init a node with default values for parameters a & b
+func NewCNNNeuronHardSigmoidNodeWithSource(sourceNode obj.Object) *CNNNeuronHardSigmoidNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return cNNNeuronHardSigmoidNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronHardSigmoidNode) WithLabel(label string) *CNNNeuronHardSigmoidNode {
-	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNNeuronHardSigmoidNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode {
-	return &x.inner.MPSCNNNeuronNode
-}
-
-func (x *CNNNeuronHardSigmoidNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
 }
 
 // CNNNeuronHardSigmoidNodeable is the interface implemented by [CNNNeuronHardSigmoidNode], for mocking and DI.
 type CNNNeuronHardSigmoidNodeable interface {
-	Unwrap() *raw.MPSCNNNeuronHardSigmoidNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronHardSigmoidNode
+	obj.Object
 	WithLabel(label string) *CNNNeuronHardSigmoidNode
 }
 
 var _ CNNNeuronHardSigmoidNodeable = (*CNNNeuronHardSigmoidNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronHardSigmoidNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronHardSigmoidNode)(nil)

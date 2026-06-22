@@ -5,57 +5,58 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A GPU-based image-processing routine that processes only the geometry information in an image, used to create custom Core Image filters.
+// WarpKernel is an idiomatic wrapper over the Objective-C class CIWarpKernel.
 //
-// WarpKernel wraps [raw.CIWarpKernel] with a fluent Go API.
+// It embeds [Kernel], promoting that type's methods.
+//
+// A GPU-based image-processing routine that processes only the geometry information in an image, used to create custom Core Image filters.
 type WarpKernel struct {
-	inner *raw.CIWarpKernel
+	Kernel
 }
 
-// Unwrap returns the underlying [raw.CIWarpKernel].
-func (x *WarpKernel) Unwrap() *raw.CIWarpKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WarpKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// WarpKernelFromID adopts an existing object pointer as a WarpKernel (nil for 0).
+// WarpKernelFromID adopts an existing Objective-C object as a WarpKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func WarpKernelFromID(id objc.ID) *WarpKernel {
 	if id == 0 {
 		return nil
 	}
-	return &WarpKernel{inner: raw.CIWarpKernelFromID(id)}
+	x := &WarpKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWarpKernel creates a new [WarpKernel].
-func NewWarpKernel() *WarpKernel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIWarpKernel")), objc.RegisterName("new"))
-	return &WarpKernel{inner: raw.CIWarpKernelFromID(_id)}
-}
-
-// Creates a new image using the kernel and the specified input image and arguments.
-//
-// ApplyWithExtentRoiCallbackInputImageArguments calls the underlying ApplyWithExtentRoiCallbackInputImageArguments.
-func (x *WarpKernel) ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *raw.CIImage, args *foundation.NSArray[objc.ID]) *Image {
-	_r := x.inner.ApplyWithExtentRoiCallbackInputImageArguments(extent, callback, image, args)
-	if _r == nil {
+// warpKernelAdopt wraps an Objective-C object that this code just created as a
+// WarpKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func warpKernelAdopt(id objc.ID) *WarpKernel {
+	if id == 0 {
 		return nil
 	}
-	return &Image{inner: _r}
+	x := &WarpKernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *WarpKernel) asKernel() *raw.CIKernel { return &x.inner.CIKernel }
+// NewWarpKernel creates a new WarpKernel.
+func NewWarpKernel() *WarpKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("CIWarpKernel")), objc.RegisterName("new"))
+	return warpKernelAdopt(_id)
+}
 
 // WarpKernelable is the interface implemented by [WarpKernel], for mocking and DI.
 type WarpKernelable interface {
-	Unwrap() *raw.CIWarpKernel
-	ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *raw.CIImage, args *foundation.NSArray[objc.ID]) *Image
+	obj.Object
 }
 
 var _ WarpKernelable = (*WarpKernel)(nil)
+
+var _ KernelProvider = (*WarpKernel)(nil)

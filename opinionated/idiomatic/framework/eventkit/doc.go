@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package eventkit provides a fluent Go API over the macOS EventKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - CalendarItem: [Event], [Reminder]
+//   - Object: [Alarm], [Calendar], [CalendarItem], [Participant], [RecurrenceRule], [Source], [StructuredLocation]
 package eventkit

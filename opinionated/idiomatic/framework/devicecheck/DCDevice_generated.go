@@ -6,78 +6,109 @@ package devicecheck
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicecheck"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A representation of a device that provides a unique, authenticated token.
+// Device is an idiomatic wrapper over the Objective-C class DCDevice.
 //
-// Device wraps [raw.DCDevice] with a fluent Go API.
+// A representation of a device that provides a unique, authenticated token.
 type Device struct {
-	inner *raw.DCDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DCDevice].
-func (x *Device) Unwrap() *raw.DCDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Device) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceFromID adopts an existing object pointer as a Device (nil for 0).
+// DeviceFromID adopts an existing Objective-C object as a Device
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	return &Device{inner: raw.DCDeviceFromID(id)}
+	x := &Device{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDevice creates a new [Device].
+// deviceAdopt wraps an Objective-C object that this code just created as a
+// Device (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceAdopt(id objc.ID) *Device {
+	if id == 0 {
+		return nil
+	}
+	x := &Device{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Device) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Device) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDevice creates a new Device.
 func NewDevice() *Device {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DCDevice")), objc.RegisterName("new"))
-	return &Device{inner: raw.DCDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DCDevice")), objc.RegisterName("new"))
+	return deviceAdopt(_id)
 }
 
-// Generates a token that identifies the current device.
+// GenerateToken generates a token that identifies the current device.
 //
 // GenerateToken blocks until the operation completes or ctx is cancelled.
-func (x *Device) GenerateToken(ctx context.Context) (*foundation.NSData, error) {
+func (x *Device) GenerateToken(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GenerateTokenWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateTokenWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// A Boolean value that indicates whether the device supports the DeviceCheck API.
-//
-// IsSupported calls the underlying IsSupported.
+// IsSupported a Boolean value that indicates whether the device supports the DeviceCheck API.
 func (x *Device) IsSupported() bool {
-	return x.inner.IsSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+	return _r
 }
 
 // Deviceable is the interface implemented by [Device], for mocking and DI.
 type Deviceable interface {
-	Unwrap() *raw.DCDevice
-	GenerateToken(ctx context.Context) (*foundation.NSData, error)
+	obj.Object
+	GenerateToken(ctx context.Context) (obj.Object, error)
 	IsSupported() bool
 }
 

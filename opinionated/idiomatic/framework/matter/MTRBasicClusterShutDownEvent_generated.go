@@ -5,43 +5,56 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBasicClusterShutDownEvent wraps [raw.MTRBasicClusterShutDownEvent] with a fluent Go API.
+// MTRBasicClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBasicClusterShutDownEvent.
+//
+// It embeds [MTRBasicInformationClusterShutDownEvent], promoting that type's methods.
 type MTRBasicClusterShutDownEvent struct {
-	inner *raw.MTRBasicClusterShutDownEvent
+	MTRBasicInformationClusterShutDownEvent
 }
 
-// Unwrap returns the underlying [raw.MTRBasicClusterShutDownEvent].
-func (x *MTRBasicClusterShutDownEvent) Unwrap() *raw.MTRBasicClusterShutDownEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBasicClusterShutDownEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBasicClusterShutDownEventFromID adopts an existing object pointer as a MTRBasicClusterShutDownEvent (nil for 0).
+// MTRBasicClusterShutDownEventFromID adopts an existing Objective-C object as a MTRBasicClusterShutDownEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBasicClusterShutDownEventFromID(id objc.ID) *MTRBasicClusterShutDownEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBasicClusterShutDownEvent{inner: raw.MTRBasicClusterShutDownEventFromID(id)}
+	x := &MTRBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBasicClusterShutDownEvent creates a new [MTRBasicClusterShutDownEvent].
+// mTRBasicClusterShutDownEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBasicClusterShutDownEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBasicClusterShutDownEventAdopt(id objc.ID) *MTRBasicClusterShutDownEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRBasicClusterShutDownEvent creates a new MTRBasicClusterShutDownEvent.
 func NewMTRBasicClusterShutDownEvent() *MTRBasicClusterShutDownEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBasicClusterShutDownEvent")), objc.RegisterName("new"))
-	return &MTRBasicClusterShutDownEvent{inner: raw.MTRBasicClusterShutDownEventFromID(_id)}
-}
-
-func (x *MTRBasicClusterShutDownEvent) asMTRBasicInformationClusterShutDownEvent() *raw.MTRBasicInformationClusterShutDownEvent {
-	return &x.inner.MTRBasicInformationClusterShutDownEvent
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicClusterShutDownEvent")), objc.RegisterName("new"))
+	return mTRBasicClusterShutDownEventAdopt(_id)
 }
 
 // MTRBasicClusterShutDownEventable is the interface implemented by [MTRBasicClusterShutDownEvent], for mocking and DI.
 type MTRBasicClusterShutDownEventable interface {
-	Unwrap() *raw.MTRBasicClusterShutDownEvent
+	obj.Object
 }
 
 var _ MTRBasicClusterShutDownEventable = (*MTRBasicClusterShutDownEvent)(nil)
+
+var _ MTRBasicInformationClusterShutDownEventProvider = (*MTRBasicClusterShutDownEvent)(nil)

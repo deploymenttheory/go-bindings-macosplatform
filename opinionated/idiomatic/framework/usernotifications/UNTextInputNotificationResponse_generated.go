@@ -5,56 +5,68 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The user’s response to an actionable notification, including any custom text that the user typed or dictated.
+// TextInputNotificationResponse is an idiomatic wrapper over the Objective-C class UNTextInputNotificationResponse.
 //
-// TextInputNotificationResponse wraps [raw.UNTextInputNotificationResponse] with a fluent Go API.
+// It embeds [NotificationResponse], promoting that type's methods.
+//
+// The user’s response to an actionable notification, including any custom text that the user typed or dictated.
 type TextInputNotificationResponse struct {
-	inner *raw.UNTextInputNotificationResponse
+	NotificationResponse
 }
 
-// Unwrap returns the underlying [raw.UNTextInputNotificationResponse].
-func (x *TextInputNotificationResponse) Unwrap() *raw.UNTextInputNotificationResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextInputNotificationResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// TextInputNotificationResponseFromID adopts an existing object pointer as a TextInputNotificationResponse (nil for 0).
+// TextInputNotificationResponseFromID adopts an existing Objective-C object as a TextInputNotificationResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func TextInputNotificationResponseFromID(id objc.ID) *TextInputNotificationResponse {
 	if id == 0 {
 		return nil
 	}
-	return &TextInputNotificationResponse{inner: raw.UNTextInputNotificationResponseFromID(id)}
+	x := &TextInputNotificationResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextInputNotificationResponse creates a new [TextInputNotificationResponse].
+// textInputNotificationResponseAdopt wraps an Objective-C object that this code just created as a
+// TextInputNotificationResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textInputNotificationResponseAdopt(id objc.ID) *TextInputNotificationResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &TextInputNotificationResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTextInputNotificationResponse creates a new TextInputNotificationResponse.
 func NewTextInputNotificationResponse() *TextInputNotificationResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNTextInputNotificationResponse")), objc.RegisterName("new"))
-	return &TextInputNotificationResponse{inner: raw.UNTextInputNotificationResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNTextInputNotificationResponse")), objc.RegisterName("new"))
+	return textInputNotificationResponseAdopt(_id)
 }
 
-// UserText calls the underlying UserText.
+// UserText wraps the corresponding Objective-C method.
 func (x *TextInputNotificationResponse) UserText() string {
-	_r := x.inner.UserText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *TextInputNotificationResponse) asNotificationResponse() *raw.UNNotificationResponse {
-	return &x.inner.UNNotificationResponse
+	return purego.GoString(_r)
 }
 
 // TextInputNotificationResponseable is the interface implemented by [TextInputNotificationResponse], for mocking and DI.
 type TextInputNotificationResponseable interface {
-	Unwrap() *raw.UNTextInputNotificationResponse
+	obj.Object
 	UserText() string
 }
 
 var _ TextInputNotificationResponseable = (*TextInputNotificationResponse)(nil)
+
+var _ NotificationResponseProvider = (*TextInputNotificationResponse)(nil)

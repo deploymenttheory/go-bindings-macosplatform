@@ -5,51 +5,64 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SignedPersonIdentityProof wraps [raw.SWSignedPersonIdentityProof] with a fluent Go API.
+// SignedPersonIdentityProof is an idiomatic wrapper over the Objective-C class SWSignedPersonIdentityProof.
+//
+// It embeds [PersonIdentityProof], promoting that type's methods.
 type SignedPersonIdentityProof struct {
-	inner *raw.SWSignedPersonIdentityProof
+	PersonIdentityProof
 }
 
-// Unwrap returns the underlying [raw.SWSignedPersonIdentityProof].
-func (x *SignedPersonIdentityProof) Unwrap() *raw.SWSignedPersonIdentityProof { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SignedPersonIdentityProof) ID() objc.ID { return x.inner.Ptr() }
-
-// SignedPersonIdentityProofFromID adopts an existing object pointer as a SignedPersonIdentityProof (nil for 0).
+// SignedPersonIdentityProofFromID adopts an existing Objective-C object as a SignedPersonIdentityProof
+// (nil for 0), retaining it and registering a release finalizer.
 func SignedPersonIdentityProofFromID(id objc.ID) *SignedPersonIdentityProof {
 	if id == 0 {
 		return nil
 	}
-	return &SignedPersonIdentityProof{inner: raw.SWSignedPersonIdentityProofFromID(id)}
+	x := &SignedPersonIdentityProof{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData creates a new [SignedPersonIdentityProof].
-func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIdentityProof *raw.SWPersonIdentityProof, data *foundation.NSData) *SignedPersonIdentityProof {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWSignedPersonIdentityProof")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonIdentityProof:signatureData:"), personIdentityProof.Ptr(), data.Ptr())
-	return &SignedPersonIdentityProof{inner: raw.SWSignedPersonIdentityProofFromID(_id)}
+// signedPersonIdentityProofAdopt wraps an Objective-C object that this code just created as a
+// SignedPersonIdentityProof (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func signedPersonIdentityProofAdopt(id objc.ID) *SignedPersonIdentityProof {
+	if id == 0 {
+		return nil
+	}
+	x := &SignedPersonIdentityProof{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SignatureData calls the underlying SignatureData.
-func (x *SignedPersonIdentityProof) SignatureData() *foundation.NSData {
-	return x.inner.SignatureData()
+// NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData creates a new SignedPersonIdentityProof.
+func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIdentityProof *PersonIdentityProof, data obj.Object) *SignedPersonIdentityProof {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWSignedPersonIdentityProof")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonIdentityProof:signatureData:"), objref.IDOf(personIdentityProof), objref.IDOf(data))
+	return signedPersonIdentityProofAdopt(_id)
 }
 
-func (x *SignedPersonIdentityProof) asPersonIdentityProof() *raw.SWPersonIdentityProof {
-	return &x.inner.SWPersonIdentityProof
+// SignatureData wraps the corresponding Objective-C method.
+func (x *SignedPersonIdentityProof) SignatureData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signatureData"))
+	return obj.Wrap(_r)
 }
 
 // SignedPersonIdentityProofable is the interface implemented by [SignedPersonIdentityProof], for mocking and DI.
 type SignedPersonIdentityProofable interface {
-	Unwrap() *raw.SWSignedPersonIdentityProof
-	SignatureData() *foundation.NSData
+	obj.Object
+	SignatureData() obj.Object
 }
 
 var _ SignedPersonIdentityProofable = (*SignedPersonIdentityProof)(nil)
+
+var _ PersonIdentityProofProvider = (*SignedPersonIdentityProof)(nil)

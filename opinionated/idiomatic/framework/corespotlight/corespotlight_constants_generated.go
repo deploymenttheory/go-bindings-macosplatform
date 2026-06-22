@@ -5,62 +5,49 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CSMailboxInbox returns the string constant CSMailboxInbox as an objc.ID, for use as a dictionary key or selector argument.
-func CSMailboxInbox() objc.ID {
-	return purego.CFConstant(raw.CSMailboxInbox())
+// CSMailboxInbox returns the string constant CSMailboxInbox, for use as a dictionary key or argument.
+func CSMailboxInbox() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CSMailboxInbox"))) }
+
+// CSMailboxDrafts returns the string constant CSMailboxDrafts, for use as a dictionary key or argument.
+func CSMailboxDrafts() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CSMailboxDrafts"))) }
+
+// CSMailboxSent returns the string constant CSMailboxSent, for use as a dictionary key or argument.
+func CSMailboxSent() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CSMailboxSent"))) }
+
+// CSMailboxJunk returns the string constant CSMailboxJunk, for use as a dictionary key or argument.
+func CSMailboxJunk() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CSMailboxJunk"))) }
+
+// CSMailboxTrash returns the string constant CSMailboxTrash, for use as a dictionary key or argument.
+func CSMailboxTrash() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CSMailboxTrash"))) }
+
+// CSMailboxArchive returns the string constant CSMailboxArchive, for use as a dictionary key or argument.
+func CSMailboxArchive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CSMailboxArchive"))) }
+
+// CSSearchableItemActionType returns the string constant CSSearchableItemActionType, for use as a dictionary key or argument.
+func CSSearchableItemActionType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSSearchableItemActionType")))
 }
 
-// CSMailboxDrafts returns the string constant CSMailboxDrafts as an objc.ID, for use as a dictionary key or selector argument.
-func CSMailboxDrafts() objc.ID {
-	return purego.CFConstant(raw.CSMailboxDrafts())
+// CSSearchableItemActivityIdentifier returns the string constant CSSearchableItemActivityIdentifier, for use as a dictionary key or argument.
+func CSSearchableItemActivityIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSSearchableItemActivityIdentifier")))
 }
 
-// CSMailboxSent returns the string constant CSMailboxSent as an objc.ID, for use as a dictionary key or selector argument.
-func CSMailboxSent() objc.ID {
-	return purego.CFConstant(raw.CSMailboxSent())
+// CSQueryContinuationActionType returns the string constant CSQueryContinuationActionType, for use as a dictionary key or argument.
+func CSQueryContinuationActionType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSQueryContinuationActionType")))
 }
 
-// CSMailboxJunk returns the string constant CSMailboxJunk as an objc.ID, for use as a dictionary key or selector argument.
-func CSMailboxJunk() objc.ID {
-	return purego.CFConstant(raw.CSMailboxJunk())
+// CSSearchQueryString returns the string constant CSSearchQueryString, for use as a dictionary key or argument.
+func CSSearchQueryString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSSearchQueryString")))
 }
 
-// CSMailboxTrash returns the string constant CSMailboxTrash as an objc.ID, for use as a dictionary key or selector argument.
-func CSMailboxTrash() objc.ID {
-	return purego.CFConstant(raw.CSMailboxTrash())
-}
-
-// CSMailboxArchive returns the string constant CSMailboxArchive as an objc.ID, for use as a dictionary key or selector argument.
-func CSMailboxArchive() objc.ID {
-	return purego.CFConstant(raw.CSMailboxArchive())
-}
-
-// CSSearchableItemActionType returns the string constant CSSearchableItemActionType as an objc.ID, for use as a dictionary key or selector argument.
-func CSSearchableItemActionType() objc.ID {
-	return purego.CFConstant(raw.CSSearchableItemActionType())
-}
-
-// CSSearchableItemActivityIdentifier returns the string constant CSSearchableItemActivityIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func CSSearchableItemActivityIdentifier() objc.ID {
-	return purego.CFConstant(raw.CSSearchableItemActivityIdentifier())
-}
-
-// CSQueryContinuationActionType returns the string constant CSQueryContinuationActionType as an objc.ID, for use as a dictionary key or selector argument.
-func CSQueryContinuationActionType() objc.ID {
-	return purego.CFConstant(raw.CSQueryContinuationActionType())
-}
-
-// CSSearchQueryString returns the string constant CSSearchQueryString as an objc.ID, for use as a dictionary key or selector argument.
-func CSSearchQueryString() objc.ID {
-	return purego.CFConstant(raw.CSSearchQueryString())
-}
-
-// CSIndexErrorDomain returns the string constant CSIndexErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func CSIndexErrorDomain() objc.ID {
-	return purego.CFConstant(raw.CSIndexErrorDomain())
+// CSIndexErrorDomain returns the string constant CSIndexErrorDomain, for use as a dictionary key or argument.
+func CSIndexErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CSIndexErrorDomain")))
 }

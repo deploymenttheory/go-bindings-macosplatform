@@ -5,87 +5,96 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Geometry data for a specific keyframe to use in a moving instance.
+// MotionKeyframeData is an idiomatic wrapper over the Objective-C class MTLMotionKeyframeData.
 //
-// MotionKeyframeData wraps [raw.MTLMotionKeyframeData] with a fluent Go API.
+// Geometry data for a specific keyframe to use in a moving instance.
 type MotionKeyframeData struct {
-	inner *raw.MTLMotionKeyframeData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLMotionKeyframeData].
-func (x *MotionKeyframeData) Unwrap() *raw.MTLMotionKeyframeData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MotionKeyframeData) ID() objc.ID { return x.inner.Ptr() }
-
-// MotionKeyframeDataFromID adopts an existing object pointer as a MotionKeyframeData (nil for 0).
+// MotionKeyframeDataFromID adopts an existing Objective-C object as a MotionKeyframeData
+// (nil for 0), retaining it and registering a release finalizer.
 func MotionKeyframeDataFromID(id objc.ID) *MotionKeyframeData {
 	if id == 0 {
 		return nil
 	}
-	return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(id)}
+	x := &MotionKeyframeData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMotionKeyframeData creates a new [MotionKeyframeData].
+// motionKeyframeDataAdopt wraps an Objective-C object that this code just created as a
+// MotionKeyframeData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func motionKeyframeDataAdopt(id objc.ID) *MotionKeyframeData {
+	if id == 0 {
+		return nil
+	}
+	x := &MotionKeyframeData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MotionKeyframeData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MotionKeyframeData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MotionKeyframeData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MotionKeyframeData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMotionKeyframeData creates a new MotionKeyframeData.
 func NewMotionKeyframeData() *MotionKeyframeData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLMotionKeyframeData")), objc.RegisterName("new"))
-	return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLMotionKeyframeData")), objc.RegisterName("new"))
+	return motionKeyframeDataAdopt(_id)
 }
 
-// The buffer that holds the geometry data.
-//
-// WithBuffer sets the buffer property and returns the receiver for chaining.
-func (x *MotionKeyframeData) WithBuffer(buffer raw.MTLBuffer) *MotionKeyframeData {
-	x.inner.SetBuffer(buffer)
+// WithOffset the offset, in bytes, to the keyframe data.
+func (x *MotionKeyframeData) WithOffset(offset int) *MotionKeyframeData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// The offset, in bytes, to the keyframe data.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *MotionKeyframeData) WithOffset(offset uint) *MotionKeyframeData {
-	x.inner.SetOffset(offset)
-	return x
+// Offset buffer offset. Must be a multiple of 4 bytes.
+func (x *MotionKeyframeData) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
-// @brief Buffer containing the data of a single keyframe. Multiple keyframes can be interleaved in one MTLBuffer.
-//
-// Buffer calls the underlying Buffer.
-func (x *MotionKeyframeData) Buffer() raw.MTLBuffer {
-	return x.inner.Buffer()
-}
-
-// SetBuffer calls the underlying SetBuffer.
-func (x *MotionKeyframeData) SetBuffer(buffer raw.MTLBuffer) {
-	x.inner.SetBuffer(buffer)
-}
-
-// @brief Buffer offset. Must be a multiple of 4 bytes.
-//
-// Offset calls the underlying Offset.
-func (x *MotionKeyframeData) Offset() uint {
-	return x.inner.Offset()
-}
-
-// SetOffset calls the underlying SetOffset.
-func (x *MotionKeyframeData) SetOffset(offset uint) {
-	x.inner.SetOffset(offset)
+// SetOffset wraps the corresponding Objective-C method.
+func (x *MotionKeyframeData) SetOffset(offset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
 // MotionKeyframeDataable is the interface implemented by [MotionKeyframeData], for mocking and DI.
 type MotionKeyframeDataable interface {
-	Unwrap() *raw.MTLMotionKeyframeData
-	WithBuffer(buffer raw.MTLBuffer) *MotionKeyframeData
-	WithOffset(offset uint) *MotionKeyframeData
-	Buffer() raw.MTLBuffer
-	SetBuffer(buffer raw.MTLBuffer)
-	Offset() uint
-	SetOffset(offset uint)
+	obj.Object
+	WithOffset(offset int) *MotionKeyframeData
+	Offset() int
+	SetOffset(offset int)
 }
 
 var _ MotionKeyframeDataable = (*MotionKeyframeData)(nil)

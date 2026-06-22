@@ -5,65 +5,90 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that appends timed metadata groups to an asset writer input.
+// AssetWriterInputMetadataAdaptor is an idiomatic wrapper over the Objective-C class AVAssetWriterInputMetadataAdaptor.
 //
-// AssetWriterInputMetadataAdaptor wraps [raw.AVAssetWriterInputMetadataAdaptor] with a fluent Go API.
+// An object that appends timed metadata groups to an asset writer input.
 type AssetWriterInputMetadataAdaptor struct {
-	inner *raw.AVAssetWriterInputMetadataAdaptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetWriterInputMetadataAdaptor].
-func (x *AssetWriterInputMetadataAdaptor) Unwrap() *raw.AVAssetWriterInputMetadataAdaptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetWriterInputMetadataAdaptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetWriterInputMetadataAdaptorFromID adopts an existing object pointer as a AssetWriterInputMetadataAdaptor (nil for 0).
+// AssetWriterInputMetadataAdaptorFromID adopts an existing Objective-C object as a AssetWriterInputMetadataAdaptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetWriterInputMetadataAdaptorFromID(id objc.ID) *AssetWriterInputMetadataAdaptor {
 	if id == 0 {
 		return nil
 	}
-	return &AssetWriterInputMetadataAdaptor{inner: raw.AVAssetWriterInputMetadataAdaptorFromID(id)}
+	x := &AssetWriterInputMetadataAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a metadata group adaptor to append timed metadata groups to write to an output file.
-//
-// NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a new [AssetWriterInputMetadataAdaptor].
-func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *raw.AVAssetWriterInput) *AssetWriterInputMetadataAdaptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputMetadataAdaptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), input.Ptr())
-	return &AssetWriterInputMetadataAdaptor{inner: raw.AVAssetWriterInputMetadataAdaptorFromID(_id)}
-}
-
-// Appends a timed metadata group to the adaptor.
-//
-// AppendTimedMetadataGroup calls the underlying AppendTimedMetadataGroup.
-func (x *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *raw.AVTimedMetadataGroup) bool {
-	return x.inner.AppendTimedMetadataGroup(timedMetadataGroup)
-}
-
-// The asset writer input to which the receiver should append timed metadata groups.
-//
-// AssetWriterInput calls the underlying AssetWriterInput.
-func (x *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
-	_r := x.inner.AssetWriterInput()
-	if _r == nil {
+// assetWriterInputMetadataAdaptorAdopt wraps an Objective-C object that this code just created as a
+// AssetWriterInputMetadataAdaptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetWriterInputMetadataAdaptorAdopt(id objc.ID) *AssetWriterInputMetadataAdaptor {
+	if id == 0 {
 		return nil
 	}
-	return &AssetWriterInput{inner: _r}
+	x := &AssetWriterInputMetadataAdaptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetWriterInputMetadataAdaptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetWriterInputMetadataAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetWriterInputMetadataAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputMetadataAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a metadata group adaptor to append timed metadata groups to write to an output file.
+func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputMetadataAdaptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputMetadataAdaptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), objref.IDOf(input))
+	return assetWriterInputMetadataAdaptorAdopt(_id)
+}
+
+// AppendTimedMetadataGroup appends a timed metadata group to the adaptor.
+func (x *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendTimedMetadataGroup:"), objref.IDOf(timedMetadataGroup))
+	return _r
+}
+
+// AssetWriterInput the asset writer input to which the receiver should append timed metadata groups.
+func (x *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
+	return AssetWriterInputFromID(_r)
 }
 
 // AssetWriterInputMetadataAdaptorable is the interface implemented by [AssetWriterInputMetadataAdaptor], for mocking and DI.
 type AssetWriterInputMetadataAdaptorable interface {
-	Unwrap() *raw.AVAssetWriterInputMetadataAdaptor
-	AppendTimedMetadataGroup(timedMetadataGroup *raw.AVTimedMetadataGroup) bool
+	obj.Object
+	AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool
 	AssetWriterInput() *AssetWriterInput
 }
 

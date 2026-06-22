@@ -5,41 +5,76 @@
 package coreaudiokit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A window controller that displays nearby Bluetooth-based MIDI peripherals.
+// CABTLEMIDIWindowController is an idiomatic wrapper over the Objective-C class CABTLEMIDIWindowController.
 //
-// CABTLEMIDIWindowController wraps [raw.CABTLEMIDIWindowController] with a fluent Go API.
+// A window controller that displays nearby Bluetooth-based MIDI peripherals.
 type CABTLEMIDIWindowController struct {
-	inner *raw.CABTLEMIDIWindowController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CABTLEMIDIWindowController].
-func (x *CABTLEMIDIWindowController) Unwrap() *raw.CABTLEMIDIWindowController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CABTLEMIDIWindowController) ID() objc.ID { return x.inner.Ptr() }
-
-// CABTLEMIDIWindowControllerFromID adopts an existing object pointer as a CABTLEMIDIWindowController (nil for 0).
+// CABTLEMIDIWindowControllerFromID adopts an existing Objective-C object as a CABTLEMIDIWindowController
+// (nil for 0), retaining it and registering a release finalizer.
 func CABTLEMIDIWindowControllerFromID(id objc.ID) *CABTLEMIDIWindowController {
 	if id == 0 {
 		return nil
 	}
-	return &CABTLEMIDIWindowController{inner: raw.CABTLEMIDIWindowControllerFromID(id)}
+	x := &CABTLEMIDIWindowController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCABTLEMIDIWindowController creates a new [CABTLEMIDIWindowController].
+// cABTLEMIDIWindowControllerAdopt wraps an Objective-C object that this code just created as a
+// CABTLEMIDIWindowController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cABTLEMIDIWindowControllerAdopt(id objc.ID) *CABTLEMIDIWindowController {
+	if id == 0 {
+		return nil
+	}
+	x := &CABTLEMIDIWindowController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CABTLEMIDIWindowController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CABTLEMIDIWindowController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CABTLEMIDIWindowController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CABTLEMIDIWindowController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCABTLEMIDIWindowController creates a new CABTLEMIDIWindowController.
 func NewCABTLEMIDIWindowController() *CABTLEMIDIWindowController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CABTLEMIDIWindowController")), objc.RegisterName("new"))
-	return &CABTLEMIDIWindowController{inner: raw.CABTLEMIDIWindowControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CABTLEMIDIWindowController")), objc.RegisterName("new"))
+	return cABTLEMIDIWindowControllerAdopt(_id)
 }
 
 // CABTLEMIDIWindowControllerable is the interface implemented by [CABTLEMIDIWindowController], for mocking and DI.
 type CABTLEMIDIWindowControllerable interface {
-	Unwrap() *raw.CABTLEMIDIWindowController
+	obj.Object
 }
 
 var _ CABTLEMIDIWindowControllerable = (*CABTLEMIDIWindowController)(nil)

@@ -5,39 +5,74 @@
 package javaruntimesupport
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Drag wraps [raw.JRSDrag] with a fluent Go API.
+// Drag is an idiomatic wrapper over the Objective-C class JRSDrag.
 type Drag struct {
-	inner *raw.JRSDrag
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.JRSDrag].
-func (x *Drag) Unwrap() *raw.JRSDrag { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Drag) ID() objc.ID { return x.inner.Ptr() }
-
-// DragFromID adopts an existing object pointer as a Drag (nil for 0).
+// DragFromID adopts an existing Objective-C object as a Drag
+// (nil for 0), retaining it and registering a release finalizer.
 func DragFromID(id objc.ID) *Drag {
 	if id == 0 {
 		return nil
 	}
-	return &Drag{inner: raw.JRSDragFromID(id)}
+	x := &Drag{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDrag creates a new [Drag].
+// dragAdopt wraps an Objective-C object that this code just created as a
+// Drag (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dragAdopt(id objc.ID) *Drag {
+	if id == 0 {
+		return nil
+	}
+	x := &Drag{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Drag) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Drag) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Drag) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Drag) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDrag creates a new Drag.
 func NewDrag() *Drag {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("JRSDrag")), objc.RegisterName("new"))
-	return &Drag{inner: raw.JRSDragFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("JRSDrag")), objc.RegisterName("new"))
+	return dragAdopt(_id)
 }
 
 // Dragable is the interface implemented by [Drag], for mocking and DI.
 type Dragable interface {
-	Unwrap() *raw.JRSDrag
+	obj.Object
 }
 
 var _ Dragable = (*Drag)(nil)

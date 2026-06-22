@@ -3,12 +3,11 @@
 package keychain
 
 import (
-	"errors"
+	"fmt"
 
 	foundation "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	security "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/security"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // ── Key (kSecClassKey) ───────────────────────────────────────────────────────
@@ -29,7 +28,7 @@ const (
 	KeyRSA                // RSA (kSecAttrKeyTypeRSA)
 )
 
-func (t KeyType) constant() purego.ID {
+func (t KeyType) constant() obj.Object {
 	if t == KeyRSA {
 		return security.KSecAttrKeyTypeRSA()
 	}
@@ -55,12 +54,14 @@ func CreateKey(k Key) error {
 		Set(security.KSecAttrKeyType(), k.Type.constant()).
 		Set(security.KSecAttrKeyClass(), security.KSecAttrKeyClassPrivate())
 
-	keyRef := security.SecKeyCreateWithData(purego.CFRef(newData(k.Data)), purego.CFRef(attrs.ID()), nil)
-	if keyRef == nil {
-		return errors.New("keychain: invalid key data for the given key type")
+	// SecKeyCreateWithData reports a malformed key through its CFErrorRef
+	// out-parameter, which the idiomatic wrapper surfaces as a Go error.
+	keyRef, err := security.SecKeyCreateWithData(newData(k.Data), attrs)
+	if err != nil {
+		return fmt.Errorf("keychain: invalid key data for the given key type: %w", err)
 	}
 
-	add := []attr{ref(security.KSecValueRef(), purego.ID(uintptr(keyRef)))}
+	add := []attr{ref(security.KSecValueRef(), keyRef)}
 	if k.Label != "" {
 		add = append(add, str(security.KSecAttrLabel(), k.Label))
 	}

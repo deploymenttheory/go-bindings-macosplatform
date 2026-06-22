@@ -5,235 +5,190 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A torus, or ring-shaped geometry.
+// Torus is an idiomatic wrapper over the Objective-C class SCNTorus.
 //
-// Torus wraps [raw.SCNTorus] with a fluent Go API.
+// It embeds [Geometry], promoting that type's methods.
+//
+// A torus, or ring-shaped geometry.
 type Torus struct {
-	inner *raw.SCNTorus
+	Geometry
 }
 
-// Unwrap returns the underlying [raw.SCNTorus].
-func (x *Torus) Unwrap() *raw.SCNTorus { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Torus) ID() objc.ID { return x.inner.Ptr() }
-
-// TorusFromID adopts an existing object pointer as a Torus (nil for 0).
+// TorusFromID adopts an existing Objective-C object as a Torus
+// (nil for 0), retaining it and registering a release finalizer.
 func TorusFromID(id objc.ID) *Torus {
 	if id == 0 {
 		return nil
 	}
-	return &Torus{inner: raw.SCNTorusFromID(id)}
+	x := &Torus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTorus creates a new [Torus].
+// torusAdopt wraps an Objective-C object that this code just created as a
+// Torus (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func torusAdopt(id objc.ID) *Torus {
+	if id == 0 {
+		return nil
+	}
+	x := &Torus{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTorus creates a new Torus.
 func NewTorus() *Torus {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNTorus")), objc.RegisterName("new"))
-	return &Torus{inner: raw.SCNTorusFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNTorus")), objc.RegisterName("new"))
+	return torusAdopt(_id)
 }
 
-// The major radius of the torus, defining a circle in the x- and z-axis dimensions. Animatable.
-//
-// WithRingRadius sets the ringRadius property and returns the receiver for chaining.
+// WithRingRadius the major radius of the torus, defining a circle in the x- and z-axis dimensions. Animatable.
 func (x *Torus) WithRingRadius(ringRadius float64) *Torus {
-	x.inner.SetRingRadius(ringRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRingRadius:"), ringRadius)
 	return x
 }
 
-// The minor radius of the torus, defining the pipe that encircles the torus ring. Animatable.
-//
-// WithPipeRadius sets the pipeRadius property and returns the receiver for chaining.
+// WithPipeRadius the minor radius of the torus, defining the pipe that encircles the torus ring. Animatable.
 func (x *Torus) WithPipeRadius(pipeRadius float64) *Torus {
-	x.inner.SetPipeRadius(pipeRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPipeRadius:"), pipeRadius)
 	return x
 }
 
-// The number of subdivisions around the torus ring. Animatable.
-//
-// WithRingSegmentCount sets the ringSegmentCount property and returns the receiver for chaining.
+// WithRingSegmentCount the number of subdivisions around the torus ring. Animatable.
 func (x *Torus) WithRingSegmentCount(ringSegmentCount int) *Torus {
-	x.inner.SetRingSegmentCount(ringSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRingSegmentCount:"), ringSegmentCount)
 	return x
 }
 
-// The number of subdivisions around the torus pipe. Animatable.
-//
-// WithPipeSegmentCount sets the pipeSegmentCount property and returns the receiver for chaining.
+// WithPipeSegmentCount the number of subdivisions around the torus pipe. Animatable.
 func (x *Torus) WithPipeSegmentCount(pipeSegmentCount int) *Torus {
-	x.inner.SetPipeSegmentCount(pipeSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPipeSegmentCount:"), pipeSegmentCount)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a name associated with the geometry object.
 func (x *Torus) WithName(name string) *Torus {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (x *Torus) WithMaterials(items ...*Material) *Torus {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Torus) WithFirstMaterial(firstMaterial *Material) *Torus {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Torus) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (x *Torus) WithLevelsOfDetail(items ...*LevelOfDetail) *Torus {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Torus) WithTessellator(tessellator *GeometryTessellator) *Torus {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Torus) WithSubdivisionLevel(subdivisionLevel uint) *Torus {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (x *Torus) WithSubdivisionLevel(subdivisionLevel int) *Torus {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Torus) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Torus {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Torus) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property ringRadius @abstract The radius of the torus ring. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
-//
-// RingRadius calls the underlying RingRadius.
+// RingRadius the radius of the torus ring. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (x *Torus) RingRadius() float64 {
-	return x.inner.RingRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("ringRadius"))
+	return _r
 }
 
-// SetRingRadius calls the underlying SetRingRadius.
+// SetRingRadius wraps the corresponding Objective-C method.
 func (x *Torus) SetRingRadius(ringRadius float64) {
-	x.inner.SetRingRadius(ringRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRingRadius:"), ringRadius)
 }
 
-// @property pipeRadius @abstract The radius of the torus pipe. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.25.
-//
-// PipeRadius calls the underlying PipeRadius.
+// PipeRadius the radius of the torus pipe. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.25.
 func (x *Torus) PipeRadius() float64 {
-	return x.inner.PipeRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pipeRadius"))
+	return _r
 }
 
-// SetPipeRadius calls the underlying SetPipeRadius.
+// SetPipeRadius wraps the corresponding Objective-C method.
 func (x *Torus) SetPipeRadius(pipeRadius float64) {
-	x.inner.SetPipeRadius(pipeRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPipeRadius:"), pipeRadius)
 }
 
-// @property ringSegmentCount @abstract The number of subdivisions of the ring. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
-//
-// RingSegmentCount calls the underlying RingSegmentCount.
+// RingSegmentCount the number of subdivisions of the ring. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (x *Torus) RingSegmentCount() int {
-	return x.inner.RingSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("ringSegmentCount"))
+	return _r
 }
 
-// SetRingSegmentCount calls the underlying SetRingSegmentCount.
+// SetRingSegmentCount wraps the corresponding Objective-C method.
 func (x *Torus) SetRingSegmentCount(ringSegmentCount int) {
-	x.inner.SetRingSegmentCount(ringSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRingSegmentCount:"), ringSegmentCount)
 }
 
-// @property pipeSegmentCount @abstract The number of subdivisions of the pipe. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 24.
-//
-// PipeSegmentCount calls the underlying PipeSegmentCount.
+// PipeSegmentCount the number of subdivisions of the pipe. Animatable. If the value is less than 3, the behavior is undefined. The default value is 24.
 func (x *Torus) PipeSegmentCount() int {
-	return x.inner.PipeSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pipeSegmentCount"))
+	return _r
 }
 
-// SetPipeSegmentCount calls the underlying SetPipeSegmentCount.
+// SetPipeSegmentCount wraps the corresponding Objective-C method.
 func (x *Torus) SetPipeSegmentCount(pipeSegmentCount int) {
-	x.inner.SetPipeSegmentCount(pipeSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPipeSegmentCount:"), pipeSegmentCount)
 }
-
-func (x *Torus) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Torusable is the interface implemented by [Torus], for mocking and DI.
 type Torusable interface {
-	Unwrap() *raw.SCNTorus
+	obj.Object
 	WithRingRadius(ringRadius float64) *Torus
 	WithPipeRadius(pipeRadius float64) *Torus
 	WithRingSegmentCount(ringSegmentCount int) *Torus
 	WithPipeSegmentCount(pipeSegmentCount int) *Torus
 	WithName(name string) *Torus
-	WithMaterials(items ...*raw.SCNMaterial) *Torus
+	WithMaterials(items ...*Material) *Torus
 	WithFirstMaterial(firstMaterial *Material) *Torus
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Torus
 	WithTessellator(tessellator *GeometryTessellator) *Torus
-	WithSubdivisionLevel(subdivisionLevel uint) *Torus
+	WithSubdivisionLevel(subdivisionLevel int) *Torus
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Torus
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus
@@ -248,3 +203,5 @@ type Torusable interface {
 }
 
 var _ Torusable = (*Torus)(nil)
+
+var _ GeometryProvider = (*Torus)(nil)

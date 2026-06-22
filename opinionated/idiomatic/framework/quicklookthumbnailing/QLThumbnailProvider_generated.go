@@ -6,59 +6,90 @@ package quicklookthumbnailing
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract base class for creating thumbnails of custom file types.
+// ThumbnailProvider is an idiomatic wrapper over the Objective-C class QLThumbnailProvider.
 //
-// ThumbnailProvider wraps [raw.QLThumbnailProvider] with a fluent Go API.
+// An abstract base class for creating thumbnails of custom file types.
 type ThumbnailProvider struct {
-	inner *raw.QLThumbnailProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLThumbnailProvider].
-func (x *ThumbnailProvider) Unwrap() *raw.QLThumbnailProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ThumbnailProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// ThumbnailProviderFromID adopts an existing object pointer as a ThumbnailProvider (nil for 0).
+// ThumbnailProviderFromID adopts an existing Objective-C object as a ThumbnailProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func ThumbnailProviderFromID(id objc.ID) *ThumbnailProvider {
 	if id == 0 {
 		return nil
 	}
-	return &ThumbnailProvider{inner: raw.QLThumbnailProviderFromID(id)}
+	x := &ThumbnailProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewThumbnailProvider creates a new [ThumbnailProvider].
+// thumbnailProviderAdopt wraps an Objective-C object that this code just created as a
+// ThumbnailProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func thumbnailProviderAdopt(id objc.ID) *ThumbnailProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &ThumbnailProvider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ThumbnailProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ThumbnailProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ThumbnailProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewThumbnailProvider creates a new ThumbnailProvider.
 func NewThumbnailProvider() *ThumbnailProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLThumbnailProvider")), objc.RegisterName("new"))
-	return &ThumbnailProvider{inner: raw.QLThumbnailProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QLThumbnailProvider")), objc.RegisterName("new"))
+	return thumbnailProviderAdopt(_id)
 }
 
-// Creates a thumbnail of a custom file type for a specific request.
+// ProvideThumbnailForFileRequest creates a thumbnail of a custom file type for a specific request.
 //
 // ProvideThumbnailForFileRequest blocks until the operation completes or ctx is cancelled.
-func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *raw.QLFileThumbnailRequest) (*ThumbnailReply, error) {
+func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (result *ThumbnailReply, err error) {
 	type _result struct {
 		val *ThumbnailReply
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ProvideThumbnailForFileRequestCompletionHandler(request, func(_p0 *raw.QLThumbnailReply, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ThumbnailReply{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ThumbnailReplyFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provideThumbnailForFileRequest:completionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -70,8 +101,8 @@ func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, 
 
 // ThumbnailProviderable is the interface implemented by [ThumbnailProvider], for mocking and DI.
 type ThumbnailProviderable interface {
-	Unwrap() *raw.QLThumbnailProvider
-	ProvideThumbnailForFileRequest(ctx context.Context, request *raw.QLFileThumbnailRequest) (*ThumbnailReply, error)
+	obj.Object
+	ProvideThumbnailForFileRequest(ctx context.Context, request *FileThumbnailRequest) (*ThumbnailReply, error)
 }
 
 var _ ThumbnailProviderable = (*ThumbnailProvider)(nil)

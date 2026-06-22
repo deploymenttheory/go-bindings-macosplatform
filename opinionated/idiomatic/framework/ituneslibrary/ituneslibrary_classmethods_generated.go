@@ -5,30 +5,28 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// LibraryWithAPIVersionError calls the underlying ITLibraryLibraryWithAPIVersionError.
-func LibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
-	_r, _err := raw.ITLibraryLibraryWithAPIVersionError(foundation.NSStringStringWithUTF8String(requestedAPIVersion))
-	if _err != nil {
-		return nil, _err
+// LibraryWithAPIVersionError creates and initializes an instance of ITLibrary that can retrieve media entities.
+func LibraryWithAPIVersionError(requestedAPIVersion string) (result *Library, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("ITLibrary")), objc.RegisterName("libraryWithAPIVersion:error:"), purego.NSString(requestedAPIVersion), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Library{inner: _r}, nil
+	return LibraryFromID(_r), nil
 }
 
-// LibraryWithAPIVersionOptionsError calls the underlying ITLibraryLibraryWithAPIVersionOptionsError.
-func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ITLibInitOptions) (*Library, error) {
-	_r, _err := raw.ITLibraryLibraryWithAPIVersionOptionsError(foundation.NSStringStringWithUTF8String(requestedAPIVersion), raw.ITLibInitOptions(options))
-	if _err != nil {
-		return nil, _err
+// LibraryWithAPIVersionOptionsError creates and initializes an instance of ITLibrary that can retrieve media entities.
+func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options LibInitOptions) (result *Library, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("ITLibrary")), objc.RegisterName("libraryWithAPIVersion:options:error:"), purego.NSString(requestedAPIVersion), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Library{inner: _r}, nil
+	return LibraryFromID(_r), nil
 }

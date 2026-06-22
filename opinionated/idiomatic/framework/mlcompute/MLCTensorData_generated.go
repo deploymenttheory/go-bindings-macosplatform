@@ -5,58 +5,83 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An encapsulation of the memory that tensor data uses.
+// TensorData is an idiomatic wrapper over the Objective-C class MLCTensorData.
 //
-// TensorData wraps [raw.MLCTensorData] with a fluent Go API.
+// An encapsulation of the memory that tensor data uses.
 type TensorData struct {
-	inner *raw.MLCTensorData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCTensorData].
-func (x *TensorData) Unwrap() *raw.MLCTensorData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TensorData) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorDataFromID adopts an existing object pointer as a TensorData (nil for 0).
+// TensorDataFromID adopts an existing Objective-C object as a TensorData
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorDataFromID(id objc.ID) *TensorData {
 	if id == 0 {
 		return nil
 	}
-	return &TensorData{inner: raw.MLCTensorDataFromID(id)}
+	x := &TensorData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTensorData creates a new [TensorData].
+// tensorDataAdopt wraps an Objective-C object that this code just created as a
+// TensorData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorDataAdopt(id objc.ID) *TensorData {
+	if id == 0 {
+		return nil
+	}
+	x := &TensorData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TensorData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TensorData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TensorData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTensorData creates a new TensorData.
 func NewTensorData() *TensorData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTensorData")), objc.RegisterName("new"))
-	return &TensorData{inner: raw.MLCTensorDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("new"))
+	return tensorDataAdopt(_id)
 }
 
-// @property   bytes @abstract   Pointer to memory that contains or will be used for tensor data
-//
-// Bytes calls the underlying Bytes.
-func (x *TensorData) Bytes() unsafe.Pointer {
-	return x.inner.Bytes()
-}
-
-// @property   length @abstract   The size in bytes of the tensor data
-//
-// Length calls the underlying Length.
-func (x *TensorData) Length() uint {
-	return x.inner.Length()
+// Length the size in bytes of the tensor data
+func (x *TensorData) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // TensorDataable is the interface implemented by [TensorData], for mocking and DI.
 type TensorDataable interface {
-	Unwrap() *raw.MLCTensorData
-	Bytes() unsafe.Pointer
-	Length() uint
+	obj.Object
+	Length() int
 }
 
 var _ TensorDataable = (*TensorData)(nil)

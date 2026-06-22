@@ -5,58 +5,83 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that provides a rendered pixel buffer and its position in pixels.
+// RenderedCaptionImage is an idiomatic wrapper over the Objective-C class AVRenderedCaptionImage.
 //
-// RenderedCaptionImage wraps [raw.AVRenderedCaptionImage] with a fluent Go API.
+// An object that provides a rendered pixel buffer and its position in pixels.
 type RenderedCaptionImage struct {
-	inner *raw.AVRenderedCaptionImage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVRenderedCaptionImage].
-func (x *RenderedCaptionImage) Unwrap() *raw.AVRenderedCaptionImage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderedCaptionImage) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderedCaptionImageFromID adopts an existing object pointer as a RenderedCaptionImage (nil for 0).
+// RenderedCaptionImageFromID adopts an existing Objective-C object as a RenderedCaptionImage
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderedCaptionImageFromID(id objc.ID) *RenderedCaptionImage {
 	if id == 0 {
 		return nil
 	}
-	return &RenderedCaptionImage{inner: raw.AVRenderedCaptionImageFromID(id)}
+	x := &RenderedCaptionImage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderedCaptionImage creates a new [RenderedCaptionImage].
+// renderedCaptionImageAdopt wraps an Objective-C object that this code just created as a
+// RenderedCaptionImage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderedCaptionImageAdopt(id objc.ID) *RenderedCaptionImage {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderedCaptionImage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderedCaptionImage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderedCaptionImage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderedCaptionImage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderedCaptionImage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderedCaptionImage creates a new RenderedCaptionImage.
 func NewRenderedCaptionImage() *RenderedCaptionImage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVRenderedCaptionImage")), objc.RegisterName("new"))
-	return &RenderedCaptionImage{inner: raw.AVRenderedCaptionImageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVRenderedCaptionImage")), objc.RegisterName("new"))
+	return renderedCaptionImageAdopt(_id)
 }
 
-// @property		pixelBuffer @abstract		A CVPixelBufferRef that contains pixel data for the rendered caption. @discussion		If the client reads a pixelBuffer and wants to use it longer than AVRenderedCaptionImage, it must retain the pixelBuffer. The pixel buffer can be converted to MTLTexture using CVMetalTextureCache. The pixel format is fixed to kCVPixelFormatType_32BGRA defined in <CoreVideo/CVPixelBuffer.h>.
-//
-// PixelBuffer calls the underlying PixelBuffer.
-func (x *RenderedCaptionImage) PixelBuffer() unsafe.Pointer {
-	return x.inner.PixelBuffer()
-}
-
-// @property		position @abstract		A CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame @discussion		To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
-//
-// Position calls the underlying Position.
+// Position a CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
 func (x *RenderedCaptionImage) Position() corefoundation.CGPoint {
-	return x.inner.Position()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("position"))
+	return _r
 }
 
 // RenderedCaptionImageable is the interface implemented by [RenderedCaptionImage], for mocking and DI.
 type RenderedCaptionImageable interface {
-	Unwrap() *raw.AVRenderedCaptionImage
-	PixelBuffer() unsafe.Pointer
+	obj.Object
 	Position() corefoundation.CGPoint
 }
 

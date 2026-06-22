@@ -5,93 +5,112 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the configuration of a secure element payment pass.
+// AddSecureElementPassConfiguration is an idiomatic wrapper over the Objective-C class PKAddSecureElementPassConfiguration.
 //
-// AddSecureElementPassConfiguration wraps [raw.PKAddSecureElementPassConfiguration] with a fluent Go API.
+// AddSecureElementPassConfiguration is an abstract base — you do not construct it directly. Construct one of [AddCarKeyPassConfiguration], [AddIdentityDocumentConfiguration], [AddShareablePassConfiguration] and pass it where a AddSecureElementPassConfiguration is accepted.
+//
+// An object that describes the configuration of a secure element payment pass.
 type AddSecureElementPassConfiguration struct {
-	inner *raw.PKAddSecureElementPassConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKAddSecureElementPassConfiguration].
-func (x *AddSecureElementPassConfiguration) Unwrap() *raw.PKAddSecureElementPassConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddSecureElementPassConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AddSecureElementPassConfigurationFromID adopts an existing object pointer as a AddSecureElementPassConfiguration (nil for 0).
+// AddSecureElementPassConfigurationFromID adopts an existing Objective-C object as a AddSecureElementPassConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AddSecureElementPassConfigurationFromID(id objc.ID) *AddSecureElementPassConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AddSecureElementPassConfiguration{inner: raw.PKAddSecureElementPassConfigurationFromID(id)}
+	x := &AddSecureElementPassConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAddSecureElementPassConfiguration creates a new [AddSecureElementPassConfiguration].
-func NewAddSecureElementPassConfiguration() *AddSecureElementPassConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddSecureElementPassConfiguration")), objc.RegisterName("new"))
-	return &AddSecureElementPassConfiguration{inner: raw.PKAddSecureElementPassConfigurationFromID(_id)}
+// addSecureElementPassConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AddSecureElementPassConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addSecureElementPassConfigurationAdopt(id objc.ID) *AddSecureElementPassConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &AddSecureElementPassConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// An opaque value for the configuration.
-//
-// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *AddSecureElementPassConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddSecureElementPassConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddSecureElementPassConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddSecureElementPassConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithIssuerIdentifier an opaque value for the configuration.
 func (x *AddSecureElementPassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddSecureElementPassConfiguration {
-	x.inner.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 	return x
 }
 
-// The configuration’s localized description.
-//
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+// WithLocalizedDescription the configuration’s localized description.
 func (x *AddSecureElementPassConfiguration) WithLocalizedDescription(localizedDescription string) *AddSecureElementPassConfiguration {
-	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// IssuerIdentifier calls the underlying IssuerIdentifier.
+// IssuerIdentifier wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) IssuerIdentifier() string {
-	_r := x.inner.IssuerIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIssuerIdentifier calls the underlying SetIssuerIdentifier.
+// SetIssuerIdentifier wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) SetIssuerIdentifier(issuerIdentifier string) {
-	x.inner.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 }
 
-// LocalizedDescription calls the underlying LocalizedDescription.
+// LocalizedDescription wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) LocalizedDescription() string {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+// SetLocalizedDescription wraps the corresponding Objective-C method.
 func (x *AddSecureElementPassConfiguration) SetLocalizedDescription(localizedDescription string) {
-	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-}
-
-func (x *AddSecureElementPassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
 
 // AddSecureElementPassConfigurationable is the interface implemented by [AddSecureElementPassConfiguration], for mocking and DI.
 type AddSecureElementPassConfigurationable interface {
-	Unwrap() *raw.PKAddSecureElementPassConfiguration
+	obj.Object
 	WithIssuerIdentifier(issuerIdentifier string) *AddSecureElementPassConfiguration
 	WithLocalizedDescription(localizedDescription string) *AddSecureElementPassConfiguration
 	IssuerIdentifier() string
@@ -101,3 +120,10 @@ type AddSecureElementPassConfigurationable interface {
 }
 
 var _ AddSecureElementPassConfigurationable = (*AddSecureElementPassConfiguration)(nil)
+
+// isAddSecureElementPassConfiguration marks AddSecureElementPassConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the AddSecureElementPassConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AddSecureElementPassConfiguration) isAddSecureElementPassConfiguration() {}
+
+var _ AddSecureElementPassConfigurationProvider = (*AddSecureElementPassConfiguration)(nil)

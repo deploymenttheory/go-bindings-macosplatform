@@ -5,57 +5,72 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the result of a batch delete request.
+// BatchDeleteResult is an idiomatic wrapper over the Objective-C class NSBatchDeleteResult.
 //
-// BatchDeleteResult wraps [raw.NSBatchDeleteResult] with a fluent Go API.
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// An object that describes the result of a batch delete request.
 type BatchDeleteResult struct {
-	inner *raw.NSBatchDeleteResult
+	PersistentStoreResult
 }
 
-// Unwrap returns the underlying [raw.NSBatchDeleteResult].
-func (x *BatchDeleteResult) Unwrap() *raw.NSBatchDeleteResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BatchDeleteResult) ID() objc.ID { return x.inner.Ptr() }
-
-// BatchDeleteResultFromID adopts an existing object pointer as a BatchDeleteResult (nil for 0).
+// BatchDeleteResultFromID adopts an existing Objective-C object as a BatchDeleteResult
+// (nil for 0), retaining it and registering a release finalizer.
 func BatchDeleteResultFromID(id objc.ID) *BatchDeleteResult {
 	if id == 0 {
 		return nil
 	}
-	return &BatchDeleteResult{inner: raw.NSBatchDeleteResultFromID(id)}
+	x := &BatchDeleteResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBatchDeleteResult creates a new [BatchDeleteResult].
+// batchDeleteResultAdopt wraps an Objective-C object that this code just created as a
+// BatchDeleteResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func batchDeleteResultAdopt(id objc.ID) *BatchDeleteResult {
+	if id == 0 {
+		return nil
+	}
+	x := &BatchDeleteResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBatchDeleteResult creates a new BatchDeleteResult.
 func NewBatchDeleteResult() *BatchDeleteResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchDeleteResult")), objc.RegisterName("new"))
-	return &BatchDeleteResult{inner: raw.NSBatchDeleteResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSBatchDeleteResult")), objc.RegisterName("new"))
+	return batchDeleteResultAdopt(_id)
 }
 
-// Result calls the underlying Result.
-func (x *BatchDeleteResult) Result() objc.ID {
-	return x.inner.Result()
+// Result wraps the corresponding Objective-C method.
+func (x *BatchDeleteResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+	return obj.Wrap(_r)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *BatchDeleteResult) ResultType() NSBatchDeleteRequestResultType {
-	return NSBatchDeleteRequestResultType(x.inner.ResultType())
-}
-
-func (x *BatchDeleteResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return &x.inner.NSPersistentStoreResult
+// ResultType wraps the corresponding Objective-C method.
+func (x *BatchDeleteResult) ResultType() BatchDeleteRequestResultType {
+	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
 // BatchDeleteResultable is the interface implemented by [BatchDeleteResult], for mocking and DI.
 type BatchDeleteResultable interface {
-	Unwrap() *raw.NSBatchDeleteResult
-	Result() objc.ID
-	ResultType() NSBatchDeleteRequestResultType
+	obj.Object
+	Result() obj.Object
+	ResultType() BatchDeleteRequestResultType
 }
 
 var _ BatchDeleteResultable = (*BatchDeleteResult)(nil)
+
+var _ PersistentStoreResultProvider = (*BatchDeleteResult)(nil)

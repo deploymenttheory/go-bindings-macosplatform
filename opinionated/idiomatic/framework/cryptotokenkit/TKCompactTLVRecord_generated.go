@@ -5,47 +5,59 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.
+// CompactTLVRecord is an idiomatic wrapper over the Objective-C class TKCompactTLVRecord.
 //
-// CompactTLVRecord wraps [raw.TKCompactTLVRecord] with a fluent Go API.
+// It embeds [TLVRecord], promoting that type's methods.
+//
+// An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.
 type CompactTLVRecord struct {
-	inner *raw.TKCompactTLVRecord
+	TLVRecord
 }
 
-// Unwrap returns the underlying [raw.TKCompactTLVRecord].
-func (x *CompactTLVRecord) Unwrap() *raw.TKCompactTLVRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompactTLVRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// CompactTLVRecordFromID adopts an existing object pointer as a CompactTLVRecord (nil for 0).
+// CompactTLVRecordFromID adopts an existing Objective-C object as a CompactTLVRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func CompactTLVRecordFromID(id objc.ID) *CompactTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	return &CompactTLVRecord{inner: raw.TKCompactTLVRecordFromID(id)}
+	x := &CompactTLVRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a TLV record with the specified tag and value.
-//
-// NewCompactTLVRecordWithTagValue creates a new [CompactTLVRecord].
-func NewCompactTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *CompactTLVRecord {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKCompactTLVRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, value.Ptr())
-	return &CompactTLVRecord{inner: raw.TKCompactTLVRecordFromID(_id)}
+// compactTLVRecordAdopt wraps an Objective-C object that this code just created as a
+// CompactTLVRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compactTLVRecordAdopt(id objc.ID) *CompactTLVRecord {
+	if id == 0 {
+		return nil
+	}
+	x := &CompactTLVRecord{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *CompactTLVRecord) asTLVRecord() *raw.TKTLVRecord { return &x.inner.TKTLVRecord }
+// NewCompactTLVRecordWithTagValue initializes a TLV record with the specified tag and value.
+func NewCompactTLVRecordWithTagValue(tag uint8, value obj.Object) *CompactTLVRecord {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKCompactTLVRecord")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, objref.IDOf(value))
+	return compactTLVRecordAdopt(_id)
+}
 
 // CompactTLVRecordable is the interface implemented by [CompactTLVRecord], for mocking and DI.
 type CompactTLVRecordable interface {
-	Unwrap() *raw.TKCompactTLVRecord
+	obj.Object
 }
 
 var _ CompactTLVRecordable = (*CompactTLVRecord)(nil)
+
+var _ TLVRecordProvider = (*CompactTLVRecord)(nil)

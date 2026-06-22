@@ -5,108 +5,110 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Cluster Messages This cluster provides an interface for passing messages to be presented by a device.
+// MTRClusterMessages is an idiomatic wrapper over the Objective-C class MTRClusterMessages.
 //
-// MTRClusterMessages wraps [raw.MTRClusterMessages] with a fluent Go API.
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Messages This cluster provides an interface for passing messages to be presented by a device.
 type MTRClusterMessages struct {
-	inner *raw.MTRClusterMessages
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterMessages].
-func (x *MTRClusterMessages) Unwrap() *raw.MTRClusterMessages { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterMessages) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterMessagesFromID adopts an existing object pointer as a MTRClusterMessages (nil for 0).
+// MTRClusterMessagesFromID adopts an existing Objective-C object as a MTRClusterMessages
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterMessagesFromID(id objc.ID) *MTRClusterMessages {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterMessages{inner: raw.MTRClusterMessagesFromID(id)}
+	x := &MTRClusterMessages{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterMessagesWithDeviceEndpointIDQueue creates a new [MTRClusterMessages].
-func NewMTRClusterMessagesWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMessages {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMessages")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterMessages{inner: raw.MTRClusterMessagesFromID(_id)}
+// mTRClusterMessagesAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterMessages (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterMessagesAdopt(id objc.ID) *MTRClusterMessages {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterMessages{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMessages) PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMessagesClusterPresentMessagesRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterMessagesWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterMessagesWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMessages {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMessages")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterMessagesAdopt(_id)
 }
 
-// CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMessages) CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMessagesClusterCancelMessagesRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeMessagesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeMessagesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMessagesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMessagesWithParams calls the underlying ReadAttributeMessagesWithParams.
-func (x *MTRClusterMessages) ReadAttributeMessagesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMessagesWithParams(params)
+// ReadAttributeActiveMessageIDsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeActiveMessageIDsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveMessageIDsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveMessageIDsWithParams calls the underlying ReadAttributeActiveMessageIDsWithParams.
-func (x *MTRClusterMessages) ReadAttributeActiveMessageIDsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveMessageIDsWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterMessages) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterMessages) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterMessages) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterMessages) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterMessages) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterMessages) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterMessages) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterMessages) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterMessagesable is the interface implemented by [MTRClusterMessages], for mocking and DI.
 type MTRClusterMessagesable interface {
-	Unwrap() *raw.MTRClusterMessages
-	PresentMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMessagesClusterPresentMessagesRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CancelMessagesRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMessagesClusterCancelMessagesRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeMessagesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveMessageIDsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMessagesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveMessageIDsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterMessagesable = (*MTRClusterMessages)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterMessages)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterMessages)(nil)

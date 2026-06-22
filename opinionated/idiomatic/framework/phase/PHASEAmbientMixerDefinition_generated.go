@@ -5,98 +5,81 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An audio-layering object that outputs sound in a particular direction in 3D space.
+// AmbientMixerDefinition is an idiomatic wrapper over the Objective-C class PHASEAmbientMixerDefinition.
 //
-// AmbientMixerDefinition wraps [raw.PHASEAmbientMixerDefinition] with a fluent Go API.
+// It embeds [MixerDefinition], promoting that type's methods.
+//
+// An audio-layering object that outputs sound in a particular direction in 3D space.
 type AmbientMixerDefinition struct {
-	inner *raw.PHASEAmbientMixerDefinition
+	MixerDefinition
 }
 
-// Unwrap returns the underlying [raw.PHASEAmbientMixerDefinition].
-func (x *AmbientMixerDefinition) Unwrap() *raw.PHASEAmbientMixerDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AmbientMixerDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// AmbientMixerDefinitionFromID adopts an existing object pointer as a AmbientMixerDefinition (nil for 0).
+// AmbientMixerDefinitionFromID adopts an existing Objective-C object as a AmbientMixerDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func AmbientMixerDefinitionFromID(id objc.ID) *AmbientMixerDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(id)}
+	x := &AmbientMixerDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a named ambient mixer with the given channel layout and orientation.
-//
-// NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier creates a new [AmbientMixerDefinition].
-func NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer, identifier string) *AmbientMixerDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEAmbientMixerDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:orientation:identifier:"), layout.Ptr(), orientation, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(_id)}
+// ambientMixerDefinitionAdopt wraps an Objective-C object that this code just created as a
+// AmbientMixerDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ambientMixerDefinitionAdopt(id objc.ID) *AmbientMixerDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &AmbientMixerDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates an ambient mixer with the given channel layout and orientation.
-//
-// NewAmbientMixerDefinitionWithChannelLayoutOrientation creates a new [AmbientMixerDefinition].
-func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer) *AmbientMixerDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEAmbientMixerDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:orientation:"), layout.Ptr(), orientation)
-	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(_id)}
+// NewAmbientMixerDefinition creates a new AmbientMixerDefinition.
+func NewAmbientMixerDefinition() *AmbientMixerDefinition {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEAmbientMixerDefinition")), objc.RegisterName("new"))
+	return ambientMixerDefinitionAdopt(_id)
 }
 
-// The mixer’s volume.
-//
-// WithGain sets the gain property and returns the receiver for chaining.
+// WithGain the mixer’s volume.
 func (x *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition {
-	x.inner.PHASEMixerDefinition.SetGain(gain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// A template for a parameter that changes the mixer’s volume gradually over a period of time.
-//
-// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (x *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {
-	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
-// @property orientation @abstract A readonly value of the ambient source's orientation relative to the scene root.
-//
-// Orientation calls the underlying Orientation.
-func (x *AmbientMixerDefinition) Orientation() unsafe.Pointer {
-	return x.inner.Orientation()
-}
-
-// @property inputChannelLayout @abstract A readonly value of the input channel layout this mixer was initialized with.
-//
-// InputChannelLayout calls the underlying InputChannelLayout.
-func (x *AmbientMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
-	return x.inner.InputChannelLayout()
-}
-
-func (x *AmbientMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition {
-	return &x.inner.PHASEMixerDefinition
-}
-
-func (x *AmbientMixerDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEMixerDefinition.PHASEDefinition
+// InputChannelLayout a readonly value of the input channel layout this mixer was initialized with.
+func (x *AmbientMixerDefinition) InputChannelLayout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputChannelLayout"))
+	return obj.Wrap(_r)
 }
 
 // AmbientMixerDefinitionable is the interface implemented by [AmbientMixerDefinition], for mocking and DI.
 type AmbientMixerDefinitionable interface {
-	Unwrap() *raw.PHASEAmbientMixerDefinition
+	obj.Object
 	WithGain(gain float64) *AmbientMixerDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition
-	Orientation() unsafe.Pointer
-	InputChannelLayout() *avfaudio.AVAudioChannelLayout
+	InputChannelLayout() obj.Object
 }
 
 var _ AmbientMixerDefinitionable = (*AmbientMixerDefinition)(nil)
+
+var _ MixerDefinitionProvider = (*AmbientMixerDefinition)(nil)
+
+var _ DefinitionProvider = (*AmbientMixerDefinition)(nil)

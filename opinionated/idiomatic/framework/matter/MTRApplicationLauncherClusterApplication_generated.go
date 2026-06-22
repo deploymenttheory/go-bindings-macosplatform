@@ -5,74 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRApplicationLauncherClusterApplication wraps [raw.MTRApplicationLauncherClusterApplication] with a fluent Go API.
+// MTRApplicationLauncherClusterApplication is an idiomatic wrapper over the Objective-C class MTRApplicationLauncherClusterApplication.
+//
+// It embeds [MTRApplicationLauncherClusterApplicationStruct], promoting that type's methods.
 type MTRApplicationLauncherClusterApplication struct {
-	inner *raw.MTRApplicationLauncherClusterApplication
+	MTRApplicationLauncherClusterApplicationStruct
 }
 
-// Unwrap returns the underlying [raw.MTRApplicationLauncherClusterApplication].
-func (x *MTRApplicationLauncherClusterApplication) Unwrap() *raw.MTRApplicationLauncherClusterApplication {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRApplicationLauncherClusterApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRApplicationLauncherClusterApplicationFromID adopts an existing object pointer as a MTRApplicationLauncherClusterApplication (nil for 0).
+// MTRApplicationLauncherClusterApplicationFromID adopts an existing Objective-C object as a MTRApplicationLauncherClusterApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRApplicationLauncherClusterApplicationFromID(id objc.ID) *MTRApplicationLauncherClusterApplication {
 	if id == 0 {
 		return nil
 	}
-	return &MTRApplicationLauncherClusterApplication{inner: raw.MTRApplicationLauncherClusterApplicationFromID(id)}
+	x := &MTRApplicationLauncherClusterApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRApplicationLauncherClusterApplication creates a new [MTRApplicationLauncherClusterApplication].
+// mTRApplicationLauncherClusterApplicationAdopt wraps an Objective-C object that this code just created as a
+// MTRApplicationLauncherClusterApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRApplicationLauncherClusterApplicationAdopt(id objc.ID) *MTRApplicationLauncherClusterApplication {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRApplicationLauncherClusterApplication{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRApplicationLauncherClusterApplication creates a new MTRApplicationLauncherClusterApplication.
 func NewMTRApplicationLauncherClusterApplication() *MTRApplicationLauncherClusterApplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRApplicationLauncherClusterApplication")), objc.RegisterName("new"))
-	return &MTRApplicationLauncherClusterApplication{inner: raw.MTRApplicationLauncherClusterApplicationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRApplicationLauncherClusterApplication")), objc.RegisterName("new"))
+	return mTRApplicationLauncherClusterApplicationAdopt(_id)
 }
 
-// WithCatalogVendorID sets the catalogVendorID property and returns the receiver for chaining.
-func (x *MTRApplicationLauncherClusterApplication) WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationLauncherClusterApplication {
-	x.inner.MTRApplicationLauncherClusterApplicationStruct.SetCatalogVendorID(catalogVendorID)
+// WithCatalogVendorID sets the property and returns the receiver so calls can be chained.
+func (x *MTRApplicationLauncherClusterApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return x
 }
 
-// WithCatalogVendorId sets the catalogVendorId property and returns the receiver for chaining.
-func (x *MTRApplicationLauncherClusterApplication) WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationLauncherClusterApplication {
-	x.inner.MTRApplicationLauncherClusterApplicationStruct.SetCatalogVendorId(catalogVendorId)
+// WithCatalogVendorId sets the property and returns the receiver so calls can be chained.
+func (x *MTRApplicationLauncherClusterApplication) WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationLauncherClusterApplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorId:"), objref.IDOf(catalogVendorId))
 	return x
 }
 
-// WithApplicationID sets the applicationID property and returns the receiver for chaining.
+// WithApplicationID sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplication) WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplication {
-	x.inner.MTRApplicationLauncherClusterApplicationStruct.SetApplicationID(foundation.NSStringStringWithUTF8String(applicationID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
 	return x
 }
 
-// WithApplicationId sets the applicationId property and returns the receiver for chaining.
+// WithApplicationId sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplication) WithApplicationId(applicationId string) *MTRApplicationLauncherClusterApplication {
-	x.inner.MTRApplicationLauncherClusterApplicationStruct.SetApplicationId(foundation.NSStringStringWithUTF8String(applicationId))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationId:"), purego.NSString(applicationId))
 	return x
-}
-
-func (x *MTRApplicationLauncherClusterApplication) asMTRApplicationLauncherClusterApplicationStruct() *raw.MTRApplicationLauncherClusterApplicationStruct {
-	return &x.inner.MTRApplicationLauncherClusterApplicationStruct
 }
 
 // MTRApplicationLauncherClusterApplicationable is the interface implemented by [MTRApplicationLauncherClusterApplication], for mocking and DI.
 type MTRApplicationLauncherClusterApplicationable interface {
-	Unwrap() *raw.MTRApplicationLauncherClusterApplication
-	WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationLauncherClusterApplication
-	WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationLauncherClusterApplication
+	obj.Object
+	WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplication
+	WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationLauncherClusterApplication
 	WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplication
 	WithApplicationId(applicationId string) *MTRApplicationLauncherClusterApplication
 }
 
 var _ MTRApplicationLauncherClusterApplicationable = (*MTRApplicationLauncherClusterApplication)(nil)
+
+var _ MTRApplicationLauncherClusterApplicationStructProvider = (*MTRApplicationLauncherClusterApplication)(nil)

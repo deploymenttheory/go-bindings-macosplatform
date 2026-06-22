@@ -5,61 +5,89 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of attribute descriptor objects.
+// AttributeDescriptorArray is an idiomatic wrapper over the Objective-C class MTLAttributeDescriptorArray.
 //
-// AttributeDescriptorArray wraps [raw.MTLAttributeDescriptorArray] with a fluent Go API.
+// An array of attribute descriptor objects.
 type AttributeDescriptorArray struct {
-	inner *raw.MTLAttributeDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLAttributeDescriptorArray].
-func (x *AttributeDescriptorArray) Unwrap() *raw.MTLAttributeDescriptorArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributeDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeDescriptorArrayFromID adopts an existing object pointer as a AttributeDescriptorArray (nil for 0).
+// AttributeDescriptorArrayFromID adopts an existing Objective-C object as a AttributeDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeDescriptorArrayFromID(id objc.ID) *AttributeDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &AttributeDescriptorArray{inner: raw.MTLAttributeDescriptorArrayFromID(id)}
+	x := &AttributeDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAttributeDescriptorArray creates a new [AttributeDescriptorArray].
-func NewAttributeDescriptorArray() *AttributeDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAttributeDescriptorArray")), objc.RegisterName("new"))
-	return &AttributeDescriptorArray{inner: raw.MTLAttributeDescriptorArrayFromID(_id)}
-}
-
-// Returns the state of the specified attribute.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *AttributeDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(index)
-	if _r == nil {
+// attributeDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// AttributeDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeDescriptorArrayAdopt(id objc.ID) *AttributeDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &AttributeDescriptor{inner: _r}
+	x := &AttributeDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets state for the specified attribute.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *raw.MTLAttributeDescriptor, index uint) {
-	x.inner.SetObjectAtIndexedSubscript(attributeDesc, index)
+// Description returns the object's -description text.
+func (x *AttributeDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributeDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributeDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributeDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttributeDescriptorArray creates a new AttributeDescriptorArray.
+func NewAttributeDescriptorArray() *AttributeDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLAttributeDescriptorArray")), objc.RegisterName("new"))
+	return attributeDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript returns the state of the specified attribute.
+func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *AttributeDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+	return AttributeDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript sets state for the specified attribute.
+func (x *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }
 
 // AttributeDescriptorArrayable is the interface implemented by [AttributeDescriptorArray], for mocking and DI.
 type AttributeDescriptorArrayable interface {
-	Unwrap() *raw.MTLAttributeDescriptorArray
-	ObjectAtIndexedSubscript(index uint) *AttributeDescriptor
-	SetObjectAtIndexedSubscript(attributeDesc *raw.MTLAttributeDescriptor, index uint)
+	obj.Object
+	ObjectAtIndexedSubscript(index int) *AttributeDescriptor
+	SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int)
 }
 
 var _ AttributeDescriptorArrayable = (*AttributeDescriptorArray)(nil)

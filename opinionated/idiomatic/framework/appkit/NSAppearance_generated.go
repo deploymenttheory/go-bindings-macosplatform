@@ -6,58 +6,90 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages standard appearance attributes for UI elements in an app.
+// Appearance is an idiomatic wrapper over the Objective-C class NSAppearance.
 //
-// Appearance wraps [raw.NSAppearance] with a fluent Go API.
+// An object that manages standard appearance attributes for UI elements in an app.
 type Appearance struct {
-	inner *raw.NSAppearance
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAppearance].
-func (x *Appearance) Unwrap() *raw.NSAppearance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Appearance) ID() objc.ID { return x.inner.Ptr() }
-
-// AppearanceFromID adopts an existing object pointer as a Appearance (nil for 0).
+// AppearanceFromID adopts an existing Objective-C object as a Appearance
+// (nil for 0), retaining it and registering a release finalizer.
 func AppearanceFromID(id objc.ID) *Appearance {
 	if id == 0 {
 		return nil
 	}
-	return &Appearance{inner: raw.NSAppearanceFromID(id)}
+	x := &Appearance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an appearance object from the named appearance file located in the specified bundle.
-//
-// NewAppearanceWithAppearanceNamedBundle creates a new [Appearance].
-func NewAppearanceWithAppearanceNamedBundle(name *foundation.NSString, bundle *foundation.NSBundle) *Appearance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppearance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAppearanceNamed:bundle:"), name.Ptr(), bundle.Ptr())
-	return &Appearance{inner: raw.NSAppearanceFromID(_id)}
+// appearanceAdopt wraps an Objective-C object that this code just created as a
+// Appearance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appearanceAdopt(id objc.ID) *Appearance {
+	if id == 0 {
+		return nil
+	}
+	x := &Appearance{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewAppearanceWithCoder creates a new [Appearance].
-func NewAppearanceWithCoder(coder *foundation.NSCoder) *Appearance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppearance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Appearance{inner: raw.NSAppearanceFromID(_id)}
+// Description returns the object's -description text.
+func (x *Appearance) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Sets the appearance to be the active drawing appearance and perform the specified block.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Appearance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Appearance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Appearance) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAppearanceWithAppearanceNamedBundle creates an appearance object from the named appearance file located in the specified bundle.
+func NewAppearanceWithAppearanceNamedBundle(name obj.Object, bundle obj.Object) *Appearance {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAppearanceNamed:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
+	return appearanceAdopt(_id)
+}
+
+// NewAppearanceWithCoder creates a new Appearance.
+func NewAppearanceWithCoder(coder obj.Object) *Appearance {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return appearanceAdopt(_id)
+}
+
+// PerformAsCurrentDrawingAppearance sets the appearance to be the active drawing appearance and perform the specified block.
 //
 // PerformAsCurrentDrawingAppearance blocks until the operation completes or ctx is cancelled.
 func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformAsCurrentDrawingAppearance(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAsCurrentDrawingAppearance:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -66,37 +98,30 @@ func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) erro
 	}
 }
 
-// Returns the appearance name that most closely matches the current appearance object.
-//
-// BestMatchFromAppearancesWithNames calls the underlying BestMatchFromAppearancesWithNames.
-func (x *Appearance) BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) string {
-	_r := x.inner.BestMatchFromAppearancesWithNames(appearances)
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// BestMatchFromAppearancesWithNames returns the appearance name that most closely matches the current appearance object.
+func (x *Appearance) BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestMatchFromAppearancesWithNames:"), purego.SliceToNSArray(appearances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// Name calls the underlying Name.
-func (x *Appearance) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Name wraps the corresponding Objective-C method.
+func (x *Appearance) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return obj.Wrap(_r)
 }
 
-// AllowsVibrancy calls the underlying AllowsVibrancy.
+// AllowsVibrancy wraps the corresponding Objective-C method.
 func (x *Appearance) AllowsVibrancy() bool {
-	return x.inner.AllowsVibrancy()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsVibrancy"))
+	return _r
 }
 
 // Appearanceable is the interface implemented by [Appearance], for mocking and DI.
 type Appearanceable interface {
-	Unwrap() *raw.NSAppearance
+	obj.Object
 	PerformAsCurrentDrawingAppearance(ctx context.Context) error
-	BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) string
-	Name() string
+	BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object
+	Name() obj.Object
 	AllowsVibrancy() bool
 }
 

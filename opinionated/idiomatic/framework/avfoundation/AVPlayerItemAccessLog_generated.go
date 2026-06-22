@@ -5,72 +5,98 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to retrieve the access log associated with a player item.
+// PlayerItemAccessLog is an idiomatic wrapper over the Objective-C class AVPlayerItemAccessLog.
 //
-// PlayerItemAccessLog wraps [raw.AVPlayerItemAccessLog] with a fluent Go API.
+// An object used to retrieve the access log associated with a player item.
 type PlayerItemAccessLog struct {
-	inner *raw.AVPlayerItemAccessLog
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemAccessLog].
-func (x *PlayerItemAccessLog) Unwrap() *raw.AVPlayerItemAccessLog { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemAccessLog) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemAccessLogFromID adopts an existing object pointer as a PlayerItemAccessLog (nil for 0).
+// PlayerItemAccessLogFromID adopts an existing Objective-C object as a PlayerItemAccessLog
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemAccessLogFromID(id objc.ID) *PlayerItemAccessLog {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemAccessLog{inner: raw.AVPlayerItemAccessLogFromID(id)}
+	x := &PlayerItemAccessLog{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemAccessLog creates a new [PlayerItemAccessLog].
+// playerItemAccessLogAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemAccessLog (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemAccessLogAdopt(id objc.ID) *PlayerItemAccessLog {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemAccessLog{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerItemAccessLog) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemAccessLog) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemAccessLog) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemAccessLog) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerItemAccessLog creates a new PlayerItemAccessLog.
 func NewPlayerItemAccessLog() *PlayerItemAccessLog {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemAccessLog")), objc.RegisterName("new"))
-	return &PlayerItemAccessLog{inner: raw.AVPlayerItemAccessLogFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemAccessLog")), objc.RegisterName("new"))
+	return playerItemAccessLogAdopt(_id)
 }
 
-// Returns a serialized representation of the access log in the Extended Log File Format.
-//
-// ExtendedLogData calls the underlying ExtendedLogData.
-func (x *PlayerItemAccessLog) ExtendedLogData() *foundation.NSData {
-	return x.inner.ExtendedLogData()
+// ExtendedLogData returns a serialized representation of the access log in the Extended Log File Format.
+func (x *PlayerItemAccessLog) ExtendedLogData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLogData"))
+	return obj.Wrap(_r)
 }
 
-// Returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
-//
-// ExtendedLogDataStringEncoding calls the underlying ExtendedLogDataStringEncoding.
-func (x *PlayerItemAccessLog) ExtendedLogDataStringEncoding() uint {
-	return x.inner.ExtendedLogDataStringEncoding()
+// ExtendedLogDataStringEncoding returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
+func (x *PlayerItemAccessLog) ExtendedLogDataStringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extendedLogDataStringEncoding"))
+	return _r
 }
 
-// An ordered collection of AVPlayerItemAccessLogEvent instances. An ordered collection of AVPlayerItemAccessLogEvent instances that represent the chronological sequence of events contained in the access log. This property is not observable.
+// Events an ordered collection of AVPlayerItemAccessLogEvent instances. An ordered collection of AVPlayerItemAccessLogEvent instances that represent the chronological sequence of events contained in the access log. This property is not observable.
 //
 // Events returns the collection as a Go slice.
 func (x *PlayerItemAccessLog) Events() []*PlayerItemAccessLogEvent {
-	arr := x.inner.Events()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemAccessLogEvent {
-		return &PlayerItemAccessLogEvent{inner: raw.AVPlayerItemAccessLogEventFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("events"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemAccessLogEvent { return PlayerItemAccessLogEventFromID(_id) })
 }
 
 // PlayerItemAccessLogable is the interface implemented by [PlayerItemAccessLog], for mocking and DI.
 type PlayerItemAccessLogable interface {
-	Unwrap() *raw.AVPlayerItemAccessLog
-	ExtendedLogData() *foundation.NSData
-	ExtendedLogDataStringEncoding() uint
+	obj.Object
+	ExtendedLogData() obj.Object
+	ExtendedLogDataStringEncoding() int
 	Events() []*PlayerItemAccessLogEvent
 }
 

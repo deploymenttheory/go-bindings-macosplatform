@@ -5,159 +5,197 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRActionsClusterActionStruct wraps [raw.MTRActionsClusterActionStruct] with a fluent Go API.
+// MTRActionsClusterActionStruct is an idiomatic wrapper over the Objective-C class MTRActionsClusterActionStruct.
 type MTRActionsClusterActionStruct struct {
-	inner *raw.MTRActionsClusterActionStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRActionsClusterActionStruct].
-func (x *MTRActionsClusterActionStruct) Unwrap() *raw.MTRActionsClusterActionStruct { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRActionsClusterActionStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRActionsClusterActionStructFromID adopts an existing object pointer as a MTRActionsClusterActionStruct (nil for 0).
+// MTRActionsClusterActionStructFromID adopts an existing Objective-C object as a MTRActionsClusterActionStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRActionsClusterActionStructFromID(id objc.ID) *MTRActionsClusterActionStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRActionsClusterActionStruct{inner: raw.MTRActionsClusterActionStructFromID(id)}
+	x := &MTRActionsClusterActionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRActionsClusterActionStruct creates a new [MTRActionsClusterActionStruct].
+// mTRActionsClusterActionStructAdopt wraps an Objective-C object that this code just created as a
+// MTRActionsClusterActionStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRActionsClusterActionStructAdopt(id objc.ID) *MTRActionsClusterActionStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRActionsClusterActionStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRActionsClusterActionStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRActionsClusterActionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRActionsClusterActionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRActionsClusterActionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRActionsClusterActionStruct creates a new MTRActionsClusterActionStruct.
 func NewMTRActionsClusterActionStruct() *MTRActionsClusterActionStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRActionsClusterActionStruct")), objc.RegisterName("new"))
-	return &MTRActionsClusterActionStruct{inner: raw.MTRActionsClusterActionStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterActionStruct")), objc.RegisterName("new"))
+	return mTRActionsClusterActionStructAdopt(_id)
 }
 
-// WithActionID sets the actionID property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionStruct) WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterActionStruct {
-	x.inner.SetActionID(actionID)
+// WithActionID sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionStruct) WithActionID(actionID obj.Object) *MTRActionsClusterActionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterActionStruct) WithName(name string) *MTRActionsClusterActionStruct {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionStruct) WithType(type_ *foundation.NSNumber) *MTRActionsClusterActionStruct {
-	x.inner.SetType(type_)
+// WithType sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionStruct) WithType(type_ obj.Object) *MTRActionsClusterActionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithEndpointListID sets the endpointListID property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionStruct) WithEndpointListID(endpointListID *foundation.NSNumber) *MTRActionsClusterActionStruct {
-	x.inner.SetEndpointListID(endpointListID)
+// WithEndpointListID sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterActionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return x
 }
 
-// WithSupportedCommands sets the supportedCommands property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionStruct) WithSupportedCommands(supportedCommands *foundation.NSNumber) *MTRActionsClusterActionStruct {
-	x.inner.SetSupportedCommands(supportedCommands)
+// WithSupportedCommands sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionStruct) WithSupportedCommands(supportedCommands obj.Object) *MTRActionsClusterActionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedCommands:"), objref.IDOf(supportedCommands))
 	return x
 }
 
-// WithState sets the state property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionStruct) WithState(state *foundation.NSNumber) *MTRActionsClusterActionStruct {
-	x.inner.SetState(state)
+// WithState sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionStruct) WithState(state obj.Object) *MTRActionsClusterActionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 	return x
 }
 
-// ActionID calls the underlying ActionID.
-func (x *MTRActionsClusterActionStruct) ActionID() *foundation.NSNumber {
-	return x.inner.ActionID()
+// ActionID wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) ActionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
+	return obj.Wrap(_r)
 }
 
-// SetActionID calls the underlying SetActionID.
-func (x *MTRActionsClusterActionStruct) SetActionID(actionID *foundation.NSNumber) {
-	x.inner.SetActionID(actionID)
+// SetActionID wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) SetActionID(actionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionStruct) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterActionStruct) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// Type calls the underlying Type.
-func (x *MTRActionsClusterActionStruct) Type() *foundation.NSNumber {
-	return x.inner.Type()
+// Type wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	return obj.Wrap(_r)
 }
 
-// SetType calls the underlying SetType.
-func (x *MTRActionsClusterActionStruct) SetType(type_ *foundation.NSNumber) {
-	x.inner.SetType(type_)
+// SetType wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) SetType(type_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
 
-// EndpointListID calls the underlying EndpointListID.
-func (x *MTRActionsClusterActionStruct) EndpointListID() *foundation.NSNumber {
-	return x.inner.EndpointListID()
+// EndpointListID wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) EndpointListID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointListID"))
+	return obj.Wrap(_r)
 }
 
-// SetEndpointListID calls the underlying SetEndpointListID.
-func (x *MTRActionsClusterActionStruct) SetEndpointListID(endpointListID *foundation.NSNumber) {
-	x.inner.SetEndpointListID(endpointListID)
+// SetEndpointListID wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) SetEndpointListID(endpointListID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 }
 
-// SupportedCommands calls the underlying SupportedCommands.
-func (x *MTRActionsClusterActionStruct) SupportedCommands() *foundation.NSNumber {
-	return x.inner.SupportedCommands()
+// SupportedCommands wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) SupportedCommands() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedCommands"))
+	return obj.Wrap(_r)
 }
 
-// SetSupportedCommands calls the underlying SetSupportedCommands.
-func (x *MTRActionsClusterActionStruct) SetSupportedCommands(supportedCommands *foundation.NSNumber) {
-	x.inner.SetSupportedCommands(supportedCommands)
+// SetSupportedCommands wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) SetSupportedCommands(supportedCommands obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedCommands:"), objref.IDOf(supportedCommands))
 }
 
-// State calls the underlying State.
-func (x *MTRActionsClusterActionStruct) State() *foundation.NSNumber {
-	return x.inner.State()
+// State wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) State() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	return obj.Wrap(_r)
 }
 
-// SetState calls the underlying SetState.
-func (x *MTRActionsClusterActionStruct) SetState(state *foundation.NSNumber) {
-	x.inner.SetState(state)
+// SetState wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterActionStruct) SetState(state obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 }
 
 // MTRActionsClusterActionStructable is the interface implemented by [MTRActionsClusterActionStruct], for mocking and DI.
 type MTRActionsClusterActionStructable interface {
-	Unwrap() *raw.MTRActionsClusterActionStruct
-	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterActionStruct
+	obj.Object
+	WithActionID(actionID obj.Object) *MTRActionsClusterActionStruct
 	WithName(name string) *MTRActionsClusterActionStruct
-	WithType(type_ *foundation.NSNumber) *MTRActionsClusterActionStruct
-	WithEndpointListID(endpointListID *foundation.NSNumber) *MTRActionsClusterActionStruct
-	WithSupportedCommands(supportedCommands *foundation.NSNumber) *MTRActionsClusterActionStruct
-	WithState(state *foundation.NSNumber) *MTRActionsClusterActionStruct
-	ActionID() *foundation.NSNumber
-	SetActionID(actionID *foundation.NSNumber)
+	WithType(type_ obj.Object) *MTRActionsClusterActionStruct
+	WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterActionStruct
+	WithSupportedCommands(supportedCommands obj.Object) *MTRActionsClusterActionStruct
+	WithState(state obj.Object) *MTRActionsClusterActionStruct
+	ActionID() obj.Object
+	SetActionID(actionID obj.Object)
 	Name() string
 	SetName(name string)
-	Type() *foundation.NSNumber
-	SetType(type_ *foundation.NSNumber)
-	EndpointListID() *foundation.NSNumber
-	SetEndpointListID(endpointListID *foundation.NSNumber)
-	SupportedCommands() *foundation.NSNumber
-	SetSupportedCommands(supportedCommands *foundation.NSNumber)
-	State() *foundation.NSNumber
-	SetState(state *foundation.NSNumber)
+	Type() obj.Object
+	SetType(type_ obj.Object)
+	EndpointListID() obj.Object
+	SetEndpointListID(endpointListID obj.Object)
+	SupportedCommands() obj.Object
+	SetSupportedCommands(supportedCommands obj.Object)
+	State() obj.Object
+	SetState(state obj.Object)
 }
 
 var _ MTRActionsClusterActionStructable = (*MTRActionsClusterActionStruct)(nil)

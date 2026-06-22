@@ -5,73 +5,114 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that manages one or more audio sessions that belong to an app.
+// AudioApplication is an idiomatic wrapper over the Objective-C class AVAudioApplication.
 //
-// AudioApplication wraps [raw.AVAudioApplication] with a fluent Go API.
+// An object that manages one or more audio sessions that belong to an app.
 type AudioApplication struct {
-	inner *raw.AVAudioApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioApplication].
-func (x *AudioApplication) Unwrap() *raw.AVAudioApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioApplicationFromID adopts an existing object pointer as a AudioApplication (nil for 0).
+// AudioApplicationFromID adopts an existing Objective-C object as a AudioApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioApplicationFromID(id objc.ID) *AudioApplication {
 	if id == 0 {
 		return nil
 	}
-	return &AudioApplication{inner: raw.AVAudioApplicationFromID(id)}
+	x := &AudioApplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioApplication creates a new [AudioApplication].
+// audioApplicationAdopt wraps an Objective-C object that this code just created as a
+// AudioApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioApplicationAdopt(id objc.ID) *AudioApplication {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioApplication{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioApplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioApplication) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioApplication creates a new AudioApplication.
 func NewAudioApplication() *AudioApplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioApplication")), objc.RegisterName("new"))
-	return &AudioApplication{inner: raw.AVAudioApplicationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioApplication")), objc.RegisterName("new"))
+	return audioApplicationAdopt(_id)
 }
 
-// Sets a Boolean value that indicates whether the app’s audio input is in a muted state.
-//
-// SetInputMutedError calls the underlying SetInputMutedError.
-func (x *AudioApplication) SetInputMutedError(muted bool) (bool, error) {
-	return x.inner.SetInputMutedError(muted)
+// SetInputMuted sets a Boolean value that indicates whether the app’s audio input is in a muted state.
+func (x *AudioApplication) SetInputMuted(muted bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setInputMuted:error:"), muted, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Sets a callback to handle changes to application-level audio muting states.
-//
-// SetInputMuteStateChangeHandlerError calls the underlying SetInputMuteStateChangeHandlerError.
-func (x *AudioApplication) SetInputMuteStateChangeHandlerError(inputMuteHandler func(bool) bool) (bool, error) {
-	return x.inner.SetInputMuteStateChangeHandlerError(inputMuteHandler)
+// SetInputMuteStateChangeHandler sets a callback to handle changes to application-level audio muting states.
+func (x *AudioApplication) SetInputMuteStateChangeHandler(inputMuteHandler func(bool) bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setInputMuteStateChangeHandler:error:"), objc.NewBlock(func(_ objc.Block, _b0 bool) bool { return inputMuteHandler(_b0) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Get the input muted state - return value is boolean 0 for unmuted or value 1 for muted (input samples zeroed out)
-//
-// IsInputMuted calls the underlying IsInputMuted.
+// IsInputMuted get the input muted state - return value is boolean 0 for unmuted or value 1 for muted (input samples zeroed out)
 func (x *AudioApplication) IsInputMuted() bool {
-	return x.inner.IsInputMuted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInputMuted"))
+	return _r
 }
 
-// Returns an enum indicating whether the user has granted or denied permission to record, or has not been asked
-//
-// RecordPermission calls the underlying RecordPermission.
-func (x *AudioApplication) RecordPermission() AVAudioApplicationRecordPermission {
-	return AVAudioApplicationRecordPermission(x.inner.RecordPermission())
+// RecordPermission returns an enum indicating whether the user has granted or denied permission to record, or has not been asked
+func (x *AudioApplication) RecordPermission() AudioApplicationRecordPermission {
+	_r := objc.Send[AudioApplicationRecordPermission](objref.IDOf(x), objc.RegisterName("recordPermission"))
+	return _r
 }
 
 // AudioApplicationable is the interface implemented by [AudioApplication], for mocking and DI.
 type AudioApplicationable interface {
-	Unwrap() *raw.AVAudioApplication
-	SetInputMutedError(muted bool) (bool, error)
-	SetInputMuteStateChangeHandlerError(inputMuteHandler func(bool) bool) (bool, error)
+	obj.Object
+	SetInputMuted(muted bool) error
+	SetInputMuteStateChangeHandler(inputMuteHandler func(bool) bool) error
 	IsInputMuted() bool
-	RecordPermission() AVAudioApplicationRecordPermission
+	RecordPermission() AudioApplicationRecordPermission
 }
 
 var _ AudioApplicationable = (*AudioApplication)(nil)

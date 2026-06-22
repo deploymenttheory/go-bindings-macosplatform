@@ -5,164 +5,172 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// This class provides information about an album in the iTunes library.
+// LibAlbum is an idiomatic wrapper over the Objective-C class ITLibAlbum.
 //
-// LibAlbum wraps [raw.ITLibAlbum] with a fluent Go API.
+// This class provides information about an album in the iTunes library.
 type LibAlbum struct {
-	inner *raw.ITLibAlbum
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibAlbum].
-func (x *LibAlbum) Unwrap() *raw.ITLibAlbum { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LibAlbum) ID() objc.ID { return x.inner.Ptr() }
-
-// LibAlbumFromID adopts an existing object pointer as a LibAlbum (nil for 0).
+// LibAlbumFromID adopts an existing Objective-C object as a LibAlbum
+// (nil for 0), retaining it and registering a release finalizer.
 func LibAlbumFromID(id objc.ID) *LibAlbum {
 	if id == 0 {
 		return nil
 	}
-	return &LibAlbum{inner: raw.ITLibAlbumFromID(id)}
+	x := &LibAlbum{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLibAlbum creates a new [LibAlbum].
+// libAlbumAdopt wraps an Objective-C object that this code just created as a
+// LibAlbum (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libAlbumAdopt(id objc.ID) *LibAlbum {
+	if id == 0 {
+		return nil
+	}
+	x := &LibAlbum{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LibAlbum) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LibAlbum) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LibAlbum) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibAlbum) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLibAlbum creates a new LibAlbum.
 func NewLibAlbum() *LibAlbum {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibAlbum")), objc.RegisterName("new"))
-	return &LibAlbum{inner: raw.ITLibAlbumFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ITLibAlbum")), objc.RegisterName("new"))
+	return libAlbumAdopt(_id)
 }
 
-// @abstract The name of this album.
-//
-// Title calls the underlying Title.
+// Title the name of this album.
 func (x *LibAlbum) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The name of this that should be used for sorting purposes.
-//
-// SortTitle calls the underlying SortTitle.
+// SortTitle the name of this that should be used for sorting purposes.
 func (x *LibAlbum) SortTitle() string {
-	_r := x.inner.SortTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Whether this album is a compilation.
-//
-// IsCompilation calls the underlying IsCompilation.
+// IsCompilation whether this album is a compilation.
 func (x *LibAlbum) IsCompilation() bool {
-	return x.inner.IsCompilation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompilation"))
+	return _r
 }
 
-// @abstract Deprecated. Will be removed in future versions.
-//
-// Artist calls the underlying Artist.
-func (x *LibAlbum) Artist() unsafe.Pointer {
-	return x.inner.Artist()
+// DiscCount the number of discs in this album.
+func (x *LibAlbum) DiscCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("discCount"))
+	return _r
 }
 
-// @abstract The number of discs in this album.
-//
-// DiscCount calls the underlying DiscCount.
-func (x *LibAlbum) DiscCount() uint {
-	return x.inner.DiscCount()
+// DiscNumber the index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
+func (x *LibAlbum) DiscNumber() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("discNumber"))
+	return _r
 }
 
-// @abstract The index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
-//
-// DiscNumber calls the underlying DiscNumber.
-func (x *LibAlbum) DiscNumber() uint {
-	return x.inner.DiscNumber()
-}
-
-// @abstract The rating of this track's album.
-//
-// Rating calls the underlying Rating.
+// Rating the rating of this track's album.
 func (x *LibAlbum) Rating() int {
-	return x.inner.Rating()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rating"))
+	return _r
 }
 
-// @abstract The rating of this track's album.
-//
-// IsRatingComputed calls the underlying IsRatingComputed.
+// IsRatingComputed the rating of this track's album.
 func (x *LibAlbum) IsRatingComputed() bool {
-	return x.inner.IsRatingComputed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRatingComputed"))
+	return _r
 }
 
-// @abstract Whether this track's album is gapless.
-//
-// IsGapless calls the underlying IsGapless.
+// IsGapless whether this track's album is gapless.
 func (x *LibAlbum) IsGapless() bool {
-	return x.inner.IsGapless()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGapless"))
+	return _r
 }
 
-// @abstract Number of tracks in this album.
-//
-// TrackCount calls the underlying TrackCount.
-func (x *LibAlbum) TrackCount() uint {
-	return x.inner.TrackCount()
+// TrackCount number of tracks in this album.
+func (x *LibAlbum) TrackCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trackCount"))
+	return _r
 }
 
-// @abstract The artist associated with this album.
-//
-// AlbumArtist calls the underlying AlbumArtist.
+// AlbumArtist the artist associated with this album.
 func (x *LibAlbum) AlbumArtist() string {
-	_r := x.inner.AlbumArtist()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("albumArtist"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The artist associated with this album. This field should be used when sorting.
-//
-// SortAlbumArtist calls the underlying SortAlbumArtist.
+// SortAlbumArtist the artist associated with this album. This field should be used when sorting.
 func (x *LibAlbum) SortAlbumArtist() string {
-	_r := x.inner.SortAlbumArtist()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortAlbumArtist"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The unique identifier of this album.
-//
-// PersistentID calls the underlying PersistentID.
-func (x *LibAlbum) PersistentID() *foundation.NSNumber {
-	return x.inner.PersistentID()
+// PersistentID the unique identifier of this album.
+func (x *LibAlbum) PersistentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
+	return obj.Wrap(_r)
 }
 
 // LibAlbumable is the interface implemented by [LibAlbum], for mocking and DI.
 type LibAlbumable interface {
-	Unwrap() *raw.ITLibAlbum
+	obj.Object
 	Title() string
 	SortTitle() string
 	IsCompilation() bool
-	Artist() unsafe.Pointer
-	DiscCount() uint
-	DiscNumber() uint
+	DiscCount() int
+	DiscNumber() int
 	Rating() int
 	IsRatingComputed() bool
 	IsGapless() bool
-	TrackCount() uint
+	TrackCount() int
 	AlbumArtist() string
 	SortAlbumArtist() string
-	PersistentID() *foundation.NSNumber
+	PersistentID() obj.Object
 }
 
 var _ LibAlbumable = (*LibAlbum)(nil)

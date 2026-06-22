@@ -5,101 +5,99 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An element that represents a media asset within project section content.
+// ProjectAssetElement is an idiomatic wrapper over the Objective-C class PHProjectAssetElement.
 //
-// ProjectAssetElement wraps [raw.PHProjectAssetElement] with a fluent Go API.
+// It embeds [ProjectElement], promoting that type's methods.
+//
+// An element that represents a media asset within project section content.
 type ProjectAssetElement struct {
-	inner *raw.PHProjectAssetElement
+	ProjectElement
 }
 
-// Unwrap returns the underlying [raw.PHProjectAssetElement].
-func (x *ProjectAssetElement) Unwrap() *raw.PHProjectAssetElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectAssetElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectAssetElementFromID adopts an existing object pointer as a ProjectAssetElement (nil for 0).
+// ProjectAssetElementFromID adopts an existing Objective-C object as a ProjectAssetElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectAssetElementFromID(id objc.ID) *ProjectAssetElement {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectAssetElement{inner: raw.PHProjectAssetElementFromID(id)}
+	x := &ProjectAssetElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProjectAssetElement creates a new [ProjectAssetElement].
+// projectAssetElementAdopt wraps an Objective-C object that this code just created as a
+// ProjectAssetElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectAssetElementAdopt(id objc.ID) *ProjectAssetElement {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectAssetElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewProjectAssetElement creates a new ProjectAssetElement.
 func NewProjectAssetElement() *ProjectAssetElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectAssetElement")), objc.RegisterName("new"))
-	return &ProjectAssetElement{inner: raw.PHProjectAssetElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectAssetElement")), objc.RegisterName("new"))
+	return projectAssetElementAdopt(_id)
 }
 
-// Cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
-//
-// CloudAssetIdentifier calls the underlying CloudAssetIdentifier.
-func (x *ProjectAssetElement) CloudAssetIdentifier() *photos.PHCloudIdentifier {
-	return x.inner.CloudAssetIdentifier()
+// CloudAssetIdentifier cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
+func (x *ProjectAssetElement) CloudAssetIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudAssetIdentifier"))
+	return obj.Wrap(_r)
 }
 
-// If a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
-//
-// Annotation calls the underlying Annotation.
+// Annotation if a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
 func (x *ProjectAssetElement) Annotation() string {
-	_r := x.inner.Annotation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// If the asset was presented to the user in a cropped manner in Photos either automatically or through user manipulation (pan & zoom) before the creation of the project, the visible image area shown to the user will be provided as a crop rect. As a fallback, Photos may suggest a general "safe crop" based on image content through this property. The rect is in unit coordinates with an upper left origin. Default value: {(0.0, 0.0), (1.0,1.0)}
-//
-// CropRect calls the underlying CropRect.
+// CropRect if the asset was presented to the user in a cropped manner in Photos either automatically or through user manipulation (pan & zoom) before the creation of the project, the visible image area shown to the user will be provided as a crop rect. As a fallback, Photos may suggest a general "safe crop" based on image content through this property. The rect is in unit coordinates with an upper left origin. Default value: {(0.0, 0.0), (1.0,1.0)}
 func (x *ProjectAssetElement) CropRect() corefoundation.CGRect {
-	return x.inner.CropRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("cropRect"))
+	return _r
 }
 
-// Array of regions of interest (faces, objects, etc.) in the assets. Note: Photos will filter out features of an asset that it doesn't believe to be meaningful in the context of the user's full library. For example, random faces in a crowd.
+// RegionsOfInterest array of regions of interest (faces, objects, etc.) in the assets. Note: Photos will filter out features of an asset that it doesn't believe to be meaningful in the context of the user's full library. For example, random faces in a crowd.
 //
 // RegionsOfInterest returns the collection as a Go slice.
 func (x *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
-	arr := x.inner.RegionsOfInterest()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectRegionOfInterest {
-		return &ProjectRegionOfInterest{inner: raw.PHProjectRegionOfInterestFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionsOfInterest"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectRegionOfInterest { return ProjectRegionOfInterestFromID(_id) })
 }
 
-// The following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the asset was presented horizontally flipped in the originating project.
-//
-// HorizontallyFlipped calls the underlying HorizontallyFlipped.
+// HorizontallyFlipped the following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the asset was presented horizontally flipped in the originating project.
 func (x *ProjectAssetElement) HorizontallyFlipped() bool {
-	return x.inner.HorizontallyFlipped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("horizontallyFlipped"))
+	return _r
 }
 
-// YES if the asset was presented vertically flipped in the originating project.
-//
-// VerticallyFlipped calls the underlying VerticallyFlipped.
+// VerticallyFlipped YES if the asset was presented vertically flipped in the originating project.
 func (x *ProjectAssetElement) VerticallyFlipped() bool {
-	return x.inner.VerticallyFlipped()
-}
-
-func (x *ProjectAssetElement) asProjectElement() *raw.PHProjectElement {
-	return &x.inner.PHProjectElement
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verticallyFlipped"))
+	return _r
 }
 
 // ProjectAssetElementable is the interface implemented by [ProjectAssetElement], for mocking and DI.
 type ProjectAssetElementable interface {
-	Unwrap() *raw.PHProjectAssetElement
-	CloudAssetIdentifier() *photos.PHCloudIdentifier
+	obj.Object
+	CloudAssetIdentifier() obj.Object
 	Annotation() string
 	CropRect() corefoundation.CGRect
 	RegionsOfInterest() []*ProjectRegionOfInterest
@@ -108,3 +106,5 @@ type ProjectAssetElementable interface {
 }
 
 var _ ProjectAssetElementable = (*ProjectAssetElement)(nil)
+
+var _ ProjectElementProvider = (*ProjectAssetElement)(nil)

@@ -5,53 +5,65 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the playback rate.
+// ChangePlaybackRateCommandEvent is an idiomatic wrapper over the Objective-C class MPChangePlaybackRateCommandEvent.
 //
-// ChangePlaybackRateCommandEvent wraps [raw.MPChangePlaybackRateCommandEvent] with a fluent Go API.
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the playback rate.
 type ChangePlaybackRateCommandEvent struct {
-	inner *raw.MPChangePlaybackRateCommandEvent
+	RemoteCommandEvent
 }
 
-// Unwrap returns the underlying [raw.MPChangePlaybackRateCommandEvent].
-func (x *ChangePlaybackRateCommandEvent) Unwrap() *raw.MPChangePlaybackRateCommandEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangePlaybackRateCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangePlaybackRateCommandEventFromID adopts an existing object pointer as a ChangePlaybackRateCommandEvent (nil for 0).
+// ChangePlaybackRateCommandEventFromID adopts an existing Objective-C object as a ChangePlaybackRateCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangePlaybackRateCommandEventFromID(id objc.ID) *ChangePlaybackRateCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangePlaybackRateCommandEvent{inner: raw.MPChangePlaybackRateCommandEventFromID(id)}
+	x := &ChangePlaybackRateCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangePlaybackRateCommandEvent creates a new [ChangePlaybackRateCommandEvent].
+// changePlaybackRateCommandEventAdopt wraps an Objective-C object that this code just created as a
+// ChangePlaybackRateCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changePlaybackRateCommandEventAdopt(id objc.ID) *ChangePlaybackRateCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangePlaybackRateCommandEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangePlaybackRateCommandEvent creates a new ChangePlaybackRateCommandEvent.
 func NewChangePlaybackRateCommandEvent() *ChangePlaybackRateCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangePlaybackRateCommandEvent")), objc.RegisterName("new"))
-	return &ChangePlaybackRateCommandEvent{inner: raw.MPChangePlaybackRateCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangePlaybackRateCommandEvent")), objc.RegisterName("new"))
+	return changePlaybackRateCommandEventAdopt(_id)
 }
 
-// PlaybackRate calls the underlying PlaybackRate.
+// PlaybackRate wraps the corresponding Objective-C method.
 func (x *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
-	return x.inner.PlaybackRate()
-}
-
-func (x *ChangePlaybackRateCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("playbackRate"))
+	return _r
 }
 
 // ChangePlaybackRateCommandEventable is the interface implemented by [ChangePlaybackRateCommandEvent], for mocking and DI.
 type ChangePlaybackRateCommandEventable interface {
-	Unwrap() *raw.MPChangePlaybackRateCommandEvent
+	obj.Object
 	PlaybackRate() float32
 }
 
 var _ ChangePlaybackRateCommandEventable = (*ChangePlaybackRateCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*ChangePlaybackRateCommandEvent)(nil)

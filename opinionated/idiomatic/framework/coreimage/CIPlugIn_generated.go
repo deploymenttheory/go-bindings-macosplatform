@@ -5,41 +5,76 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The mechanism for loading image units in macOS.
+// PlugIn is an idiomatic wrapper over the Objective-C class CIPlugIn.
 //
-// PlugIn wraps [raw.CIPlugIn] with a fluent Go API.
+// The mechanism for loading image units in macOS.
 type PlugIn struct {
-	inner *raw.CIPlugIn
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIPlugIn].
-func (x *PlugIn) Unwrap() *raw.CIPlugIn { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlugIn) ID() objc.ID { return x.inner.Ptr() }
-
-// PlugInFromID adopts an existing object pointer as a PlugIn (nil for 0).
+// PlugInFromID adopts an existing Objective-C object as a PlugIn
+// (nil for 0), retaining it and registering a release finalizer.
 func PlugInFromID(id objc.ID) *PlugIn {
 	if id == 0 {
 		return nil
 	}
-	return &PlugIn{inner: raw.CIPlugInFromID(id)}
+	x := &PlugIn{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlugIn creates a new [PlugIn].
+// plugInAdopt wraps an Objective-C object that this code just created as a
+// PlugIn (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func plugInAdopt(id objc.ID) *PlugIn {
+	if id == 0 {
+		return nil
+	}
+	x := &PlugIn{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlugIn) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlugIn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlugIn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlugIn) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlugIn creates a new PlugIn.
 func NewPlugIn() *PlugIn {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIPlugIn")), objc.RegisterName("new"))
-	return &PlugIn{inner: raw.CIPlugInFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CIPlugIn")), objc.RegisterName("new"))
+	return plugInAdopt(_id)
 }
 
 // PlugInable is the interface implemented by [PlugIn], for mocking and DI.
 type PlugInable interface {
-	Unwrap() *raw.CIPlugIn
+	obj.Object
 }
 
 var _ PlugInable = (*PlugIn)(nil)

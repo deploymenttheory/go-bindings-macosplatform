@@ -5,45 +5,60 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An asset with a duration that the system can extend without modifying its existing media data.
+// FragmentedAsset is an idiomatic wrapper over the Objective-C class AVFragmentedAsset.
 //
-// FragmentedAsset wraps [raw.AVFragmentedAsset] with a fluent Go API.
+// It embeds [URLAsset], promoting that type's methods.
+//
+// An asset with a duration that the system can extend without modifying its existing media data.
 type FragmentedAsset struct {
-	inner *raw.AVFragmentedAsset
+	URLAsset
 }
 
-// Unwrap returns the underlying [raw.AVFragmentedAsset].
-func (x *FragmentedAsset) Unwrap() *raw.AVFragmentedAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FragmentedAsset) ID() objc.ID { return x.inner.Ptr() }
-
-// FragmentedAssetFromID adopts an existing object pointer as a FragmentedAsset (nil for 0).
+// FragmentedAssetFromID adopts an existing Objective-C object as a FragmentedAsset
+// (nil for 0), retaining it and registering a release finalizer.
 func FragmentedAssetFromID(id objc.ID) *FragmentedAsset {
 	if id == 0 {
 		return nil
 	}
-	return &FragmentedAsset{inner: raw.AVFragmentedAssetFromID(id)}
+	x := &FragmentedAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFragmentedAsset creates a new [FragmentedAsset].
+// fragmentedAssetAdopt wraps an Objective-C object that this code just created as a
+// FragmentedAsset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fragmentedAssetAdopt(id objc.ID) *FragmentedAsset {
+	if id == 0 {
+		return nil
+	}
+	x := &FragmentedAsset{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFragmentedAsset creates a new FragmentedAsset.
 func NewFragmentedAsset() *FragmentedAsset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVFragmentedAsset")), objc.RegisterName("new"))
-	return &FragmentedAsset{inner: raw.AVFragmentedAssetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAsset")), objc.RegisterName("new"))
+	return fragmentedAssetAdopt(_id)
 }
-
-func (x *FragmentedAsset) asURLAsset() *raw.AVURLAsset { return &x.inner.AVURLAsset }
-
-func (x *FragmentedAsset) asAsset() *raw.AVAsset { return &x.inner.AVURLAsset.AVAsset }
 
 // FragmentedAssetable is the interface implemented by [FragmentedAsset], for mocking and DI.
 type FragmentedAssetable interface {
-	Unwrap() *raw.AVFragmentedAsset
+	obj.Object
 }
 
 var _ FragmentedAssetable = (*FragmentedAsset)(nil)
+
+var _ URLAssetProvider = (*FragmentedAsset)(nil)
+
+var _ AssetProvider = (*FragmentedAsset)(nil)

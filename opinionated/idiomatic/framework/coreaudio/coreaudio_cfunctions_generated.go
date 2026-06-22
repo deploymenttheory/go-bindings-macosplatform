@@ -5,178 +5,71 @@
 package coreaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// AudioConvertHostTimeToNanos calls [raw.AudioConvertHostTimeToNanos] (C function AudioConvertHostTimeToNanos).
+var _fnAudioConvertHostTimeToNanos func(uint64) uint64
+
+// AudioConvertHostTimeToNanos calls the CoreAudio framework function AudioConvertHostTimeToNanos.
 func AudioConvertHostTimeToNanos(inHostTime uint64) uint64 {
-	return raw.AudioConvertHostTimeToNanos(inHostTime)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConvertHostTimeToNanos == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConvertHostTimeToNanos, _lib, "AudioConvertHostTimeToNanos")
+	}
+	return _fnAudioConvertHostTimeToNanos(inHostTime)
 }
 
-// AudioConvertNanosToHostTime calls [raw.AudioConvertNanosToHostTime] (C function AudioConvertNanosToHostTime).
+var _fnAudioConvertNanosToHostTime func(uint64) uint64
+
+// AudioConvertNanosToHostTime calls the CoreAudio framework function AudioConvertNanosToHostTime.
 func AudioConvertNanosToHostTime(inNanos uint64) uint64 {
-	return raw.AudioConvertNanosToHostTime(inNanos)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConvertNanosToHostTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConvertNanosToHostTime, _lib, "AudioConvertNanosToHostTime")
+	}
+	return _fnAudioConvertNanosToHostTime(inNanos)
 }
 
-// AudioDeviceAddIOProc calls [raw.AudioDeviceAddIOProc] (C function AudioDeviceAddIOProc).
-func AudioDeviceAddIOProc(inDevice uint, inProc unsafe.Pointer, inClientData unsafe.Pointer) int {
-	return raw.AudioDeviceAddIOProc(inDevice, inProc, inClientData)
-}
+var _fnAudioGetCurrentHostTime func() uint64
 
-// AudioDeviceAddPropertyListener calls [raw.AudioDeviceAddPropertyListener] (C function AudioDeviceAddPropertyListener).
-func AudioDeviceAddPropertyListener(inDevice uint, inChannel uint, isInput uint8, inPropertyID uint, inProc unsafe.Pointer, inClientData unsafe.Pointer) int {
-	return raw.AudioDeviceAddPropertyListener(inDevice, inChannel, isInput, inPropertyID, inProc, inClientData)
-}
-
-// AudioDeviceCreateIOProcID calls [raw.AudioDeviceCreateIOProcID] (C function AudioDeviceCreateIOProcID).
-func AudioDeviceCreateIOProcID(inDevice uint, inProc unsafe.Pointer, inClientData unsafe.Pointer, outIOProcID unsafe.Pointer) int {
-	return raw.AudioDeviceCreateIOProcID(inDevice, inProc, inClientData, outIOProcID)
-}
-
-// AudioDeviceCreateIOProcIDWithBlock calls [raw.AudioDeviceCreateIOProcIDWithBlock] (C function AudioDeviceCreateIOProcIDWithBlock).
-func AudioDeviceCreateIOProcIDWithBlock(outIOProcID unsafe.Pointer, inDevice uint, inDispatchQueue *foundation.NSObject, inIOBlock func(*coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList, unsafe.Pointer)) int {
-	return raw.AudioDeviceCreateIOProcIDWithBlock(outIOProcID, inDevice, inDispatchQueue, inIOBlock)
-}
-
-// AudioDeviceDestroyIOProcID calls [raw.AudioDeviceDestroyIOProcID] (C function AudioDeviceDestroyIOProcID).
-func AudioDeviceDestroyIOProcID(inDevice uint, inIOProcID unsafe.Pointer) int {
-	return raw.AudioDeviceDestroyIOProcID(inDevice, inIOProcID)
-}
-
-// AudioDeviceGetProperty calls [raw.AudioDeviceGetProperty] (C function AudioDeviceGetProperty).
-func AudioDeviceGetProperty(inDevice uint, inChannel uint, isInput uint8, inPropertyID uint, ioPropertyDataSize *uint, outPropertyData unsafe.Pointer) int {
-	return raw.AudioDeviceGetProperty(inDevice, inChannel, isInput, inPropertyID, ioPropertyDataSize, outPropertyData)
-}
-
-// AudioDeviceRemoveIOProc calls [raw.AudioDeviceRemoveIOProc] (C function AudioDeviceRemoveIOProc).
-func AudioDeviceRemoveIOProc(inDevice uint, inProc unsafe.Pointer) int {
-	return raw.AudioDeviceRemoveIOProc(inDevice, inProc)
-}
-
-// AudioDeviceRemovePropertyListener calls [raw.AudioDeviceRemovePropertyListener] (C function AudioDeviceRemovePropertyListener).
-func AudioDeviceRemovePropertyListener(inDevice uint, inChannel uint, isInput uint8, inPropertyID uint, inProc unsafe.Pointer) int {
-	return raw.AudioDeviceRemovePropertyListener(inDevice, inChannel, isInput, inPropertyID, inProc)
-}
-
-// AudioDeviceSetProperty calls [raw.AudioDeviceSetProperty] (C function AudioDeviceSetProperty).
-func AudioDeviceSetProperty(inDevice uint, inWhen *coreaudiotypes.AudioTimeStamp, inChannel uint, isInput uint8, inPropertyID uint, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
-	return raw.AudioDeviceSetProperty(inDevice, inWhen, inChannel, isInput, inPropertyID, inPropertyDataSize, inPropertyData)
-}
-
-// AudioDeviceStart calls [raw.AudioDeviceStart] (C function AudioDeviceStart).
-func AudioDeviceStart(inDevice uint, inProcID unsafe.Pointer) int {
-	return raw.AudioDeviceStart(inDevice, inProcID)
-}
-
-// AudioDeviceStartAtTime calls [raw.AudioDeviceStartAtTime] (C function AudioDeviceStartAtTime).
-func AudioDeviceStartAtTime(inDevice uint, inProcID unsafe.Pointer, ioRequestedStartTime *coreaudiotypes.AudioTimeStamp, inFlags uint) int {
-	return raw.AudioDeviceStartAtTime(inDevice, inProcID, ioRequestedStartTime, inFlags)
-}
-
-// AudioDeviceStop calls [raw.AudioDeviceStop] (C function AudioDeviceStop).
-func AudioDeviceStop(inDevice uint, inProcID unsafe.Pointer) int {
-	return raw.AudioDeviceStop(inDevice, inProcID)
-}
-
-// AudioGetCurrentHostTime calls [raw.AudioGetCurrentHostTime] (C function AudioGetCurrentHostTime).
+// AudioGetCurrentHostTime calls the CoreAudio framework function AudioGetCurrentHostTime.
 func AudioGetCurrentHostTime() uint64 {
-	return raw.AudioGetCurrentHostTime()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioGetCurrentHostTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioGetCurrentHostTime, _lib, "AudioGetCurrentHostTime")
+	}
+	return _fnAudioGetCurrentHostTime()
 }
 
-// AudioGetHostClockFrequency calls [raw.AudioGetHostClockFrequency] (C function AudioGetHostClockFrequency).
+var _fnAudioGetHostClockFrequency func() float64
+
+// AudioGetHostClockFrequency calls the CoreAudio framework function AudioGetHostClockFrequency.
 func AudioGetHostClockFrequency() float64 {
-	return raw.AudioGetHostClockFrequency()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioGetHostClockFrequency == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioGetHostClockFrequency, _lib, "AudioGetHostClockFrequency")
+	}
+	return _fnAudioGetHostClockFrequency()
 }
 
-// AudioGetHostClockMinimumTimeDelta calls [raw.AudioGetHostClockMinimumTimeDelta] (C function AudioGetHostClockMinimumTimeDelta).
-func AudioGetHostClockMinimumTimeDelta() uint {
-	return raw.AudioGetHostClockMinimumTimeDelta()
+var _fnAudioGetHostClockMinimumTimeDelta func() int
+
+// AudioGetHostClockMinimumTimeDelta calls the CoreAudio framework function AudioGetHostClockMinimumTimeDelta.
+func AudioGetHostClockMinimumTimeDelta() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioGetHostClockMinimumTimeDelta == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioGetHostClockMinimumTimeDelta, _lib, "AudioGetHostClockMinimumTimeDelta")
+	}
+	return _fnAudioGetHostClockMinimumTimeDelta()
 }
 
-// AudioHardwareAddPropertyListener calls [raw.AudioHardwareAddPropertyListener] (C function AudioHardwareAddPropertyListener).
-func AudioHardwareAddPropertyListener(inPropertyID uint, inProc unsafe.Pointer, inClientData unsafe.Pointer) int {
-	return raw.AudioHardwareAddPropertyListener(inPropertyID, inProc, inClientData)
-}
+var _fnAudioObjectShow func(int)
 
-// AudioHardwareGetProperty calls [raw.AudioHardwareGetProperty] (C function AudioHardwareGetProperty).
-func AudioHardwareGetProperty(inPropertyID uint, ioPropertyDataSize *uint, outPropertyData unsafe.Pointer) int {
-	return raw.AudioHardwareGetProperty(inPropertyID, ioPropertyDataSize, outPropertyData)
-}
-
-// AudioHardwareRemovePropertyListener calls [raw.AudioHardwareRemovePropertyListener] (C function AudioHardwareRemovePropertyListener).
-func AudioHardwareRemovePropertyListener(inPropertyID uint, inProc unsafe.Pointer) int {
-	return raw.AudioHardwareRemovePropertyListener(inPropertyID, inProc)
-}
-
-// AudioHardwareSetProperty calls [raw.AudioHardwareSetProperty] (C function AudioHardwareSetProperty).
-func AudioHardwareSetProperty(inPropertyID uint, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
-	return raw.AudioHardwareSetProperty(inPropertyID, inPropertyDataSize, inPropertyData)
-}
-
-// AudioObjectAddPropertyListener calls [raw.AudioObjectAddPropertyListener] (C function AudioObjectAddPropertyListener).
-func AudioObjectAddPropertyListener(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inListener unsafe.Pointer, inClientData unsafe.Pointer) int {
-	return raw.AudioObjectAddPropertyListener(inObjectID, inAddress, inListener, inClientData)
-}
-
-// AudioObjectAddPropertyListenerBlock calls [raw.AudioObjectAddPropertyListenerBlock] (C function AudioObjectAddPropertyListenerBlock).
-func AudioObjectAddPropertyListenerBlock(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inDispatchQueue *foundation.NSObject, inListener func(uint, *raw.AudioObjectPropertyAddress)) int {
-	return raw.AudioObjectAddPropertyListenerBlock(inObjectID, inAddress, inDispatchQueue, inListener)
-}
-
-// AudioObjectGetPropertyData calls [raw.AudioObjectGetPropertyData] (C function AudioObjectGetPropertyData).
-func AudioObjectGetPropertyData(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inQualifierDataSize uint, inQualifierData unsafe.Pointer, ioDataSize *uint, outData unsafe.Pointer) int {
-	return raw.AudioObjectGetPropertyData(inObjectID, inAddress, inQualifierDataSize, inQualifierData, ioDataSize, outData)
-}
-
-// AudioObjectGetPropertyDataSize calls [raw.AudioObjectGetPropertyDataSize] (C function AudioObjectGetPropertyDataSize).
-func AudioObjectGetPropertyDataSize(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inQualifierDataSize uint, inQualifierData unsafe.Pointer, outDataSize *uint) int {
-	return raw.AudioObjectGetPropertyDataSize(inObjectID, inAddress, inQualifierDataSize, inQualifierData, outDataSize)
-}
-
-// AudioObjectHasProperty calls [raw.AudioObjectHasProperty] (C function AudioObjectHasProperty).
-func AudioObjectHasProperty(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress) uint8 {
-	return raw.AudioObjectHasProperty(inObjectID, inAddress)
-}
-
-// AudioObjectRemovePropertyListener calls [raw.AudioObjectRemovePropertyListener] (C function AudioObjectRemovePropertyListener).
-func AudioObjectRemovePropertyListener(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inListener unsafe.Pointer, inClientData unsafe.Pointer) int {
-	return raw.AudioObjectRemovePropertyListener(inObjectID, inAddress, inListener, inClientData)
-}
-
-// AudioObjectRemovePropertyListenerBlock calls [raw.AudioObjectRemovePropertyListenerBlock] (C function AudioObjectRemovePropertyListenerBlock).
-func AudioObjectRemovePropertyListenerBlock(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inDispatchQueue *foundation.NSObject, inListener func(uint, *raw.AudioObjectPropertyAddress)) int {
-	return raw.AudioObjectRemovePropertyListenerBlock(inObjectID, inAddress, inDispatchQueue, inListener)
-}
-
-// AudioObjectSetPropertyData calls [raw.AudioObjectSetPropertyData] (C function AudioObjectSetPropertyData).
-func AudioObjectSetPropertyData(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, inQualifierDataSize uint, inQualifierData unsafe.Pointer, inDataSize uint, inData unsafe.Pointer) int {
-	return raw.AudioObjectSetPropertyData(inObjectID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData)
-}
-
-// AudioObjectShow calls [raw.AudioObjectShow] (C function AudioObjectShow).
-func AudioObjectShow(inObjectID uint) {
-	raw.AudioObjectShow(inObjectID)
-}
-
-// AudioStreamAddPropertyListener calls [raw.AudioStreamAddPropertyListener] (C function AudioStreamAddPropertyListener).
-func AudioStreamAddPropertyListener(inStream uint, inChannel uint, inPropertyID uint, inProc unsafe.Pointer, inClientData unsafe.Pointer) int {
-	return raw.AudioStreamAddPropertyListener(inStream, inChannel, inPropertyID, inProc, inClientData)
-}
-
-// AudioStreamGetProperty calls [raw.AudioStreamGetProperty] (C function AudioStreamGetProperty).
-func AudioStreamGetProperty(inStream uint, inChannel uint, inPropertyID uint, ioPropertyDataSize *uint, outPropertyData unsafe.Pointer) int {
-	return raw.AudioStreamGetProperty(inStream, inChannel, inPropertyID, ioPropertyDataSize, outPropertyData)
-}
-
-// AudioStreamRemovePropertyListener calls [raw.AudioStreamRemovePropertyListener] (C function AudioStreamRemovePropertyListener).
-func AudioStreamRemovePropertyListener(inStream uint, inChannel uint, inPropertyID uint, inProc unsafe.Pointer) int {
-	return raw.AudioStreamRemovePropertyListener(inStream, inChannel, inPropertyID, inProc)
-}
-
-// AudioStreamSetProperty calls [raw.AudioStreamSetProperty] (C function AudioStreamSetProperty).
-func AudioStreamSetProperty(inStream uint, inWhen *coreaudiotypes.AudioTimeStamp, inChannel uint, inPropertyID uint, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
-	return raw.AudioStreamSetProperty(inStream, inWhen, inChannel, inPropertyID, inPropertyDataSize, inPropertyData)
+// AudioObjectShow calls the CoreAudio framework function AudioObjectShow.
+func AudioObjectShow(inObjectID int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioObjectShow == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioObjectShow, _lib, "AudioObjectShow")
+	}
+	_fnAudioObjectShow(inObjectID)
 }

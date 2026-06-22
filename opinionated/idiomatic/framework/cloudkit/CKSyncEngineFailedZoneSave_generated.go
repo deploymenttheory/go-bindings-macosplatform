@@ -5,62 +5,83 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that describes an unsuccessful attempt to modify a single record zone.
+// SyncEngineFailedZoneSave is an idiomatic wrapper over the Objective-C class CKSyncEngineFailedZoneSave.
 //
-// SyncEngineFailedZoneSave wraps [raw.CKSyncEngineFailedZoneSave] with a fluent Go API.
+// An object that describes an unsuccessful attempt to modify a single record zone.
 type SyncEngineFailedZoneSave struct {
-	inner *raw.CKSyncEngineFailedZoneSave
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFailedZoneSave].
-func (x *SyncEngineFailedZoneSave) Unwrap() *raw.CKSyncEngineFailedZoneSave { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFailedZoneSave) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFailedZoneSaveFromID adopts an existing object pointer as a SyncEngineFailedZoneSave (nil for 0).
+// SyncEngineFailedZoneSaveFromID adopts an existing Objective-C object as a SyncEngineFailedZoneSave
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFailedZoneSaveFromID(id objc.ID) *SyncEngineFailedZoneSave {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFailedZoneSave{inner: raw.CKSyncEngineFailedZoneSaveFromID(id)}
+	x := &SyncEngineFailedZoneSave{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineFailedZoneSave creates a new [SyncEngineFailedZoneSave].
-func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFailedZoneSave")), objc.RegisterName("new"))
-	return &SyncEngineFailedZoneSave{inner: raw.CKSyncEngineFailedZoneSaveFromID(_id)}
-}
-
-// The record zone that CloudKit is unable to modify.
-//
-// RecordZone calls the underlying RecordZone.
-func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
-	_r := x.inner.RecordZone()
-	if _r == nil {
+// syncEngineFailedZoneSaveAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFailedZoneSave (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFailedZoneSaveAdopt(id objc.ID) *SyncEngineFailedZoneSave {
+	if id == 0 {
 		return nil
 	}
-	return &RecordZone{inner: _r}
+	x := &SyncEngineFailedZoneSave{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A error that describes the reason for the unsuccessful attempt to modify the associated record zone.
-//
-// Error calls the underlying Error.
-func (x *SyncEngineFailedZoneSave) Error() unsafe.Pointer {
-	return x.inner.Error()
+// Description returns the object's -description text.
+func (x *SyncEngineFailedZoneSave) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFailedZoneSave) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFailedZoneSave) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFailedZoneSave) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineFailedZoneSave creates a new SyncEngineFailedZoneSave.
+func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFailedZoneSave")), objc.RegisterName("new"))
+	return syncEngineFailedZoneSaveAdopt(_id)
+}
+
+// RecordZone the record zone that CloudKit is unable to modify.
+func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZone"))
+	return RecordZoneFromID(_r)
 }
 
 // SyncEngineFailedZoneSaveable is the interface implemented by [SyncEngineFailedZoneSave], for mocking and DI.
 type SyncEngineFailedZoneSaveable interface {
-	Unwrap() *raw.CKSyncEngineFailedZoneSave
+	obj.Object
 	RecordZone() *RecordZone
-	Error() unsafe.Pointer
 }
 
 var _ SyncEngineFailedZoneSaveable = (*SyncEngineFailedZoneSave)(nil)

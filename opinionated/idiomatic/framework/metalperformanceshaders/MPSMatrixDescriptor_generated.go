@@ -5,150 +5,150 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of attributes used to create an MPS matrix.
+// MatrixDescriptor is an idiomatic wrapper over the Objective-C class MPSMatrixDescriptor.
 //
-// MatrixDescriptor wraps [raw.MPSMatrixDescriptor] with a fluent Go API.
+// A description of attributes used to create an MPS matrix.
 type MatrixDescriptor struct {
-	inner *raw.MPSMatrixDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixDescriptor].
-func (x *MatrixDescriptor) Unwrap() *raw.MPSMatrixDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixDescriptorFromID adopts an existing object pointer as a MatrixDescriptor (nil for 0).
+// MatrixDescriptorFromID adopts an existing Objective-C object as a MatrixDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixDescriptorFromID(id objc.ID) *MatrixDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixDescriptor{inner: raw.MPSMatrixDescriptorFromID(id)}
+	x := &MatrixDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatrixDescriptor creates a new [MatrixDescriptor].
+// matrixDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MatrixDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixDescriptorAdopt(id objc.ID) *MatrixDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatrixDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMatrixDescriptor creates a new MatrixDescriptor.
 func NewMatrixDescriptor() *MatrixDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixDescriptor")), objc.RegisterName("new"))
-	return &MatrixDescriptor{inner: raw.MPSMatrixDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("new"))
+	return matrixDescriptorAdopt(_id)
 }
 
-// The number of rows in the matrix.
-//
-// WithRows sets the rows property and returns the receiver for chaining.
-func (x *MatrixDescriptor) WithRows(rows uint) *MatrixDescriptor {
-	x.inner.SetRows(rows)
+// WithRows the number of rows in the matrix.
+func (x *MatrixDescriptor) WithRows(rows int) *MatrixDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRows:"), rows)
 	return x
 }
 
-// The number of columns in the matrix.
-//
-// WithColumns sets the columns property and returns the receiver for chaining.
-func (x *MatrixDescriptor) WithColumns(columns uint) *MatrixDescriptor {
-	x.inner.SetColumns(columns)
+// WithColumns the number of columns in the matrix.
+func (x *MatrixDescriptor) WithColumns(columns int) *MatrixDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumns:"), columns)
 	return x
 }
 
-// The type of the values in the matrix.
-//
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *MatrixDescriptor) WithDataType(dataType mpscore.MPSDataType) *MatrixDescriptor {
-	x.inner.SetDataType(dataType)
+// WithRowBytes the stride, in bytes, between corresponding elements of consecutive rows in the matrix.
+func (x *MatrixDescriptor) WithRowBytes(rowBytes int) *MatrixDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowBytes:"), rowBytes)
 	return x
 }
 
-// The stride, in bytes, between corresponding elements of consecutive rows in the matrix.
-//
-// WithRowBytes sets the rowBytes property and returns the receiver for chaining.
-func (x *MatrixDescriptor) WithRowBytes(rowBytes uint) *MatrixDescriptor {
-	x.inner.SetRowBytes(rowBytes)
-	return x
+// Rows the number of rows in a matrix.
+func (x *MatrixDescriptor) Rows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+	return _r
 }
 
-// @property   rows @discussion The number of rows in a matrix.
-//
-// Rows calls the underlying Rows.
-func (x *MatrixDescriptor) Rows() uint {
-	return x.inner.Rows()
+// SetRows wraps the corresponding Objective-C method.
+func (x *MatrixDescriptor) SetRows(rows int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRows:"), rows)
 }
 
-// SetRows calls the underlying SetRows.
-func (x *MatrixDescriptor) SetRows(rows uint) {
-	x.inner.SetRows(rows)
+// Columns the number of columns in a matrix.
+func (x *MatrixDescriptor) Columns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+	return _r
 }
 
-// @property   columns @discussion The number of columns in a matrix.
-//
-// Columns calls the underlying Columns.
-func (x *MatrixDescriptor) Columns() uint {
-	return x.inner.Columns()
+// SetColumns wraps the corresponding Objective-C method.
+func (x *MatrixDescriptor) SetColumns(columns int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumns:"), columns)
 }
 
-// SetColumns calls the underlying SetColumns.
-func (x *MatrixDescriptor) SetColumns(columns uint) {
-	x.inner.SetColumns(columns)
+// Matrices the number of matrices.
+func (x *MatrixDescriptor) Matrices() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrices"))
+	return _r
 }
 
-// @property   matrices @discussion The number of matrices.
-//
-// Matrices calls the underlying Matrices.
-func (x *MatrixDescriptor) Matrices() uint {
-	return x.inner.Matrices()
+// RowBytes the stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
+func (x *MatrixDescriptor) RowBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowBytes"))
+	return _r
 }
 
-// @property   dataType @discussion The type of the data which makes up the values of the matrix.
-//
-// DataType calls the underlying DataType.
-func (x *MatrixDescriptor) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
+// SetRowBytes wraps the corresponding Objective-C method.
+func (x *MatrixDescriptor) SetRowBytes(rowBytes int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowBytes:"), rowBytes)
 }
 
-// SetDataType calls the underlying SetDataType.
-func (x *MatrixDescriptor) SetDataType(dataType mpscore.MPSDataType) {
-	x.inner.SetDataType(dataType)
-}
-
-// @property   rowBytes @discussion The stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
-//
-// RowBytes calls the underlying RowBytes.
-func (x *MatrixDescriptor) RowBytes() uint {
-	return x.inner.RowBytes()
-}
-
-// SetRowBytes calls the underlying SetRowBytes.
-func (x *MatrixDescriptor) SetRowBytes(rowBytes uint) {
-	x.inner.SetRowBytes(rowBytes)
-}
-
-// @property   matrixBytes @discussion The stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
-//
-// MatrixBytes calls the underlying MatrixBytes.
-func (x *MatrixDescriptor) MatrixBytes() uint {
-	return x.inner.MatrixBytes()
+// MatrixBytes the stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
+func (x *MatrixDescriptor) MatrixBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrixBytes"))
+	return _r
 }
 
 // MatrixDescriptorable is the interface implemented by [MatrixDescriptor], for mocking and DI.
 type MatrixDescriptorable interface {
-	Unwrap() *raw.MPSMatrixDescriptor
-	WithRows(rows uint) *MatrixDescriptor
-	WithColumns(columns uint) *MatrixDescriptor
-	WithDataType(dataType mpscore.MPSDataType) *MatrixDescriptor
-	WithRowBytes(rowBytes uint) *MatrixDescriptor
-	Rows() uint
-	SetRows(rows uint)
-	Columns() uint
-	SetColumns(columns uint)
-	Matrices() uint
-	DataType() mpscore.MPSDataType
-	SetDataType(dataType mpscore.MPSDataType)
-	RowBytes() uint
-	SetRowBytes(rowBytes uint)
-	MatrixBytes() uint
+	obj.Object
+	WithRows(rows int) *MatrixDescriptor
+	WithColumns(columns int) *MatrixDescriptor
+	WithRowBytes(rowBytes int) *MatrixDescriptor
+	Rows() int
+	SetRows(rows int)
+	Columns() int
+	SetColumns(columns int)
+	Matrices() int
+	RowBytes() int
+	SetRowBytes(rowBytes int)
+	MatrixBytes() int
 }
 
 var _ MatrixDescriptorable = (*MatrixDescriptor)(nil)

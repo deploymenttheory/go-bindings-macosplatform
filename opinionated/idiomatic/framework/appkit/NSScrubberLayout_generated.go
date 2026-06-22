@@ -5,143 +5,148 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that describes the layout of items within a scrubber control.
+// ScrubberLayout is an idiomatic wrapper over the Objective-C class NSScrubberLayout.
 //
-// ScrubberLayout wraps [raw.NSScrubberLayout] with a fluent Go API.
+// ScrubberLayout is an abstract base — you do not construct it directly. Construct one of [ScrubberFlowLayout], [ScrubberProportionalLayout] and pass it where a ScrubberLayout is accepted.
+//
+// An abstract class that describes the layout of items within a scrubber control.
 type ScrubberLayout struct {
-	inner *raw.NSScrubberLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScrubberLayout].
-func (x *ScrubberLayout) Unwrap() *raw.NSScrubberLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrubberLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrubberLayoutFromID adopts an existing object pointer as a ScrubberLayout (nil for 0).
+// ScrubberLayoutFromID adopts an existing Objective-C object as a ScrubberLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrubberLayoutFromID(id objc.ID) *ScrubberLayout {
 	if id == 0 {
 		return nil
 	}
-	return &ScrubberLayout{inner: raw.NSScrubberLayoutFromID(id)}
+	x := &ScrubberLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScrubberLayout creates a new [ScrubberLayout].
-func NewScrubberLayout() *ScrubberLayout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberLayout")), objc.RegisterName("new"))
-	return &ScrubberLayout{inner: raw.NSScrubberLayoutFromID(_id)}
+// scrubberLayoutAdopt wraps an Objective-C object that this code just created as a
+// ScrubberLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrubberLayoutAdopt(id objc.ID) *ScrubberLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &ScrubberLayout{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a newly allocated scrubber layout object from a storyboard or nib file.
-//
-// NewScrubberLayoutWithCoder creates a new [ScrubberLayout].
-func NewScrubberLayoutWithCoder(coder *foundation.NSCoder) *ScrubberLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ScrubberLayout{inner: raw.NSScrubberLayoutFromID(_id)}
+// Description returns the object's -description text.
+func (x *ScrubberLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Signals that the layout has been invalidated, and that the scrubber control should perform a new layout pass.
-//
-// InvalidateLayout calls the underlying InvalidateLayout.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScrubberLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScrubberLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScrubberLayout) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScrubberLayoutWithCoder initializes and returns a newly allocated scrubber layout object from a storyboard or nib file.
+func NewScrubberLayoutWithCoder(coder obj.Object) *ScrubberLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberLayout")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return scrubberLayoutAdopt(_id)
+}
+
+// InvalidateLayout signals that the layout has been invalidated, and that the scrubber control should perform a new layout pass.
 func (x *ScrubberLayout) InvalidateLayout() {
-	x.inner.InvalidateLayout()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayout"))
 }
 
-// Gives you an opportunity to perform layout calculations when the scrubber’s layout is invalidated.
-//
-// PrepareLayout calls the underlying PrepareLayout.
+// PrepareLayout gives you an opportunity to perform layout calculations when the scrubber’s layout is invalidated.
 func (x *ScrubberLayout) PrepareLayout() {
-	x.inner.PrepareLayout()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareLayout"))
 }
 
-// The layout attributes for the item with the specified index.
-//
-// LayoutAttributesForItemAtIndex calls the underlying LayoutAttributesForItemAtIndex.
+// LayoutAttributesForItemAtIndex the layout attributes for the item with the specified index.
 func (x *ScrubberLayout) LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes {
-	_r := x.inner.LayoutAttributesForItemAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &ScrubberLayoutAttributes{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForItemAtIndex:"), index)
+	return ScrubberLayoutAttributesFromID(_r)
 }
 
-// The set of layout attributes for all items within the provided rectangle.
-//
-// LayoutAttributesForItemsInRect calls the underlying LayoutAttributesForItemsInRect.
-func (x *ScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*raw.NSScrubberLayoutAttributes] {
-	return x.inner.LayoutAttributesForItemsInRect(rect)
+// LayoutAttributesForItemsInRect the set of layout attributes for all items within the provided rectangle.
+func (x *ScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutAttributesForItemsInRect:"), rect)
+	return obj.Wrap(_r)
 }
 
-// Determines whether the scrubber should refresh its layout in response to a change of its visible region.
-//
-// ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect calls the underlying ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect.
+// ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect determines whether the scrubber should refresh its layout in response to a change of its visible region.
 func (x *ScrubberLayout) ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool {
-	return x.inner.ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect, toVisibleRect)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldInvalidateLayoutForChangeFromVisibleRect:toVisibleRect:"), fromVisibleRect, toVisibleRect)
+	return _r
 }
 
-// The NSScrubber control that this layout is assigned to, or @c nil if the receiver is not assigned to a scrubber.
-//
-// Scrubber calls the underlying Scrubber.
+// Scrubber the NSScrubber control that this layout is assigned to, or
 func (x *ScrubberLayout) Scrubber() *Scrubber {
-	_r := x.inner.Scrubber()
-	if _r == nil {
-		return nil
-	}
-	return &Scrubber{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrubber"))
+	return ScrubberFromID(_r)
 }
 
-// The currently visible rectangle, in the coordinate space of the scrubber content. Returns @c NSZeroRect if the receiver is not assigned to a scrubber.
-//
-// VisibleRect calls the underlying VisibleRect.
+// VisibleRect the currently visible rectangle, in the coordinate space of the scrubber content. Returns
 func (x *ScrubberLayout) VisibleRect() corefoundation.CGRect {
-	return x.inner.VisibleRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("visibleRect"))
+	return _r
 }
 
-// Returns the content size for all elements within the scrubber. The base implementation returns @c NSZeroSize.
-//
-// ScrubberContentSize calls the underlying ScrubberContentSize.
+// ScrubberContentSize returns the content size for all elements within the scrubber. The base implementation returns
 func (x *ScrubberLayout) ScrubberContentSize() corefoundation.CGSize {
-	return x.inner.ScrubberContentSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("scrubberContentSize"))
+	return _r
 }
 
-// If @c YES, the scrubber will invalidate its layout when the selection changes. The default value is @c NO. Subclasses should return @c YES if the selection index affects the item layout.
-//
-// ShouldInvalidateLayoutForSelectionChange calls the underlying ShouldInvalidateLayoutForSelectionChange.
+// ShouldInvalidateLayoutForSelectionChange if
 func (x *ScrubberLayout) ShouldInvalidateLayoutForSelectionChange() bool {
-	return x.inner.ShouldInvalidateLayoutForSelectionChange()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldInvalidateLayoutForSelectionChange"))
+	return _r
 }
 
-// If @c YES, the scrubber will invalidate its layout when an item is highlighted. The default value is @c NO. Subclasses should return @c YES if the highlight state affects the item layout.
-//
-// ShouldInvalidateLayoutForHighlightChange calls the underlying ShouldInvalidateLayoutForHighlightChange.
+// ShouldInvalidateLayoutForHighlightChange if
 func (x *ScrubberLayout) ShouldInvalidateLayoutForHighlightChange() bool {
-	return x.inner.ShouldInvalidateLayoutForHighlightChange()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldInvalidateLayoutForHighlightChange"))
+	return _r
 }
 
-// If @c YES, the layout object will automatically have its inputs and outputs mirrored in right-to-left interfaces. The default value is @c YES. Subclasses that wish to handle RTL layout manually should return @c NO.
-//
-// AutomaticallyMirrorsInRightToLeftLayout calls the underlying AutomaticallyMirrorsInRightToLeftLayout.
+// AutomaticallyMirrorsInRightToLeftLayout if
 func (x *ScrubberLayout) AutomaticallyMirrorsInRightToLeftLayout() bool {
-	return x.inner.AutomaticallyMirrorsInRightToLeftLayout()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyMirrorsInRightToLeftLayout"))
+	return _r
 }
-
-func (x *ScrubberLayout) asScrubberLayout() *raw.NSScrubberLayout { return x.inner }
 
 // ScrubberLayoutable is the interface implemented by [ScrubberLayout], for mocking and DI.
 type ScrubberLayoutable interface {
-	Unwrap() *raw.NSScrubberLayout
+	obj.Object
 	InvalidateLayout()
 	PrepareLayout()
 	LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes
-	LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*raw.NSScrubberLayoutAttributes]
+	LayoutAttributesForItemsInRect(rect corefoundation.CGRect) obj.Object
 	ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool
 	Scrubber() *Scrubber
 	VisibleRect() corefoundation.CGRect
@@ -152,3 +157,10 @@ type ScrubberLayoutable interface {
 }
 
 var _ ScrubberLayoutable = (*ScrubberLayout)(nil)
+
+// isScrubberLayout marks ScrubberLayout — and, by embedding promotion, its
+// subclasses — as a member of the ScrubberLayout hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScrubberLayout) isScrubberLayout() {}
+
+var _ ScrubberLayoutProvider = (*ScrubberLayout)(nil)

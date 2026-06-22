@@ -6,145 +6,125 @@ package corespotlight
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A type you use to initiate searches from your interface and offer suggested text completions.
+// UserQuery is an idiomatic wrapper over the Objective-C class CSUserQuery.
 //
-// UserQuery wraps [raw.CSUserQuery] with a fluent Go API.
+// It embeds [SearchQuery], promoting that type's methods.
+//
+// A type you use to initiate searches from your interface and offer suggested text completions.
 type UserQuery struct {
-	inner *raw.CSUserQuery
+	SearchQuery
 }
 
-// Unwrap returns the underlying [raw.CSUserQuery].
-func (x *UserQuery) Unwrap() *raw.CSUserQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// UserQueryFromID adopts an existing object pointer as a UserQuery (nil for 0).
+// UserQueryFromID adopts an existing Objective-C object as a UserQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func UserQueryFromID(id objc.ID) *UserQuery {
 	if id == 0 {
 		return nil
 	}
-	return &UserQuery{inner: raw.CSUserQueryFromID(id)}
-}
-
-// Creates a new user query that searches for the specified term.
-//
-// NewUserQueryWithUserQueryStringUserQueryContext creates a new [UserQuery].
-func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, userQueryContext *raw.CSUserQueryContext) *UserQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSUserQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserQueryString:userQueryContext:"), foundation.NSStringStringWithUTF8String(userQueryString).Ptr(), userQueryContext.Ptr())
-	return &UserQuery{inner: raw.CSUserQueryFromID(_id)}
-}
-
-// The block to execute when the query delivers a new batch of suggested items.
-//
-// WithFoundSuggestionsHandler sets the foundSuggestionsHandler property and returns the receiver for chaining.
-func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(*foundation.NSArray[*raw.CSSuggestion])) *UserQuery {
-	x.inner.SetFoundSuggestionsHandler(foundSuggestionsHandler)
+	x := &UserQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The block to execute when the query delivers a new batch of matching items.
-//
-// WithFoundItemsHandler sets the foundItemsHandler property and returns the receiver for chaining.
-func (x *UserQuery) WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *UserQuery {
-	x.inner.CSSearchQuery.SetFoundItemsHandler(foundItemsHandler)
-	return x
-}
-
-// The block to execute when the query finishes delivering all results.
-//
-// WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
-func (x *UserQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery {
-	x.inner.CSSearchQuery.SetCompletionHandler(completionHandler)
-	return x
-}
-
-// The protection types of the indexes you want to search.
-//
-// WithProtectionClasses sets the collection, converting the Go slice to an NSArray.
-func (x *UserQuery) WithProtectionClasses(items ...*foundation.NSString) *UserQuery {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CSSearchQuery.SetProtectionClasses(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
+// userQueryAdopt wraps an Objective-C object that this code just created as a
+// UserQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userQueryAdopt(id objc.ID) *UserQuery {
+	if id == 0 {
+		return nil
 	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CSSearchQuery.SetProtectionClasses(_arr)
+	x := &UserQuery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// UserEngagedWithItemVisibleItemsUserInteractionType calls the underlying UserEngagedWithItemVisibleItemsUserInteractionType.
-func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType CSUserInteraction) {
-	x.inner.UserEngagedWithItemVisibleItemsUserInteractionType(item, visibleItems, raw.CSUserInteraction(userInteractionType))
+// NewUserQueryWithUserQueryStringUserQueryContext creates a new user query that searches for the specified term.
+func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, userQueryContext *UserQueryContext) *UserQuery {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserQueryString:userQueryContext:"), purego.NSString(userQueryString), objref.IDOf(userQueryContext))
+	return userQueryAdopt(_id)
 }
 
-// UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType calls the underlying UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType.
-func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType CSUserInteraction) {
-	x.inner.UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion, visibleSuggestions, raw.CSUserInteraction(userInteractionType))
+// WithFoundSuggestionsHandler the block to execute when the query delivers a new batch of suggested items.
+func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(obj.Object)) *UserQuery {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundSuggestionsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundSuggestionsHandler(obj.Wrap(_b0)) }))
+	return x
 }
 
-// FoundSuggestionCount calls the underlying FoundSuggestionCount.
+// WithFoundItemsHandler the block to execute when the query delivers a new batch of matching items.
+func (x *UserQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
+	return x
+}
+
+// WithProtectionClasses the protection types of the indexes you want to search.
+func (x *UserQuery) WithProtectionClasses(items ...obj.Object) *UserQuery {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtectionClasses:"), _arr)
+	return x
+}
+
+// UserEngagedWithItemVisibleItemsUserInteractionType wraps the corresponding Objective-C method.
+func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:"), objref.IDOf(item), purego.SliceToNSArray(visibleItems, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), userInteractionType)
+}
+
+// UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType wraps the corresponding Objective-C method.
+func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:"), objref.IDOf(suggestion), purego.SliceToNSArray(visibleSuggestions, func(_v *Suggestion) objc.ID { return objref.IDOf(_v) }), userInteractionType)
+}
+
+// FoundSuggestionCount wraps the corresponding Objective-C method.
 func (x *UserQuery) FoundSuggestionCount() int {
-	return x.inner.FoundSuggestionCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("foundSuggestionCount"))
+	return _r
 }
 
-// FoundSuggestionsHandler calls the underlying FoundSuggestionsHandler.
-func (x *UserQuery) FoundSuggestionsHandler() objc.Block {
-	return x.inner.FoundSuggestionsHandler()
-}
-
+// SetFoundSuggestionsHandler wraps the corresponding Objective-C method.
+//
 // SetFoundSuggestionsHandler blocks until the operation completes or ctx is cancelled.
-func (x *UserQuery) SetFoundSuggestionsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSuggestion], error) {
+func (x *UserQuery) SetFoundSuggestionsHandler(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CSSuggestion]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetFoundSuggestionsHandler(func(_p0 *foundation.NSArray[*raw.CSSuggestion]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundSuggestionsHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CSSuggestion]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-func (x *UserQuery) asSearchQuery() *raw.CSSearchQuery { return &x.inner.CSSearchQuery }
-
 // UserQueryable is the interface implemented by [UserQuery], for mocking and DI.
 type UserQueryable interface {
-	Unwrap() *raw.CSUserQuery
-	WithFoundSuggestionsHandler(foundSuggestionsHandler func(*foundation.NSArray[*raw.CSSuggestion])) *UserQuery
-	WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *UserQuery
-	WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery
-	WithProtectionClasses(items ...*foundation.NSString) *UserQuery
-	UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType CSUserInteraction)
-	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType CSUserInteraction)
+	obj.Object
+	WithFoundSuggestionsHandler(foundSuggestionsHandler func(obj.Object)) *UserQuery
+	WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery
+	WithProtectionClasses(items ...obj.Object) *UserQuery
+	UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction)
+	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction)
 	FoundSuggestionCount() int
-	FoundSuggestionsHandler() objc.Block
-	SetFoundSuggestionsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSuggestion], error)
+	SetFoundSuggestionsHandler(ctx context.Context) (obj.Object, error)
 }
 
 var _ UserQueryable = (*UserQuery)(nil)
+
+var _ SearchQueryProvider = (*UserQuery)(nil)

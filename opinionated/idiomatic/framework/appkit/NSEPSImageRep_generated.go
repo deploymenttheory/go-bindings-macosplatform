@@ -5,144 +5,136 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can render an image from encapsulated PostScript (EPS) code.
+// EPSImageRep is an idiomatic wrapper over the Objective-C class NSEPSImageRep.
 //
-// EPSImageRep wraps [raw.NSEPSImageRep] with a fluent Go API.
+// It embeds [ImageRep], promoting that type's methods.
+//
+// An object that can render an image from encapsulated PostScript (EPS) code.
 type EPSImageRep struct {
-	inner *raw.NSEPSImageRep
+	ImageRep
 }
 
-// Unwrap returns the underlying [raw.NSEPSImageRep].
-func (x *EPSImageRep) Unwrap() *raw.NSEPSImageRep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EPSImageRep) ID() objc.ID { return x.inner.Ptr() }
-
-// EPSImageRepFromID adopts an existing object pointer as a EPSImageRep (nil for 0).
+// EPSImageRepFromID adopts an existing Objective-C object as a EPSImageRep
+// (nil for 0), retaining it and registering a release finalizer.
 func EPSImageRepFromID(id objc.ID) *EPSImageRep {
 	if id == 0 {
 		return nil
 	}
-	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(id)}
+	x := &EPSImageRep{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns a representation of an image initialized with the specified EPS data.
-//
-// NewEPSImageRepWithData creates a new [EPSImageRep].
-func NewEPSImageRepWithData(epsData *foundation.NSData) *EPSImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSEPSImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), epsData.Ptr())
-	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(_id)}
+// ePSImageRepAdopt wraps an Objective-C object that this code just created as a
+// EPSImageRep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ePSImageRepAdopt(id objc.ID) *EPSImageRep {
+	if id == 0 {
+		return nil
+	}
+	x := &EPSImageRep{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The size of the image representation, measured in points in the user coordinate space.
-//
-// WithSize sets the size property and returns the receiver for chaining.
+// NewEPSImageRepWithData returns a representation of an image initialized with the specified EPS data.
+func NewEPSImageRepWithData(epsData obj.Object) *EPSImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSEPSImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(epsData))
+	return ePSImageRepAdopt(_id)
+}
+
+// WithSize the size of the image representation, measured in points in the user coordinate space.
 func (x *EPSImageRep) WithSize(size corefoundation.CGSize) *EPSImageRep {
-	x.inner.NSImageRep.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// A Boolean value that indicates whether the image data has an alpha channel.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
 func (x *EPSImageRep) WithAlpha(alpha bool) *EPSImageRep {
-	x.inner.NSImageRep.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that indicates whether the image is opaque.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque a Boolean value that indicates whether the image is opaque.
 func (x *EPSImageRep) WithOpaque(opaque bool) *EPSImageRep {
-	x.inner.NSImageRep.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// The name of the color space used by the image data.
-//
-// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
-func (x *EPSImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *EPSImageRep {
-	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+// WithColorSpaceName the name of the color space used by the image data.
+func (x *EPSImageRep) WithColorSpaceName(colorSpaceName obj.Object) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
-// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-//
-// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 func (x *EPSImageRep) WithBitsPerSample(bitsPerSample int) *EPSImageRep {
-	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
-// The width of the image, measured in pixels.
-//
-// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+// WithPixelsWide the width of the image, measured in pixels.
 func (x *EPSImageRep) WithPixelsWide(pixelsWide int) *EPSImageRep {
-	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
-// The height of the image, measured in pixels.
-//
-// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+// WithPixelsHigh the height of the image, measured in pixels.
 func (x *EPSImageRep) WithPixelsHigh(pixelsHigh int) *EPSImageRep {
-	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
-// The layout direction for the image.
-//
-// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *EPSImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *EPSImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
+// WithLayoutDirection the layout direction for the image.
+func (x *EPSImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *EPSImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
-// Implemented by subclasses to configure the graphics state prior to drawing.
-//
-// PrepareGState calls the underlying PrepareGState.
+// PrepareGState implemented by subclasses to configure the graphics state prior to drawing.
 func (x *EPSImageRep) PrepareGState() {
-	x.inner.PrepareGState()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareGState"))
 }
 
-// The rectangle that bounds the image representation.
-//
-// BoundingBox calls the underlying BoundingBox.
+// BoundingBox the rectangle that bounds the image representation.
 func (x *EPSImageRep) BoundingBox() corefoundation.CGRect {
-	return x.inner.BoundingBox()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingBox"))
+	return _r
 }
 
-// The EPS representation of the image representation.
-//
-// EPSRepresentation calls the underlying EPSRepresentation.
-func (x *EPSImageRep) EPSRepresentation() *foundation.NSData {
-	return x.inner.EPSRepresentation()
+// EPSRepresentation the EPS representation of the image representation.
+func (x *EPSImageRep) EPSRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EPSRepresentation"))
+	return obj.Wrap(_r)
 }
-
-func (x *EPSImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 
 // EPSImageRepable is the interface implemented by [EPSImageRep], for mocking and DI.
 type EPSImageRepable interface {
-	Unwrap() *raw.NSEPSImageRep
+	obj.Object
 	WithSize(size corefoundation.CGSize) *EPSImageRep
 	WithAlpha(alpha bool) *EPSImageRep
 	WithOpaque(opaque bool) *EPSImageRep
-	WithColorSpaceName(colorSpaceName *foundation.NSString) *EPSImageRep
+	WithColorSpaceName(colorSpaceName obj.Object) *EPSImageRep
 	WithBitsPerSample(bitsPerSample int) *EPSImageRep
 	WithPixelsWide(pixelsWide int) *EPSImageRep
 	WithPixelsHigh(pixelsHigh int) *EPSImageRep
-	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *EPSImageRep
+	WithLayoutDirection(layoutDirection ImageLayoutDirection) *EPSImageRep
 	PrepareGState()
 	BoundingBox() corefoundation.CGRect
-	EPSRepresentation() *foundation.NSData
+	EPSRepresentation() obj.Object
 }
 
 var _ EPSImageRepable = (*EPSImageRep)(nil)
+
+var _ ImageRepProvider = (*EPSImageRep)(nil)

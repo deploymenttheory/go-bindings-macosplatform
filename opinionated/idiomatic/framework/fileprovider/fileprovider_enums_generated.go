@@ -10,48 +10,52 @@ import (
 )
 
 // A mode indicating how the system handles user data when removing a domain.
-type NSFileProviderDomainRemovalMode int64
+type FileProviderDomainRemovalMode int64
 
 const (
 	// Don't keep any files that are current in the domain
-	NSFileProviderDomainRemovalModeRemoveAll NSFileProviderDomainRemovalMode = 0
+	FileProviderDomainRemovalModeRemoveAll FileProviderDomainRemovalMode = 0
 	// Delete the domain from the system but keeps the at least all the dirty corresponding user data around.
-	NSFileProviderDomainRemovalModePreserveDirtyUserData NSFileProviderDomainRemovalMode = 1
+	FileProviderDomainRemovalModePreserveDirtyUserData FileProviderDomainRemovalMode = 1
 	// Delete the domain from the system but keeps all the downloaded corresponding user data around.
-	NSFileProviderDomainRemovalModePreserveDownloadedUserData NSFileProviderDomainRemovalMode = 2
+	FileProviderDomainRemovalModePreserveDownloadedUserData FileProviderDomainRemovalMode = 2
 )
 
-func (e NSFileProviderDomainRemovalMode) String() string {
+// String returns the FileProviderDomainRemovalMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderDomainRemovalMode) String() string {
 	switch e {
-	case NSFileProviderDomainRemovalModeRemoveAll:
-		return "NSFileProviderDomainRemovalModeRemoveAll"
-	case NSFileProviderDomainRemovalModePreserveDirtyUserData:
-		return "NSFileProviderDomainRemovalModePreserveDirtyUserData"
-	case NSFileProviderDomainRemovalModePreserveDownloadedUserData:
-		return "NSFileProviderDomainRemovalModePreserveDownloadedUserData"
+	case FileProviderDomainRemovalModeRemoveAll:
+		return "FileProviderDomainRemovalModeRemoveAll"
+	case FileProviderDomainRemovalModePreserveDirtyUserData:
+		return "FileProviderDomainRemovalModePreserveDirtyUserData"
+	case FileProviderDomainRemovalModePreserveDownloadedUserData:
+		return "FileProviderDomainRemovalModePreserveDownloadedUserData"
 	default:
-		return fmt.Sprintf("NSFileProviderDomainRemovalMode(%d)", int64(e))
+		return fmt.Sprintf("FileProviderDomainRemovalMode(%d)", int64(e))
 	}
 }
 
 // Modes that modify the system’s behavior while testing.
 // Bitmask — values may be combined with |.
-type NSFileProviderDomainTestingModes uint64
+type FileProviderDomainTestingModes uint64
 
 const (
 	// Enable the domain without any user action required.
-	NSFileProviderDomainTestingModeAlwaysEnabled NSFileProviderDomainTestingModes = 1
+	FileProviderDomainTestingModeAlwaysEnabled FileProviderDomainTestingModes = 1
 	// Enable interactive mode. Disable the automatic scheduling from the system and allow external tools to control the execution of operations. When manual scheduling is enabled, an external tool should use -[NSFileProviderManager listAvailableTestingOperationsWithError:] and -[NSFileProviderManager runTestingOperations:error:] to control the system. If that mode is enabled, some crash recovery guarantees are lost. For instance, the system may lose any event that hasn't been ingested. The system does not support removing this mode from a domain on which it has been enabled.
-	NSFileProviderDomainTestingModeInteractive NSFileProviderDomainTestingModes = 2
+	FileProviderDomainTestingModeInteractive FileProviderDomainTestingModes = 2
 )
 
-func (e NSFileProviderDomainTestingModes) String() string {
+// String returns the FileProviderDomainTestingModes constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderDomainTestingModes) String() string {
 	var parts []string
-	if e&NSFileProviderDomainTestingModeAlwaysEnabled != 0 {
-		parts = append(parts, "NSFileProviderDomainTestingModeAlwaysEnabled")
+	if e&FileProviderDomainTestingModeAlwaysEnabled != 0 {
+		parts = append(parts, "FileProviderDomainTestingModeAlwaysEnabled")
 	}
-	if e&NSFileProviderDomainTestingModeInteractive != 0 {
-		parts = append(parts, "NSFileProviderDomainTestingModeInteractive")
+	if e&FileProviderDomainTestingModeInteractive != 0 {
+		parts = append(parts, "FileProviderDomainTestingModeInteractive")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -60,119 +64,123 @@ func (e NSFileProviderDomainTestingModes) String() string {
 }
 
 // The error codes for the File Provider extension.
-type NSFileProviderErrorCode int64
+type FileProviderErrorCode int64
 
 const (
 	// The user credentials cannot be verified
-	NSFileProviderErrorNotAuthenticated NSFileProviderErrorCode = -1000
+	FileProviderErrorNotAuthenticated FileProviderErrorCode = -1000
 	// An item already exists with the same parentItemIdentifier and filename (or with a filename differing only in case.) \note Please use -[NSError (NSFileProviderError) fileProviderErrorForCollisionWithItem:] to build an error with this code. \see -[NSError (NSFileProviderError) fileProviderErrorForCollisionWithItem:]
-	NSFileProviderErrorFilenameCollision NSFileProviderErrorCode = -1001
+	FileProviderErrorFilenameCollision FileProviderErrorCode = -1001
 	// The value of the sync anchor is too old, and the system must re-sync from scratch
-	NSFileProviderErrorSyncAnchorExpired NSFileProviderErrorCode = -1002
+	FileProviderErrorSyncAnchorExpired FileProviderErrorCode = -1002
 	// An error indicating that the page is too old, and that the system must restart the enumeration operation from the beginning.
-	NSFileProviderErrorPageExpired NSFileProviderErrorCode = -1002
+	FileProviderErrorPageExpired FileProviderErrorCode = -1002
 	// The item has not been uploaded because it would push the account over quota
-	NSFileProviderErrorInsufficientQuota NSFileProviderErrorCode = -1003
+	FileProviderErrorInsufficientQuota FileProviderErrorCode = -1003
 	// Connecting to the servers failed
-	NSFileProviderErrorServerUnreachable NSFileProviderErrorCode = -1004
+	FileProviderErrorServerUnreachable FileProviderErrorCode = -1004
 	// The requested item doesn't exist \note Please use -[NSError (NSFileProviderError) fileProviderErrorForNonExistentItemWithIdentifier:] to build an error with this code. \see -[NSError (NSFileProviderError) fileProviderErrorForNonExistentItemWithIdentifier:]
-	NSFileProviderErrorNoSuchItem NSFileProviderErrorCode = -1005
+	FileProviderErrorNoSuchItem FileProviderErrorCode = -1005
 	// The provider disallowed the deletion of the item. \note Please use -[NSError (NSFileProviderError) fileProviderErrorForRejectedDeletionOfItem:] to build an error with this code. \see -[NSError (NSFileProviderError) fileProviderErrorForRejectedDeletionOfItem:]
-	NSFileProviderErrorDeletionRejected NSFileProviderErrorCode = -1006
+	FileProviderErrorDeletionRejected FileProviderErrorCode = -1006
 	// We're trying to non-recursively delete a non-empty directory
-	NSFileProviderErrorDirectoryNotEmpty NSFileProviderErrorCode = -1007
+	FileProviderErrorDirectoryNotEmpty FileProviderErrorCode = -1007
 	// Returned by NSFileProviderManager if no provider could be found in the application
-	NSFileProviderErrorProviderNotFound NSFileProviderErrorCode = -2001
+	FileProviderErrorProviderNotFound FileProviderErrorCode = -2001
 	// Returned by NSFileProviderManager if the application's provider has been disabled due to app translocation
-	NSFileProviderErrorProviderTranslocated NSFileProviderErrorCode = -2002
+	FileProviderErrorProviderTranslocated FileProviderErrorCode = -2002
 	// Returned by NSFileProviderManager if the provider registered in the system is an older version than the one corresponding to this app. The `NSFilePathErrorKey` key points to the location of the older version. If the location of the older version cannot be determined (e.g. because it was since deleted), the `NSFilePathErrorKey` will not be set.
-	NSFileProviderErrorOlderExtensionVersionRunning NSFileProviderErrorCode = -2003
+	FileProviderErrorOlderExtensionVersionRunning FileProviderErrorCode = -2003
 	// Returned by NSFileProviderManager if the provider registered in the system is a newer version than the one corresponding to this app.
-	NSFileProviderErrorNewerExtensionVersionFound NSFileProviderErrorCode = -2004
+	FileProviderErrorNewerExtensionVersionFound FileProviderErrorCode = -2004
 	// Indicates that synchronization cannot happen. This error can be returned by the provider or the system. This is returned by NSFileProviderManager if a barrier failed for a sync-related error. If the failure is caused by a specific item, the system will set the NSFileProviderErrorItemKey to the corresponding item identifier and the NSUnderlyingErrorKey will be set to the error encountered by that item. When a provider returns this error on createItem or updateItem, it means that syncing that item is definitively broken. The system will not retry syncing those items, until either: The operating system has been updated. The FileProvider extension has been updated. The item is modified on disk.
-	NSFileProviderErrorCannotSynchronize NSFileProviderErrorCode = -2005
+	FileProviderErrorCannotSynchronize FileProviderErrorCode = -2005
 	// Returned by NSFileProviderManager if directory eviction failed because the target contains non-evictable items. -[NSError underlyingErrors] is set to an array of the underlying errors. Each one has NSURLErrorKey set to identify the particular file or directory affected by this error. The number of reported failing items is capped to an implementation-defined number. + domain: NSFileProviderErrorDomain errorCode: NSFileProviderErrorUnsyncedEdits error: if the item had unsynced content. + domain: NSFileProviderErrorDomain errorCode: NSFileProviderErrorNonEvictable error: if the item has been marked as non-purgeable by the provider. + domain: NSPOSIXErrorDomain errorCode: EBUSY - if the item had open file descriptors on it. + domain: NSPOSIXErrorDomain errorCode: EMLINK : if the item had several hardlinks.
-	NSFileProviderErrorNonEvictableChildren NSFileProviderErrorCode = -2006
+	FileProviderErrorNonEvictableChildren FileProviderErrorCode = -2006
 	// Returned by NSFileProviderManager if item eviction is failing because the item has edits that have not been synced yet The NSURLErrorKey will be set to with the item URL that has unsynced content.
-	NSFileProviderErrorUnsyncedEdits NSFileProviderErrorCode = -2007
+	FileProviderErrorUnsyncedEdits FileProviderErrorCode = -2007
 	// Returned by NSFileProviderManager if item eviction is failing because the item has not been assigned the evictable capability. The NSURLErrorKey will be set to with the corresponding item URL.
-	NSFileProviderErrorNonEvictable NSFileProviderErrorCode = -2008
+	FileProviderErrorNonEvictable FileProviderErrorCode = -2008
 	// Returned by the provider to indicate that the requested version for an item cannot be provided. When a provider returns that error, it means the version for this item is definitively unavailable. It is intended to be returned by fetchPartialContentsForItemWithIdentifier, when NSFileProviderFetchContentsOptionsStrictVersioning is set, to tell the system that a remote update happened to the item that outdated the requested version.
-	NSFileProviderErrorVersionNoLongerAvailable             NSFileProviderErrorCode = -2009
-	NSFileProviderErrorDomainDisabled                       NSFileProviderErrorCode = -2011
-	NSFileProviderErrorProviderDomainTemporarilyUnavailable NSFileProviderErrorCode = -2012
-	NSFileProviderErrorProviderDomainNotFound               NSFileProviderErrorCode = -2013
-	NSFileProviderErrorApplicationExtensionNotFound         NSFileProviderErrorCode = -2014
-	NSFileProviderErrorLocalVersionConflictingWithServer    NSFileProviderErrorCode = -2015
+	FileProviderErrorVersionNoLongerAvailable             FileProviderErrorCode = -2009
+	FileProviderErrorDomainDisabled                       FileProviderErrorCode = -2011
+	FileProviderErrorProviderDomainTemporarilyUnavailable FileProviderErrorCode = -2012
+	FileProviderErrorProviderDomainNotFound               FileProviderErrorCode = -2013
+	FileProviderErrorApplicationExtensionNotFound         FileProviderErrorCode = -2014
+	FileProviderErrorLocalVersionConflictingWithServer    FileProviderErrorCode = -2015
 )
 
-func (e NSFileProviderErrorCode) String() string {
+// String returns the FileProviderErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderErrorCode) String() string {
 	switch e {
-	case NSFileProviderErrorNotAuthenticated:
-		return "NSFileProviderErrorNotAuthenticated"
-	case NSFileProviderErrorFilenameCollision:
-		return "NSFileProviderErrorFilenameCollision"
-	case NSFileProviderErrorSyncAnchorExpired:
-		return "NSFileProviderErrorSyncAnchorExpired"
-	case NSFileProviderErrorInsufficientQuota:
-		return "NSFileProviderErrorInsufficientQuota"
-	case NSFileProviderErrorServerUnreachable:
-		return "NSFileProviderErrorServerUnreachable"
-	case NSFileProviderErrorNoSuchItem:
-		return "NSFileProviderErrorNoSuchItem"
-	case NSFileProviderErrorDeletionRejected:
-		return "NSFileProviderErrorDeletionRejected"
-	case NSFileProviderErrorDirectoryNotEmpty:
-		return "NSFileProviderErrorDirectoryNotEmpty"
-	case NSFileProviderErrorProviderNotFound:
-		return "NSFileProviderErrorProviderNotFound"
-	case NSFileProviderErrorProviderTranslocated:
-		return "NSFileProviderErrorProviderTranslocated"
-	case NSFileProviderErrorOlderExtensionVersionRunning:
-		return "NSFileProviderErrorOlderExtensionVersionRunning"
-	case NSFileProviderErrorNewerExtensionVersionFound:
-		return "NSFileProviderErrorNewerExtensionVersionFound"
-	case NSFileProviderErrorCannotSynchronize:
-		return "NSFileProviderErrorCannotSynchronize"
-	case NSFileProviderErrorNonEvictableChildren:
-		return "NSFileProviderErrorNonEvictableChildren"
-	case NSFileProviderErrorUnsyncedEdits:
-		return "NSFileProviderErrorUnsyncedEdits"
-	case NSFileProviderErrorNonEvictable:
-		return "NSFileProviderErrorNonEvictable"
-	case NSFileProviderErrorVersionNoLongerAvailable:
-		return "NSFileProviderErrorVersionNoLongerAvailable"
-	case NSFileProviderErrorDomainDisabled:
-		return "NSFileProviderErrorDomainDisabled"
-	case NSFileProviderErrorProviderDomainTemporarilyUnavailable:
-		return "NSFileProviderErrorProviderDomainTemporarilyUnavailable"
-	case NSFileProviderErrorProviderDomainNotFound:
-		return "NSFileProviderErrorProviderDomainNotFound"
-	case NSFileProviderErrorApplicationExtensionNotFound:
-		return "NSFileProviderErrorApplicationExtensionNotFound"
-	case NSFileProviderErrorLocalVersionConflictingWithServer:
-		return "NSFileProviderErrorLocalVersionConflictingWithServer"
+	case FileProviderErrorNotAuthenticated:
+		return "FileProviderErrorNotAuthenticated"
+	case FileProviderErrorFilenameCollision:
+		return "FileProviderErrorFilenameCollision"
+	case FileProviderErrorSyncAnchorExpired:
+		return "FileProviderErrorSyncAnchorExpired"
+	case FileProviderErrorInsufficientQuota:
+		return "FileProviderErrorInsufficientQuota"
+	case FileProviderErrorServerUnreachable:
+		return "FileProviderErrorServerUnreachable"
+	case FileProviderErrorNoSuchItem:
+		return "FileProviderErrorNoSuchItem"
+	case FileProviderErrorDeletionRejected:
+		return "FileProviderErrorDeletionRejected"
+	case FileProviderErrorDirectoryNotEmpty:
+		return "FileProviderErrorDirectoryNotEmpty"
+	case FileProviderErrorProviderNotFound:
+		return "FileProviderErrorProviderNotFound"
+	case FileProviderErrorProviderTranslocated:
+		return "FileProviderErrorProviderTranslocated"
+	case FileProviderErrorOlderExtensionVersionRunning:
+		return "FileProviderErrorOlderExtensionVersionRunning"
+	case FileProviderErrorNewerExtensionVersionFound:
+		return "FileProviderErrorNewerExtensionVersionFound"
+	case FileProviderErrorCannotSynchronize:
+		return "FileProviderErrorCannotSynchronize"
+	case FileProviderErrorNonEvictableChildren:
+		return "FileProviderErrorNonEvictableChildren"
+	case FileProviderErrorUnsyncedEdits:
+		return "FileProviderErrorUnsyncedEdits"
+	case FileProviderErrorNonEvictable:
+		return "FileProviderErrorNonEvictable"
+	case FileProviderErrorVersionNoLongerAvailable:
+		return "FileProviderErrorVersionNoLongerAvailable"
+	case FileProviderErrorDomainDisabled:
+		return "FileProviderErrorDomainDisabled"
+	case FileProviderErrorProviderDomainTemporarilyUnavailable:
+		return "FileProviderErrorProviderDomainTemporarilyUnavailable"
+	case FileProviderErrorProviderDomainNotFound:
+		return "FileProviderErrorProviderDomainNotFound"
+	case FileProviderErrorApplicationExtensionNotFound:
+		return "FileProviderErrorApplicationExtensionNotFound"
+	case FileProviderErrorLocalVersionConflictingWithServer:
+		return "FileProviderErrorLocalVersionConflictingWithServer"
 	default:
-		return fmt.Sprintf("NSFileProviderErrorCode(%d)", int64(e))
+		return fmt.Sprintf("FileProviderErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants that identify known folders.
 // Bitmask — values may be combined with |.
-type NSFileProviderKnownFolders uint64
+type FileProviderKnownFolders uint64
 
 const (
-	NSFileProviderDesktop   NSFileProviderKnownFolders = 1
-	NSFileProviderDocuments NSFileProviderKnownFolders = 2
+	FileProviderDesktop   FileProviderKnownFolders = 1
+	FileProviderDocuments FileProviderKnownFolders = 2
 )
 
-func (e NSFileProviderKnownFolders) String() string {
+// String returns the FileProviderKnownFolders constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderKnownFolders) String() string {
 	var parts []string
-	if e&NSFileProviderDesktop != 0 {
-		parts = append(parts, "NSFileProviderDesktop")
+	if e&FileProviderDesktop != 0 {
+		parts = append(parts, "FileProviderDesktop")
 	}
-	if e&NSFileProviderDocuments != 0 {
-		parts = append(parts, "NSFileProviderDocuments")
+	if e&FileProviderDocuments != 0 {
+		parts = append(parts, "FileProviderDocuments")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -182,16 +190,60 @@ func (e NSFileProviderKnownFolders) String() string {
 
 // Options for disconnecting a domain from the extension.
 // Bitmask — values may be combined with |.
-type NSFileProviderManagerDisconnectionOptions uint64
+type FileProviderManagerDisconnectionOptions uint64
 
 const (
-	NSFileProviderManagerDisconnectionOptionsTemporary NSFileProviderManagerDisconnectionOptions = 1
+	FileProviderManagerDisconnectionOptionsTemporary FileProviderManagerDisconnectionOptions = 1
 )
 
-func (e NSFileProviderManagerDisconnectionOptions) String() string {
+// String returns the FileProviderManagerDisconnectionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderManagerDisconnectionOptions) String() string {
 	var parts []string
-	if e&NSFileProviderManagerDisconnectionOptionsTemporary != 0 {
-		parts = append(parts, "NSFileProviderManagerDisconnectionOptionsTemporary")
+	if e&FileProviderManagerDisconnectionOptionsTemporary != 0 {
+		parts = append(parts, "FileProviderManagerDisconnectionOptionsTemporary")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that describe why an external volume might not be eligible for storing a domain.
+// Bitmask — values may be combined with |.
+type FileProviderVolumeUnsupportedReason uint64
+
+const (
+	FileProviderVolumeUnsupportedReasonNone         FileProviderVolumeUnsupportedReason = 0
+	FileProviderVolumeUnsupportedReasonUnknown      FileProviderVolumeUnsupportedReason = 1
+	FileProviderVolumeUnsupportedReasonNonAPFS      FileProviderVolumeUnsupportedReason = 2
+	FileProviderVolumeUnsupportedReasonNonEncrypted FileProviderVolumeUnsupportedReason = 4
+	FileProviderVolumeUnsupportedReasonReadOnly     FileProviderVolumeUnsupportedReason = 8
+	FileProviderVolumeUnsupportedReasonNetwork      FileProviderVolumeUnsupportedReason = 16
+	FileProviderVolumeUnsupportedReasonQuarantined  FileProviderVolumeUnsupportedReason = 32
+)
+
+// String returns the FileProviderVolumeUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderVolumeUnsupportedReason) String() string {
+	var parts []string
+	if e&FileProviderVolumeUnsupportedReasonUnknown != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonUnknown")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNonAPFS != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonAPFS")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNonEncrypted != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonEncrypted")
+	}
+	if e&FileProviderVolumeUnsupportedReasonReadOnly != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonReadOnly")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNetwork != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNetwork")
+	}
+	if e&FileProviderVolumeUnsupportedReasonQuarantined != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonQuarantined")
 	}
 	if len(parts) == 0 {
 		return "0"

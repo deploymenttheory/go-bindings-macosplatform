@@ -5,89 +5,95 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a rental car reservation.
+// RentalCarReservation is an idiomatic wrapper over the Objective-C class INRentalCarReservation.
 //
-// RentalCarReservation wraps [raw.INRentalCarReservation] with a fluent Go API.
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a rental car reservation.
 type RentalCarReservation struct {
-	inner *raw.INRentalCarReservation
+	Reservation
 }
 
-// Unwrap returns the underlying [raw.INRentalCarReservation].
-func (x *RentalCarReservation) Unwrap() *raw.INRentalCarReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RentalCarReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// RentalCarReservationFromID adopts an existing object pointer as a RentalCarReservation (nil for 0).
+// RentalCarReservationFromID adopts an existing Objective-C object as a RentalCarReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func RentalCarReservationFromID(id objc.ID) *RentalCarReservation {
 	if id == 0 {
 		return nil
 	}
-	return &RentalCarReservation{inner: raw.INRentalCarReservationFromID(id)}
+	x := &RentalCarReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a rental car reservation with the specified contents and attributes.
-//
-// NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation creates a new [RentalCarReservation].
-func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, rentalCar *raw.INRentalCar, rentalDuration *raw.INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *RentalCarReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRentalCarReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), rentalCar.Ptr(), rentalDuration.Ptr(), pickupLocation.Ptr(), dropOffLocation.Ptr())
-	return &RentalCarReservation{inner: raw.INRentalCarReservationFromID(_id)}
+// rentalCarReservationAdopt wraps an Objective-C object that this code just created as a
+// RentalCarReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rentalCarReservationAdopt(id objc.ID) *RentalCarReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &RentalCarReservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a new rental car reservation with the specified contents and attributes.
-//
-// NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation creates a new [RentalCarReservation].
-func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], rentalCar *raw.INRentalCar, rentalDuration *raw.INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *RentalCarReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRentalCarReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), rentalCar.Ptr(), rentalDuration.Ptr(), pickupLocation.Ptr(), dropOffLocation.Ptr())
-	return &RentalCarReservation{inner: raw.INRentalCarReservationFromID(_id)}
+// NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation creates a rental car reservation with the specified contents and attributes.
+func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, rentalCar *RentalCar, rentalDuration *DateComponentsRange, pickupLocation obj.Object, dropOffLocation obj.Object) *RentalCarReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INRentalCarReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(rentalCar), objref.IDOf(rentalDuration), objref.IDOf(pickupLocation), objref.IDOf(dropOffLocation))
+	return rentalCarReservationAdopt(_id)
 }
 
-// RentalCar calls the underlying RentalCar.
+// NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation creates a new rental car reservation with the specified contents and attributes.
+func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, rentalCar *RentalCar, rentalDuration *DateComponentsRange, pickupLocation obj.Object, dropOffLocation obj.Object) *RentalCarReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INRentalCarReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(rentalCar), objref.IDOf(rentalDuration), objref.IDOf(pickupLocation), objref.IDOf(dropOffLocation))
+	return rentalCarReservationAdopt(_id)
+}
+
+// RentalCar wraps the corresponding Objective-C method.
 func (x *RentalCarReservation) RentalCar() *RentalCar {
-	_r := x.inner.RentalCar()
-	if _r == nil {
-		return nil
-	}
-	return &RentalCar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCar"))
+	return RentalCarFromID(_r)
 }
 
-// RentalDuration calls the underlying RentalDuration.
+// RentalDuration wraps the corresponding Objective-C method.
 func (x *RentalCarReservation) RentalDuration() *DateComponentsRange {
-	_r := x.inner.RentalDuration()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalDuration"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// PickupLocation calls the underlying PickupLocation.
-func (x *RentalCarReservation) PickupLocation() *corelocation.CLPlacemark {
-	return x.inner.PickupLocation()
+// PickupLocation wraps the corresponding Objective-C method.
+func (x *RentalCarReservation) PickupLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pickupLocation"))
+	return obj.Wrap(_r)
 }
 
-// DropOffLocation calls the underlying DropOffLocation.
-func (x *RentalCarReservation) DropOffLocation() *corelocation.CLPlacemark {
-	return x.inner.DropOffLocation()
+// DropOffLocation wraps the corresponding Objective-C method.
+func (x *RentalCarReservation) DropOffLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropOffLocation"))
+	return obj.Wrap(_r)
 }
-
-func (x *RentalCarReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // RentalCarReservationable is the interface implemented by [RentalCarReservation], for mocking and DI.
 type RentalCarReservationable interface {
-	Unwrap() *raw.INRentalCarReservation
+	obj.Object
 	RentalCar() *RentalCar
 	RentalDuration() *DateComponentsRange
-	PickupLocation() *corelocation.CLPlacemark
-	DropOffLocation() *corelocation.CLPlacemark
+	PickupLocation() obj.Object
+	DropOffLocation() obj.Object
 }
 
 var _ RentalCarReservationable = (*RentalCarReservation)(nil)
+
+var _ ReservationProvider = (*RentalCarReservation)(nil)

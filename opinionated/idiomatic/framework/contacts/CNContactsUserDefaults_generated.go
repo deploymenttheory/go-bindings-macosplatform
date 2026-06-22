@@ -5,57 +5,92 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the default options to use when displaying contacts.
+// ContactsUserDefaults is an idiomatic wrapper over the Objective-C class CNContactsUserDefaults.
 //
-// ContactsUserDefaults wraps [raw.CNContactsUserDefaults] with a fluent Go API.
+// An object that defines the default options to use when displaying contacts.
 type ContactsUserDefaults struct {
-	inner *raw.CNContactsUserDefaults
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactsUserDefaults].
-func (x *ContactsUserDefaults) Unwrap() *raw.CNContactsUserDefaults { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactsUserDefaults) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactsUserDefaultsFromID adopts an existing object pointer as a ContactsUserDefaults (nil for 0).
+// ContactsUserDefaultsFromID adopts an existing Objective-C object as a ContactsUserDefaults
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactsUserDefaultsFromID(id objc.ID) *ContactsUserDefaults {
 	if id == 0 {
 		return nil
 	}
-	return &ContactsUserDefaults{inner: raw.CNContactsUserDefaultsFromID(id)}
+	x := &ContactsUserDefaults{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContactsUserDefaults creates a new [ContactsUserDefaults].
+// contactsUserDefaultsAdopt wraps an Objective-C object that this code just created as a
+// ContactsUserDefaults (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactsUserDefaultsAdopt(id objc.ID) *ContactsUserDefaults {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactsUserDefaults{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactsUserDefaults) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactsUserDefaults) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactsUserDefaults) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactsUserDefaults) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContactsUserDefaults creates a new ContactsUserDefaults.
 func NewContactsUserDefaults() *ContactsUserDefaults {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactsUserDefaults")), objc.RegisterName("new"))
-	return &ContactsUserDefaults{inner: raw.CNContactsUserDefaultsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactsUserDefaults")), objc.RegisterName("new"))
+	return contactsUserDefaultsAdopt(_id)
 }
 
-// SortOrder calls the underlying SortOrder.
-func (x *ContactsUserDefaults) SortOrder() CNContactSortOrder {
-	return CNContactSortOrder(x.inner.SortOrder())
+// SortOrder wraps the corresponding Objective-C method.
+func (x *ContactsUserDefaults) SortOrder() ContactSortOrder {
+	_r := objc.Send[ContactSortOrder](objref.IDOf(x), objc.RegisterName("sortOrder"))
+	return _r
 }
 
-// CountryCode calls the underlying CountryCode.
+// CountryCode wraps the corresponding Objective-C method.
 func (x *ContactsUserDefaults) CountryCode() string {
-	_r := x.inner.CountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ContactsUserDefaultsable is the interface implemented by [ContactsUserDefaults], for mocking and DI.
 type ContactsUserDefaultsable interface {
-	Unwrap() *raw.CNContactsUserDefaults
-	SortOrder() CNContactSortOrder
+	obj.Object
+	SortOrder() ContactSortOrder
 	CountryCode() string
 }
 

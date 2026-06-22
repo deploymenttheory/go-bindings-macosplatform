@@ -5,66 +5,93 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that describes how to organize and map data to a vertex function.
+// VertexDescriptor is an idiomatic wrapper over the Objective-C class MTLVertexDescriptor.
 //
-// VertexDescriptor wraps [raw.MTLVertexDescriptor] with a fluent Go API.
+// An instance that describes how to organize and map data to a vertex function.
 type VertexDescriptor struct {
-	inner *raw.MTLVertexDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVertexDescriptor].
-func (x *VertexDescriptor) Unwrap() *raw.MTLVertexDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexDescriptorFromID adopts an existing object pointer as a VertexDescriptor (nil for 0).
+// VertexDescriptorFromID adopts an existing Objective-C object as a VertexDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexDescriptorFromID(id objc.ID) *VertexDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VertexDescriptor{inner: raw.MTLVertexDescriptorFromID(id)}
+	x := &VertexDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVertexDescriptor creates a new [VertexDescriptor].
+// vertexDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VertexDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexDescriptorAdopt(id objc.ID) *VertexDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VertexDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VertexDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVertexDescriptor creates a new VertexDescriptor.
 func NewVertexDescriptor() *VertexDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexDescriptor")), objc.RegisterName("new"))
-	return &VertexDescriptor{inner: raw.MTLVertexDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexDescriptor")), objc.RegisterName("new"))
+	return vertexDescriptorAdopt(_id)
 }
 
-// Resets the default state for the vertex descriptor.
-//
-// Reset calls the underlying Reset.
+// Reset resets the default state for the vertex descriptor.
 func (x *VertexDescriptor) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Layouts calls the underlying Layouts.
+// Layouts wraps the corresponding Objective-C method.
 func (x *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
-	_r := x.inner.Layouts()
-	if _r == nil {
-		return nil
-	}
-	return &VertexBufferLayoutDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
+	return VertexBufferLayoutDescriptorArrayFromID(_r)
 }
 
-// Attributes calls the underlying Attributes.
+// Attributes wraps the corresponding Objective-C method.
 func (x *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
-	_r := x.inner.Attributes()
-	if _r == nil {
-		return nil
-	}
-	return &VertexAttributeDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return VertexAttributeDescriptorArrayFromID(_r)
 }
 
 // VertexDescriptorable is the interface implemented by [VertexDescriptor], for mocking and DI.
 type VertexDescriptorable interface {
-	Unwrap() *raw.MTLVertexDescriptor
+	obj.Object
 	Reset()
 	Layouts() *VertexBufferLayoutDescriptorArray
 	Attributes() *VertexAttributeDescriptorArray

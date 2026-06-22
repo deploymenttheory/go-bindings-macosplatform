@@ -5,58 +5,60 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a perspective warp transformation.
+// ImageHomographicAlignmentObservation is an idiomatic wrapper over the Objective-C class VNImageHomographicAlignmentObservation.
 //
-// ImageHomographicAlignmentObservation wraps [raw.VNImageHomographicAlignmentObservation] with a fluent Go API.
+// It embeds [ImageAlignmentObservation], promoting that type's methods.
+//
+// An object that represents a perspective warp transformation.
 type ImageHomographicAlignmentObservation struct {
-	inner *raw.VNImageHomographicAlignmentObservation
+	ImageAlignmentObservation
 }
 
-// Unwrap returns the underlying [raw.VNImageHomographicAlignmentObservation].
-func (x *ImageHomographicAlignmentObservation) Unwrap() *raw.VNImageHomographicAlignmentObservation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageHomographicAlignmentObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageHomographicAlignmentObservationFromID adopts an existing object pointer as a ImageHomographicAlignmentObservation (nil for 0).
+// ImageHomographicAlignmentObservationFromID adopts an existing Objective-C object as a ImageHomographicAlignmentObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageHomographicAlignmentObservationFromID(id objc.ID) *ImageHomographicAlignmentObservation {
 	if id == 0 {
 		return nil
 	}
-	return &ImageHomographicAlignmentObservation{inner: raw.VNImageHomographicAlignmentObservationFromID(id)}
+	x := &ImageHomographicAlignmentObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageHomographicAlignmentObservation creates a new [ImageHomographicAlignmentObservation].
+// imageHomographicAlignmentObservationAdopt wraps an Objective-C object that this code just created as a
+// ImageHomographicAlignmentObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageHomographicAlignmentObservationAdopt(id objc.ID) *ImageHomographicAlignmentObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageHomographicAlignmentObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageHomographicAlignmentObservation creates a new ImageHomographicAlignmentObservation.
 func NewImageHomographicAlignmentObservation() *ImageHomographicAlignmentObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageHomographicAlignmentObservation")), objc.RegisterName("new"))
-	return &ImageHomographicAlignmentObservation{inner: raw.VNImageHomographicAlignmentObservationFromID(_id)}
-}
-
-// WarpTransform calls the underlying WarpTransform.
-func (x *ImageHomographicAlignmentObservation) WarpTransform() unsafe.Pointer {
-	return x.inner.WarpTransform()
-}
-
-func (x *ImageHomographicAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation {
-	return &x.inner.VNImageAlignmentObservation
-}
-
-func (x *ImageHomographicAlignmentObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNImageAlignmentObservation.VNObservation
+	_id := objc.Send[objc.ID](objc.ID(_class("VNImageHomographicAlignmentObservation")), objc.RegisterName("new"))
+	return imageHomographicAlignmentObservationAdopt(_id)
 }
 
 // ImageHomographicAlignmentObservationable is the interface implemented by [ImageHomographicAlignmentObservation], for mocking and DI.
 type ImageHomographicAlignmentObservationable interface {
-	Unwrap() *raw.VNImageHomographicAlignmentObservation
-	WarpTransform() unsafe.Pointer
+	obj.Object
 }
 
 var _ ImageHomographicAlignmentObservationable = (*ImageHomographicAlignmentObservation)(nil)
+
+var _ ImageAlignmentObservationProvider = (*ImageHomographicAlignmentObservation)(nil)
+
+var _ ObservationProvider = (*ImageHomographicAlignmentObservation)(nil)

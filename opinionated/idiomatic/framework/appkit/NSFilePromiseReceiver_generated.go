@@ -6,93 +6,119 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that receives a file promise from the pasteboard.
+// FilePromiseReceiver is an idiomatic wrapper over the Objective-C class NSFilePromiseReceiver.
 //
-// FilePromiseReceiver wraps [raw.NSFilePromiseReceiver] with a fluent Go API.
+// An object that receives a file promise from the pasteboard.
 type FilePromiseReceiver struct {
-	inner *raw.NSFilePromiseReceiver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFilePromiseReceiver].
-func (x *FilePromiseReceiver) Unwrap() *raw.NSFilePromiseReceiver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FilePromiseReceiver) ID() objc.ID { return x.inner.Ptr() }
-
-// FilePromiseReceiverFromID adopts an existing object pointer as a FilePromiseReceiver (nil for 0).
+// FilePromiseReceiverFromID adopts an existing Objective-C object as a FilePromiseReceiver
+// (nil for 0), retaining it and registering a release finalizer.
 func FilePromiseReceiverFromID(id objc.ID) *FilePromiseReceiver {
 	if id == 0 {
 		return nil
 	}
-	return &FilePromiseReceiver{inner: raw.NSFilePromiseReceiverFromID(id)}
+	x := &FilePromiseReceiver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFilePromiseReceiver creates a new [FilePromiseReceiver].
+// filePromiseReceiverAdopt wraps an Objective-C object that this code just created as a
+// FilePromiseReceiver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func filePromiseReceiverAdopt(id objc.ID) *FilePromiseReceiver {
+	if id == 0 {
+		return nil
+	}
+	x := &FilePromiseReceiver{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FilePromiseReceiver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FilePromiseReceiver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FilePromiseReceiver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilePromiseReceiver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFilePromiseReceiver creates a new FilePromiseReceiver.
 func NewFilePromiseReceiver() *FilePromiseReceiver {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFilePromiseReceiver")), objc.RegisterName("new"))
-	return &FilePromiseReceiver{inner: raw.NSFilePromiseReceiverFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFilePromiseReceiver")), objc.RegisterName("new"))
+	return filePromiseReceiverAdopt(_id)
 }
 
-// Fulfills the promises at the specified destination.
+// ReceivePromisedFilesAtDestinationOptionsOperationQueueReader fulfills the promises at the specified destination.
 //
 // ReceivePromisedFilesAtDestinationOptionsOperationQueueReader blocks until the operation completes or ctx is cancelled.
-func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options *foundation.NSDictionary[objc.ID, objc.ID], operationQueue *foundation.NSOperationQueue) (*foundation.NSURL, error) {
+func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options obj.Object, operationQueue obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSURL
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationDir)), options, operationQueue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivePromisedFilesAtDestination:options:operationQueue:reader:"), rt.FileURL(destinationDir), objref.IDOf(options), objref.IDOf(operationQueue), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSURL
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// FileTypes wraps the corresponding Objective-C method.
+//
 // FileTypes returns the collection as a Go slice.
 func (x *FilePromiseReceiver) FileTypes() []string {
-	arr := x.inner.FileTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// FileNames wraps the corresponding Objective-C method.
+//
 // FileNames returns the collection as a Go slice.
 func (x *FilePromiseReceiver) FileNames() []string {
-	arr := x.inner.FileNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FilePromiseReceiverable is the interface implemented by [FilePromiseReceiver], for mocking and DI.
 type FilePromiseReceiverable interface {
-	Unwrap() *raw.NSFilePromiseReceiver
-	ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options *foundation.NSDictionary[objc.ID, objc.ID], operationQueue *foundation.NSOperationQueue) (*foundation.NSURL, error)
+	obj.Object
+	ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options obj.Object, operationQueue obj.Object) (obj.Object, error)
 	FileTypes() []string
 	FileNames() []string
 }

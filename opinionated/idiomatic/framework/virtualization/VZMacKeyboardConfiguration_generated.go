@@ -5,45 +5,58 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that defines the configuration for a Mac keyboard.
+// MacKeyboardConfiguration is an idiomatic wrapper over the Objective-C class VZMacKeyboardConfiguration.
 //
-// MacKeyboardConfiguration wraps [raw.VZMacKeyboardConfiguration] with a fluent Go API.
+// It embeds [KeyboardConfiguration], promoting that type's methods.
+//
+// A device that defines the configuration for a Mac keyboard.
 type MacKeyboardConfiguration struct {
-	inner *raw.VZMacKeyboardConfiguration
+	KeyboardConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZMacKeyboardConfiguration].
-func (x *MacKeyboardConfiguration) Unwrap() *raw.VZMacKeyboardConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacKeyboardConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MacKeyboardConfigurationFromID adopts an existing object pointer as a MacKeyboardConfiguration (nil for 0).
+// MacKeyboardConfigurationFromID adopts an existing Objective-C object as a MacKeyboardConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MacKeyboardConfigurationFromID(id objc.ID) *MacKeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MacKeyboardConfiguration{inner: raw.VZMacKeyboardConfigurationFromID(id)}
+	x := &MacKeyboardConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMacKeyboardConfiguration creates a new [MacKeyboardConfiguration].
+// macKeyboardConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MacKeyboardConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macKeyboardConfigurationAdopt(id objc.ID) *MacKeyboardConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MacKeyboardConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMacKeyboardConfiguration creates a new MacKeyboardConfiguration.
 func NewMacKeyboardConfiguration() *MacKeyboardConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacKeyboardConfiguration")), objc.RegisterName("new"))
-	return &MacKeyboardConfiguration{inner: raw.VZMacKeyboardConfigurationFromID(_id)}
-}
-
-func (x *MacKeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration {
-	return &x.inner.VZKeyboardConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacKeyboardConfiguration")), objc.RegisterName("new"))
+	return macKeyboardConfigurationAdopt(_id)
 }
 
 // MacKeyboardConfigurationable is the interface implemented by [MacKeyboardConfiguration], for mocking and DI.
 type MacKeyboardConfigurationable interface {
-	Unwrap() *raw.VZMacKeyboardConfiguration
+	obj.Object
 }
 
 var _ MacKeyboardConfigurationable = (*MacKeyboardConfiguration)(nil)
+
+var _ KeyboardConfigurationProvider = (*MacKeyboardConfiguration)(nil)

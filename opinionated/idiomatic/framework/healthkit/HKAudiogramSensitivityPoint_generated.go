@@ -5,88 +5,102 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A hearing sensitivity reading associated with a hearing test.
+// AudiogramSensitivityPoint is an idiomatic wrapper over the Objective-C class HKAudiogramSensitivityPoint.
 //
-// AudiogramSensitivityPoint wraps [raw.HKAudiogramSensitivityPoint] with a fluent Go API.
+// A hearing sensitivity reading associated with a hearing test.
 type AudiogramSensitivityPoint struct {
-	inner *raw.HKAudiogramSensitivityPoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKAudiogramSensitivityPoint].
-func (x *AudiogramSensitivityPoint) Unwrap() *raw.HKAudiogramSensitivityPoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudiogramSensitivityPoint) ID() objc.ID { return x.inner.Ptr() }
-
-// AudiogramSensitivityPointFromID adopts an existing object pointer as a AudiogramSensitivityPoint (nil for 0).
+// AudiogramSensitivityPointFromID adopts an existing Objective-C object as a AudiogramSensitivityPoint
+// (nil for 0), retaining it and registering a release finalizer.
 func AudiogramSensitivityPointFromID(id objc.ID) *AudiogramSensitivityPoint {
 	if id == 0 {
 		return nil
 	}
-	return &AudiogramSensitivityPoint{inner: raw.HKAudiogramSensitivityPointFromID(id)}
+	x := &AudiogramSensitivityPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudiogramSensitivityPoint creates a new [AudiogramSensitivityPoint].
+// audiogramSensitivityPointAdopt wraps an Objective-C object that this code just created as a
+// AudiogramSensitivityPoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audiogramSensitivityPointAdopt(id objc.ID) *AudiogramSensitivityPoint {
+	if id == 0 {
+		return nil
+	}
+	x := &AudiogramSensitivityPoint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudiogramSensitivityPoint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudiogramSensitivityPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudiogramSensitivityPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudiogramSensitivityPoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudiogramSensitivityPoint creates a new AudiogramSensitivityPoint.
 func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAudiogramSensitivityPoint")), objc.RegisterName("new"))
-	return &AudiogramSensitivityPoint{inner: raw.HKAudiogramSensitivityPointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSensitivityPoint")), objc.RegisterName("new"))
+	return audiogramSensitivityPointAdopt(_id)
 }
 
-// @property frequency  Frequency where sensitivity was measured.  The unit of measurement is [HKUnit hertzUnit] or "Hz".
-//
-// Frequency calls the underlying Frequency.
+// Frequency wraps the corresponding Objective-C method.
 func (x *AudiogramSensitivityPoint) Frequency() *Quantity {
-	_r := x.inner.Frequency()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frequency"))
+	return QuantityFromID(_r)
 }
 
-// @property sensitivity Left ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
-//
-// LeftEarSensitivity calls the underlying LeftEarSensitivity.
+// LeftEarSensitivity wraps the corresponding Objective-C method.
 func (x *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
-	_r := x.inner.LeftEarSensitivity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEarSensitivity"))
+	return QuantityFromID(_r)
 }
 
-// @property sensitivity Right ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
-//
-// RightEarSensitivity calls the underlying RightEarSensitivity.
+// RightEarSensitivity wraps the corresponding Objective-C method.
 func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
-	_r := x.inner.RightEarSensitivity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEarSensitivity"))
+	return QuantityFromID(_r)
 }
 
-// @property      tests @abstract      The tests conducted at this frequency
+// Tests the tests conducted at this frequency
 //
 // Tests returns the collection as a Go slice.
 func (x *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {
-	arr := x.inner.Tests()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudiogramSensitivityTest {
-		return &AudiogramSensitivityTest{inner: raw.HKAudiogramSensitivityTestFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tests"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudiogramSensitivityTest { return AudiogramSensitivityTestFromID(_id) })
 }
 
 // AudiogramSensitivityPointable is the interface implemented by [AudiogramSensitivityPoint], for mocking and DI.
 type AudiogramSensitivityPointable interface {
-	Unwrap() *raw.HKAudiogramSensitivityPoint
+	obj.Object
 	Frequency() *Quantity
 	LeftEarSensitivity() *Quantity
 	RightEarSensitivity() *Quantity

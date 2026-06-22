@@ -6,286 +6,259 @@ package storekit
 
 import (
 	"fmt"
-	"strings"
 )
 
 // Constants that indicate the type of authorization the customer has for accessing the Music library.
 //
 // Deprecated: Use MusicAuthorization.Status from MusicKit.
-type SKCloudServiceAuthorizationStatus int64
+type CloudServiceAuthorizationStatus int64
 
 const (
 	// The authorization type cannot be determined.
-	SKCloudServiceAuthorizationStatusNotDetermined SKCloudServiceAuthorizationStatus = 0
+	CloudServiceAuthorizationStatusNotDetermined CloudServiceAuthorizationStatus = 0
 	// The user does not authorize any access to their music library.
-	SKCloudServiceAuthorizationStatusDenied SKCloudServiceAuthorizationStatus = 1
+	CloudServiceAuthorizationStatusDenied CloudServiceAuthorizationStatus = 1
 	// Access to the music library is restricted in a way that the user cannot change, so your app should not prompt for authorization. An example of this situation is if the device is in an education mode.
-	SKCloudServiceAuthorizationStatusRestricted SKCloudServiceAuthorizationStatus = 2
+	CloudServiceAuthorizationStatusRestricted CloudServiceAuthorizationStatus = 2
 	// The user authorizes playback of Apple Music tracks and the addition of tracks to their music library.
-	SKCloudServiceAuthorizationStatusAuthorized SKCloudServiceAuthorizationStatus = 3
+	CloudServiceAuthorizationStatusAuthorized CloudServiceAuthorizationStatus = 3
 )
 
-func (e SKCloudServiceAuthorizationStatus) String() string {
+// String returns the CloudServiceAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CloudServiceAuthorizationStatus) String() string {
 	switch e {
-	case SKCloudServiceAuthorizationStatusNotDetermined:
-		return "SKCloudServiceAuthorizationStatusNotDetermined"
-	case SKCloudServiceAuthorizationStatusDenied:
-		return "SKCloudServiceAuthorizationStatusDenied"
-	case SKCloudServiceAuthorizationStatusRestricted:
-		return "SKCloudServiceAuthorizationStatusRestricted"
-	case SKCloudServiceAuthorizationStatusAuthorized:
-		return "SKCloudServiceAuthorizationStatusAuthorized"
+	case CloudServiceAuthorizationStatusNotDetermined:
+		return "CloudServiceAuthorizationStatusNotDetermined"
+	case CloudServiceAuthorizationStatusDenied:
+		return "CloudServiceAuthorizationStatusDenied"
+	case CloudServiceAuthorizationStatusRestricted:
+		return "CloudServiceAuthorizationStatusRestricted"
+	case CloudServiceAuthorizationStatusAuthorized:
+		return "CloudServiceAuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("SKCloudServiceAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("CloudServiceAuthorizationStatus(%d)", int64(e))
 	}
-}
-
-// Constants that specify the current capabilities of the customer’s Music library on the device.
-//
-// Deprecated: Use MusicSubscription from MusicKit.
-// Bitmask — values may be combined with |.
-type SKCloudServiceCapability uint64
-
-const (
-	// The device does not allow playback of Apple Music content or the addition of tracks to the music library.
-	//
-	// Deprecated: Use MusicAuthorization.Status from MusicKit.
-	SKCloudServiceCapabilityNone SKCloudServiceCapability = 0
-	// The device allows playback of Apple Music catalog tracks.
-	SKCloudServiceCapabilityMusicCatalogPlayback SKCloudServiceCapability = 1
-	// The device allows subscription to the Apple Music catalog.
-	//
-	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
-	SKCloudServiceCapabilityMusicCatalogSubscriptionEligible SKCloudServiceCapability = 2
-	// The device allows tracks to be added to the user’s music library.
-	//
-	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
-	SKCloudServiceCapabilityAddToCloudMusicLibrary SKCloudServiceCapability = 256
-)
-
-func (e SKCloudServiceCapability) String() string {
-	var parts []string
-	if e&SKCloudServiceCapabilityMusicCatalogPlayback != 0 {
-		parts = append(parts, "SKCloudServiceCapabilityMusicCatalogPlayback")
-	}
-	if e&SKCloudServiceCapabilityMusicCatalogSubscriptionEligible != 0 {
-		parts = append(parts, "SKCloudServiceCapabilityMusicCatalogSubscriptionEligible")
-	}
-	if e&SKCloudServiceCapabilityAddToCloudMusicLibrary != 0 {
-		parts = append(parts, "SKCloudServiceCapabilityAddToCloudMusicLibrary")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // The states that a download operation can be in.
 //
 // Deprecated: Hosted content is no longer supported.
-type SKDownloadState int64
+type DownloadState int64
 
 const (
 	// Indicates that the download has not started yet.
-	SKDownloadStateWaiting SKDownloadState = 0
+	DownloadStateWaiting DownloadState = 0
 	// Indicates that the content is currently being downloaded.
-	SKDownloadStateActive SKDownloadState = 1
+	DownloadStateActive DownloadState = 1
 	// Indicates that your app paused the download.
-	SKDownloadStatePaused SKDownloadState = 2
+	DownloadStatePaused DownloadState = 2
 	// Indicates that the content was successfully downloaded.
-	SKDownloadStateFinished SKDownloadState = 3
+	DownloadStateFinished DownloadState = 3
 	// Indicates that an error occurred while the file was being downloaded.
-	SKDownloadStateFailed SKDownloadState = 4
+	DownloadStateFailed DownloadState = 4
 	// Indicates that your app canceled the download.
-	SKDownloadStateCancelled SKDownloadState = 5
+	DownloadStateCancelled DownloadState = 5
 )
 
-func (e SKDownloadState) String() string {
+// String returns the DownloadState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DownloadState) String() string {
 	switch e {
-	case SKDownloadStateWaiting:
-		return "SKDownloadStateWaiting"
-	case SKDownloadStateActive:
-		return "SKDownloadStateActive"
-	case SKDownloadStatePaused:
-		return "SKDownloadStatePaused"
-	case SKDownloadStateFinished:
-		return "SKDownloadStateFinished"
-	case SKDownloadStateFailed:
-		return "SKDownloadStateFailed"
-	case SKDownloadStateCancelled:
-		return "SKDownloadStateCancelled"
+	case DownloadStateWaiting:
+		return "DownloadStateWaiting"
+	case DownloadStateActive:
+		return "DownloadStateActive"
+	case DownloadStatePaused:
+		return "DownloadStatePaused"
+	case DownloadStateFinished:
+		return "DownloadStateFinished"
+	case DownloadStateFailed:
+		return "DownloadStateFailed"
+	case DownloadStateCancelled:
+		return "DownloadStateCancelled"
 	default:
-		return fmt.Sprintf("SKDownloadState(%d)", int64(e))
+		return fmt.Sprintf("DownloadState(%d)", int64(e))
 	}
 }
 
 // Error codes for StoreKit errors.
-type SKErrorCode int64
+type ErrorCode int64
 
 const (
-	SKErrorUnknown                                   SKErrorCode = 0
-	SKErrorClientInvalid                             SKErrorCode = 1
-	SKErrorPaymentCancelled                          SKErrorCode = 2
-	SKErrorPaymentInvalid                            SKErrorCode = 3
-	SKErrorPaymentNotAllowed                         SKErrorCode = 4
-	SKErrorStoreProductNotAvailable                  SKErrorCode = 5
-	SKErrorCloudServicePermissionDenied              SKErrorCode = 6
-	SKErrorCloudServiceNetworkConnectionFailed       SKErrorCode = 7
-	SKErrorCloudServiceRevoked                       SKErrorCode = 8
-	SKErrorPrivacyAcknowledgementRequired            SKErrorCode = 9
-	SKErrorUnauthorizedRequestData                   SKErrorCode = 10
-	SKErrorInvalidOfferIdentifier                    SKErrorCode = 11
-	SKErrorInvalidSignature                          SKErrorCode = 12
-	SKErrorMissingOfferParams                        SKErrorCode = 13
-	SKErrorInvalidOfferPrice                         SKErrorCode = 14
-	SKErrorOverlayCancelled                          SKErrorCode = 15
-	SKErrorIneligibleForOffer                        SKErrorCode = 18
-	SKErrorUnsupportedPlatform                       SKErrorCode = 19
-	SKErrorPaymentMethodBindingConfigurationRequired SKErrorCode = 21
+	ErrorUnknown                                   ErrorCode = 0
+	ErrorClientInvalid                             ErrorCode = 1
+	ErrorPaymentCancelled                          ErrorCode = 2
+	ErrorPaymentInvalid                            ErrorCode = 3
+	ErrorPaymentNotAllowed                         ErrorCode = 4
+	ErrorStoreProductNotAvailable                  ErrorCode = 5
+	ErrorCloudServicePermissionDenied              ErrorCode = 6
+	ErrorCloudServiceNetworkConnectionFailed       ErrorCode = 7
+	ErrorCloudServiceRevoked                       ErrorCode = 8
+	ErrorPrivacyAcknowledgementRequired            ErrorCode = 9
+	ErrorUnauthorizedRequestData                   ErrorCode = 10
+	ErrorInvalidOfferIdentifier                    ErrorCode = 11
+	ErrorInvalidSignature                          ErrorCode = 12
+	ErrorMissingOfferParams                        ErrorCode = 13
+	ErrorInvalidOfferPrice                         ErrorCode = 14
+	ErrorOverlayCancelled                          ErrorCode = 15
+	ErrorIneligibleForOffer                        ErrorCode = 18
+	ErrorUnsupportedPlatform                       ErrorCode = 19
+	ErrorPaymentMethodBindingConfigurationRequired ErrorCode = 21
 )
 
-func (e SKErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case SKErrorUnknown:
-		return "SKErrorUnknown"
-	case SKErrorClientInvalid:
-		return "SKErrorClientInvalid"
-	case SKErrorPaymentCancelled:
-		return "SKErrorPaymentCancelled"
-	case SKErrorPaymentInvalid:
-		return "SKErrorPaymentInvalid"
-	case SKErrorPaymentNotAllowed:
-		return "SKErrorPaymentNotAllowed"
-	case SKErrorStoreProductNotAvailable:
-		return "SKErrorStoreProductNotAvailable"
-	case SKErrorCloudServicePermissionDenied:
-		return "SKErrorCloudServicePermissionDenied"
-	case SKErrorCloudServiceNetworkConnectionFailed:
-		return "SKErrorCloudServiceNetworkConnectionFailed"
-	case SKErrorCloudServiceRevoked:
-		return "SKErrorCloudServiceRevoked"
-	case SKErrorPrivacyAcknowledgementRequired:
-		return "SKErrorPrivacyAcknowledgementRequired"
-	case SKErrorUnauthorizedRequestData:
-		return "SKErrorUnauthorizedRequestData"
-	case SKErrorInvalidOfferIdentifier:
-		return "SKErrorInvalidOfferIdentifier"
-	case SKErrorInvalidSignature:
-		return "SKErrorInvalidSignature"
-	case SKErrorMissingOfferParams:
-		return "SKErrorMissingOfferParams"
-	case SKErrorInvalidOfferPrice:
-		return "SKErrorInvalidOfferPrice"
-	case SKErrorOverlayCancelled:
-		return "SKErrorOverlayCancelled"
-	case SKErrorIneligibleForOffer:
-		return "SKErrorIneligibleForOffer"
-	case SKErrorUnsupportedPlatform:
-		return "SKErrorUnsupportedPlatform"
-	case SKErrorPaymentMethodBindingConfigurationRequired:
-		return "SKErrorPaymentMethodBindingConfigurationRequired"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorClientInvalid:
+		return "ErrorClientInvalid"
+	case ErrorPaymentCancelled:
+		return "ErrorPaymentCancelled"
+	case ErrorPaymentInvalid:
+		return "ErrorPaymentInvalid"
+	case ErrorPaymentNotAllowed:
+		return "ErrorPaymentNotAllowed"
+	case ErrorStoreProductNotAvailable:
+		return "ErrorStoreProductNotAvailable"
+	case ErrorCloudServicePermissionDenied:
+		return "ErrorCloudServicePermissionDenied"
+	case ErrorCloudServiceNetworkConnectionFailed:
+		return "ErrorCloudServiceNetworkConnectionFailed"
+	case ErrorCloudServiceRevoked:
+		return "ErrorCloudServiceRevoked"
+	case ErrorPrivacyAcknowledgementRequired:
+		return "ErrorPrivacyAcknowledgementRequired"
+	case ErrorUnauthorizedRequestData:
+		return "ErrorUnauthorizedRequestData"
+	case ErrorInvalidOfferIdentifier:
+		return "ErrorInvalidOfferIdentifier"
+	case ErrorInvalidSignature:
+		return "ErrorInvalidSignature"
+	case ErrorMissingOfferParams:
+		return "ErrorMissingOfferParams"
+	case ErrorInvalidOfferPrice:
+		return "ErrorInvalidOfferPrice"
+	case ErrorOverlayCancelled:
+		return "ErrorOverlayCancelled"
+	case ErrorIneligibleForOffer:
+		return "ErrorIneligibleForOffer"
+	case ErrorUnsupportedPlatform:
+		return "ErrorUnsupportedPlatform"
+	case ErrorPaymentMethodBindingConfigurationRequired:
+		return "ErrorPaymentMethodBindingConfigurationRequired"
 	default:
-		return fmt.Sprintf("SKErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Values representing the payment modes for a product discount.
 //
 // Deprecated: Use Product.SubscriptionOffer.PaymentMode.
-type SKProductDiscountPaymentMode uint64
+type ProductDiscountPaymentMode uint64
 
 const (
-	SKProductDiscountPaymentModePayAsYouGo SKProductDiscountPaymentMode = 0
-	SKProductDiscountPaymentModePayUpFront SKProductDiscountPaymentMode = 1
-	SKProductDiscountPaymentModeFreeTrial  SKProductDiscountPaymentMode = 2
+	ProductDiscountPaymentModePayAsYouGo ProductDiscountPaymentMode = 0
+	ProductDiscountPaymentModePayUpFront ProductDiscountPaymentMode = 1
+	ProductDiscountPaymentModeFreeTrial  ProductDiscountPaymentMode = 2
 )
 
-func (e SKProductDiscountPaymentMode) String() string {
+// String returns the ProductDiscountPaymentMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProductDiscountPaymentMode) String() string {
 	switch e {
-	case SKProductDiscountPaymentModePayAsYouGo:
-		return "SKProductDiscountPaymentModePayAsYouGo"
-	case SKProductDiscountPaymentModePayUpFront:
-		return "SKProductDiscountPaymentModePayUpFront"
-	case SKProductDiscountPaymentModeFreeTrial:
-		return "SKProductDiscountPaymentModeFreeTrial"
+	case ProductDiscountPaymentModePayAsYouGo:
+		return "ProductDiscountPaymentModePayAsYouGo"
+	case ProductDiscountPaymentModePayUpFront:
+		return "ProductDiscountPaymentModePayUpFront"
+	case ProductDiscountPaymentModeFreeTrial:
+		return "ProductDiscountPaymentModeFreeTrial"
 	default:
-		return fmt.Sprintf("SKProductDiscountPaymentMode(%d)", int64(e))
+		return fmt.Sprintf("ProductDiscountPaymentMode(%d)", int64(e))
 	}
 }
 
 // Values representing the types of discount offers an app can present.
 //
 // Deprecated: Use Product.SubscriptionOffer.OfferType.
-type SKProductDiscountType uint64
+type ProductDiscountType uint64
 
 const (
 	// Deprecated: Use Product.SubscriptionOffer.PaymentMode.
-	SKProductDiscountTypeIntroductory SKProductDiscountType = 0
+	ProductDiscountTypeIntroductory ProductDiscountType = 0
 	// Deprecated: Use Product.SubscriptionOffer.PaymentMode.
-	SKProductDiscountTypeSubscription SKProductDiscountType = 1
+	ProductDiscountTypeSubscription ProductDiscountType = 1
 )
 
-func (e SKProductDiscountType) String() string {
+// String returns the ProductDiscountType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProductDiscountType) String() string {
 	switch e {
-	case SKProductDiscountTypeIntroductory:
-		return "SKProductDiscountTypeIntroductory"
-	case SKProductDiscountTypeSubscription:
-		return "SKProductDiscountTypeSubscription"
+	case ProductDiscountTypeIntroductory:
+		return "ProductDiscountTypeIntroductory"
+	case ProductDiscountTypeSubscription:
+		return "ProductDiscountTypeSubscription"
 	default:
-		return fmt.Sprintf("SKProductDiscountType(%d)", int64(e))
+		return fmt.Sprintf("ProductDiscountType(%d)", int64(e))
 	}
 }
 
 // Values representing the duration of an interval, from a day up to a year.
 //
 // Deprecated: Use Product.SubscriptionPeriod.Unit.
-type SKProductPeriodUnit uint64
+type ProductPeriodUnit uint64
 
 const (
-	SKProductPeriodUnitDay   SKProductPeriodUnit = 0
-	SKProductPeriodUnitWeek  SKProductPeriodUnit = 1
-	SKProductPeriodUnitMonth SKProductPeriodUnit = 2
-	SKProductPeriodUnitYear  SKProductPeriodUnit = 3
+	ProductPeriodUnitDay   ProductPeriodUnit = 0
+	ProductPeriodUnitWeek  ProductPeriodUnit = 1
+	ProductPeriodUnitMonth ProductPeriodUnit = 2
+	ProductPeriodUnitYear  ProductPeriodUnit = 3
 )
 
-func (e SKProductPeriodUnit) String() string {
+// String returns the ProductPeriodUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProductPeriodUnit) String() string {
 	switch e {
-	case SKProductPeriodUnitDay:
-		return "SKProductPeriodUnitDay"
-	case SKProductPeriodUnitWeek:
-		return "SKProductPeriodUnitWeek"
-	case SKProductPeriodUnitMonth:
-		return "SKProductPeriodUnitMonth"
-	case SKProductPeriodUnitYear:
-		return "SKProductPeriodUnitYear"
+	case ProductPeriodUnitDay:
+		return "ProductPeriodUnitDay"
+	case ProductPeriodUnitWeek:
+		return "ProductPeriodUnitWeek"
+	case ProductPeriodUnitMonth:
+		return "ProductPeriodUnitMonth"
+	case ProductPeriodUnitYear:
+		return "ProductPeriodUnitYear"
 	default:
-		return fmt.Sprintf("SKProductPeriodUnit(%d)", int64(e))
+		return fmt.Sprintf("ProductPeriodUnit(%d)", int64(e))
 	}
 }
 
 // The visibility settings that determine if an in-app purchase is visible on a device.
 //
 // Deprecated: Use Product.PromotionInfo.Visibility.
-type SKProductStorePromotionVisibility int64
+type ProductStorePromotionVisibility int64
 
 const (
 	// Indicates product visibility is the same as the default value set in App Store Connect.
-	SKProductStorePromotionVisibilityDefault SKProductStorePromotionVisibility = 0
+	ProductStorePromotionVisibilityDefault ProductStorePromotionVisibility = 0
 	// Indicates product is shown.
-	SKProductStorePromotionVisibilityShow SKProductStorePromotionVisibility = 1
+	ProductStorePromotionVisibilityShow ProductStorePromotionVisibility = 1
 	// Indicates product is hidden.
-	SKProductStorePromotionVisibilityHide SKProductStorePromotionVisibility = 2
+	ProductStorePromotionVisibilityHide ProductStorePromotionVisibility = 2
 )
 
-func (e SKProductStorePromotionVisibility) String() string {
+// String returns the ProductStorePromotionVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProductStorePromotionVisibility) String() string {
 	switch e {
-	case SKProductStorePromotionVisibilityDefault:
-		return "SKProductStorePromotionVisibilityDefault"
-	case SKProductStorePromotionVisibilityShow:
-		return "SKProductStorePromotionVisibilityShow"
-	case SKProductStorePromotionVisibilityHide:
-		return "SKProductStorePromotionVisibilityHide"
+	case ProductStorePromotionVisibilityDefault:
+		return "ProductStorePromotionVisibilityDefault"
+	case ProductStorePromotionVisibilityShow:
+		return "ProductStorePromotionVisibilityShow"
+	case ProductStorePromotionVisibilityHide:
+		return "ProductStorePromotionVisibilityHide"
 	default:
-		return fmt.Sprintf("SKProductStorePromotionVisibility(%d)", int64(e))
+		return fmt.Sprintf("ProductStorePromotionVisibility(%d)", int64(e))
 	}
 }

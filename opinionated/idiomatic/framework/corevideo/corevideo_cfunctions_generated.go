@@ -5,658 +5,675 @@
 package corevideo
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CVBufferCopyAttachment calls [raw.CVBufferCopyAttachment] (C function CVBufferCopyAttachment).
-func CVBufferCopyAttachment(buffer unsafe.Pointer, key unsafe.Pointer, attachmentMode *CVAttachmentMode) unsafe.Pointer {
-	var _attachmentMode raw.CVAttachmentMode
-	_ret := raw.CVBufferCopyAttachment(buffer, key, &_attachmentMode)
-	if attachmentMode != nil {
-		*attachmentMode = CVAttachmentMode(_attachmentMode)
+var _fnCVBufferCopyAttachments func(objc.ID, CVAttachmentMode) objc.ID
+
+// CVBufferCopyAttachments calls the CoreVideo framework function CVBufferCopyAttachments.
+func CVBufferCopyAttachments(buffer obj.Object, attachmentMode CVAttachmentMode) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferCopyAttachments == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferCopyAttachments, _lib, "CVBufferCopyAttachments")
 	}
-	return _ret
+	_ret := _fnCVBufferCopyAttachments(objref.IDOf(buffer), attachmentMode)
+	return obj.Wrap(_ret)
 }
 
-// CVBufferCopyAttachments calls [raw.CVBufferCopyAttachments] (C function CVBufferCopyAttachments).
-func CVBufferCopyAttachments(buffer unsafe.Pointer, attachmentMode CVAttachmentMode) unsafe.Pointer {
-	return raw.CVBufferCopyAttachments(buffer, raw.CVAttachmentMode(attachmentMode))
-}
+var _fnCVBufferGetAttachments func(objc.ID, CVAttachmentMode) objc.ID
 
-// CVBufferGetAttachment calls [raw.CVBufferGetAttachment] (C function CVBufferGetAttachment).
-func CVBufferGetAttachment(buffer unsafe.Pointer, key unsafe.Pointer, attachmentMode *CVAttachmentMode) unsafe.Pointer {
-	var _attachmentMode raw.CVAttachmentMode
-	_ret := raw.CVBufferGetAttachment(buffer, key, &_attachmentMode)
-	if attachmentMode != nil {
-		*attachmentMode = CVAttachmentMode(_attachmentMode)
+// CVBufferGetAttachments calls the CoreVideo framework function CVBufferGetAttachments.
+func CVBufferGetAttachments(buffer obj.Object, attachmentMode CVAttachmentMode) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferGetAttachments == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferGetAttachments, _lib, "CVBufferGetAttachments")
 	}
-	return _ret
+	_ret := _fnCVBufferGetAttachments(objref.IDOf(buffer), attachmentMode)
+	return obj.Wrap(_ret)
 }
 
-// CVBufferGetAttachments calls [raw.CVBufferGetAttachments] (C function CVBufferGetAttachments).
-func CVBufferGetAttachments(buffer unsafe.Pointer, attachmentMode CVAttachmentMode) unsafe.Pointer {
-	return raw.CVBufferGetAttachments(buffer, raw.CVAttachmentMode(attachmentMode))
+var _fnCVBufferHasAttachment func(objc.ID, objc.ID) uint8
+
+// CVBufferHasAttachment calls the CoreVideo framework function CVBufferHasAttachment.
+func CVBufferHasAttachment(buffer obj.Object, key obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferHasAttachment == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferHasAttachment, _lib, "CVBufferHasAttachment")
+	}
+	return _fnCVBufferHasAttachment(objref.IDOf(buffer), objref.IDOf(key))
 }
 
-// CVBufferHasAttachment calls [raw.CVBufferHasAttachment] (C function CVBufferHasAttachment).
-func CVBufferHasAttachment(buffer unsafe.Pointer, key unsafe.Pointer) uint8 {
-	return raw.CVBufferHasAttachment(buffer, key)
+var _fnCVBufferPropagateAttachments func(objc.ID, objc.ID)
+
+// CVBufferPropagateAttachments calls the CoreVideo framework function CVBufferPropagateAttachments.
+func CVBufferPropagateAttachments(sourceBuffer obj.Object, destinationBuffer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferPropagateAttachments == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferPropagateAttachments, _lib, "CVBufferPropagateAttachments")
+	}
+	_fnCVBufferPropagateAttachments(objref.IDOf(sourceBuffer), objref.IDOf(destinationBuffer))
 }
 
-// CVBufferPropagateAttachments calls [raw.CVBufferPropagateAttachments] (C function CVBufferPropagateAttachments).
-func CVBufferPropagateAttachments(sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) {
-	raw.CVBufferPropagateAttachments(sourceBuffer, destinationBuffer)
+var _fnCVBufferRelease func(objc.ID)
+
+// CVBufferRelease calls the CoreVideo framework function CVBufferRelease.
+func CVBufferRelease(buffer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferRelease, _lib, "CVBufferRelease")
+	}
+	_fnCVBufferRelease(objref.IDOf(buffer))
 }
 
-// CVBufferRelease calls [raw.CVBufferRelease] (C function CVBufferRelease).
-func CVBufferRelease(buffer unsafe.Pointer) {
-	raw.CVBufferRelease(buffer)
+var _fnCVBufferRemoveAllAttachments func(objc.ID)
+
+// CVBufferRemoveAllAttachments calls the CoreVideo framework function CVBufferRemoveAllAttachments.
+func CVBufferRemoveAllAttachments(buffer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferRemoveAllAttachments == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferRemoveAllAttachments, _lib, "CVBufferRemoveAllAttachments")
+	}
+	_fnCVBufferRemoveAllAttachments(objref.IDOf(buffer))
 }
 
-// CVBufferRemoveAllAttachments calls [raw.CVBufferRemoveAllAttachments] (C function CVBufferRemoveAllAttachments).
-func CVBufferRemoveAllAttachments(buffer unsafe.Pointer) {
-	raw.CVBufferRemoveAllAttachments(buffer)
+var _fnCVBufferRemoveAttachment func(objc.ID, objc.ID)
+
+// CVBufferRemoveAttachment calls the CoreVideo framework function CVBufferRemoveAttachment.
+func CVBufferRemoveAttachment(buffer obj.Object, key obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferRemoveAttachment == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferRemoveAttachment, _lib, "CVBufferRemoveAttachment")
+	}
+	_fnCVBufferRemoveAttachment(objref.IDOf(buffer), objref.IDOf(key))
 }
 
-// CVBufferRemoveAttachment calls [raw.CVBufferRemoveAttachment] (C function CVBufferRemoveAttachment).
-func CVBufferRemoveAttachment(buffer unsafe.Pointer, key unsafe.Pointer) {
-	raw.CVBufferRemoveAttachment(buffer, key)
+var _fnCVBufferRetain func(objc.ID) objc.ID
+
+// CVBufferRetain calls the CoreVideo framework function CVBufferRetain.
+func CVBufferRetain(buffer obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferRetain, _lib, "CVBufferRetain")
+	}
+	_ret := _fnCVBufferRetain(objref.IDOf(buffer))
+	return obj.Wrap(_ret)
 }
 
-// CVBufferRetain calls [raw.CVBufferRetain] (C function CVBufferRetain).
-func CVBufferRetain(buffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVBufferRetain(buffer)
+var _fnCVBufferSetAttachment func(objc.ID, objc.ID, objc.ID, CVAttachmentMode)
+
+// CVBufferSetAttachment calls the CoreVideo framework function CVBufferSetAttachment.
+func CVBufferSetAttachment(buffer obj.Object, key obj.Object, value obj.Object, attachmentMode CVAttachmentMode) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferSetAttachment == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferSetAttachment, _lib, "CVBufferSetAttachment")
+	}
+	_fnCVBufferSetAttachment(objref.IDOf(buffer), objref.IDOf(key), objref.IDOf(value), attachmentMode)
 }
 
-// CVBufferSetAttachment calls [raw.CVBufferSetAttachment] (C function CVBufferSetAttachment).
-func CVBufferSetAttachment(buffer unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, attachmentMode CVAttachmentMode) {
-	raw.CVBufferSetAttachment(buffer, key, value, raw.CVAttachmentMode(attachmentMode))
+var _fnCVBufferSetAttachments func(objc.ID, objc.ID, CVAttachmentMode)
+
+// CVBufferSetAttachments calls the CoreVideo framework function CVBufferSetAttachments.
+func CVBufferSetAttachments(buffer obj.Object, theAttachments obj.Object, attachmentMode CVAttachmentMode) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVBufferSetAttachments == nil {
+		ebipurego.RegisterLibFunc(&_fnCVBufferSetAttachments, _lib, "CVBufferSetAttachments")
+	}
+	_fnCVBufferSetAttachments(objref.IDOf(buffer), objref.IDOf(theAttachments), attachmentMode)
 }
 
-// CVBufferSetAttachments calls [raw.CVBufferSetAttachments] (C function CVBufferSetAttachments).
-func CVBufferSetAttachments(buffer unsafe.Pointer, theAttachments unsafe.Pointer, attachmentMode CVAttachmentMode) {
-	raw.CVBufferSetAttachments(buffer, theAttachments, raw.CVAttachmentMode(attachmentMode))
+var _fnCVColorPrimariesGetIntegerCodePointForString func(objc.ID) int
+
+// CVColorPrimariesGetIntegerCodePointForString calls the CoreVideo framework function CVColorPrimariesGetIntegerCodePointForString.
+func CVColorPrimariesGetIntegerCodePointForString(colorPrimariesString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVColorPrimariesGetIntegerCodePointForString == nil {
+		ebipurego.RegisterLibFunc(&_fnCVColorPrimariesGetIntegerCodePointForString, _lib, "CVColorPrimariesGetIntegerCodePointForString")
+	}
+	return _fnCVColorPrimariesGetIntegerCodePointForString(objref.IDOf(colorPrimariesString))
 }
 
-// CVColorPrimariesGetIntegerCodePointForString calls [raw.CVColorPrimariesGetIntegerCodePointForString] (C function CVColorPrimariesGetIntegerCodePointForString).
-func CVColorPrimariesGetIntegerCodePointForString(colorPrimariesString unsafe.Pointer) int {
-	return raw.CVColorPrimariesGetIntegerCodePointForString(colorPrimariesString)
+var _fnCVColorPrimariesGetStringForIntegerCodePoint func(int) objc.ID
+
+// CVColorPrimariesGetStringForIntegerCodePoint calls the CoreVideo framework function CVColorPrimariesGetStringForIntegerCodePoint.
+func CVColorPrimariesGetStringForIntegerCodePoint(colorPrimariesCodePoint int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVColorPrimariesGetStringForIntegerCodePoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCVColorPrimariesGetStringForIntegerCodePoint, _lib, "CVColorPrimariesGetStringForIntegerCodePoint")
+	}
+	_ret := _fnCVColorPrimariesGetStringForIntegerCodePoint(colorPrimariesCodePoint)
+	return obj.Wrap(_ret)
 }
 
-// CVColorPrimariesGetStringForIntegerCodePoint calls [raw.CVColorPrimariesGetStringForIntegerCodePoint] (C function CVColorPrimariesGetStringForIntegerCodePoint).
-func CVColorPrimariesGetStringForIntegerCodePoint(colorPrimariesCodePoint int) unsafe.Pointer {
-	return raw.CVColorPrimariesGetStringForIntegerCodePoint(colorPrimariesCodePoint)
+var _fnCVDisplayLinkGetActualOutputVideoRefreshPeriod func(objc.ID) float64
+
+// CVDisplayLinkGetActualOutputVideoRefreshPeriod calls the CoreVideo framework function CVDisplayLinkGetActualOutputVideoRefreshPeriod.
+func CVDisplayLinkGetActualOutputVideoRefreshPeriod(displayLink obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkGetActualOutputVideoRefreshPeriod == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkGetActualOutputVideoRefreshPeriod, _lib, "CVDisplayLinkGetActualOutputVideoRefreshPeriod")
+	}
+	return _fnCVDisplayLinkGetActualOutputVideoRefreshPeriod(objref.IDOf(displayLink))
 }
 
-// CVDisplayLinkCreateWithActiveCGDisplays calls [raw.CVDisplayLinkCreateWithActiveCGDisplays] (C function CVDisplayLinkCreateWithActiveCGDisplays).
-func CVDisplayLinkCreateWithActiveCGDisplays(displayLinkOut unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkCreateWithActiveCGDisplays(displayLinkOut)
+var _fnCVDisplayLinkGetCurrentCGDisplay func(objc.ID) uint32
+
+// CVDisplayLinkGetCurrentCGDisplay calls the CoreVideo framework function CVDisplayLinkGetCurrentCGDisplay.
+func CVDisplayLinkGetCurrentCGDisplay(displayLink obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkGetCurrentCGDisplay == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkGetCurrentCGDisplay, _lib, "CVDisplayLinkGetCurrentCGDisplay")
+	}
+	return _fnCVDisplayLinkGetCurrentCGDisplay(objref.IDOf(displayLink))
 }
 
-// CVDisplayLinkCreateWithCGDisplay calls [raw.CVDisplayLinkCreateWithCGDisplay] (C function CVDisplayLinkCreateWithCGDisplay).
-func CVDisplayLinkCreateWithCGDisplay(displayID uint32, displayLinkOut unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkCreateWithCGDisplay(displayID, displayLinkOut)
+var _fnCVDisplayLinkGetTypeID func() int
+
+// CVDisplayLinkGetTypeID calls the CoreVideo framework function CVDisplayLinkGetTypeID.
+func CVDisplayLinkGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkGetTypeID, _lib, "CVDisplayLinkGetTypeID")
+	}
+	return _fnCVDisplayLinkGetTypeID()
 }
 
-// CVDisplayLinkCreateWithCGDisplays calls [raw.CVDisplayLinkCreateWithCGDisplays] (C function CVDisplayLinkCreateWithCGDisplays).
-func CVDisplayLinkCreateWithCGDisplays(displayArray *uint32, count int, displayLinkOut unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkCreateWithCGDisplays(displayArray, count, displayLinkOut)
+var _fnCVDisplayLinkIsRunning func(objc.ID) uint8
+
+// CVDisplayLinkIsRunning calls the CoreVideo framework function CVDisplayLinkIsRunning.
+func CVDisplayLinkIsRunning(displayLink obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkIsRunning == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkIsRunning, _lib, "CVDisplayLinkIsRunning")
+	}
+	return _fnCVDisplayLinkIsRunning(objref.IDOf(displayLink))
 }
 
-// CVDisplayLinkCreateWithOpenGLDisplayMask calls [raw.CVDisplayLinkCreateWithOpenGLDisplayMask] (C function CVDisplayLinkCreateWithOpenGLDisplayMask).
-func CVDisplayLinkCreateWithOpenGLDisplayMask(mask uint32, displayLinkOut unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkCreateWithOpenGLDisplayMask(mask, displayLinkOut)
+var _fnCVDisplayLinkRelease func(objc.ID)
+
+// CVDisplayLinkRelease calls the CoreVideo framework function CVDisplayLinkRelease.
+func CVDisplayLinkRelease(displayLink obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkRelease, _lib, "CVDisplayLinkRelease")
+	}
+	_fnCVDisplayLinkRelease(objref.IDOf(displayLink))
 }
 
-// CVDisplayLinkGetActualOutputVideoRefreshPeriod calls [raw.CVDisplayLinkGetActualOutputVideoRefreshPeriod] (C function CVDisplayLinkGetActualOutputVideoRefreshPeriod).
-func CVDisplayLinkGetActualOutputVideoRefreshPeriod(displayLink unsafe.Pointer) float64 {
-	return raw.CVDisplayLinkGetActualOutputVideoRefreshPeriod(displayLink)
+var _fnCVDisplayLinkRetain func(objc.ID) objc.ID
+
+// CVDisplayLinkRetain calls the CoreVideo framework function CVDisplayLinkRetain.
+func CVDisplayLinkRetain(displayLink obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkRetain, _lib, "CVDisplayLinkRetain")
+	}
+	_ret := _fnCVDisplayLinkRetain(objref.IDOf(displayLink))
+	return obj.Wrap(_ret)
 }
 
-// CVDisplayLinkGetCurrentCGDisplay calls [raw.CVDisplayLinkGetCurrentCGDisplay] (C function CVDisplayLinkGetCurrentCGDisplay).
-func CVDisplayLinkGetCurrentCGDisplay(displayLink unsafe.Pointer) uint32 {
-	return raw.CVDisplayLinkGetCurrentCGDisplay(displayLink)
+var _fnCVDisplayLinkSetCurrentCGDisplay func(objc.ID, uint32) int32
+
+// CVDisplayLinkSetCurrentCGDisplay calls the CoreVideo framework function CVDisplayLinkSetCurrentCGDisplay.
+func CVDisplayLinkSetCurrentCGDisplay(displayLink obj.Object, displayID uint32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkSetCurrentCGDisplay == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkSetCurrentCGDisplay, _lib, "CVDisplayLinkSetCurrentCGDisplay")
+	}
+	return _fnCVDisplayLinkSetCurrentCGDisplay(objref.IDOf(displayLink), displayID)
 }
 
-// CVDisplayLinkGetCurrentTime calls [raw.CVDisplayLinkGetCurrentTime] (C function CVDisplayLinkGetCurrentTime).
-func CVDisplayLinkGetCurrentTime(displayLink unsafe.Pointer, outTime *raw.CVTimeStamp) int32 {
-	return raw.CVDisplayLinkGetCurrentTime(displayLink, outTime)
+var _fnCVDisplayLinkSetCurrentCGDisplayFromOpenGLContext func(objc.ID, objc.ID, objc.ID) int32
+
+// CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext calls the CoreVideo framework function CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext.
+func CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink obj.Object, cglContext obj.Object, cglPixelFormat obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkSetCurrentCGDisplayFromOpenGLContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkSetCurrentCGDisplayFromOpenGLContext, _lib, "CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext")
+	}
+	return _fnCVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(objref.IDOf(displayLink), objref.IDOf(cglContext), objref.IDOf(cglPixelFormat))
 }
 
-// CVDisplayLinkGetNominalOutputVideoRefreshPeriod calls [raw.CVDisplayLinkGetNominalOutputVideoRefreshPeriod] (C function CVDisplayLinkGetNominalOutputVideoRefreshPeriod).
-func CVDisplayLinkGetNominalOutputVideoRefreshPeriod(displayLink unsafe.Pointer) raw.CVTime {
-	return raw.CVDisplayLinkGetNominalOutputVideoRefreshPeriod(displayLink)
+var _fnCVDisplayLinkStart func(objc.ID) int32
+
+// CVDisplayLinkStart calls the CoreVideo framework function CVDisplayLinkStart.
+func CVDisplayLinkStart(displayLink obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkStart == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkStart, _lib, "CVDisplayLinkStart")
+	}
+	return _fnCVDisplayLinkStart(objref.IDOf(displayLink))
 }
 
-// CVDisplayLinkGetOutputVideoLatency calls [raw.CVDisplayLinkGetOutputVideoLatency] (C function CVDisplayLinkGetOutputVideoLatency).
-func CVDisplayLinkGetOutputVideoLatency(displayLink unsafe.Pointer) raw.CVTime {
-	return raw.CVDisplayLinkGetOutputVideoLatency(displayLink)
+var _fnCVDisplayLinkStop func(objc.ID) int32
+
+// CVDisplayLinkStop calls the CoreVideo framework function CVDisplayLinkStop.
+func CVDisplayLinkStop(displayLink obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkStop == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkStop, _lib, "CVDisplayLinkStop")
+	}
+	return _fnCVDisplayLinkStop(objref.IDOf(displayLink))
 }
 
-// CVDisplayLinkGetTypeID calls [raw.CVDisplayLinkGetTypeID] (C function CVDisplayLinkGetTypeID).
-func CVDisplayLinkGetTypeID() uint {
-	return raw.CVDisplayLinkGetTypeID()
-}
+var _fnCVGetCurrentHostTime func() uint64
 
-// CVDisplayLinkIsRunning calls [raw.CVDisplayLinkIsRunning] (C function CVDisplayLinkIsRunning).
-func CVDisplayLinkIsRunning(displayLink unsafe.Pointer) uint8 {
-	return raw.CVDisplayLinkIsRunning(displayLink)
-}
-
-// CVDisplayLinkRelease calls [raw.CVDisplayLinkRelease] (C function CVDisplayLinkRelease).
-func CVDisplayLinkRelease(displayLink unsafe.Pointer) {
-	raw.CVDisplayLinkRelease(displayLink)
-}
-
-// CVDisplayLinkRetain calls [raw.CVDisplayLinkRetain] (C function CVDisplayLinkRetain).
-func CVDisplayLinkRetain(displayLink unsafe.Pointer) unsafe.Pointer {
-	return raw.CVDisplayLinkRetain(displayLink)
-}
-
-// CVDisplayLinkSetCurrentCGDisplay calls [raw.CVDisplayLinkSetCurrentCGDisplay] (C function CVDisplayLinkSetCurrentCGDisplay).
-func CVDisplayLinkSetCurrentCGDisplay(displayLink unsafe.Pointer, displayID uint32) int32 {
-	return raw.CVDisplayLinkSetCurrentCGDisplay(displayLink, displayID)
-}
-
-// CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext calls [raw.CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext] (C function CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext).
-func CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink unsafe.Pointer, cglContext unsafe.Pointer, cglPixelFormat unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink, cglContext, cglPixelFormat)
-}
-
-// CVDisplayLinkSetOutputCallback calls [raw.CVDisplayLinkSetOutputCallback] (C function CVDisplayLinkSetOutputCallback).
-func CVDisplayLinkSetOutputCallback(displayLink unsafe.Pointer, callback unsafe.Pointer, userInfo unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkSetOutputCallback(displayLink, callback, userInfo)
-}
-
-// CVDisplayLinkSetOutputHandler calls [raw.CVDisplayLinkSetOutputHandler] (C function CVDisplayLinkSetOutputHandler).
-func CVDisplayLinkSetOutputHandler(displayLink unsafe.Pointer, handler func(unsafe.Pointer, *raw.CVTimeStamp, *raw.CVTimeStamp, uint64, *uint64) int32) int32 {
-	return raw.CVDisplayLinkSetOutputHandler(displayLink, handler)
-}
-
-// CVDisplayLinkStart calls [raw.CVDisplayLinkStart] (C function CVDisplayLinkStart).
-func CVDisplayLinkStart(displayLink unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkStart(displayLink)
-}
-
-// CVDisplayLinkStop calls [raw.CVDisplayLinkStop] (C function CVDisplayLinkStop).
-func CVDisplayLinkStop(displayLink unsafe.Pointer) int32 {
-	return raw.CVDisplayLinkStop(displayLink)
-}
-
-// CVDisplayLinkTranslateTime calls [raw.CVDisplayLinkTranslateTime] (C function CVDisplayLinkTranslateTime).
-func CVDisplayLinkTranslateTime(displayLink unsafe.Pointer, inTime *raw.CVTimeStamp, outTime *raw.CVTimeStamp) int32 {
-	return raw.CVDisplayLinkTranslateTime(displayLink, inTime, outTime)
-}
-
-// CVGetCurrentHostTime calls [raw.CVGetCurrentHostTime] (C function CVGetCurrentHostTime).
+// CVGetCurrentHostTime calls the CoreVideo framework function CVGetCurrentHostTime.
 func CVGetCurrentHostTime() uint64 {
-	return raw.CVGetCurrentHostTime()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVGetCurrentHostTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCVGetCurrentHostTime, _lib, "CVGetCurrentHostTime")
+	}
+	return _fnCVGetCurrentHostTime()
 }
 
-// CVGetHostClockFrequency calls [raw.CVGetHostClockFrequency] (C function CVGetHostClockFrequency).
+var _fnCVGetHostClockFrequency func() float64
+
+// CVGetHostClockFrequency calls the CoreVideo framework function CVGetHostClockFrequency.
 func CVGetHostClockFrequency() float64 {
-	return raw.CVGetHostClockFrequency()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVGetHostClockFrequency == nil {
+		ebipurego.RegisterLibFunc(&_fnCVGetHostClockFrequency, _lib, "CVGetHostClockFrequency")
+	}
+	return _fnCVGetHostClockFrequency()
 }
 
-// CVGetHostClockMinimumTimeDelta calls [raw.CVGetHostClockMinimumTimeDelta] (C function CVGetHostClockMinimumTimeDelta).
+var _fnCVGetHostClockMinimumTimeDelta func() uint32
+
+// CVGetHostClockMinimumTimeDelta calls the CoreVideo framework function CVGetHostClockMinimumTimeDelta.
 func CVGetHostClockMinimumTimeDelta() uint32 {
-	return raw.CVGetHostClockMinimumTimeDelta()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVGetHostClockMinimumTimeDelta == nil {
+		ebipurego.RegisterLibFunc(&_fnCVGetHostClockMinimumTimeDelta, _lib, "CVGetHostClockMinimumTimeDelta")
+	}
+	return _fnCVGetHostClockMinimumTimeDelta()
 }
 
-// CVImageBufferCreateColorSpaceFromAttachments calls [raw.CVImageBufferCreateColorSpaceFromAttachments] (C function CVImageBufferCreateColorSpaceFromAttachments).
-func CVImageBufferCreateColorSpaceFromAttachments(attachments unsafe.Pointer) unsafe.Pointer {
-	return raw.CVImageBufferCreateColorSpaceFromAttachments(attachments)
-}
-
-// CVImageBufferGetCleanRect calls [raw.CVImageBufferGetCleanRect] (C function CVImageBufferGetCleanRect).
-func CVImageBufferGetCleanRect(imageBuffer unsafe.Pointer) corefoundation.CGRect {
-	return raw.CVImageBufferGetCleanRect(imageBuffer)
-}
-
-// CVImageBufferGetColorSpace calls [raw.CVImageBufferGetColorSpace] (C function CVImageBufferGetColorSpace).
-func CVImageBufferGetColorSpace(imageBuffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVImageBufferGetColorSpace(imageBuffer)
-}
-
-// CVImageBufferGetDisplaySize calls [raw.CVImageBufferGetDisplaySize] (C function CVImageBufferGetDisplaySize).
-func CVImageBufferGetDisplaySize(imageBuffer unsafe.Pointer) corefoundation.CGSize {
-	return raw.CVImageBufferGetDisplaySize(imageBuffer)
-}
-
-// CVImageBufferGetEncodedSize calls [raw.CVImageBufferGetEncodedSize] (C function CVImageBufferGetEncodedSize).
-func CVImageBufferGetEncodedSize(imageBuffer unsafe.Pointer) corefoundation.CGSize {
-	return raw.CVImageBufferGetEncodedSize(imageBuffer)
-}
-
-// CVImageBufferIsFlipped calls [raw.CVImageBufferIsFlipped] (C function CVImageBufferIsFlipped).
-func CVImageBufferIsFlipped(imageBuffer unsafe.Pointer) uint8 {
-	return raw.CVImageBufferIsFlipped(imageBuffer)
-}
-
-// CVIsCompressedPixelFormatAvailable calls [raw.CVIsCompressedPixelFormatAvailable] (C function CVIsCompressedPixelFormatAvailable).
-func CVIsCompressedPixelFormatAvailable(pixelFormatType uint) uint8 {
-	return raw.CVIsCompressedPixelFormatAvailable(pixelFormatType)
-}
-
-// CVMetalBufferCacheCreate calls [raw.CVMetalBufferCacheCreate] (C function CVMetalBufferCacheCreate).
-func CVMetalBufferCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, metalDevice metal.MTLDevice, cacheOut unsafe.Pointer) int32 {
-	return raw.CVMetalBufferCacheCreate(allocator, cacheAttributes, metalDevice, cacheOut)
-}
-
-// CVMetalBufferCacheCreateBufferFromImage calls [raw.CVMetalBufferCacheCreateBufferFromImage] (C function CVMetalBufferCacheCreateBufferFromImage).
-func CVMetalBufferCacheCreateBufferFromImage(allocator unsafe.Pointer, bufferCache unsafe.Pointer, imageBuffer unsafe.Pointer, bufferOut unsafe.Pointer) int32 {
-	return raw.CVMetalBufferCacheCreateBufferFromImage(allocator, bufferCache, imageBuffer, bufferOut)
-}
-
-// CVMetalBufferCacheFlush calls [raw.CVMetalBufferCacheFlush] (C function CVMetalBufferCacheFlush).
-func CVMetalBufferCacheFlush(bufferCache unsafe.Pointer, options uint64) {
-	raw.CVMetalBufferCacheFlush(bufferCache, options)
-}
-
-// CVMetalBufferCacheGetTypeID calls [raw.CVMetalBufferCacheGetTypeID] (C function CVMetalBufferCacheGetTypeID).
-func CVMetalBufferCacheGetTypeID() uint {
-	return raw.CVMetalBufferCacheGetTypeID()
-}
-
-// CVMetalBufferGetBuffer calls [raw.CVMetalBufferGetBuffer] (C function CVMetalBufferGetBuffer).
-func CVMetalBufferGetBuffer(buffer unsafe.Pointer) metal.MTLBuffer {
-	return raw.CVMetalBufferGetBuffer(buffer)
-}
-
-// CVMetalBufferGetTypeID calls [raw.CVMetalBufferGetTypeID] (C function CVMetalBufferGetTypeID).
-func CVMetalBufferGetTypeID() uint {
-	return raw.CVMetalBufferGetTypeID()
-}
-
-// CVMetalTextureCacheCreate calls [raw.CVMetalTextureCacheCreate] (C function CVMetalTextureCacheCreate).
-func CVMetalTextureCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, metalDevice metal.MTLDevice, textureAttributes unsafe.Pointer, cacheOut unsafe.Pointer) int32 {
-	return raw.CVMetalTextureCacheCreate(allocator, cacheAttributes, metalDevice, textureAttributes, cacheOut)
-}
-
-// CVMetalTextureCacheCreateTextureFromImage calls [raw.CVMetalTextureCacheCreateTextureFromImage] (C function CVMetalTextureCacheCreateTextureFromImage).
-func CVMetalTextureCacheCreateTextureFromImage(allocator unsafe.Pointer, textureCache unsafe.Pointer, sourceImage unsafe.Pointer, textureAttributes unsafe.Pointer, pixelFormat metal.MTLPixelFormat, width uint, height uint, planeIndex uint, textureOut unsafe.Pointer) int32 {
-	return raw.CVMetalTextureCacheCreateTextureFromImage(allocator, textureCache, sourceImage, textureAttributes, pixelFormat, width, height, planeIndex, textureOut)
-}
-
-// CVMetalTextureCacheFlush calls [raw.CVMetalTextureCacheFlush] (C function CVMetalTextureCacheFlush).
-func CVMetalTextureCacheFlush(textureCache unsafe.Pointer, options uint64) {
-	raw.CVMetalTextureCacheFlush(textureCache, options)
-}
-
-// CVMetalTextureCacheGetTypeID calls [raw.CVMetalTextureCacheGetTypeID] (C function CVMetalTextureCacheGetTypeID).
-func CVMetalTextureCacheGetTypeID() uint {
-	return raw.CVMetalTextureCacheGetTypeID()
-}
-
-// CVMetalTextureGetCleanTexCoords calls [raw.CVMetalTextureGetCleanTexCoords] (C function CVMetalTextureGetCleanTexCoords).
-func CVMetalTextureGetCleanTexCoords(image unsafe.Pointer, lowerLeft *float32, lowerRight *float32, upperRight *float32, upperLeft *float32) {
-	raw.CVMetalTextureGetCleanTexCoords(image, lowerLeft, lowerRight, upperRight, upperLeft)
-}
-
-// CVMetalTextureGetTexture calls [raw.CVMetalTextureGetTexture] (C function CVMetalTextureGetTexture).
-func CVMetalTextureGetTexture(image unsafe.Pointer) metal.MTLTexture {
-	return raw.CVMetalTextureGetTexture(image)
-}
-
-// CVMetalTextureGetTypeID calls [raw.CVMetalTextureGetTypeID] (C function CVMetalTextureGetTypeID).
-func CVMetalTextureGetTypeID() uint {
-	return raw.CVMetalTextureGetTypeID()
-}
-
-// CVMetalTextureIsFlipped calls [raw.CVMetalTextureIsFlipped] (C function CVMetalTextureIsFlipped).
-func CVMetalTextureIsFlipped(image unsafe.Pointer) uint8 {
-	return raw.CVMetalTextureIsFlipped(image)
-}
-
-// CVOpenGLBufferAttach calls [raw.CVOpenGLBufferAttach] (C function CVOpenGLBufferAttach).
-func CVOpenGLBufferAttach(openGLBuffer unsafe.Pointer, cglContext unsafe.Pointer, face uint32, level int32, screen int32) int32 {
-	return raw.CVOpenGLBufferAttach(openGLBuffer, cglContext, face, level, screen)
-}
-
-// CVOpenGLBufferCreate calls [raw.CVOpenGLBufferCreate] (C function CVOpenGLBufferCreate).
-func CVOpenGLBufferCreate(allocator unsafe.Pointer, width uint, height uint, attributes unsafe.Pointer, bufferOut unsafe.Pointer) int32 {
-	return raw.CVOpenGLBufferCreate(allocator, width, height, attributes, bufferOut)
-}
+var _fnCVImageBufferCreateColorSpaceFromAttachments func(objc.ID) objc.ID
 
-// CVOpenGLBufferGetAttributes calls [raw.CVOpenGLBufferGetAttributes] (C function CVOpenGLBufferGetAttributes).
-func CVOpenGLBufferGetAttributes(openGLBuffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLBufferGetAttributes(openGLBuffer)
+// CVImageBufferCreateColorSpaceFromAttachments calls the CoreVideo framework function CVImageBufferCreateColorSpaceFromAttachments.
+func CVImageBufferCreateColorSpaceFromAttachments(attachments obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVImageBufferCreateColorSpaceFromAttachments == nil {
+		ebipurego.RegisterLibFunc(&_fnCVImageBufferCreateColorSpaceFromAttachments, _lib, "CVImageBufferCreateColorSpaceFromAttachments")
+	}
+	_ret := _fnCVImageBufferCreateColorSpaceFromAttachments(objref.IDOf(attachments))
+	return obj.Wrap(_ret)
 }
 
-// CVOpenGLBufferGetTypeID calls [raw.CVOpenGLBufferGetTypeID] (C function CVOpenGLBufferGetTypeID).
-func CVOpenGLBufferGetTypeID() uint {
-	return raw.CVOpenGLBufferGetTypeID()
-}
-
-// CVOpenGLBufferPoolCreate calls [raw.CVOpenGLBufferPoolCreate] (C function CVOpenGLBufferPoolCreate).
-func CVOpenGLBufferPoolCreate(allocator unsafe.Pointer, poolAttributes unsafe.Pointer, openGLBufferAttributes unsafe.Pointer, poolOut unsafe.Pointer) int32 {
-	return raw.CVOpenGLBufferPoolCreate(allocator, poolAttributes, openGLBufferAttributes, poolOut)
-}
+var _fnCVIsCompressedPixelFormatAvailable func(int) uint8
 
-// CVOpenGLBufferPoolCreateOpenGLBuffer calls [raw.CVOpenGLBufferPoolCreateOpenGLBuffer] (C function CVOpenGLBufferPoolCreateOpenGLBuffer).
-func CVOpenGLBufferPoolCreateOpenGLBuffer(allocator unsafe.Pointer, openGLBufferPool unsafe.Pointer, openGLBufferOut unsafe.Pointer) int32 {
-	return raw.CVOpenGLBufferPoolCreateOpenGLBuffer(allocator, openGLBufferPool, openGLBufferOut)
+// CVIsCompressedPixelFormatAvailable calls the CoreVideo framework function CVIsCompressedPixelFormatAvailable.
+func CVIsCompressedPixelFormatAvailable(pixelFormatType int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVIsCompressedPixelFormatAvailable == nil {
+		ebipurego.RegisterLibFunc(&_fnCVIsCompressedPixelFormatAvailable, _lib, "CVIsCompressedPixelFormatAvailable")
+	}
+	return _fnCVIsCompressedPixelFormatAvailable(pixelFormatType)
 }
 
-// CVOpenGLBufferPoolGetAttributes calls [raw.CVOpenGLBufferPoolGetAttributes] (C function CVOpenGLBufferPoolGetAttributes).
-func CVOpenGLBufferPoolGetAttributes(pool unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLBufferPoolGetAttributes(pool)
-}
+var _fnCVMetalBufferCacheFlush func(objc.ID, uint64)
 
-// CVOpenGLBufferPoolGetOpenGLBufferAttributes calls [raw.CVOpenGLBufferPoolGetOpenGLBufferAttributes] (C function CVOpenGLBufferPoolGetOpenGLBufferAttributes).
-func CVOpenGLBufferPoolGetOpenGLBufferAttributes(pool unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLBufferPoolGetOpenGLBufferAttributes(pool)
+// CVMetalBufferCacheFlush calls the CoreVideo framework function CVMetalBufferCacheFlush.
+func CVMetalBufferCacheFlush(bufferCache obj.Object, options uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalBufferCacheFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalBufferCacheFlush, _lib, "CVMetalBufferCacheFlush")
+	}
+	_fnCVMetalBufferCacheFlush(objref.IDOf(bufferCache), options)
 }
 
-// CVOpenGLBufferPoolGetTypeID calls [raw.CVOpenGLBufferPoolGetTypeID] (C function CVOpenGLBufferPoolGetTypeID).
-func CVOpenGLBufferPoolGetTypeID() uint {
-	return raw.CVOpenGLBufferPoolGetTypeID()
-}
+var _fnCVMetalBufferCacheGetTypeID func() int
 
-// CVOpenGLBufferPoolRelease calls [raw.CVOpenGLBufferPoolRelease] (C function CVOpenGLBufferPoolRelease).
-func CVOpenGLBufferPoolRelease(openGLBufferPool unsafe.Pointer) {
-	raw.CVOpenGLBufferPoolRelease(openGLBufferPool)
+// CVMetalBufferCacheGetTypeID calls the CoreVideo framework function CVMetalBufferCacheGetTypeID.
+func CVMetalBufferCacheGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalBufferCacheGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalBufferCacheGetTypeID, _lib, "CVMetalBufferCacheGetTypeID")
+	}
+	return _fnCVMetalBufferCacheGetTypeID()
 }
 
-// CVOpenGLBufferPoolRetain calls [raw.CVOpenGLBufferPoolRetain] (C function CVOpenGLBufferPoolRetain).
-func CVOpenGLBufferPoolRetain(openGLBufferPool unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLBufferPoolRetain(openGLBufferPool)
-}
+var _fnCVMetalBufferGetTypeID func() int
 
-// CVOpenGLBufferRelease calls [raw.CVOpenGLBufferRelease] (C function CVOpenGLBufferRelease).
-func CVOpenGLBufferRelease(buffer unsafe.Pointer) {
-	raw.CVOpenGLBufferRelease(buffer)
+// CVMetalBufferGetTypeID calls the CoreVideo framework function CVMetalBufferGetTypeID.
+func CVMetalBufferGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalBufferGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalBufferGetTypeID, _lib, "CVMetalBufferGetTypeID")
+	}
+	return _fnCVMetalBufferGetTypeID()
 }
 
-// CVOpenGLBufferRetain calls [raw.CVOpenGLBufferRetain] (C function CVOpenGLBufferRetain).
-func CVOpenGLBufferRetain(buffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLBufferRetain(buffer)
-}
+var _fnCVMetalTextureCacheFlush func(objc.ID, uint64)
 
-// CVOpenGLTextureCacheCreate calls [raw.CVOpenGLTextureCacheCreate] (C function CVOpenGLTextureCacheCreate).
-func CVOpenGLTextureCacheCreate(allocator unsafe.Pointer, cacheAttributes unsafe.Pointer, cglContext unsafe.Pointer, cglPixelFormat unsafe.Pointer, textureAttributes unsafe.Pointer, cacheOut unsafe.Pointer) int32 {
-	return raw.CVOpenGLTextureCacheCreate(allocator, cacheAttributes, cglContext, cglPixelFormat, textureAttributes, cacheOut)
+// CVMetalTextureCacheFlush calls the CoreVideo framework function CVMetalTextureCacheFlush.
+func CVMetalTextureCacheFlush(textureCache obj.Object, options uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalTextureCacheFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalTextureCacheFlush, _lib, "CVMetalTextureCacheFlush")
+	}
+	_fnCVMetalTextureCacheFlush(objref.IDOf(textureCache), options)
 }
 
-// CVOpenGLTextureCacheCreateTextureFromImage calls [raw.CVOpenGLTextureCacheCreateTextureFromImage] (C function CVOpenGLTextureCacheCreateTextureFromImage).
-func CVOpenGLTextureCacheCreateTextureFromImage(allocator unsafe.Pointer, textureCache unsafe.Pointer, sourceImage unsafe.Pointer, attributes unsafe.Pointer, textureOut unsafe.Pointer) int32 {
-	return raw.CVOpenGLTextureCacheCreateTextureFromImage(allocator, textureCache, sourceImage, attributes, textureOut)
-}
+var _fnCVMetalTextureCacheGetTypeID func() int
 
-// CVOpenGLTextureCacheFlush calls [raw.CVOpenGLTextureCacheFlush] (C function CVOpenGLTextureCacheFlush).
-func CVOpenGLTextureCacheFlush(textureCache unsafe.Pointer, options uint64) {
-	raw.CVOpenGLTextureCacheFlush(textureCache, options)
+// CVMetalTextureCacheGetTypeID calls the CoreVideo framework function CVMetalTextureCacheGetTypeID.
+func CVMetalTextureCacheGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalTextureCacheGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalTextureCacheGetTypeID, _lib, "CVMetalTextureCacheGetTypeID")
+	}
+	return _fnCVMetalTextureCacheGetTypeID()
 }
 
-// CVOpenGLTextureCacheGetTypeID calls [raw.CVOpenGLTextureCacheGetTypeID] (C function CVOpenGLTextureCacheGetTypeID).
-func CVOpenGLTextureCacheGetTypeID() uint {
-	return raw.CVOpenGLTextureCacheGetTypeID()
-}
+var _fnCVMetalTextureGetTypeID func() int
 
-// CVOpenGLTextureCacheRelease calls [raw.CVOpenGLTextureCacheRelease] (C function CVOpenGLTextureCacheRelease).
-func CVOpenGLTextureCacheRelease(textureCache unsafe.Pointer) {
-	raw.CVOpenGLTextureCacheRelease(textureCache)
+// CVMetalTextureGetTypeID calls the CoreVideo framework function CVMetalTextureGetTypeID.
+func CVMetalTextureGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalTextureGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalTextureGetTypeID, _lib, "CVMetalTextureGetTypeID")
+	}
+	return _fnCVMetalTextureGetTypeID()
 }
 
-// CVOpenGLTextureCacheRetain calls [raw.CVOpenGLTextureCacheRetain] (C function CVOpenGLTextureCacheRetain).
-func CVOpenGLTextureCacheRetain(textureCache unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLTextureCacheRetain(textureCache)
-}
+var _fnCVOpenGLBufferGetTypeID func() int
 
-// CVOpenGLTextureGetCleanTexCoords calls [raw.CVOpenGLTextureGetCleanTexCoords] (C function CVOpenGLTextureGetCleanTexCoords).
-func CVOpenGLTextureGetCleanTexCoords(image unsafe.Pointer, lowerLeft *float32, lowerRight *float32, upperRight *float32, upperLeft *float32) {
-	raw.CVOpenGLTextureGetCleanTexCoords(image, lowerLeft, lowerRight, upperRight, upperLeft)
+// CVOpenGLBufferGetTypeID calls the CoreVideo framework function CVOpenGLBufferGetTypeID.
+func CVOpenGLBufferGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLBufferGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferGetTypeID, _lib, "CVOpenGLBufferGetTypeID")
+	}
+	return _fnCVOpenGLBufferGetTypeID()
 }
 
-// CVOpenGLTextureGetName calls [raw.CVOpenGLTextureGetName] (C function CVOpenGLTextureGetName).
-func CVOpenGLTextureGetName(image unsafe.Pointer) uint32 {
-	return raw.CVOpenGLTextureGetName(image)
-}
+var _fnCVOpenGLBufferPoolGetAttributes func(objc.ID) objc.ID
 
-// CVOpenGLTextureGetTarget calls [raw.CVOpenGLTextureGetTarget] (C function CVOpenGLTextureGetTarget).
-func CVOpenGLTextureGetTarget(image unsafe.Pointer) uint32 {
-	return raw.CVOpenGLTextureGetTarget(image)
+// CVOpenGLBufferPoolGetAttributes calls the CoreVideo framework function CVOpenGLBufferPoolGetAttributes.
+func CVOpenGLBufferPoolGetAttributes(pool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLBufferPoolGetAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolGetAttributes, _lib, "CVOpenGLBufferPoolGetAttributes")
+	}
+	_ret := _fnCVOpenGLBufferPoolGetAttributes(objref.IDOf(pool))
+	return obj.Wrap(_ret)
 }
 
-// CVOpenGLTextureGetTypeID calls [raw.CVOpenGLTextureGetTypeID] (C function CVOpenGLTextureGetTypeID).
-func CVOpenGLTextureGetTypeID() uint {
-	return raw.CVOpenGLTextureGetTypeID()
-}
+var _fnCVOpenGLBufferPoolGetOpenGLBufferAttributes func(objc.ID) objc.ID
 
-// CVOpenGLTextureIsFlipped calls [raw.CVOpenGLTextureIsFlipped] (C function CVOpenGLTextureIsFlipped).
-func CVOpenGLTextureIsFlipped(image unsafe.Pointer) uint8 {
-	return raw.CVOpenGLTextureIsFlipped(image)
+// CVOpenGLBufferPoolGetOpenGLBufferAttributes calls the CoreVideo framework function CVOpenGLBufferPoolGetOpenGLBufferAttributes.
+func CVOpenGLBufferPoolGetOpenGLBufferAttributes(pool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLBufferPoolGetOpenGLBufferAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolGetOpenGLBufferAttributes, _lib, "CVOpenGLBufferPoolGetOpenGLBufferAttributes")
+	}
+	_ret := _fnCVOpenGLBufferPoolGetOpenGLBufferAttributes(objref.IDOf(pool))
+	return obj.Wrap(_ret)
 }
 
-// CVOpenGLTextureRelease calls [raw.CVOpenGLTextureRelease] (C function CVOpenGLTextureRelease).
-func CVOpenGLTextureRelease(texture unsafe.Pointer) {
-	raw.CVOpenGLTextureRelease(texture)
-}
+var _fnCVOpenGLBufferPoolGetTypeID func() int
 
-// CVOpenGLTextureRetain calls [raw.CVOpenGLTextureRetain] (C function CVOpenGLTextureRetain).
-func CVOpenGLTextureRetain(texture unsafe.Pointer) unsafe.Pointer {
-	return raw.CVOpenGLTextureRetain(texture)
+// CVOpenGLBufferPoolGetTypeID calls the CoreVideo framework function CVOpenGLBufferPoolGetTypeID.
+func CVOpenGLBufferPoolGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLBufferPoolGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolGetTypeID, _lib, "CVOpenGLBufferPoolGetTypeID")
+	}
+	return _fnCVOpenGLBufferPoolGetTypeID()
 }
 
-// CVPixelBufferCopyCreationAttributes calls [raw.CVPixelBufferCopyCreationAttributes] (C function CVPixelBufferCopyCreationAttributes).
-func CVPixelBufferCopyCreationAttributes(pixelBuffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferCopyCreationAttributes(pixelBuffer)
-}
+var _fnCVOpenGLBufferPoolRelease func(objc.ID)
 
-// CVPixelBufferCreate calls [raw.CVPixelBufferCreate] (C function CVPixelBufferCreate).
-func CVPixelBufferCreate(allocator unsafe.Pointer, width uint, height uint, pixelFormatType uint, pixelBufferAttributes unsafe.Pointer, pixelBufferOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferCreate(allocator, width, height, pixelFormatType, pixelBufferAttributes, pixelBufferOut)
+// CVOpenGLBufferPoolRelease calls the CoreVideo framework function CVOpenGLBufferPoolRelease.
+func CVOpenGLBufferPoolRelease(openGLBufferPool obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLBufferPoolRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolRelease, _lib, "CVOpenGLBufferPoolRelease")
+	}
+	_fnCVOpenGLBufferPoolRelease(objref.IDOf(openGLBufferPool))
 }
 
-// CVPixelBufferCreateResolvedAttributesDictionary calls [raw.CVPixelBufferCreateResolvedAttributesDictionary] (C function CVPixelBufferCreateResolvedAttributesDictionary).
-func CVPixelBufferCreateResolvedAttributesDictionary(allocator unsafe.Pointer, attributes unsafe.Pointer, resolvedDictionaryOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferCreateResolvedAttributesDictionary(allocator, attributes, resolvedDictionaryOut)
-}
+var _fnCVOpenGLBufferPoolRetain func(objc.ID) objc.ID
 
-// CVPixelBufferCreateWithBytes calls [raw.CVPixelBufferCreateWithBytes] (C function CVPixelBufferCreateWithBytes).
-func CVPixelBufferCreateWithBytes(allocator unsafe.Pointer, width uint, height uint, pixelFormatType uint, baseAddress unsafe.Pointer, bytesPerRow uint, releaseCallback unsafe.Pointer, releaseRefCon unsafe.Pointer, pixelBufferAttributes unsafe.Pointer, pixelBufferOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferCreateWithBytes(allocator, width, height, pixelFormatType, baseAddress, bytesPerRow, releaseCallback, releaseRefCon, pixelBufferAttributes, pixelBufferOut)
+// CVOpenGLBufferPoolRetain calls the CoreVideo framework function CVOpenGLBufferPoolRetain.
+func CVOpenGLBufferPoolRetain(openGLBufferPool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLBufferPoolRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLBufferPoolRetain, _lib, "CVOpenGLBufferPoolRetain")
+	}
+	_ret := _fnCVOpenGLBufferPoolRetain(objref.IDOf(openGLBufferPool))
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferCreateWithIOSurface calls [raw.CVPixelBufferCreateWithIOSurface] (C function CVPixelBufferCreateWithIOSurface).
-func CVPixelBufferCreateWithIOSurface(allocator unsafe.Pointer, surface unsafe.Pointer, pixelBufferAttributes unsafe.Pointer, pixelBufferOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferCreateWithIOSurface(allocator, surface, pixelBufferAttributes, pixelBufferOut)
-}
+var _fnCVOpenGLTextureCacheFlush func(objc.ID, uint64)
 
-// CVPixelBufferCreateWithPlanarBytes calls [raw.CVPixelBufferCreateWithPlanarBytes] (C function CVPixelBufferCreateWithPlanarBytes).
-func CVPixelBufferCreateWithPlanarBytes(allocator unsafe.Pointer, width uint, height uint, pixelFormatType uint, dataPtr unsafe.Pointer, dataSize uint, numberOfPlanes uint, planeBaseAddress unsafe.Pointer, planeWidth *uint, planeHeight *uint, planeBytesPerRow *uint, releaseCallback unsafe.Pointer, releaseRefCon unsafe.Pointer, pixelBufferAttributes unsafe.Pointer, pixelBufferOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferCreateWithPlanarBytes(allocator, width, height, pixelFormatType, dataPtr, dataSize, numberOfPlanes, planeBaseAddress, planeWidth, planeHeight, planeBytesPerRow, releaseCallback, releaseRefCon, pixelBufferAttributes, pixelBufferOut)
+// CVOpenGLTextureCacheFlush calls the CoreVideo framework function CVOpenGLTextureCacheFlush.
+func CVOpenGLTextureCacheFlush(textureCache obj.Object, options uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLTextureCacheFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLTextureCacheFlush, _lib, "CVOpenGLTextureCacheFlush")
+	}
+	_fnCVOpenGLTextureCacheFlush(objref.IDOf(textureCache), options)
 }
 
-// CVPixelBufferFillExtendedPixels calls [raw.CVPixelBufferFillExtendedPixels] (C function CVPixelBufferFillExtendedPixels).
-func CVPixelBufferFillExtendedPixels(pixelBuffer unsafe.Pointer) int32 {
-	return raw.CVPixelBufferFillExtendedPixels(pixelBuffer)
-}
+var _fnCVOpenGLTextureCacheGetTypeID func() int
 
-// CVPixelBufferGetBaseAddress calls [raw.CVPixelBufferGetBaseAddress] (C function CVPixelBufferGetBaseAddress).
-func CVPixelBufferGetBaseAddress(pixelBuffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferGetBaseAddress(pixelBuffer)
+// CVOpenGLTextureCacheGetTypeID calls the CoreVideo framework function CVOpenGLTextureCacheGetTypeID.
+func CVOpenGLTextureCacheGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLTextureCacheGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLTextureCacheGetTypeID, _lib, "CVOpenGLTextureCacheGetTypeID")
+	}
+	return _fnCVOpenGLTextureCacheGetTypeID()
 }
 
-// CVPixelBufferGetBaseAddressOfPlane calls [raw.CVPixelBufferGetBaseAddressOfPlane] (C function CVPixelBufferGetBaseAddressOfPlane).
-func CVPixelBufferGetBaseAddressOfPlane(pixelBuffer unsafe.Pointer, planeIndex uint) unsafe.Pointer {
-	return raw.CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, planeIndex)
-}
+var _fnCVOpenGLTextureCacheRelease func(objc.ID)
 
-// CVPixelBufferGetBytesPerRow calls [raw.CVPixelBufferGetBytesPerRow] (C function CVPixelBufferGetBytesPerRow).
-func CVPixelBufferGetBytesPerRow(pixelBuffer unsafe.Pointer) uint {
-	return raw.CVPixelBufferGetBytesPerRow(pixelBuffer)
+// CVOpenGLTextureCacheRelease calls the CoreVideo framework function CVOpenGLTextureCacheRelease.
+func CVOpenGLTextureCacheRelease(textureCache obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLTextureCacheRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLTextureCacheRelease, _lib, "CVOpenGLTextureCacheRelease")
+	}
+	_fnCVOpenGLTextureCacheRelease(objref.IDOf(textureCache))
 }
 
-// CVPixelBufferGetBytesPerRowOfPlane calls [raw.CVPixelBufferGetBytesPerRowOfPlane] (C function CVPixelBufferGetBytesPerRowOfPlane).
-func CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer unsafe.Pointer, planeIndex uint) uint {
-	return raw.CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, planeIndex)
-}
+var _fnCVOpenGLTextureCacheRetain func(objc.ID) objc.ID
 
-// CVPixelBufferGetDataSize calls [raw.CVPixelBufferGetDataSize] (C function CVPixelBufferGetDataSize).
-func CVPixelBufferGetDataSize(pixelBuffer unsafe.Pointer) uint {
-	return raw.CVPixelBufferGetDataSize(pixelBuffer)
+// CVOpenGLTextureCacheRetain calls the CoreVideo framework function CVOpenGLTextureCacheRetain.
+func CVOpenGLTextureCacheRetain(textureCache obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLTextureCacheRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLTextureCacheRetain, _lib, "CVOpenGLTextureCacheRetain")
+	}
+	_ret := _fnCVOpenGLTextureCacheRetain(objref.IDOf(textureCache))
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferGetExtendedPixels calls [raw.CVPixelBufferGetExtendedPixels] (C function CVPixelBufferGetExtendedPixels).
-func CVPixelBufferGetExtendedPixels(pixelBuffer unsafe.Pointer, extraColumnsOnLeft *uint, extraColumnsOnRight *uint, extraRowsOnTop *uint, extraRowsOnBottom *uint) {
-	raw.CVPixelBufferGetExtendedPixels(pixelBuffer, extraColumnsOnLeft, extraColumnsOnRight, extraRowsOnTop, extraRowsOnBottom)
-}
+var _fnCVOpenGLTextureGetTypeID func() int
 
-// CVPixelBufferGetHeight calls [raw.CVPixelBufferGetHeight] (C function CVPixelBufferGetHeight).
-func CVPixelBufferGetHeight(pixelBuffer unsafe.Pointer) uint {
-	return raw.CVPixelBufferGetHeight(pixelBuffer)
+// CVOpenGLTextureGetTypeID calls the CoreVideo framework function CVOpenGLTextureGetTypeID.
+func CVOpenGLTextureGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVOpenGLTextureGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVOpenGLTextureGetTypeID, _lib, "CVOpenGLTextureGetTypeID")
+	}
+	return _fnCVOpenGLTextureGetTypeID()
 }
 
-// CVPixelBufferGetHeightOfPlane calls [raw.CVPixelBufferGetHeightOfPlane] (C function CVPixelBufferGetHeightOfPlane).
-func CVPixelBufferGetHeightOfPlane(pixelBuffer unsafe.Pointer, planeIndex uint) uint {
-	return raw.CVPixelBufferGetHeightOfPlane(pixelBuffer, planeIndex)
-}
+var _fnCVPixelBufferGetTypeID func() int
 
-// CVPixelBufferGetIOSurface calls [raw.CVPixelBufferGetIOSurface] (C function CVPixelBufferGetIOSurface).
-func CVPixelBufferGetIOSurface(pixelBuffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferGetIOSurface(pixelBuffer)
+// CVPixelBufferGetTypeID calls the CoreVideo framework function CVPixelBufferGetTypeID.
+func CVPixelBufferGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferGetTypeID, _lib, "CVPixelBufferGetTypeID")
+	}
+	return _fnCVPixelBufferGetTypeID()
 }
 
-// CVPixelBufferGetPixelFormatType calls [raw.CVPixelBufferGetPixelFormatType] (C function CVPixelBufferGetPixelFormatType).
-func CVPixelBufferGetPixelFormatType(pixelBuffer unsafe.Pointer) uint {
-	return raw.CVPixelBufferGetPixelFormatType(pixelBuffer)
-}
+var _fnCVPixelBufferPoolFlush func(objc.ID, CVPixelBufferPoolFlushFlags)
 
-// CVPixelBufferGetPlaneCount calls [raw.CVPixelBufferGetPlaneCount] (C function CVPixelBufferGetPlaneCount).
-func CVPixelBufferGetPlaneCount(pixelBuffer unsafe.Pointer) uint {
-	return raw.CVPixelBufferGetPlaneCount(pixelBuffer)
+// CVPixelBufferPoolFlush calls the CoreVideo framework function CVPixelBufferPoolFlush.
+func CVPixelBufferPoolFlush(pool obj.Object, options CVPixelBufferPoolFlushFlags) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferPoolFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolFlush, _lib, "CVPixelBufferPoolFlush")
+	}
+	_fnCVPixelBufferPoolFlush(objref.IDOf(pool), options)
 }
 
-// CVPixelBufferGetTypeID calls [raw.CVPixelBufferGetTypeID] (C function CVPixelBufferGetTypeID).
-func CVPixelBufferGetTypeID() uint {
-	return raw.CVPixelBufferGetTypeID()
-}
+var _fnCVPixelBufferPoolGetAttributes func(objc.ID) objc.ID
 
-// CVPixelBufferGetWidth calls [raw.CVPixelBufferGetWidth] (C function CVPixelBufferGetWidth).
-func CVPixelBufferGetWidth(pixelBuffer unsafe.Pointer) uint {
-	return raw.CVPixelBufferGetWidth(pixelBuffer)
+// CVPixelBufferPoolGetAttributes calls the CoreVideo framework function CVPixelBufferPoolGetAttributes.
+func CVPixelBufferPoolGetAttributes(pool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferPoolGetAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolGetAttributes, _lib, "CVPixelBufferPoolGetAttributes")
+	}
+	_ret := _fnCVPixelBufferPoolGetAttributes(objref.IDOf(pool))
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferGetWidthOfPlane calls [raw.CVPixelBufferGetWidthOfPlane] (C function CVPixelBufferGetWidthOfPlane).
-func CVPixelBufferGetWidthOfPlane(pixelBuffer unsafe.Pointer, planeIndex uint) uint {
-	return raw.CVPixelBufferGetWidthOfPlane(pixelBuffer, planeIndex)
-}
+var _fnCVPixelBufferPoolGetPixelBufferAttributes func(objc.ID) objc.ID
 
-// CVPixelBufferIsCompatibleWithAttributes calls [raw.CVPixelBufferIsCompatibleWithAttributes] (C function CVPixelBufferIsCompatibleWithAttributes).
-func CVPixelBufferIsCompatibleWithAttributes(pixelBuffer unsafe.Pointer, attributes unsafe.Pointer) uint8 {
-	return raw.CVPixelBufferIsCompatibleWithAttributes(pixelBuffer, attributes)
+// CVPixelBufferPoolGetPixelBufferAttributes calls the CoreVideo framework function CVPixelBufferPoolGetPixelBufferAttributes.
+func CVPixelBufferPoolGetPixelBufferAttributes(pool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferPoolGetPixelBufferAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolGetPixelBufferAttributes, _lib, "CVPixelBufferPoolGetPixelBufferAttributes")
+	}
+	_ret := _fnCVPixelBufferPoolGetPixelBufferAttributes(objref.IDOf(pool))
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferIsPlanar calls [raw.CVPixelBufferIsPlanar] (C function CVPixelBufferIsPlanar).
-func CVPixelBufferIsPlanar(pixelBuffer unsafe.Pointer) uint8 {
-	return raw.CVPixelBufferIsPlanar(pixelBuffer)
-}
+var _fnCVPixelBufferPoolGetTypeID func() int
 
-// CVPixelBufferLockBaseAddress calls [raw.CVPixelBufferLockBaseAddress] (C function CVPixelBufferLockBaseAddress).
-func CVPixelBufferLockBaseAddress(pixelBuffer unsafe.Pointer, lockFlags CVPixelBufferLockFlags) int32 {
-	return raw.CVPixelBufferLockBaseAddress(pixelBuffer, raw.CVPixelBufferLockFlags(lockFlags))
+// CVPixelBufferPoolGetTypeID calls the CoreVideo framework function CVPixelBufferPoolGetTypeID.
+func CVPixelBufferPoolGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferPoolGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolGetTypeID, _lib, "CVPixelBufferPoolGetTypeID")
+	}
+	return _fnCVPixelBufferPoolGetTypeID()
 }
 
-// CVPixelBufferPoolCreate calls [raw.CVPixelBufferPoolCreate] (C function CVPixelBufferPoolCreate).
-func CVPixelBufferPoolCreate(allocator unsafe.Pointer, poolAttributes unsafe.Pointer, pixelBufferAttributes unsafe.Pointer, poolOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferPoolCreate(allocator, poolAttributes, pixelBufferAttributes, poolOut)
-}
+var _fnCVPixelBufferPoolRelease func(objc.ID)
 
-// CVPixelBufferPoolCreatePixelBuffer calls [raw.CVPixelBufferPoolCreatePixelBuffer] (C function CVPixelBufferPoolCreatePixelBuffer).
-func CVPixelBufferPoolCreatePixelBuffer(allocator unsafe.Pointer, pixelBufferPool unsafe.Pointer, pixelBufferOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferPoolCreatePixelBuffer(allocator, pixelBufferPool, pixelBufferOut)
+// CVPixelBufferPoolRelease calls the CoreVideo framework function CVPixelBufferPoolRelease.
+func CVPixelBufferPoolRelease(pixelBufferPool obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferPoolRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolRelease, _lib, "CVPixelBufferPoolRelease")
+	}
+	_fnCVPixelBufferPoolRelease(objref.IDOf(pixelBufferPool))
 }
 
-// CVPixelBufferPoolCreatePixelBufferWithAuxAttributes calls [raw.CVPixelBufferPoolCreatePixelBufferWithAuxAttributes] (C function CVPixelBufferPoolCreatePixelBufferWithAuxAttributes).
-func CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(allocator unsafe.Pointer, pixelBufferPool unsafe.Pointer, auxAttributes unsafe.Pointer, pixelBufferOut unsafe.Pointer) int32 {
-	return raw.CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(allocator, pixelBufferPool, auxAttributes, pixelBufferOut)
-}
+var _fnCVPixelBufferPoolRetain func(objc.ID) objc.ID
 
-// CVPixelBufferPoolFlush calls [raw.CVPixelBufferPoolFlush] (C function CVPixelBufferPoolFlush).
-func CVPixelBufferPoolFlush(pool unsafe.Pointer, options CVPixelBufferPoolFlushFlags) {
-	raw.CVPixelBufferPoolFlush(pool, raw.CVPixelBufferPoolFlushFlags(options))
+// CVPixelBufferPoolRetain calls the CoreVideo framework function CVPixelBufferPoolRetain.
+func CVPixelBufferPoolRetain(pixelBufferPool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelBufferPoolRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelBufferPoolRetain, _lib, "CVPixelBufferPoolRetain")
+	}
+	_ret := _fnCVPixelBufferPoolRetain(objref.IDOf(pixelBufferPool))
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferPoolGetAttributes calls [raw.CVPixelBufferPoolGetAttributes] (C function CVPixelBufferPoolGetAttributes).
-func CVPixelBufferPoolGetAttributes(pool unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferPoolGetAttributes(pool)
-}
+var _fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes func(objc.ID) objc.ID
 
-// CVPixelBufferPoolGetPixelBufferAttributes calls [raw.CVPixelBufferPoolGetPixelBufferAttributes] (C function CVPixelBufferPoolGetPixelBufferAttributes).
-func CVPixelBufferPoolGetPixelBufferAttributes(pool unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferPoolGetPixelBufferAttributes(pool)
+// CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes calls the CoreVideo framework function CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes.
+func CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes, _lib, "CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes")
+	}
+	_ret := _fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(objref.IDOf(allocator))
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferPoolGetTypeID calls [raw.CVPixelBufferPoolGetTypeID] (C function CVPixelBufferPoolGetTypeID).
-func CVPixelBufferPoolGetTypeID() uint {
-	return raw.CVPixelBufferPoolGetTypeID()
-}
+var _fnCVPixelFormatDescriptionCreateWithPixelFormatType func(objc.ID, int) objc.ID
 
-// CVPixelBufferPoolRelease calls [raw.CVPixelBufferPoolRelease] (C function CVPixelBufferPoolRelease).
-func CVPixelBufferPoolRelease(pixelBufferPool unsafe.Pointer) {
-	raw.CVPixelBufferPoolRelease(pixelBufferPool)
+// CVPixelFormatDescriptionCreateWithPixelFormatType calls the CoreVideo framework function CVPixelFormatDescriptionCreateWithPixelFormatType.
+func CVPixelFormatDescriptionCreateWithPixelFormatType(allocator obj.Object, pixelFormat int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelFormatDescriptionCreateWithPixelFormatType == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionCreateWithPixelFormatType, _lib, "CVPixelFormatDescriptionCreateWithPixelFormatType")
+	}
+	_ret := _fnCVPixelFormatDescriptionCreateWithPixelFormatType(objref.IDOf(allocator), pixelFormat)
+	return obj.Wrap(_ret)
 }
 
-// CVPixelBufferPoolRetain calls [raw.CVPixelBufferPoolRetain] (C function CVPixelBufferPoolRetain).
-func CVPixelBufferPoolRetain(pixelBufferPool unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferPoolRetain(pixelBufferPool)
-}
+var _fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType func(objc.ID, int)
 
-// CVPixelBufferRelease calls [raw.CVPixelBufferRelease] (C function CVPixelBufferRelease).
-func CVPixelBufferRelease(texture unsafe.Pointer) {
-	raw.CVPixelBufferRelease(texture)
+// CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType calls the CoreVideo framework function CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType.
+func CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(description obj.Object, pixelFormat int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType, _lib, "CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType")
+	}
+	_fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(objref.IDOf(description), pixelFormat)
 }
 
-// CVPixelBufferRetain calls [raw.CVPixelBufferRetain] (C function CVPixelBufferRetain).
-func CVPixelBufferRetain(texture unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelBufferRetain(texture)
-}
+var _fnCVPixelFormatTypeCopyFourCharCodeString func(int) objc.ID
 
-// CVPixelBufferUnlockBaseAddress calls [raw.CVPixelBufferUnlockBaseAddress] (C function CVPixelBufferUnlockBaseAddress).
-func CVPixelBufferUnlockBaseAddress(pixelBuffer unsafe.Pointer, unlockFlags CVPixelBufferLockFlags) int32 {
-	return raw.CVPixelBufferUnlockBaseAddress(pixelBuffer, raw.CVPixelBufferLockFlags(unlockFlags))
+// CVPixelFormatTypeCopyFourCharCodeString calls the CoreVideo framework function CVPixelFormatTypeCopyFourCharCodeString.
+func CVPixelFormatTypeCopyFourCharCodeString(pixelFormat int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVPixelFormatTypeCopyFourCharCodeString == nil {
+		ebipurego.RegisterLibFunc(&_fnCVPixelFormatTypeCopyFourCharCodeString, _lib, "CVPixelFormatTypeCopyFourCharCodeString")
+	}
+	_ret := _fnCVPixelFormatTypeCopyFourCharCodeString(pixelFormat)
+	return obj.Wrap(_ret)
 }
 
-// CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes calls [raw.CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes] (C function CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes).
-func CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(allocator)
-}
+var _fnCVTransferFunctionGetIntegerCodePointForString func(objc.ID) int
 
-// CVPixelFormatDescriptionCreateWithPixelFormatType calls [raw.CVPixelFormatDescriptionCreateWithPixelFormatType] (C function CVPixelFormatDescriptionCreateWithPixelFormatType).
-func CVPixelFormatDescriptionCreateWithPixelFormatType(allocator unsafe.Pointer, pixelFormat uint) unsafe.Pointer {
-	return raw.CVPixelFormatDescriptionCreateWithPixelFormatType(allocator, pixelFormat)
+// CVTransferFunctionGetIntegerCodePointForString calls the CoreVideo framework function CVTransferFunctionGetIntegerCodePointForString.
+func CVTransferFunctionGetIntegerCodePointForString(transferFunctionString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVTransferFunctionGetIntegerCodePointForString == nil {
+		ebipurego.RegisterLibFunc(&_fnCVTransferFunctionGetIntegerCodePointForString, _lib, "CVTransferFunctionGetIntegerCodePointForString")
+	}
+	return _fnCVTransferFunctionGetIntegerCodePointForString(objref.IDOf(transferFunctionString))
 }
 
-// CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType calls [raw.CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType] (C function CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType).
-func CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(description unsafe.Pointer, pixelFormat uint) {
-	raw.CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(description, pixelFormat)
-}
+var _fnCVTransferFunctionGetStringForIntegerCodePoint func(int) objc.ID
 
-// CVPixelFormatTypeCopyFourCharCodeString calls [raw.CVPixelFormatTypeCopyFourCharCodeString] (C function CVPixelFormatTypeCopyFourCharCodeString).
-func CVPixelFormatTypeCopyFourCharCodeString(pixelFormat uint) unsafe.Pointer {
-	return raw.CVPixelFormatTypeCopyFourCharCodeString(pixelFormat)
+// CVTransferFunctionGetStringForIntegerCodePoint calls the CoreVideo framework function CVTransferFunctionGetStringForIntegerCodePoint.
+func CVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVTransferFunctionGetStringForIntegerCodePoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCVTransferFunctionGetStringForIntegerCodePoint, _lib, "CVTransferFunctionGetStringForIntegerCodePoint")
+	}
+	_ret := _fnCVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint)
+	return obj.Wrap(_ret)
 }
 
-// CVTransferFunctionGetIntegerCodePointForString calls [raw.CVTransferFunctionGetIntegerCodePointForString] (C function CVTransferFunctionGetIntegerCodePointForString).
-func CVTransferFunctionGetIntegerCodePointForString(transferFunctionString unsafe.Pointer) int {
-	return raw.CVTransferFunctionGetIntegerCodePointForString(transferFunctionString)
-}
+var _fnCVYCbCrMatrixGetIntegerCodePointForString func(objc.ID) int
 
-// CVTransferFunctionGetStringForIntegerCodePoint calls [raw.CVTransferFunctionGetStringForIntegerCodePoint] (C function CVTransferFunctionGetStringForIntegerCodePoint).
-func CVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint int) unsafe.Pointer {
-	return raw.CVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint)
+// CVYCbCrMatrixGetIntegerCodePointForString calls the CoreVideo framework function CVYCbCrMatrixGetIntegerCodePointForString.
+func CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVYCbCrMatrixGetIntegerCodePointForString == nil {
+		ebipurego.RegisterLibFunc(&_fnCVYCbCrMatrixGetIntegerCodePointForString, _lib, "CVYCbCrMatrixGetIntegerCodePointForString")
+	}
+	return _fnCVYCbCrMatrixGetIntegerCodePointForString(objref.IDOf(yCbCrMatrixString))
 }
 
-// CVYCbCrMatrixGetIntegerCodePointForString calls [raw.CVYCbCrMatrixGetIntegerCodePointForString] (C function CVYCbCrMatrixGetIntegerCodePointForString).
-func CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString unsafe.Pointer) int {
-	return raw.CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString)
-}
+var _fnCVYCbCrMatrixGetStringForIntegerCodePoint func(int) objc.ID
 
-// CVYCbCrMatrixGetStringForIntegerCodePoint calls [raw.CVYCbCrMatrixGetStringForIntegerCodePoint] (C function CVYCbCrMatrixGetStringForIntegerCodePoint).
-func CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint int) unsafe.Pointer {
-	return raw.CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint)
+// CVYCbCrMatrixGetStringForIntegerCodePoint calls the CoreVideo framework function CVYCbCrMatrixGetStringForIntegerCodePoint.
+func CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVYCbCrMatrixGetStringForIntegerCodePoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCVYCbCrMatrixGetStringForIntegerCodePoint, _lib, "CVYCbCrMatrixGetStringForIntegerCodePoint")
+	}
+	_ret := _fnCVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint)
+	return obj.Wrap(_ret)
 }

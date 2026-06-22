@@ -5,160 +5,86 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedInstance calls the underlying FSClientSharedInstance.
+// SharedInstance the shared instance of the FSKit client class.
 func SharedInstance() *Client {
-	_r := raw.FSClientSharedInstance()
-	if _r == nil {
-		return nil
-	}
-	return &Client{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSClient")), objc.RegisterName("sharedInstance"))
+	return ClientFromID(_r)
 }
 
-// ActiveWithStatus calls the underlying FSContainerStatusActiveWithStatus.
-func ActiveWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
-	_r := raw.FSContainerStatusActiveWithStatus(errorStatus)
-	if _r == nil {
-		return nil
-	}
-	return &ContainerStatus{inner: _r}
-}
-
-// BlockedWithStatus calls the underlying FSContainerStatusBlockedWithStatus.
-func BlockedWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
-	_r := raw.FSContainerStatusBlockedWithStatus(errorStatus)
-	if _r == nil {
-		return nil
-	}
-	return &ContainerStatus{inner: _r}
-}
-
-// NotReadyWithStatus calls the underlying FSContainerStatusNotReadyWithStatus.
-func NotReadyWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
-	_r := raw.FSContainerStatusNotReadyWithStatus(errorStatus)
-	if _r == nil {
-		return nil
-	}
-	return &ContainerStatus{inner: _r}
-}
-
-// ReadyWithStatus calls the underlying FSContainerStatusReadyWithStatus.
-func ReadyWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
-	_r := raw.FSContainerStatusReadyWithStatus(errorStatus)
-	if _r == nil {
-		return nil
-	}
-	return &ContainerStatus{inner: _r}
-}
-
-// Active calls the underlying FSContainerStatusActive.
+// Active a status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.
 func Active() *ContainerStatus {
-	_r := raw.FSContainerStatusActive()
-	if _r == nil {
-		return nil
-	}
-	return &ContainerStatus{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("active"))
+	return ContainerStatusFromID(_r)
 }
 
-// Ready calls the underlying FSContainerStatusReady.
+// Ready a status that represents a ready container with no error. This value is a “FSContainerStatus“ with a “state“ that is “ready“, and a “status“ that is `nil`.
 func Ready() *ContainerStatus {
-	_r := raw.FSContainerStatusReady()
-	if _r == nil {
-		return nil
-	}
-	return &ContainerStatus{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("ready"))
+	return ContainerStatusFromID(_r)
 }
 
-// NameWithCString calls the underlying FSFileNameNameWithCString.
+// NameWithCString creates a filename from a null-terminated character sequence.
 func NameWithCString(name string) *FileName {
-	_r := raw.FSFileNameNameWithCString(name)
-	if _r == nil {
-		return nil
-	}
-	return &FileName{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithCString:"), name)
+	return FileNameFromID(_r)
 }
 
-// NameWithBytesLength calls the underlying FSFileNameNameWithBytesLength.
-func NameWithBytesLength(bytes_ string, length uint) *FileName {
-	_r := raw.FSFileNameNameWithBytesLength(bytes_, length)
-	if _r == nil {
-		return nil
-	}
-	return &FileName{inner: _r}
+// NameWithBytesLength creates a filename by copying a character sequence from a byte array.
+func NameWithBytesLength(bytes_ string, length int) *FileName {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithBytes:length:"), bytes_, length)
+	return FileNameFromID(_r)
 }
 
-// NameWithData calls the underlying FSFileNameNameWithData.
-func NameWithData(name *foundation.NSData) *FileName {
-	_r := raw.FSFileNameNameWithData(name)
-	if _r == nil {
-		return nil
-	}
-	return &FileName{inner: _r}
+// NameWithData creates a filename by copying a character sequence data object.
+func NameWithData(name obj.Object) *FileName {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithData:"), objref.IDOf(name))
+	return FileNameFromID(_r)
 }
 
-// NameWithString calls the underlying FSFileNameNameWithString.
+// NameWithString creates a filename by copying a character sequence from a string instance.
 func NameWithString(name string) *FileName {
-	_r := raw.FSFileNameNameWithString(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &FileName{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("nameWithString:"), purego.NSString(name))
+	return FileNameFromID(_r)
 }
 
-// RangeWithOffsetSegmentLengthSegmentCount calls the underlying FSMetadataRangeRangeWithOffsetSegmentLengthSegmentCount.
+// RangeWithOffsetSegmentLengthSegmentCount creates a metadata range with the given properties.
 func RangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *MetadataRange {
-	_r := raw.FSMetadataRangeRangeWithOffsetSegmentLengthSegmentCount(startOffset, segmentLength, segmentCount)
-	if _r == nil {
-		return nil
-	}
-	return &MetadataRange{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSMetadataRange")), objc.RegisterName("rangeWithOffset:segmentLength:segmentCount:"), startOffset, segmentLength, segmentCount)
+	return MetadataRangeFromID(_r)
 }
 
-// RecognizedProbeResultWithNameContainerID calls the underlying FSProbeResultRecognizedProbeResultWithNameContainerID.
-func RecognizedProbeResultWithNameContainerID(name string, containerID *raw.FSContainerIdentifier) *ProbeResult {
-	_r := raw.FSProbeResultRecognizedProbeResultWithNameContainerID(foundation.NSStringStringWithUTF8String(name), containerID)
-	if _r == nil {
-		return nil
-	}
-	return &ProbeResult{inner: _r}
+// RecognizedProbeResultWithNameContainerID creates a probe result for a recognized file system.
+func RecognizedProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("recognizedProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
+	return ProbeResultFromID(_r)
 }
 
-// UsableButLimitedProbeResultWithNameContainerID calls the underlying FSProbeResultUsableButLimitedProbeResultWithNameContainerID.
-func UsableButLimitedProbeResultWithNameContainerID(name string, containerID *raw.FSContainerIdentifier) *ProbeResult {
-	_r := raw.FSProbeResultUsableButLimitedProbeResultWithNameContainerID(foundation.NSStringStringWithUTF8String(name), containerID)
-	if _r == nil {
-		return nil
-	}
-	return &ProbeResult{inner: _r}
+// UsableButLimitedProbeResultWithNameContainerID creates a probe result for a recognized file system that is usable, but with limited capabilities.
+func UsableButLimitedProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
+	return ProbeResultFromID(_r)
 }
 
-// UsableProbeResultWithNameContainerID calls the underlying FSProbeResultUsableProbeResultWithNameContainerID.
-func UsableProbeResultWithNameContainerID(name string, containerID *raw.FSContainerIdentifier) *ProbeResult {
-	_r := raw.FSProbeResultUsableProbeResultWithNameContainerID(foundation.NSStringStringWithUTF8String(name), containerID)
-	if _r == nil {
-		return nil
-	}
-	return &ProbeResult{inner: _r}
+// UsableProbeResultWithNameContainerID creates a probe result for a recognized and usable file system.
+func UsableProbeResultWithNameContainerID(name string, containerID *ContainerIdentifier) *ProbeResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableProbeResultWithName:containerID:"), purego.NSString(name), objref.IDOf(containerID))
+	return ProbeResultFromID(_r)
 }
 
-// NotRecognizedProbeResult calls the underlying FSProbeResultNotRecognizedProbeResult.
+// NotRecognizedProbeResult a probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its “FSProbeResult/name“ and “FSProbeResult/containerID“ properties.
 func NotRecognizedProbeResult() *ProbeResult {
-	_r := raw.FSProbeResultNotRecognizedProbeResult()
-	if _r == nil {
-		return nil
-	}
-	return &ProbeResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("notRecognizedProbeResult"))
+	return ProbeResultFromID(_r)
 }
 
-// UsableButLimitedProbeResult calls the underlying FSProbeResultUsableButLimitedProbeResult.
+// UsableButLimitedProbeResult a probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the “FSProbeResult/name“, “FSProbeResult/containerID“, or both. Don't return this result from probing a resource that isn't limited.
 func UsableButLimitedProbeResult() *ProbeResult {
-	_r := raw.FSProbeResultUsableButLimitedProbeResult()
-	if _r == nil {
-		return nil
-	}
-	return &ProbeResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResult"))
+	return ProbeResultFromID(_r)
 }

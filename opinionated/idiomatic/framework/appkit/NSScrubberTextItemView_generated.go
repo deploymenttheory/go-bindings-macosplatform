@@ -5,480 +5,394 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A concrete view subclass for displaying text for an item in a scrubber.
+// ScrubberTextItemView is an idiomatic wrapper over the Objective-C class NSScrubberTextItemView.
 //
-// ScrubberTextItemView wraps [raw.NSScrubberTextItemView] with a fluent Go API.
+// It embeds [ScrubberItemView], promoting that type's methods.
+//
+// A concrete view subclass for displaying text for an item in a scrubber.
 type ScrubberTextItemView struct {
-	inner *raw.NSScrubberTextItemView
+	ScrubberItemView
 }
 
-// Unwrap returns the underlying [raw.NSScrubberTextItemView].
-func (x *ScrubberTextItemView) Unwrap() *raw.NSScrubberTextItemView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrubberTextItemView) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrubberTextItemViewFromID adopts an existing object pointer as a ScrubberTextItemView (nil for 0).
+// ScrubberTextItemViewFromID adopts an existing Objective-C object as a ScrubberTextItemView
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrubberTextItemViewFromID(id objc.ID) *ScrubberTextItemView {
 	if id == 0 {
 		return nil
 	}
-	return &ScrubberTextItemView{inner: raw.NSScrubberTextItemViewFromID(id)}
-}
-
-// NewScrubberTextItemView creates a new [ScrubberTextItemView].
-func NewScrubberTextItemView() *ScrubberTextItemView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberTextItemView")), objc.RegisterName("new"))
-	return &ScrubberTextItemView{inner: raw.NSScrubberTextItemViewFromID(_id)}
-}
-
-// The text displayed for the scrubber item.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithTitle(title string) *ScrubberTextItemView {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	x := &ScrubberTextItemView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that specifies whether the current view is selected.
-//
-// WithSelected sets the selected property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithSelected(selected bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.SetSelected(selected)
-	return x
-}
-
-// A Boolean value that specifies whether the view is currently highlighted.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithHighlighted(highlighted bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.SetHighlighted(highlighted)
-	return x
-}
-
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
-func (x *ScrubberTextItemView) WithSubviews(items ...ViewProvider) *ScrubberTextItemView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetSubviews(_arr)
-	return x
-}
-
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithHidden(hidden bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetHidden(hidden)
-	return x
-}
-
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
-	return x
-}
-
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizesSubviews(autoresizesSubviews)
-	return x
-}
-
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
-	return x
-}
-
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithFrame(frame corefoundation.CGRect) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithFrameRotation(frameRotation float64) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrameRotation(frameRotation)
-	return x
-}
-
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrameCenterRotation(frameCenterRotation)
-	return x
-}
-
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithBoundsRotation(boundsRotation float64) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBoundsRotation(boundsRotation)
-	return x
-}
-
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetCanDrawConcurrently(canDrawConcurrently)
-	return x
-}
-
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsDisplay(needsDisplay)
-	return x
-}
-
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
-	return x
-}
-
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsRestingTouches(wantsRestingTouches)
-	return x
-}
-
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
-	return x
-}
-
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
-	return x
-}
-
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithWantsLayer(wantsLayer bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsLayer(wantsLayer)
-	return x
-}
-
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithLayer(layer *quartzcore.CALayer) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayer(layer)
-	return x
-}
-
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
-	return x
-}
-
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithNeedsLayout(needsLayout bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsLayout(needsLayout)
-	return x
-}
-
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAlphaValue(alphaValue float64) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAlphaValue(alphaValue)
-	return x
-}
-
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
-	return x
-}
-
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ScrubberTextItemView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberTextItemView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBackgroundFilters(_arr)
-	return x
-}
-
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetCompositingFilter(compositingFilter)
-	return x
-}
-
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ScrubberTextItemView) WithContentFilters(items ...*coreimage.CIFilter) *ScrubberTextItemView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetContentFilters(_arr)
-	return x
-}
-
-// WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithShadow(shadow *Shadow) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetShadow(shadow.Unwrap())
-	return x
-}
-
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetClipsToBounds(clipsToBounds)
-	return x
-}
-
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
-	return x
-}
-
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithToolTip(toolTip string) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
-	return x
-}
-
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
-	return x
-}
-
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNextKeyView(nextKeyView.asView())
-	return x
-}
-
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithFocusRingType(focusRingType NSFocusRingType) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
-	return x
-}
-
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
-func (x *ScrubberTextItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberTextItemView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetGestureRecognizers(_arr)
-	return x
-}
-
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
-	return x
-}
-
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
-	return x
-}
-
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
-	return x
-}
-
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
-	return x
-}
-
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
-	return x
-}
-
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
-	return x
-}
-
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
-	return x
-}
-
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
-	return x
-}
-
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
-	return x
-}
-
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
-	return x
-}
-
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
-	return x
-}
-
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithMenu(menu *Menu) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu.Unwrap())
-	return x
-}
-
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetUserActivity(userActivity)
-	return x
-}
-
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithTouchBar(touchBar *TouchBar) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
-	return x
-}
-
-// TextField calls the underlying TextField.
-func (x *ScrubberTextItemView) TextField() *TextField {
-	_r := x.inner.TextField()
-	if _r == nil {
+// scrubberTextItemViewAdopt wraps an Objective-C object that this code just created as a
+// ScrubberTextItemView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrubberTextItemViewAdopt(id objc.ID) *ScrubberTextItemView {
+	if id == 0 {
 		return nil
 	}
-	return &TextField{inner: _r}
+	x := &ScrubberTextItemView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Title calls the underlying Title.
+// NewScrubberTextItemView creates a new ScrubberTextItemView.
+func NewScrubberTextItemView() *ScrubberTextItemView {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberTextItemView")), objc.RegisterName("new"))
+	return scrubberTextItemViewAdopt(_id)
+}
+
+// WithTitle the text displayed for the scrubber item.
+func (x *ScrubberTextItemView) WithTitle(title string) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+// WithSelected a Boolean value that specifies whether the current view is selected.
+func (x *ScrubberTextItemView) WithSelected(selected bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
+	return x
+}
+
+// WithHighlighted a Boolean value that specifies whether the view is currently highlighted.
+func (x *ScrubberTextItemView) WithHighlighted(highlighted bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
+	return x
+}
+
+// WithSubviews sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithSubviews(items ...ViewProvider) *ScrubberTextItemView {
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
+	return x
+}
+
+// WithHidden sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithHidden(hidden bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return x
+}
+
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *ScrubberTextItemView) WithFrame(frame corefoundation.CGRect) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithFrameRotation(frameRotation float64) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithBoundsRotation(boundsRotation float64) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return x
+}
+
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *ScrubberTextItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (x *ScrubberTextItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithWantsLayer(wantsLayer bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return x
+}
+
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithLayer(layer obj.Object) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithNeedsLayout(needsLayout bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithAlphaValue(alphaValue float64) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithBackgroundFilters(items ...obj.Object) *ScrubberTextItemView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return x
+}
+
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return x
+}
+
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithContentFilters(items ...obj.Object) *ScrubberTextItemView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
+	return x
+}
+
+// WithShadow sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithShadow(shadow *Shadow) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return x
+}
+
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithToolTip(toolTip string) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return x
+}
+
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithFocusRingType(focusRingType FocusRingType) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberTextItemView {
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (x *ScrubberTextItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+func (x *ScrubberTextItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
+func (x *ScrubberTextItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return x
+}
+
+// WithMenu returns the responder’s menu.
+func (x *ScrubberTextItemView) WithMenu(menu *Menu) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return x
+}
+
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *ScrubberTextItemView) WithUserActivity(userActivity obj.Object) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// WithTouchBar the NSTouchBar object associated with the responder.
+func (x *ScrubberTextItemView) WithTouchBar(touchBar *TouchBar) *ScrubberTextItemView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return x
+}
+
+// TextField wraps the corresponding Objective-C method.
+func (x *ScrubberTextItemView) TextField() *TextField {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textField"))
+	return TextFieldFromID(_r)
+}
+
+// Title wraps the corresponding Objective-C method.
 func (x *ScrubberTextItemView) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ScrubberTextItemView) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
-}
-
-func (x *ScrubberTextItemView) asScrubberItemView() *raw.NSScrubberItemView {
-	return &x.inner.NSScrubberItemView
-}
-
-func (x *ScrubberTextItemView) asScrubberArrangedView() *raw.NSScrubberArrangedView {
-	return &x.inner.NSScrubberItemView.NSScrubberArrangedView
-}
-
-func (x *ScrubberTextItemView) asView() *raw.NSView {
-	return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView
-}
-
-func (x *ScrubberTextItemView) asResponder() *raw.NSResponder {
-	return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // ScrubberTextItemViewable is the interface implemented by [ScrubberTextItemView], for mocking and DI.
 type ScrubberTextItemViewable interface {
-	Unwrap() *raw.NSScrubberTextItemView
+	obj.Object
 	WithTitle(title string) *ScrubberTextItemView
 	WithSelected(selected bool) *ScrubberTextItemView
 	WithHighlighted(highlighted bool) *ScrubberTextItemView
@@ -486,7 +400,7 @@ type ScrubberTextItemViewable interface {
 	WithHidden(hidden bool) *ScrubberTextItemView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberTextItemView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberTextItemView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberTextItemView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberTextItemView
 	WithFrame(frame corefoundation.CGRect) *ScrubberTextItemView
 	WithFrameRotation(frameRotation float64) *ScrubberTextItemView
 	WithFrameCenterRotation(frameCenterRotation float64) *ScrubberTextItemView
@@ -496,27 +410,27 @@ type ScrubberTextItemViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ScrubberTextItemView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberTextItemView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberTextItemView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberTextItemView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberTextItemView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberTextItemView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberTextItemView
 	WithWantsLayer(wantsLayer bool) *ScrubberTextItemView
-	WithLayer(layer *quartzcore.CALayer) *ScrubberTextItemView
+	WithLayer(layer obj.Object) *ScrubberTextItemView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberTextItemView
 	WithNeedsLayout(needsLayout bool) *ScrubberTextItemView
 	WithAlphaValue(alphaValue float64) *ScrubberTextItemView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberTextItemView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberTextItemView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberTextItemView
-	WithContentFilters(items ...*coreimage.CIFilter) *ScrubberTextItemView
+	WithBackgroundFilters(items ...obj.Object) *ScrubberTextItemView
+	WithCompositingFilter(compositingFilter obj.Object) *ScrubberTextItemView
+	WithContentFilters(items ...obj.Object) *ScrubberTextItemView
 	WithShadow(shadow *Shadow) *ScrubberTextItemView
 	WithClipsToBounds(clipsToBounds bool) *ScrubberTextItemView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberTextItemView
 	WithToolTip(toolTip string) *ScrubberTextItemView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberTextItemView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberTextItemView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberTextItemView
 	WithNextKeyView(nextKeyView ViewProvider) *ScrubberTextItemView
-	WithFocusRingType(focusRingType NSFocusRingType) *ScrubberTextItemView
+	WithFocusRingType(focusRingType FocusRingType) *ScrubberTextItemView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberTextItemView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberTextItemView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberTextItemView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberTextItemView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberTextItemView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberTextItemView
@@ -529,7 +443,7 @@ type ScrubberTextItemViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberTextItemView
 	WithNextResponder(nextResponder ResponderProvider) *ScrubberTextItemView
 	WithMenu(menu *Menu) *ScrubberTextItemView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberTextItemView
+	WithUserActivity(userActivity obj.Object) *ScrubberTextItemView
 	WithTouchBar(touchBar *TouchBar) *ScrubberTextItemView
 	TextField() *TextField
 	Title() string
@@ -537,3 +451,11 @@ type ScrubberTextItemViewable interface {
 }
 
 var _ ScrubberTextItemViewable = (*ScrubberTextItemView)(nil)
+
+var _ ScrubberItemViewProvider = (*ScrubberTextItemView)(nil)
+
+var _ ScrubberArrangedViewProvider = (*ScrubberTextItemView)(nil)
+
+var _ ViewProvider = (*ScrubberTextItemView)(nil)
+
+var _ ResponderProvider = (*ScrubberTextItemView)(nil)

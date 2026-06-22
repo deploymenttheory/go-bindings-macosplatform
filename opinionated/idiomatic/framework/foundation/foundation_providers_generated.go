@@ -5,216 +5,257 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ArrayProvider is implemented by Array and any idiomatic type wrapping a NSArray subclass.
+// ArrayProvider is accepted wherever a NSArray (or one of its subclasses) is expected.
 type ArrayProvider interface {
-	asArray() *raw.NSArray[objc.ID]
+	objref.Object
+	isArray()
 }
 
-// AttributedStringProvider is implemented by AttributedString and any idiomatic type wrapping a NSAttributedString subclass.
+// AttributedStringProvider is accepted wherever a NSAttributedString (or one of its subclasses) is expected.
 type AttributedStringProvider interface {
-	asAttributedString() *raw.NSAttributedString
+	objref.Object
+	isAttributedString()
 }
 
-// CharacterSetProvider is implemented by CharacterSet and any idiomatic type wrapping a NSCharacterSet subclass.
+// CharacterSetProvider is accepted wherever a NSCharacterSet (or one of its subclasses) is expected.
 type CharacterSetProvider interface {
-	asCharacterSet() *raw.NSCharacterSet
+	objref.Object
+	isCharacterSet()
 }
 
-// ClassDescriptionProvider is implemented by ClassDescription and any idiomatic type wrapping a NSClassDescription subclass.
+// ClassDescriptionProvider is accepted wherever a NSClassDescription (or one of its subclasses) is expected.
 type ClassDescriptionProvider interface {
-	asClassDescription() *raw.NSClassDescription
+	objref.Object
+	isClassDescription()
 }
 
-// CoderProvider is implemented by Coder and any idiomatic type wrapping a NSCoder subclass.
+// CoderProvider is accepted wherever a NSCoder (or one of its subclasses) is expected.
 type CoderProvider interface {
-	asCoder() *raw.NSCoder
+	objref.Object
+	isCoder()
 }
 
-// DataProvider is implemented by Data and any idiomatic type wrapping a NSData subclass.
+// DataProvider is accepted wherever a NSData (or one of its subclasses) is expected.
 type DataProvider interface {
-	asData() *raw.NSData
+	objref.Object
+	isData()
 }
 
-// DateProvider is implemented by Date and any idiomatic type wrapping a NSDate subclass.
+// DateProvider is accepted wherever a NSDate (or one of its subclasses) is expected.
 type DateProvider interface {
-	asDate() *raw.NSDate
+	objref.Object
+	isDate()
 }
 
-// DictionaryProvider is implemented by Dictionary and any idiomatic type wrapping a NSDictionary subclass.
+// DictionaryProvider is accepted wherever a NSDictionary (or one of its subclasses) is expected.
 type DictionaryProvider interface {
-	asDictionary() *raw.NSDictionary[objc.ID, objc.ID]
+	objref.Object
+	isDictionary()
 }
 
-// DimensionProvider is implemented by Dimension and any idiomatic type wrapping a NSDimension subclass.
+// DimensionProvider is accepted wherever a NSDimension (or one of its subclasses) is expected.
 type DimensionProvider interface {
-	asDimension() *raw.NSDimension
+	objref.Object
+	isDimension()
 }
 
-// EnumeratorProvider is implemented by Enumerator and any idiomatic type wrapping a NSEnumerator subclass.
+// EnumeratorProvider is accepted wherever a NSEnumerator (or one of its subclasses) is expected.
 type EnumeratorProvider interface {
-	asEnumerator() *raw.NSEnumerator[objc.ID]
+	objref.Object
+	isEnumerator()
 }
 
-// FormatterProvider is implemented by Formatter and any idiomatic type wrapping a NSFormatter subclass.
+// FormatterProvider is accepted wherever a NSFormatter (or one of its subclasses) is expected.
 type FormatterProvider interface {
-	asFormatter() *raw.NSFormatter
+	objref.Object
+	isFormatter()
 }
 
-// IndexSetProvider is implemented by IndexSet and any idiomatic type wrapping a NSIndexSet subclass.
+// IndexSetProvider is accepted wherever a NSIndexSet (or one of its subclasses) is expected.
 type IndexSetProvider interface {
-	asIndexSet() *raw.NSIndexSet
+	objref.Object
+	isIndexSet()
 }
 
-// InflectionRuleProvider is implemented by InflectionRule and any idiomatic type wrapping a NSInflectionRule subclass.
+// InflectionRuleProvider is accepted wherever a NSInflectionRule (or one of its subclasses) is expected.
 type InflectionRuleProvider interface {
-	asInflectionRule() *raw.NSInflectionRule
+	objref.Object
+	isInflectionRule()
 }
 
-// MutableDataProvider is implemented by MutableData and any idiomatic type wrapping a NSMutableData subclass.
+// MutableDataProvider is accepted wherever a NSMutableData (or one of its subclasses) is expected.
 type MutableDataProvider interface {
-	asMutableData() *raw.NSMutableData
+	objref.Object
+	isMutableData()
 }
 
-// MutableSetProvider is implemented by MutableSet and any idiomatic type wrapping a NSMutableSet subclass.
+// MutableSetProvider is accepted wherever a NSMutableSet (or one of its subclasses) is expected.
 type MutableSetProvider interface {
-	asMutableSet() *raw.NSMutableSet[objc.ID]
+	objref.Object
+	isMutableSet()
 }
 
-// NotificationCenterProvider is implemented by NotificationCenter and any idiomatic type wrapping a NSNotificationCenter subclass.
+// NotificationCenterProvider is accepted wherever a NSNotificationCenter (or one of its subclasses) is expected.
 type NotificationCenterProvider interface {
-	asNotificationCenter() *raw.NSNotificationCenter
+	objref.Object
+	isNotificationCenter()
 }
 
-// NumberProvider is implemented by Number and any idiomatic type wrapping a NSNumber subclass.
+// NumberProvider is accepted wherever a NSNumber (or one of its subclasses) is expected.
 type NumberProvider interface {
-	asNumber() *raw.NSNumber
+	objref.Object
+	isNumber()
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a NSObject subclass.
+// ObjectProvider is accepted wherever a NSObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.NSObject
+	objref.Object
+	isObject()
 }
 
-// OperationProvider is implemented by Operation and any idiomatic type wrapping a NSOperation subclass.
+// OperationProvider is accepted wherever a NSOperation (or one of its subclasses) is expected.
 type OperationProvider interface {
-	asOperation() *raw.NSOperation
+	objref.Object
+	isOperation()
 }
 
-// OrderedSetProvider is implemented by OrderedSet and any idiomatic type wrapping a NSOrderedSet subclass.
+// OrderedSetProvider is accepted wherever a NSOrderedSet (or one of its subclasses) is expected.
 type OrderedSetProvider interface {
-	asOrderedSet() *raw.NSOrderedSet[objc.ID]
+	objref.Object
+	isOrderedSet()
 }
 
-// PortProvider is implemented by Port and any idiomatic type wrapping a NSPort subclass.
+// PortProvider is accepted wherever a NSPort (or one of its subclasses) is expected.
 type PortProvider interface {
-	asPort() *raw.NSPort
+	objref.Object
+	isPort()
 }
 
-// PortNameServerProvider is implemented by PortNameServer and any idiomatic type wrapping a NSPortNameServer subclass.
+// PortNameServerProvider is accepted wherever a NSPortNameServer (or one of its subclasses) is expected.
 type PortNameServerProvider interface {
-	asPortNameServer() *raw.NSPortNameServer
+	objref.Object
+	isPortNameServer()
 }
 
-// PredicateProvider is implemented by Predicate and any idiomatic type wrapping a NSPredicate subclass.
+// PredicateProvider is accepted wherever a NSPredicate (or one of its subclasses) is expected.
 type PredicateProvider interface {
-	asPredicate() *raw.NSPredicate
+	objref.Object
+	isPredicate()
 }
 
-// ProxyProvider is implemented by Proxy and any idiomatic type wrapping a NSProxy subclass.
+// ProxyProvider is accepted wherever a NSProxy (or one of its subclasses) is expected.
 type ProxyProvider interface {
-	asProxy() *raw.NSProxy
+	objref.Object
+	isProxy()
 }
 
-// RegularExpressionProvider is implemented by RegularExpression and any idiomatic type wrapping a NSRegularExpression subclass.
+// RegularExpressionProvider is accepted wherever a NSRegularExpression (or one of its subclasses) is expected.
 type RegularExpressionProvider interface {
-	asRegularExpression() *raw.NSRegularExpression
+	objref.Object
+	isRegularExpression()
 }
 
-// ScriptCommandProvider is implemented by ScriptCommand and any idiomatic type wrapping a NSScriptCommand subclass.
+// ScriptCommandProvider is accepted wherever a NSScriptCommand (or one of its subclasses) is expected.
 type ScriptCommandProvider interface {
-	asScriptCommand() *raw.NSScriptCommand
+	objref.Object
+	isScriptCommand()
 }
 
-// ScriptObjectSpecifierProvider is implemented by ScriptObjectSpecifier and any idiomatic type wrapping a NSScriptObjectSpecifier subclass.
+// ScriptObjectSpecifierProvider is accepted wherever a NSScriptObjectSpecifier (or one of its subclasses) is expected.
 type ScriptObjectSpecifierProvider interface {
-	asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier
+	objref.Object
+	isScriptObjectSpecifier()
 }
 
-// ScriptWhoseTestProvider is implemented by ScriptWhoseTest and any idiomatic type wrapping a NSScriptWhoseTest subclass.
+// ScriptWhoseTestProvider is accepted wherever a NSScriptWhoseTest (or one of its subclasses) is expected.
 type ScriptWhoseTestProvider interface {
-	asScriptWhoseTest() *raw.NSScriptWhoseTest
+	objref.Object
+	isScriptWhoseTest()
 }
 
-// SetProvider is implemented by Set and any idiomatic type wrapping a NSSet subclass.
+// SetProvider is accepted wherever a NSSet (or one of its subclasses) is expected.
 type SetProvider interface {
-	asSet() *raw.NSSet[objc.ID]
+	objref.Object
+	isSet()
 }
 
-// SimpleCStringProvider is implemented by SimpleCString and any idiomatic type wrapping a NSSimpleCString subclass.
+// SimpleCStringProvider is accepted wherever a NSSimpleCString (or one of its subclasses) is expected.
 type SimpleCStringProvider interface {
-	asSimpleCString() *raw.NSSimpleCString
+	objref.Object
+	isSimpleCString()
 }
 
-// StreamProvider is implemented by Stream and any idiomatic type wrapping a NSStream subclass.
+// StreamProvider is accepted wherever a NSStream (or one of its subclasses) is expected.
 type StreamProvider interface {
-	asStream() *raw.NSStream
+	objref.Object
+	isStream()
 }
 
-// StringProvider is implemented by String and any idiomatic type wrapping a NSString subclass.
+// StringProvider is accepted wherever a NSString (or one of its subclasses) is expected.
 type StringProvider interface {
-	asString() *raw.NSString
+	objref.Object
+	isString()
 }
 
-// URLRequestProvider is implemented by URLRequest and any idiomatic type wrapping a NSURLRequest subclass.
+// URLRequestProvider is accepted wherever a NSURLRequest (or one of its subclasses) is expected.
 type URLRequestProvider interface {
-	asURLRequest() *raw.NSURLRequest
+	objref.Object
+	isURLRequest()
 }
 
-// URLResponseProvider is implemented by URLResponse and any idiomatic type wrapping a NSURLResponse subclass.
+// URLResponseProvider is accepted wherever a NSURLResponse (or one of its subclasses) is expected.
 type URLResponseProvider interface {
-	asURLResponse() *raw.NSURLResponse
+	objref.Object
+	isURLResponse()
 }
 
-// URLSessionDataTaskProvider is implemented by URLSessionDataTask and any idiomatic type wrapping a NSURLSessionDataTask subclass.
+// URLSessionDataTaskProvider is accepted wherever a NSURLSessionDataTask (or one of its subclasses) is expected.
 type URLSessionDataTaskProvider interface {
-	asURLSessionDataTask() *raw.NSURLSessionDataTask
+	objref.Object
+	isURLSessionDataTask()
 }
 
-// URLSessionTaskProvider is implemented by URLSessionTask and any idiomatic type wrapping a NSURLSessionTask subclass.
+// URLSessionTaskProvider is accepted wherever a NSURLSessionTask (or one of its subclasses) is expected.
 type URLSessionTaskProvider interface {
-	asURLSessionTask() *raw.NSURLSessionTask
+	objref.Object
+	isURLSessionTask()
 }
 
-// UnitProvider is implemented by Unit and any idiomatic type wrapping a NSUnit subclass.
+// UnitProvider is accepted wherever a NSUnit (or one of its subclasses) is expected.
 type UnitProvider interface {
-	asUnit() *raw.NSUnit
+	objref.Object
+	isUnit()
 }
 
-// UnitConverterProvider is implemented by UnitConverter and any idiomatic type wrapping a NSUnitConverter subclass.
+// UnitConverterProvider is accepted wherever a NSUnitConverter (or one of its subclasses) is expected.
 type UnitConverterProvider interface {
-	asUnitConverter() *raw.NSUnitConverter
+	objref.Object
+	isUnitConverter()
 }
 
-// UserScriptTaskProvider is implemented by UserScriptTask and any idiomatic type wrapping a NSUserScriptTask subclass.
+// UserScriptTaskProvider is accepted wherever a NSUserScriptTask (or one of its subclasses) is expected.
 type UserScriptTaskProvider interface {
-	asUserScriptTask() *raw.NSUserScriptTask
+	objref.Object
+	isUserScriptTask()
 }
 
-// ValueProvider is implemented by Value and any idiomatic type wrapping a NSValue subclass.
+// ValueProvider is accepted wherever a NSValue (or one of its subclasses) is expected.
 type ValueProvider interface {
-	asValue() *raw.NSValue
+	objref.Object
+	isValue()
 }
 
-// ValueTransformerProvider is implemented by ValueTransformer and any idiomatic type wrapping a NSValueTransformer subclass.
+// ValueTransformerProvider is accepted wherever a NSValueTransformer (or one of its subclasses) is expected.
 type ValueTransformerProvider interface {
-	asValueTransformer() *raw.NSValueTransformer
+	objref.Object
+	isValueTransformer()
 }
 
-// XMLNodeProvider is implemented by XMLNode and any idiomatic type wrapping a NSXMLNode subclass.
+// XMLNodeProvider is accepted wherever a NSXMLNode (or one of its subclasses) is expected.
 type XMLNodeProvider interface {
-	asXMLNode() *raw.NSXMLNode
+	objref.Object
+	isXMLNode()
 }

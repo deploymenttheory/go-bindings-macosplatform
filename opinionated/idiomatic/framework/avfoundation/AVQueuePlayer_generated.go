@@ -5,228 +5,204 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that plays a sequence of player items.
+// QueuePlayer is an idiomatic wrapper over the Objective-C class AVQueuePlayer.
 //
-// QueuePlayer wraps [raw.AVQueuePlayer] with a fluent Go API.
+// It embeds [Player], promoting that type's methods.
+//
+// An object that plays a sequence of player items.
 type QueuePlayer struct {
-	inner *raw.AVQueuePlayer
+	Player
 }
 
-// Unwrap returns the underlying [raw.AVQueuePlayer].
-func (x *QueuePlayer) Unwrap() *raw.AVQueuePlayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QueuePlayer) ID() objc.ID { return x.inner.Ptr() }
-
-// QueuePlayerFromID adopts an existing object pointer as a QueuePlayer (nil for 0).
+// QueuePlayerFromID adopts an existing Objective-C object as a QueuePlayer
+// (nil for 0), retaining it and registering a release finalizer.
 func QueuePlayerFromID(id objc.ID) *QueuePlayer {
 	if id == 0 {
 		return nil
 	}
-	return &QueuePlayer{inner: raw.AVQueuePlayerFromID(id)}
+	x := &QueuePlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that plays a queue of items.
-//
-// NewQueuePlayerWithItems creates a new [QueuePlayer].
-func NewQueuePlayerWithItems(items *foundation.NSArray[*raw.AVPlayerItem]) *QueuePlayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVQueuePlayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), items.Ptr())
-	return &QueuePlayer{inner: raw.AVQueuePlayerFromID(_id)}
+// queuePlayerAdopt wraps an Objective-C object that this code just created as a
+// QueuePlayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queuePlayerAdopt(id objc.ID) *QueuePlayer {
+	if id == 0 {
+		return nil
+	}
+	x := &QueuePlayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The current playback rate.
-//
-// WithRate sets the rate property and returns the receiver for chaining.
+// NewQueuePlayerWithItems creates an object that plays a queue of items.
+func NewQueuePlayerWithItems(items []*PlayerItem) *QueuePlayer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVQueuePlayer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), purego.SliceToNSArray(items, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }))
+	return queuePlayerAdopt(_id)
+}
+
+// WithRate the current playback rate.
 func (x *QueuePlayer) WithRate(rate float32) *QueuePlayer {
-	x.inner.AVPlayer.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// A default rate at which to begin playback.
-//
-// WithDefaultRate sets the defaultRate property and returns the receiver for chaining.
+// WithDefaultRate a default rate at which to begin playback.
 func (x *QueuePlayer) WithDefaultRate(defaultRate float32) *QueuePlayer {
-	x.inner.AVPlayer.SetDefaultRate(defaultRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRate:"), defaultRate)
 	return x
 }
 
-// The action to perform when the current player item has finished playing.
-//
-// WithActionAtItemEnd sets the actionAtItemEnd property and returns the receiver for chaining.
-func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *QueuePlayer {
-	x.inner.AVPlayer.SetActionAtItemEnd(raw.AVPlayerActionAtItemEnd(actionAtItemEnd))
+// WithActionAtItemEnd the action to perform when the current player item has finished playing.
+func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *QueuePlayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
 	return x
 }
 
-// A Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
-//
-// WithAutomaticallyWaitsToMinimizeStalling sets the automaticallyWaitsToMinimizeStalling property and returns the receiver for chaining.
+// WithAutomaticallyWaitsToMinimizeStalling a Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
 func (x *QueuePlayer) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer {
-	x.inner.AVPlayer.SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
 	return x
 }
 
-// The audio playback volume for the player.
-//
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithSourceClock a clock the player uses for item time bases.
+func (x *QueuePlayer) WithSourceClock(sourceClock obj.Object) *QueuePlayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
+	return x
+}
+
+// WithVolume the audio playback volume for the player.
 func (x *QueuePlayer) WithVolume(volume float32) *QueuePlayer {
-	x.inner.AVPlayer.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
-// A Boolean value that indicates whether the audio output of the player is muted.
-//
-// WithMuted sets the muted property and returns the receiver for chaining.
+// WithMuted a Boolean value that indicates whether the audio output of the player is muted.
 func (x *QueuePlayer) WithMuted(muted bool) *QueuePlayer {
-	x.inner.AVPlayer.SetMuted(muted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
-//
-// WithAppliesMediaSelectionCriteriaAutomatically sets the appliesMediaSelectionCriteriaAutomatically property and returns the receiver for chaining.
+// WithAppliesMediaSelectionCriteriaAutomatically a Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
 func (x *QueuePlayer) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *QueuePlayer {
-	x.inner.AVPlayer.SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
 	return x
 }
 
-// Specifies the unique ID of the Core Audio output device used to play audio.
-//
-// WithAudioOutputDeviceUniqueID sets the audioOutputDeviceUniqueID property and returns the receiver for chaining.
+// WithAudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio.
 func (x *QueuePlayer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *QueuePlayer {
-	x.inner.AVPlayer.SetAudioOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(audioOutputDeviceUniqueID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
 	return x
 }
 
-// A Boolean value that indicates whether the player allows switching to external playback mode.
-//
-// WithAllowsExternalPlayback sets the allowsExternalPlayback property and returns the receiver for chaining.
+// WithAllowsExternalPlayback a Boolean value that indicates whether the player allows switching to external playback mode.
 func (x *QueuePlayer) WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer {
-	x.inner.AVPlayer.SetAllowsExternalPlayback(allowsExternalPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
 	return x
 }
 
-// The registry identifier for the GPU used for video decoding.
-//
-// WithPreferredVideoDecoderGPURegistryID sets the preferredVideoDecoderGPURegistryID property and returns the receiver for chaining.
+// WithPreferredVideoDecoderGPURegistryID the registry identifier for the GPU used for video decoding.
 func (x *QueuePlayer) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer {
-	x.inner.AVPlayer.SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
 	return x
 }
 
-// A Boolean value that indicates whether video playback prevents display and device sleep.
-//
-// WithPreventsDisplaySleepDuringVideoPlayback sets the preventsDisplaySleepDuringVideoPlayback property and returns the receiver for chaining.
+// WithPreventsDisplaySleepDuringVideoPlayback a Boolean value that indicates whether video playback prevents display and device sleep.
 func (x *QueuePlayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer {
-	x.inner.AVPlayer.SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
 	return x
 }
 
-// A policy that determines how playback of audiovisual media continues when the app transitions to the background.
-//
-// WithAudiovisualBackgroundPlaybackPolicy sets the audiovisualBackgroundPlaybackPolicy property and returns the receiver for chaining.
-func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
-	x.inner.AVPlayer.SetAudiovisualBackgroundPlaybackPolicy(raw.AVPlayerAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy))
+// WithAudiovisualBackgroundPlaybackPolicy a policy that determines how playback of audiovisual media continues when the app transitions to the background.
+func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
 	return x
 }
 
-// The video output for this player.
-//
-// WithVideoOutput sets the videoOutput property and returns the receiver for chaining.
+// WithVideoOutput the video output for this player.
 func (x *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer {
-	x.inner.AVPlayer.SetVideoOutput(videoOutput.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
 	return x
 }
 
-// Indicates the priority of this player for network bandwidth resource distribution.
-//
-// WithNetworkResourcePriority sets the networkResourcePriority property and returns the receiver for chaining.
-func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *QueuePlayer {
-	x.inner.AVPlayer.SetNetworkResourcePriority(raw.AVPlayerNetworkResourcePriority(networkResourcePriority))
+// WithNetworkResourcePriority indicates the priority of this player for network bandwidth resource distribution.
+func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *QueuePlayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
 	return x
 }
 
-// Indicates whether the video output of ClearKey Encrypted Video can be captured
-//
-// WithAllowsCaptureOfClearKeyVideo sets the allowsCaptureOfClearKeyVideo property and returns the receiver for chaining.
+// WithAllowsCaptureOfClearKeyVideo indicates whether the video output of ClearKey Encrypted Video can be captured
 func (x *QueuePlayer) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer {
-	x.inner.AVPlayer.SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
 	return x
 }
 
-// A Boolean value that indicates whether the player uses closed captioning.
-//
-// WithClosedCaptionDisplayEnabled sets the closedCaptionDisplayEnabled property and returns the receiver for chaining.
+// WithClosedCaptionDisplayEnabled a Boolean value that indicates whether the player uses closed captioning.
 func (x *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer {
-	x.inner.AVPlayer.SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
 	return x
 }
 
-// Returns an array of the currently enqueued items.
+// WithMasterClock the host clock for item time bases.
+func (x *QueuePlayer) WithMasterClock(masterClock obj.Object) *QueuePlayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
+	return x
+}
+
+// Items returns an array of the currently enqueued items.
 //
 // Items returns the collection as a Go slice.
 func (x *QueuePlayer) Items() []*PlayerItem {
-	arr := x.inner.Items()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItem {
-		return &PlayerItem{inner: raw.AVPlayerItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }
 
-// Ends playback of the current item and starts playback of the next item in the player’s queue.
-//
-// AdvanceToNextItem calls the underlying AdvanceToNextItem.
+// AdvanceToNextItem ends playback of the current item and starts playback of the next item in the player’s queue.
 func (x *QueuePlayer) AdvanceToNextItem() {
-	x.inner.AdvanceToNextItem()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advanceToNextItem"))
 }
 
-// Returns a Boolean value that indicates whether you can insert a player item into the player’s queue.
-//
-// CanInsertItemAfterItem calls the underlying CanInsertItemAfterItem.
-func (x *QueuePlayer) CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool {
-	return x.inner.CanInsertItemAfterItem(item, afterItem)
+// CanInsertItemAfterItem returns a Boolean value that indicates whether you can insert a player item into the player’s queue.
+func (x *QueuePlayer) CanInsertItemAfterItem(item *PlayerItem, afterItem *PlayerItem) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canInsertItem:afterItem:"), objref.IDOf(item), objref.IDOf(afterItem))
+	return _r
 }
 
-// Inserts a player item after another player item in the queue.
-//
-// InsertItemAfterItem calls the underlying InsertItemAfterItem.
-func (x *QueuePlayer) InsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) {
-	x.inner.InsertItemAfterItem(item, afterItem)
+// InsertItemAfterItem inserts a player item after another player item in the queue.
+func (x *QueuePlayer) InsertItemAfterItem(item *PlayerItem, afterItem *PlayerItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItem:afterItem:"), objref.IDOf(item), objref.IDOf(afterItem))
 }
 
-// Removes a given player item from the queue.
-//
-// RemoveItem calls the underlying RemoveItem.
-func (x *QueuePlayer) RemoveItem(item *raw.AVPlayerItem) {
-	x.inner.RemoveItem(item)
+// RemoveItem removes a given player item from the queue.
+func (x *QueuePlayer) RemoveItem(item *PlayerItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItem:"), objref.IDOf(item))
 }
 
-// Removes all player items from the queue.
-//
-// RemoveAllItems calls the underlying RemoveAllItems.
+// RemoveAllItems removes all player items from the queue.
 func (x *QueuePlayer) RemoveAllItems() {
-	x.inner.RemoveAllItems()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllItems"))
 }
-
-func (x *QueuePlayer) asPlayer() *raw.AVPlayer { return &x.inner.AVPlayer }
 
 // QueuePlayerable is the interface implemented by [QueuePlayer], for mocking and DI.
 type QueuePlayerable interface {
-	Unwrap() *raw.AVQueuePlayer
+	obj.Object
 	WithRate(rate float32) *QueuePlayer
 	WithDefaultRate(defaultRate float32) *QueuePlayer
-	WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *QueuePlayer
+	WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *QueuePlayer
 	WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer
+	WithSourceClock(sourceClock obj.Object) *QueuePlayer
 	WithVolume(volume float32) *QueuePlayer
 	WithMuted(muted bool) *QueuePlayer
 	WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *QueuePlayer
@@ -234,17 +210,20 @@ type QueuePlayerable interface {
 	WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer
 	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer
 	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer
-	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer
+	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer
 	WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer
-	WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *QueuePlayer
+	WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *QueuePlayer
 	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer
 	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer
+	WithMasterClock(masterClock obj.Object) *QueuePlayer
 	Items() []*PlayerItem
 	AdvanceToNextItem()
-	CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool
-	InsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem)
-	RemoveItem(item *raw.AVPlayerItem)
+	CanInsertItemAfterItem(item *PlayerItem, afterItem *PlayerItem) bool
+	InsertItemAfterItem(item *PlayerItem, afterItem *PlayerItem)
+	RemoveItem(item *PlayerItem)
 	RemoveAllItems()
 }
 
 var _ QueuePlayerable = (*QueuePlayer)(nil)
+
+var _ PlayerProvider = (*QueuePlayer)(nil)

@@ -5,57 +5,90 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a change that occurred in the photo library.
+// Change is an idiomatic wrapper over the Objective-C class PHChange.
 //
-// Change wraps [raw.PHChange] with a fluent Go API.
+// A description of a change that occurred in the photo library.
 type Change struct {
-	inner *raw.PHChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHChange].
-func (x *Change) Unwrap() *raw.PHChange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Change) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeFromID adopts an existing object pointer as a Change (nil for 0).
+// ChangeFromID adopts an existing Objective-C object as a Change
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeFromID(id objc.ID) *Change {
 	if id == 0 {
 		return nil
 	}
-	return &Change{inner: raw.PHChangeFromID(id)}
+	x := &Change{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChange creates a new [Change].
+// changeAdopt wraps an Objective-C object that this code just created as a
+// Change (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeAdopt(id objc.ID) *Change {
+	if id == 0 {
+		return nil
+	}
+	x := &Change{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Change) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Change) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Change) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Change) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewChange creates a new Change.
 func NewChange() *Change {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHChange")), objc.RegisterName("new"))
-	return &Change{inner: raw.PHChangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHChange")), objc.RegisterName("new"))
+	return changeAdopt(_id)
 }
 
-// Returns detailed change information for the specified asset or collection.
-//
-// ChangeDetailsForObject calls the underlying ChangeDetailsForObject.
-func (x *Change) ChangeDetailsForObject(object *raw.PHObject) *raw.PHObjectChangeDetails[objc.ID] {
-	return x.inner.ChangeDetailsForObject(object)
+// ChangeDetailsForObject returns detailed change information for the specified asset or collection.
+func (x *Change) ChangeDetailsForObject(object *Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
 }
 
-// Returns detailed change information for a fetch result.
-//
-// ChangeDetailsForFetchResult calls the underlying ChangeDetailsForFetchResult.
-func (x *Change) ChangeDetailsForFetchResult(object *raw.PHFetchResult[objc.ID]) *raw.PHFetchResultChangeDetails[objc.ID] {
-	return x.inner.ChangeDetailsForFetchResult(object)
+// ChangeDetailsForFetchResult returns detailed change information for a fetch result.
+func (x *Change) ChangeDetailsForFetchResult(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForFetchResult:"), objref.IDOf(object))
+	return obj.Wrap(_r)
 }
 
 // Changeable is the interface implemented by [Change], for mocking and DI.
 type Changeable interface {
-	Unwrap() *raw.PHChange
-	ChangeDetailsForObject(object *raw.PHObject) *raw.PHObjectChangeDetails[objc.ID]
-	ChangeDetailsForFetchResult(object *raw.PHFetchResult[objc.ID]) *raw.PHFetchResultChangeDetails[objc.ID]
+	obj.Object
+	ChangeDetailsForObject(object *Object) obj.Object
+	ChangeDetailsForFetchResult(object obj.Object) obj.Object
 }
 
 var _ Changeable = (*Change)(nil)

@@ -5,65 +5,95 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A range that describes contiguous metadata segments on disk.
+// MetadataRange is an idiomatic wrapper over the Objective-C class FSMetadataRange.
 //
-// MetadataRange wraps [raw.FSMetadataRange] with a fluent Go API.
+// A range that describes contiguous metadata segments on disk.
 type MetadataRange struct {
-	inner *raw.FSMetadataRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSMetadataRange].
-func (x *MetadataRange) Unwrap() *raw.FSMetadataRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataRange) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataRangeFromID adopts an existing object pointer as a MetadataRange (nil for 0).
+// MetadataRangeFromID adopts an existing Objective-C object as a MetadataRange
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataRangeFromID(id objc.ID) *MetadataRange {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataRange{inner: raw.FSMetadataRangeFromID(id)}
+	x := &MetadataRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a metadata range with the given properties.
-//
-// NewMetadataRangeWithOffsetSegmentLengthSegmentCount creates a new [MetadataRange].
+// metadataRangeAdopt wraps an Objective-C object that this code just created as a
+// MetadataRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataRangeAdopt(id objc.ID) *MetadataRange {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataRange{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetadataRangeWithOffsetSegmentLengthSegmentCount initializes a metadata range with the given properties.
 func NewMetadataRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *MetadataRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSMetadataRange")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSMetadataRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOffset:segmentLength:segmentCount:"), startOffset, segmentLength, segmentCount)
-	return &MetadataRange{inner: raw.FSMetadataRangeFromID(_id)}
+	return metadataRangeAdopt(_id)
 }
 
-// The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
-//
-// StartOffset calls the underlying StartOffset.
+// StartOffset the start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (x *MetadataRange) StartOffset() int64 {
-	return x.inner.StartOffset()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("startOffset"))
+	return _r
 }
 
-// The segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
-//
-// SegmentLength calls the underlying SegmentLength.
+// SegmentLength the segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (x *MetadataRange) SegmentLength() uint64 {
-	return x.inner.SegmentLength()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("segmentLength"))
+	return _r
 }
 
-// The number of segments in the range.
-//
-// SegmentCount calls the underlying SegmentCount.
+// SegmentCount the number of segments in the range.
 func (x *MetadataRange) SegmentCount() uint64 {
-	return x.inner.SegmentCount()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("segmentCount"))
+	return _r
 }
 
 // MetadataRangeable is the interface implemented by [MetadataRange], for mocking and DI.
 type MetadataRangeable interface {
-	Unwrap() *raw.FSMetadataRange
+	obj.Object
 	StartOffset() int64
 	SegmentLength() uint64
 	SegmentCount() uint64

@@ -5,79 +5,80 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when the playback rate changes.
+// MetricPlayerItemRateChangeEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemRateChangeEvent.
 //
-// MetricPlayerItemRateChangeEvent wraps [raw.AVMetricPlayerItemRateChangeEvent] with a fluent Go API.
+// MetricPlayerItemRateChangeEvent is an abstract base — you do not construct it directly. Construct one of [MetricPlayerItemSeekDidCompleteEvent], [MetricPlayerItemSeekEvent], [MetricPlayerItemStallEvent] and pass it where a MetricPlayerItemRateChangeEvent is accepted.
+//
+// An event that represents when the playback rate changes.
 type MetricPlayerItemRateChangeEvent struct {
-	inner *raw.AVMetricPlayerItemRateChangeEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemRateChangeEvent].
-func (x *MetricPlayerItemRateChangeEvent) Unwrap() *raw.AVMetricPlayerItemRateChangeEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemRateChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemRateChangeEventFromID adopts an existing object pointer as a MetricPlayerItemRateChangeEvent (nil for 0).
+// MetricPlayerItemRateChangeEventFromID adopts an existing Objective-C object as a MetricPlayerItemRateChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemRateChangeEventFromID(id objc.ID) *MetricPlayerItemRateChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemRateChangeEvent{inner: raw.AVMetricPlayerItemRateChangeEventFromID(id)}
+	x := &MetricPlayerItemRateChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemRateChangeEvent creates a new [MetricPlayerItemRateChangeEvent].
-func NewMetricPlayerItemRateChangeEvent() *MetricPlayerItemRateChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemRateChangeEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemRateChangeEvent{inner: raw.AVMetricPlayerItemRateChangeEventFromID(_id)}
-}
-
-// Returns the playback rate after the rate change event.
-//
-// Rate calls the underlying Rate.
-func (x *MetricPlayerItemRateChangeEvent) Rate() float64 {
-	return x.inner.Rate()
-}
-
-// Returns the playback rate before the rate change event.
-//
-// PreviousRate calls the underlying PreviousRate.
-func (x *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
-	return x.inner.PreviousRate()
-}
-
-// Returns the variant being played at the time of rate change. If no value is present, returns nil.
-//
-// Variant calls the underlying Variant.
-func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
-	_r := x.inner.Variant()
-	if _r == nil {
+// metricPlayerItemRateChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemRateChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemRateChangeEventAdopt(id objc.ID) *MetricPlayerItemRateChangeEvent {
+	if id == 0 {
 		return nil
 	}
-	return &AssetVariant{inner: _r}
+	x := &MetricPlayerItemRateChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MetricPlayerItemRateChangeEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
-	return x.inner
+// Rate returns the playback rate after the rate change event.
+func (x *MetricPlayerItemRateChangeEvent) Rate() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-func (x *MetricPlayerItemRateChangeEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+// PreviousRate returns the playback rate before the rate change event.
+func (x *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("previousRate"))
+	return _r
+}
+
+// Variant returns the variant being played at the time of rate change. If no value is present, returns nil.
+func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variant"))
+	return AssetVariantFromID(_r)
 }
 
 // MetricPlayerItemRateChangeEventable is the interface implemented by [MetricPlayerItemRateChangeEvent], for mocking and DI.
 type MetricPlayerItemRateChangeEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemRateChangeEvent
+	obj.Object
 	Rate() float64
 	PreviousRate() float64
 	Variant() *AssetVariant
 }
 
 var _ MetricPlayerItemRateChangeEventable = (*MetricPlayerItemRateChangeEvent)(nil)
+
+// isMetricPlayerItemRateChangeEvent marks MetricPlayerItemRateChangeEvent — and, by embedding promotion, its
+// subclasses — as a member of the MetricPlayerItemRateChangeEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetricPlayerItemRateChangeEvent) isMetricPlayerItemRateChangeEvent() {}
+
+var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemRateChangeEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemRateChangeEvent)(nil)

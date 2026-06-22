@@ -5,170 +5,166 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the relationship between skeletal animations and the nodes and geometries they animate.
+// Skinner is an idiomatic wrapper over the Objective-C class SCNSkinner.
 //
-// Skinner wraps [raw.SCNSkinner] with a fluent Go API.
+// An object that manages the relationship between skeletal animations and the nodes and geometries they animate.
 type Skinner struct {
-	inner *raw.SCNSkinner
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNSkinner].
-func (x *Skinner) Unwrap() *raw.SCNSkinner { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Skinner) ID() objc.ID { return x.inner.Ptr() }
-
-// SkinnerFromID adopts an existing object pointer as a Skinner (nil for 0).
+// SkinnerFromID adopts an existing Objective-C object as a Skinner
+// (nil for 0), retaining it and registering a release finalizer.
 func SkinnerFromID(id objc.ID) *Skinner {
 	if id == 0 {
 		return nil
 	}
-	return &Skinner{inner: raw.SCNSkinnerFromID(id)}
+	x := &Skinner{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSkinner creates a new [Skinner].
+// skinnerAdopt wraps an Objective-C object that this code just created as a
+// Skinner (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func skinnerAdopt(id objc.ID) *Skinner {
+	if id == 0 {
+		return nil
+	}
+	x := &Skinner{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Skinner) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Skinner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Skinner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Skinner) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSkinner creates a new Skinner.
 func NewSkinner() *Skinner {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSkinner")), objc.RegisterName("new"))
-	return &Skinner{inner: raw.SCNSkinnerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNSkinner")), objc.RegisterName("new"))
+	return skinnerAdopt(_id)
 }
 
-// The root node of the skinner object’s animation skeleton.
-//
-// WithSkeleton sets the skeleton property and returns the receiver for chaining.
+// WithSkeleton the root node of the skinner object’s animation skeleton.
 func (x *Skinner) WithSkeleton(skeleton NodeProvider) *Skinner {
-	x.inner.SetSkeleton(skeleton.asNode())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 	return x
 }
 
-// The geometry whose surface the skinner’s animation skeleton deforms.
-//
-// WithBaseGeometry sets the baseGeometry property and returns the receiver for chaining.
+// WithBaseGeometry the geometry whose surface the skinner’s animation skeleton deforms.
 func (x *Skinner) WithBaseGeometry(baseGeometry GeometryProvider) *Skinner {
-	x.inner.SetBaseGeometry(baseGeometry.asGeometry())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseGeometry:"), objref.IDOf(baseGeometry))
 	return x
 }
 
-// The coordinate transformation for the skinner’s geometry in its default state.
-//
-// WithBaseGeometryBindTransform sets the baseGeometryBindTransform property and returns the receiver for chaining.
+// WithBaseGeometryBindTransform the coordinate transformation for the skinner’s geometry in its default state.
 func (x *Skinner) WithBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) *Skinner {
-	x.inner.SetBaseGeometryBindTransform(baseGeometryBindTransform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseGeometryBindTransform:"), baseGeometryBindTransform)
 	return x
 }
 
-// @property skeleton @abstract Specifies the skeleton of the receiver. @discussion When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
-//
-// Skeleton calls the underlying Skeleton.
+// Skeleton specifies the skeleton of the receiver. When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
 func (x *Skinner) Skeleton() *Node {
-	_r := x.inner.Skeleton()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skeleton"))
+	return NodeFromID(_r)
 }
 
-// SetSkeleton calls the underlying SetSkeleton.
-func (x *Skinner) SetSkeleton(skeleton *raw.SCNNode) {
-	x.inner.SetSkeleton(skeleton)
+// SetSkeleton wraps the corresponding Objective-C method.
+func (x *Skinner) SetSkeleton(skeleton *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 }
 
-// @property baseGeometry @abstract Specifies the base geometry of the receiver. @discussion Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
-//
-// BaseGeometry calls the underlying BaseGeometry.
+// BaseGeometry specifies the base geometry of the receiver. Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
 func (x *Skinner) BaseGeometry() *Geometry {
-	_r := x.inner.BaseGeometry()
-	if _r == nil {
-		return nil
-	}
-	return &Geometry{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseGeometry"))
+	return GeometryFromID(_r)
 }
 
-// SetBaseGeometry calls the underlying SetBaseGeometry.
-func (x *Skinner) SetBaseGeometry(baseGeometry *raw.SCNGeometry) {
-	x.inner.SetBaseGeometry(baseGeometry)
+// SetBaseGeometry wraps the corresponding Objective-C method.
+func (x *Skinner) SetBaseGeometry(baseGeometry *Geometry) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseGeometry:"), objref.IDOf(baseGeometry))
 }
 
-// @property baseGeometryBindTransform @abstract Specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
-//
-// BaseGeometryBindTransform calls the underlying BaseGeometryBindTransform.
+// BaseGeometryBindTransform specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
 func (x *Skinner) BaseGeometryBindTransform() quartzcore.CATransform3D {
-	return x.inner.BaseGeometryBindTransform()
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("baseGeometryBindTransform"))
+	return _r
 }
 
-// SetBaseGeometryBindTransform calls the underlying SetBaseGeometryBindTransform.
+// SetBaseGeometryBindTransform wraps the corresponding Objective-C method.
 func (x *Skinner) SetBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) {
-	x.inner.SetBaseGeometryBindTransform(baseGeometryBindTransform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseGeometryBindTransform:"), baseGeometryBindTransform)
 }
 
-// @property boneInverseBindTransforms @abstract The inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone. @discussion boneInverseBindTransforms is an array of SCNMatrix4 wrapped into instances of NSValue.
+// BoneInverseBindTransforms the inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone. boneInverseBindTransforms is an array of SCNMatrix4 wrapped into instances of NSValue.
 //
 // BoneInverseBindTransforms returns the collection as a Go slice.
-func (x *Skinner) BoneInverseBindTransforms() []*foundation.NSValue {
-	arr := x.inner.BoneInverseBindTransforms()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *Skinner) BoneInverseBindTransforms() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boneInverseBindTransforms"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property bones @abstract The bones of the skinner.
+// Bones the bones of the skinner.
 //
 // Bones returns the collection as a Go slice.
 func (x *Skinner) Bones() []*Node {
-	arr := x.inner.Bones()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Node {
-		return &Node{inner: raw.SCNNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bones"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// @property boneWeights @abstract The bone weights of the receiver.
-//
-// BoneWeights calls the underlying BoneWeights.
+// BoneWeights the bone weights of the receiver.
 func (x *Skinner) BoneWeights() *GeometrySource {
-	_r := x.inner.BoneWeights()
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boneWeights"))
+	return GeometrySourceFromID(_r)
 }
 
-// @property boneIndices @abstract The bone indices of the receiver.
-//
-// BoneIndices calls the underlying BoneIndices.
+// BoneIndices the bone indices of the receiver.
 func (x *Skinner) BoneIndices() *GeometrySource {
-	_r := x.inner.BoneIndices()
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boneIndices"))
+	return GeometrySourceFromID(_r)
 }
 
 // Skinnerable is the interface implemented by [Skinner], for mocking and DI.
 type Skinnerable interface {
-	Unwrap() *raw.SCNSkinner
+	obj.Object
 	WithSkeleton(skeleton NodeProvider) *Skinner
 	WithBaseGeometry(baseGeometry GeometryProvider) *Skinner
 	WithBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) *Skinner
 	Skeleton() *Node
-	SetSkeleton(skeleton *raw.SCNNode)
+	SetSkeleton(skeleton *Node)
 	BaseGeometry() *Geometry
-	SetBaseGeometry(baseGeometry *raw.SCNGeometry)
+	SetBaseGeometry(baseGeometry *Geometry)
 	BaseGeometryBindTransform() quartzcore.CATransform3D
 	SetBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D)
-	BoneInverseBindTransforms() []*foundation.NSValue
+	BoneInverseBindTransforms() []obj.Object
 	Bones() []*Node
 	BoneWeights() *GeometrySource
 	BoneIndices() *GeometrySource

@@ -5,113 +5,116 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the region in which the system presents a caption.
+// CaptionRegion is an idiomatic wrapper over the Objective-C class AVCaptionRegion.
 //
-// CaptionRegion wraps [raw.AVCaptionRegion] with a fluent Go API.
+// CaptionRegion is an abstract base — you do not construct it directly. Construct one of [MutableCaptionRegion] and pass it where a CaptionRegion is accepted.
+//
+// An object that represents the region in which the system presents a caption.
 type CaptionRegion struct {
-	inner *raw.AVCaptionRegion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionRegion].
-func (x *CaptionRegion) Unwrap() *raw.AVCaptionRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionRegion) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionRegionFromID adopts an existing object pointer as a CaptionRegion (nil for 0).
+// CaptionRegionFromID adopts an existing Objective-C object as a CaptionRegion
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionRegionFromID(id objc.ID) *CaptionRegion {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionRegion{inner: raw.AVCaptionRegionFromID(id)}
+	x := &CaptionRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionRegion creates a new [CaptionRegion].
-func NewCaptionRegion() *CaptionRegion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRegion")), objc.RegisterName("new"))
-	return &CaptionRegion{inner: raw.AVCaptionRegionFromID(_id)}
+// captionRegionAdopt wraps an Objective-C object that this code just created as a
+// CaptionRegion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionRegionAdopt(id objc.ID) *CaptionRegion {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionRegion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Encodes the region using the specified encoder.
-//
-// EncodeWithCoder calls the underlying EncodeWithCoder.
-func (x *CaptionRegion) EncodeWithCoder(encoder *foundation.NSCoder) {
-	x.inner.EncodeWithCoder(encoder)
+// Description returns the object's -description text.
+func (x *CaptionRegion) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a Boolean value that indicates whether an object equals another.
-//
-// IsEqual calls the underlying IsEqual.
-func (x *CaptionRegion) IsEqual(object objc.ID) bool {
-	return x.inner.IsEqual(object)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property identifier @abstract Identifier for the region @discussion When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
-//
-// Identifier calls the underlying Identifier.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionRegion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// EncodeWithCoder encodes the region using the specified encoder.
+func (x *CaptionRegion) EncodeWithCoder(encoder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(encoder))
+}
+
+// Identifier identifier for the region When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
 func (x *CaptionRegion) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property origin @abstract The position of the top-left of the region, potentially with unspecified fields. @discussion It returns an AVCaptionPoint potentially with unspecified x and/or y fields. Unspecified dimensions indicate the region doesn't have positioning information for that dimension.
-//
-// Origin calls the underlying Origin.
-func (x *CaptionRegion) Origin() raw.AVCaptionPoint {
-	return x.inner.Origin()
+// Scroll scroll mode for the region See AVCaptionRegionScrollXXX enum for possible values.
+func (x *CaptionRegion) Scroll() CaptionRegionScroll {
+	_r := objc.Send[CaptionRegionScroll](objref.IDOf(x), objc.RegisterName("scroll"))
+	return _r
 }
 
-// @property size @abstract The width and height of the region, potentally with unspecified fields. @discussion It returns an AVCaptionSize potentially with unspecified width and/or height. CEA608 closed captions support limits the size.height property’s value to 1 cell except when the AVCaptionRegionScroll is AVCaptionRegionScrollRollUp. If the AVCaptionRegionScroll is AVCaptionRegionScrollRollUp, the size.height property’s value must be 2, 3 or 4 cells. It returns an AVCaptionSize with unspecifed width and height when the region doesn't have width or height information.
-//
-// Size calls the underlying Size.
-func (x *CaptionRegion) Size() raw.AVCaptionSize {
-	return x.inner.Size()
+// DisplayAlignment alignment of lines for the region
+func (x *CaptionRegion) DisplayAlignment() CaptionRegionDisplayAlignment {
+	_r := objc.Send[CaptionRegionDisplayAlignment](objref.IDOf(x), objc.RegisterName("displayAlignment"))
+	return _r
 }
 
-// @property scroll @abstract Scroll mode for the region @discussion See AVCaptionRegionScrollXXX enum for possible values.
-//
-// Scroll calls the underlying Scroll.
-func (x *CaptionRegion) Scroll() AVCaptionRegionScroll {
-	return AVCaptionRegionScroll(x.inner.Scroll())
+// WritingMode the block and inline progression direction of the region.
+func (x *CaptionRegion) WritingMode() CaptionRegionWritingMode {
+	_r := objc.Send[CaptionRegionWritingMode](objref.IDOf(x), objc.RegisterName("writingMode"))
+	return _r
 }
-
-// @property displayAlignment @abstract Alignment of lines for the region
-//
-// DisplayAlignment calls the underlying DisplayAlignment.
-func (x *CaptionRegion) DisplayAlignment() AVCaptionRegionDisplayAlignment {
-	return AVCaptionRegionDisplayAlignment(x.inner.DisplayAlignment())
-}
-
-// @property writingMode @abstract The block and inline progression direction of the region.
-//
-// WritingMode calls the underlying WritingMode.
-func (x *CaptionRegion) WritingMode() AVCaptionRegionWritingMode {
-	return AVCaptionRegionWritingMode(x.inner.WritingMode())
-}
-
-func (x *CaptionRegion) asCaptionRegion() *raw.AVCaptionRegion { return x.inner }
 
 // CaptionRegionable is the interface implemented by [CaptionRegion], for mocking and DI.
 type CaptionRegionable interface {
-	Unwrap() *raw.AVCaptionRegion
-	EncodeWithCoder(encoder *foundation.NSCoder)
-	IsEqual(object objc.ID) bool
+	obj.Object
+	EncodeWithCoder(encoder obj.Object)
 	Identifier() string
-	Origin() raw.AVCaptionPoint
-	Size() raw.AVCaptionSize
-	Scroll() AVCaptionRegionScroll
-	DisplayAlignment() AVCaptionRegionDisplayAlignment
-	WritingMode() AVCaptionRegionWritingMode
+	Scroll() CaptionRegionScroll
+	DisplayAlignment() CaptionRegionDisplayAlignment
+	WritingMode() CaptionRegionWritingMode
 }
 
 var _ CaptionRegionable = (*CaptionRegion)(nil)
+
+// isCaptionRegion marks CaptionRegion — and, by embedding promotion, its
+// subclasses — as a member of the CaptionRegion hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptionRegion) isCaptionRegion() {}
+
+var _ CaptionRegionProvider = (*CaptionRegion)(nil)

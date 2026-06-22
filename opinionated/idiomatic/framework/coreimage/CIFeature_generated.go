@@ -5,65 +5,97 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for objects representing notable features detected in an image.
+// Feature is an idiomatic wrapper over the Objective-C class CIFeature.
 //
-// Feature wraps [raw.CIFeature] with a fluent Go API.
+// Feature is an abstract base — you do not construct it directly. Construct one of [FaceFeature], [QRCodeFeature], [RectangleFeature], [TextFeature] and pass it where a Feature is accepted.
+//
+// The abstract superclass for objects representing notable features detected in an image.
 type Feature struct {
-	inner *raw.CIFeature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIFeature].
-func (x *Feature) Unwrap() *raw.CIFeature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Feature) ID() objc.ID { return x.inner.Ptr() }
-
-// FeatureFromID adopts an existing object pointer as a Feature (nil for 0).
+// FeatureFromID adopts an existing Objective-C object as a Feature
+// (nil for 0), retaining it and registering a release finalizer.
 func FeatureFromID(id objc.ID) *Feature {
 	if id == 0 {
 		return nil
 	}
-	return &Feature{inner: raw.CIFeatureFromID(id)}
+	x := &Feature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFeature creates a new [Feature].
-func NewFeature() *Feature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIFeature")), objc.RegisterName("new"))
-	return &Feature{inner: raw.CIFeatureFromID(_id)}
+// featureAdopt wraps an Objective-C object that this code just created as a
+// Feature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func featureAdopt(id objc.ID) *Feature {
+	if id == 0 {
+		return nil
+	}
+	x := &Feature{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
-//
-// Type calls the underlying Type.
+// Description returns the object's -description text.
+func (x *Feature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Feature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Feature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Feature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Type the type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
 func (x *Feature) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
-//
-// Bounds calls the underlying Bounds.
+// Bounds the rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
 func (x *Feature) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
 }
-
-func (x *Feature) asFeature() *raw.CIFeature { return x.inner }
 
 // Featureable is the interface implemented by [Feature], for mocking and DI.
 type Featureable interface {
-	Unwrap() *raw.CIFeature
+	obj.Object
 	Type() string
 	Bounds() corefoundation.CGRect
 }
 
 var _ Featureable = (*Feature)(nil)
+
+// isFeature marks Feature — and, by embedding promotion, its
+// subclasses — as a member of the Feature hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Feature) isFeature() {}
+
+var _ FeatureProvider = (*Feature)(nil)

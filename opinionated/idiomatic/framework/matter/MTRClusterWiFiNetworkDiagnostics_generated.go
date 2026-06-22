@@ -5,205 +5,206 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterWiFiNetworkDiagnostics wraps [raw.MTRClusterWiFiNetworkDiagnostics] with a fluent Go API.
+// MTRClusterWiFiNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterWiFiNetworkDiagnostics.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterWiFiNetworkDiagnostics struct {
-	inner *raw.MTRClusterWiFiNetworkDiagnostics
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterWiFiNetworkDiagnostics].
-func (x *MTRClusterWiFiNetworkDiagnostics) Unwrap() *raw.MTRClusterWiFiNetworkDiagnostics {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterWiFiNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterWiFiNetworkDiagnosticsFromID adopts an existing object pointer as a MTRClusterWiFiNetworkDiagnostics (nil for 0).
+// MTRClusterWiFiNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterWiFiNetworkDiagnostics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterWiFiNetworkDiagnosticsFromID(id objc.ID) *MTRClusterWiFiNetworkDiagnostics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterWiFiNetworkDiagnostics{inner: raw.MTRClusterWiFiNetworkDiagnosticsFromID(id)}
+	x := &MTRClusterWiFiNetworkDiagnostics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRClusterWiFiNetworkDiagnostics].
-func NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWiFiNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWiFiNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterWiFiNetworkDiagnostics{inner: raw.MTRClusterWiFiNetworkDiagnosticsFromID(_id)}
+// mTRClusterWiFiNetworkDiagnosticsAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterWiFiNetworkDiagnostics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterWiFiNetworkDiagnosticsAdopt(id objc.ID) *MTRClusterWiFiNetworkDiagnostics {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterWiFiNetworkDiagnostics{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue creates a new [MTRClusterWiFiNetworkDiagnostics].
-func NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterWiFiNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWiFiNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterWiFiNetworkDiagnostics{inner: raw.MTRClusterWiFiNetworkDiagnosticsFromID(_id)}
+// NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterWiFiNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWiFiNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterWiFiNetworkDiagnosticsAdopt(_id)
 }
 
-// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterWiFiNetworkDiagnostics.
+func NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterWiFiNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWiFiNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterWiFiNetworkDiagnosticsAdopt(_id)
 }
 
-// ResetCountsWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// ReadAttributeBSSIDWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBSSIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBSSIDWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBSSIDWithParams calls the underlying ReadAttributeBSSIDWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBSSIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBSSIDWithParams(params)
+// ReadAttributeSecurityTypeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeSecurityTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSecurityTypeWithParams calls the underlying ReadAttributeSecurityTypeWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeSecurityTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSecurityTypeWithParams(params)
+// ReadAttributeWiFiVersionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWiFiVersionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiFiVersionWithParams calls the underlying ReadAttributeWiFiVersionWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWiFiVersionWithParams(params)
+// ReadAttributeChannelNumberWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumberWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelNumberWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeChannelNumberWithParams calls the underlying ReadAttributeChannelNumberWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeChannelNumberWithParams(params)
+// ReadAttributeRSSIWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRSSIWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRSSIWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRSSIWithParams calls the underlying ReadAttributeRSSIWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRSSIWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRSSIWithParams(params)
+// ReadAttributeBeaconLostCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBeaconLostCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBeaconLostCountWithParams calls the underlying ReadAttributeBeaconLostCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBeaconLostCountWithParams(params)
+// ReadAttributeBeaconRxCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBeaconRxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBeaconRxCountWithParams calls the underlying ReadAttributeBeaconRxCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBeaconRxCountWithParams(params)
+// ReadAttributePacketMulticastRxCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePacketMulticastRxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketMulticastRxCountWithParams calls the underlying ReadAttributePacketMulticastRxCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePacketMulticastRxCountWithParams(params)
+// ReadAttributePacketMulticastTxCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePacketMulticastTxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketMulticastTxCountWithParams calls the underlying ReadAttributePacketMulticastTxCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePacketMulticastTxCountWithParams(params)
+// ReadAttributePacketUnicastRxCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePacketUnicastRxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketUnicastRxCountWithParams calls the underlying ReadAttributePacketUnicastRxCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePacketUnicastRxCountWithParams(params)
+// ReadAttributePacketUnicastTxCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePacketUnicastTxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketUnicastTxCountWithParams calls the underlying ReadAttributePacketUnicastTxCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePacketUnicastTxCountWithParams(params)
+// ReadAttributeCurrentMaxRateWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentMaxRateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentMaxRateWithParams calls the underlying ReadAttributeCurrentMaxRateWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentMaxRateWithParams(params)
+// ReadAttributeOverrunCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOverrunCountWithParams calls the underlying ReadAttributeOverrunCountWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOverrunCountWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeBssidWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBssidWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBssidWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// ReadAttributeBssidWithParams calls the underlying ReadAttributeBssidWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBssidWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBssidWithParams(params)
-}
-
-// ReadAttributeRssiWithParams calls the underlying ReadAttributeRssiWithParams.
-func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRssiWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRssiWithParams(params)
-}
-
-func (x *MTRClusterWiFiNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterWiFiNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeRssiWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRssiWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRssiWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterWiFiNetworkDiagnosticsable is the interface implemented by [MTRClusterWiFiNetworkDiagnostics], for mocking and DI.
 type MTRClusterWiFiNetworkDiagnosticsable interface {
-	Unwrap() *raw.MTRClusterWiFiNetworkDiagnostics
-	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeBSSIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSecurityTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWiFiVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeChannelNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRSSIWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBeaconLostCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBeaconRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePacketMulticastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePacketMulticastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePacketUnicastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePacketUnicastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentMaxRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ReadAttributeBssidWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRssiWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeBSSIDWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSecurityTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWiFiVersionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeChannelNumberWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRSSIWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBeaconLostCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBeaconRxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePacketMulticastRxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePacketMulticastTxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePacketUnicastRxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePacketUnicastTxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentMaxRateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBssidWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRssiWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterWiFiNetworkDiagnosticsable = (*MTRClusterWiFiNetworkDiagnostics)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterWiFiNetworkDiagnostics)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterWiFiNetworkDiagnostics)(nil)

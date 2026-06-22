@@ -5,50 +5,82 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a connection to a mixer node from a node that conforms to the audio mixing protocol.
+// AudioMixingDestination is an idiomatic wrapper over the Objective-C class AVAudioMixingDestination.
 //
-// AudioMixingDestination wraps [raw.AVAudioMixingDestination] with a fluent Go API.
+// An object that represents a connection to a mixer node from a node that conforms to the audio mixing protocol.
 type AudioMixingDestination struct {
-	inner *raw.AVAudioMixingDestination
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioMixingDestination].
-func (x *AudioMixingDestination) Unwrap() *raw.AVAudioMixingDestination { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioMixingDestination) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioMixingDestinationFromID adopts an existing object pointer as a AudioMixingDestination (nil for 0).
+// AudioMixingDestinationFromID adopts an existing Objective-C object as a AudioMixingDestination
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioMixingDestinationFromID(id objc.ID) *AudioMixingDestination {
 	if id == 0 {
 		return nil
 	}
-	return &AudioMixingDestination{inner: raw.AVAudioMixingDestinationFromID(id)}
+	x := &AudioMixingDestination{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioMixingDestination creates a new [AudioMixingDestination].
-func NewAudioMixingDestination() *AudioMixingDestination {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioMixingDestination")), objc.RegisterName("new"))
-	return &AudioMixingDestination{inner: raw.AVAudioMixingDestinationFromID(_id)}
-}
-
-// ConnectionPoint calls the underlying ConnectionPoint.
-func (x *AudioMixingDestination) ConnectionPoint() *AudioConnectionPoint {
-	_r := x.inner.ConnectionPoint()
-	if _r == nil {
+// audioMixingDestinationAdopt wraps an Objective-C object that this code just created as a
+// AudioMixingDestination (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioMixingDestinationAdopt(id objc.ID) *AudioMixingDestination {
+	if id == 0 {
 		return nil
 	}
-	return &AudioConnectionPoint{inner: _r}
+	x := &AudioMixingDestination{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioMixingDestination) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioMixingDestination) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioMixingDestination) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioMixingDestination) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioMixingDestination creates a new AudioMixingDestination.
+func NewAudioMixingDestination() *AudioMixingDestination {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioMixingDestination")), objc.RegisterName("new"))
+	return audioMixingDestinationAdopt(_id)
+}
+
+// ConnectionPoint wraps the corresponding Objective-C method.
+func (x *AudioMixingDestination) ConnectionPoint() *AudioConnectionPoint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionPoint"))
+	return AudioConnectionPointFromID(_r)
 }
 
 // AudioMixingDestinationable is the interface implemented by [AudioMixingDestination], for mocking and DI.
 type AudioMixingDestinationable interface {
-	Unwrap() *raw.AVAudioMixingDestination
+	obj.Object
 	ConnectionPoint() *AudioConnectionPoint
 }
 

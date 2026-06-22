@@ -5,114 +5,151 @@
 package osservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCSIdentityErrorDomain returns the value of the CoreFoundation reference constant kCSIdentityErrorDomain as an objc.ID.
-func KCSIdentityErrorDomain() objc.ID { return purego.CFConstant(raw.KCSIdentityErrorDomain()) }
-
-// KCSIdentityGeneratePosixName returns the value of the CoreFoundation reference constant kCSIdentityGeneratePosixName as an objc.ID.
-func KCSIdentityGeneratePosixName() objc.ID {
-	return purego.CFConstant(raw.KCSIdentityGeneratePosixName())
+// KCSIdentityErrorDomain returns the value of the constant kCSIdentityErrorDomain.
+func KCSIdentityErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCSIdentityErrorDomain")))
 }
 
-// KWSXMLRPCProtocol returns the value of the CoreFoundation reference constant kWSXMLRPCProtocol as an objc.ID.
-func KWSXMLRPCProtocol() objc.ID { return purego.CFConstant(raw.KWSXMLRPCProtocol()) }
-
-// KWSSOAP1999Protocol returns the value of the CoreFoundation reference constant kWSSOAP1999Protocol as an objc.ID.
-func KWSSOAP1999Protocol() objc.ID { return purego.CFConstant(raw.KWSSOAP1999Protocol()) }
-
-// KWSSOAP2001Protocol returns the value of the CoreFoundation reference constant kWSSOAP2001Protocol as an objc.ID.
-func KWSSOAP2001Protocol() objc.ID { return purego.CFConstant(raw.KWSSOAP2001Protocol()) }
-
-// KWSMethodInvocationResult returns the value of the CoreFoundation reference constant kWSMethodInvocationResult as an objc.ID.
-func KWSMethodInvocationResult() objc.ID { return purego.CFConstant(raw.KWSMethodInvocationResult()) }
-
-// KWSFaultString returns the value of the CoreFoundation reference constant kWSFaultString as an objc.ID.
-func KWSFaultString() objc.ID { return purego.CFConstant(raw.KWSFaultString()) }
-
-// KWSFaultCode returns the value of the CoreFoundation reference constant kWSFaultCode as an objc.ID.
-func KWSFaultCode() objc.ID { return purego.CFConstant(raw.KWSFaultCode()) }
-
-// KWSFaultExtra returns the value of the CoreFoundation reference constant kWSFaultExtra as an objc.ID.
-func KWSFaultExtra() objc.ID { return purego.CFConstant(raw.KWSFaultExtra()) }
-
-// KWSNetworkStreamFaultString returns the value of the CoreFoundation reference constant kWSNetworkStreamFaultString as an objc.ID.
-func KWSNetworkStreamFaultString() objc.ID {
-	return purego.CFConstant(raw.KWSNetworkStreamFaultString())
+// KCSIdentityGeneratePosixName returns the value of the constant kCSIdentityGeneratePosixName.
+func KCSIdentityGeneratePosixName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCSIdentityGeneratePosixName")))
 }
 
-// KWSStreamErrorMessage returns the value of the CoreFoundation reference constant kWSStreamErrorMessage as an objc.ID.
-func KWSStreamErrorMessage() objc.ID { return purego.CFConstant(raw.KWSStreamErrorMessage()) }
+// KWSXMLRPCProtocol returns the value of the constant kWSXMLRPCProtocol.
+func KWSXMLRPCProtocol() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSXMLRPCProtocol"))) }
 
-// KWSStreamErrorDomain returns the value of the CoreFoundation reference constant kWSStreamErrorDomain as an objc.ID.
-func KWSStreamErrorDomain() objc.ID { return purego.CFConstant(raw.KWSStreamErrorDomain()) }
-
-// KWSStreamErrorError returns the value of the CoreFoundation reference constant kWSStreamErrorError as an objc.ID.
-func KWSStreamErrorError() objc.ID { return purego.CFConstant(raw.KWSStreamErrorError()) }
-
-// KWSHTTPMessage returns the value of the CoreFoundation reference constant kWSHTTPMessage as an objc.ID.
-func KWSHTTPMessage() objc.ID { return purego.CFConstant(raw.KWSHTTPMessage()) }
-
-// KWSHTTPResponseMessage returns the value of the CoreFoundation reference constant kWSHTTPResponseMessage as an objc.ID.
-func KWSHTTPResponseMessage() objc.ID { return purego.CFConstant(raw.KWSHTTPResponseMessage()) }
-
-// KWSHTTPExtraHeaders returns the value of the CoreFoundation reference constant kWSHTTPExtraHeaders as an objc.ID.
-func KWSHTTPExtraHeaders() objc.ID { return purego.CFConstant(raw.KWSHTTPExtraHeaders()) }
-
-// KWSHTTPVersion returns the value of the CoreFoundation reference constant kWSHTTPVersion as an objc.ID.
-func KWSHTTPVersion() objc.ID { return purego.CFConstant(raw.KWSHTTPVersion()) }
-
-// KWSHTTPProxy returns the value of the CoreFoundation reference constant kWSHTTPProxy as an objc.ID.
-func KWSHTTPProxy() objc.ID { return purego.CFConstant(raw.KWSHTTPProxy()) }
-
-// KWSHTTPFollowsRedirects returns the value of the CoreFoundation reference constant kWSHTTPFollowsRedirects as an objc.ID.
-func KWSHTTPFollowsRedirects() objc.ID { return purego.CFConstant(raw.KWSHTTPFollowsRedirects()) }
-
-// KWSDebugOutgoingHeaders returns the value of the CoreFoundation reference constant kWSDebugOutgoingHeaders as an objc.ID.
-func KWSDebugOutgoingHeaders() objc.ID { return purego.CFConstant(raw.KWSDebugOutgoingHeaders()) }
-
-// KWSDebugOutgoingBody returns the value of the CoreFoundation reference constant kWSDebugOutgoingBody as an objc.ID.
-func KWSDebugOutgoingBody() objc.ID { return purego.CFConstant(raw.KWSDebugOutgoingBody()) }
-
-// KWSDebugIncomingHeaders returns the value of the CoreFoundation reference constant kWSDebugIncomingHeaders as an objc.ID.
-func KWSDebugIncomingHeaders() objc.ID { return purego.CFConstant(raw.KWSDebugIncomingHeaders()) }
-
-// KWSDebugIncomingBody returns the value of the CoreFoundation reference constant kWSDebugIncomingBody as an objc.ID.
-func KWSDebugIncomingBody() objc.ID { return purego.CFConstant(raw.KWSDebugIncomingBody()) }
-
-// KWSSOAPBodyEncodingStyle returns the value of the CoreFoundation reference constant kWSSOAPBodyEncodingStyle as an objc.ID.
-func KWSSOAPBodyEncodingStyle() objc.ID { return purego.CFConstant(raw.KWSSOAPBodyEncodingStyle()) }
-
-// KWSSOAPMethodNamespaceURI returns the value of the CoreFoundation reference constant kWSSOAPMethodNamespaceURI as an objc.ID.
-func KWSSOAPMethodNamespaceURI() objc.ID { return purego.CFConstant(raw.KWSSOAPMethodNamespaceURI()) }
-
-// KWSSOAPStyleDoc returns the value of the CoreFoundation reference constant kWSSOAPStyleDoc as an objc.ID.
-func KWSSOAPStyleDoc() objc.ID { return purego.CFConstant(raw.KWSSOAPStyleDoc()) }
-
-// KWSSOAPStyleRPC returns the value of the CoreFoundation reference constant kWSSOAPStyleRPC as an objc.ID.
-func KWSSOAPStyleRPC() objc.ID { return purego.CFConstant(raw.KWSSOAPStyleRPC()) }
-
-// KWSSOAPMessageHeaders returns the value of the CoreFoundation reference constant kWSSOAPMessageHeaders as an objc.ID.
-func KWSSOAPMessageHeaders() objc.ID { return purego.CFConstant(raw.KWSSOAPMessageHeaders()) }
-
-// KWSRecordParameterOrder returns the value of the CoreFoundation reference constant kWSRecordParameterOrder as an objc.ID.
-func KWSRecordParameterOrder() objc.ID { return purego.CFConstant(raw.KWSRecordParameterOrder()) }
-
-// KWSRecordNamespaceURI returns the value of the CoreFoundation reference constant kWSRecordNamespaceURI as an objc.ID.
-func KWSRecordNamespaceURI() objc.ID { return purego.CFConstant(raw.KWSRecordNamespaceURI()) }
-
-// KWSRecordType returns the value of the CoreFoundation reference constant kWSRecordType as an objc.ID.
-func KWSRecordType() objc.ID { return purego.CFConstant(raw.KWSRecordType()) }
-
-// KWSMethodInvocationResultParameterName returns the value of the CoreFoundation reference constant kWSMethodInvocationResultParameterName as an objc.ID.
-func KWSMethodInvocationResultParameterName() objc.ID {
-	return purego.CFConstant(raw.KWSMethodInvocationResultParameterName())
+// KWSSOAP1999Protocol returns the value of the constant kWSSOAP1999Protocol.
+func KWSSOAP1999Protocol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSSOAP1999Protocol")))
 }
 
-// KWSMethodInvocationTimeoutValue returns the value of the CoreFoundation reference constant kWSMethodInvocationTimeoutValue as an objc.ID.
-func KWSMethodInvocationTimeoutValue() objc.ID {
-	return purego.CFConstant(raw.KWSMethodInvocationTimeoutValue())
+// KWSSOAP2001Protocol returns the value of the constant kWSSOAP2001Protocol.
+func KWSSOAP2001Protocol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSSOAP2001Protocol")))
+}
+
+// KWSMethodInvocationResult returns the value of the constant kWSMethodInvocationResult.
+func KWSMethodInvocationResult() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSMethodInvocationResult")))
+}
+
+// KWSFaultString returns the value of the constant kWSFaultString.
+func KWSFaultString() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSFaultString"))) }
+
+// KWSFaultCode returns the value of the constant kWSFaultCode.
+func KWSFaultCode() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSFaultCode"))) }
+
+// KWSFaultExtra returns the value of the constant kWSFaultExtra.
+func KWSFaultExtra() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSFaultExtra"))) }
+
+// KWSNetworkStreamFaultString returns the value of the constant kWSNetworkStreamFaultString.
+func KWSNetworkStreamFaultString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSNetworkStreamFaultString")))
+}
+
+// KWSStreamErrorMessage returns the value of the constant kWSStreamErrorMessage.
+func KWSStreamErrorMessage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSStreamErrorMessage")))
+}
+
+// KWSStreamErrorDomain returns the value of the constant kWSStreamErrorDomain.
+func KWSStreamErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSStreamErrorDomain")))
+}
+
+// KWSStreamErrorError returns the value of the constant kWSStreamErrorError.
+func KWSStreamErrorError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSStreamErrorError")))
+}
+
+// KWSHTTPMessage returns the value of the constant kWSHTTPMessage.
+func KWSHTTPMessage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSHTTPMessage"))) }
+
+// KWSHTTPResponseMessage returns the value of the constant kWSHTTPResponseMessage.
+func KWSHTTPResponseMessage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSHTTPResponseMessage")))
+}
+
+// KWSHTTPExtraHeaders returns the value of the constant kWSHTTPExtraHeaders.
+func KWSHTTPExtraHeaders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSHTTPExtraHeaders")))
+}
+
+// KWSHTTPVersion returns the value of the constant kWSHTTPVersion.
+func KWSHTTPVersion() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSHTTPVersion"))) }
+
+// KWSHTTPProxy returns the value of the constant kWSHTTPProxy.
+func KWSHTTPProxy() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSHTTPProxy"))) }
+
+// KWSHTTPFollowsRedirects returns the value of the constant kWSHTTPFollowsRedirects.
+func KWSHTTPFollowsRedirects() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSHTTPFollowsRedirects")))
+}
+
+// KWSDebugOutgoingHeaders returns the value of the constant kWSDebugOutgoingHeaders.
+func KWSDebugOutgoingHeaders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSDebugOutgoingHeaders")))
+}
+
+// KWSDebugOutgoingBody returns the value of the constant kWSDebugOutgoingBody.
+func KWSDebugOutgoingBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSDebugOutgoingBody")))
+}
+
+// KWSDebugIncomingHeaders returns the value of the constant kWSDebugIncomingHeaders.
+func KWSDebugIncomingHeaders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSDebugIncomingHeaders")))
+}
+
+// KWSDebugIncomingBody returns the value of the constant kWSDebugIncomingBody.
+func KWSDebugIncomingBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSDebugIncomingBody")))
+}
+
+// KWSSOAPBodyEncodingStyle returns the value of the constant kWSSOAPBodyEncodingStyle.
+func KWSSOAPBodyEncodingStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSSOAPBodyEncodingStyle")))
+}
+
+// KWSSOAPMethodNamespaceURI returns the value of the constant kWSSOAPMethodNamespaceURI.
+func KWSSOAPMethodNamespaceURI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSSOAPMethodNamespaceURI")))
+}
+
+// KWSSOAPStyleDoc returns the value of the constant kWSSOAPStyleDoc.
+func KWSSOAPStyleDoc() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSSOAPStyleDoc"))) }
+
+// KWSSOAPStyleRPC returns the value of the constant kWSSOAPStyleRPC.
+func KWSSOAPStyleRPC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSSOAPStyleRPC"))) }
+
+// KWSSOAPMessageHeaders returns the value of the constant kWSSOAPMessageHeaders.
+func KWSSOAPMessageHeaders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSSOAPMessageHeaders")))
+}
+
+// KWSRecordParameterOrder returns the value of the constant kWSRecordParameterOrder.
+func KWSRecordParameterOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSRecordParameterOrder")))
+}
+
+// KWSRecordNamespaceURI returns the value of the constant kWSRecordNamespaceURI.
+func KWSRecordNamespaceURI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSRecordNamespaceURI")))
+}
+
+// KWSRecordType returns the value of the constant kWSRecordType.
+func KWSRecordType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kWSRecordType"))) }
+
+// KWSMethodInvocationResultParameterName returns the value of the constant kWSMethodInvocationResultParameterName.
+func KWSMethodInvocationResultParameterName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSMethodInvocationResultParameterName")))
+}
+
+// KWSMethodInvocationTimeoutValue returns the value of the constant kWSMethodInvocationTimeoutValue.
+func KWSMethodInvocationTimeoutValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kWSMethodInvocationTimeoutValue")))
 }

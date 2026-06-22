@@ -6,64 +6,91 @@ package healthkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The access point for attachments associated with samples in the HealthKit store.
+// AttachmentStore is an idiomatic wrapper over the Objective-C class HKAttachmentStore.
 //
-// AttachmentStore wraps [raw.HKAttachmentStore] with a fluent Go API.
+// The access point for attachments associated with samples in the HealthKit store.
 type AttachmentStore struct {
-	inner *raw.HKAttachmentStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKAttachmentStore].
-func (x *AttachmentStore) Unwrap() *raw.HKAttachmentStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttachmentStore) ID() objc.ID { return x.inner.Ptr() }
-
-// AttachmentStoreFromID adopts an existing object pointer as a AttachmentStore (nil for 0).
+// AttachmentStoreFromID adopts an existing Objective-C object as a AttachmentStore
+// (nil for 0), retaining it and registering a release finalizer.
 func AttachmentStoreFromID(id objc.ID) *AttachmentStore {
 	if id == 0 {
 		return nil
 	}
-	return &AttachmentStore{inner: raw.HKAttachmentStoreFromID(id)}
+	x := &AttachmentStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an attachment store for the provided HealthKit store.
-//
-// NewAttachmentStoreWithHealthStore creates a new [AttachmentStore].
-func NewAttachmentStoreWithHealthStore(healthStore *raw.HKHealthStore) *AttachmentStore {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAttachmentStore")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:"), healthStore.Ptr())
-	return &AttachmentStore{inner: raw.HKAttachmentStoreFromID(_id)}
+// attachmentStoreAdopt wraps an Objective-C object that this code just created as a
+// AttachmentStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attachmentStoreAdopt(id objc.ID) *AttachmentStore {
+	if id == 0 {
+		return nil
+	}
+	x := &AttachmentStore{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Adds an attachment to the specified object.
+// Description returns the object's -description text.
+func (x *AttachmentStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttachmentStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttachmentStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttachmentStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttachmentStoreWithHealthStore creates an attachment store for the provided HealthKit store.
+func NewAttachmentStoreWithHealthStore(healthStore *HealthStore) *AttachmentStore {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAttachmentStore")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:"), objref.IDOf(healthStore))
+	return attachmentStoreAdopt(_id)
+}
+
+// AddAttachmentToObjectNameContentTypeURLMetadataCompletion adds an attachment to the specified object.
 //
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *raw.HKObject, name string, contentType *uniformtypeidentifiers.UTType, uRL string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Attachment, error) {
+func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (result *Attachment, err error) {
 	type _result struct {
 		val *Attachment
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AddAttachmentToObjectNameContentTypeURLMetadataCompletion(object, foundation.NSStringStringWithUTF8String(name), contentType, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), metadata, func(_p0 *raw.HKAttachment, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Attachment{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AttachmentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAttachmentToObject:name:contentType:URL:metadata:completion:"), objref.IDOf(object), purego.NSString(name), objref.IDOf(contentType), rt.FileURL(uRL), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -73,61 +100,36 @@ func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComplet
 	}
 }
 
-// Removes the specified attachment.
-//
-// RemoveAttachmentFromObjectCompletion calls the underlying RemoveAttachmentFromObjectCompletion.
-func (x *AttachmentStore) RemoveAttachmentFromObjectCompletion(attachment *raw.HKAttachment, object *raw.HKObject, completion func(bool, unsafe.Pointer)) {
-	x.inner.RemoveAttachmentFromObjectCompletion(attachment, object, completion)
-}
-
-// Returns all the attachments for the specified object.
+// GetAttachmentsForObjectCompletion returns all the attachments for the specified object.
 //
 // GetAttachmentsForObjectCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *raw.HKObject) (*foundation.NSArray[*raw.HKAttachment], error) {
+func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.HKAttachment]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetAttachmentsForObjectCompletion(object, func(_p0 *foundation.NSArray[*raw.HKAttachment], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAttachmentsForObject:completion:"), objref.IDOf(object), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.HKAttachment]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Returns an attachment’s data.
-//
-// GetDataForAttachmentCompletion calls the underlying GetDataForAttachmentCompletion.
-func (x *AttachmentStore) GetDataForAttachmentCompletion(attachment *raw.HKAttachment, completion func(*foundation.NSData, unsafe.Pointer)) *foundation.NSProgress {
-	return x.inner.GetDataForAttachmentCompletion(attachment, completion)
-}
-
-// Asynchronously returns the attachment’s data.
-//
-// StreamDataForAttachmentDataHandler calls the underlying StreamDataForAttachmentDataHandler.
-func (x *AttachmentStore) StreamDataForAttachmentDataHandler(attachment *raw.HKAttachment, dataHandler func(*foundation.NSData, unsafe.Pointer, bool)) *foundation.NSProgress {
-	return x.inner.StreamDataForAttachmentDataHandler(attachment, dataHandler)
-}
-
 // AttachmentStoreable is the interface implemented by [AttachmentStore], for mocking and DI.
 type AttachmentStoreable interface {
-	Unwrap() *raw.HKAttachmentStore
-	AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *raw.HKObject, name string, contentType *uniformtypeidentifiers.UTType, uRL string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Attachment, error)
-	RemoveAttachmentFromObjectCompletion(attachment *raw.HKAttachment, object *raw.HKObject, completion func(bool, unsafe.Pointer))
-	GetAttachmentsForObjectCompletion(ctx context.Context, object *raw.HKObject) (*foundation.NSArray[*raw.HKAttachment], error)
-	GetDataForAttachmentCompletion(attachment *raw.HKAttachment, completion func(*foundation.NSData, unsafe.Pointer)) *foundation.NSProgress
-	StreamDataForAttachmentDataHandler(attachment *raw.HKAttachment, dataHandler func(*foundation.NSData, unsafe.Pointer, bool)) *foundation.NSProgress
+	obj.Object
+	AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (*Attachment, error)
+	GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (obj.Object, error)
 }
 
 var _ AttachmentStoreable = (*AttachmentStore)(nil)

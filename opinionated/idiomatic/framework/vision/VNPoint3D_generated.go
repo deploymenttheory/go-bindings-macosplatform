@@ -5,53 +5,79 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a 3D point in an image.
+// Point3D is an idiomatic wrapper over the Objective-C class VNPoint3D.
 //
-// Point3D wraps [raw.VNPoint3D] with a fluent Go API.
+// Point3D is an abstract base — you do not construct it directly. Construct one of [RecognizedPoint3D] and pass it where a Point3D is accepted.
+//
+// An object that represents a 3D point in an image.
 type Point3D struct {
-	inner *raw.VNPoint3D
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNPoint3D].
-func (x *Point3D) Unwrap() *raw.VNPoint3D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Point3D) ID() objc.ID { return x.inner.Ptr() }
-
-// Point3DFromID adopts an existing object pointer as a Point3D (nil for 0).
+// Point3DFromID adopts an existing Objective-C object as a Point3D
+// (nil for 0), retaining it and registering a release finalizer.
 func Point3DFromID(id objc.ID) *Point3D {
 	if id == 0 {
 		return nil
 	}
-	return &Point3D{inner: raw.VNPoint3DFromID(id)}
+	x := &Point3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a point object with the position you specify.
-//
-// NewPoint3DWithPosition creates a new [Point3D].
-func NewPoint3DWithPosition(position unsafe.Pointer) *Point3D {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPoint3D")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPosition:"), position)
-	return &Point3D{inner: raw.VNPoint3DFromID(_id)}
+// point3DAdopt wraps an Objective-C object that this code just created as a
+// Point3D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func point3DAdopt(id objc.ID) *Point3D {
+	if id == 0 {
+		return nil
+	}
+	x := &Point3D{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Position calls the underlying Position.
-func (x *Point3D) Position() unsafe.Pointer {
-	return x.inner.Position()
+// Description returns the object's -description text.
+func (x *Point3D) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *Point3D) asPoint3D() *raw.VNPoint3D { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Point3D) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Point3D) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Point3D) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // Point3Dable is the interface implemented by [Point3D], for mocking and DI.
 type Point3Dable interface {
-	Unwrap() *raw.VNPoint3D
-	Position() unsafe.Pointer
+	obj.Object
 }
 
 var _ Point3Dable = (*Point3D)(nil)
+
+// isPoint3D marks Point3D — and, by embedding promotion, its
+// subclasses — as a member of the Point3D hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Point3D) isPoint3D() {}
+
+var _ Point3DProvider = (*Point3D)(nil)

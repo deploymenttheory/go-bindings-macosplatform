@@ -5,284 +5,196 @@
 package javascriptcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javascriptcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// CurrentContext calls the underlying JSContextCurrentContext.
+// CurrentContext returns the context currently executing JavaScript code.
 func CurrentContext() *Context {
-	_r := raw.JSContextCurrentContext()
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("currentContext"))
+	return ContextFromID(_r)
 }
 
-// CurrentCallee calls the underlying JSContextCurrentCallee.
+// CurrentCallee returns the currently executing JavaScript function.
 func CurrentCallee() *Value {
-	_r := raw.JSContextCurrentCallee()
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("currentCallee"))
+	return ValueFromID(_r)
 }
 
-// CurrentThis calls the underlying JSContextCurrentThis.
+// CurrentThis returns the value of the this keyword in currently executing JavaScript code.
 func CurrentThis() *Value {
-	_r := raw.JSContextCurrentThis()
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("currentThis"))
+	return ValueFromID(_r)
 }
 
-// CurrentArguments calls the underlying JSContextCurrentArguments.
-func CurrentArguments() *foundation.NSArray[objc.ID] {
-	return raw.JSContextCurrentArguments()
+// CurrentArguments returns the arguments to the current native callback from JavaScript code.
+func CurrentArguments() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("currentArguments"))
+	return obj.Wrap(_r)
 }
 
-// ContextWithJSGlobalContextRef calls the underlying JSContextContextWithJSGlobalContextRef.
-func ContextWithJSGlobalContextRef(jsGlobalContextRef unsafe.Pointer) *Context {
-	_r := raw.JSContextContextWithJSGlobalContextRef(jsGlobalContextRef)
-	if _r == nil {
-		return nil
-	}
-	return &Context{inner: _r}
+// ContextWithJSGlobalContextRef create a JSContext, wrapping its C API counterpart.
+func ContextWithJSGlobalContextRef(jsGlobalContextRef obj.Object) *Context {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("contextWithJSGlobalContextRef:"), objref.IDOf(jsGlobalContextRef))
+	return ContextFromID(_r)
 }
 
-// ManagedValueWithValue calls the underlying JSManagedValueManagedValueWithValue.
-func ManagedValueWithValue(value *raw.JSValue) *ManagedValue {
-	_r := raw.JSManagedValueManagedValueWithValue(value)
-	if _r == nil {
-		return nil
-	}
-	return &ManagedValue{inner: _r}
+// ManagedValueWithValue creates a managed value with the specified JavaScript value.
+func ManagedValueWithValue(value *Value) *ManagedValue {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSManagedValue")), objc.RegisterName("managedValueWithValue:"), objref.IDOf(value))
+	return ManagedValueFromID(_r)
 }
 
-// ManagedValueWithValueAndOwner calls the underlying JSManagedValueManagedValueWithValueAndOwner.
-func ManagedValueWithValueAndOwner(value *raw.JSValue, owner objc.ID) *ManagedValue {
-	_r := raw.JSManagedValueManagedValueWithValueAndOwner(value, owner)
-	if _r == nil {
-		return nil
-	}
-	return &ManagedValue{inner: _r}
+// ManagedValueWithValueAndOwner creates a managed value and associates it with an owner.
+func ManagedValueWithValueAndOwner(value *Value, owner obj.Object) *ManagedValue {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSManagedValue")), objc.RegisterName("managedValueWithValue:andOwner:"), objref.IDOf(value), objref.IDOf(owner))
+	return ManagedValueFromID(_r)
 }
 
-// ValueWithObjectInContext calls the underlying JSValueValueWithObjectInContext.
-func ValueWithObjectInContext(value objc.ID, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithObjectInContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithObjectInContext creates a JavaScript value by converting the specified native object.
+func ValueWithObjectInContext(value obj.Object, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithObject:inContext:"), objref.IDOf(value), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithBoolInContext calls the underlying JSValueValueWithBoolInContext.
-func ValueWithBoolInContext(value bool, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithBoolInContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithBoolInContext creates a JavaScript representation of the specified Boolean value.
+func ValueWithBoolInContext(value bool, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithBool:inContext:"), value, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithDoubleInContext calls the underlying JSValueValueWithDoubleInContext.
-func ValueWithDoubleInContext(value float64, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithDoubleInContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithDoubleInContext creates a JavaScript representation of the specified floating-point value.
+func ValueWithDoubleInContext(value float64, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithDouble:inContext:"), value, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithInt32InContext calls the underlying JSValueValueWithInt32InContext.
-func ValueWithInt32InContext(value int32, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithInt32InContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithInt32InContext creates a JavaScript representation of the specified signed integer value.
+func ValueWithInt32InContext(value int32, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithInt32:inContext:"), value, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithUInt32InContext calls the underlying JSValueValueWithUInt32InContext.
-func ValueWithUInt32InContext(value uint32, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithUInt32InContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithUInt32InContext creates a JavaScript representation of the specified unsigned integer value.
+func ValueWithUInt32InContext(value uint32, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithUInt32:inContext:"), value, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewObjectInContext calls the underlying JSValueValueWithNewObjectInContext.
-func ValueWithNewObjectInContext(context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewObjectInContext(context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewObjectInContext creates a new, empty JavaScript object value.
+func ValueWithNewObjectInContext(context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewObjectInContext:"), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewArrayInContext calls the underlying JSValueValueWithNewArrayInContext.
-func ValueWithNewArrayInContext(context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewArrayInContext(context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewArrayInContext creates a new, empty JavaScript array value.
+func ValueWithNewArrayInContext(context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewArrayInContext:"), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewRegularExpressionFromPatternFlagsInContext calls the underlying JSValueValueWithNewRegularExpressionFromPatternFlagsInContext.
-func ValueWithNewRegularExpressionFromPatternFlagsInContext(pattern string, flags string, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewRegularExpressionFromPatternFlagsInContext(foundation.NSStringStringWithUTF8String(pattern), foundation.NSStringStringWithUTF8String(flags), context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewRegularExpressionFromPatternFlagsInContext creates a JavaScript regular expression value from the specified pattern.
+func ValueWithNewRegularExpressionFromPatternFlagsInContext(pattern string, flags string, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewRegularExpressionFromPattern:flags:inContext:"), purego.NSString(pattern), purego.NSString(flags), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewErrorFromMessageInContext calls the underlying JSValueValueWithNewErrorFromMessageInContext.
-func ValueWithNewErrorFromMessageInContext(message string, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewErrorFromMessageInContext(foundation.NSStringStringWithUTF8String(message), context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewErrorFromMessageInContext creates a JavaScript error value with the specified error message.
+func ValueWithNewErrorFromMessageInContext(message string, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewErrorFromMessage:inContext:"), purego.NSString(message), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewPromiseInContextFromExecutor calls the underlying JSValueValueWithNewPromiseInContextFromExecutor.
-func ValueWithNewPromiseInContextFromExecutor(context_ *raw.JSContext, callback func(*raw.JSValue, *raw.JSValue)) *Value {
-	_r := raw.JSValueValueWithNewPromiseInContextFromExecutor(context_, callback)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewPromiseInContextFromExecutor creates a promise object using the specified executor callback.
+func ValueWithNewPromiseInContextFromExecutor(context_ *Context, callback func(obj.Object, obj.Object)) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewPromiseInContext:fromExecutor:"), objref.IDOf(context_), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { callback(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewPromiseResolvedWithResultInContext calls the underlying JSValueValueWithNewPromiseResolvedWithResultInContext.
-func ValueWithNewPromiseResolvedWithResultInContext(result objc.ID, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewPromiseResolvedWithResultInContext(result, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewPromiseResolvedWithResultInContext creates a resolved promise object with the specified value.
+func ValueWithNewPromiseResolvedWithResultInContext(result obj.Object, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewPromiseResolvedWithResult:inContext:"), objref.IDOf(result), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewPromiseRejectedWithReasonInContext calls the underlying JSValueValueWithNewPromiseRejectedWithReasonInContext.
-func ValueWithNewPromiseRejectedWithReasonInContext(reason objc.ID, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewPromiseRejectedWithReasonInContext(reason, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewPromiseRejectedWithReasonInContext creates a rejected promise object with the specified value.
+func ValueWithNewPromiseRejectedWithReasonInContext(reason obj.Object, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewPromiseRejectedWithReason:inContext:"), objref.IDOf(reason), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewSymbolFromDescriptionInContext calls the underlying JSValueValueWithNewSymbolFromDescriptionInContext.
-func ValueWithNewSymbolFromDescriptionInContext(description string, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewSymbolFromDescriptionInContext(foundation.NSStringStringWithUTF8String(description), context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewSymbolFromDescriptionInContext creates a unique symbol object.
+func ValueWithNewSymbolFromDescriptionInContext(description string, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewSymbolFromDescription:inContext:"), purego.NSString(description), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewBigIntFromStringInContext calls the underlying JSValueValueWithNewBigIntFromStringInContext.
-func ValueWithNewBigIntFromStringInContext(string_ string, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewBigIntFromStringInContext(foundation.NSStringStringWithUTF8String(string_), context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewBigIntFromStringInContext create a new BigInt value from a numeric string. This is equivalent to calling the <code>BigInt</code> constructor from JavaScript with a string argument.
+func ValueWithNewBigIntFromStringInContext(string_ string, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewBigIntFromString:inContext:"), purego.NSString(string_), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewBigIntFromInt64InContext calls the underlying JSValueValueWithNewBigIntFromInt64InContext.
-func ValueWithNewBigIntFromInt64InContext(int64 int64, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewBigIntFromInt64InContext(int64, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewBigIntFromInt64InContext create a new BigInt value from a <code>int64_t</code>.
+func ValueWithNewBigIntFromInt64InContext(int64 int64, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewBigIntFromInt64:inContext:"), int64, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewBigIntFromUInt64InContext calls the underlying JSValueValueWithNewBigIntFromUInt64InContext.
-func ValueWithNewBigIntFromUInt64InContext(uint64 uint64, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewBigIntFromUInt64InContext(uint64, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewBigIntFromUInt64InContext create a new BigInt value from a <code>uint64_t</code>.
+func ValueWithNewBigIntFromUInt64InContext(uint64 uint64, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewBigIntFromUInt64:inContext:"), uint64, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNewBigIntFromDoubleInContext calls the underlying JSValueValueWithNewBigIntFromDoubleInContext.
-func ValueWithNewBigIntFromDoubleInContext(value float64, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNewBigIntFromDoubleInContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNewBigIntFromDoubleInContext create a new BigInt value from a double. If the value is not an integer, an exception is thrown.
+func ValueWithNewBigIntFromDoubleInContext(value float64, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNewBigIntFromDouble:inContext:"), value, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithNullInContext calls the underlying JSValueValueWithNullInContext.
-func ValueWithNullInContext(context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithNullInContext(context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithNullInContext creates a JavaScript null value.
+func ValueWithNullInContext(context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithNullInContext:"), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithUndefinedInContext calls the underlying JSValueValueWithUndefinedInContext.
-func ValueWithUndefinedInContext(context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithUndefinedInContext(context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithUndefinedInContext creates a JavaScript undefined value.
+func ValueWithUndefinedInContext(context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithUndefinedInContext:"), objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithPointInContext calls the underlying JSValueValueWithPointInContext.
-func ValueWithPointInContext(point corefoundation.CGPoint, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithPointInContext(point, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithPointInContext create a JSValue from a CGPoint.
+func ValueWithPointInContext(point corefoundation.CGPoint, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithPoint:inContext:"), point, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithRangeInContext calls the underlying JSValueValueWithRangeInContext.
-func ValueWithRangeInContext(range_ foundation.NSRange, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithRangeInContext(range_, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithRangeInContext create a JSValue from a NSRange.
+func ValueWithRangeInContext(range_ foundation.NSRange, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithRange:inContext:"), range_, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithRectInContext calls the underlying JSValueValueWithRectInContext.
-func ValueWithRectInContext(rect corefoundation.CGRect, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithRectInContext(rect, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithRectInContext create a JSValue from a CGRect.
+func ValueWithRectInContext(rect corefoundation.CGRect, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithRect:inContext:"), rect, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithSizeInContext calls the underlying JSValueValueWithSizeInContext.
-func ValueWithSizeInContext(size corefoundation.CGSize, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithSizeInContext(size, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithSizeInContext create a JSValue from a CGSize.
+func ValueWithSizeInContext(size corefoundation.CGSize, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithSize:inContext:"), size, objref.IDOf(context_))
+	return ValueFromID(_r)
 }
 
-// ValueWithJSValueRefInContext calls the underlying JSValueValueWithJSValueRefInContext.
-func ValueWithJSValueRefInContext(value unsafe.Pointer, context_ *raw.JSContext) *Value {
-	_r := raw.JSValueValueWithJSValueRefInContext(value, context_)
-	if _r == nil {
-		return nil
-	}
-	return &Value{inner: _r}
+// ValueWithJSValueRefInContext creates a JSValue, wrapping its C API counterpart.
+func ValueWithJSValueRefInContext(value obj.Object, context_ *Context) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithJSValueRef:inContext:"), objref.IDOf(value), objref.IDOf(context_))
+	return ValueFromID(_r)
 }

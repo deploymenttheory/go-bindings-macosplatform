@@ -5,41 +5,76 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates information about a response to a content decryption key request.
+// ContentKeyResponse is an idiomatic wrapper over the Objective-C class AVContentKeyResponse.
 //
-// ContentKeyResponse wraps [raw.AVContentKeyResponse] with a fluent Go API.
+// An object that encapsulates information about a response to a content decryption key request.
 type ContentKeyResponse struct {
-	inner *raw.AVContentKeyResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVContentKeyResponse].
-func (x *ContentKeyResponse) Unwrap() *raw.AVContentKeyResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContentKeyResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// ContentKeyResponseFromID adopts an existing object pointer as a ContentKeyResponse (nil for 0).
+// ContentKeyResponseFromID adopts an existing Objective-C object as a ContentKeyResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func ContentKeyResponseFromID(id objc.ID) *ContentKeyResponse {
 	if id == 0 {
 		return nil
 	}
-	return &ContentKeyResponse{inner: raw.AVContentKeyResponseFromID(id)}
+	x := &ContentKeyResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContentKeyResponse creates a new [ContentKeyResponse].
+// contentKeyResponseAdopt wraps an Objective-C object that this code just created as a
+// ContentKeyResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contentKeyResponseAdopt(id objc.ID) *ContentKeyResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &ContentKeyResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContentKeyResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContentKeyResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContentKeyResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentKeyResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentKeyResponse creates a new ContentKeyResponse.
 func NewContentKeyResponse() *ContentKeyResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVContentKeyResponse")), objc.RegisterName("new"))
-	return &ContentKeyResponse{inner: raw.AVContentKeyResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVContentKeyResponse")), objc.RegisterName("new"))
+	return contentKeyResponseAdopt(_id)
 }
 
 // ContentKeyResponseable is the interface implemented by [ContentKeyResponse], for mocking and DI.
 type ContentKeyResponseable interface {
-	Unwrap() *raw.AVContentKeyResponse
+	obj.Object
 }
 
 var _ ContentKeyResponseable = (*ContentKeyResponse)(nil)

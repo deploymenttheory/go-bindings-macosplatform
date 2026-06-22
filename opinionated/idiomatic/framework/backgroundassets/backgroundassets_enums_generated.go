@@ -6,192 +6,149 @@ package backgroundassets
 
 import (
 	"fmt"
-	"strings"
 )
-
-// The status of an asset pack.
-// Bitmask — values may be combined with |.
-type BAAssetPackStatus uint64
-
-const (
-	// A status value that indicates that the asset pack is available to download.
-	BAAssetPackStatusDownloadAvailable BAAssetPackStatus = 1
-	// A status value that indicates that an update to the asset pack is available to download.
-	BAAssetPackStatusUpdateAvailable BAAssetPackStatus = 2
-	// A status value that indicates that the downloaded asset pack is up to date.
-	BAAssetPackStatusUpToDate BAAssetPackStatus = 4
-	// A status value that indicates that the downloaded asset pack is out of date.
-	BAAssetPackStatusOutOfDate BAAssetPackStatus = 8
-	// A status value that indicates that the asset pack is no longer available to download.
-	BAAssetPackStatusObsolete BAAssetPackStatus = 16
-	// A status value that indicates that the system is currently downloading the asset pack.
-	BAAssetPackStatusDownloading BAAssetPackStatus = 32
-	// A status value that indicates that the system finished downloading the asset pack.
-	BAAssetPackStatusDownloaded BAAssetPackStatus = 64
-)
-
-func (e BAAssetPackStatus) String() string {
-	var parts []string
-	if e&BAAssetPackStatusDownloadAvailable != 0 {
-		parts = append(parts, "BAAssetPackStatusDownloadAvailable")
-	}
-	if e&BAAssetPackStatusUpdateAvailable != 0 {
-		parts = append(parts, "BAAssetPackStatusUpdateAvailable")
-	}
-	if e&BAAssetPackStatusUpToDate != 0 {
-		parts = append(parts, "BAAssetPackStatusUpToDate")
-	}
-	if e&BAAssetPackStatusOutOfDate != 0 {
-		parts = append(parts, "BAAssetPackStatusOutOfDate")
-	}
-	if e&BAAssetPackStatusObsolete != 0 {
-		parts = append(parts, "BAAssetPackStatusObsolete")
-	}
-	if e&BAAssetPackStatusDownloading != 0 {
-		parts = append(parts, "BAAssetPackStatusDownloading")
-	}
-	if e&BAAssetPackStatusDownloaded != 0 {
-		parts = append(parts, "BAAssetPackStatusDownloaded")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
 
 // The content request type used in the downloader extension.
-type BAContentRequest int64
+type ContentRequest int64
 
 const (
 	// A content request resulting from the installation of the app.
-	BAContentRequestInstall BAContentRequest = 1
+	ContentRequestInstall ContentRequest = 1
 	// A content request resulting from an update of the app.
-	BAContentRequestUpdate BAContentRequest = 2
+	ContentRequestUpdate ContentRequest = 2
 	// A content request resulting from a system request for updated content within the app.
-	BAContentRequestPeriodic BAContentRequest = 3
+	ContentRequestPeriodic ContentRequest = 3
 )
 
-func (e BAContentRequest) String() string {
+// String returns the ContentRequest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContentRequest) String() string {
 	switch e {
-	case BAContentRequestInstall:
-		return "BAContentRequestInstall"
-	case BAContentRequestUpdate:
-		return "BAContentRequestUpdate"
-	case BAContentRequestPeriodic:
-		return "BAContentRequestPeriodic"
+	case ContentRequestInstall:
+		return "ContentRequestInstall"
+	case ContentRequestUpdate:
+		return "ContentRequestUpdate"
+	case ContentRequestPeriodic:
+		return "ContentRequestPeriodic"
 	default:
-		return fmt.Sprintf("BAContentRequest(%d)", int64(e))
+		return fmt.Sprintf("ContentRequest(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the state of a download.
-type BADownloadState int64
+type DownloadState int64
 
 const (
-	BADownloadStateFailed      BADownloadState = -1
-	BADownloadStateCreated     BADownloadState = 0
-	BADownloadStateWaiting     BADownloadState = 1
-	BADownloadStateDownloading BADownloadState = 2
-	BADownloadStateFinished    BADownloadState = 3
+	DownloadStateFailed      DownloadState = -1
+	DownloadStateCreated     DownloadState = 0
+	DownloadStateWaiting     DownloadState = 1
+	DownloadStateDownloading DownloadState = 2
+	DownloadStateFinished    DownloadState = 3
 )
 
-func (e BADownloadState) String() string {
+// String returns the DownloadState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DownloadState) String() string {
 	switch e {
-	case BADownloadStateFailed:
-		return "BADownloadStateFailed"
-	case BADownloadStateCreated:
-		return "BADownloadStateCreated"
-	case BADownloadStateWaiting:
-		return "BADownloadStateWaiting"
-	case BADownloadStateDownloading:
-		return "BADownloadStateDownloading"
-	case BADownloadStateFinished:
-		return "BADownloadStateFinished"
+	case DownloadStateFailed:
+		return "DownloadStateFailed"
+	case DownloadStateCreated:
+		return "DownloadStateCreated"
+	case DownloadStateWaiting:
+		return "DownloadStateWaiting"
+	case DownloadStateDownloading:
+		return "DownloadStateDownloading"
+	case DownloadStateFinished:
+		return "DownloadStateFinished"
 	default:
-		return fmt.Sprintf("BADownloadState(%d)", int64(e))
+		return fmt.Sprintf("DownloadState(%d)", int64(e))
 	}
 }
 
-type BAErrorCode int64
+type ErrorCode int64
 
 const (
-	BAErrorCodeDownloadInvalid                            BAErrorCode = 0
-	BAErrorCodeCallFromExtensionNotAllowed                BAErrorCode = 50
-	BAErrorCodeCallFromInactiveProcessNotAllowed          BAErrorCode = 51
-	BAErrorCodeCallerConnectionNotAccepted                BAErrorCode = 55
-	BAErrorCodeCallerConnectionInvalid                    BAErrorCode = 56
-	BAErrorCodeDownloadAlreadyScheduled                   BAErrorCode = 100
-	BAErrorCodeDownloadNotScheduled                       BAErrorCode = 101
-	BAErrorCodeDownloadFailedToStart                      BAErrorCode = 102
-	BAErrorCodeDownloadAlreadyFailed                      BAErrorCode = 103
-	BAErrorCodeDownloadEssentialDownloadNotPermitted      BAErrorCode = 109
-	BAErrorCodeDownloadBackgroundActivityProhibited       BAErrorCode = 111
-	BAErrorCodeDownloadWouldExceedAllowance               BAErrorCode = 112
-	BAErrorCodeDownloadDoesNotExist                       BAErrorCode = 113
-	BAErrorCodeSessionDownloadDisallowedByDomain          BAErrorCode = 202
-	BAErrorCodeSessionDownloadDisallowedByAllowance       BAErrorCode = 203
-	BAErrorCodeSessionDownloadAllowanceExceeded           BAErrorCode = 204
-	BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch BAErrorCode = 206
+	ErrorCodeDownloadInvalid                            ErrorCode = 0
+	ErrorCodeCallFromExtensionNotAllowed                ErrorCode = 50
+	ErrorCodeCallFromInactiveProcessNotAllowed          ErrorCode = 51
+	ErrorCodeCallerConnectionNotAccepted                ErrorCode = 55
+	ErrorCodeCallerConnectionInvalid                    ErrorCode = 56
+	ErrorCodeDownloadAlreadyScheduled                   ErrorCode = 100
+	ErrorCodeDownloadNotScheduled                       ErrorCode = 101
+	ErrorCodeDownloadFailedToStart                      ErrorCode = 102
+	ErrorCodeDownloadAlreadyFailed                      ErrorCode = 103
+	ErrorCodeDownloadEssentialDownloadNotPermitted      ErrorCode = 109
+	ErrorCodeDownloadBackgroundActivityProhibited       ErrorCode = 111
+	ErrorCodeDownloadWouldExceedAllowance               ErrorCode = 112
+	ErrorCodeDownloadDoesNotExist                       ErrorCode = 113
+	ErrorCodeSessionDownloadDisallowedByDomain          ErrorCode = 202
+	ErrorCodeSessionDownloadDisallowedByAllowance       ErrorCode = 203
+	ErrorCodeSessionDownloadAllowanceExceeded           ErrorCode = 204
+	ErrorCodeSessionDownloadNotPermittedBeforeAppLaunch ErrorCode = 206
 )
 
-func (e BAErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case BAErrorCodeDownloadInvalid:
-		return "BAErrorCodeDownloadInvalid"
-	case BAErrorCodeCallFromExtensionNotAllowed:
-		return "BAErrorCodeCallFromExtensionNotAllowed"
-	case BAErrorCodeCallFromInactiveProcessNotAllowed:
-		return "BAErrorCodeCallFromInactiveProcessNotAllowed"
-	case BAErrorCodeCallerConnectionNotAccepted:
-		return "BAErrorCodeCallerConnectionNotAccepted"
-	case BAErrorCodeCallerConnectionInvalid:
-		return "BAErrorCodeCallerConnectionInvalid"
-	case BAErrorCodeDownloadAlreadyScheduled:
-		return "BAErrorCodeDownloadAlreadyScheduled"
-	case BAErrorCodeDownloadNotScheduled:
-		return "BAErrorCodeDownloadNotScheduled"
-	case BAErrorCodeDownloadFailedToStart:
-		return "BAErrorCodeDownloadFailedToStart"
-	case BAErrorCodeDownloadAlreadyFailed:
-		return "BAErrorCodeDownloadAlreadyFailed"
-	case BAErrorCodeDownloadEssentialDownloadNotPermitted:
-		return "BAErrorCodeDownloadEssentialDownloadNotPermitted"
-	case BAErrorCodeDownloadBackgroundActivityProhibited:
-		return "BAErrorCodeDownloadBackgroundActivityProhibited"
-	case BAErrorCodeDownloadWouldExceedAllowance:
-		return "BAErrorCodeDownloadWouldExceedAllowance"
-	case BAErrorCodeDownloadDoesNotExist:
-		return "BAErrorCodeDownloadDoesNotExist"
-	case BAErrorCodeSessionDownloadDisallowedByDomain:
-		return "BAErrorCodeSessionDownloadDisallowedByDomain"
-	case BAErrorCodeSessionDownloadDisallowedByAllowance:
-		return "BAErrorCodeSessionDownloadDisallowedByAllowance"
-	case BAErrorCodeSessionDownloadAllowanceExceeded:
-		return "BAErrorCodeSessionDownloadAllowanceExceeded"
-	case BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch:
-		return "BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch"
+	case ErrorCodeDownloadInvalid:
+		return "ErrorCodeDownloadInvalid"
+	case ErrorCodeCallFromExtensionNotAllowed:
+		return "ErrorCodeCallFromExtensionNotAllowed"
+	case ErrorCodeCallFromInactiveProcessNotAllowed:
+		return "ErrorCodeCallFromInactiveProcessNotAllowed"
+	case ErrorCodeCallerConnectionNotAccepted:
+		return "ErrorCodeCallerConnectionNotAccepted"
+	case ErrorCodeCallerConnectionInvalid:
+		return "ErrorCodeCallerConnectionInvalid"
+	case ErrorCodeDownloadAlreadyScheduled:
+		return "ErrorCodeDownloadAlreadyScheduled"
+	case ErrorCodeDownloadNotScheduled:
+		return "ErrorCodeDownloadNotScheduled"
+	case ErrorCodeDownloadFailedToStart:
+		return "ErrorCodeDownloadFailedToStart"
+	case ErrorCodeDownloadAlreadyFailed:
+		return "ErrorCodeDownloadAlreadyFailed"
+	case ErrorCodeDownloadEssentialDownloadNotPermitted:
+		return "ErrorCodeDownloadEssentialDownloadNotPermitted"
+	case ErrorCodeDownloadBackgroundActivityProhibited:
+		return "ErrorCodeDownloadBackgroundActivityProhibited"
+	case ErrorCodeDownloadWouldExceedAllowance:
+		return "ErrorCodeDownloadWouldExceedAllowance"
+	case ErrorCodeDownloadDoesNotExist:
+		return "ErrorCodeDownloadDoesNotExist"
+	case ErrorCodeSessionDownloadDisallowedByDomain:
+		return "ErrorCodeSessionDownloadDisallowedByDomain"
+	case ErrorCodeSessionDownloadDisallowedByAllowance:
+		return "ErrorCodeSessionDownloadDisallowedByAllowance"
+	case ErrorCodeSessionDownloadAllowanceExceeded:
+		return "ErrorCodeSessionDownloadAllowanceExceeded"
+	case ErrorCodeSessionDownloadNotPermittedBeforeAppLaunch:
+		return "ErrorCodeSessionDownloadNotPermittedBeforeAppLaunch"
 	default:
-		return fmt.Sprintf("BAErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // An error code for a managed asset pack.
-type BAManagedErrorCode int64
+type ManagedErrorCode int64
 
 const (
 	// An error code that indicates the system couldn’t find an asset pack with the given identifier.
-	BAManagedErrorCodeAssetPackNotFound BAManagedErrorCode = 0
+	ManagedErrorCodeAssetPackNotFound ManagedErrorCode = 0
 	// An error code that indicates the system couldn’t find a file at the specified path.
-	BAManagedErrorCodeFileNotFound BAManagedErrorCode = 1
+	ManagedErrorCodeFileNotFound ManagedErrorCode = 1
 )
 
-func (e BAManagedErrorCode) String() string {
+// String returns the ManagedErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ManagedErrorCode) String() string {
 	switch e {
-	case BAManagedErrorCodeAssetPackNotFound:
-		return "BAManagedErrorCodeAssetPackNotFound"
-	case BAManagedErrorCodeFileNotFound:
-		return "BAManagedErrorCodeFileNotFound"
+	case ManagedErrorCodeAssetPackNotFound:
+		return "ManagedErrorCodeAssetPackNotFound"
+	case ManagedErrorCodeFileNotFound:
+		return "ManagedErrorCodeFileNotFound"
 	default:
-		return fmt.Sprintf("BAManagedErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ManagedErrorCode(%d)", int64(e))
 	}
 }

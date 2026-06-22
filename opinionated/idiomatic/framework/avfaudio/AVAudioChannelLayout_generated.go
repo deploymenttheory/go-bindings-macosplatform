@@ -5,85 +5,90 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes the roles of a set of audio channels.
+// AudioChannelLayout is an idiomatic wrapper over the Objective-C class AVAudioChannelLayout.
 //
-// AudioChannelLayout wraps [raw.AVAudioChannelLayout] with a fluent Go API.
+// An object that describes the roles of a set of audio channels.
 type AudioChannelLayout struct {
-	inner *raw.AVAudioChannelLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioChannelLayout].
-func (x *AudioChannelLayout) Unwrap() *raw.AVAudioChannelLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioChannelLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioChannelLayoutFromID adopts an existing object pointer as a AudioChannelLayout (nil for 0).
+// AudioChannelLayoutFromID adopts an existing Objective-C object as a AudioChannelLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioChannelLayoutFromID(id objc.ID) *AudioChannelLayout {
 	if id == 0 {
 		return nil
 	}
-	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(id)}
+	x := &AudioChannelLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an audio channel layout object from a layout tag.
-//
-// NewAudioChannelLayoutWithLayoutTag creates a new [AudioChannelLayout].
-func NewAudioChannelLayoutWithLayoutTag(layoutTag uint) *AudioChannelLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioChannelLayout")), objc.RegisterName("alloc"))
+// audioChannelLayoutAdopt wraps an Objective-C object that this code just created as a
+// AudioChannelLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioChannelLayoutAdopt(id objc.ID) *AudioChannelLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioChannelLayout{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioChannelLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioChannelLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioChannelLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioChannelLayout) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioChannelLayoutWithLayoutTag creates an audio channel layout object from a layout tag.
+func NewAudioChannelLayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioChannelLayout")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLayoutTag:"), layoutTag)
-	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
+	return audioChannelLayoutAdopt(_id)
 }
 
-// Creates an audio channel layout object from an existing one.
-//
-// NewAudioChannelLayoutWithLayout creates a new [AudioChannelLayout].
-func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioChannelLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLayout:"), layout)
-	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
+// LayoutTag the layout's tag.
+func (x *AudioChannelLayout) LayoutTag() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layoutTag"))
+	return _r
 }
 
-// Indicates whether another audio channel layout is exactly equal to the current layout.
-//
-// IsEqual calls the underlying IsEqual.
-func (x *AudioChannelLayout) IsEqual(object objc.ID) bool {
-	return x.inner.IsEqual(object)
-}
-
-// @property layoutTag @abstract The layout's tag.
-//
-// LayoutTag calls the underlying LayoutTag.
-func (x *AudioChannelLayout) LayoutTag() uint {
-	return x.inner.LayoutTag()
-}
-
-// @property layout @abstract The underlying AudioChannelLayout.
-//
-// Layout calls the underlying Layout.
-func (x *AudioChannelLayout) Layout() *coreaudiotypes.AudioChannelLayout {
-	return x.inner.Layout()
-}
-
-// @property channelCount @abstract The number of channels of audio data.
-//
-// ChannelCount calls the underlying ChannelCount.
+// ChannelCount the number of channels of audio data.
 func (x *AudioChannelLayout) ChannelCount() uint32 {
-	return x.inner.ChannelCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("channelCount"))
+	return _r
 }
 
 // AudioChannelLayoutable is the interface implemented by [AudioChannelLayout], for mocking and DI.
 type AudioChannelLayoutable interface {
-	Unwrap() *raw.AVAudioChannelLayout
-	IsEqual(object objc.ID) bool
-	LayoutTag() uint
-	Layout() *coreaudiotypes.AudioChannelLayout
+	obj.Object
+	LayoutTag() int
 	ChannelCount() uint32
 }
 

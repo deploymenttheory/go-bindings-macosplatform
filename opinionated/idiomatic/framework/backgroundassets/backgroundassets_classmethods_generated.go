@@ -5,23 +5,17 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager calls the underlying BAAssetPackManagerSharedManager.
+// SharedManager the shared asset-pack manager.
 func SharedManager() *AssetPackManager {
-	_r := raw.BAAssetPackManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &AssetPackManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManager")), objc.RegisterName("sharedManager"))
+	return AssetPackManagerFromID(_r)
 }
 
-// BADownloadManagerSharedManager calls the underlying BADownloadManagerSharedManager.
+// BADownloadManagerSharedManager gets the singleton downloader object.
 func BADownloadManagerSharedManager() *DownloadManager {
-	_r := raw.BADownloadManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &DownloadManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("BADownloadManager")), objc.RegisterName("sharedManager"))
+	return DownloadManagerFromID(_r)
 }

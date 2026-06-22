@@ -5,150 +5,146 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents the static metadata you define for the challenge.
+// ChallengeDefinition is an idiomatic wrapper over the Objective-C class GKChallengeDefinition.
 //
-// ChallengeDefinition wraps [raw.GKChallengeDefinition] with a fluent Go API.
+// An object that represents the static metadata you define for the challenge.
 type ChallengeDefinition struct {
-	inner *raw.GKChallengeDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKChallengeDefinition].
-func (x *ChallengeDefinition) Unwrap() *raw.GKChallengeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChallengeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// ChallengeDefinitionFromID adopts an existing object pointer as a ChallengeDefinition (nil for 0).
+// ChallengeDefinitionFromID adopts an existing Objective-C object as a ChallengeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func ChallengeDefinitionFromID(id objc.ID) *ChallengeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &ChallengeDefinition{inner: raw.GKChallengeDefinitionFromID(id)}
+	x := &ChallengeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChallengeDefinition creates a new [ChallengeDefinition].
+// challengeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// ChallengeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func challengeDefinitionAdopt(id objc.ID) *ChallengeDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &ChallengeDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChallengeDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChallengeDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChallengeDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ChallengeDefinition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewChallengeDefinition creates a new ChallengeDefinition.
 func NewChallengeDefinition() *ChallengeDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKChallengeDefinition")), objc.RegisterName("new"))
-	return &ChallengeDefinition{inner: raw.GKChallengeDefinitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengeDefinition")), objc.RegisterName("new"))
+	return challengeDefinitionAdopt(_id)
 }
 
-// Loads the image set on the challenge definition, which may be nil if none was set.
-//
-// LoadImageWithCompletionHandler calls the underlying LoadImageWithCompletionHandler.
-func (x *ChallengeDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.LoadImageWithCompletionHandler(completionHandler)
-}
-
-// The developer defined identifier for a given challenge definition.
-//
-// Identifier calls the underlying Identifier.
+// Identifier the developer defined identifier for a given challenge definition.
 func (x *ChallengeDefinition) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The group identifier for the challenge definition, if one exists.
-//
-// GroupIdentifier calls the underlying GroupIdentifier.
+// GroupIdentifier the group identifier for the challenge definition, if one exists.
 func (x *ChallengeDefinition) GroupIdentifier() string {
-	_r := x.inner.GroupIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// A short title for the challenge definition.
-//
-// Title calls the underlying Title.
+// Title a short title for the challenge definition.
 func (x *ChallengeDefinition) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// A more detailed description of the challenge definition.
-//
-// Details calls the underlying Details.
+// Details a more detailed description of the challenge definition.
 func (x *ChallengeDefinition) Details() string {
-	_r := x.inner.Details()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("details"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The duration options for the challenge, like `1 day` or `1 week`. - Note: If set, the amount of weeks is stored in the `weekOfYear` field. - Important: The actual duration of the challenge may be dynamically adjusted in order to accommodate different factors like players' timezones.
+// DurationOptions the duration options for the challenge, like `1 day` or `1 week`. - Note: If set, the amount of weeks is stored in the `weekOfYear` field. - Important: The actual duration of the challenge may be dynamically adjusted in order to accommodate different factors like players' timezones.
 //
 // DurationOptions returns the collection as a Go slice.
-func (x *ChallengeDefinition) DurationOptions() []*foundation.NSDateComponents {
-	arr := x.inner.DurationOptions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSDateComponents {
-		return foundation.NSDateComponentsFromID(purego.Retain(_id))
-	})
+func (x *ChallengeDefinition) DurationOptions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("durationOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Indicates if a challenge can be attempted more than once.
-//
-// IsRepeatable calls the underlying IsRepeatable.
+// IsRepeatable indicates if a challenge can be attempted more than once.
 func (x *ChallengeDefinition) IsRepeatable() bool {
-	return x.inner.IsRepeatable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRepeatable"))
+	return _r
 }
 
-// Scores submitted to this leaderboard will also be submitted as scores in this challenge.
-//
-// Leaderboard calls the underlying Leaderboard.
+// Leaderboard scores submitted to this leaderboard will also be submitted as scores in this challenge.
 func (x *ChallengeDefinition) Leaderboard() *Leaderboard {
-	_r := x.inner.Leaderboard()
-	if _r == nil {
-		return nil
-	}
-	return &Leaderboard{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboard"))
+	return LeaderboardFromID(_r)
 }
 
-// The release state of the challenge definition in App Store Connect.
-//
-// ReleaseState calls the underlying ReleaseState.
-func (x *ChallengeDefinition) ReleaseState() GKReleaseState {
-	return GKReleaseState(x.inner.ReleaseState())
-}
-
-// Indicates if this definition has active challenges associated with it.
-//
-// HasActiveChallengesWithCompletionHandler calls the underlying HasActiveChallengesWithCompletionHandler.
-func (x *ChallengeDefinition) HasActiveChallengesWithCompletionHandler(completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.HasActiveChallengesWithCompletionHandler(completionHandler)
+// ReleaseState the release state of the challenge definition in App Store Connect.
+func (x *ChallengeDefinition) ReleaseState() ReleaseState {
+	_r := objc.Send[ReleaseState](objref.IDOf(x), objc.RegisterName("releaseState"))
+	return _r
 }
 
 // ChallengeDefinitionable is the interface implemented by [ChallengeDefinition], for mocking and DI.
 type ChallengeDefinitionable interface {
-	Unwrap() *raw.GKChallengeDefinition
-	LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	obj.Object
 	Identifier() string
 	GroupIdentifier() string
 	Title() string
 	Details() string
-	DurationOptions() []*foundation.NSDateComponents
+	DurationOptions() []obj.Object
 	IsRepeatable() bool
 	Leaderboard() *Leaderboard
-	ReleaseState() GKReleaseState
-	HasActiveChallengesWithCompletionHandler(completionHandler func(bool, unsafe.Pointer))
+	ReleaseState() ReleaseState
 }
 
 var _ ChallengeDefinitionable = (*ChallengeDefinition)(nil)

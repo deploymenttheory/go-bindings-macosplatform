@@ -5,105 +5,129 @@
 package naturallanguage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A collection of terms and their labels, which take precedence over a word tagger.
+// Gazetteer is an idiomatic wrapper over the Objective-C class NLGazetteer.
 //
-// Gazetteer wraps [raw.NLGazetteer] with a fluent Go API.
+// A collection of terms and their labels, which take precedence over a word tagger.
 type Gazetteer struct {
-	inner *raw.NLGazetteer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NLGazetteer].
-func (x *Gazetteer) Unwrap() *raw.NLGazetteer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Gazetteer) ID() objc.ID { return x.inner.Ptr() }
-
-// GazetteerFromID adopts an existing object pointer as a Gazetteer (nil for 0).
+// GazetteerFromID adopts an existing Objective-C object as a Gazetteer
+// (nil for 0), retaining it and registering a release finalizer.
 func GazetteerFromID(id objc.ID) *Gazetteer {
 	if id == 0 {
 		return nil
 	}
-	return &Gazetteer{inner: raw.NLGazetteerFromID(id)}
+	x := &Gazetteer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a Natural Language gazetteer from a model created with the Create ML framework.
-//
-// NewGazetteerWithContentsOfURLError creates a new [Gazetteer].
-func NewGazetteerWithContentsOfURLError(url string) (*Gazetteer, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// gazetteerAdopt wraps an Objective-C object that this code just created as a
+// Gazetteer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gazetteerAdopt(id objc.ID) *Gazetteer {
+	if id == 0 {
+		return nil
 	}
-	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
+	x := &Gazetteer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a gazetteer from a data instance.
-//
-// NewGazetteerWithDataError creates a new [Gazetteer].
-func NewGazetteerWithDataError(data *foundation.NSData) (*Gazetteer, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
+// Description returns the object's -description text.
+func (x *Gazetteer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Gazetteer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Gazetteer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Gazetteer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGazetteerWithContentsOfURLError creates a Natural Language gazetteer from a model created with the Create ML framework.
+func NewGazetteerWithContentsOfURLError(url string) (result *Gazetteer, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), data.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
+	return gazetteerAdopt(_id), nil
 }
 
-// Creates a gazetteer from a set of labels for terms represented by a dictionary.
-//
-// NewGazetteerWithDictionaryLanguageError creates a new [Gazetteer].
-func NewGazetteerWithDictionaryLanguageError(dictionary purego.IDer, language *foundation.NSString) (*Gazetteer, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
+// NewGazetteerWithDataError creates a gazetteer from a data instance.
+func NewGazetteerWithDataError(data obj.Object) (result *Gazetteer, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), dictionary.ID(), language.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
+	return gazetteerAdopt(_id), nil
 }
 
-// Retrieves the label for the given term.
-//
-// LabelForString calls the underlying LabelForString.
+// NewGazetteerWithDictionaryLanguageError creates a gazetteer from a set of labels for terms represented by a dictionary.
+func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj.Object) (result *Gazetteer, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), objref.IDOf(dictionary), objref.IDOf(language), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return gazetteerAdopt(_id), nil
+}
+
+// LabelForString retrieves the label for the given term.
 func (x *Gazetteer) LabelForString(string_ string) string {
-	_r := x.inner.LabelForString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForString:"), purego.NSString(string_))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Language calls the underlying Language.
-func (x *Gazetteer) Language() string {
-	_r := x.inner.Language()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Language wraps the corresponding Objective-C method.
+func (x *Gazetteer) Language() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	return obj.Wrap(_r)
 }
 
-// Data calls the underlying Data.
-func (x *Gazetteer) Data() *foundation.NSData {
-	return x.inner.Data()
+// Data wraps the corresponding Objective-C method.
+func (x *Gazetteer) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // Gazetteerable is the interface implemented by [Gazetteer], for mocking and DI.
 type Gazetteerable interface {
-	Unwrap() *raw.NLGazetteer
+	obj.Object
 	LabelForString(string_ string) string
-	Language() string
-	Data() *foundation.NSData
+	Language() obj.Object
+	Data() obj.Object
 }
 
 var _ Gazetteerable = (*Gazetteer)(nil)

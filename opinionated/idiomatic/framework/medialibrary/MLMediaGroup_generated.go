@@ -5,151 +5,175 @@
 package medialibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.
+// MediaGroup is an idiomatic wrapper over the Objective-C class MLMediaGroup.
 //
-// MediaGroup wraps [raw.MLMediaGroup] with a fluent Go API.
+// The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.
 type MediaGroup struct {
-	inner *raw.MLMediaGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLMediaGroup].
-func (x *MediaGroup) Unwrap() *raw.MLMediaGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaGroupFromID adopts an existing object pointer as a MediaGroup (nil for 0).
+// MediaGroupFromID adopts an existing Objective-C object as a MediaGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaGroupFromID(id objc.ID) *MediaGroup {
 	if id == 0 {
 		return nil
 	}
-	return &MediaGroup{inner: raw.MLMediaGroupFromID(id)}
+	x := &MediaGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMediaGroup creates a new [MediaGroup].
+// mediaGroupAdopt wraps an Objective-C object that this code just created as a
+// MediaGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaGroupAdopt(id objc.ID) *MediaGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaGroup creates a new MediaGroup.
 func NewMediaGroup() *MediaGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMediaGroup")), objc.RegisterName("new"))
-	return &MediaGroup{inner: raw.MLMediaGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLMediaGroup")), objc.RegisterName("new"))
+	return mediaGroupAdopt(_id)
 }
 
-// MediaLibrary calls the underlying MediaLibrary.
+// MediaLibrary wraps the corresponding Objective-C method.
 func (x *MediaGroup) MediaLibrary() *MediaLibrary {
-	_r := x.inner.MediaLibrary()
-	if _r == nil {
-		return nil
-	}
-	return &MediaLibrary{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
+	return MediaLibraryFromID(_r)
 }
 
-// Parent calls the underlying Parent.
+// Parent wraps the corresponding Objective-C method.
 func (x *MediaGroup) Parent() *MediaGroup {
-	_r := x.inner.Parent()
-	if _r == nil {
-		return nil
-	}
-	return &MediaGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+	return MediaGroupFromID(_r)
 }
 
-// MediaSourceIdentifier calls the underlying MediaSourceIdentifier.
+// MediaSourceIdentifier wraps the corresponding Objective-C method.
 func (x *MediaGroup) MediaSourceIdentifier() string {
-	_r := x.inner.MediaSourceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MediaGroup) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *MediaGroup) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TypeIdentifier calls the underlying TypeIdentifier.
+// TypeIdentifier wraps the corresponding Objective-C method.
 func (x *MediaGroup) TypeIdentifier() string {
-	_r := x.inner.TypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Attributes calls the underlying Attributes.
-func (x *MediaGroup) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Attributes()
+// Attributes wraps the corresponding Objective-C method.
+func (x *MediaGroup) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
+// ChildGroups wraps the corresponding Objective-C method.
+//
 // ChildGroups returns the collection as a Go slice.
 func (x *MediaGroup) ChildGroups() []*MediaGroup {
-	arr := x.inner.ChildGroups()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaGroup {
-		return &MediaGroup{inner: raw.MLMediaGroupFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childGroups"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaGroup { return MediaGroupFromID(_id) })
 }
 
-// URL calls the underlying URL.
-func (x *MediaGroup) URL() *foundation.NSURL {
-	return x.inner.URL()
+// URL wraps the corresponding Objective-C method.
+func (x *MediaGroup) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// ModificationDate calls the underlying ModificationDate.
-func (x *MediaGroup) ModificationDate() *foundation.NSDate {
-	return x.inner.ModificationDate()
+// ModificationDate wraps the corresponding Objective-C method.
+func (x *MediaGroup) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return obj.Wrap(_r)
 }
 
-// IconImage calls the underlying IconImage.
-func (x *MediaGroup) IconImage() *appkit.NSImage {
-	return x.inner.IconImage()
+// IconImage wraps the corresponding Objective-C method.
+func (x *MediaGroup) IconImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconImage"))
+	return obj.Wrap(_r)
 }
 
+// MediaObjects wraps the corresponding Objective-C method.
+//
 // MediaObjects returns the collection as a Go slice.
 func (x *MediaGroup) MediaObjects() []*MediaObject {
-	arr := x.inner.MediaObjects()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaObject {
-		return &MediaObject{inner: raw.MLMediaObjectFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjects"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaObject { return MediaObjectFromID(_id) })
 }
 
 // MediaGroupable is the interface implemented by [MediaGroup], for mocking and DI.
 type MediaGroupable interface {
-	Unwrap() *raw.MLMediaGroup
+	obj.Object
 	MediaLibrary() *MediaLibrary
 	Parent() *MediaGroup
 	MediaSourceIdentifier() string
 	Name() string
 	Identifier() string
 	TypeIdentifier() string
-	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Attributes() obj.Object
 	ChildGroups() []*MediaGroup
-	URL() *foundation.NSURL
-	ModificationDate() *foundation.NSDate
-	IconImage() *appkit.NSImage
+	URL() obj.Object
+	ModificationDate() obj.Object
+	IconImage() obj.Object
 	MediaObjects() []*MediaObject
 }
 

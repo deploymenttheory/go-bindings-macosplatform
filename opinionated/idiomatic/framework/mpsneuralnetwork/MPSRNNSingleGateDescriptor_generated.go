@@ -5,134 +5,91 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RNNSingleGateDescriptor wraps [raw.MPSRNNSingleGateDescriptor] with a fluent Go API.
+// RNNSingleGateDescriptor is an idiomatic wrapper over the Objective-C class MPSRNNSingleGateDescriptor.
+//
+// It embeds [RNNDescriptor], promoting that type's methods.
 type RNNSingleGateDescriptor struct {
-	inner *raw.MPSRNNSingleGateDescriptor
+	RNNDescriptor
 }
 
-// Unwrap returns the underlying [raw.MPSRNNSingleGateDescriptor].
-func (x *RNNSingleGateDescriptor) Unwrap() *raw.MPSRNNSingleGateDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNSingleGateDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNSingleGateDescriptorFromID adopts an existing object pointer as a RNNSingleGateDescriptor (nil for 0).
+// RNNSingleGateDescriptorFromID adopts an existing Objective-C object as a RNNSingleGateDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNSingleGateDescriptorFromID(id objc.ID) *RNNSingleGateDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RNNSingleGateDescriptor{inner: raw.MPSRNNSingleGateDescriptorFromID(id)}
+	x := &RNNSingleGateDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRNNSingleGateDescriptor creates a new [RNNSingleGateDescriptor].
+// rNNSingleGateDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RNNSingleGateDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNSingleGateDescriptorAdopt(id objc.ID) *RNNSingleGateDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RNNSingleGateDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRNNSingleGateDescriptor creates a new RNNSingleGateDescriptor.
 func NewRNNSingleGateDescriptor() *RNNSingleGateDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNSingleGateDescriptor")), objc.RegisterName("new"))
-	return &RNNSingleGateDescriptor{inner: raw.MPSRNNSingleGateDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNSingleGateDescriptor")), objc.RegisterName("new"))
+	return rNNSingleGateDescriptorAdopt(_id)
 }
 
-// @property   inputWeights @abstract   Contains weights 'W_ij', bias 'b_i' and neuron 'gi' from the simple RNN layer formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
-//
-// WithInputWeights sets the inputWeights property and returns the receiver for chaining.
-func (x *RNNSingleGateDescriptor) WithInputWeights(inputWeights raw.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor {
-	x.inner.SetInputWeights(inputWeights)
+// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (x *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
-// @property   recurrentWeights @abstract   Contains weights 'U_ij' from the simple RNN layer formula. If nil then assumed zero weights. Defaults to nil.
-//
-// WithRecurrentWeights sets the recurrentWeights property and returns the receiver for chaining.
-func (x *RNNSingleGateDescriptor) WithRecurrentWeights(recurrentWeights raw.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor {
-	x.inner.SetRecurrentWeights(recurrentWeights)
+// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (x *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
-//
-// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
-func (x *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *RNNSingleGateDescriptor {
-	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
-	return x
-}
-
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-//
-// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
-func (x *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *RNNSingleGateDescriptor {
-	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
-	return x
-}
-
-// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
-//
-// WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
+// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (x *RNNSingleGateDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor {
-	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 	return x
 }
 
-// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
-//
-// WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
+// WithUseFloat32Weights if YES, then
 func (x *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor {
-	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 	return x
 }
 
-// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
-//
-// WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
-func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *RNNSingleGateDescriptor {
-	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(raw.MPSRNNSequenceDirection(layerSequenceDirection))
+// WithLayerSequenceDirection when the layer specified with this descriptor is used to process a sequence of inputs by calling
+func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) *RNNSingleGateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerSequenceDirection:"), layerSequenceDirection)
 	return x
-}
-
-// @property   inputWeights @abstract   Contains weights 'W_ij', bias 'b_i' and neuron 'gi' from the simple RNN layer formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
-//
-// InputWeights calls the underlying InputWeights.
-func (x *RNNSingleGateDescriptor) InputWeights() raw.MPSCNNConvolutionDataSource {
-	return x.inner.InputWeights()
-}
-
-// SetInputWeights calls the underlying SetInputWeights.
-func (x *RNNSingleGateDescriptor) SetInputWeights(inputWeights raw.MPSCNNConvolutionDataSource) {
-	x.inner.SetInputWeights(inputWeights)
-}
-
-// @property   recurrentWeights @abstract   Contains weights 'U_ij' from the simple RNN layer formula. If nil then assumed zero weights. Defaults to nil.
-//
-// RecurrentWeights calls the underlying RecurrentWeights.
-func (x *RNNSingleGateDescriptor) RecurrentWeights() raw.MPSCNNConvolutionDataSource {
-	return x.inner.RecurrentWeights()
-}
-
-// SetRecurrentWeights calls the underlying SetRecurrentWeights.
-func (x *RNNSingleGateDescriptor) SetRecurrentWeights(recurrentWeights raw.MPSCNNConvolutionDataSource) {
-	x.inner.SetRecurrentWeights(recurrentWeights)
-}
-
-func (x *RNNSingleGateDescriptor) asRNNDescriptor() *raw.MPSRNNDescriptor {
-	return &x.inner.MPSRNNDescriptor
 }
 
 // RNNSingleGateDescriptorable is the interface implemented by [RNNSingleGateDescriptor], for mocking and DI.
 type RNNSingleGateDescriptorable interface {
-	Unwrap() *raw.MPSRNNSingleGateDescriptor
-	WithInputWeights(inputWeights raw.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor
-	WithRecurrentWeights(recurrentWeights raw.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor
-	WithInputFeatureChannels(inputFeatureChannels uint) *RNNSingleGateDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels uint) *RNNSingleGateDescriptor
+	obj.Object
+	WithInputFeatureChannels(inputFeatureChannels int) *RNNSingleGateDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels int) *RNNSingleGateDescriptor
 	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor
 	WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor
-	WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *RNNSingleGateDescriptor
-	InputWeights() raw.MPSCNNConvolutionDataSource
-	SetInputWeights(inputWeights raw.MPSCNNConvolutionDataSource)
-	RecurrentWeights() raw.MPSCNNConvolutionDataSource
-	SetRecurrentWeights(recurrentWeights raw.MPSCNNConvolutionDataSource)
+	WithLayerSequenceDirection(layerSequenceDirection RNNSequenceDirection) *RNNSingleGateDescriptor
 }
 
 var _ RNNSingleGateDescriptorable = (*RNNSingleGateDescriptor)(nil)
+
+var _ RNNDescriptorProvider = (*RNNSingleGateDescriptor)(nil)

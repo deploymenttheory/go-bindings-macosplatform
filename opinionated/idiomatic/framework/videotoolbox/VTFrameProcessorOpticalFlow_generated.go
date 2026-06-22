@@ -5,61 +5,76 @@
 package videotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A class to wrap bidirectional optical flow to send to the processor.
+// FrameProcessorOpticalFlow is an idiomatic wrapper over the Objective-C class VTFrameProcessorOpticalFlow.
 //
-// FrameProcessorOpticalFlow wraps [raw.VTFrameProcessorOpticalFlow] with a fluent Go API.
+// A class to wrap bidirectional optical flow to send to the processor.
 type FrameProcessorOpticalFlow struct {
-	inner *raw.VTFrameProcessorOpticalFlow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTFrameProcessorOpticalFlow].
-func (x *FrameProcessorOpticalFlow) Unwrap() *raw.VTFrameProcessorOpticalFlow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FrameProcessorOpticalFlow) ID() objc.ID { return x.inner.Ptr() }
-
-// FrameProcessorOpticalFlowFromID adopts an existing object pointer as a FrameProcessorOpticalFlow (nil for 0).
+// FrameProcessorOpticalFlowFromID adopts an existing Objective-C object as a FrameProcessorOpticalFlow
+// (nil for 0), retaining it and registering a release finalizer.
 func FrameProcessorOpticalFlowFromID(id objc.ID) *FrameProcessorOpticalFlow {
 	if id == 0 {
 		return nil
 	}
-	return &FrameProcessorOpticalFlow{inner: raw.VTFrameProcessorOpticalFlowFromID(id)}
+	x := &FrameProcessorOpticalFlow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object with forward and backward optical flow pixel buffers.
-//
-// NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow creates a new [FrameProcessorOpticalFlow].
-func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.Pointer, backwardFlow unsafe.Pointer) *FrameProcessorOpticalFlow {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameProcessorOpticalFlow")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithForwardFlow:backwardFlow:"), forwardFlow, backwardFlow)
-	return &FrameProcessorOpticalFlow{inner: raw.VTFrameProcessorOpticalFlowFromID(_id)}
+// frameProcessorOpticalFlowAdopt wraps an Objective-C object that this code just created as a
+// FrameProcessorOpticalFlow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func frameProcessorOpticalFlowAdopt(id objc.ID) *FrameProcessorOpticalFlow {
+	if id == 0 {
+		return nil
+	}
+	x := &FrameProcessorOpticalFlow{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the forward optical flow `CVPixelBuffer` that you provided when you initialized the object.
-//
-// ForwardFlow calls the underlying ForwardFlow.
-func (x *FrameProcessorOpticalFlow) ForwardFlow() unsafe.Pointer {
-	return x.inner.ForwardFlow()
+// Description returns the object's -description text.
+func (x *FrameProcessorOpticalFlow) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the backward optical flow `CVPixelBuffer` that you provided when you initialized the object.
-//
-// BackwardFlow calls the underlying BackwardFlow.
-func (x *FrameProcessorOpticalFlow) BackwardFlow() unsafe.Pointer {
-	return x.inner.BackwardFlow()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FrameProcessorOpticalFlow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FrameProcessorOpticalFlow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FrameProcessorOpticalFlow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFrameProcessorOpticalFlow creates a new FrameProcessorOpticalFlow.
+func NewFrameProcessorOpticalFlow() *FrameProcessorOpticalFlow {
+	_id := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorOpticalFlow")), objc.RegisterName("new"))
+	return frameProcessorOpticalFlowAdopt(_id)
 }
 
 // FrameProcessorOpticalFlowable is the interface implemented by [FrameProcessorOpticalFlow], for mocking and DI.
 type FrameProcessorOpticalFlowable interface {
-	Unwrap() *raw.VTFrameProcessorOpticalFlow
-	ForwardFlow() unsafe.Pointer
-	BackwardFlow() unsafe.Pointer
+	obj.Object
 }
 
 var _ FrameProcessorOpticalFlowable = (*FrameProcessorOpticalFlow)(nil)

@@ -5,74 +5,158 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent wraps [raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent] with a fluent Go API.
-type MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent struct {
-	inner *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+// MTROTASoftwareUpdateRequestorClusterStateTransitionEvent is an idiomatic wrapper over the Objective-C class MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.
+//
+// MTROTASoftwareUpdateRequestorClusterStateTransitionEvent is an abstract base — you do not construct it directly. Construct one of [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent] and pass it where a MTROTASoftwareUpdateRequestorClusterStateTransitionEvent is accepted.
+type MTROTASoftwareUpdateRequestorClusterStateTransitionEvent struct {
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent].
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROtaSoftwareUpdateRequestorClusterStateTransitionEventFromID adopts an existing object pointer as a MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent (nil for 0).
-func MTROtaSoftwareUpdateRequestorClusterStateTransitionEventFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+// MTROTASoftwareUpdateRequestorClusterStateTransitionEventFromID adopts an existing Objective-C object as a MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+// (nil for 0), retaining it and registering a release finalizer.
+func MTROTASoftwareUpdateRequestorClusterStateTransitionEventFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEventFromID(id)}
-}
-
-// NewMTROtaSoftwareUpdateRequestorClusterStateTransitionEvent creates a new [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent].
-func NewMTROtaSoftwareUpdateRequestorClusterStateTransitionEvent() *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent")), objc.RegisterName("new"))
-	return &MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEventFromID(_id)}
-}
-
-// WithPreviousState sets the previousState property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetPreviousState(previousState)
+	x := &MTROTASoftwareUpdateRequestorClusterStateTransitionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithNewState sets the newState property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetNewState(newState)
+// mTROTASoftwareUpdateRequestorClusterStateTransitionEventAdopt wraps an Objective-C object that this code just created as a
+// MTROTASoftwareUpdateRequestorClusterStateTransitionEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROTASoftwareUpdateRequestorClusterStateTransitionEventAdopt(id objc.ID) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROTASoftwareUpdateRequestorClusterStateTransitionEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithReason sets the reason property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetReason(reason)
+// Description returns the object's -description text.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithPreviousState sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousState:"), objref.IDOf(previousState))
 	return x
 }
 
-// WithTargetSoftwareVersion sets the targetSoftwareVersion property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent.SetTargetSoftwareVersion(targetSoftwareVersion)
+// WithNewState sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) asMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() *raw.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
-	return &x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+// WithReason sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReason:"), objref.IDOf(reason))
+	return x
 }
 
-// MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable interface {
-	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithPreviousState(previousState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithNewState(newState *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithReason(reason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithTargetSoftwareVersion(targetSoftwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+// WithTargetSoftwareVersion sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetSoftwareVersion:"), objref.IDOf(targetSoftwareVersion))
+	return x
 }
 
-var _ MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable = (*MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent)(nil)
+// PreviousState wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) PreviousState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousState"))
+	return obj.Wrap(_r)
+}
+
+// SetPreviousState wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetPreviousState(previousState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousState:"), objref.IDOf(previousState))
+}
+
+// GetNewState wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) GetNewState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewState"))
+	return obj.Wrap(_r)
+}
+
+// SetNewState wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetNewState(newState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
+}
+
+// Reason wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) Reason() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
+	return obj.Wrap(_r)
+}
+
+// SetReason wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetReason(reason obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReason:"), objref.IDOf(reason))
+}
+
+// TargetSoftwareVersion wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) TargetSoftwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetSoftwareVersion"))
+	return obj.Wrap(_r)
+}
+
+// SetTargetSoftwareVersion wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) SetTargetSoftwareVersion(targetSoftwareVersion obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetSoftwareVersion:"), objref.IDOf(targetSoftwareVersion))
+}
+
+// MTROTASoftwareUpdateRequestorClusterStateTransitionEventable is the interface implemented by [MTROTASoftwareUpdateRequestorClusterStateTransitionEvent], for mocking and DI.
+type MTROTASoftwareUpdateRequestorClusterStateTransitionEventable interface {
+	obj.Object
+	WithPreviousState(previousState obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+	WithNewState(newState obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+	WithReason(reason obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+	WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+	PreviousState() obj.Object
+	SetPreviousState(previousState obj.Object)
+	GetNewState() obj.Object
+	SetNewState(newState obj.Object)
+	Reason() obj.Object
+	SetReason(reason obj.Object)
+	TargetSoftwareVersion() obj.Object
+	SetTargetSoftwareVersion(targetSoftwareVersion obj.Object)
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterStateTransitionEventable = (*MTROTASoftwareUpdateRequestorClusterStateTransitionEvent)(nil)
+
+// isMTROTASoftwareUpdateRequestorClusterStateTransitionEvent marks MTROTASoftwareUpdateRequestorClusterStateTransitionEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTROTASoftwareUpdateRequestorClusterStateTransitionEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) isMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() {
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider = (*MTROTASoftwareUpdateRequestorClusterStateTransitionEvent)(nil)

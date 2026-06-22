@@ -5,68 +5,79 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that performs elementwise comparison of two tensors.
+// ComparisonLayer is an idiomatic wrapper over the Objective-C class MLCComparisonLayer.
 //
-// ComparisonLayer wraps [raw.MLCComparisonLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that performs elementwise comparison of two tensors.
 type ComparisonLayer struct {
-	inner *raw.MLCComparisonLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCComparisonLayer].
-func (x *ComparisonLayer) Unwrap() *raw.MLCComparisonLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComparisonLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ComparisonLayerFromID adopts an existing object pointer as a ComparisonLayer (nil for 0).
+// ComparisonLayerFromID adopts an existing Objective-C object as a ComparisonLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ComparisonLayerFromID(id objc.ID) *ComparisonLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ComparisonLayer{inner: raw.MLCComparisonLayerFromID(id)}
+	x := &ComparisonLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComparisonLayer creates a new [ComparisonLayer].
+// comparisonLayerAdopt wraps an Objective-C object that this code just created as a
+// ComparisonLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func comparisonLayerAdopt(id objc.ID) *ComparisonLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ComparisonLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewComparisonLayer creates a new ComparisonLayer.
 func NewComparisonLayer() *ComparisonLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCComparisonLayer")), objc.RegisterName("new"))
-	return &ComparisonLayer{inner: raw.MLCComparisonLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCComparisonLayer")), objc.RegisterName("new"))
+	return comparisonLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *ComparisonLayer) WithLabel(label string) *ComparisonLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// Operation calls the underlying Operation.
-func (x *ComparisonLayer) Operation() MLCComparisonOperation {
-	return MLCComparisonOperation(x.inner.Operation())
+// Operation wraps the corresponding Objective-C method.
+func (x *ComparisonLayer) Operation() ComparisonOperation {
+	_r := objc.Send[ComparisonOperation](objref.IDOf(x), objc.RegisterName("operation"))
+	return _r
 }
-
-func (x *ComparisonLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // ComparisonLayerable is the interface implemented by [ComparisonLayer], for mocking and DI.
 type ComparisonLayerable interface {
-	Unwrap() *raw.MLCComparisonLayer
+	obj.Object
 	WithLabel(label string) *ComparisonLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer
-	Operation() MLCComparisonOperation
+	Operation() ComparisonOperation
 }
 
 var _ ComparisonLayerable = (*ComparisonLayer)(nil)
+
+var _ LayerProvider = (*ComparisonLayer)(nil)

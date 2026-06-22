@@ -5,84 +5,85 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that executes Automator workflows.
+// UserAutomatorTask is an idiomatic wrapper over the Objective-C class NSUserAutomatorTask.
 //
-// UserAutomatorTask wraps [raw.NSUserAutomatorTask] with a fluent Go API.
+// It embeds [UserScriptTask], promoting that type's methods.
+//
+// An object that executes Automator workflows.
 type UserAutomatorTask struct {
-	inner *raw.NSUserAutomatorTask
+	UserScriptTask
 }
 
-// Unwrap returns the underlying [raw.NSUserAutomatorTask].
-func (x *UserAutomatorTask) Unwrap() *raw.NSUserAutomatorTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserAutomatorTask) ID() objc.ID { return x.inner.Ptr() }
-
-// UserAutomatorTaskFromID adopts an existing object pointer as a UserAutomatorTask (nil for 0).
+// UserAutomatorTaskFromID adopts an existing Objective-C object as a UserAutomatorTask
+// (nil for 0), retaining it and registering a release finalizer.
 func UserAutomatorTaskFromID(id objc.ID) *UserAutomatorTask {
 	if id == 0 {
 		return nil
 	}
-	return &UserAutomatorTask{inner: raw.NSUserAutomatorTaskFromID(id)}
+	x := &UserAutomatorTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUserAutomatorTask creates a new [UserAutomatorTask].
+// userAutomatorTaskAdopt wraps an Objective-C object that this code just created as a
+// UserAutomatorTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userAutomatorTaskAdopt(id objc.ID) *UserAutomatorTask {
+	if id == 0 {
+		return nil
+	}
+	x := &UserAutomatorTask{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewUserAutomatorTask creates a new UserAutomatorTask.
 func NewUserAutomatorTask() *UserAutomatorTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserAutomatorTask")), objc.RegisterName("new"))
-	return &UserAutomatorTask{inner: raw.NSUserAutomatorTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUserAutomatorTask")), objc.RegisterName("new"))
+	return userAutomatorTaskAdopt(_id)
 }
 
-// The variables required by the Automator workflow.
-//
-// WithVariables sets the variables property and returns the receiver for chaining.
-func (x *UserAutomatorTask) WithVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask {
-	x.inner.SetVariables(variables)
+// WithVariables the variables required by the Automator workflow.
+func (x *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariables:"), objref.IDOf(variables))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UserAutomatorTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask {
-	x.inner.NSUserScriptTask.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UserAutomatorTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Execute the Automator workflow by providing it as securely coded input.
-//
-// ExecuteWithInputCompletionHandler calls the underlying ExecuteWithInputCompletionHandler.
-func (x *UserAutomatorTask) ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer)) {
-	x.inner.ExecuteWithInputCompletionHandler(input, handler)
+// Variables wraps the corresponding Objective-C method.
+func (x *UserAutomatorTask) Variables() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variables"))
+	return obj.Wrap(_r)
 }
 
-// Variables calls the underlying Variables.
-func (x *UserAutomatorTask) Variables() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.Variables()
+// SetVariables wraps the corresponding Objective-C method.
+func (x *UserAutomatorTask) SetVariables(variables obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariables:"), objref.IDOf(variables))
 }
-
-// SetVariables calls the underlying SetVariables.
-func (x *UserAutomatorTask) SetVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) {
-	x.inner.SetVariables(variables)
-}
-
-func (x *UserAutomatorTask) asUserScriptTask() *raw.NSUserScriptTask {
-	return &x.inner.NSUserScriptTask
-}
-
-func (x *UserAutomatorTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
 
 // UserAutomatorTaskable is the interface implemented by [UserAutomatorTask], for mocking and DI.
 type UserAutomatorTaskable interface {
-	Unwrap() *raw.NSUserAutomatorTask
-	WithVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask
-	ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer))
-	Variables() *raw.NSDictionary[*raw.NSString, objc.ID]
-	SetVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID])
+	obj.Object
+	WithVariables(variables obj.Object) *UserAutomatorTask
+	WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask
+	Variables() obj.Object
+	SetVariables(variables obj.Object)
 }
 
 var _ UserAutomatorTaskable = (*UserAutomatorTask)(nil)
+
+var _ UserScriptTaskProvider = (*UserAutomatorTask)(nil)

@@ -5,121 +5,115 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that produces synthesized speech from text utterances and enables monitoring or controlling of ongoing speech.
+// SpeechSynthesizer is an idiomatic wrapper over the Objective-C class AVSpeechSynthesizer.
 //
-// SpeechSynthesizer wraps [raw.AVSpeechSynthesizer] with a fluent Go API.
+// An object that produces synthesized speech from text utterances and enables monitoring or controlling of ongoing speech.
 type SpeechSynthesizer struct {
-	inner *raw.AVSpeechSynthesizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSpeechSynthesizer].
-func (x *SpeechSynthesizer) Unwrap() *raw.AVSpeechSynthesizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechSynthesizer) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechSynthesizerFromID adopts an existing object pointer as a SpeechSynthesizer (nil for 0).
+// SpeechSynthesizerFromID adopts an existing Objective-C object as a SpeechSynthesizer
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechSynthesizerFromID(id objc.ID) *SpeechSynthesizer {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechSynthesizer{inner: raw.AVSpeechSynthesizerFromID(id)}
-}
-
-// NewSpeechSynthesizer creates a new [SpeechSynthesizer].
-func NewSpeechSynthesizer() *SpeechSynthesizer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesizer")), objc.RegisterName("new"))
-	return &SpeechSynthesizer{inner: raw.AVSpeechSynthesizerFromID(_id)}
-}
-
-// The delegate object for the speech synthesizer.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SpeechSynthesizer) WithDelegate(delegate raw.AVSpeechSynthesizerDelegate) *SpeechSynthesizer {
-	x.inner.SetDelegate(delegate)
+	x := &SpeechSynthesizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Adds the utterance you specify to the speech synthesizer’s queue.
-//
-// SpeakUtterance calls the underlying SpeakUtterance.
-func (x *SpeechSynthesizer) SpeakUtterance(utterance *raw.AVSpeechUtterance) {
-	x.inner.SpeakUtterance(utterance)
+// speechSynthesizerAdopt wraps an Objective-C object that this code just created as a
+// SpeechSynthesizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechSynthesizerAdopt(id objc.ID) *SpeechSynthesizer {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechSynthesizer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Generates speech for the utterance and invokes the callback with the audio buffer.
-//
-// WriteUtteranceToBufferCallback calls the underlying WriteUtteranceToBufferCallback.
-func (x *SpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer)) {
-	x.inner.WriteUtteranceToBufferCallback(utterance, bufferCallback)
+// Description returns the object's -description text.
+func (x *SpeechSynthesizer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Generates audio buffers and associated metadata for storage or further speech synthesis processing.
-//
-// WriteUtteranceToBufferCallbackToMarkerCallback calls the underlying WriteUtteranceToBufferCallbackToMarkerCallback.
-func (x *SpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker])) {
-	x.inner.WriteUtteranceToBufferCallbackToMarkerCallback(utterance, bufferCallback, markerCallback)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechSynthesizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Stops speech at the boundary you specify.
-//
-// StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
-func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
-	return x.inner.StopSpeakingAtBoundary(raw.AVSpeechBoundary(boundary))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechSynthesizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Pauses speech at the boundary you specify.
-//
-// PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
-func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
-	return x.inner.PauseSpeakingAtBoundary(raw.AVSpeechBoundary(boundary))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechSynthesizer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Resumes speech from its paused point.
-//
-// ContinueSpeaking calls the underlying ContinueSpeaking.
+// NewSpeechSynthesizer creates a new SpeechSynthesizer.
+func NewSpeechSynthesizer() *SpeechSynthesizer {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesizer")), objc.RegisterName("new"))
+	return speechSynthesizerAdopt(_id)
+}
+
+// SpeakUtterance adds the utterance you specify to the speech synthesizer’s queue.
+func (x *SpeechSynthesizer) SpeakUtterance(utterance *SpeechUtterance) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakUtterance:"), objref.IDOf(utterance))
+}
+
+// StopSpeakingAtBoundary stops speech at the boundary you specify.
+func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
+	return _r
+}
+
+// PauseSpeakingAtBoundary pauses speech at the boundary you specify.
+func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
+	return _r
+}
+
+// ContinueSpeaking resumes speech from its paused point.
 func (x *SpeechSynthesizer) ContinueSpeaking() bool {
-	return x.inner.ContinueSpeaking()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("continueSpeaking"))
+	return _r
 }
 
-// Delegate calls the underlying Delegate.
-func (x *SpeechSynthesizer) Delegate() raw.AVSpeechSynthesizerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SpeechSynthesizer) SetDelegate(delegate raw.AVSpeechSynthesizerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IsSpeaking calls the underlying IsSpeaking.
+// IsSpeaking wraps the corresponding Objective-C method.
 func (x *SpeechSynthesizer) IsSpeaking() bool {
-	return x.inner.IsSpeaking()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpeaking"))
+	return _r
 }
 
-// IsPaused calls the underlying IsPaused.
+// IsPaused wraps the corresponding Objective-C method.
 func (x *SpeechSynthesizer) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
 // SpeechSynthesizerable is the interface implemented by [SpeechSynthesizer], for mocking and DI.
 type SpeechSynthesizerable interface {
-	Unwrap() *raw.AVSpeechSynthesizer
-	WithDelegate(delegate raw.AVSpeechSynthesizerDelegate) *SpeechSynthesizer
-	SpeakUtterance(utterance *raw.AVSpeechUtterance)
-	WriteUtteranceToBufferCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer))
-	WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker]))
-	StopSpeakingAtBoundary(boundary AVSpeechBoundary) bool
-	PauseSpeakingAtBoundary(boundary AVSpeechBoundary) bool
+	obj.Object
+	SpeakUtterance(utterance *SpeechUtterance)
+	StopSpeakingAtBoundary(boundary SpeechBoundary) bool
+	PauseSpeakingAtBoundary(boundary SpeechBoundary) bool
 	ContinueSpeaking() bool
-	Delegate() raw.AVSpeechSynthesizerDelegate
-	SetDelegate(delegate raw.AVSpeechSynthesizerDelegate)
 	IsSpeaking() bool
 	IsPaused() bool
 }

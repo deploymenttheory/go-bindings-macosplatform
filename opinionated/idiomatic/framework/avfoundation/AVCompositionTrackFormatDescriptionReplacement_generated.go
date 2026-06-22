@@ -5,60 +5,90 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a format description and its replacement.
+// CompositionTrackFormatDescriptionReplacement is an idiomatic wrapper over the Objective-C class AVCompositionTrackFormatDescriptionReplacement.
 //
-// CompositionTrackFormatDescriptionReplacement wraps [raw.AVCompositionTrackFormatDescriptionReplacement] with a fluent Go API.
+// An object that represents a format description and its replacement.
 type CompositionTrackFormatDescriptionReplacement struct {
-	inner *raw.AVCompositionTrackFormatDescriptionReplacement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCompositionTrackFormatDescriptionReplacement].
-func (x *CompositionTrackFormatDescriptionReplacement) Unwrap() *raw.AVCompositionTrackFormatDescriptionReplacement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositionTrackFormatDescriptionReplacement) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionTrackFormatDescriptionReplacementFromID adopts an existing object pointer as a CompositionTrackFormatDescriptionReplacement (nil for 0).
+// CompositionTrackFormatDescriptionReplacementFromID adopts an existing Objective-C object as a CompositionTrackFormatDescriptionReplacement
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionTrackFormatDescriptionReplacementFromID(id objc.ID) *CompositionTrackFormatDescriptionReplacement {
 	if id == 0 {
 		return nil
 	}
-	return &CompositionTrackFormatDescriptionReplacement{inner: raw.AVCompositionTrackFormatDescriptionReplacementFromID(id)}
+	x := &CompositionTrackFormatDescriptionReplacement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCompositionTrackFormatDescriptionReplacement creates a new [CompositionTrackFormatDescriptionReplacement].
+// compositionTrackFormatDescriptionReplacementAdopt wraps an Objective-C object that this code just created as a
+// CompositionTrackFormatDescriptionReplacement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionTrackFormatDescriptionReplacementAdopt(id objc.ID) *CompositionTrackFormatDescriptionReplacement {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositionTrackFormatDescriptionReplacement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompositionTrackFormatDescriptionReplacement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositionTrackFormatDescriptionReplacement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositionTrackFormatDescriptionReplacement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CompositionTrackFormatDescriptionReplacement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCompositionTrackFormatDescriptionReplacement creates a new CompositionTrackFormatDescriptionReplacement.
 func NewCompositionTrackFormatDescriptionReplacement() *CompositionTrackFormatDescriptionReplacement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCompositionTrackFormatDescriptionReplacement")), objc.RegisterName("new"))
-	return &CompositionTrackFormatDescriptionReplacement{inner: raw.AVCompositionTrackFormatDescriptionReplacementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackFormatDescriptionReplacement")), objc.RegisterName("new"))
+	return compositionTrackFormatDescriptionReplacementAdopt(_id)
 }
 
-// @property       originalFormatDescription @abstract       The original format description.
-//
-// OriginalFormatDescription calls the underlying OriginalFormatDescription.
-func (x *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() unsafe.Pointer {
-	return x.inner.OriginalFormatDescription()
+// OriginalFormatDescription the original format description.
+func (x *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFormatDescription"))
+	return obj.Wrap(_r)
 }
 
-// @property       replacementFormatDescription @abstract       The replacement format description.
-//
-// ReplacementFormatDescription calls the underlying ReplacementFormatDescription.
-func (x *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() unsafe.Pointer {
-	return x.inner.ReplacementFormatDescription()
+// ReplacementFormatDescription the replacement format description.
+func (x *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementFormatDescription"))
+	return obj.Wrap(_r)
 }
 
 // CompositionTrackFormatDescriptionReplacementable is the interface implemented by [CompositionTrackFormatDescriptionReplacement], for mocking and DI.
 type CompositionTrackFormatDescriptionReplacementable interface {
-	Unwrap() *raw.AVCompositionTrackFormatDescriptionReplacement
-	OriginalFormatDescription() unsafe.Pointer
-	ReplacementFormatDescription() unsafe.Pointer
+	obj.Object
+	OriginalFormatDescription() obj.Object
+	ReplacementFormatDescription() obj.Object
 }
 
 var _ CompositionTrackFormatDescriptionReplacementable = (*CompositionTrackFormatDescriptionReplacement)(nil)

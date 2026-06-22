@@ -5,41 +5,74 @@
 package iobluetoothui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetoothui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BluetoothAccessibilityIgnoredImageCell wraps [raw.IOBluetoothAccessibilityIgnoredImageCell] with a fluent Go API.
+// BluetoothAccessibilityIgnoredImageCell is an idiomatic wrapper over the Objective-C class IOBluetoothAccessibilityIgnoredImageCell.
 type BluetoothAccessibilityIgnoredImageCell struct {
-	inner *raw.IOBluetoothAccessibilityIgnoredImageCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothAccessibilityIgnoredImageCell].
-func (x *BluetoothAccessibilityIgnoredImageCell) Unwrap() *raw.IOBluetoothAccessibilityIgnoredImageCell {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BluetoothAccessibilityIgnoredImageCell) ID() objc.ID { return x.inner.Ptr() }
-
-// BluetoothAccessibilityIgnoredImageCellFromID adopts an existing object pointer as a BluetoothAccessibilityIgnoredImageCell (nil for 0).
+// BluetoothAccessibilityIgnoredImageCellFromID adopts an existing Objective-C object as a BluetoothAccessibilityIgnoredImageCell
+// (nil for 0), retaining it and registering a release finalizer.
 func BluetoothAccessibilityIgnoredImageCellFromID(id objc.ID) *BluetoothAccessibilityIgnoredImageCell {
 	if id == 0 {
 		return nil
 	}
-	return &BluetoothAccessibilityIgnoredImageCell{inner: raw.IOBluetoothAccessibilityIgnoredImageCellFromID(id)}
+	x := &BluetoothAccessibilityIgnoredImageCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBluetoothAccessibilityIgnoredImageCell creates a new [BluetoothAccessibilityIgnoredImageCell].
+// bluetoothAccessibilityIgnoredImageCellAdopt wraps an Objective-C object that this code just created as a
+// BluetoothAccessibilityIgnoredImageCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bluetoothAccessibilityIgnoredImageCellAdopt(id objc.ID) *BluetoothAccessibilityIgnoredImageCell {
+	if id == 0 {
+		return nil
+	}
+	x := &BluetoothAccessibilityIgnoredImageCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BluetoothAccessibilityIgnoredImageCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BluetoothAccessibilityIgnoredImageCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BluetoothAccessibilityIgnoredImageCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BluetoothAccessibilityIgnoredImageCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBluetoothAccessibilityIgnoredImageCell creates a new BluetoothAccessibilityIgnoredImageCell.
 func NewBluetoothAccessibilityIgnoredImageCell() *BluetoothAccessibilityIgnoredImageCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothAccessibilityIgnoredImageCell")), objc.RegisterName("new"))
-	return &BluetoothAccessibilityIgnoredImageCell{inner: raw.IOBluetoothAccessibilityIgnoredImageCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredImageCell")), objc.RegisterName("new"))
+	return bluetoothAccessibilityIgnoredImageCellAdopt(_id)
 }
 
 // BluetoothAccessibilityIgnoredImageCellable is the interface implemented by [BluetoothAccessibilityIgnoredImageCell], for mocking and DI.
 type BluetoothAccessibilityIgnoredImageCellable interface {
-	Unwrap() *raw.IOBluetoothAccessibilityIgnoredImageCell
+	obj.Object
 }
 
 var _ BluetoothAccessibilityIgnoredImageCellable = (*BluetoothAccessibilityIgnoredImageCell)(nil)

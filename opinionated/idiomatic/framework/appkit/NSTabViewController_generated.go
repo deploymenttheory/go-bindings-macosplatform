@@ -5,403 +5,297 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A container view controller that manages a tab view interface, which organizes multiple pages of content but displays only one page at a time.
+// TabViewController is an idiomatic wrapper over the Objective-C class NSTabViewController.
 //
-// TabViewController wraps [raw.NSTabViewController] with a fluent Go API.
+// It embeds [ViewController], promoting that type's methods.
+//
+// A container view controller that manages a tab view interface, which organizes multiple pages of content but displays only one page at a time.
 type TabViewController struct {
-	inner *raw.NSTabViewController
+	ViewController
 }
 
-// Unwrap returns the underlying [raw.NSTabViewController].
-func (x *TabViewController) Unwrap() *raw.NSTabViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TabViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// TabViewControllerFromID adopts an existing object pointer as a TabViewController (nil for 0).
+// TabViewControllerFromID adopts an existing Objective-C object as a TabViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func TabViewControllerFromID(id objc.ID) *TabViewController {
 	if id == 0 {
 		return nil
 	}
-	return &TabViewController{inner: raw.NSTabViewControllerFromID(id)}
+	x := &TabViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTabViewController creates a new [TabViewController].
+// tabViewControllerAdopt wraps an Objective-C object that this code just created as a
+// TabViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tabViewControllerAdopt(id objc.ID) *TabViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &TabViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTabViewController creates a new TabViewController.
 func NewTabViewController() *TabViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTabViewController")), objc.RegisterName("new"))
-	return &TabViewController{inner: raw.NSTabViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTabViewController")), objc.RegisterName("new"))
+	return tabViewControllerAdopt(_id)
 }
 
-// The style used to display the tabs.
-//
-// WithTabStyle sets the tabStyle property and returns the receiver for chaining.
-func (x *TabViewController) WithTabStyle(tabStyle NSTabViewControllerTabStyle) *TabViewController {
-	x.inner.SetTabStyle(raw.NSTabViewControllerTabStyle(tabStyle))
+// WithTabStyle the style used to display the tabs.
+func (x *TabViewController) WithTabStyle(tabStyle TabViewControllerTabStyle) *TabViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabStyle:"), tabStyle)
 	return x
 }
 
-// The tab view that manages the views of the interface.
-//
-// WithTabView sets the tabView property and returns the receiver for chaining.
+// WithTabView the tab view that manages the views of the interface.
 func (x *TabViewController) WithTabView(tabView *TabView) *TabViewController {
-	x.inner.SetTabView(tabView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabView:"), objref.IDOf(tabView))
 	return x
 }
 
-// The animation options to use when switching between tabs.
-//
-// WithTransitionOptions sets the transitionOptions property and returns the receiver for chaining.
-func (x *TabViewController) WithTransitionOptions(transitionOptions NSViewControllerTransitionOptions) *TabViewController {
-	x.inner.SetTransitionOptions(raw.NSViewControllerTransitionOptions(transitionOptions))
+// WithTransitionOptions the animation options to use when switching between tabs.
+func (x *TabViewController) WithTransitionOptions(transitionOptions ViewControllerTransitionOptions) *TabViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionOptions:"), transitionOptions)
 	return x
 }
 
-// A Boolean value indicating whether the tab view controller gets its title from the selected child view controller.
-//
-// WithCanPropagateSelectedChildViewControllerTitle sets the canPropagateSelectedChildViewControllerTitle property and returns the receiver for chaining.
+// WithCanPropagateSelectedChildViewControllerTitle a Boolean value indicating whether the tab view controller gets its title from the selected child view controller.
 func (x *TabViewController) WithCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) *TabViewController {
-	x.inner.SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPropagateSelectedChildViewControllerTitle:"), canPropagateSelectedChildViewControllerTitle)
 	return x
 }
 
-// The array of tab view items used to manage each of the child view controllers.
-//
-// WithTabViewItems sets the collection, converting the Go slice to an NSArray.
-func (x *TabViewController) WithTabViewItems(items ...*raw.NSTabViewItem) *TabViewController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetTabViewItems(foundation.NSArrayFromID[*raw.NSTabViewItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSTabViewItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetTabViewItems(_arr)
+// WithTabViewItems the array of tab view items used to manage each of the child view controllers.
+func (x *TabViewController) WithTabViewItems(items ...*TabViewItem) *TabViewController {
+	_arr := purego.SliceToNSArray(items, func(_v *TabViewItem) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewItems:"), _arr)
 	return x
 }
 
-// The index of the selected tab.
-//
-// WithSelectedTabViewItemIndex sets the selectedTabViewItemIndex property and returns the receiver for chaining.
+// WithSelectedTabViewItemIndex the index of the selected tab.
 func (x *TabViewController) WithSelectedTabViewItemIndex(selectedTabViewItemIndex int) *TabViewController {
-	x.inner.SetSelectedTabViewItemIndex(selectedTabViewItemIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedTabViewItemIndex:"), selectedTabViewItemIndex)
 	return x
 }
 
-// The object whose value is presented in the receiver’s primary view.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *TabViewController) WithRepresentedObject(representedObject objc.ID) *TabViewController {
-	x.inner.NSViewController.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object whose value is presented in the receiver’s primary view.
+func (x *TabViewController) WithRepresentedObject(representedObject obj.Object) *TabViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The localized title of the receiver’s primary view.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the localized title of the receiver’s primary view.
 func (x *TabViewController) WithTitle(title string) *TabViewController {
-	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The view controller’s primary view.
-//
-// WithView sets the view property and returns the receiver for chaining.
+// WithView the view controller’s primary view.
 func (x *TabViewController) WithView(view ViewProvider) *TabViewController {
-	x.inner.NSViewController.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// The desired size of the view controller’s view, in screen units.
-//
-// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+// WithPreferredContentSize the desired size of the view controller’s view, in screen units.
 func (x *TabViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TabViewController {
-	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
 	return x
 }
 
-// An array of view controllers that are hierarchical children of the view controller.
-//
-// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+// WithChildViewControllers an array of view controllers that are hierarchical children of the view controller.
 func (x *TabViewController) WithChildViewControllers(items ...ViewControllerProvider) *TabViewController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSViewController.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asViewController().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSViewController](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSViewController.SetChildViewControllers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
 	return x
 }
 
-// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+// WithSourceItemView sets the property and returns the receiver so calls can be chained.
 func (x *TabViewController) WithSourceItemView(sourceItemView ViewProvider) *TabViewController {
-	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return x
 }
 
-// For a view controller that is part of an app extension, the preferred screen origin.
-//
-// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+// WithPreferredScreenOrigin for a view controller that is part of an app extension, the preferred screen origin.
 func (x *TabViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TabViewController {
-	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *TabViewController) WithNextResponder(nextResponder ResponderProvider) *TabViewController {
-	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *TabViewController) WithMenu(menu *Menu) *TabViewController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *TabViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *TabViewController {
-	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *TabViewController) WithUserActivity(userActivity obj.Object) *TabViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *TabViewController) WithTouchBar(touchBar *TouchBar) *TabViewController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Adds the specified tab to the end of the tab view controller’s list of tabs.
-//
-// AddTabViewItem calls the underlying AddTabViewItem.
-func (x *TabViewController) AddTabViewItem(tabViewItem *raw.NSTabViewItem) {
-	x.inner.AddTabViewItem(tabViewItem)
+// AddTabViewItem adds the specified tab to the end of the tab view controller’s list of tabs.
+func (x *TabViewController) AddTabViewItem(tabViewItem *TabViewItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTabViewItem:"), objref.IDOf(tabViewItem))
 }
 
-// Inserts a tab view into the tab view controller’s list of tabs.
-//
-// InsertTabViewItemAtIndex calls the underlying InsertTabViewItemAtIndex.
-func (x *TabViewController) InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int) {
-	x.inner.InsertTabViewItemAtIndex(tabViewItem, index)
+// InsertTabViewItemAtIndex inserts a tab view into the tab view controller’s list of tabs.
+func (x *TabViewController) InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertTabViewItem:atIndex:"), objref.IDOf(tabViewItem), index)
 }
 
-// Removes the specified tab view item from the tab view controller.
-//
-// RemoveTabViewItem calls the underlying RemoveTabViewItem.
-func (x *TabViewController) RemoveTabViewItem(tabViewItem *raw.NSTabViewItem) {
-	x.inner.RemoveTabViewItem(tabViewItem)
+// RemoveTabViewItem removes the specified tab view item from the tab view controller.
+func (x *TabViewController) RemoveTabViewItem(tabViewItem *TabViewItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTabViewItem:"), objref.IDOf(tabViewItem))
 }
 
-// Returns the tab view item for the specified child view controller.
-//
-// TabViewItemForViewController calls the underlying TabViewItemForViewController.
-func (x *TabViewController) TabViewItemForViewController(viewController *raw.NSViewController) *TabViewItem {
-	_r := x.inner.TabViewItemForViewController(viewController)
-	if _r == nil {
-		return nil
-	}
-	return &TabViewItem{inner: _r}
+// TabViewItemForViewController returns the tab view item for the specified child view controller.
+func (x *TabViewController) TabViewItemForViewController(viewController *ViewController) *TabViewItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabViewItemForViewController:"), objref.IDOf(viewController))
+	return TabViewItemFromID(_r)
 }
 
-// Informs the tab view controller that the specified tab is about to be selected.
-//
-// TabViewWillSelectTabViewItem calls the underlying TabViewWillSelectTabViewItem.
-func (x *TabViewController) TabViewWillSelectTabViewItem(tabView *raw.NSTabView, tabViewItem *raw.NSTabViewItem) {
-	x.inner.TabViewWillSelectTabViewItem(tabView, tabViewItem)
+// TabViewWillSelectTabViewItem informs the tab view controller that the specified tab is about to be selected.
+func (x *TabViewController) TabViewWillSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabView:willSelectTabViewItem:"), objref.IDOf(tabView), objref.IDOf(tabViewItem))
 }
 
-// Informs the tab view controller that the specified tab was selected.
-//
-// TabViewDidSelectTabViewItem calls the underlying TabViewDidSelectTabViewItem.
-func (x *TabViewController) TabViewDidSelectTabViewItem(tabView *raw.NSTabView, tabViewItem *raw.NSTabViewItem) {
-	x.inner.TabViewDidSelectTabViewItem(tabView, tabViewItem)
+// TabViewDidSelectTabViewItem informs the tab view controller that the specified tab was selected.
+func (x *TabViewController) TabViewDidSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabView:didSelectTabViewItem:"), objref.IDOf(tabView), objref.IDOf(tabViewItem))
 }
 
-// Asks the tab view controller if the specified tab should be selected.
-//
-// TabViewShouldSelectTabViewItem calls the underlying TabViewShouldSelectTabViewItem.
-func (x *TabViewController) TabViewShouldSelectTabViewItem(tabView *raw.NSTabView, tabViewItem *raw.NSTabViewItem) bool {
-	return x.inner.TabViewShouldSelectTabViewItem(tabView, tabViewItem)
+// TabViewShouldSelectTabViewItem asks the tab view controller if the specified tab should be selected.
+func (x *TabViewController) TabViewShouldSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tabView:shouldSelectTabViewItem:"), objref.IDOf(tabView), objref.IDOf(tabViewItem))
+	return _r
 }
 
-// Returns the toolbar item for the specified identifier.
-//
-// ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar calls the underlying ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar.
-func (x *TabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *raw.NSToolbar, itemIdentifier *foundation.NSString, flag bool) *ToolbarItem {
-	_r := x.inner.ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar, itemIdentifier, flag)
-	if _r == nil {
-		return nil
-	}
-	return &ToolbarItem{inner: _r}
+// ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar returns the toolbar item for the specified identifier.
+func (x *TabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *Toolbar, itemIdentifier obj.Object, flag bool) *ToolbarItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:"), objref.IDOf(toolbar), objref.IDOf(itemIdentifier), flag)
+	return ToolbarItemFromID(_r)
 }
 
-// Returns the array of identifier strings for the default toolbar items.
-//
-// ToolbarDefaultItemIdentifiers calls the underlying ToolbarDefaultItemIdentifiers.
-func (x *TabViewController) ToolbarDefaultItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.ToolbarDefaultItemIdentifiers(toolbar)
+// ToolbarDefaultItemIdentifiers returns the array of identifier strings for the default toolbar items.
+func (x *TabViewController) ToolbarDefaultItemIdentifiers(toolbar *Toolbar) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbarDefaultItemIdentifiers:"), objref.IDOf(toolbar))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns the array of identifier strings for the allowed toolbar items.
-//
-// ToolbarAllowedItemIdentifiers calls the underlying ToolbarAllowedItemIdentifiers.
-func (x *TabViewController) ToolbarAllowedItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.ToolbarAllowedItemIdentifiers(toolbar)
+// ToolbarAllowedItemIdentifiers returns the array of identifier strings for the allowed toolbar items.
+func (x *TabViewController) ToolbarAllowedItemIdentifiers(toolbar *Toolbar) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbarAllowedItemIdentifiers:"), objref.IDOf(toolbar))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns the array of identifier strings for the selectable toolbar items
-//
-// ToolbarSelectableItemIdentifiers calls the underlying ToolbarSelectableItemIdentifiers.
-func (x *TabViewController) ToolbarSelectableItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.ToolbarSelectableItemIdentifiers(toolbar)
+// ToolbarSelectableItemIdentifiers returns the array of identifier strings for the selectable toolbar items
+func (x *TabViewController) ToolbarSelectableItemIdentifiers(toolbar *Toolbar) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbarSelectableItemIdentifiers:"), objref.IDOf(toolbar))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
-//
-// TabStyle calls the underlying TabStyle.
-func (x *TabViewController) TabStyle() NSTabViewControllerTabStyle {
-	return NSTabViewControllerTabStyle(x.inner.TabStyle())
+// TabStyle the style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
+func (x *TabViewController) TabStyle() TabViewControllerTabStyle {
+	_r := objc.Send[TabViewControllerTabStyle](objref.IDOf(x), objc.RegisterName("tabStyle"))
+	return _r
 }
 
-// The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
-//
-// SetTabStyle calls the underlying SetTabStyle.
-func (x *TabViewController) SetTabStyle(tabStyle NSTabViewControllerTabStyle) {
-	x.inner.SetTabStyle(raw.NSTabViewControllerTabStyle(tabStyle))
+// SetTabStyle the style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
+func (x *TabViewController) SetTabStyle(tabStyle TabViewControllerTabStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabStyle:"), tabStyle)
 }
 
-// Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
-//
-// TabView calls the underlying TabView.
+// TabView access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
 func (x *TabViewController) TabView() *TabView {
-	_r := x.inner.TabView()
-	if _r == nil {
-		return nil
-	}
-	return &TabView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabView"))
+	return TabViewFromID(_r)
 }
 
-// Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
-//
-// SetTabView calls the underlying SetTabView.
-func (x *TabViewController) SetTabView(tabView *raw.NSTabView) {
-	x.inner.SetTabView(tabView)
+// SetTabView access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
+func (x *TabViewController) SetTabView(tabView *TabView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabView:"), objref.IDOf(tabView))
 }
 
-// This defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
-//
-// TransitionOptions calls the underlying TransitionOptions.
-func (x *TabViewController) TransitionOptions() NSViewControllerTransitionOptions {
-	return NSViewControllerTransitionOptions(x.inner.TransitionOptions())
+// TransitionOptions this defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
+func (x *TabViewController) TransitionOptions() ViewControllerTransitionOptions {
+	_r := objc.Send[ViewControllerTransitionOptions](objref.IDOf(x), objc.RegisterName("transitionOptions"))
+	return _r
 }
 
-// This defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
-//
-// SetTransitionOptions calls the underlying SetTransitionOptions.
-func (x *TabViewController) SetTransitionOptions(transitionOptions NSViewControllerTransitionOptions) {
-	x.inner.SetTransitionOptions(raw.NSViewControllerTransitionOptions(transitionOptions))
+// SetTransitionOptions this defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
+func (x *TabViewController) SetTransitionOptions(transitionOptions ViewControllerTransitionOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionOptions:"), transitionOptions)
 }
 
-// If YES and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If NO, it will continue to return nil. The default value is \c YES.
-//
-// CanPropagateSelectedChildViewControllerTitle calls the underlying CanPropagateSelectedChildViewControllerTitle.
+// CanPropagateSelectedChildViewControllerTitle if YES and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If NO, it will continue to return nil. The default value is \c YES.
 func (x *TabViewController) CanPropagateSelectedChildViewControllerTitle() bool {
-	return x.inner.CanPropagateSelectedChildViewControllerTitle()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPropagateSelectedChildViewControllerTitle"))
+	return _r
 }
 
-// If YES and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If NO, it will continue to return nil. The default value is \c YES.
-//
-// SetCanPropagateSelectedChildViewControllerTitle calls the underlying SetCanPropagateSelectedChildViewControllerTitle.
+// SetCanPropagateSelectedChildViewControllerTitle if YES and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If NO, it will continue to return nil. The default value is \c YES.
 func (x *TabViewController) SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) {
-	x.inner.SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPropagateSelectedChildViewControllerTitle:"), canPropagateSelectedChildViewControllerTitle)
 }
 
-// The array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
+// TabViewItems the array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
 //
 // TabViewItems returns the collection as a Go slice.
 func (x *TabViewController) TabViewItems() []*TabViewItem {
-	arr := x.inner.TabViewItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TabViewItem {
-		return &TabViewItem{inner: raw.NSTabViewItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabViewItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TabViewItem { return TabViewItemFromID(_id) })
 }
 
-// The array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
-//
-// SetTabViewItems calls the underlying SetTabViewItems.
-func (x *TabViewController) SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem]) {
-	x.inner.SetTabViewItems(tabViewItems)
+// SetTabViewItems the array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
+func (x *TabViewController) SetTabViewItems(tabViewItems []*TabViewItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabViewItems:"), purego.SliceToNSArray(tabViewItems, func(_v *TabViewItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:@“selectedTabViewItemIndex" options:nil];
-//
-// SelectedTabViewItemIndex calls the underlying SelectedTabViewItemIndex.
+// SelectedTabViewItemIndex read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:
 func (x *TabViewController) SelectedTabViewItemIndex() int {
-	return x.inner.SelectedTabViewItemIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedTabViewItemIndex"))
+	return _r
 }
 
-// Read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:@“selectedTabViewItemIndex" options:nil];
-//
-// SetSelectedTabViewItemIndex calls the underlying SetSelectedTabViewItemIndex.
+// SetSelectedTabViewItemIndex read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:
 func (x *TabViewController) SetSelectedTabViewItemIndex(selectedTabViewItemIndex int) {
-	x.inner.SetSelectedTabViewItemIndex(selectedTabViewItemIndex)
-}
-
-func (x *TabViewController) asViewController() *raw.NSViewController {
-	return &x.inner.NSViewController
-}
-
-func (x *TabViewController) asResponder() *raw.NSResponder {
-	return &x.inner.NSViewController.NSResponder
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedTabViewItemIndex:"), selectedTabViewItemIndex)
 }
 
 // TabViewControllerable is the interface implemented by [TabViewController], for mocking and DI.
 type TabViewControllerable interface {
-	Unwrap() *raw.NSTabViewController
-	WithTabStyle(tabStyle NSTabViewControllerTabStyle) *TabViewController
+	obj.Object
+	WithTabStyle(tabStyle TabViewControllerTabStyle) *TabViewController
 	WithTabView(tabView *TabView) *TabViewController
-	WithTransitionOptions(transitionOptions NSViewControllerTransitionOptions) *TabViewController
+	WithTransitionOptions(transitionOptions ViewControllerTransitionOptions) *TabViewController
 	WithCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) *TabViewController
-	WithTabViewItems(items ...*raw.NSTabViewItem) *TabViewController
+	WithTabViewItems(items ...*TabViewItem) *TabViewController
 	WithSelectedTabViewItemIndex(selectedTabViewItemIndex int) *TabViewController
-	WithRepresentedObject(representedObject objc.ID) *TabViewController
+	WithRepresentedObject(representedObject obj.Object) *TabViewController
 	WithTitle(title string) *TabViewController
 	WithView(view ViewProvider) *TabViewController
 	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TabViewController
@@ -410,31 +304,35 @@ type TabViewControllerable interface {
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TabViewController
 	WithNextResponder(nextResponder ResponderProvider) *TabViewController
 	WithMenu(menu *Menu) *TabViewController
-	WithUserActivity(userActivity *foundation.NSUserActivity) *TabViewController
+	WithUserActivity(userActivity obj.Object) *TabViewController
 	WithTouchBar(touchBar *TouchBar) *TabViewController
-	AddTabViewItem(tabViewItem *raw.NSTabViewItem)
-	InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int)
-	RemoveTabViewItem(tabViewItem *raw.NSTabViewItem)
-	TabViewItemForViewController(viewController *raw.NSViewController) *TabViewItem
-	TabViewWillSelectTabViewItem(tabView *raw.NSTabView, tabViewItem *raw.NSTabViewItem)
-	TabViewDidSelectTabViewItem(tabView *raw.NSTabView, tabViewItem *raw.NSTabViewItem)
-	TabViewShouldSelectTabViewItem(tabView *raw.NSTabView, tabViewItem *raw.NSTabViewItem) bool
-	ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *raw.NSToolbar, itemIdentifier *foundation.NSString, flag bool) *ToolbarItem
-	ToolbarDefaultItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString]
-	ToolbarAllowedItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString]
-	ToolbarSelectableItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString]
-	TabStyle() NSTabViewControllerTabStyle
-	SetTabStyle(tabStyle NSTabViewControllerTabStyle)
+	AddTabViewItem(tabViewItem *TabViewItem)
+	InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int)
+	RemoveTabViewItem(tabViewItem *TabViewItem)
+	TabViewItemForViewController(viewController *ViewController) *TabViewItem
+	TabViewWillSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem)
+	TabViewDidSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem)
+	TabViewShouldSelectTabViewItem(tabView *TabView, tabViewItem *TabViewItem) bool
+	ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *Toolbar, itemIdentifier obj.Object, flag bool) *ToolbarItem
+	ToolbarDefaultItemIdentifiers(toolbar *Toolbar) []obj.Object
+	ToolbarAllowedItemIdentifiers(toolbar *Toolbar) []obj.Object
+	ToolbarSelectableItemIdentifiers(toolbar *Toolbar) []obj.Object
+	TabStyle() TabViewControllerTabStyle
+	SetTabStyle(tabStyle TabViewControllerTabStyle)
 	TabView() *TabView
-	SetTabView(tabView *raw.NSTabView)
-	TransitionOptions() NSViewControllerTransitionOptions
-	SetTransitionOptions(transitionOptions NSViewControllerTransitionOptions)
+	SetTabView(tabView *TabView)
+	TransitionOptions() ViewControllerTransitionOptions
+	SetTransitionOptions(transitionOptions ViewControllerTransitionOptions)
 	CanPropagateSelectedChildViewControllerTitle() bool
 	SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool)
 	TabViewItems() []*TabViewItem
-	SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem])
+	SetTabViewItems(tabViewItems []*TabViewItem)
 	SelectedTabViewItemIndex() int
 	SetSelectedTabViewItemIndex(selectedTabViewItemIndex int)
 }
 
 var _ TabViewControllerable = (*TabViewController)(nil)
+
+var _ ViewControllerProvider = (*TabViewController)(nil)
+
+var _ ResponderProvider = (*TabViewController)(nil)

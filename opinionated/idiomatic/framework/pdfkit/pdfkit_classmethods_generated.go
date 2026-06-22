@@ -5,21 +5,21 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// LineStyleFromName calls the underlying PDFAnnotationLineStyleFromName.
-func LineStyleFromName(name string) PDFLineStyle {
-	return PDFLineStyle(raw.PDFAnnotationLineStyleFromName(foundation.NSStringStringWithUTF8String(name)))
+// LineStyleFromName returns a line style that corresponds to the specified name.
+func LineStyleFromName(name string) LineStyle {
+	_r := objc.Send[LineStyle](objc.ID(_class("PDFAnnotation")), objc.RegisterName("lineStyleFromName:"), purego.NSString(name))
+	return _r
 }
 
-// NameForLineStyle calls the underlying PDFAnnotationNameForLineStyle.
-func NameForLineStyle(style PDFLineStyle) string {
-	_r := raw.PDFAnnotationNameForLineStyle(raw.PDFLineStyle(style))
-	if _r == nil {
+// NameForLineStyle returns the name of the line style, which matches the definition in the Adobe PDF Specification.
+func NameForLineStyle(style LineStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("nameForLineStyle:"), style)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }

@@ -5,25 +5,29 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// NotificationActionProvider is implemented by NotificationAction and any idiomatic type wrapping a UNNotificationAction subclass.
+// NotificationActionProvider is accepted wherever a UNNotificationAction (or one of its subclasses) is expected.
 type NotificationActionProvider interface {
-	asNotificationAction() *raw.UNNotificationAction
+	objref.Object
+	isNotificationAction()
 }
 
-// NotificationContentProvider is implemented by NotificationContent and any idiomatic type wrapping a UNNotificationContent subclass.
+// NotificationContentProvider is accepted wherever a UNNotificationContent (or one of its subclasses) is expected.
 type NotificationContentProvider interface {
-	asNotificationContent() *raw.UNNotificationContent
+	objref.Object
+	isNotificationContent()
 }
 
-// NotificationResponseProvider is implemented by NotificationResponse and any idiomatic type wrapping a UNNotificationResponse subclass.
+// NotificationResponseProvider is accepted wherever a UNNotificationResponse (or one of its subclasses) is expected.
 type NotificationResponseProvider interface {
-	asNotificationResponse() *raw.UNNotificationResponse
+	objref.Object
+	isNotificationResponse()
 }
 
-// NotificationTriggerProvider is implemented by NotificationTrigger and any idiomatic type wrapping a UNNotificationTrigger subclass.
+// NotificationTriggerProvider is accepted wherever a UNNotificationTrigger (or one of its subclasses) is expected.
 type NotificationTriggerProvider interface {
-	asNotificationTrigger() *raw.UNNotificationTrigger
+	objref.Object
+	isNotificationTrigger()
 }

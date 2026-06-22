@@ -5,159 +5,179 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object you use to create a convolution or fully connected layer.
+// ConvolutionDescriptor is an idiomatic wrapper over the Objective-C class MLCConvolutionDescriptor.
 //
-// ConvolutionDescriptor wraps [raw.MLCConvolutionDescriptor] with a fluent Go API.
+// A configuration object you use to create a convolution or fully connected layer.
 type ConvolutionDescriptor struct {
-	inner *raw.MLCConvolutionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCConvolutionDescriptor].
-func (x *ConvolutionDescriptor) Unwrap() *raw.MLCConvolutionDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConvolutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ConvolutionDescriptorFromID adopts an existing object pointer as a ConvolutionDescriptor (nil for 0).
+// ConvolutionDescriptorFromID adopts an existing Objective-C object as a ConvolutionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ConvolutionDescriptorFromID(id objc.ID) *ConvolutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ConvolutionDescriptor{inner: raw.MLCConvolutionDescriptorFromID(id)}
+	x := &ConvolutionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewConvolutionDescriptor creates a new [ConvolutionDescriptor].
+// convolutionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ConvolutionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func convolutionDescriptorAdopt(id objc.ID) *ConvolutionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ConvolutionDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ConvolutionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConvolutionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConvolutionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConvolutionDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewConvolutionDescriptor creates a new ConvolutionDescriptor.
 func NewConvolutionDescriptor() *ConvolutionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCConvolutionDescriptor")), objc.RegisterName("new"))
-	return &ConvolutionDescriptor{inner: raw.MLCConvolutionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("new"))
+	return convolutionDescriptorAdopt(_id)
 }
 
-// @property   convolutionType @abstract   The type of convolution.
-//
-// ConvolutionType calls the underlying ConvolutionType.
-func (x *ConvolutionDescriptor) ConvolutionType() MLCConvolutionType {
-	return MLCConvolutionType(x.inner.ConvolutionType())
+// ConvolutionType the type of convolution.
+func (x *ConvolutionDescriptor) ConvolutionType() ConvolutionType {
+	_r := objc.Send[ConvolutionType](objref.IDOf(x), objc.RegisterName("convolutionType"))
+	return _r
 }
 
-// @property   kernelWidth @abstract   The convolution kernel size in x.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *ConvolutionDescriptor) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// KernelWidth the convolution kernel size in x.
+func (x *ConvolutionDescriptor) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
 
-// @property   kernelHeight @abstract   The convolution kernel size in y.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *ConvolutionDescriptor) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// KernelHeight the convolution kernel size in y.
+func (x *ConvolutionDescriptor) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// @property   inputFeatureChannelCount @abstract   Number of channels in the input tensor
-//
-// InputFeatureChannelCount calls the underlying InputFeatureChannelCount.
-func (x *ConvolutionDescriptor) InputFeatureChannelCount() uint {
-	return x.inner.InputFeatureChannelCount()
+// InputFeatureChannelCount number of channels in the input tensor
+func (x *ConvolutionDescriptor) InputFeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannelCount"))
+	return _r
 }
 
-// @property   outputFeatureChannelCount @abstract   Number of channels in the output tensor
-//
-// OutputFeatureChannelCount calls the underlying OutputFeatureChannelCount.
-func (x *ConvolutionDescriptor) OutputFeatureChannelCount() uint {
-	return x.inner.OutputFeatureChannelCount()
+// OutputFeatureChannelCount number of channels in the output tensor
+func (x *ConvolutionDescriptor) OutputFeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannelCount"))
+	return _r
 }
 
-// @property   strideInX @abstract   The stride of the kernel in x.
-//
-// StrideInX calls the underlying StrideInX.
-func (x *ConvolutionDescriptor) StrideInX() uint {
-	return x.inner.StrideInX()
+// StrideInX the stride of the kernel in x.
+func (x *ConvolutionDescriptor) StrideInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
+	return _r
 }
 
-// @property   strideInY @abstract   The stride of the kernel in y.
-//
-// StrideInY calls the underlying StrideInY.
-func (x *ConvolutionDescriptor) StrideInY() uint {
-	return x.inner.StrideInY()
+// StrideInY the stride of the kernel in y.
+func (x *ConvolutionDescriptor) StrideInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
+	return _r
 }
 
-// @property   dilationRateInX @abstract   The dilation rate i.e. stride of elements in the kernel in x.
-//
-// DilationRateInX calls the underlying DilationRateInX.
-func (x *ConvolutionDescriptor) DilationRateInX() uint {
-	return x.inner.DilationRateInX()
+// DilationRateInX the dilation rate i.e. stride of elements in the kernel in x.
+func (x *ConvolutionDescriptor) DilationRateInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
+	return _r
 }
 
-// @property   dilationRateInY @abstract   The dilation rate i.e. stride of elements in the kernel in y.
-//
-// DilationRateInY calls the underlying DilationRateInY.
-func (x *ConvolutionDescriptor) DilationRateInY() uint {
-	return x.inner.DilationRateInY()
+// DilationRateInY the dilation rate i.e. stride of elements in the kernel in y.
+func (x *ConvolutionDescriptor) DilationRateInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
+	return _r
 }
 
-// @property   groupCount @abstract   Number of blocked connections from input channels to output channels
-//
-// GroupCount calls the underlying GroupCount.
-func (x *ConvolutionDescriptor) GroupCount() uint {
-	return x.inner.GroupCount()
+// GroupCount number of blocked connections from input channels to output channels
+func (x *ConvolutionDescriptor) GroupCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupCount"))
+	return _r
 }
 
-// @property   paddingPolicy @abstract   The padding policy to use.
-//
-// PaddingPolicy calls the underlying PaddingPolicy.
-func (x *ConvolutionDescriptor) PaddingPolicy() MLCPaddingPolicy {
-	return MLCPaddingPolicy(x.inner.PaddingPolicy())
+// PaddingPolicy the padding policy to use.
+func (x *ConvolutionDescriptor) PaddingPolicy() PaddingPolicy {
+	_r := objc.Send[PaddingPolicy](objref.IDOf(x), objc.RegisterName("paddingPolicy"))
+	return _r
 }
 
-// @property   paddingSizeInX @abstract   The pooling size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
-//
-// PaddingSizeInX calls the underlying PaddingSizeInX.
-func (x *ConvolutionDescriptor) PaddingSizeInX() uint {
-	return x.inner.PaddingSizeInX()
+// PaddingSizeInX the pooling size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+func (x *ConvolutionDescriptor) PaddingSizeInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInX"))
+	return _r
 }
 
-// @property   paddingSizeInY @abstract   The pooling size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
-//
-// PaddingSizeInY calls the underlying PaddingSizeInY.
-func (x *ConvolutionDescriptor) PaddingSizeInY() uint {
-	return x.inner.PaddingSizeInY()
+// PaddingSizeInY the pooling size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+func (x *ConvolutionDescriptor) PaddingSizeInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInY"))
+	return _r
 }
 
-// @property   isConvolutionTranspose @abstract   A flag to indicate if this is a convolution transpose
-//
-// IsConvolutionTranspose calls the underlying IsConvolutionTranspose.
+// IsConvolutionTranspose a flag to indicate if this is a convolution transpose
 func (x *ConvolutionDescriptor) IsConvolutionTranspose() bool {
-	return x.inner.IsConvolutionTranspose()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConvolutionTranspose"))
+	return _r
 }
 
-// @property   usesDepthwiseConvolution @abstract   A flag to indicate depthwise convolution
-//
-// UsesDepthwiseConvolution calls the underlying UsesDepthwiseConvolution.
+// UsesDepthwiseConvolution a flag to indicate depthwise convolution
 func (x *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
-	return x.inner.UsesDepthwiseConvolution()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDepthwiseConvolution"))
+	return _r
 }
 
 // ConvolutionDescriptorable is the interface implemented by [ConvolutionDescriptor], for mocking and DI.
 type ConvolutionDescriptorable interface {
-	Unwrap() *raw.MLCConvolutionDescriptor
-	ConvolutionType() MLCConvolutionType
-	KernelWidth() uint
-	KernelHeight() uint
-	InputFeatureChannelCount() uint
-	OutputFeatureChannelCount() uint
-	StrideInX() uint
-	StrideInY() uint
-	DilationRateInX() uint
-	DilationRateInY() uint
-	GroupCount() uint
-	PaddingPolicy() MLCPaddingPolicy
-	PaddingSizeInX() uint
-	PaddingSizeInY() uint
+	obj.Object
+	ConvolutionType() ConvolutionType
+	KernelWidth() int
+	KernelHeight() int
+	InputFeatureChannelCount() int
+	OutputFeatureChannelCount() int
+	StrideInX() int
+	StrideInY() int
+	DilationRateInX() int
+	DilationRateInY() int
+	GroupCount() int
+	PaddingPolicy() PaddingPolicy
+	PaddingSizeInX() int
+	PaddingSizeInY() int
 	IsConvolutionTranspose() bool
 	UsesDepthwiseConvolution() bool
 }

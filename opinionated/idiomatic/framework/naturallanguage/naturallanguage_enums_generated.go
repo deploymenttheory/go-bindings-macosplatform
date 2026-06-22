@@ -9,121 +9,80 @@ import (
 	"strings"
 )
 
-// The availability of the contextual embedding model assets.
-type NLContextualEmbeddingAssetsResult int64
-
-const (
-	// A result that indicates that the assets are present on-device.
-	NLContextualEmbeddingAssetsResultAvailable NLContextualEmbeddingAssetsResult = 0
-	// A result that indicates that the assets aren't present on-device.
-	NLContextualEmbeddingAssetsResultNotAvailable NLContextualEmbeddingAssetsResult = 1
-	// A result that indicates the framework encounters an error.
-	NLContextualEmbeddingAssetsResultError NLContextualEmbeddingAssetsResult = 2
-)
-
-func (e NLContextualEmbeddingAssetsResult) String() string {
-	switch e {
-	case NLContextualEmbeddingAssetsResultAvailable:
-		return "NLContextualEmbeddingAssetsResultAvailable"
-	case NLContextualEmbeddingAssetsResultNotAvailable:
-		return "NLContextualEmbeddingAssetsResultNotAvailable"
-	case NLContextualEmbeddingAssetsResultError:
-		return "NLContextualEmbeddingAssetsResultError"
-	default:
-		return fmt.Sprintf("NLContextualEmbeddingAssetsResult(%d)", int64(e))
-	}
-}
-
 // The means of calculating a distance between two locations in a text embedding.
-type NLDistanceType int64
+type DistanceType int64
 
 const (
 	// A method of calculating distance by using cosine similarity.
-	NLDistanceTypeCosine NLDistanceType = 0
+	DistanceTypeCosine DistanceType = 0
 )
 
-func (e NLDistanceType) String() string {
+// String returns the DistanceType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DistanceType) String() string {
 	switch e {
-	case NLDistanceTypeCosine:
-		return "NLDistanceTypeCosine"
+	case DistanceTypeCosine:
+		return "DistanceTypeCosine"
 	default:
-		return fmt.Sprintf("NLDistanceType(%d)", int64(e))
+		return fmt.Sprintf("DistanceType(%d)", int64(e))
 	}
 }
 
 // The different types of a natural language model.
-type NLModelType int64
+type ModelType int64
 
 const (
-	NLModelTypeClassifier NLModelType = 0
-	NLModelTypeSequence   NLModelType = 1
+	ModelTypeClassifier ModelType = 0
+	ModelTypeSequence   ModelType = 1
 )
 
-func (e NLModelType) String() string {
+// String returns the ModelType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ModelType) String() string {
 	switch e {
-	case NLModelTypeClassifier:
-		return "NLModelTypeClassifier"
-	case NLModelTypeSequence:
-		return "NLModelTypeSequence"
+	case ModelTypeClassifier:
+		return "ModelTypeClassifier"
+	case ModelTypeSequence:
+		return "ModelTypeSequence"
 	default:
-		return fmt.Sprintf("NLModelType(%d)", int64(e))
-	}
-}
-
-// The response to an asset request.
-type NLTaggerAssetsResult int64
-
-const (
-	NLTaggerAssetsResultAvailable    NLTaggerAssetsResult = 0
-	NLTaggerAssetsResultNotAvailable NLTaggerAssetsResult = 1
-	NLTaggerAssetsResultError        NLTaggerAssetsResult = 2
-)
-
-func (e NLTaggerAssetsResult) String() string {
-	switch e {
-	case NLTaggerAssetsResultAvailable:
-		return "NLTaggerAssetsResultAvailable"
-	case NLTaggerAssetsResultNotAvailable:
-		return "NLTaggerAssetsResultNotAvailable"
-	case NLTaggerAssetsResultError:
-		return "NLTaggerAssetsResultError"
-	default:
-		return fmt.Sprintf("NLTaggerAssetsResult(%d)", int64(e))
+		return fmt.Sprintf("ModelType(%d)", int64(e))
 	}
 }
 
 // Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
 // Bitmask — values may be combined with |.
-type NLTaggerOptions uint64
+type TaggerOptions uint64
 
 const (
-	NLTaggerOmitWords        NLTaggerOptions = 1
-	NLTaggerOmitPunctuation  NLTaggerOptions = 2
-	NLTaggerOmitWhitespace   NLTaggerOptions = 4
-	NLTaggerOmitOther        NLTaggerOptions = 8
-	NLTaggerJoinNames        NLTaggerOptions = 16
-	NLTaggerJoinContractions NLTaggerOptions = 32
+	TaggerOmitWords        TaggerOptions = 1
+	TaggerOmitPunctuation  TaggerOptions = 2
+	TaggerOmitWhitespace   TaggerOptions = 4
+	TaggerOmitOther        TaggerOptions = 8
+	TaggerJoinNames        TaggerOptions = 16
+	TaggerJoinContractions TaggerOptions = 32
 )
 
-func (e NLTaggerOptions) String() string {
+// String returns the TaggerOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaggerOptions) String() string {
 	var parts []string
-	if e&NLTaggerOmitWords != 0 {
-		parts = append(parts, "NLTaggerOmitWords")
+	if e&TaggerOmitWords != 0 {
+		parts = append(parts, "TaggerOmitWords")
 	}
-	if e&NLTaggerOmitPunctuation != 0 {
-		parts = append(parts, "NLTaggerOmitPunctuation")
+	if e&TaggerOmitPunctuation != 0 {
+		parts = append(parts, "TaggerOmitPunctuation")
 	}
-	if e&NLTaggerOmitWhitespace != 0 {
-		parts = append(parts, "NLTaggerOmitWhitespace")
+	if e&TaggerOmitWhitespace != 0 {
+		parts = append(parts, "TaggerOmitWhitespace")
 	}
-	if e&NLTaggerOmitOther != 0 {
-		parts = append(parts, "NLTaggerOmitOther")
+	if e&TaggerOmitOther != 0 {
+		parts = append(parts, "TaggerOmitOther")
 	}
-	if e&NLTaggerJoinNames != 0 {
-		parts = append(parts, "NLTaggerJoinNames")
+	if e&TaggerJoinNames != 0 {
+		parts = append(parts, "TaggerJoinNames")
 	}
-	if e&NLTaggerJoinContractions != 0 {
-		parts = append(parts, "NLTaggerJoinContractions")
+	if e&TaggerJoinContractions != 0 {
+		parts = append(parts, "TaggerJoinContractions")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -132,30 +91,32 @@ func (e NLTaggerOptions) String() string {
 }
 
 // Constants representing linguistic units.
-type NLTokenUnit int64
+type TokenUnit int64
 
 const (
 	// An individual word.
-	NLTokenUnitWord NLTokenUnit = 0
+	TokenUnitWord TokenUnit = 0
 	// An individual sentence.
-	NLTokenUnitSentence NLTokenUnit = 1
+	TokenUnitSentence TokenUnit = 1
 	// An individual paragraph.
-	NLTokenUnitParagraph NLTokenUnit = 2
+	TokenUnitParagraph TokenUnit = 2
 	// The document in its entirety.
-	NLTokenUnitDocument NLTokenUnit = 3
+	TokenUnitDocument TokenUnit = 3
 )
 
-func (e NLTokenUnit) String() string {
+// String returns the TokenUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TokenUnit) String() string {
 	switch e {
-	case NLTokenUnitWord:
-		return "NLTokenUnitWord"
-	case NLTokenUnitSentence:
-		return "NLTokenUnitSentence"
-	case NLTokenUnitParagraph:
-		return "NLTokenUnitParagraph"
-	case NLTokenUnitDocument:
-		return "NLTokenUnitDocument"
+	case TokenUnitWord:
+		return "TokenUnitWord"
+	case TokenUnitSentence:
+		return "TokenUnitSentence"
+	case TokenUnitParagraph:
+		return "TokenUnitParagraph"
+	case TokenUnitDocument:
+		return "TokenUnitDocument"
 	default:
-		return fmt.Sprintf("NLTokenUnit(%d)", int64(e))
+		return fmt.Sprintf("TokenUnit(%d)", int64(e))
 	}
 }

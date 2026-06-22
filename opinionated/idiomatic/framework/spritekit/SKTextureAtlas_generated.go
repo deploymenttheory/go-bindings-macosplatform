@@ -6,59 +6,88 @@ package spritekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of textures optimized for storage and drawing performance.
+// TextureAtlas is an idiomatic wrapper over the Objective-C class SKTextureAtlas.
 //
-// TextureAtlas wraps [raw.SKTextureAtlas] with a fluent Go API.
+// A collection of textures optimized for storage and drawing performance.
 type TextureAtlas struct {
-	inner *raw.SKTextureAtlas
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKTextureAtlas].
-func (x *TextureAtlas) Unwrap() *raw.SKTextureAtlas { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextureAtlas) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureAtlasFromID adopts an existing object pointer as a TextureAtlas (nil for 0).
+// TextureAtlasFromID adopts an existing Objective-C object as a TextureAtlas
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureAtlasFromID(id objc.ID) *TextureAtlas {
 	if id == 0 {
 		return nil
 	}
-	return &TextureAtlas{inner: raw.SKTextureAtlasFromID(id)}
+	x := &TextureAtlas{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextureAtlas creates a new [TextureAtlas].
-func NewTextureAtlas() *TextureAtlas {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTextureAtlas")), objc.RegisterName("new"))
-	return &TextureAtlas{inner: raw.SKTextureAtlasFromID(_id)}
-}
-
-// Creates a texture from data stored in the texture atlas.
-//
-// TextureNamed calls the underlying TextureNamed.
-func (x *TextureAtlas) TextureNamed(name string) *Texture {
-	_r := x.inner.TextureNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
+// textureAtlasAdopt wraps an Objective-C object that this code just created as a
+// TextureAtlas (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureAtlasAdopt(id objc.ID) *TextureAtlas {
+	if id == 0 {
 		return nil
 	}
-	return &Texture{inner: _r}
+	x := &TextureAtlas{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Loads an atlas object’s textures into memory, calling a completion handler after the task completes.
+// Description returns the object's -description text.
+func (x *TextureAtlas) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextureAtlas) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextureAtlas) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureAtlas) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextureAtlas creates a new TextureAtlas.
+func NewTextureAtlas() *TextureAtlas {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKTextureAtlas")), objc.RegisterName("new"))
+	return textureAtlasAdopt(_id)
+}
+
+// TextureNamed creates a texture from data stored in the texture atlas.
+func (x *TextureAtlas) TextureNamed(name string) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureNamed:"), purego.NSString(name))
+	return TextureFromID(_r)
+}
+
+// Preload loads an atlas object’s textures into memory, calling a completion handler after the task completes.
 //
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *TextureAtlas) Preload(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PreloadWithCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -67,20 +96,17 @@ func (x *TextureAtlas) Preload(ctx context.Context) error {
 	}
 }
 
+// TextureNames wraps the corresponding Objective-C method.
+//
 // TextureNames returns the collection as a Go slice.
 func (x *TextureAtlas) TextureNames() []string {
-	arr := x.inner.TextureNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // TextureAtlasable is the interface implemented by [TextureAtlas], for mocking and DI.
 type TextureAtlasable interface {
-	Unwrap() *raw.SKTextureAtlas
+	obj.Object
 	TextureNamed(name string) *Texture
 	Preload(ctx context.Context) error
 	TextureNames() []string

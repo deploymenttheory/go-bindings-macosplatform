@@ -6,64 +6,85 @@ package storekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A product promotion controller for customizing the order and visibility of In-App Purchases per device.
+// ProductStorePromotionController is an idiomatic wrapper over the Objective-C class SKProductStorePromotionController.
 //
-// ProductStorePromotionController wraps [raw.SKProductStorePromotionController] with a fluent Go API.
+// A product promotion controller for customizing the order and visibility of In-App Purchases per device.
 type ProductStorePromotionController struct {
-	inner *raw.SKProductStorePromotionController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKProductStorePromotionController].
-func (x *ProductStorePromotionController) Unwrap() *raw.SKProductStorePromotionController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProductStorePromotionController) ID() objc.ID { return x.inner.Ptr() }
-
-// ProductStorePromotionControllerFromID adopts an existing object pointer as a ProductStorePromotionController (nil for 0).
+// ProductStorePromotionControllerFromID adopts an existing Objective-C object as a ProductStorePromotionController
+// (nil for 0), retaining it and registering a release finalizer.
 func ProductStorePromotionControllerFromID(id objc.ID) *ProductStorePromotionController {
 	if id == 0 {
 		return nil
 	}
-	return &ProductStorePromotionController{inner: raw.SKProductStorePromotionControllerFromID(id)}
+	x := &ProductStorePromotionController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProductStorePromotionController creates a new [ProductStorePromotionController].
+// productStorePromotionControllerAdopt wraps an Objective-C object that this code just created as a
+// ProductStorePromotionController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func productStorePromotionControllerAdopt(id objc.ID) *ProductStorePromotionController {
+	if id == 0 {
+		return nil
+	}
+	x := &ProductStorePromotionController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProductStorePromotionController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProductStorePromotionController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProductStorePromotionController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductStorePromotionController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewProductStorePromotionController creates a new ProductStorePromotionController.
 func NewProductStorePromotionController() *ProductStorePromotionController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductStorePromotionController")), objc.RegisterName("new"))
-	return &ProductStorePromotionController{inner: raw.SKProductStorePromotionControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKProductStorePromotionController")), objc.RegisterName("new"))
+	return productStorePromotionControllerAdopt(_id)
 }
 
-// Reads the visibility setting of a promoted product in the App Store for this device.
-//
-// FetchStorePromotionVisibilityForProductCompletionHandler calls the underlying FetchStorePromotionVisibilityForProductCompletionHandler.
-func (x *ProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(SKProductStorePromotionVisibility, unsafe.Pointer)) {
-	x.inner.FetchStorePromotionVisibilityForProductCompletionHandler(product, func(_a0 raw.SKProductStorePromotionVisibility, _a1 unsafe.Pointer) {
-		completionHandler(SKProductStorePromotionVisibility(_a0), _a1)
-	})
-}
-
-// Updates the visibility of the product on the App Store, per device.
+// UpdateStorePromotionVisibilityForProduct updates the visibility of the product on the App Store, per device.
 //
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility SKProductStorePromotionVisibility, product *raw.SKProduct) error {
+func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error {
 	_ch := make(chan error, 1)
-	x.inner.UpdateStorePromotionVisibilityForProductCompletionHandler(raw.SKProductStorePromotionVisibility(promotionVisibility), product, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateStorePromotionVisibility:forProduct:completionHandler:"), promotionVisibility, objref.IDOf(product), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -72,44 +93,42 @@ func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProdu
 	}
 }
 
-// Reads the product order override that determines the promoted product order on this device.
+// FetchStorePromotionOrder reads the product order override that determines the promoted product order on this device.
 //
 // FetchStorePromotionOrder blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (*foundation.NSArray[*raw.SKProduct], error) {
+func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.SKProduct]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchStorePromotionOrderWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.SKProduct], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchStorePromotionOrderWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.SKProduct]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Overrides the promoted product order on this device.
+// UpdateStorePromotionOrder overrides the promoted product order on this device.
 //
 // UpdateStorePromotionOrder blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder *foundation.NSArray[*raw.SKProduct]) error {
+func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error {
 	_ch := make(chan error, 1)
-	x.inner.UpdateStorePromotionOrderCompletionHandler(promotionOrder, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateStorePromotionOrder:completionHandler:"), purego.SliceToNSArray(promotionOrder, func(_v *Product) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -120,11 +139,10 @@ func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.
 
 // ProductStorePromotionControllerable is the interface implemented by [ProductStorePromotionController], for mocking and DI.
 type ProductStorePromotionControllerable interface {
-	Unwrap() *raw.SKProductStorePromotionController
-	FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(SKProductStorePromotionVisibility, unsafe.Pointer))
-	UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility SKProductStorePromotionVisibility, product *raw.SKProduct) error
-	FetchStorePromotionOrder(ctx context.Context) (*foundation.NSArray[*raw.SKProduct], error)
-	UpdateStorePromotionOrder(ctx context.Context, promotionOrder *foundation.NSArray[*raw.SKProduct]) error
+	obj.Object
+	UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error
+	FetchStorePromotionOrder(ctx context.Context) (obj.Object, error)
+	UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error
 }
 
 var _ ProductStorePromotionControllerable = (*ProductStorePromotionController)(nil)

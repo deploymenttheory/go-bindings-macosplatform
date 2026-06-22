@@ -5,66 +5,95 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @brief Contain information about an email address. This can include both valid and invalid email addresses.
+// EmailAddress is an idiomatic wrapper over the Objective-C class MEEmailAddress.
 //
-// EmailAddress wraps [raw.MEEmailAddress] with a fluent Go API.
+// Contain information about an email address. This can include both valid and invalid email addresses.
 type EmailAddress struct {
-	inner *raw.MEEmailAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEEmailAddress].
-func (x *EmailAddress) Unwrap() *raw.MEEmailAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EmailAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// EmailAddressFromID adopts an existing object pointer as a EmailAddress (nil for 0).
+// EmailAddressFromID adopts an existing Objective-C object as a EmailAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func EmailAddressFromID(id objc.ID) *EmailAddress {
 	if id == 0 {
 		return nil
 	}
-	return &EmailAddress{inner: raw.MEEmailAddressFromID(id)}
+	x := &EmailAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEmailAddressWithRawString creates a new [EmailAddress].
+// emailAddressAdopt wraps an Objective-C object that this code just created as a
+// EmailAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func emailAddressAdopt(id objc.ID) *EmailAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &EmailAddress{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EmailAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EmailAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EmailAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EmailAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEmailAddressWithRawString creates a new EmailAddress.
 func NewEmailAddressWithRawString(rawString string) *EmailAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEEmailAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawString:"), foundation.NSStringStringWithUTF8String(rawString).Ptr())
-	return &EmailAddress{inner: raw.MEEmailAddressFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEmailAddress")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawString:"), purego.NSString(rawString))
+	return emailAddressAdopt(_id)
 }
 
-// @brief The raw string for the email address.
-//
-// RawString calls the underlying RawString.
+// RawString the raw string for the email address.
 func (x *EmailAddress) RawString() string {
-	_r := x.inner.RawString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief The simple address string portion of the raw string if it is valid. For example, the  @c addressString of "John Appleseed <j.appleseed@example.com>" will be "j.appleseed@example.com".
-//
-// AddressString calls the underlying AddressString.
+// AddressString the simple address string portion of the raw string if it is valid. For example, the
 func (x *EmailAddress) AddressString() string {
-	_r := x.inner.AddressString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // EmailAddressable is the interface implemented by [EmailAddress], for mocking and DI.
 type EmailAddressable interface {
-	Unwrap() *raw.MEEmailAddress
+	obj.Object
 	RawString() string
 	AddressString() string
 }

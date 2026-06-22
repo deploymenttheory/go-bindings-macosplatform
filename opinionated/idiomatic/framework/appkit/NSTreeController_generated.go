@@ -5,542 +5,440 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A bindings-compatible controller that manages a tree of objects.
+// TreeController is an idiomatic wrapper over the Objective-C class NSTreeController.
 //
-// TreeController wraps [raw.NSTreeController] with a fluent Go API.
+// It embeds [ObjectController], promoting that type's methods.
+//
+// A bindings-compatible controller that manages a tree of objects.
 type TreeController struct {
-	inner *raw.NSTreeController
+	ObjectController
 }
 
-// Unwrap returns the underlying [raw.NSTreeController].
-func (x *TreeController) Unwrap() *raw.NSTreeController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TreeController) ID() objc.ID { return x.inner.Ptr() }
-
-// TreeControllerFromID adopts an existing object pointer as a TreeController (nil for 0).
+// TreeControllerFromID adopts an existing Objective-C object as a TreeController
+// (nil for 0), retaining it and registering a release finalizer.
 func TreeControllerFromID(id objc.ID) *TreeController {
 	if id == 0 {
 		return nil
 	}
-	return &TreeController{inner: raw.NSTreeControllerFromID(id)}
+	x := &TreeController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTreeController creates a new [TreeController].
+// treeControllerAdopt wraps an Objective-C object that this code just created as a
+// TreeController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func treeControllerAdopt(id objc.ID) *TreeController {
+	if id == 0 {
+		return nil
+	}
+	x := &TreeController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTreeController creates a new TreeController.
 func NewTreeController() *TreeController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTreeController")), objc.RegisterName("new"))
-	return &TreeController{inner: raw.NSTreeControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTreeController")), objc.RegisterName("new"))
+	return treeControllerAdopt(_id)
 }
 
-// The key path used to find the children in the tree controller’s objects.
-//
-// WithChildrenKeyPath sets the childrenKeyPath property and returns the receiver for chaining.
+// WithChildrenKeyPath the key path used to find the children in the tree controller’s objects.
 func (x *TreeController) WithChildrenKeyPath(childrenKeyPath string) *TreeController {
-	x.inner.SetChildrenKeyPath(foundation.NSStringStringWithUTF8String(childrenKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildrenKeyPath:"), purego.NSString(childrenKeyPath))
 	return x
 }
 
-// The key path used to find the number of children for a node.
-//
-// WithCountKeyPath sets the countKeyPath property and returns the receiver for chaining.
+// WithCountKeyPath the key path used to find the number of children for a node.
 func (x *TreeController) WithCountKeyPath(countKeyPath string) *TreeController {
-	x.inner.SetCountKeyPath(foundation.NSStringStringWithUTF8String(countKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountKeyPath:"), purego.NSString(countKeyPath))
 	return x
 }
 
-// The key path used by the tree controller to determine if a node is a leaf key.
-//
-// WithLeafKeyPath sets the leafKeyPath property and returns the receiver for chaining.
+// WithLeafKeyPath the key path used by the tree controller to determine if a node is a leaf key.
 func (x *TreeController) WithLeafKeyPath(leafKeyPath string) *TreeController {
-	x.inner.SetLeafKeyPath(foundation.NSStringStringWithUTF8String(leafKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeafKeyPath:"), purego.NSString(leafKeyPath))
 	return x
 }
 
-// An array containing the sort descriptors used to arrange the tree controller’s content.
-//
-// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
-func (x *TreeController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TreeController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSortDescriptors(_arr)
+// WithSortDescriptors an array containing the sort descriptors used to arrange the tree controller’s content.
+func (x *TreeController) WithSortDescriptors(items ...obj.Object) *TreeController {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the tree controller requires the content array to attempt to maintain a selection at all times, avoiding an empty selection.
-//
-// WithAvoidsEmptySelection sets the avoidsEmptySelection property and returns the receiver for chaining.
+// WithAvoidsEmptySelection a Boolean value that indicates whether the tree controller requires the content array to attempt to maintain a selection at all times, avoiding an empty selection.
 func (x *TreeController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *TreeController {
-	x.inner.SetAvoidsEmptySelection(avoidsEmptySelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
 	return x
 }
 
-// A Boolean value that indicates whether the tree controller will attempt to preserve the current selection when the content changes.
-//
-// WithPreservesSelection sets the preservesSelection property and returns the receiver for chaining.
+// WithPreservesSelection a Boolean value that indicates whether the tree controller will attempt to preserve the current selection when the content changes.
 func (x *TreeController) WithPreservesSelection(preservesSelection bool) *TreeController {
-	x.inner.SetPreservesSelection(preservesSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
 	return x
 }
 
-// A Boolean value that indicates whether the tree controller automatically selects objects as they are inserted.
-//
-// WithSelectsInsertedObjects sets the selectsInsertedObjects property and returns the receiver for chaining.
+// WithSelectsInsertedObjects a Boolean value that indicates whether the tree controller automatically selects objects as they are inserted.
 func (x *TreeController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *TreeController {
-	x.inner.SetSelectsInsertedObjects(selectsInsertedObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
 	return x
 }
 
-// A Boolean value that indicates whether the tree controller always returns the multiple values marker when multiple objects are selected, even if the selected items have the same value.
-//
-// WithAlwaysUsesMultipleValuesMarker sets the alwaysUsesMultipleValuesMarker property and returns the receiver for chaining.
+// WithAlwaysUsesMultipleValuesMarker a Boolean value that indicates whether the tree controller always returns the multiple values marker when multiple objects are selected, even if the selected items have the same value.
 func (x *TreeController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *TreeController {
-	x.inner.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
 	return x
 }
 
-// An array containing the index paths of the currently selected objects.
-//
-// WithSelectionIndexPaths sets the collection, converting the Go slice to an NSArray.
-func (x *TreeController) WithSelectionIndexPaths(items ...*foundation.NSIndexPath) *TreeController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSelectionIndexPaths(foundation.NSArrayFromID[*foundation.NSIndexPath](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSIndexPath](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSelectionIndexPaths(_arr)
+// WithSelectionIndexPaths an array containing the index paths of the currently selected objects.
+func (x *TreeController) WithSelectionIndexPaths(items ...obj.Object) *TreeController {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexPaths:"), _arr)
 	return x
 }
 
-// The index path of the first selected object.
-//
-// WithSelectionIndexPath sets the selectionIndexPath property and returns the receiver for chaining.
-func (x *TreeController) WithSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath) *TreeController {
-	x.inner.SetSelectionIndexPath(selectionIndexPath)
+// WithSelectionIndexPath the index path of the first selected object.
+func (x *TreeController) WithSelectionIndexPath(selectionIndexPath obj.Object) *TreeController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(selectionIndexPath))
 	return x
 }
 
-// The receiver’s content object.
-//
-// WithContent sets the content property and returns the receiver for chaining.
-func (x *TreeController) WithContent(content objc.ID) *TreeController {
-	x.inner.NSObjectController.SetContent(content)
+// WithContent the receiver’s content object.
+func (x *TreeController) WithContent(content obj.Object) *TreeController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return x
 }
 
-// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
-//
-// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+// WithAutomaticallyPreparesContent a Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
 func (x *TreeController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *TreeController {
-	x.inner.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
 	return x
 }
 
-// The object class to use when creating new objects.
-//
-// WithObjectClass sets the objectClass property and returns the receiver for chaining.
-func (x *TreeController) WithObjectClass(objectClass objc.Class) *TreeController {
-	x.inner.NSObjectController.SetObjectClass(objectClass)
-	return x
-}
-
-// A Boolean that indicates whether the receiver allows adding and removing objects.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean that indicates whether the receiver allows adding and removing objects.
 func (x *TreeController) WithEditable(editable bool) *TreeController {
-	x.inner.NSObjectController.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// The receiver’s managed object context.
-//
-// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
-func (x *TreeController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *TreeController {
-	x.inner.NSObjectController.SetManagedObjectContext(managedObjectContext)
+// WithManagedObjectContext the receiver’s managed object context.
+func (x *TreeController) WithManagedObjectContext(managedObjectContext obj.Object) *TreeController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return x
 }
 
-// The entity name used by the receiver to create new objects.
-//
-// WithEntityName sets the entityName property and returns the receiver for chaining.
+// WithEntityName the entity name used by the receiver to create new objects.
 func (x *TreeController) WithEntityName(entityName string) *TreeController {
-	x.inner.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
 	return x
 }
 
-// The receiver’s fetch predicate.
-//
-// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
-func (x *TreeController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *TreeController {
-	x.inner.NSObjectController.SetFetchPredicate(fetchPredicate)
+// WithFetchPredicate the receiver’s fetch predicate.
+func (x *TreeController) WithFetchPredicate(fetchPredicate obj.Object) *TreeController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return x
 }
 
-// A Boolean that indicates whether the receiver uses lazy fetching.
-//
-// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+// WithUsesLazyFetching a Boolean that indicates whether the receiver uses lazy fetching.
 func (x *TreeController) WithUsesLazyFetching(usesLazyFetching bool) *TreeController {
-	x.inner.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
 	return x
 }
 
-// Use this method to trigger reordering of the tree controller’s content.
-//
-// RearrangeObjects calls the underlying RearrangeObjects.
+// RearrangeObjects use this method to trigger reordering of the tree controller’s content.
 func (x *TreeController) RearrangeObjects() {
-	x.inner.RearrangeObjects()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rearrangeObjects"))
 }
 
-// Adds a child object to the currently selected item.
-//
-// AddChild calls the underlying AddChild.
-func (x *TreeController) AddChild(sender objc.ID) {
-	x.inner.AddChild(sender)
+// AddChild adds a child object to the currently selected item.
+func (x *TreeController) AddChild(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(sender))
 }
 
-// Creates a new object of the class specified by objectClass and inserts it into the tree controller’s content.
-//
-// Insert calls the underlying Insert.
-func (x *TreeController) Insert(sender objc.ID) {
-	x.inner.Insert(sender)
+// Insert creates a new object of the class specified by objectClass and inserts it into the tree controller’s content.
+func (x *TreeController) Insert(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insert:"), objref.IDOf(sender))
 }
 
-// Creates a new object of the class specified by objectClass and inserts it into the tree controller’s content as a child of the current selection.
-//
-// InsertChild calls the underlying InsertChild.
-func (x *TreeController) InsertChild(sender objc.ID) {
-	x.inner.InsertChild(sender)
+// InsertChild creates a new object of the class specified by objectClass and inserts it into the tree controller’s content as a child of the current selection.
+func (x *TreeController) InsertChild(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:"), objref.IDOf(sender))
 }
 
-// Inserts object into the tree controller’s arranged objects array at the location specified by indexPath, and adds it to the tree controller’s content.
-//
-// InsertObjectAtArrangedObjectIndexPath calls the underlying InsertObjectAtArrangedObjectIndexPath.
-func (x *TreeController) InsertObjectAtArrangedObjectIndexPath(object objc.ID, indexPath *foundation.NSIndexPath) {
-	x.inner.InsertObjectAtArrangedObjectIndexPath(object, indexPath)
+// InsertObjectAtArrangedObjectIndexPath inserts object into the tree controller’s arranged objects array at the location specified by indexPath, and adds it to the tree controller’s content.
+func (x *TreeController) InsertObjectAtArrangedObjectIndexPath(object obj.Object, indexPath obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:atArrangedObjectIndexPath:"), objref.IDOf(object), objref.IDOf(indexPath))
 }
 
-// Inserts objects into the tree controller’s arranged objects array at the locations specified in indexPaths, and adds them to the tree controller’s content.
-//
-// InsertObjectsAtArrangedObjectIndexPaths calls the underlying InsertObjectsAtArrangedObjectIndexPaths.
-func (x *TreeController) InsertObjectsAtArrangedObjectIndexPaths(objects *foundation.NSArray[objc.ID], indexPaths *foundation.NSArray[*foundation.NSIndexPath]) {
-	x.inner.InsertObjectsAtArrangedObjectIndexPaths(objects, indexPaths)
+// InsertObjectsAtArrangedObjectIndexPaths inserts objects into the tree controller’s arranged objects array at the locations specified in indexPaths, and adds them to the tree controller’s content.
+func (x *TreeController) InsertObjectsAtArrangedObjectIndexPaths(objects obj.Object, indexPaths []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObjects:atArrangedObjectIndexPaths:"), objref.IDOf(objects), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes the object at the specified indexPath in the tree controller’s arranged objects from the tree controller’s content.
-//
-// RemoveObjectAtArrangedObjectIndexPath calls the underlying RemoveObjectAtArrangedObjectIndexPath.
-func (x *TreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath *foundation.NSIndexPath) {
-	x.inner.RemoveObjectAtArrangedObjectIndexPath(indexPath)
+// RemoveObjectAtArrangedObjectIndexPath removes the object at the specified indexPath in the tree controller’s arranged objects from the tree controller’s content.
+func (x *TreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectAtArrangedObjectIndexPath:"), objref.IDOf(indexPath))
 }
 
-// Removes the objects at the specified indexPaths in the tree controller’s arranged objects from the tree controller’s content.
-//
-// RemoveObjectsAtArrangedObjectIndexPaths calls the underlying RemoveObjectsAtArrangedObjectIndexPaths.
-func (x *TreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) {
-	x.inner.RemoveObjectsAtArrangedObjectIndexPaths(indexPaths)
+// RemoveObjectsAtArrangedObjectIndexPaths removes the objects at the specified indexPaths in the tree controller’s arranged objects from the tree controller’s content.
+func (x *TreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsAtArrangedObjectIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Sets the tree controller’s current selection to the specified index paths.
-//
-// SetSelectionIndexPaths calls the underlying SetSelectionIndexPaths.
-func (x *TreeController) SetSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool {
-	return x.inner.SetSelectionIndexPaths(indexPaths)
+// SetSelectionIndexPaths sets the tree controller’s current selection to the specified index paths.
+func (x *TreeController) SetSelectionIndexPaths(indexPaths []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Sets the tree controller’s current selection.
-//
-// SetSelectionIndexPath calls the underlying SetSelectionIndexPath.
-func (x *TreeController) SetSelectionIndexPath(indexPath *foundation.NSIndexPath) bool {
-	return x.inner.SetSelectionIndexPath(indexPath)
+// SetSelectionIndexPath sets the tree controller’s current selection.
+func (x *TreeController) SetSelectionIndexPath(indexPath obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(indexPath))
+	return _r
 }
 
-// Adds the objects at the specified indexPaths in the tree controller’s content to the current selection.
-//
-// AddSelectionIndexPaths calls the underlying AddSelectionIndexPaths.
-func (x *TreeController) AddSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool {
-	return x.inner.AddSelectionIndexPaths(indexPaths)
+// AddSelectionIndexPaths adds the objects at the specified indexPaths in the tree controller’s content to the current selection.
+func (x *TreeController) AddSelectionIndexPaths(indexPaths []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Removes the objects at the specified index paths from the tree controller’s current selection.
-//
-// RemoveSelectionIndexPaths calls the underlying RemoveSelectionIndexPaths.
-func (x *TreeController) RemoveSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool {
-	return x.inner.RemoveSelectionIndexPaths(indexPaths)
+// RemoveSelectionIndexPaths removes the objects at the specified index paths from the tree controller’s current selection.
+func (x *TreeController) RemoveSelectionIndexPaths(indexPaths []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Moves the specified tree node to the new index path.
-//
-// MoveNodeToIndexPath calls the underlying MoveNodeToIndexPath.
-func (x *TreeController) MoveNodeToIndexPath(node *raw.NSTreeNode, indexPath *foundation.NSIndexPath) {
-	x.inner.MoveNodeToIndexPath(node, indexPath)
+// MoveNodeToIndexPath moves the specified tree node to the new index path.
+func (x *TreeController) MoveNodeToIndexPath(node *TreeNode, indexPath obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveNode:toIndexPath:"), objref.IDOf(node), objref.IDOf(indexPath))
 }
 
-// Moves the specified tree nodes to the new index path.
-//
-// MoveNodesToIndexPath calls the underlying MoveNodesToIndexPath.
-func (x *TreeController) MoveNodesToIndexPath(nodes *foundation.NSArray[*raw.NSTreeNode], startingIndexPath *foundation.NSIndexPath) {
-	x.inner.MoveNodesToIndexPath(nodes, startingIndexPath)
+// MoveNodesToIndexPath moves the specified tree nodes to the new index path.
+func (x *TreeController) MoveNodesToIndexPath(nodes []*TreeNode, startingIndexPath obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveNodes:toIndexPath:"), purego.SliceToNSArray(nodes, func(_v *TreeNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startingIndexPath))
 }
 
-// Returns the key path used to find the children in the specified tree node.
-//
-// ChildrenKeyPathForNode calls the underlying ChildrenKeyPathForNode.
-func (x *TreeController) ChildrenKeyPathForNode(node *raw.NSTreeNode) string {
-	_r := x.inner.ChildrenKeyPathForNode(node)
-	if _r == nil {
+// ChildrenKeyPathForNode returns the key path used to find the children in the specified tree node.
+func (x *TreeController) ChildrenKeyPathForNode(node *TreeNode) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childrenKeyPathForNode:"), objref.IDOf(node))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the key path that provides the number of children for a specified node.
-//
-// CountKeyPathForNode calls the underlying CountKeyPathForNode.
-func (x *TreeController) CountKeyPathForNode(node *raw.NSTreeNode) string {
-	_r := x.inner.CountKeyPathForNode(node)
-	if _r == nil {
+// CountKeyPathForNode returns the key path that provides the number of children for a specified node.
+func (x *TreeController) CountKeyPathForNode(node *TreeNode) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countKeyPathForNode:"), objref.IDOf(node))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the key path that specifies whether the node is a leaf node.
-//
-// LeafKeyPathForNode calls the underlying LeafKeyPathForNode.
-func (x *TreeController) LeafKeyPathForNode(node *raw.NSTreeNode) string {
-	_r := x.inner.LeafKeyPathForNode(node)
-	if _r == nil {
+// LeafKeyPathForNode returns the key path that specifies whether the node is a leaf node.
+func (x *TreeController) LeafKeyPathForNode(node *TreeNode) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leafKeyPathForNode:"), objref.IDOf(node))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ArrangedObjects calls the underlying ArrangedObjects.
+// ArrangedObjects wraps the corresponding Objective-C method.
 func (x *TreeController) ArrangedObjects() *TreeNode {
-	_r := x.inner.ArrangedObjects()
-	if _r == nil {
-		return nil
-	}
-	return &TreeNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedObjects"))
+	return TreeNodeFromID(_r)
 }
 
-// ChildrenKeyPath calls the underlying ChildrenKeyPath.
+// ChildrenKeyPath wraps the corresponding Objective-C method.
 func (x *TreeController) ChildrenKeyPath() string {
-	_r := x.inner.ChildrenKeyPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childrenKeyPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetChildrenKeyPath calls the underlying SetChildrenKeyPath.
+// SetChildrenKeyPath wraps the corresponding Objective-C method.
 func (x *TreeController) SetChildrenKeyPath(childrenKeyPath string) {
-	x.inner.SetChildrenKeyPath(foundation.NSStringStringWithUTF8String(childrenKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildrenKeyPath:"), purego.NSString(childrenKeyPath))
 }
 
-// CountKeyPath calls the underlying CountKeyPath.
+// CountKeyPath wraps the corresponding Objective-C method.
 func (x *TreeController) CountKeyPath() string {
-	_r := x.inner.CountKeyPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countKeyPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCountKeyPath calls the underlying SetCountKeyPath.
+// SetCountKeyPath wraps the corresponding Objective-C method.
 func (x *TreeController) SetCountKeyPath(countKeyPath string) {
-	x.inner.SetCountKeyPath(foundation.NSStringStringWithUTF8String(countKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountKeyPath:"), purego.NSString(countKeyPath))
 }
 
-// LeafKeyPath calls the underlying LeafKeyPath.
+// LeafKeyPath wraps the corresponding Objective-C method.
 func (x *TreeController) LeafKeyPath() string {
-	_r := x.inner.LeafKeyPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leafKeyPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLeafKeyPath calls the underlying SetLeafKeyPath.
+// SetLeafKeyPath wraps the corresponding Objective-C method.
 func (x *TreeController) SetLeafKeyPath(leafKeyPath string) {
-	x.inner.SetLeafKeyPath(foundation.NSStringStringWithUTF8String(leafKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeafKeyPath:"), purego.NSString(leafKeyPath))
 }
 
+// SortDescriptors wraps the corresponding Objective-C method.
+//
 // SortDescriptors returns the collection as a Go slice.
-func (x *TreeController) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+func (x *TreeController) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSortDescriptors calls the underlying SetSortDescriptors.
-func (x *TreeController) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	x.inner.SetSortDescriptors(sortDescriptors)
+// SetSortDescriptors wraps the corresponding Objective-C method.
+func (x *TreeController) SetSortDescriptors(sortDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// CanInsert calls the underlying CanInsert.
+// CanInsert wraps the corresponding Objective-C method.
 func (x *TreeController) CanInsert() bool {
-	return x.inner.CanInsert()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canInsert"))
+	return _r
 }
 
-// CanInsertChild calls the underlying CanInsertChild.
+// CanInsertChild wraps the corresponding Objective-C method.
 func (x *TreeController) CanInsertChild() bool {
-	return x.inner.CanInsertChild()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canInsertChild"))
+	return _r
 }
 
-// CanAddChild calls the underlying CanAddChild.
+// CanAddChild wraps the corresponding Objective-C method.
 func (x *TreeController) CanAddChild() bool {
-	return x.inner.CanAddChild()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddChild"))
+	return _r
 }
 
-// AvoidsEmptySelection calls the underlying AvoidsEmptySelection.
+// AvoidsEmptySelection wraps the corresponding Objective-C method.
 func (x *TreeController) AvoidsEmptySelection() bool {
-	return x.inner.AvoidsEmptySelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("avoidsEmptySelection"))
+	return _r
 }
 
-// SetAvoidsEmptySelection calls the underlying SetAvoidsEmptySelection.
+// SetAvoidsEmptySelection wraps the corresponding Objective-C method.
 func (x *TreeController) SetAvoidsEmptySelection(avoidsEmptySelection bool) {
-	x.inner.SetAvoidsEmptySelection(avoidsEmptySelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
 }
 
-// PreservesSelection calls the underlying PreservesSelection.
+// PreservesSelection wraps the corresponding Objective-C method.
 func (x *TreeController) PreservesSelection() bool {
-	return x.inner.PreservesSelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesSelection"))
+	return _r
 }
 
-// SetPreservesSelection calls the underlying SetPreservesSelection.
+// SetPreservesSelection wraps the corresponding Objective-C method.
 func (x *TreeController) SetPreservesSelection(preservesSelection bool) {
-	x.inner.SetPreservesSelection(preservesSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
 }
 
-// SelectsInsertedObjects calls the underlying SelectsInsertedObjects.
+// SelectsInsertedObjects wraps the corresponding Objective-C method.
 func (x *TreeController) SelectsInsertedObjects() bool {
-	return x.inner.SelectsInsertedObjects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectsInsertedObjects"))
+	return _r
 }
 
-// SetSelectsInsertedObjects calls the underlying SetSelectsInsertedObjects.
+// SetSelectsInsertedObjects wraps the corresponding Objective-C method.
 func (x *TreeController) SetSelectsInsertedObjects(selectsInsertedObjects bool) {
-	x.inner.SetSelectsInsertedObjects(selectsInsertedObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
 }
 
-// AlwaysUsesMultipleValuesMarker calls the underlying AlwaysUsesMultipleValuesMarker.
+// AlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
 func (x *TreeController) AlwaysUsesMultipleValuesMarker() bool {
-	return x.inner.AlwaysUsesMultipleValuesMarker()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alwaysUsesMultipleValuesMarker"))
+	return _r
 }
 
-// SetAlwaysUsesMultipleValuesMarker calls the underlying SetAlwaysUsesMultipleValuesMarker.
+// SetAlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
 func (x *TreeController) SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) {
-	x.inner.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
 }
 
+// SelectionIndexPaths wraps the corresponding Objective-C method.
+//
 // SelectionIndexPaths returns the collection as a Go slice.
-func (x *TreeController) SelectionIndexPaths() []*foundation.NSIndexPath {
-	arr := x.inner.SelectionIndexPaths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSIndexPath {
-		return foundation.NSIndexPathFromID(purego.Retain(_id))
-	})
+func (x *TreeController) SelectionIndexPaths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SelectionIndexPath calls the underlying SelectionIndexPath.
-func (x *TreeController) SelectionIndexPath() *foundation.NSIndexPath {
-	return x.inner.SelectionIndexPath()
+// SelectionIndexPath wraps the corresponding Objective-C method.
+func (x *TreeController) SelectionIndexPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexPath"))
+	return obj.Wrap(_r)
 }
 
+// SelectedNodes wraps the corresponding Objective-C method.
+//
 // SelectedNodes returns the collection as a Go slice.
 func (x *TreeController) SelectedNodes() []*TreeNode {
-	arr := x.inner.SelectedNodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TreeNode {
-		return &TreeNode{inner: raw.NSTreeNodeFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *TreeController) asObjectController() *raw.NSObjectController {
-	return &x.inner.NSObjectController
-}
-
-func (x *TreeController) asController() *raw.NSController {
-	return &x.inner.NSObjectController.NSController
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedNodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
 
 // TreeControllerable is the interface implemented by [TreeController], for mocking and DI.
 type TreeControllerable interface {
-	Unwrap() *raw.NSTreeController
+	obj.Object
 	WithChildrenKeyPath(childrenKeyPath string) *TreeController
 	WithCountKeyPath(countKeyPath string) *TreeController
 	WithLeafKeyPath(leafKeyPath string) *TreeController
-	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TreeController
+	WithSortDescriptors(items ...obj.Object) *TreeController
 	WithAvoidsEmptySelection(avoidsEmptySelection bool) *TreeController
 	WithPreservesSelection(preservesSelection bool) *TreeController
 	WithSelectsInsertedObjects(selectsInsertedObjects bool) *TreeController
 	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *TreeController
-	WithSelectionIndexPaths(items ...*foundation.NSIndexPath) *TreeController
-	WithSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath) *TreeController
-	WithContent(content objc.ID) *TreeController
+	WithSelectionIndexPaths(items ...obj.Object) *TreeController
+	WithSelectionIndexPath(selectionIndexPath obj.Object) *TreeController
+	WithContent(content obj.Object) *TreeController
 	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *TreeController
-	WithObjectClass(objectClass objc.Class) *TreeController
 	WithEditable(editable bool) *TreeController
-	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *TreeController
+	WithManagedObjectContext(managedObjectContext obj.Object) *TreeController
 	WithEntityName(entityName string) *TreeController
-	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *TreeController
+	WithFetchPredicate(fetchPredicate obj.Object) *TreeController
 	WithUsesLazyFetching(usesLazyFetching bool) *TreeController
 	RearrangeObjects()
-	AddChild(sender objc.ID)
-	Insert(sender objc.ID)
-	InsertChild(sender objc.ID)
-	InsertObjectAtArrangedObjectIndexPath(object objc.ID, indexPath *foundation.NSIndexPath)
-	InsertObjectsAtArrangedObjectIndexPaths(objects *foundation.NSArray[objc.ID], indexPaths *foundation.NSArray[*foundation.NSIndexPath])
-	RemoveObjectAtArrangedObjectIndexPath(indexPath *foundation.NSIndexPath)
-	RemoveObjectsAtArrangedObjectIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath])
-	SetSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool
-	SetSelectionIndexPath(indexPath *foundation.NSIndexPath) bool
-	AddSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool
-	RemoveSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool
-	MoveNodeToIndexPath(node *raw.NSTreeNode, indexPath *foundation.NSIndexPath)
-	MoveNodesToIndexPath(nodes *foundation.NSArray[*raw.NSTreeNode], startingIndexPath *foundation.NSIndexPath)
-	ChildrenKeyPathForNode(node *raw.NSTreeNode) string
-	CountKeyPathForNode(node *raw.NSTreeNode) string
-	LeafKeyPathForNode(node *raw.NSTreeNode) string
+	AddChild(sender obj.Object)
+	Insert(sender obj.Object)
+	InsertChild(sender obj.Object)
+	InsertObjectAtArrangedObjectIndexPath(object obj.Object, indexPath obj.Object)
+	InsertObjectsAtArrangedObjectIndexPaths(objects obj.Object, indexPaths []obj.Object)
+	RemoveObjectAtArrangedObjectIndexPath(indexPath obj.Object)
+	RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []obj.Object)
+	SetSelectionIndexPaths(indexPaths []obj.Object) bool
+	SetSelectionIndexPath(indexPath obj.Object) bool
+	AddSelectionIndexPaths(indexPaths []obj.Object) bool
+	RemoveSelectionIndexPaths(indexPaths []obj.Object) bool
+	MoveNodeToIndexPath(node *TreeNode, indexPath obj.Object)
+	MoveNodesToIndexPath(nodes []*TreeNode, startingIndexPath obj.Object)
+	ChildrenKeyPathForNode(node *TreeNode) string
+	CountKeyPathForNode(node *TreeNode) string
+	LeafKeyPathForNode(node *TreeNode) string
 	ArrangedObjects() *TreeNode
 	ChildrenKeyPath() string
 	SetChildrenKeyPath(childrenKeyPath string)
@@ -548,8 +446,8 @@ type TreeControllerable interface {
 	SetCountKeyPath(countKeyPath string)
 	LeafKeyPath() string
 	SetLeafKeyPath(leafKeyPath string)
-	SortDescriptors() []*foundation.NSSortDescriptor
-	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
+	SortDescriptors() []obj.Object
+	SetSortDescriptors(sortDescriptors []obj.Object)
 	CanInsert() bool
 	CanInsertChild() bool
 	CanAddChild() bool
@@ -561,9 +459,13 @@ type TreeControllerable interface {
 	SetSelectsInsertedObjects(selectsInsertedObjects bool)
 	AlwaysUsesMultipleValuesMarker() bool
 	SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool)
-	SelectionIndexPaths() []*foundation.NSIndexPath
-	SelectionIndexPath() *foundation.NSIndexPath
+	SelectionIndexPaths() []obj.Object
+	SelectionIndexPath() obj.Object
 	SelectedNodes() []*TreeNode
 }
 
 var _ TreeControllerable = (*TreeController)(nil)
+
+var _ ObjectControllerProvider = (*TreeController)(nil)
+
+var _ ControllerProvider = (*TreeController)(nil)

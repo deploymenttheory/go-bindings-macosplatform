@@ -5,222 +5,261 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROperationalCredentialsClusterFabricDescriptorStruct wraps [raw.MTROperationalCredentialsClusterFabricDescriptorStruct] with a fluent Go API.
+// MTROperationalCredentialsClusterFabricDescriptorStruct is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterFabricDescriptorStruct.
+//
+// MTROperationalCredentialsClusterFabricDescriptorStruct is an abstract base — you do not construct it directly. Construct one of [MTROperationalCredentialsClusterFabricDescriptor] and pass it where a MTROperationalCredentialsClusterFabricDescriptorStruct is accepted.
 type MTROperationalCredentialsClusterFabricDescriptorStruct struct {
-	inner *raw.MTROperationalCredentialsClusterFabricDescriptorStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalCredentialsClusterFabricDescriptorStruct].
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalCredentialsClusterFabricDescriptorStructFromID adopts an existing object pointer as a MTROperationalCredentialsClusterFabricDescriptorStruct (nil for 0).
+// MTROperationalCredentialsClusterFabricDescriptorStructFromID adopts an existing Objective-C object as a MTROperationalCredentialsClusterFabricDescriptorStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalCredentialsClusterFabricDescriptorStructFromID(id objc.ID) *MTROperationalCredentialsClusterFabricDescriptorStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalCredentialsClusterFabricDescriptorStruct{inner: raw.MTROperationalCredentialsClusterFabricDescriptorStructFromID(id)}
-}
-
-// NewMTROperationalCredentialsClusterFabricDescriptorStruct creates a new [MTROperationalCredentialsClusterFabricDescriptorStruct].
-func NewMTROperationalCredentialsClusterFabricDescriptorStruct() *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterFabricDescriptorStruct")), objc.RegisterName("new"))
-	return &MTROperationalCredentialsClusterFabricDescriptorStruct{inner: raw.MTROperationalCredentialsClusterFabricDescriptorStructFromID(_id)}
-}
-
-// WithRootPublicKey sets the rootPublicKey property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithRootPublicKey(rootPublicKey *foundation.NSData) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetRootPublicKey(rootPublicKey)
+	x := &MTROperationalCredentialsClusterFabricDescriptorStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithVendorID sets the vendorID property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithVendorID(vendorID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetVendorID(vendorID)
+// mTROperationalCredentialsClusterFabricDescriptorStructAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalCredentialsClusterFabricDescriptorStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalCredentialsClusterFabricDescriptorStructAdopt(id objc.ID) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROperationalCredentialsClusterFabricDescriptorStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithVendorId sets the vendorId property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithVendorId(vendorId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetVendorId(vendorId)
+// Description returns the object's -description text.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithRootPublicKey sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithRootPublicKey(rootPublicKey obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootPublicKey:"), objref.IDOf(rootPublicKey))
 	return x
 }
 
-// WithFabricID sets the fabricID property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricID(fabricID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetFabricID(fabricID)
+// WithVendorID sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithVendorID(vendorID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return x
 }
 
-// WithFabricId sets the fabricId property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricId(fabricId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetFabricId(fabricId)
+// WithVendorId sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithVendorId(vendorId obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
 	return x
 }
 
-// WithNodeID sets the nodeID property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithNodeID(nodeID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetNodeID(nodeID)
+// WithFabricID sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricID(fabricID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricID:"), objref.IDOf(fabricID))
 	return x
 }
 
-// WithNodeId sets the nodeId property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithNodeId(nodeId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetNodeId(nodeId)
+// WithFabricId sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricId(fabricId obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricId:"), objref.IDOf(fabricId))
 	return x
 }
 
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithNodeID sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithNodeID(nodeID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
+	return x
+}
+
+// WithNodeId sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithNodeId(nodeId obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeId:"), objref.IDOf(nodeId))
+	return x
+}
+
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithLabel(label string) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct {
-	x.inner.SetFabricIndex(fabricIndex)
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
-// RootPublicKey calls the underlying RootPublicKey.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) RootPublicKey() *foundation.NSData {
-	return x.inner.RootPublicKey()
+// RootPublicKey wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) RootPublicKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootPublicKey"))
+	return obj.Wrap(_r)
 }
 
-// SetRootPublicKey calls the underlying SetRootPublicKey.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetRootPublicKey(rootPublicKey *foundation.NSData) {
-	x.inner.SetRootPublicKey(rootPublicKey)
+// SetRootPublicKey wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetRootPublicKey(rootPublicKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootPublicKey:"), objref.IDOf(rootPublicKey))
 }
 
-// VendorID calls the underlying VendorID.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorID() *foundation.NSNumber {
-	return x.inner.VendorID()
+// VendorID wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return obj.Wrap(_r)
 }
 
-// SetVendorID calls the underlying SetVendorID.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorID(vendorID *foundation.NSNumber) {
-	x.inner.SetVendorID(vendorID)
+// SetVendorID wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorID(vendorID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 }
 
-// VendorId calls the underlying VendorId.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorId() *foundation.NSNumber {
-	return x.inner.VendorId()
+// VendorId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorId"))
+	return obj.Wrap(_r)
 }
 
-// SetVendorId calls the underlying SetVendorId.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorId(vendorId *foundation.NSNumber) {
-	x.inner.SetVendorId(vendorId)
+// SetVendorId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorId(vendorId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
 }
 
-// FabricID calls the underlying FabricID.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricID() *foundation.NSNumber {
-	return x.inner.FabricID()
+// FabricID wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricID calls the underlying SetFabricID.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricID(fabricID *foundation.NSNumber) {
-	x.inner.SetFabricID(fabricID)
+// SetFabricID wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricID(fabricID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricID:"), objref.IDOf(fabricID))
 }
 
-// FabricId calls the underlying FabricId.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricId() *foundation.NSNumber {
-	return x.inner.FabricId()
+// FabricId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricId"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricId calls the underlying SetFabricId.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricId(fabricId *foundation.NSNumber) {
-	x.inner.SetFabricId(fabricId)
+// SetFabricId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricId(fabricId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricId:"), objref.IDOf(fabricId))
 }
 
-// NodeID calls the underlying NodeID.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeID() *foundation.NSNumber {
-	return x.inner.NodeID()
+// NodeID wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+	return obj.Wrap(_r)
 }
 
-// SetNodeID calls the underlying SetNodeID.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeID(nodeID *foundation.NSNumber) {
-	x.inner.SetNodeID(nodeID)
+// SetNodeID wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeID(nodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 }
 
-// NodeId calls the underlying NodeId.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeId() *foundation.NSNumber {
-	return x.inner.NodeId()
+// NodeId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeId"))
+	return obj.Wrap(_r)
 }
 
-// SetNodeId calls the underlying SetNodeId.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeId(nodeId *foundation.NSNumber) {
-	x.inner.SetNodeId(nodeId)
+// SetNodeId wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeId(nodeId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeId:"), objref.IDOf(nodeId))
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+// FabricIndex wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
-}
-
-func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct {
-	return x.inner
+// SetFabricIndex wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // MTROperationalCredentialsClusterFabricDescriptorStructable is the interface implemented by [MTROperationalCredentialsClusterFabricDescriptorStruct], for mocking and DI.
 type MTROperationalCredentialsClusterFabricDescriptorStructable interface {
-	Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithRootPublicKey(rootPublicKey *foundation.NSData) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithVendorID(vendorID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithVendorId(vendorId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithFabricID(fabricID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithFabricId(fabricId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithNodeID(nodeID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithNodeId(nodeId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	obj.Object
+	WithRootPublicKey(rootPublicKey obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithVendorID(vendorID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithVendorId(vendorId obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithFabricID(fabricID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithFabricId(fabricId obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithNodeID(nodeID obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithNodeId(nodeId obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
 	WithLabel(label string) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
-	RootPublicKey() *foundation.NSData
-	SetRootPublicKey(rootPublicKey *foundation.NSData)
-	VendorID() *foundation.NSNumber
-	SetVendorID(vendorID *foundation.NSNumber)
-	VendorId() *foundation.NSNumber
-	SetVendorId(vendorId *foundation.NSNumber)
-	FabricID() *foundation.NSNumber
-	SetFabricID(fabricID *foundation.NSNumber)
-	FabricId() *foundation.NSNumber
-	SetFabricId(fabricId *foundation.NSNumber)
-	NodeID() *foundation.NSNumber
-	SetNodeID(nodeID *foundation.NSNumber)
-	NodeId() *foundation.NSNumber
-	SetNodeId(nodeId *foundation.NSNumber)
+	WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	RootPublicKey() obj.Object
+	SetRootPublicKey(rootPublicKey obj.Object)
+	VendorID() obj.Object
+	SetVendorID(vendorID obj.Object)
+	VendorId() obj.Object
+	SetVendorId(vendorId obj.Object)
+	FabricID() obj.Object
+	SetFabricID(fabricID obj.Object)
+	FabricId() obj.Object
+	SetFabricId(fabricId obj.Object)
+	NodeID() obj.Object
+	SetNodeID(nodeID obj.Object)
+	NodeId() obj.Object
+	SetNodeId(nodeId obj.Object)
 	Label() string
 	SetLabel(label string)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 }
 
 var _ MTROperationalCredentialsClusterFabricDescriptorStructable = (*MTROperationalCredentialsClusterFabricDescriptorStruct)(nil)
+
+// isMTROperationalCredentialsClusterFabricDescriptorStruct marks MTROperationalCredentialsClusterFabricDescriptorStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTROperationalCredentialsClusterFabricDescriptorStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) isMTROperationalCredentialsClusterFabricDescriptorStruct() {
+}
+
+var _ MTROperationalCredentialsClusterFabricDescriptorStructProvider = (*MTROperationalCredentialsClusterFabricDescriptorStruct)(nil)

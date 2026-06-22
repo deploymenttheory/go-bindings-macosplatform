@@ -5,57 +5,58 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A long-running query that monitors the HealthKit store and updates your app when the HealthKit store saves or deletes a matching sample.
+// ObserverQuery is an idiomatic wrapper over the Objective-C class HKObserverQuery.
 //
-// ObserverQuery wraps [raw.HKObserverQuery] with a fluent Go API.
+// It embeds [Query], promoting that type's methods.
+//
+// A long-running query that monitors the HealthKit store and updates your app when the HealthKit store saves or deletes a matching sample.
 type ObserverQuery struct {
-	inner *raw.HKObserverQuery
+	Query
 }
 
-// Unwrap returns the underlying [raw.HKObserverQuery].
-func (x *ObserverQuery) Unwrap() *raw.HKObserverQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObserverQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// ObserverQueryFromID adopts an existing object pointer as a ObserverQuery (nil for 0).
+// ObserverQueryFromID adopts an existing Objective-C object as a ObserverQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func ObserverQueryFromID(id objc.ID) *ObserverQuery {
 	if id == 0 {
 		return nil
 	}
-	return &ObserverQuery{inner: raw.HKObserverQueryFromID(id)}
+	x := &ObserverQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Instantiates and returns a query that monitors the HealthKit store and responds to changes.
-//
-// NewObserverQueryWithSampleTypePredicateUpdateHandler creates a new [ObserverQuery].
-func NewObserverQueryWithSampleTypePredicateUpdateHandler(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate, updateHandler func(*raw.HKObserverQuery, objc.Block, unsafe.Pointer)) *ObserverQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKObserverQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:updateHandler:"), sampleType.Ptr(), predicate.Ptr(), updateHandler)
-	return &ObserverQuery{inner: raw.HKObserverQueryFromID(_id)}
+// observerQueryAdopt wraps an Objective-C object that this code just created as a
+// ObserverQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func observerQueryAdopt(id objc.ID) *ObserverQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &ObserverQuery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a query that monitors the HealthKit store and responds to any changes matching any of the query descriptors you provided.
-//
-// NewObserverQueryWithQueryDescriptorsUpdateHandler creates a new [ObserverQuery].
-func NewObserverQueryWithQueryDescriptorsUpdateHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], updateHandler func(*raw.HKObserverQuery, *foundation.NSSet[*raw.HKSampleType], objc.Block, unsafe.Pointer)) *ObserverQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKObserverQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:updateHandler:"), queryDescriptors.Ptr(), updateHandler)
-	return &ObserverQuery{inner: raw.HKObserverQueryFromID(_id)}
+// NewObserverQuery creates a new ObserverQuery.
+func NewObserverQuery() *ObserverQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKObserverQuery")), objc.RegisterName("new"))
+	return observerQueryAdopt(_id)
 }
-
-func (x *ObserverQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
 // ObserverQueryable is the interface implemented by [ObserverQuery], for mocking and DI.
 type ObserverQueryable interface {
-	Unwrap() *raw.HKObserverQuery
+	obj.Object
 }
 
 var _ ObserverQueryable = (*ObserverQuery)(nil)
+
+var _ QueryProvider = (*ObserverQuery)(nil)

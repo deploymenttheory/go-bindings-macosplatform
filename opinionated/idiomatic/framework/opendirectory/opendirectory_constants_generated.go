@@ -5,51 +5,44 @@
 package opendirectory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// ODFrameworkErrorDomain returns the string constant ODFrameworkErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ODFrameworkErrorDomain() objc.ID {
-	return purego.CFConstant(raw.ODFrameworkErrorDomain())
+// ODFrameworkErrorDomain returns the string constant ODFrameworkErrorDomain, for use as a dictionary key or argument.
+func ODFrameworkErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODFrameworkErrorDomain")))
 }
 
-// @const      ODSessionProxyAddress @abstract   the address to connect to via proxy, used when making the options dictionary @discussion the address to connect to via proxy, used when making the options dictionary
-// ODSessionProxyAddress returns the string constant ODSessionProxyAddress as an objc.ID, for use as a dictionary key or selector argument.
-func ODSessionProxyAddress() objc.ID {
-	return purego.CFConstant(raw.ODSessionProxyAddress())
+// ODSessionProxyAddress returns the string constant ODSessionProxyAddress, for use as a dictionary key or argument.
+func ODSessionProxyAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyAddress")))
 }
 
-// @const      ODSessionProxyPort @abstract   the port to connect to via proxy, used when making the options dictionary @discussion the port to connect to via proxy, used when making the options dictionary.  This parameter is optional and should not be passed normally.
-// ODSessionProxyPort returns the string constant ODSessionProxyPort as an objc.ID, for use as a dictionary key or selector argument.
-func ODSessionProxyPort() objc.ID {
-	return purego.CFConstant(raw.ODSessionProxyPort())
+// ODSessionProxyPort returns the string constant ODSessionProxyPort, for use as a dictionary key or argument.
+func ODSessionProxyPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyPort")))
 }
 
-// @const      ODSessionProxyUsername @abstract   the username to connect with via proxy, used when making the options dictionary @discussion the username to connect with via proxy, used when making the options dictionary
-// ODSessionProxyUsername returns the string constant ODSessionProxyUsername as an objc.ID, for use as a dictionary key or selector argument.
-func ODSessionProxyUsername() objc.ID {
-	return purego.CFConstant(raw.ODSessionProxyUsername())
+// ODSessionProxyUsername returns the string constant ODSessionProxyUsername, for use as a dictionary key or argument.
+func ODSessionProxyUsername() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyUsername")))
 }
 
-// @const      ODSessionProxyPassword @abstract   the password to connect with via proxy, used when making the options dictionary @discussion the password to connect with via proxy, used when making the options dictionary
-// ODSessionProxyPassword returns the string constant ODSessionProxyPassword as an objc.ID, for use as a dictionary key or selector argument.
-func ODSessionProxyPassword() objc.ID {
-	return purego.CFConstant(raw.ODSessionProxyPassword())
+// ODSessionProxyPassword returns the string constant ODSessionProxyPassword, for use as a dictionary key or argument.
+func ODSessionProxyPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODSessionProxyPassword")))
 }
 
-// ODTrustTypeJoined returns the string constant ODTrustTypeJoined as an objc.ID, for use as a dictionary key or selector argument.
-func ODTrustTypeJoined() objc.ID {
-	return purego.CFConstant(raw.ODTrustTypeJoined())
+// ODTrustTypeJoined returns the string constant ODTrustTypeJoined, for use as a dictionary key or argument.
+func ODTrustTypeJoined() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ODTrustTypeJoined"))) }
+
+// ODTrustTypeUsingCredentials returns the string constant ODTrustTypeUsingCredentials, for use as a dictionary key or argument.
+func ODTrustTypeUsingCredentials() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODTrustTypeUsingCredentials")))
 }
 
-// ODTrustTypeUsingCredentials returns the string constant ODTrustTypeUsingCredentials as an objc.ID, for use as a dictionary key or selector argument.
-func ODTrustTypeUsingCredentials() objc.ID {
-	return purego.CFConstant(raw.ODTrustTypeUsingCredentials())
-}
-
-// ODTrustTypeAnonymous returns the string constant ODTrustTypeAnonymous as an objc.ID, for use as a dictionary key or selector argument.
-func ODTrustTypeAnonymous() objc.ID {
-	return purego.CFConstant(raw.ODTrustTypeAnonymous())
+// ODTrustTypeAnonymous returns the string constant ODTrustTypeAnonymous, for use as a dictionary key or argument.
+func ODTrustTypeAnonymous() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ODTrustTypeAnonymous")))
 }

@@ -5,72 +5,79 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a diagnostic report for a fatal or nonfatal CPU exception.
+// CPUExceptionDiagnostic is an idiomatic wrapper over the Objective-C class MXCPUExceptionDiagnostic.
 //
-// CPUExceptionDiagnostic wraps [raw.MXCPUExceptionDiagnostic] with a fluent Go API.
+// It embeds [Diagnostic], promoting that type's methods.
+//
+// An object representing a diagnostic report for a fatal or nonfatal CPU exception.
 type CPUExceptionDiagnostic struct {
-	inner *raw.MXCPUExceptionDiagnostic
+	Diagnostic
 }
 
-// Unwrap returns the underlying [raw.MXCPUExceptionDiagnostic].
-func (x *CPUExceptionDiagnostic) Unwrap() *raw.MXCPUExceptionDiagnostic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CPUExceptionDiagnostic) ID() objc.ID { return x.inner.Ptr() }
-
-// CPUExceptionDiagnosticFromID adopts an existing object pointer as a CPUExceptionDiagnostic (nil for 0).
+// CPUExceptionDiagnosticFromID adopts an existing Objective-C object as a CPUExceptionDiagnostic
+// (nil for 0), retaining it and registering a release finalizer.
 func CPUExceptionDiagnosticFromID(id objc.ID) *CPUExceptionDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	return &CPUExceptionDiagnostic{inner: raw.MXCPUExceptionDiagnosticFromID(id)}
+	x := &CPUExceptionDiagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCPUExceptionDiagnostic creates a new [CPUExceptionDiagnostic].
-func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXCPUExceptionDiagnostic")), objc.RegisterName("new"))
-	return &CPUExceptionDiagnostic{inner: raw.MXCPUExceptionDiagnosticFromID(_id)}
-}
-
-// @property      callStackTree @abstract      The application call stack tree associated with the excessive CPU consumption.
-//
-// CallStackTree calls the underlying CallStackTree.
-func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
-	_r := x.inner.CallStackTree()
-	if _r == nil {
+// cPUExceptionDiagnosticAdopt wraps an Objective-C object that this code just created as a
+// CPUExceptionDiagnostic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cPUExceptionDiagnosticAdopt(id objc.ID) *CPUExceptionDiagnostic {
+	if id == 0 {
 		return nil
 	}
-	return &CallStackTree{inner: _r}
+	x := &CPUExceptionDiagnostic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property      totalCPUTime @abstract      Total CPU time consumed in the scope of this CPU exception. @discussion    Dimensioned as NSUnitDuration.
-//
-// TotalCPUTime calls the underlying TotalCPUTime.
-func (x *CPUExceptionDiagnostic) TotalCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.TotalCPUTime()
+// NewCPUExceptionDiagnostic creates a new CPUExceptionDiagnostic.
+func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
+	_id := objc.Send[objc.ID](objc.ID(_class("MXCPUExceptionDiagnostic")), objc.RegisterName("new"))
+	return cPUExceptionDiagnosticAdopt(_id)
 }
 
-// @property      totalSampledTime @abstract      Total time that the application was sampled for during the CPU exception. @discussion    Dimensioned as NSUnitDuration.
-//
-// TotalSampledTime calls the underlying TotalSampledTime.
-func (x *CPUExceptionDiagnostic) TotalSampledTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.TotalSampledTime()
+// CallStackTree the application call stack tree associated with the excessive CPU consumption.
+func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+	return CallStackTreeFromID(_r)
 }
 
-func (x *CPUExceptionDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+// TotalCPUTime total CPU time consumed in the scope of this CPU exception. Dimensioned as NSUnitDuration.
+func (x *CPUExceptionDiagnostic) TotalCPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCPUTime"))
+	return obj.Wrap(_r)
+}
+
+// TotalSampledTime total time that the application was sampled for during the CPU exception. Dimensioned as NSUnitDuration.
+func (x *CPUExceptionDiagnostic) TotalSampledTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalSampledTime"))
+	return obj.Wrap(_r)
+}
 
 // CPUExceptionDiagnosticable is the interface implemented by [CPUExceptionDiagnostic], for mocking and DI.
 type CPUExceptionDiagnosticable interface {
-	Unwrap() *raw.MXCPUExceptionDiagnostic
+	obj.Object
 	CallStackTree() *CallStackTree
-	TotalCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
-	TotalSampledTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	TotalCPUTime() obj.Object
+	TotalSampledTime() obj.Object
 }
 
 var _ CPUExceptionDiagnosticable = (*CPUExceptionDiagnostic)(nil)
+
+var _ DiagnosticProvider = (*CPUExceptionDiagnostic)(nil)

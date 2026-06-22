@@ -5,132 +5,136 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The name, type, and constraints of an input or output feature.
+// FeatureDescription is an idiomatic wrapper over the Objective-C class MLFeatureDescription.
 //
-// FeatureDescription wraps [raw.MLFeatureDescription] with a fluent Go API.
+// The name, type, and constraints of an input or output feature.
 type FeatureDescription struct {
-	inner *raw.MLFeatureDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLFeatureDescription].
-func (x *FeatureDescription) Unwrap() *raw.MLFeatureDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FeatureDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// FeatureDescriptionFromID adopts an existing object pointer as a FeatureDescription (nil for 0).
+// FeatureDescriptionFromID adopts an existing Objective-C object as a FeatureDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func FeatureDescriptionFromID(id objc.ID) *FeatureDescription {
 	if id == 0 {
 		return nil
 	}
-	return &FeatureDescription{inner: raw.MLFeatureDescriptionFromID(id)}
+	x := &FeatureDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFeatureDescription creates a new [FeatureDescription].
+// featureDescriptionAdopt wraps an Objective-C object that this code just created as a
+// FeatureDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func featureDescriptionAdopt(id objc.ID) *FeatureDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &FeatureDescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FeatureDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FeatureDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FeatureDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FeatureDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFeatureDescription creates a new FeatureDescription.
 func NewFeatureDescription() *FeatureDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLFeatureDescription")), objc.RegisterName("new"))
-	return &FeatureDescription{inner: raw.MLFeatureDescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLFeatureDescription")), objc.RegisterName("new"))
+	return featureDescriptionAdopt(_id)
 }
 
-// Checks whether the model will accept an input feature value.
-//
-// IsAllowedValue calls the underlying IsAllowedValue.
-func (x *FeatureDescription) IsAllowedValue(value *raw.MLFeatureValue) bool {
-	return x.inner.IsAllowedValue(value)
+// IsAllowedValue checks whether the model will accept an input feature value.
+func (x *FeatureDescription) IsAllowedValue(value *FeatureValue) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllowedValue:"), objref.IDOf(value))
+	return _r
 }
 
-// Name of feature
-//
-// Name calls the underlying Name.
+// Name name of feature
 func (x *FeatureDescription) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type of data
-//
-// Type calls the underlying Type.
-func (x *FeatureDescription) Type() MLFeatureType {
-	return MLFeatureType(x.inner.Type())
+// Type type of data
+func (x *FeatureDescription) Type() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// Whether this feature can take an undefined value or not
-//
-// IsOptional calls the underlying IsOptional.
+// IsOptional whether this feature can take an undefined value or not
 func (x *FeatureDescription) IsOptional() bool {
-	return x.inner.IsOptional()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOptional"))
+	return _r
 }
 
-// Constraint when type == MLFeatureTypeMultiArray, nil otherwise
-//
-// MultiArrayConstraint calls the underlying MultiArrayConstraint.
+// MultiArrayConstraint constraint when type == MLFeatureTypeMultiArray, nil otherwise
 func (x *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
-	_r := x.inner.MultiArrayConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &MultiArrayConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiArrayConstraint"))
+	return MultiArrayConstraintFromID(_r)
 }
 
-// Constraint when type == MLFeatureTypeImage, nil otherwise
-//
-// ImageConstraint calls the underlying ImageConstraint.
+// ImageConstraint constraint when type == MLFeatureTypeImage, nil otherwise
 func (x *FeatureDescription) ImageConstraint() *ImageConstraint {
-	_r := x.inner.ImageConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &ImageConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageConstraint"))
+	return ImageConstraintFromID(_r)
 }
 
-// Constraint when type == MLFeatureTypeDictionary, nil otherwise
-//
-// DictionaryConstraint calls the underlying DictionaryConstraint.
+// DictionaryConstraint constraint when type == MLFeatureTypeDictionary, nil otherwise
 func (x *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
-	_r := x.inner.DictionaryConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &DictionaryConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryConstraint"))
+	return DictionaryConstraintFromID(_r)
 }
 
-// Constraint when type == MLFeatureTypeSequence, nil otherwise
-//
-// SequenceConstraint calls the underlying SequenceConstraint.
+// SequenceConstraint constraint when type == MLFeatureTypeSequence, nil otherwise
 func (x *FeatureDescription) SequenceConstraint() *SequenceConstraint {
-	_r := x.inner.SequenceConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &SequenceConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sequenceConstraint"))
+	return SequenceConstraintFromID(_r)
 }
 
-// The state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
-//
-// StateConstraint calls the underlying StateConstraint.
+// StateConstraint the state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
 func (x *FeatureDescription) StateConstraint() *StateConstraint {
-	_r := x.inner.StateConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &StateConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateConstraint"))
+	return StateConstraintFromID(_r)
 }
 
 // FeatureDescriptionable is the interface implemented by [FeatureDescription], for mocking and DI.
 type FeatureDescriptionable interface {
-	Unwrap() *raw.MLFeatureDescription
-	IsAllowedValue(value *raw.MLFeatureValue) bool
+	obj.Object
+	IsAllowedValue(value *FeatureValue) bool
 	Name() string
-	Type() MLFeatureType
+	Type() FeatureType
 	IsOptional() bool
 	MultiArrayConstraint() *MultiArrayConstraint
 	ImageConstraint() *ImageConstraint

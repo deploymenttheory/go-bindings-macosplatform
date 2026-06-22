@@ -4,9 +4,7 @@
 
 package compositorservices
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
-)
-
-// CpTime is a type alias for the raw CpTime value-type struct.
-type CpTime = raw.CpTime
+// A Mach absolute time clock value.
+type CpTime struct {
+	Cp_mach_abs_time uint64
+}

@@ -5,80 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThreadNetworkDiagnosticsClusterSecurityPolicy wraps [raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy] with a fluent Go API.
+// MTRThreadNetworkDiagnosticsClusterSecurityPolicy is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDiagnosticsClusterSecurityPolicy.
 type MTRThreadNetworkDiagnosticsClusterSecurityPolicy struct {
-	inner *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy].
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID adopts an existing object pointer as a MTRThreadNetworkDiagnosticsClusterSecurityPolicy (nil for 0).
+// MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID adopts an existing Objective-C object as a MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{inner: raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(id)}
+	x := &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy creates a new [MTRThreadNetworkDiagnosticsClusterSecurityPolicy].
+// mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadNetworkDiagnosticsClusterSecurityPolicy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(id objc.ID) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy creates a new MTRThreadNetworkDiagnosticsClusterSecurityPolicy.
 func NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy() *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDiagnosticsClusterSecurityPolicy")), objc.RegisterName("new"))
-	return &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{inner: raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDiagnosticsClusterSecurityPolicy")), objc.RegisterName("new"))
+	return mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(_id)
 }
 
-// WithRotationTime sets the rotationTime property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
-	x.inner.SetRotationTime(rotationTime)
+// WithRotationTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 	return x
 }
 
-// WithFlags sets the flags property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
-	x.inner.SetFlags(flags)
+// WithFlags sets the property and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), objref.IDOf(flags))
 	return x
 }
 
-// RotationTime calls the underlying RotationTime.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() *foundation.NSNumber {
-	return x.inner.RotationTime()
+// RotationTime wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotationTime"))
+	return obj.Wrap(_r)
 }
 
-// SetRotationTime calls the underlying SetRotationTime.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetRotationTime(rotationTime *foundation.NSNumber) {
-	x.inner.SetRotationTime(rotationTime)
+// SetRotationTime wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetRotationTime(rotationTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 }
 
-// Flags calls the underlying Flags.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() *foundation.NSNumber {
-	return x.inner.Flags()
+// Flags wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flags"))
+	return obj.Wrap(_r)
 }
 
-// SetFlags calls the underlying SetFlags.
-func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetFlags(flags *foundation.NSNumber) {
-	x.inner.SetFlags(flags)
+// SetFlags wraps the corresponding Objective-C method.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetFlags(flags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), objref.IDOf(flags))
 }
 
 // MTRThreadNetworkDiagnosticsClusterSecurityPolicyable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterSecurityPolicy], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterSecurityPolicyable interface {
-	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy
-	WithRotationTime(rotationTime *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
-	WithFlags(flags *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
-	RotationTime() *foundation.NSNumber
-	SetRotationTime(rotationTime *foundation.NSNumber)
-	Flags() *foundation.NSNumber
-	SetFlags(flags *foundation.NSNumber)
+	obj.Object
+	WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+	WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+	RotationTime() obj.Object
+	SetRotationTime(rotationTime obj.Object)
+	Flags() obj.Object
+	SetFlags(flags obj.Object)
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterSecurityPolicyable = (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy)(nil)

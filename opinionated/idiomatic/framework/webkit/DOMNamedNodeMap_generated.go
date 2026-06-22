@@ -5,142 +5,128 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMNamedNodeMap wraps [raw.DOMNamedNodeMap] with a fluent Go API.
+// DOMNamedNodeMap is an idiomatic wrapper over the Objective-C class DOMNamedNodeMap.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMNamedNodeMap struct {
-	inner *raw.DOMNamedNodeMap
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMNamedNodeMap].
-func (x *DOMNamedNodeMap) Unwrap() *raw.DOMNamedNodeMap { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMNamedNodeMap) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMNamedNodeMapFromID adopts an existing object pointer as a DOMNamedNodeMap (nil for 0).
+// DOMNamedNodeMapFromID adopts an existing Objective-C object as a DOMNamedNodeMap
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMNamedNodeMapFromID(id objc.ID) *DOMNamedNodeMap {
 	if id == 0 {
 		return nil
 	}
-	return &DOMNamedNodeMap{inner: raw.DOMNamedNodeMapFromID(id)}
+	x := &DOMNamedNodeMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMNamedNodeMap creates a new [DOMNamedNodeMap].
+// dOMNamedNodeMapAdopt wraps an Objective-C object that this code just created as a
+// DOMNamedNodeMap (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMNamedNodeMapAdopt(id objc.ID) *DOMNamedNodeMap {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMNamedNodeMap{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMNamedNodeMap creates a new DOMNamedNodeMap.
 func NewDOMNamedNodeMap() *DOMNamedNodeMap {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMNamedNodeMap")), objc.RegisterName("new"))
-	return &DOMNamedNodeMap{inner: raw.DOMNamedNodeMapFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMNamedNodeMap")), objc.RegisterName("new"))
+	return dOMNamedNodeMapAdopt(_id)
 }
 
-// GetNamedItem calls the underlying GetNamedItem.
+// GetNamedItem wraps the corresponding Objective-C method.
 func (x *DOMNamedNodeMap) GetNamedItem(name string) *DOMNode {
-	_r := x.inner.GetNamedItem(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNamedItem:"), purego.NSString(name))
+	return DOMNodeFromID(_r)
 }
 
-// SetNamedItem calls the underlying SetNamedItem.
-func (x *DOMNamedNodeMap) SetNamedItem(node *raw.DOMNode) *DOMNode {
-	_r := x.inner.SetNamedItem(node)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// SetNamedItem wraps the corresponding Objective-C method.
+func (x *DOMNamedNodeMap) SetNamedItem(node *DOMNode) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamedItem:"), objref.IDOf(node))
+	return DOMNodeFromID(_r)
 }
 
-// RemoveNamedItem calls the underlying RemoveNamedItem.
+// RemoveNamedItem wraps the corresponding Objective-C method.
 func (x *DOMNamedNodeMap) RemoveNamedItem(name string) *DOMNode {
-	_r := x.inner.RemoveNamedItem(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamedItem:"), purego.NSString(name))
+	return DOMNodeFromID(_r)
 }
 
-// Item calls the underlying Item.
-func (x *DOMNamedNodeMap) Item(index uint) *DOMNode {
-	_r := x.inner.Item(index)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// Item wraps the corresponding Objective-C method.
+func (x *DOMNamedNodeMap) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMNodeFromID(_r)
 }
 
-// GetNamedItemNSLocalName calls the underlying GetNamedItemNSLocalName.
+// GetNamedItemNSLocalName wraps the corresponding Objective-C method.
 func (x *DOMNamedNodeMap) GetNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
-	_r := x.inner.GetNamedItemNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
+	return DOMNodeFromID(_r)
 }
 
-// SetNamedItemNS calls the underlying SetNamedItemNS.
-func (x *DOMNamedNodeMap) SetNamedItemNS(node *raw.DOMNode) *DOMNode {
-	_r := x.inner.SetNamedItemNS(node)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// SetNamedItemNS wraps the corresponding Objective-C method.
+func (x *DOMNamedNodeMap) SetNamedItemNS(node *DOMNode) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamedItemNS:"), objref.IDOf(node))
+	return DOMNodeFromID(_r)
 }
 
-// RemoveNamedItemNSLocalName calls the underlying RemoveNamedItemNSLocalName.
+// RemoveNamedItemNSLocalName wraps the corresponding Objective-C method.
 func (x *DOMNamedNodeMap) RemoveNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
-	_r := x.inner.RemoveNamedItemNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
+	return DOMNodeFromID(_r)
 }
 
-// Length calls the underlying Length.
-func (x *DOMNamedNodeMap) Length() uint {
-	return x.inner.Length()
+// Length wraps the corresponding Objective-C method.
+func (x *DOMNamedNodeMap) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// GetNamedItemNS calls the underlying GetNamedItemNS.
+// GetNamedItemNS wraps the corresponding Objective-C method.
 func (x *DOMNamedNodeMap) GetNamedItemNS(namespaceURI string, localName string) *DOMNode {
-	_r := x.inner.GetNamedItemNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
+	return DOMNodeFromID(_r)
 }
 
-// RemoveNamedItemNS calls the underlying RemoveNamedItemNS.
+// RemoveNamedItemNS wraps the corresponding Objective-C method.
 func (x *DOMNamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName string) *DOMNode {
-	_r := x.inner.RemoveNamedItemNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
-}
-
-func (x *DOMNamedNodeMap) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMNamedNodeMap) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
+	return DOMNodeFromID(_r)
 }
 
 // DOMNamedNodeMapable is the interface implemented by [DOMNamedNodeMap], for mocking and DI.
 type DOMNamedNodeMapable interface {
-	Unwrap() *raw.DOMNamedNodeMap
+	obj.Object
 	GetNamedItem(name string) *DOMNode
-	SetNamedItem(node *raw.DOMNode) *DOMNode
+	SetNamedItem(node *DOMNode) *DOMNode
 	RemoveNamedItem(name string) *DOMNode
-	Item(index uint) *DOMNode
+	Item(index int) *DOMNode
 	GetNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode
-	SetNamedItemNS(node *raw.DOMNode) *DOMNode
+	SetNamedItemNS(node *DOMNode) *DOMNode
 	RemoveNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode
-	Length() uint
+	Length() int
 	GetNamedItemNS(namespaceURI string, localName string) *DOMNode
 	RemoveNamedItemNS(namespaceURI string, localName string) *DOMNode
 }
 
 var _ DOMNamedNodeMapable = (*DOMNamedNodeMap)(nil)
+
+var _ DOMObjectProvider = (*DOMNamedNodeMap)(nil)
+
+var _ WebScriptObjectProvider = (*DOMNamedNodeMap)(nil)

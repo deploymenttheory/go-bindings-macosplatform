@@ -5,375 +5,325 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An annotation view that displays a balloon-shaped marker at the designated location.
+// MarkerAnnotationView is an idiomatic wrapper over the Objective-C class MKMarkerAnnotationView.
 //
-// MarkerAnnotationView wraps [raw.MKMarkerAnnotationView] with a fluent Go API.
+// It embeds [AnnotationView], promoting that type's methods.
+//
+// An annotation view that displays a balloon-shaped marker at the designated location.
 type MarkerAnnotationView struct {
-	inner *raw.MKMarkerAnnotationView
+	AnnotationView
 }
 
-// Unwrap returns the underlying [raw.MKMarkerAnnotationView].
-func (x *MarkerAnnotationView) Unwrap() *raw.MKMarkerAnnotationView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MarkerAnnotationView) ID() objc.ID { return x.inner.Ptr() }
-
-// MarkerAnnotationViewFromID adopts an existing object pointer as a MarkerAnnotationView (nil for 0).
+// MarkerAnnotationViewFromID adopts an existing Objective-C object as a MarkerAnnotationView
+// (nil for 0), retaining it and registering a release finalizer.
 func MarkerAnnotationViewFromID(id objc.ID) *MarkerAnnotationView {
 	if id == 0 {
 		return nil
 	}
-	return &MarkerAnnotationView{inner: raw.MKMarkerAnnotationViewFromID(id)}
+	x := &MarkerAnnotationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMarkerAnnotationView creates a new [MarkerAnnotationView].
+// markerAnnotationViewAdopt wraps an Objective-C object that this code just created as a
+// MarkerAnnotationView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func markerAnnotationViewAdopt(id objc.ID) *MarkerAnnotationView {
+	if id == 0 {
+		return nil
+	}
+	x := &MarkerAnnotationView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMarkerAnnotationView creates a new MarkerAnnotationView.
 func NewMarkerAnnotationView() *MarkerAnnotationView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMarkerAnnotationView")), objc.RegisterName("new"))
-	return &MarkerAnnotationView{inner: raw.MKMarkerAnnotationViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMarkerAnnotationView")), objc.RegisterName("new"))
+	return markerAnnotationViewAdopt(_id)
 }
 
-// The visibility of the title text rendered beneath the marker balloon.
-//
-// WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithTitleVisibility(titleVisibility MKFeatureVisibility) *MarkerAnnotationView {
-	x.inner.SetTitleVisibility(raw.MKFeatureVisibility(titleVisibility))
+// WithTitleVisibility the visibility of the title text rendered beneath the marker balloon.
+func (x *MarkerAnnotationView) WithTitleVisibility(titleVisibility FeatureVisibility) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 	return x
 }
 
-// The visibility of the subtitle text rendered beneath the marker balloon.
-//
-// WithSubtitleVisibility sets the subtitleVisibility property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility MKFeatureVisibility) *MarkerAnnotationView {
-	x.inner.SetSubtitleVisibility(raw.MKFeatureVisibility(subtitleVisibility))
+// WithSubtitleVisibility the visibility of the subtitle text rendered beneath the marker balloon.
+func (x *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility FeatureVisibility) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitleVisibility:"), subtitleVisibility)
 	return x
 }
 
-// The background color of the marker balloon.
-//
-// WithMarkerTintColor sets the markerTintColor property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithMarkerTintColor(markerTintColor *appkit.NSColor) *MarkerAnnotationView {
-	x.inner.SetMarkerTintColor(markerTintColor)
+// WithMarkerTintColor the background color of the marker balloon.
+func (x *MarkerAnnotationView) WithMarkerTintColor(markerTintColor obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkerTintColor:"), objref.IDOf(markerTintColor))
 	return x
 }
 
-// The color to apply to the glyph text or image.
-//
-// WithGlyphTintColor sets the glyphTintColor property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithGlyphTintColor(glyphTintColor *appkit.NSColor) *MarkerAnnotationView {
-	x.inner.SetGlyphTintColor(glyphTintColor)
+// WithGlyphTintColor the color to apply to the glyph text or image.
+func (x *MarkerAnnotationView) WithGlyphTintColor(glyphTintColor obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphTintColor:"), objref.IDOf(glyphTintColor))
 	return x
 }
 
-// The text to display in the marker balloon.
-//
-// WithGlyphText sets the glyphText property and returns the receiver for chaining.
+// WithGlyphText the text to display in the marker balloon.
 func (x *MarkerAnnotationView) WithGlyphText(glyphText string) *MarkerAnnotationView {
-	x.inner.SetGlyphText(foundation.NSStringStringWithUTF8String(glyphText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphText:"), purego.NSString(glyphText))
 	return x
 }
 
-// An image to display in the marker balloon.
-//
-// WithGlyphImage sets the glyphImage property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithGlyphImage(glyphImage *appkit.NSImage) *MarkerAnnotationView {
-	x.inner.SetGlyphImage(glyphImage)
+// WithGlyphImage an image to display in the marker balloon.
+func (x *MarkerAnnotationView) WithGlyphImage(glyphImage obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphImage:"), objref.IDOf(glyphImage))
 	return x
 }
 
-// An image to display when the user selects the marker.
-//
-// WithSelectedGlyphImage sets the selectedGlyphImage property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) *MarkerAnnotationView {
-	x.inner.SetSelectedGlyphImage(selectedGlyphImage)
+// WithSelectedGlyphImage an image to display when the user selects the marker.
+func (x *MarkerAnnotationView) WithSelectedGlyphImage(selectedGlyphImage obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedGlyphImage:"), objref.IDOf(selectedGlyphImage))
 	return x
 }
 
-// A Boolean that indicates whether the marker animates into position onscreen.
-//
-// WithAnimatesWhenAdded sets the animatesWhenAdded property and returns the receiver for chaining.
+// WithAnimatesWhenAdded a Boolean that indicates whether the marker animates into position onscreen.
 func (x *MarkerAnnotationView) WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView {
-	x.inner.SetAnimatesWhenAdded(animatesWhenAdded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimatesWhenAdded:"), animatesWhenAdded)
 	return x
 }
 
-// The annotation object associated with the view.
-//
-// WithAnnotation sets the annotation property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithAnnotation(annotation raw.MKAnnotation) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetAnnotation(annotation)
+// WithImage the image the annotation view displays.
+func (x *MarkerAnnotationView) WithImage(image obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The image the annotation view displays.
-//
-// WithImage sets the image property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithImage(image *appkit.NSImage) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetImage(image)
-	return x
-}
-
-// The offset (in points) at which to display the view.
-//
-// WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
+// WithCenterOffset the offset (in points) at which to display the view.
 func (x *MarkerAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetCenterOffset(centerOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterOffset:"), centerOffset)
 	return x
 }
 
-// An offset that changes the accessory’s default anchor point.
-//
-// WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
+// WithAccessoryOffset an offset that changes the accessory’s default anchor point.
 func (x *MarkerAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetAccessoryOffset(accessoryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
 	return x
 }
 
-// The offset (in points) at which to place the callout.
-//
-// WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
+// WithCalloutOffset the offset (in points) at which to place the callout.
 func (x *MarkerAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetCalloutOffset(calloutOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalloutOffset:"), calloutOffset)
 	return x
 }
 
-// The offset in points from the middle-left of the annotation view.
-//
-// WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
+// WithLeftCalloutOffset the offset in points from the middle-left of the annotation view.
 func (x *MarkerAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetLeftCalloutOffset(leftCalloutOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
 	return x
 }
 
-// The offset in points from the middle-right of the annotation view.
-//
-// WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
+// WithRightCalloutOffset the offset in points from the middle-right of the annotation view.
 func (x *MarkerAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetRightCalloutOffset(rightCalloutOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation is in an enabled state.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the annotation is in an enabled state.
 func (x *MarkerAnnotationView) WithEnabled(enabled bool) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value that indicates whether the map view highlights the annotation view.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value that indicates whether the map view highlights the annotation view.
 func (x *MarkerAnnotationView) WithHighlighted(highlighted bool) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is in a selected state.
-//
-// WithSelected sets the selected property and returns the receiver for chaining.
+// WithSelected a Boolean value that indicates whether the annotation view is in a selected state.
 func (x *MarkerAnnotationView) WithSelected(selected bool) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetSelected(selected)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
-//
-// WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
+// WithCanShowCallout a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (x *MarkerAnnotationView) WithCanShowCallout(canShowCallout bool) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetCanShowCallout(canShowCallout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanShowCallout:"), canShowCallout)
 	return x
 }
 
-// The view to display on the left side of the standard callout.
-//
-// WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
+// WithLeftCalloutAccessoryView the view to display on the left side of the standard callout.
+func (x *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	return x
 }
 
-// The view to display on the right side of the standard callout.
-//
-// WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
+// WithRightCalloutAccessoryView the view to display on the right side of the standard callout.
+func (x *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	return x
 }
 
-// The detail accessory view to use in the standard callout.
-//
-// WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
+// WithDetailCalloutAccessoryView the detail accessory view to use in the standard callout.
+func (x *MarkerAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	return x
 }
 
-// A Boolean value that indicates whether the annotation view is draggable.
-//
-// WithDraggable sets the draggable property and returns the receiver for chaining.
+// WithDraggable a Boolean value that indicates whether the annotation view is draggable.
 func (x *MarkerAnnotationView) WithDraggable(draggable bool) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetDraggable(draggable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggable:"), draggable)
 	return x
 }
 
-// The drag state of the annotation view.
-//
-// WithDragState sets the dragState property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithDragState(dragState MKAnnotationViewDragState) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
+// WithDragState the drag state of the annotation view.
+func (x *MarkerAnnotationView) WithDragState(dragState AnnotationViewDragState) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:"), dragState)
 	return x
 }
 
-// An identifier that determines whether the annotation view participates in clustering.
-//
-// WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
+// WithClusteringIdentifier an identifier that determines whether the annotation view participates in clustering.
 func (x *MarkerAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
 	return x
 }
 
-// The display priority of the annotation view.
-//
-// WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
+// WithDisplayPriority the display priority of the annotation view.
 func (x *MarkerAnnotationView) WithDisplayPriority(displayPriority float32) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetDisplayPriority(displayPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPriority:"), displayPriority)
 	return x
 }
 
-// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
-//
-// WithZPriority sets the zPriority property and returns the receiver for chaining.
+// WithZPriority the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (x *MarkerAnnotationView) WithZPriority(zPriority float32) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetZPriority(zPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPriority:"), zPriority)
 	return x
 }
 
-// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
-//
-// WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
+// WithSelectedZPriority the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (x *MarkerAnnotationView) WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetSelectedZPriority(selectedZPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
 	return x
 }
 
-// The collision mode to use when interpreting the collision frame rectangle.
-//
-// WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
+// WithCollisionMode the collision mode to use when interpreting the collision frame rectangle.
+func (x *MarkerAnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *MarkerAnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionMode:"), collisionMode)
 	return x
 }
 
-// TitleVisibility calls the underlying TitleVisibility.
-func (x *MarkerAnnotationView) TitleVisibility() MKFeatureVisibility {
-	return MKFeatureVisibility(x.inner.TitleVisibility())
+// TitleVisibility wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) TitleVisibility() FeatureVisibility {
+	_r := objc.Send[FeatureVisibility](objref.IDOf(x), objc.RegisterName("titleVisibility"))
+	return _r
 }
 
-// SetTitleVisibility calls the underlying SetTitleVisibility.
-func (x *MarkerAnnotationView) SetTitleVisibility(titleVisibility MKFeatureVisibility) {
-	x.inner.SetTitleVisibility(raw.MKFeatureVisibility(titleVisibility))
+// SetTitleVisibility wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SetTitleVisibility(titleVisibility FeatureVisibility) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 }
 
-// SubtitleVisibility calls the underlying SubtitleVisibility.
-func (x *MarkerAnnotationView) SubtitleVisibility() MKFeatureVisibility {
-	return MKFeatureVisibility(x.inner.SubtitleVisibility())
+// SubtitleVisibility wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SubtitleVisibility() FeatureVisibility {
+	_r := objc.Send[FeatureVisibility](objref.IDOf(x), objc.RegisterName("subtitleVisibility"))
+	return _r
 }
 
-// SetSubtitleVisibility calls the underlying SetSubtitleVisibility.
-func (x *MarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility MKFeatureVisibility) {
-	x.inner.SetSubtitleVisibility(raw.MKFeatureVisibility(subtitleVisibility))
+// SetSubtitleVisibility wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility FeatureVisibility) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitleVisibility:"), subtitleVisibility)
 }
 
-// MarkerTintColor calls the underlying MarkerTintColor.
-func (x *MarkerAnnotationView) MarkerTintColor() *appkit.NSColor {
-	return x.inner.MarkerTintColor()
+// MarkerTintColor wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) MarkerTintColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerTintColor"))
+	return obj.Wrap(_r)
 }
 
-// SetMarkerTintColor calls the underlying SetMarkerTintColor.
-func (x *MarkerAnnotationView) SetMarkerTintColor(markerTintColor *appkit.NSColor) {
-	x.inner.SetMarkerTintColor(markerTintColor)
+// SetMarkerTintColor wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SetMarkerTintColor(markerTintColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkerTintColor:"), objref.IDOf(markerTintColor))
 }
 
-// GlyphTintColor calls the underlying GlyphTintColor.
-func (x *MarkerAnnotationView) GlyphTintColor() *appkit.NSColor {
-	return x.inner.GlyphTintColor()
+// GlyphTintColor wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) GlyphTintColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphTintColor"))
+	return obj.Wrap(_r)
 }
 
-// SetGlyphTintColor calls the underlying SetGlyphTintColor.
-func (x *MarkerAnnotationView) SetGlyphTintColor(glyphTintColor *appkit.NSColor) {
-	x.inner.SetGlyphTintColor(glyphTintColor)
+// SetGlyphTintColor wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SetGlyphTintColor(glyphTintColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphTintColor:"), objref.IDOf(glyphTintColor))
 }
 
-// GlyphText calls the underlying GlyphText.
+// GlyphText wraps the corresponding Objective-C method.
 func (x *MarkerAnnotationView) GlyphText() string {
-	_r := x.inner.GlyphText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetGlyphText calls the underlying SetGlyphText.
+// SetGlyphText wraps the corresponding Objective-C method.
 func (x *MarkerAnnotationView) SetGlyphText(glyphText string) {
-	x.inner.SetGlyphText(foundation.NSStringStringWithUTF8String(glyphText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphText:"), purego.NSString(glyphText))
 }
 
-// GlyphImage calls the underlying GlyphImage.
-func (x *MarkerAnnotationView) GlyphImage() *appkit.NSImage {
-	return x.inner.GlyphImage()
+// GlyphImage wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) GlyphImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphImage"))
+	return obj.Wrap(_r)
 }
 
-// SetGlyphImage calls the underlying SetGlyphImage.
-func (x *MarkerAnnotationView) SetGlyphImage(glyphImage *appkit.NSImage) {
-	x.inner.SetGlyphImage(glyphImage)
+// SetGlyphImage wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SetGlyphImage(glyphImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlyphImage:"), objref.IDOf(glyphImage))
 }
 
-// SelectedGlyphImage calls the underlying SelectedGlyphImage.
-func (x *MarkerAnnotationView) SelectedGlyphImage() *appkit.NSImage {
-	return x.inner.SelectedGlyphImage()
+// SelectedGlyphImage wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SelectedGlyphImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedGlyphImage"))
+	return obj.Wrap(_r)
 }
 
-// SetSelectedGlyphImage calls the underlying SetSelectedGlyphImage.
-func (x *MarkerAnnotationView) SetSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) {
-	x.inner.SetSelectedGlyphImage(selectedGlyphImage)
+// SetSelectedGlyphImage wraps the corresponding Objective-C method.
+func (x *MarkerAnnotationView) SetSelectedGlyphImage(selectedGlyphImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedGlyphImage:"), objref.IDOf(selectedGlyphImage))
 }
 
-// AnimatesWhenAdded calls the underlying AnimatesWhenAdded.
+// AnimatesWhenAdded wraps the corresponding Objective-C method.
 func (x *MarkerAnnotationView) AnimatesWhenAdded() bool {
-	return x.inner.AnimatesWhenAdded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("animatesWhenAdded"))
+	return _r
 }
 
-// SetAnimatesWhenAdded calls the underlying SetAnimatesWhenAdded.
+// SetAnimatesWhenAdded wraps the corresponding Objective-C method.
 func (x *MarkerAnnotationView) SetAnimatesWhenAdded(animatesWhenAdded bool) {
-	x.inner.SetAnimatesWhenAdded(animatesWhenAdded)
-}
-
-func (x *MarkerAnnotationView) asAnnotationView() *raw.MKAnnotationView {
-	return &x.inner.MKAnnotationView
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimatesWhenAdded:"), animatesWhenAdded)
 }
 
 // MarkerAnnotationViewable is the interface implemented by [MarkerAnnotationView], for mocking and DI.
 type MarkerAnnotationViewable interface {
-	Unwrap() *raw.MKMarkerAnnotationView
-	WithTitleVisibility(titleVisibility MKFeatureVisibility) *MarkerAnnotationView
-	WithSubtitleVisibility(subtitleVisibility MKFeatureVisibility) *MarkerAnnotationView
-	WithMarkerTintColor(markerTintColor *appkit.NSColor) *MarkerAnnotationView
-	WithGlyphTintColor(glyphTintColor *appkit.NSColor) *MarkerAnnotationView
+	obj.Object
+	WithTitleVisibility(titleVisibility FeatureVisibility) *MarkerAnnotationView
+	WithSubtitleVisibility(subtitleVisibility FeatureVisibility) *MarkerAnnotationView
+	WithMarkerTintColor(markerTintColor obj.Object) *MarkerAnnotationView
+	WithGlyphTintColor(glyphTintColor obj.Object) *MarkerAnnotationView
 	WithGlyphText(glyphText string) *MarkerAnnotationView
-	WithGlyphImage(glyphImage *appkit.NSImage) *MarkerAnnotationView
-	WithSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) *MarkerAnnotationView
+	WithGlyphImage(glyphImage obj.Object) *MarkerAnnotationView
+	WithSelectedGlyphImage(selectedGlyphImage obj.Object) *MarkerAnnotationView
 	WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView
-	WithAnnotation(annotation raw.MKAnnotation) *MarkerAnnotationView
-	WithImage(image *appkit.NSImage) *MarkerAnnotationView
+	WithImage(image obj.Object) *MarkerAnnotationView
 	WithCenterOffset(centerOffset corefoundation.CGPoint) *MarkerAnnotationView
 	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *MarkerAnnotationView
 	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *MarkerAnnotationView
@@ -383,32 +333,34 @@ type MarkerAnnotationViewable interface {
 	WithHighlighted(highlighted bool) *MarkerAnnotationView
 	WithSelected(selected bool) *MarkerAnnotationView
 	WithCanShowCallout(canShowCallout bool) *MarkerAnnotationView
-	WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
-	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
-	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
+	WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *MarkerAnnotationView
+	WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *MarkerAnnotationView
+	WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *MarkerAnnotationView
 	WithDraggable(draggable bool) *MarkerAnnotationView
-	WithDragState(dragState MKAnnotationViewDragState) *MarkerAnnotationView
+	WithDragState(dragState AnnotationViewDragState) *MarkerAnnotationView
 	WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView
 	WithDisplayPriority(displayPriority float32) *MarkerAnnotationView
 	WithZPriority(zPriority float32) *MarkerAnnotationView
 	WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView
-	WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *MarkerAnnotationView
-	TitleVisibility() MKFeatureVisibility
-	SetTitleVisibility(titleVisibility MKFeatureVisibility)
-	SubtitleVisibility() MKFeatureVisibility
-	SetSubtitleVisibility(subtitleVisibility MKFeatureVisibility)
-	MarkerTintColor() *appkit.NSColor
-	SetMarkerTintColor(markerTintColor *appkit.NSColor)
-	GlyphTintColor() *appkit.NSColor
-	SetGlyphTintColor(glyphTintColor *appkit.NSColor)
+	WithCollisionMode(collisionMode AnnotationViewCollisionMode) *MarkerAnnotationView
+	TitleVisibility() FeatureVisibility
+	SetTitleVisibility(titleVisibility FeatureVisibility)
+	SubtitleVisibility() FeatureVisibility
+	SetSubtitleVisibility(subtitleVisibility FeatureVisibility)
+	MarkerTintColor() obj.Object
+	SetMarkerTintColor(markerTintColor obj.Object)
+	GlyphTintColor() obj.Object
+	SetGlyphTintColor(glyphTintColor obj.Object)
 	GlyphText() string
 	SetGlyphText(glyphText string)
-	GlyphImage() *appkit.NSImage
-	SetGlyphImage(glyphImage *appkit.NSImage)
-	SelectedGlyphImage() *appkit.NSImage
-	SetSelectedGlyphImage(selectedGlyphImage *appkit.NSImage)
+	GlyphImage() obj.Object
+	SetGlyphImage(glyphImage obj.Object)
+	SelectedGlyphImage() obj.Object
+	SetSelectedGlyphImage(selectedGlyphImage obj.Object)
 	AnimatesWhenAdded() bool
 	SetAnimatesWhenAdded(animatesWhenAdded bool)
 }
 
 var _ MarkerAnnotationViewable = (*MarkerAnnotationView)(nil)
+
+var _ AnnotationViewProvider = (*MarkerAnnotationView)(nil)

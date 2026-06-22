@@ -5,15 +5,17 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// KeyProvider is implemented by Key and any idiomatic type wrapping a MLKey subclass.
+// KeyProvider is accepted wherever a MLKey (or one of its subclasses) is expected.
 type KeyProvider interface {
-	asKey() *raw.MLKey
+	objref.Object
+	isKey()
 }
 
-// TaskProvider is implemented by Task and any idiomatic type wrapping a MLTask subclass.
+// TaskProvider is accepted wherever a MLTask (or one of its subclasses) is expected.
 type TaskProvider interface {
-	asTask() *raw.MLTask
+	objref.Object
+	isTask()
 }

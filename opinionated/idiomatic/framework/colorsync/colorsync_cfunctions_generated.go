@@ -5,281 +5,435 @@
 package colorsync
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/colorsync"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CGDisplayCreateUUIDFromDisplayID calls [raw.CGDisplayCreateUUIDFromDisplayID] (C function CGDisplayCreateUUIDFromDisplayID).
-func CGDisplayCreateUUIDFromDisplayID(displayID uint32) unsafe.Pointer {
-	return raw.CGDisplayCreateUUIDFromDisplayID(displayID)
+var _fnCGDisplayCreateUUIDFromDisplayID func(uint32) objc.ID
+
+// CGDisplayCreateUUIDFromDisplayID calls the ColorSync framework function CGDisplayCreateUUIDFromDisplayID.
+func CGDisplayCreateUUIDFromDisplayID(displayID uint32) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGDisplayCreateUUIDFromDisplayID == nil {
+		ebipurego.RegisterLibFunc(&_fnCGDisplayCreateUUIDFromDisplayID, _lib, "CGDisplayCreateUUIDFromDisplayID")
+	}
+	_ret := _fnCGDisplayCreateUUIDFromDisplayID(displayID)
+	return obj.Wrap(_ret)
 }
 
-// CGDisplayGetDisplayIDFromUUID calls [raw.CGDisplayGetDisplayIDFromUUID] (C function CGDisplayGetDisplayIDFromUUID).
-func CGDisplayGetDisplayIDFromUUID(uuid unsafe.Pointer) uint32 {
-	return raw.CGDisplayGetDisplayIDFromUUID(uuid)
+var _fnCGDisplayGetDisplayIDFromUUID func(objc.ID) uint32
+
+// CGDisplayGetDisplayIDFromUUID calls the ColorSync framework function CGDisplayGetDisplayIDFromUUID.
+func CGDisplayGetDisplayIDFromUUID(uuid obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGDisplayGetDisplayIDFromUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnCGDisplayGetDisplayIDFromUUID, _lib, "CGDisplayGetDisplayIDFromUUID")
+	}
+	return _fnCGDisplayGetDisplayIDFromUUID(objref.IDOf(uuid))
 }
 
-// ColorSyncAPIVersion calls [raw.ColorSyncAPIVersion] (C function ColorSyncAPIVersion).
+var _fnColorSyncAPIVersion func() uint32
+
+// ColorSyncAPIVersion calls the ColorSync framework function ColorSyncAPIVersion.
 func ColorSyncAPIVersion() uint32 {
-	return raw.ColorSyncAPIVersion()
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncAPIVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncAPIVersion, _lib, "ColorSyncAPIVersion")
+	}
+	return _fnColorSyncAPIVersion()
 }
 
-// ColorSyncCMMCopyCMMIdentifier calls [raw.ColorSyncCMMCopyCMMIdentifier] (C function ColorSyncCMMCopyCMMIdentifier).
-func ColorSyncCMMCopyCMMIdentifier(arg unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncCMMCopyCMMIdentifier(arg)
+var _fnColorSyncCMMCopyCMMIdentifier func(objc.ID) objc.ID
+
+// ColorSyncCMMCopyCMMIdentifier calls the ColorSync framework function ColorSyncCMMCopyCMMIdentifier.
+func ColorSyncCMMCopyCMMIdentifier(arg obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncCMMCopyCMMIdentifier == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCopyCMMIdentifier, _lib, "ColorSyncCMMCopyCMMIdentifier")
+	}
+	_ret := _fnColorSyncCMMCopyCMMIdentifier(objref.IDOf(arg))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncCMMCopyLocalizedName calls [raw.ColorSyncCMMCopyLocalizedName] (C function ColorSyncCMMCopyLocalizedName).
-func ColorSyncCMMCopyLocalizedName(arg unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncCMMCopyLocalizedName(arg)
+var _fnColorSyncCMMCopyLocalizedName func(objc.ID) objc.ID
+
+// ColorSyncCMMCopyLocalizedName calls the ColorSync framework function ColorSyncCMMCopyLocalizedName.
+func ColorSyncCMMCopyLocalizedName(arg obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncCMMCopyLocalizedName == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCopyLocalizedName, _lib, "ColorSyncCMMCopyLocalizedName")
+	}
+	_ret := _fnColorSyncCMMCopyLocalizedName(objref.IDOf(arg))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncCMMCreate calls [raw.ColorSyncCMMCreate] (C function ColorSyncCMMCreate).
-func ColorSyncCMMCreate(cmmBundle unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncCMMCreate(cmmBundle)
+var _fnColorSyncCMMCreate func(objc.ID) objc.ID
+
+// ColorSyncCMMCreate calls the ColorSync framework function ColorSyncCMMCreate.
+func ColorSyncCMMCreate(cmmBundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncCMMCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCreate, _lib, "ColorSyncCMMCreate")
+	}
+	_ret := _fnColorSyncCMMCreate(objref.IDOf(cmmBundle))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncCMMGetBundle calls [raw.ColorSyncCMMGetBundle] (C function ColorSyncCMMGetBundle).
-func ColorSyncCMMGetBundle(arg unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncCMMGetBundle(arg)
+var _fnColorSyncCMMGetBundle func(objc.ID) objc.ID
+
+// ColorSyncCMMGetBundle calls the ColorSync framework function ColorSyncCMMGetBundle.
+func ColorSyncCMMGetBundle(arg obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncCMMGetBundle == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncCMMGetBundle, _lib, "ColorSyncCMMGetBundle")
+	}
+	_ret := _fnColorSyncCMMGetBundle(objref.IDOf(arg))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncCMMGetTypeID calls [raw.ColorSyncCMMGetTypeID] (C function ColorSyncCMMGetTypeID).
-func ColorSyncCMMGetTypeID() uint {
-	return raw.ColorSyncCMMGetTypeID()
+var _fnColorSyncCMMGetTypeID func() int
+
+// ColorSyncCMMGetTypeID calls the ColorSync framework function ColorSyncCMMGetTypeID.
+func ColorSyncCMMGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncCMMGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncCMMGetTypeID, _lib, "ColorSyncCMMGetTypeID")
+	}
+	return _fnColorSyncCMMGetTypeID()
 }
 
-// ColorSyncCreateCodeFragment calls [raw.ColorSyncCreateCodeFragment] (C function ColorSyncCreateCodeFragment).
-func ColorSyncCreateCodeFragment(profileSequence unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncCreateCodeFragment(profileSequence, options)
+var _fnColorSyncCreateCodeFragment func(objc.ID, objc.ID) objc.ID
+
+// ColorSyncCreateCodeFragment calls the ColorSync framework function ColorSyncCreateCodeFragment.
+func ColorSyncCreateCodeFragment(profileSequence obj.Object, options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncCreateCodeFragment == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncCreateCodeFragment, _lib, "ColorSyncCreateCodeFragment")
+	}
+	_ret := _fnColorSyncCreateCodeFragment(objref.IDOf(profileSequence), objref.IDOf(options))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncDeviceCopyDeviceInfo calls [raw.ColorSyncDeviceCopyDeviceInfo] (C function ColorSyncDeviceCopyDeviceInfo).
-func ColorSyncDeviceCopyDeviceInfo(deviceClass unsafe.Pointer, devID unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncDeviceCopyDeviceInfo(deviceClass, devID)
+var _fnColorSyncDeviceCopyDeviceInfo func(objc.ID, objc.ID) objc.ID
+
+// ColorSyncDeviceCopyDeviceInfo calls the ColorSync framework function ColorSyncDeviceCopyDeviceInfo.
+func ColorSyncDeviceCopyDeviceInfo(deviceClass obj.Object, devID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncDeviceCopyDeviceInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncDeviceCopyDeviceInfo, _lib, "ColorSyncDeviceCopyDeviceInfo")
+	}
+	_ret := _fnColorSyncDeviceCopyDeviceInfo(objref.IDOf(deviceClass), objref.IDOf(devID))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncDeviceSetCustomProfiles calls [raw.ColorSyncDeviceSetCustomProfiles] (C function ColorSyncDeviceSetCustomProfiles).
-func ColorSyncDeviceSetCustomProfiles(deviceClass unsafe.Pointer, deviceID unsafe.Pointer, profileInfo unsafe.Pointer) bool {
-	return raw.ColorSyncDeviceSetCustomProfiles(deviceClass, deviceID, profileInfo)
+var _fnColorSyncDeviceSetCustomProfiles func(objc.ID, objc.ID, objc.ID) bool
+
+// ColorSyncDeviceSetCustomProfiles calls the ColorSync framework function ColorSyncDeviceSetCustomProfiles.
+func ColorSyncDeviceSetCustomProfiles(deviceClass obj.Object, deviceID obj.Object, profileInfo obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncDeviceSetCustomProfiles == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncDeviceSetCustomProfiles, _lib, "ColorSyncDeviceSetCustomProfiles")
+	}
+	return _fnColorSyncDeviceSetCustomProfiles(objref.IDOf(deviceClass), objref.IDOf(deviceID), objref.IDOf(profileInfo))
 }
 
-// ColorSyncIterateDeviceProfiles calls [raw.ColorSyncIterateDeviceProfiles] (C function ColorSyncIterateDeviceProfiles).
-func ColorSyncIterateDeviceProfiles(callBack unsafe.Pointer, userInfo unsafe.Pointer) {
-	raw.ColorSyncIterateDeviceProfiles(callBack, userInfo)
+var _fnColorSyncProfileContainsTag func(objc.ID, objc.ID) bool
+
+// ColorSyncProfileContainsTag calls the ColorSync framework function ColorSyncProfileContainsTag.
+func ColorSyncProfileContainsTag(prof obj.Object, signature obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileContainsTag == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileContainsTag, _lib, "ColorSyncProfileContainsTag")
+	}
+	return _fnColorSyncProfileContainsTag(objref.IDOf(prof), objref.IDOf(signature))
 }
 
-// ColorSyncIterateInstalledCMMs calls [raw.ColorSyncIterateInstalledCMMs] (C function ColorSyncIterateInstalledCMMs).
-func ColorSyncIterateInstalledCMMs(callBack unsafe.Pointer, userInfo unsafe.Pointer) {
-	raw.ColorSyncIterateInstalledCMMs(callBack, userInfo)
+var _fnColorSyncProfileCopyDescriptionString func(objc.ID) objc.ID
+
+// ColorSyncProfileCopyDescriptionString calls the ColorSync framework function ColorSyncProfileCopyDescriptionString.
+func ColorSyncProfileCopyDescriptionString(prof obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCopyDescriptionString == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyDescriptionString, _lib, "ColorSyncProfileCopyDescriptionString")
+	}
+	_ret := _fnColorSyncProfileCopyDescriptionString(objref.IDOf(prof))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncIterateInstalledProfiles calls [raw.ColorSyncIterateInstalledProfiles] (C function ColorSyncIterateInstalledProfiles).
-func ColorSyncIterateInstalledProfiles(callBack unsafe.Pointer, seed *uint32, userInfo unsafe.Pointer, error_ unsafe.Pointer) {
-	raw.ColorSyncIterateInstalledProfiles(callBack, seed, userInfo, error_)
+var _fnColorSyncProfileCopyHeader func(objc.ID) objc.ID
+
+// ColorSyncProfileCopyHeader calls the ColorSync framework function ColorSyncProfileCopyHeader.
+func ColorSyncProfileCopyHeader(prof obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCopyHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeader, _lib, "ColorSyncProfileCopyHeader")
+	}
+	_ret := _fnColorSyncProfileCopyHeader(objref.IDOf(prof))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncIterateInstalledProfilesWithOptions calls [raw.ColorSyncIterateInstalledProfilesWithOptions] (C function ColorSyncIterateInstalledProfilesWithOptions).
-func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, seed *uint32, userInfo unsafe.Pointer, options unsafe.Pointer, error_ unsafe.Pointer) {
-	raw.ColorSyncIterateInstalledProfilesWithOptions(callBack, seed, userInfo, options, error_)
+var _fnColorSyncProfileCopyTag func(objc.ID, objc.ID) objc.ID
+
+// ColorSyncProfileCopyTag calls the ColorSync framework function ColorSyncProfileCopyTag.
+func ColorSyncProfileCopyTag(prof obj.Object, signature obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCopyTag == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyTag, _lib, "ColorSyncProfileCopyTag")
+	}
+	_ret := _fnColorSyncProfileCopyTag(objref.IDOf(prof), objref.IDOf(signature))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileContainsTag calls [raw.ColorSyncProfileContainsTag] (C function ColorSyncProfileContainsTag).
-func ColorSyncProfileContainsTag(prof unsafe.Pointer, signature unsafe.Pointer) bool {
-	return raw.ColorSyncProfileContainsTag(prof, signature)
+var _fnColorSyncProfileCopyTagSignatures func(objc.ID) objc.ID
+
+// ColorSyncProfileCopyTagSignatures calls the ColorSync framework function ColorSyncProfileCopyTagSignatures.
+func ColorSyncProfileCopyTagSignatures(prof obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCopyTagSignatures == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyTagSignatures, _lib, "ColorSyncProfileCopyTagSignatures")
+	}
+	_ret := _fnColorSyncProfileCopyTagSignatures(objref.IDOf(prof))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCopyData calls [raw.ColorSyncProfileCopyData] (C function ColorSyncProfileCopyData).
-func ColorSyncProfileCopyData(prof unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCopyData(prof, error_)
+var _fnColorSyncProfileCreateDeviceProfile func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// ColorSyncProfileCreateDeviceProfile calls the ColorSync framework function ColorSyncProfileCreateDeviceProfile.
+func ColorSyncProfileCreateDeviceProfile(deviceClass obj.Object, deviceID obj.Object, profileID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateDeviceProfile == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateDeviceProfile, _lib, "ColorSyncProfileCreateDeviceProfile")
+	}
+	_ret := _fnColorSyncProfileCreateDeviceProfile(objref.IDOf(deviceClass), objref.IDOf(deviceID), objref.IDOf(profileID))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCopyDescriptionString calls [raw.ColorSyncProfileCopyDescriptionString] (C function ColorSyncProfileCopyDescriptionString).
-func ColorSyncProfileCopyDescriptionString(prof unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCopyDescriptionString(prof)
+var _fnColorSyncProfileCreateLink func(objc.ID, objc.ID) objc.ID
+
+// ColorSyncProfileCreateLink calls the ColorSync framework function ColorSyncProfileCreateLink.
+func ColorSyncProfileCreateLink(profileInfo obj.Object, options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateLink == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateLink, _lib, "ColorSyncProfileCreateLink")
+	}
+	_ret := _fnColorSyncProfileCreateLink(objref.IDOf(profileInfo), objref.IDOf(options))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCopyHeader calls [raw.ColorSyncProfileCopyHeader] (C function ColorSyncProfileCopyHeader).
-func ColorSyncProfileCopyHeader(prof unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCopyHeader(prof)
+var _fnColorSyncProfileCreateMutable func() objc.ID
+
+// ColorSyncProfileCreateMutable calls the ColorSync framework function ColorSyncProfileCreateMutable.
+func ColorSyncProfileCreateMutable() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateMutable == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateMutable, _lib, "ColorSyncProfileCreateMutable")
+	}
+	_ret := _fnColorSyncProfileCreateMutable()
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCopyTag calls [raw.ColorSyncProfileCopyTag] (C function ColorSyncProfileCopyTag).
-func ColorSyncProfileCopyTag(prof unsafe.Pointer, signature unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCopyTag(prof, signature)
+var _fnColorSyncProfileCreateMutableCopy func(objc.ID) objc.ID
+
+// ColorSyncProfileCreateMutableCopy calls the ColorSync framework function ColorSyncProfileCreateMutableCopy.
+func ColorSyncProfileCreateMutableCopy(prof obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateMutableCopy, _lib, "ColorSyncProfileCreateMutableCopy")
+	}
+	_ret := _fnColorSyncProfileCreateMutableCopy(objref.IDOf(prof))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCopyTagSignatures calls [raw.ColorSyncProfileCopyTagSignatures] (C function ColorSyncProfileCopyTagSignatures).
-func ColorSyncProfileCopyTagSignatures(prof unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCopyTagSignatures(prof)
+var _fnColorSyncProfileCreateWithDisplayID func(uint32) objc.ID
+
+// ColorSyncProfileCreateWithDisplayID calls the ColorSync framework function ColorSyncProfileCreateWithDisplayID.
+func ColorSyncProfileCreateWithDisplayID(displayID uint32) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateWithDisplayID == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithDisplayID, _lib, "ColorSyncProfileCreateWithDisplayID")
+	}
+	_ret := _fnColorSyncProfileCreateWithDisplayID(displayID)
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCreate calls [raw.ColorSyncProfileCreate] (C function ColorSyncProfileCreate).
-func ColorSyncProfileCreate(data unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreate(data, error_)
+var _fnColorSyncProfileCreateWithName func(objc.ID) objc.ID
+
+// ColorSyncProfileCreateWithName calls the ColorSync framework function ColorSyncProfileCreateWithName.
+func ColorSyncProfileCreateWithName(name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateWithName == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithName, _lib, "ColorSyncProfileCreateWithName")
+	}
+	_ret := _fnColorSyncProfileCreateWithName(objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileCreateDeviceProfile calls [raw.ColorSyncProfileCreateDeviceProfile] (C function ColorSyncProfileCreateDeviceProfile).
-func ColorSyncProfileCreateDeviceProfile(deviceClass unsafe.Pointer, deviceID unsafe.Pointer, profileID unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateDeviceProfile(deviceClass, deviceID, profileID)
+var _fnColorSyncProfileGetTypeID func() int
+
+// ColorSyncProfileGetTypeID calls the ColorSync framework function ColorSyncProfileGetTypeID.
+func ColorSyncProfileGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetTypeID, _lib, "ColorSyncProfileGetTypeID")
+	}
+	return _fnColorSyncProfileGetTypeID()
 }
 
-// ColorSyncProfileCreateDisplayTransferTablesFromVCGT calls [raw.ColorSyncProfileCreateDisplayTransferTablesFromVCGT] (C function ColorSyncProfileCreateDisplayTransferTablesFromVCGT).
-func ColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile unsafe.Pointer, nSamplesPerChannel *uint) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile, nSamplesPerChannel)
+var _fnColorSyncProfileIsHLGBased func(objc.ID) bool
+
+// ColorSyncProfileIsHLGBased calls the ColorSync framework function ColorSyncProfileIsHLGBased.
+func ColorSyncProfileIsHLGBased(arg obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileIsHLGBased == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsHLGBased, _lib, "ColorSyncProfileIsHLGBased")
+	}
+	return _fnColorSyncProfileIsHLGBased(objref.IDOf(arg))
 }
 
-// ColorSyncProfileCreateLink calls [raw.ColorSyncProfileCreateLink] (C function ColorSyncProfileCreateLink).
-func ColorSyncProfileCreateLink(profileInfo unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateLink(profileInfo, options)
+var _fnColorSyncProfileIsMatrixBased func(objc.ID) bool
+
+// ColorSyncProfileIsMatrixBased calls the ColorSync framework function ColorSyncProfileIsMatrixBased.
+func ColorSyncProfileIsMatrixBased(arg obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileIsMatrixBased == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsMatrixBased, _lib, "ColorSyncProfileIsMatrixBased")
+	}
+	return _fnColorSyncProfileIsMatrixBased(objref.IDOf(arg))
 }
 
-// ColorSyncProfileCreateMutable calls [raw.ColorSyncProfileCreateMutable] (C function ColorSyncProfileCreateMutable).
-func ColorSyncProfileCreateMutable() unsafe.Pointer {
-	return raw.ColorSyncProfileCreateMutable()
+var _fnColorSyncProfileIsPQBased func(objc.ID) bool
+
+// ColorSyncProfileIsPQBased calls the ColorSync framework function ColorSyncProfileIsPQBased.
+func ColorSyncProfileIsPQBased(arg obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileIsPQBased == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsPQBased, _lib, "ColorSyncProfileIsPQBased")
+	}
+	return _fnColorSyncProfileIsPQBased(objref.IDOf(arg))
 }
 
-// ColorSyncProfileCreateMutableCopy calls [raw.ColorSyncProfileCreateMutableCopy] (C function ColorSyncProfileCreateMutableCopy).
-func ColorSyncProfileCreateMutableCopy(prof unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateMutableCopy(prof)
+var _fnColorSyncProfileIsWideGamut func(objc.ID) bool
+
+// ColorSyncProfileIsWideGamut calls the ColorSync framework function ColorSyncProfileIsWideGamut.
+func ColorSyncProfileIsWideGamut(arg obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileIsWideGamut == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileIsWideGamut, _lib, "ColorSyncProfileIsWideGamut")
+	}
+	return _fnColorSyncProfileIsWideGamut(objref.IDOf(arg))
 }
 
-// ColorSyncProfileCreateWithDisplayID calls [raw.ColorSyncProfileCreateWithDisplayID] (C function ColorSyncProfileCreateWithDisplayID).
-func ColorSyncProfileCreateWithDisplayID(displayID uint32) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateWithDisplayID(displayID)
+var _fnColorSyncProfileRemoveTag func(objc.ID, objc.ID)
+
+// ColorSyncProfileRemoveTag calls the ColorSync framework function ColorSyncProfileRemoveTag.
+func ColorSyncProfileRemoveTag(prof obj.Object, signature obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileRemoveTag == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileRemoveTag, _lib, "ColorSyncProfileRemoveTag")
+	}
+	_fnColorSyncProfileRemoveTag(objref.IDOf(prof), objref.IDOf(signature))
 }
 
-// ColorSyncProfileCreateWithName calls [raw.ColorSyncProfileCreateWithName] (C function ColorSyncProfileCreateWithName).
-func ColorSyncProfileCreateWithName(name unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateWithName(name)
+var _fnColorSyncProfileSetHeader func(objc.ID, objc.ID)
+
+// ColorSyncProfileSetHeader calls the ColorSync framework function ColorSyncProfileSetHeader.
+func ColorSyncProfileSetHeader(prof obj.Object, header obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileSetHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileSetHeader, _lib, "ColorSyncProfileSetHeader")
+	}
+	_fnColorSyncProfileSetHeader(objref.IDOf(prof), objref.IDOf(header))
 }
 
-// ColorSyncProfileCreateWithURL calls [raw.ColorSyncProfileCreateWithURL] (C function ColorSyncProfileCreateWithURL).
-func ColorSyncProfileCreateWithURL(url unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateWithURL(url, error_)
+var _fnColorSyncProfileSetTag func(objc.ID, objc.ID, objc.ID)
+
+// ColorSyncProfileSetTag calls the ColorSync framework function ColorSyncProfileSetTag.
+func ColorSyncProfileSetTag(prof obj.Object, signature obj.Object, data obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileSetTag == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileSetTag, _lib, "ColorSyncProfileSetTag")
+	}
+	_fnColorSyncProfileSetTag(objref.IDOf(prof), objref.IDOf(signature), objref.IDOf(data))
 }
 
-// ColorSyncProfileCreateWithURLAndOptions calls [raw.ColorSyncProfileCreateWithURLAndOptions] (C function ColorSyncProfileCreateWithURLAndOptions).
-func ColorSyncProfileCreateWithURLAndOptions(url unsafe.Pointer, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileCreateWithURLAndOptions(url, options, error_)
+var _fnColorSyncRegisterDevice func(objc.ID, objc.ID, objc.ID) bool
+
+// ColorSyncRegisterDevice calls the ColorSync framework function ColorSyncRegisterDevice.
+func ColorSyncRegisterDevice(deviceClass obj.Object, deviceID obj.Object, deviceInfo obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncRegisterDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncRegisterDevice, _lib, "ColorSyncRegisterDevice")
+	}
+	return _fnColorSyncRegisterDevice(objref.IDOf(deviceClass), objref.IDOf(deviceID), objref.IDOf(deviceInfo))
 }
 
-// ColorSyncProfileEstimateGamma calls [raw.ColorSyncProfileEstimateGamma] (C function ColorSyncProfileEstimateGamma).
-func ColorSyncProfileEstimateGamma(prof unsafe.Pointer, error_ unsafe.Pointer) float32 {
-	return raw.ColorSyncProfileEstimateGamma(prof, error_)
+var _fnColorSyncTransformCopyProperty func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// ColorSyncTransformCopyProperty calls the ColorSync framework function ColorSyncTransformCopyProperty.
+func ColorSyncTransformCopyProperty(transform obj.Object, key obj.Object, options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncTransformCopyProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCopyProperty, _lib, "ColorSyncTransformCopyProperty")
+	}
+	_ret := _fnColorSyncTransformCopyProperty(objref.IDOf(transform), objref.IDOf(key), objref.IDOf(options))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileEstimateGammaWithDisplayID calls [raw.ColorSyncProfileEstimateGammaWithDisplayID] (C function ColorSyncProfileEstimateGammaWithDisplayID).
-func ColorSyncProfileEstimateGammaWithDisplayID(displayID int, error_ unsafe.Pointer) float32 {
-	return raw.ColorSyncProfileEstimateGammaWithDisplayID(displayID, error_)
+var _fnColorSyncTransformCreate func(objc.ID, objc.ID) objc.ID
+
+// ColorSyncTransformCreate calls the ColorSync framework function ColorSyncTransformCreate.
+func ColorSyncTransformCreate(profileSequence obj.Object, options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncTransformCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCreate, _lib, "ColorSyncTransformCreate")
+	}
+	_ret := _fnColorSyncTransformCreate(objref.IDOf(profileSequence), objref.IDOf(options))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileGetDisplayTransferFormulaFromVCGT calls [raw.ColorSyncProfileGetDisplayTransferFormulaFromVCGT] (C function ColorSyncProfileGetDisplayTransferFormulaFromVCGT).
-func ColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile unsafe.Pointer, redMin *float32, redMax *float32, redGamma *float32, greenMin *float32, greenMax *float32, greenGamma *float32, blueMin *float32, blueMax *float32, blueGamma *float32) bool {
-	return raw.ColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile, redMin, redMax, redGamma, greenMin, greenMax, greenGamma, blueMin, blueMax, blueGamma)
+var _fnColorSyncTransformGetProfileSequence func(objc.ID) objc.ID
+
+// ColorSyncTransformGetProfileSequence calls the ColorSync framework function ColorSyncTransformGetProfileSequence.
+func ColorSyncTransformGetProfileSequence(transform obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncTransformGetProfileSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncTransformGetProfileSequence, _lib, "ColorSyncTransformGetProfileSequence")
+	}
+	_ret := _fnColorSyncTransformGetProfileSequence(objref.IDOf(transform))
+	return obj.Wrap(_ret)
 }
 
-// ColorSyncProfileGetMD5 calls [raw.ColorSyncProfileGetMD5] (C function ColorSyncProfileGetMD5).
-func ColorSyncProfileGetMD5(prof unsafe.Pointer) raw.ColorSyncMD5 {
-	return raw.ColorSyncProfileGetMD5(prof)
+var _fnColorSyncTransformGetTypeID func() int
+
+// ColorSyncTransformGetTypeID calls the ColorSync framework function ColorSyncTransformGetTypeID.
+func ColorSyncTransformGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncTransformGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncTransformGetTypeID, _lib, "ColorSyncTransformGetTypeID")
+	}
+	return _fnColorSyncTransformGetTypeID()
 }
 
-// ColorSyncProfileGetTypeID calls [raw.ColorSyncProfileGetTypeID] (C function ColorSyncProfileGetTypeID).
-func ColorSyncProfileGetTypeID() uint {
-	return raw.ColorSyncProfileGetTypeID()
+var _fnColorSyncTransformSetProperty func(objc.ID, objc.ID, objc.ID)
+
+// ColorSyncTransformSetProperty calls the ColorSync framework function ColorSyncTransformSetProperty.
+func ColorSyncTransformSetProperty(transform obj.Object, key obj.Object, property obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncTransformSetProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncTransformSetProperty, _lib, "ColorSyncTransformSetProperty")
+	}
+	_fnColorSyncTransformSetProperty(objref.IDOf(transform), objref.IDOf(key), objref.IDOf(property))
 }
 
-// ColorSyncProfileGetURL calls [raw.ColorSyncProfileGetURL] (C function ColorSyncProfileGetURL).
-func ColorSyncProfileGetURL(prof unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncProfileGetURL(prof, error_)
-}
+var _fnColorSyncUnregisterDevice func(objc.ID, objc.ID) bool
 
-// ColorSyncProfileInstall calls [raw.ColorSyncProfileInstall] (C function ColorSyncProfileInstall).
-func ColorSyncProfileInstall(profile unsafe.Pointer, domain unsafe.Pointer, subpath unsafe.Pointer, error_ unsafe.Pointer) bool {
-	return raw.ColorSyncProfileInstall(profile, domain, subpath, error_)
-}
-
-// ColorSyncProfileIsHLGBased calls [raw.ColorSyncProfileIsHLGBased] (C function ColorSyncProfileIsHLGBased).
-func ColorSyncProfileIsHLGBased(arg unsafe.Pointer) bool {
-	return raw.ColorSyncProfileIsHLGBased(arg)
-}
-
-// ColorSyncProfileIsMatrixBased calls [raw.ColorSyncProfileIsMatrixBased] (C function ColorSyncProfileIsMatrixBased).
-func ColorSyncProfileIsMatrixBased(arg unsafe.Pointer) bool {
-	return raw.ColorSyncProfileIsMatrixBased(arg)
-}
-
-// ColorSyncProfileIsPQBased calls [raw.ColorSyncProfileIsPQBased] (C function ColorSyncProfileIsPQBased).
-func ColorSyncProfileIsPQBased(arg unsafe.Pointer) bool {
-	return raw.ColorSyncProfileIsPQBased(arg)
-}
-
-// ColorSyncProfileIsWideGamut calls [raw.ColorSyncProfileIsWideGamut] (C function ColorSyncProfileIsWideGamut).
-func ColorSyncProfileIsWideGamut(arg unsafe.Pointer) bool {
-	return raw.ColorSyncProfileIsWideGamut(arg)
-}
-
-// ColorSyncProfileRemoveTag calls [raw.ColorSyncProfileRemoveTag] (C function ColorSyncProfileRemoveTag).
-func ColorSyncProfileRemoveTag(prof unsafe.Pointer, signature unsafe.Pointer) {
-	raw.ColorSyncProfileRemoveTag(prof, signature)
-}
-
-// ColorSyncProfileSetHeader calls [raw.ColorSyncProfileSetHeader] (C function ColorSyncProfileSetHeader).
-func ColorSyncProfileSetHeader(prof unsafe.Pointer, header unsafe.Pointer) {
-	raw.ColorSyncProfileSetHeader(prof, header)
-}
-
-// ColorSyncProfileSetTag calls [raw.ColorSyncProfileSetTag] (C function ColorSyncProfileSetTag).
-func ColorSyncProfileSetTag(prof unsafe.Pointer, signature unsafe.Pointer, data unsafe.Pointer) {
-	raw.ColorSyncProfileSetTag(prof, signature, data)
-}
-
-// ColorSyncProfileUninstall calls [raw.ColorSyncProfileUninstall] (C function ColorSyncProfileUninstall).
-func ColorSyncProfileUninstall(profile unsafe.Pointer, error_ unsafe.Pointer) bool {
-	return raw.ColorSyncProfileUninstall(profile, error_)
-}
-
-// ColorSyncProfileVerify calls [raw.ColorSyncProfileVerify] (C function ColorSyncProfileVerify).
-func ColorSyncProfileVerify(prof unsafe.Pointer, errors_ unsafe.Pointer, warnings unsafe.Pointer) bool {
-	return raw.ColorSyncProfileVerify(prof, errors_, warnings)
-}
-
-// ColorSyncRegisterDevice calls [raw.ColorSyncRegisterDevice] (C function ColorSyncRegisterDevice).
-func ColorSyncRegisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer, deviceInfo unsafe.Pointer) bool {
-	return raw.ColorSyncRegisterDevice(deviceClass, deviceID, deviceInfo)
-}
-
-// ColorSyncTransformConvert calls [raw.ColorSyncTransformConvert] (C function ColorSyncTransformConvert).
-func ColorSyncTransformConvert(transform unsafe.Pointer, width uint, height uint, dst unsafe.Pointer, dstDepth ColorSyncDataDepth, dstLayout uint32, dstBytesPerRow uint, src unsafe.Pointer, srcDepth ColorSyncDataDepth, srcLayout uint32, srcBytesPerRow uint, options unsafe.Pointer) bool {
-	return raw.ColorSyncTransformConvert(transform, width, height, dst, raw.ColorSyncDataDepth(dstDepth), dstLayout, dstBytesPerRow, src, raw.ColorSyncDataDepth(srcDepth), srcLayout, srcBytesPerRow, options)
-}
-
-// ColorSyncTransformCopyProperty calls [raw.ColorSyncTransformCopyProperty] (C function ColorSyncTransformCopyProperty).
-func ColorSyncTransformCopyProperty(transform unsafe.Pointer, key unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncTransformCopyProperty(transform, key, options)
-}
-
-// ColorSyncTransformCreate calls [raw.ColorSyncTransformCreate] (C function ColorSyncTransformCreate).
-func ColorSyncTransformCreate(profileSequence unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncTransformCreate(profileSequence, options)
-}
-
-// ColorSyncTransformGetProfileSequence calls [raw.ColorSyncTransformGetProfileSequence] (C function ColorSyncTransformGetProfileSequence).
-func ColorSyncTransformGetProfileSequence(transform unsafe.Pointer) unsafe.Pointer {
-	return raw.ColorSyncTransformGetProfileSequence(transform)
-}
-
-// ColorSyncTransformGetTypeID calls [raw.ColorSyncTransformGetTypeID] (C function ColorSyncTransformGetTypeID).
-func ColorSyncTransformGetTypeID() uint {
-	return raw.ColorSyncTransformGetTypeID()
-}
-
-// ColorSyncTransformSetProperty calls [raw.ColorSyncTransformSetProperty] (C function ColorSyncTransformSetProperty).
-func ColorSyncTransformSetProperty(transform unsafe.Pointer, key unsafe.Pointer, property unsafe.Pointer) {
-	raw.ColorSyncTransformSetProperty(transform, key, property)
-}
-
-// ColorSyncUnregisterDevice calls [raw.ColorSyncUnregisterDevice] (C function ColorSyncUnregisterDevice).
-func ColorSyncUnregisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer) bool {
-	return raw.ColorSyncUnregisterDevice(deviceClass, deviceID)
+// ColorSyncUnregisterDevice calls the ColorSync framework function ColorSyncUnregisterDevice.
+func ColorSyncUnregisterDevice(deviceClass obj.Object, deviceID obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncUnregisterDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncUnregisterDevice, _lib, "ColorSyncUnregisterDevice")
+	}
+	return _fnColorSyncUnregisterDevice(objref.IDOf(deviceClass), objref.IDOf(deviceID))
 }

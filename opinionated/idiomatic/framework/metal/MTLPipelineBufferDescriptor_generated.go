@@ -5,62 +5,96 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The mutability options for a buffer that a render or compute pipeline uses.
+// PipelineBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLPipelineBufferDescriptor.
 //
-// PipelineBufferDescriptor wraps [raw.MTLPipelineBufferDescriptor] with a fluent Go API.
+// The mutability options for a buffer that a render or compute pipeline uses.
 type PipelineBufferDescriptor struct {
-	inner *raw.MTLPipelineBufferDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLPipelineBufferDescriptor].
-func (x *PipelineBufferDescriptor) Unwrap() *raw.MTLPipelineBufferDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PipelineBufferDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// PipelineBufferDescriptorFromID adopts an existing object pointer as a PipelineBufferDescriptor (nil for 0).
+// PipelineBufferDescriptorFromID adopts an existing Objective-C object as a PipelineBufferDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func PipelineBufferDescriptorFromID(id objc.ID) *PipelineBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &PipelineBufferDescriptor{inner: raw.MTLPipelineBufferDescriptorFromID(id)}
-}
-
-// NewPipelineBufferDescriptor creates a new [PipelineBufferDescriptor].
-func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLPipelineBufferDescriptor")), objc.RegisterName("new"))
-	return &PipelineBufferDescriptor{inner: raw.MTLPipelineBufferDescriptorFromID(_id)}
-}
-
-// A mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
-//
-// WithMutability sets the mutability property and returns the receiver for chaining.
-func (x *PipelineBufferDescriptor) WithMutability(mutability MTLMutability) *PipelineBufferDescriptor {
-	x.inner.SetMutability(raw.MTLMutability(mutability))
+	x := &PipelineBufferDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Mutability calls the underlying Mutability.
-func (x *PipelineBufferDescriptor) Mutability() MTLMutability {
-	return MTLMutability(x.inner.Mutability())
+// pipelineBufferDescriptorAdopt wraps an Objective-C object that this code just created as a
+// PipelineBufferDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pipelineBufferDescriptorAdopt(id objc.ID) *PipelineBufferDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &PipelineBufferDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMutability calls the underlying SetMutability.
-func (x *PipelineBufferDescriptor) SetMutability(mutability MTLMutability) {
-	x.inner.SetMutability(raw.MTLMutability(mutability))
+// Description returns the object's -description text.
+func (x *PipelineBufferDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PipelineBufferDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PipelineBufferDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PipelineBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPipelineBufferDescriptor creates a new PipelineBufferDescriptor.
+func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLPipelineBufferDescriptor")), objc.RegisterName("new"))
+	return pipelineBufferDescriptorAdopt(_id)
+}
+
+// WithMutability a mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
+func (x *PipelineBufferDescriptor) WithMutability(mutability Mutability) *PipelineBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutability:"), mutability)
+	return x
+}
+
+// Mutability wraps the corresponding Objective-C method.
+func (x *PipelineBufferDescriptor) Mutability() Mutability {
+	_r := objc.Send[Mutability](objref.IDOf(x), objc.RegisterName("mutability"))
+	return _r
+}
+
+// SetMutability wraps the corresponding Objective-C method.
+func (x *PipelineBufferDescriptor) SetMutability(mutability Mutability) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutability:"), mutability)
 }
 
 // PipelineBufferDescriptorable is the interface implemented by [PipelineBufferDescriptor], for mocking and DI.
 type PipelineBufferDescriptorable interface {
-	Unwrap() *raw.MTLPipelineBufferDescriptor
-	WithMutability(mutability MTLMutability) *PipelineBufferDescriptor
-	Mutability() MTLMutability
-	SetMutability(mutability MTLMutability)
+	obj.Object
+	WithMutability(mutability Mutability) *PipelineBufferDescriptor
+	Mutability() Mutability
+	SetMutability(mutability Mutability)
 }
 
 var _ PipelineBufferDescriptorable = (*PipelineBufferDescriptor)(nil)

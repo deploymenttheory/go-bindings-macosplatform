@@ -5,97 +5,121 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGroupKeyManagementClusterKeySetReadResponseParams wraps [raw.MTRGroupKeyManagementClusterKeySetReadResponseParams] with a fluent Go API.
+// MTRGroupKeyManagementClusterKeySetReadResponseParams is an idiomatic wrapper over the Objective-C class MTRGroupKeyManagementClusterKeySetReadResponseParams.
 type MTRGroupKeyManagementClusterKeySetReadResponseParams struct {
-	inner *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetReadResponseParams].
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterKeySetReadResponseParams (nil for 0).
+// MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID adopts an existing Objective-C object as a MTRGroupKeyManagementClusterKeySetReadResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(id objc.ID) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupKeyManagementClusterKeySetReadResponseParams{inner: raw.MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(id)}
-}
-
-// Initialize an MTRGroupKeyManagementClusterKeySetReadResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError creates a new [MTRGroupKeyManagementClusterKeySetReadResponseParams].
-func NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupKeyManagementClusterKeySetReadResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRGroupKeyManagementClusterKeySetReadResponseParams{inner: raw.MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(_id)}, nil
-}
-
-// WithGroupKeySet sets the groupKeySet property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
-	x.inner.SetGroupKeySet(groupKeySet.Unwrap())
+	x := &MTRGroupKeyManagementClusterKeySetReadResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
-	return x
-}
-
-// GroupKeySet calls the underlying GroupKeySet.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	_r := x.inner.GroupKeySet()
-	if _r == nil {
+// mTRGroupKeyManagementClusterKeySetReadResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupKeyManagementClusterKeySetReadResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupKeyManagementClusterKeySetReadResponseParamsAdopt(id objc.ID) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
+	if id == 0 {
 		return nil
 	}
-	return &MTRGroupKeyManagementClusterGroupKeySetStruct{inner: _r}
+	x := &MTRGroupKeyManagementClusterKeySetReadResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetGroupKeySet calls the underlying SetGroupKeySet.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) {
-	x.inner.SetGroupKeySet(groupKeySet)
+// Description returns the object's -description text.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError initialize an MTRGroupKeyManagementClusterKeySetReadResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGroupKeyManagementClusterKeySetReadResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRGroupKeyManagementClusterKeySetReadResponseParamsAdopt(_id), nil
+}
+
+// WithGroupKeySet sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySet:"), objref.IDOf(groupKeySet))
+	return x
+}
+
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
+}
+
+// GroupKeySet wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySet"))
+	return MTRGroupKeyManagementClusterGroupKeySetStructFromID(_r)
+}
+
+// SetGroupKeySet wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySet:"), objref.IDOf(groupKeySet))
+}
+
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRGroupKeyManagementClusterKeySetReadResponseParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetReadResponseParams], for mocking and DI.
 type MTRGroupKeyManagementClusterKeySetReadResponseParamsable interface {
-	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams
+	obj.Object
 	WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetReadResponseParams
 	GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct
-	SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	SetGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRGroupKeyManagementClusterKeySetReadResponseParamsable = (*MTRGroupKeyManagementClusterKeySetReadResponseParams)(nil)

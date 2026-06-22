@@ -5,90 +5,109 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A task object for monitoring the speech recognition progress.
+// SpeechRecognitionTask is an idiomatic wrapper over the Objective-C class SFSpeechRecognitionTask.
 //
-// SpeechRecognitionTask wraps [raw.SFSpeechRecognitionTask] with a fluent Go API.
+// A task object for monitoring the speech recognition progress.
 type SpeechRecognitionTask struct {
-	inner *raw.SFSpeechRecognitionTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSpeechRecognitionTask].
-func (x *SpeechRecognitionTask) Unwrap() *raw.SFSpeechRecognitionTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechRecognitionTask) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechRecognitionTaskFromID adopts an existing object pointer as a SpeechRecognitionTask (nil for 0).
+// SpeechRecognitionTaskFromID adopts an existing Objective-C object as a SpeechRecognitionTask
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechRecognitionTaskFromID(id objc.ID) *SpeechRecognitionTask {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechRecognitionTask{inner: raw.SFSpeechRecognitionTaskFromID(id)}
+	x := &SpeechRecognitionTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechRecognitionTask creates a new [SpeechRecognitionTask].
+// speechRecognitionTaskAdopt wraps an Objective-C object that this code just created as a
+// SpeechRecognitionTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechRecognitionTaskAdopt(id objc.ID) *SpeechRecognitionTask {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechRecognitionTask{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechRecognitionTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechRecognitionTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechRecognitionTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechRecognitionTask) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechRecognitionTask creates a new SpeechRecognitionTask.
 func NewSpeechRecognitionTask() *SpeechRecognitionTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechRecognitionTask")), objc.RegisterName("new"))
-	return &SpeechRecognitionTask{inner: raw.SFSpeechRecognitionTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognitionTask")), objc.RegisterName("new"))
+	return speechRecognitionTaskAdopt(_id)
 }
 
-// Stops accepting new audio and finishes processing on the audio input that has already been accepted.
-//
-// Finish calls the underlying Finish.
+// Finish stops accepting new audio and finishes processing on the audio input that has already been accepted.
 func (x *SpeechRecognitionTask) Finish() {
-	x.inner.Finish()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish"))
 }
 
-// Cancels the current speech recognition task.
-//
-// Cancel calls the underlying Cancel.
+// Cancel cancels the current speech recognition task.
 func (x *SpeechRecognitionTask) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// The current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see “SFSpeechRecognitionTaskState“.
-//
-// State calls the underlying State.
-func (x *SpeechRecognitionTask) State() SFSpeechRecognitionTaskState {
-	return SFSpeechRecognitionTaskState(x.inner.State())
+// State the current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see “SFSpeechRecognitionTaskState“.
+func (x *SpeechRecognitionTask) State() SpeechRecognitionTaskState {
+	_r := objc.Send[SpeechRecognitionTaskState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// A Boolean value that indicates whether audio input has stopped. By default, the value of this property is `false`.
-//
-// IsFinishing calls the underlying IsFinishing.
+// IsFinishing a Boolean value that indicates whether audio input has stopped. By default, the value of this property is `false`.
 func (x *SpeechRecognitionTask) IsFinishing() bool {
-	return x.inner.IsFinishing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinishing"))
+	return _r
 }
 
-// A Boolean value that indicates whether the speech recognition task was canceled. By default, the value of this property is `false`.
-//
-// IsCancelled calls the underlying IsCancelled.
+// IsCancelled a Boolean value that indicates whether the speech recognition task was canceled. By default, the value of this property is `false`.
 func (x *SpeechRecognitionTask) IsCancelled() bool {
-	return x.inner.IsCancelled()
-}
-
-// An error object that specifies the error that occurred during a speech recognition task. The system may return one of the errors listed in the table below. | Error Code | Error Domain | Description | |---|---|---| | `102` | `kLSRErrorDomain` | Assets are not installed. | | `201` | `kLSRErrorDomain` | Siri or Dictation is disabled. | | `300` | `kLSRErrorDomain` | Failed to initialize recognizer. | | `301` | `kLSRErrorDomain` | Request was canceled. | | `203` | `kAFAssistantErrorDomain` | Failure occurred during speech recognition. | | `1100` | `kAFAssistantErrorDomain` | Trying to start recognition while an earlier instance is still active. | | `1101` | `kAFAssistantErrorDomain` | Connection to speech process was invalidated. | | `1107` | `kAFAssistantErrorDomain` | Connection to speech process was interrupted. | | `1110` | `kAFAssistantErrorDomain` | Failed to recognize any speech. | | `1700` | `kAFAssistantErrorDomain` | Request is not authorized. |
-//
-// Error calls the underlying Error.
-func (x *SpeechRecognitionTask) Error() unsafe.Pointer {
-	return x.inner.Error()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+	return _r
 }
 
 // SpeechRecognitionTaskable is the interface implemented by [SpeechRecognitionTask], for mocking and DI.
 type SpeechRecognitionTaskable interface {
-	Unwrap() *raw.SFSpeechRecognitionTask
+	obj.Object
 	Finish()
 	Cancel()
-	State() SFSpeechRecognitionTaskState
+	State() SpeechRecognitionTaskState
 	IsFinishing() bool
 	IsCancelled() bool
-	Error() unsafe.Pointer
 }
 
 var _ SpeechRecognitionTaskable = (*SpeechRecognitionTask)(nil)

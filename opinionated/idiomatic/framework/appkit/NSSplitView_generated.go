@@ -5,647 +5,523 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A view that arranges two or more views in a linear stack running horizontally or vertically.
+// SplitView is an idiomatic wrapper over the Objective-C class NSSplitView.
 //
-// SplitView wraps [raw.NSSplitView] with a fluent Go API.
+// It embeds [View], promoting that type's methods.
+//
+// A view that arranges two or more views in a linear stack running horizontally or vertically.
 type SplitView struct {
-	inner *raw.NSSplitView
+	View
 }
 
-// Unwrap returns the underlying [raw.NSSplitView].
-func (x *SplitView) Unwrap() *raw.NSSplitView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SplitView) ID() objc.ID { return x.inner.Ptr() }
-
-// SplitViewFromID adopts an existing object pointer as a SplitView (nil for 0).
+// SplitViewFromID adopts an existing Objective-C object as a SplitView
+// (nil for 0), retaining it and registering a release finalizer.
 func SplitViewFromID(id objc.ID) *SplitView {
 	if id == 0 {
 		return nil
 	}
-	return &SplitView{inner: raw.NSSplitViewFromID(id)}
-}
-
-// NewSplitView creates a new [SplitView].
-func NewSplitView() *SplitView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSplitView")), objc.RegisterName("new"))
-	return &SplitView{inner: raw.NSSplitViewFromID(_id)}
-}
-
-// A Boolean value that determines the geometric orientation of the split view’s dividers.
-//
-// WithVertical sets the vertical property and returns the receiver for chaining.
-func (x *SplitView) WithVertical(vertical bool) *SplitView {
-	x.inner.SetVertical(vertical)
+	x := &SplitView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The style of divider between views.
-//
-// WithDividerStyle sets the dividerStyle property and returns the receiver for chaining.
-func (x *SplitView) WithDividerStyle(dividerStyle NSSplitViewDividerStyle) *SplitView {
-	x.inner.SetDividerStyle(raw.NSSplitViewDividerStyle(dividerStyle))
-	return x
-}
-
-// The name to use when the system automatically saves the split view’s divider configuration.
-//
-// WithAutosaveName sets the autosaveName property and returns the receiver for chaining.
-func (x *SplitView) WithAutosaveName(autosaveName *foundation.NSString) *SplitView {
-	x.inner.SetAutosaveName(autosaveName)
-	return x
-}
-
-// The split view’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SplitView) WithDelegate(delegate raw.NSSplitViewDelegate) *SplitView {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that determines whether the split view arranges all of its subviews as split panes.
-//
-// WithArrangesAllSubviews sets the arrangesAllSubviews property and returns the receiver for chaining.
-func (x *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView {
-	x.inner.SetArrangesAllSubviews(arrangesAllSubviews)
-	return x
-}
-
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
-func (x *SplitView) WithSubviews(items ...ViewProvider) *SplitView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
-	return x
-}
-
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *SplitView) WithHidden(hidden bool) *SplitView {
-	x.inner.NSView.SetHidden(hidden)
-	return x
-}
-
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
-func (x *SplitView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SplitView {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
-	return x
-}
-
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
-func (x *SplitView) WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
-	return x
-}
-
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SplitView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SplitView {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
-	return x
-}
-
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *SplitView) WithFrame(frame corefoundation.CGRect) *SplitView {
-	x.inner.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
-func (x *SplitView) WithFrameRotation(frameRotation float64) *SplitView {
-	x.inner.NSView.SetFrameRotation(frameRotation)
-	return x
-}
-
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
-func (x *SplitView) WithFrameCenterRotation(frameCenterRotation float64) *SplitView {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
-	return x
-}
-
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
-func (x *SplitView) WithBoundsRotation(boundsRotation float64) *SplitView {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
-	return x
-}
-
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *SplitView) WithBounds(bounds corefoundation.CGRect) *SplitView {
-	x.inner.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
-func (x *SplitView) WithCanDrawConcurrently(canDrawConcurrently bool) *SplitView {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
-	return x
-}
-
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
-func (x *SplitView) WithNeedsDisplay(needsDisplay bool) *SplitView {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
-	return x
-}
-
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
-func (x *SplitView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SplitView {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
-	return x
-}
-
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
-func (x *SplitView) WithWantsRestingTouches(wantsRestingTouches bool) *SplitView {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
-	return x
-}
-
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SplitView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SplitView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
-	return x
-}
-
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SplitView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SplitView {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
-	return x
-}
-
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
-func (x *SplitView) WithWantsLayer(wantsLayer bool) *SplitView {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
-	return x
-}
-
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *SplitView) WithLayer(layer *quartzcore.CALayer) *SplitView {
-	x.inner.NSView.SetLayer(layer)
-	return x
-}
-
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
-func (x *SplitView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SplitView {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
-	return x
-}
-
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
-func (x *SplitView) WithNeedsLayout(needsLayout bool) *SplitView {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
-	return x
-}
-
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
-func (x *SplitView) WithAlphaValue(alphaValue float64) *SplitView {
-	x.inner.NSView.SetAlphaValue(alphaValue)
-	return x
-}
-
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
-func (x *SplitView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SplitView {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
-	return x
-}
-
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *SplitView) WithBackgroundFilters(items ...*coreimage.CIFilter) *SplitView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
-	return x
-}
-
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *SplitView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SplitView {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
-	return x
-}
-
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *SplitView) WithContentFilters(items ...*coreimage.CIFilter) *SplitView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
-	return x
-}
-
-// WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *SplitView) WithShadow(shadow *Shadow) *SplitView {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
-	return x
-}
-
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
-func (x *SplitView) WithClipsToBounds(clipsToBounds bool) *SplitView {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
-	return x
-}
-
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
-func (x *SplitView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
-	return x
-}
-
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
-func (x *SplitView) WithToolTip(toolTip string) *SplitView {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
-	return x
-}
-
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SplitView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SplitView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
-	return x
-}
-
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *SplitView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SplitView {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
-func (x *SplitView) WithNextKeyView(nextKeyView ViewProvider) *SplitView {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
-	return x
-}
-
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SplitView) WithFocusRingType(focusRingType NSFocusRingType) *SplitView {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
-	return x
-}
-
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
-func (x *SplitView) WithGestureRecognizers(items ...GestureRecognizerProvider) *SplitView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
-	return x
-}
-
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SplitView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SplitView {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *SplitView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
-	return x
-}
-
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
-func (x *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
-	return x
-}
-
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
-	return x
-}
-
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
-func (x *SplitView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SplitView {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
-	return x
-}
-
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
-func (x *SplitView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SplitView {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
-	return x
-}
-
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *SplitView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SplitView {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
-	return x
-}
-
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *SplitView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SplitView {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
-	return x
-}
-
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
-func (x *SplitView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SplitView {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
-	return x
-}
-
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
-func (x *SplitView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SplitView {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
-	return x
-}
-
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *SplitView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
-	return x
-}
-
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
-func (x *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitView {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
-	return x
-}
-
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SplitView) WithMenu(menu *Menu) *SplitView {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
-	return x
-}
-
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *SplitView) WithUserActivity(userActivity *foundation.NSUserActivity) *SplitView {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
-	return x
-}
-
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
-	return x
-}
-
-// Draws a divider between two of the split view’s subviews.
-//
-// DrawDividerInRect calls the underlying DrawDividerInRect.
-func (x *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
-	x.inner.DrawDividerInRect(rect)
-}
-
-// Adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
-//
-// AdjustSubviews calls the underlying AdjustSubviews.
-func (x *SplitView) AdjustSubviews() {
-	x.inner.AdjustSubviews()
-}
-
-// Returns whether the specified view is in a collapsed state.
-//
-// IsSubviewCollapsed calls the underlying IsSubviewCollapsed.
-func (x *SplitView) IsSubviewCollapsed(subview *raw.NSView) bool {
-	return x.inner.IsSubviewCollapsed(subview)
-}
-
-// Returns the minimum possible position of the divider at the specified index.
-//
-// MinPossiblePositionOfDividerAtIndex calls the underlying MinPossiblePositionOfDividerAtIndex.
-func (x *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
-	return x.inner.MinPossiblePositionOfDividerAtIndex(dividerIndex)
-}
-
-// Returns the maximum possible position of the divider at the specified index.
-//
-// MaxPossiblePositionOfDividerAtIndex calls the underlying MaxPossiblePositionOfDividerAtIndex.
-func (x *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
-	return x.inner.MaxPossiblePositionOfDividerAtIndex(dividerIndex)
-}
-
-// Updates the location of a divider you specify by index.
-//
-// SetPositionOfDividerAtIndex calls the underlying SetPositionOfDividerAtIndex.
-func (x *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
-	x.inner.SetPositionOfDividerAtIndex(position, dividerIndex)
-}
-
-// Returns the priority of the subview’s width or height when resizing.
-//
-// HoldingPriorityForSubviewAtIndex calls the underlying HoldingPriorityForSubviewAtIndex.
-func (x *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
-	return x.inner.HoldingPriorityForSubviewAtIndex(subviewIndex)
-}
-
-// Sets the priority for split view subviews to maintain their width or height.
-//
-// SetHoldingPriorityForSubviewAtIndex calls the underlying SetHoldingPriorityForSubviewAtIndex.
-func (x *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
-	x.inner.SetHoldingPriorityForSubviewAtIndex(priority, subviewIndex)
-}
-
-// IsVertical calls the underlying IsVertical.
-func (x *SplitView) IsVertical() bool {
-	return x.inner.IsVertical()
-}
-
-// SetVertical calls the underlying SetVertical.
-func (x *SplitView) SetVertical(vertical bool) {
-	x.inner.SetVertical(vertical)
-}
-
-// DividerStyle calls the underlying DividerStyle.
-func (x *SplitView) DividerStyle() NSSplitViewDividerStyle {
-	return NSSplitViewDividerStyle(x.inner.DividerStyle())
-}
-
-// SetDividerStyle calls the underlying SetDividerStyle.
-func (x *SplitView) SetDividerStyle(dividerStyle NSSplitViewDividerStyle) {
-	x.inner.SetDividerStyle(raw.NSSplitViewDividerStyle(dividerStyle))
-}
-
-// AutosaveName calls the underlying AutosaveName.
-func (x *SplitView) AutosaveName() string {
-	_r := x.inner.AutosaveName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetAutosaveName calls the underlying SetAutosaveName.
-func (x *SplitView) SetAutosaveName(autosaveName *foundation.NSString) {
-	x.inner.SetAutosaveName(autosaveName)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *SplitView) Delegate() raw.NSSplitViewDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SplitView) SetDelegate(delegate raw.NSSplitViewDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// DividerColor calls the underlying DividerColor.
-func (x *SplitView) DividerColor() *Color {
-	_r := x.inner.DividerColor()
-	if _r == nil {
+// splitViewAdopt wraps an Objective-C object that this code just created as a
+// SplitView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func splitViewAdopt(id objc.ID) *SplitView {
+	if id == 0 {
 		return nil
 	}
-	return &Color{inner: _r}
+	x := &SplitView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DividerThickness calls the underlying DividerThickness.
+// NewSplitView creates a new SplitView.
+func NewSplitView() *SplitView {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSplitView")), objc.RegisterName("new"))
+	return splitViewAdopt(_id)
+}
+
+// WithVertical a Boolean value that determines the geometric orientation of the split view’s dividers.
+func (x *SplitView) WithVertical(vertical bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertical:"), vertical)
+	return x
+}
+
+// WithDividerStyle the style of divider between views.
+func (x *SplitView) WithDividerStyle(dividerStyle SplitViewDividerStyle) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDividerStyle:"), dividerStyle)
+	return x
+}
+
+// WithAutosaveName the name to use when the system automatically saves the split view’s divider configuration.
+func (x *SplitView) WithAutosaveName(autosaveName obj.Object) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
+	return x
+}
+
+// WithArrangesAllSubviews a Boolean value that determines whether the split view arranges all of its subviews as split panes.
+func (x *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrangesAllSubviews:"), arrangesAllSubviews)
+	return x
+}
+
+// WithSubviews sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithSubviews(items ...ViewProvider) *SplitView {
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
+	return x
+}
+
+// WithHidden sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithHidden(hidden bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return x
+}
+
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *SplitView) WithFrame(frame corefoundation.CGRect) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithFrameRotation(frameRotation float64) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithFrameCenterRotation(frameCenterRotation float64) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithBoundsRotation(boundsRotation float64) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return x
+}
+
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *SplitView) WithBounds(bounds corefoundation.CGRect) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithCanDrawConcurrently(canDrawConcurrently bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (x *SplitView) WithNeedsDisplay(needsDisplay bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithWantsRestingTouches(wantsRestingTouches bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithWantsLayer(wantsLayer bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return x
+}
+
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithLayer(layer obj.Object) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithNeedsLayout(needsLayout bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithAlphaValue(alphaValue float64) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithBackgroundFilters(items ...obj.Object) *SplitView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return x
+}
+
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithCompositingFilter(compositingFilter obj.Object) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return x
+}
+
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithContentFilters(items ...obj.Object) *SplitView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
+	return x
+}
+
+// WithShadow sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithShadow(shadow *Shadow) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return x
+}
+
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithClipsToBounds(clipsToBounds bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithToolTip(toolTip string) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithNextKeyView(nextKeyView ViewProvider) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return x
+}
+
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithFocusRingType(focusRingType FocusRingType) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithGestureRecognizers(items ...GestureRecognizerProvider) *SplitView {
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (x *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+func (x *SplitView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
+func (x *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return x
+}
+
+// WithMenu returns the responder’s menu.
+func (x *SplitView) WithMenu(menu *Menu) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return x
+}
+
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *SplitView) WithUserActivity(userActivity obj.Object) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// WithTouchBar the NSTouchBar object associated with the responder.
+func (x *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return x
+}
+
+// DrawDividerInRect draws a divider between two of the split view’s subviews.
+func (x *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawDividerInRect:"), rect)
+}
+
+// AdjustSubviews adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
+func (x *SplitView) AdjustSubviews() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustSubviews"))
+}
+
+// IsSubviewCollapsed returns whether the specified view is in a collapsed state.
+func (x *SplitView) IsSubviewCollapsed(subview *View) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubviewCollapsed:"), objref.IDOf(subview))
+	return _r
+}
+
+// MinPossiblePositionOfDividerAtIndex returns the minimum possible position of the divider at the specified index.
+func (x *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minPossiblePositionOfDividerAtIndex:"), dividerIndex)
+	return _r
+}
+
+// MaxPossiblePositionOfDividerAtIndex returns the maximum possible position of the divider at the specified index.
+func (x *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxPossiblePositionOfDividerAtIndex:"), dividerIndex)
+	return _r
+}
+
+// SetPositionOfDividerAtIndex updates the location of a divider you specify by index.
+func (x *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:ofDividerAtIndex:"), position, dividerIndex)
+}
+
+// HoldingPriorityForSubviewAtIndex returns the priority of the subview’s width or height when resizing.
+func (x *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("holdingPriorityForSubviewAtIndex:"), subviewIndex)
+	return _r
+}
+
+// SetHoldingPriorityForSubviewAtIndex sets the priority for split view subviews to maintain their width or height.
+func (x *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldingPriority:forSubviewAtIndex:"), priority, subviewIndex)
+}
+
+// IsVertical wraps the corresponding Objective-C method.
+func (x *SplitView) IsVertical() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+	return _r
+}
+
+// SetVertical wraps the corresponding Objective-C method.
+func (x *SplitView) SetVertical(vertical bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertical:"), vertical)
+}
+
+// DividerStyle wraps the corresponding Objective-C method.
+func (x *SplitView) DividerStyle() SplitViewDividerStyle {
+	_r := objc.Send[SplitViewDividerStyle](objref.IDOf(x), objc.RegisterName("dividerStyle"))
+	return _r
+}
+
+// SetDividerStyle wraps the corresponding Objective-C method.
+func (x *SplitView) SetDividerStyle(dividerStyle SplitViewDividerStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDividerStyle:"), dividerStyle)
+}
+
+// AutosaveName wraps the corresponding Objective-C method.
+func (x *SplitView) AutosaveName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("autosaveName"))
+	return obj.Wrap(_r)
+}
+
+// SetAutosaveName wraps the corresponding Objective-C method.
+func (x *SplitView) SetAutosaveName(autosaveName obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
+}
+
+// DividerColor wraps the corresponding Objective-C method.
+func (x *SplitView) DividerColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dividerColor"))
+	return ColorFromID(_r)
+}
+
+// DividerThickness wraps the corresponding Objective-C method.
 func (x *SplitView) DividerThickness() float64 {
-	return x.inner.DividerThickness()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("dividerThickness"))
+	return _r
 }
 
-// Adds a view as an arranged split pane.
-//
-// AddArrangedSubview calls the underlying AddArrangedSubview.
-func (x *SplitView) AddArrangedSubview(view *raw.NSView) {
-	x.inner.AddArrangedSubview(view)
+// AddArrangedSubview adds a view as an arranged split pane.
+func (x *SplitView) AddArrangedSubview(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
 }
 
-// Adds a view as an arranged split pane at the specified index.
-//
-// InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
-func (x *SplitView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
-	x.inner.InsertArrangedSubviewAtIndex(view, index)
+// InsertArrangedSubviewAtIndex adds a view as an arranged split pane at the specified index.
+func (x *SplitView) InsertArrangedSubviewAtIndex(view *View, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
 }
 
-// Removes a view as an arranged split pane.
-//
-// RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
-func (x *SplitView) RemoveArrangedSubview(view *raw.NSView) {
-	x.inner.RemoveArrangedSubview(view)
+// RemoveArrangedSubview removes a view as an arranged split pane.
+func (x *SplitView) RemoveArrangedSubview(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
 }
 
-// Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
-//
-// ArrangesAllSubviews calls the underlying ArrangesAllSubviews.
+// ArrangesAllSubviews whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
 func (x *SplitView) ArrangesAllSubviews() bool {
-	return x.inner.ArrangesAllSubviews()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("arrangesAllSubviews"))
+	return _r
 }
 
-// Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
-//
-// SetArrangesAllSubviews calls the underlying SetArrangesAllSubviews.
+// SetArrangesAllSubviews whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
 func (x *SplitView) SetArrangesAllSubviews(arrangesAllSubviews bool) {
-	x.inner.SetArrangesAllSubviews(arrangesAllSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrangesAllSubviews:"), arrangesAllSubviews)
 }
 
-// The list of views that are arranged as split panes in the receiver. They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
+// ArrangedSubviews the list of views that are arranged as split panes in the receiver. They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
 //
 // ArrangedSubviews returns the collection as a Go slice.
 func (x *SplitView) ArrangedSubviews() []*View {
-	arr := x.inner.ArrangedSubviews()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
-		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedSubviews"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// Sets the type of splitter.
-//
-// SetIsPaneSplitter calls the underlying SetIsPaneSplitter.
+// SetIsPaneSplitter sets the type of splitter.
 func (x *SplitView) SetIsPaneSplitter(flag bool) {
-	x.inner.SetIsPaneSplitter(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsPaneSplitter:"), flag)
 }
 
-// The type of pane splitter.
-//
-// IsPaneSplitter calls the underlying IsPaneSplitter.
+// IsPaneSplitter the type of pane splitter.
 func (x *SplitView) IsPaneSplitter() bool {
-	return x.inner.IsPaneSplitter()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaneSplitter"))
+	return _r
 }
-
-func (x *SplitView) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *SplitView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // SplitViewable is the interface implemented by [SplitView], for mocking and DI.
 type SplitViewable interface {
-	Unwrap() *raw.NSSplitView
+	obj.Object
 	WithVertical(vertical bool) *SplitView
-	WithDividerStyle(dividerStyle NSSplitViewDividerStyle) *SplitView
-	WithAutosaveName(autosaveName *foundation.NSString) *SplitView
-	WithDelegate(delegate raw.NSSplitViewDelegate) *SplitView
+	WithDividerStyle(dividerStyle SplitViewDividerStyle) *SplitView
+	WithAutosaveName(autosaveName obj.Object) *SplitView
 	WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView
 	WithSubviews(items ...ViewProvider) *SplitView
 	WithHidden(hidden bool) *SplitView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SplitView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SplitView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SplitView
 	WithFrame(frame corefoundation.CGRect) *SplitView
 	WithFrameRotation(frameRotation float64) *SplitView
 	WithFrameCenterRotation(frameCenterRotation float64) *SplitView
@@ -655,27 +531,27 @@ type SplitViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *SplitView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SplitView
 	WithWantsRestingTouches(wantsRestingTouches bool) *SplitView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SplitView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SplitView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SplitView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SplitView
 	WithWantsLayer(wantsLayer bool) *SplitView
-	WithLayer(layer *quartzcore.CALayer) *SplitView
+	WithLayer(layer obj.Object) *SplitView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SplitView
 	WithNeedsLayout(needsLayout bool) *SplitView
 	WithAlphaValue(alphaValue float64) *SplitView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SplitView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *SplitView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SplitView
-	WithContentFilters(items ...*coreimage.CIFilter) *SplitView
+	WithBackgroundFilters(items ...obj.Object) *SplitView
+	WithCompositingFilter(compositingFilter obj.Object) *SplitView
+	WithContentFilters(items ...obj.Object) *SplitView
 	WithShadow(shadow *Shadow) *SplitView
 	WithClipsToBounds(clipsToBounds bool) *SplitView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView
 	WithToolTip(toolTip string) *SplitView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SplitView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SplitView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SplitView
 	WithNextKeyView(nextKeyView ViewProvider) *SplitView
-	WithFocusRingType(focusRingType NSFocusRingType) *SplitView
+	WithFocusRingType(focusRingType FocusRingType) *SplitView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SplitView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SplitView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SplitView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView
@@ -688,11 +564,11 @@ type SplitViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView
 	WithNextResponder(nextResponder ResponderProvider) *SplitView
 	WithMenu(menu *Menu) *SplitView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *SplitView
+	WithUserActivity(userActivity obj.Object) *SplitView
 	WithTouchBar(touchBar *TouchBar) *SplitView
 	DrawDividerInRect(rect corefoundation.CGRect)
 	AdjustSubviews()
-	IsSubviewCollapsed(subview *raw.NSView) bool
+	IsSubviewCollapsed(subview *View) bool
 	MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64
 	MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64
 	SetPositionOfDividerAtIndex(position float64, dividerIndex int)
@@ -700,17 +576,15 @@ type SplitViewable interface {
 	SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int)
 	IsVertical() bool
 	SetVertical(vertical bool)
-	DividerStyle() NSSplitViewDividerStyle
-	SetDividerStyle(dividerStyle NSSplitViewDividerStyle)
-	AutosaveName() string
-	SetAutosaveName(autosaveName *foundation.NSString)
-	Delegate() raw.NSSplitViewDelegate
-	SetDelegate(delegate raw.NSSplitViewDelegate)
+	DividerStyle() SplitViewDividerStyle
+	SetDividerStyle(dividerStyle SplitViewDividerStyle)
+	AutosaveName() obj.Object
+	SetAutosaveName(autosaveName obj.Object)
 	DividerColor() *Color
 	DividerThickness() float64
-	AddArrangedSubview(view *raw.NSView)
-	InsertArrangedSubviewAtIndex(view *raw.NSView, index int)
-	RemoveArrangedSubview(view *raw.NSView)
+	AddArrangedSubview(view *View)
+	InsertArrangedSubviewAtIndex(view *View, index int)
+	RemoveArrangedSubview(view *View)
 	ArrangesAllSubviews() bool
 	SetArrangesAllSubviews(arrangesAllSubviews bool)
 	ArrangedSubviews() []*View
@@ -719,3 +593,7 @@ type SplitViewable interface {
 }
 
 var _ SplitViewable = (*SplitView)(nil)
+
+var _ ViewProvider = (*SplitView)(nil)
+
+var _ ResponderProvider = (*SplitView)(nil)

@@ -5,41 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterPausedEvent wraps [raw.MTRDeviceEnergyManagementClusterPausedEvent] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterPausedEvent is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterPausedEvent.
 type MTRDeviceEnergyManagementClusterPausedEvent struct {
-	inner *raw.MTRDeviceEnergyManagementClusterPausedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterPausedEvent].
-func (x *MTRDeviceEnergyManagementClusterPausedEvent) Unwrap() *raw.MTRDeviceEnergyManagementClusterPausedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterPausedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterPausedEventFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterPausedEvent (nil for 0).
+// MTRDeviceEnergyManagementClusterPausedEventFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterPausedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterPausedEventFromID(id objc.ID) *MTRDeviceEnergyManagementClusterPausedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterPausedEvent{inner: raw.MTRDeviceEnergyManagementClusterPausedEventFromID(id)}
+	x := &MTRDeviceEnergyManagementClusterPausedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementClusterPausedEvent creates a new [MTRDeviceEnergyManagementClusterPausedEvent].
+// mTRDeviceEnergyManagementClusterPausedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterPausedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterPausedEventAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterPausedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterPausedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterPausedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterPausedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterPausedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterPausedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceEnergyManagementClusterPausedEvent creates a new MTRDeviceEnergyManagementClusterPausedEvent.
 func NewMTRDeviceEnergyManagementClusterPausedEvent() *MTRDeviceEnergyManagementClusterPausedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterPausedEvent")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterPausedEvent{inner: raw.MTRDeviceEnergyManagementClusterPausedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterPausedEvent")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterPausedEventAdopt(_id)
 }
 
 // MTRDeviceEnergyManagementClusterPausedEventable is the interface implemented by [MTRDeviceEnergyManagementClusterPausedEvent], for mocking and DI.
 type MTRDeviceEnergyManagementClusterPausedEventable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterPausedEvent
+	obj.Object
 }
 
 var _ MTRDeviceEnergyManagementClusterPausedEventable = (*MTRDeviceEnergyManagementClusterPausedEvent)(nil)

@@ -5,82 +5,88 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI pitch bend message.
+// MIDIPitchBendEvent is an idiomatic wrapper over the Objective-C class AVMIDIPitchBendEvent.
 //
-// MIDIPitchBendEvent wraps [raw.AVMIDIPitchBendEvent] with a fluent Go API.
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI pitch bend message.
 type MIDIPitchBendEvent struct {
-	inner *raw.AVMIDIPitchBendEvent
+	MIDIChannelEvent
 }
 
-// Unwrap returns the underlying [raw.AVMIDIPitchBendEvent].
-func (x *MIDIPitchBendEvent) Unwrap() *raw.AVMIDIPitchBendEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIPitchBendEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIPitchBendEventFromID adopts an existing object pointer as a MIDIPitchBendEvent (nil for 0).
+// MIDIPitchBendEventFromID adopts an existing Objective-C object as a MIDIPitchBendEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIPitchBendEventFromID(id objc.ID) *MIDIPitchBendEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIPitchBendEvent{inner: raw.AVMIDIPitchBendEventFromID(id)}
+	x := &MIDIPitchBendEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an event with a channel and pitch bend value.
-//
-// NewMIDIPitchBendEventWithChannelValue creates a new [MIDIPitchBendEvent].
-func NewMIDIPitchBendEventWithChannelValue(channel uint, value uint) *MIDIPitchBendEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIPitchBendEvent")), objc.RegisterName("alloc"))
+// mIDIPitchBendEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIPitchBendEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIPitchBendEventAdopt(id objc.ID) *MIDIPitchBendEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIPitchBendEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMIDIPitchBendEventWithChannelValue creates an event with a channel and pitch bend value.
+func NewMIDIPitchBendEventWithChannelValue(channel int, value int) *MIDIPitchBendEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIPitchBendEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:value:"), channel, value)
-	return &MIDIPitchBendEvent{inner: raw.AVMIDIPitchBendEventFromID(_id)}
+	return mIDIPitchBendEventAdopt(_id)
 }
 
-// The value of the pitch bend event.
-//
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MIDIPitchBendEvent) WithValue(value uint) *MIDIPitchBendEvent {
-	x.inner.SetValue(value)
+// WithValue the value of the pitch bend event.
+func (x *MIDIPitchBendEvent) WithValue(value int) *MIDIPitchBendEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// The MIDI channel.
-//
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MIDIPitchBendEvent) WithChannel(channel uint) *MIDIPitchBendEvent {
-	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+// WithChannel the MIDI channel.
+func (x *MIDIPitchBendEvent) WithChannel(channel int) *MIDIPitchBendEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
-// Value calls the underlying Value.
-func (x *MIDIPitchBendEvent) Value() uint {
-	return x.inner.Value()
+// Value wraps the corresponding Objective-C method.
+func (x *MIDIPitchBendEvent) Value() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MIDIPitchBendEvent) SetValue(value uint) {
-	x.inner.SetValue(value)
-}
-
-func (x *MIDIPitchBendEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
-	return &x.inner.AVMIDIChannelEvent
-}
-
-func (x *MIDIPitchBendEvent) asMusicEvent() *raw.AVMusicEvent {
-	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+// SetValue wraps the corresponding Objective-C method.
+func (x *MIDIPitchBendEvent) SetValue(value int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
 // MIDIPitchBendEventable is the interface implemented by [MIDIPitchBendEvent], for mocking and DI.
 type MIDIPitchBendEventable interface {
-	Unwrap() *raw.AVMIDIPitchBendEvent
-	WithValue(value uint) *MIDIPitchBendEvent
-	WithChannel(channel uint) *MIDIPitchBendEvent
-	Value() uint
-	SetValue(value uint)
+	obj.Object
+	WithValue(value int) *MIDIPitchBendEvent
+	WithChannel(channel int) *MIDIPitchBendEvent
+	Value() int
+	SetValue(value int)
 }
 
 var _ MIDIPitchBendEventable = (*MIDIPitchBendEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIPitchBendEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIPitchBendEvent)(nil)

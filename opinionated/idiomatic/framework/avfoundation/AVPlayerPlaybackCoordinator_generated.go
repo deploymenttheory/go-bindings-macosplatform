@@ -5,133 +5,100 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A playback coordinator subclass that coordinates the playback of player objects in a connected group.
+// PlayerPlaybackCoordinator is an idiomatic wrapper over the Objective-C class AVPlayerPlaybackCoordinator.
 //
-// PlayerPlaybackCoordinator wraps [raw.AVPlayerPlaybackCoordinator] with a fluent Go API.
+// It embeds [PlaybackCoordinator], promoting that type's methods.
+//
+// A playback coordinator subclass that coordinates the playback of player objects in a connected group.
 type PlayerPlaybackCoordinator struct {
-	inner *raw.AVPlayerPlaybackCoordinator
+	PlaybackCoordinator
 }
 
-// Unwrap returns the underlying [raw.AVPlayerPlaybackCoordinator].
-func (x *PlayerPlaybackCoordinator) Unwrap() *raw.AVPlayerPlaybackCoordinator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerPlaybackCoordinator) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerPlaybackCoordinatorFromID adopts an existing object pointer as a PlayerPlaybackCoordinator (nil for 0).
+// PlayerPlaybackCoordinatorFromID adopts an existing Objective-C object as a PlayerPlaybackCoordinator
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerPlaybackCoordinatorFromID(id objc.ID) *PlayerPlaybackCoordinator {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerPlaybackCoordinator{inner: raw.AVPlayerPlaybackCoordinatorFromID(id)}
+	x := &PlayerPlaybackCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerPlaybackCoordinator creates a new [PlayerPlaybackCoordinator].
+// playerPlaybackCoordinatorAdopt wraps an Objective-C object that this code just created as a
+// PlayerPlaybackCoordinator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerPlaybackCoordinatorAdopt(id objc.ID) *PlayerPlaybackCoordinator {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerPlaybackCoordinator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPlayerPlaybackCoordinator creates a new PlayerPlaybackCoordinator.
 func NewPlayerPlaybackCoordinator() *PlayerPlaybackCoordinator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerPlaybackCoordinator")), objc.RegisterName("new"))
-	return &PlayerPlaybackCoordinator{inner: raw.AVPlayerPlaybackCoordinatorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerPlaybackCoordinator")), objc.RegisterName("new"))
+	return playerPlaybackCoordinatorAdopt(_id)
 }
 
-// A delegate object for the playback coordinator.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PlayerPlaybackCoordinator) WithDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator {
-	x.inner.SetDelegate(delegate)
+// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
+func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
 	return x
 }
 
-// The reasons that cause a coordinator to suspend playback.
-//
-// WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
-func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlayerPlaybackCoordinator {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(_arr)
-	return x
-}
-
-// A Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-//
-// WithPauseSnapsToMediaTimeOfOriginator sets the pauseSnapsToMediaTimeOfOriginator property and returns the receiver for chaining.
+// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
 func (x *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator {
-	x.inner.AVPlaybackCoordinator.SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
 	return x
 }
 
-// The AVPlayer this coordinator is controlling.
-//
-// Player calls the underlying Player.
+// Player the AVPlayer this coordinator is controlling.
 func (x *PlayerPlaybackCoordinator) Player() *Player {
-	_r := x.inner.Player()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+	return PlayerFromID(_r)
+}
+
+// CoordinateUsingCoordinationMedium connects the playback coordinator to the coordination medium
+func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("coordinateUsingCoordinationMedium:error:"), objref.IDOf(coordinationMedium), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Player{inner: _r}
+	return nil
 }
 
-// An object implementing the AVPlaybackCoordinatorDelegate protocol.
-//
-// Delegate calls the underlying Delegate.
-func (x *PlayerPlaybackCoordinator) Delegate() raw.AVPlayerPlaybackCoordinatorDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *PlayerPlaybackCoordinator) SetDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Connects the playback coordinator to the coordination medium
-//
-// CoordinateUsingCoordinationMediumError calls the underlying CoordinateUsingCoordinationMediumError.
-func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMediumError(coordinationMedium *raw.AVPlaybackCoordinationMedium) (bool, error) {
-	return x.inner.CoordinateUsingCoordinationMediumError(coordinationMedium)
-}
-
-// PlaybackCoordinationMedium calls the underlying PlaybackCoordinationMedium.
+// PlaybackCoordinationMedium wraps the corresponding Objective-C method.
 func (x *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
-	_r := x.inner.PlaybackCoordinationMedium()
-	if _r == nil {
-		return nil
-	}
-	return &PlaybackCoordinationMedium{inner: _r}
-}
-
-func (x *PlayerPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator {
-	return &x.inner.AVPlaybackCoordinator
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackCoordinationMedium"))
+	return PlaybackCoordinationMediumFromID(_r)
 }
 
 // PlayerPlaybackCoordinatorable is the interface implemented by [PlayerPlaybackCoordinator], for mocking and DI.
 type PlayerPlaybackCoordinatorable interface {
-	Unwrap() *raw.AVPlayerPlaybackCoordinator
-	WithDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator
-	WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlayerPlaybackCoordinator
+	obj.Object
+	WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator
 	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator
 	Player() *Player
-	Delegate() raw.AVPlayerPlaybackCoordinatorDelegate
-	SetDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate)
-	CoordinateUsingCoordinationMediumError(coordinationMedium *raw.AVPlaybackCoordinationMedium) (bool, error)
+	CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error
 	PlaybackCoordinationMedium() *PlaybackCoordinationMedium
 }
 
 var _ PlayerPlaybackCoordinatorable = (*PlayerPlaybackCoordinator)(nil)
+
+var _ PlaybackCoordinatorProvider = (*PlayerPlaybackCoordinator)(nil)

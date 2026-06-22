@@ -5,123 +5,121 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A convenient interface to the garbage collection system.
+// GarbageCollector is an idiomatic wrapper over the Objective-C class NSGarbageCollector.
 //
-// GarbageCollector wraps [raw.NSGarbageCollector] with a fluent Go API.
+// A convenient interface to the garbage collection system.
 type GarbageCollector struct {
-	inner *raw.NSGarbageCollector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGarbageCollector].
-func (x *GarbageCollector) Unwrap() *raw.NSGarbageCollector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GarbageCollector) ID() objc.ID { return x.inner.Ptr() }
-
-// GarbageCollectorFromID adopts an existing object pointer as a GarbageCollector (nil for 0).
+// GarbageCollectorFromID adopts an existing Objective-C object as a GarbageCollector
+// (nil for 0), retaining it and registering a release finalizer.
 func GarbageCollectorFromID(id objc.ID) *GarbageCollector {
 	if id == 0 {
 		return nil
 	}
-	return &GarbageCollector{inner: raw.NSGarbageCollectorFromID(id)}
-}
-
-// NewGarbageCollector creates a new [GarbageCollector].
-func NewGarbageCollector() *GarbageCollector {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGarbageCollector")), objc.RegisterName("new"))
-	return &GarbageCollector{inner: raw.NSGarbageCollectorFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *GarbageCollector) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *GarbageCollector {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &GarbageCollector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a Boolean value that indicates whether a collection is currently in progress.
-//
-// IsCollecting calls the underlying IsCollecting.
+// garbageCollectorAdopt wraps an Objective-C object that this code just created as a
+// GarbageCollector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func garbageCollectorAdopt(id objc.ID) *GarbageCollector {
+	if id == 0 {
+		return nil
+	}
+	x := &GarbageCollector{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GarbageCollector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GarbageCollector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GarbageCollector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GarbageCollector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGarbageCollector creates a new GarbageCollector.
+func NewGarbageCollector() *GarbageCollector {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGarbageCollector")), objc.RegisterName("new"))
+	return garbageCollectorAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *GarbageCollector) WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// IsCollecting returns a Boolean value that indicates whether a collection is currently in progress.
 func (x *GarbageCollector) IsCollecting() bool {
-	return x.inner.IsCollecting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCollecting"))
+	return _r
 }
 
-// Temporarily disables collections.
-//
-// Disable calls the underlying Disable.
+// Disable temporarily disables collections.
 func (x *GarbageCollector) Disable() {
-	x.inner.Disable()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disable"))
 }
 
-// Enables collection after collection has been disabled.
-//
-// Enable calls the underlying Enable.
+// Enable enables collection after collection has been disabled.
 func (x *GarbageCollector) Enable() {
-	x.inner.Enable()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enable"))
 }
 
-// Returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
 func (x *GarbageCollector) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// Tells the receiver to collect if memory consumption thresholds have been exceeded.
-//
-// CollectIfNeeded calls the underlying CollectIfNeeded.
+// CollectIfNeeded tells the receiver to collect if memory consumption thresholds have been exceeded.
 func (x *GarbageCollector) CollectIfNeeded() {
-	x.inner.CollectIfNeeded()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectIfNeeded"))
 }
 
-// Tells the receiver to collect iteratively.
-//
-// CollectExhaustively calls the underlying CollectExhaustively.
+// CollectExhaustively tells the receiver to collect iteratively.
 func (x *GarbageCollector) CollectExhaustively() {
-	x.inner.CollectExhaustively()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectExhaustively"))
 }
-
-// Specifies that a given pointer will not be collected.
-//
-// DisableCollectorForPointer calls the underlying DisableCollectorForPointer.
-func (x *GarbageCollector) DisableCollectorForPointer(ptr unsafe.Pointer) {
-	x.inner.DisableCollectorForPointer(ptr)
-}
-
-// Specifies that a given pointer may be collected.
-//
-// EnableCollectorForPointer calls the underlying EnableCollectorForPointer.
-func (x *GarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
-	x.inner.EnableCollectorForPointer(ptr)
-}
-
-// Returns a zone of unscanned memory.
-//
-// Zone calls the underlying Zone.
-func (x *GarbageCollector) Zone() unsafe.Pointer {
-	return x.inner.Zone()
-}
-
-func (x *GarbageCollector) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // GarbageCollectorable is the interface implemented by [GarbageCollector], for mocking and DI.
 type GarbageCollectorable interface {
-	Unwrap() *raw.NSGarbageCollector
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *GarbageCollector
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector
 	IsCollecting() bool
 	Disable()
 	Enable()
 	IsEnabled() bool
 	CollectIfNeeded()
 	CollectExhaustively()
-	DisableCollectorForPointer(ptr unsafe.Pointer)
-	EnableCollectorForPointer(ptr unsafe.Pointer)
-	Zone() unsafe.Pointer
 }
 
 var _ GarbageCollectorable = (*GarbageCollector)(nil)

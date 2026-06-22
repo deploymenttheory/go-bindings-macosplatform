@@ -5,68 +5,80 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The horizon angle information that an image-analysis request detects.
+// HorizonObservation is an idiomatic wrapper over the Objective-C class VNHorizonObservation.
 //
-// HorizonObservation wraps [raw.VNHorizonObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// The horizon angle information that an image-analysis request detects.
 type HorizonObservation struct {
-	inner *raw.VNHorizonObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNHorizonObservation].
-func (x *HorizonObservation) Unwrap() *raw.VNHorizonObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HorizonObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// HorizonObservationFromID adopts an existing object pointer as a HorizonObservation (nil for 0).
+// HorizonObservationFromID adopts an existing Objective-C object as a HorizonObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func HorizonObservationFromID(id objc.ID) *HorizonObservation {
 	if id == 0 {
 		return nil
 	}
-	return &HorizonObservation{inner: raw.VNHorizonObservationFromID(id)}
+	x := &HorizonObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHorizonObservation creates a new [HorizonObservation].
+// horizonObservationAdopt wraps an Objective-C object that this code just created as a
+// HorizonObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func horizonObservationAdopt(id objc.ID) *HorizonObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &HorizonObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewHorizonObservation creates a new HorizonObservation.
 func NewHorizonObservation() *HorizonObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNHorizonObservation")), objc.RegisterName("new"))
-	return &HorizonObservation{inner: raw.VNHorizonObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNHorizonObservation")), objc.RegisterName("new"))
+	return horizonObservationAdopt(_id)
 }
 
-// Creates an affine transform for the specified image width and height.
-//
-// TransformForImageWidthHeight calls the underlying TransformForImageWidthHeight.
-func (x *HorizonObservation) TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform {
-	return x.inner.TransformForImageWidthHeight(width, height)
+// TransformForImageWidthHeight creates an affine transform for the specified image width and height.
+func (x *HorizonObservation) TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transformForImageWidth:height:"), width, height)
+	return _r
 }
 
-// @brief Transform applied to the detected horizon in image coordinates. @discussion This is the transform in image coordinates and not a normalized transform.
-//
-// Transform calls the underlying Transform.
+// Transform transform applied to the detected horizon in image coordinates. This is the transform in image coordinates and not a normalized transform.
 func (x *HorizonObservation) Transform() corefoundation.CGAffineTransform {
-	return x.inner.Transform()
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transform"))
+	return _r
 }
 
-// @brief Angle of the observed horizon.
-//
-// Angle calls the underlying Angle.
+// Angle angle of the observed horizon.
 func (x *HorizonObservation) Angle() float64 {
-	return x.inner.Angle()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angle"))
+	return _r
 }
-
-func (x *HorizonObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // HorizonObservationable is the interface implemented by [HorizonObservation], for mocking and DI.
 type HorizonObservationable interface {
-	Unwrap() *raw.VNHorizonObservation
-	TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform
+	obj.Object
+	TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform
 	Transform() corefoundation.CGAffineTransform
 	Angle() float64
 }
 
 var _ HorizonObservationable = (*HorizonObservation)(nil)
+
+var _ ObservationProvider = (*HorizonObservation)(nil)

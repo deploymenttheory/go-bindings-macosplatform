@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBooleanStateClusterStateChangeEvent wraps [raw.MTRBooleanStateClusterStateChangeEvent] with a fluent Go API.
+// MTRBooleanStateClusterStateChangeEvent is an idiomatic wrapper over the Objective-C class MTRBooleanStateClusterStateChangeEvent.
 type MTRBooleanStateClusterStateChangeEvent struct {
-	inner *raw.MTRBooleanStateClusterStateChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBooleanStateClusterStateChangeEvent].
-func (x *MTRBooleanStateClusterStateChangeEvent) Unwrap() *raw.MTRBooleanStateClusterStateChangeEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBooleanStateClusterStateChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBooleanStateClusterStateChangeEventFromID adopts an existing object pointer as a MTRBooleanStateClusterStateChangeEvent (nil for 0).
+// MTRBooleanStateClusterStateChangeEventFromID adopts an existing Objective-C object as a MTRBooleanStateClusterStateChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBooleanStateClusterStateChangeEventFromID(id objc.ID) *MTRBooleanStateClusterStateChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBooleanStateClusterStateChangeEvent{inner: raw.MTRBooleanStateClusterStateChangeEventFromID(id)}
-}
-
-// NewMTRBooleanStateClusterStateChangeEvent creates a new [MTRBooleanStateClusterStateChangeEvent].
-func NewMTRBooleanStateClusterStateChangeEvent() *MTRBooleanStateClusterStateChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBooleanStateClusterStateChangeEvent")), objc.RegisterName("new"))
-	return &MTRBooleanStateClusterStateChangeEvent{inner: raw.MTRBooleanStateClusterStateChangeEventFromID(_id)}
-}
-
-// WithStateValue sets the stateValue property and returns the receiver for chaining.
-func (x *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue *foundation.NSNumber) *MTRBooleanStateClusterStateChangeEvent {
-	x.inner.SetStateValue(stateValue)
+	x := &MTRBooleanStateClusterStateChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// StateValue calls the underlying StateValue.
-func (x *MTRBooleanStateClusterStateChangeEvent) StateValue() *foundation.NSNumber {
-	return x.inner.StateValue()
+// mTRBooleanStateClusterStateChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBooleanStateClusterStateChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBooleanStateClusterStateChangeEventAdopt(id objc.ID) *MTRBooleanStateClusterStateChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBooleanStateClusterStateChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetStateValue calls the underlying SetStateValue.
-func (x *MTRBooleanStateClusterStateChangeEvent) SetStateValue(stateValue *foundation.NSNumber) {
-	x.inner.SetStateValue(stateValue)
+// Description returns the object's -description text.
+func (x *MTRBooleanStateClusterStateChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBooleanStateClusterStateChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBooleanStateClusterStateChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBooleanStateClusterStateChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRBooleanStateClusterStateChangeEvent creates a new MTRBooleanStateClusterStateChangeEvent.
+func NewMTRBooleanStateClusterStateChangeEvent() *MTRBooleanStateClusterStateChangeEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBooleanStateClusterStateChangeEvent")), objc.RegisterName("new"))
+	return mTRBooleanStateClusterStateChangeEventAdopt(_id)
+}
+
+// WithStateValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
+	return x
+}
+
+// StateValue wraps the corresponding Objective-C method.
+func (x *MTRBooleanStateClusterStateChangeEvent) StateValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateValue"))
+	return obj.Wrap(_r)
+}
+
+// SetStateValue wraps the corresponding Objective-C method.
+func (x *MTRBooleanStateClusterStateChangeEvent) SetStateValue(stateValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
 }
 
 // MTRBooleanStateClusterStateChangeEventable is the interface implemented by [MTRBooleanStateClusterStateChangeEvent], for mocking and DI.
 type MTRBooleanStateClusterStateChangeEventable interface {
-	Unwrap() *raw.MTRBooleanStateClusterStateChangeEvent
-	WithStateValue(stateValue *foundation.NSNumber) *MTRBooleanStateClusterStateChangeEvent
-	StateValue() *foundation.NSNumber
-	SetStateValue(stateValue *foundation.NSNumber)
+	obj.Object
+	WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent
+	StateValue() obj.Object
+	SetStateValue(stateValue obj.Object)
 }
 
 var _ MTRBooleanStateClusterStateChangeEventable = (*MTRBooleanStateClusterStateChangeEvent)(nil)

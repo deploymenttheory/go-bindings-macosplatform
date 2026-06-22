@@ -5,835 +5,716 @@
 package dvdplayback
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/dvdplayback"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// DVDClearLastPlayBookmark wraps [raw.DVDClearLastPlayBookmark], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDClearLastPlayBookmark func() int32
+
+// DVDClearLastPlayBookmark reports an error if the DVDPlayback framework function DVDClearLastPlayBookmark fails.
 func DVDClearLastPlayBookmark() error {
-	if _err := purego.NewOSStatus(raw.DVDClearLastPlayBookmark()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDClearLastPlayBookmark == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDClearLastPlayBookmark, _lib, "DVDClearLastPlayBookmark")
+	}
+	_rc := _fnDVDClearLastPlayBookmark()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDCloseMediaFile wraps [raw.DVDCloseMediaFile], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDCloseMediaFile func() int32
+
+// DVDCloseMediaFile reports an error if the DVDPlayback framework function DVDCloseMediaFile fails.
 func DVDCloseMediaFile() error {
-	if _err := purego.NewOSStatus(raw.DVDCloseMediaFile()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDCloseMediaFile == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDCloseMediaFile, _lib, "DVDCloseMediaFile")
+	}
+	_rc := _fnDVDCloseMediaFile()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDCloseMediaVolume wraps [raw.DVDCloseMediaVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDCloseMediaVolume func() int32
+
+// DVDCloseMediaVolume reports an error if the DVDPlayback framework function DVDCloseMediaVolume fails.
 func DVDCloseMediaVolume() error {
-	if _err := purego.NewOSStatus(raw.DVDCloseMediaVolume()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDCloseMediaVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDCloseMediaVolume, _lib, "DVDCloseMediaVolume")
+	}
+	_rc := _fnDVDCloseMediaVolume()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDDisplaySubPicture wraps [raw.DVDDisplaySubPicture], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDDisplaySubPicture func(uint8) int32
+
+// DVDDisplaySubPicture reports an error if the DVDPlayback framework function DVDDisplaySubPicture fails.
 func DVDDisplaySubPicture(inDisplay uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDDisplaySubPicture(inDisplay)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDDisplaySubPicture == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDDisplaySubPicture, _lib, "DVDDisplaySubPicture")
+	}
+	_rc := _fnDVDDisplaySubPicture(inDisplay)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDDispose wraps [raw.DVDDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDDispose func() int32
+
+// DVDDispose reports an error if the DVDPlayback framework function DVDDispose fails.
 func DVDDispose() error {
-	if _err := purego.NewOSStatus(raw.DVDDispose()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDDispose, _lib, "DVDDispose")
+	}
+	_rc := _fnDVDDispose()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDDoButtonActivate wraps [raw.DVDDoButtonActivate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDDoButtonActivate func(int) int32
+
+// DVDDoButtonActivate reports an error if the DVDPlayback framework function DVDDoButtonActivate fails.
 func DVDDoButtonActivate(inIndex int) error {
-	if _err := purego.NewOSStatus(raw.DVDDoButtonActivate(inIndex)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDDoButtonActivate == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDDoButtonActivate, _lib, "DVDDoButtonActivate")
+	}
+	_rc := _fnDVDDoButtonActivate(inIndex)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDDoMenuCGClick wraps [raw.DVDDoMenuCGClick], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDDoMenuCGClick(inPt *corefoundation.CGPoint, outIndex *int) error {
-	if _err := purego.NewOSStatus(raw.DVDDoMenuCGClick(inPt, outIndex)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDDoUserNavigation func(DVDUserNavigation) int32
 
-// DVDDoMenuCGMouseOver wraps [raw.DVDDoMenuCGMouseOver], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDDoMenuCGMouseOver(inPt *corefoundation.CGPoint, outIndex *int) error {
-	if _err := purego.NewOSStatus(raw.DVDDoMenuCGMouseOver(inPt, outIndex)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDDoUserNavigation wraps [raw.DVDDoUserNavigation], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDDoUserNavigation reports an error if the DVDPlayback framework function DVDDoUserNavigation fails.
 func DVDDoUserNavigation(inNavigation DVDUserNavigation) error {
-	if _err := purego.NewOSStatus(raw.DVDDoUserNavigation(raw.DVDUserNavigation(inNavigation))).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDDoUserNavigation == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDDoUserNavigation, _lib, "DVDDoUserNavigation")
+	}
+	_rc := _fnDVDDoUserNavigation(inNavigation)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDEnableWebAccess wraps [raw.DVDEnableWebAccess], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDEnableWebAccess func(uint8) int32
+
+// DVDEnableWebAccess reports an error if the DVDPlayback framework function DVDEnableWebAccess fails.
 func DVDEnableWebAccess(inEnable uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDEnableWebAccess(inEnable)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDEnableWebAccess == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDEnableWebAccess, _lib, "DVDEnableWebAccess")
+	}
+	_rc := _fnDVDEnableWebAccess(inEnable)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDGetAngle wraps [raw.DVDGetAngle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAngle(outAngleNum *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAngle(outAngleNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDGetMediaVolumeCFName func(unsafe.Pointer) int32
 
-// DVDGetAspectRatio wraps [raw.DVDGetAspectRatio], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAspectRatio(outRatio *raw.DVDAspectRatio) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAspectRatio(outRatio)).Err(); _err != nil {
-		return _err
+// DVDGetMediaVolumeCFName reports an error if the DVDPlayback framework function DVDGetMediaVolumeCFName fails.
+func DVDGetMediaVolumeCFName() (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGetMediaVolumeCFName == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGetMediaVolumeCFName, _lib, "DVDGetMediaVolumeCFName")
 	}
-	return nil
-}
-
-// DVDGetAudioLanguageCode wraps [raw.DVDGetAudioLanguageCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioLanguageCode(outCode *uint, outExtension *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioLanguageCode(outCode, outExtension)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioLanguageCodeByStream wraps [raw.DVDGetAudioLanguageCodeByStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioLanguageCodeByStream(inStreamNum uint16, outCode *uint, outExtension *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioLanguageCodeByStream(inStreamNum, outCode, outExtension)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioOutputMode wraps [raw.DVDGetAudioOutputMode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioOutputMode(outMode *int) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioOutputMode(outMode)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioOutputModeCapabilities wraps [raw.DVDGetAudioOutputModeCapabilities], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioOutputModeCapabilities(outModes *int) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioOutputModeCapabilities(outModes)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioStream wraps [raw.DVDGetAudioStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioStream(outStreamNum *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioStream(outStreamNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioStreamFormat wraps [raw.DVDGetAudioStreamFormat], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioStreamFormat(outFormat *raw.DVDAudioFormat, outBitsPerSample *uint, outSamplesPerSecond *uint, outChannels *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioStreamFormat(outFormat, outBitsPerSample, outSamplesPerSecond, outChannels)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioStreamFormatByStream wraps [raw.DVDGetAudioStreamFormatByStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioStreamFormatByStream(inStreamNum uint, outFormat *raw.DVDAudioFormat, outBitsPerSample *uint, outSamplesPerSecond *uint, outChannels *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioStreamFormatByStream(inStreamNum, outFormat, outBitsPerSample, outSamplesPerSecond, outChannels)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioVolume wraps [raw.DVDGetAudioVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioVolume(outVolume *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioVolume(outVolume)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetAudioVolumeInfo wraps [raw.DVDGetAudioVolumeInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetAudioVolumeInfo(outMinVolume *uint16, outCurVolume *uint16, outMaxVolume *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetAudioVolumeInfo(outMinVolume, outCurVolume, outMaxVolume)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetButtonPosition wraps [raw.DVDGetButtonPosition], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetButtonPosition(index uint, outRect *corefoundation.CGRect, autoAction *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetButtonPosition(index, outRect, autoAction)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetButtoninfo wraps [raw.DVDGetButtoninfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetButtoninfo(numberOfButtons *uint, selectedButton *uint, forcedActivateButton *uint, userButtonOffset *uint, numberOfUserButtons *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetButtoninfo(numberOfButtons, selectedButton, forcedActivateButton, userButtonOffset, numberOfUserButtons)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetChapter wraps [raw.DVDGetChapter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetChapter(outChapterNum *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetChapter(outChapterNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetDiscRegionCode wraps [raw.DVDGetDiscRegionCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetDiscRegionCode(outCode *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetDiscRegionCode(outCode)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetDriveRegionCode wraps [raw.DVDGetDriveRegionCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetDriveRegionCode(outCode *uint, outNumberChangesLeft *int16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetDriveRegionCode(outCode, outNumberChangesLeft)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetFormatStandard wraps [raw.DVDGetFormatStandard], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetFormatStandard(outFormat *raw.DVDFormat) error {
-	if _err := purego.NewOSStatus(raw.DVDGetFormatStandard(outFormat)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetGPRMValue wraps [raw.DVDGetGPRMValue], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetGPRMValue(index uint, value *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetGPRMValue(index, value)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetMediaUniqueID wraps [raw.DVDGetMediaUniqueID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetMediaUniqueID(outDiscID *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDGetMediaUniqueID(outDiscID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetMediaVolumeCFName wraps [raw.DVDGetMediaVolumeCFName], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetMediaVolumeCFName() (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.DVDGetMediaVolumeCFName(unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnDVDGetMediaVolumeCFName(unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// DVDGetMediaVolumeName wraps [raw.DVDGetMediaVolumeName], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDGetMediaVolumeName func(string) int32
+
+// DVDGetMediaVolumeName reports an error if the DVDPlayback framework function DVDGetMediaVolumeName fails.
 func DVDGetMediaVolumeName(outDiscVolumeName string) error {
-	if _err := purego.NewOSStatus(raw.DVDGetMediaVolumeName(outDiscVolumeName)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGetMediaVolumeName == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGetMediaVolumeName, _lib, "DVDGetMediaVolumeName")
+	}
+	_rc := _fnDVDGetMediaVolumeName(outDiscVolumeName)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDGetMenuLanguageCode wraps [raw.DVDGetMenuLanguageCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetMenuLanguageCode(outCode *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetMenuLanguageCode(outCode)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDGetSPDIFDataOutDeviceCFName func(int, unsafe.Pointer) int32
 
-// DVDGetNativeVideoSize wraps [raw.DVDGetNativeVideoSize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetNativeVideoSize(outWidth *uint16, outHeight *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetNativeVideoSize(outWidth, outHeight)).Err(); _err != nil {
-		return _err
+// DVDGetSPDIFDataOutDeviceCFName reports an error if the DVDPlayback framework function DVDGetSPDIFDataOutDeviceCFName fails.
+func DVDGetSPDIFDataOutDeviceCFName(inIndex int) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGetSPDIFDataOutDeviceCFName == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDeviceCFName, _lib, "DVDGetSPDIFDataOutDeviceCFName")
 	}
-	return nil
-}
-
-// DVDGetNumAngles wraps [raw.DVDGetNumAngles], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetNumAngles(outNumAngles *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetNumAngles(outNumAngles)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetNumAudioStreams wraps [raw.DVDGetNumAudioStreams], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetNumAudioStreams(outNumStreams *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetNumAudioStreams(outNumStreams)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetNumChapters wraps [raw.DVDGetNumChapters], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetNumChapters(inTitleNum uint16, outNumChapters *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetNumChapters(inTitleNum, outNumChapters)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetNumSubPictureStreams wraps [raw.DVDGetNumSubPictureStreams], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetNumSubPictureStreams(outNumStreams *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetNumSubPictureStreams(outNumStreams)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetNumTitles wraps [raw.DVDGetNumTitles], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetNumTitles(outNumTitles *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetNumTitles(outNumTitles)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetSPDIFDataOutDevice wraps [raw.DVDGetSPDIFDataOutDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetSPDIFDataOutDevice(outIndex *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetSPDIFDataOutDevice(outIndex)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetSPDIFDataOutDeviceCFName wraps [raw.DVDGetSPDIFDataOutDeviceCFName], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetSPDIFDataOutDeviceCFName(inIndex uint) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.DVDGetSPDIFDataOutDeviceCFName(inIndex, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnDVDGetSPDIFDataOutDeviceCFName(inIndex, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// DVDGetSPDIFDataOutDeviceCount wraps [raw.DVDGetSPDIFDataOutDeviceCount], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetSPDIFDataOutDeviceCount(outCount *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetSPDIFDataOutDeviceCount(outCount)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDGoBackOneLevel func() int32
 
-// DVDGetScanRate wraps [raw.DVDGetScanRate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetScanRate(outRate *raw.DVDScanRate, outDirection *raw.DVDScanDirection) error {
-	if _err := purego.NewOSStatus(raw.DVDGetScanRate(outRate, outDirection)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetState wraps [raw.DVDGetState], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetState(outState *raw.DVDState) error {
-	if _err := purego.NewOSStatus(raw.DVDGetState(outState)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetSubPictureLanguageCode wraps [raw.DVDGetSubPictureLanguageCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetSubPictureLanguageCode(outCode *uint, outExtension *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetSubPictureLanguageCode(outCode, outExtension)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetSubPictureLanguageCodeByStream wraps [raw.DVDGetSubPictureLanguageCodeByStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetSubPictureLanguageCodeByStream(inStreamNum uint16, outCode *uint, outExtension *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetSubPictureLanguageCodeByStream(inStreamNum, outCode, outExtension)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetSubPictureStream wraps [raw.DVDGetSubPictureStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetSubPictureStream(outStreamNum *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetSubPictureStream(outStreamNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetTime wraps [raw.DVDGetTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetTime(inTimeCode int16, outTime *uint, outFrames *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetTime(inTimeCode, outTime, outFrames)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetTimeEventRate wraps [raw.DVDGetTimeEventRate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetTimeEventRate(outMilliseconds *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetTimeEventRate(outMilliseconds)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetTitle wraps [raw.DVDGetTitle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetTitle(outTitleNum *uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDGetTitle(outTitleNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetVideoCGBounds wraps [raw.DVDGetVideoCGBounds], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetVideoCGBounds(outRect *corefoundation.CGRect) error {
-	if _err := purego.NewOSStatus(raw.DVDGetVideoCGBounds(outRect)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetVideoDisplay wraps [raw.DVDGetVideoDisplay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetVideoDisplay(outDisplay *uint32) error {
-	if _err := purego.NewOSStatus(raw.DVDGetVideoDisplay(outDisplay)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGetVideoWindowID wraps [raw.DVDGetVideoWindowID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGetVideoWindowID(outVidWindowID *uint) error {
-	if _err := purego.NewOSStatus(raw.DVDGetVideoWindowID(outVidWindowID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDGoBackOneLevel wraps [raw.DVDGoBackOneLevel], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDGoBackOneLevel reports an error if the DVDPlayback framework function DVDGoBackOneLevel fails.
 func DVDGoBackOneLevel() error {
-	if _err := purego.NewOSStatus(raw.DVDGoBackOneLevel()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGoBackOneLevel == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGoBackOneLevel, _lib, "DVDGoBackOneLevel")
+	}
+	_rc := _fnDVDGoBackOneLevel()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDGoToMenu wraps [raw.DVDGoToMenu], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDGoToMenu func(DVDMenu) int32
+
+// DVDGoToMenu reports an error if the DVDPlayback framework function DVDGoToMenu fails.
 func DVDGoToMenu(inMenu DVDMenu) error {
-	if _err := purego.NewOSStatus(raw.DVDGoToMenu(raw.DVDMenu(inMenu))).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGoToMenu == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGoToMenu, _lib, "DVDGoToMenu")
+	}
+	_rc := _fnDVDGoToMenu(inMenu)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDHasMedia wraps [raw.DVDHasMedia], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDHasMedia(outHasMedia *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDHasMedia(outHasMedia)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDIdle func() int32
 
-// DVDHasMenu wraps [raw.DVDHasMenu], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDHasMenu(inMenu DVDMenu, outHasMenu *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDHasMenu(raw.DVDMenu(inMenu), outHasMenu)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDHasNextChapter wraps [raw.DVDHasNextChapter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDHasNextChapter(outHasChapter *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDHasNextChapter(outHasChapter)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDHasPreviousChapter wraps [raw.DVDHasPreviousChapter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDHasPreviousChapter(outHasChapter *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDHasPreviousChapter(outHasChapter)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIdle wraps [raw.DVDIdle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDIdle reports an error if the DVDPlayback framework function DVDIdle fails.
 func DVDIdle() error {
-	if _err := purego.NewOSStatus(raw.DVDIdle()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDIdle == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDIdle, _lib, "DVDIdle")
+	}
+	_rc := _fnDVDIdle()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDInitialize wraps [raw.DVDInitialize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDInitialize func() int32
+
+// DVDInitialize reports an error if the DVDPlayback framework function DVDInitialize fails.
 func DVDInitialize() error {
-	if _err := purego.NewOSStatus(raw.DVDInitialize()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDInitialize, _lib, "DVDInitialize")
+	}
+	_rc := _fnDVDInitialize()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDIsDisplayingSubPicture wraps [raw.DVDIsDisplayingSubPicture], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsDisplayingSubPicture(outDisplayingSubPicture *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsDisplayingSubPicture(outDisplayingSubPicture)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDMute func(uint8) int32
 
-// DVDIsMuted wraps [raw.DVDIsMuted], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsMuted(outIsMuted *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsMuted(outIsMuted)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIsOnMenu wraps [raw.DVDIsOnMenu], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsOnMenu(outOnMenu *uint8, outMenu *raw.DVDMenu) error {
-	if _err := purego.NewOSStatus(raw.DVDIsOnMenu(outOnMenu, outMenu)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIsPaused wraps [raw.DVDIsPaused], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsPaused(outIsPaused *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsPaused(outIsPaused)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIsPlaying wraps [raw.DVDIsPlaying], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsPlaying(outIsPlaying *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsPlaying(outIsPlaying)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIsSupportedDisplay wraps [raw.DVDIsSupportedDisplay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsSupportedDisplay(inDisplay uint32, outSupported *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsSupportedDisplay(inDisplay, outSupported)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIsValidMediaRef wraps [raw.DVDIsValidMediaRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsValidMediaRef(inRef *carboncore.FSRef, outIsValid *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsValidMediaRef(inRef, outIsValid)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDIsValidMediaURL wraps [raw.DVDIsValidMediaURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDIsValidMediaURL(inRef objc.ID, outIsValid *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDIsValidMediaURL(purego.CFRef(inRef), outIsValid)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDMute wraps [raw.DVDMute], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDMute reports an error if the DVDPlayback framework function DVDMute fails.
 func DVDMute(inMute uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDMute(inMute)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDMute == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDMute, _lib, "DVDMute")
+	}
+	_rc := _fnDVDMute(inMute)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDNextChapter wraps [raw.DVDNextChapter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDNextChapter func() int32
+
+// DVDNextChapter reports an error if the DVDPlayback framework function DVDNextChapter fails.
 func DVDNextChapter() error {
-	if _err := purego.NewOSStatus(raw.DVDNextChapter()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDNextChapter == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDNextChapter, _lib, "DVDNextChapter")
+	}
+	_rc := _fnDVDNextChapter()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDOpenMediaFile wraps [raw.DVDOpenMediaFile], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDOpenMediaFile(inFile *carboncore.FSRef) error {
-	if _err := purego.NewOSStatus(raw.DVDOpenMediaFile(inFile)).Err(); _err != nil {
+var _fnDVDOpenMediaFileWithURL func(objc.ID) int32
+
+// DVDOpenMediaFileWithURL reports an error if the DVDPlayback framework function DVDOpenMediaFileWithURL fails.
+func DVDOpenMediaFileWithURL(inFile obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDOpenMediaFileWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDOpenMediaFileWithURL, _lib, "DVDOpenMediaFileWithURL")
+	}
+	_rc := _fnDVDOpenMediaFileWithURL(objref.IDOf(inFile))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDOpenMediaFileWithURL wraps [raw.DVDOpenMediaFileWithURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDOpenMediaFileWithURL(inFile objc.ID) error {
-	if _err := purego.NewOSStatus(raw.DVDOpenMediaFileWithURL(purego.CFRef(inFile))).Err(); _err != nil {
+var _fnDVDOpenMediaVolumeWithURL func(objc.ID) int32
+
+// DVDOpenMediaVolumeWithURL reports an error if the DVDPlayback framework function DVDOpenMediaVolumeWithURL fails.
+func DVDOpenMediaVolumeWithURL(inVolume obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDOpenMediaVolumeWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDOpenMediaVolumeWithURL, _lib, "DVDOpenMediaVolumeWithURL")
+	}
+	_rc := _fnDVDOpenMediaVolumeWithURL(objref.IDOf(inVolume))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDOpenMediaVolume wraps [raw.DVDOpenMediaVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDOpenMediaVolume(inVolume *carboncore.FSRef) error {
-	if _err := purego.NewOSStatus(raw.DVDOpenMediaVolume(inVolume)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDPause func() int32
 
-// DVDOpenMediaVolumeWithURL wraps [raw.DVDOpenMediaVolumeWithURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDOpenMediaVolumeWithURL(inVolume objc.ID) error {
-	if _err := purego.NewOSStatus(raw.DVDOpenMediaVolumeWithURL(purego.CFRef(inVolume))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// DVDPause wraps [raw.DVDPause], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDPause reports an error if the DVDPlayback framework function DVDPause fails.
 func DVDPause() error {
-	if _err := purego.NewOSStatus(raw.DVDPause()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDPause == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDPause, _lib, "DVDPause")
+	}
+	_rc := _fnDVDPause()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDPlay wraps [raw.DVDPlay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDPlay func() int32
+
+// DVDPlay reports an error if the DVDPlayback framework function DVDPlay fails.
 func DVDPlay() error {
-	if _err := purego.NewOSStatus(raw.DVDPlay()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDPlay == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDPlay, _lib, "DVDPlay")
+	}
+	_rc := _fnDVDPlay()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDPreviousChapter wraps [raw.DVDPreviousChapter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDPreviousChapter func() int32
+
+// DVDPreviousChapter reports an error if the DVDPlayback framework function DVDPreviousChapter fails.
 func DVDPreviousChapter() error {
-	if _err := purego.NewOSStatus(raw.DVDPreviousChapter()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDPreviousChapter == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDPreviousChapter, _lib, "DVDPreviousChapter")
+	}
+	_rc := _fnDVDPreviousChapter()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDResume wraps [raw.DVDResume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDResume func() int32
+
+// DVDResume reports an error if the DVDPlayback framework function DVDResume fails.
 func DVDResume() error {
-	if _err := purego.NewOSStatus(raw.DVDResume()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDResume == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDResume, _lib, "DVDResume")
+	}
+	_rc := _fnDVDResume()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDReturnToTitle wraps [raw.DVDReturnToTitle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDReturnToTitle func() int32
+
+// DVDReturnToTitle reports an error if the DVDPlayback framework function DVDReturnToTitle fails.
 func DVDReturnToTitle() error {
-	if _err := purego.NewOSStatus(raw.DVDReturnToTitle()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDReturnToTitle == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDReturnToTitle, _lib, "DVDReturnToTitle")
+	}
+	_rc := _fnDVDReturnToTitle()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDScan wraps [raw.DVDScan], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDScan func(DVDScanRate, DVDScanDirection) int32
+
+// DVDScan reports an error if the DVDPlayback framework function DVDScan fails.
 func DVDScan(inRate DVDScanRate, inDirection DVDScanDirection) error {
-	if _err := purego.NewOSStatus(raw.DVDScan(raw.DVDScanRate(inRate), raw.DVDScanDirection(inDirection))).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDScan == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDScan, _lib, "DVDScan")
+	}
+	_rc := _fnDVDScan(inRate, inDirection)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetAngle wraps [raw.DVDSetAngle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetAngle func(uint16) int32
+
+// DVDSetAngle reports an error if the DVDPlayback framework function DVDSetAngle fails.
 func DVDSetAngle(inAngleNum uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetAngle(inAngleNum)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetAngle == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetAngle, _lib, "DVDSetAngle")
+	}
+	_rc := _fnDVDSetAngle(inAngleNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetAspectRatio wraps [raw.DVDSetAspectRatio], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetAspectRatio func(DVDAspectRatio) int32
+
+// DVDSetAspectRatio reports an error if the DVDPlayback framework function DVDSetAspectRatio fails.
 func DVDSetAspectRatio(inRatio DVDAspectRatio) error {
-	if _err := purego.NewOSStatus(raw.DVDSetAspectRatio(raw.DVDAspectRatio(inRatio))).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetAspectRatio == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetAspectRatio, _lib, "DVDSetAspectRatio")
+	}
+	_rc := _fnDVDSetAspectRatio(inRatio)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetAudioOutputMode wraps [raw.DVDSetAudioOutputMode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetAudioOutputMode func(int) int32
+
+// DVDSetAudioOutputMode reports an error if the DVDPlayback framework function DVDSetAudioOutputMode fails.
 func DVDSetAudioOutputMode(inMode int) error {
-	if _err := purego.NewOSStatus(raw.DVDSetAudioOutputMode(inMode)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetAudioOutputMode == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetAudioOutputMode, _lib, "DVDSetAudioOutputMode")
+	}
+	_rc := _fnDVDSetAudioOutputMode(inMode)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetAudioStream wraps [raw.DVDSetAudioStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetAudioStream func(uint16) int32
+
+// DVDSetAudioStream reports an error if the DVDPlayback framework function DVDSetAudioStream fails.
 func DVDSetAudioStream(inStreamNum uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetAudioStream(inStreamNum)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetAudioStream == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetAudioStream, _lib, "DVDSetAudioStream")
+	}
+	_rc := _fnDVDSetAudioStream(inStreamNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetAudioVolume wraps [raw.DVDSetAudioVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetAudioVolume func(uint16) int32
+
+// DVDSetAudioVolume reports an error if the DVDPlayback framework function DVDSetAudioVolume fails.
 func DVDSetAudioVolume(inVolume uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetAudioVolume(inVolume)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetAudioVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetAudioVolume, _lib, "DVDSetAudioVolume")
+	}
+	_rc := _fnDVDSetAudioVolume(inVolume)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetChapter wraps [raw.DVDSetChapter], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetChapter func(uint16) int32
+
+// DVDSetChapter reports an error if the DVDPlayback framework function DVDSetChapter fails.
 func DVDSetChapter(inChapterNum uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetChapter(inChapterNum)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetChapter == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetChapter, _lib, "DVDSetChapter")
+	}
+	_rc := _fnDVDSetChapter(inChapterNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetDefaultAudioLanguageCode wraps [raw.DVDSetDefaultAudioLanguageCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetDefaultAudioLanguageCode(inCode uint, inExtension uint) error {
-	if _err := purego.NewOSStatus(raw.DVDSetDefaultAudioLanguageCode(inCode, inExtension)).Err(); _err != nil {
+var _fnDVDSetDefaultAudioLanguageCode func(int, int) int32
+
+// DVDSetDefaultAudioLanguageCode reports an error if the DVDPlayback framework function DVDSetDefaultAudioLanguageCode fails.
+func DVDSetDefaultAudioLanguageCode(inCode int, inExtension int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetDefaultAudioLanguageCode == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetDefaultAudioLanguageCode, _lib, "DVDSetDefaultAudioLanguageCode")
+	}
+	_rc := _fnDVDSetDefaultAudioLanguageCode(inCode, inExtension)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetDefaultMenuLanguageCode wraps [raw.DVDSetDefaultMenuLanguageCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetDefaultMenuLanguageCode(inCode uint) error {
-	if _err := purego.NewOSStatus(raw.DVDSetDefaultMenuLanguageCode(inCode)).Err(); _err != nil {
+var _fnDVDSetDefaultMenuLanguageCode func(int) int32
+
+// DVDSetDefaultMenuLanguageCode reports an error if the DVDPlayback framework function DVDSetDefaultMenuLanguageCode fails.
+func DVDSetDefaultMenuLanguageCode(inCode int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetDefaultMenuLanguageCode == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetDefaultMenuLanguageCode, _lib, "DVDSetDefaultMenuLanguageCode")
+	}
+	_rc := _fnDVDSetDefaultMenuLanguageCode(inCode)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetDefaultSubPictureLanguageCode wraps [raw.DVDSetDefaultSubPictureLanguageCode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetDefaultSubPictureLanguageCode(inCode uint, inExtension uint) error {
-	if _err := purego.NewOSStatus(raw.DVDSetDefaultSubPictureLanguageCode(inCode, inExtension)).Err(); _err != nil {
+var _fnDVDSetDefaultSubPictureLanguageCode func(int, int) int32
+
+// DVDSetDefaultSubPictureLanguageCode reports an error if the DVDPlayback framework function DVDSetDefaultSubPictureLanguageCode fails.
+func DVDSetDefaultSubPictureLanguageCode(inCode int, inExtension int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetDefaultSubPictureLanguageCode == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetDefaultSubPictureLanguageCode, _lib, "DVDSetDefaultSubPictureLanguageCode")
+	}
+	_rc := _fnDVDSetDefaultSubPictureLanguageCode(inCode, inExtension)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetSPDIFDataOutDevice wraps [raw.DVDSetSPDIFDataOutDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetSPDIFDataOutDevice(inIndex uint) error {
-	if _err := purego.NewOSStatus(raw.DVDSetSPDIFDataOutDevice(inIndex)).Err(); _err != nil {
+var _fnDVDSetDriveRegionCode func(int, objc.ID) int32
+
+// DVDSetDriveRegionCode reports an error if the DVDPlayback framework function DVDSetDriveRegionCode fails.
+func DVDSetDriveRegionCode(inCode int, inAuthorization obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetDriveRegionCode == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetDriveRegionCode, _lib, "DVDSetDriveRegionCode")
+	}
+	_rc := _fnDVDSetDriveRegionCode(inCode, objref.IDOf(inAuthorization))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetSubPictureStream wraps [raw.DVDSetSubPictureStream], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetSPDIFDataOutDevice func(int) int32
+
+// DVDSetSPDIFDataOutDevice reports an error if the DVDPlayback framework function DVDSetSPDIFDataOutDevice fails.
+func DVDSetSPDIFDataOutDevice(inIndex int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetSPDIFDataOutDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetSPDIFDataOutDevice, _lib, "DVDSetSPDIFDataOutDevice")
+	}
+	_rc := _fnDVDSetSPDIFDataOutDevice(inIndex)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnDVDSetSubPictureStream func(uint16) int32
+
+// DVDSetSubPictureStream reports an error if the DVDPlayback framework function DVDSetSubPictureStream fails.
 func DVDSetSubPictureStream(inStreamNum uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetSubPictureStream(inStreamNum)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetSubPictureStream == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetSubPictureStream, _lib, "DVDSetSubPictureStream")
+	}
+	_rc := _fnDVDSetSubPictureStream(inStreamNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetTime wraps [raw.DVDSetTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetTime(inTimeCode int16, inTime uint, inFrames uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetTime(inTimeCode, inTime, inFrames)).Err(); _err != nil {
+var _fnDVDSetTime func(int16, int, uint16) int32
+
+// DVDSetTime reports an error if the DVDPlayback framework function DVDSetTime fails.
+func DVDSetTime(inTimeCode int16, inTime int, inFrames uint16) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetTime == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetTime, _lib, "DVDSetTime")
+	}
+	_rc := _fnDVDSetTime(inTimeCode, inTime, inFrames)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetTimeEventRate wraps [raw.DVDSetTimeEventRate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetTimeEventRate(inMilliseconds uint) error {
-	if _err := purego.NewOSStatus(raw.DVDSetTimeEventRate(inMilliseconds)).Err(); _err != nil {
+var _fnDVDSetTimeEventRate func(int) int32
+
+// DVDSetTimeEventRate reports an error if the DVDPlayback framework function DVDSetTimeEventRate fails.
+func DVDSetTimeEventRate(inMilliseconds int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetTimeEventRate == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetTimeEventRate, _lib, "DVDSetTimeEventRate")
+	}
+	_rc := _fnDVDSetTimeEventRate(inMilliseconds)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetTitle wraps [raw.DVDSetTitle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSetTitle func(uint16) int32
+
+// DVDSetTitle reports an error if the DVDPlayback framework function DVDSetTitle fails.
 func DVDSetTitle(inTitleNum uint16) error {
-	if _err := purego.NewOSStatus(raw.DVDSetTitle(inTitleNum)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetTitle == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetTitle, _lib, "DVDSetTitle")
+	}
+	_rc := _fnDVDSetTitle(inTitleNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetVideoCGBounds wraps [raw.DVDSetVideoCGBounds], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetVideoCGBounds(inRect *corefoundation.CGRect) error {
-	if _err := purego.NewOSStatus(raw.DVDSetVideoCGBounds(inRect)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDSetVideoDisplay func(uint32) int32
 
-// DVDSetVideoDisplay wraps [raw.DVDSetVideoDisplay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDSetVideoDisplay reports an error if the DVDPlayback framework function DVDSetVideoDisplay fails.
 func DVDSetVideoDisplay(inDisplay uint32) error {
-	if _err := purego.NewOSStatus(raw.DVDSetVideoDisplay(inDisplay)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetVideoDisplay == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetVideoDisplay, _lib, "DVDSetVideoDisplay")
+	}
+	_rc := _fnDVDSetVideoDisplay(inDisplay)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSetVideoWindowID wraps [raw.DVDSetVideoWindowID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetVideoWindowID(inVidWindowID uint) error {
-	if _err := purego.NewOSStatus(raw.DVDSetVideoWindowID(inVidWindowID)).Err(); _err != nil {
+var _fnDVDSetVideoWindowID func(int) int32
+
+// DVDSetVideoWindowID reports an error if the DVDPlayback framework function DVDSetVideoWindowID fails.
+func DVDSetVideoWindowID(inVidWindowID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetVideoWindowID == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetVideoWindowID, _lib, "DVDSetVideoWindowID")
+	}
+	_rc := _fnDVDSetVideoWindowID(inVidWindowID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSleep wraps [raw.DVDSleep], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDSleep func() int32
+
+// DVDSleep reports an error if the DVDPlayback framework function DVDSleep fails.
 func DVDSleep() error {
-	if _err := purego.NewOSStatus(raw.DVDSleep()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSleep == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSleep, _lib, "DVDSleep")
+	}
+	_rc := _fnDVDSleep()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDStepFrame wraps [raw.DVDStepFrame], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDStepFrame func(DVDScanDirection) int32
+
+// DVDStepFrame reports an error if the DVDPlayback framework function DVDStepFrame fails.
 func DVDStepFrame(inDirection DVDScanDirection) error {
-	if _err := purego.NewOSStatus(raw.DVDStepFrame(raw.DVDScanDirection(inDirection))).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDStepFrame == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDStepFrame, _lib, "DVDStepFrame")
+	}
+	_rc := _fnDVDStepFrame(inDirection)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDStop wraps [raw.DVDStop], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDStop func() int32
+
+// DVDStop reports an error if the DVDPlayback framework function DVDStop fails.
 func DVDStop() error {
-	if _err := purego.NewOSStatus(raw.DVDStop()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDStop == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDStop, _lib, "DVDStop")
+	}
+	_rc := _fnDVDStop()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDSwitchToDisplay wraps [raw.DVDSwitchToDisplay], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSwitchToDisplay(newDisplay uint32, outSupported *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDSwitchToDisplay(newDisplay, outSupported)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnDVDUpdateVideo func() int32
 
-// DVDUpdateVideo wraps [raw.DVDUpdateVideo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// DVDUpdateVideo reports an error if the DVDPlayback framework function DVDUpdateVideo fails.
 func DVDUpdateVideo() error {
-	if _err := purego.NewOSStatus(raw.DVDUpdateVideo()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDUpdateVideo == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDUpdateVideo, _lib, "DVDUpdateVideo")
+	}
+	_rc := _fnDVDUpdateVideo()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DVDWakeUp wraps [raw.DVDWakeUp], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnDVDWakeUp func() int32
+
+// DVDWakeUp reports an error if the DVDPlayback framework function DVDWakeUp fails.
 func DVDWakeUp() error {
-	if _err := purego.NewOSStatus(raw.DVDWakeUp()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDWakeUp == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDWakeUp, _lib, "DVDWakeUp")
+	}
+	_rc := _fnDVDWakeUp()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

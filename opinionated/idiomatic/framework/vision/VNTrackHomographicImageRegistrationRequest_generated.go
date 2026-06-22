@@ -5,102 +5,91 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An image-analysis request, as a stateful request you track over time, that determines the perspective warp matrix necessary to align the content of two images.
+// TrackHomographicImageRegistrationRequest is an idiomatic wrapper over the Objective-C class VNTrackHomographicImageRegistrationRequest.
 //
-// TrackHomographicImageRegistrationRequest wraps [raw.VNTrackHomographicImageRegistrationRequest] with a fluent Go API.
+// It embeds [StatefulRequest], promoting that type's methods.
+//
+// An image-analysis request, as a stateful request you track over time, that determines the perspective warp matrix necessary to align the content of two images.
 type TrackHomographicImageRegistrationRequest struct {
-	inner *raw.VNTrackHomographicImageRegistrationRequest
+	StatefulRequest
 }
 
-// Unwrap returns the underlying [raw.VNTrackHomographicImageRegistrationRequest].
-func (x *TrackHomographicImageRegistrationRequest) Unwrap() *raw.VNTrackHomographicImageRegistrationRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrackHomographicImageRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// TrackHomographicImageRegistrationRequestFromID adopts an existing object pointer as a TrackHomographicImageRegistrationRequest (nil for 0).
+// TrackHomographicImageRegistrationRequestFromID adopts an existing Objective-C object as a TrackHomographicImageRegistrationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func TrackHomographicImageRegistrationRequestFromID(id objc.ID) *TrackHomographicImageRegistrationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &TrackHomographicImageRegistrationRequest{inner: raw.VNTrackHomographicImageRegistrationRequestFromID(id)}
+	x := &TrackHomographicImageRegistrationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTrackHomographicImageRegistrationRequest creates a new [TrackHomographicImageRegistrationRequest].
+// trackHomographicImageRegistrationRequestAdopt wraps an Objective-C object that this code just created as a
+// TrackHomographicImageRegistrationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trackHomographicImageRegistrationRequestAdopt(id objc.ID) *TrackHomographicImageRegistrationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &TrackHomographicImageRegistrationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTrackHomographicImageRegistrationRequest creates a new TrackHomographicImageRegistrationRequest.
 func NewTrackHomographicImageRegistrationRequest() *TrackHomographicImageRegistrationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackHomographicImageRegistrationRequest")), objc.RegisterName("new"))
-	return &TrackHomographicImageRegistrationRequest{inner: raw.VNTrackHomographicImageRegistrationRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNTrackHomographicImageRegistrationRequest")), objc.RegisterName("new"))
+	return trackHomographicImageRegistrationRequestAdopt(_id)
 }
 
-// Creates a new request that tracks the homographic transformation of two images, with a system callback on completion.
-//
-// NewTrackHomographicImageRegistrationRequestWithCompletionHandler creates a new [TrackHomographicImageRegistrationRequest].
-func NewTrackHomographicImageRegistrationRequestWithCompletionHandler(completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TrackHomographicImageRegistrationRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackHomographicImageRegistrationRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), completionHandler)
-	return &TrackHomographicImageRegistrationRequest{inner: raw.VNTrackHomographicImageRegistrationRequestFromID(_id)}
-}
-
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *TrackHomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackHomographicImageRegistrationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *TrackHomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackHomographicImageRegistrationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *TrackHomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackHomographicImageRegistrationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *TrackHomographicImageRegistrationRequest) WithRevision(revision uint) *TrackHomographicImageRegistrationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *TrackHomographicImageRegistrationRequest) WithRevision(revision int) *TrackHomographicImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *TrackHomographicImageRegistrationRequest) asStatefulRequest() *raw.VNStatefulRequest {
-	return &x.inner.VNStatefulRequest
-}
-
-func (x *TrackHomographicImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest
-}
-
-func (x *TrackHomographicImageRegistrationRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
 }
 
 // TrackHomographicImageRegistrationRequestable is the interface implemented by [TrackHomographicImageRegistrationRequest], for mocking and DI.
 type TrackHomographicImageRegistrationRequestable interface {
-	Unwrap() *raw.VNTrackHomographicImageRegistrationRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackHomographicImageRegistrationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackHomographicImageRegistrationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackHomographicImageRegistrationRequest
-	WithRevision(revision uint) *TrackHomographicImageRegistrationRequest
+	WithRevision(revision int) *TrackHomographicImageRegistrationRequest
 }
 
 var _ TrackHomographicImageRegistrationRequestable = (*TrackHomographicImageRegistrationRequest)(nil)
+
+var _ StatefulRequestProvider = (*TrackHomographicImageRegistrationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TrackHomographicImageRegistrationRequest)(nil)
+
+var _ RequestProvider = (*TrackHomographicImageRegistrationRequest)(nil)

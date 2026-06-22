@@ -5,320 +5,262 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceControllerStartupParams wraps [raw.MTRDeviceControllerStartupParams] with a fluent Go API.
+// MTRDeviceControllerStartupParams is an idiomatic wrapper over the Objective-C class MTRDeviceControllerStartupParams.
 type MTRDeviceControllerStartupParams struct {
-	inner *raw.MTRDeviceControllerStartupParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceControllerStartupParams].
-func (x *MTRDeviceControllerStartupParams) Unwrap() *raw.MTRDeviceControllerStartupParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceControllerStartupParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceControllerStartupParamsFromID adopts an existing object pointer as a MTRDeviceControllerStartupParams (nil for 0).
+// MTRDeviceControllerStartupParamsFromID adopts an existing Objective-C object as a MTRDeviceControllerStartupParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceControllerStartupParamsFromID(id objc.ID) *MTRDeviceControllerStartupParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(id)}
-}
-
-// Prepare to initialize a controller given a keypair to use for signing operational certificates. A controller created from MTRDeviceControllerStartupParams initialized with this method will be able to issue operational certificates to devices it commissions, using nocSigner to sign them. @param ipk The Identity Protection Key, must be 16 bytes in length @param fabricID The fabric identifier, must be non-zero.
-//
-// NewMTRDeviceControllerStartupParamsWithIPKFabricIDNocSigner creates a new [MTRDeviceControllerStartupParams].
-func NewMTRDeviceControllerStartupParamsWithIPKFabricIDNocSigner(ipk *foundation.NSData, fabricID *foundation.NSNumber, nocSigner raw.MTRKeypair) *MTRDeviceControllerStartupParams {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerStartupParams")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPK:fabricID:nocSigner:"), ipk.Ptr(), fabricID.Ptr(), nocSigner)
-	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(_id)}
-}
-
-// Prepare to initialize a controller that is not able to sign operational certificates itself, and therefore needs to be provided with a complete operational certificate chain.  This initialization method should be used when none of the certificate-signing private keys are available locally. A controller created from MTRDeviceControllerStartupParams initialized with this method will not be able to commission devices unless operationalCertificateIssuer and operationalCertificateIssuerQueue are set. The fabric id and node id to use for the controller will be derived from the provided operationalCertificate. @param ipk The Identity Protection Key, must be 16 bytes in length @param intermediateCertificate may be nil if operationalCertificate is directly signed by rootCertificate.
-//
-// NewMTRDeviceControllerStartupParamsWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate creates a new [MTRDeviceControllerStartupParams].
-func NewMTRDeviceControllerStartupParamsWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate(ipk *foundation.NSData, operationalKeypair raw.MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerStartupParams")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPK:operationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate:"), ipk.Ptr(), operationalKeypair, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr())
-	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(_id)}
-}
-
-// NewMTRDeviceControllerStartupParamsWithSigningKeypairFabricIdIpk creates a new [MTRDeviceControllerStartupParams].
-func NewMTRDeviceControllerStartupParamsWithSigningKeypairFabricIdIpk(nocSigner raw.MTRKeypair, fabricId uint64, ipk *foundation.NSData) *MTRDeviceControllerStartupParams {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerStartupParams")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSigningKeypair:fabricId:ipk:"), nocSigner, fabricId, ipk.Ptr())
-	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(_id)}
-}
-
-// NewMTRDeviceControllerStartupParamsWithOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificateIpk creates a new [MTRDeviceControllerStartupParams].
-func NewMTRDeviceControllerStartupParamsWithOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificateIpk(operationalKeypair raw.MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData, ipk *foundation.NSData) *MTRDeviceControllerStartupParams {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerStartupParams")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOperationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate:ipk:"), operationalKeypair, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr(), ipk.Ptr())
-	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(_id)}
-}
-
-// Vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
-//
-// WithVendorID sets the vendorID property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithVendorID(vendorID *foundation.NSNumber) *MTRDeviceControllerStartupParams {
-	x.inner.SetVendorID(vendorID)
+	x := &MTRDeviceControllerStartupParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Node id for this controller.
-//
-// WithNodeID sets the nodeID property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithNodeID(nodeID *foundation.NSNumber) *MTRDeviceControllerStartupParams {
-	x.inner.SetNodeID(nodeID)
+// mTRDeviceControllerStartupParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceControllerStartupParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceControllerStartupParamsAdopt(id objc.ID) *MTRDeviceControllerStartupParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceControllerStartupParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithCaseAuthenticatedTags sets the caseAuthenticatedTags property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) *MTRDeviceControllerStartupParams {
-	x.inner.SetCaseAuthenticatedTags(caseAuthenticatedTags)
+// Description returns the object's -description text.
+func (x *MTRDeviceControllerStartupParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceControllerStartupParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceControllerStartupParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceControllerStartupParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceControllerStartupParams creates a new MTRDeviceControllerStartupParams.
+func NewMTRDeviceControllerStartupParams() *MTRDeviceControllerStartupParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerStartupParams")), objc.RegisterName("new"))
+	return mTRDeviceControllerStartupParamsAdopt(_id)
+}
+
+// WithVendorID vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
+func (x *MTRDeviceControllerStartupParams) WithVendorID(vendorID obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return x
 }
 
-// Root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
-//
-// WithRootCertificate sets the rootCertificate property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithRootCertificate(rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
-	x.inner.SetRootCertificate(rootCertificate)
+// WithNodeID node id for this controller.
+func (x *MTRDeviceControllerStartupParams) WithNodeID(nodeID obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return x
 }
 
-// Intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
-//
-// WithIntermediateCertificate sets the intermediateCertificate property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithIntermediateCertificate(intermediateCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
-	x.inner.SetIntermediateCertificate(intermediateCertificate)
+// WithCaseAuthenticatedTags sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerStartupParams) WithCaseAuthenticatedTags(caseAuthenticatedTags obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseAuthenticatedTags:"), objref.IDOf(caseAuthenticatedTags))
 	return x
 }
 
-// Operational keypair to use.  If operationalCertificate is not nil, the public key must match operationalCertificate. If not nil, and if operationalCertificate is nil, a new operational certificate will be generated for the given operationalKeypair.  The node id for that certificate will be determined as described in the documentation for nodeID.
-//
-// WithOperationalKeypair sets the operationalKeypair property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithOperationalKeypair(operationalKeypair raw.MTRKeypair) *MTRDeviceControllerStartupParams {
-	x.inner.SetOperationalKeypair(operationalKeypair)
+// WithRootCertificate root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
+func (x *MTRDeviceControllerStartupParams) WithRootCertificate(rootCertificate obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
 	return x
 }
 
-// The certificate issuer delegate to use for issuing operational certificates when commissioning devices.  Allowed to be nil if this controller either does not issue operational certificates at all or internally generates the certificates to be issued.  In the latter case, nocSigner must not be nil.
-//
-// WithOperationalCertificateIssuer sets the operationalCertificateIssuer property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer) *MTRDeviceControllerStartupParams {
-	x.inner.SetOperationalCertificateIssuer(operationalCertificateIssuer)
+// WithIntermediateCertificate intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
+func (x *MTRDeviceControllerStartupParams) WithIntermediateCertificate(intermediateCertificate obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
 	return x
 }
 
-// WithOperationalCertificateIssuerQueue sets the operationalCertificateIssuerQueue property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject) *MTRDeviceControllerStartupParams {
-	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue)
+// WithOperationalCertificateIssuerQueue sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalCertificateIssuerQueue:"), objref.IDOf(operationalCertificateIssuerQueue))
 	return x
 }
 
-// WithVendorId sets the vendorId property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithVendorId(vendorId *foundation.NSNumber) *MTRDeviceControllerStartupParams {
-	x.inner.SetVendorId(vendorId)
+// WithVendorId sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerStartupParams) WithVendorId(vendorId obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
 	return x
 }
 
-// WithNodeId sets the nodeId property and returns the receiver for chaining.
-func (x *MTRDeviceControllerStartupParams) WithNodeId(nodeId *foundation.NSNumber) *MTRDeviceControllerStartupParams {
-	x.inner.SetNodeId(nodeId)
+// WithNodeId sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerStartupParams) WithNodeId(nodeId obj.Object) *MTRDeviceControllerStartupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeId:"), objref.IDOf(nodeId))
 	return x
 }
 
-// Keypair used to sign operational certificates.  This is the root CA keypair if not using an intermediate CA, the intermediate CA's keypair otherwise. Allowed to be nil if this controller will not be issuing internally-generated operational certificates.  In that case, the MTRDeviceControllerStartupParams object must be initialized using initWithIPK:operationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate: (to provide the operational credentials for t2he controller itself).
-//
-// NocSigner calls the underlying NocSigner.
-func (x *MTRDeviceControllerStartupParams) NocSigner() raw.MTRKeypair {
-	return x.inner.NocSigner()
+// FabricID fabric id for the controller.  Must be set to a nonzero value.  This is scoped by the root public key, which is determined as follows: * If a root certificate is provided, it is the public key of the root certificate. * If a root certificate is not provided, the root public key is the public key of the nocSigner keypair, since in this case we are not using an intermediate certificate.
+func (x *MTRDeviceControllerStartupParams) FabricID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
+	return obj.Wrap(_r)
 }
 
-// Fabric id for the controller.  Must be set to a nonzero value.  This is scoped by the root public key, which is determined as follows: * If a root certificate is provided, it is the public key of the root certificate. * If a root certificate is not provided, the root public key is the public key of the nocSigner keypair, since in this case we are not using an intermediate certificate.
-//
-// FabricID calls the underlying FabricID.
-func (x *MTRDeviceControllerStartupParams) FabricID() *foundation.NSNumber {
-	return x.inner.FabricID()
+// Ipk IPK to use for the controller's fabric.  Allowed to change from the last time a controller was started on this fabric if a new IPK has been distributed to all the devices the controller wants to interact with.
+func (x *MTRDeviceControllerStartupParams) Ipk() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ipk"))
+	return obj.Wrap(_r)
 }
 
-// IPK to use for the controller's fabric.  Allowed to change from the last time a controller was started on this fabric if a new IPK has been distributed to all the devices the controller wants to interact with.
-//
-// Ipk calls the underlying Ipk.
-func (x *MTRDeviceControllerStartupParams) Ipk() *foundation.NSData {
-	return x.inner.Ipk()
+// VendorID vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
+func (x *MTRDeviceControllerStartupParams) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return obj.Wrap(_r)
 }
 
-// Vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
-//
-// VendorID calls the underlying VendorID.
-func (x *MTRDeviceControllerStartupParams) VendorID() *foundation.NSNumber {
-	return x.inner.VendorID()
+// SetVendorID wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetVendorID(vendorID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 }
 
-// SetVendorID calls the underlying SetVendorID.
-func (x *MTRDeviceControllerStartupParams) SetVendorID(vendorID *foundation.NSNumber) {
-	x.inner.SetVendorID(vendorID)
+// NodeID node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
+func (x *MTRDeviceControllerStartupParams) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+	return obj.Wrap(_r)
 }
 
-// Node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
-//
-// NodeID calls the underlying NodeID.
-func (x *MTRDeviceControllerStartupParams) NodeID() *foundation.NSNumber {
-	return x.inner.NodeID()
+// SetNodeID wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetNodeID(nodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 }
 
-// SetNodeID calls the underlying SetNodeID.
-func (x *MTRDeviceControllerStartupParams) SetNodeID(nodeID *foundation.NSNumber) {
-	x.inner.SetNodeID(nodeID)
+// CaseAuthenticatedTags wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseAuthenticatedTags"))
+	return obj.Wrap(_r)
 }
 
-// CaseAuthenticatedTags calls the underlying CaseAuthenticatedTags.
-func (x *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
-	return x.inner.CaseAuthenticatedTags()
+// SetCaseAuthenticatedTags wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetCaseAuthenticatedTags(caseAuthenticatedTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseAuthenticatedTags:"), objref.IDOf(caseAuthenticatedTags))
 }
 
-// SetCaseAuthenticatedTags calls the underlying SetCaseAuthenticatedTags.
-func (x *MTRDeviceControllerStartupParams) SetCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) {
-	x.inner.SetCaseAuthenticatedTags(caseAuthenticatedTags)
+// RootCertificate root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
+func (x *MTRDeviceControllerStartupParams) RootCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
+	return obj.Wrap(_r)
 }
 
-// Root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
-//
-// RootCertificate calls the underlying RootCertificate.
-func (x *MTRDeviceControllerStartupParams) RootCertificate() *foundation.NSData {
-	return x.inner.RootCertificate()
+// SetRootCertificate wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetRootCertificate(rootCertificate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
 }
 
-// SetRootCertificate calls the underlying SetRootCertificate.
-func (x *MTRDeviceControllerStartupParams) SetRootCertificate(rootCertificate *foundation.NSData) {
-	x.inner.SetRootCertificate(rootCertificate)
+// IntermediateCertificate intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
+func (x *MTRDeviceControllerStartupParams) IntermediateCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCertificate"))
+	return obj.Wrap(_r)
 }
 
-// Intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
-//
-// IntermediateCertificate calls the underlying IntermediateCertificate.
-func (x *MTRDeviceControllerStartupParams) IntermediateCertificate() *foundation.NSData {
-	return x.inner.IntermediateCertificate()
+// SetIntermediateCertificate wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetIntermediateCertificate(intermediateCertificate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
 }
 
-// SetIntermediateCertificate calls the underlying SetIntermediateCertificate.
-func (x *MTRDeviceControllerStartupParams) SetIntermediateCertificate(intermediateCertificate *foundation.NSData) {
-	x.inner.SetIntermediateCertificate(intermediateCertificate)
+// OperationalCertificate operational certificate, in X.509 DER form, to use. If not nil, will be used as the operational certificate.  In this case operationalKeypair must not be nil. If nil, an operational certificate will be determined as described in the documentation for nodeID.
+func (x *MTRDeviceControllerStartupParams) OperationalCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificate"))
+	return obj.Wrap(_r)
 }
 
-// Operational certificate, in X.509 DER form, to use. If not nil, will be used as the operational certificate.  In this case operationalKeypair must not be nil. If nil, an operational certificate will be determined as described in the documentation for nodeID.
-//
-// OperationalCertificate calls the underlying OperationalCertificate.
-func (x *MTRDeviceControllerStartupParams) OperationalCertificate() *foundation.NSData {
-	return x.inner.OperationalCertificate()
+// OperationalCertificateIssuerQueue wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificateIssuerQueue"))
+	return obj.Wrap(_r)
 }
 
-// Operational keypair to use.  If operationalCertificate is not nil, the public key must match operationalCertificate. If not nil, and if operationalCertificate is nil, a new operational certificate will be generated for the given operationalKeypair.  The node id for that certificate will be determined as described in the documentation for nodeID.
-//
-// OperationalKeypair calls the underlying OperationalKeypair.
-func (x *MTRDeviceControllerStartupParams) OperationalKeypair() raw.MTRKeypair {
-	return x.inner.OperationalKeypair()
+// SetOperationalCertificateIssuerQueue wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalCertificateIssuerQueue:"), objref.IDOf(operationalCertificateIssuerQueue))
 }
 
-// SetOperationalKeypair calls the underlying SetOperationalKeypair.
-func (x *MTRDeviceControllerStartupParams) SetOperationalKeypair(operationalKeypair raw.MTRKeypair) {
-	x.inner.SetOperationalKeypair(operationalKeypair)
-}
-
-// The certificate issuer delegate to use for issuing operational certificates when commissioning devices.  Allowed to be nil if this controller either does not issue operational certificates at all or internally generates the certificates to be issued.  In the latter case, nocSigner must not be nil.
-//
-// OperationalCertificateIssuer calls the underlying OperationalCertificateIssuer.
-func (x *MTRDeviceControllerStartupParams) OperationalCertificateIssuer() raw.MTROperationalCertificateIssuer {
-	return x.inner.OperationalCertificateIssuer()
-}
-
-// SetOperationalCertificateIssuer calls the underlying SetOperationalCertificateIssuer.
-func (x *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer) {
-	x.inner.SetOperationalCertificateIssuer(operationalCertificateIssuer)
-}
-
-// OperationalCertificateIssuerQueue calls the underlying OperationalCertificateIssuerQueue.
-func (x *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() *foundation.NSObject {
-	return x.inner.OperationalCertificateIssuerQueue()
-}
-
-// SetOperationalCertificateIssuerQueue calls the underlying SetOperationalCertificateIssuerQueue.
-func (x *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject) {
-	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue)
-}
-
-// FabricId calls the underlying FabricId.
+// FabricId wraps the corresponding Objective-C method.
 func (x *MTRDeviceControllerStartupParams) FabricId() uint64 {
-	return x.inner.FabricId()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("fabricId"))
+	return _r
 }
 
-// VendorId calls the underlying VendorId.
-func (x *MTRDeviceControllerStartupParams) VendorId() *foundation.NSNumber {
-	return x.inner.VendorId()
+// VendorId wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) VendorId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorId"))
+	return obj.Wrap(_r)
 }
 
-// SetVendorId calls the underlying SetVendorId.
-func (x *MTRDeviceControllerStartupParams) SetVendorId(vendorId *foundation.NSNumber) {
-	x.inner.SetVendorId(vendorId)
+// SetVendorId wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetVendorId(vendorId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
 }
 
-// NodeId calls the underlying NodeId.
-func (x *MTRDeviceControllerStartupParams) NodeId() *foundation.NSNumber {
-	return x.inner.NodeId()
+// NodeId wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) NodeId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeId"))
+	return obj.Wrap(_r)
 }
 
-// SetNodeId calls the underlying SetNodeId.
-func (x *MTRDeviceControllerStartupParams) SetNodeId(nodeId *foundation.NSNumber) {
-	x.inner.SetNodeId(nodeId)
+// SetNodeId wraps the corresponding Objective-C method.
+func (x *MTRDeviceControllerStartupParams) SetNodeId(nodeId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeId:"), objref.IDOf(nodeId))
 }
 
 // MTRDeviceControllerStartupParamsable is the interface implemented by [MTRDeviceControllerStartupParams], for mocking and DI.
 type MTRDeviceControllerStartupParamsable interface {
-	Unwrap() *raw.MTRDeviceControllerStartupParams
-	WithVendorID(vendorID *foundation.NSNumber) *MTRDeviceControllerStartupParams
-	WithNodeID(nodeID *foundation.NSNumber) *MTRDeviceControllerStartupParams
-	WithCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) *MTRDeviceControllerStartupParams
-	WithRootCertificate(rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams
-	WithIntermediateCertificate(intermediateCertificate *foundation.NSData) *MTRDeviceControllerStartupParams
-	WithOperationalKeypair(operationalKeypair raw.MTRKeypair) *MTRDeviceControllerStartupParams
-	WithOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer) *MTRDeviceControllerStartupParams
-	WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject) *MTRDeviceControllerStartupParams
-	WithVendorId(vendorId *foundation.NSNumber) *MTRDeviceControllerStartupParams
-	WithNodeId(nodeId *foundation.NSNumber) *MTRDeviceControllerStartupParams
-	NocSigner() raw.MTRKeypair
-	FabricID() *foundation.NSNumber
-	Ipk() *foundation.NSData
-	VendorID() *foundation.NSNumber
-	SetVendorID(vendorID *foundation.NSNumber)
-	NodeID() *foundation.NSNumber
-	SetNodeID(nodeID *foundation.NSNumber)
-	CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber]
-	SetCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber])
-	RootCertificate() *foundation.NSData
-	SetRootCertificate(rootCertificate *foundation.NSData)
-	IntermediateCertificate() *foundation.NSData
-	SetIntermediateCertificate(intermediateCertificate *foundation.NSData)
-	OperationalCertificate() *foundation.NSData
-	OperationalKeypair() raw.MTRKeypair
-	SetOperationalKeypair(operationalKeypair raw.MTRKeypair)
-	OperationalCertificateIssuer() raw.MTROperationalCertificateIssuer
-	SetOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer)
-	OperationalCertificateIssuerQueue() *foundation.NSObject
-	SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject)
+	obj.Object
+	WithVendorID(vendorID obj.Object) *MTRDeviceControllerStartupParams
+	WithNodeID(nodeID obj.Object) *MTRDeviceControllerStartupParams
+	WithCaseAuthenticatedTags(caseAuthenticatedTags obj.Object) *MTRDeviceControllerStartupParams
+	WithRootCertificate(rootCertificate obj.Object) *MTRDeviceControllerStartupParams
+	WithIntermediateCertificate(intermediateCertificate obj.Object) *MTRDeviceControllerStartupParams
+	WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object) *MTRDeviceControllerStartupParams
+	WithVendorId(vendorId obj.Object) *MTRDeviceControllerStartupParams
+	WithNodeId(nodeId obj.Object) *MTRDeviceControllerStartupParams
+	FabricID() obj.Object
+	Ipk() obj.Object
+	VendorID() obj.Object
+	SetVendorID(vendorID obj.Object)
+	NodeID() obj.Object
+	SetNodeID(nodeID obj.Object)
+	CaseAuthenticatedTags() obj.Object
+	SetCaseAuthenticatedTags(caseAuthenticatedTags obj.Object)
+	RootCertificate() obj.Object
+	SetRootCertificate(rootCertificate obj.Object)
+	IntermediateCertificate() obj.Object
+	SetIntermediateCertificate(intermediateCertificate obj.Object)
+	OperationalCertificate() obj.Object
+	OperationalCertificateIssuerQueue() obj.Object
+	SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object)
 	FabricId() uint64
-	VendorId() *foundation.NSNumber
-	SetVendorId(vendorId *foundation.NSNumber)
-	NodeId() *foundation.NSNumber
-	SetNodeId(nodeId *foundation.NSNumber)
+	VendorId() obj.Object
+	SetVendorId(vendorId obj.Object)
+	NodeId() obj.Object
+	SetNodeId(nodeId obj.Object)
 }
 
 var _ MTRDeviceControllerStartupParamsable = (*MTRDeviceControllerStartupParams)(nil)

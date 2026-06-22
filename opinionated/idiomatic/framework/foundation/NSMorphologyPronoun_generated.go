@@ -5,80 +5,106 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A custom pronoun for referring to a third person.
+// MorphologyPronoun is an idiomatic wrapper over the Objective-C class NSMorphologyPronoun.
 //
-// MorphologyPronoun wraps [raw.NSMorphologyPronoun] with a fluent Go API.
+// A custom pronoun for referring to a third person.
 type MorphologyPronoun struct {
-	inner *raw.NSMorphologyPronoun
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMorphologyPronoun].
-func (x *MorphologyPronoun) Unwrap() *raw.NSMorphologyPronoun { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MorphologyPronoun) ID() objc.ID { return x.inner.Ptr() }
-
-// MorphologyPronounFromID adopts an existing object pointer as a MorphologyPronoun (nil for 0).
+// MorphologyPronounFromID adopts an existing Objective-C object as a MorphologyPronoun
+// (nil for 0), retaining it and registering a release finalizer.
 func MorphologyPronounFromID(id objc.ID) *MorphologyPronoun {
 	if id == 0 {
 		return nil
 	}
-	return &MorphologyPronoun{inner: raw.NSMorphologyPronounFromID(id)}
-}
-
-// NewMorphologyPronounWithPronounMorphologyDependentMorphology creates a new [MorphologyPronoun].
-func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string, morphology *raw.NSMorphology, dependentMorphology *raw.NSMorphology) *MorphologyPronoun {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMorphologyPronoun")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPronoun:morphology:dependentMorphology:"), foundation.NSStringStringWithUTF8String(pronoun).Ptr(), morphology.Ptr(), dependentMorphology.Ptr())
-	return &MorphologyPronoun{inner: raw.NSMorphologyPronounFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MorphologyPronoun) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MorphologyPronoun {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MorphologyPronoun{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Pronoun calls the underlying Pronoun.
-func (x *MorphologyPronoun) Pronoun() *String {
-	_r := x.inner.Pronoun()
-	if _r == nil {
+// morphologyPronounAdopt wraps an Objective-C object that this code just created as a
+// MorphologyPronoun (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func morphologyPronounAdopt(id objc.ID) *MorphologyPronoun {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &MorphologyPronoun{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Morphology calls the underlying Morphology.
+// Description returns the object's -description text.
+func (x *MorphologyPronoun) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MorphologyPronoun) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MorphologyPronoun) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MorphologyPronoun) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMorphologyPronounWithPronounMorphologyDependentMorphology creates a new MorphologyPronoun.
+func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string, morphology *Morphology, dependentMorphology *Morphology) *MorphologyPronoun {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMorphologyPronoun")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPronoun:morphology:dependentMorphology:"), purego.NSString(pronoun), objref.IDOf(morphology), objref.IDOf(dependentMorphology))
+	return morphologyPronounAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MorphologyPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Pronoun wraps the corresponding Objective-C method.
+func (x *MorphologyPronoun) Pronoun() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronoun"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Morphology wraps the corresponding Objective-C method.
 func (x *MorphologyPronoun) Morphology() *Morphology {
-	_r := x.inner.Morphology()
-	if _r == nil {
-		return nil
-	}
-	return &Morphology{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morphology"))
+	return MorphologyFromID(_r)
 }
 
-// DependentMorphology calls the underlying DependentMorphology.
+// DependentMorphology wraps the corresponding Objective-C method.
 func (x *MorphologyPronoun) DependentMorphology() *Morphology {
-	_r := x.inner.DependentMorphology()
-	if _r == nil {
-		return nil
-	}
-	return &Morphology{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependentMorphology"))
+	return MorphologyFromID(_r)
 }
-
-func (x *MorphologyPronoun) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // MorphologyPronounable is the interface implemented by [MorphologyPronoun], for mocking and DI.
 type MorphologyPronounable interface {
-	Unwrap() *raw.NSMorphologyPronoun
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MorphologyPronoun
-	Pronoun() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun
+	Pronoun() string
 	Morphology() *Morphology
 	DependentMorphology() *Morphology
 }

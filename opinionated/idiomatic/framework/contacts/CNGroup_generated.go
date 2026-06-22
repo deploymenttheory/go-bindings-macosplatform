@@ -5,66 +5,99 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a group of contacts.
+// Group is an idiomatic wrapper over the Objective-C class CNGroup.
 //
-// Group wraps [raw.CNGroup] with a fluent Go API.
+// Group is an abstract base — you do not construct it directly. Construct one of [MutableGroup] and pass it where a Group is accepted.
+//
+// An immutable object that represents a group of contacts.
 type Group struct {
-	inner *raw.CNGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNGroup].
-func (x *Group) Unwrap() *raw.CNGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Group) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupFromID adopts an existing object pointer as a Group (nil for 0).
+// GroupFromID adopts an existing Objective-C object as a Group
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupFromID(id objc.ID) *Group {
 	if id == 0 {
 		return nil
 	}
-	return &Group{inner: raw.CNGroupFromID(id)}
+	x := &Group{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGroup creates a new [Group].
-func NewGroup() *Group {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNGroup")), objc.RegisterName("new"))
-	return &Group{inner: raw.CNGroupFromID(_id)}
+// groupAdopt wraps an Objective-C object that this code just created as a
+// Group (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupAdopt(id objc.ID) *Group {
+	if id == 0 {
+		return nil
+	}
+	x := &Group{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
-//
-// Identifier calls the underlying Identifier.
+// Description returns the object's -description text.
+func (x *Group) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Group) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Group) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Group) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Identifier the identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
 func (x *Group) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Group) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Group) asGroup() *raw.CNGroup { return x.inner }
 
 // Groupable is the interface implemented by [Group], for mocking and DI.
 type Groupable interface {
-	Unwrap() *raw.CNGroup
+	obj.Object
 	Identifier() string
 	Name() string
 }
 
 var _ Groupable = (*Group)(nil)
+
+// isGroup marks Group — and, by embedding promotion, its
+// subclasses — as a member of the Group hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Group) isGroup() {}
+
+var _ GroupProvider = (*Group)(nil)

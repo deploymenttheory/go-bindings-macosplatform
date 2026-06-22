@@ -5,81 +5,86 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A storage device attachment that uses a disk to store data.
+// DiskBlockDeviceStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZDiskBlockDeviceStorageDeviceAttachment.
 //
-// DiskBlockDeviceStorageDeviceAttachment wraps [raw.VZDiskBlockDeviceStorageDeviceAttachment] with a fluent Go API.
+// It embeds [StorageDeviceAttachment], promoting that type's methods.
+//
+// A storage device attachment that uses a disk to store data.
 type DiskBlockDeviceStorageDeviceAttachment struct {
-	inner *raw.VZDiskBlockDeviceStorageDeviceAttachment
+	StorageDeviceAttachment
 }
 
-// Unwrap returns the underlying [raw.VZDiskBlockDeviceStorageDeviceAttachment].
-func (x *DiskBlockDeviceStorageDeviceAttachment) Unwrap() *raw.VZDiskBlockDeviceStorageDeviceAttachment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiskBlockDeviceStorageDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// DiskBlockDeviceStorageDeviceAttachmentFromID adopts an existing object pointer as a DiskBlockDeviceStorageDeviceAttachment (nil for 0).
+// DiskBlockDeviceStorageDeviceAttachmentFromID adopts an existing Objective-C object as a DiskBlockDeviceStorageDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func DiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *DiskBlockDeviceStorageDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &DiskBlockDeviceStorageDeviceAttachment{inner: raw.VZDiskBlockDeviceStorageDeviceAttachmentFromID(id)}
+	x := &DiskBlockDeviceStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
-//
-// NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new [DiskBlockDeviceStorageDeviceAttachment].
-func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle *foundation.NSFileHandle, readOnly bool, synchronizationMode VZDiskSynchronizationMode) (*DiskBlockDeviceStorageDeviceAttachment, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:"), fileHandle.Ptr(), readOnly, raw.VZDiskSynchronizationMode(synchronizationMode), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// diskBlockDeviceStorageDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// DiskBlockDeviceStorageDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diskBlockDeviceStorageDeviceAttachmentAdopt(id objc.ID) *DiskBlockDeviceStorageDeviceAttachment {
+	if id == 0 {
+		return nil
 	}
-	return &DiskBlockDeviceStorageDeviceAttachment{inner: raw.VZDiskBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
+	x := &DiskBlockDeviceStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract File handle to the underlying disk used for storage by the attachment.
-//
-// FileHandle calls the underlying FileHandle.
-func (x *DiskBlockDeviceStorageDeviceAttachment) FileHandle() *foundation.NSFileHandle {
-	return x.inner.FileHandle()
+// NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
+func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle obj.Object, readOnly bool, synchronizationMode DiskSynchronizationMode) (result *DiskBlockDeviceStorageDeviceAttachment, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:"), objref.IDOf(fileHandle), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return diskBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// @abstract Whether the underlying disk attachment is read-only.
-//
-// IsReadOnly calls the underlying IsReadOnly.
+// FileHandle file handle to the underlying disk used for storage by the attachment.
+func (x *DiskBlockDeviceStorageDeviceAttachment) FileHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandle"))
+	return obj.Wrap(_r)
+}
+
+// IsReadOnly whether the underlying disk attachment is read-only.
 func (x *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
-	return x.inner.IsReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+	return _r
 }
 
-// @abstract The mode in which the disk image synchronizes data with the underlying storage device.
-//
-// SynchronizationMode calls the underlying SynchronizationMode.
-func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskSynchronizationMode {
-	return VZDiskSynchronizationMode(x.inner.SynchronizationMode())
-}
-
-func (x *DiskBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
-	return &x.inner.VZStorageDeviceAttachment
+// SynchronizationMode the mode in which the disk image synchronizes data with the underlying storage device.
+func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
+	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
+	return _r
 }
 
 // DiskBlockDeviceStorageDeviceAttachmentable is the interface implemented by [DiskBlockDeviceStorageDeviceAttachment], for mocking and DI.
 type DiskBlockDeviceStorageDeviceAttachmentable interface {
-	Unwrap() *raw.VZDiskBlockDeviceStorageDeviceAttachment
-	FileHandle() *foundation.NSFileHandle
+	obj.Object
+	FileHandle() obj.Object
 	IsReadOnly() bool
-	SynchronizationMode() VZDiskSynchronizationMode
+	SynchronizationMode() DiskSynchronizationMode
 }
 
 var _ DiskBlockDeviceStorageDeviceAttachmentable = (*DiskBlockDeviceStorageDeviceAttachment)(nil)
+
+var _ StorageDeviceAttachmentProvider = (*DiskBlockDeviceStorageDeviceAttachment)(nil)

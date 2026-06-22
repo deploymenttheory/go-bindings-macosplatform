@@ -5,210 +5,184 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Configuration parameters for a DNS proxy.
+// NEDNSProxyProviderProtocol is an idiomatic wrapper over the Objective-C class NEDNSProxyProviderProtocol.
 //
-// NEDNSProxyProviderProtocol wraps [raw.NEDNSProxyProviderProtocol] with a fluent Go API.
+// It embeds [NEVPNProtocol], promoting that type's methods.
+//
+// Configuration parameters for a DNS proxy.
 type NEDNSProxyProviderProtocol struct {
-	inner *raw.NEDNSProxyProviderProtocol
+	NEVPNProtocol
 }
 
-// Unwrap returns the underlying [raw.NEDNSProxyProviderProtocol].
-func (x *NEDNSProxyProviderProtocol) Unwrap() *raw.NEDNSProxyProviderProtocol { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEDNSProxyProviderProtocol) ID() objc.ID { return x.inner.Ptr() }
-
-// NEDNSProxyProviderProtocolFromID adopts an existing object pointer as a NEDNSProxyProviderProtocol (nil for 0).
+// NEDNSProxyProviderProtocolFromID adopts an existing Objective-C object as a NEDNSProxyProviderProtocol
+// (nil for 0), retaining it and registering a release finalizer.
 func NEDNSProxyProviderProtocolFromID(id objc.ID) *NEDNSProxyProviderProtocol {
 	if id == 0 {
 		return nil
 	}
-	return &NEDNSProxyProviderProtocol{inner: raw.NEDNSProxyProviderProtocolFromID(id)}
+	x := &NEDNSProxyProviderProtocol{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEDNSProxyProviderProtocol creates a new [NEDNSProxyProviderProtocol].
+// nEDNSProxyProviderProtocolAdopt wraps an Objective-C object that this code just created as a
+// NEDNSProxyProviderProtocol (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEDNSProxyProviderProtocolAdopt(id objc.ID) *NEDNSProxyProviderProtocol {
+	if id == 0 {
+		return nil
+	}
+	x := &NEDNSProxyProviderProtocol{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNEDNSProxyProviderProtocol creates a new NEDNSProxyProviderProtocol.
 func NewNEDNSProxyProviderProtocol() *NEDNSProxyProviderProtocol {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEDNSProxyProviderProtocol")), objc.RegisterName("new"))
-	return &NEDNSProxyProviderProtocol{inner: raw.NEDNSProxyProviderProtocolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEDNSProxyProviderProtocol")), objc.RegisterName("new"))
+	return nEDNSProxyProviderProtocolAdopt(_id)
 }
 
-// A dictionary containing vendor-specific configuration parameters for a proxy provider.
-//
-// WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
-func (x *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEDNSProxyProviderProtocol {
-	x.inner.SetProviderConfiguration(providerConfiguration)
+// WithProviderConfiguration a dictionary containing vendor-specific configuration parameters for a proxy provider.
+func (x *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
 	return x
 }
 
-// A string containing the bundle identifier of the proxy provider to be used by this configuration.
-//
-// WithProviderBundleIdentifier sets the providerBundleIdentifier property and returns the receiver for chaining.
+// WithProviderBundleIdentifier a string containing the bundle identifier of the proxy provider to be used by this configuration.
 func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol {
-	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
 	return x
 }
 
-// The address of the VPN server.
-//
-// WithServerAddress sets the serverAddress property and returns the receiver for chaining.
+// WithServerAddress the address of the VPN server.
 func (x *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
 	return x
 }
 
-// The user name component of the tunneling protocol authentication credential.
-//
-// WithUsername sets the username property and returns the receiver for chaining.
+// WithUsername the user name component of the tunneling protocol authentication credential.
 func (x *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetUsername(foundation.NSStringStringWithUTF8String(username))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
 	return x
 }
 
-// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-//
-// WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
-func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetPasswordReference(passwordReference)
+// WithPasswordReference a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
+func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
 	return x
 }
 
-// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-//
-// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
-func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference *foundation.NSData) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetIdentityReference(identityReference)
+// WithIdentityReference a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
+func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 	return x
 }
 
-// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-//
-// WithIdentityData sets the identityData property and returns the receiver for chaining.
-func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetIdentityData(identityData)
+// WithIdentityData the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
+func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
 	return x
 }
 
-// The password for the PKCS12 tunneling protocol authentication credentials.
-//
-// WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
+// WithIdentityDataPassword the password for the PKCS12 tunneling protocol authentication credentials.
 func (x *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
 	return x
 }
 
-// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
-//
-// WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
+// WithDisconnectOnSleep a Boolean value that indicates whether the VPN disconnects when the device sleeps.
 func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetDisconnectOnSleep(disconnectOnSleep)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
 	return x
 }
 
-// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
-//
-// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+// WithProxySettings the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
-// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
-//
-// WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
+// WithIncludeAllNetworks a Boolean value that indicates whether the system sends most network traffic over the tunnel.
 func (x *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetIncludeAllNetworks(includeAllNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
 	return x
 }
 
-// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
-//
-// WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
+// WithExcludeLocalNetworks a Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 func (x *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeLocalNetworks(excludeLocalNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
 	return x
 }
 
-// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
-//
-// WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
+// WithExcludeCellularServices a Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 func (x *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeCellularServices(excludeCellularServices)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
 	return x
 }
 
-// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
-//
-// WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
+// WithExcludeAPNs a Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 func (x *NEDNSProxyProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeAPNs(excludeAPNs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
 	return x
 }
 
-// @property excludeDeviceCommunication @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
-//
-// WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
+// WithExcludeDeviceCommunication if includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
 func (x *NEDNSProxyProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeDeviceCommunication(excludeDeviceCommunication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
 	return x
 }
 
-// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
-//
-// WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
+// WithEnforceRoutes a Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 func (x *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol {
-	x.inner.NEVPNProtocol.SetEnforceRoutes(enforceRoutes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
 	return x
 }
 
-// @property providerConfiguration @discussion A dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
-//
-// ProviderConfiguration calls the underlying ProviderConfiguration.
-func (x *NEDNSProxyProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ProviderConfiguration()
+// ProviderConfiguration a dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
+func (x *NEDNSProxyProviderProtocol) ProviderConfiguration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerConfiguration"))
+	return obj.Wrap(_r)
 }
 
-// SetProviderConfiguration calls the underlying SetProviderConfiguration.
-func (x *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetProviderConfiguration(providerConfiguration)
+// SetProviderConfiguration wraps the corresponding Objective-C method.
+func (x *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfiguration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
 }
 
-// @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
-//
-// ProviderBundleIdentifier calls the underlying ProviderBundleIdentifier.
+// ProviderBundleIdentifier a string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
 func (x *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() string {
-	_r := x.inner.ProviderBundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerBundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetProviderBundleIdentifier calls the underlying SetProviderBundleIdentifier.
+// SetProviderBundleIdentifier wraps the corresponding Objective-C method.
 func (x *NEDNSProxyProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier string) {
-	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
-}
-
-func (x *NEDNSProxyProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol {
-	return &x.inner.NEVPNProtocol
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
 }
 
 // NEDNSProxyProviderProtocolable is the interface implemented by [NEDNSProxyProviderProtocol], for mocking and DI.
 type NEDNSProxyProviderProtocolable interface {
-	Unwrap() *raw.NEDNSProxyProviderProtocol
-	WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEDNSProxyProviderProtocol
+	obj.Object
+	WithProviderConfiguration(providerConfiguration obj.Object) *NEDNSProxyProviderProtocol
 	WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol
 	WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol
 	WithUsername(username string) *NEDNSProxyProviderProtocol
-	WithPasswordReference(passwordReference *foundation.NSData) *NEDNSProxyProviderProtocol
-	WithIdentityReference(identityReference *foundation.NSData) *NEDNSProxyProviderProtocol
-	WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol
+	WithPasswordReference(passwordReference obj.Object) *NEDNSProxyProviderProtocol
+	WithIdentityReference(identityReference obj.Object) *NEDNSProxyProviderProtocol
+	WithIdentityData(identityData obj.Object) *NEDNSProxyProviderProtocol
 	WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol
 	WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol
@@ -218,10 +192,12 @@ type NEDNSProxyProviderProtocolable interface {
 	WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol
 	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol
 	WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol
-	ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ProviderConfiguration() obj.Object
+	SetProviderConfiguration(providerConfiguration obj.Object)
 	ProviderBundleIdentifier() string
 	SetProviderBundleIdentifier(providerBundleIdentifier string)
 }
 
 var _ NEDNSProxyProviderProtocolable = (*NEDNSProxyProviderProtocol)(nil)
+
+var _ NEVPNProtocolProvider = (*NEDNSProxyProviderProtocol)(nil)

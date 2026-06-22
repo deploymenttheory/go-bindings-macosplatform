@@ -5,75 +5,72 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A generator of texel data that creates a gradient between two specified colors.
+// ColorSwatchTexture is an idiomatic wrapper over the Objective-C class MDLColorSwatchTexture.
 //
-// ColorSwatchTexture wraps [raw.MDLColorSwatchTexture] with a fluent Go API.
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that creates a gradient between two specified colors.
 type ColorSwatchTexture struct {
-	inner *raw.MDLColorSwatchTexture
+	Texture
 }
 
-// Unwrap returns the underlying [raw.MDLColorSwatchTexture].
-func (x *ColorSwatchTexture) Unwrap() *raw.MDLColorSwatchTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorSwatchTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorSwatchTextureFromID adopts an existing object pointer as a ColorSwatchTexture (nil for 0).
+// ColorSwatchTextureFromID adopts an existing Objective-C object as a ColorSwatchTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorSwatchTextureFromID(id objc.ID) *ColorSwatchTexture {
 	if id == 0 {
 		return nil
 	}
-	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(id)}
+	x := &ColorSwatchTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a texture that creates a vertical gradient between two color temperatures.
-//
-// NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions creates a new [ColorSwatchTexture].
-func NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions(colorTemperature1 float32, colorTemperature2 float32, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorTemperatureGradientFrom:toColorTemperature:name:textureDimensions:"), colorTemperature1, colorTemperature2, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions)
-	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(_id)}
+// colorSwatchTextureAdopt wraps an Objective-C object that this code just created as a
+// ColorSwatchTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorSwatchTextureAdopt(id objc.ID) *ColorSwatchTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &ColorSwatchTexture{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a texture that creates a vertical gradient between two colors.
-//
-// NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions creates a new [ColorSwatchTexture].
-func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(color1 unsafe.Pointer, color2 unsafe.Pointer, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorGradientFrom:toColor:name:textureDimensions:"), color1, color2, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions)
-	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(_id)}
+// NewColorSwatchTexture creates a new ColorSwatchTexture.
+func NewColorSwatchTexture() *ColorSwatchTexture {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLColorSwatchTexture")), objc.RegisterName("new"))
+	return colorSwatchTextureAdopt(_id)
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *ColorSwatchTexture) WithIsCube(isCube bool) *ColorSwatchTexture {
-	x.inner.MDLTexture.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *ColorSwatchTexture) WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture {
-	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
-
-func (x *ColorSwatchTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // ColorSwatchTextureable is the interface implemented by [ColorSwatchTexture], for mocking and DI.
 type ColorSwatchTextureable interface {
-	Unwrap() *raw.MDLColorSwatchTexture
+	obj.Object
 	WithIsCube(isCube bool) *ColorSwatchTexture
 	WithHasAlphaValues(hasAlphaValues bool) *ColorSwatchTexture
 }
 
 var _ ColorSwatchTextureable = (*ColorSwatchTexture)(nil)
+
+var _ TextureProvider = (*ColorSwatchTexture)(nil)

@@ -9,22 +9,24 @@ import (
 )
 
 // Styles for a Preview View.
-type QLPreviewViewStyle uint64
+type PreviewViewStyle uint64
 
 const (
 	// Provides the default preview style for larger, full-sized previews.
-	QLPreviewViewStyleNormal QLPreviewViewStyle = 0
+	PreviewViewStyleNormal PreviewViewStyle = 0
 	// Provides a compact preview style suited for smaller previews or inspectors.
-	QLPreviewViewStyleCompact QLPreviewViewStyle = 1
+	PreviewViewStyleCompact PreviewViewStyle = 1
 )
 
-func (e QLPreviewViewStyle) String() string {
+// String returns the PreviewViewStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PreviewViewStyle) String() string {
 	switch e {
-	case QLPreviewViewStyleNormal:
-		return "QLPreviewViewStyleNormal"
-	case QLPreviewViewStyleCompact:
-		return "QLPreviewViewStyleCompact"
+	case PreviewViewStyleNormal:
+		return "PreviewViewStyleNormal"
+	case PreviewViewStyleCompact:
+		return "PreviewViewStyleCompact"
 	default:
-		return fmt.Sprintf("QLPreviewViewStyle(%d)", int64(e))
+		return fmt.Sprintf("PreviewViewStyle(%d)", int64(e))
 	}
 }

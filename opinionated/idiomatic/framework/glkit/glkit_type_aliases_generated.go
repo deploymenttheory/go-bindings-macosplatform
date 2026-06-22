@@ -4,9 +4,9 @@
 
 package glkit
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
-)
-
-// GLKVertexAttributeParameters is a type alias for the raw GLKVertexAttributeParameters value-type struct.
-type GLKVertexAttributeParameters = raw.GLKVertexAttributeParameters
+// Structure for parameters to use in glVertexAttribPointer given a MDLVertexForamt
+type GLKVertexAttributeParameters struct {
+	Type       uint32
+	Size       int32
+	Normalized uint8
+}

@@ -9,50 +9,54 @@ import (
 )
 
 // The enumerated error codes that the Sound Analysis framework produces.
-type SNErrorCode int64
+type ErrorCode int64
 
 const (
-	SNErrorCodeUnknownError    SNErrorCode = 1
-	SNErrorCodeOperationFailed SNErrorCode = 2
-	SNErrorCodeInvalidFormat   SNErrorCode = 3
-	SNErrorCodeInvalidModel    SNErrorCode = 4
-	SNErrorCodeInvalidFile     SNErrorCode = 5
+	ErrorCodeUnknownError    ErrorCode = 1
+	ErrorCodeOperationFailed ErrorCode = 2
+	ErrorCodeInvalidFormat   ErrorCode = 3
+	ErrorCodeInvalidModel    ErrorCode = 4
+	ErrorCodeInvalidFile     ErrorCode = 5
 )
 
-func (e SNErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case SNErrorCodeUnknownError:
-		return "SNErrorCodeUnknownError"
-	case SNErrorCodeOperationFailed:
-		return "SNErrorCodeOperationFailed"
-	case SNErrorCodeInvalidFormat:
-		return "SNErrorCodeInvalidFormat"
-	case SNErrorCodeInvalidModel:
-		return "SNErrorCodeInvalidModel"
-	case SNErrorCodeInvalidFile:
-		return "SNErrorCodeInvalidFile"
+	case ErrorCodeUnknownError:
+		return "ErrorCodeUnknownError"
+	case ErrorCodeOperationFailed:
+		return "ErrorCodeOperationFailed"
+	case ErrorCodeInvalidFormat:
+		return "ErrorCodeInvalidFormat"
+	case ErrorCodeInvalidModel:
+		return "ErrorCodeInvalidModel"
+	case ErrorCodeInvalidFile:
+		return "ErrorCodeInvalidFile"
 	default:
-		return fmt.Sprintf("SNErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Defines the types a time duration constraint uses.
-type SNTimeDurationConstraintType int64
+type TimeDurationConstraintType int64
 
 const (
 	// A constraint type that uses an array of time durations to define what a request’s underlying sound classifier accepts.
-	SNTimeDurationConstraintTypeEnumerated SNTimeDurationConstraintType = 1
+	TimeDurationConstraintTypeEnumerated TimeDurationConstraintType = 1
 	// A constraint type that uses a time duration range to define what a request’s underlying sound classifier accepts.
-	SNTimeDurationConstraintTypeRange SNTimeDurationConstraintType = 2
+	TimeDurationConstraintTypeRange TimeDurationConstraintType = 2
 )
 
-func (e SNTimeDurationConstraintType) String() string {
+// String returns the TimeDurationConstraintType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TimeDurationConstraintType) String() string {
 	switch e {
-	case SNTimeDurationConstraintTypeEnumerated:
-		return "SNTimeDurationConstraintTypeEnumerated"
-	case SNTimeDurationConstraintTypeRange:
-		return "SNTimeDurationConstraintTypeRange"
+	case TimeDurationConstraintTypeEnumerated:
+		return "TimeDurationConstraintTypeEnumerated"
+	case TimeDurationConstraintTypeRange:
+		return "TimeDurationConstraintTypeRange"
 	default:
-		return fmt.Sprintf("SNTimeDurationConstraintType(%d)", int64(e))
+		return fmt.Sprintf("TimeDurationConstraintType(%d)", int64(e))
 	}
 }

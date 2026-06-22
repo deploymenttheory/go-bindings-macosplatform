@@ -5,232 +5,195 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A base class shared by all VPN On Demand rules.
+// NEOnDemandRule is an idiomatic wrapper over the Objective-C class NEOnDemandRule.
 //
-// NEOnDemandRule wraps [raw.NEOnDemandRule] with a fluent Go API.
+// NEOnDemandRule is an abstract base — you do not construct it directly. Construct one of [NEOnDemandRuleConnect], [NEOnDemandRuleDisconnect], [NEOnDemandRuleEvaluateConnection], [NEOnDemandRuleIgnore] and pass it where a NEOnDemandRule is accepted.
+//
+// A base class shared by all VPN On Demand rules.
 type NEOnDemandRule struct {
-	inner *raw.NEOnDemandRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEOnDemandRule].
-func (x *NEOnDemandRule) Unwrap() *raw.NEOnDemandRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEOnDemandRule) ID() objc.ID { return x.inner.Ptr() }
-
-// NEOnDemandRuleFromID adopts an existing object pointer as a NEOnDemandRule (nil for 0).
+// NEOnDemandRuleFromID adopts an existing Objective-C object as a NEOnDemandRule
+// (nil for 0), retaining it and registering a release finalizer.
 func NEOnDemandRuleFromID(id objc.ID) *NEOnDemandRule {
 	if id == 0 {
 		return nil
 	}
-	return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(id)}
-}
-
-// NewNEOnDemandRule creates a new [NEOnDemandRule].
-func NewNEOnDemandRule() *NEOnDemandRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEOnDemandRule")), objc.RegisterName("new"))
-	return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(_id)}
-}
-
-// DNS search domains that identify a network.
-//
-// WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRule) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRule {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDNSSearchDomainMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDNSSearchDomainMatch(_arr)
+	x := &NEOnDemandRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// DNS server addresses that identify a network.
-//
-// WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRule) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRule {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDNSServerAddressMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
+// nEOnDemandRuleAdopt wraps an Objective-C object that this code just created as a
+// NEOnDemandRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEOnDemandRuleAdopt(id objc.ID) *NEOnDemandRule {
+	if id == 0 {
+		return nil
 	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDNSServerAddressMatch(_arr)
+	x := &NEOnDemandRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// An interface type to identify a network.
-//
-// WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *NEOnDemandRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEOnDemandRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEOnDemandRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEOnDemandRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithDNSSearchDomainMatch DNS search domains that identify a network.
+func (x *NEOnDemandRule) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRule {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
+	return x
+}
+
+// WithDNSServerAddressMatch DNS server addresses that identify a network.
+func (x *NEOnDemandRule) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRule {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
+	return x
+}
+
+// WithInterfaceTypeMatch an interface type to identify a network.
 func (x *NEOnDemandRule) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRule {
-	x.inner.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
 	return x
 }
 
-// SSIDs that identify a network.
-//
-// WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRule) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRule {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSSIDMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSSIDMatch(_arr)
+// WithSSIDMatch SSIDs that identify a network.
+func (x *NEOnDemandRule) WithSSIDMatch(items ...obj.Object) *NEOnDemandRule {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
 	return x
 }
 
-// A URL to probe when all other network identifiers match to validate that an expected resource is available.
-//
-// WithProbeURL sets the probeURL property and returns the receiver for chaining.
+// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
 func (x *NEOnDemandRule) WithProbeURL(probeURL string) *NEOnDemandRule {
-	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 	return x
 }
 
-// @property action @discussion The rule's action
-//
-// Action calls the underlying Action.
+// Action the rule's action
 func (x *NEOnDemandRule) Action() NEOnDemandRuleAction {
-	return NEOnDemandRuleAction(x.inner.Action())
+	_r := objc.Send[NEOnDemandRuleAction](objref.IDOf(x), objc.RegisterName("action"))
+	return _r
 }
 
-// @property DNSSearchDomainMatch @discussion An array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
+// DNSSearchDomainMatch an array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
 //
 // DNSSearchDomainMatch returns the collection as a Go slice.
 func (x *NEOnDemandRule) DNSSearchDomainMatch() []string {
-	arr := x.inner.DNSSearchDomainMatch()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("DNSSearchDomainMatch"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetDNSSearchDomainMatch calls the underlying SetDNSSearchDomainMatch.
-func (x *NEOnDemandRule) SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDNSSearchDomainMatch(dNSSearchDomainMatch)
+// SetDNSSearchDomainMatch wraps the corresponding Objective-C method.
+func (x *NEOnDemandRule) SetDNSSearchDomainMatch(dNSSearchDomainMatch []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), purego.SliceToNSArray(dNSSearchDomainMatch, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property DNSServerAddressMatch @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
+// DNSServerAddressMatch an array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
 //
 // DNSServerAddressMatch returns the collection as a Go slice.
 func (x *NEOnDemandRule) DNSServerAddressMatch() []string {
-	arr := x.inner.DNSServerAddressMatch()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("DNSServerAddressMatch"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetDNSServerAddressMatch calls the underlying SetDNSServerAddressMatch.
-func (x *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDNSServerAddressMatch(dNSServerAddressMatch)
+// SetDNSServerAddressMatch wraps the corresponding Objective-C method.
+func (x *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), purego.SliceToNSArray(dNSServerAddressMatch, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property interfaceTypeMatch @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
-//
-// InterfaceTypeMatch calls the underlying InterfaceTypeMatch.
+// InterfaceTypeMatch the type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
 func (x *NEOnDemandRule) InterfaceTypeMatch() NEOnDemandRuleInterfaceType {
-	return NEOnDemandRuleInterfaceType(x.inner.InterfaceTypeMatch())
+	_r := objc.Send[NEOnDemandRuleInterfaceType](objref.IDOf(x), objc.RegisterName("interfaceTypeMatch"))
+	return _r
 }
 
-// SetInterfaceTypeMatch calls the underlying SetInterfaceTypeMatch.
+// SetInterfaceTypeMatch wraps the corresponding Objective-C method.
 func (x *NEOnDemandRule) SetInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) {
-	x.inner.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
 }
 
-// @property SSIDMatch @discussion An array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
+// SSIDMatch an array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
 //
 // SSIDMatch returns the collection as a Go slice.
 func (x *NEOnDemandRule) SSIDMatch() []string {
-	arr := x.inner.SSIDMatch()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("SSIDMatch"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetSSIDMatch calls the underlying SetSSIDMatch.
-func (x *NEOnDemandRule) SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetSSIDMatch(sSIDMatch)
+// SetSSIDMatch wraps the corresponding Objective-C method.
+func (x *NEOnDemandRule) SetSSIDMatch(sSIDMatch []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), purego.SliceToNSArray(sSIDMatch, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
-//
-// ProbeURL calls the underlying ProbeURL.
-func (x *NEOnDemandRule) ProbeURL() *foundation.NSURL {
-	return x.inner.ProbeURL()
+// ProbeURL an HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
+func (x *NEOnDemandRule) ProbeURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("probeURL"))
+	return obj.Wrap(_r)
 }
 
-// SetProbeURL calls the underlying SetProbeURL.
+// SetProbeURL wraps the corresponding Objective-C method.
 func (x *NEOnDemandRule) SetProbeURL(probeURL string) {
-	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 }
-
-func (x *NEOnDemandRule) asNEOnDemandRule() *raw.NEOnDemandRule { return x.inner }
 
 // NEOnDemandRuleable is the interface implemented by [NEOnDemandRule], for mocking and DI.
 type NEOnDemandRuleable interface {
-	Unwrap() *raw.NEOnDemandRule
-	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRule
-	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRule
+	obj.Object
+	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRule
+	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRule
 	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRule
-	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRule
+	WithSSIDMatch(items ...obj.Object) *NEOnDemandRule
 	WithProbeURL(probeURL string) *NEOnDemandRule
 	Action() NEOnDemandRuleAction
 	DNSSearchDomainMatch() []string
-	SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString])
+	SetDNSSearchDomainMatch(dNSSearchDomainMatch []string)
 	DNSServerAddressMatch() []string
-	SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString])
+	SetDNSServerAddressMatch(dNSServerAddressMatch []string)
 	InterfaceTypeMatch() NEOnDemandRuleInterfaceType
 	SetInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType)
 	SSIDMatch() []string
-	SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString])
-	ProbeURL() *foundation.NSURL
+	SetSSIDMatch(sSIDMatch []string)
+	ProbeURL() obj.Object
 	SetProbeURL(probeURL string)
 }
 
 var _ NEOnDemandRuleable = (*NEOnDemandRule)(nil)
+
+// isNEOnDemandRule marks NEOnDemandRule — and, by embedding promotion, its
+// subclasses — as a member of the NEOnDemandRule hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEOnDemandRule) isNEOnDemandRule() {}
+
+var _ NEOnDemandRuleProvider = (*NEOnDemandRule)(nil)

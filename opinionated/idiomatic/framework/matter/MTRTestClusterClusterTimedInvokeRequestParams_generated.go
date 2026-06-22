@@ -5,64 +5,70 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTimedInvokeRequestParams wraps [raw.MTRTestClusterClusterTimedInvokeRequestParams] with a fluent Go API.
+// MTRTestClusterClusterTimedInvokeRequestParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTimedInvokeRequestParams.
+//
+// It embeds [MTRUnitTestingClusterTimedInvokeRequestParams], promoting that type's methods.
 type MTRTestClusterClusterTimedInvokeRequestParams struct {
-	inner *raw.MTRTestClusterClusterTimedInvokeRequestParams
+	MTRUnitTestingClusterTimedInvokeRequestParams
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTimedInvokeRequestParams].
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTimedInvokeRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTimedInvokeRequestParams (nil for 0).
+// MTRTestClusterClusterTimedInvokeRequestParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTimedInvokeRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTimedInvokeRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTimedInvokeRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTimedInvokeRequestParams{inner: raw.MTRTestClusterClusterTimedInvokeRequestParamsFromID(id)}
+	x := &MTRTestClusterClusterTimedInvokeRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTimedInvokeRequestParams creates a new [MTRTestClusterClusterTimedInvokeRequestParams].
+// mTRTestClusterClusterTimedInvokeRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTimedInvokeRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTimedInvokeRequestParamsAdopt(id objc.ID) *MTRTestClusterClusterTimedInvokeRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTimedInvokeRequestParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRTestClusterClusterTimedInvokeRequestParams creates a new MTRTestClusterClusterTimedInvokeRequestParams.
 func NewMTRTestClusterClusterTimedInvokeRequestParams() *MTRTestClusterClusterTimedInvokeRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTimedInvokeRequestParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTimedInvokeRequestParams{inner: raw.MTRTestClusterClusterTimedInvokeRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTimedInvokeRequestParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTimedInvokeRequestParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams {
-	x.inner.MTRUnitTestingClusterTimedInvokeRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTimedInvokeRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams {
-	x.inner.MTRUnitTestingClusterTimedInvokeRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTestClusterClusterTimedInvokeRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTimedInvokeRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
-}
-
-func (x *MTRTestClusterClusterTimedInvokeRequestParams) asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams {
-	return &x.inner.MTRUnitTestingClusterTimedInvokeRequestParams
 }
 
 // MTRTestClusterClusterTimedInvokeRequestParamsable is the interface implemented by [MTRTestClusterClusterTimedInvokeRequestParams], for mocking and DI.
 type MTRTestClusterClusterTimedInvokeRequestParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTimedInvokeRequestParams
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTimedInvokeRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTimedInvokeRequestParams
 }
 
 var _ MTRTestClusterClusterTimedInvokeRequestParamsable = (*MTRTestClusterClusterTimedInvokeRequestParams)(nil)
+
+var _ MTRUnitTestingClusterTimedInvokeRequestParamsProvider = (*MTRTestClusterClusterTimedInvokeRequestParams)(nil)

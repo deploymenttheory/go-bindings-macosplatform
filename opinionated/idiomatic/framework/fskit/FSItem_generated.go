@@ -5,41 +5,76 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.
+// Item is an idiomatic wrapper over the Objective-C class FSItem.
 //
-// Item wraps [raw.FSItem] with a fluent Go API.
+// A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.
 type Item struct {
-	inner *raw.FSItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSItem].
-func (x *Item) Unwrap() *raw.FSItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Item) ID() objc.ID { return x.inner.Ptr() }
-
-// ItemFromID adopts an existing object pointer as a Item (nil for 0).
+// ItemFromID adopts an existing Objective-C object as a Item
+// (nil for 0), retaining it and registering a release finalizer.
 func ItemFromID(id objc.ID) *Item {
 	if id == 0 {
 		return nil
 	}
-	return &Item{inner: raw.FSItemFromID(id)}
+	x := &Item{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewItem creates a new [Item].
+// itemAdopt wraps an Objective-C object that this code just created as a
+// Item (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func itemAdopt(id objc.ID) *Item {
+	if id == 0 {
+		return nil
+	}
+	x := &Item{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Item) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Item) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Item) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Item) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewItem creates a new Item.
 func NewItem() *Item {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSItem")), objc.RegisterName("new"))
-	return &Item{inner: raw.FSItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSItem")), objc.RegisterName("new"))
+	return itemAdopt(_id)
 }
 
 // Itemable is the interface implemented by [Item], for mocking and DI.
 type Itemable interface {
-	Unwrap() *raw.FSItem
+	obj.Object
 }
 
 var _ Itemable = (*Item)(nil)

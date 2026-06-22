@@ -5,58 +5,66 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsent record zone modification.
+// SyncEnginePendingZoneSave is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingZoneSave.
 //
-// SyncEnginePendingZoneSave wraps [raw.CKSyncEnginePendingZoneSave] with a fluent Go API.
+// It embeds [SyncEnginePendingDatabaseChange], promoting that type's methods.
+//
+// An object that describes an unsent record zone modification.
 type SyncEnginePendingZoneSave struct {
-	inner *raw.CKSyncEnginePendingZoneSave
+	SyncEnginePendingDatabaseChange
 }
 
-// Unwrap returns the underlying [raw.CKSyncEnginePendingZoneSave].
-func (x *SyncEnginePendingZoneSave) Unwrap() *raw.CKSyncEnginePendingZoneSave { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEnginePendingZoneSave) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEnginePendingZoneSaveFromID adopts an existing object pointer as a SyncEnginePendingZoneSave (nil for 0).
+// SyncEnginePendingZoneSaveFromID adopts an existing Objective-C object as a SyncEnginePendingZoneSave
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEnginePendingZoneSaveFromID(id objc.ID) *SyncEnginePendingZoneSave {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEnginePendingZoneSave{inner: raw.CKSyncEnginePendingZoneSaveFromID(id)}
+	x := &SyncEnginePendingZoneSave{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a pending zone save for the specified record zone.
-//
-// NewSyncEnginePendingZoneSaveWithZone creates a new [SyncEnginePendingZoneSave].
-func NewSyncEnginePendingZoneSaveWithZone(zone *raw.CKRecordZone) *SyncEnginePendingZoneSave {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingZoneSave")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZone:"), zone.Ptr())
-	return &SyncEnginePendingZoneSave{inner: raw.CKSyncEnginePendingZoneSaveFromID(_id)}
-}
-
-// Zone calls the underlying Zone.
-func (x *SyncEnginePendingZoneSave) Zone() *RecordZone {
-	_r := x.inner.Zone()
-	if _r == nil {
+// syncEnginePendingZoneSaveAdopt wraps an Objective-C object that this code just created as a
+// SyncEnginePendingZoneSave (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEnginePendingZoneSaveAdopt(id objc.ID) *SyncEnginePendingZoneSave {
+	if id == 0 {
 		return nil
 	}
-	return &RecordZone{inner: _r}
+	x := &SyncEnginePendingZoneSave{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SyncEnginePendingZoneSave) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange {
-	return &x.inner.CKSyncEnginePendingDatabaseChange
+// NewSyncEnginePendingZoneSaveWithZone creates a pending zone save for the specified record zone.
+func NewSyncEnginePendingZoneSaveWithZone(zone *RecordZone) *SyncEnginePendingZoneSave {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingZoneSave")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZone:"), objref.IDOf(zone))
+	return syncEnginePendingZoneSaveAdopt(_id)
+}
+
+// Zone wraps the corresponding Objective-C method.
+func (x *SyncEnginePendingZoneSave) Zone() *RecordZone {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zone"))
+	return RecordZoneFromID(_r)
 }
 
 // SyncEnginePendingZoneSaveable is the interface implemented by [SyncEnginePendingZoneSave], for mocking and DI.
 type SyncEnginePendingZoneSaveable interface {
-	Unwrap() *raw.CKSyncEnginePendingZoneSave
+	obj.Object
 	Zone() *RecordZone
 }
 
 var _ SyncEnginePendingZoneSaveable = (*SyncEnginePendingZoneSave)(nil)
+
+var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingZoneSave)(nil)

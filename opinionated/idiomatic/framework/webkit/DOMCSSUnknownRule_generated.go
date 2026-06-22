@@ -5,55 +5,67 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSUnknownRule wraps [raw.DOMCSSUnknownRule] with a fluent Go API.
+// DOMCSSUnknownRule is an idiomatic wrapper over the Objective-C class DOMCSSUnknownRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSUnknownRule struct {
-	inner *raw.DOMCSSUnknownRule
+	DOMCSSRule
 }
 
-// Unwrap returns the underlying [raw.DOMCSSUnknownRule].
-func (x *DOMCSSUnknownRule) Unwrap() *raw.DOMCSSUnknownRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSUnknownRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSUnknownRuleFromID adopts an existing object pointer as a DOMCSSUnknownRule (nil for 0).
+// DOMCSSUnknownRuleFromID adopts an existing Objective-C object as a DOMCSSUnknownRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSUnknownRuleFromID(id objc.ID) *DOMCSSUnknownRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSUnknownRule{inner: raw.DOMCSSUnknownRuleFromID(id)}
-}
-
-// NewDOMCSSUnknownRule creates a new [DOMCSSUnknownRule].
-func NewDOMCSSUnknownRule() *DOMCSSUnknownRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSUnknownRule")), objc.RegisterName("new"))
-	return &DOMCSSUnknownRule{inner: raw.DOMCSSUnknownRuleFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSUnknownRule) WithCssText(cssText string) *DOMCSSUnknownRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSUnknownRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *DOMCSSUnknownRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
+// dOMCSSUnknownRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSUnknownRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSUnknownRuleAdopt(id objc.ID) *DOMCSSUnknownRule {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSUnknownRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *DOMCSSUnknownRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
+// NewDOMCSSUnknownRule creates a new DOMCSSUnknownRule.
+func NewDOMCSSUnknownRule() *DOMCSSUnknownRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSUnknownRule")), objc.RegisterName("new"))
+	return dOMCSSUnknownRuleAdopt(_id)
+}
 
-func (x *DOMCSSUnknownRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSUnknownRule) WithCssText(cssText string) *DOMCSSUnknownRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
 }
 
 // DOMCSSUnknownRuleable is the interface implemented by [DOMCSSUnknownRule], for mocking and DI.
 type DOMCSSUnknownRuleable interface {
-	Unwrap() *raw.DOMCSSUnknownRule
+	obj.Object
 	WithCssText(cssText string) *DOMCSSUnknownRule
 }
 
 var _ DOMCSSUnknownRuleable = (*DOMCSSUnknownRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSUnknownRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSUnknownRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSUnknownRule)(nil)

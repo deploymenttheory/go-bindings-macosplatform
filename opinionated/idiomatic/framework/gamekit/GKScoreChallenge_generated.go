@@ -5,67 +5,72 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type of challenge where a player must beat the leaderboard score of another player.
+// ScoreChallenge is an idiomatic wrapper over the Objective-C class GKScoreChallenge.
 //
-// ScoreChallenge wraps [raw.GKScoreChallenge] with a fluent Go API.
+// It embeds [Challenge], promoting that type's methods.
+//
+// A type of challenge where a player must beat the leaderboard score of another player.
 type ScoreChallenge struct {
-	inner *raw.GKScoreChallenge
+	Challenge
 }
 
-// Unwrap returns the underlying [raw.GKScoreChallenge].
-func (x *ScoreChallenge) Unwrap() *raw.GKScoreChallenge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScoreChallenge) ID() objc.ID { return x.inner.Ptr() }
-
-// ScoreChallengeFromID adopts an existing object pointer as a ScoreChallenge (nil for 0).
+// ScoreChallengeFromID adopts an existing Objective-C object as a ScoreChallenge
+// (nil for 0), retaining it and registering a release finalizer.
 func ScoreChallengeFromID(id objc.ID) *ScoreChallenge {
 	if id == 0 {
 		return nil
 	}
-	return &ScoreChallenge{inner: raw.GKScoreChallengeFromID(id)}
+	x := &ScoreChallenge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScoreChallenge creates a new [ScoreChallenge].
+// scoreChallengeAdopt wraps an Objective-C object that this code just created as a
+// ScoreChallenge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scoreChallengeAdopt(id objc.ID) *ScoreChallenge {
+	if id == 0 {
+		return nil
+	}
+	x := &ScoreChallenge{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewScoreChallenge creates a new ScoreChallenge.
 func NewScoreChallenge() *ScoreChallenge {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKScoreChallenge")), objc.RegisterName("new"))
-	return &ScoreChallenge{inner: raw.GKScoreChallengeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKScoreChallenge")), objc.RegisterName("new"))
+	return scoreChallengeAdopt(_id)
 }
 
-// The score to meet to satisfy this challenge
-//
-// Score calls the underlying Score.
+// Score the score to meet to satisfy this challenge
 func (x *ScoreChallenge) Score() *Score {
-	_r := x.inner.Score()
-	if _r == nil {
-		return nil
-	}
-	return &Score{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("score"))
+	return ScoreFromID(_r)
 }
 
-// The leaderboard entry to meet to satisfy this challenge
-//
-// LeaderboardEntry calls the underlying LeaderboardEntry.
+// LeaderboardEntry the leaderboard entry to meet to satisfy this challenge
 func (x *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
-	_r := x.inner.LeaderboardEntry()
-	if _r == nil {
-		return nil
-	}
-	return &LeaderboardEntry{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardEntry"))
+	return LeaderboardEntryFromID(_r)
 }
-
-func (x *ScoreChallenge) asChallenge() *raw.GKChallenge { return &x.inner.GKChallenge }
 
 // ScoreChallengeable is the interface implemented by [ScoreChallenge], for mocking and DI.
 type ScoreChallengeable interface {
-	Unwrap() *raw.GKScoreChallenge
+	obj.Object
 	Score() *Score
 	LeaderboardEntry() *LeaderboardEntry
 }
 
 var _ ScoreChallengeable = (*ScoreChallenge)(nil)
+
+var _ ChallengeProvider = (*ScoreChallenge)(nil)

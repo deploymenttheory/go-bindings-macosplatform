@@ -5,63 +5,90 @@
 package pushkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a received PushKit notification.
+// PushPayload is an idiomatic wrapper over the Objective-C class PKPushPayload.
 //
-// PushPayload wraps [raw.PKPushPayload] with a fluent Go API.
+// An object that contains information about a received PushKit notification.
 type PushPayload struct {
-	inner *raw.PKPushPayload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPushPayload].
-func (x *PushPayload) Unwrap() *raw.PKPushPayload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PushPayload) ID() objc.ID { return x.inner.Ptr() }
-
-// PushPayloadFromID adopts an existing object pointer as a PushPayload (nil for 0).
+// PushPayloadFromID adopts an existing Objective-C object as a PushPayload
+// (nil for 0), retaining it and registering a release finalizer.
 func PushPayloadFromID(id objc.ID) *PushPayload {
 	if id == 0 {
 		return nil
 	}
-	return &PushPayload{inner: raw.PKPushPayloadFromID(id)}
+	x := &PushPayload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPushPayload creates a new [PushPayload].
-func NewPushPayload() *PushPayload {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPushPayload")), objc.RegisterName("new"))
-	return &PushPayload{inner: raw.PKPushPayloadFromID(_id)}
-}
-
-// The type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
-//
-// Type calls the underlying Type.
-func (x *PushPayload) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
-		return ""
+// pushPayloadAdopt wraps an Objective-C object that this code just created as a
+// PushPayload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pushPayloadAdopt(id objc.ID) *PushPayload {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &PushPayload{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
-//
-// DictionaryPayload calls the underlying DictionaryPayload.
-func (x *PushPayload) DictionaryPayload() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryPayload()
+// Description returns the object's -description text.
+func (x *PushPayload) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PushPayload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PushPayload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PushPayload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPushPayload creates a new PushPayload.
+func NewPushPayload() *PushPayload {
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPushPayload")), objc.RegisterName("new"))
+	return pushPayloadAdopt(_id)
+}
+
+// Type the type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
+func (x *PushPayload) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	return obj.Wrap(_r)
+}
+
+// DictionaryPayload the contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
+func (x *PushPayload) DictionaryPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryPayload"))
+	return obj.Wrap(_r)
 }
 
 // PushPayloadable is the interface implemented by [PushPayload], for mocking and DI.
 type PushPayloadable interface {
-	Unwrap() *raw.PKPushPayload
-	Type() string
-	DictionaryPayload() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	Type() obj.Object
+	DictionaryPayload() obj.Object
 }
 
 var _ PushPayloadable = (*PushPayload)(nil)

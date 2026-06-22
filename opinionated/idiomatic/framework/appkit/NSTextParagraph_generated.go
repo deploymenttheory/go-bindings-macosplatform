@@ -5,93 +5,101 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a single paragraph backed by an attributed string as the contents.
+// TextParagraph is an idiomatic wrapper over the Objective-C class NSTextParagraph.
 //
-// TextParagraph wraps [raw.NSTextParagraph] with a fluent Go API.
+// TextParagraph is an abstract base — you do not construct it directly. Construct one of [TextListElement] and pass it where a TextParagraph is accepted.
+//
+// A class that represents a single paragraph backed by an attributed string as the contents.
 type TextParagraph struct {
-	inner *raw.NSTextParagraph
+	TextElement
 }
 
-// Unwrap returns the underlying [raw.NSTextParagraph].
-func (x *TextParagraph) Unwrap() *raw.NSTextParagraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextParagraph) ID() objc.ID { return x.inner.Ptr() }
-
-// TextParagraphFromID adopts an existing object pointer as a TextParagraph (nil for 0).
+// TextParagraphFromID adopts an existing Objective-C object as a TextParagraph
+// (nil for 0), retaining it and registering a release finalizer.
 func TextParagraphFromID(id objc.ID) *TextParagraph {
 	if id == 0 {
 		return nil
 	}
-	return &TextParagraph{inner: raw.NSTextParagraphFromID(id)}
+	x := &TextParagraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new paragraph with the attributed string you provide.
-//
-// NewTextParagraphWithAttributedString creates a new [TextParagraph].
-func NewTextParagraphWithAttributedString(attributedString *foundation.NSAttributedString) *TextParagraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextParagraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), attributedString.Ptr())
-	return &TextParagraph{inner: raw.NSTextParagraphFromID(_id)}
+// textParagraphAdopt wraps an Objective-C object that this code just created as a
+// TextParagraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textParagraphAdopt(id objc.ID) *TextParagraph {
+	if id == 0 {
+		return nil
+	}
+	x := &TextParagraph{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The value that represents the current content manager.
-//
-// WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
+// NewTextParagraphWithAttributedString creates a new paragraph with the attributed string you provide.
+func NewTextParagraphWithAttributedString(attributedString obj.Object) *TextParagraph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextParagraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), objref.IDOf(attributedString))
+	return textParagraphAdopt(_id)
+}
+
+// WithTextContentManager the value that represents the current content manager.
 func (x *TextParagraph) WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph {
-	x.inner.NSTextElement.SetTextContentManager(textContentManager.asTextContentManager())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
 	return x
 }
 
-// A range value that represents the range of the element inside the document.
-//
-// WithElementRange sets the elementRange property and returns the receiver for chaining.
+// WithElementRange a range value that represents the range of the element inside the document.
 func (x *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagraph {
-	x.inner.NSTextElement.SetElementRange(elementRange.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
 	return x
 }
 
-// AttributedString calls the underlying AttributedString.
-func (x *TextParagraph) AttributedString() *foundation.NSAttributedString {
-	return x.inner.AttributedString()
+// AttributedString wraps the corresponding Objective-C method.
+func (x *TextParagraph) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+	return obj.Wrap(_r)
 }
 
-// ParagraphContentRange calls the underlying ParagraphContentRange.
+// ParagraphContentRange wraps the corresponding Objective-C method.
 func (x *TextParagraph) ParagraphContentRange() *TextRange {
-	_r := x.inner.ParagraphContentRange()
-	if _r == nil {
-		return nil
-	}
-	return &TextRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paragraphContentRange"))
+	return TextRangeFromID(_r)
 }
 
-// ParagraphSeparatorRange calls the underlying ParagraphSeparatorRange.
+// ParagraphSeparatorRange wraps the corresponding Objective-C method.
 func (x *TextParagraph) ParagraphSeparatorRange() *TextRange {
-	_r := x.inner.ParagraphSeparatorRange()
-	if _r == nil {
-		return nil
-	}
-	return &TextRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paragraphSeparatorRange"))
+	return TextRangeFromID(_r)
 }
-
-func (x *TextParagraph) asTextParagraph() *raw.NSTextParagraph { return x.inner }
-
-func (x *TextParagraph) asTextElement() *raw.NSTextElement { return &x.inner.NSTextElement }
 
 // TextParagraphable is the interface implemented by [TextParagraph], for mocking and DI.
 type TextParagraphable interface {
-	Unwrap() *raw.NSTextParagraph
+	obj.Object
 	WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph
 	WithElementRange(elementRange *TextRange) *TextParagraph
-	AttributedString() *foundation.NSAttributedString
+	AttributedString() obj.Object
 	ParagraphContentRange() *TextRange
 	ParagraphSeparatorRange() *TextRange
 }
 
 var _ TextParagraphable = (*TextParagraph)(nil)
+
+// isTextParagraph marks TextParagraph — and, by embedding promotion, its
+// subclasses — as a member of the TextParagraph hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TextParagraph) isTextParagraph() {}
+
+var _ TextParagraphProvider = (*TextParagraph)(nil)
+
+var _ TextElementProvider = (*TextParagraph)(nil)

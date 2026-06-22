@@ -5,62 +5,92 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a reflection object containing information about a function in a Metal library.
+// FunctionReflection is an idiomatic wrapper over the Objective-C class MTLFunctionReflection.
 //
-// FunctionReflection wraps [raw.MTLFunctionReflection] with a fluent Go API.
+// Represents a reflection object containing information about a function in a Metal library.
 type FunctionReflection struct {
-	inner *raw.MTLFunctionReflection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionReflection].
-func (x *FunctionReflection) Unwrap() *raw.MTLFunctionReflection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionReflection) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionReflectionFromID adopts an existing object pointer as a FunctionReflection (nil for 0).
+// FunctionReflectionFromID adopts an existing Objective-C object as a FunctionReflection
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionReflectionFromID(id objc.ID) *FunctionReflection {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionReflection{inner: raw.MTLFunctionReflectionFromID(id)}
+	x := &FunctionReflection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFunctionReflection creates a new [FunctionReflection].
+// functionReflectionAdopt wraps an Objective-C object that this code just created as a
+// FunctionReflection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionReflectionAdopt(id objc.ID) *FunctionReflection {
+	if id == 0 {
+		return nil
+	}
+	x := &FunctionReflection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FunctionReflection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionReflection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFunctionReflection creates a new FunctionReflection.
 func NewFunctionReflection() *FunctionReflection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionReflection")), objc.RegisterName("new"))
-	return &FunctionReflection{inner: raw.MTLFunctionReflectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionReflection")), objc.RegisterName("new"))
+	return functionReflectionAdopt(_id)
 }
 
-// Provides a list of inputs and outputs of the function.
-//
-// Bindings calls the underlying Bindings.
-func (x *FunctionReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
-	return x.inner.Bindings()
+// Bindings provides a list of inputs and outputs of the function.
+func (x *FunctionReflection) Bindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
-//
-// UserAnnotation calls the underlying UserAnnotation.
+// UserAnnotation the string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
 func (x *FunctionReflection) UserAnnotation() string {
-	_r := x.inner.UserAnnotation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userAnnotation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // FunctionReflectionable is the interface implemented by [FunctionReflection], for mocking and DI.
 type FunctionReflectionable interface {
-	Unwrap() *raw.MTLFunctionReflection
-	Bindings() *foundation.NSArray[raw.MTLBinding]
+	obj.Object
+	Bindings() []obj.Object
 	UserAnnotation() string
 }
 

@@ -5,117 +5,113 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a diagnostic report for an app crash.
+// CrashDiagnostic is an idiomatic wrapper over the Objective-C class MXCrashDiagnostic.
 //
-// CrashDiagnostic wraps [raw.MXCrashDiagnostic] with a fluent Go API.
+// It embeds [Diagnostic], promoting that type's methods.
+//
+// An object representing a diagnostic report for an app crash.
 type CrashDiagnostic struct {
-	inner *raw.MXCrashDiagnostic
+	Diagnostic
 }
 
-// Unwrap returns the underlying [raw.MXCrashDiagnostic].
-func (x *CrashDiagnostic) Unwrap() *raw.MXCrashDiagnostic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CrashDiagnostic) ID() objc.ID { return x.inner.Ptr() }
-
-// CrashDiagnosticFromID adopts an existing object pointer as a CrashDiagnostic (nil for 0).
+// CrashDiagnosticFromID adopts an existing Objective-C object as a CrashDiagnostic
+// (nil for 0), retaining it and registering a release finalizer.
 func CrashDiagnosticFromID(id objc.ID) *CrashDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	return &CrashDiagnostic{inner: raw.MXCrashDiagnosticFromID(id)}
+	x := &CrashDiagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCrashDiagnostic creates a new [CrashDiagnostic].
+// crashDiagnosticAdopt wraps an Objective-C object that this code just created as a
+// CrashDiagnostic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func crashDiagnosticAdopt(id objc.ID) *CrashDiagnostic {
+	if id == 0 {
+		return nil
+	}
+	x := &CrashDiagnostic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCrashDiagnostic creates a new CrashDiagnostic.
 func NewCrashDiagnostic() *CrashDiagnostic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXCrashDiagnostic")), objc.RegisterName("new"))
-	return &CrashDiagnostic{inner: raw.MXCrashDiagnosticFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXCrashDiagnostic")), objc.RegisterName("new"))
+	return crashDiagnosticAdopt(_id)
 }
 
-// @property      callStackTree @abstract      The application call stack tree associated with this crash. @discussion    This call stack tree includes those stack frames present at the time of the crash.
-//
-// CallStackTree calls the underlying CallStackTree.
+// CallStackTree the application call stack tree associated with this crash. This call stack tree includes those stack frames present at the time of the crash.
 func (x *CrashDiagnostic) CallStackTree() *CallStackTree {
-	_r := x.inner.CallStackTree()
-	if _r == nil {
-		return nil
-	}
-	return &CallStackTree{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+	return CallStackTreeFromID(_r)
 }
 
-// @property      terminationReason @abstract      The termination reason associated with this crash. @discussion    Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
-//
-// TerminationReason calls the underlying TerminationReason.
+// TerminationReason the termination reason associated with this crash. Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
 func (x *CrashDiagnostic) TerminationReason() string {
-	_r := x.inner.TerminationReason()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminationReason"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      virtualMemoryRegionInfo @abstract      Details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. @discussion    This property is set when a bad memory access crash occurs.
-//
-// VirtualMemoryRegionInfo calls the underlying VirtualMemoryRegionInfo.
+// VirtualMemoryRegionInfo details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. This property is set when a bad memory access crash occurs.
 func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
-	_r := x.inner.VirtualMemoryRegionInfo()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMemoryRegionInfo"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      exceptionType @abstract      The name of the Mach exception that terminated the app. @see           sys/exception_types.h
-//
-// ExceptionType calls the underlying ExceptionType.
-func (x *CrashDiagnostic) ExceptionType() *foundation.NSNumber {
-	return x.inner.ExceptionType()
+// ExceptionType the name of the Mach exception that terminated the app.
+func (x *CrashDiagnostic) ExceptionType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionType"))
+	return obj.Wrap(_r)
 }
 
-// @property      exceptionCode @abstract      Processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers @see           sys/exception_types.h
-//
-// ExceptionCode calls the underlying ExceptionCode.
-func (x *CrashDiagnostic) ExceptionCode() *foundation.NSNumber {
-	return x.inner.ExceptionCode()
+// ExceptionCode processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers
+func (x *CrashDiagnostic) ExceptionCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionCode"))
+	return obj.Wrap(_r)
 }
 
-// @property      signal @abstract      The signal associated with this crash. @see           sys/signal.h
-//
-// Signal calls the underlying Signal.
-func (x *CrashDiagnostic) Signal() *foundation.NSNumber {
-	return x.inner.Signal()
+// Signal the signal associated with this crash.
+func (x *CrashDiagnostic) Signal() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signal"))
+	return obj.Wrap(_r)
 }
 
-// @property      exceptionReason @abstract      The MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash. @see           <MetricKit/MXCrashDiagnosticObjectiveCExceptionReason.h>
-//
-// ExceptionReason calls the underlying ExceptionReason.
+// ExceptionReason the MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
 func (x *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
-	_r := x.inner.ExceptionReason()
-	if _r == nil {
-		return nil
-	}
-	return &CrashDiagnosticObjectiveCExceptionReason{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionReason"))
+	return CrashDiagnosticObjectiveCExceptionReasonFromID(_r)
 }
-
-func (x *CrashDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
 
 // CrashDiagnosticable is the interface implemented by [CrashDiagnostic], for mocking and DI.
 type CrashDiagnosticable interface {
-	Unwrap() *raw.MXCrashDiagnostic
+	obj.Object
 	CallStackTree() *CallStackTree
 	TerminationReason() string
 	VirtualMemoryRegionInfo() string
-	ExceptionType() *foundation.NSNumber
-	ExceptionCode() *foundation.NSNumber
-	Signal() *foundation.NSNumber
+	ExceptionType() obj.Object
+	ExceptionCode() obj.Object
+	Signal() obj.Object
 	ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason
 }
 
 var _ CrashDiagnosticable = (*CrashDiagnostic)(nil)
+
+var _ DiagnosticProvider = (*CrashDiagnostic)(nil)

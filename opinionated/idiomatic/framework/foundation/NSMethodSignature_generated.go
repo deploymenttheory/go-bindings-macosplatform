@@ -5,91 +5,118 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A record of the type information for the return value and parameters of a method.
+// MethodSignature is an idiomatic wrapper over the Objective-C class NSMethodSignature.
 //
-// MethodSignature wraps [raw.NSMethodSignature] with a fluent Go API.
+// A record of the type information for the return value and parameters of a method.
 type MethodSignature struct {
-	inner *raw.NSMethodSignature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMethodSignature].
-func (x *MethodSignature) Unwrap() *raw.NSMethodSignature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MethodSignature) ID() objc.ID { return x.inner.Ptr() }
-
-// MethodSignatureFromID adopts an existing object pointer as a MethodSignature (nil for 0).
+// MethodSignatureFromID adopts an existing Objective-C object as a MethodSignature
+// (nil for 0), retaining it and registering a release finalizer.
 func MethodSignatureFromID(id objc.ID) *MethodSignature {
 	if id == 0 {
 		return nil
 	}
-	return &MethodSignature{inner: raw.NSMethodSignatureFromID(id)}
-}
-
-// NewMethodSignature creates a new [MethodSignature].
-func NewMethodSignature() *MethodSignature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMethodSignature")), objc.RegisterName("new"))
-	return &MethodSignature{inner: raw.NSMethodSignatureFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MethodSignature) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MethodSignature {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MethodSignature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns the type encoding for the argument at a given index.
-//
-// GetArgumentTypeAtIndex calls the underlying GetArgumentTypeAtIndex.
-func (x *MethodSignature) GetArgumentTypeAtIndex(idx uint) string {
-	return x.inner.GetArgumentTypeAtIndex(idx)
+// methodSignatureAdopt wraps an Objective-C object that this code just created as a
+// MethodSignature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func methodSignatureAdopt(id objc.ID) *MethodSignature {
+	if id == 0 {
+		return nil
+	}
+	x := &MethodSignature{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Whether the receiver is asynchronous when invoked through distributed objects.
-//
-// IsOneway calls the underlying IsOneway.
+// Description returns the object's -description text.
+func (x *MethodSignature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MethodSignature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MethodSignature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MethodSignature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMethodSignature creates a new MethodSignature.
+func NewMethodSignature() *MethodSignature {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMethodSignature")), objc.RegisterName("new"))
+	return methodSignatureAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MethodSignature) WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// GetArgumentTypeAtIndex returns the type encoding for the argument at a given index.
+func (x *MethodSignature) GetArgumentTypeAtIndex(idx int) string {
+	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("getArgumentTypeAtIndex:"), idx)
+	return _r
+}
+
+// IsOneway whether the receiver is asynchronous when invoked through distributed objects.
 func (x *MethodSignature) IsOneway() bool {
-	return x.inner.IsOneway()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOneway"))
+	return _r
 }
 
-// NumberOfArguments calls the underlying NumberOfArguments.
-func (x *MethodSignature) NumberOfArguments() uint {
-	return x.inner.NumberOfArguments()
+// NumberOfArguments wraps the corresponding Objective-C method.
+func (x *MethodSignature) NumberOfArguments() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfArguments"))
+	return _r
 }
 
-// FrameLength calls the underlying FrameLength.
-func (x *MethodSignature) FrameLength() uint {
-	return x.inner.FrameLength()
+// FrameLength wraps the corresponding Objective-C method.
+func (x *MethodSignature) FrameLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameLength"))
+	return _r
 }
 
-// MethodReturnType calls the underlying MethodReturnType.
-func (x *MethodSignature) MethodReturnType() unsafe.Pointer {
-	return x.inner.MethodReturnType()
+// MethodReturnLength wraps the corresponding Objective-C method.
+func (x *MethodSignature) MethodReturnLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("methodReturnLength"))
+	return _r
 }
-
-// MethodReturnLength calls the underlying MethodReturnLength.
-func (x *MethodSignature) MethodReturnLength() uint {
-	return x.inner.MethodReturnLength()
-}
-
-func (x *MethodSignature) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // MethodSignatureable is the interface implemented by [MethodSignature], for mocking and DI.
 type MethodSignatureable interface {
-	Unwrap() *raw.NSMethodSignature
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MethodSignature
-	GetArgumentTypeAtIndex(idx uint) string
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature
+	GetArgumentTypeAtIndex(idx int) string
 	IsOneway() bool
-	NumberOfArguments() uint
-	FrameLength() uint
-	MethodReturnType() unsafe.Pointer
-	MethodReturnLength() uint
+	NumberOfArguments() int
+	FrameLength() int
+	MethodReturnLength() int
 }
 
 var _ MethodSignatureable = (*MethodSignature)(nil)

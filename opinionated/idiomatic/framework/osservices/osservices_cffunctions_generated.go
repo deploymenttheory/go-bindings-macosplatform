@@ -5,21 +5,20 @@
 package osservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// KCGetKeychainManagerVersion wraps [raw.KCGetKeychainManagerVersion], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func KCGetKeychainManagerVersion(returnVers *uint) error {
-	if _err := purego.NewOSStatus(raw.KCGetKeychainManagerVersion(returnVers)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnKCSetInteractionAllowed func(uint8) int32
 
-// KCSetInteractionAllowed wraps [raw.KCSetInteractionAllowed], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// KCSetInteractionAllowed reports an error if the OSServices framework function KCSetInteractionAllowed fails.
 func KCSetInteractionAllowed(state uint8) error {
-	if _err := purego.NewOSStatus(raw.KCSetInteractionAllowed(state)).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCSetInteractionAllowed == nil {
+		ebipurego.RegisterLibFunc(&_fnKCSetInteractionAllowed, _lib, "KCSetInteractionAllowed")
+	}
+	_rc := _fnKCSetInteractionAllowed(state)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

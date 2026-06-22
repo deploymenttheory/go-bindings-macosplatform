@@ -5,56 +5,50 @@
 package imagekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// FilterBrowserPanelWithStyleMask calls the underlying IKFilterBrowserPanelFilterBrowserPanelWithStyleMask.
-func FilterBrowserPanelWithStyleMask(styleMask uint) objc.ID {
-	return raw.IKFilterBrowserPanelFilterBrowserPanelWithStyleMask(styleMask)
+// FilterBrowserPanelWithStyleMask create a shared instance of the IKFilterBrowser Use this method to create a shared instance of the IKFilterBrowser with a specific NSWindow style. Right now it only supports selecting of deselecting the NSTexturedBackgroundWindowMask style bit.
+func FilterBrowserPanelWithStyleMask(styleMask int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("filterBrowserPanelWithStyleMask:"), styleMask)
+	return obj.Wrap(_r)
 }
 
-// ViewWithFrameFilter calls the underlying IKFilterUIViewViewWithFrameFilter.
-func ViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) objc.ID {
-	return raw.IKFilterUIViewViewWithFrameFilter(frameRect, inFilter)
+// ViewWithFrameFilter the viewWithFrame method creates a view that retains the filter passed into it.
+func ViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("viewWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
+	return obj.Wrap(_r)
 }
 
-// SharedImageEditPanel calls the underlying IKImageEditPanelSharedImageEditPanel.
+// SharedImageEditPanel creates a shared instance of an image editing panel.
 func SharedImageEditPanel() *ImageEditPanel {
-	_r := raw.IKImageEditPanelSharedImageEditPanel()
-	if _r == nil {
-		return nil
-	}
-	return &ImageEditPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("sharedImageEditPanel"))
+	return ImageEditPanelFromID(_r)
 }
 
-// IKPictureTakerPictureTaker calls the underlying IKPictureTakerPictureTaker.
+// IKPictureTakerPictureTaker returns the shared IKPictureTaker instance, creating it if necessary.
 func IKPictureTakerPictureTaker() *PictureTaker {
-	_r := raw.IKPictureTakerPictureTaker()
-	if _r == nil {
-		return nil
-	}
-	return &PictureTaker{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("pictureTaker"))
+	return PictureTakerFromID(_r)
 }
 
-// SharedSlideshow calls the underlying IKSlideshowSharedSlideshow.
+// SharedSlideshow shared instance of the IKSlideshow.
 func SharedSlideshow() *Slideshow {
-	_r := raw.IKSlideshowSharedSlideshow()
-	if _r == nil {
-		return nil
-	}
-	return &Slideshow{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("sharedSlideshow"))
+	return SlideshowFromID(_r)
 }
 
-// CanExportToApplication calls the underlying IKSlideshowCanExportToApplication.
+// CanExportToApplication is exporting to a given application possible (application installed?, right version?, ...).
 func CanExportToApplication(applicationBundleIdentifier string) bool {
-	return raw.IKSlideshowCanExportToApplication(foundation.NSStringStringWithUTF8String(applicationBundleIdentifier))
+	_r := objc.Send[bool](objc.ID(_class("IKSlideshow")), objc.RegisterName("canExportToApplication:"), purego.NSString(applicationBundleIdentifier))
+	return _r
 }
 
-// ExportSlideshowItemToApplication calls the underlying IKSlideshowExportSlideshowItemToApplication.
-func ExportSlideshowItemToApplication(item objc.ID, applicationBundleIdentifier string) {
-	raw.IKSlideshowExportSlideshowItemToApplication(item, foundation.NSStringStringWithUTF8String(applicationBundleIdentifier))
+// ExportSlideshowItemToApplication export an item to the given application. The item can be either: NSImage, NSString, NSURL, or a NSArray of NSImage / NSString / NSURL.
+func ExportSlideshowItemToApplication(item obj.Object, applicationBundleIdentifier string) {
+	objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("exportSlideshowItem:toApplication:"), objref.IDOf(item), purego.NSString(applicationBundleIdentifier))
 }

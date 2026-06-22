@@ -5,128 +5,117 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Virtual base class for CNN normalization nodes.
+// CNNNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNNormalizationNode.
 //
-// CNNNormalizationNode wraps [raw.MPSCNNNormalizationNode] with a fluent Go API.
+// CNNNormalizationNode is an abstract base — you do not construct it directly. Construct one of [CNNCrossChannelNormalizationNode], [CNNLocalContrastNormalizationNode], [CNNSpatialNormalizationNode] and pass it where a CNNNormalizationNode is accepted.
+//
+// Virtual base class for CNN normalization nodes.
 type CNNNormalizationNode struct {
-	inner *raw.MPSCNNNormalizationNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNormalizationNode].
-func (x *CNNNormalizationNode) Unwrap() *raw.MPSCNNNormalizationNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNormalizationNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNormalizationNodeFromID adopts an existing object pointer as a CNNNormalizationNode (nil for 0).
+// CNNNormalizationNodeFromID adopts an existing Objective-C object as a CNNNormalizationNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNormalizationNodeFromID(id objc.ID) *CNNNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNormalizationNode{inner: raw.MPSCNNNormalizationNodeFromID(id)}
+	x := &CNNNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNNormalizationNodeWithSource creates a new [CNNNormalizationNode].
-func NewCNNNormalizationNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *CNNNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &CNNNormalizationNode{inner: raw.MPSCNNNormalizationNodeFromID(_id)}
+// cNNNormalizationNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNNormalizationNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNormalizationNodeAdopt(id objc.ID) *CNNNormalizationNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNormalizationNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   alpha @abstract   The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// NewCNNNormalizationNodeWithSource creates a new CNNNormalizationNode.
+func NewCNNNormalizationNodeWithSource(sourceNode obj.Object) *CNNNormalizationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return cNNNormalizationNodeAdopt(_id)
+}
+
+// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNNormalizationNode) WithAlpha(alpha float32) *CNNNormalizationNode {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   beta @abstract   The value of beta.  Default is 5.0
-//
-// WithBeta sets the beta property and returns the receiver for chaining.
+// WithBeta the value of beta.  Default is 5.0
 func (x *CNNNormalizationNode) WithBeta(beta float32) *CNNNormalizationNode {
-	x.inner.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// @property   delta @abstract   The value of delta.  Default is 1.0
-//
-// WithDelta sets the delta property and returns the receiver for chaining.
+// WithDelta the value of delta.  Default is 1.0
 func (x *CNNNormalizationNode) WithDelta(delta float32) *CNNNormalizationNode {
-	x.inner.SetDelta(delta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNormalizationNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *CNNNormalizationNode) WithLabel(label string) *CNNNormalizationNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @abstract   The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// Alpha calls the underlying Alpha.
+// Alpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNNormalizationNode) Alpha() float32 {
-	return x.inner.Alpha()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *CNNNormalizationNode) SetAlpha(alpha float32) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// @property   beta @abstract   The value of beta.  Default is 5.0
-//
-// Beta calls the underlying Beta.
+// Beta the value of beta.  Default is 5.0
 func (x *CNNNormalizationNode) Beta() float32 {
-	return x.inner.Beta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+	return _r
 }
 
-// SetBeta calls the underlying SetBeta.
+// SetBeta wraps the corresponding Objective-C method.
 func (x *CNNNormalizationNode) SetBeta(beta float32) {
-	x.inner.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
 
-// @property   delta @abstract   The value of delta.  Default is 1.0
-//
-// Delta calls the underlying Delta.
+// Delta the value of delta.  Default is 1.0
 func (x *CNNNormalizationNode) Delta() float32 {
-	return x.inner.Delta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+	return _r
 }
 
-// SetDelta calls the underlying SetDelta.
+// SetDelta wraps the corresponding Objective-C method.
 func (x *CNNNormalizationNode) SetDelta(delta float32) {
-	x.inner.SetDelta(delta)
-}
-
-func (x *CNNNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 }
 
 // CNNNormalizationNodeable is the interface implemented by [CNNNormalizationNode], for mocking and DI.
 type CNNNormalizationNodeable interface {
-	Unwrap() *raw.MPSCNNNormalizationNode
+	obj.Object
 	WithAlpha(alpha float32) *CNNNormalizationNode
 	WithBeta(beta float32) *CNNNormalizationNode
 	WithDelta(delta float32) *CNNNormalizationNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNormalizationNode
 	WithLabel(label string) *CNNNormalizationNode
 	Alpha() float32
 	SetAlpha(alpha float32)
@@ -137,3 +126,12 @@ type CNNNormalizationNodeable interface {
 }
 
 var _ CNNNormalizationNodeable = (*CNNNormalizationNode)(nil)
+
+// isCNNNormalizationNode marks CNNNormalizationNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNNormalizationNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNNormalizationNode) isCNNNormalizationNode() {}
+
+var _ CNNNormalizationNodeProvider = (*CNNNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNormalizationNode)(nil)

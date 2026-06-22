@@ -5,89 +5,110 @@
 package safariservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A proxy for a Safari app extension toolbar item in a Safari window.
+// SafariToolbarItem is an idiomatic wrapper over the Objective-C class SFSafariToolbarItem.
 //
-// SafariToolbarItem wraps [raw.SFSafariToolbarItem] with a fluent Go API.
+// A proxy for a Safari app extension toolbar item in a Safari window.
 type SafariToolbarItem struct {
-	inner *raw.SFSafariToolbarItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariToolbarItem].
-func (x *SafariToolbarItem) Unwrap() *raw.SFSafariToolbarItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariToolbarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariToolbarItemFromID adopts an existing object pointer as a SafariToolbarItem (nil for 0).
+// SafariToolbarItemFromID adopts an existing Objective-C object as a SafariToolbarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariToolbarItemFromID(id objc.ID) *SafariToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	return &SafariToolbarItem{inner: raw.SFSafariToolbarItemFromID(id)}
+	x := &SafariToolbarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSafariToolbarItem creates a new [SafariToolbarItem].
+// safariToolbarItemAdopt wraps an Objective-C object that this code just created as a
+// SafariToolbarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariToolbarItemAdopt(id objc.ID) *SafariToolbarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariToolbarItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariToolbarItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariToolbarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariToolbarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariToolbarItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSafariToolbarItem creates a new SafariToolbarItem.
 func NewSafariToolbarItem() *SafariToolbarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariToolbarItem")), objc.RegisterName("new"))
-	return &SafariToolbarItem{inner: raw.SFSafariToolbarItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariToolbarItem")), objc.RegisterName("new"))
+	return safariToolbarItemAdopt(_id)
 }
 
-// Sets the enabled state and the badge text for the toolbar item.
-//
-// SetEnabledWithBadgeText calls the underlying SetEnabledWithBadgeText.
+// SetEnabledWithBadgeText sets the enabled state and the badge text for the toolbar item.
 func (x *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
-	x.inner.SetEnabledWithBadgeText(enabled, foundation.NSStringStringWithUTF8String(badgeText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:withBadgeText:"), enabled, purego.NSString(badgeText))
 }
 
-// Sets whether the toolbar item is enabled.
-//
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled sets whether the toolbar item is enabled.
 func (x *SafariToolbarItem) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Sets the badge text for the toolbar item.
-//
-// SetBadgeText calls the underlying SetBadgeText.
+// SetBadgeText sets the badge text for the toolbar item.
 func (x *SafariToolbarItem) SetBadgeText(badgeText string) {
-	x.inner.SetBadgeText(foundation.NSStringStringWithUTF8String(badgeText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeText:"), purego.NSString(badgeText))
 }
 
-// Sets the image displayed in the toolbar button.
-//
-// SetImage calls the underlying SetImage.
-func (x *SafariToolbarItem) SetImage(image *appkit.NSImage) {
-	x.inner.SetImage(image)
+// SetImage sets the image displayed in the toolbar button.
+func (x *SafariToolbarItem) SetImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// Sets the label for the toolbar button. Setting the label to nil will set the default label.
-//
-// SetLabel calls the underlying SetLabel.
+// SetLabel sets the label for the toolbar button. Setting the label to nil will set the default label.
 func (x *SafariToolbarItem) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Shows the popover associated with this toolbar button.
-//
-// ShowPopover calls the underlying ShowPopover.
+// ShowPopover shows the popover associated with this toolbar button.
 func (x *SafariToolbarItem) ShowPopover() {
-	x.inner.ShowPopover()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showPopover"))
 }
 
 // SafariToolbarItemable is the interface implemented by [SafariToolbarItem], for mocking and DI.
 type SafariToolbarItemable interface {
-	Unwrap() *raw.SFSafariToolbarItem
+	obj.Object
 	SetEnabledWithBadgeText(enabled bool, badgeText string)
 	SetEnabled(enabled bool)
 	SetBadgeText(badgeText string)
-	SetImage(image *appkit.NSImage)
+	SetImage(image obj.Object)
 	SetLabel(label string)
 	ShowPopover()
 }

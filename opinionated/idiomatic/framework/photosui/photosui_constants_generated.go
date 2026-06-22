@@ -5,79 +5,51 @@
 package photosui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// PHProjectTypeUndefined returns the string constant PHProjectTypeUndefined as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectTypeUndefined() objc.ID {
-	if _r := raw.PHProjectTypeUndefined(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectTypeUndefined returns the string constant PHProjectTypeUndefined, for use as a dictionary key or argument.
+func PHProjectTypeUndefined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectTypeUndefined")))
 }
 
-// PHProjectCategoryBook returns the string constant PHProjectCategoryBook as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryBook() objc.ID {
-	if _r := raw.PHProjectCategoryBook(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryBook returns the string constant PHProjectCategoryBook, for use as a dictionary key or argument.
+func PHProjectCategoryBook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryBook")))
 }
 
-// PHProjectCategoryCalendar returns the string constant PHProjectCategoryCalendar as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryCalendar() objc.ID {
-	if _r := raw.PHProjectCategoryCalendar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryCalendar returns the string constant PHProjectCategoryCalendar, for use as a dictionary key or argument.
+func PHProjectCategoryCalendar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryCalendar")))
 }
 
-// PHProjectCategoryCard returns the string constant PHProjectCategoryCard as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryCard() objc.ID {
-	if _r := raw.PHProjectCategoryCard(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryCard returns the string constant PHProjectCategoryCard, for use as a dictionary key or argument.
+func PHProjectCategoryCard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryCard")))
 }
 
-// PHProjectCategoryPrints returns the string constant PHProjectCategoryPrints as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryPrints() objc.ID {
-	if _r := raw.PHProjectCategoryPrints(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryPrints returns the string constant PHProjectCategoryPrints, for use as a dictionary key or argument.
+func PHProjectCategoryPrints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryPrints")))
 }
 
-// PHProjectCategorySlideshow returns the string constant PHProjectCategorySlideshow as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategorySlideshow() objc.ID {
-	if _r := raw.PHProjectCategorySlideshow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategorySlideshow returns the string constant PHProjectCategorySlideshow, for use as a dictionary key or argument.
+func PHProjectCategorySlideshow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategorySlideshow")))
 }
 
-// PHProjectCategoryWallDecor returns the string constant PHProjectCategoryWallDecor as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryWallDecor() objc.ID {
-	if _r := raw.PHProjectCategoryWallDecor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryWallDecor returns the string constant PHProjectCategoryWallDecor, for use as a dictionary key or argument.
+func PHProjectCategoryWallDecor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryWallDecor")))
 }
 
-// PHProjectCategoryOther returns the string constant PHProjectCategoryOther as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryOther() objc.ID {
-	if _r := raw.PHProjectCategoryOther(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryOther returns the string constant PHProjectCategoryOther, for use as a dictionary key or argument.
+func PHProjectCategoryOther() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryOther")))
 }
 
-// PHProjectCategoryUndefined is used to indicate that -[PHProjectExtensionController typeDescriptionDataSourceForCategory:invalidator:] should return the data source which provides all project types descriptions.
-// PHProjectCategoryUndefined returns the string constant PHProjectCategoryUndefined as an objc.ID, for use as a dictionary key or selector argument.
-func PHProjectCategoryUndefined() objc.ID {
-	if _r := raw.PHProjectCategoryUndefined(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHProjectCategoryUndefined returns the string constant PHProjectCategoryUndefined, for use as a dictionary key or argument.
+func PHProjectCategoryUndefined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHProjectCategoryUndefined")))
 }

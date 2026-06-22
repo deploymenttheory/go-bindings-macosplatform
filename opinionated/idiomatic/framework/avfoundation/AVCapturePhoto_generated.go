@@ -5,120 +5,118 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A container for image data from a photo capture output.
+// CapturePhoto is an idiomatic wrapper over the Objective-C class AVCapturePhoto.
 //
-// CapturePhoto wraps [raw.AVCapturePhoto] with a fluent Go API.
+// A container for image data from a photo capture output.
 type CapturePhoto struct {
-	inner *raw.AVCapturePhoto
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCapturePhoto].
-func (x *CapturePhoto) Unwrap() *raw.AVCapturePhoto { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CapturePhoto) ID() objc.ID { return x.inner.Ptr() }
-
-// CapturePhotoFromID adopts an existing object pointer as a CapturePhoto (nil for 0).
+// CapturePhotoFromID adopts an existing Objective-C object as a CapturePhoto
+// (nil for 0), retaining it and registering a release finalizer.
 func CapturePhotoFromID(id objc.ID) *CapturePhoto {
 	if id == 0 {
 		return nil
 	}
-	return &CapturePhoto{inner: raw.AVCapturePhotoFromID(id)}
+	x := &CapturePhoto{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCapturePhoto creates a new [CapturePhoto].
-func NewCapturePhoto() *CapturePhoto {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCapturePhoto")), objc.RegisterName("new"))
-	return &CapturePhoto{inner: raw.AVCapturePhotoFromID(_id)}
-}
-
-// @property timestamp @abstract The time at which this image was captured, synchronized to the synchronizationClock of the AVCaptureSession @discussion The timestamp property indicates the time the image was captured, and is analogous to CMSampleBufferGetPresentationTimeStamp(). If an error was provided in the -captureOutput:didFinishingProcessingPhoto:error: callback, timestamp returns kCMTimeInvalid.
-//
-// Timestamp calls the underlying Timestamp.
-func (x *CapturePhoto) Timestamp() coremedia.CMTime {
-	return x.inner.Timestamp()
-}
-
-// @property pixelBuffer @abstract For uncompressed or RAW captures, this property offers access to the pixel data. @discussion Uncompressed captures, such as '420f' or 'BGRA', Bayer RAW captures, such as 'bgg4', or Apple ProRAW captures, such as 'l64r', present pixel data as a CVPixelBuffer. See AVCapturePhotoOutput's -appleProRAWEnabled for a discussion on the differences between Bayer RAW and Apple ProRAW. This property is analogous to CMSampleBufferGetImageBuffer(). The pixel buffer contains only the minimal attachments required for correct display. Compressed captures, such as 'jpeg', return nil.
-//
-// PixelBuffer calls the underlying PixelBuffer.
-func (x *CapturePhoto) PixelBuffer() unsafe.Pointer {
-	return x.inner.PixelBuffer()
-}
-
-// @property resolvedSettings @abstract The AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. @discussion Even in the event of an error, the resolved settings are always non nil.
-//
-// ResolvedSettings calls the underlying ResolvedSettings.
-func (x *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
-	_r := x.inner.ResolvedSettings()
-	if _r == nil {
+// capturePhotoAdopt wraps an Objective-C object that this code just created as a
+// CapturePhoto (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func capturePhotoAdopt(id objc.ID) *CapturePhoto {
+	if id == 0 {
 		return nil
 	}
-	return &CaptureResolvedPhotoSettings{inner: _r}
+	x := &CapturePhoto{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property photoCount @abstract This photo's index (1-based) in the total expected photo count. @discussion The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
-//
-// PhotoCount calls the underlying PhotoCount.
+// Description returns the object's -description text.
+func (x *CapturePhoto) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CapturePhoto) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CapturePhoto) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CapturePhoto) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCapturePhoto creates a new CapturePhoto.
+func NewCapturePhoto() *CapturePhoto {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCapturePhoto")), objc.RegisterName("new"))
+	return capturePhotoAdopt(_id)
+}
+
+// ResolvedSettings the AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.
+func (x *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedSettings"))
+	return CaptureResolvedPhotoSettingsFromID(_r)
+}
+
+// PhotoCount this photo's index (1-based) in the total expected photo count. The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
 func (x *CapturePhoto) PhotoCount() int {
-	return x.inner.PhotoCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("photoCount"))
+	return _r
 }
 
-// @property constantColorConfidenceMap @abstract Returns a pixel buffer with the same aspect ratio as the constant color photo, where each pixel value (unsigned 8-bit integer) indicates how fully the constant color effect has been achieved in the corresponding region of the constant color photo -- 255 means full confidence, 0 means zero confidence. @discussion NULL is returned for any non constant color photos.
-//
-// ConstantColorConfidenceMap calls the underlying ConstantColorConfidenceMap.
-func (x *CapturePhoto) ConstantColorConfidenceMap() unsafe.Pointer {
-	return x.inner.ConstantColorConfidenceMap()
-}
-
-// @property constantColorCenterWeightedMeanConfidenceLevel @abstract Returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence. @discussion Default is 0.0. In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo. Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
-//
-// ConstantColorCenterWeightedMeanConfidenceLevel calls the underlying ConstantColorCenterWeightedMeanConfidenceLevel.
+// ConstantColorCenterWeightedMeanConfidenceLevel returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence. Default is 0.0. In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo. Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
 func (x *CapturePhoto) ConstantColorCenterWeightedMeanConfidenceLevel() float32 {
-	return x.inner.ConstantColorCenterWeightedMeanConfidenceLevel()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantColorCenterWeightedMeanConfidenceLevel"))
+	return _r
 }
 
-// @property constantColorFallbackPhoto @abstract Indicates whether this photo is a fallback photo for a constant color capture.
-//
-// IsConstantColorFallbackPhoto calls the underlying IsConstantColorFallbackPhoto.
+// IsConstantColorFallbackPhoto indicates whether this photo is a fallback photo for a constant color capture.
 func (x *CapturePhoto) IsConstantColorFallbackPhoto() bool {
-	return x.inner.IsConstantColorFallbackPhoto()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorFallbackPhoto"))
+	return _r
 }
 
-// Generates and returns a flat data representation of the photo and its attachments.
-//
-// FileDataRepresentation calls the underlying FileDataRepresentation.
-func (x *CapturePhoto) FileDataRepresentation() *foundation.NSData {
-	return x.inner.FileDataRepresentation()
+// FileDataRepresentation generates and returns a flat data representation of the photo and its attachments.
+func (x *CapturePhoto) FileDataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileDataRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// Extracts and returns the captured photo’s primary image as a Core Graphics image object.
-//
-// CGImageRepresentation calls the underlying CGImageRepresentation.
-func (x *CapturePhoto) CGImageRepresentation() unsafe.Pointer {
-	return x.inner.CGImageRepresentation()
+// CGImageRepresentation extracts and returns the captured photo’s primary image as a Core Graphics image object.
+func (x *CapturePhoto) CGImageRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImageRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // CapturePhotoable is the interface implemented by [CapturePhoto], for mocking and DI.
 type CapturePhotoable interface {
-	Unwrap() *raw.AVCapturePhoto
-	Timestamp() coremedia.CMTime
-	PixelBuffer() unsafe.Pointer
+	obj.Object
 	ResolvedSettings() *CaptureResolvedPhotoSettings
 	PhotoCount() int
-	ConstantColorConfidenceMap() unsafe.Pointer
 	ConstantColorCenterWeightedMeanConfidenceLevel() float32
 	IsConstantColorFallbackPhoto() bool
-	FileDataRepresentation() *foundation.NSData
-	CGImageRepresentation() unsafe.Pointer
+	FileDataRepresentation() obj.Object
+	CGImageRepresentation() obj.Object
 }
 
 var _ CapturePhotoable = (*CapturePhoto)(nil)

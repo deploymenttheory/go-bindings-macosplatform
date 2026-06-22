@@ -5,210 +5,175 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable metadata item for an audiovisual asset or for one of its tracks.
+// MutableMetadataItem is an idiomatic wrapper over the Objective-C class AVMutableMetadataItem.
 //
-// MutableMetadataItem wraps [raw.AVMutableMetadataItem] with a fluent Go API.
+// It embeds [MetadataItem], promoting that type's methods.
+//
+// A mutable metadata item for an audiovisual asset or for one of its tracks.
 type MutableMetadataItem struct {
-	inner *raw.AVMutableMetadataItem
+	MetadataItem
 }
 
-// Unwrap returns the underlying [raw.AVMutableMetadataItem].
-func (x *MutableMetadataItem) Unwrap() *raw.AVMutableMetadataItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableMetadataItem) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableMetadataItemFromID adopts an existing object pointer as a MutableMetadataItem (nil for 0).
+// MutableMetadataItemFromID adopts an existing Objective-C object as a MutableMetadataItem
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableMetadataItemFromID(id objc.ID) *MutableMetadataItem {
 	if id == 0 {
 		return nil
 	}
-	return &MutableMetadataItem{inner: raw.AVMutableMetadataItemFromID(id)}
+	x := &MutableMetadataItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutableMetadataItem creates a new [MutableMetadataItem].
+// mutableMetadataItemAdopt wraps an Objective-C object that this code just created as a
+// MutableMetadataItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableMetadataItemAdopt(id objc.ID) *MutableMetadataItem {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableMetadataItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableMetadataItem creates a new MutableMetadataItem.
 func NewMutableMetadataItem() *MutableMetadataItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMetadataItem")), objc.RegisterName("new"))
-	return &MutableMetadataItem{inner: raw.AVMutableMetadataItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableMetadataItem")), objc.RegisterName("new"))
+	return mutableMetadataItemAdopt(_id)
 }
 
-// Indicates the identifier of the metadata item.
-//
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithIdentifier(identifier *foundation.NSString) *MutableMetadataItem {
-	x.inner.SetIdentifier(identifier)
+// WithIdentifier indicates the identifier of the metadata item.
+func (x *MutableMetadataItem) WithIdentifier(identifier obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// The IETF BCP 47 (RFC 4646) language identifier of the metadata item.
-//
-// WithExtendedLanguageTag sets the extendedLanguageTag property and returns the receiver for chaining.
+// WithExtendedLanguageTag the IETF BCP 47 (RFC 4646) language identifier of the metadata item.
 func (x *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem {
-	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 	return x
 }
 
-// The locale for a mutable metadata item.
-//
-// WithLocale sets the locale property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithLocale(locale *foundation.NSLocale) *MutableMetadataItem {
-	x.inner.SetLocale(locale)
+// WithLocale the locale for a mutable metadata item.
+func (x *MutableMetadataItem) WithLocale(locale obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// The timestamp for a mutable metadata item.
-//
-// WithTime sets the time_ property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithTime(time_ coremedia.CMTime) *MutableMetadataItem {
-	x.inner.SetTime(time_)
-	return x
-}
-
-// The duration of a mutable metadata item.
-//
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithDuration(duration coremedia.CMTime) *MutableMetadataItem {
-	x.inner.SetDuration(duration)
-	return x
-}
-
-// The data type of the metadata item’s value.
-//
-// WithDataType sets the dataType property and returns the receiver for chaining.
+// WithDataType the data type of the metadata item’s value.
 func (x *MutableMetadataItem) WithDataType(dataType string) *MutableMetadataItem {
-	x.inner.SetDataType(foundation.NSStringStringWithUTF8String(dataType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), purego.NSString(dataType))
 	return x
 }
 
-// The value for the mutable metadata item.
-//
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithValue(value objc.ID) *MutableMetadataItem {
-	x.inner.SetValue(value)
+// WithValue the value for the mutable metadata item.
+func (x *MutableMetadataItem) WithValue(value obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// A dictionary of additional attributes for a metadata item.
-//
-// WithExtraAttributes sets the extraAttributes property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMetadataItem {
-	x.inner.SetExtraAttributes(extraAttributes)
+// WithExtraAttributes a dictionary of additional attributes for a metadata item.
+func (x *MutableMetadataItem) WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
 	return x
 }
 
-// The start date of the timed metadata.
-//
-// WithStartDate sets the startDate property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithStartDate(startDate *foundation.NSDate) *MutableMetadataItem {
-	x.inner.SetStartDate(startDate)
+// WithStartDate the start date of the timed metadata.
+func (x *MutableMetadataItem) WithStartDate(startDate obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 	return x
 }
 
-// The key space of the metadata item’s key.
-//
-// WithKeySpace sets the keySpace property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithKeySpace(keySpace *foundation.NSString) *MutableMetadataItem {
-	x.inner.SetKeySpace(keySpace)
+// WithKeySpace the key space of the metadata item’s key.
+func (x *MutableMetadataItem) WithKeySpace(keySpace obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
 	return x
 }
 
-// The key for a mutable metadata item.
-//
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *MutableMetadataItem) WithKey(key objc.ID) *MutableMetadataItem {
-	x.inner.SetKey(key)
+// WithKey the key for a mutable metadata item.
+func (x *MutableMetadataItem) WithKey(key obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
-func (x *MutableMetadataItem) SetIdentifier(identifier *foundation.NSString) {
-	x.inner.SetIdentifier(identifier)
+// SetIdentifier wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetIdentifier(identifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 }
 
-// SetExtendedLanguageTag calls the underlying SetExtendedLanguageTag.
+// SetExtendedLanguageTag wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetExtendedLanguageTag(extendedLanguageTag string) {
-	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *MutableMetadataItem) SetLocale(locale *foundation.NSLocale) {
-	x.inner.SetLocale(locale)
+// SetLocale wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetLocale(locale obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
-// SetTime calls the underlying SetTime.
-func (x *MutableMetadataItem) SetTime(time_ coremedia.CMTime) {
-	x.inner.SetTime(time_)
-}
-
-// SetDuration calls the underlying SetDuration.
-func (x *MutableMetadataItem) SetDuration(duration coremedia.CMTime) {
-	x.inner.SetDuration(duration)
-}
-
-// SetDataType calls the underlying SetDataType.
+// SetDataType wraps the corresponding Objective-C method.
 func (x *MutableMetadataItem) SetDataType(dataType string) {
-	x.inner.SetDataType(foundation.NSStringStringWithUTF8String(dataType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), purego.NSString(dataType))
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MutableMetadataItem) SetValue(value objc.ID) {
-	x.inner.SetValue(value)
+// SetValue wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
-// SetExtraAttributes calls the underlying SetExtraAttributes.
-func (x *MutableMetadataItem) SetExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetExtraAttributes(extraAttributes)
+// SetExtraAttributes wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetExtraAttributes(extraAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
 }
 
-// SetStartDate calls the underlying SetStartDate.
-func (x *MutableMetadataItem) SetStartDate(startDate *foundation.NSDate) {
-	x.inner.SetStartDate(startDate)
+// SetStartDate wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetStartDate(startDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
-// SetKeySpace calls the underlying SetKeySpace.
-func (x *MutableMetadataItem) SetKeySpace(keySpace *foundation.NSString) {
-	x.inner.SetKeySpace(keySpace)
+// SetKeySpace wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetKeySpace(keySpace obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
 }
 
-// SetKey calls the underlying SetKey.
-func (x *MutableMetadataItem) SetKey(key objc.ID) {
-	x.inner.SetKey(key)
+// SetKey wraps the corresponding Objective-C method.
+func (x *MutableMetadataItem) SetKey(key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 }
-
-func (x *MutableMetadataItem) asMetadataItem() *raw.AVMetadataItem { return &x.inner.AVMetadataItem }
 
 // MutableMetadataItemable is the interface implemented by [MutableMetadataItem], for mocking and DI.
 type MutableMetadataItemable interface {
-	Unwrap() *raw.AVMutableMetadataItem
-	WithIdentifier(identifier *foundation.NSString) *MutableMetadataItem
+	obj.Object
+	WithIdentifier(identifier obj.Object) *MutableMetadataItem
 	WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem
-	WithLocale(locale *foundation.NSLocale) *MutableMetadataItem
-	WithTime(time_ coremedia.CMTime) *MutableMetadataItem
-	WithDuration(duration coremedia.CMTime) *MutableMetadataItem
+	WithLocale(locale obj.Object) *MutableMetadataItem
 	WithDataType(dataType string) *MutableMetadataItem
-	WithValue(value objc.ID) *MutableMetadataItem
-	WithExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMetadataItem
-	WithStartDate(startDate *foundation.NSDate) *MutableMetadataItem
-	WithKeySpace(keySpace *foundation.NSString) *MutableMetadataItem
-	WithKey(key objc.ID) *MutableMetadataItem
-	SetIdentifier(identifier *foundation.NSString)
+	WithValue(value obj.Object) *MutableMetadataItem
+	WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem
+	WithStartDate(startDate obj.Object) *MutableMetadataItem
+	WithKeySpace(keySpace obj.Object) *MutableMetadataItem
+	WithKey(key obj.Object) *MutableMetadataItem
+	SetIdentifier(identifier obj.Object)
 	SetExtendedLanguageTag(extendedLanguageTag string)
-	SetLocale(locale *foundation.NSLocale)
-	SetTime(time_ coremedia.CMTime)
-	SetDuration(duration coremedia.CMTime)
+	SetLocale(locale obj.Object)
 	SetDataType(dataType string)
-	SetValue(value objc.ID)
-	SetExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	SetStartDate(startDate *foundation.NSDate)
-	SetKeySpace(keySpace *foundation.NSString)
-	SetKey(key objc.ID)
+	SetValue(value obj.Object)
+	SetExtraAttributes(extraAttributes obj.Object)
+	SetStartDate(startDate obj.Object)
+	SetKeySpace(keySpace obj.Object)
+	SetKey(key obj.Object)
 }
 
 var _ MutableMetadataItemable = (*MutableMetadataItem)(nil)
+
+var _ MetadataItemProvider = (*MutableMetadataItem)(nil)

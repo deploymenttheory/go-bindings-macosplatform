@@ -5,43 +5,58 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A read-only proxy object that represents a Photos asset or collection to create.
+// ObjectPlaceholder is an idiomatic wrapper over the Objective-C class PHObjectPlaceholder.
 //
-// ObjectPlaceholder wraps [raw.PHObjectPlaceholder] with a fluent Go API.
+// It embeds [Object], promoting that type's methods.
+//
+// A read-only proxy object that represents a Photos asset or collection to create.
 type ObjectPlaceholder struct {
-	inner *raw.PHObjectPlaceholder
+	Object
 }
 
-// Unwrap returns the underlying [raw.PHObjectPlaceholder].
-func (x *ObjectPlaceholder) Unwrap() *raw.PHObjectPlaceholder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectPlaceholder) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectPlaceholderFromID adopts an existing object pointer as a ObjectPlaceholder (nil for 0).
+// ObjectPlaceholderFromID adopts an existing Objective-C object as a ObjectPlaceholder
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectPlaceholderFromID(id objc.ID) *ObjectPlaceholder {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectPlaceholder{inner: raw.PHObjectPlaceholderFromID(id)}
+	x := &ObjectPlaceholder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObjectPlaceholder creates a new [ObjectPlaceholder].
+// objectPlaceholderAdopt wraps an Objective-C object that this code just created as a
+// ObjectPlaceholder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectPlaceholderAdopt(id objc.ID) *ObjectPlaceholder {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectPlaceholder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewObjectPlaceholder creates a new ObjectPlaceholder.
 func NewObjectPlaceholder() *ObjectPlaceholder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHObjectPlaceholder")), objc.RegisterName("new"))
-	return &ObjectPlaceholder{inner: raw.PHObjectPlaceholderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHObjectPlaceholder")), objc.RegisterName("new"))
+	return objectPlaceholderAdopt(_id)
 }
-
-func (x *ObjectPlaceholder) asObject() *raw.PHObject { return &x.inner.PHObject }
 
 // ObjectPlaceholderable is the interface implemented by [ObjectPlaceholder], for mocking and DI.
 type ObjectPlaceholderable interface {
-	Unwrap() *raw.PHObjectPlaceholder
+	obj.Object
 }
 
 var _ ObjectPlaceholderable = (*ObjectPlaceholder)(nil)
+
+var _ ObjectProvider = (*ObjectPlaceholder)(nil)

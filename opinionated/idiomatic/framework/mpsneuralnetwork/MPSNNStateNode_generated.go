@@ -5,106 +5,106 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNStateNode wraps [raw.MPSNNStateNode] with a fluent Go API.
+// NNStateNode is an idiomatic wrapper over the Objective-C class MPSNNStateNode.
+//
+// NNStateNode is an abstract base — you do not construct it directly. Construct one of [NNBinaryGradientStateNode], [NNGradientStateNode], [NNLabelsNode], [NNMultiaryGradientStateNode] and pass it where a NNStateNode is accepted.
 type NNStateNode struct {
-	inner *raw.MPSNNStateNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNStateNode].
-func (x *NNStateNode) Unwrap() *raw.MPSNNStateNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNStateNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNStateNodeFromID adopts an existing object pointer as a NNStateNode (nil for 0).
+// NNStateNodeFromID adopts an existing Objective-C object as a NNStateNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNStateNodeFromID(id objc.ID) *NNStateNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNStateNode{inner: raw.MPSNNStateNodeFromID(id)}
-}
-
-// NewNNStateNode creates a new [NNStateNode].
-func NewNNStateNode() *NNStateNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNStateNode")), objc.RegisterName("new"))
-	return &NNStateNode{inner: raw.MPSNNStateNodeFromID(_id)}
-}
-
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
-//
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNStateNode) WithHandle(handle raw.MPSHandle) *NNStateNode {
-	x.inner.SetHandle(handle)
+	x := &NNStateNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// nNStateNodeAdopt wraps an Objective-C object that this code just created as a
+// NNStateNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNStateNodeAdopt(id objc.ID) *NNStateNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNStateNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNStateNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNStateNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNStateNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNStateNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNStateNode) WithExportFromGraph(exportFromGraph bool) *NNStateNode {
-	x.inner.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
-//
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (x *NNStateNode) WithSynchronizeResource(synchronizeResource bool) *NNStateNode {
-	x.inner.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
 }
 
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
-//
-// Handle calls the underlying Handle.
-func (x *NNStateNode) Handle() raw.MPSHandle {
-	return x.inner.Handle()
-}
-
-// SetHandle calls the underlying SetHandle.
-func (x *NNStateNode) SetHandle(handle raw.MPSHandle) {
-	x.inner.SetHandle(handle)
-}
-
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// ExportFromGraph calls the underlying ExportFromGraph.
+// ExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNStateNode) ExportFromGraph() bool {
-	return x.inner.ExportFromGraph()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("exportFromGraph"))
+	return _r
 }
 
-// SetExportFromGraph calls the underlying SetExportFromGraph.
+// SetExportFromGraph wraps the corresponding Objective-C method.
 func (x *NNStateNode) SetExportFromGraph(exportFromGraph bool) {
-	x.inner.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
-//
-// SynchronizeResource calls the underlying SynchronizeResource.
+// SynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (x *NNStateNode) SynchronizeResource() bool {
-	return x.inner.SynchronizeResource()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeResource"))
+	return _r
 }
 
-// SetSynchronizeResource calls the underlying SetSynchronizeResource.
+// SetSynchronizeResource wraps the corresponding Objective-C method.
 func (x *NNStateNode) SetSynchronizeResource(synchronizeResource bool) {
-	x.inner.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 }
-
-func (x *NNStateNode) asNNStateNode() *raw.MPSNNStateNode { return x.inner }
 
 // NNStateNodeable is the interface implemented by [NNStateNode], for mocking and DI.
 type NNStateNodeable interface {
-	Unwrap() *raw.MPSNNStateNode
-	WithHandle(handle raw.MPSHandle) *NNStateNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNStateNode
 	WithSynchronizeResource(synchronizeResource bool) *NNStateNode
-	Handle() raw.MPSHandle
-	SetHandle(handle raw.MPSHandle)
 	ExportFromGraph() bool
 	SetExportFromGraph(exportFromGraph bool)
 	SynchronizeResource() bool
@@ -112,3 +112,10 @@ type NNStateNodeable interface {
 }
 
 var _ NNStateNodeable = (*NNStateNode)(nil)
+
+// isNNStateNode marks NNStateNode — and, by embedding promotion, its
+// subclasses — as a member of the NNStateNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNStateNode) isNNStateNode() {}
+
+var _ NNStateNodeProvider = (*NNStateNode)(nil)

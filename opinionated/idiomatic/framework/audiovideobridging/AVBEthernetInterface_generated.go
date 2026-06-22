@@ -5,41 +5,56 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EthernetInterface wraps [raw.AVBEthernetInterface] with a fluent Go API.
+// EthernetInterface is an idiomatic wrapper over the Objective-C class AVBEthernetInterface.
+//
+// It embeds [Interface], promoting that type's methods.
 type EthernetInterface struct {
-	inner *raw.AVBEthernetInterface
+	Interface
 }
 
-// Unwrap returns the underlying [raw.AVBEthernetInterface].
-func (x *EthernetInterface) Unwrap() *raw.AVBEthernetInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EthernetInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// EthernetInterfaceFromID adopts an existing object pointer as a EthernetInterface (nil for 0).
+// EthernetInterfaceFromID adopts an existing Objective-C object as a EthernetInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func EthernetInterfaceFromID(id objc.ID) *EthernetInterface {
 	if id == 0 {
 		return nil
 	}
-	return &EthernetInterface{inner: raw.AVBEthernetInterfaceFromID(id)}
+	x := &EthernetInterface{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEthernetInterface creates a new [EthernetInterface].
+// ethernetInterfaceAdopt wraps an Objective-C object that this code just created as a
+// EthernetInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ethernetInterfaceAdopt(id objc.ID) *EthernetInterface {
+	if id == 0 {
+		return nil
+	}
+	x := &EthernetInterface{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewEthernetInterface creates a new EthernetInterface.
 func NewEthernetInterface() *EthernetInterface {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBEthernetInterface")), objc.RegisterName("new"))
-	return &EthernetInterface{inner: raw.AVBEthernetInterfaceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVBEthernetInterface")), objc.RegisterName("new"))
+	return ethernetInterfaceAdopt(_id)
 }
-
-func (x *EthernetInterface) asInterface() *raw.AVBInterface { return &x.inner.AVBInterface }
 
 // EthernetInterfaceable is the interface implemented by [EthernetInterface], for mocking and DI.
 type EthernetInterfaceable interface {
-	Unwrap() *raw.AVBEthernetInterface
+	obj.Object
 }
 
 var _ EthernetInterfaceable = (*EthernetInterface)(nil)
+
+var _ InterfaceProvider = (*EthernetInterface)(nil)

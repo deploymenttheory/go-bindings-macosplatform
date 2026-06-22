@@ -5,67 +5,75 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a collection of key-value information that a Core ML image-analysis request produces.
+// CoreMLFeatureValueObservation is an idiomatic wrapper over the Objective-C class VNCoreMLFeatureValueObservation.
 //
-// CoreMLFeatureValueObservation wraps [raw.VNCoreMLFeatureValueObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents a collection of key-value information that a Core ML image-analysis request produces.
 type CoreMLFeatureValueObservation struct {
-	inner *raw.VNCoreMLFeatureValueObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNCoreMLFeatureValueObservation].
-func (x *CoreMLFeatureValueObservation) Unwrap() *raw.VNCoreMLFeatureValueObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CoreMLFeatureValueObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// CoreMLFeatureValueObservationFromID adopts an existing object pointer as a CoreMLFeatureValueObservation (nil for 0).
+// CoreMLFeatureValueObservationFromID adopts an existing Objective-C object as a CoreMLFeatureValueObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func CoreMLFeatureValueObservationFromID(id objc.ID) *CoreMLFeatureValueObservation {
 	if id == 0 {
 		return nil
 	}
-	return &CoreMLFeatureValueObservation{inner: raw.VNCoreMLFeatureValueObservationFromID(id)}
+	x := &CoreMLFeatureValueObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCoreMLFeatureValueObservation creates a new [CoreMLFeatureValueObservation].
+// coreMLFeatureValueObservationAdopt wraps an Objective-C object that this code just created as a
+// CoreMLFeatureValueObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coreMLFeatureValueObservationAdopt(id objc.ID) *CoreMLFeatureValueObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &CoreMLFeatureValueObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCoreMLFeatureValueObservation creates a new CoreMLFeatureValueObservation.
 func NewCoreMLFeatureValueObservation() *CoreMLFeatureValueObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCoreMLFeatureValueObservation")), objc.RegisterName("new"))
-	return &CoreMLFeatureValueObservation{inner: raw.VNCoreMLFeatureValueObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNCoreMLFeatureValueObservation")), objc.RegisterName("new"))
+	return coreMLFeatureValueObservationAdopt(_id)
 }
 
-// @brief The result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
-//
-// FeatureValue calls the underlying FeatureValue.
-func (x *CoreMLFeatureValueObservation) FeatureValue() *coreml.MLFeatureValue {
-	return x.inner.FeatureValue()
+// FeatureValue the result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
+func (x *CoreMLFeatureValueObservation) FeatureValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureValue"))
+	return obj.Wrap(_r)
 }
 
-// @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
-//
-// FeatureName calls the underlying FeatureName.
+// FeatureName the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
 func (x *CoreMLFeatureValueObservation) FeatureName() string {
-	_r := x.inner.FeatureName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *CoreMLFeatureValueObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNObservation
+	return purego.GoString(_r)
 }
 
 // CoreMLFeatureValueObservationable is the interface implemented by [CoreMLFeatureValueObservation], for mocking and DI.
 type CoreMLFeatureValueObservationable interface {
-	Unwrap() *raw.VNCoreMLFeatureValueObservation
-	FeatureValue() *coreml.MLFeatureValue
+	obj.Object
+	FeatureValue() obj.Object
 	FeatureName() string
 }
 
 var _ CoreMLFeatureValueObservationable = (*CoreMLFeatureValueObservation)(nil)
+
+var _ ObservationProvider = (*CoreMLFeatureValueObservation)(nil)

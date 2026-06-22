@@ -1,0 +1,15 @@
+{{/*
+    class_seal.tmpl emits the sealing marker method for a class that is itself a
+    provider base, plus the compile-time assertions (E11) that the wrapper
+    satisfies every provider interface its hierarchy grants it. The marker is
+    defined once on the base and promoted to subclasses through embedding; the
+    assertions guarantee that promotion actually holds.
+*/}}
+{{define "class_seal"}}{{if .MarkerName}}
+// {{.MarkerName}} marks {{.GoTypeName}} — and, by embedding promotion, its
+// subclasses — as a member of the {{.GoTypeName}} hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *{{.GoTypeName}}) {{.MarkerName}}() {}
+{{end}}{{range .ProviderIfaces}}
+var _ {{.}} = (*{{$.GoTypeName}})(nil)
+{{end}}{{end}}

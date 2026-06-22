@@ -34,6 +34,8 @@ const (
 	KCGBitmapByteOrder32Big CGBitmapInfo = 16384
 )
 
+// String returns the CGBitmapInfo constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGBitmapInfo) String() string {
 	var parts []string
 	if e&KCGBitmapAlphaInfoMask != 0 {
@@ -131,6 +133,8 @@ const (
 	KCGBlendModePlusLighter CGBlendMode = 27
 )
 
+// String returns the CGBlendMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGBlendMode) String() string {
 	switch e {
 	case KCGBlendModeNormal:
@@ -205,6 +209,8 @@ const (
 	KCGCaptureNoFill CGCaptureOptions = 1
 )
 
+// String returns the CGCaptureOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGCaptureOptions) String() string {
 	var parts []string
 	if e&KCGCaptureNoFill != 0 {
@@ -228,6 +234,8 @@ const (
 	KCGColorConversionTransformApplySpace CGColorConversionInfoTransformType = 2
 )
 
+// String returns the CGColorConversionInfoTransformType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGColorConversionInfoTransformType) String() string {
 	switch e {
 	case KCGColorConversionTransformFromSpace:
@@ -254,6 +262,8 @@ const (
 	KCGRenderingIntentSaturation CGColorRenderingIntent = 4
 )
 
+// String returns the CGColorRenderingIntent constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGColorRenderingIntent) String() string {
 	switch e {
 	case KCGRenderingIntentDefault:
@@ -295,6 +305,8 @@ const (
 	KCGColorSpaceModelXYZ CGColorSpaceModel = 7
 )
 
+// String returns the CGColorSpaceModel constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGColorSpaceModel) String() string {
 	switch e {
 	case KCGColorSpaceModelUnknown:
@@ -332,6 +344,8 @@ const (
 	KCGConfigurePermanently CGConfigureOption = 2
 )
 
+// String returns the CGConfigureOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGConfigureOption) String() string {
 	var parts []string
 	if e&KCGConfigureForSession != 0 {
@@ -374,6 +388,8 @@ const (
 	KCGErrorNoneAvailable CGError = 1011
 )
 
+// String returns the CGError constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGError) String() string {
 	switch e {
 	case KCGErrorSuccess:
@@ -527,6 +543,8 @@ const (
 	KCGScrollWheelEventRawDeltaAxis2                           CGEventField = 177
 )
 
+// String returns the CGEventField constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventField) String() string {
 	switch e {
 	case KCGMouseEventNumber:
@@ -674,6 +692,8 @@ const (
 	KCGEventFilterMaskPermitSystemDefinedEvents CGEventFilterMask = 4
 )
 
+// String returns the CGEventFilterMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventFilterMask) String() string {
 	var parts []string
 	if e&KCGEventFilterMaskPermitLocalMouseEvents != 0 {
@@ -716,6 +736,8 @@ const (
 	KCGEventFlagMaskNonCoalesced CGEventFlags = 256
 )
 
+// String returns the CGEventFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventFlags) String() string {
 	var parts []string
 	if e&KCGEventFlagMaskAlphaShift != 0 {
@@ -763,6 +785,8 @@ const (
 	KCGEventSourceStateHIDSystemState CGEventSourceStateID = 1
 )
 
+// String returns the CGEventSourceStateID constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventSourceStateID) String() string {
 	switch e {
 	case KCGEventSourceStatePrivate:
@@ -787,6 +811,8 @@ const (
 	KCGNumberOfEventSuppressionStates       CGEventSuppressionState = 2
 )
 
+// String returns the CGEventSuppressionState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventSuppressionState) String() string {
 	switch e {
 	case KCGEventSuppressionStateSuppressionInterval:
@@ -812,6 +838,8 @@ const (
 	KCGAnnotatedSessionEventTap CGEventTapLocation = 2
 )
 
+// String returns the CGEventTapLocation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventTapLocation) String() string {
 	switch e {
 	case KCGHIDEventTap:
@@ -833,6 +861,8 @@ const (
 	KCGEventTapOptionListenOnly CGEventTapOptions = 1
 )
 
+// String returns the CGEventTapOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventTapOptions) String() string {
 	switch e {
 	case KCGEventTapOptionDefault:
@@ -854,6 +884,8 @@ const (
 	KCGTailAppendEventTap CGEventTapPlacement = 1
 )
 
+// String returns the CGEventTapPlacement constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventTapPlacement) String() string {
 	switch e {
 	case KCGHeadInsertEventTap:
@@ -909,6 +941,8 @@ const (
 	KCGEventTapDisabledByUserInput CGEventType = 4294967295
 )
 
+// String returns the CGEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGEventType) String() string {
 	switch e {
 	case KCGEventNull:
@@ -966,6 +1000,8 @@ const (
 	KCGFontPostScriptFormatType42 CGFontPostScriptFormat = 42
 )
 
+// String returns the CGFontPostScriptFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGFontPostScriptFormat) String() string {
 	switch e {
 	case KCGFontPostScriptFormatType1:
@@ -990,6 +1026,8 @@ const (
 	KCGGradientDrawsAfterEndLocation CGGradientDrawingOptions = 2
 )
 
+// String returns the CGGradientDrawingOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGGradientDrawingOptions) String() string {
 	var parts []string
 	if e&KCGGradientDrawsBeforeStartLocation != 0 {
@@ -1026,6 +1064,8 @@ const (
 	KCGImageAlphaOnly CGImageAlphaInfo = 7
 )
 
+// String returns the CGImageAlphaInfo constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGImageAlphaInfo) String() string {
 	switch e {
 	case KCGImageAlphaNone:
@@ -1062,6 +1102,8 @@ const (
 	KCGImageByteOrder32Host   CGImageByteOrderInfo = 8192
 )
 
+// String returns the CGImageByteOrderInfo constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGImageByteOrderInfo) String() string {
 	switch e {
 	case KCGImageByteOrderMask:
@@ -1088,6 +1130,8 @@ const (
 	KCGImageComponentFloat   CGImageComponentInfo = 256
 )
 
+// String returns the CGImageComponentInfo constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGImageComponentInfo) String() string {
 	switch e {
 	case KCGImageComponentInteger:
@@ -1110,6 +1154,8 @@ const (
 	KCGImagePixelFormatRGBCIF10  CGImagePixelFormatInfo = 262144
 )
 
+// String returns the CGImagePixelFormatInfo constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGImagePixelFormatInfo) String() string {
 	switch e {
 	case KCGImagePixelFormatMask:
@@ -1145,6 +1191,8 @@ const (
 	KCGInterpolationHigh CGInterpolationQuality = 3
 )
 
+// String returns the CGInterpolationQuality constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGInterpolationQuality) String() string {
 	switch e {
 	case KCGInterpolationDefault:
@@ -1174,6 +1222,8 @@ const (
 	KCGLineCapSquare CGLineCap = 2
 )
 
+// String returns the CGLineCap constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGLineCap) String() string {
 	switch e {
 	case KCGLineCapButt:
@@ -1198,6 +1248,8 @@ const (
 	KCGLineJoinBevel CGLineJoin = 2
 )
 
+// String returns the CGLineJoin constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGLineJoin) String() string {
 	switch e {
 	case KCGLineJoinMiter:
@@ -1220,6 +1272,8 @@ const (
 	KCGMouseButtonCenter CGMouseButton = 2
 )
 
+// String returns the CGMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGMouseButton) String() string {
 	switch e {
 	case KCGMouseButtonLeft:
@@ -1247,6 +1301,8 @@ const (
 	KCGPDFAllowsFormFieldEntry       CGPDFAccessPermissions = 128
 )
 
+// String returns the CGPDFAccessPermissions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGPDFAccessPermissions) String() string {
 	var parts []string
 	if e&KCGPDFAllowsLowQualityPrinting != 0 {
@@ -1295,6 +1351,8 @@ const (
 	KCGPDFArtBox CGPDFBox = 4
 )
 
+// String returns the CGPDFBox constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGPDFBox) String() string {
 	switch e {
 	case KCGPDFMediaBox:
@@ -1309,31 +1367,6 @@ func (e CGPDFBox) String() string {
 		return "KCGPDFArtBox"
 	default:
 		return fmt.Sprintf("CGPDFBox(%d)", int64(e))
-	}
-}
-
-// The encoding format of PDF data.
-type CGPDFDataFormat int64
-
-const (
-	// The data stream is not encoded.
-	CGPDFDataFormatRaw CGPDFDataFormat = 0
-	// The data stream is encoded in JPEG format.
-	CGPDFDataFormatJPEGEncoded CGPDFDataFormat = 1
-	// The data stream is encoded in JPEG-2000 format.
-	CGPDFDataFormatJPEG2000 CGPDFDataFormat = 2
-)
-
-func (e CGPDFDataFormat) String() string {
-	switch e {
-	case CGPDFDataFormatRaw:
-		return "CGPDFDataFormatRaw"
-	case CGPDFDataFormatJPEGEncoded:
-		return "CGPDFDataFormatJPEGEncoded"
-	case CGPDFDataFormatJPEG2000:
-		return "CGPDFDataFormatJPEG2000"
-	default:
-		return fmt.Sprintf("CGPDFDataFormat(%d)", int64(e))
 	}
 }
 
@@ -1361,6 +1394,8 @@ const (
 	KCGPDFObjectTypeStream CGPDFObjectType = 9
 )
 
+// String returns the CGPDFObjectType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGPDFObjectType) String() string {
 	switch e {
 	case KCGPDFObjectTypeNull:
@@ -1441,6 +1476,8 @@ const (
 	CGPDFTagTypeObject             CGPDFTagType = 800
 )
 
+// String returns the CGPDFTagType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGPDFTagType) String() string {
 	switch e {
 	case CGPDFTagTypeDocument:
@@ -1564,6 +1601,8 @@ const (
 	KCGPathEOFillStroke CGPathDrawingMode = 4
 )
 
+// String returns the CGPathDrawingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGPathDrawingMode) String() string {
 	switch e {
 	case KCGPathFill:
@@ -1581,31 +1620,6 @@ func (e CGPathDrawingMode) String() string {
 	}
 }
 
-// Different methods for rendering a tiled pattern.
-type CGPatternTiling int64
-
-const (
-	// The pattern cell is not distorted when painted.The spacing between pattern cells may vary by as much as 1 devicepixel.
-	KCGPatternTilingNoDistortion CGPatternTiling = 0
-	// Pattern cells are spaced consistently. Thepattern cell may be distorted by as much as 1 device pixel whenthe pattern is painted.
-	KCGPatternTilingConstantSpacingMinimalDistortion CGPatternTiling = 1
-	// Pattern cells are spaced consistently, as with kCGPatternTilingConstantSpacingMinimalDistortion.The pattern cell may be distorted additionally to permit a moreefficient implementation.
-	KCGPatternTilingConstantSpacing CGPatternTiling = 2
-)
-
-func (e CGPatternTiling) String() string {
-	switch e {
-	case KCGPatternTilingNoDistortion:
-		return "KCGPatternTilingNoDistortion"
-	case KCGPatternTilingConstantSpacingMinimalDistortion:
-		return "KCGPatternTilingConstantSpacingMinimalDistortion"
-	case KCGPatternTilingConstantSpacing:
-		return "KCGPatternTilingConstantSpacing"
-	default:
-		return fmt.Sprintf("CGPatternTiling(%d)", int64(e))
-	}
-}
-
 // Types of screen-update operations.
 // Bitmask — values may be combined with |.
 type CGScreenUpdateOperation int64
@@ -1618,6 +1632,8 @@ const (
 	KCGScreenUpdateOperationReducedDirtyRectangleCount CGScreenUpdateOperation = 2147483648
 )
 
+// String returns the CGScreenUpdateOperation constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGScreenUpdateOperation) String() string {
 	var parts []string
 	if e&KCGScreenUpdateOperationMove != 0 {
@@ -1642,6 +1658,8 @@ const (
 	KCGScrollEventUnitLine CGScrollEventUnit = 1
 )
 
+// String returns the CGScrollEventUnit constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGScrollEventUnit) String() string {
 	switch e {
 	case KCGScrollEventUnitPixel:
@@ -1675,6 +1693,8 @@ const (
 	KCGTextClip CGTextDrawingMode = 7
 )
 
+// String returns the CGTextDrawingMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGTextDrawingMode) String() string {
 	switch e {
 	case KCGTextFill:
@@ -1710,6 +1730,8 @@ const (
 	KCGEncodingMacRoman CGTextEncoding = 1
 )
 
+// String returns the CGTextEncoding constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGTextEncoding) String() string {
 	switch e {
 	case KCGEncodingFontSpecific:
@@ -1732,6 +1754,8 @@ const (
 	KCGToneMappingNone                     CGToneMapping = 5
 )
 
+// String returns the CGToneMapping constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGToneMapping) String() string {
 	switch e {
 	case KCGToneMappingDefault:
@@ -1766,6 +1790,8 @@ const (
 	KCGWindowImageNominalResolution CGWindowImageOption = 16
 )
 
+// String returns the CGWindowImageOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGWindowImageOption) String() string {
 	var parts []string
 	if e&KCGWindowImageBoundsIgnoreFraming != 0 {
@@ -1817,6 +1843,8 @@ const (
 	KCGNumberOfWindowLevelKeys         CGWindowLevelKey = 21
 )
 
+// String returns the CGWindowLevelKey constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGWindowLevelKey) String() string {
 	switch e {
 	case KCGBaseWindowLevelKey:
@@ -1881,6 +1909,8 @@ const (
 	KCGWindowListExcludeDesktopElements    CGWindowListOption = 16
 )
 
+// String returns the CGWindowListOption constant's name, or its numeric form when the
+// value is not a known constant.
 func (e CGWindowListOption) String() string {
 	var parts []string
 	if e&KCGWindowListOptionOnScreenOnly != 0 {

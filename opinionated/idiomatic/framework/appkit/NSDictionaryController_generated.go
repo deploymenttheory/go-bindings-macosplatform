@@ -5,394 +5,297 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A bindings-compatible controller that manages the display and editing of a dictionary of key-value pairs.
+// DictionaryController is an idiomatic wrapper over the Objective-C class NSDictionaryController.
 //
-// DictionaryController wraps [raw.NSDictionaryController] with a fluent Go API.
+// It embeds [ArrayController], promoting that type's methods.
+//
+// A bindings-compatible controller that manages the display and editing of a dictionary of key-value pairs.
 type DictionaryController struct {
-	inner *raw.NSDictionaryController
+	ArrayController
 }
 
-// Unwrap returns the underlying [raw.NSDictionaryController].
-func (x *DictionaryController) Unwrap() *raw.NSDictionaryController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DictionaryController) ID() objc.ID { return x.inner.Ptr() }
-
-// DictionaryControllerFromID adopts an existing object pointer as a DictionaryController (nil for 0).
+// DictionaryControllerFromID adopts an existing Objective-C object as a DictionaryController
+// (nil for 0), retaining it and registering a release finalizer.
 func DictionaryControllerFromID(id objc.ID) *DictionaryController {
 	if id == 0 {
 		return nil
 	}
-	return &DictionaryController{inner: raw.NSDictionaryControllerFromID(id)}
+	x := &DictionaryController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDictionaryController creates a new [DictionaryController].
+// dictionaryControllerAdopt wraps an Objective-C object that this code just created as a
+// DictionaryController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dictionaryControllerAdopt(id objc.ID) *DictionaryController {
+	if id == 0 {
+		return nil
+	}
+	x := &DictionaryController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDictionaryController creates a new DictionaryController.
 func NewDictionaryController() *DictionaryController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionaryController")), objc.RegisterName("new"))
-	return &DictionaryController{inner: raw.NSDictionaryControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDictionaryController")), objc.RegisterName("new"))
+	return dictionaryControllerAdopt(_id)
 }
 
-// The string used as the initial key name for a newly inserted item.
-//
-// WithInitialKey sets the initialKey property and returns the receiver for chaining.
+// WithInitialKey the string used as the initial key name for a newly inserted item.
 func (x *DictionaryController) WithInitialKey(initialKey string) *DictionaryController {
-	x.inner.SetInitialKey(foundation.NSStringStringWithUTF8String(initialKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialKey:"), purego.NSString(initialKey))
 	return x
 }
 
-// The string used as the initial value for a newly inserted item.
-//
-// WithInitialValue sets the initialValue property and returns the receiver for chaining.
-func (x *DictionaryController) WithInitialValue(initialValue objc.ID) *DictionaryController {
-	x.inner.SetInitialValue(initialValue)
+// WithInitialValue the string used as the initial value for a newly inserted item.
+func (x *DictionaryController) WithInitialValue(initialValue obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialValue:"), objref.IDOf(initialValue))
 	return x
 }
 
-// The key names that are represented by a key-value pair, even if they are not present in the receiver’s content dictionary.
-//
-// WithIncludedKeys sets the collection, converting the Go slice to an NSArray.
-func (x *DictionaryController) WithIncludedKeys(items ...*foundation.NSString) *DictionaryController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetIncludedKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetIncludedKeys(_arr)
+// WithIncludedKeys the key names that are represented by a key-value pair, even if they are not present in the receiver’s content dictionary.
+func (x *DictionaryController) WithIncludedKeys(items ...obj.Object) *DictionaryController {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedKeys:"), _arr)
 	return x
 }
 
-// The key names that are never displayed in the user interface items bound to the receiver.
-//
-// WithExcludedKeys sets the collection, converting the Go slice to an NSArray.
-func (x *DictionaryController) WithExcludedKeys(items ...*foundation.NSString) *DictionaryController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExcludedKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExcludedKeys(_arr)
+// WithExcludedKeys the key names that are never displayed in the user interface items bound to the receiver.
+func (x *DictionaryController) WithExcludedKeys(items ...obj.Object) *DictionaryController {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedKeys:"), _arr)
 	return x
 }
 
-// The localized key names that are displayed by the receiver in place of the key names.
-//
-// WithLocalizedKeyDictionary sets the localizedKeyDictionary property and returns the receiver for chaining.
-func (x *DictionaryController) WithLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *DictionaryController {
-	x.inner.SetLocalizedKeyDictionary(localizedKeyDictionary)
+// WithLocalizedKeyDictionary the localized key names that are displayed by the receiver in place of the key names.
+func (x *DictionaryController) WithLocalizedKeyDictionary(localizedKeyDictionary obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKeyDictionary:"), objref.IDOf(localizedKeyDictionary))
 	return x
 }
 
-// the strings file used to localize key names.
-//
-// WithLocalizedKeyTable sets the localizedKeyTable property and returns the receiver for chaining.
+// WithLocalizedKeyTable the strings file used to localize key names.
 func (x *DictionaryController) WithLocalizedKeyTable(localizedKeyTable string) *DictionaryController {
-	x.inner.SetLocalizedKeyTable(foundation.NSStringStringWithUTF8String(localizedKeyTable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKeyTable:"), purego.NSString(localizedKeyTable))
 	return x
 }
 
-// A Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
-//
-// WithAutomaticallyRearrangesObjects sets the automaticallyRearrangesObjects property and returns the receiver for chaining.
+// WithAutomaticallyRearrangesObjects a Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
 func (x *DictionaryController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *DictionaryController {
-	x.inner.NSArrayController.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyRearrangesObjects:"), automaticallyRearrangesObjects)
 	return x
 }
 
-// An array of sort descriptor objects, used by the receiver to arrange its content.
-//
-// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
-func (x *DictionaryController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *DictionaryController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSArrayController.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSArrayController.SetSortDescriptors(_arr)
+// WithSortDescriptors an array of sort descriptor objects, used by the receiver to arrange its content.
+func (x *DictionaryController) WithSortDescriptors(items ...obj.Object) *DictionaryController {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
-// A predicate used by the receiver to filter the array controller contents
-//
-// WithFilterPredicate sets the filterPredicate property and returns the receiver for chaining.
-func (x *DictionaryController) WithFilterPredicate(filterPredicate *foundation.NSPredicate) *DictionaryController {
-	x.inner.NSArrayController.SetFilterPredicate(filterPredicate)
+// WithFilterPredicate a predicate used by the receiver to filter the array controller contents
+func (x *DictionaryController) WithFilterPredicate(filterPredicate obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
-//
-// WithClearsFilterPredicateOnInsertion sets the clearsFilterPredicateOnInsertion property and returns the receiver for chaining.
+// WithClearsFilterPredicateOnInsertion a Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
 func (x *DictionaryController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *DictionaryController {
-	x.inner.NSArrayController.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearsFilterPredicateOnInsertion:"), clearsFilterPredicateOnInsertion)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
-//
-// WithAvoidsEmptySelection sets the avoidsEmptySelection property and returns the receiver for chaining.
+// WithAvoidsEmptySelection a Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
 func (x *DictionaryController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *DictionaryController {
-	x.inner.NSArrayController.SetAvoidsEmptySelection(avoidsEmptySelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvoidsEmptySelection:"), avoidsEmptySelection)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
-//
-// WithPreservesSelection sets the preservesSelection property and returns the receiver for chaining.
+// WithPreservesSelection a Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
 func (x *DictionaryController) WithPreservesSelection(preservesSelection bool) *DictionaryController {
-	x.inner.NSArrayController.SetPreservesSelection(preservesSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesSelection:"), preservesSelection)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver automatically selects inserted objects
-//
-// WithSelectsInsertedObjects sets the selectsInsertedObjects property and returns the receiver for chaining.
+// WithSelectsInsertedObjects a Boolean value that indicates whether the receiver automatically selects inserted objects
 func (x *DictionaryController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *DictionaryController {
-	x.inner.NSArrayController.SetSelectsInsertedObjects(selectsInsertedObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectsInsertedObjects:"), selectsInsertedObjects)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
-//
-// WithAlwaysUsesMultipleValuesMarker sets the alwaysUsesMultipleValuesMarker property and returns the receiver for chaining.
+// WithAlwaysUsesMultipleValuesMarker a Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
 func (x *DictionaryController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *DictionaryController {
-	x.inner.NSArrayController.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysUsesMultipleValuesMarker:"), alwaysUsesMultipleValuesMarker)
 	return x
 }
 
-// An index set containing the indexes of the receiver’s currently selected objects in the content array
-//
-// WithSelectionIndexes sets the selectionIndexes property and returns the receiver for chaining.
-func (x *DictionaryController) WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *DictionaryController {
-	x.inner.NSArrayController.SetSelectionIndexes(selectionIndexes)
+// WithSelectionIndexes an index set containing the indexes of the receiver’s currently selected objects in the content array
+func (x *DictionaryController) WithSelectionIndexes(selectionIndexes obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
 	return x
 }
 
-// The index of the first object in the receiver’s selection
-//
-// WithSelectionIndex sets the selectionIndex property and returns the receiver for chaining.
-func (x *DictionaryController) WithSelectionIndex(selectionIndex uint) *DictionaryController {
-	x.inner.NSArrayController.SetSelectionIndex(selectionIndex)
+// WithSelectionIndex the index of the first object in the receiver’s selection
+func (x *DictionaryController) WithSelectionIndex(selectionIndex int) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndex:"), selectionIndex)
 	return x
 }
 
-// The receiver’s content object.
-//
-// WithContent sets the content property and returns the receiver for chaining.
-func (x *DictionaryController) WithContent(content objc.ID) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetContent(content)
+// WithContent the receiver’s content object.
+func (x *DictionaryController) WithContent(content obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return x
 }
 
-// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
-//
-// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+// WithAutomaticallyPreparesContent a Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
 func (x *DictionaryController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
 	return x
 }
 
-// The object class to use when creating new objects.
-//
-// WithObjectClass sets the objectClass property and returns the receiver for chaining.
-func (x *DictionaryController) WithObjectClass(objectClass objc.Class) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetObjectClass(objectClass)
-	return x
-}
-
-// A Boolean that indicates whether the receiver allows adding and removing objects.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean that indicates whether the receiver allows adding and removing objects.
 func (x *DictionaryController) WithEditable(editable bool) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// The receiver’s managed object context.
-//
-// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
-func (x *DictionaryController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetManagedObjectContext(managedObjectContext)
+// WithManagedObjectContext the receiver’s managed object context.
+func (x *DictionaryController) WithManagedObjectContext(managedObjectContext obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return x
 }
 
-// The entity name used by the receiver to create new objects.
-//
-// WithEntityName sets the entityName property and returns the receiver for chaining.
+// WithEntityName the entity name used by the receiver to create new objects.
 func (x *DictionaryController) WithEntityName(entityName string) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
 	return x
 }
 
-// The receiver’s fetch predicate.
-//
-// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
-func (x *DictionaryController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetFetchPredicate(fetchPredicate)
+// WithFetchPredicate the receiver’s fetch predicate.
+func (x *DictionaryController) WithFetchPredicate(fetchPredicate obj.Object) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return x
 }
 
-// A Boolean that indicates whether the receiver uses lazy fetching.
-//
-// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+// WithUsesLazyFetching a Boolean that indicates whether the receiver uses lazy fetching.
 func (x *DictionaryController) WithUsesLazyFetching(usesLazyFetching bool) *DictionaryController {
-	x.inner.NSArrayController.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
 	return x
 }
 
-// SetInitialKey calls the underlying SetInitialKey.
+// SetInitialKey wraps the corresponding Objective-C method.
 func (x *DictionaryController) SetInitialKey(initialKey string) {
-	x.inner.SetInitialKey(foundation.NSStringStringWithUTF8String(initialKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialKey:"), purego.NSString(initialKey))
 }
 
-// SetInitialValue calls the underlying SetInitialValue.
-func (x *DictionaryController) SetInitialValue(initialValue objc.ID) {
-	x.inner.SetInitialValue(initialValue)
+// SetInitialValue wraps the corresponding Objective-C method.
+func (x *DictionaryController) SetInitialValue(initialValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialValue:"), objref.IDOf(initialValue))
 }
 
+// IncludedKeys wraps the corresponding Objective-C method.
+//
 // IncludedKeys returns the collection as a Go slice.
 func (x *DictionaryController) IncludedKeys() []string {
-	arr := x.inner.IncludedKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("includedKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetIncludedKeys calls the underlying SetIncludedKeys.
-func (x *DictionaryController) SetIncludedKeys(includedKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetIncludedKeys(includedKeys)
+// SetIncludedKeys wraps the corresponding Objective-C method.
+func (x *DictionaryController) SetIncludedKeys(includedKeys []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedKeys:"), purego.SliceToNSArray(includedKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
+// ExcludedKeys wraps the corresponding Objective-C method.
+//
 // ExcludedKeys returns the collection as a Go slice.
 func (x *DictionaryController) ExcludedKeys() []string {
-	arr := x.inner.ExcludedKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetExcludedKeys calls the underlying SetExcludedKeys.
-func (x *DictionaryController) SetExcludedKeys(excludedKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetExcludedKeys(excludedKeys)
+// SetExcludedKeys wraps the corresponding Objective-C method.
+func (x *DictionaryController) SetExcludedKeys(excludedKeys []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedKeys:"), purego.SliceToNSArray(excludedKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// LocalizedKeyDictionary calls the underlying LocalizedKeyDictionary.
-func (x *DictionaryController) LocalizedKeyDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.LocalizedKeyDictionary()
+// LocalizedKeyDictionary wraps the corresponding Objective-C method.
+func (x *DictionaryController) LocalizedKeyDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedKeyDictionary"))
+	return obj.Wrap(_r)
 }
 
-// SetLocalizedKeyDictionary calls the underlying SetLocalizedKeyDictionary.
-func (x *DictionaryController) SetLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	x.inner.SetLocalizedKeyDictionary(localizedKeyDictionary)
+// SetLocalizedKeyDictionary wraps the corresponding Objective-C method.
+func (x *DictionaryController) SetLocalizedKeyDictionary(localizedKeyDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKeyDictionary:"), objref.IDOf(localizedKeyDictionary))
 }
 
-// LocalizedKeyTable calls the underlying LocalizedKeyTable.
+// LocalizedKeyTable wraps the corresponding Objective-C method.
 func (x *DictionaryController) LocalizedKeyTable() string {
-	_r := x.inner.LocalizedKeyTable()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedKeyTable"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedKeyTable calls the underlying SetLocalizedKeyTable.
+// SetLocalizedKeyTable wraps the corresponding Objective-C method.
 func (x *DictionaryController) SetLocalizedKeyTable(localizedKeyTable string) {
-	x.inner.SetLocalizedKeyTable(foundation.NSStringStringWithUTF8String(localizedKeyTable))
-}
-
-func (x *DictionaryController) asArrayController() *raw.NSArrayController {
-	return &x.inner.NSArrayController
-}
-
-func (x *DictionaryController) asObjectController() *raw.NSObjectController {
-	return &x.inner.NSArrayController.NSObjectController
-}
-
-func (x *DictionaryController) asController() *raw.NSController {
-	return &x.inner.NSArrayController.NSObjectController.NSController
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKeyTable:"), purego.NSString(localizedKeyTable))
 }
 
 // DictionaryControllerable is the interface implemented by [DictionaryController], for mocking and DI.
 type DictionaryControllerable interface {
-	Unwrap() *raw.NSDictionaryController
+	obj.Object
 	WithInitialKey(initialKey string) *DictionaryController
-	WithInitialValue(initialValue objc.ID) *DictionaryController
-	WithIncludedKeys(items ...*foundation.NSString) *DictionaryController
-	WithExcludedKeys(items ...*foundation.NSString) *DictionaryController
-	WithLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *DictionaryController
+	WithInitialValue(initialValue obj.Object) *DictionaryController
+	WithIncludedKeys(items ...obj.Object) *DictionaryController
+	WithExcludedKeys(items ...obj.Object) *DictionaryController
+	WithLocalizedKeyDictionary(localizedKeyDictionary obj.Object) *DictionaryController
 	WithLocalizedKeyTable(localizedKeyTable string) *DictionaryController
 	WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *DictionaryController
-	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *DictionaryController
-	WithFilterPredicate(filterPredicate *foundation.NSPredicate) *DictionaryController
+	WithSortDescriptors(items ...obj.Object) *DictionaryController
+	WithFilterPredicate(filterPredicate obj.Object) *DictionaryController
 	WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *DictionaryController
 	WithAvoidsEmptySelection(avoidsEmptySelection bool) *DictionaryController
 	WithPreservesSelection(preservesSelection bool) *DictionaryController
 	WithSelectsInsertedObjects(selectsInsertedObjects bool) *DictionaryController
 	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *DictionaryController
-	WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *DictionaryController
-	WithSelectionIndex(selectionIndex uint) *DictionaryController
-	WithContent(content objc.ID) *DictionaryController
+	WithSelectionIndexes(selectionIndexes obj.Object) *DictionaryController
+	WithSelectionIndex(selectionIndex int) *DictionaryController
+	WithContent(content obj.Object) *DictionaryController
 	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *DictionaryController
-	WithObjectClass(objectClass objc.Class) *DictionaryController
 	WithEditable(editable bool) *DictionaryController
-	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *DictionaryController
+	WithManagedObjectContext(managedObjectContext obj.Object) *DictionaryController
 	WithEntityName(entityName string) *DictionaryController
-	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *DictionaryController
+	WithFetchPredicate(fetchPredicate obj.Object) *DictionaryController
 	WithUsesLazyFetching(usesLazyFetching bool) *DictionaryController
 	SetInitialKey(initialKey string)
-	SetInitialValue(initialValue objc.ID)
+	SetInitialValue(initialValue obj.Object)
 	IncludedKeys() []string
-	SetIncludedKeys(includedKeys *foundation.NSArray[*foundation.NSString])
+	SetIncludedKeys(includedKeys []string)
 	ExcludedKeys() []string
-	SetExcludedKeys(excludedKeys *foundation.NSArray[*foundation.NSString])
-	LocalizedKeyDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
-	SetLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	SetExcludedKeys(excludedKeys []string)
+	LocalizedKeyDictionary() obj.Object
+	SetLocalizedKeyDictionary(localizedKeyDictionary obj.Object)
 	LocalizedKeyTable() string
 	SetLocalizedKeyTable(localizedKeyTable string)
 }
 
 var _ DictionaryControllerable = (*DictionaryController)(nil)
+
+var _ ArrayControllerProvider = (*DictionaryController)(nil)
+
+var _ ObjectControllerProvider = (*DictionaryController)(nil)
+
+var _ ControllerProvider = (*DictionaryController)(nil)

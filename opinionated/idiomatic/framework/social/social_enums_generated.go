@@ -9,30 +9,32 @@ import (
 )
 
 // Indicates the request method used in the request.
-type SLRequestMethod int64
+type RequestMethod int64
 
 const (
 	// Requests information from the specified resource.
-	SLRequestMethodGET SLRequestMethod = 0
+	RequestMethodGET RequestMethod = 0
 	// Submits data to be processed.
-	SLRequestMethodPOST SLRequestMethod = 1
+	RequestMethodPOST RequestMethod = 1
 	// Deletes the specified resource.
-	SLRequestMethodDELETE SLRequestMethod = 2
+	RequestMethodDELETE RequestMethod = 2
 	// Uses a PUT request to submit the data.
-	SLRequestMethodPUT SLRequestMethod = 3
+	RequestMethodPUT RequestMethod = 3
 )
 
-func (e SLRequestMethod) String() string {
+// String returns the RequestMethod constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RequestMethod) String() string {
 	switch e {
-	case SLRequestMethodGET:
-		return "SLRequestMethodGET"
-	case SLRequestMethodPOST:
-		return "SLRequestMethodPOST"
-	case SLRequestMethodDELETE:
-		return "SLRequestMethodDELETE"
-	case SLRequestMethodPUT:
-		return "SLRequestMethodPUT"
+	case RequestMethodGET:
+		return "RequestMethodGET"
+	case RequestMethodPOST:
+		return "RequestMethodPOST"
+	case RequestMethodDELETE:
+		return "RequestMethodDELETE"
+	case RequestMethodPUT:
+		return "RequestMethodPUT"
 	default:
-		return fmt.Sprintf("SLRequestMethod(%d)", int64(e))
+		return fmt.Sprintf("RequestMethod(%d)", int64(e))
 	}
 }

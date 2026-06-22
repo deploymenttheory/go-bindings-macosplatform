@@ -5,93 +5,89 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to add a background to a section of a collection view.
+// CollectionLayoutDecorationItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutDecorationItem.
 //
-// CollectionLayoutDecorationItem wraps [raw.NSCollectionLayoutDecorationItem] with a fluent Go API.
+// It embeds [CollectionLayoutItem], promoting that type's methods.
+//
+// An object used to add a background to a section of a collection view.
 type CollectionLayoutDecorationItem struct {
-	inner *raw.NSCollectionLayoutDecorationItem
+	CollectionLayoutItem
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutDecorationItem].
-func (x *CollectionLayoutDecorationItem) Unwrap() *raw.NSCollectionLayoutDecorationItem {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutDecorationItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutDecorationItemFromID adopts an existing object pointer as a CollectionLayoutDecorationItem (nil for 0).
+// CollectionLayoutDecorationItemFromID adopts an existing Objective-C object as a CollectionLayoutDecorationItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutDecorationItemFromID(id objc.ID) *CollectionLayoutDecorationItem {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutDecorationItem{inner: raw.NSCollectionLayoutDecorationItemFromID(id)}
+	x := &CollectionLayoutDecorationItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutDecorationItem creates a new [CollectionLayoutDecorationItem].
+// collectionLayoutDecorationItemAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutDecorationItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutDecorationItemAdopt(id objc.ID) *CollectionLayoutDecorationItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutDecorationItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCollectionLayoutDecorationItem creates a new CollectionLayoutDecorationItem.
 func NewCollectionLayoutDecorationItem() *CollectionLayoutDecorationItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutDecorationItem")), objc.RegisterName("new"))
-	return &CollectionLayoutDecorationItem{inner: raw.NSCollectionLayoutDecorationItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDecorationItem")), objc.RegisterName("new"))
+	return collectionLayoutDecorationItemAdopt(_id)
 }
 
-// The vertical stacking order of the decoration item in relation to other items in the section.
-//
-// WithZIndex sets the zIndex property and returns the receiver for chaining.
+// WithZIndex the vertical stacking order of the decoration item in relation to other items in the section.
 func (x *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayoutDecorationItem {
-	x.inner.SetZIndex(zIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 	return x
 }
 
-// The amount of space added around the content of the item to adjust its final size after its position is computed.
-//
-// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
-func (x *CollectionLayoutDecorationItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem {
-	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
-	return x
-}
-
-// The amount of space added around the boundaries of the item between other items and this item’s container.
-//
-// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
 func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
-	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
-// ZIndex calls the underlying ZIndex.
+// ZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDecorationItem) ZIndex() int {
-	return x.inner.ZIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+	return _r
 }
 
-// SetZIndex calls the underlying SetZIndex.
+// SetZIndex wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDecorationItem) SetZIndex(zIndex int) {
-	x.inner.SetZIndex(zIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 }
 
-// ElementKind calls the underlying ElementKind.
+// ElementKind wraps the corresponding Objective-C method.
 func (x *CollectionLayoutDecorationItem) ElementKind() string {
-	_r := x.inner.ElementKind()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementKind"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *CollectionLayoutDecorationItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
-	return &x.inner.NSCollectionLayoutItem
+	return purego.GoString(_r)
 }
 
 // CollectionLayoutDecorationItemable is the interface implemented by [CollectionLayoutDecorationItem], for mocking and DI.
 type CollectionLayoutDecorationItemable interface {
-	Unwrap() *raw.NSCollectionLayoutDecorationItem
+	obj.Object
 	WithZIndex(zIndex int) *CollectionLayoutDecorationItem
-	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem
 	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem
 	ZIndex() int
 	SetZIndex(zIndex int)
@@ -99,3 +95,5 @@ type CollectionLayoutDecorationItemable interface {
 }
 
 var _ CollectionLayoutDecorationItemable = (*CollectionLayoutDecorationItem)(nil)
+
+var _ CollectionLayoutItemProvider = (*CollectionLayoutDecorationItem)(nil)

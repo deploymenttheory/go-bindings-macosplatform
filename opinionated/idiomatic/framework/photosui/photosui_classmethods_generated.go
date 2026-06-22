@@ -5,151 +5,97 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/ebitengine/purego/objc"
 )
 
-// PlaybackStyleFilter calls the underlying PHPickerFilterPlaybackStyleFilter.
-func PlaybackStyleFilter(playbackStyle photos.PHAssetPlaybackStyle) *PickerFilter {
-	_r := raw.PHPickerFilterPlaybackStyleFilter(playbackStyle)
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+// AnyFilterMatchingSubfilters returns a new filter formed by OR-ing the filters in a given array.
+func AnyFilterMatchingSubfilters(subfilters []*PickerFilter) *PickerFilter {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("anyFilterMatchingSubfilters:"), purego.SliceToNSArray(subfilters, func(_v *PickerFilter) objc.ID { return objref.IDOf(_v) }))
+	return PickerFilterFromID(_r)
 }
 
-// AnyFilterMatchingSubfilters calls the underlying PHPickerFilterAnyFilterMatchingSubfilters.
-func AnyFilterMatchingSubfilters(subfilters *foundation.NSArray[*raw.PHPickerFilter]) *PickerFilter {
-	_r := raw.PHPickerFilterAnyFilterMatchingSubfilters(subfilters)
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+// AllFilterMatchingSubfilters returns a new filter formed by AND-ing the filters in a given array.
+func AllFilterMatchingSubfilters(subfilters []*PickerFilter) *PickerFilter {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("allFilterMatchingSubfilters:"), purego.SliceToNSArray(subfilters, func(_v *PickerFilter) objc.ID { return objref.IDOf(_v) }))
+	return PickerFilterFromID(_r)
 }
 
-// AllFilterMatchingSubfilters calls the underlying PHPickerFilterAllFilterMatchingSubfilters.
-func AllFilterMatchingSubfilters(subfilters *foundation.NSArray[*raw.PHPickerFilter]) *PickerFilter {
-	_r := raw.PHPickerFilterAllFilterMatchingSubfilters(subfilters)
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+// NotFilterOfSubfilter returns a new filter formed by negating the given filter.
+func NotFilterOfSubfilter(subfilter *PickerFilter) *PickerFilter {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("notFilterOfSubfilter:"), objref.IDOf(subfilter))
+	return PickerFilterFromID(_r)
 }
 
-// NotFilterOfSubfilter calls the underlying PHPickerFilterNotFilterOfSubfilter.
-func NotFilterOfSubfilter(subfilter *raw.PHPickerFilter) *PickerFilter {
-	_r := raw.PHPickerFilterNotFilterOfSubfilter(subfilter)
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
-}
-
-// ImagesFilter calls the underlying PHPickerFilterImagesFilter.
+// ImagesFilter the filter for images.
 func ImagesFilter() *PickerFilter {
-	_r := raw.PHPickerFilterImagesFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("imagesFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// VideosFilter calls the underlying PHPickerFilterVideosFilter.
+// VideosFilter the filter for videos.
 func VideosFilter() *PickerFilter {
-	_r := raw.PHPickerFilterVideosFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("videosFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// LivePhotosFilter calls the underlying PHPickerFilterLivePhotosFilter.
+// LivePhotosFilter the filter for live photos.
 func LivePhotosFilter() *PickerFilter {
-	_r := raw.PHPickerFilterLivePhotosFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("livePhotosFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// DepthEffectPhotosFilter calls the underlying PHPickerFilterDepthEffectPhotosFilter.
+// DepthEffectPhotosFilter the filter for Depth Effect photos.
 func DepthEffectPhotosFilter() *PickerFilter {
-	_r := raw.PHPickerFilterDepthEffectPhotosFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("depthEffectPhotosFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// BurstsFilter calls the underlying PHPickerFilterBurstsFilter.
+// BurstsFilter the filter for bursts.
 func BurstsFilter() *PickerFilter {
-	_r := raw.PHPickerFilterBurstsFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("burstsFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// PanoramasFilter calls the underlying PHPickerFilterPanoramasFilter.
+// PanoramasFilter the filter for panorama photos.
 func PanoramasFilter() *PickerFilter {
-	_r := raw.PHPickerFilterPanoramasFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("panoramasFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// ScreenshotsFilter calls the underlying PHPickerFilterScreenshotsFilter.
+// ScreenshotsFilter the filter for screenshots.
 func ScreenshotsFilter() *PickerFilter {
-	_r := raw.PHPickerFilterScreenshotsFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("screenshotsFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// ScreenRecordingsFilter calls the underlying PHPickerFilterScreenRecordingsFilter.
+// ScreenRecordingsFilter the filter for screen recordings.
 func ScreenRecordingsFilter() *PickerFilter {
-	_r := raw.PHPickerFilterScreenRecordingsFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("screenRecordingsFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// CinematicVideosFilter calls the underlying PHPickerFilterCinematicVideosFilter.
+// CinematicVideosFilter the filter for Cinematic videos.
 func CinematicVideosFilter() *PickerFilter {
-	_r := raw.PHPickerFilterCinematicVideosFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("cinematicVideosFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// SlomoVideosFilter calls the underlying PHPickerFilterSlomoVideosFilter.
+// SlomoVideosFilter the filter for Slow-Mo videos.
 func SlomoVideosFilter() *PickerFilter {
-	_r := raw.PHPickerFilterSlomoVideosFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("slomoVideosFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// TimelapseVideosFilter calls the underlying PHPickerFilterTimelapseVideosFilter.
+// TimelapseVideosFilter the filter for time-lapse videos.
 func TimelapseVideosFilter() *PickerFilter {
-	_r := raw.PHPickerFilterTimelapseVideosFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("timelapseVideosFilter"))
+	return PickerFilterFromID(_r)
 }
 
-// SpatialMediaFilter calls the underlying PHPickerFilterSpatialMediaFilter.
+// SpatialMediaFilter the filter for spatial media.
 func SpatialMediaFilter() *PickerFilter {
-	_r := raw.PHPickerFilterSpatialMediaFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PickerFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("spatialMediaFilter"))
+	return PickerFilterFromID(_r)
 }

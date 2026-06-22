@@ -5,45 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a time interval associated with an intent.
+// TimeIntervalResolutionResult is an idiomatic wrapper over the Objective-C class INTimeIntervalResolutionResult.
 //
-// TimeIntervalResolutionResult wraps [raw.INTimeIntervalResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a time interval associated with an intent.
 type TimeIntervalResolutionResult struct {
-	inner *raw.INTimeIntervalResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INTimeIntervalResolutionResult].
-func (x *TimeIntervalResolutionResult) Unwrap() *raw.INTimeIntervalResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TimeIntervalResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// TimeIntervalResolutionResultFromID adopts an existing object pointer as a TimeIntervalResolutionResult (nil for 0).
+// TimeIntervalResolutionResultFromID adopts an existing Objective-C object as a TimeIntervalResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func TimeIntervalResolutionResultFromID(id objc.ID) *TimeIntervalResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &TimeIntervalResolutionResult{inner: raw.INTimeIntervalResolutionResultFromID(id)}
+	x := &TimeIntervalResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTimeIntervalResolutionResult creates a new [TimeIntervalResolutionResult].
+// timeIntervalResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// TimeIntervalResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func timeIntervalResolutionResultAdopt(id objc.ID) *TimeIntervalResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &TimeIntervalResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTimeIntervalResolutionResult creates a new TimeIntervalResolutionResult.
 func NewTimeIntervalResolutionResult() *TimeIntervalResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INTimeIntervalResolutionResult")), objc.RegisterName("new"))
-	return &TimeIntervalResolutionResult{inner: raw.INTimeIntervalResolutionResultFromID(_id)}
-}
-
-func (x *TimeIntervalResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INTimeIntervalResolutionResult")), objc.RegisterName("new"))
+	return timeIntervalResolutionResultAdopt(_id)
 }
 
 // TimeIntervalResolutionResultable is the interface implemented by [TimeIntervalResolutionResult], for mocking and DI.
 type TimeIntervalResolutionResultable interface {
-	Unwrap() *raw.INTimeIntervalResolutionResult
+	obj.Object
 }
 
 var _ TimeIntervalResolutionResultable = (*TimeIntervalResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*TimeIntervalResolutionResult)(nil)

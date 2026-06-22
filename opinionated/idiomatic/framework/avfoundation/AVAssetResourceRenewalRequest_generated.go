@@ -5,64 +5,72 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates information about a resource request from a resource loader to renew a previously issued request.
+// AssetResourceRenewalRequest is an idiomatic wrapper over the Objective-C class AVAssetResourceRenewalRequest.
 //
-// AssetResourceRenewalRequest wraps [raw.AVAssetResourceRenewalRequest] with a fluent Go API.
+// It embeds [AssetResourceLoadingRequest], promoting that type's methods.
+//
+// An object that encapsulates information about a resource request from a resource loader to renew a previously issued request.
 type AssetResourceRenewalRequest struct {
-	inner *raw.AVAssetResourceRenewalRequest
+	AssetResourceLoadingRequest
 }
 
-// Unwrap returns the underlying [raw.AVAssetResourceRenewalRequest].
-func (x *AssetResourceRenewalRequest) Unwrap() *raw.AVAssetResourceRenewalRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResourceRenewalRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceRenewalRequestFromID adopts an existing object pointer as a AssetResourceRenewalRequest (nil for 0).
+// AssetResourceRenewalRequestFromID adopts an existing Objective-C object as a AssetResourceRenewalRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceRenewalRequestFromID(id objc.ID) *AssetResourceRenewalRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResourceRenewalRequest{inner: raw.AVAssetResourceRenewalRequestFromID(id)}
+	x := &AssetResourceRenewalRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResourceRenewalRequest creates a new [AssetResourceRenewalRequest].
+// assetResourceRenewalRequestAdopt wraps an Objective-C object that this code just created as a
+// AssetResourceRenewalRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceRenewalRequestAdopt(id objc.ID) *AssetResourceRenewalRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResourceRenewalRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAssetResourceRenewalRequest creates a new AssetResourceRenewalRequest.
 func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetResourceRenewalRequest")), objc.RegisterName("new"))
-	return &AssetResourceRenewalRequest{inner: raw.AVAssetResourceRenewalRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceRenewalRequest")), objc.RegisterName("new"))
+	return assetResourceRenewalRequestAdopt(_id)
 }
 
-// The URL response for the loading request.
-//
-// WithResponse sets the response property and returns the receiver for chaining.
-func (x *AssetResourceRenewalRequest) WithResponse(response *foundation.NSURLResponse) *AssetResourceRenewalRequest {
-	x.inner.AVAssetResourceLoadingRequest.SetResponse(response)
+// WithResponse the URL response for the loading request.
+func (x *AssetResourceRenewalRequest) WithResponse(response obj.Object) *AssetResourceRenewalRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponse:"), objref.IDOf(response))
 	return x
 }
 
-// An URL request instance if the loading request was redirected.
-//
-// WithRedirect sets the redirect property and returns the receiver for chaining.
-func (x *AssetResourceRenewalRequest) WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceRenewalRequest {
-	x.inner.AVAssetResourceLoadingRequest.SetRedirect(redirect)
+// WithRedirect an URL request instance if the loading request was redirected.
+func (x *AssetResourceRenewalRequest) WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
 	return x
-}
-
-func (x *AssetResourceRenewalRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest {
-	return &x.inner.AVAssetResourceLoadingRequest
 }
 
 // AssetResourceRenewalRequestable is the interface implemented by [AssetResourceRenewalRequest], for mocking and DI.
 type AssetResourceRenewalRequestable interface {
-	Unwrap() *raw.AVAssetResourceRenewalRequest
-	WithResponse(response *foundation.NSURLResponse) *AssetResourceRenewalRequest
-	WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceRenewalRequest
+	obj.Object
+	WithResponse(response obj.Object) *AssetResourceRenewalRequest
+	WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest
 }
 
 var _ AssetResourceRenewalRequestable = (*AssetResourceRenewalRequest)(nil)
+
+var _ AssetResourceLoadingRequestProvider = (*AssetResourceRenewalRequest)(nil)

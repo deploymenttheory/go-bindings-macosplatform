@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package usernotifications provides a fluent Go API over the macOS UserNotifications framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - NotificationAction: [TextInputNotificationAction]
+//   - NotificationContent: [MutableNotificationContent]
+//   - NotificationResponse: [TextInputNotificationResponse]
+//   - NotificationTrigger: [CalendarNotificationTrigger], [PushNotificationTrigger], [TimeIntervalNotificationTrigger]
 package usernotifications

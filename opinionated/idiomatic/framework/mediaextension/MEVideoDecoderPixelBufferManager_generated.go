@@ -5,84 +5,102 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Describes pixel buffer requirements and creates new pixel buffers.
+// VideoDecoderPixelBufferManager is an idiomatic wrapper over the Objective-C class MEVideoDecoderPixelBufferManager.
 //
-// VideoDecoderPixelBufferManager wraps [raw.MEVideoDecoderPixelBufferManager] with a fluent Go API.
+// Describes pixel buffer requirements and creates new pixel buffers.
 type VideoDecoderPixelBufferManager struct {
-	inner *raw.MEVideoDecoderPixelBufferManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEVideoDecoderPixelBufferManager].
-func (x *VideoDecoderPixelBufferManager) Unwrap() *raw.MEVideoDecoderPixelBufferManager {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoDecoderPixelBufferManager) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoDecoderPixelBufferManagerFromID adopts an existing object pointer as a VideoDecoderPixelBufferManager (nil for 0).
+// VideoDecoderPixelBufferManagerFromID adopts an existing Objective-C object as a VideoDecoderPixelBufferManager
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoDecoderPixelBufferManagerFromID(id objc.ID) *VideoDecoderPixelBufferManager {
 	if id == 0 {
 		return nil
 	}
-	return &VideoDecoderPixelBufferManager{inner: raw.MEVideoDecoderPixelBufferManagerFromID(id)}
-}
-
-// NewVideoDecoderPixelBufferManager creates a new [VideoDecoderPixelBufferManager].
-func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEVideoDecoderPixelBufferManager")), objc.RegisterName("new"))
-	return &VideoDecoderPixelBufferManager{inner: raw.MEVideoDecoderPixelBufferManagerFromID(_id)}
-}
-
-// A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.
-//
-// WithPixelBufferAttributes sets the pixelBufferAttributes property and returns the receiver for chaining.
-func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoDecoderPixelBufferManager {
-	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
+	x := &VideoDecoderPixelBufferManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Generates a pixel buffer using the session’s pixel buffer pool.
-//
-// CreatePixelBufferAndReturnError calls the underlying CreatePixelBufferAndReturnError.
-func (x *VideoDecoderPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
-	return x.inner.CreatePixelBufferAndReturnError()
+// videoDecoderPixelBufferManagerAdopt wraps an Objective-C object that this code just created as a
+// VideoDecoderPixelBufferManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoDecoderPixelBufferManagerAdopt(id objc.ID) *VideoDecoderPixelBufferManager {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoDecoderPixelBufferManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method			registerCustomPixelFormat @abstract		VideoToolbox will register the described pixelFormat in both the Extension process and the client process. @discussion		This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(). @param			customPixelFormat This dictionary contains a set of keys and values as described in CoreVideo/CVPixelFormatDescription.h suitable for providing as the 'description' parameter to CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType.  This must contain the custom pixel format fourCC as the value for the kCVPixelFormatCodecType key.
-//
-// RegisterCustomPixelFormat calls the underlying RegisterCustomPixelFormat.
-func (x *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.RegisterCustomPixelFormat(customPixelFormat)
+// Description returns the object's -description text.
+func (x *VideoDecoderPixelBufferManager) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a PixelBuffer for the decoder. @discussion		This can be updated by the decoder before requesting a new pixelBuffer.
-//
-// PixelBufferAttributes calls the underlying PixelBufferAttributes.
-func (x *VideoDecoderPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.PixelBufferAttributes()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoDecoderPixelBufferManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetPixelBufferAttributes calls the underlying SetPixelBufferAttributes.
-func (x *VideoDecoderPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoDecoderPixelBufferManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoDecoderPixelBufferManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVideoDecoderPixelBufferManager creates a new VideoDecoderPixelBufferManager.
+func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("MEVideoDecoderPixelBufferManager")), objc.RegisterName("new"))
+	return videoDecoderPixelBufferManagerAdopt(_id)
+}
+
+// WithPixelBufferAttributes a dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.
+func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *VideoDecoderPixelBufferManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+	return x
+}
+
+// RegisterCustomPixelFormat videoToolbox will register the described pixelFormat in both the Extension process and the client process. This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType().
+func (x *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerCustomPixelFormat:"), objref.IDOf(customPixelFormat))
+}
+
+// PixelBufferAttributes videoToolbox will use these attributes when creating a PixelBuffer for the decoder. This can be updated by the decoder before requesting a new pixelBuffer.
+func (x *VideoDecoderPixelBufferManager) PixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferAttributes"))
+	return obj.Wrap(_r)
+}
+
+// SetPixelBufferAttributes wraps the corresponding Objective-C method.
+func (x *VideoDecoderPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
 }
 
 // VideoDecoderPixelBufferManagerable is the interface implemented by [VideoDecoderPixelBufferManager], for mocking and DI.
 type VideoDecoderPixelBufferManagerable interface {
-	Unwrap() *raw.MEVideoDecoderPixelBufferManager
-	WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoDecoderPixelBufferManager
-	CreatePixelBufferAndReturnError() (unsafe.Pointer, error)
-	RegisterCustomPixelFormat(customPixelFormat *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	obj.Object
+	WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *VideoDecoderPixelBufferManager
+	RegisterCustomPixelFormat(customPixelFormat obj.Object)
+	PixelBufferAttributes() obj.Object
+	SetPixelBufferAttributes(pixelBufferAttributes obj.Object)
 }
 
 var _ VideoDecoderPixelBufferManagerable = (*VideoDecoderPixelBufferManager)(nil)

@@ -4,9 +4,9 @@
 
 package mpsmatrix
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
-)
-
-// MPSMatrixCopyOffsets is a type alias for the raw MPSMatrixCopyOffsets value-type struct.
-type MPSMatrixCopyOffsets = raw.MPSMatrixCopyOffsets
+type MPSMatrixCopyOffsets struct {
+	SourceRowOffset         uint32
+	SourceColumnOffset      uint32
+	DestinationRowOffset    uint32
+	DestinationColumnOffset uint32
+}

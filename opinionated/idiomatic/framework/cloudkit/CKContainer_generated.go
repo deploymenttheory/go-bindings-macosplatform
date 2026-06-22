@@ -6,147 +6,128 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A conduit to your app’s databases.
+// Container is an idiomatic wrapper over the Objective-C class CKContainer.
 //
-// Container wraps [raw.CKContainer] with a fluent Go API.
+// A conduit to your app’s databases.
 type Container struct {
-	inner *raw.CKContainer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKContainer].
-func (x *Container) Unwrap() *raw.CKContainer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Container) ID() objc.ID { return x.inner.Ptr() }
-
-// ContainerFromID adopts an existing object pointer as a Container (nil for 0).
+// ContainerFromID adopts an existing Objective-C object as a Container
+// (nil for 0), retaining it and registering a release finalizer.
 func ContainerFromID(id objc.ID) *Container {
 	if id == 0 {
 		return nil
 	}
-	return &Container{inner: raw.CKContainerFromID(id)}
+	x := &Container{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContainer creates a new [Container].
+// containerAdopt wraps an Objective-C object that this code just created as a
+// Container (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func containerAdopt(id objc.ID) *Container {
+	if id == 0 {
+		return nil
+	}
+	x := &Container{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Container) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Container) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Container) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Container) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContainer creates a new Container.
 func NewContainer() *Container {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKContainer")), objc.RegisterName("new"))
-	return &Container{inner: raw.CKContainerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKContainer")), objc.RegisterName("new"))
+	return containerAdopt(_id)
 }
 
-// Adds an operation to the container’s queue.
-//
-// AddOperation calls the underlying AddOperation.
-func (x *Container) AddOperation(operation *raw.CKOperation) {
-	x.inner.AddOperation(operation)
+// AddOperation adds an operation to the container’s queue.
+func (x *Container) AddOperation(operation *Operation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
-// The container's unique identifier. Use this property's value to distinguish different containers in your app.
-//
-// ContainerIdentifier calls the underlying ContainerIdentifier.
+// ContainerIdentifier the container's unique identifier. Use this property's value to distinguish different containers in your app.
 func (x *Container) ContainerIdentifier() string {
-	_r := x.inner.ContainerIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the database with the specified scope.
-//
-// DatabaseWithDatabaseScope calls the underlying DatabaseWithDatabaseScope.
-func (x *Container) DatabaseWithDatabaseScope(databaseScope CKDatabaseScope) *Database {
-	_r := x.inner.DatabaseWithDatabaseScope(raw.CKDatabaseScope(databaseScope))
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+// DatabaseWithDatabaseScope returns the database with the specified scope.
+func (x *Container) DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseWithDatabaseScope:"), databaseScope)
+	return DatabaseFromID(_r)
 }
 
-// The user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
-//
-// PrivateCloudDatabase calls the underlying PrivateCloudDatabase.
+// PrivateCloudDatabase the user's private database. The user's private database is only available if the device has an iCloud account. Only the user can access their private database, by default. They own all of the database's content and can view and modify that content. Data in the private database isn't visible in the developer portal. Data in the private database counts toward the user's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
 func (x *Container) PrivateCloudDatabase() *Database {
-	_r := x.inner.PrivateCloudDatabase()
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateCloudDatabase"))
+	return DatabaseFromID(_r)
 }
 
-// The app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
-//
-// PublicCloudDatabase calls the underlying PublicCloudDatabase.
+// PublicCloudDatabase the app's public database. This database is available regardless of whether the user's device has an iCloud account. The contents of the public database are readable by all users of the app, and users have write access to the records, and other objects, they create. The public database's contents are visible in the developer portal, where you can assign roles to users and restrict access as necessary. Data in the public database counts toward your app's iCloud storage quota.
 func (x *Container) PublicCloudDatabase() *Database {
-	_r := x.inner.PublicCloudDatabase()
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicCloudDatabase"))
+	return DatabaseFromID(_r)
 }
 
-// The database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
-//
-// SharedCloudDatabase calls the underlying SharedCloudDatabase.
+// SharedCloudDatabase the database that contains shared data. This database is only available if the device has an iCloud account. Permissions on the database are available only to the user according to the permissions of the enclosing “CKShare“ instance, which represents the shared record. The current user doesn't own the content in the shared database, and can view and modify that content only if the necessary permissions exist. Data in the shared database isn't visible in the developer portal or to any user who doesn't have access. Data in the shared database counts toward your app's iCloud storage quota. If there isn't an iCloud account on the user's device, this property still returns a database, but any attempt to use it results in an error. To determine if there is an iCloud account on the device, use the “CKContainer/accountStatus(completionHandler:)“ method.
 func (x *Container) SharedCloudDatabase() *Database {
-	_r := x.inner.SharedCloudDatabase()
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedCloudDatabase"))
+	return DatabaseFromID(_r)
 }
 
-// Determines whether the system can access the user’s iCloud account.
-//
-// AccountStatusWithCompletionHandler calls the underlying AccountStatusWithCompletionHandler.
-func (x *Container) AccountStatusWithCompletionHandler(completionHandler func(CKAccountStatus, unsafe.Pointer)) {
-	x.inner.AccountStatusWithCompletionHandler(func(_a0 raw.CKAccountStatus, _a1 unsafe.Pointer) { completionHandler(CKAccountStatus(_a0), _a1) })
-}
-
-// Determines the authorization status of the specified permission.
-//
-// StatusForApplicationPermissionCompletionHandler calls the underlying StatusForApplicationPermissionCompletionHandler.
-func (x *Container) StatusForApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer)) {
-	x.inner.StatusForApplicationPermissionCompletionHandler(raw.CKApplicationPermissions(applicationPermission), func(_a0 raw.CKApplicationPermissionStatus, _a1 unsafe.Pointer) {
-		completionHandler(CKApplicationPermissionStatus(_a0), _a1)
-	})
-}
-
-// Prompts the user to authorize the specified permission.
-//
-// RequestApplicationPermissionCompletionHandler calls the underlying RequestApplicationPermissionCompletionHandler.
-func (x *Container) RequestApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer)) {
-	x.inner.RequestApplicationPermissionCompletionHandler(raw.CKApplicationPermissions(applicationPermission), func(_a0 raw.CKApplicationPermissionStatus, _a1 unsafe.Pointer) {
-		completionHandler(CKApplicationPermissionStatus(_a0), _a1)
-	})
-}
-
-// Fetches the user record ID of the current user.
+// FetchUserRecordID fetches the user record ID of the current user.
 //
 // FetchUserRecordID blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchUserRecordID(ctx context.Context) (*RecordID, error) {
+func (x *Container) FetchUserRecordID(ctx context.Context) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchUserRecordIDWithCompletionHandler(func(_p0 *raw.CKRecordID, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordID{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchUserRecordIDWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,72 +137,47 @@ func (x *Container) FetchUserRecordID(ctx context.Context) (*RecordID, error) {
 	}
 }
 
-// Fetches all user identities that match entries in the user’s Contacts.
+// DiscoverAllIdentities fetches all user identities that match entries in the user’s Contacts.
 //
 // DiscoverAllIdentities blocks until the operation completes or ctx is cancelled.
-func (x *Container) DiscoverAllIdentities(ctx context.Context) (*foundation.NSArray[*raw.CKUserIdentity], error) {
+func (x *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CKUserIdentity]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DiscoverAllIdentitiesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.CKUserIdentity], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoverAllIdentitiesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CKUserIdentity]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Fetches the user identity for the specified email address.
-//
-// DiscoverUserIdentityWithEmailAddressCompletionHandler calls the underlying DiscoverUserIdentityWithEmailAddressCompletionHandler.
-func (x *Container) DiscoverUserIdentityWithEmailAddressCompletionHandler(email string, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.DiscoverUserIdentityWithEmailAddressCompletionHandler(foundation.NSStringStringWithUTF8String(email), completionHandler)
-}
-
-// Fetches the user identity for the specified phone number.
-//
-// DiscoverUserIdentityWithPhoneNumberCompletionHandler calls the underlying DiscoverUserIdentityWithPhoneNumberCompletionHandler.
-func (x *Container) DiscoverUserIdentityWithPhoneNumberCompletionHandler(phoneNumber string, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.DiscoverUserIdentityWithPhoneNumberCompletionHandler(foundation.NSStringStringWithUTF8String(phoneNumber), completionHandler)
-}
-
-// Fetches the user identity for the specified user record ID.
-//
-// DiscoverUserIdentityWithUserRecordIDCompletionHandler calls the underlying DiscoverUserIdentityWithUserRecordIDCompletionHandler.
-func (x *Container) DiscoverUserIdentityWithUserRecordIDCompletionHandler(userRecordID *raw.CKRecordID, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.DiscoverUserIdentityWithUserRecordIDCompletionHandler(userRecordID, completionHandler)
-}
-
-// Fetches the share participant with the specified email address.
+// FetchShareParticipantWithEmailAddress fetches the share participant with the specified email address.
 //
 // FetchShareParticipantWithEmailAddress blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (*ShareParticipant, error) {
+func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchShareParticipantWithEmailAddressCompletionHandler(foundation.NSStringStringWithUTF8String(emailAddress), func(_p0 *raw.CKShareParticipant, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareParticipant{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareParticipantFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareParticipantWithEmailAddress:completionHandler:"), purego.NSString(emailAddress), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,25 +187,22 @@ func (x *Container) FetchShareParticipantWithEmailAddress(ctx context.Context, e
 	}
 }
 
-// Fetches the share participant with the specified phone number.
+// FetchShareParticipantWithPhoneNumber fetches the share participant with the specified phone number.
 //
 // FetchShareParticipantWithPhoneNumber blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (*ShareParticipant, error) {
+func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchShareParticipantWithPhoneNumberCompletionHandler(foundation.NSStringStringWithUTF8String(phoneNumber), func(_p0 *raw.CKShareParticipant, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareParticipant{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareParticipantFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareParticipantWithPhoneNumber:completionHandler:"), purego.NSString(phoneNumber), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -259,25 +212,22 @@ func (x *Container) FetchShareParticipantWithPhoneNumber(ctx context.Context, ph
 	}
 }
 
-// Fetches the share participant with the specified user record ID.
+// FetchShareParticipantWithUserRecordID fetches the share participant with the specified user record ID.
 //
 // FetchShareParticipantWithUserRecordID blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *raw.CKRecordID) (*ShareParticipant, error) {
+func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (result *ShareParticipant, err error) {
 	type _result struct {
 		val *ShareParticipant
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchShareParticipantWithUserRecordIDCompletionHandler(userRecordID, func(_p0 *raw.CKShareParticipant, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareParticipant{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareParticipantFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareParticipantWithUserRecordID:completionHandler:"), objref.IDOf(userRecordID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -287,25 +237,22 @@ func (x *Container) FetchShareParticipantWithUserRecordID(ctx context.Context, u
 	}
 }
 
-// Fetches the share metadata for the specified share URL.
+// FetchShareMetadataWithURL fetches the share metadata for the specified share URL.
 //
 // FetchShareMetadataWithURL blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (*ShareMetadata, error) {
+func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (result *ShareMetadata, err error) {
 	type _result struct {
 		val *ShareMetadata
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchShareMetadataWithURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 *raw.CKShareMetadata, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareMetadata{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareMetadataFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchShareMetadataWithURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,25 +262,22 @@ func (x *Container) FetchShareMetadataWithURL(ctx context.Context, url string) (
 	}
 }
 
-// Accepts the specified share metadata.
+// AcceptShareMetadata accepts the specified share metadata.
 //
 // AcceptShareMetadata blocks until the operation completes or ctx is cancelled.
-func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *raw.CKShareMetadata) (*Share, error) {
+func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (result *Share, err error) {
 	type _result struct {
 		val *Share
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AcceptShareMetadataCompletionHandler(metadata, func(_p0 *raw.CKShare, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Share{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptShareMetadata:completionHandler:"), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -343,63 +287,48 @@ func (x *Container) AcceptShareMetadata(ctx context.Context, metadata *raw.CKSha
 	}
 }
 
-// Fetches the IDs of any long-lived operations that are running.
+// FetchAllLongLivedOperationIDs fetches the IDs of any long-lived operations that are running.
 //
 // FetchAllLongLivedOperationIDs blocks until the operation completes or ctx is cancelled.
-func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+func (x *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*foundation.NSString]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchAllLongLivedOperationIDsWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAllLongLivedOperationIDsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*foundation.NSString]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Fetches the long-lived operation for the specified operation ID.
-//
-// FetchLongLivedOperationWithIDCompletionHandler calls the underlying FetchLongLivedOperationWithIDCompletionHandler.
-func (x *Container) FetchLongLivedOperationWithIDCompletionHandler(operationID *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.FetchLongLivedOperationWithIDCompletionHandler(operationID, completionHandler)
-}
-
 // Containerable is the interface implemented by [Container], for mocking and DI.
 type Containerable interface {
-	Unwrap() *raw.CKContainer
-	AddOperation(operation *raw.CKOperation)
+	obj.Object
+	AddOperation(operation *Operation)
 	ContainerIdentifier() string
-	DatabaseWithDatabaseScope(databaseScope CKDatabaseScope) *Database
+	DatabaseWithDatabaseScope(databaseScope DatabaseScope) *Database
 	PrivateCloudDatabase() *Database
 	PublicCloudDatabase() *Database
 	SharedCloudDatabase() *Database
-	AccountStatusWithCompletionHandler(completionHandler func(CKAccountStatus, unsafe.Pointer))
-	StatusForApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer))
-	RequestApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer))
 	FetchUserRecordID(ctx context.Context) (*RecordID, error)
-	DiscoverAllIdentities(ctx context.Context) (*foundation.NSArray[*raw.CKUserIdentity], error)
-	DiscoverUserIdentityWithEmailAddressCompletionHandler(email string, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	DiscoverUserIdentityWithPhoneNumberCompletionHandler(phoneNumber string, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	DiscoverUserIdentityWithUserRecordIDCompletionHandler(userRecordID *raw.CKRecordID, completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	DiscoverAllIdentities(ctx context.Context) (obj.Object, error)
 	FetchShareParticipantWithEmailAddress(ctx context.Context, emailAddress string) (*ShareParticipant, error)
 	FetchShareParticipantWithPhoneNumber(ctx context.Context, phoneNumber string) (*ShareParticipant, error)
-	FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *raw.CKRecordID) (*ShareParticipant, error)
+	FetchShareParticipantWithUserRecordID(ctx context.Context, userRecordID *RecordID) (*ShareParticipant, error)
 	FetchShareMetadataWithURL(ctx context.Context, url string) (*ShareMetadata, error)
-	AcceptShareMetadata(ctx context.Context, metadata *raw.CKShareMetadata) (*Share, error)
-	FetchAllLongLivedOperationIDs(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
-	FetchLongLivedOperationWithIDCompletionHandler(operationID *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	AcceptShareMetadata(ctx context.Context, metadata *ShareMetadata) (*Share, error)
+	FetchAllLongLivedOperationIDs(ctx context.Context) (obj.Object, error)
 }
 
 var _ Containerable = (*Container)(nil)

@@ -5,67 +5,72 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that makes the layers of a symbol-based image appear separately or as a whole.
+// SymbolAppearEffect is an idiomatic wrapper over the Objective-C class NSSymbolAppearEffect.
 //
-// SymbolAppearEffect wraps [raw.NSSymbolAppearEffect] with a fluent Go API.
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that makes the layers of a symbol-based image appear separately or as a whole.
 type SymbolAppearEffect struct {
-	inner *raw.NSSymbolAppearEffect
+	SymbolEffect
 }
 
-// Unwrap returns the underlying [raw.NSSymbolAppearEffect].
-func (x *SymbolAppearEffect) Unwrap() *raw.NSSymbolAppearEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolAppearEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolAppearEffectFromID adopts an existing object pointer as a SymbolAppearEffect (nil for 0).
+// SymbolAppearEffectFromID adopts an existing Objective-C object as a SymbolAppearEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolAppearEffectFromID(id objc.ID) *SymbolAppearEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolAppearEffect{inner: raw.NSSymbolAppearEffectFromID(id)}
+	x := &SymbolAppearEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolAppearEffect creates a new [SymbolAppearEffect].
+// symbolAppearEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolAppearEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolAppearEffectAdopt(id objc.ID) *SymbolAppearEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolAppearEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolAppearEffect creates a new SymbolAppearEffect.
 func NewSymbolAppearEffect() *SymbolAppearEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolAppearEffect")), objc.RegisterName("new"))
-	return &SymbolAppearEffect{inner: raw.NSSymbolAppearEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolAppearEffect")), objc.RegisterName("new"))
+	return symbolAppearEffectAdopt(_id)
 }
 
-// An effect that makes each layer appear separately.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
+// EffectWithByLayer an effect that makes each layer appear separately.
 func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolAppearEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolAppearEffectFromID(_r)
 }
 
-// An effect that makes all layers appear simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+// EffectWithWholeSymbol an effect that makes all layers appear simultaneously.
 func (x *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolAppearEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolAppearEffectFromID(_r)
 }
-
-func (x *SymbolAppearEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolAppearEffectable is the interface implemented by [SymbolAppearEffect], for mocking and DI.
 type SymbolAppearEffectable interface {
-	Unwrap() *raw.NSSymbolAppearEffect
+	obj.Object
 	EffectWithByLayer() *SymbolAppearEffect
 	EffectWithWholeSymbol() *SymbolAppearEffect
 }
 
 var _ SymbolAppearEffectable = (*SymbolAppearEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolAppearEffect)(nil)

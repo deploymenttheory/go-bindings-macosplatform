@@ -5,293 +5,263 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that manages the timing and progress of animations in the user interface.
+// Animation is an idiomatic wrapper over the Objective-C class NSAnimation.
 //
-// Animation wraps [raw.NSAnimation] with a fluent Go API.
+// Animation is an abstract base — you do not construct it directly. Construct one of [ViewAnimation] and pass it where a Animation is accepted.
+//
+// An object that manages the timing and progress of animations in the user interface.
 type Animation struct {
-	inner *raw.NSAnimation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAnimation].
-func (x *Animation) Unwrap() *raw.NSAnimation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Animation) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimationFromID adopts an existing object pointer as a Animation (nil for 0).
+// AnimationFromID adopts an existing Objective-C object as a Animation
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimationFromID(id objc.ID) *Animation {
 	if id == 0 {
 		return nil
 	}
-	return &Animation{inner: raw.NSAnimationFromID(id)}
+	x := &Animation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns an NSAnimation object initialized with the specified duration and animation-curve values.
-//
-// NewAnimationWithDurationAnimationCurve creates a new [Animation].
-func NewAnimationWithDurationAnimationCurve(duration float64, animationCurve NSAnimationCurve) *Animation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAnimation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDuration:animationCurve:"), duration, raw.NSAnimationCurve(animationCurve))
-	return &Animation{inner: raw.NSAnimationFromID(_id)}
+// animationAdopt wraps an Objective-C object that this code just created as a
+// Animation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animationAdopt(id objc.ID) *Animation {
+	if id == 0 {
+		return nil
+	}
+	x := &Animation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewAnimationWithCoder creates a new [Animation].
-func NewAnimationWithCoder(coder *foundation.NSCoder) *Animation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAnimation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Animation{inner: raw.NSAnimationFromID(_id)}
+// Description returns the object's -description text.
+func (x *Animation) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The current progress of the animation.
-//
-// WithCurrentProgress sets the currentProgress property and returns the receiver for chaining.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Animation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Animation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Animation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAnimationWithDurationAnimationCurve returns an NSAnimation object initialized with the specified duration and animation-curve values.
+func NewAnimationWithDurationAnimationCurve(duration float64, animationCurve AnimationCurve) *Animation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAnimation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDuration:animationCurve:"), duration, animationCurve)
+	return animationAdopt(_id)
+}
+
+// NewAnimationWithCoder creates a new Animation.
+func NewAnimationWithCoder(coder obj.Object) *Animation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAnimation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return animationAdopt(_id)
+}
+
+// WithCurrentProgress the current progress of the animation.
 func (x *Animation) WithCurrentProgress(currentProgress float32) *Animation {
-	x.inner.SetCurrentProgress(currentProgress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
 	return x
 }
 
-// The duration of the animation, in seconds.
-//
-// WithDuration sets the duration property and returns the receiver for chaining.
+// WithDuration the duration of the animation, in seconds.
 func (x *Animation) WithDuration(duration float64) *Animation {
-	x.inner.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
-// The blocking mode of the animation.
-//
-// WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
-func (x *Animation) WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *Animation {
-	x.inner.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
+// WithAnimationBlockingMode the blocking mode of the animation.
+func (x *Animation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *Animation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
 	return x
 }
 
-// The number of frame updates per second to generate for the animation.
-//
-// WithFrameRate sets the frameRate property and returns the receiver for chaining.
+// WithFrameRate the number of frame updates per second to generate for the animation.
 func (x *Animation) WithFrameRate(frameRate float32) *Animation {
-	x.inner.SetFrameRate(frameRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
 	return x
 }
 
-// The timing curve for the animation.
-//
-// WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
-func (x *Animation) WithAnimationCurve(animationCurve NSAnimationCurve) *Animation {
-	x.inner.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
+// WithAnimationCurve the timing curve for the animation.
+func (x *Animation) WithAnimationCurve(animationCurve AnimationCurve) *Animation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
 	return x
 }
 
-// The animation delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Animation) WithDelegate(delegate raw.NSAnimationDelegate) *Animation {
-	x.inner.SetDelegate(delegate)
+// WithProgressMarks an array of floating-point numbers representing current progress marks.
+func (x *Animation) WithProgressMarks(items ...obj.Object) *Animation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), _arr)
 	return x
 }
 
-// An array of floating-point numbers representing current progress marks.
-//
-// WithProgressMarks sets the collection, converting the Go slice to an NSArray.
-func (x *Animation) WithProgressMarks(items ...*foundation.NSNumber) *Animation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetProgressMarks(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetProgressMarks(_arr)
-	return x
-}
-
-// Starts the animation represented by the receiver.
-//
-// StartAnimation calls the underlying StartAnimation.
+// StartAnimation starts the animation represented by the receiver.
 func (x *Animation) StartAnimation() {
-	x.inner.StartAnimation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation"))
 }
 
-// Stops the animation represented by the receiver.
-//
-// StopAnimation calls the underlying StopAnimation.
+// StopAnimation stops the animation represented by the receiver.
 func (x *Animation) StopAnimation() {
-	x.inner.StopAnimation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation"))
 }
 
-// Adds the progress mark to the receiver.
-//
-// AddProgressMark calls the underlying AddProgressMark.
+// AddProgressMark adds the progress mark to the receiver.
 func (x *Animation) AddProgressMark(progressMark float32) {
-	x.inner.AddProgressMark(progressMark)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addProgressMark:"), progressMark)
 }
 
-// Removes progress mark from the receiver.
-//
-// RemoveProgressMark calls the underlying RemoveProgressMark.
+// RemoveProgressMark removes progress mark from the receiver.
 func (x *Animation) RemoveProgressMark(progressMark float32) {
-	x.inner.RemoveProgressMark(progressMark)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeProgressMark:"), progressMark)
 }
 
-// Starts running the animation represented by the receiver when another animation reaches a specific progress mark.
-//
-// StartWhenAnimationReachesProgress calls the underlying StartWhenAnimationReachesProgress.
-func (x *Animation) StartWhenAnimationReachesProgress(animation *raw.NSAnimation, startProgress float32) {
-	x.inner.StartWhenAnimationReachesProgress(animation, startProgress)
+// StartWhenAnimationReachesProgress starts running the animation represented by the receiver when another animation reaches a specific progress mark.
+func (x *Animation) StartWhenAnimationReachesProgress(animation *Animation, startProgress float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWhenAnimation:reachesProgress:"), objref.IDOf(animation), startProgress)
 }
 
-// Stops running the animation represented by the receiver when another animation reaches a specific progress mark.
-//
-// StopWhenAnimationReachesProgress calls the underlying StopWhenAnimationReachesProgress.
-func (x *Animation) StopWhenAnimationReachesProgress(animation *raw.NSAnimation, stopProgress float32) {
-	x.inner.StopWhenAnimationReachesProgress(animation, stopProgress)
+// StopWhenAnimationReachesProgress stops running the animation represented by the receiver when another animation reaches a specific progress mark.
+func (x *Animation) StopWhenAnimationReachesProgress(animation *Animation, stopProgress float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWhenAnimation:reachesProgress:"), objref.IDOf(animation), stopProgress)
 }
 
-// Clears linkage to another animation that causes the receiver to start.
-//
-// ClearStartAnimation calls the underlying ClearStartAnimation.
+// ClearStartAnimation clears linkage to another animation that causes the receiver to start.
 func (x *Animation) ClearStartAnimation() {
-	x.inner.ClearStartAnimation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearStartAnimation"))
 }
 
-// Clears linkage to another animation that causes the receiver to stop.
-//
-// ClearStopAnimation calls the underlying ClearStopAnimation.
+// ClearStopAnimation clears linkage to another animation that causes the receiver to stop.
 func (x *Animation) ClearStopAnimation() {
-	x.inner.ClearStopAnimation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearStopAnimation"))
 }
 
-// IsAnimating calls the underlying IsAnimating.
+// IsAnimating wraps the corresponding Objective-C method.
 func (x *Animation) IsAnimating() bool {
-	return x.inner.IsAnimating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimating"))
+	return _r
 }
 
-// CurrentProgress calls the underlying CurrentProgress.
+// CurrentProgress wraps the corresponding Objective-C method.
 func (x *Animation) CurrentProgress() float32 {
-	return x.inner.CurrentProgress()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentProgress"))
+	return _r
 }
 
-// SetCurrentProgress calls the underlying SetCurrentProgress.
+// SetCurrentProgress wraps the corresponding Objective-C method.
 func (x *Animation) SetCurrentProgress(currentProgress float32) {
-	x.inner.SetCurrentProgress(currentProgress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
 }
 
-// Duration calls the underlying Duration.
+// Duration wraps the corresponding Objective-C method.
 func (x *Animation) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// SetDuration calls the underlying SetDuration.
+// SetDuration wraps the corresponding Objective-C method.
 func (x *Animation) SetDuration(duration float64) {
-	x.inner.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
-// AnimationBlockingMode calls the underlying AnimationBlockingMode.
-func (x *Animation) AnimationBlockingMode() NSAnimationBlockingMode {
-	return NSAnimationBlockingMode(x.inner.AnimationBlockingMode())
+// AnimationBlockingMode wraps the corresponding Objective-C method.
+func (x *Animation) AnimationBlockingMode() AnimationBlockingMode {
+	_r := objc.Send[AnimationBlockingMode](objref.IDOf(x), objc.RegisterName("animationBlockingMode"))
+	return _r
 }
 
-// SetAnimationBlockingMode calls the underlying SetAnimationBlockingMode.
-func (x *Animation) SetAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) {
-	x.inner.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
+// SetAnimationBlockingMode wraps the corresponding Objective-C method.
+func (x *Animation) SetAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
 }
 
-// FrameRate calls the underlying FrameRate.
+// FrameRate wraps the corresponding Objective-C method.
 func (x *Animation) FrameRate() float32 {
-	return x.inner.FrameRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("frameRate"))
+	return _r
 }
 
-// SetFrameRate calls the underlying SetFrameRate.
+// SetFrameRate wraps the corresponding Objective-C method.
 func (x *Animation) SetFrameRate(frameRate float32) {
-	x.inner.SetFrameRate(frameRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
 }
 
-// AnimationCurve calls the underlying AnimationCurve.
-func (x *Animation) AnimationCurve() NSAnimationCurve {
-	return NSAnimationCurve(x.inner.AnimationCurve())
+// AnimationCurve wraps the corresponding Objective-C method.
+func (x *Animation) AnimationCurve() AnimationCurve {
+	_r := objc.Send[AnimationCurve](objref.IDOf(x), objc.RegisterName("animationCurve"))
+	return _r
 }
 
-// SetAnimationCurve calls the underlying SetAnimationCurve.
-func (x *Animation) SetAnimationCurve(animationCurve NSAnimationCurve) {
-	x.inner.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
+// SetAnimationCurve wraps the corresponding Objective-C method.
+func (x *Animation) SetAnimationCurve(animationCurve AnimationCurve) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
 }
 
-// CurrentValue calls the underlying CurrentValue.
+// CurrentValue wraps the corresponding Objective-C method.
 func (x *Animation) CurrentValue() float32 {
-	return x.inner.CurrentValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentValue"))
+	return _r
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Animation) Delegate() raw.NSAnimationDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Animation) SetDelegate(delegate raw.NSAnimationDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
+// ProgressMarks wraps the corresponding Objective-C method.
+//
 // ProgressMarks returns the collection as a Go slice.
-func (x *Animation) ProgressMarks() []*foundation.NSNumber {
-	arr := x.inner.ProgressMarks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *Animation) ProgressMarks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progressMarks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetProgressMarks calls the underlying SetProgressMarks.
-func (x *Animation) SetProgressMarks(progressMarks *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetProgressMarks(progressMarks)
+// SetProgressMarks wraps the corresponding Objective-C method.
+func (x *Animation) SetProgressMarks(progressMarks []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), purego.SliceToNSArray(progressMarks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// RunLoopModesForAnimating wraps the corresponding Objective-C method.
+//
 // RunLoopModesForAnimating returns the collection as a Go slice.
-func (x *Animation) RunLoopModesForAnimating() []*foundation.NSString {
-	arr := x.inner.RunLoopModesForAnimating()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *Animation) RunLoopModesForAnimating() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runLoopModesForAnimating"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *Animation) asAnimation() *raw.NSAnimation { return x.inner }
 
 // Animationable is the interface implemented by [Animation], for mocking and DI.
 type Animationable interface {
-	Unwrap() *raw.NSAnimation
+	obj.Object
 	WithCurrentProgress(currentProgress float32) *Animation
 	WithDuration(duration float64) *Animation
-	WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *Animation
+	WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *Animation
 	WithFrameRate(frameRate float32) *Animation
-	WithAnimationCurve(animationCurve NSAnimationCurve) *Animation
-	WithDelegate(delegate raw.NSAnimationDelegate) *Animation
-	WithProgressMarks(items ...*foundation.NSNumber) *Animation
+	WithAnimationCurve(animationCurve AnimationCurve) *Animation
+	WithProgressMarks(items ...obj.Object) *Animation
 	StartAnimation()
 	StopAnimation()
 	AddProgressMark(progressMark float32)
 	RemoveProgressMark(progressMark float32)
-	StartWhenAnimationReachesProgress(animation *raw.NSAnimation, startProgress float32)
-	StopWhenAnimationReachesProgress(animation *raw.NSAnimation, stopProgress float32)
+	StartWhenAnimationReachesProgress(animation *Animation, startProgress float32)
+	StopWhenAnimationReachesProgress(animation *Animation, stopProgress float32)
 	ClearStartAnimation()
 	ClearStopAnimation()
 	IsAnimating() bool
@@ -299,18 +269,23 @@ type Animationable interface {
 	SetCurrentProgress(currentProgress float32)
 	Duration() float64
 	SetDuration(duration float64)
-	AnimationBlockingMode() NSAnimationBlockingMode
-	SetAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode)
+	AnimationBlockingMode() AnimationBlockingMode
+	SetAnimationBlockingMode(animationBlockingMode AnimationBlockingMode)
 	FrameRate() float32
 	SetFrameRate(frameRate float32)
-	AnimationCurve() NSAnimationCurve
-	SetAnimationCurve(animationCurve NSAnimationCurve)
+	AnimationCurve() AnimationCurve
+	SetAnimationCurve(animationCurve AnimationCurve)
 	CurrentValue() float32
-	Delegate() raw.NSAnimationDelegate
-	SetDelegate(delegate raw.NSAnimationDelegate)
-	ProgressMarks() []*foundation.NSNumber
-	SetProgressMarks(progressMarks *foundation.NSArray[*foundation.NSNumber])
-	RunLoopModesForAnimating() []*foundation.NSString
+	ProgressMarks() []obj.Object
+	SetProgressMarks(progressMarks []obj.Object)
+	RunLoopModesForAnimating() []obj.Object
 }
 
 var _ Animationable = (*Animation)(nil)
+
+// isAnimation marks Animation — and, by embedding promotion, its
+// subclasses — as a member of the Animation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Animation) isAnimation() {}
+
+var _ AnimationProvider = (*Animation)(nil)

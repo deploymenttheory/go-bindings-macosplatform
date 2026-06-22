@@ -5,504 +5,326 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// PKEncryptionSchemeECC_V2 returns the string constant PKEncryptionSchemeECC_V2 as an objc.ID, for use as a dictionary key or selector argument.
-func PKEncryptionSchemeECC_V2() objc.ID {
-	if _r := raw.PKEncryptionSchemeECC_V2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKEncryptionSchemeECC_V2 returns the string constant PKEncryptionSchemeECC_V2, for use as a dictionary key or argument.
+func PKEncryptionSchemeECC_V2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKEncryptionSchemeECC_V2")))
 }
 
-// PKEncryptionSchemeRSA_V2 returns the string constant PKEncryptionSchemeRSA_V2 as an objc.ID, for use as a dictionary key or selector argument.
-func PKEncryptionSchemeRSA_V2() objc.ID {
-	if _r := raw.PKEncryptionSchemeRSA_V2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKEncryptionSchemeRSA_V2 returns the string constant PKEncryptionSchemeRSA_V2, for use as a dictionary key or argument.
+func PKEncryptionSchemeRSA_V2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKEncryptionSchemeRSA_V2")))
 }
 
-// PKPaymentNetworkAmex returns the string constant PKPaymentNetworkAmex as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkAmex() objc.ID {
-	if _r := raw.PKPaymentNetworkAmex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkAmex returns the string constant PKPaymentNetworkAmex, for use as a dictionary key or argument.
+func PKPaymentNetworkAmex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkAmex")))
 }
 
-// PKPaymentNetworkBancomat returns the string constant PKPaymentNetworkBancomat as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkBancomat() objc.ID {
-	if _r := raw.PKPaymentNetworkBancomat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkBancomat returns the string constant PKPaymentNetworkBancomat, for use as a dictionary key or argument.
+func PKPaymentNetworkBancomat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkBancomat")))
 }
 
-// PKPaymentNetworkPagoBancomat returns the string constant PKPaymentNetworkPagoBancomat as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkPagoBancomat() objc.ID {
-	if _r := raw.PKPaymentNetworkPagoBancomat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkPagoBancomat returns the string constant PKPaymentNetworkPagoBancomat, for use as a dictionary key or argument.
+func PKPaymentNetworkPagoBancomat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkPagoBancomat")))
 }
 
-// PKPaymentNetworkBancontact returns the string constant PKPaymentNetworkBancontact as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkBancontact() objc.ID {
-	if _r := raw.PKPaymentNetworkBancontact(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkBancontact returns the string constant PKPaymentNetworkBancontact, for use as a dictionary key or argument.
+func PKPaymentNetworkBancontact() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkBancontact")))
 }
 
-// PKPaymentNetworkCarteBancaire returns the string constant PKPaymentNetworkCarteBancaire as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkCarteBancaire() objc.ID {
-	if _r := raw.PKPaymentNetworkCarteBancaire(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkCarteBancaire returns the string constant PKPaymentNetworkCarteBancaire, for use as a dictionary key or argument.
+func PKPaymentNetworkCarteBancaire() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkCarteBancaire")))
 }
 
-// PKPaymentNetworkCarteBancaires returns the string constant PKPaymentNetworkCarteBancaires as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkCarteBancaires() objc.ID {
-	if _r := raw.PKPaymentNetworkCarteBancaires(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkCarteBancaires returns the string constant PKPaymentNetworkCarteBancaires, for use as a dictionary key or argument.
+func PKPaymentNetworkCarteBancaires() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkCarteBancaires")))
 }
 
-// PKPaymentNetworkCartesBancaires returns the string constant PKPaymentNetworkCartesBancaires as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkCartesBancaires() objc.ID {
-	if _r := raw.PKPaymentNetworkCartesBancaires(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkCartesBancaires returns the string constant PKPaymentNetworkCartesBancaires, for use as a dictionary key or argument.
+func PKPaymentNetworkCartesBancaires() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkCartesBancaires")))
 }
 
-// PKPaymentNetworkChinaUnionPay returns the string constant PKPaymentNetworkChinaUnionPay as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkChinaUnionPay() objc.ID {
-	if _r := raw.PKPaymentNetworkChinaUnionPay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkChinaUnionPay returns the string constant PKPaymentNetworkChinaUnionPay, for use as a dictionary key or argument.
+func PKPaymentNetworkChinaUnionPay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkChinaUnionPay")))
 }
 
-// PKPaymentNetworkDankort returns the string constant PKPaymentNetworkDankort as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkDankort() objc.ID {
-	if _r := raw.PKPaymentNetworkDankort(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkDankort returns the string constant PKPaymentNetworkDankort, for use as a dictionary key or argument.
+func PKPaymentNetworkDankort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkDankort")))
 }
 
-// PKPaymentNetworkDiscover returns the string constant PKPaymentNetworkDiscover as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkDiscover() objc.ID {
-	if _r := raw.PKPaymentNetworkDiscover(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkDiscover returns the string constant PKPaymentNetworkDiscover, for use as a dictionary key or argument.
+func PKPaymentNetworkDiscover() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkDiscover")))
 }
 
-// PKPaymentNetworkEftpos returns the string constant PKPaymentNetworkEftpos as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkEftpos() objc.ID {
-	if _r := raw.PKPaymentNetworkEftpos(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkEftpos returns the string constant PKPaymentNetworkEftpos, for use as a dictionary key or argument.
+func PKPaymentNetworkEftpos() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkEftpos")))
 }
 
-// PKPaymentNetworkElectron returns the string constant PKPaymentNetworkElectron as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkElectron() objc.ID {
-	if _r := raw.PKPaymentNetworkElectron(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkElectron returns the string constant PKPaymentNetworkElectron, for use as a dictionary key or argument.
+func PKPaymentNetworkElectron() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkElectron")))
 }
 
-// PKPaymentNetworkElo returns the string constant PKPaymentNetworkElo as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkElo() objc.ID {
-	if _r := raw.PKPaymentNetworkElo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkElo returns the string constant PKPaymentNetworkElo, for use as a dictionary key or argument.
+func PKPaymentNetworkElo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkElo")))
 }
 
-// PKPaymentNetworkIDCredit returns the string constant PKPaymentNetworkIDCredit as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkIDCredit() objc.ID {
-	if _r := raw.PKPaymentNetworkIDCredit(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkIDCredit returns the string constant PKPaymentNetworkIDCredit, for use as a dictionary key or argument.
+func PKPaymentNetworkIDCredit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkIDCredit")))
 }
 
-// PKPaymentNetworkInterac returns the string constant PKPaymentNetworkInterac as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkInterac() objc.ID {
-	if _r := raw.PKPaymentNetworkInterac(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkInterac returns the string constant PKPaymentNetworkInterac, for use as a dictionary key or argument.
+func PKPaymentNetworkInterac() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkInterac")))
 }
 
-// PKPaymentNetworkJCB returns the string constant PKPaymentNetworkJCB as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkJCB() objc.ID {
-	if _r := raw.PKPaymentNetworkJCB(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkJCB returns the string constant PKPaymentNetworkJCB, for use as a dictionary key or argument.
+func PKPaymentNetworkJCB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkJCB")))
 }
 
-// PKPaymentNetworkMada returns the string constant PKPaymentNetworkMada as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkMada() objc.ID {
-	if _r := raw.PKPaymentNetworkMada(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkMada returns the string constant PKPaymentNetworkMada, for use as a dictionary key or argument.
+func PKPaymentNetworkMada() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMada")))
 }
 
-// PKPaymentNetworkMaestro returns the string constant PKPaymentNetworkMaestro as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkMaestro() objc.ID {
-	if _r := raw.PKPaymentNetworkMaestro(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkMaestro returns the string constant PKPaymentNetworkMaestro, for use as a dictionary key or argument.
+func PKPaymentNetworkMaestro() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMaestro")))
 }
 
-// PKPaymentNetworkMasterCard returns the string constant PKPaymentNetworkMasterCard as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkMasterCard() objc.ID {
-	if _r := raw.PKPaymentNetworkMasterCard(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkMasterCard returns the string constant PKPaymentNetworkMasterCard, for use as a dictionary key or argument.
+func PKPaymentNetworkMasterCard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMasterCard")))
 }
 
-// PKPaymentNetworkMir returns the string constant PKPaymentNetworkMir as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkMir() objc.ID {
-	if _r := raw.PKPaymentNetworkMir(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkMir returns the string constant PKPaymentNetworkMir, for use as a dictionary key or argument.
+func PKPaymentNetworkMir() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMir")))
 }
 
-// PKPaymentNetworkPrivateLabel returns the string constant PKPaymentNetworkPrivateLabel as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkPrivateLabel() objc.ID {
-	if _r := raw.PKPaymentNetworkPrivateLabel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkPrivateLabel returns the string constant PKPaymentNetworkPrivateLabel, for use as a dictionary key or argument.
+func PKPaymentNetworkPrivateLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkPrivateLabel")))
 }
 
-// PKPaymentNetworkQuicPay returns the string constant PKPaymentNetworkQuicPay as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkQuicPay() objc.ID {
-	if _r := raw.PKPaymentNetworkQuicPay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkQuicPay returns the string constant PKPaymentNetworkQuicPay, for use as a dictionary key or argument.
+func PKPaymentNetworkQuicPay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkQuicPay")))
 }
 
-// PKPaymentNetworkSuica returns the string constant PKPaymentNetworkSuica as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkSuica() objc.ID {
-	if _r := raw.PKPaymentNetworkSuica(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkSuica returns the string constant PKPaymentNetworkSuica, for use as a dictionary key or argument.
+func PKPaymentNetworkSuica() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkSuica")))
 }
 
-// PKPaymentNetworkVisa returns the string constant PKPaymentNetworkVisa as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkVisa() objc.ID {
-	if _r := raw.PKPaymentNetworkVisa(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkVisa returns the string constant PKPaymentNetworkVisa, for use as a dictionary key or argument.
+func PKPaymentNetworkVisa() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkVisa")))
 }
 
-// PKPaymentNetworkVPay returns the string constant PKPaymentNetworkVPay as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkVPay() objc.ID {
-	if _r := raw.PKPaymentNetworkVPay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkVPay returns the string constant PKPaymentNetworkVPay, for use as a dictionary key or argument.
+func PKPaymentNetworkVPay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkVPay")))
 }
 
-// PKPaymentNetworkBarcode returns the string constant PKPaymentNetworkBarcode as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkBarcode() objc.ID {
-	if _r := raw.PKPaymentNetworkBarcode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkBarcode returns the string constant PKPaymentNetworkBarcode, for use as a dictionary key or argument.
+func PKPaymentNetworkBarcode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkBarcode")))
 }
 
-// PKPaymentNetworkGirocard returns the string constant PKPaymentNetworkGirocard as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkGirocard() objc.ID {
-	if _r := raw.PKPaymentNetworkGirocard(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkGirocard returns the string constant PKPaymentNetworkGirocard, for use as a dictionary key or argument.
+func PKPaymentNetworkGirocard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkGirocard")))
 }
 
-// PKPaymentNetworkWaon returns the string constant PKPaymentNetworkWaon as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkWaon() objc.ID {
-	if _r := raw.PKPaymentNetworkWaon(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkWaon returns the string constant PKPaymentNetworkWaon, for use as a dictionary key or argument.
+func PKPaymentNetworkWaon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkWaon")))
 }
 
-// PKPaymentNetworkNanaco returns the string constant PKPaymentNetworkNanaco as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkNanaco() objc.ID {
-	if _r := raw.PKPaymentNetworkNanaco(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkNanaco returns the string constant PKPaymentNetworkNanaco, for use as a dictionary key or argument.
+func PKPaymentNetworkNanaco() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkNanaco")))
 }
 
-// PKPaymentNetworkPostFinance returns the string constant PKPaymentNetworkPostFinance as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkPostFinance() objc.ID {
-	if _r := raw.PKPaymentNetworkPostFinance(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkPostFinance returns the string constant PKPaymentNetworkPostFinance, for use as a dictionary key or argument.
+func PKPaymentNetworkPostFinance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkPostFinance")))
 }
 
-// PKPaymentNetworkTmoney returns the string constant PKPaymentNetworkTmoney as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkTmoney() objc.ID {
-	if _r := raw.PKPaymentNetworkTmoney(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkTmoney returns the string constant PKPaymentNetworkTmoney, for use as a dictionary key or argument.
+func PKPaymentNetworkTmoney() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkTmoney")))
 }
 
-// PKPaymentNetworkMeeza returns the string constant PKPaymentNetworkMeeza as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkMeeza() objc.ID {
-	if _r := raw.PKPaymentNetworkMeeza(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkMeeza returns the string constant PKPaymentNetworkMeeza, for use as a dictionary key or argument.
+func PKPaymentNetworkMeeza() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMeeza")))
 }
 
-// PKPaymentNetworkNAPAS returns the string constant PKPaymentNetworkNAPAS as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkNAPAS() objc.ID {
-	if _r := raw.PKPaymentNetworkNAPAS(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkNAPAS returns the string constant PKPaymentNetworkNAPAS, for use as a dictionary key or argument.
+func PKPaymentNetworkNAPAS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkNAPAS")))
 }
 
-// PKPaymentNetworkBankAxept returns the string constant PKPaymentNetworkBankAxept as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkBankAxept() objc.ID {
-	if _r := raw.PKPaymentNetworkBankAxept(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkBankAxept returns the string constant PKPaymentNetworkBankAxept, for use as a dictionary key or argument.
+func PKPaymentNetworkBankAxept() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkBankAxept")))
 }
 
-// PKPaymentNetworkHimyan returns the string constant PKPaymentNetworkHimyan as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkHimyan() objc.ID {
-	if _r := raw.PKPaymentNetworkHimyan(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkHimyan returns the string constant PKPaymentNetworkHimyan, for use as a dictionary key or argument.
+func PKPaymentNetworkHimyan() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkHimyan")))
 }
 
-// PKPaymentNetworkJaywan returns the string constant PKPaymentNetworkJaywan as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkJaywan() objc.ID {
-	if _r := raw.PKPaymentNetworkJaywan(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkJaywan returns the string constant PKPaymentNetworkJaywan, for use as a dictionary key or argument.
+func PKPaymentNetworkJaywan() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkJaywan")))
 }
 
-// PKPaymentNetworkMyDebit returns the string constant PKPaymentNetworkMyDebit as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkMyDebit() objc.ID {
-	if _r := raw.PKPaymentNetworkMyDebit(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkMyDebit returns the string constant PKPaymentNetworkMyDebit, for use as a dictionary key or argument.
+func PKPaymentNetworkMyDebit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkMyDebit")))
 }
 
-// PKPaymentNetworkConecs returns the string constant PKPaymentNetworkConecs as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkConecs() objc.ID {
-	if _r := raw.PKPaymentNetworkConecs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkConecs returns the string constant PKPaymentNetworkConecs, for use as a dictionary key or argument.
+func PKPaymentNetworkConecs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkConecs")))
 }
 
-// PKPaymentNetworkElCorteIngles returns the string constant PKPaymentNetworkElCorteIngles as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentNetworkElCorteIngles() objc.ID {
-	if _r := raw.PKPaymentNetworkElCorteIngles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentNetworkElCorteIngles returns the string constant PKPaymentNetworkElCorteIngles, for use as a dictionary key or argument.
+func PKPaymentNetworkElCorteIngles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentNetworkElCorteIngles")))
 }
 
-// PKContactFieldPostalAddress returns the string constant PKContactFieldPostalAddress as an objc.ID, for use as a dictionary key or selector argument.
-func PKContactFieldPostalAddress() objc.ID {
-	if _r := raw.PKContactFieldPostalAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKContactFieldPostalAddress returns the string constant PKContactFieldPostalAddress, for use as a dictionary key or argument.
+func PKContactFieldPostalAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKContactFieldPostalAddress")))
 }
 
-// PKContactFieldEmailAddress returns the string constant PKContactFieldEmailAddress as an objc.ID, for use as a dictionary key or selector argument.
-func PKContactFieldEmailAddress() objc.ID {
-	if _r := raw.PKContactFieldEmailAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKContactFieldEmailAddress returns the string constant PKContactFieldEmailAddress, for use as a dictionary key or argument.
+func PKContactFieldEmailAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKContactFieldEmailAddress")))
 }
 
-// PKContactFieldPhoneNumber returns the string constant PKContactFieldPhoneNumber as an objc.ID, for use as a dictionary key or selector argument.
-func PKContactFieldPhoneNumber() objc.ID {
-	if _r := raw.PKContactFieldPhoneNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKContactFieldPhoneNumber returns the string constant PKContactFieldPhoneNumber, for use as a dictionary key or argument.
+func PKContactFieldPhoneNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKContactFieldPhoneNumber")))
 }
 
-// PKContactFieldName returns the string constant PKContactFieldName as an objc.ID, for use as a dictionary key or selector argument.
-func PKContactFieldName() objc.ID {
-	if _r := raw.PKContactFieldName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKContactFieldName returns the string constant PKContactFieldName, for use as a dictionary key or argument.
+func PKContactFieldName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKContactFieldName")))
 }
 
-// PKContactFieldPhoneticName returns the string constant PKContactFieldPhoneticName as an objc.ID, for use as a dictionary key or selector argument.
-func PKContactFieldPhoneticName() objc.ID {
-	if _r := raw.PKContactFieldPhoneticName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKContactFieldPhoneticName returns the string constant PKContactFieldPhoneticName, for use as a dictionary key or argument.
+func PKContactFieldPhoneticName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKContactFieldPhoneticName")))
 }
 
-// PKPassKitErrorDomain returns the string constant PKPassKitErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassKitErrorDomain() objc.ID {
-	return purego.CFConstant(raw.PKPassKitErrorDomain())
+// PKPassKitErrorDomain returns the string constant PKPassKitErrorDomain, for use as a dictionary key or argument.
+func PKPassKitErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassKitErrorDomain")))
 }
 
-// PKPaymentErrorDomain returns the string constant PKPaymentErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentErrorDomain() objc.ID {
-	return purego.CFConstant(raw.PKPaymentErrorDomain())
+// PKPaymentErrorDomain returns the string constant PKPaymentErrorDomain, for use as a dictionary key or argument.
+func PKPaymentErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentErrorDomain")))
 }
 
-// PKPaymentErrorContactFieldUserInfoKey returns the string constant PKPaymentErrorContactFieldUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentErrorContactFieldUserInfoKey() objc.ID {
-	if _r := raw.PKPaymentErrorContactFieldUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentErrorContactFieldUserInfoKey returns the string constant PKPaymentErrorContactFieldUserInfoKey, for use as a dictionary key or argument.
+func PKPaymentErrorContactFieldUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentErrorContactFieldUserInfoKey")))
 }
 
-// PKPaymentErrorPostalAddressUserInfoKey returns the string constant PKPaymentErrorPostalAddressUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPaymentErrorPostalAddressUserInfoKey() objc.ID {
-	if _r := raw.PKPaymentErrorPostalAddressUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPaymentErrorPostalAddressUserInfoKey returns the string constant PKPaymentErrorPostalAddressUserInfoKey, for use as a dictionary key or argument.
+func PKPaymentErrorPostalAddressUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPaymentErrorPostalAddressUserInfoKey")))
 }
 
-// PKDisbursementErrorDomain returns the string constant PKDisbursementErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PKDisbursementErrorDomain() objc.ID {
-	return purego.CFConstant(raw.PKDisbursementErrorDomain())
+// PKDisbursementErrorDomain returns the string constant PKDisbursementErrorDomain, for use as a dictionary key or argument.
+func PKDisbursementErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKDisbursementErrorDomain")))
 }
 
-// PKDisbursementErrorContactFieldUserInfoKey returns the string constant PKDisbursementErrorContactFieldUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKDisbursementErrorContactFieldUserInfoKey() objc.ID {
-	if _r := raw.PKDisbursementErrorContactFieldUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKDisbursementErrorContactFieldUserInfoKey returns the string constant PKDisbursementErrorContactFieldUserInfoKey, for use as a dictionary key or argument.
+func PKDisbursementErrorContactFieldUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKDisbursementErrorContactFieldUserInfoKey")))
 }
 
-// PKAddSecureElementPassErrorDomain returns the string constant PKAddSecureElementPassErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PKAddSecureElementPassErrorDomain() objc.ID {
-	return purego.CFConstant(raw.PKAddSecureElementPassErrorDomain())
+// PKAddSecureElementPassErrorDomain returns the string constant PKAddSecureElementPassErrorDomain, for use as a dictionary key or argument.
+func PKAddSecureElementPassErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKAddSecureElementPassErrorDomain")))
 }
 
-// PKShareSecureElementPassErrorDomain returns the string constant PKShareSecureElementPassErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PKShareSecureElementPassErrorDomain() objc.ID {
-	return purego.CFConstant(raw.PKShareSecureElementPassErrorDomain())
+// PKShareSecureElementPassErrorDomain returns the string constant PKShareSecureElementPassErrorDomain, for use as a dictionary key or argument.
+func PKShareSecureElementPassErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKShareSecureElementPassErrorDomain")))
 }
 
-// PKPassLibraryDidChangeNotification returns the string constant PKPassLibraryDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryDidChangeNotification() objc.ID {
-	if _r := raw.PKPassLibraryDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryDidChangeNotification returns the string constant PKPassLibraryDidChangeNotification, for use as a dictionary key or argument.
+func PKPassLibraryDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryDidChangeNotification")))
 }
 
-// PKPassLibraryRemotePaymentPassesDidChangeNotification returns the string constant PKPassLibraryRemotePaymentPassesDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryRemotePaymentPassesDidChangeNotification() objc.ID {
-	if _r := raw.PKPassLibraryRemotePaymentPassesDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryRemotePaymentPassesDidChangeNotification returns the string constant PKPassLibraryRemotePaymentPassesDidChangeNotification, for use as a dictionary key or argument.
+func PKPassLibraryRemotePaymentPassesDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryRemotePaymentPassesDidChangeNotification")))
 }
 
-// PKPassLibraryAddedPassesUserInfoKey returns the string constant PKPassLibraryAddedPassesUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryAddedPassesUserInfoKey() objc.ID {
-	if _r := raw.PKPassLibraryAddedPassesUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryAddedPassesUserInfoKey returns the string constant PKPassLibraryAddedPassesUserInfoKey, for use as a dictionary key or argument.
+func PKPassLibraryAddedPassesUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryAddedPassesUserInfoKey")))
 }
 
-// PKPassLibraryReplacementPassesUserInfoKey returns the string constant PKPassLibraryReplacementPassesUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryReplacementPassesUserInfoKey() objc.ID {
-	if _r := raw.PKPassLibraryReplacementPassesUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryReplacementPassesUserInfoKey returns the string constant PKPassLibraryReplacementPassesUserInfoKey, for use as a dictionary key or argument.
+func PKPassLibraryReplacementPassesUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryReplacementPassesUserInfoKey")))
 }
 
-// PKPassLibraryRemovedPassInfosUserInfoKey returns the string constant PKPassLibraryRemovedPassInfosUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryRemovedPassInfosUserInfoKey() objc.ID {
-	if _r := raw.PKPassLibraryRemovedPassInfosUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryRemovedPassInfosUserInfoKey returns the string constant PKPassLibraryRemovedPassInfosUserInfoKey, for use as a dictionary key or argument.
+func PKPassLibraryRemovedPassInfosUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryRemovedPassInfosUserInfoKey")))
 }
 
-// PKPassLibraryPassTypeIdentifierUserInfoKey returns the string constant PKPassLibraryPassTypeIdentifierUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryPassTypeIdentifierUserInfoKey() objc.ID {
-	if _r := raw.PKPassLibraryPassTypeIdentifierUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryPassTypeIdentifierUserInfoKey returns the string constant PKPassLibraryPassTypeIdentifierUserInfoKey, for use as a dictionary key or argument.
+func PKPassLibraryPassTypeIdentifierUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryPassTypeIdentifierUserInfoKey")))
 }
 
-// PKPassLibrarySerialNumberUserInfoKey returns the string constant PKPassLibrarySerialNumberUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibrarySerialNumberUserInfoKey() objc.ID {
-	if _r := raw.PKPassLibrarySerialNumberUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibrarySerialNumberUserInfoKey returns the string constant PKPassLibrarySerialNumberUserInfoKey, for use as a dictionary key or argument.
+func PKPassLibrarySerialNumberUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibrarySerialNumberUserInfoKey")))
 }
 
-// PKPassLibraryRecoveredPassesUserInfoKey returns the string constant PKPassLibraryRecoveredPassesUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func PKPassLibraryRecoveredPassesUserInfoKey() objc.ID {
-	if _r := raw.PKPassLibraryRecoveredPassesUserInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPassLibraryRecoveredPassesUserInfoKey returns the string constant PKPassLibraryRecoveredPassesUserInfoKey, for use as a dictionary key or argument.
+func PKPassLibraryRecoveredPassesUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPassLibraryRecoveredPassesUserInfoKey")))
 }
 
-// PKStoredValuePassBalanceTypeCash returns the string constant PKStoredValuePassBalanceTypeCash as an objc.ID, for use as a dictionary key or selector argument.
-func PKStoredValuePassBalanceTypeCash() objc.ID {
-	if _r := raw.PKStoredValuePassBalanceTypeCash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKStoredValuePassBalanceTypeCash returns the string constant PKStoredValuePassBalanceTypeCash, for use as a dictionary key or argument.
+func PKStoredValuePassBalanceTypeCash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKStoredValuePassBalanceTypeCash")))
 }
 
-// PKStoredValuePassBalanceTypeLoyaltyPoints returns the string constant PKStoredValuePassBalanceTypeLoyaltyPoints as an objc.ID, for use as a dictionary key or selector argument.
-func PKStoredValuePassBalanceTypeLoyaltyPoints() objc.ID {
-	if _r := raw.PKStoredValuePassBalanceTypeLoyaltyPoints(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKStoredValuePassBalanceTypeLoyaltyPoints returns the string constant PKStoredValuePassBalanceTypeLoyaltyPoints, for use as a dictionary key or argument.
+func PKStoredValuePassBalanceTypeLoyaltyPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKStoredValuePassBalanceTypeLoyaltyPoints")))
 }

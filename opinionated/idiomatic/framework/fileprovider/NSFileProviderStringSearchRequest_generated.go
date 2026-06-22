@@ -5,62 +5,91 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that contains details of a string-based search request.
+// FileProviderStringSearchRequest is an idiomatic wrapper over the Objective-C class NSFileProviderStringSearchRequest.
 //
-// FileProviderStringSearchRequest wraps [raw.NSFileProviderStringSearchRequest] with a fluent Go API.
+// A type that contains details of a string-based search request.
 type FileProviderStringSearchRequest struct {
-	inner *raw.NSFileProviderStringSearchRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderStringSearchRequest].
-func (x *FileProviderStringSearchRequest) Unwrap() *raw.NSFileProviderStringSearchRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderStringSearchRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderStringSearchRequestFromID adopts an existing object pointer as a FileProviderStringSearchRequest (nil for 0).
+// FileProviderStringSearchRequestFromID adopts an existing Objective-C object as a FileProviderStringSearchRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderStringSearchRequestFromID(id objc.ID) *FileProviderStringSearchRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderStringSearchRequest{inner: raw.NSFileProviderStringSearchRequestFromID(id)}
+	x := &FileProviderStringSearchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFileProviderStringSearchRequest creates a new [FileProviderStringSearchRequest].
+// fileProviderStringSearchRequestAdopt wraps an Objective-C object that this code just created as a
+// FileProviderStringSearchRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderStringSearchRequestAdopt(id objc.ID) *FileProviderStringSearchRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderStringSearchRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderStringSearchRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderStringSearchRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderStringSearchRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderStringSearchRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileProviderStringSearchRequest creates a new FileProviderStringSearchRequest.
 func NewFileProviderStringSearchRequest() *FileProviderStringSearchRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderStringSearchRequest")), objc.RegisterName("new"))
-	return &FileProviderStringSearchRequest{inner: raw.NSFileProviderStringSearchRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderStringSearchRequest")), objc.RegisterName("new"))
+	return fileProviderStringSearchRequestAdopt(_id)
 }
 
-// A plaintext string, representing the query the user entered into the system search UI.
-//
-// Query calls the underlying Query.
+// Query a plaintext string, representing the query the user entered into the system search UI.
 func (x *FileProviderStringSearchRequest) Query() string {
-	_r := x.inner.Query()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("query"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// How many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
-//
-// DesiredNumberOfResults calls the underlying DesiredNumberOfResults.
+// DesiredNumberOfResults how many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
 func (x *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
-	return x.inner.DesiredNumberOfResults()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("desiredNumberOfResults"))
+	return _r
 }
 
 // FileProviderStringSearchRequestable is the interface implemented by [FileProviderStringSearchRequest], for mocking and DI.
 type FileProviderStringSearchRequestable interface {
-	Unwrap() *raw.NSFileProviderStringSearchRequest
+	obj.Object
 	Query() string
 	DesiredNumberOfResults() int
 }

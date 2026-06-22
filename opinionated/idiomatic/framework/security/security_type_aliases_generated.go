@@ -4,543 +4,126 @@
 
 package security
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
-)
-
-// AuthorizationExternalForm is a type alias for the raw AuthorizationExternalForm value-type struct.
-type AuthorizationExternalForm = raw.AuthorizationExternalForm
-
-// AuthorizationItem is a type alias for the raw AuthorizationItem value-type struct.
-type AuthorizationItem = raw.AuthorizationItem
-
-// AuthorizationItemSet is a type alias for the raw AuthorizationItemSet value-type struct.
-type AuthorizationItemSet = raw.AuthorizationItemSet
-
-// CSSM_APPLE_CL_CSR_REQUEST is a type alias for the raw CSSM_APPLE_CL_CSR_REQUEST value-type struct.
-type CSSM_APPLE_CL_CSR_REQUEST = raw.CSSM_APPLE_CL_CSR_REQUEST
-
-// CSSM_APPLE_TP_ACTION_DATA is a type alias for the raw CSSM_APPLE_TP_ACTION_DATA value-type struct.
-type CSSM_APPLE_TP_ACTION_DATA = raw.CSSM_APPLE_TP_ACTION_DATA
-
-// CSSM_APPLE_TP_CERT_REQUEST is a type alias for the raw CSSM_APPLE_TP_CERT_REQUEST value-type struct.
-type CSSM_APPLE_TP_CERT_REQUEST = raw.CSSM_APPLE_TP_CERT_REQUEST
-
-// CSSM_APPLE_TP_CRL_OPTIONS is a type alias for the raw CSSM_APPLE_TP_CRL_OPTIONS value-type struct.
-type CSSM_APPLE_TP_CRL_OPTIONS = raw.CSSM_APPLE_TP_CRL_OPTIONS
-
-// CSSM_APPLE_TP_NAME_OID is a type alias for the raw CSSM_APPLE_TP_NAME_OID value-type struct.
-type CSSM_APPLE_TP_NAME_OID = raw.CSSM_APPLE_TP_NAME_OID
-
-// CSSM_APPLE_TP_SMIME_OPTIONS is a type alias for the raw CSSM_APPLE_TP_SMIME_OPTIONS value-type struct.
-type CSSM_APPLE_TP_SMIME_OPTIONS = raw.CSSM_APPLE_TP_SMIME_OPTIONS
-
-// CSSM_APPLE_TP_SSL_OPTIONS is a type alias for the raw CSSM_APPLE_TP_SSL_OPTIONS value-type struct.
-type CSSM_APPLE_TP_SSL_OPTIONS = raw.CSSM_APPLE_TP_SSL_OPTIONS
-
-// CSSM_TP_APPLE_EVIDENCE_HEADER is a type alias for the raw CSSM_TP_APPLE_EVIDENCE_HEADER value-type struct.
-type CSSM_TP_APPLE_EVIDENCE_HEADER = raw.CSSM_TP_APPLE_EVIDENCE_HEADER
-
-// CSSM_TP_APPLE_EVIDENCE_INFO is a type alias for the raw CSSM_TP_APPLE_EVIDENCE_INFO value-type struct.
-type CSSM_TP_APPLE_EVIDENCE_INFO = raw.CSSM_TP_APPLE_EVIDENCE_INFO
-
-// CSSM_TUPLE is a type alias for the raw CSSM_TUPLE value-type struct.
-type CSSM_TUPLE = raw.CSSM_TUPLE
-
-// SecAsn1AlgId is a type alias for the raw SecAsn1AlgId value-type struct.
-type SecAsn1AlgId = raw.SecAsn1AlgId
-
-// SecAsn1PubKeyInfo is a type alias for the raw SecAsn1PubKeyInfo value-type struct.
-type SecAsn1PubKeyInfo = raw.SecAsn1PubKeyInfo
-
-// SecAsn1Template_struct is a type alias for the raw SecAsn1Template_struct value-type struct.
-type SecAsn1Template_struct = raw.SecAsn1Template_struct
-
-// SecItemImportExportKeyParameters is a type alias for the raw SecItemImportExportKeyParameters value-type struct.
-type SecItemImportExportKeyParameters = raw.SecItemImportExportKeyParameters
-
-// SecKeyImportExportParameters is a type alias for the raw SecKeyImportExportParameters value-type struct.
-type SecKeyImportExportParameters = raw.SecKeyImportExportParameters
-
-// SecKeychainAttribute is a type alias for the raw SecKeychainAttribute value-type struct.
-type SecKeychainAttribute = raw.SecKeychainAttribute
-
-// SecKeychainAttributeInfo is a type alias for the raw SecKeychainAttributeInfo value-type struct.
-type SecKeychainAttributeInfo = raw.SecKeychainAttributeInfo
-
-// SecKeychainAttributeList is a type alias for the raw SecKeychainAttributeList value-type struct.
-type SecKeychainAttributeList = raw.SecKeychainAttributeList
-
-// SecKeychainCallbackInfo is a type alias for the raw SecKeychainCallbackInfo value-type struct.
-type SecKeychainCallbackInfo = raw.SecKeychainCallbackInfo
-
-// SecKeychainSettings is a type alias for the raw SecKeychainSettings value-type struct.
-type SecKeychainSettings = raw.SecKeychainSettings
-
-// CEAccessDescription is a type alias for the raw CEAccessDescription value-type struct.
-type CEAccessDescription = raw.CEAccessDescription
-
-// CEAuthorityInfoAccess is a type alias for the raw CEAuthorityInfoAccess value-type struct.
-type CEAuthorityInfoAccess = raw.CEAuthorityInfoAccess
-
-// CEAuthorityKeyID is a type alias for the raw CEAuthorityKeyID value-type struct.
-type CEAuthorityKeyID = raw.CEAuthorityKeyID
-
-// CEBasicConstraints is a type alias for the raw CEBasicConstraints value-type struct.
-type CEBasicConstraints = raw.CEBasicConstraints
-
-// CECRLDistPointsSyntax is a type alias for the raw CECRLDistPointsSyntax value-type struct.
-type CECRLDistPointsSyntax = raw.CECRLDistPointsSyntax
-
-// CECRLDistributionPoint is a type alias for the raw CECRLDistributionPoint value-type struct.
-type CECRLDistributionPoint = raw.CECRLDistributionPoint
-
-// CECertPolicies is a type alias for the raw CECertPolicies value-type struct.
-type CECertPolicies = raw.CECertPolicies
-
-// CEDataAndType is a type alias for the raw CEDataAndType value-type struct.
-type CEDataAndType = raw.CEDataAndType
-
-// CEDistributionPointName is a type alias for the raw CEDistributionPointName value-type struct.
-type CEDistributionPointName = raw.CEDistributionPointName
-
-// CEExtendedKeyUsage is a type alias for the raw CEExtendedKeyUsage value-type struct.
-type CEExtendedKeyUsage = raw.CEExtendedKeyUsage
-
-// CEGeneralName is a type alias for the raw CEGeneralName value-type struct.
-type CEGeneralName = raw.CEGeneralName
-
-// CEGeneralNames is a type alias for the raw CEGeneralNames value-type struct.
-type CEGeneralNames = raw.CEGeneralNames
-
-// CEGeneralSubtree is a type alias for the raw CEGeneralSubtree value-type struct.
-type CEGeneralSubtree = raw.CEGeneralSubtree
-
-// CEGeneralSubtrees is a type alias for the raw CEGeneralSubtrees value-type struct.
-type CEGeneralSubtrees = raw.CEGeneralSubtrees
-
-// CEIssuingDistributionPoint is a type alias for the raw CEIssuingDistributionPoint value-type struct.
-type CEIssuingDistributionPoint = raw.CEIssuingDistributionPoint
-
-// CENameConstraints is a type alias for the raw CENameConstraints value-type struct.
-type CENameConstraints = raw.CENameConstraints
-
-// CEOtherName is a type alias for the raw CEOtherName value-type struct.
-type CEOtherName = raw.CEOtherName
-
-// CEPolicyConstraints is a type alias for the raw CEPolicyConstraints value-type struct.
-type CEPolicyConstraints = raw.CEPolicyConstraints
-
-// CEPolicyInformation is a type alias for the raw CEPolicyInformation value-type struct.
-type CEPolicyInformation = raw.CEPolicyInformation
-
-// CEPolicyMapping is a type alias for the raw CEPolicyMapping value-type struct.
-type CEPolicyMapping = raw.CEPolicyMapping
-
-// CEPolicyMappings is a type alias for the raw CEPolicyMappings value-type struct.
-type CEPolicyMappings = raw.CEPolicyMappings
-
-// CEPolicyQualifierInfo is a type alias for the raw CEPolicyQualifierInfo value-type struct.
-type CEPolicyQualifierInfo = raw.CEPolicyQualifierInfo
-
-// CEQCStatement is a type alias for the raw CEQCStatement value-type struct.
-type CEQCStatement = raw.CEQCStatement
-
-// CEQCStatements is a type alias for the raw CEQCStatements value-type struct.
-type CEQCStatements = raw.CEQCStatements
-
-// CESemanticsInformation is a type alias for the raw CESemanticsInformation value-type struct.
-type CESemanticsInformation = raw.CESemanticsInformation
-
-// CssmAccessCredentials is a type alias for the raw CssmAccessCredentials value-type struct.
-type CssmAccessCredentials = raw.CssmAccessCredentials
-
-// CssmAclEdit is a type alias for the raw CssmAclEdit value-type struct.
-type CssmAclEdit = raw.CssmAclEdit
-
-// CssmAclEntryInfo is a type alias for the raw CssmAclEntryInfo value-type struct.
-type CssmAclEntryInfo = raw.CssmAclEntryInfo
-
-// CssmAclEntryInput is a type alias for the raw CssmAclEntryInput value-type struct.
-type CssmAclEntryInput = raw.CssmAclEntryInput
-
-// CssmAclEntryPrototype is a type alias for the raw CssmAclEntryPrototype value-type struct.
-type CssmAclEntryPrototype = raw.CssmAclEntryPrototype
-
-// CssmAclKeychainPromptSelector is a type alias for the raw CssmAclKeychainPromptSelector value-type struct.
-type CssmAclKeychainPromptSelector = raw.CssmAclKeychainPromptSelector
-
-// CssmAclOwnerPrototype is a type alias for the raw CssmAclOwnerPrototype value-type struct.
-type CssmAclOwnerPrototype = raw.CssmAclOwnerPrototype
-
-// CssmAclProcessSubjectSelector is a type alias for the raw CssmAclProcessSubjectSelector value-type struct.
-type CssmAclProcessSubjectSelector = raw.CssmAclProcessSubjectSelector
-
-// CssmAclValidityPeriod is a type alias for the raw CssmAclValidityPeriod value-type struct.
-type CssmAclValidityPeriod = raw.CssmAclValidityPeriod
-
-// CssmApplecspdlDbChangePasswordParameters is a type alias for the raw CssmApplecspdlDbChangePasswordParameters value-type struct.
-type CssmApplecspdlDbChangePasswordParameters = raw.CssmApplecspdlDbChangePasswordParameters
-
-// CssmApplecspdlDbIsLockedParameters is a type alias for the raw CssmApplecspdlDbIsLockedParameters value-type struct.
-type CssmApplecspdlDbIsLockedParameters = raw.CssmApplecspdlDbIsLockedParameters
-
-// CssmApplecspdlDbSettingsParameters is a type alias for the raw CssmApplecspdlDbSettingsParameters value-type struct.
-type CssmApplecspdlDbSettingsParameters = raw.CssmApplecspdlDbSettingsParameters
-
-// CssmAppledlOpenParameters is a type alias for the raw CssmAppledlOpenParameters value-type struct.
-type CssmAppledlOpenParameters = raw.CssmAppledlOpenParameters
-
-// CssmAuthorizationgroup is a type alias for the raw CssmAuthorizationgroup value-type struct.
-type CssmAuthorizationgroup = raw.CssmAuthorizationgroup
-
-// CssmBaseCerts is a type alias for the raw CssmBaseCerts value-type struct.
-type CssmBaseCerts = raw.CssmBaseCerts
-
-// CssmCertBundle is a type alias for the raw CssmCertBundle value-type struct.
-type CssmCertBundle = raw.CssmCertBundle
-
-// CssmCertBundleHeader is a type alias for the raw CssmCertBundleHeader value-type struct.
-type CssmCertBundleHeader = raw.CssmCertBundleHeader
-
-// CssmCertPair is a type alias for the raw CssmCertPair value-type struct.
-type CssmCertPair = raw.CssmCertPair
-
-// CssmCertgroup is a type alias for the raw CssmCertgroup value-type struct.
-type CssmCertgroup = raw.CssmCertgroup
-
-// CssmContext is a type alias for the raw CssmContext value-type struct.
-type CssmContext = raw.CssmContext
-
-// CssmContextAttribute is a type alias for the raw CssmContextAttribute value-type struct.
-type CssmContextAttribute = raw.CssmContextAttribute
-
-// CssmCrlPair is a type alias for the raw CssmCrlPair value-type struct.
-type CssmCrlPair = raw.CssmCrlPair
-
-// CssmCrlgroup is a type alias for the raw CssmCrlgroup value-type struct.
-type CssmCrlgroup = raw.CssmCrlgroup
-
-// CssmCryptoData is a type alias for the raw CssmCryptoData value-type struct.
-type CssmCryptoData = raw.CssmCryptoData
-
-// CssmCspOperationalStatistics is a type alias for the raw CssmCspOperationalStatistics value-type struct.
-type CssmCspOperationalStatistics = raw.CssmCspOperationalStatistics
-
-// CssmData is a type alias for the raw CssmData value-type struct.
-type CssmData = raw.CssmData
-
-// CssmDate is a type alias for the raw CssmDate value-type struct.
-type CssmDate = raw.CssmDate
-
-// CssmDbAttributeData is a type alias for the raw CssmDbAttributeData value-type struct.
-type CssmDbAttributeData = raw.CssmDbAttributeData
-
-// CssmDbAttributeInfo is a type alias for the raw CssmDbAttributeInfo value-type struct.
-type CssmDbAttributeInfo = raw.CssmDbAttributeInfo
-
-// CssmDbIndexInfo is a type alias for the raw CssmDbIndexInfo value-type struct.
-type CssmDbIndexInfo = raw.CssmDbIndexInfo
-
-// CssmDbParsingModuleInfo is a type alias for the raw CssmDbParsingModuleInfo value-type struct.
-type CssmDbParsingModuleInfo = raw.CssmDbParsingModuleInfo
-
-// CssmDbRecordAttributeData is a type alias for the raw CssmDbRecordAttributeData value-type struct.
-type CssmDbRecordAttributeData = raw.CssmDbRecordAttributeData
-
-// CssmDbRecordAttributeInfo is a type alias for the raw CssmDbRecordAttributeInfo value-type struct.
-type CssmDbRecordAttributeInfo = raw.CssmDbRecordAttributeInfo
-
-// CssmDbRecordIndexInfo is a type alias for the raw CssmDbRecordIndexInfo value-type struct.
-type CssmDbRecordIndexInfo = raw.CssmDbRecordIndexInfo
-
-// CssmDbSchemaAttributeInfo is a type alias for the raw CssmDbSchemaAttributeInfo value-type struct.
-type CssmDbSchemaAttributeInfo = raw.CssmDbSchemaAttributeInfo
-
-// CssmDbSchemaIndexInfo is a type alias for the raw CssmDbSchemaIndexInfo value-type struct.
-type CssmDbSchemaIndexInfo = raw.CssmDbSchemaIndexInfo
-
-// CssmDbUniqueRecord is a type alias for the raw CssmDbUniqueRecord value-type struct.
-type CssmDbUniqueRecord = raw.CssmDbUniqueRecord
-
-// CssmDbinfo is a type alias for the raw CssmDbinfo value-type struct.
-type CssmDbinfo = raw.CssmDbinfo
-
-// CssmDlDbHandle is a type alias for the raw CssmDlDbHandle value-type struct.
-type CssmDlDbHandle = raw.CssmDlDbHandle
-
-// CssmDlDbList is a type alias for the raw CssmDlDbList value-type struct.
-type CssmDlDbList = raw.CssmDlDbList
-
-// CssmDlPkcs11Attributes is a type alias for the raw CssmDlPkcs11Attributes value-type struct.
-type CssmDlPkcs11Attributes = raw.CssmDlPkcs11Attributes
-
-// CssmEncodedCert is a type alias for the raw CssmEncodedCert value-type struct.
-type CssmEncodedCert = raw.CssmEncodedCert
-
-// CssmEncodedCrl is a type alias for the raw CssmEncodedCrl value-type struct.
-type CssmEncodedCrl = raw.CssmEncodedCrl
-
-// CssmEvidence is a type alias for the raw CssmEvidence value-type struct.
-type CssmEvidence = raw.CssmEvidence
-
-// CssmField is a type alias for the raw CssmField value-type struct.
-type CssmField = raw.CssmField
-
-// CssmFieldgroup is a type alias for the raw CssmFieldgroup value-type struct.
-type CssmFieldgroup = raw.CssmFieldgroup
-
-// CssmFuncNameAddr is a type alias for the raw CssmFuncNameAddr value-type struct.
-type CssmFuncNameAddr = raw.CssmFuncNameAddr
-
-// CssmGuid is a type alias for the raw CssmGuid value-type struct.
-type CssmGuid = raw.CssmGuid
-
-// CssmKeaDeriveParams is a type alias for the raw CssmKeaDeriveParams value-type struct.
-type CssmKeaDeriveParams = raw.CssmKeaDeriveParams
-
-// CssmKey is a type alias for the raw CssmKey value-type struct.
-type CssmKey = raw.CssmKey
-
-// CssmKeySize is a type alias for the raw CssmKeySize value-type struct.
-type CssmKeySize = raw.CssmKeySize
-
-// CssmKeyheader is a type alias for the raw CssmKeyheader value-type struct.
-type CssmKeyheader = raw.CssmKeyheader
-
-// CssmKrName is a type alias for the raw CssmKrName value-type struct.
-type CssmKrName = raw.CssmKrName
-
-// CssmKrPolicyInfo is a type alias for the raw CssmKrPolicyInfo value-type struct.
-type CssmKrPolicyInfo = raw.CssmKrPolicyInfo
-
-// CssmKrPolicyListItem is a type alias for the raw CssmKrPolicyListItem value-type struct.
-type CssmKrPolicyListItem = raw.CssmKrPolicyListItem
-
-// CssmKrProfile is a type alias for the raw CssmKrProfile value-type struct.
-type CssmKrProfile = raw.CssmKrProfile
-
-// CssmKrWrappedproductinfo is a type alias for the raw CssmKrWrappedproductinfo value-type struct.
-type CssmKrWrappedproductinfo = raw.CssmKrWrappedproductinfo
-
-// CssmKrsubservice is a type alias for the raw CssmKrsubservice value-type struct.
-type CssmKrsubservice = raw.CssmKrsubservice
-
-// CssmList is a type alias for the raw CssmList value-type struct.
-type CssmList = raw.CssmList
-
-// CssmListElement is a type alias for the raw CssmListElement value-type struct.
-type CssmListElement = raw.CssmListElement
-
-// CssmManagerEventNotification is a type alias for the raw CssmManagerEventNotification value-type struct.
-type CssmManagerEventNotification = raw.CssmManagerEventNotification
-
-// CssmManagerRegistrationInfo is a type alias for the raw CssmManagerRegistrationInfo value-type struct.
-type CssmManagerRegistrationInfo = raw.CssmManagerRegistrationInfo
-
-// CssmMemoryFuncs is a type alias for the raw CssmMemoryFuncs value-type struct.
-type CssmMemoryFuncs = raw.CssmMemoryFuncs
-
-// CssmModuleFuncs is a type alias for the raw CssmModuleFuncs value-type struct.
-type CssmModuleFuncs = raw.CssmModuleFuncs
-
-// CssmNameList is a type alias for the raw CssmNameList value-type struct.
-type CssmNameList = raw.CssmNameList
-
-// CssmNetAddress is a type alias for the raw CssmNetAddress value-type struct.
-type CssmNetAddress = raw.CssmNetAddress
-
-// CssmParsedCert is a type alias for the raw CssmParsedCert value-type struct.
-type CssmParsedCert = raw.CssmParsedCert
-
-// CssmParsedCrl is a type alias for the raw CssmParsedCrl value-type struct.
-type CssmParsedCrl = raw.CssmParsedCrl
-
-// CssmPkcs1OaepParams is a type alias for the raw CssmPkcs1OaepParams value-type struct.
-type CssmPkcs1OaepParams = raw.CssmPkcs1OaepParams
-
-// CssmPkcs5Pbkdf1Params is a type alias for the raw CssmPkcs5Pbkdf1Params value-type struct.
-type CssmPkcs5Pbkdf1Params = raw.CssmPkcs5Pbkdf1Params
-
-// CssmPkcs5Pbkdf2Params is a type alias for the raw CssmPkcs5Pbkdf2Params value-type struct.
-type CssmPkcs5Pbkdf2Params = raw.CssmPkcs5Pbkdf2Params
-
-// CssmQuery is a type alias for the raw CssmQuery value-type struct.
-type CssmQuery = raw.CssmQuery
-
-// CssmQueryLimits is a type alias for the raw CssmQueryLimits value-type struct.
-type CssmQueryLimits = raw.CssmQueryLimits
-
-// CssmQuerySizeData is a type alias for the raw CssmQuerySizeData value-type struct.
-type CssmQuerySizeData = raw.CssmQuerySizeData
-
-// CssmRange is a type alias for the raw CssmRange value-type struct.
-type CssmRange = raw.CssmRange
-
-// CssmResourceControlContext is a type alias for the raw CssmResourceControlContext value-type struct.
-type CssmResourceControlContext = raw.CssmResourceControlContext
-
-// CssmSample is a type alias for the raw CssmSample value-type struct.
-type CssmSample = raw.CssmSample
-
-// CssmSamplegroup is a type alias for the raw CssmSamplegroup value-type struct.
-type CssmSamplegroup = raw.CssmSamplegroup
-
-// CssmSelectionPredicate is a type alias for the raw CssmSelectionPredicate value-type struct.
-type CssmSelectionPredicate = raw.CssmSelectionPredicate
-
-// CssmSpiAcFuncs is a type alias for the raw CssmSpiAcFuncs value-type struct.
-type CssmSpiAcFuncs = raw.CssmSpiAcFuncs
-
-// CssmSpiClFuncs is a type alias for the raw CssmSpiClFuncs value-type struct.
-type CssmSpiClFuncs = raw.CssmSpiClFuncs
-
-// CssmSpiCspFuncs is a type alias for the raw CssmSpiCspFuncs value-type struct.
-type CssmSpiCspFuncs = raw.CssmSpiCspFuncs
-
-// CssmSpiDlFuncs is a type alias for the raw CssmSpiDlFuncs value-type struct.
-type CssmSpiDlFuncs = raw.CssmSpiDlFuncs
-
-// CssmSpiKrFuncs is a type alias for the raw CssmSpiKrFuncs value-type struct.
-type CssmSpiKrFuncs = raw.CssmSpiKrFuncs
-
-// CssmSpiTpFuncs is a type alias for the raw CssmSpiTpFuncs value-type struct.
-type CssmSpiTpFuncs = raw.CssmSpiTpFuncs
-
-// CssmStateFuncs is a type alias for the raw CssmStateFuncs value-type struct.
-type CssmStateFuncs = raw.CssmStateFuncs
-
-// CssmSubserviceUid is a type alias for the raw CssmSubserviceUid value-type struct.
-type CssmSubserviceUid = raw.CssmSubserviceUid
-
-// CssmTpAuthorityId is a type alias for the raw CssmTpAuthorityId value-type struct.
-type CssmTpAuthorityId = raw.CssmTpAuthorityId
-
-// CssmTpCallerauthContext is a type alias for the raw CssmTpCallerauthContext value-type struct.
-type CssmTpCallerauthContext = raw.CssmTpCallerauthContext
-
-// CssmTpCertchangeInput is a type alias for the raw CssmTpCertchangeInput value-type struct.
-type CssmTpCertchangeInput = raw.CssmTpCertchangeInput
-
-// CssmTpCertchangeOutput is a type alias for the raw CssmTpCertchangeOutput value-type struct.
-type CssmTpCertchangeOutput = raw.CssmTpCertchangeOutput
-
-// CssmTpCertissueInput is a type alias for the raw CssmTpCertissueInput value-type struct.
-type CssmTpCertissueInput = raw.CssmTpCertissueInput
-
-// CssmTpCertissueOutput is a type alias for the raw CssmTpCertissueOutput value-type struct.
-type CssmTpCertissueOutput = raw.CssmTpCertissueOutput
-
-// CssmTpCertnotarizeInput is a type alias for the raw CssmTpCertnotarizeInput value-type struct.
-type CssmTpCertnotarizeInput = raw.CssmTpCertnotarizeInput
-
-// CssmTpCertnotarizeOutput is a type alias for the raw CssmTpCertnotarizeOutput value-type struct.
-type CssmTpCertnotarizeOutput = raw.CssmTpCertnotarizeOutput
-
-// CssmTpCertreclaimInput is a type alias for the raw CssmTpCertreclaimInput value-type struct.
-type CssmTpCertreclaimInput = raw.CssmTpCertreclaimInput
-
-// CssmTpCertreclaimOutput is a type alias for the raw CssmTpCertreclaimOutput value-type struct.
-type CssmTpCertreclaimOutput = raw.CssmTpCertreclaimOutput
-
-// CssmTpCertverifyInput is a type alias for the raw CssmTpCertverifyInput value-type struct.
-type CssmTpCertverifyInput = raw.CssmTpCertverifyInput
-
-// CssmTpCertverifyOutput is a type alias for the raw CssmTpCertverifyOutput value-type struct.
-type CssmTpCertverifyOutput = raw.CssmTpCertverifyOutput
-
-// CssmTpConfirmResponse is a type alias for the raw CssmTpConfirmResponse value-type struct.
-type CssmTpConfirmResponse = raw.CssmTpConfirmResponse
-
-// CssmTpCrlissueInput is a type alias for the raw CssmTpCrlissueInput value-type struct.
-type CssmTpCrlissueInput = raw.CssmTpCrlissueInput
-
-// CssmTpCrlissueOutput is a type alias for the raw CssmTpCrlissueOutput value-type struct.
-type CssmTpCrlissueOutput = raw.CssmTpCrlissueOutput
-
-// CssmTpPolicyinfo is a type alias for the raw CssmTpPolicyinfo value-type struct.
-type CssmTpPolicyinfo = raw.CssmTpPolicyinfo
-
-// CssmTpRequestSet is a type alias for the raw CssmTpRequestSet value-type struct.
-type CssmTpRequestSet = raw.CssmTpRequestSet
-
-// CssmTpResultSet is a type alias for the raw CssmTpResultSet value-type struct.
-type CssmTpResultSet = raw.CssmTpResultSet
-
-// CssmTpVerifyContext is a type alias for the raw CssmTpVerifyContext value-type struct.
-type CssmTpVerifyContext = raw.CssmTpVerifyContext
-
-// CssmTpVerifyContextResult is a type alias for the raw CssmTpVerifyContextResult value-type struct.
-type CssmTpVerifyContextResult = raw.CssmTpVerifyContextResult
-
-// CssmTuplegroup is a type alias for the raw CssmTuplegroup value-type struct.
-type CssmTuplegroup = raw.CssmTuplegroup
-
-// CssmUpcalls is a type alias for the raw CssmUpcalls value-type struct.
-type CssmUpcalls = raw.CssmUpcalls
-
-// CssmVersion is a type alias for the raw CssmVersion value-type struct.
-type CssmVersion = raw.CssmVersion
-
-// CssmX509Extension is a type alias for the raw CssmX509Extension value-type struct.
-type CssmX509Extension = raw.CssmX509Extension
-
-// CssmX509ExtensionTagAndValue is a type alias for the raw CssmX509ExtensionTagAndValue value-type struct.
-type CssmX509ExtensionTagAndValue = raw.CssmX509ExtensionTagAndValue
-
-// CssmX509Extensions is a type alias for the raw CssmX509Extensions value-type struct.
-type CssmX509Extensions = raw.CssmX509Extensions
-
-// CssmX509Name is a type alias for the raw CssmX509Name value-type struct.
-type CssmX509Name = raw.CssmX509Name
-
-// CssmX509Rdn is a type alias for the raw CssmX509Rdn value-type struct.
-type CssmX509Rdn = raw.CssmX509Rdn
-
-// CssmX509RevokedCertEntry is a type alias for the raw CssmX509RevokedCertEntry value-type struct.
-type CssmX509RevokedCertEntry = raw.CssmX509RevokedCertEntry
-
-// CssmX509RevokedCertList is a type alias for the raw CssmX509RevokedCertList value-type struct.
-type CssmX509RevokedCertList = raw.CssmX509RevokedCertList
-
-// CssmX509Signature is a type alias for the raw CssmX509Signature value-type struct.
-type CssmX509Signature = raw.CssmX509Signature
-
-// CssmX509SignedCertificate is a type alias for the raw CssmX509SignedCertificate value-type struct.
-type CssmX509SignedCertificate = raw.CssmX509SignedCertificate
-
-// CssmX509SignedCrl is a type alias for the raw CssmX509SignedCrl value-type struct.
-type CssmX509SignedCrl = raw.CssmX509SignedCrl
-
-// CssmX509TbsCertificate is a type alias for the raw CssmX509TbsCertificate value-type struct.
-type CssmX509TbsCertificate = raw.CssmX509TbsCertificate
-
-// CssmX509TbsCertlist is a type alias for the raw CssmX509TbsCertlist value-type struct.
-type CssmX509TbsCertlist = raw.CssmX509TbsCertlist
-
-// CssmX509Time is a type alias for the raw CssmX509Time value-type struct.
-type CssmX509Time = raw.CssmX509Time
-
-// CssmX509TypeValuePair is a type alias for the raw CssmX509TypeValuePair value-type struct.
-type CssmX509TypeValuePair = raw.CssmX509TypeValuePair
-
-// CssmX509extBasicConstraints is a type alias for the raw CssmX509extBasicConstraints value-type struct.
-type CssmX509extBasicConstraints = raw.CssmX509extBasicConstraints
-
-// CssmX509extPair is a type alias for the raw CssmX509extPair value-type struct.
-type CssmX509extPair = raw.CssmX509extPair
-
-// CssmX509extPolicyInfo is a type alias for the raw CssmX509extPolicyInfo value-type struct.
-type CssmX509extPolicyInfo = raw.CssmX509extPolicyInfo
-
-// CssmX509extPolicyQualifierInfo is a type alias for the raw CssmX509extPolicyQualifierInfo value-type struct.
-type CssmX509extPolicyQualifierInfo = raw.CssmX509extPolicyQualifierInfo
-
-// CssmX509extPolicyQualifiers is a type alias for the raw CssmX509extPolicyQualifiers value-type struct.
-type CssmX509extPolicyQualifiers = raw.CssmX509extPolicyQualifiers
-
-// MdsFuncs is a type alias for the raw MdsFuncs value-type struct.
-type MdsFuncs = raw.MdsFuncs
-
-// X509Validity is a type alias for the raw X509Validity value-type struct.
-type X509Validity = raw.X509Validity
+type CEBasicConstraints struct {
+	CA                       int32
+	PathLenConstraintPresent int32
+	PathLenConstraint        uint32
+}
+
+type CEPolicyConstraints struct {
+	RequireExplicitPolicyPresent int32
+	RequireExplicitPolicy        uint32
+	InhibitPolicyMappingPresent  int32
+	InhibitPolicyMapping         uint32
+}
+
+type CSSM_APPLE_TP_ACTION_DATA struct {
+	Version     uint32
+	ActionFlags uint32
+}
+
+type CSSM_TP_APPLE_EVIDENCE_HEADER struct {
+	Version uint32
+}
+
+type CssmAclKeychainPromptSelector struct {
+	Version uint16
+	Flags   uint16
+}
+
+type CssmAclProcessSubjectSelector struct {
+	Version uint16
+	Mask    uint16
+	Uid     uint32
+	Gid     uint32
+}
+
+type CssmApplecspdlDbIsLockedParameters struct {
+	IsLocked uint8
+}
+
+type CssmApplecspdlDbSettingsParameters struct {
+	IdleTimeout uint32
+	LockOnSleep uint8
+}
+
+type CssmAppledlOpenParameters struct {
+	Length     uint32
+	Version    uint32
+	AutoCommit int32
+	Mask       uint32
+	Mode       uint16
+}
+
+type CssmCertBundleHeader struct {
+	BundleType     uint32
+	BundleEncoding uint32
+}
+
+type CssmCspOperationalStatistics struct {
+	UserAuthenticated         int32
+	DeviceFlags               uint32
+	TokenMaxSessionCount      uint32
+	TokenOpenedSessionCount   uint32
+	TokenMaxRWSessionCount    uint32
+	TokenOpenedRWSessionCount uint32
+	TokenTotalPublicMem       uint32
+	TokenFreePublicMem        uint32
+	TokenTotalPrivateMem      uint32
+	TokenFreePrivateMem       uint32
+}
+
+type CssmDbSchemaIndexInfo struct {
+	AttributeId         uint32
+	IndexId             uint32
+	IndexType           uint32
+	IndexedDataLocation uint32
+}
+
+type CssmDlDbHandle struct {
+	DLHandle int
+	DBHandle int
+}
+
+type CssmDlPkcs11Attributes struct {
+	DeviceAccessFlags uint32
+}
+
+type CssmKeySize struct {
+	LogicalKeySizeInBits   uint32
+	EffectiveKeySizeInBits uint32
+}
+
+type CssmQueryLimits struct {
+	TimeLimit uint32
+	SizeLimit uint32
+}
+
+type CssmQuerySizeData struct {
+	SizeInputBlock  uint32
+	SizeOutputBlock uint32
+}
+
+type CssmRange struct {
+	Min uint32
+	Max uint32
+}
+
+type CssmVersion struct {
+	Major uint32
+	Minor uint32
+}
+
+type CssmX509extBasicConstraints struct {
+	CA                       int32
+	PathLenConstraintPresent int32
+	PathLenConstraint        uint32
+}
+
+// A structure that contains information about keychain settings.
+type SecKeychainSettings struct {
+	Version         uint
+	LockOnSleep     uint8
+	UseLockInterval uint8
+	LockInterval    uint
+}

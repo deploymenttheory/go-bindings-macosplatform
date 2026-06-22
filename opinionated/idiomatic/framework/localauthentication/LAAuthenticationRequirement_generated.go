@@ -5,41 +5,76 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of requirements that protect a right.
+// AuthenticationRequirement is an idiomatic wrapper over the Objective-C class LAAuthenticationRequirement.
 //
-// AuthenticationRequirement wraps [raw.LAAuthenticationRequirement] with a fluent Go API.
+// A set of requirements that protect a right.
 type AuthenticationRequirement struct {
-	inner *raw.LAAuthenticationRequirement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAAuthenticationRequirement].
-func (x *AuthenticationRequirement) Unwrap() *raw.LAAuthenticationRequirement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthenticationRequirement) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthenticationRequirementFromID adopts an existing object pointer as a AuthenticationRequirement (nil for 0).
+// AuthenticationRequirementFromID adopts an existing Objective-C object as a AuthenticationRequirement
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthenticationRequirementFromID(id objc.ID) *AuthenticationRequirement {
 	if id == 0 {
 		return nil
 	}
-	return &AuthenticationRequirement{inner: raw.LAAuthenticationRequirementFromID(id)}
+	x := &AuthenticationRequirement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthenticationRequirement creates a new [AuthenticationRequirement].
+// authenticationRequirementAdopt wraps an Objective-C object that this code just created as a
+// AuthenticationRequirement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authenticationRequirementAdopt(id objc.ID) *AuthenticationRequirement {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthenticationRequirement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthenticationRequirement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthenticationRequirement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthenticationRequirement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthenticationRequirement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthenticationRequirement creates a new AuthenticationRequirement.
 func NewAuthenticationRequirement() *AuthenticationRequirement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAAuthenticationRequirement")), objc.RegisterName("new"))
-	return &AuthenticationRequirement{inner: raw.LAAuthenticationRequirementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("new"))
+	return authenticationRequirementAdopt(_id)
 }
 
 // AuthenticationRequirementable is the interface implemented by [AuthenticationRequirement], for mocking and DI.
 type AuthenticationRequirementable interface {
-	Unwrap() *raw.LAAuthenticationRequirement
+	obj.Object
 }
 
 var _ AuthenticationRequirementable = (*AuthenticationRequirement)(nil)

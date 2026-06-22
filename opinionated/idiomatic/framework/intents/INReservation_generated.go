@@ -5,105 +5,136 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a reservation.
+// Reservation is an idiomatic wrapper over the Objective-C class INReservation.
 //
-// Reservation wraps [raw.INReservation] with a fluent Go API.
+// Reservation is an abstract base — you do not construct it directly. Construct one of [BoatReservation], [BusReservation], [FlightReservation], [LodgingReservation], [RentalCarReservation], [RestaurantReservation], [TicketedEventReservation], [TrainReservation] and pass it where a Reservation is accepted.
+//
+// An object that describes a reservation.
 type Reservation struct {
-	inner *raw.INReservation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INReservation].
-func (x *Reservation) Unwrap() *raw.INReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Reservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ReservationFromID adopts an existing object pointer as a Reservation (nil for 0).
+// ReservationFromID adopts an existing Objective-C object as a Reservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ReservationFromID(id objc.ID) *Reservation {
 	if id == 0 {
 		return nil
 	}
-	return &Reservation{inner: raw.INReservationFromID(id)}
+	x := &Reservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewReservation creates a new [Reservation].
-func NewReservation() *Reservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INReservation")), objc.RegisterName("new"))
-	return &Reservation{inner: raw.INReservationFromID(_id)}
-}
-
-// ItemReference calls the underlying ItemReference.
-func (x *Reservation) ItemReference() *SpeakableString {
-	_r := x.inner.ItemReference()
-	if _r == nil {
+// reservationAdopt wraps an Objective-C object that this code just created as a
+// Reservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func reservationAdopt(id objc.ID) *Reservation {
+	if id == 0 {
 		return nil
 	}
-	return &SpeakableString{inner: _r}
+	x := &Reservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ReservationNumber calls the underlying ReservationNumber.
+// Description returns the object's -description text.
+func (x *Reservation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Reservation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Reservation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Reservation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// ItemReference wraps the corresponding Objective-C method.
+func (x *Reservation) ItemReference() *SpeakableString {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemReference"))
+	return SpeakableStringFromID(_r)
+}
+
+// ReservationNumber wraps the corresponding Objective-C method.
 func (x *Reservation) ReservationNumber() string {
-	_r := x.inner.ReservationNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BookingTime calls the underlying BookingTime.
-func (x *Reservation) BookingTime() *foundation.NSDate {
-	return x.inner.BookingTime()
+// BookingTime wraps the corresponding Objective-C method.
+func (x *Reservation) BookingTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookingTime"))
+	return obj.Wrap(_r)
 }
 
-// ReservationStatus calls the underlying ReservationStatus.
-func (x *Reservation) ReservationStatus() INReservationStatus {
-	return INReservationStatus(x.inner.ReservationStatus())
+// ReservationStatus wraps the corresponding Objective-C method.
+func (x *Reservation) ReservationStatus() ReservationStatus {
+	_r := objc.Send[ReservationStatus](objref.IDOf(x), objc.RegisterName("reservationStatus"))
+	return _r
 }
 
-// ReservationHolderName calls the underlying ReservationHolderName.
+// ReservationHolderName wraps the corresponding Objective-C method.
 func (x *Reservation) ReservationHolderName() string {
-	_r := x.inner.ReservationHolderName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationHolderName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
+// Actions wraps the corresponding Objective-C method.
+//
 // Actions returns the collection as a Go slice.
 func (x *Reservation) Actions() []*ReservationAction {
-	arr := x.inner.Actions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ReservationAction {
-		return &ReservationAction{inner: raw.INReservationActionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ReservationAction { return ReservationActionFromID(_id) })
 }
 
-// URL calls the underlying URL.
-func (x *Reservation) URL() *foundation.NSURL {
-	return x.inner.URL()
+// URL wraps the corresponding Objective-C method.
+func (x *Reservation) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
-
-func (x *Reservation) asReservation() *raw.INReservation { return x.inner }
 
 // Reservationable is the interface implemented by [Reservation], for mocking and DI.
 type Reservationable interface {
-	Unwrap() *raw.INReservation
+	obj.Object
 	ItemReference() *SpeakableString
 	ReservationNumber() string
-	BookingTime() *foundation.NSDate
-	ReservationStatus() INReservationStatus
+	BookingTime() obj.Object
+	ReservationStatus() ReservationStatus
 	ReservationHolderName() string
 	Actions() []*ReservationAction
-	URL() *foundation.NSURL
+	URL() obj.Object
 }
 
 var _ Reservationable = (*Reservation)(nil)
+
+// isReservation marks Reservation — and, by embedding promotion, its
+// subclasses — as a member of the Reservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Reservation) isReservation() {}
+
+var _ ReservationProvider = (*Reservation)(nil)

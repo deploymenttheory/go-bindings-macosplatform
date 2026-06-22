@@ -5,119 +5,38 @@
 package audiotoolbox
 
 import (
-	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// InstantiateWithComponentDescriptionOptions blocks until the operation completes or ctx is cancelled.
-func InstantiateWithComponentDescriptionOptions(ctx context.Context, componentDescription raw.AudioComponentDescription, options AudioComponentInstantiationOptions) (*AudioUnit, error) {
-	type _result struct {
-		val *AudioUnit
-		err error
-	}
-	_ch := make(chan _result, 1)
-	raw.AUAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(componentDescription, raw.AudioComponentInstantiationOptions(options), func(_p0 *raw.AUAudioUnit, _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AudioUnit{inner: _p0}
-		}
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *AudioUnit
-		return _zero, ctx.Err()
-	}
+// CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters creates a single parameter object.
+func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings []string, dependentParameters []obj.Object) *Parameter {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createParameterWithIdentifier:name:address:min:max:unit:unitName:flags:valueStrings:dependentParameters:"), purego.NSString(identifier), purego.NSString(name), address, min, max, unit, purego.NSString(unitName), flags, purego.SliceToNSArray(valueStrings, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dependentParameters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ParameterFromID(_r)
 }
 
-// RegisterSubclassAsComponentDescriptionNameVersion calls the underlying AUAudioUnitRegisterSubclassAsComponentDescriptionNameVersion.
-func RegisterSubclassAsComponentDescriptionNameVersion(cls objc.Class, componentDescription raw.AudioComponentDescription, name string, version uint) {
-	raw.AUAudioUnitRegisterSubclassAsComponentDescriptionNameVersion(cls, componentDescription, foundation.NSStringStringWithUTF8String(name), version)
+// CreateGroupWithIdentifierNameChildren creates a parameter group object.
+func CreateGroupWithIdentifierNameChildren(identifier string, name string, children []*ParameterNode) *ParameterGroup {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupWithIdentifier:name:children:"), purego.NSString(identifier), purego.NSString(name), purego.SliceToNSArray(children, func(_v *ParameterNode) objc.ID { return objref.IDOf(_v) }))
+	return ParameterGroupFromID(_r)
 }
 
-// CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters calls the underlying AUParameterTreeCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters.
-func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings *foundation.NSArray[*foundation.NSString], dependentParameters *foundation.NSArray[*foundation.NSNumber]) *Parameter {
-	_r := raw.AUParameterTreeCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), address, min, max, raw.AudioUnitParameterUnit(unit), foundation.NSStringStringWithUTF8String(unitName), raw.AudioUnitParameterOptions(flags), valueStrings, dependentParameters)
-	if _r == nil {
-		return nil
-	}
-	return &Parameter{inner: _r}
+// CreateGroupTemplate creates a template group which may be used as a prototype for further group instances.
+func CreateGroupTemplate(children []*ParameterNode) *ParameterGroup {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupTemplate:"), purego.SliceToNSArray(children, func(_v *ParameterNode) objc.ID { return objref.IDOf(_v) }))
+	return ParameterGroupFromID(_r)
 }
 
-// CreateGroupWithIdentifierNameChildren calls the underlying AUParameterTreeCreateGroupWithIdentifierNameChildren.
-func CreateGroupWithIdentifierNameChildren(identifier string, name string, children ...ParameterNodeProvider) *ParameterGroup {
-	_ptrs := make([]objc.ID, len(children))
-	for _i, _v := range children {
-		_ptrs[_i] = _v.asParameterNode().Ptr()
-	}
-	var _arg2 *foundation.NSArray[*raw.AUParameterNode]
-	if len(_ptrs) > 0 {
-		_arg2 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.AUParameterTreeCreateGroupWithIdentifierNameChildren(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), _arg2)
-	if _r == nil {
-		return nil
-	}
-	return &ParameterGroup{inner: _r}
+// CreateGroupFromTemplateIdentifierNameAddressOffset initializes a group as a copied instance of a template group.
+func CreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup *ParameterGroup, identifier string, name string, addressOffset uint64) *ParameterGroup {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createGroupFromTemplate:identifier:name:addressOffset:"), objref.IDOf(templateGroup), purego.NSString(identifier), purego.NSString(name), addressOffset)
+	return ParameterGroupFromID(_r)
 }
 
-// CreateGroupTemplate calls the underlying AUParameterTreeCreateGroupTemplate.
-func CreateGroupTemplate(children ...ParameterNodeProvider) *ParameterGroup {
-	_ptrs := make([]objc.ID, len(children))
-	for _i, _v := range children {
-		_ptrs[_i] = _v.asParameterNode().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AUParameterNode]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.AUParameterTreeCreateGroupTemplate(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &ParameterGroup{inner: _r}
-}
-
-// CreateGroupFromTemplateIdentifierNameAddressOffset calls the underlying AUParameterTreeCreateGroupFromTemplateIdentifierNameAddressOffset.
-func CreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup *raw.AUParameterGroup, identifier string, name string, addressOffset uint64) *ParameterGroup {
-	_r := raw.AUParameterTreeCreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup, foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), addressOffset)
-	if _r == nil {
-		return nil
-	}
-	return &ParameterGroup{inner: _r}
-}
-
-// CreateTreeWithChildren calls the underlying AUParameterTreeCreateTreeWithChildren.
-func CreateTreeWithChildren(children ...ParameterNodeProvider) *ParameterTree {
-	_ptrs := make([]objc.ID, len(children))
-	for _i, _v := range children {
-		_ptrs[_i] = _v.asParameterNode().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AUParameterNode]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.AUParameterTreeCreateTreeWithChildren(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &ParameterTree{inner: _r}
+// CreateTreeWithChildren creates a parameter tree object.
+func CreateTreeWithChildren(children []*ParameterNode) *ParameterTree {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("createTreeWithChildren:"), purego.SliceToNSArray(children, func(_v *ParameterNode) objc.ID { return objref.IDOf(_v) }))
+	return ParameterTreeFromID(_r)
 }

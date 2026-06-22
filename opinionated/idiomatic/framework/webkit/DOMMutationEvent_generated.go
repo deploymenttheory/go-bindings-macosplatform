@@ -5,110 +5,113 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMMutationEvent wraps [raw.DOMMutationEvent] with a fluent Go API.
+// DOMMutationEvent is an idiomatic wrapper over the Objective-C class DOMMutationEvent.
+//
+// It embeds [DOMEvent], promoting that type's methods.
 type DOMMutationEvent struct {
-	inner *raw.DOMMutationEvent
+	DOMEvent
 }
 
-// Unwrap returns the underlying [raw.DOMMutationEvent].
-func (x *DOMMutationEvent) Unwrap() *raw.DOMMutationEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMMutationEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMMutationEventFromID adopts an existing object pointer as a DOMMutationEvent (nil for 0).
+// DOMMutationEventFromID adopts an existing Objective-C object as a DOMMutationEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMMutationEventFromID(id objc.ID) *DOMMutationEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DOMMutationEvent{inner: raw.DOMMutationEventFromID(id)}
-}
-
-// NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange creates a new [DOMMutationEvent].
-func NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange(type_ string, canBubble bool, cancelable bool, relatedNode *raw.DOMNode, prevValue string, newValue string, attrName string, attrChange uint16) *DOMMutationEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMMutationEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMutationEvent:canBubble:cancelable:relatedNode:prevValue:newValue:attrName:attrChange:"), foundation.NSStringStringWithUTF8String(type_).Ptr(), canBubble, cancelable, relatedNode.Ptr(), foundation.NSStringStringWithUTF8String(prevValue).Ptr(), foundation.NSStringStringWithUTF8String(newValue).Ptr(), foundation.NSStringStringWithUTF8String(attrName).Ptr(), attrChange)
-	return &DOMMutationEvent{inner: raw.DOMMutationEventFromID(_id)}
-}
-
-// NewDOMMutationEventMutationEvent creates a new [DOMMutationEvent].
-func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable bool, relatedNode *raw.DOMNode, prevValue string, newValue string, attrName string, attrChange uint16) *DOMMutationEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMMutationEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMutationEvent::::::::"), foundation.NSStringStringWithUTF8String(type_).Ptr(), canBubble, cancelable, relatedNode.Ptr(), foundation.NSStringStringWithUTF8String(prevValue).Ptr(), foundation.NSStringStringWithUTF8String(newValue).Ptr(), foundation.NSStringStringWithUTF8String(attrName).Ptr(), attrChange)
-	return &DOMMutationEvent{inner: raw.DOMMutationEventFromID(_id)}
-}
-
-// WithReturnValue sets the returnValue property and returns the receiver for chaining.
-func (x *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
-	x.inner.DOMEvent.SetReturnValue(returnValue)
+	x := &DOMMutationEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
-func (x *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
-	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
-	return x
-}
-
-// NewValue calls the underlying NewValue.
-func (x *DOMMutationEvent) NewValue() string {
-	_r := x.inner.NewValue()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// RelatedNode calls the underlying RelatedNode.
-func (x *DOMMutationEvent) RelatedNode() *DOMNode {
-	_r := x.inner.RelatedNode()
-	if _r == nil {
+// dOMMutationEventAdopt wraps an Objective-C object that this code just created as a
+// DOMMutationEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMMutationEventAdopt(id objc.ID) *DOMMutationEvent {
+	if id == 0 {
 		return nil
 	}
-	return &DOMNode{inner: _r}
+	x := &DOMMutationEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PrevValue calls the underlying PrevValue.
+// NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange creates a new DOMMutationEvent.
+func NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange(type_ string, canBubble bool, cancelable bool, relatedNode *DOMNode, prevValue string, newValue string, attrName string, attrChange uint16) *DOMMutationEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMMutationEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMutationEvent:canBubble:cancelable:relatedNode:prevValue:newValue:attrName:attrChange:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(relatedNode), purego.NSString(prevValue), purego.NSString(newValue), purego.NSString(attrName), attrChange)
+	return dOMMutationEventAdopt(_id)
+}
+
+// NewDOMMutationEventMutationEvent creates a new DOMMutationEvent.
+func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable bool, relatedNode *DOMNode, prevValue string, newValue string, attrName string, attrChange uint16) *DOMMutationEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMMutationEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMutationEvent::::::::"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(relatedNode), purego.NSString(prevValue), purego.NSString(newValue), purego.NSString(attrName), attrChange)
+	return dOMMutationEventAdopt(_id)
+}
+
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
+func (x *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
+	return x
+}
+
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+func (x *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return x
+}
+
+// NewValue wraps the corresponding Objective-C method.
+func (x *DOMMutationEvent) NewValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newValue"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// RelatedNode wraps the corresponding Objective-C method.
+func (x *DOMMutationEvent) RelatedNode() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedNode"))
+	return DOMNodeFromID(_r)
+}
+
+// PrevValue wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) PrevValue() string {
-	_r := x.inner.PrevValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prevValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttrName calls the underlying AttrName.
+// AttrName wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) AttrName() string {
-	_r := x.inner.AttrName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attrName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttrChange calls the underlying AttrChange.
+// AttrChange wraps the corresponding Objective-C method.
 func (x *DOMMutationEvent) AttrChange() uint16 {
-	return x.inner.AttrChange()
-}
-
-func (x *DOMMutationEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
-
-func (x *DOMMutationEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
-
-func (x *DOMMutationEvent) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("attrChange"))
+	return _r
 }
 
 // DOMMutationEventable is the interface implemented by [DOMMutationEvent], for mocking and DI.
 type DOMMutationEventable interface {
-	Unwrap() *raw.DOMMutationEvent
+	obj.Object
 	WithReturnValue(returnValue bool) *DOMMutationEvent
 	WithCancelBubble(cancelBubble bool) *DOMMutationEvent
 	NewValue() string
@@ -119,3 +122,9 @@ type DOMMutationEventable interface {
 }
 
 var _ DOMMutationEventable = (*DOMMutationEvent)(nil)
+
+var _ DOMEventProvider = (*DOMMutationEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMMutationEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMMutationEvent)(nil)

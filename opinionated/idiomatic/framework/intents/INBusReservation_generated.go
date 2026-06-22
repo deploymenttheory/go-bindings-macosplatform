@@ -5,67 +5,74 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a bus reservation.
+// BusReservation is an idiomatic wrapper over the Objective-C class INBusReservation.
 //
-// BusReservation wraps [raw.INBusReservation] with a fluent Go API.
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a bus reservation.
 type BusReservation struct {
-	inner *raw.INBusReservation
+	Reservation
 }
 
-// Unwrap returns the underlying [raw.INBusReservation].
-func (x *BusReservation) Unwrap() *raw.INBusReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BusReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// BusReservationFromID adopts an existing object pointer as a BusReservation (nil for 0).
+// BusReservationFromID adopts an existing Objective-C object as a BusReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func BusReservationFromID(id objc.ID) *BusReservation {
 	if id == 0 {
 		return nil
 	}
-	return &BusReservation{inner: raw.INBusReservationFromID(id)}
+	x := &BusReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a bus reservation with the specified contents and attributes.
-//
-// NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a new [BusReservation].
-func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, busTrip *raw.INBusTrip) *BusReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBusReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservedSeat.Ptr(), busTrip.Ptr())
-	return &BusReservation{inner: raw.INBusReservationFromID(_id)}
+// busReservationAdopt wraps an Objective-C object that this code just created as a
+// BusReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func busReservationAdopt(id objc.ID) *BusReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &BusReservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ReservedSeat calls the underlying ReservedSeat.
+// NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a bus reservation with the specified contents and attributes.
+func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, busTrip *BusTrip) *BusReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INBusReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(busTrip))
+	return busReservationAdopt(_id)
+}
+
+// ReservedSeat wraps the corresponding Objective-C method.
 func (x *BusReservation) ReservedSeat() *Seat {
-	_r := x.inner.ReservedSeat()
-	if _r == nil {
-		return nil
-	}
-	return &Seat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+	return SeatFromID(_r)
 }
 
-// BusTrip calls the underlying BusTrip.
+// BusTrip wraps the corresponding Objective-C method.
 func (x *BusReservation) BusTrip() *BusTrip {
-	_r := x.inner.BusTrip()
-	if _r == nil {
-		return nil
-	}
-	return &BusTrip{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busTrip"))
+	return BusTripFromID(_r)
 }
-
-func (x *BusReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // BusReservationable is the interface implemented by [BusReservation], for mocking and DI.
 type BusReservationable interface {
-	Unwrap() *raw.INBusReservation
+	obj.Object
 	ReservedSeat() *Seat
 	BusTrip() *BusTrip
 }
 
 var _ BusReservationable = (*BusReservation)(nil)
+
+var _ ReservationProvider = (*BusReservation)(nil)

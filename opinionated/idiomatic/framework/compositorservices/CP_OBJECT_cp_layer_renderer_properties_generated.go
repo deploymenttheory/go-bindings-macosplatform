@@ -5,43 +5,76 @@
 package compositorservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the “cp_layer_renderer_properties_get_texture_topology“ function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
+// _cp_layer_renderer_properties is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer_properties.
 //
-// _cp_layer_renderer_properties wraps [raw.CP_OBJECT_cp_layer_renderer_properties] with a fluent Go API.
+// Returns the type value that specifies how the underlying texture organizes its views. - Parameters: - texture_topology: The texture topology to query. Get the texture topology from the layer properties using the “cp_layer_renderer_properties_get_texture_topology“ function. - Returns: A Metal value that indicates the arrangement of views within the texture. A texture might store the content of one view or multiple views. For example, a single texture might store one or both views for the left and right eyes of a head-mounted display. The texture type indicates this content organization strategy.
 type _cp_layer_renderer_properties struct {
-	inner *raw.CP_OBJECT_cp_layer_renderer_properties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CP_OBJECT_cp_layer_renderer_properties].
-func (x *_cp_layer_renderer_properties) Unwrap() *raw.CP_OBJECT_cp_layer_renderer_properties {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *_cp_layer_renderer_properties) ID() objc.ID { return x.inner.Ptr() }
-
-// _cp_layer_renderer_propertiesFromID adopts an existing object pointer as a _cp_layer_renderer_properties (nil for 0).
+// _cp_layer_renderer_propertiesFromID adopts an existing Objective-C object as a _cp_layer_renderer_properties
+// (nil for 0), retaining it and registering a release finalizer.
 func _cp_layer_renderer_propertiesFromID(id objc.ID) *_cp_layer_renderer_properties {
 	if id == 0 {
 		return nil
 	}
-	return &_cp_layer_renderer_properties{inner: raw.CP_OBJECT_cp_layer_renderer_propertiesFromID(id)}
+	x := &_cp_layer_renderer_properties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// New_cp_layer_renderer_properties creates a new [_cp_layer_renderer_properties].
+// _cp_layer_renderer_propertiesAdopt wraps an Objective-C object that this code just created as a
+// _cp_layer_renderer_properties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func _cp_layer_renderer_propertiesAdopt(id objc.ID) *_cp_layer_renderer_properties {
+	if id == 0 {
+		return nil
+	}
+	x := &_cp_layer_renderer_properties{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *_cp_layer_renderer_properties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *_cp_layer_renderer_properties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *_cp_layer_renderer_properties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *_cp_layer_renderer_properties) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// New_cp_layer_renderer_properties creates a new _cp_layer_renderer_properties.
 func New_cp_layer_renderer_properties() *_cp_layer_renderer_properties {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CP_OBJECT_cp_layer_renderer_properties")), objc.RegisterName("new"))
-	return &_cp_layer_renderer_properties{inner: raw.CP_OBJECT_cp_layer_renderer_propertiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CP_OBJECT_cp_layer_renderer_properties")), objc.RegisterName("new"))
+	return _cp_layer_renderer_propertiesAdopt(_id)
 }
 
 // _cp_layer_renderer_propertiesable is the interface implemented by [_cp_layer_renderer_properties], for mocking and DI.
 type _cp_layer_renderer_propertiesable interface {
-	Unwrap() *raw.CP_OBJECT_cp_layer_renderer_properties
+	obj.Object
 }
 
 var _ _cp_layer_renderer_propertiesable = (*_cp_layer_renderer_properties)(nil)

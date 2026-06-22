@@ -5,54 +5,66 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a time-based cadence for processing a video stream.
+// VideoProcessorTimeIntervalCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorTimeIntervalCadence.
 //
-// VideoProcessorTimeIntervalCadence wraps [raw.VNVideoProcessorTimeIntervalCadence] with a fluent Go API.
+// It embeds [VideoProcessorCadence], promoting that type's methods.
+//
+// An object that defines a time-based cadence for processing a video stream.
 type VideoProcessorTimeIntervalCadence struct {
-	inner *raw.VNVideoProcessorTimeIntervalCadence
+	VideoProcessorCadence
 }
 
-// Unwrap returns the underlying [raw.VNVideoProcessorTimeIntervalCadence].
-func (x *VideoProcessorTimeIntervalCadence) Unwrap() *raw.VNVideoProcessorTimeIntervalCadence {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoProcessorTimeIntervalCadence) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoProcessorTimeIntervalCadenceFromID adopts an existing object pointer as a VideoProcessorTimeIntervalCadence (nil for 0).
+// VideoProcessorTimeIntervalCadenceFromID adopts an existing Objective-C object as a VideoProcessorTimeIntervalCadence
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoProcessorTimeIntervalCadenceFromID(id objc.ID) *VideoProcessorTimeIntervalCadence {
 	if id == 0 {
 		return nil
 	}
-	return &VideoProcessorTimeIntervalCadence{inner: raw.VNVideoProcessorTimeIntervalCadenceFromID(id)}
+	x := &VideoProcessorTimeIntervalCadence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVideoProcessorTimeIntervalCadenceWithTimeInterval creates a new [VideoProcessorTimeIntervalCadence].
+// videoProcessorTimeIntervalCadenceAdopt wraps an Objective-C object that this code just created as a
+// VideoProcessorTimeIntervalCadence (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoProcessorTimeIntervalCadenceAdopt(id objc.ID) *VideoProcessorTimeIntervalCadence {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoProcessorTimeIntervalCadence{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVideoProcessorTimeIntervalCadenceWithTimeInterval creates a new VideoProcessorTimeIntervalCadence.
 func NewVideoProcessorTimeIntervalCadenceWithTimeInterval(timeInterval float64) *VideoProcessorTimeIntervalCadence {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVideoProcessorTimeIntervalCadence")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessorTimeIntervalCadence")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeInterval:"), timeInterval)
-	return &VideoProcessorTimeIntervalCadence{inner: raw.VNVideoProcessorTimeIntervalCadenceFromID(_id)}
+	return videoProcessorTimeIntervalCadenceAdopt(_id)
 }
 
-// TimeInterval calls the underlying TimeInterval.
+// TimeInterval wraps the corresponding Objective-C method.
 func (x *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
-	return x.inner.TimeInterval()
-}
-
-func (x *VideoProcessorTimeIntervalCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence {
-	return &x.inner.VNVideoProcessorCadence
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+	return _r
 }
 
 // VideoProcessorTimeIntervalCadenceable is the interface implemented by [VideoProcessorTimeIntervalCadence], for mocking and DI.
 type VideoProcessorTimeIntervalCadenceable interface {
-	Unwrap() *raw.VNVideoProcessorTimeIntervalCadence
+	obj.Object
 	TimeInterval() float64
 }
 
 var _ VideoProcessorTimeIntervalCadenceable = (*VideoProcessorTimeIntervalCadence)(nil)
+
+var _ VideoProcessorCadenceProvider = (*VideoProcessorTimeIntervalCadence)(nil)

@@ -5,367 +5,148 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A container for uniform shader data.
+// Uniform is an idiomatic wrapper over the Objective-C class SKUniform.
 //
-// Uniform wraps [raw.SKUniform] with a fluent Go API.
+// A container for uniform shader data.
 type Uniform struct {
-	inner *raw.SKUniform
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKUniform].
-func (x *Uniform) Unwrap() *raw.SKUniform { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Uniform) ID() objc.ID { return x.inner.Ptr() }
-
-// UniformFromID adopts an existing object pointer as a Uniform (nil for 0).
+// UniformFromID adopts an existing Objective-C object as a Uniform
+// (nil for 0), retaining it and registering a release finalizer.
 func UniformFromID(id objc.ID) *Uniform {
 	if id == 0 {
 		return nil
 	}
-	return &Uniform{inner: raw.SKUniformFromID(id)}
-}
-
-// Initializes a new uniform object.
-//
-// NewUniformWithName creates a new [Uniform].
-func NewUniformWithName(name string) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a reference to a texture.
-//
-// NewUniformWithNameTexture creates a new [Uniform].
-func NewUniformWithNameTexture(name string, texture *raw.SKTexture) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:texture:"), foundation.NSStringStringWithUTF8String(name).Ptr(), texture.Ptr())
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a floating-point number.
-//
-// NewUniformWithNameFloat creates a new [Uniform].
-func NewUniformWithNameFloat(name string, value float32) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:float:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// NewUniformWithNameVectorFloat2 creates a new [Uniform].
-func NewUniformWithNameVectorFloat2(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:vectorFloat2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// NewUniformWithNameVectorFloat3 creates a new [Uniform].
-func NewUniformWithNameVectorFloat3(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:vectorFloat3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// NewUniformWithNameVectorFloat4 creates a new [Uniform].
-func NewUniformWithNameVectorFloat4(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:vectorFloat4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// NewUniformWithNameMatrixFloat2x2 creates a new [Uniform].
-func NewUniformWithNameMatrixFloat2x2(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:matrixFloat2x2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// NewUniformWithNameMatrixFloat3x3 creates a new [Uniform].
-func NewUniformWithNameMatrixFloat3x3(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:matrixFloat3x3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// NewUniformWithNameMatrixFloat4x4 creates a new [Uniform].
-func NewUniformWithNameMatrixFloat4x4(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:matrixFloat4x4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a vector of two floating-point numbers.
-//
-// NewUniformWithNameFloatVector2 creates a new [Uniform].
-func NewUniformWithNameFloatVector2(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatVector2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Creates and initializes a new uniform object that holds a vector of three floating-point numbers.
-//
-// NewUniformWithNameFloatVector3 creates a new [Uniform].
-func NewUniformWithNameFloatVector3(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatVector3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a vector of four floating-point numbers.
-//
-// NewUniformWithNameFloatVector4 creates a new [Uniform].
-func NewUniformWithNameFloatVector4(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatVector4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.
-//
-// NewUniformWithNameFloatMatrix2 creates a new [Uniform].
-func NewUniformWithNameFloatMatrix2(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatMatrix2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.
-//
-// NewUniformWithNameFloatMatrix3 creates a new [Uniform].
-func NewUniformWithNameFloatMatrix3(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatMatrix3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// Initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.
-//
-// NewUniformWithNameFloatMatrix4 creates a new [Uniform].
-func NewUniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatMatrix4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), value)
-	return &Uniform{inner: raw.SKUniformFromID(_id)}
-}
-
-// The receiver’s value as a SpriteKit texture.
-//
-// WithTextureValue sets the textureValue property and returns the receiver for chaining.
-func (x *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
-	x.inner.SetTextureValue(textureValue.asTexture())
+	x := &Uniform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The receiver’s value as a floating-point value.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
-func (x *Uniform) WithFloatValue(floatValue float32) *Uniform {
-	x.inner.SetFloatValue(floatValue)
-	return x
-}
-
-// Name calls the underlying Name.
-func (x *Uniform) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// UniformType calls the underlying UniformType.
-func (x *Uniform) UniformType() SKUniformType {
-	return SKUniformType(x.inner.UniformType())
-}
-
-// TextureValue calls the underlying TextureValue.
-func (x *Uniform) TextureValue() *Texture {
-	_r := x.inner.TextureValue()
-	if _r == nil {
+// uniformAdopt wraps an Objective-C object that this code just created as a
+// Uniform (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uniformAdopt(id objc.ID) *Uniform {
+	if id == 0 {
 		return nil
 	}
-	return &Texture{inner: _r}
+	x := &Uniform{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetTextureValue calls the underlying SetTextureValue.
-func (x *Uniform) SetTextureValue(textureValue *raw.SKTexture) {
-	x.inner.SetTextureValue(textureValue)
+// Description returns the object's -description text.
+func (x *Uniform) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// FloatValue calls the underlying FloatValue.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Uniform) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Uniform) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Uniform) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUniformWithName initializes a new uniform object.
+func NewUniformWithName(name string) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameTexture initializes a new uniform object that holds a reference to a texture.
+func NewUniformWithNameTexture(name string, texture *Texture) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:texture:"), purego.NSString(name), objref.IDOf(texture))
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloat initializes a new uniform object that holds a floating-point number.
+func NewUniformWithNameFloat(name string, value float32) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:float:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// WithTextureValue the receiver’s value as a SpriteKit texture.
+func (x *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
+	return x
+}
+
+// WithFloatValue the receiver’s value as a floating-point value.
+func (x *Uniform) WithFloatValue(floatValue float32) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
+	return x
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *Uniform) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// UniformType wraps the corresponding Objective-C method.
+func (x *Uniform) UniformType() UniformType {
+	_r := objc.Send[UniformType](objref.IDOf(x), objc.RegisterName("uniformType"))
+	return _r
+}
+
+// TextureValue wraps the corresponding Objective-C method.
+func (x *Uniform) TextureValue() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureValue"))
+	return TextureFromID(_r)
+}
+
+// SetTextureValue wraps the corresponding Objective-C method.
+func (x *Uniform) SetTextureValue(textureValue *Texture) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
+}
+
+// FloatValue wraps the corresponding Objective-C method.
 func (x *Uniform) FloatValue() float32 {
-	return x.inner.FloatValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+	return _r
 }
 
-// SetFloatValue calls the underlying SetFloatValue.
+// SetFloatValue wraps the corresponding Objective-C method.
 func (x *Uniform) SetFloatValue(floatValue float32) {
-	x.inner.SetFloatValue(floatValue)
-}
-
-// VectorFloat2Value calls the underlying VectorFloat2Value.
-func (x *Uniform) VectorFloat2Value() unsafe.Pointer {
-	return x.inner.VectorFloat2Value()
-}
-
-// SetVectorFloat2Value calls the underlying SetVectorFloat2Value.
-func (x *Uniform) SetVectorFloat2Value(vectorFloat2Value unsafe.Pointer) {
-	x.inner.SetVectorFloat2Value(vectorFloat2Value)
-}
-
-// VectorFloat3Value calls the underlying VectorFloat3Value.
-func (x *Uniform) VectorFloat3Value() unsafe.Pointer {
-	return x.inner.VectorFloat3Value()
-}
-
-// SetVectorFloat3Value calls the underlying SetVectorFloat3Value.
-func (x *Uniform) SetVectorFloat3Value(vectorFloat3Value unsafe.Pointer) {
-	x.inner.SetVectorFloat3Value(vectorFloat3Value)
-}
-
-// VectorFloat4Value calls the underlying VectorFloat4Value.
-func (x *Uniform) VectorFloat4Value() unsafe.Pointer {
-	return x.inner.VectorFloat4Value()
-}
-
-// SetVectorFloat4Value calls the underlying SetVectorFloat4Value.
-func (x *Uniform) SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer) {
-	x.inner.SetVectorFloat4Value(vectorFloat4Value)
-}
-
-// MatrixFloat2x2Value calls the underlying MatrixFloat2x2Value.
-func (x *Uniform) MatrixFloat2x2Value() unsafe.Pointer {
-	return x.inner.MatrixFloat2x2Value()
-}
-
-// SetMatrixFloat2x2Value calls the underlying SetMatrixFloat2x2Value.
-func (x *Uniform) SetMatrixFloat2x2Value(matrixFloat2x2Value unsafe.Pointer) {
-	x.inner.SetMatrixFloat2x2Value(matrixFloat2x2Value)
-}
-
-// MatrixFloat3x3Value calls the underlying MatrixFloat3x3Value.
-func (x *Uniform) MatrixFloat3x3Value() unsafe.Pointer {
-	return x.inner.MatrixFloat3x3Value()
-}
-
-// SetMatrixFloat3x3Value calls the underlying SetMatrixFloat3x3Value.
-func (x *Uniform) SetMatrixFloat3x3Value(matrixFloat3x3Value unsafe.Pointer) {
-	x.inner.SetMatrixFloat3x3Value(matrixFloat3x3Value)
-}
-
-// MatrixFloat4x4Value calls the underlying MatrixFloat4x4Value.
-func (x *Uniform) MatrixFloat4x4Value() unsafe.Pointer {
-	return x.inner.MatrixFloat4x4Value()
-}
-
-// SetMatrixFloat4x4Value calls the underlying SetMatrixFloat4x4Value.
-func (x *Uniform) SetMatrixFloat4x4Value(matrixFloat4x4Value unsafe.Pointer) {
-	x.inner.SetMatrixFloat4x4Value(matrixFloat4x4Value)
-}
-
-// FloatVector2Value calls the underlying FloatVector2Value.
-func (x *Uniform) FloatVector2Value() unsafe.Pointer {
-	return x.inner.FloatVector2Value()
-}
-
-// SetFloatVector2Value calls the underlying SetFloatVector2Value.
-func (x *Uniform) SetFloatVector2Value(floatVector2Value unsafe.Pointer) {
-	x.inner.SetFloatVector2Value(floatVector2Value)
-}
-
-// FloatVector3Value calls the underlying FloatVector3Value.
-func (x *Uniform) FloatVector3Value() unsafe.Pointer {
-	return x.inner.FloatVector3Value()
-}
-
-// SetFloatVector3Value calls the underlying SetFloatVector3Value.
-func (x *Uniform) SetFloatVector3Value(floatVector3Value unsafe.Pointer) {
-	x.inner.SetFloatVector3Value(floatVector3Value)
-}
-
-// FloatVector4Value calls the underlying FloatVector4Value.
-func (x *Uniform) FloatVector4Value() unsafe.Pointer {
-	return x.inner.FloatVector4Value()
-}
-
-// SetFloatVector4Value calls the underlying SetFloatVector4Value.
-func (x *Uniform) SetFloatVector4Value(floatVector4Value unsafe.Pointer) {
-	x.inner.SetFloatVector4Value(floatVector4Value)
-}
-
-// FloatMatrix2Value calls the underlying FloatMatrix2Value.
-func (x *Uniform) FloatMatrix2Value() unsafe.Pointer {
-	return x.inner.FloatMatrix2Value()
-}
-
-// SetFloatMatrix2Value calls the underlying SetFloatMatrix2Value.
-func (x *Uniform) SetFloatMatrix2Value(floatMatrix2Value unsafe.Pointer) {
-	x.inner.SetFloatMatrix2Value(floatMatrix2Value)
-}
-
-// FloatMatrix3Value calls the underlying FloatMatrix3Value.
-func (x *Uniform) FloatMatrix3Value() unsafe.Pointer {
-	return x.inner.FloatMatrix3Value()
-}
-
-// SetFloatMatrix3Value calls the underlying SetFloatMatrix3Value.
-func (x *Uniform) SetFloatMatrix3Value(floatMatrix3Value unsafe.Pointer) {
-	x.inner.SetFloatMatrix3Value(floatMatrix3Value)
-}
-
-// FloatMatrix4Value calls the underlying FloatMatrix4Value.
-func (x *Uniform) FloatMatrix4Value() unsafe.Pointer {
-	return x.inner.FloatMatrix4Value()
-}
-
-// SetFloatMatrix4Value calls the underlying SetFloatMatrix4Value.
-func (x *Uniform) SetFloatMatrix4Value(floatMatrix4Value unsafe.Pointer) {
-	x.inner.SetFloatMatrix4Value(floatMatrix4Value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }
 
 // Uniformable is the interface implemented by [Uniform], for mocking and DI.
 type Uniformable interface {
-	Unwrap() *raw.SKUniform
+	obj.Object
 	WithTextureValue(textureValue TextureProvider) *Uniform
 	WithFloatValue(floatValue float32) *Uniform
 	Name() string
-	UniformType() SKUniformType
+	UniformType() UniformType
 	TextureValue() *Texture
-	SetTextureValue(textureValue *raw.SKTexture)
+	SetTextureValue(textureValue *Texture)
 	FloatValue() float32
 	SetFloatValue(floatValue float32)
-	VectorFloat2Value() unsafe.Pointer
-	SetVectorFloat2Value(vectorFloat2Value unsafe.Pointer)
-	VectorFloat3Value() unsafe.Pointer
-	SetVectorFloat3Value(vectorFloat3Value unsafe.Pointer)
-	VectorFloat4Value() unsafe.Pointer
-	SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer)
-	MatrixFloat2x2Value() unsafe.Pointer
-	SetMatrixFloat2x2Value(matrixFloat2x2Value unsafe.Pointer)
-	MatrixFloat3x3Value() unsafe.Pointer
-	SetMatrixFloat3x3Value(matrixFloat3x3Value unsafe.Pointer)
-	MatrixFloat4x4Value() unsafe.Pointer
-	SetMatrixFloat4x4Value(matrixFloat4x4Value unsafe.Pointer)
-	FloatVector2Value() unsafe.Pointer
-	SetFloatVector2Value(floatVector2Value unsafe.Pointer)
-	FloatVector3Value() unsafe.Pointer
-	SetFloatVector3Value(floatVector3Value unsafe.Pointer)
-	FloatVector4Value() unsafe.Pointer
-	SetFloatVector4Value(floatVector4Value unsafe.Pointer)
-	FloatMatrix2Value() unsafe.Pointer
-	SetFloatMatrix2Value(floatMatrix2Value unsafe.Pointer)
-	FloatMatrix3Value() unsafe.Pointer
-	SetFloatMatrix3Value(floatMatrix3Value unsafe.Pointer)
-	FloatMatrix4Value() unsafe.Pointer
-	SetFloatMatrix4Value(floatMatrix4Value unsafe.Pointer)
 }
 
 var _ Uniformable = (*Uniform)(nil)

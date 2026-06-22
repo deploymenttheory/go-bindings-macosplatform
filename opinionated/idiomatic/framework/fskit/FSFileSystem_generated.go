@@ -5,41 +5,76 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for implementing a full-featured file system.
+// FileSystem is an idiomatic wrapper over the Objective-C class FSFileSystem.
 //
-// FileSystem wraps [raw.FSFileSystem] with a fluent Go API.
+// An abstract base class for implementing a full-featured file system.
 type FileSystem struct {
-	inner *raw.FSFileSystem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSFileSystem].
-func (x *FileSystem) Unwrap() *raw.FSFileSystem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileSystem) ID() objc.ID { return x.inner.Ptr() }
-
-// FileSystemFromID adopts an existing object pointer as a FileSystem (nil for 0).
+// FileSystemFromID adopts an existing Objective-C object as a FileSystem
+// (nil for 0), retaining it and registering a release finalizer.
 func FileSystemFromID(id objc.ID) *FileSystem {
 	if id == 0 {
 		return nil
 	}
-	return &FileSystem{inner: raw.FSFileSystemFromID(id)}
+	x := &FileSystem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFileSystem creates a new [FileSystem].
+// fileSystemAdopt wraps an Objective-C object that this code just created as a
+// FileSystem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileSystemAdopt(id objc.ID) *FileSystem {
+	if id == 0 {
+		return nil
+	}
+	x := &FileSystem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileSystem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileSystem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileSystem creates a new FileSystem.
 func NewFileSystem() *FileSystem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileSystem")), objc.RegisterName("new"))
-	return &FileSystem{inner: raw.FSFileSystemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSFileSystem")), objc.RegisterName("new"))
+	return fileSystemAdopt(_id)
 }
 
 // FileSystemable is the interface implemented by [FileSystem], for mocking and DI.
 type FileSystemable interface {
-	Unwrap() *raw.FSFileSystem
+	obj.Object
 }
 
 var _ FileSystemable = (*FileSystem)(nil)

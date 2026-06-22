@@ -5,43 +5,77 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// IntentDonationMetadata wraps [raw.INIntentDonationMetadata] with a fluent Go API.
+// IntentDonationMetadata is an idiomatic wrapper over the Objective-C class INIntentDonationMetadata.
+//
+// IntentDonationMetadata is an abstract base — you do not construct it directly. Construct one of [SendMessageIntentDonationMetadata] and pass it where a IntentDonationMetadata is accepted.
 type IntentDonationMetadata struct {
-	inner *raw.INIntentDonationMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INIntentDonationMetadata].
-func (x *IntentDonationMetadata) Unwrap() *raw.INIntentDonationMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IntentDonationMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// IntentDonationMetadataFromID adopts an existing object pointer as a IntentDonationMetadata (nil for 0).
+// IntentDonationMetadataFromID adopts an existing Objective-C object as a IntentDonationMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func IntentDonationMetadataFromID(id objc.ID) *IntentDonationMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &IntentDonationMetadata{inner: raw.INIntentDonationMetadataFromID(id)}
+	x := &IntentDonationMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIntentDonationMetadata creates a new [IntentDonationMetadata].
-func NewIntentDonationMetadata() *IntentDonationMetadata {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INIntentDonationMetadata")), objc.RegisterName("new"))
-	return &IntentDonationMetadata{inner: raw.INIntentDonationMetadataFromID(_id)}
+// intentDonationMetadataAdopt wraps an Objective-C object that this code just created as a
+// IntentDonationMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func intentDonationMetadataAdopt(id objc.ID) *IntentDonationMetadata {
+	if id == 0 {
+		return nil
+	}
+	x := &IntentDonationMetadata{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *IntentDonationMetadata) asIntentDonationMetadata() *raw.INIntentDonationMetadata {
-	return x.inner
+// Description returns the object's -description text.
+func (x *IntentDonationMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IntentDonationMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IntentDonationMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IntentDonationMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // IntentDonationMetadataable is the interface implemented by [IntentDonationMetadata], for mocking and DI.
 type IntentDonationMetadataable interface {
-	Unwrap() *raw.INIntentDonationMetadata
+	obj.Object
 }
 
 var _ IntentDonationMetadataable = (*IntentDonationMetadata)(nil)
+
+// isIntentDonationMetadata marks IntentDonationMetadata — and, by embedding promotion, its
+// subclasses — as a member of the IntentDonationMetadata hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IntentDonationMetadata) isIntentDonationMetadata() {}
+
+var _ IntentDonationMetadataProvider = (*IntentDonationMetadata)(nil)

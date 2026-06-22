@@ -5,59 +5,58 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayLUTDequantize wraps [raw.MPSNDArrayLUTDequantize] with a fluent Go API.
+// ArrayLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayLUTDequantize.
+//
+// It embeds [ArrayMultiaryKernel], promoting that type's methods.
 type ArrayLUTDequantize struct {
-	inner *raw.MPSNDArrayLUTDequantize
+	ArrayMultiaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayLUTDequantize].
-func (x *ArrayLUTDequantize) Unwrap() *raw.MPSNDArrayLUTDequantize { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayLUTDequantize) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayLUTDequantizeFromID adopts an existing object pointer as a ArrayLUTDequantize (nil for 0).
+// ArrayLUTDequantizeFromID adopts an existing Objective-C object as a ArrayLUTDequantize
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayLUTDequantizeFromID(id objc.ID) *ArrayLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(id)}
-}
-
-// NewArrayLUTDequantizeWithDevice creates a new [ArrayLUTDequantize].
-func NewArrayLUTDequantizeWithDevice(device metal.MTLDevice) *ArrayLUTDequantize {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayLUTDequantize")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayLUTDequantize{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *ArrayLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
+// arrayLUTDequantizeAdopt wraps an Objective-C object that this code just created as a
+// ArrayLUTDequantize (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayLUTDequantizeAdopt(id objc.ID) *ArrayLUTDequantize {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayLUTDequantize{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ArrayLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+// NewArrayLUTDequantize creates a new ArrayLUTDequantize.
+func NewArrayLUTDequantize() *ArrayLUTDequantize {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayLUTDequantize")), objc.RegisterName("new"))
+	return arrayLUTDequantizeAdopt(_id)
 }
 
 // ArrayLUTDequantizeable is the interface implemented by [ArrayLUTDequantize], for mocking and DI.
 type ArrayLUTDequantizeable interface {
-	Unwrap() *raw.MPSNDArrayLUTDequantize
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayLUTDequantize
+	obj.Object
 }
 
 var _ ArrayLUTDequantizeable = (*ArrayLUTDequantize)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayLUTDequantize)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayLUTDequantize)(nil)

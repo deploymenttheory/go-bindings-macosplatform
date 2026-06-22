@@ -5,71 +5,77 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestNullableOptionalRequestParams wraps [raw.MTRTestClusterClusterTestNullableOptionalRequestParams] with a fluent Go API.
+// MTRTestClusterClusterTestNullableOptionalRequestParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestNullableOptionalRequestParams.
+//
+// It embeds [MTRUnitTestingClusterTestNullableOptionalRequestParams], promoting that type's methods.
 type MTRTestClusterClusterTestNullableOptionalRequestParams struct {
-	inner *raw.MTRTestClusterClusterTestNullableOptionalRequestParams
+	MTRUnitTestingClusterTestNullableOptionalRequestParams
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestNullableOptionalRequestParams].
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestNullableOptionalRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestNullableOptionalRequestParams (nil for 0).
+// MTRTestClusterClusterTestNullableOptionalRequestParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestNullableOptionalRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestNullableOptionalRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestNullableOptionalRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestNullableOptionalRequestParams{inner: raw.MTRTestClusterClusterTestNullableOptionalRequestParamsFromID(id)}
+	x := &MTRTestClusterClusterTestNullableOptionalRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestNullableOptionalRequestParams creates a new [MTRTestClusterClusterTestNullableOptionalRequestParams].
+// mTRTestClusterClusterTestNullableOptionalRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestNullableOptionalRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestNullableOptionalRequestParamsAdopt(id objc.ID) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestNullableOptionalRequestParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRTestClusterClusterTestNullableOptionalRequestParams creates a new MTRTestClusterClusterTestNullableOptionalRequestParams.
 func NewMTRTestClusterClusterTestNullableOptionalRequestParams() *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestNullableOptionalRequestParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestNullableOptionalRequestParams{inner: raw.MTRTestClusterClusterTestNullableOptionalRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestNullableOptionalRequestParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestNullableOptionalRequestParamsAdopt(_id)
 }
 
-// WithArg1 sets the arg1 property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams.SetArg1(arg1)
+// WithArg1 sets the property and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) asMTRUnitTestingClusterTestNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams {
-	return &x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams
 }
 
 // MTRTestClusterClusterTestNullableOptionalRequestParamsable is the interface implemented by [MTRTestClusterClusterTestNullableOptionalRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestNullableOptionalRequestParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalRequestParams
-	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams
+	obj.Object
+	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams
 }
 
 var _ MTRTestClusterClusterTestNullableOptionalRequestParamsable = (*MTRTestClusterClusterTestNullableOptionalRequestParams)(nil)
+
+var _ MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider = (*MTRTestClusterClusterTestNullableOptionalRequestParams)(nil)

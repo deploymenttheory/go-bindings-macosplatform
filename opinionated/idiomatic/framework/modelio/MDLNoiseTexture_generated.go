@@ -5,84 +5,72 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A generator of texel data that creates a field of random noise.
+// NoiseTexture is an idiomatic wrapper over the Objective-C class MDLNoiseTexture.
 //
-// NoiseTexture wraps [raw.MDLNoiseTexture] with a fluent Go API.
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that creates a field of random noise.
 type NoiseTexture struct {
-	inner *raw.MDLNoiseTexture
+	Texture
 }
 
-// Unwrap returns the underlying [raw.MDLNoiseTexture].
-func (x *NoiseTexture) Unwrap() *raw.MDLNoiseTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NoiseTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// NoiseTextureFromID adopts an existing object pointer as a NoiseTexture (nil for 0).
+// NoiseTextureFromID adopts an existing Objective-C object as a NoiseTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func NoiseTextureFromID(id objc.ID) *NoiseTexture {
 	if id == 0 {
 		return nil
 	}
-	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(id)}
+	x := &NoiseTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a noise texture that creates random directional noise.
-//
-// NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
-func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:"), smoothness, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, raw.MDLTextureChannelEncoding(channelEncoding))
-	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
+// noiseTextureAdopt wraps an Objective-C object that this code just created as a
+// NoiseTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func noiseTextureAdopt(id objc.ID) *NoiseTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &NoiseTexture{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a noise texture that creates random color noise.
-//
-// NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale creates a new [NoiseTexture].
-func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name string, textureDimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, grayscale bool) *NoiseTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initScalarNoiseWithSmoothness:name:textureDimensions:channelCount:channelEncoding:grayscale:"), smoothness, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, channelCount, raw.MDLTextureChannelEncoding(channelEncoding), grayscale)
-	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
+// NewNoiseTexture creates a new NoiseTexture.
+func NewNoiseTexture() *NoiseTexture {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLNoiseTexture")), objc.RegisterName("new"))
+	return noiseTextureAdopt(_id)
 }
 
-// Create a texture containing cellular noise. @param frequency How large the cells will be
-//
-// NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
-func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding(frequency float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCellularNoiseWithFrequency:name:textureDimensions:channelEncoding:"), frequency, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, raw.MDLTextureChannelEncoding(channelEncoding))
-	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
-}
-
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
-	x.inner.MDLTexture.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *NoiseTexture) WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture {
-	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
-
-func (x *NoiseTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // NoiseTextureable is the interface implemented by [NoiseTexture], for mocking and DI.
 type NoiseTextureable interface {
-	Unwrap() *raw.MDLNoiseTexture
+	obj.Object
 	WithIsCube(isCube bool) *NoiseTexture
 	WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture
 }
 
 var _ NoiseTextureable = (*NoiseTexture)(nil)
+
+var _ TextureProvider = (*NoiseTexture)(nil)

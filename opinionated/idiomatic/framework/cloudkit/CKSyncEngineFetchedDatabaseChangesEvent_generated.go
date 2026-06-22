@@ -5,76 +5,76 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about fetched database changes.
+// SyncEngineFetchedDatabaseChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchedDatabaseChangesEvent.
 //
-// SyncEngineFetchedDatabaseChangesEvent wraps [raw.CKSyncEngineFetchedDatabaseChangesEvent] with a fluent Go API.
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// An object that provides information about fetched database changes.
 type SyncEngineFetchedDatabaseChangesEvent struct {
-	inner *raw.CKSyncEngineFetchedDatabaseChangesEvent
+	SyncEngineEvent
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFetchedDatabaseChangesEvent].
-func (x *SyncEngineFetchedDatabaseChangesEvent) Unwrap() *raw.CKSyncEngineFetchedDatabaseChangesEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFetchedDatabaseChangesEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFetchedDatabaseChangesEventFromID adopts an existing object pointer as a SyncEngineFetchedDatabaseChangesEvent (nil for 0).
+// SyncEngineFetchedDatabaseChangesEventFromID adopts an existing Objective-C object as a SyncEngineFetchedDatabaseChangesEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFetchedDatabaseChangesEventFromID(id objc.ID) *SyncEngineFetchedDatabaseChangesEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchedDatabaseChangesEvent{inner: raw.CKSyncEngineFetchedDatabaseChangesEventFromID(id)}
+	x := &SyncEngineFetchedDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineFetchedDatabaseChangesEvent creates a new [SyncEngineFetchedDatabaseChangesEvent].
+// syncEngineFetchedDatabaseChangesEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFetchedDatabaseChangesEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFetchedDatabaseChangesEventAdopt(id objc.ID) *SyncEngineFetchedDatabaseChangesEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineFetchedDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSyncEngineFetchedDatabaseChangesEvent creates a new SyncEngineFetchedDatabaseChangesEvent.
 func NewSyncEngineFetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchedDatabaseChangesEvent")), objc.RegisterName("new"))
-	return &SyncEngineFetchedDatabaseChangesEvent{inner: raw.CKSyncEngineFetchedDatabaseChangesEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchedDatabaseChangesEvent")), objc.RegisterName("new"))
+	return syncEngineFetchedDatabaseChangesEventAdopt(_id)
 }
 
-// The fetched record zone modifications.
+// Modifications the fetched record zone modifications.
 //
 // Modifications returns the collection as a Go slice.
 func (x *SyncEngineFetchedDatabaseChangesEvent) Modifications() []*RecordZone {
-	arr := x.inner.Modifications()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZone {
-		return &RecordZone{inner: raw.CKRecordZoneFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifications"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
 
-// The fetched record zone deletions.
+// Deletions the fetched record zone deletions.
 //
 // Deletions returns the collection as a Go slice.
 func (x *SyncEngineFetchedDatabaseChangesEvent) Deletions() []*SyncEngineFetchedZoneDeletion {
-	arr := x.inner.Deletions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEngineFetchedZoneDeletion {
-		return &SyncEngineFetchedZoneDeletion{inner: raw.CKSyncEngineFetchedZoneDeletionFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *SyncEngineFetchedDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFetchedZoneDeletion { return SyncEngineFetchedZoneDeletionFromID(_id) })
 }
 
 // SyncEngineFetchedDatabaseChangesEventable is the interface implemented by [SyncEngineFetchedDatabaseChangesEvent], for mocking and DI.
 type SyncEngineFetchedDatabaseChangesEventable interface {
-	Unwrap() *raw.CKSyncEngineFetchedDatabaseChangesEvent
+	obj.Object
 	Modifications() []*RecordZone
 	Deletions() []*SyncEngineFetchedZoneDeletion
 }
 
 var _ SyncEngineFetchedDatabaseChangesEventable = (*SyncEngineFetchedDatabaseChangesEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineFetchedDatabaseChangesEvent)(nil)

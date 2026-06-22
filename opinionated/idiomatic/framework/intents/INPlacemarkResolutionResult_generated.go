@@ -5,45 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for placemark information associated with an intent.
+// PlacemarkResolutionResult is an idiomatic wrapper over the Objective-C class INPlacemarkResolutionResult.
 //
-// PlacemarkResolutionResult wraps [raw.INPlacemarkResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for placemark information associated with an intent.
 type PlacemarkResolutionResult struct {
-	inner *raw.INPlacemarkResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INPlacemarkResolutionResult].
-func (x *PlacemarkResolutionResult) Unwrap() *raw.INPlacemarkResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlacemarkResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PlacemarkResolutionResultFromID adopts an existing object pointer as a PlacemarkResolutionResult (nil for 0).
+// PlacemarkResolutionResultFromID adopts an existing Objective-C object as a PlacemarkResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PlacemarkResolutionResultFromID(id objc.ID) *PlacemarkResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &PlacemarkResolutionResult{inner: raw.INPlacemarkResolutionResultFromID(id)}
+	x := &PlacemarkResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlacemarkResolutionResult creates a new [PlacemarkResolutionResult].
+// placemarkResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// PlacemarkResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func placemarkResolutionResultAdopt(id objc.ID) *PlacemarkResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PlacemarkResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPlacemarkResolutionResult creates a new PlacemarkResolutionResult.
 func NewPlacemarkResolutionResult() *PlacemarkResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INPlacemarkResolutionResult")), objc.RegisterName("new"))
-	return &PlacemarkResolutionResult{inner: raw.INPlacemarkResolutionResultFromID(_id)}
-}
-
-func (x *PlacemarkResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INPlacemarkResolutionResult")), objc.RegisterName("new"))
+	return placemarkResolutionResultAdopt(_id)
 }
 
 // PlacemarkResolutionResultable is the interface implemented by [PlacemarkResolutionResult], for mocking and DI.
 type PlacemarkResolutionResultable interface {
-	Unwrap() *raw.INPlacemarkResolutionResult
+	obj.Object
 }
 
 var _ PlacemarkResolutionResultable = (*PlacemarkResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*PlacemarkResolutionResult)(nil)

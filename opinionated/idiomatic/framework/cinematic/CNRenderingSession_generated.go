@@ -5,97 +5,98 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object representing the context in which rendering occurs.
+// RenderingSession is an idiomatic wrapper over the Objective-C class CNRenderingSession.
 //
-// RenderingSession wraps [raw.CNRenderingSession] with a fluent Go API.
+// An object representing the context in which rendering occurs.
 type RenderingSession struct {
-	inner *raw.CNRenderingSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNRenderingSession].
-func (x *RenderingSession) Unwrap() *raw.CNRenderingSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderingSession) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderingSessionFromID adopts an existing object pointer as a RenderingSession (nil for 0).
+// RenderingSessionFromID adopts an existing Objective-C object as a RenderingSession
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderingSessionFromID(id objc.ID) *RenderingSession {
 	if id == 0 {
 		return nil
 	}
-	return &RenderingSession{inner: raw.CNRenderingSessionFromID(id)}
+	x := &RenderingSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuality creates a new [RenderingSession].
-func NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuality(commandQueue metal.MTLCommandQueue, sessionAttributes *raw.CNRenderingSessionAttributes, preferredTransform corefoundation.CGAffineTransform, quality CNRenderingQuality) *RenderingSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandQueue:sessionAttributes:preferredTransform:quality:"), commandQueue, sessionAttributes.Ptr(), preferredTransform, raw.CNRenderingQuality(quality))
-	return &RenderingSession{inner: raw.CNRenderingSessionFromID(_id)}
-}
-
-// Encode a command to render a shallow depth of field (SDoF) image to a pixel buffer. - Parameters: - commandBuffer: the metal command buffer on which to encode the command - frameAttributes: controls the focus distance and aperture of the rendering - sourceImage: a pixel buffer read from the cinematicVideoTrack - sourceDisparity: a pixel buffer read from the cinematicDisparityTrack - destinationImage: the pixel buffer to which the SDoF image is rendered - Returns: whether encoding the render command was successful
-//
-// EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage.
-func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationImage unsafe.Pointer) bool {
-	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationImage)
-}
-
-// Encode a command to render a shallow depth of field (SDoF) image to a metal texture as RGBA. - Parameters: - commandBuffer: the metal command buffer on which to encode the command - frameAttributes: controls the focus distance and aperture of the rendering - sourceImage: a pixel buffer read from the cinematicVideoTrack - sourceDisparity: a pixel buffer read from the cinematicDisparityTrack - destinationRGBA: a metal texture to which the SDoF image is rendered in RGBA format - Returns: whether encoding the render command was successful
-//
-// EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA.
-func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationRGBA metal.MTLTexture) bool {
-	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationRGBA)
-}
-
-// Encode a command to render a shallow depth of field (SDoF) image to two metal textures as luma and chroma. - Parameters: - commandBuffer: the metal command buffer on which to encode the command - frameAttributes: controls the focus distance and aperture of the rendering - sourceImage: a pixel buffer read from the cinematicVideoTrack - sourceDisparity: a pixel buffer read from the cinematicDisparityTrack - destinationLuma: a metal texture to which the luma of the SDoF image is rendered - destinationChroma: a metal texture to which the chroma of the SDoF image is rendered - Returns: whether encoding the render command was successful
-//
-// EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma.
-func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationLuma metal.MTLTexture, destinationChroma metal.MTLTexture) bool {
-	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationLuma, destinationChroma)
-}
-
-// CommandQueue calls the underlying CommandQueue.
-func (x *RenderingSession) CommandQueue() metal.MTLCommandQueue {
-	return x.inner.CommandQueue()
-}
-
-// SessionAttributes calls the underlying SessionAttributes.
-func (x *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
-	_r := x.inner.SessionAttributes()
-	if _r == nil {
+// renderingSessionAdopt wraps an Objective-C object that this code just created as a
+// RenderingSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderingSessionAdopt(id objc.ID) *RenderingSession {
+	if id == 0 {
 		return nil
 	}
-	return &RenderingSessionAttributes{inner: _r}
+	x := &RenderingSession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PreferredTransform calls the underlying PreferredTransform.
+// Description returns the object's -description text.
+func (x *RenderingSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderingSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderingSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderingSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderingSession creates a new RenderingSession.
+func NewRenderingSession() *RenderingSession {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNRenderingSession")), objc.RegisterName("new"))
+	return renderingSessionAdopt(_id)
+}
+
+// SessionAttributes wraps the corresponding Objective-C method.
+func (x *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionAttributes"))
+	return RenderingSessionAttributesFromID(_r)
+}
+
+// PreferredTransform wraps the corresponding Objective-C method.
 func (x *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
-	return x.inner.PreferredTransform()
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+	return _r
 }
 
-// Quality calls the underlying Quality.
-func (x *RenderingSession) Quality() CNRenderingQuality {
-	return CNRenderingQuality(x.inner.Quality())
+// Quality wraps the corresponding Objective-C method.
+func (x *RenderingSession) Quality() RenderingQuality {
+	_r := objc.Send[RenderingQuality](objref.IDOf(x), objc.RegisterName("quality"))
+	return _r
 }
 
 // RenderingSessionable is the interface implemented by [RenderingSession], for mocking and DI.
 type RenderingSessionable interface {
-	Unwrap() *raw.CNRenderingSession
-	EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationImage unsafe.Pointer) bool
-	EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationRGBA metal.MTLTexture) bool
-	EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationLuma metal.MTLTexture, destinationChroma metal.MTLTexture) bool
-	CommandQueue() metal.MTLCommandQueue
+	obj.Object
 	SessionAttributes() *RenderingSessionAttributes
 	PreferredTransform() corefoundation.CGAffineTransform
-	Quality() CNRenderingQuality
+	Quality() RenderingQuality
 }
 
 var _ RenderingSessionable = (*RenderingSession)(nil)

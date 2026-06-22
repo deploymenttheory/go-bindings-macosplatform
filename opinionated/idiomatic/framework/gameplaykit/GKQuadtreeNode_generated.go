@@ -5,47 +5,76 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A helper class for managing the objects you organize in a quadtree.
+// QuadtreeNode is an idiomatic wrapper over the Objective-C class GKQuadtreeNode.
 //
-// QuadtreeNode wraps [raw.GKQuadtreeNode] with a fluent Go API.
+// A helper class for managing the objects you organize in a quadtree.
 type QuadtreeNode struct {
-	inner *raw.GKQuadtreeNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKQuadtreeNode].
-func (x *QuadtreeNode) Unwrap() *raw.GKQuadtreeNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuadtreeNode) ID() objc.ID { return x.inner.Ptr() }
-
-// QuadtreeNodeFromID adopts an existing object pointer as a QuadtreeNode (nil for 0).
+// QuadtreeNodeFromID adopts an existing Objective-C object as a QuadtreeNode
+// (nil for 0), retaining it and registering a release finalizer.
 func QuadtreeNodeFromID(id objc.ID) *QuadtreeNode {
 	if id == 0 {
 		return nil
 	}
-	return &QuadtreeNode{inner: raw.GKQuadtreeNodeFromID(id)}
+	x := &QuadtreeNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQuadtreeNode creates a new [QuadtreeNode].
+// quadtreeNodeAdopt wraps an Objective-C object that this code just created as a
+// QuadtreeNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quadtreeNodeAdopt(id objc.ID) *QuadtreeNode {
+	if id == 0 {
+		return nil
+	}
+	x := &QuadtreeNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QuadtreeNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuadtreeNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuadtreeNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuadtreeNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQuadtreeNode creates a new QuadtreeNode.
 func NewQuadtreeNode() *QuadtreeNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKQuadtreeNode")), objc.RegisterName("new"))
-	return &QuadtreeNode{inner: raw.GKQuadtreeNodeFromID(_id)}
-}
-
-// Quad calls the underlying Quad.
-func (x *QuadtreeNode) Quad() raw.GKQuad {
-	return x.inner.Quad()
+	_id := objc.Send[objc.ID](objc.ID(_class("GKQuadtreeNode")), objc.RegisterName("new"))
+	return quadtreeNodeAdopt(_id)
 }
 
 // QuadtreeNodeable is the interface implemented by [QuadtreeNode], for mocking and DI.
 type QuadtreeNodeable interface {
-	Unwrap() *raw.GKQuadtreeNode
-	Quad() raw.GKQuad
+	obj.Object
 }
 
 var _ QuadtreeNodeable = (*QuadtreeNode)(nil)

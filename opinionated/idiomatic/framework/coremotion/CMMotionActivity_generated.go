@@ -5,81 +5,100 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The data for a single motion update event.
+// MotionActivity is an idiomatic wrapper over the Objective-C class CMMotionActivity.
 //
-// MotionActivity wraps [raw.CMMotionActivity] with a fluent Go API.
+// It embeds [LogItem], promoting that type's methods.
+//
+// The data for a single motion update event.
 type MotionActivity struct {
-	inner *raw.CMMotionActivity
+	LogItem
 }
 
-// Unwrap returns the underlying [raw.CMMotionActivity].
-func (x *MotionActivity) Unwrap() *raw.CMMotionActivity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MotionActivity) ID() objc.ID { return x.inner.Ptr() }
-
-// MotionActivityFromID adopts an existing object pointer as a MotionActivity (nil for 0).
+// MotionActivityFromID adopts an existing Objective-C object as a MotionActivity
+// (nil for 0), retaining it and registering a release finalizer.
 func MotionActivityFromID(id objc.ID) *MotionActivity {
 	if id == 0 {
 		return nil
 	}
-	return &MotionActivity{inner: raw.CMMotionActivityFromID(id)}
+	x := &MotionActivity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMotionActivity creates a new [MotionActivity].
+// motionActivityAdopt wraps an Objective-C object that this code just created as a
+// MotionActivity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func motionActivityAdopt(id objc.ID) *MotionActivity {
+	if id == 0 {
+		return nil
+	}
+	x := &MotionActivity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMotionActivity creates a new MotionActivity.
 func NewMotionActivity() *MotionActivity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMMotionActivity")), objc.RegisterName("new"))
-	return &MotionActivity{inner: raw.CMMotionActivityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMMotionActivity")), objc.RegisterName("new"))
+	return motionActivityAdopt(_id)
 }
 
-// Confidence calls the underlying Confidence.
-func (x *MotionActivity) Confidence() CMMotionActivityConfidence {
-	return CMMotionActivityConfidence(x.inner.Confidence())
+// Confidence wraps the corresponding Objective-C method.
+func (x *MotionActivity) Confidence() MotionActivityConfidence {
+	_r := objc.Send[MotionActivityConfidence](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
 
-// StartDate calls the underlying StartDate.
-func (x *MotionActivity) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// StartDate wraps the corresponding Objective-C method.
+func (x *MotionActivity) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// Unknown calls the underlying Unknown.
+// Unknown wraps the corresponding Objective-C method.
 func (x *MotionActivity) Unknown() bool {
-	return x.inner.Unknown()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unknown"))
+	return _r
 }
 
-// Stationary calls the underlying Stationary.
+// Stationary wraps the corresponding Objective-C method.
 func (x *MotionActivity) Stationary() bool {
-	return x.inner.Stationary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stationary"))
+	return _r
 }
 
-// Walking calls the underlying Walking.
+// Walking wraps the corresponding Objective-C method.
 func (x *MotionActivity) Walking() bool {
-	return x.inner.Walking()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("walking"))
+	return _r
 }
 
-// Running calls the underlying Running.
+// Running wraps the corresponding Objective-C method.
 func (x *MotionActivity) Running() bool {
-	return x.inner.Running()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("running"))
+	return _r
 }
 
-// Automotive calls the underlying Automotive.
+// Automotive wraps the corresponding Objective-C method.
 func (x *MotionActivity) Automotive() bool {
-	return x.inner.Automotive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automotive"))
+	return _r
 }
-
-func (x *MotionActivity) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
 
 // MotionActivityable is the interface implemented by [MotionActivity], for mocking and DI.
 type MotionActivityable interface {
-	Unwrap() *raw.CMMotionActivity
-	Confidence() CMMotionActivityConfidence
-	StartDate() *foundation.NSDate
+	obj.Object
+	Confidence() MotionActivityConfidence
+	StartDate() obj.Object
 	Unknown() bool
 	Stationary() bool
 	Walking() bool
@@ -88,3 +107,5 @@ type MotionActivityable interface {
 }
 
 var _ MotionActivityable = (*MotionActivity)(nil)
+
+var _ LogItemProvider = (*MotionActivity)(nil)

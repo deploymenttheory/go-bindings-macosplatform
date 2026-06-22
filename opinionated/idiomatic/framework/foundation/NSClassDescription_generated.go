@@ -5,52 +5,86 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides the interface for querying the relationships and properties of a class.
+// ClassDescription is an idiomatic wrapper over the Objective-C class NSClassDescription.
 //
-// ClassDescription wraps [raw.NSClassDescription] with a fluent Go API.
+// ClassDescription is an abstract base — you do not construct it directly. Construct one of [ScriptClassDescription] and pass it where a ClassDescription is accepted.
+//
+// An abstract class that provides the interface for querying the relationships and properties of a class.
 type ClassDescription struct {
-	inner *raw.NSClassDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSClassDescription].
-func (x *ClassDescription) Unwrap() *raw.NSClassDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClassDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// ClassDescriptionFromID adopts an existing object pointer as a ClassDescription (nil for 0).
+// ClassDescriptionFromID adopts an existing Objective-C object as a ClassDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func ClassDescriptionFromID(id objc.ID) *ClassDescription {
 	if id == 0 {
 		return nil
 	}
-	return &ClassDescription{inner: raw.NSClassDescriptionFromID(id)}
-}
-
-// NewClassDescription creates a new [ClassDescription].
-func NewClassDescription() *ClassDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSClassDescription")), objc.RegisterName("new"))
-	return &ClassDescription{inner: raw.NSClassDescriptionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ClassDescription) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ClassDescription {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ClassDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *ClassDescription) asClassDescription() *raw.NSClassDescription { return x.inner }
+// classDescriptionAdopt wraps an Objective-C object that this code just created as a
+// ClassDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func classDescriptionAdopt(id objc.ID) *ClassDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &ClassDescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *ClassDescription) asObject() *raw.NSObject { return &x.inner.NSObject }
+// Description returns the object's -description text.
+func (x *ClassDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ClassDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ClassDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClassDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *ClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // ClassDescriptionable is the interface implemented by [ClassDescription], for mocking and DI.
 type ClassDescriptionable interface {
-	Unwrap() *raw.NSClassDescription
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ClassDescription
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription
 }
 
 var _ ClassDescriptionable = (*ClassDescription)(nil)
+
+// isClassDescription marks ClassDescription — and, by embedding promotion, its
+// subclasses — as a member of the ClassDescription hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ClassDescription) isClassDescription() {}
+
+var _ ClassDescriptionProvider = (*ClassDescription)(nil)

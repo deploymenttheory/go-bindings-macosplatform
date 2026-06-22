@@ -5,292 +5,141 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// FilterIncludingAll calls the underlying MKAddressFilterFilterIncludingAll.
+// FilterIncludingAll wraps the corresponding Objective-C method.
 func FilterIncludingAll() *AddressFilter {
-	_r := raw.MKAddressFilterFilterIncludingAll()
-	if _r == nil {
-		return nil
-	}
-	return &AddressFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("filterIncludingAll"))
+	return AddressFilterFromID(_r)
 }
 
-// FilterExcludingAll calls the underlying MKAddressFilterFilterExcludingAll.
+// FilterExcludingAll wraps the corresponding Objective-C method.
 func FilterExcludingAll() *AddressFilter {
-	_r := raw.MKAddressFilterFilterExcludingAll()
-	if _r == nil {
-		return nil
-	}
-	return &AddressFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("filterExcludingAll"))
+	return AddressFilterFromID(_r)
 }
 
-// CircleWithCenterCoordinateRadius calls the underlying MKCircleCircleWithCenterCoordinateRadius.
-func CircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsafe.Pointer) *Circle {
-	_r := raw.MKCircleCircleWithCenterCoordinateRadius(coord, radius)
-	if _r == nil {
-		return nil
-	}
-	return &Circle{inner: _r}
+// CompassButtonWithMapView creates a compass button and associates it with the specified map view.
+func CompassButtonWithMapView(mapView *MapView) *CompassButton {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("compassButtonWithMapView:"), objref.IDOf(mapView))
+	return CompassButtonFromID(_r)
 }
 
-// CircleWithMapRect calls the underlying MKCircleCircleWithMapRect.
-func CircleWithMapRect(mapRect raw.MKMapRect) *Circle {
-	_r := raw.MKCircleCircleWithMapRect(mapRect)
-	if _r == nil {
-		return nil
-	}
-	return &Circle{inner: _r}
-}
-
-// CompassButtonWithMapView calls the underlying MKCompassButtonCompassButtonWithMapView.
-func CompassButtonWithMapView(mapView *raw.MKMapView) *CompassButton {
-	_r := raw.MKCompassButtonCompassButtonWithMapView(mapView)
-	if _r == nil {
-		return nil
-	}
-	return &CompassButton{inner: _r}
-}
-
-// IsDirectionsRequestURL calls the underlying MKDirectionsRequestIsDirectionsRequestURL.
+// IsDirectionsRequestURL wraps the corresponding Objective-C method.
 func IsDirectionsRequestURL(url string) bool {
-	return raw.MKDirectionsRequestIsDirectionsRequestURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objc.ID(_class("MKDirectionsRequest")), objc.RegisterName("isDirectionsRequestURL:"), rt.FileURL(url))
+	return _r
 }
 
-// PolylineWithPointsCount calls the underlying MKGeodesicPolylinePolylineWithPointsCount.
-func PolylineWithPointsCount(points *raw.MKMapPoint, count uint) *GeodesicPolyline {
-	_r := raw.MKGeodesicPolylinePolylineWithPointsCount(points, count)
-	if _r == nil {
-		return nil
-	}
-	return &GeodesicPolyline{inner: _r}
-}
-
-// PolylineWithCoordinatesCount calls the underlying MKGeodesicPolylinePolylineWithCoordinatesCount.
-func PolylineWithCoordinatesCount(coords unsafe.Pointer, count uint) *GeodesicPolyline {
-	_r := raw.MKGeodesicPolylinePolylineWithCoordinatesCount(coords, count)
-	if _r == nil {
-		return nil
-	}
-	return &GeodesicPolyline{inner: _r}
-}
-
-// Camera calls the underlying MKMapCameraCamera.
+// Camera returns a new camera object for you to configure.
 func Camera() *MapCamera {
-	_r := raw.MKMapCameraCamera()
-	if _r == nil {
-		return nil
-	}
-	return &MapCamera{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("camera"))
+	return MapCameraFromID(_r)
 }
 
-// CameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude calls the underlying MKMapCameraCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude.
-func CameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude(centerCoordinate unsafe.Pointer, eyeCoordinate unsafe.Pointer, eyeAltitude unsafe.Pointer) *MapCamera {
-	_r := raw.MKMapCameraCameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude(centerCoordinate, eyeCoordinate, eyeAltitude)
-	if _r == nil {
-		return nil
-	}
-	return &MapCamera{inner: _r}
+// CameraLookingAtMapItemForViewSizeAllowPitch returns a new camera object using the specified map item, view size, and pitch.
+func CameraLookingAtMapItemForViewSizeAllowPitch(mapItem *MapItem, viewSize corefoundation.CGSize, allowPitch bool) *MapCamera {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("cameraLookingAtMapItem:forViewSize:allowPitch:"), objref.IDOf(mapItem), viewSize, allowPitch)
+	return MapCameraFromID(_r)
 }
 
-// CameraLookingAtCenterCoordinateFromDistancePitchHeading calls the underlying MKMapCameraCameraLookingAtCenterCoordinateFromDistancePitchHeading.
-func CameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCoordinate unsafe.Pointer, distance unsafe.Pointer, pitch float64, heading unsafe.Pointer) *MapCamera {
-	_r := raw.MKMapCameraCameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCoordinate, distance, pitch, heading)
-	if _r == nil {
-		return nil
-	}
-	return &MapCamera{inner: _r}
-}
-
-// CameraLookingAtMapItemForViewSizeAllowPitch calls the underlying MKMapCameraCameraLookingAtMapItemForViewSizeAllowPitch.
-func CameraLookingAtMapItemForViewSizeAllowPitch(mapItem *raw.MKMapItem, viewSize corefoundation.CGSize, allowPitch bool) *MapCamera {
-	_r := raw.MKMapCameraCameraLookingAtMapItemForViewSizeAllowPitch(mapItem, viewSize, allowPitch)
-	if _r == nil {
-		return nil
-	}
-	return &MapCamera{inner: _r}
-}
-
-// MapItemForCurrentLocation calls the underlying MKMapItemMapItemForCurrentLocation.
+// MapItemForCurrentLocation creates and returns a singleton map item object representing the user’s location.
 func MapItemForCurrentLocation() *MapItem {
-	_r := raw.MKMapItemMapItemForCurrentLocation()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("mapItemForCurrentLocation"))
+	return MapItemFromID(_r)
 }
 
-// OpenMapsWithItemsLaunchOptions calls the underlying MKMapItemOpenMapsWithItemsLaunchOptions.
-func OpenMapsWithItemsLaunchOptions(mapItems *foundation.NSArray[*raw.MKMapItem], launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return raw.MKMapItemOpenMapsWithItemsLaunchOptions(mapItems, launchOptions)
+// OpenMapsWithItemsLaunchOptions opens the Maps app and displays the specified map items.
+func OpenMapsWithItemsLaunchOptions(mapItems []*MapItem, launchOptions obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(launchOptions))
+	return _r
 }
 
-// OpenMapsWithItemsLaunchOptionsCompletionHandler calls the underlying MKMapItemOpenMapsWithItemsLaunchOptionsCompletionHandler.
-func OpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems *foundation.NSArray[*raw.MKMapItem], launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool)) {
-	raw.MKMapItemOpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems, launchOptions, completion)
+// OpenMapsWithItemsLaunchOptionsCompletionHandler opens the Maps app using the specified map items and options.
+func OpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems []*MapItem, launchOptions obj.Object, completion func(bool)) {
+	objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:completionHandler:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// AutomaticWithPresentationViewController calls the underlying MKMapItemDetailSelectionAccessoryPresentationStyleAutomaticWithPresentationViewController.
-func AutomaticWithPresentationViewController(presentationViewController *appkit.NSViewController) *MapItemDetailSelectionAccessoryPresentationStyle {
-	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleAutomaticWithPresentationViewController(presentationViewController)
-	if _r == nil {
-		return nil
-	}
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: _r}
+// AutomaticWithPresentationViewController an appropriate presentation style will be chosen automatically.
+func AutomaticWithPresentationViewController(presentationViewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("automaticWithPresentationViewController:"), objref.IDOf(presentationViewController))
+	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// CalloutWithCalloutStyle calls the underlying MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle.
-func CalloutWithCalloutStyle(style MKMapItemDetailSelectionAccessoryCalloutStyle) *MapItemDetailSelectionAccessoryPresentationStyle {
-	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle(raw.MKMapItemDetailSelectionAccessoryCalloutStyle(style))
-	if _r == nil {
-		return nil
-	}
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: _r}
+// CalloutWithCalloutStyle show map item detail as an annotation callout on the map
+func CalloutWithCalloutStyle(style MapItemDetailSelectionAccessoryCalloutStyle) *MapItemDetailSelectionAccessoryPresentationStyle {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("calloutWithCalloutStyle:"), style)
+	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// SheetPresentedFromViewController calls the underlying MKMapItemDetailSelectionAccessoryPresentationStyleSheetPresentedFromViewController.
-func SheetPresentedFromViewController(viewController *appkit.NSViewController) *MapItemDetailSelectionAccessoryPresentationStyle {
-	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleSheetPresentedFromViewController(viewController)
-	if _r == nil {
-		return nil
-	}
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: _r}
+// SheetPresentedFromViewController wraps the corresponding Objective-C method.
+func SheetPresentedFromViewController(viewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("sheetPresentedFromViewController:"), objref.IDOf(viewController))
+	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// Callout calls the underlying MKMapItemDetailSelectionAccessoryPresentationStyleCallout.
+// Callout wraps the corresponding Objective-C method.
 func Callout() *MapItemDetailSelectionAccessoryPresentationStyle {
-	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleCallout()
-	if _r == nil {
-		return nil
-	}
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("callout"))
+	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// OpenInMaps calls the underlying MKMapItemDetailSelectionAccessoryPresentationStyleOpenInMaps.
+// OpenInMaps wraps the corresponding Objective-C method.
 func OpenInMaps() *MapItemDetailSelectionAccessoryPresentationStyle {
-	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleOpenInMaps()
-	if _r == nil {
-		return nil
-	}
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("openInMaps"))
+	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// RedPinColor calls the underlying MKPinAnnotationViewRedPinColor.
-func RedPinColor() *appkit.NSColor {
-	return raw.MKPinAnnotationViewRedPinColor()
+// RedPinColor returns the standard color for red pins.
+func RedPinColor() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("redPinColor"))
+	return obj.Wrap(_r)
 }
 
-// GreenPinColor calls the underlying MKPinAnnotationViewGreenPinColor.
-func GreenPinColor() *appkit.NSColor {
-	return raw.MKPinAnnotationViewGreenPinColor()
+// GreenPinColor returns the standard color for green pins.
+func GreenPinColor() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("greenPinColor"))
+	return obj.Wrap(_r)
 }
 
-// PurplePinColor calls the underlying MKPinAnnotationViewPurplePinColor.
-func PurplePinColor() *appkit.NSColor {
-	return raw.MKPinAnnotationViewPurplePinColor()
+// PurplePinColor returns the standard color for purple pins.
+func PurplePinColor() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("purplePinColor"))
+	return obj.Wrap(_r)
 }
 
-// PitchControlWithMapView calls the underlying MKPitchControlPitchControlWithMapView.
-func PitchControlWithMapView(mapView *raw.MKMapView) *PitchControl {
-	_r := raw.MKPitchControlPitchControlWithMapView(mapView)
-	if _r == nil {
-		return nil
-	}
-	return &PitchControl{inner: _r}
+// PitchControlWithMapView creates a pitch control and associates it with the specified map view.
+func PitchControlWithMapView(mapView *MapView) *PitchControl {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("pitchControlWithMapView:"), objref.IDOf(mapView))
+	return PitchControlFromID(_r)
 }
 
-// FilterIncludingAllCategories calls the underlying MKPointOfInterestFilterFilterIncludingAllCategories.
+// FilterIncludingAllCategories wraps the corresponding Objective-C method.
 func FilterIncludingAllCategories() *PointOfInterestFilter {
-	_r := raw.MKPointOfInterestFilterFilterIncludingAllCategories()
-	if _r == nil {
-		return nil
-	}
-	return &PointOfInterestFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterIncludingAllCategories"))
+	return PointOfInterestFilterFromID(_r)
 }
 
-// FilterExcludingAllCategories calls the underlying MKPointOfInterestFilterFilterExcludingAllCategories.
+// FilterExcludingAllCategories wraps the corresponding Objective-C method.
 func FilterExcludingAllCategories() *PointOfInterestFilter {
-	_r := raw.MKPointOfInterestFilterFilterExcludingAllCategories()
-	if _r == nil {
-		return nil
-	}
-	return &PointOfInterestFilter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterExcludingAllCategories"))
+	return PointOfInterestFilterFromID(_r)
 }
 
-// PolygonWithPointsCount calls the underlying MKPolygonPolygonWithPointsCount.
-func PolygonWithPointsCount(points *raw.MKMapPoint, count uint) *Polygon {
-	_r := raw.MKPolygonPolygonWithPointsCount(points, count)
-	if _r == nil {
-		return nil
-	}
-	return &Polygon{inner: _r}
+// MapItemDetailWithPresentationStyle detailed information about a place
+func MapItemDetailWithPresentationStyle(presentationStyle *MapItemDetailSelectionAccessoryPresentationStyle) *SelectionAccessory {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKSelectionAccessory")), objc.RegisterName("mapItemDetailWithPresentationStyle:"), objref.IDOf(presentationStyle))
+	return SelectionAccessoryFromID(_r)
 }
 
-// PolygonWithPointsCountInteriorPolygons calls the underlying MKPolygonPolygonWithPointsCountInteriorPolygons.
-func PolygonWithPointsCountInteriorPolygons(points *raw.MKMapPoint, count uint, interiorPolygons *foundation.NSArray[*raw.MKPolygon]) *Polygon {
-	_r := raw.MKPolygonPolygonWithPointsCountInteriorPolygons(points, count, interiorPolygons)
-	if _r == nil {
-		return nil
-	}
-	return &Polygon{inner: _r}
-}
-
-// PolygonWithCoordinatesCount calls the underlying MKPolygonPolygonWithCoordinatesCount.
-func PolygonWithCoordinatesCount(coords unsafe.Pointer, count uint) *Polygon {
-	_r := raw.MKPolygonPolygonWithCoordinatesCount(coords, count)
-	if _r == nil {
-		return nil
-	}
-	return &Polygon{inner: _r}
-}
-
-// PolygonWithCoordinatesCountInteriorPolygons calls the underlying MKPolygonPolygonWithCoordinatesCountInteriorPolygons.
-func PolygonWithCoordinatesCountInteriorPolygons(coords unsafe.Pointer, count uint, interiorPolygons *foundation.NSArray[*raw.MKPolygon]) *Polygon {
-	_r := raw.MKPolygonPolygonWithCoordinatesCountInteriorPolygons(coords, count, interiorPolygons)
-	if _r == nil {
-		return nil
-	}
-	return &Polygon{inner: _r}
-}
-
-// MKPolylinePolylineWithPointsCount calls the underlying MKPolylinePolylineWithPointsCount.
-func MKPolylinePolylineWithPointsCount(points *raw.MKMapPoint, count uint) *Polyline {
-	_r := raw.MKPolylinePolylineWithPointsCount(points, count)
-	if _r == nil {
-		return nil
-	}
-	return &Polyline{inner: _r}
-}
-
-// MKPolylinePolylineWithCoordinatesCount calls the underlying MKPolylinePolylineWithCoordinatesCount.
-func MKPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count uint) *Polyline {
-	_r := raw.MKPolylinePolylineWithCoordinatesCount(coords, count)
-	if _r == nil {
-		return nil
-	}
-	return &Polyline{inner: _r}
-}
-
-// MapItemDetailWithPresentationStyle calls the underlying MKSelectionAccessoryMapItemDetailWithPresentationStyle.
-func MapItemDetailWithPresentationStyle(presentationStyle *raw.MKMapItemDetailSelectionAccessoryPresentationStyle) *SelectionAccessory {
-	_r := raw.MKSelectionAccessoryMapItemDetailWithPresentationStyle(presentationStyle)
-	if _r == nil {
-		return nil
-	}
-	return &SelectionAccessory{inner: _r}
-}
-
-// ZoomControlWithMapView calls the underlying MKZoomControlZoomControlWithMapView.
-func ZoomControlWithMapView(mapView *raw.MKMapView) *ZoomControl {
-	_r := raw.MKZoomControlZoomControlWithMapView(mapView)
-	if _r == nil {
-		return nil
-	}
-	return &ZoomControl{inner: _r}
+// ZoomControlWithMapView creates a zoom control and associates it with the specified map view.
+func ZoomControlWithMapView(mapView *MapView) *ZoomControl {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("zoomControlWithMapView:"), objref.IDOf(mapView))
+	return ZoomControlFromID(_r)
 }

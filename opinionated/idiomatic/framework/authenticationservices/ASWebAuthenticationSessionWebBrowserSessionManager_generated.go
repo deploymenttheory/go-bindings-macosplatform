@@ -5,69 +5,82 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session manager that mediates sharing data between an app and a web browser.
+// WebAuthenticationSessionWebBrowserSessionManager is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSessionWebBrowserSessionManager.
 //
-// WebAuthenticationSessionWebBrowserSessionManager wraps [raw.ASWebAuthenticationSessionWebBrowserSessionManager] with a fluent Go API.
+// A session manager that mediates sharing data between an app and a web browser.
 type WebAuthenticationSessionWebBrowserSessionManager struct {
-	inner *raw.ASWebAuthenticationSessionWebBrowserSessionManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASWebAuthenticationSessionWebBrowserSessionManager].
-func (x *WebAuthenticationSessionWebBrowserSessionManager) Unwrap() *raw.ASWebAuthenticationSessionWebBrowserSessionManager {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) ID() objc.ID { return x.inner.Ptr() }
-
-// WebAuthenticationSessionWebBrowserSessionManagerFromID adopts an existing object pointer as a WebAuthenticationSessionWebBrowserSessionManager (nil for 0).
+// WebAuthenticationSessionWebBrowserSessionManagerFromID adopts an existing Objective-C object as a WebAuthenticationSessionWebBrowserSessionManager
+// (nil for 0), retaining it and registering a release finalizer.
 func WebAuthenticationSessionWebBrowserSessionManagerFromID(id objc.ID) *WebAuthenticationSessionWebBrowserSessionManager {
 	if id == 0 {
 		return nil
 	}
-	return &WebAuthenticationSessionWebBrowserSessionManager{inner: raw.ASWebAuthenticationSessionWebBrowserSessionManagerFromID(id)}
-}
-
-// NewWebAuthenticationSessionWebBrowserSessionManager creates a new [WebAuthenticationSessionWebBrowserSessionManager].
-func NewWebAuthenticationSessionWebBrowserSessionManager() *WebAuthenticationSessionWebBrowserSessionManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSessionWebBrowserSessionManager")), objc.RegisterName("new"))
-	return &WebAuthenticationSessionWebBrowserSessionManager{inner: raw.ASWebAuthenticationSessionWebBrowserSessionManagerFromID(_id)}
-}
-
-// A handler that a web browser provides to handle session requests from an app.
-//
-// WithSessionHandler sets the sessionHandler property and returns the receiver for chaining.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) WithSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling) *WebAuthenticationSessionWebBrowserSessionManager {
-	x.inner.SetSessionHandler(sessionHandler)
+	x := &WebAuthenticationSessionWebBrowserSessionManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SessionHandler calls the underlying SessionHandler.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) SessionHandler() raw.ASWebAuthenticationSessionWebBrowserSessionHandling {
-	return x.inner.SessionHandler()
+// webAuthenticationSessionWebBrowserSessionManagerAdopt wraps an Objective-C object that this code just created as a
+// WebAuthenticationSessionWebBrowserSessionManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webAuthenticationSessionWebBrowserSessionManagerAdopt(id objc.ID) *WebAuthenticationSessionWebBrowserSessionManager {
+	if id == 0 {
+		return nil
+	}
+	x := &WebAuthenticationSessionWebBrowserSessionManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSessionHandler calls the underlying SetSessionHandler.
-func (x *WebAuthenticationSessionWebBrowserSessionManager) SetSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling) {
-	x.inner.SetSessionHandler(sessionHandler)
+// Description returns the object's -description text.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// WasLaunchedByAuthenticationServices calls the underlying WasLaunchedByAuthenticationServices.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebAuthenticationSessionWebBrowserSessionManager creates a new WebAuthenticationSessionWebBrowserSessionManager.
+func NewWebAuthenticationSessionWebBrowserSessionManager() *WebAuthenticationSessionWebBrowserSessionManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionWebBrowserSessionManager")), objc.RegisterName("new"))
+	return webAuthenticationSessionWebBrowserSessionManagerAdopt(_id)
+}
+
+// WasLaunchedByAuthenticationServices wraps the corresponding Objective-C method.
 func (x *WebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthenticationServices() bool {
-	return x.inner.WasLaunchedByAuthenticationServices()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasLaunchedByAuthenticationServices"))
+	return _r
 }
 
 // WebAuthenticationSessionWebBrowserSessionManagerable is the interface implemented by [WebAuthenticationSessionWebBrowserSessionManager], for mocking and DI.
 type WebAuthenticationSessionWebBrowserSessionManagerable interface {
-	Unwrap() *raw.ASWebAuthenticationSessionWebBrowserSessionManager
-	WithSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling) *WebAuthenticationSessionWebBrowserSessionManager
-	SessionHandler() raw.ASWebAuthenticationSessionWebBrowserSessionHandling
-	SetSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling)
+	obj.Object
 	WasLaunchedByAuthenticationServices() bool
 }
 

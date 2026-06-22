@@ -5,219 +5,174 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A bar item that, along with its delegate, provides a list of textual suggestions for the current text view.
+// CandidateListTouchBarItem is an idiomatic wrapper over the Objective-C class NSCandidateListTouchBarItem.
 //
-// CandidateListTouchBarItem wraps [raw.NSCandidateListTouchBarItem] with a fluent Go API.
+// It embeds [TouchBarItem], promoting that type's methods.
+//
+// A bar item that, along with its delegate, provides a list of textual suggestions for the current text view.
 type CandidateListTouchBarItem struct {
-	inner *raw.NSCandidateListTouchBarItem[objc.ID]
+	TouchBarItem
 }
 
-// Unwrap returns the underlying [raw.NSCandidateListTouchBarItem].
-func (x *CandidateListTouchBarItem) Unwrap() *raw.NSCandidateListTouchBarItem[objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CandidateListTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CandidateListTouchBarItemFromID adopts an existing object pointer as a CandidateListTouchBarItem (nil for 0).
+// CandidateListTouchBarItemFromID adopts an existing Objective-C object as a CandidateListTouchBarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CandidateListTouchBarItemFromID(id objc.ID) *CandidateListTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	return &CandidateListTouchBarItem{inner: raw.NSCandidateListTouchBarItemFromID[objc.ID](id)}
-}
-
-// NewCandidateListTouchBarItem creates a new [CandidateListTouchBarItem].
-func NewCandidateListTouchBarItem() *CandidateListTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCandidateListTouchBarItem")), objc.RegisterName("new"))
-	return &CandidateListTouchBarItem{inner: raw.NSCandidateListTouchBarItemFromID[objc.ID](_id)}
-}
-
-// The client object for the candidate list item.
-//
-// WithClient sets the client property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithClient(client ViewProvider) *CandidateListTouchBarItem {
-	x.inner.SetClient(client.asView())
+	x := &CandidateListTouchBarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The delegate of the candidate list item.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithDelegate(delegate raw.NSCandidateListTouchBarItemDelegate) *CandidateListTouchBarItem {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that controls the visibility of the candidate list.
-//
-// WithCollapsed sets the collapsed property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithCollapsed(collapsed bool) *CandidateListTouchBarItem {
-	x.inner.SetCollapsed(collapsed)
-	return x
-}
-
-// A Boolean value that specifies whether the item can be collapsed.
-//
-// WithAllowsCollapsing sets the allowsCollapsing property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithAllowsCollapsing(allowsCollapsing bool) *CandidateListTouchBarItem {
-	x.inner.SetAllowsCollapsing(allowsCollapsing)
-	return x
-}
-
-// A Boolean value that specifies whether a candidate list item displays candidates from text input providers.
-//
-// WithAllowsTextInputContextCandidates sets the allowsTextInputContextCandidates property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem {
-	x.inner.SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates)
-	return x
-}
-
-// A block that converts a candidate object into an attributed string for display in the candidate list item.
-//
-// WithAttributedStringForCandidate sets the attributedStringForCandidate property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithAttributedStringForCandidate(attributedStringForCandidate objc.Block) *CandidateListTouchBarItem {
-	x.inner.SetAttributedStringForCandidate(attributedStringForCandidate)
-	return x
-}
-
-// The user-visible string identifying this item during bar customization.
-//
-// WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
-	return x
-}
-
-// Determines which items are shown in a bar when space is limited.
-//
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
-func (x *CandidateListTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem {
-	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
-	return x
-}
-
-// Updates the candidate list visibility configuration based on the client’s insertion point state.
-//
-// UpdateWithInsertionPointVisibility calls the underlying UpdateWithInsertionPointVisibility.
-func (x *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
-	x.inner.UpdateWithInsertionPointVisibility(isVisible)
-}
-
-// Sets an array of candidate objects to be displayed in the candidate list bar item.
-//
-// SetCandidatesForSelectedRangeInString calls the underlying SetCandidatesForSelectedRangeInString.
-func (x *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[objc.ID], selectedRange foundation.NSRange, originalString string) {
-	x.inner.SetCandidatesForSelectedRangeInString(candidates, selectedRange, foundation.NSStringStringWithUTF8String(originalString))
-}
-
-// Client calls the underlying Client.
-func (x *CandidateListTouchBarItem) Client() *View {
-	_r := x.inner.Client()
-	if _r == nil {
+// candidateListTouchBarItemAdopt wraps an Objective-C object that this code just created as a
+// CandidateListTouchBarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func candidateListTouchBarItemAdopt(id objc.ID) *CandidateListTouchBarItem {
+	if id == 0 {
 		return nil
 	}
-	return &View{inner: _r}
+	x := &CandidateListTouchBarItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetClient calls the underlying SetClient.
-func (x *CandidateListTouchBarItem) SetClient(client *raw.NSView) {
-	x.inner.SetClient(client)
+// NewCandidateListTouchBarItem creates a new CandidateListTouchBarItem.
+func NewCandidateListTouchBarItem() *CandidateListTouchBarItem {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCandidateListTouchBarItem")), objc.RegisterName("new"))
+	return candidateListTouchBarItemAdopt(_id)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *CandidateListTouchBarItem) Delegate() raw.NSCandidateListTouchBarItemDelegate {
-	return x.inner.Delegate()
+// WithClient the client object for the candidate list item.
+func (x *CandidateListTouchBarItem) WithClient(client ViewProvider) *CandidateListTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClient:"), objref.IDOf(client))
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *CandidateListTouchBarItem) SetDelegate(delegate raw.NSCandidateListTouchBarItemDelegate) {
-	x.inner.SetDelegate(delegate)
+// WithCollapsed a Boolean value that controls the visibility of the candidate list.
+func (x *CandidateListTouchBarItem) WithCollapsed(collapsed bool) *CandidateListTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsed:"), collapsed)
+	return x
 }
 
-// IsCollapsed calls the underlying IsCollapsed.
+// WithAllowsCollapsing a Boolean value that specifies whether the item can be collapsed.
+func (x *CandidateListTouchBarItem) WithAllowsCollapsing(allowsCollapsing bool) *CandidateListTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCollapsing:"), allowsCollapsing)
+	return x
+}
+
+// WithAllowsTextInputContextCandidates a Boolean value that specifies whether a candidate list item displays candidates from text input providers.
+func (x *CandidateListTouchBarItem) WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTextInputContextCandidates:"), allowsTextInputContextCandidates)
+	return x
+}
+
+// WithCustomizationLabel the user-visible string identifying this item during bar customization.
+func (x *CandidateListTouchBarItem) WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	return x
+}
+
+// WithVisibilityPriority determines which items are shown in a bar when space is limited.
+func (x *CandidateListTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return x
+}
+
+// UpdateWithInsertionPointVisibility updates the candidate list visibility configuration based on the client’s insertion point state.
+func (x *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithInsertionPointVisibility:"), isVisible)
+}
+
+// SetCandidatesForSelectedRangeInString sets an array of candidate objects to be displayed in the candidate list bar item.
+func (x *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(candidates []obj.Object, selectedRange foundation.NSRange, originalString string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCandidates:forSelectedRange:inString:"), purego.SliceToNSArray(candidates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), selectedRange, purego.NSString(originalString))
+}
+
+// Client wraps the corresponding Objective-C method.
+func (x *CandidateListTouchBarItem) Client() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
+	return ViewFromID(_r)
+}
+
+// SetClient wraps the corresponding Objective-C method.
+func (x *CandidateListTouchBarItem) SetClient(client *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClient:"), objref.IDOf(client))
+}
+
+// IsCollapsed wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) IsCollapsed() bool {
-	return x.inner.IsCollapsed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCollapsed"))
+	return _r
 }
 
-// SetCollapsed calls the underlying SetCollapsed.
+// SetCollapsed wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) SetCollapsed(collapsed bool) {
-	x.inner.SetCollapsed(collapsed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsed:"), collapsed)
 }
 
-// AllowsCollapsing calls the underlying AllowsCollapsing.
+// AllowsCollapsing wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) AllowsCollapsing() bool {
-	return x.inner.AllowsCollapsing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCollapsing"))
+	return _r
 }
 
-// SetAllowsCollapsing calls the underlying SetAllowsCollapsing.
+// SetAllowsCollapsing wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) SetAllowsCollapsing(allowsCollapsing bool) {
-	x.inner.SetAllowsCollapsing(allowsCollapsing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCollapsing:"), allowsCollapsing)
 }
 
-// IsCandidateListVisible calls the underlying IsCandidateListVisible.
+// IsCandidateListVisible wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) IsCandidateListVisible() bool {
-	return x.inner.IsCandidateListVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCandidateListVisible"))
+	return _r
 }
 
-// AllowsTextInputContextCandidates calls the underlying AllowsTextInputContextCandidates.
+// AllowsTextInputContextCandidates wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) AllowsTextInputContextCandidates() bool {
-	return x.inner.AllowsTextInputContextCandidates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTextInputContextCandidates"))
+	return _r
 }
 
-// SetAllowsTextInputContextCandidates calls the underlying SetAllowsTextInputContextCandidates.
+// SetAllowsTextInputContextCandidates wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) {
-	x.inner.SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTextInputContextCandidates:"), allowsTextInputContextCandidates)
 }
 
-// AttributedStringForCandidate calls the underlying AttributedStringForCandidate.
-func (x *CandidateListTouchBarItem) AttributedStringForCandidate() objc.Block {
-	return x.inner.AttributedStringForCandidate()
+// Candidates wraps the corresponding Objective-C method.
+func (x *CandidateListTouchBarItem) Candidates() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidates"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetAttributedStringForCandidate calls the underlying SetAttributedStringForCandidate.
-func (x *CandidateListTouchBarItem) SetAttributedStringForCandidate(attributedStringForCandidate objc.Block) {
-	x.inner.SetAttributedStringForCandidate(attributedStringForCandidate)
-}
-
-// Candidates calls the underlying Candidates.
-func (x *CandidateListTouchBarItem) Candidates() *foundation.NSArray[objc.ID] {
-	return x.inner.Candidates()
-}
-
-// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+// SetCustomizationLabel wraps the corresponding Objective-C method.
 func (x *CandidateListTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
-}
-
-func (x *CandidateListTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem {
-	return &x.inner.NSTouchBarItem
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 }
 
 // CandidateListTouchBarItemable is the interface implemented by [CandidateListTouchBarItem], for mocking and DI.
 type CandidateListTouchBarItemable interface {
-	Unwrap() *raw.NSCandidateListTouchBarItem[objc.ID]
+	obj.Object
 	WithClient(client ViewProvider) *CandidateListTouchBarItem
-	WithDelegate(delegate raw.NSCandidateListTouchBarItemDelegate) *CandidateListTouchBarItem
 	WithCollapsed(collapsed bool) *CandidateListTouchBarItem
 	WithAllowsCollapsing(allowsCollapsing bool) *CandidateListTouchBarItem
 	WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem
-	WithAttributedStringForCandidate(attributedStringForCandidate objc.Block) *CandidateListTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem
 	UpdateWithInsertionPointVisibility(isVisible bool)
-	SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[objc.ID], selectedRange foundation.NSRange, originalString string)
+	SetCandidatesForSelectedRangeInString(candidates []obj.Object, selectedRange foundation.NSRange, originalString string)
 	Client() *View
-	SetClient(client *raw.NSView)
-	Delegate() raw.NSCandidateListTouchBarItemDelegate
-	SetDelegate(delegate raw.NSCandidateListTouchBarItemDelegate)
+	SetClient(client *View)
 	IsCollapsed() bool
 	SetCollapsed(collapsed bool)
 	AllowsCollapsing() bool
@@ -225,10 +180,10 @@ type CandidateListTouchBarItemable interface {
 	IsCandidateListVisible() bool
 	AllowsTextInputContextCandidates() bool
 	SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool)
-	AttributedStringForCandidate() objc.Block
-	SetAttributedStringForCandidate(attributedStringForCandidate objc.Block)
-	Candidates() *foundation.NSArray[objc.ID]
+	Candidates() []obj.Object
 	SetCustomizationLabel(customizationLabel string)
 }
 
 var _ CandidateListTouchBarItemable = (*CandidateListTouchBarItem)(nil)
+
+var _ TouchBarItemProvider = (*CandidateListTouchBarItem)(nil)

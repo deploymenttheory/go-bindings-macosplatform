@@ -5,53 +5,66 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A component that encapsulates a SceneKit node.
+// SCNNodeComponent is an idiomatic wrapper over the Objective-C class GKSCNNodeComponent.
 //
-// SCNNodeComponent wraps [raw.GKSCNNodeComponent] with a fluent Go API.
+// It embeds [Component], promoting that type's methods.
+//
+// A component that encapsulates a SceneKit node.
 type SCNNodeComponent struct {
-	inner *raw.GKSCNNodeComponent
+	Component
 }
 
-// Unwrap returns the underlying [raw.GKSCNNodeComponent].
-func (x *SCNNodeComponent) Unwrap() *raw.GKSCNNodeComponent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SCNNodeComponent) ID() objc.ID { return x.inner.Ptr() }
-
-// SCNNodeComponentFromID adopts an existing object pointer as a SCNNodeComponent (nil for 0).
+// SCNNodeComponentFromID adopts an existing Objective-C object as a SCNNodeComponent
+// (nil for 0), retaining it and registering a release finalizer.
 func SCNNodeComponentFromID(id objc.ID) *SCNNodeComponent {
 	if id == 0 {
 		return nil
 	}
-	return &SCNNodeComponent{inner: raw.GKSCNNodeComponentFromID(id)}
+	x := &SCNNodeComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set. @param node Node to associate with the component. @see SCNNode.entity
-//
-// NewSCNNodeComponentWithNode creates a new [SCNNodeComponent].
-func NewSCNNodeComponentWithNode(node *scenekit.SCNNode) *SCNNodeComponent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSCNNodeComponent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), node.Ptr())
-	return &SCNNodeComponent{inner: raw.GKSCNNodeComponentFromID(_id)}
+// sCNNodeComponentAdopt wraps an Objective-C object that this code just created as a
+// SCNNodeComponent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sCNNodeComponentAdopt(id objc.ID) *SCNNodeComponent {
+	if id == 0 {
+		return nil
+	}
+	x := &SCNNodeComponent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Node calls the underlying Node.
-func (x *SCNNodeComponent) Node() *scenekit.SCNNode {
-	return x.inner.Node()
+// NewSCNNodeComponentWithNode initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set.
+func NewSCNNodeComponentWithNode(node obj.Object) *SCNNodeComponent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSCNNodeComponent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), objref.IDOf(node))
+	return sCNNodeComponentAdopt(_id)
 }
 
-func (x *SCNNodeComponent) asComponent() *raw.GKComponent { return &x.inner.GKComponent }
+// Node wraps the corresponding Objective-C method.
+func (x *SCNNodeComponent) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+	return obj.Wrap(_r)
+}
 
 // SCNNodeComponentable is the interface implemented by [SCNNodeComponent], for mocking and DI.
 type SCNNodeComponentable interface {
-	Unwrap() *raw.GKSCNNodeComponent
-	Node() *scenekit.SCNNode
+	obj.Object
+	Node() obj.Object
 }
 
 var _ SCNNodeComponentable = (*SCNNodeComponent)(nil)
+
+var _ ComponentProvider = (*SCNNodeComponent)(nil)

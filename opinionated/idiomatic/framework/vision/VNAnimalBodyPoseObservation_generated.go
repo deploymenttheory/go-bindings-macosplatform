@@ -5,102 +5,102 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An observation that provides the animal body points the analysis recognizes.
+// AnimalBodyPoseObservation is an idiomatic wrapper over the Objective-C class VNAnimalBodyPoseObservation.
 //
-// AnimalBodyPoseObservation wraps [raw.VNAnimalBodyPoseObservation] with a fluent Go API.
+// It embeds [RecognizedPointsObservation], promoting that type's methods.
+//
+// An observation that provides the animal body points the analysis recognizes.
 type AnimalBodyPoseObservation struct {
-	inner *raw.VNAnimalBodyPoseObservation
+	RecognizedPointsObservation
 }
 
-// Unwrap returns the underlying [raw.VNAnimalBodyPoseObservation].
-func (x *AnimalBodyPoseObservation) Unwrap() *raw.VNAnimalBodyPoseObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimalBodyPoseObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimalBodyPoseObservationFromID adopts an existing object pointer as a AnimalBodyPoseObservation (nil for 0).
+// AnimalBodyPoseObservationFromID adopts an existing Objective-C object as a AnimalBodyPoseObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimalBodyPoseObservationFromID(id objc.ID) *AnimalBodyPoseObservation {
 	if id == 0 {
 		return nil
 	}
-	return &AnimalBodyPoseObservation{inner: raw.VNAnimalBodyPoseObservationFromID(id)}
+	x := &AnimalBodyPoseObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAnimalBodyPoseObservation creates a new [AnimalBodyPoseObservation].
+// animalBodyPoseObservationAdopt wraps an Objective-C object that this code just created as a
+// AnimalBodyPoseObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animalBodyPoseObservationAdopt(id objc.ID) *AnimalBodyPoseObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimalBodyPoseObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAnimalBodyPoseObservation creates a new AnimalBodyPoseObservation.
 func NewAnimalBodyPoseObservation() *AnimalBodyPoseObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNAnimalBodyPoseObservation")), objc.RegisterName("new"))
-	return &AnimalBodyPoseObservation{inner: raw.VNAnimalBodyPoseObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNAnimalBodyPoseObservation")), objc.RegisterName("new"))
+	return animalBodyPoseObservationAdopt(_id)
 }
 
-// Returns the point for a joint name the observation recognizes.
-//
-// RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
-func (x *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
-	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
-	if _err != nil {
-		return nil, _err
+// RecognizedPointForJointNameError returns the point for a joint name the observation recognizes.
+func (x *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return RecognizedPointFromID(_r), nil
+}
+
+// RecognizedPointsForJointsGroupNameError returns the points for a joint group name the observation recognizes.
+func (x *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RecognizedPoint{inner: _r}, nil
+	return obj.Wrap(_r), nil
 }
 
-// Returns the points for a joint group name the observation recognizes.
-//
-// RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
-func (x *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
-	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
-}
-
-// @brief All animal joint names available in the observation.
+// AvailableJointNames all animal joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
-func (x *AnimalBodyPoseObservation) AvailableJointNames() []*foundation.NSString {
-	arr := x.inner.AvailableJointNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *AnimalBodyPoseObservation) AvailableJointNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @brief All animal joints group names available in the observation.
+// AvailableJointGroupNames all animal joints group names available in the observation.
 //
 // AvailableJointGroupNames returns the collection as a Go slice.
-func (x *AnimalBodyPoseObservation) AvailableJointGroupNames() []*foundation.NSString {
-	arr := x.inner.AvailableJointGroupNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
-}
-
-func (x *AnimalBodyPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
-	return &x.inner.VNRecognizedPointsObservation
-}
-
-func (x *AnimalBodyPoseObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNRecognizedPointsObservation.VNObservation
+func (x *AnimalBodyPoseObservation) AvailableJointGroupNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointGroupNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AnimalBodyPoseObservationable is the interface implemented by [AnimalBodyPoseObservation], for mocking and DI.
 type AnimalBodyPoseObservationable interface {
-	Unwrap() *raw.VNAnimalBodyPoseObservation
-	RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error)
-	RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error)
-	AvailableJointNames() []*foundation.NSString
-	AvailableJointGroupNames() []*foundation.NSString
+	obj.Object
+	RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error)
+	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
+	AvailableJointNames() []obj.Object
+	AvailableJointGroupNames() []obj.Object
 }
 
 var _ AnimalBodyPoseObservationable = (*AnimalBodyPoseObservation)(nil)
+
+var _ RecognizedPointsObservationProvider = (*AnimalBodyPoseObservation)(nil)
+
+var _ ObservationProvider = (*AnimalBodyPoseObservation)(nil)

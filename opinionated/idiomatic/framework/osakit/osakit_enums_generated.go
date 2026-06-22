@@ -10,44 +10,46 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type OSALanguageFeatures uint64
+type LanguageFeatures uint64
 
 const (
-	OSASupportsCompiling     OSALanguageFeatures = 2
-	OSASupportsGetSource     OSALanguageFeatures = 4
-	OSASupportsAECoercion    OSALanguageFeatures = 8
-	OSASupportsAESending     OSALanguageFeatures = 16
-	OSASupportsRecording     OSALanguageFeatures = 32
-	OSASupportsConvenience   OSALanguageFeatures = 64
-	OSASupportsDialects      OSALanguageFeatures = 128
-	OSASupportsEventHandling OSALanguageFeatures = 256
+	SupportsCompiling     LanguageFeatures = 2
+	SupportsGetSource     LanguageFeatures = 4
+	SupportsAECoercion    LanguageFeatures = 8
+	SupportsAESending     LanguageFeatures = 16
+	SupportsRecording     LanguageFeatures = 32
+	SupportsConvenience   LanguageFeatures = 64
+	SupportsDialects      LanguageFeatures = 128
+	SupportsEventHandling LanguageFeatures = 256
 )
 
-func (e OSALanguageFeatures) String() string {
+// String returns the LanguageFeatures constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LanguageFeatures) String() string {
 	var parts []string
-	if e&OSASupportsCompiling != 0 {
-		parts = append(parts, "OSASupportsCompiling")
+	if e&SupportsCompiling != 0 {
+		parts = append(parts, "SupportsCompiling")
 	}
-	if e&OSASupportsGetSource != 0 {
-		parts = append(parts, "OSASupportsGetSource")
+	if e&SupportsGetSource != 0 {
+		parts = append(parts, "SupportsGetSource")
 	}
-	if e&OSASupportsAECoercion != 0 {
-		parts = append(parts, "OSASupportsAECoercion")
+	if e&SupportsAECoercion != 0 {
+		parts = append(parts, "SupportsAECoercion")
 	}
-	if e&OSASupportsAESending != 0 {
-		parts = append(parts, "OSASupportsAESending")
+	if e&SupportsAESending != 0 {
+		parts = append(parts, "SupportsAESending")
 	}
-	if e&OSASupportsRecording != 0 {
-		parts = append(parts, "OSASupportsRecording")
+	if e&SupportsRecording != 0 {
+		parts = append(parts, "SupportsRecording")
 	}
-	if e&OSASupportsConvenience != 0 {
-		parts = append(parts, "OSASupportsConvenience")
+	if e&SupportsConvenience != 0 {
+		parts = append(parts, "SupportsConvenience")
 	}
-	if e&OSASupportsDialects != 0 {
-		parts = append(parts, "OSASupportsDialects")
+	if e&SupportsDialects != 0 {
+		parts = append(parts, "SupportsDialects")
 	}
-	if e&OSASupportsEventHandling != 0 {
-		parts = append(parts, "OSASupportsEventHandling")
+	if e&SupportsEventHandling != 0 {
+		parts = append(parts, "SupportsEventHandling")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -55,55 +57,59 @@ func (e OSALanguageFeatures) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSAScriptState int64
+type ScriptState int64
 
 const (
-	OSAScriptStopped   OSAScriptState = 0
-	OSAScriptRunning   OSAScriptState = 1
-	OSAScriptRecording OSAScriptState = 2
+	ScriptStopped   ScriptState = 0
+	ScriptRunning   ScriptState = 1
+	ScriptRecording ScriptState = 2
 )
 
-func (e OSAScriptState) String() string {
+// String returns the ScriptState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScriptState) String() string {
 	switch e {
-	case OSAScriptStopped:
-		return "OSAScriptStopped"
-	case OSAScriptRunning:
-		return "OSAScriptRunning"
-	case OSAScriptRecording:
-		return "OSAScriptRecording"
+	case ScriptStopped:
+		return "ScriptStopped"
+	case ScriptRunning:
+		return "ScriptRunning"
+	case ScriptRecording:
+		return "ScriptRecording"
 	default:
-		return fmt.Sprintf("OSAScriptState(%d)", int64(e))
+		return fmt.Sprintf("ScriptState(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type OSAStorageOptions uint64
+type StorageOptions uint64
 
 const (
-	OSANull                  OSAStorageOptions = 0
-	OSAPreventGetSource      OSAStorageOptions = 1
-	OSACompileIntoContext    OSAStorageOptions = 2
-	OSADontSetScriptLocation OSAStorageOptions = 16777216
-	OSAStayOpenApplet        OSAStorageOptions = 268435456
-	OSAShowStartupScreen     OSAStorageOptions = 536870912
+	Null                  StorageOptions = 0
+	PreventGetSource      StorageOptions = 1
+	CompileIntoContext    StorageOptions = 2
+	DontSetScriptLocation StorageOptions = 16777216
+	StayOpenApplet        StorageOptions = 268435456
+	ShowStartupScreen     StorageOptions = 536870912
 )
 
-func (e OSAStorageOptions) String() string {
+// String returns the StorageOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StorageOptions) String() string {
 	var parts []string
-	if e&OSAPreventGetSource != 0 {
-		parts = append(parts, "OSAPreventGetSource")
+	if e&PreventGetSource != 0 {
+		parts = append(parts, "PreventGetSource")
 	}
-	if e&OSACompileIntoContext != 0 {
-		parts = append(parts, "OSACompileIntoContext")
+	if e&CompileIntoContext != 0 {
+		parts = append(parts, "CompileIntoContext")
 	}
-	if e&OSADontSetScriptLocation != 0 {
-		parts = append(parts, "OSADontSetScriptLocation")
+	if e&DontSetScriptLocation != 0 {
+		parts = append(parts, "DontSetScriptLocation")
 	}
-	if e&OSAStayOpenApplet != 0 {
-		parts = append(parts, "OSAStayOpenApplet")
+	if e&StayOpenApplet != 0 {
+		parts = append(parts, "StayOpenApplet")
 	}
-	if e&OSAShowStartupScreen != 0 {
-		parts = append(parts, "OSAShowStartupScreen")
+	if e&ShowStartupScreen != 0 {
+		parts = append(parts, "ShowStartupScreen")
 	}
 	if len(parts) == 0 {
 		return "0"

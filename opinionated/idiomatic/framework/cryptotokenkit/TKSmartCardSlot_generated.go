@@ -5,98 +5,117 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single smart card reader slot in the system.
+// SmartCardSlot is an idiomatic wrapper over the Objective-C class TKSmartCardSlot.
 //
-// SmartCardSlot wraps [raw.TKSmartCardSlot] with a fluent Go API.
+// A single smart card reader slot in the system.
 type SmartCardSlot struct {
-	inner *raw.TKSmartCardSlot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardSlot].
-func (x *SmartCardSlot) Unwrap() *raw.TKSmartCardSlot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardSlot) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardSlotFromID adopts an existing object pointer as a SmartCardSlot (nil for 0).
+// SmartCardSlotFromID adopts an existing Objective-C object as a SmartCardSlot
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardSlotFromID(id objc.ID) *SmartCardSlot {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardSlot{inner: raw.TKSmartCardSlotFromID(id)}
+	x := &SmartCardSlot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCardSlot creates a new [SmartCardSlot].
+// smartCardSlotAdopt wraps an Objective-C object that this code just created as a
+// SmartCardSlot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardSlotAdopt(id objc.ID) *SmartCardSlot {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardSlot{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardSlot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardSlot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardSlot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardSlot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSmartCardSlot creates a new SmartCardSlot.
 func NewSmartCardSlot() *SmartCardSlot {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardSlot")), objc.RegisterName("new"))
-	return &SmartCardSlot{inner: raw.TKSmartCardSlotFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlot")), objc.RegisterName("new"))
+	return smartCardSlotAdopt(_id)
 }
 
-// Creates a new TKSmartCard object representing the currently inserted Smart Card.
-//
-// MakeSmartCard calls the underlying MakeSmartCard.
+// MakeSmartCard creates a new TKSmartCard object representing the currently inserted Smart Card.
 func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
-	_r := x.inner.MakeSmartCard()
-	if _r == nil {
-		return nil
-	}
-	return &SmartCard{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSmartCard"))
+	return SmartCardFromID(_r)
 }
 
-// Current state of the slot.  Use KVO to be notified about state changes.
-//
-// State calls the underlying State.
-func (x *SmartCardSlot) State() TKSmartCardSlotState {
-	return TKSmartCardSlotState(x.inner.State())
+// State current state of the slot.  Use KVO to be notified about state changes.
+func (x *SmartCardSlot) State() SmartCardSlotState {
+	_r := objc.Send[SmartCardSlotState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
-//
-// ATR calls the underlying ATR.
+// ATR ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
 func (x *SmartCardSlot) ATR() *SmartCardATR {
-	_r := x.inner.ATR()
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardATR{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ATR"))
+	return SmartCardATRFromID(_r)
 }
 
-// Name of the SmartCard reader slot.
-//
-// Name calls the underlying Name.
+// Name name of the SmartCard reader slot.
 func (x *SmartCardSlot) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Maximal length of input APDU that the slot is able to transfer to the card.
-//
-// MaxInputLength calls the underlying MaxInputLength.
+// MaxInputLength maximal length of input APDU that the slot is able to transfer to the card.
 func (x *SmartCardSlot) MaxInputLength() int {
-	return x.inner.MaxInputLength()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxInputLength"))
+	return _r
 }
 
-// Maximal length of output APDU that the slot is able to transfer from the card.
-//
-// MaxOutputLength calls the underlying MaxOutputLength.
+// MaxOutputLength maximal length of output APDU that the slot is able to transfer from the card.
 func (x *SmartCardSlot) MaxOutputLength() int {
-	return x.inner.MaxOutputLength()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxOutputLength"))
+	return _r
 }
 
 // SmartCardSlotable is the interface implemented by [SmartCardSlot], for mocking and DI.
 type SmartCardSlotable interface {
-	Unwrap() *raw.TKSmartCardSlot
+	obj.Object
 	MakeSmartCard() *SmartCard
-	State() TKSmartCardSlotState
+	State() SmartCardSlotState
 	ATR() *SmartCardATR
 	Name() string
 	MaxInputLength() int

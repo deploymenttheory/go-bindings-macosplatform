@@ -5,50 +5,82 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A file to include in a message.
+// SendMessageAttachment is an idiomatic wrapper over the Objective-C class INSendMessageAttachment.
 //
-// SendMessageAttachment wraps [raw.INSendMessageAttachment] with a fluent Go API.
+// A file to include in a message.
 type SendMessageAttachment struct {
-	inner *raw.INSendMessageAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INSendMessageAttachment].
-func (x *SendMessageAttachment) Unwrap() *raw.INSendMessageAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SendMessageAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// SendMessageAttachmentFromID adopts an existing object pointer as a SendMessageAttachment (nil for 0).
+// SendMessageAttachmentFromID adopts an existing Objective-C object as a SendMessageAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func SendMessageAttachmentFromID(id objc.ID) *SendMessageAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &SendMessageAttachment{inner: raw.INSendMessageAttachmentFromID(id)}
+	x := &SendMessageAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSendMessageAttachment creates a new [SendMessageAttachment].
-func NewSendMessageAttachment() *SendMessageAttachment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageAttachment")), objc.RegisterName("new"))
-	return &SendMessageAttachment{inner: raw.INSendMessageAttachmentFromID(_id)}
-}
-
-// AudioMessageFile calls the underlying AudioMessageFile.
-func (x *SendMessageAttachment) AudioMessageFile() *File {
-	_r := x.inner.AudioMessageFile()
-	if _r == nil {
+// sendMessageAttachmentAdopt wraps an Objective-C object that this code just created as a
+// SendMessageAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sendMessageAttachmentAdopt(id objc.ID) *SendMessageAttachment {
+	if id == 0 {
 		return nil
 	}
-	return &File{inner: _r}
+	x := &SendMessageAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SendMessageAttachment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SendMessageAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SendMessageAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SendMessageAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSendMessageAttachment creates a new SendMessageAttachment.
+func NewSendMessageAttachment() *SendMessageAttachment {
+	_id := objc.Send[objc.ID](objc.ID(_class("INSendMessageAttachment")), objc.RegisterName("new"))
+	return sendMessageAttachmentAdopt(_id)
+}
+
+// AudioMessageFile wraps the corresponding Objective-C method.
+func (x *SendMessageAttachment) AudioMessageFile() *File {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMessageFile"))
+	return FileFromID(_r)
 }
 
 // SendMessageAttachmentable is the interface implemented by [SendMessageAttachment], for mocking and DI.
 type SendMessageAttachmentable interface {
-	Unwrap() *raw.INSendMessageAttachment
+	obj.Object
 	AudioMessageFile() *File
 }
 

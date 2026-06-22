@@ -5,131 +5,87 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that stores data required to execute batch normalization.
+// CNNBatchNormalizationState is an idiomatic wrapper over the Objective-C class MPSCNNBatchNormalizationState.
 //
-// CNNBatchNormalizationState wraps [raw.MPSCNNBatchNormalizationState] with a fluent Go API.
+// It embeds [NNGradientState], promoting that type's methods.
+//
+// An object that stores data required to execute batch normalization.
 type CNNBatchNormalizationState struct {
-	inner *raw.MPSCNNBatchNormalizationState
+	NNGradientState
 }
 
-// Unwrap returns the underlying [raw.MPSCNNBatchNormalizationState].
-func (x *CNNBatchNormalizationState) Unwrap() *raw.MPSCNNBatchNormalizationState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNBatchNormalizationState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNBatchNormalizationStateFromID adopts an existing object pointer as a CNNBatchNormalizationState (nil for 0).
+// CNNBatchNormalizationStateFromID adopts an existing Objective-C object as a CNNBatchNormalizationState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNBatchNormalizationStateFromID(id objc.ID) *CNNBatchNormalizationState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNBatchNormalizationState{inner: raw.MPSCNNBatchNormalizationStateFromID(id)}
+	x := &CNNBatchNormalizationState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNBatchNormalizationState creates a new [CNNBatchNormalizationState].
+// cNNBatchNormalizationStateAdopt wraps an Objective-C object that this code just created as a
+// CNNBatchNormalizationState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNBatchNormalizationStateAdopt(id objc.ID) *CNNBatchNormalizationState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNBatchNormalizationState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNBatchNormalizationState creates a new CNNBatchNormalizationState.
 func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBatchNormalizationState")), objc.RegisterName("new"))
-	return &CNNBatchNormalizationState{inner: raw.MPSCNNBatchNormalizationStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNBatchNormalizationState")), objc.RegisterName("new"))
+	return cNNBatchNormalizationStateAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *CNNBatchNormalizationState) WithReadCount(readCount uint) *CNNBatchNormalizationState {
-	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+// WithReadCount sets the property and returns the receiver so calls can be chained.
+func (x *CNNBatchNormalizationState) WithReadCount(readCount int) *CNNBatchNormalizationState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *CNNBatchNormalizationState) WithLabel(label string) *CNNBatchNormalizationState {
-	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Reset any accumulated state data to its initial values.
-//
-// Reset calls the underlying Reset.
+// Reset reset any accumulated state data to its initial values.
 func (x *CNNBatchNormalizationState) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// @abstract   Return an MTLBuffer object with the state's current gamma values.
-//
-// Gamma calls the underlying Gamma.
-func (x *CNNBatchNormalizationState) Gamma() metal.MTLBuffer {
-	return x.inner.Gamma()
-}
-
-// @abstract   Return an MTLBuffer object with the state's current beta values..
-//
-// Beta calls the underlying Beta.
-func (x *CNNBatchNormalizationState) Beta() metal.MTLBuffer {
-	return x.inner.Beta()
-}
-
-// @abstract   Return an MTLBuffer object with the most recently computed batch mean values.
-//
-// Mean calls the underlying Mean.
-func (x *CNNBatchNormalizationState) Mean() metal.MTLBuffer {
-	return x.inner.Mean()
-}
-
-// @abstract   Return an MTLBuffer object with the most recently computed batch variance values.
-//
-// Variance calls the underlying Variance.
-func (x *CNNBatchNormalizationState) Variance() metal.MTLBuffer {
-	return x.inner.Variance()
-}
-
-// @abstract   Return an MTLBuffer object containing the values of the gradient of the loss function with respect to the scale factors.  If a MPSCNNBatchNormalizationGradient kernel has not successfully generated these values nil will be returned.
-//
-// GradientForGamma calls the underlying GradientForGamma.
-func (x *CNNBatchNormalizationState) GradientForGamma() metal.MTLBuffer {
-	return x.inner.GradientForGamma()
-}
-
-// @abstract   Return an MTLBuffer object containing the values of the gradient of the loss function with respect to the bias terms.  If a MPSCNNBatchNormalizationGradient kernel has not successfully generated these values nil will be returned.
-//
-// GradientForBeta calls the underlying GradientForBeta.
-func (x *CNNBatchNormalizationState) GradientForBeta() metal.MTLBuffer {
-	return x.inner.GradientForBeta()
-}
-
-// BatchNormalization calls the underlying BatchNormalization.
-func (x *CNNBatchNormalizationState) BatchNormalization() *mpsneuralnetwork.MPSCNNBatchNormalization {
-	return x.inner.BatchNormalization()
-}
-
-func (x *CNNBatchNormalizationState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState {
-	return &x.inner.MPSNNGradientState
-}
-
-func (x *CNNBatchNormalizationState) asState() *mpscore.MPSState {
-	return &x.inner.MPSNNGradientState.MPSState
+// BatchNormalization wraps the corresponding Objective-C method.
+func (x *CNNBatchNormalizationState) BatchNormalization() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchNormalization"))
+	return obj.Wrap(_r)
 }
 
 // CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
 type CNNBatchNormalizationStateable interface {
-	Unwrap() *raw.MPSCNNBatchNormalizationState
-	WithReadCount(readCount uint) *CNNBatchNormalizationState
+	obj.Object
+	WithReadCount(readCount int) *CNNBatchNormalizationState
 	WithLabel(label string) *CNNBatchNormalizationState
 	Reset()
-	Gamma() metal.MTLBuffer
-	Beta() metal.MTLBuffer
-	Mean() metal.MTLBuffer
-	Variance() metal.MTLBuffer
-	GradientForGamma() metal.MTLBuffer
-	GradientForBeta() metal.MTLBuffer
-	BatchNormalization() *mpsneuralnetwork.MPSCNNBatchNormalization
+	BatchNormalization() obj.Object
 }
 
 var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
+
+var _ NNGradientStateProvider = (*CNNBatchNormalizationState)(nil)
+
+var _ StateProvider = (*CNNBatchNormalizationState)(nil)

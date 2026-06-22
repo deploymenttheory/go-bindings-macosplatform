@@ -5,129 +5,158 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that encapsulates a drag-and-drop action.
+// DraggingSession is an idiomatic wrapper over the Objective-C class NSDraggingSession.
 //
-// DraggingSession wraps [raw.NSDraggingSession] with a fluent Go API.
+// An object that encapsulates a drag-and-drop action.
 type DraggingSession struct {
-	inner *raw.NSDraggingSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDraggingSession].
-func (x *DraggingSession) Unwrap() *raw.NSDraggingSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DraggingSession) ID() objc.ID { return x.inner.Ptr() }
-
-// DraggingSessionFromID adopts an existing object pointer as a DraggingSession (nil for 0).
+// DraggingSessionFromID adopts an existing Objective-C object as a DraggingSession
+// (nil for 0), retaining it and registering a release finalizer.
 func DraggingSessionFromID(id objc.ID) *DraggingSession {
 	if id == 0 {
 		return nil
 	}
-	return &DraggingSession{inner: raw.NSDraggingSessionFromID(id)}
-}
-
-// NewDraggingSession creates a new [DraggingSession].
-func NewDraggingSession() *DraggingSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDraggingSession")), objc.RegisterName("new"))
-	return &DraggingSession{inner: raw.NSDraggingSessionFromID(_id)}
-}
-
-// Controls the dragging formation when the drag is not over the source or a valid destination.
-//
-// WithDraggingFormation sets the draggingFormation property and returns the receiver for chaining.
-func (x *DraggingSession) WithDraggingFormation(draggingFormation NSDraggingFormation) *DraggingSession {
-	x.inner.SetDraggingFormation(raw.NSDraggingFormation(draggingFormation))
+	x := &DraggingSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Controls whether the dragging image animates back to its starting point on a cancelled or failed drag.
-//
-// WithAnimatesToStartingPositionsOnCancelOrFail sets the animatesToStartingPositionsOnCancelOrFail property and returns the receiver for chaining.
-func (x *DraggingSession) WithAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) *DraggingSession {
-	x.inner.SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail)
-	return x
-}
-
-// The index of the dragging item under the cursor.
-//
-// WithDraggingLeaderIndex sets the draggingLeaderIndex property and returns the receiver for chaining.
-func (x *DraggingSession) WithDraggingLeaderIndex(draggingLeaderIndex int) *DraggingSession {
-	x.inner.SetDraggingLeaderIndex(draggingLeaderIndex)
-	return x
-}
-
-// Enumerates through each dragging item.
-//
-// EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing calls the underlying EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing.
-func (x *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool)) {
-	x.inner.EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(raw.NSDraggingItemEnumerationOptions(enumOpts), view, classArray, searchOptions, block)
-}
-
-// DraggingFormation calls the underlying DraggingFormation.
-func (x *DraggingSession) DraggingFormation() NSDraggingFormation {
-	return NSDraggingFormation(x.inner.DraggingFormation())
-}
-
-// SetDraggingFormation calls the underlying SetDraggingFormation.
-func (x *DraggingSession) SetDraggingFormation(draggingFormation NSDraggingFormation) {
-	x.inner.SetDraggingFormation(raw.NSDraggingFormation(draggingFormation))
-}
-
-// AnimatesToStartingPositionsOnCancelOrFail calls the underlying AnimatesToStartingPositionsOnCancelOrFail.
-func (x *DraggingSession) AnimatesToStartingPositionsOnCancelOrFail() bool {
-	return x.inner.AnimatesToStartingPositionsOnCancelOrFail()
-}
-
-// SetAnimatesToStartingPositionsOnCancelOrFail calls the underlying SetAnimatesToStartingPositionsOnCancelOrFail.
-func (x *DraggingSession) SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) {
-	x.inner.SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail)
-}
-
-// DraggingLeaderIndex calls the underlying DraggingLeaderIndex.
-func (x *DraggingSession) DraggingLeaderIndex() int {
-	return x.inner.DraggingLeaderIndex()
-}
-
-// SetDraggingLeaderIndex calls the underlying SetDraggingLeaderIndex.
-func (x *DraggingSession) SetDraggingLeaderIndex(draggingLeaderIndex int) {
-	x.inner.SetDraggingLeaderIndex(draggingLeaderIndex)
-}
-
-// DraggingPasteboard calls the underlying DraggingPasteboard.
-func (x *DraggingSession) DraggingPasteboard() *Pasteboard {
-	_r := x.inner.DraggingPasteboard()
-	if _r == nil {
+// draggingSessionAdopt wraps an Objective-C object that this code just created as a
+// DraggingSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func draggingSessionAdopt(id objc.ID) *DraggingSession {
+	if id == 0 {
 		return nil
 	}
-	return &Pasteboard{inner: _r}
+	x := &DraggingSession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DraggingSequenceNumber calls the underlying DraggingSequenceNumber.
+// Description returns the object's -description text.
+func (x *DraggingSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DraggingSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DraggingSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DraggingSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDraggingSession creates a new DraggingSession.
+func NewDraggingSession() *DraggingSession {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDraggingSession")), objc.RegisterName("new"))
+	return draggingSessionAdopt(_id)
+}
+
+// WithDraggingFormation controls the dragging formation when the drag is not over the source or a valid destination.
+func (x *DraggingSession) WithDraggingFormation(draggingFormation DraggingFormation) *DraggingSession {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingFormation:"), draggingFormation)
+	return x
+}
+
+// WithAnimatesToStartingPositionsOnCancelOrFail controls whether the dragging image animates back to its starting point on a cancelled or failed drag.
+func (x *DraggingSession) WithAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) *DraggingSession {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimatesToStartingPositionsOnCancelOrFail:"), animatesToStartingPositionsOnCancelOrFail)
+	return x
+}
+
+// WithDraggingLeaderIndex the index of the dragging item under the cursor.
+func (x *DraggingSession) WithDraggingLeaderIndex(draggingLeaderIndex int) *DraggingSession {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingLeaderIndex:"), draggingLeaderIndex)
+	return x
+}
+
+// EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing enumerates through each dragging item.
+func (x *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts DraggingItemEnumerationOptions, view *View, classArray []obj.Object, searchOptions obj.Object, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateDraggingItemsWithOptions:forView:classes:searchOptions:usingBlock:"), enumOpts, objref.IDOf(view), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(searchOptions), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
+}
+
+// DraggingFormation wraps the corresponding Objective-C method.
+func (x *DraggingSession) DraggingFormation() DraggingFormation {
+	_r := objc.Send[DraggingFormation](objref.IDOf(x), objc.RegisterName("draggingFormation"))
+	return _r
+}
+
+// SetDraggingFormation wraps the corresponding Objective-C method.
+func (x *DraggingSession) SetDraggingFormation(draggingFormation DraggingFormation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingFormation:"), draggingFormation)
+}
+
+// AnimatesToStartingPositionsOnCancelOrFail wraps the corresponding Objective-C method.
+func (x *DraggingSession) AnimatesToStartingPositionsOnCancelOrFail() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("animatesToStartingPositionsOnCancelOrFail"))
+	return _r
+}
+
+// SetAnimatesToStartingPositionsOnCancelOrFail wraps the corresponding Objective-C method.
+func (x *DraggingSession) SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimatesToStartingPositionsOnCancelOrFail:"), animatesToStartingPositionsOnCancelOrFail)
+}
+
+// DraggingLeaderIndex wraps the corresponding Objective-C method.
+func (x *DraggingSession) DraggingLeaderIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("draggingLeaderIndex"))
+	return _r
+}
+
+// SetDraggingLeaderIndex wraps the corresponding Objective-C method.
+func (x *DraggingSession) SetDraggingLeaderIndex(draggingLeaderIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingLeaderIndex:"), draggingLeaderIndex)
+}
+
+// DraggingPasteboard wraps the corresponding Objective-C method.
+func (x *DraggingSession) DraggingPasteboard() *Pasteboard {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draggingPasteboard"))
+	return PasteboardFromID(_r)
+}
+
+// DraggingSequenceNumber wraps the corresponding Objective-C method.
 func (x *DraggingSession) DraggingSequenceNumber() int {
-	return x.inner.DraggingSequenceNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("draggingSequenceNumber"))
+	return _r
 }
 
-// DraggingLocation calls the underlying DraggingLocation.
+// DraggingLocation wraps the corresponding Objective-C method.
 func (x *DraggingSession) DraggingLocation() corefoundation.CGPoint {
-	return x.inner.DraggingLocation()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("draggingLocation"))
+	return _r
 }
 
 // DraggingSessionable is the interface implemented by [DraggingSession], for mocking and DI.
 type DraggingSessionable interface {
-	Unwrap() *raw.NSDraggingSession
-	WithDraggingFormation(draggingFormation NSDraggingFormation) *DraggingSession
+	obj.Object
+	WithDraggingFormation(draggingFormation DraggingFormation) *DraggingSession
 	WithAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) *DraggingSession
 	WithDraggingLeaderIndex(draggingLeaderIndex int) *DraggingSession
-	EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool))
-	DraggingFormation() NSDraggingFormation
-	SetDraggingFormation(draggingFormation NSDraggingFormation)
+	EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts DraggingItemEnumerationOptions, view *View, classArray []obj.Object, searchOptions obj.Object, block func(obj.Object, int, *bool))
+	DraggingFormation() DraggingFormation
+	SetDraggingFormation(draggingFormation DraggingFormation)
 	AnimatesToStartingPositionsOnCancelOrFail() bool
 	SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool)
 	DraggingLeaderIndex() int

@@ -5,66 +5,92 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing a function in the Program.
+// ModelStructureProgramFunction is an idiomatic wrapper over the Objective-C class MLModelStructureProgramFunction.
 //
-// ModelStructureProgramFunction wraps [raw.MLModelStructureProgramFunction] with a fluent Go API.
+// A class representing a function in the Program.
 type ModelStructureProgramFunction struct {
-	inner *raw.MLModelStructureProgramFunction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructureProgramFunction].
-func (x *ModelStructureProgramFunction) Unwrap() *raw.MLModelStructureProgramFunction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructureProgramFunction) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureProgramFunctionFromID adopts an existing object pointer as a ModelStructureProgramFunction (nil for 0).
+// ModelStructureProgramFunctionFromID adopts an existing Objective-C object as a ModelStructureProgramFunction
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureProgramFunctionFromID(id objc.ID) *ModelStructureProgramFunction {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructureProgramFunction{inner: raw.MLModelStructureProgramFunctionFromID(id)}
+	x := &ModelStructureProgramFunction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructureProgramFunction creates a new [ModelStructureProgramFunction].
+// modelStructureProgramFunctionAdopt wraps an Objective-C object that this code just created as a
+// ModelStructureProgramFunction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureProgramFunctionAdopt(id objc.ID) *ModelStructureProgramFunction {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructureProgramFunction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructureProgramFunction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructureProgramFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructureProgramFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureProgramFunction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModelStructureProgramFunction creates a new ModelStructureProgramFunction.
 func NewModelStructureProgramFunction() *ModelStructureProgramFunction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgramFunction")), objc.RegisterName("new"))
-	return &ModelStructureProgramFunction{inner: raw.MLModelStructureProgramFunctionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramFunction")), objc.RegisterName("new"))
+	return modelStructureProgramFunctionAdopt(_id)
 }
 
-// The named inputs to the function.
+// Inputs the named inputs to the function.
 //
 // Inputs returns the collection as a Go slice.
 func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
-	arr := x.inner.Inputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramNamedValueType {
-		return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
+		return ModelStructureProgramNamedValueTypeFromID(_id)
 	})
 }
 
-// The active block in the function.
-//
-// Block calls the underlying Block.
+// Block the active block in the function.
 func (x *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
-	_r := x.inner.Block()
-	if _r == nil {
-		return nil
-	}
-	return &ModelStructureProgramBlock{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("block"))
+	return ModelStructureProgramBlockFromID(_r)
 }
 
 // ModelStructureProgramFunctionable is the interface implemented by [ModelStructureProgramFunction], for mocking and DI.
 type ModelStructureProgramFunctionable interface {
-	Unwrap() *raw.MLModelStructureProgramFunction
+	obj.Object
 	Inputs() []*ModelStructureProgramNamedValueType
 	Block() *ModelStructureProgramBlock
 }

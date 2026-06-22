@@ -5,143 +5,174 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAccessControlClusterAccessControlExtensionChangedEvent wraps [raw.MTRAccessControlClusterAccessControlExtensionChangedEvent] with a fluent Go API.
+// MTRAccessControlClusterAccessControlExtensionChangedEvent is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterAccessControlExtensionChangedEvent.
 type MTRAccessControlClusterAccessControlExtensionChangedEvent struct {
-	inner *raw.MTRAccessControlClusterAccessControlExtensionChangedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlExtensionChangedEvent].
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRAccessControlClusterAccessControlExtensionChangedEventFromID adopts an existing object pointer as a MTRAccessControlClusterAccessControlExtensionChangedEvent (nil for 0).
+// MTRAccessControlClusterAccessControlExtensionChangedEventFromID adopts an existing Objective-C object as a MTRAccessControlClusterAccessControlExtensionChangedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAccessControlClusterAccessControlExtensionChangedEventFromID(id objc.ID) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAccessControlClusterAccessControlExtensionChangedEvent{inner: raw.MTRAccessControlClusterAccessControlExtensionChangedEventFromID(id)}
-}
-
-// NewMTRAccessControlClusterAccessControlExtensionChangedEvent creates a new [MTRAccessControlClusterAccessControlExtensionChangedEvent].
-func NewMTRAccessControlClusterAccessControlExtensionChangedEvent() *MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAccessControlClusterAccessControlExtensionChangedEvent")), objc.RegisterName("new"))
-	return &MTRAccessControlClusterAccessControlExtensionChangedEvent{inner: raw.MTRAccessControlClusterAccessControlExtensionChangedEventFromID(_id)}
-}
-
-// WithAdminNodeID sets the adminNodeID property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithAdminNodeID(adminNodeID *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	x.inner.SetAdminNodeID(adminNodeID)
+	x := &MTRAccessControlClusterAccessControlExtensionChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithAdminPasscodeID sets the adminPasscodeID property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithAdminPasscodeID(adminPasscodeID *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	x.inner.SetAdminPasscodeID(adminPasscodeID)
-	return x
-}
-
-// WithChangeType sets the changeType property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithChangeType(changeType *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	x.inner.SetChangeType(changeType)
-	return x
-}
-
-// WithLatestValue sets the latestValue property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithLatestValue(latestValue MTRAccessControlClusterAccessControlExtensionStructProvider) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	x.inner.SetLatestValue(latestValue.asMTRAccessControlClusterAccessControlExtensionStruct())
-	return x
-}
-
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
-	x.inner.SetFabricIndex(fabricIndex)
-	return x
-}
-
-// AdminNodeID calls the underlying AdminNodeID.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminNodeID() *foundation.NSNumber {
-	return x.inner.AdminNodeID()
-}
-
-// SetAdminNodeID calls the underlying SetAdminNodeID.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetAdminNodeID(adminNodeID *foundation.NSNumber) {
-	x.inner.SetAdminNodeID(adminNodeID)
-}
-
-// AdminPasscodeID calls the underlying AdminPasscodeID.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminPasscodeID() *foundation.NSNumber {
-	return x.inner.AdminPasscodeID()
-}
-
-// SetAdminPasscodeID calls the underlying SetAdminPasscodeID.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetAdminPasscodeID(adminPasscodeID *foundation.NSNumber) {
-	x.inner.SetAdminPasscodeID(adminPasscodeID)
-}
-
-// ChangeType calls the underlying ChangeType.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) ChangeType() *foundation.NSNumber {
-	return x.inner.ChangeType()
-}
-
-// SetChangeType calls the underlying SetChangeType.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetChangeType(changeType *foundation.NSNumber) {
-	x.inner.SetChangeType(changeType)
-}
-
-// LatestValue calls the underlying LatestValue.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlExtensionStruct {
-	_r := x.inner.LatestValue()
-	if _r == nil {
+// mTRAccessControlClusterAccessControlExtensionChangedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRAccessControlClusterAccessControlExtensionChangedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAccessControlClusterAccessControlExtensionChangedEventAdopt(id objc.ID) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MTRAccessControlClusterAccessControlExtensionStruct{inner: _r}
+	x := &MTRAccessControlClusterAccessControlExtensionChangedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetLatestValue calls the underlying SetLatestValue.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetLatestValue(latestValue *raw.MTRAccessControlClusterAccessControlExtensionStruct) {
-	x.inner.SetLatestValue(latestValue)
+// Description returns the object's -description text.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAccessControlClusterAccessControlExtensionChangedEvent creates a new MTRAccessControlClusterAccessControlExtensionChangedEvent.
+func NewMTRAccessControlClusterAccessControlExtensionChangedEvent() *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterAccessControlExtensionChangedEvent")), objc.RegisterName("new"))
+	return mTRAccessControlClusterAccessControlExtensionChangedEventAdopt(_id)
+}
+
+// WithAdminNodeID sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithAdminNodeID(adminNodeID obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminNodeID:"), objref.IDOf(adminNodeID))
+	return x
+}
+
+// WithAdminPasscodeID sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithAdminPasscodeID(adminPasscodeID obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminPasscodeID:"), objref.IDOf(adminPasscodeID))
+	return x
+}
+
+// WithChangeType sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithChangeType(changeType obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeType:"), objref.IDOf(changeType))
+	return x
+}
+
+// WithLatestValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithLatestValue(latestValue MTRAccessControlClusterAccessControlExtensionStructProvider) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatestValue:"), objref.IDOf(latestValue))
+	return x
+}
+
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return x
+}
+
+// AdminNodeID wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminNodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adminNodeID"))
+	return obj.Wrap(_r)
+}
+
+// SetAdminNodeID wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetAdminNodeID(adminNodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminNodeID:"), objref.IDOf(adminNodeID))
+}
+
+// AdminPasscodeID wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminPasscodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adminPasscodeID"))
+	return obj.Wrap(_r)
+}
+
+// SetAdminPasscodeID wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetAdminPasscodeID(adminPasscodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminPasscodeID:"), objref.IDOf(adminPasscodeID))
+}
+
+// ChangeType wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) ChangeType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeType"))
+	return obj.Wrap(_r)
+}
+
+// SetChangeType wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetChangeType(changeType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeType:"), objref.IDOf(changeType))
+}
+
+// LatestValue wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlExtensionStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("latestValue"))
+	return MTRAccessControlClusterAccessControlExtensionStructFromID(_r)
+}
+
+// SetLatestValue wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetLatestValue(latestValue *MTRAccessControlClusterAccessControlExtensionStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatestValue:"), objref.IDOf(latestValue))
+}
+
+// FabricIndex wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
+}
+
+// SetFabricIndex wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // MTRAccessControlClusterAccessControlExtensionChangedEventable is the interface implemented by [MTRAccessControlClusterAccessControlExtensionChangedEvent], for mocking and DI.
 type MTRAccessControlClusterAccessControlExtensionChangedEventable interface {
-	Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionChangedEvent
-	WithAdminNodeID(adminNodeID *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent
-	WithAdminPasscodeID(adminPasscodeID *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent
-	WithChangeType(changeType *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent
+	obj.Object
+	WithAdminNodeID(adminNodeID obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent
+	WithAdminPasscodeID(adminPasscodeID obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent
+	WithChangeType(changeType obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent
 	WithLatestValue(latestValue MTRAccessControlClusterAccessControlExtensionStructProvider) *MTRAccessControlClusterAccessControlExtensionChangedEvent
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionChangedEvent
-	AdminNodeID() *foundation.NSNumber
-	SetAdminNodeID(adminNodeID *foundation.NSNumber)
-	AdminPasscodeID() *foundation.NSNumber
-	SetAdminPasscodeID(adminPasscodeID *foundation.NSNumber)
-	ChangeType() *foundation.NSNumber
-	SetChangeType(changeType *foundation.NSNumber)
+	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent
+	AdminNodeID() obj.Object
+	SetAdminNodeID(adminNodeID obj.Object)
+	AdminPasscodeID() obj.Object
+	SetAdminPasscodeID(adminPasscodeID obj.Object)
+	ChangeType() obj.Object
+	SetChangeType(changeType obj.Object)
 	LatestValue() *MTRAccessControlClusterAccessControlExtensionStruct
-	SetLatestValue(latestValue *raw.MTRAccessControlClusterAccessControlExtensionStruct)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	SetLatestValue(latestValue *MTRAccessControlClusterAccessControlExtensionStruct)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 }
 
 var _ MTRAccessControlClusterAccessControlExtensionChangedEventable = (*MTRAccessControlClusterAccessControlExtensionChangedEvent)(nil)

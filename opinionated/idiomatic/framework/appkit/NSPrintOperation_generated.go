@@ -5,354 +5,331 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that controls operations that generate Encapsulated PostScript (EPS) code, Portable Document Format (PDF) code, or print jobs.
+// PrintOperation is an idiomatic wrapper over the Objective-C class NSPrintOperation.
 //
-// PrintOperation wraps [raw.NSPrintOperation] with a fluent Go API.
+// An object that controls operations that generate Encapsulated PostScript (EPS) code, Portable Document Format (PDF) code, or print jobs.
 type PrintOperation struct {
-	inner *raw.NSPrintOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPrintOperation].
-func (x *PrintOperation) Unwrap() *raw.NSPrintOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PrintOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// PrintOperationFromID adopts an existing object pointer as a PrintOperation (nil for 0).
+// PrintOperationFromID adopts an existing Objective-C object as a PrintOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func PrintOperationFromID(id objc.ID) *PrintOperation {
 	if id == 0 {
 		return nil
 	}
-	return &PrintOperation{inner: raw.NSPrintOperationFromID(id)}
+	x := &PrintOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPrintOperation creates a new [PrintOperation].
+// printOperationAdopt wraps an Objective-C object that this code just created as a
+// PrintOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func printOperationAdopt(id objc.ID) *PrintOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &PrintOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PrintOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PrintOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PrintOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PrintOperation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPrintOperation creates a new PrintOperation.
 func NewPrintOperation() *PrintOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPrintOperation")), objc.RegisterName("new"))
-	return &PrintOperation{inner: raw.NSPrintOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("new"))
+	return printOperationAdopt(_id)
 }
 
-// The custom title of the print job.
-//
-// WithJobTitle sets the jobTitle property and returns the receiver for chaining.
+// WithJobTitle the custom title of the print job.
 func (x *PrintOperation) WithJobTitle(jobTitle string) *PrintOperation {
-	x.inner.SetJobTitle(foundation.NSStringStringWithUTF8String(jobTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobTitle:"), purego.NSString(jobTitle))
 	return x
 }
 
-// A Boolean value that determines whether the print operation displays a print panel.
-//
-// WithShowsPrintPanel sets the showsPrintPanel property and returns the receiver for chaining.
+// WithShowsPrintPanel a Boolean value that determines whether the print operation displays a print panel.
 func (x *PrintOperation) WithShowsPrintPanel(showsPrintPanel bool) *PrintOperation {
-	x.inner.SetShowsPrintPanel(showsPrintPanel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPrintPanel:"), showsPrintPanel)
 	return x
 }
 
-// A Boolean value that determines whether the print operation displays a progress panel.
-//
-// WithShowsProgressPanel sets the showsProgressPanel property and returns the receiver for chaining.
+// WithShowsProgressPanel a Boolean value that determines whether the print operation displays a progress panel.
 func (x *PrintOperation) WithShowsProgressPanel(showsProgressPanel bool) *PrintOperation {
-	x.inner.SetShowsProgressPanel(showsProgressPanel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsProgressPanel:"), showsProgressPanel)
 	return x
 }
 
-// The print panel object to use during the operation.
-//
-// WithPrintPanel sets the printPanel property and returns the receiver for chaining.
+// WithPrintPanel the print panel object to use during the operation.
 func (x *PrintOperation) WithPrintPanel(printPanel *PrintPanel) *PrintOperation {
-	x.inner.SetPrintPanel(printPanel.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrintPanel:"), objref.IDOf(printPanel))
 	return x
 }
 
-// The PDF panel object to use during the operation.
-//
-// WithPDFPanel sets the pDFPanel property and returns the receiver for chaining.
+// WithPDFPanel the PDF panel object to use during the operation.
 func (x *PrintOperation) WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation {
-	x.inner.SetPDFPanel(pDFPanel.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPDFPanel:"), objref.IDOf(pDFPanel))
 	return x
 }
 
-// A Boolean value that determines whether the print operation is allowed to spawn a separate printing thread.
-//
-// WithCanSpawnSeparateThread sets the canSpawnSeparateThread property and returns the receiver for chaining.
+// WithCanSpawnSeparateThread a Boolean value that determines whether the print operation is allowed to spawn a separate printing thread.
 func (x *PrintOperation) WithCanSpawnSeparateThread(canSpawnSeparateThread bool) *PrintOperation {
-	x.inner.SetCanSpawnSeparateThread(canSpawnSeparateThread)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSpawnSeparateThread:"), canSpawnSeparateThread)
 	return x
 }
 
-// The print order for the pages of the operation.
-//
-// WithPageOrder sets the pageOrder property and returns the receiver for chaining.
-func (x *PrintOperation) WithPageOrder(pageOrder NSPrintingPageOrder) *PrintOperation {
-	x.inner.SetPageOrder(raw.NSPrintingPageOrder(pageOrder))
+// WithPageOrder the print order for the pages of the operation.
+func (x *PrintOperation) WithPageOrder(pageOrder PrintingPageOrder) *PrintOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageOrder:"), pageOrder)
 	return x
 }
 
-// The printing information associated with the print operation.
-//
-// WithPrintInfo sets the printInfo property and returns the receiver for chaining.
+// WithPrintInfo the printing information associated with the print operation.
 func (x *PrintOperation) WithPrintInfo(printInfo *PrintInfo) *PrintOperation {
-	x.inner.SetPrintInfo(printInfo.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
 	return x
 }
 
-// Runs the print operation, calling your custom delegate method upon completion.
-//
-// RunOperationModalForWindowDelegateDidRunSelectorContextInfo calls the underlying RunOperationModalForWindowDelegateDidRunSelectorContextInfo.
-func (x *PrintOperation) RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow *raw.NSWindow, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow, delegate, didRunSelector, contextInfo)
-}
-
-// Runs the print operation on the current thread.
-//
-// RunOperation calls the underlying RunOperation.
+// RunOperation runs the print operation on the current thread.
 func (x *PrintOperation) RunOperation() bool {
-	return x.inner.RunOperation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("runOperation"))
+	return _r
 }
 
-// Creates the graphics context object used for drawing during the operation.
-//
-// CreateContext calls the underlying CreateContext.
+// CreateContext creates the graphics context object used for drawing during the operation.
 func (x *PrintOperation) CreateContext() *GraphicsContext {
-	_r := x.inner.CreateContext()
-	if _r == nil {
-		return nil
-	}
-	return &GraphicsContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createContext"))
+	return GraphicsContextFromID(_r)
 }
 
-// Destroys the print operation’s graphics context.
-//
-// DestroyContext calls the underlying DestroyContext.
+// DestroyContext destroys the print operation’s graphics context.
 func (x *PrintOperation) DestroyContext() {
-	x.inner.DestroyContext()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destroyContext"))
 }
 
-// Delivers the results of the print operation to the intended destination.
-//
-// DeliverResult calls the underlying DeliverResult.
+// DeliverResult delivers the results of the print operation to the intended destination.
 func (x *PrintOperation) DeliverResult() bool {
-	return x.inner.DeliverResult()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deliverResult"))
+	return _r
 }
 
-// Called at the end of a print operation to remove the print operation as the current operation.
-//
-// CleanUpOperation calls the underlying CleanUpOperation.
+// CleanUpOperation called at the end of a print operation to remove the print operation as the current operation.
 func (x *PrintOperation) CleanUpOperation() {
-	x.inner.CleanUpOperation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cleanUpOperation"))
 }
 
-// IsCopyingOperation calls the underlying IsCopyingOperation.
+// IsCopyingOperation wraps the corresponding Objective-C method.
 func (x *PrintOperation) IsCopyingOperation() bool {
-	return x.inner.IsCopyingOperation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCopyingOperation"))
+	return _r
 }
 
-// PreferredRenderingQuality calls the underlying PreferredRenderingQuality.
-func (x *PrintOperation) PreferredRenderingQuality() NSPrintRenderingQuality {
-	return NSPrintRenderingQuality(x.inner.PreferredRenderingQuality())
+// PreferredRenderingQuality wraps the corresponding Objective-C method.
+func (x *PrintOperation) PreferredRenderingQuality() PrintRenderingQuality {
+	_r := objc.Send[PrintRenderingQuality](objref.IDOf(x), objc.RegisterName("preferredRenderingQuality"))
+	return _r
 }
 
-// JobTitle calls the underlying JobTitle.
+// JobTitle wraps the corresponding Objective-C method.
 func (x *PrintOperation) JobTitle() string {
-	_r := x.inner.JobTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jobTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetJobTitle calls the underlying SetJobTitle.
+// SetJobTitle wraps the corresponding Objective-C method.
 func (x *PrintOperation) SetJobTitle(jobTitle string) {
-	x.inner.SetJobTitle(foundation.NSStringStringWithUTF8String(jobTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobTitle:"), purego.NSString(jobTitle))
 }
 
-// ShowsPrintPanel calls the underlying ShowsPrintPanel.
+// ShowsPrintPanel wraps the corresponding Objective-C method.
 func (x *PrintOperation) ShowsPrintPanel() bool {
-	return x.inner.ShowsPrintPanel()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPrintPanel"))
+	return _r
 }
 
-// SetShowsPrintPanel calls the underlying SetShowsPrintPanel.
+// SetShowsPrintPanel wraps the corresponding Objective-C method.
 func (x *PrintOperation) SetShowsPrintPanel(showsPrintPanel bool) {
-	x.inner.SetShowsPrintPanel(showsPrintPanel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPrintPanel:"), showsPrintPanel)
 }
 
-// ShowsProgressPanel calls the underlying ShowsProgressPanel.
+// ShowsProgressPanel wraps the corresponding Objective-C method.
 func (x *PrintOperation) ShowsProgressPanel() bool {
-	return x.inner.ShowsProgressPanel()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsProgressPanel"))
+	return _r
 }
 
-// SetShowsProgressPanel calls the underlying SetShowsProgressPanel.
+// SetShowsProgressPanel wraps the corresponding Objective-C method.
 func (x *PrintOperation) SetShowsProgressPanel(showsProgressPanel bool) {
-	x.inner.SetShowsProgressPanel(showsProgressPanel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsProgressPanel:"), showsProgressPanel)
 }
 
-// PrintPanel calls the underlying PrintPanel.
+// PrintPanel wraps the corresponding Objective-C method.
 func (x *PrintOperation) PrintPanel() *PrintPanel {
-	_r := x.inner.PrintPanel()
-	if _r == nil {
-		return nil
-	}
-	return &PrintPanel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printPanel"))
+	return PrintPanelFromID(_r)
 }
 
-// SetPrintPanel calls the underlying SetPrintPanel.
-func (x *PrintOperation) SetPrintPanel(printPanel *raw.NSPrintPanel) {
-	x.inner.SetPrintPanel(printPanel)
+// SetPrintPanel wraps the corresponding Objective-C method.
+func (x *PrintOperation) SetPrintPanel(printPanel *PrintPanel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrintPanel:"), objref.IDOf(printPanel))
 }
 
-// PDFPanel calls the underlying PDFPanel.
+// PDFPanel wraps the corresponding Objective-C method.
 func (x *PrintOperation) PDFPanel() *PDFPanel {
-	_r := x.inner.PDFPanel()
-	if _r == nil {
-		return nil
-	}
-	return &PDFPanel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PDFPanel"))
+	return PDFPanelFromID(_r)
 }
 
-// SetPDFPanel calls the underlying SetPDFPanel.
-func (x *PrintOperation) SetPDFPanel(pDFPanel *raw.NSPDFPanel) {
-	x.inner.SetPDFPanel(pDFPanel)
+// SetPDFPanel wraps the corresponding Objective-C method.
+func (x *PrintOperation) SetPDFPanel(pDFPanel *PDFPanel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPDFPanel:"), objref.IDOf(pDFPanel))
 }
 
-// CanSpawnSeparateThread calls the underlying CanSpawnSeparateThread.
+// CanSpawnSeparateThread wraps the corresponding Objective-C method.
 func (x *PrintOperation) CanSpawnSeparateThread() bool {
-	return x.inner.CanSpawnSeparateThread()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSpawnSeparateThread"))
+	return _r
 }
 
-// SetCanSpawnSeparateThread calls the underlying SetCanSpawnSeparateThread.
+// SetCanSpawnSeparateThread wraps the corresponding Objective-C method.
 func (x *PrintOperation) SetCanSpawnSeparateThread(canSpawnSeparateThread bool) {
-	x.inner.SetCanSpawnSeparateThread(canSpawnSeparateThread)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSpawnSeparateThread:"), canSpawnSeparateThread)
 }
 
-// PageOrder calls the underlying PageOrder.
-func (x *PrintOperation) PageOrder() NSPrintingPageOrder {
-	return NSPrintingPageOrder(x.inner.PageOrder())
+// PageOrder wraps the corresponding Objective-C method.
+func (x *PrintOperation) PageOrder() PrintingPageOrder {
+	_r := objc.Send[PrintingPageOrder](objref.IDOf(x), objc.RegisterName("pageOrder"))
+	return _r
 }
 
-// SetPageOrder calls the underlying SetPageOrder.
-func (x *PrintOperation) SetPageOrder(pageOrder NSPrintingPageOrder) {
-	x.inner.SetPageOrder(raw.NSPrintingPageOrder(pageOrder))
+// SetPageOrder wraps the corresponding Objective-C method.
+func (x *PrintOperation) SetPageOrder(pageOrder PrintingPageOrder) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageOrder:"), pageOrder)
 }
 
-// View calls the underlying View.
+// View wraps the corresponding Objective-C method.
 func (x *PrintOperation) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
-// PrintInfo calls the underlying PrintInfo.
+// PrintInfo wraps the corresponding Objective-C method.
 func (x *PrintOperation) PrintInfo() *PrintInfo {
-	_r := x.inner.PrintInfo()
-	if _r == nil {
-		return nil
-	}
-	return &PrintInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printInfo"))
+	return PrintInfoFromID(_r)
 }
 
-// SetPrintInfo calls the underlying SetPrintInfo.
-func (x *PrintOperation) SetPrintInfo(printInfo *raw.NSPrintInfo) {
-	x.inner.SetPrintInfo(printInfo)
+// SetPrintInfo wraps the corresponding Objective-C method.
+func (x *PrintOperation) SetPrintInfo(printInfo *PrintInfo) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
 }
 
-// Context calls the underlying Context.
+// Context wraps the corresponding Objective-C method.
 func (x *PrintOperation) Context() *GraphicsContext {
-	_r := x.inner.Context()
-	if _r == nil {
-		return nil
-	}
-	return &GraphicsContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return GraphicsContextFromID(_r)
 }
 
-// PageRange calls the underlying PageRange.
+// PageRange wraps the corresponding Objective-C method.
 func (x *PrintOperation) PageRange() foundation.NSRange {
-	return x.inner.PageRange()
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("pageRange"))
+	return _r
 }
 
-// CurrentPage calls the underlying CurrentPage.
+// CurrentPage wraps the corresponding Objective-C method.
 func (x *PrintOperation) CurrentPage() int {
-	return x.inner.CurrentPage()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentPage"))
+	return _r
 }
 
-// Sets the custom accessory view to be displayed by the print operation’s print panel.
-//
-// SetAccessoryView calls the underlying SetAccessoryView.
-func (x *PrintOperation) SetAccessoryView(view *raw.NSView) {
-	x.inner.SetAccessoryView(view)
+// SetAccessoryView sets the custom accessory view to be displayed by the print operation’s print panel.
+func (x *PrintOperation) SetAccessoryView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(view))
 }
 
-// Returns the accessory view used by the print operation’s print panel.
-//
-// AccessoryView calls the underlying AccessoryView.
+// AccessoryView returns the accessory view used by the print operation’s print panel.
 func (x *PrintOperation) AccessoryView() *View {
-	_r := x.inner.AccessoryView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+	return ViewFromID(_r)
 }
 
-// Sets the type of content that the print job is printing.
-//
-// SetJobStyleHint calls the underlying SetJobStyleHint.
+// SetJobStyleHint sets the type of content that the print job is printing.
 func (x *PrintOperation) SetJobStyleHint(hint string) {
-	x.inner.SetJobStyleHint(foundation.NSStringStringWithUTF8String(hint))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobStyleHint:"), purego.NSString(hint))
 }
 
-// The type of content that the print job is printing.
-//
-// JobStyleHint calls the underlying JobStyleHint.
+// JobStyleHint the type of content that the print job is printing.
 func (x *PrintOperation) JobStyleHint() string {
-	_r := x.inner.JobStyleHint()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jobStyleHint"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Sets whether the print operation should display a print panel.
-//
-// SetShowPanels calls the underlying SetShowPanels.
+// SetShowPanels sets whether the print operation should display a print panel.
 func (x *PrintOperation) SetShowPanels(flag bool) {
-	x.inner.SetShowPanels(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowPanels:"), flag)
 }
 
-// Returns a Boolean value that indicates whether the print panel is to be displayed.
-//
-// ShowPanels calls the underlying ShowPanels.
+// ShowPanels returns a Boolean value that indicates whether the print panel is to be displayed.
 func (x *PrintOperation) ShowPanels() bool {
-	return x.inner.ShowPanels()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showPanels"))
+	return _r
 }
 
 // PrintOperationable is the interface implemented by [PrintOperation], for mocking and DI.
 type PrintOperationable interface {
-	Unwrap() *raw.NSPrintOperation
+	obj.Object
 	WithJobTitle(jobTitle string) *PrintOperation
 	WithShowsPrintPanel(showsPrintPanel bool) *PrintOperation
 	WithShowsProgressPanel(showsProgressPanel bool) *PrintOperation
 	WithPrintPanel(printPanel *PrintPanel) *PrintOperation
 	WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation
 	WithCanSpawnSeparateThread(canSpawnSeparateThread bool) *PrintOperation
-	WithPageOrder(pageOrder NSPrintingPageOrder) *PrintOperation
+	WithPageOrder(pageOrder PrintingPageOrder) *PrintOperation
 	WithPrintInfo(printInfo *PrintInfo) *PrintOperation
-	RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow *raw.NSWindow, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunOperation() bool
 	CreateContext() *GraphicsContext
 	DestroyContext()
 	DeliverResult() bool
 	CleanUpOperation()
 	IsCopyingOperation() bool
-	PreferredRenderingQuality() NSPrintRenderingQuality
+	PreferredRenderingQuality() PrintRenderingQuality
 	JobTitle() string
 	SetJobTitle(jobTitle string)
 	ShowsPrintPanel() bool
@@ -360,20 +337,20 @@ type PrintOperationable interface {
 	ShowsProgressPanel() bool
 	SetShowsProgressPanel(showsProgressPanel bool)
 	PrintPanel() *PrintPanel
-	SetPrintPanel(printPanel *raw.NSPrintPanel)
+	SetPrintPanel(printPanel *PrintPanel)
 	PDFPanel() *PDFPanel
-	SetPDFPanel(pDFPanel *raw.NSPDFPanel)
+	SetPDFPanel(pDFPanel *PDFPanel)
 	CanSpawnSeparateThread() bool
 	SetCanSpawnSeparateThread(canSpawnSeparateThread bool)
-	PageOrder() NSPrintingPageOrder
-	SetPageOrder(pageOrder NSPrintingPageOrder)
+	PageOrder() PrintingPageOrder
+	SetPageOrder(pageOrder PrintingPageOrder)
 	View() *View
 	PrintInfo() *PrintInfo
-	SetPrintInfo(printInfo *raw.NSPrintInfo)
+	SetPrintInfo(printInfo *PrintInfo)
 	Context() *GraphicsContext
 	PageRange() foundation.NSRange
 	CurrentPage() int
-	SetAccessoryView(view *raw.NSView)
+	SetAccessoryView(view *View)
 	AccessoryView() *View
 	SetJobStyleHint(hint string)
 	JobStyleHint() string

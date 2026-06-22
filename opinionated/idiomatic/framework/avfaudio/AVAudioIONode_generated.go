@@ -5,78 +5,86 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that performs audio input or output in the engine.
+// AudioIONode is an idiomatic wrapper over the Objective-C class AVAudioIONode.
 //
-// AudioIONode wraps [raw.AVAudioIONode] with a fluent Go API.
+// AudioIONode is an abstract base — you do not construct it directly. Construct one of [AudioInputNode], [AudioOutputNode] and pass it where a AudioIONode is accepted.
+//
+// An object that performs audio input or output in the engine.
 type AudioIONode struct {
-	inner *raw.AVAudioIONode
+	AudioNode
 }
 
-// Unwrap returns the underlying [raw.AVAudioIONode].
-func (x *AudioIONode) Unwrap() *raw.AVAudioIONode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioIONode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioIONodeFromID adopts an existing object pointer as a AudioIONode (nil for 0).
+// AudioIONodeFromID adopts an existing Objective-C object as a AudioIONode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioIONodeFromID(id objc.ID) *AudioIONode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioIONode{inner: raw.AVAudioIONodeFromID(id)}
+	x := &AudioIONode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioIONode creates a new [AudioIONode].
-func NewAudioIONode() *AudioIONode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioIONode")), objc.RegisterName("new"))
-	return &AudioIONode{inner: raw.AVAudioIONodeFromID(_id)}
+// audioIONodeAdopt wraps an Objective-C object that this code just created as a
+// AudioIONode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioIONodeAdopt(id objc.ID) *AudioIONode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioIONode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Enables or disables voice processing on the I/O node.
-//
-// SetVoiceProcessingEnabledError calls the underlying SetVoiceProcessingEnabledError.
-func (x *AudioIONode) SetVoiceProcessingEnabledError(enabled bool) (bool, error) {
-	return x.inner.SetVoiceProcessingEnabledError(enabled)
+// SetVoiceProcessingEnabled enables or disables voice processing on the I/O node.
+func (x *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setVoiceProcessingEnabled:error:"), enabled, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @property presentationLatency @abstract The presentation or hardware latency, applicable when the engine is rendering to/from an audio device. @discussion This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
-//
-// PresentationLatency calls the underlying PresentationLatency.
+// PresentationLatency the presentation or hardware latency, applicable when the engine is rendering to/from an audio device. This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
 func (x *AudioIONode) PresentationLatency() float64 {
-	return x.inner.PresentationLatency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("presentationLatency"))
+	return _r
 }
 
-// @property audioUnit @abstract The node's underlying AudioUnit, if any. @discussion This is only necessary for certain advanced usages.
-//
-// AudioUnit calls the underlying AudioUnit.
-func (x *AudioIONode) AudioUnit() *carboncore.ComponentInstanceRecord {
-	return x.inner.AudioUnit()
-}
-
-// @property voiceProcessingEnabled @abstract Indicates whether voice processing is enabled.
-//
-// IsVoiceProcessingEnabled calls the underlying IsVoiceProcessingEnabled.
+// IsVoiceProcessingEnabled indicates whether voice processing is enabled.
 func (x *AudioIONode) IsVoiceProcessingEnabled() bool {
-	return x.inner.IsVoiceProcessingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingEnabled"))
+	return _r
 }
-
-func (x *AudioIONode) asAudioIONode() *raw.AVAudioIONode { return x.inner }
-
-func (x *AudioIONode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
 
 // AudioIONodeable is the interface implemented by [AudioIONode], for mocking and DI.
 type AudioIONodeable interface {
-	Unwrap() *raw.AVAudioIONode
-	SetVoiceProcessingEnabledError(enabled bool) (bool, error)
+	obj.Object
+	SetVoiceProcessingEnabled(enabled bool) error
 	PresentationLatency() float64
-	AudioUnit() *carboncore.ComponentInstanceRecord
 	IsVoiceProcessingEnabled() bool
 }
 
 var _ AudioIONodeable = (*AudioIONode)(nil)
+
+// isAudioIONode marks AudioIONode — and, by embedding promotion, its
+// subclasses — as a member of the AudioIONode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AudioIONode) isAudioIONode() {}
+
+var _ AudioIONodeProvider = (*AudioIONode)(nil)
+
+var _ AudioNodeProvider = (*AudioIONode)(nil)

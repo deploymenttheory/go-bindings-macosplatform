@@ -5,99 +5,103 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// @class   IOUSBHostCIDeviceStateMachine @brief   The object representing the state of a user-mode USB host controller device @details This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command. IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
+// HostCIDeviceStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIDeviceStateMachine.
 //
-// HostCIDeviceStateMachine wraps [raw.IOUSBHostCIDeviceStateMachine] with a fluent Go API.
+// The object representing the state of a user-mode USB host controller device This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command. IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
 type HostCIDeviceStateMachine struct {
-	inner *raw.IOUSBHostCIDeviceStateMachine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostCIDeviceStateMachine].
-func (x *HostCIDeviceStateMachine) Unwrap() *raw.IOUSBHostCIDeviceStateMachine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostCIDeviceStateMachine) ID() objc.ID { return x.inner.Ptr() }
-
-// HostCIDeviceStateMachineFromID adopts an existing object pointer as a HostCIDeviceStateMachine (nil for 0).
+// HostCIDeviceStateMachineFromID adopts an existing Objective-C object as a HostCIDeviceStateMachine
+// (nil for 0), retaining it and registering a release finalizer.
 func HostCIDeviceStateMachineFromID(id objc.ID) *HostCIDeviceStateMachine {
 	if id == 0 {
 		return nil
 	}
-	return &HostCIDeviceStateMachine{inner: raw.IOUSBHostCIDeviceStateMachineFromID(id)}
+	x := &HostCIDeviceStateMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @brief       Initializes an IOUSBHostCIDeviceStateMachine object @discussion  The IOUSBHostCIDeviceStateMachine defaults to the IOUSBHostCIDeviceStateActive state. @param       interface IOUSBHostControllerInterface which will be used to send command responses. @param       command IOUSBHostCIMessage with type IOUSBHostCIMessageTypeDeviceCreate @return      IOUSBHostCIDeviceStateMachine instance, to be released by the caller.
-//
-// NewHostCIDeviceStateMachineWithInterfaceCommandError creates a new [HostCIDeviceStateMachine].
-func NewHostCIDeviceStateMachineWithInterfaceCommandError(interface_ *raw.IOUSBHostControllerInterface, command *raw.IOUSBHostCIMessage) (*HostCIDeviceStateMachine, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostCIDeviceStateMachine")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:command:error:"), interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &HostCIDeviceStateMachine{inner: raw.IOUSBHostCIDeviceStateMachineFromID(_id)}, nil
-}
-
-// @brief       Inspect an IOUSBHostCIMessage command @discussion  The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @return      BOOL YES if the command is targeting a controller, and can be handled in the current state BOOL NO if the command does not target a controller, or cannot be handled in the current state
-//
-// InspectCommandError calls the underlying InspectCommandError.
-func (x *HostCIDeviceStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
-	return x.inner.InspectCommandError(command)
-}
-
-// @brief       Advance the state machine and respond to an IOUSBHostCIMessage command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
-//
-// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
-func (x *HostCIDeviceStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
-	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
-}
-
-// RespondToCommandStatusDeviceAddressError calls the underlying RespondToCommandStatusDeviceAddressError.
-func (x *HostCIDeviceStateMachine) RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error) {
-	return x.inner.RespondToCommandStatusDeviceAddressError(command, raw.IOUSBHostCIMessageStatus(status), deviceAddress)
-}
-
-// DeviceState calls the underlying DeviceState.
-func (x *HostCIDeviceStateMachine) DeviceState() IOUSBHostCIDeviceState {
-	return IOUSBHostCIDeviceState(x.inner.DeviceState())
-}
-
-// CompleteRoute calls the underlying CompleteRoute.
-func (x *HostCIDeviceStateMachine) CompleteRoute() uint {
-	return x.inner.CompleteRoute()
-}
-
-// DeviceAddress calls the underlying DeviceAddress.
-func (x *HostCIDeviceStateMachine) DeviceAddress() uint {
-	return x.inner.DeviceAddress()
-}
-
-// ControllerInterface calls the underlying ControllerInterface.
-func (x *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := x.inner.ControllerInterface()
-	if _r == nil {
+// hostCIDeviceStateMachineAdopt wraps an Objective-C object that this code just created as a
+// HostCIDeviceStateMachine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostCIDeviceStateMachineAdopt(id objc.ID) *HostCIDeviceStateMachine {
+	if id == 0 {
 		return nil
 	}
-	return &HostControllerInterface{inner: _r}
+	x := &HostCIDeviceStateMachine{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HostCIDeviceStateMachine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostCIDeviceStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostCIDeviceStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostCIDeviceStateMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHostCIDeviceStateMachine creates a new HostCIDeviceStateMachine.
+func NewHostCIDeviceStateMachine() *HostCIDeviceStateMachine {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIDeviceStateMachine")), objc.RegisterName("new"))
+	return hostCIDeviceStateMachineAdopt(_id)
+}
+
+// DeviceState wraps the corresponding Objective-C method.
+func (x *HostCIDeviceStateMachine) DeviceState() HostCIDeviceState {
+	_r := objc.Send[HostCIDeviceState](objref.IDOf(x), objc.RegisterName("deviceState"))
+	return _r
+}
+
+// CompleteRoute wraps the corresponding Objective-C method.
+func (x *HostCIDeviceStateMachine) CompleteRoute() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("completeRoute"))
+	return _r
+}
+
+// DeviceAddress wraps the corresponding Objective-C method.
+func (x *HostCIDeviceStateMachine) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+	return _r
+}
+
+// ControllerInterface wraps the corresponding Objective-C method.
+func (x *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+	return HostControllerInterfaceFromID(_r)
 }
 
 // HostCIDeviceStateMachineable is the interface implemented by [HostCIDeviceStateMachine], for mocking and DI.
 type HostCIDeviceStateMachineable interface {
-	Unwrap() *raw.IOUSBHostCIDeviceStateMachine
-	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
-	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error)
-	RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error)
-	DeviceState() IOUSBHostCIDeviceState
-	CompleteRoute() uint
-	DeviceAddress() uint
+	obj.Object
+	DeviceState() HostCIDeviceState
+	CompleteRoute() int
+	DeviceAddress() int
 	ControllerInterface() *HostControllerInterface
 }
 

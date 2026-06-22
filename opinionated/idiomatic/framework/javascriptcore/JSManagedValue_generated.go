@@ -5,53 +5,83 @@
 package javascriptcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javascriptcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A JavaScript value with conditional retain behavior to provide automatic memory management.
+// ManagedValue is an idiomatic wrapper over the Objective-C class JSManagedValue.
 //
-// ManagedValue wraps [raw.JSManagedValue] with a fluent Go API.
+// A JavaScript value with conditional retain behavior to provide automatic memory management.
 type ManagedValue struct {
-	inner *raw.JSManagedValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.JSManagedValue].
-func (x *ManagedValue) Unwrap() *raw.JSManagedValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ManagedValue) ID() objc.ID { return x.inner.Ptr() }
-
-// ManagedValueFromID adopts an existing object pointer as a ManagedValue (nil for 0).
+// ManagedValueFromID adopts an existing Objective-C object as a ManagedValue
+// (nil for 0), retaining it and registering a release finalizer.
 func ManagedValueFromID(id objc.ID) *ManagedValue {
 	if id == 0 {
 		return nil
 	}
-	return &ManagedValue{inner: raw.JSManagedValueFromID(id)}
+	x := &ManagedValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a managed value with the specified JavaScript value.
-//
-// NewManagedValueWithValue creates a new [ManagedValue].
-func NewManagedValueWithValue(value *raw.JSValue) *ManagedValue {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("JSManagedValue")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), value.Ptr())
-	return &ManagedValue{inner: raw.JSManagedValueFromID(_id)}
-}
-
-// Value calls the underlying Value.
-func (x *ManagedValue) Value() *Value {
-	_r := x.inner.Value()
-	if _r == nil {
+// managedValueAdopt wraps an Objective-C object that this code just created as a
+// ManagedValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func managedValueAdopt(id objc.ID) *ManagedValue {
+	if id == 0 {
 		return nil
 	}
-	return &Value{inner: _r}
+	x := &ManagedValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ManagedValue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ManagedValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ManagedValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ManagedValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewManagedValueWithValue initializes a managed value with the specified JavaScript value.
+func NewManagedValueWithValue(value *Value) *ManagedValue {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("JSManagedValue")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), objref.IDOf(value))
+	return managedValueAdopt(_id)
+}
+
+// Value wraps the corresponding Objective-C method.
+func (x *ManagedValue) Value() *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return ValueFromID(_r)
 }
 
 // ManagedValueable is the interface implemented by [ManagedValue], for mocking and DI.
 type ManagedValueable interface {
-	Unwrap() *raw.JSManagedValue
+	obj.Object
 	Value() *Value
 }
 

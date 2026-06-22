@@ -5,210 +5,188 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A bar item that provides a bar to contain other items.
+// GroupTouchBarItem is an idiomatic wrapper over the Objective-C class NSGroupTouchBarItem.
 //
-// GroupTouchBarItem wraps [raw.NSGroupTouchBarItem] with a fluent Go API.
+// It embeds [TouchBarItem], promoting that type's methods.
+//
+// A bar item that provides a bar to contain other items.
 type GroupTouchBarItem struct {
-	inner *raw.NSGroupTouchBarItem
+	TouchBarItem
 }
 
-// Unwrap returns the underlying [raw.NSGroupTouchBarItem].
-func (x *GroupTouchBarItem) Unwrap() *raw.NSGroupTouchBarItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GroupTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupTouchBarItemFromID adopts an existing object pointer as a GroupTouchBarItem (nil for 0).
+// GroupTouchBarItemFromID adopts an existing Objective-C object as a GroupTouchBarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupTouchBarItemFromID(id objc.ID) *GroupTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	return &GroupTouchBarItem{inner: raw.NSGroupTouchBarItemFromID(id)}
+	x := &GroupTouchBarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGroupTouchBarItem creates a new [GroupTouchBarItem].
+// groupTouchBarItemAdopt wraps an Objective-C object that this code just created as a
+// GroupTouchBarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupTouchBarItemAdopt(id objc.ID) *GroupTouchBarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &GroupTouchBarItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGroupTouchBarItem creates a new GroupTouchBarItem.
 func NewGroupTouchBarItem() *GroupTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGroupTouchBarItem")), objc.RegisterName("new"))
-	return &GroupTouchBarItem{inner: raw.NSGroupTouchBarItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGroupTouchBarItem")), objc.RegisterName("new"))
+	return groupTouchBarItemAdopt(_id)
 }
 
-// A bar that holds this group’s items.
-//
-// WithGroupTouchBar sets the groupTouchBar property and returns the receiver for chaining.
+// WithGroupTouchBar a bar that holds this group’s items.
 func (x *GroupTouchBarItem) WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem {
-	x.inner.SetGroupTouchBar(groupTouchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupTouchBar:"), objref.IDOf(groupTouchBar))
 	return x
 }
 
-// The user-visible string identifying this item during bar customization.
-//
-// WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
+// WithCustomizationLabel the user-visible string identifying this item during bar customization.
 func (x *GroupTouchBarItem) WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 	return x
 }
 
-// The user interface direction that controls the layout order of the items.
-//
-// WithGroupUserInterfaceLayoutDirection sets the groupUserInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GroupTouchBarItem) WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GroupTouchBarItem {
-	x.inner.SetGroupUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection))
+// WithGroupUserInterfaceLayoutDirection the user interface direction that controls the layout order of the items.
+func (x *GroupTouchBarItem) WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection UserInterfaceLayoutDirection) *GroupTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupUserInterfaceLayoutDirection:"), groupUserInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value that specifies that items should have equal widths when possible.
-//
-// WithPrefersEqualWidths sets the prefersEqualWidths property and returns the receiver for chaining.
+// WithPrefersEqualWidths a Boolean value that specifies that items should have equal widths when possible.
 func (x *GroupTouchBarItem) WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem {
-	x.inner.SetPrefersEqualWidths(prefersEqualWidths)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersEqualWidths:"), prefersEqualWidths)
 	return x
 }
 
-// The preferred width for items in the group.
-//
-// WithPreferredItemWidth sets the preferredItemWidth property and returns the receiver for chaining.
+// WithPreferredItemWidth the preferred width for items in the group.
 func (x *GroupTouchBarItem) WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem {
-	x.inner.SetPreferredItemWidth(preferredItemWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredItemWidth:"), preferredItemWidth)
 	return x
 }
 
-// The allowed compression options, in the order they should be applied.
-//
-// WithPrioritizedCompressionOptions sets the collection, converting the Go slice to an NSArray.
-func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPrioritizedCompressionOptions(foundation.NSArrayFromID[*raw.NSUserInterfaceCompressionOptions](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSUserInterfaceCompressionOptions](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPrioritizedCompressionOptions(_arr)
+// WithPrioritizedCompressionOptions the allowed compression options, in the order they should be applied.
+func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*UserInterfaceCompressionOptions) *GroupTouchBarItem {
+	_arr := purego.SliceToNSArray(items, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrioritizedCompressionOptions:"), _arr)
 	return x
 }
 
-// Determines which items are shown in a bar when space is limited.
-//
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority determines which items are shown in a bar when space is limited.
 func (x *GroupTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *GroupTouchBarItem {
-	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// GroupTouchBar calls the underlying GroupTouchBar.
+// GroupTouchBar wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) GroupTouchBar() *TouchBar {
-	_r := x.inner.GroupTouchBar()
-	if _r == nil {
-		return nil
-	}
-	return &TouchBar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupTouchBar"))
+	return TouchBarFromID(_r)
 }
 
-// SetGroupTouchBar calls the underlying SetGroupTouchBar.
-func (x *GroupTouchBarItem) SetGroupTouchBar(groupTouchBar *raw.NSTouchBar) {
-	x.inner.SetGroupTouchBar(groupTouchBar)
+// SetGroupTouchBar wraps the corresponding Objective-C method.
+func (x *GroupTouchBarItem) SetGroupTouchBar(groupTouchBar *TouchBar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupTouchBar:"), objref.IDOf(groupTouchBar))
 }
 
-// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+// SetCustomizationLabel wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 }
 
-// GroupUserInterfaceLayoutDirection calls the underlying GroupUserInterfaceLayoutDirection.
-func (x *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
-	return NSUserInterfaceLayoutDirection(x.inner.GroupUserInterfaceLayoutDirection())
+// GroupUserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+func (x *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("groupUserInterfaceLayoutDirection"))
+	return _r
 }
 
-// SetGroupUserInterfaceLayoutDirection calls the underlying SetGroupUserInterfaceLayoutDirection.
-func (x *GroupTouchBarItem) SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
-	x.inner.SetGroupUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection))
+// SetGroupUserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+func (x *GroupTouchBarItem) SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection UserInterfaceLayoutDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupUserInterfaceLayoutDirection:"), groupUserInterfaceLayoutDirection)
 }
 
-// PrefersEqualWidths calls the underlying PrefersEqualWidths.
+// PrefersEqualWidths wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) PrefersEqualWidths() bool {
-	return x.inner.PrefersEqualWidths()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersEqualWidths"))
+	return _r
 }
 
-// SetPrefersEqualWidths calls the underlying SetPrefersEqualWidths.
+// SetPrefersEqualWidths wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) SetPrefersEqualWidths(prefersEqualWidths bool) {
-	x.inner.SetPrefersEqualWidths(prefersEqualWidths)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersEqualWidths:"), prefersEqualWidths)
 }
 
-// PreferredItemWidth calls the underlying PreferredItemWidth.
+// PreferredItemWidth wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) PreferredItemWidth() float64 {
-	return x.inner.PreferredItemWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredItemWidth"))
+	return _r
 }
 
-// SetPreferredItemWidth calls the underlying SetPreferredItemWidth.
+// SetPreferredItemWidth wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) SetPreferredItemWidth(preferredItemWidth float64) {
-	x.inner.SetPreferredItemWidth(preferredItemWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredItemWidth:"), preferredItemWidth)
 }
 
-// EffectiveCompressionOptions calls the underlying EffectiveCompressionOptions.
+// EffectiveCompressionOptions wraps the corresponding Objective-C method.
 func (x *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompressionOptions {
-	_r := x.inner.EffectiveCompressionOptions()
-	if _r == nil {
-		return nil
-	}
-	return &UserInterfaceCompressionOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectiveCompressionOptions"))
+	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
+// PrioritizedCompressionOptions wraps the corresponding Objective-C method.
+//
 // PrioritizedCompressionOptions returns the collection as a Go slice.
 func (x *GroupTouchBarItem) PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions {
-	arr := x.inner.PrioritizedCompressionOptions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserInterfaceCompressionOptions {
-		return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prioritizedCompressionOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserInterfaceCompressionOptions { return UserInterfaceCompressionOptionsFromID(_id) })
 }
 
-// SetPrioritizedCompressionOptions calls the underlying SetPrioritizedCompressionOptions.
-func (x *GroupTouchBarItem) SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) {
-	x.inner.SetPrioritizedCompressionOptions(prioritizedCompressionOptions)
+// SetPrioritizedCompressionOptions wraps the corresponding Objective-C method.
+func (x *GroupTouchBarItem) SetPrioritizedCompressionOptions(prioritizedCompressionOptions []*UserInterfaceCompressionOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedCompressionOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *GroupTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
 
 // GroupTouchBarItemable is the interface implemented by [GroupTouchBarItem], for mocking and DI.
 type GroupTouchBarItemable interface {
-	Unwrap() *raw.NSGroupTouchBarItem
+	obj.Object
 	WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem
-	WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GroupTouchBarItem
+	WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection UserInterfaceLayoutDirection) *GroupTouchBarItem
 	WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem
 	WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem
-	WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem
+	WithPrioritizedCompressionOptions(items ...*UserInterfaceCompressionOptions) *GroupTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *GroupTouchBarItem
 	GroupTouchBar() *TouchBar
-	SetGroupTouchBar(groupTouchBar *raw.NSTouchBar)
+	SetGroupTouchBar(groupTouchBar *TouchBar)
 	SetCustomizationLabel(customizationLabel string)
-	GroupUserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
-	SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection)
+	GroupUserInterfaceLayoutDirection() UserInterfaceLayoutDirection
+	SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection UserInterfaceLayoutDirection)
 	PrefersEqualWidths() bool
 	SetPrefersEqualWidths(prefersEqualWidths bool)
 	PreferredItemWidth() float64
 	SetPreferredItemWidth(preferredItemWidth float64)
 	EffectiveCompressionOptions() *UserInterfaceCompressionOptions
 	PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions
-	SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions])
+	SetPrioritizedCompressionOptions(prioritizedCompressionOptions []*UserInterfaceCompressionOptions)
 }
 
 var _ GroupTouchBarItemable = (*GroupTouchBarItem)(nil)
+
+var _ TouchBarItemProvider = (*GroupTouchBarItem)(nil)

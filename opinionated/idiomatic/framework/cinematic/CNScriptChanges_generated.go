@@ -5,87 +5,106 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.
+// ScriptChanges is an idiomatic wrapper over the Objective-C class CNScriptChanges.
 //
-// ScriptChanges wraps [raw.CNScriptChanges] with a fluent Go API.
+// An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.
 type ScriptChanges struct {
-	inner *raw.CNScriptChanges
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNScriptChanges].
-func (x *ScriptChanges) Unwrap() *raw.CNScriptChanges { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptChanges) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptChangesFromID adopts an existing object pointer as a ScriptChanges (nil for 0).
+// ScriptChangesFromID adopts an existing Objective-C object as a ScriptChanges
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptChangesFromID(id objc.ID) *ScriptChanges {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptChanges{inner: raw.CNScriptChangesFromID(id)}
+	x := &ScriptChanges{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a previously saved data representation.
-//
-// NewScriptChangesWithDataRepresentation creates a new [ScriptChanges].
-func NewScriptChangesWithDataRepresentation(dataRepresentation *foundation.NSData) *ScriptChanges {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNScriptChanges")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), dataRepresentation.Ptr())
-	return &ScriptChanges{inner: raw.CNScriptChangesFromID(_id)}
+// scriptChangesAdopt wraps an Objective-C object that this code just created as a
+// ScriptChanges (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptChangesAdopt(id objc.ID) *ScriptChanges {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptChanges{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Get persistent data representation of these changes for later restoration. The changes can only be used with the original cinematic asset from which the CNScript was created.
-//
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *ScriptChanges) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+// Description returns the object's -description text.
+func (x *ScriptChanges) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The f/number to apply to the entire movie.
-//
-// FNumber calls the underlying FNumber.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptChanges) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptChanges) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptChanges) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScriptChangesWithDataRepresentation creates a previously saved data representation.
+func NewScriptChangesWithDataRepresentation(dataRepresentation obj.Object) *ScriptChanges {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNScriptChanges")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
+	return scriptChangesAdopt(_id)
+}
+
+// DataRepresentation get persistent data representation of these changes for later restoration. The changes can only be used with the original cinematic asset from which the CNScript was created.
+func (x *ScriptChanges) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
+}
+
+// FNumber the f/number to apply to the entire movie.
 func (x *ScriptChanges) FNumber() float32 {
-	return x.inner.FNumber()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
+	return _r
 }
 
-// All active user decisions, including those made at recording time, unless they have been removed.
+// UserDecisions all active user decisions, including those made at recording time, unless they have been removed.
 //
 // UserDecisions returns the collection as a Go slice.
 func (x *ScriptChanges) UserDecisions() []*Decision {
-	arr := x.inner.UserDecisions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Decision {
-		return &Decision{inner: raw.CNDecisionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userDecisions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Decision { return DecisionFromID(_id) })
 }
 
-// All detection tracks that have been added. Does not include those created at recording time.
+// AddedDetectionTracks all detection tracks that have been added. Does not include those created at recording time.
 //
 // AddedDetectionTracks returns the collection as a Go slice.
 func (x *ScriptChanges) AddedDetectionTracks() []*DetectionTrack {
-	arr := x.inner.AddedDetectionTracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DetectionTrack {
-		return &DetectionTrack{inner: raw.CNDetectionTrackFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDetectionTracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DetectionTrack { return DetectionTrackFromID(_id) })
 }
 
 // ScriptChangesable is the interface implemented by [ScriptChanges], for mocking and DI.
 type ScriptChangesable interface {
-	Unwrap() *raw.CNScriptChanges
-	DataRepresentation() *foundation.NSData
+	obj.Object
+	DataRepresentation() obj.Object
 	FNumber() float32
 	UserDecisions() []*Decision
 	AddedDetectionTracks() []*DetectionTrack

@@ -5,109 +5,83 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayQuantizedMatrixMultiplication wraps [raw.MPSNDArrayQuantizedMatrixMultiplication] with a fluent Go API.
+// NDArrayQuantizedMatrixMultiplication is an idiomatic wrapper over the Objective-C class MPSNDArrayQuantizedMatrixMultiplication.
+//
+// It embeds [NDArrayMatrixMultiplication], promoting that type's methods.
 type NDArrayQuantizedMatrixMultiplication struct {
-	inner *raw.MPSNDArrayQuantizedMatrixMultiplication
+	NDArrayMatrixMultiplication
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayQuantizedMatrixMultiplication].
-func (x *NDArrayQuantizedMatrixMultiplication) Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayQuantizedMatrixMultiplication) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayQuantizedMatrixMultiplicationFromID adopts an existing object pointer as a NDArrayQuantizedMatrixMultiplication (nil for 0).
+// NDArrayQuantizedMatrixMultiplicationFromID adopts an existing Objective-C object as a NDArrayQuantizedMatrixMultiplication
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayQuantizedMatrixMultiplicationFromID(id objc.ID) *NDArrayQuantizedMatrixMultiplication {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayQuantizedMatrixMultiplication{inner: raw.MPSNDArrayQuantizedMatrixMultiplicationFromID(id)}
+	x := &NDArrayQuantizedMatrixMultiplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a quantized matrix multiplication kernel. @param      leftQuantizationDescriptor    The quantization definition for the LHS input. @param      rightQuantizationDescriptor    The quantization definition for the RHS input. @result     A new valid quantized matrix multiplication kernel.
-//
-// NewNDArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor creates a new [NDArrayQuantizedMatrixMultiplication].
-func NewNDArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor(device metal.MTLDevice, leftQuantizationDescriptor *mpsndarray.MPSNDArrayQuantizationDescriptor, rightQuantizationDescriptor *mpsndarray.MPSNDArrayQuantizationDescriptor) *NDArrayQuantizedMatrixMultiplication {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayQuantizedMatrixMultiplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:leftQuantizationDescriptor:rightQuantizationDescriptor:"), device, leftQuantizationDescriptor.Ptr(), rightQuantizationDescriptor.Ptr())
-	return &NDArrayQuantizedMatrixMultiplication{inner: raw.MPSNDArrayQuantizedMatrixMultiplicationFromID(_id)}
+// nDArrayQuantizedMatrixMultiplicationAdopt wraps an Objective-C object that this code just created as a
+// NDArrayQuantizedMatrixMultiplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayQuantizedMatrixMultiplicationAdopt(id objc.ID) *NDArrayQuantizedMatrixMultiplication {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayQuantizedMatrixMultiplication{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// NewNDArrayQuantizedMatrixMultiplication creates a new NDArrayQuantizedMatrixMultiplication.
+func NewNDArrayQuantizedMatrixMultiplication() *NDArrayQuantizedMatrixMultiplication {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayQuantizedMatrixMultiplication")), objc.RegisterName("new"))
+	return nDArrayQuantizedMatrixMultiplicationAdopt(_id)
+}
+
+// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication {
-	x.inner.MPSNDArrayMatrixMultiplication.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithBeta sets the beta property and returns the receiver for chaining.
+// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication {
-	x.inner.MPSNDArrayMatrixMultiplication.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayQuantizedMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayQuantizedMatrixMultiplication {
-	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayQuantizedMatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *NDArrayQuantizedMatrixMultiplication {
-	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayQuantizedMatrixMultiplication) WithLabel(label string) *NDArrayQuantizedMatrixMultiplication {
-	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMatrixMultiplication() *mpsndarray.MPSNDArrayMatrixMultiplication {
-	return &x.inner.MPSNDArrayMatrixMultiplication
-}
-
-func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayQuantizedMatrixMultiplication) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayQuantizedMatrixMultiplicationable is the interface implemented by [NDArrayQuantizedMatrixMultiplication], for mocking and DI.
 type NDArrayQuantizedMatrixMultiplicationable interface {
-	Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication
+	obj.Object
 	WithAlpha(alpha float64) *NDArrayQuantizedMatrixMultiplication
 	WithBeta(beta float64) *NDArrayQuantizedMatrixMultiplication
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayQuantizedMatrixMultiplication
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayQuantizedMatrixMultiplication
 	WithLabel(label string) *NDArrayQuantizedMatrixMultiplication
 }
 
 var _ NDArrayQuantizedMatrixMultiplicationable = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ NDArrayMatrixMultiplicationProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)
+
+var _ KernelProvider = (*NDArrayQuantizedMatrixMultiplication)(nil)

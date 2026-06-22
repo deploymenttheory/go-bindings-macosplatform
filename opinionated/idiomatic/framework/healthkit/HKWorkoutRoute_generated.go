@@ -5,47 +5,62 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that contains a workout’s route data.
+// WorkoutRoute is an idiomatic wrapper over the Objective-C class HKWorkoutRoute.
 //
-// WorkoutRoute wraps [raw.HKWorkoutRoute] with a fluent Go API.
+// It embeds [SeriesSample], promoting that type's methods.
+//
+// A sample that contains a workout’s route data.
 type WorkoutRoute struct {
-	inner *raw.HKWorkoutRoute
+	SeriesSample
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutRoute].
-func (x *WorkoutRoute) Unwrap() *raw.HKWorkoutRoute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutRoute) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutRouteFromID adopts an existing object pointer as a WorkoutRoute (nil for 0).
+// WorkoutRouteFromID adopts an existing Objective-C object as a WorkoutRoute
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutRouteFromID(id objc.ID) *WorkoutRoute {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutRoute{inner: raw.HKWorkoutRouteFromID(id)}
+	x := &WorkoutRoute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWorkoutRoute creates a new [WorkoutRoute].
+// workoutRouteAdopt wraps an Objective-C object that this code just created as a
+// WorkoutRoute (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutRouteAdopt(id objc.ID) *WorkoutRoute {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutRoute{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewWorkoutRoute creates a new WorkoutRoute.
 func NewWorkoutRoute() *WorkoutRoute {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutRoute")), objc.RegisterName("new"))
-	return &WorkoutRoute{inner: raw.HKWorkoutRouteFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRoute")), objc.RegisterName("new"))
+	return workoutRouteAdopt(_id)
 }
-
-func (x *WorkoutRoute) asSeriesSample() *raw.HKSeriesSample { return &x.inner.HKSeriesSample }
-
-func (x *WorkoutRoute) asSample() *raw.HKSample { return &x.inner.HKSeriesSample.HKSample }
-
-func (x *WorkoutRoute) asObject() *raw.HKObject { return &x.inner.HKSeriesSample.HKSample.HKObject }
 
 // WorkoutRouteable is the interface implemented by [WorkoutRoute], for mocking and DI.
 type WorkoutRouteable interface {
-	Unwrap() *raw.HKWorkoutRoute
+	obj.Object
 }
 
 var _ WorkoutRouteable = (*WorkoutRoute)(nil)
+
+var _ SeriesSampleProvider = (*WorkoutRoute)(nil)
+
+var _ SampleProvider = (*WorkoutRoute)(nil)
+
+var _ ObjectProvider = (*WorkoutRoute)(nil)

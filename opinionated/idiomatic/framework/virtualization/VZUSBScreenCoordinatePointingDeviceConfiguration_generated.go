@@ -5,47 +5,58 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the configuration for a USB pointing device that reports absolute coordinates.
+// USBScreenCoordinatePointingDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZUSBScreenCoordinatePointingDeviceConfiguration.
 //
-// USBScreenCoordinatePointingDeviceConfiguration wraps [raw.VZUSBScreenCoordinatePointingDeviceConfiguration] with a fluent Go API.
+// It embeds [PointingDeviceConfiguration], promoting that type's methods.
+//
+// An object that defines the configuration for a USB pointing device that reports absolute coordinates.
 type USBScreenCoordinatePointingDeviceConfiguration struct {
-	inner *raw.VZUSBScreenCoordinatePointingDeviceConfiguration
+	PointingDeviceConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZUSBScreenCoordinatePointingDeviceConfiguration].
-func (x *USBScreenCoordinatePointingDeviceConfiguration) Unwrap() *raw.VZUSBScreenCoordinatePointingDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *USBScreenCoordinatePointingDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// USBScreenCoordinatePointingDeviceConfigurationFromID adopts an existing object pointer as a USBScreenCoordinatePointingDeviceConfiguration (nil for 0).
+// USBScreenCoordinatePointingDeviceConfigurationFromID adopts an existing Objective-C object as a USBScreenCoordinatePointingDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func USBScreenCoordinatePointingDeviceConfigurationFromID(id objc.ID) *USBScreenCoordinatePointingDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &USBScreenCoordinatePointingDeviceConfiguration{inner: raw.VZUSBScreenCoordinatePointingDeviceConfigurationFromID(id)}
+	x := &USBScreenCoordinatePointingDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUSBScreenCoordinatePointingDeviceConfiguration creates a new [USBScreenCoordinatePointingDeviceConfiguration].
+// uSBScreenCoordinatePointingDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// USBScreenCoordinatePointingDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uSBScreenCoordinatePointingDeviceConfigurationAdopt(id objc.ID) *USBScreenCoordinatePointingDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &USBScreenCoordinatePointingDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewUSBScreenCoordinatePointingDeviceConfiguration creates a new USBScreenCoordinatePointingDeviceConfiguration.
 func NewUSBScreenCoordinatePointingDeviceConfiguration() *USBScreenCoordinatePointingDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZUSBScreenCoordinatePointingDeviceConfiguration")), objc.RegisterName("new"))
-	return &USBScreenCoordinatePointingDeviceConfiguration{inner: raw.VZUSBScreenCoordinatePointingDeviceConfigurationFromID(_id)}
-}
-
-func (x *USBScreenCoordinatePointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration {
-	return &x.inner.VZPointingDeviceConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBScreenCoordinatePointingDeviceConfiguration")), objc.RegisterName("new"))
+	return uSBScreenCoordinatePointingDeviceConfigurationAdopt(_id)
 }
 
 // USBScreenCoordinatePointingDeviceConfigurationable is the interface implemented by [USBScreenCoordinatePointingDeviceConfiguration], for mocking and DI.
 type USBScreenCoordinatePointingDeviceConfigurationable interface {
-	Unwrap() *raw.VZUSBScreenCoordinatePointingDeviceConfiguration
+	obj.Object
 }
 
 var _ USBScreenCoordinatePointingDeviceConfigurationable = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)
+
+var _ PointingDeviceConfigurationProvider = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)

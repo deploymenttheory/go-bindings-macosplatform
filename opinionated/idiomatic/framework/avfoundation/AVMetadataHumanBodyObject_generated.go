@@ -5,49 +5,60 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a single detected human body in a picture.
+// MetadataHumanBodyObject is an idiomatic wrapper over the Objective-C class AVMetadataHumanBodyObject.
 //
-// MetadataHumanBodyObject wraps [raw.AVMetadataHumanBodyObject] with a fluent Go API.
+// It embeds [MetadataBodyObject], promoting that type's methods.
+//
+// An object representing a single detected human body in a picture.
 type MetadataHumanBodyObject struct {
-	inner *raw.AVMetadataHumanBodyObject
+	MetadataBodyObject
 }
 
-// Unwrap returns the underlying [raw.AVMetadataHumanBodyObject].
-func (x *MetadataHumanBodyObject) Unwrap() *raw.AVMetadataHumanBodyObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataHumanBodyObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataHumanBodyObjectFromID adopts an existing object pointer as a MetadataHumanBodyObject (nil for 0).
+// MetadataHumanBodyObjectFromID adopts an existing Objective-C object as a MetadataHumanBodyObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataHumanBodyObjectFromID(id objc.ID) *MetadataHumanBodyObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataHumanBodyObject{inner: raw.AVMetadataHumanBodyObjectFromID(id)}
+	x := &MetadataHumanBodyObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataHumanBodyObject creates a new [MetadataHumanBodyObject].
+// metadataHumanBodyObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataHumanBodyObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataHumanBodyObjectAdopt(id objc.ID) *MetadataHumanBodyObject {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataHumanBodyObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMetadataHumanBodyObject creates a new MetadataHumanBodyObject.
 func NewMetadataHumanBodyObject() *MetadataHumanBodyObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataHumanBodyObject")), objc.RegisterName("new"))
-	return &MetadataHumanBodyObject{inner: raw.AVMetadataHumanBodyObjectFromID(_id)}
-}
-
-func (x *MetadataHumanBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject {
-	return &x.inner.AVMetadataBodyObject
-}
-
-func (x *MetadataHumanBodyObject) asMetadataObject() *raw.AVMetadataObject {
-	return &x.inner.AVMetadataBodyObject.AVMetadataObject
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataHumanBodyObject")), objc.RegisterName("new"))
+	return metadataHumanBodyObjectAdopt(_id)
 }
 
 // MetadataHumanBodyObjectable is the interface implemented by [MetadataHumanBodyObject], for mocking and DI.
 type MetadataHumanBodyObjectable interface {
-	Unwrap() *raw.AVMetadataHumanBodyObject
+	obj.Object
 }
 
 var _ MetadataHumanBodyObjectable = (*MetadataHumanBodyObject)(nil)
+
+var _ MetadataBodyObjectProvider = (*MetadataHumanBodyObject)(nil)
+
+var _ MetadataObjectProvider = (*MetadataHumanBodyObject)(nil)

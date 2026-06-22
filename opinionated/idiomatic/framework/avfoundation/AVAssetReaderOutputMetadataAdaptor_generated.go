@@ -5,68 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that creates timed metadata group objects for an asset track.
+// AssetReaderOutputMetadataAdaptor is an idiomatic wrapper over the Objective-C class AVAssetReaderOutputMetadataAdaptor.
 //
-// AssetReaderOutputMetadataAdaptor wraps [raw.AVAssetReaderOutputMetadataAdaptor] with a fluent Go API.
+// An object that creates timed metadata group objects for an asset track.
 type AssetReaderOutputMetadataAdaptor struct {
-	inner *raw.AVAssetReaderOutputMetadataAdaptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetReaderOutputMetadataAdaptor].
-func (x *AssetReaderOutputMetadataAdaptor) Unwrap() *raw.AVAssetReaderOutputMetadataAdaptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReaderOutputMetadataAdaptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderOutputMetadataAdaptorFromID adopts an existing object pointer as a AssetReaderOutputMetadataAdaptor (nil for 0).
+// AssetReaderOutputMetadataAdaptorFromID adopts an existing Objective-C object as a AssetReaderOutputMetadataAdaptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderOutputMetadataAdaptorFromID(id objc.ID) *AssetReaderOutputMetadataAdaptor {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReaderOutputMetadataAdaptor{inner: raw.AVAssetReaderOutputMetadataAdaptorFromID(id)}
+	x := &AssetReaderOutputMetadataAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that reads timed metadata groups from an asset reader output.
-//
-// NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput creates a new [AssetReaderOutputMetadataAdaptor].
-func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *raw.AVAssetReaderTrackOutput) *AssetReaderOutputMetadataAdaptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderOutputMetadataAdaptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), trackOutput.Ptr())
-	return &AssetReaderOutputMetadataAdaptor{inner: raw.AVAssetReaderOutputMetadataAdaptorFromID(_id)}
+// assetReaderOutputMetadataAdaptorAdopt wraps an Objective-C object that this code just created as a
+// AssetReaderOutputMetadataAdaptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderOutputMetadataAdaptorAdopt(id objc.ID) *AssetReaderOutputMetadataAdaptor {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetReaderOutputMetadataAdaptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the next timed metadata group for the asset reader output.
-//
-// NextTimedMetadataGroup calls the underlying NextTimedMetadataGroup.
+// Description returns the object's -description text.
+func (x *AssetReaderOutputMetadataAdaptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetReaderOutputMetadataAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetReaderOutputMetadataAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReaderOutputMetadataAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput creates an object that reads timed metadata groups from an asset reader output.
+func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *AssetReaderTrackOutput) *AssetReaderOutputMetadataAdaptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderOutputMetadataAdaptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetReaderTrackOutput:"), objref.IDOf(trackOutput))
+	return assetReaderOutputMetadataAdaptorAdopt(_id)
+}
+
+// NextTimedMetadataGroup returns the next timed metadata group for the asset reader output.
 func (x *AssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *TimedMetadataGroup {
-	_r := x.inner.NextTimedMetadataGroup()
-	if _r == nil {
-		return nil
-	}
-	return &TimedMetadataGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTimedMetadataGroup"))
+	return TimedMetadataGroupFromID(_r)
 }
 
-// @property assetReaderTrackOutput @abstract The asset reader track output from which the receiver pulls timed metadata groups.
-//
-// AssetReaderTrackOutput calls the underlying AssetReaderTrackOutput.
+// AssetReaderTrackOutput the asset reader track output from which the receiver pulls timed metadata groups.
 func (x *AssetReaderOutputMetadataAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
-	_r := x.inner.AssetReaderTrackOutput()
-	if _r == nil {
-		return nil
-	}
-	return &AssetReaderTrackOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderTrackOutput"))
+	return AssetReaderTrackOutputFromID(_r)
 }
 
 // AssetReaderOutputMetadataAdaptorable is the interface implemented by [AssetReaderOutputMetadataAdaptor], for mocking and DI.
 type AssetReaderOutputMetadataAdaptorable interface {
-	Unwrap() *raw.AVAssetReaderOutputMetadataAdaptor
+	obj.Object
 	NextTimedMetadataGroup() *TimedMetadataGroup
 	AssetReaderTrackOutput() *AssetReaderTrackOutput
 }

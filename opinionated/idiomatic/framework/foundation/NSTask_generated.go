@@ -6,296 +6,305 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents a subprocess of the current process.
+// Task is an idiomatic wrapper over the Objective-C class NSTask.
 //
-// Task wraps [raw.NSTask] with a fluent Go API.
+// An object that represents a subprocess of the current process.
 type Task struct {
-	inner *raw.NSTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTask].
-func (x *Task) Unwrap() *raw.NSTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Task) ID() objc.ID { return x.inner.Ptr() }
-
-// TaskFromID adopts an existing object pointer as a Task (nil for 0).
+// TaskFromID adopts an existing Objective-C object as a Task
+// (nil for 0), retaining it and registering a release finalizer.
 func TaskFromID(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	return &Task{inner: raw.NSTaskFromID(id)}
-}
-
-// NewTask creates a new [Task].
-func NewTask() *Task {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTask")), objc.RegisterName("new"))
-	return &Task{inner: raw.NSTaskFromID(_id)}
-}
-
-// WithExecutableURL sets the executableURL property and returns the receiver for chaining.
-func (x *Task) WithExecutableURL(executableURL string) *Task {
-	x.inner.SetExecutableURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(executableURL)))
+	x := &Task{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithArguments sets the collection, converting the Go slice to an NSArray.
-func (x *Task) WithArguments(items ...StringProvider) *Task {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetArguments(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetArguments(_arr)
-	return x
-}
-
-// WithEnvironment sets the environment property and returns the receiver for chaining.
-func (x *Task) WithEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString]) *Task {
-	x.inner.SetEnvironment(environment)
-	return x
-}
-
-// WithCurrentDirectoryURL sets the currentDirectoryURL property and returns the receiver for chaining.
-func (x *Task) WithCurrentDirectoryURL(currentDirectoryURL string) *Task {
-	x.inner.SetCurrentDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(currentDirectoryURL)))
-	return x
-}
-
-// WithLaunchRequirementData sets the launchRequirementData property and returns the receiver for chaining.
-func (x *Task) WithLaunchRequirementData(launchRequirementData DataProvider) *Task {
-	x.inner.SetLaunchRequirementData(launchRequirementData.asData())
-	return x
-}
-
-// WithStandardInput sets the standardInput property and returns the receiver for chaining.
-func (x *Task) WithStandardInput(standardInput objc.ID) *Task {
-	x.inner.SetStandardInput(standardInput)
-	return x
-}
-
-// WithStandardOutput sets the standardOutput property and returns the receiver for chaining.
-func (x *Task) WithStandardOutput(standardOutput objc.ID) *Task {
-	x.inner.SetStandardOutput(standardOutput)
-	return x
-}
-
-// WithStandardError sets the standardError property and returns the receiver for chaining.
-func (x *Task) WithStandardError(standardError objc.ID) *Task {
-	x.inner.SetStandardError(standardError)
-	return x
-}
-
-// WithTerminationHandler sets the terminationHandler property and returns the receiver for chaining.
-func (x *Task) WithTerminationHandler(terminationHandler func(*raw.NSTask)) *Task {
-	x.inner.SetTerminationHandler(terminationHandler)
-	return x
-}
-
-// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *Task) WithQualityOfService(qualityOfService NSQualityOfService) *Task {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Task) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Task {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// LaunchAndReturnError returns any validation error.
-func (x *Task) LaunchAndReturnError() error {
-	_, err := x.inner.LaunchAndReturnError()
-	return err
-}
-
-// Interrupt calls the underlying Interrupt.
-func (x *Task) Interrupt() {
-	x.inner.Interrupt()
-}
-
-// Terminate calls the underlying Terminate.
-func (x *Task) Terminate() {
-	x.inner.Terminate()
-}
-
-// Suspend calls the underlying Suspend.
-func (x *Task) Suspend() bool {
-	return x.inner.Suspend()
-}
-
-// Resume calls the underlying Resume.
-func (x *Task) Resume() bool {
-	return x.inner.Resume()
-}
-
-// ExecutableURL calls the underlying ExecutableURL.
-func (x *Task) ExecutableURL() *URL {
-	_r := x.inner.ExecutableURL()
-	if _r == nil {
+// taskAdopt wraps an Objective-C object that this code just created as a
+// Task (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func taskAdopt(id objc.ID) *Task {
+	if id == 0 {
 		return nil
 	}
-	return &URL{inner: _r}
+	x := &Task{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetExecutableURL calls the underlying SetExecutableURL.
+// Description returns the object's -description text.
+func (x *Task) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Task) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Task) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Task) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTask creates a new Task.
+func NewTask() *Task {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("new"))
+	return taskAdopt(_id)
+}
+
+// WithExecutableURL sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithExecutableURL(executableURL string) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExecutableURL:"), rt.FileURL(executableURL))
+	return x
+}
+
+// WithArguments sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithArguments(items ...StringProvider) *Task {
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), _arr)
+	return x
+}
+
+// WithEnvironment sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithEnvironment(environment obj.Object) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
+	return x
+}
+
+// WithCurrentDirectoryURL sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithCurrentDirectoryURL(currentDirectoryURL string) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentDirectoryURL:"), rt.FileURL(currentDirectoryURL))
+	return x
+}
+
+// WithLaunchRequirementData sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithLaunchRequirementData(launchRequirementData DataProvider) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaunchRequirementData:"), objref.IDOf(launchRequirementData))
+	return x
+}
+
+// WithStandardInput sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithStandardInput(standardInput obj.Object) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
+	return x
+}
+
+// WithStandardOutput sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithStandardOutput(standardOutput obj.Object) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
+	return x
+}
+
+// WithStandardError sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithStandardError(standardError obj.Object) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
+	return x
+}
+
+// WithTerminationHandler sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithTerminationHandler(terminationHandler func(obj.Object)) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTerminationHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
+	return x
+}
+
+// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithQualityOfService(qualityOfService QualityOfService) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Task) WithScriptingProperties(scriptingProperties obj.Object) *Task {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// LaunchAndReturnError wraps the corresponding Objective-C method.
+//
+// LaunchAndReturnError returns an error if the operation did not succeed.
+func (x *Task) LaunchAndReturnError() error {
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Interrupt wraps the corresponding Objective-C method.
+func (x *Task) Interrupt() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interrupt"))
+}
+
+// Terminate wraps the corresponding Objective-C method.
+func (x *Task) Terminate() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminate"))
+}
+
+// Suspend wraps the corresponding Objective-C method.
+func (x *Task) Suspend() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suspend"))
+	return _r
+}
+
+// Resume wraps the corresponding Objective-C method.
+func (x *Task) Resume() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resume"))
+	return _r
+}
+
+// ExecutableURL wraps the corresponding Objective-C method.
+func (x *Task) ExecutableURL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executableURL"))
+	return URLFromID(_r)
+}
+
+// SetExecutableURL wraps the corresponding Objective-C method.
 func (x *Task) SetExecutableURL(executableURL string) {
-	x.inner.SetExecutableURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(executableURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExecutableURL:"), rt.FileURL(executableURL))
 }
 
+// Arguments wraps the corresponding Objective-C method.
+//
 // Arguments returns the collection as a Go slice.
 func (x *Task) Arguments() []string {
-	arr := x.inner.Arguments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetArguments calls the underlying SetArguments.
-func (x *Task) SetArguments(arguments ...StringProvider) {
-	_ptrs := make([]objc.ID, len(arguments))
-	for _i, _v := range arguments {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetArguments(_arg0)
+// SetArguments wraps the corresponding Objective-C method.
+func (x *Task) SetArguments(arguments []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Environment calls the underlying Environment.
-func (x *Task) Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return x.inner.Environment()
+// Environment wraps the corresponding Objective-C method.
+func (x *Task) Environment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("environment"))
+	return obj.Wrap(_r)
 }
 
-// SetEnvironment calls the underlying SetEnvironment.
-func (x *Task) SetEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString]) {
-	x.inner.SetEnvironment(environment)
+// SetEnvironment wraps the corresponding Objective-C method.
+func (x *Task) SetEnvironment(environment obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
 }
 
-// CurrentDirectoryURL calls the underlying CurrentDirectoryURL.
+// CurrentDirectoryURL wraps the corresponding Objective-C method.
 func (x *Task) CurrentDirectoryURL() *URL {
-	_r := x.inner.CurrentDirectoryURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDirectoryURL"))
+	return URLFromID(_r)
 }
 
-// SetCurrentDirectoryURL calls the underlying SetCurrentDirectoryURL.
+// SetCurrentDirectoryURL wraps the corresponding Objective-C method.
 func (x *Task) SetCurrentDirectoryURL(currentDirectoryURL string) {
-	x.inner.SetCurrentDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(currentDirectoryURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentDirectoryURL:"), rt.FileURL(currentDirectoryURL))
 }
 
-// LaunchRequirementData calls the underlying LaunchRequirementData.
+// LaunchRequirementData wraps the corresponding Objective-C method.
 func (x *Task) LaunchRequirementData() *Data {
-	_r := x.inner.LaunchRequirementData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchRequirementData"))
+	return DataFromID(_r)
 }
 
-// SetLaunchRequirementData calls the underlying SetLaunchRequirementData.
-func (x *Task) SetLaunchRequirementData(launchRequirementData *raw.NSData) {
-	x.inner.SetLaunchRequirementData(launchRequirementData)
+// SetLaunchRequirementData wraps the corresponding Objective-C method.
+func (x *Task) SetLaunchRequirementData(launchRequirementData *Data) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaunchRequirementData:"), objref.IDOf(launchRequirementData))
 }
 
-// StandardInput calls the underlying StandardInput.
-func (x *Task) StandardInput() objc.ID {
-	return x.inner.StandardInput()
+// StandardInput wraps the corresponding Objective-C method.
+func (x *Task) StandardInput() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardInput"))
+	return obj.Wrap(_r)
 }
 
-// SetStandardInput calls the underlying SetStandardInput.
-func (x *Task) SetStandardInput(standardInput objc.ID) {
-	x.inner.SetStandardInput(standardInput)
+// SetStandardInput wraps the corresponding Objective-C method.
+func (x *Task) SetStandardInput(standardInput obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 }
 
-// StandardOutput calls the underlying StandardOutput.
-func (x *Task) StandardOutput() objc.ID {
-	return x.inner.StandardOutput()
+// StandardOutput wraps the corresponding Objective-C method.
+func (x *Task) StandardOutput() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardOutput"))
+	return obj.Wrap(_r)
 }
 
-// SetStandardOutput calls the underlying SetStandardOutput.
-func (x *Task) SetStandardOutput(standardOutput objc.ID) {
-	x.inner.SetStandardOutput(standardOutput)
+// SetStandardOutput wraps the corresponding Objective-C method.
+func (x *Task) SetStandardOutput(standardOutput obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 }
 
-// StandardError calls the underlying StandardError.
-func (x *Task) StandardError() objc.ID {
-	return x.inner.StandardError()
+// StandardError wraps the corresponding Objective-C method.
+func (x *Task) StandardError() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardError"))
+	return obj.Wrap(_r)
 }
 
-// SetStandardError calls the underlying SetStandardError.
-func (x *Task) SetStandardError(standardError objc.ID) {
-	x.inner.SetStandardError(standardError)
+// SetStandardError wraps the corresponding Objective-C method.
+func (x *Task) SetStandardError(standardError obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 }
 
-// ProcessIdentifier calls the underlying ProcessIdentifier.
+// ProcessIdentifier wraps the corresponding Objective-C method.
 func (x *Task) ProcessIdentifier() int {
-	return x.inner.ProcessIdentifier()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processIdentifier"))
+	return _r
 }
 
-// IsRunning calls the underlying IsRunning.
+// IsRunning wraps the corresponding Objective-C method.
 func (x *Task) IsRunning() bool {
-	return x.inner.IsRunning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
-// TerminationStatus calls the underlying TerminationStatus.
+// TerminationStatus wraps the corresponding Objective-C method.
 func (x *Task) TerminationStatus() int {
-	return x.inner.TerminationStatus()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("terminationStatus"))
+	return _r
 }
 
-// TerminationReason calls the underlying TerminationReason.
-func (x *Task) TerminationReason() NSTaskTerminationReason {
-	return NSTaskTerminationReason(x.inner.TerminationReason())
+// TerminationReason wraps the corresponding Objective-C method.
+func (x *Task) TerminationReason() TaskTerminationReason {
+	_r := objc.Send[TaskTerminationReason](objref.IDOf(x), objc.RegisterName("terminationReason"))
+	return _r
 }
 
-// TerminationHandler calls the underlying TerminationHandler.
-func (x *Task) TerminationHandler() objc.Block {
-	return x.inner.TerminationHandler()
-}
-
+// SetTerminationHandler wraps the corresponding Objective-C method.
+//
 // SetTerminationHandler blocks until the operation completes or ctx is cancelled.
-func (x *Task) SetTerminationHandler(ctx context.Context) (*Task, error) {
+func (x *Task) SetTerminationHandler(ctx context.Context) (result *Task, err error) {
 	type _result struct {
 		val *Task
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetTerminationHandler(func(_p0 *raw.NSTask) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Task{inner: _p0}
-		}
+		_o.val = TaskFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTerminationHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -305,62 +314,41 @@ func (x *Task) SetTerminationHandler(ctx context.Context) (*Task, error) {
 	}
 }
 
-// QualityOfService calls the underlying QualityOfService.
-func (x *Task) QualityOfService() NSQualityOfService {
-	return NSQualityOfService(x.inner.QualityOfService())
+// QualityOfService wraps the corresponding Objective-C method.
+func (x *Task) QualityOfService() QualityOfService {
+	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
+	return _r
 }
 
-// SetQualityOfService calls the underlying SetQualityOfService.
-func (x *Task) SetQualityOfService(qualityOfService NSQualityOfService) {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+// SetQualityOfService wraps the corresponding Objective-C method.
+func (x *Task) SetQualityOfService(qualityOfService QualityOfService) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 }
 
-// WaitUntilExit calls the underlying WaitUntilExit.
+// WaitUntilExit wraps the corresponding Objective-C method.
 func (x *Task) WaitUntilExit() {
-	x.inner.WaitUntilExit()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilExit"))
 }
 
-// Launch calls the underlying Launch.
+// Launch wraps the corresponding Objective-C method.
 func (x *Task) Launch() {
-	x.inner.Launch()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launch"))
 }
-
-// LaunchPath calls the underlying LaunchPath.
-func (x *Task) LaunchPath() unsafe.Pointer {
-	return x.inner.LaunchPath()
-}
-
-// SetLaunchPath calls the underlying SetLaunchPath.
-func (x *Task) SetLaunchPath(launchPath unsafe.Pointer) {
-	x.inner.SetLaunchPath(launchPath)
-}
-
-// CurrentDirectoryPath calls the underlying CurrentDirectoryPath.
-func (x *Task) CurrentDirectoryPath() unsafe.Pointer {
-	return x.inner.CurrentDirectoryPath()
-}
-
-// SetCurrentDirectoryPath calls the underlying SetCurrentDirectoryPath.
-func (x *Task) SetCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer) {
-	x.inner.SetCurrentDirectoryPath(currentDirectoryPath)
-}
-
-func (x *Task) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Taskable is the interface implemented by [Task], for mocking and DI.
 type Taskable interface {
-	Unwrap() *raw.NSTask
+	obj.Object
 	WithExecutableURL(executableURL string) *Task
 	WithArguments(items ...StringProvider) *Task
-	WithEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString]) *Task
+	WithEnvironment(environment obj.Object) *Task
 	WithCurrentDirectoryURL(currentDirectoryURL string) *Task
 	WithLaunchRequirementData(launchRequirementData DataProvider) *Task
-	WithStandardInput(standardInput objc.ID) *Task
-	WithStandardOutput(standardOutput objc.ID) *Task
-	WithStandardError(standardError objc.ID) *Task
-	WithTerminationHandler(terminationHandler func(*raw.NSTask)) *Task
-	WithQualityOfService(qualityOfService NSQualityOfService) *Task
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Task
+	WithStandardInput(standardInput obj.Object) *Task
+	WithStandardOutput(standardOutput obj.Object) *Task
+	WithStandardError(standardError obj.Object) *Task
+	WithTerminationHandler(terminationHandler func(obj.Object)) *Task
+	WithQualityOfService(qualityOfService QualityOfService) *Task
+	WithScriptingProperties(scriptingProperties obj.Object) *Task
 	LaunchAndReturnError() error
 	Interrupt()
 	Terminate()
@@ -369,33 +357,28 @@ type Taskable interface {
 	ExecutableURL() *URL
 	SetExecutableURL(executableURL string)
 	Arguments() []string
-	SetArguments(arguments ...StringProvider)
-	Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString]
-	SetEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString])
+	SetArguments(arguments []string)
+	Environment() obj.Object
+	SetEnvironment(environment obj.Object)
 	CurrentDirectoryURL() *URL
 	SetCurrentDirectoryURL(currentDirectoryURL string)
 	LaunchRequirementData() *Data
-	SetLaunchRequirementData(launchRequirementData *raw.NSData)
-	StandardInput() objc.ID
-	SetStandardInput(standardInput objc.ID)
-	StandardOutput() objc.ID
-	SetStandardOutput(standardOutput objc.ID)
-	StandardError() objc.ID
-	SetStandardError(standardError objc.ID)
+	SetLaunchRequirementData(launchRequirementData *Data)
+	StandardInput() obj.Object
+	SetStandardInput(standardInput obj.Object)
+	StandardOutput() obj.Object
+	SetStandardOutput(standardOutput obj.Object)
+	StandardError() obj.Object
+	SetStandardError(standardError obj.Object)
 	ProcessIdentifier() int
 	IsRunning() bool
 	TerminationStatus() int
-	TerminationReason() NSTaskTerminationReason
-	TerminationHandler() objc.Block
+	TerminationReason() TaskTerminationReason
 	SetTerminationHandler(ctx context.Context) (*Task, error)
-	QualityOfService() NSQualityOfService
-	SetQualityOfService(qualityOfService NSQualityOfService)
+	QualityOfService() QualityOfService
+	SetQualityOfService(qualityOfService QualityOfService)
 	WaitUntilExit()
 	Launch()
-	LaunchPath() unsafe.Pointer
-	SetLaunchPath(launchPath unsafe.Pointer)
-	CurrentDirectoryPath() unsafe.Pointer
-	SetCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer)
 }
 
 var _ Taskable = (*Task)(nil)

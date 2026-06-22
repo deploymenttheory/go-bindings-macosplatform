@@ -5,76 +5,96 @@
 package inputmethodkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/inputmethodkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The IMKServer class manages client connections to your input method. When you write the main function for your input method, you create an IMKServer object. You should never need to override this class.
+// Server is an idiomatic wrapper over the Objective-C class IMKServer.
 //
-// Server wraps [raw.IMKServer] with a fluent Go API.
+// The IMKServer class manages client connections to your input method. When you write the main function for your input method, you create an IMKServer object. You should never need to override this class.
 type Server struct {
-	inner *raw.IMKServer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IMKServer].
-func (x *Server) Unwrap() *raw.IMKServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Server) ID() objc.ID { return x.inner.Ptr() }
-
-// ServerFromID adopts an existing object pointer as a Server (nil for 0).
+// ServerFromID adopts an existing Objective-C object as a Server
+// (nil for 0), retaining it and registering a release finalizer.
 func ServerFromID(id objc.ID) *Server {
 	if id == 0 {
 		return nil
 	}
-	return &Server{inner: raw.IMKServerFromID(id)}
+	x := &Server{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a server object from property list information contained in the provided bundle.
-//
-// NewServerWithNameBundleIdentifier creates a new [Server].
+// serverAdopt wraps an Objective-C object that this code just created as a
+// Server (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func serverAdopt(id objc.ID) *Server {
+	if id == 0 {
+		return nil
+	}
+	x := &Server{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Server) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Server) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Server) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Server) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewServerWithNameBundleIdentifier creates and returns a server object from property list information contained in the provided bundle.
 func NewServerWithNameBundleIdentifier(name string, bundleIdentifier string) *Server {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKServer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundleIdentifier:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr())
-	return &Server{inner: raw.IMKServerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKServer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundleIdentifier:"), purego.NSString(name), purego.NSString(bundleIdentifier))
+	return serverAdopt(_id)
 }
 
-// Creates and returns a server object initialized with the provided parameters.
-//
-// NewServerWithNameControllerClassDelegateClass creates a new [Server].
-func NewServerWithNameControllerClassDelegateClass(name string, controllerClassID objc.Class, delegateClassID objc.Class) *Server {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKServer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:controllerClass:delegateClass:"), foundation.NSStringStringWithUTF8String(name).Ptr(), controllerClassID, delegateClassID)
-	return &Server{inner: raw.IMKServerFromID(_id)}
+// Bundle returns an NSBundle object for the input method.
+func (x *Server) Bundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
+	return obj.Wrap(_r)
 }
 
-// Returns an NSBundle object for the input method.
-//
-// Bundle calls the underlying Bundle.
-func (x *Server) Bundle() *foundation.NSBundle {
-	return x.inner.Bundle()
-}
-
-// @method @abstract   Call this before terminating a palette IM. @discussion Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns NO the palette should not terminate.
-//
-// PaletteWillTerminate calls the underlying PaletteWillTerminate.
+// PaletteWillTerminate call this before terminating a palette IM. Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns NO the palette should not terminate.
 func (x *Server) PaletteWillTerminate() bool {
-	return x.inner.PaletteWillTerminate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("paletteWillTerminate"))
+	return _r
 }
 
-// @method @abstract   Returns a BOOL indicating whether or not the last key press was a dead key.
-//
-// LastKeyEventWasDeadKey calls the underlying LastKeyEventWasDeadKey.
+// LastKeyEventWasDeadKey returns a BOOL indicating whether or not the last key press was a dead key.
 func (x *Server) LastKeyEventWasDeadKey() bool {
-	return x.inner.LastKeyEventWasDeadKey()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lastKeyEventWasDeadKey"))
+	return _r
 }
 
 // Serverable is the interface implemented by [Server], for mocking and DI.
 type Serverable interface {
-	Unwrap() *raw.IMKServer
-	Bundle() *foundation.NSBundle
+	obj.Object
+	Bundle() obj.Object
 	PaletteWillTerminate() bool
 	LastKeyEventWasDeadKey() bool
 }

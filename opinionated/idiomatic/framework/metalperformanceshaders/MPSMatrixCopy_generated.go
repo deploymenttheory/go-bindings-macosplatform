@@ -5,125 +5,93 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that can perform multiple matrix copy operations.
+// MatrixCopy is an idiomatic wrapper over the Objective-C class MPSMatrixCopy.
 //
-// MatrixCopy wraps [raw.MPSMatrixCopy] with a fluent Go API.
+// It embeds [Kernel], promoting that type's methods.
+//
+// A class that can perform multiple matrix copy operations.
 type MatrixCopy struct {
-	inner *raw.MPSMatrixCopy
+	Kernel
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixCopy].
-func (x *MatrixCopy) Unwrap() *raw.MPSMatrixCopy { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixCopy) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixCopyFromID adopts an existing object pointer as a MatrixCopy (nil for 0).
+// MatrixCopyFromID adopts an existing Objective-C object as a MatrixCopy
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixCopyFromID(id objc.ID) *MatrixCopy {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixCopy{inner: raw.MPSMatrixCopyFromID(id)}
-}
-
-// @abstract   Initialize a copy operator @param      copyRows        The number of rows to copy for each copy operation @param      copyColumns     The number of matrix columns to copy in each copy operation @param      sourcesAreTransposed       If YES, the sources are in column major storage order @param      destinationsAreTransposed  If YES, the destinations are in column major storage order
-//
-// NewMatrixCopyWithDeviceCopyRowsCopyColumnsSourcesAreTransposedDestinationsAreTransposed creates a new [MatrixCopy].
-func NewMatrixCopyWithDeviceCopyRowsCopyColumnsSourcesAreTransposedDestinationsAreTransposed(device metal.MTLDevice, copyRows uint, copyColumns uint, sourcesAreTransposed bool, destinationsAreTransposed bool) *MatrixCopy {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopy")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:copyRows:copyColumns:sourcesAreTransposed:destinationsAreTransposed:"), device, copyRows, copyColumns, sourcesAreTransposed, destinationsAreTransposed)
-	return &MatrixCopy{inner: raw.MPSMatrixCopyFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixLookUpAndCopy @param      device      The MTLDevice on which to make the MPSMatrixLookUpAndCopy @return     A new MPSMatrixLookUpAndCopy object, or nil if failure.
-//
-// NewMatrixCopyWithCoderDevice creates a new [MatrixCopy].
-func NewMatrixCopyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixCopy {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopy")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixCopy{inner: raw.MPSMatrixCopyFromID(_id)}
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixCopy) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopy {
-	x.inner.MPSKernel.SetOptions(options)
+	x := &MatrixCopy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// matrixCopyAdopt wraps an Objective-C object that this code just created as a
+// MatrixCopy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixCopyAdopt(id objc.ID) *MatrixCopy {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixCopy{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatrixCopy creates a new MatrixCopy.
+func NewMatrixCopy() *MatrixCopy {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopy")), objc.RegisterName("new"))
+	return matrixCopyAdopt(_id)
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *MatrixCopy) WithLabel(label string) *MatrixCopy {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Encode the copy operations to the command buffer @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded kernel. @param      copyDescriptor      The descriptor that defines the copy operator
-//
-// EncodeToCommandBufferCopyDescriptor calls the underlying EncodeToCommandBufferCopyDescriptor.
-func (x *MatrixCopy) EncodeToCommandBufferCopyDescriptor(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor) {
-	x.inner.EncodeToCommandBufferCopyDescriptor(commandBuffer, copyDescriptor)
+// CopyRows the number of rows to copy for each copy operation
+func (x *MatrixCopy) CopyRows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyRows"))
+	return _r
 }
 
-// @abstract   Encode the copy operations to the command buffer. This of the encode version support permuting the outputs with custom vectors of indices. The permutations are defined on the destination indices and are the same for each copy operation. @param      commandBuffer           A valid MTLCommandBuffer to receive the encoded kernel. @param      copyDescriptor          The descriptor that defines the copy operator @param      rowPermuteIndices       If not nil then the output row index is 'rowPermuteIndices[i] + rowOffset' instead of 'i + rowOffset', where 'i' is the local row index of the copy operation. Note: if destinationsAreTransposed is set to YES then the destination transpose is performed before permutations. @param      rowPermuteOffset        Offset in numbers to apply to the 'rowPermuteIndices' vector. @param      columnPermuteIndices    If not nil then the output column index is 'columnPermuteIndices[i] + columnOffset' instead of 'i + columnOffset', where 'i' is the local column index of the copy operation. Note: if destinationsAreTransposed is set to YES then the destination transpose is performed before permutations. @param      columnPermuteOffset     Offset in numbers to apply to the 'columnPermuteIndices' vector.
-//
-// EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset calls the underlying EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset.
-func (x *MatrixCopy) EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor, rowPermuteIndices *mpscore.MPSVector, rowPermuteOffset uint, columnPermuteIndices *mpscore.MPSVector, columnPermuteOffset uint) {
-	x.inner.EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer, copyDescriptor, rowPermuteIndices, rowPermuteOffset, columnPermuteIndices, columnPermuteOffset)
+// CopyColumns the number of columns to copy for each copy operation
+func (x *MatrixCopy) CopyColumns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyColumns"))
+	return _r
 }
 
-// @abstract   The number of rows to copy for each copy operation
-//
-// CopyRows calls the underlying CopyRows.
-func (x *MatrixCopy) CopyRows() uint {
-	return x.inner.CopyRows()
-}
-
-// @abstract   The number of columns to copy for each copy operation
-//
-// CopyColumns calls the underlying CopyColumns.
-func (x *MatrixCopy) CopyColumns() uint {
-	return x.inner.CopyColumns()
-}
-
-// @abstract   If YES, the sources are in row major storage order
-//
-// SourcesAreTransposed calls the underlying SourcesAreTransposed.
+// SourcesAreTransposed if YES, the sources are in row major storage order
 func (x *MatrixCopy) SourcesAreTransposed() bool {
-	return x.inner.SourcesAreTransposed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sourcesAreTransposed"))
+	return _r
 }
 
-// @abstract   If YES, the destinations are in row major storage order
-//
-// DestinationsAreTransposed calls the underlying DestinationsAreTransposed.
+// DestinationsAreTransposed if YES, the destinations are in row major storage order
 func (x *MatrixCopy) DestinationsAreTransposed() bool {
-	return x.inner.DestinationsAreTransposed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("destinationsAreTransposed"))
+	return _r
 }
-
-func (x *MatrixCopy) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // MatrixCopyable is the interface implemented by [MatrixCopy], for mocking and DI.
 type MatrixCopyable interface {
-	Unwrap() *raw.MPSMatrixCopy
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixCopy
+	obj.Object
 	WithLabel(label string) *MatrixCopy
-	EncodeToCommandBufferCopyDescriptor(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor)
-	EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer metal.MTLCommandBuffer, copyDescriptor *mpsmatrix.MPSMatrixCopyDescriptor, rowPermuteIndices *mpscore.MPSVector, rowPermuteOffset uint, columnPermuteIndices *mpscore.MPSVector, columnPermuteOffset uint)
-	CopyRows() uint
-	CopyColumns() uint
+	CopyRows() int
+	CopyColumns() int
 	SourcesAreTransposed() bool
 	DestinationsAreTransposed() bool
 }
 
 var _ MatrixCopyable = (*MatrixCopy)(nil)
+
+var _ KernelProvider = (*MatrixCopy)(nil)

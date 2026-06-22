@@ -6,65 +6,71 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Cluster Refrigerator And Temperature Controlled Cabinet Mode Attributes and commands for selecting a mode from a list of supported options.
+// MTRClusterRefrigeratorAndTemperatureControlledCabinetMode is an idiomatic wrapper over the Objective-C class MTRClusterRefrigeratorAndTemperatureControlledCabinetMode.
 //
-// MTRClusterRefrigeratorAndTemperatureControlledCabinetMode wraps [raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode] with a fluent Go API.
+// It embeds [MTRGenericCluster], promoting that type's methods.
+//
+// Cluster Refrigerator And Temperature Controlled Cabinet Mode Attributes and commands for selecting a mode from a list of supported options.
 type MTRClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
-	inner *raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode].
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) Unwrap() *raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID adopts an existing object pointer as a MTRClusterRefrigeratorAndTemperatureControlledCabinetMode (nil for 0).
+// MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID adopts an existing Objective-C object as a MTRClusterRefrigeratorAndTemperatureControlledCabinetMode
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc.ID) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{inner: raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id)}
+	x := &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+// mTRClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterRefrigeratorAndTemperatureControlledCabinetMode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt(id objc.ID) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRefrigeratorAndTemperatureControlledCabinetMode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterRefrigeratorAndTemperatureControlledCabinetModeAdopt(_id)
+}
+
+// ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
-// NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue creates a new [MTRClusterRefrigeratorAndTemperatureControlledCabinetMode].
-func NewMTRClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterRefrigeratorAndTemperatureControlledCabinetMode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterRefrigeratorAndTemperatureControlledCabinetMode{inner: raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(_id)}
-}
-
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, err error) {
 	type _result struct {
 		val *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -74,60 +80,63 @@ func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToMode
 	}
 }
 
-// ReadAttributeSupportedModesWithParams calls the underlying ReadAttributeSupportedModesWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedModesWithParams(params)
+// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentModeWithParams calls the underlying ReadAttributeCurrentModeWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentModeWithParams(params)
+// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable is the interface implemented by [MTRClusterRefrigeratorAndTemperatureControlledCabinetMode], for mocking and DI.
 type MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable interface {
-	Unwrap() *raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode
-	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, error)
-	ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, error)
+	ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)

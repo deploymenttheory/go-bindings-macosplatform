@@ -10,143 +10,153 @@ import (
 )
 
 // Classifications that reflect the type of identity document.
-type PKAddIdentityDocumentType int64
+type AddIdentityDocumentType int64
 
 const (
 	// A generic pass that represents a person’s identification.
-	PKAddIdentityDocumentTypeIDCard PKAddIdentityDocumentType = 0
+	AddIdentityDocumentTypeIDCard AddIdentityDocumentType = 0
 	// A pass that represents a driver’s license or government-issued identification.
-	PKAddIdentityDocumentTypeMDL PKAddIdentityDocumentType = 1
+	AddIdentityDocumentTypeMDL AddIdentityDocumentType = 1
 	// A pass to use for personal identification.
-	PKAddIdentityDocumentTypePhotoID PKAddIdentityDocumentType = 2
+	AddIdentityDocumentTypePhotoID AddIdentityDocumentType = 2
 )
 
-func (e PKAddIdentityDocumentType) String() string {
+// String returns the AddIdentityDocumentType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddIdentityDocumentType) String() string {
 	switch e {
-	case PKAddIdentityDocumentTypeIDCard:
-		return "PKAddIdentityDocumentTypeIDCard"
-	case PKAddIdentityDocumentTypeMDL:
-		return "PKAddIdentityDocumentTypeMDL"
-	case PKAddIdentityDocumentTypePhotoID:
-		return "PKAddIdentityDocumentTypePhotoID"
+	case AddIdentityDocumentTypeIDCard:
+		return "AddIdentityDocumentTypeIDCard"
+	case AddIdentityDocumentTypeMDL:
+		return "AddIdentityDocumentTypeMDL"
+	case AddIdentityDocumentTypePhotoID:
+		return "AddIdentityDocumentTypePhotoID"
 	default:
-		return fmt.Sprintf("PKAddIdentityDocumentType(%d)", int64(e))
+		return fmt.Sprintf("AddIdentityDocumentType(%d)", int64(e))
 	}
 }
 
 // The type of payment pass.
-type PKAddPaymentPassStyle int64
+type AddPaymentPassStyle int64
 
 const (
 	// A pass used by a customer for purchasing.
-	PKAddPaymentPassStylePayment PKAddPaymentPassStyle = 0
+	AddPaymentPassStylePayment AddPaymentPassStyle = 0
 	// A pass that authorizes the user to access a location or resource.
-	PKAddPaymentPassStyleAccess PKAddPaymentPassStyle = 1
+	AddPaymentPassStyleAccess AddPaymentPassStyle = 1
 )
 
-func (e PKAddPaymentPassStyle) String() string {
+// String returns the AddPaymentPassStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddPaymentPassStyle) String() string {
 	switch e {
-	case PKAddPaymentPassStylePayment:
-		return "PKAddPaymentPassStylePayment"
-	case PKAddPaymentPassStyleAccess:
-		return "PKAddPaymentPassStyleAccess"
+	case AddPaymentPassStylePayment:
+		return "AddPaymentPassStylePayment"
+	case AddPaymentPassStyleAccess:
+		return "AddPaymentPassStyleAccess"
 	default:
-		return fmt.Sprintf("PKAddPaymentPassStyle(%d)", int64(e))
+		return fmt.Sprintf("AddPaymentPassStyle(%d)", int64(e))
 	}
 }
 
 // Error codes for problems that occur when you add a secure element passes.
-type PKAddSecureElementPassErrorCode int64
+type AddSecureElementPassErrorCode int64
 
 const (
-	PKAddSecureElementPassGenericError PKAddSecureElementPassErrorCode = 0
+	AddSecureElementPassGenericError AddSecureElementPassErrorCode = 0
 	// The system canceled adding the pass due to an unknown failure.
-	PKAddSecureElementPassUnknownError               PKAddSecureElementPassErrorCode = 0
-	PKAddSecureElementPassUserCanceledError          PKAddSecureElementPassErrorCode = 1
-	PKAddSecureElementPassUnavailableError           PKAddSecureElementPassErrorCode = 2
-	PKAddSecureElementPassInvalidConfigurationError  PKAddSecureElementPassErrorCode = 3
-	PKAddSecureElementPassDeviceNotSupportedError    PKAddSecureElementPassErrorCode = 4
-	PKAddSecureElementPassDeviceNotReadyError        PKAddSecureElementPassErrorCode = 5
-	PKAddSecureElementPassOSVersionNotSupportedError PKAddSecureElementPassErrorCode = 6
+	AddSecureElementPassUnknownError               AddSecureElementPassErrorCode = 0
+	AddSecureElementPassUserCanceledError          AddSecureElementPassErrorCode = 1
+	AddSecureElementPassUnavailableError           AddSecureElementPassErrorCode = 2
+	AddSecureElementPassInvalidConfigurationError  AddSecureElementPassErrorCode = 3
+	AddSecureElementPassDeviceNotSupportedError    AddSecureElementPassErrorCode = 4
+	AddSecureElementPassDeviceNotReadyError        AddSecureElementPassErrorCode = 5
+	AddSecureElementPassOSVersionNotSupportedError AddSecureElementPassErrorCode = 6
 )
 
-func (e PKAddSecureElementPassErrorCode) String() string {
+// String returns the AddSecureElementPassErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddSecureElementPassErrorCode) String() string {
 	switch e {
-	case PKAddSecureElementPassGenericError:
-		return "PKAddSecureElementPassGenericError"
-	case PKAddSecureElementPassUserCanceledError:
-		return "PKAddSecureElementPassUserCanceledError"
-	case PKAddSecureElementPassUnavailableError:
-		return "PKAddSecureElementPassUnavailableError"
-	case PKAddSecureElementPassInvalidConfigurationError:
-		return "PKAddSecureElementPassInvalidConfigurationError"
-	case PKAddSecureElementPassDeviceNotSupportedError:
-		return "PKAddSecureElementPassDeviceNotSupportedError"
-	case PKAddSecureElementPassDeviceNotReadyError:
-		return "PKAddSecureElementPassDeviceNotReadyError"
-	case PKAddSecureElementPassOSVersionNotSupportedError:
-		return "PKAddSecureElementPassOSVersionNotSupportedError"
+	case AddSecureElementPassGenericError:
+		return "AddSecureElementPassGenericError"
+	case AddSecureElementPassUserCanceledError:
+		return "AddSecureElementPassUserCanceledError"
+	case AddSecureElementPassUnavailableError:
+		return "AddSecureElementPassUnavailableError"
+	case AddSecureElementPassInvalidConfigurationError:
+		return "AddSecureElementPassInvalidConfigurationError"
+	case AddSecureElementPassDeviceNotSupportedError:
+		return "AddSecureElementPassDeviceNotSupportedError"
+	case AddSecureElementPassDeviceNotReadyError:
+		return "AddSecureElementPassDeviceNotReadyError"
+	case AddSecureElementPassOSVersionNotSupportedError:
+		return "AddSecureElementPassOSVersionNotSupportedError"
 	default:
-		return fmt.Sprintf("PKAddSecureElementPassErrorCode(%d)", int64(e))
+		return fmt.Sprintf("AddSecureElementPassErrorCode(%d)", int64(e))
 	}
 }
 
 // The kind of add action that the system performs with a pass.
-type PKAddShareablePassConfigurationPrimaryAction uint64
+type AddShareablePassConfigurationPrimaryAction uint64
 
 const (
 	// A constant that indicates the system adds a pass to a device.
-	PKAddShareablePassConfigurationPrimaryActionAdd PKAddShareablePassConfigurationPrimaryAction = 0
+	AddShareablePassConfigurationPrimaryActionAdd AddShareablePassConfigurationPrimaryAction = 0
 	// A constant that indicates the system shares the pass with another user.
-	PKAddShareablePassConfigurationPrimaryActionShare PKAddShareablePassConfigurationPrimaryAction = 1
+	AddShareablePassConfigurationPrimaryActionShare AddShareablePassConfigurationPrimaryAction = 1
 )
 
-func (e PKAddShareablePassConfigurationPrimaryAction) String() string {
+// String returns the AddShareablePassConfigurationPrimaryAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddShareablePassConfigurationPrimaryAction) String() string {
 	switch e {
-	case PKAddShareablePassConfigurationPrimaryActionAdd:
-		return "PKAddShareablePassConfigurationPrimaryActionAdd"
-	case PKAddShareablePassConfigurationPrimaryActionShare:
-		return "PKAddShareablePassConfigurationPrimaryActionShare"
+	case AddShareablePassConfigurationPrimaryActionAdd:
+		return "AddShareablePassConfigurationPrimaryActionAdd"
+	case AddShareablePassConfigurationPrimaryActionShare:
+		return "AddShareablePassConfigurationPrimaryActionShare"
 	default:
-		return fmt.Sprintf("PKAddShareablePassConfigurationPrimaryAction(%d)", int64(e))
+		return fmt.Sprintf("AddShareablePassConfigurationPrimaryAction(%d)", int64(e))
 	}
 }
 
 // Billing or shipping address fields.
 // Bitmask — values may be combined with |.
-type PKAddressField uint64
+type AddressField uint64
 
 const (
 	// No fields.
-	PKAddressFieldNone PKAddressField = 0
+	AddressFieldNone AddressField = 0
 	// The buyer’s full street address, including name, street, city, state or province, postal code, and country or region.
-	PKAddressFieldPostalAddress PKAddressField = 1
+	AddressFieldPostalAddress AddressField = 1
 	// The buyer’s telephone number.
-	PKAddressFieldPhone PKAddressField = 2
+	AddressFieldPhone AddressField = 2
 	// The buyer’s email address.
-	PKAddressFieldEmail PKAddressField = 4
+	AddressFieldEmail AddressField = 4
 	// The buyer’s first and last name.
-	PKAddressFieldName PKAddressField = 8
+	AddressFieldName AddressField = 8
 	// All fields.
-	PKAddressFieldAll PKAddressField = 15
+	AddressFieldAll AddressField = 15
 )
 
-func (e PKAddressField) String() string {
+// String returns the AddressField constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddressField) String() string {
 	var parts []string
-	if e&PKAddressFieldPostalAddress != 0 {
-		parts = append(parts, "PKAddressFieldPostalAddress")
+	if e&AddressFieldPostalAddress != 0 {
+		parts = append(parts, "AddressFieldPostalAddress")
 	}
-	if e&PKAddressFieldPhone != 0 {
-		parts = append(parts, "PKAddressFieldPhone")
+	if e&AddressFieldPhone != 0 {
+		parts = append(parts, "AddressFieldPhone")
 	}
-	if e&PKAddressFieldEmail != 0 {
-		parts = append(parts, "PKAddressFieldEmail")
+	if e&AddressFieldEmail != 0 {
+		parts = append(parts, "AddressFieldEmail")
 	}
-	if e&PKAddressFieldName != 0 {
-		parts = append(parts, "PKAddressFieldName")
+	if e&AddressFieldName != 0 {
+		parts = append(parts, "AddressFieldName")
 	}
-	if e&PKAddressFieldAll != 0 {
-		parts = append(parts, "PKAddressFieldAll")
+	if e&AddressFieldAll != 0 {
+		parts = append(parts, "AddressFieldAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -155,139 +165,114 @@ func (e PKAddressField) String() string {
 }
 
 // Values you use to enable or disable Apple Pay Later for a specific transaction.
-type PKApplePayLaterAvailability int64
+type ApplePayLaterAvailability int64
 
 const (
 	// Apple Pay Later is available.
-	PKApplePayLaterAvailable PKApplePayLaterAvailability = 0
+	ApplePayLaterAvailable ApplePayLaterAvailability = 0
 	// Apple Pay Later is unavailable because one or more ineligible or prohibited items are in the shopping cart, such as gift cards.
-	PKApplePayLaterUnavailableItemIneligible PKApplePayLaterAvailability = 1
+	ApplePayLaterUnavailableItemIneligible ApplePayLaterAvailability = 1
 	// Apple Pay Later is unavailable because there’s a recurring payment or subscription in the shopping cart.
-	PKApplePayLaterUnavailableRecurringTransaction PKApplePayLaterAvailability = 2
+	ApplePayLaterUnavailableRecurringTransaction ApplePayLaterAvailability = 2
 )
 
-func (e PKApplePayLaterAvailability) String() string {
+// String returns the ApplePayLaterAvailability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplePayLaterAvailability) String() string {
 	switch e {
-	case PKApplePayLaterAvailable:
-		return "PKApplePayLaterAvailable"
-	case PKApplePayLaterUnavailableItemIneligible:
-		return "PKApplePayLaterUnavailableItemIneligible"
-	case PKApplePayLaterUnavailableRecurringTransaction:
-		return "PKApplePayLaterUnavailableRecurringTransaction"
+	case ApplePayLaterAvailable:
+		return "ApplePayLaterAvailable"
+	case ApplePayLaterUnavailableItemIneligible:
+		return "ApplePayLaterUnavailableItemIneligible"
+	case ApplePayLaterUnavailableRecurringTransaction:
+		return "ApplePayLaterUnavailableRecurringTransaction"
 	default:
-		return fmt.Sprintf("PKApplePayLaterAvailability(%d)", int64(e))
+		return fmt.Sprintf("ApplePayLaterAvailability(%d)", int64(e))
 	}
 }
 
-// The result of an attempt to suppress automatic pass presentation.
-type PKAutomaticPassPresentationSuppressionResult uint64
+type BarcodeEventConfigurationDataType int64
 
 const (
-	// The device doesn’t support the suppression of automatic pass presentation.
-	PKAutomaticPassPresentationSuppressionResultNotSupported PKAutomaticPassPresentationSuppressionResult = 0
-	// The device is already presenting passes.
-	PKAutomaticPassPresentationSuppressionResultAlreadyPresenting PKAutomaticPassPresentationSuppressionResult = 1
-	// The user prevented the suppression, or an internal error occurred.
-	PKAutomaticPassPresentationSuppressionResultDenied PKAutomaticPassPresentationSuppressionResult = 2
-	// The system canceled the suppression before calling the response handler.
-	PKAutomaticPassPresentationSuppressionResultCancelled PKAutomaticPassPresentationSuppressionResult = 3
-	// Suppression of automatic presentation successful.
-	PKAutomaticPassPresentationSuppressionResultSuccess PKAutomaticPassPresentationSuppressionResult = 4
+	BarcodeEventConfigurationDataTypeUnknown            BarcodeEventConfigurationDataType = 0
+	BarcodeEventConfigurationDataTypeSigningKeyMaterial BarcodeEventConfigurationDataType = 1
+	BarcodeEventConfigurationDataTypeSigningCertificate BarcodeEventConfigurationDataType = 2
 )
 
-func (e PKAutomaticPassPresentationSuppressionResult) String() string {
+// String returns the BarcodeEventConfigurationDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BarcodeEventConfigurationDataType) String() string {
 	switch e {
-	case PKAutomaticPassPresentationSuppressionResultNotSupported:
-		return "PKAutomaticPassPresentationSuppressionResultNotSupported"
-	case PKAutomaticPassPresentationSuppressionResultAlreadyPresenting:
-		return "PKAutomaticPassPresentationSuppressionResultAlreadyPresenting"
-	case PKAutomaticPassPresentationSuppressionResultDenied:
-		return "PKAutomaticPassPresentationSuppressionResultDenied"
-	case PKAutomaticPassPresentationSuppressionResultCancelled:
-		return "PKAutomaticPassPresentationSuppressionResultCancelled"
-	case PKAutomaticPassPresentationSuppressionResultSuccess:
-		return "PKAutomaticPassPresentationSuppressionResultSuccess"
+	case BarcodeEventConfigurationDataTypeUnknown:
+		return "BarcodeEventConfigurationDataTypeUnknown"
+	case BarcodeEventConfigurationDataTypeSigningKeyMaterial:
+		return "BarcodeEventConfigurationDataTypeSigningKeyMaterial"
+	case BarcodeEventConfigurationDataTypeSigningCertificate:
+		return "BarcodeEventConfigurationDataTypeSigningCertificate"
 	default:
-		return fmt.Sprintf("PKAutomaticPassPresentationSuppressionResult(%d)", int64(e))
-	}
-}
-
-type PKBarcodeEventConfigurationDataType int64
-
-const (
-	PKBarcodeEventConfigurationDataTypeUnknown            PKBarcodeEventConfigurationDataType = 0
-	PKBarcodeEventConfigurationDataTypeSigningKeyMaterial PKBarcodeEventConfigurationDataType = 1
-	PKBarcodeEventConfigurationDataTypeSigningCertificate PKBarcodeEventConfigurationDataType = 2
-)
-
-func (e PKBarcodeEventConfigurationDataType) String() string {
-	switch e {
-	case PKBarcodeEventConfigurationDataTypeUnknown:
-		return "PKBarcodeEventConfigurationDataTypeUnknown"
-	case PKBarcodeEventConfigurationDataTypeSigningKeyMaterial:
-		return "PKBarcodeEventConfigurationDataTypeSigningKeyMaterial"
-	case PKBarcodeEventConfigurationDataTypeSigningCertificate:
-		return "PKBarcodeEventConfigurationDataTypeSigningCertificate"
-	default:
-		return fmt.Sprintf("PKBarcodeEventConfigurationDataType(%d)", int64(e))
+		return fmt.Sprintf("BarcodeEventConfigurationDataType(%d)", int64(e))
 	}
 }
 
 // Values that describe errors that can occur while processing the disbursement.
-type PKDisbursementErrorCode int64
+type DisbursementErrorCode int64
 
 const (
-	PKDisbursementUnknownError                 PKDisbursementErrorCode = -1
-	PKDisbursementUnsupportedCardError         PKDisbursementErrorCode = 1
-	PKDisbursementRecipientContactInvalidError PKDisbursementErrorCode = 2
+	DisbursementUnknownError                 DisbursementErrorCode = -1
+	DisbursementUnsupportedCardError         DisbursementErrorCode = 1
+	DisbursementRecipientContactInvalidError DisbursementErrorCode = 2
 )
 
-func (e PKDisbursementErrorCode) String() string {
+// String returns the DisbursementErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DisbursementErrorCode) String() string {
 	switch e {
-	case PKDisbursementUnknownError:
-		return "PKDisbursementUnknownError"
-	case PKDisbursementUnsupportedCardError:
-		return "PKDisbursementUnsupportedCardError"
-	case PKDisbursementRecipientContactInvalidError:
-		return "PKDisbursementRecipientContactInvalidError"
+	case DisbursementUnknownError:
+		return "DisbursementUnknownError"
+	case DisbursementUnsupportedCardError:
+		return "DisbursementUnsupportedCardError"
+	case DisbursementRecipientContactInvalidError:
+		return "DisbursementRecipientContactInvalidError"
 	default:
-		return fmt.Sprintf("PKDisbursementErrorCode(%d)", int64(e))
+		return fmt.Sprintf("DisbursementErrorCode(%d)", int64(e))
 	}
 }
 
 // Capabilities for processing payment.
 // Bitmask — values may be combined with |.
-type PKMerchantCapability uint64
+type MerchantCapability uint64
 
 const (
 	// Support for the 3-D Secure protocol.
-	PKMerchantCapability3DS PKMerchantCapability = 1
+	MerchantCapability3DS MerchantCapability = 1
 	// Support for the EMV protocol.
-	PKMerchantCapabilityEMV PKMerchantCapability = 2
+	MerchantCapabilityEMV MerchantCapability = 2
 	// Support for credit cards.
-	PKMerchantCapabilityCredit PKMerchantCapability = 4
+	MerchantCapabilityCredit MerchantCapability = 4
 	// Support for debit cards.
-	PKMerchantCapabilityDebit PKMerchantCapability = 8
+	MerchantCapabilityDebit MerchantCapability = 8
 	// The value that indicates the merchant supports disbursing funds using Instant Funds Out.
-	PKMerchantCapabilityInstantFundsOut PKMerchantCapability = 128
+	MerchantCapabilityInstantFundsOut MerchantCapability = 128
 )
 
-func (e PKMerchantCapability) String() string {
+// String returns the MerchantCapability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MerchantCapability) String() string {
 	var parts []string
-	if e&PKMerchantCapability3DS != 0 {
-		parts = append(parts, "PKMerchantCapability3DS")
+	if e&MerchantCapability3DS != 0 {
+		parts = append(parts, "MerchantCapability3DS")
 	}
-	if e&PKMerchantCapabilityEMV != 0 {
-		parts = append(parts, "PKMerchantCapabilityEMV")
+	if e&MerchantCapabilityEMV != 0 {
+		parts = append(parts, "MerchantCapabilityEMV")
 	}
-	if e&PKMerchantCapabilityCredit != 0 {
-		parts = append(parts, "PKMerchantCapabilityCredit")
+	if e&MerchantCapabilityCredit != 0 {
+		parts = append(parts, "MerchantCapabilityCredit")
 	}
-	if e&PKMerchantCapabilityDebit != 0 {
-		parts = append(parts, "PKMerchantCapabilityDebit")
+	if e&MerchantCapabilityDebit != 0 {
+		parts = append(parts, "MerchantCapabilityDebit")
 	}
-	if e&PKMerchantCapabilityInstantFundsOut != 0 {
-		parts = append(parts, "PKMerchantCapabilityInstantFundsOut")
+	if e&MerchantCapabilityInstantFundsOut != 0 {
+		parts = append(parts, "MerchantCapabilityInstantFundsOut")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -296,427 +281,426 @@ func (e PKMerchantCapability) String() string {
 }
 
 // Errors that the PassKit framework uses.
-type PKPassKitErrorCode int64
+type PassKitErrorCode int64
 
 const (
-	PKUnknownError            PKPassKitErrorCode = -1
-	PKInvalidDataError        PKPassKitErrorCode = 1
-	PKUnsupportedVersionError PKPassKitErrorCode = 2
-	PKInvalidSignature        PKPassKitErrorCode = 3
-	PKNotEntitledError        PKPassKitErrorCode = 4
+	UnknownError            PassKitErrorCode = -1
+	InvalidDataError        PassKitErrorCode = 1
+	UnsupportedVersionError PassKitErrorCode = 2
+	InvalidSignature        PassKitErrorCode = 3
+	NotEntitledError        PassKitErrorCode = 4
 )
 
-func (e PKPassKitErrorCode) String() string {
+// String returns the PassKitErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PassKitErrorCode) String() string {
 	switch e {
-	case PKUnknownError:
-		return "PKUnknownError"
-	case PKInvalidDataError:
-		return "PKInvalidDataError"
-	case PKUnsupportedVersionError:
-		return "PKUnsupportedVersionError"
-	case PKInvalidSignature:
-		return "PKInvalidSignature"
-	case PKNotEntitledError:
-		return "PKNotEntitledError"
+	case UnknownError:
+		return "UnknownError"
+	case InvalidDataError:
+		return "InvalidDataError"
+	case UnsupportedVersionError:
+		return "UnsupportedVersionError"
+	case InvalidSignature:
+		return "InvalidSignature"
+	case NotEntitledError:
+		return "NotEntitledError"
 	default:
-		return fmt.Sprintf("PKPassKitErrorCode(%d)", int64(e))
+		return fmt.Sprintf("PassKitErrorCode(%d)", int64(e))
 	}
 }
 
-// Statuses that PassKit uses when it adds passes to the pass library.
-type PKPassLibraryAddPassesStatus int64
+type PassLibraryAuthorizationStatus int64
 
 const (
-	// A status that occurs when the user successfully adds one or more passes.
-	PKPassLibraryDidAddPasses PKPassLibraryAddPassesStatus = 0
-	// A status that occurs when the app prompts the user to review the passes.
-	PKPassLibraryShouldReviewPasses PKPassLibraryAddPassesStatus = 1
-	// A status that occurs when the user cancels the addition of passes.
-	PKPassLibraryDidCancelAddPasses PKPassLibraryAddPassesStatus = 2
+	PassLibraryAuthorizationStatusNotDetermined PassLibraryAuthorizationStatus = -1
+	PassLibraryAuthorizationStatusDenied        PassLibraryAuthorizationStatus = 0
+	PassLibraryAuthorizationStatusAuthorized    PassLibraryAuthorizationStatus = 1
+	PassLibraryAuthorizationStatusRestricted    PassLibraryAuthorizationStatus = 2
 )
 
-func (e PKPassLibraryAddPassesStatus) String() string {
+// String returns the PassLibraryAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PassLibraryAuthorizationStatus) String() string {
 	switch e {
-	case PKPassLibraryDidAddPasses:
-		return "PKPassLibraryDidAddPasses"
-	case PKPassLibraryShouldReviewPasses:
-		return "PKPassLibraryShouldReviewPasses"
-	case PKPassLibraryDidCancelAddPasses:
-		return "PKPassLibraryDidCancelAddPasses"
+	case PassLibraryAuthorizationStatusNotDetermined:
+		return "PassLibraryAuthorizationStatusNotDetermined"
+	case PassLibraryAuthorizationStatusDenied:
+		return "PassLibraryAuthorizationStatusDenied"
+	case PassLibraryAuthorizationStatusAuthorized:
+		return "PassLibraryAuthorizationStatusAuthorized"
+	case PassLibraryAuthorizationStatusRestricted:
+		return "PassLibraryAuthorizationStatusRestricted"
 	default:
-		return fmt.Sprintf("PKPassLibraryAddPassesStatus(%d)", int64(e))
+		return fmt.Sprintf("PassLibraryAuthorizationStatus(%d)", int64(e))
 	}
 }
 
-type PKPassLibraryAuthorizationStatus int64
+type PassLibraryCapability int64
 
 const (
-	PKPassLibraryAuthorizationStatusNotDetermined PKPassLibraryAuthorizationStatus = -1
-	PKPassLibraryAuthorizationStatusDenied        PKPassLibraryAuthorizationStatus = 0
-	PKPassLibraryAuthorizationStatusAuthorized    PKPassLibraryAuthorizationStatus = 1
-	PKPassLibraryAuthorizationStatusRestricted    PKPassLibraryAuthorizationStatus = 2
+	PassLibraryCapabilityBackgroundAddPasses PassLibraryCapability = 0
 )
 
-func (e PKPassLibraryAuthorizationStatus) String() string {
+// String returns the PassLibraryCapability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PassLibraryCapability) String() string {
 	switch e {
-	case PKPassLibraryAuthorizationStatusNotDetermined:
-		return "PKPassLibraryAuthorizationStatusNotDetermined"
-	case PKPassLibraryAuthorizationStatusDenied:
-		return "PKPassLibraryAuthorizationStatusDenied"
-	case PKPassLibraryAuthorizationStatusAuthorized:
-		return "PKPassLibraryAuthorizationStatusAuthorized"
-	case PKPassLibraryAuthorizationStatusRestricted:
-		return "PKPassLibraryAuthorizationStatusRestricted"
+	case PassLibraryCapabilityBackgroundAddPasses:
+		return "PassLibraryCapabilityBackgroundAddPasses"
 	default:
-		return fmt.Sprintf("PKPassLibraryAuthorizationStatus(%d)", int64(e))
-	}
-}
-
-type PKPassLibraryCapability int64
-
-const (
-	PKPassLibraryCapabilityBackgroundAddPasses PKPassLibraryCapability = 0
-)
-
-func (e PKPassLibraryCapability) String() string {
-	switch e {
-	case PKPassLibraryCapabilityBackgroundAddPasses:
-		return "PKPassLibraryCapabilityBackgroundAddPasses"
-	default:
-		return fmt.Sprintf("PKPassLibraryCapability(%d)", int64(e))
+		return fmt.Sprintf("PassLibraryCapability(%d)", int64(e))
 	}
 }
 
 // Types of passes.
-type PKPassType uint64
+type PassType uint64
 
 const (
 	// A pass that represents a barcode.
-	PKPassTypeBarcode PKPassType = 0
+	PassTypeBarcode PassType = 0
 	// A pass that represents a credential that the device stores in the Secure Element.
-	PKPassTypeSecureElement PKPassType = 1
+	PassTypeSecureElement PassType = 1
 	// A pass that represents a credit or debit card
 	//
 	// Deprecated: Use PKPassTypeSecureElement instead
-	PKPassTypePayment PKPassType = 1
+	PassTypePayment PassType = 1
 	// A nonspecific pass type.
 	//
 	// Deprecated: Use PKPassTypeSecureElement instead
-	PKPassTypeAny PKPassType = 18446744073709551615
+	PassTypeAny PassType = 18446744073709551615
 )
 
-func (e PKPassType) String() string {
+// String returns the PassType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PassType) String() string {
 	switch e {
-	case PKPassTypeBarcode:
-		return "PKPassTypeBarcode"
-	case PKPassTypeSecureElement:
-		return "PKPassTypeSecureElement"
-	case PKPassTypeAny:
-		return "PKPassTypeAny"
+	case PassTypeBarcode:
+		return "PassTypeBarcode"
+	case PassTypeSecureElement:
+		return "PassTypeSecureElement"
+	case PassTypeAny:
+		return "PassTypeAny"
 	default:
-		return fmt.Sprintf("PKPassType(%d)", int64(e))
+		return fmt.Sprintf("PassType(%d)", int64(e))
 	}
 }
 
 // General success and failure status for payment authorization.
-type PKPaymentAuthorizationStatus int64
+type PaymentAuthorizationStatus int64
 
 const (
 	// Merchant successfully authorized the transaction, or the transaction is expected to succeed.
-	PKPaymentAuthorizationStatusSuccess PKPaymentAuthorizationStatus = 0
+	PaymentAuthorizationStatusSuccess PaymentAuthorizationStatus = 0
 	// Merchant failed to authorize the transaction.
-	PKPaymentAuthorizationStatusFailure PKPaymentAuthorizationStatus = 1
+	PaymentAuthorizationStatusFailure PaymentAuthorizationStatus = 1
 	// Invalid or unusable billing address.
-	PKPaymentAuthorizationStatusInvalidBillingPostalAddress PKPaymentAuthorizationStatus = 2
+	PaymentAuthorizationStatusInvalidBillingPostalAddress PaymentAuthorizationStatus = 2
 	// Invalid or unusable shipping address.
-	PKPaymentAuthorizationStatusInvalidShippingPostalAddress PKPaymentAuthorizationStatus = 3
+	PaymentAuthorizationStatusInvalidShippingPostalAddress PaymentAuthorizationStatus = 3
 	// Invalid or incomplete shipping contact.
-	PKPaymentAuthorizationStatusInvalidShippingContact PKPaymentAuthorizationStatus = 4
+	PaymentAuthorizationStatusInvalidShippingContact PaymentAuthorizationStatus = 4
 	// Transaction requires PIN entry.
-	PKPaymentAuthorizationStatusPINRequired PKPaymentAuthorizationStatus = 5
+	PaymentAuthorizationStatusPINRequired PaymentAuthorizationStatus = 5
 	// Incorrect PIN entered.
-	PKPaymentAuthorizationStatusPINIncorrect PKPaymentAuthorizationStatus = 6
+	PaymentAuthorizationStatusPINIncorrect PaymentAuthorizationStatus = 6
 	// PIN retry limit exceeded.
-	PKPaymentAuthorizationStatusPINLockout PKPaymentAuthorizationStatus = 7
+	PaymentAuthorizationStatusPINLockout PaymentAuthorizationStatus = 7
 )
 
-func (e PKPaymentAuthorizationStatus) String() string {
+// String returns the PaymentAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentAuthorizationStatus) String() string {
 	switch e {
-	case PKPaymentAuthorizationStatusSuccess:
-		return "PKPaymentAuthorizationStatusSuccess"
-	case PKPaymentAuthorizationStatusFailure:
-		return "PKPaymentAuthorizationStatusFailure"
-	case PKPaymentAuthorizationStatusInvalidBillingPostalAddress:
-		return "PKPaymentAuthorizationStatusInvalidBillingPostalAddress"
-	case PKPaymentAuthorizationStatusInvalidShippingPostalAddress:
-		return "PKPaymentAuthorizationStatusInvalidShippingPostalAddress"
-	case PKPaymentAuthorizationStatusInvalidShippingContact:
-		return "PKPaymentAuthorizationStatusInvalidShippingContact"
-	case PKPaymentAuthorizationStatusPINRequired:
-		return "PKPaymentAuthorizationStatusPINRequired"
-	case PKPaymentAuthorizationStatusPINIncorrect:
-		return "PKPaymentAuthorizationStatusPINIncorrect"
-	case PKPaymentAuthorizationStatusPINLockout:
-		return "PKPaymentAuthorizationStatusPINLockout"
+	case PaymentAuthorizationStatusSuccess:
+		return "PaymentAuthorizationStatusSuccess"
+	case PaymentAuthorizationStatusFailure:
+		return "PaymentAuthorizationStatusFailure"
+	case PaymentAuthorizationStatusInvalidBillingPostalAddress:
+		return "PaymentAuthorizationStatusInvalidBillingPostalAddress"
+	case PaymentAuthorizationStatusInvalidShippingPostalAddress:
+		return "PaymentAuthorizationStatusInvalidShippingPostalAddress"
+	case PaymentAuthorizationStatusInvalidShippingContact:
+		return "PaymentAuthorizationStatusInvalidShippingContact"
+	case PaymentAuthorizationStatusPINRequired:
+		return "PaymentAuthorizationStatusPINRequired"
+	case PaymentAuthorizationStatusPINIncorrect:
+		return "PaymentAuthorizationStatusPINIncorrect"
+	case PaymentAuthorizationStatusPINLockout:
+		return "PaymentAuthorizationStatusPINLockout"
 	default:
-		return fmt.Sprintf("PKPaymentAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("PaymentAuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // A type that indicates the available appearances for an Apple Pay button.
-type PKPaymentButtonStyle int64
+type PaymentButtonStyle int64
 
 const (
 	// A white button with black lettering.
-	PKPaymentButtonStyleWhite PKPaymentButtonStyle = 0
+	PaymentButtonStyleWhite PaymentButtonStyle = 0
 	// A white button with black lettering and a black outline.
-	PKPaymentButtonStyleWhiteOutline PKPaymentButtonStyle = 1
+	PaymentButtonStyleWhiteOutline PaymentButtonStyle = 1
 	// A black button with white lettering.
-	PKPaymentButtonStyleBlack PKPaymentButtonStyle = 2
+	PaymentButtonStyleBlack PaymentButtonStyle = 2
 	// A button that automatically changes its appearance when the user switches between Light Mode and Dark Mode.
-	PKPaymentButtonStyleAutomatic PKPaymentButtonStyle = 3
+	PaymentButtonStyleAutomatic PaymentButtonStyle = 3
 )
 
-func (e PKPaymentButtonStyle) String() string {
+// String returns the PaymentButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentButtonStyle) String() string {
 	switch e {
-	case PKPaymentButtonStyleWhite:
-		return "PKPaymentButtonStyleWhite"
-	case PKPaymentButtonStyleWhiteOutline:
-		return "PKPaymentButtonStyleWhiteOutline"
-	case PKPaymentButtonStyleBlack:
-		return "PKPaymentButtonStyleBlack"
-	case PKPaymentButtonStyleAutomatic:
-		return "PKPaymentButtonStyleAutomatic"
+	case PaymentButtonStyleWhite:
+		return "PaymentButtonStyleWhite"
+	case PaymentButtonStyleWhiteOutline:
+		return "PaymentButtonStyleWhiteOutline"
+	case PaymentButtonStyleBlack:
+		return "PaymentButtonStyleBlack"
+	case PaymentButtonStyleAutomatic:
+		return "PaymentButtonStyleAutomatic"
 	default:
-		return fmt.Sprintf("PKPaymentButtonStyle(%d)", int64(e))
+		return fmt.Sprintf("PaymentButtonStyle(%d)", int64(e))
 	}
 }
 
 // The Apple Pay button types you can display to initiate Apple Pay transactions.
-type PKPaymentButtonType int64
+type PaymentButtonType int64
 
 const (
 	// An Apple Pay button with the Apple Pay logo only, useful when an additional call to action isn’t needed.
-	PKPaymentButtonTypePlain PKPaymentButtonType = 0
+	PaymentButtonTypePlain PaymentButtonType = 0
 	// An Apple Pay button useful for product purchases.
-	PKPaymentButtonTypeBuy PKPaymentButtonType = 1
+	PaymentButtonTypeBuy PaymentButtonType = 1
 	// An Apple Pay button useful for prompting the user to set up a card.
-	PKPaymentButtonTypeSetUp PKPaymentButtonType = 2
+	PaymentButtonTypeSetUp PaymentButtonType = 2
 	// An Apple Pay button useful for paying bills or invoices.
-	PKPaymentButtonTypeInStore PKPaymentButtonType = 3
+	PaymentButtonTypeInStore PaymentButtonType = 3
 	// An Apple Pay button used by approved nonprofit organization that lets people make donations.
-	PKPaymentButtonTypeDonate PKPaymentButtonType = 4
+	PaymentButtonTypeDonate PaymentButtonType = 4
 	// An Apple Pay button useful for purchase experiences that include other payment buttons that start with “Check out”.
-	PKPaymentButtonTypeCheckout PKPaymentButtonType = 5
+	PaymentButtonTypeCheckout PaymentButtonType = 5
 	// An Apple Pay button useful for booking trips, flights, or other experiences.
-	PKPaymentButtonTypeBook PKPaymentButtonType = 6
+	PaymentButtonTypeBook PaymentButtonType = 6
 	// An Apple Pay button useful for purchasing a subscription such as a gym membership or meal-kit delivery service.
-	PKPaymentButtonTypeSubscribe PKPaymentButtonType = 7
+	PaymentButtonTypeSubscribe PaymentButtonType = 7
 	// An Apple Pay button useful for adding money to a card, account, or payment system.
-	PKPaymentButtonTypeReload PKPaymentButtonType = 8
+	PaymentButtonTypeReload PaymentButtonType = 8
 	// An Apple Pay button useful for adding money to a card, account, or payment system.
-	PKPaymentButtonTypeAddMoney PKPaymentButtonType = 9
+	PaymentButtonTypeAddMoney PaymentButtonType = 9
 	// An Apple Pay button useful for adding money to a card, account, or payment system.
-	PKPaymentButtonTypeTopUp PKPaymentButtonType = 10
+	PaymentButtonTypeTopUp PaymentButtonType = 10
 	// An Apple Pay button useful for placing orders for such as like meals or flowers.
-	PKPaymentButtonTypeOrder PKPaymentButtonType = 11
+	PaymentButtonTypeOrder PaymentButtonType = 11
 	// An Apple Pay button useful for renting items such as cars or scooters.
-	PKPaymentButtonTypeRent PKPaymentButtonType = 12
+	PaymentButtonTypeRent PaymentButtonType = 12
 	// An Apple Pay button useful supporting people give money to projects, causes, organizations, and other entities.
-	PKPaymentButtonTypeSupport PKPaymentButtonType = 13
+	PaymentButtonTypeSupport PaymentButtonType = 13
 	// An Apple Pay button useful to help people contribute money to projects, causes, organizations, and other entities.
-	PKPaymentButtonTypeContribute PKPaymentButtonType = 14
+	PaymentButtonTypeContribute PaymentButtonType = 14
 	// An Apple Pay button useful useful for letting people tip for goods or services.
-	PKPaymentButtonTypeTip PKPaymentButtonType = 15
+	PaymentButtonTypeTip PaymentButtonType = 15
 	// An Apple Pay button useful for general purchases.
-	PKPaymentButtonTypeContinue PKPaymentButtonType = 16
+	PaymentButtonTypeContinue PaymentButtonType = 16
 )
 
-func (e PKPaymentButtonType) String() string {
+// String returns the PaymentButtonType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentButtonType) String() string {
 	switch e {
-	case PKPaymentButtonTypePlain:
-		return "PKPaymentButtonTypePlain"
-	case PKPaymentButtonTypeBuy:
-		return "PKPaymentButtonTypeBuy"
-	case PKPaymentButtonTypeSetUp:
-		return "PKPaymentButtonTypeSetUp"
-	case PKPaymentButtonTypeInStore:
-		return "PKPaymentButtonTypeInStore"
-	case PKPaymentButtonTypeDonate:
-		return "PKPaymentButtonTypeDonate"
-	case PKPaymentButtonTypeCheckout:
-		return "PKPaymentButtonTypeCheckout"
-	case PKPaymentButtonTypeBook:
-		return "PKPaymentButtonTypeBook"
-	case PKPaymentButtonTypeSubscribe:
-		return "PKPaymentButtonTypeSubscribe"
-	case PKPaymentButtonTypeReload:
-		return "PKPaymentButtonTypeReload"
-	case PKPaymentButtonTypeAddMoney:
-		return "PKPaymentButtonTypeAddMoney"
-	case PKPaymentButtonTypeTopUp:
-		return "PKPaymentButtonTypeTopUp"
-	case PKPaymentButtonTypeOrder:
-		return "PKPaymentButtonTypeOrder"
-	case PKPaymentButtonTypeRent:
-		return "PKPaymentButtonTypeRent"
-	case PKPaymentButtonTypeSupport:
-		return "PKPaymentButtonTypeSupport"
-	case PKPaymentButtonTypeContribute:
-		return "PKPaymentButtonTypeContribute"
-	case PKPaymentButtonTypeTip:
-		return "PKPaymentButtonTypeTip"
-	case PKPaymentButtonTypeContinue:
-		return "PKPaymentButtonTypeContinue"
+	case PaymentButtonTypePlain:
+		return "PaymentButtonTypePlain"
+	case PaymentButtonTypeBuy:
+		return "PaymentButtonTypeBuy"
+	case PaymentButtonTypeSetUp:
+		return "PaymentButtonTypeSetUp"
+	case PaymentButtonTypeInStore:
+		return "PaymentButtonTypeInStore"
+	case PaymentButtonTypeDonate:
+		return "PaymentButtonTypeDonate"
+	case PaymentButtonTypeCheckout:
+		return "PaymentButtonTypeCheckout"
+	case PaymentButtonTypeBook:
+		return "PaymentButtonTypeBook"
+	case PaymentButtonTypeSubscribe:
+		return "PaymentButtonTypeSubscribe"
+	case PaymentButtonTypeReload:
+		return "PaymentButtonTypeReload"
+	case PaymentButtonTypeAddMoney:
+		return "PaymentButtonTypeAddMoney"
+	case PaymentButtonTypeTopUp:
+		return "PaymentButtonTypeTopUp"
+	case PaymentButtonTypeOrder:
+		return "PaymentButtonTypeOrder"
+	case PaymentButtonTypeRent:
+		return "PaymentButtonTypeRent"
+	case PaymentButtonTypeSupport:
+		return "PaymentButtonTypeSupport"
+	case PaymentButtonTypeContribute:
+		return "PaymentButtonTypeContribute"
+	case PaymentButtonTypeTip:
+		return "PaymentButtonTypeTip"
+	case PaymentButtonTypeContinue:
+		return "PaymentButtonTypeContinue"
 	default:
-		return fmt.Sprintf("PKPaymentButtonType(%d)", int64(e))
+		return fmt.Sprintf("PaymentButtonType(%d)", int64(e))
 	}
 }
 
 // An error code that you provide to indicate problems with address or contact information on an Apple Pay sheet.
-type PKPaymentErrorCode int64
+type PaymentErrorCode int64
 
 const (
-	PKPaymentUnknownError                      PKPaymentErrorCode = -1
-	PKPaymentShippingContactInvalidError       PKPaymentErrorCode = 1
-	PKPaymentBillingContactInvalidError        PKPaymentErrorCode = 2
-	PKPaymentShippingAddressUnserviceableError PKPaymentErrorCode = 3
-	PKPaymentCouponCodeInvalidError            PKPaymentErrorCode = 4
-	PKPaymentCouponCodeExpiredError            PKPaymentErrorCode = 5
+	PaymentUnknownError                      PaymentErrorCode = -1
+	PaymentShippingContactInvalidError       PaymentErrorCode = 1
+	PaymentBillingContactInvalidError        PaymentErrorCode = 2
+	PaymentShippingAddressUnserviceableError PaymentErrorCode = 3
+	PaymentCouponCodeInvalidError            PaymentErrorCode = 4
+	PaymentCouponCodeExpiredError            PaymentErrorCode = 5
 )
 
-func (e PKPaymentErrorCode) String() string {
+// String returns the PaymentErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentErrorCode) String() string {
 	switch e {
-	case PKPaymentUnknownError:
-		return "PKPaymentUnknownError"
-	case PKPaymentShippingContactInvalidError:
-		return "PKPaymentShippingContactInvalidError"
-	case PKPaymentBillingContactInvalidError:
-		return "PKPaymentBillingContactInvalidError"
-	case PKPaymentShippingAddressUnserviceableError:
-		return "PKPaymentShippingAddressUnserviceableError"
-	case PKPaymentCouponCodeInvalidError:
-		return "PKPaymentCouponCodeInvalidError"
-	case PKPaymentCouponCodeExpiredError:
-		return "PKPaymentCouponCodeExpiredError"
+	case PaymentUnknownError:
+		return "PaymentUnknownError"
+	case PaymentShippingContactInvalidError:
+		return "PaymentShippingContactInvalidError"
+	case PaymentBillingContactInvalidError:
+		return "PaymentBillingContactInvalidError"
+	case PaymentShippingAddressUnserviceableError:
+		return "PaymentShippingAddressUnserviceableError"
+	case PaymentCouponCodeInvalidError:
+		return "PaymentCouponCodeInvalidError"
+	case PaymentCouponCodeExpiredError:
+		return "PaymentCouponCodeExpiredError"
 	default:
-		return fmt.Sprintf("PKPaymentErrorCode(%d)", int64(e))
+		return fmt.Sprintf("PaymentErrorCode(%d)", int64(e))
 	}
 }
 
 // The type of cards available in Apple Pay.
-type PKPaymentMethodType uint64
+type PaymentMethodType uint64
 
 const (
 	// The card’s type is unknown.
-	PKPaymentMethodTypeUnknown PKPaymentMethodType = 0
+	PaymentMethodTypeUnknown PaymentMethodType = 0
 	// A debit card.
-	PKPaymentMethodTypeDebit PKPaymentMethodType = 1
+	PaymentMethodTypeDebit PaymentMethodType = 1
 	// A credit card.
-	PKPaymentMethodTypeCredit PKPaymentMethodType = 2
+	PaymentMethodTypeCredit PaymentMethodType = 2
 	// A prepaid card.
-	PKPaymentMethodTypePrepaid PKPaymentMethodType = 3
+	PaymentMethodTypePrepaid PaymentMethodType = 3
 	// A store card.
-	PKPaymentMethodTypeStore PKPaymentMethodType = 4
+	PaymentMethodTypeStore PaymentMethodType = 4
 	// An electronic money card.
-	PKPaymentMethodTypeEMoney PKPaymentMethodType = 5
+	PaymentMethodTypeEMoney PaymentMethodType = 5
 )
 
-func (e PKPaymentMethodType) String() string {
+// String returns the PaymentMethodType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentMethodType) String() string {
 	switch e {
-	case PKPaymentMethodTypeUnknown:
-		return "PKPaymentMethodTypeUnknown"
-	case PKPaymentMethodTypeDebit:
-		return "PKPaymentMethodTypeDebit"
-	case PKPaymentMethodTypeCredit:
-		return "PKPaymentMethodTypeCredit"
-	case PKPaymentMethodTypePrepaid:
-		return "PKPaymentMethodTypePrepaid"
-	case PKPaymentMethodTypeStore:
-		return "PKPaymentMethodTypeStore"
-	case PKPaymentMethodTypeEMoney:
-		return "PKPaymentMethodTypeEMoney"
+	case PaymentMethodTypeUnknown:
+		return "PaymentMethodTypeUnknown"
+	case PaymentMethodTypeDebit:
+		return "PaymentMethodTypeDebit"
+	case PaymentMethodTypeCredit:
+		return "PaymentMethodTypeCredit"
+	case PaymentMethodTypePrepaid:
+		return "PaymentMethodTypePrepaid"
+	case PaymentMethodTypeStore:
+		return "PaymentMethodTypeStore"
+	case PaymentMethodTypeEMoney:
+		return "PaymentMethodTypeEMoney"
 	default:
-		return fmt.Sprintf("PKPaymentMethodType(%d)", int64(e))
+		return fmt.Sprintf("PaymentMethodType(%d)", int64(e))
 	}
 }
 
 // Cases that indicate payment pass activation states.
 //
 // Deprecated: Use PKSecureElementPassActivationState instead
-type PKPaymentPassActivationState uint64
+type PaymentPassActivationState uint64
 
 const (
 	// Active and ready for payment use.
-	PKPaymentPassActivationStateActivated PKPaymentPassActivationState = 0
+	PaymentPassActivationStateActivated PaymentPassActivationState = 0
 	// Not active but may be activated by the issuer.
-	PKPaymentPassActivationStateRequiresActivation PKPaymentPassActivationState = 1
+	PaymentPassActivationStateRequiresActivation PaymentPassActivationState = 1
 	// Not ready for use but activation is in progress.
-	PKPaymentPassActivationStateActivating PKPaymentPassActivationState = 2
+	PaymentPassActivationStateActivating PaymentPassActivationState = 2
 	// Not active and can’t be activated.
-	PKPaymentPassActivationStateSuspended PKPaymentPassActivationState = 3
+	PaymentPassActivationStateSuspended PaymentPassActivationState = 3
 	// Not active because the issuer disabled the account associated with the device.
-	PKPaymentPassActivationStateDeactivated PKPaymentPassActivationState = 4
+	PaymentPassActivationStateDeactivated PaymentPassActivationState = 4
 )
 
-func (e PKPaymentPassActivationState) String() string {
+// String returns the PaymentPassActivationState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentPassActivationState) String() string {
 	switch e {
-	case PKPaymentPassActivationStateActivated:
-		return "PKPaymentPassActivationStateActivated"
-	case PKPaymentPassActivationStateRequiresActivation:
-		return "PKPaymentPassActivationStateRequiresActivation"
-	case PKPaymentPassActivationStateActivating:
-		return "PKPaymentPassActivationStateActivating"
-	case PKPaymentPassActivationStateSuspended:
-		return "PKPaymentPassActivationStateSuspended"
-	case PKPaymentPassActivationStateDeactivated:
-		return "PKPaymentPassActivationStateDeactivated"
+	case PaymentPassActivationStateActivated:
+		return "PaymentPassActivationStateActivated"
+	case PaymentPassActivationStateRequiresActivation:
+		return "PaymentPassActivationStateRequiresActivation"
+	case PaymentPassActivationStateActivating:
+		return "PaymentPassActivationStateActivating"
+	case PaymentPassActivationStateSuspended:
+		return "PaymentPassActivationStateSuspended"
+	case PaymentPassActivationStateDeactivated:
+		return "PaymentPassActivationStateDeactivated"
 	default:
-		return fmt.Sprintf("PKPaymentPassActivationState(%d)", int64(e))
+		return fmt.Sprintf("PaymentPassActivationState(%d)", int64(e))
 	}
 }
 
 // Constants that describe the type of the payment summary item, such as final or pending.
-type PKPaymentSummaryItemType uint64
+type PaymentSummaryItemType uint64
 
 const (
 	// A summary item that represents a known, final cost.
-	PKPaymentSummaryItemTypeFinal PKPaymentSummaryItemType = 0
+	PaymentSummaryItemTypeFinal PaymentSummaryItemType = 0
 	// A summary item that represents an estimated or unknown cost.
-	PKPaymentSummaryItemTypePending PKPaymentSummaryItemType = 1
+	PaymentSummaryItemTypePending PaymentSummaryItemType = 1
 )
 
-func (e PKPaymentSummaryItemType) String() string {
+// String returns the PaymentSummaryItemType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaymentSummaryItemType) String() string {
 	switch e {
-	case PKPaymentSummaryItemTypeFinal:
-		return "PKPaymentSummaryItemTypeFinal"
-	case PKPaymentSummaryItemTypePending:
-		return "PKPaymentSummaryItemTypePending"
+	case PaymentSummaryItemTypeFinal:
+		return "PaymentSummaryItemTypeFinal"
+	case PaymentSummaryItemTypePending:
+		return "PaymentSummaryItemTypePending"
 	default:
-		return fmt.Sprintf("PKPaymentSummaryItemType(%d)", int64(e))
+		return fmt.Sprintf("PaymentSummaryItemType(%d)", int64(e))
 	}
 }
 
 // Constants that describe the type of wireless radio technology that a pass uses.
 // Bitmask — values may be combined with |.
-type PKRadioTechnology uint64
+type RadioTechnology uint64
 
 const (
 	// An identifier that indicates the pass doesn’t use radio frequency communication.
-	PKRadioTechnologyNone PKRadioTechnology = 0
+	RadioTechnologyNone RadioTechnology = 0
 	// An identifier that indicates the near field communication (NFC) radio frequency communication technology.
-	PKRadioTechnologyNFC PKRadioTechnology = 1
+	RadioTechnologyNFC RadioTechnology = 1
 	// An identifier that indicates the Bluetooth radio frequency communication technology.
-	PKRadioTechnologyBluetooth PKRadioTechnology = 2
+	RadioTechnologyBluetooth RadioTechnology = 2
 )
 
-func (e PKRadioTechnology) String() string {
+// String returns the RadioTechnology constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RadioTechnology) String() string {
 	var parts []string
-	if e&PKRadioTechnologyNFC != 0 {
-		parts = append(parts, "PKRadioTechnologyNFC")
+	if e&RadioTechnologyNFC != 0 {
+		parts = append(parts, "RadioTechnologyNFC")
 	}
-	if e&PKRadioTechnologyBluetooth != 0 {
-		parts = append(parts, "PKRadioTechnologyBluetooth")
+	if e&RadioTechnologyBluetooth != 0 {
+		parts = append(parts, "RadioTechnologyBluetooth")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -725,144 +709,156 @@ func (e PKRadioTechnology) String() string {
 }
 
 // The activation states of a Secure Element pass.
-type PKSecureElementPassActivationState int64
+type SecureElementPassActivationState int64
 
 const (
-	PKSecureElementPassActivationStateActivated          PKSecureElementPassActivationState = 0
-	PKSecureElementPassActivationStateRequiresActivation PKSecureElementPassActivationState = 1
-	PKSecureElementPassActivationStateActivating         PKSecureElementPassActivationState = 2
-	PKSecureElementPassActivationStateSuspended          PKSecureElementPassActivationState = 3
-	PKSecureElementPassActivationStateDeactivated        PKSecureElementPassActivationState = 4
+	SecureElementPassActivationStateActivated          SecureElementPassActivationState = 0
+	SecureElementPassActivationStateRequiresActivation SecureElementPassActivationState = 1
+	SecureElementPassActivationStateActivating         SecureElementPassActivationState = 2
+	SecureElementPassActivationStateSuspended          SecureElementPassActivationState = 3
+	SecureElementPassActivationStateDeactivated        SecureElementPassActivationState = 4
 )
 
-func (e PKSecureElementPassActivationState) String() string {
+// String returns the SecureElementPassActivationState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecureElementPassActivationState) String() string {
 	switch e {
-	case PKSecureElementPassActivationStateActivated:
-		return "PKSecureElementPassActivationStateActivated"
-	case PKSecureElementPassActivationStateRequiresActivation:
-		return "PKSecureElementPassActivationStateRequiresActivation"
-	case PKSecureElementPassActivationStateActivating:
-		return "PKSecureElementPassActivationStateActivating"
-	case PKSecureElementPassActivationStateSuspended:
-		return "PKSecureElementPassActivationStateSuspended"
-	case PKSecureElementPassActivationStateDeactivated:
-		return "PKSecureElementPassActivationStateDeactivated"
+	case SecureElementPassActivationStateActivated:
+		return "SecureElementPassActivationStateActivated"
+	case SecureElementPassActivationStateRequiresActivation:
+		return "SecureElementPassActivationStateRequiresActivation"
+	case SecureElementPassActivationStateActivating:
+		return "SecureElementPassActivationStateActivating"
+	case SecureElementPassActivationStateSuspended:
+		return "SecureElementPassActivationStateSuspended"
+	case SecureElementPassActivationStateDeactivated:
+		return "SecureElementPassActivationStateDeactivated"
 	default:
-		return fmt.Sprintf("PKSecureElementPassActivationState(%d)", int64(e))
+		return fmt.Sprintf("SecureElementPassActivationState(%d)", int64(e))
 	}
 }
 
-type PKShareSecureElementPassErrorCode int64
+type ShareSecureElementPassErrorCode int64
 
 const (
-	PKShareSecureElementPassUnknownError PKShareSecureElementPassErrorCode = 0
-	PKShareSecureElementPassSetupError   PKShareSecureElementPassErrorCode = 1
+	ShareSecureElementPassUnknownError ShareSecureElementPassErrorCode = 0
+	ShareSecureElementPassSetupError   ShareSecureElementPassErrorCode = 1
 )
 
-func (e PKShareSecureElementPassErrorCode) String() string {
+// String returns the ShareSecureElementPassErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShareSecureElementPassErrorCode) String() string {
 	switch e {
-	case PKShareSecureElementPassUnknownError:
-		return "PKShareSecureElementPassUnknownError"
-	case PKShareSecureElementPassSetupError:
-		return "PKShareSecureElementPassSetupError"
+	case ShareSecureElementPassUnknownError:
+		return "ShareSecureElementPassUnknownError"
+	case ShareSecureElementPassSetupError:
+		return "ShareSecureElementPassSetupError"
 	default:
-		return fmt.Sprintf("PKShareSecureElementPassErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ShareSecureElementPassErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants that indicate whether the shipping mode prevents the user from editing fields of the shipping address.
-type PKShippingContactEditingMode uint64
+type ShippingContactEditingMode uint64
 
 const (
 	// The value that indicates Apple Pay Later is available.
-	PKShippingContactEditingModeAvailable PKShippingContactEditingMode = 1
+	ShippingContactEditingModeAvailable ShippingContactEditingMode = 1
 	// The shipping contact on the payment sheet represents a pickup address and isn’t editable by the user.
-	PKShippingContactEditingModeStorePickup PKShippingContactEditingMode = 2
+	ShippingContactEditingModeStorePickup ShippingContactEditingMode = 2
 	// All fields of the shipping contact on the payment sheet are editable by the user.
-	PKShippingContactEditingModeEnabled PKShippingContactEditingMode = 1
+	ShippingContactEditingModeEnabled ShippingContactEditingMode = 1
 )
 
-func (e PKShippingContactEditingMode) String() string {
+// String returns the ShippingContactEditingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShippingContactEditingMode) String() string {
 	switch e {
-	case PKShippingContactEditingModeAvailable:
-		return "PKShippingContactEditingModeAvailable"
-	case PKShippingContactEditingModeStorePickup:
-		return "PKShippingContactEditingModeStorePickup"
+	case ShippingContactEditingModeAvailable:
+		return "ShippingContactEditingModeAvailable"
+	case ShippingContactEditingModeStorePickup:
+		return "ShippingContactEditingModeStorePickup"
 	default:
-		return fmt.Sprintf("PKShippingContactEditingMode(%d)", int64(e))
+		return fmt.Sprintf("ShippingContactEditingMode(%d)", int64(e))
 	}
 }
 
 // A complete list of valid shipping types.
-type PKShippingType uint64
+type ShippingType uint64
 
 const (
 	// Shipping the purchase to the provided address using a third-party shipping company. This is the default shipping type.
-	PKShippingTypeShipping PKShippingType = 0
+	ShippingTypeShipping ShippingType = 0
 	// Delivering the purchase by the seller (for example, pizza, flower, or furniture delivery).
-	PKShippingTypeDelivery PKShippingType = 1
+	ShippingTypeDelivery ShippingType = 1
 	// Store pickup of the purchase from the seller’s store.
-	PKShippingTypeStorePickup PKShippingType = 2
+	ShippingTypeStorePickup ShippingType = 2
 	// Picking up an item from the provided address by the service (for example, transportation or shipping services that provide home pickup).
-	PKShippingTypeServicePickup PKShippingType = 3
+	ShippingTypeServicePickup ShippingType = 3
 )
 
-func (e PKShippingType) String() string {
+// String returns the ShippingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShippingType) String() string {
 	switch e {
-	case PKShippingTypeShipping:
-		return "PKShippingTypeShipping"
-	case PKShippingTypeDelivery:
-		return "PKShippingTypeDelivery"
-	case PKShippingTypeStorePickup:
-		return "PKShippingTypeStorePickup"
-	case PKShippingTypeServicePickup:
-		return "PKShippingTypeServicePickup"
+	case ShippingTypeShipping:
+		return "ShippingTypeShipping"
+	case ShippingTypeDelivery:
+		return "ShippingTypeDelivery"
+	case ShippingTypeStorePickup:
+		return "ShippingTypeStorePickup"
+	case ShippingTypeServicePickup:
+		return "ShippingTypeServicePickup"
 	default:
-		return fmt.Sprintf("PKShippingType(%d)", int64(e))
+		return fmt.Sprintf("ShippingType(%d)", int64(e))
 	}
 }
 
-type PKVehicleConnectionErrorCode int64
+type VehicleConnectionErrorCode int64
 
 const (
-	PKVehicleConnectionErrorCodeUnknown              PKVehicleConnectionErrorCode = 0
-	PKVehicleConnectionErrorCodeSessionUnableToStart PKVehicleConnectionErrorCode = 1
-	PKVehicleConnectionErrorCodeSessionNotActive     PKVehicleConnectionErrorCode = 2
+	VehicleConnectionErrorCodeUnknown              VehicleConnectionErrorCode = 0
+	VehicleConnectionErrorCodeSessionUnableToStart VehicleConnectionErrorCode = 1
+	VehicleConnectionErrorCodeSessionNotActive     VehicleConnectionErrorCode = 2
 )
 
-func (e PKVehicleConnectionErrorCode) String() string {
+// String returns the VehicleConnectionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VehicleConnectionErrorCode) String() string {
 	switch e {
-	case PKVehicleConnectionErrorCodeUnknown:
-		return "PKVehicleConnectionErrorCodeUnknown"
-	case PKVehicleConnectionErrorCodeSessionUnableToStart:
-		return "PKVehicleConnectionErrorCodeSessionUnableToStart"
-	case PKVehicleConnectionErrorCodeSessionNotActive:
-		return "PKVehicleConnectionErrorCodeSessionNotActive"
+	case VehicleConnectionErrorCodeUnknown:
+		return "VehicleConnectionErrorCodeUnknown"
+	case VehicleConnectionErrorCodeSessionUnableToStart:
+		return "VehicleConnectionErrorCodeSessionUnableToStart"
+	case VehicleConnectionErrorCodeSessionNotActive:
+		return "VehicleConnectionErrorCodeSessionNotActive"
 	default:
-		return fmt.Sprintf("PKVehicleConnectionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("VehicleConnectionErrorCode(%d)", int64(e))
 	}
 }
 
-type PKVehicleConnectionSessionConnectionState int64
+type VehicleConnectionSessionConnectionState int64
 
 const (
-	PKVehicleConnectionSessionConnectionStateDisconnected    PKVehicleConnectionSessionConnectionState = 0
-	PKVehicleConnectionSessionConnectionStateConnected       PKVehicleConnectionSessionConnectionState = 1
-	PKVehicleConnectionSessionConnectionStateConnecting      PKVehicleConnectionSessionConnectionState = 2
-	PKVehicleConnectionSessionConnectionStateFailedToConnect PKVehicleConnectionSessionConnectionState = 3
+	VehicleConnectionSessionConnectionStateDisconnected    VehicleConnectionSessionConnectionState = 0
+	VehicleConnectionSessionConnectionStateConnected       VehicleConnectionSessionConnectionState = 1
+	VehicleConnectionSessionConnectionStateConnecting      VehicleConnectionSessionConnectionState = 2
+	VehicleConnectionSessionConnectionStateFailedToConnect VehicleConnectionSessionConnectionState = 3
 )
 
-func (e PKVehicleConnectionSessionConnectionState) String() string {
+// String returns the VehicleConnectionSessionConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VehicleConnectionSessionConnectionState) String() string {
 	switch e {
-	case PKVehicleConnectionSessionConnectionStateDisconnected:
-		return "PKVehicleConnectionSessionConnectionStateDisconnected"
-	case PKVehicleConnectionSessionConnectionStateConnected:
-		return "PKVehicleConnectionSessionConnectionStateConnected"
-	case PKVehicleConnectionSessionConnectionStateConnecting:
-		return "PKVehicleConnectionSessionConnectionStateConnecting"
-	case PKVehicleConnectionSessionConnectionStateFailedToConnect:
-		return "PKVehicleConnectionSessionConnectionStateFailedToConnect"
+	case VehicleConnectionSessionConnectionStateDisconnected:
+		return "VehicleConnectionSessionConnectionStateDisconnected"
+	case VehicleConnectionSessionConnectionStateConnected:
+		return "VehicleConnectionSessionConnectionStateConnected"
+	case VehicleConnectionSessionConnectionStateConnecting:
+		return "VehicleConnectionSessionConnectionStateConnecting"
+	case VehicleConnectionSessionConnectionStateFailedToConnect:
+		return "VehicleConnectionSessionConnectionStateFailedToConnect"
 	default:
-		return fmt.Sprintf("PKVehicleConnectionSessionConnectionState(%d)", int64(e))
+		return fmt.Sprintf("VehicleConnectionSessionConnectionState(%d)", int64(e))
 	}
 }

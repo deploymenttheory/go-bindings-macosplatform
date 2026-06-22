@@ -4,42 +4,112 @@
 
 package gamecontroller
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
-)
+// A three-dimensional acceleration vector.
+type GCAcceleration struct {
+	X float64
+	Y float64
+	Z float64
+}
 
-// GCAcceleration is a type alias for the raw GCAcceleration value-type struct.
-type GCAcceleration = raw.GCAcceleration
+// A structure that specifies the controller’s attitude as a series of rotations around the x, y, and z axes.
+type GCEulerAngles struct {
+	Pitch float64
+	Yaw   float64
+	Roll  float64
+}
 
-// GCDualSenseAdaptiveTriggerPositionalAmplitudes is a type alias for the raw GCDualSenseAdaptiveTriggerPositionalAmplitudes value-type struct.
-type GCDualSenseAdaptiveTriggerPositionalAmplitudes = raw.GCDualSenseAdaptiveTriggerPositionalAmplitudes
+// A structure that holds a snapshot of an extended gamepad controller’s input data.
+type GCExtendedGamepadSnapShotDataV100 struct {
+	Version          uint16
+	Size             uint16
+	DpadX            float32
+	DpadY            float32
+	ButtonA          float32
+	ButtonB          float32
+	ButtonX          float32
+	ButtonY          float32
+	LeftShoulder     float32
+	RightShoulder    float32
+	LeftThumbstickX  float32
+	LeftThumbstickY  float32
+	RightThumbstickX float32
+	RightThumbstickY float32
+	LeftTrigger      float32
+	RightTrigger     float32
+}
 
-// GCDualSenseAdaptiveTriggerPositionalResistiveStrengths is a type alias for the raw GCDualSenseAdaptiveTriggerPositionalResistiveStrengths value-type struct.
-type GCDualSenseAdaptiveTriggerPositionalResistiveStrengths = raw.GCDualSenseAdaptiveTriggerPositionalResistiveStrengths
+type GCExtendedGamepadSnapshotData struct {
+	Version                      uint16
+	Size                         uint16
+	DpadX                        float32
+	DpadY                        float32
+	ButtonA                      float32
+	ButtonB                      float32
+	ButtonX                      float32
+	ButtonY                      float32
+	LeftShoulder                 float32
+	RightShoulder                float32
+	LeftThumbstickX              float32
+	LeftThumbstickY              float32
+	RightThumbstickX             float32
+	RightThumbstickY             float32
+	LeftTrigger                  float32
+	RightTrigger                 float32
+	SupportsClickableThumbsticks bool
+	LeftThumbstickButton         bool
+	RightThumbstickButton        bool
+}
 
-// GCEulerAngles is a type alias for the raw GCEulerAngles value-type struct.
-type GCEulerAngles = raw.GCEulerAngles
+// A structure that holds a snapshot of a gamepad controller’s input data.
+type GCGamepadSnapShotDataV100 struct {
+	Version       uint16
+	Size          uint16
+	DpadX         float32
+	DpadY         float32
+	ButtonA       float32
+	ButtonB       float32
+	ButtonX       float32
+	ButtonY       float32
+	LeftShoulder  float32
+	RightShoulder float32
+}
 
-// GCExtendedGamepadSnapShotDataV100 is a type alias for the raw GCExtendedGamepadSnapShotDataV100 value-type struct.
-type GCExtendedGamepadSnapShotDataV100 = raw.GCExtendedGamepadSnapShotDataV100
+// A structure that holds a snapshot of a micro gamepad controller’s input data.
+type GCMicroGamepadSnapShotDataV100 struct {
+	Version uint16
+	Size    uint16
+	DpadX   float32
+	DpadY   float32
+	ButtonA float32
+	ButtonX float32
+}
 
-// GCExtendedGamepadSnapshotData is a type alias for the raw GCExtendedGamepadSnapshotData value-type struct.
-type GCExtendedGamepadSnapshotData = raw.GCExtendedGamepadSnapshotData
+type GCMicroGamepadSnapshotData struct {
+	Version uint16
+	Size    uint16
+	DpadX   float32
+	DpadY   float32
+	ButtonA float32
+	ButtonX float32
+}
 
-// GCGamepadSnapShotDataV100 is a type alias for the raw GCGamepadSnapShotDataV100 value-type struct.
-type GCGamepadSnapShotDataV100 = raw.GCGamepadSnapShotDataV100
+// A structure that represents a normalized point in a two-dimensional coordinate system.
+type GCPoint2 struct {
+	X float32
+	Y float32
+}
 
-// GCMicroGamepadSnapShotDataV100 is a type alias for the raw GCMicroGamepadSnapShotDataV100 value-type struct.
-type GCMicroGamepadSnapShotDataV100 = raw.GCMicroGamepadSnapShotDataV100
+// A quaternion that represents a controller’s measurement of attitude.
+type GCQuaternion struct {
+	X float64
+	Y float64
+	Z float64
+	W float64
+}
 
-// GCMicroGamepadSnapshotData is a type alias for the raw GCMicroGamepadSnapshotData value-type struct.
-type GCMicroGamepadSnapshotData = raw.GCMicroGamepadSnapshotData
-
-// GCPoint2 is a type alias for the raw GCPoint2 value-type struct.
-type GCPoint2 = raw.GCPoint2
-
-// GCQuaternion is a type alias for the raw GCQuaternion value-type struct.
-type GCQuaternion = raw.GCQuaternion
-
-// GCRotationRate is a type alias for the raw GCRotationRate value-type struct.
-type GCRotationRate = raw.GCRotationRate
+// A structure that represents rotation rates around the x, y, and z axes.
+type GCRotationRate struct {
+	X float64
+	Y float64
+	Z float64
+}

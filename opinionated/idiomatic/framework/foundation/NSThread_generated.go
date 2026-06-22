@@ -5,189 +5,222 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A thread of execution.
+// Thread is an idiomatic wrapper over the Objective-C class NSThread.
 //
-// Thread wraps [raw.NSThread] with a fluent Go API.
+// A thread of execution.
 type Thread struct {
-	inner *raw.NSThread
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSThread].
-func (x *Thread) Unwrap() *raw.NSThread { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Thread) ID() objc.ID { return x.inner.Ptr() }
-
-// ThreadFromID adopts an existing object pointer as a Thread (nil for 0).
+// ThreadFromID adopts an existing Objective-C object as a Thread
+// (nil for 0), retaining it and registering a release finalizer.
 func ThreadFromID(id objc.ID) *Thread {
 	if id == 0 {
 		return nil
 	}
-	return &Thread{inner: raw.NSThreadFromID(id)}
-}
-
-// NewThread creates a new [Thread].
-func NewThread() *Thread {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSThread")), objc.RegisterName("new"))
-	return &Thread{inner: raw.NSThreadFromID(_id)}
-}
-
-// NewThreadWithTargetSelectorObject creates a new [Thread].
-func NewThreadWithTargetSelectorObject(target objc.ID, selector objc.SEL, argument objc.ID) *Thread {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSThread")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:selector:object:"), target, selector, argument)
-	return &Thread{inner: raw.NSThreadFromID(_id)}
-}
-
-// NewThreadWith creates a new [Thread].
-func NewThreadWith(block func()) *Thread {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSThread")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBlock:"), block)
-	return &Thread{inner: raw.NSThreadFromID(_id)}
-}
-
-// WithThreadPriority sets the threadPriority property and returns the receiver for chaining.
-func (x *Thread) WithThreadPriority(threadPriority float64) *Thread {
-	x.inner.SetThreadPriority(threadPriority)
+	x := &Thread{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *Thread) WithQualityOfService(qualityOfService NSQualityOfService) *Thread {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
-	return x
-}
-
-// WithName sets the name property and returns the receiver for chaining.
-func (x *Thread) WithName(name string) *Thread {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// WithStackSize sets the stackSize property and returns the receiver for chaining.
-func (x *Thread) WithStackSize(stackSize uint) *Thread {
-	x.inner.SetStackSize(stackSize)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Thread) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Thread {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// Cancel calls the underlying Cancel.
-func (x *Thread) Cancel() {
-	x.inner.Cancel()
-}
-
-// Start calls the underlying Start.
-func (x *Thread) Start() {
-	x.inner.Start()
-}
-
-// Main calls the underlying Main.
-func (x *Thread) Main() {
-	x.inner.Main()
-}
-
-// ThreadDictionary calls the underlying ThreadDictionary.
-func (x *Thread) ThreadDictionary() *raw.NSMutableDictionary[objc.ID, objc.ID] {
-	return x.inner.ThreadDictionary()
-}
-
-// ThreadPriority calls the underlying ThreadPriority.
-func (x *Thread) ThreadPriority() float64 {
-	return x.inner.ThreadPriority()
-}
-
-// SetThreadPriority calls the underlying SetThreadPriority.
-func (x *Thread) SetThreadPriority(threadPriority float64) {
-	x.inner.SetThreadPriority(threadPriority)
-}
-
-// QualityOfService calls the underlying QualityOfService.
-func (x *Thread) QualityOfService() NSQualityOfService {
-	return NSQualityOfService(x.inner.QualityOfService())
-}
-
-// SetQualityOfService calls the underlying SetQualityOfService.
-func (x *Thread) SetQualityOfService(qualityOfService NSQualityOfService) {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
-}
-
-// Name calls the underlying Name.
-func (x *Thread) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
+// threadAdopt wraps an Objective-C object that this code just created as a
+// Thread (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func threadAdopt(id objc.ID) *Thread {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &Thread{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetName calls the underlying SetName.
+// Description returns the object's -description text.
+func (x *Thread) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Thread) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Thread) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Thread) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewThread creates a new Thread.
+func NewThread() *Thread {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("new"))
+	return threadAdopt(_id)
+}
+
+// NewThreadWith creates a new Thread.
+func NewThreadWith(block func()) *Thread {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBlock:"), objc.NewBlock(func(_ objc.Block) { block() }))
+	return threadAdopt(_id)
+}
+
+// WithThreadPriority sets the property and returns the receiver so calls can be chained.
+func (x *Thread) WithThreadPriority(threadPriority float64) *Thread {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
+	return x
+}
+
+// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+func (x *Thread) WithQualityOfService(qualityOfService QualityOfService) *Thread {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
+	return x
+}
+
+// WithName sets the property and returns the receiver so calls can be chained.
+func (x *Thread) WithName(name StringProvider) *Thread {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
+	return x
+}
+
+// WithStackSize sets the property and returns the receiver so calls can be chained.
+func (x *Thread) WithStackSize(stackSize int) *Thread {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), stackSize)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Thread) WithScriptingProperties(scriptingProperties obj.Object) *Thread {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Cancel wraps the corresponding Objective-C method.
+func (x *Thread) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+}
+
+// Start wraps the corresponding Objective-C method.
+func (x *Thread) Start() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+}
+
+// Main wraps the corresponding Objective-C method.
+func (x *Thread) Main() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("main"))
+}
+
+// ThreadDictionary wraps the corresponding Objective-C method.
+func (x *Thread) ThreadDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("threadDictionary"))
+	return obj.Wrap(_r)
+}
+
+// ThreadPriority wraps the corresponding Objective-C method.
+func (x *Thread) ThreadPriority() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threadPriority"))
+	return _r
+}
+
+// SetThreadPriority wraps the corresponding Objective-C method.
+func (x *Thread) SetThreadPriority(threadPriority float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
+}
+
+// QualityOfService wraps the corresponding Objective-C method.
+func (x *Thread) QualityOfService() QualityOfService {
+	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
+	return _r
+}
+
+// SetQualityOfService wraps the corresponding Objective-C method.
+func (x *Thread) SetQualityOfService(qualityOfService QualityOfService) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *Thread) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetName wraps the corresponding Objective-C method.
 func (x *Thread) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// StackSize calls the underlying StackSize.
-func (x *Thread) StackSize() uint {
-	return x.inner.StackSize()
+// StackSize wraps the corresponding Objective-C method.
+func (x *Thread) StackSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stackSize"))
+	return _r
 }
 
-// SetStackSize calls the underlying SetStackSize.
-func (x *Thread) SetStackSize(stackSize uint) {
-	x.inner.SetStackSize(stackSize)
+// SetStackSize wraps the corresponding Objective-C method.
+func (x *Thread) SetStackSize(stackSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), stackSize)
 }
 
-// IsMainThread calls the underlying IsMainThread.
+// IsMainThread wraps the corresponding Objective-C method.
 func (x *Thread) IsMainThread() bool {
-	return x.inner.IsMainThread()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMainThread"))
+	return _r
 }
 
-// IsExecuting calls the underlying IsExecuting.
+// IsExecuting wraps the corresponding Objective-C method.
 func (x *Thread) IsExecuting() bool {
-	return x.inner.IsExecuting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExecuting"))
+	return _r
 }
 
-// IsFinished calls the underlying IsFinished.
+// IsFinished wraps the corresponding Objective-C method.
 func (x *Thread) IsFinished() bool {
-	return x.inner.IsFinished()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinished"))
+	return _r
 }
 
-// IsCancelled calls the underlying IsCancelled.
+// IsCancelled wraps the corresponding Objective-C method.
 func (x *Thread) IsCancelled() bool {
-	return x.inner.IsCancelled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+	return _r
 }
-
-func (x *Thread) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Threadable is the interface implemented by [Thread], for mocking and DI.
 type Threadable interface {
-	Unwrap() *raw.NSThread
+	obj.Object
 	WithThreadPriority(threadPriority float64) *Thread
-	WithQualityOfService(qualityOfService NSQualityOfService) *Thread
-	WithName(name string) *Thread
-	WithStackSize(stackSize uint) *Thread
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Thread
+	WithQualityOfService(qualityOfService QualityOfService) *Thread
+	WithName(name StringProvider) *Thread
+	WithStackSize(stackSize int) *Thread
+	WithScriptingProperties(scriptingProperties obj.Object) *Thread
 	Cancel()
 	Start()
 	Main()
-	ThreadDictionary() *raw.NSMutableDictionary[objc.ID, objc.ID]
+	ThreadDictionary() obj.Object
 	ThreadPriority() float64
 	SetThreadPriority(threadPriority float64)
-	QualityOfService() NSQualityOfService
-	SetQualityOfService(qualityOfService NSQualityOfService)
-	Name() *String
+	QualityOfService() QualityOfService
+	SetQualityOfService(qualityOfService QualityOfService)
+	Name() string
 	SetName(name string)
-	StackSize() uint
-	SetStackSize(stackSize uint)
+	StackSize() int
+	SetStackSize(stackSize int)
 	IsMainThread() bool
 	IsExecuting() bool
 	IsFinished() bool

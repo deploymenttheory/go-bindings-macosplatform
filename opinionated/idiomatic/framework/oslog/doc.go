@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package oslog provides a fluent Go API over the macOS OSLog framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - LogEntry: [LogEntryActivity], [LogEntryBoundary], [LogEntryLog], [LogEntrySignpost]
 package oslog

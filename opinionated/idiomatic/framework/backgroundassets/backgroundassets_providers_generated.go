@@ -5,10 +5,11 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// DownloadProvider is implemented by Download and any idiomatic type wrapping a BADownload subclass.
+// DownloadProvider is accepted wherever a BADownload (or one of its subclasses) is expected.
 type DownloadProvider interface {
-	asDownload() *raw.BADownload
+	objref.Object
+	isDownload()
 }

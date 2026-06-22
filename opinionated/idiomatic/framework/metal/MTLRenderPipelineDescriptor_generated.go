@@ -5,787 +5,665 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An argument of options you pass to a GPU device to get a render pipeline state.
+// RenderPipelineDescriptor is an idiomatic wrapper over the Objective-C class MTLRenderPipelineDescriptor.
 //
-// RenderPipelineDescriptor wraps [raw.MTLRenderPipelineDescriptor] with a fluent Go API.
+// An argument of options you pass to a GPU device to get a render pipeline state.
 type RenderPipelineDescriptor struct {
-	inner *raw.MTLRenderPipelineDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRenderPipelineDescriptor].
-func (x *RenderPipelineDescriptor) Unwrap() *raw.MTLRenderPipelineDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderPipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderPipelineDescriptorFromID adopts an existing object pointer as a RenderPipelineDescriptor (nil for 0).
+// RenderPipelineDescriptorFromID adopts an existing Objective-C object as a RenderPipelineDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderPipelineDescriptorFromID(id objc.ID) *RenderPipelineDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RenderPipelineDescriptor{inner: raw.MTLRenderPipelineDescriptorFromID(id)}
+	x := &RenderPipelineDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderPipelineDescriptor creates a new [RenderPipelineDescriptor].
+// renderPipelineDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RenderPipelineDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderPipelineDescriptorAdopt(id objc.ID) *RenderPipelineDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderPipelineDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderPipelineDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderPipelineDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderPipelineDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPipelineDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderPipelineDescriptor creates a new RenderPipelineDescriptor.
 func NewRenderPipelineDescriptor() *RenderPipelineDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRenderPipelineDescriptor")), objc.RegisterName("new"))
-	return &RenderPipelineDescriptor{inner: raw.MTLRenderPipelineDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPipelineDescriptor")), objc.RegisterName("new"))
+	return renderPipelineDescriptorAdopt(_id)
 }
 
-// A string that identifies the render pipeline descriptor.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that identifies the render pipeline descriptor.
 func (x *RenderPipelineDescriptor) WithLabel(label string) *RenderPipelineDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The vertex function the pipeline calls to process vertices.
-//
-// WithVertexFunction sets the vertexFunction property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithVertexFunction(vertexFunction raw.MTLFunction) *RenderPipelineDescriptor {
-	x.inner.SetVertexFunction(vertexFunction)
-	return x
-}
-
-// The fragment function the pipeline calls to process fragments.
-//
-// WithFragmentFunction sets the fragmentFunction property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithFragmentFunction(fragmentFunction raw.MTLFunction) *RenderPipelineDescriptor {
-	x.inner.SetFragmentFunction(fragmentFunction)
-	return x
-}
-
-// The organization of vertex data in an attribute’s argument table.
-//
-// WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
+// WithVertexDescriptor the organization of vertex data in an attribute’s argument table.
 func (x *RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *RenderPipelineDescriptor {
-	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 	return x
 }
 
-// The number of samples the pipeline applies for each fragment.
-//
-// WithSampleCount sets the sampleCount property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithSampleCount(sampleCount uint) *RenderPipelineDescriptor {
-	x.inner.SetSampleCount(sampleCount)
+// WithSampleCount the number of samples the pipeline applies for each fragment.
+func (x *RenderPipelineDescriptor) WithSampleCount(sampleCount int) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 	return x
 }
 
-// The number of samples the pipeline applies for each fragment.
-//
-// WithRasterSampleCount sets the rasterSampleCount property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount uint) *RenderPipelineDescriptor {
-	x.inner.SetRasterSampleCount(rasterSampleCount)
+// WithRasterSampleCount the number of samples the pipeline applies for each fragment.
+func (x *RenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount int) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
 	return x
 }
 
-// A Boolean value that indicates whether to read and use the alpha channel fragment output for color attachments to compute a sample coverage mask.
-//
-// WithAlphaToCoverageEnabled sets the alphaToCoverageEnabled property and returns the receiver for chaining.
+// WithAlphaToCoverageEnabled a Boolean value that indicates whether to read and use the alpha channel fragment output for color attachments to compute a sample coverage mask.
 func (x *RenderPipelineDescriptor) WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *RenderPipelineDescriptor {
-	x.inner.SetAlphaToCoverageEnabled(alphaToCoverageEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToCoverageEnabled:"), alphaToCoverageEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether to force alpha channel values for color attachments to the largest representable value.
-//
-// WithAlphaToOneEnabled sets the alphaToOneEnabled property and returns the receiver for chaining.
+// WithAlphaToOneEnabled a Boolean value that indicates whether to force alpha channel values for color attachments to the largest representable value.
 func (x *RenderPipelineDescriptor) WithAlphaToOneEnabled(alphaToOneEnabled bool) *RenderPipelineDescriptor {
-	x.inner.SetAlphaToOneEnabled(alphaToOneEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToOneEnabled:"), alphaToOneEnabled)
 	return x
 }
 
-// A Boolean value that determines whether the pipeline rasterizes primitives.
-//
-// WithRasterizationEnabled sets the rasterizationEnabled property and returns the receiver for chaining.
+// WithRasterizationEnabled a Boolean value that determines whether the pipeline rasterizes primitives.
 func (x *RenderPipelineDescriptor) WithRasterizationEnabled(rasterizationEnabled bool) *RenderPipelineDescriptor {
-	x.inner.SetRasterizationEnabled(rasterizationEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationEnabled:"), rasterizationEnabled)
 	return x
 }
 
-// The maximum vertex amplification count you can set when encoding render commands.
-//
-// WithMaxVertexAmplificationCount sets the maxVertexAmplificationCount property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *RenderPipelineDescriptor {
-	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
+// WithMaxVertexAmplificationCount the maximum vertex amplification count you can set when encoding render commands.
+func (x *RenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount int) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexAmplificationCount:"), maxVertexAmplificationCount)
 	return x
 }
 
-// The pixel format of the attachment that stores depth data.
-//
-// WithDepthAttachmentPixelFormat sets the depthAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor {
-	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
+// WithDepthAttachmentPixelFormat the pixel format of the attachment that stores depth data.
+func (x *RenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthAttachmentPixelFormat:"), depthAttachmentPixelFormat)
 	return x
 }
 
-// The pixel format of the attachment that stores stencil data.
-//
-// WithStencilAttachmentPixelFormat sets the stencilAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor {
-	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
+// WithStencilAttachmentPixelFormat the pixel format of the attachment that stores stencil data.
+func (x *RenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilAttachmentPixelFormat:"), stencilAttachmentPixelFormat)
 	return x
 }
 
-// The type of primitive topology the pipeline renders.
-//
-// WithInputPrimitiveTopology sets the inputPrimitiveTopology property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) *RenderPipelineDescriptor {
-	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
+// WithInputPrimitiveTopology the type of primitive topology the pipeline renders.
+func (x *RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitiveTopology PrimitiveTopologyClass) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputPrimitiveTopology:"), inputPrimitiveTopology)
 	return x
 }
 
-// The partitioning mode that the tessellator uses to derive the number and spacing of segments for subdividing a corresponding edge.
-//
-// WithTessellationPartitionMode sets the tessellationPartitionMode property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) *RenderPipelineDescriptor {
-	x.inner.SetTessellationPartitionMode(raw.MTLTessellationPartitionMode(tessellationPartitionMode))
+// WithTessellationPartitionMode the partitioning mode that the tessellator uses to derive the number and spacing of segments for subdividing a corresponding edge.
+func (x *RenderPipelineDescriptor) WithTessellationPartitionMode(tessellationPartitionMode TessellationPartitionMode) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationPartitionMode:"), tessellationPartitionMode)
 	return x
 }
 
-// The maximum tessellation factor that the tessellator uses when tessellating patches.
-//
-// WithMaxTessellationFactor sets the maxTessellationFactor property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithMaxTessellationFactor(maxTessellationFactor uint) *RenderPipelineDescriptor {
-	x.inner.SetMaxTessellationFactor(maxTessellationFactor)
+// WithMaxTessellationFactor the maximum tessellation factor that the tessellator uses when tessellating patches.
+func (x *RenderPipelineDescriptor) WithMaxTessellationFactor(maxTessellationFactor int) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTessellationFactor:"), maxTessellationFactor)
 	return x
 }
 
-// A Boolean value that determines whether the pipeline scales the tessellation factor.
-//
-// WithTessellationFactorScaleEnabled sets the tessellationFactorScaleEnabled property and returns the receiver for chaining.
+// WithTessellationFactorScaleEnabled a Boolean value that determines whether the pipeline scales the tessellation factor.
 func (x *RenderPipelineDescriptor) WithTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool) *RenderPipelineDescriptor {
-	x.inner.SetTessellationFactorScaleEnabled(tessellationFactorScaleEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorScaleEnabled:"), tessellationFactorScaleEnabled)
 	return x
 }
 
-// The format of the tessellation factors in the tessellation factor buffer.
-//
-// WithTessellationFactorFormat sets the tessellationFactorFormat property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) *RenderPipelineDescriptor {
-	x.inner.SetTessellationFactorFormat(raw.MTLTessellationFactorFormat(tessellationFactorFormat))
+// WithTessellationFactorFormat the format of the tessellation factors in the tessellation factor buffer.
+func (x *RenderPipelineDescriptor) WithTessellationFactorFormat(tessellationFactorFormat TessellationFactorFormat) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorFormat:"), tessellationFactorFormat)
 	return x
 }
 
-// The size of the control point indices in a control point index buffer.
-//
-// WithTessellationControlPointIndexType sets the tessellationControlPointIndexType property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) *RenderPipelineDescriptor {
-	x.inner.SetTessellationControlPointIndexType(raw.MTLTessellationControlPointIndexType(tessellationControlPointIndexType))
+// WithTessellationControlPointIndexType the size of the control point indices in a control point index buffer.
+func (x *RenderPipelineDescriptor) WithTessellationControlPointIndexType(tessellationControlPointIndexType TessellationControlPointIndexType) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationControlPointIndexType:"), tessellationControlPointIndexType)
 	return x
 }
 
-// The step function for determining the tessellation factors for a patch from the tessellation factor buffer.
-//
-// WithTessellationFactorStepFunction sets the tessellationFactorStepFunction property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) *RenderPipelineDescriptor {
-	x.inner.SetTessellationFactorStepFunction(raw.MTLTessellationFactorStepFunction(tessellationFactorStepFunction))
+// WithTessellationFactorStepFunction the step function for determining the tessellation factors for a patch from the tessellation factor buffer.
+func (x *RenderPipelineDescriptor) WithTessellationFactorStepFunction(tessellationFactorStepFunction TessellationFactorStepFunction) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorStepFunction:"), tessellationFactorStepFunction)
 	return x
 }
 
-// The winding order of triangles from the tessellator.
-//
-// WithTessellationOutputWindingOrder sets the tessellationOutputWindingOrder property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) *RenderPipelineDescriptor {
-	x.inner.SetTessellationOutputWindingOrder(raw.MTLWinding(tessellationOutputWindingOrder))
+// WithTessellationOutputWindingOrder the winding order of triangles from the tessellator.
+func (x *RenderPipelineDescriptor) WithTessellationOutputWindingOrder(tessellationOutputWindingOrder Winding) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationOutputWindingOrder:"), tessellationOutputWindingOrder)
 	return x
 }
 
-// A Boolean value that determines whether you can encode commands into an indirect command buffer using the render pipeline.
-//
-// WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
+// WithSupportIndirectCommandBuffers a Boolean value that determines whether you can encode commands into an indirect command buffer using the render pipeline.
 func (x *RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *RenderPipelineDescriptor {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
 	return x
 }
 
-// Functions that you can specify as function arguments for the vertex shader when encoding commands that use the pipeline.
-//
-// WithVertexLinkedFunctions sets the vertexLinkedFunctions property and returns the receiver for chaining.
+// WithVertexLinkedFunctions functions that you can specify as function arguments for the vertex shader when encoding commands that use the pipeline.
 func (x *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
-	x.inner.SetVertexLinkedFunctions(vertexLinkedFunctions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexLinkedFunctions:"), objref.IDOf(vertexLinkedFunctions))
 	return x
 }
 
-// Functions that you can specify as function arguments for the fragment shader when encoding commands that use the pipeline.
-//
-// WithFragmentLinkedFunctions sets the fragmentLinkedFunctions property and returns the receiver for chaining.
+// WithFragmentLinkedFunctions functions that you can specify as function arguments for the fragment shader when encoding commands that use the pipeline.
 func (x *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
-	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentLinkedFunctions:"), objref.IDOf(fragmentLinkedFunctions))
 	return x
 }
 
-// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to the vertex shader’s callable functions list.
-//
-// WithSupportAddingVertexBinaryFunctions sets the supportAddingVertexBinaryFunctions property and returns the receiver for chaining.
+// WithSupportAddingVertexBinaryFunctions a Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to the vertex shader’s callable functions list.
 func (x *RenderPipelineDescriptor) WithSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) *RenderPipelineDescriptor {
-	x.inner.SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingVertexBinaryFunctions:"), supportAddingVertexBinaryFunctions)
 	return x
 }
 
-// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to the fragment shader’s callable functions list.
-//
-// WithSupportAddingFragmentBinaryFunctions sets the supportAddingFragmentBinaryFunctions property and returns the receiver for chaining.
+// WithSupportAddingFragmentBinaryFunctions a Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to the fragment shader’s callable functions list.
 func (x *RenderPipelineDescriptor) WithSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) *RenderPipelineDescriptor {
-	x.inner.SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingFragmentBinaryFunctions:"), supportAddingFragmentBinaryFunctions)
 	return x
 }
 
-// The maximum function call depth from the top-most vertex shader function.
-//
-// WithMaxVertexCallStackDepth sets the maxVertexCallStackDepth property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithMaxVertexCallStackDepth(maxVertexCallStackDepth uint) *RenderPipelineDescriptor {
-	x.inner.SetMaxVertexCallStackDepth(maxVertexCallStackDepth)
+// WithMaxVertexCallStackDepth the maximum function call depth from the top-most vertex shader function.
+func (x *RenderPipelineDescriptor) WithMaxVertexCallStackDepth(maxVertexCallStackDepth int) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexCallStackDepth:"), maxVertexCallStackDepth)
 	return x
 }
 
-// The maximum function call depth from the top-most fragment shader function.
-//
-// WithMaxFragmentCallStackDepth sets the maxFragmentCallStackDepth property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) *RenderPipelineDescriptor {
-	x.inner.SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth)
+// WithMaxFragmentCallStackDepth the maximum function call depth from the top-most fragment shader function.
+func (x *RenderPipelineDescriptor) WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth int) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFragmentCallStackDepth:"), maxFragmentCallStackDepth)
 	return x
 }
 
-// A value that enables or disables shader validation for the pipeline.
-//
-// WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *RenderPipelineDescriptor {
-	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
+// WithShaderValidation a value that enables or disables shader validation for the pipeline.
+func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation ShaderValidation) *RenderPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 	return x
 }
 
-// Specifies the default rendering pipeline state values for the descriptor.
-//
-// Reset calls the underlying Reset.
+// Reset specifies the default rendering pipeline state values for the descriptor.
 func (x *RenderPipelineDescriptor) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// VertexFunction calls the underlying VertexFunction.
-func (x *RenderPipelineDescriptor) VertexFunction() raw.MTLFunction {
-	return x.inner.VertexFunction()
-}
-
-// SetVertexFunction calls the underlying SetVertexFunction.
-func (x *RenderPipelineDescriptor) SetVertexFunction(vertexFunction raw.MTLFunction) {
-	x.inner.SetVertexFunction(vertexFunction)
-}
-
-// FragmentFunction calls the underlying FragmentFunction.
-func (x *RenderPipelineDescriptor) FragmentFunction() raw.MTLFunction {
-	return x.inner.FragmentFunction()
-}
-
-// SetFragmentFunction calls the underlying SetFragmentFunction.
-func (x *RenderPipelineDescriptor) SetFragmentFunction(fragmentFunction raw.MTLFunction) {
-	x.inner.SetFragmentFunction(fragmentFunction)
-}
-
-// VertexDescriptor calls the underlying VertexDescriptor.
+// VertexDescriptor wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) VertexDescriptor() *VertexDescriptor {
-	_r := x.inner.VertexDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &VertexDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
+	return VertexDescriptorFromID(_r)
 }
 
-// SetVertexDescriptor calls the underlying SetVertexDescriptor.
-func (x *RenderPipelineDescriptor) SetVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) {
-	x.inner.SetVertexDescriptor(vertexDescriptor)
+// SetVertexDescriptor wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetVertexDescriptor(vertexDescriptor *VertexDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 }
 
-// SampleCount calls the underlying SampleCount.
-func (x *RenderPipelineDescriptor) SampleCount() uint {
-	return x.inner.SampleCount()
+// SampleCount wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+	return _r
 }
 
-// SetSampleCount calls the underlying SetSampleCount.
-func (x *RenderPipelineDescriptor) SetSampleCount(sampleCount uint) {
-	x.inner.SetSampleCount(sampleCount)
+// SetSampleCount wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetSampleCount(sampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 }
 
-// RasterSampleCount calls the underlying RasterSampleCount.
-func (x *RenderPipelineDescriptor) RasterSampleCount() uint {
-	return x.inner.RasterSampleCount()
+// RasterSampleCount wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) RasterSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rasterSampleCount"))
+	return _r
 }
 
-// SetRasterSampleCount calls the underlying SetRasterSampleCount.
-func (x *RenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount uint) {
-	x.inner.SetRasterSampleCount(rasterSampleCount)
+// SetRasterSampleCount wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterSampleCount:"), rasterSampleCount)
 }
 
-// IsAlphaToCoverageEnabled calls the underlying IsAlphaToCoverageEnabled.
+// IsAlphaToCoverageEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) IsAlphaToCoverageEnabled() bool {
-	return x.inner.IsAlphaToCoverageEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAlphaToCoverageEnabled"))
+	return _r
 }
 
-// SetAlphaToCoverageEnabled calls the underlying SetAlphaToCoverageEnabled.
+// SetAlphaToCoverageEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SetAlphaToCoverageEnabled(alphaToCoverageEnabled bool) {
-	x.inner.SetAlphaToCoverageEnabled(alphaToCoverageEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToCoverageEnabled:"), alphaToCoverageEnabled)
 }
 
-// IsAlphaToOneEnabled calls the underlying IsAlphaToOneEnabled.
+// IsAlphaToOneEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) IsAlphaToOneEnabled() bool {
-	return x.inner.IsAlphaToOneEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAlphaToOneEnabled"))
+	return _r
 }
 
-// SetAlphaToOneEnabled calls the underlying SetAlphaToOneEnabled.
+// SetAlphaToOneEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SetAlphaToOneEnabled(alphaToOneEnabled bool) {
-	x.inner.SetAlphaToOneEnabled(alphaToOneEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaToOneEnabled:"), alphaToOneEnabled)
 }
 
-// IsRasterizationEnabled calls the underlying IsRasterizationEnabled.
+// IsRasterizationEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) IsRasterizationEnabled() bool {
-	return x.inner.IsRasterizationEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRasterizationEnabled"))
+	return _r
 }
 
-// SetRasterizationEnabled calls the underlying SetRasterizationEnabled.
+// SetRasterizationEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SetRasterizationEnabled(rasterizationEnabled bool) {
-	x.inner.SetRasterizationEnabled(rasterizationEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationEnabled:"), rasterizationEnabled)
 }
 
-// MaxVertexAmplificationCount calls the underlying MaxVertexAmplificationCount.
-func (x *RenderPipelineDescriptor) MaxVertexAmplificationCount() uint {
-	return x.inner.MaxVertexAmplificationCount()
+// MaxVertexAmplificationCount wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) MaxVertexAmplificationCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxVertexAmplificationCount"))
+	return _r
 }
 
-// SetMaxVertexAmplificationCount calls the underlying SetMaxVertexAmplificationCount.
-func (x *RenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint) {
-	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
+// SetMaxVertexAmplificationCount wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAmplificationCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexAmplificationCount:"), maxVertexAmplificationCount)
 }
 
-// ColorAttachments calls the underlying ColorAttachments.
+// ColorAttachments wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray {
-	_r := x.inner.ColorAttachments()
-	if _r == nil {
-		return nil
-	}
-	return &RenderPipelineColorAttachmentDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorAttachments"))
+	return RenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// DepthAttachmentPixelFormat calls the underlying DepthAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) DepthAttachmentPixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.DepthAttachmentPixelFormat())
+// DepthAttachmentPixelFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) DepthAttachmentPixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("depthAttachmentPixelFormat"))
+	return _r
 }
 
-// SetDepthAttachmentPixelFormat calls the underlying SetDepthAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) {
-	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
+// SetDepthAttachmentPixelFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthAttachmentPixelFormat:"), depthAttachmentPixelFormat)
 }
 
-// StencilAttachmentPixelFormat calls the underlying StencilAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) StencilAttachmentPixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.StencilAttachmentPixelFormat())
+// StencilAttachmentPixelFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) StencilAttachmentPixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("stencilAttachmentPixelFormat"))
+	return _r
 }
 
-// SetStencilAttachmentPixelFormat calls the underlying SetStencilAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) {
-	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
+// SetStencilAttachmentPixelFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilAttachmentPixelFormat:"), stencilAttachmentPixelFormat)
 }
 
-// InputPrimitiveTopology calls the underlying InputPrimitiveTopology.
-func (x *RenderPipelineDescriptor) InputPrimitiveTopology() MTLPrimitiveTopologyClass {
-	return MTLPrimitiveTopologyClass(x.inner.InputPrimitiveTopology())
+// InputPrimitiveTopology wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) InputPrimitiveTopology() PrimitiveTopologyClass {
+	_r := objc.Send[PrimitiveTopologyClass](objref.IDOf(x), objc.RegisterName("inputPrimitiveTopology"))
+	return _r
 }
 
-// SetInputPrimitiveTopology calls the underlying SetInputPrimitiveTopology.
-func (x *RenderPipelineDescriptor) SetInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) {
-	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
+// SetInputPrimitiveTopology wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetInputPrimitiveTopology(inputPrimitiveTopology PrimitiveTopologyClass) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputPrimitiveTopology:"), inputPrimitiveTopology)
 }
 
-// TessellationPartitionMode calls the underlying TessellationPartitionMode.
-func (x *RenderPipelineDescriptor) TessellationPartitionMode() MTLTessellationPartitionMode {
-	return MTLTessellationPartitionMode(x.inner.TessellationPartitionMode())
+// TessellationPartitionMode wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) TessellationPartitionMode() TessellationPartitionMode {
+	_r := objc.Send[TessellationPartitionMode](objref.IDOf(x), objc.RegisterName("tessellationPartitionMode"))
+	return _r
 }
 
-// SetTessellationPartitionMode calls the underlying SetTessellationPartitionMode.
-func (x *RenderPipelineDescriptor) SetTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) {
-	x.inner.SetTessellationPartitionMode(raw.MTLTessellationPartitionMode(tessellationPartitionMode))
+// SetTessellationPartitionMode wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetTessellationPartitionMode(tessellationPartitionMode TessellationPartitionMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationPartitionMode:"), tessellationPartitionMode)
 }
 
-// MaxTessellationFactor calls the underlying MaxTessellationFactor.
-func (x *RenderPipelineDescriptor) MaxTessellationFactor() uint {
-	return x.inner.MaxTessellationFactor()
+// MaxTessellationFactor wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) MaxTessellationFactor() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTessellationFactor"))
+	return _r
 }
 
-// SetMaxTessellationFactor calls the underlying SetMaxTessellationFactor.
-func (x *RenderPipelineDescriptor) SetMaxTessellationFactor(maxTessellationFactor uint) {
-	x.inner.SetMaxTessellationFactor(maxTessellationFactor)
+// SetMaxTessellationFactor wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetMaxTessellationFactor(maxTessellationFactor int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTessellationFactor:"), maxTessellationFactor)
 }
 
-// IsTessellationFactorScaleEnabled calls the underlying IsTessellationFactorScaleEnabled.
+// IsTessellationFactorScaleEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) IsTessellationFactorScaleEnabled() bool {
-	return x.inner.IsTessellationFactorScaleEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTessellationFactorScaleEnabled"))
+	return _r
 }
 
-// SetTessellationFactorScaleEnabled calls the underlying SetTessellationFactorScaleEnabled.
+// SetTessellationFactorScaleEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SetTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool) {
-	x.inner.SetTessellationFactorScaleEnabled(tessellationFactorScaleEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorScaleEnabled:"), tessellationFactorScaleEnabled)
 }
 
-// TessellationFactorFormat calls the underlying TessellationFactorFormat.
-func (x *RenderPipelineDescriptor) TessellationFactorFormat() MTLTessellationFactorFormat {
-	return MTLTessellationFactorFormat(x.inner.TessellationFactorFormat())
+// TessellationFactorFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) TessellationFactorFormat() TessellationFactorFormat {
+	_r := objc.Send[TessellationFactorFormat](objref.IDOf(x), objc.RegisterName("tessellationFactorFormat"))
+	return _r
 }
 
-// SetTessellationFactorFormat calls the underlying SetTessellationFactorFormat.
-func (x *RenderPipelineDescriptor) SetTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) {
-	x.inner.SetTessellationFactorFormat(raw.MTLTessellationFactorFormat(tessellationFactorFormat))
+// SetTessellationFactorFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetTessellationFactorFormat(tessellationFactorFormat TessellationFactorFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorFormat:"), tessellationFactorFormat)
 }
 
-// TessellationControlPointIndexType calls the underlying TessellationControlPointIndexType.
-func (x *RenderPipelineDescriptor) TessellationControlPointIndexType() MTLTessellationControlPointIndexType {
-	return MTLTessellationControlPointIndexType(x.inner.TessellationControlPointIndexType())
+// TessellationControlPointIndexType wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) TessellationControlPointIndexType() TessellationControlPointIndexType {
+	_r := objc.Send[TessellationControlPointIndexType](objref.IDOf(x), objc.RegisterName("tessellationControlPointIndexType"))
+	return _r
 }
 
-// SetTessellationControlPointIndexType calls the underlying SetTessellationControlPointIndexType.
-func (x *RenderPipelineDescriptor) SetTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) {
-	x.inner.SetTessellationControlPointIndexType(raw.MTLTessellationControlPointIndexType(tessellationControlPointIndexType))
+// SetTessellationControlPointIndexType wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetTessellationControlPointIndexType(tessellationControlPointIndexType TessellationControlPointIndexType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationControlPointIndexType:"), tessellationControlPointIndexType)
 }
 
-// TessellationFactorStepFunction calls the underlying TessellationFactorStepFunction.
-func (x *RenderPipelineDescriptor) TessellationFactorStepFunction() MTLTessellationFactorStepFunction {
-	return MTLTessellationFactorStepFunction(x.inner.TessellationFactorStepFunction())
+// TessellationFactorStepFunction wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) TessellationFactorStepFunction() TessellationFactorStepFunction {
+	_r := objc.Send[TessellationFactorStepFunction](objref.IDOf(x), objc.RegisterName("tessellationFactorStepFunction"))
+	return _r
 }
 
-// SetTessellationFactorStepFunction calls the underlying SetTessellationFactorStepFunction.
-func (x *RenderPipelineDescriptor) SetTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) {
-	x.inner.SetTessellationFactorStepFunction(raw.MTLTessellationFactorStepFunction(tessellationFactorStepFunction))
+// SetTessellationFactorStepFunction wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetTessellationFactorStepFunction(tessellationFactorStepFunction TessellationFactorStepFunction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationFactorStepFunction:"), tessellationFactorStepFunction)
 }
 
-// TessellationOutputWindingOrder calls the underlying TessellationOutputWindingOrder.
-func (x *RenderPipelineDescriptor) TessellationOutputWindingOrder() MTLWinding {
-	return MTLWinding(x.inner.TessellationOutputWindingOrder())
+// TessellationOutputWindingOrder wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) TessellationOutputWindingOrder() Winding {
+	_r := objc.Send[Winding](objref.IDOf(x), objc.RegisterName("tessellationOutputWindingOrder"))
+	return _r
 }
 
-// SetTessellationOutputWindingOrder calls the underlying SetTessellationOutputWindingOrder.
-func (x *RenderPipelineDescriptor) SetTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) {
-	x.inner.SetTessellationOutputWindingOrder(raw.MTLWinding(tessellationOutputWindingOrder))
+// SetTessellationOutputWindingOrder wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetTessellationOutputWindingOrder(tessellationOutputWindingOrder Winding) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellationOutputWindingOrder:"), tessellationOutputWindingOrder)
 }
 
-// VertexBuffers calls the underlying VertexBuffers.
+// VertexBuffers wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) VertexBuffers() *PipelineBufferDescriptorArray {
-	_r := x.inner.VertexBuffers()
-	if _r == nil {
-		return nil
-	}
-	return &PipelineBufferDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBuffers"))
+	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// FragmentBuffers calls the underlying FragmentBuffers.
+// FragmentBuffers wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) FragmentBuffers() *PipelineBufferDescriptorArray {
-	_r := x.inner.FragmentBuffers()
-	if _r == nil {
-		return nil
-	}
-	return &PipelineBufferDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentBuffers"))
+	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
+// SupportIndirectCommandBuffers wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SupportIndirectCommandBuffers() bool {
-	return x.inner.SupportIndirectCommandBuffers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportIndirectCommandBuffers"))
+	return _r
 }
 
-// SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
+// SetSupportIndirectCommandBuffers wraps the corresponding Objective-C method.
 func (x *RenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
 }
 
-// @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
-//
-// BinaryArchives calls the underlying BinaryArchives.
-func (x *RenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
-	return x.inner.BinaryArchives()
+// BinaryArchives the set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
+func (x *RenderPipelineDescriptor) BinaryArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryArchives"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *RenderPipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(binaryArchives))
-	for _i, _v := range binaryArchives {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetBinaryArchives(_arg0)
+// SetBinaryArchives wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property vertexPreloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the vertexFunction before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use vertexPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
-//
-// VertexPreloadedLibraries calls the underlying VertexPreloadedLibraries.
-func (x *RenderPipelineDescriptor) VertexPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
-	return x.inner.VertexPreloadedLibraries()
+// VertexPreloadedLibraries the set of MTLDynamicLibrary to use to resolve external symbols for the vertexFunction before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use vertexPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+func (x *RenderPipelineDescriptor) VertexPreloadedLibraries() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexPreloadedLibraries"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetVertexPreloadedLibraries calls the underlying SetVertexPreloadedLibraries.
-func (x *RenderPipelineDescriptor) SetVertexPreloadedLibraries(vertexPreloadedLibraries ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(vertexPreloadedLibraries))
-	for _i, _v := range vertexPreloadedLibraries {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetVertexPreloadedLibraries(_arg0)
+// SetVertexPreloadedLibraries wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetVertexPreloadedLibraries(vertexPreloadedLibraries []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexPreloadedLibraries:"), purego.SliceToNSArray(vertexPreloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property fragmentPreloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the fragmentFunction before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use fragmentPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
-//
-// FragmentPreloadedLibraries calls the underlying FragmentPreloadedLibraries.
-func (x *RenderPipelineDescriptor) FragmentPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
-	return x.inner.FragmentPreloadedLibraries()
+// FragmentPreloadedLibraries the set of MTLDynamicLibrary to use to resolve external symbols for the fragmentFunction before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use fragmentPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+func (x *RenderPipelineDescriptor) FragmentPreloadedLibraries() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentPreloadedLibraries"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetFragmentPreloadedLibraries calls the underlying SetFragmentPreloadedLibraries.
-func (x *RenderPipelineDescriptor) SetFragmentPreloadedLibraries(fragmentPreloadedLibraries ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(fragmentPreloadedLibraries))
-	for _i, _v := range fragmentPreloadedLibraries {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetFragmentPreloadedLibraries(_arg0)
+// SetFragmentPreloadedLibraries wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetFragmentPreloadedLibraries(fragmentPreloadedLibraries []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentPreloadedLibraries:"), purego.SliceToNSArray(fragmentPreloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
-//
-// VertexLinkedFunctions calls the underlying VertexLinkedFunctions.
+// VertexLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the vertex function.
 func (x *RenderPipelineDescriptor) VertexLinkedFunctions() *LinkedFunctions {
-	_r := x.inner.VertexLinkedFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &LinkedFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexLinkedFunctions"))
+	return LinkedFunctionsFromID(_r)
 }
 
-// @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
-//
-// SetVertexLinkedFunctions calls the underlying SetVertexLinkedFunctions.
-func (x *RenderPipelineDescriptor) SetVertexLinkedFunctions(vertexLinkedFunctions *raw.MTLLinkedFunctions) {
-	x.inner.SetVertexLinkedFunctions(vertexLinkedFunctions)
+// SetVertexLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the vertex function.
+func (x *RenderPipelineDescriptor) SetVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexLinkedFunctions:"), objref.IDOf(vertexLinkedFunctions))
 }
 
-// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
-//
-// FragmentLinkedFunctions calls the underlying FragmentLinkedFunctions.
+// FragmentLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the fragment function.
 func (x *RenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunctions {
-	_r := x.inner.FragmentLinkedFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &LinkedFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentLinkedFunctions"))
+	return LinkedFunctionsFromID(_r)
 }
 
-// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
-//
-// SetFragmentLinkedFunctions calls the underlying SetFragmentLinkedFunctions.
-func (x *RenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) {
-	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions)
+// SetFragmentLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the fragment function.
+func (x *RenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentLinkedFunctions:"), objref.IDOf(fragmentLinkedFunctions))
 }
 
-// @property supportAddingVertexBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
-//
-// SupportAddingVertexBinaryFunctions calls the underlying SupportAddingVertexBinaryFunctions.
+// SupportAddingVertexBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *RenderPipelineDescriptor) SupportAddingVertexBinaryFunctions() bool {
-	return x.inner.SupportAddingVertexBinaryFunctions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportAddingVertexBinaryFunctions"))
+	return _r
 }
 
-// @property supportAddingVertexBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
-//
-// SetSupportAddingVertexBinaryFunctions calls the underlying SetSupportAddingVertexBinaryFunctions.
+// SetSupportAddingVertexBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *RenderPipelineDescriptor) SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) {
-	x.inner.SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingVertexBinaryFunctions:"), supportAddingVertexBinaryFunctions)
 }
 
-// @property supportFragmentAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
-//
-// SupportAddingFragmentBinaryFunctions calls the underlying SupportAddingFragmentBinaryFunctions.
+// SupportAddingFragmentBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *RenderPipelineDescriptor) SupportAddingFragmentBinaryFunctions() bool {
-	return x.inner.SupportAddingFragmentBinaryFunctions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportAddingFragmentBinaryFunctions"))
+	return _r
 }
 
-// @property supportFragmentAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
-//
-// SetSupportAddingFragmentBinaryFunctions calls the underlying SetSupportAddingFragmentBinaryFunctions.
+// SetSupportAddingFragmentBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *RenderPipelineDescriptor) SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) {
-	x.inner.SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingFragmentBinaryFunctions:"), supportAddingFragmentBinaryFunctions)
 }
 
-// @property maxVertexCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
-//
-// MaxVertexCallStackDepth calls the underlying MaxVertexCallStackDepth.
-func (x *RenderPipelineDescriptor) MaxVertexCallStackDepth() uint {
-	return x.inner.MaxVertexCallStackDepth()
+// MaxVertexCallStackDepth the maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+func (x *RenderPipelineDescriptor) MaxVertexCallStackDepth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxVertexCallStackDepth"))
+	return _r
 }
 
-// @property maxVertexCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
-//
-// SetMaxVertexCallStackDepth calls the underlying SetMaxVertexCallStackDepth.
-func (x *RenderPipelineDescriptor) SetMaxVertexCallStackDepth(maxVertexCallStackDepth uint) {
-	x.inner.SetMaxVertexCallStackDepth(maxVertexCallStackDepth)
+// SetMaxVertexCallStackDepth the maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+func (x *RenderPipelineDescriptor) SetMaxVertexCallStackDepth(maxVertexCallStackDepth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVertexCallStackDepth:"), maxVertexCallStackDepth)
 }
 
-// @property maxFragmentCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
-//
-// MaxFragmentCallStackDepth calls the underlying MaxFragmentCallStackDepth.
-func (x *RenderPipelineDescriptor) MaxFragmentCallStackDepth() uint {
-	return x.inner.MaxFragmentCallStackDepth()
+// MaxFragmentCallStackDepth the maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+func (x *RenderPipelineDescriptor) MaxFragmentCallStackDepth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxFragmentCallStackDepth"))
+	return _r
 }
 
-// @property maxFragmentCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
-//
-// SetMaxFragmentCallStackDepth calls the underlying SetMaxFragmentCallStackDepth.
-func (x *RenderPipelineDescriptor) SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) {
-	x.inner.SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth)
+// SetMaxFragmentCallStackDepth the maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+func (x *RenderPipelineDescriptor) SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFragmentCallStackDepth:"), maxFragmentCallStackDepth)
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
-//
-// ShaderValidation calls the underlying ShaderValidation.
-func (x *RenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
-	return MTLShaderValidation(x.inner.ShaderValidation())
+// ShaderValidation toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+func (x *RenderPipelineDescriptor) ShaderValidation() ShaderValidation {
+	_r := objc.Send[ShaderValidation](objref.IDOf(x), objc.RegisterName("shaderValidation"))
+	return _r
 }
 
-// SetShaderValidation calls the underlying SetShaderValidation.
-func (x *RenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
-	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
+// SetShaderValidation wraps the corresponding Objective-C method.
+func (x *RenderPipelineDescriptor) SetShaderValidation(shaderValidation ShaderValidation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 }
 
 // RenderPipelineDescriptorable is the interface implemented by [RenderPipelineDescriptor], for mocking and DI.
 type RenderPipelineDescriptorable interface {
-	Unwrap() *raw.MTLRenderPipelineDescriptor
+	obj.Object
 	WithLabel(label string) *RenderPipelineDescriptor
-	WithVertexFunction(vertexFunction raw.MTLFunction) *RenderPipelineDescriptor
-	WithFragmentFunction(fragmentFunction raw.MTLFunction) *RenderPipelineDescriptor
 	WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *RenderPipelineDescriptor
-	WithSampleCount(sampleCount uint) *RenderPipelineDescriptor
-	WithRasterSampleCount(rasterSampleCount uint) *RenderPipelineDescriptor
+	WithSampleCount(sampleCount int) *RenderPipelineDescriptor
+	WithRasterSampleCount(rasterSampleCount int) *RenderPipelineDescriptor
 	WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *RenderPipelineDescriptor
 	WithAlphaToOneEnabled(alphaToOneEnabled bool) *RenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *RenderPipelineDescriptor
-	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *RenderPipelineDescriptor
-	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor
-	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor
-	WithInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) *RenderPipelineDescriptor
-	WithTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) *RenderPipelineDescriptor
-	WithMaxTessellationFactor(maxTessellationFactor uint) *RenderPipelineDescriptor
+	WithMaxVertexAmplificationCount(maxVertexAmplificationCount int) *RenderPipelineDescriptor
+	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat) *RenderPipelineDescriptor
+	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat) *RenderPipelineDescriptor
+	WithInputPrimitiveTopology(inputPrimitiveTopology PrimitiveTopologyClass) *RenderPipelineDescriptor
+	WithTessellationPartitionMode(tessellationPartitionMode TessellationPartitionMode) *RenderPipelineDescriptor
+	WithMaxTessellationFactor(maxTessellationFactor int) *RenderPipelineDescriptor
 	WithTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool) *RenderPipelineDescriptor
-	WithTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) *RenderPipelineDescriptor
-	WithTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) *RenderPipelineDescriptor
-	WithTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) *RenderPipelineDescriptor
-	WithTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) *RenderPipelineDescriptor
+	WithTessellationFactorFormat(tessellationFactorFormat TessellationFactorFormat) *RenderPipelineDescriptor
+	WithTessellationControlPointIndexType(tessellationControlPointIndexType TessellationControlPointIndexType) *RenderPipelineDescriptor
+	WithTessellationFactorStepFunction(tessellationFactorStepFunction TessellationFactorStepFunction) *RenderPipelineDescriptor
+	WithTessellationOutputWindingOrder(tessellationOutputWindingOrder Winding) *RenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *RenderPipelineDescriptor
 	WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor
 	WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor
 	WithSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) *RenderPipelineDescriptor
 	WithSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) *RenderPipelineDescriptor
-	WithMaxVertexCallStackDepth(maxVertexCallStackDepth uint) *RenderPipelineDescriptor
-	WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) *RenderPipelineDescriptor
-	WithShaderValidation(shaderValidation MTLShaderValidation) *RenderPipelineDescriptor
+	WithMaxVertexCallStackDepth(maxVertexCallStackDepth int) *RenderPipelineDescriptor
+	WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth int) *RenderPipelineDescriptor
+	WithShaderValidation(shaderValidation ShaderValidation) *RenderPipelineDescriptor
 	Reset()
 	Label() string
 	SetLabel(label string)
-	VertexFunction() raw.MTLFunction
-	SetVertexFunction(vertexFunction raw.MTLFunction)
-	FragmentFunction() raw.MTLFunction
-	SetFragmentFunction(fragmentFunction raw.MTLFunction)
 	VertexDescriptor() *VertexDescriptor
-	SetVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor)
-	SampleCount() uint
-	SetSampleCount(sampleCount uint)
-	RasterSampleCount() uint
-	SetRasterSampleCount(rasterSampleCount uint)
+	SetVertexDescriptor(vertexDescriptor *VertexDescriptor)
+	SampleCount() int
+	SetSampleCount(sampleCount int)
+	RasterSampleCount() int
+	SetRasterSampleCount(rasterSampleCount int)
 	IsAlphaToCoverageEnabled() bool
 	SetAlphaToCoverageEnabled(alphaToCoverageEnabled bool)
 	IsAlphaToOneEnabled() bool
 	SetAlphaToOneEnabled(alphaToOneEnabled bool)
 	IsRasterizationEnabled() bool
 	SetRasterizationEnabled(rasterizationEnabled bool)
-	MaxVertexAmplificationCount() uint
-	SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint)
+	MaxVertexAmplificationCount() int
+	SetMaxVertexAmplificationCount(maxVertexAmplificationCount int)
 	ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray
-	DepthAttachmentPixelFormat() MTLPixelFormat
-	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat)
-	StencilAttachmentPixelFormat() MTLPixelFormat
-	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat)
-	InputPrimitiveTopology() MTLPrimitiveTopologyClass
-	SetInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass)
-	TessellationPartitionMode() MTLTessellationPartitionMode
-	SetTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode)
-	MaxTessellationFactor() uint
-	SetMaxTessellationFactor(maxTessellationFactor uint)
+	DepthAttachmentPixelFormat() PixelFormat
+	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat PixelFormat)
+	StencilAttachmentPixelFormat() PixelFormat
+	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat PixelFormat)
+	InputPrimitiveTopology() PrimitiveTopologyClass
+	SetInputPrimitiveTopology(inputPrimitiveTopology PrimitiveTopologyClass)
+	TessellationPartitionMode() TessellationPartitionMode
+	SetTessellationPartitionMode(tessellationPartitionMode TessellationPartitionMode)
+	MaxTessellationFactor() int
+	SetMaxTessellationFactor(maxTessellationFactor int)
 	IsTessellationFactorScaleEnabled() bool
 	SetTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool)
-	TessellationFactorFormat() MTLTessellationFactorFormat
-	SetTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat)
-	TessellationControlPointIndexType() MTLTessellationControlPointIndexType
-	SetTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType)
-	TessellationFactorStepFunction() MTLTessellationFactorStepFunction
-	SetTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction)
-	TessellationOutputWindingOrder() MTLWinding
-	SetTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding)
+	TessellationFactorFormat() TessellationFactorFormat
+	SetTessellationFactorFormat(tessellationFactorFormat TessellationFactorFormat)
+	TessellationControlPointIndexType() TessellationControlPointIndexType
+	SetTessellationControlPointIndexType(tessellationControlPointIndexType TessellationControlPointIndexType)
+	TessellationFactorStepFunction() TessellationFactorStepFunction
+	SetTessellationFactorStepFunction(tessellationFactorStepFunction TessellationFactorStepFunction)
+	TessellationOutputWindingOrder() Winding
+	SetTessellationOutputWindingOrder(tessellationOutputWindingOrder Winding)
 	VertexBuffers() *PipelineBufferDescriptorArray
 	FragmentBuffers() *PipelineBufferDescriptorArray
 	SupportIndirectCommandBuffers() bool
 	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
-	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives ...purego.IDer)
-	VertexPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetVertexPreloadedLibraries(vertexPreloadedLibraries ...purego.IDer)
-	FragmentPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetFragmentPreloadedLibraries(fragmentPreloadedLibraries ...purego.IDer)
+	BinaryArchives() []obj.Object
+	SetBinaryArchives(binaryArchives []obj.Object)
+	VertexPreloadedLibraries() []obj.Object
+	SetVertexPreloadedLibraries(vertexPreloadedLibraries []obj.Object)
+	FragmentPreloadedLibraries() []obj.Object
+	SetFragmentPreloadedLibraries(fragmentPreloadedLibraries []obj.Object)
 	VertexLinkedFunctions() *LinkedFunctions
-	SetVertexLinkedFunctions(vertexLinkedFunctions *raw.MTLLinkedFunctions)
+	SetVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions)
 	FragmentLinkedFunctions() *LinkedFunctions
-	SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions)
+	SetFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions)
 	SupportAddingVertexBinaryFunctions() bool
 	SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool)
 	SupportAddingFragmentBinaryFunctions() bool
 	SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool)
-	MaxVertexCallStackDepth() uint
-	SetMaxVertexCallStackDepth(maxVertexCallStackDepth uint)
-	MaxFragmentCallStackDepth() uint
-	SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint)
-	ShaderValidation() MTLShaderValidation
-	SetShaderValidation(shaderValidation MTLShaderValidation)
+	MaxVertexCallStackDepth() int
+	SetMaxVertexCallStackDepth(maxVertexCallStackDepth int)
+	MaxFragmentCallStackDepth() int
+	SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth int)
+	ShaderValidation() ShaderValidation
+	SetShaderValidation(shaderValidation ShaderValidation)
 }
 
 var _ RenderPipelineDescriptorable = (*RenderPipelineDescriptor)(nil)

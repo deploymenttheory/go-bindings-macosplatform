@@ -5,58 +5,90 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Parameters used to perform specific key exchange operations.
+// TokenKeyExchangeParameters is an idiomatic wrapper over the Objective-C class TKTokenKeyExchangeParameters.
 //
-// TokenKeyExchangeParameters wraps [raw.TKTokenKeyExchangeParameters] with a fluent Go API.
+// Parameters used to perform specific key exchange operations.
 type TokenKeyExchangeParameters struct {
-	inner *raw.TKTokenKeyExchangeParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenKeyExchangeParameters].
-func (x *TokenKeyExchangeParameters) Unwrap() *raw.TKTokenKeyExchangeParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenKeyExchangeParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenKeyExchangeParametersFromID adopts an existing object pointer as a TokenKeyExchangeParameters (nil for 0).
+// TokenKeyExchangeParametersFromID adopts an existing Objective-C object as a TokenKeyExchangeParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenKeyExchangeParametersFromID(id objc.ID) *TokenKeyExchangeParameters {
 	if id == 0 {
 		return nil
 	}
-	return &TokenKeyExchangeParameters{inner: raw.TKTokenKeyExchangeParametersFromID(id)}
+	x := &TokenKeyExchangeParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTokenKeyExchangeParameters creates a new [TokenKeyExchangeParameters].
+// tokenKeyExchangeParametersAdopt wraps an Objective-C object that this code just created as a
+// TokenKeyExchangeParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenKeyExchangeParametersAdopt(id objc.ID) *TokenKeyExchangeParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenKeyExchangeParameters{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenKeyExchangeParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenKeyExchangeParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenKeyExchangeParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenKeyExchangeParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTokenKeyExchangeParameters creates a new TokenKeyExchangeParameters.
 func NewTokenKeyExchangeParameters() *TokenKeyExchangeParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeyExchangeParameters")), objc.RegisterName("new"))
-	return &TokenKeyExchangeParameters{inner: raw.TKTokenKeyExchangeParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeyExchangeParameters")), objc.RegisterName("new"))
+	return tokenKeyExchangeParametersAdopt(_id)
 }
 
-// @discussion Requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
-//
-// RequestedSize calls the underlying RequestedSize.
+// RequestedSize requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
 func (x *TokenKeyExchangeParameters) RequestedSize() int {
-	return x.inner.RequestedSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestedSize"))
+	return _r
 }
 
-// @discussion Additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
-//
-// SharedInfo calls the underlying SharedInfo.
-func (x *TokenKeyExchangeParameters) SharedInfo() *foundation.NSData {
-	return x.inner.SharedInfo()
+// SharedInfo additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
+func (x *TokenKeyExchangeParameters) SharedInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedInfo"))
+	return obj.Wrap(_r)
 }
 
 // TokenKeyExchangeParametersable is the interface implemented by [TokenKeyExchangeParameters], for mocking and DI.
 type TokenKeyExchangeParametersable interface {
-	Unwrap() *raw.TKTokenKeyExchangeParameters
+	obj.Object
 	RequestedSize() int
-	SharedInfo() *foundation.NSData
+	SharedInfo() obj.Object
 }
 
 var _ TokenKeyExchangeParametersable = (*TokenKeyExchangeParameters)(nil)

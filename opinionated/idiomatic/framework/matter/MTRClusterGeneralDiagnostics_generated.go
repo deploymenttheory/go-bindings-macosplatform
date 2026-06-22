@@ -6,71 +6,76 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterGeneralDiagnostics wraps [raw.MTRClusterGeneralDiagnostics] with a fluent Go API.
+// MTRClusterGeneralDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterGeneralDiagnostics.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterGeneralDiagnostics struct {
-	inner *raw.MTRClusterGeneralDiagnostics
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterGeneralDiagnostics].
-func (x *MTRClusterGeneralDiagnostics) Unwrap() *raw.MTRClusterGeneralDiagnostics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterGeneralDiagnostics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterGeneralDiagnosticsFromID adopts an existing object pointer as a MTRClusterGeneralDiagnostics (nil for 0).
+// MTRClusterGeneralDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterGeneralDiagnostics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterGeneralDiagnosticsFromID(id objc.ID) *MTRClusterGeneralDiagnostics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterGeneralDiagnostics{inner: raw.MTRClusterGeneralDiagnosticsFromID(id)}
+	x := &MTRClusterGeneralDiagnostics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+// mTRClusterGeneralDiagnosticsAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterGeneralDiagnostics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterGeneralDiagnosticsAdopt(id objc.ID) *MTRClusterGeneralDiagnostics {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterGeneralDiagnostics{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRClusterGeneralDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterGeneralDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterGeneralDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGeneralDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterGeneralDiagnosticsAdopt(_id)
+}
+
+// NewMTRClusterGeneralDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterGeneralDiagnostics.
+func NewMTRClusterGeneralDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterGeneralDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGeneralDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterGeneralDiagnosticsAdopt(_id)
+}
+
+// TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
-// NewMTRClusterGeneralDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRClusterGeneralDiagnostics].
-func NewMTRClusterGeneralDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGeneralDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGeneralDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterGeneralDiagnostics{inner: raw.MTRClusterGeneralDiagnosticsFromID(_id)}
-}
-
-// NewMTRClusterGeneralDiagnosticsWithDeviceEndpointQueue creates a new [MTRClusterGeneralDiagnostics].
-func NewMTRClusterGeneralDiagnosticsWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGeneralDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGeneralDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterGeneralDiagnostics{inner: raw.MTRClusterGeneralDiagnosticsFromID(_id)}
-}
-
-// TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterGeneralDiagnostics) TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGeneralDiagnosticsClusterTestEventTriggerParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
-}
-
 // TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralDiagnostics) TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error) {
+func (x *MTRClusterGeneralDiagnostics) TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralDiagnosticsClusterTimeSnapshotParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeSnapshotWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -80,23 +85,22 @@ func (x *MTRClusterGeneralDiagnostics) TimeSnapshotWithParamsExpectedValuesExpec
 	}
 }
 
+// TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralDiagnostics) TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error) {
+func (x *MTRClusterGeneralDiagnostics) TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeSnapshotWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,23 +110,22 @@ func (x *MTRClusterGeneralDiagnostics) TimeSnapshotWithExpectedValuesExpectedVal
 	}
 }
 
+// PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralDiagnostics) PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error) {
+func (x *MTRClusterGeneralDiagnostics) PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralDiagnosticsClusterPayloadTestRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralDiagnosticsClusterPayloadTestResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralDiagnosticsClusterPayloadTestResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGeneralDiagnosticsClusterPayloadTestResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payloadTestRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -132,117 +135,121 @@ func (x *MTRClusterGeneralDiagnostics) PayloadTestRequestWithParamsExpectedValue
 	}
 }
 
-// ReadAttributeNetworkInterfacesWithParams calls the underlying ReadAttributeNetworkInterfacesWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeNetworkInterfacesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNetworkInterfacesWithParams(params)
+// ReadAttributeNetworkInterfacesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeNetworkInterfacesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkInterfacesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRebootCountWithParams calls the underlying ReadAttributeRebootCountWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeRebootCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRebootCountWithParams(params)
+// ReadAttributeRebootCountWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeRebootCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRebootCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeUpTimeWithParams calls the underlying ReadAttributeUpTimeWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeUpTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeUpTimeWithParams(params)
+// ReadAttributeUpTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeUpTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTotalOperationalHoursWithParams calls the underlying ReadAttributeTotalOperationalHoursWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeTotalOperationalHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTotalOperationalHoursWithParams(params)
+// ReadAttributeTotalOperationalHoursWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeTotalOperationalHoursWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTotalOperationalHoursWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBootReasonWithParams calls the underlying ReadAttributeBootReasonWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBootReasonWithParams(params)
+// ReadAttributeBootReasonWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBootReasonWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveHardwareFaultsWithParams calls the underlying ReadAttributeActiveHardwareFaultsWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeActiveHardwareFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveHardwareFaultsWithParams(params)
+// ReadAttributeActiveHardwareFaultsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeActiveHardwareFaultsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveHardwareFaultsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveRadioFaultsWithParams calls the underlying ReadAttributeActiveRadioFaultsWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeActiveRadioFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveRadioFaultsWithParams(params)
+// ReadAttributeActiveRadioFaultsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeActiveRadioFaultsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveRadioFaultsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveNetworkFaultsWithParams calls the underlying ReadAttributeActiveNetworkFaultsWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeActiveNetworkFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveNetworkFaultsWithParams(params)
+// ReadAttributeActiveNetworkFaultsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeActiveNetworkFaultsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTestEventTriggersEnabledWithParams calls the underlying ReadAttributeTestEventTriggersEnabledWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeTestEventTriggersEnabledWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTestEventTriggersEnabledWithParams(params)
+// ReadAttributeTestEventTriggersEnabledWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeTestEventTriggersEnabledWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTestEventTriggersEnabledWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterGeneralDiagnostics) TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGeneralDiagnosticsClusterTestEventTriggerParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ReadAttributeBootReasonsWithParams calls the underlying ReadAttributeBootReasonsWithParams.
-func (x *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBootReasonsWithParams(params)
-}
-
-func (x *MTRClusterGeneralDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterGeneralDiagnostics) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeBootReasonsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBootReasonsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterGeneralDiagnosticsable is the interface implemented by [MTRClusterGeneralDiagnostics], for mocking and DI.
 type MTRClusterGeneralDiagnosticsable interface {
-	Unwrap() *raw.MTRClusterGeneralDiagnostics
-	TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGeneralDiagnosticsClusterTestEventTriggerParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error)
-	TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error)
-	PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error)
-	ReadAttributeNetworkInterfacesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRebootCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeUpTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTotalOperationalHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBootReasonWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveHardwareFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveRadioFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveNetworkFaultsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTestEventTriggersEnabledWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	TestEventTriggerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGeneralDiagnosticsClusterTestEventTriggerParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ReadAttributeBootReasonsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	TimeSnapshotWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralDiagnosticsClusterTimeSnapshotParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error)
+	TimeSnapshotWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error)
+	PayloadTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralDiagnosticsClusterPayloadTestRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error)
+	ReadAttributeNetworkInterfacesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRebootCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeUpTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTotalOperationalHoursWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBootReasonWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveHardwareFaultsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveRadioFaultsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveNetworkFaultsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTestEventTriggersEnabledWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBootReasonsWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterGeneralDiagnosticsable = (*MTRClusterGeneralDiagnostics)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterGeneralDiagnostics)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterGeneralDiagnostics)(nil)

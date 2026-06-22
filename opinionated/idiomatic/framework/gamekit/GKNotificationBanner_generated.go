@@ -5,41 +5,76 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Game Center-style banner that displays a message to the local player.
+// NotificationBanner is an idiomatic wrapper over the Objective-C class GKNotificationBanner.
 //
-// NotificationBanner wraps [raw.GKNotificationBanner] with a fluent Go API.
+// A Game Center-style banner that displays a message to the local player.
 type NotificationBanner struct {
-	inner *raw.GKNotificationBanner
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKNotificationBanner].
-func (x *NotificationBanner) Unwrap() *raw.GKNotificationBanner { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationBanner) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationBannerFromID adopts an existing object pointer as a NotificationBanner (nil for 0).
+// NotificationBannerFromID adopts an existing Objective-C object as a NotificationBanner
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationBannerFromID(id objc.ID) *NotificationBanner {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationBanner{inner: raw.GKNotificationBannerFromID(id)}
+	x := &NotificationBanner{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationBanner creates a new [NotificationBanner].
+// notificationBannerAdopt wraps an Objective-C object that this code just created as a
+// NotificationBanner (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationBannerAdopt(id objc.ID) *NotificationBanner {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationBanner{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationBanner) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationBanner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationBanner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationBanner) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotificationBanner creates a new NotificationBanner.
 func NewNotificationBanner() *NotificationBanner {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNotificationBanner")), objc.RegisterName("new"))
-	return &NotificationBanner{inner: raw.GKNotificationBannerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKNotificationBanner")), objc.RegisterName("new"))
+	return notificationBannerAdopt(_id)
 }
 
 // NotificationBannerable is the interface implemented by [NotificationBanner], for mocking and DI.
 type NotificationBannerable interface {
-	Unwrap() *raw.GKNotificationBanner
+	obj.Object
 }
 
 var _ NotificationBannerable = (*NotificationBanner)(nil)

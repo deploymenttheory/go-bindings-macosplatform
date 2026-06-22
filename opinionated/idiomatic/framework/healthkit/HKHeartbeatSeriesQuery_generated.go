@@ -5,47 +5,58 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A query that returns the heartbeat data contained in a heartbeat series sample.
+// HeartbeatSeriesQuery is an idiomatic wrapper over the Objective-C class HKHeartbeatSeriesQuery.
 //
-// HeartbeatSeriesQuery wraps [raw.HKHeartbeatSeriesQuery] with a fluent Go API.
+// It embeds [Query], promoting that type's methods.
+//
+// A query that returns the heartbeat data contained in a heartbeat series sample.
 type HeartbeatSeriesQuery struct {
-	inner *raw.HKHeartbeatSeriesQuery
+	Query
 }
 
-// Unwrap returns the underlying [raw.HKHeartbeatSeriesQuery].
-func (x *HeartbeatSeriesQuery) Unwrap() *raw.HKHeartbeatSeriesQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HeartbeatSeriesQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// HeartbeatSeriesQueryFromID adopts an existing object pointer as a HeartbeatSeriesQuery (nil for 0).
+// HeartbeatSeriesQueryFromID adopts an existing Objective-C object as a HeartbeatSeriesQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func HeartbeatSeriesQueryFromID(id objc.ID) *HeartbeatSeriesQuery {
 	if id == 0 {
 		return nil
 	}
-	return &HeartbeatSeriesQuery{inner: raw.HKHeartbeatSeriesQueryFromID(id)}
+	x := &HeartbeatSeriesQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new heartbeat series query.
-//
-// NewHeartbeatSeriesQueryWithHeartbeatSeriesDataHandler creates a new [HeartbeatSeriesQuery].
-func NewHeartbeatSeriesQueryWithHeartbeatSeriesDataHandler(heartbeatSeries *raw.HKHeartbeatSeriesSample, dataHandler func(*raw.HKHeartbeatSeriesQuery, float64, bool, bool, unsafe.Pointer)) *HeartbeatSeriesQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKHeartbeatSeriesQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHeartbeatSeries:dataHandler:"), heartbeatSeries.Ptr(), dataHandler)
-	return &HeartbeatSeriesQuery{inner: raw.HKHeartbeatSeriesQueryFromID(_id)}
+// heartbeatSeriesQueryAdopt wraps an Objective-C object that this code just created as a
+// HeartbeatSeriesQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func heartbeatSeriesQueryAdopt(id objc.ID) *HeartbeatSeriesQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &HeartbeatSeriesQuery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *HeartbeatSeriesQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// NewHeartbeatSeriesQuery creates a new HeartbeatSeriesQuery.
+func NewHeartbeatSeriesQuery() *HeartbeatSeriesQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesQuery")), objc.RegisterName("new"))
+	return heartbeatSeriesQueryAdopt(_id)
+}
 
 // HeartbeatSeriesQueryable is the interface implemented by [HeartbeatSeriesQuery], for mocking and DI.
 type HeartbeatSeriesQueryable interface {
-	Unwrap() *raw.HKHeartbeatSeriesQuery
+	obj.Object
 }
 
 var _ HeartbeatSeriesQueryable = (*HeartbeatSeriesQuery)(nil)
+
+var _ QueryProvider = (*HeartbeatSeriesQuery)(nil)

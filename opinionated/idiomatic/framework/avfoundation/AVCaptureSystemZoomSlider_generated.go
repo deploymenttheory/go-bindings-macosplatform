@@ -5,66 +5,73 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control that adjusts the video zoom factor of a capture device within the system-recommended range.
+// CaptureSystemZoomSlider is an idiomatic wrapper over the Objective-C class AVCaptureSystemZoomSlider.
 //
-// CaptureSystemZoomSlider wraps [raw.AVCaptureSystemZoomSlider] with a fluent Go API.
+// It embeds [CaptureControl], promoting that type's methods.
+//
+// A control that adjusts the video zoom factor of a capture device within the system-recommended range.
 type CaptureSystemZoomSlider struct {
-	inner *raw.AVCaptureSystemZoomSlider
+	CaptureControl
 }
 
-// Unwrap returns the underlying [raw.AVCaptureSystemZoomSlider].
-func (x *CaptureSystemZoomSlider) Unwrap() *raw.AVCaptureSystemZoomSlider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureSystemZoomSlider) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureSystemZoomSliderFromID adopts an existing object pointer as a CaptureSystemZoomSlider (nil for 0).
+// CaptureSystemZoomSliderFromID adopts an existing Objective-C object as a CaptureSystemZoomSlider
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureSystemZoomSliderFromID(id objc.ID) *CaptureSystemZoomSlider {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(id)}
-}
-
-// Creates a slider to control the video zoom factor of a capture device.
-//
-// NewCaptureSystemZoomSliderWithDevice creates a new [CaptureSystemZoomSlider].
-func NewCaptureSystemZoomSliderWithDevice(device *raw.AVCaptureDevice) *CaptureSystemZoomSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device.Ptr())
-	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(_id)}
-}
-
-// Creates a slider to control the zoom level of the specified capture device with an action to respond to zoom changes.
-//
-// NewCaptureSystemZoomSliderWithDeviceAction creates a new [CaptureSystemZoomSlider].
-func NewCaptureSystemZoomSliderWithDeviceAction(device *raw.AVCaptureDevice, action func(float64)) *CaptureSystemZoomSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), device.Ptr(), action)
-	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(_id)}
-}
-
-// A Boolean value that indicates whether this control supports user interaction.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSlider {
-	x.inner.AVCaptureControl.SetEnabled(enabled)
+	x := &CaptureSystemZoomSlider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *CaptureSystemZoomSlider) asCaptureControl() *raw.AVCaptureControl {
-	return &x.inner.AVCaptureControl
+// captureSystemZoomSliderAdopt wraps an Objective-C object that this code just created as a
+// CaptureSystemZoomSlider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureSystemZoomSliderAdopt(id objc.ID) *CaptureSystemZoomSlider {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureSystemZoomSlider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCaptureSystemZoomSliderWithDevice creates a slider to control the video zoom factor of a capture device.
+func NewCaptureSystemZoomSliderWithDevice(device *CaptureDevice) *CaptureSystemZoomSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
+	return captureSystemZoomSliderAdopt(_id)
+}
+
+// NewCaptureSystemZoomSliderWithDeviceAction creates a slider to control the zoom level of the specified capture device with an action to respond to zoom changes.
+func NewCaptureSystemZoomSliderWithDeviceAction(device *CaptureDevice, action func(float64)) *CaptureSystemZoomSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), objref.IDOf(device), objc.NewBlock(func(_ objc.Block, _b0 float64) { action(_b0) }))
+	return captureSystemZoomSliderAdopt(_id)
+}
+
+// WithEnabled a Boolean value that indicates whether this control supports user interaction.
+func (x *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSlider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
 }
 
 // CaptureSystemZoomSliderable is the interface implemented by [CaptureSystemZoomSlider], for mocking and DI.
 type CaptureSystemZoomSliderable interface {
-	Unwrap() *raw.AVCaptureSystemZoomSlider
+	obj.Object
 	WithEnabled(enabled bool) *CaptureSystemZoomSlider
 }
 
 var _ CaptureSystemZoomSliderable = (*CaptureSystemZoomSlider)(nil)
+
+var _ CaptureControlProvider = (*CaptureSystemZoomSlider)(nil)

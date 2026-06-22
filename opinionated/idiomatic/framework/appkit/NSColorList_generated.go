@@ -5,142 +5,157 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An ordered list of color objects, identified by keys.
+// ColorList is an idiomatic wrapper over the Objective-C class NSColorList.
 //
-// ColorList wraps [raw.NSColorList] with a fluent Go API.
+// An ordered list of color objects, identified by keys.
 type ColorList struct {
-	inner *raw.NSColorList
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSColorList].
-func (x *ColorList) Unwrap() *raw.NSColorList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorList) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorListFromID adopts an existing object pointer as a ColorList (nil for 0).
+// ColorListFromID adopts an existing Objective-C object as a ColorList
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorListFromID(id objc.ID) *ColorList {
 	if id == 0 {
 		return nil
 	}
-	return &ColorList{inner: raw.NSColorListFromID(id)}
+	x := &ColorList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a color list, registering it under the specified name if it isn’t in use already.
-//
-// NewColorListWithName creates a new [ColorList].
-func NewColorListWithName(name *foundation.NSString) *ColorList {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorList")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), name.Ptr())
-	return &ColorList{inner: raw.NSColorListFromID(_id)}
-}
-
-// Initializes and returns a color list from the specified file, registering it under the specified name if it isn’t in use already.
-//
-// NewColorListWithNameFromFile creates a new [ColorList].
-func NewColorListWithNameFromFile(name *foundation.NSString, path string) *ColorList {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorList")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:fromFile:"), name.Ptr(), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &ColorList{inner: raw.NSColorListFromID(_id)}
-}
-
-// Associates the specified color object with the specified key.
-//
-// SetColorForKey calls the underlying SetColorForKey.
-func (x *ColorList) SetColorForKey(color *raw.NSColor, key *foundation.NSString) {
-	x.inner.SetColorForKey(color, key)
-}
-
-// Inserts the specified color at the specified location in the color list.
-//
-// InsertColorKeyAtIndex calls the underlying InsertColorKeyAtIndex.
-func (x *ColorList) InsertColorKeyAtIndex(color *raw.NSColor, key *foundation.NSString, loc uint) {
-	x.inner.InsertColorKeyAtIndex(color, key, loc)
-}
-
-// Removes the color associated with the specified key from the color list.
-//
-// RemoveColorWithKey calls the underlying RemoveColorWithKey.
-func (x *ColorList) RemoveColorWithKey(key *foundation.NSString) {
-	x.inner.RemoveColorWithKey(key)
-}
-
-// Returns the color object associated with the specified key.
-//
-// ColorWithKey calls the underlying ColorWithKey.
-func (x *ColorList) ColorWithKey(key *foundation.NSString) *Color {
-	_r := x.inner.ColorWithKey(key)
-	if _r == nil {
+// colorListAdopt wraps an Objective-C object that this code just created as a
+// ColorList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorListAdopt(id objc.ID) *ColorList {
+	if id == 0 {
 		return nil
 	}
-	return &Color{inner: _r}
+	x := &ColorList{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Saves the color list to the file at the specified URL.
-//
-// WriteToURLError calls the underlying WriteToURLError.
-func (x *ColorList) WriteToURLError(url string) (bool, error) {
-	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// Description returns the object's -description text.
+func (x *ColorList) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Saves the color list to the file at the specified path.
-//
-// WriteToFile calls the underlying WriteToFile.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ColorList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ColorList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ColorList) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewColorListWithName initializes and returns a color list, registering it under the specified name if it isn’t in use already.
+func NewColorListWithName(name obj.Object) *ColorList {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorList")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), objref.IDOf(name))
+	return colorListAdopt(_id)
+}
+
+// NewColorListWithNameFromFile initializes and returns a color list from the specified file, registering it under the specified name if it isn’t in use already.
+func NewColorListWithNameFromFile(name obj.Object, path string) *ColorList {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorList")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:fromFile:"), objref.IDOf(name), purego.NSString(path))
+	return colorListAdopt(_id)
+}
+
+// SetColorForKey associates the specified color object with the specified key.
+func (x *ColorList) SetColorForKey(color *Color, key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:forKey:"), objref.IDOf(color), objref.IDOf(key))
+}
+
+// InsertColorKeyAtIndex inserts the specified color at the specified location in the color list.
+func (x *ColorList) InsertColorKeyAtIndex(color *Color, key obj.Object, loc int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertColor:key:atIndex:"), objref.IDOf(color), objref.IDOf(key), loc)
+}
+
+// RemoveColorWithKey removes the color associated with the specified key from the color list.
+func (x *ColorList) RemoveColorWithKey(key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeColorWithKey:"), objref.IDOf(key))
+}
+
+// ColorWithKey returns the color object associated with the specified key.
+func (x *ColorList) ColorWithKey(key obj.Object) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorWithKey:"), objref.IDOf(key))
+	return ColorFromID(_r)
+}
+
+// WriteToURL saves the color list to the file at the specified URL.
+func (x *ColorList) WriteToURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// WriteToFile saves the color list to the file at the specified path.
 func (x *ColorList) WriteToFile(path string) bool {
-	return x.inner.WriteToFile(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:"), purego.NSString(path))
+	return _r
 }
 
-// Removes the file from which the list was created, if the file is in a standard search path and owned by the user.
-//
-// RemoveFile calls the underlying RemoveFile.
+// RemoveFile removes the file from which the list was created, if the file is in a standard search path and owned by the user.
 func (x *ColorList) RemoveFile() {
-	x.inner.RemoveFile()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFile"))
 }
 
-// Name calls the underlying Name.
-func (x *ColorList) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Name wraps the corresponding Objective-C method.
+func (x *ColorList) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return obj.Wrap(_r)
 }
 
+// AllKeys wraps the corresponding Objective-C method.
+//
 // AllKeys returns the collection as a Go slice.
-func (x *ColorList) AllKeys() []*foundation.NSString {
-	arr := x.inner.AllKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *ColorList) AllKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsEditable calls the underlying IsEditable.
+// IsEditable wraps the corresponding Objective-C method.
 func (x *ColorList) IsEditable() bool {
-	return x.inner.IsEditable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+	return _r
 }
 
 // ColorListable is the interface implemented by [ColorList], for mocking and DI.
 type ColorListable interface {
-	Unwrap() *raw.NSColorList
-	SetColorForKey(color *raw.NSColor, key *foundation.NSString)
-	InsertColorKeyAtIndex(color *raw.NSColor, key *foundation.NSString, loc uint)
-	RemoveColorWithKey(key *foundation.NSString)
-	ColorWithKey(key *foundation.NSString) *Color
-	WriteToURLError(url string) (bool, error)
+	obj.Object
+	SetColorForKey(color *Color, key obj.Object)
+	InsertColorKeyAtIndex(color *Color, key obj.Object, loc int)
+	RemoveColorWithKey(key obj.Object)
+	ColorWithKey(key obj.Object) *Color
+	WriteToURL(url string) error
 	WriteToFile(path string) bool
 	RemoveFile()
-	Name() string
-	AllKeys() []*foundation.NSString
+	Name() obj.Object
+	AllKeys() []obj.Object
 	IsEditable() bool
 }
 

@@ -5,71 +5,103 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.
+// ProjectExtensionContext is an idiomatic wrapper over the Objective-C class PHProjectExtensionContext.
 //
-// ProjectExtensionContext wraps [raw.PHProjectExtensionContext] with a fluent Go API.
+// An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.
 type ProjectExtensionContext struct {
-	inner *raw.PHProjectExtensionContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHProjectExtensionContext].
-func (x *ProjectExtensionContext) Unwrap() *raw.PHProjectExtensionContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectExtensionContext) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectExtensionContextFromID adopts an existing object pointer as a ProjectExtensionContext (nil for 0).
+// ProjectExtensionContextFromID adopts an existing Objective-C object as a ProjectExtensionContext
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectExtensionContextFromID(id objc.ID) *ProjectExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectExtensionContext{inner: raw.PHProjectExtensionContextFromID(id)}
+	x := &ProjectExtensionContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProjectExtensionContext creates a new [ProjectExtensionContext].
+// projectExtensionContextAdopt wraps an Objective-C object that this code just created as a
+// ProjectExtensionContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectExtensionContextAdopt(id objc.ID) *ProjectExtensionContext {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectExtensionContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProjectExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProjectExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProjectExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProjectExtensionContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewProjectExtensionContext creates a new ProjectExtensionContext.
 func NewProjectExtensionContext() *ProjectExtensionContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectExtensionContext")), objc.RegisterName("new"))
-	return &ProjectExtensionContext{inner: raw.PHProjectExtensionContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectExtensionContext")), objc.RegisterName("new"))
+	return projectExtensionContextAdopt(_id)
 }
 
-// Invokes the built-in photo editor for the given asset.
-//
-// ShowEditorForAsset calls the underlying ShowEditorForAsset.
-func (x *ProjectExtensionContext) ShowEditorForAsset(asset *photos.PHAsset) {
-	x.inner.ShowEditorForAsset(asset)
+// ShowEditorForAsset invokes the built-in photo editor for the given asset.
+func (x *ProjectExtensionContext) ShowEditorForAsset(asset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showEditorForAsset:"), objref.IDOf(asset))
 }
 
-// Creates an updated PHProjectInfo instance from existing project information and current assets.
-//
-// UpdatedProjectInfoFromProjectInfoCompletion calls the underlying UpdatedProjectInfoFromProjectInfoCompletion.
-func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *raw.PHProjectInfo, completion func(*raw.PHProjectInfo)) *foundation.NSProgress {
-	return x.inner.UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo, completion)
+// UpdatedProjectInfoFromProjectInfoCompletion creates an updated PHProjectInfo instance from existing project information and current assets.
+func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedProjectInfoFromProjectInfo:completion:"), objref.IDOf(existingProjectInfo), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
+	return obj.Wrap(_r)
 }
 
-// PhotoLibrary calls the underlying PhotoLibrary.
-func (x *ProjectExtensionContext) PhotoLibrary() *photos.PHPhotoLibrary {
-	return x.inner.PhotoLibrary()
+// PhotoLibrary wraps the corresponding Objective-C method.
+func (x *ProjectExtensionContext) PhotoLibrary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("photoLibrary"))
+	return obj.Wrap(_r)
 }
 
-// Project calls the underlying Project.
-func (x *ProjectExtensionContext) Project() *photos.PHProject {
-	return x.inner.Project()
+// Project wraps the corresponding Objective-C method.
+func (x *ProjectExtensionContext) Project() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("project"))
+	return obj.Wrap(_r)
 }
 
 // ProjectExtensionContextable is the interface implemented by [ProjectExtensionContext], for mocking and DI.
 type ProjectExtensionContextable interface {
-	Unwrap() *raw.PHProjectExtensionContext
-	ShowEditorForAsset(asset *photos.PHAsset)
-	UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *raw.PHProjectInfo, completion func(*raw.PHProjectInfo)) *foundation.NSProgress
-	PhotoLibrary() *photos.PHPhotoLibrary
-	Project() *photos.PHProject
+	obj.Object
+	ShowEditorForAsset(asset obj.Object)
+	UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object
+	PhotoLibrary() obj.Object
+	Project() obj.Object
 }
 
 var _ ProjectExtensionContextable = (*ProjectExtensionContext)(nil)

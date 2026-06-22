@@ -5,74 +5,74 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageGaussianPyramid wraps [raw.MPSImageGaussianPyramid] with a fluent Go API.
+// ImageGaussianPyramid is an idiomatic wrapper over the Objective-C class MPSImageGaussianPyramid.
+//
+// It embeds [ImagePyramid], promoting that type's methods.
 type ImageGaussianPyramid struct {
-	inner *raw.MPSImageGaussianPyramid
+	ImagePyramid
 }
 
-// Unwrap returns the underlying [raw.MPSImageGaussianPyramid].
-func (x *ImageGaussianPyramid) Unwrap() *raw.MPSImageGaussianPyramid { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageGaussianPyramid) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageGaussianPyramidFromID adopts an existing object pointer as a ImageGaussianPyramid (nil for 0).
+// ImageGaussianPyramidFromID adopts an existing Objective-C object as a ImageGaussianPyramid
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageGaussianPyramidFromID(id objc.ID) *ImageGaussianPyramid {
 	if id == 0 {
 		return nil
 	}
-	return &ImageGaussianPyramid{inner: raw.MPSImageGaussianPyramidFromID(id)}
+	x := &ImageGaussianPyramid{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageGaussianPyramid creates a new [ImageGaussianPyramid].
+// imageGaussianPyramidAdopt wraps an Objective-C object that this code just created as a
+// ImageGaussianPyramid (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageGaussianPyramidAdopt(id objc.ID) *ImageGaussianPyramid {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageGaussianPyramid{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageGaussianPyramid creates a new ImageGaussianPyramid.
 func NewImageGaussianPyramid() *ImageGaussianPyramid {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageGaussianPyramid")), objc.RegisterName("new"))
-	return &ImageGaussianPyramid{inner: raw.MPSImageGaussianPyramidFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageGaussianPyramid")), objc.RegisterName("new"))
+	return imageGaussianPyramidAdopt(_id)
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (x *ImageGaussianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageGaussianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageGaussianPyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-func (x *ImageGaussianPyramid) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImagePyramid }
-
-func (x *ImageGaussianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel
 }
 
 // ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
 type ImageGaussianPyramidable interface {
-	Unwrap() *raw.MPSImageGaussianPyramid
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid
 	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianPyramid
 }
 
 var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)
+
+var _ ImagePyramidProvider = (*ImageGaussianPyramid)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageGaussianPyramid)(nil)

@@ -5,121 +5,115 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageNormalizedHistogram wraps [raw.MPSImageNormalizedHistogram] with a fluent Go API.
+// ImageNormalizedHistogram is an idiomatic wrapper over the Objective-C class MPSImageNormalizedHistogram.
 type ImageNormalizedHistogram struct {
-	inner *raw.MPSImageNormalizedHistogram
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageNormalizedHistogram].
-func (x *ImageNormalizedHistogram) Unwrap() *raw.MPSImageNormalizedHistogram { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageNormalizedHistogram) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageNormalizedHistogramFromID adopts an existing object pointer as a ImageNormalizedHistogram (nil for 0).
+// ImageNormalizedHistogramFromID adopts an existing Objective-C object as a ImageNormalizedHistogram
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageNormalizedHistogramFromID(id objc.ID) *ImageNormalizedHistogram {
 	if id == 0 {
 		return nil
 	}
-	return &ImageNormalizedHistogram{inner: raw.MPSImageNormalizedHistogramFromID(id)}
+	x := &ImageNormalizedHistogram{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageNormalizedHistogramWithDeviceHistogramInfo creates a new [ImageNormalizedHistogram].
-func NewImageNormalizedHistogramWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *raw.MPSImageHistogramInfo) *ImageNormalizedHistogram {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageNormalizedHistogram")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:histogramInfo:"), device, histogramInfo)
-	return &ImageNormalizedHistogram{inner: raw.MPSImageNormalizedHistogramFromID(_id)}
+// imageNormalizedHistogramAdopt wraps an Objective-C object that this code just created as a
+// ImageNormalizedHistogram (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageNormalizedHistogramAdopt(id objc.ID) *ImageNormalizedHistogram {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageNormalizedHistogram{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageNormalizedHistogramWithCoderDevice creates a new [ImageNormalizedHistogram].
-func NewImageNormalizedHistogramWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageNormalizedHistogram {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageNormalizedHistogram")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageNormalizedHistogram{inner: raw.MPSImageNormalizedHistogramFromID(_id)}
+// Description returns the object's -description text.
+func (x *ImageNormalizedHistogram) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageNormalizedHistogram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageNormalizedHistogram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageNormalizedHistogram) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageNormalizedHistogram creates a new ImageNormalizedHistogram.
+func NewImageNormalizedHistogram() *ImageNormalizedHistogram {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageNormalizedHistogram")), objc.RegisterName("new"))
+	return imageNormalizedHistogramAdopt(_id)
+}
+
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
 func (x *ImageNormalizedHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram {
-	x.inner.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// @property   zeroHistogram @abstract   Zero-initalize the histogram results @discussion Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-//
-// WithZeroHistogram sets the zeroHistogram property and returns the receiver for chaining.
+// WithZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
 func (x *ImageNormalizedHistogram) WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram {
-	x.inner.SetZeroHistogram(zeroHistogram)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
 	return x
 }
 
-// @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder. @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer           A valid MTLCommandBuffer. @param  source                  A valid MTLTexture containing the source image for the filter @param  minmaxTexture           A valid MTLTexture in which the min/max pixel values from source will be returned @param  histogram               A valid MTLBuffer to receive the histogram results. @param  histogramOffset         Byte offset into histogram buffer at which to write the histogram results. Must be a multiple of 32 bytes. The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. The histogram results are stored in the histogram buffer as follows: - histogram results for the R channel for all bins followed by - histogram results for the G channel for all bins followed by - histogram results for the B channel for all bins followed by - histogram results for the A channel for all bins
-//
-// EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset calls the underlying EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset.
-func (x *ImageNormalizedHistogram) EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, minmaxTexture metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
-	x.inner.EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer, source, minmaxTexture, histogram, histogramOffset)
-}
-
-// @abstract   The amount of space in the output MTLBuffer the histogram will take up. @discussion This convenience function calculates the minimum amount of space needed in the output histogram for the results.  The MTLBuffer should be at least this length, longer if histogramOffset is non-zero. @param      sourceFormat      The MTLPixelFormat of the source image. This is the source parameter of -encodeToCommandBuffer: sourceTexture:histogram:histogramOffset @return     The number of bytes needed to store the result histograms.
-//
-// HistogramSizeForSourceFormat calls the underlying HistogramSizeForSourceFormat.
-func (x *ImageNormalizedHistogram) HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint {
-	return x.inner.HistogramSizeForSourceFormat(sourceFormat)
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-//
-// ClipRectSource calls the underlying ClipRectSource.
+// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
 func (x *ImageNormalizedHistogram) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+	return _r
 }
 
-// SetClipRectSource calls the underlying SetClipRectSource.
+// SetClipRectSource wraps the corresponding Objective-C method.
 func (x *ImageNormalizedHistogram) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 }
 
-// @property   zeroHistogram @abstract   Zero-initalize the histogram results @discussion Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-//
-// ZeroHistogram calls the underlying ZeroHistogram.
+// ZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
 func (x *ImageNormalizedHistogram) ZeroHistogram() bool {
-	return x.inner.ZeroHistogram()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("zeroHistogram"))
+	return _r
 }
 
-// SetZeroHistogram calls the underlying SetZeroHistogram.
+// SetZeroHistogram wraps the corresponding Objective-C method.
 func (x *ImageNormalizedHistogram) SetZeroHistogram(zeroHistogram bool) {
-	x.inner.SetZeroHistogram(zeroHistogram)
-}
-
-// @property   histogramInfo @abstract   Return a structure describing the histogram content @discussion Returns a MPSImageHistogramInfo structure describing the format of the histogram.
-//
-// HistogramInfo calls the underlying HistogramInfo.
-func (x *ImageNormalizedHistogram) HistogramInfo() raw.MPSImageHistogramInfo {
-	return x.inner.HistogramInfo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
 }
 
 // ImageNormalizedHistogramable is the interface implemented by [ImageNormalizedHistogram], for mocking and DI.
 type ImageNormalizedHistogramable interface {
-	Unwrap() *raw.MPSImageNormalizedHistogram
+	obj.Object
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram
 	WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram
-	EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, minmaxTexture metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
-	HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 	ZeroHistogram() bool
 	SetZeroHistogram(zeroHistogram bool)
-	HistogramInfo() raw.MPSImageHistogramInfo
 }
 
 var _ ImageNormalizedHistogramable = (*ImageNormalizedHistogram)(nil)

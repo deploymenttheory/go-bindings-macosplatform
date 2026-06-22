@@ -5,60 +5,89 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context of an attempt to fetch changes from the server.
+// SyncEngineFetchChangesContext is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchChangesContext.
 //
-// SyncEngineFetchChangesContext wraps [raw.CKSyncEngineFetchChangesContext] with a fluent Go API.
+// The context of an attempt to fetch changes from the server.
 type SyncEngineFetchChangesContext struct {
-	inner *raw.CKSyncEngineFetchChangesContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFetchChangesContext].
-func (x *SyncEngineFetchChangesContext) Unwrap() *raw.CKSyncEngineFetchChangesContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFetchChangesContext) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFetchChangesContextFromID adopts an existing object pointer as a SyncEngineFetchChangesContext (nil for 0).
+// SyncEngineFetchChangesContextFromID adopts an existing Objective-C object as a SyncEngineFetchChangesContext
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFetchChangesContextFromID(id objc.ID) *SyncEngineFetchChangesContext {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchChangesContext{inner: raw.CKSyncEngineFetchChangesContextFromID(id)}
+	x := &SyncEngineFetchChangesContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineFetchChangesContext creates a new [SyncEngineFetchChangesContext].
-func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchChangesContext")), objc.RegisterName("new"))
-	return &SyncEngineFetchChangesContext{inner: raw.CKSyncEngineFetchChangesContextFromID(_id)}
-}
-
-// The reason why the sync engine is attempting to fetch changes.
-//
-// Reason calls the underlying Reason.
-func (x *SyncEngineFetchChangesContext) Reason() CKSyncEngineSyncReason {
-	return CKSyncEngineSyncReason(x.inner.Reason())
-}
-
-// The options being used for this attempt to fetch changes.
-//
-// Options calls the underlying Options.
-func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
-	_r := x.inner.Options()
-	if _r == nil {
+// syncEngineFetchChangesContextAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFetchChangesContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFetchChangesContextAdopt(id objc.ID) *SyncEngineFetchChangesContext {
+	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchChangesOptions{inner: _r}
+	x := &SyncEngineFetchChangesContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineFetchChangesContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFetchChangesContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFetchChangesContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineFetchChangesContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineFetchChangesContext creates a new SyncEngineFetchChangesContext.
+func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesContext")), objc.RegisterName("new"))
+	return syncEngineFetchChangesContextAdopt(_id)
+}
+
+// Reason the reason why the sync engine is attempting to fetch changes.
+func (x *SyncEngineFetchChangesContext) Reason() SyncEngineSyncReason {
+	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(x), objc.RegisterName("reason"))
+	return _r
+}
+
+// Options the options being used for this attempt to fetch changes.
+func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return SyncEngineFetchChangesOptionsFromID(_r)
 }
 
 // SyncEngineFetchChangesContextable is the interface implemented by [SyncEngineFetchChangesContext], for mocking and DI.
 type SyncEngineFetchChangesContextable interface {
-	Unwrap() *raw.CKSyncEngineFetchChangesContext
-	Reason() CKSyncEngineSyncReason
+	obj.Object
+	Reason() SyncEngineSyncReason
 	Options() *SyncEngineFetchChangesOptions
 }
 

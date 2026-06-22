@@ -5,276 +5,310 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterPumpConfigurationAndControl wraps [raw.MTRClusterPumpConfigurationAndControl] with a fluent Go API.
+// MTRClusterPumpConfigurationAndControl is an idiomatic wrapper over the Objective-C class MTRClusterPumpConfigurationAndControl.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterPumpConfigurationAndControl struct {
-	inner *raw.MTRClusterPumpConfigurationAndControl
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterPumpConfigurationAndControl].
-func (x *MTRClusterPumpConfigurationAndControl) Unwrap() *raw.MTRClusterPumpConfigurationAndControl {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterPumpConfigurationAndControl) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterPumpConfigurationAndControlFromID adopts an existing object pointer as a MTRClusterPumpConfigurationAndControl (nil for 0).
+// MTRClusterPumpConfigurationAndControlFromID adopts an existing Objective-C object as a MTRClusterPumpConfigurationAndControl
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterPumpConfigurationAndControlFromID(id objc.ID) *MTRClusterPumpConfigurationAndControl {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterPumpConfigurationAndControl{inner: raw.MTRClusterPumpConfigurationAndControlFromID(id)}
+	x := &MTRClusterPumpConfigurationAndControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointIDQueue creates a new [MTRClusterPumpConfigurationAndControl].
-func NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPumpConfigurationAndControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPumpConfigurationAndControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterPumpConfigurationAndControl{inner: raw.MTRClusterPumpConfigurationAndControlFromID(_id)}
+// mTRClusterPumpConfigurationAndControlAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterPumpConfigurationAndControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterPumpConfigurationAndControlAdopt(id objc.ID) *MTRClusterPumpConfigurationAndControl {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterPumpConfigurationAndControl{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointQueue creates a new [MTRClusterPumpConfigurationAndControl].
-func NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterPumpConfigurationAndControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPumpConfigurationAndControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterPumpConfigurationAndControl{inner: raw.MTRClusterPumpConfigurationAndControlFromID(_id)}
+// NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPumpConfigurationAndControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPumpConfigurationAndControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterPumpConfigurationAndControlAdopt(_id)
 }
 
-// ReadAttributeMaxPressureWithParams calls the underlying ReadAttributeMaxPressureWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxPressureWithParams(params)
+// NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointQueue creates a new MTRClusterPumpConfigurationAndControl.
+func NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterPumpConfigurationAndControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPumpConfigurationAndControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterPumpConfigurationAndControlAdopt(_id)
 }
 
-// ReadAttributeMaxSpeedWithParams calls the underlying ReadAttributeMaxSpeedWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxSpeedWithParams(params)
+// ReadAttributeMaxPressureWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxPressureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxPressureWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxFlowWithParams calls the underlying ReadAttributeMaxFlowWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxFlowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxFlowWithParams(params)
+// ReadAttributeMaxSpeedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxSpeedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxSpeedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstPressureWithParams calls the underlying ReadAttributeMinConstPressureWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinConstPressureWithParams(params)
+// ReadAttributeMaxFlowWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxFlowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxFlowWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstPressureWithParams calls the underlying ReadAttributeMaxConstPressureWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxConstPressureWithParams(params)
+// ReadAttributeMinConstPressureWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstPressureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinConstPressureWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinCompPressureWithParams calls the underlying ReadAttributeMinCompPressureWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinCompPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinCompPressureWithParams(params)
+// ReadAttributeMaxConstPressureWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstPressureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxConstPressureWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxCompPressureWithParams calls the underlying ReadAttributeMaxCompPressureWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxCompPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxCompPressureWithParams(params)
+// ReadAttributeMinCompPressureWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinCompPressureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinCompPressureWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstSpeedWithParams calls the underlying ReadAttributeMinConstSpeedWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinConstSpeedWithParams(params)
+// ReadAttributeMaxCompPressureWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxCompPressureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxCompPressureWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstSpeedWithParams calls the underlying ReadAttributeMaxConstSpeedWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxConstSpeedWithParams(params)
+// ReadAttributeMinConstSpeedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstSpeedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinConstSpeedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstFlowWithParams calls the underlying ReadAttributeMinConstFlowWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstFlowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinConstFlowWithParams(params)
+// ReadAttributeMaxConstSpeedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstSpeedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxConstSpeedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstFlowWithParams calls the underlying ReadAttributeMaxConstFlowWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstFlowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxConstFlowWithParams(params)
+// ReadAttributeMinConstFlowWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstFlowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinConstFlowWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstTempWithParams calls the underlying ReadAttributeMinConstTempWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstTempWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinConstTempWithParams(params)
+// ReadAttributeMaxConstFlowWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstFlowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxConstFlowWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstTempWithParams calls the underlying ReadAttributeMaxConstTempWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstTempWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxConstTempWithParams(params)
+// ReadAttributeMinConstTempWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstTempWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinConstTempWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePumpStatusWithParams calls the underlying ReadAttributePumpStatusWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributePumpStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePumpStatusWithParams(params)
+// ReadAttributeMaxConstTempWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstTempWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxConstTempWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeEffectiveOperationModeWithParams calls the underlying ReadAttributeEffectiveOperationModeWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeEffectiveOperationModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeEffectiveOperationModeWithParams(params)
+// ReadAttributePumpStatusWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributePumpStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePumpStatusWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeEffectiveControlModeWithParams calls the underlying ReadAttributeEffectiveControlModeWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeEffectiveControlModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeEffectiveControlModeWithParams(params)
+// ReadAttributeEffectiveOperationModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeEffectiveOperationModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEffectiveOperationModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCapacityWithParams calls the underlying ReadAttributeCapacityWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeCapacityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCapacityWithParams(params)
+// ReadAttributeEffectiveControlModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeEffectiveControlModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEffectiveControlModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSpeedWithParams calls the underlying ReadAttributeSpeedWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSpeedWithParams(params)
+// ReadAttributeCapacityWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeCapacityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCapacityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLifetimeRunningHoursWithParams calls the underlying ReadAttributeLifetimeRunningHoursWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeLifetimeRunningHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLifetimeRunningHoursWithParams(params)
+// ReadAttributeSpeedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeSpeedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSpeedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval calls the underlying WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeLifetimeRunningHoursWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeLifetimeRunningHoursWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLifetimeRunningHoursWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributePowerWithParams calls the underlying ReadAttributePowerWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePowerWithParams(params)
+// WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLifetimeEnergyConsumedWithParams calls the underlying ReadAttributeLifetimeEnergyConsumedWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeLifetimeEnergyConsumedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLifetimeEnergyConsumedWithParams(params)
+// ReadAttributePowerWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributePowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval calls the underlying WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeLifetimeEnergyConsumedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeLifetimeEnergyConsumedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLifetimeEnergyConsumedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOperationModeWithParams calls the underlying ReadAttributeOperationModeWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeOperationModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOperationModeWithParams(params)
+// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOperationModeWithValueExpectedValueInterval calls the underlying WriteAttributeOperationModeWithValueExpectedValueInterval.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeOperationModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOperationModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeOperationModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeOperationModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOperationModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOperationModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeOperationModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeControlModeWithParams calls the underlying ReadAttributeControlModeWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeControlModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeControlModeWithParams(params)
+// WriteAttributeOperationModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeControlModeWithValueExpectedValueInterval calls the underlying WriteAttributeControlModeWithValueExpectedValueInterval.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeControlModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeControlModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeControlModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeControlModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeControlModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeControlModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeControlModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeControlModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeControlModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeControlModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeControlModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// WriteAttributeControlModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) WriteAttributeControlModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterPumpConfigurationAndControl) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterPumpConfigurationAndControl) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterPumpConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterPumpConfigurationAndControlable is the interface implemented by [MTRClusterPumpConfigurationAndControl], for mocking and DI.
 type MTRClusterPumpConfigurationAndControlable interface {
-	Unwrap() *raw.MTRClusterPumpConfigurationAndControl
-	ReadAttributeMaxPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxFlowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinConstPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxConstPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinCompPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxCompPressureWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinConstSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxConstSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinConstFlowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxConstFlowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinConstTempWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxConstTempWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePumpStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeEffectiveOperationModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeEffectiveControlModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCapacityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLifetimeRunningHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLifetimeEnergyConsumedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOperationModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOperationModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeControlModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeControlModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeControlModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMaxPressureWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxSpeedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxFlowWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinConstPressureWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxConstPressureWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinCompPressureWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxCompPressureWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinConstSpeedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxConstSpeedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinConstFlowWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxConstFlowWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinConstTempWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxConstTempWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePumpStatusWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeEffectiveOperationModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeEffectiveControlModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCapacityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSpeedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLifetimeRunningHoursWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributePowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLifetimeEnergyConsumedWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOperationModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeControlModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeControlModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeControlModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterPumpConfigurationAndControlable = (*MTRClusterPumpConfigurationAndControl)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterPumpConfigurationAndControl)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterPumpConfigurationAndControl)(nil)

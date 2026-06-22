@@ -5,111 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that models the timeline and playback sequence of a primary player item and scheduled interstitial events.
+// PlayerItemIntegratedTimeline is an idiomatic wrapper over the Objective-C class AVPlayerItemIntegratedTimeline.
 //
-// PlayerItemIntegratedTimeline wraps [raw.AVPlayerItemIntegratedTimeline] with a fluent Go API.
+// An object that models the timeline and playback sequence of a primary player item and scheduled interstitial events.
 type PlayerItemIntegratedTimeline struct {
-	inner *raw.AVPlayerItemIntegratedTimeline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemIntegratedTimeline].
-func (x *PlayerItemIntegratedTimeline) Unwrap() *raw.AVPlayerItemIntegratedTimeline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemIntegratedTimeline) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemIntegratedTimelineFromID adopts an existing object pointer as a PlayerItemIntegratedTimeline (nil for 0).
+// PlayerItemIntegratedTimelineFromID adopts an existing Objective-C object as a PlayerItemIntegratedTimeline
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemIntegratedTimelineFromID(id objc.ID) *PlayerItemIntegratedTimeline {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemIntegratedTimeline{inner: raw.AVPlayerItemIntegratedTimelineFromID(id)}
+	x := &PlayerItemIntegratedTimeline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemIntegratedTimeline creates a new [PlayerItemIntegratedTimeline].
-func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemIntegratedTimeline")), objc.RegisterName("new"))
-	return &PlayerItemIntegratedTimeline{inner: raw.AVPlayerItemIntegratedTimelineFromID(_id)}
-}
-
-// @property	currentSnapshot @abstract	This property provides an immutable representation of the timeline state at time of request. @discussion Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
-//
-// CurrentSnapshot calls the underlying CurrentSnapshot.
-func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
-	_r := x.inner.CurrentSnapshot()
-	if _r == nil {
+// playerItemIntegratedTimelineAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemIntegratedTimeline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemIntegratedTimelineAdopt(id objc.ID) *PlayerItemIntegratedTimeline {
+	if id == 0 {
 		return nil
 	}
-	return &PlayerItemIntegratedTimelineSnapshot{inner: _r}
+	x := &PlayerItemIntegratedTimeline{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property	currentTime @abstract	Returns the current time on the integrated timeline. @discussion Returns the current time on the integrated timeline. During playback of interstitial events that occupy a single point, currentTime will not change.
-//
-// CurrentTime calls the underlying CurrentTime.
-func (x *PlayerItemIntegratedTimeline) CurrentTime() coremedia.CMTime {
-	return x.inner.CurrentTime()
+// Description returns the object's -description text.
+func (x *PlayerItemIntegratedTimeline) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property	currentDate @abstract	Returns the date of current playback, or nil if playback is not mapped to any date.
-//
-// CurrentDate calls the underlying CurrentDate.
-func (x *PlayerItemIntegratedTimeline) CurrentDate() *foundation.NSDate {
-	return x.inner.CurrentDate()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemIntegratedTimeline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Seeks to a particular time in the integrated time domain.
-//
-// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
-func (x *PlayerItemIntegratedTimeline) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
-	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemIntegratedTimeline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Seeks to a particular date in the integrated time domain.
-//
-// SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
-func (x *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) {
-	x.inner.SeekToDateCompletionHandler(date, completionHandler)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemIntegratedTimeline) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Requests invocation of a block during playback to report changing time.
-//
-// AddPeriodicTimeObserverForIntervalQueueUsing calls the underlying AddPeriodicTimeObserverForIntervalQueueUsing.
-func (x *PlayerItemIntegratedTimeline) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) raw.AVPlayerItemIntegratedTimelineObserver {
-	return x.inner.AddPeriodicTimeObserverForIntervalQueueUsing(interval, queue, block)
+// NewPlayerItemIntegratedTimeline creates a new PlayerItemIntegratedTimeline.
+func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemIntegratedTimeline")), objc.RegisterName("new"))
+	return playerItemIntegratedTimelineAdopt(_id)
 }
 
-// Requests invocation of a block when traversing an offset in a segment during playback.
-//
-// AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing calls the underlying AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing.
-func (x *PlayerItemIntegratedTimeline) AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment *raw.AVPlayerItemSegment, offsetsIntoSegment *foundation.NSArray[objc.ID], queue *foundation.NSObject, block func(bool)) raw.AVPlayerItemIntegratedTimelineObserver {
-	return x.inner.AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment, offsetsIntoSegment, queue, block)
+// CurrentSnapshot this property provides an immutable representation of the timeline state at time of request. Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
+func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSnapshot"))
+	return PlayerItemIntegratedTimelineSnapshotFromID(_r)
 }
 
-// Cancels a previously registered time observer.
-//
-// RemoveTimeObserver calls the underlying RemoveTimeObserver.
-func (x *PlayerItemIntegratedTimeline) RemoveTimeObserver(observer raw.AVPlayerItemIntegratedTimelineObserver) {
-	x.inner.RemoveTimeObserver(observer)
+// CurrentDate returns the date of current playback, or nil if playback is not mapped to any date.
+func (x *PlayerItemIntegratedTimeline) CurrentDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
+	return obj.Wrap(_r)
+}
+
+// SeekToDateCompletionHandler seeks to a particular date in the integrated time domain.
+func (x *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // PlayerItemIntegratedTimelineable is the interface implemented by [PlayerItemIntegratedTimeline], for mocking and DI.
 type PlayerItemIntegratedTimelineable interface {
-	Unwrap() *raw.AVPlayerItemIntegratedTimeline
+	obj.Object
 	CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot
-	CurrentTime() coremedia.CMTime
-	CurrentDate() *foundation.NSDate
-	SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool))
-	SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool))
-	AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) raw.AVPlayerItemIntegratedTimelineObserver
-	AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment *raw.AVPlayerItemSegment, offsetsIntoSegment *foundation.NSArray[objc.ID], queue *foundation.NSObject, block func(bool)) raw.AVPlayerItemIntegratedTimelineObserver
-	RemoveTimeObserver(observer raw.AVPlayerItemIntegratedTimelineObserver)
+	CurrentDate() obj.Object
+	SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool))
 }
 
 var _ PlayerItemIntegratedTimelineable = (*PlayerItemIntegratedTimeline)(nil)

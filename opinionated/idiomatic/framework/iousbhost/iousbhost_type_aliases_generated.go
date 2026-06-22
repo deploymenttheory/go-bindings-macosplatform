@@ -4,18 +4,18 @@
 
 package iousbhost
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
-)
+// Foundational IOUSBHostControllerInterface message structure used for commands, transfers, and interrupts IOUSBHostCIMessage structures are control structures passed between the IOUSBHostControllerInterface client and the kernel driver.  They are used to represent capabilities during initialization, commands and transfers sent from the kernel, and interrupt events sent to the kernel.
+type IOUSBHostCIMessage struct {
+	Control uint32
+	Data0   uint32
+	Data1   uint64
+}
 
-// IOUSBHostCIMessage is a type alias for the raw IOUSBHostCIMessage value-type struct.
-type IOUSBHostCIMessage = raw.IOUSBHostCIMessage
-
-// IOUSBHostIOSourceDescriptors is a type alias for the raw IOUSBHostIOSourceDescriptors value-type struct.
-type IOUSBHostIOSourceDescriptors = raw.IOUSBHostIOSourceDescriptors
-
-// IOUSBHostIsochronousFrame is a type alias for the raw IOUSBHostIsochronousFrame value-type struct.
-type IOUSBHostIsochronousFrame = raw.IOUSBHostIsochronousFrame
-
-// IOUSBHostIsochronousTransaction is a type alias for the raw IOUSBHostIsochronousTransaction value-type struct.
-type IOUSBHostIsochronousTransaction = raw.IOUSBHostIsochronousTransaction
+// A structure that represents a single frame in an isochronous transfer.
+type IOUSBHostIsochronousFrame struct {
+	Status        int
+	RequestCount  uint32
+	CompleteCount uint32
+	Reserved      uint32
+	TimeStamp     uint64
+}

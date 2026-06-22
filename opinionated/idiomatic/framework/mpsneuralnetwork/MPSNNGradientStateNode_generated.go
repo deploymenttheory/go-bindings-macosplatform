@@ -5,70 +5,71 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNGradientStateNode wraps [raw.MPSNNGradientStateNode] with a fluent Go API.
+// NNGradientStateNode is an idiomatic wrapper over the Objective-C class MPSNNGradientStateNode.
+//
+// NNGradientStateNode is an abstract base — you do not construct it directly. Construct one of [CNNConvolutionGradientStateNode] and pass it where a NNGradientStateNode is accepted.
 type NNGradientStateNode struct {
-	inner *raw.MPSNNGradientStateNode
+	NNStateNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNGradientStateNode].
-func (x *NNGradientStateNode) Unwrap() *raw.MPSNNGradientStateNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGradientStateNodeFromID adopts an existing object pointer as a NNGradientStateNode (nil for 0).
+// NNGradientStateNodeFromID adopts an existing Objective-C object as a NNGradientStateNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGradientStateNodeFromID(id objc.ID) *NNGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNGradientStateNode{inner: raw.MPSNNGradientStateNodeFromID(id)}
-}
-
-// NewNNGradientStateNode creates a new [NNGradientStateNode].
-func NewNNGradientStateNode() *NNGradientStateNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGradientStateNode")), objc.RegisterName("new"))
-	return &NNGradientStateNode{inner: raw.MPSNNGradientStateNodeFromID(_id)}
-}
-
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
-//
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNGradientStateNode) WithHandle(handle raw.MPSHandle) *NNGradientStateNode {
-	x.inner.MPSNNStateNode.SetHandle(handle)
+	x := &NNGradientStateNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// nNGradientStateNodeAdopt wraps an Objective-C object that this code just created as a
+// NNGradientStateNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGradientStateNodeAdopt(id objc.ID) *NNGradientStateNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGradientStateNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode {
-	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
-//
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (x *NNGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode {
-	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
 }
-
-func (x *NNGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode { return x.inner }
-
-func (x *NNGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
 // NNGradientStateNodeable is the interface implemented by [NNGradientStateNode], for mocking and DI.
 type NNGradientStateNodeable interface {
-	Unwrap() *raw.MPSNNGradientStateNode
-	WithHandle(handle raw.MPSHandle) *NNGradientStateNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode
 	WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode
 }
 
 var _ NNGradientStateNodeable = (*NNGradientStateNode)(nil)
+
+// isNNGradientStateNode marks NNGradientStateNode — and, by embedding promotion, its
+// subclasses — as a member of the NNGradientStateNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNGradientStateNode) isNNGradientStateNode() {}
+
+var _ NNGradientStateNodeProvider = (*NNGradientStateNode)(nil)
+
+var _ NNStateNodeProvider = (*NNGradientStateNode)(nil)

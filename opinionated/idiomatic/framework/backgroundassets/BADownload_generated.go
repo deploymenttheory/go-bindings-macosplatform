@@ -5,100 +5,116 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an in-progress or concluded asset download.
+// Download is an idiomatic wrapper over the Objective-C class BADownload.
 //
-// Download wraps [raw.BADownload] with a fluent Go API.
+// Download is an abstract base — you do not construct it directly. Construct one of [URLDownload] and pass it where a Download is accepted.
+//
+// An object that represents an in-progress or concluded asset download.
 type Download struct {
-	inner *raw.BADownload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BADownload].
-func (x *Download) Unwrap() *raw.BADownload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Download) ID() objc.ID { return x.inner.Ptr() }
-
-// DownloadFromID adopts an existing object pointer as a Download (nil for 0).
+// DownloadFromID adopts an existing Objective-C object as a Download
+// (nil for 0), retaining it and registering a release finalizer.
 func DownloadFromID(id objc.ID) *Download {
 	if id == 0 {
 		return nil
 	}
-	return &Download{inner: raw.BADownloadFromID(id)}
+	x := &Download{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDownload creates a new [Download].
-func NewDownload() *Download {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BADownload")), objc.RegisterName("new"))
-	return &Download{inner: raw.BADownloadFromID(_id)}
-}
-
-// @brief Copies an existing download ensuring that it has `isEssential == false`. @discussion This serves as a convenience method for constructing a non-essential representation of an existing download. It is important to note that essential downloads can only be enqueued by the app extension during a content request. If an essential download fails, `copyAsNonEssential` can be used to create a copy with `isEssential == false` that can be re-queued with `BADownloadManager`.
-//
-// CopyAsNonEssential calls the underlying CopyAsNonEssential.
-func (x *Download) CopyAsNonEssential() *Download {
-	_r := x.inner.CopyAsNonEssential()
-	if _r == nil {
+// downloadAdopt wraps an Objective-C object that this code just created as a
+// Download (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func downloadAdopt(id objc.ID) *Download {
+	if id == 0 {
 		return nil
 	}
-	return &Download{inner: _r}
+	x := &Download{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief The current state of the respresented download.
-//
-// State calls the underlying State.
-func (x *Download) State() BADownloadState {
-	return BADownloadState(x.inner.State())
+// Description returns the object's -description text.
+func (x *Download) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief A client defined identifier that uniquely identifies this asset.
-//
-// Identifier calls the underlying Identifier.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Download) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Download) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Download) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// CopyAsNonEssential copies an existing download ensuring that it has `isEssential == false`. This serves as a convenience method for constructing a non-essential representation of an existing download. It is important to note that essential downloads can only be enqueued by the app extension during a content request. If an essential download fails, `copyAsNonEssential` can be used to create a copy with `isEssential == false` that can be re-queued with `BADownloadManager`.
+func (x *Download) CopyAsNonEssential() *Download {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyAsNonEssential"))
+	return DownloadFromID(_r)
+}
+
+// State the current state of the respresented download.
+func (x *Download) State() DownloadState {
+	_r := objc.Send[DownloadState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
+}
+
+// Identifier a client defined identifier that uniquely identifies this asset.
 func (x *Download) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief A UUID that uniquely identifies the download object.
-//
-// UniqueIdentifier calls the underlying UniqueIdentifier.
+// UniqueIdentifier a UUID that uniquely identifies the download object.
 func (x *Download) UniqueIdentifier() string {
-	_r := x.inner.UniqueIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief A client set priority to try to order downloads in order of importance
-//
-// Priority calls the underlying Priority.
+// Priority a client set priority to try to order downloads in order of importance
 func (x *Download) Priority() int {
-	return x.inner.Priority()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("priority"))
+	return _r
 }
 
-// @brief Whether this download is essential. Essential downloads will occur while the app is being installed. Users cannot launch the app while these downloads are occurring. Essential downloads cannot be scheduled with `BADownloadManager`, they may only be scheduled from the extension with a `BAContentRequest` type of `Update` or `Install`. Essential downloads must have an accurate `fileSize` or they will fail.
-//
-// IsEssential calls the underlying IsEssential.
+// IsEssential whether this download is essential. Essential downloads will occur while the app is being installed. Users cannot launch the app while these downloads are occurring. Essential downloads cannot be scheduled with `BADownloadManager`, they may only be scheduled from the extension with a `BAContentRequest` type of `Update` or `Install`. Essential downloads must have an accurate `fileSize` or they will fail.
 func (x *Download) IsEssential() bool {
-	return x.inner.IsEssential()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEssential"))
+	return _r
 }
-
-func (x *Download) asDownload() *raw.BADownload { return x.inner }
 
 // Downloadable is the interface implemented by [Download], for mocking and DI.
 type Downloadable interface {
-	Unwrap() *raw.BADownload
+	obj.Object
 	CopyAsNonEssential() *Download
-	State() BADownloadState
+	State() DownloadState
 	Identifier() string
 	UniqueIdentifier() string
 	Priority() int
@@ -106,3 +122,10 @@ type Downloadable interface {
 }
 
 var _ Downloadable = (*Download)(nil)
+
+// isDownload marks Download — and, by embedding promotion, its
+// subclasses — as a member of the Download hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Download) isDownload() {}
+
+var _ DownloadProvider = (*Download)(nil)

@@ -6,53 +6,85 @@ package shazamkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents the user’s Shazam library.
+// MediaLibrary is an idiomatic wrapper over the Objective-C class SHMediaLibrary.
 //
-// MediaLibrary wraps [raw.SHMediaLibrary] with a fluent Go API.
+// An object that represents the user’s Shazam library.
 type MediaLibrary struct {
-	inner *raw.SHMediaLibrary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SHMediaLibrary].
-func (x *MediaLibrary) Unwrap() *raw.SHMediaLibrary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaLibrary) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaLibraryFromID adopts an existing object pointer as a MediaLibrary (nil for 0).
+// MediaLibraryFromID adopts an existing Objective-C object as a MediaLibrary
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaLibraryFromID(id objc.ID) *MediaLibrary {
 	if id == 0 {
 		return nil
 	}
-	return &MediaLibrary{inner: raw.SHMediaLibraryFromID(id)}
+	x := &MediaLibrary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMediaLibrary creates a new [MediaLibrary].
+// mediaLibraryAdopt wraps an Objective-C object that this code just created as a
+// MediaLibrary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaLibraryAdopt(id objc.ID) *MediaLibrary {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaLibrary{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaLibrary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaLibrary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaLibrary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaLibrary) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaLibrary creates a new MediaLibrary.
 func NewMediaLibrary() *MediaLibrary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SHMediaLibrary")), objc.RegisterName("new"))
-	return &MediaLibrary{inner: raw.SHMediaLibraryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SHMediaLibrary")), objc.RegisterName("new"))
+	return mediaLibraryAdopt(_id)
 }
 
-// Adds an array of songs to the user’s Shazam library.
+// AddMediaItems adds an array of songs to the user’s Shazam library.
 //
 // AddMediaItems blocks until the operation completes or ctx is cancelled.
-func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems *foundation.NSArray[*raw.SHMediaItem]) error {
+func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error {
 	_ch := make(chan error, 1)
-	x.inner.AddMediaItemsCompletionHandler(mediaItems, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMediaItems:completionHandler:"), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -63,8 +95,8 @@ func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems *foundation
 
 // MediaLibraryable is the interface implemented by [MediaLibrary], for mocking and DI.
 type MediaLibraryable interface {
-	Unwrap() *raw.SHMediaLibrary
-	AddMediaItems(ctx context.Context, mediaItems *foundation.NSArray[*raw.SHMediaItem]) error
+	obj.Object
+	AddMediaItems(ctx context.Context, mediaItems []*MediaItem) error
 }
 
 var _ MediaLibraryable = (*MediaLibrary)(nil)

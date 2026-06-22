@@ -5,99 +5,104 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that displays detailed information about a map item.
+// MapItemDetailViewController is an idiomatic wrapper over the Objective-C class MKMapItemDetailViewController.
 //
-// MapItemDetailViewController wraps [raw.MKMapItemDetailViewController] with a fluent Go API.
+// An object that displays detailed information about a map item.
 type MapItemDetailViewController struct {
-	inner *raw.MKMapItemDetailViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapItemDetailViewController].
-func (x *MapItemDetailViewController) Unwrap() *raw.MKMapItemDetailViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapItemDetailViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// MapItemDetailViewControllerFromID adopts an existing object pointer as a MapItemDetailViewController (nil for 0).
+// MapItemDetailViewControllerFromID adopts an existing Objective-C object as a MapItemDetailViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func MapItemDetailViewControllerFromID(id objc.ID) *MapItemDetailViewController {
 	if id == 0 {
 		return nil
 	}
-	return &MapItemDetailViewController{inner: raw.MKMapItemDetailViewControllerFromID(id)}
-}
-
-// Create a map item detail view controller
-//
-// NewMapItemDetailViewControllerWithMapItemDisplaysMap creates a new [MapItemDetailViewController].
-func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *raw.MKMapItem, displaysMap bool) *MapItemDetailViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:displaysMap:"), mapItem.Ptr(), displaysMap)
-	return &MapItemDetailViewController{inner: raw.MKMapItemDetailViewControllerFromID(_id)}
-}
-
-// Create a map item detail view controller.
-//
-// NewMapItemDetailViewControllerWithMapItem creates a new [MapItemDetailViewController].
-func NewMapItemDetailViewControllerWithMapItem(mapItem *raw.MKMapItem) *MapItemDetailViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), mapItem.Ptr())
-	return &MapItemDetailViewController{inner: raw.MKMapItemDetailViewControllerFromID(_id)}
-}
-
-// The map item to display.
-//
-// WithMapItem sets the mapItem property and returns the receiver for chaining.
-func (x *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
-	x.inner.SetMapItem(mapItem.Unwrap())
+	x := &MapItemDetailViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The map item detail view controller’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *MapItemDetailViewController) WithDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) *MapItemDetailViewController {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// MapItem calls the underlying MapItem.
-func (x *MapItemDetailViewController) MapItem() *MapItem {
-	_r := x.inner.MapItem()
-	if _r == nil {
+// mapItemDetailViewControllerAdopt wraps an Objective-C object that this code just created as a
+// MapItemDetailViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapItemDetailViewControllerAdopt(id objc.ID) *MapItemDetailViewController {
+	if id == 0 {
 		return nil
 	}
-	return &MapItem{inner: _r}
+	x := &MapItemDetailViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMapItem calls the underlying SetMapItem.
-func (x *MapItemDetailViewController) SetMapItem(mapItem *raw.MKMapItem) {
-	x.inner.SetMapItem(mapItem)
+// Description returns the object's -description text.
+func (x *MapItemDetailViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *MapItemDetailViewController) Delegate() raw.MKMapItemDetailViewControllerDelegate {
-	return x.inner.Delegate()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapItemDetailViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *MapItemDetailViewController) SetDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapItemDetailViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapItemDetailViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapItemDetailViewControllerWithMapItemDisplaysMap create a map item detail view controller
+func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *MapItem, displaysMap bool) *MapItemDetailViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:displaysMap:"), objref.IDOf(mapItem), displaysMap)
+	return mapItemDetailViewControllerAdopt(_id)
+}
+
+// NewMapItemDetailViewControllerWithMapItem create a map item detail view controller.
+func NewMapItemDetailViewControllerWithMapItem(mapItem *MapItem) *MapItemDetailViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
+	return mapItemDetailViewControllerAdopt(_id)
+}
+
+// WithMapItem the map item to display.
+func (x *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
+	return x
+}
+
+// MapItem wraps the corresponding Objective-C method.
+func (x *MapItemDetailViewController) MapItem() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
+	return MapItemFromID(_r)
+}
+
+// SetMapItem wraps the corresponding Objective-C method.
+func (x *MapItemDetailViewController) SetMapItem(mapItem *MapItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
 }
 
 // MapItemDetailViewControllerable is the interface implemented by [MapItemDetailViewController], for mocking and DI.
 type MapItemDetailViewControllerable interface {
-	Unwrap() *raw.MKMapItemDetailViewController
+	obj.Object
 	WithMapItem(mapItem *MapItem) *MapItemDetailViewController
-	WithDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) *MapItemDetailViewController
 	MapItem() *MapItem
-	SetMapItem(mapItem *raw.MKMapItem)
-	Delegate() raw.MKMapItemDetailViewControllerDelegate
-	SetDelegate(delegate raw.MKMapItemDetailViewControllerDelegate)
+	SetMapItem(mapItem *MapItem)
 }
 
 var _ MapItemDetailViewControllerable = (*MapItemDetailViewController)(nil)

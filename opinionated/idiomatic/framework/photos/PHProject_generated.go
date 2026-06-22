@@ -5,62 +5,76 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a Photos app project extension.
+// Project is an idiomatic wrapper over the Objective-C class PHProject.
 //
-// Project wraps [raw.PHProject] with a fluent Go API.
+// It embeds [AssetCollection], promoting that type's methods.
+//
+// A representation of a Photos app project extension.
 type Project struct {
-	inner *raw.PHProject
+	AssetCollection
 }
 
-// Unwrap returns the underlying [raw.PHProject].
-func (x *Project) Unwrap() *raw.PHProject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Project) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectFromID adopts an existing object pointer as a Project (nil for 0).
+// ProjectFromID adopts an existing Objective-C object as a Project
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectFromID(id objc.ID) *Project {
 	if id == 0 {
 		return nil
 	}
-	return &Project{inner: raw.PHProjectFromID(id)}
+	x := &Project{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProject creates a new [Project].
+// projectAdopt wraps an Objective-C object that this code just created as a
+// Project (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectAdopt(id objc.ID) *Project {
+	if id == 0 {
+		return nil
+	}
+	x := &Project{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewProject creates a new Project.
 func NewProject() *Project {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProject")), objc.RegisterName("new"))
-	return &Project{inner: raw.PHProjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProject")), objc.RegisterName("new"))
+	return projectAdopt(_id)
 }
 
-// ProjectExtensionData calls the underlying ProjectExtensionData.
-func (x *Project) ProjectExtensionData() *foundation.NSData {
-	return x.inner.ProjectExtensionData()
+// ProjectExtensionData wraps the corresponding Objective-C method.
+func (x *Project) ProjectExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectExtensionData"))
+	return obj.Wrap(_r)
 }
 
-// Property to determine if a project preview was previously set. Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
-//
-// HasProjectPreview calls the underlying HasProjectPreview.
+// HasProjectPreview property to determine if a project preview was previously set. Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
 func (x *Project) HasProjectPreview() bool {
-	return x.inner.HasProjectPreview()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasProjectPreview"))
+	return _r
 }
-
-func (x *Project) asAssetCollection() *raw.PHAssetCollection { return &x.inner.PHAssetCollection }
-
-func (x *Project) asCollection() *raw.PHCollection { return &x.inner.PHAssetCollection.PHCollection }
-
-func (x *Project) asObject() *raw.PHObject { return &x.inner.PHAssetCollection.PHCollection.PHObject }
 
 // Projectable is the interface implemented by [Project], for mocking and DI.
 type Projectable interface {
-	Unwrap() *raw.PHProject
-	ProjectExtensionData() *foundation.NSData
+	obj.Object
+	ProjectExtensionData() obj.Object
 	HasProjectPreview() bool
 }
 
 var _ Projectable = (*Project)(nil)
+
+var _ AssetCollectionProvider = (*Project)(nil)
+
+var _ CollectionProvider = (*Project)(nil)
+
+var _ ObjectProvider = (*Project)(nil)

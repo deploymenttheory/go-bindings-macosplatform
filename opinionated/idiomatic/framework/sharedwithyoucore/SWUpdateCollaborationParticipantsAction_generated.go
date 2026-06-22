@@ -5,80 +5,83 @@
 package sharedwithyoucore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.
+// UpdateCollaborationParticipantsAction is an idiomatic wrapper over the Objective-C class SWUpdateCollaborationParticipantsAction.
 //
-// UpdateCollaborationParticipantsAction wraps [raw.SWUpdateCollaborationParticipantsAction] with a fluent Go API.
+// It embeds [Action], promoting that type's methods.
+//
+// An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.
 type UpdateCollaborationParticipantsAction struct {
-	inner *raw.SWUpdateCollaborationParticipantsAction
+	Action
 }
 
-// Unwrap returns the underlying [raw.SWUpdateCollaborationParticipantsAction].
-func (x *UpdateCollaborationParticipantsAction) Unwrap() *raw.SWUpdateCollaborationParticipantsAction {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UpdateCollaborationParticipantsAction) ID() objc.ID { return x.inner.Ptr() }
-
-// UpdateCollaborationParticipantsActionFromID adopts an existing object pointer as a UpdateCollaborationParticipantsAction (nil for 0).
+// UpdateCollaborationParticipantsActionFromID adopts an existing Objective-C object as a UpdateCollaborationParticipantsAction
+// (nil for 0), retaining it and registering a release finalizer.
 func UpdateCollaborationParticipantsActionFromID(id objc.ID) *UpdateCollaborationParticipantsAction {
 	if id == 0 {
 		return nil
 	}
-	return &UpdateCollaborationParticipantsAction{inner: raw.SWUpdateCollaborationParticipantsActionFromID(id)}
+	x := &UpdateCollaborationParticipantsAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUpdateCollaborationParticipantsAction creates a new [UpdateCollaborationParticipantsAction].
-func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipantsAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWUpdateCollaborationParticipantsAction")), objc.RegisterName("new"))
-	return &UpdateCollaborationParticipantsAction{inner: raw.SWUpdateCollaborationParticipantsActionFromID(_id)}
-}
-
-// CollaborationMetadata calls the underlying CollaborationMetadata.
-func (x *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
-	_r := x.inner.CollaborationMetadata()
-	if _r == nil {
+// updateCollaborationParticipantsActionAdopt wraps an Objective-C object that this code just created as a
+// UpdateCollaborationParticipantsAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func updateCollaborationParticipantsActionAdopt(id objc.ID) *UpdateCollaborationParticipantsAction {
+	if id == 0 {
 		return nil
 	}
-	return &CollaborationMetadata{inner: _r}
+	x := &UpdateCollaborationParticipantsAction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
+// NewUpdateCollaborationParticipantsAction creates a new UpdateCollaborationParticipantsAction.
+func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipantsAction {
+	_id := objc.Send[objc.ID](objc.ID(_class("SWUpdateCollaborationParticipantsAction")), objc.RegisterName("new"))
+	return updateCollaborationParticipantsActionAdopt(_id)
+}
+
+// CollaborationMetadata wraps the corresponding Objective-C method.
+func (x *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationMetadata"))
+	return CollaborationMetadataFromID(_r)
+}
+
+// AddedIdentities wraps the corresponding Objective-C method.
+//
 // AddedIdentities returns the collection as a Go slice.
 func (x *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
-	arr := x.inner.AddedIdentities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersonIdentity {
-		return &PersonIdentity{inner: raw.SWPersonIdentityFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedIdentities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
 
+// RemovedIdentities wraps the corresponding Objective-C method.
+//
 // RemovedIdentities returns the collection as a Go slice.
 func (x *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {
-	arr := x.inner.RemovedIdentities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersonIdentity {
-		return &PersonIdentity{inner: raw.SWPersonIdentityFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedIdentities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
-
-func (x *UpdateCollaborationParticipantsAction) asAction() *raw.SWAction { return &x.inner.SWAction }
 
 // UpdateCollaborationParticipantsActionable is the interface implemented by [UpdateCollaborationParticipantsAction], for mocking and DI.
 type UpdateCollaborationParticipantsActionable interface {
-	Unwrap() *raw.SWUpdateCollaborationParticipantsAction
+	obj.Object
 	CollaborationMetadata() *CollaborationMetadata
 	AddedIdentities() []*PersonIdentity
 	RemovedIdentities() []*PersonIdentity
 }
 
 var _ UpdateCollaborationParticipantsActionable = (*UpdateCollaborationParticipantsAction)(nil)
+
+var _ ActionProvider = (*UpdateCollaborationParticipantsAction)(nil)

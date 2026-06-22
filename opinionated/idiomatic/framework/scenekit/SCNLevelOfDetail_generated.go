@@ -5,66 +5,94 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An alternate resolution for a geometry that SceneKit automatically substitutes to improve rendering performance.
+// LevelOfDetail is an idiomatic wrapper over the Objective-C class SCNLevelOfDetail.
 //
-// LevelOfDetail wraps [raw.SCNLevelOfDetail] with a fluent Go API.
+// An alternate resolution for a geometry that SceneKit automatically substitutes to improve rendering performance.
 type LevelOfDetail struct {
-	inner *raw.SCNLevelOfDetail
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNLevelOfDetail].
-func (x *LevelOfDetail) Unwrap() *raw.SCNLevelOfDetail { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LevelOfDetail) ID() objc.ID { return x.inner.Ptr() }
-
-// LevelOfDetailFromID adopts an existing object pointer as a LevelOfDetail (nil for 0).
+// LevelOfDetailFromID adopts an existing Objective-C object as a LevelOfDetail
+// (nil for 0), retaining it and registering a release finalizer.
 func LevelOfDetailFromID(id objc.ID) *LevelOfDetail {
 	if id == 0 {
 		return nil
 	}
-	return &LevelOfDetail{inner: raw.SCNLevelOfDetailFromID(id)}
+	x := &LevelOfDetail{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLevelOfDetail creates a new [LevelOfDetail].
-func NewLevelOfDetail() *LevelOfDetail {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNLevelOfDetail")), objc.RegisterName("new"))
-	return &LevelOfDetail{inner: raw.SCNLevelOfDetailFromID(_id)}
-}
-
-// @property geometry @abstract Returns the geometry of the receiver.
-//
-// Geometry calls the underlying Geometry.
-func (x *LevelOfDetail) Geometry() *Geometry {
-	_r := x.inner.Geometry()
-	if _r == nil {
+// levelOfDetailAdopt wraps an Objective-C object that this code just created as a
+// LevelOfDetail (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func levelOfDetailAdopt(id objc.ID) *LevelOfDetail {
+	if id == 0 {
 		return nil
 	}
-	return &Geometry{inner: _r}
+	x := &LevelOfDetail{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property screenSpaceRadius @abstract Returns the screen space radius of the receiver if any, 0 otherwise.
-//
-// ScreenSpaceRadius calls the underlying ScreenSpaceRadius.
+// Description returns the object's -description text.
+func (x *LevelOfDetail) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LevelOfDetail) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LevelOfDetail) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LevelOfDetail) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLevelOfDetail creates a new LevelOfDetail.
+func NewLevelOfDetail() *LevelOfDetail {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNLevelOfDetail")), objc.RegisterName("new"))
+	return levelOfDetailAdopt(_id)
+}
+
+// Geometry returns the geometry of the receiver.
+func (x *LevelOfDetail) Geometry() *Geometry {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
+	return GeometryFromID(_r)
+}
+
+// ScreenSpaceRadius returns the screen space radius of the receiver if any, 0 otherwise.
 func (x *LevelOfDetail) ScreenSpaceRadius() float64 {
-	return x.inner.ScreenSpaceRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceRadius"))
+	return _r
 }
 
-// @property worldSpaceDistance @abstract Returns the world space distance of the receiver if any, 0 otherwise.
-//
-// WorldSpaceDistance calls the underlying WorldSpaceDistance.
+// WorldSpaceDistance returns the world space distance of the receiver if any, 0 otherwise.
 func (x *LevelOfDetail) WorldSpaceDistance() float64 {
-	return x.inner.WorldSpaceDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("worldSpaceDistance"))
+	return _r
 }
 
 // LevelOfDetailable is the interface implemented by [LevelOfDetail], for mocking and DI.
 type LevelOfDetailable interface {
-	Unwrap() *raw.SCNLevelOfDetail
+	obj.Object
 	Geometry() *Geometry
 	ScreenSpaceRadius() float64
 	WorldSpaceDistance() float64

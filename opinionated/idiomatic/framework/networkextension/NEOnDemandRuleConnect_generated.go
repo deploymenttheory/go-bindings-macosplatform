@@ -5,137 +5,97 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A VPN On Demand rule that connects the VPN.
+// NEOnDemandRuleConnect is an idiomatic wrapper over the Objective-C class NEOnDemandRuleConnect.
 //
-// NEOnDemandRuleConnect wraps [raw.NEOnDemandRuleConnect] with a fluent Go API.
+// It embeds [NEOnDemandRule], promoting that type's methods.
+//
+// A VPN On Demand rule that connects the VPN.
 type NEOnDemandRuleConnect struct {
-	inner *raw.NEOnDemandRuleConnect
+	NEOnDemandRule
 }
 
-// Unwrap returns the underlying [raw.NEOnDemandRuleConnect].
-func (x *NEOnDemandRuleConnect) Unwrap() *raw.NEOnDemandRuleConnect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEOnDemandRuleConnect) ID() objc.ID { return x.inner.Ptr() }
-
-// NEOnDemandRuleConnectFromID adopts an existing object pointer as a NEOnDemandRuleConnect (nil for 0).
+// NEOnDemandRuleConnectFromID adopts an existing Objective-C object as a NEOnDemandRuleConnect
+// (nil for 0), retaining it and registering a release finalizer.
 func NEOnDemandRuleConnectFromID(id objc.ID) *NEOnDemandRuleConnect {
 	if id == 0 {
 		return nil
 	}
-	return &NEOnDemandRuleConnect{inner: raw.NEOnDemandRuleConnectFromID(id)}
+	x := &NEOnDemandRuleConnect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEOnDemandRuleConnect creates a new [NEOnDemandRuleConnect].
+// nEOnDemandRuleConnectAdopt wraps an Objective-C object that this code just created as a
+// NEOnDemandRuleConnect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEOnDemandRuleConnectAdopt(id objc.ID) *NEOnDemandRuleConnect {
+	if id == 0 {
+		return nil
+	}
+	x := &NEOnDemandRuleConnect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNEOnDemandRuleConnect creates a new NEOnDemandRuleConnect.
 func NewNEOnDemandRuleConnect() *NEOnDemandRuleConnect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEOnDemandRuleConnect")), objc.RegisterName("new"))
-	return &NEOnDemandRuleConnect{inner: raw.NEOnDemandRuleConnectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEOnDemandRuleConnect")), objc.RegisterName("new"))
+	return nEOnDemandRuleConnectAdopt(_id)
 }
 
-// DNS search domains that identify a network.
-//
-// WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRuleConnect) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleConnect {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(_arr)
+// WithDNSSearchDomainMatch DNS search domains that identify a network.
+func (x *NEOnDemandRuleConnect) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleConnect {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
 	return x
 }
 
-// DNS server addresses that identify a network.
-//
-// WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRuleConnect) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleConnect {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEOnDemandRule.SetDNSServerAddressMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEOnDemandRule.SetDNSServerAddressMatch(_arr)
+// WithDNSServerAddressMatch DNS server addresses that identify a network.
+func (x *NEOnDemandRuleConnect) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleConnect {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
 	return x
 }
 
-// An interface type to identify a network.
-//
-// WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
+// WithInterfaceTypeMatch an interface type to identify a network.
 func (x *NEOnDemandRuleConnect) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleConnect {
-	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
 	return x
 }
 
-// SSIDs that identify a network.
-//
-// WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRuleConnect) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleConnect {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEOnDemandRule.SetSSIDMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEOnDemandRule.SetSSIDMatch(_arr)
+// WithSSIDMatch SSIDs that identify a network.
+func (x *NEOnDemandRuleConnect) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleConnect {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
 	return x
 }
 
-// A URL to probe when all other network identifiers match to validate that an expected resource is available.
-//
-// WithProbeURL sets the probeURL property and returns the receiver for chaining.
+// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
 func (x *NEOnDemandRuleConnect) WithProbeURL(probeURL string) *NEOnDemandRuleConnect {
-	x.inner.NEOnDemandRule.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 	return x
-}
-
-func (x *NEOnDemandRuleConnect) asNEOnDemandRule() *raw.NEOnDemandRule {
-	return &x.inner.NEOnDemandRule
 }
 
 // NEOnDemandRuleConnectable is the interface implemented by [NEOnDemandRuleConnect], for mocking and DI.
 type NEOnDemandRuleConnectable interface {
-	Unwrap() *raw.NEOnDemandRuleConnect
-	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleConnect
-	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleConnect
+	obj.Object
+	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleConnect
+	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleConnect
 	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleConnect
-	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleConnect
+	WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleConnect
 	WithProbeURL(probeURL string) *NEOnDemandRuleConnect
 }
 
 var _ NEOnDemandRuleConnectable = (*NEOnDemandRuleConnect)(nil)
+
+var _ NEOnDemandRuleProvider = (*NEOnDemandRuleConnect)(nil)

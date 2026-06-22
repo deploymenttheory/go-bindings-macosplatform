@@ -5,127 +5,103 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A kernel for computing the solution of a linear system of equations using an LU factorization.
+// MatrixSolveLU is an idiomatic wrapper over the Objective-C class MPSMatrixSolveLU.
 //
-// MatrixSolveLU wraps [raw.MPSMatrixSolveLU] with a fluent Go API.
+// It embeds [MatrixBinaryKernel], promoting that type's methods.
+//
+// A kernel for computing the solution of a linear system of equations using an LU factorization.
 type MatrixSolveLU struct {
-	inner *raw.MPSMatrixSolveLU
+	MatrixBinaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixSolveLU].
-func (x *MatrixSolveLU) Unwrap() *raw.MPSMatrixSolveLU { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixSolveLU) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixSolveLUFromID adopts an existing object pointer as a MatrixSolveLU (nil for 0).
+// MatrixSolveLUFromID adopts an existing Objective-C object as a MatrixSolveLU
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixSolveLUFromID(id objc.ID) *MatrixSolveLU {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixSolveLU{inner: raw.MPSMatrixSolveLUFromID(id)}
+	x := &MatrixSolveLU{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize an MPSMatrixSolveLU object on a device @param      device          The device on which the kernel will execute. @param      transpose       A boolean value which indicates if the source matrix should be used in transposed form. @param      order           The order of the source matrix and the number of rows in the solution and right hand side matrices. @param      numberOfRightHandSides  The number of columns in the solution and right hand side matrices. @return     A valid MPSMatrixSolveLU object or nil, if failure.
-//
-// NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides creates a new [MatrixSolveLU].
-func NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides(device metal.MTLDevice, transpose bool, order uint, numberOfRightHandSides uint) *MatrixSolveLU {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSolveLU")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:transpose:order:numberOfRightHandSides:"), device, transpose, order, numberOfRightHandSides)
-	return &MatrixSolveLU{inner: raw.MPSMatrixSolveLUFromID(_id)}
+// matrixSolveLUAdopt wraps an Objective-C object that this code just created as a
+// MatrixSolveLU (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixSolveLUAdopt(id objc.ID) *MatrixSolveLU {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixSolveLU{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+// NewMatrixSolveLU creates a new MatrixSolveLU.
+func NewMatrixSolveLU() *MatrixSolveLU {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixSolveLU")), objc.RegisterName("new"))
+	return matrixSolveLUAdopt(_id)
+}
+
+// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixSolveLU) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
 	return x
 }
 
-// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixSolveLU) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
 	return x
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixSolveLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
 	return x
 }
 
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixSolveLU) WithBatchStart(batchStart uint) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (x *MatrixSolveLU) WithBatchStart(batchStart int) *MatrixSolveLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixSolveLU) WithBatchSize(batchSize uint) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (x *MatrixSolveLU) WithBatchSize(batchSize int) *MatrixSolveLU {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixSolveLU) WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixSolveLU) WithLabel(label string) *MatrixSolveLU {
-	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @abstract   Encode a MPSMatrixSolveLU kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      sourceMatrix        A valid MPSMatrix containing the source matrix in factored form as returned by a previous successful execution of a MPSMatrixDecompositionLU kernel. @param      rightHandSideMatrix A valid MPSMatrix containing the right hand side values. @param      pivotIndices        A valid MPSMatrix which contains the pivot indices as returned by a previous successful execution of a MPSMatrixDecompositionLU kernel. @param      solutionMatrix      A valid MPSMatrix to contain the result. @discussion This function encodes the MPSMatrixSolveLU object to a valid command buffer. sourceMatrix should contain the lower and upper triangular factors of A as results from a previous execution of MPSMatrixDecompositionLU. pivotIndices is an array of pivots resulting from a previous execution of MPSMatrixDecompositionLU. rightHandSideMatrix and solutionMatrix must be large enough to hold a matrix of size order x numberOfRightHandSides starting at secondarySourceMatrixOrigin and resultMatrixOrigin respectively. sourceMatrix must be at least size order x order starting at primarySourceMatrixOrigin.
-//
-// EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix.
-func (x *MatrixSolveLU) EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, pivotIndices, solutionMatrix)
-}
-
-func (x *MatrixSolveLU) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
-	return &x.inner.MPSMatrixBinaryKernel
-}
-
-func (x *MatrixSolveLU) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
 }
 
 // MatrixSolveLUable is the interface implemented by [MatrixSolveLU], for mocking and DI.
 type MatrixSolveLUable interface {
-	Unwrap() *raw.MPSMatrixSolveLU
+	obj.Object
 	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
 	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU
-	WithBatchStart(batchStart uint) *MatrixSolveLU
-	WithBatchSize(batchSize uint) *MatrixSolveLU
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveLU
+	WithBatchStart(batchStart int) *MatrixSolveLU
+	WithBatchSize(batchSize int) *MatrixSolveLU
 	WithLabel(label string) *MatrixSolveLU
-	EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
 }
 
 var _ MatrixSolveLUable = (*MatrixSolveLU)(nil)
+
+var _ MatrixBinaryKernelProvider = (*MatrixSolveLU)(nil)
+
+var _ KernelProvider = (*MatrixSolveLU)(nil)

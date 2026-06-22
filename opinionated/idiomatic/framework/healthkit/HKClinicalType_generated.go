@@ -5,45 +5,60 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that contain clinical record data.
+// ClinicalType is an idiomatic wrapper over the Objective-C class HKClinicalType.
 //
-// ClinicalType wraps [raw.HKClinicalType] with a fluent Go API.
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that contain clinical record data.
 type ClinicalType struct {
-	inner *raw.HKClinicalType
+	SampleType
 }
 
-// Unwrap returns the underlying [raw.HKClinicalType].
-func (x *ClinicalType) Unwrap() *raw.HKClinicalType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClinicalType) ID() objc.ID { return x.inner.Ptr() }
-
-// ClinicalTypeFromID adopts an existing object pointer as a ClinicalType (nil for 0).
+// ClinicalTypeFromID adopts an existing Objective-C object as a ClinicalType
+// (nil for 0), retaining it and registering a release finalizer.
 func ClinicalTypeFromID(id objc.ID) *ClinicalType {
 	if id == 0 {
 		return nil
 	}
-	return &ClinicalType{inner: raw.HKClinicalTypeFromID(id)}
+	x := &ClinicalType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewClinicalType creates a new [ClinicalType].
+// clinicalTypeAdopt wraps an Objective-C object that this code just created as a
+// ClinicalType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func clinicalTypeAdopt(id objc.ID) *ClinicalType {
+	if id == 0 {
+		return nil
+	}
+	x := &ClinicalType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewClinicalType creates a new ClinicalType.
 func NewClinicalType() *ClinicalType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKClinicalType")), objc.RegisterName("new"))
-	return &ClinicalType{inner: raw.HKClinicalTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKClinicalType")), objc.RegisterName("new"))
+	return clinicalTypeAdopt(_id)
 }
-
-func (x *ClinicalType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *ClinicalType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
 // ClinicalTypeable is the interface implemented by [ClinicalType], for mocking and DI.
 type ClinicalTypeable interface {
-	Unwrap() *raw.HKClinicalType
+	obj.Object
 }
 
 var _ ClinicalTypeable = (*ClinicalType)(nil)
+
+var _ SampleTypeProvider = (*ClinicalType)(nil)
+
+var _ ObjectTypeProvider = (*ClinicalType)(nil)

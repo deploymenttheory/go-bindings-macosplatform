@@ -5,72 +5,87 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of how to convert between units using a linear equation.
+// UnitConverterLinear is an idiomatic wrapper over the Objective-C class NSUnitConverterLinear.
 //
-// UnitConverterLinear wraps [raw.NSUnitConverterLinear] with a fluent Go API.
+// It embeds [UnitConverter], promoting that type's methods.
+//
+// A description of how to convert between units using a linear equation.
 type UnitConverterLinear struct {
-	inner *raw.NSUnitConverterLinear
+	UnitConverter
 }
 
-// Unwrap returns the underlying [raw.NSUnitConverterLinear].
-func (x *UnitConverterLinear) Unwrap() *raw.NSUnitConverterLinear { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitConverterLinear) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitConverterLinearFromID adopts an existing object pointer as a UnitConverterLinear (nil for 0).
+// UnitConverterLinearFromID adopts an existing Objective-C object as a UnitConverterLinear
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitConverterLinearFromID(id objc.ID) *UnitConverterLinear {
 	if id == 0 {
 		return nil
 	}
-	return &UnitConverterLinear{inner: raw.NSUnitConverterLinearFromID(id)}
-}
-
-// NewUnitConverterLinearWithCoefficient creates a new [UnitConverterLinear].
-func NewUnitConverterLinearWithCoefficient(coefficient float64) *UnitConverterLinear {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitConverterLinear")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:"), coefficient)
-	return &UnitConverterLinear{inner: raw.NSUnitConverterLinearFromID(_id)}
-}
-
-// NewUnitConverterLinearWithCoefficientConstant creates a new [UnitConverterLinear].
-func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant float64) *UnitConverterLinear {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitConverterLinear")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:constant:"), coefficient, constant)
-	return &UnitConverterLinear{inner: raw.NSUnitConverterLinearFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitConverterLinear) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverterLinear {
-	x.inner.NSUnitConverter.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitConverterLinear{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Coefficient calls the underlying Coefficient.
+// unitConverterLinearAdopt wraps an Objective-C object that this code just created as a
+// UnitConverterLinear (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitConverterLinearAdopt(id objc.ID) *UnitConverterLinear {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitConverterLinear{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewUnitConverterLinearWithCoefficient creates a new UnitConverterLinear.
+func NewUnitConverterLinearWithCoefficient(coefficient float64) *UnitConverterLinear {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnitConverterLinear")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:"), coefficient)
+	return unitConverterLinearAdopt(_id)
+}
+
+// NewUnitConverterLinearWithCoefficientConstant creates a new UnitConverterLinear.
+func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant float64) *UnitConverterLinear {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnitConverterLinear")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:constant:"), coefficient, constant)
+	return unitConverterLinearAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitConverterLinear) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverterLinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Coefficient wraps the corresponding Objective-C method.
 func (x *UnitConverterLinear) Coefficient() float64 {
-	return x.inner.Coefficient()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("coefficient"))
+	return _r
 }
 
-// Constant calls the underlying Constant.
+// Constant wraps the corresponding Objective-C method.
 func (x *UnitConverterLinear) Constant() float64 {
-	return x.inner.Constant()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("constant"))
+	return _r
 }
-
-func (x *UnitConverterLinear) asUnitConverter() *raw.NSUnitConverter { return &x.inner.NSUnitConverter }
-
-func (x *UnitConverterLinear) asObject() *raw.NSObject { return &x.inner.NSUnitConverter.NSObject }
 
 // UnitConverterLinearable is the interface implemented by [UnitConverterLinear], for mocking and DI.
 type UnitConverterLinearable interface {
-	Unwrap() *raw.NSUnitConverterLinear
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverterLinear
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitConverterLinear
 	Coefficient() float64
 	Constant() float64
 }
 
 var _ UnitConverterLinearable = (*UnitConverterLinear)(nil)
+
+var _ UnitConverterProvider = (*UnitConverterLinear)(nil)

@@ -6,86 +6,115 @@ package eventkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that associates virtual conferencing details with an event object in a user’s calendar.
+// VirtualConferenceProvider is an idiomatic wrapper over the Objective-C class EKVirtualConferenceProvider.
 //
-// VirtualConferenceProvider wraps [raw.EKVirtualConferenceProvider] with a fluent Go API.
+// An object that associates virtual conferencing details with an event object in a user’s calendar.
 type VirtualConferenceProvider struct {
-	inner *raw.EKVirtualConferenceProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKVirtualConferenceProvider].
-func (x *VirtualConferenceProvider) Unwrap() *raw.EKVirtualConferenceProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtualConferenceProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtualConferenceProviderFromID adopts an existing object pointer as a VirtualConferenceProvider (nil for 0).
+// VirtualConferenceProviderFromID adopts an existing Objective-C object as a VirtualConferenceProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtualConferenceProviderFromID(id objc.ID) *VirtualConferenceProvider {
 	if id == 0 {
 		return nil
 	}
-	return &VirtualConferenceProvider{inner: raw.EKVirtualConferenceProviderFromID(id)}
+	x := &VirtualConferenceProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVirtualConferenceProvider creates a new [VirtualConferenceProvider].
+// virtualConferenceProviderAdopt wraps an Objective-C object that this code just created as a
+// VirtualConferenceProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtualConferenceProviderAdopt(id objc.ID) *VirtualConferenceProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtualConferenceProvider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtualConferenceProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtualConferenceProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtualConferenceProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualConferenceProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVirtualConferenceProvider creates a new VirtualConferenceProvider.
 func NewVirtualConferenceProvider() *VirtualConferenceProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKVirtualConferenceProvider")), objc.RegisterName("new"))
-	return &VirtualConferenceProvider{inner: raw.EKVirtualConferenceProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceProvider")), objc.RegisterName("new"))
+	return virtualConferenceProviderAdopt(_id)
 }
 
-// Provides an array of room types where events take place.
+// FetchAvailableRoomTypes provides an array of room types where events take place.
 //
 // FetchAvailableRoomTypes blocks until the operation completes or ctx is cancelled.
-func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (*foundation.NSArray[*raw.EKVirtualConferenceRoomTypeDescriptor], error) {
+func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.EKVirtualConferenceRoomTypeDescriptor]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchAvailableRoomTypesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.EKVirtualConferenceRoomTypeDescriptor], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAvailableRoomTypesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.EKVirtualConferenceRoomTypeDescriptor]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Provides details about a virtual conference that takes place in a room the user selects.
+// FetchVirtualConferenceForIdentifier provides details about a virtual conference that takes place in a room the user selects.
 //
 // FetchVirtualConferenceForIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier *foundation.NSString) (*VirtualConferenceDescriptor, error) {
+func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (result *VirtualConferenceDescriptor, err error) {
 	type _result struct {
 		val *VirtualConferenceDescriptor
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchVirtualConferenceForIdentifierCompletionHandler(identifier, func(_p0 *raw.EKVirtualConferenceDescriptor, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &VirtualConferenceDescriptor{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = VirtualConferenceDescriptorFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchVirtualConferenceForIdentifier:completionHandler:"), objref.IDOf(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -97,9 +126,9 @@ func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx cont
 
 // VirtualConferenceProviderable is the interface implemented by [VirtualConferenceProvider], for mocking and DI.
 type VirtualConferenceProviderable interface {
-	Unwrap() *raw.EKVirtualConferenceProvider
-	FetchAvailableRoomTypes(ctx context.Context) (*foundation.NSArray[*raw.EKVirtualConferenceRoomTypeDescriptor], error)
-	FetchVirtualConferenceForIdentifier(ctx context.Context, identifier *foundation.NSString) (*VirtualConferenceDescriptor, error)
+	obj.Object
+	FetchAvailableRoomTypes(ctx context.Context) (obj.Object, error)
+	FetchVirtualConferenceForIdentifier(ctx context.Context, identifier obj.Object) (*VirtualConferenceDescriptor, error)
 }
 
 var _ VirtualConferenceProviderable = (*VirtualConferenceProvider)(nil)

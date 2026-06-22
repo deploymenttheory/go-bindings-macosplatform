@@ -5,100 +5,87 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element for the cursor used as a directional pad.
+// DeviceCursor is an idiomatic wrapper over the Objective-C class GCDeviceCursor.
 //
-// DeviceCursor wraps [raw.GCDeviceCursor] with a fluent Go API.
+// It embeds [ControllerDirectionPad], promoting that type's methods.
+//
+// A control element for the cursor used as a directional pad.
 type DeviceCursor struct {
-	inner *raw.GCDeviceCursor
+	ControllerDirectionPad
 }
 
-// Unwrap returns the underlying [raw.GCDeviceCursor].
-func (x *DeviceCursor) Unwrap() *raw.GCDeviceCursor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeviceCursor) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceCursorFromID adopts an existing object pointer as a DeviceCursor (nil for 0).
+// DeviceCursorFromID adopts an existing Objective-C object as a DeviceCursor
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceCursorFromID(id objc.ID) *DeviceCursor {
 	if id == 0 {
 		return nil
 	}
-	return &DeviceCursor{inner: raw.GCDeviceCursorFromID(id)}
+	x := &DeviceCursor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDeviceCursor creates a new [DeviceCursor].
+// deviceCursorAdopt wraps an Objective-C object that this code just created as a
+// DeviceCursor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceCursorAdopt(id objc.ID) *DeviceCursor {
+	if id == 0 {
+		return nil
+	}
+	x := &DeviceCursor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDeviceCursor creates a new DeviceCursor.
 func NewDeviceCursor() *DeviceCursor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDeviceCursor")), objc.RegisterName("new"))
-	return &DeviceCursor{inner: raw.GCDeviceCursorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceCursor")), objc.RegisterName("new"))
+	return deviceCursorAdopt(_id)
 }
 
-// The block that the directional pad calls when the user changes its values.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *DeviceCursor) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.SetValueChangedHandler(valueChangedHandler)
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
+func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
-	return x
-}
-
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
-}
-
-func (x *DeviceCursor) asControllerDirectionPad() *raw.GCControllerDirectionPad {
-	return &x.inner.GCControllerDirectionPad
-}
-
-func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement {
-	return &x.inner.GCControllerDirectionPad.GCControllerElement
 }
 
 // DeviceCursorable is the interface implemented by [DeviceCursor], for mocking and DI.
 type DeviceCursorable interface {
-	Unwrap() *raw.GCDeviceCursor
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *DeviceCursor
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DeviceCursor
+	obj.Object
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor
 	WithSfSymbolsName(sfSymbolsName string) *DeviceCursor
 	WithLocalizedName(localizedName string) *DeviceCursor
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor
@@ -106,3 +93,7 @@ type DeviceCursorable interface {
 }
 
 var _ DeviceCursorable = (*DeviceCursor)(nil)
+
+var _ ControllerDirectionPadProvider = (*DeviceCursor)(nil)
+
+var _ ControllerElementProvider = (*DeviceCursor)(nil)

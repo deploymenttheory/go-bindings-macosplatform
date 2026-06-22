@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package storekit provides a fluent Go API over the macOS StoreKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Payment: [MutablePayment]
+//   - Request: [ProductsRequest], [ReceiptRefreshRequest]
 package storekit

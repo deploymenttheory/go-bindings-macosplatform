@@ -5,683 +5,595 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An interface that provides visual feedback to the user about the status of an ongoing task.
+// ProgressIndicator is an idiomatic wrapper over the Objective-C class NSProgressIndicator.
 //
-// ProgressIndicator wraps [raw.NSProgressIndicator] with a fluent Go API.
+// It embeds [View], promoting that type's methods.
+//
+// An interface that provides visual feedback to the user about the status of an ongoing task.
 type ProgressIndicator struct {
-	inner *raw.NSProgressIndicator
+	View
 }
 
-// Unwrap returns the underlying [raw.NSProgressIndicator].
-func (x *ProgressIndicator) Unwrap() *raw.NSProgressIndicator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProgressIndicator) ID() objc.ID { return x.inner.Ptr() }
-
-// ProgressIndicatorFromID adopts an existing object pointer as a ProgressIndicator (nil for 0).
+// ProgressIndicatorFromID adopts an existing Objective-C object as a ProgressIndicator
+// (nil for 0), retaining it and registering a release finalizer.
 func ProgressIndicatorFromID(id objc.ID) *ProgressIndicator {
 	if id == 0 {
 		return nil
 	}
-	return &ProgressIndicator{inner: raw.NSProgressIndicatorFromID(id)}
+	x := &ProgressIndicator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProgressIndicator creates a new [ProgressIndicator].
+// progressIndicatorAdopt wraps an Objective-C object that this code just created as a
+// ProgressIndicator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func progressIndicatorAdopt(id objc.ID) *ProgressIndicator {
+	if id == 0 {
+		return nil
+	}
+	x := &ProgressIndicator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewProgressIndicator creates a new ProgressIndicator.
 func NewProgressIndicator() *ProgressIndicator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSProgressIndicator")), objc.RegisterName("new"))
-	return &ProgressIndicator{inner: raw.NSProgressIndicatorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSProgressIndicator")), objc.RegisterName("new"))
+	return progressIndicatorAdopt(_id)
 }
 
-// A Boolean that indicates whether the progress indicator is indeterminate.
-//
-// WithIndeterminate sets the indeterminate property and returns the receiver for chaining.
+// WithIndeterminate a Boolean that indicates whether the progress indicator is indeterminate.
 func (x *ProgressIndicator) WithIndeterminate(indeterminate bool) *ProgressIndicator {
-	x.inner.SetIndeterminate(indeterminate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndeterminate:"), indeterminate)
 	return x
 }
 
-// The size of the progress indicator.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithControlSize(controlSize NSControlSize) *ProgressIndicator {
-	x.inner.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the progress indicator.
+func (x *ProgressIndicator) WithControlSize(controlSize ControlSize) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The value that indicates the current extent of the progress indicator.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the value that indicates the current extent of the progress indicator.
 func (x *ProgressIndicator) WithDoubleValue(doubleValue float64) *ProgressIndicator {
-	x.inner.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The minimum value for the progress indicator.
-//
-// WithMinValue sets the minValue property and returns the receiver for chaining.
+// WithMinValue the minimum value for the progress indicator.
 func (x *ProgressIndicator) WithMinValue(minValue float64) *ProgressIndicator {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 	return x
 }
 
-// The maximum value for the progress indicator.
-//
-// WithMaxValue sets the maxValue property and returns the receiver for chaining.
+// WithMaxValue the maximum value for the progress indicator.
 func (x *ProgressIndicator) WithMaxValue(maxValue float64) *ProgressIndicator {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 	return x
 }
 
-// The progress object to use for updating the progress view.
-//
-// WithObservedProgress sets the observedProgress property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithObservedProgress(observedProgress *foundation.NSProgress) *ProgressIndicator {
-	x.inner.SetObservedProgress(observedProgress)
+// WithObservedProgress the progress object to use for updating the progress view.
+func (x *ProgressIndicator) WithObservedProgress(observedProgress obj.Object) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObservedProgress:"), objref.IDOf(observedProgress))
 	return x
 }
 
-// A Boolean that indicates whether the progress indicator implements animation in a separate thread.
-//
-// WithUsesThreadedAnimation sets the usesThreadedAnimation property and returns the receiver for chaining.
+// WithUsesThreadedAnimation a Boolean that indicates whether the progress indicator implements animation in a separate thread.
 func (x *ProgressIndicator) WithUsesThreadedAnimation(usesThreadedAnimation bool) *ProgressIndicator {
-	x.inner.SetUsesThreadedAnimation(usesThreadedAnimation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThreadedAnimation:"), usesThreadedAnimation)
 	return x
 }
 
-// The style of the progress indicator (bar or spinning).
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithStyle(style NSProgressIndicatorStyle) *ProgressIndicator {
-	x.inner.SetStyle(raw.NSProgressIndicatorStyle(style))
+// WithStyle the style of the progress indicator (bar or spinning).
+func (x *ProgressIndicator) WithStyle(style ProgressIndicatorStyle) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// A Boolean that indicates whether the progress indicator hides itself when it isn’t animating.
-//
-// WithDisplayedWhenStopped sets the displayedWhenStopped property and returns the receiver for chaining.
+// WithDisplayedWhenStopped a Boolean that indicates whether the progress indicator hides itself when it isn’t animating.
 func (x *ProgressIndicator) WithDisplayedWhenStopped(displayedWhenStopped bool) *ProgressIndicator {
-	x.inner.SetDisplayedWhenStopped(displayedWhenStopped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedWhenStopped:"), displayedWhenStopped)
 	return x
 }
 
-// A Boolean that indicates whether the progress indicator’s frame has a three-dimensional bezel.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean that indicates whether the progress indicator’s frame has a three-dimensional bezel.
 func (x *ProgressIndicator) WithBezeled(bezeled bool) *ProgressIndicator {
-	x.inner.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// The progress indicator’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithControlTint(controlTint NSControlTint) *ProgressIndicator {
-	x.inner.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the progress indicator’s control tint.
+func (x *ProgressIndicator) WithControlTint(controlTint ControlTint) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithSubviews(items ...ViewProvider) *ProgressIndicator {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithHidden(hidden bool) *ProgressIndicator {
-	x.inner.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ProgressIndicator {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (x *ProgressIndicator) WithFrame(frame corefoundation.CGRect) *ProgressIndicator {
-	x.inner.NSView.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithFrameRotation(frameRotation float64) *ProgressIndicator {
-	x.inner.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithBoundsRotation(boundsRotation float64) *ProgressIndicator {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (x *ProgressIndicator) WithBounds(bounds corefoundation.CGRect) *ProgressIndicator {
-	x.inner.NSView.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *ProgressIndicator {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *ProgressIndicator) WithNeedsDisplay(needsDisplay bool) *ProgressIndicator {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ProgressIndicator {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ProgressIndicator {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithWantsLayer(wantsLayer bool) *ProgressIndicator {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithLayer(layer *quartzcore.CALayer) *ProgressIndicator {
-	x.inner.NSView.SetLayer(layer)
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithLayer(layer obj.Object) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithNeedsLayout(needsLayout bool) *ProgressIndicator {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithAlphaValue(alphaValue float64) *ProgressIndicator {
-	x.inner.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ProgressIndicator {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ProgressIndicator) WithBackgroundFilters(items ...*coreimage.CIFilter) *ProgressIndicator {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithBackgroundFilters(items ...obj.Object) *ProgressIndicator {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ProgressIndicator {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithCompositingFilter(compositingFilter obj.Object) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ProgressIndicator) WithContentFilters(items ...*coreimage.CIFilter) *ProgressIndicator {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithContentFilters(items ...obj.Object) *ProgressIndicator {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithShadow(shadow *Shadow) *ProgressIndicator {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithClipsToBounds(clipsToBounds bool) *ProgressIndicator {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithToolTip(toolTip string) *ProgressIndicator {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ProgressIndicator {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return x
 }
 
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithFocusRingType(focusRingType NSFocusRingType) *ProgressIndicator {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithFocusRingType(focusRingType FocusRingType) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ProgressIndicator {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ProgressIndicator {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ProgressIndicator {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ProgressIndicator {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ProgressIndicator {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ProgressIndicator {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *ProgressIndicator) WithMenu(menu *Menu) *ProgressIndicator {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *ProgressIndicator {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *ProgressIndicator) WithUserActivity(userActivity obj.Object) *ProgressIndicator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *ProgressIndicator) WithTouchBar(touchBar *TouchBar) *ProgressIndicator {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Advances the progress bar of a determinate progress indicator by the specified amount.
-//
-// IncrementBy calls the underlying IncrementBy.
+// IncrementBy advances the progress bar of a determinate progress indicator by the specified amount.
 func (x *ProgressIndicator) IncrementBy(delta float64) {
-	x.inner.IncrementBy(delta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("incrementBy:"), delta)
 }
 
-// Starts the animation of an indeterminate progress indicator.
-//
-// StartAnimation calls the underlying StartAnimation.
-func (x *ProgressIndicator) StartAnimation(sender objc.ID) {
-	x.inner.StartAnimation(sender)
+// StartAnimation starts the animation of an indeterminate progress indicator.
+func (x *ProgressIndicator) StartAnimation(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 }
 
-// Stops the animation of an indeterminate progress indicator.
-//
-// StopAnimation calls the underlying StopAnimation.
-func (x *ProgressIndicator) StopAnimation(sender objc.ID) {
-	x.inner.StopAnimation(sender)
+// StopAnimation stops the animation of an indeterminate progress indicator.
+func (x *ProgressIndicator) StopAnimation(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 }
 
-// This action method resizes the progress indicator to an appropriate size depending on the value of style.
-//
-// SizeToFit calls the underlying SizeToFit.
+// SizeToFit this action method resizes the progress indicator to an appropriate size depending on the value of style.
 func (x *ProgressIndicator) SizeToFit() {
-	x.inner.SizeToFit()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
 }
 
-// IsIndeterminate calls the underlying IsIndeterminate.
+// IsIndeterminate wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) IsIndeterminate() bool {
-	return x.inner.IsIndeterminate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndeterminate"))
+	return _r
 }
 
-// SetIndeterminate calls the underlying SetIndeterminate.
+// SetIndeterminate wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetIndeterminate(indeterminate bool) {
-	x.inner.SetIndeterminate(indeterminate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndeterminate:"), indeterminate)
 }
 
-// ControlSize calls the underlying ControlSize.
-func (x *ProgressIndicator) ControlSize() NSControlSize {
-	return NSControlSize(x.inner.ControlSize())
+// ControlSize wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) ControlSize() ControlSize {
+	_r := objc.Send[ControlSize](objref.IDOf(x), objc.RegisterName("controlSize"))
+	return _r
 }
 
-// SetControlSize calls the underlying SetControlSize.
-func (x *ProgressIndicator) SetControlSize(controlSize NSControlSize) {
-	x.inner.SetControlSize(raw.NSControlSize(controlSize))
+// SetControlSize wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) SetControlSize(controlSize ControlSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 }
 
-// DoubleValue calls the underlying DoubleValue.
+// DoubleValue wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) DoubleValue() float64 {
-	return x.inner.DoubleValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+	return _r
 }
 
-// SetDoubleValue calls the underlying SetDoubleValue.
+// SetDoubleValue wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetDoubleValue(doubleValue float64) {
-	x.inner.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 }
 
-// MinValue calls the underlying MinValue.
+// MinValue wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) MinValue() float64 {
-	return x.inner.MinValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+	return _r
 }
 
-// SetMinValue calls the underlying SetMinValue.
+// SetMinValue wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetMinValue(minValue float64) {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
-// MaxValue calls the underlying MaxValue.
+// MaxValue wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) MaxValue() float64 {
-	return x.inner.MaxValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+	return _r
 }
 
-// SetMaxValue calls the underlying SetMaxValue.
+// SetMaxValue wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetMaxValue(maxValue float64) {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
-// ObservedProgress calls the underlying ObservedProgress.
-func (x *ProgressIndicator) ObservedProgress() *foundation.NSProgress {
-	return x.inner.ObservedProgress()
+// ObservedProgress wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) ObservedProgress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("observedProgress"))
+	return obj.Wrap(_r)
 }
 
-// SetObservedProgress calls the underlying SetObservedProgress.
-func (x *ProgressIndicator) SetObservedProgress(observedProgress *foundation.NSProgress) {
-	x.inner.SetObservedProgress(observedProgress)
+// SetObservedProgress wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) SetObservedProgress(observedProgress obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObservedProgress:"), objref.IDOf(observedProgress))
 }
 
-// UsesThreadedAnimation calls the underlying UsesThreadedAnimation.
+// UsesThreadedAnimation wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) UsesThreadedAnimation() bool {
-	return x.inner.UsesThreadedAnimation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesThreadedAnimation"))
+	return _r
 }
 
-// SetUsesThreadedAnimation calls the underlying SetUsesThreadedAnimation.
+// SetUsesThreadedAnimation wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetUsesThreadedAnimation(usesThreadedAnimation bool) {
-	x.inner.SetUsesThreadedAnimation(usesThreadedAnimation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThreadedAnimation:"), usesThreadedAnimation)
 }
 
-// Style calls the underlying Style.
-func (x *ProgressIndicator) Style() NSProgressIndicatorStyle {
-	return NSProgressIndicatorStyle(x.inner.Style())
+// Style wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) Style() ProgressIndicatorStyle {
+	_r := objc.Send[ProgressIndicatorStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// SetStyle calls the underlying SetStyle.
-func (x *ProgressIndicator) SetStyle(style NSProgressIndicatorStyle) {
-	x.inner.SetStyle(raw.NSProgressIndicatorStyle(style))
+// SetStyle wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) SetStyle(style ProgressIndicatorStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
-// IsDisplayedWhenStopped calls the underlying IsDisplayedWhenStopped.
+// IsDisplayedWhenStopped wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) IsDisplayedWhenStopped() bool {
-	return x.inner.IsDisplayedWhenStopped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDisplayedWhenStopped"))
+	return _r
 }
 
-// SetDisplayedWhenStopped calls the underlying SetDisplayedWhenStopped.
+// SetDisplayedWhenStopped wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetDisplayedWhenStopped(displayedWhenStopped bool) {
-	x.inner.SetDisplayedWhenStopped(displayedWhenStopped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedWhenStopped:"), displayedWhenStopped)
 }
 
-// Returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
-//
-// AnimationDelay calls the underlying AnimationDelay.
+// AnimationDelay returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
 func (x *ProgressIndicator) AnimationDelay() float64 {
-	return x.inner.AnimationDelay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("animationDelay"))
+	return _r
 }
 
-// Sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
-//
-// SetAnimationDelay calls the underlying SetAnimationDelay.
+// SetAnimationDelay sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
 func (x *ProgressIndicator) SetAnimationDelay(delay float64) {
-	x.inner.SetAnimationDelay(delay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationDelay:"), delay)
 }
 
-// This action method advances the progress animation of an indeterminate progress animator by one step.
-//
-// Animate calls the underlying Animate.
-func (x *ProgressIndicator) Animate(sender objc.ID) {
-	x.inner.Animate(sender)
+// Animate this action method advances the progress animation of an indeterminate progress animator by one step.
+func (x *ProgressIndicator) Animate(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animate:"), objref.IDOf(sender))
 }
 
-// IsBezeled calls the underlying IsBezeled.
+// IsBezeled wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) IsBezeled() bool {
-	return x.inner.IsBezeled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBezeled"))
+	return _r
 }
 
-// SetBezeled calls the underlying SetBezeled.
+// SetBezeled wraps the corresponding Objective-C method.
 func (x *ProgressIndicator) SetBezeled(bezeled bool) {
-	x.inner.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 }
 
-// ControlTint calls the underlying ControlTint.
-func (x *ProgressIndicator) ControlTint() NSControlTint {
-	return NSControlTint(x.inner.ControlTint())
+// ControlTint wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) ControlTint() ControlTint {
+	_r := objc.Send[ControlTint](objref.IDOf(x), objc.RegisterName("controlTint"))
+	return _r
 }
 
-// SetControlTint calls the underlying SetControlTint.
-func (x *ProgressIndicator) SetControlTint(controlTint NSControlTint) {
-	x.inner.SetControlTint(raw.NSControlTint(controlTint))
+// SetControlTint wraps the corresponding Objective-C method.
+func (x *ProgressIndicator) SetControlTint(controlTint ControlTint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 }
-
-func (x *ProgressIndicator) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *ProgressIndicator) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // ProgressIndicatorable is the interface implemented by [ProgressIndicator], for mocking and DI.
 type ProgressIndicatorable interface {
-	Unwrap() *raw.NSProgressIndicator
+	obj.Object
 	WithIndeterminate(indeterminate bool) *ProgressIndicator
-	WithControlSize(controlSize NSControlSize) *ProgressIndicator
+	WithControlSize(controlSize ControlSize) *ProgressIndicator
 	WithDoubleValue(doubleValue float64) *ProgressIndicator
 	WithMinValue(minValue float64) *ProgressIndicator
 	WithMaxValue(maxValue float64) *ProgressIndicator
-	WithObservedProgress(observedProgress *foundation.NSProgress) *ProgressIndicator
+	WithObservedProgress(observedProgress obj.Object) *ProgressIndicator
 	WithUsesThreadedAnimation(usesThreadedAnimation bool) *ProgressIndicator
-	WithStyle(style NSProgressIndicatorStyle) *ProgressIndicator
+	WithStyle(style ProgressIndicatorStyle) *ProgressIndicator
 	WithDisplayedWhenStopped(displayedWhenStopped bool) *ProgressIndicator
 	WithBezeled(bezeled bool) *ProgressIndicator
-	WithControlTint(controlTint NSControlTint) *ProgressIndicator
+	WithControlTint(controlTint ControlTint) *ProgressIndicator
 	WithSubviews(items ...ViewProvider) *ProgressIndicator
 	WithHidden(hidden bool) *ProgressIndicator
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ProgressIndicator
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ProgressIndicator
 	WithFrame(frame corefoundation.CGRect) *ProgressIndicator
 	WithFrameRotation(frameRotation float64) *ProgressIndicator
 	WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator
@@ -691,27 +603,27 @@ type ProgressIndicatorable interface {
 	WithNeedsDisplay(needsDisplay bool) *ProgressIndicator
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator
 	WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ProgressIndicator
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ProgressIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ProgressIndicator
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ProgressIndicator
 	WithWantsLayer(wantsLayer bool) *ProgressIndicator
-	WithLayer(layer *quartzcore.CALayer) *ProgressIndicator
+	WithLayer(layer obj.Object) *ProgressIndicator
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator
 	WithNeedsLayout(needsLayout bool) *ProgressIndicator
 	WithAlphaValue(alphaValue float64) *ProgressIndicator
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ProgressIndicator
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *ProgressIndicator
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ProgressIndicator
-	WithContentFilters(items ...*coreimage.CIFilter) *ProgressIndicator
+	WithBackgroundFilters(items ...obj.Object) *ProgressIndicator
+	WithCompositingFilter(compositingFilter obj.Object) *ProgressIndicator
+	WithContentFilters(items ...obj.Object) *ProgressIndicator
 	WithShadow(shadow *Shadow) *ProgressIndicator
 	WithClipsToBounds(clipsToBounds bool) *ProgressIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator
 	WithToolTip(toolTip string) *ProgressIndicator
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ProgressIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ProgressIndicator
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator
 	WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator
-	WithFocusRingType(focusRingType NSFocusRingType) *ProgressIndicator
+	WithFocusRingType(focusRingType FocusRingType) *ProgressIndicator
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ProgressIndicator
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ProgressIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator
@@ -724,37 +636,41 @@ type ProgressIndicatorable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator
 	WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator
 	WithMenu(menu *Menu) *ProgressIndicator
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ProgressIndicator
+	WithUserActivity(userActivity obj.Object) *ProgressIndicator
 	WithTouchBar(touchBar *TouchBar) *ProgressIndicator
 	IncrementBy(delta float64)
-	StartAnimation(sender objc.ID)
-	StopAnimation(sender objc.ID)
+	StartAnimation(sender obj.Object)
+	StopAnimation(sender obj.Object)
 	SizeToFit()
 	IsIndeterminate() bool
 	SetIndeterminate(indeterminate bool)
-	ControlSize() NSControlSize
-	SetControlSize(controlSize NSControlSize)
+	ControlSize() ControlSize
+	SetControlSize(controlSize ControlSize)
 	DoubleValue() float64
 	SetDoubleValue(doubleValue float64)
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64
 	SetMaxValue(maxValue float64)
-	ObservedProgress() *foundation.NSProgress
-	SetObservedProgress(observedProgress *foundation.NSProgress)
+	ObservedProgress() obj.Object
+	SetObservedProgress(observedProgress obj.Object)
 	UsesThreadedAnimation() bool
 	SetUsesThreadedAnimation(usesThreadedAnimation bool)
-	Style() NSProgressIndicatorStyle
-	SetStyle(style NSProgressIndicatorStyle)
+	Style() ProgressIndicatorStyle
+	SetStyle(style ProgressIndicatorStyle)
 	IsDisplayedWhenStopped() bool
 	SetDisplayedWhenStopped(displayedWhenStopped bool)
 	AnimationDelay() float64
 	SetAnimationDelay(delay float64)
-	Animate(sender objc.ID)
+	Animate(sender obj.Object)
 	IsBezeled() bool
 	SetBezeled(bezeled bool)
-	ControlTint() NSControlTint
-	SetControlTint(controlTint NSControlTint)
+	ControlTint() ControlTint
+	SetControlTint(controlTint ControlTint)
 }
 
 var _ ProgressIndicatorable = (*ProgressIndicator)(nil)
+
+var _ ViewProvider = (*ProgressIndicator)(nil)
+
+var _ ResponderProvider = (*ProgressIndicator)(nil)

@@ -5,58 +5,68 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Affine transform information that an image-alignment request produces.
+// ImageTranslationAlignmentObservation is an idiomatic wrapper over the Objective-C class VNImageTranslationAlignmentObservation.
 //
-// ImageTranslationAlignmentObservation wraps [raw.VNImageTranslationAlignmentObservation] with a fluent Go API.
+// It embeds [ImageAlignmentObservation], promoting that type's methods.
+//
+// Affine transform information that an image-alignment request produces.
 type ImageTranslationAlignmentObservation struct {
-	inner *raw.VNImageTranslationAlignmentObservation
+	ImageAlignmentObservation
 }
 
-// Unwrap returns the underlying [raw.VNImageTranslationAlignmentObservation].
-func (x *ImageTranslationAlignmentObservation) Unwrap() *raw.VNImageTranslationAlignmentObservation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageTranslationAlignmentObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageTranslationAlignmentObservationFromID adopts an existing object pointer as a ImageTranslationAlignmentObservation (nil for 0).
+// ImageTranslationAlignmentObservationFromID adopts an existing Objective-C object as a ImageTranslationAlignmentObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageTranslationAlignmentObservationFromID(id objc.ID) *ImageTranslationAlignmentObservation {
 	if id == 0 {
 		return nil
 	}
-	return &ImageTranslationAlignmentObservation{inner: raw.VNImageTranslationAlignmentObservationFromID(id)}
+	x := &ImageTranslationAlignmentObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageTranslationAlignmentObservation creates a new [ImageTranslationAlignmentObservation].
+// imageTranslationAlignmentObservationAdopt wraps an Objective-C object that this code just created as a
+// ImageTranslationAlignmentObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageTranslationAlignmentObservationAdopt(id objc.ID) *ImageTranslationAlignmentObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageTranslationAlignmentObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageTranslationAlignmentObservation creates a new ImageTranslationAlignmentObservation.
 func NewImageTranslationAlignmentObservation() *ImageTranslationAlignmentObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageTranslationAlignmentObservation")), objc.RegisterName("new"))
-	return &ImageTranslationAlignmentObservation{inner: raw.VNImageTranslationAlignmentObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNImageTranslationAlignmentObservation")), objc.RegisterName("new"))
+	return imageTranslationAlignmentObservationAdopt(_id)
 }
 
-// AlignmentTransform calls the underlying AlignmentTransform.
+// AlignmentTransform wraps the corresponding Objective-C method.
 func (x *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
-	return x.inner.AlignmentTransform()
-}
-
-func (x *ImageTranslationAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation {
-	return &x.inner.VNImageAlignmentObservation
-}
-
-func (x *ImageTranslationAlignmentObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNImageAlignmentObservation.VNObservation
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("alignmentTransform"))
+	return _r
 }
 
 // ImageTranslationAlignmentObservationable is the interface implemented by [ImageTranslationAlignmentObservation], for mocking and DI.
 type ImageTranslationAlignmentObservationable interface {
-	Unwrap() *raw.VNImageTranslationAlignmentObservation
+	obj.Object
 	AlignmentTransform() corefoundation.CGAffineTransform
 }
 
 var _ ImageTranslationAlignmentObservationable = (*ImageTranslationAlignmentObservation)(nil)
+
+var _ ImageAlignmentObservationProvider = (*ImageTranslationAlignmentObservation)(nil)
+
+var _ ObservationProvider = (*ImageTranslationAlignmentObservation)(nil)

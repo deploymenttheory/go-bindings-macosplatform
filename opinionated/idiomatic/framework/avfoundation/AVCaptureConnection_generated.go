@@ -5,321 +5,262 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a connection from a capture input to a capture output.
+// CaptureConnection is an idiomatic wrapper over the Objective-C class AVCaptureConnection.
 //
-// CaptureConnection wraps [raw.AVCaptureConnection] with a fluent Go API.
+// An object that represents a connection from a capture input to a capture output.
 type CaptureConnection struct {
-	inner *raw.AVCaptureConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureConnection].
-func (x *CaptureConnection) Unwrap() *raw.AVCaptureConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureConnection) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureConnectionFromID adopts an existing object pointer as a CaptureConnection (nil for 0).
+// CaptureConnectionFromID adopts an existing Objective-C object as a CaptureConnection
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureConnectionFromID(id objc.ID) *CaptureConnection {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(id)}
+	x := &CaptureConnection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a capture connection that represents a connection between multiple input ports and an output.
-//
-// NewCaptureConnectionWithInputPortsOutput creates a new [CaptureConnection].
-func NewCaptureConnectionWithInputPortsOutput(ports *foundation.NSArray[*raw.AVCaptureInputPort], output *raw.AVCaptureOutput) *CaptureConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputPorts:output:"), ports.Ptr(), output.Ptr())
-	return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(_id)}
+// captureConnectionAdopt wraps an Objective-C object that this code just created as a
+// CaptureConnection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureConnectionAdopt(id objc.ID) *CaptureConnection {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureConnection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a capture connection that represents a connection between an input port and a video preview layer.
-//
-// NewCaptureConnectionWithInputPortVideoPreviewLayer creates a new [CaptureConnection].
-func NewCaptureConnectionWithInputPortVideoPreviewLayer(port *raw.AVCaptureInputPort, layer *raw.AVCaptureVideoPreviewLayer) *CaptureConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputPort:videoPreviewLayer:"), port.Ptr(), layer.Ptr())
-	return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(_id)}
+// Description returns the object's -description text.
+func (x *CaptureConnection) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Turns the connection on and off.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureConnection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureConnectionWithInputPortsOutput creates a capture connection that represents a connection between multiple input ports and an output.
+func NewCaptureConnectionWithInputPortsOutput(ports []*CaptureInputPort, output *CaptureOutput) *CaptureConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputPorts:output:"), purego.SliceToNSArray(ports, func(_v *CaptureInputPort) objc.ID { return objref.IDOf(_v) }), objref.IDOf(output))
+	return captureConnectionAdopt(_id)
+}
+
+// NewCaptureConnectionWithInputPortVideoPreviewLayer creates a capture connection that represents a connection between an input port and a video preview layer.
+func NewCaptureConnectionWithInputPortVideoPreviewLayer(port *CaptureInputPort, layer *CaptureVideoPreviewLayer) *CaptureConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputPort:videoPreviewLayer:"), objref.IDOf(port), objref.IDOf(layer))
+	return captureConnectionAdopt(_id)
+}
+
+// WithEnabled turns the connection on and off.
 func (x *CaptureConnection) WithEnabled(enabled bool) *CaptureConnection {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value that indicates whether the connection horizontally flips the video flowing through it.
-//
-// WithVideoMirrored sets the videoMirrored property and returns the receiver for chaining.
+// WithVideoMirrored a Boolean value that indicates whether the connection horizontally flips the video flowing through it.
 func (x *CaptureConnection) WithVideoMirrored(videoMirrored bool) *CaptureConnection {
-	x.inner.SetVideoMirrored(videoMirrored)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoMirrored:"), videoMirrored)
 	return x
 }
 
-// A Boolean value that indicates whether you can enable mirroring based on a session’s configuration.
-//
-// WithAutomaticallyAdjustsVideoMirroring sets the automaticallyAdjustsVideoMirroring property and returns the receiver for chaining.
+// WithAutomaticallyAdjustsVideoMirroring a Boolean value that indicates whether you can enable mirroring based on a session’s configuration.
 func (x *CaptureConnection) WithAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) *CaptureConnection {
-	x.inner.SetAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsVideoMirroring:"), automaticallyAdjustsVideoMirroring)
 	return x
 }
 
-// A rotation angle the connection applies to a video flowing through it.
-//
-// WithVideoRotationAngle sets the videoRotationAngle property and returns the receiver for chaining.
+// WithVideoRotationAngle a rotation angle the connection applies to a video flowing through it.
 func (x *CaptureConnection) WithVideoRotationAngle(videoRotationAngle float64) *CaptureConnection {
-	x.inner.SetVideoRotationAngle(videoRotationAngle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoRotationAngle:"), videoRotationAngle)
 	return x
 }
 
-// An orientation that tells the connection how to rotate a video flowing through it.
-//
-// WithVideoOrientation sets the videoOrientation property and returns the receiver for chaining.
-func (x *CaptureConnection) WithVideoOrientation(videoOrientation AVCaptureVideoOrientation) *CaptureConnection {
-	x.inner.SetVideoOrientation(raw.AVCaptureVideoOrientation(videoOrientation))
+// WithVideoOrientation an orientation that tells the connection how to rotate a video flowing through it.
+func (x *CaptureConnection) WithVideoOrientation(videoOrientation CaptureVideoOrientation) *CaptureConnection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoOrientation:"), videoOrientation)
 	return x
 }
 
-// A setting that tells the connection how to interlace video flowing through it.
-//
-// WithVideoFieldMode sets the videoFieldMode property and returns the receiver for chaining.
-func (x *CaptureConnection) WithVideoFieldMode(videoFieldMode AVVideoFieldMode) *CaptureConnection {
-	x.inner.SetVideoFieldMode(raw.AVVideoFieldMode(videoFieldMode))
+// WithVideoFieldMode a setting that tells the connection how to interlace video flowing through it.
+func (x *CaptureConnection) WithVideoFieldMode(videoFieldMode VideoFieldMode) *CaptureConnection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFieldMode:"), videoFieldMode)
 	return x
 }
 
-// The smallest time interval the connection can apply between consecutive video frames.
-//
-// WithVideoMinFrameDuration sets the videoMinFrameDuration property and returns the receiver for chaining.
-func (x *CaptureConnection) WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection {
-	x.inner.SetVideoMinFrameDuration(videoMinFrameDuration)
-	return x
-}
-
-// The largest time interval the connection can apply between consecutive video frames.
-//
-// WithVideoMaxFrameDuration sets the videoMaxFrameDuration property and returns the receiver for chaining.
-func (x *CaptureConnection) WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection {
-	x.inner.SetVideoMaxFrameDuration(videoMaxFrameDuration)
-	return x
-}
-
-// Returns a Boolean value that indicates whether the connection supports a rotation angle.
-//
-// IsVideoRotationAngleSupported calls the underlying IsVideoRotationAngleSupported.
+// IsVideoRotationAngleSupported returns a Boolean value that indicates whether the connection supports a rotation angle.
 func (x *CaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle float64) bool {
-	return x.inner.IsVideoRotationAngleSupported(videoRotationAngle)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoRotationAngleSupported:"), videoRotationAngle)
+	return _r
 }
 
-// @property inputPorts @abstract An array of AVCaptureInputPort instances providing data through this connection. @discussion An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's inputPorts remain static for the life of the object.
+// InputPorts an array of AVCaptureInputPort instances providing data through this connection. An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's inputPorts remain static for the life of the object.
 //
 // InputPorts returns the collection as a Go slice.
 func (x *CaptureConnection) InputPorts() []*CaptureInputPort {
-	arr := x.inner.InputPorts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureInputPort {
-		return &CaptureInputPort{inner: raw.AVCaptureInputPortFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputPorts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureInputPort { return CaptureInputPortFromID(_id) })
 }
 
-// @property output @abstract The AVCaptureOutput instance consuming data from this connection's inputPorts. @discussion An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's output remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
-//
-// Output calls the underlying Output.
+// Output the AVCaptureOutput instance consuming data from this connection's inputPorts. An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's output remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
 func (x *CaptureConnection) Output() *CaptureOutput {
-	_r := x.inner.Output()
-	if _r == nil {
-		return nil
-	}
-	return &CaptureOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("output"))
+	return CaptureOutputFromID(_r)
 }
 
-// @property videoPreviewLayer @abstract The AVCaptureVideoPreviewLayer instance consuming data from this connection's inputPort. @discussion An AVCaptureConnection may involve one AVCaptureInputPort producing data to an AVCaptureVideoPreviewLayer object. This property is read-only. An AVCaptureConnection's videoPreviewLayer remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
-//
-// VideoPreviewLayer calls the underlying VideoPreviewLayer.
+// VideoPreviewLayer the AVCaptureVideoPreviewLayer instance consuming data from this connection's inputPort. An AVCaptureConnection may involve one AVCaptureInputPort producing data to an AVCaptureVideoPreviewLayer object. This property is read-only. An AVCaptureConnection's videoPreviewLayer remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
 func (x *CaptureConnection) VideoPreviewLayer() *CaptureVideoPreviewLayer {
-	_r := x.inner.VideoPreviewLayer()
-	if _r == nil {
-		return nil
-	}
-	return &CaptureVideoPreviewLayer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoPreviewLayer"))
+	return CaptureVideoPreviewLayerFromID(_r)
 }
 
-// @property enabled @abstract Indicates whether the connection's output should consume data. @discussion The value of this property is a BOOL that determines whether the receiver's output should consume data from its connected inputPorts when a session is running. Clients can set this property to stop the flow of data to a given output during capture. The default value is YES.
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled indicates whether the connection's output should consume data. The value of this property is a BOOL that determines whether the receiver's output should consume data from its connected inputPorts when a session is running. Clients can set this property to stop the flow of data to a given output during capture. The default value is YES.
 func (x *CaptureConnection) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *CaptureConnection) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// @property active @abstract Indicates whether the receiver's output is currently capable of consuming data through this connection. @discussion The value of this property is a BOOL that determines whether the receiver's output can consume data provided through this connection. This property is read-only. Clients may key-value observe this property to know when a session's configuration forces a connection to become inactive. The default value is YES. Prior to iOS 11, the audio connection feeding an AVCaptureAudioDataOutput is made inactive when using AVCaptureSessionPresetPhoto or the equivalent photo format using -[AVCaptureDevice activeFormat]. On iOS 11 and later, the audio connection feeding AVCaptureAudioDataOutput is active for all presets and device formats.
-//
-// IsActive calls the underlying IsActive.
+// IsActive indicates whether the receiver's output is currently capable of consuming data through this connection. The value of this property is a BOOL that determines whether the receiver's output can consume data provided through this connection. This property is read-only. Clients may key-value observe this property to know when a session's configuration forces a connection to become inactive. The default value is YES. Prior to iOS 11, the audio connection feeding an AVCaptureAudioDataOutput is made inactive when using AVCaptureSessionPresetPhoto or the equivalent photo format using -[AVCaptureDevice activeFormat]. On iOS 11 and later, the audio connection feeding AVCaptureAudioDataOutput is active for all presets and device formats.
 func (x *CaptureConnection) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// @property audioChannels @abstract An array of AVCaptureAudioChannel objects representing individual channels of audio data flowing through the connection. @discussion This property is only applicable to AVCaptureConnection instances involving audio. In such connections, the audioChannels array contains one AVCaptureAudioChannel object for each channel of audio data flowing through this connection.
+// AudioChannels an array of AVCaptureAudioChannel objects representing individual channels of audio data flowing through the connection. This property is only applicable to AVCaptureConnection instances involving audio. In such connections, the audioChannels array contains one AVCaptureAudioChannel object for each channel of audio data flowing through this connection.
 //
 // AudioChannels returns the collection as a Go slice.
 func (x *CaptureConnection) AudioChannels() []*CaptureAudioChannel {
-	arr := x.inner.AudioChannels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureAudioChannel {
-		return &CaptureAudioChannel{inner: raw.AVCaptureAudioChannelFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioChannels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureAudioChannel { return CaptureAudioChannelFromID(_id) })
 }
 
-// @property supportsVideoMirroring @abstract Indicates whether the connection supports setting the videoMirrored property. @discussion This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMirrored property may only be set if -isVideoMirroringSupported returns YES.
-//
-// IsVideoMirroringSupported calls the underlying IsVideoMirroringSupported.
+// IsVideoMirroringSupported indicates whether the connection supports setting the videoMirrored property. This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMirrored property may only be set if -isVideoMirroringSupported returns YES.
 func (x *CaptureConnection) IsVideoMirroringSupported() bool {
-	return x.inner.IsVideoMirroringSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoMirroringSupported"))
+	return _r
 }
 
-// @property videoMirrored @abstract Indicates whether the video flowing through the connection should be mirrored about its vertical axis. @discussion This property is only applicable to AVCaptureConnection instances involving video. if -isVideoMirroringSupported returns YES, videoMirrored may be set to flip the video about its vertical axis and produce a mirror-image effect. This property may not be set unless -isVideoMirroringSupported returns YES, otherwise a NSInvalidArgumentException is thrown. This property may not be set if -automaticallyAdjustsVideoMirroring returns YES, otherwise an NSInvalidArgumentException is thrown.
-//
-// IsVideoMirrored calls the underlying IsVideoMirrored.
+// IsVideoMirrored indicates whether the video flowing through the connection should be mirrored about its vertical axis. This property is only applicable to AVCaptureConnection instances involving video. if -isVideoMirroringSupported returns YES, videoMirrored may be set to flip the video about its vertical axis and produce a mirror-image effect. This property may not be set unless -isVideoMirroringSupported returns YES, otherwise a NSInvalidArgumentException is thrown. This property may not be set if -automaticallyAdjustsVideoMirroring returns YES, otherwise an NSInvalidArgumentException is thrown.
 func (x *CaptureConnection) IsVideoMirrored() bool {
-	return x.inner.IsVideoMirrored()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoMirrored"))
+	return _r
 }
 
-// SetVideoMirrored calls the underlying SetVideoMirrored.
+// SetVideoMirrored wraps the corresponding Objective-C method.
 func (x *CaptureConnection) SetVideoMirrored(videoMirrored bool) {
-	x.inner.SetVideoMirrored(videoMirrored)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoMirrored:"), videoMirrored)
 }
 
-// @property automaticallyAdjustsVideoMirroring @abstract Specifies whether or not the value of @"videoMirrored" can change based on configuration of the session. @discussion For some session configurations, video data flowing through the connection will be mirrored by default. When the value of this property is YES, the value of @"videoMirrored" may change depending on the configuration of the session, for example after switching to a different AVCaptureDeviceInput. The default value is YES.
-//
-// AutomaticallyAdjustsVideoMirroring calls the underlying AutomaticallyAdjustsVideoMirroring.
+// AutomaticallyAdjustsVideoMirroring specifies whether or not the value of For some session configurations, video data flowing through the connection will be mirrored by default. When the value of this property is YES, the value of
 func (x *CaptureConnection) AutomaticallyAdjustsVideoMirroring() bool {
-	return x.inner.AutomaticallyAdjustsVideoMirroring()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsVideoMirroring"))
+	return _r
 }
 
-// SetAutomaticallyAdjustsVideoMirroring calls the underlying SetAutomaticallyAdjustsVideoMirroring.
+// SetAutomaticallyAdjustsVideoMirroring wraps the corresponding Objective-C method.
 func (x *CaptureConnection) SetAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) {
-	x.inner.SetAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsVideoMirroring:"), automaticallyAdjustsVideoMirroring)
 }
 
-// @property videoRotationAngle @abstract Indicates whether the video flowing through the connection should be rotated with a given angle in degrees. @discussion This property is only applicable to AVCaptureConnection instances involving video or depth. -setVideoRotationAngle: throws an NSInvalidArgumentException if set to an unsupported value (see -isVideoRotationAngleSupported:). Note that setting videoRotationAngle does not necessarily result in physical rotation of video buffers. For instance, a video connection to an AVCaptureMovieFileOutput handles orientation using a Quicktime track matrix. In the AVCapturePhotoOutput, orientation is handled using Exif tags. And the AVCaptureVideoPreviewLayer applies transforms to its contents to perform rotations. However, the AVCaptureVideoDataOutput and AVCaptureDepthDataOutput do output physically rotated video buffers. Setting a video rotation angle for an output that does physically rotate buffers requires a lengthy configuration of the capture render pipeline and should be done before calling -[AVCaptureSession startRunning]. Starting with the Spring 2024 iPad line, the default value of videoRotationAngle is 180 degrees for video data on Front Camera as compared to 0 degrees on previous devices. So clients using AVCaptureVideoDataOutput and AVCaptureDepthDataOutput should set videoRotationAngle to 0 to avoid the physical buffer rotation described above. And clients rotating video data by themselves must account for the default value of videoRotationAngle when applying angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) from AVCaptureDeviceRotationCoordinator. Note that this change in default value is currently limited to these iPads, however it is recommended that clients rotating video data themselves incorporate the default rotation value into their workflows for all devices. Clients using AVCaptureVideoDataOutput with ProRes Raw should set videoRotationAngle to 0 as rotation is not supported for RAW buffers. If clients want to rotate these buffers themselves they need to apply rotation angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) provided by AVCaptureDeviceRotationCoordinator.
-//
-// VideoRotationAngle calls the underlying VideoRotationAngle.
+// VideoRotationAngle indicates whether the video flowing through the connection should be rotated with a given angle in degrees. This property is only applicable to AVCaptureConnection instances involving video or depth. -setVideoRotationAngle: throws an NSInvalidArgumentException if set to an unsupported value (see -isVideoRotationAngleSupported:). Note that setting videoRotationAngle does not necessarily result in physical rotation of video buffers. For instance, a video connection to an AVCaptureMovieFileOutput handles orientation using a Quicktime track matrix. In the AVCapturePhotoOutput, orientation is handled using Exif tags. And the AVCaptureVideoPreviewLayer applies transforms to its contents to perform rotations. However, the AVCaptureVideoDataOutput and AVCaptureDepthDataOutput do output physically rotated video buffers. Setting a video rotation angle for an output that does physically rotate buffers requires a lengthy configuration of the capture render pipeline and should be done before calling -[AVCaptureSession startRunning]. Starting with the Spring 2024 iPad line, the default value of videoRotationAngle is 180 degrees for video data on Front Camera as compared to 0 degrees on previous devices. So clients using AVCaptureVideoDataOutput and AVCaptureDepthDataOutput should set videoRotationAngle to 0 to avoid the physical buffer rotation described above. And clients rotating video data by themselves must account for the default value of videoRotationAngle when applying angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) from AVCaptureDeviceRotationCoordinator. Note that this change in default value is currently limited to these iPads, however it is recommended that clients rotating video data themselves incorporate the default rotation value into their workflows for all devices. Clients using AVCaptureVideoDataOutput with ProRes Raw should set videoRotationAngle to 0 as rotation is not supported for RAW buffers. If clients want to rotate these buffers themselves they need to apply rotation angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) provided by AVCaptureDeviceRotationCoordinator.
 func (x *CaptureConnection) VideoRotationAngle() float64 {
-	return x.inner.VideoRotationAngle()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoRotationAngle"))
+	return _r
 }
 
-// SetVideoRotationAngle calls the underlying SetVideoRotationAngle.
+// SetVideoRotationAngle wraps the corresponding Objective-C method.
 func (x *CaptureConnection) SetVideoRotationAngle(videoRotationAngle float64) {
-	x.inner.SetVideoRotationAngle(videoRotationAngle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoRotationAngle:"), videoRotationAngle)
 }
 
-// @property supportsVideoOrientation @abstract Indicates whether the connection supports setting the videoOrientation property. @discussion This property is deprecated. Use -isVideoRotationAngleSupported: instead.
-//
-// IsVideoOrientationSupported calls the underlying IsVideoOrientationSupported.
+// IsVideoOrientationSupported indicates whether the connection supports setting the videoOrientation property. This property is deprecated. Use -isVideoRotationAngleSupported: instead.
 func (x *CaptureConnection) IsVideoOrientationSupported() bool {
-	return x.inner.IsVideoOrientationSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoOrientationSupported"))
+	return _r
 }
 
-// @property videoOrientation @abstract Indicates whether the video flowing through the connection should be rotated to a given orientation. @discussion This property is deprecated. Use -videoRotationAngle instead. This property may only be set if -isVideoOrientationSupported returns YES, otherwise an NSInvalidArgumentException is thrown.
-//
-// VideoOrientation calls the underlying VideoOrientation.
-func (x *CaptureConnection) VideoOrientation() AVCaptureVideoOrientation {
-	return AVCaptureVideoOrientation(x.inner.VideoOrientation())
+// VideoOrientation indicates whether the video flowing through the connection should be rotated to a given orientation. This property is deprecated. Use -videoRotationAngle instead. This property may only be set if -isVideoOrientationSupported returns YES, otherwise an NSInvalidArgumentException is thrown.
+func (x *CaptureConnection) VideoOrientation() CaptureVideoOrientation {
+	_r := objc.Send[CaptureVideoOrientation](objref.IDOf(x), objc.RegisterName("videoOrientation"))
+	return _r
 }
 
-// SetVideoOrientation calls the underlying SetVideoOrientation.
-func (x *CaptureConnection) SetVideoOrientation(videoOrientation AVCaptureVideoOrientation) {
-	x.inner.SetVideoOrientation(raw.AVCaptureVideoOrientation(videoOrientation))
+// SetVideoOrientation wraps the corresponding Objective-C method.
+func (x *CaptureConnection) SetVideoOrientation(videoOrientation CaptureVideoOrientation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoOrientation:"), videoOrientation)
 }
 
-// @property supportsVideoFieldMode @abstract Indicates whether the connection supports setting the videoFieldMode property. @discussion This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoFieldMode property may only be set if -isVideoFieldModeSupported returns YES.
-//
-// IsVideoFieldModeSupported calls the underlying IsVideoFieldModeSupported.
+// IsVideoFieldModeSupported indicates whether the connection supports setting the videoFieldMode property. This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoFieldMode property may only be set if -isVideoFieldModeSupported returns YES.
 func (x *CaptureConnection) IsVideoFieldModeSupported() bool {
-	return x.inner.IsVideoFieldModeSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoFieldModeSupported"))
+	return _r
 }
 
-// @property videoFieldMode @abstract Indicates how interlaced video flowing through the connection should be treated. @discussion This property is only applicable to AVCaptureConnection instances involving video. If -isVideoFieldModeSupported returns YES, videoFieldMode may be set to affect interlaced video content flowing through the connection.
-//
-// VideoFieldMode calls the underlying VideoFieldMode.
-func (x *CaptureConnection) VideoFieldMode() AVVideoFieldMode {
-	return AVVideoFieldMode(x.inner.VideoFieldMode())
+// VideoFieldMode indicates how interlaced video flowing through the connection should be treated. This property is only applicable to AVCaptureConnection instances involving video. If -isVideoFieldModeSupported returns YES, videoFieldMode may be set to affect interlaced video content flowing through the connection.
+func (x *CaptureConnection) VideoFieldMode() VideoFieldMode {
+	_r := objc.Send[VideoFieldMode](objref.IDOf(x), objc.RegisterName("videoFieldMode"))
+	return _r
 }
 
-// SetVideoFieldMode calls the underlying SetVideoFieldMode.
-func (x *CaptureConnection) SetVideoFieldMode(videoFieldMode AVVideoFieldMode) {
-	x.inner.SetVideoFieldMode(raw.AVVideoFieldMode(videoFieldMode))
+// SetVideoFieldMode wraps the corresponding Objective-C method.
+func (x *CaptureConnection) SetVideoFieldMode(videoFieldMode VideoFieldMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoFieldMode:"), videoFieldMode)
 }
 
-// @property supportsVideoMinFrameDuration @abstract Indicates whether the connection supports setting the videoMinFrameDuration property. @discussion This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMinFrameDuration property may only be set if -isVideoMinFrameDurationSupported returns YES. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
-//
-// IsVideoMinFrameDurationSupported calls the underlying IsVideoMinFrameDurationSupported.
+// IsVideoMinFrameDurationSupported indicates whether the connection supports setting the videoMinFrameDuration property. This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMinFrameDuration property may only be set if -isVideoMinFrameDurationSupported returns YES. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
 func (x *CaptureConnection) IsVideoMinFrameDurationSupported() bool {
-	return x.inner.IsVideoMinFrameDurationSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoMinFrameDurationSupported"))
+	return _r
 }
 
-// @property videoMinFrameDuration @abstract Indicates the minimum time interval at which the receiver should output consecutive video frames. @discussion The value of this property is a CMTime specifying the minimum duration of each video frame output by the receiver, placing a lower bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the maximum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited maximum frame rate. The default value is kCMTimeInvalid. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
-//
-// VideoMinFrameDuration calls the underlying VideoMinFrameDuration.
-func (x *CaptureConnection) VideoMinFrameDuration() coremedia.CMTime {
-	return x.inner.VideoMinFrameDuration()
-}
-
-// SetVideoMinFrameDuration calls the underlying SetVideoMinFrameDuration.
-func (x *CaptureConnection) SetVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) {
-	x.inner.SetVideoMinFrameDuration(videoMinFrameDuration)
-}
-
-// @property supportsVideoMaxFrameDuration @abstract Indicates whether the connection supports setting the videoMaxFrameDuration property. @discussion This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMaxFrameDuration property may only be set if -isVideoMaxFrameDurationSupported returns YES. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
-//
-// IsVideoMaxFrameDurationSupported calls the underlying IsVideoMaxFrameDurationSupported.
+// IsVideoMaxFrameDurationSupported indicates whether the connection supports setting the videoMaxFrameDuration property. This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMaxFrameDuration property may only be set if -isVideoMaxFrameDurationSupported returns YES. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
 func (x *CaptureConnection) IsVideoMaxFrameDurationSupported() bool {
-	return x.inner.IsVideoMaxFrameDurationSupported()
-}
-
-// @property videoMaxFrameDuration @abstract Indicates the maximum time interval at which the receiver should output consecutive video frames. @discussion The value of this property is a CMTime specifying the maximum duration of each video frame output by the receiver, placing an upper bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the minimum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited minimum frame rate. The default value is kCMTimeInvalid. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
-//
-// VideoMaxFrameDuration calls the underlying VideoMaxFrameDuration.
-func (x *CaptureConnection) VideoMaxFrameDuration() coremedia.CMTime {
-	return x.inner.VideoMaxFrameDuration()
-}
-
-// SetVideoMaxFrameDuration calls the underlying SetVideoMaxFrameDuration.
-func (x *CaptureConnection) SetVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) {
-	x.inner.SetVideoMaxFrameDuration(videoMaxFrameDuration)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVideoMaxFrameDurationSupported"))
+	return _r
 }
 
 // CaptureConnectionable is the interface implemented by [CaptureConnection], for mocking and DI.
 type CaptureConnectionable interface {
-	Unwrap() *raw.AVCaptureConnection
+	obj.Object
 	WithEnabled(enabled bool) *CaptureConnection
 	WithVideoMirrored(videoMirrored bool) *CaptureConnection
 	WithAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) *CaptureConnection
 	WithVideoRotationAngle(videoRotationAngle float64) *CaptureConnection
-	WithVideoOrientation(videoOrientation AVCaptureVideoOrientation) *CaptureConnection
-	WithVideoFieldMode(videoFieldMode AVVideoFieldMode) *CaptureConnection
-	WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection
-	WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection
+	WithVideoOrientation(videoOrientation CaptureVideoOrientation) *CaptureConnection
+	WithVideoFieldMode(videoFieldMode VideoFieldMode) *CaptureConnection
 	IsVideoRotationAngleSupported(videoRotationAngle float64) bool
 	InputPorts() []*CaptureInputPort
 	Output() *CaptureOutput
@@ -336,17 +277,13 @@ type CaptureConnectionable interface {
 	VideoRotationAngle() float64
 	SetVideoRotationAngle(videoRotationAngle float64)
 	IsVideoOrientationSupported() bool
-	VideoOrientation() AVCaptureVideoOrientation
-	SetVideoOrientation(videoOrientation AVCaptureVideoOrientation)
+	VideoOrientation() CaptureVideoOrientation
+	SetVideoOrientation(videoOrientation CaptureVideoOrientation)
 	IsVideoFieldModeSupported() bool
-	VideoFieldMode() AVVideoFieldMode
-	SetVideoFieldMode(videoFieldMode AVVideoFieldMode)
+	VideoFieldMode() VideoFieldMode
+	SetVideoFieldMode(videoFieldMode VideoFieldMode)
 	IsVideoMinFrameDurationSupported() bool
-	VideoMinFrameDuration() coremedia.CMTime
-	SetVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime)
 	IsVideoMaxFrameDurationSupported() bool
-	VideoMaxFrameDuration() coremedia.CMTime
-	SetVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime)
 }
 
 var _ CaptureConnectionable = (*CaptureConnection)(nil)

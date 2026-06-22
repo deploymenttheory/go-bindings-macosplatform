@@ -5,43 +5,76 @@
 package coreaudiokit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller object that displays iOS devices that support inter-device audio.
+// CAInterDeviceAudioViewController is an idiomatic wrapper over the Objective-C class CAInterDeviceAudioViewController.
 //
-// CAInterDeviceAudioViewController wraps [raw.CAInterDeviceAudioViewController] with a fluent Go API.
+// A view controller object that displays iOS devices that support inter-device audio.
 type CAInterDeviceAudioViewController struct {
-	inner *raw.CAInterDeviceAudioViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAInterDeviceAudioViewController].
-func (x *CAInterDeviceAudioViewController) Unwrap() *raw.CAInterDeviceAudioViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CAInterDeviceAudioViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// CAInterDeviceAudioViewControllerFromID adopts an existing object pointer as a CAInterDeviceAudioViewController (nil for 0).
+// CAInterDeviceAudioViewControllerFromID adopts an existing Objective-C object as a CAInterDeviceAudioViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func CAInterDeviceAudioViewControllerFromID(id objc.ID) *CAInterDeviceAudioViewController {
 	if id == 0 {
 		return nil
 	}
-	return &CAInterDeviceAudioViewController{inner: raw.CAInterDeviceAudioViewControllerFromID(id)}
+	x := &CAInterDeviceAudioViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCAInterDeviceAudioViewController creates a new [CAInterDeviceAudioViewController].
+// cAInterDeviceAudioViewControllerAdopt wraps an Objective-C object that this code just created as a
+// CAInterDeviceAudioViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cAInterDeviceAudioViewControllerAdopt(id objc.ID) *CAInterDeviceAudioViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &CAInterDeviceAudioViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CAInterDeviceAudioViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CAInterDeviceAudioViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CAInterDeviceAudioViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CAInterDeviceAudioViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCAInterDeviceAudioViewController creates a new CAInterDeviceAudioViewController.
 func NewCAInterDeviceAudioViewController() *CAInterDeviceAudioViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAInterDeviceAudioViewController")), objc.RegisterName("new"))
-	return &CAInterDeviceAudioViewController{inner: raw.CAInterDeviceAudioViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CAInterDeviceAudioViewController")), objc.RegisterName("new"))
+	return cAInterDeviceAudioViewControllerAdopt(_id)
 }
 
 // CAInterDeviceAudioViewControllerable is the interface implemented by [CAInterDeviceAudioViewController], for mocking and DI.
 type CAInterDeviceAudioViewControllerable interface {
-	Unwrap() *raw.CAInterDeviceAudioViewController
+	obj.Object
 }
 
 var _ CAInterDeviceAudioViewControllerable = (*CAInterDeviceAudioViewController)(nil)

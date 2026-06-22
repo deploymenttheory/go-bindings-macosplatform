@@ -5,194 +5,234 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGroupKeyManagementClusterGroupKeySetStruct wraps [raw.MTRGroupKeyManagementClusterGroupKeySetStruct] with a fluent Go API.
+// MTRGroupKeyManagementClusterGroupKeySetStruct is an idiomatic wrapper over the Objective-C class MTRGroupKeyManagementClusterGroupKeySetStruct.
 type MTRGroupKeyManagementClusterGroupKeySetStruct struct {
-	inner *raw.MTRGroupKeyManagementClusterGroupKeySetStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterGroupKeySetStruct].
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeySetStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupKeyManagementClusterGroupKeySetStructFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterGroupKeySetStruct (nil for 0).
+// MTRGroupKeyManagementClusterGroupKeySetStructFromID adopts an existing Objective-C object as a MTRGroupKeyManagementClusterGroupKeySetStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupKeyManagementClusterGroupKeySetStructFromID(id objc.ID) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupKeyManagementClusterGroupKeySetStruct{inner: raw.MTRGroupKeyManagementClusterGroupKeySetStructFromID(id)}
+	x := &MTRGroupKeyManagementClusterGroupKeySetStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGroupKeyManagementClusterGroupKeySetStruct creates a new [MTRGroupKeyManagementClusterGroupKeySetStruct].
+// mTRGroupKeyManagementClusterGroupKeySetStructAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupKeyManagementClusterGroupKeySetStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupKeyManagementClusterGroupKeySetStructAdopt(id objc.ID) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGroupKeyManagementClusterGroupKeySetStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGroupKeyManagementClusterGroupKeySetStruct creates a new MTRGroupKeyManagementClusterGroupKeySetStruct.
 func NewMTRGroupKeyManagementClusterGroupKeySetStruct() *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupKeyManagementClusterGroupKeySetStruct")), objc.RegisterName("new"))
-	return &MTRGroupKeyManagementClusterGroupKeySetStruct{inner: raw.MTRGroupKeyManagementClusterGroupKeySetStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGroupKeyManagementClusterGroupKeySetStruct")), objc.RegisterName("new"))
+	return mTRGroupKeyManagementClusterGroupKeySetStructAdopt(_id)
 }
 
-// WithGroupKeySetID sets the groupKeySetID property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetGroupKeySetID(groupKeySetID)
+// WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return x
 }
 
-// WithGroupKeySecurityPolicy sets the groupKeySecurityPolicy property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetGroupKeySecurityPolicy(groupKeySecurityPolicy)
+// WithGroupKeySecurityPolicy sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySecurityPolicy(groupKeySecurityPolicy obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySecurityPolicy:"), objref.IDOf(groupKeySecurityPolicy))
 	return x
 }
 
-// WithEpochKey0 sets the epochKey0 property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey0(epochKey0 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetEpochKey0(epochKey0)
+// WithEpochKey0 sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey0(epochKey0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochKey0:"), objref.IDOf(epochKey0))
 	return x
 }
 
-// WithEpochStartTime0 sets the epochStartTime0 property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime0(epochStartTime0 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetEpochStartTime0(epochStartTime0)
+// WithEpochStartTime0 sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime0(epochStartTime0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochStartTime0:"), objref.IDOf(epochStartTime0))
 	return x
 }
 
-// WithEpochKey1 sets the epochKey1 property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey1(epochKey1 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetEpochKey1(epochKey1)
+// WithEpochKey1 sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey1(epochKey1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochKey1:"), objref.IDOf(epochKey1))
 	return x
 }
 
-// WithEpochStartTime1 sets the epochStartTime1 property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime1(epochStartTime1 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetEpochStartTime1(epochStartTime1)
+// WithEpochStartTime1 sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime1(epochStartTime1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochStartTime1:"), objref.IDOf(epochStartTime1))
 	return x
 }
 
-// WithEpochKey2 sets the epochKey2 property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey2(epochKey2 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetEpochKey2(epochKey2)
+// WithEpochKey2 sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey2(epochKey2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochKey2:"), objref.IDOf(epochKey2))
 	return x
 }
 
-// WithEpochStartTime2 sets the epochStartTime2 property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime2(epochStartTime2 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	x.inner.SetEpochStartTime2(epochStartTime2)
+// WithEpochStartTime2 sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime2(epochStartTime2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochStartTime2:"), objref.IDOf(epochStartTime2))
 	return x
 }
 
-// GroupKeySetID calls the underlying GroupKeySetID.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() *foundation.NSNumber {
-	return x.inner.GroupKeySetID()
+// GroupKeySetID wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySetID"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupKeySetID calls the underlying SetGroupKeySetID.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySetID(groupKeySetID *foundation.NSNumber) {
-	x.inner.SetGroupKeySetID(groupKeySetID)
+// SetGroupKeySetID wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySetID(groupKeySetID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 }
 
-// GroupKeySecurityPolicy calls the underlying GroupKeySecurityPolicy.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() *foundation.NSNumber {
-	return x.inner.GroupKeySecurityPolicy()
+// GroupKeySecurityPolicy wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySecurityPolicy"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupKeySecurityPolicy calls the underlying SetGroupKeySecurityPolicy.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber) {
-	x.inner.SetGroupKeySecurityPolicy(groupKeySecurityPolicy)
+// SetGroupKeySecurityPolicy wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySecurityPolicy(groupKeySecurityPolicy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySecurityPolicy:"), objref.IDOf(groupKeySecurityPolicy))
 }
 
-// EpochKey0 calls the underlying EpochKey0.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() *foundation.NSData {
-	return x.inner.EpochKey0()
+// EpochKey0 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("epochKey0"))
+	return obj.Wrap(_r)
 }
 
-// SetEpochKey0 calls the underlying SetEpochKey0.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey0(epochKey0 *foundation.NSData) {
-	x.inner.SetEpochKey0(epochKey0)
+// SetEpochKey0 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey0(epochKey0 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochKey0:"), objref.IDOf(epochKey0))
 }
 
-// EpochStartTime0 calls the underlying EpochStartTime0.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() *foundation.NSNumber {
-	return x.inner.EpochStartTime0()
+// EpochStartTime0 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("epochStartTime0"))
+	return obj.Wrap(_r)
 }
 
-// SetEpochStartTime0 calls the underlying SetEpochStartTime0.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime0(epochStartTime0 *foundation.NSNumber) {
-	x.inner.SetEpochStartTime0(epochStartTime0)
+// SetEpochStartTime0 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime0(epochStartTime0 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochStartTime0:"), objref.IDOf(epochStartTime0))
 }
 
-// EpochKey1 calls the underlying EpochKey1.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() *foundation.NSData {
-	return x.inner.EpochKey1()
+// EpochKey1 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("epochKey1"))
+	return obj.Wrap(_r)
 }
 
-// SetEpochKey1 calls the underlying SetEpochKey1.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey1(epochKey1 *foundation.NSData) {
-	x.inner.SetEpochKey1(epochKey1)
+// SetEpochKey1 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey1(epochKey1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochKey1:"), objref.IDOf(epochKey1))
 }
 
-// EpochStartTime1 calls the underlying EpochStartTime1.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() *foundation.NSNumber {
-	return x.inner.EpochStartTime1()
+// EpochStartTime1 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("epochStartTime1"))
+	return obj.Wrap(_r)
 }
 
-// SetEpochStartTime1 calls the underlying SetEpochStartTime1.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime1(epochStartTime1 *foundation.NSNumber) {
-	x.inner.SetEpochStartTime1(epochStartTime1)
+// SetEpochStartTime1 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime1(epochStartTime1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochStartTime1:"), objref.IDOf(epochStartTime1))
 }
 
-// EpochKey2 calls the underlying EpochKey2.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() *foundation.NSData {
-	return x.inner.EpochKey2()
+// EpochKey2 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("epochKey2"))
+	return obj.Wrap(_r)
 }
 
-// SetEpochKey2 calls the underlying SetEpochKey2.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey2(epochKey2 *foundation.NSData) {
-	x.inner.SetEpochKey2(epochKey2)
+// SetEpochKey2 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey2(epochKey2 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochKey2:"), objref.IDOf(epochKey2))
 }
 
-// EpochStartTime2 calls the underlying EpochStartTime2.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() *foundation.NSNumber {
-	return x.inner.EpochStartTime2()
+// EpochStartTime2 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("epochStartTime2"))
+	return obj.Wrap(_r)
 }
 
-// SetEpochStartTime2 calls the underlying SetEpochStartTime2.
-func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime2(epochStartTime2 *foundation.NSNumber) {
-	x.inner.SetEpochStartTime2(epochStartTime2)
+// SetEpochStartTime2 wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime2(epochStartTime2 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpochStartTime2:"), objref.IDOf(epochStartTime2))
 }
 
 // MTRGroupKeyManagementClusterGroupKeySetStructable is the interface implemented by [MTRGroupKeyManagementClusterGroupKeySetStruct], for mocking and DI.
 type MTRGroupKeyManagementClusterGroupKeySetStructable interface {
-	Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithEpochKey0(epochKey0 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithEpochStartTime0(epochStartTime0 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithEpochKey1(epochKey1 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithEpochStartTime1(epochStartTime1 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithEpochKey2(epochKey2 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	WithEpochStartTime2(epochStartTime2 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
-	GroupKeySetID() *foundation.NSNumber
-	SetGroupKeySetID(groupKeySetID *foundation.NSNumber)
-	GroupKeySecurityPolicy() *foundation.NSNumber
-	SetGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber)
-	EpochKey0() *foundation.NSData
-	SetEpochKey0(epochKey0 *foundation.NSData)
-	EpochStartTime0() *foundation.NSNumber
-	SetEpochStartTime0(epochStartTime0 *foundation.NSNumber)
-	EpochKey1() *foundation.NSData
-	SetEpochKey1(epochKey1 *foundation.NSData)
-	EpochStartTime1() *foundation.NSNumber
-	SetEpochStartTime1(epochStartTime1 *foundation.NSNumber)
-	EpochKey2() *foundation.NSData
-	SetEpochKey2(epochKey2 *foundation.NSData)
-	EpochStartTime2() *foundation.NSNumber
-	SetEpochStartTime2(epochStartTime2 *foundation.NSNumber)
+	obj.Object
+	WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithGroupKeySecurityPolicy(groupKeySecurityPolicy obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochKey0(epochKey0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochStartTime0(epochStartTime0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochKey1(epochKey1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochStartTime1(epochStartTime1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochKey2(epochKey2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochStartTime2(epochStartTime2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	GroupKeySetID() obj.Object
+	SetGroupKeySetID(groupKeySetID obj.Object)
+	GroupKeySecurityPolicy() obj.Object
+	SetGroupKeySecurityPolicy(groupKeySecurityPolicy obj.Object)
+	EpochKey0() obj.Object
+	SetEpochKey0(epochKey0 obj.Object)
+	EpochStartTime0() obj.Object
+	SetEpochStartTime0(epochStartTime0 obj.Object)
+	EpochKey1() obj.Object
+	SetEpochKey1(epochKey1 obj.Object)
+	EpochStartTime1() obj.Object
+	SetEpochStartTime1(epochStartTime1 obj.Object)
+	EpochKey2() obj.Object
+	SetEpochKey2(epochKey2 obj.Object)
+	EpochStartTime2() obj.Object
+	SetEpochStartTime2(epochStartTime2 obj.Object)
 }
 
 var _ MTRGroupKeyManagementClusterGroupKeySetStructable = (*MTRGroupKeyManagementClusterGroupKeySetStruct)(nil)

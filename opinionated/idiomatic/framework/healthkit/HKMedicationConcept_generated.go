@@ -5,87 +5,107 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a specific medication concept.
+// MedicationConcept is an idiomatic wrapper over the Objective-C class HKMedicationConcept.
 //
-// MedicationConcept wraps [raw.HKMedicationConcept] with a fluent Go API.
+// An object that describes a specific medication concept.
 type MedicationConcept struct {
-	inner *raw.HKMedicationConcept
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKMedicationConcept].
-func (x *MedicationConcept) Unwrap() *raw.HKMedicationConcept { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MedicationConcept) ID() objc.ID { return x.inner.Ptr() }
-
-// MedicationConceptFromID adopts an existing object pointer as a MedicationConcept (nil for 0).
+// MedicationConceptFromID adopts an existing Objective-C object as a MedicationConcept
+// (nil for 0), retaining it and registering a release finalizer.
 func MedicationConceptFromID(id objc.ID) *MedicationConcept {
 	if id == 0 {
 		return nil
 	}
-	return &MedicationConcept{inner: raw.HKMedicationConceptFromID(id)}
+	x := &MedicationConcept{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMedicationConcept creates a new [MedicationConcept].
-func NewMedicationConcept() *MedicationConcept {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKMedicationConcept")), objc.RegisterName("new"))
-	return &MedicationConcept{inner: raw.HKMedicationConceptFromID(_id)}
-}
-
-// The unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
-//
-// Identifier calls the underlying Identifier.
-func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
-	_r := x.inner.Identifier()
-	if _r == nil {
+// medicationConceptAdopt wraps an Objective-C object that this code just created as a
+// MedicationConcept (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func medicationConceptAdopt(id objc.ID) *MedicationConcept {
+	if id == 0 {
 		return nil
 	}
-	return &HealthConceptIdentifier{inner: _r}
+	x := &MedicationConcept{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The display name for this medication. The name of the medication a person enters or selects during medication onboarding.
-//
-// DisplayText calls the underlying DisplayText.
+// Description returns the object's -description text.
+func (x *MedicationConcept) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MedicationConcept) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MedicationConcept) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MedicationConcept) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMedicationConcept creates a new MedicationConcept.
+func NewMedicationConcept() *MedicationConcept {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKMedicationConcept")), objc.RegisterName("new"))
+	return medicationConceptAdopt(_id)
+}
+
+// Identifier the unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
+func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return HealthConceptIdentifierFromID(_r)
+}
+
+// DisplayText the display name for this medication. The name of the medication a person enters or selects during medication onboarding.
 func (x *MedicationConcept) DisplayText() string {
-	_r := x.inner.DisplayText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
-//
-// GeneralForm calls the underlying GeneralForm.
-func (x *MedicationConcept) GeneralForm() string {
-	_r := x.inner.GeneralForm()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// GeneralForm the general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
+func (x *MedicationConcept) GeneralForm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generalForm"))
+	return obj.Wrap(_r)
 }
 
-// The set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
-//
-// RelatedCodings calls the underlying RelatedCodings.
-func (x *MedicationConcept) RelatedCodings() *foundation.NSSet[*raw.HKClinicalCoding] {
-	return x.inner.RelatedCodings()
+// RelatedCodings the set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
+func (x *MedicationConcept) RelatedCodings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedCodings"))
+	return obj.Wrap(_r)
 }
 
 // MedicationConceptable is the interface implemented by [MedicationConcept], for mocking and DI.
 type MedicationConceptable interface {
-	Unwrap() *raw.HKMedicationConcept
+	obj.Object
 	Identifier() *HealthConceptIdentifier
 	DisplayText() string
-	GeneralForm() string
-	RelatedCodings() *foundation.NSSet[*raw.HKClinicalCoding]
+	GeneralForm() obj.Object
+	RelatedCodings() obj.Object
 }
 
 var _ MedicationConceptable = (*MedicationConcept)(nil)

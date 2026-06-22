@@ -5,80 +5,80 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a nearest spatial upsampling filter.
+// CNNUpsamplingNearestNode is an idiomatic wrapper over the Objective-C class MPSCNNUpsamplingNearestNode.
 //
-// CNNUpsamplingNearestNode wraps [raw.MPSCNNUpsamplingNearestNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A representation of a nearest spatial upsampling filter.
 type CNNUpsamplingNearestNode struct {
-	inner *raw.MPSCNNUpsamplingNearestNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNUpsamplingNearestNode].
-func (x *CNNUpsamplingNearestNode) Unwrap() *raw.MPSCNNUpsamplingNearestNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNUpsamplingNearestNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNUpsamplingNearestNodeFromID adopts an existing object pointer as a CNNUpsamplingNearestNode (nil for 0).
+// CNNUpsamplingNearestNodeFromID adopts an existing Objective-C object as a CNNUpsamplingNearestNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNUpsamplingNearestNodeFromID(id objc.ID) *CNNUpsamplingNearestNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNUpsamplingNearestNode{inner: raw.MPSCNNUpsamplingNearestNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSCNNUpsamplingNearest kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @return     A new MPSNNFilter node for a MPSCNNUpsamplingNearest kernel.
-//
-// NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY creates a new [CNNUpsamplingNearestNode].
-func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *mpsneuralnetwork.MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *CNNUpsamplingNearestNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNUpsamplingNearestNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:"), sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY)
-	return &CNNUpsamplingNearestNode{inner: raw.MPSCNNUpsamplingNearestNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNUpsamplingNearestNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearestNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNUpsamplingNearestNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNUpsamplingNearestNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNUpsamplingNearestNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNUpsamplingNearestNodeAdopt(id objc.ID) *CNNUpsamplingNearestNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNUpsamplingNearestNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a node representing a MPSCNNUpsamplingNearest kernel
+func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode obj.Object, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingNearestNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
+	return cNNUpsamplingNearestNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNearestNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// ScaleFactorX calls the underlying ScaleFactorX.
+// ScaleFactorX wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
-	return x.inner.ScaleFactorX()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
+	return _r
 }
 
-// ScaleFactorY calls the underlying ScaleFactorY.
+// ScaleFactorY wraps the corresponding Objective-C method.
 func (x *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
-	return x.inner.ScaleFactorY()
-}
-
-func (x *CNNUpsamplingNearestNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
+	return _r
 }
 
 // CNNUpsamplingNearestNodeable is the interface implemented by [CNNUpsamplingNearestNode], for mocking and DI.
 type CNNUpsamplingNearestNodeable interface {
-	Unwrap() *raw.MPSCNNUpsamplingNearestNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearestNode
+	obj.Object
 	WithLabel(label string) *CNNUpsamplingNearestNode
 	ScaleFactorX() float64
 	ScaleFactorY() float64
 }
 
 var _ CNNUpsamplingNearestNodeable = (*CNNUpsamplingNearestNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNUpsamplingNearestNode)(nil)

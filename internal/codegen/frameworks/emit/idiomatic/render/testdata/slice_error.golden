@@ -1,0 +1,10 @@
+// ContentsOfDirectory returns the collection as a Go slice.
+func (x *Manager) ContentsOfDirectory() (result []string, err error) {
+var _nsErr uintptr
+_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentsOfDirectoryAtPath:error:"), unsafe.Pointer(&_nsErr))
+if _nsErr != 0 {
+return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) }), nil
+}
+

@@ -5,56 +5,65 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object that requests the creation of a console device to communicate with the guest system.
+// VirtioConsoleDeviceSerialPortConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioConsoleDeviceSerialPortConfiguration.
 //
-// VirtioConsoleDeviceSerialPortConfiguration wraps [raw.VZVirtioConsoleDeviceSerialPortConfiguration] with a fluent Go API.
+// It embeds [SerialPortConfiguration], promoting that type's methods.
+//
+// A configuration object that requests the creation of a console device to communicate with the guest system.
 type VirtioConsoleDeviceSerialPortConfiguration struct {
-	inner *raw.VZVirtioConsoleDeviceSerialPortConfiguration
+	SerialPortConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZVirtioConsoleDeviceSerialPortConfiguration].
-func (x *VirtioConsoleDeviceSerialPortConfiguration) Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioConsoleDeviceSerialPortConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioConsoleDeviceSerialPortConfigurationFromID adopts an existing object pointer as a VirtioConsoleDeviceSerialPortConfiguration (nil for 0).
+// VirtioConsoleDeviceSerialPortConfigurationFromID adopts an existing Objective-C object as a VirtioConsoleDeviceSerialPortConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioConsoleDeviceSerialPortConfigurationFromID(id objc.ID) *VirtioConsoleDeviceSerialPortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioConsoleDeviceSerialPortConfiguration{inner: raw.VZVirtioConsoleDeviceSerialPortConfigurationFromID(id)}
-}
-
-// NewVirtioConsoleDeviceSerialPortConfiguration creates a new [VirtioConsoleDeviceSerialPortConfiguration].
-func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialPortConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioConsoleDeviceSerialPortConfiguration")), objc.RegisterName("new"))
-	return &VirtioConsoleDeviceSerialPortConfiguration{inner: raw.VZVirtioConsoleDeviceSerialPortConfigurationFromID(_id)}
-}
-
-// The object that defines how the configuration of the virtual machine’s serial port interfaces.
-//
-// WithAttachment sets the attachment property and returns the receiver for chaining.
-func (x *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
-	x.inner.VZSerialPortConfiguration.SetAttachment(attachment.asSerialPortAttachment())
+	x := &VirtioConsoleDeviceSerialPortConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *VirtioConsoleDeviceSerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration {
-	return &x.inner.VZSerialPortConfiguration
+// virtioConsoleDeviceSerialPortConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioConsoleDeviceSerialPortConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioConsoleDeviceSerialPortConfigurationAdopt(id objc.ID) *VirtioConsoleDeviceSerialPortConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioConsoleDeviceSerialPortConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVirtioConsoleDeviceSerialPortConfiguration creates a new VirtioConsoleDeviceSerialPortConfiguration.
+func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialPortConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioConsoleDeviceSerialPortConfiguration")), objc.RegisterName("new"))
+	return virtioConsoleDeviceSerialPortConfigurationAdopt(_id)
+}
+
+// WithAttachment the object that defines how the configuration of the virtual machine’s serial port interfaces.
+func (x *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return x
 }
 
 // VirtioConsoleDeviceSerialPortConfigurationable is the interface implemented by [VirtioConsoleDeviceSerialPortConfiguration], for mocking and DI.
 type VirtioConsoleDeviceSerialPortConfigurationable interface {
-	Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration
+	obj.Object
 	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration
 }
 
 var _ VirtioConsoleDeviceSerialPortConfigurationable = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)
+
+var _ SerialPortConfigurationProvider = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)

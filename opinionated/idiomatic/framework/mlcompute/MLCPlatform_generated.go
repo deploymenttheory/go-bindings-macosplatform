@@ -5,41 +5,76 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class for setting global properties in the framework.
+// Platform is an idiomatic wrapper over the Objective-C class MLCPlatform.
 //
-// Platform wraps [raw.MLCPlatform] with a fluent Go API.
+// A utility class for setting global properties in the framework.
 type Platform struct {
-	inner *raw.MLCPlatform
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCPlatform].
-func (x *Platform) Unwrap() *raw.MLCPlatform { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Platform) ID() objc.ID { return x.inner.Ptr() }
-
-// PlatformFromID adopts an existing object pointer as a Platform (nil for 0).
+// PlatformFromID adopts an existing Objective-C object as a Platform
+// (nil for 0), retaining it and registering a release finalizer.
 func PlatformFromID(id objc.ID) *Platform {
 	if id == 0 {
 		return nil
 	}
-	return &Platform{inner: raw.MLCPlatformFromID(id)}
+	x := &Platform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlatform creates a new [Platform].
+// platformAdopt wraps an Objective-C object that this code just created as a
+// Platform (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func platformAdopt(id objc.ID) *Platform {
+	if id == 0 {
+		return nil
+	}
+	x := &Platform{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Platform) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Platform) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Platform) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Platform) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlatform creates a new Platform.
 func NewPlatform() *Platform {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCPlatform")), objc.RegisterName("new"))
-	return &Platform{inner: raw.MLCPlatformFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCPlatform")), objc.RegisterName("new"))
+	return platformAdopt(_id)
 }
 
 // Platformable is the interface implemented by [Platform], for mocking and DI.
 type Platformable interface {
-	Unwrap() *raw.MLCPlatform
+	obj.Object
 }
 
 var _ Platformable = (*Platform)(nil)

@@ -5,56 +5,88 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AppExtensionInfo wraps [raw.BAAppExtensionInfo] with a fluent Go API.
+// AppExtensionInfo is an idiomatic wrapper over the Objective-C class BAAppExtensionInfo.
 type AppExtensionInfo struct {
-	inner *raw.BAAppExtensionInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BAAppExtensionInfo].
-func (x *AppExtensionInfo) Unwrap() *raw.BAAppExtensionInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppExtensionInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// AppExtensionInfoFromID adopts an existing object pointer as a AppExtensionInfo (nil for 0).
+// AppExtensionInfoFromID adopts an existing Objective-C object as a AppExtensionInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func AppExtensionInfoFromID(id objc.ID) *AppExtensionInfo {
 	if id == 0 {
 		return nil
 	}
-	return &AppExtensionInfo{inner: raw.BAAppExtensionInfoFromID(id)}
+	x := &AppExtensionInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAppExtensionInfo creates a new [AppExtensionInfo].
+// appExtensionInfoAdopt wraps an Objective-C object that this code just created as a
+// AppExtensionInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appExtensionInfoAdopt(id objc.ID) *AppExtensionInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &AppExtensionInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppExtensionInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppExtensionInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppExtensionInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AppExtensionInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAppExtensionInfo creates a new AppExtensionInfo.
 func NewAppExtensionInfo() *AppExtensionInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAppExtensionInfo")), objc.RegisterName("new"))
-	return &AppExtensionInfo{inner: raw.BAAppExtensionInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BAAppExtensionInfo")), objc.RegisterName("new"))
+	return appExtensionInfoAdopt(_id)
 }
 
-// @brief The number of bytes remaining that can be scheduled if the total download size is restricted. @discussion When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed. @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
-//
-// RestrictedDownloadSizeRemaining calls the underlying RestrictedDownloadSizeRemaining.
-func (x *AppExtensionInfo) RestrictedDownloadSizeRemaining() *foundation.NSNumber {
-	return x.inner.RestrictedDownloadSizeRemaining()
+// RestrictedDownloadSizeRemaining the number of bytes remaining that can be scheduled if the total download size is restricted. When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
+func (x *AppExtensionInfo) RestrictedDownloadSizeRemaining() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictedDownloadSizeRemaining"))
+	return obj.Wrap(_r)
 }
 
-// @brief The number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. @discussion When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed. @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
-//
-// RestrictedEssentialDownloadSizeRemaining calls the underlying RestrictedEssentialDownloadSizeRemaining.
-func (x *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() *foundation.NSNumber {
-	return x.inner.RestrictedEssentialDownloadSizeRemaining()
+// RestrictedEssentialDownloadSizeRemaining the number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
+func (x *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictedEssentialDownloadSizeRemaining"))
+	return obj.Wrap(_r)
 }
 
 // AppExtensionInfoable is the interface implemented by [AppExtensionInfo], for mocking and DI.
 type AppExtensionInfoable interface {
-	Unwrap() *raw.BAAppExtensionInfo
-	RestrictedDownloadSizeRemaining() *foundation.NSNumber
-	RestrictedEssentialDownloadSizeRemaining() *foundation.NSNumber
+	obj.Object
+	RestrictedDownloadSizeRemaining() obj.Object
+	RestrictedEssentialDownloadSizeRemaining() obj.Object
 }
 
 var _ AppExtensionInfoable = (*AppExtensionInfo)(nil)

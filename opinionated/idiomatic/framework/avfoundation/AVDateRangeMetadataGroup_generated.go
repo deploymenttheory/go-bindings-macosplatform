@@ -5,65 +5,80 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of metadata items that are valid for use within a specific date range.
+// DateRangeMetadataGroup is an idiomatic wrapper over the Objective-C class AVDateRangeMetadataGroup.
 //
-// DateRangeMetadataGroup wraps [raw.AVDateRangeMetadataGroup] with a fluent Go API.
+// DateRangeMetadataGroup is an abstract base — you do not construct it directly. Construct one of [MutableDateRangeMetadataGroup] and pass it where a DateRangeMetadataGroup is accepted.
+//
+// A collection of metadata items that are valid for use within a specific date range.
 type DateRangeMetadataGroup struct {
-	inner *raw.AVDateRangeMetadataGroup
+	MetadataGroup
 }
 
-// Unwrap returns the underlying [raw.AVDateRangeMetadataGroup].
-func (x *DateRangeMetadataGroup) Unwrap() *raw.AVDateRangeMetadataGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DateRangeMetadataGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// DateRangeMetadataGroupFromID adopts an existing object pointer as a DateRangeMetadataGroup (nil for 0).
+// DateRangeMetadataGroupFromID adopts an existing Objective-C object as a DateRangeMetadataGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func DateRangeMetadataGroupFromID(id objc.ID) *DateRangeMetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	return &DateRangeMetadataGroup{inner: raw.AVDateRangeMetadataGroupFromID(id)}
+	x := &DateRangeMetadataGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items.
-//
-// NewDateRangeMetadataGroupWithItemsStartDateEndDate creates a new [DateRangeMetadataGroup].
-func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items *foundation.NSArray[*raw.AVMetadataItem], startDate *foundation.NSDate, endDate *foundation.NSDate) *DateRangeMetadataGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDateRangeMetadataGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:startDate:endDate:"), items.Ptr(), startDate.Ptr(), endDate.Ptr())
-	return &DateRangeMetadataGroup{inner: raw.AVDateRangeMetadataGroupFromID(_id)}
+// dateRangeMetadataGroupAdopt wraps an Objective-C object that this code just created as a
+// DateRangeMetadataGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dateRangeMetadataGroupAdopt(id objc.ID) *DateRangeMetadataGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &DateRangeMetadataGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// StartDate calls the underlying StartDate.
-func (x *DateRangeMetadataGroup) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// NewDateRangeMetadataGroupWithItemsStartDateEndDate initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items.
+func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items []*MetadataItem, startDate obj.Object, endDate obj.Object) *DateRangeMetadataGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVDateRangeMetadataGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:startDate:endDate:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate))
+	return dateRangeMetadataGroupAdopt(_id)
 }
 
-// EndDate calls the underlying EndDate.
-func (x *DateRangeMetadataGroup) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// StartDate wraps the corresponding Objective-C method.
+func (x *DateRangeMetadataGroup) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-func (x *DateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup {
-	return x.inner
-}
-
-func (x *DateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup {
-	return &x.inner.AVMetadataGroup
+// EndDate wraps the corresponding Objective-C method.
+func (x *DateRangeMetadataGroup) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
 // DateRangeMetadataGroupable is the interface implemented by [DateRangeMetadataGroup], for mocking and DI.
 type DateRangeMetadataGroupable interface {
-	Unwrap() *raw.AVDateRangeMetadataGroup
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
+	obj.Object
+	StartDate() obj.Object
+	EndDate() obj.Object
 }
 
 var _ DateRangeMetadataGroupable = (*DateRangeMetadataGroup)(nil)
+
+// isDateRangeMetadataGroup marks DateRangeMetadataGroup — and, by embedding promotion, its
+// subclasses — as a member of the DateRangeMetadataGroup hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DateRangeMetadataGroup) isDateRangeMetadataGroup() {}
+
+var _ DateRangeMetadataGroupProvider = (*DateRangeMetadataGroup)(nil)
+
+var _ MetadataGroupProvider = (*DateRangeMetadataGroup)(nil)

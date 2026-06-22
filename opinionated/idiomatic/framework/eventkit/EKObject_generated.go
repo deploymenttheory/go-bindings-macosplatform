@@ -5,74 +5,100 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for all EventKit classes that have persistent instances.
+// Object is an idiomatic wrapper over the Objective-C class EKObject.
 //
-// Object wraps [raw.EKObject] with a fluent Go API.
+// Object is an abstract base — you do not construct it directly. Construct one of [Alarm], [CalendarItem], [Calendar], [Participant], [RecurrenceRule], [Source], [StructuredLocation] and pass it where a Object is accepted.
+//
+// An abstract superclass for all EventKit classes that have persistent instances.
 type Object struct {
-	inner *raw.EKObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKObject].
-func (x *Object) Unwrap() *raw.EKObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Object) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
+// ObjectFromID adopts an existing Objective-C object as a Object
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	return &Object{inner: raw.EKObjectFromID(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObject creates a new [Object].
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKObject")), objc.RegisterName("new"))
-	return &Object{inner: raw.EKObjectFromID(_id)}
+// objectAdopt wraps an Objective-C object that this code just created as a
+// Object (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectAdopt(id objc.ID) *Object {
+	if id == 0 {
+		return nil
+	}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns this object to its saved state.
-//
-// Reset calls the underlying Reset.
+// Description returns the object's -description text.
+func (x *Object) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Reset returns this object to its saved state.
 func (x *Object) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Rolls back the property values of this object to its original state when it was first fetched.
-//
-// Rollback calls the underlying Rollback.
+// Rollback rolls back the property values of this object to its original state when it was first fetched.
 func (x *Object) Rollback() {
-	x.inner.Rollback()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rollback"))
 }
 
-// Merges changes to this object with the latest saved values.
-//
-// Refresh calls the underlying Refresh.
+// Refresh merges changes to this object with the latest saved values.
 func (x *Object) Refresh() bool {
-	return x.inner.Refresh()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("refresh"))
+	return _r
 }
 
-// HasChanges calls the underlying HasChanges.
+// HasChanges wraps the corresponding Objective-C method.
 func (x *Object) HasChanges() bool {
-	return x.inner.HasChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
+	return _r
 }
 
-// IsNew calls the underlying IsNew.
+// IsNew wraps the corresponding Objective-C method.
 func (x *Object) IsNew() bool {
-	return x.inner.IsNew()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNew"))
+	return _r
 }
-
-func (x *Object) asObject() *raw.EKObject { return x.inner }
 
 // Objectable is the interface implemented by [Object], for mocking and DI.
 type Objectable interface {
-	Unwrap() *raw.EKObject
+	obj.Object
 	Reset()
 	Rollback()
 	Refresh() bool
@@ -81,3 +107,10 @@ type Objectable interface {
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

@@ -5,79 +5,118 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an attribute defined in the stage-in argument for a shader.
+// Attribute is an idiomatic wrapper over the Objective-C class MTLAttribute.
 //
-// Attribute wraps [raw.MTLAttribute] with a fluent Go API.
+// An object that describes an attribute defined in the stage-in argument for a shader.
 type Attribute struct {
-	inner *raw.MTLAttribute
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLAttribute].
-func (x *Attribute) Unwrap() *raw.MTLAttribute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Attribute) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeFromID adopts an existing object pointer as a Attribute (nil for 0).
+// AttributeFromID adopts an existing Objective-C object as a Attribute
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	return &Attribute{inner: raw.MTLAttributeFromID(id)}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAttribute creates a new [Attribute].
+// attributeAdopt wraps an Objective-C object that this code just created as a
+// Attribute (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeAdopt(id objc.ID) *Attribute {
+	if id == 0 {
+		return nil
+	}
+	x := &Attribute{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Attribute) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Attribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Attribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attribute) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttribute creates a new Attribute.
 func NewAttribute() *Attribute {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAttribute")), objc.RegisterName("new"))
-	return &Attribute{inner: raw.MTLAttributeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLAttribute")), objc.RegisterName("new"))
+	return attributeAdopt(_id)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Attribute) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttributeIndex calls the underlying AttributeIndex.
-func (x *Attribute) AttributeIndex() uint {
-	return x.inner.AttributeIndex()
+// AttributeIndex wraps the corresponding Objective-C method.
+func (x *Attribute) AttributeIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("attributeIndex"))
+	return _r
 }
 
-// AttributeType calls the underlying AttributeType.
-func (x *Attribute) AttributeType() MTLDataType {
-	return MTLDataType(x.inner.AttributeType())
+// AttributeType wraps the corresponding Objective-C method.
+func (x *Attribute) AttributeType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("attributeType"))
+	return _r
 }
 
-// IsActive calls the underlying IsActive.
+// IsActive wraps the corresponding Objective-C method.
 func (x *Attribute) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// IsPatchData calls the underlying IsPatchData.
+// IsPatchData wraps the corresponding Objective-C method.
 func (x *Attribute) IsPatchData() bool {
-	return x.inner.IsPatchData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchData"))
+	return _r
 }
 
-// IsPatchControlPointData calls the underlying IsPatchControlPointData.
+// IsPatchControlPointData wraps the corresponding Objective-C method.
 func (x *Attribute) IsPatchControlPointData() bool {
-	return x.inner.IsPatchControlPointData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchControlPointData"))
+	return _r
 }
 
 // Attributeable is the interface implemented by [Attribute], for mocking and DI.
 type Attributeable interface {
-	Unwrap() *raw.MTLAttribute
+	obj.Object
 	Name() string
-	AttributeIndex() uint
-	AttributeType() MTLDataType
+	AttributeIndex() int
+	AttributeType() DataType
 	IsActive() bool
 	IsPatchData() bool
 	IsPatchControlPointData() bool

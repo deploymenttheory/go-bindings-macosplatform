@@ -5,104 +5,104 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A request to classify an image.
+// ClassifyImageRequest is an idiomatic wrapper over the Objective-C class VNClassifyImageRequest.
 //
-// ClassifyImageRequest wraps [raw.VNClassifyImageRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request to classify an image.
 type ClassifyImageRequest struct {
-	inner *raw.VNClassifyImageRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNClassifyImageRequest].
-func (x *ClassifyImageRequest) Unwrap() *raw.VNClassifyImageRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClassifyImageRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ClassifyImageRequestFromID adopts an existing object pointer as a ClassifyImageRequest (nil for 0).
+// ClassifyImageRequestFromID adopts an existing Objective-C object as a ClassifyImageRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ClassifyImageRequestFromID(id objc.ID) *ClassifyImageRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ClassifyImageRequest{inner: raw.VNClassifyImageRequestFromID(id)}
+	x := &ClassifyImageRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewClassifyImageRequest creates a new [ClassifyImageRequest].
+// classifyImageRequestAdopt wraps an Objective-C object that this code just created as a
+// ClassifyImageRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func classifyImageRequestAdopt(id objc.ID) *ClassifyImageRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ClassifyImageRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewClassifyImageRequest creates a new ClassifyImageRequest.
 func NewClassifyImageRequest() *ClassifyImageRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNClassifyImageRequest")), objc.RegisterName("new"))
-	return &ClassifyImageRequest{inner: raw.VNClassifyImageRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNClassifyImageRequest")), objc.RegisterName("new"))
+	return classifyImageRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *ClassifyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ClassifyImageRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *ClassifyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ClassifyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *ClassifyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *ClassifyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *ClassifyImageRequest) WithRevision(revision uint) *ClassifyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *ClassifyImageRequest) WithRevision(revision int) *ClassifyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Returns the classification identifiers that the request supports in its current configuration.
+// SupportedIdentifiers returns the classification identifiers that the request supports in its current configuration.
 //
 // SupportedIdentifiers returns the collection as a Go slice.
-func (x *ClassifyImageRequest) SupportedIdentifiers() ([]string, error) {
-	arr, err := x.inner.SupportedIdentifiersAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *ClassifyImageRequest) SupportedIdentifiers() (result []string, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	}), nil
-}
-
-func (x *ClassifyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *ClassifyImageRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) }), nil
 }
 
 // ClassifyImageRequestable is the interface implemented by [ClassifyImageRequest], for mocking and DI.
 type ClassifyImageRequestable interface {
-	Unwrap() *raw.VNClassifyImageRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ClassifyImageRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ClassifyImageRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *ClassifyImageRequest
-	WithRevision(revision uint) *ClassifyImageRequest
+	WithRevision(revision int) *ClassifyImageRequest
 	SupportedIdentifiers() ([]string, error)
 }
 
 var _ ClassifyImageRequestable = (*ClassifyImageRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*ClassifyImageRequest)(nil)
+
+var _ RequestProvider = (*ClassifyImageRequest)(nil)

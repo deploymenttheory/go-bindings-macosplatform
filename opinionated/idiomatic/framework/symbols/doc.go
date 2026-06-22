@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package symbols provides a fluent Go API over the macOS Symbols framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - SymbolContentTransition: [SymbolAutomaticContentTransition], [SymbolMagicReplaceContentTransition], [SymbolReplaceContentTransition]
+//   - SymbolEffect: [SymbolAppearEffect], [SymbolBounceEffect], [SymbolBreatheEffect], [SymbolDisappearEffect], [SymbolDrawOffEffect], [SymbolDrawOnEffect], [SymbolPulseEffect], [SymbolRotateEffect], [SymbolScaleEffect], [SymbolVariableColorEffect], [SymbolWiggleEffect]
 package symbols

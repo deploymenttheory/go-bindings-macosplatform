@@ -5,45 +5,79 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base for media data collectors.
+// PlayerItemMediaDataCollector is an idiomatic wrapper over the Objective-C class AVPlayerItemMediaDataCollector.
 //
-// PlayerItemMediaDataCollector wraps [raw.AVPlayerItemMediaDataCollector] with a fluent Go API.
+// PlayerItemMediaDataCollector is an abstract base — you do not construct it directly. Construct one of [PlayerItemMetadataCollector] and pass it where a PlayerItemMediaDataCollector is accepted.
+//
+// The abstract base for media data collectors.
 type PlayerItemMediaDataCollector struct {
-	inner *raw.AVPlayerItemMediaDataCollector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemMediaDataCollector].
-func (x *PlayerItemMediaDataCollector) Unwrap() *raw.AVPlayerItemMediaDataCollector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemMediaDataCollector) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemMediaDataCollectorFromID adopts an existing object pointer as a PlayerItemMediaDataCollector (nil for 0).
+// PlayerItemMediaDataCollectorFromID adopts an existing Objective-C object as a PlayerItemMediaDataCollector
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemMediaDataCollectorFromID(id objc.ID) *PlayerItemMediaDataCollector {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemMediaDataCollector{inner: raw.AVPlayerItemMediaDataCollectorFromID(id)}
+	x := &PlayerItemMediaDataCollector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemMediaDataCollector creates a new [PlayerItemMediaDataCollector].
-func NewPlayerItemMediaDataCollector() *PlayerItemMediaDataCollector {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemMediaDataCollector")), objc.RegisterName("new"))
-	return &PlayerItemMediaDataCollector{inner: raw.AVPlayerItemMediaDataCollectorFromID(_id)}
+// playerItemMediaDataCollectorAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemMediaDataCollector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemMediaDataCollectorAdopt(id objc.ID) *PlayerItemMediaDataCollector {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemMediaDataCollector{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *PlayerItemMediaDataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector {
-	return x.inner
+// Description returns the object's -description text.
+func (x *PlayerItemMediaDataCollector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemMediaDataCollector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemMediaDataCollector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemMediaDataCollector) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PlayerItemMediaDataCollectorable is the interface implemented by [PlayerItemMediaDataCollector], for mocking and DI.
 type PlayerItemMediaDataCollectorable interface {
-	Unwrap() *raw.AVPlayerItemMediaDataCollector
+	obj.Object
 }
 
 var _ PlayerItemMediaDataCollectorable = (*PlayerItemMediaDataCollector)(nil)
+
+// isPlayerItemMediaDataCollector marks PlayerItemMediaDataCollector — and, by embedding promotion, its
+// subclasses — as a member of the PlayerItemMediaDataCollector hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlayerItemMediaDataCollector) isPlayerItemMediaDataCollector() {}
+
+var _ PlayerItemMediaDataCollectorProvider = (*PlayerItemMediaDataCollector)(nil)

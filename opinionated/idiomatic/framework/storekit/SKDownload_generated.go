@@ -5,113 +5,135 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Downloadable content associated with a product.
+// Download is an idiomatic wrapper over the Objective-C class SKDownload.
 //
-// Download wraps [raw.SKDownload] with a fluent Go API.
+// Downloadable content associated with a product.
 type Download struct {
-	inner *raw.SKDownload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKDownload].
-func (x *Download) Unwrap() *raw.SKDownload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Download) ID() objc.ID { return x.inner.Ptr() }
-
-// DownloadFromID adopts an existing object pointer as a Download (nil for 0).
+// DownloadFromID adopts an existing Objective-C object as a Download
+// (nil for 0), retaining it and registering a release finalizer.
 func DownloadFromID(id objc.ID) *Download {
 	if id == 0 {
 		return nil
 	}
-	return &Download{inner: raw.SKDownloadFromID(id)}
+	x := &Download{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDownload creates a new [Download].
-func NewDownload() *Download {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKDownload")), objc.RegisterName("new"))
-	return &Download{inner: raw.SKDownloadFromID(_id)}
-}
-
-// State calls the underlying State.
-func (x *Download) State() SKDownloadState {
-	return SKDownloadState(x.inner.State())
-}
-
-// ContentLength calls the underlying ContentLength.
-func (x *Download) ContentLength() unsafe.Pointer {
-	return x.inner.ContentLength()
-}
-
-// ExpectedContentLength calls the underlying ExpectedContentLength.
-func (x *Download) ExpectedContentLength() int64 {
-	return x.inner.ExpectedContentLength()
-}
-
-// ContentIdentifier calls the underlying ContentIdentifier.
-func (x *Download) ContentIdentifier() string {
-	_r := x.inner.ContentIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// ContentURL calls the underlying ContentURL.
-func (x *Download) ContentURL() *foundation.NSURL {
-	return x.inner.ContentURL()
-}
-
-// ContentVersion calls the underlying ContentVersion.
-func (x *Download) ContentVersion() string {
-	_r := x.inner.ContentVersion()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Error calls the underlying Error.
-func (x *Download) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-// Progress calls the underlying Progress.
-func (x *Download) Progress() float32 {
-	return x.inner.Progress()
-}
-
-// TimeRemaining calls the underlying TimeRemaining.
-func (x *Download) TimeRemaining() float64 {
-	return x.inner.TimeRemaining()
-}
-
-// Transaction calls the underlying Transaction.
-func (x *Download) Transaction() *PaymentTransaction {
-	_r := x.inner.Transaction()
-	if _r == nil {
+// downloadAdopt wraps an Objective-C object that this code just created as a
+// Download (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func downloadAdopt(id objc.ID) *Download {
+	if id == 0 {
 		return nil
 	}
-	return &PaymentTransaction{inner: _r}
+	x := &Download{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Download) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Download) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Download) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Download) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDownload creates a new Download.
+func NewDownload() *Download {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("new"))
+	return downloadAdopt(_id)
+}
+
+// State wraps the corresponding Objective-C method.
+func (x *Download) State() DownloadState {
+	_r := objc.Send[DownloadState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
+}
+
+// ExpectedContentLength wraps the corresponding Objective-C method.
+func (x *Download) ExpectedContentLength() int64 {
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedContentLength"))
+	return _r
+}
+
+// ContentIdentifier wraps the corresponding Objective-C method.
+func (x *Download) ContentIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// ContentURL wraps the corresponding Objective-C method.
+func (x *Download) ContentURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentURL"))
+	return obj.Wrap(_r)
+}
+
+// ContentVersion wraps the corresponding Objective-C method.
+func (x *Download) ContentVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentVersion"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Progress wraps the corresponding Objective-C method.
+func (x *Download) Progress() float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("progress"))
+	return _r
+}
+
+// TimeRemaining wraps the corresponding Objective-C method.
+func (x *Download) TimeRemaining() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeRemaining"))
+	return _r
+}
+
+// Transaction wraps the corresponding Objective-C method.
+func (x *Download) Transaction() *PaymentTransaction {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transaction"))
+	return PaymentTransactionFromID(_r)
 }
 
 // Downloadable is the interface implemented by [Download], for mocking and DI.
 type Downloadable interface {
-	Unwrap() *raw.SKDownload
-	State() SKDownloadState
-	ContentLength() unsafe.Pointer
+	obj.Object
+	State() DownloadState
 	ExpectedContentLength() int64
 	ContentIdentifier() string
-	ContentURL() *foundation.NSURL
+	ContentURL() obj.Object
 	ContentVersion() string
-	Error() unsafe.Pointer
 	Progress() float32
 	TimeRemaining() float64
 	Transaction() *PaymentTransaction

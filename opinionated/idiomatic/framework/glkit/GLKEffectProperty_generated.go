@@ -5,43 +5,79 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for configuration information used in GLKit rendering effects.
+// EffectProperty is an idiomatic wrapper over the Objective-C class GLKEffectProperty.
 //
-// EffectProperty wraps [raw.GLKEffectProperty] with a fluent Go API.
+// EffectProperty is an abstract base — you do not construct it directly. Construct one of [EffectPropertyFog], [EffectPropertyLight], [EffectPropertyMaterial], [EffectPropertyTexture], [EffectPropertyTransform] and pass it where a EffectProperty is accepted.
+//
+// The abstract superclass for configuration information used in GLKit rendering effects.
 type EffectProperty struct {
-	inner *raw.GLKEffectProperty
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKEffectProperty].
-func (x *EffectProperty) Unwrap() *raw.GLKEffectProperty { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EffectProperty) ID() objc.ID { return x.inner.Ptr() }
-
-// EffectPropertyFromID adopts an existing object pointer as a EffectProperty (nil for 0).
+// EffectPropertyFromID adopts an existing Objective-C object as a EffectProperty
+// (nil for 0), retaining it and registering a release finalizer.
 func EffectPropertyFromID(id objc.ID) *EffectProperty {
 	if id == 0 {
 		return nil
 	}
-	return &EffectProperty{inner: raw.GLKEffectPropertyFromID(id)}
+	x := &EffectProperty{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEffectProperty creates a new [EffectProperty].
-func NewEffectProperty() *EffectProperty {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKEffectProperty")), objc.RegisterName("new"))
-	return &EffectProperty{inner: raw.GLKEffectPropertyFromID(_id)}
+// effectPropertyAdopt wraps an Objective-C object that this code just created as a
+// EffectProperty (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func effectPropertyAdopt(id objc.ID) *EffectProperty {
+	if id == 0 {
+		return nil
+	}
+	x := &EffectProperty{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *EffectProperty) asEffectProperty() *raw.GLKEffectProperty { return x.inner }
+// Description returns the object's -description text.
+func (x *EffectProperty) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EffectProperty) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EffectProperty) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EffectProperty) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // EffectPropertyable is the interface implemented by [EffectProperty], for mocking and DI.
 type EffectPropertyable interface {
-	Unwrap() *raw.GLKEffectProperty
+	obj.Object
 }
 
 var _ EffectPropertyable = (*EffectProperty)(nil)
+
+// isEffectProperty marks EffectProperty — and, by embedding promotion, its
+// subclasses — as a member of the EffectProperty hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *EffectProperty) isEffectProperty() {}
+
+var _ EffectPropertyProvider = (*EffectProperty)(nil)

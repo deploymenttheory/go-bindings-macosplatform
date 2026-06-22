@@ -5,199 +5,193 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLOptGroupElement wraps [raw.DOMHTMLOptGroupElement] with a fluent Go API.
+// DOMHTMLOptGroupElement is an idiomatic wrapper over the Objective-C class DOMHTMLOptGroupElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLOptGroupElement struct {
-	inner *raw.DOMHTMLOptGroupElement
+	DOMHTMLElement
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLOptGroupElement].
-func (x *DOMHTMLOptGroupElement) Unwrap() *raw.DOMHTMLOptGroupElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLOptGroupElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLOptGroupElementFromID adopts an existing object pointer as a DOMHTMLOptGroupElement (nil for 0).
+// DOMHTMLOptGroupElementFromID adopts an existing Objective-C object as a DOMHTMLOptGroupElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLOptGroupElementFromID(id objc.ID) *DOMHTMLOptGroupElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLOptGroupElement{inner: raw.DOMHTMLOptGroupElementFromID(id)}
+	x := &DOMHTMLOptGroupElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLOptGroupElement creates a new [DOMHTMLOptGroupElement].
+// dOMHTMLOptGroupElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLOptGroupElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLOptGroupElementAdopt(id objc.ID) *DOMHTMLOptGroupElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLOptGroupElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMHTMLOptGroupElement creates a new DOMHTMLOptGroupElement.
 func NewDOMHTMLOptGroupElement() *DOMHTMLOptGroupElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLOptGroupElement")), objc.RegisterName("new"))
-	return &DOMHTMLOptGroupElement{inner: raw.DOMHTMLOptGroupElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLOptGroupElement")), objc.RegisterName("new"))
+	return dOMHTMLOptGroupElementAdopt(_id)
 }
 
-// WithDisabled sets the disabled property and returns the receiver for chaining.
+// WithDisabled sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithDisabled(disabled bool) *DOMHTMLOptGroupElement {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithLabel(label string) *DOMHTMLOptGroupElement {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithTitle(title string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithLang(lang string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithDir(dir string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithTabIndex(tabIndex int) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithAccessKey(accessKey string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithInnerText(innerText string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithOuterText(outerText string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithContentEditable(contentEditable string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithIdName(idName string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithScrollLeft(scrollLeft int) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithScrollTop(scrollTop int) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithInnerHTML(innerHTML string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithOuterHTML(outerHTML string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithClassName(className string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithNodeValue(nodeValue string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithPrefix(prefix string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLOptGroupElement) WithTextContent(textContent string) *DOMHTMLOptGroupElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Disabled calls the underlying Disabled.
+// Disabled wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptGroupElement) Disabled() bool {
-	return x.inner.Disabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+	return _r
 }
 
-// SetDisabled calls the underlying SetDisabled.
+// SetDisabled wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptGroupElement) SetDisabled(disabled bool) {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptGroupElement) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *DOMHTMLOptGroupElement) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
-}
-
-func (x *DOMHTMLOptGroupElement) asDOMHTMLElement() *raw.DOMHTMLElement {
-	return &x.inner.DOMHTMLElement
-}
-
-func (x *DOMHTMLOptGroupElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLOptGroupElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLOptGroupElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLOptGroupElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // DOMHTMLOptGroupElementable is the interface implemented by [DOMHTMLOptGroupElement], for mocking and DI.
 type DOMHTMLOptGroupElementable interface {
-	Unwrap() *raw.DOMHTMLOptGroupElement
+	obj.Object
 	WithDisabled(disabled bool) *DOMHTMLOptGroupElement
 	WithLabel(label string) *DOMHTMLOptGroupElement
 	WithTitle(title string) *DOMHTMLOptGroupElement
@@ -224,3 +218,13 @@ type DOMHTMLOptGroupElementable interface {
 }
 
 var _ DOMHTMLOptGroupElementable = (*DOMHTMLOptGroupElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLOptGroupElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLOptGroupElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLOptGroupElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLOptGroupElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLOptGroupElement)(nil)

@@ -5,63 +5,97 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.
+// VertexBufferLayout is an idiomatic wrapper over the Objective-C class MDLVertexBufferLayout.
 //
-// VertexBufferLayout wraps [raw.MDLVertexBufferLayout] with a fluent Go API.
+// A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.
 type VertexBufferLayout struct {
-	inner *raw.MDLVertexBufferLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLVertexBufferLayout].
-func (x *VertexBufferLayout) Unwrap() *raw.MDLVertexBufferLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexBufferLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexBufferLayoutFromID adopts an existing object pointer as a VertexBufferLayout (nil for 0).
+// VertexBufferLayoutFromID adopts an existing Objective-C object as a VertexBufferLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexBufferLayoutFromID(id objc.ID) *VertexBufferLayout {
 	if id == 0 {
 		return nil
 	}
-	return &VertexBufferLayout{inner: raw.MDLVertexBufferLayoutFromID(id)}
-}
-
-// NewVertexBufferLayoutWithStride creates a new [VertexBufferLayout].
-func NewVertexBufferLayoutWithStride(stride uint) *VertexBufferLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVertexBufferLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStride:"), stride)
-	return &VertexBufferLayout{inner: raw.MDLVertexBufferLayoutFromID(_id)}
-}
-
-// The stride, in bytes, between data for separate vertices in a vertex buffer.
-//
-// WithStride sets the stride property and returns the receiver for chaining.
-func (x *VertexBufferLayout) WithStride(stride uint) *VertexBufferLayout {
-	x.inner.SetStride(stride)
+	x := &VertexBufferLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Stride calls the underlying Stride.
-func (x *VertexBufferLayout) Stride() uint {
-	return x.inner.Stride()
+// vertexBufferLayoutAdopt wraps an Objective-C object that this code just created as a
+// VertexBufferLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexBufferLayoutAdopt(id objc.ID) *VertexBufferLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &VertexBufferLayout{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetStride calls the underlying SetStride.
-func (x *VertexBufferLayout) SetStride(stride uint) {
-	x.inner.SetStride(stride)
+// Description returns the object's -description text.
+func (x *VertexBufferLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexBufferLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexBufferLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexBufferLayout) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVertexBufferLayoutWithStride creates a new VertexBufferLayout.
+func NewVertexBufferLayoutWithStride(stride int) *VertexBufferLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVertexBufferLayout")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStride:"), stride)
+	return vertexBufferLayoutAdopt(_id)
+}
+
+// WithStride the stride, in bytes, between data for separate vertices in a vertex buffer.
+func (x *VertexBufferLayout) WithStride(stride int) *VertexBufferLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
+	return x
+}
+
+// Stride wraps the corresponding Objective-C method.
+func (x *VertexBufferLayout) Stride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+	return _r
+}
+
+// SetStride wraps the corresponding Objective-C method.
+func (x *VertexBufferLayout) SetStride(stride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
 // VertexBufferLayoutable is the interface implemented by [VertexBufferLayout], for mocking and DI.
 type VertexBufferLayoutable interface {
-	Unwrap() *raw.MDLVertexBufferLayout
-	WithStride(stride uint) *VertexBufferLayout
-	Stride() uint
-	SetStride(stride uint)
+	obj.Object
+	WithStride(stride int) *VertexBufferLayout
+	Stride() int
+	SetStride(stride int)
 }
 
 var _ VertexBufferLayoutable = (*VertexBufferLayout)(nil)

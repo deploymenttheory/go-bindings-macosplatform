@@ -5,194 +5,194 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An input for a physical control, such as a button or thumbstick.
+// ControllerElement is an idiomatic wrapper over the Objective-C class GCControllerElement.
 //
-// ControllerElement wraps [raw.GCControllerElement] with a fluent Go API.
+// ControllerElement is an abstract base — you do not construct it directly. Construct one of [ControllerAxisInput], [ControllerButtonInput], [ControllerDirectionPad], [ControllerTouchpad] and pass it where a ControllerElement is accepted.
+//
+// An input for a physical control, such as a button or thumbstick.
 type ControllerElement struct {
-	inner *raw.GCControllerElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCControllerElement].
-func (x *ControllerElement) Unwrap() *raw.GCControllerElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ControllerElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerElementFromID adopts an existing object pointer as a ControllerElement (nil for 0).
+// ControllerElementFromID adopts an existing Objective-C object as a ControllerElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerElementFromID(id objc.ID) *ControllerElement {
 	if id == 0 {
 		return nil
 	}
-	return &ControllerElement{inner: raw.GCControllerElementFromID(id)}
-}
-
-// NewControllerElement creates a new [ControllerElement].
-func NewControllerElement() *ControllerElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCControllerElement")), objc.RegisterName("new"))
-	return &ControllerElement{inner: raw.GCControllerElementFromID(_id)}
-}
-
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerElement {
-	x.inner.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+	x := &ControllerElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
-func (x *ControllerElement) WithSfSymbolsName(sfSymbolsName string) *ControllerElement {
-	x.inner.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
-	return x
-}
-
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
-func (x *ControllerElement) WithLocalizedName(localizedName string) *ControllerElement {
-	x.inner.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
-	return x
-}
-
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
-func (x *ControllerElement) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement {
-	x.inner.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
-	return x
-}
-
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
-func (x *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerElement {
-	x.inner.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
-	return x
-}
-
-// Each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
-//
-// Collection calls the underlying Collection.
-func (x *ControllerElement) Collection() *ControllerElement {
-	_r := x.inner.Collection()
-	if _r == nil {
+// controllerElementAdopt wraps an Objective-C object that this code just created as a
+// ControllerElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerElementAdopt(id objc.ID) *ControllerElement {
+	if id == 0 {
 		return nil
 	}
-	return &ControllerElement{inner: _r}
+	x := &ControllerElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Check if the element can support more than just digital values, such as decimal ranges between 0 and 1. Defaults to YES for most elements.
-//
-// IsAnalog calls the underlying IsAnalog.
+// Description returns the object's -description text.
+func (x *ControllerElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ControllerElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ControllerElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ControllerElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
+func (x *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName a system symbol for the element or the remapped element.
+func (x *ControllerElement) WithSfSymbolsName(sfSymbolsName string) *ControllerElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName the localized name for the element or the remapped element.
+func (x *ControllerElement) WithLocalizedName(localizedName string) *ControllerElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
+func (x *ControllerElement) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
+func (x *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return x
+}
+
+// Collection each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
+func (x *ControllerElement) Collection() *ControllerElement {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collection"))
+	return ControllerElementFromID(_r)
+}
+
+// IsAnalog check if the element can support more than just digital values, such as decimal ranges between 0 and 1. Defaults to YES for most elements.
 func (x *ControllerElement) IsAnalog() bool {
-	return x.inner.IsAnalog()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnalog"))
+	return _r
 }
 
-// Check if the element is bound to a system gesture. Defaults to NO for most elements. @see preferredSystemGestureState @see GCSystemGestureState
-//
-// IsBoundToSystemGesture calls the underlying IsBoundToSystemGesture.
+// IsBoundToSystemGesture check if the element is bound to a system gesture. Defaults to NO for most elements.
 func (x *ControllerElement) IsBoundToSystemGesture() bool {
-	return x.inner.IsBoundToSystemGesture()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBoundToSystemGesture"))
+	return _r
 }
 
-// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
-//
-// PreferredSystemGestureState calls the underlying PreferredSystemGestureState.
-func (x *ControllerElement) PreferredSystemGestureState() GCSystemGestureState {
-	return GCSystemGestureState(x.inner.PreferredSystemGestureState())
+// PreferredSystemGestureState the preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements
+func (x *ControllerElement) PreferredSystemGestureState() SystemGestureState {
+	_r := objc.Send[SystemGestureState](objref.IDOf(x), objc.RegisterName("preferredSystemGestureState"))
+	return _r
 }
 
-// SetPreferredSystemGestureState calls the underlying SetPreferredSystemGestureState.
-func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) {
-	x.inner.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+// SetPreferredSystemGestureState wraps the corresponding Objective-C method.
+func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 }
 
-// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
-//
-// SfSymbolsName calls the underlying SfSymbolsName.
+// SfSymbolsName the element's SF Symbols name, taking input remapping into account.
 func (x *ControllerElement) SfSymbolsName() string {
-	_r := x.inner.SfSymbolsName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sfSymbolsName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSfSymbolsName calls the underlying SetSfSymbolsName.
+// SetSfSymbolsName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetSfSymbolsName(sfSymbolsName string) {
-	x.inner.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 }
 
-// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
-//
-// LocalizedName calls the underlying LocalizedName.
+// LocalizedName the element's localized name, taking input remapping into account.
 func (x *ControllerElement) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedName calls the underlying SetLocalizedName.
+// SetLocalizedName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetLocalizedName(localizedName string) {
-	x.inner.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 }
 
-// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
-//
-// UnmappedSfSymbolsName calls the underlying UnmappedSfSymbolsName.
+// UnmappedSfSymbolsName the element's SF Symbols name, not taking any input remapping into account.
 func (x *ControllerElement) UnmappedSfSymbolsName() string {
-	_r := x.inner.UnmappedSfSymbolsName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedSfSymbolsName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUnmappedSfSymbolsName calls the underlying SetUnmappedSfSymbolsName.
+// SetUnmappedSfSymbolsName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetUnmappedSfSymbolsName(unmappedSfSymbolsName string) {
-	x.inner.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 }
 
-// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
-//
-// UnmappedLocalizedName calls the underlying UnmappedLocalizedName.
+// UnmappedLocalizedName the element's localized name, not taking any input remapping into account.
 func (x *ControllerElement) UnmappedLocalizedName() string {
-	_r := x.inner.UnmappedLocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedLocalizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUnmappedLocalizedName calls the underlying SetUnmappedLocalizedName.
+// SetUnmappedLocalizedName wraps the corresponding Objective-C method.
 func (x *ControllerElement) SetUnmappedLocalizedName(unmappedLocalizedName string) {
-	x.inner.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 }
 
-// A set of aliases that can be used to access this element with keyed subscript notation.
-//
-// Aliases calls the underlying Aliases.
-func (x *ControllerElement) Aliases() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.Aliases()
+// Aliases a set of aliases that can be used to access this element with keyed subscript notation.
+func (x *ControllerElement) Aliases() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aliases"))
+	return obj.Wrap(_r)
 }
-
-func (x *ControllerElement) asControllerElement() *raw.GCControllerElement { return x.inner }
 
 // ControllerElementable is the interface implemented by [ControllerElement], for mocking and DI.
 type ControllerElementable interface {
-	Unwrap() *raw.GCControllerElement
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerElement
+	obj.Object
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerElement
 	WithSfSymbolsName(sfSymbolsName string) *ControllerElement
 	WithLocalizedName(localizedName string) *ControllerElement
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement
@@ -200,8 +200,8 @@ type ControllerElementable interface {
 	Collection() *ControllerElement
 	IsAnalog() bool
 	IsBoundToSystemGesture() bool
-	PreferredSystemGestureState() GCSystemGestureState
-	SetPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState)
+	PreferredSystemGestureState() SystemGestureState
+	SetPreferredSystemGestureState(preferredSystemGestureState SystemGestureState)
 	SfSymbolsName() string
 	SetSfSymbolsName(sfSymbolsName string)
 	LocalizedName() string
@@ -210,7 +210,14 @@ type ControllerElementable interface {
 	SetUnmappedSfSymbolsName(unmappedSfSymbolsName string)
 	UnmappedLocalizedName() string
 	SetUnmappedLocalizedName(unmappedLocalizedName string)
-	Aliases() *foundation.NSSet[*foundation.NSString]
+	Aliases() obj.Object
 }
 
 var _ ControllerElementable = (*ControllerElement)(nil)
+
+// isControllerElement marks ControllerElement — and, by embedding promotion, its
+// subclasses — as a member of the ControllerElement hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ControllerElement) isControllerElement() {}
+
+var _ ControllerElementProvider = (*ControllerElement)(nil)

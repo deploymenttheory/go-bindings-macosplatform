@@ -5,70 +5,97 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.
+// QCCompositionRepository is an idiomatic wrapper over the Objective-C class QCCompositionRepository.
 //
-// QCCompositionRepository wraps [raw.QCCompositionRepository] with a fluent Go API.
+// The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.
 type QCCompositionRepository struct {
-	inner *raw.QCCompositionRepository
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionRepository].
-func (x *QCCompositionRepository) Unwrap() *raw.QCCompositionRepository { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCCompositionRepository) ID() objc.ID { return x.inner.Ptr() }
-
-// QCCompositionRepositoryFromID adopts an existing object pointer as a QCCompositionRepository (nil for 0).
+// QCCompositionRepositoryFromID adopts an existing Objective-C object as a QCCompositionRepository
+// (nil for 0), retaining it and registering a release finalizer.
 func QCCompositionRepositoryFromID(id objc.ID) *QCCompositionRepository {
 	if id == 0 {
 		return nil
 	}
-	return &QCCompositionRepository{inner: raw.QCCompositionRepositoryFromID(id)}
+	x := &QCCompositionRepository{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQCCompositionRepository creates a new [QCCompositionRepository].
-func NewQCCompositionRepository() *QCCompositionRepository {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionRepository")), objc.RegisterName("new"))
-	return &QCCompositionRepository{inner: raw.QCCompositionRepositoryFromID(_id)}
-}
-
-// Returns the composition that corresponds to the identifier.
-//
-// CompositionWithIdentifier calls the underlying CompositionWithIdentifier.
-func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
-	_r := x.inner.CompositionWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
+// qCCompositionRepositoryAdopt wraps an Objective-C object that this code just created as a
+// QCCompositionRepository (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCCompositionRepositoryAdopt(id objc.ID) *QCCompositionRepository {
+	if id == 0 {
 		return nil
 	}
-	return &QCComposition{inner: _r}
+	x := &QCCompositionRepository{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns an array of compositions that match a set of criteria.
-//
-// CompositionsWithProtocolsAndAttributes calls the underlying CompositionsWithProtocolsAndAttributes.
-func (x *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
-	return x.inner.CompositionsWithProtocolsAndAttributes(protocols, attributes)
+// Description returns the object's -description text.
+func (x *QCCompositionRepository) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns an array that contains all compositions currently in the composition repository.
-//
-// AllCompositions calls the underlying AllCompositions.
-func (x *QCCompositionRepository) AllCompositions() *foundation.NSArray[objc.ID] {
-	return x.inner.AllCompositions()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCCompositionRepository) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCCompositionRepository) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QCCompositionRepository) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQCCompositionRepository creates a new QCCompositionRepository.
+func NewQCCompositionRepository() *QCCompositionRepository {
+	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("new"))
+	return qCCompositionRepositoryAdopt(_id)
+}
+
+// CompositionWithIdentifier returns the composition that corresponds to the identifier.
+func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
+	return QCCompositionFromID(_r)
+}
+
+// CompositionsWithProtocolsAndAttributes returns an array of compositions that match a set of criteria.
+func (x *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
+	return obj.Wrap(_r)
+}
+
+// AllCompositions returns an array that contains all compositions currently in the composition repository.
+func (x *QCCompositionRepository) AllCompositions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCompositions"))
+	return obj.Wrap(_r)
 }
 
 // QCCompositionRepositoryable is the interface implemented by [QCCompositionRepository], for mocking and DI.
 type QCCompositionRepositoryable interface {
-	Unwrap() *raw.QCCompositionRepository
+	obj.Object
 	CompositionWithIdentifier(identifier string) *QCComposition
-	CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID]
-	AllCompositions() *foundation.NSArray[objc.ID]
+	CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object
+	AllCompositions() obj.Object
 }
 
 var _ QCCompositionRepositoryable = (*QCCompositionRepository)(nil)

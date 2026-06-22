@@ -5,43 +5,79 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for the events you associate with a music track.
+// MusicEvent is an idiomatic wrapper over the Objective-C class AVMusicEvent.
 //
-// MusicEvent wraps [raw.AVMusicEvent] with a fluent Go API.
+// MusicEvent is an abstract base — you do not construct it directly. Construct one of [AUPresetEvent], [ExtendedNoteOnEvent], [ExtendedTempoEvent], [MIDIChannelEvent], [MIDIMetaEvent], [MIDINoteEvent], [MIDISysexEvent], [MusicUserEvent], [ParameterEvent] and pass it where a MusicEvent is accepted.
+//
+// A base class for the events you associate with a music track.
 type MusicEvent struct {
-	inner *raw.AVMusicEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMusicEvent].
-func (x *MusicEvent) Unwrap() *raw.AVMusicEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MusicEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MusicEventFromID adopts an existing object pointer as a MusicEvent (nil for 0).
+// MusicEventFromID adopts an existing Objective-C object as a MusicEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MusicEventFromID(id objc.ID) *MusicEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MusicEvent{inner: raw.AVMusicEventFromID(id)}
+	x := &MusicEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMusicEvent creates a new [MusicEvent].
-func NewMusicEvent() *MusicEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMusicEvent")), objc.RegisterName("new"))
-	return &MusicEvent{inner: raw.AVMusicEventFromID(_id)}
+// musicEventAdopt wraps an Objective-C object that this code just created as a
+// MusicEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func musicEventAdopt(id objc.ID) *MusicEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MusicEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MusicEvent) asMusicEvent() *raw.AVMusicEvent { return x.inner }
+// Description returns the object's -description text.
+func (x *MusicEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MusicEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MusicEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MusicEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // MusicEventable is the interface implemented by [MusicEvent], for mocking and DI.
 type MusicEventable interface {
-	Unwrap() *raw.AVMusicEvent
+	obj.Object
 }
 
 var _ MusicEventable = (*MusicEvent)(nil)
+
+// isMusicEvent marks MusicEvent — and, by embedding promotion, its
+// subclasses — as a member of the MusicEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MusicEvent) isMusicEvent() {}
+
+var _ MusicEventProvider = (*MusicEvent)(nil)

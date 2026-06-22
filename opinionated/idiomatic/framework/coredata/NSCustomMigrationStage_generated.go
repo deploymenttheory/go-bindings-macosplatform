@@ -5,121 +5,80 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that enables you to participate in the migration between two versions of the same model.
+// CustomMigrationStage is an idiomatic wrapper over the Objective-C class NSCustomMigrationStage.
 //
-// CustomMigrationStage wraps [raw.NSCustomMigrationStage] with a fluent Go API.
+// It embeds [MigrationStage], promoting that type's methods.
+//
+// An object that enables you to participate in the migration between two versions of the same model.
 type CustomMigrationStage struct {
-	inner *raw.NSCustomMigrationStage
+	MigrationStage
 }
 
-// Unwrap returns the underlying [raw.NSCustomMigrationStage].
-func (x *CustomMigrationStage) Unwrap() *raw.NSCustomMigrationStage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomMigrationStage) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomMigrationStageFromID adopts an existing object pointer as a CustomMigrationStage (nil for 0).
+// CustomMigrationStageFromID adopts an existing Objective-C object as a CustomMigrationStage
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomMigrationStageFromID(id objc.ID) *CustomMigrationStage {
 	if id == 0 {
 		return nil
 	}
-	return &CustomMigrationStage{inner: raw.NSCustomMigrationStageFromID(id)}
-}
-
-// Creates a custom migration stage with the specified source and destination model references.
-//
-// NewCustomMigrationStageWithCurrentModelReferenceNextModelReference creates a new [CustomMigrationStage].
-func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentModel *raw.NSManagedObjectModelReference, nextModel *raw.NSManagedObjectModelReference) *CustomMigrationStage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomMigrationStage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentModelReference:nextModelReference:"), currentModel.Ptr(), nextModel.Ptr())
-	return &CustomMigrationStage{inner: raw.NSCustomMigrationStageFromID(_id)}
-}
-
-// The handler to execute before the stage runs.
-//
-// WithWillMigrateHandler sets the willMigrateHandler property and returns the receiver for chaining.
-func (x *CustomMigrationStage) WithWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage {
-	x.inner.SetWillMigrateHandler(willMigrateHandler)
+	x := &CustomMigrationStage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The handler to execute after the stage runs.
-//
-// WithDidMigrateHandler sets the didMigrateHandler property and returns the receiver for chaining.
-func (x *CustomMigrationStage) WithDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage {
-	x.inner.SetDidMigrateHandler(didMigrateHandler)
+// customMigrationStageAdopt wraps an Objective-C object that this code just created as a
+// CustomMigrationStage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customMigrationStageAdopt(id objc.ID) *CustomMigrationStage {
+	if id == 0 {
+		return nil
+	}
+	x := &CustomMigrationStage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The textual description of the migration stage’s purpose.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewCustomMigrationStageWithCurrentModelReferenceNextModelReference creates a custom migration stage with the specified source and destination model references.
+func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentModel *ManagedObjectModelReference, nextModel *ManagedObjectModelReference) *CustomMigrationStage {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCustomMigrationStage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentModelReference:nextModelReference:"), objref.IDOf(currentModel), objref.IDOf(nextModel))
+	return customMigrationStageAdopt(_id)
+}
+
+// WithLabel the textual description of the migration stage’s purpose.
 func (x *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
-	x.inner.NSMigrationStage.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// CurrentModel calls the underlying CurrentModel.
+// CurrentModel wraps the corresponding Objective-C method.
 func (x *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
-	_r := x.inner.CurrentModel()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectModelReference{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentModel"))
+	return ManagedObjectModelReferenceFromID(_r)
 }
 
-// NextModel calls the underlying NextModel.
+// NextModel wraps the corresponding Objective-C method.
 func (x *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
-	_r := x.inner.NextModel()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectModelReference{inner: _r}
-}
-
-// WillMigrateHandler calls the underlying WillMigrateHandler.
-func (x *CustomMigrationStage) WillMigrateHandler() objc.Block {
-	return x.inner.WillMigrateHandler()
-}
-
-// SetWillMigrateHandler calls the underlying SetWillMigrateHandler.
-func (x *CustomMigrationStage) SetWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) {
-	x.inner.SetWillMigrateHandler(willMigrateHandler)
-}
-
-// DidMigrateHandler calls the underlying DidMigrateHandler.
-func (x *CustomMigrationStage) DidMigrateHandler() objc.Block {
-	return x.inner.DidMigrateHandler()
-}
-
-// SetDidMigrateHandler calls the underlying SetDidMigrateHandler.
-func (x *CustomMigrationStage) SetDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) {
-	x.inner.SetDidMigrateHandler(didMigrateHandler)
-}
-
-func (x *CustomMigrationStage) asMigrationStage() *raw.NSMigrationStage {
-	return &x.inner.NSMigrationStage
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextModel"))
+	return ManagedObjectModelReferenceFromID(_r)
 }
 
 // CustomMigrationStageable is the interface implemented by [CustomMigrationStage], for mocking and DI.
 type CustomMigrationStageable interface {
-	Unwrap() *raw.NSCustomMigrationStage
-	WithWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage
-	WithDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage
+	obj.Object
 	WithLabel(label string) *CustomMigrationStage
 	CurrentModel() *ManagedObjectModelReference
 	NextModel() *ManagedObjectModelReference
-	WillMigrateHandler() objc.Block
-	SetWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool)
-	DidMigrateHandler() objc.Block
-	SetDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool)
 }
 
 var _ CustomMigrationStageable = (*CustomMigrationStage)(nil)
+
+var _ MigrationStageProvider = (*CustomMigrationStage)(nil)

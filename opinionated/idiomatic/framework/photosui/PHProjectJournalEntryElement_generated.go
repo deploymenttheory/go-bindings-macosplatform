@@ -5,78 +5,79 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An element that represents a journal entry within project section content.
+// ProjectJournalEntryElement is an idiomatic wrapper over the Objective-C class PHProjectJournalEntryElement.
 //
-// ProjectJournalEntryElement wraps [raw.PHProjectJournalEntryElement] with a fluent Go API.
+// It embeds [ProjectElement], promoting that type's methods.
+//
+// An element that represents a journal entry within project section content.
 type ProjectJournalEntryElement struct {
-	inner *raw.PHProjectJournalEntryElement
+	ProjectElement
 }
 
-// Unwrap returns the underlying [raw.PHProjectJournalEntryElement].
-func (x *ProjectJournalEntryElement) Unwrap() *raw.PHProjectJournalEntryElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectJournalEntryElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectJournalEntryElementFromID adopts an existing object pointer as a ProjectJournalEntryElement (nil for 0).
+// ProjectJournalEntryElementFromID adopts an existing Objective-C object as a ProjectJournalEntryElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectJournalEntryElementFromID(id objc.ID) *ProjectJournalEntryElement {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectJournalEntryElement{inner: raw.PHProjectJournalEntryElementFromID(id)}
+	x := &ProjectJournalEntryElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProjectJournalEntryElement creates a new [ProjectJournalEntryElement].
+// projectJournalEntryElementAdopt wraps an Objective-C object that this code just created as a
+// ProjectJournalEntryElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectJournalEntryElementAdopt(id objc.ID) *ProjectJournalEntryElement {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectJournalEntryElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewProjectJournalEntryElement creates a new ProjectJournalEntryElement.
 func NewProjectJournalEntryElement() *ProjectJournalEntryElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectJournalEntryElement")), objc.RegisterName("new"))
-	return &ProjectJournalEntryElement{inner: raw.PHProjectJournalEntryElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectJournalEntryElement")), objc.RegisterName("new"))
+	return projectJournalEntryElementAdopt(_id)
 }
 
-// Date to which the provided asset and/or text pertain
-//
-// Date calls the underlying Date.
-func (x *ProjectJournalEntryElement) Date() *foundation.NSDate {
-	return x.inner.Date()
+// Date date to which the provided asset and/or text pertain
+func (x *ProjectJournalEntryElement) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
-// Representative asset, if any, for that date.
-//
-// AssetElement calls the underlying AssetElement.
+// AssetElement representative asset, if any, for that date.
 func (x *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
-	_r := x.inner.AssetElement()
-	if _r == nil {
-		return nil
-	}
-	return &ProjectAssetElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetElement"))
+	return ProjectAssetElementFromID(_r)
 }
 
-// Descriptive text (e.g., "Mom's Birthday") for that date.
-//
-// TextElement calls the underlying TextElement.
+// TextElement descriptive text (e.g., "Mom's Birthday") for that date.
 func (x *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
-	_r := x.inner.TextElement()
-	if _r == nil {
-		return nil
-	}
-	return &ProjectTextElement{inner: _r}
-}
-
-func (x *ProjectJournalEntryElement) asProjectElement() *raw.PHProjectElement {
-	return &x.inner.PHProjectElement
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElement"))
+	return ProjectTextElementFromID(_r)
 }
 
 // ProjectJournalEntryElementable is the interface implemented by [ProjectJournalEntryElement], for mocking and DI.
 type ProjectJournalEntryElementable interface {
-	Unwrap() *raw.PHProjectJournalEntryElement
-	Date() *foundation.NSDate
+	obj.Object
+	Date() obj.Object
 	AssetElement() *ProjectAssetElement
 	TextElement() *ProjectTextElement
 }
 
 var _ ProjectJournalEntryElementable = (*ProjectJournalEntryElement)(nil)
+
+var _ ProjectElementProvider = (*ProjectJournalEntryElement)(nil)

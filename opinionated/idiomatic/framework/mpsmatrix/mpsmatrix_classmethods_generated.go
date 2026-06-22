@@ -5,51 +5,29 @@
 package mpsmatrix
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DescriptorWithSourceMatrixDestinationMatrixOffsets calls the underlying MPSMatrixCopyDescriptorDescriptorWithSourceMatrixDestinationMatrixOffsets.
-func DescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets raw.MPSMatrixCopyOffsets) *MatrixCopyDescriptor {
-	_r := raw.MPSMatrixCopyDescriptorDescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix, destinationMatrix, offsets)
-	if _r == nil {
-		return nil
-	}
-	return &MatrixCopyDescriptor{inner: _r}
-}
-
-// UniformDistributionDescriptorWithMinimumMaximum calls the underlying MPSMatrixRandomDistributionDescriptorUniformDistributionDescriptorWithMinimumMaximum.
+// UniformDistributionDescriptorWithMinimumMaximum make a descriptor for a uniform distribution of floating point values in the range [minimum, maximum).
 func UniformDistributionDescriptorWithMinimumMaximum(minimum float32, maximum float32) *MatrixRandomDistributionDescriptor {
-	_r := raw.MPSMatrixRandomDistributionDescriptorUniformDistributionDescriptorWithMinimumMaximum(minimum, maximum)
-	if _r == nil {
-		return nil
-	}
-	return &MatrixRandomDistributionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("uniformDistributionDescriptorWithMinimum:maximum:"), minimum, maximum)
+	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// NormalDistributionDescriptorWithMeanStandardDeviation calls the underlying MPSMatrixRandomDistributionDescriptorNormalDistributionDescriptorWithMeanStandardDeviation.
+// NormalDistributionDescriptorWithMeanStandardDeviation make a descriptor for a normal distribution of floating point values.
 func NormalDistributionDescriptorWithMeanStandardDeviation(mean float32, standardDeviation float32) *MatrixRandomDistributionDescriptor {
-	_r := raw.MPSMatrixRandomDistributionDescriptorNormalDistributionDescriptorWithMeanStandardDeviation(mean, standardDeviation)
-	if _r == nil {
-		return nil
-	}
-	return &MatrixRandomDistributionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:"), mean, standardDeviation)
+	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum calls the underlying MPSMatrixRandomDistributionDescriptorNormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum.
+// NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum make a descriptor for a truncated normal distribution of floating point values.
 func NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum(mean float32, standardDeviation float32, minimum float32, maximum float32) *MatrixRandomDistributionDescriptor {
-	_r := raw.MPSMatrixRandomDistributionDescriptorNormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum(mean, standardDeviation, minimum, maximum)
-	if _r == nil {
-		return nil
-	}
-	return &MatrixRandomDistributionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("normalDistributionDescriptorWithMean:standardDeviation:minimum:maximum:"), mean, standardDeviation, minimum, maximum)
+	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// DefaultDistributionDescriptor calls the underlying MPSMatrixRandomDistributionDescriptorDefaultDistributionDescriptor.
+// DefaultDistributionDescriptor make a descriptor for a default distribution.
 func DefaultDistributionDescriptor() *MatrixRandomDistributionDescriptor {
-	_r := raw.MPSMatrixRandomDistributionDescriptorDefaultDistributionDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &MatrixRandomDistributionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("defaultDistributionDescriptor"))
+	return MatrixRandomDistributionDescriptorFromID(_r)
 }

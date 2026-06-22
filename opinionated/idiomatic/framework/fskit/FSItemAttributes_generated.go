@@ -5,390 +5,307 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ItemAttributes wraps [raw.FSItemAttributes] with a fluent Go API.
+// ItemAttributes is an idiomatic wrapper over the Objective-C class FSItemAttributes.
+//
+// ItemAttributes is an abstract base — you do not construct it directly. Construct one of [ItemSetAttributesRequest] and pass it where a ItemAttributes is accepted.
 type ItemAttributes struct {
-	inner *raw.FSItemAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSItemAttributes].
-func (x *ItemAttributes) Unwrap() *raw.FSItemAttributes { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ItemAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// ItemAttributesFromID adopts an existing object pointer as a ItemAttributes (nil for 0).
+// ItemAttributesFromID adopts an existing Objective-C object as a ItemAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func ItemAttributesFromID(id objc.ID) *ItemAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &ItemAttributes{inner: raw.FSItemAttributesFromID(id)}
+	x := &ItemAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewItemAttributes creates a new [ItemAttributes].
-func NewItemAttributes() *ItemAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSItemAttributes")), objc.RegisterName("new"))
-	return &ItemAttributes{inner: raw.FSItemAttributesFromID(_id)}
+// itemAttributesAdopt wraps an Objective-C object that this code just created as a
+// ItemAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func itemAttributesAdopt(id objc.ID) *ItemAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &ItemAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The user identifier.
-//
-// WithUid sets the uid property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *ItemAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ItemAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ItemAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ItemAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithUid the user identifier.
 func (x *ItemAttributes) WithUid(uid uint32) *ItemAttributes {
-	x.inner.SetUid(uid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
 	return x
 }
 
-// The group identifier.
-//
-// WithGid sets the gid property and returns the receiver for chaining.
+// WithGid the group identifier.
 func (x *ItemAttributes) WithGid(gid uint32) *ItemAttributes {
-	x.inner.SetGid(gid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
 	return x
 }
 
-// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
-//
-// WithMode sets the mode property and returns the receiver for chaining.
+// WithMode the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 func (x *ItemAttributes) WithMode(mode uint32) *ItemAttributes {
-	x.inner.SetMode(mode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// The item type, such as a regular file, directory, or symbolic link.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ItemAttributes) WithType(type_ FSItemType) *ItemAttributes {
-	x.inner.SetType(raw.FSItemType(type_))
+// WithType the item type, such as a regular file, directory, or symbolic link.
+func (x *ItemAttributes) WithType(type_ ItemType) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The number of hard links to the item.
-//
-// WithLinkCount sets the linkCount property and returns the receiver for chaining.
+// WithLinkCount the number of hard links to the item.
 func (x *ItemAttributes) WithLinkCount(linkCount uint32) *ItemAttributes {
-	x.inner.SetLinkCount(linkCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
 	return x
 }
 
-// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
-//
-// WithFlags sets the flags property and returns the receiver for chaining.
+// WithFlags the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 func (x *ItemAttributes) WithFlags(flags uint32) *ItemAttributes {
-	x.inner.SetFlags(flags)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 	return x
 }
 
-// The item's size.
-//
-// WithSize sets the size property and returns the receiver for chaining.
+// WithSize the item's size.
 func (x *ItemAttributes) WithSize(size uint64) *ItemAttributes {
-	x.inner.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// The item's allocated size.
-//
-// WithAllocSize sets the allocSize property and returns the receiver for chaining.
+// WithAllocSize the item's allocated size.
 func (x *ItemAttributes) WithAllocSize(allocSize uint64) *ItemAttributes {
-	x.inner.SetAllocSize(allocSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
 	return x
 }
 
-// The item's file identifier.
-//
-// WithFileID sets the fileID property and returns the receiver for chaining.
-func (x *ItemAttributes) WithFileID(fileID FSItemID) *ItemAttributes {
-	x.inner.SetFileID(raw.FSItemID(fileID))
+// WithFileID the item's file identifier.
+func (x *ItemAttributes) WithFileID(fileID ItemID) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
 	return x
 }
 
-// The identifier of the item's parent.
-//
-// WithParentID sets the parentID property and returns the receiver for chaining.
-func (x *ItemAttributes) WithParentID(parentID FSItemID) *ItemAttributes {
-	x.inner.SetParentID(raw.FSItemID(parentID))
+// WithParentID the identifier of the item's parent.
+func (x *ItemAttributes) WithParentID(parentID ItemID) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
 	return x
 }
 
-// A Boolean value that indicates whether the item supports a limited set of extended attributes.
-//
-// WithSupportsLimitedXAttrs sets the supportsLimitedXAttrs property and returns the receiver for chaining.
+// WithSupportsLimitedXAttrs a Boolean value that indicates whether the item supports a limited set of extended attributes.
 func (x *ItemAttributes) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemAttributes {
-	x.inner.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
 	return x
 }
 
-// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
-//
-// WithInhibitKernelOffloadedIO sets the inhibitKernelOffloadedIO property and returns the receiver for chaining.
+// WithInhibitKernelOffloadedIO a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (x *ItemAttributes) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes {
-	x.inner.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
 	return x
 }
 
-// Marks all attributes inactive.
-//
-// InvalidateAllProperties calls the underlying InvalidateAllProperties.
+// InvalidateAllProperties marks all attributes inactive.
 func (x *ItemAttributes) InvalidateAllProperties() {
-	x.inner.InvalidateAllProperties()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateAllProperties"))
 }
 
-// Returns a Boolean value that indicates whether the attribute is valid. If the value returned by this method is `YES` (Objective-C) or `true` (Swift), a caller can safely use the given attribute.
-//
-// IsValid calls the underlying IsValid.
-func (x *ItemAttributes) IsValid(attribute FSItemAttribute) bool {
-	return x.inner.IsValid(raw.FSItemAttribute(attribute))
+// IsValid returns a Boolean value that indicates whether the attribute is valid. If the value returned by this method is `YES` (Objective-C) or `true` (Swift), a caller can safely use the given attribute.
+func (x *ItemAttributes) IsValid(attribute ItemAttribute) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid:"), attribute)
+	return _r
 }
 
-// The user identifier.
-//
-// Uid calls the underlying Uid.
+// Uid the user identifier.
 func (x *ItemAttributes) Uid() uint32 {
-	return x.inner.Uid()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("uid"))
+	return _r
 }
 
-// SetUid calls the underlying SetUid.
+// SetUid wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetUid(uid uint32) {
-	x.inner.SetUid(uid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
 }
 
-// The group identifier.
-//
-// Gid calls the underlying Gid.
+// Gid the group identifier.
 func (x *ItemAttributes) Gid() uint32 {
-	return x.inner.Gid()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("gid"))
+	return _r
 }
 
-// SetGid calls the underlying SetGid.
+// SetGid wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetGid(gid uint32) {
-	x.inner.SetGid(gid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
 }
 
-// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
-//
-// Mode calls the underlying Mode.
+// Mode the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 func (x *ItemAttributes) Mode() uint32 {
-	return x.inner.Mode()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// SetMode calls the underlying SetMode.
+// SetMode wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetMode(mode uint32) {
-	x.inner.SetMode(mode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// The item type, such as a regular file, directory, or symbolic link.
-//
-// Type calls the underlying Type.
-func (x *ItemAttributes) Type() FSItemType {
-	return FSItemType(x.inner.Type())
+// Type the item type, such as a regular file, directory, or symbolic link.
+func (x *ItemAttributes) Type() ItemType {
+	_r := objc.Send[ItemType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetType calls the underlying SetType.
-func (x *ItemAttributes) SetType(type_ FSItemType) {
-	x.inner.SetType(raw.FSItemType(type_))
+// SetType wraps the corresponding Objective-C method.
+func (x *ItemAttributes) SetType(type_ ItemType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// The number of hard links to the item.
-//
-// LinkCount calls the underlying LinkCount.
+// LinkCount the number of hard links to the item.
 func (x *ItemAttributes) LinkCount() uint32 {
-	return x.inner.LinkCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("linkCount"))
+	return _r
 }
 
-// SetLinkCount calls the underlying SetLinkCount.
+// SetLinkCount wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetLinkCount(linkCount uint32) {
-	x.inner.SetLinkCount(linkCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
 }
 
-// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
-//
-// Flags calls the underlying Flags.
+// Flags the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 func (x *ItemAttributes) Flags() uint32 {
-	return x.inner.Flags()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("flags"))
+	return _r
 }
 
-// SetFlags calls the underlying SetFlags.
+// SetFlags wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetFlags(flags uint32) {
-	x.inner.SetFlags(flags)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 }
 
-// The item's size.
-//
-// Size calls the underlying Size.
+// Size the item's size.
 func (x *ItemAttributes) Size() uint64 {
-	return x.inner.Size()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
 
-// SetSize calls the underlying SetSize.
+// SetSize wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetSize(size uint64) {
-	x.inner.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
-// The item's allocated size.
-//
-// AllocSize calls the underlying AllocSize.
+// AllocSize the item's allocated size.
 func (x *ItemAttributes) AllocSize() uint64 {
-	return x.inner.AllocSize()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("allocSize"))
+	return _r
 }
 
-// SetAllocSize calls the underlying SetAllocSize.
+// SetAllocSize wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetAllocSize(allocSize uint64) {
-	x.inner.SetAllocSize(allocSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
 }
 
-// The item's file identifier.
-//
-// FileID calls the underlying FileID.
-func (x *ItemAttributes) FileID() FSItemID {
-	return FSItemID(x.inner.FileID())
+// FileID the item's file identifier.
+func (x *ItemAttributes) FileID() ItemID {
+	_r := objc.Send[ItemID](objref.IDOf(x), objc.RegisterName("fileID"))
+	return _r
 }
 
-// SetFileID calls the underlying SetFileID.
-func (x *ItemAttributes) SetFileID(fileID FSItemID) {
-	x.inner.SetFileID(raw.FSItemID(fileID))
+// SetFileID wraps the corresponding Objective-C method.
+func (x *ItemAttributes) SetFileID(fileID ItemID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
 }
 
-// The identifier of the item's parent.
-//
-// ParentID calls the underlying ParentID.
-func (x *ItemAttributes) ParentID() FSItemID {
-	return FSItemID(x.inner.ParentID())
+// ParentID the identifier of the item's parent.
+func (x *ItemAttributes) ParentID() ItemID {
+	_r := objc.Send[ItemID](objref.IDOf(x), objc.RegisterName("parentID"))
+	return _r
 }
 
-// SetParentID calls the underlying SetParentID.
-func (x *ItemAttributes) SetParentID(parentID FSItemID) {
-	x.inner.SetParentID(raw.FSItemID(parentID))
+// SetParentID wraps the corresponding Objective-C method.
+func (x *ItemAttributes) SetParentID(parentID ItemID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
 }
 
-// A Boolean value that indicates whether the item supports a limited set of extended attributes.
-//
-// SupportsLimitedXAttrs calls the underlying SupportsLimitedXAttrs.
+// SupportsLimitedXAttrs a Boolean value that indicates whether the item supports a limited set of extended attributes.
 func (x *ItemAttributes) SupportsLimitedXAttrs() bool {
-	return x.inner.SupportsLimitedXAttrs()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsLimitedXAttrs"))
+	return _r
 }
 
-// SetSupportsLimitedXAttrs calls the underlying SetSupportsLimitedXAttrs.
+// SetSupportsLimitedXAttrs wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool) {
-	x.inner.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
 }
 
-// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
-//
-// InhibitKernelOffloadedIO calls the underlying InhibitKernelOffloadedIO.
+// InhibitKernelOffloadedIO a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (x *ItemAttributes) InhibitKernelOffloadedIO() bool {
-	return x.inner.InhibitKernelOffloadedIO()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inhibitKernelOffloadedIO"))
+	return _r
 }
 
-// SetInhibitKernelOffloadedIO calls the underlying SetInhibitKernelOffloadedIO.
+// SetInhibitKernelOffloadedIO wraps the corresponding Objective-C method.
 func (x *ItemAttributes) SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) {
-	x.inner.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
 }
-
-// The item's last-modified time. This property represents `mtime`, the last time the item's contents changed.
-//
-// ModifyTime calls the underlying ModifyTime.
-func (x *ItemAttributes) ModifyTime() unsafe.Pointer {
-	return x.inner.ModifyTime()
-}
-
-// SetModifyTime calls the underlying SetModifyTime.
-func (x *ItemAttributes) SetModifyTime(modifyTime unsafe.Pointer) {
-	x.inner.SetModifyTime(modifyTime)
-}
-
-// The item's added time. This property represents the time the file system added the item to its parent directory.
-//
-// AddedTime calls the underlying AddedTime.
-func (x *ItemAttributes) AddedTime() unsafe.Pointer {
-	return x.inner.AddedTime()
-}
-
-// SetAddedTime calls the underlying SetAddedTime.
-func (x *ItemAttributes) SetAddedTime(addedTime unsafe.Pointer) {
-	x.inner.SetAddedTime(addedTime)
-}
-
-// The item's last-changed time. This property represents `ctime`, the last time the item's metadata changed.
-//
-// ChangeTime calls the underlying ChangeTime.
-func (x *ItemAttributes) ChangeTime() unsafe.Pointer {
-	return x.inner.ChangeTime()
-}
-
-// SetChangeTime calls the underlying SetChangeTime.
-func (x *ItemAttributes) SetChangeTime(changeTime unsafe.Pointer) {
-	x.inner.SetChangeTime(changeTime)
-}
-
-// The item's last-accessed time.
-//
-// AccessTime calls the underlying AccessTime.
-func (x *ItemAttributes) AccessTime() unsafe.Pointer {
-	return x.inner.AccessTime()
-}
-
-// SetAccessTime calls the underlying SetAccessTime.
-func (x *ItemAttributes) SetAccessTime(accessTime unsafe.Pointer) {
-	x.inner.SetAccessTime(accessTime)
-}
-
-// The item's creation time.
-//
-// BirthTime calls the underlying BirthTime.
-func (x *ItemAttributes) BirthTime() unsafe.Pointer {
-	return x.inner.BirthTime()
-}
-
-// SetBirthTime calls the underlying SetBirthTime.
-func (x *ItemAttributes) SetBirthTime(birthTime unsafe.Pointer) {
-	x.inner.SetBirthTime(birthTime)
-}
-
-// The item's last-backup time.
-//
-// BackupTime calls the underlying BackupTime.
-func (x *ItemAttributes) BackupTime() unsafe.Pointer {
-	return x.inner.BackupTime()
-}
-
-// SetBackupTime calls the underlying SetBackupTime.
-func (x *ItemAttributes) SetBackupTime(backupTime unsafe.Pointer) {
-	x.inner.SetBackupTime(backupTime)
-}
-
-func (x *ItemAttributes) asItemAttributes() *raw.FSItemAttributes { return x.inner }
 
 // ItemAttributesable is the interface implemented by [ItemAttributes], for mocking and DI.
 type ItemAttributesable interface {
-	Unwrap() *raw.FSItemAttributes
+	obj.Object
 	WithUid(uid uint32) *ItemAttributes
 	WithGid(gid uint32) *ItemAttributes
 	WithMode(mode uint32) *ItemAttributes
-	WithType(type_ FSItemType) *ItemAttributes
+	WithType(type_ ItemType) *ItemAttributes
 	WithLinkCount(linkCount uint32) *ItemAttributes
 	WithFlags(flags uint32) *ItemAttributes
 	WithSize(size uint64) *ItemAttributes
 	WithAllocSize(allocSize uint64) *ItemAttributes
-	WithFileID(fileID FSItemID) *ItemAttributes
-	WithParentID(parentID FSItemID) *ItemAttributes
+	WithFileID(fileID ItemID) *ItemAttributes
+	WithParentID(parentID ItemID) *ItemAttributes
 	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemAttributes
 	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes
 	InvalidateAllProperties()
-	IsValid(attribute FSItemAttribute) bool
+	IsValid(attribute ItemAttribute) bool
 	Uid() uint32
 	SetUid(uid uint32)
 	Gid() uint32
 	SetGid(gid uint32)
 	Mode() uint32
 	SetMode(mode uint32)
-	Type() FSItemType
-	SetType(type_ FSItemType)
+	Type() ItemType
+	SetType(type_ ItemType)
 	LinkCount() uint32
 	SetLinkCount(linkCount uint32)
 	Flags() uint32
@@ -397,26 +314,21 @@ type ItemAttributesable interface {
 	SetSize(size uint64)
 	AllocSize() uint64
 	SetAllocSize(allocSize uint64)
-	FileID() FSItemID
-	SetFileID(fileID FSItemID)
-	ParentID() FSItemID
-	SetParentID(parentID FSItemID)
+	FileID() ItemID
+	SetFileID(fileID ItemID)
+	ParentID() ItemID
+	SetParentID(parentID ItemID)
 	SupportsLimitedXAttrs() bool
 	SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool)
 	InhibitKernelOffloadedIO() bool
 	SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool)
-	ModifyTime() unsafe.Pointer
-	SetModifyTime(modifyTime unsafe.Pointer)
-	AddedTime() unsafe.Pointer
-	SetAddedTime(addedTime unsafe.Pointer)
-	ChangeTime() unsafe.Pointer
-	SetChangeTime(changeTime unsafe.Pointer)
-	AccessTime() unsafe.Pointer
-	SetAccessTime(accessTime unsafe.Pointer)
-	BirthTime() unsafe.Pointer
-	SetBirthTime(birthTime unsafe.Pointer)
-	BackupTime() unsafe.Pointer
-	SetBackupTime(backupTime unsafe.Pointer)
 }
 
 var _ ItemAttributesable = (*ItemAttributes)(nil)
+
+// isItemAttributes marks ItemAttributes — and, by embedding promotion, its
+// subclasses — as a member of the ItemAttributes hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ItemAttributes) isItemAttributes() {}
+
+var _ ItemAttributesProvider = (*ItemAttributes)(nil)

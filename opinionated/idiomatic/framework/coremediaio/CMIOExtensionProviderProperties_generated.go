@@ -5,131 +5,149 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the properties of an extension provider.
+// ExtensionProviderProperties is an idiomatic wrapper over the Objective-C class CMIOExtensionProviderProperties.
 //
-// ExtensionProviderProperties wraps [raw.CMIOExtensionProviderProperties] with a fluent Go API.
+// An object that manages the properties of an extension provider.
 type ExtensionProviderProperties struct {
-	inner *raw.CMIOExtensionProviderProperties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionProviderProperties].
-func (x *ExtensionProviderProperties) Unwrap() *raw.CMIOExtensionProviderProperties { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionProviderProperties) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionProviderPropertiesFromID adopts an existing object pointer as a ExtensionProviderProperties (nil for 0).
+// ExtensionProviderPropertiesFromID adopts an existing Objective-C object as a ExtensionProviderProperties
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionProviderPropertiesFromID(id objc.ID) *ExtensionProviderProperties {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(id)}
+	x := &ExtensionProviderProperties{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a provider properties object with the specified properties.
-//
-// NewExtensionProviderPropertiesWithDictionary creates a new [ExtensionProviderProperties].
-func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionProviderProperties {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionProviderProperties")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.ID())
-	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(_id)}
+// extensionProviderPropertiesAdopt wraps an Objective-C object that this code just created as a
+// ExtensionProviderProperties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionProviderPropertiesAdopt(id objc.ID) *ExtensionProviderProperties {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionProviderProperties{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The provider name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *ExtensionProviderProperties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionProviderProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionProviderProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionProviderProperties) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionProviderPropertiesWithDictionary creates a provider properties object with the specified properties.
+func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProviderProperties")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(propertiesDictionary))
+	return extensionProviderPropertiesAdopt(_id)
+}
+
+// WithName the provider name.
 func (x *ExtensionProviderProperties) WithName(name string) *ExtensionProviderProperties {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The provider manufacturer.
-//
-// WithManufacturer sets the manufacturer property and returns the receiver for chaining.
+// WithManufacturer the provider manufacturer.
 func (x *ExtensionProviderProperties) WithManufacturer(manufacturer string) *ExtensionProviderProperties {
-	x.inner.SetManufacturer(foundation.NSStringStringWithUTF8String(manufacturer))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturer:"), purego.NSString(manufacturer))
 	return x
 }
 
-// A dictionary of properties for a provider.
-//
-// WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
-func (x *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties {
-	x.inner.SetPropertiesDictionary(propertiesDictionary)
+// WithPropertiesDictionary a dictionary of properties for a provider.
+func (x *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
 	return x
 }
 
-// Sets a state value for the specified property.
-//
-// SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
-func (x *ExtensionProviderProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
-	x.inner.SetPropertyStateForProperty(propertyState, property)
+// SetPropertyStateForProperty sets a state value for the specified property.
+func (x *ExtensionProviderProperties) SetPropertyStateForProperty(propertyState obj.Object, property obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyState:forProperty:"), objref.IDOf(propertyState), objref.IDOf(property))
 }
 
-// @property name @abstract The provider name. @discussion The property key is CMIOExtensionPropertyProviderName.
-//
-// Name calls the underlying Name.
+// Name the provider name. The property key is CMIOExtensionPropertyProviderName.
 func (x *ExtensionProviderProperties) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *ExtensionProviderProperties) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @property manufacturer @abstract The provider manufacturer. @discussion The property key is CMIOExtensionPropertyProviderManufacturer.
-//
-// Manufacturer calls the underlying Manufacturer.
+// Manufacturer the provider manufacturer. The property key is CMIOExtensionPropertyProviderManufacturer.
 func (x *ExtensionProviderProperties) Manufacturer() string {
-	_r := x.inner.Manufacturer()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturer"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetManufacturer calls the underlying SetManufacturer.
+// SetManufacturer wraps the corresponding Objective-C method.
 func (x *ExtensionProviderProperties) SetManufacturer(manufacturer string) {
-	x.inner.SetManufacturer(foundation.NSStringStringWithUTF8String(manufacturer))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturer:"), purego.NSString(manufacturer))
 }
 
-// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
-//
-// PropertiesDictionary calls the underlying PropertiesDictionary.
-func (x *ExtensionProviderProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.PropertiesDictionary()
+// PropertiesDictionary the dictionary of properties. The dictionary containing all keys and values.
+func (x *ExtensionProviderProperties) PropertiesDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesDictionary"))
+	return obj.Wrap(_r)
 }
 
-// SetPropertiesDictionary calls the underlying SetPropertiesDictionary.
-func (x *ExtensionProviderProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetPropertiesDictionary(propertiesDictionary)
+// SetPropertiesDictionary wraps the corresponding Objective-C method.
+func (x *ExtensionProviderProperties) SetPropertiesDictionary(propertiesDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
 }
 
 // ExtensionProviderPropertiesable is the interface implemented by [ExtensionProviderProperties], for mocking and DI.
 type ExtensionProviderPropertiesable interface {
-	Unwrap() *raw.CMIOExtensionProviderProperties
+	obj.Object
 	WithName(name string) *ExtensionProviderProperties
 	WithManufacturer(manufacturer string) *ExtensionProviderProperties
-	WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties
-	SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString)
+	WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties
+	SetPropertyStateForProperty(propertyState obj.Object, property obj.Object)
 	Name() string
 	SetName(name string)
 	Manufacturer() string
 	SetManufacturer(manufacturer string)
-	PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	PropertiesDictionary() obj.Object
+	SetPropertiesDictionary(propertiesDictionary obj.Object)
 }
 
 var _ ExtensionProviderPropertiesable = (*ExtensionProviderProperties)(nil)

@@ -5,84 +5,79 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A spherical impassable volume to be avoided by agents.
+// SphereObstacle is an idiomatic wrapper over the Objective-C class GKSphereObstacle.
 //
-// SphereObstacle wraps [raw.GKSphereObstacle] with a fluent Go API.
+// It embeds [Obstacle], promoting that type's methods.
+//
+// A spherical impassable volume to be avoided by agents.
 type SphereObstacle struct {
-	inner *raw.GKSphereObstacle
+	Obstacle
 }
 
-// Unwrap returns the underlying [raw.GKSphereObstacle].
-func (x *SphereObstacle) Unwrap() *raw.GKSphereObstacle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SphereObstacle) ID() objc.ID { return x.inner.Ptr() }
-
-// SphereObstacleFromID adopts an existing object pointer as a SphereObstacle (nil for 0).
+// SphereObstacleFromID adopts an existing Objective-C object as a SphereObstacle
+// (nil for 0), retaining it and registering a release finalizer.
 func SphereObstacleFromID(id objc.ID) *SphereObstacle {
 	if id == 0 {
 		return nil
 	}
-	return &SphereObstacle{inner: raw.GKSphereObstacleFromID(id)}
-}
-
-// Initializes a spherical obstacle with the specified radius.
-//
-// NewSphereObstacleWithRadius creates a new [SphereObstacle].
-func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSphereObstacle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
-	return &SphereObstacle{inner: raw.GKSphereObstacleFromID(_id)}
-}
-
-// The radius of the obstacle.
-//
-// WithRadius sets the radius property and returns the receiver for chaining.
-func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
-	x.inner.SetRadius(radius)
+	x := &SphereObstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Radius of the impassible circle
-//
-// Radius calls the underlying Radius.
+// sphereObstacleAdopt wraps an Objective-C object that this code just created as a
+// SphereObstacle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sphereObstacleAdopt(id objc.ID) *SphereObstacle {
+	if id == 0 {
+		return nil
+	}
+	x := &SphereObstacle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSphereObstacleWithRadius initializes a spherical obstacle with the specified radius.
+func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSphereObstacle")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
+	return sphereObstacleAdopt(_id)
+}
+
+// WithRadius the radius of the obstacle.
+func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
+	return x
+}
+
+// Radius radius of the impassible circle
 func (x *SphereObstacle) Radius() float32 {
-	return x.inner.Radius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
+// SetRadius wraps the corresponding Objective-C method.
 func (x *SphereObstacle) SetRadius(radius float32) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
-
-// Position of the center of the circle in 3D space.
-//
-// Position calls the underlying Position.
-func (x *SphereObstacle) Position() unsafe.Pointer {
-	return x.inner.Position()
-}
-
-// SetPosition calls the underlying SetPosition.
-func (x *SphereObstacle) SetPosition(position unsafe.Pointer) {
-	x.inner.SetPosition(position)
-}
-
-func (x *SphereObstacle) asObstacle() *raw.GKObstacle { return &x.inner.GKObstacle }
 
 // SphereObstacleable is the interface implemented by [SphereObstacle], for mocking and DI.
 type SphereObstacleable interface {
-	Unwrap() *raw.GKSphereObstacle
+	obj.Object
 	WithRadius(radius float32) *SphereObstacle
 	Radius() float32
 	SetRadius(radius float32)
-	Position() unsafe.Pointer
-	SetPosition(position unsafe.Pointer)
 }
 
 var _ SphereObstacleable = (*SphereObstacle)(nil)
+
+var _ ObstacleProvider = (*SphereObstacle)(nil)

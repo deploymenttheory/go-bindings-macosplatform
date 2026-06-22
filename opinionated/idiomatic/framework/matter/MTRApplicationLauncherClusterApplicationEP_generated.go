@@ -5,60 +5,70 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRApplicationLauncherClusterApplicationEP wraps [raw.MTRApplicationLauncherClusterApplicationEP] with a fluent Go API.
+// MTRApplicationLauncherClusterApplicationEP is an idiomatic wrapper over the Objective-C class MTRApplicationLauncherClusterApplicationEP.
+//
+// It embeds [MTRApplicationLauncherClusterApplicationEPStruct], promoting that type's methods.
 type MTRApplicationLauncherClusterApplicationEP struct {
-	inner *raw.MTRApplicationLauncherClusterApplicationEP
+	MTRApplicationLauncherClusterApplicationEPStruct
 }
 
-// Unwrap returns the underlying [raw.MTRApplicationLauncherClusterApplicationEP].
-func (x *MTRApplicationLauncherClusterApplicationEP) Unwrap() *raw.MTRApplicationLauncherClusterApplicationEP {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRApplicationLauncherClusterApplicationEP) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRApplicationLauncherClusterApplicationEPFromID adopts an existing object pointer as a MTRApplicationLauncherClusterApplicationEP (nil for 0).
+// MTRApplicationLauncherClusterApplicationEPFromID adopts an existing Objective-C object as a MTRApplicationLauncherClusterApplicationEP
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRApplicationLauncherClusterApplicationEPFromID(id objc.ID) *MTRApplicationLauncherClusterApplicationEP {
 	if id == 0 {
 		return nil
 	}
-	return &MTRApplicationLauncherClusterApplicationEP{inner: raw.MTRApplicationLauncherClusterApplicationEPFromID(id)}
+	x := &MTRApplicationLauncherClusterApplicationEP{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRApplicationLauncherClusterApplicationEP creates a new [MTRApplicationLauncherClusterApplicationEP].
+// mTRApplicationLauncherClusterApplicationEPAdopt wraps an Objective-C object that this code just created as a
+// MTRApplicationLauncherClusterApplicationEP (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRApplicationLauncherClusterApplicationEPAdopt(id objc.ID) *MTRApplicationLauncherClusterApplicationEP {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRApplicationLauncherClusterApplicationEP{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRApplicationLauncherClusterApplicationEP creates a new MTRApplicationLauncherClusterApplicationEP.
 func NewMTRApplicationLauncherClusterApplicationEP() *MTRApplicationLauncherClusterApplicationEP {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRApplicationLauncherClusterApplicationEP")), objc.RegisterName("new"))
-	return &MTRApplicationLauncherClusterApplicationEP{inner: raw.MTRApplicationLauncherClusterApplicationEPFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRApplicationLauncherClusterApplicationEP")), objc.RegisterName("new"))
+	return mTRApplicationLauncherClusterApplicationEPAdopt(_id)
 }
 
-// WithApplication sets the application property and returns the receiver for chaining.
+// WithApplication sets the property and returns the receiver so calls can be chained.
 func (x *MTRApplicationLauncherClusterApplicationEP) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP {
-	x.inner.MTRApplicationLauncherClusterApplicationEPStruct.SetApplication(application.asMTRApplicationLauncherClusterApplicationStruct())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return x
 }
 
-// WithEndpoint sets the endpoint property and returns the receiver for chaining.
-func (x *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint *foundation.NSNumber) *MTRApplicationLauncherClusterApplicationEP {
-	x.inner.MTRApplicationLauncherClusterApplicationEPStruct.SetEndpoint(endpoint)
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
+func (x *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
-}
-
-func (x *MTRApplicationLauncherClusterApplicationEP) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct {
-	return &x.inner.MTRApplicationLauncherClusterApplicationEPStruct
 }
 
 // MTRApplicationLauncherClusterApplicationEPable is the interface implemented by [MTRApplicationLauncherClusterApplicationEP], for mocking and DI.
 type MTRApplicationLauncherClusterApplicationEPable interface {
-	Unwrap() *raw.MTRApplicationLauncherClusterApplicationEP
+	obj.Object
 	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP
-	WithEndpoint(endpoint *foundation.NSNumber) *MTRApplicationLauncherClusterApplicationEP
+	WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP
 }
 
 var _ MTRApplicationLauncherClusterApplicationEPable = (*MTRApplicationLauncherClusterApplicationEP)(nil)
+
+var _ MTRApplicationLauncherClusterApplicationEPStructProvider = (*MTRApplicationLauncherClusterApplicationEP)(nil)

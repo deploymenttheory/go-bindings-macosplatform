@@ -5,10 +5,11 @@
 package discrecordingui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// SetupPanelProvider is implemented by SetupPanel and any idiomatic type wrapping a DRSetupPanel subclass.
+// SetupPanelProvider is accepted wherever a DRSetupPanel (or one of its subclasses) is expected.
 type SetupPanelProvider interface {
-	asSetupPanel() *raw.DRSetupPanel
+	objref.Object
+	isSetupPanel()
 }

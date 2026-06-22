@@ -5,41 +5,76 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Image data inside an Intents extension or Intents UI extension.
+// Image is an idiomatic wrapper over the Objective-C class INImage.
 //
-// Image wraps [raw.INImage] with a fluent Go API.
+// Image data inside an Intents extension or Intents UI extension.
 type Image struct {
-	inner *raw.INImage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INImage].
-func (x *Image) Unwrap() *raw.INImage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Image) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageFromID adopts an existing object pointer as a Image (nil for 0).
+// ImageFromID adopts an existing Objective-C object as a Image
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageFromID(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	return &Image{inner: raw.INImageFromID(id)}
+	x := &Image{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImage creates a new [Image].
+// imageAdopt wraps an Objective-C object that this code just created as a
+// Image (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAdopt(id objc.ID) *Image {
+	if id == 0 {
+		return nil
+	}
+	x := &Image{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Image) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Image) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Image) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Image) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImage creates a new Image.
 func NewImage() *Image {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INImage")), objc.RegisterName("new"))
-	return &Image{inner: raw.INImageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("INImage")), objc.RegisterName("new"))
+	return imageAdopt(_id)
 }
 
 // Imageable is the interface implemented by [Image], for mocking and DI.
 type Imageable interface {
-	Unwrap() *raw.INImage
+	obj.Object
 }
 
 var _ Imageable = (*Image)(nil)

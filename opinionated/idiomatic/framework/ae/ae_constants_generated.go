@@ -5,21 +5,26 @@
 package ae
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ae"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KAERemoteProcessURLKey returns the value of the CoreFoundation reference constant kAERemoteProcessURLKey as an objc.ID.
-func KAERemoteProcessURLKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessURLKey()) }
+// KAERemoteProcessURLKey returns the value of the constant kAERemoteProcessURLKey.
+func KAERemoteProcessURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kAERemoteProcessURLKey")))
+}
 
-// KAERemoteProcessNameKey returns the value of the CoreFoundation reference constant kAERemoteProcessNameKey as an objc.ID.
-func KAERemoteProcessNameKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessNameKey()) }
+// KAERemoteProcessNameKey returns the value of the constant kAERemoteProcessNameKey.
+func KAERemoteProcessNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kAERemoteProcessNameKey")))
+}
 
-// KAERemoteProcessUserIDKey returns the value of the CoreFoundation reference constant kAERemoteProcessUserIDKey as an objc.ID.
-func KAERemoteProcessUserIDKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessUserIDKey()) }
+// KAERemoteProcessUserIDKey returns the value of the constant kAERemoteProcessUserIDKey.
+func KAERemoteProcessUserIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kAERemoteProcessUserIDKey")))
+}
 
-// KAERemoteProcessProcessIDKey returns the value of the CoreFoundation reference constant kAERemoteProcessProcessIDKey as an objc.ID.
-func KAERemoteProcessProcessIDKey() objc.ID {
-	return purego.CFConstant(raw.KAERemoteProcessProcessIDKey())
+// KAERemoteProcessProcessIDKey returns the value of the constant kAERemoteProcessProcessIDKey.
+func KAERemoteProcessProcessIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kAERemoteProcessProcessIDKey")))
 }

@@ -5,78 +5,86 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that updates the output at an index you specify.
+// ScatterLayer is an idiomatic wrapper over the Objective-C class MLCScatterLayer.
 //
-// ScatterLayer wraps [raw.MLCScatterLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that updates the output at an index you specify.
 type ScatterLayer struct {
-	inner *raw.MLCScatterLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCScatterLayer].
-func (x *ScatterLayer) Unwrap() *raw.MLCScatterLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScatterLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ScatterLayerFromID adopts an existing object pointer as a ScatterLayer (nil for 0).
+// ScatterLayerFromID adopts an existing Objective-C object as a ScatterLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ScatterLayerFromID(id objc.ID) *ScatterLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ScatterLayer{inner: raw.MLCScatterLayerFromID(id)}
+	x := &ScatterLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScatterLayer creates a new [ScatterLayer].
+// scatterLayerAdopt wraps an Objective-C object that this code just created as a
+// ScatterLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scatterLayerAdopt(id objc.ID) *ScatterLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ScatterLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewScatterLayer creates a new ScatterLayer.
 func NewScatterLayer() *ScatterLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCScatterLayer")), objc.RegisterName("new"))
-	return &ScatterLayer{inner: raw.MLCScatterLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCScatterLayer")), objc.RegisterName("new"))
+	return scatterLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *ScatterLayer) WithLabel(label string) *ScatterLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *ScatterLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   dimension @abstract   The dimension along which to index
-//
-// Dimension calls the underlying Dimension.
-func (x *ScatterLayer) Dimension() uint {
-	return x.inner.Dimension()
+// Dimension the dimension along which to index
+func (x *ScatterLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
 
-// @property   reductionType @abstract   The reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum.
-//
-// ReductionType calls the underlying ReductionType.
-func (x *ScatterLayer) ReductionType() MLCReductionType {
-	return MLCReductionType(x.inner.ReductionType())
+// ReductionType the reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum.
+func (x *ScatterLayer) ReductionType() ReductionType {
+	_r := objc.Send[ReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+	return _r
 }
-
-func (x *ScatterLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // ScatterLayerable is the interface implemented by [ScatterLayer], for mocking and DI.
 type ScatterLayerable interface {
-	Unwrap() *raw.MLCScatterLayer
+	obj.Object
 	WithLabel(label string) *ScatterLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer
-	Dimension() uint
-	ReductionType() MLCReductionType
+	Dimension() int
+	ReductionType() ReductionType
 }
 
 var _ ScatterLayerable = (*ScatterLayer)(nil)
+
+var _ LayerProvider = (*ScatterLayer)(nil)

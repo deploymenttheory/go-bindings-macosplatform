@@ -6,54 +6,88 @@ package usernotifications
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that modifies the content of a remote notification before it’s delivered to the user.
+// NotificationServiceExtension is an idiomatic wrapper over the Objective-C class UNNotificationServiceExtension.
 //
-// NotificationServiceExtension wraps [raw.UNNotificationServiceExtension] with a fluent Go API.
+// An object that modifies the content of a remote notification before it’s delivered to the user.
 type NotificationServiceExtension struct {
-	inner *raw.UNNotificationServiceExtension
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationServiceExtension].
-func (x *NotificationServiceExtension) Unwrap() *raw.UNNotificationServiceExtension { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationServiceExtension) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationServiceExtensionFromID adopts an existing object pointer as a NotificationServiceExtension (nil for 0).
+// NotificationServiceExtensionFromID adopts an existing Objective-C object as a NotificationServiceExtension
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationServiceExtensionFromID(id objc.ID) *NotificationServiceExtension {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationServiceExtension{inner: raw.UNNotificationServiceExtensionFromID(id)}
+	x := &NotificationServiceExtension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationServiceExtension creates a new [NotificationServiceExtension].
+// notificationServiceExtensionAdopt wraps an Objective-C object that this code just created as a
+// NotificationServiceExtension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationServiceExtensionAdopt(id objc.ID) *NotificationServiceExtension {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationServiceExtension{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationServiceExtension) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationServiceExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationServiceExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationServiceExtension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotificationServiceExtension creates a new NotificationServiceExtension.
 func NewNotificationServiceExtension() *NotificationServiceExtension {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationServiceExtension")), objc.RegisterName("new"))
-	return &NotificationServiceExtension{inner: raw.UNNotificationServiceExtensionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationServiceExtension")), objc.RegisterName("new"))
+	return notificationServiceExtensionAdopt(_id)
 }
 
-// Asks you to make any needed changes to the notification and notify the system when you’re done.
+// DidReceiveNotificationRequestWithContentHandler asks you to make any needed changes to the notification and notify the system when you’re done.
 //
 // DidReceiveNotificationRequestWithContentHandler blocks until the operation completes or ctx is cancelled.
-func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *raw.UNNotificationRequest) (*NotificationContent, error) {
+func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (result *NotificationContent, err error) {
 	type _result struct {
 		val *NotificationContent
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DidReceiveNotificationRequestWithContentHandler(request, func(_p0 *raw.UNNotificationContent) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &NotificationContent{inner: _p0}
-		}
+		_o.val = NotificationContentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didReceiveNotificationRequest:withContentHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -63,17 +97,15 @@ func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentH
 	}
 }
 
-// Tells you that the system is terminating your extension.
-//
-// ServiceExtensionTimeWillExpire calls the underlying ServiceExtensionTimeWillExpire.
+// ServiceExtensionTimeWillExpire tells you that the system is terminating your extension.
 func (x *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
-	x.inner.ServiceExtensionTimeWillExpire()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceExtensionTimeWillExpire"))
 }
 
 // NotificationServiceExtensionable is the interface implemented by [NotificationServiceExtension], for mocking and DI.
 type NotificationServiceExtensionable interface {
-	Unwrap() *raw.UNNotificationServiceExtension
-	DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *raw.UNNotificationRequest) (*NotificationContent, error)
+	obj.Object
+	DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (*NotificationContent, error)
 	ServiceExtensionTimeWillExpire()
 }
 

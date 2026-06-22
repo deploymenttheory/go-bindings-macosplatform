@@ -5,76 +5,60 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayStridedSlice wraps [raw.MPSNDArrayStridedSlice] with a fluent Go API.
+// ArrayStridedSlice is an idiomatic wrapper over the Objective-C class MPSNDArrayStridedSlice.
+//
+// It embeds [ArrayUnaryKernel], promoting that type's methods.
 type ArrayStridedSlice struct {
-	inner *raw.MPSNDArrayStridedSlice
+	ArrayUnaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayStridedSlice].
-func (x *ArrayStridedSlice) Unwrap() *raw.MPSNDArrayStridedSlice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayStridedSlice) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayStridedSliceFromID adopts an existing object pointer as a ArrayStridedSlice (nil for 0).
+// ArrayStridedSliceFromID adopts an existing Objective-C object as a ArrayStridedSlice
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayStridedSliceFromID(id objc.ID) *ArrayStridedSlice {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayStridedSlice{inner: raw.MPSNDArrayStridedSliceFromID(id)}
+	x := &ArrayStridedSlice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewArrayStridedSlice creates a new [ArrayStridedSlice].
+// arrayStridedSliceAdopt wraps an Objective-C object that this code just created as a
+// ArrayStridedSlice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayStridedSliceAdopt(id objc.ID) *ArrayStridedSlice {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayStridedSlice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewArrayStridedSlice creates a new ArrayStridedSlice.
 func NewArrayStridedSlice() *ArrayStridedSlice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayStridedSlice")), objc.RegisterName("new"))
-	return &ArrayStridedSlice{inner: raw.MPSNDArrayStridedSliceFromID(_id)}
-}
-
-// @property  strides @abstract  The strides to use when slicing the input array.
-//
-// WithStrides sets the strides property and returns the receiver for chaining.
-func (x *ArrayStridedSlice) WithStrides(strides raw.MPSNDArrayOffsets) *ArrayStridedSlice {
-	x.inner.SetStrides(strides)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayStridedSlice) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSlice {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
-}
-
-// SetStrides calls the underlying SetStrides.
-func (x *ArrayStridedSlice) SetStrides(strides raw.MPSNDArrayOffsets) {
-	x.inner.SetStrides(strides)
-}
-
-func (x *ArrayStridedSlice) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel {
-	return &x.inner.MPSNDArrayUnaryKernel
-}
-
-func (x *ArrayStridedSlice) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
-}
-
-func (x *ArrayStridedSlice) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayStridedSlice")), objc.RegisterName("new"))
+	return arrayStridedSliceAdopt(_id)
 }
 
 // ArrayStridedSliceable is the interface implemented by [ArrayStridedSlice], for mocking and DI.
 type ArrayStridedSliceable interface {
-	Unwrap() *raw.MPSNDArrayStridedSlice
-	WithStrides(strides raw.MPSNDArrayOffsets) *ArrayStridedSlice
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSlice
-	SetStrides(strides raw.MPSNDArrayOffsets)
+	obj.Object
 }
 
 var _ ArrayStridedSliceable = (*ArrayStridedSlice)(nil)
+
+var _ ArrayUnaryKernelProvider = (*ArrayStridedSlice)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayStridedSlice)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayStridedSlice)(nil)

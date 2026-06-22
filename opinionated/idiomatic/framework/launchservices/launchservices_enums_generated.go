@@ -16,6 +16,8 @@ const (
 	KLSAcceptAllowLoginUI LSAcceptanceFlags = 2
 )
 
+// String returns the LSAcceptanceFlags constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LSAcceptanceFlags) String() string {
 	var parts []string
 	if e&KLSAcceptDefault != 0 {
@@ -40,6 +42,8 @@ const (
 	KLSHandlerOptionsIgnoreCreator LSHandlerOptions = 1
 )
 
+// String returns the LSHandlerOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LSHandlerOptions) String() string {
 	var parts []string
 	if e&KLSHandlerOptionsIgnoreCreator != 0 {
@@ -65,6 +69,8 @@ const (
 	KLSRequestAllInfo            LSRequestedInfo = 4294967295
 )
 
+// String returns the LSRequestedInfo constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LSRequestedInfo) String() string {
 	var parts []string
 	if e&KLSRequestExtension != 0 {
@@ -108,6 +114,8 @@ const (
 	KLSRolesAll    LSRolesMask = 4294967295
 )
 
+// String returns the LSRolesMask constant's name, or its numeric form when the
+// value is not a known constant.
 func (e LSRolesMask) String() string {
 	var parts []string
 	if e&KLSRolesNone != 0 {

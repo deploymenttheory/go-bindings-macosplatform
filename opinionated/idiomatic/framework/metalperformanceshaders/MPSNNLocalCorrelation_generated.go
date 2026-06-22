@@ -5,348 +5,247 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNLocalCorrelation wraps [raw.MPSNNLocalCorrelation] with a fluent Go API.
+// NNLocalCorrelation is an idiomatic wrapper over the Objective-C class MPSNNLocalCorrelation.
+//
+// It embeds [NNReduceBinary], promoting that type's methods.
 type NNLocalCorrelation struct {
-	inner *raw.MPSNNLocalCorrelation
+	NNReduceBinary
 }
 
-// Unwrap returns the underlying [raw.MPSNNLocalCorrelation].
-func (x *NNLocalCorrelation) Unwrap() *raw.MPSNNLocalCorrelation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNLocalCorrelation) ID() objc.ID { return x.inner.Ptr() }
-
-// NNLocalCorrelationFromID adopts an existing object pointer as a NNLocalCorrelation (nil for 0).
+// NNLocalCorrelationFromID adopts an existing Objective-C object as a NNLocalCorrelation
+// (nil for 0), retaining it and registering a release finalizer.
 func NNLocalCorrelationFromID(id objc.ID) *NNLocalCorrelation {
 	if id == 0 {
 		return nil
 	}
-	return &NNLocalCorrelation{inner: raw.MPSNNLocalCorrelationFromID(id)}
-}
-
-// @abstract  Initialize the MPSNNLocalCorrelation filter with default property values. @param     device            The device the filter will run on @return    A valid MPSNNReduceLocalCorrelation object or nil, if failure.
-//
-// NewNNLocalCorrelationWithDevice creates a new [NNLocalCorrelation].
-func NewNNLocalCorrelationWithDevice(device metal.MTLDevice) *NNLocalCorrelation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLocalCorrelation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNLocalCorrelation{inner: raw.MPSNNLocalCorrelationFromID(_id)}
-}
-
-// @abstract Specifies information to apply the local correlation operation on an image. @param    device                The device the filter will run on @param    windowInX             Specifies a symmetric window around 0 for offsetting the secondary source in the x dimension. @param    windowInY             Specifies a symmetric window around 0 for offsetting the secondary source in the y dimension. @param    strideInX             Specifies the stride for the offset in the x dimension. @param    strideInY             Specifies the stride for the offset in the y dimension. @return   A valid MPSNNReduceLocalCorrelation object or nil, if failure.
-//
-// NewNNLocalCorrelationWithDeviceWindowInXWindowInYStrideInXStrideInY creates a new [NNLocalCorrelation].
-func NewNNLocalCorrelationWithDeviceWindowInXWindowInYStrideInXStrideInY(device metal.MTLDevice, windowInX uint, windowInY uint, strideInX uint, strideInY uint) *NNLocalCorrelation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLocalCorrelation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:windowInX:windowInY:strideInX:strideInY:"), device, windowInX, windowInY, strideInX, strideInY)
-	return &NNLocalCorrelation{inner: raw.MPSNNLocalCorrelationFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
-//
-// NewNNLocalCorrelationWithCoderDevice creates a new [NNLocalCorrelation].
-func NewNNLocalCorrelationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNLocalCorrelation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLocalCorrelation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNLocalCorrelation{inner: raw.MPSNNLocalCorrelationFromID(_id)}
-}
-
-// @abstract   Specifies a symmetric window around 0 for offsetting the secondary source in the x dimension. @discussion The default value for windowInX is 0.
-//
-// WithWindowInX sets the windowInX property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithWindowInX(windowInX uint) *NNLocalCorrelation {
-	x.inner.SetWindowInX(windowInX)
+	x := &NNLocalCorrelation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Specifies a symmetric window around 0 for offsetting the secondary source in the y dimension. @discussion The default value for windowInY is 0.
-//
-// WithWindowInY sets the windowInY property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithWindowInY(windowInY uint) *NNLocalCorrelation {
-	x.inner.SetWindowInY(windowInY)
+// nNLocalCorrelationAdopt wraps an Objective-C object that this code just created as a
+// NNLocalCorrelation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNLocalCorrelationAdopt(id objc.ID) *NNLocalCorrelation {
+	if id == 0 {
+		return nil
+	}
+	x := &NNLocalCorrelation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Specifies the stride for the offset in the x dimension. @discussion strideInX must be > 0. The default value for strideInX is 1.
-//
-// WithStrideInX sets the strideInX property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithStrideInX(strideInX uint) *NNLocalCorrelation {
-	x.inner.SetStrideInX(strideInX)
+// NewNNLocalCorrelation creates a new NNLocalCorrelation.
+func NewNNLocalCorrelation() *NNLocalCorrelation {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNLocalCorrelation")), objc.RegisterName("new"))
+	return nNLocalCorrelationAdopt(_id)
+}
+
+// WithWindowInX specifies a symmetric window around 0 for offsetting the secondary source in the x dimension. The default value for windowInX is 0.
+func (x *NNLocalCorrelation) WithWindowInX(windowInX int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowInX:"), windowInX)
 	return x
 }
 
-// @abstract   Specifies the stride for the offset in the y dimension. @discussion strideInY must be > 0. The default value for strideInY is 1.
-//
-// WithStrideInY sets the strideInY property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithStrideInY(strideInY uint) *NNLocalCorrelation {
-	x.inner.SetStrideInY(strideInY)
+// WithWindowInY specifies a symmetric window around 0 for offsetting the secondary source in the y dimension. The default value for windowInY is 0.
+func (x *NNLocalCorrelation) WithWindowInY(windowInY int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowInY:"), windowInY)
 	return x
 }
 
-// @abstract   The source rectangle to use when reading data from primary source @discussion A MTLRegion that indicates which part of the primary source to read. If the clipRectPrimarySource does not lie completely within the primary source image, the intersection of the image bounds and clipRectPrimarySource will be used. The primarySourceClipRect replaces the MPSBinaryImageKernel primaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithPrimarySourceClipRect sets the primarySourceClipRect property and returns the receiver for chaining.
+// WithStrideInX specifies the stride for the offset in the x dimension. strideInX must be > 0. The default value for strideInX is 1.
+func (x *NNLocalCorrelation) WithStrideInX(strideInX int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
+	return x
+}
+
+// WithStrideInY specifies the stride for the offset in the y dimension. strideInY must be > 0. The default value for strideInY is 1.
+func (x *NNLocalCorrelation) WithStrideInY(strideInY int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
+	return x
+}
+
+// WithPrimarySourceClipRect the source rectangle to use when reading data from primary source A MTLRegion that indicates which part of the primary source to read. If the clipRectPrimarySource does not lie completely within the primary source image, the intersection of the image bounds and clipRectPrimarySource will be used. The primarySourceClipRect replaces the MPSBinaryImageKernel primaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (x *NNLocalCorrelation) WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.SetPrimarySourceClipRect(primarySourceClipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceClipRect:"), primarySourceClipRect)
 	return x
 }
 
-// @abstract   The source rectangle to use when reading data from secondary source @discussion A MTLRegion that indicates which part of the secondary source to read. If the clipRectSecondarySource does not lie completely within the secondary source image, the intersection of the image bounds and clipRectSecondarySource will be used. The secondarySourceClipRect replaces the MPSBinaryImageKernel secondaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithSecondarySourceClipRect sets the secondarySourceClipRect property and returns the receiver for chaining.
+// WithSecondarySourceClipRect the source rectangle to use when reading data from secondary source A MTLRegion that indicates which part of the secondary source to read. If the clipRectSecondarySource does not lie completely within the secondary source image, the intersection of the image bounds and clipRectSecondarySource will be used. The secondarySourceClipRect replaces the MPSBinaryImageKernel secondaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (x *NNLocalCorrelation) WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.SetSecondarySourceClipRect(secondarySourceClipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceClipRect:"), secondarySourceClipRect)
 	return x
 }
 
-// @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+// WithPrimaryOffset since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
 func (x *NNLocalCorrelation) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.SetPrimaryOffset(primaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
 	return x
 }
 
-// @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+// WithSecondaryOffset since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
 func (x *NNLocalCorrelation) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.SetSecondaryOffset(secondaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
 func (x *NNLocalCorrelation) WithClipRect(clipRect metal.MTLRegion) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (x *NNLocalCorrelation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (x *NNLocalCorrelation) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (x *NNLocalCorrelation) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *NNLocalCorrelation) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *NNLocalCorrelation) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *NNLocalCorrelation) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *NNLocalCorrelation) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *NNLocalCorrelation) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *NNLocalCorrelation) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNLocalCorrelation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
-	return x
-}
-
-// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNLocalCorrelation) WithOptions(options mpscore.MPSKernelOptions) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NNLocalCorrelation) WithLabel(label string) *NNLocalCorrelation {
-	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Specifies a symmetric window around 0 for offsetting the secondary source in the x dimension. @discussion The default value for windowInX is 0.
-//
-// WindowInX calls the underlying WindowInX.
-func (x *NNLocalCorrelation) WindowInX() uint {
-	return x.inner.WindowInX()
+// WindowInX specifies a symmetric window around 0 for offsetting the secondary source in the x dimension. The default value for windowInX is 0.
+func (x *NNLocalCorrelation) WindowInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowInX"))
+	return _r
 }
 
-// SetWindowInX calls the underlying SetWindowInX.
-func (x *NNLocalCorrelation) SetWindowInX(windowInX uint) {
-	x.inner.SetWindowInX(windowInX)
+// SetWindowInX wraps the corresponding Objective-C method.
+func (x *NNLocalCorrelation) SetWindowInX(windowInX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowInX:"), windowInX)
 }
 
-// @abstract   Specifies a symmetric window around 0 for offsetting the secondary source in the y dimension. @discussion The default value for windowInY is 0.
-//
-// WindowInY calls the underlying WindowInY.
-func (x *NNLocalCorrelation) WindowInY() uint {
-	return x.inner.WindowInY()
+// WindowInY specifies a symmetric window around 0 for offsetting the secondary source in the y dimension. The default value for windowInY is 0.
+func (x *NNLocalCorrelation) WindowInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowInY"))
+	return _r
 }
 
-// SetWindowInY calls the underlying SetWindowInY.
-func (x *NNLocalCorrelation) SetWindowInY(windowInY uint) {
-	x.inner.SetWindowInY(windowInY)
+// SetWindowInY wraps the corresponding Objective-C method.
+func (x *NNLocalCorrelation) SetWindowInY(windowInY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowInY:"), windowInY)
 }
 
-// @abstract   Specifies the stride for the offset in the x dimension. @discussion strideInX must be > 0. The default value for strideInX is 1.
-//
-// StrideInX calls the underlying StrideInX.
-func (x *NNLocalCorrelation) StrideInX() uint {
-	return x.inner.StrideInX()
+// StrideInX specifies the stride for the offset in the x dimension. strideInX must be > 0. The default value for strideInX is 1.
+func (x *NNLocalCorrelation) StrideInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
+	return _r
 }
 
-// SetStrideInX calls the underlying SetStrideInX.
-func (x *NNLocalCorrelation) SetStrideInX(strideInX uint) {
-	x.inner.SetStrideInX(strideInX)
+// SetStrideInX wraps the corresponding Objective-C method.
+func (x *NNLocalCorrelation) SetStrideInX(strideInX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 }
 
-// @abstract   Specifies the stride for the offset in the y dimension. @discussion strideInY must be > 0. The default value for strideInY is 1.
-//
-// StrideInY calls the underlying StrideInY.
-func (x *NNLocalCorrelation) StrideInY() uint {
-	return x.inner.StrideInY()
+// StrideInY specifies the stride for the offset in the y dimension. strideInY must be > 0. The default value for strideInY is 1.
+func (x *NNLocalCorrelation) StrideInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
+	return _r
 }
 
-// SetStrideInY calls the underlying SetStrideInY.
-func (x *NNLocalCorrelation) SetStrideInY(strideInY uint) {
-	x.inner.SetStrideInY(strideInY)
-}
-
-func (x *NNLocalCorrelation) asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary {
-	return &x.inner.MPSNNReduceBinary
-}
-
-func (x *NNLocalCorrelation) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
-	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel
-}
-
-func (x *NNLocalCorrelation) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel
+// SetStrideInY wraps the corresponding Objective-C method.
+func (x *NNLocalCorrelation) SetStrideInY(strideInY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 }
 
 // NNLocalCorrelationable is the interface implemented by [NNLocalCorrelation], for mocking and DI.
 type NNLocalCorrelationable interface {
-	Unwrap() *raw.MPSNNLocalCorrelation
-	WithWindowInX(windowInX uint) *NNLocalCorrelation
-	WithWindowInY(windowInY uint) *NNLocalCorrelation
-	WithStrideInX(strideInX uint) *NNLocalCorrelation
-	WithStrideInY(strideInY uint) *NNLocalCorrelation
+	obj.Object
+	WithWindowInX(windowInX int) *NNLocalCorrelation
+	WithWindowInY(windowInY int) *NNLocalCorrelation
+	WithStrideInX(strideInX int) *NNLocalCorrelation
+	WithStrideInY(strideInY int) *NNLocalCorrelation
 	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNLocalCorrelation
 	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNLocalCorrelation
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLocalCorrelation
 	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLocalCorrelation
 	WithClipRect(clipRect metal.MTLRegion) *NNLocalCorrelation
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLocalCorrelation
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLocalCorrelation
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLocalCorrelation
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLocalCorrelation
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLocalCorrelation
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLocalCorrelation
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLocalCorrelation
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLocalCorrelation
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLocalCorrelation
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNLocalCorrelation
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLocalCorrelation
-	WithOptions(options mpscore.MPSKernelOptions) *NNLocalCorrelation
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNLocalCorrelation
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNLocalCorrelation
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNLocalCorrelation
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNLocalCorrelation
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNLocalCorrelation
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNLocalCorrelation
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNLocalCorrelation
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNLocalCorrelation
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNLocalCorrelation
 	WithLabel(label string) *NNLocalCorrelation
-	WindowInX() uint
-	SetWindowInX(windowInX uint)
-	WindowInY() uint
-	SetWindowInY(windowInY uint)
-	StrideInX() uint
-	SetStrideInX(strideInX uint)
-	StrideInY() uint
-	SetStrideInY(strideInY uint)
+	WindowInX() int
+	SetWindowInX(windowInX int)
+	WindowInY() int
+	SetWindowInY(windowInY int)
+	StrideInX() int
+	SetStrideInX(strideInX int)
+	StrideInY() int
+	SetStrideInY(strideInY int)
 }
 
 var _ NNLocalCorrelationable = (*NNLocalCorrelation)(nil)
+
+var _ NNReduceBinaryProvider = (*NNLocalCorrelation)(nil)
+
+var _ CNNBinaryKernelProvider = (*NNLocalCorrelation)(nil)
+
+var _ KernelProvider = (*NNLocalCorrelation)(nil)

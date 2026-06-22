@@ -5,107 +5,133 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to specify attributes to create and style a drop shadow during drawing operations.
+// Shadow is an idiomatic wrapper over the Objective-C class NSShadow.
 //
-// Shadow wraps [raw.NSShadow] with a fluent Go API.
+// An object you use to specify attributes to create and style a drop shadow during drawing operations.
 type Shadow struct {
-	inner *raw.NSShadow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSShadow].
-func (x *Shadow) Unwrap() *raw.NSShadow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Shadow) ID() objc.ID { return x.inner.Ptr() }
-
-// ShadowFromID adopts an existing object pointer as a Shadow (nil for 0).
+// ShadowFromID adopts an existing Objective-C object as a Shadow
+// (nil for 0), retaining it and registering a release finalizer.
 func ShadowFromID(id objc.ID) *Shadow {
 	if id == 0 {
 		return nil
 	}
-	return &Shadow{inner: raw.NSShadowFromID(id)}
-}
-
-// NewShadow creates a new [Shadow].
-func NewShadow() *Shadow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSShadow")), objc.RegisterName("new"))
-	return &Shadow{inner: raw.NSShadowFromID(_id)}
-}
-
-// The shadow’s relative position, which you specify with horizontal and vertical offset values.
-//
-// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
-func (x *Shadow) WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow {
-	x.inner.SetShadowOffset(shadowOffset)
+	x := &Shadow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The blur radius of the shadow.
-//
-// WithShadowBlurRadius sets the shadowBlurRadius property and returns the receiver for chaining.
-func (x *Shadow) WithShadowBlurRadius(shadowBlurRadius float64) *Shadow {
-	x.inner.SetShadowBlurRadius(shadowBlurRadius)
-	return x
-}
-
-// The color of the shadow.
-//
-// WithShadowColor sets the shadowColor property and returns the receiver for chaining.
-func (x *Shadow) WithShadowColor(shadowColor *Color) *Shadow {
-	x.inner.SetShadowColor(shadowColor.Unwrap())
-	return x
-}
-
-// Sets the shadow of subsequent drawing operations to the current shadow.
-//
-// Set calls the underlying Set.
-func (x *Shadow) Set() {
-	x.inner.Set()
-}
-
-// ShadowOffset calls the underlying ShadowOffset.
-func (x *Shadow) ShadowOffset() corefoundation.CGSize {
-	return x.inner.ShadowOffset()
-}
-
-// SetShadowOffset calls the underlying SetShadowOffset.
-func (x *Shadow) SetShadowOffset(shadowOffset corefoundation.CGSize) {
-	x.inner.SetShadowOffset(shadowOffset)
-}
-
-// ShadowBlurRadius calls the underlying ShadowBlurRadius.
-func (x *Shadow) ShadowBlurRadius() float64 {
-	return x.inner.ShadowBlurRadius()
-}
-
-// SetShadowBlurRadius calls the underlying SetShadowBlurRadius.
-func (x *Shadow) SetShadowBlurRadius(shadowBlurRadius float64) {
-	x.inner.SetShadowBlurRadius(shadowBlurRadius)
-}
-
-// ShadowColor calls the underlying ShadowColor.
-func (x *Shadow) ShadowColor() *Color {
-	_r := x.inner.ShadowColor()
-	if _r == nil {
+// shadowAdopt wraps an Objective-C object that this code just created as a
+// Shadow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shadowAdopt(id objc.ID) *Shadow {
+	if id == 0 {
 		return nil
 	}
-	return &Color{inner: _r}
+	x := &Shadow{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetShadowColor calls the underlying SetShadowColor.
-func (x *Shadow) SetShadowColor(shadowColor *raw.NSColor) {
-	x.inner.SetShadowColor(shadowColor)
+// Description returns the object's -description text.
+func (x *Shadow) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Shadow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Shadow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shadow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShadow creates a new Shadow.
+func NewShadow() *Shadow {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSShadow")), objc.RegisterName("new"))
+	return shadowAdopt(_id)
+}
+
+// WithShadowOffset the shadow’s relative position, which you specify with horizontal and vertical offset values.
+func (x *Shadow) WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return x
+}
+
+// WithShadowBlurRadius the blur radius of the shadow.
+func (x *Shadow) WithShadowBlurRadius(shadowBlurRadius float64) *Shadow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBlurRadius:"), shadowBlurRadius)
+	return x
+}
+
+// WithShadowColor the color of the shadow.
+func (x *Shadow) WithShadowColor(shadowColor *Color) *Shadow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return x
+}
+
+// Set sets the shadow of subsequent drawing operations to the current shadow.
+func (x *Shadow) Set() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+}
+
+// ShadowOffset wraps the corresponding Objective-C method.
+func (x *Shadow) ShadowOffset() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("shadowOffset"))
+	return _r
+}
+
+// SetShadowOffset wraps the corresponding Objective-C method.
+func (x *Shadow) SetShadowOffset(shadowOffset corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+}
+
+// ShadowBlurRadius wraps the corresponding Objective-C method.
+func (x *Shadow) ShadowBlurRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shadowBlurRadius"))
+	return _r
+}
+
+// SetShadowBlurRadius wraps the corresponding Objective-C method.
+func (x *Shadow) SetShadowBlurRadius(shadowBlurRadius float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBlurRadius:"), shadowBlurRadius)
+}
+
+// ShadowColor wraps the corresponding Objective-C method.
+func (x *Shadow) ShadowColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowColor"))
+	return ColorFromID(_r)
+}
+
+// SetShadowColor wraps the corresponding Objective-C method.
+func (x *Shadow) SetShadowColor(shadowColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 }
 
 // Shadowable is the interface implemented by [Shadow], for mocking and DI.
 type Shadowable interface {
-	Unwrap() *raw.NSShadow
+	obj.Object
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow
 	WithShadowBlurRadius(shadowBlurRadius float64) *Shadow
 	WithShadowColor(shadowColor *Color) *Shadow
@@ -115,7 +141,7 @@ type Shadowable interface {
 	ShadowBlurRadius() float64
 	SetShadowBlurRadius(shadowBlurRadius float64)
 	ShadowColor() *Color
-	SetShadowColor(shadowColor *raw.NSColor)
+	SetShadowColor(shadowColor *Color)
 }
 
 var _ Shadowable = (*Shadow)(nil)

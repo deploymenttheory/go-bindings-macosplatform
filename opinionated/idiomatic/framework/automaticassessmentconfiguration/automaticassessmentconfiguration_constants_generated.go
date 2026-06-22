@@ -5,17 +5,16 @@
 package automaticassessmentconfiguration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// AENotInstalledParticipantsKey returns the string constant AENotInstalledParticipantsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AENotInstalledParticipantsKey() objc.ID {
-	return purego.CFConstant(raw.AENotInstalledParticipantsKey())
+// AENotInstalledParticipantsKey returns the string constant AENotInstalledParticipantsKey, for use as a dictionary key or argument.
+func AENotInstalledParticipantsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AENotInstalledParticipantsKey")))
 }
 
-// AERestrictedSystemParticipantsKey returns the string constant AERestrictedSystemParticipantsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AERestrictedSystemParticipantsKey() objc.ID {
-	return purego.CFConstant(raw.AERestrictedSystemParticipantsKey())
+// AERestrictedSystemParticipantsKey returns the string constant AERestrictedSystemParticipantsKey, for use as a dictionary key or argument.
+func AERestrictedSystemParticipantsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AERestrictedSystemParticipantsKey")))
 }

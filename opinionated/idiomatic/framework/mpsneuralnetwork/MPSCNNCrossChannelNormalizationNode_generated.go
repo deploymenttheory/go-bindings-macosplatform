@@ -5,122 +5,114 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNCrossChannelNormalizationNode wraps [raw.MPSCNNCrossChannelNormalizationNode] with a fluent Go API.
+// CNNCrossChannelNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNCrossChannelNormalizationNode.
+//
+// It embeds [CNNNormalizationNode], promoting that type's methods.
 type CNNCrossChannelNormalizationNode struct {
-	inner *raw.MPSCNNCrossChannelNormalizationNode
+	CNNNormalizationNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNCrossChannelNormalizationNode].
-func (x *CNNCrossChannelNormalizationNode) Unwrap() *raw.MPSCNNCrossChannelNormalizationNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNCrossChannelNormalizationNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNCrossChannelNormalizationNodeFromID adopts an existing object pointer as a CNNCrossChannelNormalizationNode (nil for 0).
+// CNNCrossChannelNormalizationNodeFromID adopts an existing Objective-C object as a CNNCrossChannelNormalizationNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNCrossChannelNormalizationNodeFromID(id objc.ID) *CNNCrossChannelNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNCrossChannelNormalizationNode{inner: raw.MPSCNNCrossChannelNormalizationNodeFromID(id)}
-}
-
-// NewCNNCrossChannelNormalizationNodeWithSourceKernelSize creates a new [CNNCrossChannelNormalizationNode].
-func NewCNNCrossChannelNormalizationNodeWithSourceKernelSize(sourceNode *raw.MPSNNImageNode, kernelSize uint) *CNNCrossChannelNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), sourceNode.Ptr(), kernelSize)
-	return &CNNCrossChannelNormalizationNode{inner: raw.MPSCNNCrossChannelNormalizationNodeFromID(_id)}
-}
-
-// NewCNNCrossChannelNormalizationNodeWithSource creates a new [CNNCrossChannelNormalizationNode].
-func NewCNNCrossChannelNormalizationNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNCrossChannelNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &CNNCrossChannelNormalizationNode{inner: raw.MPSCNNCrossChannelNormalizationNodeFromID(_id)}
-}
-
-// WithKernelSizeInFeatureChannels sets the kernelSizeInFeatureChannels property and returns the receiver for chaining.
-func (x *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) *CNNCrossChannelNormalizationNode {
-	x.inner.SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels)
+	x := &CNNCrossChannelNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property   alpha @abstract   The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// cNNCrossChannelNormalizationNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNCrossChannelNormalizationNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNCrossChannelNormalizationNodeAdopt(id objc.ID) *CNNCrossChannelNormalizationNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNCrossChannelNormalizationNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNCrossChannelNormalizationNodeWithSourceKernelSize creates a new CNNCrossChannelNormalizationNode.
+func NewCNNCrossChannelNormalizationNodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNCrossChannelNormalizationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
+	return cNNCrossChannelNormalizationNodeAdopt(_id)
+}
+
+// NewCNNCrossChannelNormalizationNodeWithSource creates a new CNNCrossChannelNormalizationNode.
+func NewCNNCrossChannelNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNCrossChannelNormalizationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return cNNCrossChannelNormalizationNodeAdopt(_id)
+}
+
+// WithKernelSizeInFeatureChannels sets the property and returns the receiver so calls can be chained.
+func (x *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
+	return x
+}
+
+// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNCrossChannelNormalizationNode) WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   beta @abstract   The value of beta.  Default is 5.0
-//
-// WithBeta sets the beta property and returns the receiver for chaining.
+// WithBeta the value of beta.  Default is 5.0
 func (x *CNNCrossChannelNormalizationNode) WithBeta(beta float32) *CNNCrossChannelNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// @property   delta @abstract   The value of delta.  Default is 1.0
-//
-// WithDelta sets the delta property and returns the receiver for chaining.
+// WithDelta the value of delta.  Default is 1.0
 func (x *CNNCrossChannelNormalizationNode) WithDelta(delta float32) *CNNCrossChannelNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.SetDelta(delta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNCrossChannelNormalizationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNCrossChannelNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCrossChannelNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// KernelSizeInFeatureChannels calls the underlying KernelSizeInFeatureChannels.
-func (x *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() uint {
-	return x.inner.KernelSizeInFeatureChannels()
+// KernelSizeInFeatureChannels wraps the corresponding Objective-C method.
+func (x *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelSizeInFeatureChannels"))
+	return _r
 }
 
-// SetKernelSizeInFeatureChannels calls the underlying SetKernelSizeInFeatureChannels.
-func (x *CNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) {
-	x.inner.SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels)
-}
-
-func (x *CNNCrossChannelNormalizationNode) asCNNNormalizationNode() *raw.MPSCNNNormalizationNode {
-	return &x.inner.MPSCNNNormalizationNode
-}
-
-func (x *CNNCrossChannelNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode
+// SetKernelSizeInFeatureChannels wraps the corresponding Objective-C method.
+func (x *CNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
 }
 
 // CNNCrossChannelNormalizationNodeable is the interface implemented by [CNNCrossChannelNormalizationNode], for mocking and DI.
 type CNNCrossChannelNormalizationNodeable interface {
-	Unwrap() *raw.MPSCNNCrossChannelNormalizationNode
-	WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) *CNNCrossChannelNormalizationNode
+	obj.Object
+	WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode
 	WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode
 	WithBeta(beta float32) *CNNCrossChannelNormalizationNode
 	WithDelta(delta float32) *CNNCrossChannelNormalizationNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNCrossChannelNormalizationNode
 	WithLabel(label string) *CNNCrossChannelNormalizationNode
-	KernelSizeInFeatureChannels() uint
-	SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint)
+	KernelSizeInFeatureChannels() int
+	SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int)
 }
 
 var _ CNNCrossChannelNormalizationNodeable = (*CNNCrossChannelNormalizationNode)(nil)
+
+var _ CNNNormalizationNodeProvider = (*CNNCrossChannelNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNCrossChannelNormalizationNode)(nil)

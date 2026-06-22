@@ -5,83 +5,115 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROperationalStateClusterOperationalStateStruct wraps [raw.MTROperationalStateClusterOperationalStateStruct] with a fluent Go API.
+// MTROperationalStateClusterOperationalStateStruct is an idiomatic wrapper over the Objective-C class MTROperationalStateClusterOperationalStateStruct.
 type MTROperationalStateClusterOperationalStateStruct struct {
-	inner *raw.MTROperationalStateClusterOperationalStateStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalStateStruct].
-func (x *MTROperationalStateClusterOperationalStateStruct) Unwrap() *raw.MTROperationalStateClusterOperationalStateStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalStateClusterOperationalStateStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalStateClusterOperationalStateStructFromID adopts an existing object pointer as a MTROperationalStateClusterOperationalStateStruct (nil for 0).
+// MTROperationalStateClusterOperationalStateStructFromID adopts an existing Objective-C object as a MTROperationalStateClusterOperationalStateStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalStateClusterOperationalStateStructFromID(id objc.ID) *MTROperationalStateClusterOperationalStateStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalStateClusterOperationalStateStruct{inner: raw.MTROperationalStateClusterOperationalStateStructFromID(id)}
+	x := &MTROperationalStateClusterOperationalStateStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTROperationalStateClusterOperationalStateStruct creates a new [MTROperationalStateClusterOperationalStateStruct].
+// mTROperationalStateClusterOperationalStateStructAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalStateClusterOperationalStateStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalStateClusterOperationalStateStructAdopt(id objc.ID) *MTROperationalStateClusterOperationalStateStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROperationalStateClusterOperationalStateStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROperationalStateClusterOperationalStateStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalStateClusterOperationalStateStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalStateClusterOperationalStateStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalStateClusterOperationalStateStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROperationalStateClusterOperationalStateStruct creates a new MTROperationalStateClusterOperationalStateStruct.
 func NewMTROperationalStateClusterOperationalStateStruct() *MTROperationalStateClusterOperationalStateStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalStateClusterOperationalStateStruct")), objc.RegisterName("new"))
-	return &MTROperationalStateClusterOperationalStateStruct{inner: raw.MTROperationalStateClusterOperationalStateStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalStateClusterOperationalStateStruct")), objc.RegisterName("new"))
+	return mTROperationalStateClusterOperationalStateStructAdopt(_id)
 }
 
-// WithOperationalStateID sets the operationalStateID property and returns the receiver for chaining.
-func (x *MTROperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID *foundation.NSNumber) *MTROperationalStateClusterOperationalStateStruct {
-	x.inner.SetOperationalStateID(operationalStateID)
+// WithOperationalStateID sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID obj.Object) *MTROperationalStateClusterOperationalStateStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
 	return x
 }
 
-// WithOperationalStateLabel sets the operationalStateLabel property and returns the receiver for chaining.
+// WithOperationalStateLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalStateClusterOperationalStateStruct) WithOperationalStateLabel(operationalStateLabel string) *MTROperationalStateClusterOperationalStateStruct {
-	x.inner.SetOperationalStateLabel(foundation.NSStringStringWithUTF8String(operationalStateLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
 	return x
 }
 
-// OperationalStateID calls the underlying OperationalStateID.
-func (x *MTROperationalStateClusterOperationalStateStruct) OperationalStateID() *foundation.NSNumber {
-	return x.inner.OperationalStateID()
+// OperationalStateID wraps the corresponding Objective-C method.
+func (x *MTROperationalStateClusterOperationalStateStruct) OperationalStateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalStateID"))
+	return obj.Wrap(_r)
 }
 
-// SetOperationalStateID calls the underlying SetOperationalStateID.
-func (x *MTROperationalStateClusterOperationalStateStruct) SetOperationalStateID(operationalStateID *foundation.NSNumber) {
-	x.inner.SetOperationalStateID(operationalStateID)
+// SetOperationalStateID wraps the corresponding Objective-C method.
+func (x *MTROperationalStateClusterOperationalStateStruct) SetOperationalStateID(operationalStateID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
 }
 
-// OperationalStateLabel calls the underlying OperationalStateLabel.
+// OperationalStateLabel wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
-	_r := x.inner.OperationalStateLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalStateLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOperationalStateLabel calls the underlying SetOperationalStateLabel.
+// SetOperationalStateLabel wraps the corresponding Objective-C method.
 func (x *MTROperationalStateClusterOperationalStateStruct) SetOperationalStateLabel(operationalStateLabel string) {
-	x.inner.SetOperationalStateLabel(foundation.NSStringStringWithUTF8String(operationalStateLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
 }
 
 // MTROperationalStateClusterOperationalStateStructable is the interface implemented by [MTROperationalStateClusterOperationalStateStruct], for mocking and DI.
 type MTROperationalStateClusterOperationalStateStructable interface {
-	Unwrap() *raw.MTROperationalStateClusterOperationalStateStruct
-	WithOperationalStateID(operationalStateID *foundation.NSNumber) *MTROperationalStateClusterOperationalStateStruct
+	obj.Object
+	WithOperationalStateID(operationalStateID obj.Object) *MTROperationalStateClusterOperationalStateStruct
 	WithOperationalStateLabel(operationalStateLabel string) *MTROperationalStateClusterOperationalStateStruct
-	OperationalStateID() *foundation.NSNumber
-	SetOperationalStateID(operationalStateID *foundation.NSNumber)
+	OperationalStateID() obj.Object
+	SetOperationalStateID(operationalStateID obj.Object)
 	OperationalStateLabel() string
 	SetOperationalStateLabel(operationalStateLabel string)
 }

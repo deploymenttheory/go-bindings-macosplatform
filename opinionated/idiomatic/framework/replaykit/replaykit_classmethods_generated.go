@@ -6,32 +6,30 @@ package replaykit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
+// ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier presents a list of available broadcast services for the user to select.
+//
 // ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier blocks until the operation completes or ctx is cancelled.
-func ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier(ctx context.Context, point corefoundation.CGPoint, window *appkit.NSWindow, preferredExtension string) (*BroadcastActivityController, error) {
+func ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier(ctx context.Context, point corefoundation.CGPoint, window obj.Object, preferredExtension string) (result *BroadcastActivityController, err error) {
 	type _result struct {
 		val *BroadcastActivityController
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.RPBroadcastActivityControllerShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifierCompletionHandler(point, window, foundation.NSStringStringWithUTF8String(preferredExtension), func(_p0 *raw.RPBroadcastActivityController, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &BroadcastActivityController{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = BroadcastActivityControllerFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("RPBroadcastActivityController")), objc.RegisterName("showBroadcastPickerAtPoint:fromWindow:preferredExtensionIdentifier:completionHandler:"), point, objref.IDOf(window), purego.NSString(preferredExtension), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -41,11 +39,8 @@ func ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier(ctx contex
 	}
 }
 
-// SharedRecorder calls the underlying RPScreenRecorderSharedRecorder.
+// SharedRecorder returns an app’s instance of the shared screen recorder.
 func SharedRecorder() *ScreenRecorder {
-	_r := raw.RPScreenRecorderSharedRecorder()
-	if _r == nil {
-		return nil
-	}
-	return &ScreenRecorder{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("RPScreenRecorder")), objc.RegisterName("sharedRecorder"))
+	return ScreenRecorderFromID(_r)
 }

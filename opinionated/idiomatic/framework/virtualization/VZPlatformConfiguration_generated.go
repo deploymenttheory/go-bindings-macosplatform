@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a platform configuration.
+// PlatformConfiguration is an idiomatic wrapper over the Objective-C class VZPlatformConfiguration.
 //
-// PlatformConfiguration wraps [raw.VZPlatformConfiguration] with a fluent Go API.
+// PlatformConfiguration is an abstract base — you do not construct it directly. Construct one of [GenericPlatformConfiguration], [MacPlatformConfiguration] and pass it where a PlatformConfiguration is accepted.
+//
+// The base class for a platform configuration.
 type PlatformConfiguration struct {
-	inner *raw.VZPlatformConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZPlatformConfiguration].
-func (x *PlatformConfiguration) Unwrap() *raw.VZPlatformConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlatformConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// PlatformConfigurationFromID adopts an existing object pointer as a PlatformConfiguration (nil for 0).
+// PlatformConfigurationFromID adopts an existing Objective-C object as a PlatformConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func PlatformConfigurationFromID(id objc.ID) *PlatformConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &PlatformConfiguration{inner: raw.VZPlatformConfigurationFromID(id)}
+	x := &PlatformConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlatformConfiguration creates a new [PlatformConfiguration].
-func NewPlatformConfiguration() *PlatformConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZPlatformConfiguration")), objc.RegisterName("new"))
-	return &PlatformConfiguration{inner: raw.VZPlatformConfigurationFromID(_id)}
+// platformConfigurationAdopt wraps an Objective-C object that this code just created as a
+// PlatformConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func platformConfigurationAdopt(id objc.ID) *PlatformConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &PlatformConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *PlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *PlatformConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlatformConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlatformConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlatformConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // PlatformConfigurationable is the interface implemented by [PlatformConfiguration], for mocking and DI.
 type PlatformConfigurationable interface {
-	Unwrap() *raw.VZPlatformConfiguration
+	obj.Object
 }
 
 var _ PlatformConfigurationable = (*PlatformConfiguration)(nil)
+
+// isPlatformConfiguration marks PlatformConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the PlatformConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PlatformConfiguration) isPlatformConfiguration() {}
+
+var _ PlatformConfigurationProvider = (*PlatformConfiguration)(nil)

@@ -5,82 +5,102 @@
 package syncservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ISyncRecordSnapshot wraps [raw.ISyncRecordSnapshot] with a fluent Go API.
+// ISyncRecordSnapshot is an idiomatic wrapper over the Objective-C class ISyncRecordSnapshot.
 type ISyncRecordSnapshot struct {
-	inner *raw.ISyncRecordSnapshot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ISyncRecordSnapshot].
-func (x *ISyncRecordSnapshot) Unwrap() *raw.ISyncRecordSnapshot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ISyncRecordSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// ISyncRecordSnapshotFromID adopts an existing object pointer as a ISyncRecordSnapshot (nil for 0).
+// ISyncRecordSnapshotFromID adopts an existing Objective-C object as a ISyncRecordSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func ISyncRecordSnapshotFromID(id objc.ID) *ISyncRecordSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &ISyncRecordSnapshot{inner: raw.ISyncRecordSnapshotFromID(id)}
+	x := &ISyncRecordSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewISyncRecordSnapshot creates a new [ISyncRecordSnapshot].
-func NewISyncRecordSnapshot() *ISyncRecordSnapshot {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncRecordSnapshot")), objc.RegisterName("new"))
-	return &ISyncRecordSnapshot{inner: raw.ISyncRecordSnapshotFromID(_id)}
-}
-
-// RecordsWithIdentifiers calls the underlying RecordsWithIdentifiers.
-func (x *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds *foundation.NSArray[objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.RecordsWithIdentifiers(recordIds)
-}
-
-// TargetIdentifiersForRelationshipNameWithSourceIdentifier calls the underlying TargetIdentifiersForRelationshipNameWithSourceIdentifier.
-func (x *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID] {
-	return x.inner.TargetIdentifiersForRelationshipNameWithSourceIdentifier(foundation.NSStringStringWithUTF8String(relationshipName), foundation.NSStringStringWithUTF8String(sourceId))
-}
-
-// SourceIdentifiersForRelationshipNameWithTargetIdentifier calls the underlying SourceIdentifiersForRelationshipNameWithTargetIdentifier.
-func (x *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID] {
-	return x.inner.SourceIdentifiersForRelationshipNameWithTargetIdentifier(foundation.NSStringStringWithUTF8String(relationshipName), foundation.NSStringStringWithUTF8String(sourceId))
-}
-
-// RecordsWithMatchingAttributes calls the underlying RecordsWithMatchingAttributes.
-func (x *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.RecordsWithMatchingAttributes(attributes)
-}
-
-// RecordReferenceForRecordWithIdentifier calls the underlying RecordReferenceForRecordWithIdentifier.
-func (x *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier string) unsafe.Pointer {
-	return x.inner.RecordReferenceForRecordWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-}
-
-// RecordIdentifierForReferenceIsModified calls the underlying RecordIdentifierForReferenceIsModified.
-func (x *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer, pModified *bool) string {
-	_r := x.inner.RecordIdentifierForReferenceIsModified(reference, pModified)
-	if _r == nil {
-		return ""
+// iSyncRecordSnapshotAdopt wraps an Objective-C object that this code just created as a
+// ISyncRecordSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iSyncRecordSnapshotAdopt(id objc.ID) *ISyncRecordSnapshot {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &ISyncRecordSnapshot{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ISyncRecordSnapshot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ISyncRecordSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ISyncRecordSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncRecordSnapshot) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewISyncRecordSnapshot creates a new ISyncRecordSnapshot.
+func NewISyncRecordSnapshot() *ISyncRecordSnapshot {
+	_id := objc.Send[objc.ID](objc.ID(_class("ISyncRecordSnapshot")), objc.RegisterName("new"))
+	return iSyncRecordSnapshotAdopt(_id)
+}
+
+// RecordsWithIdentifiers wraps the corresponding Objective-C method.
+func (x *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsWithIdentifiers:"), objref.IDOf(recordIds))
+	return obj.Wrap(_r)
+}
+
+// TargetIdentifiersForRelationshipNameWithSourceIdentifier wraps the corresponding Objective-C method.
+func (x *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetIdentifiersForRelationshipName:withSourceIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
+	return obj.Wrap(_r)
+}
+
+// SourceIdentifiersForRelationshipNameWithTargetIdentifier wraps the corresponding Objective-C method.
+func (x *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifiersForRelationshipName:withTargetIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
+	return obj.Wrap(_r)
+}
+
+// RecordsWithMatchingAttributes wraps the corresponding Objective-C method.
+func (x *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsWithMatchingAttributes:"), objref.IDOf(attributes))
+	return obj.Wrap(_r)
 }
 
 // ISyncRecordSnapshotable is the interface implemented by [ISyncRecordSnapshot], for mocking and DI.
 type ISyncRecordSnapshotable interface {
-	Unwrap() *raw.ISyncRecordSnapshot
-	RecordsWithIdentifiers(recordIds *foundation.NSArray[objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID]
-	TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID]
-	SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID]
-	RecordsWithMatchingAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID]
-	RecordReferenceForRecordWithIdentifier(identifier string) unsafe.Pointer
-	RecordIdentifierForReferenceIsModified(reference unsafe.Pointer, pModified *bool) string
+	obj.Object
+	RecordsWithIdentifiers(recordIds obj.Object) obj.Object
+	TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object
+	SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object
+	RecordsWithMatchingAttributes(attributes obj.Object) obj.Object
 }
 
 var _ ISyncRecordSnapshotable = (*ISyncRecordSnapshot)(nil)

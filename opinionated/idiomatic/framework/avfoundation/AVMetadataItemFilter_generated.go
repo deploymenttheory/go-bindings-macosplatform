@@ -5,41 +5,76 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that filters selected information from a metadata item.
+// MetadataItemFilter is an idiomatic wrapper over the Objective-C class AVMetadataItemFilter.
 //
-// MetadataItemFilter wraps [raw.AVMetadataItemFilter] with a fluent Go API.
+// An object that filters selected information from a metadata item.
 type MetadataItemFilter struct {
-	inner *raw.AVMetadataItemFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataItemFilter].
-func (x *MetadataItemFilter) Unwrap() *raw.AVMetadataItemFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataItemFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataItemFilterFromID adopts an existing object pointer as a MetadataItemFilter (nil for 0).
+// MetadataItemFilterFromID adopts an existing Objective-C object as a MetadataItemFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataItemFilterFromID(id objc.ID) *MetadataItemFilter {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataItemFilter{inner: raw.AVMetadataItemFilterFromID(id)}
+	x := &MetadataItemFilter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataItemFilter creates a new [MetadataItemFilter].
+// metadataItemFilterAdopt wraps an Objective-C object that this code just created as a
+// MetadataItemFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataItemFilterAdopt(id objc.ID) *MetadataItemFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataItemFilter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataItemFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataItemFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataItemFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataItemFilter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetadataItemFilter creates a new MetadataItemFilter.
 func NewMetadataItemFilter() *MetadataItemFilter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataItemFilter")), objc.RegisterName("new"))
-	return &MetadataItemFilter{inner: raw.AVMetadataItemFilterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataItemFilter")), objc.RegisterName("new"))
+	return metadataItemFilterAdopt(_id)
 }
 
 // MetadataItemFilterable is the interface implemented by [MetadataItemFilter], for mocking and DI.
 type MetadataItemFilterable interface {
-	Unwrap() *raw.AVMetadataItemFilter
+	obj.Object
 }
 
 var _ MetadataItemFilterable = (*MetadataItemFilter)(nil)

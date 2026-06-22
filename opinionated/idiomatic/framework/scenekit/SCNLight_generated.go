@@ -5,872 +5,724 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A light source that can be attached to a node to illuminate the scene.
+// Light is an idiomatic wrapper over the Objective-C class SCNLight.
 //
-// Light wraps [raw.SCNLight] with a fluent Go API.
+// A light source that can be attached to a node to illuminate the scene.
 type Light struct {
-	inner *raw.SCNLight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNLight].
-func (x *Light) Unwrap() *raw.SCNLight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Light) ID() objc.ID { return x.inner.Ptr() }
-
-// LightFromID adopts an existing object pointer as a Light (nil for 0).
+// LightFromID adopts an existing Objective-C object as a Light
+// (nil for 0), retaining it and registering a release finalizer.
 func LightFromID(id objc.ID) *Light {
 	if id == 0 {
 		return nil
 	}
-	return &Light{inner: raw.SCNLightFromID(id)}
-}
-
-// NewLight creates a new [Light].
-func NewLight() *Light {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNLight")), objc.RegisterName("new"))
-	return &Light{inner: raw.SCNLightFromID(_id)}
-}
-
-// A constant identifying the general behavior of the light.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *Light) WithType(type_ *foundation.NSString) *Light {
-	x.inner.SetType(type_)
+	x := &Light{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The color of the light. Animatable.
-//
-// WithColor sets the color property and returns the receiver for chaining.
-func (x *Light) WithColor(color objc.ID) *Light {
-	x.inner.SetColor(color)
-	return x
-}
-
-// The color temperature, in degrees Kelvin, of the light source. Animatable.
-//
-// WithTemperature sets the temperature property and returns the receiver for chaining.
-func (x *Light) WithTemperature(temperature float64) *Light {
-	x.inner.SetTemperature(temperature)
-	return x
-}
-
-// The luminous flux, in lumens, or total brightness of the light. Animatable.
-//
-// WithIntensity sets the intensity property and returns the receiver for chaining.
-func (x *Light) WithIntensity(intensity float64) *Light {
-	x.inner.SetIntensity(intensity)
-	return x
-}
-
-// A name associated with the light.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *Light) WithName(name string) *Light {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// A Boolean value that determines whether the light casts shadows.
-//
-// WithCastsShadow sets the castsShadow property and returns the receiver for chaining.
-func (x *Light) WithCastsShadow(castsShadow bool) *Light {
-	x.inner.SetCastsShadow(castsShadow)
-	return x
-}
-
-// The color of shadows cast by the light. Animatable.
-//
-// WithShadowColor sets the shadowColor property and returns the receiver for chaining.
-func (x *Light) WithShadowColor(shadowColor objc.ID) *Light {
-	x.inner.SetShadowColor(shadowColor)
-	return x
-}
-
-// A number that specifies the amount of blurring around the edges of shadows cast by the light. Animatable.
-//
-// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
-func (x *Light) WithShadowRadius(shadowRadius float64) *Light {
-	x.inner.SetShadowRadius(shadowRadius)
-	return x
-}
-
-// The size of the shadow map image that SceneKit renders when creating shadows.
-//
-// WithShadowMapSize sets the shadowMapSize property and returns the receiver for chaining.
-func (x *Light) WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light {
-	x.inner.SetShadowMapSize(shadowMapSize)
-	return x
-}
-
-// The number of samples from the shadow map that SceneKit uses to render each pixel.
-//
-// WithShadowSampleCount sets the shadowSampleCount property and returns the receiver for chaining.
-func (x *Light) WithShadowSampleCount(shadowSampleCount uint) *Light {
-	x.inner.SetShadowSampleCount(shadowSampleCount)
-	return x
-}
-
-// The mode SceneKit uses to render shadows.
-//
-// WithShadowMode sets the shadowMode property and returns the receiver for chaining.
-func (x *Light) WithShadowMode(shadowMode SCNShadowMode) *Light {
-	x.inner.SetShadowMode(raw.SCNShadowMode(shadowMode))
-	return x
-}
-
-// The amount of correction to apply to the shadow to prevent rendering artifacts.
-//
-// WithShadowBias sets the shadowBias property and returns the receiver for chaining.
-func (x *Light) WithShadowBias(shadowBias float64) *Light {
-	x.inner.SetShadowBias(shadowBias)
-	return x
-}
-
-// @property automaticallyAdjustsShadowProjection @abstract Specifies if the shadow map projection should be done automatically or manually by the user. Defaults to YES.
-//
-// WithAutomaticallyAdjustsShadowProjection sets the automaticallyAdjustsShadowProjection property and returns the receiver for chaining.
-func (x *Light) WithAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) *Light {
-	x.inner.SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection)
-	return x
-}
-
-// @property maximumShadowDistance @abstract Specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
-//
-// WithMaximumShadowDistance sets the maximumShadowDistance property and returns the receiver for chaining.
-func (x *Light) WithMaximumShadowDistance(maximumShadowDistance float64) *Light {
-	x.inner.SetMaximumShadowDistance(maximumShadowDistance)
-	return x
-}
-
-// @property forcesBackFaceCasters @abstract Render only back faces of the shadow caster when enabled. Defaults to NO. This is a behavior change from previous releases.
-//
-// WithForcesBackFaceCasters sets the forcesBackFaceCasters property and returns the receiver for chaining.
-func (x *Light) WithForcesBackFaceCasters(forcesBackFaceCasters bool) *Light {
-	x.inner.SetForcesBackFaceCasters(forcesBackFaceCasters)
-	return x
-}
-
-// @property sampleDistributedShadowMaps @abstract Use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to NO.
-//
-// WithSampleDistributedShadowMaps sets the sampleDistributedShadowMaps property and returns the receiver for chaining.
-func (x *Light) WithSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) *Light {
-	x.inner.SetSampleDistributedShadowMaps(sampleDistributedShadowMaps)
-	return x
-}
-
-// @property shadowCascadeCount @abstract Specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
-//
-// WithShadowCascadeCount sets the shadowCascadeCount property and returns the receiver for chaining.
-func (x *Light) WithShadowCascadeCount(shadowCascadeCount uint) *Light {
-	x.inner.SetShadowCascadeCount(shadowCascadeCount)
-	return x
-}
-
-// @property shadowCascadeSplittingFactor @abstract Specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
-//
-// WithShadowCascadeSplittingFactor sets the shadowCascadeSplittingFactor property and returns the receiver for chaining.
-func (x *Light) WithShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) *Light {
-	x.inner.SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor)
-	return x
-}
-
-// The orthographic scale SceneKit uses when rendering the shadow map for a directional light.
-//
-// WithOrthographicScale sets the orthographicScale property and returns the receiver for chaining.
-func (x *Light) WithOrthographicScale(orthographicScale float64) *Light {
-	x.inner.SetOrthographicScale(orthographicScale)
-	return x
-}
-
-// The minimum distance between the light and a visible surface for casting shadows. Animatable.
-//
-// WithZNear sets the zNear property and returns the receiver for chaining.
-func (x *Light) WithZNear(zNear float64) *Light {
-	x.inner.SetZNear(zNear)
-	return x
-}
-
-// The maximum distance between the light and a visible surface for casting shadows.
-//
-// WithZFar sets the zFar property and returns the receiver for chaining.
-func (x *Light) WithZFar(zFar float64) *Light {
-	x.inner.SetZFar(zFar)
-	return x
-}
-
-// The distance from the light at which its intensity begins to diminish. Animatable.
-//
-// WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
-func (x *Light) WithAttenuationStartDistance(attenuationStartDistance float64) *Light {
-	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
-	return x
-}
-
-// The distance from the light at which its intensity is completely diminished. Animatable.
-//
-// WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
-func (x *Light) WithAttenuationEndDistance(attenuationEndDistance float64) *Light {
-	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
-	return x
-}
-
-// The transition curve for the light’s intensity between its attenuation start and end distances. Animatable.
-//
-// WithAttenuationFalloffExponent sets the attenuationFalloffExponent property and returns the receiver for chaining.
-func (x *Light) WithAttenuationFalloffExponent(attenuationFalloffExponent float64) *Light {
-	x.inner.SetAttenuationFalloffExponent(attenuationFalloffExponent)
-	return x
-}
-
-// The angle, in degrees, of the area fully lit by a spotlight. Animatable.
-//
-// WithSpotInnerAngle sets the spotInnerAngle property and returns the receiver for chaining.
-func (x *Light) WithSpotInnerAngle(spotInnerAngle float64) *Light {
-	x.inner.SetSpotInnerAngle(spotInnerAngle)
-	return x
-}
-
-// The angle, in degrees, of the area partially lit by a spotlight. Animatable.
-//
-// WithSpotOuterAngle sets the spotOuterAngle property and returns the receiver for chaining.
-func (x *Light) WithSpotOuterAngle(spotOuterAngle float64) *Light {
-	x.inner.SetSpotOuterAngle(spotOuterAngle)
-	return x
-}
-
-// The URL for a file that contains photometry data describing the intended appearance of the light.
-//
-// WithIESProfileURL sets the iESProfileURL property and returns the receiver for chaining.
-func (x *Light) WithIESProfileURL(iESProfileURL string) *Light {
-	x.inner.SetIESProfileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(iESProfileURL)))
-	return x
-}
-
-// WithProbeType sets the probeType property and returns the receiver for chaining.
-func (x *Light) WithProbeType(probeType SCNLightProbeType) *Light {
-	x.inner.SetProbeType(raw.SCNLightProbeType(probeType))
-	return x
-}
-
-// WithProbeUpdateType sets the probeUpdateType property and returns the receiver for chaining.
-func (x *Light) WithProbeUpdateType(probeUpdateType SCNLightProbeUpdateType) *Light {
-	x.inner.SetProbeUpdateType(raw.SCNLightProbeUpdateType(probeUpdateType))
-	return x
-}
-
-// WithParallaxCorrectionEnabled sets the parallaxCorrectionEnabled property and returns the receiver for chaining.
-func (x *Light) WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light {
-	x.inner.SetParallaxCorrectionEnabled(parallaxCorrectionEnabled)
-	return x
-}
-
-// @property areaType @abstract Determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
-//
-// WithAreaType sets the areaType property and returns the receiver for chaining.
-func (x *Light) WithAreaType(areaType SCNLightAreaType) *Light {
-	x.inner.SetAreaType(raw.SCNLightAreaType(areaType))
-	return x
-}
-
-// @property areaPolygonVertices @abstract Determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. @discussion An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
-//
-// WithAreaPolygonVertices sets the collection, converting the Go slice to an NSArray.
-func (x *Light) WithAreaPolygonVertices(items ...*foundation.NSValue) *Light {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAreaPolygonVertices(foundation.NSArrayFromID[*foundation.NSValue](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSValue](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAreaPolygonVertices(_arr)
-	return x
-}
-
-// @property drawsArea @abstract Determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
-//
-// WithDrawsArea sets the drawsArea property and returns the receiver for chaining.
-func (x *Light) WithDrawsArea(drawsArea bool) *Light {
-	x.inner.SetDrawsArea(drawsArea)
-	return x
-}
-
-// @property doubleSided @abstract Determines whether a light of type SCNLightTypeArea is double-sided. Defaults NO. @discussion Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to YES, they also emit light along the +Z axis.
-//
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
-func (x *Light) WithDoubleSided(doubleSided bool) *Light {
-	x.inner.SetDoubleSided(doubleSided)
-	return x
-}
-
-// A mask that defines which categories this light belongs to.
-//
-// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
-func (x *Light) WithCategoryBitMask(categoryBitMask uint) *Light {
-	x.inner.SetCategoryBitMask(categoryBitMask)
-	return x
-}
-
-// @property type @abstract Specifies the receiver's type. @discussion Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
-//
-// Type calls the underlying Type.
-func (x *Light) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetType calls the underlying SetType.
-func (x *Light) SetType(type_ *foundation.NSString) {
-	x.inner.SetType(type_)
-}
-
-// @property color @abstract Specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
-//
-// Color calls the underlying Color.
-func (x *Light) Color() objc.ID {
-	return x.inner.Color()
-}
-
-// SetColor calls the underlying SetColor.
-func (x *Light) SetColor(color objc.ID) {
-	x.inner.SetColor(color)
-}
-
-// @property temperature @abstract Specifies the receiver's temperature. @discussion This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
-//
-// Temperature calls the underlying Temperature.
-func (x *Light) Temperature() float64 {
-	return x.inner.Temperature()
-}
-
-// SetTemperature calls the underlying SetTemperature.
-func (x *Light) SetTemperature(temperature float64) {
-	x.inner.SetTemperature(temperature)
-}
-
-// @property intensity @abstract Specifies the receiver's intensity. @discussion This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
-//
-// Intensity calls the underlying Intensity.
-func (x *Light) Intensity() float64 {
-	return x.inner.Intensity()
-}
-
-// SetIntensity calls the underlying SetIntensity.
-func (x *Light) SetIntensity(intensity float64) {
-	x.inner.SetIntensity(intensity)
-}
-
-// @property name @abstract Determines the name of the receiver.
-//
-// Name calls the underlying Name.
-func (x *Light) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetName calls the underlying SetName.
-func (x *Light) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// @property castsShadow @abstract Determines whether the receiver casts a shadow. Defaults to NO. @discussion Shadows are only supported by spot and directional lights.
-//
-// CastsShadow calls the underlying CastsShadow.
-func (x *Light) CastsShadow() bool {
-	return x.inner.CastsShadow()
-}
-
-// SetCastsShadow calls the underlying SetCastsShadow.
-func (x *Light) SetCastsShadow(castsShadow bool) {
-	x.inner.SetCastsShadow(castsShadow)
-}
-
-// @property shadowColor @abstract Specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable. @discussion On iOS 9 or earlier and macOS 10.11 or earlier, this defaults to black 50% transparent.
-//
-// ShadowColor calls the underlying ShadowColor.
-func (x *Light) ShadowColor() objc.ID {
-	return x.inner.ShadowColor()
-}
-
-// SetShadowColor calls the underlying SetShadowColor.
-func (x *Light) SetShadowColor(shadowColor objc.ID) {
-	x.inner.SetShadowColor(shadowColor)
-}
-
-// @property shadowRadius @abstract Specifies the sample radius used to render the receiver’s shadow. Default value is 3.0. Animatable.
-//
-// ShadowRadius calls the underlying ShadowRadius.
-func (x *Light) ShadowRadius() float64 {
-	return x.inner.ShadowRadius()
-}
-
-// SetShadowRadius calls the underlying SetShadowRadius.
-func (x *Light) SetShadowRadius(shadowRadius float64) {
-	x.inner.SetShadowRadius(shadowRadius)
-}
-
-// @property shadowMapSize @abstract Specifies the size of the shadow map. @discussion The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
-//
-// ShadowMapSize calls the underlying ShadowMapSize.
-func (x *Light) ShadowMapSize() corefoundation.CGSize {
-	return x.inner.ShadowMapSize()
-}
-
-// SetShadowMapSize calls the underlying SetShadowMapSize.
-func (x *Light) SetShadowMapSize(shadowMapSize corefoundation.CGSize) {
-	x.inner.SetShadowMapSize(shadowMapSize)
-}
-
-// @property shadowSampleCount @abstract Specifies the number of sample per fragment to compute the shadow map. Defaults to 0. @discussion On macOS 10.11 or earlier, the shadowSampleCount defaults to 16. On iOS 9 or earlier it defaults to 1.0. On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
-//
-// ShadowSampleCount calls the underlying ShadowSampleCount.
-func (x *Light) ShadowSampleCount() uint {
-	return x.inner.ShadowSampleCount()
-}
-
-// SetShadowSampleCount calls the underlying SetShadowSampleCount.
-func (x *Light) SetShadowSampleCount(shadowSampleCount uint) {
-	x.inner.SetShadowSampleCount(shadowSampleCount)
-}
-
-// @property shadowMode @abstract Specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
-//
-// ShadowMode calls the underlying ShadowMode.
-func (x *Light) ShadowMode() SCNShadowMode {
-	return SCNShadowMode(x.inner.ShadowMode())
-}
-
-// SetShadowMode calls the underlying SetShadowMode.
-func (x *Light) SetShadowMode(shadowMode SCNShadowMode) {
-	x.inner.SetShadowMode(raw.SCNShadowMode(shadowMode))
-}
-
-// @property shadowBias @abstract Specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
-//
-// ShadowBias calls the underlying ShadowBias.
-func (x *Light) ShadowBias() float64 {
-	return x.inner.ShadowBias()
-}
-
-// SetShadowBias calls the underlying SetShadowBias.
-func (x *Light) SetShadowBias(shadowBias float64) {
-	x.inner.SetShadowBias(shadowBias)
-}
-
-// @property automaticallyAdjustsShadowProjection @abstract Specifies if the shadow map projection should be done automatically or manually by the user. Defaults to YES.
-//
-// AutomaticallyAdjustsShadowProjection calls the underlying AutomaticallyAdjustsShadowProjection.
-func (x *Light) AutomaticallyAdjustsShadowProjection() bool {
-	return x.inner.AutomaticallyAdjustsShadowProjection()
-}
-
-// SetAutomaticallyAdjustsShadowProjection calls the underlying SetAutomaticallyAdjustsShadowProjection.
-func (x *Light) SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) {
-	x.inner.SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection)
-}
-
-// @property maximumShadowDistance @abstract Specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
-//
-// MaximumShadowDistance calls the underlying MaximumShadowDistance.
-func (x *Light) MaximumShadowDistance() float64 {
-	return x.inner.MaximumShadowDistance()
-}
-
-// SetMaximumShadowDistance calls the underlying SetMaximumShadowDistance.
-func (x *Light) SetMaximumShadowDistance(maximumShadowDistance float64) {
-	x.inner.SetMaximumShadowDistance(maximumShadowDistance)
-}
-
-// @property forcesBackFaceCasters @abstract Render only back faces of the shadow caster when enabled. Defaults to NO. This is a behavior change from previous releases.
-//
-// ForcesBackFaceCasters calls the underlying ForcesBackFaceCasters.
-func (x *Light) ForcesBackFaceCasters() bool {
-	return x.inner.ForcesBackFaceCasters()
-}
-
-// SetForcesBackFaceCasters calls the underlying SetForcesBackFaceCasters.
-func (x *Light) SetForcesBackFaceCasters(forcesBackFaceCasters bool) {
-	x.inner.SetForcesBackFaceCasters(forcesBackFaceCasters)
-}
-
-// @property sampleDistributedShadowMaps @abstract Use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to NO.
-//
-// SampleDistributedShadowMaps calls the underlying SampleDistributedShadowMaps.
-func (x *Light) SampleDistributedShadowMaps() bool {
-	return x.inner.SampleDistributedShadowMaps()
-}
-
-// SetSampleDistributedShadowMaps calls the underlying SetSampleDistributedShadowMaps.
-func (x *Light) SetSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) {
-	x.inner.SetSampleDistributedShadowMaps(sampleDistributedShadowMaps)
-}
-
-// @property shadowCascadeCount @abstract Specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
-//
-// ShadowCascadeCount calls the underlying ShadowCascadeCount.
-func (x *Light) ShadowCascadeCount() uint {
-	return x.inner.ShadowCascadeCount()
-}
-
-// SetShadowCascadeCount calls the underlying SetShadowCascadeCount.
-func (x *Light) SetShadowCascadeCount(shadowCascadeCount uint) {
-	x.inner.SetShadowCascadeCount(shadowCascadeCount)
-}
-
-// @property shadowCascadeSplittingFactor @abstract Specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
-//
-// ShadowCascadeSplittingFactor calls the underlying ShadowCascadeSplittingFactor.
-func (x *Light) ShadowCascadeSplittingFactor() float64 {
-	return x.inner.ShadowCascadeSplittingFactor()
-}
-
-// SetShadowCascadeSplittingFactor calls the underlying SetShadowCascadeSplittingFactor.
-func (x *Light) SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) {
-	x.inner.SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor)
-}
-
-// @property orthographicScale @abstract Specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1. @discussion This is only applicable for directional lights.
-//
-// OrthographicScale calls the underlying OrthographicScale.
-func (x *Light) OrthographicScale() float64 {
-	return x.inner.OrthographicScale()
-}
-
-// SetOrthographicScale calls the underlying SetOrthographicScale.
-func (x *Light) SetOrthographicScale(orthographicScale float64) {
-	x.inner.SetOrthographicScale(orthographicScale)
-}
-
-// @property zNear @abstract Specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
-//
-// ZNear calls the underlying ZNear.
-func (x *Light) ZNear() float64 {
-	return x.inner.ZNear()
-}
-
-// SetZNear calls the underlying SetZNear.
-func (x *Light) SetZNear(zNear float64) {
-	x.inner.SetZNear(zNear)
-}
-
-// @property zFar @abstract Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
-//
-// ZFar calls the underlying ZFar.
-func (x *Light) ZFar() float64 {
-	return x.inner.ZFar()
-}
-
-// SetZFar calls the underlying SetZFar.
-func (x *Light) SetZFar(zFar float64) {
-	x.inner.SetZFar(zFar)
-}
-
-// @property attenuationStartDistance @abstract The distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
-//
-// AttenuationStartDistance calls the underlying AttenuationStartDistance.
-func (x *Light) AttenuationStartDistance() float64 {
-	return x.inner.AttenuationStartDistance()
-}
-
-// SetAttenuationStartDistance calls the underlying SetAttenuationStartDistance.
-func (x *Light) SetAttenuationStartDistance(attenuationStartDistance float64) {
-	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
-}
-
-// @property attenuationEndDistance @abstract The distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
-//
-// AttenuationEndDistance calls the underlying AttenuationEndDistance.
-func (x *Light) AttenuationEndDistance() float64 {
-	return x.inner.AttenuationEndDistance()
-}
-
-// SetAttenuationEndDistance calls the underlying SetAttenuationEndDistance.
-func (x *Light) SetAttenuationEndDistance(attenuationEndDistance float64) {
-	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
-}
-
-// @property attenuationFalloffExponent @abstract Specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
-//
-// AttenuationFalloffExponent calls the underlying AttenuationFalloffExponent.
-func (x *Light) AttenuationFalloffExponent() float64 {
-	return x.inner.AttenuationFalloffExponent()
-}
-
-// SetAttenuationFalloffExponent calls the underlying SetAttenuationFalloffExponent.
-func (x *Light) SetAttenuationFalloffExponent(attenuationFalloffExponent float64) {
-	x.inner.SetAttenuationFalloffExponent(attenuationFalloffExponent)
-}
-
-// @property spotInnerAngle @abstract The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
-//
-// SpotInnerAngle calls the underlying SpotInnerAngle.
-func (x *Light) SpotInnerAngle() float64 {
-	return x.inner.SpotInnerAngle()
-}
-
-// SetSpotInnerAngle calls the underlying SetSpotInnerAngle.
-func (x *Light) SetSpotInnerAngle(spotInnerAngle float64) {
-	x.inner.SetSpotInnerAngle(spotInnerAngle)
-}
-
-// @property spotOuterAngle @abstract The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
-//
-// SpotOuterAngle calls the underlying SpotOuterAngle.
-func (x *Light) SpotOuterAngle() float64 {
-	return x.inner.SpotOuterAngle()
-}
-
-// SetSpotOuterAngle calls the underlying SetSpotOuterAngle.
-func (x *Light) SetSpotOuterAngle(spotOuterAngle float64) {
-	x.inner.SetSpotOuterAngle(spotOuterAngle)
-}
-
-// @property IESProfileURL @abstract Specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
-//
-// IESProfileURL calls the underlying IESProfileURL.
-func (x *Light) IESProfileURL() *foundation.NSURL {
-	return x.inner.IESProfileURL()
-}
-
-// SetIESProfileURL calls the underlying SetIESProfileURL.
-func (x *Light) SetIESProfileURL(iESProfileURL string) {
-	x.inner.SetIESProfileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(iESProfileURL)))
-}
-
-// @property sphericalHarmonicsCoefficients @abstract The receiver's spherical harmonics coefficients. @discussion Currently spherical harmonics are only supported by light probes (SCNLightTypeProbe). The data is an array of 27 32-bit floating-point values, containing three non-interleaved data sets corresponding to the red, green, and blue sets of coefficients.
-//
-// SphericalHarmonicsCoefficients calls the underlying SphericalHarmonicsCoefficients.
-func (x *Light) SphericalHarmonicsCoefficients() *foundation.NSData {
-	return x.inner.SphericalHarmonicsCoefficients()
-}
-
-// ProbeType calls the underlying ProbeType.
-func (x *Light) ProbeType() SCNLightProbeType {
-	return SCNLightProbeType(x.inner.ProbeType())
-}
-
-// SetProbeType calls the underlying SetProbeType.
-func (x *Light) SetProbeType(probeType SCNLightProbeType) {
-	x.inner.SetProbeType(raw.SCNLightProbeType(probeType))
-}
-
-// ProbeUpdateType calls the underlying ProbeUpdateType.
-func (x *Light) ProbeUpdateType() SCNLightProbeUpdateType {
-	return SCNLightProbeUpdateType(x.inner.ProbeUpdateType())
-}
-
-// SetProbeUpdateType calls the underlying SetProbeUpdateType.
-func (x *Light) SetProbeUpdateType(probeUpdateType SCNLightProbeUpdateType) {
-	x.inner.SetProbeUpdateType(raw.SCNLightProbeUpdateType(probeUpdateType))
-}
-
-// ProbeExtents calls the underlying ProbeExtents.
-func (x *Light) ProbeExtents() unsafe.Pointer {
-	return x.inner.ProbeExtents()
-}
-
-// SetProbeExtents calls the underlying SetProbeExtents.
-func (x *Light) SetProbeExtents(probeExtents unsafe.Pointer) {
-	x.inner.SetProbeExtents(probeExtents)
-}
-
-// ProbeOffset calls the underlying ProbeOffset.
-func (x *Light) ProbeOffset() unsafe.Pointer {
-	return x.inner.ProbeOffset()
-}
-
-// SetProbeOffset calls the underlying SetProbeOffset.
-func (x *Light) SetProbeOffset(probeOffset unsafe.Pointer) {
-	x.inner.SetProbeOffset(probeOffset)
-}
-
-// ParallaxCorrectionEnabled calls the underlying ParallaxCorrectionEnabled.
-func (x *Light) ParallaxCorrectionEnabled() bool {
-	return x.inner.ParallaxCorrectionEnabled()
-}
-
-// SetParallaxCorrectionEnabled calls the underlying SetParallaxCorrectionEnabled.
-func (x *Light) SetParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) {
-	x.inner.SetParallaxCorrectionEnabled(parallaxCorrectionEnabled)
-}
-
-// ParallaxExtentsFactor calls the underlying ParallaxExtentsFactor.
-func (x *Light) ParallaxExtentsFactor() unsafe.Pointer {
-	return x.inner.ParallaxExtentsFactor()
-}
-
-// SetParallaxExtentsFactor calls the underlying SetParallaxExtentsFactor.
-func (x *Light) SetParallaxExtentsFactor(parallaxExtentsFactor unsafe.Pointer) {
-	x.inner.SetParallaxExtentsFactor(parallaxExtentsFactor)
-}
-
-// ParallaxCenterOffset calls the underlying ParallaxCenterOffset.
-func (x *Light) ParallaxCenterOffset() unsafe.Pointer {
-	return x.inner.ParallaxCenterOffset()
-}
-
-// SetParallaxCenterOffset calls the underlying SetParallaxCenterOffset.
-func (x *Light) SetParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer) {
-	x.inner.SetParallaxCenterOffset(parallaxCenterOffset)
-}
-
-// ProbeEnvironment calls the underlying ProbeEnvironment.
-func (x *Light) ProbeEnvironment() *MaterialProperty {
-	_r := x.inner.ProbeEnvironment()
-	if _r == nil {
+// lightAdopt wraps an Objective-C object that this code just created as a
+// Light (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lightAdopt(id objc.ID) *Light {
+	if id == 0 {
 		return nil
 	}
-	return &MaterialProperty{inner: _r}
+	x := &Light{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property areaType @abstract Determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
-//
-// AreaType calls the underlying AreaType.
-func (x *Light) AreaType() SCNLightAreaType {
-	return SCNLightAreaType(x.inner.AreaType())
+// Description returns the object's -description text.
+func (x *Light) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetAreaType calls the underlying SetAreaType.
-func (x *Light) SetAreaType(areaType SCNLightAreaType) {
-	x.inner.SetAreaType(raw.SCNLightAreaType(areaType))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Light) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property areaExtents @abstract Determines the extents of a light of type SCNLightTypeArea. Defaults to (1.0, 1.0, 1.0). @discussion The extents are interpreted differently for each type of area light SCNLightAreaTypeLine      : areaExtents.x   = (width) SCNLightAreaTypeRectangle : areaExtents.xy  = (width, height) SCNLightAreaTypePolygon   : ignored (see `areaPolygonVertices`)
-//
-// AreaExtents calls the underlying AreaExtents.
-func (x *Light) AreaExtents() unsafe.Pointer {
-	return x.inner.AreaExtents()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Light) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetAreaExtents calls the underlying SetAreaExtents.
-func (x *Light) SetAreaExtents(areaExtents unsafe.Pointer) {
-	x.inner.SetAreaExtents(areaExtents)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Light) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property areaPolygonVertices @abstract Determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. @discussion An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
+// NewLight creates a new Light.
+func NewLight() *Light {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNLight")), objc.RegisterName("new"))
+	return lightAdopt(_id)
+}
+
+// WithType a constant identifying the general behavior of the light.
+func (x *Light) WithType(type_ obj.Object) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
+	return x
+}
+
+// WithColor the color of the light. Animatable.
+func (x *Light) WithColor(color obj.Object) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return x
+}
+
+// WithTemperature the color temperature, in degrees Kelvin, of the light source. Animatable.
+func (x *Light) WithTemperature(temperature float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemperature:"), temperature)
+	return x
+}
+
+// WithIntensity the luminous flux, in lumens, or total brightness of the light. Animatable.
+func (x *Light) WithIntensity(intensity float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntensity:"), intensity)
+	return x
+}
+
+// WithName a name associated with the light.
+func (x *Light) WithName(name string) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithCastsShadow a Boolean value that determines whether the light casts shadows.
+func (x *Light) WithCastsShadow(castsShadow bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
+	return x
+}
+
+// WithShadowColor the color of shadows cast by the light. Animatable.
+func (x *Light) WithShadowColor(shadowColor obj.Object) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return x
+}
+
+// WithShadowRadius a number that specifies the amount of blurring around the edges of shadows cast by the light. Animatable.
+func (x *Light) WithShadowRadius(shadowRadius float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return x
+}
+
+// WithShadowMapSize the size of the shadow map image that SceneKit renders when creating shadows.
+func (x *Light) WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowMapSize:"), shadowMapSize)
+	return x
+}
+
+// WithShadowSampleCount the number of samples from the shadow map that SceneKit uses to render each pixel.
+func (x *Light) WithShadowSampleCount(shadowSampleCount int) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowSampleCount:"), shadowSampleCount)
+	return x
+}
+
+// WithShadowMode the mode SceneKit uses to render shadows.
+func (x *Light) WithShadowMode(shadowMode ShadowMode) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowMode:"), shadowMode)
+	return x
+}
+
+// WithShadowBias the amount of correction to apply to the shadow to prevent rendering artifacts.
+func (x *Light) WithShadowBias(shadowBias float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBias:"), shadowBias)
+	return x
+}
+
+// WithAutomaticallyAdjustsShadowProjection specifies if the shadow map projection should be done automatically or manually by the user. Defaults to YES.
+func (x *Light) WithAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsShadowProjection:"), automaticallyAdjustsShadowProjection)
+	return x
+}
+
+// WithMaximumShadowDistance specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
+func (x *Light) WithMaximumShadowDistance(maximumShadowDistance float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumShadowDistance:"), maximumShadowDistance)
+	return x
+}
+
+// WithForcesBackFaceCasters render only back faces of the shadow caster when enabled. Defaults to NO. This is a behavior change from previous releases.
+func (x *Light) WithForcesBackFaceCasters(forcesBackFaceCasters bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForcesBackFaceCasters:"), forcesBackFaceCasters)
+	return x
+}
+
+// WithSampleDistributedShadowMaps use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to NO.
+func (x *Light) WithSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleDistributedShadowMaps:"), sampleDistributedShadowMaps)
+	return x
+}
+
+// WithShadowCascadeCount specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
+func (x *Light) WithShadowCascadeCount(shadowCascadeCount int) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowCascadeCount:"), shadowCascadeCount)
+	return x
+}
+
+// WithShadowCascadeSplittingFactor specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
+func (x *Light) WithShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowCascadeSplittingFactor:"), shadowCascadeSplittingFactor)
+	return x
+}
+
+// WithOrthographicScale the orthographic scale SceneKit uses when rendering the shadow map for a directional light.
+func (x *Light) WithOrthographicScale(orthographicScale float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthographicScale:"), orthographicScale)
+	return x
+}
+
+// WithZNear the minimum distance between the light and a visible surface for casting shadows. Animatable.
+func (x *Light) WithZNear(zNear float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZNear:"), zNear)
+	return x
+}
+
+// WithZFar the maximum distance between the light and a visible surface for casting shadows.
+func (x *Light) WithZFar(zFar float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZFar:"), zFar)
+	return x
+}
+
+// WithAttenuationStartDistance the distance from the light at which its intensity begins to diminish. Animatable.
+func (x *Light) WithAttenuationStartDistance(attenuationStartDistance float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
+	return x
+}
+
+// WithAttenuationEndDistance the distance from the light at which its intensity is completely diminished. Animatable.
+func (x *Light) WithAttenuationEndDistance(attenuationEndDistance float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
+	return x
+}
+
+// WithAttenuationFalloffExponent the transition curve for the light’s intensity between its attenuation start and end distances. Animatable.
+func (x *Light) WithAttenuationFalloffExponent(attenuationFalloffExponent float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationFalloffExponent:"), attenuationFalloffExponent)
+	return x
+}
+
+// WithSpotInnerAngle the angle, in degrees, of the area fully lit by a spotlight. Animatable.
+func (x *Light) WithSpotInnerAngle(spotInnerAngle float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotInnerAngle:"), spotInnerAngle)
+	return x
+}
+
+// WithSpotOuterAngle the angle, in degrees, of the area partially lit by a spotlight. Animatable.
+func (x *Light) WithSpotOuterAngle(spotOuterAngle float64) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotOuterAngle:"), spotOuterAngle)
+	return x
+}
+
+// WithIESProfileURL the URL for a file that contains photometry data describing the intended appearance of the light.
+func (x *Light) WithIESProfileURL(iESProfileURL string) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIESProfileURL:"), rt.FileURL(iESProfileURL))
+	return x
+}
+
+// WithProbeType sets the property and returns the receiver so calls can be chained.
+func (x *Light) WithProbeType(probeType LightProbeType) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeType:"), probeType)
+	return x
+}
+
+// WithProbeUpdateType sets the property and returns the receiver so calls can be chained.
+func (x *Light) WithProbeUpdateType(probeUpdateType LightProbeUpdateType) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeUpdateType:"), probeUpdateType)
+	return x
+}
+
+// WithParallaxCorrectionEnabled sets the property and returns the receiver so calls can be chained.
+func (x *Light) WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParallaxCorrectionEnabled:"), parallaxCorrectionEnabled)
+	return x
+}
+
+// WithAreaType determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
+func (x *Light) WithAreaType(areaType LightAreaType) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), areaType)
+	return x
+}
+
+// WithAreaPolygonVertices determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
+func (x *Light) WithAreaPolygonVertices(items ...obj.Object) *Light {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaPolygonVertices:"), _arr)
+	return x
+}
+
+// WithDrawsArea determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
+func (x *Light) WithDrawsArea(drawsArea bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsArea:"), drawsArea)
+	return x
+}
+
+// WithDoubleSided determines whether a light of type SCNLightTypeArea is double-sided. Defaults NO. Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to YES, they also emit light along the +Z axis.
+func (x *Light) WithDoubleSided(doubleSided bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return x
+}
+
+// WithCategoryBitMask a mask that defines which categories this light belongs to.
+func (x *Light) WithCategoryBitMask(categoryBitMask int) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	return x
+}
+
+// Type specifies the receiver's type. Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
+func (x *Light) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	return obj.Wrap(_r)
+}
+
+// SetType wraps the corresponding Objective-C method.
+func (x *Light) SetType(type_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
+}
+
+// Color specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white. The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
+func (x *Light) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
+}
+
+// SetColor wraps the corresponding Objective-C method.
+func (x *Light) SetColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+}
+
+// Temperature specifies the receiver's temperature. This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
+func (x *Light) Temperature() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("temperature"))
+	return _r
+}
+
+// SetTemperature wraps the corresponding Objective-C method.
+func (x *Light) SetTemperature(temperature float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemperature:"), temperature)
+}
+
+// Intensity specifies the receiver's intensity. This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
+func (x *Light) Intensity() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("intensity"))
+	return _r
+}
+
+// SetIntensity wraps the corresponding Objective-C method.
+func (x *Light) SetIntensity(intensity float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntensity:"), intensity)
+}
+
+// Name determines the name of the receiver.
+func (x *Light) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetName wraps the corresponding Objective-C method.
+func (x *Light) SetName(name string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+}
+
+// CastsShadow determines whether the receiver casts a shadow. Defaults to NO. Shadows are only supported by spot and directional lights.
+func (x *Light) CastsShadow() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("castsShadow"))
+	return _r
+}
+
+// SetCastsShadow wraps the corresponding Objective-C method.
+func (x *Light) SetCastsShadow(castsShadow bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
+}
+
+// ShadowColor specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable. On iOS 9 or earlier and macOS 10.11 or earlier, this defaults to black 50% transparent.
+func (x *Light) ShadowColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowColor"))
+	return obj.Wrap(_r)
+}
+
+// SetShadowColor wraps the corresponding Objective-C method.
+func (x *Light) SetShadowColor(shadowColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+}
+
+// ShadowRadius specifies the sample radius used to render the receiver’s shadow. Default value is 3.0. Animatable.
+func (x *Light) ShadowRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shadowRadius"))
+	return _r
+}
+
+// SetShadowRadius wraps the corresponding Objective-C method.
+func (x *Light) SetShadowRadius(shadowRadius float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
+}
+
+// ShadowMapSize specifies the size of the shadow map. The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
+func (x *Light) ShadowMapSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("shadowMapSize"))
+	return _r
+}
+
+// SetShadowMapSize wraps the corresponding Objective-C method.
+func (x *Light) SetShadowMapSize(shadowMapSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowMapSize:"), shadowMapSize)
+}
+
+// ShadowSampleCount specifies the number of sample per fragment to compute the shadow map. Defaults to 0. On macOS 10.11 or earlier, the shadowSampleCount defaults to 16. On iOS 9 or earlier it defaults to 1.0. On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
+func (x *Light) ShadowSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("shadowSampleCount"))
+	return _r
+}
+
+// SetShadowSampleCount wraps the corresponding Objective-C method.
+func (x *Light) SetShadowSampleCount(shadowSampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowSampleCount:"), shadowSampleCount)
+}
+
+// ShadowMode specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
+func (x *Light) ShadowMode() ShadowMode {
+	_r := objc.Send[ShadowMode](objref.IDOf(x), objc.RegisterName("shadowMode"))
+	return _r
+}
+
+// SetShadowMode wraps the corresponding Objective-C method.
+func (x *Light) SetShadowMode(shadowMode ShadowMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowMode:"), shadowMode)
+}
+
+// ShadowBias specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
+func (x *Light) ShadowBias() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shadowBias"))
+	return _r
+}
+
+// SetShadowBias wraps the corresponding Objective-C method.
+func (x *Light) SetShadowBias(shadowBias float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowBias:"), shadowBias)
+}
+
+// AutomaticallyAdjustsShadowProjection specifies if the shadow map projection should be done automatically or manually by the user. Defaults to YES.
+func (x *Light) AutomaticallyAdjustsShadowProjection() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsShadowProjection"))
+	return _r
+}
+
+// SetAutomaticallyAdjustsShadowProjection wraps the corresponding Objective-C method.
+func (x *Light) SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsShadowProjection:"), automaticallyAdjustsShadowProjection)
+}
+
+// MaximumShadowDistance specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
+func (x *Light) MaximumShadowDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumShadowDistance"))
+	return _r
+}
+
+// SetMaximumShadowDistance wraps the corresponding Objective-C method.
+func (x *Light) SetMaximumShadowDistance(maximumShadowDistance float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumShadowDistance:"), maximumShadowDistance)
+}
+
+// ForcesBackFaceCasters render only back faces of the shadow caster when enabled. Defaults to NO. This is a behavior change from previous releases.
+func (x *Light) ForcesBackFaceCasters() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("forcesBackFaceCasters"))
+	return _r
+}
+
+// SetForcesBackFaceCasters wraps the corresponding Objective-C method.
+func (x *Light) SetForcesBackFaceCasters(forcesBackFaceCasters bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForcesBackFaceCasters:"), forcesBackFaceCasters)
+}
+
+// SampleDistributedShadowMaps use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to NO.
+func (x *Light) SampleDistributedShadowMaps() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sampleDistributedShadowMaps"))
+	return _r
+}
+
+// SetSampleDistributedShadowMaps wraps the corresponding Objective-C method.
+func (x *Light) SetSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleDistributedShadowMaps:"), sampleDistributedShadowMaps)
+}
+
+// ShadowCascadeCount specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
+func (x *Light) ShadowCascadeCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("shadowCascadeCount"))
+	return _r
+}
+
+// SetShadowCascadeCount wraps the corresponding Objective-C method.
+func (x *Light) SetShadowCascadeCount(shadowCascadeCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowCascadeCount:"), shadowCascadeCount)
+}
+
+// ShadowCascadeSplittingFactor specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
+func (x *Light) ShadowCascadeSplittingFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shadowCascadeSplittingFactor"))
+	return _r
+}
+
+// SetShadowCascadeSplittingFactor wraps the corresponding Objective-C method.
+func (x *Light) SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowCascadeSplittingFactor:"), shadowCascadeSplittingFactor)
+}
+
+// OrthographicScale specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1. This is only applicable for directional lights.
+func (x *Light) OrthographicScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("orthographicScale"))
+	return _r
+}
+
+// SetOrthographicScale wraps the corresponding Objective-C method.
+func (x *Light) SetOrthographicScale(orthographicScale float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthographicScale:"), orthographicScale)
+}
+
+// ZNear specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
+func (x *Light) ZNear() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zNear"))
+	return _r
+}
+
+// SetZNear wraps the corresponding Objective-C method.
+func (x *Light) SetZNear(zNear float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZNear:"), zNear)
+}
+
+// ZFar specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
+func (x *Light) ZFar() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zFar"))
+	return _r
+}
+
+// SetZFar wraps the corresponding Objective-C method.
+func (x *Light) SetZFar(zFar float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZFar:"), zFar)
+}
+
+// AttenuationStartDistance the distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
+func (x *Light) AttenuationStartDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("attenuationStartDistance"))
+	return _r
+}
+
+// SetAttenuationStartDistance wraps the corresponding Objective-C method.
+func (x *Light) SetAttenuationStartDistance(attenuationStartDistance float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
+}
+
+// AttenuationEndDistance the distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
+func (x *Light) AttenuationEndDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("attenuationEndDistance"))
+	return _r
+}
+
+// SetAttenuationEndDistance wraps the corresponding Objective-C method.
+func (x *Light) SetAttenuationEndDistance(attenuationEndDistance float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
+}
+
+// AttenuationFalloffExponent specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
+func (x *Light) AttenuationFalloffExponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("attenuationFalloffExponent"))
+	return _r
+}
+
+// SetAttenuationFalloffExponent wraps the corresponding Objective-C method.
+func (x *Light) SetAttenuationFalloffExponent(attenuationFalloffExponent float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationFalloffExponent:"), attenuationFalloffExponent)
+}
+
+// SpotInnerAngle the angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
+func (x *Light) SpotInnerAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spotInnerAngle"))
+	return _r
+}
+
+// SetSpotInnerAngle wraps the corresponding Objective-C method.
+func (x *Light) SetSpotInnerAngle(spotInnerAngle float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotInnerAngle:"), spotInnerAngle)
+}
+
+// SpotOuterAngle the angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
+func (x *Light) SpotOuterAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spotOuterAngle"))
+	return _r
+}
+
+// SetSpotOuterAngle wraps the corresponding Objective-C method.
+func (x *Light) SetSpotOuterAngle(spotOuterAngle float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotOuterAngle:"), spotOuterAngle)
+}
+
+// IESProfileURL specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
+func (x *Light) IESProfileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("IESProfileURL"))
+	return obj.Wrap(_r)
+}
+
+// SetIESProfileURL wraps the corresponding Objective-C method.
+func (x *Light) SetIESProfileURL(iESProfileURL string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIESProfileURL:"), rt.FileURL(iESProfileURL))
+}
+
+// SphericalHarmonicsCoefficients the receiver's spherical harmonics coefficients. Currently spherical harmonics are only supported by light probes (SCNLightTypeProbe). The data is an array of 27 32-bit floating-point values, containing three non-interleaved data sets corresponding to the red, green, and blue sets of coefficients.
+func (x *Light) SphericalHarmonicsCoefficients() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsCoefficients"))
+	return obj.Wrap(_r)
+}
+
+// ProbeType wraps the corresponding Objective-C method.
+func (x *Light) ProbeType() LightProbeType {
+	_r := objc.Send[LightProbeType](objref.IDOf(x), objc.RegisterName("probeType"))
+	return _r
+}
+
+// SetProbeType wraps the corresponding Objective-C method.
+func (x *Light) SetProbeType(probeType LightProbeType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeType:"), probeType)
+}
+
+// ProbeUpdateType wraps the corresponding Objective-C method.
+func (x *Light) ProbeUpdateType() LightProbeUpdateType {
+	_r := objc.Send[LightProbeUpdateType](objref.IDOf(x), objc.RegisterName("probeUpdateType"))
+	return _r
+}
+
+// SetProbeUpdateType wraps the corresponding Objective-C method.
+func (x *Light) SetProbeUpdateType(probeUpdateType LightProbeUpdateType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeUpdateType:"), probeUpdateType)
+}
+
+// ParallaxCorrectionEnabled wraps the corresponding Objective-C method.
+func (x *Light) ParallaxCorrectionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("parallaxCorrectionEnabled"))
+	return _r
+}
+
+// SetParallaxCorrectionEnabled wraps the corresponding Objective-C method.
+func (x *Light) SetParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParallaxCorrectionEnabled:"), parallaxCorrectionEnabled)
+}
+
+// ProbeEnvironment wraps the corresponding Objective-C method.
+func (x *Light) ProbeEnvironment() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("probeEnvironment"))
+	return MaterialPropertyFromID(_r)
+}
+
+// AreaType determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
+func (x *Light) AreaType() LightAreaType {
+	_r := objc.Send[LightAreaType](objref.IDOf(x), objc.RegisterName("areaType"))
+	return _r
+}
+
+// SetAreaType wraps the corresponding Objective-C method.
+func (x *Light) SetAreaType(areaType LightAreaType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), areaType)
+}
+
+// AreaPolygonVertices determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
 //
 // AreaPolygonVertices returns the collection as a Go slice.
-func (x *Light) AreaPolygonVertices() []*foundation.NSValue {
-	arr := x.inner.AreaPolygonVertices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *Light) AreaPolygonVertices() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaPolygonVertices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetAreaPolygonVertices calls the underlying SetAreaPolygonVertices.
-func (x *Light) SetAreaPolygonVertices(areaPolygonVertices *foundation.NSArray[*foundation.NSValue]) {
-	x.inner.SetAreaPolygonVertices(areaPolygonVertices)
+// SetAreaPolygonVertices wraps the corresponding Objective-C method.
+func (x *Light) SetAreaPolygonVertices(areaPolygonVertices []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaPolygonVertices:"), purego.SliceToNSArray(areaPolygonVertices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property drawsArea @abstract Determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
-//
-// DrawsArea calls the underlying DrawsArea.
+// DrawsArea determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
 func (x *Light) DrawsArea() bool {
-	return x.inner.DrawsArea()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsArea"))
+	return _r
 }
 
-// SetDrawsArea calls the underlying SetDrawsArea.
+// SetDrawsArea wraps the corresponding Objective-C method.
 func (x *Light) SetDrawsArea(drawsArea bool) {
-	x.inner.SetDrawsArea(drawsArea)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsArea:"), drawsArea)
 }
 
-// @property doubleSided @abstract Determines whether a light of type SCNLightTypeArea is double-sided. Defaults NO. @discussion Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to YES, they also emit light along the +Z axis.
-//
-// DoubleSided calls the underlying DoubleSided.
+// DoubleSided determines whether a light of type SCNLightTypeArea is double-sided. Defaults NO. Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to YES, they also emit light along the +Z axis.
 func (x *Light) DoubleSided() bool {
-	return x.inner.DoubleSided()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doubleSided"))
+	return _r
 }
 
-// SetDoubleSided calls the underlying SetDoubleSided.
+// SetDoubleSided wraps the corresponding Objective-C method.
 func (x *Light) SetDoubleSided(doubleSided bool) {
-	x.inner.SetDoubleSided(doubleSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 }
 
-// @property gobo @abstract Specifies the gobo (or "cookie") of the light, used to control the shape of emitted light. @discussion Gobos are only supported by spot lights.
-//
-// Gobo calls the underlying Gobo.
+// Gobo specifies the gobo (or "cookie") of the light, used to control the shape of emitted light. Gobos are only supported by spot lights.
 func (x *Light) Gobo() *MaterialProperty {
-	_r := x.inner.Gobo()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gobo"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property categoryBitMask @abstract Determines the node categories that will be lit by the receiver. Defaults to all bit set.
-//
-// CategoryBitMask calls the underlying CategoryBitMask.
-func (x *Light) CategoryBitMask() uint {
-	return x.inner.CategoryBitMask()
+// CategoryBitMask determines the node categories that will be lit by the receiver. Defaults to all bit set.
+func (x *Light) CategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+	return _r
 }
 
-// SetCategoryBitMask calls the underlying SetCategoryBitMask.
-func (x *Light) SetCategoryBitMask(categoryBitMask uint) {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+// SetCategoryBitMask wraps the corresponding Objective-C method.
+func (x *Light) SetCategoryBitMask(categoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
-// Returns the value of a lighting attribute.
-//
-// AttributeForKey calls the underlying AttributeForKey.
-func (x *Light) AttributeForKey(key string) objc.ID {
-	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
+// AttributeForKey returns the value of a lighting attribute.
+func (x *Light) AttributeForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Sets the value for a lighting attribute.
-//
-// SetAttributeForKey calls the underlying SetAttributeForKey.
-func (x *Light) SetAttributeForKey(attribute objc.ID, key string) {
-	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))
+// SetAttributeForKey sets the value for a lighting attribute.
+func (x *Light) SetAttributeForKey(attribute obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttribute:forKey:"), objref.IDOf(attribute), purego.NSString(key))
 }
 
 // Lightable is the interface implemented by [Light], for mocking and DI.
 type Lightable interface {
-	Unwrap() *raw.SCNLight
-	WithType(type_ *foundation.NSString) *Light
-	WithColor(color objc.ID) *Light
+	obj.Object
+	WithType(type_ obj.Object) *Light
+	WithColor(color obj.Object) *Light
 	WithTemperature(temperature float64) *Light
 	WithIntensity(intensity float64) *Light
 	WithName(name string) *Light
 	WithCastsShadow(castsShadow bool) *Light
-	WithShadowColor(shadowColor objc.ID) *Light
+	WithShadowColor(shadowColor obj.Object) *Light
 	WithShadowRadius(shadowRadius float64) *Light
 	WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light
-	WithShadowSampleCount(shadowSampleCount uint) *Light
-	WithShadowMode(shadowMode SCNShadowMode) *Light
+	WithShadowSampleCount(shadowSampleCount int) *Light
+	WithShadowMode(shadowMode ShadowMode) *Light
 	WithShadowBias(shadowBias float64) *Light
 	WithAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) *Light
 	WithMaximumShadowDistance(maximumShadowDistance float64) *Light
 	WithForcesBackFaceCasters(forcesBackFaceCasters bool) *Light
 	WithSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) *Light
-	WithShadowCascadeCount(shadowCascadeCount uint) *Light
+	WithShadowCascadeCount(shadowCascadeCount int) *Light
 	WithShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) *Light
 	WithOrthographicScale(orthographicScale float64) *Light
 	WithZNear(zNear float64) *Light
@@ -881,18 +733,18 @@ type Lightable interface {
 	WithSpotInnerAngle(spotInnerAngle float64) *Light
 	WithSpotOuterAngle(spotOuterAngle float64) *Light
 	WithIESProfileURL(iESProfileURL string) *Light
-	WithProbeType(probeType SCNLightProbeType) *Light
-	WithProbeUpdateType(probeUpdateType SCNLightProbeUpdateType) *Light
+	WithProbeType(probeType LightProbeType) *Light
+	WithProbeUpdateType(probeUpdateType LightProbeUpdateType) *Light
 	WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light
-	WithAreaType(areaType SCNLightAreaType) *Light
-	WithAreaPolygonVertices(items ...*foundation.NSValue) *Light
+	WithAreaType(areaType LightAreaType) *Light
+	WithAreaPolygonVertices(items ...obj.Object) *Light
 	WithDrawsArea(drawsArea bool) *Light
 	WithDoubleSided(doubleSided bool) *Light
-	WithCategoryBitMask(categoryBitMask uint) *Light
-	Type() string
-	SetType(type_ *foundation.NSString)
-	Color() objc.ID
-	SetColor(color objc.ID)
+	WithCategoryBitMask(categoryBitMask int) *Light
+	Type() obj.Object
+	SetType(type_ obj.Object)
+	Color() obj.Object
+	SetColor(color obj.Object)
 	Temperature() float64
 	SetTemperature(temperature float64)
 	Intensity() float64
@@ -901,16 +753,16 @@ type Lightable interface {
 	SetName(name string)
 	CastsShadow() bool
 	SetCastsShadow(castsShadow bool)
-	ShadowColor() objc.ID
-	SetShadowColor(shadowColor objc.ID)
+	ShadowColor() obj.Object
+	SetShadowColor(shadowColor obj.Object)
 	ShadowRadius() float64
 	SetShadowRadius(shadowRadius float64)
 	ShadowMapSize() corefoundation.CGSize
 	SetShadowMapSize(shadowMapSize corefoundation.CGSize)
-	ShadowSampleCount() uint
-	SetShadowSampleCount(shadowSampleCount uint)
-	ShadowMode() SCNShadowMode
-	SetShadowMode(shadowMode SCNShadowMode)
+	ShadowSampleCount() int
+	SetShadowSampleCount(shadowSampleCount int)
+	ShadowMode() ShadowMode
+	SetShadowMode(shadowMode ShadowMode)
 	ShadowBias() float64
 	SetShadowBias(shadowBias float64)
 	AutomaticallyAdjustsShadowProjection() bool
@@ -921,8 +773,8 @@ type Lightable interface {
 	SetForcesBackFaceCasters(forcesBackFaceCasters bool)
 	SampleDistributedShadowMaps() bool
 	SetSampleDistributedShadowMaps(sampleDistributedShadowMaps bool)
-	ShadowCascadeCount() uint
-	SetShadowCascadeCount(shadowCascadeCount uint)
+	ShadowCascadeCount() int
+	SetShadowCascadeCount(shadowCascadeCount int)
 	ShadowCascadeSplittingFactor() float64
 	SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64)
 	OrthographicScale() float64
@@ -941,39 +793,29 @@ type Lightable interface {
 	SetSpotInnerAngle(spotInnerAngle float64)
 	SpotOuterAngle() float64
 	SetSpotOuterAngle(spotOuterAngle float64)
-	IESProfileURL() *foundation.NSURL
+	IESProfileURL() obj.Object
 	SetIESProfileURL(iESProfileURL string)
-	SphericalHarmonicsCoefficients() *foundation.NSData
-	ProbeType() SCNLightProbeType
-	SetProbeType(probeType SCNLightProbeType)
-	ProbeUpdateType() SCNLightProbeUpdateType
-	SetProbeUpdateType(probeUpdateType SCNLightProbeUpdateType)
-	ProbeExtents() unsafe.Pointer
-	SetProbeExtents(probeExtents unsafe.Pointer)
-	ProbeOffset() unsafe.Pointer
-	SetProbeOffset(probeOffset unsafe.Pointer)
+	SphericalHarmonicsCoefficients() obj.Object
+	ProbeType() LightProbeType
+	SetProbeType(probeType LightProbeType)
+	ProbeUpdateType() LightProbeUpdateType
+	SetProbeUpdateType(probeUpdateType LightProbeUpdateType)
 	ParallaxCorrectionEnabled() bool
 	SetParallaxCorrectionEnabled(parallaxCorrectionEnabled bool)
-	ParallaxExtentsFactor() unsafe.Pointer
-	SetParallaxExtentsFactor(parallaxExtentsFactor unsafe.Pointer)
-	ParallaxCenterOffset() unsafe.Pointer
-	SetParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer)
 	ProbeEnvironment() *MaterialProperty
-	AreaType() SCNLightAreaType
-	SetAreaType(areaType SCNLightAreaType)
-	AreaExtents() unsafe.Pointer
-	SetAreaExtents(areaExtents unsafe.Pointer)
-	AreaPolygonVertices() []*foundation.NSValue
-	SetAreaPolygonVertices(areaPolygonVertices *foundation.NSArray[*foundation.NSValue])
+	AreaType() LightAreaType
+	SetAreaType(areaType LightAreaType)
+	AreaPolygonVertices() []obj.Object
+	SetAreaPolygonVertices(areaPolygonVertices []obj.Object)
 	DrawsArea() bool
 	SetDrawsArea(drawsArea bool)
 	DoubleSided() bool
 	SetDoubleSided(doubleSided bool)
 	Gobo() *MaterialProperty
-	CategoryBitMask() uint
-	SetCategoryBitMask(categoryBitMask uint)
-	AttributeForKey(key string) objc.ID
-	SetAttributeForKey(attribute objc.ID, key string)
+	CategoryBitMask() int
+	SetCategoryBitMask(categoryBitMask int)
+	AttributeForKey(key string) obj.Object
+	SetAttributeForKey(attribute obj.Object, key string)
 }
 
 var _ Lightable = (*Light)(nil)

@@ -5,14 +5,11 @@
 package exceptionhandling
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/exceptionhandling"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DefaultExceptionHandler calls the underlying NSExceptionHandlerDefaultExceptionHandler.
+// DefaultExceptionHandler returns the singleton NSExceptionHandler instance.
 func DefaultExceptionHandler() *ExceptionHandler {
-	_r := raw.NSExceptionHandlerDefaultExceptionHandler()
-	if _r == nil {
-		return nil
-	}
-	return &ExceptionHandler{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExceptionHandler")), objc.RegisterName("defaultExceptionHandler"))
+	return ExceptionHandlerFromID(_r)
 }

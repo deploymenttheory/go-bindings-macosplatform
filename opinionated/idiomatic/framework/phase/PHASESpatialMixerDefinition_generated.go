@@ -5,161 +5,133 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An audio-layering object that produces environmental effects and plays sound with a 3D position and orientation.
+// SpatialMixerDefinition is an idiomatic wrapper over the Objective-C class PHASESpatialMixerDefinition.
 //
-// SpatialMixerDefinition wraps [raw.PHASESpatialMixerDefinition] with a fluent Go API.
+// It embeds [MixerDefinition], promoting that type's methods.
+//
+// An audio-layering object that produces environmental effects and plays sound with a 3D position and orientation.
 type SpatialMixerDefinition struct {
-	inner *raw.PHASESpatialMixerDefinition
+	MixerDefinition
 }
 
-// Unwrap returns the underlying [raw.PHASESpatialMixerDefinition].
-func (x *SpatialMixerDefinition) Unwrap() *raw.PHASESpatialMixerDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpatialMixerDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// SpatialMixerDefinitionFromID adopts an existing object pointer as a SpatialMixerDefinition (nil for 0).
+// SpatialMixerDefinitionFromID adopts an existing Objective-C object as a SpatialMixerDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func SpatialMixerDefinitionFromID(id objc.ID) *SpatialMixerDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(id)}
+	x := &SpatialMixerDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a mixer with the designated spatial pipeline.
-//
-// NewSpatialMixerDefinitionWithSpatialPipeline creates a new [SpatialMixerDefinition].
-func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *raw.PHASESpatialPipeline) *SpatialMixerDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpatialPipeline:"), spatialPipeline.Ptr())
-	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(_id)}
+// spatialMixerDefinitionAdopt wraps an Objective-C object that this code just created as a
+// SpatialMixerDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func spatialMixerDefinitionAdopt(id objc.ID) *SpatialMixerDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &SpatialMixerDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a named mixer with the designated spatial pipeline.
-//
-// NewSpatialMixerDefinitionWithSpatialPipelineIdentifier creates a new [SpatialMixerDefinition].
-func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *raw.PHASESpatialPipeline, identifier string) *SpatialMixerDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpatialPipeline:identifier:"), spatialPipeline.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(_id)}
+// NewSpatialMixerDefinitionWithSpatialPipeline creates a mixer with the designated spatial pipeline.
+func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *SpatialPipeline) *SpatialMixerDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpatialPipeline:"), objref.IDOf(spatialPipeline))
+	return spatialMixerDefinitionAdopt(_id)
 }
 
-// An effect that changes sound as it carries over a distance.
-//
-// WithDistanceModelParameters sets the distanceModelParameters property and returns the receiver for chaining.
+// NewSpatialMixerDefinitionWithSpatialPipelineIdentifier creates a named mixer with the designated spatial pipeline.
+func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *SpatialPipeline, identifier string) *SpatialMixerDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpatialPipeline:identifier:"), objref.IDOf(spatialPipeline), purego.NSString(identifier))
+	return spatialMixerDefinitionAdopt(_id)
+}
+
+// WithDistanceModelParameters an effect that changes sound as it carries over a distance.
 func (x *SpatialMixerDefinition) WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition {
-	x.inner.SetDistanceModelParameters(distanceModelParameters.asDistanceModelParameters())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistanceModelParameters:"), objref.IDOf(distanceModelParameters))
 	return x
 }
 
-// A data set that determines how well the listener hears depending on its direction relative to a sound source.
-//
-// WithListenerDirectivityModelParameters sets the listenerDirectivityModelParameters property and returns the receiver for chaining.
+// WithListenerDirectivityModelParameters a data set that determines how well the listener hears depending on its direction relative to a sound source.
 func (x *SpatialMixerDefinition) WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
-	x.inner.SetListenerDirectivityModelParameters(listenerDirectivityModelParameters.asDirectivityModelParameters())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerDirectivityModelParameters:"), objref.IDOf(listenerDirectivityModelParameters))
 	return x
 }
 
-// A data set that directs sound such that it’s louder when directed at the listener.
-//
-// WithSourceDirectivityModelParameters sets the sourceDirectivityModelParameters property and returns the receiver for chaining.
+// WithSourceDirectivityModelParameters a data set that directs sound such that it’s louder when directed at the listener.
 func (x *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
-	x.inner.SetSourceDirectivityModelParameters(sourceDirectivityModelParameters.asDirectivityModelParameters())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceDirectivityModelParameters:"), objref.IDOf(sourceDirectivityModelParameters))
 	return x
 }
 
-// The mixer’s volume.
-//
-// WithGain sets the gain property and returns the receiver for chaining.
+// WithGain the mixer’s volume.
 func (x *SpatialMixerDefinition) WithGain(gain float64) *SpatialMixerDefinition {
-	x.inner.PHASEMixerDefinition.SetGain(gain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// A template for a parameter that changes the mixer’s volume gradually over a period of time.
-//
-// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (x *SpatialMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition {
-	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
-// @property spatialPipeline @abstract Spatial Pipeline.
-//
-// SpatialPipeline calls the underlying SpatialPipeline.
+// SpatialPipeline spatial Pipeline.
 func (x *SpatialMixerDefinition) SpatialPipeline() *SpatialPipeline {
-	_r := x.inner.SpatialPipeline()
-	if _r == nil {
-		return nil
-	}
-	return &SpatialPipeline{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spatialPipeline"))
+	return SpatialPipelineFromID(_r)
 }
 
-// @property distanceModelParameters @abstract Distance model parameters (optional).
-//
-// DistanceModelParameters calls the underlying DistanceModelParameters.
+// DistanceModelParameters distance model parameters (optional).
 func (x *SpatialMixerDefinition) DistanceModelParameters() *DistanceModelParameters {
-	_r := x.inner.DistanceModelParameters()
-	if _r == nil {
-		return nil
-	}
-	return &DistanceModelParameters{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distanceModelParameters"))
+	return DistanceModelParametersFromID(_r)
 }
 
-// SetDistanceModelParameters calls the underlying SetDistanceModelParameters.
-func (x *SpatialMixerDefinition) SetDistanceModelParameters(distanceModelParameters *raw.PHASEDistanceModelParameters) {
-	x.inner.SetDistanceModelParameters(distanceModelParameters)
+// SetDistanceModelParameters wraps the corresponding Objective-C method.
+func (x *SpatialMixerDefinition) SetDistanceModelParameters(distanceModelParameters *DistanceModelParameters) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistanceModelParameters:"), objref.IDOf(distanceModelParameters))
 }
 
-// @property listenerDirectivityModelParameters @abstract Listener directivity model parameters (optional).
-//
-// ListenerDirectivityModelParameters calls the underlying ListenerDirectivityModelParameters.
+// ListenerDirectivityModelParameters listener directivity model parameters (optional).
 func (x *SpatialMixerDefinition) ListenerDirectivityModelParameters() *DirectivityModelParameters {
-	_r := x.inner.ListenerDirectivityModelParameters()
-	if _r == nil {
-		return nil
-	}
-	return &DirectivityModelParameters{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listenerDirectivityModelParameters"))
+	return DirectivityModelParametersFromID(_r)
 }
 
-// SetListenerDirectivityModelParameters calls the underlying SetListenerDirectivityModelParameters.
-func (x *SpatialMixerDefinition) SetListenerDirectivityModelParameters(listenerDirectivityModelParameters *raw.PHASEDirectivityModelParameters) {
-	x.inner.SetListenerDirectivityModelParameters(listenerDirectivityModelParameters)
+// SetListenerDirectivityModelParameters wraps the corresponding Objective-C method.
+func (x *SpatialMixerDefinition) SetListenerDirectivityModelParameters(listenerDirectivityModelParameters *DirectivityModelParameters) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerDirectivityModelParameters:"), objref.IDOf(listenerDirectivityModelParameters))
 }
 
-// @property sourceDirectivityModelParameters @abstract Source directivity model parameters (optional).
-//
-// SourceDirectivityModelParameters calls the underlying SourceDirectivityModelParameters.
+// SourceDirectivityModelParameters source directivity model parameters (optional).
 func (x *SpatialMixerDefinition) SourceDirectivityModelParameters() *DirectivityModelParameters {
-	_r := x.inner.SourceDirectivityModelParameters()
-	if _r == nil {
-		return nil
-	}
-	return &DirectivityModelParameters{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceDirectivityModelParameters"))
+	return DirectivityModelParametersFromID(_r)
 }
 
-// SetSourceDirectivityModelParameters calls the underlying SetSourceDirectivityModelParameters.
-func (x *SpatialMixerDefinition) SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *raw.PHASEDirectivityModelParameters) {
-	x.inner.SetSourceDirectivityModelParameters(sourceDirectivityModelParameters)
-}
-
-func (x *SpatialMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition {
-	return &x.inner.PHASEMixerDefinition
-}
-
-func (x *SpatialMixerDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEMixerDefinition.PHASEDefinition
+// SetSourceDirectivityModelParameters wraps the corresponding Objective-C method.
+func (x *SpatialMixerDefinition) SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *DirectivityModelParameters) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceDirectivityModelParameters:"), objref.IDOf(sourceDirectivityModelParameters))
 }
 
 // SpatialMixerDefinitionable is the interface implemented by [SpatialMixerDefinition], for mocking and DI.
 type SpatialMixerDefinitionable interface {
-	Unwrap() *raw.PHASESpatialMixerDefinition
+	obj.Object
 	WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition
 	WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition
 	WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition
@@ -167,11 +139,15 @@ type SpatialMixerDefinitionable interface {
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition
 	SpatialPipeline() *SpatialPipeline
 	DistanceModelParameters() *DistanceModelParameters
-	SetDistanceModelParameters(distanceModelParameters *raw.PHASEDistanceModelParameters)
+	SetDistanceModelParameters(distanceModelParameters *DistanceModelParameters)
 	ListenerDirectivityModelParameters() *DirectivityModelParameters
-	SetListenerDirectivityModelParameters(listenerDirectivityModelParameters *raw.PHASEDirectivityModelParameters)
+	SetListenerDirectivityModelParameters(listenerDirectivityModelParameters *DirectivityModelParameters)
 	SourceDirectivityModelParameters() *DirectivityModelParameters
-	SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *raw.PHASEDirectivityModelParameters)
+	SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *DirectivityModelParameters)
 }
 
 var _ SpatialMixerDefinitionable = (*SpatialMixerDefinition)(nil)
+
+var _ MixerDefinitionProvider = (*SpatialMixerDefinition)(nil)
+
+var _ DefinitionProvider = (*SpatialMixerDefinition)(nil)

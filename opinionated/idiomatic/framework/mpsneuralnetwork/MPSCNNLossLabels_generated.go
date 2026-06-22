@@ -5,86 +5,95 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNLossLabels wraps [raw.MPSCNNLossLabels] with a fluent Go API.
+// CNNLossLabels is an idiomatic wrapper over the Objective-C class MPSCNNLossLabels.
 type CNNLossLabels struct {
-	inner *raw.MPSCNNLossLabels
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNLossLabels].
-func (x *CNNLossLabels) Unwrap() *raw.MPSCNNLossLabels { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNLossLabels) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNLossLabelsFromID adopts an existing object pointer as a CNNLossLabels (nil for 0).
+// CNNLossLabelsFromID adopts an existing Objective-C object as a CNNLossLabels
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNLossLabelsFromID(id objc.ID) *CNNLossLabels {
 	if id == 0 {
 		return nil
 	}
-	return &CNNLossLabels{inner: raw.MPSCNNLossLabelsFromID(id)}
+	x := &CNNLossLabels{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Set labels (aka targets, ground truth) for the MPSCNNLossLabels object. @discussion The labels and weights data are copied into internal storage. The computed loss can either be a scalar value (in batch mode, a single value per image in a batch) or it can be one value per feature channel. Thus, the size of the loss image must either match the size of the input source image or be {1, 1, 1}, which results in a scalar value. In this convinience initializer, the assumed size of the loss image is {1, 1, 1}. @param      device                  Device the state resources will be created on. @param      labelsDescriptor        Describes the labels data. This includes: - The per-element labels data. The data must be in floating point format. - Data layout of labels data. See MPSImage.h for more information. - Size of labels data: (width, height, feature channels}. - Optionally, row bytes of labels data. - Optionally, slice bytes of labels data.
-//
-// NewCNNLossLabelsWithDeviceLabelsDescriptor creates a new [CNNLossLabels].
-func NewCNNLossLabelsWithDeviceLabelsDescriptor(device metal.MTLDevice, labelsDescriptor *raw.MPSCNNLossDataDescriptor) *CNNLossLabels {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLossLabels")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:labelsDescriptor:"), device, labelsDescriptor.Ptr())
-	return &CNNLossLabels{inner: raw.MPSCNNLossLabelsFromID(_id)}
+// cNNLossLabelsAdopt wraps an Objective-C object that this code just created as a
+// CNNLossLabels (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNLossLabelsAdopt(id objc.ID) *CNNLossLabels {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNLossLabels{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Set labels (aka targets, ground truth) and weights for the MPSCNNLossLabels object. Weights are optional. @discussion The labels and weights data are copied into internal storage. @param      device                  Device the state resources will be created on. @param      lossImageSize           The size of the resulting loss image: { width, height, featureChannels }. The computed loss can either be a scalar value (in batch mode, a single value per image in a batch) or it can be one value per feature channel. Thus, the size of the loss image must either match the size of the input source image or be {1, 1, 1}, which results in a scalar value. @param      labelsDescriptor        Describes the labels data. This includes: - The per-element labels data. The data must be in floating point format. - Data layout of labels data. See MPSImage.h for more information. - Size of labels data: (width, height, feature channels}. - Optionally, row bytes of labels data. - Optionally, slice bytes of labels data. @param      weightsDescriptor       Describes the weights data. This includes: - The per-element weights data. The data must be in floating point format. - Data layout of weights data. See MPSImage.h for more information. - Size of weights data: (width, height, feature channels}. - Optionally, row bytes of weights data. - Optionally, slice bytes of weights data. This parameter is optional. If you are using a single weight, please use the weight property of the MPSCNNLossDescriptor object.
-//
-// NewCNNLossLabelsWithDeviceLossImageSizeLabelsDescriptorWeightsDescriptor creates a new [CNNLossLabels].
-func NewCNNLossLabelsWithDeviceLossImageSizeLabelsDescriptorWeightsDescriptor(device metal.MTLDevice, lossImageSize metal.MTLSize, labelsDescriptor *raw.MPSCNNLossDataDescriptor, weightsDescriptor *raw.MPSCNNLossDataDescriptor) *CNNLossLabels {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLossLabels")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:lossImageSize:labelsDescriptor:weightsDescriptor:"), device, lossImageSize, labelsDescriptor.Ptr(), weightsDescriptor.Ptr())
-	return &CNNLossLabels{inner: raw.MPSCNNLossLabelsFromID(_id)}
+// Description returns the object's -description text.
+func (x *CNNLossLabels) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Set labels (aka targets, ground truth) and weights for the MPSCNNLossLabels object. Weights are optional. @discussion The labels and weights images are retained - it is the users responsibility to make sure that they contain the right data when the loss filter is run on the device. @param      device                  Device the state resources will be created on. @param      lossImageSize           The size of the resulting loss image: { width, height, featureChannels }. The computed loss can either be a scalar value (in batch mode, a single value per image in a batch) or it can be one value per feature channel. Thus, the size of the loss image must either match the size of the input source image or be {1, 1, 1}, which results in a scalar value. @param      labelsImage             Describes the labels data. @param      weightsImage            Describes the weights data. This parameter is optional. If you are using a single weight, please use the weight property of the MPSCNNLossDescriptor object.
-//
-// NewCNNLossLabelsWithDeviceLossImageSizeLabelsImageWeightsImage creates a new [CNNLossLabels].
-func NewCNNLossLabelsWithDeviceLossImageSizeLabelsImageWeightsImage(device metal.MTLDevice, lossImageSize metal.MTLSize, labelsImage *mpscore.MPSImage, weightsImage *mpscore.MPSImage) *CNNLossLabels {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLossLabels")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:lossImageSize:labelsImage:weightsImage:"), device, lossImageSize, labelsImage.Ptr(), weightsImage.Ptr())
-	return &CNNLossLabels{inner: raw.MPSCNNLossLabelsFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNLossLabels) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Loss image accessor method. @return     An autoreleased MPSImage object, containing the loss data. The loss data is populated in the -encode call, thus the contents are undefined until you -encode the filter. In order to guarantee that the image is correctly synchronized for CPU side access, it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:] method before accessing the data in the image.
-//
-// LossImage calls the underlying LossImage.
-func (x *CNNLossLabels) LossImage() *mpscore.MPSImage {
-	return x.inner.LossImage()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNLossLabels) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract   Labels image accessor method. @return     An autoreleased MPSImage object, containing the labels data. The labels data is populated in the -initWithDevice call. In order to guarantee that the image is correctly synchronized for CPU side access, it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:] method before accessing the data in the image.
-//
-// LabelsImage calls the underlying LabelsImage.
-func (x *CNNLossLabels) LabelsImage() *mpscore.MPSImage {
-	return x.inner.LabelsImage()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNLossLabels) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Weights image accessor method. @return     An autoreleased MPSImage object, containing the weights data. The weights data is populated in the -initWithDevice call. In order to guarantee that the image is correctly synchronized for CPU side access, it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:] method before accessing the data in the image.
-//
-// WeightsImage calls the underlying WeightsImage.
-func (x *CNNLossLabels) WeightsImage() *mpscore.MPSImage {
-	return x.inner.WeightsImage()
+// NewCNNLossLabels creates a new CNNLossLabels.
+func NewCNNLossLabels() *CNNLossLabels {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossLabels")), objc.RegisterName("new"))
+	return cNNLossLabelsAdopt(_id)
+}
+
+// LossImage loss image accessor method.
+func (x *CNNLossLabels) LossImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lossImage"))
+	return obj.Wrap(_r)
+}
+
+// LabelsImage labels image accessor method.
+func (x *CNNLossLabels) LabelsImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelsImage"))
+	return obj.Wrap(_r)
+}
+
+// WeightsImage weights image accessor method.
+func (x *CNNLossLabels) WeightsImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsImage"))
+	return obj.Wrap(_r)
 }
 
 // CNNLossLabelsable is the interface implemented by [CNNLossLabels], for mocking and DI.
 type CNNLossLabelsable interface {
-	Unwrap() *raw.MPSCNNLossLabels
-	LossImage() *mpscore.MPSImage
-	LabelsImage() *mpscore.MPSImage
-	WeightsImage() *mpscore.MPSImage
+	obj.Object
+	LossImage() obj.Object
+	LabelsImage() obj.Object
+	WeightsImage() obj.Object
 }
 
 var _ CNNLossLabelsable = (*CNNLossLabels)(nil)

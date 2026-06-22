@@ -5,43 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a directory share.
+// DirectoryShare is an idiomatic wrapper over the Objective-C class VZDirectoryShare.
 //
-// DirectoryShare wraps [raw.VZDirectoryShare] with a fluent Go API.
+// DirectoryShare is an abstract base — you do not construct it directly. Construct one of [LinuxRosettaDirectoryShare], [MultipleDirectoryShare], [SingleDirectoryShare] and pass it where a DirectoryShare is accepted.
+//
+// The base class for a directory share.
 type DirectoryShare struct {
-	inner *raw.VZDirectoryShare
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZDirectoryShare].
-func (x *DirectoryShare) Unwrap() *raw.VZDirectoryShare { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectoryShare) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectoryShareFromID adopts an existing object pointer as a DirectoryShare (nil for 0).
+// DirectoryShareFromID adopts an existing Objective-C object as a DirectoryShare
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectoryShareFromID(id objc.ID) *DirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	return &DirectoryShare{inner: raw.VZDirectoryShareFromID(id)}
+	x := &DirectoryShare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDirectoryShare creates a new [DirectoryShare].
-func NewDirectoryShare() *DirectoryShare {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDirectoryShare")), objc.RegisterName("new"))
-	return &DirectoryShare{inner: raw.VZDirectoryShareFromID(_id)}
+// directoryShareAdopt wraps an Objective-C object that this code just created as a
+// DirectoryShare (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directoryShareAdopt(id objc.ID) *DirectoryShare {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectoryShare{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return x.inner }
+// Description returns the object's -description text.
+func (x *DirectoryShare) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectoryShare) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectoryShare) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectoryShare) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // DirectoryShareable is the interface implemented by [DirectoryShare], for mocking and DI.
 type DirectoryShareable interface {
-	Unwrap() *raw.VZDirectoryShare
+	obj.Object
 }
 
 var _ DirectoryShareable = (*DirectoryShare)(nil)
+
+// isDirectoryShare marks DirectoryShare — and, by embedding promotion, its
+// subclasses — as a member of the DirectoryShare hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectoryShare) isDirectoryShare() {}
+
+var _ DirectoryShareProvider = (*DirectoryShare)(nil)

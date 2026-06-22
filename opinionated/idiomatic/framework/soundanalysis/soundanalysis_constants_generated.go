@@ -5,21 +5,14 @@
 package soundanalysis
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Denotes the first edition of the Apple-provided sound classifier.
-// SNClassifierIdentifierVersion1 returns the string constant SNClassifierIdentifierVersion1 as an objc.ID, for use as a dictionary key or selector argument.
-func SNClassifierIdentifierVersion1() objc.ID {
-	if _r := raw.SNClassifierIdentifierVersion1(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SNClassifierIdentifierVersion1 returns the string constant SNClassifierIdentifierVersion1, for use as a dictionary key or argument.
+func SNClassifierIdentifierVersion1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SNClassifierIdentifierVersion1")))
 }
 
-// SNErrorDomain returns the string constant SNErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SNErrorDomain() objc.ID {
-	return purego.CFConstant(raw.SNErrorDomain())
-}
+// SNErrorDomain returns the string constant SNErrorDomain, for use as a dictionary key or argument.
+func SNErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SNErrorDomain"))) }

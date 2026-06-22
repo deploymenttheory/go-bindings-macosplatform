@@ -5,99 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEClusterEnergyTransferStartedEvent wraps [raw.MTREnergyEVSEClusterEnergyTransferStartedEvent] with a fluent Go API.
+// MTREnergyEVSEClusterEnergyTransferStartedEvent is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterEnergyTransferStartedEvent.
 type MTREnergyEVSEClusterEnergyTransferStartedEvent struct {
-	inner *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEClusterEnergyTransferStartedEvent].
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEClusterEnergyTransferStartedEventFromID adopts an existing object pointer as a MTREnergyEVSEClusterEnergyTransferStartedEvent (nil for 0).
+// MTREnergyEVSEClusterEnergyTransferStartedEventFromID adopts an existing Objective-C object as a MTREnergyEVSEClusterEnergyTransferStartedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEClusterEnergyTransferStartedEventFromID(id objc.ID) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEClusterEnergyTransferStartedEvent{inner: raw.MTREnergyEVSEClusterEnergyTransferStartedEventFromID(id)}
+	x := &MTREnergyEVSEClusterEnergyTransferStartedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTREnergyEVSEClusterEnergyTransferStartedEvent creates a new [MTREnergyEVSEClusterEnergyTransferStartedEvent].
+// mTREnergyEVSEClusterEnergyTransferStartedEventAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEClusterEnergyTransferStartedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEClusterEnergyTransferStartedEventAdopt(id objc.ID) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEClusterEnergyTransferStartedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEClusterEnergyTransferStartedEvent creates a new MTREnergyEVSEClusterEnergyTransferStartedEvent.
 func NewMTREnergyEVSEClusterEnergyTransferStartedEvent() *MTREnergyEVSEClusterEnergyTransferStartedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEClusterEnergyTransferStartedEvent")), objc.RegisterName("new"))
-	return &MTREnergyEVSEClusterEnergyTransferStartedEvent{inner: raw.MTREnergyEVSEClusterEnergyTransferStartedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterEnergyTransferStartedEvent")), objc.RegisterName("new"))
+	return mTREnergyEVSEClusterEnergyTransferStartedEventAdopt(_id)
 }
 
-// WithSessionID sets the sessionID property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
-	x.inner.SetSessionID(sessionID)
+// WithSessionID sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return x
 }
 
-// WithState sets the state property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
-	x.inner.SetState(state)
+// WithState sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 	return x
 }
 
-// WithMaximumCurrent sets the maximumCurrent property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithMaximumCurrent(maximumCurrent *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
-	x.inner.SetMaximumCurrent(maximumCurrent)
+// WithMaximumCurrent sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithMaximumCurrent(maximumCurrent obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCurrent:"), objref.IDOf(maximumCurrent))
 	return x
 }
 
-// SessionID calls the underlying SessionID.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() *foundation.NSNumber {
-	return x.inner.SessionID()
+// SessionID wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+	return obj.Wrap(_r)
 }
 
-// SetSessionID calls the underlying SetSessionID.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetSessionID(sessionID *foundation.NSNumber) {
-	x.inner.SetSessionID(sessionID)
+// SetSessionID wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetSessionID(sessionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 }
 
-// State calls the underlying State.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() *foundation.NSNumber {
-	return x.inner.State()
+// State wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	return obj.Wrap(_r)
 }
 
-// SetState calls the underlying SetState.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetState(state *foundation.NSNumber) {
-	x.inner.SetState(state)
+// SetState wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetState(state obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), objref.IDOf(state))
 }
 
-// MaximumCurrent calls the underlying MaximumCurrent.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() *foundation.NSNumber {
-	return x.inner.MaximumCurrent()
+// MaximumCurrent wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumCurrent"))
+	return obj.Wrap(_r)
 }
 
-// SetMaximumCurrent calls the underlying SetMaximumCurrent.
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetMaximumCurrent(maximumCurrent *foundation.NSNumber) {
-	x.inner.SetMaximumCurrent(maximumCurrent)
+// SetMaximumCurrent wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetMaximumCurrent(maximumCurrent obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCurrent:"), objref.IDOf(maximumCurrent))
 }
 
 // MTREnergyEVSEClusterEnergyTransferStartedEventable is the interface implemented by [MTREnergyEVSEClusterEnergyTransferStartedEvent], for mocking and DI.
 type MTREnergyEVSEClusterEnergyTransferStartedEventable interface {
-	Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent
-	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent
-	WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent
-	WithMaximumCurrent(maximumCurrent *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent
-	SessionID() *foundation.NSNumber
-	SetSessionID(sessionID *foundation.NSNumber)
-	State() *foundation.NSNumber
-	SetState(state *foundation.NSNumber)
-	MaximumCurrent() *foundation.NSNumber
-	SetMaximumCurrent(maximumCurrent *foundation.NSNumber)
+	obj.Object
+	WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent
+	WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent
+	WithMaximumCurrent(maximumCurrent obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent
+	SessionID() obj.Object
+	SetSessionID(sessionID obj.Object)
+	State() obj.Object
+	SetState(state obj.Object)
+	MaximumCurrent() obj.Object
+	SetMaximumCurrent(maximumCurrent obj.Object)
 }
 
 var _ MTREnergyEVSEClusterEnergyTransferStartedEventable = (*MTREnergyEVSEClusterEnergyTransferStartedEvent)(nil)

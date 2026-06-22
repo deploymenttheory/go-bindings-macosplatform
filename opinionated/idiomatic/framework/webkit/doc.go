@@ -3,4 +3,25 @@
 //go:build darwin
 
 // Package webkit provides a fluent Go API over the macOS WebKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - DOMBlob: [DOMFile]
+//   - DOMCSSRule: [DOMCSSCharsetRule], [DOMCSSFontFaceRule], [DOMCSSImportRule], [DOMCSSMediaRule], [DOMCSSPageRule], [DOMCSSStyleRule], [DOMCSSUnknownRule]
+//   - DOMCSSValue: [DOMCSSPrimitiveValue], [DOMCSSValueList]
+//   - DOMCharacterData: [DOMComment], [DOMProcessingInstruction], [DOMText]
+//   - DOMDocument: [DOMHTMLDocument]
+//   - DOMElement: [DOMHTMLElement]
+//   - DOMEvent: [DOMMutationEvent], [DOMOverflowEvent], [DOMProgressEvent], [DOMUIEvent]
+//   - DOMHTMLElement: [DOMHTMLAnchorElement], [DOMHTMLAppletElement], [DOMHTMLAreaElement], [DOMHTMLBRElement], [DOMHTMLBaseElement], [DOMHTMLBaseFontElement], [DOMHTMLBodyElement], [DOMHTMLButtonElement], [DOMHTMLDListElement], [DOMHTMLDirectoryElement], [DOMHTMLDivElement], [DOMHTMLEmbedElement], [DOMHTMLFieldSetElement], [DOMHTMLFontElement], [DOMHTMLFormElement], [DOMHTMLFrameElement], [DOMHTMLFrameSetElement], [DOMHTMLHRElement], [DOMHTMLHeadElement], [DOMHTMLHeadingElement], [DOMHTMLHtmlElement], [DOMHTMLIFrameElement], [DOMHTMLImageElement], [DOMHTMLInputElement], [DOMHTMLLIElement], [DOMHTMLLabelElement], [DOMHTMLLegendElement], [DOMHTMLLinkElement], [DOMHTMLMapElement], [DOMHTMLMarqueeElement], [DOMHTMLMenuElement], [DOMHTMLMetaElement], [DOMHTMLModElement], [DOMHTMLOListElement], [DOMHTMLObjectElement], [DOMHTMLOptGroupElement], [DOMHTMLOptionElement], [DOMHTMLParagraphElement], [DOMHTMLParamElement], [DOMHTMLPreElement], [DOMHTMLQuoteElement], [DOMHTMLScriptElement], [DOMHTMLSelectElement], [DOMHTMLStyleElement], [DOMHTMLTableCaptionElement], [DOMHTMLTableCellElement], [DOMHTMLTableColElement], [DOMHTMLTableElement], [DOMHTMLTableRowElement], [DOMHTMLTableSectionElement], [DOMHTMLTextAreaElement], [DOMHTMLTitleElement], [DOMHTMLUListElement]
+//   - DOMMouseEvent: [DOMWheelEvent]
+//   - DOMNode: [DOMAttr], [DOMCharacterData], [DOMDocument], [DOMDocumentFragment], [DOMDocumentType], [DOMElement], [DOMEntity], [DOMEntityReference]
+//   - DOMObject: [DOMAbstractView], [DOMBlob], [DOMCSSRule], [DOMCSSRuleList], [DOMCSSStyleDeclaration], [DOMCSSValue], [DOMCounter], [DOMEvent], [DOMFileList], [DOMHTMLCollection], [DOMHTMLOptionsCollection], [DOMImplementation], [DOMMediaList], [DOMNamedNodeMap], [DOMNode], [DOMNodeIterator], [DOMNodeList], [DOMRGBColor], [DOMRange], [DOMRect], [DOMStyleSheet], [DOMStyleSheetList], [DOMTreeWalker], [DOMXPathExpression], [DOMXPathResult]
+//   - DOMStyleSheet: [DOMCSSStyleSheet]
+//   - DOMText: [DOMCDATASection]
+//   - DOMUIEvent: [DOMKeyboardEvent], [DOMMouseEvent]
+//   - WebScriptObject: [DOMObject]
 package webkit

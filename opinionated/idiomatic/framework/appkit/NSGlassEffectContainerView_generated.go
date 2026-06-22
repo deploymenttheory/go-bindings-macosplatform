@@ -5,475 +5,397 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A view that efficiently merges descendant glass effect views together when they are within a specified proximity to each other.
+// GlassEffectContainerView is an idiomatic wrapper over the Objective-C class NSGlassEffectContainerView.
 //
-// GlassEffectContainerView wraps [raw.NSGlassEffectContainerView] with a fluent Go API.
+// It embeds [View], promoting that type's methods.
+//
+// A view that efficiently merges descendant glass effect views together when they are within a specified proximity to each other.
 type GlassEffectContainerView struct {
-	inner *raw.NSGlassEffectContainerView
+	View
 }
 
-// Unwrap returns the underlying [raw.NSGlassEffectContainerView].
-func (x *GlassEffectContainerView) Unwrap() *raw.NSGlassEffectContainerView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GlassEffectContainerView) ID() objc.ID { return x.inner.Ptr() }
-
-// GlassEffectContainerViewFromID adopts an existing object pointer as a GlassEffectContainerView (nil for 0).
+// GlassEffectContainerViewFromID adopts an existing Objective-C object as a GlassEffectContainerView
+// (nil for 0), retaining it and registering a release finalizer.
 func GlassEffectContainerViewFromID(id objc.ID) *GlassEffectContainerView {
 	if id == 0 {
 		return nil
 	}
-	return &GlassEffectContainerView{inner: raw.NSGlassEffectContainerViewFromID(id)}
-}
-
-// NewGlassEffectContainerView creates a new [GlassEffectContainerView].
-func NewGlassEffectContainerView() *GlassEffectContainerView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGlassEffectContainerView")), objc.RegisterName("new"))
-	return &GlassEffectContainerView{inner: raw.NSGlassEffectContainerViewFromID(_id)}
-}
-
-// The view that contains descendant views to merge together when in proximity to each other.
-//
-// WithContentView sets the contentView property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithContentView(contentView ViewProvider) *GlassEffectContainerView {
-	x.inner.SetContentView(contentView.asView())
+	x := &GlassEffectContainerView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The proximity at which the glass effect container view begins merging eligible descendent glass effect views.
-//
-// WithSpacing sets the spacing property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithSpacing(spacing float64) *GlassEffectContainerView {
-	x.inner.SetSpacing(spacing)
-	return x
-}
-
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
-func (x *GlassEffectContainerView) WithSubviews(items ...ViewProvider) *GlassEffectContainerView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
-	return x
-}
-
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithHidden(hidden bool) *GlassEffectContainerView {
-	x.inner.NSView.SetHidden(hidden)
-	return x
-}
-
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectContainerView {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
-	return x
-}
-
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectContainerView {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
-	return x
-}
-
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GlassEffectContainerView {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
-	return x
-}
-
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithFrame(frame corefoundation.CGRect) *GlassEffectContainerView {
-	x.inner.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithFrameRotation(frameRotation float64) *GlassEffectContainerView {
-	x.inner.NSView.SetFrameRotation(frameRotation)
-	return x
-}
-
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectContainerView {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
-	return x
-}
-
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithBoundsRotation(boundsRotation float64) *GlassEffectContainerView {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
-	return x
-}
-
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithBounds(bounds corefoundation.CGRect) *GlassEffectContainerView {
-	x.inner.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithCanDrawConcurrently(canDrawConcurrently bool) *GlassEffectContainerView {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
-	return x
-}
-
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithNeedsDisplay(needsDisplay bool) *GlassEffectContainerView {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
-	return x
-}
-
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectContainerView {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
-	return x
-}
-
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectContainerView {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
-	return x
-}
-
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GlassEffectContainerView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
-	return x
-}
-
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GlassEffectContainerView {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
-	return x
-}
-
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithWantsLayer(wantsLayer bool) *GlassEffectContainerView {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
-	return x
-}
-
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithLayer(layer *quartzcore.CALayer) *GlassEffectContainerView {
-	x.inner.NSView.SetLayer(layer)
-	return x
-}
-
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectContainerView {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
-	return x
-}
-
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithNeedsLayout(needsLayout bool) *GlassEffectContainerView {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
-	return x
-}
-
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAlphaValue(alphaValue float64) *GlassEffectContainerView {
-	x.inner.NSView.SetAlphaValue(alphaValue)
-	return x
-}
-
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GlassEffectContainerView {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
-	return x
-}
-
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *GlassEffectContainerView) WithBackgroundFilters(items ...*coreimage.CIFilter) *GlassEffectContainerView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
-	return x
-}
-
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GlassEffectContainerView {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
-	return x
-}
-
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *GlassEffectContainerView) WithContentFilters(items ...*coreimage.CIFilter) *GlassEffectContainerView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
-	return x
-}
-
-// WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithShadow(shadow *Shadow) *GlassEffectContainerView {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
-	return x
-}
-
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithClipsToBounds(clipsToBounds bool) *GlassEffectContainerView {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
-	return x
-}
-
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectContainerView {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
-	return x
-}
-
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithToolTip(toolTip string) *GlassEffectContainerView {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
-	return x
-}
-
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GlassEffectContainerView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
-	return x
-}
-
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectContainerView {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffectContainerView {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
-	return x
-}
-
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithFocusRingType(focusRingType NSFocusRingType) *GlassEffectContainerView {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
-	return x
-}
-
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
-func (x *GlassEffectContainerView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectContainerView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
-	return x
-}
-
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GlassEffectContainerView {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectContainerView {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
-	return x
-}
-
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
-	return x
-}
-
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
-	return x
-}
-
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GlassEffectContainerView {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
-	return x
-}
-
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GlassEffectContainerView {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
-	return x
-}
-
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GlassEffectContainerView {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
-	return x
-}
-
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectContainerView {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
-	return x
-}
-
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GlassEffectContainerView {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
-	return x
-}
-
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GlassEffectContainerView {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
-	return x
-}
-
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectContainerView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
-	return x
-}
-
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectContainerView {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
-	return x
-}
-
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithMenu(menu *Menu) *GlassEffectContainerView {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
-	return x
-}
-
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithUserActivity(userActivity *foundation.NSUserActivity) *GlassEffectContainerView {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
-	return x
-}
-
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
-	return x
-}
-
-// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
-//
-// ContentView calls the underlying ContentView.
-func (x *GlassEffectContainerView) ContentView() *View {
-	_r := x.inner.ContentView()
-	if _r == nil {
+// glassEffectContainerViewAdopt wraps an Objective-C object that this code just created as a
+// GlassEffectContainerView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func glassEffectContainerViewAdopt(id objc.ID) *GlassEffectContainerView {
+	if id == 0 {
 		return nil
 	}
-	return &View{inner: _r}
+	x := &GlassEffectContainerView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
-//
-// SetContentView calls the underlying SetContentView.
-func (x *GlassEffectContainerView) SetContentView(contentView *raw.NSView) {
-	x.inner.SetContentView(contentView)
+// NewGlassEffectContainerView creates a new GlassEffectContainerView.
+func NewGlassEffectContainerView() *GlassEffectContainerView {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGlassEffectContainerView")), objc.RegisterName("new"))
+	return glassEffectContainerViewAdopt(_id)
 }
 
-// The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
-//
-// Spacing calls the underlying Spacing.
+// WithContentView the view that contains descendant views to merge together when in proximity to each other.
+func (x *GlassEffectContainerView) WithContentView(contentView ViewProvider) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	return x
+}
+
+// WithSpacing the proximity at which the glass effect container view begins merging eligible descendent glass effect views.
+func (x *GlassEffectContainerView) WithSpacing(spacing float64) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpacing:"), spacing)
+	return x
+}
+
+// WithSubviews sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithSubviews(items ...ViewProvider) *GlassEffectContainerView {
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
+	return x
+}
+
+// WithHidden sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithHidden(hidden bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return x
+}
+
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *GlassEffectContainerView) WithFrame(frame corefoundation.CGRect) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithFrameRotation(frameRotation float64) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithBoundsRotation(boundsRotation float64) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return x
+}
+
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *GlassEffectContainerView) WithBounds(bounds corefoundation.CGRect) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithCanDrawConcurrently(canDrawConcurrently bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (x *GlassEffectContainerView) WithNeedsDisplay(needsDisplay bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithWantsLayer(wantsLayer bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return x
+}
+
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithLayer(layer obj.Object) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithNeedsLayout(needsLayout bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithAlphaValue(alphaValue float64) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithBackgroundFilters(items ...obj.Object) *GlassEffectContainerView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return x
+}
+
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithCompositingFilter(compositingFilter obj.Object) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return x
+}
+
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithContentFilters(items ...obj.Object) *GlassEffectContainerView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
+	return x
+}
+
+// WithShadow sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithShadow(shadow *Shadow) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return x
+}
+
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithClipsToBounds(clipsToBounds bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithToolTip(toolTip string) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return x
+}
+
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithFocusRingType(focusRingType FocusRingType) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectContainerView {
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (x *GlassEffectContainerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+func (x *GlassEffectContainerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
+func (x *GlassEffectContainerView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return x
+}
+
+// WithMenu returns the responder’s menu.
+func (x *GlassEffectContainerView) WithMenu(menu *Menu) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return x
+}
+
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *GlassEffectContainerView) WithUserActivity(userActivity obj.Object) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// WithTouchBar the NSTouchBar object associated with the responder.
+func (x *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return x
+}
+
+// ContentView the view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
+func (x *GlassEffectContainerView) ContentView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+	return ViewFromID(_r)
+}
+
+// SetContentView the view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
+func (x *GlassEffectContainerView) SetContentView(contentView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+}
+
+// Spacing the proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
 func (x *GlassEffectContainerView) Spacing() float64 {
-	return x.inner.Spacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spacing"))
+	return _r
 }
 
-// The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
-//
-// SetSpacing calls the underlying SetSpacing.
+// SetSpacing the proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
 func (x *GlassEffectContainerView) SetSpacing(spacing float64) {
-	x.inner.SetSpacing(spacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpacing:"), spacing)
 }
-
-func (x *GlassEffectContainerView) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *GlassEffectContainerView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // GlassEffectContainerViewable is the interface implemented by [GlassEffectContainerView], for mocking and DI.
 type GlassEffectContainerViewable interface {
-	Unwrap() *raw.NSGlassEffectContainerView
+	obj.Object
 	WithContentView(contentView ViewProvider) *GlassEffectContainerView
 	WithSpacing(spacing float64) *GlassEffectContainerView
 	WithSubviews(items ...ViewProvider) *GlassEffectContainerView
 	WithHidden(hidden bool) *GlassEffectContainerView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectContainerView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectContainerView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GlassEffectContainerView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GlassEffectContainerView
 	WithFrame(frame corefoundation.CGRect) *GlassEffectContainerView
 	WithFrameRotation(frameRotation float64) *GlassEffectContainerView
 	WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectContainerView
@@ -483,27 +405,27 @@ type GlassEffectContainerViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *GlassEffectContainerView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectContainerView
 	WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectContainerView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GlassEffectContainerView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GlassEffectContainerView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GlassEffectContainerView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GlassEffectContainerView
 	WithWantsLayer(wantsLayer bool) *GlassEffectContainerView
-	WithLayer(layer *quartzcore.CALayer) *GlassEffectContainerView
+	WithLayer(layer obj.Object) *GlassEffectContainerView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectContainerView
 	WithNeedsLayout(needsLayout bool) *GlassEffectContainerView
 	WithAlphaValue(alphaValue float64) *GlassEffectContainerView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GlassEffectContainerView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *GlassEffectContainerView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GlassEffectContainerView
-	WithContentFilters(items ...*coreimage.CIFilter) *GlassEffectContainerView
+	WithBackgroundFilters(items ...obj.Object) *GlassEffectContainerView
+	WithCompositingFilter(compositingFilter obj.Object) *GlassEffectContainerView
+	WithContentFilters(items ...obj.Object) *GlassEffectContainerView
 	WithShadow(shadow *Shadow) *GlassEffectContainerView
 	WithClipsToBounds(clipsToBounds bool) *GlassEffectContainerView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectContainerView
 	WithToolTip(toolTip string) *GlassEffectContainerView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GlassEffectContainerView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GlassEffectContainerView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectContainerView
 	WithNextKeyView(nextKeyView ViewProvider) *GlassEffectContainerView
-	WithFocusRingType(focusRingType NSFocusRingType) *GlassEffectContainerView
+	WithFocusRingType(focusRingType FocusRingType) *GlassEffectContainerView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectContainerView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GlassEffectContainerView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GlassEffectContainerView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectContainerView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView
@@ -516,12 +438,16 @@ type GlassEffectContainerViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectContainerView
 	WithNextResponder(nextResponder ResponderProvider) *GlassEffectContainerView
 	WithMenu(menu *Menu) *GlassEffectContainerView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *GlassEffectContainerView
+	WithUserActivity(userActivity obj.Object) *GlassEffectContainerView
 	WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView
 	ContentView() *View
-	SetContentView(contentView *raw.NSView)
+	SetContentView(contentView *View)
 	Spacing() float64
 	SetSpacing(spacing float64)
 }
 
 var _ GlassEffectContainerViewable = (*GlassEffectContainerView)(nil)
+
+var _ ViewProvider = (*GlassEffectContainerView)(nil)
+
+var _ ResponderProvider = (*GlassEffectContainerView)(nil)

@@ -5,120 +5,69 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// NDArrayIdentity wraps [raw.MPSNDArrayIdentity] with a fluent Go API.
+// NDArrayIdentity is an idiomatic wrapper over the Objective-C class MPSNDArrayIdentity.
+//
+// It embeds [NDArrayUnaryKernel], promoting that type's methods.
 type NDArrayIdentity struct {
-	inner *raw.MPSNDArrayIdentity
+	NDArrayUnaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayIdentity].
-func (x *NDArrayIdentity) Unwrap() *raw.MPSNDArrayIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayIdentityFromID adopts an existing object pointer as a NDArrayIdentity (nil for 0).
+// NDArrayIdentityFromID adopts an existing Objective-C object as a NDArrayIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayIdentityFromID(id objc.ID) *NDArrayIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayIdentity{inner: raw.MPSNDArrayIdentityFromID(id)}
-}
-
-// NewNDArrayIdentityWithDevice creates a new [NDArrayIdentity].
-func NewNDArrayIdentityWithDevice(device metal.MTLDevice) *NDArrayIdentity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NDArrayIdentity{inner: raw.MPSNDArrayIdentityFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayIdentity) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayIdentity {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayIdentity) WithOptions(options mpscore.MPSKernelOptions) *NDArrayIdentity {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// nDArrayIdentityAdopt wraps an Objective-C object that this code just created as a
+// NDArrayIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayIdentityAdopt(id objc.ID) *NDArrayIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayIdentity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNDArrayIdentity creates a new NDArrayIdentity.
+func NewNDArrayIdentity() *NDArrayIdentity {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayIdentity")), objc.RegisterName("new"))
+	return nDArrayIdentityAdopt(_id)
+}
+
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      shape               The new shape, given in TF dimension ordering (as always with MPSShape). @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
-//
-// ReshapeWithCommandBufferSourceArrayShapeDestinationArray calls the underlying ReshapeWithCommandBufferSourceArrayShapeDestinationArray.
-func (x *NDArrayIdentity) ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
-	return x.inner.ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf, sourceArray, shape, destinationArray)
-}
-
-// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      numberOfDimensions  The number of dimensions of the NDArray. @param      dimensionSizes      The extents of each dimensions of the NDArray. @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
-//
-// ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray calls the underlying ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray.
-func (x *NDArrayIdentity) ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
-	return x.inner.ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf, sourceArray, numberOfDimensions, dimensionSizes, destinationArray)
-}
-
-// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      encoder             The `MTLComputeCommandEncoder` that the kernel will be encoded with. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      shape               The new shape, given in TF dimension ordering (as always with MPSShape). @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
-//
-// ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray calls the underlying ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray.
-func (x *NDArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
-	return x.inner.ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder, cmdBuf, sourceArray, shape, destinationArray)
-}
-
-// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      encoder             The `MTLComputeCommandEncoder` that the kernel will be encoded with. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      numberOfDimensions  The number of dimensions of the NDArray. @param      dimensionSizes      The extents of each dimensions of the NDArray. @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
-//
-// ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray calls the underlying ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray.
-func (x *NDArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
-	return x.inner.ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder, cmdBuf, sourceArray, numberOfDimensions, dimensionSizes, destinationArray)
-}
-
-func (x *NDArrayIdentity) asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel {
-	return &x.inner.MPSNDArrayUnaryKernel
-}
-
-func (x *NDArrayIdentity) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayIdentity) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayIdentity) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayIdentityable is the interface implemented by [NDArrayIdentity], for mocking and DI.
 type NDArrayIdentityable interface {
-	Unwrap() *raw.MPSNDArrayIdentity
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayIdentity
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayIdentity
+	obj.Object
 	WithLabel(label string) *NDArrayIdentity
-	ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
-	ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
-	ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
-	ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 }
 
 var _ NDArrayIdentityable = (*NDArrayIdentity)(nil)
+
+var _ NDArrayUnaryKernelProvider = (*NDArrayIdentity)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayIdentity)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayIdentity)(nil)
+
+var _ KernelProvider = (*NDArrayIdentity)(nil)

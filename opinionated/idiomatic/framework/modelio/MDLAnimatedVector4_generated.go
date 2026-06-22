@@ -5,97 +5,63 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnimatedVector4 wraps [raw.MDLAnimatedVector4] with a fluent Go API.
+// AnimatedVector4 is an idiomatic wrapper over the Objective-C class MDLAnimatedVector4.
+//
+// It embeds [AnimatedValue], promoting that type's methods.
 type AnimatedVector4 struct {
-	inner *raw.MDLAnimatedVector4
+	AnimatedValue
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedVector4].
-func (x *AnimatedVector4) Unwrap() *raw.MDLAnimatedVector4 { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedVector4) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedVector4FromID adopts an existing object pointer as a AnimatedVector4 (nil for 0).
+// AnimatedVector4FromID adopts an existing Objective-C object as a AnimatedVector4
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedVector4FromID(id objc.ID) *AnimatedVector4 {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedVector4{inner: raw.MDLAnimatedVector4FromID(id)}
-}
-
-// NewAnimatedVector4 creates a new [AnimatedVector4].
-func NewAnimatedVector4() *AnimatedVector4 {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedVector4")), objc.RegisterName("new"))
-	return &AnimatedVector4{inner: raw.MDLAnimatedVector4FromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedVector4) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector4 {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedVector4{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SetFloat4AtTime calls the underlying SetFloat4AtTime.
-func (x *AnimatedVector4) SetFloat4AtTime(value unsafe.Pointer, time_ float64) {
-	x.inner.SetFloat4AtTime(value, time_)
+// animatedVector4Adopt wraps an Objective-C object that this code just created as a
+// AnimatedVector4 (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedVector4Adopt(id objc.ID) *AnimatedVector4 {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedVector4{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDouble4AtTime calls the underlying SetDouble4AtTime.
-func (x *AnimatedVector4) SetDouble4AtTime(value unsafe.Pointer, time_ float64) {
-	x.inner.SetDouble4AtTime(value, time_)
+// NewAnimatedVector4 creates a new AnimatedVector4.
+func NewAnimatedVector4() *AnimatedVector4 {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedVector4")), objc.RegisterName("new"))
+	return animatedVector4Adopt(_id)
 }
 
-// Float4AtTime calls the underlying Float4AtTime.
-func (x *AnimatedVector4) Float4AtTime(time_ float64) unsafe.Pointer {
-	return x.inner.Float4AtTime(time_)
+// WithInterpolation sets the property and returns the receiver so calls can be chained.
+func (x *AnimatedVector4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector4 {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
 }
-
-// Double4AtTime calls the underlying Double4AtTime.
-func (x *AnimatedVector4) Double4AtTime(time_ float64) unsafe.Pointer {
-	return x.inner.Double4AtTime(time_)
-}
-
-// ResetWithFloat4ArrayAtTimesCount calls the underlying ResetWithFloat4ArrayAtTimesCount.
-func (x *AnimatedVector4) ResetWithFloat4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
-	x.inner.ResetWithFloat4ArrayAtTimesCount(valuesArray, timesArray, count)
-}
-
-// ResetWithDouble4ArrayAtTimesCount calls the underlying ResetWithDouble4ArrayAtTimesCount.
-func (x *AnimatedVector4) ResetWithDouble4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
-	x.inner.ResetWithDouble4ArrayAtTimesCount(valuesArray, timesArray, count)
-}
-
-// GetFloat4ArrayMaxCount calls the underlying GetFloat4ArrayMaxCount.
-func (x *AnimatedVector4) GetFloat4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetFloat4ArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDouble4ArrayMaxCount calls the underlying GetDouble4ArrayMaxCount.
-func (x *AnimatedVector4) GetDouble4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetDouble4ArrayMaxCount(valuesArray, maxCount)
-}
-
-func (x *AnimatedVector4) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
 
 // AnimatedVector4able is the interface implemented by [AnimatedVector4], for mocking and DI.
 type AnimatedVector4able interface {
-	Unwrap() *raw.MDLAnimatedVector4
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector4
-	SetFloat4AtTime(value unsafe.Pointer, time_ float64)
-	SetDouble4AtTime(value unsafe.Pointer, time_ float64)
-	Float4AtTime(time_ float64) unsafe.Pointer
-	Double4AtTime(time_ float64) unsafe.Pointer
-	ResetWithFloat4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
-	ResetWithDouble4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
-	GetFloat4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	GetDouble4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector4
 }
 
 var _ AnimatedVector4able = (*AnimatedVector4)(nil)
+
+var _ AnimatedValueProvider = (*AnimatedVector4)(nil)

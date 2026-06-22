@@ -5,115 +5,137 @@
 package installerplugins
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/installerplugins"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// InstallerState wraps [raw.InstallerState] with a fluent Go API.
+// InstallerState is an idiomatic wrapper over the Objective-C class InstallerState.
 type InstallerState struct {
-	inner *raw.InstallerState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.InstallerState].
-func (x *InstallerState) Unwrap() *raw.InstallerState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InstallerState) ID() objc.ID { return x.inner.Ptr() }
-
-// InstallerStateFromID adopts an existing object pointer as a InstallerState (nil for 0).
+// InstallerStateFromID adopts an existing Objective-C object as a InstallerState
+// (nil for 0), retaining it and registering a release finalizer.
 func InstallerStateFromID(id objc.ID) *InstallerState {
 	if id == 0 {
 		return nil
 	}
-	return &InstallerState{inner: raw.InstallerStateFromID(id)}
+	x := &InstallerState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewInstallerState creates a new [InstallerState].
+// installerStateAdopt wraps an Objective-C object that this code just created as a
+// InstallerState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func installerStateAdopt(id objc.ID) *InstallerState {
+	if id == 0 {
+		return nil
+	}
+	x := &InstallerState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InstallerState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InstallerState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InstallerState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InstallerState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInstallerState creates a new InstallerState.
 func NewInstallerState() *InstallerState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("InstallerState")), objc.RegisterName("new"))
-	return &InstallerState{inner: raw.InstallerStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("InstallerState")), objc.RegisterName("new"))
+	return installerStateAdopt(_id)
 }
 
-// @method     choiceDictionaryForIdentifier: @abstract   Retrieves choice dictionaries by identifier. @discussion See choiceDictionaries for the values returned.
-//
-// ChoiceDictionaryForIdentifier calls the underlying ChoiceDictionaryForIdentifier.
-func (x *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.ChoiceDictionaryForIdentifier(foundation.NSStringStringWithUTF8String(choiceIdentifier))
+// ChoiceDictionaryForIdentifier retrieves choice dictionaries by identifier. See choiceDictionaries for the values returned.
+func (x *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choiceDictionaryForIdentifier:"), purego.NSString(choiceIdentifier))
+	return obj.Wrap(_r)
 }
 
-// @method     licenseAgreed @abstract   Specifies the user agreed to the license, if there is no license, this will return NO.
-//
-// LicenseAgreed calls the underlying LicenseAgreed.
+// LicenseAgreed specifies the user agreed to the license, if there is no license, this will return NO.
 func (x *InstallerState) LicenseAgreed() bool {
-	return x.inner.LicenseAgreed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("licenseAgreed"))
+	return _r
 }
 
-// @method     licenseAgreedLanguage @abstract   Specifies the language the language was last viewed or agreed with.
-//
-// LicenseAgreedLanguage calls the underlying LicenseAgreedLanguage.
+// LicenseAgreedLanguage specifies the language the language was last viewed or agreed with.
 func (x *InstallerState) LicenseAgreedLanguage() string {
-	_r := x.inner.LicenseAgreedLanguage()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("licenseAgreedLanguage"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method     targetVolumePath @abstract   Specifies the mount point of the selected target @discussion Only Available after target has been selected.
-//
-// TargetVolumePath calls the underlying TargetVolumePath.
+// TargetVolumePath specifies the mount point of the selected target Only Available after target has been selected.
 func (x *InstallerState) TargetVolumePath() string {
-	_r := x.inner.TargetVolumePath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetVolumePath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method     targetPath @abstract   Full target path selected. @discussion Specifies the full path selected by the user.  This path contains the targetVolumePath.
-//
-// TargetPath calls the underlying TargetPath.
+// TargetPath full target path selected. Specifies the full path selected by the user.  This path contains the targetVolumePath.
 func (x *InstallerState) TargetPath() string {
-	_r := x.inner.TargetPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method     choiceDictionaries @abstract   Returns an array of choice dictionaries. @discussion Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
-//
-// ChoiceDictionaries calls the underlying ChoiceDictionaries.
-func (x *InstallerState) ChoiceDictionaries() *foundation.NSArray[objc.ID] {
-	return x.inner.ChoiceDictionaries()
+// ChoiceDictionaries returns an array of choice dictionaries. Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
+func (x *InstallerState) ChoiceDictionaries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choiceDictionaries"))
+	return obj.Wrap(_r)
 }
 
-// @method     installStarted @abstract   Specifies if the install process has started or not. @discussion Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.
-//
-// InstallStarted calls the underlying InstallStarted.
+// InstallStarted specifies if the install process has started or not. Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.
 func (x *InstallerState) InstallStarted() bool {
-	return x.inner.InstallStarted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("installStarted"))
+	return _r
 }
 
-// @method     installSucceeded @abstract   Specifies if the install was successfull or not. @discussion This value is only valid if installStarted returns True.
-//
-// InstallSucceeded calls the underlying InstallSucceeded.
+// InstallSucceeded specifies if the install was successfull or not. This value is only valid if installStarted returns True.
 func (x *InstallerState) InstallSucceeded() bool {
-	return x.inner.InstallSucceeded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("installSucceeded"))
+	return _r
 }
 
 // InstallerStateable is the interface implemented by [InstallerState], for mocking and DI.
 type InstallerStateable interface {
-	Unwrap() *raw.InstallerState
-	ChoiceDictionaryForIdentifier(choiceIdentifier string) *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object
 	LicenseAgreed() bool
 	LicenseAgreedLanguage() string
 	TargetVolumePath() string
 	TargetPath() string
-	ChoiceDictionaries() *foundation.NSArray[objc.ID]
+	ChoiceDictionaries() obj.Object
 	InstallStarted() bool
 	InstallSucceeded() bool
 }

@@ -5,66 +5,96 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A Core Animation layer that renders a SceneKit scene as its content.
+// Layer is an idiomatic wrapper over the Objective-C class SCNLayer.
 //
-// Layer wraps [raw.SCNLayer] with a fluent Go API.
+// A Core Animation layer that renders a SceneKit scene as its content.
 type Layer struct {
-	inner *raw.SCNLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNLayer].
-func (x *Layer) Unwrap() *raw.SCNLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Layer) ID() objc.ID { return x.inner.Ptr() }
-
-// LayerFromID adopts an existing object pointer as a Layer (nil for 0).
+// LayerFromID adopts an existing Objective-C object as a Layer
+// (nil for 0), retaining it and registering a release finalizer.
 func LayerFromID(id objc.ID) *Layer {
 	if id == 0 {
 		return nil
 	}
-	return &Layer{inner: raw.SCNLayerFromID(id)}
-}
-
-// NewLayer creates a new [Layer].
-func NewLayer() *Layer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNLayer")), objc.RegisterName("new"))
-	return &Layer{inner: raw.SCNLayerFromID(_id)}
-}
-
-// The scene to be displayed in the layer.
-//
-// WithScene sets the scene property and returns the receiver for chaining.
-func (x *Layer) WithScene(scene *Scene) *Layer {
-	x.inner.SetScene(scene.Unwrap())
+	x := &Layer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Scene calls the underlying Scene.
-func (x *Layer) Scene() *Scene {
-	_r := x.inner.Scene()
-	if _r == nil {
+// layerAdopt wraps an Objective-C object that this code just created as a
+// Layer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func layerAdopt(id objc.ID) *Layer {
+	if id == 0 {
 		return nil
 	}
-	return &Scene{inner: _r}
+	x := &Layer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetScene calls the underlying SetScene.
-func (x *Layer) SetScene(scene *raw.SCNScene) {
-	x.inner.SetScene(scene)
+// Description returns the object's -description text.
+func (x *Layer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Layer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Layer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Layer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLayer creates a new Layer.
+func NewLayer() *Layer {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNLayer")), objc.RegisterName("new"))
+	return layerAdopt(_id)
+}
+
+// WithScene the scene to be displayed in the layer.
+func (x *Layer) WithScene(scene *Scene) *Layer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	return x
+}
+
+// Scene wraps the corresponding Objective-C method.
+func (x *Layer) Scene() *Scene {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+	return SceneFromID(_r)
+}
+
+// SetScene wraps the corresponding Objective-C method.
+func (x *Layer) SetScene(scene *Scene) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 }
 
 // Layerable is the interface implemented by [Layer], for mocking and DI.
 type Layerable interface {
-	Unwrap() *raw.SCNLayer
+	obj.Object
 	WithScene(scene *Scene) *Layer
 	Scene() *Scene
-	SetScene(scene *raw.SCNScene)
+	SetScene(scene *Scene)
 }
 
 var _ Layerable = (*Layer)(nil)

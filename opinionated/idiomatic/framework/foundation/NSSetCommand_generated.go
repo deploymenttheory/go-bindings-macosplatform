@@ -5,126 +5,121 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A command that sets one or more attributes or relationships to one or more values.
+// SetCommand is an idiomatic wrapper over the Objective-C class NSSetCommand.
 //
-// SetCommand wraps [raw.NSSetCommand] with a fluent Go API.
+// It embeds [ScriptCommand], promoting that type's methods.
+//
+// A command that sets one or more attributes or relationships to one or more values.
 type SetCommand struct {
-	inner *raw.NSSetCommand
+	ScriptCommand
 }
 
-// Unwrap returns the underlying [raw.NSSetCommand].
-func (x *SetCommand) Unwrap() *raw.NSSetCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SetCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// SetCommandFromID adopts an existing object pointer as a SetCommand (nil for 0).
+// SetCommandFromID adopts an existing Objective-C object as a SetCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func SetCommandFromID(id objc.ID) *SetCommand {
 	if id == 0 {
 		return nil
 	}
-	return &SetCommand{inner: raw.NSSetCommandFromID(id)}
-}
-
-// NewSetCommand creates a new [SetCommand].
-func NewSetCommand() *SetCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSetCommand")), objc.RegisterName("new"))
-	return &SetCommand{inner: raw.NSSetCommandFromID(_id)}
-}
-
-// Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-//
-// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
-func (x *SetCommand) WithDirectParameter(directParameter objc.ID) *SetCommand {
-	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	x := &SetCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-//
-// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
-func (x *SetCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *SetCommand {
-	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
-	return x
-}
-
-// Sets the arguments of the command to args.
-//
-// WithArguments sets the arguments property and returns the receiver for chaining.
-func (x *SetCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand {
-	x.inner.NSScriptCommand.SetArguments(arguments)
-	return x
-}
-
-// Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-//
-// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
-func (x *SetCommand) WithScriptErrorNumber(scriptErrorNumber int) *SetCommand {
-	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
-	return x
-}
-
-// Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-//
-// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
-func (x *SetCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *SetCommand {
-	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
-	return x
-}
-
-// Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-//
-// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
-func (x *SetCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *SetCommand {
-	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
-	return x
-}
-
-// Sets a script error string that is associated with execution of the command.
-//
-// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
-func (x *SetCommand) WithScriptErrorString(scriptErrorString string) *SetCommand {
-	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SetCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand {
-	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// KeySpecifier calls the underlying KeySpecifier.
-func (x *SetCommand) KeySpecifier() *ScriptObjectSpecifier {
-	_r := x.inner.KeySpecifier()
-	if _r == nil {
+// setCommandAdopt wraps an Objective-C object that this code just created as a
+// SetCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func setCommandAdopt(id objc.ID) *SetCommand {
+	if id == 0 {
 		return nil
 	}
-	return &ScriptObjectSpecifier{inner: _r}
+	x := &SetCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SetCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
+// NewSetCommand creates a new SetCommand.
+func NewSetCommand() *SetCommand {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSetCommand")), objc.RegisterName("new"))
+	return setCommandAdopt(_id)
+}
 
-func (x *SetCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+func (x *SetCommand) WithDirectParameter(directParameter obj.Object) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
+	return x
+}
+
+// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+func (x *SetCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
+	return x
+}
+
+// WithArguments sets the arguments of the command to args.
+func (x *SetCommand) WithArguments(arguments obj.Object) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+	return x
+}
+
+// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+func (x *SetCommand) WithScriptErrorNumber(scriptErrorNumber int) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (x *SetCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (x *SetCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
+	return x
+}
+
+// WithScriptErrorString sets a script error string that is associated with execution of the command.
+func (x *SetCommand) WithScriptErrorString(scriptErrorString StringProvider) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *SetCommand) WithScriptingProperties(scriptingProperties obj.Object) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// KeySpecifier wraps the corresponding Objective-C method.
+func (x *SetCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySpecifier"))
+	return ScriptObjectSpecifierFromID(_r)
+}
 
 // SetCommandable is the interface implemented by [SetCommand], for mocking and DI.
 type SetCommandable interface {
-	Unwrap() *raw.NSSetCommand
-	WithDirectParameter(directParameter objc.ID) *SetCommand
+	obj.Object
+	WithDirectParameter(directParameter obj.Object) *SetCommand
 	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *SetCommand
-	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand
+	WithArguments(arguments obj.Object) *SetCommand
 	WithScriptErrorNumber(scriptErrorNumber int) *SetCommand
 	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *SetCommand
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *SetCommand
-	WithScriptErrorString(scriptErrorString string) *SetCommand
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand
+	WithScriptErrorString(scriptErrorString StringProvider) *SetCommand
+	WithScriptingProperties(scriptingProperties obj.Object) *SetCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 
 var _ SetCommandable = (*SetCommand)(nil)
+
+var _ ScriptCommandProvider = (*SetCommand)(nil)

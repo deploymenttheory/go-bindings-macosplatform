@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package quartzcore provides a fluent Go API over the macOS QuartzCore framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Animation: [AnimationGroup], [PropertyAnimation], [Transition]
+//   - BasicAnimation: [SpringAnimation]
+//   - Layer: [EmitterLayer], [GradientLayer], [MetalLayer], [OpenGLLayer], [ReplicatorLayer], [ScrollLayer], [ShapeLayer], [TextLayer], [TiledLayer], [TransformLayer]
+//   - PropertyAnimation: [BasicAnimation], [KeyframeAnimation]
 package quartzcore

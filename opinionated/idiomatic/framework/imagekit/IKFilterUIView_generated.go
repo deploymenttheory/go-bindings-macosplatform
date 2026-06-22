@@ -5,61 +5,90 @@
 package imagekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// FilterUIView wraps [raw.IKFilterUIView] with a fluent Go API.
+// FilterUIView is an idiomatic wrapper over the Objective-C class IKFilterUIView.
 type FilterUIView struct {
-	inner *raw.IKFilterUIView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKFilterUIView].
-func (x *FilterUIView) Unwrap() *raw.IKFilterUIView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FilterUIView) ID() objc.ID { return x.inner.Ptr() }
-
-// FilterUIViewFromID adopts an existing object pointer as a FilterUIView (nil for 0).
+// FilterUIViewFromID adopts an existing Objective-C object as a FilterUIView
+// (nil for 0), retaining it and registering a release finalizer.
 func FilterUIViewFromID(id objc.ID) *FilterUIView {
 	if id == 0 {
 		return nil
 	}
-	return &FilterUIView{inner: raw.IKFilterUIViewFromID(id)}
+	x := &FilterUIView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @method     initWithFrame:filter: @abstract   The initWithFrame method initializes a view that retains the filter passed into it.
-//
-// NewFilterUIViewWithFrameFilter creates a new [FilterUIView].
-func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) *FilterUIView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterUIView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, inFilter.Ptr())
-	return &FilterUIView{inner: raw.IKFilterUIViewFromID(_id)}
+// filterUIViewAdopt wraps an Objective-C object that this code just created as a
+// FilterUIView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func filterUIViewAdopt(id objc.ID) *FilterUIView {
+	if id == 0 {
+		return nil
+	}
+	x := &FilterUIView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method     filter @abstract   Accessor method to return the filter instance that the view controls.
-//
-// Filter calls the underlying Filter.
-func (x *FilterUIView) Filter() *coreimage.CIFilter {
-	return x.inner.Filter()
+// Description returns the object's -description text.
+func (x *FilterUIView) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @method     objectController @abstract   Accessor method for the object controller for all bindings between the filter and the UI representation.
-//
-// ObjectController calls the underlying ObjectController.
-func (x *FilterUIView) ObjectController() *appkit.NSObjectController {
-	return x.inner.ObjectController()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FilterUIView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FilterUIView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FilterUIView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFilterUIViewWithFrameFilter the initWithFrame method initializes a view that retains the filter passed into it.
+func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *FilterUIView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
+	return filterUIViewAdopt(_id)
+}
+
+// Filter accessor method to return the filter instance that the view controls.
+func (x *FilterUIView) Filter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
+	return obj.Wrap(_r)
+}
+
+// ObjectController accessor method for the object controller for all bindings between the filter and the UI representation.
+func (x *FilterUIView) ObjectController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectController"))
+	return obj.Wrap(_r)
 }
 
 // FilterUIViewable is the interface implemented by [FilterUIView], for mocking and DI.
 type FilterUIViewable interface {
-	Unwrap() *raw.IKFilterUIView
-	Filter() *coreimage.CIFilter
-	ObjectController() *appkit.NSObjectController
+	obj.Object
+	Filter() obj.Object
+	ObjectController() obj.Object
 }
 
 var _ FilterUIViewable = (*FilterUIView)(nil)

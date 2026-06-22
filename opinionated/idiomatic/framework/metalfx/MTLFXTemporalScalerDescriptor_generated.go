@@ -5,389 +5,264 @@
 package metalfx
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalfx"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of properties that configure a temporal scaling effect, and a factory method that creates the effect.
+// TemporalScalerDescriptor is an idiomatic wrapper over the Objective-C class MTLFXTemporalScalerDescriptor.
 //
-// TemporalScalerDescriptor wraps [raw.MTLFXTemporalScalerDescriptor] with a fluent Go API.
+// A set of properties that configure a temporal scaling effect, and a factory method that creates the effect.
 type TemporalScalerDescriptor struct {
-	inner *raw.MTLFXTemporalScalerDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFXTemporalScalerDescriptor].
-func (x *TemporalScalerDescriptor) Unwrap() *raw.MTLFXTemporalScalerDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TemporalScalerDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// TemporalScalerDescriptorFromID adopts an existing object pointer as a TemporalScalerDescriptor (nil for 0).
+// TemporalScalerDescriptorFromID adopts an existing Objective-C object as a TemporalScalerDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func TemporalScalerDescriptorFromID(id objc.ID) *TemporalScalerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &TemporalScalerDescriptor{inner: raw.MTLFXTemporalScalerDescriptorFromID(id)}
+	x := &TemporalScalerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTemporalScalerDescriptor creates a new [TemporalScalerDescriptor].
+// temporalScalerDescriptorAdopt wraps an Objective-C object that this code just created as a
+// TemporalScalerDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func temporalScalerDescriptorAdopt(id objc.ID) *TemporalScalerDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &TemporalScalerDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TemporalScalerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TemporalScalerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TemporalScalerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TemporalScalerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTemporalScalerDescriptor creates a new TemporalScalerDescriptor.
 func NewTemporalScalerDescriptor() *TemporalScalerDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFXTemporalScalerDescriptor")), objc.RegisterName("new"))
-	return &TemporalScalerDescriptor{inner: raw.MTLFXTemporalScalerDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFXTemporalScalerDescriptor")), objc.RegisterName("new"))
+	return temporalScalerDescriptorAdopt(_id)
 }
 
-// The pixel format of the input color texture for the temporal scaler you create with this descriptor.
-//
-// WithColorTextureFormat sets the colorTextureFormat property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
+// WithInputWidth the width of the input color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) WithInputWidth(inputWidth int) *TemporalScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 	return x
 }
 
-// The pixel format of the input depth texture for the temporal scaler you create with this descriptor.
-//
-// WithDepthTextureFormat sets the depthTextureFormat property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor {
-	x.inner.SetDepthTextureFormat(depthTextureFormat)
+// WithInputHeight the height of the input color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) WithInputHeight(inputHeight int) *TemporalScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 	return x
 }
 
-// The pixel format of the input motion texture for the temporal scaler you create with this descriptor.
-//
-// WithMotionTextureFormat sets the motionTextureFormat property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor {
-	x.inner.SetMotionTextureFormat(motionTextureFormat)
+// WithOutputWidth the width of the output color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) WithOutputWidth(outputWidth int) *TemporalScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 	return x
 }
 
-// The pixel format of the output color texture for the temporal scaler you create with this descriptor.
-//
-// WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
+// WithOutputHeight the height of the output color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) WithOutputHeight(outputHeight int) *TemporalScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 	return x
 }
 
-// The width of the input color texture for the temporal scaler you create with this descriptor.
-//
-// WithInputWidth sets the inputWidth property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithInputWidth(inputWidth uint) *TemporalScalerDescriptor {
-	x.inner.SetInputWidth(inputWidth)
-	return x
-}
-
-// The height of the input color texture for the temporal scaler you create with this descriptor.
-//
-// WithInputHeight sets the inputHeight property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithInputHeight(inputHeight uint) *TemporalScalerDescriptor {
-	x.inner.SetInputHeight(inputHeight)
-	return x
-}
-
-// The width of the output color texture for the temporal scaler you create with this descriptor.
-//
-// WithOutputWidth sets the outputWidth property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithOutputWidth(outputWidth uint) *TemporalScalerDescriptor {
-	x.inner.SetOutputWidth(outputWidth)
-	return x
-}
-
-// The height of the output color texture for the temporal scaler you create with this descriptor.
-//
-// WithOutputHeight sets the outputHeight property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithOutputHeight(outputHeight uint) *TemporalScalerDescriptor {
-	x.inner.SetOutputHeight(outputHeight)
-	return x
-}
-
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame.
-//
-// WithAutoExposureEnabled sets the autoExposureEnabled property and returns the receiver for chaining.
+// WithAutoExposureEnabled a Boolean value that indicates whether MetalFX calculates the exposure for each frame.
 func (x *TemporalScalerDescriptor) WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalScalerDescriptor {
-	x.inner.SetAutoExposureEnabled(autoExposureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoExposureEnabled:"), autoExposureEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.
-//
-// WithRequiresSynchronousInitialization sets the requiresSynchronousInitialization property and returns the receiver for chaining.
+// WithRequiresSynchronousInitialization a Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.
 func (x *TemporalScalerDescriptor) WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalScalerDescriptor {
-	x.inner.SetRequiresSynchronousInitialization(requiresSynchronousInitialization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSynchronousInitialization:"), requiresSynchronousInitialization)
 	return x
 }
 
-// A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution.
-//
-// WithInputContentPropertiesEnabled sets the inputContentPropertiesEnabled property and returns the receiver for chaining.
+// WithInputContentPropertiesEnabled a Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution.
 func (x *TemporalScalerDescriptor) WithInputContentPropertiesEnabled(inputContentPropertiesEnabled bool) *TemporalScalerDescriptor {
-	x.inner.SetInputContentPropertiesEnabled(inputContentPropertiesEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputContentPropertiesEnabled:"), inputContentPropertiesEnabled)
 	return x
 }
 
-// The smallest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
-//
-// WithInputContentMinScale sets the inputContentMinScale property and returns the receiver for chaining.
+// WithInputContentMinScale the smallest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
 func (x *TemporalScalerDescriptor) WithInputContentMinScale(inputContentMinScale float32) *TemporalScalerDescriptor {
-	x.inner.SetInputContentMinScale(inputContentMinScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputContentMinScale:"), inputContentMinScale)
 	return x
 }
 
-// The largest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
-//
-// WithInputContentMaxScale sets the inputContentMaxScale property and returns the receiver for chaining.
+// WithInputContentMaxScale the largest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
 func (x *TemporalScalerDescriptor) WithInputContentMaxScale(inputContentMaxScale float32) *TemporalScalerDescriptor {
-	x.inner.SetInputContentMaxScale(inputContentMaxScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputContentMaxScale:"), inputContentMaxScale)
 	return x
 }
 
-// A Boolean value that indicates whether a temporal scaler you create with the descriptor applies a reactive mask.
-//
-// WithReactiveMaskTextureEnabled sets the reactiveMaskTextureEnabled property and returns the receiver for chaining.
+// WithReactiveMaskTextureEnabled a Boolean value that indicates whether a temporal scaler you create with the descriptor applies a reactive mask.
 func (x *TemporalScalerDescriptor) WithReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) *TemporalScalerDescriptor {
-	x.inner.SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReactiveMaskTextureEnabled:"), reactiveMaskTextureEnabled)
 	return x
 }
 
-// The pixel format of the reactive mask input texture for a temporal scaler you create with the descriptor.
-//
-// WithReactiveMaskTextureFormat sets the reactiveMaskTextureFormat property and returns the receiver for chaining.
-func (x *TemporalScalerDescriptor) WithReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor {
-	x.inner.SetReactiveMaskTextureFormat(reactiveMaskTextureFormat)
-	return x
+// InputWidth the width of the input color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) InputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputWidth"))
+	return _r
 }
 
-// Creates a temporal scaler instance from this descriptor’s current property values.
-//
-// NewTemporalScalerWithDevice calls the underlying NewTemporalScalerWithDevice.
-func (x *TemporalScalerDescriptor) NewTemporalScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalScaler {
-	return x.inner.NewTemporalScalerWithDevice(device)
+// SetInputWidth wraps the corresponding Objective-C method.
+func (x *TemporalScalerDescriptor) SetInputWidth(inputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 }
 
-// Creates a temporal scaler instance for a Metal device.
-//
-// NewTemporalScalerWithDeviceCompiler calls the underlying NewTemporalScalerWithDeviceCompiler.
-func (x *TemporalScalerDescriptor) NewTemporalScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalScaler {
-	return x.inner.NewTemporalScalerWithDeviceCompiler(device, compiler)
+// InputHeight the height of the input color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) InputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputHeight"))
+	return _r
 }
 
-// The pixel format of the input color texture for the temporal scaler you create with this descriptor.
-//
-// ColorTextureFormat calls the underlying ColorTextureFormat.
-func (x *TemporalScalerDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
-	return x.inner.ColorTextureFormat()
+// SetInputHeight wraps the corresponding Objective-C method.
+func (x *TemporalScalerDescriptor) SetInputHeight(inputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 }
 
-// SetColorTextureFormat calls the underlying SetColorTextureFormat.
-func (x *TemporalScalerDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
+// OutputWidth the width of the output color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) OutputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputWidth"))
+	return _r
 }
 
-// The pixel format of the input depth texture for the temporal scaler you create with this descriptor.
-//
-// DepthTextureFormat calls the underlying DepthTextureFormat.
-func (x *TemporalScalerDescriptor) DepthTextureFormat() metal.MTLPixelFormat {
-	return x.inner.DepthTextureFormat()
+// SetOutputWidth wraps the corresponding Objective-C method.
+func (x *TemporalScalerDescriptor) SetOutputWidth(outputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 }
 
-// SetDepthTextureFormat calls the underlying SetDepthTextureFormat.
-func (x *TemporalScalerDescriptor) SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetDepthTextureFormat(depthTextureFormat)
+// OutputHeight the height of the output color texture for the temporal scaler you create with this descriptor.
+func (x *TemporalScalerDescriptor) OutputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputHeight"))
+	return _r
 }
 
-// The pixel format of the input motion texture for the temporal scaler you create with this descriptor.
-//
-// MotionTextureFormat calls the underlying MotionTextureFormat.
-func (x *TemporalScalerDescriptor) MotionTextureFormat() metal.MTLPixelFormat {
-	return x.inner.MotionTextureFormat()
+// SetOutputHeight wraps the corresponding Objective-C method.
+func (x *TemporalScalerDescriptor) SetOutputHeight(outputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 }
 
-// SetMotionTextureFormat calls the underlying SetMotionTextureFormat.
-func (x *TemporalScalerDescriptor) SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetMotionTextureFormat(motionTextureFormat)
-}
-
-// The pixel format of the output texture for the temporal scaler you create with this descriptor.
-//
-// OutputTextureFormat calls the underlying OutputTextureFormat.
-func (x *TemporalScalerDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
-	return x.inner.OutputTextureFormat()
-}
-
-// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
-func (x *TemporalScalerDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
-}
-
-// The width of the input color texture for the temporal scaler you create with this descriptor.
-//
-// InputWidth calls the underlying InputWidth.
-func (x *TemporalScalerDescriptor) InputWidth() uint {
-	return x.inner.InputWidth()
-}
-
-// SetInputWidth calls the underlying SetInputWidth.
-func (x *TemporalScalerDescriptor) SetInputWidth(inputWidth uint) {
-	x.inner.SetInputWidth(inputWidth)
-}
-
-// The height of the input color texture for the temporal scaler you create with this descriptor.
-//
-// InputHeight calls the underlying InputHeight.
-func (x *TemporalScalerDescriptor) InputHeight() uint {
-	return x.inner.InputHeight()
-}
-
-// SetInputHeight calls the underlying SetInputHeight.
-func (x *TemporalScalerDescriptor) SetInputHeight(inputHeight uint) {
-	x.inner.SetInputHeight(inputHeight)
-}
-
-// The width of the output color texture for the temporal scaler you create with this descriptor.
-//
-// OutputWidth calls the underlying OutputWidth.
-func (x *TemporalScalerDescriptor) OutputWidth() uint {
-	return x.inner.OutputWidth()
-}
-
-// SetOutputWidth calls the underlying SetOutputWidth.
-func (x *TemporalScalerDescriptor) SetOutputWidth(outputWidth uint) {
-	x.inner.SetOutputWidth(outputWidth)
-}
-
-// The height of the output color texture for the temporal scaler you create with this descriptor.
-//
-// OutputHeight calls the underlying OutputHeight.
-func (x *TemporalScalerDescriptor) OutputHeight() uint {
-	return x.inner.OutputHeight()
-}
-
-// SetOutputHeight calls the underlying SetOutputHeight.
-func (x *TemporalScalerDescriptor) SetOutputHeight(outputHeight uint) {
-	x.inner.SetOutputHeight(outputHeight)
-}
-
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Temporal scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// IsAutoExposureEnabled calls the underlying IsAutoExposureEnabled.
+// IsAutoExposureEnabled a Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Temporal scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *TemporalScalerDescriptor) IsAutoExposureEnabled() bool {
-	return x.inner.IsAutoExposureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutoExposureEnabled"))
+	return _r
 }
 
-// SetAutoExposureEnabled calls the underlying SetAutoExposureEnabled.
+// SetAutoExposureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalScalerDescriptor) SetAutoExposureEnabled(autoExposureEnabled bool) {
-	x.inner.SetAutoExposureEnabled(autoExposureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoExposureEnabled:"), autoExposureEnabled)
 }
 
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal scaler that can upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
-//
-// RequiresSynchronousInitialization calls the underlying RequiresSynchronousInitialization.
+// RequiresSynchronousInitialization a Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal scaler that can upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
 func (x *TemporalScalerDescriptor) RequiresSynchronousInitialization() bool {
-	return x.inner.RequiresSynchronousInitialization()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSynchronousInitialization"))
+	return _r
 }
 
-// SetRequiresSynchronousInitialization calls the underlying SetRequiresSynchronousInitialization.
+// SetRequiresSynchronousInitialization wraps the corresponding Objective-C method.
 func (x *TemporalScalerDescriptor) SetRequiresSynchronousInitialization(requiresSynchronousInitialization bool) {
-	x.inner.SetRequiresSynchronousInitialization(requiresSynchronousInitialization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSynchronousInitialization:"), requiresSynchronousInitialization)
 }
 
-// A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution. When you set this property to <doc://com.apple.documentation/documentation/swift/true> to enable dynamic resolution, scale properties “inputContentMinScale“ and “inputContentMaxScale“ represent the input and output resolution both the width and height. * Note: The scaler assumes that aspect ratio of the input and output textures doesn't change.
-//
-// IsInputContentPropertiesEnabled calls the underlying IsInputContentPropertiesEnabled.
+// IsInputContentPropertiesEnabled a Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution. When you set this property to <doc://com.apple.documentation/documentation/swift/true> to enable dynamic resolution, scale properties “inputContentMinScale“ and “inputContentMaxScale“ represent the input and output resolution both the width and height. * Note: The scaler assumes that aspect ratio of the input and output textures doesn't change.
 func (x *TemporalScalerDescriptor) IsInputContentPropertiesEnabled() bool {
-	return x.inner.IsInputContentPropertiesEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInputContentPropertiesEnabled"))
+	return _r
 }
 
-// SetInputContentPropertiesEnabled calls the underlying SetInputContentPropertiesEnabled.
+// SetInputContentPropertiesEnabled wraps the corresponding Objective-C method.
 func (x *TemporalScalerDescriptor) SetInputContentPropertiesEnabled(inputContentPropertiesEnabled bool) {
-	x.inner.SetInputContentPropertiesEnabled(inputContentPropertiesEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputContentPropertiesEnabled:"), inputContentPropertiesEnabled)
 }
 
-// The smallest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
-//
-// InputContentMinScale calls the underlying InputContentMinScale.
+// InputContentMinScale the smallest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
 func (x *TemporalScalerDescriptor) InputContentMinScale() float32 {
-	return x.inner.InputContentMinScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("inputContentMinScale"))
+	return _r
 }
 
-// SetInputContentMinScale calls the underlying SetInputContentMinScale.
+// SetInputContentMinScale wraps the corresponding Objective-C method.
 func (x *TemporalScalerDescriptor) SetInputContentMinScale(inputContentMinScale float32) {
-	x.inner.SetInputContentMinScale(inputContentMinScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputContentMinScale:"), inputContentMinScale)
 }
 
-// The largest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
-//
-// InputContentMaxScale calls the underlying InputContentMaxScale.
+// InputContentMaxScale the largest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
 func (x *TemporalScalerDescriptor) InputContentMaxScale() float32 {
-	return x.inner.InputContentMaxScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("inputContentMaxScale"))
+	return _r
 }
 
-// SetInputContentMaxScale calls the underlying SetInputContentMaxScale.
+// SetInputContentMaxScale wraps the corresponding Objective-C method.
 func (x *TemporalScalerDescriptor) SetInputContentMaxScale(inputContentMaxScale float32) {
-	x.inner.SetInputContentMaxScale(inputContentMaxScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputContentMaxScale:"), inputContentMaxScale)
 }
 
-// A Boolean value that indicates whether a temporal scaler you create with the descriptor applies a reactive mask.
-//
-// IsReactiveMaskTextureEnabled calls the underlying IsReactiveMaskTextureEnabled.
+// IsReactiveMaskTextureEnabled a Boolean value that indicates whether a temporal scaler you create with the descriptor applies a reactive mask.
 func (x *TemporalScalerDescriptor) IsReactiveMaskTextureEnabled() bool {
-	return x.inner.IsReactiveMaskTextureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReactiveMaskTextureEnabled"))
+	return _r
 }
 
-// SetReactiveMaskTextureEnabled calls the underlying SetReactiveMaskTextureEnabled.
+// SetReactiveMaskTextureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalScalerDescriptor) SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) {
-	x.inner.SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled)
-}
-
-// The pixel format of the reactive mask input texture for a temporal scaler you create with the descriptor.
-//
-// ReactiveMaskTextureFormat calls the underlying ReactiveMaskTextureFormat.
-func (x *TemporalScalerDescriptor) ReactiveMaskTextureFormat() metal.MTLPixelFormat {
-	return x.inner.ReactiveMaskTextureFormat()
-}
-
-// SetReactiveMaskTextureFormat calls the underlying SetReactiveMaskTextureFormat.
-func (x *TemporalScalerDescriptor) SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetReactiveMaskTextureFormat(reactiveMaskTextureFormat)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReactiveMaskTextureEnabled:"), reactiveMaskTextureEnabled)
 }
 
 // TemporalScalerDescriptorable is the interface implemented by [TemporalScalerDescriptor], for mocking and DI.
 type TemporalScalerDescriptorable interface {
-	Unwrap() *raw.MTLFXTemporalScalerDescriptor
-	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor
-	WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor
-	WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor
-	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor
-	WithInputWidth(inputWidth uint) *TemporalScalerDescriptor
-	WithInputHeight(inputHeight uint) *TemporalScalerDescriptor
-	WithOutputWidth(outputWidth uint) *TemporalScalerDescriptor
-	WithOutputHeight(outputHeight uint) *TemporalScalerDescriptor
+	obj.Object
+	WithInputWidth(inputWidth int) *TemporalScalerDescriptor
+	WithInputHeight(inputHeight int) *TemporalScalerDescriptor
+	WithOutputWidth(outputWidth int) *TemporalScalerDescriptor
+	WithOutputHeight(outputHeight int) *TemporalScalerDescriptor
 	WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalScalerDescriptor
 	WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalScalerDescriptor
 	WithInputContentPropertiesEnabled(inputContentPropertiesEnabled bool) *TemporalScalerDescriptor
 	WithInputContentMinScale(inputContentMinScale float32) *TemporalScalerDescriptor
 	WithInputContentMaxScale(inputContentMaxScale float32) *TemporalScalerDescriptor
 	WithReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) *TemporalScalerDescriptor
-	WithReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) *TemporalScalerDescriptor
-	NewTemporalScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalScaler
-	NewTemporalScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalScaler
-	ColorTextureFormat() metal.MTLPixelFormat
-	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
-	DepthTextureFormat() metal.MTLPixelFormat
-	SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat)
-	MotionTextureFormat() metal.MTLPixelFormat
-	SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat)
-	OutputTextureFormat() metal.MTLPixelFormat
-	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
-	InputWidth() uint
-	SetInputWidth(inputWidth uint)
-	InputHeight() uint
-	SetInputHeight(inputHeight uint)
-	OutputWidth() uint
-	SetOutputWidth(outputWidth uint)
-	OutputHeight() uint
-	SetOutputHeight(outputHeight uint)
+	InputWidth() int
+	SetInputWidth(inputWidth int)
+	InputHeight() int
+	SetInputHeight(inputHeight int)
+	OutputWidth() int
+	SetOutputWidth(outputWidth int)
+	OutputHeight() int
+	SetOutputHeight(outputHeight int)
 	IsAutoExposureEnabled() bool
 	SetAutoExposureEnabled(autoExposureEnabled bool)
 	RequiresSynchronousInitialization() bool
@@ -400,8 +275,6 @@ type TemporalScalerDescriptorable interface {
 	SetInputContentMaxScale(inputContentMaxScale float32)
 	IsReactiveMaskTextureEnabled() bool
 	SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool)
-	ReactiveMaskTextureFormat() metal.MTLPixelFormat
-	SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat)
 }
 
 var _ TemporalScalerDescriptorable = (*TemporalScalerDescriptor)(nil)

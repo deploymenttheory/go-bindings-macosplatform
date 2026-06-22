@@ -5,48 +5,82 @@
 package mediaextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains options to pass to a format reader extension.
+// FormatReaderInstantiationOptions is an idiomatic wrapper over the Objective-C class MEFormatReaderInstantiationOptions.
 //
-// FormatReaderInstantiationOptions wraps [raw.MEFormatReaderInstantiationOptions] with a fluent Go API.
+// An object that contains options to pass to a format reader extension.
 type FormatReaderInstantiationOptions struct {
-	inner *raw.MEFormatReaderInstantiationOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEFormatReaderInstantiationOptions].
-func (x *FormatReaderInstantiationOptions) Unwrap() *raw.MEFormatReaderInstantiationOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FormatReaderInstantiationOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// FormatReaderInstantiationOptionsFromID adopts an existing object pointer as a FormatReaderInstantiationOptions (nil for 0).
+// FormatReaderInstantiationOptionsFromID adopts an existing Objective-C object as a FormatReaderInstantiationOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func FormatReaderInstantiationOptionsFromID(id objc.ID) *FormatReaderInstantiationOptions {
 	if id == 0 {
 		return nil
 	}
-	return &FormatReaderInstantiationOptions{inner: raw.MEFormatReaderInstantiationOptionsFromID(id)}
+	x := &FormatReaderInstantiationOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFormatReaderInstantiationOptions creates a new [FormatReaderInstantiationOptions].
+// formatReaderInstantiationOptionsAdopt wraps an Objective-C object that this code just created as a
+// FormatReaderInstantiationOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func formatReaderInstantiationOptionsAdopt(id objc.ID) *FormatReaderInstantiationOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &FormatReaderInstantiationOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FormatReaderInstantiationOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FormatReaderInstantiationOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FormatReaderInstantiationOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FormatReaderInstantiationOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFormatReaderInstantiationOptions creates a new FormatReaderInstantiationOptions.
 func NewFormatReaderInstantiationOptions() *FormatReaderInstantiationOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEFormatReaderInstantiationOptions")), objc.RegisterName("new"))
-	return &FormatReaderInstantiationOptions{inner: raw.MEFormatReaderInstantiationOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEFormatReaderInstantiationOptions")), objc.RegisterName("new"))
+	return formatReaderInstantiationOptionsAdopt(_id)
 }
 
-// AllowIncrementalFragmentParsing calls the underlying AllowIncrementalFragmentParsing.
+// AllowIncrementalFragmentParsing wraps the corresponding Objective-C method.
 func (x *FormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() bool {
-	return x.inner.AllowIncrementalFragmentParsing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowIncrementalFragmentParsing"))
+	return _r
 }
 
 // FormatReaderInstantiationOptionsable is the interface implemented by [FormatReaderInstantiationOptions], for mocking and DI.
 type FormatReaderInstantiationOptionsable interface {
-	Unwrap() *raw.MEFormatReaderInstantiationOptions
+	obj.Object
 	AllowIncrementalFragmentParsing() bool
 }
 

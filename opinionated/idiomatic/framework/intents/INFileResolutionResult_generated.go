@@ -5,45 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for a file associated with an intent.
+// FileResolutionResult is an idiomatic wrapper over the Objective-C class INFileResolutionResult.
 //
-// FileResolutionResult wraps [raw.INFileResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for a file associated with an intent.
 type FileResolutionResult struct {
-	inner *raw.INFileResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INFileResolutionResult].
-func (x *FileResolutionResult) Unwrap() *raw.INFileResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// FileResolutionResultFromID adopts an existing object pointer as a FileResolutionResult (nil for 0).
+// FileResolutionResultFromID adopts an existing Objective-C object as a FileResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func FileResolutionResultFromID(id objc.ID) *FileResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &FileResolutionResult{inner: raw.INFileResolutionResultFromID(id)}
+	x := &FileResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFileResolutionResult creates a new [FileResolutionResult].
+// fileResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// FileResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileResolutionResultAdopt(id objc.ID) *FileResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &FileResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFileResolutionResult creates a new FileResolutionResult.
 func NewFileResolutionResult() *FileResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INFileResolutionResult")), objc.RegisterName("new"))
-	return &FileResolutionResult{inner: raw.INFileResolutionResultFromID(_id)}
-}
-
-func (x *FileResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INFileResolutionResult")), objc.RegisterName("new"))
+	return fileResolutionResultAdopt(_id)
 }
 
 // FileResolutionResultable is the interface implemented by [FileResolutionResult], for mocking and DI.
 type FileResolutionResultable interface {
-	Unwrap() *raw.INFileResolutionResult
+	obj.Object
 }
 
 var _ FileResolutionResultable = (*FileResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*FileResolutionResult)(nil)

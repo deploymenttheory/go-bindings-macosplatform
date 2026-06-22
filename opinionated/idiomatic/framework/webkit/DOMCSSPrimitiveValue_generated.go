@@ -5,121 +5,119 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSPrimitiveValue wraps [raw.DOMCSSPrimitiveValue] with a fluent Go API.
+// DOMCSSPrimitiveValue is an idiomatic wrapper over the Objective-C class DOMCSSPrimitiveValue.
+//
+// It embeds [DOMCSSValue], promoting that type's methods.
 type DOMCSSPrimitiveValue struct {
-	inner *raw.DOMCSSPrimitiveValue
+	DOMCSSValue
 }
 
-// Unwrap returns the underlying [raw.DOMCSSPrimitiveValue].
-func (x *DOMCSSPrimitiveValue) Unwrap() *raw.DOMCSSPrimitiveValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSPrimitiveValue) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSPrimitiveValueFromID adopts an existing object pointer as a DOMCSSPrimitiveValue (nil for 0).
+// DOMCSSPrimitiveValueFromID adopts an existing Objective-C object as a DOMCSSPrimitiveValue
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSPrimitiveValueFromID(id objc.ID) *DOMCSSPrimitiveValue {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSPrimitiveValue{inner: raw.DOMCSSPrimitiveValueFromID(id)}
-}
-
-// NewDOMCSSPrimitiveValue creates a new [DOMCSSPrimitiveValue].
-func NewDOMCSSPrimitiveValue() *DOMCSSPrimitiveValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSPrimitiveValue")), objc.RegisterName("new"))
-	return &DOMCSSPrimitiveValue{inner: raw.DOMCSSPrimitiveValueFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSPrimitiveValue) WithCssText(cssText string) *DOMCSSPrimitiveValue {
-	x.inner.DOMCSSValue.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSPrimitiveValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SetFloatValueFloatValue calls the underlying SetFloatValueFloatValue.
+// dOMCSSPrimitiveValueAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSPrimitiveValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSPrimitiveValueAdopt(id objc.ID) *DOMCSSPrimitiveValue {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSPrimitiveValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMCSSPrimitiveValue creates a new DOMCSSPrimitiveValue.
+func NewDOMCSSPrimitiveValue() *DOMCSSPrimitiveValue {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSPrimitiveValue")), objc.RegisterName("new"))
+	return dOMCSSPrimitiveValueAdopt(_id)
+}
+
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSPrimitiveValue) WithCssText(cssText string) *DOMCSSPrimitiveValue {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+// SetFloatValueFloatValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) SetFloatValueFloatValue(unitType uint16, floatValue float32) {
-	x.inner.SetFloatValueFloatValue(unitType, floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:floatValue:"), unitType, floatValue)
 }
 
-// GetFloatValue calls the underlying GetFloatValue.
+// GetFloatValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) GetFloatValue(unitType uint16) float32 {
-	return x.inner.GetFloatValue(unitType)
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("getFloatValue:"), unitType)
+	return _r
 }
 
-// SetStringValueStringValue calls the underlying SetStringValueStringValue.
+// SetStringValueStringValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) SetStringValueStringValue(stringType uint16, stringValue string) {
-	x.inner.SetStringValueStringValue(stringType, foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:stringValue:"), stringType, purego.NSString(stringValue))
 }
 
-// GetStringValue calls the underlying GetStringValue.
+// GetStringValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) GetStringValue() string {
-	_r := x.inner.GetStringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getStringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GetCounterValue calls the underlying GetCounterValue.
+// GetCounterValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) GetCounterValue() *DOMCounter {
-	_r := x.inner.GetCounterValue()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCounter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCounterValue"))
+	return DOMCounterFromID(_r)
 }
 
-// GetRectValue calls the underlying GetRectValue.
+// GetRectValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) GetRectValue() *DOMRect {
-	_r := x.inner.GetRectValue()
-	if _r == nil {
-		return nil
-	}
-	return &DOMRect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRectValue"))
+	return DOMRectFromID(_r)
 }
 
-// GetRGBColorValue calls the underlying GetRGBColorValue.
+// GetRGBColorValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) GetRGBColorValue() *DOMRGBColor {
-	_r := x.inner.GetRGBColorValue()
-	if _r == nil {
-		return nil
-	}
-	return &DOMRGBColor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRGBColorValue"))
+	return DOMRGBColorFromID(_r)
 }
 
-// PrimitiveType calls the underlying PrimitiveType.
+// PrimitiveType wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) PrimitiveType() uint16 {
-	return x.inner.PrimitiveType()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("primitiveType"))
+	return _r
 }
 
-// SetFloatValue calls the underlying SetFloatValue.
+// SetFloatValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) SetFloatValue(unitType uint16, floatValue float32) {
-	x.inner.SetFloatValue(unitType, floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue::"), unitType, floatValue)
 }
 
-// SetStringValue calls the underlying SetStringValue.
+// SetStringValue wraps the corresponding Objective-C method.
 func (x *DOMCSSPrimitiveValue) SetStringValue(stringType uint16, stringValue string) {
-	x.inner.SetStringValue(stringType, foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-func (x *DOMCSSPrimitiveValue) asDOMCSSValue() *raw.DOMCSSValue { return &x.inner.DOMCSSValue }
-
-func (x *DOMCSSPrimitiveValue) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSValue.DOMObject }
-
-func (x *DOMCSSPrimitiveValue) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSValue.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue::"), stringType, purego.NSString(stringValue))
 }
 
 // DOMCSSPrimitiveValueable is the interface implemented by [DOMCSSPrimitiveValue], for mocking and DI.
 type DOMCSSPrimitiveValueable interface {
-	Unwrap() *raw.DOMCSSPrimitiveValue
+	obj.Object
 	WithCssText(cssText string) *DOMCSSPrimitiveValue
 	SetFloatValueFloatValue(unitType uint16, floatValue float32)
 	GetFloatValue(unitType uint16) float32
@@ -134,3 +132,9 @@ type DOMCSSPrimitiveValueable interface {
 }
 
 var _ DOMCSSPrimitiveValueable = (*DOMCSSPrimitiveValue)(nil)
+
+var _ DOMCSSValueProvider = (*DOMCSSPrimitiveValue)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSPrimitiveValue)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSPrimitiveValue)(nil)

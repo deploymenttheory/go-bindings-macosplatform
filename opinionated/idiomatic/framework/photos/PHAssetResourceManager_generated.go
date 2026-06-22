@@ -6,60 +6,85 @@ package photos
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A resource manager for the data storage underlying a Photos asset.
+// AssetResourceManager is an idiomatic wrapper over the Objective-C class PHAssetResourceManager.
 //
-// AssetResourceManager wraps [raw.PHAssetResourceManager] with a fluent Go API.
+// A resource manager for the data storage underlying a Photos asset.
 type AssetResourceManager struct {
-	inner *raw.PHAssetResourceManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAssetResourceManager].
-func (x *AssetResourceManager) Unwrap() *raw.PHAssetResourceManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResourceManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceManagerFromID adopts an existing object pointer as a AssetResourceManager (nil for 0).
+// AssetResourceManagerFromID adopts an existing Objective-C object as a AssetResourceManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceManagerFromID(id objc.ID) *AssetResourceManager {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResourceManager{inner: raw.PHAssetResourceManagerFromID(id)}
+	x := &AssetResourceManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResourceManager creates a new [AssetResourceManager].
+// assetResourceManagerAdopt wraps an Objective-C object that this code just created as a
+// AssetResourceManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceManagerAdopt(id objc.ID) *AssetResourceManager {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResourceManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetResourceManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetResourceManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetResourceManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetResourceManager creates a new AssetResourceManager.
 func NewAssetResourceManager() *AssetResourceManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetResourceManager")), objc.RegisterName("new"))
-	return &AssetResourceManager{inner: raw.PHAssetResourceManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceManager")), objc.RegisterName("new"))
+	return assetResourceManagerAdopt(_id)
 }
 
-// Requests the underlying data for the specified asset resource, to be delivered asynchronously.
-//
-// RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler calls the underlying RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler.
-func (x *AssetResourceManager) RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *raw.PHAssetResource, options *raw.PHAssetResourceRequestOptions, handler func(*foundation.NSData), completionHandler func(unsafe.Pointer)) int32 {
-	return x.inner.RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource, options, handler, completionHandler)
-}
-
-// Requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
+// WriteDataForAssetResourceToFileOptions requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
 //
 // WriteDataForAssetResourceToFileOptions blocks until the operation completes or ctx is cancelled.
-func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *raw.PHAssetResource, fileURL string, options *raw.PHAssetResourceRequestOptions) error {
+func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.WriteDataForAssetResourceToFileOptionsCompletionHandler(resource, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeDataForAssetResource:toFile:options:completionHandler:"), objref.IDOf(resource), rt.FileURL(fileURL), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -68,18 +93,15 @@ func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx contex
 	}
 }
 
-// Cancels an asynchronous request.
-//
-// CancelDataRequest calls the underlying CancelDataRequest.
+// CancelDataRequest cancels an asynchronous request.
 func (x *AssetResourceManager) CancelDataRequest(requestID int32) {
-	x.inner.CancelDataRequest(requestID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDataRequest:"), requestID)
 }
 
 // AssetResourceManagerable is the interface implemented by [AssetResourceManager], for mocking and DI.
 type AssetResourceManagerable interface {
-	Unwrap() *raw.PHAssetResourceManager
-	RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *raw.PHAssetResource, options *raw.PHAssetResourceRequestOptions, handler func(*foundation.NSData), completionHandler func(unsafe.Pointer)) int32
-	WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *raw.PHAssetResource, fileURL string, options *raw.PHAssetResourceRequestOptions) error
+	obj.Object
+	WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error
 	CancelDataRequest(requestID int32)
 }
 

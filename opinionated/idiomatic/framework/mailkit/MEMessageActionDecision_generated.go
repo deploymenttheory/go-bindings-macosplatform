@@ -5,41 +5,76 @@
 package mailkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.
+// MessageActionDecision is an idiomatic wrapper over the Objective-C class MEMessageActionDecision.
 //
-// MessageActionDecision wraps [raw.MEMessageActionDecision] with a fluent Go API.
+// The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.
 type MessageActionDecision struct {
-	inner *raw.MEMessageActionDecision
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEMessageActionDecision].
-func (x *MessageActionDecision) Unwrap() *raw.MEMessageActionDecision { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MessageActionDecision) ID() objc.ID { return x.inner.Ptr() }
-
-// MessageActionDecisionFromID adopts an existing object pointer as a MessageActionDecision (nil for 0).
+// MessageActionDecisionFromID adopts an existing Objective-C object as a MessageActionDecision
+// (nil for 0), retaining it and registering a release finalizer.
 func MessageActionDecisionFromID(id objc.ID) *MessageActionDecision {
 	if id == 0 {
 		return nil
 	}
-	return &MessageActionDecision{inner: raw.MEMessageActionDecisionFromID(id)}
+	x := &MessageActionDecision{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMessageActionDecision creates a new [MessageActionDecision].
+// messageActionDecisionAdopt wraps an Objective-C object that this code just created as a
+// MessageActionDecision (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messageActionDecisionAdopt(id objc.ID) *MessageActionDecision {
+	if id == 0 {
+		return nil
+	}
+	x := &MessageActionDecision{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MessageActionDecision) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MessageActionDecision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MessageActionDecision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageActionDecision) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMessageActionDecision creates a new MessageActionDecision.
 func NewMessageActionDecision() *MessageActionDecision {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageActionDecision")), objc.RegisterName("new"))
-	return &MessageActionDecision{inner: raw.MEMessageActionDecisionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("new"))
+	return messageActionDecisionAdopt(_id)
 }
 
 // MessageActionDecisionable is the interface implemented by [MessageActionDecision], for mocking and DI.
 type MessageActionDecisionable interface {
-	Unwrap() *raw.MEMessageActionDecision
+	obj.Object
 }
 
 var _ MessageActionDecisionable = (*MessageActionDecision)(nil)

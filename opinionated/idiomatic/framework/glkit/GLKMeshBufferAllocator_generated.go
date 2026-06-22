@@ -5,39 +5,74 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MeshBufferAllocator wraps [raw.GLKMeshBufferAllocator] with a fluent Go API.
+// MeshBufferAllocator is an idiomatic wrapper over the Objective-C class GLKMeshBufferAllocator.
 type MeshBufferAllocator struct {
-	inner *raw.GLKMeshBufferAllocator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKMeshBufferAllocator].
-func (x *MeshBufferAllocator) Unwrap() *raw.GLKMeshBufferAllocator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBufferAllocator) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferAllocatorFromID adopts an existing object pointer as a MeshBufferAllocator (nil for 0).
+// MeshBufferAllocatorFromID adopts an existing Objective-C object as a MeshBufferAllocator
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferAllocatorFromID(id objc.ID) *MeshBufferAllocator {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBufferAllocator{inner: raw.GLKMeshBufferAllocatorFromID(id)}
+	x := &MeshBufferAllocator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMeshBufferAllocator creates a new [MeshBufferAllocator].
+// meshBufferAllocatorAdopt wraps an Objective-C object that this code just created as a
+// MeshBufferAllocator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferAllocatorAdopt(id objc.ID) *MeshBufferAllocator {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshBufferAllocator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MeshBufferAllocator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBufferAllocator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBufferAllocator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBufferAllocator) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeshBufferAllocator creates a new MeshBufferAllocator.
 func NewMeshBufferAllocator() *MeshBufferAllocator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKMeshBufferAllocator")), objc.RegisterName("new"))
-	return &MeshBufferAllocator{inner: raw.GLKMeshBufferAllocatorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKMeshBufferAllocator")), objc.RegisterName("new"))
+	return meshBufferAllocatorAdopt(_id)
 }
 
 // MeshBufferAllocatorable is the interface implemented by [MeshBufferAllocator], for mocking and DI.
 type MeshBufferAllocatorable interface {
-	Unwrap() *raw.GLKMeshBufferAllocator
+	obj.Object
 }
 
 var _ MeshBufferAllocatorable = (*MeshBufferAllocator)(nil)

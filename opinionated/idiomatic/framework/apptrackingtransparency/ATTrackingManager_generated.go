@@ -5,41 +5,76 @@
 package apptrackingtransparency
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/apptrackingtransparency"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides a tracking authorization request and the tracking authorization status of the app.
+// TrackingManager is an idiomatic wrapper over the Objective-C class ATTrackingManager.
 //
-// TrackingManager wraps [raw.ATTrackingManager] with a fluent Go API.
+// A class that provides a tracking authorization request and the tracking authorization status of the app.
 type TrackingManager struct {
-	inner *raw.ATTrackingManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ATTrackingManager].
-func (x *TrackingManager) Unwrap() *raw.ATTrackingManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrackingManager) ID() objc.ID { return x.inner.Ptr() }
-
-// TrackingManagerFromID adopts an existing object pointer as a TrackingManager (nil for 0).
+// TrackingManagerFromID adopts an existing Objective-C object as a TrackingManager
+// (nil for 0), retaining it and registering a release finalizer.
 func TrackingManagerFromID(id objc.ID) *TrackingManager {
 	if id == 0 {
 		return nil
 	}
-	return &TrackingManager{inner: raw.ATTrackingManagerFromID(id)}
+	x := &TrackingManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTrackingManager creates a new [TrackingManager].
+// trackingManagerAdopt wraps an Objective-C object that this code just created as a
+// TrackingManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trackingManagerAdopt(id objc.ID) *TrackingManager {
+	if id == 0 {
+		return nil
+	}
+	x := &TrackingManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TrackingManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TrackingManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TrackingManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TrackingManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTrackingManager creates a new TrackingManager.
 func NewTrackingManager() *TrackingManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ATTrackingManager")), objc.RegisterName("new"))
-	return &TrackingManager{inner: raw.ATTrackingManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ATTrackingManager")), objc.RegisterName("new"))
+	return trackingManagerAdopt(_id)
 }
 
 // TrackingManagerable is the interface implemented by [TrackingManager], for mocking and DI.
 type TrackingManagerable interface {
-	Unwrap() *raw.ATTrackingManager
+	obj.Object
 }
 
 var _ TrackingManagerable = (*TrackingManager)(nil)

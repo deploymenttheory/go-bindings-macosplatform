@@ -5,414 +5,300 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A rectangle annotation on a page.
+// AnnotationSquare is an idiomatic wrapper over the Objective-C class PDFAnnotationSquare.
 //
-// AnnotationSquare wraps [raw.PDFAnnotationSquare] with a fluent Go API.
+// It embeds [Annotation], promoting that type's methods.
+//
+// A rectangle annotation on a page.
 type AnnotationSquare struct {
-	inner *raw.PDFAnnotationSquare
+	Annotation
 }
 
-// Unwrap returns the underlying [raw.PDFAnnotationSquare].
-func (x *AnnotationSquare) Unwrap() *raw.PDFAnnotationSquare { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnnotationSquare) ID() objc.ID { return x.inner.Ptr() }
-
-// AnnotationSquareFromID adopts an existing object pointer as a AnnotationSquare (nil for 0).
+// AnnotationSquareFromID adopts an existing Objective-C object as a AnnotationSquare
+// (nil for 0), retaining it and registering a release finalizer.
 func AnnotationSquareFromID(id objc.ID) *AnnotationSquare {
 	if id == 0 {
 		return nil
 	}
-	return &AnnotationSquare{inner: raw.PDFAnnotationSquareFromID(id)}
+	x := &AnnotationSquare{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAnnotationSquare creates a new [AnnotationSquare].
+// annotationSquareAdopt wraps an Objective-C object that this code just created as a
+// AnnotationSquare (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func annotationSquareAdopt(id objc.ID) *AnnotationSquare {
+	if id == 0 {
+		return nil
+	}
+	x := &AnnotationSquare{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAnnotationSquare creates a new AnnotationSquare.
 func NewAnnotationSquare() *AnnotationSquare {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFAnnotationSquare")), objc.RegisterName("new"))
-	return &AnnotationSquare{inner: raw.PDFAnnotationSquareFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFAnnotationSquare")), objc.RegisterName("new"))
+	return annotationSquareAdopt(_id)
 }
 
-// Returns the page that the annotation is associated with.
-//
-// WithPage sets the page property and returns the receiver for chaining.
+// WithPage returns the page that the annotation is associated with.
 func (x *AnnotationSquare) WithPage(page *Page) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetPage(page.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return x
 }
 
-// Returns the type of the annotation.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType returns the type of the annotation.
 func (x *AnnotationSquare) WithType(type_ string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// Returns the bounding box for the annotation in page space.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds returns the bounding box for the annotation in page space.
 func (x *AnnotationSquare) WithBounds(bounds corefoundation.CGRect) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// Returns a Boolean value indicating whether the annotation should be displayed.
-//
-// WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
+// WithShouldDisplay returns a Boolean value indicating whether the annotation should be displayed.
 func (x *AnnotationSquare) WithShouldDisplay(shouldDisplay bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
 	return x
 }
 
-// Returns a Boolean value indicating whether the annotation should appear when the document is printed.
-//
-// WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
+// WithShouldPrint returns a Boolean value indicating whether the annotation should appear when the document is printed.
 func (x *AnnotationSquare) WithShouldPrint(shouldPrint bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
 func (x *AnnotationSquare) WithHighlighted(highlighted bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The font the annotation uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithFont(font *appkit.NSFont) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetFont(font)
+// WithFont the font the annotation uses to display text.
+func (x *AnnotationSquare) WithFont(font obj.Object) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The font color the annotation uses to display text.
-//
-// WithFontColor sets the fontColor property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithFontColor(fontColor *appkit.NSColor) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetFontColor(fontColor)
+// WithFontColor the font color the annotation uses to display text.
+func (x *AnnotationSquare) WithFontColor(fontColor obj.Object) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return x
 }
 
-// The fill color for drawing a circle, line, or square annotation.
-//
-// WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
+// WithInteriorColor the fill color for drawing a circle, line, or square annotation.
+func (x *AnnotationSquare) WithInteriorColor(interiorColor obj.Object) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return x
 }
 
-// The alignment of the free text and text widget annotation’s text content.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetAlignment(alignment)
-	return x
-}
-
-// The point where a line begins, in annotation-space coordinates.
-//
-// WithStartPoint sets the startPoint property and returns the receiver for chaining.
+// WithStartPoint the point where a line begins, in annotation-space coordinates.
 func (x *AnnotationSquare) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetStartPoint(startPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
 	return x
 }
 
-// The point where a line ends, in annotation-space coordinates.
-//
-// WithEndPoint sets the endPoint property and returns the receiver for chaining.
+// WithEndPoint the point where a line ends, in annotation-space coordinates.
 func (x *AnnotationSquare) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetEndPoint(endPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
 	return x
 }
 
-// The style of the line annotation’s starting point, such as square or filled arrowhead.
-//
-// WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
+// WithStartLineStyle the style of the line annotation’s starting point, such as square or filled arrowhead.
+func (x *AnnotationSquare) WithStartLineStyle(startLineStyle LineStyle) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
 	return x
 }
 
-// The style of the line annotation’s ending point, such as square or filled arrowhead.
-//
-// WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
+// WithEndLineStyle the style of the line annotation’s ending point, such as square or filled arrowhead.
+func (x *AnnotationSquare) WithEndLineStyle(endLineStyle LineStyle) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
 	return x
 }
 
-// The type of icon to display for a pop-up text annotation.
-//
-// WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
+// WithIconType the type of icon to display for a pop-up text annotation.
+func (x *AnnotationSquare) WithIconType(iconType TextAnnotationIconType) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
 	return x
 }
 
-// An array of values that represents the points bounding the marked-up text.
-//
-// WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
-func (x *AnnotationSquare) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationSquare {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.PDFAnnotation.SetQuadrilateralPoints(foundation.NSArrayFromID[*foundation.NSValue](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSValue](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.PDFAnnotation.SetQuadrilateralPoints(_arr)
+// WithQuadrilateralPoints an array of values that represents the points bounding the marked-up text.
+func (x *AnnotationSquare) WithQuadrilateralPoints(items ...obj.Object) *AnnotationSquare {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), _arr)
 	return x
 }
 
-// The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
-//
-// WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithMarkupType(markupType PDFMarkupType) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
+// WithMarkupType the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
+func (x *AnnotationSquare) WithMarkupType(markupType MarkupType) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
 	return x
 }
 
-// The type of button widget control, either radio button, push button, or checkbox.
-//
-// WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
+// WithWidgetControlType the type of button widget control, either radio button, push button, or checkbox.
+func (x *AnnotationSquare) WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
 	return x
 }
 
-// A Boolean value that indicates whether the text widget annotation displays multiple lines.
-//
-// WithMultiline sets the multiline property and returns the receiver for chaining.
+// WithMultiline a Boolean value that indicates whether the text widget annotation displays multiple lines.
 func (x *AnnotationSquare) WithMultiline(multiline bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetMultiline(multiline)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
 	return x
 }
 
-// A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
-//
-// WithComb sets the comb property and returns the receiver for chaining.
+// WithComb a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
 func (x *AnnotationSquare) WithComb(comb bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetComb(comb)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
 	return x
 }
 
-// The maximum number of characters the text widget annotation allows.
-//
-// WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
+// WithMaximumLength the maximum number of characters the text widget annotation allows.
 func (x *AnnotationSquare) WithMaximumLength(maximumLength int) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
 	return x
 }
 
-// The string value of the widget annotation.
-//
-// WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
+// WithWidgetStringValue the string value of the widget annotation.
 func (x *AnnotationSquare) WithWidgetStringValue(widgetStringValue string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
 	return x
 }
 
-// The string value that the widget reverts to when performing a reset form action.
-//
-// WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
+// WithWidgetDefaultStringValue the string value that the widget reverts to when performing a reset form action.
 func (x *AnnotationSquare) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
 	return x
 }
 
-// A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
-//
-// WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
+// WithAllowsToggleToOff a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
 func (x *AnnotationSquare) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
 	return x
 }
 
-// A Boolean value that indicates whether radio buttons in a group turn on and off in unison.
-//
-// WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
+// WithRadiosInUnison a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
 func (x *AnnotationSquare) WithRadiosInUnison(radiosInUnison bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
 	return x
 }
 
-// A Boolean value that determines whether the widget is editable.
-//
-// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+// WithReadOnly a Boolean value that determines whether the widget is editable.
 func (x *AnnotationSquare) WithReadOnly(readOnly bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
-// A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
-//
-// WithListChoice sets the listChoice property and returns the receiver for chaining.
+// WithListChoice a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
 func (x *AnnotationSquare) WithListChoice(listChoice bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetListChoice(listChoice)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
 	return x
 }
 
-// An array of strings that specifies the options in either a list or a pop-up menu.
-//
-// WithChoices sets the collection, converting the Go slice to an NSArray.
-func (x *AnnotationSquare) WithChoices(items ...*foundation.NSString) *AnnotationSquare {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.PDFAnnotation.SetChoices(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.PDFAnnotation.SetChoices(_arr)
+// WithChoices an array of strings that specifies the options in either a list or a pop-up menu.
+func (x *AnnotationSquare) WithChoices(items ...obj.Object) *AnnotationSquare {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), _arr)
 	return x
 }
 
-// An array of strings that specifies the export values for items in a list or a pop-up menu.
-//
-// WithValues sets the collection, converting the Go slice to an NSArray.
-func (x *AnnotationSquare) WithValues(items ...*foundation.NSString) *AnnotationSquare {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.PDFAnnotation.SetValues(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.PDFAnnotation.SetValues(_arr)
+// WithValues an array of strings that specifies the export values for items in a list or a pop-up menu.
+func (x *AnnotationSquare) WithValues(items ...obj.Object) *AnnotationSquare {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), _arr)
 	return x
 }
 
-// The current state of the button widget annotation.
-//
-// WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
+// WithButtonWidgetState the current state of the button widget annotation.
+func (x *AnnotationSquare) WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
 	return x
 }
 
-// A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
-//
-// WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
+// WithButtonWidgetStateString a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
 func (x *AnnotationSquare) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
 	return x
 }
 
-// A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
-//
-// WithOpen sets the open property and returns the receiver for chaining.
+// WithOpen a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
 func (x *AnnotationSquare) WithOpen(open bool) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetOpen(open)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
 	return x
 }
 
-// The destination for a link annotation.
-//
-// WithDestination sets the destination property and returns the receiver for chaining.
+// WithDestination the destination for a link annotation.
 func (x *AnnotationSquare) WithDestination(destination *Destination) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
-// A URL for a link annotation.
-//
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL a URL for a link annotation.
 func (x *AnnotationSquare) WithURL(uRL string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// The widget identifier for form annotation actions and behaviors.
-//
-// WithFieldName sets the fieldName property and returns the receiver for chaining.
+// WithFieldName the widget identifier for form annotation actions and behaviors.
 func (x *AnnotationSquare) WithFieldName(fieldName string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
 	return x
 }
 
-// The title of push button widget annotations.
-//
-// WithCaption sets the caption property and returns the receiver for chaining.
+// WithCaption the title of push button widget annotations.
 func (x *AnnotationSquare) WithCaption(caption string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 	return x
 }
 
-// The color of the widget’s background.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
+// WithBackgroundColor the color of the widget’s background.
+func (x *AnnotationSquare) WithBackgroundColor(backgroundColor obj.Object) *AnnotationSquare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
-//
-// WithStampName sets the stampName property and returns the receiver for chaining.
+// WithStampName the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
 func (x *AnnotationSquare) WithStampName(stampName string) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
 	return x
 }
-
-func (x *AnnotationSquare) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
 // AnnotationSquareable is the interface implemented by [AnnotationSquare], for mocking and DI.
 type AnnotationSquareable interface {
-	Unwrap() *raw.PDFAnnotationSquare
+	obj.Object
 	WithPage(page *Page) *AnnotationSquare
 	WithType(type_ string) *AnnotationSquare
 	WithBounds(bounds corefoundation.CGRect) *AnnotationSquare
 	WithShouldDisplay(shouldDisplay bool) *AnnotationSquare
 	WithShouldPrint(shouldPrint bool) *AnnotationSquare
 	WithHighlighted(highlighted bool) *AnnotationSquare
-	WithFont(font *appkit.NSFont) *AnnotationSquare
-	WithFontColor(fontColor *appkit.NSColor) *AnnotationSquare
-	WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationSquare
-	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationSquare
+	WithFont(font obj.Object) *AnnotationSquare
+	WithFontColor(fontColor obj.Object) *AnnotationSquare
+	WithInteriorColor(interiorColor obj.Object) *AnnotationSquare
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationSquare
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationSquare
-	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationSquare
-	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationSquare
-	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationSquare
-	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationSquare
-	WithMarkupType(markupType PDFMarkupType) *AnnotationSquare
-	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationSquare
+	WithStartLineStyle(startLineStyle LineStyle) *AnnotationSquare
+	WithEndLineStyle(endLineStyle LineStyle) *AnnotationSquare
+	WithIconType(iconType TextAnnotationIconType) *AnnotationSquare
+	WithQuadrilateralPoints(items ...obj.Object) *AnnotationSquare
+	WithMarkupType(markupType MarkupType) *AnnotationSquare
+	WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationSquare
 	WithMultiline(multiline bool) *AnnotationSquare
 	WithComb(comb bool) *AnnotationSquare
 	WithMaximumLength(maximumLength int) *AnnotationSquare
@@ -422,17 +308,19 @@ type AnnotationSquareable interface {
 	WithRadiosInUnison(radiosInUnison bool) *AnnotationSquare
 	WithReadOnly(readOnly bool) *AnnotationSquare
 	WithListChoice(listChoice bool) *AnnotationSquare
-	WithChoices(items ...*foundation.NSString) *AnnotationSquare
-	WithValues(items ...*foundation.NSString) *AnnotationSquare
-	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationSquare
+	WithChoices(items ...obj.Object) *AnnotationSquare
+	WithValues(items ...obj.Object) *AnnotationSquare
+	WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationSquare
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationSquare
 	WithOpen(open bool) *AnnotationSquare
 	WithDestination(destination *Destination) *AnnotationSquare
 	WithURL(uRL string) *AnnotationSquare
 	WithFieldName(fieldName string) *AnnotationSquare
 	WithCaption(caption string) *AnnotationSquare
-	WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationSquare
+	WithBackgroundColor(backgroundColor obj.Object) *AnnotationSquare
 	WithStampName(stampName string) *AnnotationSquare
 }
 
 var _ AnnotationSquareable = (*AnnotationSquare)(nil)
+
+var _ AnnotationProvider = (*AnnotationSquare)(nil)

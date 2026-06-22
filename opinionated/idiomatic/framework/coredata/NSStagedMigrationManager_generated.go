@@ -5,78 +5,91 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that handles the migration event loop and provides access to the migrating persistent store.
+// StagedMigrationManager is an idiomatic wrapper over the Objective-C class NSStagedMigrationManager.
 //
-// StagedMigrationManager wraps [raw.NSStagedMigrationManager] with a fluent Go API.
+// An object that handles the migration event loop and provides access to the migrating persistent store.
 type StagedMigrationManager struct {
-	inner *raw.NSStagedMigrationManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStagedMigrationManager].
-func (x *StagedMigrationManager) Unwrap() *raw.NSStagedMigrationManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StagedMigrationManager) ID() objc.ID { return x.inner.Ptr() }
-
-// StagedMigrationManagerFromID adopts an existing object pointer as a StagedMigrationManager (nil for 0).
+// StagedMigrationManagerFromID adopts an existing Objective-C object as a StagedMigrationManager
+// (nil for 0), retaining it and registering a release finalizer.
 func StagedMigrationManagerFromID(id objc.ID) *StagedMigrationManager {
 	if id == 0 {
 		return nil
 	}
-	return &StagedMigrationManager{inner: raw.NSStagedMigrationManagerFromID(id)}
+	x := &StagedMigrationManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a migration manager with the specified stages.
+// stagedMigrationManagerAdopt wraps an Objective-C object that this code just created as a
+// StagedMigrationManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stagedMigrationManagerAdopt(id objc.ID) *StagedMigrationManager {
+	if id == 0 {
+		return nil
+	}
+	x := &StagedMigrationManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StagedMigrationManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StagedMigrationManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StagedMigrationManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StagedMigrationManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStagedMigrationManagerWithMigrationStages creates a migration manager with the specified stages.
+func NewStagedMigrationManagerWithMigrationStages(stages []*MigrationStage) *StagedMigrationManager {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSStagedMigrationManager")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMigrationStages:"), purego.SliceToNSArray(stages, func(_v *MigrationStage) objc.ID { return objref.IDOf(_v) }))
+	return stagedMigrationManagerAdopt(_id)
+}
+
+// Stages wraps the corresponding Objective-C method.
 //
-// NewStagedMigrationManagerWithMigrationStages creates a new [StagedMigrationManager].
-func NewStagedMigrationManagerWithMigrationStages(stages ...MigrationStageProvider) *StagedMigrationManager {
-	_ptrs := make([]objc.ID, len(stages))
-	for _i, _v := range stages {
-		_ptrs[_i] = _v.asMigrationStage().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSMigrationStage]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSMigrationStage](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSMigrationStage](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStagedMigrationManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMigrationStages:"), _arg0.Ptr())
-	return &StagedMigrationManager{inner: raw.NSStagedMigrationManagerFromID(_id)}
-}
-
 // Stages returns the collection as a Go slice.
 func (x *StagedMigrationManager) Stages() []*MigrationStage {
-	arr := x.inner.Stages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MigrationStage {
-		return &MigrationStage{inner: raw.NSMigrationStageFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MigrationStage { return MigrationStageFromID(_id) })
 }
 
-// Container calls the underlying Container.
+// Container wraps the corresponding Objective-C method.
 func (x *StagedMigrationManager) Container() *PersistentContainer {
-	_r := x.inner.Container()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentContainer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
+	return PersistentContainerFromID(_r)
 }
 
 // StagedMigrationManagerable is the interface implemented by [StagedMigrationManager], for mocking and DI.
 type StagedMigrationManagerable interface {
-	Unwrap() *raw.NSStagedMigrationManager
+	obj.Object
 	Stages() []*MigrationStage
 	Container() *PersistentContainer
 }

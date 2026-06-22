@@ -5,62 +5,59 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SKErrorDomain returns the string constant SKErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SKErrorDomain() objc.ID {
-	return purego.CFConstant(raw.SKErrorDomain())
+// SKErrorDomain returns the string constant SKErrorDomain, for use as a dictionary key or argument.
+func SKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SKErrorDomain"))) }
+
+// SKReceiptPropertyIsExpired returns the string constant SKReceiptPropertyIsExpired, for use as a dictionary key or argument.
+func SKReceiptPropertyIsExpired() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKReceiptPropertyIsExpired")))
 }
 
-// SKReceiptPropertyIsExpired returns the string constant SKReceiptPropertyIsExpired as an objc.ID, for use as a dictionary key or selector argument.
-func SKReceiptPropertyIsExpired() objc.ID {
-	return purego.CFConstant(raw.SKReceiptPropertyIsExpired())
+// SKReceiptPropertyIsRevoked returns the string constant SKReceiptPropertyIsRevoked, for use as a dictionary key or argument.
+func SKReceiptPropertyIsRevoked() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKReceiptPropertyIsRevoked")))
 }
 
-// SKReceiptPropertyIsRevoked returns the string constant SKReceiptPropertyIsRevoked as an objc.ID, for use as a dictionary key or selector argument.
-func SKReceiptPropertyIsRevoked() objc.ID {
-	return purego.CFConstant(raw.SKReceiptPropertyIsRevoked())
+// SKReceiptPropertyIsVolumePurchase returns the string constant SKReceiptPropertyIsVolumePurchase, for use as a dictionary key or argument.
+func SKReceiptPropertyIsVolumePurchase() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKReceiptPropertyIsVolumePurchase")))
 }
 
-// SKReceiptPropertyIsVolumePurchase returns the string constant SKReceiptPropertyIsVolumePurchase as an objc.ID, for use as a dictionary key or selector argument.
-func SKReceiptPropertyIsVolumePurchase() objc.ID {
-	return purego.CFConstant(raw.SKReceiptPropertyIsVolumePurchase())
+// SKStoreProductParameterITunesItemIdentifier returns the string constant SKStoreProductParameterITunesItemIdentifier, for use as a dictionary key or argument.
+func SKStoreProductParameterITunesItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterITunesItemIdentifier")))
 }
 
-// SKStoreProductParameterITunesItemIdentifier returns the string constant SKStoreProductParameterITunesItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterITunesItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterITunesItemIdentifier())
+// SKStoreProductParameterProductIdentifier returns the string constant SKStoreProductParameterProductIdentifier, for use as a dictionary key or argument.
+func SKStoreProductParameterProductIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterProductIdentifier")))
 }
 
-// SKStoreProductParameterProductIdentifier returns the string constant SKStoreProductParameterProductIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterProductIdentifier() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterProductIdentifier())
+// SKStoreProductParameterCustomProductPageIdentifier returns the string constant SKStoreProductParameterCustomProductPageIdentifier, for use as a dictionary key or argument.
+func SKStoreProductParameterCustomProductPageIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterCustomProductPageIdentifier")))
 }
 
-// SKStoreProductParameterCustomProductPageIdentifier returns the string constant SKStoreProductParameterCustomProductPageIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterCustomProductPageIdentifier() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterCustomProductPageIdentifier())
+// SKStoreProductParameterAffiliateToken returns the string constant SKStoreProductParameterAffiliateToken, for use as a dictionary key or argument.
+func SKStoreProductParameterAffiliateToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterAffiliateToken")))
 }
 
-// SKStoreProductParameterAffiliateToken returns the string constant SKStoreProductParameterAffiliateToken as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterAffiliateToken() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterAffiliateToken())
+// SKStoreProductParameterCampaignToken returns the string constant SKStoreProductParameterCampaignToken, for use as a dictionary key or argument.
+func SKStoreProductParameterCampaignToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterCampaignToken")))
 }
 
-// SKStoreProductParameterCampaignToken returns the string constant SKStoreProductParameterCampaignToken as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterCampaignToken() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterCampaignToken())
+// SKStoreProductParameterProviderToken returns the string constant SKStoreProductParameterProviderToken, for use as a dictionary key or argument.
+func SKStoreProductParameterProviderToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterProviderToken")))
 }
 
-// SKStoreProductParameterProviderToken returns the string constant SKStoreProductParameterProviderToken as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterProviderToken() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterProviderToken())
-}
-
-// SKStoreProductParameterAdvertisingPartnerToken returns the string constant SKStoreProductParameterAdvertisingPartnerToken as an objc.ID, for use as a dictionary key or selector argument.
-func SKStoreProductParameterAdvertisingPartnerToken() objc.ID {
-	return purego.CFConstant(raw.SKStoreProductParameterAdvertisingPartnerToken())
+// SKStoreProductParameterAdvertisingPartnerToken returns the string constant SKStoreProductParameterAdvertisingPartnerToken, for use as a dictionary key or argument.
+func SKStoreProductParameterAdvertisingPartnerToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterAdvertisingPartnerToken")))
 }

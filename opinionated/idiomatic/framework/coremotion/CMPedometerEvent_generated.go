@@ -5,54 +5,90 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A change in the user’s pedestrian activity.
+// PedometerEvent is an idiomatic wrapper over the Objective-C class CMPedometerEvent.
 //
-// PedometerEvent wraps [raw.CMPedometerEvent] with a fluent Go API.
+// A change in the user’s pedestrian activity.
 type PedometerEvent struct {
-	inner *raw.CMPedometerEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMPedometerEvent].
-func (x *PedometerEvent) Unwrap() *raw.CMPedometerEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PedometerEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// PedometerEventFromID adopts an existing object pointer as a PedometerEvent (nil for 0).
+// PedometerEventFromID adopts an existing Objective-C object as a PedometerEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func PedometerEventFromID(id objc.ID) *PedometerEvent {
 	if id == 0 {
 		return nil
 	}
-	return &PedometerEvent{inner: raw.CMPedometerEventFromID(id)}
+	x := &PedometerEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPedometerEvent creates a new [PedometerEvent].
+// pedometerEventAdopt wraps an Objective-C object that this code just created as a
+// PedometerEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pedometerEventAdopt(id objc.ID) *PedometerEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &PedometerEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PedometerEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PedometerEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PedometerEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PedometerEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPedometerEvent creates a new PedometerEvent.
 func NewPedometerEvent() *PedometerEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMPedometerEvent")), objc.RegisterName("new"))
-	return &PedometerEvent{inner: raw.CMPedometerEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometerEvent")), objc.RegisterName("new"))
+	return pedometerEventAdopt(_id)
 }
 
-// Date calls the underlying Date.
-func (x *PedometerEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
+// Date wraps the corresponding Objective-C method.
+func (x *PedometerEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
-// Type calls the underlying Type.
-func (x *PedometerEvent) Type() CMPedometerEventType {
-	return CMPedometerEventType(x.inner.Type())
+// Type wraps the corresponding Objective-C method.
+func (x *PedometerEvent) Type() PedometerEventType {
+	_r := objc.Send[PedometerEventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // PedometerEventable is the interface implemented by [PedometerEvent], for mocking and DI.
 type PedometerEventable interface {
-	Unwrap() *raw.CMPedometerEvent
-	Date() *foundation.NSDate
-	Type() CMPedometerEventType
+	obj.Object
+	Date() obj.Object
+	Type() PedometerEventType
 }
 
 var _ PedometerEventable = (*PedometerEvent)(nil)

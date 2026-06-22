@@ -6,988 +6,686 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that models the timing and presentation state of an asset during playback.
+// PlayerItem is an idiomatic wrapper over the Objective-C class AVPlayerItem.
 //
-// PlayerItem wraps [raw.AVPlayerItem] with a fluent Go API.
+// An object that models the timing and presentation state of an asset during playback.
 type PlayerItem struct {
-	inner *raw.AVPlayerItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItem].
-func (x *PlayerItem) Unwrap() *raw.AVPlayerItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItem) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemFromID adopts an existing object pointer as a PlayerItem (nil for 0).
+// PlayerItemFromID adopts an existing Objective-C object as a PlayerItem
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemFromID(id objc.ID) *PlayerItem {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItem{inner: raw.AVPlayerItemFromID(id)}
-}
-
-// Creates a player item with a specified URL.
-//
-// NewPlayerItemWithURL creates a new [PlayerItem].
-func NewPlayerItemWithURL(uRL string) *PlayerItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &PlayerItem{inner: raw.AVPlayerItemFromID(_id)}
-}
-
-// Creates a player item for a specified asset.
-//
-// NewPlayerItemWithAsset creates a new [PlayerItem].
-func NewPlayerItemWithAsset(asset *raw.AVAsset) *PlayerItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), asset.Ptr())
-	return &PlayerItem{inner: raw.AVPlayerItemFromID(_id)}
-}
-
-// Creates a player item with the specified asset and the asset keys to automatically load.
-//
-// NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys creates a new [PlayerItem].
-func NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *raw.AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *PlayerItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:automaticallyLoadedAssetKeys:"), asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
-	return &PlayerItem{inner: raw.AVPlayerItemFromID(_id)}
-}
-
-// A time value that indicates the offset from the live time to start playback, or resume playback after a seek to positive infinity.
-//
-// WithConfiguredTimeOffsetFromLive sets the configuredTimeOffsetFromLive property and returns the receiver for chaining.
-func (x *PlayerItem) WithConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) *PlayerItem {
-	x.inner.SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive)
+	x := &PlayerItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether the player preserves its time offset from the live time after a buffering operation.
-//
-// WithAutomaticallyPreservesTimeOffsetFromLive sets the automaticallyPreservesTimeOffsetFromLive property and returns the receiver for chaining.
-func (x *PlayerItem) WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) *PlayerItem {
-	x.inner.SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive)
-	return x
-}
-
-// The time at which forward playback ends.
-//
-// WithForwardPlaybackEndTime sets the forwardPlaybackEndTime property and returns the receiver for chaining.
-func (x *PlayerItem) WithForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) *PlayerItem {
-	x.inner.SetForwardPlaybackEndTime(forwardPlaybackEndTime)
-	return x
-}
-
-// The time at which reverse playback ends.
-//
-// WithReversePlaybackEndTime sets the reversePlaybackEndTime property and returns the receiver for chaining.
-func (x *PlayerItem) WithReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) *PlayerItem {
-	x.inner.SetReversePlaybackEndTime(reversePlaybackEndTime)
-	return x
-}
-
-// The video composition settings to be applied during playback.
-//
-// WithVideoComposition sets the videoComposition property and returns the receiver for chaining.
-func (x *PlayerItem) WithVideoComposition(videoComposition VideoCompositionProvider) *PlayerItem {
-	x.inner.SetVideoComposition(videoComposition.asVideoComposition())
-	return x
-}
-
-// A Boolean value that indicates whether the item’s timing follows the displayed video frame when seeking with a video composition.
-//
-// WithSeekingWaitsForVideoCompositionRendering sets the seekingWaitsForVideoCompositionRendering property and returns the receiver for chaining.
-func (x *PlayerItem) WithSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) *PlayerItem {
-	x.inner.SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering)
-	return x
-}
-
-// An array of text style rules that specify the formatting and presentation of Web Video Text Tracks (WebVTT) subtitles.
-//
-// WithTextStyleRules sets the collection, converting the Go slice to an NSArray.
-func (x *PlayerItem) WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerItem {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetTextStyleRules(foundation.NSArrayFromID[*raw.AVTextStyleRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVTextStyleRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetTextStyleRules(_arr)
-	return x
-}
-
-// The video aperture mode to apply during playback.
-//
-// WithVideoApertureMode sets the videoApertureMode property and returns the receiver for chaining.
-func (x *PlayerItem) WithVideoApertureMode(videoApertureMode *foundation.NSString) *PlayerItem {
-	x.inner.SetVideoApertureMode(videoApertureMode)
-	return x
-}
-
-// A Boolean value that indicates whether the player item applies per-frame HDR display metadata during playback.
-//
-// WithAppliesPerFrameHDRDisplayMetadata sets the appliesPerFrameHDRDisplayMetadata property and returns the receiver for chaining.
-func (x *PlayerItem) WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) *PlayerItem {
-	x.inner.SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata)
-	return x
-}
-
-// The processing algorithm used to manage audio pitch for scaled audio edits.
-//
-// WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
-func (x *PlayerItem) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *PlayerItem {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
-	return x
-}
-
-// A Boolean value that indicates whether the player item allows spatialized audio playback.
-//
-// WithAudioSpatializationAllowed sets the audioSpatializationAllowed property and returns the receiver for chaining.
-func (x *PlayerItem) WithAudioSpatializationAllowed(audioSpatializationAllowed bool) *PlayerItem {
-	x.inner.SetAudioSpatializationAllowed(audioSpatializationAllowed)
-	return x
-}
-
-// The source audio channel layouts the player item supports for spatialization.
-//
-// WithAllowedAudioSpatializationFormats sets the allowedAudioSpatializationFormats property and returns the receiver for chaining.
-func (x *PlayerItem) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *PlayerItem {
-	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
-	return x
-}
-
-// The audio mix parameters to be applied during playback.
-//
-// WithAudioMix sets the audioMix property and returns the receiver for chaining.
-func (x *PlayerItem) WithAudioMix(audioMix AudioMixProvider) *PlayerItem {
-	x.inner.SetAudioMix(audioMix.asAudioMix())
-	return x
-}
-
-// A Boolean value that indicates whether the player item can use network resources to keep the playback state up to date while paused.
-//
-// WithCanUseNetworkResourcesForLiveStreamingWhilePaused sets the canUseNetworkResourcesForLiveStreamingWhilePaused property and returns the receiver for chaining.
-func (x *PlayerItem) WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) *PlayerItem {
-	x.inner.SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused)
-	return x
-}
-
-// The duration the player should buffer media from the network ahead of the playhead to guard against playback disruption.
-//
-// WithPreferredForwardBufferDuration sets the preferredForwardBufferDuration property and returns the receiver for chaining.
-func (x *PlayerItem) WithPreferredForwardBufferDuration(preferredForwardBufferDuration float64) *PlayerItem {
-	x.inner.SetPreferredForwardBufferDuration(preferredForwardBufferDuration)
-	return x
-}
-
-// The desired limit, in bits per second, of network bandwidth consumption for this item.
-//
-// WithPreferredPeakBitRate sets the preferredPeakBitRate property and returns the receiver for chaining.
-func (x *PlayerItem) WithPreferredPeakBitRate(preferredPeakBitRate float64) *PlayerItem {
-	x.inner.SetPreferredPeakBitRate(preferredPeakBitRate)
-	return x
-}
-
-// A limit of network bandwidth consumption by the item when connecting over expensive networks.
-//
-// WithPreferredPeakBitRateForExpensiveNetworks sets the preferredPeakBitRateForExpensiveNetworks property and returns the receiver for chaining.
-func (x *PlayerItem) WithPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) *PlayerItem {
-	x.inner.SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks)
-	return x
-}
-
-// The desired maximum resolution of a video that is to be downloaded.
-//
-// WithPreferredMaximumResolution sets the preferredMaximumResolution property and returns the receiver for chaining.
-func (x *PlayerItem) WithPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) *PlayerItem {
-	x.inner.SetPreferredMaximumResolution(preferredMaximumResolution)
-	return x
-}
-
-// An upper limit on the resolution of video to download when connecting over expensive networks.
-//
-// WithPreferredMaximumResolutionForExpensiveNetworks sets the preferredMaximumResolutionForExpensiveNetworks property and returns the receiver for chaining.
-func (x *PlayerItem) WithPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) *PlayerItem {
-	x.inner.SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks)
-	return x
-}
-
-// A Boolean value that indicates whether playback starts with the first eligible variant that appears in the stream’s main playlist.
-//
-// WithStartsOnFirstEligibleVariant sets the startsOnFirstEligibleVariant property and returns the receiver for chaining.
-func (x *PlayerItem) WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) *PlayerItem {
-	x.inner.SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant)
-	return x
-}
-
-// The preferences the player item uses when selecting variant playlists.
-//
-// WithVariantPreferences sets the variantPreferences property and returns the receiver for chaining.
-func (x *PlayerItem) WithVariantPreferences(variantPreferences AVVariantPreferences) *PlayerItem {
-	x.inner.SetVariantPreferences(raw.AVVariantPreferences(variantPreferences))
-	return x
-}
-
-// Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver’s asset with which an associated UI implementation should configure its interface for media selection.
-//
-// WithPreferredCustomMediaSelectionSchemes sets the collection, converting the Go slice to an NSArray.
-func (x *PlayerItem) WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCustomMediaSelectionScheme) *PlayerItem {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPreferredCustomMediaSelectionSchemes(foundation.NSArrayFromID[*raw.AVCustomMediaSelectionScheme](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVCustomMediaSelectionScheme](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPreferredCustomMediaSelectionSchemes(_arr)
-	return x
-}
-
-// A Boolean value that indicates whether the player item automatically plays interstitial events according to server-side directives.
-//
-// WithAutomaticallyHandlesInterstitialEvents sets the automaticallyHandlesInterstitialEvents property and returns the receiver for chaining.
-func (x *PlayerItem) WithAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) *PlayerItem {
-	x.inner.SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents)
-	return x
-}
-
-// The ability of the receiver to be used for playback. The value of this property is an AVPlayerItemStatus that indicates whether the receiver can be used for playback. When the value of this property is AVPlayerItemStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. The value of this property will not be updated after the receiver is removed from an AVPlayer. This property is key value observable.
-//
-// Status calls the underlying Status.
-func (x *PlayerItem) Status() AVPlayerItemStatus {
-	return AVPlayerItemStatus(x.inner.Status())
-}
-
-// If the receiver's status is AVPlayerItemStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the receiver to no longer be able to be played. If the receiver's status is not AVPlayerItemStatusFailed, the value of this property is nil.
-//
-// Error calls the underlying Error.
-func (x *PlayerItem) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-// Accessor for underlying AVAsset.
-//
-// Asset calls the underlying Asset.
-func (x *PlayerItem) Asset() *Asset {
-	_r := x.inner.Asset()
-	if _r == nil {
+// playerItemAdopt wraps an Objective-C object that this code just created as a
+// PlayerItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemAdopt(id objc.ID) *PlayerItem {
+	if id == 0 {
 		return nil
 	}
-	return &Asset{inner: _r}
+	x := &PlayerItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Provides array of AVPlayerItem tracks. Observable (can change dynamically during playback). The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain a valid array of tracks as soon as it becomes available.
+// Description returns the object's -description text.
+func (x *PlayerItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerItemWithURL creates a player item with a specified URL.
+func NewPlayerItemWithURL(uRL string) *PlayerItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	return playerItemAdopt(_id)
+}
+
+// NewPlayerItemWithAsset creates a player item for a specified asset.
+func NewPlayerItemWithAsset(asset *Asset) *PlayerItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), objref.IDOf(asset))
+	return playerItemAdopt(_id)
+}
+
+// NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys creates a player item with the specified asset and the asset keys to automatically load.
+func NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *Asset, automaticallyLoadedAssetKeys []string) *PlayerItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:automaticallyLoadedAssetKeys:"), objref.IDOf(asset), purego.SliceToNSArray(automaticallyLoadedAssetKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return playerItemAdopt(_id)
+}
+
+// WithAutomaticallyPreservesTimeOffsetFromLive a Boolean value that indicates whether the player preserves its time offset from the live time after a buffering operation.
+func (x *PlayerItem) WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreservesTimeOffsetFromLive:"), automaticallyPreservesTimeOffsetFromLive)
+	return x
+}
+
+// WithVideoComposition the video composition settings to be applied during playback.
+func (x *PlayerItem) WithVideoComposition(videoComposition VideoCompositionProvider) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
+	return x
+}
+
+// WithSeekingWaitsForVideoCompositionRendering a Boolean value that indicates whether the item’s timing follows the displayed video frame when seeking with a video composition.
+func (x *PlayerItem) WithSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeekingWaitsForVideoCompositionRendering:"), seekingWaitsForVideoCompositionRendering)
+	return x
+}
+
+// WithTextStyleRules an array of text style rules that specify the formatting and presentation of Web Video Text Tracks (WebVTT) subtitles.
+func (x *PlayerItem) WithTextStyleRules(items ...*TextStyleRule) *PlayerItem {
+	_arr := purego.SliceToNSArray(items, func(_v *TextStyleRule) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStyleRules:"), _arr)
+	return x
+}
+
+// WithVideoApertureMode the video aperture mode to apply during playback.
+func (x *PlayerItem) WithVideoApertureMode(videoApertureMode obj.Object) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoApertureMode:"), objref.IDOf(videoApertureMode))
+	return x
+}
+
+// WithAppliesPerFrameHDRDisplayMetadata a Boolean value that indicates whether the player item applies per-frame HDR display metadata during playback.
+func (x *PlayerItem) WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesPerFrameHDRDisplayMetadata:"), appliesPerFrameHDRDisplayMetadata)
+	return x
+}
+
+// WithAudioTimePitchAlgorithm the processing algorithm used to manage audio pitch for scaled audio edits.
+func (x *PlayerItem) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
+	return x
+}
+
+// WithAudioSpatializationAllowed a Boolean value that indicates whether the player item allows spatialized audio playback.
+func (x *PlayerItem) WithAudioSpatializationAllowed(audioSpatializationAllowed bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSpatializationAllowed:"), audioSpatializationAllowed)
+	return x
+}
+
+// WithAllowedAudioSpatializationFormats the source audio channel layouts the player item supports for spatialization.
+func (x *PlayerItem) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
+	return x
+}
+
+// WithAudioMix the audio mix parameters to be applied during playback.
+func (x *PlayerItem) WithAudioMix(audioMix AudioMixProvider) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
+	return x
+}
+
+// WithCanUseNetworkResourcesForLiveStreamingWhilePaused a Boolean value that indicates whether the player item can use network resources to keep the playback state up to date while paused.
+func (x *PlayerItem) WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanUseNetworkResourcesForLiveStreamingWhilePaused:"), canUseNetworkResourcesForLiveStreamingWhilePaused)
+	return x
+}
+
+// WithPreferredForwardBufferDuration the duration the player should buffer media from the network ahead of the playhead to guard against playback disruption.
+func (x *PlayerItem) WithPreferredForwardBufferDuration(preferredForwardBufferDuration float64) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredForwardBufferDuration:"), preferredForwardBufferDuration)
+	return x
+}
+
+// WithPreferredPeakBitRate the desired limit, in bits per second, of network bandwidth consumption for this item.
+func (x *PlayerItem) WithPreferredPeakBitRate(preferredPeakBitRate float64) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredPeakBitRate:"), preferredPeakBitRate)
+	return x
+}
+
+// WithPreferredPeakBitRateForExpensiveNetworks a limit of network bandwidth consumption by the item when connecting over expensive networks.
+func (x *PlayerItem) WithPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredPeakBitRateForExpensiveNetworks:"), preferredPeakBitRateForExpensiveNetworks)
+	return x
+}
+
+// WithPreferredMaximumResolution the desired maximum resolution of a video that is to be downloaded.
+func (x *PlayerItem) WithPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaximumResolution:"), preferredMaximumResolution)
+	return x
+}
+
+// WithPreferredMaximumResolutionForExpensiveNetworks an upper limit on the resolution of video to download when connecting over expensive networks.
+func (x *PlayerItem) WithPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaximumResolutionForExpensiveNetworks:"), preferredMaximumResolutionForExpensiveNetworks)
+	return x
+}
+
+// WithStartsOnFirstEligibleVariant a Boolean value that indicates whether playback starts with the first eligible variant that appears in the stream’s main playlist.
+func (x *PlayerItem) WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartsOnFirstEligibleVariant:"), startsOnFirstEligibleVariant)
+	return x
+}
+
+// WithVariantPreferences the preferences the player item uses when selecting variant playlists.
+func (x *PlayerItem) WithVariantPreferences(variantPreferences VariantPreferences) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantPreferences:"), variantPreferences)
+	return x
+}
+
+// WithPreferredCustomMediaSelectionSchemes indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver’s asset with which an associated UI implementation should configure its interface for media selection.
+func (x *PlayerItem) WithPreferredCustomMediaSelectionSchemes(items ...*CustomMediaSelectionScheme) *PlayerItem {
+	_arr := purego.SliceToNSArray(items, func(_v *CustomMediaSelectionScheme) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredCustomMediaSelectionSchemes:"), _arr)
+	return x
+}
+
+// WithAutomaticallyHandlesInterstitialEvents a Boolean value that indicates whether the player item automatically plays interstitial events according to server-side directives.
+func (x *PlayerItem) WithAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyHandlesInterstitialEvents:"), automaticallyHandlesInterstitialEvents)
+	return x
+}
+
+// Status the ability of the receiver to be used for playback. The value of this property is an AVPlayerItemStatus that indicates whether the receiver can be used for playback. When the value of this property is AVPlayerItemStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. The value of this property will not be updated after the receiver is removed from an AVPlayer. This property is key value observable.
+func (x *PlayerItem) Status() PlayerItemStatus {
+	_r := objc.Send[PlayerItemStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
+}
+
+// Asset accessor for underlying AVAsset.
+func (x *PlayerItem) Asset() *Asset {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return AssetFromID(_r)
+}
+
+// Tracks provides array of AVPlayerItem tracks. Observable (can change dynamically during playback). The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain a valid array of tracks as soon as it becomes available.
 //
 // Tracks returns the collection as a Go slice.
 func (x *PlayerItem) Tracks() []*PlayerItemTrack {
-	arr := x.inner.Tracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemTrack {
-		return &PlayerItemTrack{inner: raw.AVPlayerItemTrackFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemTrack { return PlayerItemTrackFromID(_id) })
 }
 
-// Indicates the duration of the item, not considering either its forwardPlaybackEndTime or reversePlaybackEndTime. This property is observable. The duration of an item can change dynamically during playback. Unless you omit @"duration" from the array of asset keys you pass to +playerItemWithAsset:automaticallyLoadedAssetKeys: or -initWithAsset:automaticallyLoadedAssetKeys:, the value of this property will accord with the properties of the underlying AVAsset and the current state of playback once the receiver becomes ready to play. Before the underlying duration has been loaded, the value of this property is kCMTimeIndefinite. Use key-value observation to obtain a valid duration as soon as it becomes available. (Note that the value of duration may remain kCMTimeIndefinite, e.g. for live streams.)
-//
-// Duration calls the underlying Duration.
-func (x *PlayerItem) Duration() coremedia.CMTime {
-	return x.inner.Duration()
-}
-
-// The size of the receiver as presented by the player. Indicates the size at which the visual portion of the item is presented by the player; can be scaled from this size to fit within the bounds of an AVPlayerLayer via its videoGravity property. Can be scaled arbitrarily for presentation via the frame property of an AVPlayerLayer. The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource is sufficiently loaded, its value is CGSizeZero. Use key-value observation to obtain a valid presentationSize as soon as it becomes available. (Note that the value of presentationSize may remain CGSizeZero, e.g. for audio-only items.)
-//
-// PresentationSize calls the underlying PresentationSize.
+// PresentationSize the size of the receiver as presented by the player. Indicates the size at which the visual portion of the item is presented by the player; can be scaled from this size to fit within the bounds of an AVPlayerLayer via its videoGravity property. Can be scaled arbitrarily for presentation via the frame property of an AVPlayerLayer. The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource is sufficiently loaded, its value is CGSizeZero. Use key-value observation to obtain a valid presentationSize as soon as it becomes available. (Note that the value of presentationSize may remain CGSizeZero, e.g. for audio-only items.)
 func (x *PlayerItem) PresentationSize() corefoundation.CGSize {
-	return x.inner.PresentationSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("presentationSize"))
+	return _r
 }
 
-// Provides an NSArray of AVMetadataItems representing the timed metadata encountered most recently within the media as it plays. May be nil. Notifications of changes are available via key-value observation. As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media. This property must be accessed on the main thread/queue.
+// TimedMetadata provides an NSArray of AVMetadataItems representing the timed metadata encountered most recently within the media as it plays. May be nil. Notifications of changes are available via key-value observation. As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media. This property must be accessed on the main thread/queue.
 //
 // TimedMetadata returns the collection as a Go slice.
 func (x *PlayerItem) TimedMetadata() []*MetadataItem {
-	arr := x.inner.TimedMetadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedMetadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// An array of property keys defined on AVAsset. The value of each key in the array is automatically loaded while the receiver is being made ready to play. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
+// AutomaticallyLoadedAssetKeys an array of property keys defined on AVAsset. The value of each key in the array is automatically loaded while the receiver is being made ready to play. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
 //
 // AutomaticallyLoadedAssetKeys returns the collection as a Go slice.
 func (x *PlayerItem) AutomaticallyLoadedAssetKeys() []string {
-	arr := x.inner.AutomaticallyLoadedAssetKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("automaticallyLoadedAssetKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// For releases of macOS prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0. Starting with macOS 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
-//
-// CanPlayFastForward calls the underlying CanPlayFastForward.
+// CanPlayFastForward for releases of macOS prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0. Starting with macOS 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
 func (x *PlayerItem) CanPlayFastForward() bool {
-	return x.inner.CanPlayFastForward()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPlayFastForward"))
+	return _r
 }
 
-// Indicates whether the item can be played at rates between 0.0 and 1.0
-//
-// CanPlaySlowForward calls the underlying CanPlaySlowForward.
+// CanPlaySlowForward indicates whether the item can be played at rates between 0.0 and 1.0
 func (x *PlayerItem) CanPlaySlowForward() bool {
-	return x.inner.CanPlaySlowForward()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPlaySlowForward"))
+	return _r
 }
 
-// Indicates whether the item can be played at rate -1.0
-//
-// CanPlayReverse calls the underlying CanPlayReverse.
+// CanPlayReverse indicates whether the item can be played at rate -1.0
 func (x *PlayerItem) CanPlayReverse() bool {
-	return x.inner.CanPlayReverse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPlayReverse"))
+	return _r
 }
 
-// Indicates whether the item can be played at rates less between 0.0 and -1.0
-//
-// CanPlaySlowReverse calls the underlying CanPlaySlowReverse.
+// CanPlaySlowReverse indicates whether the item can be played at rates less between 0.0 and -1.0
 func (x *PlayerItem) CanPlaySlowReverse() bool {
-	return x.inner.CanPlaySlowReverse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPlaySlowReverse"))
+	return _r
 }
 
-// Indicates whether the item can be played at rates less than -1.0
-//
-// CanPlayFastReverse calls the underlying CanPlayFastReverse.
+// CanPlayFastReverse indicates whether the item can be played at rates less than -1.0
 func (x *PlayerItem) CanPlayFastReverse() bool {
-	return x.inner.CanPlayFastReverse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPlayFastReverse"))
+	return _r
 }
 
-// Indicates whether the item supports stepping forward; see -stepByCount:. Once the item has become ready to play, the value of canStepForward does not change even when boundary conditions are reached, such as when the item's currentTime is its end time.
-//
-// CanStepForward calls the underlying CanStepForward.
+// CanStepForward indicates whether the item supports stepping forward; see -stepByCount:. Once the item has become ready to play, the value of canStepForward does not change even when boundary conditions are reached, such as when the item's currentTime is its end time.
 func (x *PlayerItem) CanStepForward() bool {
-	return x.inner.CanStepForward()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStepForward"))
+	return _r
 }
 
-// Indicates whether the item supports stepping backward; see -stepByCount:. Once the item has become ready to play, the value of canStepBackward does not change even when boundary conditions are reached, such as when the item's currentTime is equal to kCMTimeZero.
-//
-// CanStepBackward calls the underlying CanStepBackward.
+// CanStepBackward indicates whether the item supports stepping backward; see -stepByCount:. Once the item has become ready to play, the value of canStepBackward does not change even when boundary conditions are reached, such as when the item's currentTime is equal to kCMTimeZero.
 func (x *PlayerItem) CanStepBackward() bool {
-	return x.inner.CanStepBackward()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStepBackward"))
+	return _r
 }
 
-// Indicates how close to the latest content in a live stream playback will begin after a live start or a seek to kCMTimePositiveInfinity. For non-live assets this value is kCMTimeInvalid.
-//
-// ConfiguredTimeOffsetFromLive calls the underlying ConfiguredTimeOffsetFromLive.
-func (x *PlayerItem) ConfiguredTimeOffsetFromLive() coremedia.CMTime {
-	return x.inner.ConfiguredTimeOffsetFromLive()
-}
-
-// SetConfiguredTimeOffsetFromLive calls the underlying SetConfiguredTimeOffsetFromLive.
-func (x *PlayerItem) SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) {
-	x.inner.SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive)
-}
-
-// A recommended value for configuredTimeOffsetFromLive, based on observed network conditions. For non-live assets this value is kCMTimeInvalid.
-//
-// RecommendedTimeOffsetFromLive calls the underlying RecommendedTimeOffsetFromLive.
-func (x *PlayerItem) RecommendedTimeOffsetFromLive() coremedia.CMTime {
-	return x.inner.RecommendedTimeOffsetFromLive()
-}
-
-// Indicates that after the player spends a period of time buffering media, it will skip forward if necessary to restore the playhead's distance from the live edge of the presentation to what it was when buffering began. If the value of this property is YES and the player must buffer media from the network in order to resume playback, the player will seek forward if necessary before resuming playback to restore the position that the playhead had when rebuffering began, relative to the end of the current AVPlayerItem's seekableTimeRange. This behavior applies to media buffering that occurs as a consequence of starting playback, seeking, and recovering from a playback stall. Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably. This property value has no effect if the asset is not a live stream. The default value of this property is NO.
-//
-// AutomaticallyPreservesTimeOffsetFromLive calls the underlying AutomaticallyPreservesTimeOffsetFromLive.
+// AutomaticallyPreservesTimeOffsetFromLive indicates that after the player spends a period of time buffering media, it will skip forward if necessary to restore the playhead's distance from the live edge of the presentation to what it was when buffering began. If the value of this property is YES and the player must buffer media from the network in order to resume playback, the player will seek forward if necessary before resuming playback to restore the position that the playhead had when rebuffering began, relative to the end of the current AVPlayerItem's seekableTimeRange. This behavior applies to media buffering that occurs as a consequence of starting playback, seeking, and recovering from a playback stall. Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably. This property value has no effect if the asset is not a live stream. The default value of this property is NO.
 func (x *PlayerItem) AutomaticallyPreservesTimeOffsetFromLive() bool {
-	return x.inner.AutomaticallyPreservesTimeOffsetFromLive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyPreservesTimeOffsetFromLive"))
+	return _r
 }
 
-// SetAutomaticallyPreservesTimeOffsetFromLive calls the underlying SetAutomaticallyPreservesTimeOffsetFromLive.
+// SetAutomaticallyPreservesTimeOffsetFromLive wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) {
-	x.inner.SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreservesTimeOffsetFromLive:"), automaticallyPreservesTimeOffsetFromLive)
 }
 
-// Returns the current time of the item.
-//
-// CurrentTime calls the underlying CurrentTime.
-func (x *PlayerItem) CurrentTime() coremedia.CMTime {
-	return x.inner.CurrentTime()
-}
-
-// Sets the current playback time to the specified time.
-//
-// SeekToTimeCompletionHandler calls the underlying SeekToTimeCompletionHandler.
-func (x *PlayerItem) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
-	x.inner.SeekToTimeCompletionHandler(time_, completionHandler)
-}
-
-// Sets the current playback time within a specified time bound and invokes the specified block when the seek operation completes or is interrupted.
-//
-// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
-func (x *PlayerItem) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
-	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
-}
-
-// Cancels any pending seek requests and invokes the corresponding completion handlers if present.
-//
-// CancelPendingSeeks calls the underlying CancelPendingSeeks.
+// CancelPendingSeeks cancels any pending seek requests and invokes the corresponding completion handlers if present.
 func (x *PlayerItem) CancelPendingSeeks() {
-	x.inner.CancelPendingSeeks()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPendingSeeks"))
 }
 
-// Returns the current time of the item as a date.
-//
-// CurrentDate calls the underlying CurrentDate.
-func (x *PlayerItem) CurrentDate() *foundation.NSDate {
-	return x.inner.CurrentDate()
+// CurrentDate returns the current time of the item as a date.
+func (x *PlayerItem) CurrentDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
+	return obj.Wrap(_r)
 }
 
-// Sets the current playback time to the time specified by the date object.
-//
-// SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
-func (x *PlayerItem) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) bool {
-	return x.inner.SeekToDateCompletionHandler(date, completionHandler)
+// SeekToDateCompletionHandler sets the current playback time to the time specified by the date object.
+func (x *PlayerItem) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	return _r
 }
 
-// Moves the player item’s current time forward or backward by a specified number of steps.
-//
-// StepByCount calls the underlying StepByCount.
+// StepByCount moves the player item’s current time forward or backward by a specified number of steps.
 func (x *PlayerItem) StepByCount(stepCount int) {
-	x.inner.StepByCount(stepCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepByCount:"), stepCount)
 }
 
-// The end time for forward playback. Specifies the time at which playback should end when the playback rate is positive (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for forward playback is specified. In this case, the effective end time for forward playback is the receiver's duration. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is negative.
-//
-// ForwardPlaybackEndTime calls the underlying ForwardPlaybackEndTime.
-func (x *PlayerItem) ForwardPlaybackEndTime() coremedia.CMTime {
-	return x.inner.ForwardPlaybackEndTime()
-}
-
-// SetForwardPlaybackEndTime calls the underlying SetForwardPlaybackEndTime.
-func (x *PlayerItem) SetForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) {
-	x.inner.SetForwardPlaybackEndTime(forwardPlaybackEndTime)
-}
-
-// The end time for reverse playback. Specifies the time at which playback should end when the playback rate is negative (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for reverse playback is specified. In this case, the effective end time for reverse playback is kCMTimeZero. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is positive.
-//
-// ReversePlaybackEndTime calls the underlying ReversePlaybackEndTime.
-func (x *PlayerItem) ReversePlaybackEndTime() coremedia.CMTime {
-	return x.inner.ReversePlaybackEndTime()
-}
-
-// SetReversePlaybackEndTime calls the underlying SetReversePlaybackEndTime.
-func (x *PlayerItem) SetReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) {
-	x.inner.SetReversePlaybackEndTime(reversePlaybackEndTime)
-}
-
-// This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous. Returns an NSArray of NSValues containing CMTimeRanges.
+// SeekableTimeRanges this property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // SeekableTimeRanges returns the collection as a Go slice.
-func (x *PlayerItem) SeekableTimeRanges() []*foundation.NSValue {
-	arr := x.inner.SeekableTimeRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *PlayerItem) SeekableTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekableTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// The item's timebase. You can examine the timebase to discover the relationship between the item's time and the source clock used for drift synchronization. This timebase is read-only; you cannot set its time or rate to affect playback.
-//
-// Timebase calls the underlying Timebase.
-func (x *PlayerItem) Timebase() unsafe.Pointer {
-	return x.inner.Timebase()
+// Timebase the item's timebase. You can examine the timebase to discover the relationship between the item's time and the source clock used for drift synchronization. This timebase is read-only; you cannot set its time or rate to affect playback.
+func (x *PlayerItem) Timebase() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timebase"))
+	return obj.Wrap(_r)
 }
 
-// Indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
-//
-// VideoComposition calls the underlying VideoComposition.
+// VideoComposition indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
 func (x *PlayerItem) VideoComposition() *VideoComposition {
-	_r := x.inner.VideoComposition()
-	if _r == nil {
-		return nil
-	}
-	return &VideoComposition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoComposition"))
+	return VideoCompositionFromID(_r)
 }
 
-// Indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
-//
-// SetVideoComposition calls the underlying SetVideoComposition.
-func (x *PlayerItem) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
-	x.inner.SetVideoComposition(videoComposition)
+// SetVideoComposition indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
+func (x *PlayerItem) SetVideoComposition(videoComposition *VideoComposition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 }
 
-// Indicates the custom video compositor instance. This property is nil if there is no video compositor, or if the internal video compositor is in use. This reference can be used to provide extra context to the custom video compositor instance if required. The value of this property can change as a result of setting the `videoComposition` property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-//
-// CustomVideoCompositor calls the underlying CustomVideoCompositor.
-func (x *PlayerItem) CustomVideoCompositor() raw.AVVideoCompositing {
-	return x.inner.CustomVideoCompositor()
-}
-
-// Indicates whether the item's timing follows the displayed video frame when seeking with a video composition By default, item timing is updated as quickly as possible, not waiting for media at new times to be rendered when seeking or during normal playback. The latency that occurs, for example, between the completion of a seek operation and the display of a video frame at a new time is negligible in most situations. However, when video compositions are in use, the processing of video for any particular time may introduce noticeable latency. Therefore it may be desirable when a video composition is in use for the item's timing be updated only after the video frame for a time has been displayed. This allows, for instance, an AVSynchronizedLayer associated with an AVPlayerItem to remain in synchronization with the displayed video and for the currentTime property to return the time of the displayed video. This property has no effect on items for which videoComposition is nil.
-//
-// SeekingWaitsForVideoCompositionRendering calls the underlying SeekingWaitsForVideoCompositionRendering.
+// SeekingWaitsForVideoCompositionRendering indicates whether the item's timing follows the displayed video frame when seeking with a video composition By default, item timing is updated as quickly as possible, not waiting for media at new times to be rendered when seeking or during normal playback. The latency that occurs, for example, between the completion of a seek operation and the display of a video frame at a new time is negligible in most situations. However, when video compositions are in use, the processing of video for any particular time may introduce noticeable latency. Therefore it may be desirable when a video composition is in use for the item's timing be updated only after the video frame for a time has been displayed. This allows, for instance, an AVSynchronizedLayer associated with an AVPlayerItem to remain in synchronization with the displayed video and for the currentTime property to return the time of the displayed video. This property has no effect on items for which videoComposition is nil.
 func (x *PlayerItem) SeekingWaitsForVideoCompositionRendering() bool {
-	return x.inner.SeekingWaitsForVideoCompositionRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("seekingWaitsForVideoCompositionRendering"))
+	return _r
 }
 
-// SetSeekingWaitsForVideoCompositionRendering calls the underlying SetSeekingWaitsForVideoCompositionRendering.
+// SetSeekingWaitsForVideoCompositionRendering wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) {
-	x.inner.SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeekingWaitsForVideoCompositionRendering:"), seekingWaitsForVideoCompositionRendering)
 }
 
-// An array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media. The styling information contained in each AVTextStyleRule object in the array is used only when no equivalent styling information is provided by the media resource being played. For example, if the text style rules specify Courier font but the media resource specifies Helvetica font, the text will be drawn using Helvetica font. This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
+// TextStyleRules an array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media. The styling information contained in each AVTextStyleRule object in the array is used only when no equivalent styling information is provided by the media resource being played. For example, if the text style rules specify Courier font but the media resource specifies Helvetica font, the text will be drawn using Helvetica font. This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
 //
 // TextStyleRules returns the collection as a Go slice.
 func (x *PlayerItem) TextStyleRules() []*TextStyleRule {
-	arr := x.inner.TextStyleRules()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextStyleRule {
-		return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textStyleRules"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStyleRule { return TextStyleRuleFromID(_id) })
 }
 
-// SetTextStyleRules calls the underlying SetTextStyleRules.
-func (x *PlayerItem) SetTextStyleRules(textStyleRules *foundation.NSArray[*raw.AVTextStyleRule]) {
-	x.inner.SetTextStyleRules(textStyleRules)
+// SetTextStyleRules wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetTextStyleRules(textStyleRules []*TextStyleRule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStyleRules:"), purego.SliceToNSArray(textStyleRules, func(_v *TextStyleRule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Specifies the video aperture mode to apply during playback. See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
-//
-// VideoApertureMode calls the underlying VideoApertureMode.
-func (x *PlayerItem) VideoApertureMode() string {
-	_r := x.inner.VideoApertureMode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// VideoApertureMode specifies the video aperture mode to apply during playback. See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
+func (x *PlayerItem) VideoApertureMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoApertureMode"))
+	return obj.Wrap(_r)
 }
 
-// SetVideoApertureMode calls the underlying SetVideoApertureMode.
-func (x *PlayerItem) SetVideoApertureMode(videoApertureMode *foundation.NSString) {
-	x.inner.SetVideoApertureMode(videoApertureMode)
+// SetVideoApertureMode wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetVideoApertureMode(videoApertureMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoApertureMode:"), objref.IDOf(videoApertureMode))
 }
 
-// Controls whether or not to apply the per frame HDR display metadata of the source during playback.
-//
-// AppliesPerFrameHDRDisplayMetadata calls the underlying AppliesPerFrameHDRDisplayMetadata.
+// AppliesPerFrameHDRDisplayMetadata controls whether or not to apply the per frame HDR display metadata of the source during playback.
 func (x *PlayerItem) AppliesPerFrameHDRDisplayMetadata() bool {
-	return x.inner.AppliesPerFrameHDRDisplayMetadata()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesPerFrameHDRDisplayMetadata"))
+	return _r
 }
 
-// SetAppliesPerFrameHDRDisplayMetadata calls the underlying SetAppliesPerFrameHDRDisplayMetadata.
+// SetAppliesPerFrameHDRDisplayMetadata wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) {
-	x.inner.SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesPerFrameHDRDisplayMetadata:"), appliesPerFrameHDRDisplayMetadata)
 }
 
-// Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral.
-//
-// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
-func (x *PlayerItem) AudioTimePitchAlgorithm() string {
-	_r := x.inner.AudioTimePitchAlgorithm()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral.
+func (x *PlayerItem) AudioTimePitchAlgorithm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
+	return obj.Wrap(_r)
 }
 
-// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
-func (x *PlayerItem) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
 
-// Indicates whether audio spatialization is allowed When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
-//
-// IsAudioSpatializationAllowed calls the underlying IsAudioSpatializationAllowed.
+// IsAudioSpatializationAllowed indicates whether audio spatialization is allowed When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
 func (x *PlayerItem) IsAudioSpatializationAllowed() bool {
-	return x.inner.IsAudioSpatializationAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAudioSpatializationAllowed"))
+	return _r
 }
 
-// SetAudioSpatializationAllowed calls the underlying SetAudioSpatializationAllowed.
+// SetAudioSpatializationAllowed wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetAudioSpatializationAllowed(audioSpatializationAllowed bool) {
-	x.inner.SetAudioSpatializationAllowed(audioSpatializationAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSpatializationAllowed:"), audioSpatializationAllowed)
 }
 
-// Indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property with video content is AVAudioSpatializationFormatMonoStereoAndMultichannel. Otherwise, audio only content default value is AVAudioSpatializationFormatMultichannel.
-//
-// AllowedAudioSpatializationFormats calls the underlying AllowedAudioSpatializationFormats.
-func (x *PlayerItem) AllowedAudioSpatializationFormats() AVAudioSpatializationFormats {
-	return AVAudioSpatializationFormats(x.inner.AllowedAudioSpatializationFormats())
+// AllowedAudioSpatializationFormats indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property with video content is AVAudioSpatializationFormatMonoStereoAndMultichannel. Otherwise, audio only content default value is AVAudioSpatializationFormatMultichannel.
+func (x *PlayerItem) AllowedAudioSpatializationFormats() AudioSpatializationFormats {
+	_r := objc.Send[AudioSpatializationFormats](objref.IDOf(x), objc.RegisterName("allowedAudioSpatializationFormats"))
+	return _r
 }
 
-// SetAllowedAudioSpatializationFormats calls the underlying SetAllowedAudioSpatializationFormats.
-func (x *PlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) {
-	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
+// SetAllowedAudioSpatializationFormats wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
 }
 
-// Indicates the audio mix parameters to be applied during playback The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
-//
-// AudioMix calls the underlying AudioMix.
+// AudioMix indicates the audio mix parameters to be applied during playback The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
 func (x *PlayerItem) AudioMix() *AudioMix {
-	_r := x.inner.AudioMix()
-	if _r == nil {
-		return nil
-	}
-	return &AudioMix{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMix"))
+	return AudioMixFromID(_r)
 }
 
-// SetAudioMix calls the underlying SetAudioMix.
-func (x *PlayerItem) SetAudioMix(audioMix *raw.AVAudioMix) {
-	x.inner.SetAudioMix(audioMix)
+// SetAudioMix wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetAudioMix(audioMix *AudioMix) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 }
 
-// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *PlayerItem) LoadedTimeRanges() []*foundation.NSValue {
-	arr := x.inner.LoadedTimeRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *PlayerItem) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Indicates whether the item will likely play through without stalling. This property communicates a prediction of playability. Factors considered in this prediction include I/O throughput and media decode performance. It is possible for playbackLikelyToKeepUp to indicate NO while the property playbackBufferFull indicates YES. In this event the playback buffer has reached capacity but there isn't the statistical data to support a prediction that playback is likely to keep up. It is left to the application programmer to decide to continue media playback or not. See playbackBufferFull below.
-//
-// IsPlaybackLikelyToKeepUp calls the underlying IsPlaybackLikelyToKeepUp.
+// IsPlaybackLikelyToKeepUp indicates whether the item will likely play through without stalling. This property communicates a prediction of playability. Factors considered in this prediction include I/O throughput and media decode performance. It is possible for playbackLikelyToKeepUp to indicate NO while the property playbackBufferFull indicates YES. In this event the playback buffer has reached capacity but there isn't the statistical data to support a prediction that playback is likely to keep up. It is left to the application programmer to decide to continue media playback or not. See playbackBufferFull below.
 func (x *PlayerItem) IsPlaybackLikelyToKeepUp() bool {
-	return x.inner.IsPlaybackLikelyToKeepUp()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaybackLikelyToKeepUp"))
+	return _r
 }
 
-// Indicates that the internal media buffer is full and that further I/O is suspended. This property reports that the data buffer used for playback has reach capacity. Despite the playback buffer reaching capacity there might not exist sufficient statistical data to support a playbackLikelyToKeepUp prediction of YES. See playbackLikelyToKeepUp above.
-//
-// IsPlaybackBufferFull calls the underlying IsPlaybackBufferFull.
+// IsPlaybackBufferFull indicates that the internal media buffer is full and that further I/O is suspended. This property reports that the data buffer used for playback has reach capacity. Despite the playback buffer reaching capacity there might not exist sufficient statistical data to support a playbackLikelyToKeepUp prediction of YES. See playbackLikelyToKeepUp above.
 func (x *PlayerItem) IsPlaybackBufferFull() bool {
-	return x.inner.IsPlaybackBufferFull()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaybackBufferFull"))
+	return _r
 }
 
-// IsPlaybackBufferEmpty calls the underlying IsPlaybackBufferEmpty.
+// IsPlaybackBufferEmpty wraps the corresponding Objective-C method.
 func (x *PlayerItem) IsPlaybackBufferEmpty() bool {
-	return x.inner.IsPlaybackBufferEmpty()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaybackBufferEmpty"))
+	return _r
 }
 
-// Indicates whether the player item can use network resources to keep playback state up to date while paused For live streaming content, the player item may need to use extra networking and power resources to keep playback state up to date when paused. For example, when this property is set to YES, the seekableTimeRanges property will be periodically updated to reflect the current state of the live stream. For clients linked on or after macOS 10.11 or iOS 9.0, the default value is NO. To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
-//
-// CanUseNetworkResourcesForLiveStreamingWhilePaused calls the underlying CanUseNetworkResourcesForLiveStreamingWhilePaused.
+// CanUseNetworkResourcesForLiveStreamingWhilePaused indicates whether the player item can use network resources to keep playback state up to date while paused For live streaming content, the player item may need to use extra networking and power resources to keep playback state up to date when paused. For example, when this property is set to YES, the seekableTimeRanges property will be periodically updated to reflect the current state of the live stream. For clients linked on or after macOS 10.11 or iOS 9.0, the default value is NO. To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
 func (x *PlayerItem) CanUseNetworkResourcesForLiveStreamingWhilePaused() bool {
-	return x.inner.CanUseNetworkResourcesForLiveStreamingWhilePaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canUseNetworkResourcesForLiveStreamingWhilePaused"))
+	return _r
 }
 
-// SetCanUseNetworkResourcesForLiveStreamingWhilePaused calls the underlying SetCanUseNetworkResourcesForLiveStreamingWhilePaused.
+// SetCanUseNetworkResourcesForLiveStreamingWhilePaused wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) {
-	x.inner.SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanUseNetworkResourcesForLiveStreamingWhilePaused:"), canUseNetworkResourcesForLiveStreamingWhilePaused)
 }
 
-// Indicates the media duration the caller prefers the player to buffer from the network ahead of the playhead to guard against playback disruption. The value is in seconds. If it is set to 0, the player will choose an appropriate level of buffering for most use cases. Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources. Note that the system may buffer less than the value of this property in order to manage resource consumption.
-//
-// PreferredForwardBufferDuration calls the underlying PreferredForwardBufferDuration.
+// PreferredForwardBufferDuration indicates the media duration the caller prefers the player to buffer from the network ahead of the playhead to guard against playback disruption. The value is in seconds. If it is set to 0, the player will choose an appropriate level of buffering for most use cases. Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources. Note that the system may buffer less than the value of this property in order to manage resource consumption.
 func (x *PlayerItem) PreferredForwardBufferDuration() float64 {
-	return x.inner.PreferredForwardBufferDuration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredForwardBufferDuration"))
+	return _r
 }
 
-// SetPreferredForwardBufferDuration calls the underlying SetPreferredForwardBufferDuration.
+// SetPreferredForwardBufferDuration wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetPreferredForwardBufferDuration(preferredForwardBufferDuration float64) {
-	x.inner.SetPreferredForwardBufferDuration(preferredForwardBufferDuration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredForwardBufferDuration:"), preferredForwardBufferDuration)
 }
 
-// Indicates the desired limit of network bandwidth consumption for this item. Set preferredPeakBitRate to non-zero to indicate that the player should attempt to limit item playback to that bit rate, expressed in bits per second. If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
-//
-// PreferredPeakBitRate calls the underlying PreferredPeakBitRate.
+// PreferredPeakBitRate indicates the desired limit of network bandwidth consumption for this item. Set preferredPeakBitRate to non-zero to indicate that the player should attempt to limit item playback to that bit rate, expressed in bits per second. If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
 func (x *PlayerItem) PreferredPeakBitRate() float64 {
-	return x.inner.PreferredPeakBitRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredPeakBitRate"))
+	return _r
 }
 
-// SetPreferredPeakBitRate calls the underlying SetPreferredPeakBitRate.
+// SetPreferredPeakBitRate wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetPreferredPeakBitRate(preferredPeakBitRate float64) {
-	x.inner.SetPreferredPeakBitRate(preferredPeakBitRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredPeakBitRate:"), preferredPeakBitRate)
 }
 
-// Indicates the desired limit of network bandwidth consumption for this item over expensive networks. When preferredPeakBitRateForExpensiveNetworks is set to non-zero, the player will attempt to limit item playback to that bit rate when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRateForExpensiveNetworks, it will be reduced as much as possible while continuing to play the item. Note that preferredPeakBitRate still applies unconditionally. If preferredPeakBitRateForExpensiveNetworks is less restrictive (greater) than preferredPeakBitRate, preferredPeakBitRateForExpensiveNetworks has no practical effect.
-//
-// PreferredPeakBitRateForExpensiveNetworks calls the underlying PreferredPeakBitRateForExpensiveNetworks.
+// PreferredPeakBitRateForExpensiveNetworks indicates the desired limit of network bandwidth consumption for this item over expensive networks. When preferredPeakBitRateForExpensiveNetworks is set to non-zero, the player will attempt to limit item playback to that bit rate when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRateForExpensiveNetworks, it will be reduced as much as possible while continuing to play the item. Note that preferredPeakBitRate still applies unconditionally. If preferredPeakBitRateForExpensiveNetworks is less restrictive (greater) than preferredPeakBitRate, preferredPeakBitRateForExpensiveNetworks has no practical effect.
 func (x *PlayerItem) PreferredPeakBitRateForExpensiveNetworks() float64 {
-	return x.inner.PreferredPeakBitRateForExpensiveNetworks()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredPeakBitRateForExpensiveNetworks"))
+	return _r
 }
 
-// SetPreferredPeakBitRateForExpensiveNetworks calls the underlying SetPreferredPeakBitRateForExpensiveNetworks.
+// SetPreferredPeakBitRateForExpensiveNetworks wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) {
-	x.inner.SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredPeakBitRateForExpensiveNetworks:"), preferredPeakBitRateForExpensiveNetworks)
 }
 
-// Indicates a preferred upper limit on the resolution of the video to be downloaded (or otherwise transferred) and rendered by the player. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. It only applies to HTTP Live Streaming asset.
-//
-// PreferredMaximumResolution calls the underlying PreferredMaximumResolution.
+// PreferredMaximumResolution indicates a preferred upper limit on the resolution of the video to be downloaded (or otherwise transferred) and rendered by the player. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. It only applies to HTTP Live Streaming asset.
 func (x *PlayerItem) PreferredMaximumResolution() corefoundation.CGSize {
-	return x.inner.PreferredMaximumResolution()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredMaximumResolution"))
+	return _r
 }
 
-// SetPreferredMaximumResolution calls the underlying SetPreferredMaximumResolution.
+// SetPreferredMaximumResolution wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) {
-	x.inner.SetPreferredMaximumResolution(preferredMaximumResolution)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaximumResolution:"), preferredMaximumResolution)
 }
 
-// Indicates a preferred upper limit on the resolution of the video to be downloaded that applies only when the download occurs over expensive networks. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. This limit applies only when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) It only applies to HTTP Live Streaming asset. Note that preferredMaximumResolution still applies unconditionally. If preferredMaximumResolutionForExpensiveNetworks is less restrictive (higher resolution) than preferredMaximumResolution, preferredMaximumResolutionForExpensiveNetworks has no practical effect.
-//
-// PreferredMaximumResolutionForExpensiveNetworks calls the underlying PreferredMaximumResolutionForExpensiveNetworks.
+// PreferredMaximumResolutionForExpensiveNetworks indicates a preferred upper limit on the resolution of the video to be downloaded that applies only when the download occurs over expensive networks. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. This limit applies only when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) It only applies to HTTP Live Streaming asset. Note that preferredMaximumResolution still applies unconditionally. If preferredMaximumResolutionForExpensiveNetworks is less restrictive (higher resolution) than preferredMaximumResolution, preferredMaximumResolutionForExpensiveNetworks has no practical effect.
 func (x *PlayerItem) PreferredMaximumResolutionForExpensiveNetworks() corefoundation.CGSize {
-	return x.inner.PreferredMaximumResolutionForExpensiveNetworks()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredMaximumResolutionForExpensiveNetworks"))
+	return _r
 }
 
-// SetPreferredMaximumResolutionForExpensiveNetworks calls the underlying SetPreferredMaximumResolutionForExpensiveNetworks.
+// SetPreferredMaximumResolutionForExpensiveNetworks wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) {
-	x.inner.SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaximumResolutionForExpensiveNetworks:"), preferredMaximumResolutionForExpensiveNetworks)
 }
 
-// Directs the player to start playback with the first eligible variant that appears in the stream's master playlist. This property influences AVPlayer's algorithm for selecting which of the eligible variant streams in an HTTP Live Streaming master playlist is selected when playback first begins. In all cases, AVPlayer may switch to other variants during playback. On releases prior to macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback with the first eligible variant in the master playlist. On releases starting with macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback by choosing an initial variant that optimizes the startup experience. On releases starting with macOS 11.0, iOS 14, tvOS 14 and watchOS 7, applications may set this property to YES to request that AVPlayer use the previous behaviour of using the first eligible variant in the master playlist. This would be appropriate, for example, for applications which wish to control initial variant selection by ordering the variants in the master playlist. Note that changing this property may impact stream startup performance and quality. In order to be effective this property must be set before initial variant selection occurs. This property only applies to HTTP Live Streaming assets. The default value of this property is NO.
-//
-// StartsOnFirstEligibleVariant calls the underlying StartsOnFirstEligibleVariant.
+// StartsOnFirstEligibleVariant directs the player to start playback with the first eligible variant that appears in the stream's master playlist. This property influences AVPlayer's algorithm for selecting which of the eligible variant streams in an HTTP Live Streaming master playlist is selected when playback first begins. In all cases, AVPlayer may switch to other variants during playback. On releases prior to macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback with the first eligible variant in the master playlist. On releases starting with macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback by choosing an initial variant that optimizes the startup experience. On releases starting with macOS 11.0, iOS 14, tvOS 14 and watchOS 7, applications may set this property to YES to request that AVPlayer use the previous behaviour of using the first eligible variant in the master playlist. This would be appropriate, for example, for applications which wish to control initial variant selection by ordering the variants in the master playlist. Note that changing this property may impact stream startup performance and quality. In order to be effective this property must be set before initial variant selection occurs. This property only applies to HTTP Live Streaming assets. The default value of this property is NO.
 func (x *PlayerItem) StartsOnFirstEligibleVariant() bool {
-	return x.inner.StartsOnFirstEligibleVariant()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startsOnFirstEligibleVariant"))
+	return _r
 }
 
-// SetStartsOnFirstEligibleVariant calls the underlying SetStartsOnFirstEligibleVariant.
+// SetStartsOnFirstEligibleVariant wraps the corresponding Objective-C method.
 func (x *PlayerItem) SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) {
-	x.inner.SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartsOnFirstEligibleVariant:"), startsOnFirstEligibleVariant)
 }
 
-// Indicates preferences for variant switching. Changing variant preferences during playback may result in a variant switch. The default value is AVVariantPreferenceNone.
-//
-// VariantPreferences calls the underlying VariantPreferences.
-func (x *PlayerItem) VariantPreferences() AVVariantPreferences {
-	return AVVariantPreferences(x.inner.VariantPreferences())
+// VariantPreferences indicates preferences for variant switching. Changing variant preferences during playback may result in a variant switch. The default value is AVVariantPreferenceNone.
+func (x *PlayerItem) VariantPreferences() VariantPreferences {
+	_r := objc.Send[VariantPreferences](objref.IDOf(x), objc.RegisterName("variantPreferences"))
+	return _r
 }
 
-// SetVariantPreferences calls the underlying SetVariantPreferences.
-func (x *PlayerItem) SetVariantPreferences(variantPreferences AVVariantPreferences) {
-	x.inner.SetVariantPreferences(raw.AVVariantPreferences(variantPreferences))
+// SetVariantPreferences wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetVariantPreferences(variantPreferences VariantPreferences) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantPreferences:"), variantPreferences)
 }
 
-// Selects a media option in a given media selection group and deselects all other options in that group.
-//
-// SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
-func (x *PlayerItem) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
-	x.inner.SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption, mediaSelectionGroup)
+// SelectMediaOptionInMediaSelectionGroup selects a media option in a given media selection group and deselects all other options in that group.
+func (x *PlayerItem) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaOption:inMediaSelectionGroup:"), objref.IDOf(mediaSelectionOption), objref.IDOf(mediaSelectionGroup))
 }
 
-// Selects the media option in the specified media selection group that best matches the receiver’s automatic selection criteria.
-//
-// SelectMediaOptionAutomaticallyInMediaSelectionGroup calls the underlying SelectMediaOptionAutomaticallyInMediaSelectionGroup.
-func (x *PlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) {
-	x.inner.SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup)
+// SelectMediaOptionAutomaticallyInMediaSelectionGroup selects the media option in the specified media selection group that best matches the receiver’s automatic selection criteria.
+func (x *PlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaOptionAutomaticallyInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 }
 
-// CurrentMediaSelection calls the underlying CurrentMediaSelection.
+// CurrentMediaSelection wraps the corresponding Objective-C method.
 func (x *PlayerItem) CurrentMediaSelection() *MediaSelection {
-	_r := x.inner.CurrentMediaSelection()
-	if _r == nil {
-		return nil
-	}
-	return &MediaSelection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentMediaSelection"))
+	return MediaSelectionFromID(_r)
 }
 
-// When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
-//
-// SelectMediaPresentationLanguageForMediaSelectionGroup calls the underlying SelectMediaPresentationLanguageForMediaSelectionGroup.
-func (x *PlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
-	x.inner.SelectMediaPresentationLanguageForMediaSelectionGroup(foundation.NSStringStringWithUTF8String(language), mediaSelectionGroup)
+// SelectMediaPresentationLanguageForMediaSelectionGroup when the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
+func (x *PlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *MediaSelectionGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaPresentationLanguage:forMediaSelectionGroup:"), purego.NSString(language), objref.IDOf(mediaSelectionGroup))
 }
 
-// Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:.
-//
-// SelectedMediaPresentationLanguageForMediaSelectionGroup calls the underlying SelectedMediaPresentationLanguageForMediaSelectionGroup.
-func (x *PlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) string {
-	_r := x.inner.SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup)
-	if _r == nil {
+// SelectedMediaPresentationLanguageForMediaSelectionGroup returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:.
+func (x *PlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedMediaPresentationLanguageForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector.
-//
-// SelectMediaPresentationSettingForMediaSelectionGroup calls the underlying SelectMediaPresentationSettingForMediaSelectionGroup.
-func (x *PlayerItem) SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *raw.AVMediaPresentationSetting, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
-	x.inner.SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting, mediaSelectionGroup)
+// SelectMediaPresentationSettingForMediaSelectionGroup when the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector.
+func (x *PlayerItem) SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *MediaPresentationSetting, mediaSelectionGroup *MediaSelectionGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaPresentationSetting:forMediaSelectionGroup:"), objref.IDOf(mediaPresentationSetting), objref.IDOf(mediaSelectionGroup))
 }
 
-// Indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup.
-//
-// SelectedMediaPresentationSettingsForMediaSelectionGroup calls the underlying SelectedMediaPresentationSettingsForMediaSelectionGroup.
-func (x *PlayerItem) SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
-	return x.inner.SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
+// SelectedMediaPresentationSettingsForMediaSelectionGroup indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup.
+func (x *PlayerItem) SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedMediaPresentationSettingsForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return obj.Wrap(_r)
 }
 
-// Indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup.
-//
-// EffectiveMediaPresentationSettingsForMediaSelectionGroup calls the underlying EffectiveMediaPresentationSettingsForMediaSelectionGroup.
-func (x *PlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
-	return x.inner.EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
+// EffectiveMediaPresentationSettingsForMediaSelectionGroup indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup.
+func (x *PlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectiveMediaPresentationSettingsForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return obj.Wrap(_r)
 }
 
-// Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver's asset with which an associated UI implementation should configure its interface for media selection. Recommended usage: if use of a custom media selection scheme is desired, set this property before either replacing an AVPlayer's current item with the receiver or adding the receiver to an AVQueuePlayer's play queue. This will satisfy requirements of UI implementations that commit to a configuration of UI elements as the receiver becomes ready to play.
+// PreferredCustomMediaSelectionSchemes indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver's asset with which an associated UI implementation should configure its interface for media selection. Recommended usage: if use of a custom media selection scheme is desired, set this property before either replacing an AVPlayer's current item with the receiver or adding the receiver to an AVQueuePlayer's play queue. This will satisfy requirements of UI implementations that commit to a configuration of UI elements as the receiver becomes ready to play.
 //
 // PreferredCustomMediaSelectionSchemes returns the collection as a Go slice.
 func (x *PlayerItem) PreferredCustomMediaSelectionSchemes() []*CustomMediaSelectionScheme {
-	arr := x.inner.PreferredCustomMediaSelectionSchemes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CustomMediaSelectionScheme {
-		return &CustomMediaSelectionScheme{inner: raw.AVCustomMediaSelectionSchemeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredCustomMediaSelectionSchemes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CustomMediaSelectionScheme { return CustomMediaSelectionSchemeFromID(_id) })
 }
 
-// SetPreferredCustomMediaSelectionSchemes calls the underlying SetPreferredCustomMediaSelectionSchemes.
-func (x *PlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes *foundation.NSArray[*raw.AVCustomMediaSelectionScheme]) {
-	x.inner.SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes)
+// SetPreferredCustomMediaSelectionSchemes wraps the corresponding Objective-C method.
+func (x *PlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes []*CustomMediaSelectionScheme) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredCustomMediaSelectionSchemes:"), purego.SliceToNSArray(preferredCustomMediaSelectionSchemes, func(_v *CustomMediaSelectionScheme) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Returns an object that represents a snapshot of the network access log.
-//
-// AccessLog calls the underlying AccessLog.
+// AccessLog returns an object that represents a snapshot of the network access log.
 func (x *PlayerItem) AccessLog() *PlayerItemAccessLog {
-	_r := x.inner.AccessLog()
-	if _r == nil {
-		return nil
-	}
-	return &PlayerItemAccessLog{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessLog"))
+	return PlayerItemAccessLogFromID(_r)
 }
 
-// Returns an object that represents a snapshot of the error log.
-//
-// ErrorLog calls the underlying ErrorLog.
+// ErrorLog returns an object that represents a snapshot of the error log.
 func (x *PlayerItem) ErrorLog() *PlayerItemErrorLog {
-	_r := x.inner.ErrorLog()
-	if _r == nil {
-		return nil
-	}
-	return &PlayerItemErrorLog{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorLog"))
+	return PlayerItemErrorLogFromID(_r)
 }
 
-// Adds the specified player item output object to the receiver.
+// AddOutput adds the specified player item output object to the receiver.
+func (x *PlayerItem) AddOutput(output *PlayerItemOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutput:"), objref.IDOf(output))
+}
+
+// RemoveOutput removes the specified player item output object from the receiver.
+func (x *PlayerItem) RemoveOutput(output *PlayerItemOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeOutput:"), objref.IDOf(output))
+}
+
+// Outputs wraps the corresponding Objective-C method.
 //
-// AddOutput calls the underlying AddOutput.
-func (x *PlayerItem) AddOutput(output *raw.AVPlayerItemOutput) {
-	x.inner.AddOutput(output)
-}
-
-// Removes the specified player item output object from the receiver.
-//
-// RemoveOutput calls the underlying RemoveOutput.
-func (x *PlayerItem) RemoveOutput(output *raw.AVPlayerItemOutput) {
-	x.inner.RemoveOutput(output)
-}
-
 // Outputs returns the collection as a Go slice.
 func (x *PlayerItem) Outputs() []*PlayerItemOutput {
-	arr := x.inner.Outputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemOutput {
-		return &PlayerItemOutput{inner: raw.AVPlayerItemOutputFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemOutput { return PlayerItemOutputFromID(_id) })
 }
 
-// Adds the specified media data collector to the player item’s collection of media collectors.
+// AddMediaDataCollector adds the specified media data collector to the player item’s collection of media collectors.
+func (x *PlayerItem) AddMediaDataCollector(collector *PlayerItemMediaDataCollector) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMediaDataCollector:"), objref.IDOf(collector))
+}
+
+// RemoveMediaDataCollector removes the specified media data collector from the player item’s collection of media collectors.
+func (x *PlayerItem) RemoveMediaDataCollector(collector *PlayerItemMediaDataCollector) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeMediaDataCollector:"), objref.IDOf(collector))
+}
+
+// MediaDataCollectors wraps the corresponding Objective-C method.
 //
-// AddMediaDataCollector calls the underlying AddMediaDataCollector.
-func (x *PlayerItem) AddMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector) {
-	x.inner.AddMediaDataCollector(collector)
-}
-
-// Removes the specified media data collector from the player item’s collection of media collectors.
-//
-// RemoveMediaDataCollector calls the underlying RemoveMediaDataCollector.
-func (x *PlayerItem) RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector) {
-	x.inner.RemoveMediaDataCollector(collector)
-}
-
 // MediaDataCollectors returns the collection as a Go slice.
 func (x *PlayerItem) MediaDataCollectors() []*PlayerItemMediaDataCollector {
-	arr := x.inner.MediaDataCollectors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemMediaDataCollector {
-		return &PlayerItemMediaDataCollector{inner: raw.AVPlayerItemMediaDataCollectorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaDataCollectors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemMediaDataCollector { return PlayerItemMediaDataCollectorFromID(_id) })
 }
 
-// Moves the playback cursor. Use this method to seek to a specified time for the item. The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled. - Parameter time:
-//
-// SeekToTime calls the underlying SeekToTime.
-func (x *PlayerItem) SeekToTime(time_ coremedia.CMTime) {
-	x.inner.SeekToTime(time_)
+// SeekToDate move playhead to a point corresponding to a particular date. For playback content that is associated with a range of dates, move the playhead to point within that range. Will fail if the supplied date is outside the range or if the content is not associated with a range of dates. - Parameter date: The new position for the playhead. - Returns: Returns true if the playhead was moved to the supplied date.
+func (x *PlayerItem) SeekToDate(date obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("seekToDate:"), objref.IDOf(date))
+	return _r
 }
 
-// Moves the playback cursor within a specified time bound. Use this method to seek to a specified time for the item. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime within the seekable ranges. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter:
-//
-// SeekToTimeToleranceBeforeToleranceAfter calls the underlying SeekToTimeToleranceBeforeToleranceAfter.
-func (x *PlayerItem) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
-	x.inner.SeekToTimeToleranceBeforeToleranceAfter(time_, toleranceBefore, toleranceAfter)
+// SelectedMediaOptionInMediaSelectionGroup indicates the media selection option that's currently selected from the specified group. May be nil. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil. - Parameter mediaSelectionGroup: A media selection group obtained from the receiver's asset. - Returns: An instance of AVMediaSelectionOption that describes the currently selection option in the group.
+func (x *PlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return MediaSelectionOptionFromID(_r)
 }
 
-// move playhead to a point corresponding to a particular date. For playback content that is associated with a range of dates, move the playhead to point within that range. Will fail if the supplied date is outside the range or if the content is not associated with a range of dates. - Parameter date: The new position for the playhead. - Returns: Returns true if the playhead was moved to the supplied date.
-//
-// SeekToDate calls the underlying SeekToDate.
-func (x *PlayerItem) SeekToDate(date *foundation.NSDate) bool {
-	return x.inner.SeekToDate(date)
-}
-
-// Indicates the media selection option that's currently selected from the specified group. May be nil. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil. - Parameter mediaSelectionGroup: A media selection group obtained from the receiver's asset. - Returns: An instance of AVMediaSelectionOption that describes the currently selection option in the group.
-//
-// SelectedMediaOptionInMediaSelectionGroup calls the underlying SelectedMediaOptionInMediaSelectionGroup.
-func (x *PlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
-	_r := x.inner.SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup)
-	if _r == nil {
-		return nil
-	}
-	return &MediaSelectionOption{inner: _r}
-}
-
-// Presents the user the opportunity to authorize the content for playback.
+// RequestContentAuthorizationAsynchronouslyWithTimeoutInterval presents the user the opportunity to authorize the content for playback.
 //
 // RequestContentAuthorizationAsynchronouslyWithTimeoutInterval blocks until the operation completes or ctx is cancelled.
 func (x *PlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInterval(ctx context.Context, timeoutInterval float64) error {
 	_ch := make(chan error, 1)
-	x.inner.RequestContentAuthorizationAsynchronouslyWithTimeoutIntervalCompletionHandler(timeoutInterval, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestContentAuthorizationAsynchronouslyWithTimeoutInterval:completionHandler:"), timeoutInterval, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -996,101 +694,79 @@ func (x *PlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInterva
 	}
 }
 
-// Cancels the currently outstanding content authorization request.
-//
-// CancelContentAuthorizationRequest calls the underlying CancelContentAuthorizationRequest.
+// CancelContentAuthorizationRequest cancels the currently outstanding content authorization request.
 func (x *PlayerItem) CancelContentAuthorizationRequest() {
-	x.inner.CancelContentAuthorizationRequest()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelContentAuthorizationRequest"))
 }
 
-// @property		authorizationRequiredForPlayback @abstract		Indicates whether or not authorization is required to play the content. @discussion This property reports whether or not authorization is required for the receiver's content to be played.  If it does not require authorization, then none of the other methods or properties in the AVPlayerItemProtectedContent category apply (though they will return sensible values where possible). This value is NOT key-value observable.
-//
-// IsAuthorizationRequiredForPlayback calls the underlying IsAuthorizationRequiredForPlayback.
+// IsAuthorizationRequiredForPlayback indicates whether or not authorization is required to play the content. This property reports whether or not authorization is required for the receiver's content to be played.  If it does not require authorization, then none of the other methods or properties in the AVPlayerItemProtectedContent category apply (though they will return sensible values where possible). This value is NOT key-value observable.
 func (x *PlayerItem) IsAuthorizationRequiredForPlayback() bool {
-	return x.inner.IsAuthorizationRequiredForPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAuthorizationRequiredForPlayback"))
+	return _r
 }
 
-// @property		applicationAuthorizedForPlayback @abstract		Indicates whether the calling application can be used to play the content. @discussion This property reports whether or not the calling application is authorized to play the content associated with the receiver.  Note that application authorization is independent of content authorization (see contentAuthorizedForPlayback) and that both must be granted in order for an application to be allowed to play protected content. Also, unlike content authorization, application authorization is not dependent on user credentials (i.e. if applicationAuthorizedForPlayback is NO, there are no means to obtain authorization). This value is NOT key-value observable.
-//
-// IsApplicationAuthorizedForPlayback calls the underlying IsApplicationAuthorizedForPlayback.
+// IsApplicationAuthorizedForPlayback indicates whether the calling application can be used to play the content. This property reports whether or not the calling application is authorized to play the content associated with the receiver.  Note that application authorization is independent of content authorization (see contentAuthorizedForPlayback) and that both must be granted in order for an application to be allowed to play protected content. Also, unlike content authorization, application authorization is not dependent on user credentials (i.e. if applicationAuthorizedForPlayback is NO, there are no means to obtain authorization). This value is NOT key-value observable.
 func (x *PlayerItem) IsApplicationAuthorizedForPlayback() bool {
-	return x.inner.IsApplicationAuthorizedForPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isApplicationAuthorizedForPlayback"))
+	return _r
 }
 
-// @property		contentAuthorizedForPlayback @abstract		Indicates whether the content has been authorized by the user (e.g. by authorizing the content's associated account in iTunes). @discussion This property reports whether or not the user has provided the necessary credentials to the system in order for the content to be decrypted for playback. Note that content authorization is independent of application authorization (see applicationAuthorizedForPlayback) and that both must be granted in order for an application to be allowed to play protected content. This value is NOT key-value observable.
-//
-// IsContentAuthorizedForPlayback calls the underlying IsContentAuthorizedForPlayback.
+// IsContentAuthorizedForPlayback indicates whether the content has been authorized by the user (e.g. by authorizing the content's associated account in iTunes). This property reports whether or not the user has provided the necessary credentials to the system in order for the content to be decrypted for playback. Note that content authorization is independent of application authorization (see applicationAuthorizedForPlayback) and that both must be granted in order for an application to be allowed to play protected content. This value is NOT key-value observable.
 func (x *PlayerItem) IsContentAuthorizedForPlayback() bool {
-	return x.inner.IsContentAuthorizedForPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentAuthorizedForPlayback"))
+	return _r
 }
 
-// @property		contentAuthorizationRequestStatus @abstract		Indicates the status of the most recent call to requestContentAuthorizationAsynchronouslyWithTimeoutInterval:CompletionHandler: @discussion This property reports the authorization status as determined by the most recent call to requestContentAuthorizationAsynchronouslyWithTimeoutInterval:CompletionHandler:. The value will be AVContentAuthorizationUnknown before the first call and between the time a request call is made and just prior to the completion handler being executed (i.e. it is safe to query this property from the completion handler). This value is NOT key-value observable.
-//
-// ContentAuthorizationRequestStatus calls the underlying ContentAuthorizationRequestStatus.
-func (x *PlayerItem) ContentAuthorizationRequestStatus() AVContentAuthorizationStatus {
-	return AVContentAuthorizationStatus(x.inner.ContentAuthorizationRequestStatus())
+// ContentAuthorizationRequestStatus indicates the status of the most recent call to requestContentAuthorizationAsynchronouslyWithTimeoutInterval:CompletionHandler: This property reports the authorization status as determined by the most recent call to requestContentAuthorizationAsynchronouslyWithTimeoutInterval:CompletionHandler:. The value will be AVContentAuthorizationUnknown before the first call and between the time a request call is made and just prior to the completion handler being executed (i.e. it is safe to query this property from the completion handler). This value is NOT key-value observable.
+func (x *PlayerItem) ContentAuthorizationRequestStatus() ContentAuthorizationStatus {
+	_r := objc.Send[ContentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("contentAuthorizationRequestStatus"))
+	return _r
 }
 
-// Allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-//
-// AutomaticallyHandlesInterstitialEvents calls the underlying AutomaticallyHandlesInterstitialEvents.
+// AutomaticallyHandlesInterstitialEvents allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (x *PlayerItem) AutomaticallyHandlesInterstitialEvents() bool {
-	return x.inner.AutomaticallyHandlesInterstitialEvents()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyHandlesInterstitialEvents"))
+	return _r
 }
 
-// Allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-//
-// SetAutomaticallyHandlesInterstitialEvents calls the underlying SetAutomaticallyHandlesInterstitialEvents.
+// SetAutomaticallyHandlesInterstitialEvents allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (x *PlayerItem) SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) {
-	x.inner.SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyHandlesInterstitialEvents:"), automaticallyHandlesInterstitialEvents)
 }
 
-// If the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.
-//
-// TemplatePlayerItem calls the underlying TemplatePlayerItem.
+// TemplatePlayerItem if the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.
 func (x *PlayerItem) TemplatePlayerItem() *PlayerItem {
-	_r := x.inner.TemplatePlayerItem()
-	if _r == nil {
-		return nil
-	}
-	return &PlayerItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templatePlayerItem"))
+	return PlayerItemFromID(_r)
 }
 
-// The identifier of the AVPlayerInterstitialEvent that created this item, or nil if the item was not created from an interstitial event.
-//
-// InterstitialEventIdentifier calls the underlying InterstitialEventIdentifier.
+// InterstitialEventIdentifier the identifier of the AVPlayerInterstitialEvent that created this item, or nil if the item was not created from an interstitial event.
 func (x *PlayerItem) InterstitialEventIdentifier() string {
-	_r := x.inner.InterstitialEventIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interstitialEventIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IntegratedTimeline calls the underlying IntegratedTimeline.
+// IntegratedTimeline wraps the corresponding Objective-C method.
 func (x *PlayerItem) IntegratedTimeline() *PlayerItemIntegratedTimeline {
-	_r := x.inner.IntegratedTimeline()
-	if _r == nil {
-		return nil
-	}
-	return &PlayerItemIntegratedTimeline{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("integratedTimeline"))
+	return PlayerItemIntegratedTimelineFromID(_r)
 }
 
 // PlayerItemable is the interface implemented by [PlayerItem], for mocking and DI.
 type PlayerItemable interface {
-	Unwrap() *raw.AVPlayerItem
-	WithConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) *PlayerItem
+	obj.Object
 	WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) *PlayerItem
-	WithForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) *PlayerItem
-	WithReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) *PlayerItem
 	WithVideoComposition(videoComposition VideoCompositionProvider) *PlayerItem
 	WithSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) *PlayerItem
-	WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerItem
-	WithVideoApertureMode(videoApertureMode *foundation.NSString) *PlayerItem
+	WithTextStyleRules(items ...*TextStyleRule) *PlayerItem
+	WithVideoApertureMode(videoApertureMode obj.Object) *PlayerItem
 	WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) *PlayerItem
-	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *PlayerItem
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *PlayerItem
 	WithAudioSpatializationAllowed(audioSpatializationAllowed bool) *PlayerItem
-	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *PlayerItem
+	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *PlayerItem
 	WithAudioMix(audioMix AudioMixProvider) *PlayerItem
 	WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) *PlayerItem
 	WithPreferredForwardBufferDuration(preferredForwardBufferDuration float64) *PlayerItem
@@ -1099,14 +775,12 @@ type PlayerItemable interface {
 	WithPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) *PlayerItem
 	WithPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) *PlayerItem
 	WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) *PlayerItem
-	WithVariantPreferences(variantPreferences AVVariantPreferences) *PlayerItem
-	WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCustomMediaSelectionScheme) *PlayerItem
+	WithVariantPreferences(variantPreferences VariantPreferences) *PlayerItem
+	WithPreferredCustomMediaSelectionSchemes(items ...*CustomMediaSelectionScheme) *PlayerItem
 	WithAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) *PlayerItem
-	Status() AVPlayerItemStatus
-	Error() unsafe.Pointer
+	Status() PlayerItemStatus
 	Asset() *Asset
 	Tracks() []*PlayerItemTrack
-	Duration() coremedia.CMTime
 	PresentationSize() corefoundation.CGSize
 	TimedMetadata() []*MetadataItem
 	AutomaticallyLoadedAssetKeys() []string
@@ -1117,44 +791,33 @@ type PlayerItemable interface {
 	CanPlayFastReverse() bool
 	CanStepForward() bool
 	CanStepBackward() bool
-	ConfiguredTimeOffsetFromLive() coremedia.CMTime
-	SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime)
-	RecommendedTimeOffsetFromLive() coremedia.CMTime
 	AutomaticallyPreservesTimeOffsetFromLive() bool
 	SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool)
-	CurrentTime() coremedia.CMTime
-	SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool))
-	SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool))
 	CancelPendingSeeks()
-	CurrentDate() *foundation.NSDate
-	SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) bool
+	CurrentDate() obj.Object
+	SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) bool
 	StepByCount(stepCount int)
-	ForwardPlaybackEndTime() coremedia.CMTime
-	SetForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime)
-	ReversePlaybackEndTime() coremedia.CMTime
-	SetReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime)
-	SeekableTimeRanges() []*foundation.NSValue
-	Timebase() unsafe.Pointer
+	SeekableTimeRanges() []obj.Object
+	Timebase() obj.Object
 	VideoComposition() *VideoComposition
-	SetVideoComposition(videoComposition *raw.AVVideoComposition)
-	CustomVideoCompositor() raw.AVVideoCompositing
+	SetVideoComposition(videoComposition *VideoComposition)
 	SeekingWaitsForVideoCompositionRendering() bool
 	SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool)
 	TextStyleRules() []*TextStyleRule
-	SetTextStyleRules(textStyleRules *foundation.NSArray[*raw.AVTextStyleRule])
-	VideoApertureMode() string
-	SetVideoApertureMode(videoApertureMode *foundation.NSString)
+	SetTextStyleRules(textStyleRules []*TextStyleRule)
+	VideoApertureMode() obj.Object
+	SetVideoApertureMode(videoApertureMode obj.Object)
 	AppliesPerFrameHDRDisplayMetadata() bool
 	SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool)
-	AudioTimePitchAlgorithm() string
-	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+	AudioTimePitchAlgorithm() obj.Object
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object)
 	IsAudioSpatializationAllowed() bool
 	SetAudioSpatializationAllowed(audioSpatializationAllowed bool)
-	AllowedAudioSpatializationFormats() AVAudioSpatializationFormats
-	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats)
+	AllowedAudioSpatializationFormats() AudioSpatializationFormats
+	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats)
 	AudioMix() *AudioMix
-	SetAudioMix(audioMix *raw.AVAudioMix)
-	LoadedTimeRanges() []*foundation.NSValue
+	SetAudioMix(audioMix *AudioMix)
+	LoadedTimeRanges() []obj.Object
 	IsPlaybackLikelyToKeepUp() bool
 	IsPlaybackBufferFull() bool
 	IsPlaybackBufferEmpty() bool
@@ -1172,36 +835,34 @@ type PlayerItemable interface {
 	SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize)
 	StartsOnFirstEligibleVariant() bool
 	SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool)
-	VariantPreferences() AVVariantPreferences
-	SetVariantPreferences(variantPreferences AVVariantPreferences)
-	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup)
-	SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup)
+	VariantPreferences() VariantPreferences
+	SetVariantPreferences(variantPreferences VariantPreferences)
+	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup)
+	SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup)
 	CurrentMediaSelection() *MediaSelection
-	SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *raw.AVMediaSelectionGroup)
-	SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) string
-	SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *raw.AVMediaPresentationSetting, mediaSelectionGroup *raw.AVMediaSelectionGroup)
-	SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
-	EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
+	SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *MediaSelectionGroup)
+	SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) string
+	SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *MediaPresentationSetting, mediaSelectionGroup *MediaSelectionGroup)
+	SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object
+	EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object
 	PreferredCustomMediaSelectionSchemes() []*CustomMediaSelectionScheme
-	SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes *foundation.NSArray[*raw.AVCustomMediaSelectionScheme])
+	SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes []*CustomMediaSelectionScheme)
 	AccessLog() *PlayerItemAccessLog
 	ErrorLog() *PlayerItemErrorLog
-	AddOutput(output *raw.AVPlayerItemOutput)
-	RemoveOutput(output *raw.AVPlayerItemOutput)
+	AddOutput(output *PlayerItemOutput)
+	RemoveOutput(output *PlayerItemOutput)
 	Outputs() []*PlayerItemOutput
-	AddMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector)
-	RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector)
+	AddMediaDataCollector(collector *PlayerItemMediaDataCollector)
+	RemoveMediaDataCollector(collector *PlayerItemMediaDataCollector)
 	MediaDataCollectors() []*PlayerItemMediaDataCollector
-	SeekToTime(time_ coremedia.CMTime)
-	SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime)
-	SeekToDate(date *foundation.NSDate) bool
-	SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption
+	SeekToDate(date obj.Object) bool
+	SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption
 	RequestContentAuthorizationAsynchronouslyWithTimeoutInterval(ctx context.Context, timeoutInterval float64) error
 	CancelContentAuthorizationRequest()
 	IsAuthorizationRequiredForPlayback() bool
 	IsApplicationAuthorizedForPlayback() bool
 	IsContentAuthorizedForPlayback() bool
-	ContentAuthorizationRequestStatus() AVContentAuthorizationStatus
+	ContentAuthorizationRequestStatus() ContentAuthorizationStatus
 	AutomaticallyHandlesInterstitialEvents() bool
 	SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool)
 	TemplatePlayerItem() *PlayerItem

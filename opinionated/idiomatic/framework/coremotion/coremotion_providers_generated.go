@@ -5,15 +5,17 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// LogItemProvider is implemented by LogItem and any idiomatic type wrapping a CMLogItem subclass.
+// LogItemProvider is accepted wherever a CMLogItem (or one of its subclasses) is expected.
 type LogItemProvider interface {
-	asLogItem() *raw.CMLogItem
+	objref.Object
+	isLogItem()
 }
 
-// RotationRateDataProvider is implemented by RotationRateData and any idiomatic type wrapping a CMRotationRateData subclass.
+// RotationRateDataProvider is accepted wherever a CMRotationRateData (or one of its subclasses) is expected.
 type RotationRateDataProvider interface {
-	asRotationRateData() *raw.CMRotationRateData
+	objref.Object
+	isRotationRateData()
 }

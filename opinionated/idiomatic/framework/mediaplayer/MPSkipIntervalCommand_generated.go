@@ -5,97 +5,88 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that defines the skip intervals for the player.
+// SkipIntervalCommand is an idiomatic wrapper over the Objective-C class MPSkipIntervalCommand.
 //
-// SkipIntervalCommand wraps [raw.MPSkipIntervalCommand] with a fluent Go API.
+// It embeds [RemoteCommand], promoting that type's methods.
+//
+// An object that defines the skip intervals for the player.
 type SkipIntervalCommand struct {
-	inner *raw.MPSkipIntervalCommand
+	RemoteCommand
 }
 
-// Unwrap returns the underlying [raw.MPSkipIntervalCommand].
-func (x *SkipIntervalCommand) Unwrap() *raw.MPSkipIntervalCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SkipIntervalCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// SkipIntervalCommandFromID adopts an existing object pointer as a SkipIntervalCommand (nil for 0).
+// SkipIntervalCommandFromID adopts an existing Objective-C object as a SkipIntervalCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func SkipIntervalCommandFromID(id objc.ID) *SkipIntervalCommand {
 	if id == 0 {
 		return nil
 	}
-	return &SkipIntervalCommand{inner: raw.MPSkipIntervalCommandFromID(id)}
-}
-
-// NewSkipIntervalCommand creates a new [SkipIntervalCommand].
-func NewSkipIntervalCommand() *SkipIntervalCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSkipIntervalCommand")), objc.RegisterName("new"))
-	return &SkipIntervalCommand{inner: raw.MPSkipIntervalCommandFromID(_id)}
-}
-
-// The available skip intervals, in seconds, for a media item.
-//
-// WithPreferredIntervals sets the collection, converting the Go slice to an NSArray.
-func (x *SkipIntervalCommand) WithPreferredIntervals(items ...*foundation.NSNumber) *SkipIntervalCommand {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPreferredIntervals(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPreferredIntervals(_arr)
+	x := &SkipIntervalCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
-	return x
-}
-
-// PreferredIntervals returns the collection as a Go slice.
-func (x *SkipIntervalCommand) PreferredIntervals() []*foundation.NSNumber {
-	arr := x.inner.PreferredIntervals()
-	if arr == nil {
+// skipIntervalCommandAdopt wraps an Objective-C object that this code just created as a
+// SkipIntervalCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func skipIntervalCommandAdopt(id objc.ID) *SkipIntervalCommand {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &SkipIntervalCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPreferredIntervals calls the underlying SetPreferredIntervals.
-func (x *SkipIntervalCommand) SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetPreferredIntervals(preferredIntervals)
+// NewSkipIntervalCommand creates a new SkipIntervalCommand.
+func NewSkipIntervalCommand() *SkipIntervalCommand {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSkipIntervalCommand")), objc.RegisterName("new"))
+	return skipIntervalCommandAdopt(_id)
 }
 
-func (x *SkipIntervalCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+// WithPreferredIntervals the available skip intervals, in seconds, for a media item.
+func (x *SkipIntervalCommand) WithPreferredIntervals(items ...obj.Object) *SkipIntervalCommand {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredIntervals:"), _arr)
+	return x
+}
+
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
+func (x *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// PreferredIntervals wraps the corresponding Objective-C method.
+//
+// PreferredIntervals returns the collection as a Go slice.
+func (x *SkipIntervalCommand) PreferredIntervals() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredIntervals"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetPreferredIntervals wraps the corresponding Objective-C method.
+func (x *SkipIntervalCommand) SetPreferredIntervals(preferredIntervals []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredIntervals:"), purego.SliceToNSArray(preferredIntervals, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
 
 // SkipIntervalCommandable is the interface implemented by [SkipIntervalCommand], for mocking and DI.
 type SkipIntervalCommandable interface {
-	Unwrap() *raw.MPSkipIntervalCommand
-	WithPreferredIntervals(items ...*foundation.NSNumber) *SkipIntervalCommand
+	obj.Object
+	WithPreferredIntervals(items ...obj.Object) *SkipIntervalCommand
 	WithEnabled(enabled bool) *SkipIntervalCommand
-	PreferredIntervals() []*foundation.NSNumber
-	SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber])
+	PreferredIntervals() []obj.Object
+	SetPreferredIntervals(preferredIntervals []obj.Object)
 }
 
 var _ SkipIntervalCommandable = (*SkipIntervalCommand)(nil)
+
+var _ RemoteCommandProvider = (*SkipIntervalCommand)(nil)

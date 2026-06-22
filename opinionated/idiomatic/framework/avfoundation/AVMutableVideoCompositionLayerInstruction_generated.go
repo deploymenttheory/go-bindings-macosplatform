@@ -5,120 +5,78 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a mutable composition.
+// MutableVideoCompositionLayerInstruction is an idiomatic wrapper over the Objective-C class AVMutableVideoCompositionLayerInstruction.
 //
-// MutableVideoCompositionLayerInstruction wraps [raw.AVMutableVideoCompositionLayerInstruction] with a fluent Go API.
+// It embeds [VideoCompositionLayerInstruction], promoting that type's methods.
+//
+// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a mutable composition.
 type MutableVideoCompositionLayerInstruction struct {
-	inner *raw.AVMutableVideoCompositionLayerInstruction
+	VideoCompositionLayerInstruction
 }
 
-// Unwrap returns the underlying [raw.AVMutableVideoCompositionLayerInstruction].
-func (x *MutableVideoCompositionLayerInstruction) Unwrap() *raw.AVMutableVideoCompositionLayerInstruction {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableVideoCompositionLayerInstruction) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableVideoCompositionLayerInstructionFromID adopts an existing object pointer as a MutableVideoCompositionLayerInstruction (nil for 0).
+// MutableVideoCompositionLayerInstructionFromID adopts an existing Objective-C object as a MutableVideoCompositionLayerInstruction
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableVideoCompositionLayerInstructionFromID(id objc.ID) *MutableVideoCompositionLayerInstruction {
 	if id == 0 {
 		return nil
 	}
-	return &MutableVideoCompositionLayerInstruction{inner: raw.AVMutableVideoCompositionLayerInstructionFromID(id)}
-}
-
-// NewMutableVideoCompositionLayerInstruction creates a new [MutableVideoCompositionLayerInstruction].
-func NewMutableVideoCompositionLayerInstruction() *MutableVideoCompositionLayerInstruction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableVideoCompositionLayerInstruction")), objc.RegisterName("new"))
-	return &MutableVideoCompositionLayerInstruction{inner: raw.AVMutableVideoCompositionLayerInstructionFromID(_id)}
-}
-
-// The track identifier of the source track to which the compositor applies the instruction.
-//
-// WithTrackID sets the trackID property and returns the receiver for chaining.
-func (x *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction {
-	x.inner.SetTrackID(trackID)
+	x := &MutableVideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Sets a transform ramp to apply during a given time range.
-//
-// SetTransformRampFromStartTransformToEndTransformTimeRange calls the underlying SetTransformRampFromStartTransformToEndTransformTimeRange.
-func (x *MutableVideoCompositionLayerInstruction) SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform corefoundation.CGAffineTransform, endTransform corefoundation.CGAffineTransform, timeRange coremedia.CMTimeRange) {
-	x.inner.SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform, endTransform, timeRange)
+// mutableVideoCompositionLayerInstructionAdopt wraps an Objective-C object that this code just created as a
+// MutableVideoCompositionLayerInstruction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableVideoCompositionLayerInstructionAdopt(id objc.ID) *MutableVideoCompositionLayerInstruction {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableVideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the transform value at a time within the time range of the instruction.
-//
-// SetTransformAtTime calls the underlying SetTransformAtTime.
-func (x *MutableVideoCompositionLayerInstruction) SetTransformAtTime(transform corefoundation.CGAffineTransform, time_ coremedia.CMTime) {
-	x.inner.SetTransformAtTime(transform, time_)
+// NewMutableVideoCompositionLayerInstruction creates a new MutableVideoCompositionLayerInstruction.
+func NewMutableVideoCompositionLayerInstruction() *MutableVideoCompositionLayerInstruction {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoCompositionLayerInstruction")), objc.RegisterName("new"))
+	return mutableVideoCompositionLayerInstructionAdopt(_id)
 }
 
-// Sets an opacity ramp to apply during a specified time range.
-//
-// SetOpacityRampFromStartOpacityToEndOpacityTimeRange calls the underlying SetOpacityRampFromStartOpacityToEndOpacityTimeRange.
-func (x *MutableVideoCompositionLayerInstruction) SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity float32, endOpacity float32, timeRange coremedia.CMTimeRange) {
-	x.inner.SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity, endOpacity, timeRange)
+// WithTrackID the track identifier of the source track to which the compositor applies the instruction.
+func (x *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
+	return x
 }
 
-// Sets the opacity value at a specific time within the time range of the instruction.
-//
-// SetOpacityAtTime calls the underlying SetOpacityAtTime.
-func (x *MutableVideoCompositionLayerInstruction) SetOpacityAtTime(opacity float32, time_ coremedia.CMTime) {
-	x.inner.SetOpacityAtTime(opacity, time_)
-}
-
-// Sets a crop rectangle ramp to apply during the specified time range.
-//
-// SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange calls the underlying SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange.
-func (x *MutableVideoCompositionLayerInstruction) SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle corefoundation.CGRect, endCropRectangle corefoundation.CGRect, timeRange coremedia.CMTimeRange) {
-	x.inner.SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle, endCropRectangle, timeRange)
-}
-
-// Sets the crop rectangle value at a time within the time range of the instruction.
-//
-// SetCropRectangleAtTime calls the underlying SetCropRectangleAtTime.
-func (x *MutableVideoCompositionLayerInstruction) SetCropRectangleAtTime(cropRectangle corefoundation.CGRect, time_ coremedia.CMTime) {
-	x.inner.SetCropRectangleAtTime(cropRectangle, time_)
-}
-
-// Indicates the trackID of the source track to which the compositor will apply the instruction.
-//
-// TrackID calls the underlying TrackID.
+// TrackID indicates the trackID of the source track to which the compositor will apply the instruction.
 func (x *MutableVideoCompositionLayerInstruction) TrackID() int32 {
-	return x.inner.TrackID()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
+	return _r
 }
 
-// SetTrackID calls the underlying SetTrackID.
+// SetTrackID wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionLayerInstruction) SetTrackID(trackID int32) {
-	x.inner.SetTrackID(trackID)
-}
-
-func (x *MutableVideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction {
-	return &x.inner.AVVideoCompositionLayerInstruction
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 }
 
 // MutableVideoCompositionLayerInstructionable is the interface implemented by [MutableVideoCompositionLayerInstruction], for mocking and DI.
 type MutableVideoCompositionLayerInstructionable interface {
-	Unwrap() *raw.AVMutableVideoCompositionLayerInstruction
+	obj.Object
 	WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction
-	SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform corefoundation.CGAffineTransform, endTransform corefoundation.CGAffineTransform, timeRange coremedia.CMTimeRange)
-	SetTransformAtTime(transform corefoundation.CGAffineTransform, time_ coremedia.CMTime)
-	SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity float32, endOpacity float32, timeRange coremedia.CMTimeRange)
-	SetOpacityAtTime(opacity float32, time_ coremedia.CMTime)
-	SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle corefoundation.CGRect, endCropRectangle corefoundation.CGRect, timeRange coremedia.CMTimeRange)
-	SetCropRectangleAtTime(cropRectangle corefoundation.CGRect, time_ coremedia.CMTime)
 	TrackID() int32
 	SetTrackID(trackID int32)
 }
 
 var _ MutableVideoCompositionLayerInstructionable = (*MutableVideoCompositionLayerInstruction)(nil)
+
+var _ VideoCompositionLayerInstructionProvider = (*MutableVideoCompositionLayerInstruction)(nil)

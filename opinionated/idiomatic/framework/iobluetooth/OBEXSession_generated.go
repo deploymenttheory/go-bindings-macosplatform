@@ -5,244 +5,121 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Object representing an OBEX connection to a remote target.
+// OBEXSession is an idiomatic wrapper over the Objective-C class OBEXSession.
 //
-// OBEXSession wraps [raw.OBEXSession] with a fluent Go API.
+// OBEXSession is an abstract base — you do not construct it directly. Construct one of [IOBluetoothOBEXSession] and pass it where a OBEXSession is accepted.
+//
+// Object representing an OBEX connection to a remote target.
 type OBEXSession struct {
-	inner *raw.OBEXSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OBEXSession].
-func (x *OBEXSession) Unwrap() *raw.OBEXSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OBEXSession) ID() objc.ID { return x.inner.Ptr() }
-
-// OBEXSessionFromID adopts an existing object pointer as a OBEXSession (nil for 0).
+// OBEXSessionFromID adopts an existing Objective-C object as a OBEXSession
+// (nil for 0), retaining it and registering a release finalizer.
 func OBEXSessionFromID(id objc.ID) *OBEXSession {
 	if id == 0 {
 		return nil
 	}
-	return &OBEXSession{inner: raw.OBEXSessionFromID(id)}
+	x := &OBEXSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewOBEXSession creates a new [OBEXSession].
-func NewOBEXSession() *OBEXSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OBEXSession")), objc.RegisterName("new"))
-	return &OBEXSession{inner: raw.OBEXSessionFromID(_id)}
+// oBEXSessionAdopt wraps an Objective-C object that this code just created as a
+// OBEXSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func oBEXSessionAdopt(id objc.ID) *OBEXSession {
+	if id == 0 {
+		return nil
+	}
+	x := &OBEXSession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initiate an OBEX connection to a device. Causes underlying transport (Bluetooth, et al) to attempt to connect to a remote device. After success, an OBEX connect packet is sent to establish the OBEX Connection.
-//
-// OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags, inMaxPacketLength, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
+// Description returns the object's -description text.
+func (x *OBEXSession) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Send an OBEX Disconnect command to the session’s target. THIS DOES NOT necessarily close the underlying transport connection. Deleting the session will ensure that closure.
-//
-// OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OBEXSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Send an OBEX Put command to the session’s target.
-//
-// OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon(isFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength uint, inBodyData unsafe.Pointer, inBodyDataLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon(isFinalChunk, inHeadersData, inHeadersDataLength, inBodyData, inBodyDataLength, inSelector, inTarget, inUserRefCon)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OBEXSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Send an OBEX Get command to the session’s target.
-//
-// OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon(isFinalChunk uint8, inHeaders unsafe.Pointer, inHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon(isFinalChunk, inHeaders, inHeadersLength, inSelector, inTarget, inUserRefCon)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *OBEXSession) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Send an OBEX Abort command to the session’s target.
-//
-// OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send an OBEX SetPath command to the session’s target.
-//
-// OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags uint8, inConstants uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags, inConstants, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send a connect response to a session’s target.
-//
-// OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inFlags, inMaxPacketLength, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send a disconnect response to a session’s target.
-//
-// OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send a put response to a session’s target.
-//
-// OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send a get response to a session’s target.
-//
-// OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send an abort response to a session’s target.
-//
-// OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Send a set path response to a session’s target.
-//
-// OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
-func (x *OBEXSession) OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
-}
-
-// Determine the maximum amount of data you can send in a particular command as an OBEX client session.
-//
-// GetAvailableCommandPayloadLength calls the underlying GetAvailableCommandPayloadLength.
+// GetAvailableCommandPayloadLength determine the maximum amount of data you can send in a particular command as an OBEX client session.
 func (x *OBEXSession) GetAvailableCommandPayloadLength(inOpCode uint8) uint16 {
-	return x.inner.GetAvailableCommandPayloadLength(inOpCode)
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAvailableCommandPayloadLength:"), inOpCode)
+	return _r
 }
 
-// Determine the maximum amount of data you can send in a particular command response as an OBEX server session.
-//
-// GetAvailableCommandResponsePayloadLength calls the underlying GetAvailableCommandResponsePayloadLength.
+// GetAvailableCommandResponsePayloadLength determine the maximum amount of data you can send in a particular command response as an OBEX server session.
 func (x *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16 {
-	return x.inner.GetAvailableCommandResponsePayloadLength(inOpCode)
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getAvailableCommandResponsePayloadLength:"), inOpCode)
+	return _r
 }
 
-// Gets current max packet length.
-//
-// GetMaxPacketLength calls the underlying GetMaxPacketLength.
+// GetMaxPacketLength gets current max packet length.
 func (x *OBEXSession) GetMaxPacketLength() uint16 {
-	return x.inner.GetMaxPacketLength()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getMaxPacketLength"))
+	return _r
 }
 
-// Has a successful connect packet been sent and received? This API tells you so.
-//
-// HasOpenOBEXConnection calls the underlying HasOpenOBEXConnection.
+// HasOpenOBEXConnection has a successful connect packet been sent and received? This API tells you so.
 func (x *OBEXSession) HasOpenOBEXConnection() bool {
-	return x.inner.HasOpenOBEXConnection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOpenOBEXConnection"))
+	return _r
 }
 
-// Sets the C-API callback used when the session recieves data.
-//
-// SetEventCallback calls the underlying SetEventCallback.
-func (x *OBEXSession) SetEventCallback(inEventCallback unsafe.Pointer) {
-	x.inner.SetEventCallback(inEventCallback)
-}
-
-// Sets the C-API callback refCon used when the session recieves data.
-//
-// SetEventRefCon calls the underlying SetEventRefCon.
-func (x *OBEXSession) SetEventRefCon(inRefCon unsafe.Pointer) {
-	x.inner.SetEventRefCon(inRefCon)
-}
-
-// Allow you to set a selector to be called when events occur on the OBEX session.
-//
-// SetEventSelectorTargetRefCon calls the underlying SetEventSelectorTargetRefCon.
-func (x *OBEXSession) SetEventSelectorTargetRefCon(inEventSelector objc.SEL, inEventSelectorTarget objc.ID, inUserRefCon unsafe.Pointer) {
-	x.inner.SetEventSelectorTargetRefCon(inEventSelector, inEventSelectorTarget, inUserRefCon)
-}
-
-// Tranport subclasses need to invoke this from their own data-receive handlers. For example, when data is received over a Bluetooth RFCOMM channel in the IOBluetoothOBEXSession, it in turn calls this to dispatch the data. If you do not handle this case, your server session will not work, guaranteed.
-//
-// ServerHandleIncomingData calls the underlying ServerHandleIncomingData.
-func (x *OBEXSession) ServerHandleIncomingData(event *raw.OBEXTransportEvent) {
-	x.inner.ServerHandleIncomingData(event)
-}
-
-// Tranport subclasses need to invoke this from their own data-receive handlers. For example, when data is received over a Bluetooth RFCOMM channel in the IOBluetoothOBEXSession, it in turn calls this to dispatch the data. If you do not handle this case, your server session will not work, guaranteed.
-//
-// ClientHandleIncomingData calls the underlying ClientHandleIncomingData.
-func (x *OBEXSession) ClientHandleIncomingData(event *raw.OBEXTransportEvent) {
-	x.inner.ClientHandleIncomingData(event)
-}
-
-// You must override this to send data over your transport. This does nothing by default, it will return a kOBEXUnsupportedError.
-//
-// SendDataToTransportDataLength calls the underlying SendDataToTransportDataLength.
-func (x *OBEXSession) SendDataToTransportDataLength(inDataToSend unsafe.Pointer, inDataLength uint) int32 {
-	return x.inner.SendDataToTransportDataLength(inDataToSend, inDataLength)
-}
-
-// Opens a transport connection to a device. A Bluetooth connection is one example of a transport.
-//
-// OpenTransportConnectionSelectorTargetRefCon calls the underlying OpenTransportConnectionSelectorTargetRefCon.
-func (x *OBEXSession) OpenTransportConnectionSelectorTargetRefCon(inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
-	return x.inner.OpenTransportConnectionSelectorTargetRefCon(inSelector, inTarget, inUserRefCon)
-}
-
-// You must override this - it will be called periodically to determine if a transport connection is open or not.
-//
-// HasOpenTransportConnection calls the underlying HasOpenTransportConnection.
+// HasOpenTransportConnection you must override this - it will be called periodically to determine if a transport connection is open or not.
 func (x *OBEXSession) HasOpenTransportConnection() uint8 {
-	return x.inner.HasOpenTransportConnection()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("hasOpenTransportConnection"))
+	return _r
 }
 
-// You must override this - it will be called when the transport connection should be shutdown.
-//
-// CloseTransportConnection calls the underlying CloseTransportConnection.
+// CloseTransportConnection you must override this - it will be called when the transport connection should be shutdown.
 func (x *OBEXSession) CloseTransportConnection() int32 {
-	return x.inner.CloseTransportConnection()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("closeTransportConnection"))
+	return _r
 }
-
-func (x *OBEXSession) asOBEXSession() *raw.OBEXSession { return x.inner }
 
 // OBEXSessionable is the interface implemented by [OBEXSession], for mocking and DI.
 type OBEXSessionable interface {
-	Unwrap() *raw.OBEXSession
-	OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon(isFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength uint, inBodyData unsafe.Pointer, inBodyDataLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon(isFinalChunk uint8, inHeaders unsafe.Pointer, inHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags uint8, inConstants uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
-	OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
+	obj.Object
 	GetAvailableCommandPayloadLength(inOpCode uint8) uint16
 	GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16
 	GetMaxPacketLength() uint16
 	HasOpenOBEXConnection() bool
-	SetEventCallback(inEventCallback unsafe.Pointer)
-	SetEventRefCon(inRefCon unsafe.Pointer)
-	SetEventSelectorTargetRefCon(inEventSelector objc.SEL, inEventSelectorTarget objc.ID, inUserRefCon unsafe.Pointer)
-	ServerHandleIncomingData(event *raw.OBEXTransportEvent)
-	ClientHandleIncomingData(event *raw.OBEXTransportEvent)
-	SendDataToTransportDataLength(inDataToSend unsafe.Pointer, inDataLength uint) int32
-	OpenTransportConnectionSelectorTargetRefCon(inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32
 	HasOpenTransportConnection() uint8
 	CloseTransportConnection() int32
 }
 
 var _ OBEXSessionable = (*OBEXSession)(nil)
+
+// isOBEXSession marks OBEXSession — and, by embedding promotion, its
+// subclasses — as a member of the OBEXSession hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *OBEXSession) isOBEXSession() {}
+
+var _ OBEXSessionProvider = (*OBEXSession)(nil)

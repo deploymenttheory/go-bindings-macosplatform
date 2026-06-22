@@ -5,84 +5,118 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAccessControlClusterAccessControlExtensionStruct wraps [raw.MTRAccessControlClusterAccessControlExtensionStruct] with a fluent Go API.
+// MTRAccessControlClusterAccessControlExtensionStruct is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterAccessControlExtensionStruct.
+//
+// MTRAccessControlClusterAccessControlExtensionStruct is an abstract base — you do not construct it directly. Construct one of [MTRAccessControlClusterExtensionEntry] and pass it where a MTRAccessControlClusterAccessControlExtensionStruct is accepted.
 type MTRAccessControlClusterAccessControlExtensionStruct struct {
-	inner *raw.MTRAccessControlClusterAccessControlExtensionStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlExtensionStruct].
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAccessControlClusterAccessControlExtensionStructFromID adopts an existing object pointer as a MTRAccessControlClusterAccessControlExtensionStruct (nil for 0).
+// MTRAccessControlClusterAccessControlExtensionStructFromID adopts an existing Objective-C object as a MTRAccessControlClusterAccessControlExtensionStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAccessControlClusterAccessControlExtensionStructFromID(id objc.ID) *MTRAccessControlClusterAccessControlExtensionStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAccessControlClusterAccessControlExtensionStruct{inner: raw.MTRAccessControlClusterAccessControlExtensionStructFromID(id)}
-}
-
-// NewMTRAccessControlClusterAccessControlExtensionStruct creates a new [MTRAccessControlClusterAccessControlExtensionStruct].
-func NewMTRAccessControlClusterAccessControlExtensionStruct() *MTRAccessControlClusterAccessControlExtensionStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAccessControlClusterAccessControlExtensionStruct")), objc.RegisterName("new"))
-	return &MTRAccessControlClusterAccessControlExtensionStruct{inner: raw.MTRAccessControlClusterAccessControlExtensionStructFromID(_id)}
-}
-
-// WithData sets the data property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithData(data *foundation.NSData) *MTRAccessControlClusterAccessControlExtensionStruct {
-	x.inner.SetData(data)
+	x := &MTRAccessControlClusterAccessControlExtensionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionStruct {
-	x.inner.SetFabricIndex(fabricIndex)
+// mTRAccessControlClusterAccessControlExtensionStructAdopt wraps an Objective-C object that this code just created as a
+// MTRAccessControlClusterAccessControlExtensionStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAccessControlClusterAccessControlExtensionStructAdopt(id objc.ID) *MTRAccessControlClusterAccessControlExtensionStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAccessControlClusterAccessControlExtensionStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// Data calls the underlying Data.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) Data() *foundation.NSData {
-	return x.inner.Data()
+// Description returns the object's -description text.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetData calls the underlying SetData.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetData(data *foundation.NSData) {
-	x.inner.SetData(data)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct {
-	return x.inner
+// WithData sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
+	return x
+}
+
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return x
+}
+
+// Data wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
+}
+
+// SetData wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetData(data obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
+}
+
+// FabricIndex wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
+}
+
+// SetFabricIndex wraps the corresponding Objective-C method.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // MTRAccessControlClusterAccessControlExtensionStructable is the interface implemented by [MTRAccessControlClusterAccessControlExtensionStruct], for mocking and DI.
 type MTRAccessControlClusterAccessControlExtensionStructable interface {
-	Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionStruct
-	WithData(data *foundation.NSData) *MTRAccessControlClusterAccessControlExtensionStruct
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionStruct
-	Data() *foundation.NSData
-	SetData(data *foundation.NSData)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	obj.Object
+	WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct
+	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct
+	Data() obj.Object
+	SetData(data obj.Object)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 }
 
 var _ MTRAccessControlClusterAccessControlExtensionStructable = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)
+
+// isMTRAccessControlClusterAccessControlExtensionStruct marks MTRAccessControlClusterAccessControlExtensionStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRAccessControlClusterAccessControlExtensionStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) isMTRAccessControlClusterAccessControlExtensionStruct() {
+}
+
+var _ MTRAccessControlClusterAccessControlExtensionStructProvider = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)

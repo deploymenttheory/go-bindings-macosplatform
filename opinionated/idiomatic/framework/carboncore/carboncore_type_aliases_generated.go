@@ -4,528 +4,559 @@
 
 package carboncore
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-)
-
-// AFPAlternateAddress is a type alias for the raw AFPAlternateAddress value-type struct.
-type AFPAlternateAddress = raw.AFPAlternateAddress
-
-// AFPTagData is a type alias for the raw AFPTagData value-type struct.
-type AFPTagData = raw.AFPTagData
-
-// AFPVolMountInfo is a type alias for the raw AFPVolMountInfo value-type struct.
-type AFPVolMountInfo = raw.AFPVolMountInfo
-
-// AFPXVolMountInfo is a type alias for the raw AFPXVolMountInfo value-type struct.
-type AFPXVolMountInfo = raw.AFPXVolMountInfo
-
-// AIFFLoop is a type alias for the raw AIFFLoop value-type struct.
-type AIFFLoop = raw.AIFFLoop
-
-// AliasRecord is a type alias for the raw AliasRecord value-type struct.
-type AliasRecord = raw.AliasRecord
-
-// ApplicationSpecificChunk is a type alias for the raw ApplicationSpecificChunk value-type struct.
-type ApplicationSpecificChunk = raw.ApplicationSpecificChunk
-
-// AudioRecordingChunk is a type alias for the raw AudioRecordingChunk value-type struct.
-type AudioRecordingChunk = raw.AudioRecordingChunk
-
-// BigEndianFixed is a type alias for the raw BigEndianFixed value-type struct.
-type BigEndianFixed = raw.BigEndianFixed
-
-// BigEndianLong is a type alias for the raw BigEndianLong value-type struct.
-type BigEndianLong = raw.BigEndianLong
-
-// BigEndianOSType is a type alias for the raw BigEndianOSType value-type struct.
-type BigEndianOSType = raw.BigEndianOSType
-
-// BigEndianShort is a type alias for the raw BigEndianShort value-type struct.
-type BigEndianShort = raw.BigEndianShort
-
-// BigEndianUInt32 is a type alias for the raw BigEndianUInt32 value-type struct.
-type BigEndianUInt32 = raw.BigEndianUInt32
-
-// BigEndianUnsignedFixed is a type alias for the raw BigEndianUnsignedFixed value-type struct.
-type BigEndianUnsignedFixed = raw.BigEndianUnsignedFixed
-
-// BigEndianUnsignedLong is a type alias for the raw BigEndianUnsignedLong value-type struct.
-type BigEndianUnsignedLong = raw.BigEndianUnsignedLong
-
-// BigEndianUnsignedShort is a type alias for the raw BigEndianUnsignedShort value-type struct.
-type BigEndianUnsignedShort = raw.BigEndianUnsignedShort
-
-// CatPositionRec is a type alias for the raw CatPositionRec value-type struct.
-type CatPositionRec = raw.CatPositionRec
-
-// ChunkHeader is a type alias for the raw ChunkHeader value-type struct.
-type ChunkHeader = raw.ChunkHeader
-
-// Comment is a type alias for the raw Comment value-type struct.
-type Comment = raw.Comment
-
-// CommentsChunk is a type alias for the raw CommentsChunk value-type struct.
-type CommentsChunk = raw.CommentsChunk
-
-// CommonChunk is a type alias for the raw CommonChunk value-type struct.
-type CommonChunk = raw.CommonChunk
-
-// ComponentAliasResource is a type alias for the raw ComponentAliasResource value-type struct.
-type ComponentAliasResource = raw.ComponentAliasResource
-
-// ComponentDescription is a type alias for the raw ComponentDescription value-type struct.
-type ComponentDescription = raw.ComponentDescription
-
-// ComponentInstanceRecord is a type alias for the raw ComponentInstanceRecord value-type struct.
-type ComponentInstanceRecord = raw.ComponentInstanceRecord
-
-// ComponentMPWorkFunctionHeaderRecord is a type alias for the raw ComponentMPWorkFunctionHeaderRecord value-type struct.
-type ComponentMPWorkFunctionHeaderRecord = raw.ComponentMPWorkFunctionHeaderRecord
-
-// ComponentParameters is a type alias for the raw ComponentParameters value-type struct.
-type ComponentParameters = raw.ComponentParameters
-
-// ComponentPlatformInfo is a type alias for the raw ComponentPlatformInfo value-type struct.
-type ComponentPlatformInfo = raw.ComponentPlatformInfo
-
-// ComponentPlatformInfoArray is a type alias for the raw ComponentPlatformInfoArray value-type struct.
-type ComponentPlatformInfoArray = raw.ComponentPlatformInfoArray
-
-// ComponentRecord is a type alias for the raw ComponentRecord value-type struct.
-type ComponentRecord = raw.ComponentRecord
-
-// ComponentResource is a type alias for the raw ComponentResource value-type struct.
-type ComponentResource = raw.ComponentResource
-
-// ComponentResourceExtension is a type alias for the raw ComponentResourceExtension value-type struct.
-type ComponentResourceExtension = raw.ComponentResourceExtension
-
-// ContainerChunk is a type alias for the raw ContainerChunk value-type struct.
-type ContainerChunk = raw.ContainerChunk
-
-// CustomBadgeResource is a type alias for the raw CustomBadgeResource value-type struct.
-type CustomBadgeResource = raw.CustomBadgeResource
-
-// DInfo is a type alias for the raw DInfo value-type struct.
-type DInfo = raw.DInfo
-
-// DXInfo is a type alias for the raw DXInfo value-type struct.
-type DXInfo = raw.DXInfo
-
-// DateCacheRecord is a type alias for the raw DateCacheRecord value-type struct.
-type DateCacheRecord = raw.DateCacheRecord
-
-// DateTimeRec is a type alias for the raw DateTimeRec value-type struct.
-type DateTimeRec = raw.DateTimeRec
-
-// DeferredTask is a type alias for the raw DeferredTask value-type struct.
-type DeferredTask = raw.DeferredTask
-
-// ExceptionInformation is a type alias for the raw ExceptionInformation value-type struct.
-type ExceptionInformation = raw.ExceptionInformation
-
-// ExceptionInformationPowerPC is a type alias for the raw ExceptionInformationPowerPC value-type struct.
-type ExceptionInformationPowerPC = raw.ExceptionInformationPowerPC
-
-// ExtCommonChunk is a type alias for the raw ExtCommonChunk value-type struct.
-type ExtCommonChunk = raw.ExtCommonChunk
-
-// ExtComponentResource is a type alias for the raw ExtComponentResource value-type struct.
-type ExtComponentResource = raw.ExtComponentResource
-
-// ExtendedFileInfo is a type alias for the raw ExtendedFileInfo value-type struct.
-type ExtendedFileInfo = raw.ExtendedFileInfo
-
-// ExtendedFolderInfo is a type alias for the raw ExtendedFolderInfo value-type struct.
-type ExtendedFolderInfo = raw.ExtendedFolderInfo
-
-// FInfo is a type alias for the raw FInfo value-type struct.
-type FInfo = raw.FInfo
-
-// FPUInformation is a type alias for the raw FPUInformation value-type struct.
-type FPUInformation = raw.FPUInformation
-
-// FPUInformationPowerPC is a type alias for the raw FPUInformationPowerPC value-type struct.
-type FPUInformationPowerPC = raw.FPUInformationPowerPC
-
-// FSAliasInfo is a type alias for the raw FSAliasInfo value-type struct.
-type FSAliasInfo = raw.FSAliasInfo
-
-// FSCatalogBulkParam is a type alias for the raw FSCatalogBulkParam value-type struct.
-type FSCatalogBulkParam = raw.FSCatalogBulkParam
-
-// FSCatalogInfo is a type alias for the raw FSCatalogInfo value-type struct.
-type FSCatalogInfo = raw.FSCatalogInfo
-
-// FSFileOperationClientContext is a type alias for the raw FSFileOperationClientContext value-type struct.
-type FSFileOperationClientContext = raw.FSFileOperationClientContext
-
-// FSForkCBInfoParam is a type alias for the raw FSForkCBInfoParam value-type struct.
-type FSForkCBInfoParam = raw.FSForkCBInfoParam
-
-// FSForkIOParam is a type alias for the raw FSForkIOParam value-type struct.
-type FSForkIOParam = raw.FSForkIOParam
-
-// FSForkInfo is a type alias for the raw FSForkInfo value-type struct.
-type FSForkInfo = raw.FSForkInfo
-
-// FSPermissionInfo is a type alias for the raw FSPermissionInfo value-type struct.
-type FSPermissionInfo = raw.FSPermissionInfo
-
-// FSRangeLockParam is a type alias for the raw FSRangeLockParam value-type struct.
-type FSRangeLockParam = raw.FSRangeLockParam
-
-// FSRef is a type alias for the raw FSRef value-type struct.
-type FSRef = raw.FSRef
-
-// FSRefForkIOParam is a type alias for the raw FSRefForkIOParam value-type struct.
-type FSRefForkIOParam = raw.FSRefForkIOParam
-
-// FSRefParam is a type alias for the raw FSRefParam value-type struct.
-type FSRefParam = raw.FSRefParam
-
-// FSSearchParams is a type alias for the raw FSSearchParams value-type struct.
-type FSSearchParams = raw.FSSearchParams
-
-// FSSpec is a type alias for the raw FSSpec value-type struct.
-type FSSpec = raw.FSSpec
-
-// FSVolumeInfo is a type alias for the raw FSVolumeInfo value-type struct.
-type FSVolumeInfo = raw.FSVolumeInfo
-
-// FSVolumeInfoParam is a type alias for the raw FSVolumeInfoParam value-type struct.
-type FSVolumeInfoParam = raw.FSVolumeInfoParam
-
-// FVector is a type alias for the raw FVector value-type struct.
-type FVector = raw.FVector
-
-// FXInfo is a type alias for the raw FXInfo value-type struct.
-type FXInfo = raw.FXInfo
-
-// FileInfo is a type alias for the raw FileInfo value-type struct.
-type FileInfo = raw.FileInfo
-
-// FolderDesc is a type alias for the raw FolderDesc value-type struct.
-type FolderDesc = raw.FolderDesc
-
-// FolderInfo is a type alias for the raw FolderInfo value-type struct.
-type FolderInfo = raw.FolderInfo
-
-// FolderRouting is a type alias for the raw FolderRouting value-type struct.
-type FolderRouting = raw.FolderRouting
-
-// FormatVersionChunk is a type alias for the raw FormatVersionChunk value-type struct.
-type FormatVersionChunk = raw.FormatVersionChunk
-
-// GetVolParmsInfoBuffer is a type alias for the raw GetVolParmsInfoBuffer value-type struct.
-type GetVolParmsInfoBuffer = raw.GetVolParmsInfoBuffer
-
-// InstrumentChunk is a type alias for the raw InstrumentChunk value-type struct.
-type InstrumentChunk = raw.InstrumentChunk
-
-// Intl0Rec is a type alias for the raw Intl0Rec value-type struct.
-type Intl0Rec = raw.Intl0Rec
-
-// Intl1Rec is a type alias for the raw Intl1Rec value-type struct.
-type Intl1Rec = raw.Intl1Rec
-
-// Itl1ExtRec is a type alias for the raw Itl1ExtRec value-type struct.
-type Itl1ExtRec = raw.Itl1ExtRec
-
-// Itl4Rec is a type alias for the raw Itl4Rec value-type struct.
-type Itl4Rec = raw.Itl4Rec
-
-// Itl5Record is a type alias for the raw Itl5Record value-type struct.
-type Itl5Record = raw.Itl5Record
-
-// ItlbExtRecord is a type alias for the raw ItlbExtRecord value-type struct.
-type ItlbExtRecord = raw.ItlbExtRecord
-
-// ItlbRecord is a type alias for the raw ItlbRecord value-type struct.
-type ItlbRecord = raw.ItlbRecord
-
-// ItlcRecord is a type alias for the raw ItlcRecord value-type struct.
-type ItlcRecord = raw.ItlcRecord
-
-// LocalDateTime is a type alias for the raw LocalDateTime value-type struct.
-type LocalDateTime = raw.LocalDateTime
-
-// LocaleAndVariant is a type alias for the raw LocaleAndVariant value-type struct.
-type LocaleAndVariant = raw.LocaleAndVariant
-
-// MIDIDataChunk is a type alias for the raw MIDIDataChunk value-type struct.
-type MIDIDataChunk = raw.MIDIDataChunk
-
-// MPAddressSpaceInfo is a type alias for the raw MPAddressSpaceInfo value-type struct.
-type MPAddressSpaceInfo = raw.MPAddressSpaceInfo
-
-// MPCriticalRegionInfo is a type alias for the raw MPCriticalRegionInfo value-type struct.
-type MPCriticalRegionInfo = raw.MPCriticalRegionInfo
-
-// MPEventInfo is a type alias for the raw MPEventInfo value-type struct.
-type MPEventInfo = raw.MPEventInfo
-
-// MPNotificationInfo is a type alias for the raw MPNotificationInfo value-type struct.
-type MPNotificationInfo = raw.MPNotificationInfo
-
-// MPQueueInfo is a type alias for the raw MPQueueInfo value-type struct.
-type MPQueueInfo = raw.MPQueueInfo
-
-// MPSemaphoreInfo is a type alias for the raw MPSemaphoreInfo value-type struct.
-type MPSemaphoreInfo = raw.MPSemaphoreInfo
-
-// MPTaskInfo is a type alias for the raw MPTaskInfo value-type struct.
-type MPTaskInfo = raw.MPTaskInfo
-
-// MPTaskInfoVersion2 is a type alias for the raw MPTaskInfoVersion2 value-type struct.
-type MPTaskInfoVersion2 = raw.MPTaskInfoVersion2
-
-// MachineInformation is a type alias for the raw MachineInformation value-type struct.
-type MachineInformation = raw.MachineInformation
-
-// MachineInformationPowerPC is a type alias for the raw MachineInformationPowerPC value-type struct.
-type MachineInformationPowerPC = raw.MachineInformationPowerPC
-
-// MachineLocation is a type alias for the raw MachineLocation value-type struct.
-type MachineLocation = raw.MachineLocation
-
-// Marker is a type alias for the raw Marker value-type struct.
-type Marker = raw.Marker
-
-// MarkerChunk is a type alias for the raw MarkerChunk value-type struct.
-type MarkerChunk = raw.MarkerChunk
-
-// MemoryExceptionInformation is a type alias for the raw MemoryExceptionInformation value-type struct.
-type MemoryExceptionInformation = raw.MemoryExceptionInformation
-
-// MixedModeStateRecord is a type alias for the raw MixedModeStateRecord value-type struct.
-type MixedModeStateRecord = raw.MixedModeStateRecord
-
-// NItl4Rec is a type alias for the raw NItl4Rec value-type struct.
-type NItl4Rec = raw.NItl4Rec
-
-// NumFormatString is a type alias for the raw NumFormatString value-type struct.
-type NumFormatString = raw.NumFormatString
-
-// NumberParts is a type alias for the raw NumberParts value-type struct.
-type NumberParts = raw.NumberParts
-
-// OffPair is a type alias for the raw OffPair value-type struct.
-type OffPair = raw.OffPair
-
-// PEFContainerHeader is a type alias for the raw PEFContainerHeader value-type struct.
-type PEFContainerHeader = raw.PEFContainerHeader
-
-// PEFExportedSymbol is a type alias for the raw PEFExportedSymbol value-type struct.
-type PEFExportedSymbol = raw.PEFExportedSymbol
-
-// PEFExportedSymbolHashSlot is a type alias for the raw PEFExportedSymbolHashSlot value-type struct.
-type PEFExportedSymbolHashSlot = raw.PEFExportedSymbolHashSlot
-
-// PEFExportedSymbolKey is a type alias for the raw PEFExportedSymbolKey value-type struct.
-type PEFExportedSymbolKey = raw.PEFExportedSymbolKey
-
-// PEFImportedLibrary is a type alias for the raw PEFImportedLibrary value-type struct.
-type PEFImportedLibrary = raw.PEFImportedLibrary
-
-// PEFImportedSymbol is a type alias for the raw PEFImportedSymbol value-type struct.
-type PEFImportedSymbol = raw.PEFImportedSymbol
-
-// PEFLoaderInfoHeader is a type alias for the raw PEFLoaderInfoHeader value-type struct.
-type PEFLoaderInfoHeader = raw.PEFLoaderInfoHeader
-
-// PEFLoaderRelocationHeader is a type alias for the raw PEFLoaderRelocationHeader value-type struct.
-type PEFLoaderRelocationHeader = raw.PEFLoaderRelocationHeader
-
-// PEFSectionHeader is a type alias for the raw PEFSectionHeader value-type struct.
-type PEFSectionHeader = raw.PEFSectionHeader
-
-// PEFSplitHashWord is a type alias for the raw PEFSplitHashWord value-type struct.
-type PEFSplitHashWord = raw.PEFSplitHashWord
-
-// QElem is a type alias for the raw QElem value-type struct.
-type QElem = raw.QElem
-
-// QHdr is a type alias for the raw QHdr value-type struct.
-type QHdr = raw.QHdr
-
-// RegisterInformation is a type alias for the raw RegisterInformation value-type struct.
-type RegisterInformation = raw.RegisterInformation
-
-// RegisterInformationPowerPC is a type alias for the raw RegisterInformationPowerPC value-type struct.
-type RegisterInformationPowerPC = raw.RegisterInformationPowerPC
-
-// RegisteredComponentInstanceRecord is a type alias for the raw RegisteredComponentInstanceRecord value-type struct.
-type RegisteredComponentInstanceRecord = raw.RegisteredComponentInstanceRecord
-
-// RegisteredComponentRecord is a type alias for the raw RegisteredComponentRecord value-type struct.
-type RegisteredComponentRecord = raw.RegisteredComponentRecord
-
-// ResourceSpec is a type alias for the raw ResourceSpec value-type struct.
-type ResourceSpec = raw.ResourceSpec
-
-// RoutineDescriptor is a type alias for the raw RoutineDescriptor value-type struct.
-type RoutineDescriptor = raw.RoutineDescriptor
-
-// RoutineRecord is a type alias for the raw RoutineRecord value-type struct.
-type RoutineRecord = raw.RoutineRecord
-
-// RoutingResourceEntry is a type alias for the raw RoutingResourceEntry value-type struct.
-type RoutingResourceEntry = raw.RoutingResourceEntry
-
-// RuleBasedTrslRecord is a type alias for the raw RuleBasedTrslRecord value-type struct.
-type RuleBasedTrslRecord = raw.RuleBasedTrslRecord
-
-// SchedulerInfoRec is a type alias for the raw SchedulerInfoRec value-type struct.
-type SchedulerInfoRec = raw.SchedulerInfoRec
-
-// ScriptCodeRun is a type alias for the raw ScriptCodeRun value-type struct.
-type ScriptCodeRun = raw.ScriptCodeRun
-
-// SoundDataChunk is a type alias for the raw SoundDataChunk value-type struct.
-type SoundDataChunk = raw.SoundDataChunk
-
-// TECBufferContextRec is a type alias for the raw TECBufferContextRec value-type struct.
-type TECBufferContextRec = raw.TECBufferContextRec
-
-// TECConversionInfo is a type alias for the raw TECConversionInfo value-type struct.
-type TECConversionInfo = raw.TECConversionInfo
-
-// TECConverterContextRec is a type alias for the raw TECConverterContextRec value-type struct.
-type TECConverterContextRec = raw.TECConverterContextRec
-
-// TECEncodingPairRec is a type alias for the raw TECEncodingPairRec value-type struct.
-type TECEncodingPairRec = raw.TECEncodingPairRec
-
-// TECEncodingPairs is a type alias for the raw TECEncodingPairs value-type struct.
-type TECEncodingPairs = raw.TECEncodingPairs
-
-// TECEncodingPairsRec is a type alias for the raw TECEncodingPairsRec value-type struct.
-type TECEncodingPairsRec = raw.TECEncodingPairsRec
-
-// TECEncodingsListRec is a type alias for the raw TECEncodingsListRec value-type struct.
-type TECEncodingsListRec = raw.TECEncodingsListRec
-
-// TECInfo is a type alias for the raw TECInfo value-type struct.
-type TECInfo = raw.TECInfo
-
-// TECInternetNameRec is a type alias for the raw TECInternetNameRec value-type struct.
-type TECInternetNameRec = raw.TECInternetNameRec
-
-// TECInternetNamesRec is a type alias for the raw TECInternetNamesRec value-type struct.
-type TECInternetNamesRec = raw.TECInternetNamesRec
-
-// TECLocaleListToEncodingListRec is a type alias for the raw TECLocaleListToEncodingListRec value-type struct.
-type TECLocaleListToEncodingListRec = raw.TECLocaleListToEncodingListRec
-
-// TECLocaleToEncodingsListRec is a type alias for the raw TECLocaleToEncodingsListRec value-type struct.
-type TECLocaleToEncodingsListRec = raw.TECLocaleToEncodingsListRec
-
-// TECPluginDispatchTable is a type alias for the raw TECPluginDispatchTable value-type struct.
-type TECPluginDispatchTable = raw.TECPluginDispatchTable
-
-// TECPluginStateRec is a type alias for the raw TECPluginStateRec value-type struct.
-type TECPluginStateRec = raw.TECPluginStateRec
-
-// TECSnifferContextRec is a type alias for the raw TECSnifferContextRec value-type struct.
-type TECSnifferContextRec = raw.TECSnifferContextRec
-
-// TECSubTextEncodingRec is a type alias for the raw TECSubTextEncodingRec value-type struct.
-type TECSubTextEncodingRec = raw.TECSubTextEncodingRec
-
-// TECSubTextEncodingsRec is a type alias for the raw TECSubTextEncodingsRec value-type struct.
-type TECSubTextEncodingsRec = raw.TECSubTextEncodingsRec
-
-// TMTask is a type alias for the raw TMTask value-type struct.
-type TMTask = raw.TMTask
-
-// TableDirectoryRecord is a type alias for the raw TableDirectoryRecord value-type struct.
-type TableDirectoryRecord = raw.TableDirectoryRecord
-
-// TextChunk is a type alias for the raw TextChunk value-type struct.
-type TextChunk = raw.TextChunk
-
-// TextEncodingRec is a type alias for the raw TextEncodingRec value-type struct.
-type TextEncodingRec = raw.TextEncodingRec
-
-// TextEncodingRun is a type alias for the raw TextEncodingRun value-type struct.
-type TextEncodingRun = raw.TextEncodingRun
-
-// TogglePB is a type alias for the raw TogglePB value-type struct.
-type TogglePB = raw.TogglePB
-
-// TokenBlock is a type alias for the raw TokenBlock value-type struct.
-type TokenBlock = raw.TokenBlock
-
-// TokenRec is a type alias for the raw TokenRec value-type struct.
-type TokenRec = raw.TokenRec
-
-// UCKeyLayoutFeatureInfo is a type alias for the raw UCKeyLayoutFeatureInfo value-type struct.
-type UCKeyLayoutFeatureInfo = raw.UCKeyLayoutFeatureInfo
-
-// UCKeyModifiersToTableNum is a type alias for the raw UCKeyModifiersToTableNum value-type struct.
-type UCKeyModifiersToTableNum = raw.UCKeyModifiersToTableNum
-
-// UCKeySequenceDataIndex is a type alias for the raw UCKeySequenceDataIndex value-type struct.
-type UCKeySequenceDataIndex = raw.UCKeySequenceDataIndex
-
-// UCKeyStateEntryRange is a type alias for the raw UCKeyStateEntryRange value-type struct.
-type UCKeyStateEntryRange = raw.UCKeyStateEntryRange
-
-// UCKeyStateEntryTerminal is a type alias for the raw UCKeyStateEntryTerminal value-type struct.
-type UCKeyStateEntryTerminal = raw.UCKeyStateEntryTerminal
-
-// UCKeyStateRecord is a type alias for the raw UCKeyStateRecord value-type struct.
-type UCKeyStateRecord = raw.UCKeyStateRecord
-
-// UCKeyStateRecordsIndex is a type alias for the raw UCKeyStateRecordsIndex value-type struct.
-type UCKeyStateRecordsIndex = raw.UCKeyStateRecordsIndex
-
-// UCKeyStateTerminators is a type alias for the raw UCKeyStateTerminators value-type struct.
-type UCKeyStateTerminators = raw.UCKeyStateTerminators
-
-// UCKeyToCharTableIndex is a type alias for the raw UCKeyToCharTableIndex value-type struct.
-type UCKeyToCharTableIndex = raw.UCKeyToCharTableIndex
-
-// UCKeyboardLayout is a type alias for the raw UCKeyboardLayout value-type struct.
-type UCKeyboardLayout = raw.UCKeyboardLayout
-
-// UCKeyboardTypeHeader is a type alias for the raw UCKeyboardTypeHeader value-type struct.
-type UCKeyboardTypeHeader = raw.UCKeyboardTypeHeader
-
-// UTCDateTime is a type alias for the raw UTCDateTime value-type struct.
-type UTCDateTime = raw.UTCDateTime
-
-// UnicodeMapping is a type alias for the raw UnicodeMapping value-type struct.
-type UnicodeMapping = raw.UnicodeMapping
-
-// UntokenTable is a type alias for the raw UntokenTable value-type struct.
-type UntokenTable = raw.UntokenTable
-
-// VectorInformation is a type alias for the raw VectorInformation value-type struct.
-type VectorInformation = raw.VectorInformation
-
-// VectorInformationPowerPC is a type alias for the raw VectorInformationPowerPC value-type struct.
-type VectorInformationPowerPC = raw.VectorInformationPowerPC
-
-// VolMountInfoHeader is a type alias for the raw VolMountInfoHeader value-type struct.
-type VolMountInfoHeader = raw.VolMountInfoHeader
-
-// VolumeMountInfoHeader is a type alias for the raw VolumeMountInfoHeader value-type struct.
-type VolumeMountInfoHeader = raw.VolumeMountInfoHeader
-
-// WideCharArr is a type alias for the raw WideCharArr value-type struct.
-type WideCharArr = raw.WideCharArr
-
-// XLibContainerHeader is a type alias for the raw XLibContainerHeader value-type struct.
-type XLibContainerHeader = raw.XLibContainerHeader
-
-// XLibExportedSymbol is a type alias for the raw XLibExportedSymbol value-type struct.
-type XLibExportedSymbol = raw.XLibExportedSymbol
-
-// Decform is a type alias for the raw Decform value-type struct.
-type Decform = raw.Decform
-
-// Decimal is a type alias for the raw Decimal value-type struct.
-type Decimal = raw.Decimal
+type AIFFLoop struct {
+	PlayMode  int16
+	BeginLoop int16
+	EndLoop   int16
+}
+
+type BigEndianFixed struct {
+	BigEndianValue int
+}
+
+type BigEndianLong struct {
+	BigEndianValue int
+}
+
+type BigEndianOSType struct {
+	BigEndianValue uint
+}
+
+type BigEndianShort struct {
+	BigEndianValue int16
+}
+
+type BigEndianUInt32 struct {
+	BigEndianValue uint
+}
+
+type BigEndianUnsignedFixed struct {
+	BigEndianValue uint
+}
+
+type BigEndianUnsignedLong struct {
+	BigEndianValue uint
+}
+
+type BigEndianUnsignedShort struct {
+	BigEndianValue uint16
+}
+
+type ChunkHeader struct {
+	CkID   uint
+	CkSize int
+}
+
+type ComponentAliasResource struct {
+	Cr      ComponentResource
+	AliasCD ComponentDescription
+}
+
+type ComponentDescription struct {
+	ComponentType         uint
+	ComponentSubType      uint
+	ComponentManufacturer uint
+	ComponentFlags        uint
+	ComponentFlagsMask    uint
+}
+
+type ComponentMPWorkFunctionHeaderRecord struct {
+	HeaderSize     uint
+	RecordSize     uint
+	WorkFlags      uint
+	ProcessorCount uint16
+	Unused         uint8
+	IsRunning      uint8
+}
+
+type ComponentPlatformInfo struct {
+	ComponentFlags int
+	Component      ResourceSpec
+	PlatformType   int16
+}
+
+type ComponentResource struct {
+	Cd            ComponentDescription
+	Component     ResourceSpec
+	ComponentName ResourceSpec
+	ComponentInfo ResourceSpec
+	ComponentIcon ResourceSpec
+}
+
+type ComponentResourceExtension struct {
+	ComponentVersion       int
+	ComponentRegisterFlags int
+	ComponentIconFamily    int16
+}
+
+type ContainerChunk struct {
+	CkID     uint
+	CkSize   int
+	FormType uint
+}
+
+type CustomBadgeResource struct {
+	Version               int16
+	CustomBadgeResourceID int16
+	CustomBadgeType       uint
+	CustomBadgeCreator    uint
+	WindowBadgeType       uint
+	WindowBadgeCreator    uint
+	OverrideType          uint
+	OverrideCreator       uint
+}
+
+type DateTimeRec struct {
+	Year      int16
+	Month     int16
+	Day       int16
+	Hour      int16
+	Minute    int16
+	Second    int16
+	DayOfWeek int16
+}
+
+type Decform struct {
+	Style  int8
+	Unused int8
+	Digits int16
+}
+
+type FSAliasInfo struct {
+	VolumeCreateDate           UTCDateTime
+	TargetCreateDate           UTCDateTime
+	FileType                   uint
+	FileCreator                uint
+	ParentDirID                uint
+	NodeID                     uint
+	FilesystemID               uint16
+	Signature                  uint16
+	VolumeIsBootVolume         uint8
+	VolumeIsAutomounted        uint8
+	VolumeIsEjectable          uint8
+	VolumeHasPersistentFileIDs uint8
+	IsDirectory                uint8
+}
+
+type FSForkInfo struct {
+	Flags           uint8
+	Permissions     int8
+	Volume          int16
+	Reserved2       uint
+	NodeID          uint
+	ForkID          uint
+	CurrentPosition uint64
+	LogicalEOF      uint64
+	PhysicalEOF     uint64
+	Process         uint64
+}
+
+type FVector struct {
+	Start  int16
+	Length int16
+}
+
+type FolderRouting struct {
+	DescSize        int
+	FileType        uint
+	RouteFromFolder uint
+	RouteToFolder   uint
+	Flags           uint
+}
+
+type FormatVersionChunk struct {
+	CkID      uint
+	CkSize    int
+	Timestamp uint
+}
+
+type InstrumentChunk struct {
+	CkID          uint
+	CkSize        int
+	BaseFrequency uint8
+	Detune        uint8
+	LowFrequency  uint8
+	HighFrequency uint8
+	LowVelocity   uint8
+	HighVelocity  uint8
+	Gain          int16
+	SustainLoop   AIFFLoop
+	ReleaseLoop   AIFFLoop
+}
+
+type Itl4Rec struct {
+	Flags          int16
+	ResourceType   int
+	ResourceNum    int16
+	Version        int16
+	ResHeader1     int
+	ResHeader2     int
+	NumTables      int16
+	MapOffset      int
+	StrOffset      int
+	FetchOffset    int
+	UnTokenOffset  int
+	DefPartsOffset int
+	ResOffset6     int
+	ResOffset7     int
+	ResOffset8     int
+}
+
+type ItlbExtRecord struct {
+	Base            ItlbRecord
+	ItlbLocalSize   int
+	ItlbMonoFond    int16
+	ItlbMonoSize    int16
+	ItlbPrefFond    int16
+	ItlbPrefSize    int16
+	ItlbSmallFond   int16
+	ItlbSmallSize   int16
+	ItlbSysFond     int16
+	ItlbSysSize     int16
+	ItlbAppFond     int16
+	ItlbAppSize     int16
+	ItlbHelpFond    int16
+	ItlbHelpSize    int16
+	ItlbValidStyles uint8
+	ItlbAliasStyle  uint8
+}
+
+type ItlbRecord struct {
+	ItlbNumber   int16
+	ItlbDate     int16
+	ItlbSort     int16
+	ItlbFlags    int16
+	ItlbToken    int16
+	ItlbEncoding int16
+	ItlbLang     int16
+	ItlbNumRep   int8
+	ItlbDateRep  int8
+	ItlbKeys     int16
+	ItlbIcon     int16
+}
+
+type LocalDateTime struct {
+	HighSeconds uint16
+	LowSeconds  uint
+	Fraction    uint16
+}
+
+type MixedModeStateRecord struct {
+	State1 uint
+	State2 uint
+	State3 uint
+	State4 uint
+}
+
+type NItl4Rec struct {
+	Flags           int16
+	ResourceType    int
+	ResourceNum     int16
+	Version         int16
+	Format          int16
+	ResHeader       int16
+	ResHeader2      int
+	NumTables       int16
+	MapOffset       int
+	StrOffset       int
+	FetchOffset     int
+	UnTokenOffset   int
+	DefPartsOffset  int
+	WhtSpListOffset int
+	ResOffset7      int
+	ResOffset8      int
+	ResLength1      int16
+	ResLength2      int16
+	ResLength3      int16
+	UnTokenLength   int16
+	DefPartsLength  int16
+	WhtSpListLength int16
+	ResLength7      int16
+	ResLength8      int16
+}
+
+type OffPair struct {
+	OffFirst  int16
+	OffSecond int16
+}
+
+type PEFContainerHeader struct {
+	Tag1             uint
+	Tag2             uint
+	Architecture     uint
+	FormatVersion    uint
+	DateTimeStamp    uint
+	OldDefVersion    uint
+	OldImpVersion    uint
+	CurrentVersion   uint
+	SectionCount     uint16
+	InstSectionCount uint16
+	ReservedA        uint
+}
+
+type PEFExportedSymbol struct {
+	ClassAndName uint
+	SymbolValue  uint
+	SectionIndex int16
+}
+
+type PEFExportedSymbolHashSlot struct {
+	CountAndStart uint
+}
+
+type PEFImportedLibrary struct {
+	NameOffset          uint
+	OldImpVersion       uint
+	CurrentVersion      uint
+	ImportedSymbolCount uint
+	FirstImportedSymbol uint
+	Options             uint8
+	ReservedA           uint8
+	ReservedB           uint16
+}
+
+type PEFImportedSymbol struct {
+	ClassAndName uint
+}
+
+type PEFLoaderInfoHeader struct {
+	MainSection              int
+	MainOffset               uint
+	InitSection              int
+	InitOffset               uint
+	TermSection              int
+	TermOffset               uint
+	ImportedLibraryCount     uint
+	TotalImportedSymbolCount uint
+	RelocSectionCount        uint
+	RelocInstrOffset         uint
+	LoaderStringsOffset      uint
+	ExportHashOffset         uint
+	ExportHashTablePower     uint
+	ExportedSymbolCount      uint
+}
+
+type PEFLoaderRelocationHeader struct {
+	SectionIndex     uint16
+	ReservedA        uint16
+	RelocCount       uint
+	FirstRelocOffset uint
+}
+
+type PEFSectionHeader struct {
+	NameOffset      int
+	DefaultAddress  uint
+	TotalLength     uint
+	UnpackedLength  uint
+	ContainerLength uint
+	ContainerOffset uint
+	SectionKind     uint8
+	ShareKind       uint8
+	Alignment       uint8
+	ReservedA       uint8
+}
+
+type PEFSplitHashWord struct {
+	NameLength uint16
+	HashValue  uint16
+}
+
+type ResourceSpec struct {
+	ResType uint
+	ResID   int16
+}
+
+type RoutingResourceEntry struct {
+	Creator           uint
+	FileType          uint
+	TargetFolder      uint
+	DestinationFolder uint
+	ReservedField     uint
+}
+
+type RuleBasedTrslRecord struct {
+	SourceType    int16
+	TargetType    int16
+	FormatNumber  int16
+	PropertyFlag  int16
+	NumberOfRules int16
+}
+
+type SchedulerInfoRec struct {
+	InfoRecSize             uint
+	CurrentThreadID         uint
+	SuggestedThreadID       uint
+	InterruptedCoopThreadID uint
+}
+
+type ScriptCodeRun struct {
+	Offset uint
+	Script int16
+}
+
+type SoundDataChunk struct {
+	CkID      uint
+	CkSize    int
+	Offset    uint
+	BlockSize uint
+}
+
+type TECConversionInfo struct {
+	SourceEncoding      uint
+	DestinationEncoding uint
+	Reserved1           uint16
+	Reserved2           uint16
+}
+
+type TECEncodingPairRec struct {
+	Source TextEncodingRec
+	Dest   TextEncodingRec
+}
+
+type TECEncodingPairs struct {
+	EncodingPair TECEncodingPairRec
+	Flags        uint
+	Speed        uint
+}
+
+type TECEncodingPairsRec struct {
+	Count         uint
+	EncodingPairs TECEncodingPairs
+}
+
+type TECEncodingsListRec struct {
+	Count     uint
+	Encodings TextEncodingRec
+}
+
+type TECLocaleListToEncodingListRec struct {
+	Offset  uint
+	Count   uint
+	Locales int16
+}
+
+type TECLocaleToEncodingsListRec struct {
+	Count                    uint
+	LocaleListToEncodingList TECLocaleListToEncodingListRec
+}
+
+type TECPluginStateRec struct {
+	State1     uint8
+	State2     uint8
+	State3     uint8
+	State4     uint8
+	LongState1 uint
+	LongState2 uint
+	LongState3 uint
+	LongState4 uint
+}
+
+type TECSubTextEncodingRec struct {
+	Offset         uint
+	SearchEncoding TextEncodingRec
+	Count          uint
+	SubEncodings   TextEncodingRec
+}
+
+type TECSubTextEncodingsRec struct {
+	Count              uint
+	SubTextEncodingRec TECSubTextEncodingRec
+}
+
+type TableDirectoryRecord struct {
+	TableSignature   uint
+	Reserved         uint
+	TableStartOffset uint
+	TableSize        uint
+}
+
+type TextEncodingRec struct {
+	Base    uint
+	Variant uint
+	Format  uint
+}
+
+type TextEncodingRun struct {
+	Offset       uint
+	TextEncoding uint
+}
+
+type UCKeyLayoutFeatureInfo struct {
+	KeyLayoutFeatureInfoFormat uint16
+	Reserved                   uint16
+	MaxOutputStringLength      uint
+}
+
+type UCKeyStateEntryRange struct {
+	CurStateStart   uint16
+	CurStateRange   uint8
+	DeltaMultiplier uint8
+	CharData        uint16
+	NextState       uint16
+}
+
+type UCKeyStateEntryTerminal struct {
+	CurState uint16
+	CharData uint16
+}
+
+type UCKeyboardTypeHeader struct {
+	KeyboardTypeFirst            uint
+	KeyboardTypeLast             uint
+	KeyModifiersToTableNumOffset uint
+	KeyToCharTableIndexOffset    uint
+	KeyStateRecordsIndexOffset   uint
+	KeyStateTerminatorsOffset    uint
+	KeySequenceDataIndexOffset   uint
+}
+
+type UTCDateTime struct {
+	HighSeconds uint16
+	LowSeconds  uint
+	Fraction    uint16
+}
+
+type UnicodeMapping struct {
+	UnicodeEncoding uint
+	OtherEncoding   uint
+	MappingVersion  int
+}
+
+type VolMountInfoHeader struct {
+	Length int16
+	Media  uint
+}
+
+type VolumeMountInfoHeader struct {
+	Length int16
+	Media  uint
+	Flags  int16
+}
+
+type XLibContainerHeader struct {
+	Tag1                   uint
+	Tag2                   uint
+	CurrentFormat          uint
+	ContainerStringsOffset uint
+	ExportHashOffset       uint
+	ExportKeyOffset        uint
+	ExportSymbolOffset     uint
+	ExportNamesOffset      uint
+	ExportHashTablePower   uint
+	ExportedSymbolCount    uint
+	FragNameOffset         uint
+	FragNameLength         uint
+	DylibPathOffset        uint
+	DylibPathLength        uint
+	CpuFamily              uint
+	CpuModel               uint
+	DateTimeStamp          uint
+	CurrentVersion         uint
+	OldDefVersion          uint
+	OldImpVersion          uint
+}
+
+type XLibExportedSymbol struct {
+	ClassAndName uint
+	BpOffset     uint
+}

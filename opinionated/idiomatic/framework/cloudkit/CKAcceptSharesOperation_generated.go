@@ -6,200 +6,140 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An operation that confirms a user’s participation in a share.
+// AcceptSharesOperation is an idiomatic wrapper over the Objective-C class CKAcceptSharesOperation.
 //
-// AcceptSharesOperation wraps [raw.CKAcceptSharesOperation] with a fluent Go API.
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that confirms a user’s participation in a share.
 type AcceptSharesOperation struct {
-	inner *raw.CKAcceptSharesOperation
+	Operation
 }
 
-// Unwrap returns the underlying [raw.CKAcceptSharesOperation].
-func (x *AcceptSharesOperation) Unwrap() *raw.CKAcceptSharesOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AcceptSharesOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// AcceptSharesOperationFromID adopts an existing object pointer as a AcceptSharesOperation (nil for 0).
+// AcceptSharesOperationFromID adopts an existing Objective-C object as a AcceptSharesOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func AcceptSharesOperationFromID(id objc.ID) *AcceptSharesOperation {
 	if id == 0 {
 		return nil
 	}
-	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(id)}
+	x := &AcceptSharesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAcceptSharesOperation creates a new [AcceptSharesOperation].
+// acceptSharesOperationAdopt wraps an Objective-C object that this code just created as a
+// AcceptSharesOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func acceptSharesOperationAdopt(id objc.ID) *AcceptSharesOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &AcceptSharesOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAcceptSharesOperation creates a new AcceptSharesOperation.
 func NewAcceptSharesOperation() *AcceptSharesOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKAcceptSharesOperation")), objc.RegisterName("new"))
-	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKAcceptSharesOperation")), objc.RegisterName("new"))
+	return acceptSharesOperationAdopt(_id)
 }
 
-// Creates an operation for accepting the specified shares.
-//
-// NewAcceptSharesOperationWithShareMetadatas creates a new [AcceptSharesOperation].
-func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata]) *AcceptSharesOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKAcceptSharesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareMetadatas:"), shareMetadatas.Ptr())
-	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(_id)}
+// NewAcceptSharesOperationWithShareMetadatas creates an operation for accepting the specified shares.
+func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas []*ShareMetadata) *AcceptSharesOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKAcceptSharesOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareMetadatas:"), purego.SliceToNSArray(shareMetadatas, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) }))
+	return acceptSharesOperationAdopt(_id)
 }
 
-// The share metadatas to process.
-//
-// WithShareMetadatas sets the collection, converting the Go slice to an NSArray.
-func (x *AcceptSharesOperation) WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShareMetadatas(foundation.NSArrayFromID[*raw.CKShareMetadata](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKShareMetadata](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShareMetadatas(_arr)
+// WithShareMetadatas the share metadatas to process.
+func (x *AcceptSharesOperation) WithShareMetadatas(items ...*ShareMetadata) *AcceptSharesOperation {
+	_arr := purego.SliceToNSArray(items, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareMetadatas:"), _arr)
 	return x
 }
 
-// The block to execute as CloudKit processes individual shares.
-//
-// WithPerShareCompletionBlock sets the perShareCompletionBlock property and returns the receiver for chaining.
-func (x *AcceptSharesOperation) WithPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) *AcceptSharesOperation {
-	x.inner.SetPerShareCompletionBlock(perShareCompletionBlock)
-	return x
-}
-
-// The closure to execute when the operation finishes.
-//
-// WithAcceptSharesCompletionBlock sets the acceptSharesCompletionBlock property and returns the receiver for chaining.
-func (x *AcceptSharesOperation) WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation {
-	x.inner.SetAcceptSharesCompletionBlock(acceptSharesCompletionBlock)
-	return x
-}
-
-// The operation’s configuration.
-//
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration the operation’s configuration.
 func (x *AcceptSharesOperation) WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation {
-	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup the operation’s group.
 func (x *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOperation {
-	x.inner.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *AcceptSharesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *AcceptSharesOperation {
-	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
-//
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer the operation's container.
 func (x *AcceptSharesOperation) WithContainer(container *Container) *AcceptSharesOperation {
-	x.inner.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
-//
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *AcceptSharesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *AcceptSharesOperation {
-	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *AcceptSharesOperation) WithLongLived(longLived bool) *AcceptSharesOperation {
-	x.inner.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
-//
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *AcceptSharesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *AcceptSharesOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
-//
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *AcceptSharesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *AcceptSharesOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+// ShareMetadatas the share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
 //
 // ShareMetadatas returns the collection as a Go slice.
 func (x *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
-	arr := x.inner.ShareMetadatas()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareMetadata {
-		return &ShareMetadata{inner: raw.CKShareMetadataFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shareMetadatas"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareMetadata { return ShareMetadataFromID(_id) })
 }
 
-// SetShareMetadatas calls the underlying SetShareMetadatas.
-func (x *AcceptSharesOperation) SetShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata]) {
-	x.inner.SetShareMetadatas(shareMetadatas)
+// SetShareMetadatas wraps the corresponding Objective-C method.
+func (x *AcceptSharesOperation) SetShareMetadatas(shareMetadatas []*ShareMetadata) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareMetadatas:"), purego.SliceToNSArray(shareMetadatas, func(_v *ShareMetadata) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The block to execute as CloudKit processes individual shares. The closure returns no value and takes the following parameters: - The share metadata to process. - The share, or `nil` if CloudKit can't process the share metadata. - If CloudKit can't process the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each element in the “CKAcceptSharesOperation/shareMetadatas“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// SetAcceptSharesCompletionBlock wraps the corresponding Objective-C method.
 //
-// PerShareCompletionBlock calls the underlying PerShareCompletionBlock.
-func (x *AcceptSharesOperation) PerShareCompletionBlock() objc.Block {
-	return x.inner.PerShareCompletionBlock()
-}
-
-// SetPerShareCompletionBlock calls the underlying SetPerShareCompletionBlock.
-func (x *AcceptSharesOperation) SetPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) {
-	x.inner.SetPerShareCompletionBlock(perShareCompletionBlock)
-}
-
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully processes the shares. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't process some of the shares. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are share URLs that CloudKit can't process, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
-//
-// AcceptSharesCompletionBlock calls the underlying AcceptSharesCompletionBlock.
-func (x *AcceptSharesOperation) AcceptSharesCompletionBlock() objc.Block {
-	return x.inner.AcceptSharesCompletionBlock()
-}
-
 // SetAcceptSharesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetAcceptSharesCompletionBlock(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptSharesCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -208,14 +148,10 @@ func (x *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Conte
 	}
 }
 
-func (x *AcceptSharesOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
-
 // AcceptSharesOperationable is the interface implemented by [AcceptSharesOperation], for mocking and DI.
 type AcceptSharesOperationable interface {
-	Unwrap() *raw.CKAcceptSharesOperation
-	WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation
-	WithPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) *AcceptSharesOperation
-	WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation
+	obj.Object
+	WithShareMetadatas(items ...*ShareMetadata) *AcceptSharesOperation
 	WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation
 	WithGroup(group *OperationGroup) *AcceptSharesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *AcceptSharesOperation
@@ -225,11 +161,10 @@ type AcceptSharesOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *AcceptSharesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *AcceptSharesOperation
 	ShareMetadatas() []*ShareMetadata
-	SetShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata])
-	PerShareCompletionBlock() objc.Block
-	SetPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer))
-	AcceptSharesCompletionBlock() objc.Block
+	SetShareMetadatas(shareMetadatas []*ShareMetadata)
 	SetAcceptSharesCompletionBlock(ctx context.Context) error
 }
 
 var _ AcceptSharesOperationable = (*AcceptSharesOperation)(nil)
+
+var _ OperationProvider = (*AcceptSharesOperation)(nil)

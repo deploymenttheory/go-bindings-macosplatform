@@ -5,118 +5,136 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterDescriptor wraps [raw.MTRClusterDescriptor] with a fluent Go API.
+// MTRClusterDescriptor is an idiomatic wrapper over the Objective-C class MTRClusterDescriptor.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterDescriptor struct {
-	inner *raw.MTRClusterDescriptor
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterDescriptor].
-func (x *MTRClusterDescriptor) Unwrap() *raw.MTRClusterDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterDescriptorFromID adopts an existing object pointer as a MTRClusterDescriptor (nil for 0).
+// MTRClusterDescriptorFromID adopts an existing Objective-C object as a MTRClusterDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterDescriptorFromID(id objc.ID) *MTRClusterDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterDescriptor{inner: raw.MTRClusterDescriptorFromID(id)}
+	x := &MTRClusterDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterDescriptorWithDeviceEndpointIDQueue creates a new [MTRClusterDescriptor].
-func NewMTRClusterDescriptorWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterDescriptor{inner: raw.MTRClusterDescriptorFromID(_id)}
+// mTRClusterDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterDescriptorAdopt(id objc.ID) *MTRClusterDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterDescriptorWithDeviceEndpointQueue creates a new [MTRClusterDescriptor].
-func NewMTRClusterDescriptorWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterDescriptor{inner: raw.MTRClusterDescriptorFromID(_id)}
+// NewMTRClusterDescriptorWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterDescriptorWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterDescriptorAdopt(_id)
 }
 
-// ReadAttributeDeviceTypeListWithParams calls the underlying ReadAttributeDeviceTypeListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeDeviceTypeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDeviceTypeListWithParams(params)
+// NewMTRClusterDescriptorWithDeviceEndpointQueue creates a new MTRClusterDescriptor.
+func NewMTRClusterDescriptorWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterDescriptorAdopt(_id)
 }
 
-// ReadAttributeServerListWithParams calls the underlying ReadAttributeServerListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeServerListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeServerListWithParams(params)
+// ReadAttributeDeviceTypeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeDeviceTypeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDeviceTypeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClientListWithParams calls the underlying ReadAttributeClientListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeClientListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClientListWithParams(params)
+// ReadAttributeServerListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeServerListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeServerListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePartsListWithParams calls the underlying ReadAttributePartsListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributePartsListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePartsListWithParams(params)
+// ReadAttributeClientListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeClientListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClientListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributePartsListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributePartsListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartsListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDeviceListWithParams calls the underlying ReadAttributeDeviceListWithParams.
-func (x *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDeviceListWithParams(params)
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterDescriptor) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterDescriptor) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeDeviceListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDeviceListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterDescriptorable is the interface implemented by [MTRClusterDescriptor], for mocking and DI.
 type MTRClusterDescriptorable interface {
-	Unwrap() *raw.MTRClusterDescriptor
-	ReadAttributeDeviceTypeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeServerListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClientListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePartsListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDeviceListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeDeviceTypeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeServerListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClientListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePartsListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDeviceListWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterDescriptorable = (*MTRClusterDescriptor)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterDescriptor)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterDescriptor)(nil)

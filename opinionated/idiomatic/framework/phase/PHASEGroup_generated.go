@@ -5,173 +5,178 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that shares audio parameters with a collection of sounds.
+// Group is an idiomatic wrapper over the Objective-C class PHASEGroup.
 //
-// Group wraps [raw.PHASEGroup] with a fluent Go API.
+// A container that shares audio parameters with a collection of sounds.
 type Group struct {
-	inner *raw.PHASEGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEGroup].
-func (x *Group) Unwrap() *raw.PHASEGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Group) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupFromID adopts an existing object pointer as a Group (nil for 0).
+// GroupFromID adopts an existing Objective-C object as a Group
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupFromID(id objc.ID) *Group {
 	if id == 0 {
 		return nil
 	}
-	return &Group{inner: raw.PHASEGroupFromID(id)}
+	x := &Group{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a group with a unique name.
-//
-// NewGroupWithIdentifier creates a new [Group].
+// groupAdopt wraps an Objective-C object that this code just created as a
+// Group (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupAdopt(id objc.ID) *Group {
+	if id == 0 {
+		return nil
+	}
+	x := &Group{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Group) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Group) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Group) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Group) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGroupWithIdentifier creates a group with a unique name.
 func NewGroupWithIdentifier(identifier string) *Group {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &Group{inner: raw.PHASEGroupFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
+	return groupAdopt(_id)
 }
 
-// Modifies the volume of the group’s sounds.
-//
-// WithGain sets the gain property and returns the receiver for chaining.
+// WithGain modifies the volume of the group’s sounds.
 func (x *Group) WithGain(gain float64) *Group {
-	x.inner.SetGain(gain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
-// The group’s playback speed.
-//
-// WithRate sets the rate property and returns the receiver for chaining.
+// WithRate the group’s playback speed.
 func (x *Group) WithRate(rate float64) *Group {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// Adds the group to the engine’s dictionary.
-//
-// RegisterWithEngine calls the underlying RegisterWithEngine.
-func (x *Group) RegisterWithEngine(engine *raw.PHASEEngine) {
-	x.inner.RegisterWithEngine(engine)
+// RegisterWithEngine adds the group to the engine’s dictionary.
+func (x *Group) RegisterWithEngine(engine *Engine) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerWithEngine:"), objref.IDOf(engine))
 }
 
-// Removes the group from the engine’s dictionary.
-//
-// UnregisterFromEngine calls the underlying UnregisterFromEngine.
+// UnregisterFromEngine removes the group from the engine’s dictionary.
 func (x *Group) UnregisterFromEngine() {
-	x.inner.UnregisterFromEngine()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterFromEngine"))
 }
 
-// Adjusts the volume of the sounds in a group gradually.
-//
-// FadeGainDurationCurveType calls the underlying FadeGainDurationCurveType.
-func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType) {
-	x.inner.FadeGainDurationCurveType(gain, duration, raw.PHASECurveType(curveType))
+// FadeGainDurationCurveType adjusts the volume of the sounds in a group gradually.
+func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType CurveType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeGain:duration:curveType:"), gain, duration, curveType)
 }
 
-// Adjusts the playback speed of the sounds in a group gradually.
-//
-// FadeRateDurationCurveType calls the underlying FadeRateDurationCurveType.
-func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType) {
-	x.inner.FadeRateDurationCurveType(rate, duration, raw.PHASECurveType(curveType))
+// FadeRateDurationCurveType adjusts the playback speed of the sounds in a group gradually.
+func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType CurveType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeRate:duration:curveType:"), rate, duration, curveType)
 }
 
-// Silences the group.
-//
-// Mute calls the underlying Mute.
+// Mute silences the group.
 func (x *Group) Mute() {
-	x.inner.Mute()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mute"))
 }
 
-// Restores the group’s volume.
-//
-// Unmute calls the underlying Unmute.
+// Unmute restores the group’s volume.
 func (x *Group) Unmute() {
-	x.inner.Unmute()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmute"))
 }
 
-// Silences all other groups.
-//
-// Solo calls the underlying Solo.
+// Solo silences all other groups.
 func (x *Group) Solo() {
-	x.inner.Solo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("solo"))
 }
 
-// Restores the other groups’ volume.
-//
-// Unsolo calls the underlying Unsolo.
+// Unsolo restores the other groups’ volume.
 func (x *Group) Unsolo() {
-	x.inner.Unsolo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unsolo"))
 }
 
-// @property identifier @abstract The identifier that uniquely represents this group.
-//
-// Identifier calls the underlying Identifier.
+// Identifier the identifier that uniquely represents this group.
 func (x *Group) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
-//
-// Gain calls the underlying Gain.
+// Gain linear gain scalar.
 func (x *Group) Gain() float64 {
-	return x.inner.Gain()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+	return _r
 }
 
-// SetGain calls the underlying SetGain.
+// SetGain wraps the corresponding Objective-C method.
 func (x *Group) SetGain(gain float64) {
-	x.inner.SetGain(gain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 }
 
-// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
-//
-// Rate calls the underlying Rate.
+// Rate linear rate scalar.
 func (x *Group) Rate() float64 {
-	return x.inner.Rate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// SetRate calls the underlying SetRate.
+// SetRate wraps the corresponding Objective-C method.
 func (x *Group) SetRate(rate float64) {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
-// @property muted @abstract Whether or not this group is muted.
-//
-// IsMuted calls the underlying IsMuted.
+// IsMuted whether or not this group is muted.
 func (x *Group) IsMuted() bool {
-	return x.inner.IsMuted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
+	return _r
 }
 
-// @property soloed @abstract Whether or not this group is soloed.
-//
-// IsSoloed calls the underlying IsSoloed.
+// IsSoloed whether or not this group is soloed.
 func (x *Group) IsSoloed() bool {
-	return x.inner.IsSoloed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSoloed"))
+	return _r
 }
 
 // Groupable is the interface implemented by [Group], for mocking and DI.
 type Groupable interface {
-	Unwrap() *raw.PHASEGroup
+	obj.Object
 	WithGain(gain float64) *Group
 	WithRate(rate float64) *Group
-	RegisterWithEngine(engine *raw.PHASEEngine)
+	RegisterWithEngine(engine *Engine)
 	UnregisterFromEngine()
-	FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType)
-	FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType)
+	FadeGainDurationCurveType(gain float64, duration float64, curveType CurveType)
+	FadeRateDurationCurveType(rate float64, duration float64, curveType CurveType)
 	Mute()
 	Unmute()
 	Solo()

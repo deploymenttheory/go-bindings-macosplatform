@@ -5,31 +5,16 @@
 package browserenginecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginecore"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// BeMemoryInlineJitRestrictRwxToRwWithWitness calls [raw.BeMemoryInlineJitRestrictRwxToRwWithWitness] (C function be_memory_inline_jit_restrict_rwx_to_rw_with_witness).
-func BeMemoryInlineJitRestrictRwxToRwWithWitness() unsafe.Pointer {
-	return raw.BeMemoryInlineJitRestrictRwxToRwWithWitness()
-}
+var _fnBeMemoryInlineJitRestrictWithWitnessSupported func() int
 
-// BeMemoryInlineJitRestrictRwxToRwWithWitnessImpl calls [raw.BeMemoryInlineJitRestrictRwxToRwWithWitnessImpl] (C function be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl).
-func BeMemoryInlineJitRestrictRwxToRwWithWitnessImpl() unsafe.Pointer {
-	return raw.BeMemoryInlineJitRestrictRwxToRwWithWitnessImpl()
-}
-
-// BeMemoryInlineJitRestrictRwxToRxWithWitness calls [raw.BeMemoryInlineJitRestrictRwxToRxWithWitness] (C function be_memory_inline_jit_restrict_rwx_to_rx_with_witness).
-func BeMemoryInlineJitRestrictRwxToRxWithWitness() unsafe.Pointer {
-	return raw.BeMemoryInlineJitRestrictRwxToRxWithWitness()
-}
-
-// BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl calls [raw.BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl] (C function be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl).
-func BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl() unsafe.Pointer {
-	return raw.BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl()
-}
-
-// BeMemoryInlineJitRestrictWithWitnessSupported calls [raw.BeMemoryInlineJitRestrictWithWitnessSupported] (C function be_memory_inline_jit_restrict_with_witness_supported).
+// BeMemoryInlineJitRestrictWithWitnessSupported calls the BrowserEngineCore framework function be_memory_inline_jit_restrict_with_witness_supported.
 func BeMemoryInlineJitRestrictWithWitnessSupported() int {
-	return raw.BeMemoryInlineJitRestrictWithWitnessSupported()
+	_loadOnce.Do(_loadLibrary)
+	if _fnBeMemoryInlineJitRestrictWithWitnessSupported == nil {
+		ebipurego.RegisterLibFunc(&_fnBeMemoryInlineJitRestrictWithWitnessSupported, _lib, "be_memory_inline_jit_restrict_with_witness_supported")
+	}
+	return _fnBeMemoryInlineJitRestrictWithWitnessSupported()
 }

@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for concentration of mass.
+// UnitConcentrationMass is an idiomatic wrapper over the Objective-C class NSUnitConcentrationMass.
 //
-// UnitConcentrationMass wraps [raw.NSUnitConcentrationMass] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for concentration of mass.
 type UnitConcentrationMass struct {
-	inner *raw.NSUnitConcentrationMass
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitConcentrationMass].
-func (x *UnitConcentrationMass) Unwrap() *raw.NSUnitConcentrationMass { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitConcentrationMass) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitConcentrationMassFromID adopts an existing object pointer as a UnitConcentrationMass (nil for 0).
+// UnitConcentrationMassFromID adopts an existing Objective-C object as a UnitConcentrationMass
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitConcentrationMassFromID(id objc.ID) *UnitConcentrationMass {
 	if id == 0 {
 		return nil
 	}
-	return &UnitConcentrationMass{inner: raw.NSUnitConcentrationMassFromID(id)}
-}
-
-// NewUnitConcentrationMass creates a new [UnitConcentrationMass].
-func NewUnitConcentrationMass() *UnitConcentrationMass {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitConcentrationMass")), objc.RegisterName("new"))
-	return &UnitConcentrationMass{inner: raw.NSUnitConcentrationMassFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitConcentrationMass) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConcentrationMass {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitConcentrationMass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitConcentrationMass) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitConcentrationMassAdopt wraps an Objective-C object that this code just created as a
+// UnitConcentrationMass (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitConcentrationMassAdopt(id objc.ID) *UnitConcentrationMass {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitConcentrationMass{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitConcentrationMass) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitConcentrationMass creates a new UnitConcentrationMass.
+func NewUnitConcentrationMass() *UnitConcentrationMass {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("new"))
+	return unitConcentrationMassAdopt(_id)
+}
 
-func (x *UnitConcentrationMass) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitConcentrationMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitConcentrationMassable is the interface implemented by [UnitConcentrationMass], for mocking and DI.
 type UnitConcentrationMassable interface {
-	Unwrap() *raw.NSUnitConcentrationMass
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConcentrationMass
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass
 }
 
 var _ UnitConcentrationMassable = (*UnitConcentrationMass)(nil)
+
+var _ DimensionProvider = (*UnitConcentrationMass)(nil)
+
+var _ UnitProvider = (*UnitConcentrationMass)(nil)

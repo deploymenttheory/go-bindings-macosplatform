@@ -5,174 +5,200 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains layout-related attributes for an element in a collection view.
+// CollectionViewLayoutAttributes is an idiomatic wrapper over the Objective-C class NSCollectionViewLayoutAttributes.
 //
-// CollectionViewLayoutAttributes wraps [raw.NSCollectionViewLayoutAttributes] with a fluent Go API.
+// An object that contains layout-related attributes for an element in a collection view.
 type CollectionViewLayoutAttributes struct {
-	inner *raw.NSCollectionViewLayoutAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewLayoutAttributes].
-func (x *CollectionViewLayoutAttributes) Unwrap() *raw.NSCollectionViewLayoutAttributes {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewLayoutAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewLayoutAttributesFromID adopts an existing object pointer as a CollectionViewLayoutAttributes (nil for 0).
+// CollectionViewLayoutAttributesFromID adopts an existing Objective-C object as a CollectionViewLayoutAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewLayoutAttributesFromID(id objc.ID) *CollectionViewLayoutAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewLayoutAttributes{inner: raw.NSCollectionViewLayoutAttributesFromID(id)}
+	x := &CollectionViewLayoutAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionViewLayoutAttributes creates a new [CollectionViewLayoutAttributes].
+// collectionViewLayoutAttributesAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewLayoutAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewLayoutAttributesAdopt(id objc.ID) *CollectionViewLayoutAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewLayoutAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionViewLayoutAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewLayoutAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewLayoutAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionViewLayoutAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollectionViewLayoutAttributes creates a new CollectionViewLayoutAttributes.
 func NewCollectionViewLayoutAttributes() *CollectionViewLayoutAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewLayoutAttributes")), objc.RegisterName("new"))
-	return &CollectionViewLayoutAttributes{inner: raw.NSCollectionViewLayoutAttributesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("new"))
+	return collectionViewLayoutAttributesAdopt(_id)
 }
 
-// The frame rectangle of the element.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the frame rectangle of the element.
 func (x *CollectionViewLayoutAttributes) WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes {
-	x.inner.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// The size of the element.
-//
-// WithSize sets the size property and returns the receiver for chaining.
+// WithSize the size of the element.
 func (x *CollectionViewLayoutAttributes) WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes {
-	x.inner.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// The transparency of the element.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the transparency of the element.
 func (x *CollectionViewLayoutAttributes) WithAlpha(alpha float64) *CollectionViewLayoutAttributes {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The element’s position on the z axis.
-//
-// WithZIndex sets the zIndex property and returns the receiver for chaining.
+// WithZIndex the element’s position on the z axis.
 func (x *CollectionViewLayoutAttributes) WithZIndex(zIndex int) *CollectionViewLayoutAttributes {
-	x.inner.SetZIndex(zIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 	return x
 }
 
-// A Boolean value indicating whether the element is hidden.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether the element is hidden.
 func (x *CollectionViewLayoutAttributes) WithHidden(hidden bool) *CollectionViewLayoutAttributes {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The index path of the element.
-//
-// WithIndexPath sets the indexPath property and returns the receiver for chaining.
-func (x *CollectionViewLayoutAttributes) WithIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes {
-	x.inner.SetIndexPath(indexPath)
+// WithIndexPath the index path of the element.
+func (x *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
 	return x
 }
 
-// Frame calls the underlying Frame.
+// Frame wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
 }
 
-// SetFrame calls the underlying SetFrame.
+// SetFrame wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) SetFrame(frame corefoundation.CGRect) {
-	x.inner.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 }
 
-// Size calls the underlying Size.
+// Size wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
-	return x.inner.Size()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
 
-// SetSize calls the underlying SetSize.
+// SetSize wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) SetSize(size corefoundation.CGSize) {
-	x.inner.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
-// Alpha calls the underlying Alpha.
+// Alpha wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) SetAlpha(alpha float64) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// ZIndex calls the underlying ZIndex.
+// ZIndex wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) ZIndex() int {
-	return x.inner.ZIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+	return _r
 }
 
-// SetZIndex calls the underlying SetZIndex.
+// SetZIndex wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) SetZIndex(zIndex int) {
-	x.inner.SetZIndex(zIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 }
 
-// IsHidden calls the underlying IsHidden.
+// IsHidden wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
+// SetHidden wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
-// IndexPath calls the underlying IndexPath.
-func (x *CollectionViewLayoutAttributes) IndexPath() *foundation.NSIndexPath {
-	return x.inner.IndexPath()
+// IndexPath wraps the corresponding Objective-C method.
+func (x *CollectionViewLayoutAttributes) IndexPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPath"))
+	return obj.Wrap(_r)
 }
 
-// SetIndexPath calls the underlying SetIndexPath.
-func (x *CollectionViewLayoutAttributes) SetIndexPath(indexPath *foundation.NSIndexPath) {
-	x.inner.SetIndexPath(indexPath)
+// SetIndexPath wraps the corresponding Objective-C method.
+func (x *CollectionViewLayoutAttributes) SetIndexPath(indexPath obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
 }
 
-// RepresentedElementCategory calls the underlying RepresentedElementCategory.
-func (x *CollectionViewLayoutAttributes) RepresentedElementCategory() NSCollectionElementCategory {
-	return NSCollectionElementCategory(x.inner.RepresentedElementCategory())
+// RepresentedElementCategory wraps the corresponding Objective-C method.
+func (x *CollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
+	_r := objc.Send[CollectionElementCategory](objref.IDOf(x), objc.RegisterName("representedElementCategory"))
+	return _r
 }
 
-// RepresentedElementKind calls the underlying RepresentedElementKind.
+// RepresentedElementKind wraps the corresponding Objective-C method.
 func (x *CollectionViewLayoutAttributes) RepresentedElementKind() string {
-	_r := x.inner.RepresentedElementKind()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedElementKind"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CollectionViewLayoutAttributesable is the interface implemented by [CollectionViewLayoutAttributes], for mocking and DI.
 type CollectionViewLayoutAttributesable interface {
-	Unwrap() *raw.NSCollectionViewLayoutAttributes
+	obj.Object
 	WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes
 	WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes
 	WithAlpha(alpha float64) *CollectionViewLayoutAttributes
 	WithZIndex(zIndex int) *CollectionViewLayoutAttributes
 	WithHidden(hidden bool) *CollectionViewLayoutAttributes
-	WithIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes
+	WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes
 	Frame() corefoundation.CGRect
 	SetFrame(frame corefoundation.CGRect)
 	Size() corefoundation.CGSize
@@ -183,9 +209,9 @@ type CollectionViewLayoutAttributesable interface {
 	SetZIndex(zIndex int)
 	IsHidden() bool
 	SetHidden(hidden bool)
-	IndexPath() *foundation.NSIndexPath
-	SetIndexPath(indexPath *foundation.NSIndexPath)
-	RepresentedElementCategory() NSCollectionElementCategory
+	IndexPath() obj.Object
+	SetIndexPath(indexPath obj.Object)
+	RepresentedElementCategory() CollectionElementCategory
 	RepresentedElementKind() string
 }
 

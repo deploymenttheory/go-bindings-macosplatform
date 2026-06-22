@@ -5,41 +5,76 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context object provided to the filter packet handler.
+// NEFilterPacketContext is an idiomatic wrapper over the Objective-C class NEFilterPacketContext.
 //
-// NEFilterPacketContext wraps [raw.NEFilterPacketContext] with a fluent Go API.
+// The context object provided to the filter packet handler.
 type NEFilterPacketContext struct {
-	inner *raw.NEFilterPacketContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEFilterPacketContext].
-func (x *NEFilterPacketContext) Unwrap() *raw.NEFilterPacketContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterPacketContext) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterPacketContextFromID adopts an existing object pointer as a NEFilterPacketContext (nil for 0).
+// NEFilterPacketContextFromID adopts an existing Objective-C object as a NEFilterPacketContext
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterPacketContextFromID(id objc.ID) *NEFilterPacketContext {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterPacketContext{inner: raw.NEFilterPacketContextFromID(id)}
+	x := &NEFilterPacketContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEFilterPacketContext creates a new [NEFilterPacketContext].
+// nEFilterPacketContextAdopt wraps an Objective-C object that this code just created as a
+// NEFilterPacketContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterPacketContextAdopt(id objc.ID) *NEFilterPacketContext {
+	if id == 0 {
+		return nil
+	}
+	x := &NEFilterPacketContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEFilterPacketContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEFilterPacketContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEFilterPacketContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterPacketContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEFilterPacketContext creates a new NEFilterPacketContext.
 func NewNEFilterPacketContext() *NEFilterPacketContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterPacketContext")), objc.RegisterName("new"))
-	return &NEFilterPacketContext{inner: raw.NEFilterPacketContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterPacketContext")), objc.RegisterName("new"))
+	return nEFilterPacketContextAdopt(_id)
 }
 
 // NEFilterPacketContextable is the interface implemented by [NEFilterPacketContext], for mocking and DI.
 type NEFilterPacketContextable interface {
-	Unwrap() *raw.NEFilterPacketContext
+	obj.Object
 }
 
 var _ NEFilterPacketContextable = (*NEFilterPacketContext)(nil)

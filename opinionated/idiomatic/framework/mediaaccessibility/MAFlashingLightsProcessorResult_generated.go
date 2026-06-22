@@ -5,56 +5,94 @@
 package mediaaccessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reports the result of the flashing lights processor.
+// FlashingLightsProcessorResult is an idiomatic wrapper over the Objective-C class MAFlashingLightsProcessorResult.
 //
-// FlashingLightsProcessorResult wraps [raw.MAFlashingLightsProcessorResult] with a fluent Go API.
+// An object that reports the result of the flashing lights processor.
 type FlashingLightsProcessorResult struct {
-	inner *raw.MAFlashingLightsProcessorResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MAFlashingLightsProcessorResult].
-func (x *FlashingLightsProcessorResult) Unwrap() *raw.MAFlashingLightsProcessorResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FlashingLightsProcessorResult) ID() objc.ID { return x.inner.Ptr() }
-
-// FlashingLightsProcessorResultFromID adopts an existing object pointer as a FlashingLightsProcessorResult (nil for 0).
+// FlashingLightsProcessorResultFromID adopts an existing Objective-C object as a FlashingLightsProcessorResult
+// (nil for 0), retaining it and registering a release finalizer.
 func FlashingLightsProcessorResultFromID(id objc.ID) *FlashingLightsProcessorResult {
 	if id == 0 {
 		return nil
 	}
-	return &FlashingLightsProcessorResult{inner: raw.MAFlashingLightsProcessorResultFromID(id)}
+	x := &FlashingLightsProcessorResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFlashingLightsProcessorResult creates a new [FlashingLightsProcessorResult].
+// flashingLightsProcessorResultAdopt wraps an Objective-C object that this code just created as a
+// FlashingLightsProcessorResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func flashingLightsProcessorResultAdopt(id objc.ID) *FlashingLightsProcessorResult {
+	if id == 0 {
+		return nil
+	}
+	x := &FlashingLightsProcessorResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FlashingLightsProcessorResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FlashingLightsProcessorResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FlashingLightsProcessorResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FlashingLightsProcessorResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFlashingLightsProcessorResult creates a new FlashingLightsProcessorResult.
 func NewFlashingLightsProcessorResult() *FlashingLightsProcessorResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MAFlashingLightsProcessorResult")), objc.RegisterName("new"))
-	return &FlashingLightsProcessorResult{inner: raw.MAFlashingLightsProcessorResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MAFlashingLightsProcessorResult")), objc.RegisterName("new"))
+	return flashingLightsProcessorResultAdopt(_id)
 }
 
-// SurfaceProcessed calls the underlying SurfaceProcessed.
+// SurfaceProcessed wraps the corresponding Objective-C method.
 func (x *FlashingLightsProcessorResult) SurfaceProcessed() bool {
-	return x.inner.SurfaceProcessed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("surfaceProcessed"))
+	return _r
 }
 
-// MitigationLevel calls the underlying MitigationLevel.
+// MitigationLevel wraps the corresponding Objective-C method.
 func (x *FlashingLightsProcessorResult) MitigationLevel() float32 {
-	return x.inner.MitigationLevel()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mitigationLevel"))
+	return _r
 }
 
-// IntensityLevel calls the underlying IntensityLevel.
+// IntensityLevel wraps the corresponding Objective-C method.
 func (x *FlashingLightsProcessorResult) IntensityLevel() float32 {
-	return x.inner.IntensityLevel()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("intensityLevel"))
+	return _r
 }
 
 // FlashingLightsProcessorResultable is the interface implemented by [FlashingLightsProcessorResult], for mocking and DI.
 type FlashingLightsProcessorResultable interface {
-	Unwrap() *raw.MAFlashingLightsProcessorResult
+	obj.Object
 	SurfaceProcessed() bool
 	MitigationLevel() float32
 	IntensityLevel() float32

@@ -5,84 +5,92 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
+// MetricManager is an idiomatic wrapper over the Objective-C class MXMetricManager.
 //
-// MetricManager wraps [raw.MXMetricManager] with a fluent Go API.
+// The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
 type MetricManager struct {
-	inner *raw.MXMetricManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXMetricManager].
-func (x *MetricManager) Unwrap() *raw.MXMetricManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricManager) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricManagerFromID adopts an existing object pointer as a MetricManager (nil for 0).
+// MetricManagerFromID adopts an existing Objective-C object as a MetricManager
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricManagerFromID(id objc.ID) *MetricManager {
 	if id == 0 {
 		return nil
 	}
-	return &MetricManager{inner: raw.MXMetricManagerFromID(id)}
+	x := &MetricManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricManager creates a new [MetricManager].
+// metricManagerAdopt wraps an Objective-C object that this code just created as a
+// MetricManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricManagerAdopt(id objc.ID) *MetricManager {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetricManager creates a new MetricManager.
 func NewMetricManager() *MetricManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXMetricManager")), objc.RegisterName("new"))
-	return &MetricManager{inner: raw.MXMetricManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("new"))
+	return metricManagerAdopt(_id)
 }
 
-// Registers to receive a daily report of app metrics from the metrics manager.
-//
-// AddSubscriber calls the underlying AddSubscriber.
-func (x *MetricManager) AddSubscriber(subscriber raw.MXMetricManagerSubscriber) {
-	x.inner.AddSubscriber(subscriber)
-}
-
-// Unsubscribes from daily reports of app metrics.
-//
-// RemoveSubscriber calls the underlying RemoveSubscriber.
-func (x *MetricManager) RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber) {
-	x.inner.RemoveSubscriber(subscriber)
-}
-
-// @property      pastPayloads @abstract      A list of past metric payloads received.
+// PastPayloads a list of past metric payloads received.
 //
 // PastPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastPayloads() []*MetricPayload {
-	arr := x.inner.PastPayloads()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricPayload {
-		return &MetricPayload{inner: raw.MXMetricPayloadFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pastPayloads"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricPayload { return MetricPayloadFromID(_id) })
 }
 
-// @property      pastDiagnosticPayloads @abstract      A list of past diagnostic payloads received.
+// PastDiagnosticPayloads a list of past diagnostic payloads received.
 //
 // PastDiagnosticPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {
-	arr := x.inner.PastDiagnosticPayloads()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DiagnosticPayload {
-		return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pastDiagnosticPayloads"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiagnosticPayload { return DiagnosticPayloadFromID(_id) })
 }
 
 // MetricManagerable is the interface implemented by [MetricManager], for mocking and DI.
 type MetricManagerable interface {
-	Unwrap() *raw.MXMetricManager
-	AddSubscriber(subscriber raw.MXMetricManagerSubscriber)
-	RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber)
+	obj.Object
 	PastPayloads() []*MetricPayload
 	PastDiagnosticPayloads() []*DiagnosticPayload
 }

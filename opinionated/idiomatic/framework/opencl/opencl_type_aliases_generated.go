@@ -4,18 +4,12 @@
 
 package opencl
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opencl"
-)
+type ClBufferRegion struct {
+	Origin uint
+	Size   uint
+}
 
-// ClBufferRegion is a type alias for the raw ClBufferRegion value-type struct.
-type ClBufferRegion = raw.ClBufferRegion
-
-// ClImageDesc is a type alias for the raw ClImageDesc value-type struct.
-type ClImageDesc = raw.ClImageDesc
-
-// ClImageFormat is a type alias for the raw ClImageFormat value-type struct.
-type ClImageFormat = raw.ClImageFormat
-
-// ClNdrange is a type alias for the raw ClNdrange value-type struct.
-type ClNdrange = raw.ClNdrange
+type ClImageFormat struct {
+	Image_channel_order     uint32
+	Image_channel_data_type uint32
+}

@@ -5,257 +5,183 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A training graph that you create from one or more graph objects plus additional layers you add directly to the training graph.
+// TrainingGraph is an idiomatic wrapper over the Objective-C class MLCTrainingGraph.
 //
-// TrainingGraph wraps [raw.MLCTrainingGraph] with a fluent Go API.
+// It embeds [Graph], promoting that type's methods.
+//
+// A training graph that you create from one or more graph objects plus additional layers you add directly to the training graph.
 type TrainingGraph struct {
-	inner *raw.MLCTrainingGraph
+	Graph
 }
 
-// Unwrap returns the underlying [raw.MLCTrainingGraph].
-func (x *TrainingGraph) Unwrap() *raw.MLCTrainingGraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrainingGraph) ID() objc.ID { return x.inner.Ptr() }
-
-// TrainingGraphFromID adopts an existing object pointer as a TrainingGraph (nil for 0).
+// TrainingGraphFromID adopts an existing Objective-C object as a TrainingGraph
+// (nil for 0), retaining it and registering a release finalizer.
 func TrainingGraphFromID(id objc.ID) *TrainingGraph {
 	if id == 0 {
 		return nil
 	}
-	return &TrainingGraph{inner: raw.MLCTrainingGraphFromID(id)}
+	x := &TrainingGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTrainingGraph creates a new [TrainingGraph].
+// trainingGraphAdopt wraps an Objective-C object that this code just created as a
+// TrainingGraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trainingGraphAdopt(id objc.ID) *TrainingGraph {
+	if id == 0 {
+		return nil
+	}
+	x := &TrainingGraph{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTrainingGraph creates a new TrainingGraph.
 func NewTrainingGraph() *TrainingGraph {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTrainingGraph")), objc.RegisterName("new"))
-	return &TrainingGraph{inner: raw.MLCTrainingGraphFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCTrainingGraph")), objc.RegisterName("new"))
+	return trainingGraphAdopt(_id)
 }
 
-// Adds the inputs and loss label inputs that you specify to the training graph.
-//
-// AddInputsLossLabels calls the underlying AddInputsLossLabels.
-func (x *TrainingGraph) AddInputsLossLabels(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool {
-	return x.inner.AddInputsLossLabels(inputs, lossLabels)
+// AddInputsLossLabels adds the inputs and loss label inputs that you specify to the training graph.
+func (x *TrainingGraph) AddInputsLossLabels(inputs obj.Object, lossLabels obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:"), objref.IDOf(inputs), objref.IDOf(lossLabels))
+	return _r
 }
 
-// Adds the inputs, loss labels, and loss label weights that you specify to the training graph.
-//
-// AddInputsLossLabelsLossLabelWeights calls the underlying AddInputsLossLabelsLossLabelWeights.
-func (x *TrainingGraph) AddInputsLossLabelsLossLabelWeights(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabelWeights *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool {
-	return x.inner.AddInputsLossLabelsLossLabelWeights(inputs, lossLabels, lossLabelWeights)
+// AddInputsLossLabelsLossLabelWeights adds the inputs, loss labels, and loss label weights that you specify to the training graph.
+func (x *TrainingGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
+	return _r
 }
 
-// Adds the outputs to the training graph you specify.
-//
-// AddOutputs calls the underlying AddOutputs.
-func (x *TrainingGraph) AddOutputs(outputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool {
-	return x.inner.AddOutputs(outputs)
+// AddOutputs adds the outputs to the training graph you specify.
+func (x *TrainingGraph) AddOutputs(outputs obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
+	return _r
 }
 
-// Adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.
-//
-// StopGradientForTensors calls the underlying StopGradientForTensors.
-func (x *TrainingGraph) StopGradientForTensors(tensors *foundation.NSArray[*raw.MLCTensor]) bool {
-	return x.inner.StopGradientForTensors(tensors)
+// StopGradientForTensors adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.
+func (x *TrainingGraph) StopGradientForTensors(tensors []*Tensor) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopGradientForTensors:"), purego.SliceToNSArray(tensors, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Compiles the training graph for the options and device you specify.
-//
-// CompileWithOptionsDevice calls the underlying CompileWithOptionsDevice.
-func (x *TrainingGraph) CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool {
-	return x.inner.CompileWithOptionsDevice(raw.MLCGraphCompilationOptions(options), device)
+// CompileWithOptionsDevice compiles the training graph for the options and device you specify.
+func (x *TrainingGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
+	return _r
 }
 
-// Compiles the training graph for the options, device, and input tensors you specify.
-//
-// CompileWithOptionsDeviceInputTensorsInputTensorsData calls the underlying CompileWithOptionsDeviceInputTensorsInputTensorsData.
-func (x *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool {
-	return x.inner.CompileWithOptionsDeviceInputTensorsInputTensorsData(raw.MLCGraphCompilationOptions(options), device, inputTensors, inputTensorsData)
+// CompileWithOptionsDeviceInputTensorsInputTensorsData compiles the training graph for the options, device, and input tensors you specify.
+func (x *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
+	return _r
 }
 
-// Compiles the optimizer to use with a training graph you specify.
-//
-// CompileOptimizer calls the underlying CompileOptimizer.
-func (x *TrainingGraph) CompileOptimizer(optimizer *raw.MLCOptimizer) bool {
-	return x.inner.CompileOptimizer(optimizer)
+// CompileOptimizer compiles the optimizer to use with a training graph you specify.
+func (x *TrainingGraph) CompileOptimizer(optimizer *Optimizer) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileOptimizer:"), objref.IDOf(optimizer))
+	return _r
 }
 
-// Links the training graphs you specify.
-//
-// LinkWithGraphs calls the underlying LinkWithGraphs.
-func (x *TrainingGraph) LinkWithGraphs(graphs *foundation.NSArray[*raw.MLCTrainingGraph]) bool {
-	return x.inner.LinkWithGraphs(graphs)
+// LinkWithGraphs links the training graphs you specify.
+func (x *TrainingGraph) LinkWithGraphs(graphs []*TrainingGraph) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *TrainingGraph) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Gets the gradient tensor for the input tensor you specify.
-//
-// GradientTensorForInput calls the underlying GradientTensorForInput.
-func (x *TrainingGraph) GradientTensorForInput(input *raw.MLCTensor) *Tensor {
-	_r := x.inner.GradientTensorForInput(input)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// GradientTensorForInput gets the gradient tensor for the input tensor you specify.
+func (x *TrainingGraph) GradientTensorForInput(input *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientTensorForInput:"), objref.IDOf(input))
+	return TensorFromID(_r)
 }
 
-// Gets the source gradient tensors for the layer in the training graph you specify.
-//
-// SourceGradientTensorsForLayer calls the underlying SourceGradientTensorsForLayer.
-func (x *TrainingGraph) SourceGradientTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor] {
-	return x.inner.SourceGradientTensorsForLayer(layer)
+// SourceGradientTensorsForLayer gets the source gradient tensors for the layer in the training graph you specify.
+func (x *TrainingGraph) SourceGradientTensorsForLayer(layer *Layer) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceGradientTensorsForLayer:"), objref.IDOf(layer))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Gets the result gradient tensors for the layer in the training graph you specify.
-//
-// ResultGradientTensorsForLayer calls the underlying ResultGradientTensorsForLayer.
-func (x *TrainingGraph) ResultGradientTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor] {
-	return x.inner.ResultGradientTensorsForLayer(layer)
+// ResultGradientTensorsForLayer gets the result gradient tensors for the layer in the training graph you specify.
+func (x *TrainingGraph) ResultGradientTensorsForLayer(layer *Layer) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultGradientTensorsForLayer:"), objref.IDOf(layer))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// Gets the gradient data for the trainable parameter and associated layer you specify.
-//
-// GradientDataForParameterLayer calls the underlying GradientDataForParameterLayer.
-func (x *TrainingGraph) GradientDataForParameterLayer(parameter *raw.MLCTensor, layer *raw.MLCLayer) *foundation.NSData {
-	return x.inner.GradientDataForParameterLayer(parameter, layer)
+// GradientDataForParameterLayer gets the gradient data for the trainable parameter and associated layer you specify.
+func (x *TrainingGraph) GradientDataForParameterLayer(parameter *Tensor, layer *Layer) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientDataForParameter:layer:"), objref.IDOf(parameter), objref.IDOf(layer))
+	return obj.Wrap(_r)
 }
 
-// Allocates an entry for a gradient for the result tensor you specify.
-//
-// AllocateUserGradientForTensor calls the underlying AllocateUserGradientForTensor.
-func (x *TrainingGraph) AllocateUserGradientForTensor(tensor *raw.MLCTensor) *Tensor {
-	_r := x.inner.AllocateUserGradientForTensor(tensor)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// AllocateUserGradientForTensor allocates an entry for a gradient for the result tensor you specify.
+func (x *TrainingGraph) AllocateUserGradientForTensor(tensor *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocateUserGradientForTensor:"), objref.IDOf(tensor))
+	return TensorFromID(_r)
 }
 
-// Executes the training graph with the input data, batch size, execution options, and completion handler you specify.
-//
-// ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
-}
-
-// Executes the training graph with the input data, output data, batch size, execution options, and completion handler that you specify.
-//
-// ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
-}
-
-// Executes the forward pass of the training graph with the batch size, execution options, and completion handler you specify.
-//
-// ExecuteForwardWithBatchSizeOptionsCompletionHandler calls the underlying ExecuteForwardWithBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize, raw.MLCExecutionOptions(options), completionHandler)
-}
-
-// Executes the forward pass of the training graph with the batch size, execution options, output data, and completion handler you specify.
-//
-// ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler calls the underlying ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler.
-func (x *TrainingGraph) ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize, raw.MLCExecutionOptions(options), outputsData, completionHandler)
-}
-
-// Executes the gradient pass of the training graph with the batch size, execution options, and completion handler you specify.
-//
-// ExecuteGradientWithBatchSizeOptionsCompletionHandler calls the underlying ExecuteGradientWithBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize, raw.MLCExecutionOptions(options), completionHandler)
-}
-
-// Executes the gradient pass of the training graph with the batch size, execution options, output data, and completion handler you specify.
-//
-// ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler calls the underlying ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler.
-func (x *TrainingGraph) ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize, raw.MLCExecutionOptions(options), outputsData, completionHandler)
-}
-
-// Executes the optimizer update pass of the training graph with the execution options and completion handler you specify.
-//
-// ExecuteOptimizerUpdateWithOptionsCompletionHandler calls the underlying ExecuteOptimizerUpdateWithOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteOptimizerUpdateWithOptionsCompletionHandler(options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteOptimizerUpdateWithOptionsCompletionHandler(raw.MLCExecutionOptions(options), completionHandler)
-}
-
-// Synchronizes updates from device memory.
-//
-// SynchronizeUpdates calls the underlying SynchronizeUpdates.
+// SynchronizeUpdates synchronizes updates from device memory.
 func (x *TrainingGraph) SynchronizeUpdates() {
-	x.inner.SynchronizeUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizeUpdates"))
 }
 
-// Sets the input tensor parameters, which the optimizer then updates.
-//
-// SetTrainingTensorParameters calls the underlying SetTrainingTensorParameters.
-func (x *TrainingGraph) SetTrainingTensorParameters(parameters *foundation.NSArray[*raw.MLCTensorParameter]) bool {
-	return x.inner.SetTrainingTensorParameters(parameters)
+// SetTrainingTensorParameters sets the input tensor parameters, which the optimizer then updates.
+func (x *TrainingGraph) SetTrainingTensorParameters(parameters []*TensorParameter) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setTrainingTensorParameters:"), purego.SliceToNSArray(parameters, func(_v *TensorParameter) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Associates the optimizer and device data you specify along with the tensor.
-//
-// BindOptimizerDataDeviceDataWithTensor calls the underlying BindOptimizerDataDeviceDataWithTensor.
-func (x *TrainingGraph) BindOptimizerDataDeviceDataWithTensor(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData], tensor *raw.MLCTensor) bool {
-	return x.inner.BindOptimizerDataDeviceDataWithTensor(data, deviceData, tensor)
+// BindOptimizerDataDeviceDataWithTensor associates the optimizer and device data you specify along with the tensor.
+func (x *TrainingGraph) BindOptimizerDataDeviceDataWithTensor(data []*TensorData, deviceData []*TensorOptimizerDeviceData, tensor *Tensor) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindOptimizerData:deviceData:withTensor:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(tensor))
+	return _r
 }
 
-// @property   optimizer @abstract   The optimizer to be used with the training graph
-//
-// Optimizer calls the underlying Optimizer.
+// Optimizer the optimizer to be used with the training graph
 func (x *TrainingGraph) Optimizer() *Optimizer {
-	_r := x.inner.Optimizer()
-	if _r == nil {
-		return nil
-	}
-	return &Optimizer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizer"))
+	return OptimizerFromID(_r)
 }
 
-// @property   The device memory size used by the training graph @abstract   Returns the total size in bytes of device memory used for all intermediate tensors for forward, gradient passes and optimizer update for all layers in the training graph. We recommend executing an iteration before checking the device memory size as the buffers needed get allocated when the corresponding pass such as gradient, optimizer update is executed. @return     A NSUInteger value
-//
-// DeviceMemorySize calls the underlying DeviceMemorySize.
-func (x *TrainingGraph) DeviceMemorySize() uint {
-	return x.inner.DeviceMemorySize()
+// DeviceMemorySize returns the total size in bytes of device memory used for all intermediate tensors for forward, gradient passes and optimizer update for all layers in the training graph. We recommend executing an iteration before checking the device memory size as the buffers needed get allocated when the corresponding pass such as gradient, optimizer update is executed.
+func (x *TrainingGraph) DeviceMemorySize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceMemorySize"))
+	return _r
 }
-
-func (x *TrainingGraph) asGraph() *raw.MLCGraph { return &x.inner.MLCGraph }
 
 // TrainingGraphable is the interface implemented by [TrainingGraph], for mocking and DI.
 type TrainingGraphable interface {
-	Unwrap() *raw.MLCTrainingGraph
-	AddInputsLossLabels(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
-	AddInputsLossLabelsLossLabelWeights(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabelWeights *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
-	AddOutputs(outputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
-	StopGradientForTensors(tensors *foundation.NSArray[*raw.MLCTensor]) bool
-	CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool
-	CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool
-	CompileOptimizer(optimizer *raw.MLCOptimizer) bool
-	LinkWithGraphs(graphs *foundation.NSArray[*raw.MLCTrainingGraph]) bool
-	GradientTensorForInput(input *raw.MLCTensor) *Tensor
-	SourceGradientTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
-	ResultGradientTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
-	GradientDataForParameterLayer(parameter *raw.MLCTensor, layer *raw.MLCLayer) *foundation.NSData
-	AllocateUserGradientForTensor(tensor *raw.MLCTensor) *Tensor
-	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteOptimizerUpdateWithOptionsCompletionHandler(options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	obj.Object
+	AddInputsLossLabels(inputs obj.Object, lossLabels obj.Object) bool
+	AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool
+	AddOutputs(outputs obj.Object) bool
+	StopGradientForTensors(tensors []*Tensor) bool
+	CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool
+	CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool
+	CompileOptimizer(optimizer *Optimizer) bool
+	LinkWithGraphs(graphs []*TrainingGraph) bool
+	GradientTensorForInput(input *Tensor) *Tensor
+	SourceGradientTensorsForLayer(layer *Layer) []*Tensor
+	ResultGradientTensorsForLayer(layer *Layer) []*Tensor
+	GradientDataForParameterLayer(parameter *Tensor, layer *Layer) obj.Object
+	AllocateUserGradientForTensor(tensor *Tensor) *Tensor
 	SynchronizeUpdates()
-	SetTrainingTensorParameters(parameters *foundation.NSArray[*raw.MLCTensorParameter]) bool
-	BindOptimizerDataDeviceDataWithTensor(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData], tensor *raw.MLCTensor) bool
+	SetTrainingTensorParameters(parameters []*TensorParameter) bool
+	BindOptimizerDataDeviceDataWithTensor(data []*TensorData, deviceData []*TensorOptimizerDeviceData, tensor *Tensor) bool
 	Optimizer() *Optimizer
-	DeviceMemorySize() uint
+	DeviceMemorySize() int
 }
 
 var _ TrainingGraphable = (*TrainingGraph)(nil)
+
+var _ GraphProvider = (*TrainingGraph)(nil)

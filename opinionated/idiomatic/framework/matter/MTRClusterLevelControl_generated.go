@@ -5,365 +5,283 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterLevelControl wraps [raw.MTRClusterLevelControl] with a fluent Go API.
+// MTRClusterLevelControl is an idiomatic wrapper over the Objective-C class MTRClusterLevelControl.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterLevelControl struct {
-	inner *raw.MTRClusterLevelControl
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterLevelControl].
-func (x *MTRClusterLevelControl) Unwrap() *raw.MTRClusterLevelControl { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterLevelControl) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterLevelControlFromID adopts an existing object pointer as a MTRClusterLevelControl (nil for 0).
+// MTRClusterLevelControlFromID adopts an existing Objective-C object as a MTRClusterLevelControl
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterLevelControlFromID(id objc.ID) *MTRClusterLevelControl {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterLevelControl{inner: raw.MTRClusterLevelControlFromID(id)}
+	x := &MTRClusterLevelControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterLevelControlWithDeviceEndpointIDQueue creates a new [MTRClusterLevelControl].
-func NewMTRClusterLevelControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLevelControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterLevelControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterLevelControl{inner: raw.MTRClusterLevelControlFromID(_id)}
+// mTRClusterLevelControlAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterLevelControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterLevelControlAdopt(id objc.ID) *MTRClusterLevelControl {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterLevelControl{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterLevelControlWithDeviceEndpointQueue creates a new [MTRClusterLevelControl].
-func NewMTRClusterLevelControlWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterLevelControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterLevelControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterLevelControl{inner: raw.MTRClusterLevelControlFromID(_id)}
+// NewMTRClusterLevelControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterLevelControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterLevelControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLevelControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterLevelControlAdopt(_id)
 }
 
-// MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveToLevelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterLevelControlWithDeviceEndpointQueue creates a new MTRClusterLevelControl.
+func NewMTRClusterLevelControlWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterLevelControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLevelControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterLevelControlAdopt(_id)
 }
 
-// MoveWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) MoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.MoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeCurrentLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StepWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StepWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) StepWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StepWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeRemainingTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRemainingTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StopWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StopWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StopWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeMinLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveToLevelWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeMaxLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeCurrentFrequencyWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentFrequencyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStepWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeMinFrequencyWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeMinFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinFrequencyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStopWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeMaxFrequencyWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxFrequencyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterLevelControl) MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveToClosestFrequencyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeOptionsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptionsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentLevelWithParams calls the underlying ReadAttributeCurrentLevelWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeCurrentLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentLevelWithParams(params)
+// WriteAttributeOptionsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeRemainingTimeWithParams calls the underlying ReadAttributeRemainingTimeWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeRemainingTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRemainingTimeWithParams(params)
+// WriteAttributeOptionsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeMinLevelWithParams calls the underlying ReadAttributeMinLevelWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeMinLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinLevelWithParams(params)
+// ReadAttributeOnOffTransitionTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnOffTransitionTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxLevelWithParams calls the underlying ReadAttributeMaxLevelWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeMaxLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxLevelWithParams(params)
+// WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeCurrentFrequencyWithParams calls the underlying ReadAttributeCurrentFrequencyWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeCurrentFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentFrequencyWithParams(params)
+// WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeMinFrequencyWithParams calls the underlying ReadAttributeMinFrequencyWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeMinFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinFrequencyWithParams(params)
+// ReadAttributeOnLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeOnLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxFrequencyWithParams calls the underlying ReadAttributeMaxFrequencyWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeMaxFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxFrequencyWithParams(params)
+// WriteAttributeOnLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOptionsWithParams calls the underlying ReadAttributeOptionsWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeOptionsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOptionsWithParams(params)
+// WriteAttributeOnLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOptionsWithValueExpectedValueInterval calls the underlying WriteAttributeOptionsWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeOnTransitionTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnTransitionTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOptionsWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOptionsWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeOnTransitionTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOnOffTransitionTimeWithParams calls the underlying ReadAttributeOnOffTransitionTimeWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeOnOffTransitionTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOnOffTransitionTimeWithParams(params)
+// WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval calls the underlying WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeOffTransitionTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOffTransitionTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeOffTransitionTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOnLevelWithParams calls the underlying ReadAttributeOnLevelWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeOnLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOnLevelWithParams(params)
+// WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOnLevelWithValueExpectedValueInterval calls the underlying WriteAttributeOnLevelWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeDefaultMoveRateWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultMoveRateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOnLevelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeDefaultMoveRateWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOnTransitionTimeWithParams calls the underlying ReadAttributeOnTransitionTimeWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeOnTransitionTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOnTransitionTimeWithParams(params)
+// WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOnTransitionTimeWithValueExpectedValueInterval calls the underlying WriteAttributeOnTransitionTimeWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeStartUpCurrentLevelWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpCurrentLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOffTransitionTimeWithParams calls the underlying ReadAttributeOffTransitionTimeWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeOffTransitionTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOffTransitionTimeWithParams(params)
+// WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOffTransitionTimeWithValueExpectedValueInterval calls the underlying WriteAttributeOffTransitionTimeWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDefaultMoveRateWithParams calls the underlying ReadAttributeDefaultMoveRateWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeDefaultMoveRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDefaultMoveRateWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultMoveRateWithValueExpectedValueInterval calls the underlying WriteAttributeDefaultMoveRateWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams calls the underlying WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
-}
-
-// ReadAttributeStartUpCurrentLevelWithParams calls the underlying ReadAttributeStartUpCurrentLevelWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeStartUpCurrentLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStartUpCurrentLevelWithParams(params)
-}
-
-// WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval calls the underlying WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval.
-func (x *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
-}
-
-// WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
-}
-
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
-}
-
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterLevelControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveToLevelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// MoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) MoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// StepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) StepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.StepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// StopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) StopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.StopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveToLevelWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStepWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStopWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterLevelControl) MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveToClosestFrequencyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterLevelControl) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterLevelControl) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterLevelControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterLevelControlable is the interface implemented by [MTRClusterLevelControl], for mocking and DI.
 type MTRClusterLevelControlable interface {
-	Unwrap() *raw.MTRClusterLevelControl
-	MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveToLevelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	MoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StepWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StopWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveToLevelWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStepWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterStopWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRLevelControlClusterMoveToClosestFrequencyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeCurrentLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRemainingTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOptionsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOnOffTransitionTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOnLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOnTransitionTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOffTransitionTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeDefaultMoveRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeStartUpCurrentLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	MoveToLevelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveToLevelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	MoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	StepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	StopWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	MoveToLevelWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveToLevelWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	MoveWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	StepWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStepWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	StopWithOnOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterStopWithOnOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	MoveToClosestFrequencyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRLevelControlClusterMoveToClosestFrequencyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinFrequencyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOnLevelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterLevelControlable = (*MTRClusterLevelControl)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterLevelControl)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterLevelControl)(nil)

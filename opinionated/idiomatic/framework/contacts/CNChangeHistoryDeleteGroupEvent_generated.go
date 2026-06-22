@@ -5,56 +5,68 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user deleting a group.
+// ChangeHistoryDeleteGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryDeleteGroupEvent.
 //
-// ChangeHistoryDeleteGroupEvent wraps [raw.CNChangeHistoryDeleteGroupEvent] with a fluent Go API.
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user deleting a group.
 type ChangeHistoryDeleteGroupEvent struct {
-	inner *raw.CNChangeHistoryDeleteGroupEvent
+	ChangeHistoryEvent
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryDeleteGroupEvent].
-func (x *ChangeHistoryDeleteGroupEvent) Unwrap() *raw.CNChangeHistoryDeleteGroupEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryDeleteGroupEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryDeleteGroupEventFromID adopts an existing object pointer as a ChangeHistoryDeleteGroupEvent (nil for 0).
+// ChangeHistoryDeleteGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryDeleteGroupEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryDeleteGroupEventFromID(id objc.ID) *ChangeHistoryDeleteGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryDeleteGroupEvent{inner: raw.CNChangeHistoryDeleteGroupEventFromID(id)}
+	x := &ChangeHistoryDeleteGroupEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryDeleteGroupEvent creates a new [ChangeHistoryDeleteGroupEvent].
+// changeHistoryDeleteGroupEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryDeleteGroupEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryDeleteGroupEventAdopt(id objc.ID) *ChangeHistoryDeleteGroupEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryDeleteGroupEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangeHistoryDeleteGroupEvent creates a new ChangeHistoryDeleteGroupEvent.
 func NewChangeHistoryDeleteGroupEvent() *ChangeHistoryDeleteGroupEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryDeleteGroupEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryDeleteGroupEvent{inner: raw.CNChangeHistoryDeleteGroupEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryDeleteGroupEvent")), objc.RegisterName("new"))
+	return changeHistoryDeleteGroupEventAdopt(_id)
 }
 
-// GroupIdentifier calls the underlying GroupIdentifier.
+// GroupIdentifier wraps the corresponding Objective-C method.
 func (x *ChangeHistoryDeleteGroupEvent) GroupIdentifier() string {
-	_r := x.inner.GroupIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *ChangeHistoryDeleteGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+	return purego.GoString(_r)
 }
 
 // ChangeHistoryDeleteGroupEventable is the interface implemented by [ChangeHistoryDeleteGroupEvent], for mocking and DI.
 type ChangeHistoryDeleteGroupEventable interface {
-	Unwrap() *raw.CNChangeHistoryDeleteGroupEvent
+	obj.Object
 	GroupIdentifier() string
 }
 
 var _ ChangeHistoryDeleteGroupEventable = (*ChangeHistoryDeleteGroupEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryDeleteGroupEvent)(nil)

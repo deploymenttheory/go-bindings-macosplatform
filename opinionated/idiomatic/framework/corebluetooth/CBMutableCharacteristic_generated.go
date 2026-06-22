@@ -5,163 +5,130 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A characteristic of a local peripheral’s service.
+// MutableCharacteristic is an idiomatic wrapper over the Objective-C class CBMutableCharacteristic.
 //
-// MutableCharacteristic wraps [raw.CBMutableCharacteristic] with a fluent Go API.
+// It embeds [Characteristic], promoting that type's methods.
+//
+// A characteristic of a local peripheral’s service.
 type MutableCharacteristic struct {
-	inner *raw.CBMutableCharacteristic
+	Characteristic
 }
 
-// Unwrap returns the underlying [raw.CBMutableCharacteristic].
-func (x *MutableCharacteristic) Unwrap() *raw.CBMutableCharacteristic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableCharacteristic) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableCharacteristicFromID adopts an existing object pointer as a MutableCharacteristic (nil for 0).
+// MutableCharacteristicFromID adopts an existing Objective-C object as a MutableCharacteristic
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableCharacteristicFromID(id objc.ID) *MutableCharacteristic {
 	if id == 0 {
 		return nil
 	}
-	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(id)}
-}
-
-// Creates a mutable characteristic with specified permissions, properties, and value.
-//
-// NewMutableCharacteristicWithTypePropertiesValuePermissions creates a new [MutableCharacteristic].
-func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *MutableCharacteristic {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBMutableCharacteristic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:properties:value:permissions:"), uUID.Ptr(), raw.CBCharacteristicProperties(properties), value.Ptr(), raw.CBAttributePermissions(permissions))
-	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(_id)}
-}
-
-// The permissions of the characteristic value.
-//
-// WithPermissions sets the permissions property and returns the receiver for chaining.
-func (x *MutableCharacteristic) WithPermissions(permissions CBAttributePermissions) *MutableCharacteristic {
-	x.inner.SetPermissions(raw.CBAttributePermissions(permissions))
+	x := &MutableCharacteristic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The properties of the characteristic.
-//
-// WithProperties sets the properties property and returns the receiver for chaining.
-func (x *MutableCharacteristic) WithProperties(properties CBCharacteristicProperties) *MutableCharacteristic {
-	x.inner.SetProperties(raw.CBCharacteristicProperties(properties))
+// mutableCharacteristicAdopt wraps an Objective-C object that this code just created as a
+// MutableCharacteristic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableCharacteristicAdopt(id objc.ID) *MutableCharacteristic {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableCharacteristic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The value of the characteristic.
-//
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MutableCharacteristic) WithValue(value *foundation.NSData) *MutableCharacteristic {
-	x.inner.SetValue(value)
+// NewMutableCharacteristicWithTypePropertiesValuePermissions creates a mutable characteristic with specified permissions, properties, and value.
+func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *UUID, properties CharacteristicProperties, value obj.Object, permissions AttributePermissions) *MutableCharacteristic {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableCharacteristic")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:properties:value:permissions:"), objref.IDOf(uUID), properties, objref.IDOf(value), permissions)
+	return mutableCharacteristicAdopt(_id)
+}
+
+// WithPermissions the permissions of the characteristic value.
+func (x *MutableCharacteristic) WithPermissions(permissions AttributePermissions) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermissions:"), permissions)
 	return x
 }
 
-// An array of the characteristic’s descriptors.
-//
-// WithDescriptors sets the collection, converting the Go slice to an NSArray.
+// WithProperties the properties of the characteristic.
+func (x *MutableCharacteristic) WithProperties(properties CharacteristicProperties) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), properties)
+	return x
+}
+
+// WithValue the value of the characteristic.
+func (x *MutableCharacteristic) WithValue(value obj.Object) *MutableCharacteristic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return x
+}
+
+// WithDescriptors an array of the characteristic’s descriptors.
 func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDescriptors(foundation.NSArrayFromID[*raw.CBDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asDescriptor().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CBDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDescriptors(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v DescriptorProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptors:"), _arr)
 	return x
 }
 
-// @property permissions @discussion The permissions of the characteristic value. @see		CBAttributePermissions
-//
-// Permissions calls the underlying Permissions.
-func (x *MutableCharacteristic) Permissions() CBAttributePermissions {
-	return CBAttributePermissions(x.inner.Permissions())
+// Permissions the permissions of the characteristic value.
+func (x *MutableCharacteristic) Permissions() AttributePermissions {
+	_r := objc.Send[AttributePermissions](objref.IDOf(x), objc.RegisterName("permissions"))
+	return _r
 }
 
-// SetPermissions calls the underlying SetPermissions.
-func (x *MutableCharacteristic) SetPermissions(permissions CBAttributePermissions) {
-	x.inner.SetPermissions(raw.CBAttributePermissions(permissions))
+// SetPermissions wraps the corresponding Objective-C method.
+func (x *MutableCharacteristic) SetPermissions(permissions AttributePermissions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermissions:"), permissions)
 }
 
-// @property subscribedCentrals @discussion For notifying characteristics, the set of currently subscribed centrals.
+// SubscribedCentrals for notifying characteristics, the set of currently subscribed centrals.
 //
 // SubscribedCentrals returns the collection as a Go slice.
 func (x *MutableCharacteristic) SubscribedCentrals() []*Central {
-	arr := x.inner.SubscribedCentrals()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Central {
-		return &Central{inner: raw.CBCentralFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribedCentrals"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Central { return CentralFromID(_id) })
 }
 
-// SetProperties calls the underlying SetProperties.
-func (x *MutableCharacteristic) SetProperties(properties CBCharacteristicProperties) {
-	x.inner.SetProperties(raw.CBCharacteristicProperties(properties))
+// SetProperties wraps the corresponding Objective-C method.
+func (x *MutableCharacteristic) SetProperties(properties CharacteristicProperties) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), properties)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MutableCharacteristic) SetValue(value *foundation.NSData) {
-	x.inner.SetValue(value)
+// SetValue wraps the corresponding Objective-C method.
+func (x *MutableCharacteristic) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
-// SetDescriptors calls the underlying SetDescriptors.
-func (x *MutableCharacteristic) SetDescriptors(descriptors ...DescriptorProvider) {
-	_ptrs := make([]objc.ID, len(descriptors))
-	for _i, _v := range descriptors {
-		_ptrs[_i] = _v.asDescriptor().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CBDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CBDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CBDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetDescriptors(_arg0)
-}
-
-func (x *MutableCharacteristic) asCharacteristic() *raw.CBCharacteristic {
-	return &x.inner.CBCharacteristic
-}
-
-func (x *MutableCharacteristic) asAttribute() *raw.CBAttribute {
-	return &x.inner.CBCharacteristic.CBAttribute
+// SetDescriptors wraps the corresponding Objective-C method.
+func (x *MutableCharacteristic) SetDescriptors(descriptors []*Descriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *Descriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MutableCharacteristicable is the interface implemented by [MutableCharacteristic], for mocking and DI.
 type MutableCharacteristicable interface {
-	Unwrap() *raw.CBMutableCharacteristic
-	WithPermissions(permissions CBAttributePermissions) *MutableCharacteristic
-	WithProperties(properties CBCharacteristicProperties) *MutableCharacteristic
-	WithValue(value *foundation.NSData) *MutableCharacteristic
+	obj.Object
+	WithPermissions(permissions AttributePermissions) *MutableCharacteristic
+	WithProperties(properties CharacteristicProperties) *MutableCharacteristic
+	WithValue(value obj.Object) *MutableCharacteristic
 	WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic
-	Permissions() CBAttributePermissions
-	SetPermissions(permissions CBAttributePermissions)
+	Permissions() AttributePermissions
+	SetPermissions(permissions AttributePermissions)
 	SubscribedCentrals() []*Central
-	SetProperties(properties CBCharacteristicProperties)
-	SetValue(value *foundation.NSData)
-	SetDescriptors(descriptors ...DescriptorProvider)
+	SetProperties(properties CharacteristicProperties)
+	SetValue(value obj.Object)
+	SetDescriptors(descriptors []*Descriptor)
 }
 
 var _ MutableCharacteristicable = (*MutableCharacteristic)(nil)
+
+var _ CharacteristicProvider = (*MutableCharacteristic)(nil)
+
+var _ AttributeProvider = (*MutableCharacteristic)(nil)

@@ -5,44 +5,77 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A property or quality of the environment that affects how sound travels.
+// Medium is an idiomatic wrapper over the Objective-C class PHASEMedium.
 //
-// Medium wraps [raw.PHASEMedium] with a fluent Go API.
+// A property or quality of the environment that affects how sound travels.
 type Medium struct {
-	inner *raw.PHASEMedium
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEMedium].
-func (x *Medium) Unwrap() *raw.PHASEMedium { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Medium) ID() objc.ID { return x.inner.Ptr() }
-
-// MediumFromID adopts an existing object pointer as a Medium (nil for 0).
+// MediumFromID adopts an existing Objective-C object as a Medium
+// (nil for 0), retaining it and registering a release finalizer.
 func MediumFromID(id objc.ID) *Medium {
 	if id == 0 {
 		return nil
 	}
-	return &Medium{inner: raw.PHASEMediumFromID(id)}
+	x := &Medium{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a medium.
-//
-// NewMediumWithEnginePreset creates a new [Medium].
-func NewMediumWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMediumPreset) *Medium {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMedium")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), engine.Ptr(), raw.PHASEMediumPreset(preset))
-	return &Medium{inner: raw.PHASEMediumFromID(_id)}
+// mediumAdopt wraps an Objective-C object that this code just created as a
+// Medium (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediumAdopt(id objc.ID) *Medium {
+	if id == 0 {
+		return nil
+	}
+	x := &Medium{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Medium) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Medium) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Medium) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Medium) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediumWithEnginePreset creates a medium.
+func NewMediumWithEnginePreset(engine *Engine, preset MediumPreset) *Medium {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMedium")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), objref.IDOf(engine), preset)
+	return mediumAdopt(_id)
 }
 
 // Mediumable is the interface implemented by [Medium], for mocking and DI.
 type Mediumable interface {
-	Unwrap() *raw.PHASEMedium
+	obj.Object
 }
 
 var _ Mediumable = (*Medium)(nil)

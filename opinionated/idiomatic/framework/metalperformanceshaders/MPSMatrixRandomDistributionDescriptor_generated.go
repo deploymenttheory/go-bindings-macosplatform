@@ -5,149 +5,146 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixRandomDistributionDescriptor wraps [raw.MPSMatrixRandomDistributionDescriptor] with a fluent Go API.
+// MatrixRandomDistributionDescriptor is an idiomatic wrapper over the Objective-C class MPSMatrixRandomDistributionDescriptor.
 type MatrixRandomDistributionDescriptor struct {
-	inner *raw.MPSMatrixRandomDistributionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixRandomDistributionDescriptor].
-func (x *MatrixRandomDistributionDescriptor) Unwrap() *raw.MPSMatrixRandomDistributionDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixRandomDistributionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixRandomDistributionDescriptorFromID adopts an existing object pointer as a MatrixRandomDistributionDescriptor (nil for 0).
+// MatrixRandomDistributionDescriptorFromID adopts an existing Objective-C object as a MatrixRandomDistributionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixRandomDistributionDescriptorFromID(id objc.ID) *MatrixRandomDistributionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixRandomDistributionDescriptor{inner: raw.MPSMatrixRandomDistributionDescriptorFromID(id)}
+	x := &MatrixRandomDistributionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatrixRandomDistributionDescriptor creates a new [MatrixRandomDistributionDescriptor].
+// matrixRandomDistributionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MatrixRandomDistributionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixRandomDistributionDescriptorAdopt(id objc.ID) *MatrixRandomDistributionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixRandomDistributionDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatrixRandomDistributionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixRandomDistributionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixRandomDistributionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixRandomDistributionDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMatrixRandomDistributionDescriptor creates a new MatrixRandomDistributionDescriptor.
 func NewMatrixRandomDistributionDescriptor() *MatrixRandomDistributionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("new"))
-	return &MatrixRandomDistributionDescriptor{inner: raw.MPSMatrixRandomDistributionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("new"))
+	return matrixRandomDistributionDescriptorAdopt(_id)
 }
 
-// @property   distributionType @abstract   The type of distribution.
-//
-// WithDistributionType sets the distributionType property and returns the receiver for chaining.
-func (x *MatrixRandomDistributionDescriptor) WithDistributionType(distributionType mpsmatrix.MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor {
-	x.inner.SetDistributionType(distributionType)
-	return x
-}
-
-// @property   minimum @abstract   For distributions of values bounded below, this value describes the minimum.
-//
-// WithMinimum sets the minimum property and returns the receiver for chaining.
+// WithMinimum for distributions of values bounded below, this value describes the minimum.
 func (x *MatrixRandomDistributionDescriptor) WithMinimum(minimum float32) *MatrixRandomDistributionDescriptor {
-	x.inner.SetMinimum(minimum)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimum:"), minimum)
 	return x
 }
 
-// @property   maximum @abstract   For distributions of values bounded above, this value describes the maximum.
-//
-// WithMaximum sets the maximum property and returns the receiver for chaining.
+// WithMaximum for distributions of values bounded above, this value describes the maximum.
 func (x *MatrixRandomDistributionDescriptor) WithMaximum(maximum float32) *MatrixRandomDistributionDescriptor {
-	x.inner.SetMaximum(maximum)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximum:"), maximum)
 	return x
 }
 
-// @property   mean @abstract   The value to use for distributions described by their mean.
-//
-// WithMean sets the mean property and returns the receiver for chaining.
+// WithMean the value to use for distributions described by their mean.
 func (x *MatrixRandomDistributionDescriptor) WithMean(mean float32) *MatrixRandomDistributionDescriptor {
-	x.inner.SetMean(mean)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMean:"), mean)
 	return x
 }
 
-// @property   standardDeviation @abstract   The value to use for distributions described by their standardDeviation.
-//
-// WithStandardDeviation sets the standardDeviation property and returns the receiver for chaining.
+// WithStandardDeviation the value to use for distributions described by their standardDeviation.
 func (x *MatrixRandomDistributionDescriptor) WithStandardDeviation(standardDeviation float32) *MatrixRandomDistributionDescriptor {
-	x.inner.SetStandardDeviation(standardDeviation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardDeviation:"), standardDeviation)
 	return x
 }
 
-// @property   distributionType @abstract   The type of distribution.
-//
-// DistributionType calls the underlying DistributionType.
-func (x *MatrixRandomDistributionDescriptor) DistributionType() mpsmatrix.MPSMatrixRandomDistribution {
-	return x.inner.DistributionType()
-}
-
-// SetDistributionType calls the underlying SetDistributionType.
-func (x *MatrixRandomDistributionDescriptor) SetDistributionType(distributionType mpsmatrix.MPSMatrixRandomDistribution) {
-	x.inner.SetDistributionType(distributionType)
-}
-
-// @property   minimum @abstract   For distributions of values bounded below, this value describes the minimum.
-//
-// Minimum calls the underlying Minimum.
+// Minimum for distributions of values bounded below, this value describes the minimum.
 func (x *MatrixRandomDistributionDescriptor) Minimum() float32 {
-	return x.inner.Minimum()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimum"))
+	return _r
 }
 
-// SetMinimum calls the underlying SetMinimum.
+// SetMinimum wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetMinimum(minimum float32) {
-	x.inner.SetMinimum(minimum)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimum:"), minimum)
 }
 
-// @property   maximum @abstract   For distributions of values bounded above, this value describes the maximum.
-//
-// Maximum calls the underlying Maximum.
+// Maximum for distributions of values bounded above, this value describes the maximum.
 func (x *MatrixRandomDistributionDescriptor) Maximum() float32 {
-	return x.inner.Maximum()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximum"))
+	return _r
 }
 
-// SetMaximum calls the underlying SetMaximum.
+// SetMaximum wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetMaximum(maximum float32) {
-	x.inner.SetMaximum(maximum)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximum:"), maximum)
 }
 
-// @property   mean @abstract   The value to use for distributions described by their mean.
-//
-// Mean calls the underlying Mean.
+// Mean the value to use for distributions described by their mean.
 func (x *MatrixRandomDistributionDescriptor) Mean() float32 {
-	return x.inner.Mean()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mean"))
+	return _r
 }
 
-// SetMean calls the underlying SetMean.
+// SetMean wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetMean(mean float32) {
-	x.inner.SetMean(mean)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMean:"), mean)
 }
 
-// @property   standardDeviation @abstract   The value to use for distributions described by their standardDeviation.
-//
-// StandardDeviation calls the underlying StandardDeviation.
+// StandardDeviation the value to use for distributions described by their standardDeviation.
 func (x *MatrixRandomDistributionDescriptor) StandardDeviation() float32 {
-	return x.inner.StandardDeviation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("standardDeviation"))
+	return _r
 }
 
-// SetStandardDeviation calls the underlying SetStandardDeviation.
+// SetStandardDeviation wraps the corresponding Objective-C method.
 func (x *MatrixRandomDistributionDescriptor) SetStandardDeviation(standardDeviation float32) {
-	x.inner.SetStandardDeviation(standardDeviation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardDeviation:"), standardDeviation)
 }
 
 // MatrixRandomDistributionDescriptorable is the interface implemented by [MatrixRandomDistributionDescriptor], for mocking and DI.
 type MatrixRandomDistributionDescriptorable interface {
-	Unwrap() *raw.MPSMatrixRandomDistributionDescriptor
-	WithDistributionType(distributionType mpsmatrix.MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor
+	obj.Object
 	WithMinimum(minimum float32) *MatrixRandomDistributionDescriptor
 	WithMaximum(maximum float32) *MatrixRandomDistributionDescriptor
 	WithMean(mean float32) *MatrixRandomDistributionDescriptor
 	WithStandardDeviation(standardDeviation float32) *MatrixRandomDistributionDescriptor
-	DistributionType() mpsmatrix.MPSMatrixRandomDistribution
-	SetDistributionType(distributionType mpsmatrix.MPSMatrixRandomDistribution)
 	Minimum() float32
 	SetMinimum(minimum float32)
 	Maximum() float32

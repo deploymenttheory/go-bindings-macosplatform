@@ -5,108 +5,69 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayStridedSlice wraps [raw.MPSNDArrayStridedSlice] with a fluent Go API.
+// NDArrayStridedSlice is an idiomatic wrapper over the Objective-C class MPSNDArrayStridedSlice.
+//
+// It embeds [NDArrayUnaryKernel], promoting that type's methods.
 type NDArrayStridedSlice struct {
-	inner *raw.MPSNDArrayStridedSlice
+	NDArrayUnaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayStridedSlice].
-func (x *NDArrayStridedSlice) Unwrap() *raw.MPSNDArrayStridedSlice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayStridedSlice) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayStridedSliceFromID adopts an existing object pointer as a NDArrayStridedSlice (nil for 0).
+// NDArrayStridedSliceFromID adopts an existing Objective-C object as a NDArrayStridedSlice
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayStridedSliceFromID(id objc.ID) *NDArrayStridedSlice {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayStridedSlice{inner: raw.MPSNDArrayStridedSliceFromID(id)}
+	x := &NDArrayStridedSlice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNDArrayStridedSlice creates a new [NDArrayStridedSlice].
+// nDArrayStridedSliceAdopt wraps an Objective-C object that this code just created as a
+// NDArrayStridedSlice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayStridedSliceAdopt(id objc.ID) *NDArrayStridedSlice {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayStridedSlice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNDArrayStridedSlice creates a new NDArrayStridedSlice.
 func NewNDArrayStridedSlice() *NDArrayStridedSlice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayStridedSlice")), objc.RegisterName("new"))
-	return &NDArrayStridedSlice{inner: raw.MPSNDArrayStridedSliceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayStridedSlice")), objc.RegisterName("new"))
+	return nDArrayStridedSliceAdopt(_id)
 }
 
-// @property  strides @abstract  The strides to use when slicing the input array.
-//
-// WithStrides sets the strides property and returns the receiver for chaining.
-func (x *NDArrayStridedSlice) WithStrides(strides mpsndarray.MPSNDArrayOffsets) *NDArrayStridedSlice {
-	x.inner.SetStrides(strides)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayStridedSlice) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSlice {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayStridedSlice) WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSlice {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
-	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @property  strides @abstract  The strides to use when slicing the input array.
-//
-// Strides calls the underlying Strides.
-func (x *NDArrayStridedSlice) Strides() mpsndarray.MPSNDArrayOffsets {
-	return x.inner.Strides()
-}
-
-// SetStrides calls the underlying SetStrides.
-func (x *NDArrayStridedSlice) SetStrides(strides mpsndarray.MPSNDArrayOffsets) {
-	x.inner.SetStrides(strides)
-}
-
-func (x *NDArrayStridedSlice) asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel {
-	return &x.inner.MPSNDArrayUnaryKernel
-}
-
-func (x *NDArrayStridedSlice) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayStridedSlice) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayStridedSlice) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayStridedSliceable is the interface implemented by [NDArrayStridedSlice], for mocking and DI.
 type NDArrayStridedSliceable interface {
-	Unwrap() *raw.MPSNDArrayStridedSlice
-	WithStrides(strides mpsndarray.MPSNDArrayOffsets) *NDArrayStridedSlice
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSlice
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSlice
+	obj.Object
 	WithLabel(label string) *NDArrayStridedSlice
-	Strides() mpsndarray.MPSNDArrayOffsets
-	SetStrides(strides mpsndarray.MPSNDArrayOffsets)
 }
 
 var _ NDArrayStridedSliceable = (*NDArrayStridedSlice)(nil)
+
+var _ NDArrayUnaryKernelProvider = (*NDArrayStridedSlice)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayStridedSlice)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayStridedSlice)(nil)
+
+var _ KernelProvider = (*NDArrayStridedSlice)(nil)

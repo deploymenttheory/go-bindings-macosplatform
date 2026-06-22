@@ -5,14 +5,11 @@
 package mediaextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// MediaExtensionErrorDomain returns the string constant MediaExtensionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MediaExtensionErrorDomain() objc.ID {
-	if _r := raw.MediaExtensionErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MediaExtensionErrorDomain returns the string constant MediaExtensionErrorDomain, for use as a dictionary key or argument.
+func MediaExtensionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MediaExtensionErrorDomain")))
 }

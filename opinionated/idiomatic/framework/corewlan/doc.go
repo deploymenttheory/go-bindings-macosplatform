@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package corewlan provides a fluent Go API over the macOS CoreWLAN framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Configuration: [MutableConfiguration]
+//   - NetworkProfile: [MutableNetworkProfile]
 package corewlan

@@ -5,64 +5,70 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestListStructArgumentRequestParams wraps [raw.MTRTestClusterClusterTestListStructArgumentRequestParams] with a fluent Go API.
+// MTRTestClusterClusterTestListStructArgumentRequestParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestListStructArgumentRequestParams.
+//
+// It embeds [MTRUnitTestingClusterTestListStructArgumentRequestParams], promoting that type's methods.
 type MTRTestClusterClusterTestListStructArgumentRequestParams struct {
-	inner *raw.MTRTestClusterClusterTestListStructArgumentRequestParams
+	MTRUnitTestingClusterTestListStructArgumentRequestParams
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestListStructArgumentRequestParams].
-func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestListStructArgumentRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestListStructArgumentRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestListStructArgumentRequestParams (nil for 0).
+// MTRTestClusterClusterTestListStructArgumentRequestParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestListStructArgumentRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestListStructArgumentRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestListStructArgumentRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestListStructArgumentRequestParams{inner: raw.MTRTestClusterClusterTestListStructArgumentRequestParamsFromID(id)}
+	x := &MTRTestClusterClusterTestListStructArgumentRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestListStructArgumentRequestParams creates a new [MTRTestClusterClusterTestListStructArgumentRequestParams].
+// mTRTestClusterClusterTestListStructArgumentRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestListStructArgumentRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestListStructArgumentRequestParamsAdopt(id objc.ID) *MTRTestClusterClusterTestListStructArgumentRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestListStructArgumentRequestParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRTestClusterClusterTestListStructArgumentRequestParams creates a new MTRTestClusterClusterTestListStructArgumentRequestParams.
 func NewMTRTestClusterClusterTestListStructArgumentRequestParams() *MTRTestClusterClusterTestListStructArgumentRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestListStructArgumentRequestParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestListStructArgumentRequestParams{inner: raw.MTRTestClusterClusterTestListStructArgumentRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestListStructArgumentRequestParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestListStructArgumentRequestParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListStructArgumentRequestParams {
-	x.inner.MTRUnitTestingClusterTestListStructArgumentRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListStructArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestListStructArgumentRequestParams {
-	x.inner.MTRUnitTestingClusterTestListStructArgumentRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestListStructArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestListStructArgumentRequestParams) asMTRUnitTestingClusterTestListStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestListStructArgumentRequestParams {
-	return &x.inner.MTRUnitTestingClusterTestListStructArgumentRequestParams
 }
 
 // MTRTestClusterClusterTestListStructArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListStructArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestListStructArgumentRequestParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestListStructArgumentRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListStructArgumentRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestListStructArgumentRequestParams
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListStructArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestListStructArgumentRequestParams
 }
 
 var _ MTRTestClusterClusterTestListStructArgumentRequestParamsable = (*MTRTestClusterClusterTestListStructArgumentRequestParams)(nil)
+
+var _ MTRUnitTestingClusterTestListStructArgumentRequestParamsProvider = (*MTRTestClusterClusterTestListStructArgumentRequestParams)(nil)

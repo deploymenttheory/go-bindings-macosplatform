@@ -5,104 +5,128 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class you use to specify a configuration to your external display configurator.
+// CaptureExternalDisplayConfiguration is an idiomatic wrapper over the Objective-C class AVCaptureExternalDisplayConfiguration.
 //
-// CaptureExternalDisplayConfiguration wraps [raw.AVCaptureExternalDisplayConfiguration] with a fluent Go API.
+// A class you use to specify a configuration to your external display configurator.
 type CaptureExternalDisplayConfiguration struct {
-	inner *raw.AVCaptureExternalDisplayConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureExternalDisplayConfiguration].
-func (x *CaptureExternalDisplayConfiguration) Unwrap() *raw.AVCaptureExternalDisplayConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureExternalDisplayConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureExternalDisplayConfigurationFromID adopts an existing object pointer as a CaptureExternalDisplayConfiguration (nil for 0).
+// CaptureExternalDisplayConfigurationFromID adopts an existing Objective-C object as a CaptureExternalDisplayConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureExternalDisplayConfigurationFromID(id objc.ID) *CaptureExternalDisplayConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureExternalDisplayConfiguration{inner: raw.AVCaptureExternalDisplayConfigurationFromID(id)}
+	x := &CaptureExternalDisplayConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureExternalDisplayConfiguration creates a new [CaptureExternalDisplayConfiguration].
+// captureExternalDisplayConfigurationAdopt wraps an Objective-C object that this code just created as a
+// CaptureExternalDisplayConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureExternalDisplayConfigurationAdopt(id objc.ID) *CaptureExternalDisplayConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureExternalDisplayConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureExternalDisplayConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureExternalDisplayConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureExternalDisplayConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureExternalDisplayConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptureExternalDisplayConfiguration creates a new CaptureExternalDisplayConfiguration.
 func NewCaptureExternalDisplayConfiguration() *CaptureExternalDisplayConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureExternalDisplayConfiguration")), objc.RegisterName("new"))
-	return &CaptureExternalDisplayConfiguration{inner: raw.AVCaptureExternalDisplayConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureExternalDisplayConfiguration")), objc.RegisterName("new"))
+	return captureExternalDisplayConfigurationAdopt(_id)
 }
 
-// A property indicating whether the frame rate of the external display should be configured to match the camera’s frame rate.
-//
-// WithShouldMatchFrameRate sets the shouldMatchFrameRate property and returns the receiver for chaining.
+// WithShouldMatchFrameRate a property indicating whether the frame rate of the external display should be configured to match the camera’s frame rate.
 func (x *CaptureExternalDisplayConfiguration) WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration {
-	x.inner.SetShouldMatchFrameRate(shouldMatchFrameRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMatchFrameRate:"), shouldMatchFrameRate)
 	return x
 }
 
-// A property indicating whether the color space of the configurator’s preview layer should be preserved on the output display by avoiding color space conversions.
-//
-// WithBypassColorSpaceConversion sets the bypassColorSpaceConversion property and returns the receiver for chaining.
+// WithBypassColorSpaceConversion a property indicating whether the color space of the configurator’s preview layer should be preserved on the output display by avoiding color space conversions.
 func (x *CaptureExternalDisplayConfiguration) WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration {
-	x.inner.SetBypassColorSpaceConversion(bypassColorSpaceConversion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypassColorSpaceConversion:"), bypassColorSpaceConversion)
 	return x
 }
 
-// Your preferred external display resolution.
-//
-// WithPreferredResolution sets the preferredResolution property and returns the receiver for chaining.
+// WithPreferredResolution your preferred external display resolution.
 func (x *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration {
-	x.inner.SetPreferredResolution(preferredResolution)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredResolution:"), preferredResolution)
 	return x
 }
 
-// A property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
-//
-// ShouldMatchFrameRate calls the underlying ShouldMatchFrameRate.
+// ShouldMatchFrameRate a property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
 func (x *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
-	return x.inner.ShouldMatchFrameRate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMatchFrameRate"))
+	return _r
 }
 
-// SetShouldMatchFrameRate calls the underlying SetShouldMatchFrameRate.
+// SetShouldMatchFrameRate wraps the corresponding Objective-C method.
 func (x *CaptureExternalDisplayConfiguration) SetShouldMatchFrameRate(shouldMatchFrameRate bool) {
-	x.inner.SetShouldMatchFrameRate(shouldMatchFrameRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMatchFrameRate:"), shouldMatchFrameRate)
 }
 
-// A property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's  “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
-//
-// BypassColorSpaceConversion calls the underlying BypassColorSpaceConversion.
+// BypassColorSpaceConversion a property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's  “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
 func (x *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
-	return x.inner.BypassColorSpaceConversion()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypassColorSpaceConversion"))
+	return _r
 }
 
-// SetBypassColorSpaceConversion calls the underlying SetBypassColorSpaceConversion.
+// SetBypassColorSpaceConversion wraps the corresponding Objective-C method.
 func (x *CaptureExternalDisplayConfiguration) SetBypassColorSpaceConversion(bypassColorSpaceConversion bool) {
-	x.inner.SetBypassColorSpaceConversion(bypassColorSpaceConversion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypassColorSpaceConversion:"), bypassColorSpaceConversion)
 }
 
-// Your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
-//
-// PreferredResolution calls the underlying PreferredResolution.
+// PreferredResolution your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
 func (x *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
-	return x.inner.PreferredResolution()
+	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(x), objc.RegisterName("preferredResolution"))
+	return _r
 }
 
-// SetPreferredResolution calls the underlying SetPreferredResolution.
+// SetPreferredResolution wraps the corresponding Objective-C method.
 func (x *CaptureExternalDisplayConfiguration) SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions) {
-	x.inner.SetPreferredResolution(preferredResolution)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredResolution:"), preferredResolution)
 }
 
 // CaptureExternalDisplayConfigurationable is the interface implemented by [CaptureExternalDisplayConfiguration], for mocking and DI.
 type CaptureExternalDisplayConfigurationable interface {
-	Unwrap() *raw.AVCaptureExternalDisplayConfiguration
+	obj.Object
 	WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration
 	WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration
 	WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration

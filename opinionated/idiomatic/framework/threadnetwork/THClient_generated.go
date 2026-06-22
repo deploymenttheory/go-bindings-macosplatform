@@ -6,105 +6,135 @@ package threadnetwork
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/threadnetwork"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A class that supports safely sharing Thread credentials between multiple clients.
+// THClient is an idiomatic wrapper over the Objective-C class THClient.
 //
-// THClient wraps [raw.THClient] with a fluent Go API.
+// A class that supports safely sharing Thread credentials between multiple clients.
 type THClient struct {
-	inner *raw.THClient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.THClient].
-func (x *THClient) Unwrap() *raw.THClient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *THClient) ID() objc.ID { return x.inner.Ptr() }
-
-// THClientFromID adopts an existing object pointer as a THClient (nil for 0).
+// THClientFromID adopts an existing Objective-C object as a THClient
+// (nil for 0), retaining it and registering a release finalizer.
 func THClientFromID(id objc.ID) *THClient {
 	if id == 0 {
 		return nil
 	}
-	return &THClient{inner: raw.THClientFromID(id)}
+	x := &THClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTHClient creates a new [THClient].
+// tHClientAdopt wraps an Objective-C object that this code just created as a
+// THClient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tHClientAdopt(id objc.ID) *THClient {
+	if id == 0 {
+		return nil
+	}
+	x := &THClient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *THClient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *THClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *THClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *THClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTHClient creates a new THClient.
 func NewTHClient() *THClient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("THClient")), objc.RegisterName("new"))
-	return &THClient{inner: raw.THClientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("THClient")), objc.RegisterName("new"))
+	return tHClientAdopt(_id)
 }
 
-// Requests all Thread credentials from the framework.
+// RetrieveAllCredentials requests all Thread credentials from the framework.
 //
 // RetrieveAllCredentials blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveAllCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error) {
+func (x *THClient) RetrieveAllCredentials(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSSet[*raw.THCredentials]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RetrieveAllCredentials(func(_p0 *foundation.NSSet[*raw.THCredentials], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveAllCredentials:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSSet[*raw.THCredentials]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Returns a set of the active credentials.
+// RetrieveAllActiveCredentials returns a set of the active credentials.
 //
 // RetrieveAllActiveCredentials blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveAllActiveCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error) {
+func (x *THClient) RetrieveAllActiveCredentials(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSSet[*raw.THCredentials]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RetrieveAllActiveCredentials(func(_p0 *foundation.NSSet[*raw.THCredentials], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveAllActiveCredentials:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSSet[*raw.THCredentials]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Deletes Thread network credentials from the framework database for a Border Agent.
+// DeleteCredentialsForBorderAgentCompletion deletes Thread network credentials from the framework database for a Border Agent.
 //
 // DeleteCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
-func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) error {
+func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.DeleteCredentialsForBorderAgentCompletion(borderAgentID, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteCredentialsForBorderAgent:completion:"), objref.IDOf(borderAgentID), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -113,25 +143,22 @@ func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context
 	}
 }
 
-// Requests Thread credentials for a Border Agent.
+// RetrieveCredentialsForBorderAgentCompletion requests Thread credentials for a Border Agent.
 //
 // RetrieveCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) (*THCredentials, error) {
+func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) (result *THCredentials, err error) {
 	type _result struct {
 		val *THCredentials
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RetrieveCredentialsForBorderAgentCompletion(borderAgentID, func(_p0 *raw.THCredentials, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &THCredentials{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = THCredentialsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveCredentialsForBorderAgent:completion:"), objref.IDOf(borderAgentID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -141,18 +168,17 @@ func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Conte
 	}
 }
 
-// Stores Thread network credentials into the framework database that a Border Agent provides.
+// StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion stores Thread network credentials into the framework database that a Border Agent provides.
 //
 // StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion blocks until the operation completes or ctx is cancelled.
-func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID *foundation.NSData, activeOperationalDataSet *foundation.NSData) error {
+func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID obj.Object, activeOperationalDataSet obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(borderAgentID, activeOperationalDataSet, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeCredentialsForBorderAgent:activeOperationalDataSet:completion:"), objref.IDOf(borderAgentID), objref.IDOf(activeOperationalDataSet), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -161,25 +187,22 @@ func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetComplet
 	}
 }
 
-// Requests Thread credentials for the preferred network.
+// RetrievePreferredCredentials requests Thread credentials for the preferred network.
 //
 // RetrievePreferredCredentials blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (*THCredentials, error) {
+func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (result *THCredentials, err error) {
 	type _result struct {
 		val *THCredentials
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RetrievePreferredCredentials(func(_p0 *raw.THCredentials, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &THCredentials{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = THCredentialsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrievePreferredCredentials:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -189,25 +212,22 @@ func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (*THCredent
 	}
 }
 
-// Requests Thread credentials for an extended Personal Area Network (PAN) ID.
+// RetrieveCredentialsForExtendedPANIDCompletion requests Thread credentials for an extended Personal Area Network (PAN) ID.
 //
 // RetrieveCredentialsForExtendedPANIDCompletion blocks until the operation completes or ctx is cancelled.
-func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID *foundation.NSData) (*THCredentials, error) {
+func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID obj.Object) (result *THCredentials, err error) {
 	type _result struct {
 		val *THCredentials
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RetrieveCredentialsForExtendedPANIDCompletion(extendedPANID, func(_p0 *raw.THCredentials, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &THCredentials{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = THCredentialsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveCredentialsForExtendedPANID:completion:"), objref.IDOf(extendedPANID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -217,31 +237,27 @@ func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Con
 	}
 }
 
-// Determines if the essential operating parameters match the preferred network’s parameters.
-//
-// CheckPreferredNetworkForActiveOperationalDatasetCompletion calls the underlying CheckPreferredNetworkForActiveOperationalDatasetCompletion.
-func (x *THClient) CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet *foundation.NSData, completion func(bool)) {
-	x.inner.CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet, completion)
+// CheckPreferredNetworkForActiveOperationalDatasetCompletion determines if the essential operating parameters match the preferred network’s parameters.
+func (x *THClient) CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet obj.Object, completion func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkPreferredNetworkForActiveOperationalDataset:completion:"), objref.IDOf(activeOperationalDataSet), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Indicates whether a preferred network is available.
-//
-// IsPreferredNetworkAvailableWithCompletion calls the underlying IsPreferredNetworkAvailableWithCompletion.
+// IsPreferredNetworkAvailableWithCompletion indicates whether a preferred network is available.
 func (x *THClient) IsPreferredNetworkAvailableWithCompletion(completion func(bool)) {
-	x.inner.IsPreferredNetworkAvailableWithCompletion(completion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isPreferredNetworkAvailableWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // THClientable is the interface implemented by [THClient], for mocking and DI.
 type THClientable interface {
-	Unwrap() *raw.THClient
-	RetrieveAllCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error)
-	RetrieveAllActiveCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error)
-	DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) error
-	RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) (*THCredentials, error)
-	StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID *foundation.NSData, activeOperationalDataSet *foundation.NSData) error
+	obj.Object
+	RetrieveAllCredentials(ctx context.Context) (obj.Object, error)
+	RetrieveAllActiveCredentials(ctx context.Context) (obj.Object, error)
+	DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) error
+	RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID obj.Object) (*THCredentials, error)
+	StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID obj.Object, activeOperationalDataSet obj.Object) error
 	RetrievePreferredCredentials(ctx context.Context) (*THCredentials, error)
-	RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID *foundation.NSData) (*THCredentials, error)
-	CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet *foundation.NSData, completion func(bool))
+	RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID obj.Object) (*THCredentials, error)
+	CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet obj.Object, completion func(bool))
 	IsPreferredNetworkAvailableWithCompletion(completion func(bool))
 }
 

@@ -5,420 +5,235 @@
 package imagecapturecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @const      ICTransportTypeUSB @abstract   Indicates that the device uses USB transport.
-// ICTransportTypeUSB returns the string constant ICTransportTypeUSB as an objc.ID, for use as a dictionary key or selector argument.
-func ICTransportTypeUSB() objc.ID {
-	if _r := raw.ICTransportTypeUSB(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICTransportTypeUSB returns the string constant ICTransportTypeUSB, for use as a dictionary key or argument.
+func ICTransportTypeUSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTransportTypeUSB")))
 }
 
-// @const      ICTransportTypeFireWire @abstract   Indicates that the device uses FireWire transport.
-// ICTransportTypeFireWire returns the string constant ICTransportTypeFireWire as an objc.ID, for use as a dictionary key or selector argument.
-func ICTransportTypeFireWire() objc.ID {
-	return purego.CFConstant(raw.ICTransportTypeFireWire())
+// ICTransportTypeFireWire returns the string constant ICTransportTypeFireWire, for use as a dictionary key or argument.
+func ICTransportTypeFireWire() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTransportTypeFireWire")))
 }
 
-// @const      ICTransportTypeBluetooth @abstract   Indicates that the device uses Bluetooth transport.
-// ICTransportTypeBluetooth returns the string constant ICTransportTypeBluetooth as an objc.ID, for use as a dictionary key or selector argument.
-func ICTransportTypeBluetooth() objc.ID {
-	return purego.CFConstant(raw.ICTransportTypeBluetooth())
+// ICTransportTypeBluetooth returns the string constant ICTransportTypeBluetooth, for use as a dictionary key or argument.
+func ICTransportTypeBluetooth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTransportTypeBluetooth")))
 }
 
-// @const      ICTransportTypeMassStorage @abstract   Indicates that the device use mounts as a mass-storage volume.
-// ICTransportTypeMassStorage returns the string constant ICTransportTypeMassStorage as an objc.ID, for use as a dictionary key or selector argument.
-func ICTransportTypeMassStorage() objc.ID {
-	if _r := raw.ICTransportTypeMassStorage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICTransportTypeMassStorage returns the string constant ICTransportTypeMassStorage, for use as a dictionary key or argument.
+func ICTransportTypeMassStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTransportTypeMassStorage")))
 }
 
-// @const      ICTransportTypeTCPIP @abstract   Indicates that the device uses TCP/IP transport. These devices are discovered using Bonjour.
-// ICTransportTypeTCPIP returns the string constant ICTransportTypeTCPIP as an objc.ID, for use as a dictionary key or selector argument.
-func ICTransportTypeTCPIP() objc.ID {
-	if _r := raw.ICTransportTypeTCPIP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICTransportTypeTCPIP returns the string constant ICTransportTypeTCPIP, for use as a dictionary key or argument.
+func ICTransportTypeTCPIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTransportTypeTCPIP")))
 }
 
-// @const      ICTransportTypeProximity @abstract   Indicates that the device transport is based on proximity instead of a predefined phyiscal layer.
-// ICTransportTypeProximity returns the string constant ICTransportTypeProximity as an objc.ID, for use as a dictionary key or selector argument.
-func ICTransportTypeProximity() objc.ID {
-	if _r := raw.ICTransportTypeProximity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICTransportTypeProximity returns the string constant ICTransportTypeProximity, for use as a dictionary key or argument.
+func ICTransportTypeProximity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTransportTypeProximity")))
 }
 
-// @const      ICStatusNotificationKey @abstract   Key for a non-localized notification string.
-// ICStatusNotificationKey returns the string constant ICStatusNotificationKey as an objc.ID, for use as a dictionary key or selector argument.
-func ICStatusNotificationKey() objc.ID {
-	if _r := raw.ICStatusNotificationKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICStatusNotificationKey returns the string constant ICStatusNotificationKey, for use as a dictionary key or argument.
+func ICStatusNotificationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICStatusNotificationKey")))
 }
 
-// @const      ICStatusCodeKey @abstract   One of values defined in ICReturnCode.
-// ICStatusCodeKey returns the string constant ICStatusCodeKey as an objc.ID, for use as a dictionary key or selector argument.
-func ICStatusCodeKey() objc.ID {
-	return purego.CFConstant(raw.ICStatusCodeKey())
+// ICStatusCodeKey returns the string constant ICStatusCodeKey, for use as a dictionary key or argument.
+func ICStatusCodeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICStatusCodeKey"))) }
+
+// ICLocalizedStatusNotificationKey returns the string constant ICLocalizedStatusNotificationKey, for use as a dictionary key or argument.
+func ICLocalizedStatusNotificationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICLocalizedStatusNotificationKey")))
 }
 
-// @const      ICLocalizedStatusNotificationKey @abstract   Key for a localized notification string.
-// ICLocalizedStatusNotificationKey returns the string constant ICLocalizedStatusNotificationKey as an objc.ID, for use as a dictionary key or selector argument.
-func ICLocalizedStatusNotificationKey() objc.ID {
-	return purego.CFConstant(raw.ICLocalizedStatusNotificationKey())
+// ICDeviceCanEjectOrDisconnect returns the string constant ICDeviceCanEjectOrDisconnect, for use as a dictionary key or argument.
+func ICDeviceCanEjectOrDisconnect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeviceCanEjectOrDisconnect")))
 }
 
-// @const      ICDeviceCanEjectOrDisconnect @abstract   Indicates either the device is mounted as a mass-storage volume and can be ejected or the it is a remote device with an active connection that can be disconnected.
-// ICDeviceCanEjectOrDisconnect returns the string constant ICDeviceCanEjectOrDisconnect as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeviceCanEjectOrDisconnect() objc.ID {
-	if _r := raw.ICDeviceCanEjectOrDisconnect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICEnumerationChronologicalOrder returns the string constant ICEnumerationChronologicalOrder, for use as a dictionary key or argument.
+func ICEnumerationChronologicalOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICEnumerationChronologicalOrder")))
 }
 
-// ICEnumerationChronologicalOrder returns the string constant ICEnumerationChronologicalOrder as an objc.ID, for use as a dictionary key or selector argument.
-func ICEnumerationChronologicalOrder() objc.ID {
-	if _r := raw.ICEnumerationChronologicalOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeviceLocationDescriptionUSB returns the string constant ICDeviceLocationDescriptionUSB, for use as a dictionary key or argument.
+func ICDeviceLocationDescriptionUSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeviceLocationDescriptionUSB")))
 }
 
-// @const      ICDeviceLocationDescriptionUSB @abstract   This description is returned for locationDescription property of a device connected to a USB port.
-// ICDeviceLocationDescriptionUSB returns the string constant ICDeviceLocationDescriptionUSB as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeviceLocationDescriptionUSB() objc.ID {
-	if _r := raw.ICDeviceLocationDescriptionUSB(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeviceLocationDescriptionFireWire returns the string constant ICDeviceLocationDescriptionFireWire, for use as a dictionary key or argument.
+func ICDeviceLocationDescriptionFireWire() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeviceLocationDescriptionFireWire")))
 }
 
-// @const      ICDeviceLocationDescriptionFireWire @abstract   This description is returned for locationDescription property of a device connected to a FireWire port.
-// ICDeviceLocationDescriptionFireWire returns the string constant ICDeviceLocationDescriptionFireWire as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeviceLocationDescriptionFireWire() objc.ID {
-	if _r := raw.ICDeviceLocationDescriptionFireWire(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeviceLocationDescriptionBluetooth returns the string constant ICDeviceLocationDescriptionBluetooth, for use as a dictionary key or argument.
+func ICDeviceLocationDescriptionBluetooth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeviceLocationDescriptionBluetooth")))
 }
 
-// @const      ICDeviceLocationDescriptionBluetooth @abstract   This description is returned for locationDescription property of a device connected via Bluetooth.
-// ICDeviceLocationDescriptionBluetooth returns the string constant ICDeviceLocationDescriptionBluetooth as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeviceLocationDescriptionBluetooth() objc.ID {
-	if _r := raw.ICDeviceLocationDescriptionBluetooth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeviceLocationDescriptionMassStorage returns the string constant ICDeviceLocationDescriptionMassStorage, for use as a dictionary key or argument.
+func ICDeviceLocationDescriptionMassStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeviceLocationDescriptionMassStorage")))
 }
 
-// @const      ICDeviceLocationDescriptionMassStorage @abstract   This description is returned for locationDescription property of a device that is mounted as a mass-storage volume.
-// ICDeviceLocationDescriptionMassStorage returns the string constant ICDeviceLocationDescriptionMassStorage as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeviceLocationDescriptionMassStorage() objc.ID {
-	if _r := raw.ICDeviceLocationDescriptionMassStorage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICRunLoopMode returns the string constant ICRunLoopMode, for use as a dictionary key or argument.
+func ICRunLoopMode() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICRunLoopMode"))) }
+
+// ICErrorDomain returns the string constant ICErrorDomain, for use as a dictionary key or argument.
+func ICErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICErrorDomain"))) }
+
+// ICImageSourceThumbnailMaxPixelSize returns the string constant ICImageSourceThumbnailMaxPixelSize, for use as a dictionary key or argument.
+func ICImageSourceThumbnailMaxPixelSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICImageSourceThumbnailMaxPixelSize")))
 }
 
-// ICRunLoopMode returns the string constant ICRunLoopMode as an objc.ID, for use as a dictionary key or selector argument.
-func ICRunLoopMode() objc.ID {
-	return purego.CFConstant(raw.ICRunLoopMode())
+// ICImageSourceShouldCache returns the string constant ICImageSourceShouldCache, for use as a dictionary key or argument.
+func ICImageSourceShouldCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICImageSourceShouldCache")))
 }
 
-// @ICEXIFOrientationType @abstract Type representing EXIF Orientation tag value @discussion The meaning of this value is defined by the EXIF specification. Here is what the letter F would look like if it were tagged correctly and displayed by a program that ignores the orientation tag (thus showing the stored image): 1             2             3             4 8888888       8888888            88       88 88                 88            88       88 8888             8888          8888       8888 88                 88            88       88 88                 88       8888888       8888888 5             6             7             8 8888888888    88                    88    8888888888 88  88        88  88            88  88        88  88 88            8888888888    8888888888            88
-// ICErrorDomain returns the string constant ICErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ICErrorDomain() objc.ID {
-	if _r := raw.ICErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDownloadsDirectoryURL returns the string constant ICDownloadsDirectoryURL, for use as a dictionary key or argument.
+func ICDownloadsDirectoryURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDownloadsDirectoryURL")))
 }
 
-// @const ICCameraItemThumbnailOption @enum ICImageSourceShouldCache Use of this key will override any custom thumbnail size requested, ignoring the ICImageSourceThumbnailMaxPixelSize option entirely. @enum ICImageSourceThumbnailMaxPixelSize Use of this key will be ignored if ICImageSourceShouldCache has also been passed in.  Custom thumbnail requests will never be cached. @discussion Only the embedded EXIF thumbnail, or a created thumbnail of EXIF standard size (160x120) will be cached. Use of the ICImageSourceShouldCache flag is discouraged, as the framework shall not act as a backing store out of convienence. If use of this flag is required, it is highly recommeded to only keep the image cached within the framework temporarily, using the method -[ICCameraItem flushThumbnailCache] to evict the thumbnail. Multiple calls to both cache the EXIF thumbnail, and subsequently retrieve a larger thumbnail will work as defined.
-// ICImageSourceThumbnailMaxPixelSize returns the string constant ICImageSourceThumbnailMaxPixelSize as an objc.ID, for use as a dictionary key or selector argument.
-func ICImageSourceThumbnailMaxPixelSize() objc.ID {
-	if _r := raw.ICImageSourceThumbnailMaxPixelSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICSaveAsFilename returns the string constant ICSaveAsFilename, for use as a dictionary key or argument.
+func ICSaveAsFilename() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICSaveAsFilename"))) }
+
+// ICSavedFilename returns the string constant ICSavedFilename, for use as a dictionary key or argument.
+func ICSavedFilename() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICSavedFilename"))) }
+
+// ICSavedAncillaryFiles returns the string constant ICSavedAncillaryFiles, for use as a dictionary key or argument.
+func ICSavedAncillaryFiles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICSavedAncillaryFiles")))
 }
 
-// ICImageSourceShouldCache returns the string constant ICImageSourceShouldCache as an objc.ID, for use as a dictionary key or selector argument.
-func ICImageSourceShouldCache() objc.ID {
-	if _r := raw.ICImageSourceShouldCache(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICOverwrite returns the string constant ICOverwrite, for use as a dictionary key or argument.
+func ICOverwrite() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICOverwrite"))) }
+
+// ICDeleteAfterSuccessfulDownload returns the string constant ICDeleteAfterSuccessfulDownload, for use as a dictionary key or argument.
+func ICDeleteAfterSuccessfulDownload() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeleteAfterSuccessfulDownload")))
 }
 
-// @const      ICDownloadsDirectoryURL @abstract   ICDownloadsDirectoryURL @discussion The value for this key should be an NSURL object referencing a writable directory. The downloaded files will be saved in that directory.
-// ICDownloadsDirectoryURL returns the string constant ICDownloadsDirectoryURL as an objc.ID, for use as a dictionary key or selector argument.
-func ICDownloadsDirectoryURL() objc.ID {
-	if _r := raw.ICDownloadsDirectoryURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDownloadSidecarFiles returns the string constant ICDownloadSidecarFiles, for use as a dictionary key or argument.
+func ICDownloadSidecarFiles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDownloadSidecarFiles")))
 }
 
-// @const      ICSaveAsFilename @abstract   ICSaveAsFilename @discussion The value for this key should be an NSString object containing the name to be used for the downloaded file.
-// ICSaveAsFilename returns the string constant ICSaveAsFilename as an objc.ID, for use as a dictionary key or selector argument.
-func ICSaveAsFilename() objc.ID {
-	if _r := raw.ICSaveAsFilename(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICTruncateAfterSuccessfulDownload returns the string constant ICTruncateAfterSuccessfulDownload, for use as a dictionary key or argument.
+func ICTruncateAfterSuccessfulDownload() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICTruncateAfterSuccessfulDownload")))
 }
 
-// @const      ICSavedFilename @abstract   ICSavedFilename @discussion The value for this key will be an NSString object containing the actual name of the saved file. The options dictionary returned in didDownloadFile:error:options:contextInfo: will have this key.
-// ICSavedFilename returns the string constant ICSavedFilename as an objc.ID, for use as a dictionary key or selector argument.
-func ICSavedFilename() objc.ID {
-	if _r := raw.ICSavedFilename(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanTakePicture returns the string constant ICCameraDeviceCanTakePicture, for use as a dictionary key or argument.
+func ICCameraDeviceCanTakePicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanTakePicture")))
 }
 
-// @const      ICSavedAncillaryFiles @abstract   ICSavedAncillaryFiles @discussion The value for this key will be an NSArray object containing names of files associated with the primary file that is downloaded. The options dictionary returned in didDownloadFile:error:options:contextInfo: may have this key.
-// ICSavedAncillaryFiles returns the string constant ICSavedAncillaryFiles as an objc.ID, for use as a dictionary key or selector argument.
-func ICSavedAncillaryFiles() objc.ID {
-	if _r := raw.ICSavedAncillaryFiles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera returns the string constant ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera, for use as a dictionary key or argument.
+func ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera")))
 }
 
-// @const      ICOverwrite @abstract   ICOverwrite @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, the downloaded file will overwrite an existing file with the same name and extension.
-// ICOverwrite returns the string constant ICOverwrite as an objc.ID, for use as a dictionary key or selector argument.
-func ICOverwrite() objc.ID {
-	if _r := raw.ICOverwrite(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanDeleteOneFile returns the string constant ICCameraDeviceCanDeleteOneFile, for use as a dictionary key or argument.
+func ICCameraDeviceCanDeleteOneFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanDeleteOneFile")))
 }
 
-// @const      ICDeleteAfterSuccessfulDownload @abstract   ICDeleteAfterSuccessfulDownload @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, the file will be deleted from the device after it is succcessfully downloaded.
-// ICDeleteAfterSuccessfulDownload returns the string constant ICDeleteAfterSuccessfulDownload as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteAfterSuccessfulDownload() objc.ID {
-	if _r := raw.ICDeleteAfterSuccessfulDownload(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanDeleteAllFiles returns the string constant ICCameraDeviceCanDeleteAllFiles, for use as a dictionary key or argument.
+func ICCameraDeviceCanDeleteAllFiles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanDeleteAllFiles")))
 }
 
-// @const      ICDownloadSidecarFiles @abstract   ICDownloadSidecarFiles @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, all sidecar files will be downloaded along with the media file.
-// ICDownloadSidecarFiles returns the string constant ICDownloadSidecarFiles as an objc.ID, for use as a dictionary key or selector argument.
-func ICDownloadSidecarFiles() objc.ID {
-	if _r := raw.ICDownloadSidecarFiles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanSyncClock returns the string constant ICCameraDeviceCanSyncClock, for use as a dictionary key or argument.
+func ICCameraDeviceCanSyncClock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanSyncClock")))
 }
 
-// @const      ICTruncateAfterSuccessfulDownload @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, and the file is a JPG converted from HEIC on device, the padding will be stripped from the end of the file.  Note that the file size property of the ICCameraItem object will not be updated to reflect the newly truncated image.  This option has no effect for images coming from devices without the ability to convert from HEIC to JPG.
-// ICTruncateAfterSuccessfulDownload returns the string constant ICTruncateAfterSuccessfulDownload as an objc.ID, for use as a dictionary key or selector argument.
-func ICTruncateAfterSuccessfulDownload() objc.ID {
-	if _r := raw.ICTruncateAfterSuccessfulDownload(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanReceiveFile returns the string constant ICCameraDeviceCanReceiveFile, for use as a dictionary key or argument.
+func ICCameraDeviceCanReceiveFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanReceiveFile")))
 }
 
-// @const      ICCameraDeviceCanTakePicture @discussion Indicates that the camera can capture a picture while it is connected, if the client sends a 'requestTakePicture' message to it.
-// ICCameraDeviceCanTakePicture returns the string constant ICCameraDeviceCanTakePicture as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanTakePicture() objc.ID {
-	if _r := raw.ICCameraDeviceCanTakePicture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceCanAcceptPTPCommands returns the string constant ICCameraDeviceCanAcceptPTPCommands, for use as a dictionary key or argument.
+func ICCameraDeviceCanAcceptPTPCommands() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceCanAcceptPTPCommands")))
 }
 
-// @const      ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera @discussion Indicates that the camera can capture a picture while it is connected, if the user presses the shutter release on the camera.
-// ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera returns the string constant ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera() objc.ID {
-	if _r := raw.ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICCameraDeviceSupportsHEIF returns the string constant ICCameraDeviceSupportsHEIF, for use as a dictionary key or argument.
+func ICCameraDeviceSupportsHEIF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICCameraDeviceSupportsHEIF")))
 }
 
-// @const      ICCameraDeviceCanDeleteOneFile @discussion Indicates that the camera can delete a file at a time while it is connected.
-// ICCameraDeviceCanDeleteOneFile returns the string constant ICCameraDeviceCanDeleteOneFile as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanDeleteOneFile() objc.ID {
-	if _r := raw.ICCameraDeviceCanDeleteOneFile(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeleteSuccessful returns the string constant ICDeleteSuccessful, for use as a dictionary key or argument.
+func ICDeleteSuccessful() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeleteSuccessful")))
 }
 
-// @const      ICCameraDeviceCanDeleteAllFiles @discussion Indicates that the camera can delete all files in a single operation while it is connected.
-// ICCameraDeviceCanDeleteAllFiles returns the string constant ICCameraDeviceCanDeleteAllFiles as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanDeleteAllFiles() objc.ID {
-	if _r := raw.ICCameraDeviceCanDeleteAllFiles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeleteCanceled returns the string constant ICDeleteCanceled, for use as a dictionary key or argument.
+func ICDeleteCanceled() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICDeleteCanceled"))) }
+
+// ICDeleteFailed returns the string constant ICDeleteFailed, for use as a dictionary key or argument.
+func ICDeleteFailed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICDeleteFailed"))) }
+
+// ICDeleteErrorReadOnly returns the string constant ICDeleteErrorReadOnly, for use as a dictionary key or argument.
+func ICDeleteErrorReadOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeleteErrorReadOnly")))
 }
 
-// @const      ICCameraDeviceCanSyncClock @discussion Indicates that the camera can synchronize its date and time with that of the host computer.
-// ICCameraDeviceCanSyncClock returns the string constant ICCameraDeviceCanSyncClock as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanSyncClock() objc.ID {
-	if _r := raw.ICCameraDeviceCanSyncClock(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeleteErrorFileMissing returns the string constant ICDeleteErrorFileMissing, for use as a dictionary key or argument.
+func ICDeleteErrorFileMissing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeleteErrorFileMissing")))
 }
 
-// @const      ICCameraDeviceCanReceiveFile @discussion Indicates that the host can upload files to the camera.
-// ICCameraDeviceCanReceiveFile returns the string constant ICCameraDeviceCanReceiveFile as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanReceiveFile() objc.ID {
-	if _r := raw.ICCameraDeviceCanReceiveFile(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeleteErrorDeviceMissing returns the string constant ICDeleteErrorDeviceMissing, for use as a dictionary key or argument.
+func ICDeleteErrorDeviceMissing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeleteErrorDeviceMissing")))
 }
 
-// @const      ICCameraDeviceCanAcceptPTPCommands @discussion Indicates that the camera can accept PTP commands.
-// ICCameraDeviceCanAcceptPTPCommands returns the string constant ICCameraDeviceCanAcceptPTPCommands as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceCanAcceptPTPCommands() objc.ID {
-	if _r := raw.ICCameraDeviceCanAcceptPTPCommands(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICDeleteErrorCanceled returns the string constant ICDeleteErrorCanceled, for use as a dictionary key or argument.
+func ICDeleteErrorCanceled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICDeleteErrorCanceled")))
 }
 
-// @const      ICCameraDeviceSupportsHEIF @discussion Indicates that the camera supports HEIF transcoding, and can change the presentation of converted assets and original assets on the fly.
-// ICCameraDeviceSupportsHEIF returns the string constant ICCameraDeviceSupportsHEIF as an objc.ID, for use as a dictionary key or selector argument.
-func ICCameraDeviceSupportsHEIF() objc.ID {
-	if _r := raw.ICCameraDeviceSupportsHEIF(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICButtonTypeScan returns the string constant ICButtonTypeScan, for use as a dictionary key or argument.
+func ICButtonTypeScan() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICButtonTypeScan"))) }
+
+// ICButtonTypeMail returns the string constant ICButtonTypeMail, for use as a dictionary key or argument.
+func ICButtonTypeMail() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICButtonTypeMail"))) }
+
+// ICButtonTypeCopy returns the string constant ICButtonTypeCopy, for use as a dictionary key or argument.
+func ICButtonTypeCopy() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICButtonTypeCopy"))) }
+
+// ICButtonTypeWeb returns the string constant ICButtonTypeWeb, for use as a dictionary key or argument.
+func ICButtonTypeWeb() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICButtonTypeWeb"))) }
+
+// ICButtonTypePrint returns the string constant ICButtonTypePrint, for use as a dictionary key or argument.
+func ICButtonTypePrint() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ICButtonTypePrint"))) }
+
+// ICButtonTypeTransfer returns the string constant ICButtonTypeTransfer, for use as a dictionary key or argument.
+func ICButtonTypeTransfer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICButtonTypeTransfer")))
 }
 
-// @const      ICDeleteSuccessful @discussion The value for this key should be an NSArray<ICCameraItem*>*
-// ICDeleteSuccessful returns the string constant ICDeleteSuccessful as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteSuccessful() objc.ID {
-	if _r := raw.ICDeleteSuccessful(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICScannerStatusWarmingUp returns the string constant ICScannerStatusWarmingUp, for use as a dictionary key or argument.
+func ICScannerStatusWarmingUp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICScannerStatusWarmingUp")))
 }
 
-// @const      ICDeleteCanceled @discussion The value for this key should be an NSArray<ICCameraItem*>*
-// ICDeleteCanceled returns the string constant ICDeleteCanceled as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteCanceled() objc.ID {
-	if _r := raw.ICDeleteCanceled(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ICScannerStatusWarmUpDone returns the string constant ICScannerStatusWarmUpDone, for use as a dictionary key or argument.
+func ICScannerStatusWarmUpDone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICScannerStatusWarmUpDone")))
 }
 
-// @const      ICDeleteFailed @discussion The value for this key should be an NSArray<ICCameraItem*>*
-// ICDeleteFailed returns the string constant ICDeleteFailed as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteFailed() objc.ID {
-	if _r := raw.ICDeleteFailed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const      ICDeleteErrorReadOnly @discussion The value for this key should be an ICCameraItem*
-// ICDeleteErrorReadOnly returns the string constant ICDeleteErrorReadOnly as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteErrorReadOnly() objc.ID {
-	if _r := raw.ICDeleteErrorReadOnly(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const      ICDeleteErrorFileMissing @discussion The value for this key should be an ICCameraItem*
-// ICDeleteErrorFileMissing returns the string constant ICDeleteErrorFileMissing as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteErrorFileMissing() objc.ID {
-	if _r := raw.ICDeleteErrorFileMissing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const      ICDeleteErrorDeviceMissing @discussion The value for this key should be an ICCameraItem*
-// ICDeleteErrorDeviceMissing returns the string constant ICDeleteErrorDeviceMissing as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteErrorDeviceMissing() objc.ID {
-	if _r := raw.ICDeleteErrorDeviceMissing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const      ICDeleteErrorDeviceMissing @discussion The value for this key should be an ICCameraItem*
-// ICDeleteErrorCanceled returns the string constant ICDeleteErrorCanceled as an objc.ID, for use as a dictionary key or selector argument.
-func ICDeleteErrorCanceled() objc.ID {
-	if _r := raw.ICDeleteErrorCanceled(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const      ICButtonTypeScan @abstract   ICButtonTypeScan @discussion Indicates that the "Scan" button on the device was pressed.
-// ICButtonTypeScan returns the string constant ICButtonTypeScan as an objc.ID, for use as a dictionary key or selector argument.
-func ICButtonTypeScan() objc.ID {
-	return purego.CFConstant(raw.ICButtonTypeScan())
-}
-
-// @const      ICButtonTypeMail @abstract   ICButtonTypeMail @discussion Indicates that the "Mail" button on the device was pressed.
-// ICButtonTypeMail returns the string constant ICButtonTypeMail as an objc.ID, for use as a dictionary key or selector argument.
-func ICButtonTypeMail() objc.ID {
-	return purego.CFConstant(raw.ICButtonTypeMail())
-}
-
-// @const      ICButtonTypeCopy @abstract   ICButtonTypeCopy @discussion Indicates that the "Copy" button on the device was pressed.
-// ICButtonTypeCopy returns the string constant ICButtonTypeCopy as an objc.ID, for use as a dictionary key or selector argument.
-func ICButtonTypeCopy() objc.ID {
-	return purego.CFConstant(raw.ICButtonTypeCopy())
-}
-
-// @const      ICButtonTypeWeb @abstract   ICButtonTypeWeb @discussion Indicates that the "Web" button on the device was pressed.
-// ICButtonTypeWeb returns the string constant ICButtonTypeWeb as an objc.ID, for use as a dictionary key or selector argument.
-func ICButtonTypeWeb() objc.ID {
-	return purego.CFConstant(raw.ICButtonTypeWeb())
-}
-
-// @const      ICButtonTypePrint @abstract   ICButtonTypePrint @discussion Indicates that the "Print" button on the device was pressed.
-// ICButtonTypePrint returns the string constant ICButtonTypePrint as an objc.ID, for use as a dictionary key or selector argument.
-func ICButtonTypePrint() objc.ID {
-	return purego.CFConstant(raw.ICButtonTypePrint())
-}
-
-// ICButtonTypeTransfer returns the string constant ICButtonTypeTransfer as an objc.ID, for use as a dictionary key or selector argument.
-func ICButtonTypeTransfer() objc.ID {
-	return purego.CFConstant(raw.ICButtonTypeTransfer())
-}
-
-// @const      ICScannerStatusWarmingUp @abstract   ICScannerStatusWarmingUp @discussion A non-localized notification string to indicate that the scanner is warming up.
-// ICScannerStatusWarmingUp returns the string constant ICScannerStatusWarmingUp as an objc.ID, for use as a dictionary key or selector argument.
-func ICScannerStatusWarmingUp() objc.ID {
-	return purego.CFConstant(raw.ICScannerStatusWarmingUp())
-}
-
-// @const      ICScannerStatusWarmUpDone @abstract   ICScannerStatusWarmUpDone @discussion A non-localized notification string to indicate that the scanner has warmed up.
-// ICScannerStatusWarmUpDone returns the string constant ICScannerStatusWarmUpDone as an objc.ID, for use as a dictionary key or selector argument.
-func ICScannerStatusWarmUpDone() objc.ID {
-	return purego.CFConstant(raw.ICScannerStatusWarmUpDone())
-}
-
-// @const      ICScannerStatusRequestsOverviewScan @abstract   ICScannerStatusRequestsOverviewScan @discussion A non-localized notification string to indicate that the scanner is requesting an overview scan to be performed.
-// ICScannerStatusRequestsOverviewScan returns the string constant ICScannerStatusRequestsOverviewScan as an objc.ID, for use as a dictionary key or selector argument.
-func ICScannerStatusRequestsOverviewScan() objc.ID {
-	return purego.CFConstant(raw.ICScannerStatusRequestsOverviewScan())
+// ICScannerStatusRequestsOverviewScan returns the string constant ICScannerStatusRequestsOverviewScan, for use as a dictionary key or argument.
+func ICScannerStatusRequestsOverviewScan() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ICScannerStatusRequestsOverviewScan")))
 }

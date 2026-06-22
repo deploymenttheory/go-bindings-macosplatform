@@ -5,70 +5,99 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a console port configuration.
+// ConsolePortConfiguration is an idiomatic wrapper over the Objective-C class VZConsolePortConfiguration.
 //
-// ConsolePortConfiguration wraps [raw.VZConsolePortConfiguration] with a fluent Go API.
+// ConsolePortConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioConsolePortConfiguration] and pass it where a ConsolePortConfiguration is accepted.
+//
+// The base class for a console port configuration.
 type ConsolePortConfiguration struct {
-	inner *raw.VZConsolePortConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZConsolePortConfiguration].
-func (x *ConsolePortConfiguration) Unwrap() *raw.VZConsolePortConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConsolePortConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ConsolePortConfigurationFromID adopts an existing object pointer as a ConsolePortConfiguration (nil for 0).
+// ConsolePortConfigurationFromID adopts an existing Objective-C object as a ConsolePortConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ConsolePortConfigurationFromID(id objc.ID) *ConsolePortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ConsolePortConfiguration{inner: raw.VZConsolePortConfigurationFromID(id)}
-}
-
-// NewConsolePortConfiguration creates a new [ConsolePortConfiguration].
-func NewConsolePortConfiguration() *ConsolePortConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZConsolePortConfiguration")), objc.RegisterName("new"))
-	return &ConsolePortConfiguration{inner: raw.VZConsolePortConfigurationFromID(_id)}
-}
-
-// The serial port attachment.
-//
-// WithAttachment sets the attachment property and returns the receiver for chaining.
-func (x *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
-	x.inner.SetAttachment(attachment.asSerialPortAttachment())
+	x := &ConsolePortConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Attachment calls the underlying Attachment.
-func (x *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
-	_r := x.inner.Attachment()
-	if _r == nil {
+// consolePortConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ConsolePortConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func consolePortConfigurationAdopt(id objc.ID) *ConsolePortConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &SerialPortAttachment{inner: _r}
+	x := &ConsolePortConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetAttachment calls the underlying SetAttachment.
-func (x *ConsolePortConfiguration) SetAttachment(attachment *raw.VZSerialPortAttachment) {
-	x.inner.SetAttachment(attachment)
+// Description returns the object's -description text.
+func (x *ConsolePortConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *ConsolePortConfiguration) asConsolePortConfiguration() *raw.VZConsolePortConfiguration {
-	return x.inner
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConsolePortConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConsolePortConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConsolePortConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithAttachment the serial port attachment.
+func (x *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return x
+}
+
+// Attachment wraps the corresponding Objective-C method.
+func (x *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+	return SerialPortAttachmentFromID(_r)
+}
+
+// SetAttachment wraps the corresponding Objective-C method.
+func (x *ConsolePortConfiguration) SetAttachment(attachment *SerialPortAttachment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }
 
 // ConsolePortConfigurationable is the interface implemented by [ConsolePortConfiguration], for mocking and DI.
 type ConsolePortConfigurationable interface {
-	Unwrap() *raw.VZConsolePortConfiguration
+	obj.Object
 	WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration
 	Attachment() *SerialPortAttachment
-	SetAttachment(attachment *raw.VZSerialPortAttachment)
+	SetAttachment(attachment *SerialPortAttachment)
 }
 
 var _ ConsolePortConfigurationable = (*ConsolePortConfiguration)(nil)
+
+// isConsolePortConfiguration marks ConsolePortConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the ConsolePortConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ConsolePortConfiguration) isConsolePortConfiguration() {}
+
+var _ ConsolePortConfigurationProvider = (*ConsolePortConfiguration)(nil)

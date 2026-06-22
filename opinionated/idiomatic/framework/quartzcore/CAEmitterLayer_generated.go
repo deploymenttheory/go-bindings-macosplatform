@@ -5,844 +5,691 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A layer that emits, animates, and renders a particle system.
+// EmitterLayer is an idiomatic wrapper over the Objective-C class CAEmitterLayer.
 //
-// EmitterLayer wraps [raw.CAEmitterLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that emits, animates, and renders a particle system.
 type EmitterLayer struct {
-	inner *raw.CAEmitterLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.CAEmitterLayer].
-func (x *EmitterLayer) Unwrap() *raw.CAEmitterLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EmitterLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// EmitterLayerFromID adopts an existing object pointer as a EmitterLayer (nil for 0).
+// EmitterLayerFromID adopts an existing Objective-C object as a EmitterLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func EmitterLayerFromID(id objc.ID) *EmitterLayer {
 	if id == 0 {
 		return nil
 	}
-	return &EmitterLayer{inner: raw.CAEmitterLayerFromID(id)}
-}
-
-// NewEmitterLayer creates a new [EmitterLayer].
-func NewEmitterLayer() *EmitterLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAEmitterLayer")), objc.RegisterName("new"))
-	return &EmitterLayer{inner: raw.CAEmitterLayerFromID(_id)}
-}
-
-// The array emitter cells attached to the layer.
-//
-// WithEmitterCells sets the collection, converting the Go slice to an NSArray.
-func (x *EmitterLayer) WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetEmitterCells(foundation.NSArrayFromID[*raw.CAEmitterCell](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAEmitterCell](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetEmitterCells(_arr)
-	return x
-}
-
-// Defines a multiplier that is applied to the cell-defined birth rate. Animatable
-//
-// WithBirthRate sets the birthRate property and returns the receiver for chaining.
-func (x *EmitterLayer) WithBirthRate(birthRate float32) *EmitterLayer {
-	x.inner.SetBirthRate(birthRate)
-	return x
-}
-
-// Defines a multiplier applied to the cell-defined lifetime range when particles are created. Animatable.
-//
-// WithLifetime sets the lifetime property and returns the receiver for chaining.
-func (x *EmitterLayer) WithLifetime(lifetime float32) *EmitterLayer {
-	x.inner.SetLifetime(lifetime)
-	return x
-}
-
-// The position of the center of the particle emitter. Animatable.
-//
-// WithEmitterPosition sets the emitterPosition property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEmitterPosition(emitterPosition corefoundation.CGPoint) *EmitterLayer {
-	x.inner.SetEmitterPosition(emitterPosition)
-	return x
-}
-
-// Specifies the center of the particle emitter shape along the z-axis. Animatable.
-//
-// WithEmitterZPosition sets the emitterZPosition property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEmitterZPosition(emitterZPosition float64) *EmitterLayer {
-	x.inner.SetEmitterZPosition(emitterZPosition)
-	return x
-}
-
-// Determines the size of the particle emitter shape. Animatable.
-//
-// WithEmitterSize sets the emitterSize property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEmitterSize(emitterSize corefoundation.CGSize) *EmitterLayer {
-	x.inner.SetEmitterSize(emitterSize)
-	return x
-}
-
-// Determines the depth of the emitter shape.
-//
-// WithEmitterDepth sets the emitterDepth property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEmitterDepth(emitterDepth float64) *EmitterLayer {
-	x.inner.SetEmitterDepth(emitterDepth)
-	return x
-}
-
-// Specifies the emitter shape.
-//
-// WithEmitterShape sets the emitterShape property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEmitterShape(emitterShape *foundation.NSString) *EmitterLayer {
-	x.inner.SetEmitterShape(emitterShape)
-	return x
-}
-
-// Specifies the emitter mode.
-//
-// WithEmitterMode sets the emitterMode property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEmitterMode(emitterMode *foundation.NSString) *EmitterLayer {
-	x.inner.SetEmitterMode(emitterMode)
-	return x
-}
-
-// Defines how particle cells are rendered into the layer.
-//
-// WithRenderMode sets the renderMode property and returns the receiver for chaining.
-func (x *EmitterLayer) WithRenderMode(renderMode *foundation.NSString) *EmitterLayer {
-	x.inner.SetRenderMode(renderMode)
-	return x
-}
-
-// Defines whether the layer flattens the particles into its plane.
-//
-// WithPreservesDepth sets the preservesDepth property and returns the receiver for chaining.
-func (x *EmitterLayer) WithPreservesDepth(preservesDepth bool) *EmitterLayer {
-	x.inner.SetPreservesDepth(preservesDepth)
-	return x
-}
-
-// Defines a multiplier applied to the cell-defined particle velocity. Animatable.
-//
-// WithVelocity sets the velocity property and returns the receiver for chaining.
-func (x *EmitterLayer) WithVelocity(velocity float32) *EmitterLayer {
-	x.inner.SetVelocity(velocity)
-	return x
-}
-
-// Defines a multiplier applied to the cell-defined particle scale.
-//
-// WithScale sets the scale property and returns the receiver for chaining.
-func (x *EmitterLayer) WithScale(scale float32) *EmitterLayer {
-	x.inner.SetScale(scale)
-	return x
-}
-
-// Defines a multiplier applied to the cell-defined particle spin. Animatable.
-//
-// WithSpin sets the spin property and returns the receiver for chaining.
-func (x *EmitterLayer) WithSpin(spin float32) *EmitterLayer {
-	x.inner.SetSpin(spin)
-	return x
-}
-
-// Specifies the seed used to initialize the random number generator.
-//
-// WithSeed sets the seed property and returns the receiver for chaining.
-func (x *EmitterLayer) WithSeed(seed uint) *EmitterLayer {
-	x.inner.SetSeed(seed)
-	return x
-}
-
-// The layer’s bounds rectangle. Animatable.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *EmitterLayer) WithBounds(bounds corefoundation.CGRect) *EmitterLayer {
-	x.inner.CALayer.SetBounds(bounds)
-	return x
-}
-
-// The layer’s position in its superlayer’s coordinate space. Animatable.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *EmitterLayer) WithPosition(position corefoundation.CGPoint) *EmitterLayer {
-	x.inner.CALayer.SetPosition(position)
-	return x
-}
-
-// The layer’s position on the z axis. Animatable.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
-func (x *EmitterLayer) WithZPosition(zPosition float64) *EmitterLayer {
-	x.inner.CALayer.SetZPosition(zPosition)
-	return x
-}
-
-// Defines the anchor point of the layer’s bounds rectangle. Animatable.
-//
-// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
-func (x *EmitterLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *EmitterLayer {
-	x.inner.CALayer.SetAnchorPoint(anchorPoint)
-	return x
-}
-
-// The anchor point for the layer’s position along the z axis. Animatable.
-//
-// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
-func (x *EmitterLayer) WithAnchorPointZ(anchorPointZ float64) *EmitterLayer {
-	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
-	return x
-}
-
-// The transform applied to the layer’s contents. Animatable.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *EmitterLayer) WithTransform(transform raw.CATransform3D) *EmitterLayer {
-	x.inner.CALayer.SetTransform(transform)
-	return x
-}
-
-// The layer’s frame rectangle.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *EmitterLayer) WithFrame(frame corefoundation.CGRect) *EmitterLayer {
-	x.inner.CALayer.SetFrame(frame)
-	return x
-}
-
-// A Boolean indicating whether the layer is displayed. Animatable.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *EmitterLayer) WithHidden(hidden bool) *EmitterLayer {
-	x.inner.CALayer.SetHidden(hidden)
-	return x
-}
-
-// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-//
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
-func (x *EmitterLayer) WithDoubleSided(doubleSided bool) *EmitterLayer {
-	x.inner.CALayer.SetDoubleSided(doubleSided)
-	return x
-}
-
-// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-//
-// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
-func (x *EmitterLayer) WithGeometryFlipped(geometryFlipped bool) *EmitterLayer {
-	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
-	return x
-}
-
-// An array containing the layer’s sublayers.
-//
-// WithSublayers sets the collection, converting the Go slice to an NSArray.
-func (x *EmitterLayer) WithSublayers(items ...LayerProvider) *EmitterLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asLayer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CALayer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetSublayers(_arr)
-	return x
-}
-
-// Specifies the transform to apply to sublayers when rendering. Animatable.
-//
-// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
-func (x *EmitterLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *EmitterLayer {
-	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
-	return x
-}
-
-// An optional layer whose alpha channel is used to mask the layer’s content.
-//
-// WithMask sets the mask property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMask(mask LayerProvider) *EmitterLayer {
-	x.inner.CALayer.SetMask(mask.asLayer())
-	return x
-}
-
-// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-//
-// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMasksToBounds(masksToBounds bool) *EmitterLayer {
-	x.inner.CALayer.SetMasksToBounds(masksToBounds)
-	return x
-}
-
-// An object that provides the contents of the layer. Animatable.
-//
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContents(contents objc.ID) *EmitterLayer {
-	x.inner.CALayer.SetContents(contents)
-	return x
-}
-
-// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-//
-// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContentsRect(contentsRect corefoundation.CGRect) *EmitterLayer {
-	x.inner.CALayer.SetContentsRect(contentsRect)
-	return x
-}
-
-// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-//
-// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContentsGravity(contentsGravity *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetContentsGravity(contentsGravity)
-	return x
-}
-
-// The scale factor applied to the layer.
-//
-// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContentsScale(contentsScale float64) *EmitterLayer {
-	x.inner.CALayer.SetContentsScale(contentsScale)
-	return x
-}
-
-// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-//
-// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *EmitterLayer {
-	x.inner.CALayer.SetContentsCenter(contentsCenter)
-	return x
-}
-
-// A hint for the desired storage format of the layer contents.
-//
-// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContentsFormat(contentsFormat *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetContentsFormat(contentsFormat)
-	return x
-}
-
-// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
-func (x *EmitterLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *EmitterLayer {
-	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
-	return x
-}
-
-// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
-func (x *EmitterLayer) WithToneMapMode(toneMapMode *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetToneMapMode(toneMapMode)
-	return x
-}
-
-// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
-func (x *EmitterLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
-	return x
-}
-
-// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
-func (x *EmitterLayer) WithContentsHeadroom(contentsHeadroom float64) *EmitterLayer {
-	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
-	return x
-}
-
-// The filter used when reducing the size of the content.
-//
-// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetMinificationFilter(minificationFilter)
-	return x
-}
-
-// The filter used when increasing the size of the content.
-//
-// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
-	return x
-}
-
-// The bias factor used by the minification filter to determine the levels of detail.
-//
-// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMinificationFilterBias(minificationFilterBias float32) *EmitterLayer {
-	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
-	return x
-}
-
-// A Boolean value indicating whether the layer contains completely opaque content.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
-func (x *EmitterLayer) WithOpaque(opaque bool) *EmitterLayer {
-	x.inner.CALayer.SetOpaque(opaque)
-	return x
-}
-
-// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-//
-// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
-func (x *EmitterLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *EmitterLayer {
-	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
-	return x
-}
-
-// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-//
-// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
-func (x *EmitterLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *EmitterLayer {
-	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
-	return x
-}
-
-// A bitmask defining how the edges of the receiver are rasterized.
-//
-// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *EmitterLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
-	return x
-}
-
-// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
-//
-// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
-func (x *EmitterLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *EmitterLayer {
-	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
-	return x
-}
-
-// The radius to use when drawing rounded corners for the layer’s background. Animatable.
-//
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
-func (x *EmitterLayer) WithCornerRadius(cornerRadius float64) *EmitterLayer {
-	x.inner.CALayer.SetCornerRadius(cornerRadius)
-	return x
-}
-
-// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMaskedCorners(maskedCorners CACornerMask) *EmitterLayer {
-	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
-	return x
-}
-
-// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
-func (x *EmitterLayer) WithCornerCurve(cornerCurve *foundation.NSString) *EmitterLayer {
-	x.inner.CALayer.SetCornerCurve(cornerCurve)
-	return x
-}
-
-// The width of the layer’s border. Animatable.
-//
-// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
-func (x *EmitterLayer) WithBorderWidth(borderWidth float64) *EmitterLayer {
-	x.inner.CALayer.SetBorderWidth(borderWidth)
-	return x
-}
-
-// The opacity of the receiver. Animatable.
-//
-// WithOpacity sets the opacity property and returns the receiver for chaining.
-func (x *EmitterLayer) WithOpacity(opacity float32) *EmitterLayer {
-	x.inner.CALayer.SetOpacity(opacity)
-	return x
-}
-
-// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-//
-// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
-func (x *EmitterLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *EmitterLayer {
-	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
-	return x
-}
-
-// A CoreImage filter used to composite the layer and the content behind it. Animatable.
-//
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *EmitterLayer) WithCompositingFilter(compositingFilter objc.ID) *EmitterLayer {
-	x.inner.CALayer.SetCompositingFilter(compositingFilter)
-	return x
-}
-
-// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-//
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
-func (x *EmitterLayer) WithShouldRasterize(shouldRasterize bool) *EmitterLayer {
-	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
-	return x
-}
-
-// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-//
-// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
-func (x *EmitterLayer) WithRasterizationScale(rasterizationScale float64) *EmitterLayer {
-	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
-	return x
-}
-
-// The opacity of the layer’s shadow. Animatable.
-//
-// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
-func (x *EmitterLayer) WithShadowOpacity(shadowOpacity float32) *EmitterLayer {
-	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
-	return x
-}
-
-// The offset (in points) of the layer’s shadow. Animatable.
-//
-// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
-func (x *EmitterLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *EmitterLayer {
-	x.inner.CALayer.SetShadowOffset(shadowOffset)
-	return x
-}
-
-// The blur radius (in points) used to render the layer’s shadow. Animatable.
-//
-// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
-func (x *EmitterLayer) WithShadowRadius(shadowRadius float64) *EmitterLayer {
-	x.inner.CALayer.SetShadowRadius(shadowRadius)
-	return x
-}
-
-// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
-//
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *EmitterLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *EmitterLayer {
-	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
-	return x
-}
-
-// The object responsible for laying out the layer’s sublayers.
-//
-// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
-func (x *EmitterLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *EmitterLayer {
-	x.inner.CALayer.SetLayoutManager(layoutManager)
-	return x
-}
-
-// A dictionary containing layer actions.
-//
-// WithActions sets the actions property and returns the receiver for chaining.
-func (x *EmitterLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *EmitterLayer {
-	x.inner.CALayer.SetActions(actions)
-	return x
-}
-
-// The name of the receiver.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *EmitterLayer) WithName(name string) *EmitterLayer {
-	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// The layer’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *EmitterLayer) WithDelegate(delegate raw.CALayerDelegate) *EmitterLayer {
-	x.inner.CALayer.SetDelegate(delegate)
-	return x
-}
-
-// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *EmitterLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterLayer {
-	x.inner.CALayer.SetStyle(style)
-	return x
-}
-
-// The constraints used to position current layer’s sublayers.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *EmitterLayer) WithConstraints(items ...*raw.CAConstraint) *EmitterLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetConstraints(_arr)
+	x := &EmitterLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// EmitterCells returns the collection as a Go slice.
-func (x *EmitterLayer) EmitterCells() []*EmitterCell {
-	arr := x.inner.EmitterCells()
-	if arr == nil {
+// emitterLayerAdopt wraps an Objective-C object that this code just created as a
+// EmitterLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func emitterLayerAdopt(id objc.ID) *EmitterLayer {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmitterCell {
-		return &EmitterCell{inner: raw.CAEmitterCellFromID(purego.Retain(_id))}
-	})
+	x := &EmitterLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetEmitterCells calls the underlying SetEmitterCells.
-func (x *EmitterLayer) SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell]) {
-	x.inner.SetEmitterCells(emitterCells)
+// NewEmitterLayer creates a new EmitterLayer.
+func NewEmitterLayer() *EmitterLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("CAEmitterLayer")), objc.RegisterName("new"))
+	return emitterLayerAdopt(_id)
 }
 
-// BirthRate calls the underlying BirthRate.
+// WithEmitterCells the array emitter cells attached to the layer.
+func (x *EmitterLayer) WithEmitterCells(items ...*EmitterCell) *EmitterLayer {
+	_arr := purego.SliceToNSArray(items, func(_v *EmitterCell) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterCells:"), _arr)
+	return x
+}
+
+// WithBirthRate defines a multiplier that is applied to the cell-defined birth rate. Animatable
+func (x *EmitterLayer) WithBirthRate(birthRate float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBirthRate:"), birthRate)
+	return x
+}
+
+// WithLifetime defines a multiplier applied to the cell-defined lifetime range when particles are created. Animatable.
+func (x *EmitterLayer) WithLifetime(lifetime float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetime:"), lifetime)
+	return x
+}
+
+// WithEmitterPosition the position of the center of the particle emitter. Animatable.
+func (x *EmitterLayer) WithEmitterPosition(emitterPosition corefoundation.CGPoint) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterPosition:"), emitterPosition)
+	return x
+}
+
+// WithEmitterZPosition specifies the center of the particle emitter shape along the z-axis. Animatable.
+func (x *EmitterLayer) WithEmitterZPosition(emitterZPosition float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterZPosition:"), emitterZPosition)
+	return x
+}
+
+// WithEmitterSize determines the size of the particle emitter shape. Animatable.
+func (x *EmitterLayer) WithEmitterSize(emitterSize corefoundation.CGSize) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterSize:"), emitterSize)
+	return x
+}
+
+// WithEmitterDepth determines the depth of the emitter shape.
+func (x *EmitterLayer) WithEmitterDepth(emitterDepth float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterDepth:"), emitterDepth)
+	return x
+}
+
+// WithEmitterShape specifies the emitter shape.
+func (x *EmitterLayer) WithEmitterShape(emitterShape obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterShape:"), objref.IDOf(emitterShape))
+	return x
+}
+
+// WithEmitterMode specifies the emitter mode.
+func (x *EmitterLayer) WithEmitterMode(emitterMode obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterMode:"), objref.IDOf(emitterMode))
+	return x
+}
+
+// WithRenderMode defines how particle cells are rendered into the layer.
+func (x *EmitterLayer) WithRenderMode(renderMode obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderMode:"), objref.IDOf(renderMode))
+	return x
+}
+
+// WithPreservesDepth defines whether the layer flattens the particles into its plane.
+func (x *EmitterLayer) WithPreservesDepth(preservesDepth bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesDepth:"), preservesDepth)
+	return x
+}
+
+// WithVelocity defines a multiplier applied to the cell-defined particle velocity. Animatable.
+func (x *EmitterLayer) WithVelocity(velocity float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
+	return x
+}
+
+// WithScale defines a multiplier applied to the cell-defined particle scale.
+func (x *EmitterLayer) WithScale(scale float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScale:"), scale)
+	return x
+}
+
+// WithSpin defines a multiplier applied to the cell-defined particle spin. Animatable.
+func (x *EmitterLayer) WithSpin(spin float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpin:"), spin)
+	return x
+}
+
+// WithSeed specifies the seed used to initialize the random number generator.
+func (x *EmitterLayer) WithSeed(seed int) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
+	return x
+}
+
+// WithBounds the layer’s bounds rectangle. Animatable.
+func (x *EmitterLayer) WithBounds(bounds corefoundation.CGRect) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
+func (x *EmitterLayer) WithPosition(position corefoundation.CGPoint) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the layer’s position on the z axis. Animatable.
+func (x *EmitterLayer) WithZPosition(zPosition float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
+	return x
+}
+
+// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (x *EmitterLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
+func (x *EmitterLayer) WithAnchorPointZ(anchorPointZ float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return x
+}
+
+// WithFrame the layer’s frame rectangle.
+func (x *EmitterLayer) WithFrame(frame corefoundation.CGRect) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
+func (x *EmitterLayer) WithHidden(hidden bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (x *EmitterLayer) WithDoubleSided(doubleSided bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return x
+}
+
+// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (x *EmitterLayer) WithGeometryFlipped(geometryFlipped bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return x
+}
+
+// WithSublayers an array containing the layer’s sublayers.
+func (x *EmitterLayer) WithSublayers(items ...LayerProvider) *EmitterLayer {
+	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
+	return x
+}
+
+// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
+func (x *EmitterLayer) WithMask(mask LayerProvider) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return x
+}
+
+// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (x *EmitterLayer) WithMasksToBounds(masksToBounds bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return x
+}
+
+// WithContents an object that provides the contents of the layer. Animatable.
+func (x *EmitterLayer) WithContents(contents obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return x
+}
+
+// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (x *EmitterLayer) WithContentsRect(contentsRect corefoundation.CGRect) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
+	return x
+}
+
+// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (x *EmitterLayer) WithContentsGravity(contentsGravity obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return x
+}
+
+// WithContentsScale the scale factor applied to the layer.
+func (x *EmitterLayer) WithContentsScale(contentsScale float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
+	return x
+}
+
+// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (x *EmitterLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return x
+}
+
+// WithContentsFormat a hint for the desired storage format of the layer contents.
+func (x *EmitterLayer) WithContentsFormat(contentsFormat obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+func (x *EmitterLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+func (x *EmitterLayer) WithToneMapMode(toneMapMode obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return x
+}
+
+// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+func (x *EmitterLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return x
+}
+
+// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+func (x *EmitterLayer) WithContentsHeadroom(contentsHeadroom float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter the filter used when reducing the size of the content.
+func (x *EmitterLayer) WithMinificationFilter(minificationFilter obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return x
+}
+
+// WithMagnificationFilter the filter used when increasing the size of the content.
+func (x *EmitterLayer) WithMagnificationFilter(magnificationFilter obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return x
+}
+
+// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
+func (x *EmitterLayer) WithMinificationFilterBias(minificationFilterBias float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return x
+}
+
+// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
+func (x *EmitterLayer) WithOpaque(opaque bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (x *EmitterLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (x *EmitterLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
+func (x *EmitterLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (x *EmitterLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return x
+}
+
+// WithBackgroundColor the background color of the receiver. Animatable.
+func (x *EmitterLayer) WithBackgroundColor(backgroundColor obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return x
+}
+
+// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (x *EmitterLayer) WithCornerRadius(cornerRadius float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+func (x *EmitterLayer) WithMaskedCorners(maskedCorners CornerMask) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+func (x *EmitterLayer) WithCornerCurve(cornerCurve obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return x
+}
+
+// WithBorderWidth the width of the layer’s border. Animatable.
+func (x *EmitterLayer) WithBorderWidth(borderWidth float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return x
+}
+
+// WithBorderColor the color of the layer’s border. Animatable.
+func (x *EmitterLayer) WithBorderColor(borderColor obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return x
+}
+
+// WithOpacity the opacity of the receiver. Animatable.
+func (x *EmitterLayer) WithOpacity(opacity float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (x *EmitterLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (x *EmitterLayer) WithCompositingFilter(compositingFilter obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return x
+}
+
+// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (x *EmitterLayer) WithShouldRasterize(shouldRasterize bool) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (x *EmitterLayer) WithRasterizationScale(rasterizationScale float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return x
+}
+
+// WithShadowColor the color of the layer’s shadow. Animatable.
+func (x *EmitterLayer) WithShadowColor(shadowColor obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return x
+}
+
+// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
+func (x *EmitterLayer) WithShadowOpacity(shadowOpacity float32) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return x
+}
+
+// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
+func (x *EmitterLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return x
+}
+
+// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (x *EmitterLayer) WithShadowRadius(shadowRadius float64) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return x
+}
+
+// WithShadowPath the shape of the layer’s shadow. Animatable.
+func (x *EmitterLayer) WithShadowPath(shadowPath obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return x
+}
+
+// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (x *EmitterLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return x
+}
+
+// WithActions a dictionary containing layer actions.
+func (x *EmitterLayer) WithActions(actions obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return x
+}
+
+// WithName the name of the receiver.
+func (x *EmitterLayer) WithName(name string) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (x *EmitterLayer) WithStyle(style obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return x
+}
+
+// WithConstraints the constraints used to position current layer’s sublayers.
+func (x *EmitterLayer) WithConstraints(items ...*Constraint) *EmitterLayer {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
+	return x
+}
+
+// EmitterCells wraps the corresponding Objective-C method.
+//
+// EmitterCells returns the collection as a Go slice.
+func (x *EmitterLayer) EmitterCells() []*EmitterCell {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emitterCells"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmitterCell { return EmitterCellFromID(_id) })
+}
+
+// SetEmitterCells wraps the corresponding Objective-C method.
+func (x *EmitterLayer) SetEmitterCells(emitterCells []*EmitterCell) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterCells:"), purego.SliceToNSArray(emitterCells, func(_v *EmitterCell) objc.ID { return objref.IDOf(_v) }))
+}
+
+// BirthRate wraps the corresponding Objective-C method.
 func (x *EmitterLayer) BirthRate() float32 {
-	return x.inner.BirthRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("birthRate"))
+	return _r
 }
 
-// SetBirthRate calls the underlying SetBirthRate.
+// SetBirthRate wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetBirthRate(birthRate float32) {
-	x.inner.SetBirthRate(birthRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBirthRate:"), birthRate)
 }
 
-// Lifetime calls the underlying Lifetime.
+// Lifetime wraps the corresponding Objective-C method.
 func (x *EmitterLayer) Lifetime() float32 {
-	return x.inner.Lifetime()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lifetime"))
+	return _r
 }
 
-// SetLifetime calls the underlying SetLifetime.
+// SetLifetime wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetLifetime(lifetime float32) {
-	x.inner.SetLifetime(lifetime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLifetime:"), lifetime)
 }
 
-// EmitterPosition calls the underlying EmitterPosition.
+// EmitterPosition wraps the corresponding Objective-C method.
 func (x *EmitterLayer) EmitterPosition() corefoundation.CGPoint {
-	return x.inner.EmitterPosition()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("emitterPosition"))
+	return _r
 }
 
-// SetEmitterPosition calls the underlying SetEmitterPosition.
+// SetEmitterPosition wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetEmitterPosition(emitterPosition corefoundation.CGPoint) {
-	x.inner.SetEmitterPosition(emitterPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterPosition:"), emitterPosition)
 }
 
-// EmitterZPosition calls the underlying EmitterZPosition.
+// EmitterZPosition wraps the corresponding Objective-C method.
 func (x *EmitterLayer) EmitterZPosition() float64 {
-	return x.inner.EmitterZPosition()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emitterZPosition"))
+	return _r
 }
 
-// SetEmitterZPosition calls the underlying SetEmitterZPosition.
+// SetEmitterZPosition wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetEmitterZPosition(emitterZPosition float64) {
-	x.inner.SetEmitterZPosition(emitterZPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterZPosition:"), emitterZPosition)
 }
 
-// EmitterSize calls the underlying EmitterSize.
+// EmitterSize wraps the corresponding Objective-C method.
 func (x *EmitterLayer) EmitterSize() corefoundation.CGSize {
-	return x.inner.EmitterSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("emitterSize"))
+	return _r
 }
 
-// SetEmitterSize calls the underlying SetEmitterSize.
+// SetEmitterSize wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetEmitterSize(emitterSize corefoundation.CGSize) {
-	x.inner.SetEmitterSize(emitterSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterSize:"), emitterSize)
 }
 
-// EmitterDepth calls the underlying EmitterDepth.
+// EmitterDepth wraps the corresponding Objective-C method.
 func (x *EmitterLayer) EmitterDepth() float64 {
-	return x.inner.EmitterDepth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("emitterDepth"))
+	return _r
 }
 
-// SetEmitterDepth calls the underlying SetEmitterDepth.
+// SetEmitterDepth wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetEmitterDepth(emitterDepth float64) {
-	x.inner.SetEmitterDepth(emitterDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterDepth:"), emitterDepth)
 }
 
-// EmitterShape calls the underlying EmitterShape.
-func (x *EmitterLayer) EmitterShape() string {
-	_r := x.inner.EmitterShape()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// EmitterShape wraps the corresponding Objective-C method.
+func (x *EmitterLayer) EmitterShape() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emitterShape"))
+	return obj.Wrap(_r)
 }
 
-// SetEmitterShape calls the underlying SetEmitterShape.
-func (x *EmitterLayer) SetEmitterShape(emitterShape *foundation.NSString) {
-	x.inner.SetEmitterShape(emitterShape)
+// SetEmitterShape wraps the corresponding Objective-C method.
+func (x *EmitterLayer) SetEmitterShape(emitterShape obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterShape:"), objref.IDOf(emitterShape))
 }
 
-// EmitterMode calls the underlying EmitterMode.
-func (x *EmitterLayer) EmitterMode() string {
-	_r := x.inner.EmitterMode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// EmitterMode wraps the corresponding Objective-C method.
+func (x *EmitterLayer) EmitterMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emitterMode"))
+	return obj.Wrap(_r)
 }
 
-// SetEmitterMode calls the underlying SetEmitterMode.
-func (x *EmitterLayer) SetEmitterMode(emitterMode *foundation.NSString) {
-	x.inner.SetEmitterMode(emitterMode)
+// SetEmitterMode wraps the corresponding Objective-C method.
+func (x *EmitterLayer) SetEmitterMode(emitterMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmitterMode:"), objref.IDOf(emitterMode))
 }
 
-// RenderMode calls the underlying RenderMode.
-func (x *EmitterLayer) RenderMode() string {
-	_r := x.inner.RenderMode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// RenderMode wraps the corresponding Objective-C method.
+func (x *EmitterLayer) RenderMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderMode"))
+	return obj.Wrap(_r)
 }
 
-// SetRenderMode calls the underlying SetRenderMode.
-func (x *EmitterLayer) SetRenderMode(renderMode *foundation.NSString) {
-	x.inner.SetRenderMode(renderMode)
+// SetRenderMode wraps the corresponding Objective-C method.
+func (x *EmitterLayer) SetRenderMode(renderMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderMode:"), objref.IDOf(renderMode))
 }
 
-// PreservesDepth calls the underlying PreservesDepth.
+// PreservesDepth wraps the corresponding Objective-C method.
 func (x *EmitterLayer) PreservesDepth() bool {
-	return x.inner.PreservesDepth()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesDepth"))
+	return _r
 }
 
-// SetPreservesDepth calls the underlying SetPreservesDepth.
+// SetPreservesDepth wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetPreservesDepth(preservesDepth bool) {
-	x.inner.SetPreservesDepth(preservesDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesDepth:"), preservesDepth)
 }
 
-// Velocity calls the underlying Velocity.
+// Velocity wraps the corresponding Objective-C method.
 func (x *EmitterLayer) Velocity() float32 {
-	return x.inner.Velocity()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("velocity"))
+	return _r
 }
 
-// SetVelocity calls the underlying SetVelocity.
+// SetVelocity wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetVelocity(velocity float32) {
-	x.inner.SetVelocity(velocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 }
 
-// Scale calls the underlying Scale.
+// Scale wraps the corresponding Objective-C method.
 func (x *EmitterLayer) Scale() float32 {
-	return x.inner.Scale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scale"))
+	return _r
 }
 
-// SetScale calls the underlying SetScale.
+// SetScale wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetScale(scale float32) {
-	x.inner.SetScale(scale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScale:"), scale)
 }
 
-// Spin calls the underlying Spin.
+// Spin wraps the corresponding Objective-C method.
 func (x *EmitterLayer) Spin() float32 {
-	return x.inner.Spin()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("spin"))
+	return _r
 }
 
-// SetSpin calls the underlying SetSpin.
+// SetSpin wraps the corresponding Objective-C method.
 func (x *EmitterLayer) SetSpin(spin float32) {
-	x.inner.SetSpin(spin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpin:"), spin)
 }
 
-// Seed calls the underlying Seed.
-func (x *EmitterLayer) Seed() uint {
-	return x.inner.Seed()
+// Seed wraps the corresponding Objective-C method.
+func (x *EmitterLayer) Seed() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
 
-// SetSeed calls the underlying SetSeed.
-func (x *EmitterLayer) SetSeed(seed uint) {
-	x.inner.SetSeed(seed)
+// SetSeed wraps the corresponding Objective-C method.
+func (x *EmitterLayer) SetSeed(seed int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 }
-
-func (x *EmitterLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
 // EmitterLayerable is the interface implemented by [EmitterLayer], for mocking and DI.
 type EmitterLayerable interface {
-	Unwrap() *raw.CAEmitterLayer
-	WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterLayer
+	obj.Object
+	WithEmitterCells(items ...*EmitterCell) *EmitterLayer
 	WithBirthRate(birthRate float32) *EmitterLayer
 	WithLifetime(lifetime float32) *EmitterLayer
 	WithEmitterPosition(emitterPosition corefoundation.CGPoint) *EmitterLayer
 	WithEmitterZPosition(emitterZPosition float64) *EmitterLayer
 	WithEmitterSize(emitterSize corefoundation.CGSize) *EmitterLayer
 	WithEmitterDepth(emitterDepth float64) *EmitterLayer
-	WithEmitterShape(emitterShape *foundation.NSString) *EmitterLayer
-	WithEmitterMode(emitterMode *foundation.NSString) *EmitterLayer
-	WithRenderMode(renderMode *foundation.NSString) *EmitterLayer
+	WithEmitterShape(emitterShape obj.Object) *EmitterLayer
+	WithEmitterMode(emitterMode obj.Object) *EmitterLayer
+	WithRenderMode(renderMode obj.Object) *EmitterLayer
 	WithPreservesDepth(preservesDepth bool) *EmitterLayer
 	WithVelocity(velocity float32) *EmitterLayer
 	WithScale(scale float32) *EmitterLayer
 	WithSpin(spin float32) *EmitterLayer
-	WithSeed(seed uint) *EmitterLayer
+	WithSeed(seed int) *EmitterLayer
 	WithBounds(bounds corefoundation.CGRect) *EmitterLayer
 	WithPosition(position corefoundation.CGPoint) *EmitterLayer
 	WithZPosition(zPosition float64) *EmitterLayer
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *EmitterLayer
 	WithAnchorPointZ(anchorPointZ float64) *EmitterLayer
-	WithTransform(transform raw.CATransform3D) *EmitterLayer
 	WithFrame(frame corefoundation.CGRect) *EmitterLayer
 	WithHidden(hidden bool) *EmitterLayer
 	WithDoubleSided(doubleSided bool) *EmitterLayer
 	WithGeometryFlipped(geometryFlipped bool) *EmitterLayer
 	WithSublayers(items ...LayerProvider) *EmitterLayer
-	WithSublayerTransform(sublayerTransform raw.CATransform3D) *EmitterLayer
 	WithMask(mask LayerProvider) *EmitterLayer
 	WithMasksToBounds(masksToBounds bool) *EmitterLayer
-	WithContents(contents objc.ID) *EmitterLayer
+	WithContents(contents obj.Object) *EmitterLayer
 	WithContentsRect(contentsRect corefoundation.CGRect) *EmitterLayer
-	WithContentsGravity(contentsGravity *foundation.NSString) *EmitterLayer
+	WithContentsGravity(contentsGravity obj.Object) *EmitterLayer
 	WithContentsScale(contentsScale float64) *EmitterLayer
 	WithContentsCenter(contentsCenter corefoundation.CGRect) *EmitterLayer
-	WithContentsFormat(contentsFormat *foundation.NSString) *EmitterLayer
+	WithContentsFormat(contentsFormat obj.Object) *EmitterLayer
 	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *EmitterLayer
-	WithToneMapMode(toneMapMode *foundation.NSString) *EmitterLayer
-	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *EmitterLayer
+	WithToneMapMode(toneMapMode obj.Object) *EmitterLayer
+	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *EmitterLayer
 	WithContentsHeadroom(contentsHeadroom float64) *EmitterLayer
-	WithMinificationFilter(minificationFilter *foundation.NSString) *EmitterLayer
-	WithMagnificationFilter(magnificationFilter *foundation.NSString) *EmitterLayer
+	WithMinificationFilter(minificationFilter obj.Object) *EmitterLayer
+	WithMagnificationFilter(magnificationFilter obj.Object) *EmitterLayer
 	WithMinificationFilterBias(minificationFilterBias float32) *EmitterLayer
 	WithOpaque(opaque bool) *EmitterLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *EmitterLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *EmitterLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *EmitterLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *EmitterLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *EmitterLayer
+	WithBackgroundColor(backgroundColor obj.Object) *EmitterLayer
 	WithCornerRadius(cornerRadius float64) *EmitterLayer
-	WithMaskedCorners(maskedCorners CACornerMask) *EmitterLayer
-	WithCornerCurve(cornerCurve *foundation.NSString) *EmitterLayer
+	WithMaskedCorners(maskedCorners CornerMask) *EmitterLayer
+	WithCornerCurve(cornerCurve obj.Object) *EmitterLayer
 	WithBorderWidth(borderWidth float64) *EmitterLayer
+	WithBorderColor(borderColor obj.Object) *EmitterLayer
 	WithOpacity(opacity float32) *EmitterLayer
 	WithAllowsGroupOpacity(allowsGroupOpacity bool) *EmitterLayer
-	WithCompositingFilter(compositingFilter objc.ID) *EmitterLayer
+	WithCompositingFilter(compositingFilter obj.Object) *EmitterLayer
 	WithShouldRasterize(shouldRasterize bool) *EmitterLayer
 	WithRasterizationScale(rasterizationScale float64) *EmitterLayer
+	WithShadowColor(shadowColor obj.Object) *EmitterLayer
 	WithShadowOpacity(shadowOpacity float32) *EmitterLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *EmitterLayer
 	WithShadowRadius(shadowRadius float64) *EmitterLayer
-	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *EmitterLayer
-	WithLayoutManager(layoutManager raw.CALayoutManager) *EmitterLayer
-	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *EmitterLayer
+	WithShadowPath(shadowPath obj.Object) *EmitterLayer
+	WithAutoresizingMask(autoresizingMask AutoresizingMask) *EmitterLayer
+	WithActions(actions obj.Object) *EmitterLayer
 	WithName(name string) *EmitterLayer
-	WithDelegate(delegate raw.CALayerDelegate) *EmitterLayer
-	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterLayer
-	WithConstraints(items ...*raw.CAConstraint) *EmitterLayer
+	WithStyle(style obj.Object) *EmitterLayer
+	WithConstraints(items ...*Constraint) *EmitterLayer
 	EmitterCells() []*EmitterCell
-	SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell])
+	SetEmitterCells(emitterCells []*EmitterCell)
 	BirthRate() float32
 	SetBirthRate(birthRate float32)
 	Lifetime() float32
@@ -855,12 +702,12 @@ type EmitterLayerable interface {
 	SetEmitterSize(emitterSize corefoundation.CGSize)
 	EmitterDepth() float64
 	SetEmitterDepth(emitterDepth float64)
-	EmitterShape() string
-	SetEmitterShape(emitterShape *foundation.NSString)
-	EmitterMode() string
-	SetEmitterMode(emitterMode *foundation.NSString)
-	RenderMode() string
-	SetRenderMode(renderMode *foundation.NSString)
+	EmitterShape() obj.Object
+	SetEmitterShape(emitterShape obj.Object)
+	EmitterMode() obj.Object
+	SetEmitterMode(emitterMode obj.Object)
+	RenderMode() obj.Object
+	SetRenderMode(renderMode obj.Object)
 	PreservesDepth() bool
 	SetPreservesDepth(preservesDepth bool)
 	Velocity() float32
@@ -869,8 +716,10 @@ type EmitterLayerable interface {
 	SetScale(scale float32)
 	Spin() float32
 	SetSpin(spin float32)
-	Seed() uint
-	SetSeed(seed uint)
+	Seed() int
+	SetSeed(seed int)
 }
 
 var _ EmitterLayerable = (*EmitterLayer)(nil)
+
+var _ LayerProvider = (*EmitterLayer)(nil)

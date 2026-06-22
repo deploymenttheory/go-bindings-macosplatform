@@ -5,76 +5,81 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that estimates loss for the YOLO algorithm.
+// YOLOLossLayer is an idiomatic wrapper over the Objective-C class MLCYOLOLossLayer.
 //
-// YOLOLossLayer wraps [raw.MLCYOLOLossLayer] with a fluent Go API.
+// It embeds [LossLayer], promoting that type's methods.
+//
+// A layer that estimates loss for the YOLO algorithm.
 type YOLOLossLayer struct {
-	inner *raw.MLCYOLOLossLayer
+	LossLayer
 }
 
-// Unwrap returns the underlying [raw.MLCYOLOLossLayer].
-func (x *YOLOLossLayer) Unwrap() *raw.MLCYOLOLossLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *YOLOLossLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// YOLOLossLayerFromID adopts an existing object pointer as a YOLOLossLayer (nil for 0).
+// YOLOLossLayerFromID adopts an existing Objective-C object as a YOLOLossLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func YOLOLossLayerFromID(id objc.ID) *YOLOLossLayer {
 	if id == 0 {
 		return nil
 	}
-	return &YOLOLossLayer{inner: raw.MLCYOLOLossLayerFromID(id)}
-}
-
-// NewYOLOLossLayer creates a new [YOLOLossLayer].
-func NewYOLOLossLayer() *YOLOLossLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCYOLOLossLayer")), objc.RegisterName("new"))
-	return &YOLOLossLayer{inner: raw.MLCYOLOLossLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *YOLOLossLayer) WithLabel(label string) *YOLOLossLayer {
-	x.inner.MLCLossLayer.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &YOLOLossLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *YOLOLossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer {
-	x.inner.MLCLossLayer.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   yoloLossDescriptor @abstract   The YOLO loss descriptor
-//
-// YoloLossDescriptor calls the underlying YoloLossDescriptor.
-func (x *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
-	_r := x.inner.YoloLossDescriptor()
-	if _r == nil {
+// yOLOLossLayerAdopt wraps an Objective-C object that this code just created as a
+// YOLOLossLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func yOLOLossLayerAdopt(id objc.ID) *YOLOLossLayer {
+	if id == 0 {
 		return nil
 	}
-	return &YOLOLossDescriptor{inner: _r}
+	x := &YOLOLossLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *YOLOLossLayer) asLossLayer() *raw.MLCLossLayer { return &x.inner.MLCLossLayer }
+// NewYOLOLossLayer creates a new YOLOLossLayer.
+func NewYOLOLossLayer() *YOLOLossLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCYOLOLossLayer")), objc.RegisterName("new"))
+	return yOLOLossLayerAdopt(_id)
+}
 
-func (x *YOLOLossLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLossLayer.MLCLayer }
+// WithLabel a string that helps identify this layer.
+func (x *YOLOLossLayer) WithLabel(label string) *YOLOLossLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *YOLOLossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// YoloLossDescriptor the YOLO loss descriptor
+func (x *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yoloLossDescriptor"))
+	return YOLOLossDescriptorFromID(_r)
+}
 
 // YOLOLossLayerable is the interface implemented by [YOLOLossLayer], for mocking and DI.
 type YOLOLossLayerable interface {
-	Unwrap() *raw.MLCYOLOLossLayer
+	obj.Object
 	WithLabel(label string) *YOLOLossLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer
 	YoloLossDescriptor() *YOLOLossDescriptor
 }
 
 var _ YOLOLossLayerable = (*YOLOLossLayer)(nil)
+
+var _ LossLayerProvider = (*YOLOLossLayer)(nil)
+
+var _ LayerProvider = (*YOLOLossLayer)(nil)

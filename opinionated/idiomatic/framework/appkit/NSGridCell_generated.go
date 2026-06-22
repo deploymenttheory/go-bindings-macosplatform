@@ -5,184 +5,193 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An individual content area within a grid view, typically at the intersection of a row and a column.
+// GridCell is an idiomatic wrapper over the Objective-C class NSGridCell.
 //
-// GridCell wraps [raw.NSGridCell] with a fluent Go API.
+// An individual content area within a grid view, typically at the intersection of a row and a column.
 type GridCell struct {
-	inner *raw.NSGridCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGridCell].
-func (x *GridCell) Unwrap() *raw.NSGridCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GridCell) ID() objc.ID { return x.inner.Ptr() }
-
-// GridCellFromID adopts an existing object pointer as a GridCell (nil for 0).
+// GridCellFromID adopts an existing Objective-C object as a GridCell
+// (nil for 0), retaining it and registering a release finalizer.
 func GridCellFromID(id objc.ID) *GridCell {
 	if id == 0 {
 		return nil
 	}
-	return &GridCell{inner: raw.NSGridCellFromID(id)}
+	x := &GridCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGridCell creates a new [GridCell].
+// gridCellAdopt wraps an Objective-C object that this code just created as a
+// GridCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gridCellAdopt(id objc.ID) *GridCell {
+	if id == 0 {
+		return nil
+	}
+	x := &GridCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GridCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GridCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GridCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GridCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGridCell creates a new GridCell.
 func NewGridCell() *GridCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridCell")), objc.RegisterName("new"))
-	return &GridCell{inner: raw.NSGridCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGridCell")), objc.RegisterName("new"))
+	return gridCellAdopt(_id)
 }
 
-// WithContentView sets the contentView property and returns the receiver for chaining.
+// WithContentView sets the property and returns the receiver so calls can be chained.
 func (x *GridCell) WithContentView(contentView ViewProvider) *GridCell {
-	x.inner.SetContentView(contentView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// WithXPlacement sets the xPlacement property and returns the receiver for chaining.
-func (x *GridCell) WithXPlacement(xPlacement NSGridCellPlacement) *GridCell {
-	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
+// WithXPlacement sets the property and returns the receiver so calls can be chained.
+func (x *GridCell) WithXPlacement(xPlacement GridCellPlacement) *GridCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 	return x
 }
 
-// WithYPlacement sets the yPlacement property and returns the receiver for chaining.
-func (x *GridCell) WithYPlacement(yPlacement NSGridCellPlacement) *GridCell {
-	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
+// WithYPlacement sets the property and returns the receiver so calls can be chained.
+func (x *GridCell) WithYPlacement(yPlacement GridCellPlacement) *GridCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 	return x
 }
 
-// WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
-func (x *GridCell) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridCell {
-	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
+// WithRowAlignment sets the property and returns the receiver so calls can be chained.
+func (x *GridCell) WithRowAlignment(rowAlignment GridRowAlignment) *GridCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 	return x
 }
 
-// WithCustomPlacementConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *GridCell) WithCustomPlacementConstraints(items ...*raw.NSLayoutConstraint) *GridCell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCustomPlacementConstraints(foundation.NSArrayFromID[*raw.NSLayoutConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSLayoutConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCustomPlacementConstraints(_arr)
+// WithCustomPlacementConstraints sets the property and returns the receiver so calls can be chained.
+func (x *GridCell) WithCustomPlacementConstraints(items ...*LayoutConstraint) *GridCell {
+	_arr := purego.SliceToNSArray(items, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomPlacementConstraints:"), _arr)
 	return x
 }
 
-// ContentView calls the underlying ContentView.
+// ContentView wraps the corresponding Objective-C method.
 func (x *GridCell) ContentView() *View {
-	_r := x.inner.ContentView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+	return ViewFromID(_r)
 }
 
-// SetContentView calls the underlying SetContentView.
-func (x *GridCell) SetContentView(contentView *raw.NSView) {
-	x.inner.SetContentView(contentView)
+// SetContentView wraps the corresponding Objective-C method.
+func (x *GridCell) SetContentView(contentView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
-// Row calls the underlying Row.
+// Row wraps the corresponding Objective-C method.
 func (x *GridCell) Row() *GridRow {
-	_r := x.inner.Row()
-	if _r == nil {
-		return nil
-	}
-	return &GridRow{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("row"))
+	return GridRowFromID(_r)
 }
 
-// Column calls the underlying Column.
+// Column wraps the corresponding Objective-C method.
 func (x *GridCell) Column() *GridColumn {
-	_r := x.inner.Column()
-	if _r == nil {
-		return nil
-	}
-	return &GridColumn{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("column"))
+	return GridColumnFromID(_r)
 }
 
-// XPlacement calls the underlying XPlacement.
-func (x *GridCell) XPlacement() NSGridCellPlacement {
-	return NSGridCellPlacement(x.inner.XPlacement())
+// XPlacement wraps the corresponding Objective-C method.
+func (x *GridCell) XPlacement() GridCellPlacement {
+	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("xPlacement"))
+	return _r
 }
 
-// SetXPlacement calls the underlying SetXPlacement.
-func (x *GridCell) SetXPlacement(xPlacement NSGridCellPlacement) {
-	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
+// SetXPlacement wraps the corresponding Objective-C method.
+func (x *GridCell) SetXPlacement(xPlacement GridCellPlacement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 }
 
-// YPlacement calls the underlying YPlacement.
-func (x *GridCell) YPlacement() NSGridCellPlacement {
-	return NSGridCellPlacement(x.inner.YPlacement())
+// YPlacement wraps the corresponding Objective-C method.
+func (x *GridCell) YPlacement() GridCellPlacement {
+	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("yPlacement"))
+	return _r
 }
 
-// SetYPlacement calls the underlying SetYPlacement.
-func (x *GridCell) SetYPlacement(yPlacement NSGridCellPlacement) {
-	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
+// SetYPlacement wraps the corresponding Objective-C method.
+func (x *GridCell) SetYPlacement(yPlacement GridCellPlacement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 }
 
-// RowAlignment calls the underlying RowAlignment.
-func (x *GridCell) RowAlignment() NSGridRowAlignment {
-	return NSGridRowAlignment(x.inner.RowAlignment())
+// RowAlignment wraps the corresponding Objective-C method.
+func (x *GridCell) RowAlignment() GridRowAlignment {
+	_r := objc.Send[GridRowAlignment](objref.IDOf(x), objc.RegisterName("rowAlignment"))
+	return _r
 }
 
-// SetRowAlignment calls the underlying SetRowAlignment.
-func (x *GridCell) SetRowAlignment(rowAlignment NSGridRowAlignment) {
-	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
+// SetRowAlignment wraps the corresponding Objective-C method.
+func (x *GridCell) SetRowAlignment(rowAlignment GridRowAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 }
 
+// CustomPlacementConstraints wraps the corresponding Objective-C method.
+//
 // CustomPlacementConstraints returns the collection as a Go slice.
 func (x *GridCell) CustomPlacementConstraints() []*LayoutConstraint {
-	arr := x.inner.CustomPlacementConstraints()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LayoutConstraint {
-		return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customPlacementConstraints"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
-// SetCustomPlacementConstraints calls the underlying SetCustomPlacementConstraints.
-func (x *GridCell) SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*raw.NSLayoutConstraint]) {
-	x.inner.SetCustomPlacementConstraints(customPlacementConstraints)
+// SetCustomPlacementConstraints wraps the corresponding Objective-C method.
+func (x *GridCell) SetCustomPlacementConstraints(customPlacementConstraints []*LayoutConstraint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomPlacementConstraints:"), purego.SliceToNSArray(customPlacementConstraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }
 
 // GridCellable is the interface implemented by [GridCell], for mocking and DI.
 type GridCellable interface {
-	Unwrap() *raw.NSGridCell
+	obj.Object
 	WithContentView(contentView ViewProvider) *GridCell
-	WithXPlacement(xPlacement NSGridCellPlacement) *GridCell
-	WithYPlacement(yPlacement NSGridCellPlacement) *GridCell
-	WithRowAlignment(rowAlignment NSGridRowAlignment) *GridCell
-	WithCustomPlacementConstraints(items ...*raw.NSLayoutConstraint) *GridCell
+	WithXPlacement(xPlacement GridCellPlacement) *GridCell
+	WithYPlacement(yPlacement GridCellPlacement) *GridCell
+	WithRowAlignment(rowAlignment GridRowAlignment) *GridCell
+	WithCustomPlacementConstraints(items ...*LayoutConstraint) *GridCell
 	ContentView() *View
-	SetContentView(contentView *raw.NSView)
+	SetContentView(contentView *View)
 	Row() *GridRow
 	Column() *GridColumn
-	XPlacement() NSGridCellPlacement
-	SetXPlacement(xPlacement NSGridCellPlacement)
-	YPlacement() NSGridCellPlacement
-	SetYPlacement(yPlacement NSGridCellPlacement)
-	RowAlignment() NSGridRowAlignment
-	SetRowAlignment(rowAlignment NSGridRowAlignment)
+	XPlacement() GridCellPlacement
+	SetXPlacement(xPlacement GridCellPlacement)
+	YPlacement() GridCellPlacement
+	SetYPlacement(yPlacement GridCellPlacement)
+	RowAlignment() GridRowAlignment
+	SetRowAlignment(rowAlignment GridRowAlignment)
 	CustomPlacementConstraints() []*LayoutConstraint
-	SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*raw.NSLayoutConstraint])
+	SetCustomPlacementConstraints(customPlacementConstraints []*LayoutConstraint)
 }
 
 var _ GridCellable = (*GridCell)(nil)

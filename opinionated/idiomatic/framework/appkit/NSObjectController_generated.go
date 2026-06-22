@@ -5,334 +5,307 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A controller that can manage an object’s properties referenced by key-value paths.
+// ObjectController is an idiomatic wrapper over the Objective-C class NSObjectController.
 //
-// ObjectController wraps [raw.NSObjectController] with a fluent Go API.
+// ObjectController is an abstract base — you do not construct it directly. Construct one of [ArrayController], [TreeController] and pass it where a ObjectController is accepted.
+//
+// A controller that can manage an object’s properties referenced by key-value paths.
 type ObjectController struct {
-	inner *raw.NSObjectController
+	Controller
 }
 
-// Unwrap returns the underlying [raw.NSObjectController].
-func (x *ObjectController) Unwrap() *raw.NSObjectController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectController) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectControllerFromID adopts an existing object pointer as a ObjectController (nil for 0).
+// ObjectControllerFromID adopts an existing Objective-C object as a ObjectController
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectControllerFromID(id objc.ID) *ObjectController {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectController{inner: raw.NSObjectControllerFromID(id)}
-}
-
-// Initializes and returns an NSObjectController object with the given content.
-//
-// NewObjectControllerWithContent creates a new [ObjectController].
-func NewObjectControllerWithContent(content objc.ID) *ObjectController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSObjectController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), content)
-	return &ObjectController{inner: raw.NSObjectControllerFromID(_id)}
-}
-
-// NewObjectControllerWithCoder creates a new [ObjectController].
-func NewObjectControllerWithCoder(coder *foundation.NSCoder) *ObjectController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSObjectController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ObjectController{inner: raw.NSObjectControllerFromID(_id)}
-}
-
-// The receiver’s content object.
-//
-// WithContent sets the content property and returns the receiver for chaining.
-func (x *ObjectController) WithContent(content objc.ID) *ObjectController {
-	x.inner.SetContent(content)
+	x := &ObjectController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
-//
-// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+// objectControllerAdopt wraps an Objective-C object that this code just created as a
+// ObjectController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectControllerAdopt(id objc.ID) *ObjectController {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewObjectControllerWithContent initializes and returns an NSObjectController object with the given content.
+func NewObjectControllerWithContent(content obj.Object) *ObjectController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSObjectController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), objref.IDOf(content))
+	return objectControllerAdopt(_id)
+}
+
+// NewObjectControllerWithCoder creates a new ObjectController.
+func NewObjectControllerWithCoder(coder obj.Object) *ObjectController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSObjectController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return objectControllerAdopt(_id)
+}
+
+// WithContent the receiver’s content object.
+func (x *ObjectController) WithContent(content obj.Object) *ObjectController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
+	return x
+}
+
+// WithAutomaticallyPreparesContent a Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
 func (x *ObjectController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ObjectController {
-	x.inner.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
 	return x
 }
 
-// The object class to use when creating new objects.
-//
-// WithObjectClass sets the objectClass property and returns the receiver for chaining.
-func (x *ObjectController) WithObjectClass(objectClass objc.Class) *ObjectController {
-	x.inner.SetObjectClass(objectClass)
-	return x
-}
-
-// A Boolean that indicates whether the receiver allows adding and removing objects.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean that indicates whether the receiver allows adding and removing objects.
 func (x *ObjectController) WithEditable(editable bool) *ObjectController {
-	x.inner.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// The receiver’s managed object context.
-//
-// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
-func (x *ObjectController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ObjectController {
-	x.inner.SetManagedObjectContext(managedObjectContext)
+// WithManagedObjectContext the receiver’s managed object context.
+func (x *ObjectController) WithManagedObjectContext(managedObjectContext obj.Object) *ObjectController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return x
 }
 
-// The entity name used by the receiver to create new objects.
-//
-// WithEntityName sets the entityName property and returns the receiver for chaining.
+// WithEntityName the entity name used by the receiver to create new objects.
 func (x *ObjectController) WithEntityName(entityName string) *ObjectController {
-	x.inner.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
 	return x
 }
 
-// The receiver’s fetch predicate.
-//
-// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
-func (x *ObjectController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ObjectController {
-	x.inner.SetFetchPredicate(fetchPredicate)
+// WithFetchPredicate the receiver’s fetch predicate.
+func (x *ObjectController) WithFetchPredicate(fetchPredicate obj.Object) *ObjectController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return x
 }
 
-// A Boolean that indicates whether the receiver uses lazy fetching.
-//
-// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+// WithUsesLazyFetching a Boolean that indicates whether the receiver uses lazy fetching.
 func (x *ObjectController) WithUsesLazyFetching(usesLazyFetching bool) *ObjectController {
-	x.inner.SetUsesLazyFetching(usesLazyFetching)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
 	return x
 }
 
-// Typically overridden by subclasses that require additional control over the creation of new objects.
-//
-// PrepareContent calls the underlying PrepareContent.
+// PrepareContent typically overridden by subclasses that require additional control over the creation of new objects.
 func (x *ObjectController) PrepareContent() {
-	x.inner.PrepareContent()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareContent"))
 }
 
-// Creates and returns a new object of the appropriate class.
-//
-// NewObject calls the underlying NewObject.
-func (x *ObjectController) NewObject() objc.ID {
-	return x.inner.NewObject()
+// NewObject creates and returns a new object of the appropriate class.
+func (x *ObjectController) NewObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newObject"))
+	return obj.Wrap(_r)
 }
 
-// Sets the receiver’s content object.
-//
-// AddObject calls the underlying AddObject.
-func (x *ObjectController) AddObject(object objc.ID) {
-	x.inner.AddObject(object)
+// AddObject sets the receiver’s content object.
+func (x *ObjectController) AddObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
-// Removes a given object from the receiver’s content.
-//
-// RemoveObject calls the underlying RemoveObject.
-func (x *ObjectController) RemoveObject(object objc.ID) {
-	x.inner.RemoveObject(object)
+// RemoveObject removes a given object from the receiver’s content.
+func (x *ObjectController) RemoveObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
-// Creates a new object and sets it as the receiver’s content object.
-//
-// Add calls the underlying Add.
-func (x *ObjectController) Add(sender objc.ID) {
-	x.inner.Add(sender)
+// Add creates a new object and sets it as the receiver’s content object.
+func (x *ObjectController) Add(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("add:"), objref.IDOf(sender))
 }
 
-// Removes the receiver’s content object.
-//
-// Remove calls the underlying Remove.
-func (x *ObjectController) Remove(sender objc.ID) {
-	x.inner.Remove(sender)
+// Remove removes the receiver’s content object.
+func (x *ObjectController) Remove(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remove:"), objref.IDOf(sender))
 }
 
-// Returns whether the receiver can handle the action method for a user interface item.
-//
-// ValidateUserInterfaceItem calls the underlying ValidateUserInterfaceItem.
-func (x *ObjectController) ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool {
-	return x.inner.ValidateUserInterfaceItem(item)
+// Content wraps the corresponding Objective-C method.
+func (x *ObjectController) Content() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+	return obj.Wrap(_r)
 }
 
-// Content calls the underlying Content.
-func (x *ObjectController) Content() objc.ID {
-	return x.inner.Content()
+// SetContent wraps the corresponding Objective-C method.
+func (x *ObjectController) SetContent(content obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), objref.IDOf(content))
 }
 
-// SetContent calls the underlying SetContent.
-func (x *ObjectController) SetContent(content objc.ID) {
-	x.inner.SetContent(content)
+// Selection wraps the corresponding Objective-C method.
+func (x *ObjectController) Selection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selection"))
+	return obj.Wrap(_r)
 }
 
-// Selection calls the underlying Selection.
-func (x *ObjectController) Selection() objc.ID {
-	return x.inner.Selection()
+// SelectedObjects wraps the corresponding Objective-C method.
+func (x *ObjectController) SelectedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedObjects"))
+	return obj.Wrap(_r)
 }
 
-// SelectedObjects calls the underlying SelectedObjects.
-func (x *ObjectController) SelectedObjects() *foundation.NSArray[objc.ID] {
-	return x.inner.SelectedObjects()
-}
-
-// AutomaticallyPreparesContent calls the underlying AutomaticallyPreparesContent.
+// AutomaticallyPreparesContent wraps the corresponding Objective-C method.
 func (x *ObjectController) AutomaticallyPreparesContent() bool {
-	return x.inner.AutomaticallyPreparesContent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyPreparesContent"))
+	return _r
 }
 
-// SetAutomaticallyPreparesContent calls the underlying SetAutomaticallyPreparesContent.
+// SetAutomaticallyPreparesContent wraps the corresponding Objective-C method.
 func (x *ObjectController) SetAutomaticallyPreparesContent(automaticallyPreparesContent bool) {
-	x.inner.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyPreparesContent:"), automaticallyPreparesContent)
 }
 
-// ObjectClass calls the underlying ObjectClass.
-func (x *ObjectController) ObjectClass() objc.Class {
-	return x.inner.ObjectClass()
-}
-
-// SetObjectClass calls the underlying SetObjectClass.
-func (x *ObjectController) SetObjectClass(objectClass objc.Class) {
-	x.inner.SetObjectClass(objectClass)
-}
-
-// IsEditable calls the underlying IsEditable.
+// IsEditable wraps the corresponding Objective-C method.
 func (x *ObjectController) IsEditable() bool {
-	return x.inner.IsEditable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+	return _r
 }
 
-// SetEditable calls the underlying SetEditable.
+// SetEditable wraps the corresponding Objective-C method.
 func (x *ObjectController) SetEditable(editable bool) {
-	x.inner.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
-// CanAdd calls the underlying CanAdd.
+// CanAdd wraps the corresponding Objective-C method.
 func (x *ObjectController) CanAdd() bool {
-	return x.inner.CanAdd()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAdd"))
+	return _r
 }
 
-// CanRemove calls the underlying CanRemove.
+// CanRemove wraps the corresponding Objective-C method.
 func (x *ObjectController) CanRemove() bool {
-	return x.inner.CanRemove()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRemove"))
+	return _r
 }
 
-// Subclasses should override this method to customize a fetch request, for example to specify fetch limits.
-//
-// FetchWithRequestMergeError calls the underlying FetchWithRequestMergeError.
-func (x *ObjectController) FetchWithRequestMergeError(fetchRequest *coredata.NSFetchRequest[objc.ID], merge bool) (bool, error) {
-	return x.inner.FetchWithRequestMergeError(fetchRequest, merge)
+// FetchWithRequestMerge subclasses should override this method to customize a fetch request, for example to specify fetch limits.
+func (x *ObjectController) FetchWithRequestMerge(fetchRequest obj.Object, merge bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("fetchWithRequest:merge:error:"), objref.IDOf(fetchRequest), merge, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Causes the receiver to fetch the data objects specified by the entity name and fetch predicate.
-//
-// Fetch calls the underlying Fetch.
-func (x *ObjectController) Fetch(sender objc.ID) {
-	x.inner.Fetch(sender)
+// Fetch causes the receiver to fetch the data objects specified by the entity name and fetch predicate.
+func (x *ObjectController) Fetch(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetch:"), objref.IDOf(sender))
 }
 
-// Returns the default fetch request used by the receiver.
-//
-// DefaultFetchRequest calls the underlying DefaultFetchRequest.
-func (x *ObjectController) DefaultFetchRequest() *coredata.NSFetchRequest[objc.ID] {
-	return x.inner.DefaultFetchRequest()
+// DefaultFetchRequest returns the default fetch request used by the receiver.
+func (x *ObjectController) DefaultFetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultFetchRequest"))
+	return obj.Wrap(_r)
 }
 
-// ManagedObjectContext calls the underlying ManagedObjectContext.
-func (x *ObjectController) ManagedObjectContext() *coredata.NSManagedObjectContext {
-	return x.inner.ManagedObjectContext()
+// ManagedObjectContext wraps the corresponding Objective-C method.
+func (x *ObjectController) ManagedObjectContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
+	return obj.Wrap(_r)
 }
 
-// SetManagedObjectContext calls the underlying SetManagedObjectContext.
-func (x *ObjectController) SetManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) {
-	x.inner.SetManagedObjectContext(managedObjectContext)
+// SetManagedObjectContext wraps the corresponding Objective-C method.
+func (x *ObjectController) SetManagedObjectContext(managedObjectContext obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 }
 
-// EntityName calls the underlying EntityName.
+// EntityName wraps the corresponding Objective-C method.
 func (x *ObjectController) EntityName() string {
-	_r := x.inner.EntityName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetEntityName calls the underlying SetEntityName.
+// SetEntityName wraps the corresponding Objective-C method.
 func (x *ObjectController) SetEntityName(entityName string) {
-	x.inner.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityName:"), purego.NSString(entityName))
 }
 
-// FetchPredicate calls the underlying FetchPredicate.
-func (x *ObjectController) FetchPredicate() *foundation.NSPredicate {
-	return x.inner.FetchPredicate()
+// FetchPredicate wraps the corresponding Objective-C method.
+func (x *ObjectController) FetchPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchPredicate"))
+	return obj.Wrap(_r)
 }
 
-// SetFetchPredicate calls the underlying SetFetchPredicate.
-func (x *ObjectController) SetFetchPredicate(fetchPredicate *foundation.NSPredicate) {
-	x.inner.SetFetchPredicate(fetchPredicate)
+// SetFetchPredicate wraps the corresponding Objective-C method.
+func (x *ObjectController) SetFetchPredicate(fetchPredicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 }
 
-// UsesLazyFetching calls the underlying UsesLazyFetching.
+// UsesLazyFetching wraps the corresponding Objective-C method.
 func (x *ObjectController) UsesLazyFetching() bool {
-	return x.inner.UsesLazyFetching()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesLazyFetching"))
+	return _r
 }
 
-// SetUsesLazyFetching calls the underlying SetUsesLazyFetching.
+// SetUsesLazyFetching wraps the corresponding Objective-C method.
 func (x *ObjectController) SetUsesLazyFetching(usesLazyFetching bool) {
-	x.inner.SetUsesLazyFetching(usesLazyFetching)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLazyFetching:"), usesLazyFetching)
 }
-
-func (x *ObjectController) asObjectController() *raw.NSObjectController { return x.inner }
-
-func (x *ObjectController) asController() *raw.NSController { return &x.inner.NSController }
 
 // ObjectControllerable is the interface implemented by [ObjectController], for mocking and DI.
 type ObjectControllerable interface {
-	Unwrap() *raw.NSObjectController
-	WithContent(content objc.ID) *ObjectController
+	obj.Object
+	WithContent(content obj.Object) *ObjectController
 	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ObjectController
-	WithObjectClass(objectClass objc.Class) *ObjectController
 	WithEditable(editable bool) *ObjectController
-	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ObjectController
+	WithManagedObjectContext(managedObjectContext obj.Object) *ObjectController
 	WithEntityName(entityName string) *ObjectController
-	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ObjectController
+	WithFetchPredicate(fetchPredicate obj.Object) *ObjectController
 	WithUsesLazyFetching(usesLazyFetching bool) *ObjectController
 	PrepareContent()
-	NewObject() objc.ID
-	AddObject(object objc.ID)
-	RemoveObject(object objc.ID)
-	Add(sender objc.ID)
-	Remove(sender objc.ID)
-	ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool
-	Content() objc.ID
-	SetContent(content objc.ID)
-	Selection() objc.ID
-	SelectedObjects() *foundation.NSArray[objc.ID]
+	NewObject() obj.Object
+	AddObject(object obj.Object)
+	RemoveObject(object obj.Object)
+	Add(sender obj.Object)
+	Remove(sender obj.Object)
+	Content() obj.Object
+	SetContent(content obj.Object)
+	Selection() obj.Object
+	SelectedObjects() obj.Object
 	AutomaticallyPreparesContent() bool
 	SetAutomaticallyPreparesContent(automaticallyPreparesContent bool)
-	ObjectClass() objc.Class
-	SetObjectClass(objectClass objc.Class)
 	IsEditable() bool
 	SetEditable(editable bool)
 	CanAdd() bool
 	CanRemove() bool
-	FetchWithRequestMergeError(fetchRequest *coredata.NSFetchRequest[objc.ID], merge bool) (bool, error)
-	Fetch(sender objc.ID)
-	DefaultFetchRequest() *coredata.NSFetchRequest[objc.ID]
-	ManagedObjectContext() *coredata.NSManagedObjectContext
-	SetManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext)
+	FetchWithRequestMerge(fetchRequest obj.Object, merge bool) error
+	Fetch(sender obj.Object)
+	DefaultFetchRequest() obj.Object
+	ManagedObjectContext() obj.Object
+	SetManagedObjectContext(managedObjectContext obj.Object)
 	EntityName() string
 	SetEntityName(entityName string)
-	FetchPredicate() *foundation.NSPredicate
-	SetFetchPredicate(fetchPredicate *foundation.NSPredicate)
+	FetchPredicate() obj.Object
+	SetFetchPredicate(fetchPredicate obj.Object)
 	UsesLazyFetching() bool
 	SetUsesLazyFetching(usesLazyFetching bool)
 }
 
 var _ ObjectControllerable = (*ObjectController)(nil)
+
+// isObjectController marks ObjectController — and, by embedding promotion, its
+// subclasses — as a member of the ObjectController hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ObjectController) isObjectController() {}
+
+var _ ObjectControllerProvider = (*ObjectController)(nil)
+
+var _ ControllerProvider = (*ObjectController)(nil)

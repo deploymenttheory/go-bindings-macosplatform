@@ -5,99 +5,88 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller profile that supported the DualSense controller.
+// DualSenseGamepad is an idiomatic wrapper over the Objective-C class GCDualSenseGamepad.
 //
-// DualSenseGamepad wraps [raw.GCDualSenseGamepad] with a fluent Go API.
+// It embeds [ExtendedGamepad], promoting that type's methods.
+//
+// A controller profile that supported the DualSense controller.
 type DualSenseGamepad struct {
-	inner *raw.GCDualSenseGamepad
+	ExtendedGamepad
 }
 
-// Unwrap returns the underlying [raw.GCDualSenseGamepad].
-func (x *DualSenseGamepad) Unwrap() *raw.GCDualSenseGamepad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DualSenseGamepad) ID() objc.ID { return x.inner.Ptr() }
-
-// DualSenseGamepadFromID adopts an existing object pointer as a DualSenseGamepad (nil for 0).
+// DualSenseGamepadFromID adopts an existing Objective-C object as a DualSenseGamepad
+// (nil for 0), retaining it and registering a release finalizer.
 func DualSenseGamepadFromID(id objc.ID) *DualSenseGamepad {
 	if id == 0 {
 		return nil
 	}
-	return &DualSenseGamepad{inner: raw.GCDualSenseGamepadFromID(id)}
+	x := &DualSenseGamepad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDualSenseGamepad creates a new [DualSenseGamepad].
+// dualSenseGamepadAdopt wraps an Objective-C object that this code just created as a
+// DualSenseGamepad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dualSenseGamepadAdopt(id objc.ID) *DualSenseGamepad {
+	if id == 0 {
+		return nil
+	}
+	x := &DualSenseGamepad{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDualSenseGamepad creates a new DualSenseGamepad.
 func NewDualSenseGamepad() *DualSenseGamepad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDualSenseGamepad")), objc.RegisterName("new"))
-	return &DualSenseGamepad{inner: raw.GCDualSenseGamepadFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDualSenseGamepad")), objc.RegisterName("new"))
+	return dualSenseGamepadAdopt(_id)
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *DualSenseGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualSenseGamepad {
-	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
+func (x *DualSenseGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualSenseGamepad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *DualSenseGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualSenseGamepad {
-	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
-	return x
-}
-
-// DualSense controllers have a touchpad with a button and two-finger tracking.
-//
-// TouchpadButton calls the underlying TouchpadButton.
+// TouchpadButton dualSense controllers have a touchpad with a button and two-finger tracking.
 func (x *DualSenseGamepad) TouchpadButton() *ControllerButtonInput {
-	_r := x.inner.TouchpadButton()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadButton"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// TouchpadPrimary calls the underlying TouchpadPrimary.
+// TouchpadPrimary wraps the corresponding Objective-C method.
 func (x *DualSenseGamepad) TouchpadPrimary() *ControllerDirectionPad {
-	_r := x.inner.TouchpadPrimary()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadPrimary"))
+	return ControllerDirectionPadFromID(_r)
 }
 
-// TouchpadSecondary calls the underlying TouchpadSecondary.
+// TouchpadSecondary wraps the corresponding Objective-C method.
 func (x *DualSenseGamepad) TouchpadSecondary() *ControllerDirectionPad {
-	_r := x.inner.TouchpadSecondary()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
-}
-
-func (x *DualSenseGamepad) asExtendedGamepad() *raw.GCExtendedGamepad {
-	return &x.inner.GCExtendedGamepad
-}
-
-func (x *DualSenseGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadSecondary"))
+	return ControllerDirectionPadFromID(_r)
 }
 
 // DualSenseGamepadable is the interface implemented by [DualSenseGamepad], for mocking and DI.
 type DualSenseGamepadable interface {
-	Unwrap() *raw.GCDualSenseGamepad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualSenseGamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualSenseGamepad
+	obj.Object
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualSenseGamepad
 	TouchpadButton() *ControllerButtonInput
 	TouchpadPrimary() *ControllerDirectionPad
 	TouchpadSecondary() *ControllerDirectionPad
 }
 
 var _ DualSenseGamepadable = (*DualSenseGamepad)(nil)
+
+var _ ExtendedGamepadProvider = (*DualSenseGamepad)(nil)
+
+var _ PhysicalInputProfileProvider = (*DualSenseGamepad)(nil)

@@ -5,67 +5,97 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class represents the artwork for a media item.
+// LibArtwork is an idiomatic wrapper over the Objective-C class ITLibArtwork.
 //
-// LibArtwork wraps [raw.ITLibArtwork] with a fluent Go API.
+// This class represents the artwork for a media item.
 type LibArtwork struct {
-	inner *raw.ITLibArtwork
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibArtwork].
-func (x *LibArtwork) Unwrap() *raw.ITLibArtwork { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LibArtwork) ID() objc.ID { return x.inner.Ptr() }
-
-// LibArtworkFromID adopts an existing object pointer as a LibArtwork (nil for 0).
+// LibArtworkFromID adopts an existing Objective-C object as a LibArtwork
+// (nil for 0), retaining it and registering a release finalizer.
 func LibArtworkFromID(id objc.ID) *LibArtwork {
 	if id == 0 {
 		return nil
 	}
-	return &LibArtwork{inner: raw.ITLibArtworkFromID(id)}
+	x := &LibArtwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLibArtwork creates a new [LibArtwork].
+// libArtworkAdopt wraps an Objective-C object that this code just created as a
+// LibArtwork (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libArtworkAdopt(id objc.ID) *LibArtwork {
+	if id == 0 {
+		return nil
+	}
+	x := &LibArtwork{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LibArtwork) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LibArtwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LibArtwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibArtwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLibArtwork creates a new LibArtwork.
 func NewLibArtwork() *LibArtwork {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibArtwork")), objc.RegisterName("new"))
-	return &LibArtwork{inner: raw.ITLibArtworkFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ITLibArtwork")), objc.RegisterName("new"))
+	return libArtworkAdopt(_id)
 }
 
-// @abstract The NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
-//
-// Image calls the underlying Image.
-func (x *LibArtwork) Image() *appkit.NSImage {
-	return x.inner.Image()
+// Image the NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
+func (x *LibArtwork) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The data (bytes) of this artwork image.
-//
-// ImageData calls the underlying ImageData.
-func (x *LibArtwork) ImageData() *foundation.NSData {
-	return x.inner.ImageData()
+// ImageData the data (bytes) of this artwork image.
+func (x *LibArtwork) ImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The fortmat of the data returned by the imageData method.
-//
-// ImageDataFormat calls the underlying ImageDataFormat.
-func (x *LibArtwork) ImageDataFormat() ITLibArtworkFormat {
-	return ITLibArtworkFormat(x.inner.ImageDataFormat())
+// ImageDataFormat the fortmat of the data returned by the imageData method.
+func (x *LibArtwork) ImageDataFormat() LibArtworkFormat {
+	_r := objc.Send[LibArtworkFormat](objref.IDOf(x), objc.RegisterName("imageDataFormat"))
+	return _r
 }
 
 // LibArtworkable is the interface implemented by [LibArtwork], for mocking and DI.
 type LibArtworkable interface {
-	Unwrap() *raw.ITLibArtwork
-	Image() *appkit.NSImage
-	ImageData() *foundation.NSData
-	ImageDataFormat() ITLibArtworkFormat
+	obj.Object
+	Image() obj.Object
+	ImageData() obj.Object
+	ImageDataFormat() LibArtworkFormat
 }
 
 var _ LibArtworkable = (*LibArtwork)(nil)

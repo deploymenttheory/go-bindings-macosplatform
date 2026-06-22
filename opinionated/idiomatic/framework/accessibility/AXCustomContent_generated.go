@@ -5,96 +5,130 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Objects that define custom content and the timing of its output.
+// CustomContent is an idiomatic wrapper over the Objective-C class AXCustomContent.
 //
-// CustomContent wraps [raw.AXCustomContent] with a fluent Go API.
+// Objects that define custom content and the timing of its output.
 type CustomContent struct {
-	inner *raw.AXCustomContent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXCustomContent].
-func (x *CustomContent) Unwrap() *raw.AXCustomContent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomContent) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomContentFromID adopts an existing object pointer as a CustomContent (nil for 0).
+// CustomContentFromID adopts an existing Objective-C object as a CustomContent
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomContentFromID(id objc.ID) *CustomContent {
 	if id == 0 {
 		return nil
 	}
-	return &CustomContent{inner: raw.AXCustomContentFromID(id)}
-}
-
-// NewCustomContent creates a new [CustomContent].
-func NewCustomContent() *CustomContent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AXCustomContent")), objc.RegisterName("new"))
-	return &CustomContent{inner: raw.AXCustomContentFromID(_id)}
-}
-
-// An object that determines when to output custom accessibility content.
-//
-// WithImportance sets the importance property and returns the receiver for chaining.
-func (x *CustomContent) WithImportance(importance AXCustomContentImportance) *CustomContent {
-	x.inner.SetImportance(raw.AXCustomContentImportance(importance))
+	x := &CustomContent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Label calls the underlying Label.
+// customContentAdopt wraps an Objective-C object that this code just created as a
+// CustomContent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customContentAdopt(id objc.ID) *CustomContent {
+	if id == 0 {
+		return nil
+	}
+	x := &CustomContent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CustomContent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CustomContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CustomContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CustomContent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCustomContent creates a new CustomContent.
+func NewCustomContent() *CustomContent {
+	_id := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("new"))
+	return customContentAdopt(_id)
+}
+
+// WithImportance an object that determines when to output custom accessibility content.
+func (x *CustomContent) WithImportance(importance CustomContentImportance) *CustomContent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportance:"), importance)
+	return x
+}
+
+// Label wraps the corresponding Objective-C method.
 func (x *CustomContent) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttributedLabel calls the underlying AttributedLabel.
-func (x *CustomContent) AttributedLabel() *foundation.NSAttributedString {
-	return x.inner.AttributedLabel()
+// AttributedLabel wraps the corresponding Objective-C method.
+func (x *CustomContent) AttributedLabel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedLabel"))
+	return obj.Wrap(_r)
 }
 
-// Value calls the underlying Value.
+// Value wraps the corresponding Objective-C method.
 func (x *CustomContent) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttributedValue calls the underlying AttributedValue.
-func (x *CustomContent) AttributedValue() *foundation.NSAttributedString {
-	return x.inner.AttributedValue()
+// AttributedValue wraps the corresponding Objective-C method.
+func (x *CustomContent) AttributedValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedValue"))
+	return obj.Wrap(_r)
 }
 
-// Importance calls the underlying Importance.
-func (x *CustomContent) Importance() AXCustomContentImportance {
-	return AXCustomContentImportance(x.inner.Importance())
+// Importance wraps the corresponding Objective-C method.
+func (x *CustomContent) Importance() CustomContentImportance {
+	_r := objc.Send[CustomContentImportance](objref.IDOf(x), objc.RegisterName("importance"))
+	return _r
 }
 
-// SetImportance calls the underlying SetImportance.
-func (x *CustomContent) SetImportance(importance AXCustomContentImportance) {
-	x.inner.SetImportance(raw.AXCustomContentImportance(importance))
+// SetImportance wraps the corresponding Objective-C method.
+func (x *CustomContent) SetImportance(importance CustomContentImportance) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportance:"), importance)
 }
 
 // CustomContentable is the interface implemented by [CustomContent], for mocking and DI.
 type CustomContentable interface {
-	Unwrap() *raw.AXCustomContent
-	WithImportance(importance AXCustomContentImportance) *CustomContent
+	obj.Object
+	WithImportance(importance CustomContentImportance) *CustomContent
 	Label() string
-	AttributedLabel() *foundation.NSAttributedString
+	AttributedLabel() obj.Object
 	Value() string
-	AttributedValue() *foundation.NSAttributedString
-	Importance() AXCustomContentImportance
-	SetImportance(importance AXCustomContentImportance)
+	AttributedValue() obj.Object
+	Importance() CustomContentImportance
+	SetImportance(importance CustomContentImportance)
 }
 
 var _ CustomContentable = (*CustomContent)(nil)

@@ -5,99 +5,109 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.
+// CIResponder is an idiomatic wrapper over the Objective-C class MIDICIResponder.
 //
-// CIResponder wraps [raw.MIDICIResponder] with a fluent Go API.
+// An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.
 type CIResponder struct {
-	inner *raw.MIDICIResponder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIResponder].
-func (x *CIResponder) Unwrap() *raw.MIDICIResponder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIResponder) ID() objc.ID { return x.inner.Ptr() }
-
-// CIResponderFromID adopts an existing object pointer as a CIResponder (nil for 0).
+// CIResponderFromID adopts an existing Objective-C object as a CIResponder
+// (nil for 0), retaining it and registering a release finalizer.
 func CIResponderFromID(id objc.ID) *CIResponder {
 	if id == 0 {
 		return nil
 	}
-	return &CIResponder{inner: raw.MIDICIResponderFromID(id)}
+	x := &CIResponder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCIResponder creates a new [CIResponder].
-func NewCIResponder() *CIResponder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIResponder")), objc.RegisterName("new"))
-	return &CIResponder{inner: raw.MIDICIResponderFromID(_id)}
-}
-
-// Creates a new responder.
-//
-// NewCIResponderWithDeviceInfoProfileDelegateProfileStatesSupportProperties creates a new [CIResponder].
-func NewCIResponderWithDeviceInfoProfileDelegateProfileStatesSupportProperties(deviceInfo *raw.MIDICIDeviceInfo, delegate raw.MIDICIProfileResponderDelegate, profileList unsafe.Pointer, propertiesSupported bool) *CIResponder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIResponder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceInfo:profileDelegate:profileStates:supportProperties:"), deviceInfo.Ptr(), delegate, profileList, propertiesSupported)
-	return &CIResponder{inner: raw.MIDICIResponderFromID(_id)}
-}
-
-// Enables or disables a profile and notifies all connected initiators.
-//
-// NotifyProfileOnChannelIsEnabled calls the underlying NotifyProfileOnChannelIsEnabled.
-func (x *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *raw.MIDICIProfile, channel uint8, enabledState bool) bool {
-	return x.inner.NotifyProfileOnChannelIsEnabled(aProfile, channel, enabledState)
-}
-
-// Sends profile-specific data to all connected initiators.
-//
-// SendProfileOnChannelProfileData calls the underlying SendProfileOnChannelProfileData.
-func (x *CIResponder) SendProfileOnChannelProfileData(aProfile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
-	return x.inner.SendProfileOnChannelProfileData(aProfile, channel, profileSpecificData)
-}
-
-// Starts receiving initiator requests.
-//
-// Start calls the underlying Start.
-func (x *CIResponder) Start() bool {
-	return x.inner.Start()
-}
-
-// Stops receiving initiator requests and disconnects all connected initiators.
-//
-// Stop calls the underlying Stop.
-func (x *CIResponder) Stop() {
-	x.inner.Stop()
-}
-
-// ProfileDelegate calls the underlying ProfileDelegate.
-func (x *CIResponder) ProfileDelegate() raw.MIDICIProfileResponderDelegate {
-	return x.inner.ProfileDelegate()
-}
-
-// DeviceInfo calls the underlying DeviceInfo.
-func (x *CIResponder) DeviceInfo() *CIDeviceInfo {
-	_r := x.inner.DeviceInfo()
-	if _r == nil {
+// cIResponderAdopt wraps an Objective-C object that this code just created as a
+// CIResponder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIResponderAdopt(id objc.ID) *CIResponder {
+	if id == 0 {
 		return nil
 	}
-	return &CIDeviceInfo{inner: _r}
+	x := &CIResponder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CIResponder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIResponder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIResponder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIResponder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIResponder creates a new CIResponder.
+func NewCIResponder() *CIResponder {
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIResponder")), objc.RegisterName("new"))
+	return cIResponderAdopt(_id)
+}
+
+// NotifyProfileOnChannelIsEnabled enables or disables a profile and notifies all connected initiators.
+func (x *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyProfile:onChannel:isEnabled:"), objref.IDOf(aProfile), channel, enabledState)
+	return _r
+}
+
+// SendProfileOnChannelProfileData sends profile-specific data to all connected initiators.
+func (x *CIResponder) SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(aProfile), channel, objref.IDOf(profileSpecificData))
+	return _r
+}
+
+// Start starts receiving initiator requests.
+func (x *CIResponder) Start() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("start"))
+	return _r
+}
+
+// Stop stops receiving initiator requests and disconnects all connected initiators.
+func (x *CIResponder) Stop() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+}
+
+// DeviceInfo wraps the corresponding Objective-C method.
+func (x *CIResponder) DeviceInfo() *CIDeviceInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+	return CIDeviceInfoFromID(_r)
 }
 
 // CIResponderable is the interface implemented by [CIResponder], for mocking and DI.
 type CIResponderable interface {
-	Unwrap() *raw.MIDICIResponder
-	NotifyProfileOnChannelIsEnabled(aProfile *raw.MIDICIProfile, channel uint8, enabledState bool) bool
-	SendProfileOnChannelProfileData(aProfile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool
+	obj.Object
+	NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool
+	SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool
 	Start() bool
 	Stop()
-	ProfileDelegate() raw.MIDICIProfileResponderDelegate
 	DeviceInfo() *CIDeviceInfo
 }
 

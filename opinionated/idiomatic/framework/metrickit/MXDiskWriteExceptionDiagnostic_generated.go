@@ -5,64 +5,72 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a diagnostic report for a disk write exception.
+// DiskWriteExceptionDiagnostic is an idiomatic wrapper over the Objective-C class MXDiskWriteExceptionDiagnostic.
 //
-// DiskWriteExceptionDiagnostic wraps [raw.MXDiskWriteExceptionDiagnostic] with a fluent Go API.
+// It embeds [Diagnostic], promoting that type's methods.
+//
+// An object representing a diagnostic report for a disk write exception.
 type DiskWriteExceptionDiagnostic struct {
-	inner *raw.MXDiskWriteExceptionDiagnostic
+	Diagnostic
 }
 
-// Unwrap returns the underlying [raw.MXDiskWriteExceptionDiagnostic].
-func (x *DiskWriteExceptionDiagnostic) Unwrap() *raw.MXDiskWriteExceptionDiagnostic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiskWriteExceptionDiagnostic) ID() objc.ID { return x.inner.Ptr() }
-
-// DiskWriteExceptionDiagnosticFromID adopts an existing object pointer as a DiskWriteExceptionDiagnostic (nil for 0).
+// DiskWriteExceptionDiagnosticFromID adopts an existing Objective-C object as a DiskWriteExceptionDiagnostic
+// (nil for 0), retaining it and registering a release finalizer.
 func DiskWriteExceptionDiagnosticFromID(id objc.ID) *DiskWriteExceptionDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	return &DiskWriteExceptionDiagnostic{inner: raw.MXDiskWriteExceptionDiagnosticFromID(id)}
+	x := &DiskWriteExceptionDiagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDiskWriteExceptionDiagnostic creates a new [DiskWriteExceptionDiagnostic].
-func NewDiskWriteExceptionDiagnostic() *DiskWriteExceptionDiagnostic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXDiskWriteExceptionDiagnostic")), objc.RegisterName("new"))
-	return &DiskWriteExceptionDiagnostic{inner: raw.MXDiskWriteExceptionDiagnosticFromID(_id)}
-}
-
-// @property      callStackTree @abstract      The application call stack tree associated with the excessive disk writes.
-//
-// CallStackTree calls the underlying CallStackTree.
-func (x *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
-	_r := x.inner.CallStackTree()
-	if _r == nil {
+// diskWriteExceptionDiagnosticAdopt wraps an Objective-C object that this code just created as a
+// DiskWriteExceptionDiagnostic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diskWriteExceptionDiagnosticAdopt(id objc.ID) *DiskWriteExceptionDiagnostic {
+	if id == 0 {
 		return nil
 	}
-	return &CallStackTree{inner: _r}
+	x := &DiskWriteExceptionDiagnostic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property      totalWritesCaused @abstract      Total disk writes caused in the scope of this disk write exception. @discussion    Dimensioned as NSUnitInformationStorage.
-//
-// TotalWritesCaused calls the underlying TotalWritesCaused.
-func (x *DiskWriteExceptionDiagnostic) TotalWritesCaused() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.TotalWritesCaused()
+// NewDiskWriteExceptionDiagnostic creates a new DiskWriteExceptionDiagnostic.
+func NewDiskWriteExceptionDiagnostic() *DiskWriteExceptionDiagnostic {
+	_id := objc.Send[objc.ID](objc.ID(_class("MXDiskWriteExceptionDiagnostic")), objc.RegisterName("new"))
+	return diskWriteExceptionDiagnosticAdopt(_id)
 }
 
-func (x *DiskWriteExceptionDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+// CallStackTree the application call stack tree associated with the excessive disk writes.
+func (x *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+	return CallStackTreeFromID(_r)
+}
+
+// TotalWritesCaused total disk writes caused in the scope of this disk write exception. Dimensioned as NSUnitInformationStorage.
+func (x *DiskWriteExceptionDiagnostic) TotalWritesCaused() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalWritesCaused"))
+	return obj.Wrap(_r)
+}
 
 // DiskWriteExceptionDiagnosticable is the interface implemented by [DiskWriteExceptionDiagnostic], for mocking and DI.
 type DiskWriteExceptionDiagnosticable interface {
-	Unwrap() *raw.MXDiskWriteExceptionDiagnostic
+	obj.Object
 	CallStackTree() *CallStackTree
-	TotalWritesCaused() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	TotalWritesCaused() obj.Object
 }
 
 var _ DiskWriteExceptionDiagnosticable = (*DiskWriteExceptionDiagnostic)(nil)
+
+var _ DiagnosticProvider = (*DiskWriteExceptionDiagnostic)(nil)

@@ -5,143 +5,130 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javascriptcore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SCNExportJavaScriptModule calls [raw.SCNExportJavaScriptModule] (C function SCNExportJavaScriptModule).
-func SCNExportJavaScriptModule(context_ *javascriptcore.JSContext) {
-	raw.SCNExportJavaScriptModule(context_)
+var _fnSCNExportJavaScriptModule func(objc.ID)
+
+// SCNExportJavaScriptModule calls the SceneKit framework function SCNExportJavaScriptModule.
+func SCNExportJavaScriptModule(context_ obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNExportJavaScriptModule == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNExportJavaScriptModule, _lib, "SCNExportJavaScriptModule")
+	}
+	_fnSCNExportJavaScriptModule(objref.IDOf(context_))
 }
 
-// SCNMatrix4EqualToMatrix4 calls [raw.SCNMatrix4EqualToMatrix4] (C function SCNMatrix4EqualToMatrix4).
+var _fnSCNMatrix4EqualToMatrix4 func(quartzcore.CATransform3D, quartzcore.CATransform3D) bool
+
+// SCNMatrix4EqualToMatrix4 calls the SceneKit framework function SCNMatrix4EqualToMatrix4.
 func SCNMatrix4EqualToMatrix4(a quartzcore.CATransform3D, b quartzcore.CATransform3D) bool {
-	return raw.SCNMatrix4EqualToMatrix4(a, b)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4EqualToMatrix4 == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4EqualToMatrix4, _lib, "SCNMatrix4EqualToMatrix4")
+	}
+	return _fnSCNMatrix4EqualToMatrix4(a, b)
 }
 
-// SCNMatrix4FromGLKMatrix4 calls [raw.SCNMatrix4FromGLKMatrix4] (C function SCNMatrix4FromGLKMatrix4).
-func SCNMatrix4FromGLKMatrix4(mat unsafe.Pointer) quartzcore.CATransform3D {
-	return raw.SCNMatrix4FromGLKMatrix4(mat)
-}
+var _fnSCNMatrix4Invert func(quartzcore.CATransform3D) quartzcore.CATransform3D
 
-// SCNMatrix4FromMat4 calls [raw.SCNMatrix4FromMat4] (C function SCNMatrix4FromMat4).
-func SCNMatrix4FromMat4(m unsafe.Pointer) quartzcore.CATransform3D {
-	return raw.SCNMatrix4FromMat4(m)
-}
-
-// SCNMatrix4Invert calls [raw.SCNMatrix4Invert] (C function SCNMatrix4Invert).
+// SCNMatrix4Invert calls the SceneKit framework function SCNMatrix4Invert.
 func SCNMatrix4Invert(m quartzcore.CATransform3D) quartzcore.CATransform3D {
-	return raw.SCNMatrix4Invert(m)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4Invert == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4Invert, _lib, "SCNMatrix4Invert")
+	}
+	return _fnSCNMatrix4Invert(m)
 }
 
-// SCNMatrix4IsIdentity calls [raw.SCNMatrix4IsIdentity] (C function SCNMatrix4IsIdentity).
+var _fnSCNMatrix4IsIdentity func(quartzcore.CATransform3D) bool
+
+// SCNMatrix4IsIdentity calls the SceneKit framework function SCNMatrix4IsIdentity.
 func SCNMatrix4IsIdentity(m quartzcore.CATransform3D) bool {
-	return raw.SCNMatrix4IsIdentity(m)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4IsIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4IsIdentity, _lib, "SCNMatrix4IsIdentity")
+	}
+	return _fnSCNMatrix4IsIdentity(m)
 }
 
-// SCNMatrix4MakeRotation calls [raw.SCNMatrix4MakeRotation] (C function SCNMatrix4MakeRotation).
+var _fnSCNMatrix4MakeRotation func(float64, float64, float64, float64) quartzcore.CATransform3D
+
+// SCNMatrix4MakeRotation calls the SceneKit framework function SCNMatrix4MakeRotation.
 func SCNMatrix4MakeRotation(angle float64, x float64, y float64, z float64) quartzcore.CATransform3D {
-	return raw.SCNMatrix4MakeRotation(angle, x, y, z)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4MakeRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4MakeRotation, _lib, "SCNMatrix4MakeRotation")
+	}
+	return _fnSCNMatrix4MakeRotation(angle, x, y, z)
 }
 
-// SCNMatrix4MakeScale calls [raw.SCNMatrix4MakeScale] (C function SCNMatrix4MakeScale).
+var _fnSCNMatrix4MakeScale func(float64, float64, float64) quartzcore.CATransform3D
+
+// SCNMatrix4MakeScale calls the SceneKit framework function SCNMatrix4MakeScale.
 func SCNMatrix4MakeScale(sx float64, sy float64, sz float64) quartzcore.CATransform3D {
-	return raw.SCNMatrix4MakeScale(sx, sy, sz)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4MakeScale == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4MakeScale, _lib, "SCNMatrix4MakeScale")
+	}
+	return _fnSCNMatrix4MakeScale(sx, sy, sz)
 }
 
-// SCNMatrix4MakeTranslation calls [raw.SCNMatrix4MakeTranslation] (C function SCNMatrix4MakeTranslation).
+var _fnSCNMatrix4MakeTranslation func(float64, float64, float64) quartzcore.CATransform3D
+
+// SCNMatrix4MakeTranslation calls the SceneKit framework function SCNMatrix4MakeTranslation.
 func SCNMatrix4MakeTranslation(tx float64, ty float64, tz float64) quartzcore.CATransform3D {
-	return raw.SCNMatrix4MakeTranslation(tx, ty, tz)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4MakeTranslation == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4MakeTranslation, _lib, "SCNMatrix4MakeTranslation")
+	}
+	return _fnSCNMatrix4MakeTranslation(tx, ty, tz)
 }
 
-// SCNMatrix4Mult calls [raw.SCNMatrix4Mult] (C function SCNMatrix4Mult).
+var _fnSCNMatrix4Mult func(quartzcore.CATransform3D, quartzcore.CATransform3D) quartzcore.CATransform3D
+
+// SCNMatrix4Mult calls the SceneKit framework function SCNMatrix4Mult.
 func SCNMatrix4Mult(a quartzcore.CATransform3D, b quartzcore.CATransform3D) quartzcore.CATransform3D {
-	return raw.SCNMatrix4Mult(a, b)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4Mult == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4Mult, _lib, "SCNMatrix4Mult")
+	}
+	return _fnSCNMatrix4Mult(a, b)
 }
 
-// SCNMatrix4Rotate calls [raw.SCNMatrix4Rotate] (C function SCNMatrix4Rotate).
+var _fnSCNMatrix4Rotate func(quartzcore.CATransform3D, float64, float64, float64, float64) quartzcore.CATransform3D
+
+// SCNMatrix4Rotate calls the SceneKit framework function SCNMatrix4Rotate.
 func SCNMatrix4Rotate(m quartzcore.CATransform3D, angle float64, x float64, y float64, z float64) quartzcore.CATransform3D {
-	return raw.SCNMatrix4Rotate(m, angle, x, y, z)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4Rotate, _lib, "SCNMatrix4Rotate")
+	}
+	return _fnSCNMatrix4Rotate(m, angle, x, y, z)
 }
 
-// SCNMatrix4Scale calls [raw.SCNMatrix4Scale] (C function SCNMatrix4Scale).
+var _fnSCNMatrix4Scale func(quartzcore.CATransform3D, float64, float64, float64) quartzcore.CATransform3D
+
+// SCNMatrix4Scale calls the SceneKit framework function SCNMatrix4Scale.
 func SCNMatrix4Scale(m quartzcore.CATransform3D, sx float64, sy float64, sz float64) quartzcore.CATransform3D {
-	return raw.SCNMatrix4Scale(m, sx, sy, sz)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4Scale == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4Scale, _lib, "SCNMatrix4Scale")
+	}
+	return _fnSCNMatrix4Scale(m, sx, sy, sz)
 }
 
-// SCNMatrix4ToGLKMatrix4 calls [raw.SCNMatrix4ToGLKMatrix4] (C function SCNMatrix4ToGLKMatrix4).
-func SCNMatrix4ToGLKMatrix4(mat quartzcore.CATransform3D) unsafe.Pointer {
-	return raw.SCNMatrix4ToGLKMatrix4(mat)
-}
+var _fnSCNMatrix4Translate func(quartzcore.CATransform3D, float64, float64, float64) quartzcore.CATransform3D
 
-// SCNMatrix4ToMat4 calls [raw.SCNMatrix4ToMat4] (C function SCNMatrix4ToMat4).
-func SCNMatrix4ToMat4(m quartzcore.CATransform3D) unsafe.Pointer {
-	return raw.SCNMatrix4ToMat4(m)
-}
-
-// SCNMatrix4Translate calls [raw.SCNMatrix4Translate] (C function SCNMatrix4Translate).
+// SCNMatrix4Translate calls the SceneKit framework function SCNMatrix4Translate.
 func SCNMatrix4Translate(m quartzcore.CATransform3D, tx float64, ty float64, tz float64) quartzcore.CATransform3D {
-	return raw.SCNMatrix4Translate(m, tx, ty, tz)
-}
-
-// SCNVector3EqualToVector3 calls [raw.SCNVector3EqualToVector3] (C function SCNVector3EqualToVector3).
-func SCNVector3EqualToVector3(a raw.SCNVector3, b raw.SCNVector3) bool {
-	return raw.SCNVector3EqualToVector3(a, b)
-}
-
-// SCNVector3FromFloat3 calls [raw.SCNVector3FromFloat3] (C function SCNVector3FromFloat3).
-func SCNVector3FromFloat3(v unsafe.Pointer) raw.SCNVector3 {
-	return raw.SCNVector3FromFloat3(v)
-}
-
-// SCNVector3FromGLKVector3 calls [raw.SCNVector3FromGLKVector3] (C function SCNVector3FromGLKVector3).
-func SCNVector3FromGLKVector3(vector unsafe.Pointer) raw.SCNVector3 {
-	return raw.SCNVector3FromGLKVector3(vector)
-}
-
-// SCNVector3Make calls [raw.SCNVector3Make] (C function SCNVector3Make).
-func SCNVector3Make(x float64, y float64, z float64) raw.SCNVector3 {
-	return raw.SCNVector3Make(x, y, z)
-}
-
-// SCNVector3ToFloat3 calls [raw.SCNVector3ToFloat3] (C function SCNVector3ToFloat3).
-func SCNVector3ToFloat3(v raw.SCNVector3) unsafe.Pointer {
-	return raw.SCNVector3ToFloat3(v)
-}
-
-// SCNVector3ToGLKVector3 calls [raw.SCNVector3ToGLKVector3] (C function SCNVector3ToGLKVector3).
-func SCNVector3ToGLKVector3(vector raw.SCNVector3) unsafe.Pointer {
-	return raw.SCNVector3ToGLKVector3(vector)
-}
-
-// SCNVector4EqualToVector4 calls [raw.SCNVector4EqualToVector4] (C function SCNVector4EqualToVector4).
-func SCNVector4EqualToVector4(a raw.SCNVector4, b raw.SCNVector4) bool {
-	return raw.SCNVector4EqualToVector4(a, b)
-}
-
-// SCNVector4FromFloat4 calls [raw.SCNVector4FromFloat4] (C function SCNVector4FromFloat4).
-func SCNVector4FromFloat4(v unsafe.Pointer) raw.SCNVector4 {
-	return raw.SCNVector4FromFloat4(v)
-}
-
-// SCNVector4FromGLKVector4 calls [raw.SCNVector4FromGLKVector4] (C function SCNVector4FromGLKVector4).
-func SCNVector4FromGLKVector4(vector unsafe.Pointer) raw.SCNVector4 {
-	return raw.SCNVector4FromGLKVector4(vector)
-}
-
-// SCNVector4Make calls [raw.SCNVector4Make] (C function SCNVector4Make).
-func SCNVector4Make(x float64, y float64, z float64, w float64) raw.SCNVector4 {
-	return raw.SCNVector4Make(x, y, z, w)
-}
-
-// SCNVector4ToFloat4 calls [raw.SCNVector4ToFloat4] (C function SCNVector4ToFloat4).
-func SCNVector4ToFloat4(v raw.SCNVector4) unsafe.Pointer {
-	return raw.SCNVector4ToFloat4(v)
-}
-
-// SCNVector4ToGLKVector4 calls [raw.SCNVector4ToGLKVector4] (C function SCNVector4ToGLKVector4).
-func SCNVector4ToGLKVector4(vector raw.SCNVector4) unsafe.Pointer {
-	return raw.SCNVector4ToGLKVector4(vector)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4Translate == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4Translate, _lib, "SCNMatrix4Translate")
+	}
+	return _fnSCNMatrix4Translate(m, tx, ty, tz)
 }

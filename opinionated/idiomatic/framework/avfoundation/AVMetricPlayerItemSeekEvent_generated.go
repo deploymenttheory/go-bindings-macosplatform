@@ -5,49 +5,60 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents when a playback seek occurs.
+// MetricPlayerItemSeekEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemSeekEvent.
 //
-// MetricPlayerItemSeekEvent wraps [raw.AVMetricPlayerItemSeekEvent] with a fluent Go API.
+// It embeds [MetricPlayerItemRateChangeEvent], promoting that type's methods.
+//
+// An event that represents when a playback seek occurs.
 type MetricPlayerItemSeekEvent struct {
-	inner *raw.AVMetricPlayerItemSeekEvent
+	MetricPlayerItemRateChangeEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemSeekEvent].
-func (x *MetricPlayerItemSeekEvent) Unwrap() *raw.AVMetricPlayerItemSeekEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemSeekEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemSeekEventFromID adopts an existing object pointer as a MetricPlayerItemSeekEvent (nil for 0).
+// MetricPlayerItemSeekEventFromID adopts an existing Objective-C object as a MetricPlayerItemSeekEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemSeekEventFromID(id objc.ID) *MetricPlayerItemSeekEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemSeekEvent{inner: raw.AVMetricPlayerItemSeekEventFromID(id)}
+	x := &MetricPlayerItemSeekEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemSeekEvent creates a new [MetricPlayerItemSeekEvent].
+// metricPlayerItemSeekEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemSeekEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemSeekEventAdopt(id objc.ID) *MetricPlayerItemSeekEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricPlayerItemSeekEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMetricPlayerItemSeekEvent creates a new MetricPlayerItemSeekEvent.
 func NewMetricPlayerItemSeekEvent() *MetricPlayerItemSeekEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemSeekEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemSeekEvent{inner: raw.AVMetricPlayerItemSeekEventFromID(_id)}
-}
-
-func (x *MetricPlayerItemSeekEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
-	return &x.inner.AVMetricPlayerItemRateChangeEvent
-}
-
-func (x *MetricPlayerItemSeekEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemSeekEvent")), objc.RegisterName("new"))
+	return metricPlayerItemSeekEventAdopt(_id)
 }
 
 // MetricPlayerItemSeekEventable is the interface implemented by [MetricPlayerItemSeekEvent], for mocking and DI.
 type MetricPlayerItemSeekEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemSeekEvent
+	obj.Object
 }
 
 var _ MetricPlayerItemSeekEventable = (*MetricPlayerItemSeekEvent)(nil)
+
+var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemSeekEvent)(nil)
+
+var _ MetricEventProvider = (*MetricPlayerItemSeekEvent)(nil)

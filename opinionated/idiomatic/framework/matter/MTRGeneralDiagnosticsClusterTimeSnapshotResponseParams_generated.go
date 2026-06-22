@@ -5,89 +5,121 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams wraps [raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams.
 type MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams struct {
-	inner *raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams].
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams (nil for 0).
+// MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{inner: raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(id)}
+	x := &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError creates a new [MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams].
-func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{inner: raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsFromID(_id)}, nil
-}
-
-// WithSystemTimeMs sets the systemTimeMs property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithSystemTimeMs(systemTimeMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
-	x.inner.SetSystemTimeMs(systemTimeMs)
+	x := &MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithPosixTimeMs sets the posixTimeMs property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithPosixTimeMs(posixTimeMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
-	x.inner.SetPosixTimeMs(posixTimeMs)
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt(_id), nil
+}
+
+// WithSystemTimeMs sets the property and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithSystemTimeMs(systemTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemTimeMs:"), objref.IDOf(systemTimeMs))
 	return x
 }
 
-// SystemTimeMs calls the underlying SystemTimeMs.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() *foundation.NSNumber {
-	return x.inner.SystemTimeMs()
+// WithPosixTimeMs sets the property and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithPosixTimeMs(posixTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosixTimeMs:"), objref.IDOf(posixTimeMs))
+	return x
 }
 
-// SetSystemTimeMs calls the underlying SetSystemTimeMs.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetSystemTimeMs(systemTimeMs *foundation.NSNumber) {
-	x.inner.SetSystemTimeMs(systemTimeMs)
+// SystemTimeMs wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemTimeMs"))
+	return obj.Wrap(_r)
 }
 
-// PosixTimeMs calls the underlying PosixTimeMs.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() *foundation.NSNumber {
-	return x.inner.PosixTimeMs()
+// SetSystemTimeMs wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetSystemTimeMs(systemTimeMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemTimeMs:"), objref.IDOf(systemTimeMs))
 }
 
-// SetPosixTimeMs calls the underlying SetPosixTimeMs.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetPosixTimeMs(posixTimeMs *foundation.NSNumber) {
-	x.inner.SetPosixTimeMs(posixTimeMs)
+// PosixTimeMs wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("posixTimeMs"))
+	return obj.Wrap(_r)
+}
+
+// SetPosixTimeMs wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetPosixTimeMs(posixTimeMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosixTimeMs:"), objref.IDOf(posixTimeMs))
 }
 
 // MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams], for mocking and DI.
 type MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
-	WithSystemTimeMs(systemTimeMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
-	WithPosixTimeMs(posixTimeMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
-	SystemTimeMs() *foundation.NSNumber
-	SetSystemTimeMs(systemTimeMs *foundation.NSNumber)
-	PosixTimeMs() *foundation.NSNumber
-	SetPosixTimeMs(posixTimeMs *foundation.NSNumber)
+	obj.Object
+	WithSystemTimeMs(systemTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+	WithPosixTimeMs(posixTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+	SystemTimeMs() obj.Object
+	SetSystemTimeMs(systemTimeMs obj.Object)
+	PosixTimeMs() obj.Object
+	SetPosixTimeMs(posixTimeMs obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsable = (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams)(nil)

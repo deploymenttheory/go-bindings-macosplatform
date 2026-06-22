@@ -5,50 +5,86 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a remote device.
+// Peer is an idiomatic wrapper over the Objective-C class CBPeer.
 //
-// Peer wraps [raw.CBPeer] with a fluent Go API.
+// Peer is an abstract base — you do not construct it directly. Construct one of [Central], [Peripheral] and pass it where a Peer is accepted.
+//
+// An object that represents a remote device.
 type Peer struct {
-	inner *raw.CBPeer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBPeer].
-func (x *Peer) Unwrap() *raw.CBPeer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Peer) ID() objc.ID { return x.inner.Ptr() }
-
-// PeerFromID adopts an existing object pointer as a Peer (nil for 0).
+// PeerFromID adopts an existing Objective-C object as a Peer
+// (nil for 0), retaining it and registering a release finalizer.
 func PeerFromID(id objc.ID) *Peer {
 	if id == 0 {
 		return nil
 	}
-	return &Peer{inner: raw.CBPeerFromID(id)}
+	x := &Peer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPeer creates a new [Peer].
-func NewPeer() *Peer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeer")), objc.RegisterName("new"))
-	return &Peer{inner: raw.CBPeerFromID(_id)}
+// peerAdopt wraps an Objective-C object that this code just created as a
+// Peer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func peerAdopt(id objc.ID) *Peer {
+	if id == 0 {
+		return nil
+	}
+	x := &Peer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Identifier calls the underlying Identifier.
-func (x *Peer) Identifier() *foundation.NSUUID {
-	return x.inner.Identifier()
+// Description returns the object's -description text.
+func (x *Peer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *Peer) asPeer() *raw.CBPeer { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Peer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Peer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Peer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Identifier wraps the corresponding Objective-C method.
+func (x *Peer) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
+}
 
 // Peerable is the interface implemented by [Peer], for mocking and DI.
 type Peerable interface {
-	Unwrap() *raw.CBPeer
-	Identifier() *foundation.NSUUID
+	obj.Object
+	Identifier() obj.Object
 }
 
 var _ Peerable = (*Peer)(nil)
+
+// isPeer marks Peer — and, by embedding promotion, its
+// subclasses — as a member of the Peer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Peer) isPeer() {}
+
+var _ PeerProvider = (*Peer)(nil)

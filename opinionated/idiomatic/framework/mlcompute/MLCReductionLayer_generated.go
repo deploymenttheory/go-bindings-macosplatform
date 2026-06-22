@@ -5,93 +5,95 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that reduces tensor values across a specific dimension to a scalar value.
+// ReductionLayer is an idiomatic wrapper over the Objective-C class MLCReductionLayer.
 //
-// ReductionLayer wraps [raw.MLCReductionLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that reduces tensor values across a specific dimension to a scalar value.
 type ReductionLayer struct {
-	inner *raw.MLCReductionLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCReductionLayer].
-func (x *ReductionLayer) Unwrap() *raw.MLCReductionLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReductionLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ReductionLayerFromID adopts an existing object pointer as a ReductionLayer (nil for 0).
+// ReductionLayerFromID adopts an existing Objective-C object as a ReductionLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ReductionLayerFromID(id objc.ID) *ReductionLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ReductionLayer{inner: raw.MLCReductionLayerFromID(id)}
-}
-
-// NewReductionLayer creates a new [ReductionLayer].
-func NewReductionLayer() *ReductionLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCReductionLayer")), objc.RegisterName("new"))
-	return &ReductionLayer{inner: raw.MLCReductionLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *ReductionLayer) WithLabel(label string) *ReductionLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &ReductionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   reductionType @abstract   The reduction type
-//
-// ReductionType calls the underlying ReductionType.
-func (x *ReductionLayer) ReductionType() MLCReductionType {
-	return MLCReductionType(x.inner.ReductionType())
-}
-
-// @property   dimension @abstract   The dimension over which to perform the reduction operation
-//
-// Dimension calls the underlying Dimension.
-func (x *ReductionLayer) Dimension() uint {
-	return x.inner.Dimension()
-}
-
-// @property   dimensions @abstract   The dimensions over which to perform the reduction operation
-//
-// Dimensions returns the collection as a Go slice.
-func (x *ReductionLayer) Dimensions() []*foundation.NSNumber {
-	arr := x.inner.Dimensions()
-	if arr == nil {
+// reductionLayerAdopt wraps an Objective-C object that this code just created as a
+// ReductionLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func reductionLayerAdopt(id objc.ID) *ReductionLayer {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &ReductionLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ReductionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+// NewReductionLayer creates a new ReductionLayer.
+func NewReductionLayer() *ReductionLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCReductionLayer")), objc.RegisterName("new"))
+	return reductionLayerAdopt(_id)
+}
+
+// WithLabel a string that helps identify this layer.
+func (x *ReductionLayer) WithLabel(label string) *ReductionLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// ReductionType the reduction type
+func (x *ReductionLayer) ReductionType() ReductionType {
+	_r := objc.Send[ReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+	return _r
+}
+
+// Dimension the dimension over which to perform the reduction operation
+func (x *ReductionLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
+}
+
+// Dimensions the dimensions over which to perform the reduction operation
+//
+// Dimensions returns the collection as a Go slice.
+func (x *ReductionLayer) Dimensions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
 
 // ReductionLayerable is the interface implemented by [ReductionLayer], for mocking and DI.
 type ReductionLayerable interface {
-	Unwrap() *raw.MLCReductionLayer
+	obj.Object
 	WithLabel(label string) *ReductionLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer
-	ReductionType() MLCReductionType
-	Dimension() uint
-	Dimensions() []*foundation.NSNumber
+	ReductionType() ReductionType
+	Dimension() int
+	Dimensions() []obj.Object
 }
 
 var _ ReductionLayerable = (*ReductionLayer)(nil)
+
+var _ LayerProvider = (*ReductionLayer)(nil)

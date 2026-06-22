@@ -5,107 +5,97 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract request type that builds evidence of a condition over time.
+// StatefulRequest is an idiomatic wrapper over the Objective-C class VNStatefulRequest.
 //
-// StatefulRequest wraps [raw.VNStatefulRequest] with a fluent Go API.
+// StatefulRequest is an abstract base — you do not construct it directly. Construct one of [DetectHumanBodyPose3DRequest], [DetectTrajectoriesRequest], [GeneratePersonSegmentationRequest], [TrackHomographicImageRegistrationRequest], [TrackOpticalFlowRequest], [TrackTranslationalImageRegistrationRequest] and pass it where a StatefulRequest is accepted.
+//
+// An abstract request type that builds evidence of a condition over time.
 type StatefulRequest struct {
-	inner *raw.VNStatefulRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNStatefulRequest].
-func (x *StatefulRequest) Unwrap() *raw.VNStatefulRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StatefulRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// StatefulRequestFromID adopts an existing object pointer as a StatefulRequest (nil for 0).
+// StatefulRequestFromID adopts an existing Objective-C object as a StatefulRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func StatefulRequestFromID(id objc.ID) *StatefulRequest {
 	if id == 0 {
 		return nil
 	}
-	return &StatefulRequest{inner: raw.VNStatefulRequestFromID(id)}
+	x := &StatefulRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a video-based request.
-//
-// NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler creates a new [StatefulRequest].
-func NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSpacing coremedia.CMTime, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *StatefulRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNStatefulRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameAnalysisSpacing:completionHandler:"), frameAnalysisSpacing, completionHandler)
-	return &StatefulRequest{inner: raw.VNStatefulRequestFromID(_id)}
+// statefulRequestAdopt wraps an Objective-C object that this code just created as a
+// StatefulRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func statefulRequestAdopt(id objc.ID) *StatefulRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &StatefulRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *StatefulRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *StatefulRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *StatefulRequest) WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *StatefulRequest) WithRevision(revision uint) *StatefulRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *StatefulRequest) WithRevision(revision int) *StatefulRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// @brief The minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. @discussion Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
-//
-// MinimumLatencyFrameCount calls the underlying MinimumLatencyFrameCount.
+// MinimumLatencyFrameCount the minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
 func (x *StatefulRequest) MinimumLatencyFrameCount() int {
-	return x.inner.MinimumLatencyFrameCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumLatencyFrameCount"))
+	return _r
 }
-
-// @brief The reciprocal of maximum rate at which buffers will be processed. @discussion The request will not process buffers that fall within the `frameAnalysisSpacing` after it has performed the analysis. The analysis is not done by wall time but by analysis of of the time stamps of the samplebuffers being processed.
-//
-// FrameAnalysisSpacing calls the underlying FrameAnalysisSpacing.
-func (x *StatefulRequest) FrameAnalysisSpacing() coremedia.CMTime {
-	return x.inner.FrameAnalysisSpacing()
-}
-
-func (x *StatefulRequest) asStatefulRequest() *raw.VNStatefulRequest { return x.inner }
-
-func (x *StatefulRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *StatefulRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
 // StatefulRequestable is the interface implemented by [StatefulRequest], for mocking and DI.
 type StatefulRequestable interface {
-	Unwrap() *raw.VNStatefulRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest
-	WithRevision(revision uint) *StatefulRequest
+	WithRevision(revision int) *StatefulRequest
 	MinimumLatencyFrameCount() int
-	FrameAnalysisSpacing() coremedia.CMTime
 }
 
 var _ StatefulRequestable = (*StatefulRequest)(nil)
+
+// isStatefulRequest marks StatefulRequest — and, by embedding promotion, its
+// subclasses — as a member of the StatefulRequest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StatefulRequest) isStatefulRequest() {}
+
+var _ StatefulRequestProvider = (*StatefulRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*StatefulRequest)(nil)
+
+var _ RequestProvider = (*StatefulRequest)(nil)

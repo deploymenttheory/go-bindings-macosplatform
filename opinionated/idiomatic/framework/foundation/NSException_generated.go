@@ -5,111 +5,130 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a special condition that interrupts the normal flow of program execution.
+// Exception is an idiomatic wrapper over the Objective-C class NSException.
 //
-// Exception wraps [raw.NSException] with a fluent Go API.
+// An object that represents a special condition that interrupts the normal flow of program execution.
 type Exception struct {
-	inner *raw.NSException
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSException].
-func (x *Exception) Unwrap() *raw.NSException { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Exception) ID() objc.ID { return x.inner.Ptr() }
-
-// ExceptionFromID adopts an existing object pointer as a Exception (nil for 0).
+// ExceptionFromID adopts an existing Objective-C object as a Exception
+// (nil for 0), retaining it and registering a release finalizer.
 func ExceptionFromID(id objc.ID) *Exception {
 	if id == 0 {
 		return nil
 	}
-	return &Exception{inner: raw.NSExceptionFromID(id)}
-}
-
-// Initializes and returns a newly allocated exception object.
-//
-// NewExceptionWithNameReasonUserInfo creates a new [Exception].
-func NewExceptionWithNameReasonUserInfo(aName *raw.NSString, aReason string, aUserInfo purego.IDer) *Exception {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSException")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), aName.Ptr(), foundation.NSStringStringWithUTF8String(aReason).Ptr(), aUserInfo.ID())
-	return &Exception{inner: raw.NSExceptionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Exception) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Exception {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Exception{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Raises the receiver, causing program flow to jump to the local exception handler.
-//
-// Raise calls the underlying Raise.
+// exceptionAdopt wraps an Objective-C object that this code just created as a
+// Exception (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func exceptionAdopt(id objc.ID) *Exception {
+	if id == 0 {
+		return nil
+	}
+	x := &Exception{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Exception) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Exception) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Exception) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Exception) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExceptionWithNameReasonUserInfo initializes and returns a newly allocated exception object.
+func NewExceptionWithNameReasonUserInfo(aName *String, aReason string, aUserInfo obj.Object) *Exception {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), objref.IDOf(aName), purego.NSString(aReason), objref.IDOf(aUserInfo))
+	return exceptionAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Exception) WithScriptingProperties(scriptingProperties obj.Object) *Exception {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Raise raises the receiver, causing program flow to jump to the local exception handler.
 func (x *Exception) Raise() {
-	x.inner.Raise()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("raise"))
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Exception) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return StringFromID(_r)
+}
+
+// Reason wraps the corresponding Objective-C method.
+func (x *Exception) Reason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Reason calls the underlying Reason.
-func (x *Exception) Reason() *String {
-	_r := x.inner.Reason()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+// UserInfo wraps the corresponding Objective-C method.
+func (x *Exception) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *Exception) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
-}
-
+// CallStackReturnAddresses wraps the corresponding Objective-C method.
+//
 // CallStackReturnAddresses returns the collection as a Go slice.
 func (x *Exception) CallStackReturnAddresses() []*Number {
-	arr := x.inner.CallStackReturnAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
-		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackReturnAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
+// CallStackSymbols wraps the corresponding Objective-C method.
+//
 // CallStackSymbols returns the collection as a Go slice.
 func (x *Exception) CallStackSymbols() []string {
-	arr := x.inner.CallStackSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-func (x *Exception) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Exceptionable is the interface implemented by [Exception], for mocking and DI.
 type Exceptionable interface {
-	Unwrap() *raw.NSException
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Exception
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Exception
 	Raise()
 	Name() *String
-	Reason() *String
-	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+	Reason() string
+	UserInfo() obj.Object
 	CallStackReturnAddresses() []*Number
 	CallStackSymbols() []string
 }

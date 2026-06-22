@@ -5,56 +5,91 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A value that represents a person’s account and their consent to Automatic Sign-In.
+// VSAutoSignInToken is an idiomatic wrapper over the Objective-C class VSAutoSignInToken.
 //
-// VSAutoSignInToken wraps [raw.VSAutoSignInToken] with a fluent Go API.
+// A value that represents a person’s account and their consent to Automatic Sign-In.
 type VSAutoSignInToken struct {
-	inner *raw.VSAutoSignInToken
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAutoSignInToken].
-func (x *VSAutoSignInToken) Unwrap() *raw.VSAutoSignInToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAutoSignInToken) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAutoSignInTokenFromID adopts an existing object pointer as a VSAutoSignInToken (nil for 0).
+// VSAutoSignInTokenFromID adopts an existing Objective-C object as a VSAutoSignInToken
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAutoSignInTokenFromID(id objc.ID) *VSAutoSignInToken {
 	if id == 0 {
 		return nil
 	}
-	return &VSAutoSignInToken{inner: raw.VSAutoSignInTokenFromID(id)}
+	x := &VSAutoSignInToken{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVSAutoSignInToken creates a new [VSAutoSignInToken].
+// vSAutoSignInTokenAdopt wraps an Objective-C object that this code just created as a
+// VSAutoSignInToken (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAutoSignInTokenAdopt(id objc.ID) *VSAutoSignInToken {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAutoSignInToken{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSAutoSignInToken) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAutoSignInToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAutoSignInToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAutoSignInToken) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVSAutoSignInToken creates a new VSAutoSignInToken.
 func NewVSAutoSignInToken() *VSAutoSignInToken {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAutoSignInToken")), objc.RegisterName("new"))
-	return &VSAutoSignInToken{inner: raw.VSAutoSignInTokenFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VSAutoSignInToken")), objc.RegisterName("new"))
+	return vSAutoSignInTokenAdopt(_id)
 }
 
-// Authorization calls the underlying Authorization.
+// Authorization wraps the corresponding Objective-C method.
 func (x *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
-	return VSAutoSignInAuthorization(x.inner.Authorization())
+	_r := objc.Send[VSAutoSignInAuthorization](objref.IDOf(x), objc.RegisterName("authorization"))
+	return _r
 }
 
-// Value calls the underlying Value.
+// Value wraps the corresponding Objective-C method.
 func (x *VSAutoSignInToken) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // VSAutoSignInTokenable is the interface implemented by [VSAutoSignInToken], for mocking and DI.
 type VSAutoSignInTokenable interface {
-	Unwrap() *raw.VSAutoSignInToken
+	obj.Object
 	Authorization() VSAutoSignInAuthorization
 	Value() string
 }

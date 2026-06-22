@@ -3,11 +3,12 @@
 package idiomatic
 
 import (
-	"bytes"
 	"path/filepath"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -45,7 +46,10 @@ func emitConstants(
 
 	seen := make(map[string]bool)
 	seenGoNames := make(map[string]bool)
-	view := cfConstantsView{RawAlias: rawPkgAlias}
+	// Constants are grouped to preserve the original emission order: all
+	// CoreFoundation references first, then Foundation *String constants, then
+	// non-Foundation objc.ID string constants.
+	var cfRefs, strItems, strIDs []view.Constant
 
 	for _, ext := range fw.Externs {
 		if ext.Availability.IsUnavailable || seen[ext.Name] || funcNames[ext.Name] {
@@ -91,68 +95,72 @@ func emitConstants(
 		}
 		takenNames[goName] = true
 
+		_ = typedString // current accessors do not vary by typed-ness; reserved
 		comment := ""
-		if ext.Doc != "" {
-			comment = "// " + ext.Doc + "\n"
-		}
-		item := constantItem{
-			GoName:       goName,
-			ExternName:   ext.Name,
-			CommentBlock: comment,
+		if doc := cleanDoc(ext.Doc); doc != "" {
+			comment = "// " + strings.ReplaceAll(doc, "\n", "\n// ") + "\n"
 		}
 		switch {
 		case isCFRefExtern(ext.ObjCType):
-			view.Items = append(view.Items, item)
+			cfRefs = append(
+				cfRefs,
+				view.Constant{
+					GoName:       goName,
+					ExternName:   ext.Name,
+					CommentBlock: comment,
+					Kind:         view.ConstCFRef,
+				},
+			)
 		case isFoundationString:
-			view.StringItems = append(view.StringItems, item)
+			strItems = append(
+				strItems,
+				view.Constant{
+					GoName:       goName,
+					ExternName:   ext.Name,
+					CommentBlock: comment,
+					Kind:         view.ConstNSString,
+				},
+			)
 		default: // isObjcIDString
-			view.StringIDItems = append(view.StringIDItems, stringIDItem{constantItem: item, Typed: typedString})
+			strIDs = append(
+				strIDs,
+				view.Constant{
+					GoName:       goName,
+					ExternName:   ext.Name,
+					CommentBlock: comment,
+					Kind:         view.ConstObjcID,
+				},
+			)
 		}
 	}
 
-	if len(view.Items) == 0 && len(view.StringItems) == 0 && len(view.StringIDItems) == 0 {
+	constants := make([]view.Constant, 0, len(cfRefs)+len(strItems)+len(strIDs))
+	constants = append(constants, cfRefs...)
+	constants = append(constants, strItems...)
+	constants = append(constants, strIDs...)
+	if len(constants) == 0 {
 		return nil
 	}
 
-	var body bytes.Buffer
-	if err := executeTemplate(&body, "cf_constants", view); err != nil {
+	body, err := render.Constants(constants)
+	if err != nil {
 		return err
 	}
 
-	imports := map[string]string{
-		rawPkgAlias: rawPkgPath,
-		"purego":    pureobjcImportPath,
-		"objc":      objcImportPath,
+	_ = rawPkgPath
+	_ = rawPkgAlias
+	// Imports computed from the resolved constants, not by scanning the rendered
+	// text: every accessor calls purego.CFConstant; the obj wrapper is used only
+	// by the CF-reference and objc.ID-string accessors (the *String accessor uses
+	// StringFromID instead).
+	imports := map[string]string{"purego": pureobjcImportPath}
+	if len(cfRefs) > 0 || len(strIDs) > 0 {
+		imports["obj"] = objImportPath
 	}
 
 	fname := pkgName + "_constants_generated.go"
-	file := assembleFile(pkgName, usedImports(body.Bytes(), imports), body.Bytes())
+	file := assembleFile(pkgName, imports, body)
 	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
-}
-
-// constantItem / cfConstantsView are the template data for constants.tmpl.
-type constantItem struct {
-	GoName       string
-	ExternName   string
-	CommentBlock string // "// <doc>\n" when the extern has a doc, else ""
-}
-
-type cfConstantsView struct {
-	RawAlias string
-	Items    []constantItem // CoreFoundation-reference externs → objc.ID
-	// StringItems are NSString externs → *String (foundation package only).
-	StringItems []constantItem
-	// StringIDItems are NSString externs in non-foundation packages → objc.ID.
-	StringIDItems []stringIDItem
-}
-
-// stringIDItem is an NSString extern surfaced as an objc.ID accessor in a
-// non-foundation package. Typed is true when the raw accessor already returns a
-// dereferenced *NSString (use .Ptr()), false when it returns the bare uintptr
-// symbol address (use purego.CFConstant to dereference).
-type stringIDItem struct {
-	constantItem
-	Typed bool
 }
 
 // foundationPkgName is the idiomatic foundation package name, used to decide

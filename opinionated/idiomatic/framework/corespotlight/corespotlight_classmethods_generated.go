@@ -5,48 +5,42 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// IsIndexingAvailable calls the underlying CSSearchableIndexIsIndexingAvailable.
+// IsIndexingAvailable returns a Boolean value that indicates whether indexing is available on the current device.
 func IsIndexingAvailable() bool {
-	return raw.CSSearchableIndexIsIndexingAvailable()
+	_r := objc.Send[bool](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("isIndexingAvailable"))
+	return _r
 }
 
-// DefaultSearchableIndex calls the underlying CSSearchableIndexDefaultSearchableIndex.
+// DefaultSearchableIndex returns the default on-device index.
 func DefaultSearchableIndex() *SearchableIndex {
-	_r := raw.CSSearchableIndexDefaultSearchableIndex()
-	if _r == nil {
-		return nil
-	}
-	return &SearchableIndex{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("defaultSearchableIndex"))
+	return SearchableIndexFromID(_r)
 }
 
-// Prepare calls the underlying CSUserQueryPrepare.
+// Prepare performs one-time tasks that prepare Spotlight to search for content in all search indexes.
 func Prepare() {
-	raw.CSUserQueryPrepare()
+	objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("prepare"))
 }
 
-// PrepareProtectionClasses calls the underlying CSUserQueryPrepareProtectionClasses.
-func PrepareProtectionClasses(protectionClasses *foundation.NSArray[*foundation.NSString]) {
-	raw.CSUserQueryPrepareProtectionClasses(protectionClasses)
+// PrepareProtectionClasses performs one-time tasks that prepare Spotlight to search for content in one or more protected search indexes.
+func PrepareProtectionClasses(protectionClasses []obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("prepareProtectionClasses:"), purego.SliceToNSArray(protectionClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// CSUserQueryContextUserQueryContext calls the underlying CSUserQueryContextUserQueryContext.
+// CSUserQueryContextUserQueryContext returns the current behavior configuration for the user query.
 func CSUserQueryContextUserQueryContext() *UserQueryContext {
-	_r := raw.CSUserQueryContextUserQueryContext()
-	if _r == nil {
-		return nil
-	}
-	return &UserQueryContext{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CSUserQueryContext")), objc.RegisterName("userQueryContext"))
+	return UserQueryContextFromID(_r)
 }
 
-// UserQueryContextWithCurrentSuggestion calls the underlying CSUserQueryContextUserQueryContextWithCurrentSuggestion.
-func UserQueryContextWithCurrentSuggestion(currentSuggestion *raw.CSSuggestion) *UserQueryContext {
-	_r := raw.CSUserQueryContextUserQueryContextWithCurrentSuggestion(currentSuggestion)
-	if _r == nil {
-		return nil
-	}
-	return &UserQueryContext{inner: _r}
+// UserQueryContextWithCurrentSuggestion creates a new query context object with an optional suggested search string.
+func UserQueryContextWithCurrentSuggestion(currentSuggestion *Suggestion) *UserQueryContext {
+	_r := objc.Send[objc.ID](objc.ID(_class("CSUserQueryContext")), objc.RegisterName("userQueryContextWithCurrentSuggestion:"), objref.IDOf(currentSuggestion))
+	return UserQueryContextFromID(_r)
 }

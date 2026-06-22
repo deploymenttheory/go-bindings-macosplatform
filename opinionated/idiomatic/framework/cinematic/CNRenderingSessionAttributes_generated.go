@@ -5,48 +5,82 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure for movie-wide attributes required for proper rendering.
+// RenderingSessionAttributes is an idiomatic wrapper over the Objective-C class CNRenderingSessionAttributes.
 //
-// RenderingSessionAttributes wraps [raw.CNRenderingSessionAttributes] with a fluent Go API.
+// A structure for movie-wide attributes required for proper rendering.
 type RenderingSessionAttributes struct {
-	inner *raw.CNRenderingSessionAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNRenderingSessionAttributes].
-func (x *RenderingSessionAttributes) Unwrap() *raw.CNRenderingSessionAttributes { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderingSessionAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderingSessionAttributesFromID adopts an existing object pointer as a RenderingSessionAttributes (nil for 0).
+// RenderingSessionAttributesFromID adopts an existing Objective-C object as a RenderingSessionAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderingSessionAttributesFromID(id objc.ID) *RenderingSessionAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &RenderingSessionAttributes{inner: raw.CNRenderingSessionAttributesFromID(id)}
+	x := &RenderingSessionAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderingSessionAttributes creates a new [RenderingSessionAttributes].
+// renderingSessionAttributesAdopt wraps an Objective-C object that this code just created as a
+// RenderingSessionAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderingSessionAttributesAdopt(id objc.ID) *RenderingSessionAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderingSessionAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderingSessionAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderingSessionAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderingSessionAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderingSessionAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderingSessionAttributes creates a new RenderingSessionAttributes.
 func NewRenderingSessionAttributes() *RenderingSessionAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSessionAttributes")), objc.RegisterName("new"))
-	return &RenderingSessionAttributes{inner: raw.CNRenderingSessionAttributesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionAttributes")), objc.RegisterName("new"))
+	return renderingSessionAttributesAdopt(_id)
 }
 
-// Rendering version used to render the original.
-//
-// RenderingVersion calls the underlying RenderingVersion.
+// RenderingVersion rendering version used to render the original.
 func (x *RenderingSessionAttributes) RenderingVersion() int {
-	return x.inner.RenderingVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderingVersion"))
+	return _r
 }
 
 // RenderingSessionAttributesable is the interface implemented by [RenderingSessionAttributes], for mocking and DI.
 type RenderingSessionAttributesable interface {
-	Unwrap() *raw.CNRenderingSessionAttributes
+	obj.Object
 	RenderingVersion() int
 }
 

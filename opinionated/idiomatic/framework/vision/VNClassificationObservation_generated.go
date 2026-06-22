@@ -5,74 +5,83 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents classification information that an image-analysis request produces.
+// ClassificationObservation is an idiomatic wrapper over the Objective-C class VNClassificationObservation.
 //
-// ClassificationObservation wraps [raw.VNClassificationObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents classification information that an image-analysis request produces.
 type ClassificationObservation struct {
-	inner *raw.VNClassificationObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNClassificationObservation].
-func (x *ClassificationObservation) Unwrap() *raw.VNClassificationObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClassificationObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ClassificationObservationFromID adopts an existing object pointer as a ClassificationObservation (nil for 0).
+// ClassificationObservationFromID adopts an existing Objective-C object as a ClassificationObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ClassificationObservationFromID(id objc.ID) *ClassificationObservation {
 	if id == 0 {
 		return nil
 	}
-	return &ClassificationObservation{inner: raw.VNClassificationObservationFromID(id)}
+	x := &ClassificationObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewClassificationObservation creates a new [ClassificationObservation].
+// classificationObservationAdopt wraps an Objective-C object that this code just created as a
+// ClassificationObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func classificationObservationAdopt(id objc.ID) *ClassificationObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &ClassificationObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewClassificationObservation creates a new ClassificationObservation.
 func NewClassificationObservation() *ClassificationObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNClassificationObservation")), objc.RegisterName("new"))
-	return &ClassificationObservation{inner: raw.VNClassificationObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNClassificationObservation")), objc.RegisterName("new"))
+	return classificationObservationAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *ClassificationObservation) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Determines whether the observation for a specific precision has a minimum recall value.
-//
-// HasMinimumRecallForPrecision calls the underlying HasMinimumRecallForPrecision.
+// HasMinimumRecallForPrecision determines whether the observation for a specific precision has a minimum recall value.
 func (x *ClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
-	return x.inner.HasMinimumRecallForPrecision(minimumRecall, precision)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinimumRecall:forPrecision:"), minimumRecall, precision)
+	return _r
 }
 
-// Determines whether the observation for a specific recall has a minimum precision value.
-//
-// HasMinimumPrecisionForRecall calls the underlying HasMinimumPrecisionForRecall.
+// HasMinimumPrecisionForRecall determines whether the observation for a specific recall has a minimum precision value.
 func (x *ClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {
-	return x.inner.HasMinimumPrecisionForRecall(minimumPrecision, recall)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinimumPrecision:forRecall:"), minimumPrecision, recall)
+	return _r
 }
 
-// @brief	Determine whether or not precision/recall curves are available with the observation. @discussion	If this property is YES, then all other precision/recall related methods in this addition can be called.
-//
-// HasPrecisionRecallCurve calls the underlying HasPrecisionRecallCurve.
+// HasPrecisionRecallCurve determine whether or not precision/recall curves are available with the observation. If this property is YES, then all other precision/recall related methods in this addition can be called.
 func (x *ClassificationObservation) HasPrecisionRecallCurve() bool {
-	return x.inner.HasPrecisionRecallCurve()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPrecisionRecallCurve"))
+	return _r
 }
-
-func (x *ClassificationObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // ClassificationObservationable is the interface implemented by [ClassificationObservation], for mocking and DI.
 type ClassificationObservationable interface {
-	Unwrap() *raw.VNClassificationObservation
+	obj.Object
 	Identifier() string
 	HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool
 	HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool
@@ -80,3 +89,5 @@ type ClassificationObservationable interface {
 }
 
 var _ ClassificationObservationable = (*ClassificationObservation)(nil)
+
+var _ ObservationProvider = (*ClassificationObservation)(nil)

@@ -5,52 +5,88 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PassRelevantDate wraps [raw.PKPassRelevantDate] with a fluent Go API.
+// PassRelevantDate is an idiomatic wrapper over the Objective-C class PKPassRelevantDate.
 type PassRelevantDate struct {
-	inner *raw.PKPassRelevantDate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPassRelevantDate].
-func (x *PassRelevantDate) Unwrap() *raw.PKPassRelevantDate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PassRelevantDate) ID() objc.ID { return x.inner.Ptr() }
-
-// PassRelevantDateFromID adopts an existing object pointer as a PassRelevantDate (nil for 0).
+// PassRelevantDateFromID adopts an existing Objective-C object as a PassRelevantDate
+// (nil for 0), retaining it and registering a release finalizer.
 func PassRelevantDateFromID(id objc.ID) *PassRelevantDate {
 	if id == 0 {
 		return nil
 	}
-	return &PassRelevantDate{inner: raw.PKPassRelevantDateFromID(id)}
+	x := &PassRelevantDate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPassRelevantDate creates a new [PassRelevantDate].
+// passRelevantDateAdopt wraps an Objective-C object that this code just created as a
+// PassRelevantDate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passRelevantDateAdopt(id objc.ID) *PassRelevantDate {
+	if id == 0 {
+		return nil
+	}
+	x := &PassRelevantDate{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PassRelevantDate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PassRelevantDate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PassRelevantDate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PassRelevantDate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPassRelevantDate creates a new PassRelevantDate.
 func NewPassRelevantDate() *PassRelevantDate {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPassRelevantDate")), objc.RegisterName("new"))
-	return &PassRelevantDate{inner: raw.PKPassRelevantDateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPassRelevantDate")), objc.RegisterName("new"))
+	return passRelevantDateAdopt(_id)
 }
 
-// Interval calls the underlying Interval.
-func (x *PassRelevantDate) Interval() *foundation.NSDateInterval {
-	return x.inner.Interval()
+// Interval wraps the corresponding Objective-C method.
+func (x *PassRelevantDate) Interval() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interval"))
+	return obj.Wrap(_r)
 }
 
-// Date calls the underlying Date.
-func (x *PassRelevantDate) Date() *foundation.NSDate {
-	return x.inner.Date()
+// Date wraps the corresponding Objective-C method.
+func (x *PassRelevantDate) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
 // PassRelevantDateable is the interface implemented by [PassRelevantDate], for mocking and DI.
 type PassRelevantDateable interface {
-	Unwrap() *raw.PKPassRelevantDate
-	Interval() *foundation.NSDateInterval
-	Date() *foundation.NSDate
+	obj.Object
+	Interval() obj.Object
+	Date() obj.Object
 }
 
 var _ PassRelevantDateable = (*PassRelevantDate)(nil)

@@ -5,45 +5,76 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An animated image, such as an animated music album cover art, for a media item.
+// MediaItemAnimatedArtwork is an idiomatic wrapper over the Objective-C class MPMediaItemAnimatedArtwork.
 //
-// MediaItemAnimatedArtwork wraps [raw.MPMediaItemAnimatedArtwork] with a fluent Go API.
+// An animated image, such as an animated music album cover art, for a media item.
 type MediaItemAnimatedArtwork struct {
-	inner *raw.MPMediaItemAnimatedArtwork
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPMediaItemAnimatedArtwork].
-func (x *MediaItemAnimatedArtwork) Unwrap() *raw.MPMediaItemAnimatedArtwork { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaItemAnimatedArtwork) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaItemAnimatedArtworkFromID adopts an existing object pointer as a MediaItemAnimatedArtwork (nil for 0).
+// MediaItemAnimatedArtworkFromID adopts an existing Objective-C object as a MediaItemAnimatedArtwork
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaItemAnimatedArtworkFromID(id objc.ID) *MediaItemAnimatedArtwork {
 	if id == 0 {
 		return nil
 	}
-	return &MediaItemAnimatedArtwork{inner: raw.MPMediaItemAnimatedArtworkFromID(id)}
+	x := &MediaItemAnimatedArtwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an animated artwork.
-//
-// NewMediaItemAnimatedArtworkWithArtworkIDPreviewImageRequestHandlerVideoAssetFileURLRequestHandler creates a new [MediaItemAnimatedArtwork].
-func NewMediaItemAnimatedArtworkWithArtworkIDPreviewImageRequestHandlerVideoAssetFileURLRequestHandler(artworkID string, previewImageRequestHandler objc.Block, videoAssetFileURLRequestHandler objc.Block) *MediaItemAnimatedArtwork {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPMediaItemAnimatedArtwork")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArtworkID:previewImageRequestHandler:videoAssetFileURLRequestHandler:"), foundation.NSStringStringWithUTF8String(artworkID).Ptr(), previewImageRequestHandler, videoAssetFileURLRequestHandler)
-	return &MediaItemAnimatedArtwork{inner: raw.MPMediaItemAnimatedArtworkFromID(_id)}
+// mediaItemAnimatedArtworkAdopt wraps an Objective-C object that this code just created as a
+// MediaItemAnimatedArtwork (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaItemAnimatedArtworkAdopt(id objc.ID) *MediaItemAnimatedArtwork {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaItemAnimatedArtwork{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaItemAnimatedArtwork) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaItemAnimatedArtwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaItemAnimatedArtwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaItemAnimatedArtwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaItemAnimatedArtwork creates a new MediaItemAnimatedArtwork.
+func NewMediaItemAnimatedArtwork() *MediaItemAnimatedArtwork {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPMediaItemAnimatedArtwork")), objc.RegisterName("new"))
+	return mediaItemAnimatedArtworkAdopt(_id)
 }
 
 // MediaItemAnimatedArtworkable is the interface implemented by [MediaItemAnimatedArtwork], for mocking and DI.
 type MediaItemAnimatedArtworkable interface {
-	Unwrap() *raw.MPMediaItemAnimatedArtwork
+	obj.Object
 }
 
 var _ MediaItemAnimatedArtworkable = (*MediaItemAnimatedArtwork)(nil)

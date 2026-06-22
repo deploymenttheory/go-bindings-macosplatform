@@ -5,122 +5,100 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A mutable collection of metadata items that are valid for use within a specific range of dates.
+// MutableDateRangeMetadataGroup is an idiomatic wrapper over the Objective-C class AVMutableDateRangeMetadataGroup.
 //
-// MutableDateRangeMetadataGroup wraps [raw.AVMutableDateRangeMetadataGroup] with a fluent Go API.
+// It embeds [DateRangeMetadataGroup], promoting that type's methods.
+//
+// A mutable collection of metadata items that are valid for use within a specific range of dates.
 type MutableDateRangeMetadataGroup struct {
-	inner *raw.AVMutableDateRangeMetadataGroup
+	DateRangeMetadataGroup
 }
 
-// Unwrap returns the underlying [raw.AVMutableDateRangeMetadataGroup].
-func (x *MutableDateRangeMetadataGroup) Unwrap() *raw.AVMutableDateRangeMetadataGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableDateRangeMetadataGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableDateRangeMetadataGroupFromID adopts an existing object pointer as a MutableDateRangeMetadataGroup (nil for 0).
+// MutableDateRangeMetadataGroupFromID adopts an existing Objective-C object as a MutableDateRangeMetadataGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableDateRangeMetadataGroupFromID(id objc.ID) *MutableDateRangeMetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	return &MutableDateRangeMetadataGroup{inner: raw.AVMutableDateRangeMetadataGroupFromID(id)}
+	x := &MutableDateRangeMetadataGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutableDateRangeMetadataGroup creates a new [MutableDateRangeMetadataGroup].
+// mutableDateRangeMetadataGroupAdopt wraps an Objective-C object that this code just created as a
+// MutableDateRangeMetadataGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableDateRangeMetadataGroupAdopt(id objc.ID) *MutableDateRangeMetadataGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableDateRangeMetadataGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableDateRangeMetadataGroup creates a new MutableDateRangeMetadataGroup.
 func NewMutableDateRangeMetadataGroup() *MutableDateRangeMetadataGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableDateRangeMetadataGroup")), objc.RegisterName("new"))
-	return &MutableDateRangeMetadataGroup{inner: raw.AVMutableDateRangeMetadataGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableDateRangeMetadataGroup")), objc.RegisterName("new"))
+	return mutableDateRangeMetadataGroupAdopt(_id)
 }
 
-// The start date for the metadata date range group.
-//
-// WithStartDate sets the startDate property and returns the receiver for chaining.
-func (x *MutableDateRangeMetadataGroup) WithStartDate(startDate *foundation.NSDate) *MutableDateRangeMetadataGroup {
-	x.inner.SetStartDate(startDate)
+// WithStartDate the start date for the metadata date range group.
+func (x *MutableDateRangeMetadataGroup) WithStartDate(startDate obj.Object) *MutableDateRangeMetadataGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 	return x
 }
 
-// The end date for the metadata date range group.
-//
-// WithEndDate sets the endDate property and returns the receiver for chaining.
-func (x *MutableDateRangeMetadataGroup) WithEndDate(endDate *foundation.NSDate) *MutableDateRangeMetadataGroup {
-	x.inner.SetEndDate(endDate)
+// WithEndDate the end date for the metadata date range group.
+func (x *MutableDateRangeMetadataGroup) WithEndDate(endDate obj.Object) *MutableDateRangeMetadataGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 	return x
 }
 
-// An array of associated metadata items.
-//
-// WithItems sets the collection, converting the Go slice to an NSArray.
+// WithItems an array of associated metadata items.
 func (x *MutableDateRangeMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableDateRangeMetadataGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetItems(foundation.NSArrayFromID[*raw.AVMetadataItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetItems(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), _arr)
 	return x
 }
 
-// SetStartDate calls the underlying SetStartDate.
-func (x *MutableDateRangeMetadataGroup) SetStartDate(startDate *foundation.NSDate) {
-	x.inner.SetStartDate(startDate)
+// SetStartDate wraps the corresponding Objective-C method.
+func (x *MutableDateRangeMetadataGroup) SetStartDate(startDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
-// SetEndDate calls the underlying SetEndDate.
-func (x *MutableDateRangeMetadataGroup) SetEndDate(endDate *foundation.NSDate) {
-	x.inner.SetEndDate(endDate)
+// SetEndDate wraps the corresponding Objective-C method.
+func (x *MutableDateRangeMetadataGroup) SetEndDate(endDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 }
 
-// SetItems calls the underlying SetItems.
-func (x *MutableDateRangeMetadataGroup) SetItems(items ...MetadataItemProvider) {
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetItems(_arg0)
-}
-
-func (x *MutableDateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup {
-	return &x.inner.AVDateRangeMetadataGroup
-}
-
-func (x *MutableDateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup {
-	return &x.inner.AVDateRangeMetadataGroup.AVMetadataGroup
+// SetItems wraps the corresponding Objective-C method.
+func (x *MutableDateRangeMetadataGroup) SetItems(items []*MetadataItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MutableDateRangeMetadataGroupable is the interface implemented by [MutableDateRangeMetadataGroup], for mocking and DI.
 type MutableDateRangeMetadataGroupable interface {
-	Unwrap() *raw.AVMutableDateRangeMetadataGroup
-	WithStartDate(startDate *foundation.NSDate) *MutableDateRangeMetadataGroup
-	WithEndDate(endDate *foundation.NSDate) *MutableDateRangeMetadataGroup
+	obj.Object
+	WithStartDate(startDate obj.Object) *MutableDateRangeMetadataGroup
+	WithEndDate(endDate obj.Object) *MutableDateRangeMetadataGroup
 	WithItems(items ...MetadataItemProvider) *MutableDateRangeMetadataGroup
-	SetStartDate(startDate *foundation.NSDate)
-	SetEndDate(endDate *foundation.NSDate)
-	SetItems(items ...MetadataItemProvider)
+	SetStartDate(startDate obj.Object)
+	SetEndDate(endDate obj.Object)
+	SetItems(items []*MetadataItem)
 }
 
 var _ MutableDateRangeMetadataGroupable = (*MutableDateRangeMetadataGroup)(nil)
+
+var _ DateRangeMetadataGroupProvider = (*MutableDateRangeMetadataGroup)(nil)
+
+var _ MetadataGroupProvider = (*MutableDateRangeMetadataGroup)(nil)

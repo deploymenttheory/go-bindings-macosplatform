@@ -5,96 +5,99 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A port name server that takes and returns socket ports.
+// SocketPortNameServer is an idiomatic wrapper over the Objective-C class NSSocketPortNameServer.
 //
-// SocketPortNameServer wraps [raw.NSSocketPortNameServer] with a fluent Go API.
+// It embeds [PortNameServer], promoting that type's methods.
+//
+// A port name server that takes and returns socket ports.
 type SocketPortNameServer struct {
-	inner *raw.NSSocketPortNameServer
+	PortNameServer
 }
 
-// Unwrap returns the underlying [raw.NSSocketPortNameServer].
-func (x *SocketPortNameServer) Unwrap() *raw.NSSocketPortNameServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SocketPortNameServer) ID() objc.ID { return x.inner.Ptr() }
-
-// SocketPortNameServerFromID adopts an existing object pointer as a SocketPortNameServer (nil for 0).
+// SocketPortNameServerFromID adopts an existing Objective-C object as a SocketPortNameServer
+// (nil for 0), retaining it and registering a release finalizer.
 func SocketPortNameServerFromID(id objc.ID) *SocketPortNameServer {
 	if id == 0 {
 		return nil
 	}
-	return &SocketPortNameServer{inner: raw.NSSocketPortNameServerFromID(id)}
-}
-
-// NewSocketPortNameServer creates a new [SocketPortNameServer].
-func NewSocketPortNameServer() *SocketPortNameServer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPortNameServer")), objc.RegisterName("new"))
-	return &SocketPortNameServer{inner: raw.NSSocketPortNameServerFromID(_id)}
-}
-
-// Returns the port number used to contact the name server.
-//
-// WithDefaultNameServerPortNumber sets the defaultNameServerPortNumber property and returns the receiver for chaining.
-func (x *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer {
-	x.inner.SetDefaultNameServerPortNumber(defaultNameServerPortNumber)
+	x := &SocketPortNameServer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SocketPortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPortNameServer {
-	x.inner.NSPortNameServer.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// Looks up and returns the port registered under the specified name on a specified host.
-//
-// PortForNameHostNameServerPortNumber calls the underlying PortForNameHostNameServerPortNumber.
-func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
-	_r := x.inner.PortForNameHostNameServerPortNumber(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host), portNumber)
-	if _r == nil {
+// socketPortNameServerAdopt wraps an Objective-C object that this code just created as a
+// SocketPortNameServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func socketPortNameServerAdopt(id objc.ID) *SocketPortNameServer {
+	if id == 0 {
 		return nil
 	}
-	return &Port{inner: _r}
+	x := &SocketPortNameServer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Registers a given port as a network service with the specified name in the local domain.
-//
-// RegisterPortNameNameServerPortNumber calls the underlying RegisterPortNameNameServerPortNumber.
-func (x *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *raw.NSPort, name string, portNumber uint16) bool {
-	return x.inner.RegisterPortNameNameServerPortNumber(port, foundation.NSStringStringWithUTF8String(name), portNumber)
+// NewSocketPortNameServer creates a new SocketPortNameServer.
+func NewSocketPortNameServer() *SocketPortNameServer {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSocketPortNameServer")), objc.RegisterName("new"))
+	return socketPortNameServerAdopt(_id)
 }
 
-// DefaultNameServerPortNumber calls the underlying DefaultNameServerPortNumber.
+// WithDefaultNameServerPortNumber returns the port number used to contact the name server.
+func (x *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultNameServerPortNumber:"), defaultNameServerPortNumber)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *SocketPortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// PortForNameHostNameServerPortNumber looks up and returns the port registered under the specified name on a specified host.
+func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:host:nameServerPortNumber:"), purego.NSString(name), purego.NSString(host), portNumber)
+	return PortFromID(_r)
+}
+
+// RegisterPortNameNameServerPortNumber registers a given port as a network service with the specified name in the local domain.
+func (x *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *Port, name string, portNumber uint16) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerPort:name:nameServerPortNumber:"), objref.IDOf(port), purego.NSString(name), portNumber)
+	return _r
+}
+
+// DefaultNameServerPortNumber wraps the corresponding Objective-C method.
 func (x *SocketPortNameServer) DefaultNameServerPortNumber() uint16 {
-	return x.inner.DefaultNameServerPortNumber()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("defaultNameServerPortNumber"))
+	return _r
 }
 
-// SetDefaultNameServerPortNumber calls the underlying SetDefaultNameServerPortNumber.
+// SetDefaultNameServerPortNumber wraps the corresponding Objective-C method.
 func (x *SocketPortNameServer) SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) {
-	x.inner.SetDefaultNameServerPortNumber(defaultNameServerPortNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultNameServerPortNumber:"), defaultNameServerPortNumber)
 }
-
-func (x *SocketPortNameServer) asPortNameServer() *raw.NSPortNameServer {
-	return &x.inner.NSPortNameServer
-}
-
-func (x *SocketPortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
 
 // SocketPortNameServerable is the interface implemented by [SocketPortNameServer], for mocking and DI.
 type SocketPortNameServerable interface {
-	Unwrap() *raw.NSSocketPortNameServer
+	obj.Object
 	WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPortNameServer
+	WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer
 	PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port
-	RegisterPortNameNameServerPortNumber(port *raw.NSPort, name string, portNumber uint16) bool
+	RegisterPortNameNameServerPortNumber(port *Port, name string, portNumber uint16) bool
 	DefaultNameServerPortNumber() uint16
 	SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16)
 }
 
 var _ SocketPortNameServerable = (*SocketPortNameServer)(nil)
+
+var _ PortNameServerProvider = (*SocketPortNameServer)(nil)

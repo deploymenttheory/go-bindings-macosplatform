@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for frequency.
+// UnitFrequency is an idiomatic wrapper over the Objective-C class NSUnitFrequency.
 //
-// UnitFrequency wraps [raw.NSUnitFrequency] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for frequency.
 type UnitFrequency struct {
-	inner *raw.NSUnitFrequency
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitFrequency].
-func (x *UnitFrequency) Unwrap() *raw.NSUnitFrequency { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitFrequency) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitFrequencyFromID adopts an existing object pointer as a UnitFrequency (nil for 0).
+// UnitFrequencyFromID adopts an existing Objective-C object as a UnitFrequency
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitFrequencyFromID(id objc.ID) *UnitFrequency {
 	if id == 0 {
 		return nil
 	}
-	return &UnitFrequency{inner: raw.NSUnitFrequencyFromID(id)}
-}
-
-// NewUnitFrequency creates a new [UnitFrequency].
-func NewUnitFrequency() *UnitFrequency {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitFrequency")), objc.RegisterName("new"))
-	return &UnitFrequency{inner: raw.NSUnitFrequencyFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitFrequency) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFrequency {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitFrequency{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitFrequency) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitFrequencyAdopt wraps an Objective-C object that this code just created as a
+// UnitFrequency (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitFrequencyAdopt(id objc.ID) *UnitFrequency {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitFrequency{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitFrequency) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitFrequency creates a new UnitFrequency.
+func NewUnitFrequency() *UnitFrequency {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("new"))
+	return unitFrequencyAdopt(_id)
+}
 
-func (x *UnitFrequency) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitFrequency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFrequency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitFrequencyable is the interface implemented by [UnitFrequency], for mocking and DI.
 type UnitFrequencyable interface {
-	Unwrap() *raw.NSUnitFrequency
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFrequency
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitFrequency
 }
 
 var _ UnitFrequencyable = (*UnitFrequency)(nil)
+
+var _ DimensionProvider = (*UnitFrequency)(nil)
+
+var _ UnitProvider = (*UnitFrequency)(nil)

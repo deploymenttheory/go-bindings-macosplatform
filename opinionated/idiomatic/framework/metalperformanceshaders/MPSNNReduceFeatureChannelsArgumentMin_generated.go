@@ -5,168 +5,113 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A reduction filter that returns the index of the location of the minimum value for each feature channel in an image.
+// NNReduceFeatureChannelsArgumentMin is an idiomatic wrapper over the Objective-C class MPSNNReduceFeatureChannelsArgumentMin.
 //
-// NNReduceFeatureChannelsArgumentMin wraps [raw.MPSNNReduceFeatureChannelsArgumentMin] with a fluent Go API.
+// It embeds [NNReduceUnary], promoting that type's methods.
+//
+// A reduction filter that returns the index of the location of the minimum value for each feature channel in an image.
 type NNReduceFeatureChannelsArgumentMin struct {
-	inner *raw.MPSNNReduceFeatureChannelsArgumentMin
+	NNReduceUnary
 }
 
-// Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsArgumentMin].
-func (x *NNReduceFeatureChannelsArgumentMin) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNReduceFeatureChannelsArgumentMin) ID() objc.ID { return x.inner.Ptr() }
-
-// NNReduceFeatureChannelsArgumentMinFromID adopts an existing object pointer as a NNReduceFeatureChannelsArgumentMin (nil for 0).
+// NNReduceFeatureChannelsArgumentMinFromID adopts an existing Objective-C object as a NNReduceFeatureChannelsArgumentMin
+// (nil for 0), retaining it and registering a release finalizer.
 func NNReduceFeatureChannelsArgumentMinFromID(id objc.ID) *NNReduceFeatureChannelsArgumentMin {
 	if id == 0 {
 		return nil
 	}
-	return &NNReduceFeatureChannelsArgumentMin{inner: raw.MPSNNReduceFeatureChannelsArgumentMinFromID(id)}
+	x := &NNReduceFeatureChannelsArgumentMin{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNNReduceFeatureChannelsArgumentMinWithDevice creates a new [NNReduceFeatureChannelsArgumentMin].
-func NewNNReduceFeatureChannelsArgumentMinWithDevice(device metal.MTLDevice) *NNReduceFeatureChannelsArgumentMin {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNReduceFeatureChannelsArgumentMin")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNReduceFeatureChannelsArgumentMin{inner: raw.MPSNNReduceFeatureChannelsArgumentMinFromID(_id)}
+// nNReduceFeatureChannelsArgumentMinAdopt wraps an Objective-C object that this code just created as a
+// NNReduceFeatureChannelsArgumentMin (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNReduceFeatureChannelsArgumentMinAdopt(id objc.ID) *NNReduceFeatureChannelsArgumentMin {
+	if id == 0 {
+		return nil
+	}
+	x := &NNReduceFeatureChannelsArgumentMin{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceFeatureChannelsArgumentMin object, or nil if failure.
-//
-// NewNNReduceFeatureChannelsArgumentMinWithCoderDevice creates a new [NNReduceFeatureChannelsArgumentMin].
-func NewNNReduceFeatureChannelsArgumentMinWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNReduceFeatureChannelsArgumentMin {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNReduceFeatureChannelsArgumentMin")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNReduceFeatureChannelsArgumentMin{inner: raw.MPSNNReduceFeatureChannelsArgumentMinFromID(_id)}
+// NewNNReduceFeatureChannelsArgumentMin creates a new NNReduceFeatureChannelsArgumentMin.
+func NewNNReduceFeatureChannelsArgumentMin() *NNReduceFeatureChannelsArgumentMin {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNReduceFeatureChannelsArgumentMin")), objc.RegisterName("new"))
+	return nNReduceFeatureChannelsArgumentMinAdopt(_id)
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSCNNKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSCNNKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
 func (x *NNReduceFeatureChannelsArgumentMin) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
 func (x *NNReduceFeatureChannelsArgumentMin) WithOffset(offset mpscore.MPSOffset) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *NNReduceFeatureChannelsArgumentMin) WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *NNReduceFeatureChannelsArgumentMin) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNReduceFeatureChannelsArgumentMin {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *NNReduceFeatureChannelsArgumentMin) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNReduceFeatureChannelsArgumentMin {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *NNReduceFeatureChannelsArgumentMin) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNReduceFeatureChannelsArgumentMin {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNReduceFeatureChannelsArgumentMin) WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NNReduceFeatureChannelsArgumentMin) WithLabel(label string) *NNReduceFeatureChannelsArgumentMin {
-	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NNReduceFeatureChannelsArgumentMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
-	return &x.inner.MPSNNReduceUnary
-}
-
-func (x *NNReduceFeatureChannelsArgumentMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
-}
-
-func (x *NNReduceFeatureChannelsArgumentMin) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
 }
 
 // NNReduceFeatureChannelsArgumentMinable is the interface implemented by [NNReduceFeatureChannelsArgumentMin], for mocking and DI.
 type NNReduceFeatureChannelsArgumentMinable interface {
-	Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin
+	obj.Object
 	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceFeatureChannelsArgumentMin
 	WithOffset(offset mpscore.MPSOffset) *NNReduceFeatureChannelsArgumentMin
 	WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsArgumentMin
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsArgumentMin
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceFeatureChannelsArgumentMin
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsArgumentMin
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsArgumentMin
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsArgumentMin
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsArgumentMin
-	WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsArgumentMin
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNReduceFeatureChannelsArgumentMin
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNReduceFeatureChannelsArgumentMin
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNReduceFeatureChannelsArgumentMin
 	WithLabel(label string) *NNReduceFeatureChannelsArgumentMin
 }
 
 var _ NNReduceFeatureChannelsArgumentMinable = (*NNReduceFeatureChannelsArgumentMin)(nil)
+
+var _ NNReduceUnaryProvider = (*NNReduceFeatureChannelsArgumentMin)(nil)
+
+var _ CNNKernelProvider = (*NNReduceFeatureChannelsArgumentMin)(nil)
+
+var _ KernelProvider = (*NNReduceFeatureChannelsArgumentMin)(nil)

@@ -5,99 +5,107 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass defining an API for objects that act as stand-ins for other objects or for objects that don’t exist yet.
+// Proxy is an idiomatic wrapper over the Objective-C class NSProxy.
 //
-// Proxy wraps [raw.NSProxy] with a fluent Go API.
+// Proxy is an abstract base — you do not construct it directly. Construct one of [DistantObject], [ProtocolChecker] and pass it where a Proxy is accepted.
+//
+// An abstract superclass defining an API for objects that act as stand-ins for other objects or for objects that don’t exist yet.
 type Proxy struct {
-	inner *raw.NSProxy
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSProxy].
-func (x *Proxy) Unwrap() *raw.NSProxy { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Proxy) ID() objc.ID { return x.inner.Ptr() }
-
-// ProxyFromID adopts an existing object pointer as a Proxy (nil for 0).
+// ProxyFromID adopts an existing Objective-C object as a Proxy
+// (nil for 0), retaining it and registering a release finalizer.
 func ProxyFromID(id objc.ID) *Proxy {
 	if id == 0 {
 		return nil
 	}
-	return &Proxy{inner: raw.NSProxyFromID(id)}
+	x := &Proxy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProxy creates a new [Proxy].
-func NewProxy() *Proxy {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSProxy")), objc.RegisterName("new"))
-	return &Proxy{inner: raw.NSProxyFromID(_id)}
-}
-
-// Passes a given invocation to the real object the proxy represents.
-//
-// ForwardInvocation calls the underlying ForwardInvocation.
-func (x *Proxy) ForwardInvocation(invocation *raw.NSInvocation) {
-	x.inner.ForwardInvocation(invocation)
-}
-
-// Raises NSInvalidArgumentException. Override this method in your concrete subclass to return a proper NSMethodSignature object for the given selector and the class your proxy objects stand in for.
-//
-// MethodSignatureForSelector calls the underlying MethodSignatureForSelector.
-func (x *Proxy) MethodSignatureForSelector(sel objc.SEL) *MethodSignature {
-	_r := x.inner.MethodSignatureForSelector(sel)
-	if _r == nil {
+// proxyAdopt wraps an Objective-C object that this code just created as a
+// Proxy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func proxyAdopt(id objc.ID) *Proxy {
+	if id == 0 {
 		return nil
 	}
-	return &MethodSignature{inner: _r}
+	x := &Proxy{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Deallocates the memory occupied by the receiver.
-//
-// Dealloc calls the underlying Dealloc.
+// Description returns the object's -description text.
+func (x *Proxy) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Proxy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Proxy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Proxy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// ForwardInvocation passes a given invocation to the real object the proxy represents.
+func (x *Proxy) ForwardInvocation(invocation *Invocation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardInvocation:"), objref.IDOf(invocation))
+}
+
+// Dealloc deallocates the memory occupied by the receiver.
 func (x *Proxy) Dealloc() {
-	x.inner.Dealloc()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dealloc"))
 }
 
-// The garbage collector invokes this method on the receiver before disposing of the memory it uses.
-//
-// Finalize calls the underlying Finalize.
+// Finalize the garbage collector invokes this method on the receiver before disposing of the memory it uses.
 func (x *Proxy) Finalize() {
-	x.inner.Finalize()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalize"))
 }
 
-// Description calls the underlying Description.
-func (x *Proxy) Description() *String {
-	_r := x.inner.Description()
-	if _r == nil {
-		return nil
+// DebugDescription wraps the corresponding Objective-C method.
+func (x *Proxy) DebugDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugDescription"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-// DebugDescription calls the underlying DebugDescription.
-func (x *Proxy) DebugDescription() *String {
-	_r := x.inner.DebugDescription()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-func (x *Proxy) asProxy() *raw.NSProxy { return x.inner }
 
 // Proxyable is the interface implemented by [Proxy], for mocking and DI.
 type Proxyable interface {
-	Unwrap() *raw.NSProxy
-	ForwardInvocation(invocation *raw.NSInvocation)
-	MethodSignatureForSelector(sel objc.SEL) *MethodSignature
+	obj.Object
+	ForwardInvocation(invocation *Invocation)
 	Dealloc()
 	Finalize()
-	Description() *String
-	DebugDescription() *String
+	DebugDescription() string
 }
 
 var _ Proxyable = (*Proxy)(nil)
+
+// isProxy marks Proxy — and, by embedding promotion, its
+// subclasses — as a member of the Proxy hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Proxy) isProxy() {}
+
+var _ ProxyProvider = (*Proxy)(nil)

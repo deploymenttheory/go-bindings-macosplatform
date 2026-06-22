@@ -5,100 +5,127 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEClusterSetTargetsParams wraps [raw.MTREnergyEVSEClusterSetTargetsParams] with a fluent Go API.
+// MTREnergyEVSEClusterSetTargetsParams is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterSetTargetsParams.
 type MTREnergyEVSEClusterSetTargetsParams struct {
-	inner *raw.MTREnergyEVSEClusterSetTargetsParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEClusterSetTargetsParams].
-func (x *MTREnergyEVSEClusterSetTargetsParams) Unwrap() *raw.MTREnergyEVSEClusterSetTargetsParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEClusterSetTargetsParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEClusterSetTargetsParamsFromID adopts an existing object pointer as a MTREnergyEVSEClusterSetTargetsParams (nil for 0).
+// MTREnergyEVSEClusterSetTargetsParamsFromID adopts an existing Objective-C object as a MTREnergyEVSEClusterSetTargetsParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEClusterSetTargetsParamsFromID(id objc.ID) *MTREnergyEVSEClusterSetTargetsParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEClusterSetTargetsParams{inner: raw.MTREnergyEVSEClusterSetTargetsParamsFromID(id)}
+	x := &MTREnergyEVSEClusterSetTargetsParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTREnergyEVSEClusterSetTargetsParams creates a new [MTREnergyEVSEClusterSetTargetsParams].
+// mTREnergyEVSEClusterSetTargetsParamsAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEClusterSetTargetsParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEClusterSetTargetsParamsAdopt(id objc.ID) *MTREnergyEVSEClusterSetTargetsParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEClusterSetTargetsParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEClusterSetTargetsParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEClusterSetTargetsParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEClusterSetTargetsParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEClusterSetTargetsParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEClusterSetTargetsParams creates a new MTREnergyEVSEClusterSetTargetsParams.
 func NewMTREnergyEVSEClusterSetTargetsParams() *MTREnergyEVSEClusterSetTargetsParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEClusterSetTargetsParams")), objc.RegisterName("new"))
-	return &MTREnergyEVSEClusterSetTargetsParams{inner: raw.MTREnergyEVSEClusterSetTargetsParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterSetTargetsParams")), objc.RegisterName("new"))
+	return mTREnergyEVSEClusterSetTargetsParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterSetTargetsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEClusterSetTargetsParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
+func (x *MTREnergyEVSEClusterSetTargetsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterSetTargetsParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterSetTargetsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEClusterSetTargetsParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
+func (x *MTREnergyEVSEClusterSetTargetsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterSetTargetsParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// ChargingTargetSchedules calls the underlying ChargingTargetSchedules.
-func (x *MTREnergyEVSEClusterSetTargetsParams) ChargingTargetSchedules() *foundation.NSArray[objc.ID] {
-	return x.inner.ChargingTargetSchedules()
+// ChargingTargetSchedules wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterSetTargetsParams) ChargingTargetSchedules() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chargingTargetSchedules"))
+	return obj.Wrap(_r)
 }
 
-// SetChargingTargetSchedules calls the underlying SetChargingTargetSchedules.
-func (x *MTREnergyEVSEClusterSetTargetsParams) SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID]) {
-	x.inner.SetChargingTargetSchedules(chargingTargetSchedules)
+// SetChargingTargetSchedules wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterSetTargetsParams) SetChargingTargetSchedules(chargingTargetSchedules obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingTargetSchedules:"), objref.IDOf(chargingTargetSchedules))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTREnergyEVSEClusterSetTargetsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTREnergyEVSEClusterSetTargetsParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTREnergyEVSEClusterSetTargetsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterSetTargetsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTREnergyEVSEClusterSetTargetsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTREnergyEVSEClusterSetTargetsParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTREnergyEVSEClusterSetTargetsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEClusterSetTargetsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTREnergyEVSEClusterSetTargetsParamsable is the interface implemented by [MTREnergyEVSEClusterSetTargetsParams], for mocking and DI.
 type MTREnergyEVSEClusterSetTargetsParamsable interface {
-	Unwrap() *raw.MTREnergyEVSEClusterSetTargetsParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEClusterSetTargetsParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEClusterSetTargetsParams
-	ChargingTargetSchedules() *foundation.NSArray[objc.ID]
-	SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID])
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterSetTargetsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterSetTargetsParams
+	ChargingTargetSchedules() obj.Object
+	SetChargingTargetSchedules(chargingTargetSchedules obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTREnergyEVSEClusterSetTargetsParamsable = (*MTREnergyEVSEClusterSetTargetsParams)(nil)

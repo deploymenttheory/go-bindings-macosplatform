@@ -5,72 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterLineupInfo wraps [raw.MTRChannelClusterLineupInfo] with a fluent Go API.
+// MTRChannelClusterLineupInfo is an idiomatic wrapper over the Objective-C class MTRChannelClusterLineupInfo.
+//
+// It embeds [MTRChannelClusterLineupInfoStruct], promoting that type's methods.
 type MTRChannelClusterLineupInfo struct {
-	inner *raw.MTRChannelClusterLineupInfo
+	MTRChannelClusterLineupInfoStruct
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterLineupInfo].
-func (x *MTRChannelClusterLineupInfo) Unwrap() *raw.MTRChannelClusterLineupInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterLineupInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterLineupInfoFromID adopts an existing object pointer as a MTRChannelClusterLineupInfo (nil for 0).
+// MTRChannelClusterLineupInfoFromID adopts an existing Objective-C object as a MTRChannelClusterLineupInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterLineupInfoFromID(id objc.ID) *MTRChannelClusterLineupInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterLineupInfo{inner: raw.MTRChannelClusterLineupInfoFromID(id)}
+	x := &MTRChannelClusterLineupInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterLineupInfo creates a new [MTRChannelClusterLineupInfo].
+// mTRChannelClusterLineupInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterLineupInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterLineupInfoAdopt(id objc.ID) *MTRChannelClusterLineupInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterLineupInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRChannelClusterLineupInfo creates a new MTRChannelClusterLineupInfo.
 func NewMTRChannelClusterLineupInfo() *MTRChannelClusterLineupInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterLineupInfo")), objc.RegisterName("new"))
-	return &MTRChannelClusterLineupInfo{inner: raw.MTRChannelClusterLineupInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterLineupInfo")), objc.RegisterName("new"))
+	return mTRChannelClusterLineupInfoAdopt(_id)
 }
 
-// WithOperatorName sets the operatorName property and returns the receiver for chaining.
+// WithOperatorName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithOperatorName(operatorName string) *MTRChannelClusterLineupInfo {
-	x.inner.MTRChannelClusterLineupInfoStruct.SetOperatorName(foundation.NSStringStringWithUTF8String(operatorName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperatorName:"), purego.NSString(operatorName))
 	return x
 }
 
-// WithLineupName sets the lineupName property and returns the receiver for chaining.
+// WithLineupName sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithLineupName(lineupName string) *MTRChannelClusterLineupInfo {
-	x.inner.MTRChannelClusterLineupInfoStruct.SetLineupName(foundation.NSStringStringWithUTF8String(lineupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupName:"), purego.NSString(lineupName))
 	return x
 }
 
-// WithPostalCode sets the postalCode property and returns the receiver for chaining.
+// WithPostalCode sets the property and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterLineupInfo) WithPostalCode(postalCode string) *MTRChannelClusterLineupInfo {
-	x.inner.MTRChannelClusterLineupInfoStruct.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 	return x
 }
 
-// WithLineupInfoType sets the lineupInfoType property and returns the receiver for chaining.
-func (x *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfo {
-	x.inner.MTRChannelClusterLineupInfoStruct.SetLineupInfoType(lineupInfoType)
+// WithLineupInfoType sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return x
-}
-
-func (x *MTRChannelClusterLineupInfo) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct {
-	return &x.inner.MTRChannelClusterLineupInfoStruct
 }
 
 // MTRChannelClusterLineupInfoable is the interface implemented by [MTRChannelClusterLineupInfo], for mocking and DI.
 type MTRChannelClusterLineupInfoable interface {
-	Unwrap() *raw.MTRChannelClusterLineupInfo
+	obj.Object
 	WithOperatorName(operatorName string) *MTRChannelClusterLineupInfo
 	WithLineupName(lineupName string) *MTRChannelClusterLineupInfo
 	WithPostalCode(postalCode string) *MTRChannelClusterLineupInfo
-	WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfo
+	WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfo
 }
 
 var _ MTRChannelClusterLineupInfoable = (*MTRChannelClusterLineupInfo)(nil)
+
+var _ MTRChannelClusterLineupInfoStructProvider = (*MTRChannelClusterLineupInfo)(nil)

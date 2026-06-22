@@ -5,98 +5,143 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about OpenGL textures created by the GLKTextureLoader class.
+// TextureInfo is an idiomatic wrapper over the Objective-C class GLKTextureInfo.
 //
-// TextureInfo wraps [raw.GLKTextureInfo] with a fluent Go API.
+// Information about OpenGL textures created by the GLKTextureLoader class.
 type TextureInfo struct {
-	inner *raw.GLKTextureInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKTextureInfo].
-func (x *TextureInfo) Unwrap() *raw.GLKTextureInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextureInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureInfoFromID adopts an existing object pointer as a TextureInfo (nil for 0).
+// TextureInfoFromID adopts an existing Objective-C object as a TextureInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureInfoFromID(id objc.ID) *TextureInfo {
 	if id == 0 {
 		return nil
 	}
-	return &TextureInfo{inner: raw.GLKTextureInfoFromID(id)}
+	x := &TextureInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextureInfo creates a new [TextureInfo].
+// textureInfoAdopt wraps an Objective-C object that this code just created as a
+// TextureInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureInfoAdopt(id objc.ID) *TextureInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &TextureInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextureInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextureInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextureInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextureInfo creates a new TextureInfo.
 func NewTextureInfo() *TextureInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKTextureInfo")), objc.RegisterName("new"))
-	return &TextureInfo{inner: raw.GLKTextureInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKTextureInfo")), objc.RegisterName("new"))
+	return textureInfoAdopt(_id)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *TextureInfo) Name() uint32 {
-	return x.inner.Name()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("name"))
+	return _r
 }
 
-// Target calls the underlying Target.
+// Target wraps the corresponding Objective-C method.
 func (x *TextureInfo) Target() uint32 {
-	return x.inner.Target()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("target"))
+	return _r
 }
 
-// Width calls the underlying Width.
+// Width wraps the corresponding Objective-C method.
 func (x *TextureInfo) Width() uint32 {
-	return x.inner.Width()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// Height calls the underlying Height.
+// Height wraps the corresponding Objective-C method.
 func (x *TextureInfo) Height() uint32 {
-	return x.inner.Height()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// Depth calls the underlying Depth.
+// Depth wraps the corresponding Objective-C method.
 func (x *TextureInfo) Depth() uint32 {
-	return x.inner.Depth()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("depth"))
+	return _r
 }
 
-// AlphaState calls the underlying AlphaState.
-func (x *TextureInfo) AlphaState() GLKTextureInfoAlphaState {
-	return GLKTextureInfoAlphaState(x.inner.AlphaState())
+// AlphaState wraps the corresponding Objective-C method.
+func (x *TextureInfo) AlphaState() TextureInfoAlphaState {
+	_r := objc.Send[TextureInfoAlphaState](objref.IDOf(x), objc.RegisterName("alphaState"))
+	return _r
 }
 
-// TextureOrigin calls the underlying TextureOrigin.
-func (x *TextureInfo) TextureOrigin() GLKTextureInfoOrigin {
-	return GLKTextureInfoOrigin(x.inner.TextureOrigin())
+// TextureOrigin wraps the corresponding Objective-C method.
+func (x *TextureInfo) TextureOrigin() TextureInfoOrigin {
+	_r := objc.Send[TextureInfoOrigin](objref.IDOf(x), objc.RegisterName("textureOrigin"))
+	return _r
 }
 
-// ContainsMipmaps calls the underlying ContainsMipmaps.
+// ContainsMipmaps wraps the corresponding Objective-C method.
 func (x *TextureInfo) ContainsMipmaps() bool {
-	return x.inner.ContainsMipmaps()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsMipmaps"))
+	return _r
 }
 
-// MimapLevelCount calls the underlying MimapLevelCount.
+// MimapLevelCount wraps the corresponding Objective-C method.
 func (x *TextureInfo) MimapLevelCount() uint32 {
-	return x.inner.MimapLevelCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mimapLevelCount"))
+	return _r
 }
 
-// ArrayLength calls the underlying ArrayLength.
+// ArrayLength wraps the corresponding Objective-C method.
 func (x *TextureInfo) ArrayLength() uint32 {
-	return x.inner.ArrayLength()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("arrayLength"))
+	return _r
 }
 
 // TextureInfoable is the interface implemented by [TextureInfo], for mocking and DI.
 type TextureInfoable interface {
-	Unwrap() *raw.GLKTextureInfo
+	obj.Object
 	Name() uint32
 	Target() uint32
 	Width() uint32
 	Height() uint32
 	Depth() uint32
-	AlphaState() GLKTextureInfoAlphaState
-	TextureOrigin() GLKTextureInfoOrigin
+	AlphaState() TextureInfoAlphaState
+	TextureOrigin() TextureInfoOrigin
 	ContainsMipmaps() bool
 	MimapLevelCount() uint32
 	ArrayLength() uint32

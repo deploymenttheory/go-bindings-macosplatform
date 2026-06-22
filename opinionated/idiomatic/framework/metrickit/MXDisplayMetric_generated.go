@@ -5,49 +5,65 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the power used to display the app on the screen.
+// DisplayMetric is an idiomatic wrapper over the Objective-C class MXDisplayMetric.
 //
-// DisplayMetric wraps [raw.MXDisplayMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the power used to display the app on the screen.
 type DisplayMetric struct {
-	inner *raw.MXDisplayMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXDisplayMetric].
-func (x *DisplayMetric) Unwrap() *raw.MXDisplayMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DisplayMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// DisplayMetricFromID adopts an existing object pointer as a DisplayMetric (nil for 0).
+// DisplayMetricFromID adopts an existing Objective-C object as a DisplayMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func DisplayMetricFromID(id objc.ID) *DisplayMetric {
 	if id == 0 {
 		return nil
 	}
-	return &DisplayMetric{inner: raw.MXDisplayMetricFromID(id)}
+	x := &DisplayMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDisplayMetric creates a new [DisplayMetric].
+// displayMetricAdopt wraps an Objective-C object that this code just created as a
+// DisplayMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func displayMetricAdopt(id objc.ID) *DisplayMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &DisplayMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDisplayMetric creates a new DisplayMetric.
 func NewDisplayMetric() *DisplayMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXDisplayMetric")), objc.RegisterName("new"))
-	return &DisplayMetric{inner: raw.MXDisplayMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXDisplayMetric")), objc.RegisterName("new"))
+	return displayMetricAdopt(_id)
 }
 
-// AveragePixelLuminance calls the underlying AveragePixelLuminance.
-func (x *DisplayMetric) AveragePixelLuminance() *raw.MXAverage[*raw.MXUnitAveragePixelLuminance] {
-	return x.inner.AveragePixelLuminance()
+// AveragePixelLuminance wraps the corresponding Objective-C method.
+func (x *DisplayMetric) AveragePixelLuminance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averagePixelLuminance"))
+	return obj.Wrap(_r)
 }
-
-func (x *DisplayMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // DisplayMetricable is the interface implemented by [DisplayMetric], for mocking and DI.
 type DisplayMetricable interface {
-	Unwrap() *raw.MXDisplayMetric
-	AveragePixelLuminance() *raw.MXAverage[*raw.MXUnitAveragePixelLuminance]
+	obj.Object
+	AveragePixelLuminance() obj.Object
 }
 
 var _ DisplayMetricable = (*DisplayMetric)(nil)
+
+var _ MetricProvider = (*DisplayMetric)(nil)

@@ -5,144 +5,148 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterActivatedCarbonFilterMonitoring wraps [raw.MTRClusterActivatedCarbonFilterMonitoring] with a fluent Go API.
+// MTRClusterActivatedCarbonFilterMonitoring is an idiomatic wrapper over the Objective-C class MTRClusterActivatedCarbonFilterMonitoring.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterActivatedCarbonFilterMonitoring struct {
-	inner *raw.MTRClusterActivatedCarbonFilterMonitoring
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterActivatedCarbonFilterMonitoring].
-func (x *MTRClusterActivatedCarbonFilterMonitoring) Unwrap() *raw.MTRClusterActivatedCarbonFilterMonitoring {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterActivatedCarbonFilterMonitoringFromID adopts an existing object pointer as a MTRClusterActivatedCarbonFilterMonitoring (nil for 0).
+// MTRClusterActivatedCarbonFilterMonitoringFromID adopts an existing Objective-C object as a MTRClusterActivatedCarbonFilterMonitoring
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterActivatedCarbonFilterMonitoringFromID(id objc.ID) *MTRClusterActivatedCarbonFilterMonitoring {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterActivatedCarbonFilterMonitoring{inner: raw.MTRClusterActivatedCarbonFilterMonitoringFromID(id)}
+	x := &MTRClusterActivatedCarbonFilterMonitoring{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue creates a new [MTRClusterActivatedCarbonFilterMonitoring].
-func NewMTRClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterActivatedCarbonFilterMonitoring {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterActivatedCarbonFilterMonitoring")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterActivatedCarbonFilterMonitoring{inner: raw.MTRClusterActivatedCarbonFilterMonitoringFromID(_id)}
+// mTRClusterActivatedCarbonFilterMonitoringAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterActivatedCarbonFilterMonitoring (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterActivatedCarbonFilterMonitoringAdopt(id objc.ID) *MTRClusterActivatedCarbonFilterMonitoring {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterActivatedCarbonFilterMonitoring{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRActivatedCarbonFilterMonitoringClusterResetConditionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterActivatedCarbonFilterMonitoring {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterActivatedCarbonFilterMonitoring")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterActivatedCarbonFilterMonitoringAdopt(_id)
 }
 
-// ResetConditionWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetConditionWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// ReadAttributeConditionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConditionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeConditionWithParams calls the underlying ReadAttributeConditionWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeConditionWithParams(params)
+// ReadAttributeDegradationDirectionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDegradationDirectionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDegradationDirectionWithParams calls the underlying ReadAttributeDegradationDirectionWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDegradationDirectionWithParams(params)
+// ReadAttributeChangeIndicationWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChangeIndicationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeChangeIndicationWithParams calls the underlying ReadAttributeChangeIndicationWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeChangeIndicationWithParams(params)
+// ReadAttributeInPlaceIndicatorWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInPlaceIndicatorWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInPlaceIndicatorWithParams calls the underlying ReadAttributeInPlaceIndicatorWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInPlaceIndicatorWithParams(params)
+// ReadAttributeLastChangedTimeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastChangedTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLastChangedTimeWithParams calls the underlying ReadAttributeLastChangedTimeWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLastChangedTimeWithParams(params)
+// WriteAttributeLastChangedTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLastChangedTimeWithValueExpectedValueInterval calls the underlying WriteAttributeLastChangedTimeWithValueExpectedValueInterval.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// ReadAttributeReplacementProductListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReplacementProductListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeReplacementProductListWithParams calls the underlying ReadAttributeReplacementProductListWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeReplacementProductListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterActivatedCarbonFilterMonitoringable is the interface implemented by [MTRClusterActivatedCarbonFilterMonitoring], for mocking and DI.
 type MTRClusterActivatedCarbonFilterMonitoringable interface {
-	Unwrap() *raw.MTRClusterActivatedCarbonFilterMonitoring
-	ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRActivatedCarbonFilterMonitoringClusterResetConditionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeConditionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDegradationDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeChangeIndicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInPlaceIndicatorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLastChangedTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeReplacementProductListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterActivatedCarbonFilterMonitoringable = (*MTRClusterActivatedCarbonFilterMonitoring)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterActivatedCarbonFilterMonitoring)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterActivatedCarbonFilterMonitoring)(nil)

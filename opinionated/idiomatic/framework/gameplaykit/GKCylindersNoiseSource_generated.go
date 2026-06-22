@@ -5,67 +5,79 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator whose output is a 3D field of concentric cylindrical shells.
+// CylindersNoiseSource is an idiomatic wrapper over the Objective-C class GKCylindersNoiseSource.
 //
-// CylindersNoiseSource wraps [raw.GKCylindersNoiseSource] with a fluent Go API.
+// It embeds [NoiseSource], promoting that type's methods.
+//
+// A procedural noise generator whose output is a 3D field of concentric cylindrical shells.
 type CylindersNoiseSource struct {
-	inner *raw.GKCylindersNoiseSource
+	NoiseSource
 }
 
-// Unwrap returns the underlying [raw.GKCylindersNoiseSource].
-func (x *CylindersNoiseSource) Unwrap() *raw.GKCylindersNoiseSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CylindersNoiseSource) ID() objc.ID { return x.inner.Ptr() }
-
-// CylindersNoiseSourceFromID adopts an existing object pointer as a CylindersNoiseSource (nil for 0).
+// CylindersNoiseSourceFromID adopts an existing Objective-C object as a CylindersNoiseSource
+// (nil for 0), retaining it and registering a release finalizer.
 func CylindersNoiseSourceFromID(id objc.ID) *CylindersNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	return &CylindersNoiseSource{inner: raw.GKCylindersNoiseSourceFromID(id)}
-}
-
-// Initializes a cylinder noise source with the specified frequency.
-//
-// NewCylindersNoiseSourceWithFrequency creates a new [CylindersNoiseSource].
-func NewCylindersNoiseSourceWithFrequency(frequency float64) *CylindersNoiseSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCylindersNoiseSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:"), frequency)
-	return &CylindersNoiseSource{inner: raw.GKCylindersNoiseSourceFromID(_id)}
-}
-
-// A value that determines the size and spacing of concentric cylinders.
-//
-// WithFrequency sets the frequency property and returns the receiver for chaining.
-func (x *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNoiseSource {
-	x.inner.SetFrequency(frequency)
+	x := &CylindersNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Frequency calls the underlying Frequency.
+// cylindersNoiseSourceAdopt wraps an Objective-C object that this code just created as a
+// CylindersNoiseSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cylindersNoiseSourceAdopt(id objc.ID) *CylindersNoiseSource {
+	if id == 0 {
+		return nil
+	}
+	x := &CylindersNoiseSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCylindersNoiseSourceWithFrequency initializes a cylinder noise source with the specified frequency.
+func NewCylindersNoiseSourceWithFrequency(frequency float64) *CylindersNoiseSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKCylindersNoiseSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:"), frequency)
+	return cylindersNoiseSourceAdopt(_id)
+}
+
+// WithFrequency a value that determines the size and spacing of concentric cylinders.
+func (x *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
+	return x
+}
+
+// Frequency wraps the corresponding Objective-C method.
 func (x *CylindersNoiseSource) Frequency() float64 {
-	return x.inner.Frequency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+	return _r
 }
 
-// SetFrequency calls the underlying SetFrequency.
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *CylindersNoiseSource) SetFrequency(frequency float64) {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
-
-func (x *CylindersNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
 
 // CylindersNoiseSourceable is the interface implemented by [CylindersNoiseSource], for mocking and DI.
 type CylindersNoiseSourceable interface {
-	Unwrap() *raw.GKCylindersNoiseSource
+	obj.Object
 	WithFrequency(frequency float64) *CylindersNoiseSource
 	Frequency() float64
 	SetFrequency(frequency float64)
 }
 
 var _ CylindersNoiseSourceable = (*CylindersNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*CylindersNoiseSource)(nil)

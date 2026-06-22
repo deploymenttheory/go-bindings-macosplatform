@@ -5,76 +5,103 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The width, height, and pixel format constraints of an image feature.
+// ImageConstraint is an idiomatic wrapper over the Objective-C class MLImageConstraint.
 //
-// ImageConstraint wraps [raw.MLImageConstraint] with a fluent Go API.
+// The width, height, and pixel format constraints of an image feature.
 type ImageConstraint struct {
-	inner *raw.MLImageConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLImageConstraint].
-func (x *ImageConstraint) Unwrap() *raw.MLImageConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageConstraintFromID adopts an existing object pointer as a ImageConstraint (nil for 0).
+// ImageConstraintFromID adopts an existing Objective-C object as a ImageConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageConstraintFromID(id objc.ID) *ImageConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &ImageConstraint{inner: raw.MLImageConstraintFromID(id)}
+	x := &ImageConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageConstraint creates a new [ImageConstraint].
-func NewImageConstraint() *ImageConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLImageConstraint")), objc.RegisterName("new"))
-	return &ImageConstraint{inner: raw.MLImageConstraintFromID(_id)}
-}
-
-// The required or default height of the image
-//
-// PixelsHigh calls the underlying PixelsHigh.
-func (x *ImageConstraint) PixelsHigh() int {
-	return x.inner.PixelsHigh()
-}
-
-// The required or default width of the image
-//
-// PixelsWide calls the underlying PixelsWide.
-func (x *ImageConstraint) PixelsWide() int {
-	return x.inner.PixelsWide()
-}
-
-// The accepted kCVPixelFormatType for the image.
-//
-// PixelFormatType calls the underlying PixelFormatType.
-func (x *ImageConstraint) PixelFormatType() uint {
-	return x.inner.PixelFormatType()
-}
-
-// Detailed image size constraint
-//
-// SizeConstraint calls the underlying SizeConstraint.
-func (x *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
-	_r := x.inner.SizeConstraint()
-	if _r == nil {
+// imageConstraintAdopt wraps an Objective-C object that this code just created as a
+// ImageConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageConstraintAdopt(id objc.ID) *ImageConstraint {
+	if id == 0 {
 		return nil
 	}
-	return &ImageSizeConstraint{inner: _r}
+	x := &ImageConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ImageConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewImageConstraint creates a new ImageConstraint.
+func NewImageConstraint() *ImageConstraint {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLImageConstraint")), objc.RegisterName("new"))
+	return imageConstraintAdopt(_id)
+}
+
+// PixelsHigh the required or default height of the image
+func (x *ImageConstraint) PixelsHigh() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
+	return _r
+}
+
+// PixelsWide the required or default width of the image
+func (x *ImageConstraint) PixelsWide() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsWide"))
+	return _r
+}
+
+// PixelFormatType the accepted kCVPixelFormatType for the image.
+func (x *ImageConstraint) PixelFormatType() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
+	return _r
+}
+
+// SizeConstraint detailed image size constraint
+func (x *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeConstraint"))
+	return ImageSizeConstraintFromID(_r)
 }
 
 // ImageConstraintable is the interface implemented by [ImageConstraint], for mocking and DI.
 type ImageConstraintable interface {
-	Unwrap() *raw.MLImageConstraint
+	obj.Object
 	PixelsHigh() int
 	PixelsWide() int
-	PixelFormatType() uint
+	PixelFormatType() int
 	SizeConstraint() *ImageSizeConstraint
 }
 

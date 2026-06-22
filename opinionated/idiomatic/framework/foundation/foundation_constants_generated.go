@@ -5,4140 +5,2252 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// NSStringTransformLatinToKatakana returns the Foundation string constant NSStringTransformLatinToKatakana as an idiomatic *String.
+// NSStringTransformLatinToKatakana returns the string constant NSStringTransformLatinToKatakana.
 func NSStringTransformLatinToKatakana() *String {
-	_r := raw.NSStringTransformLatinToKatakana()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToKatakana")))
 }
 
-// NSStringTransformLatinToHiragana returns the Foundation string constant NSStringTransformLatinToHiragana as an idiomatic *String.
+// NSStringTransformLatinToHiragana returns the string constant NSStringTransformLatinToHiragana.
 func NSStringTransformLatinToHiragana() *String {
-	_r := raw.NSStringTransformLatinToHiragana()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToHiragana")))
 }
 
-// NSStringTransformLatinToHangul returns the Foundation string constant NSStringTransformLatinToHangul as an idiomatic *String.
+// NSStringTransformLatinToHangul returns the string constant NSStringTransformLatinToHangul.
 func NSStringTransformLatinToHangul() *String {
-	_r := raw.NSStringTransformLatinToHangul()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToHangul")))
 }
 
-// NSStringTransformLatinToArabic returns the Foundation string constant NSStringTransformLatinToArabic as an idiomatic *String.
+// NSStringTransformLatinToArabic returns the string constant NSStringTransformLatinToArabic.
 func NSStringTransformLatinToArabic() *String {
-	_r := raw.NSStringTransformLatinToArabic()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToArabic")))
 }
 
-// NSStringTransformLatinToHebrew returns the Foundation string constant NSStringTransformLatinToHebrew as an idiomatic *String.
+// NSStringTransformLatinToHebrew returns the string constant NSStringTransformLatinToHebrew.
 func NSStringTransformLatinToHebrew() *String {
-	_r := raw.NSStringTransformLatinToHebrew()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToHebrew")))
 }
 
-// NSStringTransformLatinToThai returns the Foundation string constant NSStringTransformLatinToThai as an idiomatic *String.
+// NSStringTransformLatinToThai returns the string constant NSStringTransformLatinToThai.
 func NSStringTransformLatinToThai() *String {
-	_r := raw.NSStringTransformLatinToThai()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToThai")))
 }
 
-// NSStringTransformLatinToCyrillic returns the Foundation string constant NSStringTransformLatinToCyrillic as an idiomatic *String.
+// NSStringTransformLatinToCyrillic returns the string constant NSStringTransformLatinToCyrillic.
 func NSStringTransformLatinToCyrillic() *String {
-	_r := raw.NSStringTransformLatinToCyrillic()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToCyrillic")))
 }
 
-// NSStringTransformLatinToGreek returns the Foundation string constant NSStringTransformLatinToGreek as an idiomatic *String.
+// NSStringTransformLatinToGreek returns the string constant NSStringTransformLatinToGreek.
 func NSStringTransformLatinToGreek() *String {
-	_r := raw.NSStringTransformLatinToGreek()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToGreek")))
 }
 
-// NSStringTransformToLatin returns the Foundation string constant NSStringTransformToLatin as an idiomatic *String.
+// NSStringTransformToLatin returns the string constant NSStringTransformToLatin.
 func NSStringTransformToLatin() *String {
-	_r := raw.NSStringTransformToLatin()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformToLatin")))
 }
 
-// NSStringTransformMandarinToLatin returns the Foundation string constant NSStringTransformMandarinToLatin as an idiomatic *String.
+// NSStringTransformMandarinToLatin returns the string constant NSStringTransformMandarinToLatin.
 func NSStringTransformMandarinToLatin() *String {
-	_r := raw.NSStringTransformMandarinToLatin()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformMandarinToLatin")))
 }
 
-// NSStringTransformHiraganaToKatakana returns the Foundation string constant NSStringTransformHiraganaToKatakana as an idiomatic *String.
+// NSStringTransformHiraganaToKatakana returns the string constant NSStringTransformHiraganaToKatakana.
 func NSStringTransformHiraganaToKatakana() *String {
-	_r := raw.NSStringTransformHiraganaToKatakana()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformHiraganaToKatakana")))
 }
 
-// NSStringTransformFullwidthToHalfwidth returns the Foundation string constant NSStringTransformFullwidthToHalfwidth as an idiomatic *String.
+// NSStringTransformFullwidthToHalfwidth returns the string constant NSStringTransformFullwidthToHalfwidth.
 func NSStringTransformFullwidthToHalfwidth() *String {
-	_r := raw.NSStringTransformFullwidthToHalfwidth()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformFullwidthToHalfwidth")))
 }
 
-// NSStringTransformToXMLHex returns the Foundation string constant NSStringTransformToXMLHex as an idiomatic *String.
+// NSStringTransformToXMLHex returns the string constant NSStringTransformToXMLHex.
 func NSStringTransformToXMLHex() *String {
-	_r := raw.NSStringTransformToXMLHex()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformToXMLHex")))
 }
 
-// NSStringTransformToUnicodeName returns the Foundation string constant NSStringTransformToUnicodeName as an idiomatic *String.
+// NSStringTransformToUnicodeName returns the string constant NSStringTransformToUnicodeName.
 func NSStringTransformToUnicodeName() *String {
-	_r := raw.NSStringTransformToUnicodeName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformToUnicodeName")))
 }
 
-// NSStringTransformStripCombiningMarks returns the Foundation string constant NSStringTransformStripCombiningMarks as an idiomatic *String.
+// NSStringTransformStripCombiningMarks returns the string constant NSStringTransformStripCombiningMarks.
 func NSStringTransformStripCombiningMarks() *String {
-	_r := raw.NSStringTransformStripCombiningMarks()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformStripCombiningMarks")))
 }
 
-// NSStringTransformStripDiacritics returns the Foundation string constant NSStringTransformStripDiacritics as an idiomatic *String.
+// NSStringTransformStripDiacritics returns the string constant NSStringTransformStripDiacritics.
 func NSStringTransformStripDiacritics() *String {
-	_r := raw.NSStringTransformStripDiacritics()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringTransformStripDiacritics")))
 }
 
-// NSStringEncodingDetectionSuggestedEncodingsKey returns the Foundation string constant NSStringEncodingDetectionSuggestedEncodingsKey as an idiomatic *String.
+// NSStringEncodingDetectionSuggestedEncodingsKey returns the string constant NSStringEncodingDetectionSuggestedEncodingsKey.
 func NSStringEncodingDetectionSuggestedEncodingsKey() *String {
-	_r := raw.NSStringEncodingDetectionSuggestedEncodingsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionSuggestedEncodingsKey")))
 }
 
-// NSStringEncodingDetectionDisallowedEncodingsKey returns the Foundation string constant NSStringEncodingDetectionDisallowedEncodingsKey as an idiomatic *String.
+// NSStringEncodingDetectionDisallowedEncodingsKey returns the string constant NSStringEncodingDetectionDisallowedEncodingsKey.
 func NSStringEncodingDetectionDisallowedEncodingsKey() *String {
-	_r := raw.NSStringEncodingDetectionDisallowedEncodingsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionDisallowedEncodingsKey")))
 }
 
-// NSStringEncodingDetectionUseOnlySuggestedEncodingsKey returns the Foundation string constant NSStringEncodingDetectionUseOnlySuggestedEncodingsKey as an idiomatic *String.
+// NSStringEncodingDetectionUseOnlySuggestedEncodingsKey returns the string constant NSStringEncodingDetectionUseOnlySuggestedEncodingsKey.
 func NSStringEncodingDetectionUseOnlySuggestedEncodingsKey() *String {
-	_r := raw.NSStringEncodingDetectionUseOnlySuggestedEncodingsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionUseOnlySuggestedEncodingsKey")))
 }
 
-// NSStringEncodingDetectionAllowLossyKey returns the Foundation string constant NSStringEncodingDetectionAllowLossyKey as an idiomatic *String.
+// NSStringEncodingDetectionAllowLossyKey returns the string constant NSStringEncodingDetectionAllowLossyKey.
 func NSStringEncodingDetectionAllowLossyKey() *String {
-	_r := raw.NSStringEncodingDetectionAllowLossyKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionAllowLossyKey")))
 }
 
-// NSStringEncodingDetectionFromWindowsKey returns the Foundation string constant NSStringEncodingDetectionFromWindowsKey as an idiomatic *String.
+// NSStringEncodingDetectionFromWindowsKey returns the string constant NSStringEncodingDetectionFromWindowsKey.
 func NSStringEncodingDetectionFromWindowsKey() *String {
-	_r := raw.NSStringEncodingDetectionFromWindowsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionFromWindowsKey")))
 }
 
-// NSStringEncodingDetectionLossySubstitutionKey returns the Foundation string constant NSStringEncodingDetectionLossySubstitutionKey as an idiomatic *String.
+// NSStringEncodingDetectionLossySubstitutionKey returns the string constant NSStringEncodingDetectionLossySubstitutionKey.
 func NSStringEncodingDetectionLossySubstitutionKey() *String {
-	_r := raw.NSStringEncodingDetectionLossySubstitutionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionLossySubstitutionKey")))
 }
 
-// NSStringEncodingDetectionLikelyLanguageKey returns the Foundation string constant NSStringEncodingDetectionLikelyLanguageKey as an idiomatic *String.
+// NSStringEncodingDetectionLikelyLanguageKey returns the string constant NSStringEncodingDetectionLikelyLanguageKey.
 func NSStringEncodingDetectionLikelyLanguageKey() *String {
-	_r := raw.NSStringEncodingDetectionLikelyLanguageKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingDetectionLikelyLanguageKey")))
 }
 
-// NSCharacterConversionException returns the Foundation string constant NSCharacterConversionException as an idiomatic *String.
+// NSCharacterConversionException returns the string constant NSCharacterConversionException.
 func NSCharacterConversionException() *String {
-	_r := raw.NSCharacterConversionException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCharacterConversionException")))
 }
 
-// NSParseErrorException returns the Foundation string constant NSParseErrorException as an idiomatic *String.
+// NSParseErrorException returns the string constant NSParseErrorException.
 func NSParseErrorException() *String {
-	_r := raw.NSParseErrorException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSParseErrorException")))
 }
 
-// NSProgressEstimatedTimeRemainingKey returns the Foundation string constant NSProgressEstimatedTimeRemainingKey as an idiomatic *String.
+// NSProgressEstimatedTimeRemainingKey returns the string constant NSProgressEstimatedTimeRemainingKey.
 func NSProgressEstimatedTimeRemainingKey() *String {
-	_r := raw.NSProgressEstimatedTimeRemainingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressEstimatedTimeRemainingKey")))
 }
 
-// NSProgressThroughputKey returns the Foundation string constant NSProgressThroughputKey as an idiomatic *String.
+// NSProgressThroughputKey returns the string constant NSProgressThroughputKey.
 func NSProgressThroughputKey() *String {
-	_r := raw.NSProgressThroughputKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressThroughputKey")))
 }
 
-// NSProgressKindFile returns the Foundation string constant NSProgressKindFile as an idiomatic *String.
+// NSProgressKindFile returns the string constant NSProgressKindFile.
 func NSProgressKindFile() *String {
-	_r := raw.NSProgressKindFile()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressKindFile")))
 }
 
-// NSProgressFileOperationKindKey returns the Foundation string constant NSProgressFileOperationKindKey as an idiomatic *String.
+// NSProgressFileOperationKindKey returns the string constant NSProgressFileOperationKindKey.
 func NSProgressFileOperationKindKey() *String {
-	_r := raw.NSProgressFileOperationKindKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindKey")))
 }
 
-// NSProgressFileOperationKindDownloading returns the Foundation string constant NSProgressFileOperationKindDownloading as an idiomatic *String.
+// NSProgressFileOperationKindDownloading returns the string constant NSProgressFileOperationKindDownloading.
 func NSProgressFileOperationKindDownloading() *String {
-	_r := raw.NSProgressFileOperationKindDownloading()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindDownloading")))
 }
 
-// NSProgressFileOperationKindDecompressingAfterDownloading returns the Foundation string constant NSProgressFileOperationKindDecompressingAfterDownloading as an idiomatic *String.
+// NSProgressFileOperationKindDecompressingAfterDownloading returns the string constant NSProgressFileOperationKindDecompressingAfterDownloading.
 func NSProgressFileOperationKindDecompressingAfterDownloading() *String {
-	_r := raw.NSProgressFileOperationKindDecompressingAfterDownloading()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindDecompressingAfterDownloading")))
 }
 
-// NSProgressFileOperationKindReceiving returns the Foundation string constant NSProgressFileOperationKindReceiving as an idiomatic *String.
+// NSProgressFileOperationKindReceiving returns the string constant NSProgressFileOperationKindReceiving.
 func NSProgressFileOperationKindReceiving() *String {
-	_r := raw.NSProgressFileOperationKindReceiving()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindReceiving")))
 }
 
-// NSProgressFileOperationKindCopying returns the Foundation string constant NSProgressFileOperationKindCopying as an idiomatic *String.
+// NSProgressFileOperationKindCopying returns the string constant NSProgressFileOperationKindCopying.
 func NSProgressFileOperationKindCopying() *String {
-	_r := raw.NSProgressFileOperationKindCopying()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindCopying")))
 }
 
-// NSProgressFileOperationKindUploading returns the Foundation string constant NSProgressFileOperationKindUploading as an idiomatic *String.
+// NSProgressFileOperationKindUploading returns the string constant NSProgressFileOperationKindUploading.
 func NSProgressFileOperationKindUploading() *String {
-	_r := raw.NSProgressFileOperationKindUploading()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindUploading")))
 }
 
-// NSProgressFileOperationKindDuplicating returns the Foundation string constant NSProgressFileOperationKindDuplicating as an idiomatic *String.
+// NSProgressFileOperationKindDuplicating returns the string constant NSProgressFileOperationKindDuplicating.
 func NSProgressFileOperationKindDuplicating() *String {
-	_r := raw.NSProgressFileOperationKindDuplicating()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileOperationKindDuplicating")))
 }
 
-// NSProgressFileURLKey returns the Foundation string constant NSProgressFileURLKey as an idiomatic *String.
+// NSProgressFileURLKey returns the string constant NSProgressFileURLKey.
 func NSProgressFileURLKey() *String {
-	_r := raw.NSProgressFileURLKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileURLKey")))
 }
 
-// NSProgressFileTotalCountKey returns the Foundation string constant NSProgressFileTotalCountKey as an idiomatic *String.
+// NSProgressFileTotalCountKey returns the string constant NSProgressFileTotalCountKey.
 func NSProgressFileTotalCountKey() *String {
-	_r := raw.NSProgressFileTotalCountKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileTotalCountKey")))
 }
 
-// NSProgressFileCompletedCountKey returns the Foundation string constant NSProgressFileCompletedCountKey as an idiomatic *String.
+// NSProgressFileCompletedCountKey returns the string constant NSProgressFileCompletedCountKey.
 func NSProgressFileCompletedCountKey() *String {
-	_r := raw.NSProgressFileCompletedCountKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProgressFileCompletedCountKey")))
 }
 
-// NSBundleDidLoadNotification returns the Foundation string constant NSBundleDidLoadNotification as an idiomatic *String.
+// NSBundleDidLoadNotification returns the string constant NSBundleDidLoadNotification.
 func NSBundleDidLoadNotification() *String {
-	_r := raw.NSBundleDidLoadNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSBundleDidLoadNotification")))
 }
 
-// NSSystemClockDidChangeNotification returns the Foundation string constant NSSystemClockDidChangeNotification as an idiomatic *String.
+// NSSystemClockDidChangeNotification returns the string constant NSSystemClockDidChangeNotification.
 func NSSystemClockDidChangeNotification() *String {
-	_r := raw.NSSystemClockDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSSystemClockDidChangeNotification")))
 }
 
-// NSCalendarIdentifierGregorian returns the Foundation string constant NSCalendarIdentifierGregorian as an idiomatic *String.
+// NSCalendarIdentifierGregorian returns the string constant NSCalendarIdentifierGregorian.
 func NSCalendarIdentifierGregorian() *String {
-	_r := raw.NSCalendarIdentifierGregorian()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierGregorian")))
 }
 
-// NSCalendarIdentifierBuddhist returns the Foundation string constant NSCalendarIdentifierBuddhist as an idiomatic *String.
+// NSCalendarIdentifierBuddhist returns the string constant NSCalendarIdentifierBuddhist.
 func NSCalendarIdentifierBuddhist() *String {
-	_r := raw.NSCalendarIdentifierBuddhist()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierBuddhist")))
 }
 
-// NSCalendarIdentifierChinese returns the Foundation string constant NSCalendarIdentifierChinese as an idiomatic *String.
+// NSCalendarIdentifierChinese returns the string constant NSCalendarIdentifierChinese.
 func NSCalendarIdentifierChinese() *String {
-	_r := raw.NSCalendarIdentifierChinese()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierChinese")))
 }
 
-// NSCalendarIdentifierCoptic returns the Foundation string constant NSCalendarIdentifierCoptic as an idiomatic *String.
+// NSCalendarIdentifierCoptic returns the string constant NSCalendarIdentifierCoptic.
 func NSCalendarIdentifierCoptic() *String {
-	_r := raw.NSCalendarIdentifierCoptic()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierCoptic")))
 }
 
-// NSCalendarIdentifierEthiopicAmeteMihret returns the Foundation string constant NSCalendarIdentifierEthiopicAmeteMihret as an idiomatic *String.
+// NSCalendarIdentifierEthiopicAmeteMihret returns the string constant NSCalendarIdentifierEthiopicAmeteMihret.
 func NSCalendarIdentifierEthiopicAmeteMihret() *String {
-	_r := raw.NSCalendarIdentifierEthiopicAmeteMihret()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierEthiopicAmeteMihret")))
 }
 
-// NSCalendarIdentifierEthiopicAmeteAlem returns the Foundation string constant NSCalendarIdentifierEthiopicAmeteAlem as an idiomatic *String.
+// NSCalendarIdentifierEthiopicAmeteAlem returns the string constant NSCalendarIdentifierEthiopicAmeteAlem.
 func NSCalendarIdentifierEthiopicAmeteAlem() *String {
-	_r := raw.NSCalendarIdentifierEthiopicAmeteAlem()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierEthiopicAmeteAlem")))
 }
 
-// NSCalendarIdentifierHebrew returns the Foundation string constant NSCalendarIdentifierHebrew as an idiomatic *String.
+// NSCalendarIdentifierHebrew returns the string constant NSCalendarIdentifierHebrew.
 func NSCalendarIdentifierHebrew() *String {
-	_r := raw.NSCalendarIdentifierHebrew()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierHebrew")))
 }
 
-// NSCalendarIdentifierISO8601 returns the Foundation string constant NSCalendarIdentifierISO8601 as an idiomatic *String.
+// NSCalendarIdentifierISO8601 returns the string constant NSCalendarIdentifierISO8601.
 func NSCalendarIdentifierISO8601() *String {
-	_r := raw.NSCalendarIdentifierISO8601()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierISO8601")))
 }
 
-// NSCalendarIdentifierIndian returns the Foundation string constant NSCalendarIdentifierIndian as an idiomatic *String.
+// NSCalendarIdentifierIndian returns the string constant NSCalendarIdentifierIndian.
 func NSCalendarIdentifierIndian() *String {
-	_r := raw.NSCalendarIdentifierIndian()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierIndian")))
 }
 
-// NSCalendarIdentifierIslamic returns the Foundation string constant NSCalendarIdentifierIslamic as an idiomatic *String.
+// NSCalendarIdentifierIslamic returns the string constant NSCalendarIdentifierIslamic.
 func NSCalendarIdentifierIslamic() *String {
-	_r := raw.NSCalendarIdentifierIslamic()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierIslamic")))
 }
 
-// NSCalendarIdentifierIslamicCivil returns the Foundation string constant NSCalendarIdentifierIslamicCivil as an idiomatic *String.
+// NSCalendarIdentifierIslamicCivil returns the string constant NSCalendarIdentifierIslamicCivil.
 func NSCalendarIdentifierIslamicCivil() *String {
-	_r := raw.NSCalendarIdentifierIslamicCivil()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierIslamicCivil")))
 }
 
-// NSCalendarIdentifierJapanese returns the Foundation string constant NSCalendarIdentifierJapanese as an idiomatic *String.
+// NSCalendarIdentifierJapanese returns the string constant NSCalendarIdentifierJapanese.
 func NSCalendarIdentifierJapanese() *String {
-	_r := raw.NSCalendarIdentifierJapanese()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierJapanese")))
 }
 
-// NSCalendarIdentifierPersian returns the Foundation string constant NSCalendarIdentifierPersian as an idiomatic *String.
+// NSCalendarIdentifierPersian returns the string constant NSCalendarIdentifierPersian.
 func NSCalendarIdentifierPersian() *String {
-	_r := raw.NSCalendarIdentifierPersian()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierPersian")))
 }
 
-// NSCalendarIdentifierRepublicOfChina returns the Foundation string constant NSCalendarIdentifierRepublicOfChina as an idiomatic *String.
+// NSCalendarIdentifierRepublicOfChina returns the string constant NSCalendarIdentifierRepublicOfChina.
 func NSCalendarIdentifierRepublicOfChina() *String {
-	_r := raw.NSCalendarIdentifierRepublicOfChina()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierRepublicOfChina")))
 }
 
-// NSCalendarIdentifierIslamicTabular returns the Foundation string constant NSCalendarIdentifierIslamicTabular as an idiomatic *String.
+// NSCalendarIdentifierIslamicTabular returns the string constant NSCalendarIdentifierIslamicTabular.
 func NSCalendarIdentifierIslamicTabular() *String {
-	_r := raw.NSCalendarIdentifierIslamicTabular()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierIslamicTabular")))
 }
 
-// NSCalendarIdentifierIslamicUmmAlQura returns the Foundation string constant NSCalendarIdentifierIslamicUmmAlQura as an idiomatic *String.
+// NSCalendarIdentifierIslamicUmmAlQura returns the string constant NSCalendarIdentifierIslamicUmmAlQura.
 func NSCalendarIdentifierIslamicUmmAlQura() *String {
-	_r := raw.NSCalendarIdentifierIslamicUmmAlQura()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierIslamicUmmAlQura")))
 }
 
-// NSCalendarIdentifierBangla returns the Foundation string constant NSCalendarIdentifierBangla as an idiomatic *String.
+// NSCalendarIdentifierBangla returns the string constant NSCalendarIdentifierBangla.
 func NSCalendarIdentifierBangla() *String {
-	_r := raw.NSCalendarIdentifierBangla()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierBangla")))
 }
 
-// NSCalendarIdentifierGujarati returns the Foundation string constant NSCalendarIdentifierGujarati as an idiomatic *String.
+// NSCalendarIdentifierGujarati returns the string constant NSCalendarIdentifierGujarati.
 func NSCalendarIdentifierGujarati() *String {
-	_r := raw.NSCalendarIdentifierGujarati()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierGujarati")))
 }
 
-// NSCalendarIdentifierKannada returns the Foundation string constant NSCalendarIdentifierKannada as an idiomatic *String.
+// NSCalendarIdentifierKannada returns the string constant NSCalendarIdentifierKannada.
 func NSCalendarIdentifierKannada() *String {
-	_r := raw.NSCalendarIdentifierKannada()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierKannada")))
 }
 
-// NSCalendarIdentifierMalayalam returns the Foundation string constant NSCalendarIdentifierMalayalam as an idiomatic *String.
+// NSCalendarIdentifierMalayalam returns the string constant NSCalendarIdentifierMalayalam.
 func NSCalendarIdentifierMalayalam() *String {
-	_r := raw.NSCalendarIdentifierMalayalam()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierMalayalam")))
 }
 
-// NSCalendarIdentifierMarathi returns the Foundation string constant NSCalendarIdentifierMarathi as an idiomatic *String.
+// NSCalendarIdentifierMarathi returns the string constant NSCalendarIdentifierMarathi.
 func NSCalendarIdentifierMarathi() *String {
-	_r := raw.NSCalendarIdentifierMarathi()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierMarathi")))
 }
 
-// NSCalendarIdentifierOdia returns the Foundation string constant NSCalendarIdentifierOdia as an idiomatic *String.
+// NSCalendarIdentifierOdia returns the string constant NSCalendarIdentifierOdia.
 func NSCalendarIdentifierOdia() *String {
-	_r := raw.NSCalendarIdentifierOdia()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierOdia")))
 }
 
-// NSCalendarIdentifierTamil returns the Foundation string constant NSCalendarIdentifierTamil as an idiomatic *String.
+// NSCalendarIdentifierTamil returns the string constant NSCalendarIdentifierTamil.
 func NSCalendarIdentifierTamil() *String {
-	_r := raw.NSCalendarIdentifierTamil()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierTamil")))
 }
 
-// NSCalendarIdentifierTelugu returns the Foundation string constant NSCalendarIdentifierTelugu as an idiomatic *String.
+// NSCalendarIdentifierTelugu returns the string constant NSCalendarIdentifierTelugu.
 func NSCalendarIdentifierTelugu() *String {
-	_r := raw.NSCalendarIdentifierTelugu()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierTelugu")))
 }
 
-// NSCalendarIdentifierVikram returns the Foundation string constant NSCalendarIdentifierVikram as an idiomatic *String.
+// NSCalendarIdentifierVikram returns the string constant NSCalendarIdentifierVikram.
 func NSCalendarIdentifierVikram() *String {
-	_r := raw.NSCalendarIdentifierVikram()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierVikram")))
 }
 
-// NSCalendarIdentifierDangi returns the Foundation string constant NSCalendarIdentifierDangi as an idiomatic *String.
+// NSCalendarIdentifierDangi returns the string constant NSCalendarIdentifierDangi.
 func NSCalendarIdentifierDangi() *String {
-	_r := raw.NSCalendarIdentifierDangi()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierDangi")))
 }
 
-// NSCalendarIdentifierVietnamese returns the Foundation string constant NSCalendarIdentifierVietnamese as an idiomatic *String.
+// NSCalendarIdentifierVietnamese returns the string constant NSCalendarIdentifierVietnamese.
 func NSCalendarIdentifierVietnamese() *String {
-	_r := raw.NSCalendarIdentifierVietnamese()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarIdentifierVietnamese")))
 }
 
-// NSCalendarDayChangedNotification returns the Foundation string constant NSCalendarDayChangedNotification as an idiomatic *String.
+// NSCalendarDayChangedNotification returns the string constant NSCalendarDayChangedNotification.
 func NSCalendarDayChangedNotification() *String {
-	_r := raw.NSCalendarDayChangedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCalendarDayChangedNotification")))
 }
 
-// NSInflectionConceptsKey returns the Foundation string constant NSInflectionConceptsKey as an idiomatic *String.
+// NSInflectionConceptsKey returns the string constant NSInflectionConceptsKey.
 func NSInflectionConceptsKey() *String {
-	_r := raw.NSInflectionConceptsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInflectionConceptsKey")))
 }
 
-// NSPresentationIntentAttributeName returns the Foundation string constant NSPresentationIntentAttributeName as an idiomatic *String.
+// NSPresentationIntentAttributeName returns the string constant NSPresentationIntentAttributeName.
 func NSPresentationIntentAttributeName() *String {
-	_r := raw.NSPresentationIntentAttributeName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSPresentationIntentAttributeName")))
 }
 
-// NSCurrentLocaleDidChangeNotification returns the Foundation string constant NSCurrentLocaleDidChangeNotification as an idiomatic *String.
+// NSCurrentLocaleDidChangeNotification returns the string constant NSCurrentLocaleDidChangeNotification.
 func NSCurrentLocaleDidChangeNotification() *String {
-	_r := raw.NSCurrentLocaleDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCurrentLocaleDidChangeNotification")))
 }
 
-// NSLocaleIdentifier returns the Foundation string constant NSLocaleIdentifier as an idiomatic *String.
+// NSLocaleIdentifier returns the string constant NSLocaleIdentifier.
 func NSLocaleIdentifier() *String {
-	_r := raw.NSLocaleIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleIdentifier")))
 }
 
-// NSLocaleLanguageCode returns the Foundation string constant NSLocaleLanguageCode as an idiomatic *String.
+// NSLocaleLanguageCode returns the string constant NSLocaleLanguageCode.
 func NSLocaleLanguageCode() *String {
-	_r := raw.NSLocaleLanguageCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleLanguageCode")))
 }
 
-// NSLocaleCountryCode returns the Foundation string constant NSLocaleCountryCode as an idiomatic *String.
+// NSLocaleCountryCode returns the string constant NSLocaleCountryCode.
 func NSLocaleCountryCode() *String {
-	_r := raw.NSLocaleCountryCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleCountryCode")))
 }
 
-// NSLocaleScriptCode returns the Foundation string constant NSLocaleScriptCode as an idiomatic *String.
+// NSLocaleScriptCode returns the string constant NSLocaleScriptCode.
 func NSLocaleScriptCode() *String {
-	_r := raw.NSLocaleScriptCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleScriptCode")))
 }
 
-// NSLocaleVariantCode returns the Foundation string constant NSLocaleVariantCode as an idiomatic *String.
+// NSLocaleVariantCode returns the string constant NSLocaleVariantCode.
 func NSLocaleVariantCode() *String {
-	_r := raw.NSLocaleVariantCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleVariantCode")))
 }
 
-// NSLocaleExemplarCharacterSet returns the Foundation string constant NSLocaleExemplarCharacterSet as an idiomatic *String.
+// NSLocaleExemplarCharacterSet returns the string constant NSLocaleExemplarCharacterSet.
 func NSLocaleExemplarCharacterSet() *String {
-	_r := raw.NSLocaleExemplarCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleExemplarCharacterSet")))
 }
 
-// NSLocaleCalendar returns the Foundation string constant NSLocaleCalendar as an idiomatic *String.
-func NSLocaleCalendar() *String {
-	_r := raw.NSLocaleCalendar()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSLocaleCalendar returns the string constant NSLocaleCalendar.
+func NSLocaleCalendar() *String { return StringFromID(purego.CFConstant(_symbol("NSLocaleCalendar"))) }
 
-// NSLocaleCollationIdentifier returns the Foundation string constant NSLocaleCollationIdentifier as an idiomatic *String.
+// NSLocaleCollationIdentifier returns the string constant NSLocaleCollationIdentifier.
 func NSLocaleCollationIdentifier() *String {
-	_r := raw.NSLocaleCollationIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleCollationIdentifier")))
 }
 
-// NSLocaleUsesMetricSystem returns the Foundation string constant NSLocaleUsesMetricSystem as an idiomatic *String.
+// NSLocaleUsesMetricSystem returns the string constant NSLocaleUsesMetricSystem.
 func NSLocaleUsesMetricSystem() *String {
-	_r := raw.NSLocaleUsesMetricSystem()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleUsesMetricSystem")))
 }
 
-// NSLocaleMeasurementSystem returns the Foundation string constant NSLocaleMeasurementSystem as an idiomatic *String.
+// NSLocaleMeasurementSystem returns the string constant NSLocaleMeasurementSystem.
 func NSLocaleMeasurementSystem() *String {
-	_r := raw.NSLocaleMeasurementSystem()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleMeasurementSystem")))
 }
 
-// NSLocaleDecimalSeparator returns the Foundation string constant NSLocaleDecimalSeparator as an idiomatic *String.
+// NSLocaleDecimalSeparator returns the string constant NSLocaleDecimalSeparator.
 func NSLocaleDecimalSeparator() *String {
-	_r := raw.NSLocaleDecimalSeparator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleDecimalSeparator")))
 }
 
-// NSLocaleGroupingSeparator returns the Foundation string constant NSLocaleGroupingSeparator as an idiomatic *String.
+// NSLocaleGroupingSeparator returns the string constant NSLocaleGroupingSeparator.
 func NSLocaleGroupingSeparator() *String {
-	_r := raw.NSLocaleGroupingSeparator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleGroupingSeparator")))
 }
 
-// NSLocaleCurrencySymbol returns the Foundation string constant NSLocaleCurrencySymbol as an idiomatic *String.
+// NSLocaleCurrencySymbol returns the string constant NSLocaleCurrencySymbol.
 func NSLocaleCurrencySymbol() *String {
-	_r := raw.NSLocaleCurrencySymbol()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleCurrencySymbol")))
 }
 
-// NSLocaleCurrencyCode returns the Foundation string constant NSLocaleCurrencyCode as an idiomatic *String.
+// NSLocaleCurrencyCode returns the string constant NSLocaleCurrencyCode.
 func NSLocaleCurrencyCode() *String {
-	_r := raw.NSLocaleCurrencyCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleCurrencyCode")))
 }
 
-// NSLocaleCollatorIdentifier returns the Foundation string constant NSLocaleCollatorIdentifier as an idiomatic *String.
+// NSLocaleCollatorIdentifier returns the string constant NSLocaleCollatorIdentifier.
 func NSLocaleCollatorIdentifier() *String {
-	_r := raw.NSLocaleCollatorIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleCollatorIdentifier")))
 }
 
-// NSLocaleQuotationBeginDelimiterKey returns the Foundation string constant NSLocaleQuotationBeginDelimiterKey as an idiomatic *String.
+// NSLocaleQuotationBeginDelimiterKey returns the string constant NSLocaleQuotationBeginDelimiterKey.
 func NSLocaleQuotationBeginDelimiterKey() *String {
-	_r := raw.NSLocaleQuotationBeginDelimiterKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleQuotationBeginDelimiterKey")))
 }
 
-// NSLocaleQuotationEndDelimiterKey returns the Foundation string constant NSLocaleQuotationEndDelimiterKey as an idiomatic *String.
+// NSLocaleQuotationEndDelimiterKey returns the string constant NSLocaleQuotationEndDelimiterKey.
 func NSLocaleQuotationEndDelimiterKey() *String {
-	_r := raw.NSLocaleQuotationEndDelimiterKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleQuotationEndDelimiterKey")))
 }
 
-// NSLocaleAlternateQuotationBeginDelimiterKey returns the Foundation string constant NSLocaleAlternateQuotationBeginDelimiterKey as an idiomatic *String.
+// NSLocaleAlternateQuotationBeginDelimiterKey returns the string constant NSLocaleAlternateQuotationBeginDelimiterKey.
 func NSLocaleAlternateQuotationBeginDelimiterKey() *String {
-	_r := raw.NSLocaleAlternateQuotationBeginDelimiterKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleAlternateQuotationBeginDelimiterKey")))
 }
 
-// NSLocaleAlternateQuotationEndDelimiterKey returns the Foundation string constant NSLocaleAlternateQuotationEndDelimiterKey as an idiomatic *String.
+// NSLocaleAlternateQuotationEndDelimiterKey returns the string constant NSLocaleAlternateQuotationEndDelimiterKey.
 func NSLocaleAlternateQuotationEndDelimiterKey() *String {
-	_r := raw.NSLocaleAlternateQuotationEndDelimiterKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocaleAlternateQuotationEndDelimiterKey")))
 }
 
-// NSGenericException returns the Foundation string constant NSGenericException as an idiomatic *String.
+// NSGenericException returns the string constant NSGenericException.
 func NSGenericException() *String {
-	_r := raw.NSGenericException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSGenericException")))
 }
 
-// NSRangeException returns the Foundation string constant NSRangeException as an idiomatic *String.
-func NSRangeException() *String {
-	_r := raw.NSRangeException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSRangeException returns the string constant NSRangeException.
+func NSRangeException() *String { return StringFromID(purego.CFConstant(_symbol("NSRangeException"))) }
 
-// NSInvalidArgumentException returns the Foundation string constant NSInvalidArgumentException as an idiomatic *String.
+// NSInvalidArgumentException returns the string constant NSInvalidArgumentException.
 func NSInvalidArgumentException() *String {
-	_r := raw.NSInvalidArgumentException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvalidArgumentException")))
 }
 
-// NSInternalInconsistencyException returns the Foundation string constant NSInternalInconsistencyException as an idiomatic *String.
+// NSInternalInconsistencyException returns the string constant NSInternalInconsistencyException.
 func NSInternalInconsistencyException() *String {
-	_r := raw.NSInternalInconsistencyException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInternalInconsistencyException")))
 }
 
-// NSMallocException returns the Foundation string constant NSMallocException as an idiomatic *String.
+// NSMallocException returns the string constant NSMallocException.
 func NSMallocException() *String {
-	_r := raw.NSMallocException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMallocException")))
 }
 
-// NSObjectInaccessibleException returns the Foundation string constant NSObjectInaccessibleException as an idiomatic *String.
+// NSObjectInaccessibleException returns the string constant NSObjectInaccessibleException.
 func NSObjectInaccessibleException() *String {
-	_r := raw.NSObjectInaccessibleException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSObjectInaccessibleException")))
 }
 
-// NSObjectNotAvailableException returns the Foundation string constant NSObjectNotAvailableException as an idiomatic *String.
+// NSObjectNotAvailableException returns the string constant NSObjectNotAvailableException.
 func NSObjectNotAvailableException() *String {
-	_r := raw.NSObjectNotAvailableException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSObjectNotAvailableException")))
 }
 
-// NSDestinationInvalidException returns the Foundation string constant NSDestinationInvalidException as an idiomatic *String.
+// NSDestinationInvalidException returns the string constant NSDestinationInvalidException.
 func NSDestinationInvalidException() *String {
-	_r := raw.NSDestinationInvalidException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDestinationInvalidException")))
 }
 
-// NSPortTimeoutException returns the Foundation string constant NSPortTimeoutException as an idiomatic *String.
+// NSPortTimeoutException returns the string constant NSPortTimeoutException.
 func NSPortTimeoutException() *String {
-	_r := raw.NSPortTimeoutException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSPortTimeoutException")))
 }
 
-// NSInvalidSendPortException returns the Foundation string constant NSInvalidSendPortException as an idiomatic *String.
+// NSInvalidSendPortException returns the string constant NSInvalidSendPortException.
 func NSInvalidSendPortException() *String {
-	_r := raw.NSInvalidSendPortException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvalidSendPortException")))
 }
 
-// NSInvalidReceivePortException returns the Foundation string constant NSInvalidReceivePortException as an idiomatic *String.
+// NSInvalidReceivePortException returns the string constant NSInvalidReceivePortException.
 func NSInvalidReceivePortException() *String {
-	_r := raw.NSInvalidReceivePortException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvalidReceivePortException")))
 }
 
-// NSPortSendException returns the Foundation string constant NSPortSendException as an idiomatic *String.
+// NSPortSendException returns the string constant NSPortSendException.
 func NSPortSendException() *String {
-	_r := raw.NSPortSendException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSPortSendException")))
 }
 
-// NSPortReceiveException returns the Foundation string constant NSPortReceiveException as an idiomatic *String.
+// NSPortReceiveException returns the string constant NSPortReceiveException.
 func NSPortReceiveException() *String {
-	_r := raw.NSPortReceiveException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSPortReceiveException")))
 }
 
-// NSOldStyleException returns the Foundation string constant NSOldStyleException as an idiomatic *String.
+// NSOldStyleException returns the string constant NSOldStyleException.
 func NSOldStyleException() *String {
-	_r := raw.NSOldStyleException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSOldStyleException")))
 }
 
-// NSInconsistentArchiveException returns the Foundation string constant NSInconsistentArchiveException as an idiomatic *String.
+// NSInconsistentArchiveException returns the string constant NSInconsistentArchiveException.
 func NSInconsistentArchiveException() *String {
-	_r := raw.NSInconsistentArchiveException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInconsistentArchiveException")))
 }
 
-// NSDecimalNumberExactnessException returns the Foundation string constant NSDecimalNumberExactnessException as an idiomatic *String.
+// NSDecimalNumberExactnessException returns the string constant NSDecimalNumberExactnessException.
 func NSDecimalNumberExactnessException() *String {
-	_r := raw.NSDecimalNumberExactnessException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDecimalNumberExactnessException")))
 }
 
-// NSDecimalNumberOverflowException returns the Foundation string constant NSDecimalNumberOverflowException as an idiomatic *String.
+// NSDecimalNumberOverflowException returns the string constant NSDecimalNumberOverflowException.
 func NSDecimalNumberOverflowException() *String {
-	_r := raw.NSDecimalNumberOverflowException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDecimalNumberOverflowException")))
 }
 
-// NSDecimalNumberUnderflowException returns the Foundation string constant NSDecimalNumberUnderflowException as an idiomatic *String.
+// NSDecimalNumberUnderflowException returns the string constant NSDecimalNumberUnderflowException.
 func NSDecimalNumberUnderflowException() *String {
-	_r := raw.NSDecimalNumberUnderflowException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDecimalNumberUnderflowException")))
 }
 
-// NSDecimalNumberDivideByZeroException returns the Foundation string constant NSDecimalNumberDivideByZeroException as an idiomatic *String.
+// NSDecimalNumberDivideByZeroException returns the string constant NSDecimalNumberDivideByZeroException.
 func NSDecimalNumberDivideByZeroException() *String {
-	_r := raw.NSDecimalNumberDivideByZeroException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDecimalNumberDivideByZeroException")))
 }
 
-// NSCocoaErrorDomain returns the Foundation string constant NSCocoaErrorDomain as an idiomatic *String.
+// NSCocoaErrorDomain returns the string constant NSCocoaErrorDomain.
 func NSCocoaErrorDomain() *String {
-	_r := raw.NSCocoaErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCocoaErrorDomain")))
 }
 
-// NSPOSIXErrorDomain returns the Foundation string constant NSPOSIXErrorDomain as an idiomatic *String.
+// NSPOSIXErrorDomain returns the string constant NSPOSIXErrorDomain.
 func NSPOSIXErrorDomain() *String {
-	_r := raw.NSPOSIXErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSPOSIXErrorDomain")))
 }
 
-// NSOSStatusErrorDomain returns the Foundation string constant NSOSStatusErrorDomain as an idiomatic *String.
+// NSOSStatusErrorDomain returns the string constant NSOSStatusErrorDomain.
 func NSOSStatusErrorDomain() *String {
-	_r := raw.NSOSStatusErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSOSStatusErrorDomain")))
 }
 
-// NSMachErrorDomain returns the Foundation string constant NSMachErrorDomain as an idiomatic *String.
+// NSMachErrorDomain returns the string constant NSMachErrorDomain.
 func NSMachErrorDomain() *String {
-	_r := raw.NSMachErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMachErrorDomain")))
 }
 
-// NSUnderlyingErrorKey returns the Foundation string constant NSUnderlyingErrorKey as an idiomatic *String.
+// NSUnderlyingErrorKey returns the string constant NSUnderlyingErrorKey.
 func NSUnderlyingErrorKey() *String {
-	_r := raw.NSUnderlyingErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUnderlyingErrorKey")))
 }
 
-// NSMultipleUnderlyingErrorsKey returns the Foundation string constant NSMultipleUnderlyingErrorsKey as an idiomatic *String.
+// NSMultipleUnderlyingErrorsKey returns the string constant NSMultipleUnderlyingErrorsKey.
 func NSMultipleUnderlyingErrorsKey() *String {
-	_r := raw.NSMultipleUnderlyingErrorsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMultipleUnderlyingErrorsKey")))
 }
 
-// NSLocalizedDescriptionKey returns the Foundation string constant NSLocalizedDescriptionKey as an idiomatic *String.
+// NSLocalizedDescriptionKey returns the string constant NSLocalizedDescriptionKey.
 func NSLocalizedDescriptionKey() *String {
-	_r := raw.NSLocalizedDescriptionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocalizedDescriptionKey")))
 }
 
-// NSLocalizedFailureReasonErrorKey returns the Foundation string constant NSLocalizedFailureReasonErrorKey as an idiomatic *String.
+// NSLocalizedFailureReasonErrorKey returns the string constant NSLocalizedFailureReasonErrorKey.
 func NSLocalizedFailureReasonErrorKey() *String {
-	_r := raw.NSLocalizedFailureReasonErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocalizedFailureReasonErrorKey")))
 }
 
-// NSLocalizedRecoverySuggestionErrorKey returns the Foundation string constant NSLocalizedRecoverySuggestionErrorKey as an idiomatic *String.
+// NSLocalizedRecoverySuggestionErrorKey returns the string constant NSLocalizedRecoverySuggestionErrorKey.
 func NSLocalizedRecoverySuggestionErrorKey() *String {
-	_r := raw.NSLocalizedRecoverySuggestionErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocalizedRecoverySuggestionErrorKey")))
 }
 
-// NSLocalizedRecoveryOptionsErrorKey returns the Foundation string constant NSLocalizedRecoveryOptionsErrorKey as an idiomatic *String.
+// NSLocalizedRecoveryOptionsErrorKey returns the string constant NSLocalizedRecoveryOptionsErrorKey.
 func NSLocalizedRecoveryOptionsErrorKey() *String {
-	_r := raw.NSLocalizedRecoveryOptionsErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocalizedRecoveryOptionsErrorKey")))
 }
 
-// NSRecoveryAttempterErrorKey returns the Foundation string constant NSRecoveryAttempterErrorKey as an idiomatic *String.
+// NSRecoveryAttempterErrorKey returns the string constant NSRecoveryAttempterErrorKey.
 func NSRecoveryAttempterErrorKey() *String {
-	_r := raw.NSRecoveryAttempterErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSRecoveryAttempterErrorKey")))
 }
 
-// NSHelpAnchorErrorKey returns the Foundation string constant NSHelpAnchorErrorKey as an idiomatic *String.
+// NSHelpAnchorErrorKey returns the string constant NSHelpAnchorErrorKey.
 func NSHelpAnchorErrorKey() *String {
-	_r := raw.NSHelpAnchorErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHelpAnchorErrorKey")))
 }
 
-// NSDebugDescriptionErrorKey returns the Foundation string constant NSDebugDescriptionErrorKey as an idiomatic *String.
+// NSDebugDescriptionErrorKey returns the string constant NSDebugDescriptionErrorKey.
 func NSDebugDescriptionErrorKey() *String {
-	_r := raw.NSDebugDescriptionErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDebugDescriptionErrorKey")))
 }
 
-// NSLocalizedFailureErrorKey returns the Foundation string constant NSLocalizedFailureErrorKey as an idiomatic *String.
+// NSLocalizedFailureErrorKey returns the string constant NSLocalizedFailureErrorKey.
 func NSLocalizedFailureErrorKey() *String {
-	_r := raw.NSLocalizedFailureErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocalizedFailureErrorKey")))
 }
 
-// NSStringEncodingErrorKey returns the Foundation string constant NSStringEncodingErrorKey as an idiomatic *String.
+// NSStringEncodingErrorKey returns the string constant NSStringEncodingErrorKey.
 func NSStringEncodingErrorKey() *String {
-	_r := raw.NSStringEncodingErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStringEncodingErrorKey")))
 }
 
-// NSURLErrorKey returns the Foundation string constant NSURLErrorKey as an idiomatic *String.
-func NSURLErrorKey() *String {
-	_r := raw.NSURLErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLErrorKey returns the string constant NSURLErrorKey.
+func NSURLErrorKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLErrorKey"))) }
 
-// NSFilePathErrorKey returns the Foundation string constant NSFilePathErrorKey as an idiomatic *String.
+// NSFilePathErrorKey returns the string constant NSFilePathErrorKey.
 func NSFilePathErrorKey() *String {
-	_r := raw.NSFilePathErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFilePathErrorKey")))
 }
 
-// NSDefaultRunLoopMode returns the Foundation string constant NSDefaultRunLoopMode as an idiomatic *String.
+// NSDefaultRunLoopMode returns the string constant NSDefaultRunLoopMode.
 func NSDefaultRunLoopMode() *String {
-	_r := raw.NSDefaultRunLoopMode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDefaultRunLoopMode")))
 }
 
-// NSRunLoopCommonModes returns the Foundation string constant NSRunLoopCommonModes as an idiomatic *String.
+// NSRunLoopCommonModes returns the string constant NSRunLoopCommonModes.
 func NSRunLoopCommonModes() *String {
-	_r := raw.NSRunLoopCommonModes()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSRunLoopCommonModes")))
 }
 
-// NSFileHandleOperationException returns the Foundation string constant NSFileHandleOperationException as an idiomatic *String.
+// NSFileHandleOperationException returns the string constant NSFileHandleOperationException.
 func NSFileHandleOperationException() *String {
-	_r := raw.NSFileHandleOperationException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleOperationException")))
 }
 
-// NSFileHandleReadCompletionNotification returns the Foundation string constant NSFileHandleReadCompletionNotification as an idiomatic *String.
+// NSFileHandleReadCompletionNotification returns the string constant NSFileHandleReadCompletionNotification.
 func NSFileHandleReadCompletionNotification() *String {
-	_r := raw.NSFileHandleReadCompletionNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleReadCompletionNotification")))
 }
 
-// NSFileHandleReadToEndOfFileCompletionNotification returns the Foundation string constant NSFileHandleReadToEndOfFileCompletionNotification as an idiomatic *String.
+// NSFileHandleReadToEndOfFileCompletionNotification returns the string constant NSFileHandleReadToEndOfFileCompletionNotification.
 func NSFileHandleReadToEndOfFileCompletionNotification() *String {
-	_r := raw.NSFileHandleReadToEndOfFileCompletionNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleReadToEndOfFileCompletionNotification")))
 }
 
-// NSFileHandleConnectionAcceptedNotification returns the Foundation string constant NSFileHandleConnectionAcceptedNotification as an idiomatic *String.
+// NSFileHandleConnectionAcceptedNotification returns the string constant NSFileHandleConnectionAcceptedNotification.
 func NSFileHandleConnectionAcceptedNotification() *String {
-	_r := raw.NSFileHandleConnectionAcceptedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleConnectionAcceptedNotification")))
 }
 
-// NSFileHandleDataAvailableNotification returns the Foundation string constant NSFileHandleDataAvailableNotification as an idiomatic *String.
+// NSFileHandleDataAvailableNotification returns the string constant NSFileHandleDataAvailableNotification.
 func NSFileHandleDataAvailableNotification() *String {
-	_r := raw.NSFileHandleDataAvailableNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleDataAvailableNotification")))
 }
 
-// NSURLKeysOfUnsetValuesKey returns the Foundation string constant NSURLKeysOfUnsetValuesKey as an idiomatic *String.
+// NSURLKeysOfUnsetValuesKey returns the string constant NSURLKeysOfUnsetValuesKey.
 func NSURLKeysOfUnsetValuesKey() *String {
-	_r := raw.NSURLKeysOfUnsetValuesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLKeysOfUnsetValuesKey")))
 }
 
-// NSURLNameKey returns the Foundation string constant NSURLNameKey as an idiomatic *String.
-func NSURLNameKey() *String {
-	_r := raw.NSURLNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLNameKey returns the string constant NSURLNameKey.
+func NSURLNameKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLNameKey"))) }
 
-// NSURLLocalizedNameKey returns the Foundation string constant NSURLLocalizedNameKey as an idiomatic *String.
+// NSURLLocalizedNameKey returns the string constant NSURLLocalizedNameKey.
 func NSURLLocalizedNameKey() *String {
-	_r := raw.NSURLLocalizedNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLLocalizedNameKey")))
 }
 
-// NSURLIsRegularFileKey returns the Foundation string constant NSURLIsRegularFileKey as an idiomatic *String.
+// NSURLIsRegularFileKey returns the string constant NSURLIsRegularFileKey.
 func NSURLIsRegularFileKey() *String {
-	_r := raw.NSURLIsRegularFileKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsRegularFileKey")))
 }
 
-// NSURLIsDirectoryKey returns the Foundation string constant NSURLIsDirectoryKey as an idiomatic *String.
+// NSURLIsDirectoryKey returns the string constant NSURLIsDirectoryKey.
 func NSURLIsDirectoryKey() *String {
-	_r := raw.NSURLIsDirectoryKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsDirectoryKey")))
 }
 
-// NSURLIsSymbolicLinkKey returns the Foundation string constant NSURLIsSymbolicLinkKey as an idiomatic *String.
+// NSURLIsSymbolicLinkKey returns the string constant NSURLIsSymbolicLinkKey.
 func NSURLIsSymbolicLinkKey() *String {
-	_r := raw.NSURLIsSymbolicLinkKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsSymbolicLinkKey")))
 }
 
-// NSURLIsVolumeKey returns the Foundation string constant NSURLIsVolumeKey as an idiomatic *String.
-func NSURLIsVolumeKey() *String {
-	_r := raw.NSURLIsVolumeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLIsVolumeKey returns the string constant NSURLIsVolumeKey.
+func NSURLIsVolumeKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLIsVolumeKey"))) }
 
-// NSURLIsPackageKey returns the Foundation string constant NSURLIsPackageKey as an idiomatic *String.
+// NSURLIsPackageKey returns the string constant NSURLIsPackageKey.
 func NSURLIsPackageKey() *String {
-	_r := raw.NSURLIsPackageKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsPackageKey")))
 }
 
-// NSURLIsApplicationKey returns the Foundation string constant NSURLIsApplicationKey as an idiomatic *String.
+// NSURLIsApplicationKey returns the string constant NSURLIsApplicationKey.
 func NSURLIsApplicationKey() *String {
-	_r := raw.NSURLIsApplicationKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsApplicationKey")))
 }
 
-// NSURLIsSystemImmutableKey returns the Foundation string constant NSURLIsSystemImmutableKey as an idiomatic *String.
+// NSURLIsSystemImmutableKey returns the string constant NSURLIsSystemImmutableKey.
 func NSURLIsSystemImmutableKey() *String {
-	_r := raw.NSURLIsSystemImmutableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsSystemImmutableKey")))
 }
 
-// NSURLIsUserImmutableKey returns the Foundation string constant NSURLIsUserImmutableKey as an idiomatic *String.
+// NSURLIsUserImmutableKey returns the string constant NSURLIsUserImmutableKey.
 func NSURLIsUserImmutableKey() *String {
-	_r := raw.NSURLIsUserImmutableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsUserImmutableKey")))
 }
 
-// NSURLIsHiddenKey returns the Foundation string constant NSURLIsHiddenKey as an idiomatic *String.
-func NSURLIsHiddenKey() *String {
-	_r := raw.NSURLIsHiddenKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLIsHiddenKey returns the string constant NSURLIsHiddenKey.
+func NSURLIsHiddenKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLIsHiddenKey"))) }
 
-// NSURLHasHiddenExtensionKey returns the Foundation string constant NSURLHasHiddenExtensionKey as an idiomatic *String.
+// NSURLHasHiddenExtensionKey returns the string constant NSURLHasHiddenExtensionKey.
 func NSURLHasHiddenExtensionKey() *String {
-	_r := raw.NSURLHasHiddenExtensionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLHasHiddenExtensionKey")))
 }
 
-// NSURLCreationDateKey returns the Foundation string constant NSURLCreationDateKey as an idiomatic *String.
+// NSURLCreationDateKey returns the string constant NSURLCreationDateKey.
 func NSURLCreationDateKey() *String {
-	_r := raw.NSURLCreationDateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLCreationDateKey")))
 }
 
-// NSURLContentAccessDateKey returns the Foundation string constant NSURLContentAccessDateKey as an idiomatic *String.
+// NSURLContentAccessDateKey returns the string constant NSURLContentAccessDateKey.
 func NSURLContentAccessDateKey() *String {
-	_r := raw.NSURLContentAccessDateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLContentAccessDateKey")))
 }
 
-// NSURLContentModificationDateKey returns the Foundation string constant NSURLContentModificationDateKey as an idiomatic *String.
+// NSURLContentModificationDateKey returns the string constant NSURLContentModificationDateKey.
 func NSURLContentModificationDateKey() *String {
-	_r := raw.NSURLContentModificationDateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLContentModificationDateKey")))
 }
 
-// NSURLAttributeModificationDateKey returns the Foundation string constant NSURLAttributeModificationDateKey as an idiomatic *String.
+// NSURLAttributeModificationDateKey returns the string constant NSURLAttributeModificationDateKey.
 func NSURLAttributeModificationDateKey() *String {
-	_r := raw.NSURLAttributeModificationDateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLAttributeModificationDateKey")))
 }
 
-// NSURLLinkCountKey returns the Foundation string constant NSURLLinkCountKey as an idiomatic *String.
+// NSURLLinkCountKey returns the string constant NSURLLinkCountKey.
 func NSURLLinkCountKey() *String {
-	_r := raw.NSURLLinkCountKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLLinkCountKey")))
 }
 
-// NSURLParentDirectoryURLKey returns the Foundation string constant NSURLParentDirectoryURLKey as an idiomatic *String.
+// NSURLParentDirectoryURLKey returns the string constant NSURLParentDirectoryURLKey.
 func NSURLParentDirectoryURLKey() *String {
-	_r := raw.NSURLParentDirectoryURLKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLParentDirectoryURLKey")))
 }
 
-// NSURLVolumeURLKey returns the Foundation string constant NSURLVolumeURLKey as an idiomatic *String.
+// NSURLVolumeURLKey returns the string constant NSURLVolumeURLKey.
 func NSURLVolumeURLKey() *String {
-	_r := raw.NSURLVolumeURLKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeURLKey")))
 }
 
-// NSURLTypeIdentifierKey returns the Foundation string constant NSURLTypeIdentifierKey as an idiomatic *String.
+// NSURLTypeIdentifierKey returns the string constant NSURLTypeIdentifierKey.
 func NSURLTypeIdentifierKey() *String {
-	_r := raw.NSURLTypeIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLTypeIdentifierKey")))
 }
 
-// NSURLContentTypeKey returns the Foundation string constant NSURLContentTypeKey as an idiomatic *String.
+// NSURLContentTypeKey returns the string constant NSURLContentTypeKey.
 func NSURLContentTypeKey() *String {
-	_r := raw.NSURLContentTypeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLContentTypeKey")))
 }
 
-// NSURLLocalizedTypeDescriptionKey returns the Foundation string constant NSURLLocalizedTypeDescriptionKey as an idiomatic *String.
+// NSURLLocalizedTypeDescriptionKey returns the string constant NSURLLocalizedTypeDescriptionKey.
 func NSURLLocalizedTypeDescriptionKey() *String {
-	_r := raw.NSURLLocalizedTypeDescriptionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLLocalizedTypeDescriptionKey")))
 }
 
-// NSURLLabelNumberKey returns the Foundation string constant NSURLLabelNumberKey as an idiomatic *String.
+// NSURLLabelNumberKey returns the string constant NSURLLabelNumberKey.
 func NSURLLabelNumberKey() *String {
-	_r := raw.NSURLLabelNumberKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLLabelNumberKey")))
 }
 
-// NSURLLabelColorKey returns the Foundation string constant NSURLLabelColorKey as an idiomatic *String.
+// NSURLLabelColorKey returns the string constant NSURLLabelColorKey.
 func NSURLLabelColorKey() *String {
-	_r := raw.NSURLLabelColorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLLabelColorKey")))
 }
 
-// NSURLLocalizedLabelKey returns the Foundation string constant NSURLLocalizedLabelKey as an idiomatic *String.
+// NSURLLocalizedLabelKey returns the string constant NSURLLocalizedLabelKey.
 func NSURLLocalizedLabelKey() *String {
-	_r := raw.NSURLLocalizedLabelKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLLocalizedLabelKey")))
 }
 
-// NSURLEffectiveIconKey returns the Foundation string constant NSURLEffectiveIconKey as an idiomatic *String.
+// NSURLEffectiveIconKey returns the string constant NSURLEffectiveIconKey.
 func NSURLEffectiveIconKey() *String {
-	_r := raw.NSURLEffectiveIconKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLEffectiveIconKey")))
 }
 
-// NSURLCustomIconKey returns the Foundation string constant NSURLCustomIconKey as an idiomatic *String.
+// NSURLCustomIconKey returns the string constant NSURLCustomIconKey.
 func NSURLCustomIconKey() *String {
-	_r := raw.NSURLCustomIconKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLCustomIconKey")))
 }
 
-// NSURLFileResourceIdentifierKey returns the Foundation string constant NSURLFileResourceIdentifierKey as an idiomatic *String.
+// NSURLFileResourceIdentifierKey returns the string constant NSURLFileResourceIdentifierKey.
 func NSURLFileResourceIdentifierKey() *String {
-	_r := raw.NSURLFileResourceIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceIdentifierKey")))
 }
 
-// NSURLVolumeIdentifierKey returns the Foundation string constant NSURLVolumeIdentifierKey as an idiomatic *String.
+// NSURLVolumeIdentifierKey returns the string constant NSURLVolumeIdentifierKey.
 func NSURLVolumeIdentifierKey() *String {
-	_r := raw.NSURLVolumeIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIdentifierKey")))
 }
 
-// NSURLPreferredIOBlockSizeKey returns the Foundation string constant NSURLPreferredIOBlockSizeKey as an idiomatic *String.
+// NSURLPreferredIOBlockSizeKey returns the string constant NSURLPreferredIOBlockSizeKey.
 func NSURLPreferredIOBlockSizeKey() *String {
-	_r := raw.NSURLPreferredIOBlockSizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLPreferredIOBlockSizeKey")))
 }
 
-// NSURLIsReadableKey returns the Foundation string constant NSURLIsReadableKey as an idiomatic *String.
+// NSURLIsReadableKey returns the string constant NSURLIsReadableKey.
 func NSURLIsReadableKey() *String {
-	_r := raw.NSURLIsReadableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsReadableKey")))
 }
 
-// NSURLIsWritableKey returns the Foundation string constant NSURLIsWritableKey as an idiomatic *String.
+// NSURLIsWritableKey returns the string constant NSURLIsWritableKey.
 func NSURLIsWritableKey() *String {
-	_r := raw.NSURLIsWritableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsWritableKey")))
 }
 
-// NSURLIsExecutableKey returns the Foundation string constant NSURLIsExecutableKey as an idiomatic *String.
+// NSURLIsExecutableKey returns the string constant NSURLIsExecutableKey.
 func NSURLIsExecutableKey() *String {
-	_r := raw.NSURLIsExecutableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsExecutableKey")))
 }
 
-// NSURLFileSecurityKey returns the Foundation string constant NSURLFileSecurityKey as an idiomatic *String.
+// NSURLFileSecurityKey returns the string constant NSURLFileSecurityKey.
 func NSURLFileSecurityKey() *String {
-	_r := raw.NSURLFileSecurityKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileSecurityKey")))
 }
 
-// NSURLIsExcludedFromBackupKey returns the Foundation string constant NSURLIsExcludedFromBackupKey as an idiomatic *String.
+// NSURLIsExcludedFromBackupKey returns the string constant NSURLIsExcludedFromBackupKey.
 func NSURLIsExcludedFromBackupKey() *String {
-	_r := raw.NSURLIsExcludedFromBackupKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsExcludedFromBackupKey")))
 }
 
-// NSURLPathKey returns the Foundation string constant NSURLPathKey as an idiomatic *String.
-func NSURLPathKey() *String {
-	_r := raw.NSURLPathKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLPathKey returns the string constant NSURLPathKey.
+func NSURLPathKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLPathKey"))) }
 
-// NSURLCanonicalPathKey returns the Foundation string constant NSURLCanonicalPathKey as an idiomatic *String.
+// NSURLCanonicalPathKey returns the string constant NSURLCanonicalPathKey.
 func NSURLCanonicalPathKey() *String {
-	_r := raw.NSURLCanonicalPathKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLCanonicalPathKey")))
 }
 
-// NSURLIsMountTriggerKey returns the Foundation string constant NSURLIsMountTriggerKey as an idiomatic *String.
+// NSURLIsMountTriggerKey returns the string constant NSURLIsMountTriggerKey.
 func NSURLIsMountTriggerKey() *String {
-	_r := raw.NSURLIsMountTriggerKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsMountTriggerKey")))
 }
 
-// NSURLGenerationIdentifierKey returns the Foundation string constant NSURLGenerationIdentifierKey as an idiomatic *String.
+// NSURLGenerationIdentifierKey returns the string constant NSURLGenerationIdentifierKey.
 func NSURLGenerationIdentifierKey() *String {
-	_r := raw.NSURLGenerationIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLGenerationIdentifierKey")))
 }
 
-// NSURLDocumentIdentifierKey returns the Foundation string constant NSURLDocumentIdentifierKey as an idiomatic *String.
+// NSURLDocumentIdentifierKey returns the string constant NSURLDocumentIdentifierKey.
 func NSURLDocumentIdentifierKey() *String {
-	_r := raw.NSURLDocumentIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLDocumentIdentifierKey")))
 }
 
-// NSURLAddedToDirectoryDateKey returns the Foundation string constant NSURLAddedToDirectoryDateKey as an idiomatic *String.
+// NSURLAddedToDirectoryDateKey returns the string constant NSURLAddedToDirectoryDateKey.
 func NSURLAddedToDirectoryDateKey() *String {
-	_r := raw.NSURLAddedToDirectoryDateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLAddedToDirectoryDateKey")))
 }
 
-// NSURLFileResourceTypeKey returns the Foundation string constant NSURLFileResourceTypeKey as an idiomatic *String.
+// NSURLFileResourceTypeKey returns the string constant NSURLFileResourceTypeKey.
 func NSURLFileResourceTypeKey() *String {
-	_r := raw.NSURLFileResourceTypeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeKey")))
 }
 
-// NSURLFileIdentifierKey returns the Foundation string constant NSURLFileIdentifierKey as an idiomatic *String.
+// NSURLFileIdentifierKey returns the string constant NSURLFileIdentifierKey.
 func NSURLFileIdentifierKey() *String {
-	_r := raw.NSURLFileIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileIdentifierKey")))
 }
 
-// NSURLFileContentIdentifierKey returns the Foundation string constant NSURLFileContentIdentifierKey as an idiomatic *String.
+// NSURLFileContentIdentifierKey returns the string constant NSURLFileContentIdentifierKey.
 func NSURLFileContentIdentifierKey() *String {
-	_r := raw.NSURLFileContentIdentifierKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileContentIdentifierKey")))
 }
 
-// NSURLMayShareFileContentKey returns the Foundation string constant NSURLMayShareFileContentKey as an idiomatic *String.
+// NSURLMayShareFileContentKey returns the string constant NSURLMayShareFileContentKey.
 func NSURLMayShareFileContentKey() *String {
-	_r := raw.NSURLMayShareFileContentKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLMayShareFileContentKey")))
 }
 
-// NSURLMayHaveExtendedAttributesKey returns the Foundation string constant NSURLMayHaveExtendedAttributesKey as an idiomatic *String.
+// NSURLMayHaveExtendedAttributesKey returns the string constant NSURLMayHaveExtendedAttributesKey.
 func NSURLMayHaveExtendedAttributesKey() *String {
-	_r := raw.NSURLMayHaveExtendedAttributesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLMayHaveExtendedAttributesKey")))
 }
 
-// NSURLIsPurgeableKey returns the Foundation string constant NSURLIsPurgeableKey as an idiomatic *String.
+// NSURLIsPurgeableKey returns the string constant NSURLIsPurgeableKey.
 func NSURLIsPurgeableKey() *String {
-	_r := raw.NSURLIsPurgeableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsPurgeableKey")))
 }
 
-// NSURLIsSparseKey returns the Foundation string constant NSURLIsSparseKey as an idiomatic *String.
-func NSURLIsSparseKey() *String {
-	_r := raw.NSURLIsSparseKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLIsSparseKey returns the string constant NSURLIsSparseKey.
+func NSURLIsSparseKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLIsSparseKey"))) }
 
-// NSURLFileResourceTypeNamedPipe returns the Foundation string constant NSURLFileResourceTypeNamedPipe as an idiomatic *String.
+// NSURLFileResourceTypeNamedPipe returns the string constant NSURLFileResourceTypeNamedPipe.
 func NSURLFileResourceTypeNamedPipe() *String {
-	_r := raw.NSURLFileResourceTypeNamedPipe()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeNamedPipe")))
 }
 
-// NSURLFileResourceTypeCharacterSpecial returns the Foundation string constant NSURLFileResourceTypeCharacterSpecial as an idiomatic *String.
+// NSURLFileResourceTypeCharacterSpecial returns the string constant NSURLFileResourceTypeCharacterSpecial.
 func NSURLFileResourceTypeCharacterSpecial() *String {
-	_r := raw.NSURLFileResourceTypeCharacterSpecial()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeCharacterSpecial")))
 }
 
-// NSURLFileResourceTypeDirectory returns the Foundation string constant NSURLFileResourceTypeDirectory as an idiomatic *String.
+// NSURLFileResourceTypeDirectory returns the string constant NSURLFileResourceTypeDirectory.
 func NSURLFileResourceTypeDirectory() *String {
-	_r := raw.NSURLFileResourceTypeDirectory()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeDirectory")))
 }
 
-// NSURLFileResourceTypeBlockSpecial returns the Foundation string constant NSURLFileResourceTypeBlockSpecial as an idiomatic *String.
+// NSURLFileResourceTypeBlockSpecial returns the string constant NSURLFileResourceTypeBlockSpecial.
 func NSURLFileResourceTypeBlockSpecial() *String {
-	_r := raw.NSURLFileResourceTypeBlockSpecial()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeBlockSpecial")))
 }
 
-// NSURLFileResourceTypeRegular returns the Foundation string constant NSURLFileResourceTypeRegular as an idiomatic *String.
+// NSURLFileResourceTypeRegular returns the string constant NSURLFileResourceTypeRegular.
 func NSURLFileResourceTypeRegular() *String {
-	_r := raw.NSURLFileResourceTypeRegular()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeRegular")))
 }
 
-// NSURLFileResourceTypeSymbolicLink returns the Foundation string constant NSURLFileResourceTypeSymbolicLink as an idiomatic *String.
+// NSURLFileResourceTypeSymbolicLink returns the string constant NSURLFileResourceTypeSymbolicLink.
 func NSURLFileResourceTypeSymbolicLink() *String {
-	_r := raw.NSURLFileResourceTypeSymbolicLink()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeSymbolicLink")))
 }
 
-// NSURLFileResourceTypeSocket returns the Foundation string constant NSURLFileResourceTypeSocket as an idiomatic *String.
+// NSURLFileResourceTypeSocket returns the string constant NSURLFileResourceTypeSocket.
 func NSURLFileResourceTypeSocket() *String {
-	_r := raw.NSURLFileResourceTypeSocket()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeSocket")))
 }
 
-// NSURLFileResourceTypeUnknown returns the Foundation string constant NSURLFileResourceTypeUnknown as an idiomatic *String.
+// NSURLFileResourceTypeUnknown returns the string constant NSURLFileResourceTypeUnknown.
 func NSURLFileResourceTypeUnknown() *String {
-	_r := raw.NSURLFileResourceTypeUnknown()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileResourceTypeUnknown")))
 }
 
-// NSURLThumbnailDictionaryKey returns the Foundation string constant NSURLThumbnailDictionaryKey as an idiomatic *String.
+// NSURLThumbnailDictionaryKey returns the string constant NSURLThumbnailDictionaryKey.
 func NSURLThumbnailDictionaryKey() *String {
-	_r := raw.NSURLThumbnailDictionaryKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLThumbnailDictionaryKey")))
 }
 
-// NSThumbnail1024x1024SizeKey returns the Foundation string constant NSThumbnail1024x1024SizeKey as an idiomatic *String.
+// NSThumbnail1024x1024SizeKey returns the string constant NSThumbnail1024x1024SizeKey.
 func NSThumbnail1024x1024SizeKey() *String {
-	_r := raw.NSThumbnail1024x1024SizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSThumbnail1024x1024SizeKey")))
 }
 
-// NSURLFileSizeKey returns the Foundation string constant NSURLFileSizeKey as an idiomatic *String.
-func NSURLFileSizeKey() *String {
-	_r := raw.NSURLFileSizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLFileSizeKey returns the string constant NSURLFileSizeKey.
+func NSURLFileSizeKey() *String { return StringFromID(purego.CFConstant(_symbol("NSURLFileSizeKey"))) }
 
-// NSURLFileAllocatedSizeKey returns the Foundation string constant NSURLFileAllocatedSizeKey as an idiomatic *String.
+// NSURLFileAllocatedSizeKey returns the string constant NSURLFileAllocatedSizeKey.
 func NSURLFileAllocatedSizeKey() *String {
-	_r := raw.NSURLFileAllocatedSizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileAllocatedSizeKey")))
 }
 
-// NSURLTotalFileSizeKey returns the Foundation string constant NSURLTotalFileSizeKey as an idiomatic *String.
+// NSURLTotalFileSizeKey returns the string constant NSURLTotalFileSizeKey.
 func NSURLTotalFileSizeKey() *String {
-	_r := raw.NSURLTotalFileSizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLTotalFileSizeKey")))
 }
 
-// NSURLTotalFileAllocatedSizeKey returns the Foundation string constant NSURLTotalFileAllocatedSizeKey as an idiomatic *String.
+// NSURLTotalFileAllocatedSizeKey returns the string constant NSURLTotalFileAllocatedSizeKey.
 func NSURLTotalFileAllocatedSizeKey() *String {
-	_r := raw.NSURLTotalFileAllocatedSizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLTotalFileAllocatedSizeKey")))
 }
 
-// NSURLIsAliasFileKey returns the Foundation string constant NSURLIsAliasFileKey as an idiomatic *String.
+// NSURLIsAliasFileKey returns the string constant NSURLIsAliasFileKey.
 func NSURLIsAliasFileKey() *String {
-	_r := raw.NSURLIsAliasFileKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsAliasFileKey")))
 }
 
-// NSURLFileProtectionKey returns the Foundation string constant NSURLFileProtectionKey as an idiomatic *String.
+// NSURLFileProtectionKey returns the string constant NSURLFileProtectionKey.
 func NSURLFileProtectionKey() *String {
-	_r := raw.NSURLFileProtectionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileProtectionKey")))
 }
 
-// NSURLFileProtectionNone returns the Foundation string constant NSURLFileProtectionNone as an idiomatic *String.
+// NSURLFileProtectionNone returns the string constant NSURLFileProtectionNone.
 func NSURLFileProtectionNone() *String {
-	_r := raw.NSURLFileProtectionNone()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileProtectionNone")))
 }
 
-// NSURLFileProtectionComplete returns the Foundation string constant NSURLFileProtectionComplete as an idiomatic *String.
+// NSURLFileProtectionComplete returns the string constant NSURLFileProtectionComplete.
 func NSURLFileProtectionComplete() *String {
-	_r := raw.NSURLFileProtectionComplete()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileProtectionComplete")))
 }
 
-// NSURLFileProtectionCompleteUnlessOpen returns the Foundation string constant NSURLFileProtectionCompleteUnlessOpen as an idiomatic *String.
+// NSURLFileProtectionCompleteUnlessOpen returns the string constant NSURLFileProtectionCompleteUnlessOpen.
 func NSURLFileProtectionCompleteUnlessOpen() *String {
-	_r := raw.NSURLFileProtectionCompleteUnlessOpen()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileProtectionCompleteUnlessOpen")))
 }
 
-// NSURLFileProtectionCompleteUntilFirstUserAuthentication returns the Foundation string constant NSURLFileProtectionCompleteUntilFirstUserAuthentication as an idiomatic *String.
+// NSURLFileProtectionCompleteUntilFirstUserAuthentication returns the string constant NSURLFileProtectionCompleteUntilFirstUserAuthentication.
 func NSURLFileProtectionCompleteUntilFirstUserAuthentication() *String {
-	_r := raw.NSURLFileProtectionCompleteUntilFirstUserAuthentication()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLFileProtectionCompleteUntilFirstUserAuthentication")))
 }
 
-// NSURLDirectoryEntryCountKey returns the Foundation string constant NSURLDirectoryEntryCountKey as an idiomatic *String.
+// NSURLDirectoryEntryCountKey returns the string constant NSURLDirectoryEntryCountKey.
 func NSURLDirectoryEntryCountKey() *String {
-	_r := raw.NSURLDirectoryEntryCountKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLDirectoryEntryCountKey")))
 }
 
-// NSURLVolumeLocalizedFormatDescriptionKey returns the Foundation string constant NSURLVolumeLocalizedFormatDescriptionKey as an idiomatic *String.
+// NSURLVolumeLocalizedFormatDescriptionKey returns the string constant NSURLVolumeLocalizedFormatDescriptionKey.
 func NSURLVolumeLocalizedFormatDescriptionKey() *String {
-	_r := raw.NSURLVolumeLocalizedFormatDescriptionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeLocalizedFormatDescriptionKey")))
 }
 
-// NSURLVolumeTotalCapacityKey returns the Foundation string constant NSURLVolumeTotalCapacityKey as an idiomatic *String.
+// NSURLVolumeTotalCapacityKey returns the string constant NSURLVolumeTotalCapacityKey.
 func NSURLVolumeTotalCapacityKey() *String {
-	_r := raw.NSURLVolumeTotalCapacityKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeTotalCapacityKey")))
 }
 
-// NSURLVolumeAvailableCapacityKey returns the Foundation string constant NSURLVolumeAvailableCapacityKey as an idiomatic *String.
+// NSURLVolumeAvailableCapacityKey returns the string constant NSURLVolumeAvailableCapacityKey.
 func NSURLVolumeAvailableCapacityKey() *String {
-	_r := raw.NSURLVolumeAvailableCapacityKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeAvailableCapacityKey")))
 }
 
-// NSURLVolumeResourceCountKey returns the Foundation string constant NSURLVolumeResourceCountKey as an idiomatic *String.
+// NSURLVolumeResourceCountKey returns the string constant NSURLVolumeResourceCountKey.
 func NSURLVolumeResourceCountKey() *String {
-	_r := raw.NSURLVolumeResourceCountKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeResourceCountKey")))
 }
 
-// NSURLVolumeSupportsPersistentIDsKey returns the Foundation string constant NSURLVolumeSupportsPersistentIDsKey as an idiomatic *String.
+// NSURLVolumeSupportsPersistentIDsKey returns the string constant NSURLVolumeSupportsPersistentIDsKey.
 func NSURLVolumeSupportsPersistentIDsKey() *String {
-	_r := raw.NSURLVolumeSupportsPersistentIDsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsPersistentIDsKey")))
 }
 
-// NSURLVolumeSupportsSymbolicLinksKey returns the Foundation string constant NSURLVolumeSupportsSymbolicLinksKey as an idiomatic *String.
+// NSURLVolumeSupportsSymbolicLinksKey returns the string constant NSURLVolumeSupportsSymbolicLinksKey.
 func NSURLVolumeSupportsSymbolicLinksKey() *String {
-	_r := raw.NSURLVolumeSupportsSymbolicLinksKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsSymbolicLinksKey")))
 }
 
-// NSURLVolumeSupportsHardLinksKey returns the Foundation string constant NSURLVolumeSupportsHardLinksKey as an idiomatic *String.
+// NSURLVolumeSupportsHardLinksKey returns the string constant NSURLVolumeSupportsHardLinksKey.
 func NSURLVolumeSupportsHardLinksKey() *String {
-	_r := raw.NSURLVolumeSupportsHardLinksKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsHardLinksKey")))
 }
 
-// NSURLVolumeSupportsJournalingKey returns the Foundation string constant NSURLVolumeSupportsJournalingKey as an idiomatic *String.
+// NSURLVolumeSupportsJournalingKey returns the string constant NSURLVolumeSupportsJournalingKey.
 func NSURLVolumeSupportsJournalingKey() *String {
-	_r := raw.NSURLVolumeSupportsJournalingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsJournalingKey")))
 }
 
-// NSURLVolumeIsJournalingKey returns the Foundation string constant NSURLVolumeIsJournalingKey as an idiomatic *String.
+// NSURLVolumeIsJournalingKey returns the string constant NSURLVolumeIsJournalingKey.
 func NSURLVolumeIsJournalingKey() *String {
-	_r := raw.NSURLVolumeIsJournalingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsJournalingKey")))
 }
 
-// NSURLVolumeSupportsSparseFilesKey returns the Foundation string constant NSURLVolumeSupportsSparseFilesKey as an idiomatic *String.
+// NSURLVolumeSupportsSparseFilesKey returns the string constant NSURLVolumeSupportsSparseFilesKey.
 func NSURLVolumeSupportsSparseFilesKey() *String {
-	_r := raw.NSURLVolumeSupportsSparseFilesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsSparseFilesKey")))
 }
 
-// NSURLVolumeSupportsZeroRunsKey returns the Foundation string constant NSURLVolumeSupportsZeroRunsKey as an idiomatic *String.
+// NSURLVolumeSupportsZeroRunsKey returns the string constant NSURLVolumeSupportsZeroRunsKey.
 func NSURLVolumeSupportsZeroRunsKey() *String {
-	_r := raw.NSURLVolumeSupportsZeroRunsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsZeroRunsKey")))
 }
 
-// NSURLVolumeSupportsCaseSensitiveNamesKey returns the Foundation string constant NSURLVolumeSupportsCaseSensitiveNamesKey as an idiomatic *String.
+// NSURLVolumeSupportsCaseSensitiveNamesKey returns the string constant NSURLVolumeSupportsCaseSensitiveNamesKey.
 func NSURLVolumeSupportsCaseSensitiveNamesKey() *String {
-	_r := raw.NSURLVolumeSupportsCaseSensitiveNamesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsCaseSensitiveNamesKey")))
 }
 
-// NSURLVolumeSupportsCasePreservedNamesKey returns the Foundation string constant NSURLVolumeSupportsCasePreservedNamesKey as an idiomatic *String.
+// NSURLVolumeSupportsCasePreservedNamesKey returns the string constant NSURLVolumeSupportsCasePreservedNamesKey.
 func NSURLVolumeSupportsCasePreservedNamesKey() *String {
-	_r := raw.NSURLVolumeSupportsCasePreservedNamesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsCasePreservedNamesKey")))
 }
 
-// NSURLVolumeSupportsRootDirectoryDatesKey returns the Foundation string constant NSURLVolumeSupportsRootDirectoryDatesKey as an idiomatic *String.
+// NSURLVolumeSupportsRootDirectoryDatesKey returns the string constant NSURLVolumeSupportsRootDirectoryDatesKey.
 func NSURLVolumeSupportsRootDirectoryDatesKey() *String {
-	_r := raw.NSURLVolumeSupportsRootDirectoryDatesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsRootDirectoryDatesKey")))
 }
 
-// NSURLVolumeSupportsVolumeSizesKey returns the Foundation string constant NSURLVolumeSupportsVolumeSizesKey as an idiomatic *String.
+// NSURLVolumeSupportsVolumeSizesKey returns the string constant NSURLVolumeSupportsVolumeSizesKey.
 func NSURLVolumeSupportsVolumeSizesKey() *String {
-	_r := raw.NSURLVolumeSupportsVolumeSizesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsVolumeSizesKey")))
 }
 
-// NSURLVolumeSupportsRenamingKey returns the Foundation string constant NSURLVolumeSupportsRenamingKey as an idiomatic *String.
+// NSURLVolumeSupportsRenamingKey returns the string constant NSURLVolumeSupportsRenamingKey.
 func NSURLVolumeSupportsRenamingKey() *String {
-	_r := raw.NSURLVolumeSupportsRenamingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsRenamingKey")))
 }
 
-// NSURLVolumeSupportsAdvisoryFileLockingKey returns the Foundation string constant NSURLVolumeSupportsAdvisoryFileLockingKey as an idiomatic *String.
+// NSURLVolumeSupportsAdvisoryFileLockingKey returns the string constant NSURLVolumeSupportsAdvisoryFileLockingKey.
 func NSURLVolumeSupportsAdvisoryFileLockingKey() *String {
-	_r := raw.NSURLVolumeSupportsAdvisoryFileLockingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsAdvisoryFileLockingKey")))
 }
 
-// NSURLVolumeSupportsExtendedSecurityKey returns the Foundation string constant NSURLVolumeSupportsExtendedSecurityKey as an idiomatic *String.
+// NSURLVolumeSupportsExtendedSecurityKey returns the string constant NSURLVolumeSupportsExtendedSecurityKey.
 func NSURLVolumeSupportsExtendedSecurityKey() *String {
-	_r := raw.NSURLVolumeSupportsExtendedSecurityKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsExtendedSecurityKey")))
 }
 
-// NSURLVolumeIsBrowsableKey returns the Foundation string constant NSURLVolumeIsBrowsableKey as an idiomatic *String.
+// NSURLVolumeIsBrowsableKey returns the string constant NSURLVolumeIsBrowsableKey.
 func NSURLVolumeIsBrowsableKey() *String {
-	_r := raw.NSURLVolumeIsBrowsableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsBrowsableKey")))
 }
 
-// NSURLVolumeMaximumFileSizeKey returns the Foundation string constant NSURLVolumeMaximumFileSizeKey as an idiomatic *String.
+// NSURLVolumeMaximumFileSizeKey returns the string constant NSURLVolumeMaximumFileSizeKey.
 func NSURLVolumeMaximumFileSizeKey() *String {
-	_r := raw.NSURLVolumeMaximumFileSizeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeMaximumFileSizeKey")))
 }
 
-// NSURLVolumeIsEjectableKey returns the Foundation string constant NSURLVolumeIsEjectableKey as an idiomatic *String.
+// NSURLVolumeIsEjectableKey returns the string constant NSURLVolumeIsEjectableKey.
 func NSURLVolumeIsEjectableKey() *String {
-	_r := raw.NSURLVolumeIsEjectableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsEjectableKey")))
 }
 
-// NSURLVolumeIsRemovableKey returns the Foundation string constant NSURLVolumeIsRemovableKey as an idiomatic *String.
+// NSURLVolumeIsRemovableKey returns the string constant NSURLVolumeIsRemovableKey.
 func NSURLVolumeIsRemovableKey() *String {
-	_r := raw.NSURLVolumeIsRemovableKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsRemovableKey")))
 }
 
-// NSURLVolumeIsInternalKey returns the Foundation string constant NSURLVolumeIsInternalKey as an idiomatic *String.
+// NSURLVolumeIsInternalKey returns the string constant NSURLVolumeIsInternalKey.
 func NSURLVolumeIsInternalKey() *String {
-	_r := raw.NSURLVolumeIsInternalKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsInternalKey")))
 }
 
-// NSURLVolumeIsAutomountedKey returns the Foundation string constant NSURLVolumeIsAutomountedKey as an idiomatic *String.
+// NSURLVolumeIsAutomountedKey returns the string constant NSURLVolumeIsAutomountedKey.
 func NSURLVolumeIsAutomountedKey() *String {
-	_r := raw.NSURLVolumeIsAutomountedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsAutomountedKey")))
 }
 
-// NSURLVolumeIsLocalKey returns the Foundation string constant NSURLVolumeIsLocalKey as an idiomatic *String.
+// NSURLVolumeIsLocalKey returns the string constant NSURLVolumeIsLocalKey.
 func NSURLVolumeIsLocalKey() *String {
-	_r := raw.NSURLVolumeIsLocalKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsLocalKey")))
 }
 
-// NSURLVolumeIsReadOnlyKey returns the Foundation string constant NSURLVolumeIsReadOnlyKey as an idiomatic *String.
+// NSURLVolumeIsReadOnlyKey returns the string constant NSURLVolumeIsReadOnlyKey.
 func NSURLVolumeIsReadOnlyKey() *String {
-	_r := raw.NSURLVolumeIsReadOnlyKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsReadOnlyKey")))
 }
 
-// NSURLVolumeCreationDateKey returns the Foundation string constant NSURLVolumeCreationDateKey as an idiomatic *String.
+// NSURLVolumeCreationDateKey returns the string constant NSURLVolumeCreationDateKey.
 func NSURLVolumeCreationDateKey() *String {
-	_r := raw.NSURLVolumeCreationDateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeCreationDateKey")))
 }
 
-// NSURLVolumeURLForRemountingKey returns the Foundation string constant NSURLVolumeURLForRemountingKey as an idiomatic *String.
+// NSURLVolumeURLForRemountingKey returns the string constant NSURLVolumeURLForRemountingKey.
 func NSURLVolumeURLForRemountingKey() *String {
-	_r := raw.NSURLVolumeURLForRemountingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeURLForRemountingKey")))
 }
 
-// NSURLVolumeUUIDStringKey returns the Foundation string constant NSURLVolumeUUIDStringKey as an idiomatic *String.
+// NSURLVolumeUUIDStringKey returns the string constant NSURLVolumeUUIDStringKey.
 func NSURLVolumeUUIDStringKey() *String {
-	_r := raw.NSURLVolumeUUIDStringKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeUUIDStringKey")))
 }
 
-// NSURLVolumeNameKey returns the Foundation string constant NSURLVolumeNameKey as an idiomatic *String.
+// NSURLVolumeNameKey returns the string constant NSURLVolumeNameKey.
 func NSURLVolumeNameKey() *String {
-	_r := raw.NSURLVolumeNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeNameKey")))
 }
 
-// NSURLVolumeLocalizedNameKey returns the Foundation string constant NSURLVolumeLocalizedNameKey as an idiomatic *String.
+// NSURLVolumeLocalizedNameKey returns the string constant NSURLVolumeLocalizedNameKey.
 func NSURLVolumeLocalizedNameKey() *String {
-	_r := raw.NSURLVolumeLocalizedNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeLocalizedNameKey")))
 }
 
-// NSURLVolumeIsEncryptedKey returns the Foundation string constant NSURLVolumeIsEncryptedKey as an idiomatic *String.
+// NSURLVolumeIsEncryptedKey returns the string constant NSURLVolumeIsEncryptedKey.
 func NSURLVolumeIsEncryptedKey() *String {
-	_r := raw.NSURLVolumeIsEncryptedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsEncryptedKey")))
 }
 
-// NSURLVolumeIsRootFileSystemKey returns the Foundation string constant NSURLVolumeIsRootFileSystemKey as an idiomatic *String.
+// NSURLVolumeIsRootFileSystemKey returns the string constant NSURLVolumeIsRootFileSystemKey.
 func NSURLVolumeIsRootFileSystemKey() *String {
-	_r := raw.NSURLVolumeIsRootFileSystemKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeIsRootFileSystemKey")))
 }
 
-// NSURLVolumeSupportsCompressionKey returns the Foundation string constant NSURLVolumeSupportsCompressionKey as an idiomatic *String.
+// NSURLVolumeSupportsCompressionKey returns the string constant NSURLVolumeSupportsCompressionKey.
 func NSURLVolumeSupportsCompressionKey() *String {
-	_r := raw.NSURLVolumeSupportsCompressionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsCompressionKey")))
 }
 
-// NSURLVolumeSupportsFileCloningKey returns the Foundation string constant NSURLVolumeSupportsFileCloningKey as an idiomatic *String.
+// NSURLVolumeSupportsFileCloningKey returns the string constant NSURLVolumeSupportsFileCloningKey.
 func NSURLVolumeSupportsFileCloningKey() *String {
-	_r := raw.NSURLVolumeSupportsFileCloningKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsFileCloningKey")))
 }
 
-// NSURLVolumeSupportsSwapRenamingKey returns the Foundation string constant NSURLVolumeSupportsSwapRenamingKey as an idiomatic *String.
+// NSURLVolumeSupportsSwapRenamingKey returns the string constant NSURLVolumeSupportsSwapRenamingKey.
 func NSURLVolumeSupportsSwapRenamingKey() *String {
-	_r := raw.NSURLVolumeSupportsSwapRenamingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsSwapRenamingKey")))
 }
 
-// NSURLVolumeSupportsExclusiveRenamingKey returns the Foundation string constant NSURLVolumeSupportsExclusiveRenamingKey as an idiomatic *String.
+// NSURLVolumeSupportsExclusiveRenamingKey returns the string constant NSURLVolumeSupportsExclusiveRenamingKey.
 func NSURLVolumeSupportsExclusiveRenamingKey() *String {
-	_r := raw.NSURLVolumeSupportsExclusiveRenamingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsExclusiveRenamingKey")))
 }
 
-// NSURLVolumeSupportsImmutableFilesKey returns the Foundation string constant NSURLVolumeSupportsImmutableFilesKey as an idiomatic *String.
+// NSURLVolumeSupportsImmutableFilesKey returns the string constant NSURLVolumeSupportsImmutableFilesKey.
 func NSURLVolumeSupportsImmutableFilesKey() *String {
-	_r := raw.NSURLVolumeSupportsImmutableFilesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsImmutableFilesKey")))
 }
 
-// NSURLVolumeSupportsAccessPermissionsKey returns the Foundation string constant NSURLVolumeSupportsAccessPermissionsKey as an idiomatic *String.
+// NSURLVolumeSupportsAccessPermissionsKey returns the string constant NSURLVolumeSupportsAccessPermissionsKey.
 func NSURLVolumeSupportsAccessPermissionsKey() *String {
-	_r := raw.NSURLVolumeSupportsAccessPermissionsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsAccessPermissionsKey")))
 }
 
-// NSURLVolumeSupportsFileProtectionKey returns the Foundation string constant NSURLVolumeSupportsFileProtectionKey as an idiomatic *String.
+// NSURLVolumeSupportsFileProtectionKey returns the string constant NSURLVolumeSupportsFileProtectionKey.
 func NSURLVolumeSupportsFileProtectionKey() *String {
-	_r := raw.NSURLVolumeSupportsFileProtectionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSupportsFileProtectionKey")))
 }
 
-// NSURLVolumeAvailableCapacityForImportantUsageKey returns the Foundation string constant NSURLVolumeAvailableCapacityForImportantUsageKey as an idiomatic *String.
+// NSURLVolumeAvailableCapacityForImportantUsageKey returns the string constant NSURLVolumeAvailableCapacityForImportantUsageKey.
 func NSURLVolumeAvailableCapacityForImportantUsageKey() *String {
-	_r := raw.NSURLVolumeAvailableCapacityForImportantUsageKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeAvailableCapacityForImportantUsageKey")))
 }
 
-// NSURLVolumeAvailableCapacityForOpportunisticUsageKey returns the Foundation string constant NSURLVolumeAvailableCapacityForOpportunisticUsageKey as an idiomatic *String.
+// NSURLVolumeAvailableCapacityForOpportunisticUsageKey returns the string constant NSURLVolumeAvailableCapacityForOpportunisticUsageKey.
 func NSURLVolumeAvailableCapacityForOpportunisticUsageKey() *String {
-	_r := raw.NSURLVolumeAvailableCapacityForOpportunisticUsageKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeAvailableCapacityForOpportunisticUsageKey")))
 }
 
-// NSURLVolumeTypeNameKey returns the Foundation string constant NSURLVolumeTypeNameKey as an idiomatic *String.
+// NSURLVolumeTypeNameKey returns the string constant NSURLVolumeTypeNameKey.
 func NSURLVolumeTypeNameKey() *String {
-	_r := raw.NSURLVolumeTypeNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeTypeNameKey")))
 }
 
-// NSURLVolumeSubtypeKey returns the Foundation string constant NSURLVolumeSubtypeKey as an idiomatic *String.
+// NSURLVolumeSubtypeKey returns the string constant NSURLVolumeSubtypeKey.
 func NSURLVolumeSubtypeKey() *String {
-	_r := raw.NSURLVolumeSubtypeKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeSubtypeKey")))
 }
 
-// NSURLVolumeMountFromLocationKey returns the Foundation string constant NSURLVolumeMountFromLocationKey as an idiomatic *String.
+// NSURLVolumeMountFromLocationKey returns the string constant NSURLVolumeMountFromLocationKey.
 func NSURLVolumeMountFromLocationKey() *String {
-	_r := raw.NSURLVolumeMountFromLocationKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLVolumeMountFromLocationKey")))
 }
 
-// NSURLIsUbiquitousItemKey returns the Foundation string constant NSURLIsUbiquitousItemKey as an idiomatic *String.
+// NSURLIsUbiquitousItemKey returns the string constant NSURLIsUbiquitousItemKey.
 func NSURLIsUbiquitousItemKey() *String {
-	_r := raw.NSURLIsUbiquitousItemKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLIsUbiquitousItemKey")))
 }
 
-// NSURLUbiquitousItemHasUnresolvedConflictsKey returns the Foundation string constant NSURLUbiquitousItemHasUnresolvedConflictsKey as an idiomatic *String.
+// NSURLUbiquitousItemHasUnresolvedConflictsKey returns the string constant NSURLUbiquitousItemHasUnresolvedConflictsKey.
 func NSURLUbiquitousItemHasUnresolvedConflictsKey() *String {
-	_r := raw.NSURLUbiquitousItemHasUnresolvedConflictsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemHasUnresolvedConflictsKey")))
 }
 
-// NSURLUbiquitousItemIsDownloadedKey returns the Foundation string constant NSURLUbiquitousItemIsDownloadedKey as an idiomatic *String.
+// NSURLUbiquitousItemIsDownloadedKey returns the string constant NSURLUbiquitousItemIsDownloadedKey.
 func NSURLUbiquitousItemIsDownloadedKey() *String {
-	_r := raw.NSURLUbiquitousItemIsDownloadedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsDownloadedKey")))
 }
 
-// NSURLUbiquitousItemIsDownloadingKey returns the Foundation string constant NSURLUbiquitousItemIsDownloadingKey as an idiomatic *String.
+// NSURLUbiquitousItemIsDownloadingKey returns the string constant NSURLUbiquitousItemIsDownloadingKey.
 func NSURLUbiquitousItemIsDownloadingKey() *String {
-	_r := raw.NSURLUbiquitousItemIsDownloadingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsDownloadingKey")))
 }
 
-// NSURLUbiquitousItemIsUploadedKey returns the Foundation string constant NSURLUbiquitousItemIsUploadedKey as an idiomatic *String.
+// NSURLUbiquitousItemIsUploadedKey returns the string constant NSURLUbiquitousItemIsUploadedKey.
 func NSURLUbiquitousItemIsUploadedKey() *String {
-	_r := raw.NSURLUbiquitousItemIsUploadedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsUploadedKey")))
 }
 
-// NSURLUbiquitousItemIsUploadingKey returns the Foundation string constant NSURLUbiquitousItemIsUploadingKey as an idiomatic *String.
+// NSURLUbiquitousItemIsUploadingKey returns the string constant NSURLUbiquitousItemIsUploadingKey.
 func NSURLUbiquitousItemIsUploadingKey() *String {
-	_r := raw.NSURLUbiquitousItemIsUploadingKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsUploadingKey")))
 }
 
-// NSURLUbiquitousItemPercentDownloadedKey returns the Foundation string constant NSURLUbiquitousItemPercentDownloadedKey as an idiomatic *String.
+// NSURLUbiquitousItemPercentDownloadedKey returns the string constant NSURLUbiquitousItemPercentDownloadedKey.
 func NSURLUbiquitousItemPercentDownloadedKey() *String {
-	_r := raw.NSURLUbiquitousItemPercentDownloadedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemPercentDownloadedKey")))
 }
 
-// NSURLUbiquitousItemPercentUploadedKey returns the Foundation string constant NSURLUbiquitousItemPercentUploadedKey as an idiomatic *String.
+// NSURLUbiquitousItemPercentUploadedKey returns the string constant NSURLUbiquitousItemPercentUploadedKey.
 func NSURLUbiquitousItemPercentUploadedKey() *String {
-	_r := raw.NSURLUbiquitousItemPercentUploadedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemPercentUploadedKey")))
 }
 
-// NSURLUbiquitousItemDownloadingStatusKey returns the Foundation string constant NSURLUbiquitousItemDownloadingStatusKey as an idiomatic *String.
+// NSURLUbiquitousItemDownloadingStatusKey returns the string constant NSURLUbiquitousItemDownloadingStatusKey.
 func NSURLUbiquitousItemDownloadingStatusKey() *String {
-	_r := raw.NSURLUbiquitousItemDownloadingStatusKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemDownloadingStatusKey")))
 }
 
-// NSURLUbiquitousItemDownloadingErrorKey returns the Foundation string constant NSURLUbiquitousItemDownloadingErrorKey as an idiomatic *String.
+// NSURLUbiquitousItemDownloadingErrorKey returns the string constant NSURLUbiquitousItemDownloadingErrorKey.
 func NSURLUbiquitousItemDownloadingErrorKey() *String {
-	_r := raw.NSURLUbiquitousItemDownloadingErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemDownloadingErrorKey")))
 }
 
-// NSURLUbiquitousItemUploadingErrorKey returns the Foundation string constant NSURLUbiquitousItemUploadingErrorKey as an idiomatic *String.
+// NSURLUbiquitousItemUploadingErrorKey returns the string constant NSURLUbiquitousItemUploadingErrorKey.
 func NSURLUbiquitousItemUploadingErrorKey() *String {
-	_r := raw.NSURLUbiquitousItemUploadingErrorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemUploadingErrorKey")))
 }
 
-// NSURLUbiquitousItemDownloadRequestedKey returns the Foundation string constant NSURLUbiquitousItemDownloadRequestedKey as an idiomatic *String.
+// NSURLUbiquitousItemDownloadRequestedKey returns the string constant NSURLUbiquitousItemDownloadRequestedKey.
 func NSURLUbiquitousItemDownloadRequestedKey() *String {
-	_r := raw.NSURLUbiquitousItemDownloadRequestedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemDownloadRequestedKey")))
 }
 
-// NSURLUbiquitousItemContainerDisplayNameKey returns the Foundation string constant NSURLUbiquitousItemContainerDisplayNameKey as an idiomatic *String.
+// NSURLUbiquitousItemContainerDisplayNameKey returns the string constant NSURLUbiquitousItemContainerDisplayNameKey.
 func NSURLUbiquitousItemContainerDisplayNameKey() *String {
-	_r := raw.NSURLUbiquitousItemContainerDisplayNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemContainerDisplayNameKey")))
 }
 
-// NSURLUbiquitousItemIsExcludedFromSyncKey returns the Foundation string constant NSURLUbiquitousItemIsExcludedFromSyncKey as an idiomatic *String.
+// NSURLUbiquitousItemIsExcludedFromSyncKey returns the string constant NSURLUbiquitousItemIsExcludedFromSyncKey.
 func NSURLUbiquitousItemIsExcludedFromSyncKey() *String {
-	_r := raw.NSURLUbiquitousItemIsExcludedFromSyncKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsExcludedFromSyncKey")))
 }
 
-// NSURLUbiquitousItemIsSharedKey returns the Foundation string constant NSURLUbiquitousItemIsSharedKey as an idiomatic *String.
+// NSURLUbiquitousItemIsSharedKey returns the string constant NSURLUbiquitousItemIsSharedKey.
 func NSURLUbiquitousItemIsSharedKey() *String {
-	_r := raw.NSURLUbiquitousItemIsSharedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsSharedKey")))
 }
 
-// NSURLUbiquitousSharedItemCurrentUserRoleKey returns the Foundation string constant NSURLUbiquitousSharedItemCurrentUserRoleKey as an idiomatic *String.
+// NSURLUbiquitousSharedItemCurrentUserRoleKey returns the string constant NSURLUbiquitousSharedItemCurrentUserRoleKey.
 func NSURLUbiquitousSharedItemCurrentUserRoleKey() *String {
-	_r := raw.NSURLUbiquitousSharedItemCurrentUserRoleKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemCurrentUserRoleKey")))
 }
 
-// NSURLUbiquitousSharedItemCurrentUserPermissionsKey returns the Foundation string constant NSURLUbiquitousSharedItemCurrentUserPermissionsKey as an idiomatic *String.
+// NSURLUbiquitousSharedItemCurrentUserPermissionsKey returns the string constant NSURLUbiquitousSharedItemCurrentUserPermissionsKey.
 func NSURLUbiquitousSharedItemCurrentUserPermissionsKey() *String {
-	_r := raw.NSURLUbiquitousSharedItemCurrentUserPermissionsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemCurrentUserPermissionsKey")))
 }
 
-// NSURLUbiquitousSharedItemOwnerNameComponentsKey returns the Foundation string constant NSURLUbiquitousSharedItemOwnerNameComponentsKey as an idiomatic *String.
+// NSURLUbiquitousSharedItemOwnerNameComponentsKey returns the string constant NSURLUbiquitousSharedItemOwnerNameComponentsKey.
 func NSURLUbiquitousSharedItemOwnerNameComponentsKey() *String {
-	_r := raw.NSURLUbiquitousSharedItemOwnerNameComponentsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemOwnerNameComponentsKey")))
 }
 
-// NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey returns the Foundation string constant NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey as an idiomatic *String.
+// NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey returns the string constant NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey.
 func NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey() *String {
-	_r := raw.NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey")))
 }
 
-// NSURLUbiquitousItemDownloadingStatusNotDownloaded returns the Foundation string constant NSURLUbiquitousItemDownloadingStatusNotDownloaded as an idiomatic *String.
+// NSURLUbiquitousItemDownloadingStatusNotDownloaded returns the string constant NSURLUbiquitousItemDownloadingStatusNotDownloaded.
 func NSURLUbiquitousItemDownloadingStatusNotDownloaded() *String {
-	_r := raw.NSURLUbiquitousItemDownloadingStatusNotDownloaded()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemDownloadingStatusNotDownloaded")))
 }
 
-// NSURLUbiquitousItemDownloadingStatusDownloaded returns the Foundation string constant NSURLUbiquitousItemDownloadingStatusDownloaded as an idiomatic *String.
+// NSURLUbiquitousItemDownloadingStatusDownloaded returns the string constant NSURLUbiquitousItemDownloadingStatusDownloaded.
 func NSURLUbiquitousItemDownloadingStatusDownloaded() *String {
-	_r := raw.NSURLUbiquitousItemDownloadingStatusDownloaded()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemDownloadingStatusDownloaded")))
 }
 
-// NSURLUbiquitousItemDownloadingStatusCurrent returns the Foundation string constant NSURLUbiquitousItemDownloadingStatusCurrent as an idiomatic *String.
+// NSURLUbiquitousItemDownloadingStatusCurrent returns the string constant NSURLUbiquitousItemDownloadingStatusCurrent.
 func NSURLUbiquitousItemDownloadingStatusCurrent() *String {
-	_r := raw.NSURLUbiquitousItemDownloadingStatusCurrent()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemDownloadingStatusCurrent")))
 }
 
-// NSURLUbiquitousSharedItemRoleOwner returns the Foundation string constant NSURLUbiquitousSharedItemRoleOwner as an idiomatic *String.
+// NSURLUbiquitousSharedItemRoleOwner returns the string constant NSURLUbiquitousSharedItemRoleOwner.
 func NSURLUbiquitousSharedItemRoleOwner() *String {
-	_r := raw.NSURLUbiquitousSharedItemRoleOwner()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemRoleOwner")))
 }
 
-// NSURLUbiquitousSharedItemRoleParticipant returns the Foundation string constant NSURLUbiquitousSharedItemRoleParticipant as an idiomatic *String.
+// NSURLUbiquitousSharedItemRoleParticipant returns the string constant NSURLUbiquitousSharedItemRoleParticipant.
 func NSURLUbiquitousSharedItemRoleParticipant() *String {
-	_r := raw.NSURLUbiquitousSharedItemRoleParticipant()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemRoleParticipant")))
 }
 
-// NSURLUbiquitousSharedItemPermissionsReadOnly returns the Foundation string constant NSURLUbiquitousSharedItemPermissionsReadOnly as an idiomatic *String.
+// NSURLUbiquitousSharedItemPermissionsReadOnly returns the string constant NSURLUbiquitousSharedItemPermissionsReadOnly.
 func NSURLUbiquitousSharedItemPermissionsReadOnly() *String {
-	_r := raw.NSURLUbiquitousSharedItemPermissionsReadOnly()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemPermissionsReadOnly")))
 }
 
-// NSURLUbiquitousSharedItemPermissionsReadWrite returns the Foundation string constant NSURLUbiquitousSharedItemPermissionsReadWrite as an idiomatic *String.
+// NSURLUbiquitousSharedItemPermissionsReadWrite returns the string constant NSURLUbiquitousSharedItemPermissionsReadWrite.
 func NSURLUbiquitousSharedItemPermissionsReadWrite() *String {
-	_r := raw.NSURLUbiquitousSharedItemPermissionsReadWrite()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousSharedItemPermissionsReadWrite")))
 }
 
-// NSURLUbiquitousItemSupportedSyncControlsKey returns the Foundation string constant NSURLUbiquitousItemSupportedSyncControlsKey as an idiomatic *String.
+// NSURLUbiquitousItemSupportedSyncControlsKey returns the string constant NSURLUbiquitousItemSupportedSyncControlsKey.
 func NSURLUbiquitousItemSupportedSyncControlsKey() *String {
-	_r := raw.NSURLUbiquitousItemSupportedSyncControlsKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemSupportedSyncControlsKey")))
 }
 
-// NSURLUbiquitousItemIsSyncPausedKey returns the Foundation string constant NSURLUbiquitousItemIsSyncPausedKey as an idiomatic *String.
+// NSURLUbiquitousItemIsSyncPausedKey returns the string constant NSURLUbiquitousItemIsSyncPausedKey.
 func NSURLUbiquitousItemIsSyncPausedKey() *String {
-	_r := raw.NSURLUbiquitousItemIsSyncPausedKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLUbiquitousItemIsSyncPausedKey")))
 }
 
-// NSUbiquityIdentityDidChangeNotification returns the Foundation string constant NSUbiquityIdentityDidChangeNotification as an idiomatic *String.
+// NSUbiquityIdentityDidChangeNotification returns the string constant NSUbiquityIdentityDidChangeNotification.
 func NSUbiquityIdentityDidChangeNotification() *String {
-	_r := raw.NSUbiquityIdentityDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUbiquityIdentityDidChangeNotification")))
 }
 
-// NSFileType returns the Foundation string constant NSFileType as an idiomatic *String.
-func NSFileType() *String {
-	_r := raw.NSFileType()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSFileType returns the string constant NSFileType.
+func NSFileType() *String { return StringFromID(purego.CFConstant(_symbol("NSFileType"))) }
 
-// NSFileTypeDirectory returns the Foundation string constant NSFileTypeDirectory as an idiomatic *String.
+// NSFileTypeDirectory returns the string constant NSFileTypeDirectory.
 func NSFileTypeDirectory() *String {
-	_r := raw.NSFileTypeDirectory()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileTypeDirectory")))
 }
 
-// NSFileTypeRegular returns the Foundation string constant NSFileTypeRegular as an idiomatic *String.
+// NSFileTypeRegular returns the string constant NSFileTypeRegular.
 func NSFileTypeRegular() *String {
-	_r := raw.NSFileTypeRegular()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileTypeRegular")))
 }
 
-// NSFileTypeSymbolicLink returns the Foundation string constant NSFileTypeSymbolicLink as an idiomatic *String.
+// NSFileTypeSymbolicLink returns the string constant NSFileTypeSymbolicLink.
 func NSFileTypeSymbolicLink() *String {
-	_r := raw.NSFileTypeSymbolicLink()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileTypeSymbolicLink")))
 }
 
-// NSFileTypeSocket returns the Foundation string constant NSFileTypeSocket as an idiomatic *String.
-func NSFileTypeSocket() *String {
-	_r := raw.NSFileTypeSocket()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSFileTypeSocket returns the string constant NSFileTypeSocket.
+func NSFileTypeSocket() *String { return StringFromID(purego.CFConstant(_symbol("NSFileTypeSocket"))) }
 
-// NSFileTypeCharacterSpecial returns the Foundation string constant NSFileTypeCharacterSpecial as an idiomatic *String.
+// NSFileTypeCharacterSpecial returns the string constant NSFileTypeCharacterSpecial.
 func NSFileTypeCharacterSpecial() *String {
-	_r := raw.NSFileTypeCharacterSpecial()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileTypeCharacterSpecial")))
 }
 
-// NSFileTypeBlockSpecial returns the Foundation string constant NSFileTypeBlockSpecial as an idiomatic *String.
+// NSFileTypeBlockSpecial returns the string constant NSFileTypeBlockSpecial.
 func NSFileTypeBlockSpecial() *String {
-	_r := raw.NSFileTypeBlockSpecial()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileTypeBlockSpecial")))
 }
 
-// NSFileTypeUnknown returns the Foundation string constant NSFileTypeUnknown as an idiomatic *String.
+// NSFileTypeUnknown returns the string constant NSFileTypeUnknown.
 func NSFileTypeUnknown() *String {
-	_r := raw.NSFileTypeUnknown()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileTypeUnknown")))
 }
 
-// NSFileSize returns the Foundation string constant NSFileSize as an idiomatic *String.
-func NSFileSize() *String {
-	_r := raw.NSFileSize()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSFileSize returns the string constant NSFileSize.
+func NSFileSize() *String { return StringFromID(purego.CFConstant(_symbol("NSFileSize"))) }
 
-// NSFileModificationDate returns the Foundation string constant NSFileModificationDate as an idiomatic *String.
+// NSFileModificationDate returns the string constant NSFileModificationDate.
 func NSFileModificationDate() *String {
-	_r := raw.NSFileModificationDate()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileModificationDate")))
 }
 
-// NSFileReferenceCount returns the Foundation string constant NSFileReferenceCount as an idiomatic *String.
+// NSFileReferenceCount returns the string constant NSFileReferenceCount.
 func NSFileReferenceCount() *String {
-	_r := raw.NSFileReferenceCount()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileReferenceCount")))
 }
 
-// NSFileDeviceIdentifier returns the Foundation string constant NSFileDeviceIdentifier as an idiomatic *String.
+// NSFileDeviceIdentifier returns the string constant NSFileDeviceIdentifier.
 func NSFileDeviceIdentifier() *String {
-	_r := raw.NSFileDeviceIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileDeviceIdentifier")))
 }
 
-// NSFileOwnerAccountName returns the Foundation string constant NSFileOwnerAccountName as an idiomatic *String.
+// NSFileOwnerAccountName returns the string constant NSFileOwnerAccountName.
 func NSFileOwnerAccountName() *String {
-	_r := raw.NSFileOwnerAccountName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileOwnerAccountName")))
 }
 
-// NSFileGroupOwnerAccountName returns the Foundation string constant NSFileGroupOwnerAccountName as an idiomatic *String.
+// NSFileGroupOwnerAccountName returns the string constant NSFileGroupOwnerAccountName.
 func NSFileGroupOwnerAccountName() *String {
-	_r := raw.NSFileGroupOwnerAccountName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileGroupOwnerAccountName")))
 }
 
-// NSFilePosixPermissions returns the Foundation string constant NSFilePosixPermissions as an idiomatic *String.
+// NSFilePosixPermissions returns the string constant NSFilePosixPermissions.
 func NSFilePosixPermissions() *String {
-	_r := raw.NSFilePosixPermissions()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFilePosixPermissions")))
 }
 
-// NSFileSystemNumber returns the Foundation string constant NSFileSystemNumber as an idiomatic *String.
+// NSFileSystemNumber returns the string constant NSFileSystemNumber.
 func NSFileSystemNumber() *String {
-	_r := raw.NSFileSystemNumber()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileSystemNumber")))
 }
 
-// NSFileSystemFileNumber returns the Foundation string constant NSFileSystemFileNumber as an idiomatic *String.
+// NSFileSystemFileNumber returns the string constant NSFileSystemFileNumber.
 func NSFileSystemFileNumber() *String {
-	_r := raw.NSFileSystemFileNumber()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileSystemFileNumber")))
 }
 
-// NSFileExtensionHidden returns the Foundation string constant NSFileExtensionHidden as an idiomatic *String.
+// NSFileExtensionHidden returns the string constant NSFileExtensionHidden.
 func NSFileExtensionHidden() *String {
-	_r := raw.NSFileExtensionHidden()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileExtensionHidden")))
 }
 
-// NSFileHFSCreatorCode returns the Foundation string constant NSFileHFSCreatorCode as an idiomatic *String.
+// NSFileHFSCreatorCode returns the string constant NSFileHFSCreatorCode.
 func NSFileHFSCreatorCode() *String {
-	_r := raw.NSFileHFSCreatorCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHFSCreatorCode")))
 }
 
-// NSFileHFSTypeCode returns the Foundation string constant NSFileHFSTypeCode as an idiomatic *String.
+// NSFileHFSTypeCode returns the string constant NSFileHFSTypeCode.
 func NSFileHFSTypeCode() *String {
-	_r := raw.NSFileHFSTypeCode()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileHFSTypeCode")))
 }
 
-// NSFileImmutable returns the Foundation string constant NSFileImmutable as an idiomatic *String.
-func NSFileImmutable() *String {
-	_r := raw.NSFileImmutable()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSFileImmutable returns the string constant NSFileImmutable.
+func NSFileImmutable() *String { return StringFromID(purego.CFConstant(_symbol("NSFileImmutable"))) }
 
-// NSFileAppendOnly returns the Foundation string constant NSFileAppendOnly as an idiomatic *String.
-func NSFileAppendOnly() *String {
-	_r := raw.NSFileAppendOnly()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSFileAppendOnly returns the string constant NSFileAppendOnly.
+func NSFileAppendOnly() *String { return StringFromID(purego.CFConstant(_symbol("NSFileAppendOnly"))) }
 
-// NSFileCreationDate returns the Foundation string constant NSFileCreationDate as an idiomatic *String.
+// NSFileCreationDate returns the string constant NSFileCreationDate.
 func NSFileCreationDate() *String {
-	_r := raw.NSFileCreationDate()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileCreationDate")))
 }
 
-// NSFileOwnerAccountID returns the Foundation string constant NSFileOwnerAccountID as an idiomatic *String.
+// NSFileOwnerAccountID returns the string constant NSFileOwnerAccountID.
 func NSFileOwnerAccountID() *String {
-	_r := raw.NSFileOwnerAccountID()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileOwnerAccountID")))
 }
 
-// NSFileGroupOwnerAccountID returns the Foundation string constant NSFileGroupOwnerAccountID as an idiomatic *String.
+// NSFileGroupOwnerAccountID returns the string constant NSFileGroupOwnerAccountID.
 func NSFileGroupOwnerAccountID() *String {
-	_r := raw.NSFileGroupOwnerAccountID()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileGroupOwnerAccountID")))
 }
 
-// NSFileBusy returns the Foundation string constant NSFileBusy as an idiomatic *String.
-func NSFileBusy() *String {
-	_r := raw.NSFileBusy()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSFileBusy returns the string constant NSFileBusy.
+func NSFileBusy() *String { return StringFromID(purego.CFConstant(_symbol("NSFileBusy"))) }
 
-// NSFileProtectionKey returns the Foundation string constant NSFileProtectionKey as an idiomatic *String.
+// NSFileProtectionKey returns the string constant NSFileProtectionKey.
 func NSFileProtectionKey() *String {
-	_r := raw.NSFileProtectionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileProtectionKey")))
 }
 
-// NSFileProtectionNone returns the Foundation string constant NSFileProtectionNone as an idiomatic *String.
+// NSFileProtectionNone returns the string constant NSFileProtectionNone.
 func NSFileProtectionNone() *String {
-	_r := raw.NSFileProtectionNone()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileProtectionNone")))
 }
 
-// NSFileProtectionComplete returns the Foundation string constant NSFileProtectionComplete as an idiomatic *String.
+// NSFileProtectionComplete returns the string constant NSFileProtectionComplete.
 func NSFileProtectionComplete() *String {
-	_r := raw.NSFileProtectionComplete()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileProtectionComplete")))
 }
 
-// NSFileProtectionCompleteUnlessOpen returns the Foundation string constant NSFileProtectionCompleteUnlessOpen as an idiomatic *String.
+// NSFileProtectionCompleteUnlessOpen returns the string constant NSFileProtectionCompleteUnlessOpen.
 func NSFileProtectionCompleteUnlessOpen() *String {
-	_r := raw.NSFileProtectionCompleteUnlessOpen()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileProtectionCompleteUnlessOpen")))
 }
 
-// NSFileProtectionCompleteUntilFirstUserAuthentication returns the Foundation string constant NSFileProtectionCompleteUntilFirstUserAuthentication as an idiomatic *String.
+// NSFileProtectionCompleteUntilFirstUserAuthentication returns the string constant NSFileProtectionCompleteUntilFirstUserAuthentication.
 func NSFileProtectionCompleteUntilFirstUserAuthentication() *String {
-	_r := raw.NSFileProtectionCompleteUntilFirstUserAuthentication()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileProtectionCompleteUntilFirstUserAuthentication")))
 }
 
-// NSFileSystemFreeNodes returns the Foundation string constant NSFileSystemFreeNodes as an idiomatic *String.
+// NSFileSystemFreeNodes returns the string constant NSFileSystemFreeNodes.
 func NSFileSystemFreeNodes() *String {
-	_r := raw.NSFileSystemFreeNodes()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSFileSystemFreeNodes")))
 }
 
-// @const NSHTTPCookieName @discussion Key for cookie name
-// NSHTTPCookieName returns the Foundation string constant NSHTTPCookieName as an idiomatic *String.
-func NSHTTPCookieName() *String {
-	_r := raw.NSHTTPCookieName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSHTTPCookieName returns the string constant NSHTTPCookieName.
+func NSHTTPCookieName() *String { return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieName"))) }
 
-// @const NSHTTPCookieValue @discussion Key for cookie value
-// NSHTTPCookieValue returns the Foundation string constant NSHTTPCookieValue as an idiomatic *String.
+// NSHTTPCookieValue returns the string constant NSHTTPCookieValue.
 func NSHTTPCookieValue() *String {
-	_r := raw.NSHTTPCookieValue()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieValue")))
 }
 
-// @const NSHTTPCookieOriginURL @discussion Key for cookie origin URL
-// NSHTTPCookieOriginURL returns the Foundation string constant NSHTTPCookieOriginURL as an idiomatic *String.
+// NSHTTPCookieOriginURL returns the string constant NSHTTPCookieOriginURL.
 func NSHTTPCookieOriginURL() *String {
-	_r := raw.NSHTTPCookieOriginURL()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieOriginURL")))
 }
 
-// @const NSHTTPCookieVersion @discussion Key for cookie version
-// NSHTTPCookieVersion returns the Foundation string constant NSHTTPCookieVersion as an idiomatic *String.
+// NSHTTPCookieVersion returns the string constant NSHTTPCookieVersion.
 func NSHTTPCookieVersion() *String {
-	_r := raw.NSHTTPCookieVersion()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieVersion")))
 }
 
-// @const NSHTTPCookieDomain @discussion Key for cookie domain
-// NSHTTPCookieDomain returns the Foundation string constant NSHTTPCookieDomain as an idiomatic *String.
+// NSHTTPCookieDomain returns the string constant NSHTTPCookieDomain.
 func NSHTTPCookieDomain() *String {
-	_r := raw.NSHTTPCookieDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieDomain")))
 }
 
-// @const NSHTTPCookiePath @discussion Key for cookie path
-// NSHTTPCookiePath returns the Foundation string constant NSHTTPCookiePath as an idiomatic *String.
-func NSHTTPCookiePath() *String {
-	_r := raw.NSHTTPCookiePath()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSHTTPCookiePath returns the string constant NSHTTPCookiePath.
+func NSHTTPCookiePath() *String { return StringFromID(purego.CFConstant(_symbol("NSHTTPCookiePath"))) }
 
-// @const NSHTTPCookieSecure @discussion Key for cookie secure flag
-// NSHTTPCookieSecure returns the Foundation string constant NSHTTPCookieSecure as an idiomatic *String.
+// NSHTTPCookieSecure returns the string constant NSHTTPCookieSecure.
 func NSHTTPCookieSecure() *String {
-	_r := raw.NSHTTPCookieSecure()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSecure")))
 }
 
-// @const NSHTTPCookieExpires @discussion Key for cookie expiration date
-// NSHTTPCookieExpires returns the Foundation string constant NSHTTPCookieExpires as an idiomatic *String.
+// NSHTTPCookieExpires returns the string constant NSHTTPCookieExpires.
 func NSHTTPCookieExpires() *String {
-	_r := raw.NSHTTPCookieExpires()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieExpires")))
 }
 
-// @const NSHTTPCookieComment @discussion Key for cookie comment text
-// NSHTTPCookieComment returns the Foundation string constant NSHTTPCookieComment as an idiomatic *String.
+// NSHTTPCookieComment returns the string constant NSHTTPCookieComment.
 func NSHTTPCookieComment() *String {
-	_r := raw.NSHTTPCookieComment()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieComment")))
 }
 
-// @const NSHTTPCookieCommentURL @discussion Key for cookie comment URL
-// NSHTTPCookieCommentURL returns the Foundation string constant NSHTTPCookieCommentURL as an idiomatic *String.
+// NSHTTPCookieCommentURL returns the string constant NSHTTPCookieCommentURL.
 func NSHTTPCookieCommentURL() *String {
-	_r := raw.NSHTTPCookieCommentURL()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieCommentURL")))
 }
 
-// @const NSHTTPCookieDiscard @discussion Key for cookie discard (session-only) flag
-// NSHTTPCookieDiscard returns the Foundation string constant NSHTTPCookieDiscard as an idiomatic *String.
+// NSHTTPCookieDiscard returns the string constant NSHTTPCookieDiscard.
 func NSHTTPCookieDiscard() *String {
-	_r := raw.NSHTTPCookieDiscard()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieDiscard")))
 }
 
-// @const NSHTTPCookieMaximumAge @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
-// NSHTTPCookieMaximumAge returns the Foundation string constant NSHTTPCookieMaximumAge as an idiomatic *String.
+// NSHTTPCookieMaximumAge returns the string constant NSHTTPCookieMaximumAge.
 func NSHTTPCookieMaximumAge() *String {
-	_r := raw.NSHTTPCookieMaximumAge()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieMaximumAge")))
 }
 
-// @const NSHTTPCookiePort @discussion Key for cookie ports
-// NSHTTPCookiePort returns the Foundation string constant NSHTTPCookiePort as an idiomatic *String.
-func NSHTTPCookiePort() *String {
-	_r := raw.NSHTTPCookiePort()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSHTTPCookiePort returns the string constant NSHTTPCookiePort.
+func NSHTTPCookiePort() *String { return StringFromID(purego.CFConstant(_symbol("NSHTTPCookiePort"))) }
 
-// @const NSHTTPCookieSetByJavaScript @discussion An NSString object indicating that the cookie is set via JavaScript.
-// NSHTTPCookieSetByJavaScript returns the Foundation string constant NSHTTPCookieSetByJavaScript as an idiomatic *String.
+// NSHTTPCookieSetByJavaScript returns the string constant NSHTTPCookieSetByJavaScript.
 func NSHTTPCookieSetByJavaScript() *String {
-	_r := raw.NSHTTPCookieSetByJavaScript()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSetByJavaScript")))
 }
 
-// @const NSHTTPCookieSameSitePolicy @discussion Key for cookie same site
-// NSHTTPCookieSameSitePolicy returns the Foundation string constant NSHTTPCookieSameSitePolicy as an idiomatic *String.
+// NSHTTPCookieSameSitePolicy returns the string constant NSHTTPCookieSameSitePolicy.
 func NSHTTPCookieSameSitePolicy() *String {
-	_r := raw.NSHTTPCookieSameSitePolicy()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSameSitePolicy")))
 }
 
-// @const NSHTTPCookieSameSiteLax @discussion String constant "lax" to be used as a value for the property key NSHTTPCookieSameSite
-// NSHTTPCookieSameSiteLax returns the Foundation string constant NSHTTPCookieSameSiteLax as an idiomatic *String.
+// NSHTTPCookieSameSiteLax returns the string constant NSHTTPCookieSameSiteLax.
 func NSHTTPCookieSameSiteLax() *String {
-	_r := raw.NSHTTPCookieSameSiteLax()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSameSiteLax")))
 }
 
-// @const NSHTTPCookieSameSiteStrict @discussion String constant "strict" to be used as a value for the property key NSHTTPCookieSameSite
-// NSHTTPCookieSameSiteStrict returns the Foundation string constant NSHTTPCookieSameSiteStrict as an idiomatic *String.
+// NSHTTPCookieSameSiteStrict returns the string constant NSHTTPCookieSameSiteStrict.
 func NSHTTPCookieSameSiteStrict() *String {
-	_r := raw.NSHTTPCookieSameSiteStrict()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieSameSiteStrict")))
 }
 
-// @const NSHTTPCookieManagerAcceptPolicyChangedNotification @discussion Name of notification that should be posted to the distributed notification center whenever the accept cookies preference is changed
-// NSHTTPCookieManagerAcceptPolicyChangedNotification returns the Foundation string constant NSHTTPCookieManagerAcceptPolicyChangedNotification as an idiomatic *String.
+// NSHTTPCookieManagerAcceptPolicyChangedNotification returns the string constant NSHTTPCookieManagerAcceptPolicyChangedNotification.
 func NSHTTPCookieManagerAcceptPolicyChangedNotification() *String {
-	_r := raw.NSHTTPCookieManagerAcceptPolicyChangedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieManagerAcceptPolicyChangedNotification")))
 }
 
-// @const NSHTTPCookieManagerCookiesChangedNotification @abstract Notification sent when the set of cookies changes
-// NSHTTPCookieManagerCookiesChangedNotification returns the Foundation string constant NSHTTPCookieManagerCookiesChangedNotification as an idiomatic *String.
+// NSHTTPCookieManagerCookiesChangedNotification returns the string constant NSHTTPCookieManagerCookiesChangedNotification.
 func NSHTTPCookieManagerCookiesChangedNotification() *String {
-	_r := raw.NSHTTPCookieManagerCookiesChangedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPCookieManagerCookiesChangedNotification")))
 }
 
-// NSUndefinedKeyException returns the Foundation string constant NSUndefinedKeyException as an idiomatic *String.
+// NSUndefinedKeyException returns the string constant NSUndefinedKeyException.
 func NSUndefinedKeyException() *String {
-	_r := raw.NSUndefinedKeyException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndefinedKeyException")))
 }
 
-// NSAverageKeyValueOperator returns the Foundation string constant NSAverageKeyValueOperator as an idiomatic *String.
+// NSAverageKeyValueOperator returns the string constant NSAverageKeyValueOperator.
 func NSAverageKeyValueOperator() *String {
-	_r := raw.NSAverageKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSAverageKeyValueOperator")))
 }
 
-// NSCountKeyValueOperator returns the Foundation string constant NSCountKeyValueOperator as an idiomatic *String.
+// NSCountKeyValueOperator returns the string constant NSCountKeyValueOperator.
 func NSCountKeyValueOperator() *String {
-	_r := raw.NSCountKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSCountKeyValueOperator")))
 }
 
-// NSDistinctUnionOfArraysKeyValueOperator returns the Foundation string constant NSDistinctUnionOfArraysKeyValueOperator as an idiomatic *String.
+// NSDistinctUnionOfArraysKeyValueOperator returns the string constant NSDistinctUnionOfArraysKeyValueOperator.
 func NSDistinctUnionOfArraysKeyValueOperator() *String {
-	_r := raw.NSDistinctUnionOfArraysKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDistinctUnionOfArraysKeyValueOperator")))
 }
 
-// NSDistinctUnionOfObjectsKeyValueOperator returns the Foundation string constant NSDistinctUnionOfObjectsKeyValueOperator as an idiomatic *String.
+// NSDistinctUnionOfObjectsKeyValueOperator returns the string constant NSDistinctUnionOfObjectsKeyValueOperator.
 func NSDistinctUnionOfObjectsKeyValueOperator() *String {
-	_r := raw.NSDistinctUnionOfObjectsKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDistinctUnionOfObjectsKeyValueOperator")))
 }
 
-// NSDistinctUnionOfSetsKeyValueOperator returns the Foundation string constant NSDistinctUnionOfSetsKeyValueOperator as an idiomatic *String.
+// NSDistinctUnionOfSetsKeyValueOperator returns the string constant NSDistinctUnionOfSetsKeyValueOperator.
 func NSDistinctUnionOfSetsKeyValueOperator() *String {
-	_r := raw.NSDistinctUnionOfSetsKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDistinctUnionOfSetsKeyValueOperator")))
 }
 
-// NSMaximumKeyValueOperator returns the Foundation string constant NSMaximumKeyValueOperator as an idiomatic *String.
+// NSMaximumKeyValueOperator returns the string constant NSMaximumKeyValueOperator.
 func NSMaximumKeyValueOperator() *String {
-	_r := raw.NSMaximumKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMaximumKeyValueOperator")))
 }
 
-// NSMinimumKeyValueOperator returns the Foundation string constant NSMinimumKeyValueOperator as an idiomatic *String.
+// NSMinimumKeyValueOperator returns the string constant NSMinimumKeyValueOperator.
 func NSMinimumKeyValueOperator() *String {
-	_r := raw.NSMinimumKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMinimumKeyValueOperator")))
 }
 
-// NSSumKeyValueOperator returns the Foundation string constant NSSumKeyValueOperator as an idiomatic *String.
+// NSSumKeyValueOperator returns the string constant NSSumKeyValueOperator.
 func NSSumKeyValueOperator() *String {
-	_r := raw.NSSumKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSSumKeyValueOperator")))
 }
 
-// NSUnionOfArraysKeyValueOperator returns the Foundation string constant NSUnionOfArraysKeyValueOperator as an idiomatic *String.
+// NSUnionOfArraysKeyValueOperator returns the string constant NSUnionOfArraysKeyValueOperator.
 func NSUnionOfArraysKeyValueOperator() *String {
-	_r := raw.NSUnionOfArraysKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUnionOfArraysKeyValueOperator")))
 }
 
-// NSUnionOfObjectsKeyValueOperator returns the Foundation string constant NSUnionOfObjectsKeyValueOperator as an idiomatic *String.
+// NSUnionOfObjectsKeyValueOperator returns the string constant NSUnionOfObjectsKeyValueOperator.
 func NSUnionOfObjectsKeyValueOperator() *String {
-	_r := raw.NSUnionOfObjectsKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUnionOfObjectsKeyValueOperator")))
 }
 
-// NSUnionOfSetsKeyValueOperator returns the Foundation string constant NSUnionOfSetsKeyValueOperator as an idiomatic *String.
+// NSUnionOfSetsKeyValueOperator returns the string constant NSUnionOfSetsKeyValueOperator.
 func NSUnionOfSetsKeyValueOperator() *String {
-	_r := raw.NSUnionOfSetsKeyValueOperator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUnionOfSetsKeyValueOperator")))
 }
 
-// NSKeyValueChangeKindKey returns the Foundation string constant NSKeyValueChangeKindKey as an idiomatic *String.
+// NSKeyValueChangeKindKey returns the string constant NSKeyValueChangeKindKey.
 func NSKeyValueChangeKindKey() *String {
-	_r := raw.NSKeyValueChangeKindKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSKeyValueChangeKindKey")))
 }
 
-// NSKeyValueChangeNewKey returns the Foundation string constant NSKeyValueChangeNewKey as an idiomatic *String.
+// NSKeyValueChangeNewKey returns the string constant NSKeyValueChangeNewKey.
 func NSKeyValueChangeNewKey() *String {
-	_r := raw.NSKeyValueChangeNewKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSKeyValueChangeNewKey")))
 }
 
-// NSKeyValueChangeOldKey returns the Foundation string constant NSKeyValueChangeOldKey as an idiomatic *String.
+// NSKeyValueChangeOldKey returns the string constant NSKeyValueChangeOldKey.
 func NSKeyValueChangeOldKey() *String {
-	_r := raw.NSKeyValueChangeOldKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSKeyValueChangeOldKey")))
 }
 
-// NSKeyValueChangeIndexesKey returns the Foundation string constant NSKeyValueChangeIndexesKey as an idiomatic *String.
+// NSKeyValueChangeIndexesKey returns the string constant NSKeyValueChangeIndexesKey.
 func NSKeyValueChangeIndexesKey() *String {
-	_r := raw.NSKeyValueChangeIndexesKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSKeyValueChangeIndexesKey")))
 }
 
-// NSKeyValueChangeNotificationIsPriorKey returns the Foundation string constant NSKeyValueChangeNotificationIsPriorKey as an idiomatic *String.
+// NSKeyValueChangeNotificationIsPriorKey returns the string constant NSKeyValueChangeNotificationIsPriorKey.
 func NSKeyValueChangeNotificationIsPriorKey() *String {
-	_r := raw.NSKeyValueChangeNotificationIsPriorKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSKeyValueChangeNotificationIsPriorKey")))
 }
 
-// NSInvalidArchiveOperationException returns the Foundation string constant NSInvalidArchiveOperationException as an idiomatic *String.
+// NSInvalidArchiveOperationException returns the string constant NSInvalidArchiveOperationException.
 func NSInvalidArchiveOperationException() *String {
-	_r := raw.NSInvalidArchiveOperationException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvalidArchiveOperationException")))
 }
 
-// NSInvalidUnarchiveOperationException returns the Foundation string constant NSInvalidUnarchiveOperationException as an idiomatic *String.
+// NSInvalidUnarchiveOperationException returns the string constant NSInvalidUnarchiveOperationException.
 func NSInvalidUnarchiveOperationException() *String {
-	_r := raw.NSInvalidUnarchiveOperationException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvalidUnarchiveOperationException")))
 }
 
-// NSInvocationOperationVoidResultException returns the Foundation string constant NSInvocationOperationVoidResultException as an idiomatic *String.
+// NSInvocationOperationVoidResultException returns the string constant NSInvocationOperationVoidResultException.
 func NSInvocationOperationVoidResultException() *String {
-	_r := raw.NSInvocationOperationVoidResultException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvocationOperationVoidResultException")))
 }
 
-// NSInvocationOperationCancelledException returns the Foundation string constant NSInvocationOperationCancelledException as an idiomatic *String.
+// NSInvocationOperationCancelledException returns the string constant NSInvocationOperationCancelledException.
 func NSInvocationOperationCancelledException() *String {
-	_r := raw.NSInvocationOperationCancelledException()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSInvocationOperationCancelledException")))
 }
 
-// NSPortDidBecomeInvalidNotification returns the Foundation string constant NSPortDidBecomeInvalidNotification as an idiomatic *String.
+// NSPortDidBecomeInvalidNotification returns the string constant NSPortDidBecomeInvalidNotification.
 func NSPortDidBecomeInvalidNotification() *String {
-	_r := raw.NSPortDidBecomeInvalidNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSPortDidBecomeInvalidNotification")))
 }
 
-// NSProcessInfoThermalStateDidChangeNotification returns the Foundation string constant NSProcessInfoThermalStateDidChangeNotification as an idiomatic *String.
+// NSProcessInfoThermalStateDidChangeNotification returns the string constant NSProcessInfoThermalStateDidChangeNotification.
 func NSProcessInfoThermalStateDidChangeNotification() *String {
-	_r := raw.NSProcessInfoThermalStateDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProcessInfoThermalStateDidChangeNotification")))
 }
 
-// NSProcessInfoPowerStateDidChangeNotification returns the Foundation string constant NSProcessInfoPowerStateDidChangeNotification as an idiomatic *String.
+// NSProcessInfoPowerStateDidChangeNotification returns the string constant NSProcessInfoPowerStateDidChangeNotification.
 func NSProcessInfoPowerStateDidChangeNotification() *String {
-	_r := raw.NSProcessInfoPowerStateDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSProcessInfoPowerStateDidChangeNotification")))
 }
 
-// NSTextCheckingNameKey returns the Foundation string constant NSTextCheckingNameKey as an idiomatic *String.
+// NSTextCheckingNameKey returns the string constant NSTextCheckingNameKey.
 func NSTextCheckingNameKey() *String {
-	_r := raw.NSTextCheckingNameKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingNameKey")))
 }
 
-// NSTextCheckingJobTitleKey returns the Foundation string constant NSTextCheckingJobTitleKey as an idiomatic *String.
+// NSTextCheckingJobTitleKey returns the string constant NSTextCheckingJobTitleKey.
 func NSTextCheckingJobTitleKey() *String {
-	_r := raw.NSTextCheckingJobTitleKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingJobTitleKey")))
 }
 
-// NSTextCheckingOrganizationKey returns the Foundation string constant NSTextCheckingOrganizationKey as an idiomatic *String.
+// NSTextCheckingOrganizationKey returns the string constant NSTextCheckingOrganizationKey.
 func NSTextCheckingOrganizationKey() *String {
-	_r := raw.NSTextCheckingOrganizationKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingOrganizationKey")))
 }
 
-// NSTextCheckingStreetKey returns the Foundation string constant NSTextCheckingStreetKey as an idiomatic *String.
+// NSTextCheckingStreetKey returns the string constant NSTextCheckingStreetKey.
 func NSTextCheckingStreetKey() *String {
-	_r := raw.NSTextCheckingStreetKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingStreetKey")))
 }
 
-// NSTextCheckingCityKey returns the Foundation string constant NSTextCheckingCityKey as an idiomatic *String.
+// NSTextCheckingCityKey returns the string constant NSTextCheckingCityKey.
 func NSTextCheckingCityKey() *String {
-	_r := raw.NSTextCheckingCityKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingCityKey")))
 }
 
-// NSTextCheckingStateKey returns the Foundation string constant NSTextCheckingStateKey as an idiomatic *String.
+// NSTextCheckingStateKey returns the string constant NSTextCheckingStateKey.
 func NSTextCheckingStateKey() *String {
-	_r := raw.NSTextCheckingStateKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingStateKey")))
 }
 
-// NSTextCheckingZIPKey returns the Foundation string constant NSTextCheckingZIPKey as an idiomatic *String.
+// NSTextCheckingZIPKey returns the string constant NSTextCheckingZIPKey.
 func NSTextCheckingZIPKey() *String {
-	_r := raw.NSTextCheckingZIPKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingZIPKey")))
 }
 
-// NSTextCheckingCountryKey returns the Foundation string constant NSTextCheckingCountryKey as an idiomatic *String.
+// NSTextCheckingCountryKey returns the string constant NSTextCheckingCountryKey.
 func NSTextCheckingCountryKey() *String {
-	_r := raw.NSTextCheckingCountryKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingCountryKey")))
 }
 
-// NSTextCheckingPhoneKey returns the Foundation string constant NSTextCheckingPhoneKey as an idiomatic *String.
+// NSTextCheckingPhoneKey returns the string constant NSTextCheckingPhoneKey.
 func NSTextCheckingPhoneKey() *String {
-	_r := raw.NSTextCheckingPhoneKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingPhoneKey")))
 }
 
-// NSTextCheckingAirlineKey returns the Foundation string constant NSTextCheckingAirlineKey as an idiomatic *String.
+// NSTextCheckingAirlineKey returns the string constant NSTextCheckingAirlineKey.
 func NSTextCheckingAirlineKey() *String {
-	_r := raw.NSTextCheckingAirlineKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingAirlineKey")))
 }
 
-// NSTextCheckingFlightKey returns the Foundation string constant NSTextCheckingFlightKey as an idiomatic *String.
+// NSTextCheckingFlightKey returns the string constant NSTextCheckingFlightKey.
 func NSTextCheckingFlightKey() *String {
-	_r := raw.NSTextCheckingFlightKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTextCheckingFlightKey")))
 }
 
-// NSStreamSocketSecurityLevelKey returns the Foundation string constant NSStreamSocketSecurityLevelKey as an idiomatic *String.
+// NSStreamSocketSecurityLevelKey returns the string constant NSStreamSocketSecurityLevelKey.
 func NSStreamSocketSecurityLevelKey() *String {
-	_r := raw.NSStreamSocketSecurityLevelKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSecurityLevelKey")))
 }
 
-// NSStreamSocketSecurityLevelNone returns the Foundation string constant NSStreamSocketSecurityLevelNone as an idiomatic *String.
+// NSStreamSocketSecurityLevelNone returns the string constant NSStreamSocketSecurityLevelNone.
 func NSStreamSocketSecurityLevelNone() *String {
-	_r := raw.NSStreamSocketSecurityLevelNone()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSecurityLevelNone")))
 }
 
-// NSStreamSocketSecurityLevelSSLv2 returns the Foundation string constant NSStreamSocketSecurityLevelSSLv2 as an idiomatic *String.
+// NSStreamSocketSecurityLevelSSLv2 returns the string constant NSStreamSocketSecurityLevelSSLv2.
 func NSStreamSocketSecurityLevelSSLv2() *String {
-	_r := raw.NSStreamSocketSecurityLevelSSLv2()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSecurityLevelSSLv2")))
 }
 
-// NSStreamSocketSecurityLevelSSLv3 returns the Foundation string constant NSStreamSocketSecurityLevelSSLv3 as an idiomatic *String.
+// NSStreamSocketSecurityLevelSSLv3 returns the string constant NSStreamSocketSecurityLevelSSLv3.
 func NSStreamSocketSecurityLevelSSLv3() *String {
-	_r := raw.NSStreamSocketSecurityLevelSSLv3()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSecurityLevelSSLv3")))
 }
 
-// NSStreamSocketSecurityLevelTLSv1 returns the Foundation string constant NSStreamSocketSecurityLevelTLSv1 as an idiomatic *String.
+// NSStreamSocketSecurityLevelTLSv1 returns the string constant NSStreamSocketSecurityLevelTLSv1.
 func NSStreamSocketSecurityLevelTLSv1() *String {
-	_r := raw.NSStreamSocketSecurityLevelTLSv1()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSecurityLevelTLSv1")))
 }
 
-// NSStreamSocketSecurityLevelNegotiatedSSL returns the Foundation string constant NSStreamSocketSecurityLevelNegotiatedSSL as an idiomatic *String.
+// NSStreamSocketSecurityLevelNegotiatedSSL returns the string constant NSStreamSocketSecurityLevelNegotiatedSSL.
 func NSStreamSocketSecurityLevelNegotiatedSSL() *String {
-	_r := raw.NSStreamSocketSecurityLevelNegotiatedSSL()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSecurityLevelNegotiatedSSL")))
 }
 
-// NSStreamSOCKSProxyConfigurationKey returns the Foundation string constant NSStreamSOCKSProxyConfigurationKey as an idiomatic *String.
+// NSStreamSOCKSProxyConfigurationKey returns the string constant NSStreamSOCKSProxyConfigurationKey.
 func NSStreamSOCKSProxyConfigurationKey() *String {
-	_r := raw.NSStreamSOCKSProxyConfigurationKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyConfigurationKey")))
 }
 
-// NSStreamSOCKSProxyHostKey returns the Foundation string constant NSStreamSOCKSProxyHostKey as an idiomatic *String.
+// NSStreamSOCKSProxyHostKey returns the string constant NSStreamSOCKSProxyHostKey.
 func NSStreamSOCKSProxyHostKey() *String {
-	_r := raw.NSStreamSOCKSProxyHostKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyHostKey")))
 }
 
-// NSStreamSOCKSProxyPortKey returns the Foundation string constant NSStreamSOCKSProxyPortKey as an idiomatic *String.
+// NSStreamSOCKSProxyPortKey returns the string constant NSStreamSOCKSProxyPortKey.
 func NSStreamSOCKSProxyPortKey() *String {
-	_r := raw.NSStreamSOCKSProxyPortKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyPortKey")))
 }
 
-// NSStreamSOCKSProxyVersionKey returns the Foundation string constant NSStreamSOCKSProxyVersionKey as an idiomatic *String.
+// NSStreamSOCKSProxyVersionKey returns the string constant NSStreamSOCKSProxyVersionKey.
 func NSStreamSOCKSProxyVersionKey() *String {
-	_r := raw.NSStreamSOCKSProxyVersionKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyVersionKey")))
 }
 
-// NSStreamSOCKSProxyUserKey returns the Foundation string constant NSStreamSOCKSProxyUserKey as an idiomatic *String.
+// NSStreamSOCKSProxyUserKey returns the string constant NSStreamSOCKSProxyUserKey.
 func NSStreamSOCKSProxyUserKey() *String {
-	_r := raw.NSStreamSOCKSProxyUserKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyUserKey")))
 }
 
-// NSStreamSOCKSProxyPasswordKey returns the Foundation string constant NSStreamSOCKSProxyPasswordKey as an idiomatic *String.
+// NSStreamSOCKSProxyPasswordKey returns the string constant NSStreamSOCKSProxyPasswordKey.
 func NSStreamSOCKSProxyPasswordKey() *String {
-	_r := raw.NSStreamSOCKSProxyPasswordKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyPasswordKey")))
 }
 
-// NSStreamSOCKSProxyVersion4 returns the Foundation string constant NSStreamSOCKSProxyVersion4 as an idiomatic *String.
+// NSStreamSOCKSProxyVersion4 returns the string constant NSStreamSOCKSProxyVersion4.
 func NSStreamSOCKSProxyVersion4() *String {
-	_r := raw.NSStreamSOCKSProxyVersion4()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyVersion4")))
 }
 
-// NSStreamSOCKSProxyVersion5 returns the Foundation string constant NSStreamSOCKSProxyVersion5 as an idiomatic *String.
+// NSStreamSOCKSProxyVersion5 returns the string constant NSStreamSOCKSProxyVersion5.
 func NSStreamSOCKSProxyVersion5() *String {
-	_r := raw.NSStreamSOCKSProxyVersion5()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSProxyVersion5")))
 }
 
-// NSStreamDataWrittenToMemoryStreamKey returns the Foundation string constant NSStreamDataWrittenToMemoryStreamKey as an idiomatic *String.
+// NSStreamDataWrittenToMemoryStreamKey returns the string constant NSStreamDataWrittenToMemoryStreamKey.
 func NSStreamDataWrittenToMemoryStreamKey() *String {
-	_r := raw.NSStreamDataWrittenToMemoryStreamKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamDataWrittenToMemoryStreamKey")))
 }
 
-// NSStreamFileCurrentOffsetKey returns the Foundation string constant NSStreamFileCurrentOffsetKey as an idiomatic *String.
+// NSStreamFileCurrentOffsetKey returns the string constant NSStreamFileCurrentOffsetKey.
 func NSStreamFileCurrentOffsetKey() *String {
-	_r := raw.NSStreamFileCurrentOffsetKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamFileCurrentOffsetKey")))
 }
 
-// NSStreamSocketSSLErrorDomain returns the Foundation string constant NSStreamSocketSSLErrorDomain as an idiomatic *String.
+// NSStreamSocketSSLErrorDomain returns the string constant NSStreamSocketSSLErrorDomain.
 func NSStreamSocketSSLErrorDomain() *String {
-	_r := raw.NSStreamSocketSSLErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSocketSSLErrorDomain")))
 }
 
-// NSStreamSOCKSErrorDomain returns the Foundation string constant NSStreamSOCKSErrorDomain as an idiomatic *String.
+// NSStreamSOCKSErrorDomain returns the string constant NSStreamSOCKSErrorDomain.
 func NSStreamSOCKSErrorDomain() *String {
-	_r := raw.NSStreamSOCKSErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamSOCKSErrorDomain")))
 }
 
-// NSStreamNetworkServiceType returns the Foundation string constant NSStreamNetworkServiceType as an idiomatic *String.
+// NSStreamNetworkServiceType returns the string constant NSStreamNetworkServiceType.
 func NSStreamNetworkServiceType() *String {
-	_r := raw.NSStreamNetworkServiceType()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamNetworkServiceType")))
 }
 
-// NSStreamNetworkServiceTypeVoIP returns the Foundation string constant NSStreamNetworkServiceTypeVoIP as an idiomatic *String.
+// NSStreamNetworkServiceTypeVoIP returns the string constant NSStreamNetworkServiceTypeVoIP.
 func NSStreamNetworkServiceTypeVoIP() *String {
-	_r := raw.NSStreamNetworkServiceTypeVoIP()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamNetworkServiceTypeVoIP")))
 }
 
-// NSStreamNetworkServiceTypeVideo returns the Foundation string constant NSStreamNetworkServiceTypeVideo as an idiomatic *String.
+// NSStreamNetworkServiceTypeVideo returns the string constant NSStreamNetworkServiceTypeVideo.
 func NSStreamNetworkServiceTypeVideo() *String {
-	_r := raw.NSStreamNetworkServiceTypeVideo()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamNetworkServiceTypeVideo")))
 }
 
-// NSStreamNetworkServiceTypeBackground returns the Foundation string constant NSStreamNetworkServiceTypeBackground as an idiomatic *String.
+// NSStreamNetworkServiceTypeBackground returns the string constant NSStreamNetworkServiceTypeBackground.
 func NSStreamNetworkServiceTypeBackground() *String {
-	_r := raw.NSStreamNetworkServiceTypeBackground()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamNetworkServiceTypeBackground")))
 }
 
-// NSStreamNetworkServiceTypeVoice returns the Foundation string constant NSStreamNetworkServiceTypeVoice as an idiomatic *String.
+// NSStreamNetworkServiceTypeVoice returns the string constant NSStreamNetworkServiceTypeVoice.
 func NSStreamNetworkServiceTypeVoice() *String {
-	_r := raw.NSStreamNetworkServiceTypeVoice()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamNetworkServiceTypeVoice")))
 }
 
-// NSStreamNetworkServiceTypeCallSignaling returns the Foundation string constant NSStreamNetworkServiceTypeCallSignaling as an idiomatic *String.
+// NSStreamNetworkServiceTypeCallSignaling returns the string constant NSStreamNetworkServiceTypeCallSignaling.
 func NSStreamNetworkServiceTypeCallSignaling() *String {
-	_r := raw.NSStreamNetworkServiceTypeCallSignaling()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSStreamNetworkServiceTypeCallSignaling")))
 }
 
-// NSWillBecomeMultiThreadedNotification returns the Foundation string constant NSWillBecomeMultiThreadedNotification as an idiomatic *String.
+// NSWillBecomeMultiThreadedNotification returns the string constant NSWillBecomeMultiThreadedNotification.
 func NSWillBecomeMultiThreadedNotification() *String {
-	_r := raw.NSWillBecomeMultiThreadedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSWillBecomeMultiThreadedNotification")))
 }
 
-// NSDidBecomeSingleThreadedNotification returns the Foundation string constant NSDidBecomeSingleThreadedNotification as an idiomatic *String.
+// NSDidBecomeSingleThreadedNotification returns the string constant NSDidBecomeSingleThreadedNotification.
 func NSDidBecomeSingleThreadedNotification() *String {
-	_r := raw.NSDidBecomeSingleThreadedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSDidBecomeSingleThreadedNotification")))
 }
 
-// NSThreadWillExitNotification returns the Foundation string constant NSThreadWillExitNotification as an idiomatic *String.
+// NSThreadWillExitNotification returns the string constant NSThreadWillExitNotification.
 func NSThreadWillExitNotification() *String {
-	_r := raw.NSThreadWillExitNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSThreadWillExitNotification")))
 }
 
-// NSSystemTimeZoneDidChangeNotification returns the Foundation string constant NSSystemTimeZoneDidChangeNotification as an idiomatic *String.
+// NSSystemTimeZoneDidChangeNotification returns the string constant NSSystemTimeZoneDidChangeNotification.
 func NSSystemTimeZoneDidChangeNotification() *String {
-	_r := raw.NSSystemTimeZoneDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSSystemTimeZoneDidChangeNotification")))
 }
 
-// @const NSURLCredentialStorageChangedNotification @abstract This notification is sent on the main thread whenever the set of stored credentials changes.
-// NSURLCredentialStorageChangedNotification returns the Foundation string constant NSURLCredentialStorageChangedNotification as an idiomatic *String.
+// NSURLCredentialStorageChangedNotification returns the string constant NSURLCredentialStorageChangedNotification.
 func NSURLCredentialStorageChangedNotification() *String {
-	_r := raw.NSURLCredentialStorageChangedNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLCredentialStorageChangedNotification")))
 }
 
-// NSURLErrorDomain returns the Foundation string constant NSURLErrorDomain as an idiomatic *String.
-func NSURLErrorDomain() *String {
-	_r := raw.NSURLErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
-}
+// NSURLErrorDomain returns the string constant NSURLErrorDomain.
+func NSURLErrorDomain() *String { return StringFromID(purego.CFConstant(_symbol("NSURLErrorDomain"))) }
 
-// @const NSURLErrorNetworkUnavailableReasonKey @abstract The NSErrorUserInfoKey used to store and retrieve the NSNumber object corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints.  See the NSURLErrorNetworkUnavailableReason enum for details.
-// NSURLErrorNetworkUnavailableReasonKey returns the Foundation string constant NSURLErrorNetworkUnavailableReasonKey as an idiomatic *String.
+// NSURLErrorNetworkUnavailableReasonKey returns the string constant NSURLErrorNetworkUnavailableReasonKey.
 func NSURLErrorNetworkUnavailableReasonKey() *String {
-	_r := raw.NSURLErrorNetworkUnavailableReasonKey()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSURLErrorNetworkUnavailableReasonKey")))
 }
 
-// NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.
-// NSUserDefaultsDidChangeNotification returns the Foundation string constant NSUserDefaultsDidChangeNotification as an idiomatic *String.
+// NSUserDefaultsDidChangeNotification returns the string constant NSUserDefaultsDidChangeNotification.
 func NSUserDefaultsDidChangeNotification() *String {
-	_r := raw.NSUserDefaultsDidChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUserDefaultsDidChangeNotification")))
 }
 
-// NSNegateBooleanTransformerName returns the Foundation string constant NSNegateBooleanTransformerName as an idiomatic *String.
+// NSNegateBooleanTransformerName returns the string constant NSNegateBooleanTransformerName.
 func NSNegateBooleanTransformerName() *String {
-	_r := raw.NSNegateBooleanTransformerName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSNegateBooleanTransformerName")))
 }
 
-// NSIsNilTransformerName returns the Foundation string constant NSIsNilTransformerName as an idiomatic *String.
+// NSIsNilTransformerName returns the string constant NSIsNilTransformerName.
 func NSIsNilTransformerName() *String {
-	_r := raw.NSIsNilTransformerName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSIsNilTransformerName")))
 }
 
-// NSIsNotNilTransformerName returns the Foundation string constant NSIsNotNilTransformerName as an idiomatic *String.
+// NSIsNotNilTransformerName returns the string constant NSIsNotNilTransformerName.
 func NSIsNotNilTransformerName() *String {
-	_r := raw.NSIsNotNilTransformerName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSIsNotNilTransformerName")))
 }
 
-// NSUnarchiveFromDataTransformerName returns the Foundation string constant NSUnarchiveFromDataTransformerName as an idiomatic *String.
+// NSUnarchiveFromDataTransformerName returns the string constant NSUnarchiveFromDataTransformerName.
 func NSUnarchiveFromDataTransformerName() *String {
-	_r := raw.NSUnarchiveFromDataTransformerName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUnarchiveFromDataTransformerName")))
 }
 
-// NSKeyedUnarchiveFromDataTransformerName returns the Foundation string constant NSKeyedUnarchiveFromDataTransformerName as an idiomatic *String.
+// NSKeyedUnarchiveFromDataTransformerName returns the string constant NSKeyedUnarchiveFromDataTransformerName.
 func NSKeyedUnarchiveFromDataTransformerName() *String {
-	_r := raw.NSKeyedUnarchiveFromDataTransformerName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSKeyedUnarchiveFromDataTransformerName")))
 }
 
-// NSSecureUnarchiveFromDataTransformerName returns the Foundation string constant NSSecureUnarchiveFromDataTransformerName as an idiomatic *String.
+// NSSecureUnarchiveFromDataTransformerName returns the string constant NSSecureUnarchiveFromDataTransformerName.
 func NSSecureUnarchiveFromDataTransformerName() *String {
-	_r := raw.NSSecureUnarchiveFromDataTransformerName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSSecureUnarchiveFromDataTransformerName")))
 }
 
-// NSXMLParserErrorDomain returns the Foundation string constant NSXMLParserErrorDomain as an idiomatic *String.
+// NSXMLParserErrorDomain returns the string constant NSXMLParserErrorDomain.
 func NSXMLParserErrorDomain() *String {
-	_r := raw.NSXMLParserErrorDomain()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSXMLParserErrorDomain")))
 }
 
-// NSLinguisticTagSchemeTokenType returns the Foundation string constant NSLinguisticTagSchemeTokenType as an idiomatic *String.
+// NSLinguisticTagSchemeTokenType returns the string constant NSLinguisticTagSchemeTokenType.
 func NSLinguisticTagSchemeTokenType() *String {
-	_r := raw.NSLinguisticTagSchemeTokenType()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeTokenType")))
 }
 
-// NSLinguisticTagSchemeLexicalClass returns the Foundation string constant NSLinguisticTagSchemeLexicalClass as an idiomatic *String.
+// NSLinguisticTagSchemeLexicalClass returns the string constant NSLinguisticTagSchemeLexicalClass.
 func NSLinguisticTagSchemeLexicalClass() *String {
-	_r := raw.NSLinguisticTagSchemeLexicalClass()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeLexicalClass")))
 }
 
-// NSLinguisticTagSchemeNameType returns the Foundation string constant NSLinguisticTagSchemeNameType as an idiomatic *String.
+// NSLinguisticTagSchemeNameType returns the string constant NSLinguisticTagSchemeNameType.
 func NSLinguisticTagSchemeNameType() *String {
-	_r := raw.NSLinguisticTagSchemeNameType()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeNameType")))
 }
 
-// NSLinguisticTagSchemeNameTypeOrLexicalClass returns the Foundation string constant NSLinguisticTagSchemeNameTypeOrLexicalClass as an idiomatic *String.
+// NSLinguisticTagSchemeNameTypeOrLexicalClass returns the string constant NSLinguisticTagSchemeNameTypeOrLexicalClass.
 func NSLinguisticTagSchemeNameTypeOrLexicalClass() *String {
-	_r := raw.NSLinguisticTagSchemeNameTypeOrLexicalClass()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeNameTypeOrLexicalClass")))
 }
 
-// NSLinguisticTagSchemeLemma returns the Foundation string constant NSLinguisticTagSchemeLemma as an idiomatic *String.
+// NSLinguisticTagSchemeLemma returns the string constant NSLinguisticTagSchemeLemma.
 func NSLinguisticTagSchemeLemma() *String {
-	_r := raw.NSLinguisticTagSchemeLemma()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeLemma")))
 }
 
-// NSLinguisticTagSchemeLanguage returns the Foundation string constant NSLinguisticTagSchemeLanguage as an idiomatic *String.
+// NSLinguisticTagSchemeLanguage returns the string constant NSLinguisticTagSchemeLanguage.
 func NSLinguisticTagSchemeLanguage() *String {
-	_r := raw.NSLinguisticTagSchemeLanguage()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeLanguage")))
 }
 
-// NSLinguisticTagSchemeScript returns the Foundation string constant NSLinguisticTagSchemeScript as an idiomatic *String.
+// NSLinguisticTagSchemeScript returns the string constant NSLinguisticTagSchemeScript.
 func NSLinguisticTagSchemeScript() *String {
-	_r := raw.NSLinguisticTagSchemeScript()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSchemeScript")))
 }
 
-// NSLinguisticTagWord returns the Foundation string constant NSLinguisticTagWord as an idiomatic *String.
+// NSLinguisticTagWord returns the string constant NSLinguisticTagWord.
 func NSLinguisticTagWord() *String {
-	_r := raw.NSLinguisticTagWord()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagWord")))
 }
 
-// NSLinguisticTagPunctuation returns the Foundation string constant NSLinguisticTagPunctuation as an idiomatic *String.
+// NSLinguisticTagPunctuation returns the string constant NSLinguisticTagPunctuation.
 func NSLinguisticTagPunctuation() *String {
-	_r := raw.NSLinguisticTagPunctuation()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagPunctuation")))
 }
 
-// NSLinguisticTagWhitespace returns the Foundation string constant NSLinguisticTagWhitespace as an idiomatic *String.
+// NSLinguisticTagWhitespace returns the string constant NSLinguisticTagWhitespace.
 func NSLinguisticTagWhitespace() *String {
-	_r := raw.NSLinguisticTagWhitespace()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagWhitespace")))
 }
 
-// NSLinguisticTagOther returns the Foundation string constant NSLinguisticTagOther as an idiomatic *String.
+// NSLinguisticTagOther returns the string constant NSLinguisticTagOther.
 func NSLinguisticTagOther() *String {
-	_r := raw.NSLinguisticTagOther()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOther")))
 }
 
-// NSLinguisticTagNoun returns the Foundation string constant NSLinguisticTagNoun as an idiomatic *String.
+// NSLinguisticTagNoun returns the string constant NSLinguisticTagNoun.
 func NSLinguisticTagNoun() *String {
-	_r := raw.NSLinguisticTagNoun()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagNoun")))
 }
 
-// NSLinguisticTagVerb returns the Foundation string constant NSLinguisticTagVerb as an idiomatic *String.
+// NSLinguisticTagVerb returns the string constant NSLinguisticTagVerb.
 func NSLinguisticTagVerb() *String {
-	_r := raw.NSLinguisticTagVerb()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagVerb")))
 }
 
-// NSLinguisticTagAdjective returns the Foundation string constant NSLinguisticTagAdjective as an idiomatic *String.
+// NSLinguisticTagAdjective returns the string constant NSLinguisticTagAdjective.
 func NSLinguisticTagAdjective() *String {
-	_r := raw.NSLinguisticTagAdjective()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagAdjective")))
 }
 
-// NSLinguisticTagAdverb returns the Foundation string constant NSLinguisticTagAdverb as an idiomatic *String.
+// NSLinguisticTagAdverb returns the string constant NSLinguisticTagAdverb.
 func NSLinguisticTagAdverb() *String {
-	_r := raw.NSLinguisticTagAdverb()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagAdverb")))
 }
 
-// NSLinguisticTagPronoun returns the Foundation string constant NSLinguisticTagPronoun as an idiomatic *String.
+// NSLinguisticTagPronoun returns the string constant NSLinguisticTagPronoun.
 func NSLinguisticTagPronoun() *String {
-	_r := raw.NSLinguisticTagPronoun()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagPronoun")))
 }
 
-// NSLinguisticTagDeterminer returns the Foundation string constant NSLinguisticTagDeterminer as an idiomatic *String.
+// NSLinguisticTagDeterminer returns the string constant NSLinguisticTagDeterminer.
 func NSLinguisticTagDeterminer() *String {
-	_r := raw.NSLinguisticTagDeterminer()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagDeterminer")))
 }
 
-// NSLinguisticTagParticle returns the Foundation string constant NSLinguisticTagParticle as an idiomatic *String.
+// NSLinguisticTagParticle returns the string constant NSLinguisticTagParticle.
 func NSLinguisticTagParticle() *String {
-	_r := raw.NSLinguisticTagParticle()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagParticle")))
 }
 
-// NSLinguisticTagPreposition returns the Foundation string constant NSLinguisticTagPreposition as an idiomatic *String.
+// NSLinguisticTagPreposition returns the string constant NSLinguisticTagPreposition.
 func NSLinguisticTagPreposition() *String {
-	_r := raw.NSLinguisticTagPreposition()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagPreposition")))
 }
 
-// NSLinguisticTagNumber returns the Foundation string constant NSLinguisticTagNumber as an idiomatic *String.
+// NSLinguisticTagNumber returns the string constant NSLinguisticTagNumber.
 func NSLinguisticTagNumber() *String {
-	_r := raw.NSLinguisticTagNumber()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagNumber")))
 }
 
-// NSLinguisticTagConjunction returns the Foundation string constant NSLinguisticTagConjunction as an idiomatic *String.
+// NSLinguisticTagConjunction returns the string constant NSLinguisticTagConjunction.
 func NSLinguisticTagConjunction() *String {
-	_r := raw.NSLinguisticTagConjunction()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagConjunction")))
 }
 
-// NSLinguisticTagInterjection returns the Foundation string constant NSLinguisticTagInterjection as an idiomatic *String.
+// NSLinguisticTagInterjection returns the string constant NSLinguisticTagInterjection.
 func NSLinguisticTagInterjection() *String {
-	_r := raw.NSLinguisticTagInterjection()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagInterjection")))
 }
 
-// NSLinguisticTagClassifier returns the Foundation string constant NSLinguisticTagClassifier as an idiomatic *String.
+// NSLinguisticTagClassifier returns the string constant NSLinguisticTagClassifier.
 func NSLinguisticTagClassifier() *String {
-	_r := raw.NSLinguisticTagClassifier()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagClassifier")))
 }
 
-// NSLinguisticTagIdiom returns the Foundation string constant NSLinguisticTagIdiom as an idiomatic *String.
+// NSLinguisticTagIdiom returns the string constant NSLinguisticTagIdiom.
 func NSLinguisticTagIdiom() *String {
-	_r := raw.NSLinguisticTagIdiom()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagIdiom")))
 }
 
-// NSLinguisticTagOtherWord returns the Foundation string constant NSLinguisticTagOtherWord as an idiomatic *String.
+// NSLinguisticTagOtherWord returns the string constant NSLinguisticTagOtherWord.
 func NSLinguisticTagOtherWord() *String {
-	_r := raw.NSLinguisticTagOtherWord()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOtherWord")))
 }
 
-// NSLinguisticTagSentenceTerminator returns the Foundation string constant NSLinguisticTagSentenceTerminator as an idiomatic *String.
+// NSLinguisticTagSentenceTerminator returns the string constant NSLinguisticTagSentenceTerminator.
 func NSLinguisticTagSentenceTerminator() *String {
-	_r := raw.NSLinguisticTagSentenceTerminator()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagSentenceTerminator")))
 }
 
-// NSLinguisticTagOpenQuote returns the Foundation string constant NSLinguisticTagOpenQuote as an idiomatic *String.
+// NSLinguisticTagOpenQuote returns the string constant NSLinguisticTagOpenQuote.
 func NSLinguisticTagOpenQuote() *String {
-	_r := raw.NSLinguisticTagOpenQuote()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOpenQuote")))
 }
 
-// NSLinguisticTagCloseQuote returns the Foundation string constant NSLinguisticTagCloseQuote as an idiomatic *String.
+// NSLinguisticTagCloseQuote returns the string constant NSLinguisticTagCloseQuote.
 func NSLinguisticTagCloseQuote() *String {
-	_r := raw.NSLinguisticTagCloseQuote()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagCloseQuote")))
 }
 
-// NSLinguisticTagOpenParenthesis returns the Foundation string constant NSLinguisticTagOpenParenthesis as an idiomatic *String.
+// NSLinguisticTagOpenParenthesis returns the string constant NSLinguisticTagOpenParenthesis.
 func NSLinguisticTagOpenParenthesis() *String {
-	_r := raw.NSLinguisticTagOpenParenthesis()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOpenParenthesis")))
 }
 
-// NSLinguisticTagCloseParenthesis returns the Foundation string constant NSLinguisticTagCloseParenthesis as an idiomatic *String.
+// NSLinguisticTagCloseParenthesis returns the string constant NSLinguisticTagCloseParenthesis.
 func NSLinguisticTagCloseParenthesis() *String {
-	_r := raw.NSLinguisticTagCloseParenthesis()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagCloseParenthesis")))
 }
 
-// NSLinguisticTagWordJoiner returns the Foundation string constant NSLinguisticTagWordJoiner as an idiomatic *String.
+// NSLinguisticTagWordJoiner returns the string constant NSLinguisticTagWordJoiner.
 func NSLinguisticTagWordJoiner() *String {
-	_r := raw.NSLinguisticTagWordJoiner()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagWordJoiner")))
 }
 
-// NSLinguisticTagDash returns the Foundation string constant NSLinguisticTagDash as an idiomatic *String.
+// NSLinguisticTagDash returns the string constant NSLinguisticTagDash.
 func NSLinguisticTagDash() *String {
-	_r := raw.NSLinguisticTagDash()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagDash")))
 }
 
-// NSLinguisticTagOtherPunctuation returns the Foundation string constant NSLinguisticTagOtherPunctuation as an idiomatic *String.
+// NSLinguisticTagOtherPunctuation returns the string constant NSLinguisticTagOtherPunctuation.
 func NSLinguisticTagOtherPunctuation() *String {
-	_r := raw.NSLinguisticTagOtherPunctuation()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOtherPunctuation")))
 }
 
-// NSLinguisticTagParagraphBreak returns the Foundation string constant NSLinguisticTagParagraphBreak as an idiomatic *String.
+// NSLinguisticTagParagraphBreak returns the string constant NSLinguisticTagParagraphBreak.
 func NSLinguisticTagParagraphBreak() *String {
-	_r := raw.NSLinguisticTagParagraphBreak()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagParagraphBreak")))
 }
 
-// NSLinguisticTagOtherWhitespace returns the Foundation string constant NSLinguisticTagOtherWhitespace as an idiomatic *String.
+// NSLinguisticTagOtherWhitespace returns the string constant NSLinguisticTagOtherWhitespace.
 func NSLinguisticTagOtherWhitespace() *String {
-	_r := raw.NSLinguisticTagOtherWhitespace()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOtherWhitespace")))
 }
 
-// NSLinguisticTagPersonalName returns the Foundation string constant NSLinguisticTagPersonalName as an idiomatic *String.
+// NSLinguisticTagPersonalName returns the string constant NSLinguisticTagPersonalName.
 func NSLinguisticTagPersonalName() *String {
-	_r := raw.NSLinguisticTagPersonalName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagPersonalName")))
 }
 
-// NSLinguisticTagPlaceName returns the Foundation string constant NSLinguisticTagPlaceName as an idiomatic *String.
+// NSLinguisticTagPlaceName returns the string constant NSLinguisticTagPlaceName.
 func NSLinguisticTagPlaceName() *String {
-	_r := raw.NSLinguisticTagPlaceName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagPlaceName")))
 }
 
-// NSLinguisticTagOrganizationName returns the Foundation string constant NSLinguisticTagOrganizationName as an idiomatic *String.
+// NSLinguisticTagOrganizationName returns the string constant NSLinguisticTagOrganizationName.
 func NSLinguisticTagOrganizationName() *String {
-	_r := raw.NSLinguisticTagOrganizationName()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOrganizationName")))
 }
 
-// NSMetadataQueryDidStartGatheringNotification returns the Foundation string constant NSMetadataQueryDidStartGatheringNotification as an idiomatic *String.
+// NSMetadataQueryDidStartGatheringNotification returns the string constant NSMetadataQueryDidStartGatheringNotification.
 func NSMetadataQueryDidStartGatheringNotification() *String {
-	_r := raw.NSMetadataQueryDidStartGatheringNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryDidStartGatheringNotification")))
 }
 
-// NSMetadataQueryGatheringProgressNotification returns the Foundation string constant NSMetadataQueryGatheringProgressNotification as an idiomatic *String.
+// NSMetadataQueryGatheringProgressNotification returns the string constant NSMetadataQueryGatheringProgressNotification.
 func NSMetadataQueryGatheringProgressNotification() *String {
-	_r := raw.NSMetadataQueryGatheringProgressNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryGatheringProgressNotification")))
 }
 
-// NSMetadataQueryDidFinishGatheringNotification returns the Foundation string constant NSMetadataQueryDidFinishGatheringNotification as an idiomatic *String.
+// NSMetadataQueryDidFinishGatheringNotification returns the string constant NSMetadataQueryDidFinishGatheringNotification.
 func NSMetadataQueryDidFinishGatheringNotification() *String {
-	_r := raw.NSMetadataQueryDidFinishGatheringNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryDidFinishGatheringNotification")))
 }
 
-// NSMetadataQueryDidUpdateNotification returns the Foundation string constant NSMetadataQueryDidUpdateNotification as an idiomatic *String.
+// NSMetadataQueryDidUpdateNotification returns the string constant NSMetadataQueryDidUpdateNotification.
 func NSMetadataQueryDidUpdateNotification() *String {
-	_r := raw.NSMetadataQueryDidUpdateNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryDidUpdateNotification")))
 }
 
-// NSUbiquitousKeyValueStoreDidChangeExternallyNotification returns the Foundation string constant NSUbiquitousKeyValueStoreDidChangeExternallyNotification as an idiomatic *String.
+// NSUbiquitousKeyValueStoreDidChangeExternallyNotification returns the string constant NSUbiquitousKeyValueStoreDidChangeExternallyNotification.
 func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *String {
-	_r := raw.NSUbiquitousKeyValueStoreDidChangeExternallyNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUbiquitousKeyValueStoreDidChangeExternallyNotification")))
 }
 
-// NSUndoManagerCheckpointNotification returns the Foundation string constant NSUndoManagerCheckpointNotification as an idiomatic *String.
+// NSUndoManagerCheckpointNotification returns the string constant NSUndoManagerCheckpointNotification.
 func NSUndoManagerCheckpointNotification() *String {
-	_r := raw.NSUndoManagerCheckpointNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerCheckpointNotification")))
 }
 
-// NSUndoManagerWillUndoChangeNotification returns the Foundation string constant NSUndoManagerWillUndoChangeNotification as an idiomatic *String.
+// NSUndoManagerWillUndoChangeNotification returns the string constant NSUndoManagerWillUndoChangeNotification.
 func NSUndoManagerWillUndoChangeNotification() *String {
-	_r := raw.NSUndoManagerWillUndoChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerWillUndoChangeNotification")))
 }
 
-// NSUndoManagerWillRedoChangeNotification returns the Foundation string constant NSUndoManagerWillRedoChangeNotification as an idiomatic *String.
+// NSUndoManagerWillRedoChangeNotification returns the string constant NSUndoManagerWillRedoChangeNotification.
 func NSUndoManagerWillRedoChangeNotification() *String {
-	_r := raw.NSUndoManagerWillRedoChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerWillRedoChangeNotification")))
 }
 
-// NSUndoManagerDidUndoChangeNotification returns the Foundation string constant NSUndoManagerDidUndoChangeNotification as an idiomatic *String.
+// NSUndoManagerDidUndoChangeNotification returns the string constant NSUndoManagerDidUndoChangeNotification.
 func NSUndoManagerDidUndoChangeNotification() *String {
-	_r := raw.NSUndoManagerDidUndoChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerDidUndoChangeNotification")))
 }
 
-// NSUndoManagerDidRedoChangeNotification returns the Foundation string constant NSUndoManagerDidRedoChangeNotification as an idiomatic *String.
+// NSUndoManagerDidRedoChangeNotification returns the string constant NSUndoManagerDidRedoChangeNotification.
 func NSUndoManagerDidRedoChangeNotification() *String {
-	_r := raw.NSUndoManagerDidRedoChangeNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerDidRedoChangeNotification")))
 }
 
-// NSUndoManagerDidOpenUndoGroupNotification returns the Foundation string constant NSUndoManagerDidOpenUndoGroupNotification as an idiomatic *String.
+// NSUndoManagerDidOpenUndoGroupNotification returns the string constant NSUndoManagerDidOpenUndoGroupNotification.
 func NSUndoManagerDidOpenUndoGroupNotification() *String {
-	_r := raw.NSUndoManagerDidOpenUndoGroupNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerDidOpenUndoGroupNotification")))
 }
 
-// NSUndoManagerWillCloseUndoGroupNotification returns the Foundation string constant NSUndoManagerWillCloseUndoGroupNotification as an idiomatic *String.
+// NSUndoManagerWillCloseUndoGroupNotification returns the string constant NSUndoManagerWillCloseUndoGroupNotification.
 func NSUndoManagerWillCloseUndoGroupNotification() *String {
-	_r := raw.NSUndoManagerWillCloseUndoGroupNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerWillCloseUndoGroupNotification")))
 }
 
-// NSUndoManagerDidCloseUndoGroupNotification returns the Foundation string constant NSUndoManagerDidCloseUndoGroupNotification as an idiomatic *String.
+// NSUndoManagerDidCloseUndoGroupNotification returns the string constant NSUndoManagerDidCloseUndoGroupNotification.
 func NSUndoManagerDidCloseUndoGroupNotification() *String {
-	_r := raw.NSUndoManagerDidCloseUndoGroupNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerDidCloseUndoGroupNotification")))
 }
 
-// NSLocalNotificationCenterType returns the Foundation string constant NSLocalNotificationCenterType as an idiomatic *String.
+// NSLocalNotificationCenterType returns the string constant NSLocalNotificationCenterType.
 func NSLocalNotificationCenterType() *String {
-	_r := raw.NSLocalNotificationCenterType()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSLocalNotificationCenterType")))
 }
 
-// NSTaskDidTerminateNotification returns the Foundation string constant NSTaskDidTerminateNotification as an idiomatic *String.
+// NSTaskDidTerminateNotification returns the string constant NSTaskDidTerminateNotification.
 func NSTaskDidTerminateNotification() *String {
-	_r := raw.NSTaskDidTerminateNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSTaskDidTerminateNotification")))
 }
 
-// NSAppleEventManagerWillProcessFirstEventNotification returns the Foundation string constant NSAppleEventManagerWillProcessFirstEventNotification as an idiomatic *String.
+// NSAppleEventManagerWillProcessFirstEventNotification returns the string constant NSAppleEventManagerWillProcessFirstEventNotification.
 func NSAppleEventManagerWillProcessFirstEventNotification() *String {
-	_r := raw.NSAppleEventManagerWillProcessFirstEventNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSAppleEventManagerWillProcessFirstEventNotification")))
 }
 
-// NSClassDescriptionNeededForClassNotification returns the Foundation string constant NSClassDescriptionNeededForClassNotification as an idiomatic *String.
+// NSClassDescriptionNeededForClassNotification returns the string constant NSClassDescriptionNeededForClassNotification.
 func NSClassDescriptionNeededForClassNotification() *String {
-	_r := raw.NSClassDescriptionNeededForClassNotification()
-	if _r == nil {
-		return nil
-	}
-	return StringFromID(_r.Ptr())
+	return StringFromID(purego.CFConstant(_symbol("NSClassDescriptionNeededForClassNotification")))
 }

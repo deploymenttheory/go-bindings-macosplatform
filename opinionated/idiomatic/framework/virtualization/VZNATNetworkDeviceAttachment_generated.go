@@ -5,45 +5,58 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that routes network requests through the host computer and performs network address translation on the resulting packets.
+// NATNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZNATNetworkDeviceAttachment.
 //
-// NATNetworkDeviceAttachment wraps [raw.VZNATNetworkDeviceAttachment] with a fluent Go API.
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A device that routes network requests through the host computer and performs network address translation on the resulting packets.
 type NATNetworkDeviceAttachment struct {
-	inner *raw.VZNATNetworkDeviceAttachment
+	NetworkDeviceAttachment
 }
 
-// Unwrap returns the underlying [raw.VZNATNetworkDeviceAttachment].
-func (x *NATNetworkDeviceAttachment) Unwrap() *raw.VZNATNetworkDeviceAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NATNetworkDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// NATNetworkDeviceAttachmentFromID adopts an existing object pointer as a NATNetworkDeviceAttachment (nil for 0).
+// NATNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a NATNetworkDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func NATNetworkDeviceAttachmentFromID(id objc.ID) *NATNetworkDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &NATNetworkDeviceAttachment{inner: raw.VZNATNetworkDeviceAttachmentFromID(id)}
+	x := &NATNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNATNetworkDeviceAttachment creates a new [NATNetworkDeviceAttachment].
+// nATNetworkDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// NATNetworkDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nATNetworkDeviceAttachmentAdopt(id objc.ID) *NATNetworkDeviceAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &NATNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNATNetworkDeviceAttachment creates a new NATNetworkDeviceAttachment.
 func NewNATNetworkDeviceAttachment() *NATNetworkDeviceAttachment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNATNetworkDeviceAttachment")), objc.RegisterName("new"))
-	return &NATNetworkDeviceAttachment{inner: raw.VZNATNetworkDeviceAttachmentFromID(_id)}
-}
-
-func (x *NATNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
-	return &x.inner.VZNetworkDeviceAttachment
+	_id := objc.Send[objc.ID](objc.ID(_class("VZNATNetworkDeviceAttachment")), objc.RegisterName("new"))
+	return nATNetworkDeviceAttachmentAdopt(_id)
 }
 
 // NATNetworkDeviceAttachmentable is the interface implemented by [NATNetworkDeviceAttachment], for mocking and DI.
 type NATNetworkDeviceAttachmentable interface {
-	Unwrap() *raw.VZNATNetworkDeviceAttachment
+	obj.Object
 }
 
 var _ NATNetworkDeviceAttachmentable = (*NATNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*NATNetworkDeviceAttachment)(nil)

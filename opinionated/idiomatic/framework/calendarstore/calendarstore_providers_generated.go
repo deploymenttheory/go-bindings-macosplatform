@@ -5,10 +5,11 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CalCalendarItemProvider is implemented by CalCalendarItem and any idiomatic type wrapping a CalCalendarItem subclass.
+// CalCalendarItemProvider is accepted wherever a CalCalendarItem (or one of its subclasses) is expected.
 type CalCalendarItemProvider interface {
-	asCalCalendarItem() *raw.CalCalendarItem
+	objref.Object
+	isCalCalendarItem()
 }

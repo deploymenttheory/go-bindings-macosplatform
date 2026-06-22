@@ -5,15 +5,17 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// MultiValueProvider is implemented by MultiValue and any idiomatic type wrapping a ABMultiValue subclass.
+// MultiValueProvider is accepted wherever a ABMultiValue (or one of its subclasses) is expected.
 type MultiValueProvider interface {
-	asMultiValue() *raw.ABMultiValue
+	objref.Object
+	isMultiValue()
 }
 
-// RecordProvider is implemented by Record and any idiomatic type wrapping a ABRecord subclass.
+// RecordProvider is accepted wherever a ABRecord (or one of its subclasses) is expected.
 type RecordProvider interface {
-	asRecord() *raw.ABRecord
+	objref.Object
+	isRecord()
 }

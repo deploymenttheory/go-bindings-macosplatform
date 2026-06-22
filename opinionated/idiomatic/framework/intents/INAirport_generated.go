@@ -5,73 +5,104 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes an airport.
+// Airport is an idiomatic wrapper over the Objective-C class INAirport.
 //
-// Airport wraps [raw.INAirport] with a fluent Go API.
+// The information that describes an airport.
 type Airport struct {
-	inner *raw.INAirport
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INAirport].
-func (x *Airport) Unwrap() *raw.INAirport { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Airport) ID() objc.ID { return x.inner.Ptr() }
-
-// AirportFromID adopts an existing object pointer as a Airport (nil for 0).
+// AirportFromID adopts an existing Objective-C object as a Airport
+// (nil for 0), retaining it and registering a release finalizer.
 func AirportFromID(id objc.ID) *Airport {
 	if id == 0 {
 		return nil
 	}
-	return &Airport{inner: raw.INAirportFromID(id)}
+	x := &Airport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new airport object with the specified contents and attributes.
-//
-// NewAirportWithNameIataCodeIcaoCode creates a new [Airport].
+// airportAdopt wraps an Objective-C object that this code just created as a
+// Airport (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func airportAdopt(id objc.ID) *Airport {
+	if id == 0 {
+		return nil
+	}
+	x := &Airport{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Airport) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Airport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Airport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Airport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAirportWithNameIataCodeIcaoCode creates a new airport object with the specified contents and attributes.
 func NewAirportWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode string) *Airport {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAirport")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:iataCode:icaoCode:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(iataCode).Ptr(), foundation.NSStringStringWithUTF8String(icaoCode).Ptr())
-	return &Airport{inner: raw.INAirportFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INAirport")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:iataCode:icaoCode:"), purego.NSString(name), purego.NSString(iataCode), purego.NSString(icaoCode))
+	return airportAdopt(_id)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Airport) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IataCode calls the underlying IataCode.
+// IataCode wraps the corresponding Objective-C method.
 func (x *Airport) IataCode() string {
-	_r := x.inner.IataCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iataCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IcaoCode calls the underlying IcaoCode.
+// IcaoCode wraps the corresponding Objective-C method.
 func (x *Airport) IcaoCode() string {
-	_r := x.inner.IcaoCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icaoCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Airportable is the interface implemented by [Airport], for mocking and DI.
 type Airportable interface {
-	Unwrap() *raw.INAirport
+	obj.Object
 	Name() string
 	IataCode() string
 	IcaoCode() string

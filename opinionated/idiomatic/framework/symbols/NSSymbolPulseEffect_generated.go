@@ -5,67 +5,72 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that fades the opacity of some or all layers in a symbol-based image.
+// SymbolPulseEffect is an idiomatic wrapper over the Objective-C class NSSymbolPulseEffect.
 //
-// SymbolPulseEffect wraps [raw.NSSymbolPulseEffect] with a fluent Go API.
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A type that fades the opacity of some or all layers in a symbol-based image.
 type SymbolPulseEffect struct {
-	inner *raw.NSSymbolPulseEffect
+	SymbolEffect
 }
 
-// Unwrap returns the underlying [raw.NSSymbolPulseEffect].
-func (x *SymbolPulseEffect) Unwrap() *raw.NSSymbolPulseEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolPulseEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolPulseEffectFromID adopts an existing object pointer as a SymbolPulseEffect (nil for 0).
+// SymbolPulseEffectFromID adopts an existing Objective-C object as a SymbolPulseEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolPulseEffectFromID(id objc.ID) *SymbolPulseEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolPulseEffect{inner: raw.NSSymbolPulseEffectFromID(id)}
+	x := &SymbolPulseEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolPulseEffect creates a new [SymbolPulseEffect].
+// symbolPulseEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolPulseEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolPulseEffectAdopt(id objc.ID) *SymbolPulseEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolPulseEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolPulseEffect creates a new SymbolPulseEffect.
 func NewSymbolPulseEffect() *SymbolPulseEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolPulseEffect")), objc.RegisterName("new"))
-	return &SymbolPulseEffect{inner: raw.NSSymbolPulseEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolPulseEffect")), objc.RegisterName("new"))
+	return symbolPulseEffectAdopt(_id)
 }
 
-// A copy of the effect requesting an animation that pulses only the layers marked to always pulse.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
+// EffectWithByLayer a copy of the effect requesting an animation that pulses only the layers marked to always pulse.
 func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolPulseEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolPulseEffectFromID(_r)
 }
 
-// A copy of the effect requesting an animation that pulses all layers simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+// EffectWithWholeSymbol a copy of the effect requesting an animation that pulses all layers simultaneously.
 func (x *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolPulseEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolPulseEffectFromID(_r)
 }
-
-func (x *SymbolPulseEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolPulseEffectable is the interface implemented by [SymbolPulseEffect], for mocking and DI.
 type SymbolPulseEffectable interface {
-	Unwrap() *raw.NSSymbolPulseEffect
+	obj.Object
 	EffectWithByLayer() *SymbolPulseEffect
 	EffectWithWholeSymbol() *SymbolPulseEffect
 }
 
 var _ SymbolPulseEffectable = (*SymbolPulseEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolPulseEffect)(nil)

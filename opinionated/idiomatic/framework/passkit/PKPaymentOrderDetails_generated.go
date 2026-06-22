@@ -5,130 +5,154 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Optional metadata with payment order details for the placed order.
+// PaymentOrderDetails is an idiomatic wrapper over the Objective-C class PKPaymentOrderDetails.
 //
-// PaymentOrderDetails wraps [raw.PKPaymentOrderDetails] with a fluent Go API.
+// Optional metadata with payment order details for the placed order.
 type PaymentOrderDetails struct {
-	inner *raw.PKPaymentOrderDetails
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentOrderDetails].
-func (x *PaymentOrderDetails) Unwrap() *raw.PKPaymentOrderDetails { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentOrderDetails) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentOrderDetailsFromID adopts an existing object pointer as a PaymentOrderDetails (nil for 0).
+// PaymentOrderDetailsFromID adopts an existing Objective-C object as a PaymentOrderDetails
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentOrderDetailsFromID(id objc.ID) *PaymentOrderDetails {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentOrderDetails{inner: raw.PKPaymentOrderDetailsFromID(id)}
+	x := &PaymentOrderDetails{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a payment order details object with the identifier, web service URL, and authentication token you provide.
-//
-// NewPaymentOrderDetailsWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken creates a new [PaymentOrderDetails].
+// paymentOrderDetailsAdopt wraps an Objective-C object that this code just created as a
+// PaymentOrderDetails (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentOrderDetailsAdopt(id objc.ID) *PaymentOrderDetails {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentOrderDetails{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentOrderDetails) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentOrderDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentOrderDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentOrderDetails) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPaymentOrderDetailsWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken initializes a payment order details object with the identifier, web service URL, and authentication token you provide.
 func NewPaymentOrderDetailsWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken(orderTypeIdentifier string, orderIdentifier string, webServiceURL string, authenticationToken string) *PaymentOrderDetails {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentOrderDetails")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderTypeIdentifier:orderIdentifier:webServiceURL:authenticationToken:"), foundation.NSStringStringWithUTF8String(orderTypeIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(orderIdentifier).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webServiceURL)).Ptr(), foundation.NSStringStringWithUTF8String(authenticationToken).Ptr())
-	return &PaymentOrderDetails{inner: raw.PKPaymentOrderDetailsFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentOrderDetails")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOrderTypeIdentifier:orderIdentifier:webServiceURL:authenticationToken:"), purego.NSString(orderTypeIdentifier), purego.NSString(orderIdentifier), rt.FileURL(webServiceURL), purego.NSString(authenticationToken))
+	return paymentOrderDetailsAdopt(_id)
 }
 
-// An identifier for the order type associated with the order.
-//
-// WithOrderTypeIdentifier sets the orderTypeIdentifier property and returns the receiver for chaining.
+// WithOrderTypeIdentifier an identifier for the order type associated with the order.
 func (x *PaymentOrderDetails) WithOrderTypeIdentifier(orderTypeIdentifier string) *PaymentOrderDetails {
-	x.inner.SetOrderTypeIdentifier(foundation.NSStringStringWithUTF8String(orderTypeIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderTypeIdentifier:"), purego.NSString(orderTypeIdentifier))
 	return x
 }
 
-// A unique order identifier scoped to your order type identifier.
-//
-// WithOrderIdentifier sets the orderIdentifier property and returns the receiver for chaining.
+// WithOrderIdentifier a unique order identifier scoped to your order type identifier.
 func (x *PaymentOrderDetails) WithOrderIdentifier(orderIdentifier string) *PaymentOrderDetails {
-	x.inner.SetOrderIdentifier(foundation.NSStringStringWithUTF8String(orderIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderIdentifier:"), purego.NSString(orderIdentifier))
 	return x
 }
 
-// The URL for your web service.
-//
-// WithWebServiceURL sets the webServiceURL property and returns the receiver for chaining.
+// WithWebServiceURL the URL for your web service.
 func (x *PaymentOrderDetails) WithWebServiceURL(webServiceURL string) *PaymentOrderDetails {
-	x.inner.SetWebServiceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webServiceURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebServiceURL:"), rt.FileURL(webServiceURL))
 	return x
 }
 
-// The authentification token supplied to your web service.
-//
-// WithAuthenticationToken sets the authenticationToken property and returns the receiver for chaining.
+// WithAuthenticationToken the authentification token supplied to your web service.
 func (x *PaymentOrderDetails) WithAuthenticationToken(authenticationToken string) *PaymentOrderDetails {
-	x.inner.SetAuthenticationToken(foundation.NSStringStringWithUTF8String(authenticationToken))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationToken:"), purego.NSString(authenticationToken))
 	return x
 }
 
-// OrderTypeIdentifier calls the underlying OrderTypeIdentifier.
+// OrderTypeIdentifier wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) OrderTypeIdentifier() string {
-	_r := x.inner.OrderTypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderTypeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOrderTypeIdentifier calls the underlying SetOrderTypeIdentifier.
+// SetOrderTypeIdentifier wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) SetOrderTypeIdentifier(orderTypeIdentifier string) {
-	x.inner.SetOrderTypeIdentifier(foundation.NSStringStringWithUTF8String(orderTypeIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderTypeIdentifier:"), purego.NSString(orderTypeIdentifier))
 }
 
-// OrderIdentifier calls the underlying OrderIdentifier.
+// OrderIdentifier wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) OrderIdentifier() string {
-	_r := x.inner.OrderIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOrderIdentifier calls the underlying SetOrderIdentifier.
+// SetOrderIdentifier wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) SetOrderIdentifier(orderIdentifier string) {
-	x.inner.SetOrderIdentifier(foundation.NSStringStringWithUTF8String(orderIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderIdentifier:"), purego.NSString(orderIdentifier))
 }
 
-// WebServiceURL calls the underlying WebServiceURL.
-func (x *PaymentOrderDetails) WebServiceURL() *foundation.NSURL {
-	return x.inner.WebServiceURL()
+// WebServiceURL wraps the corresponding Objective-C method.
+func (x *PaymentOrderDetails) WebServiceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webServiceURL"))
+	return obj.Wrap(_r)
 }
 
-// SetWebServiceURL calls the underlying SetWebServiceURL.
+// SetWebServiceURL wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) SetWebServiceURL(webServiceURL string) {
-	x.inner.SetWebServiceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webServiceURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebServiceURL:"), rt.FileURL(webServiceURL))
 }
 
-// AuthenticationToken calls the underlying AuthenticationToken.
+// AuthenticationToken wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) AuthenticationToken() string {
-	_r := x.inner.AuthenticationToken()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationToken"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAuthenticationToken calls the underlying SetAuthenticationToken.
+// SetAuthenticationToken wraps the corresponding Objective-C method.
 func (x *PaymentOrderDetails) SetAuthenticationToken(authenticationToken string) {
-	x.inner.SetAuthenticationToken(foundation.NSStringStringWithUTF8String(authenticationToken))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationToken:"), purego.NSString(authenticationToken))
 }
 
 // PaymentOrderDetailsable is the interface implemented by [PaymentOrderDetails], for mocking and DI.
 type PaymentOrderDetailsable interface {
-	Unwrap() *raw.PKPaymentOrderDetails
+	obj.Object
 	WithOrderTypeIdentifier(orderTypeIdentifier string) *PaymentOrderDetails
 	WithOrderIdentifier(orderIdentifier string) *PaymentOrderDetails
 	WithWebServiceURL(webServiceURL string) *PaymentOrderDetails
@@ -137,7 +161,7 @@ type PaymentOrderDetailsable interface {
 	SetOrderTypeIdentifier(orderTypeIdentifier string)
 	OrderIdentifier() string
 	SetOrderIdentifier(orderIdentifier string)
-	WebServiceURL() *foundation.NSURL
+	WebServiceURL() obj.Object
 	SetWebServiceURL(webServiceURL string)
 	AuthenticationToken() string
 	SetAuthenticationToken(authenticationToken string)

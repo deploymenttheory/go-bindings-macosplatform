@@ -5,63 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBridgedDeviceBasicInformationClusterActiveChangedEvent wraps [raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent] with a fluent Go API.
+// MTRBridgedDeviceBasicInformationClusterActiveChangedEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterActiveChangedEvent.
 type MTRBridgedDeviceBasicInformationClusterActiveChangedEvent struct {
-	inner *raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent].
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID adopts an existing object pointer as a MTRBridgedDeviceBasicInformationClusterActiveChangedEvent (nil for 0).
+// MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID(id objc.ID) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID(id)}
-}
-
-// NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent creates a new [MTRBridgedDeviceBasicInformationClusterActiveChangedEvent].
-func NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent() *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBridgedDeviceBasicInformationClusterActiveChangedEvent")), objc.RegisterName("new"))
-	return &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEventFromID(_id)}
-}
-
-// WithPromisedActiveDuration sets the promisedActiveDuration property and returns the receiver for chaining.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
-	x.inner.SetPromisedActiveDuration(promisedActiveDuration)
+	x := &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// PromisedActiveDuration calls the underlying PromisedActiveDuration.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() *foundation.NSNumber {
-	return x.inner.PromisedActiveDuration()
+// mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBridgedDeviceBasicInformationClusterActiveChangedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(id objc.ID) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBridgedDeviceBasicInformationClusterActiveChangedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPromisedActiveDuration calls the underlying SetPromisedActiveDuration.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) {
-	x.inner.SetPromisedActiveDuration(promisedActiveDuration)
+// Description returns the object's -description text.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent creates a new MTRBridgedDeviceBasicInformationClusterActiveChangedEvent.
+func NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent() *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterActiveChangedEvent")), objc.RegisterName("new"))
+	return mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(_id)
+}
+
+// WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
+	return x
+}
+
+// PromisedActiveDuration wraps the corresponding Objective-C method.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedActiveDuration"))
+	return obj.Wrap(_r)
+}
+
+// SetPromisedActiveDuration wraps the corresponding Objective-C method.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) SetPromisedActiveDuration(promisedActiveDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 }
 
 // MTRBridgedDeviceBasicInformationClusterActiveChangedEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterActiveChangedEvent], for mocking and DI.
 type MTRBridgedDeviceBasicInformationClusterActiveChangedEventable interface {
-	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
-	WithPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
-	PromisedActiveDuration() *foundation.NSNumber
-	SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber)
+	obj.Object
+	WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
+	PromisedActiveDuration() obj.Object
+	SetPromisedActiveDuration(promisedActiveDuration obj.Object)
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterActiveChangedEventable = (*MTRBridgedDeviceBasicInformationClusterActiveChangedEvent)(nil)

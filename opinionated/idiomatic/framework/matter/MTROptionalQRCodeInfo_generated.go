@@ -5,170 +5,191 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROptionalQRCodeInfo wraps [raw.MTROptionalQRCodeInfo] with a fluent Go API.
+// MTROptionalQRCodeInfo is an idiomatic wrapper over the Objective-C class MTROptionalQRCodeInfo.
 type MTROptionalQRCodeInfo struct {
-	inner *raw.MTROptionalQRCodeInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROptionalQRCodeInfo].
-func (x *MTROptionalQRCodeInfo) Unwrap() *raw.MTROptionalQRCodeInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROptionalQRCodeInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROptionalQRCodeInfoFromID adopts an existing object pointer as a MTROptionalQRCodeInfo (nil for 0).
+// MTROptionalQRCodeInfoFromID adopts an existing Objective-C object as a MTROptionalQRCodeInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROptionalQRCodeInfoFromID(id objc.ID) *MTROptionalQRCodeInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(id)}
+	x := &MTROptionalQRCodeInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTROptionalQRCodeInfo creates a new [MTROptionalQRCodeInfo].
+// mTROptionalQRCodeInfoAdopt wraps an Objective-C object that this code just created as a
+// MTROptionalQRCodeInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROptionalQRCodeInfoAdopt(id objc.ID) *MTROptionalQRCodeInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROptionalQRCodeInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROptionalQRCodeInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROptionalQRCodeInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROptionalQRCodeInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROptionalQRCodeInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROptionalQRCodeInfo creates a new MTROptionalQRCodeInfo.
 func NewMTROptionalQRCodeInfo() *MTROptionalQRCodeInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROptionalQRCodeInfo")), objc.RegisterName("new"))
-	return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROptionalQRCodeInfo")), objc.RegisterName("new"))
+	return mTROptionalQRCodeInfoAdopt(_id)
 }
 
-// Initializes the object with a tag and string value. The tag must be in the range 0x80 - 0xFF.
-//
-// NewMTROptionalQRCodeInfoWithTagStringValue creates a new [MTROptionalQRCodeInfo].
-func NewMTROptionalQRCodeInfoWithTagStringValue(tag *foundation.NSNumber, value string) *MTROptionalQRCodeInfo {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROptionalQRCodeInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:stringValue:"), tag.Ptr(), foundation.NSStringStringWithUTF8String(value).Ptr())
-	return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(_id)}
+// NewMTROptionalQRCodeInfoWithTagStringValue initializes the object with a tag and string value. The tag must be in the range 0x80 - 0xFF.
+func NewMTROptionalQRCodeInfoWithTagStringValue(tag obj.Object, value string) *MTROptionalQRCodeInfo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROptionalQRCodeInfo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:stringValue:"), objref.IDOf(tag), purego.NSString(value))
+	return mTROptionalQRCodeInfoAdopt(_id)
 }
 
-// Initializes the object with a tag and int32 value. The tag must be in the range 0x80 - 0xFF.
-//
-// NewMTROptionalQRCodeInfoWithTagInt32Value creates a new [MTROptionalQRCodeInfo].
-func NewMTROptionalQRCodeInfoWithTagInt32Value(tag *foundation.NSNumber, value int32) *MTROptionalQRCodeInfo {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROptionalQRCodeInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:int32Value:"), tag.Ptr(), value)
-	return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(_id)}
+// NewMTROptionalQRCodeInfoWithTagInt32Value initializes the object with a tag and int32 value. The tag must be in the range 0x80 - 0xFF.
+func NewMTROptionalQRCodeInfoWithTagInt32Value(tag obj.Object, value int32) *MTROptionalQRCodeInfo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROptionalQRCodeInfo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:int32Value:"), objref.IDOf(tag), value)
+	return mTROptionalQRCodeInfoAdopt(_id)
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets the property and returns the receiver so calls can be chained.
 func (x *MTROptionalQRCodeInfo) WithType(type_ MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo {
-	x.inner.SetType(raw.MTROptionalQRCodeInfoType(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
-func (x *MTROptionalQRCodeInfo) WithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo {
-	x.inner.SetTag(tag)
+// WithTag the vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
+func (x *MTROptionalQRCodeInfo) WithTag(tag obj.Object) *MTROptionalQRCodeInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), objref.IDOf(tag))
 	return x
 }
 
-// The value held in this extension element, if `type` is an integer type, or nil otherwise.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
-func (x *MTROptionalQRCodeInfo) WithIntegerValue(integerValue *foundation.NSNumber) *MTROptionalQRCodeInfo {
-	x.inner.SetIntegerValue(integerValue)
+// WithIntegerValue the value held in this extension element, if `type` is an integer type, or nil otherwise.
+func (x *MTROptionalQRCodeInfo) WithIntegerValue(integerValue obj.Object) *MTROptionalQRCodeInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), objref.IDOf(integerValue))
 	return x
 }
 
-// The value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
 func (x *MTROptionalQRCodeInfo) WithStringValue(stringValue string) *MTROptionalQRCodeInfo {
-	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// WithInfoType sets the infoType property and returns the receiver for chaining.
-func (x *MTROptionalQRCodeInfo) WithInfoType(infoType *foundation.NSNumber) *MTROptionalQRCodeInfo {
-	x.inner.SetInfoType(infoType)
+// WithInfoType sets the property and returns the receiver so calls can be chained.
+func (x *MTROptionalQRCodeInfo) WithInfoType(infoType obj.Object) *MTROptionalQRCodeInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfoType:"), objref.IDOf(infoType))
 	return x
 }
 
-// Type calls the underlying Type.
+// Type wraps the corresponding Objective-C method.
 func (x *MTROptionalQRCodeInfo) Type() MTROptionalQRCodeInfoType {
-	return MTROptionalQRCodeInfoType(x.inner.Type())
+	_r := objc.Send[MTROptionalQRCodeInfoType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// The vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
-//
-// Tag calls the underlying Tag.
-func (x *MTROptionalQRCodeInfo) Tag() *foundation.NSNumber {
-	return x.inner.Tag()
+// Tag the vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
+func (x *MTROptionalQRCodeInfo) Tag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tag"))
+	return obj.Wrap(_r)
 }
 
-// The value held in this extension element, if `type` is an integer type, or nil otherwise.
-//
-// IntegerValue calls the underlying IntegerValue.
-func (x *MTROptionalQRCodeInfo) IntegerValue() *foundation.NSNumber {
-	return x.inner.IntegerValue()
+// IntegerValue the value held in this extension element, if `type` is an integer type, or nil otherwise.
+func (x *MTROptionalQRCodeInfo) IntegerValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("integerValue"))
+	return obj.Wrap(_r)
 }
 
-// The value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
-//
-// StringValue calls the underlying StringValue.
+// StringValue the value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
 func (x *MTROptionalQRCodeInfo) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetType calls the underlying SetType.
+// SetType wraps the corresponding Objective-C method.
 func (x *MTROptionalQRCodeInfo) SetType(type_ MTROptionalQRCodeInfoType) {
-	x.inner.SetType(raw.MTROptionalQRCodeInfoType(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// SetTag calls the underlying SetTag.
-func (x *MTROptionalQRCodeInfo) SetTag(tag *foundation.NSNumber) {
-	x.inner.SetTag(tag)
+// SetTag wraps the corresponding Objective-C method.
+func (x *MTROptionalQRCodeInfo) SetTag(tag obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), objref.IDOf(tag))
 }
 
-// SetIntegerValue calls the underlying SetIntegerValue.
-func (x *MTROptionalQRCodeInfo) SetIntegerValue(integerValue *foundation.NSNumber) {
-	x.inner.SetIntegerValue(integerValue)
+// SetIntegerValue wraps the corresponding Objective-C method.
+func (x *MTROptionalQRCodeInfo) SetIntegerValue(integerValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), objref.IDOf(integerValue))
 }
 
-// SetStringValue calls the underlying SetStringValue.
+// SetStringValue wraps the corresponding Objective-C method.
 func (x *MTROptionalQRCodeInfo) SetStringValue(stringValue string) {
-	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 }
 
-// InfoType calls the underlying InfoType.
-func (x *MTROptionalQRCodeInfo) InfoType() *foundation.NSNumber {
-	return x.inner.InfoType()
+// InfoType wraps the corresponding Objective-C method.
+func (x *MTROptionalQRCodeInfo) InfoType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("infoType"))
+	return obj.Wrap(_r)
 }
 
-// SetInfoType calls the underlying SetInfoType.
-func (x *MTROptionalQRCodeInfo) SetInfoType(infoType *foundation.NSNumber) {
-	x.inner.SetInfoType(infoType)
+// SetInfoType wraps the corresponding Objective-C method.
+func (x *MTROptionalQRCodeInfo) SetInfoType(infoType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfoType:"), objref.IDOf(infoType))
 }
 
 // MTROptionalQRCodeInfoable is the interface implemented by [MTROptionalQRCodeInfo], for mocking and DI.
 type MTROptionalQRCodeInfoable interface {
-	Unwrap() *raw.MTROptionalQRCodeInfo
+	obj.Object
 	WithType(type_ MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo
-	WithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo
-	WithIntegerValue(integerValue *foundation.NSNumber) *MTROptionalQRCodeInfo
+	WithTag(tag obj.Object) *MTROptionalQRCodeInfo
+	WithIntegerValue(integerValue obj.Object) *MTROptionalQRCodeInfo
 	WithStringValue(stringValue string) *MTROptionalQRCodeInfo
-	WithInfoType(infoType *foundation.NSNumber) *MTROptionalQRCodeInfo
+	WithInfoType(infoType obj.Object) *MTROptionalQRCodeInfo
 	Type() MTROptionalQRCodeInfoType
-	Tag() *foundation.NSNumber
-	IntegerValue() *foundation.NSNumber
+	Tag() obj.Object
+	IntegerValue() obj.Object
 	StringValue() string
 	SetType(type_ MTROptionalQRCodeInfoType)
-	SetTag(tag *foundation.NSNumber)
-	SetIntegerValue(integerValue *foundation.NSNumber)
+	SetTag(tag obj.Object)
+	SetIntegerValue(integerValue obj.Object)
 	SetStringValue(stringValue string)
-	InfoType() *foundation.NSNumber
-	SetInfoType(infoType *foundation.NSNumber)
+	InfoType() obj.Object
+	SetInfoType(infoType obj.Object)
 }
 
 var _ MTROptionalQRCodeInfoable = (*MTROptionalQRCodeInfo)(nil)

@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a console device configuration.
+// ConsoleDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZConsoleDeviceConfiguration.
 //
-// ConsoleDeviceConfiguration wraps [raw.VZConsoleDeviceConfiguration] with a fluent Go API.
+// ConsoleDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioConsoleDeviceConfiguration] and pass it where a ConsoleDeviceConfiguration is accepted.
+//
+// The base class for a console device configuration.
 type ConsoleDeviceConfiguration struct {
-	inner *raw.VZConsoleDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZConsoleDeviceConfiguration].
-func (x *ConsoleDeviceConfiguration) Unwrap() *raw.VZConsoleDeviceConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConsoleDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ConsoleDeviceConfigurationFromID adopts an existing object pointer as a ConsoleDeviceConfiguration (nil for 0).
+// ConsoleDeviceConfigurationFromID adopts an existing Objective-C object as a ConsoleDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ConsoleDeviceConfigurationFromID(id objc.ID) *ConsoleDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ConsoleDeviceConfiguration{inner: raw.VZConsoleDeviceConfigurationFromID(id)}
+	x := &ConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewConsoleDeviceConfiguration creates a new [ConsoleDeviceConfiguration].
-func NewConsoleDeviceConfiguration() *ConsoleDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZConsoleDeviceConfiguration")), objc.RegisterName("new"))
-	return &ConsoleDeviceConfiguration{inner: raw.VZConsoleDeviceConfigurationFromID(_id)}
+// consoleDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ConsoleDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func consoleDeviceConfigurationAdopt(id objc.ID) *ConsoleDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ConsoleDeviceConfiguration) asConsoleDeviceConfiguration() *raw.VZConsoleDeviceConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *ConsoleDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConsoleDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConsoleDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ConsoleDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // ConsoleDeviceConfigurationable is the interface implemented by [ConsoleDeviceConfiguration], for mocking and DI.
 type ConsoleDeviceConfigurationable interface {
-	Unwrap() *raw.VZConsoleDeviceConfiguration
+	obj.Object
 }
 
 var _ ConsoleDeviceConfigurationable = (*ConsoleDeviceConfiguration)(nil)
+
+// isConsoleDeviceConfiguration marks ConsoleDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the ConsoleDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ConsoleDeviceConfiguration) isConsoleDeviceConfiguration() {}
+
+var _ ConsoleDeviceConfigurationProvider = (*ConsoleDeviceConfiguration)(nil)

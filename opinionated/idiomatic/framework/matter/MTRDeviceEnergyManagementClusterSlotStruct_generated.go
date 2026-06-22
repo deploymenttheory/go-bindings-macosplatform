@@ -5,377 +5,427 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterSlotStruct wraps [raw.MTRDeviceEnergyManagementClusterSlotStruct] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterSlotStruct is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterSlotStruct.
 type MTRDeviceEnergyManagementClusterSlotStruct struct {
-	inner *raw.MTRDeviceEnergyManagementClusterSlotStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterSlotStruct].
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterSlotStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterSlotStruct (nil for 0).
+// MTRDeviceEnergyManagementClusterSlotStructFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterSlotStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterSlotStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterSlotStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterSlotStruct{inner: raw.MTRDeviceEnergyManagementClusterSlotStructFromID(id)}
+	x := &MTRDeviceEnergyManagementClusterSlotStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementClusterSlotStruct creates a new [MTRDeviceEnergyManagementClusterSlotStruct].
+// mTRDeviceEnergyManagementClusterSlotStructAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterSlotStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterSlotStructAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterSlotStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterSlotStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceEnergyManagementClusterSlotStruct creates a new MTRDeviceEnergyManagementClusterSlotStruct.
 func NewMTRDeviceEnergyManagementClusterSlotStruct() *MTRDeviceEnergyManagementClusterSlotStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterSlotStruct")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterSlotStruct{inner: raw.MTRDeviceEnergyManagementClusterSlotStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterSlotStruct")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterSlotStructAdopt(_id)
 }
 
-// WithMinDuration sets the minDuration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDuration(minDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMinDuration(minDuration)
+// WithMinDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 	return x
 }
 
-// WithMaxDuration sets the maxDuration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDuration(maxDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMaxDuration(maxDuration)
+// WithMaxDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
 	return x
 }
 
-// WithDefaultDuration sets the defaultDuration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithDefaultDuration(defaultDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetDefaultDuration(defaultDuration)
+// WithDefaultDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithDefaultDuration(defaultDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDuration:"), objref.IDOf(defaultDuration))
 	return x
 }
 
-// WithElapsedSlotTime sets the elapsedSlotTime property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithElapsedSlotTime(elapsedSlotTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetElapsedSlotTime(elapsedSlotTime)
+// WithElapsedSlotTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithElapsedSlotTime(elapsedSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElapsedSlotTime:"), objref.IDOf(elapsedSlotTime))
 	return x
 }
 
-// WithRemainingSlotTime sets the remainingSlotTime property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithRemainingSlotTime(remainingSlotTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetRemainingSlotTime(remainingSlotTime)
+// WithRemainingSlotTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithRemainingSlotTime(remainingSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemainingSlotTime:"), objref.IDOf(remainingSlotTime))
 	return x
 }
 
-// WithSlotIsPausable sets the slotIsPausable property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithSlotIsPausable(slotIsPausable *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetSlotIsPausable(slotIsPausable)
+// WithSlotIsPausable sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithSlotIsPausable(slotIsPausable obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIsPausable:"), objref.IDOf(slotIsPausable))
 	return x
 }
 
-// WithMinPauseDuration sets the minPauseDuration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPauseDuration(minPauseDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMinPauseDuration(minPauseDuration)
+// WithMinPauseDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPauseDuration(minPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPauseDuration:"), objref.IDOf(minPauseDuration))
 	return x
 }
 
-// WithMaxPauseDuration sets the maxPauseDuration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPauseDuration(maxPauseDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMaxPauseDuration(maxPauseDuration)
+// WithMaxPauseDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPauseDuration(maxPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPauseDuration:"), objref.IDOf(maxPauseDuration))
 	return x
 }
 
-// WithManufacturerESAState sets the manufacturerESAState property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithManufacturerESAState(manufacturerESAState *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetManufacturerESAState(manufacturerESAState)
+// WithManufacturerESAState sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithManufacturerESAState(manufacturerESAState obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturerESAState:"), objref.IDOf(manufacturerESAState))
 	return x
 }
 
-// WithNominalPower sets the nominalPower property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetNominalPower(nominalPower)
+// WithNominalPower sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return x
 }
 
-// WithMinPower sets the minPower property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPower(minPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMinPower(minPower)
+// WithMinPower sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 	return x
 }
 
-// WithMaxPower sets the maxPower property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPower(maxPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMaxPower(maxPower)
+// WithMaxPower sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 	return x
 }
 
-// WithNominalEnergy sets the nominalEnergy property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalEnergy(nominalEnergy *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetNominalEnergy(nominalEnergy)
+// WithNominalEnergy sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalEnergy(nominalEnergy obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalEnergy:"), objref.IDOf(nominalEnergy))
 	return x
 }
 
-// WithMinPowerAdjustment sets the minPowerAdjustment property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMinPowerAdjustment(minPowerAdjustment)
+// WithMinPowerAdjustment sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPowerAdjustment(minPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPowerAdjustment:"), objref.IDOf(minPowerAdjustment))
 	return x
 }
 
-// WithMaxPowerAdjustment sets the maxPowerAdjustment property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMaxPowerAdjustment(maxPowerAdjustment)
+// WithMaxPowerAdjustment sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPowerAdjustment(maxPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPowerAdjustment:"), objref.IDOf(maxPowerAdjustment))
 	return x
 }
 
-// WithMinDurationAdjustment sets the minDurationAdjustment property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMinDurationAdjustment(minDurationAdjustment)
+// WithMinDurationAdjustment sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDurationAdjustment(minDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDurationAdjustment:"), objref.IDOf(minDurationAdjustment))
 	return x
 }
 
-// WithMaxDurationAdjustment sets the maxDurationAdjustment property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct {
-	x.inner.SetMaxDurationAdjustment(maxDurationAdjustment)
+// WithMaxDurationAdjustment sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDurationAdjustment(maxDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDurationAdjustment:"), objref.IDOf(maxDurationAdjustment))
 	return x
 }
 
-// MinDuration calls the underlying MinDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() *foundation.NSNumber {
-	return x.inner.MinDuration()
+// MinDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDuration"))
+	return obj.Wrap(_r)
 }
 
-// SetMinDuration calls the underlying SetMinDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDuration(minDuration *foundation.NSNumber) {
-	x.inner.SetMinDuration(minDuration)
+// SetMinDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDuration(minDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 }
 
-// MaxDuration calls the underlying MaxDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() *foundation.NSNumber {
-	return x.inner.MaxDuration()
+// MaxDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDuration"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxDuration calls the underlying SetMaxDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDuration(maxDuration *foundation.NSNumber) {
-	x.inner.SetMaxDuration(maxDuration)
+// SetMaxDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDuration(maxDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
 }
 
-// DefaultDuration calls the underlying DefaultDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() *foundation.NSNumber {
-	return x.inner.DefaultDuration()
+// DefaultDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultDuration"))
+	return obj.Wrap(_r)
 }
 
-// SetDefaultDuration calls the underlying SetDefaultDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetDefaultDuration(defaultDuration *foundation.NSNumber) {
-	x.inner.SetDefaultDuration(defaultDuration)
+// SetDefaultDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetDefaultDuration(defaultDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDuration:"), objref.IDOf(defaultDuration))
 }
 
-// ElapsedSlotTime calls the underlying ElapsedSlotTime.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() *foundation.NSNumber {
-	return x.inner.ElapsedSlotTime()
+// ElapsedSlotTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elapsedSlotTime"))
+	return obj.Wrap(_r)
 }
 
-// SetElapsedSlotTime calls the underlying SetElapsedSlotTime.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetElapsedSlotTime(elapsedSlotTime *foundation.NSNumber) {
-	x.inner.SetElapsedSlotTime(elapsedSlotTime)
+// SetElapsedSlotTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetElapsedSlotTime(elapsedSlotTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElapsedSlotTime:"), objref.IDOf(elapsedSlotTime))
 }
 
-// RemainingSlotTime calls the underlying RemainingSlotTime.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() *foundation.NSNumber {
-	return x.inner.RemainingSlotTime()
+// RemainingSlotTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remainingSlotTime"))
+	return obj.Wrap(_r)
 }
 
-// SetRemainingSlotTime calls the underlying SetRemainingSlotTime.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetRemainingSlotTime(remainingSlotTime *foundation.NSNumber) {
-	x.inner.SetRemainingSlotTime(remainingSlotTime)
+// SetRemainingSlotTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetRemainingSlotTime(remainingSlotTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemainingSlotTime:"), objref.IDOf(remainingSlotTime))
 }
 
-// SlotIsPausable calls the underlying SlotIsPausable.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() *foundation.NSNumber {
-	return x.inner.SlotIsPausable()
+// SlotIsPausable wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotIsPausable"))
+	return obj.Wrap(_r)
 }
 
-// SetSlotIsPausable calls the underlying SetSlotIsPausable.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetSlotIsPausable(slotIsPausable *foundation.NSNumber) {
-	x.inner.SetSlotIsPausable(slotIsPausable)
+// SetSlotIsPausable wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetSlotIsPausable(slotIsPausable obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotIsPausable:"), objref.IDOf(slotIsPausable))
 }
 
-// MinPauseDuration calls the underlying MinPauseDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() *foundation.NSNumber {
-	return x.inner.MinPauseDuration()
+// MinPauseDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPauseDuration"))
+	return obj.Wrap(_r)
 }
 
-// SetMinPauseDuration calls the underlying SetMinPauseDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPauseDuration(minPauseDuration *foundation.NSNumber) {
-	x.inner.SetMinPauseDuration(minPauseDuration)
+// SetMinPauseDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPauseDuration(minPauseDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPauseDuration:"), objref.IDOf(minPauseDuration))
 }
 
-// MaxPauseDuration calls the underlying MaxPauseDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() *foundation.NSNumber {
-	return x.inner.MaxPauseDuration()
+// MaxPauseDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPauseDuration"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxPauseDuration calls the underlying SetMaxPauseDuration.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPauseDuration(maxPauseDuration *foundation.NSNumber) {
-	x.inner.SetMaxPauseDuration(maxPauseDuration)
+// SetMaxPauseDuration wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPauseDuration(maxPauseDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPauseDuration:"), objref.IDOf(maxPauseDuration))
 }
 
-// ManufacturerESAState calls the underlying ManufacturerESAState.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() *foundation.NSNumber {
-	return x.inner.ManufacturerESAState()
+// ManufacturerESAState wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerESAState"))
+	return obj.Wrap(_r)
 }
 
-// SetManufacturerESAState calls the underlying SetManufacturerESAState.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetManufacturerESAState(manufacturerESAState *foundation.NSNumber) {
-	x.inner.SetManufacturerESAState(manufacturerESAState)
+// SetManufacturerESAState wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetManufacturerESAState(manufacturerESAState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManufacturerESAState:"), objref.IDOf(manufacturerESAState))
 }
 
-// NominalPower calls the underlying NominalPower.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() *foundation.NSNumber {
-	return x.inner.NominalPower()
+// NominalPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalPower"))
+	return obj.Wrap(_r)
 }
 
-// SetNominalPower calls the underlying SetNominalPower.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalPower(nominalPower *foundation.NSNumber) {
-	x.inner.SetNominalPower(nominalPower)
+// SetNominalPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalPower(nominalPower obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 }
 
-// MinPower calls the underlying MinPower.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() *foundation.NSNumber {
-	return x.inner.MinPower()
+// MinPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPower"))
+	return obj.Wrap(_r)
 }
 
-// SetMinPower calls the underlying SetMinPower.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPower(minPower *foundation.NSNumber) {
-	x.inner.SetMinPower(minPower)
+// SetMinPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPower(minPower obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 }
 
-// MaxPower calls the underlying MaxPower.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() *foundation.NSNumber {
-	return x.inner.MaxPower()
+// MaxPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPower"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxPower calls the underlying SetMaxPower.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPower(maxPower *foundation.NSNumber) {
-	x.inner.SetMaxPower(maxPower)
+// SetMaxPower wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPower(maxPower obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 }
 
-// NominalEnergy calls the underlying NominalEnergy.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() *foundation.NSNumber {
-	return x.inner.NominalEnergy()
+// NominalEnergy wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nominalEnergy"))
+	return obj.Wrap(_r)
 }
 
-// SetNominalEnergy calls the underlying SetNominalEnergy.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalEnergy(nominalEnergy *foundation.NSNumber) {
-	x.inner.SetNominalEnergy(nominalEnergy)
+// SetNominalEnergy wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalEnergy(nominalEnergy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNominalEnergy:"), objref.IDOf(nominalEnergy))
 }
 
-// Costs calls the underlying Costs.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) Costs() *foundation.NSArray[objc.ID] {
-	return x.inner.Costs()
+// Costs wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) Costs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("costs"))
+	return obj.Wrap(_r)
 }
 
-// SetCosts calls the underlying SetCosts.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs *foundation.NSArray[objc.ID]) {
-	x.inner.SetCosts(costs)
+// SetCosts wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCosts:"), objref.IDOf(costs))
 }
 
-// MinPowerAdjustment calls the underlying MinPowerAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() *foundation.NSNumber {
-	return x.inner.MinPowerAdjustment()
+// MinPowerAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPowerAdjustment"))
+	return obj.Wrap(_r)
 }
 
-// SetMinPowerAdjustment calls the underlying SetMinPowerAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber) {
-	x.inner.SetMinPowerAdjustment(minPowerAdjustment)
+// SetMinPowerAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPowerAdjustment(minPowerAdjustment obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPowerAdjustment:"), objref.IDOf(minPowerAdjustment))
 }
 
-// MaxPowerAdjustment calls the underlying MaxPowerAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() *foundation.NSNumber {
-	return x.inner.MaxPowerAdjustment()
+// MaxPowerAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPowerAdjustment"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxPowerAdjustment calls the underlying SetMaxPowerAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber) {
-	x.inner.SetMaxPowerAdjustment(maxPowerAdjustment)
+// SetMaxPowerAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPowerAdjustment(maxPowerAdjustment obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPowerAdjustment:"), objref.IDOf(maxPowerAdjustment))
 }
 
-// MinDurationAdjustment calls the underlying MinDurationAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() *foundation.NSNumber {
-	return x.inner.MinDurationAdjustment()
+// MinDurationAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDurationAdjustment"))
+	return obj.Wrap(_r)
 }
 
-// SetMinDurationAdjustment calls the underlying SetMinDurationAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber) {
-	x.inner.SetMinDurationAdjustment(minDurationAdjustment)
+// SetMinDurationAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDurationAdjustment(minDurationAdjustment obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDurationAdjustment:"), objref.IDOf(minDurationAdjustment))
 }
 
-// MaxDurationAdjustment calls the underlying MaxDurationAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() *foundation.NSNumber {
-	return x.inner.MaxDurationAdjustment()
+// MaxDurationAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDurationAdjustment"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxDurationAdjustment calls the underlying SetMaxDurationAdjustment.
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber) {
-	x.inner.SetMaxDurationAdjustment(maxDurationAdjustment)
+// SetMaxDurationAdjustment wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDurationAdjustment(maxDurationAdjustment obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDurationAdjustment:"), objref.IDOf(maxDurationAdjustment))
 }
 
 // MTRDeviceEnergyManagementClusterSlotStructable is the interface implemented by [MTRDeviceEnergyManagementClusterSlotStruct], for mocking and DI.
 type MTRDeviceEnergyManagementClusterSlotStructable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotStruct
-	WithMinDuration(minDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMaxDuration(maxDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithDefaultDuration(defaultDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithElapsedSlotTime(elapsedSlotTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithRemainingSlotTime(remainingSlotTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithSlotIsPausable(slotIsPausable *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMinPauseDuration(minPauseDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMaxPauseDuration(maxPauseDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithManufacturerESAState(manufacturerESAState *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMinPower(minPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMaxPower(maxPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithNominalEnergy(nominalEnergy *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	WithMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
-	MinDuration() *foundation.NSNumber
-	SetMinDuration(minDuration *foundation.NSNumber)
-	MaxDuration() *foundation.NSNumber
-	SetMaxDuration(maxDuration *foundation.NSNumber)
-	DefaultDuration() *foundation.NSNumber
-	SetDefaultDuration(defaultDuration *foundation.NSNumber)
-	ElapsedSlotTime() *foundation.NSNumber
-	SetElapsedSlotTime(elapsedSlotTime *foundation.NSNumber)
-	RemainingSlotTime() *foundation.NSNumber
-	SetRemainingSlotTime(remainingSlotTime *foundation.NSNumber)
-	SlotIsPausable() *foundation.NSNumber
-	SetSlotIsPausable(slotIsPausable *foundation.NSNumber)
-	MinPauseDuration() *foundation.NSNumber
-	SetMinPauseDuration(minPauseDuration *foundation.NSNumber)
-	MaxPauseDuration() *foundation.NSNumber
-	SetMaxPauseDuration(maxPauseDuration *foundation.NSNumber)
-	ManufacturerESAState() *foundation.NSNumber
-	SetManufacturerESAState(manufacturerESAState *foundation.NSNumber)
-	NominalPower() *foundation.NSNumber
-	SetNominalPower(nominalPower *foundation.NSNumber)
-	MinPower() *foundation.NSNumber
-	SetMinPower(minPower *foundation.NSNumber)
-	MaxPower() *foundation.NSNumber
-	SetMaxPower(maxPower *foundation.NSNumber)
-	NominalEnergy() *foundation.NSNumber
-	SetNominalEnergy(nominalEnergy *foundation.NSNumber)
-	Costs() *foundation.NSArray[objc.ID]
-	SetCosts(costs *foundation.NSArray[objc.ID])
-	MinPowerAdjustment() *foundation.NSNumber
-	SetMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber)
-	MaxPowerAdjustment() *foundation.NSNumber
-	SetMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber)
-	MinDurationAdjustment() *foundation.NSNumber
-	SetMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber)
-	MaxDurationAdjustment() *foundation.NSNumber
-	SetMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber)
+	obj.Object
+	WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithDefaultDuration(defaultDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithElapsedSlotTime(elapsedSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithRemainingSlotTime(remainingSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithSlotIsPausable(slotIsPausable obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinPauseDuration(minPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxPauseDuration(maxPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithManufacturerESAState(manufacturerESAState obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithNominalEnergy(nominalEnergy obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinPowerAdjustment(minPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxPowerAdjustment(maxPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinDurationAdjustment(minDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxDurationAdjustment(maxDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct
+	MinDuration() obj.Object
+	SetMinDuration(minDuration obj.Object)
+	MaxDuration() obj.Object
+	SetMaxDuration(maxDuration obj.Object)
+	DefaultDuration() obj.Object
+	SetDefaultDuration(defaultDuration obj.Object)
+	ElapsedSlotTime() obj.Object
+	SetElapsedSlotTime(elapsedSlotTime obj.Object)
+	RemainingSlotTime() obj.Object
+	SetRemainingSlotTime(remainingSlotTime obj.Object)
+	SlotIsPausable() obj.Object
+	SetSlotIsPausable(slotIsPausable obj.Object)
+	MinPauseDuration() obj.Object
+	SetMinPauseDuration(minPauseDuration obj.Object)
+	MaxPauseDuration() obj.Object
+	SetMaxPauseDuration(maxPauseDuration obj.Object)
+	ManufacturerESAState() obj.Object
+	SetManufacturerESAState(manufacturerESAState obj.Object)
+	NominalPower() obj.Object
+	SetNominalPower(nominalPower obj.Object)
+	MinPower() obj.Object
+	SetMinPower(minPower obj.Object)
+	MaxPower() obj.Object
+	SetMaxPower(maxPower obj.Object)
+	NominalEnergy() obj.Object
+	SetNominalEnergy(nominalEnergy obj.Object)
+	Costs() obj.Object
+	SetCosts(costs obj.Object)
+	MinPowerAdjustment() obj.Object
+	SetMinPowerAdjustment(minPowerAdjustment obj.Object)
+	MaxPowerAdjustment() obj.Object
+	SetMaxPowerAdjustment(maxPowerAdjustment obj.Object)
+	MinDurationAdjustment() obj.Object
+	SetMinDurationAdjustment(minDurationAdjustment obj.Object)
+	MaxDurationAdjustment() obj.Object
+	SetMaxDurationAdjustment(maxDurationAdjustment obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterSlotStructable = (*MTRDeviceEnergyManagementClusterSlotStruct)(nil)

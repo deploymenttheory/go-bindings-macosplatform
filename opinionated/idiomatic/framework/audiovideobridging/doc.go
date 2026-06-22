@@ -3,4 +3,13 @@
 //go:build darwin
 
 // Package audiovideobridging provides a fluent Go API over the macOS AudioVideoBridging framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AVB17221AECPMessage: [AVB17221AECPAEMMessage], [AVB17221AECPAVCMessage], [AVB17221AECPAddressAccessMessage], [AVB17221AECPVendorMessage]
+//   - AVB1722ControlInterface: [AVB17221ACMPInterface], [AVB17221AECPInterface]
+//   - Interface: [EthernetInterface]
 package audiovideobridging

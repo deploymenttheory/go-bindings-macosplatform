@@ -9,82 +9,22 @@ import (
 	"strings"
 )
 
-// Constants that indicate the availability of the user’s iCloud account.
-type CKAccountStatus int64
-
-const (
-	// CloudKit can’t determine the status of the user’s iCloud account.
-	CKAccountStatusCouldNotDetermine CKAccountStatus = 0
-	// The user’s iCloud account is available.
-	CKAccountStatusAvailable CKAccountStatus = 1
-	// The system denies access to the user’s iCloud account.
-	CKAccountStatusRestricted CKAccountStatus = 2
-	// The device doesn’t have an iCloud account.
-	CKAccountStatusNoAccount CKAccountStatus = 3
-	// The user’s iCloud account is temporarily unavailable.
-	CKAccountStatusTemporarilyUnavailable CKAccountStatus = 4
-)
-
-func (e CKAccountStatus) String() string {
-	switch e {
-	case CKAccountStatusCouldNotDetermine:
-		return "CKAccountStatusCouldNotDetermine"
-	case CKAccountStatusAvailable:
-		return "CKAccountStatusAvailable"
-	case CKAccountStatusRestricted:
-		return "CKAccountStatusRestricted"
-	case CKAccountStatusNoAccount:
-		return "CKAccountStatusNoAccount"
-	case CKAccountStatusTemporarilyUnavailable:
-		return "CKAccountStatusTemporarilyUnavailable"
-	default:
-		return fmt.Sprintf("CKAccountStatus(%d)", int64(e))
-	}
-}
-
-// Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
-type CKApplicationPermissionStatus int64
-
-const (
-	// The app is yet to request the permission.
-	CKApplicationPermissionStatusInitialState CKApplicationPermissionStatus = 0
-	// An error that occurs while processing the permission request.
-	CKApplicationPermissionStatusCouldNotComplete CKApplicationPermissionStatus = 1
-	// The user denies the permission.
-	CKApplicationPermissionStatusDenied CKApplicationPermissionStatus = 2
-	// The user grants the permission.
-	CKApplicationPermissionStatusGranted CKApplicationPermissionStatus = 3
-)
-
-func (e CKApplicationPermissionStatus) String() string {
-	switch e {
-	case CKApplicationPermissionStatusInitialState:
-		return "CKApplicationPermissionStatusInitialState"
-	case CKApplicationPermissionStatusCouldNotComplete:
-		return "CKApplicationPermissionStatusCouldNotComplete"
-	case CKApplicationPermissionStatusDenied:
-		return "CKApplicationPermissionStatusDenied"
-	case CKApplicationPermissionStatusGranted:
-		return "CKApplicationPermissionStatusGranted"
-	default:
-		return fmt.Sprintf("CKApplicationPermissionStatus(%d)", int64(e))
-	}
-}
-
 // Bitmask — values may be combined with |.
-type CKApplicationPermissions uint64
+type ApplicationPermissions uint64
 
 const (
 	// The user is discoverable using their email address.
 	//
 	// Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
-	CKApplicationPermissionUserDiscoverability CKApplicationPermissions = 1
+	ApplicationPermissionUserDiscoverability ApplicationPermissions = 1
 )
 
-func (e CKApplicationPermissions) String() string {
+// String returns the ApplicationPermissions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationPermissions) String() string {
 	var parts []string
-	if e&CKApplicationPermissionUserDiscoverability != 0 {
-		parts = append(parts, "CKApplicationPermissionUserDiscoverability")
+	if e&ApplicationPermissionUserDiscoverability != 0 {
+		parts = append(parts, "ApplicationPermissionUserDiscoverability")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -93,320 +33,332 @@ func (e CKApplicationPermissions) String() string {
 }
 
 // Constants that represent the scope of a database.
-type CKDatabaseScope int64
+type DatabaseScope int64
 
 const (
 	// The public database. Records in a public database: - By default are world readable, owner writable. - Can be locked down by Roles, a process done in the Developer Portal, a web interface.  Roles are not present in the client API. - Are visible to the application developer via the Developer Portal. - Do not contribute to the owner's iCloud account storage quota.
-	CKDatabaseScopePublic CKDatabaseScope = 1
+	DatabaseScopePublic DatabaseScope = 1
 	// The private database. Records in a private database: - By default are owner readable and owner writable. - Are not visible to the application developer via the Developer Portal. - Are counted towards the owner's iCloud account storage quota.
-	CKDatabaseScopePrivate CKDatabaseScope = 2
+	DatabaseScopePrivate DatabaseScope = 2
 	// The shared database. Records in a shared database: - Are available to share participants based on the permissions of the enclosing ``CKShare`` - Are not visible to the application developer via the Developer Portal. - Are counted towards the originating owner's iCloud account storage quota.
-	CKDatabaseScopeShared CKDatabaseScope = 3
+	DatabaseScopeShared DatabaseScope = 3
 )
 
-func (e CKDatabaseScope) String() string {
+// String returns the DatabaseScope constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DatabaseScope) String() string {
 	switch e {
-	case CKDatabaseScopePublic:
-		return "CKDatabaseScopePublic"
-	case CKDatabaseScopePrivate:
-		return "CKDatabaseScopePrivate"
-	case CKDatabaseScopeShared:
-		return "CKDatabaseScopeShared"
+	case DatabaseScopePublic:
+		return "DatabaseScopePublic"
+	case DatabaseScopePrivate:
+		return "DatabaseScopePrivate"
+	case DatabaseScopeShared:
+		return "DatabaseScopeShared"
 	default:
-		return fmt.Sprintf("CKDatabaseScope(%d)", int64(e))
+		return fmt.Sprintf("DatabaseScope(%d)", int64(e))
 	}
 }
 
 // The error codes that CloudKit returns.
-type CKErrorCode int64
+type ErrorCode int64
 
 const (
 	// A nonrecoverable error that CloudKit encounters. If you receive this error, file a [bug report](http://radar.apple.com) that includes the error log.
-	CKErrorInternalError CKErrorCode = 1
+	ErrorInternalError ErrorCode = 1
 	// An error that occurs when an operation completes with partial failures. Examine the specific item failures, and act on the failed items. Each specific item error is from the CloudKit error domain. You can inspect the <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> ``CKPartialErrorsByItemIDKey`` to see per-item errors. Note that in a custom zone, the system processes all items in an operation atomically. As a result, you may get a ``CKError/Code/batchRequestFailed`` error for all other items in an operation that don't cause an error.
-	CKErrorPartialFailure CKErrorCode = 2
+	ErrorPartialFailure ErrorCode = 2
 	// An error that occurs when the network is unavailable. You can retry network failures immediately, but have your app implement a backoff period so that it doesn't attempt the same operation repeatedly. If the network is unavailable, have your app monitor for network reachability and wait to reissue the operation when the network is available again. See <doc://com.apple.documentation/documentation/cfnetwork/cfnetworkerrors> for more information.
-	CKErrorNetworkUnavailable CKErrorCode = 3
+	ErrorNetworkUnavailable ErrorCode = 3
 	// An error that occurs when a network is available, but CloudKit is inaccessible. You can retry network failures immediately, but have your app implement a backoff period so that it doesn't attempt the same operation repeatedly. If the network is unavailable, have your app monitor for network reachability and wait to reissue the operation when the network is available again. See <doc://com.apple.documentation/documentation/cfnetwork/cfnetworkerrors> for more information.
-	CKErrorNetworkFailure CKErrorCode = 4
+	ErrorNetworkFailure ErrorCode = 4
 	// An error that occurs when you use an unknown or unauthorized container.
-	CKErrorBadContainer CKErrorCode = 5
+	ErrorBadContainer ErrorCode = 5
 	// An error that occurs when CloudKit is unavailable.
-	CKErrorServiceUnavailable CKErrorCode = 6
+	ErrorServiceUnavailable ErrorCode = 6
 	// An error that occurs when CloudKit rate-limits requests. Check for a ``CKErrorRetryAfterKey`` key in the <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of any CloudKit error that you receive. It's especially important to check for it if you receive any of these errors. Use the value of the ``CKErrorRetryAfterKey`` key as the number of seconds to wait before retrying this operation.
-	CKErrorRequestRateLimited CKErrorCode = 7
+	ErrorRequestRateLimited ErrorCode = 7
 	// An error that occurs when the app is missing a required entitlement.
-	CKErrorMissingEntitlement CKErrorCode = 8
+	ErrorMissingEntitlement ErrorCode = 8
 	// An error that occurs when CloudKit cannot authenticate the user.
-	CKErrorNotAuthenticated CKErrorCode = 9
+	ErrorNotAuthenticated ErrorCode = 9
 	// An error that occurs when the user doesn't have permission to save or fetch data. This error typically occurs in the public database in one of these circumstances: - You have roles for record types. - Your app is trying to accept a share that the user doesn't have an invitation for. Let users know they can't perform this operation. This error is nonrecoverable and you can't retry the operation.
-	CKErrorPermissionFailure CKErrorCode = 10
+	ErrorPermissionFailure ErrorCode = 10
 	// An error that occurs when the specified record doesn't exist.
-	CKErrorUnknownItem CKErrorCode = 11
+	ErrorUnknownItem ErrorCode = 11
 	// An error that occurs when the request contains invalid information. Consult the error's <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary for more information about the issue.
-	CKErrorInvalidArguments CKErrorCode = 12
+	ErrorInvalidArguments ErrorCode = 12
 	// An error that occurs when CloudKit truncates a query's results.
 	//
 	// Deprecated: Will not be returned
-	CKErrorResultsTruncated CKErrorCode = 13
+	ErrorResultsTruncated ErrorCode = 13
 	// An error that occurs when CloudKit rejects a record because the server's version is different. This error indicates that the server's version of the record is newer than the local version the client's trying to save. Your app needs to handle this error, resolve any conflicts in the record, and attempt another save of the record, if necessary. CloudKit provides your app with three copies of the record in this error's `userInfo` dictionary to assist with comparing and merging the changes: - ``CKRecordChangedErrorClientRecordKey``: The local record that the client's trying to save. - ``CKRecordChangedErrorServerRecordKey``: The record that exists on the server. - ``CKRecordChangedErrorAncestorRecordKey``: The original version of the record. When a conflict occurs, your app needs to merge all changes into the record for the ``CKRecordChangedErrorServerRecordKey`` key and attempt a new save using that record. Merging into either of the other two copies of the record results in another conflict error because those records have the old record change tag.
-	CKErrorServerRecordChanged CKErrorCode = 14
+	ErrorServerRecordChanged ErrorCode = 14
 	// An error that occurs when CloudKit rejects the request. This error is nonrecoverable.
-	CKErrorServerRejectedRequest CKErrorCode = 15
+	ErrorServerRejectedRequest ErrorCode = 15
 	// An error that occurs when the system can't find the specified asset.
-	CKErrorAssetFileNotFound CKErrorCode = 16
+	ErrorAssetFileNotFound ErrorCode = 16
 	// An error that occurs when the system modifies an asset while saving it.
-	CKErrorAssetFileModified CKErrorCode = 17
+	ErrorAssetFileModified ErrorCode = 17
 	// An error that occurs when the current app version is older than the oldest allowed version.
-	CKErrorIncompatibleVersion CKErrorCode = 18
+	ErrorIncompatibleVersion ErrorCode = 18
 	// An error that occurs when the server rejects the request because of a unique constraint violation.
-	CKErrorConstraintViolation CKErrorCode = 19
+	ErrorConstraintViolation ErrorCode = 19
 	// An error that occurs when an operation cancels.
-	CKErrorOperationCancelled CKErrorCode = 20
+	ErrorOperationCancelled ErrorCode = 20
 	// An error that occurs when the change token expires.
-	CKErrorChangeTokenExpired CKErrorCode = 21
+	ErrorChangeTokenExpired ErrorCode = 21
 	// An error that occurs when the system rejects the entire batch of changes. This error occurs when an operation attempts to save multiple items in a custom zone, but one of those items encounters an error. Because custom zones are atomic, the entire batch fails. The items that cause the problem have their own errors, and all other items in the batch have a ``CKError/Code/batchRequestFailed`` error to indicate that the system can't save them. This error indicates that the system can't process the associated item due to an error in another item in the operation. Check the other per-item errors under ``CKPartialErrorsByItemIDKey`` for any that aren't ``CKError/Code/batchRequestFailed`` errors. Handle those errors, and then retry all items in the operation.
-	CKErrorBatchRequestFailed CKErrorCode = 22
+	ErrorBatchRequestFailed ErrorCode = 22
 	// An error that occurs when the server is too busy to handle the record zone operation. Try the operation again in a few seconds. If you encounter this error again, increase the delay time exponentially for each subsequent retry to minimize server contention for the zone. Check for a ``CKErrorRetryAfterKey`` key in the <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of any CloudKit error that you receive. Use the value of this key as the number of seconds to wait before retrying the operation.
-	CKErrorZoneBusy CKErrorCode = 23
+	ErrorZoneBusy ErrorCode = 23
 	// An error that occurs when the operation can't complete for the specified database. The system submitted the operation to the wrong database. Make sure you aren't submitting a share operation to the public database, or a record zone create operation to the shared database.
-	CKErrorBadDatabase CKErrorCode = 24
+	ErrorBadDatabase ErrorCode = 24
 	// An error that occurs when saving a record exceeds the user's storage quota. **In the public database**: Your app's container doesn't have enough storage. Individual users can't do anything about this, but you can go to the CloudKit Dashboard to view and manage your container's storage. **In the private database**: The user doesn't have enough iCloud storage. Prompt the user to go to iCloud settings to manage their storage. **In the shared database**: The owner of the shared record zone doesn't have enough iCloud storage. The user can't do anything about this, but can contact the owner about upgrading their storage or cleaning up their iCloud account.
-	CKErrorQuotaExceeded CKErrorCode = 25
+	ErrorQuotaExceeded ErrorCode = 25
 	// An error that occurs when the specified record zone doesn't exist.
-	CKErrorZoneNotFound CKErrorCode = 26
+	ErrorZoneNotFound ErrorCode = 26
 	// An error that occurs when a request's size exceeds the limit. The server can change its limits at any time, but the following are general guidelines: - 400 items (records or shares) per operation - 2 MB per request (not counting asset sizes) If your app receives ``CKError/Code/limitExceeded``, it must split the operation in half and try both requests again.
-	CKErrorLimitExceeded CKErrorCode = 27
+	ErrorLimitExceeded ErrorCode = 27
 	// An error that occurs when the user deletes a record zone using the Settings app.
-	CKErrorUserDeletedZone CKErrorCode = 28
+	ErrorUserDeletedZone ErrorCode = 28
 	// An error that occurs when a share has too many participants. Remove some participants before you retry the operation. Limits can change at any time, but CloudKit generally enforces a maximum of 100 participants for a share.
-	CKErrorTooManyParticipants CKErrorCode = 29
+	ErrorTooManyParticipants ErrorCode = 29
 	// An error that occurs when CloudKit attempts to share a record with an existing share. A record can exist in only a single share at a time. This error means that one of the following conditions exists: - The record already has an existing share. - The record has a parent, and its parent has a share. - The record is a parent, and one of its children has a share.
-	CKErrorAlreadyShared CKErrorCode = 30
+	ErrorAlreadyShared ErrorCode = 30
 	// An error that occurs when CloudKit can't find the target of a reference.
-	CKErrorReferenceViolation CKErrorCode = 31
+	ErrorReferenceViolation ErrorCode = 31
 	// An error that occurs when CloudKit rejects a request due to a managed-account restriction. The system restricts CloudKit access for this account. This is a nonrecoverable error.
-	CKErrorManagedAccountRestricted CKErrorCode = 32
+	ErrorManagedAccountRestricted ErrorCode = 32
 	// An error that occurs when the user isn't a participant of the share. A fetch share metadata operation fails when the user isn't a participant of the share. However, there are invited participants on the share with email addresses or phone numbers that don't have associations with an iCloud account. The user may be able to join a share by associating one of those email addresses or phone numbers with the user's iCloud account. Call <doc://com.apple.documentation/documentation/uikit/uiapplication/openurl(_:)> on the share URL to have the user attempt to verify their information.
-	CKErrorParticipantMayNeedVerification CKErrorCode = 33
+	ErrorParticipantMayNeedVerification ErrorCode = 33
 	// An error that occurs when CloudKit is unable to maintain the network connection and provide a response. You can retry operations that are idempotent. For non-idempotent operations, you should consult server state to determine if the operation succeeded.
-	CKErrorServerResponseLost CKErrorCode = 34
+	ErrorServerResponseLost ErrorCode = 34
 	// An error that occurs when the system can't access the specified asset.
-	CKErrorAssetNotAvailable CKErrorCode = 35
+	ErrorAssetNotAvailable ErrorCode = 35
 	// An error that occurs when the user's iCloud account is temporarily unavailable. You receive this error when the user's iCloud account is available, but isn't ready to support CloudKit operations. Don't delete any cached data and don't enqueue any additional CloudKit operations. Checking the account status after the operation fails, assuming there are no other changes to the account's status, returns ``CKAccountStatus/temporarilyUnavailable``. Use the <doc://com.apple.documentation/documentation/foundation/nsnotification/name-swift.struct/ckaccountchanged> notification to listen for future account status changes, and retry the operation after the status becomes ``CKAccountStatus/available``.
-	CKErrorAccountTemporarilyUnavailable CKErrorCode = 36
+	ErrorAccountTemporarilyUnavailable ErrorCode = 36
 	// The user is already an invited participant on this share. They must accept the existing share invitation before continuing.
-	CKErrorParticipantAlreadyInvited CKErrorCode = 37
+	ErrorParticipantAlreadyInvited ErrorCode = 37
 )
 
-func (e CKErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case CKErrorInternalError:
-		return "CKErrorInternalError"
-	case CKErrorPartialFailure:
-		return "CKErrorPartialFailure"
-	case CKErrorNetworkUnavailable:
-		return "CKErrorNetworkUnavailable"
-	case CKErrorNetworkFailure:
-		return "CKErrorNetworkFailure"
-	case CKErrorBadContainer:
-		return "CKErrorBadContainer"
-	case CKErrorServiceUnavailable:
-		return "CKErrorServiceUnavailable"
-	case CKErrorRequestRateLimited:
-		return "CKErrorRequestRateLimited"
-	case CKErrorMissingEntitlement:
-		return "CKErrorMissingEntitlement"
-	case CKErrorNotAuthenticated:
-		return "CKErrorNotAuthenticated"
-	case CKErrorPermissionFailure:
-		return "CKErrorPermissionFailure"
-	case CKErrorUnknownItem:
-		return "CKErrorUnknownItem"
-	case CKErrorInvalidArguments:
-		return "CKErrorInvalidArguments"
-	case CKErrorResultsTruncated:
-		return "CKErrorResultsTruncated"
-	case CKErrorServerRecordChanged:
-		return "CKErrorServerRecordChanged"
-	case CKErrorServerRejectedRequest:
-		return "CKErrorServerRejectedRequest"
-	case CKErrorAssetFileNotFound:
-		return "CKErrorAssetFileNotFound"
-	case CKErrorAssetFileModified:
-		return "CKErrorAssetFileModified"
-	case CKErrorIncompatibleVersion:
-		return "CKErrorIncompatibleVersion"
-	case CKErrorConstraintViolation:
-		return "CKErrorConstraintViolation"
-	case CKErrorOperationCancelled:
-		return "CKErrorOperationCancelled"
-	case CKErrorChangeTokenExpired:
-		return "CKErrorChangeTokenExpired"
-	case CKErrorBatchRequestFailed:
-		return "CKErrorBatchRequestFailed"
-	case CKErrorZoneBusy:
-		return "CKErrorZoneBusy"
-	case CKErrorBadDatabase:
-		return "CKErrorBadDatabase"
-	case CKErrorQuotaExceeded:
-		return "CKErrorQuotaExceeded"
-	case CKErrorZoneNotFound:
-		return "CKErrorZoneNotFound"
-	case CKErrorLimitExceeded:
-		return "CKErrorLimitExceeded"
-	case CKErrorUserDeletedZone:
-		return "CKErrorUserDeletedZone"
-	case CKErrorTooManyParticipants:
-		return "CKErrorTooManyParticipants"
-	case CKErrorAlreadyShared:
-		return "CKErrorAlreadyShared"
-	case CKErrorReferenceViolation:
-		return "CKErrorReferenceViolation"
-	case CKErrorManagedAccountRestricted:
-		return "CKErrorManagedAccountRestricted"
-	case CKErrorParticipantMayNeedVerification:
-		return "CKErrorParticipantMayNeedVerification"
-	case CKErrorServerResponseLost:
-		return "CKErrorServerResponseLost"
-	case CKErrorAssetNotAvailable:
-		return "CKErrorAssetNotAvailable"
-	case CKErrorAccountTemporarilyUnavailable:
-		return "CKErrorAccountTemporarilyUnavailable"
-	case CKErrorParticipantAlreadyInvited:
-		return "CKErrorParticipantAlreadyInvited"
+	case ErrorInternalError:
+		return "ErrorInternalError"
+	case ErrorPartialFailure:
+		return "ErrorPartialFailure"
+	case ErrorNetworkUnavailable:
+		return "ErrorNetworkUnavailable"
+	case ErrorNetworkFailure:
+		return "ErrorNetworkFailure"
+	case ErrorBadContainer:
+		return "ErrorBadContainer"
+	case ErrorServiceUnavailable:
+		return "ErrorServiceUnavailable"
+	case ErrorRequestRateLimited:
+		return "ErrorRequestRateLimited"
+	case ErrorMissingEntitlement:
+		return "ErrorMissingEntitlement"
+	case ErrorNotAuthenticated:
+		return "ErrorNotAuthenticated"
+	case ErrorPermissionFailure:
+		return "ErrorPermissionFailure"
+	case ErrorUnknownItem:
+		return "ErrorUnknownItem"
+	case ErrorInvalidArguments:
+		return "ErrorInvalidArguments"
+	case ErrorResultsTruncated:
+		return "ErrorResultsTruncated"
+	case ErrorServerRecordChanged:
+		return "ErrorServerRecordChanged"
+	case ErrorServerRejectedRequest:
+		return "ErrorServerRejectedRequest"
+	case ErrorAssetFileNotFound:
+		return "ErrorAssetFileNotFound"
+	case ErrorAssetFileModified:
+		return "ErrorAssetFileModified"
+	case ErrorIncompatibleVersion:
+		return "ErrorIncompatibleVersion"
+	case ErrorConstraintViolation:
+		return "ErrorConstraintViolation"
+	case ErrorOperationCancelled:
+		return "ErrorOperationCancelled"
+	case ErrorChangeTokenExpired:
+		return "ErrorChangeTokenExpired"
+	case ErrorBatchRequestFailed:
+		return "ErrorBatchRequestFailed"
+	case ErrorZoneBusy:
+		return "ErrorZoneBusy"
+	case ErrorBadDatabase:
+		return "ErrorBadDatabase"
+	case ErrorQuotaExceeded:
+		return "ErrorQuotaExceeded"
+	case ErrorZoneNotFound:
+		return "ErrorZoneNotFound"
+	case ErrorLimitExceeded:
+		return "ErrorLimitExceeded"
+	case ErrorUserDeletedZone:
+		return "ErrorUserDeletedZone"
+	case ErrorTooManyParticipants:
+		return "ErrorTooManyParticipants"
+	case ErrorAlreadyShared:
+		return "ErrorAlreadyShared"
+	case ErrorReferenceViolation:
+		return "ErrorReferenceViolation"
+	case ErrorManagedAccountRestricted:
+		return "ErrorManagedAccountRestricted"
+	case ErrorParticipantMayNeedVerification:
+		return "ErrorParticipantMayNeedVerification"
+	case ErrorServerResponseLost:
+		return "ErrorServerResponseLost"
+	case ErrorAssetNotAvailable:
+		return "ErrorAssetNotAvailable"
+	case ErrorAccountTemporarilyUnavailable:
+		return "ErrorAccountTemporarilyUnavailable"
+	case ErrorParticipantAlreadyInvited:
+		return "ErrorParticipantAlreadyInvited"
 	default:
-		return fmt.Sprintf("CKErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the type of event that generates the push notification.
-type CKNotificationType int64
+type NotificationType int64
 
 const (
 	// A notification that CloudKit generates from a query subscription's predicate.
-	CKNotificationTypeQuery CKNotificationType = 1
+	NotificationTypeQuery NotificationType = 1
 	// A notification that CloudKit generates when the contents of a record zone change.
-	CKNotificationTypeRecordZone CKNotificationType = 2
+	NotificationTypeRecordZone NotificationType = 2
 	// A notification that your app marks as read.
-	CKNotificationTypeReadNotification CKNotificationType = 3
+	NotificationTypeReadNotification NotificationType = 3
 	// A notification that CloudKit generates when the contents of a database change.
-	CKNotificationTypeDatabase CKNotificationType = 4
+	NotificationTypeDatabase NotificationType = 4
 )
 
-func (e CKNotificationType) String() string {
+// String returns the NotificationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationType) String() string {
 	switch e {
-	case CKNotificationTypeQuery:
-		return "CKNotificationTypeQuery"
-	case CKNotificationTypeRecordZone:
-		return "CKNotificationTypeRecordZone"
-	case CKNotificationTypeReadNotification:
-		return "CKNotificationTypeReadNotification"
-	case CKNotificationTypeDatabase:
-		return "CKNotificationTypeDatabase"
+	case NotificationTypeQuery:
+		return "NotificationTypeQuery"
+	case NotificationTypeRecordZone:
+		return "NotificationTypeRecordZone"
+	case NotificationTypeReadNotification:
+		return "NotificationTypeReadNotification"
+	case NotificationTypeDatabase:
+		return "NotificationTypeDatabase"
 	default:
-		return fmt.Sprintf("CKNotificationType(%d)", int64(e))
+		return fmt.Sprintf("NotificationType(%d)", int64(e))
 	}
 }
 
 // Constants that represent possible data transfer sizes.
-type CKOperationGroupTransferSize int64
+type OperationGroupTransferSize int64
 
 const (
 	// An unknown transfer size.
-	CKOperationGroupTransferSizeUnknown CKOperationGroupTransferSize = 0
+	OperationGroupTransferSizeUnknown OperationGroupTransferSize = 0
 	// A transfer size that represents 1 or more kilobytes.
-	CKOperationGroupTransferSizeKilobytes CKOperationGroupTransferSize = 1
+	OperationGroupTransferSizeKilobytes OperationGroupTransferSize = 1
 	// A transfer size that represents 1 or more megabytes.
-	CKOperationGroupTransferSizeMegabytes CKOperationGroupTransferSize = 2
+	OperationGroupTransferSizeMegabytes OperationGroupTransferSize = 2
 	// A transfer size that represents tens of megabytes.
-	CKOperationGroupTransferSizeTensOfMegabytes CKOperationGroupTransferSize = 3
+	OperationGroupTransferSizeTensOfMegabytes OperationGroupTransferSize = 3
 	// A transfer size that represents hundreds of megabytes.
-	CKOperationGroupTransferSizeHundredsOfMegabytes CKOperationGroupTransferSize = 4
+	OperationGroupTransferSizeHundredsOfMegabytes OperationGroupTransferSize = 4
 	// A transfer size that represents 1 or more gigabytes.
-	CKOperationGroupTransferSizeGigabytes CKOperationGroupTransferSize = 5
+	OperationGroupTransferSizeGigabytes OperationGroupTransferSize = 5
 	// A transfer size that represents tens of gigabytes.
-	CKOperationGroupTransferSizeTensOfGigabytes CKOperationGroupTransferSize = 6
+	OperationGroupTransferSizeTensOfGigabytes OperationGroupTransferSize = 6
 	// A transfer size that represents hundreds of gigabytes.
-	CKOperationGroupTransferSizeHundredsOfGigabytes CKOperationGroupTransferSize = 7
+	OperationGroupTransferSizeHundredsOfGigabytes OperationGroupTransferSize = 7
 )
 
-func (e CKOperationGroupTransferSize) String() string {
+// String returns the OperationGroupTransferSize constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OperationGroupTransferSize) String() string {
 	switch e {
-	case CKOperationGroupTransferSizeUnknown:
-		return "CKOperationGroupTransferSizeUnknown"
-	case CKOperationGroupTransferSizeKilobytes:
-		return "CKOperationGroupTransferSizeKilobytes"
-	case CKOperationGroupTransferSizeMegabytes:
-		return "CKOperationGroupTransferSizeMegabytes"
-	case CKOperationGroupTransferSizeTensOfMegabytes:
-		return "CKOperationGroupTransferSizeTensOfMegabytes"
-	case CKOperationGroupTransferSizeHundredsOfMegabytes:
-		return "CKOperationGroupTransferSizeHundredsOfMegabytes"
-	case CKOperationGroupTransferSizeGigabytes:
-		return "CKOperationGroupTransferSizeGigabytes"
-	case CKOperationGroupTransferSizeTensOfGigabytes:
-		return "CKOperationGroupTransferSizeTensOfGigabytes"
-	case CKOperationGroupTransferSizeHundredsOfGigabytes:
-		return "CKOperationGroupTransferSizeHundredsOfGigabytes"
+	case OperationGroupTransferSizeUnknown:
+		return "OperationGroupTransferSizeUnknown"
+	case OperationGroupTransferSizeKilobytes:
+		return "OperationGroupTransferSizeKilobytes"
+	case OperationGroupTransferSizeMegabytes:
+		return "OperationGroupTransferSizeMegabytes"
+	case OperationGroupTransferSizeTensOfMegabytes:
+		return "OperationGroupTransferSizeTensOfMegabytes"
+	case OperationGroupTransferSizeHundredsOfMegabytes:
+		return "OperationGroupTransferSizeHundredsOfMegabytes"
+	case OperationGroupTransferSizeGigabytes:
+		return "OperationGroupTransferSizeGigabytes"
+	case OperationGroupTransferSizeTensOfGigabytes:
+		return "OperationGroupTransferSizeTensOfGigabytes"
+	case OperationGroupTransferSizeHundredsOfGigabytes:
+		return "OperationGroupTransferSizeHundredsOfGigabytes"
 	default:
-		return fmt.Sprintf("CKOperationGroupTransferSize(%d)", int64(e))
+		return fmt.Sprintf("OperationGroupTransferSize(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the event that triggers the notification.
-type CKQueryNotificationReason int64
+type QueryNotificationReason int64
 
 const (
 	// A notification that indicates the creation of a record matching the subscription's predicate.
-	CKQueryNotificationReasonRecordCreated CKQueryNotificationReason = 1
+	QueryNotificationReasonRecordCreated QueryNotificationReason = 1
 	// A notification that indicates the update of a record matching the subscription's predicate.
-	CKQueryNotificationReasonRecordUpdated CKQueryNotificationReason = 2
+	QueryNotificationReasonRecordUpdated QueryNotificationReason = 2
 	// A notification that indicates the deletion of a record matching the subscription's predicate.
-	CKQueryNotificationReasonRecordDeleted CKQueryNotificationReason = 3
+	QueryNotificationReasonRecordDeleted QueryNotificationReason = 3
 )
 
-func (e CKQueryNotificationReason) String() string {
+// String returns the QueryNotificationReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QueryNotificationReason) String() string {
 	switch e {
-	case CKQueryNotificationReasonRecordCreated:
-		return "CKQueryNotificationReasonRecordCreated"
-	case CKQueryNotificationReasonRecordUpdated:
-		return "CKQueryNotificationReasonRecordUpdated"
-	case CKQueryNotificationReasonRecordDeleted:
-		return "CKQueryNotificationReasonRecordDeleted"
+	case QueryNotificationReasonRecordCreated:
+		return "QueryNotificationReasonRecordCreated"
+	case QueryNotificationReasonRecordUpdated:
+		return "QueryNotificationReasonRecordUpdated"
+	case QueryNotificationReasonRecordDeleted:
+		return "QueryNotificationReasonRecordDeleted"
 	default:
-		return fmt.Sprintf("CKQueryNotificationReason(%d)", int64(e))
+		return fmt.Sprintf("QueryNotificationReason(%d)", int64(e))
 	}
 }
 
 // Configuration options for a query subscription.
 // Bitmask — values may be combined with |.
-type CKQuerySubscriptionOptions uint64
+type QuerySubscriptionOptions uint64
 
 const (
 	// An option that instructs CloudKit to send a push notification when it creates a record that matches a subscription's criteria.
-	CKQuerySubscriptionOptionsFiresOnRecordCreation CKQuerySubscriptionOptions = 1
+	QuerySubscriptionOptionsFiresOnRecordCreation QuerySubscriptionOptions = 1
 	// An option that instructs CloudKit to send a push notification when it modifies a record that matches a subscription's criteria.
-	CKQuerySubscriptionOptionsFiresOnRecordUpdate CKQuerySubscriptionOptions = 2
+	QuerySubscriptionOptionsFiresOnRecordUpdate QuerySubscriptionOptions = 2
 	// An option that instructs CloudKit to send a push notification when it deletes a record that matches a subscription's criteria.
-	CKQuerySubscriptionOptionsFiresOnRecordDeletion CKQuerySubscriptionOptions = 4
+	QuerySubscriptionOptionsFiresOnRecordDeletion QuerySubscriptionOptions = 4
 	// An option that instructs CloudKit to send a push notification only once. You combine this option with one or more of the other subscription options. This option applies only to query-based subscriptions. CloudKit deletes the subscription after it sends the push notification. If you want to generate subsequent push notifications using the same criteria, create and save a new subscription.
-	CKQuerySubscriptionOptionsFiresOnce CKQuerySubscriptionOptions = 8
+	QuerySubscriptionOptionsFiresOnce QuerySubscriptionOptions = 8
 )
 
-func (e CKQuerySubscriptionOptions) String() string {
+// String returns the QuerySubscriptionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QuerySubscriptionOptions) String() string {
 	var parts []string
-	if e&CKQuerySubscriptionOptionsFiresOnRecordCreation != 0 {
-		parts = append(parts, "CKQuerySubscriptionOptionsFiresOnRecordCreation")
+	if e&QuerySubscriptionOptionsFiresOnRecordCreation != 0 {
+		parts = append(parts, "QuerySubscriptionOptionsFiresOnRecordCreation")
 	}
-	if e&CKQuerySubscriptionOptionsFiresOnRecordUpdate != 0 {
-		parts = append(parts, "CKQuerySubscriptionOptionsFiresOnRecordUpdate")
+	if e&QuerySubscriptionOptionsFiresOnRecordUpdate != 0 {
+		parts = append(parts, "QuerySubscriptionOptionsFiresOnRecordUpdate")
 	}
-	if e&CKQuerySubscriptionOptionsFiresOnRecordDeletion != 0 {
-		parts = append(parts, "CKQuerySubscriptionOptionsFiresOnRecordDeletion")
+	if e&QuerySubscriptionOptionsFiresOnRecordDeletion != 0 {
+		parts = append(parts, "QuerySubscriptionOptionsFiresOnRecordDeletion")
 	}
-	if e&CKQuerySubscriptionOptionsFiresOnce != 0 {
-		parts = append(parts, "CKQuerySubscriptionOptionsFiresOnce")
+	if e&QuerySubscriptionOptionsFiresOnce != 0 {
+		parts = append(parts, "QuerySubscriptionOptionsFiresOnce")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -415,58 +367,62 @@ func (e CKQuerySubscriptionOptions) String() string {
 }
 
 // Constants that indicate which policy to apply when saving records.
-type CKRecordSavePolicy int64
+type RecordSavePolicy int64
 
 const (
 	// A policy that instructs CloudKit to only proceed if the record's change tag matches that of the server's copy. The server maintains a change tag for each record automatically. When you fetch a record, that change tag accompanies the rest of the record's data. If the change tag in your local record matches the change tag of the record on the server, the save operation proceeds normally. If the server record contains a newer change tag, CloudKit doesn't save the record and reports a ``CKError/Code/serverRecordChanged`` error. - Note: A ``CKShare`` record is always saved with policy `ifServerRecordUnchanged`, regardless of an operation's ``CKModifyRecordsOperation/savePolicy``.
-	CKRecordSaveIfServerRecordUnchanged CKRecordSavePolicy = 0
+	RecordSaveIfServerRecordUnchanged RecordSavePolicy = 0
 	// A policy that instructs CloudKit to save only the fields of a record that contain changes. - Important: This policy doesn't compare record change tags. To only save changes to the most recent version of a record, use ``CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged`` instead.
-	CKRecordSaveChangedKeys CKRecordSavePolicy = 1
+	RecordSaveChangedKeys RecordSavePolicy = 1
 	// A policy that instructs CloudKit to save all keys of a record, even those without changes. - Important: This policy doesn't compare record change tags. To only save changes to the most recent version of a record, use ``CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged`` instead. This policy causes CloudKit to overwrite any existing values on the server. It's possible for a server record to contain keys that aren't present locally. Another client might add keys to the record after you fetch it. Also, if you use the ``CKFetchRecordsOperation/desiredKeys-34l1l`` property to request a subset of keys during a fetch operation, saving that same record modifies only those keys that you include in the fetch and any keys you add to the record after that.
-	CKRecordSaveAllKeys CKRecordSavePolicy = 2
+	RecordSaveAllKeys RecordSavePolicy = 2
 )
 
-func (e CKRecordSavePolicy) String() string {
+// String returns the RecordSavePolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RecordSavePolicy) String() string {
 	switch e {
-	case CKRecordSaveIfServerRecordUnchanged:
-		return "CKRecordSaveIfServerRecordUnchanged"
-	case CKRecordSaveChangedKeys:
-		return "CKRecordSaveChangedKeys"
-	case CKRecordSaveAllKeys:
-		return "CKRecordSaveAllKeys"
+	case RecordSaveIfServerRecordUnchanged:
+		return "RecordSaveIfServerRecordUnchanged"
+	case RecordSaveChangedKeys:
+		return "RecordSaveChangedKeys"
+	case RecordSaveAllKeys:
+		return "RecordSaveAllKeys"
 	default:
-		return fmt.Sprintf("CKRecordSavePolicy(%d)", int64(e))
+		return fmt.Sprintf("RecordSavePolicy(%d)", int64(e))
 	}
 }
 
 // The capabilities that a record zone supports.
 // Bitmask — values may be combined with |.
-type CKRecordZoneCapabilities uint64
+type RecordZoneCapabilities uint64
 
 const (
 	// A capability for fetching only the changed records from a zone. This capability makes the creation of offline caches more efficient. Instead of fetching the entire record every time, use ``CKFetchRecordZoneChangesOperation`` to fetch only the changed values, and use the data it returns to update your cache. This minimizes the amount of data you receive from the server.
-	CKRecordZoneCapabilityFetchChanges CKRecordZoneCapabilities = 1
+	RecordZoneCapabilityFetchChanges RecordZoneCapabilities = 1
 	// A capability that allows atomic changes of multiple records. When you use a ``CKModifyRecordsOperation`` object to save records, if the server is unable to save the changes for one record, it doesn't save the changes for any of the records. Combining this capability with the ``CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged`` policy of the operation object prevents your app from overwriting changes to a group of records if one or more of the records on the server has recent changes.
-	CKRecordZoneCapabilityAtomic CKRecordZoneCapabilities = 2
+	RecordZoneCapabilityAtomic RecordZoneCapabilities = 2
 	// A capability for sharing a specific hierarchy of records. CloudKit allows you to share record hierarchies from custom record zones that you create in the user's private database. For more information, see <doc:shared-records>.
-	CKRecordZoneCapabilitySharing CKRecordZoneCapabilities = 4
+	RecordZoneCapabilitySharing RecordZoneCapabilities = 4
 	// A capability for sharing the entire contents of a record zone. CloudKit allows you to share custom record zones that you create in the user's private database. For more information, see <doc:shared-records>.
-	CKRecordZoneCapabilityZoneWideSharing CKRecordZoneCapabilities = 8
+	RecordZoneCapabilityZoneWideSharing RecordZoneCapabilities = 8
 )
 
-func (e CKRecordZoneCapabilities) String() string {
+// String returns the RecordZoneCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RecordZoneCapabilities) String() string {
 	var parts []string
-	if e&CKRecordZoneCapabilityFetchChanges != 0 {
-		parts = append(parts, "CKRecordZoneCapabilityFetchChanges")
+	if e&RecordZoneCapabilityFetchChanges != 0 {
+		parts = append(parts, "RecordZoneCapabilityFetchChanges")
 	}
-	if e&CKRecordZoneCapabilityAtomic != 0 {
-		parts = append(parts, "CKRecordZoneCapabilityAtomic")
+	if e&RecordZoneCapabilityAtomic != 0 {
+		parts = append(parts, "RecordZoneCapabilityAtomic")
 	}
-	if e&CKRecordZoneCapabilitySharing != 0 {
-		parts = append(parts, "CKRecordZoneCapabilitySharing")
+	if e&RecordZoneCapabilitySharing != 0 {
+		parts = append(parts, "RecordZoneCapabilitySharing")
 	}
-	if e&CKRecordZoneCapabilityZoneWideSharing != 0 {
-		parts = append(parts, "CKRecordZoneCapabilityZoneWideSharing")
+	if e&RecordZoneCapabilityZoneWideSharing != 0 {
+		parts = append(parts, "RecordZoneCapabilityZoneWideSharing")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -474,158 +430,170 @@ func (e CKRecordZoneCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CKRecordZoneEncryptionScope int64
+type RecordZoneEncryptionScope int64
 
 const (
 	// Zone uses per-record encryption keys for any encrypted values on a record or share. This is the default encryption scope for a record zone.
-	CKRecordZoneEncryptionScopePerRecord CKRecordZoneEncryptionScope = 0
+	RecordZoneEncryptionScopePerRecord RecordZoneEncryptionScope = 0
 	// Zone uses per-zone encryption keys for encrypted values across all records and the zone-wide share, if present. This is an optional optimization that can reduce the overall storage used by encryption keys in a zone. Note that: - Record zones using per-zone encryption only support zone-wide sharing. - Encryption scope can only be assigned at zone creation and cannot be changed for the lifetime of the zone. - The server does not return zones using per-zone encryption to device OS versions older than the corresponding API availability version. - An older OS trying to overwrite an existing zone using per-zone encryption due to a naming collision results in a `.serverRejectedRequest` error. - On device OS upgrade, your application is responsible for fetching database changes via `CKFetchDatabaseChangesOperation` with a nil sync token to verify it has received all the zones available to it from the server.
-	CKRecordZoneEncryptionScopePerZone CKRecordZoneEncryptionScope = 1
+	RecordZoneEncryptionScopePerZone RecordZoneEncryptionScope = 1
 )
 
-func (e CKRecordZoneEncryptionScope) String() string {
+// String returns the RecordZoneEncryptionScope constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RecordZoneEncryptionScope) String() string {
 	switch e {
-	case CKRecordZoneEncryptionScopePerRecord:
-		return "CKRecordZoneEncryptionScopePerRecord"
-	case CKRecordZoneEncryptionScopePerZone:
-		return "CKRecordZoneEncryptionScopePerZone"
+	case RecordZoneEncryptionScopePerRecord:
+		return "RecordZoneEncryptionScopePerRecord"
+	case RecordZoneEncryptionScopePerZone:
+		return "RecordZoneEncryptionScopePerZone"
 	default:
-		return fmt.Sprintf("CKRecordZoneEncryptionScope(%d)", int64(e))
+		return fmt.Sprintf("RecordZoneEncryptionScope(%d)", int64(e))
 	}
 }
 
-type CKReferenceAction uint64
+type ReferenceAction uint64
 
 const (
 	// A reference action that has no cascading behavior. No action occurs when you delete a record that the current record references. Deleting a parent record doesn't delete that record's children. The `CKReference` object still contains the ID of the deleted record and doesn't update.
-	CKReferenceActionNone CKReferenceAction = 0
+	ReferenceActionNone ReferenceAction = 0
 	// A reference action that cascades deletions. CloudKit deletes any records that contain `CKReference` objects pointing to the current record. The deletion of the additional records can trigger further deletions as the action cascades. The deletions are asynchronous in the default zone and immediate in a custom zone.
-	CKReferenceActionDeleteSelf CKReferenceAction = 1
+	ReferenceActionDeleteSelf ReferenceAction = 1
 )
 
-func (e CKReferenceAction) String() string {
+// String returns the ReferenceAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReferenceAction) String() string {
 	switch e {
-	case CKReferenceActionNone:
-		return "CKReferenceActionNone"
-	case CKReferenceActionDeleteSelf:
-		return "CKReferenceActionDeleteSelf"
+	case ReferenceActionNone:
+		return "ReferenceActionNone"
+	case ReferenceActionDeleteSelf:
+		return "ReferenceActionDeleteSelf"
 	default:
-		return fmt.Sprintf("CKReferenceAction(%d)", int64(e))
+		return fmt.Sprintf("ReferenceAction(%d)", int64(e))
 	}
 }
 
-type CKShareParticipantAcceptanceStatus int64
+type ShareParticipantAcceptanceStatus int64
 
 const (
 	// The participant's status is unknown.
-	CKShareParticipantAcceptanceStatusUnknown CKShareParticipantAcceptanceStatus = 0
+	ShareParticipantAcceptanceStatusUnknown ShareParticipantAcceptanceStatus = 0
 	// The participant's acceptance of the share request is pending.
-	CKShareParticipantAcceptanceStatusPending CKShareParticipantAcceptanceStatus = 1
+	ShareParticipantAcceptanceStatusPending ShareParticipantAcceptanceStatus = 1
 	// The participant accepted the share request.
-	CKShareParticipantAcceptanceStatusAccepted CKShareParticipantAcceptanceStatus = 2
+	ShareParticipantAcceptanceStatusAccepted ShareParticipantAcceptanceStatus = 2
 	// The system removed the participant from the share.
-	CKShareParticipantAcceptanceStatusRemoved CKShareParticipantAcceptanceStatus = 3
+	ShareParticipantAcceptanceStatusRemoved ShareParticipantAcceptanceStatus = 3
 )
 
-func (e CKShareParticipantAcceptanceStatus) String() string {
+// String returns the ShareParticipantAcceptanceStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShareParticipantAcceptanceStatus) String() string {
 	switch e {
-	case CKShareParticipantAcceptanceStatusUnknown:
-		return "CKShareParticipantAcceptanceStatusUnknown"
-	case CKShareParticipantAcceptanceStatusPending:
-		return "CKShareParticipantAcceptanceStatusPending"
-	case CKShareParticipantAcceptanceStatusAccepted:
-		return "CKShareParticipantAcceptanceStatusAccepted"
-	case CKShareParticipantAcceptanceStatusRemoved:
-		return "CKShareParticipantAcceptanceStatusRemoved"
+	case ShareParticipantAcceptanceStatusUnknown:
+		return "ShareParticipantAcceptanceStatusUnknown"
+	case ShareParticipantAcceptanceStatusPending:
+		return "ShareParticipantAcceptanceStatusPending"
+	case ShareParticipantAcceptanceStatusAccepted:
+		return "ShareParticipantAcceptanceStatusAccepted"
+	case ShareParticipantAcceptanceStatusRemoved:
+		return "ShareParticipantAcceptanceStatusRemoved"
 	default:
-		return fmt.Sprintf("CKShareParticipantAcceptanceStatus(%d)", int64(e))
+		return fmt.Sprintf("ShareParticipantAcceptanceStatus(%d)", int64(e))
 	}
 }
 
-type CKShareParticipantPermission int64
+type ShareParticipantPermission int64
 
 const (
 	// The participant's permissions are unknown.
-	CKShareParticipantPermissionUnknown CKShareParticipantPermission = 0
+	ShareParticipantPermissionUnknown ShareParticipantPermission = 0
 	// The participant doesn't have any permissions for the share.
-	CKShareParticipantPermissionNone CKShareParticipantPermission = 1
+	ShareParticipantPermissionNone ShareParticipantPermission = 1
 	// The participant has read-only permissions for the share.
-	CKShareParticipantPermissionReadOnly CKShareParticipantPermission = 2
+	ShareParticipantPermissionReadOnly ShareParticipantPermission = 2
 	// The participant has read-and-write permissions for the share.
-	CKShareParticipantPermissionReadWrite CKShareParticipantPermission = 3
+	ShareParticipantPermissionReadWrite ShareParticipantPermission = 3
 )
 
-func (e CKShareParticipantPermission) String() string {
+// String returns the ShareParticipantPermission constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShareParticipantPermission) String() string {
 	switch e {
-	case CKShareParticipantPermissionUnknown:
-		return "CKShareParticipantPermissionUnknown"
-	case CKShareParticipantPermissionNone:
-		return "CKShareParticipantPermissionNone"
-	case CKShareParticipantPermissionReadOnly:
-		return "CKShareParticipantPermissionReadOnly"
-	case CKShareParticipantPermissionReadWrite:
-		return "CKShareParticipantPermissionReadWrite"
+	case ShareParticipantPermissionUnknown:
+		return "ShareParticipantPermissionUnknown"
+	case ShareParticipantPermissionNone:
+		return "ShareParticipantPermissionNone"
+	case ShareParticipantPermissionReadOnly:
+		return "ShareParticipantPermissionReadOnly"
+	case ShareParticipantPermissionReadWrite:
+		return "ShareParticipantPermissionReadWrite"
 	default:
-		return fmt.Sprintf("CKShareParticipantPermission(%d)", int64(e))
+		return fmt.Sprintf("ShareParticipantPermission(%d)", int64(e))
 	}
 }
 
 // Constants that represent the role of a share’s participant.
-type CKShareParticipantRole int64
+type ShareParticipantRole int64
 
 const (
 	// The participant's role is unknown.
-	CKShareParticipantRoleUnknown CKShareParticipantRole = 0
+	ShareParticipantRoleUnknown ShareParticipantRole = 0
 	// The participant is the share's owner. The owner of a share can invite private users.
-	CKShareParticipantRoleOwner CKShareParticipantRole = 1
+	ShareParticipantRoleOwner ShareParticipantRole = 1
 	// The participant has the private role. A private user of a share can access the share.
-	CKShareParticipantRolePrivateUser CKShareParticipantRole = 3
+	ShareParticipantRolePrivateUser ShareParticipantRole = 3
 	// The participant has the public role. A public user of a share is self-added when accessing the share URL.
-	CKShareParticipantRolePublicUser CKShareParticipantRole = 4
+	ShareParticipantRolePublicUser ShareParticipantRole = 4
 	// The participant has the administrator role. An administrator of a share can add and remove participants and change their permissions. CloudKit returns shares with `administrator` participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as ``CloudKit/CKShareParticipantRole/CKShareParticipantRolePrivateUser``.
-	CKShareParticipantRoleAdministrator CKShareParticipantRole = 2
+	ShareParticipantRoleAdministrator ShareParticipantRole = 2
 )
 
-func (e CKShareParticipantRole) String() string {
+// String returns the ShareParticipantRole constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShareParticipantRole) String() string {
 	switch e {
-	case CKShareParticipantRoleUnknown:
-		return "CKShareParticipantRoleUnknown"
-	case CKShareParticipantRoleOwner:
-		return "CKShareParticipantRoleOwner"
-	case CKShareParticipantRolePrivateUser:
-		return "CKShareParticipantRolePrivateUser"
-	case CKShareParticipantRolePublicUser:
-		return "CKShareParticipantRolePublicUser"
-	case CKShareParticipantRoleAdministrator:
-		return "CKShareParticipantRoleAdministrator"
+	case ShareParticipantRoleUnknown:
+		return "ShareParticipantRoleUnknown"
+	case ShareParticipantRoleOwner:
+		return "ShareParticipantRoleOwner"
+	case ShareParticipantRolePrivateUser:
+		return "ShareParticipantRolePrivateUser"
+	case ShareParticipantRolePublicUser:
+		return "ShareParticipantRolePublicUser"
+	case ShareParticipantRoleAdministrator:
+		return "ShareParticipantRoleAdministrator"
 	default:
-		return fmt.Sprintf("CKShareParticipantRole(%d)", int64(e))
+		return fmt.Sprintf("ShareParticipantRole(%d)", int64(e))
 	}
 }
 
 // An object that controls participant access options.
 // Bitmask — values may be combined with |.
-type CKSharingParticipantAccessOption uint64
+type SharingParticipantAccessOption uint64
 
 const (
 	// The permission option the system uses to control whether a user can share publicly.
-	CKSharingParticipantAccessOptionAnyoneWithLink CKSharingParticipantAccessOption = 1
+	SharingParticipantAccessOptionAnyoneWithLink SharingParticipantAccessOption = 1
 	// The permission option the system uses to control whether a user can share privately.
-	CKSharingParticipantAccessOptionSpecifiedRecipientsOnly CKSharingParticipantAccessOption = 2
+	SharingParticipantAccessOptionSpecifiedRecipientsOnly SharingParticipantAccessOption = 2
 	// The permission option the system uses to control whether a user can share publicly or privately.
-	CKSharingParticipantAccessOptionAny CKSharingParticipantAccessOption = 3
+	SharingParticipantAccessOptionAny SharingParticipantAccessOption = 3
 )
 
-func (e CKSharingParticipantAccessOption) String() string {
+// String returns the SharingParticipantAccessOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SharingParticipantAccessOption) String() string {
 	var parts []string
-	if e&CKSharingParticipantAccessOptionAnyoneWithLink != 0 {
-		parts = append(parts, "CKSharingParticipantAccessOptionAnyoneWithLink")
+	if e&SharingParticipantAccessOptionAnyoneWithLink != 0 {
+		parts = append(parts, "SharingParticipantAccessOptionAnyoneWithLink")
 	}
-	if e&CKSharingParticipantAccessOptionSpecifiedRecipientsOnly != 0 {
-		parts = append(parts, "CKSharingParticipantAccessOptionSpecifiedRecipientsOnly")
+	if e&SharingParticipantAccessOptionSpecifiedRecipientsOnly != 0 {
+		parts = append(parts, "SharingParticipantAccessOptionSpecifiedRecipientsOnly")
 	}
-	if e&CKSharingParticipantAccessOptionAny != 0 {
-		parts = append(parts, "CKSharingParticipantAccessOptionAny")
+	if e&SharingParticipantAccessOptionAny != 0 {
+		parts = append(parts, "SharingParticipantAccessOptionAny")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -635,27 +603,29 @@ func (e CKSharingParticipantAccessOption) String() string {
 
 // An object that controls participant permission options.
 // Bitmask — values may be combined with |.
-type CKSharingParticipantPermissionOption uint64
+type SharingParticipantPermissionOption uint64
 
 const (
 	// The permission option the system uses to control whether a user can grant read-only access.
-	CKSharingParticipantPermissionOptionReadOnly CKSharingParticipantPermissionOption = 1
+	SharingParticipantPermissionOptionReadOnly SharingParticipantPermissionOption = 1
 	// The permission option the system uses to control whether a user can grant write access.
-	CKSharingParticipantPermissionOptionReadWrite CKSharingParticipantPermissionOption = 2
+	SharingParticipantPermissionOptionReadWrite SharingParticipantPermissionOption = 2
 	// The permission option the system uses to control whether a user can grant read-only or write access.
-	CKSharingParticipantPermissionOptionAny CKSharingParticipantPermissionOption = 3
+	SharingParticipantPermissionOptionAny SharingParticipantPermissionOption = 3
 )
 
-func (e CKSharingParticipantPermissionOption) String() string {
+// String returns the SharingParticipantPermissionOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SharingParticipantPermissionOption) String() string {
 	var parts []string
-	if e&CKSharingParticipantPermissionOptionReadOnly != 0 {
-		parts = append(parts, "CKSharingParticipantPermissionOptionReadOnly")
+	if e&SharingParticipantPermissionOptionReadOnly != 0 {
+		parts = append(parts, "SharingParticipantPermissionOptionReadOnly")
 	}
-	if e&CKSharingParticipantPermissionOptionReadWrite != 0 {
-		parts = append(parts, "CKSharingParticipantPermissionOptionReadWrite")
+	if e&SharingParticipantPermissionOptionReadWrite != 0 {
+		parts = append(parts, "SharingParticipantPermissionOptionReadWrite")
 	}
-	if e&CKSharingParticipantPermissionOptionAny != 0 {
-		parts = append(parts, "CKSharingParticipantPermissionOptionAny")
+	if e&SharingParticipantPermissionOptionAny != 0 {
+		parts = append(parts, "SharingParticipantPermissionOptionAny")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -664,196 +634,210 @@ func (e CKSharingParticipantPermissionOption) String() string {
 }
 
 // Constants that identify a subscription’s behavior.
-type CKSubscriptionType int64
+type SubscriptionType int64
 
 const (
 	// A constant that indicates the subscription is query-based.
-	CKSubscriptionTypeQuery CKSubscriptionType = 1
+	SubscriptionTypeQuery SubscriptionType = 1
 	// A constant that indicates the subscription is zone-based.
-	CKSubscriptionTypeRecordZone CKSubscriptionType = 2
+	SubscriptionTypeRecordZone SubscriptionType = 2
 	// A constant that indicates the subscription is database-based.
-	CKSubscriptionTypeDatabase CKSubscriptionType = 3
+	SubscriptionTypeDatabase SubscriptionType = 3
 )
 
-func (e CKSubscriptionType) String() string {
+// String returns the SubscriptionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SubscriptionType) String() string {
 	switch e {
-	case CKSubscriptionTypeQuery:
-		return "CKSubscriptionTypeQuery"
-	case CKSubscriptionTypeRecordZone:
-		return "CKSubscriptionTypeRecordZone"
-	case CKSubscriptionTypeDatabase:
-		return "CKSubscriptionTypeDatabase"
+	case SubscriptionTypeQuery:
+		return "SubscriptionTypeQuery"
+	case SubscriptionTypeRecordZone:
+		return "SubscriptionTypeRecordZone"
+	case SubscriptionTypeDatabase:
+		return "SubscriptionTypeDatabase"
 	default:
-		return fmt.Sprintf("CKSubscriptionType(%d)", int64(e))
+		return fmt.Sprintf("SubscriptionType(%d)", int64(e))
 	}
 }
 
 // Describes a change to the device’s iCloud account.
-type CKSyncEngineAccountChangeType int64
+type SyncEngineAccountChangeType int64
 
 const (
 	// A change indicating a sign-in to an iCloud account.
-	CKSyncEngineAccountChangeTypeSignIn CKSyncEngineAccountChangeType = 0
+	SyncEngineAccountChangeTypeSignIn SyncEngineAccountChangeType = 0
 	// A change indicating a sign-out of an iCloud account.
-	CKSyncEngineAccountChangeTypeSignOut CKSyncEngineAccountChangeType = 1
+	SyncEngineAccountChangeTypeSignOut SyncEngineAccountChangeType = 1
 	// A change indicating a switch between two iCloud accounts.
-	CKSyncEngineAccountChangeTypeSwitchAccounts CKSyncEngineAccountChangeType = 2
+	SyncEngineAccountChangeTypeSwitchAccounts SyncEngineAccountChangeType = 2
 )
 
-func (e CKSyncEngineAccountChangeType) String() string {
+// String returns the SyncEngineAccountChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SyncEngineAccountChangeType) String() string {
 	switch e {
-	case CKSyncEngineAccountChangeTypeSignIn:
-		return "CKSyncEngineAccountChangeTypeSignIn"
-	case CKSyncEngineAccountChangeTypeSignOut:
-		return "CKSyncEngineAccountChangeTypeSignOut"
-	case CKSyncEngineAccountChangeTypeSwitchAccounts:
-		return "CKSyncEngineAccountChangeTypeSwitchAccounts"
+	case SyncEngineAccountChangeTypeSignIn:
+		return "SyncEngineAccountChangeTypeSignIn"
+	case SyncEngineAccountChangeTypeSignOut:
+		return "SyncEngineAccountChangeTypeSignOut"
+	case SyncEngineAccountChangeTypeSwitchAccounts:
+		return "SyncEngineAccountChangeTypeSwitchAccounts"
 	default:
-		return fmt.Sprintf("CKSyncEngineAccountChangeType(%d)", int64(e))
+		return fmt.Sprintf("SyncEngineAccountChangeType(%d)", int64(e))
 	}
 }
 
 // Describes an event that occurs during a sync operation.
-type CKSyncEngineEventType int64
+type SyncEngineEventType int64
 
 const (
 	// The sync engine updated its state.
-	CKSyncEngineEventTypeStateUpdate CKSyncEngineEventType = 0
+	SyncEngineEventTypeStateUpdate SyncEngineEventType = 0
 	// The user signed in or out of their account.
-	CKSyncEngineEventTypeAccountChange CKSyncEngineEventType = 1
+	SyncEngineEventTypeAccountChange SyncEngineEventType = 1
 	// The sync engine has fetched new database changes from the server.
-	CKSyncEngineEventTypeFetchedDatabaseChanges CKSyncEngineEventType = 2
+	SyncEngineEventTypeFetchedDatabaseChanges SyncEngineEventType = 2
 	// The sync engine fetched new record zone changes from the server.
-	CKSyncEngineEventTypeFetchedRecordZoneChanges CKSyncEngineEventType = 3
+	SyncEngineEventTypeFetchedRecordZoneChanges SyncEngineEventType = 3
 	// The sync engine sent a batch of database changes to the server.
-	CKSyncEngineEventTypeSentDatabaseChanges CKSyncEngineEventType = 4
+	SyncEngineEventTypeSentDatabaseChanges SyncEngineEventType = 4
 	// The sync engine sent a batch of record zone changes to the server.
-	CKSyncEngineEventTypeSentRecordZoneChanges CKSyncEngineEventType = 5
+	SyncEngineEventTypeSentRecordZoneChanges SyncEngineEventType = 5
 	// The sync engine is about to fetch changes from the server.
-	CKSyncEngineEventTypeWillFetchChanges CKSyncEngineEventType = 6
+	SyncEngineEventTypeWillFetchChanges SyncEngineEventType = 6
 	// The sync engine is about to fetch record zone changes from the server for a specific zone.
-	CKSyncEngineEventTypeWillFetchRecordZoneChanges CKSyncEngineEventType = 7
+	SyncEngineEventTypeWillFetchRecordZoneChanges SyncEngineEventType = 7
 	// The sync engine has completed fetching record zone changes from the server for a specific zone.
-	CKSyncEngineEventTypeDidFetchRecordZoneChanges CKSyncEngineEventType = 8
+	SyncEngineEventTypeDidFetchRecordZoneChanges SyncEngineEventType = 8
 	// The sync engine finished fetching changes from the server.
-	CKSyncEngineEventTypeDidFetchChanges CKSyncEngineEventType = 9
+	SyncEngineEventTypeDidFetchChanges SyncEngineEventType = 9
 	// The sync engine is about to send changes to the server.
-	CKSyncEngineEventTypeWillSendChanges CKSyncEngineEventType = 10
+	SyncEngineEventTypeWillSendChanges SyncEngineEventType = 10
 	// The sync engine finished sending changes to the server.
-	CKSyncEngineEventTypeDidSendChanges CKSyncEngineEventType = 11
+	SyncEngineEventTypeDidSendChanges SyncEngineEventType = 11
 )
 
-func (e CKSyncEngineEventType) String() string {
+// String returns the SyncEngineEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SyncEngineEventType) String() string {
 	switch e {
-	case CKSyncEngineEventTypeStateUpdate:
-		return "CKSyncEngineEventTypeStateUpdate"
-	case CKSyncEngineEventTypeAccountChange:
-		return "CKSyncEngineEventTypeAccountChange"
-	case CKSyncEngineEventTypeFetchedDatabaseChanges:
-		return "CKSyncEngineEventTypeFetchedDatabaseChanges"
-	case CKSyncEngineEventTypeFetchedRecordZoneChanges:
-		return "CKSyncEngineEventTypeFetchedRecordZoneChanges"
-	case CKSyncEngineEventTypeSentDatabaseChanges:
-		return "CKSyncEngineEventTypeSentDatabaseChanges"
-	case CKSyncEngineEventTypeSentRecordZoneChanges:
-		return "CKSyncEngineEventTypeSentRecordZoneChanges"
-	case CKSyncEngineEventTypeWillFetchChanges:
-		return "CKSyncEngineEventTypeWillFetchChanges"
-	case CKSyncEngineEventTypeWillFetchRecordZoneChanges:
-		return "CKSyncEngineEventTypeWillFetchRecordZoneChanges"
-	case CKSyncEngineEventTypeDidFetchRecordZoneChanges:
-		return "CKSyncEngineEventTypeDidFetchRecordZoneChanges"
-	case CKSyncEngineEventTypeDidFetchChanges:
-		return "CKSyncEngineEventTypeDidFetchChanges"
-	case CKSyncEngineEventTypeWillSendChanges:
-		return "CKSyncEngineEventTypeWillSendChanges"
-	case CKSyncEngineEventTypeDidSendChanges:
-		return "CKSyncEngineEventTypeDidSendChanges"
+	case SyncEngineEventTypeStateUpdate:
+		return "SyncEngineEventTypeStateUpdate"
+	case SyncEngineEventTypeAccountChange:
+		return "SyncEngineEventTypeAccountChange"
+	case SyncEngineEventTypeFetchedDatabaseChanges:
+		return "SyncEngineEventTypeFetchedDatabaseChanges"
+	case SyncEngineEventTypeFetchedRecordZoneChanges:
+		return "SyncEngineEventTypeFetchedRecordZoneChanges"
+	case SyncEngineEventTypeSentDatabaseChanges:
+		return "SyncEngineEventTypeSentDatabaseChanges"
+	case SyncEngineEventTypeSentRecordZoneChanges:
+		return "SyncEngineEventTypeSentRecordZoneChanges"
+	case SyncEngineEventTypeWillFetchChanges:
+		return "SyncEngineEventTypeWillFetchChanges"
+	case SyncEngineEventTypeWillFetchRecordZoneChanges:
+		return "SyncEngineEventTypeWillFetchRecordZoneChanges"
+	case SyncEngineEventTypeDidFetchRecordZoneChanges:
+		return "SyncEngineEventTypeDidFetchRecordZoneChanges"
+	case SyncEngineEventTypeDidFetchChanges:
+		return "SyncEngineEventTypeDidFetchChanges"
+	case SyncEngineEventTypeWillSendChanges:
+		return "SyncEngineEventTypeWillSendChanges"
+	case SyncEngineEventTypeDidSendChanges:
+		return "SyncEngineEventTypeDidSendChanges"
 	default:
-		return fmt.Sprintf("CKSyncEngineEventType(%d)", int64(e))
+		return fmt.Sprintf("SyncEngineEventType(%d)", int64(e))
 	}
 }
 
 // Describes the type of a pending database change.
-type CKSyncEnginePendingDatabaseChangeType int64
+type SyncEnginePendingDatabaseChangeType int64
 
 const (
-	CKSyncEnginePendingDatabaseChangeTypeSaveZone   CKSyncEnginePendingDatabaseChangeType = 0
-	CKSyncEnginePendingDatabaseChangeTypeDeleteZone CKSyncEnginePendingDatabaseChangeType = 1
+	SyncEnginePendingDatabaseChangeTypeSaveZone   SyncEnginePendingDatabaseChangeType = 0
+	SyncEnginePendingDatabaseChangeTypeDeleteZone SyncEnginePendingDatabaseChangeType = 1
 )
 
-func (e CKSyncEnginePendingDatabaseChangeType) String() string {
+// String returns the SyncEnginePendingDatabaseChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SyncEnginePendingDatabaseChangeType) String() string {
 	switch e {
-	case CKSyncEnginePendingDatabaseChangeTypeSaveZone:
-		return "CKSyncEnginePendingDatabaseChangeTypeSaveZone"
-	case CKSyncEnginePendingDatabaseChangeTypeDeleteZone:
-		return "CKSyncEnginePendingDatabaseChangeTypeDeleteZone"
+	case SyncEnginePendingDatabaseChangeTypeSaveZone:
+		return "SyncEnginePendingDatabaseChangeTypeSaveZone"
+	case SyncEnginePendingDatabaseChangeTypeDeleteZone:
+		return "SyncEnginePendingDatabaseChangeTypeDeleteZone"
 	default:
-		return fmt.Sprintf("CKSyncEnginePendingDatabaseChangeType(%d)", int64(e))
+		return fmt.Sprintf("SyncEnginePendingDatabaseChangeType(%d)", int64(e))
 	}
 }
 
 // A type of change in a record zone that needs to be sent to the server.
-type CKSyncEnginePendingRecordZoneChangeType int64
+type SyncEnginePendingRecordZoneChangeType int64
 
 const (
-	CKSyncEnginePendingRecordZoneChangeTypeSaveRecord   CKSyncEnginePendingRecordZoneChangeType = 0
-	CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord CKSyncEnginePendingRecordZoneChangeType = 1
+	SyncEnginePendingRecordZoneChangeTypeSaveRecord   SyncEnginePendingRecordZoneChangeType = 0
+	SyncEnginePendingRecordZoneChangeTypeDeleteRecord SyncEnginePendingRecordZoneChangeType = 1
 )
 
-func (e CKSyncEnginePendingRecordZoneChangeType) String() string {
+// String returns the SyncEnginePendingRecordZoneChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SyncEnginePendingRecordZoneChangeType) String() string {
 	switch e {
-	case CKSyncEnginePendingRecordZoneChangeTypeSaveRecord:
-		return "CKSyncEnginePendingRecordZoneChangeTypeSaveRecord"
-	case CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord:
-		return "CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord"
+	case SyncEnginePendingRecordZoneChangeTypeSaveRecord:
+		return "SyncEnginePendingRecordZoneChangeTypeSaveRecord"
+	case SyncEnginePendingRecordZoneChangeTypeDeleteRecord:
+		return "SyncEnginePendingRecordZoneChangeTypeDeleteRecord"
 	default:
-		return fmt.Sprintf("CKSyncEnginePendingRecordZoneChangeType(%d)", int64(e))
+		return fmt.Sprintf("SyncEnginePendingRecordZoneChangeType(%d)", int64(e))
 	}
 }
 
 // Describes the reason for a sync operation.
-type CKSyncEngineSyncReason int64
+type SyncEngineSyncReason int64
 
 const (
 	// The sync engine automatically scheduled this sync.
-	CKSyncEngineSyncReasonScheduled CKSyncEngineSyncReason = 0
+	SyncEngineSyncReasonScheduled SyncEngineSyncReason = 0
 	// A manual sync operation.
-	CKSyncEngineSyncReasonManual CKSyncEngineSyncReason = 1
+	SyncEngineSyncReasonManual SyncEngineSyncReason = 1
 )
 
-func (e CKSyncEngineSyncReason) String() string {
+// String returns the SyncEngineSyncReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SyncEngineSyncReason) String() string {
 	switch e {
-	case CKSyncEngineSyncReasonScheduled:
-		return "CKSyncEngineSyncReasonScheduled"
-	case CKSyncEngineSyncReasonManual:
-		return "CKSyncEngineSyncReasonManual"
+	case SyncEngineSyncReasonScheduled:
+		return "SyncEngineSyncReasonScheduled"
+	case SyncEngineSyncReasonManual:
+		return "SyncEngineSyncReasonManual"
 	default:
-		return fmt.Sprintf("CKSyncEngineSyncReason(%d)", int64(e))
+		return fmt.Sprintf("SyncEngineSyncReason(%d)", int64(e))
 	}
 }
 
 // Describes the reason for a record zone deletion.
-type CKSyncEngineZoneDeletionReason int64
+type SyncEngineZoneDeletionReason int64
 
 const (
 	// Your app deleted the record zone.
-	CKSyncEngineZoneDeletionReasonDeleted CKSyncEngineZoneDeletionReason = 0
+	SyncEngineZoneDeletionReasonDeleted SyncEngineZoneDeletionReason = 0
 	// The owner of the iCloud account purged your app’s data using the Settings app.
-	CKSyncEngineZoneDeletionReasonPurged CKSyncEngineZoneDeletionReason = 1
+	SyncEngineZoneDeletionReasonPurged SyncEngineZoneDeletionReason = 1
 	// The owner of the iCloud account reset their encrypted data.
-	CKSyncEngineZoneDeletionReasonEncryptedDataReset CKSyncEngineZoneDeletionReason = 2
+	SyncEngineZoneDeletionReasonEncryptedDataReset SyncEngineZoneDeletionReason = 2
 )
 
-func (e CKSyncEngineZoneDeletionReason) String() string {
+// String returns the SyncEngineZoneDeletionReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SyncEngineZoneDeletionReason) String() string {
 	switch e {
-	case CKSyncEngineZoneDeletionReasonDeleted:
-		return "CKSyncEngineZoneDeletionReasonDeleted"
-	case CKSyncEngineZoneDeletionReasonPurged:
-		return "CKSyncEngineZoneDeletionReasonPurged"
-	case CKSyncEngineZoneDeletionReasonEncryptedDataReset:
-		return "CKSyncEngineZoneDeletionReasonEncryptedDataReset"
+	case SyncEngineZoneDeletionReasonDeleted:
+		return "SyncEngineZoneDeletionReasonDeleted"
+	case SyncEngineZoneDeletionReasonPurged:
+		return "SyncEngineZoneDeletionReasonPurged"
+	case SyncEngineZoneDeletionReasonEncryptedDataReset:
+		return "SyncEngineZoneDeletionReasonEncryptedDataReset"
 	default:
-		return fmt.Sprintf("CKSyncEngineZoneDeletionReason(%d)", int64(e))
+		return fmt.Sprintf("SyncEngineZoneDeletionReason(%d)", int64(e))
 	}
 }

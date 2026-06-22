@@ -5,53 +5,65 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event requesting a change in the playback position.
+// ChangePlaybackPositionCommandEvent is an idiomatic wrapper over the Objective-C class MPChangePlaybackPositionCommandEvent.
 //
-// ChangePlaybackPositionCommandEvent wraps [raw.MPChangePlaybackPositionCommandEvent] with a fluent Go API.
+// It embeds [RemoteCommandEvent], promoting that type's methods.
+//
+// An event requesting a change in the playback position.
 type ChangePlaybackPositionCommandEvent struct {
-	inner *raw.MPChangePlaybackPositionCommandEvent
+	RemoteCommandEvent
 }
 
-// Unwrap returns the underlying [raw.MPChangePlaybackPositionCommandEvent].
-func (x *ChangePlaybackPositionCommandEvent) Unwrap() *raw.MPChangePlaybackPositionCommandEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangePlaybackPositionCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangePlaybackPositionCommandEventFromID adopts an existing object pointer as a ChangePlaybackPositionCommandEvent (nil for 0).
+// ChangePlaybackPositionCommandEventFromID adopts an existing Objective-C object as a ChangePlaybackPositionCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangePlaybackPositionCommandEventFromID(id objc.ID) *ChangePlaybackPositionCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangePlaybackPositionCommandEvent{inner: raw.MPChangePlaybackPositionCommandEventFromID(id)}
+	x := &ChangePlaybackPositionCommandEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangePlaybackPositionCommandEvent creates a new [ChangePlaybackPositionCommandEvent].
+// changePlaybackPositionCommandEventAdopt wraps an Objective-C object that this code just created as a
+// ChangePlaybackPositionCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changePlaybackPositionCommandEventAdopt(id objc.ID) *ChangePlaybackPositionCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangePlaybackPositionCommandEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangePlaybackPositionCommandEvent creates a new ChangePlaybackPositionCommandEvent.
 func NewChangePlaybackPositionCommandEvent() *ChangePlaybackPositionCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangePlaybackPositionCommandEvent")), objc.RegisterName("new"))
-	return &ChangePlaybackPositionCommandEvent{inner: raw.MPChangePlaybackPositionCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangePlaybackPositionCommandEvent")), objc.RegisterName("new"))
+	return changePlaybackPositionCommandEventAdopt(_id)
 }
 
-// PositionTime calls the underlying PositionTime.
+// PositionTime wraps the corresponding Objective-C method.
 func (x *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
-	return x.inner.PositionTime()
-}
-
-func (x *ChangePlaybackPositionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("positionTime"))
+	return _r
 }
 
 // ChangePlaybackPositionCommandEventable is the interface implemented by [ChangePlaybackPositionCommandEvent], for mocking and DI.
 type ChangePlaybackPositionCommandEventable interface {
-	Unwrap() *raw.MPChangePlaybackPositionCommandEvent
+	obj.Object
 	PositionTime() float64
 }
 
 var _ ChangePlaybackPositionCommandEventable = (*ChangePlaybackPositionCommandEvent)(nil)
+
+var _ RemoteCommandEventProvider = (*ChangePlaybackPositionCommandEvent)(nil)

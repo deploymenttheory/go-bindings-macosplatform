@@ -5,95 +5,99 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object to initialize a mixer with a given configuration.
+// MixerDefinition is an idiomatic wrapper over the Objective-C class PHASEMixerDefinition.
 //
-// MixerDefinition wraps [raw.PHASEMixerDefinition] with a fluent Go API.
+// MixerDefinition is an abstract base — you do not construct it directly. Construct one of [AmbientMixerDefinition], [ChannelMixerDefinition], [SpatialMixerDefinition] and pass it where a MixerDefinition is accepted.
+//
+// An object to initialize a mixer with a given configuration.
 type MixerDefinition struct {
-	inner *raw.PHASEMixerDefinition
+	Definition
 }
 
-// Unwrap returns the underlying [raw.PHASEMixerDefinition].
-func (x *MixerDefinition) Unwrap() *raw.PHASEMixerDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MixerDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// MixerDefinitionFromID adopts an existing object pointer as a MixerDefinition (nil for 0).
+// MixerDefinitionFromID adopts an existing Objective-C object as a MixerDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func MixerDefinitionFromID(id objc.ID) *MixerDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &MixerDefinition{inner: raw.PHASEMixerDefinitionFromID(id)}
-}
-
-// NewMixerDefinition creates a new [MixerDefinition].
-func NewMixerDefinition() *MixerDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMixerDefinition")), objc.RegisterName("new"))
-	return &MixerDefinition{inner: raw.PHASEMixerDefinitionFromID(_id)}
-}
-
-// The mixer’s volume.
-//
-// WithGain sets the gain property and returns the receiver for chaining.
-func (x *MixerDefinition) WithGain(gain float64) *MixerDefinition {
-	x.inner.SetGain(gain)
+	x := &MixerDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A template for a parameter that changes the mixer’s volume gradually over a period of time.
-//
-// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
-func (x *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {
-	x.inner.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
-	return x
-}
-
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
-//
-// Gain calls the underlying Gain.
-func (x *MixerDefinition) Gain() float64 {
-	return x.inner.Gain()
-}
-
-// SetGain calls the underlying SetGain.
-func (x *MixerDefinition) SetGain(gain float64) {
-	x.inner.SetGain(gain)
-}
-
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
-//
-// GainMetaParameterDefinition calls the underlying GainMetaParameterDefinition.
-func (x *MixerDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := x.inner.GainMetaParameterDefinition()
-	if _r == nil {
+// mixerDefinitionAdopt wraps an Objective-C object that this code just created as a
+// MixerDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mixerDefinitionAdopt(id objc.ID) *MixerDefinition {
+	if id == 0 {
 		return nil
 	}
-	return &NumberMetaParameterDefinition{inner: _r}
+	x := &MixerDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetGainMetaParameterDefinition calls the underlying SetGainMetaParameterDefinition.
-func (x *MixerDefinition) SetGainMetaParameterDefinition(gainMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition) {
-	x.inner.SetGainMetaParameterDefinition(gainMetaParameterDefinition)
+// WithGain the mixer’s volume.
+func (x *MixerDefinition) WithGain(gain float64) *MixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
+	return x
 }
 
-func (x *MixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition { return x.inner }
+// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
+func (x *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+	return x
+}
 
-func (x *MixerDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEDefinition }
+// Gain linear gain scalar.
+func (x *MixerDefinition) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+	return _r
+}
+
+// SetGain wraps the corresponding Objective-C method.
+func (x *MixerDefinition) SetGain(gain float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
+}
+
+// GainMetaParameterDefinition optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+func (x *MixerDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameterDefinition"))
+	return NumberMetaParameterDefinitionFromID(_r)
+}
+
+// SetGainMetaParameterDefinition wraps the corresponding Objective-C method.
+func (x *MixerDefinition) SetGainMetaParameterDefinition(gainMetaParameterDefinition *NumberMetaParameterDefinition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+}
 
 // MixerDefinitionable is the interface implemented by [MixerDefinition], for mocking and DI.
 type MixerDefinitionable interface {
-	Unwrap() *raw.PHASEMixerDefinition
+	obj.Object
 	WithGain(gain float64) *MixerDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition
 	Gain() float64
 	SetGain(gain float64)
 	GainMetaParameterDefinition() *NumberMetaParameterDefinition
-	SetGainMetaParameterDefinition(gainMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition)
+	SetGainMetaParameterDefinition(gainMetaParameterDefinition *NumberMetaParameterDefinition)
 }
 
 var _ MixerDefinitionable = (*MixerDefinition)(nil)
+
+// isMixerDefinition marks MixerDefinition — and, by embedding promotion, its
+// subclasses — as a member of the MixerDefinition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MixerDefinition) isMixerDefinition() {}
+
+var _ MixerDefinitionProvider = (*MixerDefinition)(nil)
+
+var _ DefinitionProvider = (*MixerDefinition)(nil)

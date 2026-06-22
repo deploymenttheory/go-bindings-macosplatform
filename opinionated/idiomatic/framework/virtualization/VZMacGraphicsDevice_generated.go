@@ -5,45 +5,58 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a Mac graphics device.
+// MacGraphicsDevice is an idiomatic wrapper over the Objective-C class VZMacGraphicsDevice.
 //
-// MacGraphicsDevice wraps [raw.VZMacGraphicsDevice] with a fluent Go API.
+// It embeds [GraphicsDevice], promoting that type's methods.
+//
+// An object that represents a Mac graphics device.
 type MacGraphicsDevice struct {
-	inner *raw.VZMacGraphicsDevice
+	GraphicsDevice
 }
 
-// Unwrap returns the underlying [raw.VZMacGraphicsDevice].
-func (x *MacGraphicsDevice) Unwrap() *raw.VZMacGraphicsDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacGraphicsDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// MacGraphicsDeviceFromID adopts an existing object pointer as a MacGraphicsDevice (nil for 0).
+// MacGraphicsDeviceFromID adopts an existing Objective-C object as a MacGraphicsDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func MacGraphicsDeviceFromID(id objc.ID) *MacGraphicsDevice {
 	if id == 0 {
 		return nil
 	}
-	return &MacGraphicsDevice{inner: raw.VZMacGraphicsDeviceFromID(id)}
+	x := &MacGraphicsDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMacGraphicsDevice creates a new [MacGraphicsDevice].
+// macGraphicsDeviceAdopt wraps an Objective-C object that this code just created as a
+// MacGraphicsDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macGraphicsDeviceAdopt(id objc.ID) *MacGraphicsDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &MacGraphicsDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMacGraphicsDevice creates a new MacGraphicsDevice.
 func NewMacGraphicsDevice() *MacGraphicsDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacGraphicsDevice")), objc.RegisterName("new"))
-	return &MacGraphicsDevice{inner: raw.VZMacGraphicsDeviceFromID(_id)}
-}
-
-func (x *MacGraphicsDevice) asGraphicsDevice() *raw.VZGraphicsDevice {
-	return &x.inner.VZGraphicsDevice
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDevice")), objc.RegisterName("new"))
+	return macGraphicsDeviceAdopt(_id)
 }
 
 // MacGraphicsDeviceable is the interface implemented by [MacGraphicsDevice], for mocking and DI.
 type MacGraphicsDeviceable interface {
-	Unwrap() *raw.VZMacGraphicsDevice
+	obj.Object
 }
 
 var _ MacGraphicsDeviceable = (*MacGraphicsDevice)(nil)
+
+var _ GraphicsDeviceProvider = (*MacGraphicsDevice)(nil)

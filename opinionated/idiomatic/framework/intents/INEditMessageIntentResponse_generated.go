@@ -5,60 +5,71 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EditMessageIntentResponse wraps [raw.INEditMessageIntentResponse] with a fluent Go API.
+// EditMessageIntentResponse is an idiomatic wrapper over the Objective-C class INEditMessageIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
 type EditMessageIntentResponse struct {
-	inner *raw.INEditMessageIntentResponse
+	IntentResponse
 }
 
-// Unwrap returns the underlying [raw.INEditMessageIntentResponse].
-func (x *EditMessageIntentResponse) Unwrap() *raw.INEditMessageIntentResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EditMessageIntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// EditMessageIntentResponseFromID adopts an existing object pointer as a EditMessageIntentResponse (nil for 0).
+// EditMessageIntentResponseFromID adopts an existing Objective-C object as a EditMessageIntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func EditMessageIntentResponseFromID(id objc.ID) *EditMessageIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &EditMessageIntentResponse{inner: raw.INEditMessageIntentResponseFromID(id)}
-}
-
-// NewEditMessageIntentResponseWithCodeUserActivity creates a new [EditMessageIntentResponse].
-func NewEditMessageIntentResponseWithCodeUserActivity(code INEditMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *EditMessageIntentResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INEditMessageIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INEditMessageIntentResponseCode(code), userActivity.Ptr())
-	return &EditMessageIntentResponse{inner: raw.INEditMessageIntentResponseFromID(_id)}
-}
-
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *EditMessageIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *EditMessageIntentResponse {
-	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	x := &EditMessageIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Code calls the underlying Code.
-func (x *EditMessageIntentResponse) Code() INEditMessageIntentResponseCode {
-	return INEditMessageIntentResponseCode(x.inner.Code())
+// editMessageIntentResponseAdopt wraps an Objective-C object that this code just created as a
+// EditMessageIntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func editMessageIntentResponseAdopt(id objc.ID) *EditMessageIntentResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &EditMessageIntentResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *EditMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
-	return &x.inner.INIntentResponse
+// NewEditMessageIntentResponseWithCodeUserActivity creates a new EditMessageIntentResponse.
+func NewEditMessageIntentResponseWithCodeUserActivity(code EditMessageIntentResponseCode, userActivity obj.Object) *EditMessageIntentResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INEditMessageIntentResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
+	return editMessageIntentResponseAdopt(_id)
+}
+
+// WithUserActivity the user activity object to use when launching the app.
+func (x *EditMessageIntentResponse) WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// Code wraps the corresponding Objective-C method.
+func (x *EditMessageIntentResponse) Code() EditMessageIntentResponseCode {
+	_r := objc.Send[EditMessageIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
 }
 
 // EditMessageIntentResponseable is the interface implemented by [EditMessageIntentResponse], for mocking and DI.
 type EditMessageIntentResponseable interface {
-	Unwrap() *raw.INEditMessageIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *EditMessageIntentResponse
-	Code() INEditMessageIntentResponseCode
+	obj.Object
+	WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse
+	Code() EditMessageIntentResponseCode
 }
 
 var _ EditMessageIntentResponseable = (*EditMessageIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*EditMessageIntentResponse)(nil)

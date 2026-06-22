@@ -5,256 +5,208 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A right circular cone or frustum geometry.
+// Cone is an idiomatic wrapper over the Objective-C class SCNCone.
 //
-// Cone wraps [raw.SCNCone] with a fluent Go API.
+// It embeds [Geometry], promoting that type's methods.
+//
+// A right circular cone or frustum geometry.
 type Cone struct {
-	inner *raw.SCNCone
+	Geometry
 }
 
-// Unwrap returns the underlying [raw.SCNCone].
-func (x *Cone) Unwrap() *raw.SCNCone { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Cone) ID() objc.ID { return x.inner.Ptr() }
-
-// ConeFromID adopts an existing object pointer as a Cone (nil for 0).
+// ConeFromID adopts an existing Objective-C object as a Cone
+// (nil for 0), retaining it and registering a release finalizer.
 func ConeFromID(id objc.ID) *Cone {
 	if id == 0 {
 		return nil
 	}
-	return &Cone{inner: raw.SCNConeFromID(id)}
+	x := &Cone{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCone creates a new [Cone].
+// coneAdopt wraps an Objective-C object that this code just created as a
+// Cone (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coneAdopt(id objc.ID) *Cone {
+	if id == 0 {
+		return nil
+	}
+	x := &Cone{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCone creates a new Cone.
 func NewCone() *Cone {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNCone")), objc.RegisterName("new"))
-	return &Cone{inner: raw.SCNConeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNCone")), objc.RegisterName("new"))
+	return coneAdopt(_id)
 }
 
-// The radius of the cone’s circular top. Animatable.
-//
-// WithTopRadius sets the topRadius property and returns the receiver for chaining.
+// WithTopRadius the radius of the cone’s circular top. Animatable.
 func (x *Cone) WithTopRadius(topRadius float64) *Cone {
-	x.inner.SetTopRadius(topRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopRadius:"), topRadius)
 	return x
 }
 
-// The radius of the cone’s circular base. Animatable.
-//
-// WithBottomRadius sets the bottomRadius property and returns the receiver for chaining.
+// WithBottomRadius the radius of the cone’s circular base. Animatable.
 func (x *Cone) WithBottomRadius(bottomRadius float64) *Cone {
-	x.inner.SetBottomRadius(bottomRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomRadius:"), bottomRadius)
 	return x
 }
 
-// The extent of the cylinder along its y-axis. Animatable.
-//
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight the extent of the cylinder along its y-axis. Animatable.
 func (x *Cone) WithHeight(height float64) *Cone {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The number of subdivisions around the circumference of the cone. Animatable.
-//
-// WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
+// WithRadialSegmentCount the number of subdivisions around the circumference of the cone. Animatable.
 func (x *Cone) WithRadialSegmentCount(radialSegmentCount int) *Cone {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 	return x
 }
 
-// The number of subdivisions in the sides of the cone along its y-axis. Animatable.
-//
-// WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
+// WithHeightSegmentCount the number of subdivisions in the sides of the cone along its y-axis. Animatable.
 func (x *Cone) WithHeightSegmentCount(heightSegmentCount int) *Cone {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a name associated with the geometry object.
 func (x *Cone) WithName(name string) *Cone {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (x *Cone) WithMaterials(items ...*Material) *Cone {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Cone) WithFirstMaterial(firstMaterial *Material) *Cone {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Cone) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (x *Cone) WithLevelsOfDetail(items ...*LevelOfDetail) *Cone {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Cone) WithTessellator(tessellator *GeometryTessellator) *Cone {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Cone) WithSubdivisionLevel(subdivisionLevel uint) *Cone {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (x *Cone) WithSubdivisionLevel(subdivisionLevel int) *Cone {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Cone) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Cone) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cone {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property topRadius @abstract The radius at the top of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.
-//
-// TopRadius calls the underlying TopRadius.
+// TopRadius the radius at the top of the cone. Animatable. If the value is less than 0, the geometry is empty. The default value is 0.
 func (x *Cone) TopRadius() float64 {
-	return x.inner.TopRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("topRadius"))
+	return _r
 }
 
-// SetTopRadius calls the underlying SetTopRadius.
+// SetTopRadius wraps the corresponding Objective-C method.
 func (x *Cone) SetTopRadius(topRadius float64) {
-	x.inner.SetTopRadius(topRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopRadius:"), topRadius)
 }
 
-// @property bottomRadius @abstract The radius at the bottom of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.5.
-//
-// BottomRadius calls the underlying BottomRadius.
+// BottomRadius the radius at the bottom of the cone. Animatable. If the value is less than 0, the geometry is empty. The default value is 0.5.
 func (x *Cone) BottomRadius() float64 {
-	return x.inner.BottomRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bottomRadius"))
+	return _r
 }
 
-// SetBottomRadius calls the underlying SetBottomRadius.
+// SetBottomRadius wraps the corresponding Objective-C method.
 func (x *Cone) SetBottomRadius(bottomRadius float64) {
-	x.inner.SetBottomRadius(bottomRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomRadius:"), bottomRadius)
 }
 
-// @property height @abstract The height of the cone. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Height calls the underlying Height.
+// Height the height of the cone. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Cone) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
+// SetHeight wraps the corresponding Objective-C method.
 func (x *Cone) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
-//
-// RadialSegmentCount calls the underlying RadialSegmentCount.
+// RadialSegmentCount the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (x *Cone) RadialSegmentCount() int {
-	return x.inner.RadialSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radialSegmentCount"))
+	return _r
 }
 
-// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
+// SetRadialSegmentCount wraps the corresponding Objective-C method.
 func (x *Cone) SetRadialSegmentCount(radialSegmentCount int) {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// HeightSegmentCount calls the underlying HeightSegmentCount.
+// HeightSegmentCount the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Cone) HeightSegmentCount() int {
-	return x.inner.HeightSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+	return _r
 }
 
-// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+// SetHeightSegmentCount wraps the corresponding Objective-C method.
 func (x *Cone) SetHeightSegmentCount(heightSegmentCount int) {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
-
-func (x *Cone) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Coneable is the interface implemented by [Cone], for mocking and DI.
 type Coneable interface {
-	Unwrap() *raw.SCNCone
+	obj.Object
 	WithTopRadius(topRadius float64) *Cone
 	WithBottomRadius(bottomRadius float64) *Cone
 	WithHeight(height float64) *Cone
 	WithRadialSegmentCount(radialSegmentCount int) *Cone
 	WithHeightSegmentCount(heightSegmentCount int) *Cone
 	WithName(name string) *Cone
-	WithMaterials(items ...*raw.SCNMaterial) *Cone
+	WithMaterials(items ...*Material) *Cone
 	WithFirstMaterial(firstMaterial *Material) *Cone
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Cone
 	WithTessellator(tessellator *GeometryTessellator) *Cone
-	WithSubdivisionLevel(subdivisionLevel uint) *Cone
+	WithSubdivisionLevel(subdivisionLevel int) *Cone
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cone
@@ -271,3 +223,5 @@ type Coneable interface {
 }
 
 var _ Coneable = (*Cone)(nil)
+
+var _ GeometryProvider = (*Cone)(nil)

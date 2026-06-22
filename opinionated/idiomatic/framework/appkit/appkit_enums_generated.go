@@ -10,218 +10,232 @@ import (
 )
 
 // Constants that describe the direction to search for an item result.
-type NSAccessibilityCustomRotorSearchDirection int64
+type AccessibilityCustomRotorSearchDirection int64
 
 const (
-	NSAccessibilityCustomRotorSearchDirectionPrevious NSAccessibilityCustomRotorSearchDirection = 0
-	NSAccessibilityCustomRotorSearchDirectionNext     NSAccessibilityCustomRotorSearchDirection = 1
+	AccessibilityCustomRotorSearchDirectionPrevious AccessibilityCustomRotorSearchDirection = 0
+	AccessibilityCustomRotorSearchDirectionNext     AccessibilityCustomRotorSearchDirection = 1
 )
 
-func (e NSAccessibilityCustomRotorSearchDirection) String() string {
+// String returns the AccessibilityCustomRotorSearchDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityCustomRotorSearchDirection) String() string {
 	switch e {
-	case NSAccessibilityCustomRotorSearchDirectionPrevious:
-		return "NSAccessibilityCustomRotorSearchDirectionPrevious"
-	case NSAccessibilityCustomRotorSearchDirectionNext:
-		return "NSAccessibilityCustomRotorSearchDirectionNext"
+	case AccessibilityCustomRotorSearchDirectionPrevious:
+		return "AccessibilityCustomRotorSearchDirectionPrevious"
+	case AccessibilityCustomRotorSearchDirectionNext:
+		return "AccessibilityCustomRotorSearchDirectionNext"
 	default:
-		return fmt.Sprintf("NSAccessibilityCustomRotorSearchDirection(%d)", int64(e))
+		return fmt.Sprintf("AccessibilityCustomRotorSearchDirection(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the type of content that the rotor represents.
-type NSAccessibilityCustomRotorType int64
+type AccessibilityCustomRotorType int64
 
 const (
-	NSAccessibilityCustomRotorTypeCustom         NSAccessibilityCustomRotorType = 0
-	NSAccessibilityCustomRotorTypeAny            NSAccessibilityCustomRotorType = 1
-	NSAccessibilityCustomRotorTypeAnnotation     NSAccessibilityCustomRotorType = 2
-	NSAccessibilityCustomRotorTypeBoldText       NSAccessibilityCustomRotorType = 3
-	NSAccessibilityCustomRotorTypeHeading        NSAccessibilityCustomRotorType = 4
-	NSAccessibilityCustomRotorTypeHeadingLevel1  NSAccessibilityCustomRotorType = 5
-	NSAccessibilityCustomRotorTypeHeadingLevel2  NSAccessibilityCustomRotorType = 6
-	NSAccessibilityCustomRotorTypeHeadingLevel3  NSAccessibilityCustomRotorType = 7
-	NSAccessibilityCustomRotorTypeHeadingLevel4  NSAccessibilityCustomRotorType = 8
-	NSAccessibilityCustomRotorTypeHeadingLevel5  NSAccessibilityCustomRotorType = 9
-	NSAccessibilityCustomRotorTypeHeadingLevel6  NSAccessibilityCustomRotorType = 10
-	NSAccessibilityCustomRotorTypeImage          NSAccessibilityCustomRotorType = 11
-	NSAccessibilityCustomRotorTypeItalicText     NSAccessibilityCustomRotorType = 12
-	NSAccessibilityCustomRotorTypeLandmark       NSAccessibilityCustomRotorType = 13
-	NSAccessibilityCustomRotorTypeLink           NSAccessibilityCustomRotorType = 14
-	NSAccessibilityCustomRotorTypeList           NSAccessibilityCustomRotorType = 15
-	NSAccessibilityCustomRotorTypeMisspelledWord NSAccessibilityCustomRotorType = 16
-	NSAccessibilityCustomRotorTypeTable          NSAccessibilityCustomRotorType = 17
-	NSAccessibilityCustomRotorTypeTextField      NSAccessibilityCustomRotorType = 18
-	NSAccessibilityCustomRotorTypeUnderlinedText NSAccessibilityCustomRotorType = 19
-	NSAccessibilityCustomRotorTypeVisitedLink    NSAccessibilityCustomRotorType = 20
-	NSAccessibilityCustomRotorTypeAudiograph     NSAccessibilityCustomRotorType = 21
+	AccessibilityCustomRotorTypeCustom         AccessibilityCustomRotorType = 0
+	AccessibilityCustomRotorTypeAny            AccessibilityCustomRotorType = 1
+	AccessibilityCustomRotorTypeAnnotation     AccessibilityCustomRotorType = 2
+	AccessibilityCustomRotorTypeBoldText       AccessibilityCustomRotorType = 3
+	AccessibilityCustomRotorTypeHeading        AccessibilityCustomRotorType = 4
+	AccessibilityCustomRotorTypeHeadingLevel1  AccessibilityCustomRotorType = 5
+	AccessibilityCustomRotorTypeHeadingLevel2  AccessibilityCustomRotorType = 6
+	AccessibilityCustomRotorTypeHeadingLevel3  AccessibilityCustomRotorType = 7
+	AccessibilityCustomRotorTypeHeadingLevel4  AccessibilityCustomRotorType = 8
+	AccessibilityCustomRotorTypeHeadingLevel5  AccessibilityCustomRotorType = 9
+	AccessibilityCustomRotorTypeHeadingLevel6  AccessibilityCustomRotorType = 10
+	AccessibilityCustomRotorTypeImage          AccessibilityCustomRotorType = 11
+	AccessibilityCustomRotorTypeItalicText     AccessibilityCustomRotorType = 12
+	AccessibilityCustomRotorTypeLandmark       AccessibilityCustomRotorType = 13
+	AccessibilityCustomRotorTypeLink           AccessibilityCustomRotorType = 14
+	AccessibilityCustomRotorTypeList           AccessibilityCustomRotorType = 15
+	AccessibilityCustomRotorTypeMisspelledWord AccessibilityCustomRotorType = 16
+	AccessibilityCustomRotorTypeTable          AccessibilityCustomRotorType = 17
+	AccessibilityCustomRotorTypeTextField      AccessibilityCustomRotorType = 18
+	AccessibilityCustomRotorTypeUnderlinedText AccessibilityCustomRotorType = 19
+	AccessibilityCustomRotorTypeVisitedLink    AccessibilityCustomRotorType = 20
+	AccessibilityCustomRotorTypeAudiograph     AccessibilityCustomRotorType = 21
 )
 
-func (e NSAccessibilityCustomRotorType) String() string {
+// String returns the AccessibilityCustomRotorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityCustomRotorType) String() string {
 	switch e {
-	case NSAccessibilityCustomRotorTypeCustom:
-		return "NSAccessibilityCustomRotorTypeCustom"
-	case NSAccessibilityCustomRotorTypeAny:
-		return "NSAccessibilityCustomRotorTypeAny"
-	case NSAccessibilityCustomRotorTypeAnnotation:
-		return "NSAccessibilityCustomRotorTypeAnnotation"
-	case NSAccessibilityCustomRotorTypeBoldText:
-		return "NSAccessibilityCustomRotorTypeBoldText"
-	case NSAccessibilityCustomRotorTypeHeading:
-		return "NSAccessibilityCustomRotorTypeHeading"
-	case NSAccessibilityCustomRotorTypeHeadingLevel1:
-		return "NSAccessibilityCustomRotorTypeHeadingLevel1"
-	case NSAccessibilityCustomRotorTypeHeadingLevel2:
-		return "NSAccessibilityCustomRotorTypeHeadingLevel2"
-	case NSAccessibilityCustomRotorTypeHeadingLevel3:
-		return "NSAccessibilityCustomRotorTypeHeadingLevel3"
-	case NSAccessibilityCustomRotorTypeHeadingLevel4:
-		return "NSAccessibilityCustomRotorTypeHeadingLevel4"
-	case NSAccessibilityCustomRotorTypeHeadingLevel5:
-		return "NSAccessibilityCustomRotorTypeHeadingLevel5"
-	case NSAccessibilityCustomRotorTypeHeadingLevel6:
-		return "NSAccessibilityCustomRotorTypeHeadingLevel6"
-	case NSAccessibilityCustomRotorTypeImage:
-		return "NSAccessibilityCustomRotorTypeImage"
-	case NSAccessibilityCustomRotorTypeItalicText:
-		return "NSAccessibilityCustomRotorTypeItalicText"
-	case NSAccessibilityCustomRotorTypeLandmark:
-		return "NSAccessibilityCustomRotorTypeLandmark"
-	case NSAccessibilityCustomRotorTypeLink:
-		return "NSAccessibilityCustomRotorTypeLink"
-	case NSAccessibilityCustomRotorTypeList:
-		return "NSAccessibilityCustomRotorTypeList"
-	case NSAccessibilityCustomRotorTypeMisspelledWord:
-		return "NSAccessibilityCustomRotorTypeMisspelledWord"
-	case NSAccessibilityCustomRotorTypeTable:
-		return "NSAccessibilityCustomRotorTypeTable"
-	case NSAccessibilityCustomRotorTypeTextField:
-		return "NSAccessibilityCustomRotorTypeTextField"
-	case NSAccessibilityCustomRotorTypeUnderlinedText:
-		return "NSAccessibilityCustomRotorTypeUnderlinedText"
-	case NSAccessibilityCustomRotorTypeVisitedLink:
-		return "NSAccessibilityCustomRotorTypeVisitedLink"
-	case NSAccessibilityCustomRotorTypeAudiograph:
-		return "NSAccessibilityCustomRotorTypeAudiograph"
+	case AccessibilityCustomRotorTypeCustom:
+		return "AccessibilityCustomRotorTypeCustom"
+	case AccessibilityCustomRotorTypeAny:
+		return "AccessibilityCustomRotorTypeAny"
+	case AccessibilityCustomRotorTypeAnnotation:
+		return "AccessibilityCustomRotorTypeAnnotation"
+	case AccessibilityCustomRotorTypeBoldText:
+		return "AccessibilityCustomRotorTypeBoldText"
+	case AccessibilityCustomRotorTypeHeading:
+		return "AccessibilityCustomRotorTypeHeading"
+	case AccessibilityCustomRotorTypeHeadingLevel1:
+		return "AccessibilityCustomRotorTypeHeadingLevel1"
+	case AccessibilityCustomRotorTypeHeadingLevel2:
+		return "AccessibilityCustomRotorTypeHeadingLevel2"
+	case AccessibilityCustomRotorTypeHeadingLevel3:
+		return "AccessibilityCustomRotorTypeHeadingLevel3"
+	case AccessibilityCustomRotorTypeHeadingLevel4:
+		return "AccessibilityCustomRotorTypeHeadingLevel4"
+	case AccessibilityCustomRotorTypeHeadingLevel5:
+		return "AccessibilityCustomRotorTypeHeadingLevel5"
+	case AccessibilityCustomRotorTypeHeadingLevel6:
+		return "AccessibilityCustomRotorTypeHeadingLevel6"
+	case AccessibilityCustomRotorTypeImage:
+		return "AccessibilityCustomRotorTypeImage"
+	case AccessibilityCustomRotorTypeItalicText:
+		return "AccessibilityCustomRotorTypeItalicText"
+	case AccessibilityCustomRotorTypeLandmark:
+		return "AccessibilityCustomRotorTypeLandmark"
+	case AccessibilityCustomRotorTypeLink:
+		return "AccessibilityCustomRotorTypeLink"
+	case AccessibilityCustomRotorTypeList:
+		return "AccessibilityCustomRotorTypeList"
+	case AccessibilityCustomRotorTypeMisspelledWord:
+		return "AccessibilityCustomRotorTypeMisspelledWord"
+	case AccessibilityCustomRotorTypeTable:
+		return "AccessibilityCustomRotorTypeTable"
+	case AccessibilityCustomRotorTypeTextField:
+		return "AccessibilityCustomRotorTypeTextField"
+	case AccessibilityCustomRotorTypeUnderlinedText:
+		return "AccessibilityCustomRotorTypeUnderlinedText"
+	case AccessibilityCustomRotorTypeVisitedLink:
+		return "AccessibilityCustomRotorTypeVisitedLink"
+	case AccessibilityCustomRotorTypeAudiograph:
+		return "AccessibilityCustomRotorTypeAudiograph"
 	default:
-		return fmt.Sprintf("NSAccessibilityCustomRotorType(%d)", int64(e))
+		return fmt.Sprintf("AccessibilityCustomRotorType(%d)", int64(e))
 	}
 }
 
 // The set of alert styles to style alerts in your app.
-type NSAlertStyle uint64
+type AlertStyle uint64
 
 const (
 	// An alert style to be used to warn the user about a current or impending event. This style should be used when the alert’s content is more severe than `NSAlertStyleInformational` but less than `NSAlertStyleCritical`. This is the default alert style.
-	NSAlertStyleWarning NSAlertStyle = 0
+	AlertStyleWarning AlertStyle = 0
 	// An alert style to be used to inform the user about a current or impending event. - Note: Currently, there is no visual difference between informational and warning alerts.
-	NSAlertStyleInformational NSAlertStyle = 1
+	AlertStyleInformational AlertStyle = 1
 	// An alert style to be used to inform the user about a critical event. Causes the alert’s icon to be badged with a caution icon. The critical (or “caution”) style should be used sparingly. Using it too frequently diminishes its significance. Use the symbol only when extra attention is really needed, as when confirming an action that might result in unexpected loss of data. Don’t use the symbol for tasks whose only purpose is to overwrite or remove data, such as a save or empty trash.
-	NSAlertStyleCritical NSAlertStyle = 2
+	AlertStyleCritical AlertStyle = 2
 )
 
-func (e NSAlertStyle) String() string {
+// String returns the AlertStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AlertStyle) String() string {
 	switch e {
-	case NSAlertStyleWarning:
-		return "NSAlertStyleWarning"
-	case NSAlertStyleInformational:
-		return "NSAlertStyleInformational"
-	case NSAlertStyleCritical:
-		return "NSAlertStyleCritical"
+	case AlertStyleWarning:
+		return "AlertStyleWarning"
+	case AlertStyleInformational:
+		return "AlertStyleInformational"
+	case AlertStyleCritical:
+		return "AlertStyleCritical"
 	default:
-		return fmt.Sprintf("NSAlertStyle(%d)", int64(e))
+		return fmt.Sprintf("AlertStyle(%d)", int64(e))
 	}
 }
 
 // These constants indicate the blocking mode of an NSAnimation object when it is running.
-type NSAnimationBlockingMode uint64
+type AnimationBlockingMode uint64
 
 const (
-	NSAnimationBlocking            NSAnimationBlockingMode = 0
-	NSAnimationNonblocking         NSAnimationBlockingMode = 1
-	NSAnimationNonblockingThreaded NSAnimationBlockingMode = 2
+	AnimationBlocking            AnimationBlockingMode = 0
+	AnimationNonblocking         AnimationBlockingMode = 1
+	AnimationNonblockingThreaded AnimationBlockingMode = 2
 )
 
-func (e NSAnimationBlockingMode) String() string {
+// String returns the AnimationBlockingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AnimationBlockingMode) String() string {
 	switch e {
-	case NSAnimationBlocking:
-		return "NSAnimationBlocking"
-	case NSAnimationNonblocking:
-		return "NSAnimationNonblocking"
-	case NSAnimationNonblockingThreaded:
-		return "NSAnimationNonblockingThreaded"
+	case AnimationBlocking:
+		return "AnimationBlocking"
+	case AnimationNonblocking:
+		return "AnimationNonblocking"
+	case AnimationNonblockingThreaded:
+		return "AnimationNonblockingThreaded"
 	default:
-		return fmt.Sprintf("NSAnimationBlockingMode(%d)", int64(e))
+		return fmt.Sprintf("AnimationBlockingMode(%d)", int64(e))
 	}
 }
 
 // These constants describe the curve of an animation—that is, the relative speed of an animation from start to finish.
-type NSAnimationCurve uint64
+type AnimationCurve uint64
 
 const (
-	NSAnimationEaseInOut NSAnimationCurve = 0
-	NSAnimationEaseIn    NSAnimationCurve = 1
-	NSAnimationEaseOut   NSAnimationCurve = 2
-	NSAnimationLinear    NSAnimationCurve = 3
+	AnimationEaseInOut AnimationCurve = 0
+	AnimationEaseIn    AnimationCurve = 1
+	AnimationEaseOut   AnimationCurve = 2
+	AnimationLinear    AnimationCurve = 3
 )
 
-func (e NSAnimationCurve) String() string {
+// String returns the AnimationCurve constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AnimationCurve) String() string {
 	switch e {
-	case NSAnimationEaseInOut:
-		return "NSAnimationEaseInOut"
-	case NSAnimationEaseIn:
-		return "NSAnimationEaseIn"
-	case NSAnimationEaseOut:
-		return "NSAnimationEaseOut"
-	case NSAnimationLinear:
-		return "NSAnimationLinear"
+	case AnimationEaseInOut:
+		return "AnimationEaseInOut"
+	case AnimationEaseIn:
+		return "AnimationEaseIn"
+	case AnimationEaseOut:
+		return "AnimationEaseOut"
+	case AnimationLinear:
+		return "AnimationLinear"
 	default:
-		return fmt.Sprintf("NSAnimationCurve(%d)", int64(e))
+		return fmt.Sprintf("AnimationCurve(%d)", int64(e))
 	}
 }
 
 // The type for standard system animation effects, which include both display and sound.
 //
 // Deprecated: Use +[NSCursor disappearingItemCursor] instead
-type NSAnimationEffect uint64
+type AnimationEffect uint64
 
 const (
 	// The default effect.
-	NSAnimationEffectDisappearingItemDefault NSAnimationEffect = 0
+	AnimationEffectDisappearingItemDefault AnimationEffect = 0
 	// An effect showing a puff of smoke.
-	NSAnimationEffectPoof NSAnimationEffect = 10
+	AnimationEffectPoof AnimationEffect = 10
 )
 
-func (e NSAnimationEffect) String() string {
+// String returns the AnimationEffect constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AnimationEffect) String() string {
 	switch e {
-	case NSAnimationEffectDisappearingItemDefault:
-		return "NSAnimationEffectDisappearingItemDefault"
-	case NSAnimationEffectPoof:
-		return "NSAnimationEffectPoof"
+	case AnimationEffectDisappearingItemDefault:
+		return "AnimationEffectDisappearingItemDefault"
+	case AnimationEffectPoof:
+		return "AnimationEffectPoof"
 	default:
-		return fmt.Sprintf("NSAnimationEffect(%d)", int64(e))
+		return fmt.Sprintf("AnimationEffect(%d)", int64(e))
 	}
 }
 
 // The following flags are for `-activateWithOptions:` and equivalent.
 // Bitmask — values may be combined with |.
-type NSApplicationActivationOptions uint64
+type ApplicationActivationOptions uint64
 
 const (
 	// By default, activation brings only the main and key windows forward. If you specify `activateAllWindows`, all of the application's windows are brought forward.
-	NSApplicationActivateAllWindows NSApplicationActivationOptions = 1
+	ApplicationActivateAllWindows ApplicationActivationOptions = 1
 	// The application is activated regardless of the currently active app.
 	//
 	// Deprecated: ignoringOtherApps is deprecated in macOS 14 and will have no effect.
-	NSApplicationActivateIgnoringOtherApps NSApplicationActivationOptions = 2
+	ApplicationActivateIgnoringOtherApps ApplicationActivationOptions = 2
 )
 
-func (e NSApplicationActivationOptions) String() string {
+// String returns the ApplicationActivationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationActivationOptions) String() string {
 	var parts []string
-	if e&NSApplicationActivateAllWindows != 0 {
-		parts = append(parts, "NSApplicationActivateAllWindows")
+	if e&ApplicationActivateAllWindows != 0 {
+		parts = append(parts, "ApplicationActivateAllWindows")
 	}
-	if e&NSApplicationActivateIgnoringOtherApps != 0 {
-		parts = append(parts, "NSApplicationActivateIgnoringOtherApps")
+	if e&ApplicationActivateIgnoringOtherApps != 0 {
+		parts = append(parts, "ApplicationActivateIgnoringOtherApps")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -230,62 +244,68 @@ func (e NSApplicationActivationOptions) String() string {
 }
 
 // The following activation policies control whether and how an application may be activated. They are determined by the `Info.plist`.
-type NSApplicationActivationPolicy int64
+type ApplicationActivationPolicy int64
 
 const (
-	NSApplicationActivationPolicyRegular    NSApplicationActivationPolicy = 0
-	NSApplicationActivationPolicyAccessory  NSApplicationActivationPolicy = 1
-	NSApplicationActivationPolicyProhibited NSApplicationActivationPolicy = 2
+	ApplicationActivationPolicyRegular    ApplicationActivationPolicy = 0
+	ApplicationActivationPolicyAccessory  ApplicationActivationPolicy = 1
+	ApplicationActivationPolicyProhibited ApplicationActivationPolicy = 2
 )
 
-func (e NSApplicationActivationPolicy) String() string {
+// String returns the ApplicationActivationPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationActivationPolicy) String() string {
 	switch e {
-	case NSApplicationActivationPolicyRegular:
-		return "NSApplicationActivationPolicyRegular"
-	case NSApplicationActivationPolicyAccessory:
-		return "NSApplicationActivationPolicyAccessory"
-	case NSApplicationActivationPolicyProhibited:
-		return "NSApplicationActivationPolicyProhibited"
+	case ApplicationActivationPolicyRegular:
+		return "ApplicationActivationPolicyRegular"
+	case ApplicationActivationPolicyAccessory:
+		return "ApplicationActivationPolicyAccessory"
+	case ApplicationActivationPolicyProhibited:
+		return "ApplicationActivationPolicyProhibited"
 	default:
-		return fmt.Sprintf("NSApplicationActivationPolicy(%d)", int64(e))
+		return fmt.Sprintf("ApplicationActivationPolicy(%d)", int64(e))
 	}
 }
 
 // Constants that indicate whether a copy or print operation was successful, was canceled, or failed.
-type NSApplicationDelegateReply uint64
+type ApplicationDelegateReply uint64
 
 const (
-	NSApplicationDelegateReplySuccess NSApplicationDelegateReply = 0
-	NSApplicationDelegateReplyCancel  NSApplicationDelegateReply = 1
-	NSApplicationDelegateReplyFailure NSApplicationDelegateReply = 2
+	ApplicationDelegateReplySuccess ApplicationDelegateReply = 0
+	ApplicationDelegateReplyCancel  ApplicationDelegateReply = 1
+	ApplicationDelegateReplyFailure ApplicationDelegateReply = 2
 )
 
-func (e NSApplicationDelegateReply) String() string {
+// String returns the ApplicationDelegateReply constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationDelegateReply) String() string {
 	switch e {
-	case NSApplicationDelegateReplySuccess:
-		return "NSApplicationDelegateReplySuccess"
-	case NSApplicationDelegateReplyCancel:
-		return "NSApplicationDelegateReplyCancel"
-	case NSApplicationDelegateReplyFailure:
-		return "NSApplicationDelegateReplyFailure"
+	case ApplicationDelegateReplySuccess:
+		return "ApplicationDelegateReplySuccess"
+	case ApplicationDelegateReplyCancel:
+		return "ApplicationDelegateReplyCancel"
+	case ApplicationDelegateReplyFailure:
+		return "ApplicationDelegateReplyFailure"
 	default:
-		return fmt.Sprintf("NSApplicationDelegateReply(%d)", int64(e))
+		return fmt.Sprintf("ApplicationDelegateReply(%d)", int64(e))
 	}
 }
 
 // This constant indicates whether at least part of any window owned by this app is visible.
 // Bitmask — values may be combined with |.
-type NSApplicationOcclusionState uint64
+type ApplicationOcclusionState uint64
 
 const (
 	// If set, at least part of any window owned by this application is visible. If not set, all parts of all windows owned by this application are completely occluded. The menu bar does not count as a window owned by this application, so if only the menu bar is showing then the application is considered not visible. Status items, however, have windows owned by your application. If the status item is present in the menu bar, your application will be considered visible as long as the menu bar is visible.
-	NSApplicationOcclusionStateVisible NSApplicationOcclusionState = 2
+	ApplicationOcclusionStateVisible ApplicationOcclusionState = 2
 )
 
-func (e NSApplicationOcclusionState) String() string {
+// String returns the ApplicationOcclusionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationOcclusionState) String() string {
 	var parts []string
-	if e&NSApplicationOcclusionStateVisible != 0 {
-		parts = append(parts, "NSApplicationOcclusionStateVisible")
+	if e&ApplicationOcclusionStateVisible != 0 {
+		parts = append(parts, "ApplicationOcclusionStateVisible")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -295,79 +315,81 @@ func (e NSApplicationOcclusionState) String() string {
 
 // Constants that control the presentation of the app, typically for fullscreen apps such as games or kiosks.
 // Bitmask — values may be combined with |.
-type NSApplicationPresentationOptions uint64
+type ApplicationPresentationOptions uint64
 
 const (
 	// This is the default presentation mode.
-	NSApplicationPresentationDefault NSApplicationPresentationOptions = 0
+	ApplicationPresentationDefault ApplicationPresentationOptions = 0
 	// Dock appears when moused to.
-	NSApplicationPresentationAutoHideDock NSApplicationPresentationOptions = 1
+	ApplicationPresentationAutoHideDock ApplicationPresentationOptions = 1
 	// Dock is entirely unavailable.
-	NSApplicationPresentationHideDock NSApplicationPresentationOptions = 2
+	ApplicationPresentationHideDock ApplicationPresentationOptions = 2
 	// Menu Bar appears when moused to.
-	NSApplicationPresentationAutoHideMenuBar NSApplicationPresentationOptions = 4
+	ApplicationPresentationAutoHideMenuBar ApplicationPresentationOptions = 4
 	// Menu Bar is entirely unavailable.
-	NSApplicationPresentationHideMenuBar NSApplicationPresentationOptions = 8
+	ApplicationPresentationHideMenuBar ApplicationPresentationOptions = 8
 	// All Apple menu items are disabled.
-	NSApplicationPresentationDisableAppleMenu NSApplicationPresentationOptions = 16
+	ApplicationPresentationDisableAppleMenu ApplicationPresentationOptions = 16
 	// Cmd+Tab UI is disabled.
-	NSApplicationPresentationDisableProcessSwitching NSApplicationPresentationOptions = 32
+	ApplicationPresentationDisableProcessSwitching ApplicationPresentationOptions = 32
 	// Cmd+Opt+Esc panel is disabled.
-	NSApplicationPresentationDisableForceQuit NSApplicationPresentationOptions = 64
+	ApplicationPresentationDisableForceQuit ApplicationPresentationOptions = 64
 	// PowerKey panel and Restart/Shut Down/Log Out disabled.
-	NSApplicationPresentationDisableSessionTermination NSApplicationPresentationOptions = 128
+	ApplicationPresentationDisableSessionTermination ApplicationPresentationOptions = 128
 	// Application "Hide" menu item is disabled.
-	NSApplicationPresentationDisableHideApplication NSApplicationPresentationOptions = 256
+	ApplicationPresentationDisableHideApplication ApplicationPresentationOptions = 256
 	// Menu Bar's transparent appearance is disabled.
-	NSApplicationPresentationDisableMenuBarTransparency NSApplicationPresentationOptions = 512
+	ApplicationPresentationDisableMenuBarTransparency ApplicationPresentationOptions = 512
 	// Application is in fullscreen mode.
-	NSApplicationPresentationFullScreen NSApplicationPresentationOptions = 1024
-	// Fullscreen window toolbar is detached from window and hides/shows on rollover. May be used only when both @c NSApplicationPresentationFullScreen is also set.
-	NSApplicationPresentationAutoHideToolbar NSApplicationPresentationOptions = 2048
+	ApplicationPresentationFullScreen ApplicationPresentationOptions = 1024
+	// Fullscreen window toolbar is detached from window and hides/shows on rollover. May be used only when both
+	ApplicationPresentationAutoHideToolbar ApplicationPresentationOptions = 2048
 	// "Shake mouse pointer to locate" is disabled for this application.
-	NSApplicationPresentationDisableCursorLocationAssistance NSApplicationPresentationOptions = 4096
+	ApplicationPresentationDisableCursorLocationAssistance ApplicationPresentationOptions = 4096
 )
 
-func (e NSApplicationPresentationOptions) String() string {
+// String returns the ApplicationPresentationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationPresentationOptions) String() string {
 	var parts []string
-	if e&NSApplicationPresentationAutoHideDock != 0 {
-		parts = append(parts, "NSApplicationPresentationAutoHideDock")
+	if e&ApplicationPresentationAutoHideDock != 0 {
+		parts = append(parts, "ApplicationPresentationAutoHideDock")
 	}
-	if e&NSApplicationPresentationHideDock != 0 {
-		parts = append(parts, "NSApplicationPresentationHideDock")
+	if e&ApplicationPresentationHideDock != 0 {
+		parts = append(parts, "ApplicationPresentationHideDock")
 	}
-	if e&NSApplicationPresentationAutoHideMenuBar != 0 {
-		parts = append(parts, "NSApplicationPresentationAutoHideMenuBar")
+	if e&ApplicationPresentationAutoHideMenuBar != 0 {
+		parts = append(parts, "ApplicationPresentationAutoHideMenuBar")
 	}
-	if e&NSApplicationPresentationHideMenuBar != 0 {
-		parts = append(parts, "NSApplicationPresentationHideMenuBar")
+	if e&ApplicationPresentationHideMenuBar != 0 {
+		parts = append(parts, "ApplicationPresentationHideMenuBar")
 	}
-	if e&NSApplicationPresentationDisableAppleMenu != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableAppleMenu")
+	if e&ApplicationPresentationDisableAppleMenu != 0 {
+		parts = append(parts, "ApplicationPresentationDisableAppleMenu")
 	}
-	if e&NSApplicationPresentationDisableProcessSwitching != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableProcessSwitching")
+	if e&ApplicationPresentationDisableProcessSwitching != 0 {
+		parts = append(parts, "ApplicationPresentationDisableProcessSwitching")
 	}
-	if e&NSApplicationPresentationDisableForceQuit != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableForceQuit")
+	if e&ApplicationPresentationDisableForceQuit != 0 {
+		parts = append(parts, "ApplicationPresentationDisableForceQuit")
 	}
-	if e&NSApplicationPresentationDisableSessionTermination != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableSessionTermination")
+	if e&ApplicationPresentationDisableSessionTermination != 0 {
+		parts = append(parts, "ApplicationPresentationDisableSessionTermination")
 	}
-	if e&NSApplicationPresentationDisableHideApplication != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableHideApplication")
+	if e&ApplicationPresentationDisableHideApplication != 0 {
+		parts = append(parts, "ApplicationPresentationDisableHideApplication")
 	}
-	if e&NSApplicationPresentationDisableMenuBarTransparency != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableMenuBarTransparency")
+	if e&ApplicationPresentationDisableMenuBarTransparency != 0 {
+		parts = append(parts, "ApplicationPresentationDisableMenuBarTransparency")
 	}
-	if e&NSApplicationPresentationFullScreen != 0 {
-		parts = append(parts, "NSApplicationPresentationFullScreen")
+	if e&ApplicationPresentationFullScreen != 0 {
+		parts = append(parts, "ApplicationPresentationFullScreen")
 	}
-	if e&NSApplicationPresentationAutoHideToolbar != 0 {
-		parts = append(parts, "NSApplicationPresentationAutoHideToolbar")
+	if e&ApplicationPresentationAutoHideToolbar != 0 {
+		parts = append(parts, "ApplicationPresentationAutoHideToolbar")
 	}
-	if e&NSApplicationPresentationDisableCursorLocationAssistance != 0 {
-		parts = append(parts, "NSApplicationPresentationDisableCursorLocationAssistance")
+	if e&ApplicationPresentationDisableCursorLocationAssistance != 0 {
+		parts = append(parts, "ApplicationPresentationDisableCursorLocationAssistance")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -377,37 +399,39 @@ func (e NSApplicationPresentationOptions) String() string {
 
 // Constants that specify the autoresizing behaviors for views.
 // Bitmask — values may be combined with |.
-type NSAutoresizingMaskOptions uint64
+type AutoresizingMaskOptions uint64
 
 const (
-	NSViewNotSizable    NSAutoresizingMaskOptions = 0
-	NSViewMinXMargin    NSAutoresizingMaskOptions = 1
-	NSViewWidthSizable  NSAutoresizingMaskOptions = 2
-	NSViewMaxXMargin    NSAutoresizingMaskOptions = 4
-	NSViewMinYMargin    NSAutoresizingMaskOptions = 8
-	NSViewHeightSizable NSAutoresizingMaskOptions = 16
-	NSViewMaxYMargin    NSAutoresizingMaskOptions = 32
+	ViewNotSizable    AutoresizingMaskOptions = 0
+	ViewMinXMargin    AutoresizingMaskOptions = 1
+	ViewWidthSizable  AutoresizingMaskOptions = 2
+	ViewMaxXMargin    AutoresizingMaskOptions = 4
+	ViewMinYMargin    AutoresizingMaskOptions = 8
+	ViewHeightSizable AutoresizingMaskOptions = 16
+	ViewMaxYMargin    AutoresizingMaskOptions = 32
 )
 
-func (e NSAutoresizingMaskOptions) String() string {
+// String returns the AutoresizingMaskOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AutoresizingMaskOptions) String() string {
 	var parts []string
-	if e&NSViewMinXMargin != 0 {
-		parts = append(parts, "NSViewMinXMargin")
+	if e&ViewMinXMargin != 0 {
+		parts = append(parts, "ViewMinXMargin")
 	}
-	if e&NSViewWidthSizable != 0 {
-		parts = append(parts, "NSViewWidthSizable")
+	if e&ViewWidthSizable != 0 {
+		parts = append(parts, "ViewWidthSizable")
 	}
-	if e&NSViewMaxXMargin != 0 {
-		parts = append(parts, "NSViewMaxXMargin")
+	if e&ViewMaxXMargin != 0 {
+		parts = append(parts, "ViewMaxXMargin")
 	}
-	if e&NSViewMinYMargin != 0 {
-		parts = append(parts, "NSViewMinYMargin")
+	if e&ViewMinYMargin != 0 {
+		parts = append(parts, "ViewMinYMargin")
 	}
-	if e&NSViewHeightSizable != 0 {
-		parts = append(parts, "NSViewHeightSizable")
+	if e&ViewHeightSizable != 0 {
+		parts = append(parts, "ViewHeightSizable")
 	}
-	if e&NSViewMaxYMargin != 0 {
-		parts = append(parts, "NSViewMaxYMargin")
+	if e&ViewMaxYMargin != 0 {
+		parts = append(parts, "ViewMaxYMargin")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -416,208 +440,218 @@ func (e NSAutoresizingMaskOptions) String() string {
 }
 
 // Background styles to apply to a view’s cell.
-type NSBackgroundStyle int64
+type BackgroundStyle int64
 
 const (
-	NSBackgroundStyleNormal     NSBackgroundStyle = 0
-	NSBackgroundStyleEmphasized NSBackgroundStyle = 1
-	NSBackgroundStyleRaised     NSBackgroundStyle = 2
-	NSBackgroundStyleLowered    NSBackgroundStyle = 3
+	BackgroundStyleNormal     BackgroundStyle = 0
+	BackgroundStyleEmphasized BackgroundStyle = 1
+	BackgroundStyleRaised     BackgroundStyle = 2
+	BackgroundStyleLowered    BackgroundStyle = 3
 )
 
-func (e NSBackgroundStyle) String() string {
+// String returns the BackgroundStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BackgroundStyle) String() string {
 	switch e {
-	case NSBackgroundStyleNormal:
-		return "NSBackgroundStyleNormal"
-	case NSBackgroundStyleEmphasized:
-		return "NSBackgroundStyleEmphasized"
-	case NSBackgroundStyleRaised:
-		return "NSBackgroundStyleRaised"
-	case NSBackgroundStyleLowered:
-		return "NSBackgroundStyleLowered"
+	case BackgroundStyleNormal:
+		return "BackgroundStyleNormal"
+	case BackgroundStyleEmphasized:
+		return "BackgroundStyleEmphasized"
+	case BackgroundStyleRaised:
+		return "BackgroundStyleRaised"
+	case BackgroundStyleLowered:
+		return "BackgroundStyleLowered"
 	default:
-		return fmt.Sprintf("NSBackgroundStyle(%d)", int64(e))
+		return fmt.Sprintf("BackgroundStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify how the window device buffers the drawing done in a window.
-type NSBackingStoreType uint64
+type BackingStoreType uint64
 
 const (
 	// Deprecated: since macOS 10.13.
-	NSBackingStoreRetained NSBackingStoreType = 0
+	BackingStoreRetained BackingStoreType = 0
 	// Deprecated: since macOS 10.13.
-	NSBackingStoreNonretained NSBackingStoreType = 1
+	BackingStoreNonretained BackingStoreType = 1
 	// Deprecated: since macOS 10.13.
-	NSBackingStoreBuffered NSBackingStoreType = 2
+	BackingStoreBuffered BackingStoreType = 2
 )
 
-func (e NSBackingStoreType) String() string {
+// String returns the BackingStoreType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BackingStoreType) String() string {
 	switch e {
-	case NSBackingStoreRetained:
-		return "NSBackingStoreRetained"
-	case NSBackingStoreNonretained:
-		return "NSBackingStoreNonretained"
-	case NSBackingStoreBuffered:
-		return "NSBackingStoreBuffered"
+	case BackingStoreRetained:
+		return "BackingStoreRetained"
+	case BackingStoreNonretained:
+		return "BackingStoreNonretained"
+	case BackingStoreBuffered:
+		return "BackingStoreBuffered"
 	default:
-		return fmt.Sprintf("NSBackingStoreType(%d)", int64(e))
+		return fmt.Sprintf("BackingStoreType(%d)", int64(e))
 	}
 }
 
 // The set of bezel styles to style buttons in your app.
-type NSBezelStyle uint64
+type BezelStyle uint64
 
 const (
 	// The appearance of this bezel style is automatically determined based on the button's contents and position within the window. This bezel style is the default for all button initializers.
-	NSBezelStyleAutomatic NSBezelStyle = 0
+	BezelStyleAutomatic BezelStyle = 0
 	// The standard system push button style.
-	NSBezelStylePush NSBezelStyle = 1
+	BezelStylePush BezelStyle = 1
 	// A flexible-height variant of NSBezelStylePush.
-	NSBezelStyleFlexiblePush NSBezelStyle = 2
+	BezelStyleFlexiblePush BezelStyle = 2
 	// An unbezeled button with a disclosure triangle.
-	NSBezelStyleDisclosure NSBezelStyle = 5
+	BezelStyleDisclosure BezelStyle = 5
 	// A button with a circular bezel suitable for a small icon or single character.
-	NSBezelStyleCircular NSBezelStyle = 7
+	BezelStyleCircular BezelStyle = 7
 	// A circular button with a question mark providing the standard Help button appearance.
-	NSBezelStyleHelpButton NSBezelStyle = 9
+	BezelStyleHelpButton BezelStyle = 9
 	// A button with squared edges and flexible height.
-	NSBezelStyleSmallSquare NSBezelStyle = 10
+	BezelStyleSmallSquare BezelStyle = 10
 	// A button style that is appropriate for use in a toolbar item.
-	NSBezelStyleToolbar NSBezelStyle = 11
+	BezelStyleToolbar BezelStyle = 11
 	// A bezel style that is suitable for accessory and scope bars. This style is typically used for buttons that perform an action or for pop-up buttons.
-	NSBezelStyleAccessoryBarAction NSBezelStyle = 12
+	BezelStyleAccessoryBarAction BezelStyle = 12
 	// A bezel style that is suitable for accessory and scope bars. This style is typically used for buttons with togglable state.
-	NSBezelStyleAccessoryBar NSBezelStyle = 13
+	BezelStyleAccessoryBar BezelStyle = 13
 	// A bezeled variant of NSBezelStyleDisclosure.
-	NSBezelStylePushDisclosure NSBezelStyle = 14
+	BezelStylePushDisclosure BezelStyle = 14
 	// A bezel style that is typically used in table rows to display information about the row, such as a count.
-	NSBezelStyleBadge NSBezelStyle = 15
+	BezelStyleBadge BezelStyle = 15
 	// A bezel style with a glass effect
-	NSBezelStyleGlass NSBezelStyle = 16
+	BezelStyleGlass BezelStyle = 16
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleShadowlessSquare NSBezelStyle = 6
+	BezelStyleShadowlessSquare BezelStyle = 6
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleTexturedSquare NSBezelStyle = 8
+	BezelStyleTexturedSquare BezelStyle = 8
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleRounded NSBezelStyle = 1
+	BezelStyleRounded BezelStyle = 1
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleRegularSquare NSBezelStyle = 2
+	BezelStyleRegularSquare BezelStyle = 2
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleTexturedRounded NSBezelStyle = 11
+	BezelStyleTexturedRounded BezelStyle = 11
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleRoundRect NSBezelStyle = 12
+	BezelStyleRoundRect BezelStyle = 12
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleRecessed NSBezelStyle = 13
+	BezelStyleRecessed BezelStyle = 13
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleRoundedDisclosure NSBezelStyle = 14
+	BezelStyleRoundedDisclosure BezelStyle = 14
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSBezelStyleInline NSBezelStyle = 15
+	BezelStyleInline BezelStyle = 15
 )
 
-func (e NSBezelStyle) String() string {
+// String returns the BezelStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BezelStyle) String() string {
 	switch e {
-	case NSBezelStyleAutomatic:
-		return "NSBezelStyleAutomatic"
-	case NSBezelStylePush:
-		return "NSBezelStylePush"
-	case NSBezelStyleFlexiblePush:
-		return "NSBezelStyleFlexiblePush"
-	case NSBezelStyleDisclosure:
-		return "NSBezelStyleDisclosure"
-	case NSBezelStyleCircular:
-		return "NSBezelStyleCircular"
-	case NSBezelStyleHelpButton:
-		return "NSBezelStyleHelpButton"
-	case NSBezelStyleSmallSquare:
-		return "NSBezelStyleSmallSquare"
-	case NSBezelStyleToolbar:
-		return "NSBezelStyleToolbar"
-	case NSBezelStyleAccessoryBarAction:
-		return "NSBezelStyleAccessoryBarAction"
-	case NSBezelStyleAccessoryBar:
-		return "NSBezelStyleAccessoryBar"
-	case NSBezelStylePushDisclosure:
-		return "NSBezelStylePushDisclosure"
-	case NSBezelStyleBadge:
-		return "NSBezelStyleBadge"
-	case NSBezelStyleGlass:
-		return "NSBezelStyleGlass"
-	case NSBezelStyleShadowlessSquare:
-		return "NSBezelStyleShadowlessSquare"
-	case NSBezelStyleTexturedSquare:
-		return "NSBezelStyleTexturedSquare"
+	case BezelStyleAutomatic:
+		return "BezelStyleAutomatic"
+	case BezelStylePush:
+		return "BezelStylePush"
+	case BezelStyleFlexiblePush:
+		return "BezelStyleFlexiblePush"
+	case BezelStyleDisclosure:
+		return "BezelStyleDisclosure"
+	case BezelStyleCircular:
+		return "BezelStyleCircular"
+	case BezelStyleHelpButton:
+		return "BezelStyleHelpButton"
+	case BezelStyleSmallSquare:
+		return "BezelStyleSmallSquare"
+	case BezelStyleToolbar:
+		return "BezelStyleToolbar"
+	case BezelStyleAccessoryBarAction:
+		return "BezelStyleAccessoryBarAction"
+	case BezelStyleAccessoryBar:
+		return "BezelStyleAccessoryBar"
+	case BezelStylePushDisclosure:
+		return "BezelStylePushDisclosure"
+	case BezelStyleBadge:
+		return "BezelStyleBadge"
+	case BezelStyleGlass:
+		return "BezelStyleGlass"
+	case BezelStyleShadowlessSquare:
+		return "BezelStyleShadowlessSquare"
+	case BezelStyleTexturedSquare:
+		return "BezelStyleTexturedSquare"
 	default:
-		return fmt.Sprintf("NSBezelStyle(%d)", int64(e))
+		return fmt.Sprintf("BezelStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify basic path element commands.
-type NSBezierPathElement uint64
+type BezierPathElement uint64
 
 const (
-	NSBezierPathElementMoveTo           NSBezierPathElement = 0
-	NSBezierPathElementLineTo           NSBezierPathElement = 1
-	NSBezierPathElementCubicCurveTo     NSBezierPathElement = 2
-	NSBezierPathElementClosePath        NSBezierPathElement = 3
-	NSBezierPathElementQuadraticCurveTo NSBezierPathElement = 4
+	BezierPathElementMoveTo           BezierPathElement = 0
+	BezierPathElementLineTo           BezierPathElement = 1
+	BezierPathElementCubicCurveTo     BezierPathElement = 2
+	BezierPathElementClosePath        BezierPathElement = 3
+	BezierPathElementQuadraticCurveTo BezierPathElement = 4
 	// Deprecated: since macOS 14.0.
-	NSBezierPathElementCurveTo NSBezierPathElement = 2
+	BezierPathElementCurveTo BezierPathElement = 2
 )
 
-func (e NSBezierPathElement) String() string {
+// String returns the BezierPathElement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BezierPathElement) String() string {
 	switch e {
-	case NSBezierPathElementMoveTo:
-		return "NSBezierPathElementMoveTo"
-	case NSBezierPathElementLineTo:
-		return "NSBezierPathElementLineTo"
-	case NSBezierPathElementCubicCurveTo:
-		return "NSBezierPathElementCubicCurveTo"
-	case NSBezierPathElementClosePath:
-		return "NSBezierPathElementClosePath"
-	case NSBezierPathElementQuadraticCurveTo:
-		return "NSBezierPathElementQuadraticCurveTo"
+	case BezierPathElementMoveTo:
+		return "BezierPathElementMoveTo"
+	case BezierPathElementLineTo:
+		return "BezierPathElementLineTo"
+	case BezierPathElementCubicCurveTo:
+		return "BezierPathElementCubicCurveTo"
+	case BezierPathElementClosePath:
+		return "BezierPathElementClosePath"
+	case BezierPathElementQuadraticCurveTo:
+		return "BezierPathElementQuadraticCurveTo"
 	default:
-		return fmt.Sprintf("NSBezierPathElement(%d)", int64(e))
+		return fmt.Sprintf("BezierPathElement(%d)", int64(e))
 	}
 }
 
 // Constants that represent bitmap component formats.
 // Bitmask — values may be combined with |.
-type NSBitmapFormat uint64
+type BitmapFormat uint64
 
 const (
-	NSBitmapFormatAlphaFirst               NSBitmapFormat = 1
-	NSBitmapFormatAlphaNonpremultiplied    NSBitmapFormat = 2
-	NSBitmapFormatFloatingPointSamples     NSBitmapFormat = 4
-	NSBitmapFormatSixteenBitLittleEndian   NSBitmapFormat = 256
-	NSBitmapFormatThirtyTwoBitLittleEndian NSBitmapFormat = 512
-	NSBitmapFormatSixteenBitBigEndian      NSBitmapFormat = 1024
-	NSBitmapFormatThirtyTwoBitBigEndian    NSBitmapFormat = 2048
+	BitmapFormatAlphaFirst               BitmapFormat = 1
+	BitmapFormatAlphaNonpremultiplied    BitmapFormat = 2
+	BitmapFormatFloatingPointSamples     BitmapFormat = 4
+	BitmapFormatSixteenBitLittleEndian   BitmapFormat = 256
+	BitmapFormatThirtyTwoBitLittleEndian BitmapFormat = 512
+	BitmapFormatSixteenBitBigEndian      BitmapFormat = 1024
+	BitmapFormatThirtyTwoBitBigEndian    BitmapFormat = 2048
 )
 
-func (e NSBitmapFormat) String() string {
+// String returns the BitmapFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BitmapFormat) String() string {
 	var parts []string
-	if e&NSBitmapFormatAlphaFirst != 0 {
-		parts = append(parts, "NSBitmapFormatAlphaFirst")
+	if e&BitmapFormatAlphaFirst != 0 {
+		parts = append(parts, "BitmapFormatAlphaFirst")
 	}
-	if e&NSBitmapFormatAlphaNonpremultiplied != 0 {
-		parts = append(parts, "NSBitmapFormatAlphaNonpremultiplied")
+	if e&BitmapFormatAlphaNonpremultiplied != 0 {
+		parts = append(parts, "BitmapFormatAlphaNonpremultiplied")
 	}
-	if e&NSBitmapFormatFloatingPointSamples != 0 {
-		parts = append(parts, "NSBitmapFormatFloatingPointSamples")
+	if e&BitmapFormatFloatingPointSamples != 0 {
+		parts = append(parts, "BitmapFormatFloatingPointSamples")
 	}
-	if e&NSBitmapFormatSixteenBitLittleEndian != 0 {
-		parts = append(parts, "NSBitmapFormatSixteenBitLittleEndian")
+	if e&BitmapFormatSixteenBitLittleEndian != 0 {
+		parts = append(parts, "BitmapFormatSixteenBitLittleEndian")
 	}
-	if e&NSBitmapFormatThirtyTwoBitLittleEndian != 0 {
-		parts = append(parts, "NSBitmapFormatThirtyTwoBitLittleEndian")
+	if e&BitmapFormatThirtyTwoBitLittleEndian != 0 {
+		parts = append(parts, "BitmapFormatThirtyTwoBitLittleEndian")
 	}
-	if e&NSBitmapFormatSixteenBitBigEndian != 0 {
-		parts = append(parts, "NSBitmapFormatSixteenBitBigEndian")
+	if e&BitmapFormatSixteenBitBigEndian != 0 {
+		parts = append(parts, "BitmapFormatSixteenBitBigEndian")
 	}
-	if e&NSBitmapFormatThirtyTwoBitBigEndian != 0 {
-		parts = append(parts, "NSBitmapFormatThirtyTwoBitBigEndian")
+	if e&BitmapFormatThirtyTwoBitBigEndian != 0 {
+		parts = append(parts, "BitmapFormatThirtyTwoBitBigEndian")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -626,234 +660,248 @@ func (e NSBitmapFormat) String() string {
 }
 
 // Constants that specify bitmap file types.
-type NSBitmapImageFileType uint64
+type BitmapImageFileType uint64
 
 const (
-	NSBitmapImageFileTypeTIFF     NSBitmapImageFileType = 0
-	NSBitmapImageFileTypeBMP      NSBitmapImageFileType = 1
-	NSBitmapImageFileTypeGIF      NSBitmapImageFileType = 2
-	NSBitmapImageFileTypeJPEG     NSBitmapImageFileType = 3
-	NSBitmapImageFileTypePNG      NSBitmapImageFileType = 4
-	NSBitmapImageFileTypeJPEG2000 NSBitmapImageFileType = 5
+	BitmapImageFileTypeTIFF     BitmapImageFileType = 0
+	BitmapImageFileTypeBMP      BitmapImageFileType = 1
+	BitmapImageFileTypeGIF      BitmapImageFileType = 2
+	BitmapImageFileTypeJPEG     BitmapImageFileType = 3
+	BitmapImageFileTypePNG      BitmapImageFileType = 4
+	BitmapImageFileTypeJPEG2000 BitmapImageFileType = 5
 )
 
-func (e NSBitmapImageFileType) String() string {
+// String returns the BitmapImageFileType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BitmapImageFileType) String() string {
 	switch e {
-	case NSBitmapImageFileTypeTIFF:
-		return "NSBitmapImageFileTypeTIFF"
-	case NSBitmapImageFileTypeBMP:
-		return "NSBitmapImageFileTypeBMP"
-	case NSBitmapImageFileTypeGIF:
-		return "NSBitmapImageFileTypeGIF"
-	case NSBitmapImageFileTypeJPEG:
-		return "NSBitmapImageFileTypeJPEG"
-	case NSBitmapImageFileTypePNG:
-		return "NSBitmapImageFileTypePNG"
-	case NSBitmapImageFileTypeJPEG2000:
-		return "NSBitmapImageFileTypeJPEG2000"
+	case BitmapImageFileTypeTIFF:
+		return "BitmapImageFileTypeTIFF"
+	case BitmapImageFileTypeBMP:
+		return "BitmapImageFileTypeBMP"
+	case BitmapImageFileTypeGIF:
+		return "BitmapImageFileTypeGIF"
+	case BitmapImageFileTypeJPEG:
+		return "BitmapImageFileTypeJPEG"
+	case BitmapImageFileTypePNG:
+		return "BitmapImageFileTypePNG"
+	case BitmapImageFileTypeJPEG2000:
+		return "BitmapImageFileTypeJPEG2000"
 	default:
-		return fmt.Sprintf("NSBitmapImageFileType(%d)", int64(e))
+		return fmt.Sprintf("BitmapImageFileType(%d)", int64(e))
 	}
 }
 
 // These constants specify the type of a view’s border.
-type NSBorderType uint64
+type BorderType uint64
 
 const (
 	// No border.
-	NSNoBorder NSBorderType = 0
+	NoBorder BorderType = 0
 	// A black line border around the view.
-	NSLineBorder NSBorderType = 1
+	LineBorder BorderType = 1
 	// A concave border that makes the view look sunken.
-	NSBezelBorder NSBorderType = 2
+	BezelBorder BorderType = 2
 	// A thin border that looks etched around the image.
-	NSGrooveBorder NSBorderType = 3
+	GrooveBorder BorderType = 3
 )
 
-func (e NSBorderType) String() string {
+// String returns the BorderType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BorderType) String() string {
 	switch e {
-	case NSNoBorder:
-		return "NSNoBorder"
-	case NSLineBorder:
-		return "NSLineBorder"
-	case NSBezelBorder:
-		return "NSBezelBorder"
-	case NSGrooveBorder:
-		return "NSGrooveBorder"
+	case NoBorder:
+		return "NoBorder"
+	case LineBorder:
+		return "LineBorder"
+	case BezelBorder:
+		return "BezelBorder"
+	case GrooveBorder:
+		return "GrooveBorder"
 	default:
-		return fmt.Sprintf("NSBorderType(%d)", int64(e))
+		return fmt.Sprintf("BorderType(%d)", int64(e))
 	}
 }
 
 // These constants and data type identifies box types, which, in conjunction with a box’s border type, define the appearance of the box.
-type NSBoxType uint64
+type BoxType uint64
 
 const (
-	NSBoxPrimary   NSBoxType = 0
-	NSBoxSeparator NSBoxType = 2
-	NSBoxCustom    NSBoxType = 4
+	BoxPrimary   BoxType = 0
+	BoxSeparator BoxType = 2
+	BoxCustom    BoxType = 4
 )
 
-func (e NSBoxType) String() string {
+// String returns the BoxType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BoxType) String() string {
 	switch e {
-	case NSBoxPrimary:
-		return "NSBoxPrimary"
-	case NSBoxSeparator:
-		return "NSBoxSeparator"
-	case NSBoxCustom:
-		return "NSBoxCustom"
+	case BoxPrimary:
+		return "BoxPrimary"
+	case BoxSeparator:
+		return "BoxSeparator"
+	case BoxCustom:
+		return "BoxCustom"
 	default:
-		return fmt.Sprintf("NSBoxType(%d)", int64(e))
+		return fmt.Sprintf("BoxType(%d)", int64(e))
 	}
 }
 
 // Types of browser column resizing.
-type NSBrowserColumnResizingType uint64
+type BrowserColumnResizingType uint64
 
 const (
-	NSBrowserNoColumnResizing   NSBrowserColumnResizingType = 0
-	NSBrowserAutoColumnResizing NSBrowserColumnResizingType = 1
-	NSBrowserUserColumnResizing NSBrowserColumnResizingType = 2
+	BrowserNoColumnResizing   BrowserColumnResizingType = 0
+	BrowserAutoColumnResizing BrowserColumnResizingType = 1
+	BrowserUserColumnResizing BrowserColumnResizingType = 2
 )
 
-func (e NSBrowserColumnResizingType) String() string {
+// String returns the BrowserColumnResizingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BrowserColumnResizingType) String() string {
 	switch e {
-	case NSBrowserNoColumnResizing:
-		return "NSBrowserNoColumnResizing"
-	case NSBrowserAutoColumnResizing:
-		return "NSBrowserAutoColumnResizing"
-	case NSBrowserUserColumnResizing:
-		return "NSBrowserUserColumnResizing"
+	case BrowserNoColumnResizing:
+		return "BrowserNoColumnResizing"
+	case BrowserAutoColumnResizing:
+		return "BrowserAutoColumnResizing"
+	case BrowserUserColumnResizing:
+		return "BrowserUserColumnResizing"
 	default:
-		return fmt.Sprintf("NSBrowserColumnResizingType(%d)", int64(e))
+		return fmt.Sprintf("BrowserColumnResizingType(%d)", int64(e))
 	}
 }
 
-type NSButtonType uint64
+type ButtonType uint64
 
 const (
-	NSButtonTypeMomentaryLight        NSButtonType = 0
-	NSButtonTypePushOnPushOff         NSButtonType = 1
-	NSButtonTypeToggle                NSButtonType = 2
-	NSButtonTypeSwitch                NSButtonType = 3
-	NSButtonTypeRadio                 NSButtonType = 4
-	NSButtonTypeMomentaryChange       NSButtonType = 5
-	NSButtonTypeOnOff                 NSButtonType = 6
-	NSButtonTypeMomentaryPushIn       NSButtonType = 7
-	NSButtonTypeAccelerator           NSButtonType = 8
-	NSButtonTypeMultiLevelAccelerator NSButtonType = 9
+	ButtonTypeMomentaryLight        ButtonType = 0
+	ButtonTypePushOnPushOff         ButtonType = 1
+	ButtonTypeToggle                ButtonType = 2
+	ButtonTypeSwitch                ButtonType = 3
+	ButtonTypeRadio                 ButtonType = 4
+	ButtonTypeMomentaryChange       ButtonType = 5
+	ButtonTypeOnOff                 ButtonType = 6
+	ButtonTypeMomentaryPushIn       ButtonType = 7
+	ButtonTypeAccelerator           ButtonType = 8
+	ButtonTypeMultiLevelAccelerator ButtonType = 9
 )
 
-func (e NSButtonType) String() string {
+// String returns the ButtonType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ButtonType) String() string {
 	switch e {
-	case NSButtonTypeMomentaryLight:
-		return "NSButtonTypeMomentaryLight"
-	case NSButtonTypePushOnPushOff:
-		return "NSButtonTypePushOnPushOff"
-	case NSButtonTypeToggle:
-		return "NSButtonTypeToggle"
-	case NSButtonTypeSwitch:
-		return "NSButtonTypeSwitch"
-	case NSButtonTypeRadio:
-		return "NSButtonTypeRadio"
-	case NSButtonTypeMomentaryChange:
-		return "NSButtonTypeMomentaryChange"
-	case NSButtonTypeOnOff:
-		return "NSButtonTypeOnOff"
-	case NSButtonTypeMomentaryPushIn:
-		return "NSButtonTypeMomentaryPushIn"
-	case NSButtonTypeAccelerator:
-		return "NSButtonTypeAccelerator"
-	case NSButtonTypeMultiLevelAccelerator:
-		return "NSButtonTypeMultiLevelAccelerator"
+	case ButtonTypeMomentaryLight:
+		return "ButtonTypeMomentaryLight"
+	case ButtonTypePushOnPushOff:
+		return "ButtonTypePushOnPushOff"
+	case ButtonTypeToggle:
+		return "ButtonTypeToggle"
+	case ButtonTypeSwitch:
+		return "ButtonTypeSwitch"
+	case ButtonTypeRadio:
+		return "ButtonTypeRadio"
+	case ButtonTypeMomentaryChange:
+		return "ButtonTypeMomentaryChange"
+	case ButtonTypeOnOff:
+		return "ButtonTypeOnOff"
+	case ButtonTypeMomentaryPushIn:
+		return "ButtonTypeMomentaryPushIn"
+	case ButtonTypeAccelerator:
+		return "ButtonTypeAccelerator"
+	case ButtonTypeMultiLevelAccelerator:
+		return "ButtonTypeMultiLevelAccelerator"
 	default:
-		return fmt.Sprintf("NSButtonType(%d)", int64(e))
+		return fmt.Sprintf("ButtonType(%d)", int64(e))
 	}
 }
 
-type NSCellAttribute uint64
+type CellAttribute uint64
 
 const (
-	NSCellDisabled               NSCellAttribute = 0
-	NSCellState                  NSCellAttribute = 1
-	NSPushInCell                 NSCellAttribute = 2
-	NSCellEditable               NSCellAttribute = 3
-	NSChangeGrayCell             NSCellAttribute = 4
-	NSCellHighlighted            NSCellAttribute = 5
-	NSCellLightsByContents       NSCellAttribute = 6
-	NSCellLightsByGray           NSCellAttribute = 7
-	NSChangeBackgroundCell       NSCellAttribute = 8
-	NSCellLightsByBackground     NSCellAttribute = 9
-	NSCellIsBordered             NSCellAttribute = 10
-	NSCellHasOverlappingImage    NSCellAttribute = 11
-	NSCellHasImageHorizontal     NSCellAttribute = 12
-	NSCellHasImageOnLeftOrBottom NSCellAttribute = 13
-	NSCellChangesContents        NSCellAttribute = 14
-	NSCellIsInsetButton          NSCellAttribute = 15
-	NSCellAllowsMixedState       NSCellAttribute = 16
+	CellDisabled               CellAttribute = 0
+	CellState                  CellAttribute = 1
+	PushInCell                 CellAttribute = 2
+	CellEditable               CellAttribute = 3
+	ChangeGrayCell             CellAttribute = 4
+	CellHighlighted            CellAttribute = 5
+	CellLightsByContents       CellAttribute = 6
+	CellLightsByGray           CellAttribute = 7
+	ChangeBackgroundCell       CellAttribute = 8
+	CellLightsByBackground     CellAttribute = 9
+	CellIsBordered             CellAttribute = 10
+	CellHasOverlappingImage    CellAttribute = 11
+	CellHasImageHorizontal     CellAttribute = 12
+	CellHasImageOnLeftOrBottom CellAttribute = 13
+	CellChangesContents        CellAttribute = 14
+	CellIsInsetButton          CellAttribute = 15
+	CellAllowsMixedState       CellAttribute = 16
 )
 
-func (e NSCellAttribute) String() string {
+// String returns the CellAttribute constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CellAttribute) String() string {
 	switch e {
-	case NSCellDisabled:
-		return "NSCellDisabled"
-	case NSCellState:
-		return "NSCellState"
-	case NSPushInCell:
-		return "NSPushInCell"
-	case NSCellEditable:
-		return "NSCellEditable"
-	case NSChangeGrayCell:
-		return "NSChangeGrayCell"
-	case NSCellHighlighted:
-		return "NSCellHighlighted"
-	case NSCellLightsByContents:
-		return "NSCellLightsByContents"
-	case NSCellLightsByGray:
-		return "NSCellLightsByGray"
-	case NSChangeBackgroundCell:
-		return "NSChangeBackgroundCell"
-	case NSCellLightsByBackground:
-		return "NSCellLightsByBackground"
-	case NSCellIsBordered:
-		return "NSCellIsBordered"
-	case NSCellHasOverlappingImage:
-		return "NSCellHasOverlappingImage"
-	case NSCellHasImageHorizontal:
-		return "NSCellHasImageHorizontal"
-	case NSCellHasImageOnLeftOrBottom:
-		return "NSCellHasImageOnLeftOrBottom"
-	case NSCellChangesContents:
-		return "NSCellChangesContents"
-	case NSCellIsInsetButton:
-		return "NSCellIsInsetButton"
-	case NSCellAllowsMixedState:
-		return "NSCellAllowsMixedState"
+	case CellDisabled:
+		return "CellDisabled"
+	case CellState:
+		return "CellState"
+	case PushInCell:
+		return "PushInCell"
+	case CellEditable:
+		return "CellEditable"
+	case ChangeGrayCell:
+		return "ChangeGrayCell"
+	case CellHighlighted:
+		return "CellHighlighted"
+	case CellLightsByContents:
+		return "CellLightsByContents"
+	case CellLightsByGray:
+		return "CellLightsByGray"
+	case ChangeBackgroundCell:
+		return "ChangeBackgroundCell"
+	case CellLightsByBackground:
+		return "CellLightsByBackground"
+	case CellIsBordered:
+		return "CellIsBordered"
+	case CellHasOverlappingImage:
+		return "CellHasOverlappingImage"
+	case CellHasImageHorizontal:
+		return "CellHasImageHorizontal"
+	case CellHasImageOnLeftOrBottom:
+		return "CellHasImageOnLeftOrBottom"
+	case CellChangesContents:
+		return "CellChangesContents"
+	case CellIsInsetButton:
+		return "CellIsInsetButton"
+	case CellAllowsMixedState:
+		return "CellAllowsMixedState"
 	default:
-		return fmt.Sprintf("NSCellAttribute(%d)", int64(e))
+		return fmt.Sprintf("CellAttribute(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSCellHitResult uint64
+type CellHitResult uint64
 
 const (
-	NSCellHitNone             NSCellHitResult = 0
-	NSCellHitContentArea      NSCellHitResult = 1
-	NSCellHitEditableTextArea NSCellHitResult = 2
-	NSCellHitTrackableArea    NSCellHitResult = 4
+	CellHitNone             CellHitResult = 0
+	CellHitContentArea      CellHitResult = 1
+	CellHitEditableTextArea CellHitResult = 2
+	CellHitTrackableArea    CellHitResult = 4
 )
 
-func (e NSCellHitResult) String() string {
+// String returns the CellHitResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CellHitResult) String() string {
 	var parts []string
-	if e&NSCellHitContentArea != 0 {
-		parts = append(parts, "NSCellHitContentArea")
+	if e&CellHitContentArea != 0 {
+		parts = append(parts, "CellHitContentArea")
 	}
-	if e&NSCellHitEditableTextArea != 0 {
-		parts = append(parts, "NSCellHitEditableTextArea")
+	if e&CellHitEditableTextArea != 0 {
+		parts = append(parts, "CellHitEditableTextArea")
 	}
-	if e&NSCellHitTrackableArea != 0 {
-		parts = append(parts, "NSCellHitTrackableArea")
+	if e&CellHitTrackableArea != 0 {
+		parts = append(parts, "CellHitTrackableArea")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -862,69 +910,73 @@ func (e NSCellHitResult) String() string {
 }
 
 // A constant for specifying the position of a button’s image relative to its title.
-type NSCellImagePosition uint64
+type CellImagePosition uint64
 
 const (
-	NSNoImage       NSCellImagePosition = 0
-	NSImageOnly     NSCellImagePosition = 1
-	NSImageLeft     NSCellImagePosition = 2
-	NSImageRight    NSCellImagePosition = 3
-	NSImageBelow    NSCellImagePosition = 4
-	NSImageAbove    NSCellImagePosition = 5
-	NSImageOverlaps NSCellImagePosition = 6
-	NSImageLeading  NSCellImagePosition = 7
-	NSImageTrailing NSCellImagePosition = 8
+	NoImage       CellImagePosition = 0
+	ImageOnly     CellImagePosition = 1
+	ImageLeft     CellImagePosition = 2
+	ImageRight    CellImagePosition = 3
+	ImageBelow    CellImagePosition = 4
+	ImageAbove    CellImagePosition = 5
+	ImageOverlaps CellImagePosition = 6
+	ImageLeading  CellImagePosition = 7
+	ImageTrailing CellImagePosition = 8
 )
 
-func (e NSCellImagePosition) String() string {
+// String returns the CellImagePosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CellImagePosition) String() string {
 	switch e {
-	case NSNoImage:
-		return "NSNoImage"
-	case NSImageOnly:
-		return "NSImageOnly"
-	case NSImageLeft:
-		return "NSImageLeft"
-	case NSImageRight:
-		return "NSImageRight"
-	case NSImageBelow:
-		return "NSImageBelow"
-	case NSImageAbove:
-		return "NSImageAbove"
-	case NSImageOverlaps:
-		return "NSImageOverlaps"
-	case NSImageLeading:
-		return "NSImageLeading"
-	case NSImageTrailing:
-		return "NSImageTrailing"
+	case NoImage:
+		return "NoImage"
+	case ImageOnly:
+		return "ImageOnly"
+	case ImageLeft:
+		return "ImageLeft"
+	case ImageRight:
+		return "ImageRight"
+	case ImageBelow:
+		return "ImageBelow"
+	case ImageAbove:
+		return "ImageAbove"
+	case ImageOverlaps:
+		return "ImageOverlaps"
+	case ImageLeading:
+		return "ImageLeading"
+	case ImageTrailing:
+		return "ImageTrailing"
 	default:
-		return fmt.Sprintf("NSCellImagePosition(%d)", int64(e))
+		return fmt.Sprintf("CellImagePosition(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSCellStyleMask uint64
+type CellStyleMask uint64
 
 const (
-	NSNoCellMask               NSCellStyleMask = 0
-	NSContentsCellMask         NSCellStyleMask = 1
-	NSPushInCellMask           NSCellStyleMask = 2
-	NSChangeGrayCellMask       NSCellStyleMask = 4
-	NSChangeBackgroundCellMask NSCellStyleMask = 8
+	NoCellMask               CellStyleMask = 0
+	ContentsCellMask         CellStyleMask = 1
+	PushInCellMask           CellStyleMask = 2
+	ChangeGrayCellMask       CellStyleMask = 4
+	ChangeBackgroundCellMask CellStyleMask = 8
 )
 
-func (e NSCellStyleMask) String() string {
+// String returns the CellStyleMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CellStyleMask) String() string {
 	var parts []string
-	if e&NSContentsCellMask != 0 {
-		parts = append(parts, "NSContentsCellMask")
+	if e&ContentsCellMask != 0 {
+		parts = append(parts, "ContentsCellMask")
 	}
-	if e&NSPushInCellMask != 0 {
-		parts = append(parts, "NSPushInCellMask")
+	if e&PushInCellMask != 0 {
+		parts = append(parts, "PushInCellMask")
 	}
-	if e&NSChangeGrayCellMask != 0 {
-		parts = append(parts, "NSChangeGrayCellMask")
+	if e&ChangeGrayCellMask != 0 {
+		parts = append(parts, "ChangeGrayCellMask")
 	}
-	if e&NSChangeBackgroundCellMask != 0 {
-		parts = append(parts, "NSChangeBackgroundCellMask")
+	if e&ChangeBackgroundCellMask != 0 {
+		parts = append(parts, "ChangeBackgroundCellMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -932,252 +984,268 @@ func (e NSCellStyleMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSCellType uint64
+type CellType uint64
 
 const (
-	NSNullCellType  NSCellType = 0
-	NSTextCellType  NSCellType = 1
-	NSImageCellType NSCellType = 2
+	NullCellType  CellType = 0
+	TextCellType  CellType = 1
+	ImageCellType CellType = 2
 )
 
-func (e NSCellType) String() string {
+// String returns the CellType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CellType) String() string {
 	switch e {
-	case NSNullCellType:
-		return "NSNullCellType"
-	case NSTextCellType:
-		return "NSTextCellType"
-	case NSImageCellType:
-		return "NSImageCellType"
+	case NullCellType:
+		return "NullCellType"
+	case TextCellType:
+		return "TextCellType"
+	case ImageCellType:
+		return "ImageCellType"
 	default:
-		return fmt.Sprintf("NSCellType(%d)", int64(e))
+		return fmt.Sprintf("CellType(%d)", int64(e))
 	}
 }
 
 // Values that map character identifiers to glyphs.
-type NSCharacterCollection uint64
+type CharacterCollection uint64
 
 const (
 	// Indicates that the character identifier is equal to the glyph index.
-	NSIdentityMappingCharacterCollection NSCharacterCollection = 0
+	IdentityMappingCharacterCollection CharacterCollection = 0
 	// Indicates the Adobe-CNS1 mapping.
-	NSAdobeCNS1CharacterCollection NSCharacterCollection = 1
+	AdobeCNS1CharacterCollection CharacterCollection = 1
 	// Indicates the Adobe-GB1 mapping.
-	NSAdobeGB1CharacterCollection NSCharacterCollection = 2
+	AdobeGB1CharacterCollection CharacterCollection = 2
 	// Indicates the Adobe-Japan1 mapping.
-	NSAdobeJapan1CharacterCollection NSCharacterCollection = 3
+	AdobeJapan1CharacterCollection CharacterCollection = 3
 	// Indicates the Adobe-Japan2 mapping.
-	NSAdobeJapan2CharacterCollection NSCharacterCollection = 4
+	AdobeJapan2CharacterCollection CharacterCollection = 4
 	// Indicates the Adobe-Korea1 mapping.
-	NSAdobeKorea1CharacterCollection NSCharacterCollection = 5
+	AdobeKorea1CharacterCollection CharacterCollection = 5
 )
 
-func (e NSCharacterCollection) String() string {
+// String returns the CharacterCollection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CharacterCollection) String() string {
 	switch e {
-	case NSIdentityMappingCharacterCollection:
-		return "NSIdentityMappingCharacterCollection"
-	case NSAdobeCNS1CharacterCollection:
-		return "NSAdobeCNS1CharacterCollection"
-	case NSAdobeGB1CharacterCollection:
-		return "NSAdobeGB1CharacterCollection"
-	case NSAdobeJapan1CharacterCollection:
-		return "NSAdobeJapan1CharacterCollection"
-	case NSAdobeJapan2CharacterCollection:
-		return "NSAdobeJapan2CharacterCollection"
-	case NSAdobeKorea1CharacterCollection:
-		return "NSAdobeKorea1CharacterCollection"
+	case IdentityMappingCharacterCollection:
+		return "IdentityMappingCharacterCollection"
+	case AdobeCNS1CharacterCollection:
+		return "AdobeCNS1CharacterCollection"
+	case AdobeGB1CharacterCollection:
+		return "AdobeGB1CharacterCollection"
+	case AdobeJapan1CharacterCollection:
+		return "AdobeJapan1CharacterCollection"
+	case AdobeJapan2CharacterCollection:
+		return "AdobeJapan2CharacterCollection"
+	case AdobeKorea1CharacterCollection:
+		return "AdobeKorea1CharacterCollection"
 	default:
-		return fmt.Sprintf("NSCharacterCollection(%d)", int64(e))
+		return fmt.Sprintf("CharacterCollection(%d)", int64(e))
 	}
 }
 
 // Constants specifying the type of element in the collection view.
-type NSCollectionElementCategory int64
+type CollectionElementCategory int64
 
 const (
 	// The element is an item. Items represent the main content of your collection view.
-	NSCollectionElementCategoryItem NSCollectionElementCategory = 0
+	CollectionElementCategoryItem CollectionElementCategory = 0
 	// The element is a supplementary view. Use supplementary views for single views that contain some data but are associated with an entire section. For example, use them to specify header or footer views for a section.
-	NSCollectionElementCategorySupplementaryView NSCollectionElementCategory = 1
+	CollectionElementCategorySupplementaryView CollectionElementCategory = 1
 	// The element is a decoration view. Decoration views represent visual adornments that do not contain any data of their own.
-	NSCollectionElementCategoryDecorationView NSCollectionElementCategory = 2
+	CollectionElementCategoryDecorationView CollectionElementCategory = 2
 	// The element is an inter-item gap. An inter-item gap element is a custom visual indicator that is displayed between items when dropping items into the collection view.
-	NSCollectionElementCategoryInterItemGap NSCollectionElementCategory = 3
+	CollectionElementCategoryInterItemGap CollectionElementCategory = 3
 )
 
-func (e NSCollectionElementCategory) String() string {
+// String returns the CollectionElementCategory constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionElementCategory) String() string {
 	switch e {
-	case NSCollectionElementCategoryItem:
-		return "NSCollectionElementCategoryItem"
-	case NSCollectionElementCategorySupplementaryView:
-		return "NSCollectionElementCategorySupplementaryView"
-	case NSCollectionElementCategoryDecorationView:
-		return "NSCollectionElementCategoryDecorationView"
-	case NSCollectionElementCategoryInterItemGap:
-		return "NSCollectionElementCategoryInterItemGap"
+	case CollectionElementCategoryItem:
+		return "CollectionElementCategoryItem"
+	case CollectionElementCategorySupplementaryView:
+		return "CollectionElementCategorySupplementaryView"
+	case CollectionElementCategoryDecorationView:
+		return "CollectionElementCategoryDecorationView"
+	case CollectionElementCategoryInterItemGap:
+		return "CollectionElementCategoryInterItemGap"
 	default:
-		return fmt.Sprintf("NSCollectionElementCategory(%d)", int64(e))
+		return fmt.Sprintf("CollectionElementCategory(%d)", int64(e))
 	}
 }
 
 // The scrolling behavior of the layout’s sections in relation to the main layout axis.
-type NSCollectionLayoutSectionOrthogonalScrollingBehavior int64
+type CollectionLayoutSectionOrthogonalScrollingBehavior int64
 
 const (
 	// The section does not allow users to scroll its content orthogonally.
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
+	CollectionLayoutSectionOrthogonalScrollingBehaviorNone CollectionLayoutSectionOrthogonalScrollingBehavior = 0
 	// The section allows users to scroll its content orthogonally with continuous scrolling.
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
+	CollectionLayoutSectionOrthogonalScrollingBehaviorContinuous CollectionLayoutSectionOrthogonalScrollingBehavior = 1
 	// The section allows users to scroll its content orthogonally, coming to a natural stop at the leading boundary of the visible group.
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary NSCollectionLayoutSectionOrthogonalScrollingBehavior = 2
+	CollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary CollectionLayoutSectionOrthogonalScrollingBehavior = 2
 	// The section allows users to page its content orthogonally.
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
+	CollectionLayoutSectionOrthogonalScrollingBehaviorPaging CollectionLayoutSectionOrthogonalScrollingBehavior = 3
 	// The section allows users to page its content orthogonally one group at a time.
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
+	CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging CollectionLayoutSectionOrthogonalScrollingBehavior = 4
 	// The section allows users to page its content orthogonally one group at a time, centering each group.
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
+	CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered CollectionLayoutSectionOrthogonalScrollingBehavior = 5
 )
 
-func (e NSCollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
+// String returns the CollectionLayoutSectionOrthogonalScrollingBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
 	switch e {
-	case NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone:
-		return "NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone"
-	case NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous:
-		return "NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous"
-	case NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary:
-		return "NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary"
-	case NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging:
-		return "NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging"
-	case NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging:
-		return "NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging"
-	case NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered:
-		return "NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered"
+	case CollectionLayoutSectionOrthogonalScrollingBehaviorNone:
+		return "CollectionLayoutSectionOrthogonalScrollingBehaviorNone"
+	case CollectionLayoutSectionOrthogonalScrollingBehaviorContinuous:
+		return "CollectionLayoutSectionOrthogonalScrollingBehaviorContinuous"
+	case CollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary:
+		return "CollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary"
+	case CollectionLayoutSectionOrthogonalScrollingBehaviorPaging:
+		return "CollectionLayoutSectionOrthogonalScrollingBehaviorPaging"
+	case CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging:
+		return "CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging"
+	case CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered:
+		return "CollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered"
 	default:
-		return fmt.Sprintf("NSCollectionLayoutSectionOrthogonalScrollingBehavior(%d)", int64(e))
+		return fmt.Sprintf("CollectionLayoutSectionOrthogonalScrollingBehavior(%d)", int64(e))
 	}
 }
 
 // Constants indicating the type of action being performed on an item.
-type NSCollectionUpdateAction int64
+type CollectionUpdateAction int64
 
 const (
-	NSCollectionUpdateActionInsert NSCollectionUpdateAction = 0
-	NSCollectionUpdateActionDelete NSCollectionUpdateAction = 1
-	NSCollectionUpdateActionReload NSCollectionUpdateAction = 2
-	NSCollectionUpdateActionMove   NSCollectionUpdateAction = 3
-	NSCollectionUpdateActionNone   NSCollectionUpdateAction = 4
+	CollectionUpdateActionInsert CollectionUpdateAction = 0
+	CollectionUpdateActionDelete CollectionUpdateAction = 1
+	CollectionUpdateActionReload CollectionUpdateAction = 2
+	CollectionUpdateActionMove   CollectionUpdateAction = 3
+	CollectionUpdateActionNone   CollectionUpdateAction = 4
 )
 
-func (e NSCollectionUpdateAction) String() string {
+// String returns the CollectionUpdateAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionUpdateAction) String() string {
 	switch e {
-	case NSCollectionUpdateActionInsert:
-		return "NSCollectionUpdateActionInsert"
-	case NSCollectionUpdateActionDelete:
-		return "NSCollectionUpdateActionDelete"
-	case NSCollectionUpdateActionReload:
-		return "NSCollectionUpdateActionReload"
-	case NSCollectionUpdateActionMove:
-		return "NSCollectionUpdateActionMove"
-	case NSCollectionUpdateActionNone:
-		return "NSCollectionUpdateActionNone"
+	case CollectionUpdateActionInsert:
+		return "CollectionUpdateActionInsert"
+	case CollectionUpdateActionDelete:
+		return "CollectionUpdateActionDelete"
+	case CollectionUpdateActionReload:
+		return "CollectionUpdateActionReload"
+	case CollectionUpdateActionMove:
+		return "CollectionUpdateActionMove"
+	case CollectionUpdateActionNone:
+		return "CollectionUpdateActionNone"
 	default:
-		return fmt.Sprintf("NSCollectionUpdateAction(%d)", int64(e))
+		return fmt.Sprintf("CollectionUpdateAction(%d)", int64(e))
 	}
 }
 
 // Constants indicating the type of highlight applied to an item.
-type NSCollectionViewItemHighlightState int64
+type CollectionViewItemHighlightState int64
 
 const (
-	NSCollectionViewItemHighlightNone           NSCollectionViewItemHighlightState = 0
-	NSCollectionViewItemHighlightForSelection   NSCollectionViewItemHighlightState = 1
-	NSCollectionViewItemHighlightForDeselection NSCollectionViewItemHighlightState = 2
-	NSCollectionViewItemHighlightAsDropTarget   NSCollectionViewItemHighlightState = 3
+	CollectionViewItemHighlightNone           CollectionViewItemHighlightState = 0
+	CollectionViewItemHighlightForSelection   CollectionViewItemHighlightState = 1
+	CollectionViewItemHighlightForDeselection CollectionViewItemHighlightState = 2
+	CollectionViewItemHighlightAsDropTarget   CollectionViewItemHighlightState = 3
 )
 
-func (e NSCollectionViewItemHighlightState) String() string {
+// String returns the CollectionViewItemHighlightState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionViewItemHighlightState) String() string {
 	switch e {
-	case NSCollectionViewItemHighlightNone:
-		return "NSCollectionViewItemHighlightNone"
-	case NSCollectionViewItemHighlightForSelection:
-		return "NSCollectionViewItemHighlightForSelection"
-	case NSCollectionViewItemHighlightForDeselection:
-		return "NSCollectionViewItemHighlightForDeselection"
-	case NSCollectionViewItemHighlightAsDropTarget:
-		return "NSCollectionViewItemHighlightAsDropTarget"
+	case CollectionViewItemHighlightNone:
+		return "CollectionViewItemHighlightNone"
+	case CollectionViewItemHighlightForSelection:
+		return "CollectionViewItemHighlightForSelection"
+	case CollectionViewItemHighlightForDeselection:
+		return "CollectionViewItemHighlightForDeselection"
+	case CollectionViewItemHighlightAsDropTarget:
+		return "CollectionViewItemHighlightAsDropTarget"
 	default:
-		return fmt.Sprintf("NSCollectionViewItemHighlightState(%d)", int64(e))
+		return fmt.Sprintf("CollectionViewItemHighlightState(%d)", int64(e))
 	}
 }
 
 // Constants indicating the scrolling direction for the layout.
-type NSCollectionViewScrollDirection int64
+type CollectionViewScrollDirection int64
 
 const (
-	NSCollectionViewScrollDirectionVertical   NSCollectionViewScrollDirection = 0
-	NSCollectionViewScrollDirectionHorizontal NSCollectionViewScrollDirection = 1
+	CollectionViewScrollDirectionVertical   CollectionViewScrollDirection = 0
+	CollectionViewScrollDirectionHorizontal CollectionViewScrollDirection = 1
 )
 
-func (e NSCollectionViewScrollDirection) String() string {
+// String returns the CollectionViewScrollDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionViewScrollDirection) String() string {
 	switch e {
-	case NSCollectionViewScrollDirectionVertical:
-		return "NSCollectionViewScrollDirectionVertical"
-	case NSCollectionViewScrollDirectionHorizontal:
-		return "NSCollectionViewScrollDirectionHorizontal"
+	case CollectionViewScrollDirectionVertical:
+		return "CollectionViewScrollDirectionVertical"
+	case CollectionViewScrollDirectionHorizontal:
+		return "CollectionViewScrollDirectionHorizontal"
 	default:
-		return fmt.Sprintf("NSCollectionViewScrollDirection(%d)", int64(e))
+		return fmt.Sprintf("CollectionViewScrollDirection(%d)", int64(e))
 	}
 }
 
 // Constants indicating the options for scrolling the collection view’s content.
 // Bitmask — values may be combined with |.
-type NSCollectionViewScrollPosition uint64
+type CollectionViewScrollPosition uint64
 
 const (
 	// Do not scroll.
-	NSCollectionViewScrollPositionNone                  NSCollectionViewScrollPosition = 0
-	NSCollectionViewScrollPositionTop                   NSCollectionViewScrollPosition = 1
-	NSCollectionViewScrollPositionCenteredVertically    NSCollectionViewScrollPosition = 2
-	NSCollectionViewScrollPositionBottom                NSCollectionViewScrollPosition = 4
-	NSCollectionViewScrollPositionNearestHorizontalEdge NSCollectionViewScrollPosition = 512
-	NSCollectionViewScrollPositionLeft                  NSCollectionViewScrollPosition = 8
-	NSCollectionViewScrollPositionCenteredHorizontally  NSCollectionViewScrollPosition = 16
-	NSCollectionViewScrollPositionRight                 NSCollectionViewScrollPosition = 32
-	NSCollectionViewScrollPositionLeadingEdge           NSCollectionViewScrollPosition = 64
-	NSCollectionViewScrollPositionTrailingEdge          NSCollectionViewScrollPosition = 128
-	NSCollectionViewScrollPositionNearestVerticalEdge   NSCollectionViewScrollPosition = 256
+	CollectionViewScrollPositionNone                  CollectionViewScrollPosition = 0
+	CollectionViewScrollPositionTop                   CollectionViewScrollPosition = 1
+	CollectionViewScrollPositionCenteredVertically    CollectionViewScrollPosition = 2
+	CollectionViewScrollPositionBottom                CollectionViewScrollPosition = 4
+	CollectionViewScrollPositionNearestHorizontalEdge CollectionViewScrollPosition = 512
+	CollectionViewScrollPositionLeft                  CollectionViewScrollPosition = 8
+	CollectionViewScrollPositionCenteredHorizontally  CollectionViewScrollPosition = 16
+	CollectionViewScrollPositionRight                 CollectionViewScrollPosition = 32
+	CollectionViewScrollPositionLeadingEdge           CollectionViewScrollPosition = 64
+	CollectionViewScrollPositionTrailingEdge          CollectionViewScrollPosition = 128
+	CollectionViewScrollPositionNearestVerticalEdge   CollectionViewScrollPosition = 256
 )
 
-func (e NSCollectionViewScrollPosition) String() string {
+// String returns the CollectionViewScrollPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionViewScrollPosition) String() string {
 	var parts []string
-	if e&NSCollectionViewScrollPositionTop != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionTop")
+	if e&CollectionViewScrollPositionTop != 0 {
+		parts = append(parts, "CollectionViewScrollPositionTop")
 	}
-	if e&NSCollectionViewScrollPositionCenteredVertically != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionCenteredVertically")
+	if e&CollectionViewScrollPositionCenteredVertically != 0 {
+		parts = append(parts, "CollectionViewScrollPositionCenteredVertically")
 	}
-	if e&NSCollectionViewScrollPositionBottom != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionBottom")
+	if e&CollectionViewScrollPositionBottom != 0 {
+		parts = append(parts, "CollectionViewScrollPositionBottom")
 	}
-	if e&NSCollectionViewScrollPositionNearestHorizontalEdge != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionNearestHorizontalEdge")
+	if e&CollectionViewScrollPositionNearestHorizontalEdge != 0 {
+		parts = append(parts, "CollectionViewScrollPositionNearestHorizontalEdge")
 	}
-	if e&NSCollectionViewScrollPositionLeft != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionLeft")
+	if e&CollectionViewScrollPositionLeft != 0 {
+		parts = append(parts, "CollectionViewScrollPositionLeft")
 	}
-	if e&NSCollectionViewScrollPositionCenteredHorizontally != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionCenteredHorizontally")
+	if e&CollectionViewScrollPositionCenteredHorizontally != 0 {
+		parts = append(parts, "CollectionViewScrollPositionCenteredHorizontally")
 	}
-	if e&NSCollectionViewScrollPositionRight != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionRight")
+	if e&CollectionViewScrollPositionRight != 0 {
+		parts = append(parts, "CollectionViewScrollPositionRight")
 	}
-	if e&NSCollectionViewScrollPositionLeadingEdge != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionLeadingEdge")
+	if e&CollectionViewScrollPositionLeadingEdge != 0 {
+		parts = append(parts, "CollectionViewScrollPositionLeadingEdge")
 	}
-	if e&NSCollectionViewScrollPositionTrailingEdge != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionTrailingEdge")
+	if e&CollectionViewScrollPositionTrailingEdge != 0 {
+		parts = append(parts, "CollectionViewScrollPositionTrailingEdge")
 	}
-	if e&NSCollectionViewScrollPositionNearestVerticalEdge != 0 {
-		parts = append(parts, "NSCollectionViewScrollPositionNearestVerticalEdge")
+	if e&CollectionViewScrollPositionNearestVerticalEdge != 0 {
+		parts = append(parts, "CollectionViewScrollPositionNearestVerticalEdge")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1186,89 +1254,93 @@ func (e NSCollectionViewScrollPosition) String() string {
 }
 
 // A type defined for the enum constants specifying color panel modes.
-type NSColorPanelMode int64
+type ColorPanelMode int64
 
 const (
-	NSColorPanelModeNone          NSColorPanelMode = -1
-	NSColorPanelModeGray          NSColorPanelMode = 0
-	NSColorPanelModeRGB           NSColorPanelMode = 1
-	NSColorPanelModeCMYK          NSColorPanelMode = 2
-	NSColorPanelModeHSB           NSColorPanelMode = 3
-	NSColorPanelModeCustomPalette NSColorPanelMode = 4
-	NSColorPanelModeColorList     NSColorPanelMode = 5
-	NSColorPanelModeWheel         NSColorPanelMode = 6
-	NSColorPanelModeCrayon        NSColorPanelMode = 7
+	ColorPanelModeNone          ColorPanelMode = -1
+	ColorPanelModeGray          ColorPanelMode = 0
+	ColorPanelModeRGB           ColorPanelMode = 1
+	ColorPanelModeCMYK          ColorPanelMode = 2
+	ColorPanelModeHSB           ColorPanelMode = 3
+	ColorPanelModeCustomPalette ColorPanelMode = 4
+	ColorPanelModeColorList     ColorPanelMode = 5
+	ColorPanelModeWheel         ColorPanelMode = 6
+	ColorPanelModeCrayon        ColorPanelMode = 7
 )
 
-func (e NSColorPanelMode) String() string {
+// String returns the ColorPanelMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorPanelMode) String() string {
 	switch e {
-	case NSColorPanelModeNone:
-		return "NSColorPanelModeNone"
-	case NSColorPanelModeGray:
-		return "NSColorPanelModeGray"
-	case NSColorPanelModeRGB:
-		return "NSColorPanelModeRGB"
-	case NSColorPanelModeCMYK:
-		return "NSColorPanelModeCMYK"
-	case NSColorPanelModeHSB:
-		return "NSColorPanelModeHSB"
-	case NSColorPanelModeCustomPalette:
-		return "NSColorPanelModeCustomPalette"
-	case NSColorPanelModeColorList:
-		return "NSColorPanelModeColorList"
-	case NSColorPanelModeWheel:
-		return "NSColorPanelModeWheel"
-	case NSColorPanelModeCrayon:
-		return "NSColorPanelModeCrayon"
+	case ColorPanelModeNone:
+		return "ColorPanelModeNone"
+	case ColorPanelModeGray:
+		return "ColorPanelModeGray"
+	case ColorPanelModeRGB:
+		return "ColorPanelModeRGB"
+	case ColorPanelModeCMYK:
+		return "ColorPanelModeCMYK"
+	case ColorPanelModeHSB:
+		return "ColorPanelModeHSB"
+	case ColorPanelModeCustomPalette:
+		return "ColorPanelModeCustomPalette"
+	case ColorPanelModeColorList:
+		return "ColorPanelModeColorList"
+	case ColorPanelModeWheel:
+		return "ColorPanelModeWheel"
+	case ColorPanelModeCrayon:
+		return "ColorPanelModeCrayon"
 	default:
-		return fmt.Sprintf("NSColorPanelMode(%d)", int64(e))
+		return fmt.Sprintf("ColorPanelMode(%d)", int64(e))
 	}
 }
 
 // The color modes that are enabled for a color panel.
 // Bitmask — values may be combined with |.
-type NSColorPanelOptions uint64
+type ColorPanelOptions uint64
 
 const (
-	NSColorPanelGrayModeMask          NSColorPanelOptions = 1
-	NSColorPanelRGBModeMask           NSColorPanelOptions = 2
-	NSColorPanelCMYKModeMask          NSColorPanelOptions = 4
-	NSColorPanelHSBModeMask           NSColorPanelOptions = 8
-	NSColorPanelCustomPaletteModeMask NSColorPanelOptions = 16
-	NSColorPanelColorListModeMask     NSColorPanelOptions = 32
-	NSColorPanelWheelModeMask         NSColorPanelOptions = 64
-	NSColorPanelCrayonModeMask        NSColorPanelOptions = 128
-	NSColorPanelAllModesMask          NSColorPanelOptions = 65535
+	ColorPanelGrayModeMask          ColorPanelOptions = 1
+	ColorPanelRGBModeMask           ColorPanelOptions = 2
+	ColorPanelCMYKModeMask          ColorPanelOptions = 4
+	ColorPanelHSBModeMask           ColorPanelOptions = 8
+	ColorPanelCustomPaletteModeMask ColorPanelOptions = 16
+	ColorPanelColorListModeMask     ColorPanelOptions = 32
+	ColorPanelWheelModeMask         ColorPanelOptions = 64
+	ColorPanelCrayonModeMask        ColorPanelOptions = 128
+	ColorPanelAllModesMask          ColorPanelOptions = 65535
 )
 
-func (e NSColorPanelOptions) String() string {
+// String returns the ColorPanelOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorPanelOptions) String() string {
 	var parts []string
-	if e&NSColorPanelGrayModeMask != 0 {
-		parts = append(parts, "NSColorPanelGrayModeMask")
+	if e&ColorPanelGrayModeMask != 0 {
+		parts = append(parts, "ColorPanelGrayModeMask")
 	}
-	if e&NSColorPanelRGBModeMask != 0 {
-		parts = append(parts, "NSColorPanelRGBModeMask")
+	if e&ColorPanelRGBModeMask != 0 {
+		parts = append(parts, "ColorPanelRGBModeMask")
 	}
-	if e&NSColorPanelCMYKModeMask != 0 {
-		parts = append(parts, "NSColorPanelCMYKModeMask")
+	if e&ColorPanelCMYKModeMask != 0 {
+		parts = append(parts, "ColorPanelCMYKModeMask")
 	}
-	if e&NSColorPanelHSBModeMask != 0 {
-		parts = append(parts, "NSColorPanelHSBModeMask")
+	if e&ColorPanelHSBModeMask != 0 {
+		parts = append(parts, "ColorPanelHSBModeMask")
 	}
-	if e&NSColorPanelCustomPaletteModeMask != 0 {
-		parts = append(parts, "NSColorPanelCustomPaletteModeMask")
+	if e&ColorPanelCustomPaletteModeMask != 0 {
+		parts = append(parts, "ColorPanelCustomPaletteModeMask")
 	}
-	if e&NSColorPanelColorListModeMask != 0 {
-		parts = append(parts, "NSColorPanelColorListModeMask")
+	if e&ColorPanelColorListModeMask != 0 {
+		parts = append(parts, "ColorPanelColorListModeMask")
 	}
-	if e&NSColorPanelWheelModeMask != 0 {
-		parts = append(parts, "NSColorPanelWheelModeMask")
+	if e&ColorPanelWheelModeMask != 0 {
+		parts = append(parts, "ColorPanelWheelModeMask")
 	}
-	if e&NSColorPanelCrayonModeMask != 0 {
-		parts = append(parts, "NSColorPanelCrayonModeMask")
+	if e&ColorPanelCrayonModeMask != 0 {
+		parts = append(parts, "ColorPanelCrayonModeMask")
 	}
-	if e&NSColorPanelAllModesMask != 0 {
-		parts = append(parts, "NSColorPanelAllModesMask")
+	if e&ColorPanelAllModesMask != 0 {
+		parts = append(parts, "ColorPanelAllModesMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1277,458 +1349,484 @@ func (e NSColorPanelOptions) String() string {
 }
 
 // Constants that specify how Cocoa should handle colors that are not located within the destination color space of a graphics context.
-type NSColorRenderingIntent int64
+type ColorRenderingIntent int64
 
 const (
 	// Use the default rendering intent for the graphics context.
-	NSColorRenderingIntentDefault NSColorRenderingIntent = 0
+	ColorRenderingIntentDefault ColorRenderingIntent = 0
 	// Map colors outside of the gamut of the output device to the closest possible match inside the gamut of the output device.
-	NSColorRenderingIntentAbsoluteColorimetric NSColorRenderingIntent = 1
+	ColorRenderingIntentAbsoluteColorimetric ColorRenderingIntent = 1
 	// Map colors outside of the gamut of the output device to the closest possible match inside the gamut of the output device.
-	NSColorRenderingIntentRelativeColorimetric NSColorRenderingIntent = 2
+	ColorRenderingIntentRelativeColorimetric ColorRenderingIntent = 2
 	// Preserve the visual relationship between colors by compressing the gamut of the graphics context to fit inside the gamut of the output device.
-	NSColorRenderingIntentPerceptual NSColorRenderingIntent = 3
+	ColorRenderingIntentPerceptual ColorRenderingIntent = 3
 	// Preserve the relative saturation value of the colors when converting into the gamut of the output device.
-	NSColorRenderingIntentSaturation NSColorRenderingIntent = 4
+	ColorRenderingIntentSaturation ColorRenderingIntent = 4
 )
 
-func (e NSColorRenderingIntent) String() string {
+// String returns the ColorRenderingIntent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorRenderingIntent) String() string {
 	switch e {
-	case NSColorRenderingIntentDefault:
-		return "NSColorRenderingIntentDefault"
-	case NSColorRenderingIntentAbsoluteColorimetric:
-		return "NSColorRenderingIntentAbsoluteColorimetric"
-	case NSColorRenderingIntentRelativeColorimetric:
-		return "NSColorRenderingIntentRelativeColorimetric"
-	case NSColorRenderingIntentPerceptual:
-		return "NSColorRenderingIntentPerceptual"
-	case NSColorRenderingIntentSaturation:
-		return "NSColorRenderingIntentSaturation"
+	case ColorRenderingIntentDefault:
+		return "ColorRenderingIntentDefault"
+	case ColorRenderingIntentAbsoluteColorimetric:
+		return "ColorRenderingIntentAbsoluteColorimetric"
+	case ColorRenderingIntentRelativeColorimetric:
+		return "ColorRenderingIntentRelativeColorimetric"
+	case ColorRenderingIntentPerceptual:
+		return "ColorRenderingIntentPerceptual"
+	case ColorRenderingIntentSaturation:
+		return "ColorRenderingIntentSaturation"
 	default:
-		return fmt.Sprintf("NSColorRenderingIntent(%d)", int64(e))
+		return fmt.Sprintf("ColorRenderingIntent(%d)", int64(e))
 	}
 }
 
 // Constants that describe the abstract model on which color space objects are based.
-type NSColorSpaceModel int64
+type ColorSpaceModel int64
 
 const (
-	NSColorSpaceModelUnknown   NSColorSpaceModel = -1
-	NSColorSpaceModelGray      NSColorSpaceModel = 0
-	NSColorSpaceModelRGB       NSColorSpaceModel = 1
-	NSColorSpaceModelCMYK      NSColorSpaceModel = 2
-	NSColorSpaceModelLAB       NSColorSpaceModel = 3
-	NSColorSpaceModelDeviceN   NSColorSpaceModel = 4
-	NSColorSpaceModelIndexed   NSColorSpaceModel = 5
-	NSColorSpaceModelPatterned NSColorSpaceModel = 6
+	ColorSpaceModelUnknown   ColorSpaceModel = -1
+	ColorSpaceModelGray      ColorSpaceModel = 0
+	ColorSpaceModelRGB       ColorSpaceModel = 1
+	ColorSpaceModelCMYK      ColorSpaceModel = 2
+	ColorSpaceModelLAB       ColorSpaceModel = 3
+	ColorSpaceModelDeviceN   ColorSpaceModel = 4
+	ColorSpaceModelIndexed   ColorSpaceModel = 5
+	ColorSpaceModelPatterned ColorSpaceModel = 6
 )
 
-func (e NSColorSpaceModel) String() string {
+// String returns the ColorSpaceModel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorSpaceModel) String() string {
 	switch e {
-	case NSColorSpaceModelUnknown:
-		return "NSColorSpaceModelUnknown"
-	case NSColorSpaceModelGray:
-		return "NSColorSpaceModelGray"
-	case NSColorSpaceModelRGB:
-		return "NSColorSpaceModelRGB"
-	case NSColorSpaceModelCMYK:
-		return "NSColorSpaceModelCMYK"
-	case NSColorSpaceModelLAB:
-		return "NSColorSpaceModelLAB"
-	case NSColorSpaceModelDeviceN:
-		return "NSColorSpaceModelDeviceN"
-	case NSColorSpaceModelIndexed:
-		return "NSColorSpaceModelIndexed"
-	case NSColorSpaceModelPatterned:
-		return "NSColorSpaceModelPatterned"
+	case ColorSpaceModelUnknown:
+		return "ColorSpaceModelUnknown"
+	case ColorSpaceModelGray:
+		return "ColorSpaceModelGray"
+	case ColorSpaceModelRGB:
+		return "ColorSpaceModelRGB"
+	case ColorSpaceModelCMYK:
+		return "ColorSpaceModelCMYK"
+	case ColorSpaceModelLAB:
+		return "ColorSpaceModelLAB"
+	case ColorSpaceModelDeviceN:
+		return "ColorSpaceModelDeviceN"
+	case ColorSpaceModelIndexed:
+		return "ColorSpaceModelIndexed"
+	case ColorSpaceModelPatterned:
+		return "ColorSpaceModelPatterned"
 	default:
-		return fmt.Sprintf("NSColorSpaceModel(%d)", int64(e))
+		return fmt.Sprintf("ColorSpaceModel(%d)", int64(e))
 	}
 }
 
 // Constants for user interactions that change the appearance of a view or control.
-type NSColorSystemEffect int64
+type ColorSystemEffect int64
 
 const (
-	NSColorSystemEffectNone        NSColorSystemEffect = 0
-	NSColorSystemEffectPressed     NSColorSystemEffect = 1
-	NSColorSystemEffectDeepPressed NSColorSystemEffect = 2
-	NSColorSystemEffectDisabled    NSColorSystemEffect = 3
-	NSColorSystemEffectRollover    NSColorSystemEffect = 4
+	ColorSystemEffectNone        ColorSystemEffect = 0
+	ColorSystemEffectPressed     ColorSystemEffect = 1
+	ColorSystemEffectDeepPressed ColorSystemEffect = 2
+	ColorSystemEffectDisabled    ColorSystemEffect = 3
+	ColorSystemEffectRollover    ColorSystemEffect = 4
 )
 
-func (e NSColorSystemEffect) String() string {
+// String returns the ColorSystemEffect constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorSystemEffect) String() string {
 	switch e {
-	case NSColorSystemEffectNone:
-		return "NSColorSystemEffectNone"
-	case NSColorSystemEffectPressed:
-		return "NSColorSystemEffectPressed"
-	case NSColorSystemEffectDeepPressed:
-		return "NSColorSystemEffectDeepPressed"
-	case NSColorSystemEffectDisabled:
-		return "NSColorSystemEffectDisabled"
-	case NSColorSystemEffectRollover:
-		return "NSColorSystemEffectRollover"
+	case ColorSystemEffectNone:
+		return "ColorSystemEffectNone"
+	case ColorSystemEffectPressed:
+		return "ColorSystemEffectPressed"
+	case ColorSystemEffectDeepPressed:
+		return "ColorSystemEffectDeepPressed"
+	case ColorSystemEffectDisabled:
+		return "ColorSystemEffectDisabled"
+	case ColorSystemEffectRollover:
+		return "ColorSystemEffectRollover"
 	default:
-		return fmt.Sprintf("NSColorSystemEffect(%d)", int64(e))
+		return fmt.Sprintf("ColorSystemEffect(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the color’s type, and which methods may be called on the color object.
-type NSColorType int64
+type ColorType int64
 
 const (
-	NSColorTypeComponentBased NSColorType = 0
-	NSColorTypePattern        NSColorType = 1
-	NSColorTypeCatalog        NSColorType = 2
+	ColorTypeComponentBased ColorType = 0
+	ColorTypePattern        ColorType = 1
+	ColorTypeCatalog        ColorType = 2
 )
 
-func (e NSColorType) String() string {
+// String returns the ColorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorType) String() string {
 	switch e {
-	case NSColorTypeComponentBased:
-		return "NSColorTypeComponentBased"
-	case NSColorTypePattern:
-		return "NSColorTypePattern"
-	case NSColorTypeCatalog:
-		return "NSColorTypeCatalog"
+	case ColorTypeComponentBased:
+		return "ColorTypeComponentBased"
+	case ColorTypePattern:
+		return "ColorTypePattern"
+	case ColorTypeCatalog:
+		return "ColorTypeCatalog"
 	default:
-		return fmt.Sprintf("NSColorType(%d)", int64(e))
+		return fmt.Sprintf("ColorType(%d)", int64(e))
 	}
 }
 
 // Constants that specify the appearance and interaction modes for a color well.
-type NSColorWellStyle int64
+type ColorWellStyle int64
 
 const (
-	NSColorWellStyleDefault  NSColorWellStyle = 0
-	NSColorWellStyleMinimal  NSColorWellStyle = 1
-	NSColorWellStyleExpanded NSColorWellStyle = 2
+	ColorWellStyleDefault  ColorWellStyle = 0
+	ColorWellStyleMinimal  ColorWellStyle = 1
+	ColorWellStyleExpanded ColorWellStyle = 2
 )
 
-func (e NSColorWellStyle) String() string {
+// String returns the ColorWellStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ColorWellStyle) String() string {
 	switch e {
-	case NSColorWellStyleDefault:
-		return "NSColorWellStyleDefault"
-	case NSColorWellStyleMinimal:
-		return "NSColorWellStyleMinimal"
-	case NSColorWellStyleExpanded:
-		return "NSColorWellStyleExpanded"
+	case ColorWellStyleDefault:
+		return "ColorWellStyleDefault"
+	case ColorWellStyleMinimal:
+		return "ColorWellStyleMinimal"
+	case ColorWellStyleExpanded:
+		return "ColorWellStyleExpanded"
 	default:
-		return fmt.Sprintf("NSColorWellStyle(%d)", int64(e))
+		return fmt.Sprintf("ColorWellStyle(%d)", int64(e))
 	}
 }
 
 // Constants that indicate how a combo button presents its menu.
-type NSComboButtonStyle int64
+type ComboButtonStyle int64
 
 const (
 	// The button will be split across 2 segments. The leading segment shows `title`, `image`, or both. If `action` is set, it will be performed when the leading segment is clicked. If `action` is `nil`, the leading segment will be disabled. The trailing segment shows a menu indicator. If `menu` is set, clicking the trailing segment will show it. If `menu` is empty, the trailing segment will be disabled.
-	NSComboButtonStyleSplit NSComboButtonStyle = 0
+	ComboButtonStyleSplit ComboButtonStyle = 0
 	// The button will be unified in a single segment. If `action` is set, `menu` will appear on click and hold. If `action` is `nil`, then `menu` will appear on click.
-	NSComboButtonStyleUnified NSComboButtonStyle = 1
+	ComboButtonStyleUnified ComboButtonStyle = 1
 )
 
-func (e NSComboButtonStyle) String() string {
+// String returns the ComboButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ComboButtonStyle) String() string {
 	switch e {
-	case NSComboButtonStyleSplit:
-		return "NSComboButtonStyleSplit"
-	case NSComboButtonStyleUnified:
-		return "NSComboButtonStyleUnified"
+	case ComboButtonStyleSplit:
+		return "ComboButtonStyleSplit"
+	case ComboButtonStyleUnified:
+		return "ComboButtonStyleUnified"
 	default:
-		return fmt.Sprintf("NSComboButtonStyle(%d)", int64(e))
+		return fmt.Sprintf("ComboButtonStyle(%d)", int64(e))
 	}
 }
 
 // Constants that describe compositing operators in terms of source and destination images, each having an opaque and transparent region.
-type NSCompositingOperation uint64
+type CompositingOperation uint64
 
 const (
 	// Transparency everywhere.
-	NSCompositingOperationClear NSCompositingOperation = 0
+	CompositingOperationClear CompositingOperation = 0
 	// The source image.
-	NSCompositingOperationCopy NSCompositingOperation = 1
+	CompositingOperationCopy CompositingOperation = 1
 	// The source image wherever it is opaque, and the destination image elsewhere.
-	NSCompositingOperationSourceOver NSCompositingOperation = 2
+	CompositingOperationSourceOver CompositingOperation = 2
 	// The source image wherever both images are opaque, and transparent elsewhere.
-	NSCompositingOperationSourceIn NSCompositingOperation = 3
+	CompositingOperationSourceIn CompositingOperation = 3
 	// The source image wherever it is opaque and the destination image is transparent, and transparent elsewhere.
-	NSCompositingOperationSourceOut NSCompositingOperation = 4
+	CompositingOperationSourceOut CompositingOperation = 4
 	// The source image wherever both images are opaque, the destination image wherever it is opaque but the source image is transparent, and transparent elsewhere
-	NSCompositingOperationSourceAtop NSCompositingOperation = 5
+	CompositingOperationSourceAtop CompositingOperation = 5
 	// The destination image wherever it is opaque, and the source image elsewhere.
-	NSCompositingOperationDestinationOver NSCompositingOperation = 6
+	CompositingOperationDestinationOver CompositingOperation = 6
 	// The destination image wherever both images are opaque, and transparent elsewhere.
-	NSCompositingOperationDestinationIn NSCompositingOperation = 7
+	CompositingOperationDestinationIn CompositingOperation = 7
 	// The destination image wherever it is opaque and the source image is transparent, and transparent elsewhere.
-	NSCompositingOperationDestinationOut NSCompositingOperation = 8
+	CompositingOperationDestinationOut CompositingOperation = 8
 	// The destination image wherever both images are opaque, the source image wherever it is opaque and the destination image is transparent, and transparent elsehwere.
-	NSCompositingOperationDestinationAtop NSCompositingOperation = 9
+	CompositingOperationDestinationAtop CompositingOperation = 9
 	// Exclusive OR of the source and destination images.
-	NSCompositingOperationXOR NSCompositingOperation = 10
+	CompositingOperationXOR CompositingOperation = 10
 	// The sum of the source and destination images, with color values approach 0 as a limit.
-	NSCompositingOperationPlusDarker NSCompositingOperation = 11
+	CompositingOperationPlusDarker CompositingOperation = 11
 	// The source image wherever it is opaque, and the destination image elsewhere.
 	//
 	// Deprecated: Use NSCompositingOperationSourceOver instead
-	NSCompositingOperationHighlight NSCompositingOperation = 12
+	CompositingOperationHighlight CompositingOperation = 12
 	// The sum of the source and destination images, with color values approach 1 as a limit.
 	//
 	// Deprecated: Use NSCompositingOperationSourceOver instead
-	NSCompositingOperationPlusLighter NSCompositingOperation = 13
+	CompositingOperationPlusLighter CompositingOperation = 13
 	// The source color is multiplied by the destination color.
-	NSCompositingOperationMultiply NSCompositingOperation = 14
+	CompositingOperationMultiply CompositingOperation = 14
 	// Multiplies the complement of the destination and source color values, and then complements the result.
-	NSCompositingOperationScreen NSCompositingOperation = 15
+	CompositingOperationScreen CompositingOperation = 15
 	// Source colors overlay the destination.
-	NSCompositingOperationOverlay NSCompositingOperation = 16
+	CompositingOperationOverlay CompositingOperation = 16
 	// Use the darker of the source and destination colors.
-	NSCompositingOperationDarken NSCompositingOperation = 17
+	CompositingOperationDarken CompositingOperation = 17
 	// Use the lighter of the source and destination colors.
-	NSCompositingOperationLighten NSCompositingOperation = 18
+	CompositingOperationLighten CompositingOperation = 18
 	// Brightens the destination to reflect the source.
-	NSCompositingOperationColorDodge NSCompositingOperation = 19
+	CompositingOperationColorDodge CompositingOperation = 19
 	// Darkens the destination color to reflect the source.
-	NSCompositingOperationColorBurn NSCompositingOperation = 20
+	CompositingOperationColorBurn CompositingOperation = 20
 	// Darkens or lightens colors, with the effect of shining a diffused spotlight on the destination.
-	NSCompositingOperationSoftLight NSCompositingOperation = 21
+	CompositingOperationSoftLight CompositingOperation = 21
 	// Multiplies or screens colors, with the effect of shining a spotlight on the destination.
-	NSCompositingOperationHardLight NSCompositingOperation = 22
+	CompositingOperationHardLight CompositingOperation = 22
 	// Subtracts the darker value from the lighter value.
-	NSCompositingOperationDifference NSCompositingOperation = 23
+	CompositingOperationDifference CompositingOperation = 23
 	// Subtracts the darker value from the lighter value, except lower in contrast.
-	NSCompositingOperationExclusion NSCompositingOperation = 24
+	CompositingOperationExclusion CompositingOperation = 24
 	// Uses the hue of the source and the saturation and luminosity of the destination.
-	NSCompositingOperationHue NSCompositingOperation = 25
+	CompositingOperationHue CompositingOperation = 25
 	// Uses the saturation value of the source and the hue and luminosity of the destination.
-	NSCompositingOperationSaturation NSCompositingOperation = 26
+	CompositingOperationSaturation CompositingOperation = 26
 	// Uses the hue and saturation of the source and the luminosity of the destination.
-	NSCompositingOperationColor NSCompositingOperation = 27
+	CompositingOperationColor CompositingOperation = 27
 	// Uses the luminosity of the source and the hue and saturation of the destination.
-	NSCompositingOperationLuminosity NSCompositingOperation = 28
+	CompositingOperationLuminosity CompositingOperation = 28
 )
 
-func (e NSCompositingOperation) String() string {
+// String returns the CompositingOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CompositingOperation) String() string {
 	switch e {
-	case NSCompositingOperationClear:
-		return "NSCompositingOperationClear"
-	case NSCompositingOperationCopy:
-		return "NSCompositingOperationCopy"
-	case NSCompositingOperationSourceOver:
-		return "NSCompositingOperationSourceOver"
-	case NSCompositingOperationSourceIn:
-		return "NSCompositingOperationSourceIn"
-	case NSCompositingOperationSourceOut:
-		return "NSCompositingOperationSourceOut"
-	case NSCompositingOperationSourceAtop:
-		return "NSCompositingOperationSourceAtop"
-	case NSCompositingOperationDestinationOver:
-		return "NSCompositingOperationDestinationOver"
-	case NSCompositingOperationDestinationIn:
-		return "NSCompositingOperationDestinationIn"
-	case NSCompositingOperationDestinationOut:
-		return "NSCompositingOperationDestinationOut"
-	case NSCompositingOperationDestinationAtop:
-		return "NSCompositingOperationDestinationAtop"
-	case NSCompositingOperationXOR:
-		return "NSCompositingOperationXOR"
-	case NSCompositingOperationPlusDarker:
-		return "NSCompositingOperationPlusDarker"
-	case NSCompositingOperationHighlight:
-		return "NSCompositingOperationHighlight"
-	case NSCompositingOperationPlusLighter:
-		return "NSCompositingOperationPlusLighter"
-	case NSCompositingOperationMultiply:
-		return "NSCompositingOperationMultiply"
-	case NSCompositingOperationScreen:
-		return "NSCompositingOperationScreen"
-	case NSCompositingOperationOverlay:
-		return "NSCompositingOperationOverlay"
-	case NSCompositingOperationDarken:
-		return "NSCompositingOperationDarken"
-	case NSCompositingOperationLighten:
-		return "NSCompositingOperationLighten"
-	case NSCompositingOperationColorDodge:
-		return "NSCompositingOperationColorDodge"
-	case NSCompositingOperationColorBurn:
-		return "NSCompositingOperationColorBurn"
-	case NSCompositingOperationSoftLight:
-		return "NSCompositingOperationSoftLight"
-	case NSCompositingOperationHardLight:
-		return "NSCompositingOperationHardLight"
-	case NSCompositingOperationDifference:
-		return "NSCompositingOperationDifference"
-	case NSCompositingOperationExclusion:
-		return "NSCompositingOperationExclusion"
-	case NSCompositingOperationHue:
-		return "NSCompositingOperationHue"
-	case NSCompositingOperationSaturation:
-		return "NSCompositingOperationSaturation"
-	case NSCompositingOperationColor:
-		return "NSCompositingOperationColor"
-	case NSCompositingOperationLuminosity:
-		return "NSCompositingOperationLuminosity"
+	case CompositingOperationClear:
+		return "CompositingOperationClear"
+	case CompositingOperationCopy:
+		return "CompositingOperationCopy"
+	case CompositingOperationSourceOver:
+		return "CompositingOperationSourceOver"
+	case CompositingOperationSourceIn:
+		return "CompositingOperationSourceIn"
+	case CompositingOperationSourceOut:
+		return "CompositingOperationSourceOut"
+	case CompositingOperationSourceAtop:
+		return "CompositingOperationSourceAtop"
+	case CompositingOperationDestinationOver:
+		return "CompositingOperationDestinationOver"
+	case CompositingOperationDestinationIn:
+		return "CompositingOperationDestinationIn"
+	case CompositingOperationDestinationOut:
+		return "CompositingOperationDestinationOut"
+	case CompositingOperationDestinationAtop:
+		return "CompositingOperationDestinationAtop"
+	case CompositingOperationXOR:
+		return "CompositingOperationXOR"
+	case CompositingOperationPlusDarker:
+		return "CompositingOperationPlusDarker"
+	case CompositingOperationHighlight:
+		return "CompositingOperationHighlight"
+	case CompositingOperationPlusLighter:
+		return "CompositingOperationPlusLighter"
+	case CompositingOperationMultiply:
+		return "CompositingOperationMultiply"
+	case CompositingOperationScreen:
+		return "CompositingOperationScreen"
+	case CompositingOperationOverlay:
+		return "CompositingOperationOverlay"
+	case CompositingOperationDarken:
+		return "CompositingOperationDarken"
+	case CompositingOperationLighten:
+		return "CompositingOperationLighten"
+	case CompositingOperationColorDodge:
+		return "CompositingOperationColorDodge"
+	case CompositingOperationColorBurn:
+		return "CompositingOperationColorBurn"
+	case CompositingOperationSoftLight:
+		return "CompositingOperationSoftLight"
+	case CompositingOperationHardLight:
+		return "CompositingOperationHardLight"
+	case CompositingOperationDifference:
+		return "CompositingOperationDifference"
+	case CompositingOperationExclusion:
+		return "CompositingOperationExclusion"
+	case CompositingOperationHue:
+		return "CompositingOperationHue"
+	case CompositingOperationSaturation:
+		return "CompositingOperationSaturation"
+	case CompositingOperationColor:
+		return "CompositingOperationColor"
+	case CompositingOperationLuminosity:
+		return "CompositingOperationLuminosity"
 	default:
-		return fmt.Sprintf("NSCompositingOperation(%d)", int64(e))
+		return fmt.Sprintf("CompositingOperation(%d)", int64(e))
 	}
 }
 
-type NSControlBorderShape int64
+type ControlBorderShape int64
 
 const (
 	// The control will resolve this to an appropriate shape for the given control size and context
-	NSControlBorderShapeAutomatic        NSControlBorderShape = 0
-	NSControlBorderShapeCapsule          NSControlBorderShape = 1
-	NSControlBorderShapeRoundedRectangle NSControlBorderShape = 2
-	NSControlBorderShapeCircle           NSControlBorderShape = 3
+	ControlBorderShapeAutomatic        ControlBorderShape = 0
+	ControlBorderShapeCapsule          ControlBorderShape = 1
+	ControlBorderShapeRoundedRectangle ControlBorderShape = 2
+	ControlBorderShapeCircle           ControlBorderShape = 3
 )
 
-func (e NSControlBorderShape) String() string {
+// String returns the ControlBorderShape constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControlBorderShape) String() string {
 	switch e {
-	case NSControlBorderShapeAutomatic:
-		return "NSControlBorderShapeAutomatic"
-	case NSControlBorderShapeCapsule:
-		return "NSControlBorderShapeCapsule"
-	case NSControlBorderShapeRoundedRectangle:
-		return "NSControlBorderShapeRoundedRectangle"
-	case NSControlBorderShapeCircle:
-		return "NSControlBorderShapeCircle"
+	case ControlBorderShapeAutomatic:
+		return "ControlBorderShapeAutomatic"
+	case ControlBorderShapeCapsule:
+		return "ControlBorderShapeCapsule"
+	case ControlBorderShapeRoundedRectangle:
+		return "ControlBorderShapeRoundedRectangle"
+	case ControlBorderShapeCircle:
+		return "ControlBorderShapeCircle"
 	default:
-		return fmt.Sprintf("NSControlBorderShape(%d)", int64(e))
+		return fmt.Sprintf("ControlBorderShape(%d)", int64(e))
 	}
 }
 
 // A constant for specifying a cell’s size.
-type NSControlSize uint64
+type ControlSize uint64
 
 const (
-	NSControlSizeRegular    NSControlSize = 0
-	NSControlSizeSmall      NSControlSize = 1
-	NSControlSizeMini       NSControlSize = 2
-	NSControlSizeLarge      NSControlSize = 3
-	NSControlSizeExtraLarge NSControlSize = 4
+	ControlSizeRegular    ControlSize = 0
+	ControlSizeSmall      ControlSize = 1
+	ControlSizeMini       ControlSize = 2
+	ControlSizeLarge      ControlSize = 3
+	ControlSizeExtraLarge ControlSize = 4
 )
 
-func (e NSControlSize) String() string {
+// String returns the ControlSize constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControlSize) String() string {
 	switch e {
-	case NSControlSizeRegular:
-		return "NSControlSizeRegular"
-	case NSControlSizeSmall:
-		return "NSControlSizeSmall"
-	case NSControlSizeMini:
-		return "NSControlSizeMini"
-	case NSControlSizeLarge:
-		return "NSControlSizeLarge"
-	case NSControlSizeExtraLarge:
-		return "NSControlSizeExtraLarge"
+	case ControlSizeRegular:
+		return "ControlSizeRegular"
+	case ControlSizeSmall:
+		return "ControlSizeSmall"
+	case ControlSizeMini:
+		return "ControlSizeMini"
+	case ControlSizeLarge:
+		return "ControlSizeLarge"
+	case ControlSizeExtraLarge:
+		return "ControlSizeExtraLarge"
 	default:
-		return fmt.Sprintf("NSControlSize(%d)", int64(e))
+		return fmt.Sprintf("ControlSize(%d)", int64(e))
 	}
 }
 
 // Constants for specifying a cell’s tint color.
-type NSControlTint uint64
+type ControlTint uint64
 
 const (
 	// The current default tint setting.
-	NSDefaultControlTint NSControlTint = 0
+	DefaultControlTint ControlTint = 0
 	// Aqua control tint.
-	NSBlueControlTint NSControlTint = 1
+	BlueControlTint ControlTint = 1
 	// Graphite control tint.
-	NSGraphiteControlTint NSControlTint = 6
+	GraphiteControlTint ControlTint = 6
 	// Clear control tint.
-	NSClearControlTint NSControlTint = 7
+	ClearControlTint ControlTint = 7
 )
 
-func (e NSControlTint) String() string {
+// String returns the ControlTint constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControlTint) String() string {
 	switch e {
-	case NSDefaultControlTint:
-		return "NSDefaultControlTint"
-	case NSBlueControlTint:
-		return "NSBlueControlTint"
-	case NSGraphiteControlTint:
-		return "NSGraphiteControlTint"
-	case NSClearControlTint:
-		return "NSClearControlTint"
+	case DefaultControlTint:
+		return "DefaultControlTint"
+	case BlueControlTint:
+		return "BlueControlTint"
+	case GraphiteControlTint:
+		return "GraphiteControlTint"
+	case ClearControlTint:
+		return "ClearControlTint"
 	default:
-		return fmt.Sprintf("NSControlTint(%d)", int64(e))
+		return fmt.Sprintf("ControlTint(%d)", int64(e))
 	}
 }
 
 // Constants that allow an app to specify the correction indicator type displayed.
-type NSCorrectionIndicatorType int64
+type CorrectionIndicatorType int64
 
 const (
-	NSCorrectionIndicatorTypeDefault   NSCorrectionIndicatorType = 0
-	NSCorrectionIndicatorTypeReversion NSCorrectionIndicatorType = 1
-	NSCorrectionIndicatorTypeGuesses   NSCorrectionIndicatorType = 2
+	CorrectionIndicatorTypeDefault   CorrectionIndicatorType = 0
+	CorrectionIndicatorTypeReversion CorrectionIndicatorType = 1
+	CorrectionIndicatorTypeGuesses   CorrectionIndicatorType = 2
 )
 
-func (e NSCorrectionIndicatorType) String() string {
+// String returns the CorrectionIndicatorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CorrectionIndicatorType) String() string {
 	switch e {
-	case NSCorrectionIndicatorTypeDefault:
-		return "NSCorrectionIndicatorTypeDefault"
-	case NSCorrectionIndicatorTypeReversion:
-		return "NSCorrectionIndicatorTypeReversion"
-	case NSCorrectionIndicatorTypeGuesses:
-		return "NSCorrectionIndicatorTypeGuesses"
+	case CorrectionIndicatorTypeDefault:
+		return "CorrectionIndicatorTypeDefault"
+	case CorrectionIndicatorTypeReversion:
+		return "CorrectionIndicatorTypeReversion"
+	case CorrectionIndicatorTypeGuesses:
+		return "CorrectionIndicatorTypeGuesses"
 	default:
-		return fmt.Sprintf("NSCorrectionIndicatorType(%d)", int64(e))
+		return fmt.Sprintf("CorrectionIndicatorType(%d)", int64(e))
 	}
 }
 
-type NSCorrectionResponse int64
+type CorrectionResponse int64
 
 const (
-	NSCorrectionResponseNone     NSCorrectionResponse = 0
-	NSCorrectionResponseAccepted NSCorrectionResponse = 1
-	NSCorrectionResponseRejected NSCorrectionResponse = 2
-	NSCorrectionResponseIgnored  NSCorrectionResponse = 3
-	NSCorrectionResponseEdited   NSCorrectionResponse = 4
-	NSCorrectionResponseReverted NSCorrectionResponse = 5
+	CorrectionResponseNone     CorrectionResponse = 0
+	CorrectionResponseAccepted CorrectionResponse = 1
+	CorrectionResponseRejected CorrectionResponse = 2
+	CorrectionResponseIgnored  CorrectionResponse = 3
+	CorrectionResponseEdited   CorrectionResponse = 4
+	CorrectionResponseReverted CorrectionResponse = 5
 )
 
-func (e NSCorrectionResponse) String() string {
+// String returns the CorrectionResponse constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CorrectionResponse) String() string {
 	switch e {
-	case NSCorrectionResponseNone:
-		return "NSCorrectionResponseNone"
-	case NSCorrectionResponseAccepted:
-		return "NSCorrectionResponseAccepted"
-	case NSCorrectionResponseRejected:
-		return "NSCorrectionResponseRejected"
-	case NSCorrectionResponseIgnored:
-		return "NSCorrectionResponseIgnored"
-	case NSCorrectionResponseEdited:
-		return "NSCorrectionResponseEdited"
-	case NSCorrectionResponseReverted:
-		return "NSCorrectionResponseReverted"
+	case CorrectionResponseNone:
+		return "CorrectionResponseNone"
+	case CorrectionResponseAccepted:
+		return "CorrectionResponseAccepted"
+	case CorrectionResponseRejected:
+		return "CorrectionResponseRejected"
+	case CorrectionResponseIgnored:
+		return "CorrectionResponseIgnored"
+	case CorrectionResponseEdited:
+		return "CorrectionResponseEdited"
+	case CorrectionResponseReverted:
+		return "CorrectionResponseReverted"
 	default:
-		return fmt.Sprintf("NSCorrectionResponse(%d)", int64(e))
+		return fmt.Sprintf("CorrectionResponse(%d)", int64(e))
 	}
 }
 
 // The directions in which a rectangular frame can be resized.
 // Bitmask — values may be combined with |.
-type NSCursorFrameResizeDirections uint64
+type CursorFrameResizeDirections uint64
 
 const (
 	// Indicates that the shape can be resized inwards to be smaller.
-	NSCursorFrameResizeDirectionsInward NSCursorFrameResizeDirections = 1
+	CursorFrameResizeDirectionsInward CursorFrameResizeDirections = 1
 	// Indicates that the shape can be resized outwards to be larger.
-	NSCursorFrameResizeDirectionsOutward NSCursorFrameResizeDirections = 2
+	CursorFrameResizeDirectionsOutward CursorFrameResizeDirections = 2
 	// Indicates that the shape can be resized inwards or wards to be either smaller or larger, respectively.
-	NSCursorFrameResizeDirectionsAll NSCursorFrameResizeDirections = 3
+	CursorFrameResizeDirectionsAll CursorFrameResizeDirections = 3
 )
 
-func (e NSCursorFrameResizeDirections) String() string {
+// String returns the CursorFrameResizeDirections constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CursorFrameResizeDirections) String() string {
 	var parts []string
-	if e&NSCursorFrameResizeDirectionsInward != 0 {
-		parts = append(parts, "NSCursorFrameResizeDirectionsInward")
+	if e&CursorFrameResizeDirectionsInward != 0 {
+		parts = append(parts, "CursorFrameResizeDirectionsInward")
 	}
-	if e&NSCursorFrameResizeDirectionsOutward != 0 {
-		parts = append(parts, "NSCursorFrameResizeDirectionsOutward")
+	if e&CursorFrameResizeDirectionsOutward != 0 {
+		parts = append(parts, "CursorFrameResizeDirectionsOutward")
 	}
-	if e&NSCursorFrameResizeDirectionsAll != 0 {
-		parts = append(parts, "NSCursorFrameResizeDirectionsAll")
+	if e&CursorFrameResizeDirectionsAll != 0 {
+		parts = append(parts, "CursorFrameResizeDirectionsAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1737,82 +1835,86 @@ func (e NSCursorFrameResizeDirections) String() string {
 }
 
 // The position along the perimeter of a rectangular frame (its edges and corners) from which it’s resized.
-type NSCursorFrameResizePosition uint64
+type CursorFrameResizePosition uint64
 
 const (
 	// The top edge of the frame.
-	NSCursorFrameResizePositionTop NSCursorFrameResizePosition = 1
+	CursorFrameResizePositionTop CursorFrameResizePosition = 1
 	// The left edge of the frame.
-	NSCursorFrameResizePositionLeft NSCursorFrameResizePosition = 2
+	CursorFrameResizePositionLeft CursorFrameResizePosition = 2
 	// The bottom edge of the frame.
-	NSCursorFrameResizePositionBottom NSCursorFrameResizePosition = 4
+	CursorFrameResizePositionBottom CursorFrameResizePosition = 4
 	// The right edge of the frame.
-	NSCursorFrameResizePositionRight NSCursorFrameResizePosition = 8
+	CursorFrameResizePositionRight CursorFrameResizePosition = 8
 	// The top left corner of the frame.
-	NSCursorFrameResizePositionTopLeft NSCursorFrameResizePosition = 3
+	CursorFrameResizePositionTopLeft CursorFrameResizePosition = 3
 	// The top right corner of the frame.
-	NSCursorFrameResizePositionTopRight NSCursorFrameResizePosition = 9
+	CursorFrameResizePositionTopRight CursorFrameResizePosition = 9
 	// The bottom left corner of the frame.
-	NSCursorFrameResizePositionBottomLeft NSCursorFrameResizePosition = 6
+	CursorFrameResizePositionBottomLeft CursorFrameResizePosition = 6
 	// The bottom right corner of the frame.
-	NSCursorFrameResizePositionBottomRight NSCursorFrameResizePosition = 12
+	CursorFrameResizePositionBottomRight CursorFrameResizePosition = 12
 )
 
-func (e NSCursorFrameResizePosition) String() string {
+// String returns the CursorFrameResizePosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CursorFrameResizePosition) String() string {
 	switch e {
-	case NSCursorFrameResizePositionTop:
-		return "NSCursorFrameResizePositionTop"
-	case NSCursorFrameResizePositionLeft:
-		return "NSCursorFrameResizePositionLeft"
-	case NSCursorFrameResizePositionBottom:
-		return "NSCursorFrameResizePositionBottom"
-	case NSCursorFrameResizePositionRight:
-		return "NSCursorFrameResizePositionRight"
-	case NSCursorFrameResizePositionTopLeft:
-		return "NSCursorFrameResizePositionTopLeft"
-	case NSCursorFrameResizePositionTopRight:
-		return "NSCursorFrameResizePositionTopRight"
-	case NSCursorFrameResizePositionBottomLeft:
-		return "NSCursorFrameResizePositionBottomLeft"
-	case NSCursorFrameResizePositionBottomRight:
-		return "NSCursorFrameResizePositionBottomRight"
+	case CursorFrameResizePositionTop:
+		return "CursorFrameResizePositionTop"
+	case CursorFrameResizePositionLeft:
+		return "CursorFrameResizePositionLeft"
+	case CursorFrameResizePositionBottom:
+		return "CursorFrameResizePositionBottom"
+	case CursorFrameResizePositionRight:
+		return "CursorFrameResizePositionRight"
+	case CursorFrameResizePositionTopLeft:
+		return "CursorFrameResizePositionTopLeft"
+	case CursorFrameResizePositionTopRight:
+		return "CursorFrameResizePositionTopRight"
+	case CursorFrameResizePositionBottomLeft:
+		return "CursorFrameResizePositionBottomLeft"
+	case CursorFrameResizePositionBottomRight:
+		return "CursorFrameResizePositionBottomRight"
 	default:
-		return fmt.Sprintf("NSCursorFrameResizePosition(%d)", int64(e))
+		return fmt.Sprintf("CursorFrameResizePosition(%d)", int64(e))
 	}
 }
 
 // Constants that specify the date and time elements displayed by the picker.
 // Bitmask — values may be combined with |.
-type NSDatePickerElementFlags uint64
+type DatePickerElementFlags uint64
 
 const (
-	NSDatePickerElementFlagHourMinute       NSDatePickerElementFlags = 12
-	NSDatePickerElementFlagHourMinuteSecond NSDatePickerElementFlags = 14
-	NSDatePickerElementFlagTimeZone         NSDatePickerElementFlags = 16
-	NSDatePickerElementFlagYearMonth        NSDatePickerElementFlags = 192
-	NSDatePickerElementFlagYearMonthDay     NSDatePickerElementFlags = 224
-	NSDatePickerElementFlagEra              NSDatePickerElementFlags = 256
+	DatePickerElementFlagHourMinute       DatePickerElementFlags = 12
+	DatePickerElementFlagHourMinuteSecond DatePickerElementFlags = 14
+	DatePickerElementFlagTimeZone         DatePickerElementFlags = 16
+	DatePickerElementFlagYearMonth        DatePickerElementFlags = 192
+	DatePickerElementFlagYearMonthDay     DatePickerElementFlags = 224
+	DatePickerElementFlagEra              DatePickerElementFlags = 256
 )
 
-func (e NSDatePickerElementFlags) String() string {
+// String returns the DatePickerElementFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DatePickerElementFlags) String() string {
 	var parts []string
-	if e&NSDatePickerElementFlagHourMinute != 0 {
-		parts = append(parts, "NSDatePickerElementFlagHourMinute")
+	if e&DatePickerElementFlagHourMinute != 0 {
+		parts = append(parts, "DatePickerElementFlagHourMinute")
 	}
-	if e&NSDatePickerElementFlagHourMinuteSecond != 0 {
-		parts = append(parts, "NSDatePickerElementFlagHourMinuteSecond")
+	if e&DatePickerElementFlagHourMinuteSecond != 0 {
+		parts = append(parts, "DatePickerElementFlagHourMinuteSecond")
 	}
-	if e&NSDatePickerElementFlagTimeZone != 0 {
-		parts = append(parts, "NSDatePickerElementFlagTimeZone")
+	if e&DatePickerElementFlagTimeZone != 0 {
+		parts = append(parts, "DatePickerElementFlagTimeZone")
 	}
-	if e&NSDatePickerElementFlagYearMonth != 0 {
-		parts = append(parts, "NSDatePickerElementFlagYearMonth")
+	if e&DatePickerElementFlagYearMonth != 0 {
+		parts = append(parts, "DatePickerElementFlagYearMonth")
 	}
-	if e&NSDatePickerElementFlagYearMonthDay != 0 {
-		parts = append(parts, "NSDatePickerElementFlagYearMonthDay")
+	if e&DatePickerElementFlagYearMonthDay != 0 {
+		parts = append(parts, "DatePickerElementFlagYearMonthDay")
 	}
-	if e&NSDatePickerElementFlagEra != 0 {
-		parts = append(parts, "NSDatePickerElementFlagEra")
+	if e&DatePickerElementFlagEra != 0 {
+		parts = append(parts, "DatePickerElementFlagEra")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1821,74 +1923,80 @@ func (e NSDatePickerElementFlags) String() string {
 }
 
 // Constants that define whether the picker provides a single date, or a range of dates.
-type NSDatePickerMode uint64
+type DatePickerMode uint64
 
 const (
-	NSDatePickerModeSingle NSDatePickerMode = 0
-	NSDatePickerModeRange  NSDatePickerMode = 1
+	DatePickerModeSingle DatePickerMode = 0
+	DatePickerModeRange  DatePickerMode = 1
 )
 
-func (e NSDatePickerMode) String() string {
+// String returns the DatePickerMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DatePickerMode) String() string {
 	switch e {
-	case NSDatePickerModeSingle:
-		return "NSDatePickerModeSingle"
-	case NSDatePickerModeRange:
-		return "NSDatePickerModeRange"
+	case DatePickerModeSingle:
+		return "DatePickerModeSingle"
+	case DatePickerModeRange:
+		return "DatePickerModeRange"
 	default:
-		return fmt.Sprintf("NSDatePickerMode(%d)", int64(e))
+		return fmt.Sprintf("DatePickerMode(%d)", int64(e))
 	}
 }
 
 // Constants that define the visual appearance of the date picker cell.
-type NSDatePickerStyle uint64
+type DatePickerStyle uint64
 
 const (
-	NSDatePickerStyleTextFieldAndStepper NSDatePickerStyle = 0
-	NSDatePickerStyleClockAndCalendar    NSDatePickerStyle = 1
-	NSDatePickerStyleTextField           NSDatePickerStyle = 2
+	DatePickerStyleTextFieldAndStepper DatePickerStyle = 0
+	DatePickerStyleClockAndCalendar    DatePickerStyle = 1
+	DatePickerStyleTextField           DatePickerStyle = 2
 )
 
-func (e NSDatePickerStyle) String() string {
+// String returns the DatePickerStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DatePickerStyle) String() string {
 	switch e {
-	case NSDatePickerStyleTextFieldAndStepper:
-		return "NSDatePickerStyleTextFieldAndStepper"
-	case NSDatePickerStyleClockAndCalendar:
-		return "NSDatePickerStyleClockAndCalendar"
-	case NSDatePickerStyleTextField:
-		return "NSDatePickerStyleTextField"
+	case DatePickerStyleTextFieldAndStepper:
+		return "DatePickerStyleTextFieldAndStepper"
+	case DatePickerStyleClockAndCalendar:
+		return "DatePickerStyleClockAndCalendar"
+	case DatePickerStyleTextField:
+		return "DatePickerStyleTextField"
 	default:
-		return fmt.Sprintf("NSDatePickerStyle(%d)", int64(e))
+		return fmt.Sprintf("DatePickerStyle(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSDirectionalRectEdge uint64
+type DirectionalRectEdge uint64
 
 const (
-	NSDirectionalRectEdgeNone     NSDirectionalRectEdge = 0
-	NSDirectionalRectEdgeTop      NSDirectionalRectEdge = 1
-	NSDirectionalRectEdgeLeading  NSDirectionalRectEdge = 2
-	NSDirectionalRectEdgeBottom   NSDirectionalRectEdge = 4
-	NSDirectionalRectEdgeTrailing NSDirectionalRectEdge = 8
-	NSDirectionalRectEdgeAll      NSDirectionalRectEdge = 15
+	DirectionalRectEdgeNone     DirectionalRectEdge = 0
+	DirectionalRectEdgeTop      DirectionalRectEdge = 1
+	DirectionalRectEdgeLeading  DirectionalRectEdge = 2
+	DirectionalRectEdgeBottom   DirectionalRectEdge = 4
+	DirectionalRectEdgeTrailing DirectionalRectEdge = 8
+	DirectionalRectEdgeAll      DirectionalRectEdge = 15
 )
 
-func (e NSDirectionalRectEdge) String() string {
+// String returns the DirectionalRectEdge constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DirectionalRectEdge) String() string {
 	var parts []string
-	if e&NSDirectionalRectEdgeTop != 0 {
-		parts = append(parts, "NSDirectionalRectEdgeTop")
+	if e&DirectionalRectEdgeTop != 0 {
+		parts = append(parts, "DirectionalRectEdgeTop")
 	}
-	if e&NSDirectionalRectEdgeLeading != 0 {
-		parts = append(parts, "NSDirectionalRectEdgeLeading")
+	if e&DirectionalRectEdgeLeading != 0 {
+		parts = append(parts, "DirectionalRectEdgeLeading")
 	}
-	if e&NSDirectionalRectEdgeBottom != 0 {
-		parts = append(parts, "NSDirectionalRectEdgeBottom")
+	if e&DirectionalRectEdgeBottom != 0 {
+		parts = append(parts, "DirectionalRectEdgeBottom")
 	}
-	if e&NSDirectionalRectEdgeTrailing != 0 {
-		parts = append(parts, "NSDirectionalRectEdgeTrailing")
+	if e&DirectionalRectEdgeTrailing != 0 {
+		parts = append(parts, "DirectionalRectEdgeTrailing")
 	}
-	if e&NSDirectionalRectEdgeAll != 0 {
-		parts = append(parts, "NSDirectionalRectEdgeAll")
+	if e&DirectionalRectEdgeAll != 0 {
+		parts = append(parts, "DirectionalRectEdgeAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1896,117 +2004,123 @@ func (e NSDirectionalRectEdge) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSDisplayGamut int64
+type DisplayGamut int64
 
 const (
-	NSDisplayGamutSRGB NSDisplayGamut = 1
-	NSDisplayGamutP3   NSDisplayGamut = 2
+	DisplayGamutSRGB DisplayGamut = 1
+	DisplayGamutP3   DisplayGamut = 2
 )
 
-func (e NSDisplayGamut) String() string {
+// String returns the DisplayGamut constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DisplayGamut) String() string {
 	switch e {
-	case NSDisplayGamutSRGB:
-		return "NSDisplayGamutSRGB"
-	case NSDisplayGamutP3:
-		return "NSDisplayGamutP3"
+	case DisplayGamutSRGB:
+		return "DisplayGamutSRGB"
+	case DisplayGamutP3:
+		return "DisplayGamutP3"
 	default:
-		return fmt.Sprintf("NSDisplayGamut(%d)", int64(e))
+		return fmt.Sprintf("DisplayGamut(%d)", int64(e))
 	}
 }
 
 // Values that indicate a document’s edit status.
-type NSDocumentChangeType uint64
+type DocumentChangeType uint64
 
 const (
-	NSChangeDone              NSDocumentChangeType = 0
-	NSChangeUndone            NSDocumentChangeType = 1
-	NSChangeRedone            NSDocumentChangeType = 5
-	NSChangeCleared           NSDocumentChangeType = 2
-	NSChangeReadOtherContents NSDocumentChangeType = 3
-	NSChangeAutosaved         NSDocumentChangeType = 4
-	NSChangeDiscardable       NSDocumentChangeType = 256
+	ChangeDone              DocumentChangeType = 0
+	ChangeUndone            DocumentChangeType = 1
+	ChangeRedone            DocumentChangeType = 5
+	ChangeCleared           DocumentChangeType = 2
+	ChangeReadOtherContents DocumentChangeType = 3
+	ChangeAutosaved         DocumentChangeType = 4
+	ChangeDiscardable       DocumentChangeType = 256
 )
 
-func (e NSDocumentChangeType) String() string {
+// String returns the DocumentChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DocumentChangeType) String() string {
 	switch e {
-	case NSChangeDone:
-		return "NSChangeDone"
-	case NSChangeUndone:
-		return "NSChangeUndone"
-	case NSChangeRedone:
-		return "NSChangeRedone"
-	case NSChangeCleared:
-		return "NSChangeCleared"
-	case NSChangeReadOtherContents:
-		return "NSChangeReadOtherContents"
-	case NSChangeAutosaved:
-		return "NSChangeAutosaved"
-	case NSChangeDiscardable:
-		return "NSChangeDiscardable"
+	case ChangeDone:
+		return "ChangeDone"
+	case ChangeUndone:
+		return "ChangeUndone"
+	case ChangeRedone:
+		return "ChangeRedone"
+	case ChangeCleared:
+		return "ChangeCleared"
+	case ChangeReadOtherContents:
+		return "ChangeReadOtherContents"
+	case ChangeAutosaved:
+		return "ChangeAutosaved"
+	case ChangeDiscardable:
+		return "ChangeDiscardable"
 	default:
-		return fmt.Sprintf("NSDocumentChangeType(%d)", int64(e))
+		return fmt.Sprintf("DocumentChangeType(%d)", int64(e))
 	}
 }
 
 // A group of constants that represent which operations the dragging source can perform on dragging items.
 // Bitmask — values may be combined with |.
-type NSDragOperation uint64
+type DragOperation uint64
 
 const (
 	// A constant that indicates that the drag cannot perform any operations.
-	NSDragOperationNone NSDragOperation = 0
+	DragOperationNone DragOperation = 0
 	// A constant that indicates the drag can copy the data that the image represents.
-	NSDragOperationCopy NSDragOperation = 1
+	DragOperationCopy DragOperation = 1
 	// A constant that indicates the drag can share the data.
-	NSDragOperationLink NSDragOperation = 2
+	DragOperationLink DragOperation = 2
 	// A constant that indicates the destination can define the drag operation.
-	NSDragOperationGeneric NSDragOperation = 4
+	DragOperationGeneric DragOperation = 4
 	// A constant that indicates the source and destination negotiate the drag operation privately.
-	NSDragOperationPrivate NSDragOperation = 8
+	DragOperationPrivate DragOperation = 8
 	// A constant that indicates the drag can move the data.
-	NSDragOperationMove NSDragOperation = 16
+	DragOperationMove DragOperation = 16
 	// A constant that indicates the drag can delete the data.
-	NSDragOperationDelete NSDragOperation = 32
+	DragOperationDelete DragOperation = 32
 	// A constant that indicates that drag can perform all of the drag operations.
-	NSDragOperationEvery NSDragOperation = 18446744073709551615
+	DragOperationEvery DragOperation = 18446744073709551615
 	// The NSDragOperationAll constant is deprecated. Use NSDragOperationEvery instead.
 	//
 	// Deprecated: since macOS 10.10.
-	NSDragOperationAll_Obsolete NSDragOperation = 15
+	DragOperationAll_Obsolete DragOperation = 15
 	// Use NSDragOperationEvery instead.
 	//
 	// Deprecated: since macOS 10.10.
-	NSDragOperationAll NSDragOperation = 15
+	DragOperationAll DragOperation = 15
 )
 
-func (e NSDragOperation) String() string {
+// String returns the DragOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DragOperation) String() string {
 	var parts []string
-	if e&NSDragOperationCopy != 0 {
-		parts = append(parts, "NSDragOperationCopy")
+	if e&DragOperationCopy != 0 {
+		parts = append(parts, "DragOperationCopy")
 	}
-	if e&NSDragOperationLink != 0 {
-		parts = append(parts, "NSDragOperationLink")
+	if e&DragOperationLink != 0 {
+		parts = append(parts, "DragOperationLink")
 	}
-	if e&NSDragOperationGeneric != 0 {
-		parts = append(parts, "NSDragOperationGeneric")
+	if e&DragOperationGeneric != 0 {
+		parts = append(parts, "DragOperationGeneric")
 	}
-	if e&NSDragOperationPrivate != 0 {
-		parts = append(parts, "NSDragOperationPrivate")
+	if e&DragOperationPrivate != 0 {
+		parts = append(parts, "DragOperationPrivate")
 	}
-	if e&NSDragOperationMove != 0 {
-		parts = append(parts, "NSDragOperationMove")
+	if e&DragOperationMove != 0 {
+		parts = append(parts, "DragOperationMove")
 	}
-	if e&NSDragOperationDelete != 0 {
-		parts = append(parts, "NSDragOperationDelete")
+	if e&DragOperationDelete != 0 {
+		parts = append(parts, "DragOperationDelete")
 	}
-	if e&NSDragOperationEvery != 0 {
-		parts = append(parts, "NSDragOperationEvery")
+	if e&DragOperationEvery != 0 {
+		parts = append(parts, "DragOperationEvery")
 	}
-	if e&NSDragOperationAll_Obsolete != 0 {
-		parts = append(parts, "NSDragOperationAll_Obsolete")
+	if e&DragOperationAll_Obsolete != 0 {
+		parts = append(parts, "DragOperationAll_Obsolete")
 	}
-	if e&NSDragOperationAll != 0 {
-		parts = append(parts, "NSDragOperationAll")
+	if e&DragOperationAll != 0 {
+		parts = append(parts, "DragOperationAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2015,58 +2129,62 @@ func (e NSDragOperation) String() string {
 }
 
 // Constants that control the visual format of multiple dragging items.
-type NSDraggingFormation int64
+type DraggingFormation int64
 
 const (
 	// A constant that represents the system determined formation.
 	//
 	// Deprecated: since macOS 10.10.
-	NSDraggingFormationDefault NSDraggingFormation = 0
+	DraggingFormationDefault DraggingFormation = 0
 	// A constant that represents no custom formation, so drag images maintain their set positions relative to each other.
-	NSDraggingFormationNone NSDraggingFormation = 1
+	DraggingFormationNone DraggingFormation = 1
 	// A constant that represents a pile formation, so drag images display on top of each other with random rotations.
-	NSDraggingFormationPile NSDraggingFormation = 2
+	DraggingFormationPile DraggingFormation = 2
 	// A constant that represents a list formation, so drag images display vertically, non-overlapping with the left edges aligned.
-	NSDraggingFormationList NSDraggingFormation = 3
+	DraggingFormationList DraggingFormation = 3
 	// A constant that represents a stack formation, so drag images display overlapping diagonally.
-	NSDraggingFormationStack NSDraggingFormation = 4
+	DraggingFormationStack DraggingFormation = 4
 )
 
-func (e NSDraggingFormation) String() string {
+// String returns the DraggingFormation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DraggingFormation) String() string {
 	switch e {
-	case NSDraggingFormationDefault:
-		return "NSDraggingFormationDefault"
-	case NSDraggingFormationNone:
-		return "NSDraggingFormationNone"
-	case NSDraggingFormationPile:
-		return "NSDraggingFormationPile"
-	case NSDraggingFormationList:
-		return "NSDraggingFormationList"
-	case NSDraggingFormationStack:
-		return "NSDraggingFormationStack"
+	case DraggingFormationDefault:
+		return "DraggingFormationDefault"
+	case DraggingFormationNone:
+		return "DraggingFormationNone"
+	case DraggingFormationPile:
+		return "DraggingFormationPile"
+	case DraggingFormationList:
+		return "DraggingFormationList"
+	case DraggingFormationStack:
+		return "DraggingFormationStack"
 	default:
-		return fmt.Sprintf("NSDraggingFormation(%d)", int64(e))
+		return fmt.Sprintf("DraggingFormation(%d)", int64(e))
 	}
 }
 
 // A group of constants that specify options to use when enumerating dragging items.
 // Bitmask — values may be combined with |.
-type NSDraggingItemEnumerationOptions uint64
+type DraggingItemEnumerationOptions uint64
 
 const (
 	// A constant that indicates the enumeration processes dragging items concurrently.
-	NSDraggingItemEnumerationConcurrent NSDraggingItemEnumerationOptions = 1
+	DraggingItemEnumerationConcurrent DraggingItemEnumerationOptions = 1
 	// A constant that indicates the enumeration clears the image components provider for all dragging items that don’t meet the classes and search options criteria.
-	NSDraggingItemEnumerationClearNonenumeratedImages NSDraggingItemEnumerationOptions = 65536
+	DraggingItemEnumerationClearNonenumeratedImages DraggingItemEnumerationOptions = 65536
 )
 
-func (e NSDraggingItemEnumerationOptions) String() string {
+// String returns the DraggingItemEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DraggingItemEnumerationOptions) String() string {
 	var parts []string
-	if e&NSDraggingItemEnumerationConcurrent != 0 {
-		parts = append(parts, "NSDraggingItemEnumerationConcurrent")
+	if e&DraggingItemEnumerationConcurrent != 0 {
+		parts = append(parts, "DraggingItemEnumerationConcurrent")
 	}
-	if e&NSDraggingItemEnumerationClearNonenumeratedImages != 0 {
-		parts = append(parts, "NSDraggingItemEnumerationClearNonenumeratedImages")
+	if e&DraggingItemEnumerationClearNonenumeratedImages != 0 {
+		parts = append(parts, "DraggingItemEnumerationClearNonenumeratedImages")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2078,25 +2196,27 @@ func (e NSDraggingItemEnumerationOptions) String() string {
 //
 // Deprecated: since macOS 10.12.
 // Bitmask — values may be combined with |.
-type NSEventButtonMask uint64
+type EventButtonMask uint64
 
 const (
 	// Deprecated: since macOS 10.12.
-	NSEventButtonMaskPenTip       NSEventButtonMask = 1
-	NSEventButtonMaskPenLowerSide NSEventButtonMask = 2
-	NSEventButtonMaskPenUpperSide NSEventButtonMask = 4
+	EventButtonMaskPenTip       EventButtonMask = 1
+	EventButtonMaskPenLowerSide EventButtonMask = 2
+	EventButtonMaskPenUpperSide EventButtonMask = 4
 )
 
-func (e NSEventButtonMask) String() string {
+// String returns the EventButtonMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventButtonMask) String() string {
 	var parts []string
-	if e&NSEventButtonMaskPenTip != 0 {
-		parts = append(parts, "NSEventButtonMaskPenTip")
+	if e&EventButtonMaskPenTip != 0 {
+		parts = append(parts, "EventButtonMaskPenTip")
 	}
-	if e&NSEventButtonMaskPenLowerSide != 0 {
-		parts = append(parts, "NSEventButtonMaskPenLowerSide")
+	if e&EventButtonMaskPenLowerSide != 0 {
+		parts = append(parts, "EventButtonMaskPenLowerSide")
 	}
-	if e&NSEventButtonMaskPenUpperSide != 0 {
-		parts = append(parts, "NSEventButtonMaskPenUpperSide")
+	if e&EventButtonMaskPenUpperSide != 0 {
+		parts = append(parts, "EventButtonMaskPenUpperSide")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2105,24 +2225,26 @@ func (e NSEventButtonMask) String() string {
 }
 
 // Constants that specify the direction of travel for a gesture.
-type NSEventGestureAxis int64
+type EventGestureAxis int64
 
 const (
-	NSEventGestureAxisNone       NSEventGestureAxis = 0
-	NSEventGestureAxisHorizontal NSEventGestureAxis = 1
-	NSEventGestureAxisVertical   NSEventGestureAxis = 2
+	EventGestureAxisNone       EventGestureAxis = 0
+	EventGestureAxisHorizontal EventGestureAxis = 1
+	EventGestureAxisVertical   EventGestureAxis = 2
 )
 
-func (e NSEventGestureAxis) String() string {
+// String returns the EventGestureAxis constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventGestureAxis) String() string {
 	switch e {
-	case NSEventGestureAxisNone:
-		return "NSEventGestureAxisNone"
-	case NSEventGestureAxisHorizontal:
-		return "NSEventGestureAxisHorizontal"
-	case NSEventGestureAxisVertical:
-		return "NSEventGestureAxisVertical"
+	case EventGestureAxisNone:
+		return "EventGestureAxisNone"
+	case EventGestureAxisHorizontal:
+		return "EventGestureAxisHorizontal"
+	case EventGestureAxisVertical:
+		return "EventGestureAxisVertical"
 	default:
-		return fmt.Sprintf("NSEventGestureAxis(%d)", int64(e))
+		return fmt.Sprintf("EventGestureAxis(%d)", int64(e))
 	}
 }
 
@@ -2130,152 +2252,154 @@ func (e NSEventGestureAxis) String() string {
 //
 // Deprecated: since macOS 10.12.
 // Bitmask — values may be combined with |.
-type NSEventMask uint64
+type EventMask uint64
 
 const (
-	NSEventMaskLeftMouseDown      NSEventMask = 2
-	NSEventMaskLeftMouseUp        NSEventMask = 4
-	NSEventMaskRightMouseDown     NSEventMask = 8
-	NSEventMaskRightMouseUp       NSEventMask = 16
-	NSEventMaskMouseMoved         NSEventMask = 32
-	NSEventMaskLeftMouseDragged   NSEventMask = 64
-	NSEventMaskRightMouseDragged  NSEventMask = 128
-	NSEventMaskMouseEntered       NSEventMask = 256
-	NSEventMaskMouseExited        NSEventMask = 512
-	NSEventMaskKeyDown            NSEventMask = 1024
-	NSEventMaskKeyUp              NSEventMask = 2048
-	NSEventMaskFlagsChanged       NSEventMask = 4096
-	NSEventMaskAppKitDefined      NSEventMask = 8192
-	NSEventMaskSystemDefined      NSEventMask = 16384
-	NSEventMaskApplicationDefined NSEventMask = 32768
-	NSEventMaskPeriodic           NSEventMask = 65536
-	NSEventMaskCursorUpdate       NSEventMask = 131072
-	NSEventMaskScrollWheel        NSEventMask = 4194304
-	NSEventMaskTabletPoint        NSEventMask = 8388608
-	NSEventMaskTabletProximity    NSEventMask = 16777216
-	NSEventMaskOtherMouseDown     NSEventMask = 33554432
-	NSEventMaskOtherMouseUp       NSEventMask = 67108864
-	NSEventMaskOtherMouseDragged  NSEventMask = 134217728
-	NSEventMaskGesture            NSEventMask = 536870912
-	NSEventMaskMagnify            NSEventMask = 1073741824
-	NSEventMaskSwipe              NSEventMask = 2147483648
-	NSEventMaskRotate             NSEventMask = 262144
-	NSEventMaskBeginGesture       NSEventMask = 524288
-	NSEventMaskEndGesture         NSEventMask = 1048576
-	NSEventMaskSmartMagnify       NSEventMask = 4294967296
-	NSEventMaskPressure           NSEventMask = 17179869184
-	NSEventMaskDirectTouch        NSEventMask = 137438953472
-	NSEventMaskChangeMode         NSEventMask = 274877906944
-	NSEventMaskMouseCancelled     NSEventMask = 1099511627776
-	NSEventMaskAny                NSEventMask = 18446744073709551615
+	EventMaskLeftMouseDown      EventMask = 2
+	EventMaskLeftMouseUp        EventMask = 4
+	EventMaskRightMouseDown     EventMask = 8
+	EventMaskRightMouseUp       EventMask = 16
+	EventMaskMouseMoved         EventMask = 32
+	EventMaskLeftMouseDragged   EventMask = 64
+	EventMaskRightMouseDragged  EventMask = 128
+	EventMaskMouseEntered       EventMask = 256
+	EventMaskMouseExited        EventMask = 512
+	EventMaskKeyDown            EventMask = 1024
+	EventMaskKeyUp              EventMask = 2048
+	EventMaskFlagsChanged       EventMask = 4096
+	EventMaskAppKitDefined      EventMask = 8192
+	EventMaskSystemDefined      EventMask = 16384
+	EventMaskApplicationDefined EventMask = 32768
+	EventMaskPeriodic           EventMask = 65536
+	EventMaskCursorUpdate       EventMask = 131072
+	EventMaskScrollWheel        EventMask = 4194304
+	EventMaskTabletPoint        EventMask = 8388608
+	EventMaskTabletProximity    EventMask = 16777216
+	EventMaskOtherMouseDown     EventMask = 33554432
+	EventMaskOtherMouseUp       EventMask = 67108864
+	EventMaskOtherMouseDragged  EventMask = 134217728
+	EventMaskGesture            EventMask = 536870912
+	EventMaskMagnify            EventMask = 1073741824
+	EventMaskSwipe              EventMask = 2147483648
+	EventMaskRotate             EventMask = 262144
+	EventMaskBeginGesture       EventMask = 524288
+	EventMaskEndGesture         EventMask = 1048576
+	EventMaskSmartMagnify       EventMask = 4294967296
+	EventMaskPressure           EventMask = 17179869184
+	EventMaskDirectTouch        EventMask = 137438953472
+	EventMaskChangeMode         EventMask = 274877906944
+	EventMaskMouseCancelled     EventMask = 1099511627776
+	EventMaskAny                EventMask = 18446744073709551615
 )
 
-func (e NSEventMask) String() string {
+// String returns the EventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventMask) String() string {
 	var parts []string
-	if e&NSEventMaskLeftMouseDown != 0 {
-		parts = append(parts, "NSEventMaskLeftMouseDown")
+	if e&EventMaskLeftMouseDown != 0 {
+		parts = append(parts, "EventMaskLeftMouseDown")
 	}
-	if e&NSEventMaskLeftMouseUp != 0 {
-		parts = append(parts, "NSEventMaskLeftMouseUp")
+	if e&EventMaskLeftMouseUp != 0 {
+		parts = append(parts, "EventMaskLeftMouseUp")
 	}
-	if e&NSEventMaskRightMouseDown != 0 {
-		parts = append(parts, "NSEventMaskRightMouseDown")
+	if e&EventMaskRightMouseDown != 0 {
+		parts = append(parts, "EventMaskRightMouseDown")
 	}
-	if e&NSEventMaskRightMouseUp != 0 {
-		parts = append(parts, "NSEventMaskRightMouseUp")
+	if e&EventMaskRightMouseUp != 0 {
+		parts = append(parts, "EventMaskRightMouseUp")
 	}
-	if e&NSEventMaskMouseMoved != 0 {
-		parts = append(parts, "NSEventMaskMouseMoved")
+	if e&EventMaskMouseMoved != 0 {
+		parts = append(parts, "EventMaskMouseMoved")
 	}
-	if e&NSEventMaskLeftMouseDragged != 0 {
-		parts = append(parts, "NSEventMaskLeftMouseDragged")
+	if e&EventMaskLeftMouseDragged != 0 {
+		parts = append(parts, "EventMaskLeftMouseDragged")
 	}
-	if e&NSEventMaskRightMouseDragged != 0 {
-		parts = append(parts, "NSEventMaskRightMouseDragged")
+	if e&EventMaskRightMouseDragged != 0 {
+		parts = append(parts, "EventMaskRightMouseDragged")
 	}
-	if e&NSEventMaskMouseEntered != 0 {
-		parts = append(parts, "NSEventMaskMouseEntered")
+	if e&EventMaskMouseEntered != 0 {
+		parts = append(parts, "EventMaskMouseEntered")
 	}
-	if e&NSEventMaskMouseExited != 0 {
-		parts = append(parts, "NSEventMaskMouseExited")
+	if e&EventMaskMouseExited != 0 {
+		parts = append(parts, "EventMaskMouseExited")
 	}
-	if e&NSEventMaskKeyDown != 0 {
-		parts = append(parts, "NSEventMaskKeyDown")
+	if e&EventMaskKeyDown != 0 {
+		parts = append(parts, "EventMaskKeyDown")
 	}
-	if e&NSEventMaskKeyUp != 0 {
-		parts = append(parts, "NSEventMaskKeyUp")
+	if e&EventMaskKeyUp != 0 {
+		parts = append(parts, "EventMaskKeyUp")
 	}
-	if e&NSEventMaskFlagsChanged != 0 {
-		parts = append(parts, "NSEventMaskFlagsChanged")
+	if e&EventMaskFlagsChanged != 0 {
+		parts = append(parts, "EventMaskFlagsChanged")
 	}
-	if e&NSEventMaskAppKitDefined != 0 {
-		parts = append(parts, "NSEventMaskAppKitDefined")
+	if e&EventMaskAppKitDefined != 0 {
+		parts = append(parts, "EventMaskAppKitDefined")
 	}
-	if e&NSEventMaskSystemDefined != 0 {
-		parts = append(parts, "NSEventMaskSystemDefined")
+	if e&EventMaskSystemDefined != 0 {
+		parts = append(parts, "EventMaskSystemDefined")
 	}
-	if e&NSEventMaskApplicationDefined != 0 {
-		parts = append(parts, "NSEventMaskApplicationDefined")
+	if e&EventMaskApplicationDefined != 0 {
+		parts = append(parts, "EventMaskApplicationDefined")
 	}
-	if e&NSEventMaskPeriodic != 0 {
-		parts = append(parts, "NSEventMaskPeriodic")
+	if e&EventMaskPeriodic != 0 {
+		parts = append(parts, "EventMaskPeriodic")
 	}
-	if e&NSEventMaskCursorUpdate != 0 {
-		parts = append(parts, "NSEventMaskCursorUpdate")
+	if e&EventMaskCursorUpdate != 0 {
+		parts = append(parts, "EventMaskCursorUpdate")
 	}
-	if e&NSEventMaskScrollWheel != 0 {
-		parts = append(parts, "NSEventMaskScrollWheel")
+	if e&EventMaskScrollWheel != 0 {
+		parts = append(parts, "EventMaskScrollWheel")
 	}
-	if e&NSEventMaskTabletPoint != 0 {
-		parts = append(parts, "NSEventMaskTabletPoint")
+	if e&EventMaskTabletPoint != 0 {
+		parts = append(parts, "EventMaskTabletPoint")
 	}
-	if e&NSEventMaskTabletProximity != 0 {
-		parts = append(parts, "NSEventMaskTabletProximity")
+	if e&EventMaskTabletProximity != 0 {
+		parts = append(parts, "EventMaskTabletProximity")
 	}
-	if e&NSEventMaskOtherMouseDown != 0 {
-		parts = append(parts, "NSEventMaskOtherMouseDown")
+	if e&EventMaskOtherMouseDown != 0 {
+		parts = append(parts, "EventMaskOtherMouseDown")
 	}
-	if e&NSEventMaskOtherMouseUp != 0 {
-		parts = append(parts, "NSEventMaskOtherMouseUp")
+	if e&EventMaskOtherMouseUp != 0 {
+		parts = append(parts, "EventMaskOtherMouseUp")
 	}
-	if e&NSEventMaskOtherMouseDragged != 0 {
-		parts = append(parts, "NSEventMaskOtherMouseDragged")
+	if e&EventMaskOtherMouseDragged != 0 {
+		parts = append(parts, "EventMaskOtherMouseDragged")
 	}
-	if e&NSEventMaskGesture != 0 {
-		parts = append(parts, "NSEventMaskGesture")
+	if e&EventMaskGesture != 0 {
+		parts = append(parts, "EventMaskGesture")
 	}
-	if e&NSEventMaskMagnify != 0 {
-		parts = append(parts, "NSEventMaskMagnify")
+	if e&EventMaskMagnify != 0 {
+		parts = append(parts, "EventMaskMagnify")
 	}
-	if e&NSEventMaskSwipe != 0 {
-		parts = append(parts, "NSEventMaskSwipe")
+	if e&EventMaskSwipe != 0 {
+		parts = append(parts, "EventMaskSwipe")
 	}
-	if e&NSEventMaskRotate != 0 {
-		parts = append(parts, "NSEventMaskRotate")
+	if e&EventMaskRotate != 0 {
+		parts = append(parts, "EventMaskRotate")
 	}
-	if e&NSEventMaskBeginGesture != 0 {
-		parts = append(parts, "NSEventMaskBeginGesture")
+	if e&EventMaskBeginGesture != 0 {
+		parts = append(parts, "EventMaskBeginGesture")
 	}
-	if e&NSEventMaskEndGesture != 0 {
-		parts = append(parts, "NSEventMaskEndGesture")
+	if e&EventMaskEndGesture != 0 {
+		parts = append(parts, "EventMaskEndGesture")
 	}
-	if e&NSEventMaskSmartMagnify != 0 {
-		parts = append(parts, "NSEventMaskSmartMagnify")
+	if e&EventMaskSmartMagnify != 0 {
+		parts = append(parts, "EventMaskSmartMagnify")
 	}
-	if e&NSEventMaskPressure != 0 {
-		parts = append(parts, "NSEventMaskPressure")
+	if e&EventMaskPressure != 0 {
+		parts = append(parts, "EventMaskPressure")
 	}
-	if e&NSEventMaskDirectTouch != 0 {
-		parts = append(parts, "NSEventMaskDirectTouch")
+	if e&EventMaskDirectTouch != 0 {
+		parts = append(parts, "EventMaskDirectTouch")
 	}
-	if e&NSEventMaskChangeMode != 0 {
-		parts = append(parts, "NSEventMaskChangeMode")
+	if e&EventMaskChangeMode != 0 {
+		parts = append(parts, "EventMaskChangeMode")
 	}
-	if e&NSEventMaskMouseCancelled != 0 {
-		parts = append(parts, "NSEventMaskMouseCancelled")
+	if e&EventMaskMouseCancelled != 0 {
+		parts = append(parts, "EventMaskMouseCancelled")
 	}
-	if e&NSEventMaskAny != 0 {
-		parts = append(parts, "NSEventMaskAny")
+	if e&EventMaskAny != 0 {
+		parts = append(parts, "EventMaskAny")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2285,48 +2409,50 @@ func (e NSEventMask) String() string {
 
 // Flags that represent key states in an event object.
 // Bitmask — values may be combined with |.
-type NSEventModifierFlags uint64
+type EventModifierFlags uint64
 
 const (
-	NSEventModifierFlagCapsLock                   NSEventModifierFlags = 65536
-	NSEventModifierFlagShift                      NSEventModifierFlags = 131072
-	NSEventModifierFlagControl                    NSEventModifierFlags = 262144
-	NSEventModifierFlagOption                     NSEventModifierFlags = 524288
-	NSEventModifierFlagCommand                    NSEventModifierFlags = 1048576
-	NSEventModifierFlagNumericPad                 NSEventModifierFlags = 2097152
-	NSEventModifierFlagHelp                       NSEventModifierFlags = 4194304
-	NSEventModifierFlagFunction                   NSEventModifierFlags = 8388608
-	NSEventModifierFlagDeviceIndependentFlagsMask NSEventModifierFlags = 4294901760
+	EventModifierFlagCapsLock                   EventModifierFlags = 65536
+	EventModifierFlagShift                      EventModifierFlags = 131072
+	EventModifierFlagControl                    EventModifierFlags = 262144
+	EventModifierFlagOption                     EventModifierFlags = 524288
+	EventModifierFlagCommand                    EventModifierFlags = 1048576
+	EventModifierFlagNumericPad                 EventModifierFlags = 2097152
+	EventModifierFlagHelp                       EventModifierFlags = 4194304
+	EventModifierFlagFunction                   EventModifierFlags = 8388608
+	EventModifierFlagDeviceIndependentFlagsMask EventModifierFlags = 4294901760
 )
 
-func (e NSEventModifierFlags) String() string {
+// String returns the EventModifierFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventModifierFlags) String() string {
 	var parts []string
-	if e&NSEventModifierFlagCapsLock != 0 {
-		parts = append(parts, "NSEventModifierFlagCapsLock")
+	if e&EventModifierFlagCapsLock != 0 {
+		parts = append(parts, "EventModifierFlagCapsLock")
 	}
-	if e&NSEventModifierFlagShift != 0 {
-		parts = append(parts, "NSEventModifierFlagShift")
+	if e&EventModifierFlagShift != 0 {
+		parts = append(parts, "EventModifierFlagShift")
 	}
-	if e&NSEventModifierFlagControl != 0 {
-		parts = append(parts, "NSEventModifierFlagControl")
+	if e&EventModifierFlagControl != 0 {
+		parts = append(parts, "EventModifierFlagControl")
 	}
-	if e&NSEventModifierFlagOption != 0 {
-		parts = append(parts, "NSEventModifierFlagOption")
+	if e&EventModifierFlagOption != 0 {
+		parts = append(parts, "EventModifierFlagOption")
 	}
-	if e&NSEventModifierFlagCommand != 0 {
-		parts = append(parts, "NSEventModifierFlagCommand")
+	if e&EventModifierFlagCommand != 0 {
+		parts = append(parts, "EventModifierFlagCommand")
 	}
-	if e&NSEventModifierFlagNumericPad != 0 {
-		parts = append(parts, "NSEventModifierFlagNumericPad")
+	if e&EventModifierFlagNumericPad != 0 {
+		parts = append(parts, "EventModifierFlagNumericPad")
 	}
-	if e&NSEventModifierFlagHelp != 0 {
-		parts = append(parts, "NSEventModifierFlagHelp")
+	if e&EventModifierFlagHelp != 0 {
+		parts = append(parts, "EventModifierFlagHelp")
 	}
-	if e&NSEventModifierFlagFunction != 0 {
-		parts = append(parts, "NSEventModifierFlagFunction")
+	if e&EventModifierFlagFunction != 0 {
+		parts = append(parts, "EventModifierFlagFunction")
 	}
-	if e&NSEventModifierFlagDeviceIndependentFlagsMask != 0 {
-		parts = append(parts, "NSEventModifierFlagDeviceIndependentFlagsMask")
+	if e&EventModifierFlagDeviceIndependentFlagsMask != 0 {
+		parts = append(parts, "EventModifierFlagDeviceIndependentFlagsMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2336,41 +2462,43 @@ func (e NSEventModifierFlags) String() string {
 
 // Constants that represent the possible phases during an event phase.
 // Bitmask — values may be combined with |.
-type NSEventPhase uint64
+type EventPhase uint64
 
 const (
 	// The event is not associated with a phase.
 	//
 	// Deprecated: since macOS 10.12.
-	NSEventPhaseNone NSEventPhase = 0
+	EventPhaseNone EventPhase = 0
 	// Deprecated: since macOS 10.12.
-	NSEventPhaseBegan      NSEventPhase = 1
-	NSEventPhaseStationary NSEventPhase = 2
-	NSEventPhaseChanged    NSEventPhase = 4
-	NSEventPhaseEnded      NSEventPhase = 8
-	NSEventPhaseCancelled  NSEventPhase = 16
-	NSEventPhaseMayBegin   NSEventPhase = 32
+	EventPhaseBegan      EventPhase = 1
+	EventPhaseStationary EventPhase = 2
+	EventPhaseChanged    EventPhase = 4
+	EventPhaseEnded      EventPhase = 8
+	EventPhaseCancelled  EventPhase = 16
+	EventPhaseMayBegin   EventPhase = 32
 )
 
-func (e NSEventPhase) String() string {
+// String returns the EventPhase constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventPhase) String() string {
 	var parts []string
-	if e&NSEventPhaseBegan != 0 {
-		parts = append(parts, "NSEventPhaseBegan")
+	if e&EventPhaseBegan != 0 {
+		parts = append(parts, "EventPhaseBegan")
 	}
-	if e&NSEventPhaseStationary != 0 {
-		parts = append(parts, "NSEventPhaseStationary")
+	if e&EventPhaseStationary != 0 {
+		parts = append(parts, "EventPhaseStationary")
 	}
-	if e&NSEventPhaseChanged != 0 {
-		parts = append(parts, "NSEventPhaseChanged")
+	if e&EventPhaseChanged != 0 {
+		parts = append(parts, "EventPhaseChanged")
 	}
-	if e&NSEventPhaseEnded != 0 {
-		parts = append(parts, "NSEventPhaseEnded")
+	if e&EventPhaseEnded != 0 {
+		parts = append(parts, "EventPhaseEnded")
 	}
-	if e&NSEventPhaseCancelled != 0 {
-		parts = append(parts, "NSEventPhaseCancelled")
+	if e&EventPhaseCancelled != 0 {
+		parts = append(parts, "EventPhaseCancelled")
 	}
-	if e&NSEventPhaseMayBegin != 0 {
-		parts = append(parts, "NSEventPhaseMayBegin")
+	if e&EventPhaseMayBegin != 0 {
+		parts = append(parts, "EventPhaseMayBegin")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2379,56 +2507,60 @@ func (e NSEventPhase) String() string {
 }
 
 // Subtypes for various types of events.
-type NSEventSubtype int16
+type EventSubtype int16
 
 const (
-	NSEventSubtypeWindowExposed          NSEventSubtype = 0
-	NSEventSubtypeApplicationActivated   NSEventSubtype = 1
-	NSEventSubtypeApplicationDeactivated NSEventSubtype = 2
-	NSEventSubtypeWindowMoved            NSEventSubtype = 4
-	NSEventSubtypeScreenChanged          NSEventSubtype = 8
-	NSEventSubtypePowerOff               NSEventSubtype = 1
-	NSEventSubtypeMouseEvent             NSEventSubtype = 0
-	NSEventSubtypeTabletPoint            NSEventSubtype = 1
-	NSEventSubtypeTabletProximity        NSEventSubtype = 2
-	NSEventSubtypeTouch                  NSEventSubtype = 3
+	EventSubtypeWindowExposed          EventSubtype = 0
+	EventSubtypeApplicationActivated   EventSubtype = 1
+	EventSubtypeApplicationDeactivated EventSubtype = 2
+	EventSubtypeWindowMoved            EventSubtype = 4
+	EventSubtypeScreenChanged          EventSubtype = 8
+	EventSubtypePowerOff               EventSubtype = 1
+	EventSubtypeMouseEvent             EventSubtype = 0
+	EventSubtypeTabletPoint            EventSubtype = 1
+	EventSubtypeTabletProximity        EventSubtype = 2
+	EventSubtypeTouch                  EventSubtype = 3
 )
 
-func (e NSEventSubtype) String() string {
+// String returns the EventSubtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventSubtype) String() string {
 	switch e {
-	case NSEventSubtypeWindowExposed:
-		return "NSEventSubtypeWindowExposed"
-	case NSEventSubtypeApplicationActivated:
-		return "NSEventSubtypeApplicationActivated"
-	case NSEventSubtypeApplicationDeactivated:
-		return "NSEventSubtypeApplicationDeactivated"
-	case NSEventSubtypeWindowMoved:
-		return "NSEventSubtypeWindowMoved"
-	case NSEventSubtypeScreenChanged:
-		return "NSEventSubtypeScreenChanged"
-	case NSEventSubtypeTouch:
-		return "NSEventSubtypeTouch"
+	case EventSubtypeWindowExposed:
+		return "EventSubtypeWindowExposed"
+	case EventSubtypeApplicationActivated:
+		return "EventSubtypeApplicationActivated"
+	case EventSubtypeApplicationDeactivated:
+		return "EventSubtypeApplicationDeactivated"
+	case EventSubtypeWindowMoved:
+		return "EventSubtypeWindowMoved"
+	case EventSubtypeScreenChanged:
+		return "EventSubtypeScreenChanged"
+	case EventSubtypeTouch:
+		return "EventSubtypeTouch"
 	default:
-		return fmt.Sprintf("NSEventSubtype(%d)", int64(e))
+		return fmt.Sprintf("EventSubtype(%d)", int64(e))
 	}
 }
 
 // Constants that specify swipe-tracking options.
 // Bitmask — values may be combined with |.
-type NSEventSwipeTrackingOptions uint64
+type EventSwipeTrackingOptions uint64
 
 const (
-	NSEventSwipeTrackingLockDirection      NSEventSwipeTrackingOptions = 1
-	NSEventSwipeTrackingClampGestureAmount NSEventSwipeTrackingOptions = 2
+	EventSwipeTrackingLockDirection      EventSwipeTrackingOptions = 1
+	EventSwipeTrackingClampGestureAmount EventSwipeTrackingOptions = 2
 )
 
-func (e NSEventSwipeTrackingOptions) String() string {
+// String returns the EventSwipeTrackingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventSwipeTrackingOptions) String() string {
 	var parts []string
-	if e&NSEventSwipeTrackingLockDirection != 0 {
-		parts = append(parts, "NSEventSwipeTrackingLockDirection")
+	if e&EventSwipeTrackingLockDirection != 0 {
+		parts = append(parts, "EventSwipeTrackingLockDirection")
 	}
-	if e&NSEventSwipeTrackingClampGestureAmount != 0 {
-		parts = append(parts, "NSEventSwipeTrackingClampGestureAmount")
+	if e&EventSwipeTrackingClampGestureAmount != 0 {
+		parts = append(parts, "EventSwipeTrackingClampGestureAmount")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2437,229 +2569,239 @@ func (e NSEventSwipeTrackingOptions) String() string {
 }
 
 // Constants for the types of events that responder objects can handle.
-type NSEventType uint64
+type EventType uint64
 
 const (
-	NSEventTypeLeftMouseDown      NSEventType = 1
-	NSEventTypeLeftMouseUp        NSEventType = 2
-	NSEventTypeRightMouseDown     NSEventType = 3
-	NSEventTypeRightMouseUp       NSEventType = 4
-	NSEventTypeMouseMoved         NSEventType = 5
-	NSEventTypeLeftMouseDragged   NSEventType = 6
-	NSEventTypeRightMouseDragged  NSEventType = 7
-	NSEventTypeMouseEntered       NSEventType = 8
-	NSEventTypeMouseExited        NSEventType = 9
-	NSEventTypeKeyDown            NSEventType = 10
-	NSEventTypeKeyUp              NSEventType = 11
-	NSEventTypeFlagsChanged       NSEventType = 12
-	NSEventTypeAppKitDefined      NSEventType = 13
-	NSEventTypeSystemDefined      NSEventType = 14
-	NSEventTypeApplicationDefined NSEventType = 15
-	NSEventTypePeriodic           NSEventType = 16
-	NSEventTypeCursorUpdate       NSEventType = 17
-	NSEventTypeScrollWheel        NSEventType = 22
-	NSEventTypeTabletPoint        NSEventType = 23
-	NSEventTypeTabletProximity    NSEventType = 24
-	NSEventTypeOtherMouseDown     NSEventType = 25
-	NSEventTypeOtherMouseUp       NSEventType = 26
-	NSEventTypeOtherMouseDragged  NSEventType = 27
-	NSEventTypeGesture            NSEventType = 29
-	NSEventTypeMagnify            NSEventType = 30
-	NSEventTypeSwipe              NSEventType = 31
-	NSEventTypeRotate             NSEventType = 18
-	NSEventTypeBeginGesture       NSEventType = 19
-	NSEventTypeEndGesture         NSEventType = 20
-	NSEventTypeSmartMagnify       NSEventType = 32
-	NSEventTypeQuickLook          NSEventType = 33
-	NSEventTypePressure           NSEventType = 34
-	NSEventTypeDirectTouch        NSEventType = 37
-	NSEventTypeChangeMode         NSEventType = 38
-	NSEventTypeMouseCancelled     NSEventType = 40
+	EventTypeLeftMouseDown      EventType = 1
+	EventTypeLeftMouseUp        EventType = 2
+	EventTypeRightMouseDown     EventType = 3
+	EventTypeRightMouseUp       EventType = 4
+	EventTypeMouseMoved         EventType = 5
+	EventTypeLeftMouseDragged   EventType = 6
+	EventTypeRightMouseDragged  EventType = 7
+	EventTypeMouseEntered       EventType = 8
+	EventTypeMouseExited        EventType = 9
+	EventTypeKeyDown            EventType = 10
+	EventTypeKeyUp              EventType = 11
+	EventTypeFlagsChanged       EventType = 12
+	EventTypeAppKitDefined      EventType = 13
+	EventTypeSystemDefined      EventType = 14
+	EventTypeApplicationDefined EventType = 15
+	EventTypePeriodic           EventType = 16
+	EventTypeCursorUpdate       EventType = 17
+	EventTypeScrollWheel        EventType = 22
+	EventTypeTabletPoint        EventType = 23
+	EventTypeTabletProximity    EventType = 24
+	EventTypeOtherMouseDown     EventType = 25
+	EventTypeOtherMouseUp       EventType = 26
+	EventTypeOtherMouseDragged  EventType = 27
+	EventTypeGesture            EventType = 29
+	EventTypeMagnify            EventType = 30
+	EventTypeSwipe              EventType = 31
+	EventTypeRotate             EventType = 18
+	EventTypeBeginGesture       EventType = 19
+	EventTypeEndGesture         EventType = 20
+	EventTypeSmartMagnify       EventType = 32
+	EventTypeQuickLook          EventType = 33
+	EventTypePressure           EventType = 34
+	EventTypeDirectTouch        EventType = 37
+	EventTypeChangeMode         EventType = 38
+	EventTypeMouseCancelled     EventType = 40
 )
 
-func (e NSEventType) String() string {
+// String returns the EventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EventType) String() string {
 	switch e {
-	case NSEventTypeLeftMouseDown:
-		return "NSEventTypeLeftMouseDown"
-	case NSEventTypeLeftMouseUp:
-		return "NSEventTypeLeftMouseUp"
-	case NSEventTypeRightMouseDown:
-		return "NSEventTypeRightMouseDown"
-	case NSEventTypeRightMouseUp:
-		return "NSEventTypeRightMouseUp"
-	case NSEventTypeMouseMoved:
-		return "NSEventTypeMouseMoved"
-	case NSEventTypeLeftMouseDragged:
-		return "NSEventTypeLeftMouseDragged"
-	case NSEventTypeRightMouseDragged:
-		return "NSEventTypeRightMouseDragged"
-	case NSEventTypeMouseEntered:
-		return "NSEventTypeMouseEntered"
-	case NSEventTypeMouseExited:
-		return "NSEventTypeMouseExited"
-	case NSEventTypeKeyDown:
-		return "NSEventTypeKeyDown"
-	case NSEventTypeKeyUp:
-		return "NSEventTypeKeyUp"
-	case NSEventTypeFlagsChanged:
-		return "NSEventTypeFlagsChanged"
-	case NSEventTypeAppKitDefined:
-		return "NSEventTypeAppKitDefined"
-	case NSEventTypeSystemDefined:
-		return "NSEventTypeSystemDefined"
-	case NSEventTypeApplicationDefined:
-		return "NSEventTypeApplicationDefined"
-	case NSEventTypePeriodic:
-		return "NSEventTypePeriodic"
-	case NSEventTypeCursorUpdate:
-		return "NSEventTypeCursorUpdate"
-	case NSEventTypeScrollWheel:
-		return "NSEventTypeScrollWheel"
-	case NSEventTypeTabletPoint:
-		return "NSEventTypeTabletPoint"
-	case NSEventTypeTabletProximity:
-		return "NSEventTypeTabletProximity"
-	case NSEventTypeOtherMouseDown:
-		return "NSEventTypeOtherMouseDown"
-	case NSEventTypeOtherMouseUp:
-		return "NSEventTypeOtherMouseUp"
-	case NSEventTypeOtherMouseDragged:
-		return "NSEventTypeOtherMouseDragged"
-	case NSEventTypeGesture:
-		return "NSEventTypeGesture"
-	case NSEventTypeMagnify:
-		return "NSEventTypeMagnify"
-	case NSEventTypeSwipe:
-		return "NSEventTypeSwipe"
-	case NSEventTypeRotate:
-		return "NSEventTypeRotate"
-	case NSEventTypeBeginGesture:
-		return "NSEventTypeBeginGesture"
-	case NSEventTypeEndGesture:
-		return "NSEventTypeEndGesture"
-	case NSEventTypeSmartMagnify:
-		return "NSEventTypeSmartMagnify"
-	case NSEventTypeQuickLook:
-		return "NSEventTypeQuickLook"
-	case NSEventTypePressure:
-		return "NSEventTypePressure"
-	case NSEventTypeDirectTouch:
-		return "NSEventTypeDirectTouch"
-	case NSEventTypeChangeMode:
-		return "NSEventTypeChangeMode"
-	case NSEventTypeMouseCancelled:
-		return "NSEventTypeMouseCancelled"
+	case EventTypeLeftMouseDown:
+		return "EventTypeLeftMouseDown"
+	case EventTypeLeftMouseUp:
+		return "EventTypeLeftMouseUp"
+	case EventTypeRightMouseDown:
+		return "EventTypeRightMouseDown"
+	case EventTypeRightMouseUp:
+		return "EventTypeRightMouseUp"
+	case EventTypeMouseMoved:
+		return "EventTypeMouseMoved"
+	case EventTypeLeftMouseDragged:
+		return "EventTypeLeftMouseDragged"
+	case EventTypeRightMouseDragged:
+		return "EventTypeRightMouseDragged"
+	case EventTypeMouseEntered:
+		return "EventTypeMouseEntered"
+	case EventTypeMouseExited:
+		return "EventTypeMouseExited"
+	case EventTypeKeyDown:
+		return "EventTypeKeyDown"
+	case EventTypeKeyUp:
+		return "EventTypeKeyUp"
+	case EventTypeFlagsChanged:
+		return "EventTypeFlagsChanged"
+	case EventTypeAppKitDefined:
+		return "EventTypeAppKitDefined"
+	case EventTypeSystemDefined:
+		return "EventTypeSystemDefined"
+	case EventTypeApplicationDefined:
+		return "EventTypeApplicationDefined"
+	case EventTypePeriodic:
+		return "EventTypePeriodic"
+	case EventTypeCursorUpdate:
+		return "EventTypeCursorUpdate"
+	case EventTypeScrollWheel:
+		return "EventTypeScrollWheel"
+	case EventTypeTabletPoint:
+		return "EventTypeTabletPoint"
+	case EventTypeTabletProximity:
+		return "EventTypeTabletProximity"
+	case EventTypeOtherMouseDown:
+		return "EventTypeOtherMouseDown"
+	case EventTypeOtherMouseUp:
+		return "EventTypeOtherMouseUp"
+	case EventTypeOtherMouseDragged:
+		return "EventTypeOtherMouseDragged"
+	case EventTypeGesture:
+		return "EventTypeGesture"
+	case EventTypeMagnify:
+		return "EventTypeMagnify"
+	case EventTypeSwipe:
+		return "EventTypeSwipe"
+	case EventTypeRotate:
+		return "EventTypeRotate"
+	case EventTypeBeginGesture:
+		return "EventTypeBeginGesture"
+	case EventTypeEndGesture:
+		return "EventTypeEndGesture"
+	case EventTypeSmartMagnify:
+		return "EventTypeSmartMagnify"
+	case EventTypeQuickLook:
+		return "EventTypeQuickLook"
+	case EventTypePressure:
+		return "EventTypePressure"
+	case EventTypeDirectTouch:
+		return "EventTypeDirectTouch"
+	case EventTypeChangeMode:
+		return "EventTypeChangeMode"
+	case EventTypeMouseCancelled:
+		return "EventTypeMouseCancelled"
 	default:
-		return fmt.Sprintf("NSEventType(%d)", int64(e))
+		return fmt.Sprintf("EventType(%d)", int64(e))
 	}
 }
 
 // Constants that indicate how the system draws the focus ring.
-type NSFocusRingPlacement uint64
+type FocusRingPlacement uint64
 
 const (
 	// Draw the focus ring if you don’t have an image or text.
-	NSFocusRingOnly NSFocusRingPlacement = 0
+	FocusRingOnly FocusRingPlacement = 0
 	// Draw the focus ring under text.
-	NSFocusRingBelow NSFocusRingPlacement = 1
+	FocusRingBelow FocusRingPlacement = 1
 	// Draw the focus ring over an image.
-	NSFocusRingAbove NSFocusRingPlacement = 2
+	FocusRingAbove FocusRingPlacement = 2
 )
 
-func (e NSFocusRingPlacement) String() string {
+// String returns the FocusRingPlacement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FocusRingPlacement) String() string {
 	switch e {
-	case NSFocusRingOnly:
-		return "NSFocusRingOnly"
-	case NSFocusRingBelow:
-		return "NSFocusRingBelow"
-	case NSFocusRingAbove:
-		return "NSFocusRingAbove"
+	case FocusRingOnly:
+		return "FocusRingOnly"
+	case FocusRingBelow:
+		return "FocusRingBelow"
+	case FocusRingAbove:
+		return "FocusRingAbove"
 	default:
-		return fmt.Sprintf("NSFocusRingPlacement(%d)", int64(e))
+		return fmt.Sprintf("FocusRingPlacement(%d)", int64(e))
 	}
 }
 
 // Constants that describe the style of the focus ring.
-type NSFocusRingType uint64
+type FocusRingType uint64
 
 const (
 	// The default focus ring type for a view or cell.
-	NSFocusRingTypeDefault NSFocusRingType = 0
+	FocusRingTypeDefault FocusRingType = 0
 	// No focus ring.
-	NSFocusRingTypeNone NSFocusRingType = 1
+	FocusRingTypeNone FocusRingType = 1
 	// The standard Aqua focus ring.
-	NSFocusRingTypeExterior NSFocusRingType = 2
+	FocusRingTypeExterior FocusRingType = 2
 )
 
-func (e NSFocusRingType) String() string {
+// String returns the FocusRingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FocusRingType) String() string {
 	switch e {
-	case NSFocusRingTypeDefault:
-		return "NSFocusRingTypeDefault"
-	case NSFocusRingTypeNone:
-		return "NSFocusRingTypeNone"
-	case NSFocusRingTypeExterior:
-		return "NSFocusRingTypeExterior"
+	case FocusRingTypeDefault:
+		return "FocusRingTypeDefault"
+	case FocusRingTypeNone:
+		return "FocusRingTypeNone"
+	case FocusRingTypeExterior:
+		return "FocusRingTypeExterior"
 	default:
-		return fmt.Sprintf("NSFocusRingType(%d)", int64(e))
+		return fmt.Sprintf("FocusRingType(%d)", int64(e))
 	}
 }
 
 // Actions that modify a font.
-type NSFontAction uint64
+type FontAction uint64
 
 const (
 	// No action; the font is returned unchanged.
-	NSNoFontChangeAction NSFontAction = 0
+	NoFontChangeAction FontAction = 0
 	// Converts the font according to the NSFontPanel method panelConvertFont:.
-	NSViaPanelFontAction NSFontAction = 1
+	ViaPanelFontAction FontAction = 1
 	// Converts the font to have an additional trait using convertFont:toHaveTrait:.
-	NSAddTraitFontAction NSFontAction = 2
+	AddTraitFontAction FontAction = 2
 	// Converts the font to a larger size using convertFont:toSize:.
-	NSSizeUpFontAction NSFontAction = 3
+	SizeUpFontAction FontAction = 3
 	// Converts the font to a smaller size using convertFont:toSize:.
-	NSSizeDownFontAction NSFontAction = 4
+	SizeDownFontAction FontAction = 4
 	// Converts the font to a heavier weight using convertWeight:ofFont:.
-	NSHeavierFontAction NSFontAction = 5
+	HeavierFontAction FontAction = 5
 	// Converts the font to a lighter weight using convertWeight:ofFont:.
-	NSLighterFontAction NSFontAction = 6
+	LighterFontAction FontAction = 6
 	// Converts the font to remove a trait using convertFont:toNotHaveTrait:.
-	NSRemoveTraitFontAction NSFontAction = 7
+	RemoveTraitFontAction FontAction = 7
 )
 
-func (e NSFontAction) String() string {
+// String returns the FontAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontAction) String() string {
 	switch e {
-	case NSNoFontChangeAction:
-		return "NSNoFontChangeAction"
-	case NSViaPanelFontAction:
-		return "NSViaPanelFontAction"
-	case NSAddTraitFontAction:
-		return "NSAddTraitFontAction"
-	case NSSizeUpFontAction:
-		return "NSSizeUpFontAction"
-	case NSSizeDownFontAction:
-		return "NSSizeDownFontAction"
-	case NSHeavierFontAction:
-		return "NSHeavierFontAction"
-	case NSLighterFontAction:
-		return "NSLighterFontAction"
-	case NSRemoveTraitFontAction:
-		return "NSRemoveTraitFontAction"
+	case NoFontChangeAction:
+		return "NoFontChangeAction"
+	case ViaPanelFontAction:
+		return "ViaPanelFontAction"
+	case AddTraitFontAction:
+		return "AddTraitFontAction"
+	case SizeUpFontAction:
+		return "SizeUpFontAction"
+	case SizeDownFontAction:
+		return "SizeDownFontAction"
+	case HeavierFontAction:
+		return "HeavierFontAction"
+	case LighterFontAction:
+		return "LighterFontAction"
+	case RemoveTraitFontAction:
+		return "RemoveTraitFontAction"
 	default:
-		return fmt.Sprintf("NSFontAction(%d)", int64(e))
+		return fmt.Sprintf("FontAction(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSFontAssetRequestOptions uint64
+type FontAssetRequestOptions uint64
 
 const (
-	NSFontAssetRequestOptionUsesStandardUI NSFontAssetRequestOptions = 1
+	FontAssetRequestOptionUsesStandardUI FontAssetRequestOptions = 1
 )
 
-func (e NSFontAssetRequestOptions) String() string {
+// String returns the FontAssetRequestOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontAssetRequestOptions) String() string {
 	var parts []string
-	if e&NSFontAssetRequestOptionUsesStandardUI != 0 {
-		parts = append(parts, "NSFontAssetRequestOptionUsesStandardUI")
+	if e&FontAssetRequestOptionUsesStandardUI != 0 {
+		parts = append(parts, "FontAssetRequestOptionUsesStandardUI")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2669,17 +2811,19 @@ func (e NSFontAssetRequestOptions) String() string {
 
 // Constants that support font collection management.
 // Bitmask — values may be combined with |.
-type NSFontCollectionOptions uint64
+type FontCollectionOptions uint64
 
 const (
 	// Makes the collection available only to the application.
-	NSFontCollectionApplicationOnlyMask NSFontCollectionOptions = 1
+	FontCollectionApplicationOnlyMask FontCollectionOptions = 1
 )
 
-func (e NSFontCollectionOptions) String() string {
+// String returns the FontCollectionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontCollectionOptions) String() string {
 	var parts []string
-	if e&NSFontCollectionApplicationOnlyMask != 0 {
-		parts = append(parts, "NSFontCollectionApplicationOnlyMask")
+	if e&FontCollectionApplicationOnlyMask != 0 {
+		parts = append(parts, "FontCollectionApplicationOnlyMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2689,24 +2833,26 @@ func (e NSFontCollectionOptions) String() string {
 
 // Constants that specify the visibility of font collections.
 // Bitmask — values may be combined with |.
-type NSFontCollectionVisibility uint64
+type FontCollectionVisibility uint64
 
 const (
-	NSFontCollectionVisibilityProcess  NSFontCollectionVisibility = 1
-	NSFontCollectionVisibilityUser     NSFontCollectionVisibility = 2
-	NSFontCollectionVisibilityComputer NSFontCollectionVisibility = 4
+	FontCollectionVisibilityProcess  FontCollectionVisibility = 1
+	FontCollectionVisibilityUser     FontCollectionVisibility = 2
+	FontCollectionVisibilityComputer FontCollectionVisibility = 4
 )
 
-func (e NSFontCollectionVisibility) String() string {
+// String returns the FontCollectionVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontCollectionVisibility) String() string {
 	var parts []string
-	if e&NSFontCollectionVisibilityProcess != 0 {
-		parts = append(parts, "NSFontCollectionVisibilityProcess")
+	if e&FontCollectionVisibilityProcess != 0 {
+		parts = append(parts, "FontCollectionVisibilityProcess")
 	}
-	if e&NSFontCollectionVisibilityUser != 0 {
-		parts = append(parts, "NSFontCollectionVisibilityUser")
+	if e&FontCollectionVisibilityUser != 0 {
+		parts = append(parts, "FontCollectionVisibilityUser")
 	}
-	if e&NSFontCollectionVisibilityComputer != 0 {
-		parts = append(parts, "NSFontCollectionVisibilityComputer")
+	if e&FontCollectionVisibilityComputer != 0 {
+		parts = append(parts, "FontCollectionVisibilityComputer")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2716,88 +2862,90 @@ func (e NSFontCollectionVisibility) String() string {
 
 // A symbolic description of the stylistic aspects of a font.
 // Bitmask — values may be combined with |.
-type NSFontDescriptorSymbolicTraits int64
+type FontDescriptorSymbolicTraits int64
 
 const (
-	NSFontDescriptorTraitItalic             NSFontDescriptorSymbolicTraits = 1
-	NSFontDescriptorTraitBold               NSFontDescriptorSymbolicTraits = 2
-	NSFontDescriptorTraitExpanded           NSFontDescriptorSymbolicTraits = 32
-	NSFontDescriptorTraitCondensed          NSFontDescriptorSymbolicTraits = 64
-	NSFontDescriptorTraitMonoSpace          NSFontDescriptorSymbolicTraits = 1024
-	NSFontDescriptorTraitVertical           NSFontDescriptorSymbolicTraits = 2048
-	NSFontDescriptorTraitUIOptimized        NSFontDescriptorSymbolicTraits = 4096
-	NSFontDescriptorTraitTightLeading       NSFontDescriptorSymbolicTraits = 32768
-	NSFontDescriptorTraitLooseLeading       NSFontDescriptorSymbolicTraits = 65536
-	NSFontDescriptorClassOldStyleSerifs     NSFontDescriptorSymbolicTraits = 268435456
-	NSFontDescriptorClassTransitionalSerifs NSFontDescriptorSymbolicTraits = 536870912
-	NSFontDescriptorClassModernSerifs       NSFontDescriptorSymbolicTraits = 805306368
-	NSFontDescriptorClassClarendonSerifs    NSFontDescriptorSymbolicTraits = 1073741824
-	NSFontDescriptorClassSlabSerifs         NSFontDescriptorSymbolicTraits = 1342177280
-	NSFontDescriptorClassFreeformSerifs     NSFontDescriptorSymbolicTraits = 1879048192
-	NSFontDescriptorClassSansSerif          NSFontDescriptorSymbolicTraits = 2147483648
-	NSFontDescriptorClassOrnamentals        NSFontDescriptorSymbolicTraits = 2415919104
-	NSFontDescriptorClassScripts            NSFontDescriptorSymbolicTraits = 2684354560
-	NSFontDescriptorClassSymbolic           NSFontDescriptorSymbolicTraits = 3221225472
+	FontDescriptorTraitItalic             FontDescriptorSymbolicTraits = 1
+	FontDescriptorTraitBold               FontDescriptorSymbolicTraits = 2
+	FontDescriptorTraitExpanded           FontDescriptorSymbolicTraits = 32
+	FontDescriptorTraitCondensed          FontDescriptorSymbolicTraits = 64
+	FontDescriptorTraitMonoSpace          FontDescriptorSymbolicTraits = 1024
+	FontDescriptorTraitVertical           FontDescriptorSymbolicTraits = 2048
+	FontDescriptorTraitUIOptimized        FontDescriptorSymbolicTraits = 4096
+	FontDescriptorTraitTightLeading       FontDescriptorSymbolicTraits = 32768
+	FontDescriptorTraitLooseLeading       FontDescriptorSymbolicTraits = 65536
+	FontDescriptorClassOldStyleSerifs     FontDescriptorSymbolicTraits = 268435456
+	FontDescriptorClassTransitionalSerifs FontDescriptorSymbolicTraits = 536870912
+	FontDescriptorClassModernSerifs       FontDescriptorSymbolicTraits = 805306368
+	FontDescriptorClassClarendonSerifs    FontDescriptorSymbolicTraits = 1073741824
+	FontDescriptorClassSlabSerifs         FontDescriptorSymbolicTraits = 1342177280
+	FontDescriptorClassFreeformSerifs     FontDescriptorSymbolicTraits = 1879048192
+	FontDescriptorClassSansSerif          FontDescriptorSymbolicTraits = 2147483648
+	FontDescriptorClassOrnamentals        FontDescriptorSymbolicTraits = 2415919104
+	FontDescriptorClassScripts            FontDescriptorSymbolicTraits = 2684354560
+	FontDescriptorClassSymbolic           FontDescriptorSymbolicTraits = 3221225472
 )
 
-func (e NSFontDescriptorSymbolicTraits) String() string {
+// String returns the FontDescriptorSymbolicTraits constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontDescriptorSymbolicTraits) String() string {
 	var parts []string
-	if e&NSFontDescriptorTraitItalic != 0 {
-		parts = append(parts, "NSFontDescriptorTraitItalic")
+	if e&FontDescriptorTraitItalic != 0 {
+		parts = append(parts, "FontDescriptorTraitItalic")
 	}
-	if e&NSFontDescriptorTraitBold != 0 {
-		parts = append(parts, "NSFontDescriptorTraitBold")
+	if e&FontDescriptorTraitBold != 0 {
+		parts = append(parts, "FontDescriptorTraitBold")
 	}
-	if e&NSFontDescriptorTraitExpanded != 0 {
-		parts = append(parts, "NSFontDescriptorTraitExpanded")
+	if e&FontDescriptorTraitExpanded != 0 {
+		parts = append(parts, "FontDescriptorTraitExpanded")
 	}
-	if e&NSFontDescriptorTraitCondensed != 0 {
-		parts = append(parts, "NSFontDescriptorTraitCondensed")
+	if e&FontDescriptorTraitCondensed != 0 {
+		parts = append(parts, "FontDescriptorTraitCondensed")
 	}
-	if e&NSFontDescriptorTraitMonoSpace != 0 {
-		parts = append(parts, "NSFontDescriptorTraitMonoSpace")
+	if e&FontDescriptorTraitMonoSpace != 0 {
+		parts = append(parts, "FontDescriptorTraitMonoSpace")
 	}
-	if e&NSFontDescriptorTraitVertical != 0 {
-		parts = append(parts, "NSFontDescriptorTraitVertical")
+	if e&FontDescriptorTraitVertical != 0 {
+		parts = append(parts, "FontDescriptorTraitVertical")
 	}
-	if e&NSFontDescriptorTraitUIOptimized != 0 {
-		parts = append(parts, "NSFontDescriptorTraitUIOptimized")
+	if e&FontDescriptorTraitUIOptimized != 0 {
+		parts = append(parts, "FontDescriptorTraitUIOptimized")
 	}
-	if e&NSFontDescriptorTraitTightLeading != 0 {
-		parts = append(parts, "NSFontDescriptorTraitTightLeading")
+	if e&FontDescriptorTraitTightLeading != 0 {
+		parts = append(parts, "FontDescriptorTraitTightLeading")
 	}
-	if e&NSFontDescriptorTraitLooseLeading != 0 {
-		parts = append(parts, "NSFontDescriptorTraitLooseLeading")
+	if e&FontDescriptorTraitLooseLeading != 0 {
+		parts = append(parts, "FontDescriptorTraitLooseLeading")
 	}
-	if e&NSFontDescriptorClassOldStyleSerifs != 0 {
-		parts = append(parts, "NSFontDescriptorClassOldStyleSerifs")
+	if e&FontDescriptorClassOldStyleSerifs != 0 {
+		parts = append(parts, "FontDescriptorClassOldStyleSerifs")
 	}
-	if e&NSFontDescriptorClassTransitionalSerifs != 0 {
-		parts = append(parts, "NSFontDescriptorClassTransitionalSerifs")
+	if e&FontDescriptorClassTransitionalSerifs != 0 {
+		parts = append(parts, "FontDescriptorClassTransitionalSerifs")
 	}
-	if e&NSFontDescriptorClassModernSerifs != 0 {
-		parts = append(parts, "NSFontDescriptorClassModernSerifs")
+	if e&FontDescriptorClassModernSerifs != 0 {
+		parts = append(parts, "FontDescriptorClassModernSerifs")
 	}
-	if e&NSFontDescriptorClassClarendonSerifs != 0 {
-		parts = append(parts, "NSFontDescriptorClassClarendonSerifs")
+	if e&FontDescriptorClassClarendonSerifs != 0 {
+		parts = append(parts, "FontDescriptorClassClarendonSerifs")
 	}
-	if e&NSFontDescriptorClassSlabSerifs != 0 {
-		parts = append(parts, "NSFontDescriptorClassSlabSerifs")
+	if e&FontDescriptorClassSlabSerifs != 0 {
+		parts = append(parts, "FontDescriptorClassSlabSerifs")
 	}
-	if e&NSFontDescriptorClassFreeformSerifs != 0 {
-		parts = append(parts, "NSFontDescriptorClassFreeformSerifs")
+	if e&FontDescriptorClassFreeformSerifs != 0 {
+		parts = append(parts, "FontDescriptorClassFreeformSerifs")
 	}
-	if e&NSFontDescriptorClassSansSerif != 0 {
-		parts = append(parts, "NSFontDescriptorClassSansSerif")
+	if e&FontDescriptorClassSansSerif != 0 {
+		parts = append(parts, "FontDescriptorClassSansSerif")
 	}
-	if e&NSFontDescriptorClassOrnamentals != 0 {
-		parts = append(parts, "NSFontDescriptorClassOrnamentals")
+	if e&FontDescriptorClassOrnamentals != 0 {
+		parts = append(parts, "FontDescriptorClassOrnamentals")
 	}
-	if e&NSFontDescriptorClassScripts != 0 {
-		parts = append(parts, "NSFontDescriptorClassScripts")
+	if e&FontDescriptorClassScripts != 0 {
+		parts = append(parts, "FontDescriptorClassScripts")
 	}
-	if e&NSFontDescriptorClassSymbolic != 0 {
-		parts = append(parts, "NSFontDescriptorClassSymbolic")
+	if e&FontDescriptorClassSymbolic != 0 {
+		parts = append(parts, "FontDescriptorClassSymbolic")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2806,102 +2954,106 @@ func (e NSFontDescriptorSymbolicTraits) String() string {
 }
 
 // The font rendering mode.
-type NSFontRenderingMode uint64
+type FontRenderingMode uint64
 
 const (
 	// Determines the actual mode based on the user preference settings.
-	NSFontDefaultRenderingMode NSFontRenderingMode = 0
+	FontDefaultRenderingMode FontRenderingMode = 0
 	// Specifies antialiased, floating-point advancements rendering mode (synonymous with printerFont).
-	NSFontAntialiasedRenderingMode NSFontRenderingMode = 1
+	FontAntialiasedRenderingMode FontRenderingMode = 1
 	// Specifies integer advancements rendering mode.
-	NSFontIntegerAdvancementsRenderingMode NSFontRenderingMode = 2
+	FontIntegerAdvancementsRenderingMode FontRenderingMode = 2
 	// Specifies antialiased, integer advancements rendering mode.
-	NSFontAntialiasedIntegerAdvancementsRenderingMode NSFontRenderingMode = 3
+	FontAntialiasedIntegerAdvancementsRenderingMode FontRenderingMode = 3
 )
 
-func (e NSFontRenderingMode) String() string {
+// String returns the FontRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontRenderingMode) String() string {
 	switch e {
-	case NSFontDefaultRenderingMode:
-		return "NSFontDefaultRenderingMode"
-	case NSFontAntialiasedRenderingMode:
-		return "NSFontAntialiasedRenderingMode"
-	case NSFontIntegerAdvancementsRenderingMode:
-		return "NSFontIntegerAdvancementsRenderingMode"
-	case NSFontAntialiasedIntegerAdvancementsRenderingMode:
-		return "NSFontAntialiasedIntegerAdvancementsRenderingMode"
+	case FontDefaultRenderingMode:
+		return "FontDefaultRenderingMode"
+	case FontAntialiasedRenderingMode:
+		return "FontAntialiasedRenderingMode"
+	case FontIntegerAdvancementsRenderingMode:
+		return "FontIntegerAdvancementsRenderingMode"
+	case FontAntialiasedIntegerAdvancementsRenderingMode:
+		return "FontAntialiasedIntegerAdvancementsRenderingMode"
 	default:
-		return fmt.Sprintf("NSFontRenderingMode(%d)", int64(e))
+		return fmt.Sprintf("FontRenderingMode(%d)", int64(e))
 	}
 }
 
 // Constants for isolating specific traits of a font.
 // Bitmask — values may be combined with |.
-type NSFontTraitMask uint64
+type FontTraitMask uint64
 
 const (
 	// A mask that specifies an italic font.
-	NSItalicFontMask NSFontTraitMask = 1
+	ItalicFontMask FontTraitMask = 1
 	// A mask that specifies a bold font.
-	NSBoldFontMask NSFontTraitMask = 2
+	BoldFontMask FontTraitMask = 2
 	// A mask that specifies a font that is not bold.
-	NSUnboldFontMask NSFontTraitMask = 4
+	UnboldFontMask FontTraitMask = 4
 	// A mask that specifies a font containing a non-standard character set.
-	NSNonStandardCharacterSetFontMask NSFontTraitMask = 8
+	NonStandardCharacterSetFontMask FontTraitMask = 8
 	// A mask that specifies a narrow font.
-	NSNarrowFontMask NSFontTraitMask = 16
+	NarrowFontMask FontTraitMask = 16
 	// A mask that specifies an expanded font.
-	NSExpandedFontMask NSFontTraitMask = 32
+	ExpandedFontMask FontTraitMask = 32
 	// A mask that specifies a condensed font.
-	NSCondensedFontMask NSFontTraitMask = 64
+	CondensedFontMask FontTraitMask = 64
 	// A mask that specifies a small-caps font.
-	NSSmallCapsFontMask NSFontTraitMask = 128
+	SmallCapsFontMask FontTraitMask = 128
 	// A mask that specifies a poster-style font.
-	NSPosterFontMask NSFontTraitMask = 256
+	PosterFontMask FontTraitMask = 256
 	// A mask that specifies a compressed font.
-	NSCompressedFontMask NSFontTraitMask = 512
+	CompressedFontMask FontTraitMask = 512
 	// A mask that specifies a fixed pitch font.
-	NSFixedPitchFontMask NSFontTraitMask = 1024
+	FixedPitchFontMask FontTraitMask = 1024
 	// A mask that specifies a font that is not italic.
-	NSUnitalicFontMask NSFontTraitMask = 16777216
+	UnitalicFontMask FontTraitMask = 16777216
 )
 
-func (e NSFontTraitMask) String() string {
+// String returns the FontTraitMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontTraitMask) String() string {
 	var parts []string
-	if e&NSItalicFontMask != 0 {
-		parts = append(parts, "NSItalicFontMask")
+	if e&ItalicFontMask != 0 {
+		parts = append(parts, "ItalicFontMask")
 	}
-	if e&NSBoldFontMask != 0 {
-		parts = append(parts, "NSBoldFontMask")
+	if e&BoldFontMask != 0 {
+		parts = append(parts, "BoldFontMask")
 	}
-	if e&NSUnboldFontMask != 0 {
-		parts = append(parts, "NSUnboldFontMask")
+	if e&UnboldFontMask != 0 {
+		parts = append(parts, "UnboldFontMask")
 	}
-	if e&NSNonStandardCharacterSetFontMask != 0 {
-		parts = append(parts, "NSNonStandardCharacterSetFontMask")
+	if e&NonStandardCharacterSetFontMask != 0 {
+		parts = append(parts, "NonStandardCharacterSetFontMask")
 	}
-	if e&NSNarrowFontMask != 0 {
-		parts = append(parts, "NSNarrowFontMask")
+	if e&NarrowFontMask != 0 {
+		parts = append(parts, "NarrowFontMask")
 	}
-	if e&NSExpandedFontMask != 0 {
-		parts = append(parts, "NSExpandedFontMask")
+	if e&ExpandedFontMask != 0 {
+		parts = append(parts, "ExpandedFontMask")
 	}
-	if e&NSCondensedFontMask != 0 {
-		parts = append(parts, "NSCondensedFontMask")
+	if e&CondensedFontMask != 0 {
+		parts = append(parts, "CondensedFontMask")
 	}
-	if e&NSSmallCapsFontMask != 0 {
-		parts = append(parts, "NSSmallCapsFontMask")
+	if e&SmallCapsFontMask != 0 {
+		parts = append(parts, "SmallCapsFontMask")
 	}
-	if e&NSPosterFontMask != 0 {
-		parts = append(parts, "NSPosterFontMask")
+	if e&PosterFontMask != 0 {
+		parts = append(parts, "PosterFontMask")
 	}
-	if e&NSCompressedFontMask != 0 {
-		parts = append(parts, "NSCompressedFontMask")
+	if e&CompressedFontMask != 0 {
+		parts = append(parts, "CompressedFontMask")
 	}
-	if e&NSFixedPitchFontMask != 0 {
-		parts = append(parts, "NSFixedPitchFontMask")
+	if e&FixedPitchFontMask != 0 {
+		parts = append(parts, "FixedPitchFontMask")
 	}
-	if e&NSUnitalicFontMask != 0 {
-		parts = append(parts, "NSUnitalicFontMask")
+	if e&UnitalicFontMask != 0 {
+		parts = append(parts, "UnitalicFontMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2910,81 +3062,134 @@ func (e NSFontTraitMask) String() string {
 }
 
 // The current state of the gesture recognizer.
-type NSGestureRecognizerState int64
+type GestureRecognizerState int64
 
 const (
-	NSGestureRecognizerStatePossible   NSGestureRecognizerState = 0
-	NSGestureRecognizerStateBegan      NSGestureRecognizerState = 1
-	NSGestureRecognizerStateChanged    NSGestureRecognizerState = 2
-	NSGestureRecognizerStateEnded      NSGestureRecognizerState = 3
-	NSGestureRecognizerStateCancelled  NSGestureRecognizerState = 4
-	NSGestureRecognizerStateFailed     NSGestureRecognizerState = 5
-	NSGestureRecognizerStateRecognized NSGestureRecognizerState = 3
+	GestureRecognizerStatePossible   GestureRecognizerState = 0
+	GestureRecognizerStateBegan      GestureRecognizerState = 1
+	GestureRecognizerStateChanged    GestureRecognizerState = 2
+	GestureRecognizerStateEnded      GestureRecognizerState = 3
+	GestureRecognizerStateCancelled  GestureRecognizerState = 4
+	GestureRecognizerStateFailed     GestureRecognizerState = 5
+	GestureRecognizerStateRecognized GestureRecognizerState = 3
 )
 
-func (e NSGestureRecognizerState) String() string {
+// String returns the GestureRecognizerState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GestureRecognizerState) String() string {
 	switch e {
-	case NSGestureRecognizerStatePossible:
-		return "NSGestureRecognizerStatePossible"
-	case NSGestureRecognizerStateBegan:
-		return "NSGestureRecognizerStateBegan"
-	case NSGestureRecognizerStateChanged:
-		return "NSGestureRecognizerStateChanged"
-	case NSGestureRecognizerStateEnded:
-		return "NSGestureRecognizerStateEnded"
-	case NSGestureRecognizerStateCancelled:
-		return "NSGestureRecognizerStateCancelled"
-	case NSGestureRecognizerStateFailed:
-		return "NSGestureRecognizerStateFailed"
+	case GestureRecognizerStatePossible:
+		return "GestureRecognizerStatePossible"
+	case GestureRecognizerStateBegan:
+		return "GestureRecognizerStateBegan"
+	case GestureRecognizerStateChanged:
+		return "GestureRecognizerStateChanged"
+	case GestureRecognizerStateEnded:
+		return "GestureRecognizerStateEnded"
+	case GestureRecognizerStateCancelled:
+		return "GestureRecognizerStateCancelled"
+	case GestureRecognizerStateFailed:
+		return "GestureRecognizerStateFailed"
 	default:
-		return fmt.Sprintf("NSGestureRecognizerState(%d)", int64(e))
+		return fmt.Sprintf("GestureRecognizerState(%d)", int64(e))
 	}
 }
 
-type NSGlassEffectViewStyle int64
+type GlassEffectViewStyle int64
 
 const (
 	// Standard glass effect style.
-	NSGlassEffectViewStyleRegular NSGlassEffectViewStyle = 0
+	GlassEffectViewStyleRegular GlassEffectViewStyle = 0
 	// Clear glass effect style.
-	NSGlassEffectViewStyleClear NSGlassEffectViewStyle = 1
+	GlassEffectViewStyleClear GlassEffectViewStyle = 1
 )
 
-func (e NSGlassEffectViewStyle) String() string {
+// String returns the GlassEffectViewStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GlassEffectViewStyle) String() string {
 	switch e {
-	case NSGlassEffectViewStyleRegular:
-		return "NSGlassEffectViewStyleRegular"
-	case NSGlassEffectViewStyleClear:
-		return "NSGlassEffectViewStyleClear"
+	case GlassEffectViewStyleRegular:
+		return "GlassEffectViewStyleRegular"
+	case GlassEffectViewStyleClear:
+		return "GlassEffectViewStyleClear"
 	default:
-		return fmt.Sprintf("NSGlassEffectViewStyle(%d)", int64(e))
+		return fmt.Sprintf("GlassEffectViewStyle(%d)", int64(e))
+	}
+}
+
+// Constants that specify how a glyph is laid out relative to the previous glyph.
+//
+// Deprecated: Use NSGlyphProperty instead
+type GlyphInscription uint64
+
+const (
+	// A base glyph; a character that the font can represent with a single glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeBase GlyphInscription = 0
+	// A glyph is rendered below the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeBelow GlyphInscription = 1
+	// A glyph is rendered above the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeAbove GlyphInscription = 2
+	// A glyph is rendered on top of the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeOverstrike GlyphInscription = 3
+	// A glyph is rendered on top and below the previous glyph.
+	//
+	// Deprecated: since macOS 10.11.
+	GlyphInscribeOverBelow GlyphInscription = 4
+)
+
+// String returns the GlyphInscription constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GlyphInscription) String() string {
+	switch e {
+	case GlyphInscribeBase:
+		return "GlyphInscribeBase"
+	case GlyphInscribeBelow:
+		return "GlyphInscribeBelow"
+	case GlyphInscribeAbove:
+		return "GlyphInscribeAbove"
+	case GlyphInscribeOverstrike:
+		return "GlyphInscribeOverstrike"
+	case GlyphInscribeOverBelow:
+		return "GlyphInscribeOverBelow"
+	default:
+		return fmt.Sprintf("GlyphInscription(%d)", int64(e))
 	}
 }
 
 // Glyph properties.
 // Bitmask — values may be combined with |.
-type NSGlyphProperty int64
+type GlyphProperty int64
 
 const (
-	NSGlyphPropertyNull             NSGlyphProperty = 1
-	NSGlyphPropertyControlCharacter NSGlyphProperty = 2
-	NSGlyphPropertyElastic          NSGlyphProperty = 4
-	NSGlyphPropertyNonBaseCharacter NSGlyphProperty = 8
+	GlyphPropertyNull             GlyphProperty = 1
+	GlyphPropertyControlCharacter GlyphProperty = 2
+	GlyphPropertyElastic          GlyphProperty = 4
+	GlyphPropertyNonBaseCharacter GlyphProperty = 8
 )
 
-func (e NSGlyphProperty) String() string {
+// String returns the GlyphProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GlyphProperty) String() string {
 	var parts []string
-	if e&NSGlyphPropertyNull != 0 {
-		parts = append(parts, "NSGlyphPropertyNull")
+	if e&GlyphPropertyNull != 0 {
+		parts = append(parts, "GlyphPropertyNull")
 	}
-	if e&NSGlyphPropertyControlCharacter != 0 {
-		parts = append(parts, "NSGlyphPropertyControlCharacter")
+	if e&GlyphPropertyControlCharacter != 0 {
+		parts = append(parts, "GlyphPropertyControlCharacter")
 	}
-	if e&NSGlyphPropertyElastic != 0 {
-		parts = append(parts, "NSGlyphPropertyElastic")
+	if e&GlyphPropertyElastic != 0 {
+		parts = append(parts, "GlyphPropertyElastic")
 	}
-	if e&NSGlyphPropertyNonBaseCharacter != 0 {
-		parts = append(parts, "NSGlyphPropertyNonBaseCharacter")
+	if e&GlyphPropertyNonBaseCharacter != 0 {
+		parts = append(parts, "GlyphPropertyNonBaseCharacter")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2994,20 +3199,22 @@ func (e NSGlyphProperty) String() string {
 
 // Constants that specify gradient drawing options.
 // Bitmask — values may be combined with |.
-type NSGradientDrawingOptions uint64
+type GradientDrawingOptions uint64
 
 const (
-	NSGradientDrawsBeforeStartingLocation NSGradientDrawingOptions = 1
-	NSGradientDrawsAfterEndingLocation    NSGradientDrawingOptions = 2
+	GradientDrawsBeforeStartingLocation GradientDrawingOptions = 1
+	GradientDrawsAfterEndingLocation    GradientDrawingOptions = 2
 )
 
-func (e NSGradientDrawingOptions) String() string {
+// String returns the GradientDrawingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GradientDrawingOptions) String() string {
 	var parts []string
-	if e&NSGradientDrawsBeforeStartingLocation != 0 {
-		parts = append(parts, "NSGradientDrawsBeforeStartingLocation")
+	if e&GradientDrawsBeforeStartingLocation != 0 {
+		parts = append(parts, "GradientDrawsBeforeStartingLocation")
 	}
-	if e&NSGradientDrawsAfterEndingLocation != 0 {
-		parts = append(parts, "NSGradientDrawsAfterEndingLocation")
+	if e&GradientDrawsAfterEndingLocation != 0 {
+		parts = append(parts, "GradientDrawsAfterEndingLocation")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3016,134 +3223,144 @@ func (e NSGradientDrawingOptions) String() string {
 }
 
 // Deprecated: since macOS 10.12.
-type NSGradientType uint64
+type GradientType uint64
 
 const (
-	NSGradientNone          NSGradientType = 0
-	NSGradientConcaveWeak   NSGradientType = 1
-	NSGradientConcaveStrong NSGradientType = 2
-	NSGradientConvexWeak    NSGradientType = 3
-	NSGradientConvexStrong  NSGradientType = 4
+	GradientNone          GradientType = 0
+	GradientConcaveWeak   GradientType = 1
+	GradientConcaveStrong GradientType = 2
+	GradientConvexWeak    GradientType = 3
+	GradientConvexStrong  GradientType = 4
 )
 
-func (e NSGradientType) String() string {
+// String returns the GradientType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GradientType) String() string {
 	switch e {
-	case NSGradientNone:
-		return "NSGradientNone"
-	case NSGradientConcaveWeak:
-		return "NSGradientConcaveWeak"
-	case NSGradientConcaveStrong:
-		return "NSGradientConcaveStrong"
-	case NSGradientConvexWeak:
-		return "NSGradientConvexWeak"
-	case NSGradientConvexStrong:
-		return "NSGradientConvexStrong"
+	case GradientNone:
+		return "GradientNone"
+	case GradientConcaveWeak:
+		return "GradientConcaveWeak"
+	case GradientConcaveStrong:
+		return "GradientConcaveStrong"
+	case GradientConvexWeak:
+		return "GradientConvexWeak"
+	case GradientConvexStrong:
+		return "GradientConvexStrong"
 	default:
-		return fmt.Sprintf("NSGradientType(%d)", int64(e))
+		return fmt.Sprintf("GradientType(%d)", int64(e))
 	}
 }
 
-type NSGridCellPlacement int64
+type GridCellPlacement int64
 
 const (
-	NSGridCellPlacementInherited NSGridCellPlacement = 0
-	NSGridCellPlacementNone      NSGridCellPlacement = 1
-	NSGridCellPlacementLeading   NSGridCellPlacement = 2
-	NSGridCellPlacementTop       NSGridCellPlacement = 2
-	NSGridCellPlacementTrailing  NSGridCellPlacement = 3
-	NSGridCellPlacementBottom    NSGridCellPlacement = 3
-	NSGridCellPlacementCenter    NSGridCellPlacement = 4
-	NSGridCellPlacementFill      NSGridCellPlacement = 5
+	GridCellPlacementInherited GridCellPlacement = 0
+	GridCellPlacementNone      GridCellPlacement = 1
+	GridCellPlacementLeading   GridCellPlacement = 2
+	GridCellPlacementTop       GridCellPlacement = 2
+	GridCellPlacementTrailing  GridCellPlacement = 3
+	GridCellPlacementBottom    GridCellPlacement = 3
+	GridCellPlacementCenter    GridCellPlacement = 4
+	GridCellPlacementFill      GridCellPlacement = 5
 )
 
-func (e NSGridCellPlacement) String() string {
+// String returns the GridCellPlacement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GridCellPlacement) String() string {
 	switch e {
-	case NSGridCellPlacementInherited:
-		return "NSGridCellPlacementInherited"
-	case NSGridCellPlacementNone:
-		return "NSGridCellPlacementNone"
-	case NSGridCellPlacementLeading:
-		return "NSGridCellPlacementLeading"
-	case NSGridCellPlacementTrailing:
-		return "NSGridCellPlacementTrailing"
-	case NSGridCellPlacementCenter:
-		return "NSGridCellPlacementCenter"
-	case NSGridCellPlacementFill:
-		return "NSGridCellPlacementFill"
+	case GridCellPlacementInherited:
+		return "GridCellPlacementInherited"
+	case GridCellPlacementNone:
+		return "GridCellPlacementNone"
+	case GridCellPlacementLeading:
+		return "GridCellPlacementLeading"
+	case GridCellPlacementTrailing:
+		return "GridCellPlacementTrailing"
+	case GridCellPlacementCenter:
+		return "GridCellPlacementCenter"
+	case GridCellPlacementFill:
+		return "GridCellPlacementFill"
 	default:
-		return fmt.Sprintf("NSGridCellPlacement(%d)", int64(e))
+		return fmt.Sprintf("GridCellPlacement(%d)", int64(e))
 	}
 }
 
-type NSGridRowAlignment int64
+type GridRowAlignment int64
 
 const (
-	NSGridRowAlignmentInherited     NSGridRowAlignment = 0
-	NSGridRowAlignmentNone          NSGridRowAlignment = 1
-	NSGridRowAlignmentFirstBaseline NSGridRowAlignment = 2
-	NSGridRowAlignmentLastBaseline  NSGridRowAlignment = 3
+	GridRowAlignmentInherited     GridRowAlignment = 0
+	GridRowAlignmentNone          GridRowAlignment = 1
+	GridRowAlignmentFirstBaseline GridRowAlignment = 2
+	GridRowAlignmentLastBaseline  GridRowAlignment = 3
 )
 
-func (e NSGridRowAlignment) String() string {
+// String returns the GridRowAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GridRowAlignment) String() string {
 	switch e {
-	case NSGridRowAlignmentInherited:
-		return "NSGridRowAlignmentInherited"
-	case NSGridRowAlignmentNone:
-		return "NSGridRowAlignmentNone"
-	case NSGridRowAlignmentFirstBaseline:
-		return "NSGridRowAlignmentFirstBaseline"
-	case NSGridRowAlignmentLastBaseline:
-		return "NSGridRowAlignmentLastBaseline"
+	case GridRowAlignmentInherited:
+		return "GridRowAlignmentInherited"
+	case GridRowAlignmentNone:
+		return "GridRowAlignmentNone"
+	case GridRowAlignmentFirstBaseline:
+		return "GridRowAlignmentFirstBaseline"
+	case GridRowAlignmentLastBaseline:
+		return "GridRowAlignmentLastBaseline"
 	default:
-		return fmt.Sprintf("NSGridRowAlignment(%d)", int64(e))
+		return fmt.Sprintf("GridRowAlignment(%d)", int64(e))
 	}
 }
 
 // A time at which to provide haptic feedback to the user.
-type NSHapticFeedbackPerformanceTime uint64
+type HapticFeedbackPerformanceTime uint64
 
 const (
-	NSHapticFeedbackPerformanceTimeDefault       NSHapticFeedbackPerformanceTime = 0
-	NSHapticFeedbackPerformanceTimeNow           NSHapticFeedbackPerformanceTime = 1
-	NSHapticFeedbackPerformanceTimeDrawCompleted NSHapticFeedbackPerformanceTime = 2
+	HapticFeedbackPerformanceTimeDefault       HapticFeedbackPerformanceTime = 0
+	HapticFeedbackPerformanceTimeNow           HapticFeedbackPerformanceTime = 1
+	HapticFeedbackPerformanceTimeDrawCompleted HapticFeedbackPerformanceTime = 2
 )
 
-func (e NSHapticFeedbackPerformanceTime) String() string {
+// String returns the HapticFeedbackPerformanceTime constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HapticFeedbackPerformanceTime) String() string {
 	switch e {
-	case NSHapticFeedbackPerformanceTimeDefault:
-		return "NSHapticFeedbackPerformanceTimeDefault"
-	case NSHapticFeedbackPerformanceTimeNow:
-		return "NSHapticFeedbackPerformanceTimeNow"
-	case NSHapticFeedbackPerformanceTimeDrawCompleted:
-		return "NSHapticFeedbackPerformanceTimeDrawCompleted"
+	case HapticFeedbackPerformanceTimeDefault:
+		return "HapticFeedbackPerformanceTimeDefault"
+	case HapticFeedbackPerformanceTimeNow:
+		return "HapticFeedbackPerformanceTimeNow"
+	case HapticFeedbackPerformanceTimeDrawCompleted:
+		return "HapticFeedbackPerformanceTimeDrawCompleted"
 	default:
-		return fmt.Sprintf("NSHapticFeedbackPerformanceTime(%d)", int64(e))
+		return fmt.Sprintf("HapticFeedbackPerformanceTime(%d)", int64(e))
 	}
 }
 
 // The absolute directions on the horizontal axis.
 // Bitmask — values may be combined with |.
-type NSHorizontalDirections uint64
+type HorizontalDirections uint64
 
 const (
 	// The left direction.
-	NSHorizontalDirectionsLeft NSHorizontalDirections = 1
+	HorizontalDirectionsLeft HorizontalDirections = 1
 	// The right direction.
-	NSHorizontalDirectionsRight NSHorizontalDirections = 2
+	HorizontalDirectionsRight HorizontalDirections = 2
 	// All horizontal directions (left and right).
-	NSHorizontalDirectionsAll NSHorizontalDirections = 3
+	HorizontalDirectionsAll HorizontalDirections = 3
 )
 
-func (e NSHorizontalDirections) String() string {
+// String returns the HorizontalDirections constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HorizontalDirections) String() string {
 	var parts []string
-	if e&NSHorizontalDirectionsLeft != 0 {
-		parts = append(parts, "NSHorizontalDirectionsLeft")
+	if e&HorizontalDirectionsLeft != 0 {
+		parts = append(parts, "HorizontalDirectionsLeft")
 	}
-	if e&NSHorizontalDirectionsRight != 0 {
-		parts = append(parts, "NSHorizontalDirectionsRight")
+	if e&HorizontalDirectionsRight != 0 {
+		parts = append(parts, "HorizontalDirectionsRight")
 	}
-	if e&NSHorizontalDirectionsAll != 0 {
-		parts = append(parts, "NSHorizontalDirectionsAll")
+	if e&HorizontalDirectionsAll != 0 {
+		parts = append(parts, "HorizontalDirectionsAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3152,446 +3369,474 @@ func (e NSHorizontalDirections) String() string {
 }
 
 // Constants used by imageAlignment that allow you to specify the location of the image in the frame.
-type NSImageAlignment uint64
+type ImageAlignment uint64
 
 const (
-	NSImageAlignCenter      NSImageAlignment = 0
-	NSImageAlignTop         NSImageAlignment = 1
-	NSImageAlignTopLeft     NSImageAlignment = 2
-	NSImageAlignTopRight    NSImageAlignment = 3
-	NSImageAlignLeft        NSImageAlignment = 4
-	NSImageAlignBottom      NSImageAlignment = 5
-	NSImageAlignBottomLeft  NSImageAlignment = 6
-	NSImageAlignBottomRight NSImageAlignment = 7
-	NSImageAlignRight       NSImageAlignment = 8
+	ImageAlignCenter      ImageAlignment = 0
+	ImageAlignTop         ImageAlignment = 1
+	ImageAlignTopLeft     ImageAlignment = 2
+	ImageAlignTopRight    ImageAlignment = 3
+	ImageAlignLeft        ImageAlignment = 4
+	ImageAlignBottom      ImageAlignment = 5
+	ImageAlignBottomLeft  ImageAlignment = 6
+	ImageAlignBottomRight ImageAlignment = 7
+	ImageAlignRight       ImageAlignment = 8
 )
 
-func (e NSImageAlignment) String() string {
+// String returns the ImageAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageAlignment) String() string {
 	switch e {
-	case NSImageAlignCenter:
-		return "NSImageAlignCenter"
-	case NSImageAlignTop:
-		return "NSImageAlignTop"
-	case NSImageAlignTopLeft:
-		return "NSImageAlignTopLeft"
-	case NSImageAlignTopRight:
-		return "NSImageAlignTopRight"
-	case NSImageAlignLeft:
-		return "NSImageAlignLeft"
-	case NSImageAlignBottom:
-		return "NSImageAlignBottom"
-	case NSImageAlignBottomLeft:
-		return "NSImageAlignBottomLeft"
-	case NSImageAlignBottomRight:
-		return "NSImageAlignBottomRight"
-	case NSImageAlignRight:
-		return "NSImageAlignRight"
+	case ImageAlignCenter:
+		return "ImageAlignCenter"
+	case ImageAlignTop:
+		return "ImageAlignTop"
+	case ImageAlignTopLeft:
+		return "ImageAlignTopLeft"
+	case ImageAlignTopRight:
+		return "ImageAlignTopRight"
+	case ImageAlignLeft:
+		return "ImageAlignLeft"
+	case ImageAlignBottom:
+		return "ImageAlignBottom"
+	case ImageAlignBottomLeft:
+		return "ImageAlignBottomLeft"
+	case ImageAlignBottomRight:
+		return "ImageAlignBottomRight"
+	case ImageAlignRight:
+		return "ImageAlignRight"
 	default:
-		return fmt.Sprintf("NSImageAlignment(%d)", int64(e))
+		return fmt.Sprintf("ImageAlignment(%d)", int64(e))
 	}
 }
 
 // Constants that specify the caching policy on a per-image basis.
-type NSImageCacheMode uint64
+type ImageCacheMode uint64
 
 const (
-	NSImageCacheDefault NSImageCacheMode = 0
-	NSImageCacheAlways  NSImageCacheMode = 1
-	NSImageCacheBySize  NSImageCacheMode = 2
-	NSImageCacheNever   NSImageCacheMode = 3
+	ImageCacheDefault ImageCacheMode = 0
+	ImageCacheAlways  ImageCacheMode = 1
+	ImageCacheBySize  ImageCacheMode = 2
+	ImageCacheNever   ImageCacheMode = 3
 )
 
-func (e NSImageCacheMode) String() string {
+// String returns the ImageCacheMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageCacheMode) String() string {
 	switch e {
-	case NSImageCacheDefault:
-		return "NSImageCacheDefault"
-	case NSImageCacheAlways:
-		return "NSImageCacheAlways"
-	case NSImageCacheBySize:
-		return "NSImageCacheBySize"
-	case NSImageCacheNever:
-		return "NSImageCacheNever"
+	case ImageCacheDefault:
+		return "ImageCacheDefault"
+	case ImageCacheAlways:
+		return "ImageCacheAlways"
+	case ImageCacheBySize:
+		return "ImageCacheBySize"
+	case ImageCacheNever:
+		return "ImageCacheNever"
 	default:
-		return fmt.Sprintf("NSImageCacheMode(%d)", int64(e))
+		return fmt.Sprintf("ImageCacheMode(%d)", int64(e))
 	}
 }
 
 // Describes how High Dynamic Range (HDR) image content displays.
-type NSImageDynamicRange int64
+type ImageDynamicRange int64
 
 const (
-	NSImageDynamicRangeUnspecified NSImageDynamicRange = -1
+	ImageDynamicRangeUnspecified ImageDynamicRange = -1
 	// Restrict the image content dynamic range to the standard range regardless of the actual range of the image content.
-	NSImageDynamicRangeStandard NSImageDynamicRange = 0
+	ImageDynamicRangeStandard ImageDynamicRange = 0
 	// Allow constrained HDR image content. Useful when mixing HDR and SDR content.
-	NSImageDynamicRangeConstrainedHigh NSImageDynamicRange = 1
+	ImageDynamicRangeConstrainedHigh ImageDynamicRange = 1
 	// Allow image content to use extended dynamic range if it has high dynamic range content.
-	NSImageDynamicRangeHigh NSImageDynamicRange = 2
+	ImageDynamicRangeHigh ImageDynamicRange = 2
 )
 
-func (e NSImageDynamicRange) String() string {
+// String returns the ImageDynamicRange constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageDynamicRange) String() string {
 	switch e {
-	case NSImageDynamicRangeUnspecified:
-		return "NSImageDynamicRangeUnspecified"
-	case NSImageDynamicRangeStandard:
-		return "NSImageDynamicRangeStandard"
-	case NSImageDynamicRangeConstrainedHigh:
-		return "NSImageDynamicRangeConstrainedHigh"
-	case NSImageDynamicRangeHigh:
-		return "NSImageDynamicRangeHigh"
+	case ImageDynamicRangeUnspecified:
+		return "ImageDynamicRangeUnspecified"
+	case ImageDynamicRangeStandard:
+		return "ImageDynamicRangeStandard"
+	case ImageDynamicRangeConstrainedHigh:
+		return "ImageDynamicRangeConstrainedHigh"
+	case ImageDynamicRangeHigh:
+		return "ImageDynamicRangeHigh"
 	default:
-		return fmt.Sprintf("NSImageDynamicRange(%d)", int64(e))
+		return fmt.Sprintf("ImageDynamicRange(%d)", int64(e))
 	}
 }
 
 // Constants that allow you to specify the kind of frame bordering the image.
-type NSImageFrameStyle uint64
+type ImageFrameStyle uint64
 
 const (
-	NSImageFrameNone      NSImageFrameStyle = 0
-	NSImageFramePhoto     NSImageFrameStyle = 1
-	NSImageFrameGrayBezel NSImageFrameStyle = 2
-	NSImageFrameGroove    NSImageFrameStyle = 3
-	NSImageFrameButton    NSImageFrameStyle = 4
+	ImageFrameNone      ImageFrameStyle = 0
+	ImageFramePhoto     ImageFrameStyle = 1
+	ImageFrameGrayBezel ImageFrameStyle = 2
+	ImageFrameGroove    ImageFrameStyle = 3
+	ImageFrameButton    ImageFrameStyle = 4
 )
 
-func (e NSImageFrameStyle) String() string {
+// String returns the ImageFrameStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageFrameStyle) String() string {
 	switch e {
-	case NSImageFrameNone:
-		return "NSImageFrameNone"
-	case NSImageFramePhoto:
-		return "NSImageFramePhoto"
-	case NSImageFrameGrayBezel:
-		return "NSImageFrameGrayBezel"
-	case NSImageFrameGroove:
-		return "NSImageFrameGroove"
-	case NSImageFrameButton:
-		return "NSImageFrameButton"
+	case ImageFrameNone:
+		return "ImageFrameNone"
+	case ImageFramePhoto:
+		return "ImageFramePhoto"
+	case ImageFrameGrayBezel:
+		return "ImageFrameGrayBezel"
+	case ImageFrameGroove:
+		return "ImageFrameGroove"
+	case ImageFrameButton:
+		return "ImageFrameButton"
 	default:
-		return fmt.Sprintf("NSImageFrameStyle(%d)", int64(e))
+		return fmt.Sprintf("ImageFrameStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify the interpolation, or image smoothing, behavior used by the image interpolation property.
-type NSImageInterpolation uint64
+type ImageInterpolation uint64
 
 const (
 	// Use the context’s default interpolation.
-	NSImageInterpolationDefault NSImageInterpolation = 0
+	ImageInterpolationDefault ImageInterpolation = 0
 	// No interpolation.
-	NSImageInterpolationNone NSImageInterpolation = 1
+	ImageInterpolationNone ImageInterpolation = 1
 	// Fast, low-quality interpolation.
-	NSImageInterpolationLow NSImageInterpolation = 2
+	ImageInterpolationLow ImageInterpolation = 2
 	// Medium quality, slower than the low interpolation option.
-	NSImageInterpolationMedium NSImageInterpolation = 4
+	ImageInterpolationMedium ImageInterpolation = 4
 	// Highest quality, slower than the medium interpolation option.
-	NSImageInterpolationHigh NSImageInterpolation = 3
+	ImageInterpolationHigh ImageInterpolation = 3
 )
 
-func (e NSImageInterpolation) String() string {
+// String returns the ImageInterpolation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageInterpolation) String() string {
 	switch e {
-	case NSImageInterpolationDefault:
-		return "NSImageInterpolationDefault"
-	case NSImageInterpolationNone:
-		return "NSImageInterpolationNone"
-	case NSImageInterpolationLow:
-		return "NSImageInterpolationLow"
-	case NSImageInterpolationMedium:
-		return "NSImageInterpolationMedium"
-	case NSImageInterpolationHigh:
-		return "NSImageInterpolationHigh"
+	case ImageInterpolationDefault:
+		return "ImageInterpolationDefault"
+	case ImageInterpolationNone:
+		return "ImageInterpolationNone"
+	case ImageInterpolationLow:
+		return "ImageInterpolationLow"
+	case ImageInterpolationMedium:
+		return "ImageInterpolationMedium"
+	case ImageInterpolationHigh:
+		return "ImageInterpolationHigh"
 	default:
-		return fmt.Sprintf("NSImageInterpolation(%d)", int64(e))
+		return fmt.Sprintf("ImageInterpolation(%d)", int64(e))
 	}
 }
 
 // Constants that describe the layout direction for the image.
-type NSImageLayoutDirection int64
+type ImageLayoutDirection int64
 
 const (
-	NSImageLayoutDirectionUnspecified NSImageLayoutDirection = -1
-	NSImageLayoutDirectionLeftToRight NSImageLayoutDirection = 2
-	NSImageLayoutDirectionRightToLeft NSImageLayoutDirection = 3
+	ImageLayoutDirectionUnspecified ImageLayoutDirection = -1
+	ImageLayoutDirectionLeftToRight ImageLayoutDirection = 2
+	ImageLayoutDirectionRightToLeft ImageLayoutDirection = 3
 )
 
-func (e NSImageLayoutDirection) String() string {
+// String returns the ImageLayoutDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageLayoutDirection) String() string {
 	switch e {
-	case NSImageLayoutDirectionUnspecified:
-		return "NSImageLayoutDirectionUnspecified"
-	case NSImageLayoutDirectionLeftToRight:
-		return "NSImageLayoutDirectionLeftToRight"
-	case NSImageLayoutDirectionRightToLeft:
-		return "NSImageLayoutDirectionRightToLeft"
+	case ImageLayoutDirectionUnspecified:
+		return "ImageLayoutDirectionUnspecified"
+	case ImageLayoutDirectionLeftToRight:
+		return "ImageLayoutDirectionLeftToRight"
+	case ImageLayoutDirectionRightToLeft:
+		return "ImageLayoutDirectionRightToLeft"
 	default:
-		return fmt.Sprintf("NSImageLayoutDirection(%d)", int64(e))
+		return fmt.Sprintf("ImageLayoutDirection(%d)", int64(e))
 	}
 }
 
 // Constants that describe the resizing mode for the image.
-type NSImageResizingMode int64
+type ImageResizingMode int64
 
 const (
-	NSImageResizingModeTile    NSImageResizingMode = 0
-	NSImageResizingModeStretch NSImageResizingMode = 1
+	ImageResizingModeTile    ImageResizingMode = 0
+	ImageResizingModeStretch ImageResizingMode = 1
 )
 
-func (e NSImageResizingMode) String() string {
+// String returns the ImageResizingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageResizingMode) String() string {
 	switch e {
-	case NSImageResizingModeTile:
-		return "NSImageResizingModeTile"
-	case NSImageResizingModeStretch:
-		return "NSImageResizingModeStretch"
+	case ImageResizingModeTile:
+		return "ImageResizingModeTile"
+	case ImageResizingModeStretch:
+		return "ImageResizingModeStretch"
 	default:
-		return fmt.Sprintf("NSImageResizingMode(%d)", int64(e))
+		return fmt.Sprintf("ImageResizingMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify a cell’s image scaling behavior.
-type NSImageScaling uint64
+type ImageScaling uint64
 
 const (
 	// If it is too large for the destination, scale the image down while preserving the aspect ratio.
-	NSImageScaleProportionallyDown NSImageScaling = 0
+	ImageScaleProportionallyDown ImageScaling = 0
 	// Scale each dimension to exactly fit destination.
-	NSImageScaleAxesIndependently NSImageScaling = 1
+	ImageScaleAxesIndependently ImageScaling = 1
 	// Do not scale the image.
-	NSImageScaleNone NSImageScaling = 2
+	ImageScaleNone ImageScaling = 2
 	// Scale the image to its maximum possible dimensions while both staying within the destination area and preserving its aspect ratio.
-	NSImageScaleProportionallyUpOrDown NSImageScaling = 3
+	ImageScaleProportionallyUpOrDown ImageScaling = 3
 	// Deprecated: Use NSImageScaleProportionallyDown instead
-	NSScaleProportionally NSImageScaling = 0
+	ScaleProportionally ImageScaling = 0
 	// Deprecated: Use NSImageScaleAxesIndependently instead
-	NSScaleToFit NSImageScaling = 1
+	ScaleToFit ImageScaling = 1
 	// Deprecated: Use NSImageScaleNone instead
-	NSScaleNone NSImageScaling = 2
+	ScaleNone ImageScaling = 2
 )
 
-func (e NSImageScaling) String() string {
+// String returns the ImageScaling constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageScaling) String() string {
 	switch e {
-	case NSImageScaleProportionallyDown:
-		return "NSImageScaleProportionallyDown"
-	case NSImageScaleAxesIndependently:
-		return "NSImageScaleAxesIndependently"
-	case NSImageScaleNone:
-		return "NSImageScaleNone"
-	case NSImageScaleProportionallyUpOrDown:
-		return "NSImageScaleProportionallyUpOrDown"
+	case ImageScaleProportionallyDown:
+		return "ImageScaleProportionallyDown"
+	case ImageScaleAxesIndependently:
+		return "ImageScaleAxesIndependently"
+	case ImageScaleNone:
+		return "ImageScaleNone"
+	case ImageScaleProportionallyUpOrDown:
+		return "ImageScaleProportionallyUpOrDown"
 	default:
-		return fmt.Sprintf("NSImageScaling(%d)", int64(e))
+		return fmt.Sprintf("ImageScaling(%d)", int64(e))
 	}
 }
 
-type NSImageSymbolColorRenderingMode int64
+type ImageSymbolColorRenderingMode int64
 
 const (
 	// Automatically uses an appropriate color rendering mode for the symbol’s color layers.
-	NSImageSymbolColorRenderingModeAutomatic NSImageSymbolColorRenderingMode = 0
+	ImageSymbolColorRenderingModeAutomatic ImageSymbolColorRenderingMode = 0
 	// Renders the symbol’s color layers using flat colors.
-	NSImageSymbolColorRenderingModeFlat NSImageSymbolColorRenderingMode = 1
+	ImageSymbolColorRenderingModeFlat ImageSymbolColorRenderingMode = 1
 	// Renders the symbol’s color layers using gradients.
-	NSImageSymbolColorRenderingModeGradient NSImageSymbolColorRenderingMode = 2
+	ImageSymbolColorRenderingModeGradient ImageSymbolColorRenderingMode = 2
 )
 
-func (e NSImageSymbolColorRenderingMode) String() string {
+// String returns the ImageSymbolColorRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageSymbolColorRenderingMode) String() string {
 	switch e {
-	case NSImageSymbolColorRenderingModeAutomatic:
-		return "NSImageSymbolColorRenderingModeAutomatic"
-	case NSImageSymbolColorRenderingModeFlat:
-		return "NSImageSymbolColorRenderingModeFlat"
-	case NSImageSymbolColorRenderingModeGradient:
-		return "NSImageSymbolColorRenderingModeGradient"
+	case ImageSymbolColorRenderingModeAutomatic:
+		return "ImageSymbolColorRenderingModeAutomatic"
+	case ImageSymbolColorRenderingModeFlat:
+		return "ImageSymbolColorRenderingModeFlat"
+	case ImageSymbolColorRenderingModeGradient:
+		return "ImageSymbolColorRenderingModeGradient"
 	default:
-		return fmt.Sprintf("NSImageSymbolColorRenderingMode(%d)", int64(e))
+		return fmt.Sprintf("ImageSymbolColorRenderingMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify which scale variant of a symbol image to use.
-type NSImageSymbolScale int64
+type ImageSymbolScale int64
 
 const (
-	NSImageSymbolScaleSmall  NSImageSymbolScale = 1
-	NSImageSymbolScaleMedium NSImageSymbolScale = 2
-	NSImageSymbolScaleLarge  NSImageSymbolScale = 3
+	ImageSymbolScaleSmall  ImageSymbolScale = 1
+	ImageSymbolScaleMedium ImageSymbolScale = 2
+	ImageSymbolScaleLarge  ImageSymbolScale = 3
 )
 
-func (e NSImageSymbolScale) String() string {
+// String returns the ImageSymbolScale constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageSymbolScale) String() string {
 	switch e {
-	case NSImageSymbolScaleSmall:
-		return "NSImageSymbolScaleSmall"
-	case NSImageSymbolScaleMedium:
-		return "NSImageSymbolScaleMedium"
-	case NSImageSymbolScaleLarge:
-		return "NSImageSymbolScaleLarge"
+	case ImageSymbolScaleSmall:
+		return "ImageSymbolScaleSmall"
+	case ImageSymbolScaleMedium:
+		return "ImageSymbolScaleMedium"
+	case ImageSymbolScaleLarge:
+		return "ImageSymbolScaleLarge"
 	default:
-		return fmt.Sprintf("NSImageSymbolScale(%d)", int64(e))
+		return fmt.Sprintf("ImageSymbolScale(%d)", int64(e))
 	}
 }
 
-type NSImageSymbolVariableValueMode int64
+type ImageSymbolVariableValueMode int64
 
 const (
 	// Automatically selects an appropriate variable value mode for the symbol.
-	NSImageSymbolVariableValueModeAutomatic NSImageSymbolVariableValueMode = 0
+	ImageSymbolVariableValueModeAutomatic ImageSymbolVariableValueMode = 0
 	// The "color" variable value mode. Sets the opacity of each variable layer to either on or off depending on how its threshold compared to the current value.
-	NSImageSymbolVariableValueModeColor NSImageSymbolVariableValueMode = 1
+	ImageSymbolVariableValueModeColor ImageSymbolVariableValueMode = 1
 	// The "draw" variable value mode. Changes the drawn length of each variable layer to either based on how its range relates to the current value.
-	NSImageSymbolVariableValueModeDraw NSImageSymbolVariableValueMode = 2
+	ImageSymbolVariableValueModeDraw ImageSymbolVariableValueMode = 2
 )
 
-func (e NSImageSymbolVariableValueMode) String() string {
+// String returns the ImageSymbolVariableValueMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageSymbolVariableValueMode) String() string {
 	switch e {
-	case NSImageSymbolVariableValueModeAutomatic:
-		return "NSImageSymbolVariableValueModeAutomatic"
-	case NSImageSymbolVariableValueModeColor:
-		return "NSImageSymbolVariableValueModeColor"
-	case NSImageSymbolVariableValueModeDraw:
-		return "NSImageSymbolVariableValueModeDraw"
+	case ImageSymbolVariableValueModeAutomatic:
+		return "ImageSymbolVariableValueModeAutomatic"
+	case ImageSymbolVariableValueModeColor:
+		return "ImageSymbolVariableValueModeColor"
+	case ImageSymbolVariableValueModeDraw:
+		return "ImageSymbolVariableValueModeDraw"
 	default:
-		return fmt.Sprintf("NSImageSymbolVariableValueMode(%d)", int64(e))
+		return fmt.Sprintf("ImageSymbolVariableValueMode(%d)", int64(e))
 	}
 }
 
 // The part of the object’s visual representation that should be used to get the value for the constraint.
-type NSLayoutAttribute int64
+type LayoutAttribute int64
 
 const (
-	NSLayoutAttributeLeft           NSLayoutAttribute = 1
-	NSLayoutAttributeRight          NSLayoutAttribute = 2
-	NSLayoutAttributeTop            NSLayoutAttribute = 3
-	NSLayoutAttributeBottom         NSLayoutAttribute = 4
-	NSLayoutAttributeLeading        NSLayoutAttribute = 5
-	NSLayoutAttributeTrailing       NSLayoutAttribute = 6
-	NSLayoutAttributeWidth          NSLayoutAttribute = 7
-	NSLayoutAttributeHeight         NSLayoutAttribute = 8
-	NSLayoutAttributeCenterX        NSLayoutAttribute = 9
-	NSLayoutAttributeCenterY        NSLayoutAttribute = 10
-	NSLayoutAttributeLastBaseline   NSLayoutAttribute = 11
-	NSLayoutAttributeBaseline       NSLayoutAttribute = 11
-	NSLayoutAttributeFirstBaseline  NSLayoutAttribute = 12
-	NSLayoutAttributeNotAnAttribute NSLayoutAttribute = 0
+	LayoutAttributeLeft           LayoutAttribute = 1
+	LayoutAttributeRight          LayoutAttribute = 2
+	LayoutAttributeTop            LayoutAttribute = 3
+	LayoutAttributeBottom         LayoutAttribute = 4
+	LayoutAttributeLeading        LayoutAttribute = 5
+	LayoutAttributeTrailing       LayoutAttribute = 6
+	LayoutAttributeWidth          LayoutAttribute = 7
+	LayoutAttributeHeight         LayoutAttribute = 8
+	LayoutAttributeCenterX        LayoutAttribute = 9
+	LayoutAttributeCenterY        LayoutAttribute = 10
+	LayoutAttributeLastBaseline   LayoutAttribute = 11
+	LayoutAttributeBaseline       LayoutAttribute = 11
+	LayoutAttributeFirstBaseline  LayoutAttribute = 12
+	LayoutAttributeNotAnAttribute LayoutAttribute = 0
 )
 
-func (e NSLayoutAttribute) String() string {
+// String returns the LayoutAttribute constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LayoutAttribute) String() string {
 	switch e {
-	case NSLayoutAttributeLeft:
-		return "NSLayoutAttributeLeft"
-	case NSLayoutAttributeRight:
-		return "NSLayoutAttributeRight"
-	case NSLayoutAttributeTop:
-		return "NSLayoutAttributeTop"
-	case NSLayoutAttributeBottom:
-		return "NSLayoutAttributeBottom"
-	case NSLayoutAttributeLeading:
-		return "NSLayoutAttributeLeading"
-	case NSLayoutAttributeTrailing:
-		return "NSLayoutAttributeTrailing"
-	case NSLayoutAttributeWidth:
-		return "NSLayoutAttributeWidth"
-	case NSLayoutAttributeHeight:
-		return "NSLayoutAttributeHeight"
-	case NSLayoutAttributeCenterX:
-		return "NSLayoutAttributeCenterX"
-	case NSLayoutAttributeCenterY:
-		return "NSLayoutAttributeCenterY"
-	case NSLayoutAttributeLastBaseline:
-		return "NSLayoutAttributeLastBaseline"
-	case NSLayoutAttributeFirstBaseline:
-		return "NSLayoutAttributeFirstBaseline"
-	case NSLayoutAttributeNotAnAttribute:
-		return "NSLayoutAttributeNotAnAttribute"
+	case LayoutAttributeLeft:
+		return "LayoutAttributeLeft"
+	case LayoutAttributeRight:
+		return "LayoutAttributeRight"
+	case LayoutAttributeTop:
+		return "LayoutAttributeTop"
+	case LayoutAttributeBottom:
+		return "LayoutAttributeBottom"
+	case LayoutAttributeLeading:
+		return "LayoutAttributeLeading"
+	case LayoutAttributeTrailing:
+		return "LayoutAttributeTrailing"
+	case LayoutAttributeWidth:
+		return "LayoutAttributeWidth"
+	case LayoutAttributeHeight:
+		return "LayoutAttributeHeight"
+	case LayoutAttributeCenterX:
+		return "LayoutAttributeCenterX"
+	case LayoutAttributeCenterY:
+		return "LayoutAttributeCenterY"
+	case LayoutAttributeLastBaseline:
+		return "LayoutAttributeLastBaseline"
+	case LayoutAttributeFirstBaseline:
+		return "LayoutAttributeFirstBaseline"
+	case LayoutAttributeNotAnAttribute:
+		return "LayoutAttributeNotAnAttribute"
 	default:
-		return fmt.Sprintf("NSLayoutAttribute(%d)", int64(e))
+		return fmt.Sprintf("LayoutAttribute(%d)", int64(e))
 	}
 }
 
 // The layout constraint orientation, either horizontal or vertical, that the constraint uses to enforce layout between objects.
-type NSLayoutConstraintOrientation int64
+type LayoutConstraintOrientation int64
 
 const (
-	NSLayoutConstraintOrientationHorizontal NSLayoutConstraintOrientation = 0
-	NSLayoutConstraintOrientationVertical   NSLayoutConstraintOrientation = 1
+	LayoutConstraintOrientationHorizontal LayoutConstraintOrientation = 0
+	LayoutConstraintOrientationVertical   LayoutConstraintOrientation = 1
 )
 
-func (e NSLayoutConstraintOrientation) String() string {
+// String returns the LayoutConstraintOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LayoutConstraintOrientation) String() string {
 	switch e {
-	case NSLayoutConstraintOrientationHorizontal:
-		return "NSLayoutConstraintOrientationHorizontal"
-	case NSLayoutConstraintOrientationVertical:
-		return "NSLayoutConstraintOrientationVertical"
+	case LayoutConstraintOrientationHorizontal:
+		return "LayoutConstraintOrientationHorizontal"
+	case LayoutConstraintOrientationVertical:
+		return "LayoutConstraintOrientationVertical"
 	default:
-		return fmt.Sprintf("NSLayoutConstraintOrientation(%d)", int64(e))
+		return fmt.Sprintf("LayoutConstraintOrientation(%d)", int64(e))
 	}
 }
 
 // A bit mask that specifies both a part of an interface element to align and a direction for the alignment between two interface elements.
 // Bitmask — values may be combined with |.
-type NSLayoutFormatOptions uint64
+type LayoutFormatOptions uint64
 
 const (
-	NSLayoutFormatAlignAllLeft               NSLayoutFormatOptions = 2
-	NSLayoutFormatAlignAllRight              NSLayoutFormatOptions = 4
-	NSLayoutFormatAlignAllTop                NSLayoutFormatOptions = 8
-	NSLayoutFormatAlignAllBottom             NSLayoutFormatOptions = 16
-	NSLayoutFormatAlignAllLeading            NSLayoutFormatOptions = 32
-	NSLayoutFormatAlignAllTrailing           NSLayoutFormatOptions = 64
-	NSLayoutFormatAlignAllCenterX            NSLayoutFormatOptions = 512
-	NSLayoutFormatAlignAllCenterY            NSLayoutFormatOptions = 1024
-	NSLayoutFormatAlignAllLastBaseline       NSLayoutFormatOptions = 2048
-	NSLayoutFormatAlignAllFirstBaseline      NSLayoutFormatOptions = 4096
-	NSLayoutFormatAlignAllBaseline           NSLayoutFormatOptions = 2048
-	NSLayoutFormatAlignmentMask              NSLayoutFormatOptions = 65535
-	NSLayoutFormatDirectionLeadingToTrailing NSLayoutFormatOptions = 0
-	NSLayoutFormatDirectionLeftToRight       NSLayoutFormatOptions = 65536
-	NSLayoutFormatDirectionRightToLeft       NSLayoutFormatOptions = 131072
-	NSLayoutFormatDirectionMask              NSLayoutFormatOptions = 196608
+	LayoutFormatAlignAllLeft               LayoutFormatOptions = 2
+	LayoutFormatAlignAllRight              LayoutFormatOptions = 4
+	LayoutFormatAlignAllTop                LayoutFormatOptions = 8
+	LayoutFormatAlignAllBottom             LayoutFormatOptions = 16
+	LayoutFormatAlignAllLeading            LayoutFormatOptions = 32
+	LayoutFormatAlignAllTrailing           LayoutFormatOptions = 64
+	LayoutFormatAlignAllCenterX            LayoutFormatOptions = 512
+	LayoutFormatAlignAllCenterY            LayoutFormatOptions = 1024
+	LayoutFormatAlignAllLastBaseline       LayoutFormatOptions = 2048
+	LayoutFormatAlignAllFirstBaseline      LayoutFormatOptions = 4096
+	LayoutFormatAlignAllBaseline           LayoutFormatOptions = 2048
+	LayoutFormatAlignmentMask              LayoutFormatOptions = 65535
+	LayoutFormatDirectionLeadingToTrailing LayoutFormatOptions = 0
+	LayoutFormatDirectionLeftToRight       LayoutFormatOptions = 65536
+	LayoutFormatDirectionRightToLeft       LayoutFormatOptions = 131072
+	LayoutFormatDirectionMask              LayoutFormatOptions = 196608
 )
 
-func (e NSLayoutFormatOptions) String() string {
+// String returns the LayoutFormatOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LayoutFormatOptions) String() string {
 	var parts []string
-	if e&NSLayoutFormatAlignAllLeft != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllLeft")
+	if e&LayoutFormatAlignAllLeft != 0 {
+		parts = append(parts, "LayoutFormatAlignAllLeft")
 	}
-	if e&NSLayoutFormatAlignAllRight != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllRight")
+	if e&LayoutFormatAlignAllRight != 0 {
+		parts = append(parts, "LayoutFormatAlignAllRight")
 	}
-	if e&NSLayoutFormatAlignAllTop != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllTop")
+	if e&LayoutFormatAlignAllTop != 0 {
+		parts = append(parts, "LayoutFormatAlignAllTop")
 	}
-	if e&NSLayoutFormatAlignAllBottom != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllBottom")
+	if e&LayoutFormatAlignAllBottom != 0 {
+		parts = append(parts, "LayoutFormatAlignAllBottom")
 	}
-	if e&NSLayoutFormatAlignAllLeading != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllLeading")
+	if e&LayoutFormatAlignAllLeading != 0 {
+		parts = append(parts, "LayoutFormatAlignAllLeading")
 	}
-	if e&NSLayoutFormatAlignAllTrailing != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllTrailing")
+	if e&LayoutFormatAlignAllTrailing != 0 {
+		parts = append(parts, "LayoutFormatAlignAllTrailing")
 	}
-	if e&NSLayoutFormatAlignAllCenterX != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllCenterX")
+	if e&LayoutFormatAlignAllCenterX != 0 {
+		parts = append(parts, "LayoutFormatAlignAllCenterX")
 	}
-	if e&NSLayoutFormatAlignAllCenterY != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllCenterY")
+	if e&LayoutFormatAlignAllCenterY != 0 {
+		parts = append(parts, "LayoutFormatAlignAllCenterY")
 	}
-	if e&NSLayoutFormatAlignAllLastBaseline != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllLastBaseline")
+	if e&LayoutFormatAlignAllLastBaseline != 0 {
+		parts = append(parts, "LayoutFormatAlignAllLastBaseline")
 	}
-	if e&NSLayoutFormatAlignAllFirstBaseline != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllFirstBaseline")
+	if e&LayoutFormatAlignAllFirstBaseline != 0 {
+		parts = append(parts, "LayoutFormatAlignAllFirstBaseline")
 	}
-	if e&NSLayoutFormatAlignAllBaseline != 0 {
-		parts = append(parts, "NSLayoutFormatAlignAllBaseline")
+	if e&LayoutFormatAlignAllBaseline != 0 {
+		parts = append(parts, "LayoutFormatAlignAllBaseline")
 	}
-	if e&NSLayoutFormatAlignmentMask != 0 {
-		parts = append(parts, "NSLayoutFormatAlignmentMask")
+	if e&LayoutFormatAlignmentMask != 0 {
+		parts = append(parts, "LayoutFormatAlignmentMask")
 	}
-	if e&NSLayoutFormatDirectionLeftToRight != 0 {
-		parts = append(parts, "NSLayoutFormatDirectionLeftToRight")
+	if e&LayoutFormatDirectionLeftToRight != 0 {
+		parts = append(parts, "LayoutFormatDirectionLeftToRight")
 	}
-	if e&NSLayoutFormatDirectionRightToLeft != 0 {
-		parts = append(parts, "NSLayoutFormatDirectionRightToLeft")
+	if e&LayoutFormatDirectionRightToLeft != 0 {
+		parts = append(parts, "LayoutFormatDirectionRightToLeft")
 	}
-	if e&NSLayoutFormatDirectionMask != 0 {
-		parts = append(parts, "NSLayoutFormatDirectionMask")
+	if e&LayoutFormatDirectionMask != 0 {
+		parts = append(parts, "LayoutFormatDirectionMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3600,132 +3845,142 @@ func (e NSLayoutFormatOptions) String() string {
 }
 
 // The relation between the first attribute and the modified second attribute in a constraint.
-type NSLayoutRelation int64
+type LayoutRelation int64
 
 const (
-	NSLayoutRelationLessThanOrEqual    NSLayoutRelation = -1
-	NSLayoutRelationEqual              NSLayoutRelation = 0
-	NSLayoutRelationGreaterThanOrEqual NSLayoutRelation = 1
+	LayoutRelationLessThanOrEqual    LayoutRelation = -1
+	LayoutRelationEqual              LayoutRelation = 0
+	LayoutRelationGreaterThanOrEqual LayoutRelation = 1
 )
 
-func (e NSLayoutRelation) String() string {
+// String returns the LayoutRelation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LayoutRelation) String() string {
 	switch e {
-	case NSLayoutRelationLessThanOrEqual:
-		return "NSLayoutRelationLessThanOrEqual"
-	case NSLayoutRelationEqual:
-		return "NSLayoutRelationEqual"
-	case NSLayoutRelationGreaterThanOrEqual:
-		return "NSLayoutRelationGreaterThanOrEqual"
+	case LayoutRelationLessThanOrEqual:
+		return "LayoutRelationLessThanOrEqual"
+	case LayoutRelationEqual:
+		return "LayoutRelationEqual"
+	case LayoutRelationGreaterThanOrEqual:
+		return "LayoutRelationGreaterThanOrEqual"
 	default:
-		return fmt.Sprintf("NSLayoutRelation(%d)", int64(e))
+		return fmt.Sprintf("LayoutRelation(%d)", int64(e))
 	}
 }
 
-type NSLevelIndicatorPlaceholderVisibility int64
+type LevelIndicatorPlaceholderVisibility int64
 
 const (
-	NSLevelIndicatorPlaceholderVisibilityAutomatic    NSLevelIndicatorPlaceholderVisibility = 0
-	NSLevelIndicatorPlaceholderVisibilityAlways       NSLevelIndicatorPlaceholderVisibility = 1
-	NSLevelIndicatorPlaceholderVisibilityWhileEditing NSLevelIndicatorPlaceholderVisibility = 2
+	LevelIndicatorPlaceholderVisibilityAutomatic    LevelIndicatorPlaceholderVisibility = 0
+	LevelIndicatorPlaceholderVisibilityAlways       LevelIndicatorPlaceholderVisibility = 1
+	LevelIndicatorPlaceholderVisibilityWhileEditing LevelIndicatorPlaceholderVisibility = 2
 )
 
-func (e NSLevelIndicatorPlaceholderVisibility) String() string {
+// String returns the LevelIndicatorPlaceholderVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LevelIndicatorPlaceholderVisibility) String() string {
 	switch e {
-	case NSLevelIndicatorPlaceholderVisibilityAutomatic:
-		return "NSLevelIndicatorPlaceholderVisibilityAutomatic"
-	case NSLevelIndicatorPlaceholderVisibilityAlways:
-		return "NSLevelIndicatorPlaceholderVisibilityAlways"
-	case NSLevelIndicatorPlaceholderVisibilityWhileEditing:
-		return "NSLevelIndicatorPlaceholderVisibilityWhileEditing"
+	case LevelIndicatorPlaceholderVisibilityAutomatic:
+		return "LevelIndicatorPlaceholderVisibilityAutomatic"
+	case LevelIndicatorPlaceholderVisibilityAlways:
+		return "LevelIndicatorPlaceholderVisibilityAlways"
+	case LevelIndicatorPlaceholderVisibilityWhileEditing:
+		return "LevelIndicatorPlaceholderVisibilityWhileEditing"
 	default:
-		return fmt.Sprintf("NSLevelIndicatorPlaceholderVisibility(%d)", int64(e))
+		return fmt.Sprintf("LevelIndicatorPlaceholderVisibility(%d)", int64(e))
 	}
 }
 
 // Constants that specify a level indicator’s appearance.
-type NSLevelIndicatorStyle uint64
+type LevelIndicatorStyle uint64
 
 const (
-	NSLevelIndicatorStyleRelevancy          NSLevelIndicatorStyle = 0
-	NSLevelIndicatorStyleContinuousCapacity NSLevelIndicatorStyle = 1
-	NSLevelIndicatorStyleDiscreteCapacity   NSLevelIndicatorStyle = 2
-	NSLevelIndicatorStyleRating             NSLevelIndicatorStyle = 3
+	LevelIndicatorStyleRelevancy          LevelIndicatorStyle = 0
+	LevelIndicatorStyleContinuousCapacity LevelIndicatorStyle = 1
+	LevelIndicatorStyleDiscreteCapacity   LevelIndicatorStyle = 2
+	LevelIndicatorStyleRating             LevelIndicatorStyle = 3
 )
 
-func (e NSLevelIndicatorStyle) String() string {
+// String returns the LevelIndicatorStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LevelIndicatorStyle) String() string {
 	switch e {
-	case NSLevelIndicatorStyleRelevancy:
-		return "NSLevelIndicatorStyleRelevancy"
-	case NSLevelIndicatorStyleContinuousCapacity:
-		return "NSLevelIndicatorStyleContinuousCapacity"
-	case NSLevelIndicatorStyleDiscreteCapacity:
-		return "NSLevelIndicatorStyleDiscreteCapacity"
-	case NSLevelIndicatorStyleRating:
-		return "NSLevelIndicatorStyleRating"
+	case LevelIndicatorStyleRelevancy:
+		return "LevelIndicatorStyleRelevancy"
+	case LevelIndicatorStyleContinuousCapacity:
+		return "LevelIndicatorStyleContinuousCapacity"
+	case LevelIndicatorStyleDiscreteCapacity:
+		return "LevelIndicatorStyleDiscreteCapacity"
+	case LevelIndicatorStyleRating:
+		return "LevelIndicatorStyleRating"
 	default:
-		return fmt.Sprintf("NSLevelIndicatorStyle(%d)", int64(e))
+		return fmt.Sprintf("LevelIndicatorStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify what happens when a line is too long for a container.
-type NSLineBreakMode uint64
+type LineBreakMode uint64
 
 const (
 	// The value that indicates wrapping occurs at word boundaries, unless the word doesn’t fit on a single line.
-	NSLineBreakByWordWrapping NSLineBreakMode = 0
+	LineBreakByWordWrapping LineBreakMode = 0
 	// The value that indicates wrapping occurs before the first character that doesn’t fit.
-	NSLineBreakByCharWrapping NSLineBreakMode = 1
+	LineBreakByCharWrapping LineBreakMode = 1
 	// The value that indicates lines don’t extend past the edge of the text container.
-	NSLineBreakByClipping NSLineBreakMode = 2
+	LineBreakByClipping LineBreakMode = 2
 	// The value that indicates that a line displays so that the end fits in the container and an ellipsis glyph indicates the missing text at the beginning of the line.
-	NSLineBreakByTruncatingHead NSLineBreakMode = 3
+	LineBreakByTruncatingHead LineBreakMode = 3
 	// The value that indicates a line displays so that the beginning fits in the container and an ellipsis glyph indicates the missing text at the end of the line.
-	NSLineBreakByTruncatingTail NSLineBreakMode = 4
+	LineBreakByTruncatingTail LineBreakMode = 4
 	// The value that indicates that a line displays so that the beginning and end fit in the container and an ellipsis glyph indicates the missing text in the middle.
-	NSLineBreakByTruncatingMiddle NSLineBreakMode = 5
+	LineBreakByTruncatingMiddle LineBreakMode = 5
 )
 
-func (e NSLineBreakMode) String() string {
+// String returns the LineBreakMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineBreakMode) String() string {
 	switch e {
-	case NSLineBreakByWordWrapping:
-		return "NSLineBreakByWordWrapping"
-	case NSLineBreakByCharWrapping:
-		return "NSLineBreakByCharWrapping"
-	case NSLineBreakByClipping:
-		return "NSLineBreakByClipping"
-	case NSLineBreakByTruncatingHead:
-		return "NSLineBreakByTruncatingHead"
-	case NSLineBreakByTruncatingTail:
-		return "NSLineBreakByTruncatingTail"
-	case NSLineBreakByTruncatingMiddle:
-		return "NSLineBreakByTruncatingMiddle"
+	case LineBreakByWordWrapping:
+		return "LineBreakByWordWrapping"
+	case LineBreakByCharWrapping:
+		return "LineBreakByCharWrapping"
+	case LineBreakByClipping:
+		return "LineBreakByClipping"
+	case LineBreakByTruncatingHead:
+		return "LineBreakByTruncatingHead"
+	case LineBreakByTruncatingTail:
+		return "LineBreakByTruncatingTail"
+	case LineBreakByTruncatingMiddle:
+		return "LineBreakByTruncatingMiddle"
 	default:
-		return fmt.Sprintf("NSLineBreakMode(%d)", int64(e))
+		return fmt.Sprintf("LineBreakMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify how the text system breaks lines while laying out paragraphs.
 // Bitmask — values may be combined with |.
-type NSLineBreakStrategy uint64
+type LineBreakStrategy uint64
 
 const (
 	// The text system doesn’t use any line-break strategies.
-	NSLineBreakStrategyNone               NSLineBreakStrategy = 0
-	NSLineBreakStrategyPushOut            NSLineBreakStrategy = 1
-	NSLineBreakStrategyHangulWordPriority NSLineBreakStrategy = 2
-	NSLineBreakStrategyStandard           NSLineBreakStrategy = 65535
+	LineBreakStrategyNone               LineBreakStrategy = 0
+	LineBreakStrategyPushOut            LineBreakStrategy = 1
+	LineBreakStrategyHangulWordPriority LineBreakStrategy = 2
+	LineBreakStrategyStandard           LineBreakStrategy = 65535
 )
 
-func (e NSLineBreakStrategy) String() string {
+// String returns the LineBreakStrategy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineBreakStrategy) String() string {
 	var parts []string
-	if e&NSLineBreakStrategyPushOut != 0 {
-		parts = append(parts, "NSLineBreakStrategyPushOut")
+	if e&LineBreakStrategyPushOut != 0 {
+		parts = append(parts, "LineBreakStrategyPushOut")
 	}
-	if e&NSLineBreakStrategyHangulWordPriority != 0 {
-		parts = append(parts, "NSLineBreakStrategyHangulWordPriority")
+	if e&LineBreakStrategyHangulWordPriority != 0 {
+		parts = append(parts, "LineBreakStrategyHangulWordPriority")
 	}
-	if e&NSLineBreakStrategyStandard != 0 {
-		parts = append(parts, "NSLineBreakStrategyStandard")
+	if e&LineBreakStrategyStandard != 0 {
+		parts = append(parts, "LineBreakStrategyStandard")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3734,156 +3989,168 @@ func (e NSLineBreakStrategy) String() string {
 }
 
 // Constants that specify the shape of endpoints for an open path when it is stroked.
-type NSLineCapStyle uint64
+type LineCapStyle uint64
 
 const (
-	NSLineCapStyleButt   NSLineCapStyle = 0
-	NSLineCapStyleRound  NSLineCapStyle = 1
-	NSLineCapStyleSquare NSLineCapStyle = 2
+	LineCapStyleButt   LineCapStyle = 0
+	LineCapStyleRound  LineCapStyle = 1
+	LineCapStyleSquare LineCapStyle = 2
 )
 
-func (e NSLineCapStyle) String() string {
+// String returns the LineCapStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineCapStyle) String() string {
 	switch e {
-	case NSLineCapStyleButt:
-		return "NSLineCapStyleButt"
-	case NSLineCapStyleRound:
-		return "NSLineCapStyleRound"
-	case NSLineCapStyleSquare:
-		return "NSLineCapStyleSquare"
+	case LineCapStyleButt:
+		return "LineCapStyleButt"
+	case LineCapStyleRound:
+		return "LineCapStyleRound"
+	case LineCapStyleSquare:
+		return "LineCapStyleSquare"
 	default:
-		return fmt.Sprintf("NSLineCapStyle(%d)", int64(e))
+		return fmt.Sprintf("LineCapStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify the shape of the joins between connected segments of a stroked path.
-type NSLineJoinStyle uint64
+type LineJoinStyle uint64
 
 const (
-	NSLineJoinStyleMiter NSLineJoinStyle = 0
-	NSLineJoinStyleRound NSLineJoinStyle = 1
-	NSLineJoinStyleBevel NSLineJoinStyle = 2
+	LineJoinStyleMiter LineJoinStyle = 0
+	LineJoinStyleRound LineJoinStyle = 1
+	LineJoinStyleBevel LineJoinStyle = 2
 )
 
-func (e NSLineJoinStyle) String() string {
+// String returns the LineJoinStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineJoinStyle) String() string {
 	switch e {
-	case NSLineJoinStyleMiter:
-		return "NSLineJoinStyleMiter"
-	case NSLineJoinStyleRound:
-		return "NSLineJoinStyleRound"
-	case NSLineJoinStyleBevel:
-		return "NSLineJoinStyleBevel"
+	case LineJoinStyleMiter:
+		return "LineJoinStyleMiter"
+	case LineJoinStyleRound:
+		return "LineJoinStyleRound"
+	case LineJoinStyleBevel:
+		return "LineJoinStyleBevel"
 	default:
-		return fmt.Sprintf("NSLineJoinStyle(%d)", int64(e))
+		return fmt.Sprintf("LineJoinStyle(%d)", int64(e))
 	}
 }
 
 // The direction in which a line moves.
-type NSLineMovementDirection uint64
+type LineMovementDirection uint64
 
 const (
 	// Line has no movement.
-	NSLineDoesntMove NSLineMovementDirection = 0
+	LineDoesntMove LineMovementDirection = 0
 	// Lines move from right to left.
-	NSLineMovesLeft NSLineMovementDirection = 1
+	LineMovesLeft LineMovementDirection = 1
 	// Lines move from left to right.
-	NSLineMovesRight NSLineMovementDirection = 2
+	LineMovesRight LineMovementDirection = 2
 	// Lines move from top to bottom.
-	NSLineMovesDown NSLineMovementDirection = 3
+	LineMovesDown LineMovementDirection = 3
 	// Lines move from bottom to top.
-	NSLineMovesUp NSLineMovementDirection = 4
+	LineMovesUp LineMovementDirection = 4
 )
 
-func (e NSLineMovementDirection) String() string {
+// String returns the LineMovementDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineMovementDirection) String() string {
 	switch e {
-	case NSLineDoesntMove:
-		return "NSLineDoesntMove"
-	case NSLineMovesLeft:
-		return "NSLineMovesLeft"
-	case NSLineMovesRight:
-		return "NSLineMovesRight"
-	case NSLineMovesDown:
-		return "NSLineMovesDown"
-	case NSLineMovesUp:
-		return "NSLineMovesUp"
+	case LineDoesntMove:
+		return "LineDoesntMove"
+	case LineMovesLeft:
+		return "LineMovesLeft"
+	case LineMovesRight:
+		return "LineMovesRight"
+	case LineMovesDown:
+		return "LineMovesDown"
+	case LineMovesUp:
+		return "LineMovesUp"
 	default:
-		return fmt.Sprintf("NSLineMovementDirection(%d)", int64(e))
+		return fmt.Sprintf("LineMovementDirection(%d)", int64(e))
 	}
 }
 
 // Values that describe the progression of text on a page.
-type NSLineSweepDirection uint64
+type LineSweepDirection uint64
 
 const (
 	// Characters move from right to left.
-	NSLineSweepLeft NSLineSweepDirection = 0
+	LineSweepLeft LineSweepDirection = 0
 	// Characters move from left to right.
-	NSLineSweepRight NSLineSweepDirection = 1
+	LineSweepRight LineSweepDirection = 1
 	// Characters move from top to bottom.
-	NSLineSweepDown NSLineSweepDirection = 2
+	LineSweepDown LineSweepDirection = 2
 	// Characters move from bottom to top.
-	NSLineSweepUp NSLineSweepDirection = 3
+	LineSweepUp LineSweepDirection = 3
 )
 
-func (e NSLineSweepDirection) String() string {
+// String returns the LineSweepDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LineSweepDirection) String() string {
 	switch e {
-	case NSLineSweepLeft:
-		return "NSLineSweepLeft"
-	case NSLineSweepRight:
-		return "NSLineSweepRight"
-	case NSLineSweepDown:
-		return "NSLineSweepDown"
-	case NSLineSweepUp:
-		return "NSLineSweepUp"
+	case LineSweepLeft:
+		return "LineSweepLeft"
+	case LineSweepRight:
+		return "LineSweepRight"
+	case LineSweepDown:
+		return "LineSweepDown"
+	case LineSweepUp:
+		return "LineSweepUp"
 	default:
-		return fmt.Sprintf("NSLineSweepDirection(%d)", int64(e))
+		return fmt.Sprintf("LineSweepDirection(%d)", int64(e))
 	}
 }
 
 // These constants determine how NSCell objects behave when an NSMatrix object is tracking the mouse.
-type NSMatrixMode uint64
+type MatrixMode uint64
 
 const (
-	NSRadioModeMatrix     NSMatrixMode = 0
-	NSHighlightModeMatrix NSMatrixMode = 1
-	NSListModeMatrix      NSMatrixMode = 2
-	NSTrackModeMatrix     NSMatrixMode = 3
+	RadioModeMatrix     MatrixMode = 0
+	HighlightModeMatrix MatrixMode = 1
+	ListModeMatrix      MatrixMode = 2
+	TrackModeMatrix     MatrixMode = 3
 )
 
-func (e NSMatrixMode) String() string {
+// String returns the MatrixMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MatrixMode) String() string {
 	switch e {
-	case NSRadioModeMatrix:
-		return "NSRadioModeMatrix"
-	case NSHighlightModeMatrix:
-		return "NSHighlightModeMatrix"
-	case NSListModeMatrix:
-		return "NSListModeMatrix"
-	case NSTrackModeMatrix:
-		return "NSTrackModeMatrix"
+	case RadioModeMatrix:
+		return "RadioModeMatrix"
+	case HighlightModeMatrix:
+		return "HighlightModeMatrix"
+	case ListModeMatrix:
+		return "ListModeMatrix"
+	case TrackModeMatrix:
+		return "TrackModeMatrix"
 	default:
-		return fmt.Sprintf("NSMatrixMode(%d)", int64(e))
+		return fmt.Sprintf("MatrixMode(%d)", int64(e))
 	}
 }
 
 // These constants are masks used to configure a Media Library Browser to display specific types of media. Combined masks are not yet supported. In other words, only one nonzero mask value is supported at a time. If masks are combined, the lowest mask value is used.
 // Bitmask — values may be combined with |.
-type NSMediaLibrary uint64
+type MediaLibrary uint64
 
 const (
-	NSMediaLibraryAudio NSMediaLibrary = 1
-	NSMediaLibraryImage NSMediaLibrary = 2
-	NSMediaLibraryMovie NSMediaLibrary = 4
+	MediaLibraryAudio MediaLibrary = 1
+	MediaLibraryImage MediaLibrary = 2
+	MediaLibraryMovie MediaLibrary = 4
 )
 
-func (e NSMediaLibrary) String() string {
+// String returns the MediaLibrary constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MediaLibrary) String() string {
 	var parts []string
-	if e&NSMediaLibraryAudio != 0 {
-		parts = append(parts, "NSMediaLibraryAudio")
+	if e&MediaLibraryAudio != 0 {
+		parts = append(parts, "MediaLibraryAudio")
 	}
-	if e&NSMediaLibraryImage != 0 {
-		parts = append(parts, "NSMediaLibraryImage")
+	if e&MediaLibraryImage != 0 {
+		parts = append(parts, "MediaLibraryImage")
 	}
-	if e&NSMediaLibraryMovie != 0 {
-		parts = append(parts, "NSMediaLibraryMovie")
+	if e&MediaLibraryMovie != 0 {
+		parts = append(parts, "MediaLibraryMovie")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3892,87 +4159,93 @@ func (e NSMediaLibrary) String() string {
 }
 
 // Constants that define types of badges for display.
-type NSMenuItemBadgeType int64
+type MenuItemBadgeType int64
 
 const (
 	// The badge should have no string portion.
-	NSMenuItemBadgeTypeNone NSMenuItemBadgeType = 0
+	MenuItemBadgeTypeNone MenuItemBadgeType = 0
 	// The badge represents the number of available updates.
-	NSMenuItemBadgeTypeUpdates NSMenuItemBadgeType = 1
+	MenuItemBadgeTypeUpdates MenuItemBadgeType = 1
 	// The badge represents the number of new items.
-	NSMenuItemBadgeTypeNewItems NSMenuItemBadgeType = 2
+	MenuItemBadgeTypeNewItems MenuItemBadgeType = 2
 	// The badge represents the number of alerts.
-	NSMenuItemBadgeTypeAlerts NSMenuItemBadgeType = 3
+	MenuItemBadgeTypeAlerts MenuItemBadgeType = 3
 )
 
-func (e NSMenuItemBadgeType) String() string {
+// String returns the MenuItemBadgeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MenuItemBadgeType) String() string {
 	switch e {
-	case NSMenuItemBadgeTypeNone:
-		return "NSMenuItemBadgeTypeNone"
-	case NSMenuItemBadgeTypeUpdates:
-		return "NSMenuItemBadgeTypeUpdates"
-	case NSMenuItemBadgeTypeNewItems:
-		return "NSMenuItemBadgeTypeNewItems"
-	case NSMenuItemBadgeTypeAlerts:
-		return "NSMenuItemBadgeTypeAlerts"
+	case MenuItemBadgeTypeNone:
+		return "MenuItemBadgeTypeNone"
+	case MenuItemBadgeTypeUpdates:
+		return "MenuItemBadgeTypeUpdates"
+	case MenuItemBadgeTypeNewItems:
+		return "MenuItemBadgeTypeNewItems"
+	case MenuItemBadgeTypeAlerts:
+		return "MenuItemBadgeTypeAlerts"
 	default:
-		return fmt.Sprintf("NSMenuItemBadgeType(%d)", int64(e))
+		return fmt.Sprintf("MenuItemBadgeType(%d)", int64(e))
 	}
 }
 
 // Specifies the style of a menu.
-type NSMenuPresentationStyle int64
+type MenuPresentationStyle int64
 
 const (
 	// The default presentation style. Typically means the menu will be presented as either a popup or pulldown menu, based on the context.
-	NSMenuPresentationStyleRegular NSMenuPresentationStyle = 0
+	MenuPresentationStyleRegular MenuPresentationStyle = 0
 	// The menu marked as palette is to be displayed in place of the menu item presenting it, with its items aligned horizontally.
-	NSMenuPresentationStylePalette NSMenuPresentationStyle = 1
+	MenuPresentationStylePalette MenuPresentationStyle = 1
 )
 
-func (e NSMenuPresentationStyle) String() string {
+// String returns the MenuPresentationStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MenuPresentationStyle) String() string {
 	switch e {
-	case NSMenuPresentationStyleRegular:
-		return "NSMenuPresentationStyleRegular"
-	case NSMenuPresentationStylePalette:
-		return "NSMenuPresentationStylePalette"
+	case MenuPresentationStyleRegular:
+		return "MenuPresentationStyleRegular"
+	case MenuPresentationStylePalette:
+		return "MenuPresentationStylePalette"
 	default:
-		return fmt.Sprintf("NSMenuPresentationStyle(%d)", int64(e))
+		return fmt.Sprintf("MenuPresentationStyle(%d)", int64(e))
 	}
 }
 
 // These constants are used as a bitmask for specifying a set of menu or menu item properties, and are contained by the propertiesToUpdate property.
 // Bitmask — values may be combined with |.
-type NSMenuProperties uint64
+type MenuProperties uint64
 
 const (
-	NSMenuPropertyItemTitle                    NSMenuProperties = 1
-	NSMenuPropertyItemAttributedTitle          NSMenuProperties = 2
-	NSMenuPropertyItemKeyEquivalent            NSMenuProperties = 4
-	NSMenuPropertyItemImage                    NSMenuProperties = 8
-	NSMenuPropertyItemEnabled                  NSMenuProperties = 16
-	NSMenuPropertyItemAccessibilityDescription NSMenuProperties = 32
+	MenuPropertyItemTitle                    MenuProperties = 1
+	MenuPropertyItemAttributedTitle          MenuProperties = 2
+	MenuPropertyItemKeyEquivalent            MenuProperties = 4
+	MenuPropertyItemImage                    MenuProperties = 8
+	MenuPropertyItemEnabled                  MenuProperties = 16
+	MenuPropertyItemAccessibilityDescription MenuProperties = 32
 )
 
-func (e NSMenuProperties) String() string {
+// String returns the MenuProperties constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MenuProperties) String() string {
 	var parts []string
-	if e&NSMenuPropertyItemTitle != 0 {
-		parts = append(parts, "NSMenuPropertyItemTitle")
+	if e&MenuPropertyItemTitle != 0 {
+		parts = append(parts, "MenuPropertyItemTitle")
 	}
-	if e&NSMenuPropertyItemAttributedTitle != 0 {
-		parts = append(parts, "NSMenuPropertyItemAttributedTitle")
+	if e&MenuPropertyItemAttributedTitle != 0 {
+		parts = append(parts, "MenuPropertyItemAttributedTitle")
 	}
-	if e&NSMenuPropertyItemKeyEquivalent != 0 {
-		parts = append(parts, "NSMenuPropertyItemKeyEquivalent")
+	if e&MenuPropertyItemKeyEquivalent != 0 {
+		parts = append(parts, "MenuPropertyItemKeyEquivalent")
 	}
-	if e&NSMenuPropertyItemImage != 0 {
-		parts = append(parts, "NSMenuPropertyItemImage")
+	if e&MenuPropertyItemImage != 0 {
+		parts = append(parts, "MenuPropertyItemImage")
 	}
-	if e&NSMenuPropertyItemEnabled != 0 {
-		parts = append(parts, "NSMenuPropertyItemEnabled")
+	if e&MenuPropertyItemEnabled != 0 {
+		parts = append(parts, "MenuPropertyItemEnabled")
 	}
-	if e&NSMenuPropertyItemAccessibilityDescription != 0 {
-		parts = append(parts, "NSMenuPropertyItemAccessibilityDescription")
+	if e&MenuPropertyItemAccessibilityDescription != 0 {
+		parts = append(parts, "MenuPropertyItemAccessibilityDescription")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3981,173 +4254,160 @@ func (e NSMenuProperties) String() string {
 }
 
 // Describes how the menu manages selection states of the menu items that belong to the same selection group.
-type NSMenuSelectionMode int64
+type MenuSelectionMode int64
 
 const (
 	// The menu will determine the appropriate selection mode based on the context and its contents.
-	NSMenuSelectionModeAutomatic NSMenuSelectionMode = 0
+	MenuSelectionModeAutomatic MenuSelectionMode = 0
 	// The user will be allowed to select at most one menu item in the same selection group at a time. A change in selection will deselect any previously selected item.
-	NSMenuSelectionModeSelectOne NSMenuSelectionMode = 1
+	MenuSelectionModeSelectOne MenuSelectionMode = 1
 	// The user can select multiple items in the menu. A change in selection will not automatically deselect any previously selected item in the same selection group.
-	NSMenuSelectionModeSelectAny NSMenuSelectionMode = 2
+	MenuSelectionModeSelectAny MenuSelectionMode = 2
 )
 
-func (e NSMenuSelectionMode) String() string {
+// String returns the MenuSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MenuSelectionMode) String() string {
 	switch e {
-	case NSMenuSelectionModeAutomatic:
-		return "NSMenuSelectionModeAutomatic"
-	case NSMenuSelectionModeSelectOne:
-		return "NSMenuSelectionModeSelectOne"
-	case NSMenuSelectionModeSelectAny:
-		return "NSMenuSelectionModeSelectAny"
+	case MenuSelectionModeAutomatic:
+		return "MenuSelectionModeAutomatic"
+	case MenuSelectionModeSelectOne:
+		return "MenuSelectionModeSelectOne"
+	case MenuSelectionModeSelectAny:
+		return "MenuSelectionModeSelectAny"
 	default:
-		return fmt.Sprintf("NSMenuSelectionMode(%d)", int64(e))
-	}
-}
-
-// A constant for glyph packing.
-//
-// Deprecated: since macOS 10.13.
-type NSMultibyteGlyphPacking uint64
-
-const (
-	// The native format for macOS.
-	//
-	// Deprecated: since macOS 10.13.
-	NSNativeShortGlyphPacking NSMultibyteGlyphPacking = 5
-)
-
-func (e NSMultibyteGlyphPacking) String() string {
-	switch e {
-	case NSNativeShortGlyphPacking:
-		return "NSNativeShortGlyphPacking"
-	default:
-		return fmt.Sprintf("NSMultibyteGlyphPacking(%d)", int64(e))
+		return fmt.Sprintf("MenuSelectionMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify context parameters.
 //
 // Deprecated: since macOS 10.14.
-type NSOpenGLContextParameter int64
+type OpenGLContextParameter int64
 
 const (
-	NSOpenGLContextParameterSwapInterval          NSOpenGLContextParameter = 222
-	NSOpenGLContextParameterSurfaceOrder          NSOpenGLContextParameter = 235
-	NSOpenGLContextParameterSurfaceOpacity        NSOpenGLContextParameter = 236
-	NSOpenGLContextParameterSurfaceBackingSize    NSOpenGLContextParameter = 304
-	NSOpenGLContextParameterReclaimResources      NSOpenGLContextParameter = 308
-	NSOpenGLContextParameterCurrentRendererID     NSOpenGLContextParameter = 309
-	NSOpenGLContextParameterGPUVertexProcessing   NSOpenGLContextParameter = 310
-	NSOpenGLContextParameterGPUFragmentProcessing NSOpenGLContextParameter = 311
-	NSOpenGLContextParameterHasDrawable           NSOpenGLContextParameter = 314
-	NSOpenGLContextParameterMPSwapsInFlight       NSOpenGLContextParameter = 315
+	OpenGLContextParameterSwapInterval          OpenGLContextParameter = 222
+	OpenGLContextParameterSurfaceOrder          OpenGLContextParameter = 235
+	OpenGLContextParameterSurfaceOpacity        OpenGLContextParameter = 236
+	OpenGLContextParameterSurfaceBackingSize    OpenGLContextParameter = 304
+	OpenGLContextParameterReclaimResources      OpenGLContextParameter = 308
+	OpenGLContextParameterCurrentRendererID     OpenGLContextParameter = 309
+	OpenGLContextParameterGPUVertexProcessing   OpenGLContextParameter = 310
+	OpenGLContextParameterGPUFragmentProcessing OpenGLContextParameter = 311
+	OpenGLContextParameterHasDrawable           OpenGLContextParameter = 314
+	OpenGLContextParameterMPSwapsInFlight       OpenGLContextParameter = 315
 	// Deprecated: since macOS 10.14.
-	NSOpenGLContextParameterSwapRectangle NSOpenGLContextParameter = 200
+	OpenGLContextParameterSwapRectangle OpenGLContextParameter = 200
 	// Deprecated: since macOS 10.14.
-	NSOpenGLContextParameterSwapRectangleEnable NSOpenGLContextParameter = 201
+	OpenGLContextParameterSwapRectangleEnable OpenGLContextParameter = 201
 	// Deprecated: since macOS 10.14.
-	NSOpenGLContextParameterRasterizationEnable NSOpenGLContextParameter = 221
+	OpenGLContextParameterRasterizationEnable OpenGLContextParameter = 221
 	// Deprecated: since macOS 10.14.
-	NSOpenGLContextParameterStateValidation NSOpenGLContextParameter = 301
+	OpenGLContextParameterStateValidation OpenGLContextParameter = 301
 	// Deprecated: since macOS 10.14.
-	NSOpenGLContextParameterSurfaceSurfaceVolatile NSOpenGLContextParameter = 306
+	OpenGLContextParameterSurfaceSurfaceVolatile OpenGLContextParameter = 306
 )
 
-func (e NSOpenGLContextParameter) String() string {
+// String returns the OpenGLContextParameter constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OpenGLContextParameter) String() string {
 	switch e {
-	case NSOpenGLContextParameterSwapInterval:
-		return "NSOpenGLContextParameterSwapInterval"
-	case NSOpenGLContextParameterSurfaceOrder:
-		return "NSOpenGLContextParameterSurfaceOrder"
-	case NSOpenGLContextParameterSurfaceOpacity:
-		return "NSOpenGLContextParameterSurfaceOpacity"
-	case NSOpenGLContextParameterSurfaceBackingSize:
-		return "NSOpenGLContextParameterSurfaceBackingSize"
-	case NSOpenGLContextParameterReclaimResources:
-		return "NSOpenGLContextParameterReclaimResources"
-	case NSOpenGLContextParameterCurrentRendererID:
-		return "NSOpenGLContextParameterCurrentRendererID"
-	case NSOpenGLContextParameterGPUVertexProcessing:
-		return "NSOpenGLContextParameterGPUVertexProcessing"
-	case NSOpenGLContextParameterGPUFragmentProcessing:
-		return "NSOpenGLContextParameterGPUFragmentProcessing"
-	case NSOpenGLContextParameterHasDrawable:
-		return "NSOpenGLContextParameterHasDrawable"
-	case NSOpenGLContextParameterMPSwapsInFlight:
-		return "NSOpenGLContextParameterMPSwapsInFlight"
-	case NSOpenGLContextParameterSwapRectangle:
-		return "NSOpenGLContextParameterSwapRectangle"
-	case NSOpenGLContextParameterSwapRectangleEnable:
-		return "NSOpenGLContextParameterSwapRectangleEnable"
-	case NSOpenGLContextParameterRasterizationEnable:
-		return "NSOpenGLContextParameterRasterizationEnable"
-	case NSOpenGLContextParameterStateValidation:
-		return "NSOpenGLContextParameterStateValidation"
-	case NSOpenGLContextParameterSurfaceSurfaceVolatile:
-		return "NSOpenGLContextParameterSurfaceSurfaceVolatile"
+	case OpenGLContextParameterSwapInterval:
+		return "OpenGLContextParameterSwapInterval"
+	case OpenGLContextParameterSurfaceOrder:
+		return "OpenGLContextParameterSurfaceOrder"
+	case OpenGLContextParameterSurfaceOpacity:
+		return "OpenGLContextParameterSurfaceOpacity"
+	case OpenGLContextParameterSurfaceBackingSize:
+		return "OpenGLContextParameterSurfaceBackingSize"
+	case OpenGLContextParameterReclaimResources:
+		return "OpenGLContextParameterReclaimResources"
+	case OpenGLContextParameterCurrentRendererID:
+		return "OpenGLContextParameterCurrentRendererID"
+	case OpenGLContextParameterGPUVertexProcessing:
+		return "OpenGLContextParameterGPUVertexProcessing"
+	case OpenGLContextParameterGPUFragmentProcessing:
+		return "OpenGLContextParameterGPUFragmentProcessing"
+	case OpenGLContextParameterHasDrawable:
+		return "OpenGLContextParameterHasDrawable"
+	case OpenGLContextParameterMPSwapsInFlight:
+		return "OpenGLContextParameterMPSwapsInFlight"
+	case OpenGLContextParameterSwapRectangle:
+		return "OpenGLContextParameterSwapRectangle"
+	case OpenGLContextParameterSwapRectangleEnable:
+		return "OpenGLContextParameterSwapRectangleEnable"
+	case OpenGLContextParameterRasterizationEnable:
+		return "OpenGLContextParameterRasterizationEnable"
+	case OpenGLContextParameterStateValidation:
+		return "OpenGLContextParameterStateValidation"
+	case OpenGLContextParameterSurfaceSurfaceVolatile:
+		return "OpenGLContextParameterSurfaceSurfaceVolatile"
 	default:
-		return fmt.Sprintf("NSOpenGLContextParameter(%d)", int64(e))
+		return fmt.Sprintf("OpenGLContextParameter(%d)", int64(e))
 	}
 }
 
 // Constants that specify OpenGL options.
 //
 // Deprecated: since macOS 10.4.
-type NSOpenGLGlobalOption int64
+type OpenGLGlobalOption int64
 
 const (
 	// Sets the size of the pixel format cache.
-	NSOpenGLGOFormatCacheSize NSOpenGLGlobalOption = 501
+	OpenGLGOFormatCacheSize OpenGLGlobalOption = 501
 	// Resets the pixel format cache if true.
-	NSOpenGLGOClearFormatCache NSOpenGLGlobalOption = 502
+	OpenGLGOClearFormatCache OpenGLGlobalOption = 502
 	// Whether to retain loaded renderers in memory.
-	NSOpenGLGORetainRenderers NSOpenGLGlobalOption = 503
+	OpenGLGORetainRenderers OpenGLGlobalOption = 503
 	// Whether to enable the function compilation block cache. This is off by default. It must be enabled at startup.
-	NSOpenGLGOUseBuildCache NSOpenGLGlobalOption = 506
+	OpenGLGOUseBuildCache OpenGLGlobalOption = 506
 	// Does a soft reset of the CGL library if true.
 	//
 	// Deprecated: since macOS 10.4.
-	NSOpenGLGOResetLibrary NSOpenGLGlobalOption = 504
+	OpenGLGOResetLibrary OpenGLGlobalOption = 504
 )
 
-func (e NSOpenGLGlobalOption) String() string {
+// String returns the OpenGLGlobalOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OpenGLGlobalOption) String() string {
 	switch e {
-	case NSOpenGLGOFormatCacheSize:
-		return "NSOpenGLGOFormatCacheSize"
-	case NSOpenGLGOClearFormatCache:
-		return "NSOpenGLGOClearFormatCache"
-	case NSOpenGLGORetainRenderers:
-		return "NSOpenGLGORetainRenderers"
-	case NSOpenGLGOUseBuildCache:
-		return "NSOpenGLGOUseBuildCache"
-	case NSOpenGLGOResetLibrary:
-		return "NSOpenGLGOResetLibrary"
+	case OpenGLGOFormatCacheSize:
+		return "OpenGLGOFormatCacheSize"
+	case OpenGLGOClearFormatCache:
+		return "OpenGLGOClearFormatCache"
+	case OpenGLGORetainRenderers:
+		return "OpenGLGORetainRenderers"
+	case OpenGLGOUseBuildCache:
+		return "OpenGLGOUseBuildCache"
+	case OpenGLGOResetLibrary:
+		return "OpenGLGOResetLibrary"
 	default:
-		return fmt.Sprintf("NSOpenGLGlobalOption(%d)", int64(e))
+		return fmt.Sprintf("OpenGLGlobalOption(%d)", int64(e))
 	}
 }
 
 // Constants used to configure the contents of a PDF panel.
 // Bitmask — values may be combined with |.
-type NSPDFPanelOptions int64
+type PDFPanelOptions int64
 
 const (
-	NSPDFPanelShowsPaperSize          NSPDFPanelOptions = 4
-	NSPDFPanelShowsOrientation        NSPDFPanelOptions = 8
-	NSPDFPanelRequestsParentDirectory NSPDFPanelOptions = 16777216
+	PDFPanelShowsPaperSize          PDFPanelOptions = 4
+	PDFPanelShowsOrientation        PDFPanelOptions = 8
+	PDFPanelRequestsParentDirectory PDFPanelOptions = 16777216
 )
 
-func (e NSPDFPanelOptions) String() string {
+// String returns the PDFPanelOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PDFPanelOptions) String() string {
 	var parts []string
-	if e&NSPDFPanelShowsPaperSize != 0 {
-		parts = append(parts, "NSPDFPanelShowsPaperSize")
+	if e&PDFPanelShowsPaperSize != 0 {
+		parts = append(parts, "PDFPanelShowsPaperSize")
 	}
-	if e&NSPDFPanelShowsOrientation != 0 {
-		parts = append(parts, "NSPDFPanelShowsOrientation")
+	if e&PDFPanelShowsOrientation != 0 {
+		parts = append(parts, "PDFPanelShowsOrientation")
 	}
-	if e&NSPDFPanelRequestsParentDirectory != 0 {
-		parts = append(parts, "NSPDFPanelRequestsParentDirectory")
+	if e&PDFPanelRequestsParentDirectory != 0 {
+		parts = append(parts, "PDFPanelRequestsParentDirectory")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -4156,105 +4416,95 @@ func (e NSPDFPanelOptions) String() string {
 }
 
 // These constants control the transition style of the page controller.
-type NSPageControllerTransitionStyle int64
+type PageControllerTransitionStyle int64
 
 const (
-	NSPageControllerTransitionStyleStackHistory    NSPageControllerTransitionStyle = 0
-	NSPageControllerTransitionStyleStackBook       NSPageControllerTransitionStyle = 1
-	NSPageControllerTransitionStyleHorizontalStrip NSPageControllerTransitionStyle = 2
+	PageControllerTransitionStyleStackHistory    PageControllerTransitionStyle = 0
+	PageControllerTransitionStyleStackBook       PageControllerTransitionStyle = 1
+	PageControllerTransitionStyleHorizontalStrip PageControllerTransitionStyle = 2
 )
 
-func (e NSPageControllerTransitionStyle) String() string {
+// String returns the PageControllerTransitionStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PageControllerTransitionStyle) String() string {
 	switch e {
-	case NSPageControllerTransitionStyleStackHistory:
-		return "NSPageControllerTransitionStyleStackHistory"
-	case NSPageControllerTransitionStyleStackBook:
-		return "NSPageControllerTransitionStyleStackBook"
-	case NSPageControllerTransitionStyleHorizontalStrip:
-		return "NSPageControllerTransitionStyleHorizontalStrip"
+	case PageControllerTransitionStyleStackHistory:
+		return "PageControllerTransitionStyleStackHistory"
+	case PageControllerTransitionStyleStackBook:
+		return "PageControllerTransitionStyleStackBook"
+	case PageControllerTransitionStyleHorizontalStrip:
+		return "PageControllerTransitionStyleHorizontalStrip"
 	default:
-		return fmt.Sprintf("NSPageControllerTransitionStyle(%d)", int64(e))
-	}
-}
-
-type NSPageLayoutResult int64
-
-const (
-	NSPageLayoutResultCancelled NSPageLayoutResult = 0
-	NSPageLayoutResultChanged   NSPageLayoutResult = 1
-)
-
-func (e NSPageLayoutResult) String() string {
-	switch e {
-	case NSPageLayoutResultCancelled:
-		return "NSPageLayoutResultCancelled"
-	case NSPageLayoutResultChanged:
-		return "NSPageLayoutResultChanged"
-	default:
-		return fmt.Sprintf("NSPageLayoutResult(%d)", int64(e))
+		return fmt.Sprintf("PageControllerTransitionStyle(%d)", int64(e))
 	}
 }
 
 // Constants that describe the orientation of printing on a page.
-type NSPaperOrientation int64
+type PaperOrientation int64
 
 const (
-	NSPaperOrientationPortrait  NSPaperOrientation = 0
-	NSPaperOrientationLandscape NSPaperOrientation = 1
+	PaperOrientationPortrait  PaperOrientation = 0
+	PaperOrientationLandscape PaperOrientation = 1
 )
 
-func (e NSPaperOrientation) String() string {
+// String returns the PaperOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PaperOrientation) String() string {
 	switch e {
-	case NSPaperOrientationPortrait:
-		return "NSPaperOrientationPortrait"
-	case NSPaperOrientationLandscape:
-		return "NSPaperOrientationLandscape"
+	case PaperOrientationPortrait:
+		return "PaperOrientationPortrait"
+	case PaperOrientationLandscape:
+		return "PaperOrientationLandscape"
 	default:
-		return fmt.Sprintf("NSPaperOrientation(%d)", int64(e))
+		return fmt.Sprintf("PaperOrientation(%d)", int64(e))
 	}
 }
 
 // A value indicating pasteboard access behavior.
-type NSPasteboardAccessBehavior int64
+type PasteboardAccessBehavior int64
 
 const (
 	// The default behavior for the General pasteboard is to ask upon programmatic access. All other pasteboards default to always allow access. If an app has never triggered a pasteboard access alert, its General pasteboard will report `.default` behavior. Such an app is not shown in the corresponding System Settings pane. Once programmatic pasteboard access triggers the first pasteboard access alert, the state automatically changes to `.ask`. At this point the app starts being shown in System Settings, where the user can toggle the behavior between `.ask`, `.alwaysAllow`, and `.alwaysDeny`.
-	NSPasteboardAccessBehaviorDefault NSPasteboardAccessBehavior = 0
+	PasteboardAccessBehaviorDefault PasteboardAccessBehavior = 0
 	// The system will notify the user and ask for permission before granting pasteboard access. However, access that is both user originated and paste related will always be allowed, and will not result in a notification. The app is listed in the corresponding System Settings pane.
-	NSPasteboardAccessBehaviorAsk NSPasteboardAccessBehavior = 1
+	PasteboardAccessBehaviorAsk PasteboardAccessBehavior = 1
 	// The system will automatically allow all pasteboard access, without notifying the user.  The app is listed in the corresponding System Settings pane.
-	NSPasteboardAccessBehaviorAlwaysAllow NSPasteboardAccessBehavior = 2
+	PasteboardAccessBehaviorAlwaysAllow PasteboardAccessBehavior = 2
 	// The system will automatically deny all pasteboard access, without notifying the user. However, access that is both user originated and paste related will always be allowed, and will not result in a notification. The app is listed in the corresponding System Settings pane.
-	NSPasteboardAccessBehaviorAlwaysDeny NSPasteboardAccessBehavior = 3
+	PasteboardAccessBehaviorAlwaysDeny PasteboardAccessBehavior = 3
 )
 
-func (e NSPasteboardAccessBehavior) String() string {
+// String returns the PasteboardAccessBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PasteboardAccessBehavior) String() string {
 	switch e {
-	case NSPasteboardAccessBehaviorDefault:
-		return "NSPasteboardAccessBehaviorDefault"
-	case NSPasteboardAccessBehaviorAsk:
-		return "NSPasteboardAccessBehaviorAsk"
-	case NSPasteboardAccessBehaviorAlwaysAllow:
-		return "NSPasteboardAccessBehaviorAlwaysAllow"
-	case NSPasteboardAccessBehaviorAlwaysDeny:
-		return "NSPasteboardAccessBehaviorAlwaysDeny"
+	case PasteboardAccessBehaviorDefault:
+		return "PasteboardAccessBehaviorDefault"
+	case PasteboardAccessBehaviorAsk:
+		return "PasteboardAccessBehaviorAsk"
+	case PasteboardAccessBehaviorAlwaysAllow:
+		return "PasteboardAccessBehaviorAlwaysAllow"
+	case PasteboardAccessBehaviorAlwaysDeny:
+		return "PasteboardAccessBehaviorAlwaysDeny"
 	default:
-		return fmt.Sprintf("NSPasteboardAccessBehavior(%d)", int64(e))
+		return fmt.Sprintf("PasteboardAccessBehavior(%d)", int64(e))
 	}
 }
 
 // Options for preparing the pasteboard.
 // Bitmask — values may be combined with |.
-type NSPasteboardContentsOptions uint64
+type PasteboardContentsOptions uint64
 
 const (
-	NSPasteboardContentsCurrentHostOnly NSPasteboardContentsOptions = 1
+	PasteboardContentsCurrentHostOnly PasteboardContentsOptions = 1
 )
 
-func (e NSPasteboardContentsOptions) String() string {
+// String returns the PasteboardContentsOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PasteboardContentsOptions) String() string {
 	var parts []string
-	if e&NSPasteboardContentsCurrentHostOnly != 0 {
-		parts = append(parts, "NSPasteboardContentsCurrentHostOnly")
+	if e&PasteboardContentsCurrentHostOnly != 0 {
+		parts = append(parts, "PasteboardContentsCurrentHostOnly")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -4263,220 +4513,236 @@ func (e NSPasteboardContentsOptions) String() string {
 }
 
 // NSPathStyle constants represent the different visual and behavioral styles an NSPathControl or NSPathCell object can have.
-type NSPathStyle int64
+type PathStyle int64
 
 const (
-	NSPathStyleStandard NSPathStyle = 0
-	NSPathStylePopUp    NSPathStyle = 2
+	PathStyleStandard PathStyle = 0
+	PathStylePopUp    PathStyle = 2
 	// Deprecated: since macOS 10.7.
-	NSPathStyleNavigationBar NSPathStyle = 1
+	PathStyleNavigationBar PathStyle = 1
 )
 
-func (e NSPathStyle) String() string {
+// String returns the PathStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PathStyle) String() string {
 	switch e {
-	case NSPathStyleStandard:
-		return "NSPathStyleStandard"
-	case NSPathStylePopUp:
-		return "NSPathStylePopUp"
-	case NSPathStyleNavigationBar:
-		return "NSPathStyleNavigationBar"
+	case PathStyleStandard:
+		return "PathStyleStandard"
+	case PathStylePopUp:
+		return "PathStylePopUp"
+	case PathStyleNavigationBar:
+		return "PathStyleNavigationBar"
 	default:
-		return fmt.Sprintf("NSPathStyle(%d)", int64(e))
+		return fmt.Sprintf("PathStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify display styles for picker bar items.
-type NSPickerTouchBarItemControlRepresentation int64
+type PickerTouchBarItemControlRepresentation int64
 
 const (
-	NSPickerTouchBarItemControlRepresentationAutomatic NSPickerTouchBarItemControlRepresentation = 0
-	NSPickerTouchBarItemControlRepresentationExpanded  NSPickerTouchBarItemControlRepresentation = 1
-	NSPickerTouchBarItemControlRepresentationCollapsed NSPickerTouchBarItemControlRepresentation = 2
+	PickerTouchBarItemControlRepresentationAutomatic PickerTouchBarItemControlRepresentation = 0
+	PickerTouchBarItemControlRepresentationExpanded  PickerTouchBarItemControlRepresentation = 1
+	PickerTouchBarItemControlRepresentationCollapsed PickerTouchBarItemControlRepresentation = 2
 )
 
-func (e NSPickerTouchBarItemControlRepresentation) String() string {
+// String returns the PickerTouchBarItemControlRepresentation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PickerTouchBarItemControlRepresentation) String() string {
 	switch e {
-	case NSPickerTouchBarItemControlRepresentationAutomatic:
-		return "NSPickerTouchBarItemControlRepresentationAutomatic"
-	case NSPickerTouchBarItemControlRepresentationExpanded:
-		return "NSPickerTouchBarItemControlRepresentationExpanded"
-	case NSPickerTouchBarItemControlRepresentationCollapsed:
-		return "NSPickerTouchBarItemControlRepresentationCollapsed"
+	case PickerTouchBarItemControlRepresentationAutomatic:
+		return "PickerTouchBarItemControlRepresentationAutomatic"
+	case PickerTouchBarItemControlRepresentationExpanded:
+		return "PickerTouchBarItemControlRepresentationExpanded"
+	case PickerTouchBarItemControlRepresentationCollapsed:
+		return "PickerTouchBarItemControlRepresentationCollapsed"
 	default:
-		return fmt.Sprintf("NSPickerTouchBarItemControlRepresentation(%d)", int64(e))
+		return fmt.Sprintf("PickerTouchBarItemControlRepresentation(%d)", int64(e))
 	}
 }
 
 // Constants that specify selection modes for picker bar items.
-type NSPickerTouchBarItemSelectionMode int64
+type PickerTouchBarItemSelectionMode int64
 
 const (
-	NSPickerTouchBarItemSelectionModeSelectOne NSPickerTouchBarItemSelectionMode = 0
-	NSPickerTouchBarItemSelectionModeSelectAny NSPickerTouchBarItemSelectionMode = 1
-	NSPickerTouchBarItemSelectionModeMomentary NSPickerTouchBarItemSelectionMode = 2
+	PickerTouchBarItemSelectionModeSelectOne PickerTouchBarItemSelectionMode = 0
+	PickerTouchBarItemSelectionModeSelectAny PickerTouchBarItemSelectionMode = 1
+	PickerTouchBarItemSelectionModeMomentary PickerTouchBarItemSelectionMode = 2
 )
 
-func (e NSPickerTouchBarItemSelectionMode) String() string {
+// String returns the PickerTouchBarItemSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PickerTouchBarItemSelectionMode) String() string {
 	switch e {
-	case NSPickerTouchBarItemSelectionModeSelectOne:
-		return "NSPickerTouchBarItemSelectionModeSelectOne"
-	case NSPickerTouchBarItemSelectionModeSelectAny:
-		return "NSPickerTouchBarItemSelectionModeSelectAny"
-	case NSPickerTouchBarItemSelectionModeMomentary:
-		return "NSPickerTouchBarItemSelectionModeMomentary"
+	case PickerTouchBarItemSelectionModeSelectOne:
+		return "PickerTouchBarItemSelectionModeSelectOne"
+	case PickerTouchBarItemSelectionModeSelectAny:
+		return "PickerTouchBarItemSelectionModeSelectAny"
+	case PickerTouchBarItemSelectionModeMomentary:
+		return "PickerTouchBarItemSelectionModeMomentary"
 	default:
-		return fmt.Sprintf("NSPickerTouchBarItemSelectionMode(%d)", int64(e))
+		return fmt.Sprintf("PickerTouchBarItemSelectionMode(%d)", int64(e))
 	}
 }
 
 // The pointing-device types for tablet-proximity events or mouse events with a proximity event subtype.
 //
 // Deprecated: since macOS 10.12.
-type NSPointingDeviceType uint64
+type PointingDeviceType uint64
 
 const (
 	// Deprecated: since macOS 10.12.
-	NSPointingDeviceTypeUnknown NSPointingDeviceType = 0
-	NSPointingDeviceTypePen     NSPointingDeviceType = 1
-	NSPointingDeviceTypeCursor  NSPointingDeviceType = 2
-	NSPointingDeviceTypeEraser  NSPointingDeviceType = 3
+	PointingDeviceTypeUnknown PointingDeviceType = 0
+	PointingDeviceTypePen     PointingDeviceType = 1
+	PointingDeviceTypeCursor  PointingDeviceType = 2
+	PointingDeviceTypeEraser  PointingDeviceType = 3
 )
 
-func (e NSPointingDeviceType) String() string {
+// String returns the PointingDeviceType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PointingDeviceType) String() string {
 	switch e {
-	case NSPointingDeviceTypeUnknown:
-		return "NSPointingDeviceTypeUnknown"
-	case NSPointingDeviceTypePen:
-		return "NSPointingDeviceTypePen"
-	case NSPointingDeviceTypeCursor:
-		return "NSPointingDeviceTypeCursor"
-	case NSPointingDeviceTypeEraser:
-		return "NSPointingDeviceTypeEraser"
+	case PointingDeviceTypeUnknown:
+		return "PointingDeviceTypeUnknown"
+	case PointingDeviceTypePen:
+		return "PointingDeviceTypePen"
+	case PointingDeviceTypeCursor:
+		return "PointingDeviceTypeCursor"
+	case PointingDeviceTypeEraser:
+		return "PointingDeviceTypeEraser"
 	default:
-		return fmt.Sprintf("NSPointingDeviceType(%d)", int64(e))
+		return fmt.Sprintf("PointingDeviceType(%d)", int64(e))
 	}
 }
 
 // These constants are defined for use with the arrowPosition property.
-type NSPopUpArrowPosition uint64
+type PopUpArrowPosition uint64
 
 const (
-	NSPopUpNoArrow       NSPopUpArrowPosition = 0
-	NSPopUpArrowAtCenter NSPopUpArrowPosition = 1
-	NSPopUpArrowAtBottom NSPopUpArrowPosition = 2
+	PopUpNoArrow       PopUpArrowPosition = 0
+	PopUpArrowAtCenter PopUpArrowPosition = 1
+	PopUpArrowAtBottom PopUpArrowPosition = 2
 )
 
-func (e NSPopUpArrowPosition) String() string {
+// String returns the PopUpArrowPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PopUpArrowPosition) String() string {
 	switch e {
-	case NSPopUpNoArrow:
-		return "NSPopUpNoArrow"
-	case NSPopUpArrowAtCenter:
-		return "NSPopUpArrowAtCenter"
-	case NSPopUpArrowAtBottom:
-		return "NSPopUpArrowAtBottom"
+	case PopUpNoArrow:
+		return "PopUpNoArrow"
+	case PopUpArrowAtCenter:
+		return "PopUpArrowAtCenter"
+	case PopUpArrowAtBottom:
+		return "PopUpArrowAtBottom"
 	default:
-		return fmt.Sprintf("NSPopUpArrowPosition(%d)", int64(e))
+		return fmt.Sprintf("PopUpArrowPosition(%d)", int64(e))
 	}
 }
 
 // The appearance and disappearance behavior of a popover.
 //
 // Deprecated: since macOS 10.10.
-type NSPopoverBehavior int64
+type PopoverBehavior int64
 
 const (
-	NSPopoverBehaviorApplicationDefined NSPopoverBehavior = 0
-	NSPopoverBehaviorTransient          NSPopoverBehavior = 1
-	NSPopoverBehaviorSemitransient      NSPopoverBehavior = 2
+	PopoverBehaviorApplicationDefined PopoverBehavior = 0
+	PopoverBehaviorTransient          PopoverBehavior = 1
+	PopoverBehaviorSemitransient      PopoverBehavior = 2
 )
 
-func (e NSPopoverBehavior) String() string {
+// String returns the PopoverBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PopoverBehavior) String() string {
 	switch e {
-	case NSPopoverBehaviorApplicationDefined:
-		return "NSPopoverBehaviorApplicationDefined"
-	case NSPopoverBehaviorTransient:
-		return "NSPopoverBehaviorTransient"
-	case NSPopoverBehaviorSemitransient:
-		return "NSPopoverBehaviorSemitransient"
+	case PopoverBehaviorApplicationDefined:
+		return "PopoverBehaviorApplicationDefined"
+	case PopoverBehaviorTransient:
+		return "PopoverBehaviorTransient"
+	case PopoverBehaviorSemitransient:
+		return "PopoverBehaviorSemitransient"
 	default:
-		return fmt.Sprintf("NSPopoverBehavior(%d)", int64(e))
+		return fmt.Sprintf("PopoverBehavior(%d)", int64(e))
 	}
 }
 
 // These constants describe the behavior and progression of a pressure gesture.
-type NSPressureBehavior int64
+type PressureBehavior int64
 
 const (
-	NSPressureBehaviorUnknown            NSPressureBehavior = -1
-	NSPressureBehaviorPrimaryDefault     NSPressureBehavior = 0
-	NSPressureBehaviorPrimaryClick       NSPressureBehavior = 1
-	NSPressureBehaviorPrimaryGeneric     NSPressureBehavior = 2
-	NSPressureBehaviorPrimaryAccelerator NSPressureBehavior = 3
-	NSPressureBehaviorPrimaryDeepClick   NSPressureBehavior = 5
-	NSPressureBehaviorPrimaryDeepDrag    NSPressureBehavior = 6
+	PressureBehaviorUnknown            PressureBehavior = -1
+	PressureBehaviorPrimaryDefault     PressureBehavior = 0
+	PressureBehaviorPrimaryClick       PressureBehavior = 1
+	PressureBehaviorPrimaryGeneric     PressureBehavior = 2
+	PressureBehaviorPrimaryAccelerator PressureBehavior = 3
+	PressureBehaviorPrimaryDeepClick   PressureBehavior = 5
+	PressureBehaviorPrimaryDeepDrag    PressureBehavior = 6
 )
 
-func (e NSPressureBehavior) String() string {
+// String returns the PressureBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PressureBehavior) String() string {
 	switch e {
-	case NSPressureBehaviorUnknown:
-		return "NSPressureBehaviorUnknown"
-	case NSPressureBehaviorPrimaryDefault:
-		return "NSPressureBehaviorPrimaryDefault"
-	case NSPressureBehaviorPrimaryClick:
-		return "NSPressureBehaviorPrimaryClick"
-	case NSPressureBehaviorPrimaryGeneric:
-		return "NSPressureBehaviorPrimaryGeneric"
-	case NSPressureBehaviorPrimaryAccelerator:
-		return "NSPressureBehaviorPrimaryAccelerator"
-	case NSPressureBehaviorPrimaryDeepClick:
-		return "NSPressureBehaviorPrimaryDeepClick"
-	case NSPressureBehaviorPrimaryDeepDrag:
-		return "NSPressureBehaviorPrimaryDeepDrag"
+	case PressureBehaviorUnknown:
+		return "PressureBehaviorUnknown"
+	case PressureBehaviorPrimaryDefault:
+		return "PressureBehaviorPrimaryDefault"
+	case PressureBehaviorPrimaryClick:
+		return "PressureBehaviorPrimaryClick"
+	case PressureBehaviorPrimaryGeneric:
+		return "PressureBehaviorPrimaryGeneric"
+	case PressureBehaviorPrimaryAccelerator:
+		return "PressureBehaviorPrimaryAccelerator"
+	case PressureBehaviorPrimaryDeepClick:
+		return "PressureBehaviorPrimaryDeepClick"
+	case PressureBehaviorPrimaryDeepDrag:
+		return "PressureBehaviorPrimaryDeepDrag"
 	default:
-		return fmt.Sprintf("NSPressureBehavior(%d)", int64(e))
+		return fmt.Sprintf("PressureBehavior(%d)", int64(e))
 	}
 }
 
 // Constants that specify options for configuring the contents of the main Print panel.
 // Bitmask — values may be combined with |.
-type NSPrintPanelOptions uint64
+type PrintPanelOptions uint64
 
 const (
-	NSPrintPanelShowsCopies             NSPrintPanelOptions = 1
-	NSPrintPanelShowsPageRange          NSPrintPanelOptions = 2
-	NSPrintPanelShowsPaperSize          NSPrintPanelOptions = 4
-	NSPrintPanelShowsOrientation        NSPrintPanelOptions = 8
-	NSPrintPanelShowsScaling            NSPrintPanelOptions = 16
-	NSPrintPanelShowsPrintSelection     NSPrintPanelOptions = 32
-	NSPrintPanelShowsPageSetupAccessory NSPrintPanelOptions = 256
-	NSPrintPanelShowsPreview            NSPrintPanelOptions = 131072
+	PrintPanelShowsCopies             PrintPanelOptions = 1
+	PrintPanelShowsPageRange          PrintPanelOptions = 2
+	PrintPanelShowsPaperSize          PrintPanelOptions = 4
+	PrintPanelShowsOrientation        PrintPanelOptions = 8
+	PrintPanelShowsScaling            PrintPanelOptions = 16
+	PrintPanelShowsPrintSelection     PrintPanelOptions = 32
+	PrintPanelShowsPageSetupAccessory PrintPanelOptions = 256
+	PrintPanelShowsPreview            PrintPanelOptions = 131072
 )
 
-func (e NSPrintPanelOptions) String() string {
+// String returns the PrintPanelOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintPanelOptions) String() string {
 	var parts []string
-	if e&NSPrintPanelShowsCopies != 0 {
-		parts = append(parts, "NSPrintPanelShowsCopies")
+	if e&PrintPanelShowsCopies != 0 {
+		parts = append(parts, "PrintPanelShowsCopies")
 	}
-	if e&NSPrintPanelShowsPageRange != 0 {
-		parts = append(parts, "NSPrintPanelShowsPageRange")
+	if e&PrintPanelShowsPageRange != 0 {
+		parts = append(parts, "PrintPanelShowsPageRange")
 	}
-	if e&NSPrintPanelShowsPaperSize != 0 {
-		parts = append(parts, "NSPrintPanelShowsPaperSize")
+	if e&PrintPanelShowsPaperSize != 0 {
+		parts = append(parts, "PrintPanelShowsPaperSize")
 	}
-	if e&NSPrintPanelShowsOrientation != 0 {
-		parts = append(parts, "NSPrintPanelShowsOrientation")
+	if e&PrintPanelShowsOrientation != 0 {
+		parts = append(parts, "PrintPanelShowsOrientation")
 	}
-	if e&NSPrintPanelShowsScaling != 0 {
-		parts = append(parts, "NSPrintPanelShowsScaling")
+	if e&PrintPanelShowsScaling != 0 {
+		parts = append(parts, "PrintPanelShowsScaling")
 	}
-	if e&NSPrintPanelShowsPrintSelection != 0 {
-		parts = append(parts, "NSPrintPanelShowsPrintSelection")
+	if e&PrintPanelShowsPrintSelection != 0 {
+		parts = append(parts, "PrintPanelShowsPrintSelection")
 	}
-	if e&NSPrintPanelShowsPageSetupAccessory != 0 {
-		parts = append(parts, "NSPrintPanelShowsPageSetupAccessory")
+	if e&PrintPanelShowsPageSetupAccessory != 0 {
+		parts = append(parts, "PrintPanelShowsPageSetupAccessory")
 	}
-	if e&NSPrintPanelShowsPreview != 0 {
-		parts = append(parts, "NSPrintPanelShowsPreview")
+	if e&PrintPanelShowsPreview != 0 {
+		parts = append(parts, "PrintPanelShowsPreview")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -4484,202 +4750,198 @@ func (e NSPrintPanelOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSPrintPanelResult int64
-
-const (
-	NSPrintPanelResultCancelled NSPrintPanelResult = 0
-	NSPrintPanelResultPrinted   NSPrintPanelResult = 1
-)
-
-func (e NSPrintPanelResult) String() string {
-	switch e {
-	case NSPrintPanelResultCancelled:
-		return "NSPrintPanelResultCancelled"
-	case NSPrintPanelResultPrinted:
-		return "NSPrintPanelResultPrinted"
-	default:
-		return fmt.Sprintf("NSPrintPanelResult(%d)", int64(e))
-	}
-}
-
 // Constants that specify the print quality in use.
-type NSPrintRenderingQuality int64
+type PrintRenderingQuality int64
 
 const (
-	NSPrintRenderingQualityBest       NSPrintRenderingQuality = 0
-	NSPrintRenderingQualityResponsive NSPrintRenderingQuality = 1
+	PrintRenderingQualityBest       PrintRenderingQuality = 0
+	PrintRenderingQualityResponsive PrintRenderingQuality = 1
 )
 
-func (e NSPrintRenderingQuality) String() string {
+// String returns the PrintRenderingQuality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintRenderingQuality) String() string {
 	switch e {
-	case NSPrintRenderingQualityBest:
-		return "NSPrintRenderingQualityBest"
-	case NSPrintRenderingQualityResponsive:
-		return "NSPrintRenderingQualityResponsive"
+	case PrintRenderingQualityBest:
+		return "PrintRenderingQualityBest"
+	case PrintRenderingQualityResponsive:
+		return "PrintRenderingQualityResponsive"
 	default:
-		return fmt.Sprintf("NSPrintRenderingQuality(%d)", int64(e))
+		return fmt.Sprintf("PrintRenderingQuality(%d)", int64(e))
 	}
 }
 
 // Constants that describe the state of a printer information table stored by a printer object.
-type NSPrinterTableStatus uint64
+type PrinterTableStatus uint64
 
 const (
-	NSPrinterTableOK       NSPrinterTableStatus = 0
-	NSPrinterTableNotFound NSPrinterTableStatus = 1
-	NSPrinterTableError    NSPrinterTableStatus = 2
+	PrinterTableOK       PrinterTableStatus = 0
+	PrinterTableNotFound PrinterTableStatus = 1
+	PrinterTableError    PrinterTableStatus = 2
 )
 
-func (e NSPrinterTableStatus) String() string {
+// String returns the PrinterTableStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrinterTableStatus) String() string {
 	switch e {
-	case NSPrinterTableOK:
-		return "NSPrinterTableOK"
-	case NSPrinterTableNotFound:
-		return "NSPrinterTableNotFound"
-	case NSPrinterTableError:
-		return "NSPrinterTableError"
+	case PrinterTableOK:
+		return "PrinterTableOK"
+	case PrinterTableNotFound:
+		return "PrinterTableNotFound"
+	case PrinterTableError:
+		return "PrinterTableError"
 	default:
-		return fmt.Sprintf("NSPrinterTableStatus(%d)", int64(e))
+		return fmt.Sprintf("PrinterTableStatus(%d)", int64(e))
 	}
 }
 
 // Constants that specify the page order.
-type NSPrintingPageOrder int64
+type PrintingPageOrder int64
 
 const (
-	NSDescendingPageOrder NSPrintingPageOrder = -1
-	NSSpecialPageOrder    NSPrintingPageOrder = 0
-	NSAscendingPageOrder  NSPrintingPageOrder = 1
-	NSUnknownPageOrder    NSPrintingPageOrder = 2
+	DescendingPageOrder PrintingPageOrder = -1
+	SpecialPageOrder    PrintingPageOrder = 0
+	AscendingPageOrder  PrintingPageOrder = 1
+	UnknownPageOrder    PrintingPageOrder = 2
 )
 
-func (e NSPrintingPageOrder) String() string {
+// String returns the PrintingPageOrder constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintingPageOrder) String() string {
 	switch e {
-	case NSDescendingPageOrder:
-		return "NSDescendingPageOrder"
-	case NSSpecialPageOrder:
-		return "NSSpecialPageOrder"
-	case NSAscendingPageOrder:
-		return "NSAscendingPageOrder"
-	case NSUnknownPageOrder:
-		return "NSUnknownPageOrder"
+	case DescendingPageOrder:
+		return "DescendingPageOrder"
+	case SpecialPageOrder:
+		return "SpecialPageOrder"
+	case AscendingPageOrder:
+		return "AscendingPageOrder"
+	case UnknownPageOrder:
+		return "UnknownPageOrder"
 	default:
-		return fmt.Sprintf("NSPrintingPageOrder(%d)", int64(e))
+		return fmt.Sprintf("PrintingPageOrder(%d)", int64(e))
 	}
 }
 
 // Constants that specify the different ways in which an image is divided into pages.
-type NSPrintingPaginationMode uint64
+type PrintingPaginationMode uint64
 
 const (
-	NSPrintingPaginationModeAutomatic NSPrintingPaginationMode = 0
-	NSPrintingPaginationModeFit       NSPrintingPaginationMode = 1
-	NSPrintingPaginationModeClip      NSPrintingPaginationMode = 2
+	PrintingPaginationModeAutomatic PrintingPaginationMode = 0
+	PrintingPaginationModeFit       PrintingPaginationMode = 1
+	PrintingPaginationModeClip      PrintingPaginationMode = 2
 )
 
-func (e NSPrintingPaginationMode) String() string {
+// String returns the PrintingPaginationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintingPaginationMode) String() string {
 	switch e {
-	case NSPrintingPaginationModeAutomatic:
-		return "NSPrintingPaginationModeAutomatic"
-	case NSPrintingPaginationModeFit:
-		return "NSPrintingPaginationModeFit"
-	case NSPrintingPaginationModeClip:
-		return "NSPrintingPaginationModeClip"
+	case PrintingPaginationModeAutomatic:
+		return "PrintingPaginationModeAutomatic"
+	case PrintingPaginationModeFit:
+		return "PrintingPaginationModeFit"
+	case PrintingPaginationModeClip:
+		return "PrintingPaginationModeClip"
 	default:
-		return fmt.Sprintf("NSPrintingPaginationMode(%d)", int64(e))
+		return fmt.Sprintf("PrintingPaginationMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify the progress indicator’s style.
-type NSProgressIndicatorStyle uint64
+type ProgressIndicatorStyle uint64
 
 const (
-	NSProgressIndicatorStyleBar      NSProgressIndicatorStyle = 0
-	NSProgressIndicatorStyleSpinning NSProgressIndicatorStyle = 1
+	ProgressIndicatorStyleBar      ProgressIndicatorStyle = 0
+	ProgressIndicatorStyleSpinning ProgressIndicatorStyle = 1
 )
 
-func (e NSProgressIndicatorStyle) String() string {
+// String returns the ProgressIndicatorStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProgressIndicatorStyle) String() string {
 	switch e {
-	case NSProgressIndicatorStyleBar:
-		return "NSProgressIndicatorStyleBar"
-	case NSProgressIndicatorStyleSpinning:
-		return "NSProgressIndicatorStyleSpinning"
+	case ProgressIndicatorStyleBar:
+		return "ProgressIndicatorStyleBar"
+	case ProgressIndicatorStyleSpinning:
+		return "ProgressIndicatorStyleSpinning"
 	default:
-		return fmt.Sprintf("NSProgressIndicatorStyle(%d)", int64(e))
+		return fmt.Sprintf("ProgressIndicatorStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify alignment to an edge or a set of edges depending on the user interface layout direction.
-type NSRectAlignment int64
+type RectAlignment int64
 
 const (
 	// Has no specified alignment.
-	NSRectAlignmentNone NSRectAlignment = 0
+	RectAlignmentNone RectAlignment = 0
 	// Aligns to the top edge.
-	NSRectAlignmentTop NSRectAlignment = 1
+	RectAlignmentTop RectAlignment = 1
 	// Aligns to the top and leading edges.
-	NSRectAlignmentTopLeading NSRectAlignment = 2
+	RectAlignmentTopLeading RectAlignment = 2
 	// Aligns to the leading edge.
-	NSRectAlignmentLeading NSRectAlignment = 3
+	RectAlignmentLeading RectAlignment = 3
 	// Aligns to the bottom and leading edges.
-	NSRectAlignmentBottomLeading NSRectAlignment = 4
+	RectAlignmentBottomLeading RectAlignment = 4
 	// Aligns to the bottom edge.
-	NSRectAlignmentBottom NSRectAlignment = 5
+	RectAlignmentBottom RectAlignment = 5
 	// Aligns to the bottom and trailing edges.
-	NSRectAlignmentBottomTrailing NSRectAlignment = 6
+	RectAlignmentBottomTrailing RectAlignment = 6
 	// Aligns to the trailing edge.
-	NSRectAlignmentTrailing NSRectAlignment = 7
+	RectAlignmentTrailing RectAlignment = 7
 	// Aligns to the top and trailing edges.
-	NSRectAlignmentTopTrailing NSRectAlignment = 8
+	RectAlignmentTopTrailing RectAlignment = 8
 )
 
-func (e NSRectAlignment) String() string {
+// String returns the RectAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RectAlignment) String() string {
 	switch e {
-	case NSRectAlignmentNone:
-		return "NSRectAlignmentNone"
-	case NSRectAlignmentTop:
-		return "NSRectAlignmentTop"
-	case NSRectAlignmentTopLeading:
-		return "NSRectAlignmentTopLeading"
-	case NSRectAlignmentLeading:
-		return "NSRectAlignmentLeading"
-	case NSRectAlignmentBottomLeading:
-		return "NSRectAlignmentBottomLeading"
-	case NSRectAlignmentBottom:
-		return "NSRectAlignmentBottom"
-	case NSRectAlignmentBottomTrailing:
-		return "NSRectAlignmentBottomTrailing"
-	case NSRectAlignmentTrailing:
-		return "NSRectAlignmentTrailing"
-	case NSRectAlignmentTopTrailing:
-		return "NSRectAlignmentTopTrailing"
+	case RectAlignmentNone:
+		return "RectAlignmentNone"
+	case RectAlignmentTop:
+		return "RectAlignmentTop"
+	case RectAlignmentTopLeading:
+		return "RectAlignmentTopLeading"
+	case RectAlignmentLeading:
+		return "RectAlignmentLeading"
+	case RectAlignmentBottomLeading:
+		return "RectAlignmentBottomLeading"
+	case RectAlignmentBottom:
+		return "RectAlignmentBottom"
+	case RectAlignmentBottomTrailing:
+		return "RectAlignmentBottomTrailing"
+	case RectAlignmentTrailing:
+		return "RectAlignmentTrailing"
+	case RectAlignmentTopTrailing:
+		return "RectAlignmentTopTrailing"
 	default:
-		return fmt.Sprintf("NSRectAlignment(%d)", int64(e))
+		return fmt.Sprintf("RectAlignment(%d)", int64(e))
 	}
 }
 
 // These constants determine whether apps launched by remote notifications display a badge.
 // Bitmask — values may be combined with |.
-type NSRemoteNotificationType uint64
+type RemoteNotificationType uint64
 
 const (
 	// The app shouldn’t display a badge.
-	NSRemoteNotificationTypeNone  NSRemoteNotificationType = 0
-	NSRemoteNotificationTypeBadge NSRemoteNotificationType = 1
-	NSRemoteNotificationTypeSound NSRemoteNotificationType = 2
-	NSRemoteNotificationTypeAlert NSRemoteNotificationType = 4
+	RemoteNotificationTypeNone  RemoteNotificationType = 0
+	RemoteNotificationTypeBadge RemoteNotificationType = 1
+	RemoteNotificationTypeSound RemoteNotificationType = 2
+	RemoteNotificationTypeAlert RemoteNotificationType = 4
 )
 
-func (e NSRemoteNotificationType) String() string {
+// String returns the RemoteNotificationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RemoteNotificationType) String() string {
 	var parts []string
-	if e&NSRemoteNotificationTypeBadge != 0 {
-		parts = append(parts, "NSRemoteNotificationTypeBadge")
+	if e&RemoteNotificationTypeBadge != 0 {
+		parts = append(parts, "RemoteNotificationTypeBadge")
 	}
-	if e&NSRemoteNotificationTypeSound != 0 {
-		parts = append(parts, "NSRemoteNotificationTypeSound")
+	if e&RemoteNotificationTypeSound != 0 {
+		parts = append(parts, "RemoteNotificationTypeSound")
 	}
-	if e&NSRemoteNotificationTypeAlert != 0 {
-		parts = append(parts, "NSRemoteNotificationTypeAlert")
+	if e&RemoteNotificationTypeAlert != 0 {
+		parts = append(parts, "RemoteNotificationTypeAlert")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -4687,701 +4949,759 @@ func (e NSRemoteNotificationType) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSRequestUserAttentionType uint64
+type RequestUserAttentionType uint64
 
 const (
-	NSCriticalRequest      NSRequestUserAttentionType = 0
-	NSInformationalRequest NSRequestUserAttentionType = 10
+	CriticalRequest      RequestUserAttentionType = 0
+	InformationalRequest RequestUserAttentionType = 10
 )
 
-func (e NSRequestUserAttentionType) String() string {
+// String returns the RequestUserAttentionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RequestUserAttentionType) String() string {
 	switch e {
-	case NSCriticalRequest:
-		return "NSCriticalRequest"
-	case NSInformationalRequest:
-		return "NSInformationalRequest"
+	case CriticalRequest:
+		return "CriticalRequest"
+	case InformationalRequest:
+		return "InformationalRequest"
 	default:
-		return fmt.Sprintf("NSRequestUserAttentionType(%d)", int64(e))
+		return fmt.Sprintf("RequestUserAttentionType(%d)", int64(e))
 	}
 }
 
 // Specifies a type for nesting modes.
-type NSRuleEditorNestingMode uint64
+type RuleEditorNestingMode uint64
 
 const (
-	NSRuleEditorNestingModeSingle   NSRuleEditorNestingMode = 0
-	NSRuleEditorNestingModeList     NSRuleEditorNestingMode = 1
-	NSRuleEditorNestingModeCompound NSRuleEditorNestingMode = 2
-	NSRuleEditorNestingModeSimple   NSRuleEditorNestingMode = 3
+	RuleEditorNestingModeSingle   RuleEditorNestingMode = 0
+	RuleEditorNestingModeList     RuleEditorNestingMode = 1
+	RuleEditorNestingModeCompound RuleEditorNestingMode = 2
+	RuleEditorNestingModeSimple   RuleEditorNestingMode = 3
 )
 
-func (e NSRuleEditorNestingMode) String() string {
+// String returns the RuleEditorNestingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RuleEditorNestingMode) String() string {
 	switch e {
-	case NSRuleEditorNestingModeSingle:
-		return "NSRuleEditorNestingModeSingle"
-	case NSRuleEditorNestingModeList:
-		return "NSRuleEditorNestingModeList"
-	case NSRuleEditorNestingModeCompound:
-		return "NSRuleEditorNestingModeCompound"
-	case NSRuleEditorNestingModeSimple:
-		return "NSRuleEditorNestingModeSimple"
+	case RuleEditorNestingModeSingle:
+		return "RuleEditorNestingModeSingle"
+	case RuleEditorNestingModeList:
+		return "RuleEditorNestingModeList"
+	case RuleEditorNestingModeCompound:
+		return "RuleEditorNestingModeCompound"
+	case RuleEditorNestingModeSimple:
+		return "RuleEditorNestingModeSimple"
 	default:
-		return fmt.Sprintf("NSRuleEditorNestingMode(%d)", int64(e))
+		return fmt.Sprintf("RuleEditorNestingMode(%d)", int64(e))
 	}
 }
 
 // Specifies a type for row types.
-type NSRuleEditorRowType uint64
+type RuleEditorRowType uint64
 
 const (
-	NSRuleEditorRowTypeSimple   NSRuleEditorRowType = 0
-	NSRuleEditorRowTypeCompound NSRuleEditorRowType = 1
+	RuleEditorRowTypeSimple   RuleEditorRowType = 0
+	RuleEditorRowTypeCompound RuleEditorRowType = 1
 )
 
-func (e NSRuleEditorRowType) String() string {
+// String returns the RuleEditorRowType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RuleEditorRowType) String() string {
 	switch e {
-	case NSRuleEditorRowTypeSimple:
-		return "NSRuleEditorRowTypeSimple"
-	case NSRuleEditorRowTypeCompound:
-		return "NSRuleEditorRowTypeCompound"
+	case RuleEditorRowTypeSimple:
+		return "RuleEditorRowTypeSimple"
+	case RuleEditorRowTypeCompound:
+		return "RuleEditorRowTypeCompound"
 	default:
-		return fmt.Sprintf("NSRuleEditorRowType(%d)", int64(e))
+		return fmt.Sprintf("RuleEditorRowType(%d)", int64(e))
 	}
 }
 
-type NSRulerOrientation uint64
+type RulerOrientation uint64
 
 const (
-	NSHorizontalRuler NSRulerOrientation = 0
-	NSVerticalRuler   NSRulerOrientation = 1
+	HorizontalRuler RulerOrientation = 0
+	VerticalRuler   RulerOrientation = 1
 )
 
-func (e NSRulerOrientation) String() string {
+// String returns the RulerOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RulerOrientation) String() string {
 	switch e {
-	case NSHorizontalRuler:
-		return "NSHorizontalRuler"
-	case NSVerticalRuler:
-		return "NSVerticalRuler"
+	case HorizontalRuler:
+		return "HorizontalRuler"
+	case VerticalRuler:
+		return "VerticalRuler"
 	default:
-		return fmt.Sprintf("NSRulerOrientation(%d)", int64(e))
+		return fmt.Sprintf("RulerOrientation(%d)", int64(e))
 	}
 }
 
 // Constants for specifying the type of document-save operation to perform.
-type NSSaveOperationType uint64
+type SaveOperationType uint64
 
 const (
-	NSSaveOperation              NSSaveOperationType = 0
-	NSSaveAsOperation            NSSaveOperationType = 1
-	NSSaveToOperation            NSSaveOperationType = 2
-	NSAutosaveInPlaceOperation   NSSaveOperationType = 4
-	NSAutosaveElsewhereOperation NSSaveOperationType = 3
-	NSAutosaveAsOperation        NSSaveOperationType = 5
+	SaveOperation              SaveOperationType = 0
+	SaveAsOperation            SaveOperationType = 1
+	SaveToOperation            SaveOperationType = 2
+	AutosaveInPlaceOperation   SaveOperationType = 4
+	AutosaveElsewhereOperation SaveOperationType = 3
+	AutosaveAsOperation        SaveOperationType = 5
 	// Old name for the NSAutosaveElsewhereOperation operation type.
 	//
 	// Deprecated: Use NSAutosaveElsewhereOperation instead
-	NSAutosaveOperation NSSaveOperationType = 3
+	AutosaveOperation SaveOperationType = 3
 )
 
-func (e NSSaveOperationType) String() string {
+// String returns the SaveOperationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SaveOperationType) String() string {
 	switch e {
-	case NSSaveOperation:
-		return "NSSaveOperation"
-	case NSSaveAsOperation:
-		return "NSSaveAsOperation"
-	case NSSaveToOperation:
-		return "NSSaveToOperation"
-	case NSAutosaveInPlaceOperation:
-		return "NSAutosaveInPlaceOperation"
-	case NSAutosaveElsewhereOperation:
-		return "NSAutosaveElsewhereOperation"
-	case NSAutosaveAsOperation:
-		return "NSAutosaveAsOperation"
+	case SaveOperation:
+		return "SaveOperation"
+	case SaveAsOperation:
+		return "SaveAsOperation"
+	case SaveToOperation:
+		return "SaveToOperation"
+	case AutosaveInPlaceOperation:
+		return "AutosaveInPlaceOperation"
+	case AutosaveElsewhereOperation:
+		return "AutosaveElsewhereOperation"
+	case AutosaveAsOperation:
+		return "AutosaveAsOperation"
 	default:
-		return fmt.Sprintf("NSSaveOperationType(%d)", int64(e))
+		return fmt.Sprintf("SaveOperationType(%d)", int64(e))
 	}
 }
 
 // Deprecated: Scroller arrows are not used anymore.
-type NSScrollArrowPosition uint64
+type ScrollArrowPosition uint64
 
 const (
-	NSScrollerArrowsMaxEnd         NSScrollArrowPosition = 0
-	NSScrollerArrowsMinEnd         NSScrollArrowPosition = 1
-	NSScrollerArrowsDefaultSetting NSScrollArrowPosition = 0
-	NSScrollerArrowsNone           NSScrollArrowPosition = 2
+	ScrollerArrowsMaxEnd         ScrollArrowPosition = 0
+	ScrollerArrowsMinEnd         ScrollArrowPosition = 1
+	ScrollerArrowsDefaultSetting ScrollArrowPosition = 0
+	ScrollerArrowsNone           ScrollArrowPosition = 2
 )
 
-func (e NSScrollArrowPosition) String() string {
+// String returns the ScrollArrowPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollArrowPosition) String() string {
 	switch e {
-	case NSScrollerArrowsMaxEnd:
-		return "NSScrollerArrowsMaxEnd"
-	case NSScrollerArrowsMinEnd:
-		return "NSScrollerArrowsMinEnd"
-	case NSScrollerArrowsNone:
-		return "NSScrollerArrowsNone"
+	case ScrollerArrowsMaxEnd:
+		return "ScrollerArrowsMaxEnd"
+	case ScrollerArrowsMinEnd:
+		return "ScrollerArrowsMinEnd"
+	case ScrollerArrowsNone:
+		return "ScrollerArrowsNone"
 	default:
-		return fmt.Sprintf("NSScrollArrowPosition(%d)", int64(e))
+		return fmt.Sprintf("ScrollArrowPosition(%d)", int64(e))
 	}
 }
 
 // These constants determine the elasticity behavior for an axis of the scrollview.
-type NSScrollElasticity int64
+type ScrollElasticity int64
 
 const (
-	NSScrollElasticityAutomatic NSScrollElasticity = 0
-	NSScrollElasticityNone      NSScrollElasticity = 1
-	NSScrollElasticityAllowed   NSScrollElasticity = 2
+	ScrollElasticityAutomatic ScrollElasticity = 0
+	ScrollElasticityNone      ScrollElasticity = 1
+	ScrollElasticityAllowed   ScrollElasticity = 2
 )
 
-func (e NSScrollElasticity) String() string {
+// String returns the ScrollElasticity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollElasticity) String() string {
 	switch e {
-	case NSScrollElasticityAutomatic:
-		return "NSScrollElasticityAutomatic"
-	case NSScrollElasticityNone:
-		return "NSScrollElasticityNone"
-	case NSScrollElasticityAllowed:
-		return "NSScrollElasticityAllowed"
+	case ScrollElasticityAutomatic:
+		return "ScrollElasticityAutomatic"
+	case ScrollElasticityNone:
+		return "ScrollElasticityNone"
+	case ScrollElasticityAllowed:
+		return "ScrollElasticityAllowed"
 	default:
-		return fmt.Sprintf("NSScrollElasticity(%d)", int64(e))
+		return fmt.Sprintf("ScrollElasticity(%d)", int64(e))
 	}
 }
 
 // These constants define the position of the find bar in relation to the scroll view.
-type NSScrollViewFindBarPosition int64
+type ScrollViewFindBarPosition int64
 
 const (
-	NSScrollViewFindBarPositionAboveHorizontalRuler NSScrollViewFindBarPosition = 0
-	NSScrollViewFindBarPositionAboveContent         NSScrollViewFindBarPosition = 1
-	NSScrollViewFindBarPositionBelowContent         NSScrollViewFindBarPosition = 2
+	ScrollViewFindBarPositionAboveHorizontalRuler ScrollViewFindBarPosition = 0
+	ScrollViewFindBarPositionAboveContent         ScrollViewFindBarPosition = 1
+	ScrollViewFindBarPositionBelowContent         ScrollViewFindBarPosition = 2
 )
 
-func (e NSScrollViewFindBarPosition) String() string {
+// String returns the ScrollViewFindBarPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollViewFindBarPosition) String() string {
 	switch e {
-	case NSScrollViewFindBarPositionAboveHorizontalRuler:
-		return "NSScrollViewFindBarPositionAboveHorizontalRuler"
-	case NSScrollViewFindBarPositionAboveContent:
-		return "NSScrollViewFindBarPositionAboveContent"
-	case NSScrollViewFindBarPositionBelowContent:
-		return "NSScrollViewFindBarPositionBelowContent"
+	case ScrollViewFindBarPositionAboveHorizontalRuler:
+		return "ScrollViewFindBarPositionAboveHorizontalRuler"
+	case ScrollViewFindBarPositionAboveContent:
+		return "ScrollViewFindBarPositionAboveContent"
+	case ScrollViewFindBarPositionBelowContent:
+		return "ScrollViewFindBarPositionBelowContent"
 	default:
-		return fmt.Sprintf("NSScrollViewFindBarPosition(%d)", int64(e))
+		return fmt.Sprintf("ScrollViewFindBarPosition(%d)", int64(e))
 	}
 }
 
 // Deprecated: Scroller arrows are not used anymore.
-type NSScrollerArrow uint64
+type ScrollerArrow uint64
 
 const (
 	// Deprecated: Scroller arrows are not used anymore.
-	NSScrollerIncrementArrow NSScrollerArrow = 0
+	ScrollerIncrementArrow ScrollerArrow = 0
 	// Deprecated: Scroller arrows are not used anymore.
-	NSScrollerDecrementArrow NSScrollerArrow = 1
+	ScrollerDecrementArrow ScrollerArrow = 1
 )
 
-func (e NSScrollerArrow) String() string {
+// String returns the ScrollerArrow constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollerArrow) String() string {
 	switch e {
-	case NSScrollerIncrementArrow:
-		return "NSScrollerIncrementArrow"
-	case NSScrollerDecrementArrow:
-		return "NSScrollerDecrementArrow"
+	case ScrollerIncrementArrow:
+		return "ScrollerIncrementArrow"
+	case ScrollerDecrementArrow:
+		return "ScrollerDecrementArrow"
 	default:
-		return fmt.Sprintf("NSScrollerArrow(%d)", int64(e))
+		return fmt.Sprintf("ScrollerArrow(%d)", int64(e))
 	}
 }
 
 // Specify different knob styles.
-type NSScrollerKnobStyle int64
+type ScrollerKnobStyle int64
 
 const (
-	NSScrollerKnobStyleDefault NSScrollerKnobStyle = 0
-	NSScrollerKnobStyleDark    NSScrollerKnobStyle = 1
-	NSScrollerKnobStyleLight   NSScrollerKnobStyle = 2
+	ScrollerKnobStyleDefault ScrollerKnobStyle = 0
+	ScrollerKnobStyleDark    ScrollerKnobStyle = 1
+	ScrollerKnobStyleLight   ScrollerKnobStyle = 2
 )
 
-func (e NSScrollerKnobStyle) String() string {
+// String returns the ScrollerKnobStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollerKnobStyle) String() string {
 	switch e {
-	case NSScrollerKnobStyleDefault:
-		return "NSScrollerKnobStyleDefault"
-	case NSScrollerKnobStyleDark:
-		return "NSScrollerKnobStyleDark"
-	case NSScrollerKnobStyleLight:
-		return "NSScrollerKnobStyleLight"
+	case ScrollerKnobStyleDefault:
+		return "ScrollerKnobStyleDefault"
+	case ScrollerKnobStyleDark:
+		return "ScrollerKnobStyleDark"
+	case ScrollerKnobStyleLight:
+		return "ScrollerKnobStyleLight"
 	default:
-		return fmt.Sprintf("NSScrollerKnobStyle(%d)", int64(e))
+		return fmt.Sprintf("ScrollerKnobStyle(%d)", int64(e))
 	}
 }
 
 // These constants specify the different parts of the scroller:
 //
 // Deprecated: Scroller arrows are not used anymore.
-type NSScrollerPart uint64
+type ScrollerPart uint64
 
 const (
-	NSScrollerNoPart        NSScrollerPart = 0
-	NSScrollerDecrementPage NSScrollerPart = 1
-	NSScrollerKnob          NSScrollerPart = 2
-	NSScrollerIncrementPage NSScrollerPart = 3
+	ScrollerNoPart        ScrollerPart = 0
+	ScrollerDecrementPage ScrollerPart = 1
+	ScrollerKnob          ScrollerPart = 2
+	ScrollerIncrementPage ScrollerPart = 3
 	// Deprecated: Scroller arrows are not used anymore.
-	NSScrollerDecrementLine NSScrollerPart = 4
+	ScrollerDecrementLine ScrollerPart = 4
 	// Deprecated: Scroller arrows are not used anymore.
-	NSScrollerIncrementLine NSScrollerPart = 5
+	ScrollerIncrementLine ScrollerPart = 5
 	// Deprecated: Scroller arrows are not used anymore.
-	NSScrollerKnobSlot NSScrollerPart = 6
+	ScrollerKnobSlot ScrollerPart = 6
 )
 
-func (e NSScrollerPart) String() string {
+// String returns the ScrollerPart constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollerPart) String() string {
 	switch e {
-	case NSScrollerNoPart:
-		return "NSScrollerNoPart"
-	case NSScrollerDecrementPage:
-		return "NSScrollerDecrementPage"
-	case NSScrollerKnob:
-		return "NSScrollerKnob"
-	case NSScrollerIncrementPage:
-		return "NSScrollerIncrementPage"
-	case NSScrollerDecrementLine:
-		return "NSScrollerDecrementLine"
-	case NSScrollerIncrementLine:
-		return "NSScrollerIncrementLine"
-	case NSScrollerKnobSlot:
-		return "NSScrollerKnobSlot"
+	case ScrollerNoPart:
+		return "ScrollerNoPart"
+	case ScrollerDecrementPage:
+		return "ScrollerDecrementPage"
+	case ScrollerKnob:
+		return "ScrollerKnob"
+	case ScrollerIncrementPage:
+		return "ScrollerIncrementPage"
+	case ScrollerDecrementLine:
+		return "ScrollerDecrementLine"
+	case ScrollerIncrementLine:
+		return "ScrollerIncrementLine"
+	case ScrollerKnobSlot:
+		return "ScrollerKnobSlot"
 	default:
-		return fmt.Sprintf("NSScrollerPart(%d)", int64(e))
+		return fmt.Sprintf("ScrollerPart(%d)", int64(e))
 	}
 }
 
 // Constants to specify the scroller style.
-type NSScrollerStyle int64
+type ScrollerStyle int64
 
 const (
-	NSScrollerStyleLegacy  NSScrollerStyle = 0
-	NSScrollerStyleOverlay NSScrollerStyle = 1
+	ScrollerStyleLegacy  ScrollerStyle = 0
+	ScrollerStyleOverlay ScrollerStyle = 1
 )
 
-func (e NSScrollerStyle) String() string {
+// String returns the ScrollerStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrollerStyle) String() string {
 	switch e {
-	case NSScrollerStyleLegacy:
-		return "NSScrollerStyleLegacy"
-	case NSScrollerStyleOverlay:
-		return "NSScrollerStyleOverlay"
+	case ScrollerStyleLegacy:
+		return "ScrollerStyleLegacy"
+	case ScrollerStyleOverlay:
+		return "ScrollerStyleOverlay"
 	default:
-		return fmt.Sprintf("NSScrollerStyle(%d)", int64(e))
+		return fmt.Sprintf("ScrollerStyle(%d)", int64(e))
 	}
 }
 
 // The specified preferred alignment of items within the scrubber, when they come to rest following a user’s scrolling or paging interaction.
-type NSScrubberAlignment int64
+type ScrubberAlignment int64
 
 const (
-	NSScrubberAlignmentNone     NSScrubberAlignment = 0
-	NSScrubberAlignmentLeading  NSScrubberAlignment = 1
-	NSScrubberAlignmentTrailing NSScrubberAlignment = 2
-	NSScrubberAlignmentCenter   NSScrubberAlignment = 3
+	ScrubberAlignmentNone     ScrubberAlignment = 0
+	ScrubberAlignmentLeading  ScrubberAlignment = 1
+	ScrubberAlignmentTrailing ScrubberAlignment = 2
+	ScrubberAlignmentCenter   ScrubberAlignment = 3
 )
 
-func (e NSScrubberAlignment) String() string {
+// String returns the ScrubberAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrubberAlignment) String() string {
 	switch e {
-	case NSScrubberAlignmentNone:
-		return "NSScrubberAlignmentNone"
-	case NSScrubberAlignmentLeading:
-		return "NSScrubberAlignmentLeading"
-	case NSScrubberAlignmentTrailing:
-		return "NSScrubberAlignmentTrailing"
-	case NSScrubberAlignmentCenter:
-		return "NSScrubberAlignmentCenter"
+	case ScrubberAlignmentNone:
+		return "ScrubberAlignmentNone"
+	case ScrubberAlignmentLeading:
+		return "ScrubberAlignmentLeading"
+	case ScrubberAlignmentTrailing:
+		return "ScrubberAlignmentTrailing"
+	case ScrubberAlignmentCenter:
+		return "ScrubberAlignmentCenter"
 	default:
-		return fmt.Sprintf("NSScrubberAlignment(%d)", int64(e))
+		return fmt.Sprintf("ScrubberAlignment(%d)", int64(e))
 	}
 }
 
 // The scrolling behavior for a scrubber.
-type NSScrubberMode int64
+type ScrubberMode int64
 
 const (
-	NSScrubberModeFixed NSScrubberMode = 0
-	NSScrubberModeFree  NSScrubberMode = 1
+	ScrubberModeFixed ScrubberMode = 0
+	ScrubberModeFree  ScrubberMode = 1
 )
 
-func (e NSScrubberMode) String() string {
+// String returns the ScrubberMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScrubberMode) String() string {
 	switch e {
-	case NSScrubberModeFixed:
-		return "NSScrubberModeFixed"
-	case NSScrubberModeFree:
-		return "NSScrubberModeFree"
+	case ScrubberModeFixed:
+		return "ScrubberModeFixed"
+	case ScrubberModeFree:
+		return "ScrubberModeFree"
 	default:
-		return fmt.Sprintf("NSScrubberMode(%d)", int64(e))
+		return fmt.Sprintf("ScrubberMode(%d)", int64(e))
 	}
 }
 
-type NSSegmentDistribution int64
+type SegmentDistribution int64
 
 const (
 	// Dynamically sized segments will be sized to fit their contents, any remaining space will be left blank. This style is equivalent to the way segments were distributed on older systems.
-	NSSegmentDistributionFit NSSegmentDistribution = 0
+	SegmentDistributionFit SegmentDistribution = 0
 	// Dynamically sized segments will be sized to fill the available space, with extra space being distributed equally among them. Default value.
-	NSSegmentDistributionFill NSSegmentDistribution = 1
+	SegmentDistributionFill SegmentDistribution = 1
 	// Dynamically sized segments will be sized to fill the available space, and kept the same size as each other.
-	NSSegmentDistributionFillEqually NSSegmentDistribution = 2
+	SegmentDistributionFillEqually SegmentDistribution = 2
 	// Dynamically sized segments will be sized to fill the available space, and kept proportional to their fitting size.
-	NSSegmentDistributionFillProportionally NSSegmentDistribution = 3
+	SegmentDistributionFillProportionally SegmentDistribution = 3
 )
 
-func (e NSSegmentDistribution) String() string {
+// String returns the SegmentDistribution constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SegmentDistribution) String() string {
 	switch e {
-	case NSSegmentDistributionFit:
-		return "NSSegmentDistributionFit"
-	case NSSegmentDistributionFill:
-		return "NSSegmentDistributionFill"
-	case NSSegmentDistributionFillEqually:
-		return "NSSegmentDistributionFillEqually"
-	case NSSegmentDistributionFillProportionally:
-		return "NSSegmentDistributionFillProportionally"
+	case SegmentDistributionFit:
+		return "SegmentDistributionFit"
+	case SegmentDistributionFill:
+		return "SegmentDistributionFill"
+	case SegmentDistributionFillEqually:
+		return "SegmentDistributionFillEqually"
+	case SegmentDistributionFillProportionally:
+		return "SegmentDistributionFillProportionally"
 	default:
-		return fmt.Sprintf("NSSegmentDistribution(%d)", int64(e))
+		return fmt.Sprintf("SegmentDistribution(%d)", int64(e))
 	}
 }
 
-type NSSegmentStyle int64
+type SegmentStyle int64
 
 const (
-	NSSegmentStyleAutomatic       NSSegmentStyle = 0
-	NSSegmentStyleRounded         NSSegmentStyle = 1
-	NSSegmentStyleRoundRect       NSSegmentStyle = 3
-	NSSegmentStyleTexturedSquare  NSSegmentStyle = 4
-	NSSegmentStyleSmallSquare     NSSegmentStyle = 6
-	NSSegmentStyleSeparated       NSSegmentStyle = 8
-	NSSegmentStyleTexturedRounded NSSegmentStyle = 2
-	NSSegmentStyleCapsule         NSSegmentStyle = 5
+	SegmentStyleAutomatic       SegmentStyle = 0
+	SegmentStyleRounded         SegmentStyle = 1
+	SegmentStyleRoundRect       SegmentStyle = 3
+	SegmentStyleTexturedSquare  SegmentStyle = 4
+	SegmentStyleSmallSquare     SegmentStyle = 6
+	SegmentStyleSeparated       SegmentStyle = 8
+	SegmentStyleTexturedRounded SegmentStyle = 2
+	SegmentStyleCapsule         SegmentStyle = 5
 )
 
-func (e NSSegmentStyle) String() string {
+// String returns the SegmentStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SegmentStyle) String() string {
 	switch e {
-	case NSSegmentStyleAutomatic:
-		return "NSSegmentStyleAutomatic"
-	case NSSegmentStyleRounded:
-		return "NSSegmentStyleRounded"
-	case NSSegmentStyleRoundRect:
-		return "NSSegmentStyleRoundRect"
-	case NSSegmentStyleTexturedSquare:
-		return "NSSegmentStyleTexturedSquare"
-	case NSSegmentStyleSmallSquare:
-		return "NSSegmentStyleSmallSquare"
-	case NSSegmentStyleSeparated:
-		return "NSSegmentStyleSeparated"
-	case NSSegmentStyleTexturedRounded:
-		return "NSSegmentStyleTexturedRounded"
-	case NSSegmentStyleCapsule:
-		return "NSSegmentStyleCapsule"
+	case SegmentStyleAutomatic:
+		return "SegmentStyleAutomatic"
+	case SegmentStyleRounded:
+		return "SegmentStyleRounded"
+	case SegmentStyleRoundRect:
+		return "SegmentStyleRoundRect"
+	case SegmentStyleTexturedSquare:
+		return "SegmentStyleTexturedSquare"
+	case SegmentStyleSmallSquare:
+		return "SegmentStyleSmallSquare"
+	case SegmentStyleSeparated:
+		return "SegmentStyleSeparated"
+	case SegmentStyleTexturedRounded:
+		return "SegmentStyleTexturedRounded"
+	case SegmentStyleCapsule:
+		return "SegmentStyleCapsule"
 	default:
-		return fmt.Sprintf("NSSegmentStyle(%d)", int64(e))
+		return fmt.Sprintf("SegmentStyle(%d)", int64(e))
 	}
 }
 
-type NSSegmentSwitchTracking uint64
+type SegmentSwitchTracking uint64
 
 const (
-	NSSegmentSwitchTrackingSelectOne            NSSegmentSwitchTracking = 0
-	NSSegmentSwitchTrackingSelectAny            NSSegmentSwitchTracking = 1
-	NSSegmentSwitchTrackingMomentary            NSSegmentSwitchTracking = 2
-	NSSegmentSwitchTrackingMomentaryAccelerator NSSegmentSwitchTracking = 3
+	SegmentSwitchTrackingSelectOne            SegmentSwitchTracking = 0
+	SegmentSwitchTrackingSelectAny            SegmentSwitchTracking = 1
+	SegmentSwitchTrackingMomentary            SegmentSwitchTracking = 2
+	SegmentSwitchTrackingMomentaryAccelerator SegmentSwitchTracking = 3
 )
 
-func (e NSSegmentSwitchTracking) String() string {
+// String returns the SegmentSwitchTracking constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SegmentSwitchTracking) String() string {
 	switch e {
-	case NSSegmentSwitchTrackingSelectOne:
-		return "NSSegmentSwitchTrackingSelectOne"
-	case NSSegmentSwitchTrackingSelectAny:
-		return "NSSegmentSwitchTrackingSelectAny"
-	case NSSegmentSwitchTrackingMomentary:
-		return "NSSegmentSwitchTrackingMomentary"
-	case NSSegmentSwitchTrackingMomentaryAccelerator:
-		return "NSSegmentSwitchTrackingMomentaryAccelerator"
+	case SegmentSwitchTrackingSelectOne:
+		return "SegmentSwitchTrackingSelectOne"
+	case SegmentSwitchTrackingSelectAny:
+		return "SegmentSwitchTrackingSelectAny"
+	case SegmentSwitchTrackingMomentary:
+		return "SegmentSwitchTrackingMomentary"
+	case SegmentSwitchTrackingMomentaryAccelerator:
+		return "SegmentSwitchTrackingMomentaryAccelerator"
 	default:
-		return fmt.Sprintf("NSSegmentSwitchTracking(%d)", int64(e))
+		return fmt.Sprintf("SegmentSwitchTracking(%d)", int64(e))
 	}
 }
 
 // These constants specify the preferred direction of selection. They’re used by selectionAffinity and setSelectedRange:affinity:stillSelecting:.
-type NSSelectionAffinity uint64
+type SelectionAffinity uint64
 
 const (
 	// The selection is moving toward the top of the document.
-	NSSelectionAffinityUpstream NSSelectionAffinity = 0
+	SelectionAffinityUpstream SelectionAffinity = 0
 	// The selection is moving toward the bottom of the document.
-	NSSelectionAffinityDownstream NSSelectionAffinity = 1
+	SelectionAffinityDownstream SelectionAffinity = 1
 )
 
-func (e NSSelectionAffinity) String() string {
+// String returns the SelectionAffinity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SelectionAffinity) String() string {
 	switch e {
-	case NSSelectionAffinityUpstream:
-		return "NSSelectionAffinityUpstream"
-	case NSSelectionAffinityDownstream:
-		return "NSSelectionAffinityDownstream"
+	case SelectionAffinityUpstream:
+		return "SelectionAffinityUpstream"
+	case SelectionAffinityDownstream:
+		return "SelectionAffinityDownstream"
 	default:
-		return fmt.Sprintf("NSSelectionAffinity(%d)", int64(e))
+		return fmt.Sprintf("SelectionAffinity(%d)", int64(e))
 	}
 }
 
 // Constants that specify the direction a window is currently using to change the key view.
-type NSSelectionDirection uint64
+type SelectionDirection uint64
 
 const (
-	NSDirectSelection   NSSelectionDirection = 0
-	NSSelectingNext     NSSelectionDirection = 1
-	NSSelectingPrevious NSSelectionDirection = 2
+	DirectSelection   SelectionDirection = 0
+	SelectingNext     SelectionDirection = 1
+	SelectingPrevious SelectionDirection = 2
 )
 
-func (e NSSelectionDirection) String() string {
+// String returns the SelectionDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SelectionDirection) String() string {
 	switch e {
-	case NSDirectSelection:
-		return "NSDirectSelection"
-	case NSSelectingNext:
-		return "NSSelectingNext"
-	case NSSelectingPrevious:
-		return "NSSelectingPrevious"
+	case DirectSelection:
+		return "DirectSelection"
+	case SelectingNext:
+		return "SelectingNext"
+	case SelectingPrevious:
+		return "SelectingPrevious"
 	default:
-		return fmt.Sprintf("NSSelectionDirection(%d)", int64(e))
+		return fmt.Sprintf("SelectionDirection(%d)", int64(e))
 	}
 }
 
 // These constants specify how much the text view extends the selection when the user drags the mouse. They’re used by selectionGranularity, and selectionRangeForProposedRange:granularity::
-type NSSelectionGranularity uint64
+type SelectionGranularity uint64
 
 const (
 	// Extends the selection character by character.
-	NSSelectByCharacter NSSelectionGranularity = 0
+	SelectByCharacter SelectionGranularity = 0
 	// Extends the selection word by word.
-	NSSelectByWord NSSelectionGranularity = 1
+	SelectByWord SelectionGranularity = 1
 	// Extends the selection paragraph by paragraph.
-	NSSelectByParagraph NSSelectionGranularity = 2
+	SelectByParagraph SelectionGranularity = 2
 )
 
-func (e NSSelectionGranularity) String() string {
+// String returns the SelectionGranularity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SelectionGranularity) String() string {
 	switch e {
-	case NSSelectByCharacter:
-		return "NSSelectByCharacter"
-	case NSSelectByWord:
-		return "NSSelectByWord"
-	case NSSelectByParagraph:
-		return "NSSelectByParagraph"
+	case SelectByCharacter:
+		return "SelectByCharacter"
+	case SelectByWord:
+		return "SelectByWord"
+	case SelectByParagraph:
+		return "SelectByParagraph"
 	default:
-		return fmt.Sprintf("NSSelectionGranularity(%d)", int64(e))
+		return fmt.Sprintf("SelectionGranularity(%d)", int64(e))
 	}
 }
 
 // Represents the types of sharing (collaborating on an item vs. sending a copy of the item) The share picker supports up to two modes, each of which corresponds to one of these types
-type NSSharingCollaborationMode int64
+type SharingCollaborationMode int64
 
 const (
-	NSSharingCollaborationModeSendCopy    NSSharingCollaborationMode = 0
-	NSSharingCollaborationModeCollaborate NSSharingCollaborationMode = 1
+	SharingCollaborationModeSendCopy    SharingCollaborationMode = 0
+	SharingCollaborationModeCollaborate SharingCollaborationMode = 1
 )
 
-func (e NSSharingCollaborationMode) String() string {
+// String returns the SharingCollaborationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SharingCollaborationMode) String() string {
 	switch e {
-	case NSSharingCollaborationModeSendCopy:
-		return "NSSharingCollaborationModeSendCopy"
-	case NSSharingCollaborationModeCollaborate:
-		return "NSSharingCollaborationModeCollaborate"
+	case SharingCollaborationModeSendCopy:
+		return "SharingCollaborationModeSendCopy"
+	case SharingCollaborationModeCollaborate:
+		return "SharingCollaborationModeCollaborate"
 	default:
-		return fmt.Sprintf("NSSharingCollaborationMode(%d)", int64(e))
+		return fmt.Sprintf("SharingCollaborationMode(%d)", int64(e))
 	}
 }
 
 // The types of sliders, used by sliderType.
-type NSSliderType uint64
+type SliderType uint64
 
 const (
-	NSSliderTypeLinear   NSSliderType = 0
-	NSSliderTypeCircular NSSliderType = 1
+	SliderTypeLinear   SliderType = 0
+	SliderTypeCircular SliderType = 1
 )
 
-func (e NSSliderType) String() string {
+// String returns the SliderType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SliderType) String() string {
 	switch e {
-	case NSSliderTypeLinear:
-		return "NSSliderTypeLinear"
-	case NSSliderTypeCircular:
-		return "NSSliderTypeCircular"
+	case SliderTypeLinear:
+		return "SliderTypeLinear"
+	case SliderTypeCircular:
+		return "SliderTypeCircular"
 	default:
-		return fmt.Sprintf("NSSliderType(%d)", int64(e))
+		return fmt.Sprintf("SliderType(%d)", int64(e))
 	}
 }
 
-type NSSpeechBoundary uint64
+type SpeechBoundary uint64
 
 const (
 	// Deprecated: since macOS 10.5.
-	NSSpeechImmediateBoundary NSSpeechBoundary = 0
-	NSSpeechWordBoundary      NSSpeechBoundary = 1
-	NSSpeechSentenceBoundary  NSSpeechBoundary = 2
+	SpeechImmediateBoundary SpeechBoundary = 0
+	SpeechWordBoundary      SpeechBoundary = 1
+	SpeechSentenceBoundary  SpeechBoundary = 2
 )
 
-func (e NSSpeechBoundary) String() string {
+// String returns the SpeechBoundary constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechBoundary) String() string {
 	switch e {
-	case NSSpeechImmediateBoundary:
-		return "NSSpeechImmediateBoundary"
-	case NSSpeechWordBoundary:
-		return "NSSpeechWordBoundary"
-	case NSSpeechSentenceBoundary:
-		return "NSSpeechSentenceBoundary"
+	case SpeechImmediateBoundary:
+		return "SpeechImmediateBoundary"
+	case SpeechWordBoundary:
+		return "SpeechWordBoundary"
+	case SpeechSentenceBoundary:
+		return "SpeechSentenceBoundary"
 	default:
-		return fmt.Sprintf("NSSpeechBoundary(%d)", int64(e))
+		return fmt.Sprintf("SpeechBoundary(%d)", int64(e))
 	}
 }
 
 // Constants that specify the style of the split view’s dividers.
-type NSSplitViewDividerStyle int64
+type SplitViewDividerStyle int64
 
 const (
-	NSSplitViewDividerStyleThick        NSSplitViewDividerStyle = 1
-	NSSplitViewDividerStyleThin         NSSplitViewDividerStyle = 2
-	NSSplitViewDividerStylePaneSplitter NSSplitViewDividerStyle = 3
+	SplitViewDividerStyleThick        SplitViewDividerStyle = 1
+	SplitViewDividerStyleThin         SplitViewDividerStyle = 2
+	SplitViewDividerStylePaneSplitter SplitViewDividerStyle = 3
 )
 
-func (e NSSplitViewDividerStyle) String() string {
+// String returns the SplitViewDividerStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SplitViewDividerStyle) String() string {
 	switch e {
-	case NSSplitViewDividerStyleThick:
-		return "NSSplitViewDividerStyleThick"
-	case NSSplitViewDividerStyleThin:
-		return "NSSplitViewDividerStyleThin"
-	case NSSplitViewDividerStylePaneSplitter:
-		return "NSSplitViewDividerStylePaneSplitter"
+	case SplitViewDividerStyleThick:
+		return "SplitViewDividerStyleThick"
+	case SplitViewDividerStyleThin:
+		return "SplitViewDividerStyleThin"
+	case SplitViewDividerStylePaneSplitter:
+		return "SplitViewDividerStylePaneSplitter"
 	default:
-		return fmt.Sprintf("NSSplitViewDividerStyle(%d)", int64(e))
+		return fmt.Sprintf("SplitViewDividerStyle(%d)", int64(e))
 	}
 }
 
 // Constants that describe the behavior of the split view item.
-type NSSplitViewItemBehavior int64
+type SplitViewItemBehavior int64
 
 const (
-	NSSplitViewItemBehaviorDefault     NSSplitViewItemBehavior = 0
-	NSSplitViewItemBehaviorSidebar     NSSplitViewItemBehavior = 1
-	NSSplitViewItemBehaviorContentList NSSplitViewItemBehavior = 2
-	NSSplitViewItemBehaviorInspector   NSSplitViewItemBehavior = 3
+	SplitViewItemBehaviorDefault     SplitViewItemBehavior = 0
+	SplitViewItemBehaviorSidebar     SplitViewItemBehavior = 1
+	SplitViewItemBehaviorContentList SplitViewItemBehavior = 2
+	SplitViewItemBehaviorInspector   SplitViewItemBehavior = 3
 )
 
-func (e NSSplitViewItemBehavior) String() string {
+// String returns the SplitViewItemBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SplitViewItemBehavior) String() string {
 	switch e {
-	case NSSplitViewItemBehaviorDefault:
-		return "NSSplitViewItemBehaviorDefault"
-	case NSSplitViewItemBehaviorSidebar:
-		return "NSSplitViewItemBehaviorSidebar"
-	case NSSplitViewItemBehaviorContentList:
-		return "NSSplitViewItemBehaviorContentList"
-	case NSSplitViewItemBehaviorInspector:
-		return "NSSplitViewItemBehaviorInspector"
+	case SplitViewItemBehaviorDefault:
+		return "SplitViewItemBehaviorDefault"
+	case SplitViewItemBehaviorSidebar:
+		return "SplitViewItemBehaviorSidebar"
+	case SplitViewItemBehaviorContentList:
+		return "SplitViewItemBehaviorContentList"
+	case SplitViewItemBehaviorInspector:
+		return "SplitViewItemBehaviorInspector"
 	default:
-		return fmt.Sprintf("NSSplitViewItemBehavior(%d)", int64(e))
+		return fmt.Sprintf("SplitViewItemBehavior(%d)", int64(e))
 	}
 }
 
 // Constants that describe the split view item’s collapsing behavior.
-type NSSplitViewItemCollapseBehavior int64
+type SplitViewItemCollapseBehavior int64
 
 const (
 	// The item uses the default collapsing behavior for its set `behavior`. The default may change over time.
-	NSSplitViewItemCollapseBehaviorDefault NSSplitViewItemCollapseBehavior = 0
+	SplitViewItemCollapseBehaviorDefault SplitViewItemCollapseBehavior = 0
 	// The item prefers to keep the other panes at their current size and position on screen, potentially growing or shrinking the window in the direction to best preserve that. But it will break that preference in order to keep the window fully on screen or when in full screen.
-	NSSplitViewItemCollapseBehaviorPreferResizingSplitViewWithFixedSiblings NSSplitViewItemCollapseBehavior = 1
+	SplitViewItemCollapseBehaviorPreferResizingSplitViewWithFixedSiblings SplitViewItemCollapseBehavior = 1
 	// The item prefers to resize the other split panes. This will be broken when uncollapsing if the item can't fully uncollapse before hitting the minimum size of the other panes or the window.
-	NSSplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView NSSplitViewItemCollapseBehavior = 2
+	SplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView SplitViewItemCollapseBehavior = 2
 	// The item will collapse/uncollapse purely from a constraint animation, with a constraint priority of the item’s `holdingPriority`. This could result in a partial internal content resize and window resize, and has no implications for keeping the window on screen. External constraints can be used to tweak exactly how the animation affects item, sibling, and window size and positions.
-	NSSplitViewItemCollapseBehaviorUseConstraints NSSplitViewItemCollapseBehavior = 3
+	SplitViewItemCollapseBehaviorUseConstraints SplitViewItemCollapseBehavior = 3
 )
 
-func (e NSSplitViewItemCollapseBehavior) String() string {
+// String returns the SplitViewItemCollapseBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SplitViewItemCollapseBehavior) String() string {
 	switch e {
-	case NSSplitViewItemCollapseBehaviorDefault:
-		return "NSSplitViewItemCollapseBehaviorDefault"
-	case NSSplitViewItemCollapseBehaviorPreferResizingSplitViewWithFixedSiblings:
-		return "NSSplitViewItemCollapseBehaviorPreferResizingSplitViewWithFixedSiblings"
-	case NSSplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView:
-		return "NSSplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView"
-	case NSSplitViewItemCollapseBehaviorUseConstraints:
-		return "NSSplitViewItemCollapseBehaviorUseConstraints"
+	case SplitViewItemCollapseBehaviorDefault:
+		return "SplitViewItemCollapseBehaviorDefault"
+	case SplitViewItemCollapseBehaviorPreferResizingSplitViewWithFixedSiblings:
+		return "SplitViewItemCollapseBehaviorPreferResizingSplitViewWithFixedSiblings"
+	case SplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView:
+		return "SplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView"
+	case SplitViewItemCollapseBehaviorUseConstraints:
+		return "SplitViewItemCollapseBehaviorUseConstraints"
 	default:
-		return fmt.Sprintf("NSSplitViewItemCollapseBehavior(%d)", int64(e))
+		return fmt.Sprintf("SplitViewItemCollapseBehavior(%d)", int64(e))
 	}
 }
 
-type NSStackViewDistribution int64
+type StackViewDistribution int64
 
 const (
 	// Stacked views will not have any special distribution behavior, relying on behavior described by gravity areas and set hugging priorities along the stacking axis. This is the default value.
-	NSStackViewDistributionGravityAreas NSStackViewDistribution = -1
+	StackViewDistributionGravityAreas StackViewDistribution = -1
 	// The effective hugging priority in the stacking axis is `NSLayoutPriorityRequired`, causing the stacked views to tightly fill the container along the stacking axis.
-	NSStackViewDistributionFill NSStackViewDistribution = 0
+	StackViewDistributionFill StackViewDistribution = 0
 	// Stacked views will have sizes maintained to be equal as much as possible along the stacking axis. The effective hugging priority in the stacking axis is `NSLayoutPriorityRequired`.
-	NSStackViewDistributionFillEqually NSStackViewDistribution = 1
+	StackViewDistributionFillEqually StackViewDistribution = 1
 	// Stacked views will have sizes maintained to be equal, proportionally to their `intrinsicContentSize`s, as much as possible. The effective hugging priority in the stacking axis is `NSLayoutPriorityRequired`.
-	NSStackViewDistributionFillProportionally NSStackViewDistribution = 2
+	StackViewDistributionFillProportionally StackViewDistribution = 2
 	// The space separating stacked views along the stacking axis are maintained to be equal as much as possible while still maintaining the minimum spacing.
-	NSStackViewDistributionEqualSpacing NSStackViewDistribution = 3
+	StackViewDistributionEqualSpacing StackViewDistribution = 3
 	// Equal center-to-center spacing of the items is maintained as much as possible while still maintaining the minimum spacing between each view.
-	NSStackViewDistributionEqualCentering NSStackViewDistribution = 4
+	StackViewDistributionEqualCentering StackViewDistribution = 4
 )
 
-func (e NSStackViewDistribution) String() string {
+// String returns the StackViewDistribution constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StackViewDistribution) String() string {
 	switch e {
-	case NSStackViewDistributionGravityAreas:
-		return "NSStackViewDistributionGravityAreas"
-	case NSStackViewDistributionFill:
-		return "NSStackViewDistributionFill"
-	case NSStackViewDistributionFillEqually:
-		return "NSStackViewDistributionFillEqually"
-	case NSStackViewDistributionFillProportionally:
-		return "NSStackViewDistributionFillProportionally"
-	case NSStackViewDistributionEqualSpacing:
-		return "NSStackViewDistributionEqualSpacing"
-	case NSStackViewDistributionEqualCentering:
-		return "NSStackViewDistributionEqualCentering"
+	case StackViewDistributionGravityAreas:
+		return "StackViewDistributionGravityAreas"
+	case StackViewDistributionFill:
+		return "StackViewDistributionFill"
+	case StackViewDistributionFillEqually:
+		return "StackViewDistributionFillEqually"
+	case StackViewDistributionFillProportionally:
+		return "StackViewDistributionFillProportionally"
+	case StackViewDistributionEqualSpacing:
+		return "StackViewDistributionEqualSpacing"
+	case StackViewDistributionEqualCentering:
+		return "StackViewDistributionEqualCentering"
 	default:
-		return fmt.Sprintf("NSStackViewDistribution(%d)", int64(e))
+		return fmt.Sprintf("StackViewDistribution(%d)", int64(e))
 	}
 }
 
 // The gravity areas available in a stack view.
-type NSStackViewGravity int64
+type StackViewGravity int64
 
 const (
-	NSStackViewGravityTop      NSStackViewGravity = 1
-	NSStackViewGravityLeading  NSStackViewGravity = 1
-	NSStackViewGravityCenter   NSStackViewGravity = 2
-	NSStackViewGravityBottom   NSStackViewGravity = 3
-	NSStackViewGravityTrailing NSStackViewGravity = 3
+	StackViewGravityTop      StackViewGravity = 1
+	StackViewGravityLeading  StackViewGravity = 1
+	StackViewGravityCenter   StackViewGravity = 2
+	StackViewGravityBottom   StackViewGravity = 3
+	StackViewGravityTrailing StackViewGravity = 3
 )
 
-func (e NSStackViewGravity) String() string {
+// String returns the StackViewGravity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StackViewGravity) String() string {
 	switch e {
-	case NSStackViewGravityTop:
-		return "NSStackViewGravityTop"
-	case NSStackViewGravityCenter:
-		return "NSStackViewGravityCenter"
-	case NSStackViewGravityBottom:
-		return "NSStackViewGravityBottom"
+	case StackViewGravityTop:
+		return "StackViewGravityTop"
+	case StackViewGravityCenter:
+		return "StackViewGravityCenter"
+	case StackViewGravityBottom:
+		return "StackViewGravityBottom"
 	default:
-		return fmt.Sprintf("NSStackViewGravity(%d)", int64(e))
+		return fmt.Sprintf("StackViewGravity(%d)", int64(e))
 	}
 }
 
 // A set of optional status item behaviors.
 // Bitmask — values may be combined with |.
-type NSStatusItemBehavior uint64
+type StatusItemBehavior uint64
 
 const (
-	NSStatusItemBehaviorRemovalAllowed       NSStatusItemBehavior = 2
-	NSStatusItemBehaviorTerminationOnRemoval NSStatusItemBehavior = 4
+	StatusItemBehaviorRemovalAllowed       StatusItemBehavior = 2
+	StatusItemBehaviorTerminationOnRemoval StatusItemBehavior = 4
 )
 
-func (e NSStatusItemBehavior) String() string {
+// String returns the StatusItemBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StatusItemBehavior) String() string {
 	var parts []string
-	if e&NSStatusItemBehaviorRemovalAllowed != 0 {
-		parts = append(parts, "NSStatusItemBehaviorRemovalAllowed")
+	if e&StatusItemBehaviorRemovalAllowed != 0 {
+		parts = append(parts, "StatusItemBehaviorRemovalAllowed")
 	}
-	if e&NSStatusItemBehaviorTerminationOnRemoval != 0 {
-		parts = append(parts, "NSStatusItemBehaviorTerminationOnRemoval")
+	if e&StatusItemBehaviorTerminationOnRemoval != 0 {
+		parts = append(parts, "StatusItemBehaviorTerminationOnRemoval")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -5390,191 +5710,205 @@ func (e NSStatusItemBehavior) String() string {
 }
 
 // Constants that represent the supported TIFF data-compression schemes.
-type NSTIFFCompression uint64
+type TIFFCompression uint64
 
 const (
-	NSTIFFCompressionNone      NSTIFFCompression = 1
-	NSTIFFCompressionCCITTFAX3 NSTIFFCompression = 3
-	NSTIFFCompressionCCITTFAX4 NSTIFFCompression = 4
-	NSTIFFCompressionLZW       NSTIFFCompression = 5
-	NSTIFFCompressionJPEG      NSTIFFCompression = 6
-	NSTIFFCompressionNEXT      NSTIFFCompression = 32766
-	NSTIFFCompressionPackBits  NSTIFFCompression = 32773
-	NSTIFFCompressionOldJPEG   NSTIFFCompression = 32865
+	TIFFCompressionNone      TIFFCompression = 1
+	TIFFCompressionCCITTFAX3 TIFFCompression = 3
+	TIFFCompressionCCITTFAX4 TIFFCompression = 4
+	TIFFCompressionLZW       TIFFCompression = 5
+	TIFFCompressionJPEG      TIFFCompression = 6
+	TIFFCompressionNEXT      TIFFCompression = 32766
+	TIFFCompressionPackBits  TIFFCompression = 32773
+	TIFFCompressionOldJPEG   TIFFCompression = 32865
 )
 
-func (e NSTIFFCompression) String() string {
+// String returns the TIFFCompression constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TIFFCompression) String() string {
 	switch e {
-	case NSTIFFCompressionNone:
-		return "NSTIFFCompressionNone"
-	case NSTIFFCompressionCCITTFAX3:
-		return "NSTIFFCompressionCCITTFAX3"
-	case NSTIFFCompressionCCITTFAX4:
-		return "NSTIFFCompressionCCITTFAX4"
-	case NSTIFFCompressionLZW:
-		return "NSTIFFCompressionLZW"
-	case NSTIFFCompressionJPEG:
-		return "NSTIFFCompressionJPEG"
-	case NSTIFFCompressionNEXT:
-		return "NSTIFFCompressionNEXT"
-	case NSTIFFCompressionPackBits:
-		return "NSTIFFCompressionPackBits"
-	case NSTIFFCompressionOldJPEG:
-		return "NSTIFFCompressionOldJPEG"
+	case TIFFCompressionNone:
+		return "TIFFCompressionNone"
+	case TIFFCompressionCCITTFAX3:
+		return "TIFFCompressionCCITTFAX3"
+	case TIFFCompressionCCITTFAX4:
+		return "TIFFCompressionCCITTFAX4"
+	case TIFFCompressionLZW:
+		return "TIFFCompressionLZW"
+	case TIFFCompressionJPEG:
+		return "TIFFCompressionJPEG"
+	case TIFFCompressionNEXT:
+		return "TIFFCompressionNEXT"
+	case TIFFCompressionPackBits:
+		return "TIFFCompressionPackBits"
+	case TIFFCompressionOldJPEG:
+		return "TIFFCompressionOldJPEG"
 	default:
-		return fmt.Sprintf("NSTIFFCompression(%d)", int64(e))
+		return fmt.Sprintf("TIFFCompression(%d)", int64(e))
 	}
 }
 
-type NSTabPosition uint64
+type TabPosition uint64
 
 const (
-	NSTabPositionNone   NSTabPosition = 0
-	NSTabPositionTop    NSTabPosition = 1
-	NSTabPositionLeft   NSTabPosition = 2
-	NSTabPositionBottom NSTabPosition = 3
-	NSTabPositionRight  NSTabPosition = 4
+	TabPositionNone   TabPosition = 0
+	TabPositionTop    TabPosition = 1
+	TabPositionLeft   TabPosition = 2
+	TabPositionBottom TabPosition = 3
+	TabPositionRight  TabPosition = 4
 )
 
-func (e NSTabPosition) String() string {
+// String returns the TabPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TabPosition) String() string {
 	switch e {
-	case NSTabPositionNone:
-		return "NSTabPositionNone"
-	case NSTabPositionTop:
-		return "NSTabPositionTop"
-	case NSTabPositionLeft:
-		return "NSTabPositionLeft"
-	case NSTabPositionBottom:
-		return "NSTabPositionBottom"
-	case NSTabPositionRight:
-		return "NSTabPositionRight"
+	case TabPositionNone:
+		return "TabPositionNone"
+	case TabPositionTop:
+		return "TabPositionTop"
+	case TabPositionLeft:
+		return "TabPositionLeft"
+	case TabPositionBottom:
+		return "TabPositionBottom"
+	case TabPositionRight:
+		return "TabPositionRight"
 	default:
-		return fmt.Sprintf("NSTabPosition(%d)", int64(e))
+		return fmt.Sprintf("TabPosition(%d)", int64(e))
 	}
 }
 
 // These constants describe the current display state of a tab:
-type NSTabState uint64
+type TabState uint64
 
 const (
-	NSSelectedTab   NSTabState = 0
-	NSBackgroundTab NSTabState = 1
-	NSPressedTab    NSTabState = 2
+	SelectedTab   TabState = 0
+	BackgroundTab TabState = 1
+	PressedTab    TabState = 2
 )
 
-func (e NSTabState) String() string {
+// String returns the TabState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TabState) String() string {
 	switch e {
-	case NSSelectedTab:
-		return "NSSelectedTab"
-	case NSBackgroundTab:
-		return "NSBackgroundTab"
-	case NSPressedTab:
-		return "NSPressedTab"
+	case SelectedTab:
+		return "SelectedTab"
+	case BackgroundTab:
+		return "BackgroundTab"
+	case PressedTab:
+		return "PressedTab"
 	default:
-		return fmt.Sprintf("NSTabState(%d)", int64(e))
+		return fmt.Sprintf("TabState(%d)", int64(e))
 	}
 }
 
-type NSTabViewBorderType uint64
+type TabViewBorderType uint64
 
 const (
-	NSTabViewBorderTypeNone  NSTabViewBorderType = 0
-	NSTabViewBorderTypeLine  NSTabViewBorderType = 1
-	NSTabViewBorderTypeBezel NSTabViewBorderType = 2
+	TabViewBorderTypeNone  TabViewBorderType = 0
+	TabViewBorderTypeLine  TabViewBorderType = 1
+	TabViewBorderTypeBezel TabViewBorderType = 2
 )
 
-func (e NSTabViewBorderType) String() string {
+// String returns the TabViewBorderType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TabViewBorderType) String() string {
 	switch e {
-	case NSTabViewBorderTypeNone:
-		return "NSTabViewBorderTypeNone"
-	case NSTabViewBorderTypeLine:
-		return "NSTabViewBorderTypeLine"
-	case NSTabViewBorderTypeBezel:
-		return "NSTabViewBorderTypeBezel"
+	case TabViewBorderTypeNone:
+		return "TabViewBorderTypeNone"
+	case TabViewBorderTypeLine:
+		return "TabViewBorderTypeLine"
+	case TabViewBorderTypeBezel:
+		return "TabViewBorderTypeBezel"
 	default:
-		return fmt.Sprintf("NSTabViewBorderType(%d)", int64(e))
+		return fmt.Sprintf("TabViewBorderType(%d)", int64(e))
 	}
 }
 
 // Tab control style options for a tab view controller.
-type NSTabViewControllerTabStyle int64
+type TabViewControllerTabStyle int64
 
 const (
 	// Uses an NSSegmentedControl to show the UI for the tabs. The control is on the top of the view.
-	NSTabViewControllerTabStyleSegmentedControlOnTop NSTabViewControllerTabStyle = 0
+	TabViewControllerTabStyleSegmentedControlOnTop TabViewControllerTabStyle = 0
 	// Uses an NSSegmentedControl to show the UI for the tabs. The control is on the bottom of the view.
-	NSTabViewControllerTabStyleSegmentedControlOnBottom NSTabViewControllerTabStyle = 1
+	TabViewControllerTabStyleSegmentedControlOnBottom TabViewControllerTabStyle = 1
 	// Automatically pushes the tabs into the window's toolbar as toolbar items, if non-nil. This style will cause the TabViewController to set its containing window's toolbar to its own and become that toolbar's delegate. The toolbar items can be customized or supplemented by overriding the relevant NSToolbarDelegate methods.
-	NSTabViewControllerTabStyleToolbar NSTabViewControllerTabStyle = 2
+	TabViewControllerTabStyleToolbar TabViewControllerTabStyle = 2
 	// NSTabViewController will not provide any of its own tab control UI. Separate UI, such as a NSSegmentedControl or NSPopupButton, can be easily bound to the TabViewController. Or \c tabView.tabViewType can be changed for the TabView itself to draw the UI.
-	NSTabViewControllerTabStyleUnspecified NSTabViewControllerTabStyle = -1
+	TabViewControllerTabStyleUnspecified TabViewControllerTabStyle = -1
 )
 
-func (e NSTabViewControllerTabStyle) String() string {
+// String returns the TabViewControllerTabStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TabViewControllerTabStyle) String() string {
 	switch e {
-	case NSTabViewControllerTabStyleSegmentedControlOnTop:
-		return "NSTabViewControllerTabStyleSegmentedControlOnTop"
-	case NSTabViewControllerTabStyleSegmentedControlOnBottom:
-		return "NSTabViewControllerTabStyleSegmentedControlOnBottom"
-	case NSTabViewControllerTabStyleToolbar:
-		return "NSTabViewControllerTabStyleToolbar"
-	case NSTabViewControllerTabStyleUnspecified:
-		return "NSTabViewControllerTabStyleUnspecified"
+	case TabViewControllerTabStyleSegmentedControlOnTop:
+		return "TabViewControllerTabStyleSegmentedControlOnTop"
+	case TabViewControllerTabStyleSegmentedControlOnBottom:
+		return "TabViewControllerTabStyleSegmentedControlOnBottom"
+	case TabViewControllerTabStyleToolbar:
+		return "TabViewControllerTabStyleToolbar"
+	case TabViewControllerTabStyleUnspecified:
+		return "TabViewControllerTabStyleUnspecified"
 	default:
-		return fmt.Sprintf("NSTabViewControllerTabStyle(%d)", int64(e))
+		return fmt.Sprintf("TabViewControllerTabStyle(%d)", int64(e))
 	}
 }
 
-type NSTabViewType uint64
+type TabViewType uint64
 
 const (
-	NSTopTabsBezelBorder    NSTabViewType = 0
-	NSLeftTabsBezelBorder   NSTabViewType = 1
-	NSBottomTabsBezelBorder NSTabViewType = 2
-	NSRightTabsBezelBorder  NSTabViewType = 3
-	NSNoTabsBezelBorder     NSTabViewType = 4
-	NSNoTabsLineBorder      NSTabViewType = 5
-	NSNoTabsNoBorder        NSTabViewType = 6
+	TopTabsBezelBorder    TabViewType = 0
+	LeftTabsBezelBorder   TabViewType = 1
+	BottomTabsBezelBorder TabViewType = 2
+	RightTabsBezelBorder  TabViewType = 3
+	NoTabsBezelBorder     TabViewType = 4
+	NoTabsLineBorder      TabViewType = 5
+	NoTabsNoBorder        TabViewType = 6
 )
 
-func (e NSTabViewType) String() string {
+// String returns the TabViewType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TabViewType) String() string {
 	switch e {
-	case NSTopTabsBezelBorder:
-		return "NSTopTabsBezelBorder"
-	case NSLeftTabsBezelBorder:
-		return "NSLeftTabsBezelBorder"
-	case NSBottomTabsBezelBorder:
-		return "NSBottomTabsBezelBorder"
-	case NSRightTabsBezelBorder:
-		return "NSRightTabsBezelBorder"
-	case NSNoTabsBezelBorder:
-		return "NSNoTabsBezelBorder"
-	case NSNoTabsLineBorder:
-		return "NSNoTabsLineBorder"
-	case NSNoTabsNoBorder:
-		return "NSNoTabsNoBorder"
+	case TopTabsBezelBorder:
+		return "TopTabsBezelBorder"
+	case LeftTabsBezelBorder:
+		return "LeftTabsBezelBorder"
+	case BottomTabsBezelBorder:
+		return "BottomTabsBezelBorder"
+	case RightTabsBezelBorder:
+		return "RightTabsBezelBorder"
+	case NoTabsBezelBorder:
+		return "NoTabsBezelBorder"
+	case NoTabsLineBorder:
+		return "NoTabsLineBorder"
+	case NoTabsNoBorder:
+		return "NoTabsNoBorder"
 	default:
-		return fmt.Sprintf("NSTabViewType(%d)", int64(e))
+		return fmt.Sprintf("TabViewType(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSTableColumnResizingOptions uint64
+type TableColumnResizingOptions uint64
 
 const (
 	// Prevents the table column from resizing.
-	NSTableColumnNoResizing       NSTableColumnResizingOptions = 0
-	NSTableColumnAutoresizingMask NSTableColumnResizingOptions = 1
-	NSTableColumnUserResizingMask NSTableColumnResizingOptions = 2
+	TableColumnNoResizing       TableColumnResizingOptions = 0
+	TableColumnAutoresizingMask TableColumnResizingOptions = 1
+	TableColumnUserResizingMask TableColumnResizingOptions = 2
 )
 
-func (e NSTableColumnResizingOptions) String() string {
+// String returns the TableColumnResizingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableColumnResizingOptions) String() string {
 	var parts []string
-	if e&NSTableColumnAutoresizingMask != 0 {
-		parts = append(parts, "NSTableColumnAutoresizingMask")
+	if e&TableColumnAutoresizingMask != 0 {
+		parts = append(parts, "TableColumnAutoresizingMask")
 	}
-	if e&NSTableColumnUserResizingMask != 0 {
-		parts = append(parts, "NSTableColumnUserResizingMask")
+	if e&TableColumnUserResizingMask != 0 {
+		parts = append(parts, "TableColumnUserResizingMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -5584,38 +5918,40 @@ func (e NSTableColumnResizingOptions) String() string {
 
 // Specifies the animation effects to apply when inserting or removing rows.
 // Bitmask — values may be combined with |.
-type NSTableViewAnimationOptions uint64
+type TableViewAnimationOptions uint64
 
 const (
 	// Use no animation effects.
-	NSTableViewAnimationEffectNone NSTableViewAnimationOptions = 0
-	NSTableViewAnimationEffectFade NSTableViewAnimationOptions = 1
-	NSTableViewAnimationEffectGap  NSTableViewAnimationOptions = 2
-	NSTableViewAnimationSlideUp    NSTableViewAnimationOptions = 16
-	NSTableViewAnimationSlideDown  NSTableViewAnimationOptions = 32
-	NSTableViewAnimationSlideLeft  NSTableViewAnimationOptions = 48
-	NSTableViewAnimationSlideRight NSTableViewAnimationOptions = 64
+	TableViewAnimationEffectNone TableViewAnimationOptions = 0
+	TableViewAnimationEffectFade TableViewAnimationOptions = 1
+	TableViewAnimationEffectGap  TableViewAnimationOptions = 2
+	TableViewAnimationSlideUp    TableViewAnimationOptions = 16
+	TableViewAnimationSlideDown  TableViewAnimationOptions = 32
+	TableViewAnimationSlideLeft  TableViewAnimationOptions = 48
+	TableViewAnimationSlideRight TableViewAnimationOptions = 64
 )
 
-func (e NSTableViewAnimationOptions) String() string {
+// String returns the TableViewAnimationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewAnimationOptions) String() string {
 	var parts []string
-	if e&NSTableViewAnimationEffectFade != 0 {
-		parts = append(parts, "NSTableViewAnimationEffectFade")
+	if e&TableViewAnimationEffectFade != 0 {
+		parts = append(parts, "TableViewAnimationEffectFade")
 	}
-	if e&NSTableViewAnimationEffectGap != 0 {
-		parts = append(parts, "NSTableViewAnimationEffectGap")
+	if e&TableViewAnimationEffectGap != 0 {
+		parts = append(parts, "TableViewAnimationEffectGap")
 	}
-	if e&NSTableViewAnimationSlideUp != 0 {
-		parts = append(parts, "NSTableViewAnimationSlideUp")
+	if e&TableViewAnimationSlideUp != 0 {
+		parts = append(parts, "TableViewAnimationSlideUp")
 	}
-	if e&NSTableViewAnimationSlideDown != 0 {
-		parts = append(parts, "NSTableViewAnimationSlideDown")
+	if e&TableViewAnimationSlideDown != 0 {
+		parts = append(parts, "TableViewAnimationSlideDown")
 	}
-	if e&NSTableViewAnimationSlideLeft != 0 {
-		parts = append(parts, "NSTableViewAnimationSlideLeft")
+	if e&TableViewAnimationSlideLeft != 0 {
+		parts = append(parts, "TableViewAnimationSlideLeft")
 	}
-	if e&NSTableViewAnimationSlideRight != 0 {
-		parts = append(parts, "NSTableViewAnimationSlideRight")
+	if e&TableViewAnimationSlideRight != 0 {
+		parts = append(parts, "TableViewAnimationSlideRight")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -5623,99 +5959,107 @@ func (e NSTableViewAnimationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSTableViewColumnAutoresizingStyle uint64
+type TableViewColumnAutoresizingStyle uint64
 
 const (
-	NSTableViewNoColumnAutoresizing                     NSTableViewColumnAutoresizingStyle = 0
-	NSTableViewUniformColumnAutoresizingStyle           NSTableViewColumnAutoresizingStyle = 1
-	NSTableViewSequentialColumnAutoresizingStyle        NSTableViewColumnAutoresizingStyle = 2
-	NSTableViewReverseSequentialColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 3
-	NSTableViewLastColumnOnlyAutoresizingStyle          NSTableViewColumnAutoresizingStyle = 4
-	NSTableViewFirstColumnOnlyAutoresizingStyle         NSTableViewColumnAutoresizingStyle = 5
+	TableViewNoColumnAutoresizing                     TableViewColumnAutoresizingStyle = 0
+	TableViewUniformColumnAutoresizingStyle           TableViewColumnAutoresizingStyle = 1
+	TableViewSequentialColumnAutoresizingStyle        TableViewColumnAutoresizingStyle = 2
+	TableViewReverseSequentialColumnAutoresizingStyle TableViewColumnAutoresizingStyle = 3
+	TableViewLastColumnOnlyAutoresizingStyle          TableViewColumnAutoresizingStyle = 4
+	TableViewFirstColumnOnlyAutoresizingStyle         TableViewColumnAutoresizingStyle = 5
 )
 
-func (e NSTableViewColumnAutoresizingStyle) String() string {
+// String returns the TableViewColumnAutoresizingStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewColumnAutoresizingStyle) String() string {
 	switch e {
-	case NSTableViewNoColumnAutoresizing:
-		return "NSTableViewNoColumnAutoresizing"
-	case NSTableViewUniformColumnAutoresizingStyle:
-		return "NSTableViewUniformColumnAutoresizingStyle"
-	case NSTableViewSequentialColumnAutoresizingStyle:
-		return "NSTableViewSequentialColumnAutoresizingStyle"
-	case NSTableViewReverseSequentialColumnAutoresizingStyle:
-		return "NSTableViewReverseSequentialColumnAutoresizingStyle"
-	case NSTableViewLastColumnOnlyAutoresizingStyle:
-		return "NSTableViewLastColumnOnlyAutoresizingStyle"
-	case NSTableViewFirstColumnOnlyAutoresizingStyle:
-		return "NSTableViewFirstColumnOnlyAutoresizingStyle"
+	case TableViewNoColumnAutoresizing:
+		return "TableViewNoColumnAutoresizing"
+	case TableViewUniformColumnAutoresizingStyle:
+		return "TableViewUniformColumnAutoresizingStyle"
+	case TableViewSequentialColumnAutoresizingStyle:
+		return "TableViewSequentialColumnAutoresizingStyle"
+	case TableViewReverseSequentialColumnAutoresizingStyle:
+		return "TableViewReverseSequentialColumnAutoresizingStyle"
+	case TableViewLastColumnOnlyAutoresizingStyle:
+		return "TableViewLastColumnOnlyAutoresizingStyle"
+	case TableViewFirstColumnOnlyAutoresizingStyle:
+		return "TableViewFirstColumnOnlyAutoresizingStyle"
 	default:
-		return fmt.Sprintf("NSTableViewColumnAutoresizingStyle(%d)", int64(e))
+		return fmt.Sprintf("TableViewColumnAutoresizingStyle(%d)", int64(e))
 	}
 }
 
-type NSTableViewDraggingDestinationFeedbackStyle int64
+type TableViewDraggingDestinationFeedbackStyle int64
 
 const (
-	NSTableViewDraggingDestinationFeedbackStyleNone       NSTableViewDraggingDestinationFeedbackStyle = -1
-	NSTableViewDraggingDestinationFeedbackStyleRegular    NSTableViewDraggingDestinationFeedbackStyle = 0
-	NSTableViewDraggingDestinationFeedbackStyleSourceList NSTableViewDraggingDestinationFeedbackStyle = 1
-	NSTableViewDraggingDestinationFeedbackStyleGap        NSTableViewDraggingDestinationFeedbackStyle = 2
+	TableViewDraggingDestinationFeedbackStyleNone       TableViewDraggingDestinationFeedbackStyle = -1
+	TableViewDraggingDestinationFeedbackStyleRegular    TableViewDraggingDestinationFeedbackStyle = 0
+	TableViewDraggingDestinationFeedbackStyleSourceList TableViewDraggingDestinationFeedbackStyle = 1
+	TableViewDraggingDestinationFeedbackStyleGap        TableViewDraggingDestinationFeedbackStyle = 2
 )
 
-func (e NSTableViewDraggingDestinationFeedbackStyle) String() string {
+// String returns the TableViewDraggingDestinationFeedbackStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewDraggingDestinationFeedbackStyle) String() string {
 	switch e {
-	case NSTableViewDraggingDestinationFeedbackStyleNone:
-		return "NSTableViewDraggingDestinationFeedbackStyleNone"
-	case NSTableViewDraggingDestinationFeedbackStyleRegular:
-		return "NSTableViewDraggingDestinationFeedbackStyleRegular"
-	case NSTableViewDraggingDestinationFeedbackStyleSourceList:
-		return "NSTableViewDraggingDestinationFeedbackStyleSourceList"
-	case NSTableViewDraggingDestinationFeedbackStyleGap:
-		return "NSTableViewDraggingDestinationFeedbackStyleGap"
+	case TableViewDraggingDestinationFeedbackStyleNone:
+		return "TableViewDraggingDestinationFeedbackStyleNone"
+	case TableViewDraggingDestinationFeedbackStyleRegular:
+		return "TableViewDraggingDestinationFeedbackStyleRegular"
+	case TableViewDraggingDestinationFeedbackStyleSourceList:
+		return "TableViewDraggingDestinationFeedbackStyleSourceList"
+	case TableViewDraggingDestinationFeedbackStyleGap:
+		return "TableViewDraggingDestinationFeedbackStyleGap"
 	default:
-		return fmt.Sprintf("NSTableViewDraggingDestinationFeedbackStyle(%d)", int64(e))
+		return fmt.Sprintf("TableViewDraggingDestinationFeedbackStyle(%d)", int64(e))
 	}
 }
 
 // NSTableView defines these constants to specify drop operations.
-type NSTableViewDropOperation uint64
+type TableViewDropOperation uint64
 
 const (
-	NSTableViewDropOn    NSTableViewDropOperation = 0
-	NSTableViewDropAbove NSTableViewDropOperation = 1
+	TableViewDropOn    TableViewDropOperation = 0
+	TableViewDropAbove TableViewDropOperation = 1
 )
 
-func (e NSTableViewDropOperation) String() string {
+// String returns the TableViewDropOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewDropOperation) String() string {
 	switch e {
-	case NSTableViewDropOn:
-		return "NSTableViewDropOn"
-	case NSTableViewDropAbove:
-		return "NSTableViewDropAbove"
+	case TableViewDropOn:
+		return "TableViewDropOn"
+	case TableViewDropAbove:
+		return "TableViewDropAbove"
 	default:
-		return fmt.Sprintf("NSTableViewDropOperation(%d)", int64(e))
+		return fmt.Sprintf("TableViewDropOperation(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSTableViewGridLineStyle uint64
+type TableViewGridLineStyle uint64
 
 const (
-	NSTableViewGridNone                     NSTableViewGridLineStyle = 0
-	NSTableViewSolidVerticalGridLineMask    NSTableViewGridLineStyle = 1
-	NSTableViewSolidHorizontalGridLineMask  NSTableViewGridLineStyle = 2
-	NSTableViewDashedHorizontalGridLineMask NSTableViewGridLineStyle = 8
+	TableViewGridNone                     TableViewGridLineStyle = 0
+	TableViewSolidVerticalGridLineMask    TableViewGridLineStyle = 1
+	TableViewSolidHorizontalGridLineMask  TableViewGridLineStyle = 2
+	TableViewDashedHorizontalGridLineMask TableViewGridLineStyle = 8
 )
 
-func (e NSTableViewGridLineStyle) String() string {
+// String returns the TableViewGridLineStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewGridLineStyle) String() string {
 	var parts []string
-	if e&NSTableViewSolidVerticalGridLineMask != 0 {
-		parts = append(parts, "NSTableViewSolidVerticalGridLineMask")
+	if e&TableViewSolidVerticalGridLineMask != 0 {
+		parts = append(parts, "TableViewSolidVerticalGridLineMask")
 	}
-	if e&NSTableViewSolidHorizontalGridLineMask != 0 {
-		parts = append(parts, "NSTableViewSolidHorizontalGridLineMask")
+	if e&TableViewSolidHorizontalGridLineMask != 0 {
+		parts = append(parts, "TableViewSolidHorizontalGridLineMask")
 	}
-	if e&NSTableViewDashedHorizontalGridLineMask != 0 {
-		parts = append(parts, "NSTableViewDashedHorizontalGridLineMask")
+	if e&TableViewDashedHorizontalGridLineMask != 0 {
+		parts = append(parts, "TableViewDashedHorizontalGridLineMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -5724,334 +6068,360 @@ func (e NSTableViewGridLineStyle) String() string {
 }
 
 // Constants that help define the appearance and behavior of action buttons.
-type NSTableViewRowActionStyle int64
+type TableViewRowActionStyle int64
 
 const (
-	NSTableViewRowActionStyleRegular     NSTableViewRowActionStyle = 0
-	NSTableViewRowActionStyleDestructive NSTableViewRowActionStyle = 1
+	TableViewRowActionStyleRegular     TableViewRowActionStyle = 0
+	TableViewRowActionStyleDestructive TableViewRowActionStyle = 1
 )
 
-func (e NSTableViewRowActionStyle) String() string {
+// String returns the TableViewRowActionStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewRowActionStyle) String() string {
 	switch e {
-	case NSTableViewRowActionStyleRegular:
-		return "NSTableViewRowActionStyleRegular"
-	case NSTableViewRowActionStyleDestructive:
-		return "NSTableViewRowActionStyleDestructive"
+	case TableViewRowActionStyleRegular:
+		return "TableViewRowActionStyleRegular"
+	case TableViewRowActionStyleDestructive:
+		return "TableViewRowActionStyleDestructive"
 	default:
-		return fmt.Sprintf("NSTableViewRowActionStyle(%d)", int64(e))
+		return fmt.Sprintf("TableViewRowActionStyle(%d)", int64(e))
 	}
 }
 
-type NSTableViewRowSizeStyle int64
+type TableViewRowSizeStyle int64
 
 const (
-	NSTableViewRowSizeStyleDefault NSTableViewRowSizeStyle = -1
-	NSTableViewRowSizeStyleCustom  NSTableViewRowSizeStyle = 0
-	NSTableViewRowSizeStyleSmall   NSTableViewRowSizeStyle = 1
-	NSTableViewRowSizeStyleMedium  NSTableViewRowSizeStyle = 2
-	NSTableViewRowSizeStyleLarge   NSTableViewRowSizeStyle = 3
+	TableViewRowSizeStyleDefault TableViewRowSizeStyle = -1
+	TableViewRowSizeStyleCustom  TableViewRowSizeStyle = 0
+	TableViewRowSizeStyleSmall   TableViewRowSizeStyle = 1
+	TableViewRowSizeStyleMedium  TableViewRowSizeStyle = 2
+	TableViewRowSizeStyleLarge   TableViewRowSizeStyle = 3
 )
 
-func (e NSTableViewRowSizeStyle) String() string {
+// String returns the TableViewRowSizeStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewRowSizeStyle) String() string {
 	switch e {
-	case NSTableViewRowSizeStyleDefault:
-		return "NSTableViewRowSizeStyleDefault"
-	case NSTableViewRowSizeStyleCustom:
-		return "NSTableViewRowSizeStyleCustom"
-	case NSTableViewRowSizeStyleSmall:
-		return "NSTableViewRowSizeStyleSmall"
-	case NSTableViewRowSizeStyleMedium:
-		return "NSTableViewRowSizeStyleMedium"
-	case NSTableViewRowSizeStyleLarge:
-		return "NSTableViewRowSizeStyleLarge"
+	case TableViewRowSizeStyleDefault:
+		return "TableViewRowSizeStyleDefault"
+	case TableViewRowSizeStyleCustom:
+		return "TableViewRowSizeStyleCustom"
+	case TableViewRowSizeStyleSmall:
+		return "TableViewRowSizeStyleSmall"
+	case TableViewRowSizeStyleMedium:
+		return "TableViewRowSizeStyleMedium"
+	case TableViewRowSizeStyleLarge:
+		return "TableViewRowSizeStyleLarge"
 	default:
-		return fmt.Sprintf("NSTableViewRowSizeStyle(%d)", int64(e))
+		return fmt.Sprintf("TableViewRowSizeStyle(%d)", int64(e))
 	}
 }
 
-type NSTableViewSelectionHighlightStyle int64
+type TableViewSelectionHighlightStyle int64
 
 const (
-	NSTableViewSelectionHighlightStyleNone    NSTableViewSelectionHighlightStyle = -1
-	NSTableViewSelectionHighlightStyleRegular NSTableViewSelectionHighlightStyle = 0
+	TableViewSelectionHighlightStyleNone    TableViewSelectionHighlightStyle = -1
+	TableViewSelectionHighlightStyleRegular TableViewSelectionHighlightStyle = 0
 	// Deprecated: Set the NSTableView.style property to NSTableViewStyleSourceList instead.
-	NSTableViewSelectionHighlightStyleSourceList NSTableViewSelectionHighlightStyle = 1
+	TableViewSelectionHighlightStyleSourceList TableViewSelectionHighlightStyle = 1
 )
 
-func (e NSTableViewSelectionHighlightStyle) String() string {
+// String returns the TableViewSelectionHighlightStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewSelectionHighlightStyle) String() string {
 	switch e {
-	case NSTableViewSelectionHighlightStyleNone:
-		return "NSTableViewSelectionHighlightStyleNone"
-	case NSTableViewSelectionHighlightStyleRegular:
-		return "NSTableViewSelectionHighlightStyleRegular"
-	case NSTableViewSelectionHighlightStyleSourceList:
-		return "NSTableViewSelectionHighlightStyleSourceList"
+	case TableViewSelectionHighlightStyleNone:
+		return "TableViewSelectionHighlightStyleNone"
+	case TableViewSelectionHighlightStyleRegular:
+		return "TableViewSelectionHighlightStyleRegular"
+	case TableViewSelectionHighlightStyleSourceList:
+		return "TableViewSelectionHighlightStyleSourceList"
 	default:
-		return fmt.Sprintf("NSTableViewSelectionHighlightStyle(%d)", int64(e))
+		return fmt.Sprintf("TableViewSelectionHighlightStyle(%d)", int64(e))
 	}
 }
 
 // Contains the possible style values for a table view.
-type NSTableViewStyle int64
+type TableViewStyle int64
 
 const (
-	NSTableViewStyleAutomatic  NSTableViewStyle = 0
-	NSTableViewStyleFullWidth  NSTableViewStyle = 1
-	NSTableViewStyleInset      NSTableViewStyle = 2
-	NSTableViewStyleSourceList NSTableViewStyle = 3
-	NSTableViewStylePlain      NSTableViewStyle = 4
+	TableViewStyleAutomatic  TableViewStyle = 0
+	TableViewStyleFullWidth  TableViewStyle = 1
+	TableViewStyleInset      TableViewStyle = 2
+	TableViewStyleSourceList TableViewStyle = 3
+	TableViewStylePlain      TableViewStyle = 4
 )
 
-func (e NSTableViewStyle) String() string {
+// String returns the TableViewStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableViewStyle) String() string {
 	switch e {
-	case NSTableViewStyleAutomatic:
-		return "NSTableViewStyleAutomatic"
-	case NSTableViewStyleFullWidth:
-		return "NSTableViewStyleFullWidth"
-	case NSTableViewStyleInset:
-		return "NSTableViewStyleInset"
-	case NSTableViewStyleSourceList:
-		return "NSTableViewStyleSourceList"
-	case NSTableViewStylePlain:
-		return "NSTableViewStylePlain"
+	case TableViewStyleAutomatic:
+		return "TableViewStyleAutomatic"
+	case TableViewStyleFullWidth:
+		return "TableViewStyleFullWidth"
+	case TableViewStyleInset:
+		return "TableViewStyleInset"
+	case TableViewStyleSourceList:
+		return "TableViewStyleSourceList"
+	case TableViewStylePlain:
+		return "TableViewStylePlain"
 	default:
-		return fmt.Sprintf("NSTableViewStyle(%d)", int64(e))
+		return fmt.Sprintf("TableViewStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify text alignment.
-type NSTextAlignment int64
+type TextAlignment int64
 
 const (
 	// Text is left-aligned.
-	NSTextAlignmentLeft NSTextAlignment = 0
+	TextAlignmentLeft TextAlignment = 0
 	// Text is center-aligned.
-	NSTextAlignmentCenter NSTextAlignment = 1
+	TextAlignmentCenter TextAlignment = 1
 	// Text is right-aligned.
-	NSTextAlignmentRight NSTextAlignment = 2
+	TextAlignmentRight TextAlignment = 2
 	// Text is justified.
-	NSTextAlignmentJustified NSTextAlignment = 3
+	TextAlignmentJustified TextAlignment = 3
 	// Text uses the default alignment for the current localization of the app.
-	NSTextAlignmentNatural NSTextAlignment = 4
+	TextAlignmentNatural TextAlignment = 4
 )
 
-func (e NSTextAlignment) String() string {
+// String returns the TextAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextAlignment) String() string {
 	switch e {
-	case NSTextAlignmentLeft:
-		return "NSTextAlignmentLeft"
-	case NSTextAlignmentCenter:
-		return "NSTextAlignmentCenter"
-	case NSTextAlignmentRight:
-		return "NSTextAlignmentRight"
-	case NSTextAlignmentJustified:
-		return "NSTextAlignmentJustified"
-	case NSTextAlignmentNatural:
-		return "NSTextAlignmentNatural"
+	case TextAlignmentLeft:
+		return "TextAlignmentLeft"
+	case TextAlignmentCenter:
+		return "TextAlignmentCenter"
+	case TextAlignmentRight:
+		return "TextAlignmentRight"
+	case TextAlignmentJustified:
+		return "TextAlignmentJustified"
+	case TextAlignmentNatural:
+		return "TextAlignmentNatural"
 	default:
-		return fmt.Sprintf("NSTextAlignment(%d)", int64(e))
+		return fmt.Sprintf("TextAlignment(%d)", int64(e))
 	}
 }
 
-type NSTextBlockDimension uint64
+type TextBlockDimension uint64
 
 const (
-	NSTextBlockWidth         NSTextBlockDimension = 0
-	NSTextBlockMinimumWidth  NSTextBlockDimension = 1
-	NSTextBlockMaximumWidth  NSTextBlockDimension = 2
-	NSTextBlockHeight        NSTextBlockDimension = 4
-	NSTextBlockMinimumHeight NSTextBlockDimension = 5
-	NSTextBlockMaximumHeight NSTextBlockDimension = 6
+	TextBlockWidth         TextBlockDimension = 0
+	TextBlockMinimumWidth  TextBlockDimension = 1
+	TextBlockMaximumWidth  TextBlockDimension = 2
+	TextBlockHeight        TextBlockDimension = 4
+	TextBlockMinimumHeight TextBlockDimension = 5
+	TextBlockMaximumHeight TextBlockDimension = 6
 )
 
-func (e NSTextBlockDimension) String() string {
+// String returns the TextBlockDimension constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextBlockDimension) String() string {
 	switch e {
-	case NSTextBlockWidth:
-		return "NSTextBlockWidth"
-	case NSTextBlockMinimumWidth:
-		return "NSTextBlockMinimumWidth"
-	case NSTextBlockMaximumWidth:
-		return "NSTextBlockMaximumWidth"
-	case NSTextBlockHeight:
-		return "NSTextBlockHeight"
-	case NSTextBlockMinimumHeight:
-		return "NSTextBlockMinimumHeight"
-	case NSTextBlockMaximumHeight:
-		return "NSTextBlockMaximumHeight"
+	case TextBlockWidth:
+		return "TextBlockWidth"
+	case TextBlockMinimumWidth:
+		return "TextBlockMinimumWidth"
+	case TextBlockMaximumWidth:
+		return "TextBlockMaximumWidth"
+	case TextBlockHeight:
+		return "TextBlockHeight"
+	case TextBlockMinimumHeight:
+		return "TextBlockMinimumHeight"
+	case TextBlockMaximumHeight:
+		return "TextBlockMaximumHeight"
 	default:
-		return fmt.Sprintf("NSTextBlockDimension(%d)", int64(e))
+		return fmt.Sprintf("TextBlockDimension(%d)", int64(e))
 	}
 }
 
-type NSTextBlockLayer int64
+type TextBlockLayer int64
 
 const (
-	NSTextBlockPadding NSTextBlockLayer = -1
-	NSTextBlockBorder  NSTextBlockLayer = 0
-	NSTextBlockMargin  NSTextBlockLayer = 1
+	TextBlockPadding TextBlockLayer = -1
+	TextBlockBorder  TextBlockLayer = 0
+	TextBlockMargin  TextBlockLayer = 1
 )
 
-func (e NSTextBlockLayer) String() string {
+// String returns the TextBlockLayer constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextBlockLayer) String() string {
 	switch e {
-	case NSTextBlockPadding:
-		return "NSTextBlockPadding"
-	case NSTextBlockBorder:
-		return "NSTextBlockBorder"
-	case NSTextBlockMargin:
-		return "NSTextBlockMargin"
+	case TextBlockPadding:
+		return "TextBlockPadding"
+	case TextBlockBorder:
+		return "TextBlockBorder"
+	case TextBlockMargin:
+		return "TextBlockMargin"
 	default:
-		return fmt.Sprintf("NSTextBlockLayer(%d)", int64(e))
+		return fmt.Sprintf("TextBlockLayer(%d)", int64(e))
 	}
 }
 
-type NSTextBlockValueType uint64
+type TextBlockValueType uint64
 
 const (
-	NSTextBlockAbsoluteValueType   NSTextBlockValueType = 0
-	NSTextBlockPercentageValueType NSTextBlockValueType = 1
+	TextBlockAbsoluteValueType   TextBlockValueType = 0
+	TextBlockPercentageValueType TextBlockValueType = 1
 )
 
-func (e NSTextBlockValueType) String() string {
+// String returns the TextBlockValueType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextBlockValueType) String() string {
 	switch e {
-	case NSTextBlockAbsoluteValueType:
-		return "NSTextBlockAbsoluteValueType"
-	case NSTextBlockPercentageValueType:
-		return "NSTextBlockPercentageValueType"
+	case TextBlockAbsoluteValueType:
+		return "TextBlockAbsoluteValueType"
+	case TextBlockPercentageValueType:
+		return "TextBlockPercentageValueType"
 	default:
-		return fmt.Sprintf("NSTextBlockValueType(%d)", int64(e))
+		return fmt.Sprintf("TextBlockValueType(%d)", int64(e))
 	}
 }
 
-type NSTextBlockVerticalAlignment uint64
+type TextBlockVerticalAlignment uint64
 
 const (
-	NSTextBlockTopAlignment      NSTextBlockVerticalAlignment = 0
-	NSTextBlockMiddleAlignment   NSTextBlockVerticalAlignment = 1
-	NSTextBlockBottomAlignment   NSTextBlockVerticalAlignment = 2
-	NSTextBlockBaselineAlignment NSTextBlockVerticalAlignment = 3
+	TextBlockTopAlignment      TextBlockVerticalAlignment = 0
+	TextBlockMiddleAlignment   TextBlockVerticalAlignment = 1
+	TextBlockBottomAlignment   TextBlockVerticalAlignment = 2
+	TextBlockBaselineAlignment TextBlockVerticalAlignment = 3
 )
 
-func (e NSTextBlockVerticalAlignment) String() string {
+// String returns the TextBlockVerticalAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextBlockVerticalAlignment) String() string {
 	switch e {
-	case NSTextBlockTopAlignment:
-		return "NSTextBlockTopAlignment"
-	case NSTextBlockMiddleAlignment:
-		return "NSTextBlockMiddleAlignment"
-	case NSTextBlockBottomAlignment:
-		return "NSTextBlockBottomAlignment"
-	case NSTextBlockBaselineAlignment:
-		return "NSTextBlockBaselineAlignment"
+	case TextBlockTopAlignment:
+		return "TextBlockTopAlignment"
+	case TextBlockMiddleAlignment:
+		return "TextBlockMiddleAlignment"
+	case TextBlockBottomAlignment:
+		return "TextBlockBottomAlignment"
+	case TextBlockBaselineAlignment:
+		return "TextBlockBaselineAlignment"
 	default:
-		return fmt.Sprintf("NSTextBlockVerticalAlignment(%d)", int64(e))
+		return fmt.Sprintf("TextBlockVerticalAlignment(%d)", int64(e))
 	}
 }
 
 // The style of bezel the text field displays.
-type NSTextFieldBezelStyle uint64
+type TextFieldBezelStyle uint64
 
 const (
-	NSTextFieldSquareBezel  NSTextFieldBezelStyle = 0
-	NSTextFieldRoundedBezel NSTextFieldBezelStyle = 1
+	TextFieldSquareBezel  TextFieldBezelStyle = 0
+	TextFieldRoundedBezel TextFieldBezelStyle = 1
 )
 
-func (e NSTextFieldBezelStyle) String() string {
+// String returns the TextFieldBezelStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextFieldBezelStyle) String() string {
 	switch e {
-	case NSTextFieldSquareBezel:
-		return "NSTextFieldSquareBezel"
-	case NSTextFieldRoundedBezel:
-		return "NSTextFieldRoundedBezel"
+	case TextFieldSquareBezel:
+		return "TextFieldSquareBezel"
+	case TextFieldRoundedBezel:
+		return "TextFieldRoundedBezel"
 	default:
-		return fmt.Sprintf("NSTextFieldBezelStyle(%d)", int64(e))
+		return fmt.Sprintf("TextFieldBezelStyle(%d)", int64(e))
 	}
 }
 
-type NSTextFinderAction int64
+type TextFinderAction int64
 
 const (
-	NSTextFinderActionShowFindInterface     NSTextFinderAction = 1
-	NSTextFinderActionNextMatch             NSTextFinderAction = 2
-	NSTextFinderActionPreviousMatch         NSTextFinderAction = 3
-	NSTextFinderActionReplaceAll            NSTextFinderAction = 4
-	NSTextFinderActionReplace               NSTextFinderAction = 5
-	NSTextFinderActionReplaceAndFind        NSTextFinderAction = 6
-	NSTextFinderActionSetSearchString       NSTextFinderAction = 7
-	NSTextFinderActionReplaceAllInSelection NSTextFinderAction = 8
-	NSTextFinderActionSelectAll             NSTextFinderAction = 9
-	NSTextFinderActionSelectAllInSelection  NSTextFinderAction = 10
-	NSTextFinderActionHideFindInterface     NSTextFinderAction = 11
-	NSTextFinderActionShowReplaceInterface  NSTextFinderAction = 12
-	NSTextFinderActionHideReplaceInterface  NSTextFinderAction = 13
+	TextFinderActionShowFindInterface     TextFinderAction = 1
+	TextFinderActionNextMatch             TextFinderAction = 2
+	TextFinderActionPreviousMatch         TextFinderAction = 3
+	TextFinderActionReplaceAll            TextFinderAction = 4
+	TextFinderActionReplace               TextFinderAction = 5
+	TextFinderActionReplaceAndFind        TextFinderAction = 6
+	TextFinderActionSetSearchString       TextFinderAction = 7
+	TextFinderActionReplaceAllInSelection TextFinderAction = 8
+	TextFinderActionSelectAll             TextFinderAction = 9
+	TextFinderActionSelectAllInSelection  TextFinderAction = 10
+	TextFinderActionHideFindInterface     TextFinderAction = 11
+	TextFinderActionShowReplaceInterface  TextFinderAction = 12
+	TextFinderActionHideReplaceInterface  TextFinderAction = 13
 )
 
-func (e NSTextFinderAction) String() string {
+// String returns the TextFinderAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextFinderAction) String() string {
 	switch e {
-	case NSTextFinderActionShowFindInterface:
-		return "NSTextFinderActionShowFindInterface"
-	case NSTextFinderActionNextMatch:
-		return "NSTextFinderActionNextMatch"
-	case NSTextFinderActionPreviousMatch:
-		return "NSTextFinderActionPreviousMatch"
-	case NSTextFinderActionReplaceAll:
-		return "NSTextFinderActionReplaceAll"
-	case NSTextFinderActionReplace:
-		return "NSTextFinderActionReplace"
-	case NSTextFinderActionReplaceAndFind:
-		return "NSTextFinderActionReplaceAndFind"
-	case NSTextFinderActionSetSearchString:
-		return "NSTextFinderActionSetSearchString"
-	case NSTextFinderActionReplaceAllInSelection:
-		return "NSTextFinderActionReplaceAllInSelection"
-	case NSTextFinderActionSelectAll:
-		return "NSTextFinderActionSelectAll"
-	case NSTextFinderActionSelectAllInSelection:
-		return "NSTextFinderActionSelectAllInSelection"
-	case NSTextFinderActionHideFindInterface:
-		return "NSTextFinderActionHideFindInterface"
-	case NSTextFinderActionShowReplaceInterface:
-		return "NSTextFinderActionShowReplaceInterface"
-	case NSTextFinderActionHideReplaceInterface:
-		return "NSTextFinderActionHideReplaceInterface"
+	case TextFinderActionShowFindInterface:
+		return "TextFinderActionShowFindInterface"
+	case TextFinderActionNextMatch:
+		return "TextFinderActionNextMatch"
+	case TextFinderActionPreviousMatch:
+		return "TextFinderActionPreviousMatch"
+	case TextFinderActionReplaceAll:
+		return "TextFinderActionReplaceAll"
+	case TextFinderActionReplace:
+		return "TextFinderActionReplace"
+	case TextFinderActionReplaceAndFind:
+		return "TextFinderActionReplaceAndFind"
+	case TextFinderActionSetSearchString:
+		return "TextFinderActionSetSearchString"
+	case TextFinderActionReplaceAllInSelection:
+		return "TextFinderActionReplaceAllInSelection"
+	case TextFinderActionSelectAll:
+		return "TextFinderActionSelectAll"
+	case TextFinderActionSelectAllInSelection:
+		return "TextFinderActionSelectAllInSelection"
+	case TextFinderActionHideFindInterface:
+		return "TextFinderActionHideFindInterface"
+	case TextFinderActionShowReplaceInterface:
+		return "TextFinderActionShowReplaceInterface"
+	case TextFinderActionHideReplaceInterface:
+		return "TextFinderActionHideReplaceInterface"
 	default:
-		return fmt.Sprintf("NSTextFinderAction(%d)", int64(e))
+		return fmt.Sprintf("TextFinderAction(%d)", int64(e))
 	}
 }
 
-type NSTextInputTraitType int64
+type TextInputTraitType int64
 
 const (
-	NSTextInputTraitTypeDefault NSTextInputTraitType = 0
-	NSTextInputTraitTypeNo      NSTextInputTraitType = 1
-	NSTextInputTraitTypeYes     NSTextInputTraitType = 2
+	TextInputTraitTypeDefault TextInputTraitType = 0
+	TextInputTraitTypeNo      TextInputTraitType = 1
+	TextInputTraitTypeYes     TextInputTraitType = 2
 )
 
-func (e NSTextInputTraitType) String() string {
+// String returns the TextInputTraitType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextInputTraitType) String() string {
 	switch e {
-	case NSTextInputTraitTypeDefault:
-		return "NSTextInputTraitTypeDefault"
-	case NSTextInputTraitTypeNo:
-		return "NSTextInputTraitTypeNo"
-	case NSTextInputTraitTypeYes:
-		return "NSTextInputTraitTypeYes"
+	case TextInputTraitTypeDefault:
+		return "TextInputTraitTypeDefault"
+	case TextInputTraitTypeNo:
+		return "TextInputTraitTypeNo"
+	case TextInputTraitTypeYes:
+		return "TextInputTraitTypeYes"
 	default:
-		return fmt.Sprintf("NSTextInputTraitType(%d)", int64(e))
+		return fmt.Sprintf("TextInputTraitType(%d)", int64(e))
 	}
 }
 
 // Options that affect the automatic display mode.
 // Bitmask — values may be combined with |.
-type NSTextInsertionIndicatorAutomaticModeOptions int64
+type TextInsertionIndicatorAutomaticModeOptions int64
 
 const (
-	NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView   NSTextInsertionIndicatorAutomaticModeOptions = 1
-	NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking NSTextInsertionIndicatorAutomaticModeOptions = 2
+	TextInsertionIndicatorAutomaticModeOptionsShowEffectsView   TextInsertionIndicatorAutomaticModeOptions = 1
+	TextInsertionIndicatorAutomaticModeOptionsShowWhileTracking TextInsertionIndicatorAutomaticModeOptions = 2
 )
 
-func (e NSTextInsertionIndicatorAutomaticModeOptions) String() string {
+// String returns the TextInsertionIndicatorAutomaticModeOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextInsertionIndicatorAutomaticModeOptions) String() string {
 	var parts []string
-	if e&NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView != 0 {
-		parts = append(parts, "NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView")
+	if e&TextInsertionIndicatorAutomaticModeOptionsShowEffectsView != 0 {
+		parts = append(parts, "TextInsertionIndicatorAutomaticModeOptionsShowEffectsView")
 	}
-	if e&NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking != 0 {
-		parts = append(parts, "NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking")
+	if e&TextInsertionIndicatorAutomaticModeOptionsShowWhileTracking != 0 {
+		parts = append(parts, "TextInsertionIndicatorAutomaticModeOptionsShowWhileTracking")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6060,113 +6430,87 @@ func (e NSTextInsertionIndicatorAutomaticModeOptions) String() string {
 }
 
 // Constants that determine how to display the system text cursor in a custom text UI.
-type NSTextInsertionIndicatorDisplayMode int64
+type TextInsertionIndicatorDisplayMode int64
 
 const (
-	NSTextInsertionIndicatorDisplayModeAutomatic NSTextInsertionIndicatorDisplayMode = 0
-	NSTextInsertionIndicatorDisplayModeHidden    NSTextInsertionIndicatorDisplayMode = 1
-	NSTextInsertionIndicatorDisplayModeVisible   NSTextInsertionIndicatorDisplayMode = 2
+	TextInsertionIndicatorDisplayModeAutomatic TextInsertionIndicatorDisplayMode = 0
+	TextInsertionIndicatorDisplayModeHidden    TextInsertionIndicatorDisplayMode = 1
+	TextInsertionIndicatorDisplayModeVisible   TextInsertionIndicatorDisplayMode = 2
 )
 
-func (e NSTextInsertionIndicatorDisplayMode) String() string {
+// String returns the TextInsertionIndicatorDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextInsertionIndicatorDisplayMode) String() string {
 	switch e {
-	case NSTextInsertionIndicatorDisplayModeAutomatic:
-		return "NSTextInsertionIndicatorDisplayModeAutomatic"
-	case NSTextInsertionIndicatorDisplayModeHidden:
-		return "NSTextInsertionIndicatorDisplayModeHidden"
-	case NSTextInsertionIndicatorDisplayModeVisible:
-		return "NSTextInsertionIndicatorDisplayModeVisible"
+	case TextInsertionIndicatorDisplayModeAutomatic:
+		return "TextInsertionIndicatorDisplayModeAutomatic"
+	case TextInsertionIndicatorDisplayModeHidden:
+		return "TextInsertionIndicatorDisplayModeHidden"
+	case TextInsertionIndicatorDisplayModeVisible:
+		return "TextInsertionIndicatorDisplayModeVisible"
 	default:
-		return fmt.Sprintf("NSTextInsertionIndicatorDisplayMode(%d)", int64(e))
+		return fmt.Sprintf("TextInsertionIndicatorDisplayMode(%d)", int64(e))
 	}
-}
-
-// Values that describe options for enumerating text layout fragments.
-// Bitmask — values may be combined with |.
-type NSTextLayoutFragmentEnumerationOptions uint64
-
-const (
-	NSTextLayoutFragmentEnumerationOptionsNone                     NSTextLayoutFragmentEnumerationOptions = 0
-	NSTextLayoutFragmentEnumerationOptionsReverse                  NSTextLayoutFragmentEnumerationOptions = 1
-	NSTextLayoutFragmentEnumerationOptionsEstimatesSize            NSTextLayoutFragmentEnumerationOptions = 2
-	NSTextLayoutFragmentEnumerationOptionsEnsuresLayout            NSTextLayoutFragmentEnumerationOptions = 4
-	NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment NSTextLayoutFragmentEnumerationOptions = 8
-)
-
-func (e NSTextLayoutFragmentEnumerationOptions) String() string {
-	var parts []string
-	if e&NSTextLayoutFragmentEnumerationOptionsReverse != 0 {
-		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsReverse")
-	}
-	if e&NSTextLayoutFragmentEnumerationOptionsEstimatesSize != 0 {
-		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEstimatesSize")
-	}
-	if e&NSTextLayoutFragmentEnumerationOptionsEnsuresLayout != 0 {
-		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEnsuresLayout")
-	}
-	if e&NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment != 0 {
-		parts = append(parts, "NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Values that describe the possible layout states.
-type NSTextLayoutFragmentState uint64
+type TextLayoutFragmentState uint64
 
 const (
-	NSTextLayoutFragmentStateNone                  NSTextLayoutFragmentState = 0
-	NSTextLayoutFragmentStateEstimatedUsageBounds  NSTextLayoutFragmentState = 1
-	NSTextLayoutFragmentStateCalculatedUsageBounds NSTextLayoutFragmentState = 2
-	NSTextLayoutFragmentStateLayoutAvailable       NSTextLayoutFragmentState = 3
+	TextLayoutFragmentStateNone                  TextLayoutFragmentState = 0
+	TextLayoutFragmentStateEstimatedUsageBounds  TextLayoutFragmentState = 1
+	TextLayoutFragmentStateCalculatedUsageBounds TextLayoutFragmentState = 2
+	TextLayoutFragmentStateLayoutAvailable       TextLayoutFragmentState = 3
 )
 
-func (e NSTextLayoutFragmentState) String() string {
+// String returns the TextLayoutFragmentState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextLayoutFragmentState) String() string {
 	switch e {
-	case NSTextLayoutFragmentStateNone:
-		return "NSTextLayoutFragmentStateNone"
-	case NSTextLayoutFragmentStateEstimatedUsageBounds:
-		return "NSTextLayoutFragmentStateEstimatedUsageBounds"
-	case NSTextLayoutFragmentStateCalculatedUsageBounds:
-		return "NSTextLayoutFragmentStateCalculatedUsageBounds"
-	case NSTextLayoutFragmentStateLayoutAvailable:
-		return "NSTextLayoutFragmentStateLayoutAvailable"
+	case TextLayoutFragmentStateNone:
+		return "TextLayoutFragmentStateNone"
+	case TextLayoutFragmentStateEstimatedUsageBounds:
+		return "TextLayoutFragmentStateEstimatedUsageBounds"
+	case TextLayoutFragmentStateCalculatedUsageBounds:
+		return "TextLayoutFragmentStateCalculatedUsageBounds"
+	case TextLayoutFragmentStateLayoutAvailable:
+		return "TextLayoutFragmentStateLayoutAvailable"
 	default:
-		return fmt.Sprintf("NSTextLayoutFragmentState(%d)", int64(e))
+		return fmt.Sprintf("TextLayoutFragmentState(%d)", int64(e))
 	}
 }
 
 // Values that describe where and how the framework extends segments of a selection.
 // Bitmask — values may be combined with |.
-type NSTextLayoutManagerSegmentOptions uint64
+type TextLayoutManagerSegmentOptions uint64
 
 const (
-	NSTextLayoutManagerSegmentOptionsNone                    NSTextLayoutManagerSegmentOptions = 0
-	NSTextLayoutManagerSegmentOptionsRangeNotRequired        NSTextLayoutManagerSegmentOptions = 1
-	NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded NSTextLayoutManagerSegmentOptions = 2
-	NSTextLayoutManagerSegmentOptionsHeadSegmentExtended     NSTextLayoutManagerSegmentOptions = 4
-	NSTextLayoutManagerSegmentOptionsTailSegmentExtended     NSTextLayoutManagerSegmentOptions = 8
-	NSTextLayoutManagerSegmentOptionsUpstreamAffinity        NSTextLayoutManagerSegmentOptions = 16
+	TextLayoutManagerSegmentOptionsNone                    TextLayoutManagerSegmentOptions = 0
+	TextLayoutManagerSegmentOptionsRangeNotRequired        TextLayoutManagerSegmentOptions = 1
+	TextLayoutManagerSegmentOptionsMiddleFragmentsExcluded TextLayoutManagerSegmentOptions = 2
+	TextLayoutManagerSegmentOptionsHeadSegmentExtended     TextLayoutManagerSegmentOptions = 4
+	TextLayoutManagerSegmentOptionsTailSegmentExtended     TextLayoutManagerSegmentOptions = 8
+	TextLayoutManagerSegmentOptionsUpstreamAffinity        TextLayoutManagerSegmentOptions = 16
 )
 
-func (e NSTextLayoutManagerSegmentOptions) String() string {
+// String returns the TextLayoutManagerSegmentOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextLayoutManagerSegmentOptions) String() string {
 	var parts []string
-	if e&NSTextLayoutManagerSegmentOptionsRangeNotRequired != 0 {
-		parts = append(parts, "NSTextLayoutManagerSegmentOptionsRangeNotRequired")
+	if e&TextLayoutManagerSegmentOptionsRangeNotRequired != 0 {
+		parts = append(parts, "TextLayoutManagerSegmentOptionsRangeNotRequired")
 	}
-	if e&NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded != 0 {
-		parts = append(parts, "NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded")
+	if e&TextLayoutManagerSegmentOptionsMiddleFragmentsExcluded != 0 {
+		parts = append(parts, "TextLayoutManagerSegmentOptionsMiddleFragmentsExcluded")
 	}
-	if e&NSTextLayoutManagerSegmentOptionsHeadSegmentExtended != 0 {
-		parts = append(parts, "NSTextLayoutManagerSegmentOptionsHeadSegmentExtended")
+	if e&TextLayoutManagerSegmentOptionsHeadSegmentExtended != 0 {
+		parts = append(parts, "TextLayoutManagerSegmentOptionsHeadSegmentExtended")
 	}
-	if e&NSTextLayoutManagerSegmentOptionsTailSegmentExtended != 0 {
-		parts = append(parts, "NSTextLayoutManagerSegmentOptionsTailSegmentExtended")
+	if e&TextLayoutManagerSegmentOptionsTailSegmentExtended != 0 {
+		parts = append(parts, "TextLayoutManagerSegmentOptionsTailSegmentExtended")
 	}
-	if e&NSTextLayoutManagerSegmentOptionsUpstreamAffinity != 0 {
-		parts = append(parts, "NSTextLayoutManagerSegmentOptionsUpstreamAffinity")
+	if e&TextLayoutManagerSegmentOptionsUpstreamAffinity != 0 {
+		parts = append(parts, "TextLayoutManagerSegmentOptionsUpstreamAffinity")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6175,58 +6519,64 @@ func (e NSTextLayoutManagerSegmentOptions) String() string {
 }
 
 // Values that describe the rendering of selection boundaries.
-type NSTextLayoutManagerSegmentType int64
+type TextLayoutManagerSegmentType int64
 
 const (
-	NSTextLayoutManagerSegmentTypeStandard  NSTextLayoutManagerSegmentType = 0
-	NSTextLayoutManagerSegmentTypeSelection NSTextLayoutManagerSegmentType = 1
-	NSTextLayoutManagerSegmentTypeHighlight NSTextLayoutManagerSegmentType = 2
+	TextLayoutManagerSegmentTypeStandard  TextLayoutManagerSegmentType = 0
+	TextLayoutManagerSegmentTypeSelection TextLayoutManagerSegmentType = 1
+	TextLayoutManagerSegmentTypeHighlight TextLayoutManagerSegmentType = 2
 )
 
-func (e NSTextLayoutManagerSegmentType) String() string {
+// String returns the TextLayoutManagerSegmentType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextLayoutManagerSegmentType) String() string {
 	switch e {
-	case NSTextLayoutManagerSegmentTypeStandard:
-		return "NSTextLayoutManagerSegmentTypeStandard"
-	case NSTextLayoutManagerSegmentTypeSelection:
-		return "NSTextLayoutManagerSegmentTypeSelection"
-	case NSTextLayoutManagerSegmentTypeHighlight:
-		return "NSTextLayoutManagerSegmentTypeHighlight"
+	case TextLayoutManagerSegmentTypeStandard:
+		return "TextLayoutManagerSegmentTypeStandard"
+	case TextLayoutManagerSegmentTypeSelection:
+		return "TextLayoutManagerSegmentTypeSelection"
+	case TextLayoutManagerSegmentTypeHighlight:
+		return "TextLayoutManagerSegmentTypeHighlight"
 	default:
-		return fmt.Sprintf("NSTextLayoutManagerSegmentType(%d)", int64(e))
+		return fmt.Sprintf("TextLayoutManagerSegmentType(%d)", int64(e))
 	}
 }
 
 // Constants that describe the text layout orientation.
-type NSTextLayoutOrientation int64
+type TextLayoutOrientation int64
 
 const (
-	NSTextLayoutOrientationHorizontal NSTextLayoutOrientation = 0
-	NSTextLayoutOrientationVertical   NSTextLayoutOrientation = 1
+	TextLayoutOrientationHorizontal TextLayoutOrientation = 0
+	TextLayoutOrientationVertical   TextLayoutOrientation = 1
 )
 
-func (e NSTextLayoutOrientation) String() string {
+// String returns the TextLayoutOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextLayoutOrientation) String() string {
 	switch e {
-	case NSTextLayoutOrientationHorizontal:
-		return "NSTextLayoutOrientationHorizontal"
-	case NSTextLayoutOrientationVertical:
-		return "NSTextLayoutOrientationVertical"
+	case TextLayoutOrientationHorizontal:
+		return "TextLayoutOrientationHorizontal"
+	case TextLayoutOrientationVertical:
+		return "TextLayoutOrientationVertical"
 	default:
-		return fmt.Sprintf("NSTextLayoutOrientation(%d)", int64(e))
+		return fmt.Sprintf("TextLayoutOrientation(%d)", int64(e))
 	}
 }
 
 // Values that available options for text list items.
 // Bitmask — values may be combined with |.
-type NSTextListOptions uint64
+type TextListOptions uint64
 
 const (
-	NSTextListPrependEnclosingMarker NSTextListOptions = 1
+	TextListPrependEnclosingMarker TextListOptions = 1
 )
 
-func (e NSTextListOptions) String() string {
+// String returns the TextListOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextListOptions) String() string {
 	var parts []string
-	if e&NSTextListPrependEnclosingMarker != 0 {
-		parts = append(parts, "NSTextListPrependEnclosingMarker")
+	if e&TextListPrependEnclosingMarker != 0 {
+		parts = append(parts, "TextListPrependEnclosingMarker")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6235,181 +6585,166 @@ func (e NSTextListOptions) String() string {
 }
 
 // Values that describe the visual location of the text cursor, or the direction of the non-anchored edge of the selection.
-type NSTextSelectionAffinity int64
+type TextSelectionAffinity int64
 
 const (
-	NSTextSelectionAffinityUpstream   NSTextSelectionAffinity = 0
-	NSTextSelectionAffinityDownstream NSTextSelectionAffinity = 1
+	TextSelectionAffinityUpstream   TextSelectionAffinity = 0
+	TextSelectionAffinityDownstream TextSelectionAffinity = 1
 )
 
-func (e NSTextSelectionAffinity) String() string {
+// String returns the TextSelectionAffinity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionAffinity) String() string {
 	switch e {
-	case NSTextSelectionAffinityUpstream:
-		return "NSTextSelectionAffinityUpstream"
-	case NSTextSelectionAffinityDownstream:
-		return "NSTextSelectionAffinityDownstream"
+	case TextSelectionAffinityUpstream:
+		return "TextSelectionAffinityUpstream"
+	case TextSelectionAffinityDownstream:
+		return "TextSelectionAffinityDownstream"
 	default:
-		return fmt.Sprintf("NSTextSelectionAffinity(%d)", int64(e))
+		return fmt.Sprintf("TextSelectionAffinity(%d)", int64(e))
 	}
 }
 
 // Values that describe the different granularities available to make a selection.
-type NSTextSelectionGranularity int64
+type TextSelectionGranularity int64
 
 const (
-	NSTextSelectionGranularityCharacter NSTextSelectionGranularity = 0
-	NSTextSelectionGranularityWord      NSTextSelectionGranularity = 1
-	NSTextSelectionGranularityParagraph NSTextSelectionGranularity = 2
-	NSTextSelectionGranularityLine      NSTextSelectionGranularity = 3
-	NSTextSelectionGranularitySentence  NSTextSelectionGranularity = 4
+	TextSelectionGranularityCharacter TextSelectionGranularity = 0
+	TextSelectionGranularityWord      TextSelectionGranularity = 1
+	TextSelectionGranularityParagraph TextSelectionGranularity = 2
+	TextSelectionGranularityLine      TextSelectionGranularity = 3
+	TextSelectionGranularitySentence  TextSelectionGranularity = 4
 )
 
-func (e NSTextSelectionGranularity) String() string {
+// String returns the TextSelectionGranularity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionGranularity) String() string {
 	switch e {
-	case NSTextSelectionGranularityCharacter:
-		return "NSTextSelectionGranularityCharacter"
-	case NSTextSelectionGranularityWord:
-		return "NSTextSelectionGranularityWord"
-	case NSTextSelectionGranularityParagraph:
-		return "NSTextSelectionGranularityParagraph"
-	case NSTextSelectionGranularityLine:
-		return "NSTextSelectionGranularityLine"
-	case NSTextSelectionGranularitySentence:
-		return "NSTextSelectionGranularitySentence"
+	case TextSelectionGranularityCharacter:
+		return "TextSelectionGranularityCharacter"
+	case TextSelectionGranularityWord:
+		return "TextSelectionGranularityWord"
+	case TextSelectionGranularityParagraph:
+		return "TextSelectionGranularityParagraph"
+	case TextSelectionGranularityLine:
+		return "TextSelectionGranularityLine"
+	case TextSelectionGranularitySentence:
+		return "TextSelectionGranularitySentence"
 	default:
-		return fmt.Sprintf("NSTextSelectionGranularity(%d)", int64(e))
+		return fmt.Sprintf("TextSelectionGranularity(%d)", int64(e))
 	}
 }
 
 // Values that affect how the framework handles navigation across different textual boundaries during a selection.
-type NSTextSelectionNavigationDestination int64
+type TextSelectionNavigationDestination int64
 
 const (
-	NSTextSelectionNavigationDestinationCharacter NSTextSelectionNavigationDestination = 0
-	NSTextSelectionNavigationDestinationWord      NSTextSelectionNavigationDestination = 1
-	NSTextSelectionNavigationDestinationLine      NSTextSelectionNavigationDestination = 2
-	NSTextSelectionNavigationDestinationSentence  NSTextSelectionNavigationDestination = 3
-	NSTextSelectionNavigationDestinationParagraph NSTextSelectionNavigationDestination = 4
-	NSTextSelectionNavigationDestinationContainer NSTextSelectionNavigationDestination = 5
-	NSTextSelectionNavigationDestinationDocument  NSTextSelectionNavigationDestination = 6
+	TextSelectionNavigationDestinationCharacter TextSelectionNavigationDestination = 0
+	TextSelectionNavigationDestinationWord      TextSelectionNavigationDestination = 1
+	TextSelectionNavigationDestinationLine      TextSelectionNavigationDestination = 2
+	TextSelectionNavigationDestinationSentence  TextSelectionNavigationDestination = 3
+	TextSelectionNavigationDestinationParagraph TextSelectionNavigationDestination = 4
+	TextSelectionNavigationDestinationContainer TextSelectionNavigationDestination = 5
+	TextSelectionNavigationDestinationDocument  TextSelectionNavigationDestination = 6
 )
 
-func (e NSTextSelectionNavigationDestination) String() string {
+// String returns the TextSelectionNavigationDestination constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionNavigationDestination) String() string {
 	switch e {
-	case NSTextSelectionNavigationDestinationCharacter:
-		return "NSTextSelectionNavigationDestinationCharacter"
-	case NSTextSelectionNavigationDestinationWord:
-		return "NSTextSelectionNavigationDestinationWord"
-	case NSTextSelectionNavigationDestinationLine:
-		return "NSTextSelectionNavigationDestinationLine"
-	case NSTextSelectionNavigationDestinationSentence:
-		return "NSTextSelectionNavigationDestinationSentence"
-	case NSTextSelectionNavigationDestinationParagraph:
-		return "NSTextSelectionNavigationDestinationParagraph"
-	case NSTextSelectionNavigationDestinationContainer:
-		return "NSTextSelectionNavigationDestinationContainer"
-	case NSTextSelectionNavigationDestinationDocument:
-		return "NSTextSelectionNavigationDestinationDocument"
+	case TextSelectionNavigationDestinationCharacter:
+		return "TextSelectionNavigationDestinationCharacter"
+	case TextSelectionNavigationDestinationWord:
+		return "TextSelectionNavigationDestinationWord"
+	case TextSelectionNavigationDestinationLine:
+		return "TextSelectionNavigationDestinationLine"
+	case TextSelectionNavigationDestinationSentence:
+		return "TextSelectionNavigationDestinationSentence"
+	case TextSelectionNavigationDestinationParagraph:
+		return "TextSelectionNavigationDestinationParagraph"
+	case TextSelectionNavigationDestinationContainer:
+		return "TextSelectionNavigationDestinationContainer"
+	case TextSelectionNavigationDestinationDocument:
+		return "TextSelectionNavigationDestinationDocument"
 	default:
-		return fmt.Sprintf("NSTextSelectionNavigationDestination(%d)", int64(e))
+		return fmt.Sprintf("TextSelectionNavigationDestination(%d)", int64(e))
 	}
 }
 
 // Values that describe the direction of a selection.
-type NSTextSelectionNavigationDirection int64
+type TextSelectionNavigationDirection int64
 
 const (
-	NSTextSelectionNavigationDirectionForward  NSTextSelectionNavigationDirection = 0
-	NSTextSelectionNavigationDirectionBackward NSTextSelectionNavigationDirection = 1
-	NSTextSelectionNavigationDirectionRight    NSTextSelectionNavigationDirection = 2
-	NSTextSelectionNavigationDirectionLeft     NSTextSelectionNavigationDirection = 3
-	NSTextSelectionNavigationDirectionUp       NSTextSelectionNavigationDirection = 4
-	NSTextSelectionNavigationDirectionDown     NSTextSelectionNavigationDirection = 5
+	TextSelectionNavigationDirectionForward  TextSelectionNavigationDirection = 0
+	TextSelectionNavigationDirectionBackward TextSelectionNavigationDirection = 1
+	TextSelectionNavigationDirectionRight    TextSelectionNavigationDirection = 2
+	TextSelectionNavigationDirectionLeft     TextSelectionNavigationDirection = 3
+	TextSelectionNavigationDirectionUp       TextSelectionNavigationDirection = 4
+	TextSelectionNavigationDirectionDown     TextSelectionNavigationDirection = 5
 )
 
-func (e NSTextSelectionNavigationDirection) String() string {
+// String returns the TextSelectionNavigationDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionNavigationDirection) String() string {
 	switch e {
-	case NSTextSelectionNavigationDirectionForward:
-		return "NSTextSelectionNavigationDirectionForward"
-	case NSTextSelectionNavigationDirectionBackward:
-		return "NSTextSelectionNavigationDirectionBackward"
-	case NSTextSelectionNavigationDirectionRight:
-		return "NSTextSelectionNavigationDirectionRight"
-	case NSTextSelectionNavigationDirectionLeft:
-		return "NSTextSelectionNavigationDirectionLeft"
-	case NSTextSelectionNavigationDirectionUp:
-		return "NSTextSelectionNavigationDirectionUp"
-	case NSTextSelectionNavigationDirectionDown:
-		return "NSTextSelectionNavigationDirectionDown"
+	case TextSelectionNavigationDirectionForward:
+		return "TextSelectionNavigationDirectionForward"
+	case TextSelectionNavigationDirectionBackward:
+		return "TextSelectionNavigationDirectionBackward"
+	case TextSelectionNavigationDirectionRight:
+		return "TextSelectionNavigationDirectionRight"
+	case TextSelectionNavigationDirectionLeft:
+		return "TextSelectionNavigationDirectionLeft"
+	case TextSelectionNavigationDirectionUp:
+		return "TextSelectionNavigationDirectionUp"
+	case TextSelectionNavigationDirectionDown:
+		return "TextSelectionNavigationDirectionDown"
 	default:
-		return fmt.Sprintf("NSTextSelectionNavigationDirection(%d)", int64(e))
+		return fmt.Sprintf("TextSelectionNavigationDirection(%d)", int64(e))
 	}
-}
-
-// Values that describe how the framework handles different kinds of selection modifiers.
-// Bitmask — values may be combined with |.
-type NSTextSelectionNavigationModifier uint64
-
-const (
-	NSTextSelectionNavigationModifierExtend   NSTextSelectionNavigationModifier = 1
-	NSTextSelectionNavigationModifierVisual   NSTextSelectionNavigationModifier = 2
-	NSTextSelectionNavigationModifierMultiple NSTextSelectionNavigationModifier = 4
-)
-
-func (e NSTextSelectionNavigationModifier) String() string {
-	var parts []string
-	if e&NSTextSelectionNavigationModifierExtend != 0 {
-		parts = append(parts, "NSTextSelectionNavigationModifierExtend")
-	}
-	if e&NSTextSelectionNavigationModifierVisual != 0 {
-		parts = append(parts, "NSTextSelectionNavigationModifierVisual")
-	}
-	if e&NSTextSelectionNavigationModifierMultiple != 0 {
-		parts = append(parts, "NSTextSelectionNavigationModifierMultiple")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Values that describe the writing direction inside a text selection.
-type NSTextSelectionNavigationWritingDirection int64
+type TextSelectionNavigationWritingDirection int64
 
 const (
-	NSTextSelectionNavigationWritingDirectionLeftToRight NSTextSelectionNavigationWritingDirection = 0
-	NSTextSelectionNavigationWritingDirectionRightToLeft NSTextSelectionNavigationWritingDirection = 1
+	TextSelectionNavigationWritingDirectionLeftToRight TextSelectionNavigationWritingDirection = 0
+	TextSelectionNavigationWritingDirectionRightToLeft TextSelectionNavigationWritingDirection = 1
 )
 
-func (e NSTextSelectionNavigationWritingDirection) String() string {
+// String returns the TextSelectionNavigationWritingDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionNavigationWritingDirection) String() string {
 	switch e {
-	case NSTextSelectionNavigationWritingDirectionLeftToRight:
-		return "NSTextSelectionNavigationWritingDirectionLeftToRight"
-	case NSTextSelectionNavigationWritingDirectionRightToLeft:
-		return "NSTextSelectionNavigationWritingDirectionRightToLeft"
+	case TextSelectionNavigationWritingDirectionLeftToRight:
+		return "TextSelectionNavigationWritingDirectionLeftToRight"
+	case TextSelectionNavigationWritingDirectionRightToLeft:
+		return "TextSelectionNavigationWritingDirectionRightToLeft"
 	default:
-		return fmt.Sprintf("NSTextSelectionNavigationWritingDirection(%d)", int64(e))
+		return fmt.Sprintf("TextSelectionNavigationWritingDirection(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the types of changes.
 // Bitmask — values may be combined with |.
-type NSTextStorageEditActions uint64
+type TextStorageEditActions uint64
 
 const (
 	// Attributes were added, removed, or changed.
-	NSTextStorageEditedAttributes NSTextStorageEditActions = 1
+	TextStorageEditedAttributes TextStorageEditActions = 1
 	// Characters were added, removed, or replaced.
-	NSTextStorageEditedCharacters NSTextStorageEditActions = 2
+	TextStorageEditedCharacters TextStorageEditActions = 2
 )
 
-func (e NSTextStorageEditActions) String() string {
+// String returns the TextStorageEditActions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextStorageEditActions) String() string {
 	var parts []string
-	if e&NSTextStorageEditedAttributes != 0 {
-		parts = append(parts, "NSTextStorageEditedAttributes")
+	if e&TextStorageEditedAttributes != 0 {
+		parts = append(parts, "TextStorageEditedAttributes")
 	}
-	if e&NSTextStorageEditedCharacters != 0 {
-		parts = append(parts, "NSTextStorageEditedCharacters")
+	if e&TextStorageEditedCharacters != 0 {
+		parts = append(parts, "TextStorageEditedCharacters")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6418,332 +6753,358 @@ func (e NSTextStorageEditActions) String() string {
 }
 
 // Constants that specify the type of tab stop.
-type NSTextTabType uint64
+type TextTabType uint64
 
 const (
-	NSLeftTabStopType    NSTextTabType = 0
-	NSRightTabStopType   NSTextTabType = 1
-	NSCenterTabStopType  NSTextTabType = 2
-	NSDecimalTabStopType NSTextTabType = 3
+	LeftTabStopType    TextTabType = 0
+	RightTabStopType   TextTabType = 1
+	CenterTabStopType  TextTabType = 2
+	DecimalTabStopType TextTabType = 3
 )
 
-func (e NSTextTabType) String() string {
+// String returns the TextTabType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextTabType) String() string {
 	switch e {
-	case NSLeftTabStopType:
-		return "NSLeftTabStopType"
-	case NSRightTabStopType:
-		return "NSRightTabStopType"
-	case NSCenterTabStopType:
-		return "NSCenterTabStopType"
-	case NSDecimalTabStopType:
-		return "NSDecimalTabStopType"
+	case LeftTabStopType:
+		return "LeftTabStopType"
+	case RightTabStopType:
+		return "RightTabStopType"
+	case CenterTabStopType:
+		return "CenterTabStopType"
+	case DecimalTabStopType:
+		return "DecimalTabStopType"
 	default:
-		return fmt.Sprintf("NSTextTabType(%d)", int64(e))
+		return fmt.Sprintf("TextTabType(%d)", int64(e))
 	}
 }
 
 // These constants, specifying the type of text table layout algorithm, are used with layoutAlgorithm.
-type NSTextTableLayoutAlgorithm uint64
+type TextTableLayoutAlgorithm uint64
 
 const (
-	NSTextTableAutomaticLayoutAlgorithm NSTextTableLayoutAlgorithm = 0
-	NSTextTableFixedLayoutAlgorithm     NSTextTableLayoutAlgorithm = 1
+	TextTableAutomaticLayoutAlgorithm TextTableLayoutAlgorithm = 0
+	TextTableFixedLayoutAlgorithm     TextTableLayoutAlgorithm = 1
 )
 
-func (e NSTextTableLayoutAlgorithm) String() string {
+// String returns the TextTableLayoutAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextTableLayoutAlgorithm) String() string {
 	switch e {
-	case NSTextTableAutomaticLayoutAlgorithm:
-		return "NSTextTableAutomaticLayoutAlgorithm"
-	case NSTextTableFixedLayoutAlgorithm:
-		return "NSTextTableFixedLayoutAlgorithm"
+	case TextTableAutomaticLayoutAlgorithm:
+		return "TextTableAutomaticLayoutAlgorithm"
+	case TextTableFixedLayoutAlgorithm:
+		return "TextTableFixedLayoutAlgorithm"
 	default:
-		return fmt.Sprintf("NSTextTableLayoutAlgorithm(%d)", int64(e))
+		return fmt.Sprintf("TextTableLayoutAlgorithm(%d)", int64(e))
 	}
 }
 
 // The position where a linear slider’s tick marks appear (above, below, leading, or trailing).
-type NSTickMarkPosition uint64
+type TickMarkPosition uint64
 
 const (
-	NSTickMarkPositionBelow    NSTickMarkPosition = 0
-	NSTickMarkPositionAbove    NSTickMarkPosition = 1
-	NSTickMarkPositionLeading  NSTickMarkPosition = 1
-	NSTickMarkPositionTrailing NSTickMarkPosition = 0
+	TickMarkPositionBelow    TickMarkPosition = 0
+	TickMarkPositionAbove    TickMarkPosition = 1
+	TickMarkPositionLeading  TickMarkPosition = 1
+	TickMarkPositionTrailing TickMarkPosition = 0
 )
 
-func (e NSTickMarkPosition) String() string {
+// String returns the TickMarkPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TickMarkPosition) String() string {
 	switch e {
-	case NSTickMarkPositionBelow:
-		return "NSTickMarkPositionBelow"
-	case NSTickMarkPositionAbove:
-		return "NSTickMarkPositionAbove"
+	case TickMarkPositionBelow:
+		return "TickMarkPositionBelow"
+	case TickMarkPositionAbove:
+		return "TickMarkPositionAbove"
 	default:
-		return fmt.Sprintf("NSTickMarkPosition(%d)", int64(e))
+		return fmt.Sprintf("TickMarkPosition(%d)", int64(e))
 	}
 }
 
 // Controls how strongly the tint color applies in a view.
-type NSTintProminence int64
+type TintProminence int64
 
 const (
-	NSTintProminenceAutomatic NSTintProminence = 0
-	NSTintProminenceNone      NSTintProminence = 1
-	NSTintProminencePrimary   NSTintProminence = 2
-	NSTintProminenceSecondary NSTintProminence = 3
+	TintProminenceAutomatic TintProminence = 0
+	TintProminenceNone      TintProminence = 1
+	TintProminencePrimary   TintProminence = 2
+	TintProminenceSecondary TintProminence = 3
 )
 
-func (e NSTintProminence) String() string {
+// String returns the TintProminence constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TintProminence) String() string {
 	switch e {
-	case NSTintProminenceAutomatic:
-		return "NSTintProminenceAutomatic"
-	case NSTintProminenceNone:
-		return "NSTintProminenceNone"
-	case NSTintProminencePrimary:
-		return "NSTintProminencePrimary"
-	case NSTintProminenceSecondary:
-		return "NSTintProminenceSecondary"
+	case TintProminenceAutomatic:
+		return "TintProminenceAutomatic"
+	case TintProminenceNone:
+		return "TintProminenceNone"
+	case TintProminencePrimary:
+		return "TintProminencePrimary"
+	case TintProminenceSecondary:
+		return "TintProminenceSecondary"
 	default:
-		return fmt.Sprintf("NSTintProminence(%d)", int64(e))
+		return fmt.Sprintf("TintProminence(%d)", int64(e))
 	}
 }
 
 // Specify the location of a box’s title with respect to its border.
-type NSTitlePosition uint64
+type TitlePosition uint64
 
 const (
-	NSNoTitle     NSTitlePosition = 0
-	NSAboveTop    NSTitlePosition = 1
-	NSAtTop       NSTitlePosition = 2
-	NSBelowTop    NSTitlePosition = 3
-	NSAboveBottom NSTitlePosition = 4
-	NSAtBottom    NSTitlePosition = 5
-	NSBelowBottom NSTitlePosition = 6
+	NoTitle     TitlePosition = 0
+	AboveTop    TitlePosition = 1
+	AtTop       TitlePosition = 2
+	BelowTop    TitlePosition = 3
+	AboveBottom TitlePosition = 4
+	AtBottom    TitlePosition = 5
+	BelowBottom TitlePosition = 6
 )
 
-func (e NSTitlePosition) String() string {
+// String returns the TitlePosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TitlePosition) String() string {
 	switch e {
-	case NSNoTitle:
-		return "NSNoTitle"
-	case NSAboveTop:
-		return "NSAboveTop"
-	case NSAtTop:
-		return "NSAtTop"
-	case NSBelowTop:
-		return "NSBelowTop"
-	case NSAboveBottom:
-		return "NSAboveBottom"
-	case NSAtBottom:
-		return "NSAtBottom"
-	case NSBelowBottom:
-		return "NSBelowBottom"
+	case NoTitle:
+		return "NoTitle"
+	case AboveTop:
+		return "AboveTop"
+	case AtTop:
+		return "AtTop"
+	case BelowTop:
+		return "BelowTop"
+	case AboveBottom:
+		return "AboveBottom"
+	case AtBottom:
+		return "AtBottom"
+	case BelowBottom:
+		return "BelowBottom"
 	default:
-		return fmt.Sprintf("NSTitlePosition(%d)", int64(e))
+		return fmt.Sprintf("TitlePosition(%d)", int64(e))
 	}
 }
 
 // Styles that determine the type of separator displayed between the title bar and content of a window.
-type NSTitlebarSeparatorStyle int64
+type TitlebarSeparatorStyle int64
 
 const (
 	// A style indicating that the system determines the type of separator.
-	NSTitlebarSeparatorStyleAutomatic NSTitlebarSeparatorStyle = 0
+	TitlebarSeparatorStyleAutomatic TitlebarSeparatorStyle = 0
 	// A style indicating that there’s no title bar separator.
-	NSTitlebarSeparatorStyleNone NSTitlebarSeparatorStyle = 1
+	TitlebarSeparatorStyleNone TitlebarSeparatorStyle = 1
 	// A style indicating that the title bar separator is a line.
-	NSTitlebarSeparatorStyleLine NSTitlebarSeparatorStyle = 2
+	TitlebarSeparatorStyleLine TitlebarSeparatorStyle = 2
 	// A style indicating that the title bar separator is a shadow.
-	NSTitlebarSeparatorStyleShadow NSTitlebarSeparatorStyle = 3
+	TitlebarSeparatorStyleShadow TitlebarSeparatorStyle = 3
 )
 
-func (e NSTitlebarSeparatorStyle) String() string {
+// String returns the TitlebarSeparatorStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TitlebarSeparatorStyle) String() string {
 	switch e {
-	case NSTitlebarSeparatorStyleAutomatic:
-		return "NSTitlebarSeparatorStyleAutomatic"
-	case NSTitlebarSeparatorStyleNone:
-		return "NSTitlebarSeparatorStyleNone"
-	case NSTitlebarSeparatorStyleLine:
-		return "NSTitlebarSeparatorStyleLine"
-	case NSTitlebarSeparatorStyleShadow:
-		return "NSTitlebarSeparatorStyleShadow"
+	case TitlebarSeparatorStyleAutomatic:
+		return "TitlebarSeparatorStyleAutomatic"
+	case TitlebarSeparatorStyleNone:
+		return "TitlebarSeparatorStyleNone"
+	case TitlebarSeparatorStyleLine:
+		return "TitlebarSeparatorStyleLine"
+	case TitlebarSeparatorStyleShadow:
+		return "TitlebarSeparatorStyleShadow"
 	default:
-		return fmt.Sprintf("NSTitlebarSeparatorStyle(%d)", int64(e))
+		return fmt.Sprintf("TitlebarSeparatorStyle(%d)", int64(e))
 	}
 }
 
 // The NSTokenStyle constants define how tokens are displayed and editable in the NSTokenFieldCell. These values are used by tokenStyle and the delegate method tokenFieldCell:styleForRepresentedObject:.
-type NSTokenStyle uint64
+type TokenStyle uint64
 
 const (
-	NSTokenStyleDefault      NSTokenStyle = 0
-	NSTokenStyleNone         NSTokenStyle = 1
-	NSTokenStyleRounded      NSTokenStyle = 2
-	NSTokenStyleSquared      NSTokenStyle = 3
-	NSTokenStylePlainSquared NSTokenStyle = 4
+	TokenStyleDefault      TokenStyle = 0
+	TokenStyleNone         TokenStyle = 1
+	TokenStyleRounded      TokenStyle = 2
+	TokenStyleSquared      TokenStyle = 3
+	TokenStylePlainSquared TokenStyle = 4
 )
 
-func (e NSTokenStyle) String() string {
+// String returns the TokenStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TokenStyle) String() string {
 	switch e {
-	case NSTokenStyleDefault:
-		return "NSTokenStyleDefault"
-	case NSTokenStyleNone:
-		return "NSTokenStyleNone"
-	case NSTokenStyleRounded:
-		return "NSTokenStyleRounded"
-	case NSTokenStyleSquared:
-		return "NSTokenStyleSquared"
-	case NSTokenStylePlainSquared:
-		return "NSTokenStylePlainSquared"
+	case TokenStyleDefault:
+		return "TokenStyleDefault"
+	case TokenStyleNone:
+		return "TokenStyleNone"
+	case TokenStyleRounded:
+		return "TokenStyleRounded"
+	case TokenStyleSquared:
+		return "TokenStyleSquared"
+	case TokenStylePlainSquared:
+		return "TokenStylePlainSquared"
 	default:
-		return fmt.Sprintf("NSTokenStyle(%d)", int64(e))
+		return fmt.Sprintf("TokenStyle(%d)", int64(e))
 	}
 }
 
 // Constants that indicate whether the toolbar displays items using a name, icon, or combination of elements.
-type NSToolbarDisplayMode uint64
+type ToolbarDisplayMode uint64
 
 const (
-	NSToolbarDisplayModeDefault      NSToolbarDisplayMode = 0
-	NSToolbarDisplayModeIconAndLabel NSToolbarDisplayMode = 1
-	NSToolbarDisplayModeIconOnly     NSToolbarDisplayMode = 2
-	NSToolbarDisplayModeLabelOnly    NSToolbarDisplayMode = 3
+	ToolbarDisplayModeDefault      ToolbarDisplayMode = 0
+	ToolbarDisplayModeIconAndLabel ToolbarDisplayMode = 1
+	ToolbarDisplayModeIconOnly     ToolbarDisplayMode = 2
+	ToolbarDisplayModeLabelOnly    ToolbarDisplayMode = 3
 )
 
-func (e NSToolbarDisplayMode) String() string {
+// String returns the ToolbarDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ToolbarDisplayMode) String() string {
 	switch e {
-	case NSToolbarDisplayModeDefault:
-		return "NSToolbarDisplayModeDefault"
-	case NSToolbarDisplayModeIconAndLabel:
-		return "NSToolbarDisplayModeIconAndLabel"
-	case NSToolbarDisplayModeIconOnly:
-		return "NSToolbarDisplayModeIconOnly"
-	case NSToolbarDisplayModeLabelOnly:
-		return "NSToolbarDisplayModeLabelOnly"
+	case ToolbarDisplayModeDefault:
+		return "ToolbarDisplayModeDefault"
+	case ToolbarDisplayModeIconAndLabel:
+		return "ToolbarDisplayModeIconAndLabel"
+	case ToolbarDisplayModeIconOnly:
+		return "ToolbarDisplayModeIconOnly"
+	case ToolbarDisplayModeLabelOnly:
+		return "ToolbarDisplayModeLabelOnly"
 	default:
-		return fmt.Sprintf("NSToolbarDisplayMode(%d)", int64(e))
+		return fmt.Sprintf("ToolbarDisplayMode(%d)", int64(e))
 	}
 }
 
-type NSToolbarItemGroupControlRepresentation int64
+type ToolbarItemGroupControlRepresentation int64
 
 const (
-	NSToolbarItemGroupControlRepresentationAutomatic NSToolbarItemGroupControlRepresentation = 0
-	NSToolbarItemGroupControlRepresentationExpanded  NSToolbarItemGroupControlRepresentation = 1
-	NSToolbarItemGroupControlRepresentationCollapsed NSToolbarItemGroupControlRepresentation = 2
+	ToolbarItemGroupControlRepresentationAutomatic ToolbarItemGroupControlRepresentation = 0
+	ToolbarItemGroupControlRepresentationExpanded  ToolbarItemGroupControlRepresentation = 1
+	ToolbarItemGroupControlRepresentationCollapsed ToolbarItemGroupControlRepresentation = 2
 )
 
-func (e NSToolbarItemGroupControlRepresentation) String() string {
+// String returns the ToolbarItemGroupControlRepresentation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ToolbarItemGroupControlRepresentation) String() string {
 	switch e {
-	case NSToolbarItemGroupControlRepresentationAutomatic:
-		return "NSToolbarItemGroupControlRepresentationAutomatic"
-	case NSToolbarItemGroupControlRepresentationExpanded:
-		return "NSToolbarItemGroupControlRepresentationExpanded"
-	case NSToolbarItemGroupControlRepresentationCollapsed:
-		return "NSToolbarItemGroupControlRepresentationCollapsed"
+	case ToolbarItemGroupControlRepresentationAutomatic:
+		return "ToolbarItemGroupControlRepresentationAutomatic"
+	case ToolbarItemGroupControlRepresentationExpanded:
+		return "ToolbarItemGroupControlRepresentationExpanded"
+	case ToolbarItemGroupControlRepresentationCollapsed:
+		return "ToolbarItemGroupControlRepresentationCollapsed"
 	default:
-		return fmt.Sprintf("NSToolbarItemGroupControlRepresentation(%d)", int64(e))
+		return fmt.Sprintf("ToolbarItemGroupControlRepresentation(%d)", int64(e))
 	}
 }
 
 // A value that indicates how a grouped toolbar item selects its subitems.
-type NSToolbarItemGroupSelectionMode int64
+type ToolbarItemGroupSelectionMode int64
 
 const (
-	NSToolbarItemGroupSelectionModeSelectOne NSToolbarItemGroupSelectionMode = 0
-	NSToolbarItemGroupSelectionModeSelectAny NSToolbarItemGroupSelectionMode = 1
-	NSToolbarItemGroupSelectionModeMomentary NSToolbarItemGroupSelectionMode = 2
+	ToolbarItemGroupSelectionModeSelectOne ToolbarItemGroupSelectionMode = 0
+	ToolbarItemGroupSelectionModeSelectAny ToolbarItemGroupSelectionMode = 1
+	ToolbarItemGroupSelectionModeMomentary ToolbarItemGroupSelectionMode = 2
 )
 
-func (e NSToolbarItemGroupSelectionMode) String() string {
+// String returns the ToolbarItemGroupSelectionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ToolbarItemGroupSelectionMode) String() string {
 	switch e {
-	case NSToolbarItemGroupSelectionModeSelectOne:
-		return "NSToolbarItemGroupSelectionModeSelectOne"
-	case NSToolbarItemGroupSelectionModeSelectAny:
-		return "NSToolbarItemGroupSelectionModeSelectAny"
-	case NSToolbarItemGroupSelectionModeMomentary:
-		return "NSToolbarItemGroupSelectionModeMomentary"
+	case ToolbarItemGroupSelectionModeSelectOne:
+		return "ToolbarItemGroupSelectionModeSelectOne"
+	case ToolbarItemGroupSelectionModeSelectAny:
+		return "ToolbarItemGroupSelectionModeSelectAny"
+	case ToolbarItemGroupSelectionModeMomentary:
+		return "ToolbarItemGroupSelectionModeMomentary"
 	default:
-		return fmt.Sprintf("NSToolbarItemGroupSelectionMode(%d)", int64(e))
+		return fmt.Sprintf("ToolbarItemGroupSelectionMode(%d)", int64(e))
 	}
 }
 
-type NSToolbarItemStyle int64
+type ToolbarItemStyle int64
 
 const (
-	NSToolbarItemStylePlain     NSToolbarItemStyle = 0
-	NSToolbarItemStyleProminent NSToolbarItemStyle = 1
+	ToolbarItemStylePlain     ToolbarItemStyle = 0
+	ToolbarItemStyleProminent ToolbarItemStyle = 1
 )
 
-func (e NSToolbarItemStyle) String() string {
+// String returns the ToolbarItemStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ToolbarItemStyle) String() string {
 	switch e {
-	case NSToolbarItemStylePlain:
-		return "NSToolbarItemStylePlain"
-	case NSToolbarItemStyleProminent:
-		return "NSToolbarItemStyleProminent"
+	case ToolbarItemStylePlain:
+		return "ToolbarItemStylePlain"
+	case ToolbarItemStyleProminent:
+		return "ToolbarItemStyleProminent"
 	default:
-		return fmt.Sprintf("NSToolbarItemStyle(%d)", int64(e))
+		return fmt.Sprintf("ToolbarItemStyle(%d)", int64(e))
 	}
 }
 
 // Constants that specify toolbar display modes.
 //
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
-type NSToolbarSizeMode uint64
+type ToolbarSizeMode uint64
 
 const (
-	NSToolbarSizeModeDefault NSToolbarSizeMode = 0
-	NSToolbarSizeModeRegular NSToolbarSizeMode = 1
-	NSToolbarSizeModeSmall   NSToolbarSizeMode = 2
+	ToolbarSizeModeDefault ToolbarSizeMode = 0
+	ToolbarSizeModeRegular ToolbarSizeMode = 1
+	ToolbarSizeModeSmall   ToolbarSizeMode = 2
 )
 
-func (e NSToolbarSizeMode) String() string {
+// String returns the ToolbarSizeMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ToolbarSizeMode) String() string {
 	switch e {
-	case NSToolbarSizeModeDefault:
-		return "NSToolbarSizeModeDefault"
-	case NSToolbarSizeModeRegular:
-		return "NSToolbarSizeModeRegular"
-	case NSToolbarSizeModeSmall:
-		return "NSToolbarSizeModeSmall"
+	case ToolbarSizeModeDefault:
+		return "ToolbarSizeModeDefault"
+	case ToolbarSizeModeRegular:
+		return "ToolbarSizeModeRegular"
+	case ToolbarSizeModeSmall:
+		return "ToolbarSizeModeSmall"
 	default:
-		return fmt.Sprintf("NSToolbarSizeMode(%d)", int64(e))
+		return fmt.Sprintf("ToolbarSizeMode(%d)", int64(e))
 	}
 }
 
 // The possible phases of a touch.
 // Bitmask — values may be combined with |.
-type NSTouchPhase uint64
+type TouchPhase uint64
 
 const (
-	NSTouchPhaseBegan      NSTouchPhase = 1
-	NSTouchPhaseMoved      NSTouchPhase = 2
-	NSTouchPhaseStationary NSTouchPhase = 4
-	NSTouchPhaseEnded      NSTouchPhase = 8
-	NSTouchPhaseCancelled  NSTouchPhase = 16
-	NSTouchPhaseTouching   NSTouchPhase = 7
-	NSTouchPhaseAny        NSTouchPhase = 18446744073709551615
+	TouchPhaseBegan      TouchPhase = 1
+	TouchPhaseMoved      TouchPhase = 2
+	TouchPhaseStationary TouchPhase = 4
+	TouchPhaseEnded      TouchPhase = 8
+	TouchPhaseCancelled  TouchPhase = 16
+	TouchPhaseTouching   TouchPhase = 7
+	TouchPhaseAny        TouchPhase = 18446744073709551615
 )
 
-func (e NSTouchPhase) String() string {
+// String returns the TouchPhase constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TouchPhase) String() string {
 	var parts []string
-	if e&NSTouchPhaseBegan != 0 {
-		parts = append(parts, "NSTouchPhaseBegan")
+	if e&TouchPhaseBegan != 0 {
+		parts = append(parts, "TouchPhaseBegan")
 	}
-	if e&NSTouchPhaseMoved != 0 {
-		parts = append(parts, "NSTouchPhaseMoved")
+	if e&TouchPhaseMoved != 0 {
+		parts = append(parts, "TouchPhaseMoved")
 	}
-	if e&NSTouchPhaseStationary != 0 {
-		parts = append(parts, "NSTouchPhaseStationary")
+	if e&TouchPhaseStationary != 0 {
+		parts = append(parts, "TouchPhaseStationary")
 	}
-	if e&NSTouchPhaseEnded != 0 {
-		parts = append(parts, "NSTouchPhaseEnded")
+	if e&TouchPhaseEnded != 0 {
+		parts = append(parts, "TouchPhaseEnded")
 	}
-	if e&NSTouchPhaseCancelled != 0 {
-		parts = append(parts, "NSTouchPhaseCancelled")
+	if e&TouchPhaseCancelled != 0 {
+		parts = append(parts, "TouchPhaseCancelled")
 	}
-	if e&NSTouchPhaseTouching != 0 {
-		parts = append(parts, "NSTouchPhaseTouching")
+	if e&TouchPhaseTouching != 0 {
+		parts = append(parts, "TouchPhaseTouching")
 	}
-	if e&NSTouchPhaseAny != 0 {
-		parts = append(parts, "NSTouchPhaseAny")
+	if e&TouchPhaseAny != 0 {
+		parts = append(parts, "TouchPhaseAny")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6752,40 +7113,44 @@ func (e NSTouchPhase) String() string {
 }
 
 // A bit mask identifying a direct or indirect touch type.
-type NSTouchType int64
+type TouchType int64
 
 const (
-	NSTouchTypeDirect   NSTouchType = 0
-	NSTouchTypeIndirect NSTouchType = 1
+	TouchTypeDirect   TouchType = 0
+	TouchTypeIndirect TouchType = 1
 )
 
-func (e NSTouchType) String() string {
+// String returns the TouchType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TouchType) String() string {
 	switch e {
-	case NSTouchTypeDirect:
-		return "NSTouchTypeDirect"
-	case NSTouchTypeIndirect:
-		return "NSTouchTypeIndirect"
+	case TouchTypeDirect:
+		return "TouchTypeDirect"
+	case TouchTypeIndirect:
+		return "TouchTypeIndirect"
 	default:
-		return fmt.Sprintf("NSTouchType(%d)", int64(e))
+		return fmt.Sprintf("TouchType(%d)", int64(e))
 	}
 }
 
 // A bit mask identifying a direct or indirect touch type.
 // Bitmask — values may be combined with |.
-type NSTouchTypeMask uint64
+type TouchTypeMask uint64
 
 const (
-	NSTouchTypeMaskDirect   NSTouchTypeMask = 1
-	NSTouchTypeMaskIndirect NSTouchTypeMask = 2
+	TouchTypeMaskDirect   TouchTypeMask = 1
+	TouchTypeMaskIndirect TouchTypeMask = 2
 )
 
-func (e NSTouchTypeMask) String() string {
+// String returns the TouchTypeMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TouchTypeMask) String() string {
 	var parts []string
-	if e&NSTouchTypeMaskDirect != 0 {
-		parts = append(parts, "NSTouchTypeMaskDirect")
+	if e&TouchTypeMaskDirect != 0 {
+		parts = append(parts, "TouchTypeMaskDirect")
 	}
-	if e&NSTouchTypeMaskIndirect != 0 {
-		parts = append(parts, "NSTouchTypeMaskIndirect")
+	if e&TouchTypeMaskIndirect != 0 {
+		parts = append(parts, "TouchTypeMaskIndirect")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6795,52 +7160,54 @@ func (e NSTouchTypeMask) String() string {
 
 // The data type defined for the constants specified in the options parameter of init(rect:options:owner:userInfo:). These constants are described below; you can specify multiple constants by performing a bitwise-OR operation with them. In particular, you must supply one or more of the tracking-type constants (that is, NSTrackingMouseEnteredAndExited, NSTrackingMouseMoved, and NSTrackingCursorUpdate) and one of the active constants (that is, NSTrackingActiveWhenFirstResponder, NSTrackingActiveInKeyWindow, NSTrackingActiveInActiveApp, and NSTrackingActiveAlways). In addition, you may specify any of the behavior constants (that is, NSTrackingAssumeInside, NSTrackingInVisibleRect, and NSTrackingEnabledDuringMouseDrag).
 // Bitmask — values may be combined with |.
-type NSTrackingAreaOptions uint64
+type TrackingAreaOptions uint64
 
 const (
-	NSTrackingMouseEnteredAndExited    NSTrackingAreaOptions = 1
-	NSTrackingMouseMoved               NSTrackingAreaOptions = 2
-	NSTrackingCursorUpdate             NSTrackingAreaOptions = 4
-	NSTrackingActiveWhenFirstResponder NSTrackingAreaOptions = 16
-	NSTrackingActiveInKeyWindow        NSTrackingAreaOptions = 32
-	NSTrackingActiveInActiveApp        NSTrackingAreaOptions = 64
-	NSTrackingActiveAlways             NSTrackingAreaOptions = 128
-	NSTrackingAssumeInside             NSTrackingAreaOptions = 256
-	NSTrackingInVisibleRect            NSTrackingAreaOptions = 512
-	NSTrackingEnabledDuringMouseDrag   NSTrackingAreaOptions = 1024
+	TrackingMouseEnteredAndExited    TrackingAreaOptions = 1
+	TrackingMouseMoved               TrackingAreaOptions = 2
+	TrackingCursorUpdate             TrackingAreaOptions = 4
+	TrackingActiveWhenFirstResponder TrackingAreaOptions = 16
+	TrackingActiveInKeyWindow        TrackingAreaOptions = 32
+	TrackingActiveInActiveApp        TrackingAreaOptions = 64
+	TrackingActiveAlways             TrackingAreaOptions = 128
+	TrackingAssumeInside             TrackingAreaOptions = 256
+	TrackingInVisibleRect            TrackingAreaOptions = 512
+	TrackingEnabledDuringMouseDrag   TrackingAreaOptions = 1024
 )
 
-func (e NSTrackingAreaOptions) String() string {
+// String returns the TrackingAreaOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TrackingAreaOptions) String() string {
 	var parts []string
-	if e&NSTrackingMouseEnteredAndExited != 0 {
-		parts = append(parts, "NSTrackingMouseEnteredAndExited")
+	if e&TrackingMouseEnteredAndExited != 0 {
+		parts = append(parts, "TrackingMouseEnteredAndExited")
 	}
-	if e&NSTrackingMouseMoved != 0 {
-		parts = append(parts, "NSTrackingMouseMoved")
+	if e&TrackingMouseMoved != 0 {
+		parts = append(parts, "TrackingMouseMoved")
 	}
-	if e&NSTrackingCursorUpdate != 0 {
-		parts = append(parts, "NSTrackingCursorUpdate")
+	if e&TrackingCursorUpdate != 0 {
+		parts = append(parts, "TrackingCursorUpdate")
 	}
-	if e&NSTrackingActiveWhenFirstResponder != 0 {
-		parts = append(parts, "NSTrackingActiveWhenFirstResponder")
+	if e&TrackingActiveWhenFirstResponder != 0 {
+		parts = append(parts, "TrackingActiveWhenFirstResponder")
 	}
-	if e&NSTrackingActiveInKeyWindow != 0 {
-		parts = append(parts, "NSTrackingActiveInKeyWindow")
+	if e&TrackingActiveInKeyWindow != 0 {
+		parts = append(parts, "TrackingActiveInKeyWindow")
 	}
-	if e&NSTrackingActiveInActiveApp != 0 {
-		parts = append(parts, "NSTrackingActiveInActiveApp")
+	if e&TrackingActiveInActiveApp != 0 {
+		parts = append(parts, "TrackingActiveInActiveApp")
 	}
-	if e&NSTrackingActiveAlways != 0 {
-		parts = append(parts, "NSTrackingActiveAlways")
+	if e&TrackingActiveAlways != 0 {
+		parts = append(parts, "TrackingActiveAlways")
 	}
-	if e&NSTrackingAssumeInside != 0 {
-		parts = append(parts, "NSTrackingAssumeInside")
+	if e&TrackingAssumeInside != 0 {
+		parts = append(parts, "TrackingAssumeInside")
 	}
-	if e&NSTrackingInVisibleRect != 0 {
-		parts = append(parts, "NSTrackingInVisibleRect")
+	if e&TrackingInVisibleRect != 0 {
+		parts = append(parts, "TrackingInVisibleRect")
 	}
-	if e&NSTrackingEnabledDuringMouseDrag != 0 {
-		parts = append(parts, "NSTrackingEnabledDuringMouseDrag")
+	if e&TrackingEnabledDuringMouseDrag != 0 {
+		parts = append(parts, "TrackingEnabledDuringMouseDrag")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6849,74 +7216,78 @@ func (e NSTrackingAreaOptions) String() string {
 }
 
 // Constants that determine the layout manager’s behavior during layout.
-type NSTypesetterBehavior int64
+type TypesetterBehavior int64
 
 const (
-	NSTypesetterLatestBehavior                  NSTypesetterBehavior = -1
-	NSTypesetterOriginalBehavior                NSTypesetterBehavior = 0
-	NSTypesetterBehavior_10_2_WithCompatibility NSTypesetterBehavior = 1
-	NSTypesetterBehavior_10_2                   NSTypesetterBehavior = 2
-	NSTypesetterBehavior_10_3                   NSTypesetterBehavior = 3
-	NSTypesetterBehavior_10_4                   NSTypesetterBehavior = 4
+	TypesetterLatestBehavior                  TypesetterBehavior = -1
+	TypesetterOriginalBehavior                TypesetterBehavior = 0
+	TypesetterBehavior_10_2_WithCompatibility TypesetterBehavior = 1
+	TypesetterBehavior_10_2                   TypesetterBehavior = 2
+	TypesetterBehavior_10_3                   TypesetterBehavior = 3
+	TypesetterBehavior_10_4                   TypesetterBehavior = 4
 )
 
-func (e NSTypesetterBehavior) String() string {
+// String returns the TypesetterBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TypesetterBehavior) String() string {
 	switch e {
-	case NSTypesetterLatestBehavior:
-		return "NSTypesetterLatestBehavior"
-	case NSTypesetterOriginalBehavior:
-		return "NSTypesetterOriginalBehavior"
-	case NSTypesetterBehavior_10_2_WithCompatibility:
-		return "NSTypesetterBehavior_10_2_WithCompatibility"
-	case NSTypesetterBehavior_10_2:
-		return "NSTypesetterBehavior_10_2"
-	case NSTypesetterBehavior_10_3:
-		return "NSTypesetterBehavior_10_3"
-	case NSTypesetterBehavior_10_4:
-		return "NSTypesetterBehavior_10_4"
+	case TypesetterLatestBehavior:
+		return "TypesetterLatestBehavior"
+	case TypesetterOriginalBehavior:
+		return "TypesetterOriginalBehavior"
+	case TypesetterBehavior_10_2_WithCompatibility:
+		return "TypesetterBehavior_10_2_WithCompatibility"
+	case TypesetterBehavior_10_2:
+		return "TypesetterBehavior_10_2"
+	case TypesetterBehavior_10_3:
+		return "TypesetterBehavior_10_3"
+	case TypesetterBehavior_10_4:
+		return "TypesetterBehavior_10_4"
 	default:
-		return fmt.Sprintf("NSTypesetterBehavior(%d)", int64(e))
+		return fmt.Sprintf("TypesetterBehavior(%d)", int64(e))
 	}
 }
 
 // The following constants are possible values returned by the actionForControlCharacterAtIndex: method to determine the action associated with a control character.
 // Bitmask — values may be combined with |.
-type NSTypesetterControlCharacterAction uint64
+type TypesetterControlCharacterAction uint64
 
 const (
 	// Glyphs with this action are filtered out from layout (notShownAttribute == YES).
-	NSTypesetterZeroAdvancementAction NSTypesetterControlCharacterAction = 1
+	TypesetterZeroAdvancementAction TypesetterControlCharacterAction = 1
 	// The width for glyphs with this action are determined by boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex:, if the method is implemented; otherwise, same as NSTypesetterZeroAdvancementAction.
-	NSTypesetterWhitespaceAction NSTypesetterControlCharacterAction = 2
+	TypesetterWhitespaceAction TypesetterControlCharacterAction = 2
 	// Treated as tab character.
-	NSTypesetterHorizontalTabAction NSTypesetterControlCharacterAction = 4
+	TypesetterHorizontalTabAction TypesetterControlCharacterAction = 4
 	// Causes line break.
-	NSTypesetterLineBreakAction NSTypesetterControlCharacterAction = 8
+	TypesetterLineBreakAction TypesetterControlCharacterAction = 8
 	// Causes paragraph break; the value returned by firstLineHeadIndent is the advancement used for the following glyph.
-	NSTypesetterParagraphBreakAction NSTypesetterControlCharacterAction = 16
+	TypesetterParagraphBreakAction TypesetterControlCharacterAction = 16
 	// Causes container break.
-	NSTypesetterContainerBreakAction NSTypesetterControlCharacterAction = 32
+	TypesetterContainerBreakAction TypesetterControlCharacterAction = 32
 )
 
-func (e NSTypesetterControlCharacterAction) String() string {
+// String returns the TypesetterControlCharacterAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TypesetterControlCharacterAction) String() string {
 	var parts []string
-	if e&NSTypesetterZeroAdvancementAction != 0 {
-		parts = append(parts, "NSTypesetterZeroAdvancementAction")
+	if e&TypesetterZeroAdvancementAction != 0 {
+		parts = append(parts, "TypesetterZeroAdvancementAction")
 	}
-	if e&NSTypesetterWhitespaceAction != 0 {
-		parts = append(parts, "NSTypesetterWhitespaceAction")
+	if e&TypesetterWhitespaceAction != 0 {
+		parts = append(parts, "TypesetterWhitespaceAction")
 	}
-	if e&NSTypesetterHorizontalTabAction != 0 {
-		parts = append(parts, "NSTypesetterHorizontalTabAction")
+	if e&TypesetterHorizontalTabAction != 0 {
+		parts = append(parts, "TypesetterHorizontalTabAction")
 	}
-	if e&NSTypesetterLineBreakAction != 0 {
-		parts = append(parts, "NSTypesetterLineBreakAction")
+	if e&TypesetterLineBreakAction != 0 {
+		parts = append(parts, "TypesetterLineBreakAction")
 	}
-	if e&NSTypesetterParagraphBreakAction != 0 {
-		parts = append(parts, "NSTypesetterParagraphBreakAction")
+	if e&TypesetterParagraphBreakAction != 0 {
+		parts = append(parts, "TypesetterParagraphBreakAction")
 	}
-	if e&NSTypesetterContainerBreakAction != 0 {
-		parts = append(parts, "NSTypesetterContainerBreakAction")
+	if e&TypesetterContainerBreakAction != 0 {
+		parts = append(parts, "TypesetterContainerBreakAction")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6926,56 +7297,58 @@ func (e NSTypesetterControlCharacterAction) String() string {
 
 // Constants for the underline style and strikethrough style attribute keys.
 // Bitmask — values may be combined with |.
-type NSUnderlineStyle int64
+type UnderlineStyle int64
 
 const (
 	// Don’t draw a line.
-	NSUnderlineStyleNone NSUnderlineStyle = 0
+	UnderlineStyleNone UnderlineStyle = 0
 	// Draw a single line.
-	NSUnderlineStyleSingle NSUnderlineStyle = 1
+	UnderlineStyleSingle UnderlineStyle = 1
 	// Draw a thick line.
-	NSUnderlineStyleThick NSUnderlineStyle = 2
+	UnderlineStyleThick UnderlineStyle = 2
 	// Draw a double line.
-	NSUnderlineStyleDouble NSUnderlineStyle = 9
+	UnderlineStyleDouble UnderlineStyle = 9
 	// Draw a solid line.
-	NSUnderlineStylePatternSolid NSUnderlineStyle = 0
+	UnderlineStylePatternSolid UnderlineStyle = 0
 	// Draw a line of dots.
-	NSUnderlineStylePatternDot NSUnderlineStyle = 256
+	UnderlineStylePatternDot UnderlineStyle = 256
 	// Draw a line of dashes.
-	NSUnderlineStylePatternDash NSUnderlineStyle = 512
+	UnderlineStylePatternDash UnderlineStyle = 512
 	// Draw a line of alternating dashes and dots.
-	NSUnderlineStylePatternDashDot NSUnderlineStyle = 768
+	UnderlineStylePatternDashDot UnderlineStyle = 768
 	// Draw a line of alternating dashes and two dots.
-	NSUnderlineStylePatternDashDotDot NSUnderlineStyle = 1024
+	UnderlineStylePatternDashDotDot UnderlineStyle = 1024
 	// Draw the line only beneath or through words, not whitespace.
-	NSUnderlineStyleByWord NSUnderlineStyle = 32768
+	UnderlineStyleByWord UnderlineStyle = 32768
 )
 
-func (e NSUnderlineStyle) String() string {
+// String returns the UnderlineStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UnderlineStyle) String() string {
 	var parts []string
-	if e&NSUnderlineStyleSingle != 0 {
-		parts = append(parts, "NSUnderlineStyleSingle")
+	if e&UnderlineStyleSingle != 0 {
+		parts = append(parts, "UnderlineStyleSingle")
 	}
-	if e&NSUnderlineStyleThick != 0 {
-		parts = append(parts, "NSUnderlineStyleThick")
+	if e&UnderlineStyleThick != 0 {
+		parts = append(parts, "UnderlineStyleThick")
 	}
-	if e&NSUnderlineStyleDouble != 0 {
-		parts = append(parts, "NSUnderlineStyleDouble")
+	if e&UnderlineStyleDouble != 0 {
+		parts = append(parts, "UnderlineStyleDouble")
 	}
-	if e&NSUnderlineStylePatternDot != 0 {
-		parts = append(parts, "NSUnderlineStylePatternDot")
+	if e&UnderlineStylePatternDot != 0 {
+		parts = append(parts, "UnderlineStylePatternDot")
 	}
-	if e&NSUnderlineStylePatternDash != 0 {
-		parts = append(parts, "NSUnderlineStylePatternDash")
+	if e&UnderlineStylePatternDash != 0 {
+		parts = append(parts, "UnderlineStylePatternDash")
 	}
-	if e&NSUnderlineStylePatternDashDot != 0 {
-		parts = append(parts, "NSUnderlineStylePatternDashDot")
+	if e&UnderlineStylePatternDashDot != 0 {
+		parts = append(parts, "UnderlineStylePatternDashDot")
 	}
-	if e&NSUnderlineStylePatternDashDotDot != 0 {
-		parts = append(parts, "NSUnderlineStylePatternDashDotDot")
+	if e&UnderlineStylePatternDashDotDot != 0 {
+		parts = append(parts, "UnderlineStylePatternDashDotDot")
 	}
-	if e&NSUnderlineStyleByWord != 0 {
-		parts = append(parts, "NSUnderlineStyleByWord")
+	if e&UnderlineStyleByWord != 0 {
+		parts = append(parts, "UnderlineStyleByWord")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -6984,94 +7357,102 @@ func (e NSUnderlineStyle) String() string {
 }
 
 // These constants specify which parts of the scroller are visible.
-type NSUsableScrollerParts uint64
+type UsableScrollerParts uint64
 
 const (
-	NSNoScrollerParts NSUsableScrollerParts = 0
+	NoScrollerParts UsableScrollerParts = 0
 	// Deprecated: Scroller arrows are not used anymore.
-	NSOnlyScrollerArrows NSUsableScrollerParts = 1
+	OnlyScrollerArrows UsableScrollerParts = 1
 	// Deprecated: Scroller arrows are not used anymore.
-	NSAllScrollerParts NSUsableScrollerParts = 2
+	AllScrollerParts UsableScrollerParts = 2
 )
 
-func (e NSUsableScrollerParts) String() string {
+// String returns the UsableScrollerParts constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UsableScrollerParts) String() string {
 	switch e {
-	case NSNoScrollerParts:
-		return "NSNoScrollerParts"
-	case NSOnlyScrollerArrows:
-		return "NSOnlyScrollerArrows"
-	case NSAllScrollerParts:
-		return "NSAllScrollerParts"
+	case NoScrollerParts:
+		return "NoScrollerParts"
+	case OnlyScrollerArrows:
+		return "OnlyScrollerArrows"
+	case AllScrollerParts:
+		return "AllScrollerParts"
 	default:
-		return fmt.Sprintf("NSUsableScrollerParts(%d)", int64(e))
+		return fmt.Sprintf("UsableScrollerParts(%d)", int64(e))
 	}
 }
 
 // Specifies the directional flow of the user interface.
-type NSUserInterfaceLayoutDirection int64
+type UserInterfaceLayoutDirection int64
 
 const (
 	// Layout direction is left to right.
-	NSUserInterfaceLayoutDirectionLeftToRight NSUserInterfaceLayoutDirection = 0
+	UserInterfaceLayoutDirectionLeftToRight UserInterfaceLayoutDirection = 0
 	// Layout direction is right to left.
-	NSUserInterfaceLayoutDirectionRightToLeft NSUserInterfaceLayoutDirection = 1
+	UserInterfaceLayoutDirectionRightToLeft UserInterfaceLayoutDirection = 1
 )
 
-func (e NSUserInterfaceLayoutDirection) String() string {
+// String returns the UserInterfaceLayoutDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UserInterfaceLayoutDirection) String() string {
 	switch e {
-	case NSUserInterfaceLayoutDirectionLeftToRight:
-		return "NSUserInterfaceLayoutDirectionLeftToRight"
-	case NSUserInterfaceLayoutDirectionRightToLeft:
-		return "NSUserInterfaceLayoutDirectionRightToLeft"
+	case UserInterfaceLayoutDirectionLeftToRight:
+		return "UserInterfaceLayoutDirectionLeftToRight"
+	case UserInterfaceLayoutDirectionRightToLeft:
+		return "UserInterfaceLayoutDirectionRightToLeft"
 	default:
-		return fmt.Sprintf("NSUserInterfaceLayoutDirection(%d)", int64(e))
+		return fmt.Sprintf("UserInterfaceLayoutDirection(%d)", int64(e))
 	}
 }
 
 // The stack view layout directions, and user interface axes for hugging priority and clipping resistance.
-type NSUserInterfaceLayoutOrientation int64
+type UserInterfaceLayoutOrientation int64
 
 const (
 	// The horizontal orientation.
-	NSUserInterfaceLayoutOrientationHorizontal NSUserInterfaceLayoutOrientation = 0
+	UserInterfaceLayoutOrientationHorizontal UserInterfaceLayoutOrientation = 0
 	// The vertical orientation.
-	NSUserInterfaceLayoutOrientationVertical NSUserInterfaceLayoutOrientation = 1
+	UserInterfaceLayoutOrientationVertical UserInterfaceLayoutOrientation = 1
 )
 
-func (e NSUserInterfaceLayoutOrientation) String() string {
+// String returns the UserInterfaceLayoutOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UserInterfaceLayoutOrientation) String() string {
 	switch e {
-	case NSUserInterfaceLayoutOrientationHorizontal:
-		return "NSUserInterfaceLayoutOrientationHorizontal"
-	case NSUserInterfaceLayoutOrientationVertical:
-		return "NSUserInterfaceLayoutOrientationVertical"
+	case UserInterfaceLayoutOrientationHorizontal:
+		return "UserInterfaceLayoutOrientationHorizontal"
+	case UserInterfaceLayoutOrientationVertical:
+		return "UserInterfaceLayoutOrientationVertical"
 	default:
-		return fmt.Sprintf("NSUserInterfaceLayoutOrientation(%d)", int64(e))
+		return fmt.Sprintf("UserInterfaceLayoutOrientation(%d)", int64(e))
 	}
 }
 
 // The directions on the vertical axis.
 // Bitmask — values may be combined with |.
-type NSVerticalDirections uint64
+type VerticalDirections uint64
 
 const (
 	// The upwards direction.
-	NSVerticalDirectionsUp NSVerticalDirections = 1
+	VerticalDirectionsUp VerticalDirections = 1
 	// The downward direction.
-	NSVerticalDirectionsDown NSVerticalDirections = 2
+	VerticalDirectionsDown VerticalDirections = 2
 	// All vertical directions (up and down).
-	NSVerticalDirectionsAll NSVerticalDirections = 3
+	VerticalDirectionsAll VerticalDirections = 3
 )
 
-func (e NSVerticalDirections) String() string {
+// String returns the VerticalDirections constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VerticalDirections) String() string {
 	var parts []string
-	if e&NSVerticalDirectionsUp != 0 {
-		parts = append(parts, "NSVerticalDirectionsUp")
+	if e&VerticalDirectionsUp != 0 {
+		parts = append(parts, "VerticalDirectionsUp")
 	}
-	if e&NSVerticalDirectionsDown != 0 {
-		parts = append(parts, "NSVerticalDirectionsDown")
+	if e&VerticalDirectionsDown != 0 {
+		parts = append(parts, "VerticalDirectionsDown")
 	}
-	if e&NSVerticalDirectionsAll != 0 {
-		parts = append(parts, "NSVerticalDirectionsAll")
+	if e&VerticalDirectionsAll != 0 {
+		parts = append(parts, "VerticalDirectionsAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7081,46 +7462,48 @@ func (e NSVerticalDirections) String() string {
 
 // Animation options for view transitions in a view controller.
 // Bitmask — values may be combined with |.
-type NSViewControllerTransitionOptions uint64
+type ViewControllerTransitionOptions uint64
 
 const (
 	// A transition with no animation (the default). Specifying another animation option from this enumeration overrides this option.
-	NSViewControllerTransitionNone                 NSViewControllerTransitionOptions = 0
-	NSViewControllerTransitionCrossfade            NSViewControllerTransitionOptions = 1
-	NSViewControllerTransitionSlideUp              NSViewControllerTransitionOptions = 16
-	NSViewControllerTransitionSlideDown            NSViewControllerTransitionOptions = 32
-	NSViewControllerTransitionSlideLeft            NSViewControllerTransitionOptions = 64
-	NSViewControllerTransitionSlideRight           NSViewControllerTransitionOptions = 128
-	NSViewControllerTransitionSlideForward         NSViewControllerTransitionOptions = 320
-	NSViewControllerTransitionSlideBackward        NSViewControllerTransitionOptions = 384
-	NSViewControllerTransitionAllowUserInteraction NSViewControllerTransitionOptions = 4096
+	ViewControllerTransitionNone                 ViewControllerTransitionOptions = 0
+	ViewControllerTransitionCrossfade            ViewControllerTransitionOptions = 1
+	ViewControllerTransitionSlideUp              ViewControllerTransitionOptions = 16
+	ViewControllerTransitionSlideDown            ViewControllerTransitionOptions = 32
+	ViewControllerTransitionSlideLeft            ViewControllerTransitionOptions = 64
+	ViewControllerTransitionSlideRight           ViewControllerTransitionOptions = 128
+	ViewControllerTransitionSlideForward         ViewControllerTransitionOptions = 320
+	ViewControllerTransitionSlideBackward        ViewControllerTransitionOptions = 384
+	ViewControllerTransitionAllowUserInteraction ViewControllerTransitionOptions = 4096
 )
 
-func (e NSViewControllerTransitionOptions) String() string {
+// String returns the ViewControllerTransitionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ViewControllerTransitionOptions) String() string {
 	var parts []string
-	if e&NSViewControllerTransitionCrossfade != 0 {
-		parts = append(parts, "NSViewControllerTransitionCrossfade")
+	if e&ViewControllerTransitionCrossfade != 0 {
+		parts = append(parts, "ViewControllerTransitionCrossfade")
 	}
-	if e&NSViewControllerTransitionSlideUp != 0 {
-		parts = append(parts, "NSViewControllerTransitionSlideUp")
+	if e&ViewControllerTransitionSlideUp != 0 {
+		parts = append(parts, "ViewControllerTransitionSlideUp")
 	}
-	if e&NSViewControllerTransitionSlideDown != 0 {
-		parts = append(parts, "NSViewControllerTransitionSlideDown")
+	if e&ViewControllerTransitionSlideDown != 0 {
+		parts = append(parts, "ViewControllerTransitionSlideDown")
 	}
-	if e&NSViewControllerTransitionSlideLeft != 0 {
-		parts = append(parts, "NSViewControllerTransitionSlideLeft")
+	if e&ViewControllerTransitionSlideLeft != 0 {
+		parts = append(parts, "ViewControllerTransitionSlideLeft")
 	}
-	if e&NSViewControllerTransitionSlideRight != 0 {
-		parts = append(parts, "NSViewControllerTransitionSlideRight")
+	if e&ViewControllerTransitionSlideRight != 0 {
+		parts = append(parts, "ViewControllerTransitionSlideRight")
 	}
-	if e&NSViewControllerTransitionSlideForward != 0 {
-		parts = append(parts, "NSViewControllerTransitionSlideForward")
+	if e&ViewControllerTransitionSlideForward != 0 {
+		parts = append(parts, "ViewControllerTransitionSlideForward")
 	}
-	if e&NSViewControllerTransitionSlideBackward != 0 {
-		parts = append(parts, "NSViewControllerTransitionSlideBackward")
+	if e&ViewControllerTransitionSlideBackward != 0 {
+		parts = append(parts, "ViewControllerTransitionSlideBackward")
 	}
-	if e&NSViewControllerTransitionAllowUserInteraction != 0 {
-		parts = append(parts, "NSViewControllerTransitionAllowUserInteraction")
+	if e&ViewControllerTransitionAllowUserInteraction != 0 {
+		parts = append(parts, "ViewControllerTransitionAllowUserInteraction")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7128,413 +7511,435 @@ func (e NSViewControllerTransitionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSViewLayerContentsPlacement int64
+type ViewLayerContentsPlacement int64
 
 const (
-	NSViewLayerContentsPlacementScaleAxesIndependently    NSViewLayerContentsPlacement = 0
-	NSViewLayerContentsPlacementScaleProportionallyToFit  NSViewLayerContentsPlacement = 1
-	NSViewLayerContentsPlacementScaleProportionallyToFill NSViewLayerContentsPlacement = 2
-	NSViewLayerContentsPlacementCenter                    NSViewLayerContentsPlacement = 3
-	NSViewLayerContentsPlacementTop                       NSViewLayerContentsPlacement = 4
-	NSViewLayerContentsPlacementTopRight                  NSViewLayerContentsPlacement = 5
-	NSViewLayerContentsPlacementRight                     NSViewLayerContentsPlacement = 6
-	NSViewLayerContentsPlacementBottomRight               NSViewLayerContentsPlacement = 7
-	NSViewLayerContentsPlacementBottom                    NSViewLayerContentsPlacement = 8
-	NSViewLayerContentsPlacementBottomLeft                NSViewLayerContentsPlacement = 9
-	NSViewLayerContentsPlacementLeft                      NSViewLayerContentsPlacement = 10
-	NSViewLayerContentsPlacementTopLeft                   NSViewLayerContentsPlacement = 11
+	ViewLayerContentsPlacementScaleAxesIndependently    ViewLayerContentsPlacement = 0
+	ViewLayerContentsPlacementScaleProportionallyToFit  ViewLayerContentsPlacement = 1
+	ViewLayerContentsPlacementScaleProportionallyToFill ViewLayerContentsPlacement = 2
+	ViewLayerContentsPlacementCenter                    ViewLayerContentsPlacement = 3
+	ViewLayerContentsPlacementTop                       ViewLayerContentsPlacement = 4
+	ViewLayerContentsPlacementTopRight                  ViewLayerContentsPlacement = 5
+	ViewLayerContentsPlacementRight                     ViewLayerContentsPlacement = 6
+	ViewLayerContentsPlacementBottomRight               ViewLayerContentsPlacement = 7
+	ViewLayerContentsPlacementBottom                    ViewLayerContentsPlacement = 8
+	ViewLayerContentsPlacementBottomLeft                ViewLayerContentsPlacement = 9
+	ViewLayerContentsPlacementLeft                      ViewLayerContentsPlacement = 10
+	ViewLayerContentsPlacementTopLeft                   ViewLayerContentsPlacement = 11
 )
 
-func (e NSViewLayerContentsPlacement) String() string {
+// String returns the ViewLayerContentsPlacement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ViewLayerContentsPlacement) String() string {
 	switch e {
-	case NSViewLayerContentsPlacementScaleAxesIndependently:
-		return "NSViewLayerContentsPlacementScaleAxesIndependently"
-	case NSViewLayerContentsPlacementScaleProportionallyToFit:
-		return "NSViewLayerContentsPlacementScaleProportionallyToFit"
-	case NSViewLayerContentsPlacementScaleProportionallyToFill:
-		return "NSViewLayerContentsPlacementScaleProportionallyToFill"
-	case NSViewLayerContentsPlacementCenter:
-		return "NSViewLayerContentsPlacementCenter"
-	case NSViewLayerContentsPlacementTop:
-		return "NSViewLayerContentsPlacementTop"
-	case NSViewLayerContentsPlacementTopRight:
-		return "NSViewLayerContentsPlacementTopRight"
-	case NSViewLayerContentsPlacementRight:
-		return "NSViewLayerContentsPlacementRight"
-	case NSViewLayerContentsPlacementBottomRight:
-		return "NSViewLayerContentsPlacementBottomRight"
-	case NSViewLayerContentsPlacementBottom:
-		return "NSViewLayerContentsPlacementBottom"
-	case NSViewLayerContentsPlacementBottomLeft:
-		return "NSViewLayerContentsPlacementBottomLeft"
-	case NSViewLayerContentsPlacementLeft:
-		return "NSViewLayerContentsPlacementLeft"
-	case NSViewLayerContentsPlacementTopLeft:
-		return "NSViewLayerContentsPlacementTopLeft"
+	case ViewLayerContentsPlacementScaleAxesIndependently:
+		return "ViewLayerContentsPlacementScaleAxesIndependently"
+	case ViewLayerContentsPlacementScaleProportionallyToFit:
+		return "ViewLayerContentsPlacementScaleProportionallyToFit"
+	case ViewLayerContentsPlacementScaleProportionallyToFill:
+		return "ViewLayerContentsPlacementScaleProportionallyToFill"
+	case ViewLayerContentsPlacementCenter:
+		return "ViewLayerContentsPlacementCenter"
+	case ViewLayerContentsPlacementTop:
+		return "ViewLayerContentsPlacementTop"
+	case ViewLayerContentsPlacementTopRight:
+		return "ViewLayerContentsPlacementTopRight"
+	case ViewLayerContentsPlacementRight:
+		return "ViewLayerContentsPlacementRight"
+	case ViewLayerContentsPlacementBottomRight:
+		return "ViewLayerContentsPlacementBottomRight"
+	case ViewLayerContentsPlacementBottom:
+		return "ViewLayerContentsPlacementBottom"
+	case ViewLayerContentsPlacementBottomLeft:
+		return "ViewLayerContentsPlacementBottomLeft"
+	case ViewLayerContentsPlacementLeft:
+		return "ViewLayerContentsPlacementLeft"
+	case ViewLayerContentsPlacementTopLeft:
+		return "ViewLayerContentsPlacementTopLeft"
 	default:
-		return fmt.Sprintf("NSViewLayerContentsPlacement(%d)", int64(e))
+		return fmt.Sprintf("ViewLayerContentsPlacement(%d)", int64(e))
 	}
 }
 
-type NSViewLayerContentsRedrawPolicy int64
+type ViewLayerContentsRedrawPolicy int64
 
 const (
-	NSViewLayerContentsRedrawNever             NSViewLayerContentsRedrawPolicy = 0
-	NSViewLayerContentsRedrawOnSetNeedsDisplay NSViewLayerContentsRedrawPolicy = 1
-	NSViewLayerContentsRedrawDuringViewResize  NSViewLayerContentsRedrawPolicy = 2
-	NSViewLayerContentsRedrawBeforeViewResize  NSViewLayerContentsRedrawPolicy = 3
-	NSViewLayerContentsRedrawCrossfade         NSViewLayerContentsRedrawPolicy = 4
+	ViewLayerContentsRedrawNever             ViewLayerContentsRedrawPolicy = 0
+	ViewLayerContentsRedrawOnSetNeedsDisplay ViewLayerContentsRedrawPolicy = 1
+	ViewLayerContentsRedrawDuringViewResize  ViewLayerContentsRedrawPolicy = 2
+	ViewLayerContentsRedrawBeforeViewResize  ViewLayerContentsRedrawPolicy = 3
+	ViewLayerContentsRedrawCrossfade         ViewLayerContentsRedrawPolicy = 4
 )
 
-func (e NSViewLayerContentsRedrawPolicy) String() string {
+// String returns the ViewLayerContentsRedrawPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ViewLayerContentsRedrawPolicy) String() string {
 	switch e {
-	case NSViewLayerContentsRedrawNever:
-		return "NSViewLayerContentsRedrawNever"
-	case NSViewLayerContentsRedrawOnSetNeedsDisplay:
-		return "NSViewLayerContentsRedrawOnSetNeedsDisplay"
-	case NSViewLayerContentsRedrawDuringViewResize:
-		return "NSViewLayerContentsRedrawDuringViewResize"
-	case NSViewLayerContentsRedrawBeforeViewResize:
-		return "NSViewLayerContentsRedrawBeforeViewResize"
-	case NSViewLayerContentsRedrawCrossfade:
-		return "NSViewLayerContentsRedrawCrossfade"
+	case ViewLayerContentsRedrawNever:
+		return "ViewLayerContentsRedrawNever"
+	case ViewLayerContentsRedrawOnSetNeedsDisplay:
+		return "ViewLayerContentsRedrawOnSetNeedsDisplay"
+	case ViewLayerContentsRedrawDuringViewResize:
+		return "ViewLayerContentsRedrawDuringViewResize"
+	case ViewLayerContentsRedrawBeforeViewResize:
+		return "ViewLayerContentsRedrawBeforeViewResize"
+	case ViewLayerContentsRedrawCrossfade:
+		return "ViewLayerContentsRedrawCrossfade"
 	default:
-		return fmt.Sprintf("NSViewLayerContentsRedrawPolicy(%d)", int64(e))
+		return fmt.Sprintf("ViewLayerContentsRedrawPolicy(%d)", int64(e))
 	}
 }
 
-type NSViewLayoutRegionAdaptivityAxis int64
+type ViewLayoutRegionAdaptivityAxis int64
 
 const (
-	NSViewLayoutRegionAdaptivityAxisNone       NSViewLayoutRegionAdaptivityAxis = 0
-	NSViewLayoutRegionAdaptivityAxisHorizontal NSViewLayoutRegionAdaptivityAxis = 1
-	NSViewLayoutRegionAdaptivityAxisVertical   NSViewLayoutRegionAdaptivityAxis = 2
+	ViewLayoutRegionAdaptivityAxisNone       ViewLayoutRegionAdaptivityAxis = 0
+	ViewLayoutRegionAdaptivityAxisHorizontal ViewLayoutRegionAdaptivityAxis = 1
+	ViewLayoutRegionAdaptivityAxisVertical   ViewLayoutRegionAdaptivityAxis = 2
 )
 
-func (e NSViewLayoutRegionAdaptivityAxis) String() string {
+// String returns the ViewLayoutRegionAdaptivityAxis constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ViewLayoutRegionAdaptivityAxis) String() string {
 	switch e {
-	case NSViewLayoutRegionAdaptivityAxisNone:
-		return "NSViewLayoutRegionAdaptivityAxisNone"
-	case NSViewLayoutRegionAdaptivityAxisHorizontal:
-		return "NSViewLayoutRegionAdaptivityAxisHorizontal"
-	case NSViewLayoutRegionAdaptivityAxisVertical:
-		return "NSViewLayoutRegionAdaptivityAxisVertical"
+	case ViewLayoutRegionAdaptivityAxisNone:
+		return "ViewLayoutRegionAdaptivityAxisNone"
+	case ViewLayoutRegionAdaptivityAxisHorizontal:
+		return "ViewLayoutRegionAdaptivityAxisHorizontal"
+	case ViewLayoutRegionAdaptivityAxisVertical:
+		return "ViewLayoutRegionAdaptivityAxisVertical"
 	default:
-		return fmt.Sprintf("NSViewLayoutRegionAdaptivityAxis(%d)", int64(e))
+		return fmt.Sprintf("ViewLayoutRegionAdaptivityAxis(%d)", int64(e))
 	}
 }
 
 // Constants that specify whether the visual effect view blends with what’s either behind or within the window.
-type NSVisualEffectBlendingMode int64
+type VisualEffectBlendingMode int64
 
 const (
 	// Blend with the area behind the window (such as the Desktop or other windows).
-	NSVisualEffectBlendingModeBehindWindow NSVisualEffectBlendingMode = 0
+	VisualEffectBlendingModeBehindWindow VisualEffectBlendingMode = 0
 	// Blend with the area behind the view in the window.
-	NSVisualEffectBlendingModeWithinWindow NSVisualEffectBlendingMode = 1
+	VisualEffectBlendingModeWithinWindow VisualEffectBlendingMode = 1
 )
 
-func (e NSVisualEffectBlendingMode) String() string {
+// String returns the VisualEffectBlendingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VisualEffectBlendingMode) String() string {
 	switch e {
-	case NSVisualEffectBlendingModeBehindWindow:
-		return "NSVisualEffectBlendingModeBehindWindow"
-	case NSVisualEffectBlendingModeWithinWindow:
-		return "NSVisualEffectBlendingModeWithinWindow"
+	case VisualEffectBlendingModeBehindWindow:
+		return "VisualEffectBlendingModeBehindWindow"
+	case VisualEffectBlendingModeWithinWindow:
+		return "VisualEffectBlendingModeWithinWindow"
 	default:
-		return fmt.Sprintf("NSVisualEffectBlendingMode(%d)", int64(e))
+		return fmt.Sprintf("VisualEffectBlendingMode(%d)", int64(e))
 	}
 }
 
 // Constants to specify the material shown by the visual effect view.
-type NSVisualEffectMaterial int64
+type VisualEffectMaterial int64
 
 const (
 	// The material used by window titlebars.
-	NSVisualEffectMaterialTitlebar NSVisualEffectMaterial = 3
+	VisualEffectMaterialTitlebar VisualEffectMaterial = 3
 	// The material used in some table views, menus, etc., to indicate selection.
-	NSVisualEffectMaterialSelection NSVisualEffectMaterial = 4
+	VisualEffectMaterialSelection VisualEffectMaterial = 4
 	// The material used by menus.
-	NSVisualEffectMaterialMenu NSVisualEffectMaterial = 5
+	VisualEffectMaterialMenu VisualEffectMaterial = 5
 	// The material used in the background of NSPopover windows.
-	NSVisualEffectMaterialPopover NSVisualEffectMaterial = 6
+	VisualEffectMaterialPopover VisualEffectMaterial = 6
 	// The material used in the background of window sidebars.
-	NSVisualEffectMaterialSidebar NSVisualEffectMaterial = 7
+	VisualEffectMaterialSidebar VisualEffectMaterial = 7
 	// The material used in various in-line header or footer views (e.g., by NSTableView).
-	NSVisualEffectMaterialHeaderView NSVisualEffectMaterial = 10
+	VisualEffectMaterialHeaderView VisualEffectMaterial = 10
 	// The material used as the background of sheet windows.
-	NSVisualEffectMaterialSheet NSVisualEffectMaterial = 11
+	VisualEffectMaterialSheet VisualEffectMaterial = 11
 	// The material used by opaque window backgrounds.
-	NSVisualEffectMaterialWindowBackground NSVisualEffectMaterial = 12
+	VisualEffectMaterialWindowBackground VisualEffectMaterial = 12
 	// The material used as the background of heads-up display (HUD) windows.
-	NSVisualEffectMaterialHUDWindow NSVisualEffectMaterial = 13
+	VisualEffectMaterialHUDWindow VisualEffectMaterial = 13
 	// The material used as the background of full-screen modal UI.
-	NSVisualEffectMaterialFullScreenUI NSVisualEffectMaterial = 15
+	VisualEffectMaterialFullScreenUI VisualEffectMaterial = 15
 	// The material used as the background of tool tips.
-	NSVisualEffectMaterialToolTip NSVisualEffectMaterial = 17
+	VisualEffectMaterialToolTip VisualEffectMaterial = 17
 	// The material used as the opaque background of content (e.g., by NSScrollView, NSTableView, NSCollectionView, etc.).
-	NSVisualEffectMaterialContentBackground NSVisualEffectMaterial = 18
+	VisualEffectMaterialContentBackground VisualEffectMaterial = 18
 	// The material used under window backgrounds.
-	NSVisualEffectMaterialUnderWindowBackground NSVisualEffectMaterial = 21
+	VisualEffectMaterialUnderWindowBackground VisualEffectMaterial = 21
 	// The material used as the background behind document pages.
-	NSVisualEffectMaterialUnderPageBackground NSVisualEffectMaterial = 22
+	VisualEffectMaterialUnderPageBackground VisualEffectMaterial = 22
 	// A default material appropriate for the view's effectiveAppearance.  You should instead choose an appropriate semantic material.
 	//
 	// Deprecated: Use a specific semantic material instead.
-	NSVisualEffectMaterialAppearanceBased NSVisualEffectMaterial = 0
+	VisualEffectMaterialAppearanceBased VisualEffectMaterial = 0
 	// Deprecated: Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.
-	NSVisualEffectMaterialLight NSVisualEffectMaterial = 1
+	VisualEffectMaterialLight VisualEffectMaterial = 1
 	// Deprecated: Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.
-	NSVisualEffectMaterialDark NSVisualEffectMaterial = 2
+	VisualEffectMaterialDark VisualEffectMaterial = 2
 	// Deprecated: Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.
-	NSVisualEffectMaterialMediumLight NSVisualEffectMaterial = 8
+	VisualEffectMaterialMediumLight VisualEffectMaterial = 8
 	// Deprecated: Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.
-	NSVisualEffectMaterialUltraDark NSVisualEffectMaterial = 9
+	VisualEffectMaterialUltraDark VisualEffectMaterial = 9
 )
 
-func (e NSVisualEffectMaterial) String() string {
+// String returns the VisualEffectMaterial constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VisualEffectMaterial) String() string {
 	switch e {
-	case NSVisualEffectMaterialTitlebar:
-		return "NSVisualEffectMaterialTitlebar"
-	case NSVisualEffectMaterialSelection:
-		return "NSVisualEffectMaterialSelection"
-	case NSVisualEffectMaterialMenu:
-		return "NSVisualEffectMaterialMenu"
-	case NSVisualEffectMaterialPopover:
-		return "NSVisualEffectMaterialPopover"
-	case NSVisualEffectMaterialSidebar:
-		return "NSVisualEffectMaterialSidebar"
-	case NSVisualEffectMaterialHeaderView:
-		return "NSVisualEffectMaterialHeaderView"
-	case NSVisualEffectMaterialSheet:
-		return "NSVisualEffectMaterialSheet"
-	case NSVisualEffectMaterialWindowBackground:
-		return "NSVisualEffectMaterialWindowBackground"
-	case NSVisualEffectMaterialHUDWindow:
-		return "NSVisualEffectMaterialHUDWindow"
-	case NSVisualEffectMaterialFullScreenUI:
-		return "NSVisualEffectMaterialFullScreenUI"
-	case NSVisualEffectMaterialToolTip:
-		return "NSVisualEffectMaterialToolTip"
-	case NSVisualEffectMaterialContentBackground:
-		return "NSVisualEffectMaterialContentBackground"
-	case NSVisualEffectMaterialUnderWindowBackground:
-		return "NSVisualEffectMaterialUnderWindowBackground"
-	case NSVisualEffectMaterialUnderPageBackground:
-		return "NSVisualEffectMaterialUnderPageBackground"
-	case NSVisualEffectMaterialAppearanceBased:
-		return "NSVisualEffectMaterialAppearanceBased"
-	case NSVisualEffectMaterialLight:
-		return "NSVisualEffectMaterialLight"
-	case NSVisualEffectMaterialDark:
-		return "NSVisualEffectMaterialDark"
-	case NSVisualEffectMaterialMediumLight:
-		return "NSVisualEffectMaterialMediumLight"
-	case NSVisualEffectMaterialUltraDark:
-		return "NSVisualEffectMaterialUltraDark"
+	case VisualEffectMaterialTitlebar:
+		return "VisualEffectMaterialTitlebar"
+	case VisualEffectMaterialSelection:
+		return "VisualEffectMaterialSelection"
+	case VisualEffectMaterialMenu:
+		return "VisualEffectMaterialMenu"
+	case VisualEffectMaterialPopover:
+		return "VisualEffectMaterialPopover"
+	case VisualEffectMaterialSidebar:
+		return "VisualEffectMaterialSidebar"
+	case VisualEffectMaterialHeaderView:
+		return "VisualEffectMaterialHeaderView"
+	case VisualEffectMaterialSheet:
+		return "VisualEffectMaterialSheet"
+	case VisualEffectMaterialWindowBackground:
+		return "VisualEffectMaterialWindowBackground"
+	case VisualEffectMaterialHUDWindow:
+		return "VisualEffectMaterialHUDWindow"
+	case VisualEffectMaterialFullScreenUI:
+		return "VisualEffectMaterialFullScreenUI"
+	case VisualEffectMaterialToolTip:
+		return "VisualEffectMaterialToolTip"
+	case VisualEffectMaterialContentBackground:
+		return "VisualEffectMaterialContentBackground"
+	case VisualEffectMaterialUnderWindowBackground:
+		return "VisualEffectMaterialUnderWindowBackground"
+	case VisualEffectMaterialUnderPageBackground:
+		return "VisualEffectMaterialUnderPageBackground"
+	case VisualEffectMaterialAppearanceBased:
+		return "VisualEffectMaterialAppearanceBased"
+	case VisualEffectMaterialLight:
+		return "VisualEffectMaterialLight"
+	case VisualEffectMaterialDark:
+		return "VisualEffectMaterialDark"
+	case VisualEffectMaterialMediumLight:
+		return "VisualEffectMaterialMediumLight"
+	case VisualEffectMaterialUltraDark:
+		return "VisualEffectMaterialUltraDark"
 	default:
-		return fmt.Sprintf("NSVisualEffectMaterial(%d)", int64(e))
+		return fmt.Sprintf("VisualEffectMaterial(%d)", int64(e))
 	}
 }
 
 // Constants to specify how the material appearance should reflect window activity state.
-type NSVisualEffectState int64
+type VisualEffectState int64
 
 const (
 	// Use the active look only when the containing window is active.
-	NSVisualEffectStateFollowsWindowActiveState NSVisualEffectState = 0
+	VisualEffectStateFollowsWindowActiveState VisualEffectState = 0
 	// Use the active look always.
-	NSVisualEffectStateActive NSVisualEffectState = 1
+	VisualEffectStateActive VisualEffectState = 1
 	// Use the inactive look always.
-	NSVisualEffectStateInactive NSVisualEffectState = 2
+	VisualEffectStateInactive VisualEffectState = 2
 )
 
-func (e NSVisualEffectState) String() string {
+// String returns the VisualEffectState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VisualEffectState) String() string {
 	switch e {
-	case NSVisualEffectStateFollowsWindowActiveState:
-		return "NSVisualEffectStateFollowsWindowActiveState"
-	case NSVisualEffectStateActive:
-		return "NSVisualEffectStateActive"
-	case NSVisualEffectStateInactive:
-		return "NSVisualEffectStateInactive"
+	case VisualEffectStateFollowsWindowActiveState:
+		return "VisualEffectStateFollowsWindowActiveState"
+	case VisualEffectStateActive:
+		return "VisualEffectStateActive"
+	case VisualEffectStateInactive:
+		return "VisualEffectStateInactive"
 	default:
-		return fmt.Sprintf("NSVisualEffectState(%d)", int64(e))
+		return fmt.Sprintf("VisualEffectState(%d)", int64(e))
 	}
 }
 
 // Constants that specify the winding rule a Bézier path uses.
-type NSWindingRule uint64
+type WindingRule uint64
 
 const (
-	NSWindingRuleNonZero NSWindingRule = 0
-	NSWindingRuleEvenOdd NSWindingRule = 1
+	WindingRuleNonZero WindingRule = 0
+	WindingRuleEvenOdd WindingRule = 1
 )
 
-func (e NSWindingRule) String() string {
+// String returns the WindingRule constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindingRule) String() string {
 	switch e {
-	case NSWindingRuleNonZero:
-		return "NSWindingRuleNonZero"
-	case NSWindingRuleEvenOdd:
-		return "NSWindingRuleEvenOdd"
+	case WindingRuleNonZero:
+		return "WindingRuleNonZero"
+	case WindingRuleEvenOdd:
+		return "WindingRuleEvenOdd"
 	default:
-		return fmt.Sprintf("NSWindingRule(%d)", int64(e))
+		return fmt.Sprintf("WindingRule(%d)", int64(e))
 	}
 }
 
 // Constants that control the automatic window animation behavior windows use when ordering to the front or out of view.
-type NSWindowAnimationBehavior int64
+type WindowAnimationBehavior int64
 
 const (
-	NSWindowAnimationBehaviorDefault        NSWindowAnimationBehavior = 0
-	NSWindowAnimationBehaviorNone           NSWindowAnimationBehavior = 2
-	NSWindowAnimationBehaviorDocumentWindow NSWindowAnimationBehavior = 3
-	NSWindowAnimationBehaviorUtilityWindow  NSWindowAnimationBehavior = 4
-	NSWindowAnimationBehaviorAlertPanel     NSWindowAnimationBehavior = 5
+	WindowAnimationBehaviorDefault        WindowAnimationBehavior = 0
+	WindowAnimationBehaviorNone           WindowAnimationBehavior = 2
+	WindowAnimationBehaviorDocumentWindow WindowAnimationBehavior = 3
+	WindowAnimationBehaviorUtilityWindow  WindowAnimationBehavior = 4
+	WindowAnimationBehaviorAlertPanel     WindowAnimationBehavior = 5
 )
 
-func (e NSWindowAnimationBehavior) String() string {
+// String returns the WindowAnimationBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowAnimationBehavior) String() string {
 	switch e {
-	case NSWindowAnimationBehaviorDefault:
-		return "NSWindowAnimationBehaviorDefault"
-	case NSWindowAnimationBehaviorNone:
-		return "NSWindowAnimationBehaviorNone"
-	case NSWindowAnimationBehaviorDocumentWindow:
-		return "NSWindowAnimationBehaviorDocumentWindow"
-	case NSWindowAnimationBehaviorUtilityWindow:
-		return "NSWindowAnimationBehaviorUtilityWindow"
-	case NSWindowAnimationBehaviorAlertPanel:
-		return "NSWindowAnimationBehaviorAlertPanel"
+	case WindowAnimationBehaviorDefault:
+		return "WindowAnimationBehaviorDefault"
+	case WindowAnimationBehaviorNone:
+		return "WindowAnimationBehaviorNone"
+	case WindowAnimationBehaviorDocumentWindow:
+		return "WindowAnimationBehaviorDocumentWindow"
+	case WindowAnimationBehaviorUtilityWindow:
+		return "WindowAnimationBehaviorUtilityWindow"
+	case WindowAnimationBehaviorAlertPanel:
+		return "WindowAnimationBehaviorAlertPanel"
 	default:
-		return fmt.Sprintf("NSWindowAnimationBehavior(%d)", int64(e))
+		return fmt.Sprintf("WindowAnimationBehavior(%d)", int64(e))
 	}
 }
 
 // The following constants and the related data type represent a window’s possible backing locations.
 //
 // Deprecated: since macOS 10.14.
-type NSWindowBackingLocation uint64
+type WindowBackingLocation uint64
 
 const (
 	// Deprecated: This property does not do anything and should not be used
-	NSWindowBackingLocationDefault NSWindowBackingLocation = 0
+	WindowBackingLocationDefault WindowBackingLocation = 0
 	// Deprecated: This property does not do anything and should not be used
-	NSWindowBackingLocationVideoMemory NSWindowBackingLocation = 1
-	NSWindowBackingLocationMainMemory  NSWindowBackingLocation = 2
+	WindowBackingLocationVideoMemory WindowBackingLocation = 1
+	WindowBackingLocationMainMemory  WindowBackingLocation = 2
 )
 
-func (e NSWindowBackingLocation) String() string {
+// String returns the WindowBackingLocation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowBackingLocation) String() string {
 	switch e {
-	case NSWindowBackingLocationDefault:
-		return "NSWindowBackingLocationDefault"
-	case NSWindowBackingLocationVideoMemory:
-		return "NSWindowBackingLocationVideoMemory"
-	case NSWindowBackingLocationMainMemory:
-		return "NSWindowBackingLocationMainMemory"
+	case WindowBackingLocationDefault:
+		return "WindowBackingLocationDefault"
+	case WindowBackingLocationVideoMemory:
+		return "WindowBackingLocationVideoMemory"
+	case WindowBackingLocationMainMemory:
+		return "WindowBackingLocationMainMemory"
 	default:
-		return fmt.Sprintf("NSWindowBackingLocation(%d)", int64(e))
+		return fmt.Sprintf("WindowBackingLocation(%d)", int64(e))
 	}
 }
 
 // Constants that provide a way to access standard title bar buttons.
-type NSWindowButton uint64
+type WindowButton uint64
 
 const (
-	NSWindowCloseButton            NSWindowButton = 0
-	NSWindowMiniaturizeButton      NSWindowButton = 1
-	NSWindowZoomButton             NSWindowButton = 2
-	NSWindowToolbarButton          NSWindowButton = 3
-	NSWindowDocumentIconButton     NSWindowButton = 4
-	NSWindowDocumentVersionsButton NSWindowButton = 6
+	WindowCloseButton            WindowButton = 0
+	WindowMiniaturizeButton      WindowButton = 1
+	WindowZoomButton             WindowButton = 2
+	WindowToolbarButton          WindowButton = 3
+	WindowDocumentIconButton     WindowButton = 4
+	WindowDocumentVersionsButton WindowButton = 6
 )
 
-func (e NSWindowButton) String() string {
+// String returns the WindowButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowButton) String() string {
 	switch e {
-	case NSWindowCloseButton:
-		return "NSWindowCloseButton"
-	case NSWindowMiniaturizeButton:
-		return "NSWindowMiniaturizeButton"
-	case NSWindowZoomButton:
-		return "NSWindowZoomButton"
-	case NSWindowToolbarButton:
-		return "NSWindowToolbarButton"
-	case NSWindowDocumentIconButton:
-		return "NSWindowDocumentIconButton"
-	case NSWindowDocumentVersionsButton:
-		return "NSWindowDocumentVersionsButton"
+	case WindowCloseButton:
+		return "WindowCloseButton"
+	case WindowMiniaturizeButton:
+		return "WindowMiniaturizeButton"
+	case WindowZoomButton:
+		return "WindowZoomButton"
+	case WindowToolbarButton:
+		return "WindowToolbarButton"
+	case WindowDocumentIconButton:
+		return "WindowDocumentIconButton"
+	case WindowDocumentVersionsButton:
+		return "WindowDocumentVersionsButton"
 	default:
-		return fmt.Sprintf("NSWindowButton(%d)", int64(e))
+		return fmt.Sprintf("WindowButton(%d)", int64(e))
 	}
 }
 
 // Window collection behaviors related to Mission Control, Spaces, and Stage Manager.
 // Bitmask — values may be combined with |.
-type NSWindowCollectionBehavior uint64
+type WindowCollectionBehavior uint64
 
 const (
 	// The window appears in only one space at a time.
-	NSWindowCollectionBehaviorDefault                   NSWindowCollectionBehavior = 0
-	NSWindowCollectionBehaviorCanJoinAllSpaces          NSWindowCollectionBehavior = 1
-	NSWindowCollectionBehaviorMoveToActiveSpace         NSWindowCollectionBehavior = 2
-	NSWindowCollectionBehaviorManaged                   NSWindowCollectionBehavior = 4
-	NSWindowCollectionBehaviorTransient                 NSWindowCollectionBehavior = 8
-	NSWindowCollectionBehaviorStationary                NSWindowCollectionBehavior = 16
-	NSWindowCollectionBehaviorParticipatesInCycle       NSWindowCollectionBehavior = 32
-	NSWindowCollectionBehaviorIgnoresCycle              NSWindowCollectionBehavior = 64
-	NSWindowCollectionBehaviorFullScreenPrimary         NSWindowCollectionBehavior = 128
-	NSWindowCollectionBehaviorFullScreenAuxiliary       NSWindowCollectionBehavior = 256
-	NSWindowCollectionBehaviorFullScreenNone            NSWindowCollectionBehavior = 512
-	NSWindowCollectionBehaviorFullScreenAllowsTiling    NSWindowCollectionBehavior = 2048
-	NSWindowCollectionBehaviorFullScreenDisallowsTiling NSWindowCollectionBehavior = 4096
-	NSWindowCollectionBehaviorPrimary                   NSWindowCollectionBehavior = 65536
-	NSWindowCollectionBehaviorAuxiliary                 NSWindowCollectionBehavior = 131072
-	NSWindowCollectionBehaviorCanJoinAllApplications    NSWindowCollectionBehavior = 262144
+	WindowCollectionBehaviorDefault                   WindowCollectionBehavior = 0
+	WindowCollectionBehaviorCanJoinAllSpaces          WindowCollectionBehavior = 1
+	WindowCollectionBehaviorMoveToActiveSpace         WindowCollectionBehavior = 2
+	WindowCollectionBehaviorManaged                   WindowCollectionBehavior = 4
+	WindowCollectionBehaviorTransient                 WindowCollectionBehavior = 8
+	WindowCollectionBehaviorStationary                WindowCollectionBehavior = 16
+	WindowCollectionBehaviorParticipatesInCycle       WindowCollectionBehavior = 32
+	WindowCollectionBehaviorIgnoresCycle              WindowCollectionBehavior = 64
+	WindowCollectionBehaviorFullScreenPrimary         WindowCollectionBehavior = 128
+	WindowCollectionBehaviorFullScreenAuxiliary       WindowCollectionBehavior = 256
+	WindowCollectionBehaviorFullScreenNone            WindowCollectionBehavior = 512
+	WindowCollectionBehaviorFullScreenAllowsTiling    WindowCollectionBehavior = 2048
+	WindowCollectionBehaviorFullScreenDisallowsTiling WindowCollectionBehavior = 4096
+	WindowCollectionBehaviorPrimary                   WindowCollectionBehavior = 65536
+	WindowCollectionBehaviorAuxiliary                 WindowCollectionBehavior = 131072
+	WindowCollectionBehaviorCanJoinAllApplications    WindowCollectionBehavior = 262144
 )
 
-func (e NSWindowCollectionBehavior) String() string {
+// String returns the WindowCollectionBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowCollectionBehavior) String() string {
 	var parts []string
-	if e&NSWindowCollectionBehaviorCanJoinAllSpaces != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorCanJoinAllSpaces")
+	if e&WindowCollectionBehaviorCanJoinAllSpaces != 0 {
+		parts = append(parts, "WindowCollectionBehaviorCanJoinAllSpaces")
 	}
-	if e&NSWindowCollectionBehaviorMoveToActiveSpace != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorMoveToActiveSpace")
+	if e&WindowCollectionBehaviorMoveToActiveSpace != 0 {
+		parts = append(parts, "WindowCollectionBehaviorMoveToActiveSpace")
 	}
-	if e&NSWindowCollectionBehaviorManaged != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorManaged")
+	if e&WindowCollectionBehaviorManaged != 0 {
+		parts = append(parts, "WindowCollectionBehaviorManaged")
 	}
-	if e&NSWindowCollectionBehaviorTransient != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorTransient")
+	if e&WindowCollectionBehaviorTransient != 0 {
+		parts = append(parts, "WindowCollectionBehaviorTransient")
 	}
-	if e&NSWindowCollectionBehaviorStationary != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorStationary")
+	if e&WindowCollectionBehaviorStationary != 0 {
+		parts = append(parts, "WindowCollectionBehaviorStationary")
 	}
-	if e&NSWindowCollectionBehaviorParticipatesInCycle != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorParticipatesInCycle")
+	if e&WindowCollectionBehaviorParticipatesInCycle != 0 {
+		parts = append(parts, "WindowCollectionBehaviorParticipatesInCycle")
 	}
-	if e&NSWindowCollectionBehaviorIgnoresCycle != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorIgnoresCycle")
+	if e&WindowCollectionBehaviorIgnoresCycle != 0 {
+		parts = append(parts, "WindowCollectionBehaviorIgnoresCycle")
 	}
-	if e&NSWindowCollectionBehaviorFullScreenPrimary != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorFullScreenPrimary")
+	if e&WindowCollectionBehaviorFullScreenPrimary != 0 {
+		parts = append(parts, "WindowCollectionBehaviorFullScreenPrimary")
 	}
-	if e&NSWindowCollectionBehaviorFullScreenAuxiliary != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorFullScreenAuxiliary")
+	if e&WindowCollectionBehaviorFullScreenAuxiliary != 0 {
+		parts = append(parts, "WindowCollectionBehaviorFullScreenAuxiliary")
 	}
-	if e&NSWindowCollectionBehaviorFullScreenNone != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorFullScreenNone")
+	if e&WindowCollectionBehaviorFullScreenNone != 0 {
+		parts = append(parts, "WindowCollectionBehaviorFullScreenNone")
 	}
-	if e&NSWindowCollectionBehaviorFullScreenAllowsTiling != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorFullScreenAllowsTiling")
+	if e&WindowCollectionBehaviorFullScreenAllowsTiling != 0 {
+		parts = append(parts, "WindowCollectionBehaviorFullScreenAllowsTiling")
 	}
-	if e&NSWindowCollectionBehaviorFullScreenDisallowsTiling != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorFullScreenDisallowsTiling")
+	if e&WindowCollectionBehaviorFullScreenDisallowsTiling != 0 {
+		parts = append(parts, "WindowCollectionBehaviorFullScreenDisallowsTiling")
 	}
-	if e&NSWindowCollectionBehaviorPrimary != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorPrimary")
+	if e&WindowCollectionBehaviorPrimary != 0 {
+		parts = append(parts, "WindowCollectionBehaviorPrimary")
 	}
-	if e&NSWindowCollectionBehaviorAuxiliary != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorAuxiliary")
+	if e&WindowCollectionBehaviorAuxiliary != 0 {
+		parts = append(parts, "WindowCollectionBehaviorAuxiliary")
 	}
-	if e&NSWindowCollectionBehaviorCanJoinAllApplications != 0 {
-		parts = append(parts, "NSWindowCollectionBehaviorCanJoinAllApplications")
+	if e&WindowCollectionBehaviorCanJoinAllApplications != 0 {
+		parts = append(parts, "WindowCollectionBehaviorCanJoinAllApplications")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7543,40 +7948,44 @@ func (e NSWindowCollectionBehavior) String() string {
 }
 
 // A type that represents the depth, or amount of memory, for a single pixel in a window or screen.
-type NSWindowDepth int64
+type WindowDepth int64
 
 const (
-	NSWindowDepthTwentyfourBitRGB            NSWindowDepth = 520
-	NSWindowDepthSixtyfourBitRGB             NSWindowDepth = 528
-	NSWindowDepthOnehundredtwentyeightBitRGB NSWindowDepth = 544
+	WindowDepthTwentyfourBitRGB            WindowDepth = 520
+	WindowDepthSixtyfourBitRGB             WindowDepth = 528
+	WindowDepthOnehundredtwentyeightBitRGB WindowDepth = 544
 )
 
-func (e NSWindowDepth) String() string {
+// String returns the WindowDepth constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowDepth) String() string {
 	switch e {
-	case NSWindowDepthTwentyfourBitRGB:
-		return "NSWindowDepthTwentyfourBitRGB"
-	case NSWindowDepthSixtyfourBitRGB:
-		return "NSWindowDepthSixtyfourBitRGB"
-	case NSWindowDepthOnehundredtwentyeightBitRGB:
-		return "NSWindowDepthOnehundredtwentyeightBitRGB"
+	case WindowDepthTwentyfourBitRGB:
+		return "WindowDepthTwentyfourBitRGB"
+	case WindowDepthSixtyfourBitRGB:
+		return "WindowDepthSixtyfourBitRGB"
+	case WindowDepthOnehundredtwentyeightBitRGB:
+		return "WindowDepthOnehundredtwentyeightBitRGB"
 	default:
-		return fmt.Sprintf("NSWindowDepth(%d)", int64(e))
+		return fmt.Sprintf("WindowDepth(%d)", int64(e))
 	}
 }
 
 // This constant indicates a window ordering.
 // Bitmask — values may be combined with |.
-type NSWindowListOptions int64
+type WindowListOptions int64
 
 const (
 	// Onscreen application windows in front to back order. By default, -[NSApp windows] is used.
-	NSWindowListOrderedFrontToBack NSWindowListOptions = 1
+	WindowListOrderedFrontToBack WindowListOptions = 1
 )
 
-func (e NSWindowListOptions) String() string {
+// String returns the WindowListOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowListOptions) String() string {
 	var parts []string
-	if e&NSWindowListOrderedFrontToBack != 0 {
-		parts = append(parts, "NSWindowListOrderedFrontToBack")
+	if e&WindowListOrderedFrontToBack != 0 {
+		parts = append(parts, "WindowListOrderedFrontToBack")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7586,20 +7995,22 @@ func (e NSWindowListOptions) String() string {
 
 // Options to use when retrieving window numbers from the system.
 // Bitmask — values may be combined with |.
-type NSWindowNumberListOptions uint64
+type WindowNumberListOptions uint64
 
 const (
-	NSWindowNumberListAllApplications NSWindowNumberListOptions = 1
-	NSWindowNumberListAllSpaces       NSWindowNumberListOptions = 16
+	WindowNumberListAllApplications WindowNumberListOptions = 1
+	WindowNumberListAllSpaces       WindowNumberListOptions = 16
 )
 
-func (e NSWindowNumberListOptions) String() string {
+// String returns the WindowNumberListOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowNumberListOptions) String() string {
 	var parts []string
-	if e&NSWindowNumberListAllApplications != 0 {
-		parts = append(parts, "NSWindowNumberListAllApplications")
+	if e&WindowNumberListAllApplications != 0 {
+		parts = append(parts, "WindowNumberListAllApplications")
 	}
-	if e&NSWindowNumberListAllSpaces != 0 {
-		parts = append(parts, "NSWindowNumberListAllSpaces")
+	if e&WindowNumberListAllSpaces != 0 {
+		parts = append(parts, "WindowNumberListAllSpaces")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7609,16 +8020,18 @@ func (e NSWindowNumberListOptions) String() string {
 
 // Specifies whether the window is occluded.
 // Bitmask — values may be combined with |.
-type NSWindowOcclusionState uint64
+type WindowOcclusionState uint64
 
 const (
-	NSWindowOcclusionStateVisible NSWindowOcclusionState = 2
+	WindowOcclusionStateVisible WindowOcclusionState = 2
 )
 
-func (e NSWindowOcclusionState) String() string {
+// String returns the WindowOcclusionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowOcclusionState) String() string {
 	var parts []string
-	if e&NSWindowOcclusionStateVisible != 0 {
-		parts = append(parts, "NSWindowOcclusionStateVisible")
+	if e&WindowOcclusionStateVisible != 0 {
+		parts = append(parts, "WindowOcclusionStateVisible")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7627,105 +8040,111 @@ func (e NSWindowOcclusionState) String() string {
 }
 
 // Constants that let you specify how a window is ordered relative to another window.
-type NSWindowOrderingMode int64
+type WindowOrderingMode int64
 
 const (
-	NSWindowAbove NSWindowOrderingMode = 1
-	NSWindowBelow NSWindowOrderingMode = -1
-	NSWindowOut   NSWindowOrderingMode = 0
+	WindowAbove WindowOrderingMode = 1
+	WindowBelow WindowOrderingMode = -1
+	WindowOut   WindowOrderingMode = 0
 )
 
-func (e NSWindowOrderingMode) String() string {
+// String returns the WindowOrderingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowOrderingMode) String() string {
 	switch e {
-	case NSWindowAbove:
-		return "NSWindowAbove"
-	case NSWindowBelow:
-		return "NSWindowBelow"
-	case NSWindowOut:
-		return "NSWindowOut"
+	case WindowAbove:
+		return "WindowAbove"
+	case WindowBelow:
+		return "WindowBelow"
+	case WindowOut:
+		return "WindowOut"
 	default:
-		return fmt.Sprintf("NSWindowOrderingMode(%d)", int64(e))
+		return fmt.Sprintf("WindowOrderingMode(%d)", int64(e))
 	}
 }
 
 // Constants that represent the access levels other processes can have to a window’s content.
-type NSWindowSharingType uint64
+type WindowSharingType uint64
 
 const (
-	NSWindowSharingNone     NSWindowSharingType = 0
-	NSWindowSharingReadOnly NSWindowSharingType = 1
+	WindowSharingNone     WindowSharingType = 0
+	WindowSharingReadOnly WindowSharingType = 1
 )
 
-func (e NSWindowSharingType) String() string {
+// String returns the WindowSharingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowSharingType) String() string {
 	switch e {
-	case NSWindowSharingNone:
-		return "NSWindowSharingNone"
-	case NSWindowSharingReadOnly:
-		return "NSWindowSharingReadOnly"
+	case WindowSharingNone:
+		return "WindowSharingNone"
+	case WindowSharingReadOnly:
+		return "WindowSharingReadOnly"
 	default:
-		return fmt.Sprintf("NSWindowSharingType(%d)", int64(e))
+		return fmt.Sprintf("WindowSharingType(%d)", int64(e))
 	}
 }
 
 // Constants that specify the style of a window, and that you can combine with the C bitwise OR operator.
 // Bitmask — values may be combined with |.
-type NSWindowStyleMask uint64
+type WindowStyleMask uint64
 
 const (
-	NSWindowStyleMaskBorderless     NSWindowStyleMask = 0
-	NSWindowStyleMaskTitled         NSWindowStyleMask = 1
-	NSWindowStyleMaskClosable       NSWindowStyleMask = 2
-	NSWindowStyleMaskMiniaturizable NSWindowStyleMask = 4
-	NSWindowStyleMaskResizable      NSWindowStyleMask = 8
+	WindowStyleMaskBorderless     WindowStyleMask = 0
+	WindowStyleMaskTitled         WindowStyleMask = 1
+	WindowStyleMaskClosable       WindowStyleMask = 2
+	WindowStyleMaskMiniaturizable WindowStyleMask = 4
+	WindowStyleMaskResizable      WindowStyleMask = 8
 	// Deprecated: Textured window style should no longer be used
-	NSWindowStyleMaskTexturedBackground NSWindowStyleMask = 256
+	WindowStyleMaskTexturedBackground WindowStyleMask = 256
 	// Deprecated: Textured window style should no longer be used
-	NSWindowStyleMaskUnifiedTitleAndToolbar NSWindowStyleMask = 4096
-	NSWindowStyleMaskFullScreen             NSWindowStyleMask = 16384
-	NSWindowStyleMaskFullSizeContentView    NSWindowStyleMask = 32768
-	NSWindowStyleMaskUtilityWindow          NSWindowStyleMask = 16
-	NSWindowStyleMaskDocModalWindow         NSWindowStyleMask = 64
-	NSWindowStyleMaskNonactivatingPanel     NSWindowStyleMask = 128
-	NSWindowStyleMaskHUDWindow              NSWindowStyleMask = 8192
+	WindowStyleMaskUnifiedTitleAndToolbar WindowStyleMask = 4096
+	WindowStyleMaskFullScreen             WindowStyleMask = 16384
+	WindowStyleMaskFullSizeContentView    WindowStyleMask = 32768
+	WindowStyleMaskUtilityWindow          WindowStyleMask = 16
+	WindowStyleMaskDocModalWindow         WindowStyleMask = 64
+	WindowStyleMaskNonactivatingPanel     WindowStyleMask = 128
+	WindowStyleMaskHUDWindow              WindowStyleMask = 8192
 )
 
-func (e NSWindowStyleMask) String() string {
+// String returns the WindowStyleMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowStyleMask) String() string {
 	var parts []string
-	if e&NSWindowStyleMaskTitled != 0 {
-		parts = append(parts, "NSWindowStyleMaskTitled")
+	if e&WindowStyleMaskTitled != 0 {
+		parts = append(parts, "WindowStyleMaskTitled")
 	}
-	if e&NSWindowStyleMaskClosable != 0 {
-		parts = append(parts, "NSWindowStyleMaskClosable")
+	if e&WindowStyleMaskClosable != 0 {
+		parts = append(parts, "WindowStyleMaskClosable")
 	}
-	if e&NSWindowStyleMaskMiniaturizable != 0 {
-		parts = append(parts, "NSWindowStyleMaskMiniaturizable")
+	if e&WindowStyleMaskMiniaturizable != 0 {
+		parts = append(parts, "WindowStyleMaskMiniaturizable")
 	}
-	if e&NSWindowStyleMaskResizable != 0 {
-		parts = append(parts, "NSWindowStyleMaskResizable")
+	if e&WindowStyleMaskResizable != 0 {
+		parts = append(parts, "WindowStyleMaskResizable")
 	}
-	if e&NSWindowStyleMaskTexturedBackground != 0 {
-		parts = append(parts, "NSWindowStyleMaskTexturedBackground")
+	if e&WindowStyleMaskTexturedBackground != 0 {
+		parts = append(parts, "WindowStyleMaskTexturedBackground")
 	}
-	if e&NSWindowStyleMaskUnifiedTitleAndToolbar != 0 {
-		parts = append(parts, "NSWindowStyleMaskUnifiedTitleAndToolbar")
+	if e&WindowStyleMaskUnifiedTitleAndToolbar != 0 {
+		parts = append(parts, "WindowStyleMaskUnifiedTitleAndToolbar")
 	}
-	if e&NSWindowStyleMaskFullScreen != 0 {
-		parts = append(parts, "NSWindowStyleMaskFullScreen")
+	if e&WindowStyleMaskFullScreen != 0 {
+		parts = append(parts, "WindowStyleMaskFullScreen")
 	}
-	if e&NSWindowStyleMaskFullSizeContentView != 0 {
-		parts = append(parts, "NSWindowStyleMaskFullSizeContentView")
+	if e&WindowStyleMaskFullSizeContentView != 0 {
+		parts = append(parts, "WindowStyleMaskFullSizeContentView")
 	}
-	if e&NSWindowStyleMaskUtilityWindow != 0 {
-		parts = append(parts, "NSWindowStyleMaskUtilityWindow")
+	if e&WindowStyleMaskUtilityWindow != 0 {
+		parts = append(parts, "WindowStyleMaskUtilityWindow")
 	}
-	if e&NSWindowStyleMaskDocModalWindow != 0 {
-		parts = append(parts, "NSWindowStyleMaskDocModalWindow")
+	if e&WindowStyleMaskDocModalWindow != 0 {
+		parts = append(parts, "WindowStyleMaskDocModalWindow")
 	}
-	if e&NSWindowStyleMaskNonactivatingPanel != 0 {
-		parts = append(parts, "NSWindowStyleMaskNonactivatingPanel")
+	if e&WindowStyleMaskNonactivatingPanel != 0 {
+		parts = append(parts, "WindowStyleMaskNonactivatingPanel")
 	}
-	if e&NSWindowStyleMaskHUDWindow != 0 {
-		parts = append(parts, "NSWindowStyleMaskHUDWindow")
+	if e&WindowStyleMaskHUDWindow != 0 {
+		parts = append(parts, "WindowStyleMaskHUDWindow")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7734,134 +8153,146 @@ func (e NSWindowStyleMask) String() string {
 }
 
 // The preferred tabbing behavior of a window.
-type NSWindowTabbingMode int64
+type WindowTabbingMode int64
 
 const (
-	NSWindowTabbingModeAutomatic  NSWindowTabbingMode = 0
-	NSWindowTabbingModePreferred  NSWindowTabbingMode = 1
-	NSWindowTabbingModeDisallowed NSWindowTabbingMode = 2
+	WindowTabbingModeAutomatic  WindowTabbingMode = 0
+	WindowTabbingModePreferred  WindowTabbingMode = 1
+	WindowTabbingModeDisallowed WindowTabbingMode = 2
 )
 
-func (e NSWindowTabbingMode) String() string {
+// String returns the WindowTabbingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowTabbingMode) String() string {
 	switch e {
-	case NSWindowTabbingModeAutomatic:
-		return "NSWindowTabbingModeAutomatic"
-	case NSWindowTabbingModePreferred:
-		return "NSWindowTabbingModePreferred"
-	case NSWindowTabbingModeDisallowed:
-		return "NSWindowTabbingModeDisallowed"
+	case WindowTabbingModeAutomatic:
+		return "WindowTabbingModeAutomatic"
+	case WindowTabbingModePreferred:
+		return "WindowTabbingModePreferred"
+	case WindowTabbingModeDisallowed:
+		return "WindowTabbingModeDisallowed"
 	default:
-		return fmt.Sprintf("NSWindowTabbingMode(%d)", int64(e))
+		return fmt.Sprintf("WindowTabbingMode(%d)", int64(e))
 	}
 }
 
 // Specifies the appearance of the window’s title bar area.
-type NSWindowTitleVisibility int64
+type WindowTitleVisibility int64
 
 const (
-	NSWindowTitleVisible NSWindowTitleVisibility = 0
-	NSWindowTitleHidden  NSWindowTitleVisibility = 1
+	WindowTitleVisible WindowTitleVisibility = 0
+	WindowTitleHidden  WindowTitleVisibility = 1
 )
 
-func (e NSWindowTitleVisibility) String() string {
+// String returns the WindowTitleVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowTitleVisibility) String() string {
 	switch e {
-	case NSWindowTitleVisible:
-		return "NSWindowTitleVisible"
-	case NSWindowTitleHidden:
-		return "NSWindowTitleHidden"
+	case WindowTitleVisible:
+		return "WindowTitleVisible"
+	case WindowTitleHidden:
+		return "WindowTitleHidden"
 	default:
-		return fmt.Sprintf("NSWindowTitleVisibility(%d)", int64(e))
+		return fmt.Sprintf("WindowTitleVisibility(%d)", int64(e))
 	}
 }
 
 // Styles that determine the appearance and location of the toolbar in relation to the title bar.
-type NSWindowToolbarStyle int64
+type WindowToolbarStyle int64
 
 const (
-	NSWindowToolbarStyleAutomatic      NSWindowToolbarStyle = 0
-	NSWindowToolbarStyleExpanded       NSWindowToolbarStyle = 1
-	NSWindowToolbarStylePreference     NSWindowToolbarStyle = 2
-	NSWindowToolbarStyleUnified        NSWindowToolbarStyle = 3
-	NSWindowToolbarStyleUnifiedCompact NSWindowToolbarStyle = 4
+	WindowToolbarStyleAutomatic      WindowToolbarStyle = 0
+	WindowToolbarStyleExpanded       WindowToolbarStyle = 1
+	WindowToolbarStylePreference     WindowToolbarStyle = 2
+	WindowToolbarStyleUnified        WindowToolbarStyle = 3
+	WindowToolbarStyleUnifiedCompact WindowToolbarStyle = 4
 )
 
-func (e NSWindowToolbarStyle) String() string {
+// String returns the WindowToolbarStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowToolbarStyle) String() string {
 	switch e {
-	case NSWindowToolbarStyleAutomatic:
-		return "NSWindowToolbarStyleAutomatic"
-	case NSWindowToolbarStyleExpanded:
-		return "NSWindowToolbarStyleExpanded"
-	case NSWindowToolbarStylePreference:
-		return "NSWindowToolbarStylePreference"
-	case NSWindowToolbarStyleUnified:
-		return "NSWindowToolbarStyleUnified"
-	case NSWindowToolbarStyleUnifiedCompact:
-		return "NSWindowToolbarStyleUnifiedCompact"
+	case WindowToolbarStyleAutomatic:
+		return "WindowToolbarStyleAutomatic"
+	case WindowToolbarStyleExpanded:
+		return "WindowToolbarStyleExpanded"
+	case WindowToolbarStylePreference:
+		return "WindowToolbarStylePreference"
+	case WindowToolbarStyleUnified:
+		return "WindowToolbarStyleUnified"
+	case WindowToolbarStyleUnifiedCompact:
+		return "WindowToolbarStyleUnifiedCompact"
 	default:
-		return fmt.Sprintf("NSWindowToolbarStyle(%d)", int64(e))
+		return fmt.Sprintf("WindowToolbarStyle(%d)", int64(e))
 	}
 }
 
 // A value that indicates the user’s preference for window tabbing.
-type NSWindowUserTabbingPreference int64
+type WindowUserTabbingPreference int64
 
 const (
-	NSWindowUserTabbingPreferenceManual       NSWindowUserTabbingPreference = 0
-	NSWindowUserTabbingPreferenceAlways       NSWindowUserTabbingPreference = 1
-	NSWindowUserTabbingPreferenceInFullScreen NSWindowUserTabbingPreference = 2
+	WindowUserTabbingPreferenceManual       WindowUserTabbingPreference = 0
+	WindowUserTabbingPreferenceAlways       WindowUserTabbingPreference = 1
+	WindowUserTabbingPreferenceInFullScreen WindowUserTabbingPreference = 2
 )
 
-func (e NSWindowUserTabbingPreference) String() string {
+// String returns the WindowUserTabbingPreference constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WindowUserTabbingPreference) String() string {
 	switch e {
-	case NSWindowUserTabbingPreferenceManual:
-		return "NSWindowUserTabbingPreferenceManual"
-	case NSWindowUserTabbingPreferenceAlways:
-		return "NSWindowUserTabbingPreferenceAlways"
-	case NSWindowUserTabbingPreferenceInFullScreen:
-		return "NSWindowUserTabbingPreferenceInFullScreen"
+	case WindowUserTabbingPreferenceManual:
+		return "WindowUserTabbingPreferenceManual"
+	case WindowUserTabbingPreferenceAlways:
+		return "WindowUserTabbingPreferenceAlways"
+	case WindowUserTabbingPreferenceInFullScreen:
+		return "WindowUserTabbingPreferenceInFullScreen"
 	default:
-		return fmt.Sprintf("NSWindowUserTabbingPreference(%d)", int64(e))
+		return fmt.Sprintf("WindowUserTabbingPreference(%d)", int64(e))
 	}
 }
 
 // The types of privileged file operations that can be authorized by the user.
-type NSWorkspaceAuthorizationType int64
+type WorkspaceAuthorizationType int64
 
 const (
-	NSWorkspaceAuthorizationTypeCreateSymbolicLink NSWorkspaceAuthorizationType = 0
-	NSWorkspaceAuthorizationTypeSetAttributes      NSWorkspaceAuthorizationType = 1
-	NSWorkspaceAuthorizationTypeReplaceFile        NSWorkspaceAuthorizationType = 2
+	WorkspaceAuthorizationTypeCreateSymbolicLink WorkspaceAuthorizationType = 0
+	WorkspaceAuthorizationTypeSetAttributes      WorkspaceAuthorizationType = 1
+	WorkspaceAuthorizationTypeReplaceFile        WorkspaceAuthorizationType = 2
 )
 
-func (e NSWorkspaceAuthorizationType) String() string {
+// String returns the WorkspaceAuthorizationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WorkspaceAuthorizationType) String() string {
 	switch e {
-	case NSWorkspaceAuthorizationTypeCreateSymbolicLink:
-		return "NSWorkspaceAuthorizationTypeCreateSymbolicLink"
-	case NSWorkspaceAuthorizationTypeSetAttributes:
-		return "NSWorkspaceAuthorizationTypeSetAttributes"
-	case NSWorkspaceAuthorizationTypeReplaceFile:
-		return "NSWorkspaceAuthorizationTypeReplaceFile"
+	case WorkspaceAuthorizationTypeCreateSymbolicLink:
+		return "WorkspaceAuthorizationTypeCreateSymbolicLink"
+	case WorkspaceAuthorizationTypeSetAttributes:
+		return "WorkspaceAuthorizationTypeSetAttributes"
+	case WorkspaceAuthorizationTypeReplaceFile:
+		return "WorkspaceAuthorizationTypeReplaceFile"
 	default:
-		return fmt.Sprintf("NSWorkspaceAuthorizationType(%d)", int64(e))
+		return fmt.Sprintf("WorkspaceAuthorizationType(%d)", int64(e))
 	}
 }
 
 // Constants that describe options for creating icons.
 // Bitmask — values may be combined with |.
-type NSWorkspaceIconCreationOptions uint64
+type WorkspaceIconCreationOptions uint64
 
 const (
-	NSExcludeQuickDrawElementsIconCreationOption NSWorkspaceIconCreationOptions = 2
-	NSExclude10_4ElementsIconCreationOption      NSWorkspaceIconCreationOptions = 4
+	ExcludeQuickDrawElementsIconCreationOption WorkspaceIconCreationOptions = 2
+	Exclude10_4ElementsIconCreationOption      WorkspaceIconCreationOptions = 4
 )
 
-func (e NSWorkspaceIconCreationOptions) String() string {
+// String returns the WorkspaceIconCreationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WorkspaceIconCreationOptions) String() string {
 	var parts []string
-	if e&NSExcludeQuickDrawElementsIconCreationOption != 0 {
-		parts = append(parts, "NSExcludeQuickDrawElementsIconCreationOption")
+	if e&ExcludeQuickDrawElementsIconCreationOption != 0 {
+		parts = append(parts, "ExcludeQuickDrawElementsIconCreationOption")
 	}
-	if e&NSExclude10_4ElementsIconCreationOption != 0 {
-		parts = append(parts, "NSExclude10_4ElementsIconCreationOption")
+	if e&Exclude10_4ElementsIconCreationOption != 0 {
+		parts = append(parts, "Exclude10_4ElementsIconCreationOption")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7873,72 +8304,74 @@ func (e NSWorkspaceIconCreationOptions) String() string {
 //
 // Deprecated: since macOS 10.11.
 // Bitmask — values may be combined with |.
-type NSWorkspaceLaunchOptions uint64
+type WorkspaceLaunchOptions uint64
 
 const (
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setForPrinting:YES] instead.
-	NSWorkspaceLaunchAndPrint NSWorkspaceLaunchOptions = 2
+	WorkspaceLaunchAndPrint WorkspaceLaunchOptions = 2
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setPromptsUserIfNeeded:YES] instead.
-	NSWorkspaceLaunchWithErrorPresentation NSWorkspaceLaunchOptions = 64
+	WorkspaceLaunchWithErrorPresentation WorkspaceLaunchOptions = 64
 	// Deprecated: This option does nothing.
-	NSWorkspaceLaunchInhibitingBackgroundOnly NSWorkspaceLaunchOptions = 128
+	WorkspaceLaunchInhibitingBackgroundOnly WorkspaceLaunchOptions = 128
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setAddsToRecentItems:YES] instead.
-	NSWorkspaceLaunchWithoutAddingToRecents NSWorkspaceLaunchOptions = 256
+	WorkspaceLaunchWithoutAddingToRecents WorkspaceLaunchOptions = 256
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setActivates:NO] instead.
-	NSWorkspaceLaunchWithoutActivation NSWorkspaceLaunchOptions = 512
+	WorkspaceLaunchWithoutActivation WorkspaceLaunchOptions = 512
 	// Deprecated: When using NSWorkspaceOpenConfiguration, all launches are asynchronous.
-	NSWorkspaceLaunchAsync NSWorkspaceLaunchOptions = 65536
+	WorkspaceLaunchAsync WorkspaceLaunchOptions = 65536
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setCreatesNewApplicationInstance:YES] instead.
-	NSWorkspaceLaunchNewInstance NSWorkspaceLaunchOptions = 524288
+	WorkspaceLaunchNewInstance WorkspaceLaunchOptions = 524288
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setHides:YES] instead.
-	NSWorkspaceLaunchAndHide NSWorkspaceLaunchOptions = 1048576
+	WorkspaceLaunchAndHide WorkspaceLaunchOptions = 1048576
 	// Deprecated: Use -[NSWorkspaceOpenConfiguration setHidesOthers:YES] instead.
-	NSWorkspaceLaunchAndHideOthers NSWorkspaceLaunchOptions = 2097152
+	WorkspaceLaunchAndHideOthers WorkspaceLaunchOptions = 2097152
 	// Deprecated: Use NSWorkspaceOpenConfiguration instead.
-	NSWorkspaceLaunchDefault NSWorkspaceLaunchOptions = 65536
+	WorkspaceLaunchDefault WorkspaceLaunchOptions = 65536
 	// Deprecated: The Classic environment is no longer supported.
-	NSWorkspaceLaunchAllowingClassicStartup NSWorkspaceLaunchOptions = 131072
+	WorkspaceLaunchAllowingClassicStartup WorkspaceLaunchOptions = 131072
 	// Deprecated: The Classic environment is no longer supported.
-	NSWorkspaceLaunchPreferringClassic NSWorkspaceLaunchOptions = 262144
+	WorkspaceLaunchPreferringClassic WorkspaceLaunchOptions = 262144
 )
 
-func (e NSWorkspaceLaunchOptions) String() string {
+// String returns the WorkspaceLaunchOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WorkspaceLaunchOptions) String() string {
 	var parts []string
-	if e&NSWorkspaceLaunchAndPrint != 0 {
-		parts = append(parts, "NSWorkspaceLaunchAndPrint")
+	if e&WorkspaceLaunchAndPrint != 0 {
+		parts = append(parts, "WorkspaceLaunchAndPrint")
 	}
-	if e&NSWorkspaceLaunchWithErrorPresentation != 0 {
-		parts = append(parts, "NSWorkspaceLaunchWithErrorPresentation")
+	if e&WorkspaceLaunchWithErrorPresentation != 0 {
+		parts = append(parts, "WorkspaceLaunchWithErrorPresentation")
 	}
-	if e&NSWorkspaceLaunchInhibitingBackgroundOnly != 0 {
-		parts = append(parts, "NSWorkspaceLaunchInhibitingBackgroundOnly")
+	if e&WorkspaceLaunchInhibitingBackgroundOnly != 0 {
+		parts = append(parts, "WorkspaceLaunchInhibitingBackgroundOnly")
 	}
-	if e&NSWorkspaceLaunchWithoutAddingToRecents != 0 {
-		parts = append(parts, "NSWorkspaceLaunchWithoutAddingToRecents")
+	if e&WorkspaceLaunchWithoutAddingToRecents != 0 {
+		parts = append(parts, "WorkspaceLaunchWithoutAddingToRecents")
 	}
-	if e&NSWorkspaceLaunchWithoutActivation != 0 {
-		parts = append(parts, "NSWorkspaceLaunchWithoutActivation")
+	if e&WorkspaceLaunchWithoutActivation != 0 {
+		parts = append(parts, "WorkspaceLaunchWithoutActivation")
 	}
-	if e&NSWorkspaceLaunchAsync != 0 {
-		parts = append(parts, "NSWorkspaceLaunchAsync")
+	if e&WorkspaceLaunchAsync != 0 {
+		parts = append(parts, "WorkspaceLaunchAsync")
 	}
-	if e&NSWorkspaceLaunchNewInstance != 0 {
-		parts = append(parts, "NSWorkspaceLaunchNewInstance")
+	if e&WorkspaceLaunchNewInstance != 0 {
+		parts = append(parts, "WorkspaceLaunchNewInstance")
 	}
-	if e&NSWorkspaceLaunchAndHide != 0 {
-		parts = append(parts, "NSWorkspaceLaunchAndHide")
+	if e&WorkspaceLaunchAndHide != 0 {
+		parts = append(parts, "WorkspaceLaunchAndHide")
 	}
-	if e&NSWorkspaceLaunchAndHideOthers != 0 {
-		parts = append(parts, "NSWorkspaceLaunchAndHideOthers")
+	if e&WorkspaceLaunchAndHideOthers != 0 {
+		parts = append(parts, "WorkspaceLaunchAndHideOthers")
 	}
-	if e&NSWorkspaceLaunchDefault != 0 {
-		parts = append(parts, "NSWorkspaceLaunchDefault")
+	if e&WorkspaceLaunchDefault != 0 {
+		parts = append(parts, "WorkspaceLaunchDefault")
 	}
-	if e&NSWorkspaceLaunchAllowingClassicStartup != 0 {
-		parts = append(parts, "NSWorkspaceLaunchAllowingClassicStartup")
+	if e&WorkspaceLaunchAllowingClassicStartup != 0 {
+		parts = append(parts, "WorkspaceLaunchAllowingClassicStartup")
 	}
-	if e&NSWorkspaceLaunchPreferringClassic != 0 {
-		parts = append(parts, "NSWorkspaceLaunchPreferringClassic")
+	if e&WorkspaceLaunchPreferringClassic != 0 {
+		parts = append(parts, "WorkspaceLaunchPreferringClassic")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -7947,142 +8380,152 @@ func (e NSWorkspaceLaunchOptions) String() string {
 }
 
 // Constants that specify the writing direction.
-type NSWritingDirection int64
+type WritingDirection int64
 
 const (
 	// The writing direction of the current script that the system determines using the Unicode Bidi Algorithm rules P2 and P3.
-	NSWritingDirectionNatural NSWritingDirection = -1
+	WritingDirectionNatural WritingDirection = -1
 	// The writing direction is left to right.
-	NSWritingDirectionLeftToRight NSWritingDirection = 0
+	WritingDirectionLeftToRight WritingDirection = 0
 	// The writing direction is right to left.
-	NSWritingDirectionRightToLeft NSWritingDirection = 1
+	WritingDirectionRightToLeft WritingDirection = 1
 )
 
-func (e NSWritingDirection) String() string {
+// String returns the WritingDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingDirection) String() string {
 	switch e {
-	case NSWritingDirectionNatural:
-		return "NSWritingDirectionNatural"
-	case NSWritingDirectionLeftToRight:
-		return "NSWritingDirectionLeftToRight"
-	case NSWritingDirectionRightToLeft:
-		return "NSWritingDirectionRightToLeft"
+	case WritingDirectionNatural:
+		return "WritingDirectionNatural"
+	case WritingDirectionLeftToRight:
+		return "WritingDirectionLeftToRight"
+	case WritingDirectionRightToLeft:
+		return "WritingDirectionRightToLeft"
 	default:
-		return fmt.Sprintf("NSWritingDirection(%d)", int64(e))
+		return fmt.Sprintf("WritingDirection(%d)", int64(e))
 	}
 }
 
 // Constants that specify the Writing Tools experience for the underlying view.
-type NSWritingToolsBehavior int64
+type WritingToolsBehavior int64
 
 const (
 	// An option to prevent Writing Tools from modifying the text in the view.
-	NSWritingToolsBehaviorNone NSWritingToolsBehavior = -1
+	WritingToolsBehaviorNone WritingToolsBehavior = -1
 	// An option to let the system determine the best way to enable Writing Tools for the view.
-	NSWritingToolsBehaviorDefault NSWritingToolsBehavior = 0
+	WritingToolsBehaviorDefault WritingToolsBehavior = 0
 	// An option to provide the complete Writing Tools experience for the text view.
-	NSWritingToolsBehaviorComplete NSWritingToolsBehavior = 1
+	WritingToolsBehaviorComplete WritingToolsBehavior = 1
 	// An option to provide a limited, overlay-panel experience for the text view.
-	NSWritingToolsBehaviorLimited NSWritingToolsBehavior = 2
+	WritingToolsBehaviorLimited WritingToolsBehavior = 2
 )
 
-func (e NSWritingToolsBehavior) String() string {
+// String returns the WritingToolsBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsBehavior) String() string {
 	switch e {
-	case NSWritingToolsBehaviorNone:
-		return "NSWritingToolsBehaviorNone"
-	case NSWritingToolsBehaviorDefault:
-		return "NSWritingToolsBehaviorDefault"
-	case NSWritingToolsBehaviorComplete:
-		return "NSWritingToolsBehaviorComplete"
-	case NSWritingToolsBehaviorLimited:
-		return "NSWritingToolsBehaviorLimited"
+	case WritingToolsBehaviorNone:
+		return "WritingToolsBehaviorNone"
+	case WritingToolsBehaviorDefault:
+		return "WritingToolsBehaviorDefault"
+	case WritingToolsBehaviorComplete:
+		return "WritingToolsBehaviorComplete"
+	case WritingToolsBehaviorLimited:
+		return "WritingToolsBehaviorLimited"
 	default:
-		return fmt.Sprintf("NSWritingToolsBehavior(%d)", int64(e))
+		return fmt.Sprintf("WritingToolsBehavior(%d)", int64(e))
 	}
 }
 
 // The states that indicate the current activity, if any, Writing Tools is performing in your view. Making changes to your view requires several different levels of interaction. Initially, Writing Tools displays its UI and collects information about what the person wants to do. When the person selects an operation, Writing Tools sends the relevant details to a large language model (LLM) and processes the results. It then works with the custom view to integrate any changes into the view’s text storage. During each of these activities, the coordinator reflects what’s happening in its “NSWritingToolsCoordinator/state“ property. You can use the current state as a guide to making decisions in other parts of your view.
-type NSWritingToolsCoordinatorState int64
+type WritingToolsCoordinatorState int64
 
 const (
 	// A state that indicates Writing Tools isn’t currently performing any work on your view’s content. The coordinator starts in the `inactive` state, and transitions immediately to the ``noninteractive`` or ``interactiveResting`` state when someone chooses an option from the Writing Tools UI. After the coordinator finishes incorporating any changes for the current operation, it returns to the `inactive` state and waits for the person to choose a different option or dismiss the Writing Tools UI.
-	NSWritingToolsCoordinatorStateInactive NSWritingToolsCoordinatorState = 0
+	WritingToolsCoordinatorStateInactive WritingToolsCoordinatorState = 0
 	// A state that indicates Writing Tools is handling interactions in the system UI, instead of in your view. Writing Tools transitions to this state when the coordinator uses the ``NSWritingToolsBehavior/limited`` experience or when someone chooses an option that displays its results in the Writing Tools UI. When the person accepts the changes from the tool or dismisses the Writing Tools UI, the coordinator returns to the ``inactive`` state. If the person discards the change and selects a tool with an interactive experience instead, the coordinator transitions to the ``interactiveResting`` state.
-	NSWritingToolsCoordinatorStateNoninteractive NSWritingToolsCoordinatorState = 1
+	WritingToolsCoordinatorStateNoninteractive WritingToolsCoordinatorState = 1
 	// A state that indicates Writing Tools is in the resting state for an inline editing experience. When someone initially selects a tool with an interactive experience, the coordinator transitions briefly to this state and starts the operation. The coordinator transitions swiftly to the ``interactiveStreaming`` state when it submits the request and delivers the results to your view. When it finishes delivering the results, it transitions back to the `interactiveResting` state and awaits further commands. If the person accepts the changes or dismisses the Writing Tools UI, the coordinator transitions from this state to the ``inactive`` state.
-	NSWritingToolsCoordinatorStateInteractiveResting NSWritingToolsCoordinatorState = 2
+	WritingToolsCoordinatorStateInteractiveResting WritingToolsCoordinatorState = 2
 	// A state that indicates Writing Tools is processing a request and incorporating changes interactively into your view. The coordinator transitions swiftly from the ``interactiveResting`` state to this state at the start of an operation. In this state, the coordinator submits the request for processing and delivers the results back to your view. When the coordinator finishes delivering the results, it transitions back to the ``interactiveResting`` state.
-	NSWritingToolsCoordinatorStateInteractiveStreaming NSWritingToolsCoordinatorState = 3
+	WritingToolsCoordinatorStateInteractiveStreaming WritingToolsCoordinatorState = 3
 )
 
-func (e NSWritingToolsCoordinatorState) String() string {
+// String returns the WritingToolsCoordinatorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorState) String() string {
 	switch e {
-	case NSWritingToolsCoordinatorStateInactive:
-		return "NSWritingToolsCoordinatorStateInactive"
-	case NSWritingToolsCoordinatorStateNoninteractive:
-		return "NSWritingToolsCoordinatorStateNoninteractive"
-	case NSWritingToolsCoordinatorStateInteractiveResting:
-		return "NSWritingToolsCoordinatorStateInteractiveResting"
-	case NSWritingToolsCoordinatorStateInteractiveStreaming:
-		return "NSWritingToolsCoordinatorStateInteractiveStreaming"
+	case WritingToolsCoordinatorStateInactive:
+		return "WritingToolsCoordinatorStateInactive"
+	case WritingToolsCoordinatorStateNoninteractive:
+		return "WritingToolsCoordinatorStateNoninteractive"
+	case WritingToolsCoordinatorStateInteractiveResting:
+		return "WritingToolsCoordinatorStateInteractiveResting"
+	case WritingToolsCoordinatorStateInteractiveStreaming:
+		return "WritingToolsCoordinatorStateInteractiveStreaming"
 	default:
-		return fmt.Sprintf("NSWritingToolsCoordinatorState(%d)", int64(e))
+		return fmt.Sprintf("WritingToolsCoordinatorState(%d)", int64(e))
 	}
 }
 
 // Constants that specify the reason you updated your view’s content outside of the Writing Tools workflow. If you modify your view’s text storage while Writing Tools is active, report those changes to your “NSWritingToolsCoordinator“ object so it can track them correctly. Call the “NSWritingToolsCoordinator/updateRange(_:with:reason:forContextWithIdentifier:)“ method to report changes that occur inside one of your context objects. Call the “NSWritingToolsCoordinator/updateForReflowedTextInContextWithIdentifier(_:)“ method for changes that affect the layout of your text, such as text insertions before a context object or changes to your view’s frame rectangle.
-type NSWritingToolsCoordinatorTextUpdateReason int64
+type WritingToolsCoordinatorTextUpdateReason int64
 
 const (
 	// An operation that involved a person editing the text in your view. Specify this option when the changes come from the text input system.
-	NSWritingToolsCoordinatorTextUpdateReasonTyping NSWritingToolsCoordinatorTextUpdateReason = 0
+	WritingToolsCoordinatorTextUpdateReasonTyping WritingToolsCoordinatorTextUpdateReason = 0
 	// An operation that changed the view’s text as part of an undo or redo command. Specify this option when an undo or redo command initiated the change to your view.
-	NSWritingToolsCoordinatorTextUpdateReasonUndoRedo NSWritingToolsCoordinatorTextUpdateReason = 1
+	WritingToolsCoordinatorTextUpdateReasonUndoRedo WritingToolsCoordinatorTextUpdateReason = 1
 )
 
-func (e NSWritingToolsCoordinatorTextUpdateReason) String() string {
+// String returns the WritingToolsCoordinatorTextUpdateReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorTextUpdateReason) String() string {
 	switch e {
-	case NSWritingToolsCoordinatorTextUpdateReasonTyping:
-		return "NSWritingToolsCoordinatorTextUpdateReasonTyping"
-	case NSWritingToolsCoordinatorTextUpdateReasonUndoRedo:
-		return "NSWritingToolsCoordinatorTextUpdateReasonUndoRedo"
+	case WritingToolsCoordinatorTextUpdateReasonTyping:
+		return "WritingToolsCoordinatorTextUpdateReasonTyping"
+	case WritingToolsCoordinatorTextUpdateReasonUndoRedo:
+		return "WritingToolsCoordinatorTextUpdateReasonUndoRedo"
 	default:
-		return fmt.Sprintf("NSWritingToolsCoordinatorTextUpdateReason(%d)", int64(e))
+		return fmt.Sprintf("WritingToolsCoordinatorTextUpdateReason(%d)", int64(e))
 	}
 }
 
 // Constants to specify what type of content to allow in Writing Tools suggestions or rewrites.
 // Bitmask — values may be combined with |.
-type NSWritingToolsResultOptions uint64
+type WritingToolsResultOptions uint64
 
 const (
-	NSWritingToolsResultDefault NSWritingToolsResultOptions = 0
+	WritingToolsResultDefault WritingToolsResultOptions = 0
 	// An option to allow only plain text without any attributes in the returned text.
-	NSWritingToolsResultPlainText NSWritingToolsResultOptions = 1
+	WritingToolsResultPlainText WritingToolsResultOptions = 1
 	// An option to include style attributes consistent with the RTF format in the returned text.
-	NSWritingToolsResultRichText NSWritingToolsResultOptions = 2
+	WritingToolsResultRichText WritingToolsResultOptions = 2
 	// An option to allow list-style formatting in the returned text.
-	NSWritingToolsResultList NSWritingToolsResultOptions = 4
+	WritingToolsResultList WritingToolsResultOptions = 4
 	// An option to allow tabular layout attributes in the returned text.
-	NSWritingToolsResultTable              NSWritingToolsResultOptions = 8
-	NSWritingToolsResultPresentationIntent NSWritingToolsResultOptions = 16
+	WritingToolsResultTable              WritingToolsResultOptions = 8
+	WritingToolsResultPresentationIntent WritingToolsResultOptions = 16
 )
 
-func (e NSWritingToolsResultOptions) String() string {
+// String returns the WritingToolsResultOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsResultOptions) String() string {
 	var parts []string
-	if e&NSWritingToolsResultPlainText != 0 {
-		parts = append(parts, "NSWritingToolsResultPlainText")
+	if e&WritingToolsResultPlainText != 0 {
+		parts = append(parts, "WritingToolsResultPlainText")
 	}
-	if e&NSWritingToolsResultRichText != 0 {
-		parts = append(parts, "NSWritingToolsResultRichText")
+	if e&WritingToolsResultRichText != 0 {
+		parts = append(parts, "WritingToolsResultRichText")
 	}
-	if e&NSWritingToolsResultList != 0 {
-		parts = append(parts, "NSWritingToolsResultList")
+	if e&WritingToolsResultList != 0 {
+		parts = append(parts, "WritingToolsResultList")
 	}
-	if e&NSWritingToolsResultTable != 0 {
-		parts = append(parts, "NSWritingToolsResultTable")
+	if e&WritingToolsResultTable != 0 {
+		parts = append(parts, "WritingToolsResultTable")
 	}
-	if e&NSWritingToolsResultPresentationIntent != 0 {
-		parts = append(parts, "NSWritingToolsResultPresentationIntent")
+	if e&WritingToolsResultPresentationIntent != 0 {
+		parts = append(parts, "WritingToolsResultPresentationIntent")
 	}
 	if len(parts) == 0 {
 		return "0"

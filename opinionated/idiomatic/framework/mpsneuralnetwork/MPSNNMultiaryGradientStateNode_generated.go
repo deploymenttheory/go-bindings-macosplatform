@@ -5,70 +5,70 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNMultiaryGradientStateNode wraps [raw.MPSNNMultiaryGradientStateNode] with a fluent Go API.
+// NNMultiaryGradientStateNode is an idiomatic wrapper over the Objective-C class MPSNNMultiaryGradientStateNode.
+//
+// It embeds [NNStateNode], promoting that type's methods.
 type NNMultiaryGradientStateNode struct {
-	inner *raw.MPSNNMultiaryGradientStateNode
+	NNStateNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNMultiaryGradientStateNode].
-func (x *NNMultiaryGradientStateNode) Unwrap() *raw.MPSNNMultiaryGradientStateNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNMultiaryGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNMultiaryGradientStateNodeFromID adopts an existing object pointer as a NNMultiaryGradientStateNode (nil for 0).
+// NNMultiaryGradientStateNodeFromID adopts an existing Objective-C object as a NNMultiaryGradientStateNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNMultiaryGradientStateNodeFromID(id objc.ID) *NNMultiaryGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNMultiaryGradientStateNode{inner: raw.MPSNNMultiaryGradientStateNodeFromID(id)}
+	x := &NNMultiaryGradientStateNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNNMultiaryGradientStateNode creates a new [NNMultiaryGradientStateNode].
+// nNMultiaryGradientStateNodeAdopt wraps an Objective-C object that this code just created as a
+// NNMultiaryGradientStateNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNMultiaryGradientStateNodeAdopt(id objc.ID) *NNMultiaryGradientStateNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNMultiaryGradientStateNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNMultiaryGradientStateNode creates a new NNMultiaryGradientStateNode.
 func NewNNMultiaryGradientStateNode() *NNMultiaryGradientStateNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNMultiaryGradientStateNode")), objc.RegisterName("new"))
-	return &NNMultiaryGradientStateNode{inner: raw.MPSNNMultiaryGradientStateNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNMultiaryGradientStateNode")), objc.RegisterName("new"))
+	return nNMultiaryGradientStateNodeAdopt(_id)
 }
 
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
-//
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNMultiaryGradientStateNode) WithHandle(handle raw.MPSHandle) *NNMultiaryGradientStateNode {
-	x.inner.MPSNNStateNode.SetHandle(handle)
-	return x
-}
-
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNMultiaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNMultiaryGradientStateNode {
-	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
-//
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 func (x *NNMultiaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNMultiaryGradientStateNode {
-	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
-}
-
-func (x *NNMultiaryGradientStateNode) asNNStateNode() *raw.MPSNNStateNode {
-	return &x.inner.MPSNNStateNode
 }
 
 // NNMultiaryGradientStateNodeable is the interface implemented by [NNMultiaryGradientStateNode], for mocking and DI.
 type NNMultiaryGradientStateNodeable interface {
-	Unwrap() *raw.MPSNNMultiaryGradientStateNode
-	WithHandle(handle raw.MPSHandle) *NNMultiaryGradientStateNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNMultiaryGradientStateNode
 	WithSynchronizeResource(synchronizeResource bool) *NNMultiaryGradientStateNode
 }
 
 var _ NNMultiaryGradientStateNodeable = (*NNMultiaryGradientStateNode)(nil)
+
+var _ NNStateNodeProvider = (*NNMultiaryGradientStateNode)(nil)

@@ -5,272 +5,180 @@
 package launchservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/launchservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// LSCanRefAcceptItem wraps [raw.LSCanRefAcceptItem], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCanRefAcceptItem(inItemFSRef *carboncore.FSRef, inTargetRef *carboncore.FSRef, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags, outAcceptsItem *uint8) error {
-	if _err := purego.NewOSStatus(raw.LSCanRefAcceptItem(inItemFSRef, inTargetRef, raw.LSRolesMask(inRoleMask), raw.LSAcceptanceFlags(inFlags), outAcceptsItem)).Err(); _err != nil {
+var _fnLSCopyApplicationForMIMEType func(objc.ID, LSRolesMask, unsafe.Pointer) int32
+
+// LSCopyApplicationForMIMEType reports an error if the LaunchServices framework function LSCopyApplicationForMIMEType fails.
+func LSCopyApplicationForMIMEType(inMIMEType obj.Object, inRoleMask LSRolesMask) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyApplicationForMIMEType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyApplicationForMIMEType, _lib, "LSCopyApplicationForMIMEType")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyApplicationForMIMEType(objref.IDOf(inMIMEType), inRoleMask, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyDisplayNameForURL func(objc.ID, unsafe.Pointer) int32
+
+// LSCopyDisplayNameForURL reports an error if the LaunchServices framework function LSCopyDisplayNameForURL fails.
+func LSCopyDisplayNameForURL(inURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyDisplayNameForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyDisplayNameForURL, _lib, "LSCopyDisplayNameForURL")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyDisplayNameForURL(objref.IDOf(inURL), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyKindStringForMIMEType func(objc.ID, unsafe.Pointer) int32
+
+// LSCopyKindStringForMIMEType reports an error if the LaunchServices framework function LSCopyKindStringForMIMEType fails.
+func LSCopyKindStringForMIMEType(inMIMEType obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyKindStringForMIMEType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForMIMEType, _lib, "LSCopyKindStringForMIMEType")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyKindStringForMIMEType(objref.IDOf(inMIMEType), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyKindStringForTypeInfo func(int, int, objc.ID, unsafe.Pointer) int32
+
+// LSCopyKindStringForTypeInfo reports an error if the LaunchServices framework function LSCopyKindStringForTypeInfo fails.
+func LSCopyKindStringForTypeInfo(inType int, inCreator int, inExtension obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyKindStringForTypeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForTypeInfo, _lib, "LSCopyKindStringForTypeInfo")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyKindStringForTypeInfo(inType, inCreator, objref.IDOf(inExtension), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyKindStringForURL func(objc.ID, unsafe.Pointer) int32
+
+// LSCopyKindStringForURL reports an error if the LaunchServices framework function LSCopyKindStringForURL fails.
+func LSCopyKindStringForURL(inURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyKindStringForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForURL, _lib, "LSCopyKindStringForURL")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyKindStringForURL(objref.IDOf(inURL), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSOpenCFURLRef func(objc.ID, unsafe.Pointer) int32
+
+// LSOpenCFURLRef reports an error if the LaunchServices framework function LSOpenCFURLRef fails.
+func LSOpenCFURLRef(inURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSOpenCFURLRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSOpenCFURLRef, _lib, "LSOpenCFURLRef")
+	}
+	var _out0 uintptr
+	_rc := _fnLSOpenCFURLRef(objref.IDOf(inURL), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSRegisterURL func(objc.ID, uint8) int32
+
+// LSRegisterURL reports an error if the LaunchServices framework function LSRegisterURL fails.
+func LSRegisterURL(inURL obj.Object, inUpdate uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSRegisterURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSRegisterURL, _lib, "LSRegisterURL")
+	}
+	_rc := _fnLSRegisterURL(objref.IDOf(inURL), inUpdate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// LSCanURLAcceptURL wraps [raw.LSCanURLAcceptURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCanURLAcceptURL(inItemURL objc.ID, inTargetURL objc.ID, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags, outAcceptsItem *uint8) error {
-	if _err := purego.NewOSStatus(raw.LSCanURLAcceptURL(purego.CFRef(inItemURL), purego.CFRef(inTargetURL), raw.LSRolesMask(inRoleMask), raw.LSAcceptanceFlags(inFlags), outAcceptsItem)).Err(); _err != nil {
+var _fnLSSetDefaultHandlerForURLScheme func(objc.ID, objc.ID) int32
+
+// LSSetDefaultHandlerForURLScheme reports an error if the LaunchServices framework function LSSetDefaultHandlerForURLScheme fails.
+func LSSetDefaultHandlerForURLScheme(inURLScheme obj.Object, inHandlerBundleID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSetDefaultHandlerForURLScheme == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSetDefaultHandlerForURLScheme, _lib, "LSSetDefaultHandlerForURLScheme")
+	}
+	_rc := _fnLSSetDefaultHandlerForURLScheme(objref.IDOf(inURLScheme), objref.IDOf(inHandlerBundleID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// LSCopyApplicationForMIMEType wraps [raw.LSCopyApplicationForMIMEType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyApplicationForMIMEType(inMIMEType objc.ID, inRoleMask LSRolesMask) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyApplicationForMIMEType(purego.CFRef(inMIMEType), raw.LSRolesMask(inRoleMask), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
+var _fnLSSetDefaultRoleHandlerForContentType func(objc.ID, LSRolesMask, objc.ID) int32
 
-// LSCopyDisplayNameForRef wraps [raw.LSCopyDisplayNameForRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyDisplayNameForRef(inRef *carboncore.FSRef) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyDisplayNameForRef(inRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+// LSSetDefaultRoleHandlerForContentType reports an error if the LaunchServices framework function LSSetDefaultRoleHandlerForContentType fails.
+func LSSetDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSRolesMask, inHandlerBundleID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSetDefaultRoleHandlerForContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSetDefaultRoleHandlerForContentType, _lib, "LSSetDefaultRoleHandlerForContentType")
 	}
-	return objc.ID(_out0), nil
-}
-
-// LSCopyDisplayNameForURL wraps [raw.LSCopyDisplayNameForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyDisplayNameForURL(inURL objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyDisplayNameForURL(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSCopyItemAttribute wraps [raw.LSCopyItemAttribute], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyItemAttribute(inItem, raw.LSRolesMask(inRoles), purego.CFRef(inAttributeName), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSCopyItemAttributes wraps [raw.LSCopyItemAttributes], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemAttributes(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeNames objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyItemAttributes(inItem, raw.LSRolesMask(inRoles), purego.CFRef(inAttributeNames), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSCopyItemInfoForRef wraps [raw.LSCopyItemInfoForRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemInfoForRef(inItemRef *carboncore.FSRef, inWhichInfo LSRequestedInfo, outItemInfo *raw.LSItemInfoRecord) error {
-	if _err := purego.NewOSStatus(raw.LSCopyItemInfoForRef(inItemRef, raw.LSRequestedInfo(inWhichInfo), outItemInfo)).Err(); _err != nil {
+	_rc := _fnLSSetDefaultRoleHandlerForContentType(objref.IDOf(inContentType), inRole, objref.IDOf(inHandlerBundleID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// LSCopyItemInfoForURL wraps [raw.LSCopyItemInfoForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemInfoForURL(inURL objc.ID, inWhichInfo LSRequestedInfo, outItemInfo *raw.LSItemInfoRecord) error {
-	if _err := purego.NewOSStatus(raw.LSCopyItemInfoForURL(purego.CFRef(inURL), raw.LSRequestedInfo(inWhichInfo), outItemInfo)).Err(); _err != nil {
+var _fnLSSetExtensionHiddenForURL func(objc.ID, uint8) int32
+
+// LSSetExtensionHiddenForURL reports an error if the LaunchServices framework function LSSetExtensionHiddenForURL fails.
+func LSSetExtensionHiddenForURL(inURL obj.Object, inHide uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSetExtensionHiddenForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSetExtensionHiddenForURL, _lib, "LSSetExtensionHiddenForURL")
+	}
+	_rc := _fnLSSetExtensionHiddenForURL(objref.IDOf(inURL), inHide)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// LSCopyKindStringForMIMEType wraps [raw.LSCopyKindStringForMIMEType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyKindStringForMIMEType(inMIMEType objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyKindStringForMIMEType(purego.CFRef(inMIMEType), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
+var _fnLSSetHandlerOptionsForContentType func(objc.ID, LSHandlerOptions) int32
 
-// LSCopyKindStringForRef wraps [raw.LSCopyKindStringForRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyKindStringForRef(inFSRef *carboncore.FSRef) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyKindStringForRef(inFSRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+// LSSetHandlerOptionsForContentType reports an error if the LaunchServices framework function LSSetHandlerOptionsForContentType fails.
+func LSSetHandlerOptionsForContentType(inContentType obj.Object, inOptions LSHandlerOptions) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSetHandlerOptionsForContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSetHandlerOptionsForContentType, _lib, "LSSetHandlerOptionsForContentType")
 	}
-	return objc.ID(_out0), nil
-}
-
-// LSCopyKindStringForTypeInfo wraps [raw.LSCopyKindStringForTypeInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyKindStringForTypeInfo(inType uint, inCreator uint, inExtension objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyKindStringForTypeInfo(inType, inCreator, purego.CFRef(inExtension), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSCopyKindStringForURL wraps [raw.LSCopyKindStringForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyKindStringForURL(inURL objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyKindStringForURL(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSFindApplicationForInfo wraps [raw.LSFindApplicationForInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSFindApplicationForInfo(inCreator uint, inBundleID objc.ID, inName objc.ID, outAppRef *carboncore.FSRef) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSFindApplicationForInfo(inCreator, purego.CFRef(inBundleID), purego.CFRef(inName), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSGetApplicationForInfo wraps [raw.LSGetApplicationForInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetApplicationForInfo(inType uint, inCreator uint, inExtension objc.ID, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSGetApplicationForInfo(inType, inCreator, purego.CFRef(inExtension), raw.LSRolesMask(inRoleMask), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSGetApplicationForItem wraps [raw.LSGetApplicationForItem], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetApplicationForItem(inItemRef *carboncore.FSRef, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSGetApplicationForItem(inItemRef, raw.LSRolesMask(inRoleMask), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSGetApplicationForURL wraps [raw.LSGetApplicationForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetApplicationForURL(inURL objc.ID, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSGetApplicationForURL(purego.CFRef(inURL), raw.LSRolesMask(inRoleMask), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSGetExtensionInfo wraps [raw.LSGetExtensionInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetExtensionInfo(inNameLen uint, inNameBuffer *uint16, outExtStartIndex *uint) error {
-	if _err := purego.NewOSStatus(raw.LSGetExtensionInfo(inNameLen, inNameBuffer, outExtStartIndex)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSOpenCFURLRef wraps [raw.LSOpenCFURLRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSOpenCFURLRef(inURL objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSOpenCFURLRef(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSOpenFSRef wraps [raw.LSOpenFSRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSOpenFSRef(inRef *carboncore.FSRef, outLaunchedRef *carboncore.FSRef) error {
-	if _err := purego.NewOSStatus(raw.LSOpenFSRef(inRef, outLaunchedRef)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSOpenFromRefSpec wraps [raw.LSOpenFromRefSpec], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSOpenFromRefSpec(inLaunchSpec *raw.LSLaunchFSRefSpec, outLaunchedRef *carboncore.FSRef) error {
-	if _err := purego.NewOSStatus(raw.LSOpenFromRefSpec(inLaunchSpec, outLaunchedRef)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSOpenFromURLSpec wraps [raw.LSOpenFromURLSpec], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSOpenFromURLSpec(inLaunchSpec *raw.LSLaunchURLSpec) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSOpenFromURLSpec(inLaunchSpec, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
-
-// LSRegisterFSRef wraps [raw.LSRegisterFSRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSRegisterFSRef(inRef *carboncore.FSRef, inUpdate uint8) error {
-	if _err := purego.NewOSStatus(raw.LSRegisterFSRef(inRef, inUpdate)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSRegisterURL wraps [raw.LSRegisterURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSRegisterURL(inURL objc.ID, inUpdate uint8) error {
-	if _err := purego.NewOSStatus(raw.LSRegisterURL(purego.CFRef(inURL), inUpdate)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSSetDefaultHandlerForURLScheme wraps [raw.LSSetDefaultHandlerForURLScheme], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetDefaultHandlerForURLScheme(inURLScheme objc.ID, inHandlerBundleID objc.ID) error {
-	if _err := purego.NewOSStatus(raw.LSSetDefaultHandlerForURLScheme(purego.CFRef(inURLScheme), purego.CFRef(inHandlerBundleID))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSSetDefaultRoleHandlerForContentType wraps [raw.LSSetDefaultRoleHandlerForContentType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetDefaultRoleHandlerForContentType(inContentType objc.ID, inRole LSRolesMask, inHandlerBundleID objc.ID) error {
-	if _err := purego.NewOSStatus(raw.LSSetDefaultRoleHandlerForContentType(purego.CFRef(inContentType), raw.LSRolesMask(inRole), purego.CFRef(inHandlerBundleID))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSSetExtensionHiddenForRef wraps [raw.LSSetExtensionHiddenForRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetExtensionHiddenForRef(inRef *carboncore.FSRef, inHide uint8) error {
-	if _err := purego.NewOSStatus(raw.LSSetExtensionHiddenForRef(inRef, inHide)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSSetExtensionHiddenForURL wraps [raw.LSSetExtensionHiddenForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetExtensionHiddenForURL(inURL objc.ID, inHide uint8) error {
-	if _err := purego.NewOSStatus(raw.LSSetExtensionHiddenForURL(purego.CFRef(inURL), inHide)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSSetHandlerOptionsForContentType wraps [raw.LSSetHandlerOptionsForContentType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetHandlerOptionsForContentType(inContentType objc.ID, inOptions LSHandlerOptions) error {
-	if _err := purego.NewOSStatus(raw.LSSetHandlerOptionsForContentType(purego.CFRef(inContentType), raw.LSHandlerOptions(inOptions))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// LSSetItemAttribute wraps [raw.LSSetItemAttribute], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName objc.ID, inValue objc.ID) error {
-	if _err := purego.NewOSStatus(raw.LSSetItemAttribute(inItem, raw.LSRolesMask(inRoles), purego.CFRef(inAttributeName), purego.CFRef(inValue))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// ReadIconFromFSRef wraps [raw.ReadIconFromFSRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func ReadIconFromFSRef(ref *carboncore.FSRef, iconFamily ***osservices.IconFamilyResource) error {
-	if _err := purego.NewOSStatus(raw.ReadIconFromFSRef(ref, iconFamily)).Err(); _err != nil {
+	_rc := _fnLSSetHandlerOptionsForContentType(objref.IDOf(inContentType), inOptions)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

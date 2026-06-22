@@ -5,43 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class that defines the management of the initial process of the guest system.
+// BootLoader is an idiomatic wrapper over the Objective-C class VZBootLoader.
 //
-// BootLoader wraps [raw.VZBootLoader] with a fluent Go API.
+// BootLoader is an abstract base — you do not construct it directly. Construct one of [EFIBootLoader], [LinuxBootLoader], [MacOSBootLoader] and pass it where a BootLoader is accepted.
+//
+// The base class that defines the management of the initial process of the guest system.
 type BootLoader struct {
-	inner *raw.VZBootLoader
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZBootLoader].
-func (x *BootLoader) Unwrap() *raw.VZBootLoader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BootLoader) ID() objc.ID { return x.inner.Ptr() }
-
-// BootLoaderFromID adopts an existing object pointer as a BootLoader (nil for 0).
+// BootLoaderFromID adopts an existing Objective-C object as a BootLoader
+// (nil for 0), retaining it and registering a release finalizer.
 func BootLoaderFromID(id objc.ID) *BootLoader {
 	if id == 0 {
 		return nil
 	}
-	return &BootLoader{inner: raw.VZBootLoaderFromID(id)}
+	x := &BootLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBootLoader creates a new [BootLoader].
-func NewBootLoader() *BootLoader {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZBootLoader")), objc.RegisterName("new"))
-	return &BootLoader{inner: raw.VZBootLoaderFromID(_id)}
+// bootLoaderAdopt wraps an Objective-C object that this code just created as a
+// BootLoader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bootLoaderAdopt(id objc.ID) *BootLoader {
+	if id == 0 {
+		return nil
+	}
+	x := &BootLoader{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *BootLoader) asBootLoader() *raw.VZBootLoader { return x.inner }
+// Description returns the object's -description text.
+func (x *BootLoader) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BootLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BootLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BootLoader) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // BootLoaderable is the interface implemented by [BootLoader], for mocking and DI.
 type BootLoaderable interface {
-	Unwrap() *raw.VZBootLoader
+	obj.Object
 }
 
 var _ BootLoaderable = (*BootLoader)(nil)
+
+// isBootLoader marks BootLoader — and, by embedding promotion, its
+// subclasses — as a member of the BootLoader hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BootLoader) isBootLoader() {}
+
+var _ BootLoaderProvider = (*BootLoader)(nil)

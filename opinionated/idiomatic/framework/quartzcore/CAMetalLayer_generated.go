@@ -5,770 +5,598 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A Core Animation layer that Metal can render into, typically displayed onscreen.
+// MetalLayer is an idiomatic wrapper over the Objective-C class CAMetalLayer.
 //
-// MetalLayer wraps [raw.CAMetalLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A Core Animation layer that Metal can render into, typically displayed onscreen.
 type MetalLayer struct {
-	inner *raw.CAMetalLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.CAMetalLayer].
-func (x *MetalLayer) Unwrap() *raw.CAMetalLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetalLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// MetalLayerFromID adopts an existing object pointer as a MetalLayer (nil for 0).
+// MetalLayerFromID adopts an existing Objective-C object as a MetalLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func MetalLayerFromID(id objc.ID) *MetalLayer {
 	if id == 0 {
 		return nil
 	}
-	return &MetalLayer{inner: raw.CAMetalLayerFromID(id)}
-}
-
-// NewMetalLayer creates a new [MetalLayer].
-func NewMetalLayer() *MetalLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAMetalLayer")), objc.RegisterName("new"))
-	return &MetalLayer{inner: raw.CAMetalLayerFromID(_id)}
-}
-
-// The Metal device responsible for the layer’s drawable resources.
-//
-// WithDevice sets the device property and returns the receiver for chaining.
-func (x *MetalLayer) WithDevice(device metal.MTLDevice) *MetalLayer {
-	x.inner.SetDevice(device)
+	x := &MetalLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The pixel format of the layer’s textures.
-//
-// WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *MetalLayer) WithPixelFormat(pixelFormat metal.MTLPixelFormat) *MetalLayer {
-	x.inner.SetPixelFormat(pixelFormat)
-	return x
-}
-
-// A Boolean value that determines whether the layer’s textures are used only for rendering.
-//
-// WithFramebufferOnly sets the framebufferOnly property and returns the receiver for chaining.
-func (x *MetalLayer) WithFramebufferOnly(framebufferOnly bool) *MetalLayer {
-	x.inner.SetFramebufferOnly(framebufferOnly)
-	return x
-}
-
-// The size, in pixels, of textures for rendering layer content.
-//
-// WithDrawableSize sets the drawableSize property and returns the receiver for chaining.
-func (x *MetalLayer) WithDrawableSize(drawableSize corefoundation.CGSize) *MetalLayer {
-	x.inner.SetDrawableSize(drawableSize)
-	return x
-}
-
-// The number of Metal drawables in the resource pool managed by Core Animation.
-//
-// WithMaximumDrawableCount sets the maximumDrawableCount property and returns the receiver for chaining.
-func (x *MetalLayer) WithMaximumDrawableCount(maximumDrawableCount uint) *MetalLayer {
-	x.inner.SetMaximumDrawableCount(maximumDrawableCount)
-	return x
-}
-
-// A Boolean value that determines whether the layer presents its content using a Core Animation transaction.
-//
-// WithPresentsWithTransaction sets the presentsWithTransaction property and returns the receiver for chaining.
-func (x *MetalLayer) WithPresentsWithTransaction(presentsWithTransaction bool) *MetalLayer {
-	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
-	return x
-}
-
-// Metadata describing the tone mapping to apply to the extended dynamic range (EDR) values in the layer.
-//
-// WithEDRMetadata sets the eDRMetadata property and returns the receiver for chaining.
-func (x *MetalLayer) WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer {
-	x.inner.SetEDRMetadata(eDRMetadata.Unwrap())
-	return x
-}
-
-// A Boolean value that determines whether the layer synchronizes its updates to the display’s refresh rate.
-//
-// WithDisplaySyncEnabled sets the displaySyncEnabled property and returns the receiver for chaining.
-func (x *MetalLayer) WithDisplaySyncEnabled(displaySyncEnabled bool) *MetalLayer {
-	x.inner.SetDisplaySyncEnabled(displaySyncEnabled)
-	return x
-}
-
-// A Boolean value that determines whether requests for a new buffer expire if the system can’t satisfy them.
-//
-// WithAllowsNextDrawableTimeout sets the allowsNextDrawableTimeout property and returns the receiver for chaining.
-func (x *MetalLayer) WithAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool) *MetalLayer {
-	x.inner.SetAllowsNextDrawableTimeout(allowsNextDrawableTimeout)
-	return x
-}
-
-// The properties of the Metal performance heads-up display.
-//
-// WithDeveloperHUDProperties sets the developerHUDProperties property and returns the receiver for chaining.
-func (x *MetalLayer) WithDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer {
-	x.inner.SetDeveloperHUDProperties(developerHUDProperties)
-	return x
-}
-
-// The layer’s bounds rectangle. Animatable.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *MetalLayer) WithBounds(bounds corefoundation.CGRect) *MetalLayer {
-	x.inner.CALayer.SetBounds(bounds)
-	return x
-}
-
-// The layer’s position in its superlayer’s coordinate space. Animatable.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *MetalLayer) WithPosition(position corefoundation.CGPoint) *MetalLayer {
-	x.inner.CALayer.SetPosition(position)
-	return x
-}
-
-// The layer’s position on the z axis. Animatable.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
-func (x *MetalLayer) WithZPosition(zPosition float64) *MetalLayer {
-	x.inner.CALayer.SetZPosition(zPosition)
-	return x
-}
-
-// Defines the anchor point of the layer’s bounds rectangle. Animatable.
-//
-// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
-func (x *MetalLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *MetalLayer {
-	x.inner.CALayer.SetAnchorPoint(anchorPoint)
-	return x
-}
-
-// The anchor point for the layer’s position along the z axis. Animatable.
-//
-// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
-func (x *MetalLayer) WithAnchorPointZ(anchorPointZ float64) *MetalLayer {
-	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
-	return x
-}
-
-// The transform applied to the layer’s contents. Animatable.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *MetalLayer) WithTransform(transform raw.CATransform3D) *MetalLayer {
-	x.inner.CALayer.SetTransform(transform)
-	return x
-}
-
-// The layer’s frame rectangle.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *MetalLayer) WithFrame(frame corefoundation.CGRect) *MetalLayer {
-	x.inner.CALayer.SetFrame(frame)
-	return x
-}
-
-// A Boolean indicating whether the layer is displayed. Animatable.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *MetalLayer) WithHidden(hidden bool) *MetalLayer {
-	x.inner.CALayer.SetHidden(hidden)
-	return x
-}
-
-// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-//
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
-func (x *MetalLayer) WithDoubleSided(doubleSided bool) *MetalLayer {
-	x.inner.CALayer.SetDoubleSided(doubleSided)
-	return x
-}
-
-// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-//
-// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
-func (x *MetalLayer) WithGeometryFlipped(geometryFlipped bool) *MetalLayer {
-	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
-	return x
-}
-
-// An array containing the layer’s sublayers.
-//
-// WithSublayers sets the collection, converting the Go slice to an NSArray.
-func (x *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asLayer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CALayer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetSublayers(_arr)
-	return x
-}
-
-// Specifies the transform to apply to sublayers when rendering. Animatable.
-//
-// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
-func (x *MetalLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *MetalLayer {
-	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
-	return x
-}
-
-// An optional layer whose alpha channel is used to mask the layer’s content.
-//
-// WithMask sets the mask property and returns the receiver for chaining.
-func (x *MetalLayer) WithMask(mask LayerProvider) *MetalLayer {
-	x.inner.CALayer.SetMask(mask.asLayer())
-	return x
-}
-
-// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-//
-// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
-func (x *MetalLayer) WithMasksToBounds(masksToBounds bool) *MetalLayer {
-	x.inner.CALayer.SetMasksToBounds(masksToBounds)
-	return x
-}
-
-// An object that provides the contents of the layer. Animatable.
-//
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *MetalLayer) WithContents(contents objc.ID) *MetalLayer {
-	x.inner.CALayer.SetContents(contents)
-	return x
-}
-
-// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-//
-// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
-func (x *MetalLayer) WithContentsRect(contentsRect corefoundation.CGRect) *MetalLayer {
-	x.inner.CALayer.SetContentsRect(contentsRect)
-	return x
-}
-
-// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-//
-// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
-func (x *MetalLayer) WithContentsGravity(contentsGravity *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetContentsGravity(contentsGravity)
-	return x
-}
-
-// The scale factor applied to the layer.
-//
-// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
-func (x *MetalLayer) WithContentsScale(contentsScale float64) *MetalLayer {
-	x.inner.CALayer.SetContentsScale(contentsScale)
-	return x
-}
-
-// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-//
-// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
-func (x *MetalLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *MetalLayer {
-	x.inner.CALayer.SetContentsCenter(contentsCenter)
-	return x
-}
-
-// A hint for the desired storage format of the layer contents.
-//
-// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
-func (x *MetalLayer) WithContentsFormat(contentsFormat *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetContentsFormat(contentsFormat)
-	return x
-}
-
-// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
-func (x *MetalLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *MetalLayer {
-	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
-	return x
-}
-
-// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
-func (x *MetalLayer) WithToneMapMode(toneMapMode *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetToneMapMode(toneMapMode)
-	return x
-}
-
-// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
-func (x *MetalLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
-	return x
-}
-
-// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
-func (x *MetalLayer) WithContentsHeadroom(contentsHeadroom float64) *MetalLayer {
-	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
-	return x
-}
-
-// The filter used when reducing the size of the content.
-//
-// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
-func (x *MetalLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetMinificationFilter(minificationFilter)
-	return x
-}
-
-// The filter used when increasing the size of the content.
-//
-// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
-func (x *MetalLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
-	return x
-}
-
-// The bias factor used by the minification filter to determine the levels of detail.
-//
-// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
-func (x *MetalLayer) WithMinificationFilterBias(minificationFilterBias float32) *MetalLayer {
-	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
-	return x
-}
-
-// A Boolean value indicating whether the layer contains completely opaque content.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
-func (x *MetalLayer) WithOpaque(opaque bool) *MetalLayer {
-	x.inner.CALayer.SetOpaque(opaque)
-	return x
-}
-
-// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-//
-// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
-func (x *MetalLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *MetalLayer {
-	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
-	return x
-}
-
-// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-//
-// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
-func (x *MetalLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *MetalLayer {
-	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
-	return x
-}
-
-// A bitmask defining how the edges of the receiver are rasterized.
-//
-// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *MetalLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *MetalLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
-	return x
-}
-
-// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
-//
-// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
-func (x *MetalLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *MetalLayer {
-	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
-	return x
-}
-
-// The radius to use when drawing rounded corners for the layer’s background. Animatable.
-//
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
-func (x *MetalLayer) WithCornerRadius(cornerRadius float64) *MetalLayer {
-	x.inner.CALayer.SetCornerRadius(cornerRadius)
-	return x
-}
-
-// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *MetalLayer) WithMaskedCorners(maskedCorners CACornerMask) *MetalLayer {
-	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
-	return x
-}
-
-// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
-func (x *MetalLayer) WithCornerCurve(cornerCurve *foundation.NSString) *MetalLayer {
-	x.inner.CALayer.SetCornerCurve(cornerCurve)
-	return x
-}
-
-// The width of the layer’s border. Animatable.
-//
-// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
-func (x *MetalLayer) WithBorderWidth(borderWidth float64) *MetalLayer {
-	x.inner.CALayer.SetBorderWidth(borderWidth)
-	return x
-}
-
-// The opacity of the receiver. Animatable.
-//
-// WithOpacity sets the opacity property and returns the receiver for chaining.
-func (x *MetalLayer) WithOpacity(opacity float32) *MetalLayer {
-	x.inner.CALayer.SetOpacity(opacity)
-	return x
-}
-
-// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-//
-// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
-func (x *MetalLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *MetalLayer {
-	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
-	return x
-}
-
-// A CoreImage filter used to composite the layer and the content behind it. Animatable.
-//
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *MetalLayer) WithCompositingFilter(compositingFilter objc.ID) *MetalLayer {
-	x.inner.CALayer.SetCompositingFilter(compositingFilter)
-	return x
-}
-
-// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-//
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
-func (x *MetalLayer) WithShouldRasterize(shouldRasterize bool) *MetalLayer {
-	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
-	return x
-}
-
-// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-//
-// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
-func (x *MetalLayer) WithRasterizationScale(rasterizationScale float64) *MetalLayer {
-	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
-	return x
-}
-
-// The opacity of the layer’s shadow. Animatable.
-//
-// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
-func (x *MetalLayer) WithShadowOpacity(shadowOpacity float32) *MetalLayer {
-	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
-	return x
-}
-
-// The offset (in points) of the layer’s shadow. Animatable.
-//
-// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
-func (x *MetalLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *MetalLayer {
-	x.inner.CALayer.SetShadowOffset(shadowOffset)
-	return x
-}
-
-// The blur radius (in points) used to render the layer’s shadow. Animatable.
-//
-// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
-func (x *MetalLayer) WithShadowRadius(shadowRadius float64) *MetalLayer {
-	x.inner.CALayer.SetShadowRadius(shadowRadius)
-	return x
-}
-
-// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
-//
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *MetalLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *MetalLayer {
-	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
-	return x
-}
-
-// The object responsible for laying out the layer’s sublayers.
-//
-// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
-func (x *MetalLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *MetalLayer {
-	x.inner.CALayer.SetLayoutManager(layoutManager)
-	return x
-}
-
-// A dictionary containing layer actions.
-//
-// WithActions sets the actions property and returns the receiver for chaining.
-func (x *MetalLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *MetalLayer {
-	x.inner.CALayer.SetActions(actions)
-	return x
-}
-
-// The name of the receiver.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *MetalLayer) WithName(name string) *MetalLayer {
-	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// The layer’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *MetalLayer) WithDelegate(delegate raw.CALayerDelegate) *MetalLayer {
-	x.inner.CALayer.SetDelegate(delegate)
-	return x
-}
-
-// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *MetalLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer {
-	x.inner.CALayer.SetStyle(style)
-	return x
-}
-
-// The constraints used to position current layer’s sublayers.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *MetalLayer) WithConstraints(items ...*raw.CAConstraint) *MetalLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetConstraints(_arr)
-	return x
-}
-
-// Waits until a Metal drawable is available, and then returns it.
-//
-// NextDrawable calls the underlying NextDrawable.
-func (x *MetalLayer) NextDrawable() raw.CAMetalDrawable {
-	return x.inner.NextDrawable()
-}
-
-// Device calls the underlying Device.
-func (x *MetalLayer) Device() metal.MTLDevice {
-	return x.inner.Device()
-}
-
-// SetDevice calls the underlying SetDevice.
-func (x *MetalLayer) SetDevice(device metal.MTLDevice) {
-	x.inner.SetDevice(device)
-}
-
-// PreferredDevice calls the underlying PreferredDevice.
-func (x *MetalLayer) PreferredDevice() metal.MTLDevice {
-	return x.inner.PreferredDevice()
-}
-
-// PixelFormat calls the underlying PixelFormat.
-func (x *MetalLayer) PixelFormat() metal.MTLPixelFormat {
-	return x.inner.PixelFormat()
-}
-
-// SetPixelFormat calls the underlying SetPixelFormat.
-func (x *MetalLayer) SetPixelFormat(pixelFormat metal.MTLPixelFormat) {
-	x.inner.SetPixelFormat(pixelFormat)
-}
-
-// FramebufferOnly calls the underlying FramebufferOnly.
-func (x *MetalLayer) FramebufferOnly() bool {
-	return x.inner.FramebufferOnly()
-}
-
-// SetFramebufferOnly calls the underlying SetFramebufferOnly.
-func (x *MetalLayer) SetFramebufferOnly(framebufferOnly bool) {
-	x.inner.SetFramebufferOnly(framebufferOnly)
-}
-
-// DrawableSize calls the underlying DrawableSize.
-func (x *MetalLayer) DrawableSize() corefoundation.CGSize {
-	return x.inner.DrawableSize()
-}
-
-// SetDrawableSize calls the underlying SetDrawableSize.
-func (x *MetalLayer) SetDrawableSize(drawableSize corefoundation.CGSize) {
-	x.inner.SetDrawableSize(drawableSize)
-}
-
-// MaximumDrawableCount calls the underlying MaximumDrawableCount.
-func (x *MetalLayer) MaximumDrawableCount() uint {
-	return x.inner.MaximumDrawableCount()
-}
-
-// SetMaximumDrawableCount calls the underlying SetMaximumDrawableCount.
-func (x *MetalLayer) SetMaximumDrawableCount(maximumDrawableCount uint) {
-	x.inner.SetMaximumDrawableCount(maximumDrawableCount)
-}
-
-// PresentsWithTransaction calls the underlying PresentsWithTransaction.
-func (x *MetalLayer) PresentsWithTransaction() bool {
-	return x.inner.PresentsWithTransaction()
-}
-
-// SetPresentsWithTransaction calls the underlying SetPresentsWithTransaction.
-func (x *MetalLayer) SetPresentsWithTransaction(presentsWithTransaction bool) {
-	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
-}
-
-// Colorspace calls the underlying Colorspace.
-func (x *MetalLayer) Colorspace() unsafe.Pointer {
-	return x.inner.Colorspace()
-}
-
-// SetColorspace calls the underlying SetColorspace.
-func (x *MetalLayer) SetColorspace(colorspace unsafe.Pointer) {
-	x.inner.SetColorspace(colorspace)
-}
-
-// EDRMetadata calls the underlying EDRMetadata.
-func (x *MetalLayer) EDRMetadata() *EDRMetadata {
-	_r := x.inner.EDRMetadata()
-	if _r == nil {
+// metalLayerAdopt wraps an Objective-C object that this code just created as a
+// MetalLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metalLayerAdopt(id objc.ID) *MetalLayer {
+	if id == 0 {
 		return nil
 	}
-	return &EDRMetadata{inner: _r}
+	x := &MetalLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetEDRMetadata calls the underlying SetEDRMetadata.
-func (x *MetalLayer) SetEDRMetadata(eDRMetadata *raw.CAEDRMetadata) {
-	x.inner.SetEDRMetadata(eDRMetadata)
+// NewMetalLayer creates a new MetalLayer.
+func NewMetalLayer() *MetalLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("CAMetalLayer")), objc.RegisterName("new"))
+	return metalLayerAdopt(_id)
 }
 
-// DisplaySyncEnabled calls the underlying DisplaySyncEnabled.
+// WithFramebufferOnly a Boolean value that determines whether the layer’s textures are used only for rendering.
+func (x *MetalLayer) WithFramebufferOnly(framebufferOnly bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
+	return x
+}
+
+// WithDrawableSize the size, in pixels, of textures for rendering layer content.
+func (x *MetalLayer) WithDrawableSize(drawableSize corefoundation.CGSize) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableSize:"), drawableSize)
+	return x
+}
+
+// WithMaximumDrawableCount the number of Metal drawables in the resource pool managed by Core Animation.
+func (x *MetalLayer) WithMaximumDrawableCount(maximumDrawableCount int) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDrawableCount:"), maximumDrawableCount)
+	return x
+}
+
+// WithPresentsWithTransaction a Boolean value that determines whether the layer presents its content using a Core Animation transaction.
+func (x *MetalLayer) WithPresentsWithTransaction(presentsWithTransaction bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
+	return x
+}
+
+// WithColorspace the color space of the rendered content.
+func (x *MetalLayer) WithColorspace(colorspace obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+	return x
+}
+
+// WithEDRMetadata metadata describing the tone mapping to apply to the extended dynamic range (EDR) values in the layer.
+func (x *MetalLayer) WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEDRMetadata:"), objref.IDOf(eDRMetadata))
+	return x
+}
+
+// WithDisplaySyncEnabled a Boolean value that determines whether the layer synchronizes its updates to the display’s refresh rate.
+func (x *MetalLayer) WithDisplaySyncEnabled(displaySyncEnabled bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaySyncEnabled:"), displaySyncEnabled)
+	return x
+}
+
+// WithAllowsNextDrawableTimeout a Boolean value that determines whether requests for a new buffer expire if the system can’t satisfy them.
+func (x *MetalLayer) WithAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNextDrawableTimeout:"), allowsNextDrawableTimeout)
+	return x
+}
+
+// WithDeveloperHUDProperties the properties of the Metal performance heads-up display.
+func (x *MetalLayer) WithDeveloperHUDProperties(developerHUDProperties obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeveloperHUDProperties:"), objref.IDOf(developerHUDProperties))
+	return x
+}
+
+// WithBounds the layer’s bounds rectangle. Animatable.
+func (x *MetalLayer) WithBounds(bounds corefoundation.CGRect) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
+func (x *MetalLayer) WithPosition(position corefoundation.CGPoint) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the layer’s position on the z axis. Animatable.
+func (x *MetalLayer) WithZPosition(zPosition float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
+	return x
+}
+
+// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (x *MetalLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
+func (x *MetalLayer) WithAnchorPointZ(anchorPointZ float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return x
+}
+
+// WithFrame the layer’s frame rectangle.
+func (x *MetalLayer) WithFrame(frame corefoundation.CGRect) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
+func (x *MetalLayer) WithHidden(hidden bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (x *MetalLayer) WithDoubleSided(doubleSided bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return x
+}
+
+// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (x *MetalLayer) WithGeometryFlipped(geometryFlipped bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return x
+}
+
+// WithSublayers an array containing the layer’s sublayers.
+func (x *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
+	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
+	return x
+}
+
+// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
+func (x *MetalLayer) WithMask(mask LayerProvider) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return x
+}
+
+// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (x *MetalLayer) WithMasksToBounds(masksToBounds bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return x
+}
+
+// WithContents an object that provides the contents of the layer. Animatable.
+func (x *MetalLayer) WithContents(contents obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return x
+}
+
+// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (x *MetalLayer) WithContentsRect(contentsRect corefoundation.CGRect) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
+	return x
+}
+
+// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (x *MetalLayer) WithContentsGravity(contentsGravity obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return x
+}
+
+// WithContentsScale the scale factor applied to the layer.
+func (x *MetalLayer) WithContentsScale(contentsScale float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
+	return x
+}
+
+// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (x *MetalLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return x
+}
+
+// WithContentsFormat a hint for the desired storage format of the layer contents.
+func (x *MetalLayer) WithContentsFormat(contentsFormat obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+func (x *MetalLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+func (x *MetalLayer) WithToneMapMode(toneMapMode obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return x
+}
+
+// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+func (x *MetalLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return x
+}
+
+// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+func (x *MetalLayer) WithContentsHeadroom(contentsHeadroom float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter the filter used when reducing the size of the content.
+func (x *MetalLayer) WithMinificationFilter(minificationFilter obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return x
+}
+
+// WithMagnificationFilter the filter used when increasing the size of the content.
+func (x *MetalLayer) WithMagnificationFilter(magnificationFilter obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return x
+}
+
+// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
+func (x *MetalLayer) WithMinificationFilterBias(minificationFilterBias float32) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return x
+}
+
+// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
+func (x *MetalLayer) WithOpaque(opaque bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (x *MetalLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (x *MetalLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
+func (x *MetalLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (x *MetalLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return x
+}
+
+// WithBackgroundColor the background color of the receiver. Animatable.
+func (x *MetalLayer) WithBackgroundColor(backgroundColor obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return x
+}
+
+// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (x *MetalLayer) WithCornerRadius(cornerRadius float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+func (x *MetalLayer) WithMaskedCorners(maskedCorners CornerMask) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+func (x *MetalLayer) WithCornerCurve(cornerCurve obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return x
+}
+
+// WithBorderWidth the width of the layer’s border. Animatable.
+func (x *MetalLayer) WithBorderWidth(borderWidth float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return x
+}
+
+// WithBorderColor the color of the layer’s border. Animatable.
+func (x *MetalLayer) WithBorderColor(borderColor obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return x
+}
+
+// WithOpacity the opacity of the receiver. Animatable.
+func (x *MetalLayer) WithOpacity(opacity float32) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (x *MetalLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (x *MetalLayer) WithCompositingFilter(compositingFilter obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return x
+}
+
+// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (x *MetalLayer) WithShouldRasterize(shouldRasterize bool) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (x *MetalLayer) WithRasterizationScale(rasterizationScale float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return x
+}
+
+// WithShadowColor the color of the layer’s shadow. Animatable.
+func (x *MetalLayer) WithShadowColor(shadowColor obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return x
+}
+
+// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
+func (x *MetalLayer) WithShadowOpacity(shadowOpacity float32) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return x
+}
+
+// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
+func (x *MetalLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return x
+}
+
+// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (x *MetalLayer) WithShadowRadius(shadowRadius float64) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return x
+}
+
+// WithShadowPath the shape of the layer’s shadow. Animatable.
+func (x *MetalLayer) WithShadowPath(shadowPath obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return x
+}
+
+// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (x *MetalLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return x
+}
+
+// WithActions a dictionary containing layer actions.
+func (x *MetalLayer) WithActions(actions obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return x
+}
+
+// WithName the name of the receiver.
+func (x *MetalLayer) WithName(name string) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (x *MetalLayer) WithStyle(style obj.Object) *MetalLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return x
+}
+
+// WithConstraints the constraints used to position current layer’s sublayers.
+func (x *MetalLayer) WithConstraints(items ...*Constraint) *MetalLayer {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
+	return x
+}
+
+// FramebufferOnly wraps the corresponding Objective-C method.
+func (x *MetalLayer) FramebufferOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("framebufferOnly"))
+	return _r
+}
+
+// SetFramebufferOnly wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetFramebufferOnly(framebufferOnly bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
+}
+
+// DrawableSize wraps the corresponding Objective-C method.
+func (x *MetalLayer) DrawableSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("drawableSize"))
+	return _r
+}
+
+// SetDrawableSize wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetDrawableSize(drawableSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableSize:"), drawableSize)
+}
+
+// MaximumDrawableCount wraps the corresponding Objective-C method.
+func (x *MetalLayer) MaximumDrawableCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumDrawableCount"))
+	return _r
+}
+
+// SetMaximumDrawableCount wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetMaximumDrawableCount(maximumDrawableCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDrawableCount:"), maximumDrawableCount)
+}
+
+// PresentsWithTransaction wraps the corresponding Objective-C method.
+func (x *MetalLayer) PresentsWithTransaction() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentsWithTransaction"))
+	return _r
+}
+
+// SetPresentsWithTransaction wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetPresentsWithTransaction(presentsWithTransaction bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
+}
+
+// Colorspace wraps the corresponding Objective-C method.
+func (x *MetalLayer) Colorspace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorspace"))
+	return obj.Wrap(_r)
+}
+
+// SetColorspace wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetColorspace(colorspace obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+}
+
+// EDRMetadata wraps the corresponding Objective-C method.
+func (x *MetalLayer) EDRMetadata() *EDRMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EDRMetadata"))
+	return EDRMetadataFromID(_r)
+}
+
+// SetEDRMetadata wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetEDRMetadata(eDRMetadata *EDRMetadata) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEDRMetadata:"), objref.IDOf(eDRMetadata))
+}
+
+// DisplaySyncEnabled wraps the corresponding Objective-C method.
 func (x *MetalLayer) DisplaySyncEnabled() bool {
-	return x.inner.DisplaySyncEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaySyncEnabled"))
+	return _r
 }
 
-// SetDisplaySyncEnabled calls the underlying SetDisplaySyncEnabled.
+// SetDisplaySyncEnabled wraps the corresponding Objective-C method.
 func (x *MetalLayer) SetDisplaySyncEnabled(displaySyncEnabled bool) {
-	x.inner.SetDisplaySyncEnabled(displaySyncEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaySyncEnabled:"), displaySyncEnabled)
 }
 
-// AllowsNextDrawableTimeout calls the underlying AllowsNextDrawableTimeout.
+// AllowsNextDrawableTimeout wraps the corresponding Objective-C method.
 func (x *MetalLayer) AllowsNextDrawableTimeout() bool {
-	return x.inner.AllowsNextDrawableTimeout()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNextDrawableTimeout"))
+	return _r
 }
 
-// SetAllowsNextDrawableTimeout calls the underlying SetAllowsNextDrawableTimeout.
+// SetAllowsNextDrawableTimeout wraps the corresponding Objective-C method.
 func (x *MetalLayer) SetAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool) {
-	x.inner.SetAllowsNextDrawableTimeout(allowsNextDrawableTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNextDrawableTimeout:"), allowsNextDrawableTimeout)
 }
 
-// DeveloperHUDProperties calls the underlying DeveloperHUDProperties.
-func (x *MetalLayer) DeveloperHUDProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DeveloperHUDProperties()
+// DeveloperHUDProperties wraps the corresponding Objective-C method.
+func (x *MetalLayer) DeveloperHUDProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("developerHUDProperties"))
+	return obj.Wrap(_r)
 }
 
-// SetDeveloperHUDProperties calls the underlying SetDeveloperHUDProperties.
-func (x *MetalLayer) SetDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetDeveloperHUDProperties(developerHUDProperties)
+// SetDeveloperHUDProperties wraps the corresponding Objective-C method.
+func (x *MetalLayer) SetDeveloperHUDProperties(developerHUDProperties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeveloperHUDProperties:"), objref.IDOf(developerHUDProperties))
 }
-
-// ResidencySet calls the underlying ResidencySet.
-func (x *MetalLayer) ResidencySet() metal.MTLResidencySet {
-	return x.inner.ResidencySet()
-}
-
-func (x *MetalLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
 // MetalLayerable is the interface implemented by [MetalLayer], for mocking and DI.
 type MetalLayerable interface {
-	Unwrap() *raw.CAMetalLayer
-	WithDevice(device metal.MTLDevice) *MetalLayer
-	WithPixelFormat(pixelFormat metal.MTLPixelFormat) *MetalLayer
+	obj.Object
 	WithFramebufferOnly(framebufferOnly bool) *MetalLayer
 	WithDrawableSize(drawableSize corefoundation.CGSize) *MetalLayer
-	WithMaximumDrawableCount(maximumDrawableCount uint) *MetalLayer
+	WithMaximumDrawableCount(maximumDrawableCount int) *MetalLayer
 	WithPresentsWithTransaction(presentsWithTransaction bool) *MetalLayer
+	WithColorspace(colorspace obj.Object) *MetalLayer
 	WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer
 	WithDisplaySyncEnabled(displaySyncEnabled bool) *MetalLayer
 	WithAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool) *MetalLayer
-	WithDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer
+	WithDeveloperHUDProperties(developerHUDProperties obj.Object) *MetalLayer
 	WithBounds(bounds corefoundation.CGRect) *MetalLayer
 	WithPosition(position corefoundation.CGPoint) *MetalLayer
 	WithZPosition(zPosition float64) *MetalLayer
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *MetalLayer
 	WithAnchorPointZ(anchorPointZ float64) *MetalLayer
-	WithTransform(transform raw.CATransform3D) *MetalLayer
 	WithFrame(frame corefoundation.CGRect) *MetalLayer
 	WithHidden(hidden bool) *MetalLayer
 	WithDoubleSided(doubleSided bool) *MetalLayer
 	WithGeometryFlipped(geometryFlipped bool) *MetalLayer
 	WithSublayers(items ...LayerProvider) *MetalLayer
-	WithSublayerTransform(sublayerTransform raw.CATransform3D) *MetalLayer
 	WithMask(mask LayerProvider) *MetalLayer
 	WithMasksToBounds(masksToBounds bool) *MetalLayer
-	WithContents(contents objc.ID) *MetalLayer
+	WithContents(contents obj.Object) *MetalLayer
 	WithContentsRect(contentsRect corefoundation.CGRect) *MetalLayer
-	WithContentsGravity(contentsGravity *foundation.NSString) *MetalLayer
+	WithContentsGravity(contentsGravity obj.Object) *MetalLayer
 	WithContentsScale(contentsScale float64) *MetalLayer
 	WithContentsCenter(contentsCenter corefoundation.CGRect) *MetalLayer
-	WithContentsFormat(contentsFormat *foundation.NSString) *MetalLayer
+	WithContentsFormat(contentsFormat obj.Object) *MetalLayer
 	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *MetalLayer
-	WithToneMapMode(toneMapMode *foundation.NSString) *MetalLayer
-	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *MetalLayer
+	WithToneMapMode(toneMapMode obj.Object) *MetalLayer
+	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *MetalLayer
 	WithContentsHeadroom(contentsHeadroom float64) *MetalLayer
-	WithMinificationFilter(minificationFilter *foundation.NSString) *MetalLayer
-	WithMagnificationFilter(magnificationFilter *foundation.NSString) *MetalLayer
+	WithMinificationFilter(minificationFilter obj.Object) *MetalLayer
+	WithMagnificationFilter(magnificationFilter obj.Object) *MetalLayer
 	WithMinificationFilterBias(minificationFilterBias float32) *MetalLayer
 	WithOpaque(opaque bool) *MetalLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *MetalLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *MetalLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *MetalLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *MetalLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *MetalLayer
+	WithBackgroundColor(backgroundColor obj.Object) *MetalLayer
 	WithCornerRadius(cornerRadius float64) *MetalLayer
-	WithMaskedCorners(maskedCorners CACornerMask) *MetalLayer
-	WithCornerCurve(cornerCurve *foundation.NSString) *MetalLayer
+	WithMaskedCorners(maskedCorners CornerMask) *MetalLayer
+	WithCornerCurve(cornerCurve obj.Object) *MetalLayer
 	WithBorderWidth(borderWidth float64) *MetalLayer
+	WithBorderColor(borderColor obj.Object) *MetalLayer
 	WithOpacity(opacity float32) *MetalLayer
 	WithAllowsGroupOpacity(allowsGroupOpacity bool) *MetalLayer
-	WithCompositingFilter(compositingFilter objc.ID) *MetalLayer
+	WithCompositingFilter(compositingFilter obj.Object) *MetalLayer
 	WithShouldRasterize(shouldRasterize bool) *MetalLayer
 	WithRasterizationScale(rasterizationScale float64) *MetalLayer
+	WithShadowColor(shadowColor obj.Object) *MetalLayer
 	WithShadowOpacity(shadowOpacity float32) *MetalLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *MetalLayer
 	WithShadowRadius(shadowRadius float64) *MetalLayer
-	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *MetalLayer
-	WithLayoutManager(layoutManager raw.CALayoutManager) *MetalLayer
-	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *MetalLayer
+	WithShadowPath(shadowPath obj.Object) *MetalLayer
+	WithAutoresizingMask(autoresizingMask AutoresizingMask) *MetalLayer
+	WithActions(actions obj.Object) *MetalLayer
 	WithName(name string) *MetalLayer
-	WithDelegate(delegate raw.CALayerDelegate) *MetalLayer
-	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer
-	WithConstraints(items ...*raw.CAConstraint) *MetalLayer
-	NextDrawable() raw.CAMetalDrawable
-	Device() metal.MTLDevice
-	SetDevice(device metal.MTLDevice)
-	PreferredDevice() metal.MTLDevice
-	PixelFormat() metal.MTLPixelFormat
-	SetPixelFormat(pixelFormat metal.MTLPixelFormat)
+	WithStyle(style obj.Object) *MetalLayer
+	WithConstraints(items ...*Constraint) *MetalLayer
 	FramebufferOnly() bool
 	SetFramebufferOnly(framebufferOnly bool)
 	DrawableSize() corefoundation.CGSize
 	SetDrawableSize(drawableSize corefoundation.CGSize)
-	MaximumDrawableCount() uint
-	SetMaximumDrawableCount(maximumDrawableCount uint)
+	MaximumDrawableCount() int
+	SetMaximumDrawableCount(maximumDrawableCount int)
 	PresentsWithTransaction() bool
 	SetPresentsWithTransaction(presentsWithTransaction bool)
-	Colorspace() unsafe.Pointer
-	SetColorspace(colorspace unsafe.Pointer)
+	Colorspace() obj.Object
+	SetColorspace(colorspace obj.Object)
 	EDRMetadata() *EDRMetadata
-	SetEDRMetadata(eDRMetadata *raw.CAEDRMetadata)
+	SetEDRMetadata(eDRMetadata *EDRMetadata)
 	DisplaySyncEnabled() bool
 	SetDisplaySyncEnabled(displaySyncEnabled bool)
 	AllowsNextDrawableTimeout() bool
 	SetAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool)
-	DeveloperHUDProperties() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID])
-	ResidencySet() metal.MTLResidencySet
+	DeveloperHUDProperties() obj.Object
+	SetDeveloperHUDProperties(developerHUDProperties obj.Object)
 }
 
 var _ MetalLayerable = (*MetalLayer)(nil)
+
+var _ LayerProvider = (*MetalLayer)(nil)

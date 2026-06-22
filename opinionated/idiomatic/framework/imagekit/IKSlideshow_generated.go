@@ -5,103 +5,119 @@
 package imagekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class IKSlideshow @abstract IKSlideshow handles a slideshow with images, PDFs & more.
+// Slideshow is an idiomatic wrapper over the Objective-C class IKSlideshow.
 //
-// Slideshow wraps [raw.IKSlideshow] with a fluent Go API.
+// IKSlideshow handles a slideshow with images, PDFs & more.
 type Slideshow struct {
-	inner *raw.IKSlideshow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKSlideshow].
-func (x *Slideshow) Unwrap() *raw.IKSlideshow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Slideshow) ID() objc.ID { return x.inner.Ptr() }
-
-// SlideshowFromID adopts an existing object pointer as a Slideshow (nil for 0).
+// SlideshowFromID adopts an existing Objective-C object as a Slideshow
+// (nil for 0), retaining it and registering a release finalizer.
 func SlideshowFromID(id objc.ID) *Slideshow {
 	if id == 0 {
 		return nil
 	}
-	return &Slideshow{inner: raw.IKSlideshowFromID(id)}
-}
-
-// NewSlideshow creates a new [Slideshow].
-func NewSlideshow() *Slideshow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKSlideshow")), objc.RegisterName("new"))
-	return &Slideshow{inner: raw.IKSlideshowFromID(_id)}
-}
-
-// @property autoPlayDelay @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
-//
-// WithAutoPlayDelay sets the autoPlayDelay property and returns the receiver for chaining.
-func (x *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
-	x.inner.SetAutoPlayDelay(autoPlayDelay)
+	x := &Slideshow{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @method runSlideshowWithDataSource:inMode:options: @abstract start the slideshow (slideshowOptions can be NULL).
-//
-// RunSlideshowWithDataSourceInModeOptions calls the underlying RunSlideshowWithDataSourceInModeOptions.
-func (x *Slideshow) RunSlideshowWithDataSourceInModeOptions(dataSource raw.IKSlideshowDataSource, slideshowMode string, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.RunSlideshowWithDataSourceInModeOptions(dataSource, foundation.NSStringStringWithUTF8String(slideshowMode), slideshowOptions)
+// slideshowAdopt wraps an Objective-C object that this code just created as a
+// Slideshow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func slideshowAdopt(id objc.ID) *Slideshow {
+	if id == 0 {
+		return nil
+	}
+	x := &Slideshow{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method stopSlideshow: @abstract stop the slideshow.
-//
-// StopSlideshow calls the underlying StopSlideshow.
-func (x *Slideshow) StopSlideshow(sender objc.ID) {
-	x.inner.StopSlideshow(sender)
+// Description returns the object's -description text.
+func (x *Slideshow) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @method reloadData: @abstract reloadData.
-//
-// ReloadData calls the underlying ReloadData.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Slideshow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Slideshow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Slideshow) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSlideshow creates a new Slideshow.
+func NewSlideshow() *Slideshow {
+	_id := objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("new"))
+	return slideshowAdopt(_id)
+}
+
+// WithAutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (x *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
+	return x
+}
+
+// StopSlideshow stop the slideshow.
+func (x *Slideshow) StopSlideshow(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
+}
+
+// ReloadData reloadData.
 func (x *Slideshow) ReloadData() {
-	x.inner.ReloadData()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// @method reloadSlideshowItemAtIndex: @abstract reloadSlideshowItemAtIndex.
-//
-// ReloadSlideshowItemAtIndex calls the underlying ReloadSlideshowItemAtIndex.
-func (x *Slideshow) ReloadSlideshowItemAtIndex(index uint) {
-	x.inner.ReloadSlideshowItemAtIndex(index)
+// ReloadSlideshowItemAtIndex reloadSlideshowItemAtIndex.
+func (x *Slideshow) ReloadSlideshowItemAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
-// @method indexOfCurrentSlideshowItem: @abstract Returns index of current slideshow item.
-//
-// IndexOfCurrentSlideshowItem calls the underlying IndexOfCurrentSlideshowItem.
-func (x *Slideshow) IndexOfCurrentSlideshowItem() uint {
-	return x.inner.IndexOfCurrentSlideshowItem()
+// IndexOfCurrentSlideshowItem returns index of current slideshow item.
+func (x *Slideshow) IndexOfCurrentSlideshowItem() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfCurrentSlideshowItem"))
+	return _r
 }
 
-// @property autoPlayDelay @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
-//
-// AutoPlayDelay calls the underlying AutoPlayDelay.
+// AutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (x *Slideshow) AutoPlayDelay() float64 {
-	return x.inner.AutoPlayDelay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("autoPlayDelay"))
+	return _r
 }
 
-// SetAutoPlayDelay calls the underlying SetAutoPlayDelay.
+// SetAutoPlayDelay wraps the corresponding Objective-C method.
 func (x *Slideshow) SetAutoPlayDelay(autoPlayDelay float64) {
-	x.inner.SetAutoPlayDelay(autoPlayDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
 }
 
 // Slideshowable is the interface implemented by [Slideshow], for mocking and DI.
 type Slideshowable interface {
-	Unwrap() *raw.IKSlideshow
+	obj.Object
 	WithAutoPlayDelay(autoPlayDelay float64) *Slideshow
-	RunSlideshowWithDataSourceInModeOptions(dataSource raw.IKSlideshowDataSource, slideshowMode string, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID])
-	StopSlideshow(sender objc.ID)
+	StopSlideshow(sender obj.Object)
 	ReloadData()
-	ReloadSlideshowItemAtIndex(index uint)
-	IndexOfCurrentSlideshowItem() uint
+	ReloadSlideshowItemAtIndex(index int)
+	IndexOfCurrentSlideshowItem() int
 	AutoPlayDelay() float64
 	SetAutoPlayDelay(autoPlayDelay float64)
 }

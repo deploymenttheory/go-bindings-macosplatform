@@ -5,41 +5,76 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A bookmark for keeping track the most recent history that you’ve processed.
+// PersistentHistoryToken is an idiomatic wrapper over the Objective-C class NSPersistentHistoryToken.
 //
-// PersistentHistoryToken wraps [raw.NSPersistentHistoryToken] with a fluent Go API.
+// A bookmark for keeping track the most recent history that you’ve processed.
 type PersistentHistoryToken struct {
-	inner *raw.NSPersistentHistoryToken
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentHistoryToken].
-func (x *PersistentHistoryToken) Unwrap() *raw.NSPersistentHistoryToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentHistoryToken) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentHistoryTokenFromID adopts an existing object pointer as a PersistentHistoryToken (nil for 0).
+// PersistentHistoryTokenFromID adopts an existing Objective-C object as a PersistentHistoryToken
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentHistoryTokenFromID(id objc.ID) *PersistentHistoryToken {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentHistoryToken{inner: raw.NSPersistentHistoryTokenFromID(id)}
+	x := &PersistentHistoryToken{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentHistoryToken creates a new [PersistentHistoryToken].
+// persistentHistoryTokenAdopt wraps an Objective-C object that this code just created as a
+// PersistentHistoryToken (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentHistoryTokenAdopt(id objc.ID) *PersistentHistoryToken {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentHistoryToken{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentHistoryToken) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentHistoryToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentHistoryToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentHistoryToken) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersistentHistoryToken creates a new PersistentHistoryToken.
 func NewPersistentHistoryToken() *PersistentHistoryToken {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentHistoryToken")), objc.RegisterName("new"))
-	return &PersistentHistoryToken{inner: raw.NSPersistentHistoryTokenFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryToken")), objc.RegisterName("new"))
+	return persistentHistoryTokenAdopt(_id)
 }
 
 // PersistentHistoryTokenable is the interface implemented by [PersistentHistoryToken], for mocking and DI.
 type PersistentHistoryTokenable interface {
-	Unwrap() *raw.NSPersistentHistoryToken
+	obj.Object
 }
 
 var _ PersistentHistoryTokenable = (*PersistentHistoryToken)(nil)

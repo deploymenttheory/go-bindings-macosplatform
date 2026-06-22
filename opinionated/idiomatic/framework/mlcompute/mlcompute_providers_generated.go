@@ -5,25 +5,29 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// GraphProvider is implemented by Graph and any idiomatic type wrapping a MLCGraph subclass.
+// GraphProvider is accepted wherever a MLCGraph (or one of its subclasses) is expected.
 type GraphProvider interface {
-	asGraph() *raw.MLCGraph
+	objref.Object
+	isGraph()
 }
 
-// LayerProvider is implemented by Layer and any idiomatic type wrapping a MLCLayer subclass.
+// LayerProvider is accepted wherever a MLCLayer (or one of its subclasses) is expected.
 type LayerProvider interface {
-	asLayer() *raw.MLCLayer
+	objref.Object
+	isLayer()
 }
 
-// LossLayerProvider is implemented by LossLayer and any idiomatic type wrapping a MLCLossLayer subclass.
+// LossLayerProvider is accepted wherever a MLCLossLayer (or one of its subclasses) is expected.
 type LossLayerProvider interface {
-	asLossLayer() *raw.MLCLossLayer
+	objref.Object
+	isLossLayer()
 }
 
-// OptimizerProvider is implemented by Optimizer and any idiomatic type wrapping a MLCOptimizer subclass.
+// OptimizerProvider is accepted wherever a MLCOptimizer (or one of its subclasses) is expected.
 type OptimizerProvider interface {
-	asOptimizer() *raw.MLCOptimizer
+	objref.Object
+	isOptimizer()
 }

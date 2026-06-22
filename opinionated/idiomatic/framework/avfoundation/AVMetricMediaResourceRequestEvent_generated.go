@@ -5,137 +5,132 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents a media resource request.
+// MetricMediaResourceRequestEvent is an idiomatic wrapper over the Objective-C class AVMetricMediaResourceRequestEvent.
 //
-// MetricMediaResourceRequestEvent wraps [raw.AVMetricMediaResourceRequestEvent] with a fluent Go API.
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents a media resource request.
 type MetricMediaResourceRequestEvent struct {
-	inner *raw.AVMetricMediaResourceRequestEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricMediaResourceRequestEvent].
-func (x *MetricMediaResourceRequestEvent) Unwrap() *raw.AVMetricMediaResourceRequestEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricMediaResourceRequestEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricMediaResourceRequestEventFromID adopts an existing object pointer as a MetricMediaResourceRequestEvent (nil for 0).
+// MetricMediaResourceRequestEventFromID adopts an existing Objective-C object as a MetricMediaResourceRequestEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricMediaResourceRequestEventFromID(id objc.ID) *MetricMediaResourceRequestEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricMediaResourceRequestEvent{inner: raw.AVMetricMediaResourceRequestEventFromID(id)}
+	x := &MetricMediaResourceRequestEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricMediaResourceRequestEvent creates a new [MetricMediaResourceRequestEvent].
-func NewMetricMediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricMediaResourceRequestEvent")), objc.RegisterName("new"))
-	return &MetricMediaResourceRequestEvent{inner: raw.AVMetricMediaResourceRequestEventFromID(_id)}
-}
-
-// Returns the URL of the resource request. If no value is available, returns nil.
-//
-// Url calls the underlying Url.
-func (x *MetricMediaResourceRequestEvent) Url() *foundation.NSURL {
-	return x.inner.Url()
-}
-
-// The IP address of the server. If not available, the value is nil.
-//
-// ServerAddress calls the underlying ServerAddress.
-func (x *MetricMediaResourceRequestEvent) ServerAddress() string {
-	_r := x.inner.ServerAddress()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Returns the start time of the resource request.
-//
-// RequestStartTime calls the underlying RequestStartTime.
-func (x *MetricMediaResourceRequestEvent) RequestStartTime() *foundation.NSDate {
-	return x.inner.RequestStartTime()
-}
-
-// Returns the end time of the resource request.
-//
-// RequestEndTime calls the underlying RequestEndTime.
-func (x *MetricMediaResourceRequestEvent) RequestEndTime() *foundation.NSDate {
-	return x.inner.RequestEndTime()
-}
-
-// Returns the start time of the resource request response.
-//
-// ResponseStartTime calls the underlying ResponseStartTime.
-func (x *MetricMediaResourceRequestEvent) ResponseStartTime() *foundation.NSDate {
-	return x.inner.ResponseStartTime()
-}
-
-// Returns the end time of the resource request response.
-//
-// ResponseEndTime calls the underlying ResponseEndTime.
-func (x *MetricMediaResourceRequestEvent) ResponseEndTime() *foundation.NSDate {
-	return x.inner.ResponseEndTime()
-}
-
-// Returns the byte range downloaded for the resource request. If not available, the range start and end will be 0.
-//
-// ByteRange calls the underlying ByteRange.
-func (x *MetricMediaResourceRequestEvent) ByteRange() foundation.NSRange {
-	return x.inner.ByteRange()
-}
-
-// Returns true if the resource was read from the cache.
-//
-// WasReadFromCache calls the underlying WasReadFromCache.
-func (x *MetricMediaResourceRequestEvent) WasReadFromCache() bool {
-	return x.inner.WasReadFromCache()
-}
-
-// Returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
-//
-// ErrorEvent calls the underlying ErrorEvent.
-func (x *MetricMediaResourceRequestEvent) ErrorEvent() *MetricErrorEvent {
-	_r := x.inner.ErrorEvent()
-	if _r == nil {
+// metricMediaResourceRequestEventAdopt wraps an Objective-C object that this code just created as a
+// MetricMediaResourceRequestEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricMediaResourceRequestEventAdopt(id objc.ID) *MetricMediaResourceRequestEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MetricErrorEvent{inner: _r}
+	x := &MetricMediaResourceRequestEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
-//
-// NetworkTransactionMetrics calls the underlying NetworkTransactionMetrics.
-func (x *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() *foundation.NSURLSessionTaskMetrics {
-	return x.inner.NetworkTransactionMetrics()
+// NewMetricMediaResourceRequestEvent creates a new MetricMediaResourceRequestEvent.
+func NewMetricMediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricMediaResourceRequestEvent")), objc.RegisterName("new"))
+	return metricMediaResourceRequestEventAdopt(_id)
 }
 
-func (x *MetricMediaResourceRequestEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+// Url returns the URL of the resource request. If no value is available, returns nil.
+func (x *MetricMediaResourceRequestEvent) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
+}
+
+// ServerAddress the IP address of the server. If not available, the value is nil.
+func (x *MetricMediaResourceRequestEvent) ServerAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverAddress"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// RequestStartTime returns the start time of the resource request.
+func (x *MetricMediaResourceRequestEvent) RequestStartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStartTime"))
+	return obj.Wrap(_r)
+}
+
+// RequestEndTime returns the end time of the resource request.
+func (x *MetricMediaResourceRequestEvent) RequestEndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEndTime"))
+	return obj.Wrap(_r)
+}
+
+// ResponseStartTime returns the start time of the resource request response.
+func (x *MetricMediaResourceRequestEvent) ResponseStartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseStartTime"))
+	return obj.Wrap(_r)
+}
+
+// ResponseEndTime returns the end time of the resource request response.
+func (x *MetricMediaResourceRequestEvent) ResponseEndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseEndTime"))
+	return obj.Wrap(_r)
+}
+
+// ByteRange returns the byte range downloaded for the resource request. If not available, the range start and end will be 0.
+func (x *MetricMediaResourceRequestEvent) ByteRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("byteRange"))
+	return _r
+}
+
+// WasReadFromCache returns true if the resource was read from the cache.
+func (x *MetricMediaResourceRequestEvent) WasReadFromCache() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasReadFromCache"))
+	return _r
+}
+
+// ErrorEvent returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
+func (x *MetricMediaResourceRequestEvent) ErrorEvent() *MetricErrorEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
+	return MetricErrorEventFromID(_r)
+}
+
+// NetworkTransactionMetrics returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
+func (x *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkTransactionMetrics"))
+	return obj.Wrap(_r)
 }
 
 // MetricMediaResourceRequestEventable is the interface implemented by [MetricMediaResourceRequestEvent], for mocking and DI.
 type MetricMediaResourceRequestEventable interface {
-	Unwrap() *raw.AVMetricMediaResourceRequestEvent
-	Url() *foundation.NSURL
+	obj.Object
+	Url() obj.Object
 	ServerAddress() string
-	RequestStartTime() *foundation.NSDate
-	RequestEndTime() *foundation.NSDate
-	ResponseStartTime() *foundation.NSDate
-	ResponseEndTime() *foundation.NSDate
+	RequestStartTime() obj.Object
+	RequestEndTime() obj.Object
+	ResponseStartTime() obj.Object
+	ResponseEndTime() obj.Object
 	ByteRange() foundation.NSRange
 	WasReadFromCache() bool
 	ErrorEvent() *MetricErrorEvent
-	NetworkTransactionMetrics() *foundation.NSURLSessionTaskMetrics
+	NetworkTransactionMetrics() obj.Object
 }
 
 var _ MetricMediaResourceRequestEventable = (*MetricMediaResourceRequestEvent)(nil)
+
+var _ MetricEventProvider = (*MetricMediaResourceRequestEvent)(nil)

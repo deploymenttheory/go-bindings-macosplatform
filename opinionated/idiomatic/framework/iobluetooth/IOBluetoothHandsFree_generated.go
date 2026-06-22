@@ -5,275 +5,241 @@
 package iobluetooth
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Hands free profile class.
+// IOBluetoothHandsFree is an idiomatic wrapper over the Objective-C class IOBluetoothHandsFree.
 //
-// IOBluetoothHandsFree wraps [raw.IOBluetoothHandsFree] with a fluent Go API.
+// IOBluetoothHandsFree is an abstract base — you do not construct it directly. Construct one of [IOBluetoothHandsFreeAudioGateway], [IOBluetoothHandsFreeDevice] and pass it where a IOBluetoothHandsFree is accepted.
+//
+// Hands free profile class.
 type IOBluetoothHandsFree struct {
-	inner *raw.IOBluetoothHandsFree
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothHandsFree].
-func (x *IOBluetoothHandsFree) Unwrap() *raw.IOBluetoothHandsFree { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothHandsFree) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothHandsFreeFromID adopts an existing object pointer as a IOBluetoothHandsFree (nil for 0).
+// IOBluetoothHandsFreeFromID adopts an existing Objective-C object as a IOBluetoothHandsFree
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothHandsFreeFromID(id objc.ID) *IOBluetoothHandsFree {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothHandsFree{inner: raw.IOBluetoothHandsFreeFromID(id)}
-}
-
-// Create a new IOBluetoothHandsFree object
-//
-// NewIOBluetoothHandsFreeWithDeviceDelegate creates a new [IOBluetoothHandsFree].
-func NewIOBluetoothHandsFreeWithDeviceDelegate(device *raw.IOBluetoothDevice, inDelegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothHandsFree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:delegate:"), device.Ptr(), inDelegate)
-	return &IOBluetoothHandsFree{inner: raw.IOBluetoothHandsFreeFromID(_id)}
-}
-
-// Set the supported features
-//
-// WithSupportedFeatures sets the supportedFeatures property and returns the receiver for chaining.
-func (x *IOBluetoothHandsFree) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFree {
-	x.inner.SetSupportedFeatures(supportedFeatures)
+	x := &IOBluetoothHandsFree{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Return the input volume
-//
-// WithInputVolume sets the inputVolume property and returns the receiver for chaining.
-func (x *IOBluetoothHandsFree) WithInputVolume(inputVolume float32) *IOBluetoothHandsFree {
-	x.inner.SetInputVolume(inputVolume)
-	return x
-}
-
-// Return the input mute state.
-//
-// WithInputMuted sets the inputMuted property and returns the receiver for chaining.
-func (x *IOBluetoothHandsFree) WithInputMuted(inputMuted bool) *IOBluetoothHandsFree {
-	x.inner.SetInputMuted(inputMuted)
-	return x
-}
-
-// Return the output volume
-//
-// WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
-func (x *IOBluetoothHandsFree) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFree {
-	x.inner.SetOutputVolume(outputVolume)
-	return x
-}
-
-// Return the output mute state.
-//
-// WithOutputMuted sets the outputMuted property and returns the receiver for chaining.
-func (x *IOBluetoothHandsFree) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFree {
-	x.inner.SetOutputMuted(outputMuted)
-	return x
-}
-
-// Return the delegate
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *IOBluetoothHandsFree) WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFree {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Return an indicator’s value
-//
-// Indicator calls the underlying Indicator.
-func (x *IOBluetoothHandsFree) Indicator(indicatorName string) int {
-	return x.inner.Indicator(foundation.NSStringStringWithUTF8String(indicatorName))
-}
-
-// Set an indicator’s value
-//
-// SetIndicatorValue calls the underlying SetIndicatorValue.
-func (x *IOBluetoothHandsFree) SetIndicatorValue(indicatorName string, indicatorValue int) {
-	x.inner.SetIndicatorValue(foundation.NSStringStringWithUTF8String(indicatorName), indicatorValue)
-}
-
-// Connect to the device
-//
-// Connect calls the underlying Connect.
-func (x *IOBluetoothHandsFree) Connect() {
-	x.inner.Connect()
-}
-
-// Disconnect from the device
-//
-// Disconnect calls the underlying Disconnect.
-func (x *IOBluetoothHandsFree) Disconnect() {
-	x.inner.Disconnect()
-}
-
-// Open a SCO connection with the device
-//
-// ConnectSCO calls the underlying ConnectSCO.
-func (x *IOBluetoothHandsFree) ConnectSCO() {
-	x.inner.ConnectSCO()
-}
-
-// Disconnect the SCO connection with the device
-//
-// DisconnectSCO calls the underlying DisconnectSCO.
-func (x *IOBluetoothHandsFree) DisconnectSCO() {
-	x.inner.DisconnectSCO()
-}
-
-// Determine if there is a SCO connection to the device
-//
-// IsSCOConnected calls the underlying IsSCOConnected.
-func (x *IOBluetoothHandsFree) IsSCOConnected() bool {
-	return x.inner.IsSCOConnected()
-}
-
-// @method		supportedFeatures @abstract		Return supported features @discussion	Returns the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @result		The supported features bitmap @method		setSupportedFeatures:featuresBitmap @abstract		Set the supported features @discussion	Sets the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @param			featuresBitmap The features bitmap
-//
-// SupportedFeatures calls the underlying SupportedFeatures.
-func (x *IOBluetoothHandsFree) SupportedFeatures() uint32 {
-	return x.inner.SupportedFeatures()
-}
-
-// SetSupportedFeatures calls the underlying SetSupportedFeatures.
-func (x *IOBluetoothHandsFree) SetSupportedFeatures(supportedFeatures uint32) {
-	x.inner.SetSupportedFeatures(supportedFeatures)
-}
-
-// @method		inputVolume @abstract		Return the input volume @discussion	Returns the input volume between 0 and 1. 0 is the same as mute. @result		The input volume @method		setInputVolume:newVolume @abstract		Set the input volume @discussion	Sets the input volume between 0 and 1. 0 is the same as mute. @param			newVolume The new input volume
-//
-// InputVolume calls the underlying InputVolume.
-func (x *IOBluetoothHandsFree) InputVolume() float32 {
-	return x.inner.InputVolume()
-}
-
-// SetInputVolume calls the underlying SetInputVolume.
-func (x *IOBluetoothHandsFree) SetInputVolume(inputVolume float32) {
-	x.inner.SetInputVolume(inputVolume)
-}
-
-// @method		isInputMuted @abstract		Return the input mute state. @discussion	Returns the inputs mute state. @result		YES if muted; otherwise NO. @method		setInputMuted:muted @abstract		Set the input mute state. @discussion	Sets the inputs mute state. @param			muted YES if muted; otherwise NO.
-//
-// IsInputMuted calls the underlying IsInputMuted.
-func (x *IOBluetoothHandsFree) IsInputMuted() bool {
-	return x.inner.IsInputMuted()
-}
-
-// SetInputMuted calls the underlying SetInputMuted.
-func (x *IOBluetoothHandsFree) SetInputMuted(inputMuted bool) {
-	x.inner.SetInputMuted(inputMuted)
-}
-
-// @method		outputVolume @abstract		Return the output volume @discussion	Returns the output volume between 0 and 1. 0 is the same as mute. @result		The output volume @method		setOutputVolume:newVolume @abstract		Set the output volume @discussion	Sets the output volume between 0 and 1. 0 is the same as mute. @param			newVolume The new output volume
-//
-// OutputVolume calls the underlying OutputVolume.
-func (x *IOBluetoothHandsFree) OutputVolume() float32 {
-	return x.inner.OutputVolume()
-}
-
-// SetOutputVolume calls the underlying SetOutputVolume.
-func (x *IOBluetoothHandsFree) SetOutputVolume(outputVolume float32) {
-	x.inner.SetOutputVolume(outputVolume)
-}
-
-// @method		isOutputMuted @abstract		Return the output mute state. @discussion	Returns the outputs mute state. @result		YES if muted; otherwise NO. @method		setOutputMuted:muted @abstract		Set the output mute state. @discussion	Sets the outputs mute state. @param			muted YES if muted; otherwise NO.
-//
-// IsOutputMuted calls the underlying IsOutputMuted.
-func (x *IOBluetoothHandsFree) IsOutputMuted() bool {
-	return x.inner.IsOutputMuted()
-}
-
-// SetOutputMuted calls the underlying SetOutputMuted.
-func (x *IOBluetoothHandsFree) SetOutputMuted(outputMuted bool) {
-	x.inner.SetOutputMuted(outputMuted)
-}
-
-// @method		device @abstract		Return the IOBluetoothDevice. @discussion	Returns the IOBluetoothDevice to connect with. @result		The IOBluetoothDevice object
-//
-// Device calls the underlying Device.
-func (x *IOBluetoothHandsFree) Device() *IOBluetoothDevice {
-	_r := x.inner.Device()
-	if _r == nil {
+// iOBluetoothHandsFreeAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothHandsFree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothHandsFreeAdopt(id objc.ID) *IOBluetoothHandsFree {
+	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothDevice{inner: _r}
+	x := &IOBluetoothHandsFree{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method		deviceSupportedFeatures @abstract		Return the device's supported features. @discussion	Returns the device's supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @result		The device features bitmap
-//
-// DeviceSupportedFeatures calls the underlying DeviceSupportedFeatures.
+// Description returns the object's -description text.
+func (x *IOBluetoothHandsFree) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothHandsFree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothHandsFree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IOBluetoothHandsFree) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithSupportedFeatures set the supported features
+func (x *IOBluetoothHandsFree) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFree {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
+	return x
+}
+
+// WithInputVolume return the input volume
+func (x *IOBluetoothHandsFree) WithInputVolume(inputVolume float32) *IOBluetoothHandsFree {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputVolume:"), inputVolume)
+	return x
+}
+
+// WithInputMuted return the input mute state.
+func (x *IOBluetoothHandsFree) WithInputMuted(inputMuted bool) *IOBluetoothHandsFree {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMuted:"), inputMuted)
+	return x
+}
+
+// WithOutputVolume return the output volume
+func (x *IOBluetoothHandsFree) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFree {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
+	return x
+}
+
+// WithOutputMuted return the output mute state.
+func (x *IOBluetoothHandsFree) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFree {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputMuted:"), outputMuted)
+	return x
+}
+
+// Indicator return an indicator’s value
+func (x *IOBluetoothHandsFree) Indicator(indicatorName string) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indicator:"), purego.NSString(indicatorName))
+	return _r
+}
+
+// SetIndicatorValue set an indicator’s value
+func (x *IOBluetoothHandsFree) SetIndicatorValue(indicatorName string, indicatorValue int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndicator:value:"), purego.NSString(indicatorName), indicatorValue)
+}
+
+// Connect connect to the device
+func (x *IOBluetoothHandsFree) Connect() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connect"))
+}
+
+// Disconnect disconnect from the device
+func (x *IOBluetoothHandsFree) Disconnect() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnect"))
+}
+
+// ConnectSCO open a SCO connection with the device
+func (x *IOBluetoothHandsFree) ConnectSCO() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectSCO"))
+}
+
+// DisconnectSCO disconnect the SCO connection with the device
+func (x *IOBluetoothHandsFree) DisconnectSCO() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectSCO"))
+}
+
+// IsSCOConnected determine if there is a SCO connection to the device
+func (x *IOBluetoothHandsFree) IsSCOConnected() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSCOConnected"))
+	return _r
+}
+
+// SupportedFeatures return supported features Returns the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” Set the supported features Sets the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.”
+func (x *IOBluetoothHandsFree) SupportedFeatures() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("supportedFeatures"))
+	return _r
+}
+
+// SetSupportedFeatures wraps the corresponding Objective-C method.
+func (x *IOBluetoothHandsFree) SetSupportedFeatures(supportedFeatures uint32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
+}
+
+// InputVolume return the input volume Returns the input volume between 0 and 1. 0 is the same as mute. Set the input volume Sets the input volume between 0 and 1. 0 is the same as mute.
+func (x *IOBluetoothHandsFree) InputVolume() float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("inputVolume"))
+	return _r
+}
+
+// SetInputVolume wraps the corresponding Objective-C method.
+func (x *IOBluetoothHandsFree) SetInputVolume(inputVolume float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputVolume:"), inputVolume)
+}
+
+// IsInputMuted return the input mute state. Returns the inputs mute state. Set the input mute state. Sets the inputs mute state.
+func (x *IOBluetoothHandsFree) IsInputMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInputMuted"))
+	return _r
+}
+
+// SetInputMuted wraps the corresponding Objective-C method.
+func (x *IOBluetoothHandsFree) SetInputMuted(inputMuted bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMuted:"), inputMuted)
+}
+
+// OutputVolume return the output volume Returns the output volume between 0 and 1. 0 is the same as mute. Set the output volume Sets the output volume between 0 and 1. 0 is the same as mute.
+func (x *IOBluetoothHandsFree) OutputVolume() float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("outputVolume"))
+	return _r
+}
+
+// SetOutputVolume wraps the corresponding Objective-C method.
+func (x *IOBluetoothHandsFree) SetOutputVolume(outputVolume float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
+}
+
+// IsOutputMuted return the output mute state. Returns the outputs mute state. Set the output mute state. Sets the outputs mute state.
+func (x *IOBluetoothHandsFree) IsOutputMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOutputMuted"))
+	return _r
+}
+
+// SetOutputMuted wraps the corresponding Objective-C method.
+func (x *IOBluetoothHandsFree) SetOutputMuted(outputMuted bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputMuted:"), outputMuted)
+}
+
+// Device return the IOBluetoothDevice. Returns the IOBluetoothDevice to connect with.
+func (x *IOBluetoothHandsFree) Device() *IOBluetoothDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return IOBluetoothDeviceFromID(_r)
+}
+
+// DeviceSupportedFeatures return the device's supported features. Returns the device's supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.”
 func (x *IOBluetoothHandsFree) DeviceSupportedFeatures() uint32 {
-	return x.inner.DeviceSupportedFeatures()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceSupportedFeatures"))
+	return _r
 }
 
-// @method		deviceSupportedSMSServices @abstract		Return the device's supported SMS services. @discussion	Returns the device's supported SMS services bitmap. The values are described in “IOBluetoothHandsFreeSMSSupport.” @result		The SMS services supported
-//
-// DeviceSupportedSMSServices calls the underlying DeviceSupportedSMSServices.
+// DeviceSupportedSMSServices return the device's supported SMS services. Returns the device's supported SMS services bitmap. The values are described in “IOBluetoothHandsFreeSMSSupport.”
 func (x *IOBluetoothHandsFree) DeviceSupportedSMSServices() uint32 {
-	return x.inner.DeviceSupportedSMSServices()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceSupportedSMSServices"))
+	return _r
 }
 
-// @method		deviceCallHoldModes @abstract		Return the device's supported call hold modes. @discussion	Returns the device's supported call hold modes bitmap. The values are described in “IOBluetoothHandsFreeCallHoldModes.” @result		The SMS services supported
-//
-// DeviceCallHoldModes calls the underlying DeviceCallHoldModes.
+// DeviceCallHoldModes return the device's supported call hold modes. Returns the device's supported call hold modes bitmap. The values are described in “IOBluetoothHandsFreeCallHoldModes.”
 func (x *IOBluetoothHandsFree) DeviceCallHoldModes() uint32 {
-	return x.inner.DeviceCallHoldModes()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceCallHoldModes"))
+	return _r
 }
 
-// @method		SMSMode @abstract		Return the device's SMS mode. @discussion	Returns the device's SMS mode. The values are described in “IOBluetoothSMSMode.” @result		The SMS mode
-//
-// SMSMode calls the underlying SMSMode.
+// SMSMode return the device's SMS mode. Returns the device's SMS mode. The values are described in “IOBluetoothSMSMode.”
 func (x *IOBluetoothHandsFree) SMSMode() IOBluetoothSMSMode {
-	return IOBluetoothSMSMode(x.inner.SMSMode())
+	_r := objc.Send[IOBluetoothSMSMode](objref.IDOf(x), objc.RegisterName("SMSMode"))
+	return _r
 }
 
-// @method		isSMSEnabled @abstract		Return YES if the device has SMS enabled. @discussion	Returns YES if the device has SMS enabled (by responding to a CMGF command). NO if the device has not set an SMS mode or doesn't support SMS. @result		YES if the device has SMSEnabled; otherwise, NO.
-//
-// IsSMSEnabled calls the underlying IsSMSEnabled.
+// IsSMSEnabled return YES if the device has SMS enabled. Returns YES if the device has SMS enabled (by responding to a CMGF command). NO if the device has not set an SMS mode or doesn't support SMS.
 func (x *IOBluetoothHandsFree) IsSMSEnabled() bool {
-	return x.inner.IsSMSEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSMSEnabled"))
+	return _r
 }
 
-// @method		delegate @abstract		Return the delegate @discussion	Returns the hands free object's delegate. @result		The delegate for the hands free object or nil if it doesn't have a delegate. @method		setDelegate:newDelegate @abstract		Sets the hands free object’s delegate to a given object or removes an existing delegate. @discussion	A IOBluetoothHandsFree delegate can optionally respond to any of the delegate methods in IOBluetoothHandsFreeDelegate and any subclasses delegates. @param			newDelegate The delegate for the hands free object. Pass nil to remove an existing delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *IOBluetoothHandsFree) Delegate() raw.IOBluetoothHandsFreeDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *IOBluetoothHandsFree) SetDelegate(delegate raw.IOBluetoothHandsFreeDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @method		isConnected @abstract		Determine if there is a serivice level connection to the device @discussion	Determines if there is a serivice level connection to the device. @result		YES if there is a serivice level connection to the device; otherwise, NO.
-//
-// IsConnected calls the underlying IsConnected.
+// IsConnected determine if there is a serivice level connection to the device Determines if there is a serivice level connection to the device.
 func (x *IOBluetoothHandsFree) IsConnected() bool {
-	return x.inner.IsConnected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
+	return _r
 }
-
-func (x *IOBluetoothHandsFree) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree { return x.inner }
 
 // IOBluetoothHandsFreeable is the interface implemented by [IOBluetoothHandsFree], for mocking and DI.
 type IOBluetoothHandsFreeable interface {
-	Unwrap() *raw.IOBluetoothHandsFree
+	obj.Object
 	WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFree
 	WithInputVolume(inputVolume float32) *IOBluetoothHandsFree
 	WithInputMuted(inputMuted bool) *IOBluetoothHandsFree
 	WithOutputVolume(outputVolume float32) *IOBluetoothHandsFree
 	WithOutputMuted(outputMuted bool) *IOBluetoothHandsFree
-	WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFree
 	Indicator(indicatorName string) int
 	SetIndicatorValue(indicatorName string, indicatorValue int)
 	Connect()
@@ -297,9 +263,14 @@ type IOBluetoothHandsFreeable interface {
 	DeviceCallHoldModes() uint32
 	SMSMode() IOBluetoothSMSMode
 	IsSMSEnabled() bool
-	Delegate() raw.IOBluetoothHandsFreeDelegate
-	SetDelegate(delegate raw.IOBluetoothHandsFreeDelegate)
 	IsConnected() bool
 }
 
 var _ IOBluetoothHandsFreeable = (*IOBluetoothHandsFree)(nil)
+
+// isIOBluetoothHandsFree marks IOBluetoothHandsFree — and, by embedding promotion, its
+// subclasses — as a member of the IOBluetoothHandsFree hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *IOBluetoothHandsFree) isIOBluetoothHandsFree() {}
+
+var _ IOBluetoothHandsFreeProvider = (*IOBluetoothHandsFree)(nil)

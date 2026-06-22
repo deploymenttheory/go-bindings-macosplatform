@@ -6,285 +6,217 @@ package quartzcore
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// CAAnimationAnimation calls the underlying CAAnimationAnimation.
+// CAAnimationAnimation creates and returns a new CAAnimation instance.
 func CAAnimationAnimation() *Animation {
-	_r := raw.CAAnimationAnimation()
-	if _r == nil {
-		return nil
-	}
-	return &Animation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAAnimation")), objc.RegisterName("animation"))
+	return AnimationFromID(_r)
 }
 
-// DefaultValueForKey calls the underlying CAAnimationDefaultValueForKey.
-func DefaultValueForKey(key string) objc.ID {
-	return raw.CAAnimationDefaultValueForKey(foundation.NSStringStringWithUTF8String(key))
+// DefaultValueForKey specifies the default value of the property with the specified key.
+func DefaultValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAAnimation")), objc.RegisterName("defaultValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// ConstraintWithAttributeRelativeToAttributeScaleOffset calls the underlying CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset.
-func ConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, m float64, c float64) *Constraint {
-	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset(raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId), raw.CAConstraintAttribute(srcAttr), m, c)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// ConstraintWithAttributeRelativeToAttributeScaleOffset creates and returns an CAConstraint object with the specified parameters.
+func ConstraintWithAttributeRelativeToAttributeScaleOffset(attr ConstraintAttribute, srcId string, srcAttr ConstraintAttribute, m float64, c float64) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAConstraint")), objc.RegisterName("constraintWithAttribute:relativeTo:attribute:scale:offset:"), attr, purego.NSString(srcId), srcAttr, m, c)
+	return ConstraintFromID(_r)
 }
 
-// ConstraintWithAttributeRelativeToAttributeOffset calls the underlying CAConstraintConstraintWithAttributeRelativeToAttributeOffset.
-func ConstraintWithAttributeRelativeToAttributeOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, c float64) *Constraint {
-	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttributeOffset(raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId), raw.CAConstraintAttribute(srcAttr), c)
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// ConstraintWithAttributeRelativeToAttributeOffset creates and returns an CAConstraint object with the specified parameters.
+func ConstraintWithAttributeRelativeToAttributeOffset(attr ConstraintAttribute, srcId string, srcAttr ConstraintAttribute, c float64) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAConstraint")), objc.RegisterName("constraintWithAttribute:relativeTo:attribute:offset:"), attr, purego.NSString(srcId), srcAttr, c)
+	return ConstraintFromID(_r)
 }
 
-// ConstraintWithAttributeRelativeToAttribute calls the underlying CAConstraintConstraintWithAttributeRelativeToAttribute.
-func ConstraintWithAttributeRelativeToAttribute(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute) *Constraint {
-	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttribute(raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId), raw.CAConstraintAttribute(srcAttr))
-	if _r == nil {
-		return nil
-	}
-	return &Constraint{inner: _r}
+// ConstraintWithAttributeRelativeToAttribute creates and returns an CAConstraint object with the specified parameters.
+func ConstraintWithAttributeRelativeToAttribute(attr ConstraintAttribute, srcId string, srcAttr ConstraintAttribute) *Constraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAConstraint")), objc.RegisterName("constraintWithAttribute:relativeTo:attribute:"), attr, purego.NSString(srcId), srcAttr)
+	return ConstraintFromID(_r)
 }
 
-// LayoutManager calls the underlying CAConstraintLayoutManagerLayoutManager.
+// LayoutManager returns the shared layout manager object.
 func LayoutManager() *ConstraintLayoutManager {
-	_r := raw.CAConstraintLayoutManagerLayoutManager()
-	if _r == nil {
-		return nil
-	}
-	return &ConstraintLayoutManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAConstraintLayoutManager")), objc.RegisterName("layoutManager"))
+	return ConstraintLayoutManagerFromID(_r)
 }
 
-// HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale calls the underlying CAEDRMetadataHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale.
-func HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData *foundation.NSData, contentData *foundation.NSData, scale float32) *EDRMetadata {
-	_r := raw.CAEDRMetadataHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData, contentData, scale)
-	if _r == nil {
-		return nil
-	}
-	return &EDRMetadata{inner: _r}
+// HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale creates EDR metadata for HDR10 content based on mastering display color information and content light levels.
+func HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData obj.Object, contentData obj.Object, scale float32) *EDRMetadata {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HDR10MetadataWithDisplayInfo:contentInfo:opticalOutputScale:"), objref.IDOf(displayData), objref.IDOf(contentData), scale)
+	return EDRMetadataFromID(_r)
 }
 
-// HDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale calls the underlying CAEDRMetadataHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale.
+// HDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale creates EDR metadata for HDR10 content based on the luminance characteristics of a mastering display.
 func HDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale(minNits float32, maxNits float32, scale float32) *EDRMetadata {
-	_r := raw.CAEDRMetadataHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale(minNits, maxNits, scale)
-	if _r == nil {
-		return nil
-	}
-	return &EDRMetadata{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HDR10MetadataWithMinLuminance:maxLuminance:opticalOutputScale:"), minNits, maxNits, scale)
+	return EDRMetadataFromID(_r)
 }
 
-// HLGMetadataWithAmbientViewingEnvironment calls the underlying CAEDRMetadataHLGMetadataWithAmbientViewingEnvironment.
-func HLGMetadataWithAmbientViewingEnvironment(data *foundation.NSData) *EDRMetadata {
-	_r := raw.CAEDRMetadataHLGMetadataWithAmbientViewingEnvironment(data)
-	if _r == nil {
-		return nil
-	}
-	return &EDRMetadata{inner: _r}
+// HLGMetadataWithAmbientViewingEnvironment wraps the corresponding Objective-C method.
+func HLGMetadataWithAmbientViewingEnvironment(data obj.Object) *EDRMetadata {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HLGMetadataWithAmbientViewingEnvironment:"), objref.IDOf(data))
+	return EDRMetadataFromID(_r)
 }
 
-// HLGMetadata calls the underlying CAEDRMetadataHLGMetadata.
+// HLGMetadata wraps the corresponding Objective-C method.
 func HLGMetadata() *EDRMetadata {
-	_r := raw.CAEDRMetadataHLGMetadata()
-	if _r == nil {
-		return nil
-	}
-	return &EDRMetadata{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HLGMetadata"))
+	return EDRMetadataFromID(_r)
 }
 
-// IsAvailable calls the underlying CAEDRMetadataIsAvailable.
+// IsAvailable wraps the corresponding Objective-C method.
 func IsAvailable() bool {
-	return raw.CAEDRMetadataIsAvailable()
+	_r := objc.Send[bool](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("isAvailable"))
+	return _r
 }
 
-// CAEmitterCellEmitterCell calls the underlying CAEmitterCellEmitterCell.
+// CAEmitterCellEmitterCell creates and returns an instance of CAEmitterCell.
 func CAEmitterCellEmitterCell() *EmitterCell {
-	_r := raw.CAEmitterCellEmitterCell()
-	if _r == nil {
-		return nil
-	}
-	return &EmitterCell{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEmitterCell")), objc.RegisterName("emitterCell"))
+	return EmitterCellFromID(_r)
 }
 
-// CAEmitterCellDefaultValueForKey calls the underlying CAEmitterCellDefaultValueForKey.
-func CAEmitterCellDefaultValueForKey(key string) objc.ID {
-	return raw.CAEmitterCellDefaultValueForKey(foundation.NSStringStringWithUTF8String(key))
+// CAEmitterCellDefaultValueForKey returns the default value of the property with the specified key.
+func CAEmitterCellDefaultValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEmitterCell")), objc.RegisterName("defaultValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// CALayerLayer calls the underlying CALayerLayer.
+// CALayerLayer creates and returns an instance of the layer object.
 func CALayerLayer() *Layer {
-	_r := raw.CALayerLayer()
-	if _r == nil {
-		return nil
-	}
-	return &Layer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CALayer")), objc.RegisterName("layer"))
+	return LayerFromID(_r)
 }
 
-// CALayerDefaultValueForKey calls the underlying CALayerDefaultValueForKey.
-func CALayerDefaultValueForKey(key string) objc.ID {
-	return raw.CALayerDefaultValueForKey(foundation.NSStringStringWithUTF8String(key))
+// CALayerDefaultValueForKey specifies the default value associated with the specified key.
+func CALayerDefaultValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CALayer")), objc.RegisterName("defaultValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// NeedsDisplayForKey calls the underlying CALayerNeedsDisplayForKey.
+// NeedsDisplayForKey returns a Boolean indicating whether changes to the specified key require the layer to be redisplayed.
 func NeedsDisplayForKey(key string) bool {
-	return raw.CALayerNeedsDisplayForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objc.ID(_class("CALayer")), objc.RegisterName("needsDisplayForKey:"), purego.NSString(key))
+	return _r
 }
 
-// CornerCurveExpansionFactor calls the underlying CALayerCornerCurveExpansionFactor.
-func CornerCurveExpansionFactor(curve *foundation.NSString) float64 {
-	return raw.CALayerCornerCurveExpansionFactor(curve)
+// CornerCurveExpansionFactor wraps the corresponding Objective-C method.
+func CornerCurveExpansionFactor(curve obj.Object) float64 {
+	_r := objc.Send[float64](objc.ID(_class("CALayer")), objc.RegisterName("cornerCurveExpansionFactor:"), objref.IDOf(curve))
+	return _r
 }
 
-// DefaultActionForKey calls the underlying CALayerDefaultActionForKey.
-func DefaultActionForKey(event string) raw.CAAction {
-	return raw.CALayerDefaultActionForKey(foundation.NSStringStringWithUTF8String(event))
-}
-
-// LayerWithRemoteClientId calls the underlying CALayerLayerWithRemoteClientId.
+// LayerWithRemoteClientId initializes a layer with a remote client ID.
 func LayerWithRemoteClientId(client_id uint32) *Layer {
-	_r := raw.CALayerLayerWithRemoteClientId(client_id)
-	if _r == nil {
-		return nil
-	}
-	return &Layer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CALayer")), objc.RegisterName("layerWithRemoteClientId:"), client_id)
+	return LayerFromID(_r)
 }
 
-// FunctionWithName calls the underlying CAMediaTimingFunctionFunctionWithName.
-func FunctionWithName(name *foundation.NSString) *MediaTimingFunction {
-	_r := raw.CAMediaTimingFunctionFunctionWithName(name)
-	if _r == nil {
-		return nil
-	}
-	return &MediaTimingFunction{inner: _r}
+// FunctionWithName creates and returns a new instance of CAMediaTimingFunction configured with the predefined timing function specified by name.
+func FunctionWithName(name obj.Object) *MediaTimingFunction {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAMediaTimingFunction")), objc.RegisterName("functionWithName:"), objref.IDOf(name))
+	return MediaTimingFunctionFromID(_r)
 }
 
-// FunctionWithControlPoints calls the underlying CAMediaTimingFunctionFunctionWithControlPoints.
+// FunctionWithControlPoints creates and returns a new instance of CAMediaTimingFunction timing function modeled as a cubic Bézier curve using the specified control points.
 func FunctionWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *MediaTimingFunction {
-	_r := raw.CAMediaTimingFunctionFunctionWithControlPoints(c1x, c1y, c2x, c2y)
-	if _r == nil {
-		return nil
-	}
-	return &MediaTimingFunction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAMediaTimingFunction")), objc.RegisterName("functionWithControlPoints::::"), c1x, c1y, c2x, c2y)
+	return MediaTimingFunctionFromID(_r)
 }
 
-// AnimationWithKeyPath calls the underlying CAPropertyAnimationAnimationWithKeyPath.
+// AnimationWithKeyPath creates and returns an CAPropertyAnimation instance for the specified key path.
 func AnimationWithKeyPath(path string) *PropertyAnimation {
-	_r := raw.CAPropertyAnimationAnimationWithKeyPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &PropertyAnimation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CAPropertyAnimation")), objc.RegisterName("animationWithKeyPath:"), purego.NSString(path))
+	return PropertyAnimationFromID(_r)
 }
 
-// SharedServer calls the underlying CARemoteLayerServerSharedServer.
+// SharedServer returns the (singleton) instance of the shared remote layer server.
 func SharedServer() *RemoteLayerServer {
-	_r := raw.CARemoteLayerServerSharedServer()
-	if _r == nil {
-		return nil
-	}
-	return &RemoteLayerServer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CARemoteLayerServer")), objc.RegisterName("sharedServer"))
+	return RemoteLayerServerFromID(_r)
 }
 
-// RendererWithCGLContextOptions calls the underlying CARendererRendererWithCGLContextOptions.
-func RendererWithCGLContextOptions(ctx unsafe.Pointer, dict *foundation.NSDictionary[objc.ID, objc.ID]) *Renderer {
-	_r := raw.CARendererRendererWithCGLContextOptions(ctx, dict)
-	if _r == nil {
-		return nil
-	}
-	return &Renderer{inner: _r}
-}
-
-// RendererWithMTLTextureOptions calls the underlying CARendererRendererWithMTLTextureOptions.
-func RendererWithMTLTextureOptions(tex metal.MTLTexture, dict *foundation.NSDictionary[objc.ID, objc.ID]) *Renderer {
-	_r := raw.CARendererRendererWithMTLTextureOptions(tex, dict)
-	if _r == nil {
-		return nil
-	}
-	return &Renderer{inner: _r}
-}
-
-// FadeDuration calls the underlying CATiledLayerFadeDuration.
+// FadeDuration the time, in seconds, that newly added images take to “fade-in” to the rendered representation of the tiled layer.
 func FadeDuration() float64 {
-	return raw.CATiledLayerFadeDuration()
+	_r := objc.Send[float64](objc.ID(_class("CATiledLayer")), objc.RegisterName("fadeDuration"))
+	return _r
 }
 
-// Begin calls the underlying CATransactionBegin.
+// Begin begin a new transaction for the current thread.
 func Begin() {
-	raw.CATransactionBegin()
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("begin"))
 }
 
-// Commit calls the underlying CATransactionCommit.
+// Commit commit all changes made during the current transaction.
 func Commit() {
-	raw.CATransactionCommit()
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("commit"))
 }
 
-// Flush calls the underlying CATransactionFlush.
+// Flush flushes any extant implicit transaction.
 func Flush() {
-	raw.CATransactionFlush()
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("flush"))
 }
 
-// Lock calls the underlying CATransactionLock.
+// Lock attempts to acquire a recursive spin-lock lock, ensuring that returned layer values are valid until unlocked.
 func Lock() {
-	raw.CATransactionLock()
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("lock"))
 }
 
-// Unlock calls the underlying CATransactionUnlock.
+// Unlock relinquishes a previously acquired transaction lock.
 func Unlock() {
-	raw.CATransactionUnlock()
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("unlock"))
 }
 
-// AnimationDuration calls the underlying CATransactionAnimationDuration.
+// AnimationDuration returns the animation duration used by all animations within this transaction group.
 func AnimationDuration() float64 {
-	return raw.CATransactionAnimationDuration()
+	_r := objc.Send[float64](objc.ID(_class("CATransaction")), objc.RegisterName("animationDuration"))
+	return _r
 }
 
-// SetAnimationDuration calls the underlying CATransactionSetAnimationDuration.
+// SetAnimationDuration sets the animation duration used by all animations within this transaction group.
 func SetAnimationDuration(dur float64) {
-	raw.CATransactionSetAnimationDuration(dur)
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setAnimationDuration:"), dur)
 }
 
-// AnimationTimingFunction calls the underlying CATransactionAnimationTimingFunction.
+// AnimationTimingFunction returns the timing function used for all animations within this transaction group.
 func AnimationTimingFunction() *MediaTimingFunction {
-	_r := raw.CATransactionAnimationTimingFunction()
-	if _r == nil {
-		return nil
-	}
-	return &MediaTimingFunction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("animationTimingFunction"))
+	return MediaTimingFunctionFromID(_r)
 }
 
-// SetAnimationTimingFunction calls the underlying CATransactionSetAnimationTimingFunction.
-func SetAnimationTimingFunction(function *raw.CAMediaTimingFunction) {
-	raw.CATransactionSetAnimationTimingFunction(function)
+// SetAnimationTimingFunction sets the timing function used for all animations within this transaction group.
+func SetAnimationTimingFunction(function *MediaTimingFunction) {
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setAnimationTimingFunction:"), objref.IDOf(function))
 }
 
-// DisableActions calls the underlying CATransactionDisableActions.
+// DisableActions returns whether actions triggered as a result of property changes made within this transaction group are suppressed.
 func DisableActions() bool {
-	return raw.CATransactionDisableActions()
+	_r := objc.Send[bool](objc.ID(_class("CATransaction")), objc.RegisterName("disableActions"))
+	return _r
 }
 
-// SetDisableActions calls the underlying CATransactionSetDisableActions.
+// SetDisableActions sets whether actions triggered as a result of property changes made within this transaction group are suppressed.
 func SetDisableActions(flag bool) {
-	raw.CATransactionSetDisableActions(flag)
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setDisableActions:"), flag)
 }
 
-// CompletionBlock calls the underlying CATransactionCompletionBlock.
-func CompletionBlock() objc.Block {
-	return raw.CATransactionCompletionBlock()
-}
-
+// SetCompletionBlock sets the completion block object.
+//
 // SetCompletionBlock blocks until the operation completes or ctx is cancelled.
 func SetCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.CATransactionSetCompletionBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -293,21 +225,19 @@ func SetCompletionBlock(ctx context.Context) error {
 	}
 }
 
-// ValueForKey calls the underlying CATransactionValueForKey.
-func ValueForKey(key string) objc.ID {
-	return raw.CATransactionValueForKey(foundation.NSStringStringWithUTF8String(key))
+// ValueForKey returns the arbitrary keyed-data specified by the given key.
+func ValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("valueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// SetValueForKey calls the underlying CATransactionSetValueForKey.
-func SetValueForKey(anObject objc.ID, key string) {
-	raw.CATransactionSetValueForKey(anObject, foundation.NSStringStringWithUTF8String(key))
+// SetValueForKey sets the arbitrary keyed-data for the specified key.
+func SetValueForKey(anObject obj.Object, key string) {
+	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setValue:forKey:"), objref.IDOf(anObject), purego.NSString(key))
 }
 
-// CAValueFunctionFunctionWithName calls the underlying CAValueFunctionFunctionWithName.
-func CAValueFunctionFunctionWithName(name *foundation.NSString) *ValueFunction {
-	_r := raw.CAValueFunctionFunctionWithName(name)
-	if _r == nil {
-		return nil
-	}
-	return &ValueFunction{inner: _r}
+// CAValueFunctionFunctionWithName returns the value function object identified by the name.
+func CAValueFunctionFunctionWithName(name obj.Object) *ValueFunction {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAValueFunction")), objc.RegisterName("functionWithName:"), objref.IDOf(name))
+	return ValueFunctionFromID(_r)
 }

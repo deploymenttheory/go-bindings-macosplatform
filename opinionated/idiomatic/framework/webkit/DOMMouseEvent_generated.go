@@ -5,160 +5,150 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMMouseEvent wraps [raw.DOMMouseEvent] with a fluent Go API.
+// DOMMouseEvent is an idiomatic wrapper over the Objective-C class DOMMouseEvent.
+//
+// DOMMouseEvent is an abstract base — you do not construct it directly. Construct one of [DOMWheelEvent] and pass it where a DOMMouseEvent is accepted.
 type DOMMouseEvent struct {
-	inner *raw.DOMMouseEvent
+	DOMUIEvent
 }
 
-// Unwrap returns the underlying [raw.DOMMouseEvent].
-func (x *DOMMouseEvent) Unwrap() *raw.DOMMouseEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMMouseEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMMouseEventFromID adopts an existing object pointer as a DOMMouseEvent (nil for 0).
+// DOMMouseEventFromID adopts an existing Objective-C object as a DOMMouseEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMMouseEventFromID(id objc.ID) *DOMMouseEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DOMMouseEvent{inner: raw.DOMMouseEventFromID(id)}
+	x := &DOMMouseEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMMouseEventMouseEventCanBubbleCancelableViewDetailScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKeyButtonRelatedTarget creates a new [DOMMouseEvent].
-func NewDOMMouseEventMouseEventCanBubbleCancelableViewDetailScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKeyButtonRelatedTarget(type_ string, canBubble bool, cancelable bool, view *raw.DOMAbstractView, detail int, screenX int, screenY int, clientX int, clientY int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool, button uint16, relatedTarget raw.DOMEventTarget) *DOMMouseEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMMouseEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMouseEvent:canBubble:cancelable:view:detail:screenX:screenY:clientX:clientY:ctrlKey:altKey:shiftKey:metaKey:button:relatedTarget:"), foundation.NSStringStringWithUTF8String(type_).Ptr(), canBubble, cancelable, view.Ptr(), detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget)
-	return &DOMMouseEvent{inner: raw.DOMMouseEventFromID(_id)}
+// dOMMouseEventAdopt wraps an Objective-C object that this code just created as a
+// DOMMouseEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMMouseEventAdopt(id objc.ID) *DOMMouseEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMMouseEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewDOMMouseEventMouseEvent creates a new [DOMMouseEvent].
-func NewDOMMouseEventMouseEvent(type_ string, canBubble bool, cancelable bool, view *raw.DOMAbstractView, detail int, screenX int, screenY int, clientX int, clientY int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool, button uint16, relatedTarget raw.DOMEventTarget) *DOMMouseEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMMouseEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMouseEvent:::::::::::::::"), foundation.NSStringStringWithUTF8String(type_).Ptr(), canBubble, cancelable, view.Ptr(), detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget)
-	return &DOMMouseEvent{inner: raw.DOMMouseEventFromID(_id)}
-}
-
-// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMMouseEvent) WithReturnValue(returnValue bool) *DOMMouseEvent {
-	x.inner.DOMUIEvent.DOMEvent.SetReturnValue(returnValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMMouseEvent) WithCancelBubble(cancelBubble bool) *DOMMouseEvent {
-	x.inner.DOMUIEvent.DOMEvent.SetCancelBubble(cancelBubble)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
-// ScreenX calls the underlying ScreenX.
+// ScreenX wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) ScreenX() int {
-	return x.inner.ScreenX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("screenX"))
+	return _r
 }
 
-// ScreenY calls the underlying ScreenY.
+// ScreenY wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) ScreenY() int {
-	return x.inner.ScreenY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("screenY"))
+	return _r
 }
 
-// ClientX calls the underlying ClientX.
+// ClientX wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) ClientX() int {
-	return x.inner.ClientX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clientX"))
+	return _r
 }
 
-// ClientY calls the underlying ClientY.
+// ClientY wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) ClientY() int {
-	return x.inner.ClientY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clientY"))
+	return _r
 }
 
-// CtrlKey calls the underlying CtrlKey.
+// CtrlKey wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) CtrlKey() bool {
-	return x.inner.CtrlKey()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ctrlKey"))
+	return _r
 }
 
-// ShiftKey calls the underlying ShiftKey.
+// ShiftKey wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) ShiftKey() bool {
-	return x.inner.ShiftKey()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shiftKey"))
+	return _r
 }
 
-// AltKey calls the underlying AltKey.
+// AltKey wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) AltKey() bool {
-	return x.inner.AltKey()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("altKey"))
+	return _r
 }
 
-// MetaKey calls the underlying MetaKey.
+// MetaKey wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) MetaKey() bool {
-	return x.inner.MetaKey()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("metaKey"))
+	return _r
 }
 
-// Button calls the underlying Button.
+// Button wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) Button() int16 {
-	return x.inner.Button()
+	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("button"))
+	return _r
 }
 
-// RelatedTarget calls the underlying RelatedTarget.
-func (x *DOMMouseEvent) RelatedTarget() raw.DOMEventTarget {
-	return x.inner.RelatedTarget()
-}
-
-// OffsetX calls the underlying OffsetX.
+// OffsetX wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) OffsetX() int {
-	return x.inner.OffsetX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offsetX"))
+	return _r
 }
 
-// OffsetY calls the underlying OffsetY.
+// OffsetY wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) OffsetY() int {
-	return x.inner.OffsetY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offsetY"))
+	return _r
 }
 
-// X calls the underlying X.
+// X wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) X() int {
-	return x.inner.X()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("x"))
+	return _r
 }
 
-// Y calls the underlying Y.
+// Y wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) Y() int {
-	return x.inner.Y()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("y"))
+	return _r
 }
 
-// FromElement calls the underlying FromElement.
+// FromElement wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) FromElement() *DOMNode {
-	_r := x.inner.FromElement()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromElement"))
+	return DOMNodeFromID(_r)
 }
 
-// ToElement calls the underlying ToElement.
+// ToElement wraps the corresponding Objective-C method.
 func (x *DOMMouseEvent) ToElement() *DOMNode {
-	_r := x.inner.ToElement()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
-}
-
-func (x *DOMMouseEvent) asDOMMouseEvent() *raw.DOMMouseEvent { return x.inner }
-
-func (x *DOMMouseEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMUIEvent }
-
-func (x *DOMMouseEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMUIEvent.DOMEvent }
-
-func (x *DOMMouseEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject }
-
-func (x *DOMMouseEvent) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toElement"))
+	return DOMNodeFromID(_r)
 }
 
 // DOMMouseEventable is the interface implemented by [DOMMouseEvent], for mocking and DI.
 type DOMMouseEventable interface {
-	Unwrap() *raw.DOMMouseEvent
+	obj.Object
 	WithReturnValue(returnValue bool) *DOMMouseEvent
 	WithCancelBubble(cancelBubble bool) *DOMMouseEvent
 	ScreenX() int
@@ -170,7 +160,6 @@ type DOMMouseEventable interface {
 	AltKey() bool
 	MetaKey() bool
 	Button() int16
-	RelatedTarget() raw.DOMEventTarget
 	OffsetX() int
 	OffsetY() int
 	X() int
@@ -180,3 +169,18 @@ type DOMMouseEventable interface {
 }
 
 var _ DOMMouseEventable = (*DOMMouseEvent)(nil)
+
+// isDOMMouseEvent marks DOMMouseEvent — and, by embedding promotion, its
+// subclasses — as a member of the DOMMouseEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMMouseEvent) isDOMMouseEvent() {}
+
+var _ DOMMouseEventProvider = (*DOMMouseEvent)(nil)
+
+var _ DOMUIEventProvider = (*DOMMouseEvent)(nil)
+
+var _ DOMEventProvider = (*DOMMouseEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMMouseEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMMouseEvent)(nil)

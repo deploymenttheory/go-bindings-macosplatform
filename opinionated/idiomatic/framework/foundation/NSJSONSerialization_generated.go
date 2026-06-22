@@ -5,50 +5,83 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that converts between JSON and the equivalent Foundation objects.
+// JSONSerialization is an idiomatic wrapper over the Objective-C class NSJSONSerialization.
 //
-// JSONSerialization wraps [raw.NSJSONSerialization] with a fluent Go API.
+// An object that converts between JSON and the equivalent Foundation objects.
 type JSONSerialization struct {
-	inner *raw.NSJSONSerialization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSJSONSerialization].
-func (x *JSONSerialization) Unwrap() *raw.NSJSONSerialization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *JSONSerialization) ID() objc.ID { return x.inner.Ptr() }
-
-// JSONSerializationFromID adopts an existing object pointer as a JSONSerialization (nil for 0).
+// JSONSerializationFromID adopts an existing Objective-C object as a JSONSerialization
+// (nil for 0), retaining it and registering a release finalizer.
 func JSONSerializationFromID(id objc.ID) *JSONSerialization {
 	if id == 0 {
 		return nil
 	}
-	return &JSONSerialization{inner: raw.NSJSONSerializationFromID(id)}
-}
-
-// NewJSONSerialization creates a new [JSONSerialization].
-func NewJSONSerialization() *JSONSerialization {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSJSONSerialization")), objc.RegisterName("new"))
-	return &JSONSerialization{inner: raw.NSJSONSerializationFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *JSONSerialization) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *JSONSerialization {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &JSONSerialization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *JSONSerialization) asObject() *raw.NSObject { return &x.inner.NSObject }
+// jSONSerializationAdopt wraps an Objective-C object that this code just created as a
+// JSONSerialization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func jSONSerializationAdopt(id objc.ID) *JSONSerialization {
+	if id == 0 {
+		return nil
+	}
+	x := &JSONSerialization{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *JSONSerialization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *JSONSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *JSONSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *JSONSerialization) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewJSONSerialization creates a new JSONSerialization.
+func NewJSONSerialization() *JSONSerialization {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("new"))
+	return jSONSerializationAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *JSONSerialization) WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // JSONSerializationable is the interface implemented by [JSONSerialization], for mocking and DI.
 type JSONSerializationable interface {
-	Unwrap() *raw.NSJSONSerialization
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *JSONSerialization
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization
 }
 
 var _ JSONSerializationable = (*JSONSerialization)(nil)

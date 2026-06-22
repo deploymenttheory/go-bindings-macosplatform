@@ -5,88 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROnOffClusterOnWithRecallGlobalSceneParams wraps [raw.MTROnOffClusterOnWithRecallGlobalSceneParams] with a fluent Go API.
+// MTROnOffClusterOnWithRecallGlobalSceneParams is an idiomatic wrapper over the Objective-C class MTROnOffClusterOnWithRecallGlobalSceneParams.
 type MTROnOffClusterOnWithRecallGlobalSceneParams struct {
-	inner *raw.MTROnOffClusterOnWithRecallGlobalSceneParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROnOffClusterOnWithRecallGlobalSceneParams].
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) Unwrap() *raw.MTROnOffClusterOnWithRecallGlobalSceneParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROnOffClusterOnWithRecallGlobalSceneParamsFromID adopts an existing object pointer as a MTROnOffClusterOnWithRecallGlobalSceneParams (nil for 0).
+// MTROnOffClusterOnWithRecallGlobalSceneParamsFromID adopts an existing Objective-C object as a MTROnOffClusterOnWithRecallGlobalSceneParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROnOffClusterOnWithRecallGlobalSceneParamsFromID(id objc.ID) *MTROnOffClusterOnWithRecallGlobalSceneParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROnOffClusterOnWithRecallGlobalSceneParams{inner: raw.MTROnOffClusterOnWithRecallGlobalSceneParamsFromID(id)}
+	x := &MTROnOffClusterOnWithRecallGlobalSceneParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTROnOffClusterOnWithRecallGlobalSceneParams creates a new [MTROnOffClusterOnWithRecallGlobalSceneParams].
+// mTROnOffClusterOnWithRecallGlobalSceneParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROnOffClusterOnWithRecallGlobalSceneParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROnOffClusterOnWithRecallGlobalSceneParamsAdopt(id objc.ID) *MTROnOffClusterOnWithRecallGlobalSceneParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROnOffClusterOnWithRecallGlobalSceneParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROnOffClusterOnWithRecallGlobalSceneParams creates a new MTROnOffClusterOnWithRecallGlobalSceneParams.
 func NewMTROnOffClusterOnWithRecallGlobalSceneParams() *MTROnOffClusterOnWithRecallGlobalSceneParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROnOffClusterOnWithRecallGlobalSceneParams")), objc.RegisterName("new"))
-	return &MTROnOffClusterOnWithRecallGlobalSceneParams{inner: raw.MTROnOffClusterOnWithRecallGlobalSceneParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROnOffClusterOnWithRecallGlobalSceneParams")), objc.RegisterName("new"))
+	return mTROnOffClusterOnWithRecallGlobalSceneParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOnWithRecallGlobalSceneParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROnOffClusterOnWithRecallGlobalSceneParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOnWithRecallGlobalSceneParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROnOffClusterOnWithRecallGlobalSceneParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTROnOffClusterOnWithRecallGlobalSceneParamsable is the interface implemented by [MTROnOffClusterOnWithRecallGlobalSceneParams], for mocking and DI.
 type MTROnOffClusterOnWithRecallGlobalSceneParamsable interface {
-	Unwrap() *raw.MTROnOffClusterOnWithRecallGlobalSceneParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOnWithRecallGlobalSceneParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOnWithRecallGlobalSceneParams
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROnOffClusterOnWithRecallGlobalSceneParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROnOffClusterOnWithRecallGlobalSceneParams
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTROnOffClusterOnWithRecallGlobalSceneParamsable = (*MTROnOffClusterOnWithRecallGlobalSceneParams)(nil)

@@ -5,46 +5,82 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The state of a Safari extension.
+// SafariExtensionState is an idiomatic wrapper over the Objective-C class SFSafariExtensionState.
 //
-// SafariExtensionState wraps [raw.SFSafariExtensionState] with a fluent Go API.
+// The state of a Safari extension.
 type SafariExtensionState struct {
-	inner *raw.SFSafariExtensionState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariExtensionState].
-func (x *SafariExtensionState) Unwrap() *raw.SFSafariExtensionState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariExtensionState) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariExtensionStateFromID adopts an existing object pointer as a SafariExtensionState (nil for 0).
+// SafariExtensionStateFromID adopts an existing Objective-C object as a SafariExtensionState
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariExtensionStateFromID(id objc.ID) *SafariExtensionState {
 	if id == 0 {
 		return nil
 	}
-	return &SafariExtensionState{inner: raw.SFSafariExtensionStateFromID(id)}
+	x := &SafariExtensionState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSafariExtensionState creates a new [SafariExtensionState].
+// safariExtensionStateAdopt wraps an Objective-C object that this code just created as a
+// SafariExtensionState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariExtensionStateAdopt(id objc.ID) *SafariExtensionState {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariExtensionState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariExtensionState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariExtensionState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariExtensionState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SafariExtensionState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSafariExtensionState creates a new SafariExtensionState.
 func NewSafariExtensionState() *SafariExtensionState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariExtensionState")), objc.RegisterName("new"))
-	return &SafariExtensionState{inner: raw.SFSafariExtensionStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionState")), objc.RegisterName("new"))
+	return safariExtensionStateAdopt(_id)
 }
 
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *SafariExtensionState) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
 // SafariExtensionStateable is the interface implemented by [SafariExtensionState], for mocking and DI.
 type SafariExtensionStateable interface {
-	Unwrap() *raw.SFSafariExtensionState
+	obj.Object
 	IsEnabled() bool
 }
 

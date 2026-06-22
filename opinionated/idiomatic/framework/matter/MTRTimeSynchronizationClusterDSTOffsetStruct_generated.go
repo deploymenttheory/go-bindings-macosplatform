@@ -5,103 +5,138 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTimeSynchronizationClusterDSTOffsetStruct wraps [raw.MTRTimeSynchronizationClusterDSTOffsetStruct] with a fluent Go API.
+// MTRTimeSynchronizationClusterDSTOffsetStruct is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterDSTOffsetStruct.
+//
+// MTRTimeSynchronizationClusterDSTOffsetStruct is an abstract base — you do not construct it directly. Construct one of [MTRTimeSynchronizationClusterDstOffsetType] and pass it where a MTRTimeSynchronizationClusterDSTOffsetStruct is accepted.
 type MTRTimeSynchronizationClusterDSTOffsetStruct struct {
-	inner *raw.MTRTimeSynchronizationClusterDSTOffsetStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterDSTOffsetStruct].
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Unwrap() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTimeSynchronizationClusterDSTOffsetStructFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterDSTOffsetStruct (nil for 0).
+// MTRTimeSynchronizationClusterDSTOffsetStructFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterDSTOffsetStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTimeSynchronizationClusterDSTOffsetStructFromID(id objc.ID) *MTRTimeSynchronizationClusterDSTOffsetStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTimeSynchronizationClusterDSTOffsetStruct{inner: raw.MTRTimeSynchronizationClusterDSTOffsetStructFromID(id)}
-}
-
-// NewMTRTimeSynchronizationClusterDSTOffsetStruct creates a new [MTRTimeSynchronizationClusterDSTOffsetStruct].
-func NewMTRTimeSynchronizationClusterDSTOffsetStruct() *MTRTimeSynchronizationClusterDSTOffsetStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTimeSynchronizationClusterDSTOffsetStruct")), objc.RegisterName("new"))
-	return &MTRTimeSynchronizationClusterDSTOffsetStruct{inner: raw.MTRTimeSynchronizationClusterDSTOffsetStructFromID(_id)}
-}
-
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct {
-	x.inner.SetOffset(offset)
+	x := &MTRTimeSynchronizationClusterDSTOffsetStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithValidStarting sets the validStarting property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidStarting(validStarting *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct {
-	x.inner.SetValidStarting(validStarting)
+// mTRTimeSynchronizationClusterDSTOffsetStructAdopt wraps an Objective-C object that this code just created as a
+// MTRTimeSynchronizationClusterDSTOffsetStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTimeSynchronizationClusterDSTOffsetStructAdopt(id objc.ID) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTimeSynchronizationClusterDSTOffsetStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithValidUntil sets the validUntil property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidUntil(validUntil *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct {
-	x.inner.SetValidUntil(validUntil)
+// Description returns the object's -description text.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithOffset sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return x
 }
 
-// Offset calls the underlying Offset.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() *foundation.NSNumber {
-	return x.inner.Offset()
+// WithValidStarting sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
+	return x
 }
 
-// SetOffset calls the underlying SetOffset.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetOffset(offset *foundation.NSNumber) {
-	x.inner.SetOffset(offset)
+// WithValidUntil sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
+	return x
 }
 
-// ValidStarting calls the underlying ValidStarting.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() *foundation.NSNumber {
-	return x.inner.ValidStarting()
+// Offset wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offset"))
+	return obj.Wrap(_r)
 }
 
-// SetValidStarting calls the underlying SetValidStarting.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidStarting(validStarting *foundation.NSNumber) {
-	x.inner.SetValidStarting(validStarting)
+// SetOffset wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetOffset(offset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 }
 
-// ValidUntil calls the underlying ValidUntil.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() *foundation.NSNumber {
-	return x.inner.ValidUntil()
+// ValidStarting wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validStarting"))
+	return obj.Wrap(_r)
 }
 
-// SetValidUntil calls the underlying SetValidUntil.
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidUntil(validUntil *foundation.NSNumber) {
-	x.inner.SetValidUntil(validUntil)
+// SetValidStarting wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidStarting(validStarting obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
 }
 
-func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct {
-	return x.inner
+// ValidUntil wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validUntil"))
+	return obj.Wrap(_r)
+}
+
+// SetValidUntil wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidUntil(validUntil obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
 }
 
 // MTRTimeSynchronizationClusterDSTOffsetStructable is the interface implemented by [MTRTimeSynchronizationClusterDSTOffsetStruct], for mocking and DI.
 type MTRTimeSynchronizationClusterDSTOffsetStructable interface {
-	Unwrap() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct
-	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct
-	WithValidStarting(validStarting *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct
-	WithValidUntil(validUntil *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct
-	Offset() *foundation.NSNumber
-	SetOffset(offset *foundation.NSNumber)
-	ValidStarting() *foundation.NSNumber
-	SetValidStarting(validStarting *foundation.NSNumber)
-	ValidUntil() *foundation.NSNumber
-	SetValidUntil(validUntil *foundation.NSNumber)
+	obj.Object
+	WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct
+	WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct
+	WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct
+	Offset() obj.Object
+	SetOffset(offset obj.Object)
+	ValidStarting() obj.Object
+	SetValidStarting(validStarting obj.Object)
+	ValidUntil() obj.Object
+	SetValidUntil(validUntil obj.Object)
 }
 
 var _ MTRTimeSynchronizationClusterDSTOffsetStructable = (*MTRTimeSynchronizationClusterDSTOffsetStruct)(nil)
+
+// isMTRTimeSynchronizationClusterDSTOffsetStruct marks MTRTimeSynchronizationClusterDSTOffsetStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRTimeSynchronizationClusterDSTOffsetStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) isMTRTimeSynchronizationClusterDSTOffsetStruct() {
+}
+
+var _ MTRTimeSynchronizationClusterDSTOffsetStructProvider = (*MTRTimeSynchronizationClusterDSTOffsetStruct)(nil)

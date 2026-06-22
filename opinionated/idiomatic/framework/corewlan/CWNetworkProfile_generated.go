@@ -5,90 +5,117 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an immutable network profile entry.
+// NetworkProfile is an idiomatic wrapper over the Objective-C class CWNetworkProfile.
 //
-// NetworkProfile wraps [raw.CWNetworkProfile] with a fluent Go API.
+// NetworkProfile is an abstract base — you do not construct it directly. Construct one of [MutableNetworkProfile] and pass it where a NetworkProfile is accepted.
+//
+// Encapsulates an immutable network profile entry.
 type NetworkProfile struct {
-	inner *raw.CWNetworkProfile
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CWNetworkProfile].
-func (x *NetworkProfile) Unwrap() *raw.CWNetworkProfile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetworkProfile) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkProfileFromID adopts an existing object pointer as a NetworkProfile (nil for 0).
+// NetworkProfileFromID adopts an existing Objective-C object as a NetworkProfile
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkProfileFromID(id objc.ID) *NetworkProfile {
 	if id == 0 {
 		return nil
 	}
-	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(id)}
+	x := &NetworkProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNetworkProfile creates a new [NetworkProfile].
-func NewNetworkProfile() *NetworkProfile {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CWNetworkProfile")), objc.RegisterName("new"))
-	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
+// networkProfileAdopt wraps an Objective-C object that this code just created as a
+// NetworkProfile (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkProfileAdopt(id objc.ID) *NetworkProfile {
+	if id == 0 {
+		return nil
+	}
+	x := &NetworkProfile{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
-//
-// NewNetworkProfileWithNetworkProfile creates a new [NetworkProfile].
-func NewNetworkProfileWithNetworkProfile(networkProfile *raw.CWNetworkProfile) *NetworkProfile {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CWNetworkProfile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkProfile:"), networkProfile.Ptr())
-	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
+// Description returns the object's -description text.
+func (x *NetworkProfile) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Determine CWNetworkProfile object equality.
-//
-// IsEqualToNetworkProfile calls the underlying IsEqualToNetworkProfile.
-func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool {
-	return x.inner.IsEqualToNetworkProfile(networkProfile)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NetworkProfile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. @discussion Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
-//
-// Ssid calls the underlying Ssid.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NetworkProfile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkProfile) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNetworkProfileWithNetworkProfile creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
+func NewNetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *NetworkProfile {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkProfile:"), objref.IDOf(networkProfile))
+	return networkProfileAdopt(_id)
+}
+
+// IsEqualToNetworkProfile determine CWNetworkProfile object equality.
+func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNetworkProfile:"), objref.IDOf(networkProfile))
+	return _r
+}
+
+// Ssid returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (x *NetworkProfile) Ssid() string {
-	_r := x.inner.Ssid()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. @discussion The SSID is 1-32 octets.
-//
-// SsidData calls the underlying SsidData.
-func (x *NetworkProfile) SsidData() *foundation.NSData {
-	return x.inner.SsidData()
+// SsidData returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. The SSID is 1-32 octets.
+func (x *NetworkProfile) SsidData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssidData"))
+	return obj.Wrap(_r)
 }
 
-// @property @abstract Returns the security type of the Wi-Fi network profile.
-//
-// Security calls the underlying Security.
-func (x *NetworkProfile) Security() CWSecurity {
-	return CWSecurity(x.inner.Security())
+// Security returns the security type of the Wi-Fi network profile.
+func (x *NetworkProfile) Security() Security {
+	_r := objc.Send[Security](objref.IDOf(x), objc.RegisterName("security"))
+	return _r
 }
-
-func (x *NetworkProfile) asNetworkProfile() *raw.CWNetworkProfile { return x.inner }
 
 // NetworkProfileable is the interface implemented by [NetworkProfile], for mocking and DI.
 type NetworkProfileable interface {
-	Unwrap() *raw.CWNetworkProfile
-	IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool
+	obj.Object
+	IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool
 	Ssid() string
-	SsidData() *foundation.NSData
-	Security() CWSecurity
+	SsidData() obj.Object
+	Security() Security
 }
 
 var _ NetworkProfileable = (*NetworkProfile)(nil)
+
+// isNetworkProfile marks NetworkProfile — and, by embedding promotion, its
+// subclasses — as a member of the NetworkProfile hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NetworkProfile) isNetworkProfile() {}
+
+var _ NetworkProfileProvider = (*NetworkProfile)(nil)

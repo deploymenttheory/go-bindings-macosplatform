@@ -5,25 +5,29 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AnimationProvider is implemented by Animation and any idiomatic type wrapping a CAAnimation subclass.
+// AnimationProvider is accepted wherever a CAAnimation (or one of its subclasses) is expected.
 type AnimationProvider interface {
-	asAnimation() *raw.CAAnimation
+	objref.Object
+	isAnimation()
 }
 
-// BasicAnimationProvider is implemented by BasicAnimation and any idiomatic type wrapping a CABasicAnimation subclass.
+// BasicAnimationProvider is accepted wherever a CABasicAnimation (or one of its subclasses) is expected.
 type BasicAnimationProvider interface {
-	asBasicAnimation() *raw.CABasicAnimation
+	objref.Object
+	isBasicAnimation()
 }
 
-// LayerProvider is implemented by Layer and any idiomatic type wrapping a CALayer subclass.
+// LayerProvider is accepted wherever a CALayer (or one of its subclasses) is expected.
 type LayerProvider interface {
-	asLayer() *raw.CALayer
+	objref.Object
+	isLayer()
 }
 
-// PropertyAnimationProvider is implemented by PropertyAnimation and any idiomatic type wrapping a CAPropertyAnimation subclass.
+// PropertyAnimationProvider is accepted wherever a CAPropertyAnimation (or one of its subclasses) is expected.
 type PropertyAnimationProvider interface {
-	asPropertyAnimation() *raw.CAPropertyAnimation
+	objref.Object
+	isPropertyAnimation()
 }

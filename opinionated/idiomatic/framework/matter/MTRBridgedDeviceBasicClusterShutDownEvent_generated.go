@@ -5,45 +5,56 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBridgedDeviceBasicClusterShutDownEvent wraps [raw.MTRBridgedDeviceBasicClusterShutDownEvent] with a fluent Go API.
+// MTRBridgedDeviceBasicClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicClusterShutDownEvent.
+//
+// It embeds [MTRBridgedDeviceBasicInformationClusterShutDownEvent], promoting that type's methods.
 type MTRBridgedDeviceBasicClusterShutDownEvent struct {
-	inner *raw.MTRBridgedDeviceBasicClusterShutDownEvent
+	MTRBridgedDeviceBasicInformationClusterShutDownEvent
 }
 
-// Unwrap returns the underlying [raw.MTRBridgedDeviceBasicClusterShutDownEvent].
-func (x *MTRBridgedDeviceBasicClusterShutDownEvent) Unwrap() *raw.MTRBridgedDeviceBasicClusterShutDownEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicClusterShutDownEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBridgedDeviceBasicClusterShutDownEventFromID adopts an existing object pointer as a MTRBridgedDeviceBasicClusterShutDownEvent (nil for 0).
+// MTRBridgedDeviceBasicClusterShutDownEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicClusterShutDownEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBridgedDeviceBasicClusterShutDownEventFromID(id objc.ID) *MTRBridgedDeviceBasicClusterShutDownEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBridgedDeviceBasicClusterShutDownEvent{inner: raw.MTRBridgedDeviceBasicClusterShutDownEventFromID(id)}
+	x := &MTRBridgedDeviceBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBridgedDeviceBasicClusterShutDownEvent creates a new [MTRBridgedDeviceBasicClusterShutDownEvent].
+// mTRBridgedDeviceBasicClusterShutDownEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBridgedDeviceBasicClusterShutDownEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBridgedDeviceBasicClusterShutDownEventAdopt(id objc.ID) *MTRBridgedDeviceBasicClusterShutDownEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBridgedDeviceBasicClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRBridgedDeviceBasicClusterShutDownEvent creates a new MTRBridgedDeviceBasicClusterShutDownEvent.
 func NewMTRBridgedDeviceBasicClusterShutDownEvent() *MTRBridgedDeviceBasicClusterShutDownEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBridgedDeviceBasicClusterShutDownEvent")), objc.RegisterName("new"))
-	return &MTRBridgedDeviceBasicClusterShutDownEvent{inner: raw.MTRBridgedDeviceBasicClusterShutDownEventFromID(_id)}
-}
-
-func (x *MTRBridgedDeviceBasicClusterShutDownEvent) asMTRBridgedDeviceBasicInformationClusterShutDownEvent() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent {
-	return &x.inner.MTRBridgedDeviceBasicInformationClusterShutDownEvent
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicClusterShutDownEvent")), objc.RegisterName("new"))
+	return mTRBridgedDeviceBasicClusterShutDownEventAdopt(_id)
 }
 
 // MTRBridgedDeviceBasicClusterShutDownEventable is the interface implemented by [MTRBridgedDeviceBasicClusterShutDownEvent], for mocking and DI.
 type MTRBridgedDeviceBasicClusterShutDownEventable interface {
-	Unwrap() *raw.MTRBridgedDeviceBasicClusterShutDownEvent
+	obj.Object
 }
 
 var _ MTRBridgedDeviceBasicClusterShutDownEventable = (*MTRBridgedDeviceBasicClusterShutDownEvent)(nil)
+
+var _ MTRBridgedDeviceBasicInformationClusterShutDownEventProvider = (*MTRBridgedDeviceBasicClusterShutDownEvent)(nil)

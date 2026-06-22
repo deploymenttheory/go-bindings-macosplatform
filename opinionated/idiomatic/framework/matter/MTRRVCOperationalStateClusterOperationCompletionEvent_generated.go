@@ -5,99 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRRVCOperationalStateClusterOperationCompletionEvent wraps [raw.MTRRVCOperationalStateClusterOperationCompletionEvent] with a fluent Go API.
+// MTRRVCOperationalStateClusterOperationCompletionEvent is an idiomatic wrapper over the Objective-C class MTRRVCOperationalStateClusterOperationCompletionEvent.
 type MTRRVCOperationalStateClusterOperationCompletionEvent struct {
-	inner *raw.MTRRVCOperationalStateClusterOperationCompletionEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterOperationCompletionEvent].
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) Unwrap() *raw.MTRRVCOperationalStateClusterOperationCompletionEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRRVCOperationalStateClusterOperationCompletionEventFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterOperationCompletionEvent (nil for 0).
+// MTRRVCOperationalStateClusterOperationCompletionEventFromID adopts an existing Objective-C object as a MTRRVCOperationalStateClusterOperationCompletionEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRRVCOperationalStateClusterOperationCompletionEventFromID(id objc.ID) *MTRRVCOperationalStateClusterOperationCompletionEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRRVCOperationalStateClusterOperationCompletionEvent{inner: raw.MTRRVCOperationalStateClusterOperationCompletionEventFromID(id)}
+	x := &MTRRVCOperationalStateClusterOperationCompletionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRRVCOperationalStateClusterOperationCompletionEvent creates a new [MTRRVCOperationalStateClusterOperationCompletionEvent].
+// mTRRVCOperationalStateClusterOperationCompletionEventAdopt wraps an Objective-C object that this code just created as a
+// MTRRVCOperationalStateClusterOperationCompletionEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRRVCOperationalStateClusterOperationCompletionEventAdopt(id objc.ID) *MTRRVCOperationalStateClusterOperationCompletionEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRRVCOperationalStateClusterOperationCompletionEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRRVCOperationalStateClusterOperationCompletionEvent creates a new MTRRVCOperationalStateClusterOperationCompletionEvent.
 func NewMTRRVCOperationalStateClusterOperationCompletionEvent() *MTRRVCOperationalStateClusterOperationCompletionEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRRVCOperationalStateClusterOperationCompletionEvent")), objc.RegisterName("new"))
-	return &MTRRVCOperationalStateClusterOperationCompletionEvent{inner: raw.MTRRVCOperationalStateClusterOperationCompletionEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCOperationalStateClusterOperationCompletionEvent")), objc.RegisterName("new"))
+	return mTRRVCOperationalStateClusterOperationCompletionEventAdopt(_id)
 }
 
-// WithCompletionErrorCode sets the completionErrorCode property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithCompletionErrorCode(completionErrorCode *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent {
-	x.inner.SetCompletionErrorCode(completionErrorCode)
+// WithCompletionErrorCode sets the property and returns the receiver so calls can be chained.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithCompletionErrorCode(completionErrorCode obj.Object) *MTRRVCOperationalStateClusterOperationCompletionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionErrorCode:"), objref.IDOf(completionErrorCode))
 	return x
 }
 
-// WithTotalOperationalTime sets the totalOperationalTime property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithTotalOperationalTime(totalOperationalTime *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent {
-	x.inner.SetTotalOperationalTime(totalOperationalTime)
+// WithTotalOperationalTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRRVCOperationalStateClusterOperationCompletionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 	return x
 }
 
-// WithPausedTime sets the pausedTime property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithPausedTime(pausedTime *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent {
-	x.inner.SetPausedTime(pausedTime)
+// WithPausedTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithPausedTime(pausedTime obj.Object) *MTRRVCOperationalStateClusterOperationCompletionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausedTime:"), objref.IDOf(pausedTime))
 	return x
 }
 
-// CompletionErrorCode calls the underlying CompletionErrorCode.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() *foundation.NSNumber {
-	return x.inner.CompletionErrorCode()
+// CompletionErrorCode wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionErrorCode"))
+	return obj.Wrap(_r)
 }
 
-// SetCompletionErrorCode calls the underlying SetCompletionErrorCode.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetCompletionErrorCode(completionErrorCode *foundation.NSNumber) {
-	x.inner.SetCompletionErrorCode(completionErrorCode)
+// SetCompletionErrorCode wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetCompletionErrorCode(completionErrorCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionErrorCode:"), objref.IDOf(completionErrorCode))
 }
 
-// TotalOperationalTime calls the underlying TotalOperationalTime.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() *foundation.NSNumber {
-	return x.inner.TotalOperationalTime()
+// TotalOperationalTime wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalOperationalTime"))
+	return obj.Wrap(_r)
 }
 
-// SetTotalOperationalTime calls the underlying SetTotalOperationalTime.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber) {
-	x.inner.SetTotalOperationalTime(totalOperationalTime)
+// SetTotalOperationalTime wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetTotalOperationalTime(totalOperationalTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 }
 
-// PausedTime calls the underlying PausedTime.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) PausedTime() *foundation.NSNumber {
-	return x.inner.PausedTime()
+// PausedTime wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) PausedTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pausedTime"))
+	return obj.Wrap(_r)
 }
 
-// SetPausedTime calls the underlying SetPausedTime.
-func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetPausedTime(pausedTime *foundation.NSNumber) {
-	x.inner.SetPausedTime(pausedTime)
+// SetPausedTime wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetPausedTime(pausedTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausedTime:"), objref.IDOf(pausedTime))
 }
 
 // MTRRVCOperationalStateClusterOperationCompletionEventable is the interface implemented by [MTRRVCOperationalStateClusterOperationCompletionEvent], for mocking and DI.
 type MTRRVCOperationalStateClusterOperationCompletionEventable interface {
-	Unwrap() *raw.MTRRVCOperationalStateClusterOperationCompletionEvent
-	WithCompletionErrorCode(completionErrorCode *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent
-	WithTotalOperationalTime(totalOperationalTime *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent
-	WithPausedTime(pausedTime *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent
-	CompletionErrorCode() *foundation.NSNumber
-	SetCompletionErrorCode(completionErrorCode *foundation.NSNumber)
-	TotalOperationalTime() *foundation.NSNumber
-	SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber)
-	PausedTime() *foundation.NSNumber
-	SetPausedTime(pausedTime *foundation.NSNumber)
+	obj.Object
+	WithCompletionErrorCode(completionErrorCode obj.Object) *MTRRVCOperationalStateClusterOperationCompletionEvent
+	WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRRVCOperationalStateClusterOperationCompletionEvent
+	WithPausedTime(pausedTime obj.Object) *MTRRVCOperationalStateClusterOperationCompletionEvent
+	CompletionErrorCode() obj.Object
+	SetCompletionErrorCode(completionErrorCode obj.Object)
+	TotalOperationalTime() obj.Object
+	SetTotalOperationalTime(totalOperationalTime obj.Object)
+	PausedTime() obj.Object
+	SetPausedTime(pausedTime obj.Object)
 }
 
 var _ MTRRVCOperationalStateClusterOperationCompletionEventable = (*MTRRVCOperationalStateClusterOperationCompletionEvent)(nil)

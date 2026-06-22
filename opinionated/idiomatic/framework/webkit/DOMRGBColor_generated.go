@@ -5,92 +5,93 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMRGBColor wraps [raw.DOMRGBColor] with a fluent Go API.
+// DOMRGBColor is an idiomatic wrapper over the Objective-C class DOMRGBColor.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMRGBColor struct {
-	inner *raw.DOMRGBColor
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMRGBColor].
-func (x *DOMRGBColor) Unwrap() *raw.DOMRGBColor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMRGBColor) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMRGBColorFromID adopts an existing object pointer as a DOMRGBColor (nil for 0).
+// DOMRGBColorFromID adopts an existing Objective-C object as a DOMRGBColor
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMRGBColorFromID(id objc.ID) *DOMRGBColor {
 	if id == 0 {
 		return nil
 	}
-	return &DOMRGBColor{inner: raw.DOMRGBColorFromID(id)}
+	x := &DOMRGBColor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMRGBColor creates a new [DOMRGBColor].
+// dOMRGBColorAdopt wraps an Objective-C object that this code just created as a
+// DOMRGBColor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMRGBColorAdopt(id objc.ID) *DOMRGBColor {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMRGBColor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMRGBColor creates a new DOMRGBColor.
 func NewDOMRGBColor() *DOMRGBColor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMRGBColor")), objc.RegisterName("new"))
-	return &DOMRGBColor{inner: raw.DOMRGBColorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMRGBColor")), objc.RegisterName("new"))
+	return dOMRGBColorAdopt(_id)
 }
 
-// Red calls the underlying Red.
+// Red wraps the corresponding Objective-C method.
 func (x *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
-	_r := x.inner.Red()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("red"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Green calls the underlying Green.
+// Green wraps the corresponding Objective-C method.
 func (x *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
-	_r := x.inner.Green()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("green"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Blue calls the underlying Blue.
+// Blue wraps the corresponding Objective-C method.
 func (x *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
-	_r := x.inner.Blue()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blue"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Alpha calls the underlying Alpha.
+// Alpha wraps the corresponding Objective-C method.
 func (x *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
-	_r := x.inner.Alpha()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alpha"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Color calls the underlying Color.
-func (x *DOMRGBColor) Color() *appkit.NSColor {
-	return x.inner.Color()
-}
-
-func (x *DOMRGBColor) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMRGBColor) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// Color wraps the corresponding Objective-C method.
+func (x *DOMRGBColor) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
 }
 
 // DOMRGBColorable is the interface implemented by [DOMRGBColor], for mocking and DI.
 type DOMRGBColorable interface {
-	Unwrap() *raw.DOMRGBColor
+	obj.Object
 	Red() *DOMCSSPrimitiveValue
 	Green() *DOMCSSPrimitiveValue
 	Blue() *DOMCSSPrimitiveValue
 	Alpha() *DOMCSSPrimitiveValue
-	Color() *appkit.NSColor
+	Color() obj.Object
 }
 
 var _ DOMRGBColorable = (*DOMRGBColor)(nil)
+
+var _ DOMObjectProvider = (*DOMRGBColor)(nil)
+
+var _ WebScriptObjectProvider = (*DOMRGBColor)(nil)

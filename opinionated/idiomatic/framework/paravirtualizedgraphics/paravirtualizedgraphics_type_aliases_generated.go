@@ -4,12 +4,14 @@
 
 package paravirtualizedgraphics
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/paravirtualizedgraphics"
-)
+// Coordinates that describe sizes or offsets within a 2D array of pixels.
+type PGDisplayCoord_t struct {
+	X uint16
+	Y uint16
+}
 
-// PGDisplayCoord_t is a type alias for the raw PGDisplayCoord_t value-type struct.
-type PGDisplayCoord_t = raw.PGDisplayCoord_t
-
-// PGPhysicalMemoryRange_s is a type alias for the raw PGPhysicalMemoryRange_s value-type struct.
-type PGPhysicalMemoryRange_s = raw.PGPhysicalMemoryRange_s
+// A range in the guest virtual machine’s physical memory address space.
+type PGPhysicalMemoryRange_s struct {
+	PhysicalAddress uint64
+	PhysicalLength  uint64
+}

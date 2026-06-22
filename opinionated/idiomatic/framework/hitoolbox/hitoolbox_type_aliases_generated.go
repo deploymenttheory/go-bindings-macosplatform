@@ -4,441 +4,415 @@
 
 package hitoolbox
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hitoolbox"
-)
-
-// AlertStdAlertParamRec is a type alias for the raw AlertStdAlertParamRec value-type struct.
-type AlertStdAlertParamRec = raw.AlertStdAlertParamRec
-
-// AlertStdCFStringAlertParamRec is a type alias for the raw AlertStdCFStringAlertParamRec value-type struct.
-type AlertStdCFStringAlertParamRec = raw.AlertStdCFStringAlertParamRec
-
-// AlertTemplate is a type alias for the raw AlertTemplate value-type struct.
-type AlertTemplate = raw.AlertTemplate
-
-// BasicWindowDescription is a type alias for the raw BasicWindowDescription value-type struct.
-type BasicWindowDescription = raw.BasicWindowDescription
-
-// ContextualMenuInterfaceStruct is a type alias for the raw ContextualMenuInterfaceStruct value-type struct.
-type ContextualMenuInterfaceStruct = raw.ContextualMenuInterfaceStruct
-
-// ControlEditTextSelectionRec is a type alias for the raw ControlEditTextSelectionRec value-type struct.
-type ControlEditTextSelectionRec = raw.ControlEditTextSelectionRec
-
-// ControlFontStyleRec is a type alias for the raw ControlFontStyleRec value-type struct.
-type ControlFontStyleRec = raw.ControlFontStyleRec
-
-// ControlID is a type alias for the raw ControlID value-type struct.
-type ControlID = raw.ControlID
-
-// ControlImageContentInfo is a type alias for the raw ControlImageContentInfo value-type struct.
-type ControlImageContentInfo = raw.ControlImageContentInfo
-
-// ControlKind is a type alias for the raw ControlKind value-type struct.
-type ControlKind = raw.ControlKind
-
-// ControlTabEntry is a type alias for the raw ControlTabEntry value-type struct.
-type ControlTabEntry = raw.ControlTabEntry
-
-// ControlTabInfoRec is a type alias for the raw ControlTabInfoRec value-type struct.
-type ControlTabInfoRec = raw.ControlTabInfoRec
-
-// ControlTabInfoRecV1 is a type alias for the raw ControlTabInfoRecV1 value-type struct.
-type ControlTabInfoRecV1 = raw.ControlTabInfoRecV1
-
-// ControlTemplate is a type alias for the raw ControlTemplate value-type struct.
-type ControlTemplate = raw.ControlTemplate
-
-// CtlCTab is a type alias for the raw CtlCTab value-type struct.
-type CtlCTab = raw.CtlCTab
-
-// DataBrowserAccessibilityItemInfo is a type alias for the raw DataBrowserAccessibilityItemInfo value-type struct.
-type DataBrowserAccessibilityItemInfo = raw.DataBrowserAccessibilityItemInfo
-
-// DataBrowserAccessibilityItemInfoV0 is a type alias for the raw DataBrowserAccessibilityItemInfoV0 value-type struct.
-type DataBrowserAccessibilityItemInfoV0 = raw.DataBrowserAccessibilityItemInfoV0
-
-// DataBrowserAccessibilityItemInfoV1 is a type alias for the raw DataBrowserAccessibilityItemInfoV1 value-type struct.
-type DataBrowserAccessibilityItemInfoV1 = raw.DataBrowserAccessibilityItemInfoV1
-
-// DataBrowserCallbacks is a type alias for the raw DataBrowserCallbacks value-type struct.
-type DataBrowserCallbacks = raw.DataBrowserCallbacks
-
-// DataBrowserCustomCallbacks is a type alias for the raw DataBrowserCustomCallbacks value-type struct.
-type DataBrowserCustomCallbacks = raw.DataBrowserCustomCallbacks
-
-// DataBrowserListViewColumnDesc is a type alias for the raw DataBrowserListViewColumnDesc value-type struct.
-type DataBrowserListViewColumnDesc = raw.DataBrowserListViewColumnDesc
-
-// DataBrowserListViewHeaderDesc is a type alias for the raw DataBrowserListViewHeaderDesc value-type struct.
-type DataBrowserListViewHeaderDesc = raw.DataBrowserListViewHeaderDesc
-
-// DataBrowserPropertyDesc is a type alias for the raw DataBrowserPropertyDesc value-type struct.
-type DataBrowserPropertyDesc = raw.DataBrowserPropertyDesc
-
-// DialogTemplate is a type alias for the raw DialogTemplate value-type struct.
-type DialogTemplate = raw.DialogTemplate
-
-// EvQEl is a type alias for the raw EvQEl value-type struct.
-type EvQEl = raw.EvQEl
-
-// EventHotKeyID is a type alias for the raw EventHotKeyID value-type struct.
-type EventHotKeyID = raw.EventHotKeyID
-
-// EventRecord is a type alias for the raw EventRecord value-type struct.
-type EventRecord = raw.EventRecord
-
-// EventTypeSpec is a type alias for the raw EventTypeSpec value-type struct.
-type EventTypeSpec = raw.EventTypeSpec
-
-// FileTranslationList is a type alias for the raw FileTranslationList value-type struct.
-type FileTranslationList = raw.FileTranslationList
-
-// FileTranslationSpec is a type alias for the raw FileTranslationSpec value-type struct.
-type FileTranslationSpec = raw.FileTranslationSpec
-
-// FileTypeSpec is a type alias for the raw FileTypeSpec value-type struct.
-type FileTypeSpec = raw.FileTypeSpec
-
-// GetGrowImageRegionRec is a type alias for the raw GetGrowImageRegionRec value-type struct.
-type GetGrowImageRegionRec = raw.GetGrowImageRegionRec
-
-// GetWindowRegionRec is a type alias for the raw GetWindowRegionRec value-type struct.
-type GetWindowRegionRec = raw.GetWindowRegionRec
-
-// HFSFlavor is a type alias for the raw HFSFlavor value-type struct.
-type HFSFlavor = raw.HFSFlavor
-
-// HIAxisPosition is a type alias for the raw HIAxisPosition value-type struct.
-type HIAxisPosition = raw.HIAxisPosition
-
-// HIAxisScale is a type alias for the raw HIAxisScale value-type struct.
-type HIAxisScale = raw.HIAxisScale
-
-// HIBinding is a type alias for the raw HIBinding value-type struct.
-type HIBinding = raw.HIBinding
-
-// HICommand is a type alias for the raw HICommand value-type struct.
-type HICommand = raw.HICommand
-
-// HICommandExtended is a type alias for the raw HICommandExtended value-type struct.
-type HICommandExtended = raw.HICommandExtended
-
-// HIContentBorderMetrics is a type alias for the raw HIContentBorderMetrics value-type struct.
-type HIContentBorderMetrics = raw.HIContentBorderMetrics
-
-// HILayoutInfo is a type alias for the raw HILayoutInfo value-type struct.
-type HILayoutInfo = raw.HILayoutInfo
-
-// HIPositioning is a type alias for the raw HIPositioning value-type struct.
-type HIPositioning = raw.HIPositioning
-
-// HIScaling is a type alias for the raw HIScaling value-type struct.
-type HIScaling = raw.HIScaling
-
-// HIScrollBarTrackInfo is a type alias for the raw HIScrollBarTrackInfo value-type struct.
-type HIScrollBarTrackInfo = raw.HIScrollBarTrackInfo
-
-// HISideBinding is a type alias for the raw HISideBinding value-type struct.
-type HISideBinding = raw.HISideBinding
-
-// HIThemeAnimationFrameInfo is a type alias for the raw HIThemeAnimationFrameInfo value-type struct.
-type HIThemeAnimationFrameInfo = raw.HIThemeAnimationFrameInfo
-
-// HIThemeAnimationTimeInfo is a type alias for the raw HIThemeAnimationTimeInfo value-type struct.
-type HIThemeAnimationTimeInfo = raw.HIThemeAnimationTimeInfo
-
-// HIThemeBackgroundDrawInfo is a type alias for the raw HIThemeBackgroundDrawInfo value-type struct.
-type HIThemeBackgroundDrawInfo = raw.HIThemeBackgroundDrawInfo
-
-// HIThemeButtonDrawInfo is a type alias for the raw HIThemeButtonDrawInfo value-type struct.
-type HIThemeButtonDrawInfo = raw.HIThemeButtonDrawInfo
-
-// HIThemeChasingArrowsDrawInfo is a type alias for the raw HIThemeChasingArrowsDrawInfo value-type struct.
-type HIThemeChasingArrowsDrawInfo = raw.HIThemeChasingArrowsDrawInfo
-
-// HIThemeFrameDrawInfo is a type alias for the raw HIThemeFrameDrawInfo value-type struct.
-type HIThemeFrameDrawInfo = raw.HIThemeFrameDrawInfo
-
-// HIThemeGrabberDrawInfo is a type alias for the raw HIThemeGrabberDrawInfo value-type struct.
-type HIThemeGrabberDrawInfo = raw.HIThemeGrabberDrawInfo
-
-// HIThemeGroupBoxDrawInfo is a type alias for the raw HIThemeGroupBoxDrawInfo value-type struct.
-type HIThemeGroupBoxDrawInfo = raw.HIThemeGroupBoxDrawInfo
-
-// HIThemeGrowBoxDrawInfo is a type alias for the raw HIThemeGrowBoxDrawInfo value-type struct.
-type HIThemeGrowBoxDrawInfo = raw.HIThemeGrowBoxDrawInfo
-
-// HIThemeHeaderDrawInfo is a type alias for the raw HIThemeHeaderDrawInfo value-type struct.
-type HIThemeHeaderDrawInfo = raw.HIThemeHeaderDrawInfo
-
-// HIThemeMenuBarDrawInfo is a type alias for the raw HIThemeMenuBarDrawInfo value-type struct.
-type HIThemeMenuBarDrawInfo = raw.HIThemeMenuBarDrawInfo
-
-// HIThemeMenuDrawInfo is a type alias for the raw HIThemeMenuDrawInfo value-type struct.
-type HIThemeMenuDrawInfo = raw.HIThemeMenuDrawInfo
-
-// HIThemeMenuDrawInfoVersionZero is a type alias for the raw HIThemeMenuDrawInfoVersionZero value-type struct.
-type HIThemeMenuDrawInfoVersionZero = raw.HIThemeMenuDrawInfoVersionZero
-
-// HIThemeMenuItemDrawInfo is a type alias for the raw HIThemeMenuItemDrawInfo value-type struct.
-type HIThemeMenuItemDrawInfo = raw.HIThemeMenuItemDrawInfo
-
-// HIThemeMenuTitleDrawInfo is a type alias for the raw HIThemeMenuTitleDrawInfo value-type struct.
-type HIThemeMenuTitleDrawInfo = raw.HIThemeMenuTitleDrawInfo
-
-// HIThemePlacardDrawInfo is a type alias for the raw HIThemePlacardDrawInfo value-type struct.
-type HIThemePlacardDrawInfo = raw.HIThemePlacardDrawInfo
-
-// HIThemePopupArrowDrawInfo is a type alias for the raw HIThemePopupArrowDrawInfo value-type struct.
-type HIThemePopupArrowDrawInfo = raw.HIThemePopupArrowDrawInfo
-
-// HIThemeScrollBarDelimitersDrawInfo is a type alias for the raw HIThemeScrollBarDelimitersDrawInfo value-type struct.
-type HIThemeScrollBarDelimitersDrawInfo = raw.HIThemeScrollBarDelimitersDrawInfo
-
-// HIThemeSegmentDrawInfo is a type alias for the raw HIThemeSegmentDrawInfo value-type struct.
-type HIThemeSegmentDrawInfo = raw.HIThemeSegmentDrawInfo
-
-// HIThemeSeparatorDrawInfo is a type alias for the raw HIThemeSeparatorDrawInfo value-type struct.
-type HIThemeSeparatorDrawInfo = raw.HIThemeSeparatorDrawInfo
-
-// HIThemeSplitterDrawInfo is a type alias for the raw HIThemeSplitterDrawInfo value-type struct.
-type HIThemeSplitterDrawInfo = raw.HIThemeSplitterDrawInfo
-
-// HIThemeTabDrawInfo is a type alias for the raw HIThemeTabDrawInfo value-type struct.
-type HIThemeTabDrawInfo = raw.HIThemeTabDrawInfo
-
-// HIThemeTabDrawInfoVersionZero is a type alias for the raw HIThemeTabDrawInfoVersionZero value-type struct.
-type HIThemeTabDrawInfoVersionZero = raw.HIThemeTabDrawInfoVersionZero
-
-// HIThemeTabPaneDrawInfo is a type alias for the raw HIThemeTabPaneDrawInfo value-type struct.
-type HIThemeTabPaneDrawInfo = raw.HIThemeTabPaneDrawInfo
-
-// HIThemeTabPaneDrawInfoVersionZero is a type alias for the raw HIThemeTabPaneDrawInfoVersionZero value-type struct.
-type HIThemeTabPaneDrawInfoVersionZero = raw.HIThemeTabPaneDrawInfoVersionZero
-
-// HIThemeTextInfo is a type alias for the raw HIThemeTextInfo value-type struct.
-type HIThemeTextInfo = raw.HIThemeTextInfo
-
-// HIThemeTickMarkDrawInfo is a type alias for the raw HIThemeTickMarkDrawInfo value-type struct.
-type HIThemeTickMarkDrawInfo = raw.HIThemeTickMarkDrawInfo
-
-// HIThemeTrackDrawInfo is a type alias for the raw HIThemeTrackDrawInfo value-type struct.
-type HIThemeTrackDrawInfo = raw.HIThemeTrackDrawInfo
-
-// HIThemeWindowDrawInfo is a type alias for the raw HIThemeWindowDrawInfo value-type struct.
-type HIThemeWindowDrawInfo = raw.HIThemeWindowDrawInfo
-
-// HIThemeWindowWidgetDrawInfo is a type alias for the raw HIThemeWindowWidgetDrawInfo value-type struct.
-type HIThemeWindowWidgetDrawInfo = raw.HIThemeWindowWidgetDrawInfo
-
-// HITypeAndCreator is a type alias for the raw HITypeAndCreator value-type struct.
-type HITypeAndCreator = raw.HITypeAndCreator
-
-// HIViewContentInfo is a type alias for the raw HIViewContentInfo value-type struct.
-type HIViewContentInfo = raw.HIViewContentInfo
-
-// HIViewFrameMetrics is a type alias for the raw HIViewFrameMetrics value-type struct.
-type HIViewFrameMetrics = raw.HIViewFrameMetrics
-
-// HIViewKind is a type alias for the raw HIViewKind value-type struct.
-type HIViewKind = raw.HIViewKind
-
-// HMHelpContent is a type alias for the raw HMHelpContent value-type struct.
-type HMHelpContent = raw.HMHelpContent
-
-// HMHelpContentRec is a type alias for the raw HMHelpContentRec value-type struct.
-type HMHelpContentRec = raw.HMHelpContentRec
-
-// HMStringResType is a type alias for the raw HMStringResType value-type struct.
-type HMStringResType = raw.HMStringResType
-
-// HMenuBarHeader is a type alias for the raw HMenuBarHeader value-type struct.
-type HMenuBarHeader = raw.HMenuBarHeader
-
-// HMenuBarMenu is a type alias for the raw HMenuBarMenu value-type struct.
-type HMenuBarMenu = raw.HMenuBarMenu
-
-// IndicatorDragConstraint is a type alias for the raw IndicatorDragConstraint value-type struct.
-type IndicatorDragConstraint = raw.IndicatorDragConstraint
-
-// LHElement is a type alias for the raw LHElement value-type struct.
-type LHElement = raw.LHElement
-
-// ListDefSpec is a type alias for the raw ListDefSpec value-type struct.
-type ListDefSpec = raw.ListDefSpec
-
-// ListRec is a type alias for the raw ListRec value-type struct.
-type ListRec = raw.ListRec
-
-// MCEntry is a type alias for the raw MCEntry value-type struct.
-type MCEntry = raw.MCEntry
-
-// MDEFDrawData is a type alias for the raw MDEFDrawData value-type struct.
-type MDEFDrawData = raw.MDEFDrawData
-
-// MDEFDrawItemsData is a type alias for the raw MDEFDrawItemsData value-type struct.
-type MDEFDrawItemsData = raw.MDEFDrawItemsData
-
-// MDEFFindItemData is a type alias for the raw MDEFFindItemData value-type struct.
-type MDEFFindItemData = raw.MDEFFindItemData
-
-// MDEFHiliteItemData is a type alias for the raw MDEFHiliteItemData value-type struct.
-type MDEFHiliteItemData = raw.MDEFHiliteItemData
-
-// MeasureWindowTitleRec is a type alias for the raw MeasureWindowTitleRec value-type struct.
-type MeasureWindowTitleRec = raw.MeasureWindowTitleRec
-
-// MenuBarHeader is a type alias for the raw MenuBarHeader value-type struct.
-type MenuBarHeader = raw.MenuBarHeader
-
-// MenuBarMenu is a type alias for the raw MenuBarMenu value-type struct.
-type MenuBarMenu = raw.MenuBarMenu
-
-// MenuCRsrc is a type alias for the raw MenuCRsrc value-type struct.
-type MenuCRsrc = raw.MenuCRsrc
-
-// MenuDefSpec is a type alias for the raw MenuDefSpec value-type struct.
-type MenuDefSpec = raw.MenuDefSpec
-
-// MenuItemDataRec is a type alias for the raw MenuItemDataRec value-type struct.
-type MenuItemDataRec = raw.MenuItemDataRec
-
-// MenuTrackingData is a type alias for the raw MenuTrackingData value-type struct.
-type MenuTrackingData = raw.MenuTrackingData
-
-// NMRec is a type alias for the raw NMRec value-type struct.
-type NMRec = raw.NMRec
-
-// NullStRec is a type alias for the raw NullStRec value-type struct.
-type NullStRec = raw.NullStRec
-
-// ProgressTrackInfo is a type alias for the raw ProgressTrackInfo value-type struct.
-type ProgressTrackInfo = raw.ProgressTrackInfo
-
-// PromiseHFSFlavor is a type alias for the raw PromiseHFSFlavor value-type struct.
-type PromiseHFSFlavor = raw.PromiseHFSFlavor
-
-// STElement is a type alias for the raw STElement value-type struct.
-type STElement = raw.STElement
-
-// ScrapFlavorInfo is a type alias for the raw ScrapFlavorInfo value-type struct.
-type ScrapFlavorInfo = raw.ScrapFlavorInfo
-
-// ScrapTranslationList is a type alias for the raw ScrapTranslationList value-type struct.
-type ScrapTranslationList = raw.ScrapTranslationList
-
-// ScrapTypeSpec is a type alias for the raw ScrapTypeSpec value-type struct.
-type ScrapTypeSpec = raw.ScrapTypeSpec
-
-// ScriptLanguageRecord is a type alias for the raw ScriptLanguageRecord value-type struct.
-type ScriptLanguageRecord = raw.ScriptLanguageRecord
-
-// ScriptLanguageSupport is a type alias for the raw ScriptLanguageSupport value-type struct.
-type ScriptLanguageSupport = raw.ScriptLanguageSupport
-
-// ScrollBarTrackInfo is a type alias for the raw ScrollBarTrackInfo value-type struct.
-type ScrollBarTrackInfo = raw.ScrollBarTrackInfo
-
-// ScrpSTElement is a type alias for the raw ScrpSTElement value-type struct.
-type ScrpSTElement = raw.ScrpSTElement
-
-// SetupWindowProxyDragImageRec is a type alias for the raw SetupWindowProxyDragImageRec value-type struct.
-type SetupWindowProxyDragImageRec = raw.SetupWindowProxyDragImageRec
-
-// SliderTrackInfo is a type alias for the raw SliderTrackInfo value-type struct.
-type SliderTrackInfo = raw.SliderTrackInfo
-
-// StScrpRec is a type alias for the raw StScrpRec value-type struct.
-type StScrpRec = raw.StScrpRec
-
-// StandardIconListCellDataRec is a type alias for the raw StandardIconListCellDataRec value-type struct.
-type StandardIconListCellDataRec = raw.StandardIconListCellDataRec
-
-// StyleRun is a type alias for the raw StyleRun value-type struct.
-type StyleRun = raw.StyleRun
-
-// TERec is a type alias for the raw TERec value-type struct.
-type TERec = raw.TERec
-
-// TEStyleRec is a type alias for the raw TEStyleRec value-type struct.
-type TEStyleRec = raw.TEStyleRec
-
-// TSMGlyphInfo is a type alias for the raw TSMGlyphInfo value-type struct.
-type TSMGlyphInfo = raw.TSMGlyphInfo
-
-// TSMGlyphInfoArray is a type alias for the raw TSMGlyphInfoArray value-type struct.
-type TSMGlyphInfoArray = raw.TSMGlyphInfoArray
-
-// TSMTERec is a type alias for the raw TSMTERec value-type struct.
-type TSMTERec = raw.TSMTERec
-
-// TXNATSUIFeatures is a type alias for the raw TXNATSUIFeatures value-type struct.
-type TXNATSUIFeatures = raw.TXNATSUIFeatures
-
-// TXNATSUIVariations is a type alias for the raw TXNATSUIVariations value-type struct.
-type TXNATSUIVariations = raw.TXNATSUIVariations
-
-// TXNBackground is a type alias for the raw TXNBackground value-type struct.
-type TXNBackground = raw.TXNBackground
-
-// TXNBackgroundData is a type alias for the raw TXNBackgroundData value-type struct.
-type TXNBackgroundData = raw.TXNBackgroundData
-
-// TXNCarbonEventInfo is a type alias for the raw TXNCarbonEventInfo value-type struct.
-type TXNCarbonEventInfo = raw.TXNCarbonEventInfo
-
-// TXNLongRect is a type alias for the raw TXNLongRect value-type struct.
-type TXNLongRect = raw.TXNLongRect
-
-// TXNMargins is a type alias for the raw TXNMargins value-type struct.
-type TXNMargins = raw.TXNMargins
-
-// TXNMatchTextRecord is a type alias for the raw TXNMatchTextRecord value-type struct.
-type TXNMatchTextRecord = raw.TXNMatchTextRecord
-
-// TXNTab is a type alias for the raw TXNTab value-type struct.
-type TXNTab = raw.TXNTab
-
-// TXNTypeAttributes is a type alias for the raw TXNTypeAttributes value-type struct.
-type TXNTypeAttributes = raw.TXNTypeAttributes
-
-// TabletPointRec is a type alias for the raw TabletPointRec value-type struct.
-type TabletPointRec = raw.TabletPointRec
-
-// TabletProximityRec is a type alias for the raw TabletProximityRec value-type struct.
-type TabletProximityRec = raw.TabletProximityRec
-
-// TextServiceInfo is a type alias for the raw TextServiceInfo value-type struct.
-type TextServiceInfo = raw.TextServiceInfo
-
-// TextServiceList is a type alias for the raw TextServiceList value-type struct.
-type TextServiceList = raw.TextServiceList
-
-// TextStyle is a type alias for the raw TextStyle value-type struct.
-type TextStyle = raw.TextStyle
-
-// ThemeButtonDrawInfo is a type alias for the raw ThemeButtonDrawInfo value-type struct.
-type ThemeButtonDrawInfo = raw.ThemeButtonDrawInfo
-
-// ThemeTrackDrawInfo is a type alias for the raw ThemeTrackDrawInfo value-type struct.
-type ThemeTrackDrawInfo = raw.ThemeTrackDrawInfo
-
-// ThemeWindowMetrics is a type alias for the raw ThemeWindowMetrics value-type struct.
-type ThemeWindowMetrics = raw.ThemeWindowMetrics
-
-// TransitionWindowOptions is a type alias for the raw TransitionWindowOptions value-type struct.
-type TransitionWindowOptions = raw.TransitionWindowOptions
-
-// TypeSelectRecord is a type alias for the raw TypeSelectRecord value-type struct.
-type TypeSelectRecord = raw.TypeSelectRecord
-
-// WStateData is a type alias for the raw WStateData value-type struct.
-type WStateData = raw.WStateData
-
-// WinCTab is a type alias for the raw WinCTab value-type struct.
-type WinCTab = raw.WinCTab
-
-// WindowDefSpec is a type alias for the raw WindowDefSpec value-type struct.
-type WindowDefSpec = raw.WindowDefSpec
+type ControlEditTextSelectionRec struct {
+	SelStart int16
+	SelEnd   int16
+}
+
+type ControlID struct {
+	Signature uint
+	Id        int
+}
+
+type ControlKind struct {
+	Signature uint
+	Kind      uint
+}
+
+type DataBrowserAccessibilityItemInfoV0 struct {
+	Container      uint
+	Item           uint
+	ColumnProperty uint
+	PropertyPart   uint
+}
+
+type DataBrowserAccessibilityItemInfoV1 struct {
+	Container      uint
+	Item           uint
+	ColumnProperty uint
+	PropertyPart   uint
+	RowIndex       uint
+	ColumnIndex    uint
+}
+
+type DataBrowserPropertyDesc struct {
+	PropertyID    uint
+	PropertyType  uint
+	PropertyFlags uint
+}
+
+type EventHotKeyID struct {
+	Signature uint
+	Id        uint
+}
+
+type EventTypeSpec struct {
+	EventClass uint
+	EventKind  uint
+}
+
+type FileTranslationList struct {
+	ModDate    uint
+	GroupCount uint
+}
+
+// ***************************************************************************************
+type FileTypeSpec struct {
+	Format         uint
+	Hint           int
+	Flags          uint
+	CatInfoType    uint
+	CatInfoCreator uint
+}
+
+type HIContentBorderMetrics struct {
+	Top    float64
+	Left   float64
+	Bottom float64
+	Right  float64
+}
+
+type HIScrollBarTrackInfo struct {
+	Version     uint
+	EnableState uint8
+	PressState  uint8
+	Viewsize    float64
+}
+
+type HIThemeAnimationFrameInfo struct {
+	Index uint
+}
+
+type HIThemeAnimationTimeInfo struct {
+	Start   float64
+	Current float64
+}
+
+type HIThemeBackgroundDrawInfo struct {
+	Version uint
+	State   uint
+	Kind    uint
+}
+
+type HIThemeChasingArrowsDrawInfo struct {
+	Version uint
+	State   uint
+	Index   uint
+}
+
+type HIThemeFrameDrawInfo struct {
+	Version   uint
+	Kind      uint
+	State     uint
+	IsFocused uint8
+}
+
+type HIThemeGrabberDrawInfo struct {
+	Version uint
+	State   uint
+}
+
+type HIThemeGroupBoxDrawInfo struct {
+	Version uint
+	State   uint
+	Kind    uint
+}
+
+type HIThemeGrowBoxDrawInfo struct {
+	Version   uint
+	State     uint
+	Kind      uint
+	Direction uint16
+	Size      uint
+}
+
+type HIThemeHeaderDrawInfo struct {
+	Version uint
+	State   uint
+	Kind    uint
+}
+
+type HIThemeMenuBarDrawInfo struct {
+	Version    uint
+	State      uint16
+	Attributes uint
+}
+
+type HIThemeMenuDrawInfo struct {
+	Version       uint
+	MenuType      uint16
+	Reserved1     uint
+	Reserved2     float64
+	MenuDirection uint
+	Reserved3     float64
+	Reserved4     float64
+}
+
+type HIThemeMenuDrawInfoVersionZero struct {
+	Version  uint
+	MenuType uint16
+}
+
+type HIThemeMenuItemDrawInfo struct {
+	Version  uint
+	ItemType uint16
+	State    uint16
+}
+
+type HIThemeMenuTitleDrawInfo struct {
+	Version             uint
+	State               uint16
+	Attributes          uint
+	CondensedTitleExtra float64
+}
+
+type HIThemePlacardDrawInfo struct {
+	Version uint
+	State   uint
+}
+
+type HIThemePopupArrowDrawInfo struct {
+	Version     uint
+	State       uint
+	Orientation uint16
+	Size        uint16
+}
+
+type HIThemeScrollBarDelimitersDrawInfo struct {
+	Version    uint
+	State      uint
+	WindowType uint16
+	Attributes uint
+}
+
+type HIThemeSegmentDrawInfo struct {
+	Version   uint
+	State     uint
+	Value     uint16
+	Size      uint
+	Kind      uint
+	Position  uint
+	Adornment uint
+}
+
+type HIThemeSeparatorDrawInfo struct {
+	Version uint
+	State   uint
+}
+
+type HIThemeSplitterDrawInfo struct {
+	Version   uint
+	State     uint
+	Adornment uint
+}
+
+type HIThemeTabDrawInfo struct {
+	Version   uint
+	Style     uint16
+	Direction uint16
+	Size      uint
+	Adornment uint
+	Kind      uint
+	Position  uint
+}
+
+type HIThemeTabDrawInfoVersionZero struct {
+	Version   uint
+	Style     uint16
+	Direction uint16
+	Size      uint
+	Adornment uint
+}
+
+type HIThemeTabPaneDrawInfo struct {
+	Version   uint
+	State     uint
+	Direction uint16
+	Size      uint
+	Kind      uint
+	Adornment uint
+}
+
+type HIThemeTabPaneDrawInfoVersionZero struct {
+	Version   uint
+	State     uint
+	Direction uint16
+	Size      uint
+}
+
+type HIThemeTickMarkDrawInfo struct {
+	Version uint
+	State   uint
+}
+
+type HIThemeWindowDrawInfo struct {
+	Version     uint
+	State       uint
+	WindowType  uint16
+	Attributes  uint
+	TitleHeight float64
+	TitleWidth  float64
+}
+
+type HIThemeWindowWidgetDrawInfo struct {
+	Version     uint
+	WidgetState uint
+	WidgetType  uint16
+	WindowState uint
+	WindowType  uint16
+	Attributes  uint
+	TitleHeight float64
+	TitleWidth  float64
+}
+
+type HITypeAndCreator struct {
+	Type    uint
+	Creator uint
+}
+
+type HIViewFrameMetrics struct {
+	Top    float64
+	Left   float64
+	Bottom float64
+	Right  float64
+}
+
+type HIViewKind struct {
+	Signature uint
+	Kind      uint
+}
+
+type HMStringResType struct {
+	HmmResID int16
+	HmmIndex int16
+}
+
+type LHElement struct {
+	LhHeight int16
+	LhAscent int16
+}
+
+type MeasureWindowTitleRec struct {
+	FullTitleWidth int16
+	TitleTextWidth int16
+	IsUnicodeTitle uint8
+	Unused         uint8
+}
+
+type MenuBarHeader struct {
+	LastMenu  uint16
+	LastRight int16
+	MbResID   int16
+}
+
+type ProgressTrackInfo struct {
+	Phase uint8
+}
+
+type PromiseHFSFlavor struct {
+	FileType       uint
+	FileCreator    uint
+	FdFlags        uint16
+	PromisedFlavor uint
+}
+
+type ScrapFlavorInfo struct {
+	FlavorType  uint
+	FlavorFlags uint
+}
+
+type ScrapTranslationList struct {
+	ModDate    uint
+	GroupCount uint
+}
+
+// ***************************************************************************************
+type ScrapTypeSpec struct {
+	Format uint
+	Hint   int
+}
+
+type ScriptLanguageRecord struct {
+	FScript   int16
+	FLanguage int16
+}
+
+type ScrollBarTrackInfo struct {
+	Viewsize   int
+	PressState uint8
+}
+
+type SliderTrackInfo struct {
+	ThumbDir   uint8
+	PressState uint8
+}
+
+type StyleRun struct {
+	StartChar  int16
+	StyleIndex int16
+}
+
+type TXNLongRect struct {
+	Top    int
+	Left   int
+	Bottom int
+	Right  int
+}
+
+type TXNMargins struct {
+	TopMargin    int16
+	LeftMargin   int16
+	BottomMargin int16
+	RightMargin  int16
+}
+
+type TXNTab struct {
+	Value   int16
+	TabType int8
+	Filler  uint8
+}
+
+type TabletPointRec struct {
+	AbsX               int
+	AbsY               int
+	AbsZ               int
+	Buttons            uint16
+	Pressure           uint16
+	TiltX              int16
+	TiltY              int16
+	Rotation           uint16
+	TangentialPressure int16
+	DeviceID           uint16
+	Vendor1            int16
+	Vendor2            int16
+	Vendor3            int16
+}
+
+type TabletProximityRec struct {
+	VendorID            uint16
+	TabletID            uint16
+	PointerID           uint16
+	DeviceID            uint16
+	SystemTabletID      uint16
+	VendorPointerType   uint16
+	PointerSerialNumber uint
+	UniqueID            uint64
+	CapabilityMask      uint
+	PointerType         uint8
+	EnterProximity      uint8
+}
+
+type ThemeButtonDrawInfo struct {
+	State     uint
+	Value     uint16
+	Adornment uint16
+}
+
+type ThemeWindowMetrics struct {
+	MetricSize       uint16
+	TitleHeight      int16
+	TitleWidth       int16
+	PopupTabOffset   int16
+	PopupTabWidth    int16
+	PopupTabPosition uint16
+}

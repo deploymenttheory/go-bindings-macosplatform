@@ -5,558 +5,268 @@
 package metalfx
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalfx"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TemporalDenoisedScalerDescriptor wraps [raw.MTLFXTemporalDenoisedScalerDescriptor] with a fluent Go API.
+// TemporalDenoisedScalerDescriptor is an idiomatic wrapper over the Objective-C class MTLFXTemporalDenoisedScalerDescriptor.
 type TemporalDenoisedScalerDescriptor struct {
-	inner *raw.MTLFXTemporalDenoisedScalerDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFXTemporalDenoisedScalerDescriptor].
-func (x *TemporalDenoisedScalerDescriptor) Unwrap() *raw.MTLFXTemporalDenoisedScalerDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TemporalDenoisedScalerDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// TemporalDenoisedScalerDescriptorFromID adopts an existing object pointer as a TemporalDenoisedScalerDescriptor (nil for 0).
+// TemporalDenoisedScalerDescriptorFromID adopts an existing Objective-C object as a TemporalDenoisedScalerDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func TemporalDenoisedScalerDescriptorFromID(id objc.ID) *TemporalDenoisedScalerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &TemporalDenoisedScalerDescriptor{inner: raw.MTLFXTemporalDenoisedScalerDescriptorFromID(id)}
+	x := &TemporalDenoisedScalerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTemporalDenoisedScalerDescriptor creates a new [TemporalDenoisedScalerDescriptor].
+// temporalDenoisedScalerDescriptorAdopt wraps an Objective-C object that this code just created as a
+// TemporalDenoisedScalerDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func temporalDenoisedScalerDescriptorAdopt(id objc.ID) *TemporalDenoisedScalerDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &TemporalDenoisedScalerDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TemporalDenoisedScalerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TemporalDenoisedScalerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TemporalDenoisedScalerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TemporalDenoisedScalerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTemporalDenoisedScalerDescriptor creates a new TemporalDenoisedScalerDescriptor.
 func NewTemporalDenoisedScalerDescriptor() *TemporalDenoisedScalerDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFXTemporalDenoisedScalerDescriptor")), objc.RegisterName("new"))
-	return &TemporalDenoisedScalerDescriptor{inner: raw.MTLFXTemporalDenoisedScalerDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFXTemporalDenoisedScalerDescriptor")), objc.RegisterName("new"))
+	return temporalDenoisedScalerDescriptorAdopt(_id)
 }
 
-// The pixel format of the input color texture for the scaler you create with this descriptor.
-//
-// WithColorTextureFormat sets the colorTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
+// WithInputWidth the width, in pixels, of the input color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) WithInputWidth(inputWidth int) *TemporalDenoisedScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 	return x
 }
 
-// The pixel format of the input depth texture for the scaler you create with this descriptor.
-//
-// WithDepthTextureFormat sets the depthTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetDepthTextureFormat(depthTextureFormat)
+// WithInputHeight the height, in pixels, of the input color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) WithInputHeight(inputHeight int) *TemporalDenoisedScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 	return x
 }
 
-// The pixel format of the input motion texture for the scaler you create with this descriptor.
-//
-// WithMotionTextureFormat sets the motionTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetMotionTextureFormat(motionTextureFormat)
+// WithOutputWidth the width, in pixels, of the output color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) WithOutputWidth(outputWidth int) *TemporalDenoisedScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 	return x
 }
 
-// The pixel format of the input diffuse albedo texture for the scaler you create with this descriptor.
-//
-// WithDiffuseAlbedoTextureFormat sets the diffuseAlbedoTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat)
+// WithOutputHeight the height, in pixels, of the input color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) WithOutputHeight(outputHeight int) *TemporalDenoisedScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 	return x
 }
 
-// The pixel format of the input specular albedo texture for the scaler you create with this descriptor.
-//
-// WithSpecularAlbedoTextureFormat sets the specularAlbedoTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat)
-	return x
-}
-
-// The pixel format of the input normal texture for the scaler you create with this descriptor.
-//
-// WithNormalTextureFormat sets the normalTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetNormalTextureFormat(normalTextureFormat)
-	return x
-}
-
-// The pixel format of the input roughness texture for the scaler you create with this descriptor.
-//
-// WithRoughnessTextureFormat sets the roughnessTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetRoughnessTextureFormat(roughnessTextureFormat)
-	return x
-}
-
-// The pixel format of the input specular hit texture for the scaler you create with this descriptor.
-//
-// WithSpecularHitDistanceTextureFormat sets the specularHitDistanceTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat)
-	return x
-}
-
-// The pixel format of the input denoise strength mask texture for the scaler you create with this descriptor.
-//
-// WithDenoiseStrengthMaskTextureFormat sets the denoiseStrengthMaskTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat)
-	return x
-}
-
-// The pixel format of the input transparency overlay texture for the scaler you create with this descriptor.
-//
-// WithTransparencyOverlayTextureFormat sets the transparencyOverlayTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat)
-	return x
-}
-
-// The pixel format of the output color texture for the scaler you create with this descriptor.
-//
-// WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
-	return x
-}
-
-// The width, in pixels, of the input color texture for the denoiser scaler.
-//
-// WithInputWidth sets the inputWidth property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithInputWidth(inputWidth uint) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetInputWidth(inputWidth)
-	return x
-}
-
-// The height, in pixels, of the input color texture for the denoiser scaler.
-//
-// WithInputHeight sets the inputHeight property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithInputHeight(inputHeight uint) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetInputHeight(inputHeight)
-	return x
-}
-
-// The width, in pixels, of the output color texture for the denoiser scaler.
-//
-// WithOutputWidth sets the outputWidth property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithOutputWidth(outputWidth uint) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetOutputWidth(outputWidth)
-	return x
-}
-
-// The height, in pixels, of the input color texture for the denoiser scaler.
-//
-// WithOutputHeight sets the outputHeight property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithOutputHeight(outputHeight uint) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetOutputHeight(outputHeight)
-	return x
-}
-
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.
-//
-// WithRequiresSynchronousInitialization sets the requiresSynchronousInitialization property and returns the receiver for chaining.
+// WithRequiresSynchronousInitialization a Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.
 func (x *TemporalDenoisedScalerDescriptor) WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetRequiresSynchronousInitialization(requiresSynchronousInitialization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSynchronousInitialization:"), requiresSynchronousInitialization)
 	return x
 }
 
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame.
-//
-// WithAutoExposureEnabled sets the autoExposureEnabled property and returns the receiver for chaining.
+// WithAutoExposureEnabled a Boolean value that indicates whether MetalFX calculates the exposure for each frame.
 func (x *TemporalDenoisedScalerDescriptor) WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetAutoExposureEnabled(autoExposureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoExposureEnabled:"), autoExposureEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether a scaler you create from this descriptor applies a reactive mask.
-//
-// WithReactiveMaskTextureEnabled sets the reactiveMaskTextureEnabled property and returns the receiver for chaining.
+// WithReactiveMaskTextureEnabled a Boolean value that indicates whether a scaler you create from this descriptor applies a reactive mask.
 func (x *TemporalDenoisedScalerDescriptor) WithReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReactiveMaskTextureEnabled:"), reactiveMaskTextureEnabled)
 	return x
 }
 
-// The pixel format of the reactive mask input texture for a scaler you create from this descriptor.
-//
-// WithReactiveMaskTextureFormat sets the reactiveMaskTextureFormat property and returns the receiver for chaining.
-func (x *TemporalDenoisedScalerDescriptor) WithReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetReactiveMaskTextureFormat(reactiveMaskTextureFormat)
-	return x
-}
-
-// A Boolean value indicating whether the scaler evaluates a specular hit distance texture as part of its operation.
-//
-// WithSpecularHitDistanceTextureEnabled sets the specularHitDistanceTextureEnabled property and returns the receiver for chaining.
+// WithSpecularHitDistanceTextureEnabled a Boolean value indicating whether the scaler evaluates a specular hit distance texture as part of its operation.
 func (x *TemporalDenoisedScalerDescriptor) WithSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecularHitDistanceTextureEnabled:"), specularHitDistanceTextureEnabled)
 	return x
 }
 
-// A Boolean value indicating whether the scaler evaluates a denoise strength mask texture as part of its operation.
-//
-// WithDenoiseStrengthMaskTextureEnabled sets the denoiseStrengthMaskTextureEnabled property and returns the receiver for chaining.
+// WithDenoiseStrengthMaskTextureEnabled a Boolean value indicating whether the scaler evaluates a denoise strength mask texture as part of its operation.
 func (x *TemporalDenoisedScalerDescriptor) WithDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled bool) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDenoiseStrengthMaskTextureEnabled:"), denoiseStrengthMaskTextureEnabled)
 	return x
 }
 
-// A Boolean value indicating whether the scaler evaluates a transparency overlay texture as part of its operation.
-//
-// WithTransparencyOverlayTextureEnabled sets the transparencyOverlayTextureEnabled property and returns the receiver for chaining.
+// WithTransparencyOverlayTextureEnabled a Boolean value indicating whether the scaler evaluates a transparency overlay texture as part of its operation.
 func (x *TemporalDenoisedScalerDescriptor) WithTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled bool) *TemporalDenoisedScalerDescriptor {
-	x.inner.SetTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparencyOverlayTextureEnabled:"), transparencyOverlayTextureEnabled)
 	return x
 }
 
-// Creates a denoiser scaler instance for a Metal device.
-//
-// NewTemporalDenoisedScalerWithDevice calls the underlying NewTemporalDenoisedScalerWithDevice.
-func (x *TemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalDenoisedScaler {
-	return x.inner.NewTemporalDenoisedScalerWithDevice(device)
+// InputWidth the width, in pixels, of the input color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) InputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputWidth"))
+	return _r
 }
 
-// Creates a denoiser scaler instance for a Metal device.
-//
-// NewTemporalDenoisedScalerWithDeviceCompiler calls the underlying NewTemporalDenoisedScalerWithDeviceCompiler.
-func (x *TemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalDenoisedScaler {
-	return x.inner.NewTemporalDenoisedScalerWithDeviceCompiler(device, compiler)
+// SetInputWidth wraps the corresponding Objective-C method.
+func (x *TemporalDenoisedScalerDescriptor) SetInputWidth(inputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 }
 
-// The pixel format of the input color texture for the scaler you create with this descriptor.
-//
-// ColorTextureFormat calls the underlying ColorTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
-	return x.inner.ColorTextureFormat()
+// InputHeight the height, in pixels, of the input color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) InputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputHeight"))
+	return _r
 }
 
-// SetColorTextureFormat calls the underlying SetColorTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
+// SetInputHeight wraps the corresponding Objective-C method.
+func (x *TemporalDenoisedScalerDescriptor) SetInputHeight(inputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 }
 
-// The pixel format of the input depth texture for the scaler you create with this descriptor.
-//
-// DepthTextureFormat calls the underlying DepthTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) DepthTextureFormat() metal.MTLPixelFormat {
-	return x.inner.DepthTextureFormat()
+// OutputWidth the width, in pixels, of the output color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) OutputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputWidth"))
+	return _r
 }
 
-// SetDepthTextureFormat calls the underlying SetDepthTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetDepthTextureFormat(depthTextureFormat)
+// SetOutputWidth wraps the corresponding Objective-C method.
+func (x *TemporalDenoisedScalerDescriptor) SetOutputWidth(outputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 }
 
-// The pixel format of the input motion texture for the scaler you create with this descriptor.
-//
-// MotionTextureFormat calls the underlying MotionTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) MotionTextureFormat() metal.MTLPixelFormat {
-	return x.inner.MotionTextureFormat()
+// OutputHeight the height, in pixels, of the input color texture for the denoiser scaler.
+func (x *TemporalDenoisedScalerDescriptor) OutputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputHeight"))
+	return _r
 }
 
-// SetMotionTextureFormat calls the underlying SetMotionTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetMotionTextureFormat(motionTextureFormat)
+// SetOutputHeight wraps the corresponding Objective-C method.
+func (x *TemporalDenoisedScalerDescriptor) SetOutputHeight(outputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 }
 
-// The pixel format of the input diffuse albedo texture for the scaler you create with this descriptor.
-//
-// DiffuseAlbedoTextureFormat calls the underlying DiffuseAlbedoTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) DiffuseAlbedoTextureFormat() metal.MTLPixelFormat {
-	return x.inner.DiffuseAlbedoTextureFormat()
-}
-
-// SetDiffuseAlbedoTextureFormat calls the underlying SetDiffuseAlbedoTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat)
-}
-
-// The pixel format of the input specular albedo texture for the scaler you create with this descriptor.
-//
-// SpecularAlbedoTextureFormat calls the underlying SpecularAlbedoTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SpecularAlbedoTextureFormat() metal.MTLPixelFormat {
-	return x.inner.SpecularAlbedoTextureFormat()
-}
-
-// SetSpecularAlbedoTextureFormat calls the underlying SetSpecularAlbedoTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat)
-}
-
-// The pixel format of the input normal texture for the scaler you create with this descriptor.
-//
-// NormalTextureFormat calls the underlying NormalTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) NormalTextureFormat() metal.MTLPixelFormat {
-	return x.inner.NormalTextureFormat()
-}
-
-// SetNormalTextureFormat calls the underlying SetNormalTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetNormalTextureFormat(normalTextureFormat)
-}
-
-// The pixel format of the input roughness texture for the scaler you create with this descriptor.
-//
-// RoughnessTextureFormat calls the underlying RoughnessTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) RoughnessTextureFormat() metal.MTLPixelFormat {
-	return x.inner.RoughnessTextureFormat()
-}
-
-// SetRoughnessTextureFormat calls the underlying SetRoughnessTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetRoughnessTextureFormat(roughnessTextureFormat)
-}
-
-// The pixel format of the input specular hit texture for the scaler you create with this descriptor.
-//
-// SpecularHitDistanceTextureFormat calls the underlying SpecularHitDistanceTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SpecularHitDistanceTextureFormat() metal.MTLPixelFormat {
-	return x.inner.SpecularHitDistanceTextureFormat()
-}
-
-// SetSpecularHitDistanceTextureFormat calls the underlying SetSpecularHitDistanceTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat)
-}
-
-// The pixel format of the input denoise strength mask texture for the scaler you create with this descriptor. You typically set this to a single-channel texture format.
-//
-// DenoiseStrengthMaskTextureFormat calls the underlying DenoiseStrengthMaskTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) DenoiseStrengthMaskTextureFormat() metal.MTLPixelFormat {
-	return x.inner.DenoiseStrengthMaskTextureFormat()
-}
-
-// SetDenoiseStrengthMaskTextureFormat calls the underlying SetDenoiseStrengthMaskTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat)
-}
-
-// The pixel format of the input transparency overlay texture for the scaler you create with this descriptor. You typically set this to a 4-channel RGBA texture format.
-//
-// TransparencyOverlayTextureFormat calls the underlying TransparencyOverlayTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) TransparencyOverlayTextureFormat() metal.MTLPixelFormat {
-	return x.inner.TransparencyOverlayTextureFormat()
-}
-
-// SetTransparencyOverlayTextureFormat calls the underlying SetTransparencyOverlayTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat)
-}
-
-// The pixel format of the output color texture for the scaler you create with this descriptor.
-//
-// OutputTextureFormat calls the underlying OutputTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
-	return x.inner.OutputTextureFormat()
-}
-
-// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
-}
-
-// The width, in pixels, of the input color texture for the denoiser scaler.
-//
-// InputWidth calls the underlying InputWidth.
-func (x *TemporalDenoisedScalerDescriptor) InputWidth() uint {
-	return x.inner.InputWidth()
-}
-
-// SetInputWidth calls the underlying SetInputWidth.
-func (x *TemporalDenoisedScalerDescriptor) SetInputWidth(inputWidth uint) {
-	x.inner.SetInputWidth(inputWidth)
-}
-
-// The height, in pixels, of the input color texture for the denoiser scaler.
-//
-// InputHeight calls the underlying InputHeight.
-func (x *TemporalDenoisedScalerDescriptor) InputHeight() uint {
-	return x.inner.InputHeight()
-}
-
-// SetInputHeight calls the underlying SetInputHeight.
-func (x *TemporalDenoisedScalerDescriptor) SetInputHeight(inputHeight uint) {
-	x.inner.SetInputHeight(inputHeight)
-}
-
-// The width, in pixels, of the output color texture for the denoiser scaler.
-//
-// OutputWidth calls the underlying OutputWidth.
-func (x *TemporalDenoisedScalerDescriptor) OutputWidth() uint {
-	return x.inner.OutputWidth()
-}
-
-// SetOutputWidth calls the underlying SetOutputWidth.
-func (x *TemporalDenoisedScalerDescriptor) SetOutputWidth(outputWidth uint) {
-	x.inner.SetOutputWidth(outputWidth)
-}
-
-// The height, in pixels, of the input color texture for the denoiser scaler.
-//
-// OutputHeight calls the underlying OutputHeight.
-func (x *TemporalDenoisedScalerDescriptor) OutputHeight() uint {
-	return x.inner.OutputHeight()
-}
-
-// SetOutputHeight calls the underlying SetOutputHeight.
-func (x *TemporalDenoisedScalerDescriptor) SetOutputHeight(outputHeight uint) {
-	x.inner.SetOutputHeight(outputHeight)
-}
-
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal denoised scaler instance that can denoise and upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalDenoisedScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
-//
-// RequiresSynchronousInitialization calls the underlying RequiresSynchronousInitialization.
+// RequiresSynchronousInitialization a Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal denoised scaler instance that can denoise and upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalDenoisedScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
 func (x *TemporalDenoisedScalerDescriptor) RequiresSynchronousInitialization() bool {
-	return x.inner.RequiresSynchronousInitialization()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSynchronousInitialization"))
+	return _r
 }
 
-// SetRequiresSynchronousInitialization calls the underlying SetRequiresSynchronousInitialization.
+// SetRequiresSynchronousInitialization wraps the corresponding Objective-C method.
 func (x *TemporalDenoisedScalerDescriptor) SetRequiresSynchronousInitialization(requiresSynchronousInitialization bool) {
-	x.inner.SetRequiresSynchronousInitialization(requiresSynchronousInitialization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSynchronousInitialization:"), requiresSynchronousInitialization)
 }
 
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Denoiser scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// IsAutoExposureEnabled calls the underlying IsAutoExposureEnabled.
+// IsAutoExposureEnabled a Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Denoiser scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (x *TemporalDenoisedScalerDescriptor) IsAutoExposureEnabled() bool {
-	return x.inner.IsAutoExposureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutoExposureEnabled"))
+	return _r
 }
 
-// SetAutoExposureEnabled calls the underlying SetAutoExposureEnabled.
+// SetAutoExposureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalDenoisedScalerDescriptor) SetAutoExposureEnabled(autoExposureEnabled bool) {
-	x.inner.SetAutoExposureEnabled(autoExposureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoExposureEnabled:"), autoExposureEnabled)
 }
 
-// A Boolean value that indicates whether a scaler you create from this descriptor applies a reactive mask.
-//
-// IsReactiveMaskTextureEnabled calls the underlying IsReactiveMaskTextureEnabled.
+// IsReactiveMaskTextureEnabled a Boolean value that indicates whether a scaler you create from this descriptor applies a reactive mask.
 func (x *TemporalDenoisedScalerDescriptor) IsReactiveMaskTextureEnabled() bool {
-	return x.inner.IsReactiveMaskTextureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReactiveMaskTextureEnabled"))
+	return _r
 }
 
-// SetReactiveMaskTextureEnabled calls the underlying SetReactiveMaskTextureEnabled.
+// SetReactiveMaskTextureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalDenoisedScalerDescriptor) SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) {
-	x.inner.SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReactiveMaskTextureEnabled:"), reactiveMaskTextureEnabled)
 }
 
-// The pixel format of the reactive mask input texture for a scaler you create from this descriptor.
-//
-// ReactiveMaskTextureFormat calls the underlying ReactiveMaskTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) ReactiveMaskTextureFormat() metal.MTLPixelFormat {
-	return x.inner.ReactiveMaskTextureFormat()
-}
-
-// SetReactiveMaskTextureFormat calls the underlying SetReactiveMaskTextureFormat.
-func (x *TemporalDenoisedScalerDescriptor) SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetReactiveMaskTextureFormat(reactiveMaskTextureFormat)
-}
-
-// A Boolean value indicating whether the scaler evaluates a specular hit distance texture as part of its operation.
-//
-// IsSpecularHitDistanceTextureEnabled calls the underlying IsSpecularHitDistanceTextureEnabled.
+// IsSpecularHitDistanceTextureEnabled a Boolean value indicating whether the scaler evaluates a specular hit distance texture as part of its operation.
 func (x *TemporalDenoisedScalerDescriptor) IsSpecularHitDistanceTextureEnabled() bool {
-	return x.inner.IsSpecularHitDistanceTextureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpecularHitDistanceTextureEnabled"))
+	return _r
 }
 
-// SetSpecularHitDistanceTextureEnabled calls the underlying SetSpecularHitDistanceTextureEnabled.
+// SetSpecularHitDistanceTextureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalDenoisedScalerDescriptor) SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool) {
-	x.inner.SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecularHitDistanceTextureEnabled:"), specularHitDistanceTextureEnabled)
 }
 
-// A Boolean value indicating whether the scaler evaluates a denoise strength mask texture as part of its operation.
-//
-// IsDenoiseStrengthMaskTextureEnabled calls the underlying IsDenoiseStrengthMaskTextureEnabled.
+// IsDenoiseStrengthMaskTextureEnabled a Boolean value indicating whether the scaler evaluates a denoise strength mask texture as part of its operation.
 func (x *TemporalDenoisedScalerDescriptor) IsDenoiseStrengthMaskTextureEnabled() bool {
-	return x.inner.IsDenoiseStrengthMaskTextureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDenoiseStrengthMaskTextureEnabled"))
+	return _r
 }
 
-// SetDenoiseStrengthMaskTextureEnabled calls the underlying SetDenoiseStrengthMaskTextureEnabled.
+// SetDenoiseStrengthMaskTextureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalDenoisedScalerDescriptor) SetDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled bool) {
-	x.inner.SetDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDenoiseStrengthMaskTextureEnabled:"), denoiseStrengthMaskTextureEnabled)
 }
 
-// A Boolean value indicating whether the scaler evaluates a transparency overlay texture as part of its operation.
-//
-// IsTransparencyOverlayTextureEnabled calls the underlying IsTransparencyOverlayTextureEnabled.
+// IsTransparencyOverlayTextureEnabled a Boolean value indicating whether the scaler evaluates a transparency overlay texture as part of its operation.
 func (x *TemporalDenoisedScalerDescriptor) IsTransparencyOverlayTextureEnabled() bool {
-	return x.inner.IsTransparencyOverlayTextureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransparencyOverlayTextureEnabled"))
+	return _r
 }
 
-// SetTransparencyOverlayTextureEnabled calls the underlying SetTransparencyOverlayTextureEnabled.
+// SetTransparencyOverlayTextureEnabled wraps the corresponding Objective-C method.
 func (x *TemporalDenoisedScalerDescriptor) SetTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled bool) {
-	x.inner.SetTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparencyOverlayTextureEnabled:"), transparencyOverlayTextureEnabled)
 }
 
 // TemporalDenoisedScalerDescriptorable is the interface implemented by [TemporalDenoisedScalerDescriptor], for mocking and DI.
 type TemporalDenoisedScalerDescriptorable interface {
-	Unwrap() *raw.MTLFXTemporalDenoisedScalerDescriptor
-	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
-	WithInputWidth(inputWidth uint) *TemporalDenoisedScalerDescriptor
-	WithInputHeight(inputHeight uint) *TemporalDenoisedScalerDescriptor
-	WithOutputWidth(outputWidth uint) *TemporalDenoisedScalerDescriptor
-	WithOutputHeight(outputHeight uint) *TemporalDenoisedScalerDescriptor
+	obj.Object
+	WithInputWidth(inputWidth int) *TemporalDenoisedScalerDescriptor
+	WithInputHeight(inputHeight int) *TemporalDenoisedScalerDescriptor
+	WithOutputWidth(outputWidth int) *TemporalDenoisedScalerDescriptor
+	WithOutputHeight(outputHeight int) *TemporalDenoisedScalerDescriptor
 	WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalDenoisedScalerDescriptor
 	WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalDenoisedScalerDescriptor
 	WithReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) *TemporalDenoisedScalerDescriptor
-	WithReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
 	WithSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool) *TemporalDenoisedScalerDescriptor
 	WithDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled bool) *TemporalDenoisedScalerDescriptor
 	WithTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled bool) *TemporalDenoisedScalerDescriptor
-	NewTemporalDenoisedScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalDenoisedScaler
-	NewTemporalDenoisedScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalDenoisedScaler
-	ColorTextureFormat() metal.MTLPixelFormat
-	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
-	DepthTextureFormat() metal.MTLPixelFormat
-	SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat)
-	MotionTextureFormat() metal.MTLPixelFormat
-	SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat)
-	DiffuseAlbedoTextureFormat() metal.MTLPixelFormat
-	SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat)
-	SpecularAlbedoTextureFormat() metal.MTLPixelFormat
-	SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat)
-	NormalTextureFormat() metal.MTLPixelFormat
-	SetNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat)
-	RoughnessTextureFormat() metal.MTLPixelFormat
-	SetRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat)
-	SpecularHitDistanceTextureFormat() metal.MTLPixelFormat
-	SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat)
-	DenoiseStrengthMaskTextureFormat() metal.MTLPixelFormat
-	SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat)
-	TransparencyOverlayTextureFormat() metal.MTLPixelFormat
-	SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat)
-	OutputTextureFormat() metal.MTLPixelFormat
-	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
-	InputWidth() uint
-	SetInputWidth(inputWidth uint)
-	InputHeight() uint
-	SetInputHeight(inputHeight uint)
-	OutputWidth() uint
-	SetOutputWidth(outputWidth uint)
-	OutputHeight() uint
-	SetOutputHeight(outputHeight uint)
+	InputWidth() int
+	SetInputWidth(inputWidth int)
+	InputHeight() int
+	SetInputHeight(inputHeight int)
+	OutputWidth() int
+	SetOutputWidth(outputWidth int)
+	OutputHeight() int
+	SetOutputHeight(outputHeight int)
 	RequiresSynchronousInitialization() bool
 	SetRequiresSynchronousInitialization(requiresSynchronousInitialization bool)
 	IsAutoExposureEnabled() bool
 	SetAutoExposureEnabled(autoExposureEnabled bool)
 	IsReactiveMaskTextureEnabled() bool
 	SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool)
-	ReactiveMaskTextureFormat() metal.MTLPixelFormat
-	SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat)
 	IsSpecularHitDistanceTextureEnabled() bool
 	SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool)
 	IsDenoiseStrengthMaskTextureEnabled() bool

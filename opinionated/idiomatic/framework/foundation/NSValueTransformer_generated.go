@@ -5,64 +5,100 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class used to transform values from one representation to another.
+// ValueTransformer is an idiomatic wrapper over the Objective-C class NSValueTransformer.
 //
-// ValueTransformer wraps [raw.NSValueTransformer] with a fluent Go API.
+// ValueTransformer is an abstract base — you do not construct it directly. Construct one of [SecureUnarchiveFromDataTransformer] and pass it where a ValueTransformer is accepted.
+//
+// An abstract class used to transform values from one representation to another.
 type ValueTransformer struct {
-	inner *raw.NSValueTransformer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSValueTransformer].
-func (x *ValueTransformer) Unwrap() *raw.NSValueTransformer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ValueTransformer) ID() objc.ID { return x.inner.Ptr() }
-
-// ValueTransformerFromID adopts an existing object pointer as a ValueTransformer (nil for 0).
+// ValueTransformerFromID adopts an existing Objective-C object as a ValueTransformer
+// (nil for 0), retaining it and registering a release finalizer.
 func ValueTransformerFromID(id objc.ID) *ValueTransformer {
 	if id == 0 {
 		return nil
 	}
-	return &ValueTransformer{inner: raw.NSValueTransformerFromID(id)}
-}
-
-// NewValueTransformer creates a new [ValueTransformer].
-func NewValueTransformer() *ValueTransformer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSValueTransformer")), objc.RegisterName("new"))
-	return &ValueTransformer{inner: raw.NSValueTransformerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ValueTransformer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ValueTransformer {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ValueTransformer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// TransformedValue calls the underlying TransformedValue.
-func (x *ValueTransformer) TransformedValue(value objc.ID) objc.ID {
-	return x.inner.TransformedValue(value)
+// valueTransformerAdopt wraps an Objective-C object that this code just created as a
+// ValueTransformer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func valueTransformerAdopt(id objc.ID) *ValueTransformer {
+	if id == 0 {
+		return nil
+	}
+	x := &ValueTransformer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ReverseTransformedValue calls the underlying ReverseTransformedValue.
-func (x *ValueTransformer) ReverseTransformedValue(value objc.ID) objc.ID {
-	return x.inner.ReverseTransformedValue(value)
+// Description returns the object's -description text.
+func (x *ValueTransformer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *ValueTransformer) asValueTransformer() *raw.NSValueTransformer { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ValueTransformer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
 
-func (x *ValueTransformer) asObject() *raw.NSObject { return &x.inner.NSObject }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ValueTransformer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ValueTransformer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *ValueTransformer) WithScriptingProperties(scriptingProperties obj.Object) *ValueTransformer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// TransformedValue wraps the corresponding Objective-C method.
+func (x *ValueTransformer) TransformedValue(value obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformedValue:"), objref.IDOf(value))
+	return obj.Wrap(_r)
+}
+
+// ReverseTransformedValue wraps the corresponding Objective-C method.
+func (x *ValueTransformer) ReverseTransformedValue(value obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTransformedValue:"), objref.IDOf(value))
+	return obj.Wrap(_r)
+}
 
 // ValueTransformerable is the interface implemented by [ValueTransformer], for mocking and DI.
 type ValueTransformerable interface {
-	Unwrap() *raw.NSValueTransformer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ValueTransformer
-	TransformedValue(value objc.ID) objc.ID
-	ReverseTransformedValue(value objc.ID) objc.ID
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ValueTransformer
+	TransformedValue(value obj.Object) obj.Object
+	ReverseTransformedValue(value obj.Object) obj.Object
 }
 
 var _ ValueTransformerable = (*ValueTransformer)(nil)
+
+// isValueTransformer marks ValueTransformer — and, by embedding promotion, its
+// subclasses — as a member of the ValueTransformer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ValueTransformer) isValueTransformer() {}
+
+var _ ValueTransformerProvider = (*ValueTransformer)(nil)

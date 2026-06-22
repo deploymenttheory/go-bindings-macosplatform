@@ -5,41 +5,76 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for implementing a minimal file system.
+// UnaryFileSystem is an idiomatic wrapper over the Objective-C class FSUnaryFileSystem.
 //
-// UnaryFileSystem wraps [raw.FSUnaryFileSystem] with a fluent Go API.
+// An abstract base class for implementing a minimal file system.
 type UnaryFileSystem struct {
-	inner *raw.FSUnaryFileSystem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSUnaryFileSystem].
-func (x *UnaryFileSystem) Unwrap() *raw.FSUnaryFileSystem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnaryFileSystem) ID() objc.ID { return x.inner.Ptr() }
-
-// UnaryFileSystemFromID adopts an existing object pointer as a UnaryFileSystem (nil for 0).
+// UnaryFileSystemFromID adopts an existing Objective-C object as a UnaryFileSystem
+// (nil for 0), retaining it and registering a release finalizer.
 func UnaryFileSystemFromID(id objc.ID) *UnaryFileSystem {
 	if id == 0 {
 		return nil
 	}
-	return &UnaryFileSystem{inner: raw.FSUnaryFileSystemFromID(id)}
+	x := &UnaryFileSystem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUnaryFileSystem creates a new [UnaryFileSystem].
+// unaryFileSystemAdopt wraps an Objective-C object that this code just created as a
+// UnaryFileSystem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unaryFileSystemAdopt(id objc.ID) *UnaryFileSystem {
+	if id == 0 {
+		return nil
+	}
+	x := &UnaryFileSystem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UnaryFileSystem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnaryFileSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnaryFileSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UnaryFileSystem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUnaryFileSystem creates a new UnaryFileSystem.
 func NewUnaryFileSystem() *UnaryFileSystem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSUnaryFileSystem")), objc.RegisterName("new"))
-	return &UnaryFileSystem{inner: raw.FSUnaryFileSystemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSUnaryFileSystem")), objc.RegisterName("new"))
+	return unaryFileSystemAdopt(_id)
 }
 
 // UnaryFileSystemable is the interface implemented by [UnaryFileSystem], for mocking and DI.
 type UnaryFileSystemable interface {
-	Unwrap() *raw.FSUnaryFileSystem
+	obj.Object
 }
 
 var _ UnaryFileSystemable = (*UnaryFileSystem)(nil)

@@ -5,41 +5,74 @@
 package iobluetoothui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetoothui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BluetoothAccessibilityIgnoredTextFieldCell wraps [raw.IOBluetoothAccessibilityIgnoredTextFieldCell] with a fluent Go API.
+// BluetoothAccessibilityIgnoredTextFieldCell is an idiomatic wrapper over the Objective-C class IOBluetoothAccessibilityIgnoredTextFieldCell.
 type BluetoothAccessibilityIgnoredTextFieldCell struct {
-	inner *raw.IOBluetoothAccessibilityIgnoredTextFieldCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothAccessibilityIgnoredTextFieldCell].
-func (x *BluetoothAccessibilityIgnoredTextFieldCell) Unwrap() *raw.IOBluetoothAccessibilityIgnoredTextFieldCell {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BluetoothAccessibilityIgnoredTextFieldCell) ID() objc.ID { return x.inner.Ptr() }
-
-// BluetoothAccessibilityIgnoredTextFieldCellFromID adopts an existing object pointer as a BluetoothAccessibilityIgnoredTextFieldCell (nil for 0).
+// BluetoothAccessibilityIgnoredTextFieldCellFromID adopts an existing Objective-C object as a BluetoothAccessibilityIgnoredTextFieldCell
+// (nil for 0), retaining it and registering a release finalizer.
 func BluetoothAccessibilityIgnoredTextFieldCellFromID(id objc.ID) *BluetoothAccessibilityIgnoredTextFieldCell {
 	if id == 0 {
 		return nil
 	}
-	return &BluetoothAccessibilityIgnoredTextFieldCell{inner: raw.IOBluetoothAccessibilityIgnoredTextFieldCellFromID(id)}
+	x := &BluetoothAccessibilityIgnoredTextFieldCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBluetoothAccessibilityIgnoredTextFieldCell creates a new [BluetoothAccessibilityIgnoredTextFieldCell].
+// bluetoothAccessibilityIgnoredTextFieldCellAdopt wraps an Objective-C object that this code just created as a
+// BluetoothAccessibilityIgnoredTextFieldCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bluetoothAccessibilityIgnoredTextFieldCellAdopt(id objc.ID) *BluetoothAccessibilityIgnoredTextFieldCell {
+	if id == 0 {
+		return nil
+	}
+	x := &BluetoothAccessibilityIgnoredTextFieldCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BluetoothAccessibilityIgnoredTextFieldCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BluetoothAccessibilityIgnoredTextFieldCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BluetoothAccessibilityIgnoredTextFieldCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BluetoothAccessibilityIgnoredTextFieldCell) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBluetoothAccessibilityIgnoredTextFieldCell creates a new BluetoothAccessibilityIgnoredTextFieldCell.
 func NewBluetoothAccessibilityIgnoredTextFieldCell() *BluetoothAccessibilityIgnoredTextFieldCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothAccessibilityIgnoredTextFieldCell")), objc.RegisterName("new"))
-	return &BluetoothAccessibilityIgnoredTextFieldCell{inner: raw.IOBluetoothAccessibilityIgnoredTextFieldCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredTextFieldCell")), objc.RegisterName("new"))
+	return bluetoothAccessibilityIgnoredTextFieldCellAdopt(_id)
 }
 
 // BluetoothAccessibilityIgnoredTextFieldCellable is the interface implemented by [BluetoothAccessibilityIgnoredTextFieldCell], for mocking and DI.
 type BluetoothAccessibilityIgnoredTextFieldCellable interface {
-	Unwrap() *raw.IOBluetoothAccessibilityIgnoredTextFieldCell
+	obj.Object
 }
 
 var _ BluetoothAccessibilityIgnoredTextFieldCellable = (*BluetoothAccessibilityIgnoredTextFieldCell)(nil)

@@ -5,74 +5,98 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that uniquely identifies a content key.
+// ContentKeySpecifier is an idiomatic wrapper over the Objective-C class AVContentKeySpecifier.
 //
-// ContentKeySpecifier wraps [raw.AVContentKeySpecifier] with a fluent Go API.
+// An object that uniquely identifies a content key.
 type ContentKeySpecifier struct {
-	inner *raw.AVContentKeySpecifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVContentKeySpecifier].
-func (x *ContentKeySpecifier) Unwrap() *raw.AVContentKeySpecifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContentKeySpecifier) ID() objc.ID { return x.inner.Ptr() }
-
-// ContentKeySpecifierFromID adopts an existing object pointer as a ContentKeySpecifier (nil for 0).
+// ContentKeySpecifierFromID adopts an existing Objective-C object as a ContentKeySpecifier
+// (nil for 0), retaining it and registering a release finalizer.
 func ContentKeySpecifierFromID(id objc.ID) *ContentKeySpecifier {
 	if id == 0 {
 		return nil
 	}
-	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(id)}
+	x := &ContentKeySpecifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a content key specifier.
-//
-// NewContentKeySpecifierForKeySystemIdentifierOptions creates a new [ContentKeySpecifier].
-func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options purego.IDer) *ContentKeySpecifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVContentKeySpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), keySystem.Ptr(), contentKeyIdentifier, options.ID())
-	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(_id)}
-}
-
-// A valid key system for content keys.
-//
-// KeySystem calls the underlying KeySystem.
-func (x *ContentKeySpecifier) KeySystem() string {
-	_r := x.inner.KeySystem()
-	if _r == nil {
-		return ""
+// contentKeySpecifierAdopt wraps an Objective-C object that this code just created as a
+// ContentKeySpecifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contentKeySpecifierAdopt(id objc.ID) *ContentKeySpecifier {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &ContentKeySpecifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Container and protocol-specific key identifier.
-//
-// Identifier calls the underlying Identifier.
-func (x *ContentKeySpecifier) Identifier() objc.ID {
-	return x.inner.Identifier()
+// Description returns the object's -description text.
+func (x *ContentKeySpecifier) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Additional information necessary to obtain the key, can be empty if none needed.
-//
-// Options calls the underlying Options.
-func (x *ContentKeySpecifier) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Options()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContentKeySpecifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContentKeySpecifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentKeySpecifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentKeySpecifierForKeySystemIdentifierOptions creates a content key specifier.
+func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem obj.Object, contentKeyIdentifier obj.Object, options obj.Object) *ContentKeySpecifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVContentKeySpecifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), objref.IDOf(keySystem), objref.IDOf(contentKeyIdentifier), objref.IDOf(options))
+	return contentKeySpecifierAdopt(_id)
+}
+
+// KeySystem a valid key system for content keys.
+func (x *ContentKeySpecifier) KeySystem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySystem"))
+	return obj.Wrap(_r)
+}
+
+// Identifier container and protocol-specific key identifier.
+func (x *ContentKeySpecifier) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
+}
+
+// Options additional information necessary to obtain the key, can be empty if none needed.
+func (x *ContentKeySpecifier) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return obj.Wrap(_r)
 }
 
 // ContentKeySpecifierable is the interface implemented by [ContentKeySpecifier], for mocking and DI.
 type ContentKeySpecifierable interface {
-	Unwrap() *raw.AVContentKeySpecifier
-	KeySystem() string
-	Identifier() objc.ID
-	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	KeySystem() obj.Object
+	Identifier() obj.Object
+	Options() obj.Object
 }
 
 var _ ContentKeySpecifierable = (*ContentKeySpecifier)(nil)

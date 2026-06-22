@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for electric current.
+// UnitElectricCurrent is an idiomatic wrapper over the Objective-C class NSUnitElectricCurrent.
 //
-// UnitElectricCurrent wraps [raw.NSUnitElectricCurrent] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for electric current.
 type UnitElectricCurrent struct {
-	inner *raw.NSUnitElectricCurrent
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitElectricCurrent].
-func (x *UnitElectricCurrent) Unwrap() *raw.NSUnitElectricCurrent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitElectricCurrent) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitElectricCurrentFromID adopts an existing object pointer as a UnitElectricCurrent (nil for 0).
+// UnitElectricCurrentFromID adopts an existing Objective-C object as a UnitElectricCurrent
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitElectricCurrentFromID(id objc.ID) *UnitElectricCurrent {
 	if id == 0 {
 		return nil
 	}
-	return &UnitElectricCurrent{inner: raw.NSUnitElectricCurrentFromID(id)}
-}
-
-// NewUnitElectricCurrent creates a new [UnitElectricCurrent].
-func NewUnitElectricCurrent() *UnitElectricCurrent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitElectricCurrent")), objc.RegisterName("new"))
-	return &UnitElectricCurrent{inner: raw.NSUnitElectricCurrentFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitElectricCurrent) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCurrent {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitElectricCurrent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitElectricCurrent) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitElectricCurrentAdopt wraps an Objective-C object that this code just created as a
+// UnitElectricCurrent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitElectricCurrentAdopt(id objc.ID) *UnitElectricCurrent {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitElectricCurrent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitElectricCurrent) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitElectricCurrent creates a new UnitElectricCurrent.
+func NewUnitElectricCurrent() *UnitElectricCurrent {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("new"))
+	return unitElectricCurrentAdopt(_id)
+}
 
-func (x *UnitElectricCurrent) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitElectricCurrent) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCurrent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitElectricCurrentable is the interface implemented by [UnitElectricCurrent], for mocking and DI.
 type UnitElectricCurrentable interface {
-	Unwrap() *raw.NSUnitElectricCurrent
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCurrent
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCurrent
 }
 
 var _ UnitElectricCurrentable = (*UnitElectricCurrent)(nil)
+
+var _ DimensionProvider = (*UnitElectricCurrent)(nil)
+
+var _ UnitProvider = (*UnitElectricCurrent)(nil)

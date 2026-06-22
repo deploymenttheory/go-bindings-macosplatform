@@ -5,72 +5,78 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a Virtio sound device output stream configuration.
+// VirtioSoundDeviceOutputStreamConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSoundDeviceOutputStreamConfiguration.
 //
-// VirtioSoundDeviceOutputStreamConfiguration wraps [raw.VZVirtioSoundDeviceOutputStreamConfiguration] with a fluent Go API.
+// It embeds [VirtioSoundDeviceStreamConfiguration], promoting that type's methods.
+//
+// An object that defines a Virtio sound device output stream configuration.
 type VirtioSoundDeviceOutputStreamConfiguration struct {
-	inner *raw.VZVirtioSoundDeviceOutputStreamConfiguration
+	VirtioSoundDeviceStreamConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZVirtioSoundDeviceOutputStreamConfiguration].
-func (x *VirtioSoundDeviceOutputStreamConfiguration) Unwrap() *raw.VZVirtioSoundDeviceOutputStreamConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioSoundDeviceOutputStreamConfigurationFromID adopts an existing object pointer as a VirtioSoundDeviceOutputStreamConfiguration (nil for 0).
+// VirtioSoundDeviceOutputStreamConfigurationFromID adopts an existing Objective-C object as a VirtioSoundDeviceOutputStreamConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioSoundDeviceOutputStreamConfigurationFromID(id objc.ID) *VirtioSoundDeviceOutputStreamConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioSoundDeviceOutputStreamConfiguration{inner: raw.VZVirtioSoundDeviceOutputStreamConfigurationFromID(id)}
-}
-
-// NewVirtioSoundDeviceOutputStreamConfiguration creates a new [VirtioSoundDeviceOutputStreamConfiguration].
-func NewVirtioSoundDeviceOutputStreamConfiguration() *VirtioSoundDeviceOutputStreamConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioSoundDeviceOutputStreamConfiguration")), objc.RegisterName("new"))
-	return &VirtioSoundDeviceOutputStreamConfiguration{inner: raw.VZVirtioSoundDeviceOutputStreamConfigurationFromID(_id)}
-}
-
-// An audio stream sink that defines how the host handles audio data produced by the guest.
-//
-// WithSink sets the sink property and returns the receiver for chaining.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration {
-	x.inner.SetSink(sink.asAudioOutputStreamSink())
+	x := &VirtioSoundDeviceOutputStreamConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Sink calls the underlying Sink.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) Sink() *AudioOutputStreamSink {
-	_r := x.inner.Sink()
-	if _r == nil {
+// virtioSoundDeviceOutputStreamConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioSoundDeviceOutputStreamConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioSoundDeviceOutputStreamConfigurationAdopt(id objc.ID) *VirtioSoundDeviceOutputStreamConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &AudioOutputStreamSink{inner: _r}
+	x := &VirtioSoundDeviceOutputStreamConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSink calls the underlying SetSink.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) SetSink(sink *raw.VZAudioOutputStreamSink) {
-	x.inner.SetSink(sink)
+// NewVirtioSoundDeviceOutputStreamConfiguration creates a new VirtioSoundDeviceOutputStreamConfiguration.
+func NewVirtioSoundDeviceOutputStreamConfiguration() *VirtioSoundDeviceOutputStreamConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSoundDeviceOutputStreamConfiguration")), objc.RegisterName("new"))
+	return virtioSoundDeviceOutputStreamConfigurationAdopt(_id)
 }
 
-func (x *VirtioSoundDeviceOutputStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration {
-	return &x.inner.VZVirtioSoundDeviceStreamConfiguration
+// WithSink an audio stream sink that defines how the host handles audio data produced by the guest.
+func (x *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSink:"), objref.IDOf(sink))
+	return x
+}
+
+// Sink wraps the corresponding Objective-C method.
+func (x *VirtioSoundDeviceOutputStreamConfiguration) Sink() *AudioOutputStreamSink {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sink"))
+	return AudioOutputStreamSinkFromID(_r)
+}
+
+// SetSink wraps the corresponding Objective-C method.
+func (x *VirtioSoundDeviceOutputStreamConfiguration) SetSink(sink *AudioOutputStreamSink) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSink:"), objref.IDOf(sink))
 }
 
 // VirtioSoundDeviceOutputStreamConfigurationable is the interface implemented by [VirtioSoundDeviceOutputStreamConfiguration], for mocking and DI.
 type VirtioSoundDeviceOutputStreamConfigurationable interface {
-	Unwrap() *raw.VZVirtioSoundDeviceOutputStreamConfiguration
+	obj.Object
 	WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration
 	Sink() *AudioOutputStreamSink
-	SetSink(sink *raw.VZAudioOutputStreamSink)
+	SetSink(sink *AudioOutputStreamSink)
 }
 
 var _ VirtioSoundDeviceOutputStreamConfigurationable = (*VirtioSoundDeviceOutputStreamConfiguration)(nil)
+
+var _ VirtioSoundDeviceStreamConfigurationProvider = (*VirtioSoundDeviceOutputStreamConfiguration)(nil)

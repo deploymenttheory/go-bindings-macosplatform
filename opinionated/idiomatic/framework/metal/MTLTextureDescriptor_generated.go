@@ -5,432 +5,396 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that you use to configure new Metal texture instances.
+// TextureDescriptor is an idiomatic wrapper over the Objective-C class MTLTextureDescriptor.
 //
-// TextureDescriptor wraps [raw.MTLTextureDescriptor] with a fluent Go API.
+// An instance that you use to configure new Metal texture instances.
 type TextureDescriptor struct {
-	inner *raw.MTLTextureDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLTextureDescriptor].
-func (x *TextureDescriptor) Unwrap() *raw.MTLTextureDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextureDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureDescriptorFromID adopts an existing object pointer as a TextureDescriptor (nil for 0).
+// TextureDescriptorFromID adopts an existing Objective-C object as a TextureDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureDescriptorFromID(id objc.ID) *TextureDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &TextureDescriptor{inner: raw.MTLTextureDescriptorFromID(id)}
+	x := &TextureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextureDescriptor creates a new [TextureDescriptor].
+// textureDescriptorAdopt wraps an Objective-C object that this code just created as a
+// TextureDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureDescriptorAdopt(id objc.ID) *TextureDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &TextureDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextureDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextureDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextureDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TextureDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTextureDescriptor creates a new TextureDescriptor.
 func NewTextureDescriptor() *TextureDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTextureDescriptor")), objc.RegisterName("new"))
-	return &TextureDescriptor{inner: raw.MTLTextureDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTextureDescriptor")), objc.RegisterName("new"))
+	return textureDescriptorAdopt(_id)
 }
 
-// The dimension and arrangement of texture image data.
-//
-// WithTextureType sets the textureType property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithTextureType(textureType MTLTextureType) *TextureDescriptor {
-	x.inner.SetTextureType(raw.MTLTextureType(textureType))
+// WithTextureType the dimension and arrangement of texture image data.
+func (x *TextureDescriptor) WithTextureType(textureType TextureType) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 	return x
 }
 
-// The size and bit layout of all pixels in the texture.
-//
-// WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TextureDescriptor {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+// WithPixelFormat the size and bit layout of all pixels in the texture.
+func (x *TextureDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return x
 }
 
-// The width of the texture image for the base level mipmap, in pixels.
-//
-// WithWidth sets the width property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithWidth(width uint) *TextureDescriptor {
-	x.inner.SetWidth(width)
+// WithWidth the width of the texture image for the base level mipmap, in pixels.
+func (x *TextureDescriptor) WithWidth(width int) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// The height of the texture image for the base level mipmap, in pixels.
-//
-// WithHeight sets the height property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithHeight(height uint) *TextureDescriptor {
-	x.inner.SetHeight(height)
+// WithHeight the height of the texture image for the base level mipmap, in pixels.
+func (x *TextureDescriptor) WithHeight(height int) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The depth of the texture image for the base level mipmap, in pixels.
-//
-// WithDepth sets the depth property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithDepth(depth uint) *TextureDescriptor {
-	x.inner.SetDepth(depth)
+// WithDepth the depth of the texture image for the base level mipmap, in pixels.
+func (x *TextureDescriptor) WithDepth(depth int) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepth:"), depth)
 	return x
 }
 
-// The number of mipmap levels for this texture.
-//
-// WithMipmapLevelCount sets the mipmapLevelCount property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithMipmapLevelCount(mipmapLevelCount uint) *TextureDescriptor {
-	x.inner.SetMipmapLevelCount(mipmapLevelCount)
+// WithMipmapLevelCount the number of mipmap levels for this texture.
+func (x *TextureDescriptor) WithMipmapLevelCount(mipmapLevelCount int) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipmapLevelCount:"), mipmapLevelCount)
 	return x
 }
 
-// The number of samples in each fragment.
-//
-// WithSampleCount sets the sampleCount property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithSampleCount(sampleCount uint) *TextureDescriptor {
-	x.inner.SetSampleCount(sampleCount)
+// WithSampleCount the number of samples in each fragment.
+func (x *TextureDescriptor) WithSampleCount(sampleCount int) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 	return x
 }
 
-// The number of array elements for this texture.
-//
-// WithArrayLength sets the arrayLength property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithArrayLength(arrayLength uint) *TextureDescriptor {
-	x.inner.SetArrayLength(arrayLength)
+// WithArrayLength the number of array elements for this texture.
+func (x *TextureDescriptor) WithArrayLength(arrayLength int) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrayLength:"), arrayLength)
 	return x
 }
 
-// The behavior of a new memory allocation.
-//
-// WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *TextureDescriptor {
-	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
+// WithResourceOptions the behavior of a new memory allocation.
+func (x *TextureDescriptor) WithResourceOptions(resourceOptions ResourceOptions) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceOptions:"), resourceOptions)
 	return x
 }
 
-// The CPU cache mode used for the CPU mapping of the texture.
-//
-// WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TextureDescriptor {
-	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
+// WithCpuCacheMode the CPU cache mode used for the CPU mapping of the texture.
+func (x *TextureDescriptor) WithCpuCacheMode(cpuCacheMode CPUCacheMode) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCpuCacheMode:"), cpuCacheMode)
 	return x
 }
 
-// The location and access permissions of the texture.
-//
-// WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithStorageMode(storageMode MTLStorageMode) *TextureDescriptor {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+// WithStorageMode the location and access permissions of the texture.
+func (x *TextureDescriptor) WithStorageMode(storageMode StorageMode) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 	return x
 }
 
-// The texture’s hazard tracking mode.
-//
-// WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TextureDescriptor {
-	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
+// WithHazardTrackingMode the texture’s hazard tracking mode.
+func (x *TextureDescriptor) WithHazardTrackingMode(hazardTrackingMode HazardTrackingMode) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHazardTrackingMode:"), hazardTrackingMode)
 	return x
 }
 
-// Options that determine how you can use the texture.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithUsage(usage MTLTextureUsage) *TextureDescriptor {
-	x.inner.SetUsage(raw.MTLTextureUsage(usage))
+// WithUsage options that determine how you can use the texture.
+func (x *TextureDescriptor) WithUsage(usage TextureUsage) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// A Boolean value indicating whether the GPU is allowed to adjust the texture’s contents to improve GPU performance.
-//
-// WithAllowGPUOptimizedContents sets the allowGPUOptimizedContents property and returns the receiver for chaining.
+// WithAllowGPUOptimizedContents a Boolean value indicating whether the GPU is allowed to adjust the texture’s contents to improve GPU performance.
 func (x *TextureDescriptor) WithAllowGPUOptimizedContents(allowGPUOptimizedContents bool) *TextureDescriptor {
-	x.inner.SetAllowGPUOptimizedContents(allowGPUOptimizedContents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowGPUOptimizedContents:"), allowGPUOptimizedContents)
 	return x
 }
 
-// @property compressionType @abstract Controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture. @discussion The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified. Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements. Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements. The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss. Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureUsageShaderAtomic, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer. Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested. Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
-//
-// WithCompressionType sets the compressionType property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithCompressionType(compressionType MTLTextureCompressionType) *TextureDescriptor {
-	x.inner.SetCompressionType(raw.MTLTextureCompressionType(compressionType))
+// WithCompressionType controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture. The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified. Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements. Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements. The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss. Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureUsageShaderAtomic, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer. Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested. Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
+func (x *TextureDescriptor) WithCompressionType(compressionType TextureCompressionType) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompressionType:"), compressionType)
 	return x
 }
 
-// The pattern you want the GPU to apply to pixels when you read or sample pixels from the texture.
-//
-// WithSwizzle sets the swizzle property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureDescriptor {
-	x.inner.SetSwizzle(swizzle)
+// WithPlacementSparsePageSize determines the page size for a placement sparse texture.
+func (x *TextureDescriptor) WithPlacementSparsePageSize(placementSparsePageSize SparsePageSize) *TextureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlacementSparsePageSize:"), placementSparsePageSize)
 	return x
 }
 
-// Determines the page size for a placement sparse texture.
-//
-// WithPlacementSparsePageSize sets the placementSparsePageSize property and returns the receiver for chaining.
-func (x *TextureDescriptor) WithPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize) *TextureDescriptor {
-	x.inner.SetPlacementSparsePageSize(raw.MTLSparsePageSize(placementSparsePageSize))
-	return x
+// TextureType the overall type of the texture to be created. The default value is MTLTextureType2D.
+func (x *TextureDescriptor) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+	return _r
 }
 
-// @property type @abstract The overall type of the texture to be created. The default value is MTLTextureType2D.
-//
-// TextureType calls the underlying TextureType.
-func (x *TextureDescriptor) TextureType() MTLTextureType {
-	return MTLTextureType(x.inner.TextureType())
+// SetTextureType wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetTextureType(textureType TextureType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 }
 
-// SetTextureType calls the underlying SetTextureType.
-func (x *TextureDescriptor) SetTextureType(textureType MTLTextureType) {
-	x.inner.SetTextureType(raw.MTLTextureType(textureType))
+// PixelFormat the pixel format to use when allocating this texture. This is also the pixel format that will be used to when the caller writes or reads pixels from this texture. The default value is MTLPixelFormatRGBA8Unorm.
+func (x *TextureDescriptor) PixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+	return _r
 }
 
-// @property pixelFormat @abstract The pixel format to use when allocating this texture. This is also the pixel format that will be used to when the caller writes or reads pixels from this texture. The default value is MTLPixelFormatRGBA8Unorm.
-//
-// PixelFormat calls the underlying PixelFormat.
-func (x *TextureDescriptor) PixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.PixelFormat())
+// SetPixelFormat wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 }
 
-// SetPixelFormat calls the underlying SetPixelFormat.
-func (x *TextureDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+// Width the width of the texture to create. The default value is 1.
+func (x *TextureDescriptor) Width() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// @property width @abstract The width of the texture to create. The default value is 1.
-//
-// Width calls the underlying Width.
-func (x *TextureDescriptor) Width() uint {
-	return x.inner.Width()
+// SetWidth wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetWidth(width int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// SetWidth calls the underlying SetWidth.
-func (x *TextureDescriptor) SetWidth(width uint) {
-	x.inner.SetWidth(width)
+// Height the height of the texture to create. The default value is 1. height If allocating a 1D texture, height must be 1.
+func (x *TextureDescriptor) Height() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// @property height @abstract The height of the texture to create. The default value is 1. @discussion height If allocating a 1D texture, height must be 1.
-//
-// Height calls the underlying Height.
-func (x *TextureDescriptor) Height() uint {
-	return x.inner.Height()
+// SetHeight wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetHeight(height int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// SetHeight calls the underlying SetHeight.
-func (x *TextureDescriptor) SetHeight(height uint) {
-	x.inner.SetHeight(height)
+// Depth the depth of the texture to create. The default value is 1. depth When allocating any texture types other than 3D, depth must be 1.
+func (x *TextureDescriptor) Depth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("depth"))
+	return _r
 }
 
-// @property depth @abstract The depth of the texture to create. The default value is 1. @discussion depth When allocating any texture types other than 3D, depth must be 1.
-//
-// Depth calls the underlying Depth.
-func (x *TextureDescriptor) Depth() uint {
-	return x.inner.Depth()
+// SetDepth wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetDepth(depth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepth:"), depth)
 }
 
-// SetDepth calls the underlying SetDepth.
-func (x *TextureDescriptor) SetDepth(depth uint) {
-	x.inner.SetDepth(depth)
+// MipmapLevelCount the number of mipmap levels to allocate. The default value is 1. When creating Buffer and Multisample textures, mipmapLevelCount must be 1.
+func (x *TextureDescriptor) MipmapLevelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mipmapLevelCount"))
+	return _r
 }
 
-// @property mipmapLevelCount @abstract The number of mipmap levels to allocate. The default value is 1. @discussion When creating Buffer and Multisample textures, mipmapLevelCount must be 1.
-//
-// MipmapLevelCount calls the underlying MipmapLevelCount.
-func (x *TextureDescriptor) MipmapLevelCount() uint {
-	return x.inner.MipmapLevelCount()
+// SetMipmapLevelCount wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetMipmapLevelCount(mipmapLevelCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipmapLevelCount:"), mipmapLevelCount)
 }
 
-// SetMipmapLevelCount calls the underlying SetMipmapLevelCount.
-func (x *TextureDescriptor) SetMipmapLevelCount(mipmapLevelCount uint) {
-	x.inner.SetMipmapLevelCount(mipmapLevelCount)
+// SampleCount the number of samples in the texture to create. The default value is 1. When creating Buffer textures sampleCount must be 1. Implementations may round sample counts up to the next supported value.
+func (x *TextureDescriptor) SampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+	return _r
 }
 
-// @property sampleCount @abstract The number of samples in the texture to create. The default value is 1. @discussion When creating Buffer textures sampleCount must be 1. Implementations may round sample counts up to the next supported value.
-//
-// SampleCount calls the underlying SampleCount.
-func (x *TextureDescriptor) SampleCount() uint {
-	return x.inner.SampleCount()
+// SetSampleCount wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetSampleCount(sampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 }
 
-// SetSampleCount calls the underlying SetSampleCount.
-func (x *TextureDescriptor) SetSampleCount(sampleCount uint) {
-	x.inner.SetSampleCount(sampleCount)
+// ArrayLength the number of array elements to allocate. The default value is 1. When allocating any non-Array texture type, arrayLength has to be 1. Otherwise it must be set to something greater than 1 and less than 2048.
+func (x *TextureDescriptor) ArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
+	return _r
 }
 
-// @property arrayLength @abstract The number of array elements to allocate. The default value is 1. @discussion When allocating any non-Array texture type, arrayLength has to be 1. Otherwise it must be set to something greater than 1 and less than 2048.
-//
-// ArrayLength calls the underlying ArrayLength.
-func (x *TextureDescriptor) ArrayLength() uint {
-	return x.inner.ArrayLength()
+// SetArrayLength wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetArrayLength(arrayLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrayLength:"), arrayLength)
 }
 
-// SetArrayLength calls the underlying SetArrayLength.
-func (x *TextureDescriptor) SetArrayLength(arrayLength uint) {
-	x.inner.SetArrayLength(arrayLength)
+// ResourceOptions options to control memory allocation parameters, etc. Contains a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+func (x *TextureDescriptor) ResourceOptions() ResourceOptions {
+	_r := objc.Send[ResourceOptions](objref.IDOf(x), objc.RegisterName("resourceOptions"))
+	return _r
 }
 
-// @property resourceOptions @abstract Options to control memory allocation parameters, etc. @discussion Contains a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
-//
-// ResourceOptions calls the underlying ResourceOptions.
-func (x *TextureDescriptor) ResourceOptions() MTLResourceOptions {
-	return MTLResourceOptions(x.inner.ResourceOptions())
+// SetResourceOptions wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetResourceOptions(resourceOptions ResourceOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceOptions:"), resourceOptions)
 }
 
-// SetResourceOptions calls the underlying SetResourceOptions.
-func (x *TextureDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions) {
-	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
+// CpuCacheMode options to specify CPU cache mode of texture resource.
+func (x *TextureDescriptor) CpuCacheMode() CPUCacheMode {
+	_r := objc.Send[CPUCacheMode](objref.IDOf(x), objc.RegisterName("cpuCacheMode"))
+	return _r
 }
 
-// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource.
-//
-// CpuCacheMode calls the underlying CpuCacheMode.
-func (x *TextureDescriptor) CpuCacheMode() MTLCPUCacheMode {
-	return MTLCPUCacheMode(x.inner.CpuCacheMode())
+// SetCpuCacheMode wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetCpuCacheMode(cpuCacheMode CPUCacheMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCpuCacheMode:"), cpuCacheMode)
 }
 
-// SetCpuCacheMode calls the underlying SetCpuCacheMode.
-func (x *TextureDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
-	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
+// StorageMode to specify storage mode of texture resource.
+func (x *TextureDescriptor) StorageMode() StorageMode {
+	_r := objc.Send[StorageMode](objref.IDOf(x), objc.RegisterName("storageMode"))
+	return _r
 }
 
-// @property storageMode @abstract To specify storage mode of texture resource.
-//
-// StorageMode calls the underlying StorageMode.
-func (x *TextureDescriptor) StorageMode() MTLStorageMode {
-	return MTLStorageMode(x.inner.StorageMode())
+// SetStorageMode wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetStorageMode(storageMode StorageMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 }
 
-// SetStorageMode calls the underlying SetStorageMode.
-func (x *TextureDescriptor) SetStorageMode(storageMode MTLStorageMode) {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+// HazardTrackingMode set hazard tracking mode for the texture. The default value is MTLHazardTrackingModeDefault. For resources created from the device, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeTracked. For resources created on a heap, MTLHazardTrackingModeDefault is treated as the hazardTrackingMode of the heap itself. In either case, it is possible to opt-out of hazard tracking by setting MTLHazardTrackingModeUntracked. It is not possible to opt-in to hazard tracking on a heap that itself is not hazard tracked. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead.
+func (x *TextureDescriptor) HazardTrackingMode() HazardTrackingMode {
+	_r := objc.Send[HazardTrackingMode](objref.IDOf(x), objc.RegisterName("hazardTrackingMode"))
+	return _r
 }
 
-// @property hazardTrackingMode @abstract Set hazard tracking mode for the texture. The default value is MTLHazardTrackingModeDefault. @discussion For resources created from the device, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeTracked. For resources created on a heap, MTLHazardTrackingModeDefault is treated as the hazardTrackingMode of the heap itself. In either case, it is possible to opt-out of hazard tracking by setting MTLHazardTrackingModeUntracked. It is not possible to opt-in to hazard tracking on a heap that itself is not hazard tracked. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead.
-//
-// HazardTrackingMode calls the underlying HazardTrackingMode.
-func (x *TextureDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
-	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
+// SetHazardTrackingMode wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetHazardTrackingMode(hazardTrackingMode HazardTrackingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHazardTrackingMode:"), hazardTrackingMode)
 }
 
-// SetHazardTrackingMode calls the underlying SetHazardTrackingMode.
-func (x *TextureDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) {
-	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
+// Usage description of texture usage
+func (x *TextureDescriptor) Usage() TextureUsage {
+	_r := objc.Send[TextureUsage](objref.IDOf(x), objc.RegisterName("usage"))
+	return _r
 }
 
-// @property usage @abstract Description of texture usage
-//
-// Usage calls the underlying Usage.
-func (x *TextureDescriptor) Usage() MTLTextureUsage {
-	return MTLTextureUsage(x.inner.Usage())
+// SetUsage wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetUsage(usage TextureUsage) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 }
 
-// SetUsage calls the underlying SetUsage.
-func (x *TextureDescriptor) SetUsage(usage MTLTextureUsage) {
-	x.inner.SetUsage(raw.MTLTextureUsage(usage))
-}
-
-// @property allowGPUOptimizedContents @abstract Allow GPU-optimization for the contents of this texture. The default value is true. @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
-//
-// AllowGPUOptimizedContents calls the underlying AllowGPUOptimizedContents.
+// AllowGPUOptimizedContents allow GPU-optimization for the contents of this texture. The default value is true. Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
 func (x *TextureDescriptor) AllowGPUOptimizedContents() bool {
-	return x.inner.AllowGPUOptimizedContents()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowGPUOptimizedContents"))
+	return _r
 }
 
-// SetAllowGPUOptimizedContents calls the underlying SetAllowGPUOptimizedContents.
+// SetAllowGPUOptimizedContents wraps the corresponding Objective-C method.
 func (x *TextureDescriptor) SetAllowGPUOptimizedContents(allowGPUOptimizedContents bool) {
-	x.inner.SetAllowGPUOptimizedContents(allowGPUOptimizedContents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowGPUOptimizedContents:"), allowGPUOptimizedContents)
 }
 
-// @property compressionType @abstract Controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture. @discussion The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified. Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements. Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements. The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss. Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureUsageShaderAtomic, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer. Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested. Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
-//
-// CompressionType calls the underlying CompressionType.
-func (x *TextureDescriptor) CompressionType() MTLTextureCompressionType {
-	return MTLTextureCompressionType(x.inner.CompressionType())
+// CompressionType controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture. The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified. Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements. Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements. The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss. Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureUsageShaderAtomic, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer. Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested. Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
+func (x *TextureDescriptor) CompressionType() TextureCompressionType {
+	_r := objc.Send[TextureCompressionType](objref.IDOf(x), objc.RegisterName("compressionType"))
+	return _r
 }
 
-// SetCompressionType calls the underlying SetCompressionType.
-func (x *TextureDescriptor) SetCompressionType(compressionType MTLTextureCompressionType) {
-	x.inner.SetCompressionType(raw.MTLTextureCompressionType(compressionType))
+// SetCompressionType wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetCompressionType(compressionType TextureCompressionType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompressionType:"), compressionType)
 }
 
-// @property swizzle @abstract Channel swizzle to use when reading or sampling from the texture, the default value is MTLTextureSwizzleChannelsDefault.
-//
-// Swizzle calls the underlying Swizzle.
-func (x *TextureDescriptor) Swizzle() raw.MTLTextureSwizzleChannels {
-	return x.inner.Swizzle()
+// PlacementSparsePageSize determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of “MTLTexture“ that you assign memory to using a “MTLHeap“ instance of type “MTLHeapType/MTLHeapTypePlacement“ and a “MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize“ at least as large as the “MTLSparsePageSize“ value you assign to this property. This value is 0 by default.
+func (x *TextureDescriptor) PlacementSparsePageSize() SparsePageSize {
+	_r := objc.Send[SparsePageSize](objref.IDOf(x), objc.RegisterName("placementSparsePageSize"))
+	return _r
 }
 
-// SetSwizzle calls the underlying SetSwizzle.
-func (x *TextureDescriptor) SetSwizzle(swizzle raw.MTLTextureSwizzleChannels) {
-	x.inner.SetSwizzle(swizzle)
-}
-
-// Determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of “MTLTexture“ that you assign memory to using a “MTLHeap“ instance of type “MTLHeapType/MTLHeapTypePlacement“ and a “MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize“ at least as large as the “MTLSparsePageSize“ value you assign to this property. This value is 0 by default.
-//
-// PlacementSparsePageSize calls the underlying PlacementSparsePageSize.
-func (x *TextureDescriptor) PlacementSparsePageSize() MTLSparsePageSize {
-	return MTLSparsePageSize(x.inner.PlacementSparsePageSize())
-}
-
-// SetPlacementSparsePageSize calls the underlying SetPlacementSparsePageSize.
-func (x *TextureDescriptor) SetPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize) {
-	x.inner.SetPlacementSparsePageSize(raw.MTLSparsePageSize(placementSparsePageSize))
+// SetPlacementSparsePageSize wraps the corresponding Objective-C method.
+func (x *TextureDescriptor) SetPlacementSparsePageSize(placementSparsePageSize SparsePageSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlacementSparsePageSize:"), placementSparsePageSize)
 }
 
 // TextureDescriptorable is the interface implemented by [TextureDescriptor], for mocking and DI.
 type TextureDescriptorable interface {
-	Unwrap() *raw.MTLTextureDescriptor
-	WithTextureType(textureType MTLTextureType) *TextureDescriptor
-	WithPixelFormat(pixelFormat MTLPixelFormat) *TextureDescriptor
-	WithWidth(width uint) *TextureDescriptor
-	WithHeight(height uint) *TextureDescriptor
-	WithDepth(depth uint) *TextureDescriptor
-	WithMipmapLevelCount(mipmapLevelCount uint) *TextureDescriptor
-	WithSampleCount(sampleCount uint) *TextureDescriptor
-	WithArrayLength(arrayLength uint) *TextureDescriptor
-	WithResourceOptions(resourceOptions MTLResourceOptions) *TextureDescriptor
-	WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TextureDescriptor
-	WithStorageMode(storageMode MTLStorageMode) *TextureDescriptor
-	WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TextureDescriptor
-	WithUsage(usage MTLTextureUsage) *TextureDescriptor
+	obj.Object
+	WithTextureType(textureType TextureType) *TextureDescriptor
+	WithPixelFormat(pixelFormat PixelFormat) *TextureDescriptor
+	WithWidth(width int) *TextureDescriptor
+	WithHeight(height int) *TextureDescriptor
+	WithDepth(depth int) *TextureDescriptor
+	WithMipmapLevelCount(mipmapLevelCount int) *TextureDescriptor
+	WithSampleCount(sampleCount int) *TextureDescriptor
+	WithArrayLength(arrayLength int) *TextureDescriptor
+	WithResourceOptions(resourceOptions ResourceOptions) *TextureDescriptor
+	WithCpuCacheMode(cpuCacheMode CPUCacheMode) *TextureDescriptor
+	WithStorageMode(storageMode StorageMode) *TextureDescriptor
+	WithHazardTrackingMode(hazardTrackingMode HazardTrackingMode) *TextureDescriptor
+	WithUsage(usage TextureUsage) *TextureDescriptor
 	WithAllowGPUOptimizedContents(allowGPUOptimizedContents bool) *TextureDescriptor
-	WithCompressionType(compressionType MTLTextureCompressionType) *TextureDescriptor
-	WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureDescriptor
-	WithPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize) *TextureDescriptor
-	TextureType() MTLTextureType
-	SetTextureType(textureType MTLTextureType)
-	PixelFormat() MTLPixelFormat
-	SetPixelFormat(pixelFormat MTLPixelFormat)
-	Width() uint
-	SetWidth(width uint)
-	Height() uint
-	SetHeight(height uint)
-	Depth() uint
-	SetDepth(depth uint)
-	MipmapLevelCount() uint
-	SetMipmapLevelCount(mipmapLevelCount uint)
-	SampleCount() uint
-	SetSampleCount(sampleCount uint)
-	ArrayLength() uint
-	SetArrayLength(arrayLength uint)
-	ResourceOptions() MTLResourceOptions
-	SetResourceOptions(resourceOptions MTLResourceOptions)
-	CpuCacheMode() MTLCPUCacheMode
-	SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode)
-	StorageMode() MTLStorageMode
-	SetStorageMode(storageMode MTLStorageMode)
-	HazardTrackingMode() MTLHazardTrackingMode
-	SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode)
-	Usage() MTLTextureUsage
-	SetUsage(usage MTLTextureUsage)
+	WithCompressionType(compressionType TextureCompressionType) *TextureDescriptor
+	WithPlacementSparsePageSize(placementSparsePageSize SparsePageSize) *TextureDescriptor
+	TextureType() TextureType
+	SetTextureType(textureType TextureType)
+	PixelFormat() PixelFormat
+	SetPixelFormat(pixelFormat PixelFormat)
+	Width() int
+	SetWidth(width int)
+	Height() int
+	SetHeight(height int)
+	Depth() int
+	SetDepth(depth int)
+	MipmapLevelCount() int
+	SetMipmapLevelCount(mipmapLevelCount int)
+	SampleCount() int
+	SetSampleCount(sampleCount int)
+	ArrayLength() int
+	SetArrayLength(arrayLength int)
+	ResourceOptions() ResourceOptions
+	SetResourceOptions(resourceOptions ResourceOptions)
+	CpuCacheMode() CPUCacheMode
+	SetCpuCacheMode(cpuCacheMode CPUCacheMode)
+	StorageMode() StorageMode
+	SetStorageMode(storageMode StorageMode)
+	HazardTrackingMode() HazardTrackingMode
+	SetHazardTrackingMode(hazardTrackingMode HazardTrackingMode)
+	Usage() TextureUsage
+	SetUsage(usage TextureUsage)
 	AllowGPUOptimizedContents() bool
 	SetAllowGPUOptimizedContents(allowGPUOptimizedContents bool)
-	CompressionType() MTLTextureCompressionType
-	SetCompressionType(compressionType MTLTextureCompressionType)
-	Swizzle() raw.MTLTextureSwizzleChannels
-	SetSwizzle(swizzle raw.MTLTextureSwizzleChannels)
-	PlacementSparsePageSize() MTLSparsePageSize
-	SetPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize)
+	CompressionType() TextureCompressionType
+	SetCompressionType(compressionType TextureCompressionType)
+	PlacementSparsePageSize() SparsePageSize
+	SetPlacementSparsePageSize(placementSparsePageSize SparsePageSize)
 }
 
 var _ TextureDescriptorable = (*TextureDescriptor)(nil)

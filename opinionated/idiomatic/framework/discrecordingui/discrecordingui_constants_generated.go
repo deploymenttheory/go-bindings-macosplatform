@@ -5,60 +5,47 @@
 package discrecordingui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant	DRSetupPanelDeviceSelectionChangedNotification @abstract	Type of notification sent when the device selection changes.
-// DRSetupPanelDeviceSelectionChangedNotification returns the string constant DRSetupPanelDeviceSelectionChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func DRSetupPanelDeviceSelectionChangedNotification() objc.ID {
-	return purego.CFConstant(raw.DRSetupPanelDeviceSelectionChangedNotification())
+// DRSetupPanelDeviceSelectionChangedNotification returns the string constant DRSetupPanelDeviceSelectionChangedNotification, for use as a dictionary key or argument.
+func DRSetupPanelDeviceSelectionChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DRSetupPanelDeviceSelectionChangedNotification")))
 }
 
-// @constant	DRSetupPanelSelectedDeviceKey @abstract	Key in the userInfo dictionary when the @link DRSetupPanelDeviceSelectionChangedNotification DRSetupPanelDeviceSelectionChangedNotification @/link is received.
-// DRSetupPanelSelectedDeviceKey returns the string constant DRSetupPanelSelectedDeviceKey as an objc.ID, for use as a dictionary key or selector argument.
-func DRSetupPanelSelectedDeviceKey() objc.ID {
-	return purego.CFConstant(raw.DRSetupPanelSelectedDeviceKey())
+// DRSetupPanelSelectedDeviceKey returns the string constant DRSetupPanelSelectedDeviceKey, for use as a dictionary key or argument.
+func DRSetupPanelSelectedDeviceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DRSetupPanelSelectedDeviceKey")))
 }
 
-// @const		DRBurnSetupPanelDefaultButtonDefaultTitle @discussion	Passing this to @link //apple_ref/occ/instm/DRBurnSetupPanel/setDefaultButtonTitle: setDefaultButtonTitle: @/link causes the panel to redisplay the default button title.
-// DRBurnSetupPanelDefaultButtonDefaultTitle returns the string constant DRBurnSetupPanelDefaultButtonDefaultTitle as an objc.ID, for use as a dictionary key or selector argument.
-func DRBurnSetupPanelDefaultButtonDefaultTitle() objc.ID {
-	return purego.CFConstant(raw.DRBurnSetupPanelDefaultButtonDefaultTitle())
+// DRBurnSetupPanelDefaultButtonDefaultTitle returns the string constant DRBurnSetupPanelDefaultButtonDefaultTitle, for use as a dictionary key or argument.
+func DRBurnSetupPanelDefaultButtonDefaultTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DRBurnSetupPanelDefaultButtonDefaultTitle")))
 }
 
-// DRBurnProgressPanelWillBeginNotification returns the string constant DRBurnProgressPanelWillBeginNotification as an objc.ID, for use as a dictionary key or selector argument.
-func DRBurnProgressPanelWillBeginNotification() objc.ID {
-	return purego.CFConstant(raw.DRBurnProgressPanelWillBeginNotification())
+// DRBurnProgressPanelWillBeginNotification returns the string constant DRBurnProgressPanelWillBeginNotification, for use as a dictionary key or argument.
+func DRBurnProgressPanelWillBeginNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DRBurnProgressPanelWillBeginNotification")))
 }
 
-// @const			DRBurnProgressPanelDidFinishNotification @abstract		Posted when the @link //apple_ref/occ/cl/DRBurnProgressPanel DRBurnProgressPanel @/link has finished and is about to go away. @discussion		This notification contains a notification object but no userInfo dictionary. The notification object is the @link //apple_ref/occ/cl/DRBurnProgressPanel DRBurnProgressPanel @/link that will be closed.
-// DRBurnProgressPanelDidFinishNotification returns the string constant DRBurnProgressPanelDidFinishNotification as an objc.ID, for use as a dictionary key or selector argument.
-func DRBurnProgressPanelDidFinishNotification() objc.ID {
-	return purego.CFConstant(raw.DRBurnProgressPanelDidFinishNotification())
+// DRBurnProgressPanelDidFinishNotification returns the string constant DRBurnProgressPanelDidFinishNotification, for use as a dictionary key or argument.
+func DRBurnProgressPanelDidFinishNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DRBurnProgressPanelDidFinishNotification")))
 }
 
-// @const			DREraseProgressPanelWillBeginNotification @abstract		Posted when the @link //apple_ref/occ/cl/DREraseProgressPanel DREraseProgressPanel @/link is about to begin displaying progress. @discussion		This notification contains a notification object but no userInfo dictionary. The notification object is the @link //apple_ref/occ/cl/DREraseProgressPanel DREraseProgressPanel @/link thatwill be displayed.
-// DREraseProgressPanelWillBeginNotification returns the string constant DREraseProgressPanelWillBeginNotification as an objc.ID, for use as a dictionary key or selector argument.
-func DREraseProgressPanelWillBeginNotification() objc.ID {
-	return purego.CFConstant(raw.DREraseProgressPanelWillBeginNotification())
+// DREraseProgressPanelWillBeginNotification returns the string constant DREraseProgressPanelWillBeginNotification, for use as a dictionary key or argument.
+func DREraseProgressPanelWillBeginNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DREraseProgressPanelWillBeginNotification")))
 }
 
-// @const			DREraseProgressPanelDidFinishNotification @abstract		Posted when the @link //apple_ref/occ/cl/DREraseProgressPanel DREraseProgressPanel @/link has finished and is about to go away. @discussion		This notification contains a notification object but no userInfo dictionary. The notification object is the @link //apple_ref/occ/cl/DREraseProgressPanel DREraseProgressPanel @/link that will be closed.
-// DREraseProgressPanelDidFinishNotification returns the string constant DREraseProgressPanelDidFinishNotification as an objc.ID, for use as a dictionary key or selector argument.
-func DREraseProgressPanelDidFinishNotification() objc.ID {
-	return purego.CFConstant(raw.DREraseProgressPanelDidFinishNotification())
+// DREraseProgressPanelDidFinishNotification returns the string constant DREraseProgressPanelDidFinishNotification, for use as a dictionary key or argument.
+func DREraseProgressPanelDidFinishNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DREraseProgressPanelDidFinishNotification")))
 }
 
-// @const		DRBurnIcon @abstract	The name of the burn icon image. @discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed: -[NSImage imageNamed:] @/link method.
-// DRBurnIcon returns the string constant DRBurnIcon as an objc.ID, for use as a dictionary key or selector argument.
-func DRBurnIcon() objc.ID {
-	return purego.CFConstant(raw.DRBurnIcon())
-}
+// DRBurnIcon returns the string constant DRBurnIcon, for use as a dictionary key or argument.
+func DRBurnIcon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DRBurnIcon"))) }
 
-// @const		DREraseIcon @abstract	The name of the erase icon image. @discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed: -[NSImage imageNamed:] @/link method.
-// DREraseIcon returns the string constant DREraseIcon as an objc.ID, for use as a dictionary key or selector argument.
-func DREraseIcon() objc.ID {
-	return purego.CFConstant(raw.DREraseIcon())
-}
+// DREraseIcon returns the string constant DREraseIcon, for use as a dictionary key or argument.
+func DREraseIcon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DREraseIcon"))) }

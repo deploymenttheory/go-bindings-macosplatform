@@ -5,762 +5,593 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The user interface of a combo box.
+// ComboBoxCell is an idiomatic wrapper over the Objective-C class NSComboBoxCell.
 //
-// ComboBoxCell wraps [raw.NSComboBoxCell] with a fluent Go API.
+// It embeds [TextFieldCell], promoting that type's methods.
+//
+// The user interface of a combo box.
 type ComboBoxCell struct {
-	inner *raw.NSComboBoxCell
+	TextFieldCell
 }
 
-// Unwrap returns the underlying [raw.NSComboBoxCell].
-func (x *ComboBoxCell) Unwrap() *raw.NSComboBoxCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComboBoxCell) ID() objc.ID { return x.inner.Ptr() }
-
-// ComboBoxCellFromID adopts an existing object pointer as a ComboBoxCell (nil for 0).
+// ComboBoxCellFromID adopts an existing Objective-C object as a ComboBoxCell
+// (nil for 0), retaining it and registering a release finalizer.
 func ComboBoxCellFromID(id objc.ID) *ComboBoxCell {
 	if id == 0 {
 		return nil
 	}
-	return &ComboBoxCell{inner: raw.NSComboBoxCellFromID(id)}
+	x := &ComboBoxCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComboBoxCell creates a new [ComboBoxCell].
+// comboBoxCellAdopt wraps an Objective-C object that this code just created as a
+// ComboBoxCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func comboBoxCellAdopt(id objc.ID) *ComboBoxCell {
+	if id == 0 {
+		return nil
+	}
+	x := &ComboBoxCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewComboBoxCell creates a new ComboBoxCell.
 func NewComboBoxCell() *ComboBoxCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComboBoxCell")), objc.RegisterName("new"))
-	return &ComboBoxCell{inner: raw.NSComboBoxCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSComboBoxCell")), objc.RegisterName("new"))
+	return comboBoxCellAdopt(_id)
 }
 
-// A Boolean value that indicates if the combo box displays a vertical scroller.
-//
-// WithHasVerticalScroller sets the hasVerticalScroller property and returns the receiver for chaining.
+// WithHasVerticalScroller a Boolean value that indicates if the combo box displays a vertical scroller.
 func (x *ComboBoxCell) WithHasVerticalScroller(hasVerticalScroller bool) *ComboBoxCell {
-	x.inner.SetHasVerticalScroller(hasVerticalScroller)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
 	return x
 }
 
-// The spacing between cells in the combo box’s pop-up list.
-//
-// WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
+// WithIntercellSpacing the spacing between cells in the combo box’s pop-up list.
 func (x *ComboBoxCell) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *ComboBoxCell {
-	x.inner.SetIntercellSpacing(intercellSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
 	return x
 }
 
-// The height of each item in the combo box’s pop-up list.
-//
-// WithItemHeight sets the itemHeight property and returns the receiver for chaining.
+// WithItemHeight the height of each item in the combo box’s pop-up list.
 func (x *ComboBoxCell) WithItemHeight(itemHeight float64) *ComboBoxCell {
-	x.inner.SetItemHeight(itemHeight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemHeight:"), itemHeight)
 	return x
 }
 
-// The maximum number of items visible in the pop-up list at any one time.
-//
-// WithNumberOfVisibleItems sets the numberOfVisibleItems property and returns the receiver for chaining.
+// WithNumberOfVisibleItems the maximum number of items visible in the pop-up list at any one time.
 func (x *ComboBoxCell) WithNumberOfVisibleItems(numberOfVisibleItems int) *ComboBoxCell {
-	x.inner.SetNumberOfVisibleItems(numberOfVisibleItems)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
 	return x
 }
 
-// A Boolean value that indicates whether the combo box button displays a border.
-//
-// WithButtonBordered sets the buttonBordered property and returns the receiver for chaining.
+// WithButtonBordered a Boolean value that indicates whether the combo box button displays a border.
 func (x *ComboBoxCell) WithButtonBordered(buttonBordered bool) *ComboBoxCell {
-	x.inner.SetButtonBordered(buttonBordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonBordered:"), buttonBordered)
 	return x
 }
 
-// A Boolean value that indicates if the combo box uses an external data source to populate its pop-up list.
-//
-// WithUsesDataSource sets the usesDataSource property and returns the receiver for chaining.
+// WithUsesDataSource a Boolean value that indicates if the combo box uses an external data source to populate its pop-up list.
 func (x *ComboBoxCell) WithUsesDataSource(usesDataSource bool) *ComboBoxCell {
-	x.inner.SetUsesDataSource(usesDataSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDataSource:"), usesDataSource)
 	return x
 }
 
-// A Boolean value that indicates if the combo box tries to complete text entered by the user.
-//
-// WithCompletes sets the completes property and returns the receiver for chaining.
+// WithCompletes a Boolean value that indicates if the combo box tries to complete text entered by the user.
 func (x *ComboBoxCell) WithCompletes(completes bool) *ComboBoxCell {
-	x.inner.SetCompletes(completes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletes:"), completes)
 	return x
 }
 
-// The object that provides the data displayed in the combo box’s pop-up list.
-//
-// WithDataSource sets the dataSource property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithDataSource(dataSource raw.NSComboBoxCellDataSource) *ComboBoxCell {
-	x.inner.SetDataSource(dataSource)
-	return x
-}
-
-// The color of the cell’s background.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the color of the cell’s background.
 func (x *ComboBoxCell) WithBackgroundColor(backgroundColor *Color) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the cell draws its background color.
-//
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
 func (x *ComboBoxCell) WithDrawsBackground(drawsBackground bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The color to use to draw the cell’s text.
-//
-// WithTextColor sets the textColor property and returns the receiver for chaining.
+// WithTextColor the color to use to draw the cell’s text.
 func (x *ComboBoxCell) WithTextColor(textColor *Color) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
-// The bezel style to use when drawing the text field.
-//
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
+// WithBezelStyle the bezel style to use when drawing the text field.
+func (x *ComboBoxCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
-// The placeholder text for the cell, specified as a plain text string.
-//
-// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
 func (x *ComboBoxCell) WithPlaceholderString(placeholderString string) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
-// The placeholder text for the cell, specified as an attributed string.
-//
-// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
+// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
+func (x *ComboBoxCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
-// An array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-//
-// WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
-func (x *ComboBoxCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *ComboBoxCell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(_arr)
+// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+func (x *ComboBoxCell) WithAllowedInputSourceLocales(items ...obj.Object) *ComboBoxCell {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *ComboBoxCell) WithControlView(controlView ViewProvider) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithType(type_ NSCellType) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *ComboBoxCell) WithType(type_ CellType) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *ComboBoxCell) WithState(state int) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithTarget(target objc.ID) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *ComboBoxCell) WithTarget(target obj.Object) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithAction(action objc.SEL) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *ComboBoxCell) WithTag(tag int) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *ComboBoxCell) WithTitle(title string) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *ComboBoxCell) WithEnabled(enabled bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *ComboBoxCell) WithContinuous(continuous bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *ComboBoxCell) WithEditable(editable bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *ComboBoxCell) WithSelectable(selectable bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *ComboBoxCell) WithBordered(bordered bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *ComboBoxCell) WithBezeled(bezeled bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *ComboBoxCell) WithScrollable(scrollable bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *ComboBoxCell) WithHighlighted(highlighted bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithAlignment(alignment NSTextAlignment) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *ComboBoxCell) WithAlignment(alignment TextAlignment) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *ComboBoxCell) WithWraps(wraps bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *ComboBoxCell) WithFont(font *Font) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithFormatter(formatter *foundation.NSFormatter) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *ComboBoxCell) WithFormatter(formatter obj.Object) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithObjectValue(objectValue objc.ID) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *ComboBoxCell) WithObjectValue(objectValue obj.Object) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *ComboBoxCell) WithStringValue(stringValue string) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *ComboBoxCell) WithIntValue(intValue int) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *ComboBoxCell) WithFloatValue(floatValue float32) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *ComboBoxCell) WithDoubleValue(doubleValue float64) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *ComboBoxCell) WithIntegerValue(integerValue int) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *ComboBoxCell) WithImage(image *Image) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithControlSize(controlSize NSControlSize) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *ComboBoxCell) WithControlSize(controlSize ControlSize) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithRepresentedObject(representedObject objc.ID) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *ComboBoxCell) WithRepresentedObject(representedObject obj.Object) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *ComboBoxCell) WithMenu(menu *Menu) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *ComboBoxCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *ComboBoxCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *ComboBoxCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *ComboBoxCell) WithAllowsUndo(allowsUndo bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *ComboBoxCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *ComboBoxCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *ComboBoxCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *ComboBoxCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *ComboBoxCell) WithShowsFirstResponder(showsFirstResponder bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithFocusRingType(focusRingType NSFocusRingType) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *ComboBoxCell) WithFocusRingType(focusRingType FocusRingType) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *ComboBoxCell) WithAttributedStringValue(attributedStringValue obj.Object) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *ComboBoxCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *ComboBoxCell) WithImportsGraphics(importsGraphics bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *ComboBoxCell) WithAllowsMixedState(allowsMixedState bool) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *ComboBoxCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithControlTint(controlTint NSControlTint) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *ComboBoxCell) WithControlTint(controlTint ControlTint) *ComboBoxCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Marks the combo box as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
-//
-// ReloadData calls the underlying ReloadData.
+// ReloadData marks the combo box as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (x *ComboBoxCell) ReloadData() {
-	x.inner.ReloadData()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// Informs the combo box that the number of items in its data source has changed.
-//
-// NoteNumberOfItemsChanged calls the underlying NoteNumberOfItemsChanged.
+// NoteNumberOfItemsChanged informs the combo box that the number of items in its data source has changed.
 func (x *ComboBoxCell) NoteNumberOfItemsChanged() {
-	x.inner.NoteNumberOfItemsChanged()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteNumberOfItemsChanged"))
 }
 
-// Scrolls the combo box’s pop-up list vertically so that the item at the given index is as close to the top as possible.
-//
-// ScrollItemAtIndexToTop calls the underlying ScrollItemAtIndexToTop.
+// ScrollItemAtIndexToTop scrolls the combo box’s pop-up list vertically so that the item at the given index is as close to the top as possible.
 func (x *ComboBoxCell) ScrollItemAtIndexToTop(index int) {
-	x.inner.ScrollItemAtIndexToTop(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollItemAtIndexToTop:"), index)
 }
 
-// Scrolls the combo box’s pop-up list vertically so that the item at the given index is visible.
-//
-// ScrollItemAtIndexToVisible calls the underlying ScrollItemAtIndexToVisible.
+// ScrollItemAtIndexToVisible scrolls the combo box’s pop-up list vertically so that the item at the given index is visible.
 func (x *ComboBoxCell) ScrollItemAtIndexToVisible(index int) {
-	x.inner.ScrollItemAtIndexToVisible(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollItemAtIndexToVisible:"), index)
 }
 
-// Selects the pop-up list row at the given index.
-//
-// SelectItemAtIndex calls the underlying SelectItemAtIndex.
+// SelectItemAtIndex selects the pop-up list row at the given index.
 func (x *ComboBoxCell) SelectItemAtIndex(index int) {
-	x.inner.SelectItemAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectItemAtIndex:"), index)
 }
 
-// Deselects the pop-up list item at the given index if it’s selected.
-//
-// DeselectItemAtIndex calls the underlying DeselectItemAtIndex.
+// DeselectItemAtIndex deselects the pop-up list item at the given index if it’s selected.
 func (x *ComboBoxCell) DeselectItemAtIndex(index int) {
-	x.inner.DeselectItemAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deselectItemAtIndex:"), index)
 }
 
-// Returns a string from the combo box’s pop-up list that starts with the given substring.
-//
-// CompletedString calls the underlying CompletedString.
+// CompletedString returns a string from the combo box’s pop-up list that starts with the given substring.
 func (x *ComboBoxCell) CompletedString(string_ string) string {
-	_r := x.inner.CompletedString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completedString:"), purego.NSString(string_))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Adds the specified object to the internal item list.
-//
-// AddItemWithObjectValue calls the underlying AddItemWithObjectValue.
-func (x *ComboBoxCell) AddItemWithObjectValue(object objc.ID) {
-	x.inner.AddItemWithObjectValue(object)
+// AddItemWithObjectValue adds the specified object to the internal item list.
+func (x *ComboBoxCell) AddItemWithObjectValue(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItemWithObjectValue:"), objref.IDOf(object))
 }
 
-// Adds multiple objects to the internal item list.
-//
-// AddItemsWithObjectValues calls the underlying AddItemsWithObjectValues.
-func (x *ComboBoxCell) AddItemsWithObjectValues(objects *foundation.NSArray[objc.ID]) {
-	x.inner.AddItemsWithObjectValues(objects)
+// AddItemsWithObjectValues adds multiple objects to the internal item list.
+func (x *ComboBoxCell) AddItemsWithObjectValues(objects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItemsWithObjectValues:"), objref.IDOf(objects))
 }
 
-// Inserts an object at the specified location in the internal item list.
-//
-// InsertItemWithObjectValueAtIndex calls the underlying InsertItemWithObjectValueAtIndex.
-func (x *ComboBoxCell) InsertItemWithObjectValueAtIndex(object objc.ID, index int) {
-	x.inner.InsertItemWithObjectValueAtIndex(object, index)
+// InsertItemWithObjectValueAtIndex inserts an object at the specified location in the internal item list.
+func (x *ComboBoxCell) InsertItemWithObjectValueAtIndex(object obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItemWithObjectValue:atIndex:"), objref.IDOf(object), index)
 }
 
-// Removes all occurrences of the specified object from the combo box’s internal item list.
-//
-// RemoveItemWithObjectValue calls the underlying RemoveItemWithObjectValue.
-func (x *ComboBoxCell) RemoveItemWithObjectValue(object objc.ID) {
-	x.inner.RemoveItemWithObjectValue(object)
+// RemoveItemWithObjectValue removes all occurrences of the specified object from the combo box’s internal item list.
+func (x *ComboBoxCell) RemoveItemWithObjectValue(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemWithObjectValue:"), objref.IDOf(object))
 }
 
-// Removes the object at the specified location from the combo box’s internal item list.
-//
-// RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
+// RemoveItemAtIndex removes the object at the specified location from the combo box’s internal item list.
 func (x *ComboBoxCell) RemoveItemAtIndex(index int) {
-	x.inner.RemoveItemAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemAtIndex:"), index)
 }
 
-// Removes all items from the combo box’s internal item list.
-//
-// RemoveAllItems calls the underlying RemoveAllItems.
+// RemoveAllItems removes all items from the combo box’s internal item list.
 func (x *ComboBoxCell) RemoveAllItems() {
-	x.inner.RemoveAllItems()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllItems"))
 }
 
-// Selects the first pop-up list item that corresponds to the specified object.
-//
-// SelectItemWithObjectValue calls the underlying SelectItemWithObjectValue.
-func (x *ComboBoxCell) SelectItemWithObjectValue(object objc.ID) {
-	x.inner.SelectItemWithObjectValue(object)
+// SelectItemWithObjectValue selects the first pop-up list item that corresponds to the specified object.
+func (x *ComboBoxCell) SelectItemWithObjectValue(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectItemWithObjectValue:"), objref.IDOf(object))
 }
 
-// Returns the object located at the specified location in the internal item list.
-//
-// ItemObjectValueAtIndex calls the underlying ItemObjectValueAtIndex.
-func (x *ComboBoxCell) ItemObjectValueAtIndex(index int) objc.ID {
-	return x.inner.ItemObjectValueAtIndex(index)
+// ItemObjectValueAtIndex returns the object located at the specified location in the internal item list.
+func (x *ComboBoxCell) ItemObjectValueAtIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemObjectValueAtIndex:"), index)
+	return obj.Wrap(_r)
 }
 
-// Searches the combo box’s internal item list for the given object and returns the matching index number.
-//
-// IndexOfItemWithObjectValue calls the underlying IndexOfItemWithObjectValue.
-func (x *ComboBoxCell) IndexOfItemWithObjectValue(object objc.ID) int {
-	return x.inner.IndexOfItemWithObjectValue(object)
+// IndexOfItemWithObjectValue searches the combo box’s internal item list for the given object and returns the matching index number.
+func (x *ComboBoxCell) IndexOfItemWithObjectValue(object obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithObjectValue:"), objref.IDOf(object))
+	return _r
 }
 
-// HasVerticalScroller calls the underlying HasVerticalScroller.
+// HasVerticalScroller wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) HasVerticalScroller() bool {
-	return x.inner.HasVerticalScroller()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasVerticalScroller"))
+	return _r
 }
 
-// SetHasVerticalScroller calls the underlying SetHasVerticalScroller.
+// SetHasVerticalScroller wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetHasVerticalScroller(hasVerticalScroller bool) {
-	x.inner.SetHasVerticalScroller(hasVerticalScroller)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
 }
 
-// IntercellSpacing calls the underlying IntercellSpacing.
+// IntercellSpacing wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) IntercellSpacing() corefoundation.CGSize {
-	return x.inner.IntercellSpacing()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("intercellSpacing"))
+	return _r
 }
 
-// SetIntercellSpacing calls the underlying SetIntercellSpacing.
+// SetIntercellSpacing wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
-	x.inner.SetIntercellSpacing(intercellSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
 }
 
-// ItemHeight calls the underlying ItemHeight.
+// ItemHeight wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) ItemHeight() float64 {
-	return x.inner.ItemHeight()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("itemHeight"))
+	return _r
 }
 
-// SetItemHeight calls the underlying SetItemHeight.
+// SetItemHeight wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetItemHeight(itemHeight float64) {
-	x.inner.SetItemHeight(itemHeight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemHeight:"), itemHeight)
 }
 
-// NumberOfVisibleItems calls the underlying NumberOfVisibleItems.
+// NumberOfVisibleItems wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) NumberOfVisibleItems() int {
-	return x.inner.NumberOfVisibleItems()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVisibleItems"))
+	return _r
 }
 
-// SetNumberOfVisibleItems calls the underlying SetNumberOfVisibleItems.
+// SetNumberOfVisibleItems wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetNumberOfVisibleItems(numberOfVisibleItems int) {
-	x.inner.SetNumberOfVisibleItems(numberOfVisibleItems)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
 }
 
-// IsButtonBordered calls the underlying IsButtonBordered.
+// IsButtonBordered wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) IsButtonBordered() bool {
-	return x.inner.IsButtonBordered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isButtonBordered"))
+	return _r
 }
 
-// SetButtonBordered calls the underlying SetButtonBordered.
+// SetButtonBordered wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetButtonBordered(buttonBordered bool) {
-	x.inner.SetButtonBordered(buttonBordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonBordered:"), buttonBordered)
 }
 
-// UsesDataSource calls the underlying UsesDataSource.
+// UsesDataSource wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) UsesDataSource() bool {
-	return x.inner.UsesDataSource()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDataSource"))
+	return _r
 }
 
-// SetUsesDataSource calls the underlying SetUsesDataSource.
+// SetUsesDataSource wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetUsesDataSource(usesDataSource bool) {
-	x.inner.SetUsesDataSource(usesDataSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDataSource:"), usesDataSource)
 }
 
-// IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
+// IndexOfSelectedItem wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) IndexOfSelectedItem() int {
-	return x.inner.IndexOfSelectedItem()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfSelectedItem"))
+	return _r
 }
 
-// NumberOfItems calls the underlying NumberOfItems.
+// NumberOfItems wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) NumberOfItems() int {
-	return x.inner.NumberOfItems()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfItems"))
+	return _r
 }
 
-// Completes calls the underlying Completes.
+// Completes wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) Completes() bool {
-	return x.inner.Completes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("completes"))
+	return _r
 }
 
-// SetCompletes calls the underlying SetCompletes.
+// SetCompletes wraps the corresponding Objective-C method.
 func (x *ComboBoxCell) SetCompletes(completes bool) {
-	x.inner.SetCompletes(completes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletes:"), completes)
 }
 
-// DataSource calls the underlying DataSource.
-func (x *ComboBoxCell) DataSource() raw.NSComboBoxCellDataSource {
-	return x.inner.DataSource()
+// ObjectValueOfSelectedItem wraps the corresponding Objective-C method.
+func (x *ComboBoxCell) ObjectValueOfSelectedItem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectValueOfSelectedItem"))
+	return obj.Wrap(_r)
 }
 
-// SetDataSource calls the underlying SetDataSource.
-func (x *ComboBoxCell) SetDataSource(dataSource raw.NSComboBoxCellDataSource) {
-	x.inner.SetDataSource(dataSource)
+// ObjectValues wraps the corresponding Objective-C method.
+func (x *ComboBoxCell) ObjectValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectValues"))
+	return obj.Wrap(_r)
 }
-
-// ObjectValueOfSelectedItem calls the underlying ObjectValueOfSelectedItem.
-func (x *ComboBoxCell) ObjectValueOfSelectedItem() objc.ID {
-	return x.inner.ObjectValueOfSelectedItem()
-}
-
-// ObjectValues calls the underlying ObjectValues.
-func (x *ComboBoxCell) ObjectValues() *foundation.NSArray[objc.ID] {
-	return x.inner.ObjectValues()
-}
-
-func (x *ComboBoxCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
-
-func (x *ComboBoxCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
-
-func (x *ComboBoxCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
 
 // ComboBoxCellable is the interface implemented by [ComboBoxCell], for mocking and DI.
 type ComboBoxCellable interface {
-	Unwrap() *raw.NSComboBoxCell
+	obj.Object
 	WithHasVerticalScroller(hasVerticalScroller bool) *ComboBoxCell
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *ComboBoxCell
 	WithItemHeight(itemHeight float64) *ComboBoxCell
@@ -768,19 +599,17 @@ type ComboBoxCellable interface {
 	WithButtonBordered(buttonBordered bool) *ComboBoxCell
 	WithUsesDataSource(usesDataSource bool) *ComboBoxCell
 	WithCompletes(completes bool) *ComboBoxCell
-	WithDataSource(dataSource raw.NSComboBoxCellDataSource) *ComboBoxCell
 	WithBackgroundColor(backgroundColor *Color) *ComboBoxCell
 	WithDrawsBackground(drawsBackground bool) *ComboBoxCell
 	WithTextColor(textColor *Color) *ComboBoxCell
-	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *ComboBoxCell
+	WithBezelStyle(bezelStyle TextFieldBezelStyle) *ComboBoxCell
 	WithPlaceholderString(placeholderString string) *ComboBoxCell
-	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *ComboBoxCell
-	WithAllowedInputSourceLocales(items ...*foundation.NSString) *ComboBoxCell
+	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *ComboBoxCell
+	WithAllowedInputSourceLocales(items ...obj.Object) *ComboBoxCell
 	WithControlView(controlView ViewProvider) *ComboBoxCell
-	WithType(type_ NSCellType) *ComboBoxCell
+	WithType(type_ CellType) *ComboBoxCell
 	WithState(state int) *ComboBoxCell
-	WithTarget(target objc.ID) *ComboBoxCell
-	WithAction(action objc.SEL) *ComboBoxCell
+	WithTarget(target obj.Object) *ComboBoxCell
 	WithTag(tag int) *ComboBoxCell
 	WithTitle(title string) *ComboBoxCell
 	WithEnabled(enabled bool) *ComboBoxCell
@@ -791,36 +620,36 @@ type ComboBoxCellable interface {
 	WithBezeled(bezeled bool) *ComboBoxCell
 	WithScrollable(scrollable bool) *ComboBoxCell
 	WithHighlighted(highlighted bool) *ComboBoxCell
-	WithAlignment(alignment NSTextAlignment) *ComboBoxCell
+	WithAlignment(alignment TextAlignment) *ComboBoxCell
 	WithWraps(wraps bool) *ComboBoxCell
 	WithFont(font *Font) *ComboBoxCell
-	WithFormatter(formatter *foundation.NSFormatter) *ComboBoxCell
-	WithObjectValue(objectValue objc.ID) *ComboBoxCell
+	WithFormatter(formatter obj.Object) *ComboBoxCell
+	WithObjectValue(objectValue obj.Object) *ComboBoxCell
 	WithStringValue(stringValue string) *ComboBoxCell
 	WithIntValue(intValue int) *ComboBoxCell
 	WithFloatValue(floatValue float32) *ComboBoxCell
 	WithDoubleValue(doubleValue float64) *ComboBoxCell
 	WithIntegerValue(integerValue int) *ComboBoxCell
 	WithImage(image *Image) *ComboBoxCell
-	WithControlSize(controlSize NSControlSize) *ComboBoxCell
-	WithRepresentedObject(representedObject objc.ID) *ComboBoxCell
+	WithControlSize(controlSize ControlSize) *ComboBoxCell
+	WithRepresentedObject(representedObject obj.Object) *ComboBoxCell
 	WithMenu(menu *Menu) *ComboBoxCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ComboBoxCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboBoxCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboBoxCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ComboBoxCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *ComboBoxCell
 	WithAllowsUndo(allowsUndo bool) *ComboBoxCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ComboBoxCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboBoxCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboBoxCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBoxCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBoxCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ComboBoxCell
-	WithFocusRingType(focusRingType NSFocusRingType) *ComboBoxCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboBoxCell
+	WithFocusRingType(focusRingType FocusRingType) *ComboBoxCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *ComboBoxCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ComboBoxCell
 	WithImportsGraphics(importsGraphics bool) *ComboBoxCell
 	WithAllowsMixedState(allowsMixedState bool) *ComboBoxCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ComboBoxCell
-	WithControlTint(controlTint NSControlTint) *ComboBoxCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *ComboBoxCell
+	WithControlTint(controlTint ControlTint) *ComboBoxCell
 	ReloadData()
 	NoteNumberOfItemsChanged()
 	ScrollItemAtIndexToTop(index int)
@@ -828,15 +657,15 @@ type ComboBoxCellable interface {
 	SelectItemAtIndex(index int)
 	DeselectItemAtIndex(index int)
 	CompletedString(string_ string) string
-	AddItemWithObjectValue(object objc.ID)
-	AddItemsWithObjectValues(objects *foundation.NSArray[objc.ID])
-	InsertItemWithObjectValueAtIndex(object objc.ID, index int)
-	RemoveItemWithObjectValue(object objc.ID)
+	AddItemWithObjectValue(object obj.Object)
+	AddItemsWithObjectValues(objects obj.Object)
+	InsertItemWithObjectValueAtIndex(object obj.Object, index int)
+	RemoveItemWithObjectValue(object obj.Object)
 	RemoveItemAtIndex(index int)
 	RemoveAllItems()
-	SelectItemWithObjectValue(object objc.ID)
-	ItemObjectValueAtIndex(index int) objc.ID
-	IndexOfItemWithObjectValue(object objc.ID) int
+	SelectItemWithObjectValue(object obj.Object)
+	ItemObjectValueAtIndex(index int) obj.Object
+	IndexOfItemWithObjectValue(object obj.Object) int
 	HasVerticalScroller() bool
 	SetHasVerticalScroller(hasVerticalScroller bool)
 	IntercellSpacing() corefoundation.CGSize
@@ -853,10 +682,14 @@ type ComboBoxCellable interface {
 	NumberOfItems() int
 	Completes() bool
 	SetCompletes(completes bool)
-	DataSource() raw.NSComboBoxCellDataSource
-	SetDataSource(dataSource raw.NSComboBoxCellDataSource)
-	ObjectValueOfSelectedItem() objc.ID
-	ObjectValues() *foundation.NSArray[objc.ID]
+	ObjectValueOfSelectedItem() obj.Object
+	ObjectValues() obj.Object
 }
 
 var _ ComboBoxCellable = (*ComboBoxCell)(nil)
+
+var _ TextFieldCellProvider = (*ComboBoxCell)(nil)
+
+var _ ActionCellProvider = (*ComboBoxCell)(nil)
+
+var _ CellProvider = (*ComboBoxCell)(nil)

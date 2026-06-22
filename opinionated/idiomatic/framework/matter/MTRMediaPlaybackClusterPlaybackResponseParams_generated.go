@@ -5,116 +5,144 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRMediaPlaybackClusterPlaybackResponseParams wraps [raw.MTRMediaPlaybackClusterPlaybackResponseParams] with a fluent Go API.
+// MTRMediaPlaybackClusterPlaybackResponseParams is an idiomatic wrapper over the Objective-C class MTRMediaPlaybackClusterPlaybackResponseParams.
 type MTRMediaPlaybackClusterPlaybackResponseParams struct {
-	inner *raw.MTRMediaPlaybackClusterPlaybackResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMediaPlaybackClusterPlaybackResponseParams].
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Unwrap() *raw.MTRMediaPlaybackClusterPlaybackResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMediaPlaybackClusterPlaybackResponseParamsFromID adopts an existing object pointer as a MTRMediaPlaybackClusterPlaybackResponseParams (nil for 0).
+// MTRMediaPlaybackClusterPlaybackResponseParamsFromID adopts an existing Objective-C object as a MTRMediaPlaybackClusterPlaybackResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMediaPlaybackClusterPlaybackResponseParamsFromID(id objc.ID) *MTRMediaPlaybackClusterPlaybackResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMediaPlaybackClusterPlaybackResponseParams{inner: raw.MTRMediaPlaybackClusterPlaybackResponseParamsFromID(id)}
+	x := &MTRMediaPlaybackClusterPlaybackResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRMediaPlaybackClusterPlaybackResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError creates a new [MTRMediaPlaybackClusterPlaybackResponseParams].
-func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaPlaybackClusterPlaybackResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRMediaPlaybackClusterPlaybackResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRMediaPlaybackClusterPlaybackResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMediaPlaybackClusterPlaybackResponseParamsAdopt(id objc.ID) *MTRMediaPlaybackClusterPlaybackResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRMediaPlaybackClusterPlaybackResponseParams{inner: raw.MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_id)}, nil
-}
-
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) WithStatus(status *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackResponseParams {
-	x.inner.SetStatus(status)
+	x := &MTRMediaPlaybackClusterPlaybackResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError initialize an MTRMediaPlaybackClusterPlaybackResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterPlaybackResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRMediaPlaybackClusterPlaybackResponseParamsAdopt(_id), nil
+}
+
+// WithStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) WithStatus(status obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return x
+}
+
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRMediaPlaybackClusterPlaybackResponseParams) WithData(data string) *MTRMediaPlaybackClusterPlaybackResponseParams {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Status() *foundation.NSNumber {
-	return x.inner.Status()
+// Status wraps the corresponding Objective-C method.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetStatus(status *foundation.NSNumber) {
-	x.inner.SetStatus(status)
+// SetStatus wraps the corresponding Objective-C method.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetStatus(status obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
-// Data calls the underlying Data.
+// Data wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Data() string {
-	_r := x.inner.Data()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetData calls the underlying SetData.
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetData(data string) {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRMediaPlaybackClusterPlaybackResponseParamsable is the interface implemented by [MTRMediaPlaybackClusterPlaybackResponseParams], for mocking and DI.
 type MTRMediaPlaybackClusterPlaybackResponseParamsable interface {
-	Unwrap() *raw.MTRMediaPlaybackClusterPlaybackResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackResponseParams
+	obj.Object
+	WithStatus(status obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams
 	WithData(data string) *MTRMediaPlaybackClusterPlaybackResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackResponseParams
-	Status() *foundation.NSNumber
-	SetStatus(status *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams
+	Status() obj.Object
+	SetStatus(status obj.Object)
 	Data() string
 	SetData(data string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRMediaPlaybackClusterPlaybackResponseParamsable = (*MTRMediaPlaybackClusterPlaybackResponseParams)(nil)

@@ -11,14 +11,16 @@ import (
 
 // Flags to pass to a compression session.
 // Bitmask — values may be combined with |.
-type VTCompressionSessionOptionFlags int64
+type CompressionSessionOptionFlags int64
 
 const (
 	// A flag that indicates the last pass in a multi-pass compression session.
-	KVTCompressionSessionBeginFinalPass VTCompressionSessionOptionFlags = 1
+	KVTCompressionSessionBeginFinalPass CompressionSessionOptionFlags = 1
 )
 
-func (e VTCompressionSessionOptionFlags) String() string {
+// String returns the CompressionSessionOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CompressionSessionOptionFlags) String() string {
 	var parts []string
 	if e&KVTCompressionSessionBeginFinalPass != 0 {
 		parts = append(parts, "KVTCompressionSessionBeginFinalPass")
@@ -31,20 +33,22 @@ func (e VTCompressionSessionOptionFlags) String() string {
 
 // Flags to pass to a decompression session and the video decoder.
 // Bitmask — values may be combined with |.
-type VTDecodeFrameFlags int64
+type DecodeFrameFlags int64
 
 const (
 	// A flag that indicates to enable asynchronous decompression.
-	KVTDecodeFrame_EnableAsynchronousDecompression VTDecodeFrameFlags = 1
+	KVTDecodeFrame_EnableAsynchronousDecompression DecodeFrameFlags = 1
 	// A flag that provides a hint to the decompression session and video decoder not to return a frame.
-	KVTDecodeFrame_DoNotOutputFrame VTDecodeFrameFlags = 2
+	KVTDecodeFrame_DoNotOutputFrame DecodeFrameFlags = 2
 	// A flag that provides a hint to the video decoder that it’s ok to use a low-power mode that can’t decode faster than realtime.
-	KVTDecodeFrame_1xRealTimePlayback VTDecodeFrameFlags = 4
+	KVTDecodeFrame_1xRealTimePlayback DecodeFrameFlags = 4
 	// A flag that indicates to enable temporal processing.
-	KVTDecodeFrame_EnableTemporalProcessing VTDecodeFrameFlags = 8
+	KVTDecodeFrame_EnableTemporalProcessing DecodeFrameFlags = 8
 )
 
-func (e VTDecodeFrameFlags) String() string {
+// String returns the DecodeFrameFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DecodeFrameFlags) String() string {
 	var parts []string
 	if e&KVTDecodeFrame_EnableAsynchronousDecompression != 0 {
 		parts = append(parts, "KVTDecodeFrame_EnableAsynchronousDecompression")
@@ -64,351 +68,276 @@ func (e VTDecodeFrameFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Flags that provide information about the status of a decode operation.
-// Bitmask — values may be combined with |.
-type VTDecodeInfoFlags int64
+type FrameRateConversionConfigurationQualityPrioritization int64
 
 const (
-	// A flag that indicates the decode operation ran asynchronously.
-	KVTDecodeInfo_Asynchronous VTDecodeInfoFlags = 1
-	// A flag that indicates the decode operation dropped a frame.
-	KVTDecodeInfo_FrameDropped VTDecodeInfoFlags = 2
-	// A flag that indicates the image buffer is safe to modify.
-	KVTDecodeInfo_ImageBufferModifiable VTDecodeInfoFlags = 4
-	// A flag that indicates whether the decode process skips leading frames after dropping a synchronization frame.
-	KVTDecodeInfo_SkippedLeadingFrameDropped VTDecodeInfoFlags = 8
-	KVTDecodeInfo_FrameInterrupted           VTDecodeInfoFlags = 16
+	FrameRateConversionConfigurationQualityPrioritizationNormal  FrameRateConversionConfigurationQualityPrioritization = 1
+	FrameRateConversionConfigurationQualityPrioritizationQuality FrameRateConversionConfigurationQualityPrioritization = 2
 )
 
-func (e VTDecodeInfoFlags) String() string {
-	var parts []string
-	if e&KVTDecodeInfo_Asynchronous != 0 {
-		parts = append(parts, "KVTDecodeInfo_Asynchronous")
-	}
-	if e&KVTDecodeInfo_FrameDropped != 0 {
-		parts = append(parts, "KVTDecodeInfo_FrameDropped")
-	}
-	if e&KVTDecodeInfo_ImageBufferModifiable != 0 {
-		parts = append(parts, "KVTDecodeInfo_ImageBufferModifiable")
-	}
-	if e&KVTDecodeInfo_SkippedLeadingFrameDropped != 0 {
-		parts = append(parts, "KVTDecodeInfo_SkippedLeadingFrameDropped")
-	}
-	if e&KVTDecodeInfo_FrameInterrupted != 0 {
-		parts = append(parts, "KVTDecodeInfo_FrameInterrupted")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Flags that indicate encoder state.
-// Bitmask — values may be combined with |.
-type VTEncodeInfoFlags int64
-
-const (
-	// A flag that indicates that an encode operation ran asynchronously.
-	KVTEncodeInfo_Asynchronous VTEncodeInfoFlags = 1
-	// A flag that indicates that a frame dropped during encoding.
-	KVTEncodeInfo_FrameDropped VTEncodeInfoFlags = 2
-)
-
-func (e VTEncodeInfoFlags) String() string {
-	var parts []string
-	if e&KVTEncodeInfo_Asynchronous != 0 {
-		parts = append(parts, "KVTEncodeInfo_Asynchronous")
-	}
-	if e&KVTEncodeInfo_FrameDropped != 0 {
-		parts = append(parts, "KVTEncodeInfo_FrameDropped")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type VTFrameRateConversionConfigurationQualityPrioritization int64
-
-const (
-	VTFrameRateConversionConfigurationQualityPrioritizationNormal  VTFrameRateConversionConfigurationQualityPrioritization = 1
-	VTFrameRateConversionConfigurationQualityPrioritizationQuality VTFrameRateConversionConfigurationQualityPrioritization = 2
-)
-
-func (e VTFrameRateConversionConfigurationQualityPrioritization) String() string {
+// String returns the FrameRateConversionConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FrameRateConversionConfigurationQualityPrioritization) String() string {
 	switch e {
-	case VTFrameRateConversionConfigurationQualityPrioritizationNormal:
-		return "VTFrameRateConversionConfigurationQualityPrioritizationNormal"
-	case VTFrameRateConversionConfigurationQualityPrioritizationQuality:
-		return "VTFrameRateConversionConfigurationQualityPrioritizationQuality"
+	case FrameRateConversionConfigurationQualityPrioritizationNormal:
+		return "FrameRateConversionConfigurationQualityPrioritizationNormal"
+	case FrameRateConversionConfigurationQualityPrioritizationQuality:
+		return "FrameRateConversionConfigurationQualityPrioritizationQuality"
 	default:
-		return fmt.Sprintf("VTFrameRateConversionConfigurationQualityPrioritization(%d)", int64(e))
+		return fmt.Sprintf("FrameRateConversionConfigurationQualityPrioritization(%d)", int64(e))
 	}
 }
 
-type VTFrameRateConversionConfigurationRevision int64
+type FrameRateConversionConfigurationRevision int64
 
 const (
-	VTFrameRateConversionConfigurationRevision1 VTFrameRateConversionConfigurationRevision = 1
+	FrameRateConversionConfigurationRevision1 FrameRateConversionConfigurationRevision = 1
 )
 
-func (e VTFrameRateConversionConfigurationRevision) String() string {
+// String returns the FrameRateConversionConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FrameRateConversionConfigurationRevision) String() string {
 	switch e {
-	case VTFrameRateConversionConfigurationRevision1:
-		return "VTFrameRateConversionConfigurationRevision1"
+	case FrameRateConversionConfigurationRevision1:
+		return "FrameRateConversionConfigurationRevision1"
 	default:
-		return fmt.Sprintf("VTFrameRateConversionConfigurationRevision(%d)", int64(e))
+		return fmt.Sprintf("FrameRateConversionConfigurationRevision(%d)", int64(e))
 	}
 }
 
-type VTFrameRateConversionParametersSubmissionMode int64
+type FrameRateConversionParametersSubmissionMode int64
 
 const (
 	// You are submitting frames in non-sequential order.
-	VTFrameRateConversionParametersSubmissionModeRandom VTFrameRateConversionParametersSubmissionMode = 1
+	FrameRateConversionParametersSubmissionModeRandom FrameRateConversionParametersSubmissionMode = 1
 	// You are submitting frames sequentially following presentation time order.
-	VTFrameRateConversionParametersSubmissionModeSequential VTFrameRateConversionParametersSubmissionMode = 2
+	FrameRateConversionParametersSubmissionModeSequential FrameRateConversionParametersSubmissionMode = 2
 	// You are submitting frames sequentially. This processing request uses the same source and next reference frames as the previous submission.
-	VTFrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged VTFrameRateConversionParametersSubmissionMode = 3
+	FrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged FrameRateConversionParametersSubmissionMode = 3
 )
 
-func (e VTFrameRateConversionParametersSubmissionMode) String() string {
+// String returns the FrameRateConversionParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FrameRateConversionParametersSubmissionMode) String() string {
 	switch e {
-	case VTFrameRateConversionParametersSubmissionModeRandom:
-		return "VTFrameRateConversionParametersSubmissionModeRandom"
-	case VTFrameRateConversionParametersSubmissionModeSequential:
-		return "VTFrameRateConversionParametersSubmissionModeSequential"
-	case VTFrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged:
-		return "VTFrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged"
+	case FrameRateConversionParametersSubmissionModeRandom:
+		return "FrameRateConversionParametersSubmissionModeRandom"
+	case FrameRateConversionParametersSubmissionModeSequential:
+		return "FrameRateConversionParametersSubmissionModeSequential"
+	case FrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged:
+		return "FrameRateConversionParametersSubmissionModeSequentialReferencesUnchanged"
 	default:
-		return fmt.Sprintf("VTFrameRateConversionParametersSubmissionMode(%d)", int64(e))
+		return fmt.Sprintf("FrameRateConversionParametersSubmissionMode(%d)", int64(e))
 	}
 }
 
-type VTMotionBlurConfigurationQualityPrioritization int64
+type MotionBlurConfigurationQualityPrioritization int64
 
 const (
-	VTMotionBlurConfigurationQualityPrioritizationNormal  VTMotionBlurConfigurationQualityPrioritization = 1
-	VTMotionBlurConfigurationQualityPrioritizationQuality VTMotionBlurConfigurationQualityPrioritization = 2
+	MotionBlurConfigurationQualityPrioritizationNormal  MotionBlurConfigurationQualityPrioritization = 1
+	MotionBlurConfigurationQualityPrioritizationQuality MotionBlurConfigurationQualityPrioritization = 2
 )
 
-func (e VTMotionBlurConfigurationQualityPrioritization) String() string {
+// String returns the MotionBlurConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MotionBlurConfigurationQualityPrioritization) String() string {
 	switch e {
-	case VTMotionBlurConfigurationQualityPrioritizationNormal:
-		return "VTMotionBlurConfigurationQualityPrioritizationNormal"
-	case VTMotionBlurConfigurationQualityPrioritizationQuality:
-		return "VTMotionBlurConfigurationQualityPrioritizationQuality"
+	case MotionBlurConfigurationQualityPrioritizationNormal:
+		return "MotionBlurConfigurationQualityPrioritizationNormal"
+	case MotionBlurConfigurationQualityPrioritizationQuality:
+		return "MotionBlurConfigurationQualityPrioritizationQuality"
 	default:
-		return fmt.Sprintf("VTMotionBlurConfigurationQualityPrioritization(%d)", int64(e))
+		return fmt.Sprintf("MotionBlurConfigurationQualityPrioritization(%d)", int64(e))
 	}
 }
 
-type VTMotionBlurConfigurationRevision int64
+type MotionBlurConfigurationRevision int64
 
 const (
-	VTMotionBlurConfigurationRevision1 VTMotionBlurConfigurationRevision = 1
+	MotionBlurConfigurationRevision1 MotionBlurConfigurationRevision = 1
 )
 
-func (e VTMotionBlurConfigurationRevision) String() string {
+// String returns the MotionBlurConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MotionBlurConfigurationRevision) String() string {
 	switch e {
-	case VTMotionBlurConfigurationRevision1:
-		return "VTMotionBlurConfigurationRevision1"
+	case MotionBlurConfigurationRevision1:
+		return "MotionBlurConfigurationRevision1"
 	default:
-		return fmt.Sprintf("VTMotionBlurConfigurationRevision(%d)", int64(e))
+		return fmt.Sprintf("MotionBlurConfigurationRevision(%d)", int64(e))
 	}
 }
 
-type VTMotionBlurParametersSubmissionMode int64
+type MotionBlurParametersSubmissionMode int64
 
 const (
-	VTMotionBlurParametersSubmissionModeRandom     VTMotionBlurParametersSubmissionMode = 1
-	VTMotionBlurParametersSubmissionModeSequential VTMotionBlurParametersSubmissionMode = 2
+	MotionBlurParametersSubmissionModeRandom     MotionBlurParametersSubmissionMode = 1
+	MotionBlurParametersSubmissionModeSequential MotionBlurParametersSubmissionMode = 2
 )
 
-func (e VTMotionBlurParametersSubmissionMode) String() string {
+// String returns the MotionBlurParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MotionBlurParametersSubmissionMode) String() string {
 	switch e {
-	case VTMotionBlurParametersSubmissionModeRandom:
-		return "VTMotionBlurParametersSubmissionModeRandom"
-	case VTMotionBlurParametersSubmissionModeSequential:
-		return "VTMotionBlurParametersSubmissionModeSequential"
+	case MotionBlurParametersSubmissionModeRandom:
+		return "MotionBlurParametersSubmissionModeRandom"
+	case MotionBlurParametersSubmissionModeSequential:
+		return "MotionBlurParametersSubmissionModeSequential"
 	default:
-		return fmt.Sprintf("VTMotionBlurParametersSubmissionMode(%d)", int64(e))
+		return fmt.Sprintf("MotionBlurParametersSubmissionMode(%d)", int64(e))
 	}
 }
 
-// Flags to control processing of a frame you pass to the motion-estimation session.
-// Bitmask — values may be combined with |.
-type VTMotionEstimationFrameFlags int64
+type OpticalFlowConfigurationQualityPrioritization int64
 
 const (
-	// A hint to the motion-estimation session that you are going to reuse the currentBuffer as referenceBuffer in the next call to VTMotionEstimationSessionEstimateMotionVectors. Using this flag allows the motion-estimation processor to deliver better performance.
-	KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer VTMotionEstimationFrameFlags = 1
+	OpticalFlowConfigurationQualityPrioritizationNormal  OpticalFlowConfigurationQualityPrioritization = 1
+	OpticalFlowConfigurationQualityPrioritizationQuality OpticalFlowConfigurationQualityPrioritization = 2
 )
 
-func (e VTMotionEstimationFrameFlags) String() string {
-	var parts []string
-	if e&KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer != 0 {
-		parts = append(parts, "KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Directives that provide information back to you with the results of motion-estimation.
-// Bitmask — values may be combined with |.
-type VTMotionEstimationInfoFlags int64
-
-const (
-	KVTMotionEstimationInfoFlags_Reserved0 VTMotionEstimationInfoFlags = 1
-)
-
-func (e VTMotionEstimationInfoFlags) String() string {
-	var parts []string
-	if e&KVTMotionEstimationInfoFlags_Reserved0 != 0 {
-		parts = append(parts, "KVTMotionEstimationInfoFlags_Reserved0")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type VTOpticalFlowConfigurationQualityPrioritization int64
-
-const (
-	VTOpticalFlowConfigurationQualityPrioritizationNormal  VTOpticalFlowConfigurationQualityPrioritization = 1
-	VTOpticalFlowConfigurationQualityPrioritizationQuality VTOpticalFlowConfigurationQualityPrioritization = 2
-)
-
-func (e VTOpticalFlowConfigurationQualityPrioritization) String() string {
+// String returns the OpticalFlowConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OpticalFlowConfigurationQualityPrioritization) String() string {
 	switch e {
-	case VTOpticalFlowConfigurationQualityPrioritizationNormal:
-		return "VTOpticalFlowConfigurationQualityPrioritizationNormal"
-	case VTOpticalFlowConfigurationQualityPrioritizationQuality:
-		return "VTOpticalFlowConfigurationQualityPrioritizationQuality"
+	case OpticalFlowConfigurationQualityPrioritizationNormal:
+		return "OpticalFlowConfigurationQualityPrioritizationNormal"
+	case OpticalFlowConfigurationQualityPrioritizationQuality:
+		return "OpticalFlowConfigurationQualityPrioritizationQuality"
 	default:
-		return fmt.Sprintf("VTOpticalFlowConfigurationQualityPrioritization(%d)", int64(e))
+		return fmt.Sprintf("OpticalFlowConfigurationQualityPrioritization(%d)", int64(e))
 	}
 }
 
-type VTOpticalFlowConfigurationRevision int64
+type OpticalFlowConfigurationRevision int64
 
 const (
-	VTOpticalFlowConfigurationRevision1 VTOpticalFlowConfigurationRevision = 1
+	OpticalFlowConfigurationRevision1 OpticalFlowConfigurationRevision = 1
 )
 
-func (e VTOpticalFlowConfigurationRevision) String() string {
+// String returns the OpticalFlowConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OpticalFlowConfigurationRevision) String() string {
 	switch e {
-	case VTOpticalFlowConfigurationRevision1:
-		return "VTOpticalFlowConfigurationRevision1"
+	case OpticalFlowConfigurationRevision1:
+		return "OpticalFlowConfigurationRevision1"
 	default:
-		return fmt.Sprintf("VTOpticalFlowConfigurationRevision(%d)", int64(e))
+		return fmt.Sprintf("OpticalFlowConfigurationRevision(%d)", int64(e))
 	}
 }
 
-type VTOpticalFlowParametersSubmissionMode int64
+type OpticalFlowParametersSubmissionMode int64
 
 const (
-	VTOpticalFlowParametersSubmissionModeRandom     VTOpticalFlowParametersSubmissionMode = 1
-	VTOpticalFlowParametersSubmissionModeSequential VTOpticalFlowParametersSubmissionMode = 2
+	OpticalFlowParametersSubmissionModeRandom     OpticalFlowParametersSubmissionMode = 1
+	OpticalFlowParametersSubmissionModeSequential OpticalFlowParametersSubmissionMode = 2
 )
 
-func (e VTOpticalFlowParametersSubmissionMode) String() string {
+// String returns the OpticalFlowParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OpticalFlowParametersSubmissionMode) String() string {
 	switch e {
-	case VTOpticalFlowParametersSubmissionModeRandom:
-		return "VTOpticalFlowParametersSubmissionModeRandom"
-	case VTOpticalFlowParametersSubmissionModeSequential:
-		return "VTOpticalFlowParametersSubmissionModeSequential"
+	case OpticalFlowParametersSubmissionModeRandom:
+		return "OpticalFlowParametersSubmissionModeRandom"
+	case OpticalFlowParametersSubmissionModeSequential:
+		return "OpticalFlowParametersSubmissionModeSequential"
 	default:
-		return fmt.Sprintf("VTOpticalFlowParametersSubmissionMode(%d)", int64(e))
+		return fmt.Sprintf("OpticalFlowParametersSubmissionMode(%d)", int64(e))
 	}
 }
 
-type VTSuperResolutionScalerConfigurationInputType int64
+type SuperResolutionScalerConfigurationInputType int64
 
 const (
-	VTSuperResolutionScalerConfigurationInputTypeVideo VTSuperResolutionScalerConfigurationInputType = 1
-	VTSuperResolutionScalerConfigurationInputTypeImage VTSuperResolutionScalerConfigurationInputType = 2
+	SuperResolutionScalerConfigurationInputTypeVideo SuperResolutionScalerConfigurationInputType = 1
+	SuperResolutionScalerConfigurationInputTypeImage SuperResolutionScalerConfigurationInputType = 2
 )
 
-func (e VTSuperResolutionScalerConfigurationInputType) String() string {
+// String returns the SuperResolutionScalerConfigurationInputType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SuperResolutionScalerConfigurationInputType) String() string {
 	switch e {
-	case VTSuperResolutionScalerConfigurationInputTypeVideo:
-		return "VTSuperResolutionScalerConfigurationInputTypeVideo"
-	case VTSuperResolutionScalerConfigurationInputTypeImage:
-		return "VTSuperResolutionScalerConfigurationInputTypeImage"
+	case SuperResolutionScalerConfigurationInputTypeVideo:
+		return "SuperResolutionScalerConfigurationInputTypeVideo"
+	case SuperResolutionScalerConfigurationInputTypeImage:
+		return "SuperResolutionScalerConfigurationInputTypeImage"
 	default:
-		return fmt.Sprintf("VTSuperResolutionScalerConfigurationInputType(%d)", int64(e))
+		return fmt.Sprintf("SuperResolutionScalerConfigurationInputType(%d)", int64(e))
 	}
 }
 
-type VTSuperResolutionScalerConfigurationModelStatus int64
+type SuperResolutionScalerConfigurationModelStatus int64
 
 const (
-	VTSuperResolutionScalerConfigurationModelStatusDownloadRequired VTSuperResolutionScalerConfigurationModelStatus = 0
-	VTSuperResolutionScalerConfigurationModelStatusDownloading      VTSuperResolutionScalerConfigurationModelStatus = 1
-	VTSuperResolutionScalerConfigurationModelStatusReady            VTSuperResolutionScalerConfigurationModelStatus = 2
+	SuperResolutionScalerConfigurationModelStatusDownloadRequired SuperResolutionScalerConfigurationModelStatus = 0
+	SuperResolutionScalerConfigurationModelStatusDownloading      SuperResolutionScalerConfigurationModelStatus = 1
+	SuperResolutionScalerConfigurationModelStatusReady            SuperResolutionScalerConfigurationModelStatus = 2
 )
 
-func (e VTSuperResolutionScalerConfigurationModelStatus) String() string {
+// String returns the SuperResolutionScalerConfigurationModelStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SuperResolutionScalerConfigurationModelStatus) String() string {
 	switch e {
-	case VTSuperResolutionScalerConfigurationModelStatusDownloadRequired:
-		return "VTSuperResolutionScalerConfigurationModelStatusDownloadRequired"
-	case VTSuperResolutionScalerConfigurationModelStatusDownloading:
-		return "VTSuperResolutionScalerConfigurationModelStatusDownloading"
-	case VTSuperResolutionScalerConfigurationModelStatusReady:
-		return "VTSuperResolutionScalerConfigurationModelStatusReady"
+	case SuperResolutionScalerConfigurationModelStatusDownloadRequired:
+		return "SuperResolutionScalerConfigurationModelStatusDownloadRequired"
+	case SuperResolutionScalerConfigurationModelStatusDownloading:
+		return "SuperResolutionScalerConfigurationModelStatusDownloading"
+	case SuperResolutionScalerConfigurationModelStatusReady:
+		return "SuperResolutionScalerConfigurationModelStatusReady"
 	default:
-		return fmt.Sprintf("VTSuperResolutionScalerConfigurationModelStatus(%d)", int64(e))
+		return fmt.Sprintf("SuperResolutionScalerConfigurationModelStatus(%d)", int64(e))
 	}
 }
 
-type VTSuperResolutionScalerConfigurationQualityPrioritization int64
+type SuperResolutionScalerConfigurationQualityPrioritization int64
 
 const (
-	VTSuperResolutionScalerConfigurationQualityPrioritizationNormal VTSuperResolutionScalerConfigurationQualityPrioritization = 1
+	SuperResolutionScalerConfigurationQualityPrioritizationNormal SuperResolutionScalerConfigurationQualityPrioritization = 1
 )
 
-func (e VTSuperResolutionScalerConfigurationQualityPrioritization) String() string {
+// String returns the SuperResolutionScalerConfigurationQualityPrioritization constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SuperResolutionScalerConfigurationQualityPrioritization) String() string {
 	switch e {
-	case VTSuperResolutionScalerConfigurationQualityPrioritizationNormal:
-		return "VTSuperResolutionScalerConfigurationQualityPrioritizationNormal"
+	case SuperResolutionScalerConfigurationQualityPrioritizationNormal:
+		return "SuperResolutionScalerConfigurationQualityPrioritizationNormal"
 	default:
-		return fmt.Sprintf("VTSuperResolutionScalerConfigurationQualityPrioritization(%d)", int64(e))
+		return fmt.Sprintf("SuperResolutionScalerConfigurationQualityPrioritization(%d)", int64(e))
 	}
 }
 
-type VTSuperResolutionScalerConfigurationRevision int64
+type SuperResolutionScalerConfigurationRevision int64
 
 const (
-	VTSuperResolutionScalerConfigurationRevision1 VTSuperResolutionScalerConfigurationRevision = 1
+	SuperResolutionScalerConfigurationRevision1 SuperResolutionScalerConfigurationRevision = 1
 )
 
-func (e VTSuperResolutionScalerConfigurationRevision) String() string {
+// String returns the SuperResolutionScalerConfigurationRevision constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SuperResolutionScalerConfigurationRevision) String() string {
 	switch e {
-	case VTSuperResolutionScalerConfigurationRevision1:
-		return "VTSuperResolutionScalerConfigurationRevision1"
+	case SuperResolutionScalerConfigurationRevision1:
+		return "SuperResolutionScalerConfigurationRevision1"
 	default:
-		return fmt.Sprintf("VTSuperResolutionScalerConfigurationRevision(%d)", int64(e))
+		return fmt.Sprintf("SuperResolutionScalerConfigurationRevision(%d)", int64(e))
 	}
 }
 
-type VTSuperResolutionScalerParametersSubmissionMode int64
+type SuperResolutionScalerParametersSubmissionMode int64
 
 const (
-	VTSuperResolutionScalerParametersSubmissionModeRandom     VTSuperResolutionScalerParametersSubmissionMode = 1
-	VTSuperResolutionScalerParametersSubmissionModeSequential VTSuperResolutionScalerParametersSubmissionMode = 2
+	SuperResolutionScalerParametersSubmissionModeRandom     SuperResolutionScalerParametersSubmissionMode = 1
+	SuperResolutionScalerParametersSubmissionModeSequential SuperResolutionScalerParametersSubmissionMode = 2
 )
 
-func (e VTSuperResolutionScalerParametersSubmissionMode) String() string {
+// String returns the SuperResolutionScalerParametersSubmissionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SuperResolutionScalerParametersSubmissionMode) String() string {
 	switch e {
-	case VTSuperResolutionScalerParametersSubmissionModeRandom:
-		return "VTSuperResolutionScalerParametersSubmissionModeRandom"
-	case VTSuperResolutionScalerParametersSubmissionModeSequential:
-		return "VTSuperResolutionScalerParametersSubmissionModeSequential"
+	case SuperResolutionScalerParametersSubmissionModeRandom:
+		return "SuperResolutionScalerParametersSubmissionModeRandom"
+	case SuperResolutionScalerParametersSubmissionModeSequential:
+		return "SuperResolutionScalerParametersSubmissionModeSequential"
 	default:
-		return fmt.Sprintf("VTSuperResolutionScalerParametersSubmissionMode(%d)", int64(e))
+		return fmt.Sprintf("SuperResolutionScalerParametersSubmissionMode(%d)", int64(e))
 	}
 }

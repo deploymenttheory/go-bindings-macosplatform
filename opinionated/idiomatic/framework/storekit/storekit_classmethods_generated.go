@@ -5,81 +5,59 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// RegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler calls the underlying SKArcadeServiceRegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler.
-func RegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler(randomFromLib *foundation.NSData, randomFromLibLength uint32, resultHandler func(*foundation.NSData, uint32, *foundation.NSData, uint32, unsafe.Pointer)) {
-	raw.SKArcadeServiceRegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler(randomFromLib, randomFromLibLength, resultHandler)
-}
-
-// ArcadeSubscriptionStatusWithNonceResultHandler calls the underlying SKArcadeServiceArcadeSubscriptionStatusWithNonceResultHandler.
-func ArcadeSubscriptionStatusWithNonceResultHandler(nonce uint64, resultHandler func(*foundation.NSData, uint32, *foundation.NSData, uint32, unsafe.Pointer)) {
-	raw.SKArcadeServiceArcadeSubscriptionStatusWithNonceResultHandler(nonce, resultHandler)
-}
-
-// RepairArcadeApp calls the underlying SKArcadeServiceRepairArcadeApp.
+// RepairArcadeApp wraps the corresponding Objective-C method.
 func RepairArcadeApp() {
-	raw.SKArcadeServiceRepairArcadeApp()
+	objc.Send[objc.ID](objc.ID(_class("SKArcadeService")), objc.RegisterName("repairArcadeApp"))
 }
 
-// AuthorizationStatus calls the underlying SKCloudServiceControllerAuthorizationStatus.
-func AuthorizationStatus() SKCloudServiceAuthorizationStatus {
-	return SKCloudServiceAuthorizationStatus(raw.SKCloudServiceControllerAuthorizationStatus())
+// AuthorizationStatus returns the type of authorization the customer has for accessing the Music library on the device.
+func AuthorizationStatus() CloudServiceAuthorizationStatus {
+	_r := objc.Send[CloudServiceAuthorizationStatus](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
-// RequestAuthorization calls the underlying SKCloudServiceControllerRequestAuthorization.
-func RequestAuthorization(completionHandler func(SKCloudServiceAuthorizationStatus)) {
-	raw.SKCloudServiceControllerRequestAuthorization(func(_a0 raw.SKCloudServiceAuthorizationStatus) {
-		completionHandler(SKCloudServiceAuthorizationStatus(_a0))
-	})
+// ContentURLForProductID returns the local location for the previously downloaded flie.
+func ContentURLForProductID(productID string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("contentURLForProductID:"), purego.NSString(productID))
+	return obj.Wrap(_r)
 }
 
-// ContentURLForProductID calls the underlying SKDownloadContentURLForProductID.
-func ContentURLForProductID(productID string) *foundation.NSURL {
-	return raw.SKDownloadContentURLForProductID(foundation.NSStringStringWithUTF8String(productID))
-}
-
-// DeleteContentForProductID calls the underlying SKDownloadDeleteContentForProductID.
+// DeleteContentForProductID deletes the previously downloaded file.
 func DeleteContentForProductID(productID string) {
-	raw.SKDownloadDeleteContentForProductID(foundation.NSStringStringWithUTF8String(productID))
+	objc.Send[objc.ID](objc.ID(_class("SKDownload")), objc.RegisterName("deleteContentForProductID:"), purego.NSString(productID))
 }
 
-// PaymentWithProduct calls the underlying SKPaymentPaymentWithProduct.
-func PaymentWithProduct(product *raw.SKProduct) *Payment {
-	_r := raw.SKPaymentPaymentWithProduct(product)
-	if _r == nil {
-		return nil
-	}
-	return &Payment{inner: _r}
+// PaymentWithProduct returns a new payment for the specified product.
+func PaymentWithProduct(product *Product) *Payment {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPayment")), objc.RegisterName("paymentWithProduct:"), objref.IDOf(product))
+	return PaymentFromID(_r)
 }
 
-// DefaultQueue calls the underlying SKPaymentQueueDefaultQueue.
+// DefaultQueue returns the default payment queue instance.
 func DefaultQueue() *PaymentQueue {
-	_r := raw.SKPaymentQueueDefaultQueue()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentQueue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("defaultQueue"))
+	return PaymentQueueFromID(_r)
 }
 
-// CanMakePayments calls the underlying SKPaymentQueueCanMakePayments.
+// CanMakePayments a method that indicates whether the person can make purchases.
 func CanMakePayments() bool {
-	return raw.SKPaymentQueueCanMakePayments()
+	_r := objc.Send[bool](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("canMakePayments"))
+	return _r
 }
 
-// DefaultController calls the underlying SKProductStorePromotionControllerDefaultController.
+// DefaultController returns the default product store promotion controller.
 func DefaultController() *ProductStorePromotionController {
-	_r := raw.SKProductStorePromotionControllerDefaultController()
-	if _r == nil {
-		return nil
-	}
-	return &ProductStorePromotionController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SKProductStorePromotionController")), objc.RegisterName("defaultController"))
+	return ProductStorePromotionControllerFromID(_r)
 }
 
-// RequestReview calls the underlying SKStoreReviewControllerRequestReview.
+// RequestReview tells StoreKit to ask the customer to rate or review your app, if appropriate.
 func RequestReview() {
-	raw.SKStoreReviewControllerRequestReview()
+	objc.Send[objc.ID](objc.ID(_class("SKStoreReviewController")), objc.RegisterName("requestReview"))
 }

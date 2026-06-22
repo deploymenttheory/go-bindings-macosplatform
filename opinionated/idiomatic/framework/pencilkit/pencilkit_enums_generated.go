@@ -9,56 +9,60 @@ import (
 )
 
 // Constants that represent versions of PencilKit for backward compatibility.
-type PKContentVersion int64
+type ContentVersion int64
 
 const (
 	// The PencilKit version that supports inks from iPadOS 14 and earlier, including marker, pen, and pencil.
-	PKContentVersion1 PKContentVersion = 1
+	ContentVersion1 ContentVersion = 1
 	// The PencilKit version that supports inks from iPadOS 17 and earlier, including marker, pen, pencil, monoline, fountain pen, watercolor, and crayon.
-	PKContentVersion2 PKContentVersion = 2
+	ContentVersion2 ContentVersion = 2
 	// The PencilKit version that supports barrel-roll angle data in inks.
-	PKContentVersion3 PKContentVersion = 3
+	ContentVersion3 ContentVersion = 3
 	// The version that adds the Reed Pen ink.
-	PKContentVersion4 PKContentVersion = 4
+	ContentVersion4 ContentVersion = 4
 	// A property that returns latest version of PencilKit, which supports all currently available inks.
-	PKContentVersionLatest PKContentVersion = 4
+	ContentVersionLatest ContentVersion = 4
 )
 
-func (e PKContentVersion) String() string {
+// String returns the ContentVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContentVersion) String() string {
 	switch e {
-	case PKContentVersion1:
-		return "PKContentVersion1"
-	case PKContentVersion2:
-		return "PKContentVersion2"
-	case PKContentVersion3:
-		return "PKContentVersion3"
-	case PKContentVersion4:
-		return "PKContentVersion4"
+	case ContentVersion1:
+		return "ContentVersion1"
+	case ContentVersion2:
+		return "ContentVersion2"
+	case ContentVersion3:
+		return "ContentVersion3"
+	case ContentVersion4:
+		return "ContentVersion4"
 	default:
-		return fmt.Sprintf("PKContentVersion(%d)", int64(e))
+		return fmt.Sprintf("ContentVersion(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the behavior of the eraser.
-type PKEraserType int64
+type EraserType int64
 
 const (
 	// An eraser that removes an entire drawn line.
-	PKEraserTypeVector PKEraserType = 0
+	EraserTypeVector EraserType = 0
 	// An eraser that removes only those portions of the drawing it touches.
-	PKEraserTypeBitmap           PKEraserType = 1
-	PKEraserTypeFixedWidthBitmap PKEraserType = 2
+	EraserTypeBitmap           EraserType = 1
+	EraserTypeFixedWidthBitmap EraserType = 2
 )
 
-func (e PKEraserType) String() string {
+// String returns the EraserType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EraserType) String() string {
 	switch e {
-	case PKEraserTypeVector:
-		return "PKEraserTypeVector"
-	case PKEraserTypeBitmap:
-		return "PKEraserTypeBitmap"
-	case PKEraserTypeFixedWidthBitmap:
-		return "PKEraserTypeFixedWidthBitmap"
+	case EraserTypeVector:
+		return "EraserTypeVector"
+	case EraserTypeBitmap:
+		return "EraserTypeBitmap"
+	case EraserTypeFixedWidthBitmap:
+		return "EraserTypeFixedWidthBitmap"
 	default:
-		return fmt.Sprintf("PKEraserType(%d)", int64(e))
+		return fmt.Sprintf("EraserType(%d)", int64(e))
 	}
 }

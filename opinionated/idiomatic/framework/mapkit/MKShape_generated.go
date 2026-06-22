@@ -5,89 +5,112 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the basic properties for all shape-based overlay objects.
+// Shape is an idiomatic wrapper over the Objective-C class MKShape.
 //
-// Shape wraps [raw.MKShape] with a fluent Go API.
+// Shape is an abstract base — you do not construct it directly. Construct one of [Circle], [MultiPoint], [MultiPolygon], [MultiPolyline], [PointAnnotation] and pass it where a Shape is accepted.
+//
+// An abstract class that defines the basic properties for all shape-based overlay objects.
 type Shape struct {
-	inner *raw.MKShape
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKShape].
-func (x *Shape) Unwrap() *raw.MKShape { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Shape) ID() objc.ID { return x.inner.Ptr() }
-
-// ShapeFromID adopts an existing object pointer as a Shape (nil for 0).
+// ShapeFromID adopts an existing Objective-C object as a Shape
+// (nil for 0), retaining it and registering a release finalizer.
 func ShapeFromID(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	return &Shape{inner: raw.MKShapeFromID(id)}
+	x := &Shape{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewShape creates a new [Shape].
-func NewShape() *Shape {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKShape")), objc.RegisterName("new"))
-	return &Shape{inner: raw.MKShapeFromID(_id)}
+// shapeAdopt wraps an Objective-C object that this code just created as a
+// Shape (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shapeAdopt(id objc.ID) *Shape {
+	if id == 0 {
+		return nil
+	}
+	x := &Shape{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The title of the shape annotation.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *Shape) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Shape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Shape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Shape) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithTitle the title of the shape annotation.
 func (x *Shape) WithTitle(title string) *Shape {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle the subtitle of the shape annotation.
 func (x *Shape) WithSubtitle(subtitle string) *Shape {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *Shape) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *Shape) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Subtitle calls the underlying Subtitle.
+// Subtitle wraps the corresponding Objective-C method.
 func (x *Shape) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSubtitle calls the underlying SetSubtitle.
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *Shape) SetSubtitle(subtitle string) {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
-
-func (x *Shape) asShape() *raw.MKShape { return x.inner }
 
 // Shapeable is the interface implemented by [Shape], for mocking and DI.
 type Shapeable interface {
-	Unwrap() *raw.MKShape
+	obj.Object
 	WithTitle(title string) *Shape
 	WithSubtitle(subtitle string) *Shape
 	Title() string
@@ -97,3 +120,10 @@ type Shapeable interface {
 }
 
 var _ Shapeable = (*Shape)(nil)
+
+// isShape marks Shape — and, by embedding promotion, its
+// subclasses — as a member of the Shape hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Shape) isShape() {}
+
+var _ ShapeProvider = (*Shape)(nil)

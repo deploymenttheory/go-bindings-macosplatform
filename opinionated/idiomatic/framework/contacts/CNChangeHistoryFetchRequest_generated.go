@@ -5,201 +5,164 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that specifies the criteria for fetching change history.
+// ChangeHistoryFetchRequest is an idiomatic wrapper over the Objective-C class CNChangeHistoryFetchRequest.
 //
-// ChangeHistoryFetchRequest wraps [raw.CNChangeHistoryFetchRequest] with a fluent Go API.
+// It embeds [FetchRequest], promoting that type's methods.
+//
+// An object that specifies the criteria for fetching change history.
 type ChangeHistoryFetchRequest struct {
-	inner *raw.CNChangeHistoryFetchRequest
+	FetchRequest
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryFetchRequest].
-func (x *ChangeHistoryFetchRequest) Unwrap() *raw.CNChangeHistoryFetchRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryFetchRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryFetchRequestFromID adopts an existing object pointer as a ChangeHistoryFetchRequest (nil for 0).
+// ChangeHistoryFetchRequestFromID adopts an existing Objective-C object as a ChangeHistoryFetchRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryFetchRequestFromID(id objc.ID) *ChangeHistoryFetchRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryFetchRequest{inner: raw.CNChangeHistoryFetchRequestFromID(id)}
+	x := &ChangeHistoryFetchRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryFetchRequest creates a new [ChangeHistoryFetchRequest].
+// changeHistoryFetchRequestAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryFetchRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryFetchRequestAdopt(id objc.ID) *ChangeHistoryFetchRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryFetchRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangeHistoryFetchRequest creates a new ChangeHistoryFetchRequest.
 func NewChangeHistoryFetchRequest() *ChangeHistoryFetchRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryFetchRequest")), objc.RegisterName("new"))
-	return &ChangeHistoryFetchRequest{inner: raw.CNChangeHistoryFetchRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryFetchRequest")), objc.RegisterName("new"))
+	return changeHistoryFetchRequestAdopt(_id)
 }
 
-// An opaque token that indicates a point in history in the user’s Contacts database.
-//
-// WithStartingToken sets the startingToken property and returns the receiver for chaining.
-func (x *ChangeHistoryFetchRequest) WithStartingToken(startingToken *foundation.NSData) *ChangeHistoryFetchRequest {
-	x.inner.SetStartingToken(startingToken)
+// WithStartingToken an opaque token that indicates a point in history in the user’s Contacts database.
+func (x *ChangeHistoryFetchRequest) WithStartingToken(startingToken obj.Object) *ChangeHistoryFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingToken:"), objref.IDOf(startingToken))
 	return x
 }
 
-// A Boolean value that indicates whether the fetch should return contact changes as unified contacts.
-//
-// WithShouldUnifyResults sets the shouldUnifyResults property and returns the receiver for chaining.
+// WithShouldUnifyResults a Boolean value that indicates whether the fetch should return contact changes as unified contacts.
 func (x *ChangeHistoryFetchRequest) WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest {
-	x.inner.SetShouldUnifyResults(shouldUnifyResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUnifyResults:"), shouldUnifyResults)
 	return x
 }
 
-// A Boolean value that indicates whether the fetch should return mutable contacts and groups.
-//
-// WithMutableObjects sets the mutableObjects property and returns the receiver for chaining.
+// WithMutableObjects a Boolean value that indicates whether the fetch should return mutable contacts and groups.
 func (x *ChangeHistoryFetchRequest) WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest {
-	x.inner.SetMutableObjects(mutableObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableObjects:"), mutableObjects)
 	return x
 }
 
-// A Boolean value that indicates whether the fetch should also return group changes.
-//
-// WithIncludeGroupChanges sets the includeGroupChanges property and returns the receiver for chaining.
+// WithIncludeGroupChanges a Boolean value that indicates whether the fetch should also return group changes.
 func (x *ChangeHistoryFetchRequest) WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest {
-	x.inner.SetIncludeGroupChanges(includeGroupChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeGroupChanges:"), includeGroupChanges)
 	return x
 }
 
-// An array of strings that identify transaction authors to exclude from the fetch results.
-//
-// WithExcludedTransactionAuthors sets the collection, converting the Go slice to an NSArray.
-func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...*foundation.NSString) *ChangeHistoryFetchRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExcludedTransactionAuthors(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExcludedTransactionAuthors(_arr)
+// WithExcludedTransactionAuthors an array of strings that identify transaction authors to exclude from the fetch results.
+func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...obj.Object) *ChangeHistoryFetchRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedTransactionAuthors:"), _arr)
 	return x
 }
 
-// @abstract    Request changes made after a certain point. @discussion  If non-nil, only changes made after this point in history will be returned. If nil, a @c CNChangeHistoryDropEverythingEvent will be returned, followed by an add event for every contact and group currently in the contacts database.
-//
-// StartingToken calls the underlying StartingToken.
-func (x *ChangeHistoryFetchRequest) StartingToken() *foundation.NSData {
-	return x.inner.StartingToken()
+// StartingToken request changes made after a certain point. If non-nil, only changes made after this point in history will be returned. If nil, a
+func (x *ChangeHistoryFetchRequest) StartingToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startingToken"))
+	return obj.Wrap(_r)
 }
 
-// SetStartingToken calls the underlying SetStartingToken.
-func (x *ChangeHistoryFetchRequest) SetStartingToken(startingToken *foundation.NSData) {
-	x.inner.SetStartingToken(startingToken)
+// SetStartingToken wraps the corresponding Objective-C method.
+func (x *ChangeHistoryFetchRequest) SetStartingToken(startingToken obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingToken:"), objref.IDOf(startingToken))
 }
 
-// @abstract    Additional keys to include in the fetched contacts. @discussion  By default, only @c CNContactIdentifierKey will be fetched. If you would like to include additional key descriptors to process the contacts, include the key descriptors you need. @c CNContactIdentifierKey will always be fetched, whether you request it or not.
-//
-// AdditionalContactKeyDescriptors calls the underlying AdditionalContactKeyDescriptors.
-func (x *ChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() *foundation.NSArray[raw.CNKeyDescriptor] {
-	return x.inner.AdditionalContactKeyDescriptors()
+// AdditionalContactKeyDescriptors additional keys to include in the fetched contacts. By default, only
+func (x *ChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalContactKeyDescriptors"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetAdditionalContactKeyDescriptors calls the underlying SetAdditionalContactKeyDescriptors.
-func (x *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(additionalContactKeyDescriptors))
-	for _i, _v := range additionalContactKeyDescriptors {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetAdditionalContactKeyDescriptors(_arg0)
+// SetAdditionalContactKeyDescriptors wraps the corresponding Objective-C method.
+func (x *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalContactKeyDescriptors:"), purego.SliceToNSArray(additionalContactKeyDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @abstract    Returns contact changes as unified contacts. @discussion  If @c YES, returns unified contact history. Otherwise returns individual contact history. Default is @c YES. @note        A unified contact is the aggregation of properties from a set of linked individual contacts. If an individual contact is not linked then the unified contact is simply that individual contact.
-//
-// ShouldUnifyResults calls the underlying ShouldUnifyResults.
+// ShouldUnifyResults returns contact changes as unified contacts. If
 func (x *ChangeHistoryFetchRequest) ShouldUnifyResults() bool {
-	return x.inner.ShouldUnifyResults()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldUnifyResults"))
+	return _r
 }
 
-// SetShouldUnifyResults calls the underlying SetShouldUnifyResults.
+// SetShouldUnifyResults wraps the corresponding Objective-C method.
 func (x *ChangeHistoryFetchRequest) SetShouldUnifyResults(shouldUnifyResults bool) {
-	x.inner.SetShouldUnifyResults(shouldUnifyResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUnifyResults:"), shouldUnifyResults)
 }
 
-// @abstract    To return mutable contacts and groups. @discussion  If @c YES returns mutable contacts and groups. Default is @c NO.
-//
-// MutableObjects calls the underlying MutableObjects.
+// MutableObjects to return mutable contacts and groups. If
 func (x *ChangeHistoryFetchRequest) MutableObjects() bool {
-	return x.inner.MutableObjects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mutableObjects"))
+	return _r
 }
 
-// SetMutableObjects calls the underlying SetMutableObjects.
+// SetMutableObjects wraps the corresponding Objective-C method.
 func (x *ChangeHistoryFetchRequest) SetMutableObjects(mutableObjects bool) {
-	x.inner.SetMutableObjects(mutableObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableObjects:"), mutableObjects)
 }
 
-// @abstract    Set to @c YES to also fetch group changes. Default is @c NO.
-//
-// IncludeGroupChanges calls the underlying IncludeGroupChanges.
+// IncludeGroupChanges set to
 func (x *ChangeHistoryFetchRequest) IncludeGroupChanges() bool {
-	return x.inner.IncludeGroupChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeGroupChanges"))
+	return _r
 }
 
-// SetIncludeGroupChanges calls the underlying SetIncludeGroupChanges.
+// SetIncludeGroupChanges wraps the corresponding Objective-C method.
 func (x *ChangeHistoryFetchRequest) SetIncludeGroupChanges(includeGroupChanges bool) {
-	x.inner.SetIncludeGroupChanges(includeGroupChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeGroupChanges:"), includeGroupChanges)
 }
 
-// @abstract    Exclude changes made by certain authors. @discussion  If set, transactions made by the specified authors will be excluded from the results. Use this, in conjunction with @c CNSaveRequest.transactionAuthor, to suppress processing of changes you already know about.
+// ExcludedTransactionAuthors exclude changes made by certain authors. If set, transactions made by the specified authors will be excluded from the results. Use this, in conjunction with
 //
 // ExcludedTransactionAuthors returns the collection as a Go slice.
 func (x *ChangeHistoryFetchRequest) ExcludedTransactionAuthors() []string {
-	arr := x.inner.ExcludedTransactionAuthors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedTransactionAuthors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetExcludedTransactionAuthors calls the underlying SetExcludedTransactionAuthors.
-func (x *ChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransactionAuthors *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetExcludedTransactionAuthors(excludedTransactionAuthors)
-}
-
-func (x *ChangeHistoryFetchRequest) asFetchRequest() *raw.CNFetchRequest {
-	return &x.inner.CNFetchRequest
+// SetExcludedTransactionAuthors wraps the corresponding Objective-C method.
+func (x *ChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransactionAuthors []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedTransactionAuthors:"), purego.SliceToNSArray(excludedTransactionAuthors, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ChangeHistoryFetchRequestable is the interface implemented by [ChangeHistoryFetchRequest], for mocking and DI.
 type ChangeHistoryFetchRequestable interface {
-	Unwrap() *raw.CNChangeHistoryFetchRequest
-	WithStartingToken(startingToken *foundation.NSData) *ChangeHistoryFetchRequest
+	obj.Object
+	WithStartingToken(startingToken obj.Object) *ChangeHistoryFetchRequest
 	WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest
 	WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest
 	WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest
-	WithExcludedTransactionAuthors(items ...*foundation.NSString) *ChangeHistoryFetchRequest
-	StartingToken() *foundation.NSData
-	SetStartingToken(startingToken *foundation.NSData)
-	AdditionalContactKeyDescriptors() *foundation.NSArray[raw.CNKeyDescriptor]
-	SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors ...purego.IDer)
+	WithExcludedTransactionAuthors(items ...obj.Object) *ChangeHistoryFetchRequest
+	StartingToken() obj.Object
+	SetStartingToken(startingToken obj.Object)
+	AdditionalContactKeyDescriptors() []obj.Object
+	SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors []obj.Object)
 	ShouldUnifyResults() bool
 	SetShouldUnifyResults(shouldUnifyResults bool)
 	MutableObjects() bool
@@ -207,7 +170,9 @@ type ChangeHistoryFetchRequestable interface {
 	IncludeGroupChanges() bool
 	SetIncludeGroupChanges(includeGroupChanges bool)
 	ExcludedTransactionAuthors() []string
-	SetExcludedTransactionAuthors(excludedTransactionAuthors *foundation.NSArray[*foundation.NSString])
+	SetExcludedTransactionAuthors(excludedTransactionAuthors []string)
 }
 
 var _ ChangeHistoryFetchRequestable = (*ChangeHistoryFetchRequest)(nil)
+
+var _ FetchRequestProvider = (*ChangeHistoryFetchRequest)(nil)

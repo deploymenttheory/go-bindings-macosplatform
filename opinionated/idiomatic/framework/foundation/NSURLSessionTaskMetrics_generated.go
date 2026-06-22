@@ -5,79 +5,108 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object encapsulating the metrics for a session task.
+// URLSessionTaskMetrics is an idiomatic wrapper over the Objective-C class NSURLSessionTaskMetrics.
 //
-// URLSessionTaskMetrics wraps [raw.NSURLSessionTaskMetrics] with a fluent Go API.
+// An object encapsulating the metrics for a session task.
 type URLSessionTaskMetrics struct {
-	inner *raw.NSURLSessionTaskMetrics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLSessionTaskMetrics].
-func (x *URLSessionTaskMetrics) Unwrap() *raw.NSURLSessionTaskMetrics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLSessionTaskMetrics) ID() objc.ID { return x.inner.Ptr() }
-
-// URLSessionTaskMetricsFromID adopts an existing object pointer as a URLSessionTaskMetrics (nil for 0).
+// URLSessionTaskMetricsFromID adopts an existing Objective-C object as a URLSessionTaskMetrics
+// (nil for 0), retaining it and registering a release finalizer.
 func URLSessionTaskMetricsFromID(id objc.ID) *URLSessionTaskMetrics {
 	if id == 0 {
 		return nil
 	}
-	return &URLSessionTaskMetrics{inner: raw.NSURLSessionTaskMetricsFromID(id)}
-}
-
-// NewURLSessionTaskMetrics creates a new [URLSessionTaskMetrics].
-func NewURLSessionTaskMetrics() *URLSessionTaskMetrics {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLSessionTaskMetrics")), objc.RegisterName("new"))
-	return &URLSessionTaskMetrics{inner: raw.NSURLSessionTaskMetricsFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskMetrics {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLSessionTaskMetrics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// TransactionMetrics returns the collection as a Go slice.
-func (x *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
-	arr := x.inner.TransactionMetrics()
-	if arr == nil {
+// uRLSessionTaskMetricsAdopt wraps an Objective-C object that this code just created as a
+// URLSessionTaskMetrics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLSessionTaskMetricsAdopt(id objc.ID) *URLSessionTaskMetrics {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *URLSessionTaskTransactionMetrics {
-		return &URLSessionTaskTransactionMetrics{inner: raw.NSURLSessionTaskTransactionMetricsFromID(purego.Retain(_id))}
+	x := &URLSessionTaskMetrics{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLSessionTaskMetrics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLSessionTaskMetrics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLSessionTaskMetrics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLSessionTaskMetrics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLSessionTaskMetrics creates a new URLSessionTaskMetrics.
+func NewURLSessionTaskMetrics() *URLSessionTaskMetrics {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskMetrics")), objc.RegisterName("new"))
+	return uRLSessionTaskMetricsAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskMetrics {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// TransactionMetrics wraps the corresponding Objective-C method.
+//
+// TransactionMetrics returns the collection as a Go slice.
+func (x *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionMetrics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *URLSessionTaskTransactionMetrics {
+		return URLSessionTaskTransactionMetricsFromID(_id)
 	})
 }
 
-// TaskInterval calls the underlying TaskInterval.
+// TaskInterval wraps the corresponding Objective-C method.
 func (x *URLSessionTaskMetrics) TaskInterval() *DateInterval {
-	_r := x.inner.TaskInterval()
-	if _r == nil {
-		return nil
-	}
-	return &DateInterval{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskInterval"))
+	return DateIntervalFromID(_r)
 }
 
-// RedirectCount calls the underlying RedirectCount.
-func (x *URLSessionTaskMetrics) RedirectCount() uint {
-	return x.inner.RedirectCount()
+// RedirectCount wraps the corresponding Objective-C method.
+func (x *URLSessionTaskMetrics) RedirectCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("redirectCount"))
+	return _r
 }
-
-func (x *URLSessionTaskMetrics) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLSessionTaskMetricsable is the interface implemented by [URLSessionTaskMetrics], for mocking and DI.
 type URLSessionTaskMetricsable interface {
-	Unwrap() *raw.NSURLSessionTaskMetrics
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskMetrics
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskMetrics
 	TransactionMetrics() []*URLSessionTaskTransactionMetrics
 	TaskInterval() *DateInterval
-	RedirectCount() uint
+	RedirectCount() int
 }
 
 var _ URLSessionTaskMetricsable = (*URLSessionTaskMetrics)(nil)

@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package accessibility provides a fluent Go API over the macOS Accessibility framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - MathExpression: [MathExpressionFenced], [MathExpressionFraction], [MathExpressionIdentifier], [MathExpressionMultiscript], [MathExpressionNumber], [MathExpressionOperator], [MathExpressionRoot], [MathExpressionRow], [MathExpressionSubSuperscript], [MathExpressionTable], [MathExpressionTableCell], [MathExpressionTableRow], [MathExpressionText], [MathExpressionUnderOver]
 package accessibility

@@ -5,45 +5,59 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base type class for types on tensors.
+// GraphType is an idiomatic wrapper over the Objective-C class MPSGraphType.
 //
-// GraphType wraps [raw.MPSGraphType] with a fluent Go API.
+// GraphType is an abstract base — you do not construct it directly. Construct one of [GraphShapedType] and pass it where a GraphType is accepted.
+//
+// The base type class for types on tensors.
 type GraphType struct {
-	inner *raw.MPSGraphType
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraphType].
-func (x *GraphType) Unwrap() *raw.MPSGraphType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphType) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphTypeFromID adopts an existing object pointer as a GraphType (nil for 0).
+// GraphTypeFromID adopts an existing Objective-C object as a GraphType
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphTypeFromID(id objc.ID) *GraphType {
 	if id == 0 {
 		return nil
 	}
-	return &GraphType{inner: raw.MPSGraphTypeFromID(id)}
+	x := &GraphType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphType creates a new [GraphType].
-func NewGraphType() *GraphType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphType")), objc.RegisterName("new"))
-	return &GraphType{inner: raw.MPSGraphTypeFromID(_id)}
+// graphTypeAdopt wraps an Objective-C object that this code just created as a
+// GraphType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphTypeAdopt(id objc.ID) *GraphType {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
-
-func (x *GraphType) asGraphType() *raw.MPSGraphType { return x.inner }
-
-func (x *GraphType) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphTypeable is the interface implemented by [GraphType], for mocking and DI.
 type GraphTypeable interface {
-	Unwrap() *raw.MPSGraphType
+	obj.Object
 }
 
 var _ GraphTypeable = (*GraphType)(nil)
+
+// isGraphType marks GraphType — and, by embedding promotion, its
+// subclasses — as a member of the GraphType hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphType) isGraphType() {}
+
+var _ GraphTypeProvider = (*GraphType)(nil)
+
+var _ GraphObjectProvider = (*GraphType)(nil)

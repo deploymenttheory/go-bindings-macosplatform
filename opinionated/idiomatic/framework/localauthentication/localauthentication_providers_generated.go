@@ -5,15 +5,17 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// EnvironmentMechanismProvider is implemented by EnvironmentMechanism and any idiomatic type wrapping a LAEnvironmentMechanism subclass.
+// EnvironmentMechanismProvider is accepted wherever a LAEnvironmentMechanism (or one of its subclasses) is expected.
 type EnvironmentMechanismProvider interface {
-	asEnvironmentMechanism() *raw.LAEnvironmentMechanism
+	objref.Object
+	isEnvironmentMechanism()
 }
 
-// RightProvider is implemented by Right and any idiomatic type wrapping a LARight subclass.
+// RightProvider is accepted wherever a LARight (or one of its subclasses) is expected.
 type RightProvider interface {
-	asRight() *raw.LARight
+	objref.Object
+	isRight()
 }

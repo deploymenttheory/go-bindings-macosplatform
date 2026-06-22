@@ -5,77 +5,85 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.
+// PhysicsJointLimit is an idiomatic wrapper over the Objective-C class SKPhysicsJointLimit.
 //
-// PhysicsJointLimit wraps [raw.SKPhysicsJointLimit] with a fluent Go API.
+// It embeds [PhysicsJoint], promoting that type's methods.
+//
+// A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.
 type PhysicsJointLimit struct {
-	inner *raw.SKPhysicsJointLimit
+	PhysicsJoint
 }
 
-// Unwrap returns the underlying [raw.SKPhysicsJointLimit].
-func (x *PhysicsJointLimit) Unwrap() *raw.SKPhysicsJointLimit { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsJointLimit) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsJointLimitFromID adopts an existing object pointer as a PhysicsJointLimit (nil for 0).
+// PhysicsJointLimitFromID adopts an existing Objective-C object as a PhysicsJointLimit
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsJointLimitFromID(id objc.ID) *PhysicsJointLimit {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsJointLimit{inner: raw.SKPhysicsJointLimitFromID(id)}
+	x := &PhysicsJointLimit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsJointLimit creates a new [PhysicsJointLimit].
+// physicsJointLimitAdopt wraps an Objective-C object that this code just created as a
+// PhysicsJointLimit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsJointLimitAdopt(id objc.ID) *PhysicsJointLimit {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsJointLimit{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPhysicsJointLimit creates a new PhysicsJointLimit.
 func NewPhysicsJointLimit() *PhysicsJointLimit {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPhysicsJointLimit")), objc.RegisterName("new"))
-	return &PhysicsJointLimit{inner: raw.SKPhysicsJointLimitFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointLimit")), objc.RegisterName("new"))
+	return physicsJointLimitAdopt(_id)
 }
 
-// The maximum distance allowed between the two physics bodies connected by the limit joint.
-//
-// WithMaxLength sets the maxLength property and returns the receiver for chaining.
+// WithMaxLength the maximum distance allowed between the two physics bodies connected by the limit joint.
 func (x *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit {
-	x.inner.SetMaxLength(maxLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
 	return x
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets the bodyA property and returns the receiver for chaining.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets the bodyB property and returns the receiver for chaining.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
-// MaxLength calls the underlying MaxLength.
+// MaxLength wraps the corresponding Objective-C method.
 func (x *PhysicsJointLimit) MaxLength() float64 {
-	return x.inner.MaxLength()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxLength"))
+	return _r
 }
 
-// SetMaxLength calls the underlying SetMaxLength.
+// SetMaxLength wraps the corresponding Objective-C method.
 func (x *PhysicsJointLimit) SetMaxLength(maxLength float64) {
-	x.inner.SetMaxLength(maxLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
 }
-
-func (x *PhysicsJointLimit) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
 
 // PhysicsJointLimitable is the interface implemented by [PhysicsJointLimit], for mocking and DI.
 type PhysicsJointLimitable interface {
-	Unwrap() *raw.SKPhysicsJointLimit
+	obj.Object
 	WithMaxLength(maxLength float64) *PhysicsJointLimit
 	WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit
 	WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit
@@ -84,3 +92,5 @@ type PhysicsJointLimitable interface {
 }
 
 var _ PhysicsJointLimitable = (*PhysicsJointLimit)(nil)
+
+var _ PhysicsJointProvider = (*PhysicsJointLimit)(nil)

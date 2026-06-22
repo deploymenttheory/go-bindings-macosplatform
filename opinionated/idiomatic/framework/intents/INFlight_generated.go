@@ -5,100 +5,116 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a flight.
+// Flight is an idiomatic wrapper over the Objective-C class INFlight.
 //
-// Flight wraps [raw.INFlight] with a fluent Go API.
+// The information that describes a flight.
 type Flight struct {
-	inner *raw.INFlight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INFlight].
-func (x *Flight) Unwrap() *raw.INFlight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Flight) ID() objc.ID { return x.inner.Ptr() }
-
-// FlightFromID adopts an existing object pointer as a Flight (nil for 0).
+// FlightFromID adopts an existing Objective-C object as a Flight
+// (nil for 0), retaining it and registering a release finalizer.
 func FlightFromID(id objc.ID) *Flight {
 	if id == 0 {
 		return nil
 	}
-	return &Flight{inner: raw.INFlightFromID(id)}
+	x := &Flight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new object containing information about a flight.
-//
-// NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate creates a new [Flight].
-func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate(airline *raw.INAirline, flightNumber string, boardingTime *raw.INDateComponentsRange, flightDuration *raw.INDateComponentsRange, departureAirportGate *raw.INAirportGate, arrivalAirportGate *raw.INAirportGate) *Flight {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INFlight")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirline:flightNumber:boardingTime:flightDuration:departureAirportGate:arrivalAirportGate:"), airline.Ptr(), foundation.NSStringStringWithUTF8String(flightNumber).Ptr(), boardingTime.Ptr(), flightDuration.Ptr(), departureAirportGate.Ptr(), arrivalAirportGate.Ptr())
-	return &Flight{inner: raw.INFlightFromID(_id)}
-}
-
-// Airline calls the underlying Airline.
-func (x *Flight) Airline() *Airline {
-	_r := x.inner.Airline()
-	if _r == nil {
+// flightAdopt wraps an Objective-C object that this code just created as a
+// Flight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func flightAdopt(id objc.ID) *Flight {
+	if id == 0 {
 		return nil
 	}
-	return &Airline{inner: _r}
+	x := &Flight{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// FlightNumber calls the underlying FlightNumber.
+// Description returns the object's -description text.
+func (x *Flight) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Flight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Flight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Flight) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate creates a new object containing information about a flight.
+func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate(airline *Airline, flightNumber string, boardingTime *DateComponentsRange, flightDuration *DateComponentsRange, departureAirportGate *AirportGate, arrivalAirportGate *AirportGate) *Flight {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INFlight")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirline:flightNumber:boardingTime:flightDuration:departureAirportGate:arrivalAirportGate:"), objref.IDOf(airline), purego.NSString(flightNumber), objref.IDOf(boardingTime), objref.IDOf(flightDuration), objref.IDOf(departureAirportGate), objref.IDOf(arrivalAirportGate))
+	return flightAdopt(_id)
+}
+
+// Airline wraps the corresponding Objective-C method.
+func (x *Flight) Airline() *Airline {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airline"))
+	return AirlineFromID(_r)
+}
+
+// FlightNumber wraps the corresponding Objective-C method.
 func (x *Flight) FlightNumber() string {
-	_r := x.inner.FlightNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BoardingTime calls the underlying BoardingTime.
+// BoardingTime wraps the corresponding Objective-C method.
 func (x *Flight) BoardingTime() *DateComponentsRange {
-	_r := x.inner.BoardingTime()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boardingTime"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// FlightDuration calls the underlying FlightDuration.
+// FlightDuration wraps the corresponding Objective-C method.
 func (x *Flight) FlightDuration() *DateComponentsRange {
-	_r := x.inner.FlightDuration()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightDuration"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// DepartureAirportGate calls the underlying DepartureAirportGate.
+// DepartureAirportGate wraps the corresponding Objective-C method.
 func (x *Flight) DepartureAirportGate() *AirportGate {
-	_r := x.inner.DepartureAirportGate()
-	if _r == nil {
-		return nil
-	}
-	return &AirportGate{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureAirportGate"))
+	return AirportGateFromID(_r)
 }
 
-// ArrivalAirportGate calls the underlying ArrivalAirportGate.
+// ArrivalAirportGate wraps the corresponding Objective-C method.
 func (x *Flight) ArrivalAirportGate() *AirportGate {
-	_r := x.inner.ArrivalAirportGate()
-	if _r == nil {
-		return nil
-	}
-	return &AirportGate{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalAirportGate"))
+	return AirportGateFromID(_r)
 }
 
 // Flightable is the interface implemented by [Flight], for mocking and DI.
 type Flightable interface {
-	Unwrap() *raw.INFlight
+	obj.Object
 	Airline() *Airline
 	FlightNumber() string
 	BoardingTime() *DateComponentsRange

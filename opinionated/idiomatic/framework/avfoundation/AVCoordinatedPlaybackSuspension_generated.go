@@ -5,80 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a temporary suspension of coordinated playback.
+// CoordinatedPlaybackSuspension is an idiomatic wrapper over the Objective-C class AVCoordinatedPlaybackSuspension.
 //
-// CoordinatedPlaybackSuspension wraps [raw.AVCoordinatedPlaybackSuspension] with a fluent Go API.
+// An object that represents a temporary suspension of coordinated playback.
 type CoordinatedPlaybackSuspension struct {
-	inner *raw.AVCoordinatedPlaybackSuspension
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCoordinatedPlaybackSuspension].
-func (x *CoordinatedPlaybackSuspension) Unwrap() *raw.AVCoordinatedPlaybackSuspension { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CoordinatedPlaybackSuspension) ID() objc.ID { return x.inner.Ptr() }
-
-// CoordinatedPlaybackSuspensionFromID adopts an existing object pointer as a CoordinatedPlaybackSuspension (nil for 0).
+// CoordinatedPlaybackSuspensionFromID adopts an existing Objective-C object as a CoordinatedPlaybackSuspension
+// (nil for 0), retaining it and registering a release finalizer.
 func CoordinatedPlaybackSuspensionFromID(id objc.ID) *CoordinatedPlaybackSuspension {
 	if id == 0 {
 		return nil
 	}
-	return &CoordinatedPlaybackSuspension{inner: raw.AVCoordinatedPlaybackSuspensionFromID(id)}
+	x := &CoordinatedPlaybackSuspension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCoordinatedPlaybackSuspension creates a new [CoordinatedPlaybackSuspension].
-func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCoordinatedPlaybackSuspension")), objc.RegisterName("new"))
-	return &CoordinatedPlaybackSuspension{inner: raw.AVCoordinatedPlaybackSuspensionFromID(_id)}
-}
-
-// Ends a suspension.
-//
-// End calls the underlying End.
-func (x *CoordinatedPlaybackSuspension) End() {
-	x.inner.End()
-}
-
-// Ends a suspension and proposes a new playback time to the group.
-//
-// EndProposingNewTime calls the underlying EndProposingNewTime.
-func (x *CoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {
-	x.inner.EndProposingNewTime(time_)
-}
-
-// The reason for the suspension. This will be communicated to other participants while coordination is suspended.
-//
-// Reason calls the underlying Reason.
-func (x *CoordinatedPlaybackSuspension) Reason() string {
-	_r := x.inner.Reason()
-	if _r == nil {
-		return ""
+// coordinatedPlaybackSuspensionAdopt wraps an Objective-C object that this code just created as a
+// CoordinatedPlaybackSuspension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coordinatedPlaybackSuspensionAdopt(id objc.ID) *CoordinatedPlaybackSuspension {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &CoordinatedPlaybackSuspension{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The begin time of the suspension.
-//
-// BeginDate calls the underlying BeginDate.
-func (x *CoordinatedPlaybackSuspension) BeginDate() *foundation.NSDate {
-	return x.inner.BeginDate()
+// Description returns the object's -description text.
+func (x *CoordinatedPlaybackSuspension) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CoordinatedPlaybackSuspension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CoordinatedPlaybackSuspension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CoordinatedPlaybackSuspension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCoordinatedPlaybackSuspension creates a new CoordinatedPlaybackSuspension.
+func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCoordinatedPlaybackSuspension")), objc.RegisterName("new"))
+	return coordinatedPlaybackSuspensionAdopt(_id)
+}
+
+// End ends a suspension.
+func (x *CoordinatedPlaybackSuspension) End() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+}
+
+// Reason the reason for the suspension. This will be communicated to other participants while coordination is suspended.
+func (x *CoordinatedPlaybackSuspension) Reason() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
+	return obj.Wrap(_r)
+}
+
+// BeginDate the begin time of the suspension.
+func (x *CoordinatedPlaybackSuspension) BeginDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginDate"))
+	return obj.Wrap(_r)
 }
 
 // CoordinatedPlaybackSuspensionable is the interface implemented by [CoordinatedPlaybackSuspension], for mocking and DI.
 type CoordinatedPlaybackSuspensionable interface {
-	Unwrap() *raw.AVCoordinatedPlaybackSuspension
+	obj.Object
 	End()
-	EndProposingNewTime(time_ coremedia.CMTime)
-	Reason() string
-	BeginDate() *foundation.NSDate
+	Reason() obj.Object
+	BeginDate() obj.Object
 }
 
 var _ CoordinatedPlaybackSuspensionable = (*CoordinatedPlaybackSuspension)(nil)

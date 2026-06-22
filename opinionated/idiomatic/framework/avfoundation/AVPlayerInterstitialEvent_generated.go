@@ -5,538 +5,381 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that provides instructions for how a player presents interstitial content.
+// PlayerInterstitialEvent is an idiomatic wrapper over the Objective-C class AVPlayerInterstitialEvent.
 //
-// PlayerInterstitialEvent wraps [raw.AVPlayerInterstitialEvent] with a fluent Go API.
+// An object that provides instructions for how a player presents interstitial content.
 type PlayerInterstitialEvent struct {
-	inner *raw.AVPlayerInterstitialEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerInterstitialEvent].
-func (x *PlayerInterstitialEvent) Unwrap() *raw.AVPlayerInterstitialEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerInterstitialEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerInterstitialEventFromID adopts an existing object pointer as a PlayerInterstitialEvent (nil for 0).
+// PlayerInterstitialEventFromID adopts an existing Objective-C object as a PlayerInterstitialEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerInterstitialEventFromID(id objc.ID) *PlayerInterstitialEvent {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerInterstitialEvent{inner: raw.AVPlayerInterstitialEventFromID(id)}
-}
-
-// NewPlayerInterstitialEvent creates a new [PlayerInterstitialEvent].
-func NewPlayerInterstitialEvent() *PlayerInterstitialEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerInterstitialEvent")), objc.RegisterName("new"))
-	return &PlayerInterstitialEvent{inner: raw.AVPlayerInterstitialEventFromID(_id)}
-}
-
-// The player item that represents the primary content.
-//
-// WithPrimaryItem sets the primaryItem property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent {
-	x.inner.SetPrimaryItem(primaryItem.Unwrap())
+	x := &PlayerInterstitialEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// An identifier for the event.
-//
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithIdentifier(identifier string) *PlayerInterstitialEvent {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	return x
-}
-
-// A time within the timeline of the primary content that playback of interstitial content begins.
-//
-// WithTime sets the time_ property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent {
-	x.inner.SetTime(time_)
-	return x
-}
-
-// A date within the date range of the primary content that playback of interstitial content begins.
-//
-// WithDate sets the date property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithDate(date *foundation.NSDate) *PlayerInterstitialEvent {
-	x.inner.SetDate(date)
-	return x
-}
-
-// An array of player item configurations to use as templates for player items that play interstitial content.
-//
-// WithTemplateItems sets the collection, converting the Go slice to an NSArray.
-func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*raw.AVPlayerItem) *PlayerInterstitialEvent {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetTemplateItems(foundation.NSArrayFromID[*raw.AVPlayerItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVPlayerItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetTemplateItems(_arr)
-	return x
-}
-
-// The restrictions the event imposes on the playback of interstitial content.
-//
-// WithRestrictions sets the restrictions property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithRestrictions(restrictions AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
-	x.inner.SetRestrictions(raw.AVPlayerInterstitialEventRestrictions(restrictions))
-	return x
-}
-
-// A time offset at which playback of primary content resumes after interstitial content finishes.
-//
-// WithResumptionOffset sets the resumptionOffset property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithResumptionOffset(resumptionOffset coremedia.CMTime) *PlayerInterstitialEvent {
-	x.inner.SetResumptionOffset(resumptionOffset)
-	return x
-}
-
-// The time offset at which playback of the interstitial ends.
-//
-// WithPlayoutLimit sets the playoutLimit property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithPlayoutLimit(playoutLimit coremedia.CMTime) *PlayerInterstitialEvent {
-	x.inner.SetPlayoutLimit(playoutLimit)
-	return x
-}
-
-// A Boolean value that indicates whether the start time of interstitial playback should snap to a segment boundary of the primary asset.
-//
-// WithAlignsStartWithPrimarySegmentBoundary sets the alignsStartWithPrimarySegmentBoundary property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
-	x.inner.SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary)
-	return x
-}
-
-// A Boolean value that indicates whether the resumption time of primary playback should snap to a segment boundary of the primary asset.
-//
-// WithAlignsResumptionWithPrimarySegmentBoundary sets the alignsResumptionWithPrimarySegmentBoundary property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
-	x.inner.SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary)
-	return x
-}
-
-// A cue to schedule interstitial event playback at a predefined position during primary playback.
-//
-// WithCue sets the cue property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithCue(cue *foundation.NSString) *PlayerInterstitialEvent {
-	x.inner.SetCue(cue)
-	return x
-}
-
-// A Boolean value that indicates whether to schedule this event one time only and suppress subsequent replay.
-//
-// WithWillPlayOnce sets the willPlayOnce property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent {
-	x.inner.SetWillPlayOnce(willPlayOnce)
-	return x
-}
-
-// Attributes of the event that the vendor or app defines.
-//
-// WithUserDefinedAttributes sets the userDefinedAttributes property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent {
-	x.inner.SetUserDefinedAttributes(userDefinedAttributes)
-	return x
-}
-
-// An event’s occupancy on the integrated timeline.
-//
-// WithTimelineOccupancy sets the timelineOccupancy property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent {
-	x.inner.SetTimelineOccupancy(raw.AVPlayerInterstitialEventTimelineOccupancy(timelineOccupancy))
-	return x
-}
-
-// A Boolean value that indicates whether an event supplements the primary content and should present with the primary item.
-//
-// WithSupplementsPrimaryContent sets the supplementsPrimaryContent property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent {
-	x.inner.SetSupplementsPrimaryContent(supplementsPrimaryContent)
-	return x
-}
-
-// A Boolean value that indicates whether an event’s content is dynamic and the server may respond with different interstitial assets for other participants in a coordinated playback session.
-//
-// WithContentMayVary sets the contentMayVary property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent {
-	x.inner.SetContentMayVary(contentMayVary)
-	return x
-}
-
-// The time range within the duration of the interstitial event for which a skip button should be displayed.
-//
-// WithSkipControlTimeRange sets the skipControlTimeRange property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) *PlayerInterstitialEvent {
-	x.inner.SetSkipControlTimeRange(skipControlTimeRange)
-	return x
-}
-
-// The key defined in the AVPlayerInterstitialEventController’s localizedStringsBundle that points to the localized label for the skip button.
-//
-// WithSkipControlLocalizedLabelBundleKey sets the skipControlLocalizedLabelBundleKey property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent {
-	x.inner.SetSkipControlLocalizedLabelBundleKey(foundation.NSStringStringWithUTF8String(skipControlLocalizedLabelBundleKey))
-	return x
-}
-
-// The planned duration of the event.
-//
-// WithPlannedDuration sets the plannedDuration property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithPlannedDuration(plannedDuration coremedia.CMTime) *PlayerInterstitialEvent {
-	x.inner.SetPlannedDuration(plannedDuration)
-	return x
-}
-
-// An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
-//
-// PrimaryItem calls the underlying PrimaryItem.
-func (x *PlayerInterstitialEvent) PrimaryItem() *PlayerItem {
-	_r := x.inner.PrimaryItem()
-	if _r == nil {
+// playerInterstitialEventAdopt wraps an Objective-C object that this code just created as a
+// PlayerInterstitialEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerInterstitialEventAdopt(id objc.ID) *PlayerInterstitialEvent {
+	if id == 0 {
 		return nil
 	}
-	return &PlayerItem{inner: _r}
+	x := &PlayerInterstitialEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// An external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
-//
-// Identifier calls the underlying Identifier.
+// Description returns the object's -description text.
+func (x *PlayerInterstitialEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerInterstitialEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerInterstitialEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerInterstitialEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerInterstitialEvent creates a new PlayerInterstitialEvent.
+func NewPlayerInterstitialEvent() *PlayerInterstitialEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("new"))
+	return playerInterstitialEventAdopt(_id)
+}
+
+// WithPrimaryItem the player item that represents the primary content.
+func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryItem:"), objref.IDOf(primaryItem))
+	return x
+}
+
+// WithIdentifier an identifier for the event.
+func (x *PlayerInterstitialEvent) WithIdentifier(identifier string) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return x
+}
+
+// WithDate a date within the date range of the primary content that playback of interstitial content begins.
+func (x *PlayerInterstitialEvent) WithDate(date obj.Object) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDate:"), objref.IDOf(date))
+	return x
+}
+
+// WithTemplateItems an array of player item configurations to use as templates for player items that play interstitial content.
+func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*PlayerItem) *PlayerInterstitialEvent {
+	_arr := purego.SliceToNSArray(items, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateItems:"), _arr)
+	return x
+}
+
+// WithRestrictions the restrictions the event imposes on the playback of interstitial content.
+func (x *PlayerInterstitialEvent) WithRestrictions(restrictions PlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), restrictions)
+	return x
+}
+
+// WithAlignsStartWithPrimarySegmentBoundary a Boolean value that indicates whether the start time of interstitial playback should snap to a segment boundary of the primary asset.
+func (x *PlayerInterstitialEvent) WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsStartWithPrimarySegmentBoundary:"), alignsStartWithPrimarySegmentBoundary)
+	return x
+}
+
+// WithAlignsResumptionWithPrimarySegmentBoundary a Boolean value that indicates whether the resumption time of primary playback should snap to a segment boundary of the primary asset.
+func (x *PlayerInterstitialEvent) WithAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsResumptionWithPrimarySegmentBoundary:"), alignsResumptionWithPrimarySegmentBoundary)
+	return x
+}
+
+// WithCue a cue to schedule interstitial event playback at a predefined position during primary playback.
+func (x *PlayerInterstitialEvent) WithCue(cue obj.Object) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCue:"), objref.IDOf(cue))
+	return x
+}
+
+// WithWillPlayOnce a Boolean value that indicates whether to schedule this event one time only and suppress subsequent replay.
+func (x *PlayerInterstitialEvent) WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillPlayOnce:"), willPlayOnce)
+	return x
+}
+
+// WithUserDefinedAttributes attributes of the event that the vendor or app defines.
+func (x *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttributes obj.Object) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserDefinedAttributes:"), objref.IDOf(userDefinedAttributes))
+	return x
+}
+
+// WithTimelineOccupancy an event’s occupancy on the integrated timeline.
+func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy PlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimelineOccupancy:"), timelineOccupancy)
+	return x
+}
+
+// WithSupplementsPrimaryContent a Boolean value that indicates whether an event supplements the primary content and should present with the primary item.
+func (x *PlayerInterstitialEvent) WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementsPrimaryContent:"), supplementsPrimaryContent)
+	return x
+}
+
+// WithContentMayVary a Boolean value that indicates whether an event’s content is dynamic and the server may respond with different interstitial assets for other participants in a coordinated playback session.
+func (x *PlayerInterstitialEvent) WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMayVary:"), contentMayVary)
+	return x
+}
+
+// WithSkipControlLocalizedLabelBundleKey the key defined in the AVPlayerInterstitialEventController’s localizedStringsBundle that points to the localized label for the skip button.
+func (x *PlayerInterstitialEvent) WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkipControlLocalizedLabelBundleKey:"), purego.NSString(skipControlLocalizedLabelBundleKey))
+	return x
+}
+
+// PrimaryItem an AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
+func (x *PlayerInterstitialEvent) PrimaryItem() *PlayerItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryItem"))
+	return PlayerItemFromID(_r)
+}
+
+// Identifier an external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
 func (x *PlayerInterstitialEvent) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value equal to kCMTimeInvalid if the event was initialized with a date instead of a time.
-//
-// Time calls the underlying Time.
-func (x *PlayerInterstitialEvent) Time() coremedia.CMTime {
-	return x.inner.Time()
+// Date the date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
+func (x *PlayerInterstitialEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
-// The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
-//
-// Date calls the underlying Date.
-func (x *PlayerInterstitialEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
-}
-
-// An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
+// TemplateItems an array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
 //
 // TemplateItems returns the collection as a Go slice.
 func (x *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
-	arr := x.inner.TemplateItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItem {
-		return &PlayerItem{inner: raw.AVPlayerItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }
 
-// Indicates restrictions on the use of end user playback controls that are imposed by the event.
-//
-// Restrictions calls the underlying Restrictions.
-func (x *PlayerInterstitialEvent) Restrictions() AVPlayerInterstitialEventRestrictions {
-	return AVPlayerInterstitialEventRestrictions(x.inner.Restrictions())
+// Restrictions indicates restrictions on the use of end user playback controls that are imposed by the event.
+func (x *PlayerInterstitialEvent) Restrictions() PlayerInterstitialEventRestrictions {
+	_r := objc.Send[PlayerInterstitialEventRestrictions](objref.IDOf(x), objc.RegisterName("restrictions"))
+	return _r
 }
 
-// Specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback; this value is typically suitable for live broadcasts. The default value is kCMTimeZero.
-//
-// ResumptionOffset calls the underlying ResumptionOffset.
-func (x *PlayerInterstitialEvent) ResumptionOffset() coremedia.CMTime {
-	return x.inner.ResumptionOffset()
-}
-
-// Specifies the offset in time at which playback of the interstitial event should end. Can be any positive numeric value, or invalid. The default value is kCMTimeInvalid, which means there is no limit.
-//
-// PlayoutLimit calls the underlying PlayoutLimit.
-func (x *PlayerInterstitialEvent) PlayoutLimit() coremedia.CMTime {
-	return x.inner.PlayoutLimit()
-}
-
-// Specifies that the start time of interstitial playback should be snapped to a segment boundary of the primary asset If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
-//
-// AlignsStartWithPrimarySegmentBoundary calls the underlying AlignsStartWithPrimarySegmentBoundary.
+// AlignsStartWithPrimarySegmentBoundary specifies that the start time of interstitial playback should be snapped to a segment boundary of the primary asset If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 func (x *PlayerInterstitialEvent) AlignsStartWithPrimarySegmentBoundary() bool {
-	return x.inner.AlignsStartWithPrimarySegmentBoundary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsStartWithPrimarySegmentBoundary"))
+	return _r
 }
 
-// Specifies that the resumption time of primary playback should be snapped to a segment boundary of the primary asset If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
-//
-// AlignsResumptionWithPrimarySegmentBoundary calls the underlying AlignsResumptionWithPrimarySegmentBoundary.
+// AlignsResumptionWithPrimarySegmentBoundary specifies that the resumption time of primary playback should be snapped to a segment boundary of the primary asset If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 func (x *PlayerInterstitialEvent) AlignsResumptionWithPrimarySegmentBoundary() bool {
-	return x.inner.AlignsResumptionWithPrimarySegmentBoundary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignsResumptionWithPrimarySegmentBoundary"))
+	return _r
 }
 
-// The cue property is used to schedule event playback at a predefined position of primary playback.
-//
-// Cue calls the underlying Cue.
-func (x *PlayerInterstitialEvent) Cue() string {
-	_r := x.inner.Cue()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Cue the cue property is used to schedule event playback at a predefined position of primary playback.
+func (x *PlayerInterstitialEvent) Cue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cue"))
+	return obj.Wrap(_r)
 }
 
-// Specifies that the interstitial should be scheduled for playback once only, and suppressed for subsequent replay. The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
-//
-// WillPlayOnce calls the underlying WillPlayOnce.
+// WillPlayOnce specifies that the interstitial should be scheduled for playback once only, and suppressed for subsequent replay. The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
 func (x *PlayerInterstitialEvent) WillPlayOnce() bool {
-	return x.inner.WillPlayOnce()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willPlayOnce"))
+	return _r
 }
 
-// Attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
-//
-// UserDefinedAttributes calls the underlying UserDefinedAttributes.
-func (x *PlayerInterstitialEvent) UserDefinedAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserDefinedAttributes()
+// UserDefinedAttributes attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
+func (x *PlayerInterstitialEvent) UserDefinedAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userDefinedAttributes"))
+	return obj.Wrap(_r)
 }
 
-// The asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event. If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
-//
-// AssetListResponse calls the underlying AssetListResponse.
-func (x *PlayerInterstitialEvent) AssetListResponse() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.AssetListResponse()
+// AssetListResponse the asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event. If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
+func (x *PlayerInterstitialEvent) AssetListResponse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetListResponse"))
+	return obj.Wrap(_r)
 }
 
-// The identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
-//
-// ScheduleIdentifier calls the underlying ScheduleIdentifier.
+// ScheduleIdentifier the identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
 func (x *PlayerInterstitialEvent) ScheduleIdentifier() string {
-	_r := x.inner.ScheduleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
-//
-// TimelineOccupancy calls the underlying TimelineOccupancy.
-func (x *PlayerInterstitialEvent) TimelineOccupancy() AVPlayerInterstitialEventTimelineOccupancy {
-	return AVPlayerInterstitialEventTimelineOccupancy(x.inner.TimelineOccupancy())
+// TimelineOccupancy indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
+func (x *PlayerInterstitialEvent) TimelineOccupancy() PlayerInterstitialEventTimelineOccupancy {
+	_r := objc.Send[PlayerInterstitialEventTimelineOccupancy](objref.IDOf(x), objc.RegisterName("timelineOccupancy"))
+	return _r
 }
 
-// Indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is NO.
-//
-// SupplementsPrimaryContent calls the underlying SupplementsPrimaryContent.
+// SupplementsPrimaryContent indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is NO.
 func (x *PlayerInterstitialEvent) SupplementsPrimaryContent() bool {
-	return x.inner.SupplementsPrimaryContent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supplementsPrimaryContent"))
+	return _r
 }
 
-// Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to NO and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is YES.
-//
-// ContentMayVary calls the underlying ContentMayVary.
+// ContentMayVary indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to NO and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is YES.
 func (x *PlayerInterstitialEvent) ContentMayVary() bool {
-	return x.inner.ContentMayVary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("contentMayVary"))
+	return _r
 }
 
-// The time range within the duration of the interstitial event for which a skip button should be displayed. The start of the time range should indicate at which point the skip button should appear. The duration of the time range should indicate how long the skip button should be available. If this value is set to kCMTimePositiveInfinity, then the skip button will be available for the remainder of the interstitial's duration after appearing. If either the start or duration of the time range is kCMTimeInvalid, then the interstitial will NOT be eligible to be skipped.
-//
-// SkipControlTimeRange calls the underlying SkipControlTimeRange.
-func (x *PlayerInterstitialEvent) SkipControlTimeRange() coremedia.CMTimeRange {
-	return x.inner.SkipControlTimeRange()
-}
-
-// The key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
-//
-// SkipControlLocalizedLabelBundleKey calls the underlying SkipControlLocalizedLabelBundleKey.
+// SkipControlLocalizedLabelBundleKey the key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
 func (x *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string {
-	_r := x.inner.SkipControlLocalizedLabelBundleKey()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipControlLocalizedLabelBundleKey"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPrimaryItem calls the underlying SetPrimaryItem.
-func (x *PlayerInterstitialEvent) SetPrimaryItem(primaryItem *raw.AVPlayerItem) {
-	x.inner.SetPrimaryItem(primaryItem)
+// SetPrimaryItem wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetPrimaryItem(primaryItem *PlayerItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryItem:"), objref.IDOf(primaryItem))
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
-// SetTime calls the underlying SetTime.
-func (x *PlayerInterstitialEvent) SetTime(time_ coremedia.CMTime) {
-	x.inner.SetTime(time_)
+// SetDate wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDate:"), objref.IDOf(date))
 }
 
-// SetDate calls the underlying SetDate.
-func (x *PlayerInterstitialEvent) SetDate(date *foundation.NSDate) {
-	x.inner.SetDate(date)
+// SetTemplateItems wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetTemplateItems(templateItems []*PlayerItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateItems:"), purego.SliceToNSArray(templateItems, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SetTemplateItems calls the underlying SetTemplateItems.
-func (x *PlayerInterstitialEvent) SetTemplateItems(templateItems *foundation.NSArray[*raw.AVPlayerItem]) {
-	x.inner.SetTemplateItems(templateItems)
+// SetRestrictions wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetRestrictions(restrictions PlayerInterstitialEventRestrictions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), restrictions)
 }
 
-// SetRestrictions calls the underlying SetRestrictions.
-func (x *PlayerInterstitialEvent) SetRestrictions(restrictions AVPlayerInterstitialEventRestrictions) {
-	x.inner.SetRestrictions(raw.AVPlayerInterstitialEventRestrictions(restrictions))
-}
-
-// SetResumptionOffset calls the underlying SetResumptionOffset.
-func (x *PlayerInterstitialEvent) SetResumptionOffset(resumptionOffset coremedia.CMTime) {
-	x.inner.SetResumptionOffset(resumptionOffset)
-}
-
-// SetPlayoutLimit calls the underlying SetPlayoutLimit.
-func (x *PlayerInterstitialEvent) SetPlayoutLimit(playoutLimit coremedia.CMTime) {
-	x.inner.SetPlayoutLimit(playoutLimit)
-}
-
-// SetAlignsStartWithPrimarySegmentBoundary calls the underlying SetAlignsStartWithPrimarySegmentBoundary.
+// SetAlignsStartWithPrimarySegmentBoundary wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) {
-	x.inner.SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsStartWithPrimarySegmentBoundary:"), alignsStartWithPrimarySegmentBoundary)
 }
 
-// SetAlignsResumptionWithPrimarySegmentBoundary calls the underlying SetAlignsResumptionWithPrimarySegmentBoundary.
+// SetAlignsResumptionWithPrimarySegmentBoundary wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) {
-	x.inner.SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignsResumptionWithPrimarySegmentBoundary:"), alignsResumptionWithPrimarySegmentBoundary)
 }
 
-// SetCue calls the underlying SetCue.
-func (x *PlayerInterstitialEvent) SetCue(cue *foundation.NSString) {
-	x.inner.SetCue(cue)
+// SetCue wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetCue(cue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCue:"), objref.IDOf(cue))
 }
 
-// SetWillPlayOnce calls the underlying SetWillPlayOnce.
+// SetWillPlayOnce wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetWillPlayOnce(willPlayOnce bool) {
-	x.inner.SetWillPlayOnce(willPlayOnce)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillPlayOnce:"), willPlayOnce)
 }
 
-// SetUserDefinedAttributes calls the underlying SetUserDefinedAttributes.
-func (x *PlayerInterstitialEvent) SetUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetUserDefinedAttributes(userDefinedAttributes)
+// SetUserDefinedAttributes wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetUserDefinedAttributes(userDefinedAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserDefinedAttributes:"), objref.IDOf(userDefinedAttributes))
 }
 
-// SetTimelineOccupancy calls the underlying SetTimelineOccupancy.
-func (x *PlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) {
-	x.inner.SetTimelineOccupancy(raw.AVPlayerInterstitialEventTimelineOccupancy(timelineOccupancy))
+// SetTimelineOccupancy wraps the corresponding Objective-C method.
+func (x *PlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy PlayerInterstitialEventTimelineOccupancy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimelineOccupancy:"), timelineOccupancy)
 }
 
-// SetSupplementsPrimaryContent calls the underlying SetSupplementsPrimaryContent.
+// SetSupplementsPrimaryContent wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetSupplementsPrimaryContent(supplementsPrimaryContent bool) {
-	x.inner.SetSupplementsPrimaryContent(supplementsPrimaryContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementsPrimaryContent:"), supplementsPrimaryContent)
 }
 
-// SetContentMayVary calls the underlying SetContentMayVary.
+// SetContentMayVary wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetContentMayVary(contentMayVary bool) {
-	x.inner.SetContentMayVary(contentMayVary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMayVary:"), contentMayVary)
 }
 
-// Indicates the event's planned duration. The default value is kCMTimeInvalid.
-//
-// PlannedDuration calls the underlying PlannedDuration.
-func (x *PlayerInterstitialEvent) PlannedDuration() coremedia.CMTime {
-	return x.inner.PlannedDuration()
-}
-
-// SetPlannedDuration calls the underlying SetPlannedDuration.
-func (x *PlayerInterstitialEvent) SetPlannedDuration(plannedDuration coremedia.CMTime) {
-	x.inner.SetPlannedDuration(plannedDuration)
-}
-
-// SetSkipControlTimeRange calls the underlying SetSkipControlTimeRange.
-func (x *PlayerInterstitialEvent) SetSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) {
-	x.inner.SetSkipControlTimeRange(skipControlTimeRange)
-}
-
-// SetSkipControlLocalizedLabelBundleKey calls the underlying SetSkipControlLocalizedLabelBundleKey.
+// SetSkipControlLocalizedLabelBundleKey wraps the corresponding Objective-C method.
 func (x *PlayerInterstitialEvent) SetSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) {
-	x.inner.SetSkipControlLocalizedLabelBundleKey(foundation.NSStringStringWithUTF8String(skipControlLocalizedLabelBundleKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkipControlLocalizedLabelBundleKey:"), purego.NSString(skipControlLocalizedLabelBundleKey))
 }
 
 // PlayerInterstitialEventable is the interface implemented by [PlayerInterstitialEvent], for mocking and DI.
 type PlayerInterstitialEventable interface {
-	Unwrap() *raw.AVPlayerInterstitialEvent
+	obj.Object
 	WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent
 	WithIdentifier(identifier string) *PlayerInterstitialEvent
-	WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent
-	WithDate(date *foundation.NSDate) *PlayerInterstitialEvent
-	WithTemplateItems(items ...*raw.AVPlayerItem) *PlayerInterstitialEvent
-	WithRestrictions(restrictions AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent
-	WithResumptionOffset(resumptionOffset coremedia.CMTime) *PlayerInterstitialEvent
-	WithPlayoutLimit(playoutLimit coremedia.CMTime) *PlayerInterstitialEvent
+	WithDate(date obj.Object) *PlayerInterstitialEvent
+	WithTemplateItems(items ...*PlayerItem) *PlayerInterstitialEvent
+	WithRestrictions(restrictions PlayerInterstitialEventRestrictions) *PlayerInterstitialEvent
 	WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent
 	WithAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent
-	WithCue(cue *foundation.NSString) *PlayerInterstitialEvent
+	WithCue(cue obj.Object) *PlayerInterstitialEvent
 	WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent
-	WithUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent
-	WithTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent
+	WithUserDefinedAttributes(userDefinedAttributes obj.Object) *PlayerInterstitialEvent
+	WithTimelineOccupancy(timelineOccupancy PlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent
 	WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent
 	WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent
-	WithSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) *PlayerInterstitialEvent
 	WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent
-	WithPlannedDuration(plannedDuration coremedia.CMTime) *PlayerInterstitialEvent
 	PrimaryItem() *PlayerItem
 	Identifier() string
-	Time() coremedia.CMTime
-	Date() *foundation.NSDate
+	Date() obj.Object
 	TemplateItems() []*PlayerItem
-	Restrictions() AVPlayerInterstitialEventRestrictions
-	ResumptionOffset() coremedia.CMTime
-	PlayoutLimit() coremedia.CMTime
+	Restrictions() PlayerInterstitialEventRestrictions
 	AlignsStartWithPrimarySegmentBoundary() bool
 	AlignsResumptionWithPrimarySegmentBoundary() bool
-	Cue() string
+	Cue() obj.Object
 	WillPlayOnce() bool
-	UserDefinedAttributes() *foundation.NSDictionary[objc.ID, objc.ID]
-	AssetListResponse() *foundation.NSDictionary[objc.ID, objc.ID]
+	UserDefinedAttributes() obj.Object
+	AssetListResponse() obj.Object
 	ScheduleIdentifier() string
-	TimelineOccupancy() AVPlayerInterstitialEventTimelineOccupancy
+	TimelineOccupancy() PlayerInterstitialEventTimelineOccupancy
 	SupplementsPrimaryContent() bool
 	ContentMayVary() bool
-	SkipControlTimeRange() coremedia.CMTimeRange
 	SkipControlLocalizedLabelBundleKey() string
-	SetPrimaryItem(primaryItem *raw.AVPlayerItem)
+	SetPrimaryItem(primaryItem *PlayerItem)
 	SetIdentifier(identifier string)
-	SetTime(time_ coremedia.CMTime)
-	SetDate(date *foundation.NSDate)
-	SetTemplateItems(templateItems *foundation.NSArray[*raw.AVPlayerItem])
-	SetRestrictions(restrictions AVPlayerInterstitialEventRestrictions)
-	SetResumptionOffset(resumptionOffset coremedia.CMTime)
-	SetPlayoutLimit(playoutLimit coremedia.CMTime)
+	SetDate(date obj.Object)
+	SetTemplateItems(templateItems []*PlayerItem)
+	SetRestrictions(restrictions PlayerInterstitialEventRestrictions)
 	SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool)
 	SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool)
-	SetCue(cue *foundation.NSString)
+	SetCue(cue obj.Object)
 	SetWillPlayOnce(willPlayOnce bool)
-	SetUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID])
-	SetTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy)
+	SetUserDefinedAttributes(userDefinedAttributes obj.Object)
+	SetTimelineOccupancy(timelineOccupancy PlayerInterstitialEventTimelineOccupancy)
 	SetSupplementsPrimaryContent(supplementsPrimaryContent bool)
 	SetContentMayVary(contentMayVary bool)
-	PlannedDuration() coremedia.CMTime
-	SetPlannedDuration(plannedDuration coremedia.CMTime)
-	SetSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange)
 	SetSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string)
 }
 

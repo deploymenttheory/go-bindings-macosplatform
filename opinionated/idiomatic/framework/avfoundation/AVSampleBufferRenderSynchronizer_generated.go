@@ -5,184 +5,143 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object used to synchronize multiple queued sample buffers to a single timeline.
+// SampleBufferRenderSynchronizer is an idiomatic wrapper over the Objective-C class AVSampleBufferRenderSynchronizer.
 //
-// SampleBufferRenderSynchronizer wraps [raw.AVSampleBufferRenderSynchronizer] with a fluent Go API.
+// An object used to synchronize multiple queued sample buffers to a single timeline.
 type SampleBufferRenderSynchronizer struct {
-	inner *raw.AVSampleBufferRenderSynchronizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSampleBufferRenderSynchronizer].
-func (x *SampleBufferRenderSynchronizer) Unwrap() *raw.AVSampleBufferRenderSynchronizer {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleBufferRenderSynchronizer) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleBufferRenderSynchronizerFromID adopts an existing object pointer as a SampleBufferRenderSynchronizer (nil for 0).
+// SampleBufferRenderSynchronizerFromID adopts an existing Objective-C object as a SampleBufferRenderSynchronizer
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleBufferRenderSynchronizerFromID(id objc.ID) *SampleBufferRenderSynchronizer {
 	if id == 0 {
 		return nil
 	}
-	return &SampleBufferRenderSynchronizer{inner: raw.AVSampleBufferRenderSynchronizerFromID(id)}
+	x := &SampleBufferRenderSynchronizer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSampleBufferRenderSynchronizer creates a new [SampleBufferRenderSynchronizer].
+// sampleBufferRenderSynchronizerAdopt wraps an Objective-C object that this code just created as a
+// SampleBufferRenderSynchronizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleBufferRenderSynchronizerAdopt(id objc.ID) *SampleBufferRenderSynchronizer {
+	if id == 0 {
+		return nil
+	}
+	x := &SampleBufferRenderSynchronizer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SampleBufferRenderSynchronizer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleBufferRenderSynchronizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleBufferRenderSynchronizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferRenderSynchronizer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleBufferRenderSynchronizer creates a new SampleBufferRenderSynchronizer.
 func NewSampleBufferRenderSynchronizer() *SampleBufferRenderSynchronizer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleBufferRenderSynchronizer")), objc.RegisterName("new"))
-	return &SampleBufferRenderSynchronizer{inner: raw.AVSampleBufferRenderSynchronizerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferRenderSynchronizer")), objc.RegisterName("new"))
+	return sampleBufferRenderSynchronizerAdopt(_id)
 }
 
-// The current playback rate.
-//
-// WithRate sets the rate property and returns the receiver for chaining.
+// WithRate the current playback rate.
 func (x *SampleBufferRenderSynchronizer) WithRate(rate float32) *SampleBufferRenderSynchronizer {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
-// A Boolean value that Indicates whether the playback should start immediately on rate change requests.
-//
-// WithDelaysRateChangeUntilHasSufficientMediaData sets the delaysRateChangeUntilHasSufficientMediaData property and returns the receiver for chaining.
+// WithDelaysRateChangeUntilHasSufficientMediaData a Boolean value that Indicates whether the playback should start immediately on rate change requests.
 func (x *SampleBufferRenderSynchronizer) WithDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool) *SampleBufferRenderSynchronizer {
-	x.inner.SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRateChangeUntilHasSufficientMediaData:"), delaysRateChangeUntilHasSufficientMediaData)
 	return x
 }
 
-// Returns the current time of the synchronizer.
-//
-// CurrentTime calls the underlying CurrentTime.
-func (x *SampleBufferRenderSynchronizer) CurrentTime() coremedia.CMTime {
-	return x.inner.CurrentTime()
+// Timebase the synchronizer's rendering timebase, which governs how time stamps are interpreted. By default, this timebase will be driven by the clock of an added AVSampleBufferAudioRenderer. If no AVSampleBufferAudioRenderer has been added, the source clock will be the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime). The timebase is a read-only timebase. Use the rate property and corresponding methods to adjust the timebase.
+func (x *SampleBufferRenderSynchronizer) Timebase() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timebase"))
+	return obj.Wrap(_r)
 }
 
-// Sets the renderer’s time and rate.
-//
-// SetRateTime calls the underlying SetRateTime.
-func (x *SampleBufferRenderSynchronizer) SetRateTime(rate float32, time_ coremedia.CMTime) {
-	x.inner.SetRateTime(rate, time_)
-}
-
-// Sets the playback rate and the relationship between the current time and host time.
-//
-// SetRateTimeAtHostTime calls the underlying SetRateTimeAtHostTime.
-func (x *SampleBufferRenderSynchronizer) SetRateTimeAtHostTime(rate float32, time_ coremedia.CMTime, hostTime coremedia.CMTime) {
-	x.inner.SetRateTimeAtHostTime(rate, time_, hostTime)
-}
-
-// The synchronizer's rendering timebase, which governs how time stamps are interpreted. By default, this timebase will be driven by the clock of an added AVSampleBufferAudioRenderer. If no AVSampleBufferAudioRenderer has been added, the source clock will be the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime). The timebase is a read-only timebase. Use the rate property and corresponding methods to adjust the timebase.
-//
-// Timebase calls the underlying Timebase.
-func (x *SampleBufferRenderSynchronizer) Timebase() unsafe.Pointer {
-	return x.inner.Timebase()
-}
-
-// Playback rate. Indicates the current rate of rendering. A value of 0.0 means "stopped"; a value of 1.0 means "play at the natural rate of the media". Must be greater than or equal to 0.0.
-//
-// Rate calls the underlying Rate.
+// Rate playback rate. Indicates the current rate of rendering. A value of 0.0 means "stopped"; a value of 1.0 means "play at the natural rate of the media". Must be greater than or equal to 0.0.
 func (x *SampleBufferRenderSynchronizer) Rate() float32 {
-	return x.inner.Rate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// SetRate calls the underlying SetRate.
+// SetRate wraps the corresponding Objective-C method.
 func (x *SampleBufferRenderSynchronizer) SetRate(rate float32) {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
-// Indicates whether the playback should be started immediately on rate change request. If set to YES, playback will be delayed if the value of hasSufficientMediaDataForReliablePlaybackStart of any added renderer is NO. If set to NO, playback will attempt to start immediately regardless of the value of hasSufficientMediaDataForReliablePlaybackStart of added renderers. Default is YES.
-//
-// DelaysRateChangeUntilHasSufficientMediaData calls the underlying DelaysRateChangeUntilHasSufficientMediaData.
+// DelaysRateChangeUntilHasSufficientMediaData indicates whether the playback should be started immediately on rate change request. If set to YES, playback will be delayed if the value of hasSufficientMediaDataForReliablePlaybackStart of any added renderer is NO. If set to NO, playback will attempt to start immediately regardless of the value of hasSufficientMediaDataForReliablePlaybackStart of added renderers. Default is YES.
 func (x *SampleBufferRenderSynchronizer) DelaysRateChangeUntilHasSufficientMediaData() bool {
-	return x.inner.DelaysRateChangeUntilHasSufficientMediaData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysRateChangeUntilHasSufficientMediaData"))
+	return _r
 }
 
-// SetDelaysRateChangeUntilHasSufficientMediaData calls the underlying SetDelaysRateChangeUntilHasSufficientMediaData.
+// SetDelaysRateChangeUntilHasSufficientMediaData wraps the corresponding Objective-C method.
 func (x *SampleBufferRenderSynchronizer) SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool) {
-	x.inner.SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRateChangeUntilHasSufficientMediaData:"), delaysRateChangeUntilHasSufficientMediaData)
 }
 
-// Adds a renderer to the list of renderers under the synchronizer’s control.
-//
-// AddRenderer calls the underlying AddRenderer.
-func (x *SampleBufferRenderSynchronizer) AddRenderer(renderer raw.AVQueuedSampleBufferRendering) {
-	x.inner.AddRenderer(renderer)
+// Renderers array of id<AVQueuedSampleBufferRendering> currently attached to the synchronizer. A list of renderers added to and not removed from the synchronizer. The list also includes renderers that have been scheduled to be removed but have not yet been removed. This property is not KVO observable.
+func (x *SampleBufferRenderSynchronizer) Renderers() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderers"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Removes a renderer from the synchronizer.
-//
-// RemoveRendererAtTimeCompletionHandler calls the underlying RemoveRendererAtTimeCompletionHandler.
-func (x *SampleBufferRenderSynchronizer) RemoveRendererAtTimeCompletionHandler(renderer raw.AVQueuedSampleBufferRendering, time_ coremedia.CMTime, completionHandler func(bool)) {
-	x.inner.RemoveRendererAtTimeCompletionHandler(renderer, time_, completionHandler)
+// AddBoundaryTimeObserverForTimesQueueUsing requests invocation of a block when specified times are traversed during normal rendering.
+func (x *SampleBufferRenderSynchronizer) AddBoundaryTimeObserverForTimesQueueUsing(times []obj.Object, queue obj.Object, block func()) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
+	return obj.Wrap(_r)
 }
 
-// Array of id<AVQueuedSampleBufferRendering> currently attached to the synchronizer. A list of renderers added to and not removed from the synchronizer. The list also includes renderers that have been scheduled to be removed but have not yet been removed. This property is not KVO observable.
-//
-// Renderers calls the underlying Renderers.
-func (x *SampleBufferRenderSynchronizer) Renderers() *foundation.NSArray[raw.AVQueuedSampleBufferRendering] {
-	return x.inner.Renderers()
-}
-
-// Requests invocation of a block during rendering at specified time intervals.
-//
-// AddPeriodicTimeObserverForIntervalQueueUsing calls the underlying AddPeriodicTimeObserverForIntervalQueueUsing.
-func (x *SampleBufferRenderSynchronizer) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID {
-	return x.inner.AddPeriodicTimeObserverForIntervalQueueUsing(interval, queue, block)
-}
-
-// Requests invocation of a block when specified times are traversed during normal rendering.
-//
-// AddBoundaryTimeObserverForTimesQueueUsing calls the underlying AddBoundaryTimeObserverForTimesQueueUsing.
-func (x *SampleBufferRenderSynchronizer) AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID {
-	return x.inner.AddBoundaryTimeObserverForTimesQueueUsing(times, queue, block)
-}
-
-// Cancels the specified time observer.
-//
-// RemoveTimeObserver calls the underlying RemoveTimeObserver.
-func (x *SampleBufferRenderSynchronizer) RemoveTimeObserver(observer objc.ID) {
-	x.inner.RemoveTimeObserver(observer)
-}
-
-// IntendedSpatialAudioExperience calls the underlying IntendedSpatialAudioExperience.
-func (x *SampleBufferRenderSynchronizer) IntendedSpatialAudioExperience() unsafe.Pointer {
-	return x.inner.IntendedSpatialAudioExperience()
-}
-
-// SetIntendedSpatialAudioExperience calls the underlying SetIntendedSpatialAudioExperience.
-func (x *SampleBufferRenderSynchronizer) SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) {
-	x.inner.SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience)
+// RemoveTimeObserver cancels the specified time observer.
+func (x *SampleBufferRenderSynchronizer) RemoveTimeObserver(observer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTimeObserver:"), objref.IDOf(observer))
 }
 
 // SampleBufferRenderSynchronizerable is the interface implemented by [SampleBufferRenderSynchronizer], for mocking and DI.
 type SampleBufferRenderSynchronizerable interface {
-	Unwrap() *raw.AVSampleBufferRenderSynchronizer
+	obj.Object
 	WithRate(rate float32) *SampleBufferRenderSynchronizer
 	WithDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool) *SampleBufferRenderSynchronizer
-	CurrentTime() coremedia.CMTime
-	SetRateTime(rate float32, time_ coremedia.CMTime)
-	SetRateTimeAtHostTime(rate float32, time_ coremedia.CMTime, hostTime coremedia.CMTime)
-	Timebase() unsafe.Pointer
+	Timebase() obj.Object
 	Rate() float32
 	SetRate(rate float32)
 	DelaysRateChangeUntilHasSufficientMediaData() bool
 	SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool)
-	AddRenderer(renderer raw.AVQueuedSampleBufferRendering)
-	RemoveRendererAtTimeCompletionHandler(renderer raw.AVQueuedSampleBufferRendering, time_ coremedia.CMTime, completionHandler func(bool))
-	Renderers() *foundation.NSArray[raw.AVQueuedSampleBufferRendering]
-	AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID
-	AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID
-	RemoveTimeObserver(observer objc.ID)
-	IntendedSpatialAudioExperience() unsafe.Pointer
-	SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer)
+	Renderers() []obj.Object
+	AddBoundaryTimeObserverForTimesQueueUsing(times []obj.Object, queue obj.Object, block func()) obj.Object
+	RemoveTimeObserver(observer obj.Object)
 }
 
 var _ SampleBufferRenderSynchronizerable = (*SampleBufferRenderSynchronizer)(nil)

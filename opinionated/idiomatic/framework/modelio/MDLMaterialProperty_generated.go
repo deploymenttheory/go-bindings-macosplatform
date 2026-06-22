@@ -5,374 +5,302 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A definition for one specific aspect of the rendering parameters for a material.
+// MaterialProperty is an idiomatic wrapper over the Objective-C class MDLMaterialProperty.
 //
-// MaterialProperty wraps [raw.MDLMaterialProperty] with a fluent Go API.
+// A definition for one specific aspect of the rendering parameters for a material.
 type MaterialProperty struct {
-	inner *raw.MDLMaterialProperty
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMaterialProperty].
-func (x *MaterialProperty) Unwrap() *raw.MDLMaterialProperty { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MaterialProperty) ID() objc.ID { return x.inner.Ptr() }
-
-// MaterialPropertyFromID adopts an existing object pointer as a MaterialProperty (nil for 0).
+// MaterialPropertyFromID adopts an existing Objective-C object as a MaterialProperty
+// (nil for 0), retaining it and registering a release finalizer.
 func MaterialPropertyFromID(id objc.ID) *MaterialProperty {
 	if id == 0 {
 		return nil
 	}
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(id)}
-}
-
-// Initializes a material property without a value.
-//
-// NewMaterialPropertyWithNameSemantic creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemantic(name string, semantic MDLMaterialSemantic) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic))
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a scalar value.
-//
-// NewMaterialPropertyWithNameSemanticFloat creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat(name string, semantic MDLMaterialSemantic, value float32) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a 2-component vector value.
-//
-// NewMaterialPropertyWithNameSemanticFloat2 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat2(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a 3-component vector value.
-//
-// NewMaterialPropertyWithNameSemanticFloat3 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat3(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a 4-component vector value.
-//
-// NewMaterialPropertyWithNameSemanticFloat4 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat4(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a 4 x 4 matrix value.
-//
-// NewMaterialPropertyWithNameSemanticMatrix4x4 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:matrix4x4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a URL value.
-//
-// NewMaterialPropertyWithNameSemanticURL creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticURL(name string, semantic MDLMaterialSemantic, uRL string) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:URL:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a string value.
-//
-// NewMaterialPropertyWithNameSemanticString creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticString(name string, semantic MDLMaterialSemantic, string_ string) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:string:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a texture sampler object.
-//
-// NewMaterialPropertyWithNameSemanticTextureSampler creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic MDLMaterialSemantic, textureSampler *raw.MDLTextureSampler) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:textureSampler:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), textureSampler.Ptr())
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// Initializes a material property with a color value.
-//
-// NewMaterialPropertyWithNameSemanticColor creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticColor(name string, semantic MDLMaterialSemantic, color unsafe.Pointer) *MaterialProperty {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), color)
-	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
-}
-
-// The semantic meaning for the material property’s value.
-//
-// WithSemantic sets the semantic property and returns the receiver for chaining.
-func (x *MaterialProperty) WithSemantic(semantic MDLMaterialSemantic) *MaterialProperty {
-	x.inner.SetSemantic(raw.MDLMaterialSemantic(semantic))
+	x := &MaterialProperty{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The data type stored in the material property’s value.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *MaterialProperty) WithType(type_ MDLMaterialPropertyType) *MaterialProperty {
-	x.inner.SetType(raw.MDLMaterialPropertyType(type_))
-	return x
-}
-
-// A descriptive name for the material property.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *MaterialProperty) WithName(name string) *MaterialProperty {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// The string value for the material.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
-func (x *MaterialProperty) WithStringValue(stringValue string) *MaterialProperty {
-	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
-	return x
-}
-
-// The URL value for the material property—typically, the URL to a texture image.
-//
-// WithURLValue sets the uRLValue property and returns the receiver for chaining.
-func (x *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
-	x.inner.SetURLValue(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRLValue)))
-	return x
-}
-
-// A texture sampler object that provides the texture image value for the material property.
-//
-// WithTextureSamplerValue sets the textureSamplerValue property and returns the receiver for chaining.
-func (x *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
-	x.inner.SetTextureSamplerValue(textureSamplerValue.Unwrap())
-	return x
-}
-
-// The scalar floating-point value for the material property.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
-func (x *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty {
-	x.inner.SetFloatValue(floatValue)
-	return x
-}
-
-// WithLuminance sets the luminance property and returns the receiver for chaining.
-func (x *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
-	x.inner.SetLuminance(luminance)
-	return x
-}
-
-// Sets the material property’s attributes to those of the specified material property.
-//
-// SetProperties calls the underlying SetProperties.
-func (x *MaterialProperty) SetProperties(property *raw.MDLMaterialProperty) {
-	x.inner.SetProperties(property)
-}
-
-// Semantic calls the underlying Semantic.
-func (x *MaterialProperty) Semantic() MDLMaterialSemantic {
-	return MDLMaterialSemantic(x.inner.Semantic())
-}
-
-// SetSemantic calls the underlying SetSemantic.
-func (x *MaterialProperty) SetSemantic(semantic MDLMaterialSemantic) {
-	x.inner.SetSemantic(raw.MDLMaterialSemantic(semantic))
-}
-
-// Type calls the underlying Type.
-func (x *MaterialProperty) Type() MDLMaterialPropertyType {
-	return MDLMaterialPropertyType(x.inner.Type())
-}
-
-// SetType calls the underlying SetType.
-func (x *MaterialProperty) SetType(type_ MDLMaterialPropertyType) {
-	x.inner.SetType(raw.MDLMaterialPropertyType(type_))
-}
-
-// @see MDLNamed
-//
-// Name calls the underlying Name.
-func (x *MaterialProperty) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetName calls the underlying SetName.
-func (x *MaterialProperty) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// StringValue calls the underlying StringValue.
-func (x *MaterialProperty) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetStringValue calls the underlying SetStringValue.
-func (x *MaterialProperty) SetStringValue(stringValue string) {
-	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
-}
-
-// URLValue calls the underlying URLValue.
-func (x *MaterialProperty) URLValue() *foundation.NSURL {
-	return x.inner.URLValue()
-}
-
-// SetURLValue calls the underlying SetURLValue.
-func (x *MaterialProperty) SetURLValue(uRLValue string) {
-	x.inner.SetURLValue(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRLValue)))
-}
-
-// TextureSamplerValue calls the underlying TextureSamplerValue.
-func (x *MaterialProperty) TextureSamplerValue() *TextureSampler {
-	_r := x.inner.TextureSamplerValue()
-	if _r == nil {
+// materialPropertyAdopt wraps an Objective-C object that this code just created as a
+// MaterialProperty (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func materialPropertyAdopt(id objc.ID) *MaterialProperty {
+	if id == 0 {
 		return nil
 	}
-	return &TextureSampler{inner: _r}
+	x := &MaterialProperty{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetTextureSamplerValue calls the underlying SetTextureSamplerValue.
-func (x *MaterialProperty) SetTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler) {
-	x.inner.SetTextureSamplerValue(textureSamplerValue)
+// Description returns the object's -description text.
+func (x *MaterialProperty) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Color calls the underlying Color.
-func (x *MaterialProperty) Color() unsafe.Pointer {
-	return x.inner.Color()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MaterialProperty) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetColor calls the underlying SetColor.
-func (x *MaterialProperty) SetColor(color unsafe.Pointer) {
-	x.inner.SetColor(color)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MaterialProperty) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// FloatValue calls the underlying FloatValue.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MaterialProperty) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMaterialPropertyWithNameSemantic initializes a material property without a value.
+func NewMaterialPropertyWithNameSemantic(name string, semantic MaterialSemantic) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:"), purego.NSString(name), semantic)
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticFloat initializes a material property with a scalar value.
+func NewMaterialPropertyWithNameSemanticFloat(name string, semantic MaterialSemantic, value float32) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float:"), purego.NSString(name), semantic, value)
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticURL initializes a material property with a URL value.
+func NewMaterialPropertyWithNameSemanticURL(name string, semantic MaterialSemantic, uRL string) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:URL:"), purego.NSString(name), semantic, rt.FileURL(uRL))
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticString initializes a material property with a string value.
+func NewMaterialPropertyWithNameSemanticString(name string, semantic MaterialSemantic, string_ string) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:string:"), purego.NSString(name), semantic, purego.NSString(string_))
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticTextureSampler initializes a material property with a texture sampler object.
+func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic MaterialSemantic, textureSampler *TextureSampler) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:textureSampler:"), purego.NSString(name), semantic, objref.IDOf(textureSampler))
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticColor initializes a material property with a color value.
+func NewMaterialPropertyWithNameSemanticColor(name string, semantic MaterialSemantic, color obj.Object) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), purego.NSString(name), semantic, objref.IDOf(color))
+	return materialPropertyAdopt(_id)
+}
+
+// WithSemantic the semantic meaning for the material property’s value.
+func (x *MaterialProperty) WithSemantic(semantic MaterialSemantic) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSemantic:"), semantic)
+	return x
+}
+
+// WithType the data type stored in the material property’s value.
+func (x *MaterialProperty) WithType(type_ MaterialPropertyType) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
+	return x
+}
+
+// WithName a descriptive name for the material property.
+func (x *MaterialProperty) WithName(name string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithStringValue the string value for the material.
+func (x *MaterialProperty) WithStringValue(stringValue string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return x
+}
+
+// WithURLValue the URL value for the material property—typically, the URL to a texture image.
+func (x *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLValue:"), rt.FileURL(uRLValue))
+	return x
+}
+
+// WithTextureSamplerValue a texture sampler object that provides the texture image value for the material property.
+func (x *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureSamplerValue:"), objref.IDOf(textureSamplerValue))
+	return x
+}
+
+// WithColor the color value for the material property.
+func (x *MaterialProperty) WithColor(color obj.Object) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return x
+}
+
+// WithFloatValue the scalar floating-point value for the material property.
+func (x *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
+	return x
+}
+
+// WithLuminance sets the property and returns the receiver so calls can be chained.
+func (x *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminance:"), luminance)
+	return x
+}
+
+// SetProperties sets the material property’s attributes to those of the specified material property.
+func (x *MaterialProperty) SetProperties(property *MaterialProperty) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(property))
+}
+
+// Semantic wraps the corresponding Objective-C method.
+func (x *MaterialProperty) Semantic() MaterialSemantic {
+	_r := objc.Send[MaterialSemantic](objref.IDOf(x), objc.RegisterName("semantic"))
+	return _r
+}
+
+// SetSemantic wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetSemantic(semantic MaterialSemantic) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSemantic:"), semantic)
+}
+
+// Type wraps the corresponding Objective-C method.
+func (x *MaterialProperty) Type() MaterialPropertyType {
+	_r := objc.Send[MaterialPropertyType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
+
+// SetType wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetType(type_ MaterialPropertyType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *MaterialProperty) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetName wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetName(name string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+}
+
+// StringValue wraps the corresponding Objective-C method.
+func (x *MaterialProperty) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetStringValue wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetStringValue(stringValue string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+}
+
+// URLValue wraps the corresponding Objective-C method.
+func (x *MaterialProperty) URLValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLValue"))
+	return obj.Wrap(_r)
+}
+
+// SetURLValue wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetURLValue(uRLValue string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLValue:"), rt.FileURL(uRLValue))
+}
+
+// TextureSamplerValue wraps the corresponding Objective-C method.
+func (x *MaterialProperty) TextureSamplerValue() *TextureSampler {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureSamplerValue"))
+	return TextureSamplerFromID(_r)
+}
+
+// SetTextureSamplerValue wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetTextureSamplerValue(textureSamplerValue *TextureSampler) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureSamplerValue:"), objref.IDOf(textureSamplerValue))
+}
+
+// Color wraps the corresponding Objective-C method.
+func (x *MaterialProperty) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
+}
+
+// SetColor wraps the corresponding Objective-C method.
+func (x *MaterialProperty) SetColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+}
+
+// FloatValue wraps the corresponding Objective-C method.
 func (x *MaterialProperty) FloatValue() float32 {
-	return x.inner.FloatValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+	return _r
 }
 
-// SetFloatValue calls the underlying SetFloatValue.
+// SetFloatValue wraps the corresponding Objective-C method.
 func (x *MaterialProperty) SetFloatValue(floatValue float32) {
-	x.inner.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }
 
-// Float2Value calls the underlying Float2Value.
-func (x *MaterialProperty) Float2Value() unsafe.Pointer {
-	return x.inner.Float2Value()
-}
-
-// SetFloat2Value calls the underlying SetFloat2Value.
-func (x *MaterialProperty) SetFloat2Value(float2Value unsafe.Pointer) {
-	x.inner.SetFloat2Value(float2Value)
-}
-
-// Float3Value calls the underlying Float3Value.
-func (x *MaterialProperty) Float3Value() unsafe.Pointer {
-	return x.inner.Float3Value()
-}
-
-// SetFloat3Value calls the underlying SetFloat3Value.
-func (x *MaterialProperty) SetFloat3Value(float3Value unsafe.Pointer) {
-	x.inner.SetFloat3Value(float3Value)
-}
-
-// Float4Value calls the underlying Float4Value.
-func (x *MaterialProperty) Float4Value() unsafe.Pointer {
-	return x.inner.Float4Value()
-}
-
-// SetFloat4Value calls the underlying SetFloat4Value.
-func (x *MaterialProperty) SetFloat4Value(float4Value unsafe.Pointer) {
-	x.inner.SetFloat4Value(float4Value)
-}
-
-// Matrix4x4 calls the underlying Matrix4x4.
-func (x *MaterialProperty) Matrix4x4() unsafe.Pointer {
-	return x.inner.Matrix4x4()
-}
-
-// SetMatrix4x4 calls the underlying SetMatrix4x4.
-func (x *MaterialProperty) SetMatrix4x4(matrix4x4 unsafe.Pointer) {
-	x.inner.SetMatrix4x4(matrix4x4)
-}
-
-// Luminance calls the underlying Luminance.
+// Luminance wraps the corresponding Objective-C method.
 func (x *MaterialProperty) Luminance() float32 {
-	return x.inner.Luminance()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("luminance"))
+	return _r
 }
 
-// SetLuminance calls the underlying SetLuminance.
+// SetLuminance wraps the corresponding Objective-C method.
 func (x *MaterialProperty) SetLuminance(luminance float32) {
-	x.inner.SetLuminance(luminance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminance:"), luminance)
 }
 
 // MaterialPropertyable is the interface implemented by [MaterialProperty], for mocking and DI.
 type MaterialPropertyable interface {
-	Unwrap() *raw.MDLMaterialProperty
-	WithSemantic(semantic MDLMaterialSemantic) *MaterialProperty
-	WithType(type_ MDLMaterialPropertyType) *MaterialProperty
+	obj.Object
+	WithSemantic(semantic MaterialSemantic) *MaterialProperty
+	WithType(type_ MaterialPropertyType) *MaterialProperty
 	WithName(name string) *MaterialProperty
 	WithStringValue(stringValue string) *MaterialProperty
 	WithURLValue(uRLValue string) *MaterialProperty
 	WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty
+	WithColor(color obj.Object) *MaterialProperty
 	WithFloatValue(floatValue float32) *MaterialProperty
 	WithLuminance(luminance float32) *MaterialProperty
-	SetProperties(property *raw.MDLMaterialProperty)
-	Semantic() MDLMaterialSemantic
-	SetSemantic(semantic MDLMaterialSemantic)
-	Type() MDLMaterialPropertyType
-	SetType(type_ MDLMaterialPropertyType)
+	SetProperties(property *MaterialProperty)
+	Semantic() MaterialSemantic
+	SetSemantic(semantic MaterialSemantic)
+	Type() MaterialPropertyType
+	SetType(type_ MaterialPropertyType)
 	Name() string
 	SetName(name string)
 	StringValue() string
 	SetStringValue(stringValue string)
-	URLValue() *foundation.NSURL
+	URLValue() obj.Object
 	SetURLValue(uRLValue string)
 	TextureSamplerValue() *TextureSampler
-	SetTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler)
-	Color() unsafe.Pointer
-	SetColor(color unsafe.Pointer)
+	SetTextureSamplerValue(textureSamplerValue *TextureSampler)
+	Color() obj.Object
+	SetColor(color obj.Object)
 	FloatValue() float32
 	SetFloatValue(floatValue float32)
-	Float2Value() unsafe.Pointer
-	SetFloat2Value(float2Value unsafe.Pointer)
-	Float3Value() unsafe.Pointer
-	SetFloat3Value(float3Value unsafe.Pointer)
-	Float4Value() unsafe.Pointer
-	SetFloat4Value(float4Value unsafe.Pointer)
-	Matrix4x4() unsafe.Pointer
-	SetMatrix4x4(matrix4x4 unsafe.Pointer)
 	Luminance() float32
 	SetLuminance(luminance float32)
 }

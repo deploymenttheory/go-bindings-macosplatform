@@ -5,69 +5,95 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result of translation or back-translation.
+// BrailleTranslationResult is an idiomatic wrapper over the Objective-C class AXBrailleTranslationResult.
 //
-// BrailleTranslationResult wraps [raw.AXBrailleTranslationResult] with a fluent Go API.
+// The result of translation or back-translation.
 type BrailleTranslationResult struct {
-	inner *raw.AXBrailleTranslationResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXBrailleTranslationResult].
-func (x *BrailleTranslationResult) Unwrap() *raw.AXBrailleTranslationResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BrailleTranslationResult) ID() objc.ID { return x.inner.Ptr() }
-
-// BrailleTranslationResultFromID adopts an existing object pointer as a BrailleTranslationResult (nil for 0).
+// BrailleTranslationResultFromID adopts an existing Objective-C object as a BrailleTranslationResult
+// (nil for 0), retaining it and registering a release finalizer.
 func BrailleTranslationResultFromID(id objc.ID) *BrailleTranslationResult {
 	if id == 0 {
 		return nil
 	}
-	return &BrailleTranslationResult{inner: raw.AXBrailleTranslationResultFromID(id)}
+	x := &BrailleTranslationResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBrailleTranslationResult creates a new [BrailleTranslationResult].
-func NewBrailleTranslationResult() *BrailleTranslationResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AXBrailleTranslationResult")), objc.RegisterName("new"))
-	return &BrailleTranslationResult{inner: raw.AXBrailleTranslationResultFromID(_id)}
-}
-
-// The resulting string after translation or back-translation.
-//
-// ResultString calls the underlying ResultString.
-func (x *BrailleTranslationResult) ResultString() string {
-	_r := x.inner.ResultString()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// An array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
-//
-// LocationMap returns the collection as a Go slice.
-func (x *BrailleTranslationResult) LocationMap() []*foundation.NSNumber {
-	arr := x.inner.LocationMap()
-	if arr == nil {
+// brailleTranslationResultAdopt wraps an Objective-C object that this code just created as a
+// BrailleTranslationResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func brailleTranslationResultAdopt(id objc.ID) *BrailleTranslationResult {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &BrailleTranslationResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BrailleTranslationResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BrailleTranslationResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BrailleTranslationResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrailleTranslationResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBrailleTranslationResult creates a new BrailleTranslationResult.
+func NewBrailleTranslationResult() *BrailleTranslationResult {
+	_id := objc.Send[objc.ID](objc.ID(_class("AXBrailleTranslationResult")), objc.RegisterName("new"))
+	return brailleTranslationResultAdopt(_id)
+}
+
+// ResultString the resulting string after translation or back-translation.
+func (x *BrailleTranslationResult) ResultString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultString"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// LocationMap an array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
+//
+// LocationMap returns the collection as a Go slice.
+func (x *BrailleTranslationResult) LocationMap() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationMap"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // BrailleTranslationResultable is the interface implemented by [BrailleTranslationResult], for mocking and DI.
 type BrailleTranslationResultable interface {
-	Unwrap() *raw.AXBrailleTranslationResult
+	obj.Object
 	ResultString() string
-	LocationMap() []*foundation.NSNumber
+	LocationMap() []obj.Object
 }
 
 var _ BrailleTranslationResultable = (*BrailleTranslationResult)(nil)

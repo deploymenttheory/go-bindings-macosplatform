@@ -5,137 +5,114 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A multihead, scaled dot-product attention layer that attends to one or more entries in the input key-value pairs.
+// MultiheadAttentionLayer is an idiomatic wrapper over the Objective-C class MLCMultiheadAttentionLayer.
 //
-// MultiheadAttentionLayer wraps [raw.MLCMultiheadAttentionLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A multihead, scaled dot-product attention layer that attends to one or more entries in the input key-value pairs.
 type MultiheadAttentionLayer struct {
-	inner *raw.MLCMultiheadAttentionLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCMultiheadAttentionLayer].
-func (x *MultiheadAttentionLayer) Unwrap() *raw.MLCMultiheadAttentionLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiheadAttentionLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiheadAttentionLayerFromID adopts an existing object pointer as a MultiheadAttentionLayer (nil for 0).
+// MultiheadAttentionLayerFromID adopts an existing Objective-C object as a MultiheadAttentionLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiheadAttentionLayerFromID(id objc.ID) *MultiheadAttentionLayer {
 	if id == 0 {
 		return nil
 	}
-	return &MultiheadAttentionLayer{inner: raw.MLCMultiheadAttentionLayerFromID(id)}
-}
-
-// NewMultiheadAttentionLayer creates a new [MultiheadAttentionLayer].
-func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCMultiheadAttentionLayer")), objc.RegisterName("new"))
-	return &MultiheadAttentionLayer{inner: raw.MLCMultiheadAttentionLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &MultiheadAttentionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   descriptor @abstract   The multi-head attention descriptor
-//
-// Descriptor calls the underlying Descriptor.
-func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
+// multiheadAttentionLayerAdopt wraps an Objective-C object that this code just created as a
+// MultiheadAttentionLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiheadAttentionLayerAdopt(id objc.ID) *MultiheadAttentionLayer {
+	if id == 0 {
 		return nil
 	}
-	return &MultiheadAttentionDescriptor{inner: _r}
+	x := &MultiheadAttentionLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   weights @abstract   The weights of query, key, value and output projections
+// NewMultiheadAttentionLayer creates a new MultiheadAttentionLayer.
+func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCMultiheadAttentionLayer")), objc.RegisterName("new"))
+	return multiheadAttentionLayerAdopt(_id)
+}
+
+// WithLabel a string that helps identify this layer.
+func (x *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// Descriptor the multi-head attention descriptor
+func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return MultiheadAttentionDescriptorFromID(_r)
+}
+
+// Weights the weights of query, key, value and output projections
 //
 // Weights returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Weights() []*Tensor {
-	arr := x.inner.Weights()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
-		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// @property   biases @abstract   The biases of query, key, value and output projections
+// Biases the biases of query, key, value and output projections
 //
 // Biases returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Biases() []*Tensor {
-	arr := x.inner.Biases()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
-		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// @property   attentionBiases @abstract   The biases added to key and value
+// AttentionBiases the biases added to key and value
 //
 // AttentionBiases returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
-	arr := x.inner.AttentionBiases()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Tensor {
-		return &Tensor{inner: raw.MLCTensorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attentionBiases"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// @property   weightsParameters @abstract   The weights tensor parameters used for optimizer update
+// WeightsParameters the weights tensor parameters used for optimizer update
 //
 // WeightsParameters returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
-	arr := x.inner.WeightsParameters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
-		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
 
-// @property   biasesParameters @abstract   The biases tensor parameters used for optimizer update
+// BiasesParameters the biases tensor parameters used for optimizer update
 //
 // BiasesParameters returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
-	arr := x.inner.BiasesParameters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorParameter {
-		return &TensorParameter{inner: raw.MLCTensorParameterFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
-
-func (x *MultiheadAttentionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // MultiheadAttentionLayerable is the interface implemented by [MultiheadAttentionLayer], for mocking and DI.
 type MultiheadAttentionLayerable interface {
-	Unwrap() *raw.MLCMultiheadAttentionLayer
+	obj.Object
 	WithLabel(label string) *MultiheadAttentionLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer
 	Descriptor() *MultiheadAttentionDescriptor
@@ -147,3 +124,5 @@ type MultiheadAttentionLayerable interface {
 }
 
 var _ MultiheadAttentionLayerable = (*MultiheadAttentionLayer)(nil)
+
+var _ LayerProvider = (*MultiheadAttentionLayer)(nil)

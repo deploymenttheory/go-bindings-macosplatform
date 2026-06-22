@@ -5,117 +5,134 @@
 package screensaver
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screensaver"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure.
+// ScreenSaverView is an idiomatic wrapper over the Objective-C class ScreenSaverView.
 //
-// ScreenSaverView wraps [raw.ScreenSaverView] with a fluent Go API.
+// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure.
 type ScreenSaverView struct {
-	inner *raw.ScreenSaverView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ScreenSaverView].
-func (x *ScreenSaverView) Unwrap() *raw.ScreenSaverView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenSaverView) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenSaverViewFromID adopts an existing object pointer as a ScreenSaverView (nil for 0).
+// ScreenSaverViewFromID adopts an existing Objective-C object as a ScreenSaverView
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenSaverView{inner: raw.ScreenSaverViewFromID(id)}
-}
-
-// Creates a newly allocated screen saver view with the specified frame rectangle and preview information.
-//
-// NewScreenSaverViewWithFrameIsPreview creates a new [ScreenSaverView].
-func NewScreenSaverViewWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ScreenSaverView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:isPreview:"), frame, isPreview)
-	return &ScreenSaverView{inner: raw.ScreenSaverViewFromID(_id)}
-}
-
-// The time interval between animation frames.
-//
-// WithAnimationTimeInterval sets the animationTimeInterval property and returns the receiver for chaining.
-func (x *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView {
-	x.inner.SetAnimationTimeInterval(animationTimeInterval)
+	x := &ScreenSaverView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Activates the periodic timer that animates the screen saver.
-//
-// StartAnimation calls the underlying StartAnimation.
+// screenSaverViewAdopt wraps an Objective-C object that this code just created as a
+// ScreenSaverView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenSaverViewAdopt(id objc.ID) *ScreenSaverView {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenSaverView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScreenSaverView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenSaverView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenSaverView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenSaverView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScreenSaverViewWithFrameIsPreview creates a newly allocated screen saver view with the specified frame rectangle and preview information.
+func NewScreenSaverViewWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ScreenSaverView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:isPreview:"), frame, isPreview)
+	return screenSaverViewAdopt(_id)
+}
+
+// WithAnimationTimeInterval the time interval between animation frames.
+func (x *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTimeInterval:"), animationTimeInterval)
+	return x
+}
+
+// StartAnimation activates the periodic timer that animates the screen saver.
 func (x *ScreenSaverView) StartAnimation() {
-	x.inner.StartAnimation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation"))
 }
 
-// Deactivates the timer that advances the animation.
-//
-// StopAnimation calls the underlying StopAnimation.
+// StopAnimation deactivates the timer that advances the animation.
 func (x *ScreenSaverView) StopAnimation() {
-	x.inner.StopAnimation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation"))
 }
 
-// Advances the screen saver’s animation by a single frame.
-//
-// AnimateOneFrame calls the underlying AnimateOneFrame.
+// AnimateOneFrame advances the screen saver’s animation by a single frame.
 func (x *ScreenSaverView) AnimateOneFrame() {
-	x.inner.AnimateOneFrame()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animateOneFrame"))
 }
 
-// The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
-//
-// AnimationTimeInterval calls the underlying AnimationTimeInterval.
+// AnimationTimeInterval the time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (x *ScreenSaverView) AnimationTimeInterval() float64 {
-	return x.inner.AnimationTimeInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("animationTimeInterval"))
+	return _r
 }
 
-// The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
-//
-// SetAnimationTimeInterval calls the underlying SetAnimationTimeInterval.
+// SetAnimationTimeInterval the time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (x *ScreenSaverView) SetAnimationTimeInterval(animationTimeInterval float64) {
-	x.inner.SetAnimationTimeInterval(animationTimeInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTimeInterval:"), animationTimeInterval)
 }
 
-// A Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
-//
-// IsAnimating calls the underlying IsAnimating.
+// IsAnimating a Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
 func (x *ScreenSaverView) IsAnimating() bool {
-	return x.inner.IsAnimating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimating"))
+	return _r
 }
 
-// A Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
-//
-// HasConfigureSheet calls the underlying HasConfigureSheet.
+// HasConfigureSheet a Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
 func (x *ScreenSaverView) HasConfigureSheet() bool {
-	return x.inner.HasConfigureSheet()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasConfigureSheet"))
+	return _r
 }
 
-// The window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
-//
-// ConfigureSheet calls the underlying ConfigureSheet.
-func (x *ScreenSaverView) ConfigureSheet() *appkit.NSWindow {
-	return x.inner.ConfigureSheet()
+// ConfigureSheet the window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
+func (x *ScreenSaverView) ConfigureSheet() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configureSheet"))
+	return obj.Wrap(_r)
 }
 
-// A Boolean value that indicates whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
-//
-// IsPreview calls the underlying IsPreview.
+// IsPreview a Boolean value that indicates whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
 func (x *ScreenSaverView) IsPreview() bool {
-	return x.inner.IsPreview()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPreview"))
+	return _r
 }
 
 // ScreenSaverViewable is the interface implemented by [ScreenSaverView], for mocking and DI.
 type ScreenSaverViewable interface {
-	Unwrap() *raw.ScreenSaverView
+	obj.Object
 	WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView
 	StartAnimation()
 	StopAnimation()
@@ -124,7 +141,7 @@ type ScreenSaverViewable interface {
 	SetAnimationTimeInterval(animationTimeInterval float64)
 	IsAnimating() bool
 	HasConfigureSheet() bool
-	ConfigureSheet() *appkit.NSWindow
+	ConfigureSheet() obj.Object
 	IsPreview() bool
 }
 

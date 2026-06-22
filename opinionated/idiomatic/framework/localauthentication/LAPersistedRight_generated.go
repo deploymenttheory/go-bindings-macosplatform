@@ -5,76 +5,79 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A right that gates access to a key and a secret.
+// PersistedRight is an idiomatic wrapper over the Objective-C class LAPersistedRight.
 //
-// PersistedRight wraps [raw.LAPersistedRight] with a fluent Go API.
+// It embeds [Right], promoting that type's methods.
+//
+// A right that gates access to a key and a secret.
 type PersistedRight struct {
-	inner *raw.LAPersistedRight
+	Right
 }
 
-// Unwrap returns the underlying [raw.LAPersistedRight].
-func (x *PersistedRight) Unwrap() *raw.LAPersistedRight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistedRight) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistedRightFromID adopts an existing object pointer as a PersistedRight (nil for 0).
+// PersistedRightFromID adopts an existing Objective-C object as a PersistedRight
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistedRightFromID(id objc.ID) *PersistedRight {
 	if id == 0 {
 		return nil
 	}
-	return &PersistedRight{inner: raw.LAPersistedRightFromID(id)}
-}
-
-// NewPersistedRight creates a new [PersistedRight].
-func NewPersistedRight() *PersistedRight {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAPersistedRight")), objc.RegisterName("new"))
-	return &PersistedRight{inner: raw.LAPersistedRightFromID(_id)}
-}
-
-// An integer you use to identify a right.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
-func (x *PersistedRight) WithTag(tag int) *PersistedRight {
-	x.inner.LARight.SetTag(tag)
+	x := &PersistedRight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @brief Managed private key
-//
-// Key calls the underlying Key.
+// persistedRightAdopt wraps an Objective-C object that this code just created as a
+// PersistedRight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistedRightAdopt(id objc.ID) *PersistedRight {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistedRight{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPersistedRight creates a new PersistedRight.
+func NewPersistedRight() *PersistedRight {
+	_id := objc.Send[objc.ID](objc.ID(_class("LAPersistedRight")), objc.RegisterName("new"))
+	return persistedRightAdopt(_id)
+}
+
+// WithTag an integer you use to identify a right.
+func (x *PersistedRight) WithTag(tag int) *PersistedRight {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
+	return x
+}
+
+// Key managed private key
 func (x *PersistedRight) Key() *PrivateKey {
-	_r := x.inner.Key()
-	if _r == nil {
-		return nil
-	}
-	return &PrivateKey{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	return PrivateKeyFromID(_r)
 }
 
-// @brief Generic secret @discussion This is the generic secret that would have been stored along with the right
-//
-// Secret calls the underlying Secret.
+// Secret generic secret This is the generic secret that would have been stored along with the right
 func (x *PersistedRight) Secret() *Secret {
-	_r := x.inner.Secret()
-	if _r == nil {
-		return nil
-	}
-	return &Secret{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secret"))
+	return SecretFromID(_r)
 }
-
-func (x *PersistedRight) asRight() *raw.LARight { return &x.inner.LARight }
 
 // PersistedRightable is the interface implemented by [PersistedRight], for mocking and DI.
 type PersistedRightable interface {
-	Unwrap() *raw.LAPersistedRight
+	obj.Object
 	WithTag(tag int) *PersistedRight
 	Key() *PrivateKey
 	Secret() *Secret
 }
 
 var _ PersistedRightable = (*PersistedRight)(nil)
+
+var _ RightProvider = (*PersistedRight)(nil)

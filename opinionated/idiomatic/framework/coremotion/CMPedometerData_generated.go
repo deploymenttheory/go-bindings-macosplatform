@@ -5,97 +5,118 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Information about the distance traveled by a user on foot.
+// PedometerData is an idiomatic wrapper over the Objective-C class CMPedometerData.
 //
-// PedometerData wraps [raw.CMPedometerData] with a fluent Go API.
+// Information about the distance traveled by a user on foot.
 type PedometerData struct {
-	inner *raw.CMPedometerData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMPedometerData].
-func (x *PedometerData) Unwrap() *raw.CMPedometerData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PedometerData) ID() objc.ID { return x.inner.Ptr() }
-
-// PedometerDataFromID adopts an existing object pointer as a PedometerData (nil for 0).
+// PedometerDataFromID adopts an existing Objective-C object as a PedometerData
+// (nil for 0), retaining it and registering a release finalizer.
 func PedometerDataFromID(id objc.ID) *PedometerData {
 	if id == 0 {
 		return nil
 	}
-	return &PedometerData{inner: raw.CMPedometerDataFromID(id)}
+	x := &PedometerData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPedometerData creates a new [PedometerData].
+// pedometerDataAdopt wraps an Objective-C object that this code just created as a
+// PedometerData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pedometerDataAdopt(id objc.ID) *PedometerData {
+	if id == 0 {
+		return nil
+	}
+	x := &PedometerData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PedometerData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PedometerData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PedometerData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PedometerData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPedometerData creates a new PedometerData.
 func NewPedometerData() *PedometerData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMPedometerData")), objc.RegisterName("new"))
-	return &PedometerData{inner: raw.CMPedometerDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometerData")), objc.RegisterName("new"))
+	return pedometerDataAdopt(_id)
 }
 
-// StartDate calls the underlying StartDate.
-func (x *PedometerData) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// StartDate wraps the corresponding Objective-C method.
+func (x *PedometerData) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// EndDate calls the underlying EndDate.
-func (x *PedometerData) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// EndDate wraps the corresponding Objective-C method.
+func (x *PedometerData) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// NumberOfSteps calls the underlying NumberOfSteps.
-func (x *PedometerData) NumberOfSteps() *foundation.NSNumber {
-	return x.inner.NumberOfSteps()
+// NumberOfSteps wraps the corresponding Objective-C method.
+func (x *PedometerData) NumberOfSteps() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfSteps"))
+	return obj.Wrap(_r)
 }
 
-// Distance calls the underlying Distance.
-func (x *PedometerData) Distance() *foundation.NSNumber {
-	return x.inner.Distance()
+// Distance wraps the corresponding Objective-C method.
+func (x *PedometerData) Distance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distance"))
+	return obj.Wrap(_r)
 }
 
-// FloorsAscended calls the underlying FloorsAscended.
-func (x *PedometerData) FloorsAscended() *foundation.NSNumber {
-	return x.inner.FloorsAscended()
+// FloorsAscended wraps the corresponding Objective-C method.
+func (x *PedometerData) FloorsAscended() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorsAscended"))
+	return obj.Wrap(_r)
 }
 
-// FloorsDescended calls the underlying FloorsDescended.
-func (x *PedometerData) FloorsDescended() *foundation.NSNumber {
-	return x.inner.FloorsDescended()
-}
-
-// CurrentPace calls the underlying CurrentPace.
-func (x *PedometerData) CurrentPace() unsafe.Pointer {
-	return x.inner.CurrentPace()
-}
-
-// CurrentCadence calls the underlying CurrentCadence.
-func (x *PedometerData) CurrentCadence() unsafe.Pointer {
-	return x.inner.CurrentCadence()
-}
-
-// AverageActivePace calls the underlying AverageActivePace.
-func (x *PedometerData) AverageActivePace() unsafe.Pointer {
-	return x.inner.AverageActivePace()
+// FloorsDescended wraps the corresponding Objective-C method.
+func (x *PedometerData) FloorsDescended() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorsDescended"))
+	return obj.Wrap(_r)
 }
 
 // PedometerDataable is the interface implemented by [PedometerData], for mocking and DI.
 type PedometerDataable interface {
-	Unwrap() *raw.CMPedometerData
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
-	NumberOfSteps() *foundation.NSNumber
-	Distance() *foundation.NSNumber
-	FloorsAscended() *foundation.NSNumber
-	FloorsDescended() *foundation.NSNumber
-	CurrentPace() unsafe.Pointer
-	CurrentCadence() unsafe.Pointer
-	AverageActivePace() unsafe.Pointer
+	obj.Object
+	StartDate() obj.Object
+	EndDate() obj.Object
+	NumberOfSteps() obj.Object
+	Distance() obj.Object
+	FloorsAscended() obj.Object
+	FloorsDescended() obj.Object
 }
 
 var _ PedometerDataable = (*PedometerData)(nil)

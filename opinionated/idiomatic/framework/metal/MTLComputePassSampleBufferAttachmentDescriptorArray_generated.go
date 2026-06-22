@@ -5,63 +5,89 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container that stores an array of sample buffer attachments for a compute pass.
+// ComputePassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLComputePassSampleBufferAttachmentDescriptorArray.
 //
-// ComputePassSampleBufferAttachmentDescriptorArray wraps [raw.MTLComputePassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
+// A container that stores an array of sample buffer attachments for a compute pass.
 type ComputePassSampleBufferAttachmentDescriptorArray struct {
-	inner *raw.MTLComputePassSampleBufferAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLComputePassSampleBufferAttachmentDescriptorArray].
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLComputePassSampleBufferAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// ComputePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a ComputePassSampleBufferAttachmentDescriptorArray (nil for 0).
+// ComputePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a ComputePassSampleBufferAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func ComputePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *ComputePassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &ComputePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(id)}
+	x := &ComputePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComputePassSampleBufferAttachmentDescriptorArray creates a new [ComputePassSampleBufferAttachmentDescriptorArray].
-func NewComputePassSampleBufferAttachmentDescriptorArray() *ComputePassSampleBufferAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLComputePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &ComputePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
-}
-
-// Returns the descriptor object for the specified sample buffer attachment.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *ComputePassSampleBufferAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
+// computePassSampleBufferAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// ComputePassSampleBufferAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func computePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *ComputePassSampleBufferAttachmentDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &ComputePassSampleBufferAttachmentDescriptor{inner: _r}
+	x := &ComputePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the descriptor object for the specified sample buffer attachment.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+// Description returns the object's -description text.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewComputePassSampleBufferAttachmentDescriptorArray creates a new ComputePassSampleBufferAttachmentDescriptorArray.
+func NewComputePassSampleBufferAttachmentDescriptorArray() *ComputePassSampleBufferAttachmentDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return computePassSampleBufferAttachmentDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ComputePassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return ComputePassSampleBufferAttachmentDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ComputePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // ComputePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [ComputePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
 type ComputePassSampleBufferAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLComputePassSampleBufferAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *ComputePassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *ComputePassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *ComputePassSampleBufferAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ ComputePassSampleBufferAttachmentDescriptorArrayable = (*ComputePassSampleBufferAttachmentDescriptorArray)(nil)

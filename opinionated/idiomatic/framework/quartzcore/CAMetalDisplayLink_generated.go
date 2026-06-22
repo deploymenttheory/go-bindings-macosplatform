@@ -5,151 +5,133 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class your Metal app uses to register for callbacks to synchronize its animations for a display.
+// MetalDisplayLink is an idiomatic wrapper over the Objective-C class CAMetalDisplayLink.
 //
-// MetalDisplayLink wraps [raw.CAMetalDisplayLink] with a fluent Go API.
+// A class your Metal app uses to register for callbacks to synchronize its animations for a display.
 type MetalDisplayLink struct {
-	inner *raw.CAMetalDisplayLink
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAMetalDisplayLink].
-func (x *MetalDisplayLink) Unwrap() *raw.CAMetalDisplayLink { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetalDisplayLink) ID() objc.ID { return x.inner.Ptr() }
-
-// MetalDisplayLinkFromID adopts an existing object pointer as a MetalDisplayLink (nil for 0).
+// MetalDisplayLinkFromID adopts an existing Objective-C object as a MetalDisplayLink
+// (nil for 0), retaining it and registering a release finalizer.
 func MetalDisplayLinkFromID(id objc.ID) *MetalDisplayLink {
 	if id == 0 {
 		return nil
 	}
-	return &MetalDisplayLink{inner: raw.CAMetalDisplayLinkFromID(id)}
-}
-
-// Creates a display link for Metal from a Core Animation layer.
-//
-// NewMetalDisplayLinkWithMetalLayer creates a new [MetalDisplayLink].
-func NewMetalDisplayLinkWithMetalLayer(layer *raw.CAMetalLayer) *MetalDisplayLink {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAMetalDisplayLink")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMetalLayer:"), layer.Ptr())
-	return &MetalDisplayLink{inner: raw.CAMetalDisplayLinkFromID(_id)}
-}
-
-// An instance of a type your app implements that responds to the system’s callbacks.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *MetalDisplayLink) WithDelegate(delegate raw.CAMetalDisplayLinkDelegate) *MetalDisplayLink {
-	x.inner.SetDelegate(delegate)
+	x := &MetalDisplayLink{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The amount of time, in frames, your app requests to render a frame.
-//
-// WithPreferredFrameLatency sets the preferredFrameLatency property and returns the receiver for chaining.
+// metalDisplayLinkAdopt wraps an Objective-C object that this code just created as a
+// MetalDisplayLink (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metalDisplayLinkAdopt(id objc.ID) *MetalDisplayLink {
+	if id == 0 {
+		return nil
+	}
+	x := &MetalDisplayLink{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetalDisplayLink) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetalDisplayLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetalDisplayLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetalDisplayLink) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetalDisplayLinkWithMetalLayer creates a display link for Metal from a Core Animation layer.
+func NewMetalDisplayLinkWithMetalLayer(layer *MetalLayer) *MetalDisplayLink {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CAMetalDisplayLink")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMetalLayer:"), objref.IDOf(layer))
+	return metalDisplayLinkAdopt(_id)
+}
+
+// WithPreferredFrameLatency the amount of time, in frames, your app requests to render a frame.
 func (x *MetalDisplayLink) WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink {
-	x.inner.SetPreferredFrameLatency(preferredFrameLatency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFrameLatency:"), preferredFrameLatency)
 	return x
 }
 
-// A range of frequencies your app allows for frame updates, affecting how often the system invokes your delegate’s callback.
-//
-// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
-func (x *MetalDisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *MetalDisplayLink {
-	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
-	return x
-}
-
-// A Boolean value that indicates whether the system suspends the display link’s notifications to the target.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
 func (x *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// Registers the display link with a run loop.
-//
-// AddToRunLoopForMode calls the underlying AddToRunLoopForMode.
-func (x *MetalDisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
-	x.inner.AddToRunLoopForMode(runloop, mode)
+// AddToRunLoopForMode registers the display link with a run loop.
+func (x *MetalDisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
-// Removes a mode’s display link from a run loop.
-//
-// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
-func (x *MetalDisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
-	x.inner.RemoveFromRunLoopForMode(runloop, mode)
+// RemoveFromRunLoopForMode removes a mode’s display link from a run loop.
+func (x *MetalDisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
-// Removes the display link from all run loops for all modes.
-//
-// Invalidate calls the underlying Invalidate.
+// Invalidate removes the display link from all run loops for all modes.
 func (x *MetalDisplayLink) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *MetalDisplayLink) Delegate() raw.CAMetalDisplayLinkDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *MetalDisplayLink) SetDelegate(delegate raw.CAMetalDisplayLinkDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// PreferredFrameLatency calls the underlying PreferredFrameLatency.
+// PreferredFrameLatency wraps the corresponding Objective-C method.
 func (x *MetalDisplayLink) PreferredFrameLatency() float32 {
-	return x.inner.PreferredFrameLatency()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredFrameLatency"))
+	return _r
 }
 
-// SetPreferredFrameLatency calls the underlying SetPreferredFrameLatency.
+// SetPreferredFrameLatency wraps the corresponding Objective-C method.
 func (x *MetalDisplayLink) SetPreferredFrameLatency(preferredFrameLatency float32) {
-	x.inner.SetPreferredFrameLatency(preferredFrameLatency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFrameLatency:"), preferredFrameLatency)
 }
 
-// PreferredFrameRateRange calls the underlying PreferredFrameRateRange.
-func (x *MetalDisplayLink) PreferredFrameRateRange() raw.CAFrameRateRange {
-	return x.inner.PreferredFrameRateRange()
-}
-
-// SetPreferredFrameRateRange calls the underlying SetPreferredFrameRateRange.
-func (x *MetalDisplayLink) SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) {
-	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
-}
-
-// IsPaused calls the underlying IsPaused.
+// IsPaused wraps the corresponding Objective-C method.
 func (x *MetalDisplayLink) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
+// SetPaused wraps the corresponding Objective-C method.
 func (x *MetalDisplayLink) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
 // MetalDisplayLinkable is the interface implemented by [MetalDisplayLink], for mocking and DI.
 type MetalDisplayLinkable interface {
-	Unwrap() *raw.CAMetalDisplayLink
-	WithDelegate(delegate raw.CAMetalDisplayLinkDelegate) *MetalDisplayLink
+	obj.Object
 	WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink
-	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *MetalDisplayLink
 	WithPaused(paused bool) *MetalDisplayLink
-	AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
-	RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
+	AddToRunLoopForMode(runloop obj.Object, mode obj.Object)
+	RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object)
 	Invalidate()
-	Delegate() raw.CAMetalDisplayLinkDelegate
-	SetDelegate(delegate raw.CAMetalDisplayLinkDelegate)
 	PreferredFrameLatency() float32
 	SetPreferredFrameLatency(preferredFrameLatency float32)
-	PreferredFrameRateRange() raw.CAFrameRateRange
-	SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange)
 	IsPaused() bool
 	SetPaused(paused bool)
 }

@@ -5,90 +5,91 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration for a Virtio graphics device that configures the dimensions of the graphics device for a Linux VM.
+// VirtioGraphicsScanoutConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioGraphicsScanoutConfiguration.
 //
-// VirtioGraphicsScanoutConfiguration wraps [raw.VZVirtioGraphicsScanoutConfiguration] with a fluent Go API.
+// It embeds [GraphicsDisplayConfiguration], promoting that type's methods.
+//
+// The configuration for a Virtio graphics device that configures the dimensions of the graphics device for a Linux VM.
 type VirtioGraphicsScanoutConfiguration struct {
-	inner *raw.VZVirtioGraphicsScanoutConfiguration
+	GraphicsDisplayConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZVirtioGraphicsScanoutConfiguration].
-func (x *VirtioGraphicsScanoutConfiguration) Unwrap() *raw.VZVirtioGraphicsScanoutConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioGraphicsScanoutConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioGraphicsScanoutConfigurationFromID adopts an existing object pointer as a VirtioGraphicsScanoutConfiguration (nil for 0).
+// VirtioGraphicsScanoutConfigurationFromID adopts an existing Objective-C object as a VirtioGraphicsScanoutConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioGraphicsScanoutConfigurationFromID(id objc.ID) *VirtioGraphicsScanoutConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioGraphicsScanoutConfiguration{inner: raw.VZVirtioGraphicsScanoutConfigurationFromID(id)}
+	x := &VirtioGraphicsScanoutConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a Virtio graphics device with the specified dimensions.
-//
-// NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels creates a new [VirtioGraphicsScanoutConfiguration].
+// virtioGraphicsScanoutConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioGraphicsScanoutConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioGraphicsScanoutConfigurationAdopt(id objc.ID) *VirtioGraphicsScanoutConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioGraphicsScanoutConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels creates a Virtio graphics device with the specified dimensions.
 func NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels(widthInPixels int, heightInPixels int) *VirtioGraphicsScanoutConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioGraphicsScanoutConfiguration")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtioGraphicsScanoutConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWidthInPixels:heightInPixels:"), widthInPixels, heightInPixels)
-	return &VirtioGraphicsScanoutConfiguration{inner: raw.VZVirtioGraphicsScanoutConfigurationFromID(_id)}
+	return virtioGraphicsScanoutConfigurationAdopt(_id)
 }
 
-// An integer value that describes the width of the graphics device in pixels.
-//
-// WithWidthInPixels sets the widthInPixels property and returns the receiver for chaining.
+// WithWidthInPixels an integer value that describes the width of the graphics device in pixels.
 func (x *VirtioGraphicsScanoutConfiguration) WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration {
-	x.inner.SetWidthInPixels(widthInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
 	return x
 }
 
-// An integer value that describes the height of the graphics device in pixels.
-//
-// WithHeightInPixels sets the heightInPixels property and returns the receiver for chaining.
+// WithHeightInPixels an integer value that describes the height of the graphics device in pixels.
 func (x *VirtioGraphicsScanoutConfiguration) WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration {
-	x.inner.SetHeightInPixels(heightInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
 	return x
 }
 
-// @abstract The width of the scanout, in pixels.
-//
-// WidthInPixels calls the underlying WidthInPixels.
+// WidthInPixels the width of the scanout, in pixels.
 func (x *VirtioGraphicsScanoutConfiguration) WidthInPixels() int {
-	return x.inner.WidthInPixels()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthInPixels"))
+	return _r
 }
 
-// SetWidthInPixels calls the underlying SetWidthInPixels.
+// SetWidthInPixels wraps the corresponding Objective-C method.
 func (x *VirtioGraphicsScanoutConfiguration) SetWidthInPixels(widthInPixels int) {
-	x.inner.SetWidthInPixels(widthInPixels)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
 }
 
-// @abstract The height of the scanout, in pixels.
-//
-// HeightInPixels calls the underlying HeightInPixels.
+// HeightInPixels the height of the scanout, in pixels.
 func (x *VirtioGraphicsScanoutConfiguration) HeightInPixels() int {
-	return x.inner.HeightInPixels()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightInPixels"))
+	return _r
 }
 
-// SetHeightInPixels calls the underlying SetHeightInPixels.
+// SetHeightInPixels wraps the corresponding Objective-C method.
 func (x *VirtioGraphicsScanoutConfiguration) SetHeightInPixels(heightInPixels int) {
-	x.inner.SetHeightInPixels(heightInPixels)
-}
-
-func (x *VirtioGraphicsScanoutConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration {
-	return &x.inner.VZGraphicsDisplayConfiguration
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
 }
 
 // VirtioGraphicsScanoutConfigurationable is the interface implemented by [VirtioGraphicsScanoutConfiguration], for mocking and DI.
 type VirtioGraphicsScanoutConfigurationable interface {
-	Unwrap() *raw.VZVirtioGraphicsScanoutConfiguration
+	obj.Object
 	WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration
 	WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration
 	WidthInPixels() int
@@ -98,3 +99,5 @@ type VirtioGraphicsScanoutConfigurationable interface {
 }
 
 var _ VirtioGraphicsScanoutConfigurationable = (*VirtioGraphicsScanoutConfiguration)(nil)
+
+var _ GraphicsDisplayConfigurationProvider = (*VirtioGraphicsScanoutConfiguration)(nil)

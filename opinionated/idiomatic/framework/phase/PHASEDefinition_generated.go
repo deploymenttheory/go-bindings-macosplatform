@@ -5,54 +5,89 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that adds a name to framework definitions.
+// Definition is an idiomatic wrapper over the Objective-C class PHASEDefinition.
 //
-// Definition wraps [raw.PHASEDefinition] with a fluent Go API.
+// Definition is an abstract base — you do not construct it directly. Construct one of [MetaParameterDefinition], [MixerDefinition], [SoundEventNodeDefinition] and pass it where a Definition is accepted.
+//
+// A base class that adds a name to framework definitions.
 type Definition struct {
-	inner *raw.PHASEDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEDefinition].
-func (x *Definition) Unwrap() *raw.PHASEDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Definition) ID() objc.ID { return x.inner.Ptr() }
-
-// DefinitionFromID adopts an existing object pointer as a Definition (nil for 0).
+// DefinitionFromID adopts an existing Objective-C object as a Definition
+// (nil for 0), retaining it and registering a release finalizer.
 func DefinitionFromID(id objc.ID) *Definition {
 	if id == 0 {
 		return nil
 	}
-	return &Definition{inner: raw.PHASEDefinitionFromID(id)}
+	x := &Definition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDefinition creates a new [Definition].
-func NewDefinition() *Definition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDefinition")), objc.RegisterName("new"))
-	return &Definition{inner: raw.PHASEDefinitionFromID(_id)}
+// definitionAdopt wraps an Objective-C object that this code just created as a
+// Definition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func definitionAdopt(id objc.ID) *Definition {
+	if id == 0 {
+		return nil
+	}
+	x := &Definition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Identifier calls the underlying Identifier.
+// Description returns the object's -description text.
+func (x *Definition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Definition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Definition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Definition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Identifier wraps the corresponding Objective-C method.
 func (x *Definition) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Definition) asDefinition() *raw.PHASEDefinition { return x.inner }
 
 // Definitionable is the interface implemented by [Definition], for mocking and DI.
 type Definitionable interface {
-	Unwrap() *raw.PHASEDefinition
+	obj.Object
 	Identifier() string
 }
 
 var _ Definitionable = (*Definition)(nil)
+
+// isDefinition marks Definition — and, by embedding promotion, its
+// subclasses — as a member of the Definition hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Definition) isDefinition() {}
+
+var _ DefinitionProvider = (*Definition)(nil)

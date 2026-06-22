@@ -5,196 +5,234 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct wraps [raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct] with a fluent Go API.
+// MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct is an idiomatic wrapper over the Objective-C class MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct.
 type MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct struct {
-	inner *raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct].
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Unwrap() *raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID adopts an existing object pointer as a MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct (nil for 0).
+// MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID adopts an existing Objective-C object as a MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID(id objc.ID) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct{inner: raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID(id)}
+	x := &MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct creates a new [MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct].
+// mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructAdopt wraps an Objective-C object that this code just created as a
+// MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructAdopt(id objc.ID) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct creates a new MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct.
 func NewMTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct() *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct")), objc.RegisterName("new"))
-	return &MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct{inner: raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct")), objc.RegisterName("new"))
+	return mTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructAdopt(_id)
 }
 
-// WithRangeMin sets the rangeMin property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithRangeMin(rangeMin *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetRangeMin(rangeMin)
+// WithRangeMin sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithRangeMin(rangeMin obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeMin:"), objref.IDOf(rangeMin))
 	return x
 }
 
-// WithRangeMax sets the rangeMax property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithRangeMax(rangeMax *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetRangeMax(rangeMax)
+// WithRangeMax sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithRangeMax(rangeMax obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeMax:"), objref.IDOf(rangeMax))
 	return x
 }
 
-// WithPercentMax sets the percentMax property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentMax(percentMax *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetPercentMax(percentMax)
+// WithPercentMax sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentMax(percentMax obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentMax:"), objref.IDOf(percentMax))
 	return x
 }
 
-// WithPercentMin sets the percentMin property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentMin(percentMin *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetPercentMin(percentMin)
+// WithPercentMin sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentMin(percentMin obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentMin:"), objref.IDOf(percentMin))
 	return x
 }
 
-// WithPercentTypical sets the percentTypical property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentTypical(percentTypical *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetPercentTypical(percentTypical)
+// WithPercentTypical sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentTypical(percentTypical obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentTypical:"), objref.IDOf(percentTypical))
 	return x
 }
 
-// WithFixedMax sets the fixedMax property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedMax(fixedMax *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetFixedMax(fixedMax)
+// WithFixedMax sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedMax(fixedMax obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedMax:"), objref.IDOf(fixedMax))
 	return x
 }
 
-// WithFixedMin sets the fixedMin property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedMin(fixedMin *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetFixedMin(fixedMin)
+// WithFixedMin sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedMin(fixedMin obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedMin:"), objref.IDOf(fixedMin))
 	return x
 }
 
-// WithFixedTypical sets the fixedTypical property and returns the receiver for chaining.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedTypical(fixedTypical *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
-	x.inner.SetFixedTypical(fixedTypical)
+// WithFixedTypical sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedTypical(fixedTypical obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedTypical:"), objref.IDOf(fixedTypical))
 	return x
 }
 
-// RangeMin calls the underlying RangeMin.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) RangeMin() *foundation.NSNumber {
-	return x.inner.RangeMin()
+// RangeMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) RangeMin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeMin"))
+	return obj.Wrap(_r)
 }
 
-// SetRangeMin calls the underlying SetRangeMin.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetRangeMin(rangeMin *foundation.NSNumber) {
-	x.inner.SetRangeMin(rangeMin)
+// SetRangeMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetRangeMin(rangeMin obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeMin:"), objref.IDOf(rangeMin))
 }
 
-// RangeMax calls the underlying RangeMax.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) RangeMax() *foundation.NSNumber {
-	return x.inner.RangeMax()
+// RangeMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) RangeMax() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeMax"))
+	return obj.Wrap(_r)
 }
 
-// SetRangeMax calls the underlying SetRangeMax.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetRangeMax(rangeMax *foundation.NSNumber) {
-	x.inner.SetRangeMax(rangeMax)
+// SetRangeMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetRangeMax(rangeMax obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeMax:"), objref.IDOf(rangeMax))
 }
 
-// PercentMax calls the underlying PercentMax.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentMax() *foundation.NSNumber {
-	return x.inner.PercentMax()
+// PercentMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentMax() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentMax"))
+	return obj.Wrap(_r)
 }
 
-// SetPercentMax calls the underlying SetPercentMax.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentMax(percentMax *foundation.NSNumber) {
-	x.inner.SetPercentMax(percentMax)
+// SetPercentMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentMax(percentMax obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentMax:"), objref.IDOf(percentMax))
 }
 
-// PercentMin calls the underlying PercentMin.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentMin() *foundation.NSNumber {
-	return x.inner.PercentMin()
+// PercentMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentMin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentMin"))
+	return obj.Wrap(_r)
 }
 
-// SetPercentMin calls the underlying SetPercentMin.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentMin(percentMin *foundation.NSNumber) {
-	x.inner.SetPercentMin(percentMin)
+// SetPercentMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentMin(percentMin obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentMin:"), objref.IDOf(percentMin))
 }
 
-// PercentTypical calls the underlying PercentTypical.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentTypical() *foundation.NSNumber {
-	return x.inner.PercentTypical()
+// PercentTypical wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) PercentTypical() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentTypical"))
+	return obj.Wrap(_r)
 }
 
-// SetPercentTypical calls the underlying SetPercentTypical.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentTypical(percentTypical *foundation.NSNumber) {
-	x.inner.SetPercentTypical(percentTypical)
+// SetPercentTypical wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentTypical(percentTypical obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentTypical:"), objref.IDOf(percentTypical))
 }
 
-// FixedMax calls the underlying FixedMax.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedMax() *foundation.NSNumber {
-	return x.inner.FixedMax()
+// FixedMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedMax() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fixedMax"))
+	return obj.Wrap(_r)
 }
 
-// SetFixedMax calls the underlying SetFixedMax.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedMax(fixedMax *foundation.NSNumber) {
-	x.inner.SetFixedMax(fixedMax)
+// SetFixedMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedMax(fixedMax obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedMax:"), objref.IDOf(fixedMax))
 }
 
-// FixedMin calls the underlying FixedMin.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedMin() *foundation.NSNumber {
-	return x.inner.FixedMin()
+// FixedMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedMin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fixedMin"))
+	return obj.Wrap(_r)
 }
 
-// SetFixedMin calls the underlying SetFixedMin.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedMin(fixedMin *foundation.NSNumber) {
-	x.inner.SetFixedMin(fixedMin)
+// SetFixedMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedMin(fixedMin obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedMin:"), objref.IDOf(fixedMin))
 }
 
-// FixedTypical calls the underlying FixedTypical.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedTypical() *foundation.NSNumber {
-	return x.inner.FixedTypical()
+// FixedTypical wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) FixedTypical() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fixedTypical"))
+	return obj.Wrap(_r)
 }
 
-// SetFixedTypical calls the underlying SetFixedTypical.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedTypical(fixedTypical *foundation.NSNumber) {
-	x.inner.SetFixedTypical(fixedTypical)
+// SetFixedTypical wraps the corresponding Objective-C method.
+func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedTypical(fixedTypical obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFixedTypical:"), objref.IDOf(fixedTypical))
 }
 
 // MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructable is the interface implemented by [MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct], for mocking and DI.
 type MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructable interface {
-	Unwrap() *raw.MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithRangeMin(rangeMin *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithRangeMax(rangeMax *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithPercentMax(percentMax *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithPercentMin(percentMin *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithPercentTypical(percentTypical *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithFixedMax(fixedMax *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithFixedMin(fixedMin *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	WithFixedTypical(fixedTypical *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
-	RangeMin() *foundation.NSNumber
-	SetRangeMin(rangeMin *foundation.NSNumber)
-	RangeMax() *foundation.NSNumber
-	SetRangeMax(rangeMax *foundation.NSNumber)
-	PercentMax() *foundation.NSNumber
-	SetPercentMax(percentMax *foundation.NSNumber)
-	PercentMin() *foundation.NSNumber
-	SetPercentMin(percentMin *foundation.NSNumber)
-	PercentTypical() *foundation.NSNumber
-	SetPercentTypical(percentTypical *foundation.NSNumber)
-	FixedMax() *foundation.NSNumber
-	SetFixedMax(fixedMax *foundation.NSNumber)
-	FixedMin() *foundation.NSNumber
-	SetFixedMin(fixedMin *foundation.NSNumber)
-	FixedTypical() *foundation.NSNumber
-	SetFixedTypical(fixedTypical *foundation.NSNumber)
+	obj.Object
+	WithRangeMin(rangeMin obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithRangeMax(rangeMax obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithPercentMax(percentMax obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithPercentMin(percentMin obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithPercentTypical(percentTypical obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithFixedMax(fixedMax obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithFixedMin(fixedMin obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	WithFixedTypical(fixedTypical obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct
+	RangeMin() obj.Object
+	SetRangeMin(rangeMin obj.Object)
+	RangeMax() obj.Object
+	SetRangeMax(rangeMax obj.Object)
+	PercentMax() obj.Object
+	SetPercentMax(percentMax obj.Object)
+	PercentMin() obj.Object
+	SetPercentMin(percentMin obj.Object)
+	PercentTypical() obj.Object
+	SetPercentTypical(percentTypical obj.Object)
+	FixedMax() obj.Object
+	SetFixedMax(fixedMax obj.Object)
+	FixedMin() obj.Object
+	SetFixedMin(fixedMin obj.Object)
+	FixedTypical() obj.Object
+	SetFixedTypical(fixedTypical obj.Object)
 }
 
 var _ MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStructable = (*MTRElectricalEnergyMeasurementClusterMeasurementAccuracyRangeStruct)(nil)

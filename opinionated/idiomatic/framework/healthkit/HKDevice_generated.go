@@ -5,134 +5,149 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A device that generates data for HealthKit.
+// Device is an idiomatic wrapper over the Objective-C class HKDevice.
 //
-// Device wraps [raw.HKDevice] with a fluent Go API.
+// A device that generates data for HealthKit.
 type Device struct {
-	inner *raw.HKDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKDevice].
-func (x *Device) Unwrap() *raw.HKDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Device) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceFromID adopts an existing object pointer as a Device (nil for 0).
+// DeviceFromID adopts an existing Objective-C object as a Device
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	return &Device{inner: raw.HKDeviceFromID(id)}
+	x := &Device{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new device object.
-//
-// NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier creates a new [Device].
+// deviceAdopt wraps an Objective-C object that this code just created as a
+// Device (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceAdopt(id objc.ID) *Device {
+	if id == 0 {
+		return nil
+	}
+	x := &Device{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Device) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Device) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier initializes a new device object.
 func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name string, manufacturer string, model string, hardwareVersion string, firmwareVersion string, softwareVersion string, localIdentifier string, uDIDeviceIdentifier string) *Device {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDevice")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(manufacturer).Ptr(), foundation.NSStringStringWithUTF8String(model).Ptr(), foundation.NSStringStringWithUTF8String(hardwareVersion).Ptr(), foundation.NSStringStringWithUTF8String(firmwareVersion).Ptr(), foundation.NSStringStringWithUTF8String(softwareVersion).Ptr(), foundation.NSStringStringWithUTF8String(localIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(uDIDeviceIdentifier).Ptr())
-	return &Device{inner: raw.HKDeviceFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKDevice")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier:"), purego.NSString(name), purego.NSString(manufacturer), purego.NSString(model), purego.NSString(hardwareVersion), purego.NSString(firmwareVersion), purego.NSString(softwareVersion), purego.NSString(localIdentifier), purego.NSString(uDIDeviceIdentifier))
+	return deviceAdopt(_id)
 }
 
-// @property      name @abstract      The name of the receiver. @discussion    The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
-//
-// Name calls the underlying Name.
+// Name the name of the receiver. The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
 func (x *Device) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      manufacturer @abstract      The manufacturer of the receiver.
-//
-// Manufacturer calls the underlying Manufacturer.
+// Manufacturer the manufacturer of the receiver.
 func (x *Device) Manufacturer() string {
-	_r := x.inner.Manufacturer()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturer"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      model @abstract      The model of the receiver.
-//
-// Model calls the underlying Model.
+// Model the model of the receiver.
 func (x *Device) Model() string {
-	_r := x.inner.Model()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      hardwareVersion @abstract      The hardware revision of the receiver.
-//
-// HardwareVersion calls the underlying HardwareVersion.
+// HardwareVersion the hardware revision of the receiver.
 func (x *Device) HardwareVersion() string {
-	_r := x.inner.HardwareVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      firmwareVersion @abstract      The firmware revision of the receiver.
-//
-// FirmwareVersion calls the underlying FirmwareVersion.
+// FirmwareVersion the firmware revision of the receiver.
 func (x *Device) FirmwareVersion() string {
-	_r := x.inner.FirmwareVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firmwareVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      softwareVersion @abstract      The software revision of the receiver.
-//
-// SoftwareVersion calls the underlying SoftwareVersion.
+// SoftwareVersion the software revision of the receiver.
 func (x *Device) SoftwareVersion() string {
-	_r := x.inner.SoftwareVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      localIdentifier @abstract      A unique identifier for the receiver. @discussion    This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
-//
-// LocalIdentifier calls the underlying LocalIdentifier.
+// LocalIdentifier a unique identifier for the receiver. This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
 func (x *Device) LocalIdentifier() string {
-	_r := x.inner.LocalIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      UDIDeviceIdentifier @abstract      Represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). @discussion    The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
-//
-// UDIDeviceIdentifier calls the underlying UDIDeviceIdentifier.
+// UDIDeviceIdentifier represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
 func (x *Device) UDIDeviceIdentifier() string {
-	_r := x.inner.UDIDeviceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UDIDeviceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Deviceable is the interface implemented by [Device], for mocking and DI.
 type Deviceable interface {
-	Unwrap() *raw.HKDevice
+	obj.Object
 	Name() string
 	Manufacturer() string
 	Model() string

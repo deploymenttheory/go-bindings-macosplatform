@@ -5,129 +5,142 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A central repository of audio assets.
+// AssetRegistry is an idiomatic wrapper over the Objective-C class PHASEAssetRegistry.
 //
-// AssetRegistry wraps [raw.PHASEAssetRegistry] with a fluent Go API.
+// A central repository of audio assets.
 type AssetRegistry struct {
-	inner *raw.PHASEAssetRegistry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEAssetRegistry].
-func (x *AssetRegistry) Unwrap() *raw.PHASEAssetRegistry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetRegistry) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetRegistryFromID adopts an existing object pointer as a AssetRegistry (nil for 0).
+// AssetRegistryFromID adopts an existing Objective-C object as a AssetRegistry
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetRegistryFromID(id objc.ID) *AssetRegistry {
 	if id == 0 {
 		return nil
 	}
-	return &AssetRegistry{inner: raw.PHASEAssetRegistryFromID(id)}
+	x := &AssetRegistry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetRegistry creates a new [AssetRegistry].
-func NewAssetRegistry() *AssetRegistry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEAssetRegistry")), objc.RegisterName("new"))
-	return &AssetRegistry{inner: raw.PHASEAssetRegistryFromID(_id)}
-}
-
-// Registers a global metaparameter with the asset registry.
-//
-// RegisterGlobalMetaParameterError calls the underlying RegisterGlobalMetaParameterError.
-func (x *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *raw.PHASEMetaParameterDefinition) (*GlobalMetaParameterAsset, error) {
-	_r, _err := x.inner.RegisterGlobalMetaParameterError(metaParameterDefinition)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &GlobalMetaParameterAsset{inner: _r}, nil
-}
-
-// Registers the root node of the sound event asset.
-//
-// RegisterSoundEventAssetWithRootNodeIdentifierError calls the underlying RegisterSoundEventAssetWithRootNodeIdentifierError.
-func (x *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *raw.PHASESoundEventNodeDefinition, identifier string) (*SoundEventNodeAsset, error) {
-	_r, _err := x.inner.RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode, foundation.NSStringStringWithUTF8String(identifier))
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &SoundEventNodeAsset{inner: _r}, nil
-}
-
-// Loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
-//
-// RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError calls the underlying RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError.
-func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode PHASENormalizationMode) (*SoundAsset, error) {
-	_r, _err := x.inner.RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(identifier), raw.PHASEAssetType(assetType), channelLayout, raw.PHASENormalizationMode(normalizationMode))
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &SoundAsset{inner: _r}, nil
-}
-
-// Loads a sound asset from memory and adds it to the engine’s list of registered assets.
-//
-// RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError calls the underlying RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError.
-func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier string, format *avfaudio.AVAudioFormat, normalizationMode PHASENormalizationMode) (*SoundAsset, error) {
-	_r, _err := x.inner.RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data, foundation.NSStringStringWithUTF8String(identifier), format, raw.PHASENormalizationMode(normalizationMode))
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &SoundAsset{inner: _r}, nil
-}
-
-// Deallocates system memory for a given asset and removes it from the engine’s list of registered assets.
-//
-// UnregisterAssetWithIdentifierCompletion calls the underlying UnregisterAssetWithIdentifierCompletion.
-func (x *AssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool)) {
-	x.inner.UnregisterAssetWithIdentifierCompletion(foundation.NSStringStringWithUTF8String(identifier), handler)
-}
-
-// Provides the asset named with the designated identifier.
-//
-// AssetForIdentifier calls the underlying AssetForIdentifier.
-func (x *AssetRegistry) AssetForIdentifier(identifier string) *Asset {
-	_r := x.inner.AssetForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
+// assetRegistryAdopt wraps an Objective-C object that this code just created as a
+// AssetRegistry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetRegistryAdopt(id objc.ID) *AssetRegistry {
+	if id == 0 {
 		return nil
 	}
-	return &Asset{inner: _r}
+	x := &AssetRegistry{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// GlobalMetaParameters calls the underlying GlobalMetaParameters.
-func (x *AssetRegistry) GlobalMetaParameters() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEMetaParameter] {
-	return x.inner.GlobalMetaParameters()
+// Description returns the object's -description text.
+func (x *AssetRegistry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetRegistry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetRegistry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetRegistry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetRegistry creates a new AssetRegistry.
+func NewAssetRegistry() *AssetRegistry {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEAssetRegistry")), objc.RegisterName("new"))
+	return assetRegistryAdopt(_id)
+}
+
+// RegisterGlobalMetaParameterError registers a global metaparameter with the asset registry.
+func (x *AssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (result *GlobalMetaParameterAsset, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerGlobalMetaParameter:error:"), objref.IDOf(metaParameterDefinition), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return GlobalMetaParameterAssetFromID(_r), nil
+}
+
+// RegisterSoundEventAssetWithRootNodeIdentifierError registers the root node of the sound event asset.
+func (x *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (result *SoundEventNodeAsset, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerSoundEventAssetWithRootNode:identifier:error:"), objref.IDOf(rootNode), purego.NSString(identifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return SoundEventNodeAssetFromID(_r), nil
+}
+
+// RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
+func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerSoundAssetAtURL:identifier:assetType:channelLayout:normalizationMode:error:"), rt.FileURL(url), purego.NSString(identifier), assetType, objref.IDOf(channelLayout), normalizationMode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return SoundAssetFromID(_r), nil
+}
+
+// RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError loads a sound asset from memory and adds it to the engine’s list of registered assets.
+func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerSoundAssetWithData:identifier:format:normalizationMode:error:"), objref.IDOf(data), purego.NSString(identifier), objref.IDOf(format), normalizationMode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return SoundAssetFromID(_r), nil
+}
+
+// UnregisterAssetWithIdentifierCompletion deallocates system memory for a given asset and removes it from the engine’s list of registered assets.
+func (x *AssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterAssetWithIdentifier:completion:"), purego.NSString(identifier), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
+}
+
+// AssetForIdentifier provides the asset named with the designated identifier.
+func (x *AssetRegistry) AssetForIdentifier(identifier string) *Asset {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetForIdentifier:"), purego.NSString(identifier))
+	return AssetFromID(_r)
+}
+
+// GlobalMetaParameters wraps the corresponding Objective-C method.
+func (x *AssetRegistry) GlobalMetaParameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalMetaParameters"))
+	return obj.Wrap(_r)
 }
 
 // AssetRegistryable is the interface implemented by [AssetRegistry], for mocking and DI.
 type AssetRegistryable interface {
-	Unwrap() *raw.PHASEAssetRegistry
-	RegisterGlobalMetaParameterError(metaParameterDefinition *raw.PHASEMetaParameterDefinition) (*GlobalMetaParameterAsset, error)
-	RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *raw.PHASESoundEventNodeDefinition, identifier string) (*SoundEventNodeAsset, error)
-	RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode PHASENormalizationMode) (*SoundAsset, error)
-	RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier string, format *avfaudio.AVAudioFormat, normalizationMode PHASENormalizationMode) (*SoundAsset, error)
+	obj.Object
+	RegisterGlobalMetaParameterError(metaParameterDefinition *MetaParameterDefinition) (result *GlobalMetaParameterAsset, err error)
+	RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *SoundEventNodeDefinition, identifier string) (result *SoundEventNodeAsset, err error)
+	RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType AssetType, channelLayout obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error)
+	RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data obj.Object, identifier string, format obj.Object, normalizationMode NormalizationMode) (result *SoundAsset, err error)
 	UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool))
 	AssetForIdentifier(identifier string) *Asset
-	GlobalMetaParameters() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEMetaParameter]
+	GlobalMetaParameters() obj.Object
 }
 
 var _ AssetRegistryable = (*AssetRegistry)(nil)

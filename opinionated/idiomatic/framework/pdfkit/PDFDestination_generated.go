@@ -5,85 +5,108 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A PDFDestination object describes a point on a PDF page.
+// Destination is an idiomatic wrapper over the Objective-C class PDFDestination.
 //
-// Destination wraps [raw.PDFDestination] with a fluent Go API.
+// A PDFDestination object describes a point on a PDF page.
 type Destination struct {
-	inner *raw.PDFDestination
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFDestination].
-func (x *Destination) Unwrap() *raw.PDFDestination { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Destination) ID() objc.ID { return x.inner.Ptr() }
-
-// DestinationFromID adopts an existing object pointer as a Destination (nil for 0).
+// DestinationFromID adopts an existing Objective-C object as a Destination
+// (nil for 0), retaining it and registering a release finalizer.
 func DestinationFromID(id objc.ID) *Destination {
 	if id == 0 {
 		return nil
 	}
-	return &Destination{inner: raw.PDFDestinationFromID(id)}
-}
-
-// Initializes the destination.
-//
-// NewDestinationWithPageAtPoint creates a new [Destination].
-func NewDestinationWithPageAtPoint(page *raw.PDFPage, point corefoundation.CGPoint) *Destination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDestination")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPage:atPoint:"), page.Ptr(), point)
-	return &Destination{inner: raw.PDFDestinationFromID(_id)}
-}
-
-// WithZoom sets the zoom property and returns the receiver for chaining.
-func (x *Destination) WithZoom(zoom float64) *Destination {
-	x.inner.SetZoom(zoom)
+	x := &Destination{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a comparison result that indicates the location of the destination in the document, relative to the current position.
-//
-// Compare calls the underlying Compare.
-func (x *Destination) Compare(destination *raw.PDFDestination) foundation.NSComparisonResult {
-	return x.inner.Compare(destination)
-}
-
-// Page calls the underlying Page.
-func (x *Destination) Page() *Page {
-	_r := x.inner.Page()
-	if _r == nil {
+// destinationAdopt wraps an Objective-C object that this code just created as a
+// Destination (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func destinationAdopt(id objc.ID) *Destination {
+	if id == 0 {
 		return nil
 	}
-	return &Page{inner: _r}
+	x := &Destination{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Point calls the underlying Point.
+// Description returns the object's -description text.
+func (x *Destination) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Destination) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Destination) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Destination) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDestinationWithPageAtPoint initializes the destination.
+func NewDestinationWithPageAtPoint(page *Page, point corefoundation.CGPoint) *Destination {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDestination")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPage:atPoint:"), objref.IDOf(page), point)
+	return destinationAdopt(_id)
+}
+
+// WithZoom sets the property and returns the receiver so calls can be chained.
+func (x *Destination) WithZoom(zoom float64) *Destination {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoom:"), zoom)
+	return x
+}
+
+// Page wraps the corresponding Objective-C method.
+func (x *Destination) Page() *Page {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("page"))
+	return PageFromID(_r)
+}
+
+// Point wraps the corresponding Objective-C method.
 func (x *Destination) Point() corefoundation.CGPoint {
-	return x.inner.Point()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("point"))
+	return _r
 }
 
-// Zoom calls the underlying Zoom.
+// Zoom wraps the corresponding Objective-C method.
 func (x *Destination) Zoom() float64 {
-	return x.inner.Zoom()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zoom"))
+	return _r
 }
 
-// SetZoom calls the underlying SetZoom.
+// SetZoom wraps the corresponding Objective-C method.
 func (x *Destination) SetZoom(zoom float64) {
-	x.inner.SetZoom(zoom)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoom:"), zoom)
 }
 
 // Destinationable is the interface implemented by [Destination], for mocking and DI.
 type Destinationable interface {
-	Unwrap() *raw.PDFDestination
+	obj.Object
 	WithZoom(zoom float64) *Destination
-	Compare(destination *raw.PDFDestination) foundation.NSComparisonResult
 	Page() *Page
 	Point() corefoundation.CGPoint
 	Zoom() float64

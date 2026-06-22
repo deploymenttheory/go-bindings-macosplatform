@@ -5,138 +5,111 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AVB17221AECPAddressAccessMessage wraps [raw.AVB17221AECPAddressAccessMessage] with a fluent Go API.
+// AVB17221AECPAddressAccessMessage is an idiomatic wrapper over the Objective-C class AVB17221AECPAddressAccessMessage.
+//
+// It embeds [AVB17221AECPMessage], promoting that type's methods.
 type AVB17221AECPAddressAccessMessage struct {
-	inner *raw.AVB17221AECPAddressAccessMessage
+	AVB17221AECPMessage
 }
 
-// Unwrap returns the underlying [raw.AVB17221AECPAddressAccessMessage].
-func (x *AVB17221AECPAddressAccessMessage) Unwrap() *raw.AVB17221AECPAddressAccessMessage {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB17221AECPAddressAccessMessage) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB17221AECPAddressAccessMessageFromID adopts an existing object pointer as a AVB17221AECPAddressAccessMessage (nil for 0).
+// AVB17221AECPAddressAccessMessageFromID adopts an existing Objective-C object as a AVB17221AECPAddressAccessMessage
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB17221AECPAddressAccessMessageFromID(id objc.ID) *AVB17221AECPAddressAccessMessage {
 	if id == 0 {
 		return nil
 	}
-	return &AVB17221AECPAddressAccessMessage{inner: raw.AVB17221AECPAddressAccessMessageFromID(id)}
+	x := &AVB17221AECPAddressAccessMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAVB17221AECPAddressAccessMessage creates a new [AVB17221AECPAddressAccessMessage].
+// aVB17221AECPAddressAccessMessageAdopt wraps an Objective-C object that this code just created as a
+// AVB17221AECPAddressAccessMessage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB17221AECPAddressAccessMessageAdopt(id objc.ID) *AVB17221AECPAddressAccessMessage {
+	if id == 0 {
+		return nil
+	}
+	x := &AVB17221AECPAddressAccessMessage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAVB17221AECPAddressAccessMessage creates a new AVB17221AECPAddressAccessMessage.
 func NewAVB17221AECPAddressAccessMessage() *AVB17221AECPAddressAccessMessage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221AECPAddressAccessMessage")), objc.RegisterName("new"))
-	return &AVB17221AECPAddressAccessMessage{inner: raw.AVB17221AECPAddressAccessMessageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessMessage")), objc.RegisterName("new"))
+	return aVB17221AECPAddressAccessMessageAdopt(_id)
 }
 
-// @property	tlvs @abstract	An array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
-//
-// WithTlvs sets the collection, converting the Go slice to an NSArray.
-func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetTlvs(foundation.NSArrayFromID[*raw.AVB17221AECPAddressAccessTLV](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVB17221AECPAddressAccessTLV](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetTlvs(_arr)
+// WithTlvs an array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
+func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage {
+	_arr := purego.SliceToNSArray(items, func(_v *AVB17221AECPAddressAccessTLV) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTlvs:"), _arr)
 	return x
 }
 
-// @property	messageType @abstract	The message_type field of the AECP message.
-//
-// WithMessageType sets the messageType property and returns the receiver for chaining.
+// WithMessageType the message_type field of the AECP message.
 func (x *AVB17221AECPAddressAccessMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
 	return x
 }
 
-// @property	status @abstract	The status field of the AECP message.
-//
-// WithStatus sets the status property and returns the receiver for chaining.
+// WithStatus the status field of the AECP message.
 func (x *AVB17221AECPAddressAccessMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
-// @property	targetEntityID @abstract	The target_entity_id field of the AECP message.
-//
-// WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
+// WithTargetEntityID the target_entity_id field of the AECP message.
 func (x *AVB17221AECPAddressAccessMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetEntityID:"), targetEntityID)
 	return x
 }
 
-// @property	controllerEntityID @abstract	The controller_entity_id field of the AECP message.
-//
-// WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
+// WithControllerEntityID the controller_entity_id field of the AECP message.
 func (x *AVB17221AECPAddressAccessMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
 	return x
 }
 
-// @property	sequenceID @abstract	The sequence_id field of the AECP message.
-//
-// WithSequenceID sets the sequenceID property and returns the receiver for chaining.
+// WithSequenceID the sequence_id field of the AECP message.
 func (x *AVB17221AECPAddressAccessMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
 	return x
 }
 
-// @property	sourceMAC @abstract	The source_mac field of the AECP message.
-//
-// WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
+// WithSourceMAC the source_mac field of the AECP message.
 func (x *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return x
 }
 
-// @property	tlvs @abstract	An array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
+// Tlvs an array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
 //
 // Tlvs returns the collection as a Go slice.
 func (x *AVB17221AECPAddressAccessMessage) Tlvs() []*AVB17221AECPAddressAccessTLV {
-	arr := x.inner.Tlvs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AVB17221AECPAddressAccessTLV {
-		return &AVB17221AECPAddressAccessTLV{inner: raw.AVB17221AECPAddressAccessTLVFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tlvs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AVB17221AECPAddressAccessTLV { return AVB17221AECPAddressAccessTLVFromID(_id) })
 }
 
-// SetTlvs calls the underlying SetTlvs.
-func (x *AVB17221AECPAddressAccessMessage) SetTlvs(tlvs *foundation.NSArray[*raw.AVB17221AECPAddressAccessTLV]) {
-	x.inner.SetTlvs(tlvs)
-}
-
-func (x *AVB17221AECPAddressAccessMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
-	return &x.inner.AVB17221AECPMessage
+// SetTlvs wraps the corresponding Objective-C method.
+func (x *AVB17221AECPAddressAccessMessage) SetTlvs(tlvs []*AVB17221AECPAddressAccessTLV) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTlvs:"), purego.SliceToNSArray(tlvs, func(_v *AVB17221AECPAddressAccessTLV) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AVB17221AECPAddressAccessMessageable is the interface implemented by [AVB17221AECPAddressAccessMessage], for mocking and DI.
 type AVB17221AECPAddressAccessMessageable interface {
-	Unwrap() *raw.AVB17221AECPAddressAccessMessage
-	WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage
+	obj.Object
+	WithTlvs(items ...*AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage
 	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage
 	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage
@@ -144,7 +117,9 @@ type AVB17221AECPAddressAccessMessageable interface {
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage
 	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAddressAccessMessage
 	Tlvs() []*AVB17221AECPAddressAccessTLV
-	SetTlvs(tlvs *foundation.NSArray[*raw.AVB17221AECPAddressAccessTLV])
+	SetTlvs(tlvs []*AVB17221AECPAddressAccessTLV)
 }
 
 var _ AVB17221AECPAddressAccessMessageable = (*AVB17221AECPAddressAccessMessage)(nil)
+
+var _ AVB17221AECPMessageProvider = (*AVB17221AECPAddressAccessMessage)(nil)

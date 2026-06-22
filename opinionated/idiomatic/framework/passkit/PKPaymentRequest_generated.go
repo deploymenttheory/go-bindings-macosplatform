@@ -5,691 +5,588 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a request for payment, including details about payment-processing capabilities, the payment amount, and shipping information.
+// PaymentRequest is an idiomatic wrapper over the Objective-C class PKPaymentRequest.
 //
-// PaymentRequest wraps [raw.PKPaymentRequest] with a fluent Go API.
+// An object that represents a request for payment, including details about payment-processing capabilities, the payment amount, and shipping information.
 type PaymentRequest struct {
-	inner *raw.PKPaymentRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentRequest].
-func (x *PaymentRequest) Unwrap() *raw.PKPaymentRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentRequestFromID adopts an existing object pointer as a PaymentRequest (nil for 0).
+// PaymentRequestFromID adopts an existing Objective-C object as a PaymentRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentRequestFromID(id objc.ID) *PaymentRequest {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentRequest{inner: raw.PKPaymentRequestFromID(id)}
-}
-
-// NewPaymentRequest creates a new [PaymentRequest].
-func NewPaymentRequest() *PaymentRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequest")), objc.RegisterName("new"))
-	return &PaymentRequest{inner: raw.PKPaymentRequestFromID(_id)}
-}
-
-// Your merchant identifier.
-//
-// WithMerchantIdentifier sets the merchantIdentifier property and returns the receiver for chaining.
-func (x *PaymentRequest) WithMerchantIdentifier(merchantIdentifier string) *PaymentRequest {
-	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+	x := &PaymentRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithAttributionIdentifier sets the attributionIdentifier property and returns the receiver for chaining.
-func (x *PaymentRequest) WithAttributionIdentifier(attributionIdentifier string) *PaymentRequest {
-	x.inner.SetAttributionIdentifier(foundation.NSStringStringWithUTF8String(attributionIdentifier))
-	return x
-}
-
-// The merchant’s two-letter ISO 3166 country code.
-//
-// WithCountryCode sets the countryCode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithCountryCode(countryCode string) *PaymentRequest {
-	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
-	return x
-}
-
-// The payment methods that you support.
-//
-// WithSupportedNetworks sets the collection, converting the Go slice to an NSArray.
-func (x *PaymentRequest) WithSupportedNetworks(items ...*foundation.NSString) *PaymentRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSupportedNetworks(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSupportedNetworks(_arr)
-	return x
-}
-
-// A bit field of the payment-processing protocols and card types that you support.
-//
-// WithMerchantCapabilities sets the merchantCapabilities property and returns the receiver for chaining.
-func (x *PaymentRequest) WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *PaymentRequest {
-	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
-	return x
-}
-
-// A Boolean value that determines whether the payment sheet displays the coupon code field.
-//
-// WithSupportsCouponCode sets the supportsCouponCode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithSupportsCouponCode(supportsCouponCode bool) *PaymentRequest {
-	x.inner.SetSupportsCouponCode(supportsCouponCode)
-	return x
-}
-
-// The initial coupon code for the payment request.
-//
-// WithCouponCode sets the couponCode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithCouponCode(couponCode string) *PaymentRequest {
-	x.inner.SetCouponCode(foundation.NSStringStringWithUTF8String(couponCode))
-	return x
-}
-
-// An optional four-digit property, in ISO 18245 format, that represents the type of goods or service the merchant provides for the transaction.
-//
-// WithMerchantCategoryCode sets the merchantCategoryCode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithMerchantCategoryCode(merchantCategoryCode int16) *PaymentRequest {
-	x.inner.SetMerchantCategoryCode(merchantCategoryCode)
-	return x
-}
-
-// An array of payment summary item objects that summarize the amount of the payment.
-//
-// WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
-func (x *PaymentRequest) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPaymentSummaryItems(foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPaymentSummaryItems(_arr)
-	return x
-}
-
-// The three-letter ISO 4217 currency code that determines the currency the payment request uses.
-//
-// WithCurrencyCode sets the currencyCode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithCurrencyCode(currencyCode string) *PaymentRequest {
-	x.inner.SetCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
-	return x
-}
-
-// A list of fields that you need for a billing contact to process the transaction.
-//
-// WithRequiredBillingContactFields sets the requiredBillingContactFields property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest {
-	x.inner.SetRequiredBillingContactFields(requiredBillingContactFields)
-	return x
-}
-
-// A bit field of billing address fields that you need in order to process the transaction.
-//
-// WithRequiredBillingAddressFields sets the requiredBillingAddressFields property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) *PaymentRequest {
-	x.inner.SetRequiredBillingAddressFields(raw.PKAddressField(requiredBillingAddressFields))
-	return x
-}
-
-// A prepopulated billing address.
-//
-// WithBillingContact sets the billingContact property and returns the receiver for chaining.
-func (x *PaymentRequest) WithBillingContact(billingContact *Contact) *PaymentRequest {
-	x.inner.SetBillingContact(billingContact.Unwrap())
-	return x
-}
-
-// A list of fields that you need for a shipping contact to process the transaction.
-//
-// WithRequiredShippingContactFields sets the requiredShippingContactFields property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest {
-	x.inner.SetRequiredShippingContactFields(requiredShippingContactFields)
-	return x
-}
-
-// A bit field of shipping address fields that you need in order to process the transaction.
-//
-// WithRequiredShippingAddressFields sets the requiredShippingAddressFields property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) *PaymentRequest {
-	x.inner.SetRequiredShippingAddressFields(raw.PKAddressField(requiredShippingAddressFields))
-	return x
-}
-
-// A prepopulated shipping address.
-//
-// WithShippingContact sets the shippingContact property and returns the receiver for chaining.
-func (x *PaymentRequest) WithShippingContact(shippingContact *Contact) *PaymentRequest {
-	x.inner.SetShippingContact(shippingContact.Unwrap())
-	return x
-}
-
-// An array of shipping method objects that describe the supported shipping methods.
-//
-// WithShippingMethods sets the collection, converting the Go slice to an NSArray.
-func (x *PaymentRequest) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShippingMethods(foundation.NSArrayFromID[*raw.PKShippingMethod](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.PKShippingMethod](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShippingMethods(_arr)
-	return x
-}
-
-// The type of shipping the request uses.
-//
-// WithShippingType sets the shippingType property and returns the receiver for chaining.
-func (x *PaymentRequest) WithShippingType(shippingType PKShippingType) *PaymentRequest {
-	x.inner.SetShippingType(raw.PKShippingType(shippingType))
-	return x
-}
-
-// A value that indicates whether the shipping mode prevents the user from editing the shipping address.
-//
-// WithShippingContactEditingMode sets the shippingContactEditingMode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) *PaymentRequest {
-	x.inner.SetShippingContactEditingMode(raw.PKShippingContactEditingMode(shippingContactEditingMode))
-	return x
-}
-
-// Application-specific data or state.
-//
-// WithApplicationData sets the applicationData property and returns the receiver for chaining.
-func (x *PaymentRequest) WithApplicationData(applicationData *foundation.NSData) *PaymentRequest {
-	x.inner.SetApplicationData(applicationData)
-	return x
-}
-
-// A list of ISO 3166 country codes to limit payments to cards from specific countries or regions.
-//
-// WithSupportedCountries sets the supportedCountries property and returns the receiver for chaining.
-func (x *PaymentRequest) WithSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) *PaymentRequest {
-	x.inner.SetSupportedCountries(supportedCountries)
-	return x
-}
-
-// An array of payment token contexts to request multiple payment tokens with one payment token per context.
-//
-// WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
-func (x *PaymentRequest) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMultiTokenContexts(foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMultiTokenContexts(_arr)
-	return x
-}
-
-// An optional request to set up a recurring payment, typically a subscription.
-//
-// WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest {
-	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
-	return x
-}
-
-// An optional request to set up an automatic reload payment, such as a store card top-up.
-//
-// WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest {
-	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
-	return x
-}
-
-// A request to set up a deferred payment, such as a hotel booking or a pre-order.
-//
-// WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest {
-	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())
-	return x
-}
-
-// A value that indicates whether Apple Pay Later is available for a transaction.
-//
-// WithApplePayLaterAvailability sets the applePayLaterAvailability property and returns the receiver for chaining.
-func (x *PaymentRequest) WithApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) *PaymentRequest {
-	x.inner.SetApplePayLaterAvailability(raw.PKApplePayLaterAvailability(applePayLaterAvailability))
-	return x
-}
-
-// A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant.
-//
-// WithIsDelegatedRequest sets the isDelegatedRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest {
-	x.inner.SetIsDelegatedRequest(isDelegatedRequest)
-	return x
-}
-
-// MerchantIdentifier calls the underlying MerchantIdentifier.
-func (x *PaymentRequest) MerchantIdentifier() string {
-	_r := x.inner.MerchantIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetMerchantIdentifier calls the underlying SetMerchantIdentifier.
-func (x *PaymentRequest) SetMerchantIdentifier(merchantIdentifier string) {
-	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
-}
-
-// AttributionIdentifier calls the underlying AttributionIdentifier.
-func (x *PaymentRequest) AttributionIdentifier() string {
-	_r := x.inner.AttributionIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetAttributionIdentifier calls the underlying SetAttributionIdentifier.
-func (x *PaymentRequest) SetAttributionIdentifier(attributionIdentifier string) {
-	x.inner.SetAttributionIdentifier(foundation.NSStringStringWithUTF8String(attributionIdentifier))
-}
-
-// CountryCode calls the underlying CountryCode.
-func (x *PaymentRequest) CountryCode() string {
-	_r := x.inner.CountryCode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetCountryCode calls the underlying SetCountryCode.
-func (x *PaymentRequest) SetCountryCode(countryCode string) {
-	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
-}
-
-// SupportedNetworks returns the collection as a Go slice.
-func (x *PaymentRequest) SupportedNetworks() []*foundation.NSString {
-	arr := x.inner.SupportedNetworks()
-	if arr == nil {
+// paymentRequestAdopt wraps an Objective-C object that this code just created as a
+// PaymentRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentRequestAdopt(id objc.ID) *PaymentRequest {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+	x := &PaymentRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSupportedNetworks calls the underlying SetSupportedNetworks.
-func (x *PaymentRequest) SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetSupportedNetworks(supportedNetworks)
+// Description returns the object's -description text.
+func (x *PaymentRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// MerchantCapabilities calls the underlying MerchantCapabilities.
-func (x *PaymentRequest) MerchantCapabilities() PKMerchantCapability {
-	return PKMerchantCapability(x.inner.MerchantCapabilities())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetMerchantCapabilities calls the underlying SetMerchantCapabilities.
-func (x *PaymentRequest) SetMerchantCapabilities(merchantCapabilities PKMerchantCapability) {
-	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SupportsCouponCode calls the underlying SupportsCouponCode.
-func (x *PaymentRequest) SupportsCouponCode() bool {
-	return x.inner.SupportsCouponCode()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PaymentRequest) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetSupportsCouponCode calls the underlying SetSupportsCouponCode.
-func (x *PaymentRequest) SetSupportsCouponCode(supportsCouponCode bool) {
-	x.inner.SetSupportsCouponCode(supportsCouponCode)
+// NewPaymentRequest creates a new PaymentRequest.
+func NewPaymentRequest() *PaymentRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("new"))
+	return paymentRequestAdopt(_id)
 }
 
-// CouponCode calls the underlying CouponCode.
-func (x *PaymentRequest) CouponCode() string {
-	_r := x.inner.CouponCode()
-	if _r == nil {
+// WithMerchantIdentifier your merchant identifier.
+func (x *PaymentRequest) WithMerchantIdentifier(merchantIdentifier string) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
+	return x
+}
+
+// WithAttributionIdentifier sets the property and returns the receiver so calls can be chained.
+func (x *PaymentRequest) WithAttributionIdentifier(attributionIdentifier string) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributionIdentifier:"), purego.NSString(attributionIdentifier))
+	return x
+}
+
+// WithCountryCode the merchant’s two-letter ISO 3166 country code.
+func (x *PaymentRequest) WithCountryCode(countryCode string) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
+	return x
+}
+
+// WithSupportedNetworks the payment methods that you support.
+func (x *PaymentRequest) WithSupportedNetworks(items ...obj.Object) *PaymentRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedNetworks:"), _arr)
+	return x
+}
+
+// WithMerchantCapabilities a bit field of the payment-processing protocols and card types that you support.
+func (x *PaymentRequest) WithMerchantCapabilities(merchantCapabilities MerchantCapability) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantCapabilities:"), merchantCapabilities)
+	return x
+}
+
+// WithSupportsCouponCode a Boolean value that determines whether the payment sheet displays the coupon code field.
+func (x *PaymentRequest) WithSupportsCouponCode(supportsCouponCode bool) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsCouponCode:"), supportsCouponCode)
+	return x
+}
+
+// WithCouponCode the initial coupon code for the payment request.
+func (x *PaymentRequest) WithCouponCode(couponCode string) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCouponCode:"), purego.NSString(couponCode))
+	return x
+}
+
+// WithMerchantCategoryCode an optional four-digit property, in ISO 18245 format, that represents the type of goods or service the merchant provides for the transaction.
+func (x *PaymentRequest) WithMerchantCategoryCode(merchantCategoryCode int16) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantCategoryCode:"), merchantCategoryCode)
+	return x
+}
+
+// WithPaymentSummaryItems an array of payment summary item objects that summarize the amount of the payment.
+func (x *PaymentRequest) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest {
+	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), _arr)
+	return x
+}
+
+// WithCurrencyCode the three-letter ISO 4217 currency code that determines the currency the payment request uses.
+func (x *PaymentRequest) WithCurrencyCode(currencyCode string) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyCode:"), purego.NSString(currencyCode))
+	return x
+}
+
+// WithRequiredBillingContactFields a list of fields that you need for a billing contact to process the transaction.
+func (x *PaymentRequest) WithRequiredBillingContactFields(requiredBillingContactFields obj.Object) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredBillingContactFields:"), objref.IDOf(requiredBillingContactFields))
+	return x
+}
+
+// WithRequiredBillingAddressFields a bit field of billing address fields that you need in order to process the transaction.
+func (x *PaymentRequest) WithRequiredBillingAddressFields(requiredBillingAddressFields AddressField) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredBillingAddressFields:"), requiredBillingAddressFields)
+	return x
+}
+
+// WithBillingContact a prepopulated billing address.
+func (x *PaymentRequest) WithBillingContact(billingContact *Contact) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingContact:"), objref.IDOf(billingContact))
+	return x
+}
+
+// WithRequiredShippingContactFields a list of fields that you need for a shipping contact to process the transaction.
+func (x *PaymentRequest) WithRequiredShippingContactFields(requiredShippingContactFields obj.Object) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredShippingContactFields:"), objref.IDOf(requiredShippingContactFields))
+	return x
+}
+
+// WithRequiredShippingAddressFields a bit field of shipping address fields that you need in order to process the transaction.
+func (x *PaymentRequest) WithRequiredShippingAddressFields(requiredShippingAddressFields AddressField) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredShippingAddressFields:"), requiredShippingAddressFields)
+	return x
+}
+
+// WithShippingContact a prepopulated shipping address.
+func (x *PaymentRequest) WithShippingContact(shippingContact *Contact) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingContact:"), objref.IDOf(shippingContact))
+	return x
+}
+
+// WithShippingMethods an array of shipping method objects that describe the supported shipping methods.
+func (x *PaymentRequest) WithShippingMethods(items ...*ShippingMethod) *PaymentRequest {
+	_arr := purego.SliceToNSArray(items, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), _arr)
+	return x
+}
+
+// WithShippingType the type of shipping the request uses.
+func (x *PaymentRequest) WithShippingType(shippingType ShippingType) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingType:"), shippingType)
+	return x
+}
+
+// WithShippingContactEditingMode a value that indicates whether the shipping mode prevents the user from editing the shipping address.
+func (x *PaymentRequest) WithShippingContactEditingMode(shippingContactEditingMode ShippingContactEditingMode) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingContactEditingMode:"), shippingContactEditingMode)
+	return x
+}
+
+// WithApplicationData application-specific data or state.
+func (x *PaymentRequest) WithApplicationData(applicationData obj.Object) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationData:"), objref.IDOf(applicationData))
+	return x
+}
+
+// WithSupportedCountries a list of ISO 3166 country codes to limit payments to cards from specific countries or regions.
+func (x *PaymentRequest) WithSupportedCountries(supportedCountries obj.Object) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedCountries:"), objref.IDOf(supportedCountries))
+	return x
+}
+
+// WithMultiTokenContexts an array of payment token contexts to request multiple payment tokens with one payment token per context.
+func (x *PaymentRequest) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequest {
+	_arr := purego.SliceToNSArray(items, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), _arr)
+	return x
+}
+
+// WithRecurringPaymentRequest an optional request to set up a recurring payment, typically a subscription.
+func (x *PaymentRequest) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
+	return x
+}
+
+// WithAutomaticReloadPaymentRequest an optional request to set up an automatic reload payment, such as a store card top-up.
+func (x *PaymentRequest) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
+	return x
+}
+
+// WithDeferredPaymentRequest a request to set up a deferred payment, such as a hotel booking or a pre-order.
+func (x *PaymentRequest) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
+	return x
+}
+
+// WithApplePayLaterAvailability a value that indicates whether Apple Pay Later is available for a transaction.
+func (x *PaymentRequest) WithApplePayLaterAvailability(applePayLaterAvailability ApplePayLaterAvailability) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplePayLaterAvailability:"), applePayLaterAvailability)
+	return x
+}
+
+// WithIsDelegatedRequest a Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant.
+func (x *PaymentRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDelegatedRequest:"), isDelegatedRequest)
+	return x
+}
+
+// MerchantIdentifier wraps the corresponding Objective-C method.
+func (x *PaymentRequest) MerchantIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCouponCode calls the underlying SetCouponCode.
+// SetMerchantIdentifier wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetMerchantIdentifier(merchantIdentifier string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
+}
+
+// AttributionIdentifier wraps the corresponding Objective-C method.
+func (x *PaymentRequest) AttributionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributionIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetAttributionIdentifier wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetAttributionIdentifier(attributionIdentifier string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributionIdentifier:"), purego.NSString(attributionIdentifier))
+}
+
+// CountryCode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) CountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetCountryCode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetCountryCode(countryCode string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
+}
+
+// SupportedNetworks wraps the corresponding Objective-C method.
+//
+// SupportedNetworks returns the collection as a Go slice.
+func (x *PaymentRequest) SupportedNetworks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedNetworks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetSupportedNetworks wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetSupportedNetworks(supportedNetworks []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// MerchantCapabilities wraps the corresponding Objective-C method.
+func (x *PaymentRequest) MerchantCapabilities() MerchantCapability {
+	_r := objc.Send[MerchantCapability](objref.IDOf(x), objc.RegisterName("merchantCapabilities"))
+	return _r
+}
+
+// SetMerchantCapabilities wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetMerchantCapabilities(merchantCapabilities MerchantCapability) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantCapabilities:"), merchantCapabilities)
+}
+
+// SupportsCouponCode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SupportsCouponCode() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsCouponCode"))
+	return _r
+}
+
+// SetSupportsCouponCode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetSupportsCouponCode(supportsCouponCode bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsCouponCode:"), supportsCouponCode)
+}
+
+// CouponCode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) CouponCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("couponCode"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetCouponCode wraps the corresponding Objective-C method.
 func (x *PaymentRequest) SetCouponCode(couponCode string) {
-	x.inner.SetCouponCode(foundation.NSStringStringWithUTF8String(couponCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCouponCode:"), purego.NSString(couponCode))
 }
 
-// MerchantCategoryCode calls the underlying MerchantCategoryCode.
+// MerchantCategoryCode wraps the corresponding Objective-C method.
 func (x *PaymentRequest) MerchantCategoryCode() int16 {
-	return x.inner.MerchantCategoryCode()
+	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("merchantCategoryCode"))
+	return _r
 }
 
-// SetMerchantCategoryCode calls the underlying SetMerchantCategoryCode.
+// SetMerchantCategoryCode wraps the corresponding Objective-C method.
 func (x *PaymentRequest) SetMerchantCategoryCode(merchantCategoryCode int16) {
-	x.inner.SetMerchantCategoryCode(merchantCategoryCode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantCategoryCode:"), merchantCategoryCode)
 }
 
+// PaymentSummaryItems wraps the corresponding Objective-C method.
+//
 // PaymentSummaryItems returns the collection as a Go slice.
 func (x *PaymentRequest) PaymentSummaryItems() []*PaymentSummaryItem {
-	arr := x.inner.PaymentSummaryItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentSummaryItem {
-		return &PaymentSummaryItem{inner: raw.PKPaymentSummaryItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentSummaryItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
 }
 
-// SetPaymentSummaryItems calls the underlying SetPaymentSummaryItems.
-func (x *PaymentRequest) SetPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider) {
-	_ptrs := make([]objc.ID, len(paymentSummaryItems))
-	for _i, _v := range paymentSummaryItems {
-		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetPaymentSummaryItems(_arg0)
+// SetPaymentSummaryItems wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetPaymentSummaryItems(paymentSummaryItems []*PaymentSummaryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), purego.SliceToNSArray(paymentSummaryItems, func(_v *PaymentSummaryItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// CurrencyCode calls the underlying CurrencyCode.
+// CurrencyCode wraps the corresponding Objective-C method.
 func (x *PaymentRequest) CurrencyCode() string {
-	_r := x.inner.CurrencyCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCurrencyCode calls the underlying SetCurrencyCode.
+// SetCurrencyCode wraps the corresponding Objective-C method.
 func (x *PaymentRequest) SetCurrencyCode(currencyCode string) {
-	x.inner.SetCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyCode:"), purego.NSString(currencyCode))
 }
 
-// RequiredBillingContactFields calls the underlying RequiredBillingContactFields.
-func (x *PaymentRequest) RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.RequiredBillingContactFields()
+// RequiredBillingContactFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) RequiredBillingContactFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredBillingContactFields"))
+	return obj.Wrap(_r)
 }
 
-// SetRequiredBillingContactFields calls the underlying SetRequiredBillingContactFields.
-func (x *PaymentRequest) SetRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) {
-	x.inner.SetRequiredBillingContactFields(requiredBillingContactFields)
+// SetRequiredBillingContactFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetRequiredBillingContactFields(requiredBillingContactFields obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredBillingContactFields:"), objref.IDOf(requiredBillingContactFields))
 }
 
-// RequiredBillingAddressFields calls the underlying RequiredBillingAddressFields.
-func (x *PaymentRequest) RequiredBillingAddressFields() PKAddressField {
-	return PKAddressField(x.inner.RequiredBillingAddressFields())
+// RequiredBillingAddressFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) RequiredBillingAddressFields() AddressField {
+	_r := objc.Send[AddressField](objref.IDOf(x), objc.RegisterName("requiredBillingAddressFields"))
+	return _r
 }
 
-// SetRequiredBillingAddressFields calls the underlying SetRequiredBillingAddressFields.
-func (x *PaymentRequest) SetRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) {
-	x.inner.SetRequiredBillingAddressFields(raw.PKAddressField(requiredBillingAddressFields))
+// SetRequiredBillingAddressFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetRequiredBillingAddressFields(requiredBillingAddressFields AddressField) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredBillingAddressFields:"), requiredBillingAddressFields)
 }
 
-// BillingContact calls the underlying BillingContact.
+// BillingContact wraps the corresponding Objective-C method.
 func (x *PaymentRequest) BillingContact() *Contact {
-	_r := x.inner.BillingContact()
-	if _r == nil {
-		return nil
-	}
-	return &Contact{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingContact"))
+	return ContactFromID(_r)
 }
 
-// SetBillingContact calls the underlying SetBillingContact.
-func (x *PaymentRequest) SetBillingContact(billingContact *raw.PKContact) {
-	x.inner.SetBillingContact(billingContact)
+// SetBillingContact wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetBillingContact(billingContact *Contact) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingContact:"), objref.IDOf(billingContact))
 }
 
-// RequiredShippingContactFields calls the underlying RequiredShippingContactFields.
-func (x *PaymentRequest) RequiredShippingContactFields() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.RequiredShippingContactFields()
+// RequiredShippingContactFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) RequiredShippingContactFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredShippingContactFields"))
+	return obj.Wrap(_r)
 }
 
-// SetRequiredShippingContactFields calls the underlying SetRequiredShippingContactFields.
-func (x *PaymentRequest) SetRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) {
-	x.inner.SetRequiredShippingContactFields(requiredShippingContactFields)
+// SetRequiredShippingContactFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetRequiredShippingContactFields(requiredShippingContactFields obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredShippingContactFields:"), objref.IDOf(requiredShippingContactFields))
 }
 
-// RequiredShippingAddressFields calls the underlying RequiredShippingAddressFields.
-func (x *PaymentRequest) RequiredShippingAddressFields() PKAddressField {
-	return PKAddressField(x.inner.RequiredShippingAddressFields())
+// RequiredShippingAddressFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) RequiredShippingAddressFields() AddressField {
+	_r := objc.Send[AddressField](objref.IDOf(x), objc.RegisterName("requiredShippingAddressFields"))
+	return _r
 }
 
-// SetRequiredShippingAddressFields calls the underlying SetRequiredShippingAddressFields.
-func (x *PaymentRequest) SetRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) {
-	x.inner.SetRequiredShippingAddressFields(raw.PKAddressField(requiredShippingAddressFields))
+// SetRequiredShippingAddressFields wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetRequiredShippingAddressFields(requiredShippingAddressFields AddressField) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredShippingAddressFields:"), requiredShippingAddressFields)
 }
 
-// ShippingContact calls the underlying ShippingContact.
+// ShippingContact wraps the corresponding Objective-C method.
 func (x *PaymentRequest) ShippingContact() *Contact {
-	_r := x.inner.ShippingContact()
-	if _r == nil {
-		return nil
-	}
-	return &Contact{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingContact"))
+	return ContactFromID(_r)
 }
 
-// SetShippingContact calls the underlying SetShippingContact.
-func (x *PaymentRequest) SetShippingContact(shippingContact *raw.PKContact) {
-	x.inner.SetShippingContact(shippingContact)
+// SetShippingContact wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetShippingContact(shippingContact *Contact) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingContact:"), objref.IDOf(shippingContact))
 }
 
+// ShippingMethods wraps the corresponding Objective-C method.
+//
 // ShippingMethods returns the collection as a Go slice.
 func (x *PaymentRequest) ShippingMethods() []*ShippingMethod {
-	arr := x.inner.ShippingMethods()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShippingMethod {
-		return &ShippingMethod{inner: raw.PKShippingMethodFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingMethods"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShippingMethod { return ShippingMethodFromID(_id) })
 }
 
-// SetShippingMethods calls the underlying SetShippingMethods.
-func (x *PaymentRequest) SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod]) {
-	x.inner.SetShippingMethods(shippingMethods)
+// SetShippingMethods wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetShippingMethods(shippingMethods []*ShippingMethod) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), purego.SliceToNSArray(shippingMethods, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ShippingType calls the underlying ShippingType.
-func (x *PaymentRequest) ShippingType() PKShippingType {
-	return PKShippingType(x.inner.ShippingType())
+// ShippingType wraps the corresponding Objective-C method.
+func (x *PaymentRequest) ShippingType() ShippingType {
+	_r := objc.Send[ShippingType](objref.IDOf(x), objc.RegisterName("shippingType"))
+	return _r
 }
 
-// SetShippingType calls the underlying SetShippingType.
-func (x *PaymentRequest) SetShippingType(shippingType PKShippingType) {
-	x.inner.SetShippingType(raw.PKShippingType(shippingType))
+// SetShippingType wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetShippingType(shippingType ShippingType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingType:"), shippingType)
 }
 
-// ShippingContactEditingMode calls the underlying ShippingContactEditingMode.
-func (x *PaymentRequest) ShippingContactEditingMode() PKShippingContactEditingMode {
-	return PKShippingContactEditingMode(x.inner.ShippingContactEditingMode())
+// ShippingContactEditingMode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) ShippingContactEditingMode() ShippingContactEditingMode {
+	_r := objc.Send[ShippingContactEditingMode](objref.IDOf(x), objc.RegisterName("shippingContactEditingMode"))
+	return _r
 }
 
-// SetShippingContactEditingMode calls the underlying SetShippingContactEditingMode.
-func (x *PaymentRequest) SetShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) {
-	x.inner.SetShippingContactEditingMode(raw.PKShippingContactEditingMode(shippingContactEditingMode))
+// SetShippingContactEditingMode wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetShippingContactEditingMode(shippingContactEditingMode ShippingContactEditingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingContactEditingMode:"), shippingContactEditingMode)
 }
 
-// ApplicationData calls the underlying ApplicationData.
-func (x *PaymentRequest) ApplicationData() *foundation.NSData {
-	return x.inner.ApplicationData()
+// ApplicationData wraps the corresponding Objective-C method.
+func (x *PaymentRequest) ApplicationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationData"))
+	return obj.Wrap(_r)
 }
 
-// SetApplicationData calls the underlying SetApplicationData.
-func (x *PaymentRequest) SetApplicationData(applicationData *foundation.NSData) {
-	x.inner.SetApplicationData(applicationData)
+// SetApplicationData wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetApplicationData(applicationData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationData:"), objref.IDOf(applicationData))
 }
 
-// SupportedCountries calls the underlying SupportedCountries.
-func (x *PaymentRequest) SupportedCountries() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.SupportedCountries()
+// SupportedCountries wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SupportedCountries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedCountries"))
+	return obj.Wrap(_r)
 }
 
-// SetSupportedCountries calls the underlying SetSupportedCountries.
-func (x *PaymentRequest) SetSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) {
-	x.inner.SetSupportedCountries(supportedCountries)
+// SetSupportedCountries wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetSupportedCountries(supportedCountries obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedCountries:"), objref.IDOf(supportedCountries))
 }
 
+// MultiTokenContexts wraps the corresponding Objective-C method.
+//
 // MultiTokenContexts returns the collection as a Go slice.
 func (x *PaymentRequest) MultiTokenContexts() []*PaymentTokenContext {
-	arr := x.inner.MultiTokenContexts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentTokenContext {
-		return &PaymentTokenContext{inner: raw.PKPaymentTokenContextFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiTokenContexts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentTokenContext { return PaymentTokenContextFromID(_id) })
 }
 
-// SetMultiTokenContexts calls the underlying SetMultiTokenContexts.
-func (x *PaymentRequest) SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext]) {
-	x.inner.SetMultiTokenContexts(multiTokenContexts)
+// SetMultiTokenContexts wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetMultiTokenContexts(multiTokenContexts []*PaymentTokenContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), purego.SliceToNSArray(multiTokenContexts, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) }))
 }
 
-// RecurringPaymentRequest calls the underlying RecurringPaymentRequest.
+// RecurringPaymentRequest wraps the corresponding Objective-C method.
 func (x *PaymentRequest) RecurringPaymentRequest() *RecurringPaymentRequest {
-	_r := x.inner.RecurringPaymentRequest()
-	if _r == nil {
-		return nil
-	}
-	return &RecurringPaymentRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurringPaymentRequest"))
+	return RecurringPaymentRequestFromID(_r)
 }
 
-// SetRecurringPaymentRequest calls the underlying SetRecurringPaymentRequest.
-func (x *PaymentRequest) SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) {
-	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest)
+// SetRecurringPaymentRequest wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 }
 
-// AutomaticReloadPaymentRequest calls the underlying AutomaticReloadPaymentRequest.
+// AutomaticReloadPaymentRequest wraps the corresponding Objective-C method.
 func (x *PaymentRequest) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
-	_r := x.inner.AutomaticReloadPaymentRequest()
-	if _r == nil {
-		return nil
-	}
-	return &AutomaticReloadPaymentRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("automaticReloadPaymentRequest"))
+	return AutomaticReloadPaymentRequestFromID(_r)
 }
 
-// SetAutomaticReloadPaymentRequest calls the underlying SetAutomaticReloadPaymentRequest.
-func (x *PaymentRequest) SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) {
-	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+// SetAutomaticReloadPaymentRequest wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 }
 
-// DeferredPaymentRequest calls the underlying DeferredPaymentRequest.
+// DeferredPaymentRequest wraps the corresponding Objective-C method.
 func (x *PaymentRequest) DeferredPaymentRequest() *DeferredPaymentRequest {
-	_r := x.inner.DeferredPaymentRequest()
-	if _r == nil {
-		return nil
-	}
-	return &DeferredPaymentRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredPaymentRequest"))
+	return DeferredPaymentRequestFromID(_r)
 }
 
-// SetDeferredPaymentRequest calls the underlying SetDeferredPaymentRequest.
-func (x *PaymentRequest) SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) {
-	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest)
+// SetDeferredPaymentRequest wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 }
 
-// ApplePayLaterAvailability calls the underlying ApplePayLaterAvailability.
-func (x *PaymentRequest) ApplePayLaterAvailability() PKApplePayLaterAvailability {
-	return PKApplePayLaterAvailability(x.inner.ApplePayLaterAvailability())
+// ApplePayLaterAvailability wraps the corresponding Objective-C method.
+func (x *PaymentRequest) ApplePayLaterAvailability() ApplePayLaterAvailability {
+	_r := objc.Send[ApplePayLaterAvailability](objref.IDOf(x), objc.RegisterName("applePayLaterAvailability"))
+	return _r
 }
 
-// SetApplePayLaterAvailability calls the underlying SetApplePayLaterAvailability.
-func (x *PaymentRequest) SetApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) {
-	x.inner.SetApplePayLaterAvailability(raw.PKApplePayLaterAvailability(applePayLaterAvailability))
+// SetApplePayLaterAvailability wraps the corresponding Objective-C method.
+func (x *PaymentRequest) SetApplePayLaterAvailability(applePayLaterAvailability ApplePayLaterAvailability) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplePayLaterAvailability:"), applePayLaterAvailability)
 }
 
-// A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your app is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your app to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
-//
-// IsDelegatedRequest calls the underlying IsDelegatedRequest.
+// IsDelegatedRequest a Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your app is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO.
 func (x *PaymentRequest) IsDelegatedRequest() bool {
-	return x.inner.IsDelegatedRequest()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDelegatedRequest"))
+	return _r
 }
 
-// SetIsDelegatedRequest calls the underlying SetIsDelegatedRequest.
+// SetIsDelegatedRequest wraps the corresponding Objective-C method.
 func (x *PaymentRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
-	x.inner.SetIsDelegatedRequest(isDelegatedRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDelegatedRequest:"), isDelegatedRequest)
 }
 
 // PaymentRequestable is the interface implemented by [PaymentRequest], for mocking and DI.
 type PaymentRequestable interface {
-	Unwrap() *raw.PKPaymentRequest
+	obj.Object
 	WithMerchantIdentifier(merchantIdentifier string) *PaymentRequest
 	WithAttributionIdentifier(attributionIdentifier string) *PaymentRequest
 	WithCountryCode(countryCode string) *PaymentRequest
-	WithSupportedNetworks(items ...*foundation.NSString) *PaymentRequest
-	WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *PaymentRequest
+	WithSupportedNetworks(items ...obj.Object) *PaymentRequest
+	WithMerchantCapabilities(merchantCapabilities MerchantCapability) *PaymentRequest
 	WithSupportsCouponCode(supportsCouponCode bool) *PaymentRequest
 	WithCouponCode(couponCode string) *PaymentRequest
 	WithMerchantCategoryCode(merchantCategoryCode int16) *PaymentRequest
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest
 	WithCurrencyCode(currencyCode string) *PaymentRequest
-	WithRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
-	WithRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) *PaymentRequest
+	WithRequiredBillingContactFields(requiredBillingContactFields obj.Object) *PaymentRequest
+	WithRequiredBillingAddressFields(requiredBillingAddressFields AddressField) *PaymentRequest
 	WithBillingContact(billingContact *Contact) *PaymentRequest
-	WithRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
-	WithRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) *PaymentRequest
+	WithRequiredShippingContactFields(requiredShippingContactFields obj.Object) *PaymentRequest
+	WithRequiredShippingAddressFields(requiredShippingAddressFields AddressField) *PaymentRequest
 	WithShippingContact(shippingContact *Contact) *PaymentRequest
-	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest
-	WithShippingType(shippingType PKShippingType) *PaymentRequest
-	WithShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) *PaymentRequest
-	WithApplicationData(applicationData *foundation.NSData) *PaymentRequest
-	WithSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) *PaymentRequest
-	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest
+	WithShippingMethods(items ...*ShippingMethod) *PaymentRequest
+	WithShippingType(shippingType ShippingType) *PaymentRequest
+	WithShippingContactEditingMode(shippingContactEditingMode ShippingContactEditingMode) *PaymentRequest
+	WithApplicationData(applicationData obj.Object) *PaymentRequest
+	WithSupportedCountries(supportedCountries obj.Object) *PaymentRequest
+	WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequest
 	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest
 	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest
 	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest
-	WithApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) *PaymentRequest
+	WithApplePayLaterAvailability(applePayLaterAvailability ApplePayLaterAvailability) *PaymentRequest
 	WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest
 	MerchantIdentifier() string
 	SetMerchantIdentifier(merchantIdentifier string)
@@ -697,10 +594,10 @@ type PaymentRequestable interface {
 	SetAttributionIdentifier(attributionIdentifier string)
 	CountryCode() string
 	SetCountryCode(countryCode string)
-	SupportedNetworks() []*foundation.NSString
-	SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString])
-	MerchantCapabilities() PKMerchantCapability
-	SetMerchantCapabilities(merchantCapabilities PKMerchantCapability)
+	SupportedNetworks() []obj.Object
+	SetSupportedNetworks(supportedNetworks []obj.Object)
+	MerchantCapabilities() MerchantCapability
+	SetMerchantCapabilities(merchantCapabilities MerchantCapability)
 	SupportsCouponCode() bool
 	SetSupportsCouponCode(supportsCouponCode bool)
 	CouponCode() string
@@ -708,41 +605,41 @@ type PaymentRequestable interface {
 	MerchantCategoryCode() int16
 	SetMerchantCategoryCode(merchantCategoryCode int16)
 	PaymentSummaryItems() []*PaymentSummaryItem
-	SetPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider)
+	SetPaymentSummaryItems(paymentSummaryItems []*PaymentSummaryItem)
 	CurrencyCode() string
 	SetCurrencyCode(currencyCode string)
-	RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString]
-	SetRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString])
-	RequiredBillingAddressFields() PKAddressField
-	SetRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField)
+	RequiredBillingContactFields() obj.Object
+	SetRequiredBillingContactFields(requiredBillingContactFields obj.Object)
+	RequiredBillingAddressFields() AddressField
+	SetRequiredBillingAddressFields(requiredBillingAddressFields AddressField)
 	BillingContact() *Contact
-	SetBillingContact(billingContact *raw.PKContact)
-	RequiredShippingContactFields() *foundation.NSSet[*foundation.NSString]
-	SetRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString])
-	RequiredShippingAddressFields() PKAddressField
-	SetRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField)
+	SetBillingContact(billingContact *Contact)
+	RequiredShippingContactFields() obj.Object
+	SetRequiredShippingContactFields(requiredShippingContactFields obj.Object)
+	RequiredShippingAddressFields() AddressField
+	SetRequiredShippingAddressFields(requiredShippingAddressFields AddressField)
 	ShippingContact() *Contact
-	SetShippingContact(shippingContact *raw.PKContact)
+	SetShippingContact(shippingContact *Contact)
 	ShippingMethods() []*ShippingMethod
-	SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod])
-	ShippingType() PKShippingType
-	SetShippingType(shippingType PKShippingType)
-	ShippingContactEditingMode() PKShippingContactEditingMode
-	SetShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode)
-	ApplicationData() *foundation.NSData
-	SetApplicationData(applicationData *foundation.NSData)
-	SupportedCountries() *foundation.NSSet[*foundation.NSString]
-	SetSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString])
+	SetShippingMethods(shippingMethods []*ShippingMethod)
+	ShippingType() ShippingType
+	SetShippingType(shippingType ShippingType)
+	ShippingContactEditingMode() ShippingContactEditingMode
+	SetShippingContactEditingMode(shippingContactEditingMode ShippingContactEditingMode)
+	ApplicationData() obj.Object
+	SetApplicationData(applicationData obj.Object)
+	SupportedCountries() obj.Object
+	SetSupportedCountries(supportedCountries obj.Object)
 	MultiTokenContexts() []*PaymentTokenContext
-	SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext])
+	SetMultiTokenContexts(multiTokenContexts []*PaymentTokenContext)
 	RecurringPaymentRequest() *RecurringPaymentRequest
-	SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest)
+	SetRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest)
 	AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest
-	SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest)
+	SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest)
 	DeferredPaymentRequest() *DeferredPaymentRequest
-	SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest)
-	ApplePayLaterAvailability() PKApplePayLaterAvailability
-	SetApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability)
+	SetDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest)
+	ApplePayLaterAvailability() ApplePayLaterAvailability
+	SetApplePayLaterAvailability(applePayLaterAvailability ApplePayLaterAvailability)
 	IsDelegatedRequest() bool
 	SetIsDelegatedRequest(isDelegatedRequest bool)
 }

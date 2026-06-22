@@ -5,50 +5,59 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ControllerButtonInputProvider is implemented by ControllerButtonInput and any idiomatic type wrapping a GCControllerButtonInput subclass.
+// ControllerButtonInputProvider is accepted wherever a GCControllerButtonInput (or one of its subclasses) is expected.
 type ControllerButtonInputProvider interface {
-	asControllerButtonInput() *raw.GCControllerButtonInput
+	objref.Object
+	isControllerButtonInput()
 }
 
-// ControllerDirectionPadProvider is implemented by ControllerDirectionPad and any idiomatic type wrapping a GCControllerDirectionPad subclass.
+// ControllerDirectionPadProvider is accepted wherever a GCControllerDirectionPad (or one of its subclasses) is expected.
 type ControllerDirectionPadProvider interface {
-	asControllerDirectionPad() *raw.GCControllerDirectionPad
+	objref.Object
+	isControllerDirectionPad()
 }
 
-// ControllerElementProvider is implemented by ControllerElement and any idiomatic type wrapping a GCControllerElement subclass.
+// ControllerElementProvider is accepted wherever a GCControllerElement (or one of its subclasses) is expected.
 type ControllerElementProvider interface {
-	asControllerElement() *raw.GCControllerElement
+	objref.Object
+	isControllerElement()
 }
 
-// ControllerInputStateProvider is implemented by ControllerInputState and any idiomatic type wrapping a GCControllerInputState subclass.
+// ControllerInputStateProvider is accepted wherever a GCControllerInputState (or one of its subclasses) is expected.
 type ControllerInputStateProvider interface {
-	asControllerInputState() *raw.GCControllerInputState
+	objref.Object
+	isControllerInputState()
 }
 
-// ExtendedGamepadProvider is implemented by ExtendedGamepad and any idiomatic type wrapping a GCExtendedGamepad subclass.
+// ExtendedGamepadProvider is accepted wherever a GCExtendedGamepad (or one of its subclasses) is expected.
 type ExtendedGamepadProvider interface {
-	asExtendedGamepad() *raw.GCExtendedGamepad
+	objref.Object
+	isExtendedGamepad()
 }
 
-// GamepadProvider is implemented by Gamepad and any idiomatic type wrapping a GCGamepad subclass.
+// GamepadProvider is accepted wherever a GCGamepad (or one of its subclasses) is expected.
 type GamepadProvider interface {
-	asGamepad() *raw.GCGamepad
+	objref.Object
+	isGamepad()
 }
 
-// MicroGamepadProvider is implemented by MicroGamepad and any idiomatic type wrapping a GCMicroGamepad subclass.
+// MicroGamepadProvider is accepted wherever a GCMicroGamepad (or one of its subclasses) is expected.
 type MicroGamepadProvider interface {
-	asMicroGamepad() *raw.GCMicroGamepad
+	objref.Object
+	isMicroGamepad()
 }
 
-// PhysicalInputProfileProvider is implemented by PhysicalInputProfile and any idiomatic type wrapping a GCPhysicalInputProfile subclass.
+// PhysicalInputProfileProvider is accepted wherever a GCPhysicalInputProfile (or one of its subclasses) is expected.
 type PhysicalInputProfileProvider interface {
-	asPhysicalInputProfile() *raw.GCPhysicalInputProfile
+	objref.Object
+	isPhysicalInputProfile()
 }
 
-// RacingWheelInputStateProvider is implemented by RacingWheelInputState and any idiomatic type wrapping a GCRacingWheelInputState subclass.
+// RacingWheelInputStateProvider is accepted wherever a GCRacingWheelInputState (or one of its subclasses) is expected.
 type RacingWheelInputStateProvider interface {
-	asRacingWheelInputState() *raw.GCRacingWheelInputState
+	objref.Object
+	isRacingWheelInputState()
 }

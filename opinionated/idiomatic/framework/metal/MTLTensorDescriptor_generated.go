@@ -5,233 +5,236 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration type for creating new tensor instances.
+// TensorDescriptor is an idiomatic wrapper over the Objective-C class MTLTensorDescriptor.
 //
-// TensorDescriptor wraps [raw.MTLTensorDescriptor] with a fluent Go API.
+// A configuration type for creating new tensor instances.
 type TensorDescriptor struct {
-	inner *raw.MTLTensorDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLTensorDescriptor].
-func (x *TensorDescriptor) Unwrap() *raw.MTLTensorDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TensorDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorDescriptorFromID adopts an existing object pointer as a TensorDescriptor (nil for 0).
+// TensorDescriptorFromID adopts an existing Objective-C object as a TensorDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorDescriptorFromID(id objc.ID) *TensorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &TensorDescriptor{inner: raw.MTLTensorDescriptorFromID(id)}
+	x := &TensorDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTensorDescriptor creates a new [TensorDescriptor].
+// tensorDescriptorAdopt wraps an Objective-C object that this code just created as a
+// TensorDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorDescriptorAdopt(id objc.ID) *TensorDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &TensorDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TensorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TensorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TensorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TensorDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTensorDescriptor creates a new TensorDescriptor.
 func NewTensorDescriptor() *TensorDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTensorDescriptor")), objc.RegisterName("new"))
-	return &TensorDescriptor{inner: raw.MTLTensorDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTensorDescriptor")), objc.RegisterName("new"))
+	return tensorDescriptorAdopt(_id)
 }
 
-// An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor.
-//
-// WithDimensions sets the dimensions property and returns the receiver for chaining.
+// WithDimensions an array of sizes, in elements, one for each dimension of the tensors you create with this descriptor.
 func (x *TensorDescriptor) WithDimensions(dimensions *TensorExtents) *TensorDescriptor {
-	x.inner.SetDimensions(dimensions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDimensions:"), objref.IDOf(dimensions))
 	return x
 }
 
-// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable.
-//
-// WithStrides sets the strides property and returns the receiver for chaining.
+// WithStrides an array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable.
 func (x *TensorDescriptor) WithStrides(strides *TensorExtents) *TensorDescriptor {
-	x.inner.SetStrides(strides.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), objref.IDOf(strides))
 	return x
 }
 
-// The data format of all elements in the data plane.
-//
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithDataType(dataType MTLTensorDataType) *TensorDescriptor {
-	x.inner.SetDataType(raw.MTLTensorDataType(dataType))
+// WithDataType the data format of all elements in the data plane.
+func (x *TensorDescriptor) WithDataType(dataType TensorDataType) *TensorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
 	return x
 }
 
-// A set of contexts in which you can use tensors you create with this descriptor.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithUsage(usage MTLTensorUsage) *TensorDescriptor {
-	x.inner.SetUsage(raw.MTLTensorUsage(usage))
+// WithUsage a set of contexts in which you can use tensors you create with this descriptor.
+func (x *TensorDescriptor) WithUsage(usage TensorUsage) *TensorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// A packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
-//
-// WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *TensorDescriptor {
-	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
+// WithResourceOptions a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+func (x *TensorDescriptor) WithResourceOptions(resourceOptions ResourceOptions) *TensorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceOptions:"), resourceOptions)
 	return x
 }
 
-// A value that configures the cache mode of CPU mapping of tensors you create with this descriptor.
-//
-// WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TensorDescriptor {
-	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
+// WithCpuCacheMode a value that configures the cache mode of CPU mapping of tensors you create with this descriptor.
+func (x *TensorDescriptor) WithCpuCacheMode(cpuCacheMode CPUCacheMode) *TensorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCpuCacheMode:"), cpuCacheMode)
 	return x
 }
 
-// A value that configures the memory location and access permissions of tensors you create with this descriptor.
-//
-// WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithStorageMode(storageMode MTLStorageMode) *TensorDescriptor {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+// WithStorageMode a value that configures the memory location and access permissions of tensors you create with this descriptor.
+func (x *TensorDescriptor) WithStorageMode(storageMode StorageMode) *TensorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 	return x
 }
 
-// A value that configures the hazard tracking of tensors you create with this descriptor.
-//
-// WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TensorDescriptor {
-	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
+// WithHazardTrackingMode a value that configures the hazard tracking of tensors you create with this descriptor.
+func (x *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode HazardTrackingMode) *TensorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHazardTrackingMode:"), hazardTrackingMode)
 	return x
 }
 
-// An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
-//
-// Dimensions calls the underlying Dimensions.
+// Dimensions an array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
 func (x *TensorDescriptor) Dimensions() *TensorExtents {
-	_r := x.inner.Dimensions()
-	if _r == nil {
-		return nil
-	}
-	return &TensorExtents{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
+	return TensorExtentsFromID(_r)
 }
 
-// SetDimensions calls the underlying SetDimensions.
-func (x *TensorDescriptor) SetDimensions(dimensions *raw.MTLTensorExtents) {
-	x.inner.SetDimensions(dimensions)
+// SetDimensions wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetDimensions(dimensions *TensorExtents) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDimensions:"), objref.IDOf(dimensions))
 }
 
-// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
-//
-// Strides calls the underlying Strides.
+// Strides an array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
 func (x *TensorDescriptor) Strides() *TensorExtents {
-	_r := x.inner.Strides()
-	if _r == nil {
-		return nil
-	}
-	return &TensorExtents{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strides"))
+	return TensorExtentsFromID(_r)
 }
 
-// SetStrides calls the underlying SetStrides.
-func (x *TensorDescriptor) SetStrides(strides *raw.MTLTensorExtents) {
-	x.inner.SetStrides(strides)
+// SetStrides wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetStrides(strides *TensorExtents) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), objref.IDOf(strides))
 }
 
-// A data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
-//
-// DataType calls the underlying DataType.
-func (x *TensorDescriptor) DataType() MTLTensorDataType {
-	return MTLTensorDataType(x.inner.DataType())
+// DataType a data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
+func (x *TensorDescriptor) DataType() TensorDataType {
+	_r := objc.Send[TensorDataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// SetDataType calls the underlying SetDataType.
-func (x *TensorDescriptor) SetDataType(dataType MTLTensorDataType) {
-	x.inner.SetDataType(raw.MTLTensorDataType(dataType))
+// SetDataType wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetDataType(dataType TensorDataType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
 }
 
-// A set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - “MTLTensorUsage/MTLTensorUsageRender“ - “MTLTensorUsage/MTLTensorUsageCompute“
-//
-// Usage calls the underlying Usage.
-func (x *TensorDescriptor) Usage() MTLTensorUsage {
-	return MTLTensorUsage(x.inner.Usage())
+// Usage a set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - “MTLTensorUsage/MTLTensorUsageRender“ - “MTLTensorUsage/MTLTensorUsageCompute“
+func (x *TensorDescriptor) Usage() TensorUsage {
+	_r := objc.Send[TensorUsage](objref.IDOf(x), objc.RegisterName("usage"))
+	return _r
 }
 
-// SetUsage calls the underlying SetUsage.
-func (x *TensorDescriptor) SetUsage(usage MTLTensorUsage) {
-	x.inner.SetUsage(raw.MTLTensorUsage(usage))
+// SetUsage wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetUsage(usage TensorUsage) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 }
 
-// A packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
-//
-// ResourceOptions calls the underlying ResourceOptions.
-func (x *TensorDescriptor) ResourceOptions() MTLResourceOptions {
-	return MTLResourceOptions(x.inner.ResourceOptions())
+// ResourceOptions a packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
+func (x *TensorDescriptor) ResourceOptions() ResourceOptions {
+	_r := objc.Send[ResourceOptions](objref.IDOf(x), objc.RegisterName("resourceOptions"))
+	return _r
 }
 
-// SetResourceOptions calls the underlying SetResourceOptions.
-func (x *TensorDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions) {
-	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
+// SetResourceOptions wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetResourceOptions(resourceOptions ResourceOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceOptions:"), resourceOptions)
 }
 
-// A value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is “MTLCPUCacheMode/MTLCPUCacheModeDefaultCache“.
-//
-// CpuCacheMode calls the underlying CpuCacheMode.
-func (x *TensorDescriptor) CpuCacheMode() MTLCPUCacheMode {
-	return MTLCPUCacheMode(x.inner.CpuCacheMode())
+// CpuCacheMode a value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is “MTLCPUCacheMode/MTLCPUCacheModeDefaultCache“.
+func (x *TensorDescriptor) CpuCacheMode() CPUCacheMode {
+	_r := objc.Send[CPUCacheMode](objref.IDOf(x), objc.RegisterName("cpuCacheMode"))
+	return _r
 }
 
-// SetCpuCacheMode calls the underlying SetCpuCacheMode.
-func (x *TensorDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
-	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
+// SetCpuCacheMode wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetCpuCacheMode(cpuCacheMode CPUCacheMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCpuCacheMode:"), cpuCacheMode)
 }
 
-// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
-//
-// StorageMode calls the underlying StorageMode.
-func (x *TensorDescriptor) StorageMode() MTLStorageMode {
-	return MTLStorageMode(x.inner.StorageMode())
+// StorageMode a value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
+func (x *TensorDescriptor) StorageMode() StorageMode {
+	_r := objc.Send[StorageMode](objref.IDOf(x), objc.RegisterName("storageMode"))
+	return _r
 }
 
-// SetStorageMode calls the underlying SetStorageMode.
-func (x *TensorDescriptor) SetStorageMode(storageMode MTLStorageMode) {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+// SetStorageMode wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetStorageMode(storageMode StorageMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 }
 
-// A value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is “MTLHazardTrackingMode/MTLHazardTrackingModeDefault“.
-//
-// HazardTrackingMode calls the underlying HazardTrackingMode.
-func (x *TensorDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
-	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
+// HazardTrackingMode a value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is “MTLHazardTrackingMode/MTLHazardTrackingModeDefault“.
+func (x *TensorDescriptor) HazardTrackingMode() HazardTrackingMode {
+	_r := objc.Send[HazardTrackingMode](objref.IDOf(x), objc.RegisterName("hazardTrackingMode"))
+	return _r
 }
 
-// SetHazardTrackingMode calls the underlying SetHazardTrackingMode.
-func (x *TensorDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) {
-	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
+// SetHazardTrackingMode wraps the corresponding Objective-C method.
+func (x *TensorDescriptor) SetHazardTrackingMode(hazardTrackingMode HazardTrackingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHazardTrackingMode:"), hazardTrackingMode)
 }
 
 // TensorDescriptorable is the interface implemented by [TensorDescriptor], for mocking and DI.
 type TensorDescriptorable interface {
-	Unwrap() *raw.MTLTensorDescriptor
+	obj.Object
 	WithDimensions(dimensions *TensorExtents) *TensorDescriptor
 	WithStrides(strides *TensorExtents) *TensorDescriptor
-	WithDataType(dataType MTLTensorDataType) *TensorDescriptor
-	WithUsage(usage MTLTensorUsage) *TensorDescriptor
-	WithResourceOptions(resourceOptions MTLResourceOptions) *TensorDescriptor
-	WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TensorDescriptor
-	WithStorageMode(storageMode MTLStorageMode) *TensorDescriptor
-	WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TensorDescriptor
+	WithDataType(dataType TensorDataType) *TensorDescriptor
+	WithUsage(usage TensorUsage) *TensorDescriptor
+	WithResourceOptions(resourceOptions ResourceOptions) *TensorDescriptor
+	WithCpuCacheMode(cpuCacheMode CPUCacheMode) *TensorDescriptor
+	WithStorageMode(storageMode StorageMode) *TensorDescriptor
+	WithHazardTrackingMode(hazardTrackingMode HazardTrackingMode) *TensorDescriptor
 	Dimensions() *TensorExtents
-	SetDimensions(dimensions *raw.MTLTensorExtents)
+	SetDimensions(dimensions *TensorExtents)
 	Strides() *TensorExtents
-	SetStrides(strides *raw.MTLTensorExtents)
-	DataType() MTLTensorDataType
-	SetDataType(dataType MTLTensorDataType)
-	Usage() MTLTensorUsage
-	SetUsage(usage MTLTensorUsage)
-	ResourceOptions() MTLResourceOptions
-	SetResourceOptions(resourceOptions MTLResourceOptions)
-	CpuCacheMode() MTLCPUCacheMode
-	SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode)
-	StorageMode() MTLStorageMode
-	SetStorageMode(storageMode MTLStorageMode)
-	HazardTrackingMode() MTLHazardTrackingMode
-	SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode)
+	SetStrides(strides *TensorExtents)
+	DataType() TensorDataType
+	SetDataType(dataType TensorDataType)
+	Usage() TensorUsage
+	SetUsage(usage TensorUsage)
+	ResourceOptions() ResourceOptions
+	SetResourceOptions(resourceOptions ResourceOptions)
+	CpuCacheMode() CPUCacheMode
+	SetCpuCacheMode(cpuCacheMode CPUCacheMode)
+	StorageMode() StorageMode
+	SetStorageMode(storageMode StorageMode)
+	HazardTrackingMode() HazardTrackingMode
+	SetHazardTrackingMode(hazardTrackingMode HazardTrackingMode)
 }
 
 var _ TensorDescriptorable = (*TensorDescriptor)(nil)

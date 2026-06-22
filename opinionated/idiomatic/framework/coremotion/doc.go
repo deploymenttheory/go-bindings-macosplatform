@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package coremotion provides a fluent Go API over the macOS CoreMotion framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - LogItem: [AccelerometerData], [AmbientPressureData], [DeviceMotion], [GyroData], [MagnetometerData], [MotionActivity], [RotationRateData]
+//   - RotationRateData: [RecordedRotationRateData]
 package coremotion

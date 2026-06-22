@@ -3,4 +3,18 @@
 //go:build darwin
 
 // Package coredata provides a fluent Go API over the macOS CoreData framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AttributeDescription: [CompositeAttributeDescription], [DerivedAttributeDescription]
+//   - MigrationStage: [CustomMigrationStage], [LightweightMigrationStage]
+//   - PersistentContainer: [PersistentCloudKitContainer]
+//   - PersistentStore: [AtomicStore], [IncrementalStore]
+//   - PersistentStoreAsynchronousResult: [AsynchronousFetchResult]
+//   - PersistentStoreRequest: [AsynchronousFetchRequest], [BatchDeleteRequest], [BatchInsertRequest], [BatchUpdateRequest], [FetchRequest], [PersistentCloudKitContainerEventRequest], [PersistentHistoryChangeRequest], [SaveChangesRequest]
+//   - PersistentStoreResult: [BatchDeleteResult], [BatchInsertResult], [BatchUpdateResult], [PersistentCloudKitContainerEventResult], [PersistentHistoryResult], [PersistentStoreAsynchronousResult]
+//   - PropertyDescription: [AttributeDescription], [ExpressionDescription], [FetchedPropertyDescription], [RelationshipDescription]
 package coredata

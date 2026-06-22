@@ -5,100 +5,120 @@
 package corehaptics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A value that you send to a haptic pattern player to alter a property value during playback.
+// HapticDynamicParameter is an idiomatic wrapper over the Objective-C class CHHapticDynamicParameter.
 //
-// HapticDynamicParameter wraps [raw.CHHapticDynamicParameter] with a fluent Go API.
+// A value that you send to a haptic pattern player to alter a property value during playback.
 type HapticDynamicParameter struct {
-	inner *raw.CHHapticDynamicParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CHHapticDynamicParameter].
-func (x *HapticDynamicParameter) Unwrap() *raw.CHHapticDynamicParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HapticDynamicParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// HapticDynamicParameterFromID adopts an existing object pointer as a HapticDynamicParameter (nil for 0).
+// HapticDynamicParameterFromID adopts an existing Objective-C object as a HapticDynamicParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func HapticDynamicParameterFromID(id objc.ID) *HapticDynamicParameter {
 	if id == 0 {
 		return nil
 	}
-	return &HapticDynamicParameter{inner: raw.CHHapticDynamicParameterFromID(id)}
-}
-
-// Creates a dynamic parameter from its ID, value, and start time.
-//
-// NewHapticDynamicParameterWithParameterIDValueRelativeTime creates a new [HapticDynamicParameter].
-func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID *foundation.NSString, value float32, time_ float64) *HapticDynamicParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticDynamicParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:relativeTime:"), parameterID.Ptr(), value, time_)
-	return &HapticDynamicParameter{inner: raw.CHHapticDynamicParameterFromID(_id)}
-}
-
-// The value of the dynamic parameter.
-//
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParameter {
-	x.inner.SetValue(value)
+	x := &HapticDynamicParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The time at which this dynamic parameter is applied, relative to the start time of the pattern.
-//
-// WithRelativeTime sets the relativeTime property and returns the receiver for chaining.
-func (x *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticDynamicParameter {
-	x.inner.SetRelativeTime(relativeTime)
-	return x
-}
-
-// @property parameterID The ID of the dynamic parameter to use.
-//
-// ParameterID calls the underlying ParameterID.
-func (x *HapticDynamicParameter) ParameterID() string {
-	_r := x.inner.ParameterID()
-	if _r == nil {
-		return ""
+// hapticDynamicParameterAdopt wraps an Objective-C object that this code just created as a
+// HapticDynamicParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hapticDynamicParameterAdopt(id objc.ID) *HapticDynamicParameter {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &HapticDynamicParameter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property value The value of the parameter.
-//
-// Value calls the underlying Value.
+// Description returns the object's -description text.
+func (x *HapticDynamicParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HapticDynamicParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HapticDynamicParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HapticDynamicParameter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHapticDynamicParameterWithParameterIDValueRelativeTime creates a dynamic parameter from its ID, value, and start time.
+func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID obj.Object, value float32, time_ float64) *HapticDynamicParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticDynamicParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:relativeTime:"), objref.IDOf(parameterID), value, time_)
+	return hapticDynamicParameterAdopt(_id)
+}
+
+// WithValue the value of the dynamic parameter.
+func (x *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
+	return x
+}
+
+// WithRelativeTime the time at which this dynamic parameter is applied, relative to the start time of the pattern.
+func (x *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticDynamicParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
+	return x
+}
+
+// ParameterID wraps the corresponding Objective-C method.
+func (x *HapticDynamicParameter) ParameterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
+	return obj.Wrap(_r)
+}
+
+// Value wraps the corresponding Objective-C method.
 func (x *HapticDynamicParameter) Value() float32 {
-	return x.inner.Value()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
-// SetValue calls the underlying SetValue.
+// SetValue wraps the corresponding Objective-C method.
 func (x *HapticDynamicParameter) SetValue(value float32) {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// @property relativeTime The time at which the parameter should be applied, relative to the start time for the pattern.
-//
-// RelativeTime calls the underlying RelativeTime.
+// RelativeTime wraps the corresponding Objective-C method.
 func (x *HapticDynamicParameter) RelativeTime() float64 {
-	return x.inner.RelativeTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
+	return _r
 }
 
-// SetRelativeTime calls the underlying SetRelativeTime.
+// SetRelativeTime wraps the corresponding Objective-C method.
 func (x *HapticDynamicParameter) SetRelativeTime(relativeTime float64) {
-	x.inner.SetRelativeTime(relativeTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 }
 
 // HapticDynamicParameterable is the interface implemented by [HapticDynamicParameter], for mocking and DI.
 type HapticDynamicParameterable interface {
-	Unwrap() *raw.CHHapticDynamicParameter
+	obj.Object
 	WithValue(value float32) *HapticDynamicParameter
 	WithRelativeTime(relativeTime float64) *HapticDynamicParameter
-	ParameterID() string
+	ParameterID() obj.Object
 	Value() float32
 	SetValue(value float32)
 	RelativeTime() float64

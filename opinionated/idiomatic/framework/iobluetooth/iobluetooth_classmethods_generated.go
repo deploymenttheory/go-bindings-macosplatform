@@ -5,311 +5,164 @@
 package iobluetooth
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// RegisterForConnectNotificationsSelector calls the underlying IOBluetoothDeviceRegisterForConnectNotificationsSelector.
-func RegisterForConnectNotificationsSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothDeviceRegisterForConnectNotificationsSelector(observer, inSelector)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
-}
-
-// DeviceWithAddress calls the underlying IOBluetoothDeviceDeviceWithAddress.
-func DeviceWithAddress(address *raw.BluetoothDeviceAddress) *IOBluetoothDevice {
-	_r := raw.IOBluetoothDeviceDeviceWithAddress(address)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
-}
-
-// WithAddress calls the underlying IOBluetoothDeviceWithAddress.
-func WithAddress(address *raw.BluetoothDeviceAddress) *IOBluetoothDevice {
-	_r := raw.IOBluetoothDeviceWithAddress(address)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
-}
-
-// DeviceWithAddressString calls the underlying IOBluetoothDeviceDeviceWithAddressString.
+// DeviceWithAddressString returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 func DeviceWithAddressString(address string) *IOBluetoothDevice {
-	_r := raw.IOBluetoothDeviceDeviceWithAddressString(foundation.NSStringStringWithUTF8String(address))
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("deviceWithAddressString:"), purego.NSString(address))
+	return IOBluetoothDeviceFromID(_r)
 }
 
-// WithDeviceRef calls the underlying IOBluetoothDeviceWithDeviceRef.
-func WithDeviceRef(deviceRef unsafe.Pointer) *IOBluetoothDevice {
-	_r := raw.IOBluetoothDeviceWithDeviceRef(deviceRef)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
+// WithDeviceRef method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.
+func WithDeviceRef(deviceRef obj.Object) *IOBluetoothDevice {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("withDeviceRef:"), objref.IDOf(deviceRef))
+	return IOBluetoothDeviceFromID(_r)
 }
 
-// FavoriteDevices calls the underlying IOBluetoothDeviceFavoriteDevices.
-func FavoriteDevices() *foundation.NSArray[objc.ID] {
-	return raw.IOBluetoothDeviceFavoriteDevices()
+// FavoriteDevices gets an array of the user’s favorite devices.
+func FavoriteDevices() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("favoriteDevices"))
+	return obj.Wrap(_r)
 }
 
-// RecentDevices calls the underlying IOBluetoothDeviceRecentDevices.
-func RecentDevices(numDevices uint) *foundation.NSArray[objc.ID] {
-	return raw.IOBluetoothDeviceRecentDevices(numDevices)
+// RecentDevices gets an array of recently used Bluetooth devices.
+func RecentDevices(numDevices int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("recentDevices:"), numDevices)
+	return obj.Wrap(_r)
 }
 
-// PairedDevices calls the underlying IOBluetoothDevicePairedDevices.
-func PairedDevices() *foundation.NSArray[objc.ID] {
-	return raw.IOBluetoothDevicePairedDevices()
+// PairedDevices gets an array of all of the paired devices on the system.
+func PairedDevices() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("pairedDevices"))
+	return obj.Wrap(_r)
 }
 
-// InquiryWithDelegate calls the underlying IOBluetoothDeviceInquiryInquiryWithDelegate.
-func InquiryWithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry {
-	_r := raw.IOBluetoothDeviceInquiryInquiryWithDelegate(delegate)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDeviceInquiry{inner: _r}
+// InquiryWithDelegate class method to create an inquiry object.
+func InquiryWithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDeviceInquiry")), objc.RegisterName("inquiryWithDelegate:"), objref.IDOf(delegate))
+	return IOBluetoothDeviceInquiryFromID(_r)
 }
 
-// PairWithDevice calls the underlying IOBluetoothDevicePairPairWithDevice.
-func PairWithDevice(device *raw.IOBluetoothDevice) *IOBluetoothDevicePair {
-	_r := raw.IOBluetoothDevicePairPairWithDevice(device)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevicePair{inner: _r}
+// PairWithDevice creates an autorelease IOBluetoothDevicePair object with a device as the pairing target.
+func PairWithDevice(device *IOBluetoothDevice) *IOBluetoothDevicePair {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevicePair")), objc.RegisterName("pairWithDevice:"), objref.IDOf(device))
+	return IOBluetoothDevicePairFromID(_r)
 }
 
-// DefaultController calls the underlying IOBluetoothHostControllerDefaultController.
+// DefaultController gets the default HCI controller object.
 func DefaultController() *IOBluetoothHostController {
-	_r := raw.IOBluetoothHostControllerDefaultController()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothHostController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothHostController")), objc.RegisterName("defaultController"))
+	return IOBluetoothHostControllerFromID(_r)
 }
 
-// RegisterForChannelOpenNotificationsSelector calls the underlying IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelector.
-func RegisterForChannelOpenNotificationsSelector(object objc.ID, selector objc.SEL) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelector(object, selector)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
+// WithObjectID returns the IObluetoothL2CAPChannel with the given IOBluetoothObjectID.
+func WithObjectID(objectID int) *IOBluetoothL2CAPChannel {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothL2CAPChannel")), objc.RegisterName("withObjectID:"), objectID)
+	return IOBluetoothL2CAPChannelFromID(_r)
 }
 
-// RegisterForChannelOpenNotificationsSelectorWithPSMDirection calls the underlying IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelectorWithPSMDirection.
-func RegisterForChannelOpenNotificationsSelectorWithPSMDirection(object objc.ID, selector objc.SEL, psm uint16, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelectorWithPSMDirection(object, selector, psm, raw.IOBluetoothUserNotificationChannelDirection(inDirection))
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
+// WithSDPServiceRecord creates a Bluetooth-based OBEX Session using an SDP service record, typically obtained from a device/service browser window controller.
+func WithSDPServiceRecord(inSDPServiceRecord *IOBluetoothSDPServiceRecord) *IOBluetoothOBEXSession {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothOBEXSession")), objc.RegisterName("withSDPServiceRecord:"), objref.IDOf(inSDPServiceRecord))
+	return IOBluetoothOBEXSessionFromID(_r)
 }
 
-// WithObjectID calls the underlying IOBluetoothL2CAPChannelWithObjectID.
-func WithObjectID(objectID uint) *IOBluetoothL2CAPChannel {
-	_r := raw.IOBluetoothL2CAPChannelWithObjectID(objectID)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothL2CAPChannel{inner: _r}
+// WithDeviceChannelID creates a Bluetooth-based OBEX Session using a Bluetooth device and a Bluetooth RFCOMM channel ID.
+func WithDeviceChannelID(inDevice *IOBluetoothDevice, inRFCOMMChannelID uint8) *IOBluetoothOBEXSession {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothOBEXSession")), objc.RegisterName("withDevice:channelID:"), objref.IDOf(inDevice), inRFCOMMChannelID)
+	return IOBluetoothOBEXSessionFromID(_r)
 }
 
-// WithSDPServiceRecord calls the underlying IOBluetoothOBEXSessionWithSDPServiceRecord.
-func WithSDPServiceRecord(inSDPServiceRecord *raw.IOBluetoothSDPServiceRecord) *IOBluetoothOBEXSession {
-	_r := raw.IOBluetoothOBEXSessionWithSDPServiceRecord(inSDPServiceRecord)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothOBEXSession{inner: _r}
+// WithRFCOMMChannelRef method call to convert an IOBluetoothRFCOMMChannelRef into an IOBluetoothRFCOMMChannel *.
+func WithRFCOMMChannelRef(rfcommChannelRef obj.Object) *IOBluetoothRFCOMMChannel {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothRFCOMMChannel")), objc.RegisterName("withRFCOMMChannelRef:"), objref.IDOf(rfcommChannelRef))
+	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
-// WithDeviceChannelID calls the underlying IOBluetoothOBEXSessionWithDeviceChannelID.
-func WithDeviceChannelID(inDevice *raw.IOBluetoothDevice, inRFCOMMChannelID uint8) *IOBluetoothOBEXSession {
-	_r := raw.IOBluetoothOBEXSessionWithDeviceChannelID(inDevice, inRFCOMMChannelID)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothOBEXSession{inner: _r}
+// IOBluetoothRFCOMMChannelWithObjectID returns the IObluetoothRFCOMMChannel with the given IOBluetoothObjectID.
+func IOBluetoothRFCOMMChannelWithObjectID(objectID int) *IOBluetoothRFCOMMChannel {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothRFCOMMChannel")), objc.RegisterName("withObjectID:"), objectID)
+	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
-// WithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon calls the underlying IOBluetoothOBEXSessionWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon.
-func WithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon(inChannel *raw.IOBluetoothRFCOMMChannel, inEventSelector objc.SEL, inEventSelectorTarget objc.ID, inUserRefCon unsafe.Pointer) *IOBluetoothOBEXSession {
-	_r := raw.IOBluetoothOBEXSessionWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon(inChannel, inEventSelector, inEventSelectorTarget, inUserRefCon)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothOBEXSession{inner: _r}
+// WithElementValue creates a new IOBluetoothSDPDataElement with the given value.
+func WithElementValue(element obj.Object) *IOBluetoothSDPDataElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("withElementValue:"), objref.IDOf(element))
+	return IOBluetoothSDPDataElementFromID(_r)
 }
 
-// IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector calls the underlying IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector.
-func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector(object objc.ID, selector objc.SEL) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector(object, selector)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
+// WithTypeSizeDescriptorSizeValue creates a new IOBluetoothSDPDataElement with the given attributes.
+func WithTypeSizeDescriptorSizeValue(type_ uint8, newSizeDescriptor uint8, newSize uint32, newValue obj.Object) *IOBluetoothSDPDataElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("withType:sizeDescriptor:size:value:"), type_, newSizeDescriptor, newSize, objref.IDOf(newValue))
+	return IOBluetoothSDPDataElementFromID(_r)
 }
 
-// RegisterForChannelOpenNotificationsSelectorWithChannelIDDirection calls the underlying IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection.
-func RegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object objc.ID, selector objc.SEL, channelID uint8, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object, selector, channelID, raw.IOBluetoothUserNotificationChannelDirection(inDirection))
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
+// WithSDPDataElementRef method call to convert an IOBluetoothSDPDataElementRef into an IOBluetoothSDPDataElement *.
+func WithSDPDataElementRef(sdpDataElementRef obj.Object) *IOBluetoothSDPDataElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("withSDPDataElementRef:"), objref.IDOf(sdpDataElementRef))
+	return IOBluetoothSDPDataElementFromID(_r)
 }
 
-// WithRFCOMMChannelRef calls the underlying IOBluetoothRFCOMMChannelWithRFCOMMChannelRef.
-func WithRFCOMMChannelRef(rfcommChannelRef unsafe.Pointer) *IOBluetoothRFCOMMChannel {
-	_r := raw.IOBluetoothRFCOMMChannelWithRFCOMMChannelRef(rfcommChannelRef)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothRFCOMMChannel{inner: _r}
+// WithIDAttributeElementValue creates a new service attribute with the given ID and element value.
+func WithIDAttributeElementValue(newAttributeID uint16, attributeElementValue obj.Object) *IOBluetoothSDPServiceAttribute {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceAttribute")), objc.RegisterName("withID:attributeElementValue:"), newAttributeID, objref.IDOf(attributeElementValue))
+	return IOBluetoothSDPServiceAttributeFromID(_r)
 }
 
-// IOBluetoothRFCOMMChannelWithObjectID calls the underlying IOBluetoothRFCOMMChannelWithObjectID.
-func IOBluetoothRFCOMMChannelWithObjectID(objectID uint) *IOBluetoothRFCOMMChannel {
-	_r := raw.IOBluetoothRFCOMMChannelWithObjectID(objectID)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothRFCOMMChannel{inner: _r}
+// WithIDAttributeElement creates a new service attribute with the given ID and data element.
+func WithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceAttribute")), objc.RegisterName("withID:attributeElement:"), newAttributeID, objref.IDOf(attributeElement))
+	return IOBluetoothSDPServiceAttributeFromID(_r)
 }
 
-// WithElementValue calls the underlying IOBluetoothSDPDataElementWithElementValue.
-func WithElementValue(element *foundation.NSObject) *IOBluetoothSDPDataElement {
-	_r := raw.IOBluetoothSDPDataElementWithElementValue(element)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPDataElement{inner: _r}
+// PublishedServiceRecordWithDictionary adds a service to the local SDP server.
+func PublishedServiceRecordWithDictionary(serviceDict obj.Object) *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("publishedServiceRecordWithDictionary:"), objref.IDOf(serviceDict))
+	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// WithTypeSizeDescriptorSizeValue calls the underlying IOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue.
-func WithTypeSizeDescriptorSizeValue(type_ uint8, newSizeDescriptor uint8, newSize uint32, newValue *foundation.NSObject) *IOBluetoothSDPDataElement {
-	_r := raw.IOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(type_, newSizeDescriptor, newSize, newValue)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPDataElement{inner: _r}
+// WithServiceDictionaryDevice returns an IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.
+func WithServiceDictionaryDevice(serviceDict obj.Object, device *IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("withServiceDictionary:device:"), objref.IDOf(serviceDict), objref.IDOf(device))
+	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// WithSDPDataElementRef calls the underlying IOBluetoothSDPDataElementWithSDPDataElementRef.
-func WithSDPDataElementRef(sdpDataElementRef unsafe.Pointer) *IOBluetoothSDPDataElement {
-	_r := raw.IOBluetoothSDPDataElementWithSDPDataElementRef(sdpDataElementRef)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPDataElement{inner: _r}
+// WithSDPServiceRecordRef method call to convert an IOBluetoothSDPServiceRecordRef into an IOBluetoothSDPServiceRecord *.
+func WithSDPServiceRecordRef(sdpServiceRecordRef obj.Object) *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("withSDPServiceRecordRef:"), objref.IDOf(sdpServiceRecordRef))
+	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// WithIDAttributeElementValue calls the underlying IOBluetoothSDPServiceAttributeWithIDAttributeElementValue.
-func WithIDAttributeElementValue(newAttributeID uint16, attributeElementValue *foundation.NSObject) *IOBluetoothSDPServiceAttribute {
-	_r := raw.IOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID, attributeElementValue)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceAttribute{inner: _r}
+// UuidWithData creates a new IOBluetoothSDPUUID object from the given NSData.
+func UuidWithData(data obj.Object) *IOBluetoothSDPUUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("uuidWithData:"), objref.IDOf(data))
+	return IOBluetoothSDPUUIDFromID(_r)
 }
 
-// WithIDAttributeElement calls the underlying IOBluetoothSDPServiceAttributeWithIDAttributeElement.
-func WithIDAttributeElement(newAttributeID uint16, attributeElement *raw.IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
-	_r := raw.IOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID, attributeElement)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceAttribute{inner: _r}
-}
-
-// PublishedServiceRecordWithDictionary calls the underlying IOBluetoothSDPServiceRecordPublishedServiceRecordWithDictionary.
-func PublishedServiceRecordWithDictionary(serviceDict *foundation.NSDictionary[objc.ID, objc.ID]) *IOBluetoothSDPServiceRecord {
-	_r := raw.IOBluetoothSDPServiceRecordPublishedServiceRecordWithDictionary(serviceDict)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceRecord{inner: _r}
-}
-
-// WithServiceDictionaryDevice calls the underlying IOBluetoothSDPServiceRecordWithServiceDictionaryDevice.
-func WithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *raw.IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
-	_r := raw.IOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict, device)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceRecord{inner: _r}
-}
-
-// WithSDPServiceRecordRef calls the underlying IOBluetoothSDPServiceRecordWithSDPServiceRecordRef.
-func WithSDPServiceRecordRef(sdpServiceRecordRef unsafe.Pointer) *IOBluetoothSDPServiceRecord {
-	_r := raw.IOBluetoothSDPServiceRecordWithSDPServiceRecordRef(sdpServiceRecordRef)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceRecord{inner: _r}
-}
-
-// UuidWithBytesLength calls the underlying IOBluetoothSDPUUIDUuidWithBytesLength.
-func UuidWithBytesLength(bytes_ unsafe.Pointer, length uint) *IOBluetoothSDPUUID {
-	_r := raw.IOBluetoothSDPUUIDUuidWithBytesLength(bytes_, length)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPUUID{inner: _r}
-}
-
-// UuidWithData calls the underlying IOBluetoothSDPUUIDUuidWithData.
-func UuidWithData(data *foundation.NSData) *IOBluetoothSDPUUID {
-	_r := raw.IOBluetoothSDPUUIDUuidWithData(data)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPUUID{inner: _r}
-}
-
-// Uuid16 calls the underlying IOBluetoothSDPUUIDUuid16.
+// Uuid16 creates a new 16-bit IOBluetoothSDPUUID with the given UUID16
 func Uuid16(uuid16 uint16) *IOBluetoothSDPUUID {
-	_r := raw.IOBluetoothSDPUUIDUuid16(uuid16)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPUUID{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("uuid16:"), uuid16)
+	return IOBluetoothSDPUUIDFromID(_r)
 }
 
-// Uuid32 calls the underlying IOBluetoothSDPUUIDUuid32.
+// Uuid32 creates a new 32-bit IOBluetoothSDPUUID with the given UUID32
 func Uuid32(uuid32 uint32) *IOBluetoothSDPUUID {
-	_r := raw.IOBluetoothSDPUUIDUuid32(uuid32)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPUUID{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("uuid32:"), uuid32)
+	return IOBluetoothSDPUUIDFromID(_r)
 }
 
-// WithSDPUUIDRef calls the underlying IOBluetoothSDPUUIDWithSDPUUIDRef.
-func WithSDPUUIDRef(sdpUUIDRef unsafe.Pointer) *IOBluetoothSDPUUID {
-	_r := raw.IOBluetoothSDPUUIDWithSDPUUIDRef(sdpUUIDRef)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPUUID{inner: _r}
+// WithSDPUUIDRef method call to convert an IOBluetoothSDPUUIDRef into an IOBluetoothSDPUUID *.
+func WithSDPUUIDRef(sdpUUIDRef obj.Object) *IOBluetoothSDPUUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("withSDPUUIDRef:"), objref.IDOf(sdpUUIDRef))
+	return IOBluetoothSDPUUIDFromID(_r)
 }
 
-// WithOBEXSession calls the underlying OBEXFileTransferServicesWithOBEXSession.
-func WithOBEXSession(inOBEXSession *raw.IOBluetoothOBEXSession) *OBEXFileTransferServices {
-	_r := raw.OBEXFileTransferServicesWithOBEXSession(inOBEXSession)
-	if _r == nil {
-		return nil
-	}
-	return &OBEXFileTransferServices{inner: _r}
+// WithOBEXSession create a new OBEXFileTransferServices object
+func WithOBEXSession(inOBEXSession *IOBluetoothOBEXSession) *OBEXFileTransferServices {
+	_r := objc.Send[objc.ID](objc.ID(_class("OBEXFileTransferServices")), objc.RegisterName("withOBEXSession:"), objref.IDOf(inOBEXSession))
+	return OBEXFileTransferServicesFromID(_r)
 }

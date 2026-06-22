@@ -5,78 +5,74 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CompositionWithFile calls the underlying QCCompositionCompositionWithFile.
-func CompositionWithFile(path string) *quartz.QCComposition {
-	return raw.QCCompositionCompositionWithFile(foundation.NSStringStringWithUTF8String(path))
+// CompositionWithFile wraps the corresponding Objective-C method.
+func CompositionWithFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// CompositionWithData calls the underlying QCCompositionCompositionWithData.
-func CompositionWithData(data *foundation.NSData) *quartz.QCComposition {
-	return raw.QCCompositionCompositionWithData(data)
+// CompositionWithData wraps the corresponding Objective-C method.
+func CompositionWithData(data obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("compositionWithData:"), objref.IDOf(data))
+	return obj.Wrap(_r)
 }
 
-// CompositionLayerWithFile calls the underlying QCCompositionLayerCompositionLayerWithFile.
-func CompositionLayerWithFile(path string) *quartz.QCCompositionLayer {
-	return raw.QCCompositionLayerCompositionLayerWithFile(foundation.NSStringStringWithUTF8String(path))
+// CompositionLayerWithFile wraps the corresponding Objective-C method.
+func CompositionLayerWithFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// CompositionLayerWithComposition calls the underlying QCCompositionLayerCompositionLayerWithComposition.
-func CompositionLayerWithComposition(composition *quartz.QCComposition) *quartz.QCCompositionLayer {
-	return raw.QCCompositionLayerCompositionLayerWithComposition(composition)
+// CompositionLayerWithComposition wraps the corresponding Objective-C method.
+func CompositionLayerWithComposition(composition obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("compositionLayerWithComposition:"), objref.IDOf(composition))
+	return obj.Wrap(_r)
 }
 
-// SharedCompositionPickerPanel calls the underlying QCCompositionPickerPanelSharedCompositionPickerPanel.
-func SharedCompositionPickerPanel() *quartz.QCCompositionPickerPanel {
-	return raw.QCCompositionPickerPanelSharedCompositionPickerPanel()
+// SharedCompositionPickerPanel wraps the corresponding Objective-C method.
+func SharedCompositionPickerPanel() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("sharedCompositionPickerPanel"))
+	return obj.Wrap(_r)
 }
 
-// SharedCompositionRepository calls the underlying QCCompositionRepositorySharedCompositionRepository.
-func SharedCompositionRepository() *quartz.QCCompositionRepository {
-	return raw.QCCompositionRepositorySharedCompositionRepository()
+// SharedCompositionRepository wraps the corresponding Objective-C method.
+func SharedCompositionRepository() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("sharedCompositionRepository"))
+	return obj.Wrap(_r)
 }
 
-// Attributes calls the underlying QCPlugInAttributes.
-func Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return raw.QCPlugInAttributes()
+// Attributes wraps the corresponding Objective-C method.
+func Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
-// AttributesForPropertyPortWithKey calls the underlying QCPlugInAttributesForPropertyPortWithKey.
-func AttributesForPropertyPortWithKey(key string) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return raw.QCPlugInAttributesForPropertyPortWithKey(foundation.NSStringStringWithUTF8String(key))
+// AttributesForPropertyPortWithKey wraps the corresponding Objective-C method.
+func AttributesForPropertyPortWithKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributesForPropertyPortWithKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// SortedPropertyPortKeys calls the underlying QCPlugInSortedPropertyPortKeys.
-func SortedPropertyPortKeys() *foundation.NSArray[objc.ID] {
-	return raw.QCPlugInSortedPropertyPortKeys()
+// SortedPropertyPortKeys wraps the corresponding Objective-C method.
+func SortedPropertyPortKeys() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("sortedPropertyPortKeys"))
+	return obj.Wrap(_r)
 }
 
-// ExecutionModeClass calls the underlying QCPlugInExecutionModeClass.
-func ExecutionModeClass() quartz.QCPlugInExecutionMode {
-	return raw.QCPlugInExecutionModeClass()
+// PlugInKeys wraps the corresponding Objective-C method.
+func PlugInKeys() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("plugInKeys"))
+	return obj.Wrap(_r)
 }
 
-// TimeModeClass calls the underlying QCPlugInTimeModeClass.
-func TimeModeClass() quartz.QCPlugInTimeMode {
-	return raw.QCPlugInTimeModeClass()
-}
-
-// PlugInKeys calls the underlying QCPlugInPlugInKeys.
-func PlugInKeys() *foundation.NSArray[objc.ID] {
-	return raw.QCPlugInPlugInKeys()
-}
-
-// LoadPlugInAtPath calls the underlying QCPlugInLoadPlugInAtPath.
+// LoadPlugInAtPath wraps the corresponding Objective-C method.
 func LoadPlugInAtPath(path string) bool {
-	return raw.QCPlugInLoadPlugInAtPath(foundation.NSStringStringWithUTF8String(path))
-}
-
-// RegisterPlugInClass calls the underlying QCPlugInRegisterPlugInClass.
-func RegisterPlugInClass(aClass objc.Class) {
-	raw.QCPlugInRegisterPlugInClass(aClass)
+	_r := objc.Send[bool](objc.ID(_class("QCPlugIn")), objc.RegisterName("loadPlugInAtPath:"), purego.NSString(path))
+	return _r
 }

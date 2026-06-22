@@ -5,85 +5,178 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTimeSynchronizationClusterSetUtcTimeParams wraps [raw.MTRTimeSynchronizationClusterSetUtcTimeParams] with a fluent Go API.
-type MTRTimeSynchronizationClusterSetUtcTimeParams struct {
-	inner *raw.MTRTimeSynchronizationClusterSetUtcTimeParams
+// MTRTimeSynchronizationClusterSetUTCTimeParams is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterSetUTCTimeParams.
+//
+// MTRTimeSynchronizationClusterSetUTCTimeParams is an abstract base — you do not construct it directly. Construct one of [MTRTimeSynchronizationClusterSetUtcTimeParams] and pass it where a MTRTimeSynchronizationClusterSetUTCTimeParams is accepted.
+type MTRTimeSynchronizationClusterSetUTCTimeParams struct {
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetUtcTimeParams].
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetUtcTimeParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTimeSynchronizationClusterSetUtcTimeParamsFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterSetUtcTimeParams (nil for 0).
-func MTRTimeSynchronizationClusterSetUtcTimeParamsFromID(id objc.ID) *MTRTimeSynchronizationClusterSetUtcTimeParams {
+// MTRTimeSynchronizationClusterSetUTCTimeParamsFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterSetUTCTimeParams
+// (nil for 0), retaining it and registering a release finalizer.
+func MTRTimeSynchronizationClusterSetUTCTimeParamsFromID(id objc.ID) *MTRTimeSynchronizationClusterSetUTCTimeParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTimeSynchronizationClusterSetUtcTimeParams{inner: raw.MTRTimeSynchronizationClusterSetUtcTimeParamsFromID(id)}
-}
-
-// NewMTRTimeSynchronizationClusterSetUtcTimeParams creates a new [MTRTimeSynchronizationClusterSetUtcTimeParams].
-func NewMTRTimeSynchronizationClusterSetUtcTimeParams() *MTRTimeSynchronizationClusterSetUtcTimeParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTimeSynchronizationClusterSetUtcTimeParams")), objc.RegisterName("new"))
-	return &MTRTimeSynchronizationClusterSetUtcTimeParams{inner: raw.MTRTimeSynchronizationClusterSetUtcTimeParamsFromID(_id)}
-}
-
-// WithUtcTime sets the utcTime property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithUtcTime(utcTime *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
-	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetUtcTime(utcTime)
+	x := &MTRTimeSynchronizationClusterSetUTCTimeParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithGranularity sets the granularity property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithGranularity(granularity *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
-	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetGranularity(granularity)
+// mTRTimeSynchronizationClusterSetUTCTimeParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTimeSynchronizationClusterSetUTCTimeParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTimeSynchronizationClusterSetUTCTimeParamsAdopt(id objc.ID) *MTRTimeSynchronizationClusterSetUTCTimeParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTimeSynchronizationClusterSetUTCTimeParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithTimeSource sets the timeSource property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithTimeSource(timeSource *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
-	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetTimeSource(timeSource)
+// Description returns the object's -description text.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithUtcTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) WithUtcTime(utcTime obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUtcTime:"), objref.IDOf(utcTime))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
-	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithGranularity sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) WithGranularity(granularity obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGranularity:"), objref.IDOf(granularity))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
-	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithTimeSource sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) WithTimeSource(timeSource obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeSource:"), objref.IDOf(timeSource))
 	return x
 }
 
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) asMTRTimeSynchronizationClusterSetUTCTimeParams() *raw.MTRTimeSynchronizationClusterSetUTCTimeParams {
-	return &x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
 }
 
-// MTRTimeSynchronizationClusterSetUtcTimeParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetUtcTimeParams], for mocking and DI.
-type MTRTimeSynchronizationClusterSetUtcTimeParamsable interface {
-	Unwrap() *raw.MTRTimeSynchronizationClusterSetUtcTimeParams
-	WithUtcTime(utcTime *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
-	WithGranularity(granularity *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
-	WithTimeSource(timeSource *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return x
 }
 
-var _ MTRTimeSynchronizationClusterSetUtcTimeParamsable = (*MTRTimeSynchronizationClusterSetUtcTimeParams)(nil)
+// UtcTime wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) UtcTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("utcTime"))
+	return obj.Wrap(_r)
+}
+
+// SetUtcTime wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) SetUtcTime(utcTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUtcTime:"), objref.IDOf(utcTime))
+}
+
+// Granularity wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) Granularity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("granularity"))
+	return obj.Wrap(_r)
+}
+
+// SetGranularity wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) SetGranularity(granularity obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGranularity:"), objref.IDOf(granularity))
+}
+
+// TimeSource wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) TimeSource() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeSource"))
+	return obj.Wrap(_r)
+}
+
+// SetTimeSource wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) SetTimeSource(timeSource obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeSource:"), objref.IDOf(timeSource))
+}
+
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+}
+
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
+}
+
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+}
+
+// MTRTimeSynchronizationClusterSetUTCTimeParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetUTCTimeParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetUTCTimeParamsable interface {
+	obj.Object
+	WithUtcTime(utcTime obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams
+	WithGranularity(granularity obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams
+	WithTimeSource(timeSource obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams
+	UtcTime() obj.Object
+	SetUtcTime(utcTime obj.Object)
+	Granularity() obj.Object
+	SetGranularity(granularity obj.Object)
+	TimeSource() obj.Object
+	SetTimeSource(timeSource obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
+}
+
+var _ MTRTimeSynchronizationClusterSetUTCTimeParamsable = (*MTRTimeSynchronizationClusterSetUTCTimeParams)(nil)
+
+// isMTRTimeSynchronizationClusterSetUTCTimeParams marks MTRTimeSynchronizationClusterSetUTCTimeParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRTimeSynchronizationClusterSetUTCTimeParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRTimeSynchronizationClusterSetUTCTimeParams) isMTRTimeSynchronizationClusterSetUTCTimeParams() {
+}
+
+var _ MTRTimeSynchronizationClusterSetUTCTimeParamsProvider = (*MTRTimeSynchronizationClusterSetUTCTimeParams)(nil)

@@ -5,369 +5,313 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A controller that manages a window, usually a window stored in a nib file.
+// WindowController is an idiomatic wrapper over the Objective-C class NSWindowController.
 //
-// WindowController wraps [raw.NSWindowController] with a fluent Go API.
+// It embeds [Responder], promoting that type's methods.
+//
+// A controller that manages a window, usually a window stored in a nib file.
 type WindowController struct {
-	inner *raw.NSWindowController
+	Responder
 }
 
-// Unwrap returns the underlying [raw.NSWindowController].
-func (x *WindowController) Unwrap() *raw.NSWindowController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WindowController) ID() objc.ID { return x.inner.Ptr() }
-
-// WindowControllerFromID adopts an existing object pointer as a WindowController (nil for 0).
+// WindowControllerFromID adopts an existing Objective-C object as a WindowController
+// (nil for 0), retaining it and registering a release finalizer.
 func WindowControllerFromID(id objc.ID) *WindowController {
 	if id == 0 {
 		return nil
 	}
-	return &WindowController{inner: raw.NSWindowControllerFromID(id)}
-}
-
-// Returns a window controller initialized with a given window.
-//
-// NewWindowControllerWithWindow creates a new [WindowController].
-func NewWindowControllerWithWindow(window *raw.NSWindow) *WindowController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindow:"), window.Ptr())
-	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
-}
-
-// NewWindowControllerWithCoder creates a new [WindowController].
-func NewWindowControllerWithCoder(coder *foundation.NSCoder) *WindowController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
-}
-
-// Returns a window controller initialized with a nib file.
-//
-// NewWindowControllerWithWindowNibName creates a new [WindowController].
-func NewWindowControllerWithWindowNibName(windowNibName *foundation.NSString) *WindowController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowNibName:"), windowNibName.Ptr())
-	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
-}
-
-// Returns a window controller initialized with a nib file and a specified owner for that nib file.
-//
-// NewWindowControllerWithWindowNibNameOwner creates a new [WindowController].
-func NewWindowControllerWithWindowNibNameOwner(windowNibName *foundation.NSString, owner objc.ID) *WindowController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowNibName:owner:"), windowNibName.Ptr(), owner)
-	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
-}
-
-// Returns a window controller initialized with a nib file at an absolute path and a specified owner.
-//
-// NewWindowControllerWithWindowNibPathOwner creates a new [WindowController].
-func NewWindowControllerWithWindowNibPathOwner(windowNibPath string, owner objc.ID) *WindowController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowNibPath:owner:"), foundation.NSStringStringWithUTF8String(windowNibPath).Ptr(), owner)
-	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
-}
-
-// The name under which the frame rectangle of the window owned by the receiver is stored in the defaults database.
-//
-// WithWindowFrameAutosaveName sets the windowFrameAutosaveName property and returns the receiver for chaining.
-func (x *WindowController) WithWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) *WindowController {
-	x.inner.SetWindowFrameAutosaveName(windowFrameAutosaveName)
+	x := &WindowController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether the window will cascade in relation to other document windows when it is displayed.
-//
-// WithShouldCascadeWindows sets the shouldCascadeWindows property and returns the receiver for chaining.
+// windowControllerAdopt wraps an Objective-C object that this code just created as a
+// WindowController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func windowControllerAdopt(id objc.ID) *WindowController {
+	if id == 0 {
+		return nil
+	}
+	x := &WindowController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewWindowControllerWithWindow returns a window controller initialized with a given window.
+func NewWindowControllerWithWindow(window *Window) *WindowController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindowController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindow:"), objref.IDOf(window))
+	return windowControllerAdopt(_id)
+}
+
+// NewWindowControllerWithCoder creates a new WindowController.
+func NewWindowControllerWithCoder(coder obj.Object) *WindowController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindowController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return windowControllerAdopt(_id)
+}
+
+// NewWindowControllerWithWindowNibName returns a window controller initialized with a nib file.
+func NewWindowControllerWithWindowNibName(windowNibName obj.Object) *WindowController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindowController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowNibName:"), objref.IDOf(windowNibName))
+	return windowControllerAdopt(_id)
+}
+
+// NewWindowControllerWithWindowNibNameOwner returns a window controller initialized with a nib file and a specified owner for that nib file.
+func NewWindowControllerWithWindowNibNameOwner(windowNibName obj.Object, owner obj.Object) *WindowController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindowController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowNibName:owner:"), objref.IDOf(windowNibName), objref.IDOf(owner))
+	return windowControllerAdopt(_id)
+}
+
+// NewWindowControllerWithWindowNibPathOwner returns a window controller initialized with a nib file at an absolute path and a specified owner.
+func NewWindowControllerWithWindowNibPathOwner(windowNibPath string, owner obj.Object) *WindowController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindowController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowNibPath:owner:"), purego.NSString(windowNibPath), objref.IDOf(owner))
+	return windowControllerAdopt(_id)
+}
+
+// WithWindowFrameAutosaveName the name under which the frame rectangle of the window owned by the receiver is stored in the defaults database.
+func (x *WindowController) WithWindowFrameAutosaveName(windowFrameAutosaveName obj.Object) *WindowController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowFrameAutosaveName:"), objref.IDOf(windowFrameAutosaveName))
+	return x
+}
+
+// WithShouldCascadeWindows a Boolean value that indicates whether the window will cascade in relation to other document windows when it is displayed.
 func (x *WindowController) WithShouldCascadeWindows(shouldCascadeWindows bool) *WindowController {
-	x.inner.SetShouldCascadeWindows(shouldCascadeWindows)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCascadeWindows:"), shouldCascadeWindows)
 	return x
 }
 
-// The document associated with the window controller.
-//
-// WithDocument sets the document property and returns the receiver for chaining.
-func (x *WindowController) WithDocument(document objc.ID) *WindowController {
-	x.inner.SetDocument(document)
+// WithDocument the document associated with the window controller.
+func (x *WindowController) WithDocument(document obj.Object) *WindowController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocument:"), objref.IDOf(document))
 	return x
 }
 
-// A Boolean value that indicates whether the receiver necessarily closes the associated document when the window it manages is closed.
-//
-// WithShouldCloseDocument sets the shouldCloseDocument property and returns the receiver for chaining.
+// WithShouldCloseDocument a Boolean value that indicates whether the receiver necessarily closes the associated document when the window it manages is closed.
 func (x *WindowController) WithShouldCloseDocument(shouldCloseDocument bool) *WindowController {
-	x.inner.SetShouldCloseDocument(shouldCloseDocument)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCloseDocument:"), shouldCloseDocument)
 	return x
 }
 
-// The view controller for the window’s content view.
-//
-// WithContentViewController sets the contentViewController property and returns the receiver for chaining.
+// WithContentViewController the view controller for the window’s content view.
 func (x *WindowController) WithContentViewController(contentViewController ViewControllerProvider) *WindowController {
-	x.inner.SetContentViewController(contentViewController.asViewController())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	return x
 }
 
-// The window owned by the receiver.
-//
-// WithWindow sets the window property and returns the receiver for chaining.
+// WithWindow the window owned by the receiver.
 func (x *WindowController) WithWindow(window WindowProvider) *WindowController {
-	x.inner.SetWindow(window.asWindow())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindow:"), objref.IDOf(window))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *WindowController) WithNextResponder(nextResponder ResponderProvider) *WindowController {
-	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *WindowController) WithMenu(menu *Menu) *WindowController {
-	x.inner.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *WindowController) WithUserActivity(userActivity *foundation.NSUserActivity) *WindowController {
-	x.inner.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *WindowController) WithUserActivity(userActivity obj.Object) *WindowController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *WindowController) WithTouchBar(touchBar *TouchBar) *WindowController {
-	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Sets the document edited flag for the window controller.
-//
-// SetDocumentEdited calls the underlying SetDocumentEdited.
+// SetDocumentEdited sets the document edited flag for the window controller.
 func (x *WindowController) SetDocumentEdited(dirtyFlag bool) {
-	x.inner.SetDocumentEdited(dirtyFlag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), dirtyFlag)
 }
 
-// Synchronizes the displayed window title and the represented filename with the information in the associated document.
-//
-// SynchronizeWindowTitleWithDocumentName calls the underlying SynchronizeWindowTitleWithDocumentName.
+// SynchronizeWindowTitleWithDocumentName synchronizes the displayed window title and the represented filename with the information in the associated document.
 func (x *WindowController) SynchronizeWindowTitleWithDocumentName() {
-	x.inner.SynchronizeWindowTitleWithDocumentName()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizeWindowTitleWithDocumentName"))
 }
 
-// Returns the window title to be used for a given document display name.
-//
-// WindowTitleForDocumentDisplayName calls the underlying WindowTitleForDocumentDisplayName.
+// WindowTitleForDocumentDisplayName returns the window title to be used for a given document display name.
 func (x *WindowController) WindowTitleForDocumentDisplayName(displayName string) string {
-	_r := x.inner.WindowTitleForDocumentDisplayName(foundation.NSStringStringWithUTF8String(displayName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowTitleForDocumentDisplayName:"), purego.NSString(displayName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Sent before the window owned by the receiver is loaded.
-//
-// WindowWillLoad calls the underlying WindowWillLoad.
+// WindowWillLoad sent before the window owned by the receiver is loaded.
 func (x *WindowController) WindowWillLoad() {
-	x.inner.WindowWillLoad()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowWillLoad"))
 }
 
-// Sent after the window owned by the receiver has been loaded.
-//
-// WindowDidLoad calls the underlying WindowDidLoad.
+// WindowDidLoad sent after the window owned by the receiver has been loaded.
 func (x *WindowController) WindowDidLoad() {
-	x.inner.WindowDidLoad()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowDidLoad"))
 }
 
-// Loads the receiver’s window from the nib file.
-//
-// LoadWindow calls the underlying LoadWindow.
+// LoadWindow loads the receiver’s window from the nib file.
 func (x *WindowController) LoadWindow() {
-	x.inner.LoadWindow()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadWindow"))
 }
 
-// Closes the window if it was loaded.
-//
-// Close calls the underlying Close.
+// Close closes the window if it was loaded.
 func (x *WindowController) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Displays the window associated with the receiver.
-//
-// ShowWindow calls the underlying ShowWindow.
-func (x *WindowController) ShowWindow(sender objc.ID) {
-	x.inner.ShowWindow(sender)
+// ShowWindow displays the window associated with the receiver.
+func (x *WindowController) ShowWindow(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showWindow:"), objref.IDOf(sender))
 }
 
-// WindowNibName calls the underlying WindowNibName.
-func (x *WindowController) WindowNibName() string {
-	_r := x.inner.WindowNibName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// WindowNibName wraps the corresponding Objective-C method.
+func (x *WindowController) WindowNibName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowNibName"))
+	return obj.Wrap(_r)
 }
 
-// WindowNibPath calls the underlying WindowNibPath.
+// WindowNibPath wraps the corresponding Objective-C method.
 func (x *WindowController) WindowNibPath() string {
-	_r := x.inner.WindowNibPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowNibPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Owner calls the underlying Owner.
-func (x *WindowController) Owner() objc.ID {
-	return x.inner.Owner()
+// Owner wraps the corresponding Objective-C method.
+func (x *WindowController) Owner() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owner"))
+	return obj.Wrap(_r)
 }
 
-// WindowFrameAutosaveName calls the underlying WindowFrameAutosaveName.
-func (x *WindowController) WindowFrameAutosaveName() string {
-	_r := x.inner.WindowFrameAutosaveName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// WindowFrameAutosaveName wraps the corresponding Objective-C method.
+func (x *WindowController) WindowFrameAutosaveName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowFrameAutosaveName"))
+	return obj.Wrap(_r)
 }
 
-// SetWindowFrameAutosaveName calls the underlying SetWindowFrameAutosaveName.
-func (x *WindowController) SetWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) {
-	x.inner.SetWindowFrameAutosaveName(windowFrameAutosaveName)
+// SetWindowFrameAutosaveName wraps the corresponding Objective-C method.
+func (x *WindowController) SetWindowFrameAutosaveName(windowFrameAutosaveName obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowFrameAutosaveName:"), objref.IDOf(windowFrameAutosaveName))
 }
 
-// ShouldCascadeWindows calls the underlying ShouldCascadeWindows.
+// ShouldCascadeWindows wraps the corresponding Objective-C method.
 func (x *WindowController) ShouldCascadeWindows() bool {
-	return x.inner.ShouldCascadeWindows()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCascadeWindows"))
+	return _r
 }
 
-// SetShouldCascadeWindows calls the underlying SetShouldCascadeWindows.
+// SetShouldCascadeWindows wraps the corresponding Objective-C method.
 func (x *WindowController) SetShouldCascadeWindows(shouldCascadeWindows bool) {
-	x.inner.SetShouldCascadeWindows(shouldCascadeWindows)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCascadeWindows:"), shouldCascadeWindows)
 }
 
-// PreviewRepresentableActivityItems calls the underlying PreviewRepresentableActivityItems.
-func (x *WindowController) PreviewRepresentableActivityItems() *foundation.NSArray[raw.NSPreviewRepresentableActivityItem] {
-	return x.inner.PreviewRepresentableActivityItems()
+// PreviewRepresentableActivityItems wraps the corresponding Objective-C method.
+func (x *WindowController) PreviewRepresentableActivityItems() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previewRepresentableActivityItems"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPreviewRepresentableActivityItems calls the underlying SetPreviewRepresentableActivityItems.
-func (x *WindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(previewRepresentableActivityItems))
-	for _i, _v := range previewRepresentableActivityItems {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.NSPreviewRepresentableActivityItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.NSPreviewRepresentableActivityItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetPreviewRepresentableActivityItems(_arg0)
+// SetPreviewRepresentableActivityItems wraps the corresponding Objective-C method.
+func (x *WindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviewRepresentableActivityItems:"), purego.SliceToNSArray(previewRepresentableActivityItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Document calls the underlying Document.
-func (x *WindowController) Document() objc.ID {
-	return x.inner.Document()
+// Document wraps the corresponding Objective-C method.
+func (x *WindowController) Document() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+	return obj.Wrap(_r)
 }
 
-// SetDocument calls the underlying SetDocument.
-func (x *WindowController) SetDocument(document objc.ID) {
-	x.inner.SetDocument(document)
+// SetDocument wraps the corresponding Objective-C method.
+func (x *WindowController) SetDocument(document obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocument:"), objref.IDOf(document))
 }
 
-// ShouldCloseDocument calls the underlying ShouldCloseDocument.
+// ShouldCloseDocument wraps the corresponding Objective-C method.
 func (x *WindowController) ShouldCloseDocument() bool {
-	return x.inner.ShouldCloseDocument()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCloseDocument"))
+	return _r
 }
 
-// SetShouldCloseDocument calls the underlying SetShouldCloseDocument.
+// SetShouldCloseDocument wraps the corresponding Objective-C method.
 func (x *WindowController) SetShouldCloseDocument(shouldCloseDocument bool) {
-	x.inner.SetShouldCloseDocument(shouldCloseDocument)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCloseDocument:"), shouldCloseDocument)
 }
 
-// ContentViewController calls the underlying ContentViewController.
+// ContentViewController wraps the corresponding Objective-C method.
 func (x *WindowController) ContentViewController() *ViewController {
-	_r := x.inner.ContentViewController()
-	if _r == nil {
-		return nil
-	}
-	return &ViewController{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentViewController"))
+	return ViewControllerFromID(_r)
 }
 
-// SetContentViewController calls the underlying SetContentViewController.
-func (x *WindowController) SetContentViewController(contentViewController *raw.NSViewController) {
-	x.inner.SetContentViewController(contentViewController)
+// SetContentViewController wraps the corresponding Objective-C method.
+func (x *WindowController) SetContentViewController(contentViewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 }
 
-// Window calls the underlying Window.
+// Window wraps the corresponding Objective-C method.
 func (x *WindowController) Window() *Window {
-	_r := x.inner.Window()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))
+	return WindowFromID(_r)
 }
 
-// SetWindow calls the underlying SetWindow.
-func (x *WindowController) SetWindow(window *raw.NSWindow) {
-	x.inner.SetWindow(window)
+// SetWindow wraps the corresponding Objective-C method.
+func (x *WindowController) SetWindow(window *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindow:"), objref.IDOf(window))
 }
 
-// IsWindowLoaded calls the underlying IsWindowLoaded.
+// IsWindowLoaded wraps the corresponding Objective-C method.
 func (x *WindowController) IsWindowLoaded() bool {
-	return x.inner.IsWindowLoaded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWindowLoaded"))
+	return _r
 }
 
-// Storyboard calls the underlying Storyboard.
+// Storyboard wraps the corresponding Objective-C method.
 func (x *WindowController) Storyboard() *Storyboard {
-	_r := x.inner.Storyboard()
-	if _r == nil {
-		return nil
-	}
-	return &Storyboard{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storyboard"))
+	return StoryboardFromID(_r)
 }
 
-// Dismisses the window controller.
-//
-// DismissController calls the underlying DismissController.
-func (x *WindowController) DismissController(sender objc.ID) {
-	x.inner.DismissController(sender)
+// DismissController dismisses the window controller.
+func (x *WindowController) DismissController(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissController:"), objref.IDOf(sender))
 }
-
-func (x *WindowController) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
 
 // WindowControllerable is the interface implemented by [WindowController], for mocking and DI.
 type WindowControllerable interface {
-	Unwrap() *raw.NSWindowController
-	WithWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) *WindowController
+	obj.Object
+	WithWindowFrameAutosaveName(windowFrameAutosaveName obj.Object) *WindowController
 	WithShouldCascadeWindows(shouldCascadeWindows bool) *WindowController
-	WithDocument(document objc.ID) *WindowController
+	WithDocument(document obj.Object) *WindowController
 	WithShouldCloseDocument(shouldCloseDocument bool) *WindowController
 	WithContentViewController(contentViewController ViewControllerProvider) *WindowController
 	WithWindow(window WindowProvider) *WindowController
 	WithNextResponder(nextResponder ResponderProvider) *WindowController
 	WithMenu(menu *Menu) *WindowController
-	WithUserActivity(userActivity *foundation.NSUserActivity) *WindowController
+	WithUserActivity(userActivity obj.Object) *WindowController
 	WithTouchBar(touchBar *TouchBar) *WindowController
 	SetDocumentEdited(dirtyFlag bool)
 	SynchronizeWindowTitleWithDocumentName()
@@ -376,27 +320,29 @@ type WindowControllerable interface {
 	WindowDidLoad()
 	LoadWindow()
 	Close()
-	ShowWindow(sender objc.ID)
-	WindowNibName() string
+	ShowWindow(sender obj.Object)
+	WindowNibName() obj.Object
 	WindowNibPath() string
-	Owner() objc.ID
-	WindowFrameAutosaveName() string
-	SetWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString)
+	Owner() obj.Object
+	WindowFrameAutosaveName() obj.Object
+	SetWindowFrameAutosaveName(windowFrameAutosaveName obj.Object)
 	ShouldCascadeWindows() bool
 	SetShouldCascadeWindows(shouldCascadeWindows bool)
-	PreviewRepresentableActivityItems() *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]
-	SetPreviewRepresentableActivityItems(previewRepresentableActivityItems ...purego.IDer)
-	Document() objc.ID
-	SetDocument(document objc.ID)
+	PreviewRepresentableActivityItems() []obj.Object
+	SetPreviewRepresentableActivityItems(previewRepresentableActivityItems []obj.Object)
+	Document() obj.Object
+	SetDocument(document obj.Object)
 	ShouldCloseDocument() bool
 	SetShouldCloseDocument(shouldCloseDocument bool)
 	ContentViewController() *ViewController
-	SetContentViewController(contentViewController *raw.NSViewController)
+	SetContentViewController(contentViewController *ViewController)
 	Window() *Window
-	SetWindow(window *raw.NSWindow)
+	SetWindow(window *Window)
 	IsWindowLoaded() bool
 	Storyboard() *Storyboard
-	DismissController(sender objc.ID)
+	DismissController(sender obj.Object)
 }
 
 var _ WindowControllerable = (*WindowController)(nil)
+
+var _ ResponderProvider = (*WindowController)(nil)

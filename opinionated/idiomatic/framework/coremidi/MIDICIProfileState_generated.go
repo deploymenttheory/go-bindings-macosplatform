@@ -5,82 +5,106 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.
+// CIProfileState is an idiomatic wrapper over the Objective-C class MIDICIProfileState.
 //
-// CIProfileState wraps [raw.MIDICIProfileState] with a fluent Go API.
+// An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.
 type CIProfileState struct {
-	inner *raw.MIDICIProfileState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIProfileState].
-func (x *CIProfileState) Unwrap() *raw.MIDICIProfileState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIProfileState) ID() objc.ID { return x.inner.Ptr() }
-
-// CIProfileStateFromID adopts an existing object pointer as a CIProfileState (nil for 0).
+// CIProfileStateFromID adopts an existing Objective-C object as a CIProfileState
+// (nil for 0), retaining it and registering a release finalizer.
 func CIProfileStateFromID(id objc.ID) *CIProfileState {
 	if id == 0 {
 		return nil
 	}
-	return &CIProfileState{inner: raw.MIDICIProfileStateFromID(id)}
+	x := &CIProfileState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new profile state object for the specified MIDI channel and profiles.
-//
-// NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles creates a new [CIProfileState].
-func NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles(midiChannelNum uint8, enabled *foundation.NSArray[*raw.MIDICIProfile], disabled *foundation.NSArray[*raw.MIDICIProfile]) *CIProfileState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfileState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:enabledProfiles:disabledProfiles:"), midiChannelNum, enabled.Ptr(), disabled.Ptr())
-	return &CIProfileState{inner: raw.MIDICIProfileStateFromID(_id)}
+// cIProfileStateAdopt wraps an Objective-C object that this code just created as a
+// CIProfileState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIProfileStateAdopt(id objc.ID) *CIProfileState {
+	if id == 0 {
+		return nil
+	}
+	x := &CIProfileState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a new profile state object for the specified profiles.
-//
-// NewCIProfileStateWithEnabledProfilesDisabledProfiles creates a new [CIProfileState].
-func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled *foundation.NSArray[*raw.MIDICIProfile], disabled *foundation.NSArray[*raw.MIDICIProfile]) *CIProfileState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfileState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnabledProfiles:disabledProfiles:"), enabled.Ptr(), disabled.Ptr())
-	return &CIProfileState{inner: raw.MIDICIProfileStateFromID(_id)}
+// Description returns the object's -description text.
+func (x *CIProfileState) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// MidiChannel calls the underlying MidiChannel.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIProfileState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIProfileState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIProfileState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles creates a new profile state object for the specified MIDI channel and profiles.
+func NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles(midiChannelNum uint8, enabled []*CIProfile, disabled []*CIProfile) *CIProfileState {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfileState")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:enabledProfiles:disabledProfiles:"), midiChannelNum, purego.SliceToNSArray(enabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(disabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }))
+	return cIProfileStateAdopt(_id)
+}
+
+// NewCIProfileStateWithEnabledProfilesDisabledProfiles creates a new profile state object for the specified profiles.
+func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled []*CIProfile, disabled []*CIProfile) *CIProfileState {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfileState")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnabledProfiles:disabledProfiles:"), purego.SliceToNSArray(enabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(disabled, func(_v *CIProfile) objc.ID { return objref.IDOf(_v) }))
+	return cIProfileStateAdopt(_id)
+}
+
+// MidiChannel wraps the corresponding Objective-C method.
 func (x *CIProfileState) MidiChannel() uint8 {
-	return x.inner.MidiChannel()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("midiChannel"))
+	return _r
 }
 
+// EnabledProfiles wraps the corresponding Objective-C method.
+//
 // EnabledProfiles returns the collection as a Go slice.
 func (x *CIProfileState) EnabledProfiles() []*CIProfile {
-	arr := x.inner.EnabledProfiles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CIProfile {
-		return &CIProfile{inner: raw.MIDICIProfileFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enabledProfiles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
 
+// DisabledProfiles wraps the corresponding Objective-C method.
+//
 // DisabledProfiles returns the collection as a Go slice.
 func (x *CIProfileState) DisabledProfiles() []*CIProfile {
-	arr := x.inner.DisabledProfiles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CIProfile {
-		return &CIProfile{inner: raw.MIDICIProfileFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disabledProfiles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
 
 // CIProfileStateable is the interface implemented by [CIProfileState], for mocking and DI.
 type CIProfileStateable interface {
-	Unwrap() *raw.MIDICIProfileState
+	obj.Object
 	MidiChannel() uint8
 	EnabledProfiles() []*CIProfile
 	DisabledProfiles() []*CIProfile

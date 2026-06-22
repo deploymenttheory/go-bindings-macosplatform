@@ -5,107 +5,128 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single node in a navigation graph for use in pathfinding.
+// GraphNode is an idiomatic wrapper over the Objective-C class GKGraphNode.
 //
-// GraphNode wraps [raw.GKGraphNode] with a fluent Go API.
+// GraphNode is an abstract base — you do not construct it directly. Construct one of [GraphNode2D], [GraphNode3D], [GridGraphNode] and pass it where a GraphNode is accepted.
+//
+// A single node in a navigation graph for use in pathfinding.
 type GraphNode struct {
-	inner *raw.GKGraphNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKGraphNode].
-func (x *GraphNode) Unwrap() *raw.GKGraphNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphNode) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphNodeFromID adopts an existing object pointer as a GraphNode (nil for 0).
+// GraphNodeFromID adopts an existing Objective-C object as a GraphNode
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphNodeFromID(id objc.ID) *GraphNode {
 	if id == 0 {
 		return nil
 	}
-	return &GraphNode{inner: raw.GKGraphNodeFromID(id)}
+	x := &GraphNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphNode creates a new [GraphNode].
-func NewGraphNode() *GraphNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraphNode")), objc.RegisterName("new"))
-	return &GraphNode{inner: raw.GKGraphNodeFromID(_id)}
+// graphNodeAdopt wraps an Objective-C object that this code just created as a
+// GraphNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphNodeAdopt(id objc.ID) *GraphNode {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Connects this node to all nodes in the specified list.
-//
-// AddConnectionsToNodesBidirectional calls the underlying AddConnectionsToNodesBidirectional.
-func (x *GraphNode) AddConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool) {
-	x.inner.AddConnectionsToNodesBidirectional(nodes, bidirectional)
+// Description returns the object's -description text.
+func (x *GraphNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Removes the connections from this node to the specified nodes.
-//
-// RemoveConnectionsToNodesBidirectional calls the underlying RemoveConnectionsToNodesBidirectional.
-func (x *GraphNode) RemoveConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool) {
-	x.inner.RemoveConnectionsToNodesBidirectional(nodes, bidirectional)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns an underestimate of the cost of travel from this node to the specified node.
-//
-// EstimatedCostToNode calls the underlying EstimatedCostToNode.
-func (x *GraphNode) EstimatedCostToNode(node *raw.GKGraphNode) float32 {
-	return x.inner.EstimatedCostToNode(node)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns the cost to travel from this node to the specified, directly connected, node.
-//
-// CostToNode calls the underlying CostToNode.
-func (x *GraphNode) CostToNode(node *raw.GKGraphNode) float32 {
-	return x.inner.CostToNode(node)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphNode) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.
-//
-// FindPathToNode calls the underlying FindPathToNode.
-func (x *GraphNode) FindPathToNode(goalNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
-	return x.inner.FindPathToNode(goalNode)
+// AddConnectionsToNodesBidirectional connects this node to all nodes in the specified list.
+func (x *GraphNode) AddConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
 }
 
-// Computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.
-//
-// FindPathFromNode calls the underlying FindPathFromNode.
-func (x *GraphNode) FindPathFromNode(startNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
-	return x.inner.FindPathFromNode(startNode)
+// RemoveConnectionsToNodesBidirectional removes the connections from this node to the specified nodes.
+func (x *GraphNode) RemoveConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
 }
 
-// List of other graph nodes that this node has an edge leading to.
+// EstimatedCostToNode returns an underestimate of the cost of travel from this node to the specified node.
+func (x *GraphNode) EstimatedCostToNode(node *GraphNode) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("estimatedCostToNode:"), objref.IDOf(node))
+	return _r
+}
+
+// CostToNode returns the cost to travel from this node to the specified, directly connected, node.
+func (x *GraphNode) CostToNode(node *GraphNode) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("costToNode:"), objref.IDOf(node))
+	return _r
+}
+
+// FindPathToNode computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.
+func (x *GraphNode) FindPathToNode(goalNode *GraphNode) []*GraphNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathToNode:"), objref.IDOf(goalNode))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
+}
+
+// FindPathFromNode computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.
+func (x *GraphNode) FindPathFromNode(startNode *GraphNode) []*GraphNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathFromNode:"), objref.IDOf(startNode))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
+}
+
+// ConnectedNodes list of other graph nodes that this node has an edge leading to.
 //
 // ConnectedNodes returns the collection as a Go slice.
 func (x *GraphNode) ConnectedNodes() []*GraphNode {
-	arr := x.inner.ConnectedNodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphNode {
-		return &GraphNode{inner: raw.GKGraphNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedNodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
-
-func (x *GraphNode) asGraphNode() *raw.GKGraphNode { return x.inner }
 
 // GraphNodeable is the interface implemented by [GraphNode], for mocking and DI.
 type GraphNodeable interface {
-	Unwrap() *raw.GKGraphNode
-	AddConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool)
-	RemoveConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool)
-	EstimatedCostToNode(node *raw.GKGraphNode) float32
-	CostToNode(node *raw.GKGraphNode) float32
-	FindPathToNode(goalNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
-	FindPathFromNode(startNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
+	obj.Object
+	AddConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool)
+	RemoveConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool)
+	EstimatedCostToNode(node *GraphNode) float32
+	CostToNode(node *GraphNode) float32
+	FindPathToNode(goalNode *GraphNode) []*GraphNode
+	FindPathFromNode(startNode *GraphNode) []*GraphNode
 	ConnectedNodes() []*GraphNode
 }
 
 var _ GraphNodeable = (*GraphNode)(nil)
+
+// isGraphNode marks GraphNode — and, by embedding promotion, its
+// subclasses — as a member of the GraphNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphNode) isGraphNode() {}
+
+var _ GraphNodeProvider = (*GraphNode)(nil)

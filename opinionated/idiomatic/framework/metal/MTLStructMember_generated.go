@@ -5,130 +5,142 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An instance that provides information about a field in a structure.
+// StructMember is an idiomatic wrapper over the Objective-C class MTLStructMember.
 //
-// StructMember wraps [raw.MTLStructMember] with a fluent Go API.
+// An instance that provides information about a field in a structure.
 type StructMember struct {
-	inner *raw.MTLStructMember
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLStructMember].
-func (x *StructMember) Unwrap() *raw.MTLStructMember { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StructMember) ID() objc.ID { return x.inner.Ptr() }
-
-// StructMemberFromID adopts an existing object pointer as a StructMember (nil for 0).
+// StructMemberFromID adopts an existing Objective-C object as a StructMember
+// (nil for 0), retaining it and registering a release finalizer.
 func StructMemberFromID(id objc.ID) *StructMember {
 	if id == 0 {
 		return nil
 	}
-	return &StructMember{inner: raw.MTLStructMemberFromID(id)}
+	x := &StructMember{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStructMember creates a new [StructMember].
+// structMemberAdopt wraps an Objective-C object that this code just created as a
+// StructMember (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func structMemberAdopt(id objc.ID) *StructMember {
+	if id == 0 {
+		return nil
+	}
+	x := &StructMember{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StructMember) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StructMember) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StructMember) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StructMember) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStructMember creates a new StructMember.
 func NewStructMember() *StructMember {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLStructMember")), objc.RegisterName("new"))
-	return &StructMember{inner: raw.MTLStructMemberFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLStructMember")), objc.RegisterName("new"))
+	return structMemberAdopt(_id)
 }
 
-// Provides a description of the underlying struct when the struct member holds a struct.
-//
-// StructType calls the underlying StructType.
+// StructType provides a description of the underlying struct when the struct member holds a struct.
 func (x *StructMember) StructType() *StructType {
-	_r := x.inner.StructType()
-	if _r == nil {
-		return nil
-	}
-	return &StructType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("structType"))
+	return StructTypeFromID(_r)
 }
 
-// Provides a description of the underlying array when the struct member holds an array.
-//
-// ArrayType calls the underlying ArrayType.
+// ArrayType provides a description of the underlying array when the struct member holds an array.
 func (x *StructMember) ArrayType() *ArrayType {
-	_r := x.inner.ArrayType()
-	if _r == nil {
-		return nil
-	}
-	return &ArrayType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayType"))
+	return ArrayTypeFromID(_r)
 }
 
-// Provides a description of the underlying texture when the struct member holds a texture.
-//
-// TextureReferenceType calls the underlying TextureReferenceType.
+// TextureReferenceType provides a description of the underlying texture when the struct member holds a texture.
 func (x *StructMember) TextureReferenceType() *TextureReferenceType {
-	_r := x.inner.TextureReferenceType()
-	if _r == nil {
-		return nil
-	}
-	return &TextureReferenceType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureReferenceType"))
+	return TextureReferenceTypeFromID(_r)
 }
 
-// Provides a description of the underlying pointer when the struct member holds a pointer.
-//
-// PointerType calls the underlying PointerType.
+// PointerType provides a description of the underlying pointer when the struct member holds a pointer.
 func (x *StructMember) PointerType() *PointerType {
-	_r := x.inner.PointerType()
-	if _r == nil {
-		return nil
-	}
-	return &PointerType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerType"))
+	return PointerTypeFromID(_r)
 }
 
-// Provides a description of the underlying tensor type when this struct member holds a tensor.
-//
-// TensorReferenceType calls the underlying TensorReferenceType.
+// TensorReferenceType provides a description of the underlying tensor type when this struct member holds a tensor.
 func (x *StructMember) TensorReferenceType() *TensorReferenceType {
-	_r := x.inner.TensorReferenceType()
-	if _r == nil {
-		return nil
-	}
-	return &TensorReferenceType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorReferenceType"))
+	return TensorReferenceTypeFromID(_r)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *StructMember) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Offset calls the underlying Offset.
-func (x *StructMember) Offset() uint {
-	return x.inner.Offset()
+// Offset wraps the corresponding Objective-C method.
+func (x *StructMember) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
-// DataType calls the underlying DataType.
-func (x *StructMember) DataType() MTLDataType {
-	return MTLDataType(x.inner.DataType())
+// DataType wraps the corresponding Objective-C method.
+func (x *StructMember) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// ArgumentIndex calls the underlying ArgumentIndex.
-func (x *StructMember) ArgumentIndex() uint {
-	return x.inner.ArgumentIndex()
+// ArgumentIndex wraps the corresponding Objective-C method.
+func (x *StructMember) ArgumentIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndex"))
+	return _r
 }
 
 // StructMemberable is the interface implemented by [StructMember], for mocking and DI.
 type StructMemberable interface {
-	Unwrap() *raw.MTLStructMember
+	obj.Object
 	StructType() *StructType
 	ArrayType() *ArrayType
 	TextureReferenceType() *TextureReferenceType
 	PointerType() *PointerType
 	TensorReferenceType() *TensorReferenceType
 	Name() string
-	Offset() uint
-	DataType() MTLDataType
-	ArgumentIndex() uint
+	Offset() int
+	DataType() DataType
+	ArgumentIndex() int
 }
 
 var _ StructMemberable = (*StructMember)(nil)

@@ -5,69 +5,37 @@
 package inputmethodkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/inputmethodkit"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @const      IMKModeDictionary @abstract   Key used to obtain an input method's mode dictionary from the input method's bundle.
-// IMKModeDictionary returns the string constant IMKModeDictionary as an objc.ID, for use as a dictionary key or selector argument.
-func IMKModeDictionary() objc.ID {
-	if _r := raw.IMKModeDictionary(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IMKModeDictionary returns the string constant IMKModeDictionary, for use as a dictionary key or argument.
+func IMKModeDictionary() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IMKModeDictionary"))) }
+
+// IMKControllerClass returns the string constant IMKControllerClass, for use as a dictionary key or argument.
+func IMKControllerClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IMKControllerClass")))
 }
 
-// @const      IMKControllerClass @abstract   Key used to find an input method's input controller class name from the input method's bundle.
-// IMKControllerClass returns the string constant IMKControllerClass as an objc.ID, for use as a dictionary key or selector argument.
-func IMKControllerClass() objc.ID {
-	if _r := raw.IMKControllerClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IMKDelegateClass returns the string constant IMKDelegateClass, for use as a dictionary key or argument.
+func IMKDelegateClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IMKDelegateClass"))) }
+
+// KIMKCommandMenuItemName returns the string constant kIMKCommandMenuItemName, for use as a dictionary key or argument.
+func KIMKCommandMenuItemName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIMKCommandMenuItemName")))
 }
 
-// @const      IMKDelegateClass @abstract   Key used to find an input method's delegate class name from the input method's bundle.
-// IMKDelegateClass returns the string constant IMKDelegateClass as an objc.ID, for use as a dictionary key or selector argument.
-func IMKDelegateClass() objc.ID {
-	if _r := raw.IMKDelegateClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KIMKCommandClientName returns the string constant kIMKCommandClientName, for use as a dictionary key or argument.
+func KIMKCommandClientName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIMKCommandClientName")))
 }
 
-// @const		kIMKCommandMenuItem @abstract	An NSMenuItem in the infoDictionary passed to menu item actions. @discussion Use as a key to find the NSMenuItem in the infoDictionary.
-// KIMKCommandMenuItemName returns the string constant kIMKCommandMenuItemName as an objc.ID, for use as a dictionary key or selector argument.
-func KIMKCommandMenuItemName() objc.ID {
-	if _r := raw.KIMKCommandMenuItemName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IMKCandidatesOpacityAttributeName returns the string constant IMKCandidatesOpacityAttributeName, for use as a dictionary key or argument.
+func IMKCandidatesOpacityAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IMKCandidatesOpacityAttributeName")))
 }
 
-// @const		kIMKCommandClient @abstract	A client object that conforms to the IMKInputText and NSObject protocols. @discussion Use as a key to find the client in the infoDictionary.
-// KIMKCommandClientName returns the string constant kIMKCommandClientName as an objc.ID, for use as a dictionary key or selector argument.
-func KIMKCommandClientName() objc.ID {
-	if _r := raw.KIMKCommandClientName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const		IMKCandidatesOpacityAttributeName @abstract	The level of opacity. @discussion Value must be a NSNumber with a value from 0 to 1.
-// IMKCandidatesOpacityAttributeName returns the string constant IMKCandidatesOpacityAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func IMKCandidatesOpacityAttributeName() objc.ID {
-	if _r := raw.IMKCandidatesOpacityAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @const		IMKCandidatesSendServerKeyEventFirst @abstract	Control when key events are sent to a candidate window. @discussion	Value is a NSNumber with a boolean value of NO (key events are sent to the candidate window first) or YES (key events are sent to the IMKInputController first). Note that this is only applicable when a candidate window is displayed.  The default behavior is to send the key event to the candidate window first, and if it is not processed there, to send it on to the input controller.
-// IMKCandidatesSendServerKeyEventFirst returns the string constant IMKCandidatesSendServerKeyEventFirst as an objc.ID, for use as a dictionary key or selector argument.
-func IMKCandidatesSendServerKeyEventFirst() objc.ID {
-	if _r := raw.IMKCandidatesSendServerKeyEventFirst(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IMKCandidatesSendServerKeyEventFirst returns the string constant IMKCandidatesSendServerKeyEventFirst, for use as a dictionary key or argument.
+func IMKCandidatesSendServerKeyEventFirst() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IMKCandidatesSendServerKeyEventFirst")))
 }

@@ -4,48 +4,41 @@
 
 package ats
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ats"
-)
+type ATSFontMetrics struct {
+	Version             uint
+	Ascent              float64
+	Descent             float64
+	Leading             float64
+	AvgAdvanceWidth     float64
+	MaxAdvanceWidth     float64
+	MinLeftSideBearing  float64
+	MinRightSideBearing float64
+	StemWidth           float64
+	StemHeight          float64
+	CapHeight           float64
+	XHeight             float64
+	ItalicAngle         float64
+	UnderlinePosition   float64
+	UnderlineThickness  float64
+}
 
-// ATSFontFilter is a type alias for the raw ATSFontFilter value-type struct.
-type ATSFontFilter = raw.ATSFontFilter
+type ATSJustWidthDeltaEntryOverride struct {
+	BeforeGrowLimit   int
+	BeforeShrinkLimit int
+	AfterGrowLimit    int
+	AfterShrinkLimit  int
+	GrowFlags         uint16
+	ShrinkFlags       uint16
+}
 
-// ATSFontMetrics is a type alias for the raw ATSFontMetrics value-type struct.
-type ATSFontMetrics = raw.ATSFontMetrics
+type ATSLayoutRecord struct {
+	GlyphID        uint16
+	Flags          uint
+	OriginalOffset uint
+	RealPos        int
+}
 
-// ATSFontQuerySourceContext is a type alias for the raw ATSFontQuerySourceContext value-type struct.
-type ATSFontQuerySourceContext = raw.ATSFontQuerySourceContext
-
-// ATSGlyphIdealMetrics is a type alias for the raw ATSGlyphIdealMetrics value-type struct.
-type ATSGlyphIdealMetrics = raw.ATSGlyphIdealMetrics
-
-// ATSGlyphScreenMetrics is a type alias for the raw ATSGlyphScreenMetrics value-type struct.
-type ATSGlyphScreenMetrics = raw.ATSGlyphScreenMetrics
-
-// ATSJustWidthDeltaEntryOverride is a type alias for the raw ATSJustWidthDeltaEntryOverride value-type struct.
-type ATSJustWidthDeltaEntryOverride = raw.ATSJustWidthDeltaEntryOverride
-
-// ATSLayoutRecord is a type alias for the raw ATSLayoutRecord value-type struct.
-type ATSLayoutRecord = raw.ATSLayoutRecord
-
-// ATSTrapezoid is a type alias for the raw ATSTrapezoid value-type struct.
-type ATSTrapezoid = raw.ATSTrapezoid
-
-// ATSUCurvePath is a type alias for the raw ATSUCurvePath value-type struct.
-type ATSUCurvePath = raw.ATSUCurvePath
-
-// ATSUCurvePaths is a type alias for the raw ATSUCurvePaths value-type struct.
-type ATSUCurvePaths = raw.ATSUCurvePaths
-
-// FMFontFamilyInstance is a type alias for the raw FMFontFamilyInstance value-type struct.
-type FMFontFamilyInstance = raw.FMFontFamilyInstance
-
-// FMFontFamilyInstanceIterator is a type alias for the raw FMFontFamilyInstanceIterator value-type struct.
-type FMFontFamilyInstanceIterator = raw.FMFontFamilyInstanceIterator
-
-// FMFontFamilyIterator is a type alias for the raw FMFontFamilyIterator value-type struct.
-type FMFontFamilyIterator = raw.FMFontFamilyIterator
-
-// FMFontIterator is a type alias for the raw FMFontIterator value-type struct.
-type FMFontIterator = raw.FMFontIterator
+type FMFontFamilyInstance struct {
+	FontFamily int16
+	FontStyle  int16
+}

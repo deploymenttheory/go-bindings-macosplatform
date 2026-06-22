@@ -5,70 +5,103 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An action that the user can take in response to receiving a notification.
+// UserNotificationAction is an idiomatic wrapper over the Objective-C class NSUserNotificationAction.
 //
-// UserNotificationAction wraps [raw.NSUserNotificationAction] with a fluent Go API.
+// An action that the user can take in response to receiving a notification.
 type UserNotificationAction struct {
-	inner *raw.NSUserNotificationAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUserNotificationAction].
-func (x *UserNotificationAction) Unwrap() *raw.NSUserNotificationAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserNotificationAction) ID() objc.ID { return x.inner.Ptr() }
-
-// UserNotificationActionFromID adopts an existing object pointer as a UserNotificationAction (nil for 0).
+// UserNotificationActionFromID adopts an existing Objective-C object as a UserNotificationAction
+// (nil for 0), retaining it and registering a release finalizer.
 func UserNotificationActionFromID(id objc.ID) *UserNotificationAction {
 	if id == 0 {
 		return nil
 	}
-	return &UserNotificationAction{inner: raw.NSUserNotificationActionFromID(id)}
-}
-
-// NewUserNotificationAction creates a new [UserNotificationAction].
-func NewUserNotificationAction() *UserNotificationAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserNotificationAction")), objc.RegisterName("new"))
-	return &UserNotificationAction{inner: raw.NSUserNotificationActionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UserNotificationAction) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotificationAction {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UserNotificationAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Identifier calls the underlying Identifier.
-func (x *UserNotificationAction) Identifier() *String {
-	_r := x.inner.Identifier()
-	if _r == nil {
+// userNotificationActionAdopt wraps an Objective-C object that this code just created as a
+// UserNotificationAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userNotificationActionAdopt(id objc.ID) *UserNotificationAction {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &UserNotificationAction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Title calls the underlying Title.
-func (x *UserNotificationAction) Title() *String {
-	_r := x.inner.Title()
-	if _r == nil {
-		return nil
+// Description returns the object's -description text.
+func (x *UserNotificationAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserNotificationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserNotificationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UserNotificationAction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUserNotificationAction creates a new UserNotificationAction.
+func NewUserNotificationAction() *UserNotificationAction {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationAction")), objc.RegisterName("new"))
+	return userNotificationActionAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UserNotificationAction) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Identifier wraps the corresponding Objective-C method.
+func (x *UserNotificationAction) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-func (x *UserNotificationAction) asObject() *raw.NSObject { return &x.inner.NSObject }
+// Title wraps the corresponding Objective-C method.
+func (x *UserNotificationAction) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
 
 // UserNotificationActionable is the interface implemented by [UserNotificationAction], for mocking and DI.
 type UserNotificationActionable interface {
-	Unwrap() *raw.NSUserNotificationAction
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotificationAction
-	Identifier() *String
-	Title() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction
+	Identifier() string
+	Title() string
 }
 
 var _ UserNotificationActionable = (*UserNotificationAction)(nil)

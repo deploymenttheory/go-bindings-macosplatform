@@ -5,45 +5,58 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete metadata object subclass representing a cat head.
+// MetadataCatHeadObject is an idiomatic wrapper over the Objective-C class AVMetadataCatHeadObject.
 //
-// MetadataCatHeadObject wraps [raw.AVMetadataCatHeadObject] with a fluent Go API.
+// It embeds [MetadataObject], promoting that type's methods.
+//
+// A concrete metadata object subclass representing a cat head.
 type MetadataCatHeadObject struct {
-	inner *raw.AVMetadataCatHeadObject
+	MetadataObject
 }
 
-// Unwrap returns the underlying [raw.AVMetadataCatHeadObject].
-func (x *MetadataCatHeadObject) Unwrap() *raw.AVMetadataCatHeadObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataCatHeadObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataCatHeadObjectFromID adopts an existing object pointer as a MetadataCatHeadObject (nil for 0).
+// MetadataCatHeadObjectFromID adopts an existing Objective-C object as a MetadataCatHeadObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataCatHeadObjectFromID(id objc.ID) *MetadataCatHeadObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataCatHeadObject{inner: raw.AVMetadataCatHeadObjectFromID(id)}
+	x := &MetadataCatHeadObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataCatHeadObject creates a new [MetadataCatHeadObject].
+// metadataCatHeadObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataCatHeadObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataCatHeadObjectAdopt(id objc.ID) *MetadataCatHeadObject {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataCatHeadObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMetadataCatHeadObject creates a new MetadataCatHeadObject.
 func NewMetadataCatHeadObject() *MetadataCatHeadObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataCatHeadObject")), objc.RegisterName("new"))
-	return &MetadataCatHeadObject{inner: raw.AVMetadataCatHeadObjectFromID(_id)}
-}
-
-func (x *MetadataCatHeadObject) asMetadataObject() *raw.AVMetadataObject {
-	return &x.inner.AVMetadataObject
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataCatHeadObject")), objc.RegisterName("new"))
+	return metadataCatHeadObjectAdopt(_id)
 }
 
 // MetadataCatHeadObjectable is the interface implemented by [MetadataCatHeadObject], for mocking and DI.
 type MetadataCatHeadObjectable interface {
-	Unwrap() *raw.AVMetadataCatHeadObject
+	obj.Object
 }
 
 var _ MetadataCatHeadObjectable = (*MetadataCatHeadObject)(nil)
+
+var _ MetadataObjectProvider = (*MetadataCatHeadObject)(nil)

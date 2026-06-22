@@ -5,169 +5,151 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that determines the direction change of vectors for each pixel from a previous to current image.
+// TrackOpticalFlowRequest is an idiomatic wrapper over the Objective-C class VNTrackOpticalFlowRequest.
 //
-// TrackOpticalFlowRequest wraps [raw.VNTrackOpticalFlowRequest] with a fluent Go API.
+// It embeds [StatefulRequest], promoting that type's methods.
+//
+// An object that determines the direction change of vectors for each pixel from a previous to current image.
 type TrackOpticalFlowRequest struct {
-	inner *raw.VNTrackOpticalFlowRequest
+	StatefulRequest
 }
 
-// Unwrap returns the underlying [raw.VNTrackOpticalFlowRequest].
-func (x *TrackOpticalFlowRequest) Unwrap() *raw.VNTrackOpticalFlowRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrackOpticalFlowRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// TrackOpticalFlowRequestFromID adopts an existing object pointer as a TrackOpticalFlowRequest (nil for 0).
+// TrackOpticalFlowRequestFromID adopts an existing Objective-C object as a TrackOpticalFlowRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func TrackOpticalFlowRequestFromID(id objc.ID) *TrackOpticalFlowRequest {
 	if id == 0 {
 		return nil
 	}
-	return &TrackOpticalFlowRequest{inner: raw.VNTrackOpticalFlowRequestFromID(id)}
+	x := &TrackOpticalFlowRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTrackOpticalFlowRequest creates a new [TrackOpticalFlowRequest].
+// trackOpticalFlowRequestAdopt wraps an Objective-C object that this code just created as a
+// TrackOpticalFlowRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trackOpticalFlowRequestAdopt(id objc.ID) *TrackOpticalFlowRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &TrackOpticalFlowRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTrackOpticalFlowRequest creates a new TrackOpticalFlowRequest.
 func NewTrackOpticalFlowRequest() *TrackOpticalFlowRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackOpticalFlowRequest")), objc.RegisterName("new"))
-	return &TrackOpticalFlowRequest{inner: raw.VNTrackOpticalFlowRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNTrackOpticalFlowRequest")), objc.RegisterName("new"))
+	return trackOpticalFlowRequestAdopt(_id)
 }
 
-// Creates a new request that tracks the optical from one image to another, with a system callback on completion.
-//
-// NewTrackOpticalFlowRequestWithCompletionHandler creates a new [TrackOpticalFlowRequest].
-func NewTrackOpticalFlowRequestWithCompletionHandler(completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TrackOpticalFlowRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackOpticalFlowRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), completionHandler)
-	return &TrackOpticalFlowRequest{inner: raw.VNTrackOpticalFlowRequestFromID(_id)}
-}
-
-// The level of accuracy to compute the optical flow.
-//
-// WithComputationAccuracy sets the computationAccuracy property and returns the receiver for chaining.
-func (x *TrackOpticalFlowRequest) WithComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest {
-	x.inner.SetComputationAccuracy(raw.VNTrackOpticalFlowRequestComputationAccuracy(computationAccuracy))
+// WithComputationAccuracy the level of accuracy to compute the optical flow.
+func (x *TrackOpticalFlowRequest) WithComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
 	return x
 }
 
-// The pixel format type of the output value.
-//
-// WithOutputPixelFormat sets the outputPixelFormat property and returns the receiver for chaining.
-func (x *TrackOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat uint) *TrackOpticalFlowRequest {
-	x.inner.SetOutputPixelFormat(outputPixelFormat)
+// WithOutputPixelFormat the pixel format type of the output value.
+func (x *TrackOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat int) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
 	return x
 }
 
-// A Boolean value that indicates the raw pixel buffer continues to emit from the network.
-//
-// WithKeepNetworkOutput sets the keepNetworkOutput property and returns the receiver for chaining.
+// WithKeepNetworkOutput a Boolean value that indicates the raw pixel buffer continues to emit from the network.
 func (x *TrackOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest {
-	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *TrackOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *TrackOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *TrackOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *TrackOpticalFlowRequest) WithRevision(revision uint) *TrackOpticalFlowRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *TrackOpticalFlowRequest) WithRevision(revision int) *TrackOpticalFlowRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// @brief The level of accuracy used to compute the optical flow. Default is VNTrackOpticalFlowRequestComputationAccuracyMedium. @discussion The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
-//
-// ComputationAccuracy calls the underlying ComputationAccuracy.
-func (x *TrackOpticalFlowRequest) ComputationAccuracy() VNTrackOpticalFlowRequestComputationAccuracy {
-	return VNTrackOpticalFlowRequestComputationAccuracy(x.inner.ComputationAccuracy())
+// ComputationAccuracy the level of accuracy used to compute the optical flow. Default is VNTrackOpticalFlowRequestComputationAccuracyMedium. The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
+func (x *TrackOpticalFlowRequest) ComputationAccuracy() TrackOpticalFlowRequestComputationAccuracy {
+	_r := objc.Send[TrackOpticalFlowRequestComputationAccuracy](objref.IDOf(x), objc.RegisterName("computationAccuracy"))
+	return _r
 }
 
-// SetComputationAccuracy calls the underlying SetComputationAccuracy.
-func (x *TrackOpticalFlowRequest) SetComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy) {
-	x.inner.SetComputationAccuracy(raw.VNTrackOpticalFlowRequestComputationAccuracy(computationAccuracy))
+// SetComputationAccuracy wraps the corresponding Objective-C method.
+func (x *TrackOpticalFlowRequest) SetComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputationAccuracy:"), computationAccuracy)
 }
 
-// @brief Pixel format type of the output buffer. Valid values are `kCVPixelFormatType_TwoComponent32Float` and `kCVPixelFormatType_TwoComponent16Half`.  Default is `kCVPixelFormatType_TwoComponent32Float`.
-//
-// OutputPixelFormat calls the underlying OutputPixelFormat.
-func (x *TrackOpticalFlowRequest) OutputPixelFormat() uint {
-	return x.inner.OutputPixelFormat()
+// OutputPixelFormat pixel format type of the output buffer. Valid values are `kCVPixelFormatType_TwoComponent32Float` and `kCVPixelFormatType_TwoComponent16Half`.  Default is `kCVPixelFormatType_TwoComponent32Float`.
+func (x *TrackOpticalFlowRequest) OutputPixelFormat() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputPixelFormat"))
+	return _r
 }
 
-// SetOutputPixelFormat calls the underlying SetOutputPixelFormat.
-func (x *TrackOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat uint) {
-	x.inner.SetOutputPixelFormat(outputPixelFormat)
+// SetOutputPixelFormat wraps the corresponding Objective-C method.
+func (x *TrackOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
 }
 
-// @brief Setting this to `YES` will keep the raw pixel buffer coming from the the ML network. The default is `NO`. @discussion When set to `YES`, the outputPixelFormat is ignored.
-//
-// KeepNetworkOutput calls the underlying KeepNetworkOutput.
+// KeepNetworkOutput setting this to `YES` will keep the raw pixel buffer coming from the the ML network. The default is `NO`. When set to `YES`, the outputPixelFormat is ignored.
 func (x *TrackOpticalFlowRequest) KeepNetworkOutput() bool {
-	return x.inner.KeepNetworkOutput()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("keepNetworkOutput"))
+	return _r
 }
 
-// SetKeepNetworkOutput calls the underlying SetKeepNetworkOutput.
+// SetKeepNetworkOutput wraps the corresponding Objective-C method.
 func (x *TrackOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
-	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
-}
-
-func (x *TrackOpticalFlowRequest) asStatefulRequest() *raw.VNStatefulRequest {
-	return &x.inner.VNStatefulRequest
-}
-
-func (x *TrackOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest
-}
-
-func (x *TrackOpticalFlowRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeepNetworkOutput:"), keepNetworkOutput)
 }
 
 // TrackOpticalFlowRequestable is the interface implemented by [TrackOpticalFlowRequest], for mocking and DI.
 type TrackOpticalFlowRequestable interface {
-	Unwrap() *raw.VNTrackOpticalFlowRequest
-	WithComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
-	WithOutputPixelFormat(outputPixelFormat uint) *TrackOpticalFlowRequest
+	obj.Object
+	WithComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
+	WithOutputPixelFormat(outputPixelFormat int) *TrackOpticalFlowRequest
 	WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest
-	WithRevision(revision uint) *TrackOpticalFlowRequest
-	ComputationAccuracy() VNTrackOpticalFlowRequestComputationAccuracy
-	SetComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy)
-	OutputPixelFormat() uint
-	SetOutputPixelFormat(outputPixelFormat uint)
+	WithRevision(revision int) *TrackOpticalFlowRequest
+	ComputationAccuracy() TrackOpticalFlowRequestComputationAccuracy
+	SetComputationAccuracy(computationAccuracy TrackOpticalFlowRequestComputationAccuracy)
+	OutputPixelFormat() int
+	SetOutputPixelFormat(outputPixelFormat int)
 	KeepNetworkOutput() bool
 	SetKeepNetworkOutput(keepNetworkOutput bool)
 }
 
 var _ TrackOpticalFlowRequestable = (*TrackOpticalFlowRequest)(nil)
+
+var _ StatefulRequestProvider = (*TrackOpticalFlowRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TrackOpticalFlowRequest)(nil)
+
+var _ RequestProvider = (*TrackOpticalFlowRequest)(nil)

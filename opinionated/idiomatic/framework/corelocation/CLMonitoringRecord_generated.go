@@ -5,59 +5,88 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a condition and its associated information that a location monitor is monitoring.
+// MonitoringRecord is an idiomatic wrapper over the Objective-C class CLMonitoringRecord.
 //
-// MonitoringRecord wraps [raw.CLMonitoringRecord] with a fluent Go API.
+// An object that represents a condition and its associated information that a location monitor is monitoring.
 type MonitoringRecord struct {
-	inner *raw.CLMonitoringRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLMonitoringRecord].
-func (x *MonitoringRecord) Unwrap() *raw.CLMonitoringRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MonitoringRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// MonitoringRecordFromID adopts an existing object pointer as a MonitoringRecord (nil for 0).
+// MonitoringRecordFromID adopts an existing Objective-C object as a MonitoringRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func MonitoringRecordFromID(id objc.ID) *MonitoringRecord {
 	if id == 0 {
 		return nil
 	}
-	return &MonitoringRecord{inner: raw.CLMonitoringRecordFromID(id)}
+	x := &MonitoringRecord{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMonitoringRecord creates a new [MonitoringRecord].
+// monitoringRecordAdopt wraps an Objective-C object that this code just created as a
+// MonitoringRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func monitoringRecordAdopt(id objc.ID) *MonitoringRecord {
+	if id == 0 {
+		return nil
+	}
+	x := &MonitoringRecord{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MonitoringRecord) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MonitoringRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MonitoringRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MonitoringRecord) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMonitoringRecord creates a new MonitoringRecord.
 func NewMonitoringRecord() *MonitoringRecord {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLMonitoringRecord")), objc.RegisterName("new"))
-	return &MonitoringRecord{inner: raw.CLMonitoringRecordFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitoringRecord")), objc.RegisterName("new"))
+	return monitoringRecordAdopt(_id)
 }
 
-// Condition calls the underlying Condition.
+// Condition wraps the corresponding Objective-C method.
 func (x *MonitoringRecord) Condition() *Condition {
-	_r := x.inner.Condition()
-	if _r == nil {
-		return nil
-	}
-	return &Condition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("condition"))
+	return ConditionFromID(_r)
 }
 
-// LastEvent calls the underlying LastEvent.
+// LastEvent wraps the corresponding Objective-C method.
 func (x *MonitoringRecord) LastEvent() *MonitoringEvent {
-	_r := x.inner.LastEvent()
-	if _r == nil {
-		return nil
-	}
-	return &MonitoringEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastEvent"))
+	return MonitoringEventFromID(_r)
 }
 
 // MonitoringRecordable is the interface implemented by [MonitoringRecord], for mocking and DI.
 type MonitoringRecordable interface {
-	Unwrap() *raw.CLMonitoringRecord
+	obj.Object
 	Condition() *Condition
 	LastEvent() *MonitoringEvent
 }

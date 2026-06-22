@@ -5,74 +5,111 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Composition wraps [raw.QCComposition] with a fluent Go API.
+// Composition is an idiomatic wrapper over the Objective-C class QCComposition.
 type Composition struct {
-	inner *raw.QCComposition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCComposition].
-func (x *Composition) Unwrap() *raw.QCComposition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Composition) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionFromID adopts an existing object pointer as a Composition (nil for 0).
+// CompositionFromID adopts an existing Objective-C object as a Composition
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionFromID(id objc.ID) *Composition {
 	if id == 0 {
 		return nil
 	}
-	return &Composition{inner: raw.QCCompositionFromID(id)}
+	x := &Composition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComposition creates a new [Composition].
+// compositionAdopt wraps an Objective-C object that this code just created as a
+// Composition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionAdopt(id objc.ID) *Composition {
+	if id == 0 {
+		return nil
+	}
+	x := &Composition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Composition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Composition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Composition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Composition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewComposition creates a new Composition.
 func NewComposition() *Composition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCComposition")), objc.RegisterName("new"))
-	return &Composition{inner: raw.QCCompositionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("new"))
+	return compositionAdopt(_id)
 }
 
-// Protocols calls the underlying Protocols.
-func (x *Composition) Protocols() *foundation.NSArray[objc.ID] {
-	return x.inner.Protocols()
+// Protocols wraps the corresponding Objective-C method.
+func (x *Composition) Protocols() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
+	return obj.Wrap(_r)
 }
 
-// Attributes calls the underlying Attributes.
-func (x *Composition) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Attributes()
+// Attributes wraps the corresponding Objective-C method.
+func (x *Composition) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
-// InputKeys calls the underlying InputKeys.
-func (x *Composition) InputKeys() *foundation.NSArray[objc.ID] {
-	return x.inner.InputKeys()
+// InputKeys wraps the corresponding Objective-C method.
+func (x *Composition) InputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
+	return obj.Wrap(_r)
 }
 
-// OutputKeys calls the underlying OutputKeys.
-func (x *Composition) OutputKeys() *foundation.NSArray[objc.ID] {
-	return x.inner.OutputKeys()
+// OutputKeys wraps the corresponding Objective-C method.
+func (x *Composition) OutputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
+	return obj.Wrap(_r)
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *Composition) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Compositionable is the interface implemented by [Composition], for mocking and DI.
 type Compositionable interface {
-	Unwrap() *raw.QCComposition
-	Protocols() *foundation.NSArray[objc.ID]
-	Attributes() *foundation.NSDictionary[objc.ID, objc.ID]
-	InputKeys() *foundation.NSArray[objc.ID]
-	OutputKeys() *foundation.NSArray[objc.ID]
+	obj.Object
+	Protocols() obj.Object
+	Attributes() obj.Object
+	InputKeys() obj.Object
+	OutputKeys() obj.Object
 	Identifier() string
 }
 

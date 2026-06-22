@@ -5,1765 +5,1677 @@
 package coremedia
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant kCMTimeValueKey @discussion CFDictionary key for value field of CMTime (CFNumber containing int64_t)
-// KCMTimeValueKey returns the value of the CoreFoundation reference constant kCMTimeValueKey as an objc.ID.
-func KCMTimeValueKey() objc.ID { return purego.CFConstant(raw.KCMTimeValueKey()) }
+// KCMTimeValueKey returns the value of the constant kCMTimeValueKey.
+func KCMTimeValueKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeValueKey"))) }
 
-// @constant kCMTimeScaleKey @discussion CFDictionary key for timescale field of CMTime (CFNumber containing int32_t)
-// KCMTimeScaleKey returns the value of the CoreFoundation reference constant kCMTimeScaleKey as an objc.ID.
-func KCMTimeScaleKey() objc.ID { return purego.CFConstant(raw.KCMTimeScaleKey()) }
+// KCMTimeScaleKey returns the value of the constant kCMTimeScaleKey.
+func KCMTimeScaleKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeScaleKey"))) }
 
-// @constant kCMTimeEpochKey @discussion CFDictionary key for epoch field of CMTime (CFNumber containing int64_t)
-// KCMTimeEpochKey returns the value of the CoreFoundation reference constant kCMTimeEpochKey as an objc.ID.
-func KCMTimeEpochKey() objc.ID { return purego.CFConstant(raw.KCMTimeEpochKey()) }
+// KCMTimeEpochKey returns the value of the constant kCMTimeEpochKey.
+func KCMTimeEpochKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeEpochKey"))) }
 
-// @constant kCMTimeFlagsKey @discussion CFDictionary key for flags field of CMTime (CFNumber containing uint32_t)
-// KCMTimeFlagsKey returns the value of the CoreFoundation reference constant kCMTimeFlagsKey as an objc.ID.
-func KCMTimeFlagsKey() objc.ID { return purego.CFConstant(raw.KCMTimeFlagsKey()) }
+// KCMTimeFlagsKey returns the value of the constant kCMTimeFlagsKey.
+func KCMTimeFlagsKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTimeFlagsKey"))) }
 
-// @constant kCMTimeRangeStartKey @discussion CFDictionary key for start field of a CMTimeRange (CMTime)
-// KCMTimeRangeStartKey returns the value of the CoreFoundation reference constant kCMTimeRangeStartKey as an objc.ID.
-func KCMTimeRangeStartKey() objc.ID { return purego.CFConstant(raw.KCMTimeRangeStartKey()) }
+// KCMTimeRangeStartKey returns the value of the constant kCMTimeRangeStartKey.
+func KCMTimeRangeStartKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeRangeStartKey")))
+}
 
-// @constant kCMTimeRangeDurationKey @discussion CFDictionary key for timescale field of a CMTimeRange (CMTime)
-// KCMTimeRangeDurationKey returns the value of the CoreFoundation reference constant kCMTimeRangeDurationKey as an objc.ID.
-func KCMTimeRangeDurationKey() objc.ID { return purego.CFConstant(raw.KCMTimeRangeDurationKey()) }
+// KCMTimeRangeDurationKey returns the value of the constant kCMTimeRangeDurationKey.
+func KCMTimeRangeDurationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeRangeDurationKey")))
+}
 
-// @constant kCMTimeMappingSourceKey @discussion CFDictionary key for source field of a CMTimeMapping (CMTimeRange)
-// KCMTimeMappingSourceKey returns the value of the CoreFoundation reference constant kCMTimeMappingSourceKey as an objc.ID.
-func KCMTimeMappingSourceKey() objc.ID { return purego.CFConstant(raw.KCMTimeMappingSourceKey()) }
+// KCMTimeMappingSourceKey returns the value of the constant kCMTimeMappingSourceKey.
+func KCMTimeMappingSourceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeMappingSourceKey")))
+}
 
-// @constant kCMTimeMappingTargetKey @discussion CFDictionary key for target field of a CMTimeMapping (CMTimeRange)
-// KCMTimeMappingTargetKey returns the value of the CoreFoundation reference constant kCMTimeMappingTargetKey as an objc.ID.
-func KCMTimeMappingTargetKey() objc.ID { return purego.CFConstant(raw.KCMTimeMappingTargetKey()) }
+// KCMTimeMappingTargetKey returns the value of the constant kCMTimeMappingTargetKey.
+func KCMTimeMappingTargetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeMappingTargetKey")))
+}
 
-// @define 	kCMFormatDescriptionExtension_OriginalCompressionSettings @abstract	This extension contains a media-type-specific dictionary of settings used to produce a compressed media buffer. @discussion This extension is valid for format descriptions of all media types, but the contents of the dictionary are defined in a media-specific way.  The dictionary and its contents are valid property list objects. This means that dictionary keys are all CFStrings, and the values are all either CFNumber, CFString, CFBoolean, CFArray, CFDictionary, CFDate, or CFData.
-// KCMFormatDescriptionExtension_OriginalCompressionSettings returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_OriginalCompressionSettings as an objc.ID.
-func KCMFormatDescriptionExtension_OriginalCompressionSettings() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_OriginalCompressionSettings())
+// KCMFormatDescriptionExtension_OriginalCompressionSettings returns the value of the constant kCMFormatDescriptionExtension_OriginalCompressionSettings.
+func KCMFormatDescriptionExtension_OriginalCompressionSettings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_OriginalCompressionSettings")))
 }
 
-// @define 	kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms @abstract	Sample description extension atoms that were not translated into other entries in the extensions dictionary. @discussion	This key is used by sample description bridges to hold sample description extension atoms that they do not recognize. The extension is a CFDictionary mapping CFStrings of the four-char-code atom types to either CFDatas containing the atom payload or (to represent multiple atoms of a specific type) to CFArrays of CFData containing those payloads.
-// KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms as an objc.ID.
-func KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms())
+// KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms returns the value of the constant kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms.
+func KCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms")))
 }
 
-// @define 	kCMFormatDescriptionExtension_VerbatimSampleDescription @abstract	Preserves the original SampleDescription data. @discussion This extension is used to ensure that roundtrips from sample descriptions to CMFormatDescriptions back to sample descriptions preserve the exact original sample descriptions. IMPORTANT: If you make a modified clone of a CMFormatDescription, you must delete this extension from the clone, or your modifications could be lost.
-// KCMFormatDescriptionExtension_VerbatimSampleDescription returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_VerbatimSampleDescription as an objc.ID.
-func KCMFormatDescriptionExtension_VerbatimSampleDescription() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_VerbatimSampleDescription())
+// KCMFormatDescriptionExtension_VerbatimSampleDescription returns the value of the constant kCMFormatDescriptionExtension_VerbatimSampleDescription.
+func KCMFormatDescriptionExtension_VerbatimSampleDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_VerbatimSampleDescription")))
 }
 
-// @define 	kCMFormatDescriptionExtension_VerbatimISOSampleEntry @abstract	Preserves the original ISOSampleEntry data. @discussion This extension is used to ensure that roundtrips from ISO Sample Entry (ie. AudioSampleEntry or VisualSampleEntry) to CMFormatDescriptions back to ISO Sample Entry preserve the exact original sample descriptions. IMPORTANT: If you make a modified clone of a CMFormatDescription, you must delete this extension from the clone, or your modifications could be lost.
-// KCMFormatDescriptionExtension_VerbatimISOSampleEntry returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_VerbatimISOSampleEntry as an objc.ID.
-func KCMFormatDescriptionExtension_VerbatimISOSampleEntry() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_VerbatimISOSampleEntry())
+// KCMFormatDescriptionExtension_VerbatimISOSampleEntry returns the value of the constant kCMFormatDescriptionExtension_VerbatimISOSampleEntry.
+func KCMFormatDescriptionExtension_VerbatimISOSampleEntry() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_VerbatimISOSampleEntry")))
 }
 
-// KCMFormatDescriptionExtension_FormatName returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_FormatName as an objc.ID.
-func KCMFormatDescriptionExtension_FormatName() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_FormatName())
+// KCMFormatDescriptionExtension_FormatName returns the value of the constant kCMFormatDescriptionExtension_FormatName.
+func KCMFormatDescriptionExtension_FormatName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_FormatName")))
 }
 
-// KCMFormatDescriptionExtension_Depth returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_Depth as an objc.ID.
-func KCMFormatDescriptionExtension_Depth() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_Depth())
+// KCMFormatDescriptionExtension_Depth returns the value of the constant kCMFormatDescriptionExtension_Depth.
+func KCMFormatDescriptionExtension_Depth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_Depth")))
 }
 
-// KCMFormatDescriptionExtension_CleanAperture returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_CleanAperture as an objc.ID.
-func KCMFormatDescriptionExtension_CleanAperture() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_CleanAperture())
+// KCMFormatDescriptionExtension_CleanAperture returns the value of the constant kCMFormatDescriptionExtension_CleanAperture.
+func KCMFormatDescriptionExtension_CleanAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_CleanAperture")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureWidth returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureWidth as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureWidth() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureWidth())
+// KCMFormatDescriptionKey_CleanApertureWidth returns the value of the constant kCMFormatDescriptionKey_CleanApertureWidth.
+func KCMFormatDescriptionKey_CleanApertureWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureWidth")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureHeight returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureHeight as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureHeight() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureHeight())
+// KCMFormatDescriptionKey_CleanApertureHeight returns the value of the constant kCMFormatDescriptionKey_CleanApertureHeight.
+func KCMFormatDescriptionKey_CleanApertureHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureHeight")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureHorizontalOffset returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureHorizontalOffset as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureHorizontalOffset() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureHorizontalOffset())
+// KCMFormatDescriptionKey_CleanApertureHorizontalOffset returns the value of the constant kCMFormatDescriptionKey_CleanApertureHorizontalOffset.
+func KCMFormatDescriptionKey_CleanApertureHorizontalOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureHorizontalOffset")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureVerticalOffset returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureVerticalOffset as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureVerticalOffset() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureVerticalOffset())
+// KCMFormatDescriptionKey_CleanApertureVerticalOffset returns the value of the constant kCMFormatDescriptionKey_CleanApertureVerticalOffset.
+func KCMFormatDescriptionKey_CleanApertureVerticalOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureVerticalOffset")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureWidthRational returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureWidthRational as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureWidthRational() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureWidthRational())
+// KCMFormatDescriptionKey_CleanApertureWidthRational returns the value of the constant kCMFormatDescriptionKey_CleanApertureWidthRational.
+func KCMFormatDescriptionKey_CleanApertureWidthRational() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureWidthRational")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureHeightRational returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureHeightRational as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureHeightRational() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureHeightRational())
+// KCMFormatDescriptionKey_CleanApertureHeightRational returns the value of the constant kCMFormatDescriptionKey_CleanApertureHeightRational.
+func KCMFormatDescriptionKey_CleanApertureHeightRational() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureHeightRational")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational())
+// KCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational returns the value of the constant kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational.
+func KCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational")))
 }
 
-// KCMFormatDescriptionKey_CleanApertureVerticalOffsetRational returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational as an objc.ID.
-func KCMFormatDescriptionKey_CleanApertureVerticalOffsetRational() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_CleanApertureVerticalOffsetRational())
+// KCMFormatDescriptionKey_CleanApertureVerticalOffsetRational returns the value of the constant kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational.
+func KCMFormatDescriptionKey_CleanApertureVerticalOffsetRational() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational")))
 }
 
-// KCMFormatDescriptionExtension_FieldCount returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_FieldCount as an objc.ID.
-func KCMFormatDescriptionExtension_FieldCount() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_FieldCount())
+// KCMFormatDescriptionExtension_FieldCount returns the value of the constant kCMFormatDescriptionExtension_FieldCount.
+func KCMFormatDescriptionExtension_FieldCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_FieldCount")))
 }
 
-// KCMFormatDescriptionExtension_FieldDetail returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_FieldDetail as an objc.ID.
-func KCMFormatDescriptionExtension_FieldDetail() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_FieldDetail())
+// KCMFormatDescriptionExtension_FieldDetail returns the value of the constant kCMFormatDescriptionExtension_FieldDetail.
+func KCMFormatDescriptionExtension_FieldDetail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_FieldDetail")))
 }
 
-// KCMFormatDescriptionFieldDetail_TemporalTopFirst returns the value of the CoreFoundation reference constant kCMFormatDescriptionFieldDetail_TemporalTopFirst as an objc.ID.
-func KCMFormatDescriptionFieldDetail_TemporalTopFirst() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionFieldDetail_TemporalTopFirst())
+// KCMFormatDescriptionFieldDetail_TemporalTopFirst returns the value of the constant kCMFormatDescriptionFieldDetail_TemporalTopFirst.
+func KCMFormatDescriptionFieldDetail_TemporalTopFirst() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionFieldDetail_TemporalTopFirst")))
 }
 
-// KCMFormatDescriptionFieldDetail_TemporalBottomFirst returns the value of the CoreFoundation reference constant kCMFormatDescriptionFieldDetail_TemporalBottomFirst as an objc.ID.
-func KCMFormatDescriptionFieldDetail_TemporalBottomFirst() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionFieldDetail_TemporalBottomFirst())
+// KCMFormatDescriptionFieldDetail_TemporalBottomFirst returns the value of the constant kCMFormatDescriptionFieldDetail_TemporalBottomFirst.
+func KCMFormatDescriptionFieldDetail_TemporalBottomFirst() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionFieldDetail_TemporalBottomFirst")))
 }
 
-// KCMFormatDescriptionFieldDetail_SpatialFirstLineEarly returns the value of the CoreFoundation reference constant kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly as an objc.ID.
-func KCMFormatDescriptionFieldDetail_SpatialFirstLineEarly() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionFieldDetail_SpatialFirstLineEarly())
+// KCMFormatDescriptionFieldDetail_SpatialFirstLineEarly returns the value of the constant kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly.
+func KCMFormatDescriptionFieldDetail_SpatialFirstLineEarly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly")))
 }
 
-// KCMFormatDescriptionFieldDetail_SpatialFirstLineLate returns the value of the CoreFoundation reference constant kCMFormatDescriptionFieldDetail_SpatialFirstLineLate as an objc.ID.
-func KCMFormatDescriptionFieldDetail_SpatialFirstLineLate() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionFieldDetail_SpatialFirstLineLate())
+// KCMFormatDescriptionFieldDetail_SpatialFirstLineLate returns the value of the constant kCMFormatDescriptionFieldDetail_SpatialFirstLineLate.
+func KCMFormatDescriptionFieldDetail_SpatialFirstLineLate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionFieldDetail_SpatialFirstLineLate")))
 }
 
-// KCMFormatDescriptionExtension_PixelAspectRatio returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_PixelAspectRatio as an objc.ID.
-func KCMFormatDescriptionExtension_PixelAspectRatio() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_PixelAspectRatio())
+// KCMFormatDescriptionExtension_PixelAspectRatio returns the value of the constant kCMFormatDescriptionExtension_PixelAspectRatio.
+func KCMFormatDescriptionExtension_PixelAspectRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_PixelAspectRatio")))
 }
 
-// KCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing as an objc.ID.
-func KCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing())
+// KCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing returns the value of the constant kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing.
+func KCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing")))
 }
 
-// KCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing returns the value of the CoreFoundation reference constant kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing as an objc.ID.
-func KCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing())
+// KCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing returns the value of the constant kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing.
+func KCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing")))
 }
 
-// KCMFormatDescriptionExtension_ColorPrimaries returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ColorPrimaries as an objc.ID.
-func KCMFormatDescriptionExtension_ColorPrimaries() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ColorPrimaries())
+// KCMFormatDescriptionExtension_ColorPrimaries returns the value of the constant kCMFormatDescriptionExtension_ColorPrimaries.
+func KCMFormatDescriptionExtension_ColorPrimaries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ColorPrimaries")))
 }
 
-// KCMFormatDescriptionColorPrimaries_ITU_R_709_2 returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_ITU_R_709_2 as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_ITU_R_709_2())
+// KCMFormatDescriptionColorPrimaries_ITU_R_709_2 returns the value of the constant kCMFormatDescriptionColorPrimaries_ITU_R_709_2.
+func KCMFormatDescriptionColorPrimaries_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_ITU_R_709_2")))
 }
 
-// KCMFormatDescriptionColorPrimaries_EBU_3213 returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_EBU_3213 as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_EBU_3213() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_EBU_3213())
+// KCMFormatDescriptionColorPrimaries_EBU_3213 returns the value of the constant kCMFormatDescriptionColorPrimaries_EBU_3213.
+func KCMFormatDescriptionColorPrimaries_EBU_3213() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_EBU_3213")))
 }
 
-// KCMFormatDescriptionColorPrimaries_SMPTE_C returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_SMPTE_C as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_SMPTE_C() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_SMPTE_C())
+// KCMFormatDescriptionColorPrimaries_SMPTE_C returns the value of the constant kCMFormatDescriptionColorPrimaries_SMPTE_C.
+func KCMFormatDescriptionColorPrimaries_SMPTE_C() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_SMPTE_C")))
 }
 
-// KCMFormatDescriptionColorPrimaries_DCI_P3 returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_DCI_P3 as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_DCI_P3() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_DCI_P3())
+// KCMFormatDescriptionColorPrimaries_DCI_P3 returns the value of the constant kCMFormatDescriptionColorPrimaries_DCI_P3.
+func KCMFormatDescriptionColorPrimaries_DCI_P3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_DCI_P3")))
 }
 
-// KCMFormatDescriptionColorPrimaries_P3_D65 returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_P3_D65 as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_P3_D65() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_P3_D65())
+// KCMFormatDescriptionColorPrimaries_P3_D65 returns the value of the constant kCMFormatDescriptionColorPrimaries_P3_D65.
+func KCMFormatDescriptionColorPrimaries_P3_D65() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_P3_D65")))
 }
 
-// KCMFormatDescriptionColorPrimaries_ITU_R_2020 returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_ITU_R_2020 as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_ITU_R_2020())
+// KCMFormatDescriptionColorPrimaries_ITU_R_2020 returns the value of the constant kCMFormatDescriptionColorPrimaries_ITU_R_2020.
+func KCMFormatDescriptionColorPrimaries_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_ITU_R_2020")))
 }
 
-// KCMFormatDescriptionColorPrimaries_P22 returns the value of the CoreFoundation reference constant kCMFormatDescriptionColorPrimaries_P22 as an objc.ID.
-func KCMFormatDescriptionColorPrimaries_P22() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionColorPrimaries_P22())
+// KCMFormatDescriptionColorPrimaries_P22 returns the value of the constant kCMFormatDescriptionColorPrimaries_P22.
+func KCMFormatDescriptionColorPrimaries_P22() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionColorPrimaries_P22")))
 }
 
-// KCMFormatDescriptionExtension_TransferFunction returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_TransferFunction as an objc.ID.
-func KCMFormatDescriptionExtension_TransferFunction() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_TransferFunction())
+// KCMFormatDescriptionExtension_TransferFunction returns the value of the constant kCMFormatDescriptionExtension_TransferFunction.
+func KCMFormatDescriptionExtension_TransferFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_TransferFunction")))
 }
 
-// KCMFormatDescriptionTransferFunction_ITU_R_709_2 returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_ITU_R_709_2 as an objc.ID.
-func KCMFormatDescriptionTransferFunction_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_ITU_R_709_2())
+// KCMFormatDescriptionTransferFunction_ITU_R_709_2 returns the value of the constant kCMFormatDescriptionTransferFunction_ITU_R_709_2.
+func KCMFormatDescriptionTransferFunction_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_ITU_R_709_2")))
 }
 
-// KCMFormatDescriptionTransferFunction_SMPTE_240M_1995 returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_SMPTE_240M_1995 as an objc.ID.
-func KCMFormatDescriptionTransferFunction_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_SMPTE_240M_1995())
+// KCMFormatDescriptionTransferFunction_SMPTE_240M_1995 returns the value of the constant kCMFormatDescriptionTransferFunction_SMPTE_240M_1995.
+func KCMFormatDescriptionTransferFunction_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_SMPTE_240M_1995")))
 }
 
-// KCMFormatDescriptionTransferFunction_UseGamma returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_UseGamma as an objc.ID.
-func KCMFormatDescriptionTransferFunction_UseGamma() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_UseGamma())
+// KCMFormatDescriptionTransferFunction_UseGamma returns the value of the constant kCMFormatDescriptionTransferFunction_UseGamma.
+func KCMFormatDescriptionTransferFunction_UseGamma() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_UseGamma")))
 }
 
-// KCMFormatDescriptionTransferFunction_ITU_R_2020 returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_ITU_R_2020 as an objc.ID.
-func KCMFormatDescriptionTransferFunction_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_ITU_R_2020())
+// KCMFormatDescriptionTransferFunction_ITU_R_2020 returns the value of the constant kCMFormatDescriptionTransferFunction_ITU_R_2020.
+func KCMFormatDescriptionTransferFunction_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_ITU_R_2020")))
 }
 
-// KCMFormatDescriptionTransferFunction_SMPTE_ST_428_1 returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1 as an objc.ID.
-func KCMFormatDescriptionTransferFunction_SMPTE_ST_428_1() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_SMPTE_ST_428_1())
+// KCMFormatDescriptionTransferFunction_SMPTE_ST_428_1 returns the value of the constant kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1.
+func KCMFormatDescriptionTransferFunction_SMPTE_ST_428_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1")))
 }
 
-// KCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ as an objc.ID.
-func KCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ())
+// KCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ returns the value of the constant kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ.
+func KCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ")))
 }
 
-// KCMFormatDescriptionTransferFunction_ITU_R_2100_HLG returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG as an objc.ID.
-func KCMFormatDescriptionTransferFunction_ITU_R_2100_HLG() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_ITU_R_2100_HLG())
+// KCMFormatDescriptionTransferFunction_ITU_R_2100_HLG returns the value of the constant kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG.
+func KCMFormatDescriptionTransferFunction_ITU_R_2100_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG")))
 }
 
-// KCMFormatDescriptionTransferFunction_Linear returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_Linear as an objc.ID.
-func KCMFormatDescriptionTransferFunction_Linear() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_Linear())
+// KCMFormatDescriptionTransferFunction_Linear returns the value of the constant kCMFormatDescriptionTransferFunction_Linear.
+func KCMFormatDescriptionTransferFunction_Linear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_Linear")))
 }
 
-// KCMFormatDescriptionTransferFunction_sRGB returns the value of the CoreFoundation reference constant kCMFormatDescriptionTransferFunction_sRGB as an objc.ID.
-func KCMFormatDescriptionTransferFunction_sRGB() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionTransferFunction_sRGB())
+// KCMFormatDescriptionTransferFunction_sRGB returns the value of the constant kCMFormatDescriptionTransferFunction_sRGB.
+func KCMFormatDescriptionTransferFunction_sRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionTransferFunction_sRGB")))
 }
 
-// KCMFormatDescriptionExtension_GammaLevel returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_GammaLevel as an objc.ID.
-func KCMFormatDescriptionExtension_GammaLevel() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_GammaLevel())
+// KCMFormatDescriptionExtension_GammaLevel returns the value of the constant kCMFormatDescriptionExtension_GammaLevel.
+func KCMFormatDescriptionExtension_GammaLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_GammaLevel")))
 }
 
-// KCMFormatDescriptionExtension_YCbCrMatrix returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_YCbCrMatrix as an objc.ID.
-func KCMFormatDescriptionExtension_YCbCrMatrix() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_YCbCrMatrix())
+// KCMFormatDescriptionExtension_YCbCrMatrix returns the value of the constant kCMFormatDescriptionExtension_YCbCrMatrix.
+func KCMFormatDescriptionExtension_YCbCrMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_YCbCrMatrix")))
 }
 
-// KCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 returns the value of the CoreFoundation reference constant kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 as an objc.ID.
-func KCMFormatDescriptionYCbCrMatrix_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionYCbCrMatrix_ITU_R_709_2())
+// KCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 returns the value of the constant kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2.
+func KCMFormatDescriptionYCbCrMatrix_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2")))
 }
 
-// KCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 returns the value of the CoreFoundation reference constant kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 as an objc.ID.
-func KCMFormatDescriptionYCbCrMatrix_ITU_R_601_4() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionYCbCrMatrix_ITU_R_601_4())
+// KCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 returns the value of the constant kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4.
+func KCMFormatDescriptionYCbCrMatrix_ITU_R_601_4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4")))
 }
 
-// KCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 returns the value of the CoreFoundation reference constant kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 as an objc.ID.
-func KCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995())
+// KCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 returns the value of the constant kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995.
+func KCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995")))
 }
 
-// KCMFormatDescriptionYCbCrMatrix_ITU_R_2020 returns the value of the CoreFoundation reference constant kCMFormatDescriptionYCbCrMatrix_ITU_R_2020 as an objc.ID.
-func KCMFormatDescriptionYCbCrMatrix_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionYCbCrMatrix_ITU_R_2020())
+// KCMFormatDescriptionYCbCrMatrix_ITU_R_2020 returns the value of the constant kCMFormatDescriptionYCbCrMatrix_ITU_R_2020.
+func KCMFormatDescriptionYCbCrMatrix_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionYCbCrMatrix_ITU_R_2020")))
 }
 
-// KCMFormatDescriptionExtension_FullRangeVideo returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_FullRangeVideo as an objc.ID.
-func KCMFormatDescriptionExtension_FullRangeVideo() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_FullRangeVideo())
+// KCMFormatDescriptionExtension_FullRangeVideo returns the value of the constant kCMFormatDescriptionExtension_FullRangeVideo.
+func KCMFormatDescriptionExtension_FullRangeVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_FullRangeVideo")))
 }
 
-// KCMFormatDescriptionExtension_ICCProfile returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ICCProfile as an objc.ID.
-func KCMFormatDescriptionExtension_ICCProfile() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ICCProfile())
+// KCMFormatDescriptionExtension_ICCProfile returns the value of the constant kCMFormatDescriptionExtension_ICCProfile.
+func KCMFormatDescriptionExtension_ICCProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ICCProfile")))
 }
 
-// KCMFormatDescriptionExtension_BytesPerRow returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_BytesPerRow as an objc.ID.
-func KCMFormatDescriptionExtension_BytesPerRow() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_BytesPerRow())
+// KCMFormatDescriptionExtension_BytesPerRow returns the value of the constant kCMFormatDescriptionExtension_BytesPerRow.
+func KCMFormatDescriptionExtension_BytesPerRow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_BytesPerRow")))
 }
 
-// KCMFormatDescriptionExtension_ChromaLocationTopField returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ChromaLocationTopField as an objc.ID.
-func KCMFormatDescriptionExtension_ChromaLocationTopField() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ChromaLocationTopField())
+// KCMFormatDescriptionExtension_ChromaLocationTopField returns the value of the constant kCMFormatDescriptionExtension_ChromaLocationTopField.
+func KCMFormatDescriptionExtension_ChromaLocationTopField() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ChromaLocationTopField")))
 }
 
-// KCMFormatDescriptionExtension_ChromaLocationBottomField returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ChromaLocationBottomField as an objc.ID.
-func KCMFormatDescriptionExtension_ChromaLocationBottomField() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ChromaLocationBottomField())
+// KCMFormatDescriptionExtension_ChromaLocationBottomField returns the value of the constant kCMFormatDescriptionExtension_ChromaLocationBottomField.
+func KCMFormatDescriptionExtension_ChromaLocationBottomField() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ChromaLocationBottomField")))
 }
 
-// KCMFormatDescriptionChromaLocation_Left returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_Left as an objc.ID.
-func KCMFormatDescriptionChromaLocation_Left() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_Left())
+// KCMFormatDescriptionChromaLocation_Left returns the value of the constant kCMFormatDescriptionChromaLocation_Left.
+func KCMFormatDescriptionChromaLocation_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_Left")))
 }
 
-// KCMFormatDescriptionChromaLocation_Center returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_Center as an objc.ID.
-func KCMFormatDescriptionChromaLocation_Center() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_Center())
+// KCMFormatDescriptionChromaLocation_Center returns the value of the constant kCMFormatDescriptionChromaLocation_Center.
+func KCMFormatDescriptionChromaLocation_Center() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_Center")))
 }
 
-// KCMFormatDescriptionChromaLocation_TopLeft returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_TopLeft as an objc.ID.
-func KCMFormatDescriptionChromaLocation_TopLeft() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_TopLeft())
+// KCMFormatDescriptionChromaLocation_TopLeft returns the value of the constant kCMFormatDescriptionChromaLocation_TopLeft.
+func KCMFormatDescriptionChromaLocation_TopLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_TopLeft")))
 }
 
-// KCMFormatDescriptionChromaLocation_Top returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_Top as an objc.ID.
-func KCMFormatDescriptionChromaLocation_Top() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_Top())
+// KCMFormatDescriptionChromaLocation_Top returns the value of the constant kCMFormatDescriptionChromaLocation_Top.
+func KCMFormatDescriptionChromaLocation_Top() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_Top")))
 }
 
-// KCMFormatDescriptionChromaLocation_BottomLeft returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_BottomLeft as an objc.ID.
-func KCMFormatDescriptionChromaLocation_BottomLeft() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_BottomLeft())
+// KCMFormatDescriptionChromaLocation_BottomLeft returns the value of the constant kCMFormatDescriptionChromaLocation_BottomLeft.
+func KCMFormatDescriptionChromaLocation_BottomLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_BottomLeft")))
 }
 
-// KCMFormatDescriptionChromaLocation_Bottom returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_Bottom as an objc.ID.
-func KCMFormatDescriptionChromaLocation_Bottom() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_Bottom())
+// KCMFormatDescriptionChromaLocation_Bottom returns the value of the constant kCMFormatDescriptionChromaLocation_Bottom.
+func KCMFormatDescriptionChromaLocation_Bottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_Bottom")))
 }
 
-// KCMFormatDescriptionChromaLocation_DV420 returns the value of the CoreFoundation reference constant kCMFormatDescriptionChromaLocation_DV420 as an objc.ID.
-func KCMFormatDescriptionChromaLocation_DV420() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionChromaLocation_DV420())
+// KCMFormatDescriptionChromaLocation_DV420 returns the value of the constant kCMFormatDescriptionChromaLocation_DV420.
+func KCMFormatDescriptionChromaLocation_DV420() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionChromaLocation_DV420")))
 }
 
-// KCMFormatDescriptionConformsToMPEG2VideoProfile returns the value of the CoreFoundation reference constant kCMFormatDescriptionConformsToMPEG2VideoProfile as an objc.ID.
-func KCMFormatDescriptionConformsToMPEG2VideoProfile() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionConformsToMPEG2VideoProfile())
+// KCMFormatDescriptionConformsToMPEG2VideoProfile returns the value of the constant kCMFormatDescriptionConformsToMPEG2VideoProfile.
+func KCMFormatDescriptionConformsToMPEG2VideoProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionConformsToMPEG2VideoProfile")))
 }
 
-// KCMFormatDescriptionExtension_ProtectedContentOriginalFormat returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ProtectedContentOriginalFormat as an objc.ID.
-func KCMFormatDescriptionExtension_ProtectedContentOriginalFormat() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ProtectedContentOriginalFormat())
+// KCMFormatDescriptionExtension_ProtectedContentOriginalFormat returns the value of the constant kCMFormatDescriptionExtension_ProtectedContentOriginalFormat.
+func KCMFormatDescriptionExtension_ProtectedContentOriginalFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ProtectedContentOriginalFormat")))
 }
 
-// KCMFormatDescriptionExtension_TemporalQuality returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_TemporalQuality as an objc.ID.
-func KCMFormatDescriptionExtension_TemporalQuality() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_TemporalQuality())
+// KCMFormatDescriptionExtension_TemporalQuality returns the value of the constant kCMFormatDescriptionExtension_TemporalQuality.
+func KCMFormatDescriptionExtension_TemporalQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_TemporalQuality")))
 }
 
-// KCMFormatDescriptionExtension_SpatialQuality returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_SpatialQuality as an objc.ID.
-func KCMFormatDescriptionExtension_SpatialQuality() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_SpatialQuality())
+// KCMFormatDescriptionExtension_SpatialQuality returns the value of the constant kCMFormatDescriptionExtension_SpatialQuality.
+func KCMFormatDescriptionExtension_SpatialQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_SpatialQuality")))
 }
 
-// KCMFormatDescriptionExtension_VerbatimImageDescription returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_VerbatimImageDescription as an objc.ID.
-func KCMFormatDescriptionExtension_VerbatimImageDescription() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_VerbatimImageDescription())
+// KCMFormatDescriptionExtension_VerbatimImageDescription returns the value of the constant kCMFormatDescriptionExtension_VerbatimImageDescription.
+func KCMFormatDescriptionExtension_VerbatimImageDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_VerbatimImageDescription")))
 }
 
-// KCMFormatDescriptionExtension_Version returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_Version as an objc.ID.
-func KCMFormatDescriptionExtension_Version() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_Version())
+// KCMFormatDescriptionExtension_Version returns the value of the constant kCMFormatDescriptionExtension_Version.
+func KCMFormatDescriptionExtension_Version() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_Version")))
 }
 
-// KCMFormatDescriptionExtension_RevisionLevel returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_RevisionLevel as an objc.ID.
-func KCMFormatDescriptionExtension_RevisionLevel() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_RevisionLevel())
+// KCMFormatDescriptionExtension_RevisionLevel returns the value of the constant kCMFormatDescriptionExtension_RevisionLevel.
+func KCMFormatDescriptionExtension_RevisionLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_RevisionLevel")))
 }
 
-// KCMFormatDescriptionExtension_Vendor returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_Vendor as an objc.ID.
-func KCMFormatDescriptionExtension_Vendor() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_Vendor())
+// KCMFormatDescriptionExtension_Vendor returns the value of the constant kCMFormatDescriptionExtension_Vendor.
+func KCMFormatDescriptionExtension_Vendor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_Vendor")))
 }
 
-// KCMFormatDescriptionVendor_Apple returns the value of the CoreFoundation reference constant kCMFormatDescriptionVendor_Apple as an objc.ID.
-func KCMFormatDescriptionVendor_Apple() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionVendor_Apple())
+// KCMFormatDescriptionVendor_Apple returns the value of the constant kCMFormatDescriptionVendor_Apple.
+func KCMFormatDescriptionVendor_Apple() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionVendor_Apple")))
 }
 
-// KCMFormatDescriptionExtension_MasteringDisplayColorVolume returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_MasteringDisplayColorVolume as an objc.ID.
-func KCMFormatDescriptionExtension_MasteringDisplayColorVolume() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_MasteringDisplayColorVolume())
+// KCMFormatDescriptionExtension_MasteringDisplayColorVolume returns the value of the constant kCMFormatDescriptionExtension_MasteringDisplayColorVolume.
+func KCMFormatDescriptionExtension_MasteringDisplayColorVolume() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_MasteringDisplayColorVolume")))
 }
 
-// KCMFormatDescriptionExtension_ContentLightLevelInfo returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ContentLightLevelInfo as an objc.ID.
-func KCMFormatDescriptionExtension_ContentLightLevelInfo() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ContentLightLevelInfo())
+// KCMFormatDescriptionExtension_ContentLightLevelInfo returns the value of the constant kCMFormatDescriptionExtension_ContentLightLevelInfo.
+func KCMFormatDescriptionExtension_ContentLightLevelInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ContentLightLevelInfo")))
 }
 
-// KCMFormatDescriptionExtension_ContentColorVolume returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ContentColorVolume as an objc.ID.
-func KCMFormatDescriptionExtension_ContentColorVolume() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ContentColorVolume())
+// KCMFormatDescriptionExtension_ContentColorVolume returns the value of the constant kCMFormatDescriptionExtension_ContentColorVolume.
+func KCMFormatDescriptionExtension_ContentColorVolume() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ContentColorVolume")))
 }
 
-// KCMFormatDescriptionExtension_AlternativeTransferCharacteristics returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_AlternativeTransferCharacteristics as an objc.ID.
-func KCMFormatDescriptionExtension_AlternativeTransferCharacteristics() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_AlternativeTransferCharacteristics())
+// KCMFormatDescriptionExtension_AlternativeTransferCharacteristics returns the value of the constant kCMFormatDescriptionExtension_AlternativeTransferCharacteristics.
+func KCMFormatDescriptionExtension_AlternativeTransferCharacteristics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_AlternativeTransferCharacteristics")))
 }
 
-// KCMFormatDescriptionExtension_AuxiliaryTypeInfo returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_AuxiliaryTypeInfo as an objc.ID.
-func KCMFormatDescriptionExtension_AuxiliaryTypeInfo() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_AuxiliaryTypeInfo())
+// KCMFormatDescriptionExtension_AuxiliaryTypeInfo returns the value of the constant kCMFormatDescriptionExtension_AuxiliaryTypeInfo.
+func KCMFormatDescriptionExtension_AuxiliaryTypeInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_AuxiliaryTypeInfo")))
 }
 
-// KCMFormatDescriptionExtension_AlphaChannelMode returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_AlphaChannelMode as an objc.ID.
-func KCMFormatDescriptionExtension_AlphaChannelMode() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_AlphaChannelMode())
+// KCMFormatDescriptionExtension_AlphaChannelMode returns the value of the constant kCMFormatDescriptionExtension_AlphaChannelMode.
+func KCMFormatDescriptionExtension_AlphaChannelMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_AlphaChannelMode")))
 }
 
-// KCMFormatDescriptionAlphaChannelMode_StraightAlpha returns the value of the CoreFoundation reference constant kCMFormatDescriptionAlphaChannelMode_StraightAlpha as an objc.ID.
-func KCMFormatDescriptionAlphaChannelMode_StraightAlpha() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionAlphaChannelMode_StraightAlpha())
+// KCMFormatDescriptionAlphaChannelMode_StraightAlpha returns the value of the constant kCMFormatDescriptionAlphaChannelMode_StraightAlpha.
+func KCMFormatDescriptionAlphaChannelMode_StraightAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionAlphaChannelMode_StraightAlpha")))
 }
 
-// KCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha returns the value of the CoreFoundation reference constant kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha as an objc.ID.
-func KCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha())
+// KCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha returns the value of the constant kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha.
+func KCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha")))
 }
 
-// KCMFormatDescriptionExtension_ContainsAlphaChannel returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ContainsAlphaChannel as an objc.ID.
-func KCMFormatDescriptionExtension_ContainsAlphaChannel() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ContainsAlphaChannel())
+// KCMFormatDescriptionExtension_ContainsAlphaChannel returns the value of the constant kCMFormatDescriptionExtension_ContainsAlphaChannel.
+func KCMFormatDescriptionExtension_ContainsAlphaChannel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ContainsAlphaChannel")))
 }
 
-// KCMFormatDescriptionExtension_BitsPerComponent returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_BitsPerComponent as an objc.ID.
-func KCMFormatDescriptionExtension_BitsPerComponent() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_BitsPerComponent())
+// KCMFormatDescriptionExtension_BitsPerComponent returns the value of the constant kCMFormatDescriptionExtension_BitsPerComponent.
+func KCMFormatDescriptionExtension_BitsPerComponent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_BitsPerComponent")))
 }
 
-// KCMFormatDescriptionExtension_HorizontalFieldOfView returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_HorizontalFieldOfView as an objc.ID.
-func KCMFormatDescriptionExtension_HorizontalFieldOfView() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_HorizontalFieldOfView())
+// KCMFormatDescriptionExtension_HorizontalFieldOfView returns the value of the constant kCMFormatDescriptionExtension_HorizontalFieldOfView.
+func KCMFormatDescriptionExtension_HorizontalFieldOfView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HorizontalFieldOfView")))
 }
 
-// @constant    kCMFormatDescriptionExtension_LogTransferFunction Indicates that the transfer function or gamma of the content is a log format and identifies the specific log curve. @discussion The value is a CFString holding fully specified reverse DNS identifier. Content captured in Apple Log will have this key set to kCMFormatDescriptionLogTransferFunction_AppleLog. @constant    kCMFormatDescriptionLogTransferFunction_AppleLog Indicates the Apple Log identifier. @discussion You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
-// KCMFormatDescriptionExtension_LogTransferFunction returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_LogTransferFunction as an objc.ID.
-func KCMFormatDescriptionExtension_LogTransferFunction() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_LogTransferFunction())
+// KCMFormatDescriptionExtension_LogTransferFunction returns the value of the constant kCMFormatDescriptionExtension_LogTransferFunction.
+func KCMFormatDescriptionExtension_LogTransferFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_LogTransferFunction")))
 }
 
-// KCMFormatDescriptionLogTransferFunction_AppleLog returns the value of the CoreFoundation reference constant kCMFormatDescriptionLogTransferFunction_AppleLog as an objc.ID.
-func KCMFormatDescriptionLogTransferFunction_AppleLog() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionLogTransferFunction_AppleLog())
+// KCMFormatDescriptionLogTransferFunction_AppleLog returns the value of the constant kCMFormatDescriptionLogTransferFunction_AppleLog.
+func KCMFormatDescriptionLogTransferFunction_AppleLog() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionLogTransferFunction_AppleLog")))
 }
 
-// @constant    kCMFormatDescriptionExtension_HeroEye @abstract Indicates which of the two eyes should be used as the primary when rendering in 2D. It is usually perpendicular to the target image surface. @constant    kCMFormatDescriptionHeroEye_Left Indicates the left eye is the hero eye. @constant    kCMFormatDescriptionHeroEye_Right Indicates the right eye is the hero eye. @discussion The value is a CFString holding one of the kCMFormatDescriptionHeroEye_* constants.
-// KCMFormatDescriptionExtension_HeroEye returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_HeroEye as an objc.ID.
-func KCMFormatDescriptionExtension_HeroEye() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_HeroEye())
+// KCMFormatDescriptionExtension_HeroEye returns the value of the constant kCMFormatDescriptionExtension_HeroEye.
+func KCMFormatDescriptionExtension_HeroEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HeroEye")))
 }
 
-// KCMFormatDescriptionHeroEye_Left returns the value of the CoreFoundation reference constant kCMFormatDescriptionHeroEye_Left as an objc.ID.
-func KCMFormatDescriptionHeroEye_Left() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionHeroEye_Left())
+// KCMFormatDescriptionHeroEye_Left returns the value of the constant kCMFormatDescriptionHeroEye_Left.
+func KCMFormatDescriptionHeroEye_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionHeroEye_Left")))
 }
 
-// KCMFormatDescriptionHeroEye_Right returns the value of the CoreFoundation reference constant kCMFormatDescriptionHeroEye_Right as an objc.ID.
-func KCMFormatDescriptionHeroEye_Right() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionHeroEye_Right())
+// KCMFormatDescriptionHeroEye_Right returns the value of the constant kCMFormatDescriptionHeroEye_Right.
+func KCMFormatDescriptionHeroEye_Right() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionHeroEye_Right")))
 }
 
-// @constant    kCMFormatDescriptionExtension_StereoCameraBaseline @abstract Indicates the distance between centers of the lenses of the camera system. @discussion The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in micrometers or thousandths of a millimeter (e.g., 63123 is 63.123 millimeters). This property is optional and should only be specified if the distance is known.
-// KCMFormatDescriptionExtension_StereoCameraBaseline returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_StereoCameraBaseline as an objc.ID.
-func KCMFormatDescriptionExtension_StereoCameraBaseline() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_StereoCameraBaseline())
+// KCMFormatDescriptionExtension_StereoCameraBaseline returns the value of the constant kCMFormatDescriptionExtension_StereoCameraBaseline.
+func KCMFormatDescriptionExtension_StereoCameraBaseline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_StereoCameraBaseline")))
 }
 
-// @constant    kCMFormatDescriptionExtension_HorizontalDisparityAdjustment @abstract Indicates a relative shift of the left and right images, which changes the zero parallax plane. @discussion The value encoded in normalized image space is a CFNumber holding a signed 32-bit integer measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. The default value of 0 is interpreted if this property is not set. If the property is not set, NULL may be set and retrieved. The NULL value should be interpreted as meaning 0. This property is optional and should only be specified if a disparity adjustment including 0 is known.
-// KCMFormatDescriptionExtension_HorizontalDisparityAdjustment returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_HorizontalDisparityAdjustment as an objc.ID.
-func KCMFormatDescriptionExtension_HorizontalDisparityAdjustment() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_HorizontalDisparityAdjustment())
+// KCMFormatDescriptionExtension_HorizontalDisparityAdjustment returns the value of the constant kCMFormatDescriptionExtension_HorizontalDisparityAdjustment.
+func KCMFormatDescriptionExtension_HorizontalDisparityAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HorizontalDisparityAdjustment")))
 }
 
-// @constant kCMFormatDescriptionExtension_HasLeftStereoEyeView @abstract Indicates the stereo left eye is present in video frames. @discussion The value is a CFBoolean holding presence of left eye view in the stream.
-// KCMFormatDescriptionExtension_HasLeftStereoEyeView returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_HasLeftStereoEyeView as an objc.ID.
-func KCMFormatDescriptionExtension_HasLeftStereoEyeView() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_HasLeftStereoEyeView())
+// KCMFormatDescriptionExtension_HasLeftStereoEyeView returns the value of the constant kCMFormatDescriptionExtension_HasLeftStereoEyeView.
+func KCMFormatDescriptionExtension_HasLeftStereoEyeView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HasLeftStereoEyeView")))
 }
 
-// @constant kCMFormatDescriptionExtension_HasRightStereoEyeView @abstract Indicates the stereo right eye is present in video frames. @discussion The value is a CFBoolean holding presence of right eye view in the stream.
-// KCMFormatDescriptionExtension_HasRightStereoEyeView returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_HasRightStereoEyeView as an objc.ID.
-func KCMFormatDescriptionExtension_HasRightStereoEyeView() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_HasRightStereoEyeView())
+// KCMFormatDescriptionExtension_HasRightStereoEyeView returns the value of the constant kCMFormatDescriptionExtension_HasRightStereoEyeView.
+func KCMFormatDescriptionExtension_HasRightStereoEyeView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HasRightStereoEyeView")))
 }
 
-// @constant kCMFormatDescriptionExtension_HasAdditionalViews @abstract Indicates that one or more additional views may be present beyond stereo left and stereo right eyes (e.g,. a “centerline” view). @discussion The value is a CFBoolean holding presence of additional eye views in the stream.
-// KCMFormatDescriptionExtension_HasAdditionalViews returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_HasAdditionalViews as an objc.ID.
-func KCMFormatDescriptionExtension_HasAdditionalViews() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_HasAdditionalViews())
+// KCMFormatDescriptionExtension_HasAdditionalViews returns the value of the constant kCMFormatDescriptionExtension_HasAdditionalViews.
+func KCMFormatDescriptionExtension_HasAdditionalViews() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_HasAdditionalViews")))
 }
 
-// @constant 	`kCMFormatDescriptionExtension_ProjectionKind` @abstract	 Indicates the projection that should be applied to presented decoded video frames. @constant    `kCMFormatDescriptionProjectionKind_Rectilinear` Indicates rectilinear projection. Generally less than 90 degree field of view with no barrel distortion. @constant    `kCMFormatDescriptionProjectionKind_Equirectangular` Indicates equirectangular projection of a 360 degree sphere to a rectangular plane, where longitude and latitude of the sphere are mapped linearly to the x,y axes of the plane. @constant    `kCMFormatDescriptionProjectionKind_HalfEquirectangular` Indicates half equirectangular projection of a 180 degree hemisphere to a rectangular plane, where longitude and latitude of the sphere are mapped linearly to the x,y axes of the plane @constant    `kCMFormatDescriptionProjectionKind_ParametricImmersive` Indicates a projection described mathematically by a model of camera lens calibration parameters. Parameters may be found in lens calibration metadata in kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection with algorithm_kind being parametric lens @constant            `kCMFormatDescriptionProjectionKind_AppleImmersiveVideo` Indicates a proprietary projection used for Apple Immersive Video. @discussion The value is a CFString holding one of the kCMFormatDescriptionProjectionKind_* constants.
-// KCMFormatDescriptionExtension_ProjectionKind returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ProjectionKind as an objc.ID.
-func KCMFormatDescriptionExtension_ProjectionKind() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ProjectionKind())
+// KCMFormatDescriptionExtension_ProjectionKind returns the value of the constant kCMFormatDescriptionExtension_ProjectionKind.
+func KCMFormatDescriptionExtension_ProjectionKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ProjectionKind")))
 }
 
-// KCMFormatDescriptionProjectionKind_Rectilinear returns the value of the CoreFoundation reference constant kCMFormatDescriptionProjectionKind_Rectilinear as an objc.ID.
-func KCMFormatDescriptionProjectionKind_Rectilinear() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionProjectionKind_Rectilinear())
+// KCMFormatDescriptionProjectionKind_Rectilinear returns the value of the constant kCMFormatDescriptionProjectionKind_Rectilinear.
+func KCMFormatDescriptionProjectionKind_Rectilinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionProjectionKind_Rectilinear")))
 }
 
-// KCMFormatDescriptionProjectionKind_Equirectangular returns the value of the CoreFoundation reference constant kCMFormatDescriptionProjectionKind_Equirectangular as an objc.ID.
-func KCMFormatDescriptionProjectionKind_Equirectangular() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionProjectionKind_Equirectangular())
+// KCMFormatDescriptionProjectionKind_Equirectangular returns the value of the constant kCMFormatDescriptionProjectionKind_Equirectangular.
+func KCMFormatDescriptionProjectionKind_Equirectangular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionProjectionKind_Equirectangular")))
 }
 
-// KCMFormatDescriptionProjectionKind_HalfEquirectangular returns the value of the CoreFoundation reference constant kCMFormatDescriptionProjectionKind_HalfEquirectangular as an objc.ID.
-func KCMFormatDescriptionProjectionKind_HalfEquirectangular() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionProjectionKind_HalfEquirectangular())
+// KCMFormatDescriptionProjectionKind_HalfEquirectangular returns the value of the constant kCMFormatDescriptionProjectionKind_HalfEquirectangular.
+func KCMFormatDescriptionProjectionKind_HalfEquirectangular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionProjectionKind_HalfEquirectangular")))
 }
 
-// KCMFormatDescriptionProjectionKind_ParametricImmersive returns the value of the CoreFoundation reference constant kCMFormatDescriptionProjectionKind_ParametricImmersive as an objc.ID.
-func KCMFormatDescriptionProjectionKind_ParametricImmersive() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionProjectionKind_ParametricImmersive())
+// KCMFormatDescriptionProjectionKind_ParametricImmersive returns the value of the constant kCMFormatDescriptionProjectionKind_ParametricImmersive.
+func KCMFormatDescriptionProjectionKind_ParametricImmersive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionProjectionKind_ParametricImmersive")))
 }
 
-// KCMFormatDescriptionProjectionKind_AppleImmersiveVideo returns the value of the CoreFoundation reference constant kCMFormatDescriptionProjectionKind_AppleImmersiveVideo as an objc.ID.
-func KCMFormatDescriptionProjectionKind_AppleImmersiveVideo() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionProjectionKind_AppleImmersiveVideo())
+// KCMFormatDescriptionProjectionKind_AppleImmersiveVideo returns the value of the constant kCMFormatDescriptionProjectionKind_AppleImmersiveVideo.
+func KCMFormatDescriptionProjectionKind_AppleImmersiveVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionProjectionKind_AppleImmersiveVideo")))
 }
 
-// @constant 	`kCMFormatDescriptionExtension_ViewPackingKind` @abstract	 Indicates the packing type of stereoscopic video frames. @constant   `kCMFormatDescriptionViewPackingKind_SideBySide` Indicates that frames are packed side-by-side. @constant   `kCMFormatDescriptionViewPackingKind_OverUnder` Indicates that frames are packed over under. @discussion The value is a CFString holding one of the kCMFormatDescriptionViewPackingKind_* constants.
-// KCMFormatDescriptionExtension_ViewPackingKind returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ViewPackingKind as an objc.ID.
-func KCMFormatDescriptionExtension_ViewPackingKind() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ViewPackingKind())
+// KCMFormatDescriptionExtension_ViewPackingKind returns the value of the constant kCMFormatDescriptionExtension_ViewPackingKind.
+func KCMFormatDescriptionExtension_ViewPackingKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ViewPackingKind")))
 }
 
-// KCMFormatDescriptionViewPackingKind_SideBySide returns the value of the CoreFoundation reference constant kCMFormatDescriptionViewPackingKind_SideBySide as an objc.ID.
-func KCMFormatDescriptionViewPackingKind_SideBySide() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionViewPackingKind_SideBySide())
+// KCMFormatDescriptionViewPackingKind_SideBySide returns the value of the constant kCMFormatDescriptionViewPackingKind_SideBySide.
+func KCMFormatDescriptionViewPackingKind_SideBySide() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionViewPackingKind_SideBySide")))
 }
 
-// KCMFormatDescriptionViewPackingKind_OverUnder returns the value of the CoreFoundation reference constant kCMFormatDescriptionViewPackingKind_OverUnder as an objc.ID.
-func KCMFormatDescriptionViewPackingKind_OverUnder() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionViewPackingKind_OverUnder())
+// KCMFormatDescriptionViewPackingKind_OverUnder returns the value of the constant kCMFormatDescriptionViewPackingKind_OverUnder.
+func KCMFormatDescriptionViewPackingKind_OverUnder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionViewPackingKind_OverUnder")))
 }
 
-// @constant kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection @abstract	Specifies intrinsic and extrinsic parameters for single or multiple lenses. @discussion The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kCMFormatDescriptionCameraCalibration_LensRole key and its value.
-// KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection as an objc.ID.
-func KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection())
+// KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection returns the value of the constant kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection.
+func KCMFormatDescriptionExtension_CameraCalibrationDataLensCollection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection")))
 }
 
-// The following keys are required in each kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection dictionary. @constant kCMFormatDescriptionCameraCalibration_LensAlgorithmKind @abstract	Specifies the camera calibration methodology. @discussion If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters. @constant kCMFormatDescriptionCameraCalibration_LensDomain @abstract	Specifies the kind of lens (e.g., color). @constant kCMFormatDescriptionCameraCalibration_LensIdentifier @abstract	Specifies a unique number associated with a lens. @constant kCMFormatDescriptionCameraCalibration_LensRole @abstract	Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). @discussion For a stereoscopic camera system, one lens should have the left role and another should have the right role. @constant kCMFormatDescriptionCameraCalibration_LensDistortions @abstract	Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. @discussion The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order. @constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX @abstract    Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0]. @constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY @abstract    Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0]. @constant kCMFormatDescriptionCameraCalibration_RadialAngleLimit @abstract	Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. @discussion The value is linked to radial distortion corrections with k1 and k2. @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrix @abstract	Specifies the 3x3 camera intrinsic matrix for camera calibration. @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor. @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset @abstract	Specifies the offset of the point of perspective relative to the rectilinear projection. @constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions @abstract	Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. @discussion Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height". @constant kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource @abstract	Identifies how the origin of the camera system's extrinsics are determined. @discussion The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses. @constant kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion @abstract	Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. @discussion The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
-// KCMFormatDescriptionCameraCalibration_LensAlgorithmKind returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensAlgorithmKind as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensAlgorithmKind() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensAlgorithmKind())
+// KCMFormatDescriptionCameraCalibration_LensAlgorithmKind returns the value of the constant kCMFormatDescriptionCameraCalibration_LensAlgorithmKind.
+func KCMFormatDescriptionCameraCalibration_LensAlgorithmKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensAlgorithmKind")))
 }
 
-// KCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens as an objc.ID.
-func KCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens())
+// KCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens returns the value of the constant kCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens.
+func KCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens")))
 }
 
-// KCMFormatDescriptionCameraCalibration_LensDomain returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensDomain as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensDomain() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensDomain())
+// KCMFormatDescriptionCameraCalibration_LensDomain returns the value of the constant kCMFormatDescriptionCameraCalibration_LensDomain.
+func KCMFormatDescriptionCameraCalibration_LensDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensDomain")))
 }
 
-// KCMFormatDescriptionCameraCalibrationLensDomain_Color returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibrationLensDomain_Color as an objc.ID.
-func KCMFormatDescriptionCameraCalibrationLensDomain_Color() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibrationLensDomain_Color())
+// KCMFormatDescriptionCameraCalibrationLensDomain_Color returns the value of the constant kCMFormatDescriptionCameraCalibrationLensDomain_Color.
+func KCMFormatDescriptionCameraCalibrationLensDomain_Color() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibrationLensDomain_Color")))
 }
 
-// KCMFormatDescriptionCameraCalibration_LensIdentifier returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensIdentifier as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensIdentifier())
+// KCMFormatDescriptionCameraCalibration_LensIdentifier returns the value of the constant kCMFormatDescriptionCameraCalibration_LensIdentifier.
+func KCMFormatDescriptionCameraCalibration_LensIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensIdentifier")))
 }
 
-// KCMFormatDescriptionCameraCalibration_LensRole returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensRole as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensRole() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensRole())
+// KCMFormatDescriptionCameraCalibration_LensRole returns the value of the constant kCMFormatDescriptionCameraCalibration_LensRole.
+func KCMFormatDescriptionCameraCalibration_LensRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensRole")))
 }
 
-// KCMFormatDescriptionCameraCalibrationLensRole_Mono returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibrationLensRole_Mono as an objc.ID.
-func KCMFormatDescriptionCameraCalibrationLensRole_Mono() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibrationLensRole_Mono())
+// KCMFormatDescriptionCameraCalibrationLensRole_Mono returns the value of the constant kCMFormatDescriptionCameraCalibrationLensRole_Mono.
+func KCMFormatDescriptionCameraCalibrationLensRole_Mono() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibrationLensRole_Mono")))
 }
 
-// KCMFormatDescriptionCameraCalibrationLensRole_Left returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibrationLensRole_Left as an objc.ID.
-func KCMFormatDescriptionCameraCalibrationLensRole_Left() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibrationLensRole_Left())
+// KCMFormatDescriptionCameraCalibrationLensRole_Left returns the value of the constant kCMFormatDescriptionCameraCalibrationLensRole_Left.
+func KCMFormatDescriptionCameraCalibrationLensRole_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibrationLensRole_Left")))
 }
 
-// KCMFormatDescriptionCameraCalibrationLensRole_Right returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibrationLensRole_Right as an objc.ID.
-func KCMFormatDescriptionCameraCalibrationLensRole_Right() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibrationLensRole_Right())
+// KCMFormatDescriptionCameraCalibrationLensRole_Right returns the value of the constant kCMFormatDescriptionCameraCalibrationLensRole_Right.
+func KCMFormatDescriptionCameraCalibrationLensRole_Right() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibrationLensRole_Right")))
 }
 
-// KCMFormatDescriptionCameraCalibration_LensDistortions returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensDistortions as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensDistortions() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensDistortions())
+// KCMFormatDescriptionCameraCalibration_LensDistortions returns the value of the constant kCMFormatDescriptionCameraCalibration_LensDistortions.
+func KCMFormatDescriptionCameraCalibration_LensDistortions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensDistortions")))
 }
 
-// KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX())
+// KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX returns the value of the constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX.
+func KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX")))
 }
 
-// KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY())
+// KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY returns the value of the constant kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY.
+func KCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY")))
 }
 
-// KCMFormatDescriptionCameraCalibration_RadialAngleLimit returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_RadialAngleLimit as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_RadialAngleLimit() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_RadialAngleLimit())
+// KCMFormatDescriptionCameraCalibration_RadialAngleLimit returns the value of the constant kCMFormatDescriptionCameraCalibration_RadialAngleLimit.
+func KCMFormatDescriptionCameraCalibration_RadialAngleLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_RadialAngleLimit")))
 }
 
-// KCMFormatDescriptionCameraCalibration_IntrinsicMatrix returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrix as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_IntrinsicMatrix() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_IntrinsicMatrix())
+// KCMFormatDescriptionCameraCalibration_IntrinsicMatrix returns the value of the constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrix.
+func KCMFormatDescriptionCameraCalibration_IntrinsicMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_IntrinsicMatrix")))
 }
 
-// KCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset())
+// KCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset returns the value of the constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset.
+func KCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset")))
 }
 
-// KCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions())
+// KCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions returns the value of the constant kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions.
+func KCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions")))
 }
 
-// KCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource())
+// KCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource returns the value of the constant kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource.
+func KCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource")))
 }
 
-// KCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline as an objc.ID.
-func KCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline())
+// KCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline returns the value of the constant kCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline.
+func KCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline")))
 }
 
-// KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion returns the value of the CoreFoundation reference constant kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion as an objc.ID.
-func KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion())
+// KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion returns the value of the constant kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion.
+func KCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion")))
 }
 
-// @constant kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags @abstract	Indicates that the image description contains projected media data converted from an external format @discussion This format description extension is included if boxes containing external stereoscopic or spherical projection information were parsed.
-// KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags as an objc.ID.
-func KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags())
+// KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags returns the value of the constant kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags.
+func KCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags")))
 }
 
-// KCMTextFormatDescriptionExtension_DisplayFlags returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_DisplayFlags as an objc.ID.
-func KCMTextFormatDescriptionExtension_DisplayFlags() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_DisplayFlags())
+// KCMTextFormatDescriptionExtension_DisplayFlags returns the value of the constant kCMTextFormatDescriptionExtension_DisplayFlags.
+func KCMTextFormatDescriptionExtension_DisplayFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_DisplayFlags")))
 }
 
-// KCMTextFormatDescriptionExtension_BackgroundColor returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_BackgroundColor as an objc.ID.
-func KCMTextFormatDescriptionExtension_BackgroundColor() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_BackgroundColor())
+// KCMTextFormatDescriptionExtension_BackgroundColor returns the value of the constant kCMTextFormatDescriptionExtension_BackgroundColor.
+func KCMTextFormatDescriptionExtension_BackgroundColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_BackgroundColor")))
 }
 
-// KCMTextFormatDescriptionColor_Red returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionColor_Red as an objc.ID.
-func KCMTextFormatDescriptionColor_Red() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionColor_Red())
+// KCMTextFormatDescriptionColor_Red returns the value of the constant kCMTextFormatDescriptionColor_Red.
+func KCMTextFormatDescriptionColor_Red() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionColor_Red")))
 }
 
-// KCMTextFormatDescriptionColor_Green returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionColor_Green as an objc.ID.
-func KCMTextFormatDescriptionColor_Green() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionColor_Green())
+// KCMTextFormatDescriptionColor_Green returns the value of the constant kCMTextFormatDescriptionColor_Green.
+func KCMTextFormatDescriptionColor_Green() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionColor_Green")))
 }
 
-// KCMTextFormatDescriptionColor_Blue returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionColor_Blue as an objc.ID.
-func KCMTextFormatDescriptionColor_Blue() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionColor_Blue())
+// KCMTextFormatDescriptionColor_Blue returns the value of the constant kCMTextFormatDescriptionColor_Blue.
+func KCMTextFormatDescriptionColor_Blue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionColor_Blue")))
 }
 
-// KCMTextFormatDescriptionColor_Alpha returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionColor_Alpha as an objc.ID.
-func KCMTextFormatDescriptionColor_Alpha() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionColor_Alpha())
+// KCMTextFormatDescriptionColor_Alpha returns the value of the constant kCMTextFormatDescriptionColor_Alpha.
+func KCMTextFormatDescriptionColor_Alpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionColor_Alpha")))
 }
 
-// KCMTextFormatDescriptionExtension_DefaultTextBox returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_DefaultTextBox as an objc.ID.
-func KCMTextFormatDescriptionExtension_DefaultTextBox() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_DefaultTextBox())
+// KCMTextFormatDescriptionExtension_DefaultTextBox returns the value of the constant kCMTextFormatDescriptionExtension_DefaultTextBox.
+func KCMTextFormatDescriptionExtension_DefaultTextBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_DefaultTextBox")))
 }
 
-// KCMTextFormatDescriptionRect_Top returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionRect_Top as an objc.ID.
-func KCMTextFormatDescriptionRect_Top() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionRect_Top())
+// KCMTextFormatDescriptionRect_Top returns the value of the constant kCMTextFormatDescriptionRect_Top.
+func KCMTextFormatDescriptionRect_Top() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionRect_Top")))
 }
 
-// KCMTextFormatDescriptionRect_Left returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionRect_Left as an objc.ID.
-func KCMTextFormatDescriptionRect_Left() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionRect_Left())
+// KCMTextFormatDescriptionRect_Left returns the value of the constant kCMTextFormatDescriptionRect_Left.
+func KCMTextFormatDescriptionRect_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionRect_Left")))
 }
 
-// KCMTextFormatDescriptionRect_Bottom returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionRect_Bottom as an objc.ID.
-func KCMTextFormatDescriptionRect_Bottom() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionRect_Bottom())
+// KCMTextFormatDescriptionRect_Bottom returns the value of the constant kCMTextFormatDescriptionRect_Bottom.
+func KCMTextFormatDescriptionRect_Bottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionRect_Bottom")))
 }
 
-// KCMTextFormatDescriptionRect_Right returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionRect_Right as an objc.ID.
-func KCMTextFormatDescriptionRect_Right() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionRect_Right())
+// KCMTextFormatDescriptionRect_Right returns the value of the constant kCMTextFormatDescriptionRect_Right.
+func KCMTextFormatDescriptionRect_Right() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionRect_Right")))
 }
 
-// KCMTextFormatDescriptionExtension_DefaultStyle returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_DefaultStyle as an objc.ID.
-func KCMTextFormatDescriptionExtension_DefaultStyle() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_DefaultStyle())
+// KCMTextFormatDescriptionExtension_DefaultStyle returns the value of the constant kCMTextFormatDescriptionExtension_DefaultStyle.
+func KCMTextFormatDescriptionExtension_DefaultStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_DefaultStyle")))
 }
 
-// KCMTextFormatDescriptionStyle_StartChar returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_StartChar as an objc.ID.
-func KCMTextFormatDescriptionStyle_StartChar() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_StartChar())
+// KCMTextFormatDescriptionStyle_StartChar returns the value of the constant kCMTextFormatDescriptionStyle_StartChar.
+func KCMTextFormatDescriptionStyle_StartChar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_StartChar")))
 }
 
-// KCMTextFormatDescriptionStyle_Font returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_Font as an objc.ID.
-func KCMTextFormatDescriptionStyle_Font() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_Font())
+// KCMTextFormatDescriptionStyle_Font returns the value of the constant kCMTextFormatDescriptionStyle_Font.
+func KCMTextFormatDescriptionStyle_Font() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_Font")))
 }
 
-// KCMTextFormatDescriptionStyle_FontFace returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_FontFace as an objc.ID.
-func KCMTextFormatDescriptionStyle_FontFace() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_FontFace())
+// KCMTextFormatDescriptionStyle_FontFace returns the value of the constant kCMTextFormatDescriptionStyle_FontFace.
+func KCMTextFormatDescriptionStyle_FontFace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_FontFace")))
 }
 
-// KCMTextFormatDescriptionStyle_ForegroundColor returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_ForegroundColor as an objc.ID.
-func KCMTextFormatDescriptionStyle_ForegroundColor() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_ForegroundColor())
+// KCMTextFormatDescriptionStyle_ForegroundColor returns the value of the constant kCMTextFormatDescriptionStyle_ForegroundColor.
+func KCMTextFormatDescriptionStyle_ForegroundColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_ForegroundColor")))
 }
 
-// KCMTextFormatDescriptionStyle_FontSize returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_FontSize as an objc.ID.
-func KCMTextFormatDescriptionStyle_FontSize() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_FontSize())
+// KCMTextFormatDescriptionStyle_FontSize returns the value of the constant kCMTextFormatDescriptionStyle_FontSize.
+func KCMTextFormatDescriptionStyle_FontSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_FontSize")))
 }
 
-// KCMTextFormatDescriptionExtension_HorizontalJustification returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_HorizontalJustification as an objc.ID.
-func KCMTextFormatDescriptionExtension_HorizontalJustification() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_HorizontalJustification())
+// KCMTextFormatDescriptionExtension_HorizontalJustification returns the value of the constant kCMTextFormatDescriptionExtension_HorizontalJustification.
+func KCMTextFormatDescriptionExtension_HorizontalJustification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_HorizontalJustification")))
 }
 
-// KCMTextFormatDescriptionExtension_VerticalJustification returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_VerticalJustification as an objc.ID.
-func KCMTextFormatDescriptionExtension_VerticalJustification() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_VerticalJustification())
+// KCMTextFormatDescriptionExtension_VerticalJustification returns the value of the constant kCMTextFormatDescriptionExtension_VerticalJustification.
+func KCMTextFormatDescriptionExtension_VerticalJustification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_VerticalJustification")))
 }
 
-// KCMTextFormatDescriptionStyle_EndChar returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_EndChar as an objc.ID.
-func KCMTextFormatDescriptionStyle_EndChar() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_EndChar())
+// KCMTextFormatDescriptionStyle_EndChar returns the value of the constant kCMTextFormatDescriptionStyle_EndChar.
+func KCMTextFormatDescriptionStyle_EndChar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_EndChar")))
 }
 
-// KCMTextFormatDescriptionExtension_FontTable returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_FontTable as an objc.ID.
-func KCMTextFormatDescriptionExtension_FontTable() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_FontTable())
+// KCMTextFormatDescriptionExtension_FontTable returns the value of the constant kCMTextFormatDescriptionExtension_FontTable.
+func KCMTextFormatDescriptionExtension_FontTable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_FontTable")))
 }
 
-// KCMTextFormatDescriptionExtension_TextJustification returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_TextJustification as an objc.ID.
-func KCMTextFormatDescriptionExtension_TextJustification() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_TextJustification())
+// KCMTextFormatDescriptionExtension_TextJustification returns the value of the constant kCMTextFormatDescriptionExtension_TextJustification.
+func KCMTextFormatDescriptionExtension_TextJustification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_TextJustification")))
 }
 
-// KCMTextFormatDescriptionStyle_Height returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_Height as an objc.ID.
-func KCMTextFormatDescriptionStyle_Height() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_Height())
+// KCMTextFormatDescriptionStyle_Height returns the value of the constant kCMTextFormatDescriptionStyle_Height.
+func KCMTextFormatDescriptionStyle_Height() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_Height")))
 }
 
-// KCMTextFormatDescriptionStyle_Ascent returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionStyle_Ascent as an objc.ID.
-func KCMTextFormatDescriptionStyle_Ascent() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionStyle_Ascent())
+// KCMTextFormatDescriptionStyle_Ascent returns the value of the constant kCMTextFormatDescriptionStyle_Ascent.
+func KCMTextFormatDescriptionStyle_Ascent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionStyle_Ascent")))
 }
 
-// KCMTextFormatDescriptionExtension_DefaultFontName returns the value of the CoreFoundation reference constant kCMTextFormatDescriptionExtension_DefaultFontName as an objc.ID.
-func KCMTextFormatDescriptionExtension_DefaultFontName() objc.ID {
-	return purego.CFConstant(raw.KCMTextFormatDescriptionExtension_DefaultFontName())
+// KCMTextFormatDescriptionExtension_DefaultFontName returns the value of the constant kCMTextFormatDescriptionExtension_DefaultFontName.
+func KCMTextFormatDescriptionExtension_DefaultFontName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextFormatDescriptionExtension_DefaultFontName")))
 }
 
-// KCMFormatDescriptionExtension_AmbientViewingEnvironment returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtension_AmbientViewingEnvironment as an objc.ID.
-func KCMFormatDescriptionExtension_AmbientViewingEnvironment() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtension_AmbientViewingEnvironment())
+// KCMFormatDescriptionExtension_AmbientViewingEnvironment returns the value of the constant kCMFormatDescriptionExtension_AmbientViewingEnvironment.
+func KCMFormatDescriptionExtension_AmbientViewingEnvironment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtension_AmbientViewingEnvironment")))
 }
 
-// KCMTimeCodeFormatDescriptionExtension_SourceReferenceName returns the value of the CoreFoundation reference constant kCMTimeCodeFormatDescriptionExtension_SourceReferenceName as an objc.ID.
-func KCMTimeCodeFormatDescriptionExtension_SourceReferenceName() objc.ID {
-	return purego.CFConstant(raw.KCMTimeCodeFormatDescriptionExtension_SourceReferenceName())
+// KCMTimeCodeFormatDescriptionExtension_SourceReferenceName returns the value of the constant kCMTimeCodeFormatDescriptionExtension_SourceReferenceName.
+func KCMTimeCodeFormatDescriptionExtension_SourceReferenceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeCodeFormatDescriptionExtension_SourceReferenceName")))
 }
 
-// KCMTimeCodeFormatDescriptionKey_Value returns the value of the CoreFoundation reference constant kCMTimeCodeFormatDescriptionKey_Value as an objc.ID.
-func KCMTimeCodeFormatDescriptionKey_Value() objc.ID {
-	return purego.CFConstant(raw.KCMTimeCodeFormatDescriptionKey_Value())
+// KCMTimeCodeFormatDescriptionKey_Value returns the value of the constant kCMTimeCodeFormatDescriptionKey_Value.
+func KCMTimeCodeFormatDescriptionKey_Value() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeCodeFormatDescriptionKey_Value")))
 }
 
-// KCMTimeCodeFormatDescriptionKey_LangCode returns the value of the CoreFoundation reference constant kCMTimeCodeFormatDescriptionKey_LangCode as an objc.ID.
-func KCMTimeCodeFormatDescriptionKey_LangCode() objc.ID {
-	return purego.CFConstant(raw.KCMTimeCodeFormatDescriptionKey_LangCode())
+// KCMTimeCodeFormatDescriptionKey_LangCode returns the value of the constant kCMTimeCodeFormatDescriptionKey_LangCode.
+func KCMTimeCodeFormatDescriptionKey_LangCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimeCodeFormatDescriptionKey_LangCode")))
 }
 
-// KCMFormatDescriptionExtensionKey_MetadataKeyTable returns the value of the CoreFoundation reference constant kCMFormatDescriptionExtensionKey_MetadataKeyTable as an objc.ID.
-func KCMFormatDescriptionExtensionKey_MetadataKeyTable() objc.ID {
-	return purego.CFConstant(raw.KCMFormatDescriptionExtensionKey_MetadataKeyTable())
+// KCMFormatDescriptionExtensionKey_MetadataKeyTable returns the value of the constant kCMFormatDescriptionExtensionKey_MetadataKeyTable.
+func KCMFormatDescriptionExtensionKey_MetadataKeyTable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMFormatDescriptionExtensionKey_MetadataKeyTable")))
 }
 
-// KCMMetadataFormatDescriptionKey_Namespace returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_Namespace as an objc.ID.
-func KCMMetadataFormatDescriptionKey_Namespace() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_Namespace())
+// KCMMetadataFormatDescriptionKey_Namespace returns the value of the constant kCMMetadataFormatDescriptionKey_Namespace.
+func KCMMetadataFormatDescriptionKey_Namespace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_Namespace")))
 }
 
-// KCMMetadataFormatDescriptionKey_Value returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_Value as an objc.ID.
-func KCMMetadataFormatDescriptionKey_Value() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_Value())
+// KCMMetadataFormatDescriptionKey_Value returns the value of the constant kCMMetadataFormatDescriptionKey_Value.
+func KCMMetadataFormatDescriptionKey_Value() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_Value")))
 }
 
-// KCMMetadataFormatDescriptionKey_LocalID returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_LocalID as an objc.ID.
-func KCMMetadataFormatDescriptionKey_LocalID() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_LocalID())
+// KCMMetadataFormatDescriptionKey_LocalID returns the value of the constant kCMMetadataFormatDescriptionKey_LocalID.
+func KCMMetadataFormatDescriptionKey_LocalID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_LocalID")))
 }
 
-// KCMMetadataFormatDescriptionKey_DataType returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_DataType as an objc.ID.
-func KCMMetadataFormatDescriptionKey_DataType() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_DataType())
+// KCMMetadataFormatDescriptionKey_DataType returns the value of the constant kCMMetadataFormatDescriptionKey_DataType.
+func KCMMetadataFormatDescriptionKey_DataType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_DataType")))
 }
 
-// KCMMetadataFormatDescriptionKey_DataTypeNamespace returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_DataTypeNamespace as an objc.ID.
-func KCMMetadataFormatDescriptionKey_DataTypeNamespace() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_DataTypeNamespace())
+// KCMMetadataFormatDescriptionKey_DataTypeNamespace returns the value of the constant kCMMetadataFormatDescriptionKey_DataTypeNamespace.
+func KCMMetadataFormatDescriptionKey_DataTypeNamespace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_DataTypeNamespace")))
 }
 
-// KCMMetadataFormatDescriptionKey_ConformingDataTypes returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_ConformingDataTypes as an objc.ID.
-func KCMMetadataFormatDescriptionKey_ConformingDataTypes() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_ConformingDataTypes())
+// KCMMetadataFormatDescriptionKey_ConformingDataTypes returns the value of the constant kCMMetadataFormatDescriptionKey_ConformingDataTypes.
+func KCMMetadataFormatDescriptionKey_ConformingDataTypes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_ConformingDataTypes")))
 }
 
-// KCMMetadataFormatDescriptionKey_LanguageTag returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_LanguageTag as an objc.ID.
-func KCMMetadataFormatDescriptionKey_LanguageTag() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_LanguageTag())
+// KCMMetadataFormatDescriptionKey_LanguageTag returns the value of the constant kCMMetadataFormatDescriptionKey_LanguageTag.
+func KCMMetadataFormatDescriptionKey_LanguageTag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_LanguageTag")))
 }
 
-// KCMMetadataFormatDescriptionKey_StructuralDependency returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_StructuralDependency as an objc.ID.
-func KCMMetadataFormatDescriptionKey_StructuralDependency() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_StructuralDependency())
+// KCMMetadataFormatDescriptionKey_StructuralDependency returns the value of the constant kCMMetadataFormatDescriptionKey_StructuralDependency.
+func KCMMetadataFormatDescriptionKey_StructuralDependency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_StructuralDependency")))
 }
 
-// KCMMetadataFormatDescriptionKey_SetupData returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionKey_SetupData as an objc.ID.
-func KCMMetadataFormatDescriptionKey_SetupData() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionKey_SetupData())
+// KCMMetadataFormatDescriptionKey_SetupData returns the value of the constant kCMMetadataFormatDescriptionKey_SetupData.
+func KCMMetadataFormatDescriptionKey_SetupData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionKey_SetupData")))
 }
 
-// KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag returns the value of the CoreFoundation reference constant kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag as an objc.ID.
-func KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag())
+// KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag returns the value of the constant kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag.
+func KCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag")))
 }
 
-// KCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier as an objc.ID.
-func KCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier())
+// KCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier.
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier")))
 }
 
-// KCMMetadataFormatDescriptionMetadataSpecificationKey_DataType returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType as an objc.ID.
-func KCMMetadataFormatDescriptionMetadataSpecificationKey_DataType() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionMetadataSpecificationKey_DataType())
+// KCMMetadataFormatDescriptionMetadataSpecificationKey_DataType returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType.
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_DataType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType")))
 }
 
-// KCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag as an objc.ID.
-func KCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag())
+// KCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag.
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag")))
 }
 
-// KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency as an objc.ID.
-func KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency())
+// KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency.
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency")))
 }
 
-// KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData returns the value of the CoreFoundation reference constant kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData as an objc.ID.
-func KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData())
+// KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData returns the value of the constant kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData.
+func KCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData")))
 }
 
-// @constant	kCMSampleBufferNotification_DataBecameReady @abstract	Posted on a CMSampleBuffer by CMSampleBufferSetDataReady when the buffer becomes ready.
-// KCMSampleBufferNotification_DataBecameReady returns the value of the CoreFoundation reference constant kCMSampleBufferNotification_DataBecameReady as an objc.ID.
-func KCMSampleBufferNotification_DataBecameReady() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferNotification_DataBecameReady())
+// KCMSampleBufferNotification_DataBecameReady returns the value of the constant kCMSampleBufferNotification_DataBecameReady.
+func KCMSampleBufferNotification_DataBecameReady() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferNotification_DataBecameReady")))
 }
 
-// @constant	kCMSampleBufferNotification_DataFailed @abstract	Posted on a CMSampleBuffer by CMSampleBufferSetDataFailed to report that the buffer will never become ready.
-// KCMSampleBufferNotification_DataFailed returns the value of the CoreFoundation reference constant kCMSampleBufferNotification_DataFailed as an objc.ID.
-func KCMSampleBufferNotification_DataFailed() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferNotification_DataFailed())
+// KCMSampleBufferNotification_DataFailed returns the value of the constant kCMSampleBufferNotification_DataFailed.
+func KCMSampleBufferNotification_DataFailed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferNotification_DataFailed")))
 }
 
-// KCMSampleBufferNotificationParameter_OSStatus returns the value of the CoreFoundation reference constant kCMSampleBufferNotificationParameter_OSStatus as an objc.ID.
-func KCMSampleBufferNotificationParameter_OSStatus() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferNotificationParameter_OSStatus())
+// KCMSampleBufferNotificationParameter_OSStatus returns the value of the constant kCMSampleBufferNotificationParameter_OSStatus.
+func KCMSampleBufferNotificationParameter_OSStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferNotificationParameter_OSStatus")))
 }
 
-// @constant	kCMSampleBufferConduitNotification_InhibitOutputUntil @abstract	Posted on a conduit of CMSampleBuffers (eg, a CMBufferQueue) to announce a coming discontinuity and specify a tag value that will be attached to the first CMSampleBuffer following the discontinuity. @discussion The first CMSampleBuffer following the discontinuity should have a kCMSampleBufferAttachmentKey_ResumeOutput attachment with value containing the same CFNumber as this notification's payload's kCMSampleBufferConduitNotificationParameter_ResumeTag. The consumer should discard output data until it receives this CMSampleBuffer. If multiple kCMSampleBufferConduitNotification_InhibitOutputUntil notifications are received, the last one indicates the tag to trigger resuming.
-// KCMSampleBufferConduitNotification_InhibitOutputUntil returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotification_InhibitOutputUntil as an objc.ID.
-func KCMSampleBufferConduitNotification_InhibitOutputUntil() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotification_InhibitOutputUntil())
+// KCMSampleBufferConduitNotification_InhibitOutputUntil returns the value of the constant kCMSampleBufferConduitNotification_InhibitOutputUntil.
+func KCMSampleBufferConduitNotification_InhibitOutputUntil() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotification_InhibitOutputUntil")))
 }
 
-// KCMSampleBufferConduitNotificationParameter_ResumeTag returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotificationParameter_ResumeTag as an objc.ID.
-func KCMSampleBufferConduitNotificationParameter_ResumeTag() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotificationParameter_ResumeTag())
+// KCMSampleBufferConduitNotificationParameter_ResumeTag returns the value of the constant kCMSampleBufferConduitNotificationParameter_ResumeTag.
+func KCMSampleBufferConduitNotificationParameter_ResumeTag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotificationParameter_ResumeTag")))
 }
 
-// @constant	kCMSampleBufferConduitNotification_ResetOutput @abstract	Posted on a conduit of CMSampleBuffers (eg, a CMBufferQueue) to request invalidation of pending output data.
-// KCMSampleBufferConduitNotification_ResetOutput returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotification_ResetOutput as an objc.ID.
-func KCMSampleBufferConduitNotification_ResetOutput() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotification_ResetOutput())
+// KCMSampleBufferConduitNotification_ResetOutput returns the value of the constant kCMSampleBufferConduitNotification_ResetOutput.
+func KCMSampleBufferConduitNotification_ResetOutput() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotification_ResetOutput")))
 }
 
-// @constant	kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged @abstract	Posted on a conduit of video CMSampleBuffers (eg, a CMBufferQueue) to report information about the range of upcoming CMSampleBuffer output presentation timestamps.
-// KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged as an objc.ID.
-func KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged())
+// KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged returns the value of the constant kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged.
+func KCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged")))
 }
 
-// KCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange as an objc.ID.
-func KCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange())
+// KCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange returns the value of the constant kCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange.
+func KCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange")))
 }
 
-// KCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS as an objc.ID.
-func KCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS())
+// KCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS returns the value of the constant kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS.
+func KCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS")))
 }
 
-// KCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS returns the value of the CoreFoundation reference constant kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS as an objc.ID.
-func KCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS())
+// KCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS returns the value of the constant kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS.
+func KCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS")))
 }
 
-// @constant	kCMSampleBufferConsumerNotification_BufferConsumed @abstract	Posted when a CMSampleBuffer that has kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed is consumed. @discussion After an object consumes a CMSampleBuffer that has a kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed attachment, it should post kCMSampleBufferConsumerNotification_BufferConsumed with itself as the notifyingObject and the attachment value as the payload. Such an attachment value must be a CFDictionary but the contents are client-defined. Note that a NULL refcon cannot be attached to a CMSampleBuffer.
-// KCMSampleBufferConsumerNotification_BufferConsumed returns the value of the CoreFoundation reference constant kCMSampleBufferConsumerNotification_BufferConsumed as an objc.ID.
-func KCMSampleBufferConsumerNotification_BufferConsumed() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferConsumerNotification_BufferConsumed())
+// KCMSampleBufferConsumerNotification_BufferConsumed returns the value of the constant kCMSampleBufferConsumerNotification_BufferConsumed.
+func KCMSampleBufferConsumerNotification_BufferConsumed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferConsumerNotification_BufferConsumed")))
 }
 
-// KCMSampleAttachmentKey_NotSync returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_NotSync as an objc.ID.
-func KCMSampleAttachmentKey_NotSync() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_NotSync())
+// KCMSampleAttachmentKey_NotSync returns the value of the constant kCMSampleAttachmentKey_NotSync.
+func KCMSampleAttachmentKey_NotSync() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_NotSync")))
 }
 
-// KCMSampleAttachmentKey_PartialSync returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_PartialSync as an objc.ID.
-func KCMSampleAttachmentKey_PartialSync() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_PartialSync())
+// KCMSampleAttachmentKey_PartialSync returns the value of the constant kCMSampleAttachmentKey_PartialSync.
+func KCMSampleAttachmentKey_PartialSync() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_PartialSync")))
 }
 
-// KCMSampleAttachmentKey_HasRedundantCoding returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_HasRedundantCoding as an objc.ID.
-func KCMSampleAttachmentKey_HasRedundantCoding() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_HasRedundantCoding())
+// KCMSampleAttachmentKey_HasRedundantCoding returns the value of the constant kCMSampleAttachmentKey_HasRedundantCoding.
+func KCMSampleAttachmentKey_HasRedundantCoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HasRedundantCoding")))
 }
 
-// KCMSampleAttachmentKey_IsDependedOnByOthers returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_IsDependedOnByOthers as an objc.ID.
-func KCMSampleAttachmentKey_IsDependedOnByOthers() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_IsDependedOnByOthers())
+// KCMSampleAttachmentKey_IsDependedOnByOthers returns the value of the constant kCMSampleAttachmentKey_IsDependedOnByOthers.
+func KCMSampleAttachmentKey_IsDependedOnByOthers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_IsDependedOnByOthers")))
 }
 
-// KCMSampleAttachmentKey_DependsOnOthers returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_DependsOnOthers as an objc.ID.
-func KCMSampleAttachmentKey_DependsOnOthers() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_DependsOnOthers())
+// KCMSampleAttachmentKey_DependsOnOthers returns the value of the constant kCMSampleAttachmentKey_DependsOnOthers.
+func KCMSampleAttachmentKey_DependsOnOthers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_DependsOnOthers")))
 }
 
-// KCMSampleAttachmentKey_EarlierDisplayTimesAllowed returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_EarlierDisplayTimesAllowed as an objc.ID.
-func KCMSampleAttachmentKey_EarlierDisplayTimesAllowed() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_EarlierDisplayTimesAllowed())
+// KCMSampleAttachmentKey_EarlierDisplayTimesAllowed returns the value of the constant kCMSampleAttachmentKey_EarlierDisplayTimesAllowed.
+func KCMSampleAttachmentKey_EarlierDisplayTimesAllowed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_EarlierDisplayTimesAllowed")))
 }
 
-// KCMSampleAttachmentKey_DisplayImmediately returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_DisplayImmediately as an objc.ID.
-func KCMSampleAttachmentKey_DisplayImmediately() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_DisplayImmediately())
+// KCMSampleAttachmentKey_DisplayImmediately returns the value of the constant kCMSampleAttachmentKey_DisplayImmediately.
+func KCMSampleAttachmentKey_DisplayImmediately() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_DisplayImmediately")))
 }
 
-// KCMSampleAttachmentKey_DoNotDisplay returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_DoNotDisplay as an objc.ID.
-func KCMSampleAttachmentKey_DoNotDisplay() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_DoNotDisplay())
+// KCMSampleAttachmentKey_DoNotDisplay returns the value of the constant kCMSampleAttachmentKey_DoNotDisplay.
+func KCMSampleAttachmentKey_DoNotDisplay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_DoNotDisplay")))
 }
 
-// KCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding as an objc.ID.
-func KCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding())
+// KCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding returns the value of the constant kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding.
+func KCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding")))
 }
 
-// KCMSampleBufferAttachmentKey_DrainAfterDecoding returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_DrainAfterDecoding as an objc.ID.
-func KCMSampleBufferAttachmentKey_DrainAfterDecoding() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_DrainAfterDecoding())
+// KCMSampleBufferAttachmentKey_DrainAfterDecoding returns the value of the constant kCMSampleBufferAttachmentKey_DrainAfterDecoding.
+func KCMSampleBufferAttachmentKey_DrainAfterDecoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DrainAfterDecoding")))
 }
 
-// KCMSampleBufferAttachmentKey_PostNotificationWhenConsumed returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed as an objc.ID.
-func KCMSampleBufferAttachmentKey_PostNotificationWhenConsumed() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_PostNotificationWhenConsumed())
+// KCMSampleBufferAttachmentKey_PostNotificationWhenConsumed returns the value of the constant kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed.
+func KCMSampleBufferAttachmentKey_PostNotificationWhenConsumed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed")))
 }
 
-// KCMSampleBufferAttachmentKey_ResumeOutput returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_ResumeOutput as an objc.ID.
-func KCMSampleBufferAttachmentKey_ResumeOutput() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_ResumeOutput())
+// KCMSampleBufferAttachmentKey_ResumeOutput returns the value of the constant kCMSampleBufferAttachmentKey_ResumeOutput.
+func KCMSampleBufferAttachmentKey_ResumeOutput() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_ResumeOutput")))
 }
 
-// @constant	kCMSampleAttachmentKey_HEVCTemporalLevelInfo @abstract	Indicates a video frame's level within a hierarchical frame dependency structure. @discussion When present, the temporal level attachments among a group of video frames provide information about where inter-frame dependencies may and may not exist. The temporal level attachment, if present, is a positive CFNumber, and indicates that this video frame does not depend on any video frame with a greater temporal level. The attachment may be absent if no such information is available.
-// KCMSampleAttachmentKey_HEVCTemporalLevelInfo returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_HEVCTemporalLevelInfo as an objc.ID.
-func KCMSampleAttachmentKey_HEVCTemporalLevelInfo() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_HEVCTemporalLevelInfo())
+// KCMSampleAttachmentKey_HEVCTemporalLevelInfo returns the value of the constant kCMSampleAttachmentKey_HEVCTemporalLevelInfo.
+func KCMSampleAttachmentKey_HEVCTemporalLevelInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HEVCTemporalLevelInfo")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_TemporalLevel returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_TemporalLevel as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_TemporalLevel() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_TemporalLevel())
+// KCMHEVCTemporalLevelInfoKey_TemporalLevel returns the value of the constant kCMHEVCTemporalLevelInfoKey_TemporalLevel.
+func KCMHEVCTemporalLevelInfoKey_TemporalLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_TemporalLevel")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_ProfileSpace returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_ProfileSpace as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_ProfileSpace() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_ProfileSpace())
+// KCMHEVCTemporalLevelInfoKey_ProfileSpace returns the value of the constant kCMHEVCTemporalLevelInfoKey_ProfileSpace.
+func KCMHEVCTemporalLevelInfoKey_ProfileSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_ProfileSpace")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_TierFlag returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_TierFlag as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_TierFlag() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_TierFlag())
+// KCMHEVCTemporalLevelInfoKey_TierFlag returns the value of the constant kCMHEVCTemporalLevelInfoKey_TierFlag.
+func KCMHEVCTemporalLevelInfoKey_TierFlag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_TierFlag")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_ProfileIndex returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_ProfileIndex as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_ProfileIndex() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_ProfileIndex())
+// KCMHEVCTemporalLevelInfoKey_ProfileIndex returns the value of the constant kCMHEVCTemporalLevelInfoKey_ProfileIndex.
+func KCMHEVCTemporalLevelInfoKey_ProfileIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_ProfileIndex")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags())
+// KCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags returns the value of the constant kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags.
+func KCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags())
+// KCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags returns the value of the constant kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags.
+func KCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags")))
 }
 
-// KCMHEVCTemporalLevelInfoKey_LevelIndex returns the value of the CoreFoundation reference constant kCMHEVCTemporalLevelInfoKey_LevelIndex as an objc.ID.
-func KCMHEVCTemporalLevelInfoKey_LevelIndex() objc.ID {
-	return purego.CFConstant(raw.KCMHEVCTemporalLevelInfoKey_LevelIndex())
+// KCMHEVCTemporalLevelInfoKey_LevelIndex returns the value of the constant kCMHEVCTemporalLevelInfoKey_LevelIndex.
+func KCMHEVCTemporalLevelInfoKey_LevelIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMHEVCTemporalLevelInfoKey_LevelIndex")))
 }
 
-// KCMSampleAttachmentKey_HEVCTemporalSubLayerAccess returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess as an objc.ID.
-func KCMSampleAttachmentKey_HEVCTemporalSubLayerAccess() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_HEVCTemporalSubLayerAccess())
+// KCMSampleAttachmentKey_HEVCTemporalSubLayerAccess returns the value of the constant kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess.
+func KCMSampleAttachmentKey_HEVCTemporalSubLayerAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess")))
 }
 
-// KCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess as an objc.ID.
-func KCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess())
+// KCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess returns the value of the constant kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess.
+func KCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess")))
 }
 
-// KCMSampleAttachmentKey_HEVCSyncSampleNALUnitType returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType as an objc.ID.
-func KCMSampleAttachmentKey_HEVCSyncSampleNALUnitType() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_HEVCSyncSampleNALUnitType())
+// KCMSampleAttachmentKey_HEVCSyncSampleNALUnitType returns the value of the constant kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType.
+func KCMSampleAttachmentKey_HEVCSyncSampleNALUnitType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType")))
 }
 
-// KCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount as an objc.ID.
-func KCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount())
+// KCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount returns the value of the constant kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount.
+func KCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_TransitionID @abstract	Marks a transition from one source of buffers (eg. song) to another @discussion For example, during gapless playback of a list of songs, this attachment marks the first buffer from the next song. If this attachment is on a buffer containing no samples, the first following buffer that contains samples is the buffer that contains the first samples from the next song.  The value of this attachment is a CFTypeRef.  This transition identifier should be unique within a playlist, so each transition in a playlist is uniquely identifiable.  A CFNumberRef counter that increments with each transition is a simple example.
-// KCMSampleBufferAttachmentKey_TransitionID returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_TransitionID as an objc.ID.
-func KCMSampleBufferAttachmentKey_TransitionID() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_TransitionID())
+// KCMSampleBufferAttachmentKey_TransitionID returns the value of the constant kCMSampleBufferAttachmentKey_TransitionID.
+func KCMSampleBufferAttachmentKey_TransitionID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_TransitionID")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_TrimDurationAtStart @abstract	The duration that should be removed at the beginning of the sample buffer, after decoding. @discussion If this attachment is not present, the trim duration is zero (nothing removed). This is a CMTime in CFDictionary format as made by CMTimeCopyAsDictionary; use CMTimeMakeFromDictionary to convert to CMTime. In cases where all the output after decoding the sample buffer is to be discarded (eg, the samples are only being decoded to prime the decoder) the usual convention is to set kCMSampleBufferAttachmentKey_TrimDurationAtStart to the whole duration and not to set a kCMSampleBufferAttachmentKey_TrimDurationAtEnd attachment. Note that setting or removing kCMSampleBufferAttachmentKey_TrimDurationAtStart from a sample buffer will not adjust an explicitly-set OutputPresentationTimeStamp.
-// KCMSampleBufferAttachmentKey_TrimDurationAtStart returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_TrimDurationAtStart as an objc.ID.
-func KCMSampleBufferAttachmentKey_TrimDurationAtStart() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_TrimDurationAtStart())
+// KCMSampleBufferAttachmentKey_TrimDurationAtStart returns the value of the constant kCMSampleBufferAttachmentKey_TrimDurationAtStart.
+func KCMSampleBufferAttachmentKey_TrimDurationAtStart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_TrimDurationAtStart")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_TrimDurationAtEnd @abstract	The duration that should be removed at the end of the sample buffer, after decoding. @discussion If this attachment is not present, the trim duration is zero (nothing removed). This is a CMTime in CFDictionary format as made by CMTimeCopyAsDictionary; use CMTimeMakeFromDictionary to convert to CMTime.
-// KCMSampleBufferAttachmentKey_TrimDurationAtEnd returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_TrimDurationAtEnd as an objc.ID.
-func KCMSampleBufferAttachmentKey_TrimDurationAtEnd() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_TrimDurationAtEnd())
+// KCMSampleBufferAttachmentKey_TrimDurationAtEnd returns the value of the constant kCMSampleBufferAttachmentKey_TrimDurationAtEnd.
+func KCMSampleBufferAttachmentKey_TrimDurationAtEnd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_TrimDurationAtEnd")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_SpeedMultiplier @abstract	The factor by which the sample buffer's presentation should be accelerated (eg, in a scaled edit). @discussion For normal playback the speed multiplier would be 1.0 (which is used if this attachment is not present); for double-speed playback the speed multiplier would be 2.0, which would halve the output duration. Speed-multiplication factors take effect after trimming; see CMSampleBufferGetOutputDuration. Note that this attachment principally provides information about the duration-stretching effect: by default, it should be implemented by rate conversion, but other attachments may specify richer stretching operations -- for example, scaling without pitch shift, or pitch shift without changing duration. Sequences of speed-multiplied sample buffers should have explicit OutputPresentationTimeStamp attachments to clarify when each should be output.
-// KCMSampleBufferAttachmentKey_SpeedMultiplier returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_SpeedMultiplier as an objc.ID.
-func KCMSampleBufferAttachmentKey_SpeedMultiplier() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_SpeedMultiplier())
+// KCMSampleBufferAttachmentKey_SpeedMultiplier returns the value of the constant kCMSampleBufferAttachmentKey_SpeedMultiplier.
+func KCMSampleBufferAttachmentKey_SpeedMultiplier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_SpeedMultiplier")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_Reverse @abstract	Indicates that the decoded contents of the sample buffer should be reversed. If this attachment is not present, the sample buffer should be played forwards as usual. Reversal occurs after trimming and speed multipliers.
-// KCMSampleBufferAttachmentKey_Reverse returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_Reverse as an objc.ID.
-func KCMSampleBufferAttachmentKey_Reverse() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_Reverse())
+// KCMSampleBufferAttachmentKey_Reverse returns the value of the constant kCMSampleBufferAttachmentKey_Reverse.
+func KCMSampleBufferAttachmentKey_Reverse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_Reverse")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence @abstract	Fill the difference between discontiguous sample buffers with silence. @discussion If a sample buffer enters a buffer queue and the presentation time stamp between the previous buffer and the buffer with this attachment are discontiguous, handle the discontinuity by generating silence for the time difference.
-// KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence as an objc.ID.
-func KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence())
+// KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence returns the value of the constant kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence.
+func KCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_EmptyMedia @abstract	Marks an intentionally empty interval in the sequence of samples. @discussion The sample buffer's output presentation timestamp indicates when the empty interval begins. Marker sample buffers with this attachment are used to announce the arrival of empty edits.
-// KCMSampleBufferAttachmentKey_EmptyMedia returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_EmptyMedia as an objc.ID.
-func KCMSampleBufferAttachmentKey_EmptyMedia() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_EmptyMedia())
+// KCMSampleBufferAttachmentKey_EmptyMedia returns the value of the constant kCMSampleBufferAttachmentKey_EmptyMedia.
+func KCMSampleBufferAttachmentKey_EmptyMedia() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_EmptyMedia")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_PermanentEmptyMedia @abstract	Marks the end of the sequence of samples. @discussion Marker sample buffers with this attachment in addition to kCMSampleBufferAttachmentKey_EmptyMedia are used to indicate that no further samples are expected.
-// KCMSampleBufferAttachmentKey_PermanentEmptyMedia returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_PermanentEmptyMedia as an objc.ID.
-func KCMSampleBufferAttachmentKey_PermanentEmptyMedia() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_PermanentEmptyMedia())
+// KCMSampleBufferAttachmentKey_PermanentEmptyMedia returns the value of the constant kCMSampleBufferAttachmentKey_PermanentEmptyMedia.
+func KCMSampleBufferAttachmentKey_PermanentEmptyMedia() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_PermanentEmptyMedia")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately @abstract	Tells that the empty marker should be dequeued immediately regardless of its timestamp. @discussion Marker sample buffers with this attachment in addition to kCMSampleBufferAttachmentKey_EmptyMedia are used to tell that the empty sample buffer should be dequeued immediately regardless of its timestamp. This attachment should only be used with sample buffers with the kCMSampleBufferAttachmentKey_EmptyMedia attachment.
-// KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately as an objc.ID.
-func KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately())
+// KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately returns the value of the constant kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately.
+func KCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration @abstract	Indicates that sample buffer's decode timestamp may be used to define the previous sample buffer's duration. @discussion Marker sample buffers with this attachment may be used in situations where sample buffers are transmitted before their duration is known. In such situations, normally the recipient may use each sample buffer's timestamp to calculate the duration of the previous sample buffer. The marker sample buffer with this attachment is sent to provide the timestamp for calculating the final sample buffer's duration.
-// KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration as an objc.ID.
-func KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration())
+// KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration returns the value of the constant kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration.
+func KCMSampleBufferAttachmentKey_EndsPreviousSampleDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_SampleReferenceURL @abstract	Indicates the URL where the sample data is. @discussion This key is only used for CMSampleBuffers representing sample references. Such CMSampleBuffers: - have dataBuffer == NULL and imageBuffer == NULL - have dataReady == true and no makeDataReadyCallback - have a non-NULL formatDescription - have numSamples > 0 - have numSampleTimingEntries > 0 and numSampleSizeEntries > 0
-// KCMSampleBufferAttachmentKey_SampleReferenceURL returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_SampleReferenceURL as an objc.ID.
-func KCMSampleBufferAttachmentKey_SampleReferenceURL() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_SampleReferenceURL())
+// KCMSampleBufferAttachmentKey_SampleReferenceURL returns the value of the constant kCMSampleBufferAttachmentKey_SampleReferenceURL.
+func KCMSampleBufferAttachmentKey_SampleReferenceURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_SampleReferenceURL")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_SampleReferenceByteOffset @abstract	Indicates the byte offset at which the sample data begins. @discussion This key is only used for CMSampleBuffers representing sample references. Such CMSampleBuffers: - have dataBuffer == NULL and imageBuffer == NULL - have dataReady == true and no makeDataReadyCallback - have a non-NULL formatDescription - have numSamples > 0 - have numSampleTimingEntries > 0 and numSampleSizeEntries > 0
-// KCMSampleBufferAttachmentKey_SampleReferenceByteOffset returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_SampleReferenceByteOffset as an objc.ID.
-func KCMSampleBufferAttachmentKey_SampleReferenceByteOffset() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_SampleReferenceByteOffset())
+// KCMSampleBufferAttachmentKey_SampleReferenceByteOffset returns the value of the constant kCMSampleBufferAttachmentKey_SampleReferenceByteOffset.
+func KCMSampleBufferAttachmentKey_SampleReferenceByteOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_SampleReferenceByteOffset")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_GradualDecoderRefresh @abstract	Indicates the decoder refresh count. @discussion Sample buffers with this attachment may be used to identify the audio decoder refresh count.
-// KCMSampleBufferAttachmentKey_GradualDecoderRefresh returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_GradualDecoderRefresh as an objc.ID.
-func KCMSampleBufferAttachmentKey_GradualDecoderRefresh() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_GradualDecoderRefresh())
+// KCMSampleBufferAttachmentKey_GradualDecoderRefresh returns the value of the constant kCMSampleBufferAttachmentKey_GradualDecoderRefresh.
+func KCMSampleBufferAttachmentKey_GradualDecoderRefresh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_GradualDecoderRefresh")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_DroppedFrameReason @abstract	Indicates the reason the current video frame was dropped. @discussion Sample buffers with this attachment contain no image or data buffer.  They mark a dropped video frame.  This attachment identifies the reason for the droppage.
-// KCMSampleBufferAttachmentKey_DroppedFrameReason returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_DroppedFrameReason as an objc.ID.
-func KCMSampleBufferAttachmentKey_DroppedFrameReason() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_DroppedFrameReason())
+// KCMSampleBufferAttachmentKey_DroppedFrameReason returns the value of the constant kCMSampleBufferAttachmentKey_DroppedFrameReason.
+func KCMSampleBufferAttachmentKey_DroppedFrameReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DroppedFrameReason")))
 }
 
-// @constant	kCMSampleBufferDroppedFrameReason_FrameWasLate @abstract	The frame was dropped because it was late @discussion The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if a video capture client has indicated that late video frames should be dropped and the current frame is late.  This condition is typically caused by the client's processing taking too long.
-// KCMSampleBufferDroppedFrameReason_FrameWasLate returns the value of the CoreFoundation reference constant kCMSampleBufferDroppedFrameReason_FrameWasLate as an objc.ID.
-func KCMSampleBufferDroppedFrameReason_FrameWasLate() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferDroppedFrameReason_FrameWasLate())
+// KCMSampleBufferDroppedFrameReason_FrameWasLate returns the value of the constant kCMSampleBufferDroppedFrameReason_FrameWasLate.
+func KCMSampleBufferDroppedFrameReason_FrameWasLate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReason_FrameWasLate")))
 }
 
-// @constant	kCMSampleBufferDroppedFrameReason_OutOfBuffers @abstract	The frame was dropped because the module providing frames is out of buffers @discussion The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if the module providing sample buffers has run out of source buffers.  This condition is typically caused by the client holding onto buffers for too long and can be alleviated by returning buffers to the provider.
-// KCMSampleBufferDroppedFrameReason_OutOfBuffers returns the value of the CoreFoundation reference constant kCMSampleBufferDroppedFrameReason_OutOfBuffers as an objc.ID.
-func KCMSampleBufferDroppedFrameReason_OutOfBuffers() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferDroppedFrameReason_OutOfBuffers())
+// KCMSampleBufferDroppedFrameReason_OutOfBuffers returns the value of the constant kCMSampleBufferDroppedFrameReason_OutOfBuffers.
+func KCMSampleBufferDroppedFrameReason_OutOfBuffers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReason_OutOfBuffers")))
 }
 
-// @constant	kCMSampleBufferDroppedFrameReason_Discontinuity @abstract	An unknown number of frames were dropped @discussion The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if the module providing sample buffers has experienced a discontinuity, and an unknown number of frames have been lost.  This condition is typically caused by the system being too busy.
-// KCMSampleBufferDroppedFrameReason_Discontinuity returns the value of the CoreFoundation reference constant kCMSampleBufferDroppedFrameReason_Discontinuity as an objc.ID.
-func KCMSampleBufferDroppedFrameReason_Discontinuity() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferDroppedFrameReason_Discontinuity())
+// KCMSampleBufferDroppedFrameReason_Discontinuity returns the value of the constant kCMSampleBufferDroppedFrameReason_Discontinuity.
+func KCMSampleBufferDroppedFrameReason_Discontinuity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReason_Discontinuity")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo @abstract	Indicates additional information regarding the dropped video frame. @discussion Sample buffers with this attachment contain no image or data buffer.  They mark a dropped video frame. If present, this attachment provides additional information about the kCMSampleBufferAttachmentKey_DroppedFrameReason.
-// KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo as an objc.ID.
-func KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo())
+// KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo returns the value of the constant kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo.
+func KCMSampleBufferAttachmentKey_DroppedFrameReasonInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo")))
 }
 
-// @constant	kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch @abstract	A discontinuity was caused by a camera mode switch. @discussion The value of kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo if the module providing sample buffers has experienced a discontinuity due to a camera mode switch. Short discontinuities of this type can occur when the session is configured for still image capture on some devices.
-// KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch returns the value of the CoreFoundation reference constant kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch as an objc.ID.
-func KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch())
+// KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch returns the value of the constant kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch.
+func KCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo @abstract	Indicates information about the lens stabilization applied to the current still image buffer. @discussion Sample buffers that have been captured with a lens stabilization module may have an attachment of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo which has information about the stabilization status during the capture.  This key will not be present in CMSampleBuffers coming from cameras without a lens stabilization module.
-// KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo as an objc.ID.
-func KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo())
+// KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo returns the value of the constant kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo.
+func KCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo")))
 }
 
-// @constant	kCMSampleBufferLensStabilizationInfo_Active @abstract	The lens stabilization module was active for the duration this buffer.
-// KCMSampleBufferLensStabilizationInfo_Active returns the value of the CoreFoundation reference constant kCMSampleBufferLensStabilizationInfo_Active as an objc.ID.
-func KCMSampleBufferLensStabilizationInfo_Active() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferLensStabilizationInfo_Active())
+// KCMSampleBufferLensStabilizationInfo_Active returns the value of the constant kCMSampleBufferLensStabilizationInfo_Active.
+func KCMSampleBufferLensStabilizationInfo_Active() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_Active")))
 }
 
-// @constant	kCMSampleBufferLensStabilizationInfo_OutOfRange @abstract	The motion of the device or duration of the capture was outside of what the stabilization mechanism could support. @discussion The value of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo if the module stabilizing the lens was unable to compensate for the movement.
-// KCMSampleBufferLensStabilizationInfo_OutOfRange returns the value of the CoreFoundation reference constant kCMSampleBufferLensStabilizationInfo_OutOfRange as an objc.ID.
-func KCMSampleBufferLensStabilizationInfo_OutOfRange() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferLensStabilizationInfo_OutOfRange())
+// KCMSampleBufferLensStabilizationInfo_OutOfRange returns the value of the constant kCMSampleBufferLensStabilizationInfo_OutOfRange.
+func KCMSampleBufferLensStabilizationInfo_OutOfRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_OutOfRange")))
 }
 
-// @constant	kCMSampleBufferLensStabilizationInfo_Unavailable @abstract	The lens stabilization module was unavailable for use. @discussion The value of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo if the lens stabilization module is unavailable to compensate for the motion of the device.  The module may be available at a later time.
-// KCMSampleBufferLensStabilizationInfo_Unavailable returns the value of the CoreFoundation reference constant kCMSampleBufferLensStabilizationInfo_Unavailable as an objc.ID.
-func KCMSampleBufferLensStabilizationInfo_Unavailable() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferLensStabilizationInfo_Unavailable())
+// KCMSampleBufferLensStabilizationInfo_Unavailable returns the value of the constant kCMSampleBufferLensStabilizationInfo_Unavailable.
+func KCMSampleBufferLensStabilizationInfo_Unavailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_Unavailable")))
 }
 
-// @constant	kCMSampleBufferLensStabilizationInfo_Off @abstract	The lens stabilization module was not used during this capture. @discussion The value of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo if the lens stabilization module was not used for this capture.
-// KCMSampleBufferLensStabilizationInfo_Off returns the value of the CoreFoundation reference constant kCMSampleBufferLensStabilizationInfo_Off as an objc.ID.
-func KCMSampleBufferLensStabilizationInfo_Off() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferLensStabilizationInfo_Off())
+// KCMSampleBufferLensStabilizationInfo_Off returns the value of the constant kCMSampleBufferLensStabilizationInfo_Off.
+func KCMSampleBufferLensStabilizationInfo_Off() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferLensStabilizationInfo_Off")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix @abstract	Indicates the 3x3 camera intrinsic matrix applied to the current sample buffer. @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. It has the following contents: fx	0	ox 0	fy	oy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. ox and oy are the coordinates of the principal point. The origin is the upper left of the frame.
-// KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix as an objc.ID.
-func KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix())
+// KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix returns the value of the constant kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix.
+func KCMSampleBufferAttachmentKey_CameraIntrinsicMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix")))
 }
 
-// @constant	kCMSampleBufferAttachmentKey_ForceKeyFrame @abstract	Indicates that the current or next video sample buffer should be forced to be encoded as a key frame. @discussion A value of kCFBooleanTrue for kCMSampleBufferAttachmentKey_ForceKeyFrame indicates that the current or next video sample buffer processed in the stream should be forced to be encoded as a key frame. If this attachment is present and kCFBooleanTrue on a sample buffer with a video frame, that video frame will be forced to become a key frame.  If the sample buffer for which this is present and kCFBooleanTrue does not have a valid video frame, the next sample buffer processed that contains a valid video frame will be encoded as a key frame. Usual care should be taken when setting attachments on sample buffers whose orgins and destinations are ambiguous.  For example, CMSetAttachment() is not thread-safe, and CMSampleBuffers may be used in multiple sample buffer streams in a given system.  This can lead to crashes during concurrent access and/or unexpected behavior on alternate sample buffer streams.  Therefore, unless the orgin and destination of a sample buffer is known, the general recommended practice is to synthesize an empty sample buffer with this attachment alone and insert it into the sample buffer stream ahead of the concrete sample buffer rather than setting this attachment on the concrete sample buffer itself.
-// KCMSampleBufferAttachmentKey_ForceKeyFrame returns the value of the CoreFoundation reference constant kCMSampleBufferAttachmentKey_ForceKeyFrame as an objc.ID.
-func KCMSampleBufferAttachmentKey_ForceKeyFrame() objc.ID {
-	return purego.CFConstant(raw.KCMSampleBufferAttachmentKey_ForceKeyFrame())
+// KCMSampleBufferAttachmentKey_ForceKeyFrame returns the value of the constant kCMSampleBufferAttachmentKey_ForceKeyFrame.
+func KCMSampleBufferAttachmentKey_ForceKeyFrame() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleBufferAttachmentKey_ForceKeyFrame")))
 }
 
-// @constant   kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData @abstract   Describes the ranges of protected and unprotected data within a protected CMSampleBuffer @discussion The attachment is CFData containing one or more "BytesOfClearData"/"BytesOfProtectedData" pairs as appears in the 'senc' box (see ISO/IEC 23001-7 section 7.2.2). The "BytesOfClearData” and the "BytesOfProtectedData” fields are 32-bit integers. Both are native endian in the CFData. This attachment is not present if the CMSampleBuffer contains unprotected content.
-// KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData as an objc.ID.
-func KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData())
+// KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData returns the value of the constant kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData.
+func KCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData")))
 }
 
-// @constant   kCMSampleAttachmentKey_HDR10PlusPerFrameData @abstract   HDR10+ per frame metadata @discussion The attachment is CFData containing HDR10+ metadata within an User Data Registered ITU-T T-35 SEI message (see ISO/IEC 23008-2-2020 section D.3.6) as little endian in the CFData. This attachment will override any HDR10+ metadata stored within the compressed data. The data shall start with the field itu_t_t35_country_code with the value 0xb5.
-// KCMSampleAttachmentKey_HDR10PlusPerFrameData returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_HDR10PlusPerFrameData as an objc.ID.
-func KCMSampleAttachmentKey_HDR10PlusPerFrameData() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_HDR10PlusPerFrameData())
+// KCMSampleAttachmentKey_HDR10PlusPerFrameData returns the value of the constant kCMSampleAttachmentKey_HDR10PlusPerFrameData.
+func KCMSampleAttachmentKey_HDR10PlusPerFrameData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_HDR10PlusPerFrameData")))
 }
 
-// @constant	kCMSampleAttachmentKey_PostDecodeProcessingMetadata @abstract	Represents the sequence and frame level metadata for post decode processing. @discussion This attachment is used to pass sequence and frame level metadata from a format reader to a decoder or RAW processor. It should be a CFDictionary that conforms to CFPropertyList.
-// KCMSampleAttachmentKey_PostDecodeProcessingMetadata returns the value of the CoreFoundation reference constant kCMSampleAttachmentKey_PostDecodeProcessingMetadata as an objc.ID.
-func KCMSampleAttachmentKey_PostDecodeProcessingMetadata() objc.ID {
-	return purego.CFConstant(raw.KCMSampleAttachmentKey_PostDecodeProcessingMetadata())
+// KCMSampleAttachmentKey_PostDecodeProcessingMetadata returns the value of the constant kCMSampleAttachmentKey_PostDecodeProcessingMetadata.
+func KCMSampleAttachmentKey_PostDecodeProcessingMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSampleAttachmentKey_PostDecodeProcessingMetadata")))
 }
 
-// @constant kCMTagValueKey @discussion CFDictionary key for value field of a CMTag.
-// KCMTagValueKey returns the value of the CoreFoundation reference constant kCMTagValueKey as an objc.ID.
-func KCMTagValueKey() objc.ID { return purego.CFConstant(raw.KCMTagValueKey()) }
+// KCMTagValueKey returns the value of the constant kCMTagValueKey.
+func KCMTagValueKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTagValueKey"))) }
 
-// @constant kCMTagCategoryKey @discussion CFDictionary key for category field of a CMTag.
-// KCMTagCategoryKey returns the value of the CoreFoundation reference constant kCMTagCategoryKey as an objc.ID.
-func KCMTagCategoryKey() objc.ID { return purego.CFConstant(raw.KCMTagCategoryKey()) }
+// KCMTagCategoryKey returns the value of the constant kCMTagCategoryKey.
+func KCMTagCategoryKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTagCategoryKey"))) }
 
-// @constant kCMTagDataTypeKey @discussion CFDictionary key for dataType field of a CMTag.
-// KCMTagDataTypeKey returns the value of the CoreFoundation reference constant kCMTagDataTypeKey as an objc.ID.
-func KCMTagDataTypeKey() objc.ID { return purego.CFConstant(raw.KCMTagDataTypeKey()) }
+// KCMTagDataTypeKey returns the value of the constant kCMTagDataTypeKey.
+func KCMTagDataTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCMTagDataTypeKey"))) }
 
-// @constant kCMTagCollectionTagsArrayKey @discussion CFDictionary key for a CFArray of serialized CMTag dictionaries of a CMTagCollection as used with CMTagCollectionCopyAsDictionary
-// KCMTagCollectionTagsArrayKey returns the value of the CoreFoundation reference constant kCMTagCollectionTagsArrayKey as an objc.ID.
-func KCMTagCollectionTagsArrayKey() objc.ID {
-	return purego.CFConstant(raw.KCMTagCollectionTagsArrayKey())
+// KCMTagCollectionTagsArrayKey returns the value of the constant kCMTagCollectionTagsArrayKey.
+func KCMTagCollectionTagsArrayKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTagCollectionTagsArrayKey")))
 }
 
-// @const		kCMMemoryPoolOption_AgeOutPeriod @abstract	Specifies how long memory should be allowed to hang out in the pool before being deallocated. @discussion	Pass this in the options dictionary to CMMemoryPoolCreate.
-// KCMMemoryPoolOption_AgeOutPeriod returns the value of the CoreFoundation reference constant kCMMemoryPoolOption_AgeOutPeriod as an objc.ID.
-func KCMMemoryPoolOption_AgeOutPeriod() objc.ID {
-	return purego.CFConstant(raw.KCMMemoryPoolOption_AgeOutPeriod())
+// KCMMemoryPoolOption_AgeOutPeriod returns the value of the constant kCMMemoryPoolOption_AgeOutPeriod.
+func KCMMemoryPoolOption_AgeOutPeriod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMemoryPoolOption_AgeOutPeriod")))
 }
 
-// KCMTimebaseNotification_EffectiveRateChanged returns the value of the CoreFoundation reference constant kCMTimebaseNotification_EffectiveRateChanged as an objc.ID.
-func KCMTimebaseNotification_EffectiveRateChanged() objc.ID {
-	return purego.CFConstant(raw.KCMTimebaseNotification_EffectiveRateChanged())
+// KCMTimebaseNotification_EffectiveRateChanged returns the value of the constant kCMTimebaseNotification_EffectiveRateChanged.
+func KCMTimebaseNotification_EffectiveRateChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimebaseNotification_EffectiveRateChanged")))
 }
 
-// KCMTimebaseNotification_TimeJumped returns the value of the CoreFoundation reference constant kCMTimebaseNotification_TimeJumped as an objc.ID.
-func KCMTimebaseNotification_TimeJumped() objc.ID {
-	return purego.CFConstant(raw.KCMTimebaseNotification_TimeJumped())
+// KCMTimebaseNotification_TimeJumped returns the value of the constant kCMTimebaseNotification_TimeJumped.
+func KCMTimebaseNotification_TimeJumped() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimebaseNotification_TimeJumped")))
 }
 
-// KCMTimebaseNotificationKey_EventTime returns the value of the CoreFoundation reference constant kCMTimebaseNotificationKey_EventTime as an objc.ID.
-func KCMTimebaseNotificationKey_EventTime() objc.ID {
-	return purego.CFConstant(raw.KCMTimebaseNotificationKey_EventTime())
+// KCMTimebaseNotificationKey_EventTime returns the value of the constant kCMTimebaseNotificationKey_EventTime.
+func KCMTimebaseNotificationKey_EventTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTimebaseNotificationKey_EventTime")))
 }
 
-// @const      kCMTextMarkupAttribute_ForegroundColorARGB @abstract   The foreground color for text. @discussion Value must be a CFArray of 4 CFNumbers representing alpha, red, green, and blue fields with values between 0.0 and 1.0. The red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to 1.0 for 100% opaque.
-// KCMTextMarkupAttribute_ForegroundColorARGB returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_ForegroundColorARGB as an objc.ID.
-func KCMTextMarkupAttribute_ForegroundColorARGB() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_ForegroundColorARGB())
+// KCMTextMarkupAttribute_ForegroundColorARGB returns the value of the constant kCMTextMarkupAttribute_ForegroundColorARGB.
+func KCMTextMarkupAttribute_ForegroundColorARGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_ForegroundColorARGB")))
 }
 
-// @const      kCMTextMarkupAttribute_BackgroundColorARGB @abstract   The background color for the shape holding the text. @discussion Value must be a CFArray of 4 CFNumbers representing alpha, red, green, and blue fields with values between 0.0 and 1.0. The red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to 1.0 for 100% opaque. The color applies to the geometry (e.g., a box) containing the text. The container's background color may have an alpha of 0 so it is not displayed even though the text is displayed. The color behind individual characters is optionally controllable with the kCMTextMarkupAttribute_CharacterBackgroundColorARGB attribute. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
-// KCMTextMarkupAttribute_BackgroundColorARGB returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_BackgroundColorARGB as an objc.ID.
-func KCMTextMarkupAttribute_BackgroundColorARGB() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_BackgroundColorARGB())
+// KCMTextMarkupAttribute_BackgroundColorARGB returns the value of the constant kCMTextMarkupAttribute_BackgroundColorARGB.
+func KCMTextMarkupAttribute_BackgroundColorARGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_BackgroundColorARGB")))
 }
 
-// @const      kCMTextMarkupAttribute_CharacterBackgroundColorARGB @abstract   The background color behind individual text characters. @discussion Value must be a CFArray of 4 CFNumbers representing alpha, red, green, and blue fields with values between 0.0 and 1.0. The red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to 1.0 for 100% opaque.
-// KCMTextMarkupAttribute_CharacterBackgroundColorARGB returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_CharacterBackgroundColorARGB as an objc.ID.
-func KCMTextMarkupAttribute_CharacterBackgroundColorARGB() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_CharacterBackgroundColorARGB())
+// KCMTextMarkupAttribute_CharacterBackgroundColorARGB returns the value of the constant kCMTextMarkupAttribute_CharacterBackgroundColorARGB.
+func KCMTextMarkupAttribute_CharacterBackgroundColorARGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_CharacterBackgroundColorARGB")))
 }
 
-// @const      kCMTextMarkupAttribute_BoldStyle @abstract   Allows the setting of a bold style to be applied. @discussion Value must be a CFBoolean. The default is kCFBooleanFalse. If this attribute is kCFBooleanTrue, the text will be drawn with a bold style. Other styles such as italic may or may not be used as well.
-// KCMTextMarkupAttribute_BoldStyle returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_BoldStyle as an objc.ID.
-func KCMTextMarkupAttribute_BoldStyle() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_BoldStyle())
+// KCMTextMarkupAttribute_BoldStyle returns the value of the constant kCMTextMarkupAttribute_BoldStyle.
+func KCMTextMarkupAttribute_BoldStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_BoldStyle")))
 }
 
-// @const      kCMTextMarkupAttribute_ItalicStyle @abstract   Allows the setting of an italic style to be applied. @discussion Value must be a CFBoolean. The default is kCFBooleanFalse. If this attribute is kCFBooleanTrue, the text will be rendered with an italic style. Other styles such as bold may or may not be used as well.
-// KCMTextMarkupAttribute_ItalicStyle returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_ItalicStyle as an objc.ID.
-func KCMTextMarkupAttribute_ItalicStyle() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_ItalicStyle())
+// KCMTextMarkupAttribute_ItalicStyle returns the value of the constant kCMTextMarkupAttribute_ItalicStyle.
+func KCMTextMarkupAttribute_ItalicStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_ItalicStyle")))
 }
 
-// @const      kCMTextMarkupAttribute_UnderlineStyle @abstract   Allows the setting of an underline to be applied at render time. @discussion Value must be a CFBoolean. The default is kCFBooleanFalse. If this attribute is kCFBooleanTrue, the text will be rendered with an underline. Other styles such as bold may or may not be used as well.
-// KCMTextMarkupAttribute_UnderlineStyle returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_UnderlineStyle as an objc.ID.
-func KCMTextMarkupAttribute_UnderlineStyle() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_UnderlineStyle())
+// KCMTextMarkupAttribute_UnderlineStyle returns the value of the constant kCMTextMarkupAttribute_UnderlineStyle.
+func KCMTextMarkupAttribute_UnderlineStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_UnderlineStyle")))
 }
 
-// @const      kCMTextMarkupAttribute_FontFamilyName @abstract   The name of the font. @discussion Value must be a CFString holding the family name of an installed font (e.g., "Helvetica") that is used to render and/or measure text. When vended by legible output, an attributed string will have at most one of kCMTextMarkupAttribute_FontFamilyName or kCMTextMarkupAttribute_GenericFontFamilyName associated with each character.
-// KCMTextMarkupAttribute_FontFamilyName returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_FontFamilyName as an objc.ID.
-func KCMTextMarkupAttribute_FontFamilyName() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_FontFamilyName())
+// KCMTextMarkupAttribute_FontFamilyName returns the value of the constant kCMTextMarkupAttribute_FontFamilyName.
+func KCMTextMarkupAttribute_FontFamilyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_FontFamilyName")))
 }
 
-// @const      kCMTextMarkupAttribute_FontFamilyNameList @abstract   The array of font name(s) and if that name is a generic or a platform name. @discussion Value must be a CFArray holding CFDictionaries that are used to render and/or measure text. Each dictionary entry has a font family name and a font kind value. The font kind value can be either 0 for generic font family or 1 for platform font family corresponding to the font family name. The CFArray value can hold multiple font names as a fallback where the author prefers specific fonts. If the renderer does not support the first font entry, it tries the following. For example, the array includes InexistantFont and Times New Roman font names, it is expected the renderer to select the "Times New Roman" font for drawing caption.
-// KCMTextMarkupAttribute_FontFamilyNameList returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_FontFamilyNameList as an objc.ID.
-func KCMTextMarkupAttribute_FontFamilyNameList() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_FontFamilyNameList())
+// KCMTextMarkupAttribute_FontFamilyNameList returns the value of the constant kCMTextMarkupAttribute_FontFamilyNameList.
+func KCMTextMarkupAttribute_FontFamilyNameList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_FontFamilyNameList")))
 }
 
-// @const      kCMTextMarkupAttribute_GenericFontFamilyName @abstract   The attribute holding a generic font family identifier. @discussion	Value must be a CFString holding a generic font family name that is one of the kCMTextMarkupGenericFontName_* constants. Generic fonts must be mapped to the family name of an installed font (e.g., kCMTextMarkupGenericFontName_SansSerif -> "Helvetica") before rendering and/or measuring text. When vended by legible output, an attributed string will have at most one of kCMTextMarkupAttribute_FontFamilyName or kCMTextMarkupAttribute_GenericFontFamilyName associated with each character. Overview of Generic Font Family Names ===================================== Some media formats allow the specification of font family names to be used to style text they carry. Sometimes, an external specification (e.g., CSS) may be used to style the text carried by the media format. In either case, the specification may be concrete, indicating an installed platform font (e.g., "Times New Roman", Helvetica). It may be abstract, indicating a category of font to use (e.g., serif, sans-serif). This abstract designation is often termed a "generic font family". CSS for example allows a 'font-family' property specification such as this: font-family: Helvetica, sans-serif; This uses both the concrete family name "Helvetica" and the generic family name "sans-serif". Generic font families may be common across media formats (e.g., both CSS and 3GPP timed text allow "sans-serif" and "serif"). Other formats may have generic font identifiers that do not align exactly (e.g., TTML allows "monospaceSerif and "monospaceSansSerif" in addition to "monospace"). Some formats might not carry names but have numeric values mapping to a generic font identifier. Simply put, different formats use different ways to express their generic fonts. The use of generic font families is also important for media accessibility. The Media Accessibility framework can map eight categories of abstract fonts to an installed font. Users may choose to override each of these categories to a different installed font. This remapping should work if the content or external styling indicates a generic font. It should not however try to remap a concrete font like "Helvetica". Consequently, it is important to distinguish between the generic and concrete fonts expressed by the author. To accommodate what is expressible in media formats and to support media accessibility overrides, generic font families can be specified with the kCMTextMarkupAttribute_GenericFontFamilyName attribute which carries the identifier for one of the various generic font specification forms supported across media formats. These generic font identifiers are the kCMTextMarkupGenericFontName_* prefixed constants also defined here. New identifers may be added in the future. Concrete fonts are specified using the kCMTextMarkupAttribute_FontFamilyName attribute also defined in this header.
-// KCMTextMarkupAttribute_GenericFontFamilyName returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_GenericFontFamilyName as an objc.ID.
-func KCMTextMarkupAttribute_GenericFontFamilyName() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_GenericFontFamilyName())
+// KCMTextMarkupAttribute_GenericFontFamilyName returns the value of the constant kCMTextMarkupAttribute_GenericFontFamilyName.
+func KCMTextMarkupAttribute_GenericFontFamilyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_GenericFontFamilyName")))
 }
 
-// @abstract   Values for kCMTextMarkupAttribute_GenericFontFamilyName. @const      kCMTextMarkupGenericFontName_Default The generic font name indicating the default font. The default font may also be chosen if no font family is specified (i.e., no kCMTextMarkupAttribute_FontFamilyName or kCMTextMarkupAttribute_GenericFontFamilyName is specified). @const      kCMTextMarkupGenericFontName_Serif The generic font name indicating a font with serifs. The font may be proportional or monospaced. E.g., Times New Roman @const      kCMTextMarkupGenericFontName_SansSerif The generic font name indicating a font without serifs. The font may be proportional or monospaced. E.g., Helvetica @const      kCMTextMarkupGenericFontName_Monospace The generic font name indicating a monospaced font, with or without serifs. E.g., Courier @const      kCMTextMarkupGenericFontName_ProportionalSerif The generic font name indicating a proportional font with serifs. @const      kCMTextMarkupGenericFontName_ProportionalSansSerif The generic font name indicating a proportional font without serifs. @const      kCMTextMarkupGenericFontName_MonospaceSerif The generic font name indicating a monospaced font with serifs. @const      kCMTextMarkupGenericFontName_MonospaceSansSerif The generic font name indicating a monospaced font without serifs. @const      kCMTextMarkupGenericFontName_Casual The generic font name indicating a "casual" font. E.g., Dom or Impress @const      kCMTextMarkupGenericFontName_Cursive The generic font name indicating a cursive font. E.g., Coronet or Marigold @const      kCMTextMarkupGenericFontName_Fantasy The generic font name indicating a "fantasy" font. @const      kCMTextMarkupGenericFontName_SmallCapital The generic font name indicating a font with lowercase letters set as small capitals. E.g., Engravers Gothic
-// KCMTextMarkupGenericFontName_Default returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_Default as an objc.ID.
-func KCMTextMarkupGenericFontName_Default() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_Default())
+// KCMTextMarkupGenericFontName_Default returns the value of the constant kCMTextMarkupGenericFontName_Default.
+func KCMTextMarkupGenericFontName_Default() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Default")))
 }
 
-// KCMTextMarkupGenericFontName_Serif returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_Serif as an objc.ID.
-func KCMTextMarkupGenericFontName_Serif() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_Serif())
+// KCMTextMarkupGenericFontName_Serif returns the value of the constant kCMTextMarkupGenericFontName_Serif.
+func KCMTextMarkupGenericFontName_Serif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Serif")))
 }
 
-// KCMTextMarkupGenericFontName_SansSerif returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_SansSerif as an objc.ID.
-func KCMTextMarkupGenericFontName_SansSerif() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_SansSerif())
+// KCMTextMarkupGenericFontName_SansSerif returns the value of the constant kCMTextMarkupGenericFontName_SansSerif.
+func KCMTextMarkupGenericFontName_SansSerif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_SansSerif")))
 }
 
-// KCMTextMarkupGenericFontName_Monospace returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_Monospace as an objc.ID.
-func KCMTextMarkupGenericFontName_Monospace() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_Monospace())
+// KCMTextMarkupGenericFontName_Monospace returns the value of the constant kCMTextMarkupGenericFontName_Monospace.
+func KCMTextMarkupGenericFontName_Monospace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Monospace")))
 }
 
-// KCMTextMarkupGenericFontName_ProportionalSerif returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_ProportionalSerif as an objc.ID.
-func KCMTextMarkupGenericFontName_ProportionalSerif() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_ProportionalSerif())
+// KCMTextMarkupGenericFontName_ProportionalSerif returns the value of the constant kCMTextMarkupGenericFontName_ProportionalSerif.
+func KCMTextMarkupGenericFontName_ProportionalSerif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_ProportionalSerif")))
 }
 
-// KCMTextMarkupGenericFontName_ProportionalSansSerif returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_ProportionalSansSerif as an objc.ID.
-func KCMTextMarkupGenericFontName_ProportionalSansSerif() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_ProportionalSansSerif())
+// KCMTextMarkupGenericFontName_ProportionalSansSerif returns the value of the constant kCMTextMarkupGenericFontName_ProportionalSansSerif.
+func KCMTextMarkupGenericFontName_ProportionalSansSerif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_ProportionalSansSerif")))
 }
 
-// KCMTextMarkupGenericFontName_MonospaceSerif returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_MonospaceSerif as an objc.ID.
-func KCMTextMarkupGenericFontName_MonospaceSerif() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_MonospaceSerif())
+// KCMTextMarkupGenericFontName_MonospaceSerif returns the value of the constant kCMTextMarkupGenericFontName_MonospaceSerif.
+func KCMTextMarkupGenericFontName_MonospaceSerif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_MonospaceSerif")))
 }
 
-// KCMTextMarkupGenericFontName_MonospaceSansSerif returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_MonospaceSansSerif as an objc.ID.
-func KCMTextMarkupGenericFontName_MonospaceSansSerif() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_MonospaceSansSerif())
+// KCMTextMarkupGenericFontName_MonospaceSansSerif returns the value of the constant kCMTextMarkupGenericFontName_MonospaceSansSerif.
+func KCMTextMarkupGenericFontName_MonospaceSansSerif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_MonospaceSansSerif")))
 }
 
-// KCMTextMarkupGenericFontName_Casual returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_Casual as an objc.ID.
-func KCMTextMarkupGenericFontName_Casual() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_Casual())
+// KCMTextMarkupGenericFontName_Casual returns the value of the constant kCMTextMarkupGenericFontName_Casual.
+func KCMTextMarkupGenericFontName_Casual() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Casual")))
 }
 
-// KCMTextMarkupGenericFontName_Cursive returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_Cursive as an objc.ID.
-func KCMTextMarkupGenericFontName_Cursive() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_Cursive())
+// KCMTextMarkupGenericFontName_Cursive returns the value of the constant kCMTextMarkupGenericFontName_Cursive.
+func KCMTextMarkupGenericFontName_Cursive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Cursive")))
 }
 
-// KCMTextMarkupGenericFontName_Fantasy returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_Fantasy as an objc.ID.
-func KCMTextMarkupGenericFontName_Fantasy() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_Fantasy())
+// KCMTextMarkupGenericFontName_Fantasy returns the value of the constant kCMTextMarkupGenericFontName_Fantasy.
+func KCMTextMarkupGenericFontName_Fantasy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_Fantasy")))
 }
 
-// KCMTextMarkupGenericFontName_SmallCapital returns the value of the CoreFoundation reference constant kCMTextMarkupGenericFontName_SmallCapital as an objc.ID.
-func KCMTextMarkupGenericFontName_SmallCapital() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupGenericFontName_SmallCapital())
+// KCMTextMarkupGenericFontName_SmallCapital returns the value of the constant kCMTextMarkupGenericFontName_SmallCapital.
+func KCMTextMarkupGenericFontName_SmallCapital() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupGenericFontName_SmallCapital")))
 }
 
-// @const      kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight @abstract   The base font size expressed as a percentage of the video height. @discussion Value must be a non-negative CFNumber.  This is a number holding a percentage of the height of the video frame.  For example, a value of 5 indicates that the base font size should be 5% of the height of the video.
-// KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight as an objc.ID.
-func KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight())
+// KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight returns the value of the constant kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight.
+func KCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight")))
 }
 
-// @const      kCMTextMarkupAttribute_RelativeFontSize @abstract   The font size expressed as a percentage of the current default font size. @discussion Value must be a non-negative CFNumber. This is a number holding a percentage of the size of the calculated default font size.  A value of 120 indicates 20% larger than the default font size. A value of 80 indicates 80% of the default font size.  The value 100 indicates no size difference and is the default.
-// KCMTextMarkupAttribute_RelativeFontSize returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_RelativeFontSize as an objc.ID.
-func KCMTextMarkupAttribute_RelativeFontSize() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_RelativeFontSize())
+// KCMTextMarkupAttribute_RelativeFontSize returns the value of the constant kCMTextMarkupAttribute_RelativeFontSize.
+func KCMTextMarkupAttribute_RelativeFontSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_RelativeFontSize")))
 }
 
-// @const      kCMTextMarkupAttribute_VerticalLayout @abstract   The kind of vertical layout of the text block. @discussion Value must be a CFString. A CFString holding one of several values indicating the progression direction for new vertical lines of text. If this attribute is present, it indicates the writing direction is vertical. The attribute value indicates whether new vertical text lines are added from left to right or from right to left. If this attribute is missing, the writing direction is horizontal. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
-// KCMTextMarkupAttribute_VerticalLayout returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_VerticalLayout as an objc.ID.
-func KCMTextMarkupAttribute_VerticalLayout() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_VerticalLayout())
+// KCMTextMarkupAttribute_VerticalLayout returns the value of the constant kCMTextMarkupAttribute_VerticalLayout.
+func KCMTextMarkupAttribute_VerticalLayout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_VerticalLayout")))
 }
 
-// @abstract   Values for kCMTextMarkupAttribute_VerticalLayout. @const      kCMTextVerticalLayout_LeftToRight Newly added vertical lines are added from the left toward the right. @const      kCMTextVerticalLayout_RightToLeft Newly added vertical lines are added from the right toward the left.
-// KCMTextVerticalLayout_LeftToRight returns the value of the CoreFoundation reference constant kCMTextVerticalLayout_LeftToRight as an objc.ID.
-func KCMTextVerticalLayout_LeftToRight() objc.ID {
-	return purego.CFConstant(raw.KCMTextVerticalLayout_LeftToRight())
+// KCMTextVerticalLayout_LeftToRight returns the value of the constant kCMTextVerticalLayout_LeftToRight.
+func KCMTextVerticalLayout_LeftToRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextVerticalLayout_LeftToRight")))
 }
 
-// KCMTextVerticalLayout_RightToLeft returns the value of the CoreFoundation reference constant kCMTextVerticalLayout_RightToLeft as an objc.ID.
-func KCMTextVerticalLayout_RightToLeft() objc.ID {
-	return purego.CFConstant(raw.KCMTextVerticalLayout_RightToLeft())
+// KCMTextVerticalLayout_RightToLeft returns the value of the constant kCMTextVerticalLayout_RightToLeft.
+func KCMTextVerticalLayout_RightToLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextVerticalLayout_RightToLeft")))
 }
 
-// @const      kCMTextMarkupAttribute_Alignment @abstract   The alignment of text in the writing direction of the first line of text. @discussion Value must be a CFString. A CFString holding one of several values indicating the alignment in the writing direction of the first line of text of the cue. The writing direction is indicated by the value (or absence) of the kCMTextMarkupAttribute_VerticalLayout. If this attribute is missing, the kCMTextMarkupAlignmentType_Middle value should be used as the default. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
-// KCMTextMarkupAttribute_Alignment returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_Alignment as an objc.ID.
-func KCMTextMarkupAttribute_Alignment() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_Alignment())
+// KCMTextMarkupAttribute_Alignment returns the value of the constant kCMTextMarkupAttribute_Alignment.
+func KCMTextMarkupAttribute_Alignment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_Alignment")))
 }
 
-// @abstract   Values for kCMTextMarkupAttribute_Alignment. @const      kCMTextMarkupAlignmentType_Start The text is visually aligned at its starting side. For horizontally written text, the alignment is left for left-to-right text and right for right-to-left text. For vertical text, alignment is always at the top. @const      kCMTextMarkupAlignmentType_Middle The text is visually center-aligned (i.e., aligned between its starting and ending sides). @const      kCMTextMarkupAlignmentType_End The text is visually aligned at its ending side. For horizontally written text, the alignment is right for left-to-right text and left for right-to-left text. For vertical text, alignment is always at the bottom. @const      kCMTextMarkupAlignmentType_Left For horizontally written text, the text alignment is always visually left-aligned (i.e., left-to-right and right-to-left are treated uniformly). For vertical text, this is equivalent to kCMTextMarkupAlignmentType_Start. While readers should be prepared to account for kCMTextMarkupAlignmentType_Left being equivalent to kCMTextMarkupAlignmentType_Start for vertical text, authors are discouraged from using kCMTextMarkupAlignmentType_Left for vertical text. @const      kCMTextMarkupAlignmentType_Right For horizontally written text, the text alignment is always visually right-aligned (i.e., left-to-right and right-to-left are treated uniformly). For vertical text, this is equivalent to kCMTextMarkupAlignmentType_End. While readers should be prepared to account for kCMTextMarkupAlignmentType_Right being equivalent to kCMTextMarkupAlignmentType_End for vertical text, authors are discouraged from using kCMTextMarkupAlignmentType_Right for vertical text.
-// KCMTextMarkupAlignmentType_Start returns the value of the CoreFoundation reference constant kCMTextMarkupAlignmentType_Start as an objc.ID.
-func KCMTextMarkupAlignmentType_Start() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAlignmentType_Start())
+// KCMTextMarkupAlignmentType_Start returns the value of the constant kCMTextMarkupAlignmentType_Start.
+func KCMTextMarkupAlignmentType_Start() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_Start")))
 }
 
-// KCMTextMarkupAlignmentType_Middle returns the value of the CoreFoundation reference constant kCMTextMarkupAlignmentType_Middle as an objc.ID.
-func KCMTextMarkupAlignmentType_Middle() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAlignmentType_Middle())
+// KCMTextMarkupAlignmentType_Middle returns the value of the constant kCMTextMarkupAlignmentType_Middle.
+func KCMTextMarkupAlignmentType_Middle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_Middle")))
 }
 
-// KCMTextMarkupAlignmentType_End returns the value of the CoreFoundation reference constant kCMTextMarkupAlignmentType_End as an objc.ID.
-func KCMTextMarkupAlignmentType_End() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAlignmentType_End())
+// KCMTextMarkupAlignmentType_End returns the value of the constant kCMTextMarkupAlignmentType_End.
+func KCMTextMarkupAlignmentType_End() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_End")))
 }
 
-// KCMTextMarkupAlignmentType_Left returns the value of the CoreFoundation reference constant kCMTextMarkupAlignmentType_Left as an objc.ID.
-func KCMTextMarkupAlignmentType_Left() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAlignmentType_Left())
+// KCMTextMarkupAlignmentType_Left returns the value of the constant kCMTextMarkupAlignmentType_Left.
+func KCMTextMarkupAlignmentType_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_Left")))
 }
 
-// KCMTextMarkupAlignmentType_Right returns the value of the CoreFoundation reference constant kCMTextMarkupAlignmentType_Right as an objc.ID.
-func KCMTextMarkupAlignmentType_Right() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAlignmentType_Right())
+// KCMTextMarkupAlignmentType_Right returns the value of the constant kCMTextMarkupAlignmentType_Right.
+func KCMTextMarkupAlignmentType_Right() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAlignmentType_Right")))
 }
 
-// @const      kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection @abstract   The placement of the block of text specified as a percentage in the writing direction. @discussion Value must be a non-negative CFNumber. A CFNumber expressing the position of the center of the text in the writing direction as a percentage of the video dimensions in the writing direction. For horizontal cues, this is the horizontal position. For vertical, it is the vertical position. The percentage is calculated from the edge of the frame where the text begins (so for left-to-right English, it is the left edge). If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
-// KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection as an objc.ID.
-func KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection())
+// KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection returns the value of the constant kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection.
+func KCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection")))
 }
 
-// @const      kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection @abstract   The placement of the block of text's first line specified as a percentage in the direction orthogonal to the writing direction. @discussion Value must be a non-negative CFNumber. A CFNumber expressing the position of the center of the cue relative to the writing direction. The line position is orthogonal (or perpendicular) to the writing direction (i.e., for a horizontal writing direction, it is vertical and for a vertical writing direction, is is horizontal). This attribute expresses the line position as a percentage of the dimensions of the video frame in the relevant direction. For example, 0% is the top of the video frame and 100% is the bottom of the video frame for horizontal writing layout. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
-// KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection as an objc.ID.
-func KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection())
+// KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection returns the value of the constant kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection.
+func KCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection")))
 }
 
-// @const      kCMTextMarkupAttribute_WritingDirectionSizePercentage @abstract   The dimension (e.g., width) of the bounding box containing the text expressed as a percentage. @discussion Value must be a non-negative CFNumber. A CFNumber expressing the width of the bounding box for text layout as a percentage of the video frame's dimension in the writing direction. For a horizontal writing direction, it is the width. For a vertical writing direction, it is the horizontal writing direction. If used, this attribute must be applied to the entire attributed string (i.e., CFRangeMake(0, CFAttributedStringGetLength(...))).
-// KCMTextMarkupAttribute_WritingDirectionSizePercentage returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_WritingDirectionSizePercentage as an objc.ID.
-func KCMTextMarkupAttribute_WritingDirectionSizePercentage() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_WritingDirectionSizePercentage())
+// KCMTextMarkupAttribute_WritingDirectionSizePercentage returns the value of the constant kCMTextMarkupAttribute_WritingDirectionSizePercentage.
+func KCMTextMarkupAttribute_WritingDirectionSizePercentage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_WritingDirectionSizePercentage")))
 }
 
-// @const      kCMTextMarkupAttribute_CharacterEdgeStyle @abstract   Allows the setting of the style of character edges at render time. @discussion Value must be a CFString. This controls the shape of the edges of drawn characters. Set a value of something other than kCMTextMarkupEdgeStyle_None to draw using an alternative shape for edges of characters from the set of constants prefixed with "kCMTextMarkupEdgeStyle_". These correspond to text edge styles available with Media Accessibility preferences (see <MediaAccessibility/MACaptionAppearance.h>) although the values are not enumerated integers here. The absence of this attribute should be treated as though kCMTextMarkupCharacterEdgeStyle_None is specified.
-// KCMTextMarkupAttribute_CharacterEdgeStyle returns the value of the CoreFoundation reference constant kCMTextMarkupAttribute_CharacterEdgeStyle as an objc.ID.
-func KCMTextMarkupAttribute_CharacterEdgeStyle() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupAttribute_CharacterEdgeStyle())
+// KCMTextMarkupAttribute_CharacterEdgeStyle returns the value of the constant kCMTextMarkupAttribute_CharacterEdgeStyle.
+func KCMTextMarkupAttribute_CharacterEdgeStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupAttribute_CharacterEdgeStyle")))
 }
 
-// @abstract   Values for kCMTextMarkupAttribute_CharacterEdgeStyle. @const      kCMTextMarkupCharacterEdgeStyle_None The character edge style indicating no edge style. @const      kCMTextMarkupCharacterEdgeStyle_Raised The character edge style indicating a raised edge style should be drawn. @const      kCMTextMarkupCharacterEdgeStyle_Depressed The character edge style indicating a depressed edge style should be drawn. @const      kCMTextMarkupCharacterEdgeStyle_Uniform The character edge style indicating a uniform border around the character should be drawn. @const      kCMTextMarkupCharacterEdgeStyle_DropShadow The character edge style indicating a drop shadow should be drawn.
-// KCMTextMarkupCharacterEdgeStyle_None returns the value of the CoreFoundation reference constant kCMTextMarkupCharacterEdgeStyle_None as an objc.ID.
-func KCMTextMarkupCharacterEdgeStyle_None() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupCharacterEdgeStyle_None())
+// KCMTextMarkupCharacterEdgeStyle_None returns the value of the constant kCMTextMarkupCharacterEdgeStyle_None.
+func KCMTextMarkupCharacterEdgeStyle_None() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupCharacterEdgeStyle_None")))
 }
 
-// KCMTextMarkupCharacterEdgeStyle_Raised returns the value of the CoreFoundation reference constant kCMTextMarkupCharacterEdgeStyle_Raised as an objc.ID.
-func KCMTextMarkupCharacterEdgeStyle_Raised() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupCharacterEdgeStyle_Raised())
+// KCMTextMarkupCharacterEdgeStyle_Raised returns the value of the constant kCMTextMarkupCharacterEdgeStyle_Raised.
+func KCMTextMarkupCharacterEdgeStyle_Raised() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupCharacterEdgeStyle_Raised")))
 }
 
-// KCMTextMarkupCharacterEdgeStyle_Depressed returns the value of the CoreFoundation reference constant kCMTextMarkupCharacterEdgeStyle_Depressed as an objc.ID.
-func KCMTextMarkupCharacterEdgeStyle_Depressed() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupCharacterEdgeStyle_Depressed())
+// KCMTextMarkupCharacterEdgeStyle_Depressed returns the value of the constant kCMTextMarkupCharacterEdgeStyle_Depressed.
+func KCMTextMarkupCharacterEdgeStyle_Depressed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupCharacterEdgeStyle_Depressed")))
 }
 
-// KCMTextMarkupCharacterEdgeStyle_Uniform returns the value of the CoreFoundation reference constant kCMTextMarkupCharacterEdgeStyle_Uniform as an objc.ID.
-func KCMTextMarkupCharacterEdgeStyle_Uniform() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupCharacterEdgeStyle_Uniform())
+// KCMTextMarkupCharacterEdgeStyle_Uniform returns the value of the constant kCMTextMarkupCharacterEdgeStyle_Uniform.
+func KCMTextMarkupCharacterEdgeStyle_Uniform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupCharacterEdgeStyle_Uniform")))
 }
 
-// KCMTextMarkupCharacterEdgeStyle_DropShadow returns the value of the CoreFoundation reference constant kCMTextMarkupCharacterEdgeStyle_DropShadow as an objc.ID.
-func KCMTextMarkupCharacterEdgeStyle_DropShadow() objc.ID {
-	return purego.CFConstant(raw.KCMTextMarkupCharacterEdgeStyle_DropShadow())
+// KCMTextMarkupCharacterEdgeStyle_DropShadow returns the value of the constant kCMTextMarkupCharacterEdgeStyle_DropShadow.
+func KCMTextMarkupCharacterEdgeStyle_DropShadow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMTextMarkupCharacterEdgeStyle_DropShadow")))
 }
 
-// KCMMetadataKeySpace_QuickTimeUserData returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_QuickTimeUserData as an objc.ID.
-func KCMMetadataKeySpace_QuickTimeUserData() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataKeySpace_QuickTimeUserData())
+// KCMMetadataKeySpace_QuickTimeUserData returns the value of the constant kCMMetadataKeySpace_QuickTimeUserData.
+func KCMMetadataKeySpace_QuickTimeUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_QuickTimeUserData")))
 }
 
-// KCMMetadataKeySpace_ISOUserData returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_ISOUserData as an objc.ID.
-func KCMMetadataKeySpace_ISOUserData() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataKeySpace_ISOUserData())
+// KCMMetadataKeySpace_ISOUserData returns the value of the constant kCMMetadataKeySpace_ISOUserData.
+func KCMMetadataKeySpace_ISOUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_ISOUserData")))
 }
 
-// KCMMetadataKeySpace_QuickTimeMetadata returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_QuickTimeMetadata as an objc.ID.
-func KCMMetadataKeySpace_QuickTimeMetadata() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataKeySpace_QuickTimeMetadata())
+// KCMMetadataKeySpace_QuickTimeMetadata returns the value of the constant kCMMetadataKeySpace_QuickTimeMetadata.
+func KCMMetadataKeySpace_QuickTimeMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_QuickTimeMetadata")))
 }
 
-// KCMMetadataKeySpace_iTunes returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_iTunes as an objc.ID.
-func KCMMetadataKeySpace_iTunes() objc.ID { return purego.CFConstant(raw.KCMMetadataKeySpace_iTunes()) }
+// KCMMetadataKeySpace_iTunes returns the value of the constant kCMMetadataKeySpace_iTunes.
+func KCMMetadataKeySpace_iTunes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_iTunes")))
+}
 
-// KCMMetadataKeySpace_ID3 returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_ID3 as an objc.ID.
-func KCMMetadataKeySpace_ID3() objc.ID { return purego.CFConstant(raw.KCMMetadataKeySpace_ID3()) }
+// KCMMetadataKeySpace_ID3 returns the value of the constant kCMMetadataKeySpace_ID3.
+func KCMMetadataKeySpace_ID3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_ID3")))
+}
 
-// KCMMetadataKeySpace_Icy returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_Icy as an objc.ID.
-func KCMMetadataKeySpace_Icy() objc.ID { return purego.CFConstant(raw.KCMMetadataKeySpace_Icy()) }
+// KCMMetadataKeySpace_Icy returns the value of the constant kCMMetadataKeySpace_Icy.
+func KCMMetadataKeySpace_Icy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_Icy")))
+}
 
-// KCMMetadataKeySpace_HLSDateRange returns the value of the CoreFoundation reference constant kCMMetadataKeySpace_HLSDateRange as an objc.ID.
-func KCMMetadataKeySpace_HLSDateRange() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataKeySpace_HLSDateRange())
+// KCMMetadataKeySpace_HLSDateRange returns the value of the constant kCMMetadataKeySpace_HLSDateRange.
+func KCMMetadataKeySpace_HLSDateRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataKeySpace_HLSDateRange")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709 Location information in ISO-6709 format. @const kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing Direction the observer is facing.
-// KCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709 returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709 as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709())
+// KCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709 returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709.
+func KCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709")))
 }
 
-// KCMMetadataIdentifier_QuickTimeMetadataDirection_Facing returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataDirection_Facing() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataDirection_Facing())
+// KCMMetadataIdentifier_QuickTimeMetadataDirection_Facing returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing.
+func KCMMetadataIdentifier_QuickTimeMetadataDirection_Facing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform An affine transform that can be used in place of a track matrix for displaying a video track, to better reflect the current orientation of a video camera with respect to a scene.  For example, if the camera is rotated after a recording has started, the presence of this metadata will allow a player to adjust its rendering at the time the rotation occurred.
-// KCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform())
+// KCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform.
+func KCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation Video orientation as defined by TIFF/EXIF, which is enumerated by CGImagePropertyOrientation (see <ImageIO/CGImageProperties.h>).
-// KCMMetadataIdentifier_QuickTimeMetadataVideoOrientation returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataVideoOrientation() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataVideoOrientation())
+// KCMMetadataIdentifier_QuickTimeMetadataVideoOrientation returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation.
+func KCMMetadataIdentifier_QuickTimeMetadataVideoOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform A perspective transform that can be used to adjust a Live Photo still image to match the Live Photo movie. Expected data type is kCMMetadataBaseDataType_PerspectiveTransformF64.
-// KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform())
+// KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform.
+func KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions The dimensions of the image used to generate kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform. Expected data type is kCMMetadataBaseDataType_DimensionsF32.
-// KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions())
+// KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions.
+func KCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier A segment identifier, used to support movies where pause/resume has been used. Expected data type is kCMMetadataDataType_QuickTimeMetadataUUID.
-// KCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier())
+// KCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier.
+func KCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance Scene illuminance measured in units of Lux. Expected data type is kCMMetadataDataType_QuickTimeMetadataMilliLux.
-// KCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance())
+// KCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance.
+func KCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix Data associated with a Spatial Audio capture that contains an analysis of a First Order Ambisonics audio stream which is used for playback.
-// KCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix())
+// KCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix.
+func KCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono Display mask rectangle for monoscopic video Expected data type is kCMMetadataBaseDataType_RasterRectangleValue.
-// KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono())
+// KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono.
+func KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft Display mask rectangle for stereoscopic video's left eye view Expected data type is kCMMetadataBaseDataType_RasterRectangleValue or kCMMetadataBaseDataType_ExtendedRasterRectangleValue.
-// KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft())
+// KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft.
+func KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight Display mask rectangle for stereoscopic video's right eye view Expected data type is kCMMetadataBaseDataType_RasterRectangleValue or kCMMetadataBaseDataType_ExtendedRasterRectangleValue.
-// KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight())
+// KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight.
+func KCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight")))
 }
 
-// @const kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia Presentation data associated with Apple Immersive Video's video frames. Data is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object. Expected data type is kCMMetadataBaseDataType_RawData.
-// KCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia returns the value of the CoreFoundation reference constant kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia as an objc.ID.
-func KCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia())
+// KCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia returns the value of the constant kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia.
+func KCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia")))
 }
 
-// KCMMetadataBaseDataType_RawData returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_RawData as an objc.ID.
-func KCMMetadataBaseDataType_RawData() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_RawData())
+// KCMMetadataBaseDataType_RawData returns the value of the constant kCMMetadataBaseDataType_RawData.
+func KCMMetadataBaseDataType_RawData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_RawData")))
 }
 
-// KCMMetadataBaseDataType_UTF8 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_UTF8 as an objc.ID.
-func KCMMetadataBaseDataType_UTF8() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_UTF8())
+// KCMMetadataBaseDataType_UTF8 returns the value of the constant kCMMetadataBaseDataType_UTF8.
+func KCMMetadataBaseDataType_UTF8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UTF8")))
 }
 
-// KCMMetadataBaseDataType_UTF16 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_UTF16 as an objc.ID.
-func KCMMetadataBaseDataType_UTF16() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_UTF16())
+// KCMMetadataBaseDataType_UTF16 returns the value of the constant kCMMetadataBaseDataType_UTF16.
+func KCMMetadataBaseDataType_UTF16() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UTF16")))
 }
 
-// KCMMetadataBaseDataType_GIF returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_GIF as an objc.ID.
-func KCMMetadataBaseDataType_GIF() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_GIF())
+// KCMMetadataBaseDataType_GIF returns the value of the constant kCMMetadataBaseDataType_GIF.
+func KCMMetadataBaseDataType_GIF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_GIF")))
 }
 
-// KCMMetadataBaseDataType_JPEG returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_JPEG as an objc.ID.
-func KCMMetadataBaseDataType_JPEG() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_JPEG())
+// KCMMetadataBaseDataType_JPEG returns the value of the constant kCMMetadataBaseDataType_JPEG.
+func KCMMetadataBaseDataType_JPEG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_JPEG")))
 }
 
-// KCMMetadataBaseDataType_PNG returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_PNG as an objc.ID.
-func KCMMetadataBaseDataType_PNG() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_PNG())
+// KCMMetadataBaseDataType_PNG returns the value of the constant kCMMetadataBaseDataType_PNG.
+func KCMMetadataBaseDataType_PNG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_PNG")))
 }
 
-// KCMMetadataBaseDataType_BMP returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_BMP as an objc.ID.
-func KCMMetadataBaseDataType_BMP() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_BMP())
+// KCMMetadataBaseDataType_BMP returns the value of the constant kCMMetadataBaseDataType_BMP.
+func KCMMetadataBaseDataType_BMP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_BMP")))
 }
 
-// KCMMetadataBaseDataType_Float32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_Float32 as an objc.ID.
-func KCMMetadataBaseDataType_Float32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_Float32())
+// KCMMetadataBaseDataType_Float32 returns the value of the constant kCMMetadataBaseDataType_Float32.
+func KCMMetadataBaseDataType_Float32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_Float32")))
 }
 
-// KCMMetadataBaseDataType_Float64 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_Float64 as an objc.ID.
-func KCMMetadataBaseDataType_Float64() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_Float64())
+// KCMMetadataBaseDataType_Float64 returns the value of the constant kCMMetadataBaseDataType_Float64.
+func KCMMetadataBaseDataType_Float64() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_Float64")))
 }
 
-// KCMMetadataBaseDataType_SInt8 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_SInt8 as an objc.ID.
-func KCMMetadataBaseDataType_SInt8() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_SInt8())
+// KCMMetadataBaseDataType_SInt8 returns the value of the constant kCMMetadataBaseDataType_SInt8.
+func KCMMetadataBaseDataType_SInt8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_SInt8")))
 }
 
-// KCMMetadataBaseDataType_SInt16 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_SInt16 as an objc.ID.
-func KCMMetadataBaseDataType_SInt16() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_SInt16())
+// KCMMetadataBaseDataType_SInt16 returns the value of the constant kCMMetadataBaseDataType_SInt16.
+func KCMMetadataBaseDataType_SInt16() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_SInt16")))
 }
 
-// KCMMetadataBaseDataType_SInt32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_SInt32 as an objc.ID.
-func KCMMetadataBaseDataType_SInt32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_SInt32())
+// KCMMetadataBaseDataType_SInt32 returns the value of the constant kCMMetadataBaseDataType_SInt32.
+func KCMMetadataBaseDataType_SInt32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_SInt32")))
 }
 
-// KCMMetadataBaseDataType_SInt64 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_SInt64 as an objc.ID.
-func KCMMetadataBaseDataType_SInt64() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_SInt64())
+// KCMMetadataBaseDataType_SInt64 returns the value of the constant kCMMetadataBaseDataType_SInt64.
+func KCMMetadataBaseDataType_SInt64() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_SInt64")))
 }
 
-// KCMMetadataBaseDataType_UInt8 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_UInt8 as an objc.ID.
-func KCMMetadataBaseDataType_UInt8() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_UInt8())
+// KCMMetadataBaseDataType_UInt8 returns the value of the constant kCMMetadataBaseDataType_UInt8.
+func KCMMetadataBaseDataType_UInt8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UInt8")))
 }
 
-// KCMMetadataBaseDataType_UInt16 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_UInt16 as an objc.ID.
-func KCMMetadataBaseDataType_UInt16() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_UInt16())
+// KCMMetadataBaseDataType_UInt16 returns the value of the constant kCMMetadataBaseDataType_UInt16.
+func KCMMetadataBaseDataType_UInt16() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UInt16")))
 }
 
-// KCMMetadataBaseDataType_UInt32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_UInt32 as an objc.ID.
-func KCMMetadataBaseDataType_UInt32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_UInt32())
+// KCMMetadataBaseDataType_UInt32 returns the value of the constant kCMMetadataBaseDataType_UInt32.
+func KCMMetadataBaseDataType_UInt32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UInt32")))
 }
 
-// KCMMetadataBaseDataType_UInt64 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_UInt64 as an objc.ID.
-func KCMMetadataBaseDataType_UInt64() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_UInt64())
+// KCMMetadataBaseDataType_UInt64 returns the value of the constant kCMMetadataBaseDataType_UInt64.
+func KCMMetadataBaseDataType_UInt64() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_UInt64")))
 }
 
-// KCMMetadataBaseDataType_PointF32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_PointF32 as an objc.ID.
-func KCMMetadataBaseDataType_PointF32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_PointF32())
+// KCMMetadataBaseDataType_PointF32 returns the value of the constant kCMMetadataBaseDataType_PointF32.
+func KCMMetadataBaseDataType_PointF32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_PointF32")))
 }
 
-// KCMMetadataBaseDataType_DimensionsF32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_DimensionsF32 as an objc.ID.
-func KCMMetadataBaseDataType_DimensionsF32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_DimensionsF32())
+// KCMMetadataBaseDataType_DimensionsF32 returns the value of the constant kCMMetadataBaseDataType_DimensionsF32.
+func KCMMetadataBaseDataType_DimensionsF32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_DimensionsF32")))
 }
 
-// KCMMetadataBaseDataType_RectF32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_RectF32 as an objc.ID.
-func KCMMetadataBaseDataType_RectF32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_RectF32())
+// KCMMetadataBaseDataType_RectF32 returns the value of the constant kCMMetadataBaseDataType_RectF32.
+func KCMMetadataBaseDataType_RectF32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_RectF32")))
 }
 
-// KCMMetadataBaseDataType_AffineTransformF64 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_AffineTransformF64 as an objc.ID.
-func KCMMetadataBaseDataType_AffineTransformF64() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_AffineTransformF64())
+// KCMMetadataBaseDataType_AffineTransformF64 returns the value of the constant kCMMetadataBaseDataType_AffineTransformF64.
+func KCMMetadataBaseDataType_AffineTransformF64() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_AffineTransformF64")))
 }
 
-// KCMMetadataBaseDataType_PolygonF32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_PolygonF32 as an objc.ID.
-func KCMMetadataBaseDataType_PolygonF32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_PolygonF32())
+// KCMMetadataBaseDataType_PolygonF32 returns the value of the constant kCMMetadataBaseDataType_PolygonF32.
+func KCMMetadataBaseDataType_PolygonF32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_PolygonF32")))
 }
 
-// KCMMetadataBaseDataType_PolylineF32 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_PolylineF32 as an objc.ID.
-func KCMMetadataBaseDataType_PolylineF32() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_PolylineF32())
+// KCMMetadataBaseDataType_PolylineF32 returns the value of the constant kCMMetadataBaseDataType_PolylineF32.
+func KCMMetadataBaseDataType_PolylineF32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_PolylineF32")))
 }
 
-// KCMMetadataBaseDataType_JSON returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_JSON as an objc.ID.
-func KCMMetadataBaseDataType_JSON() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_JSON())
+// KCMMetadataBaseDataType_JSON returns the value of the constant kCMMetadataBaseDataType_JSON.
+func KCMMetadataBaseDataType_JSON() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_JSON")))
 }
 
-// KCMMetadataBaseDataType_PerspectiveTransformF64 returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_PerspectiveTransformF64 as an objc.ID.
-func KCMMetadataBaseDataType_PerspectiveTransformF64() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_PerspectiveTransformF64())
+// KCMMetadataBaseDataType_PerspectiveTransformF64 returns the value of the constant kCMMetadataBaseDataType_PerspectiveTransformF64.
+func KCMMetadataBaseDataType_PerspectiveTransformF64() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_PerspectiveTransformF64")))
 }
 
-// KCMMetadataBaseDataType_RasterRectangleValue returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_RasterRectangleValue as an objc.ID.
-func KCMMetadataBaseDataType_RasterRectangleValue() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_RasterRectangleValue())
+// KCMMetadataBaseDataType_RasterRectangleValue returns the value of the constant kCMMetadataBaseDataType_RasterRectangleValue.
+func KCMMetadataBaseDataType_RasterRectangleValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_RasterRectangleValue")))
 }
 
-// KCMMetadataBaseDataType_ExtendedRasterRectangleValue returns the value of the CoreFoundation reference constant kCMMetadataBaseDataType_ExtendedRasterRectangleValue as an objc.ID.
-func KCMMetadataBaseDataType_ExtendedRasterRectangleValue() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataBaseDataType_ExtendedRasterRectangleValue())
+// KCMMetadataBaseDataType_ExtendedRasterRectangleValue returns the value of the constant kCMMetadataBaseDataType_ExtendedRasterRectangleValue.
+func KCMMetadataBaseDataType_ExtendedRasterRectangleValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataBaseDataType_ExtendedRasterRectangleValue")))
 }
 
-// @const kCMMetadataDataType_Location_ISO6709 A string supplying location information in ISO-6709 format.  Conforms to kCMMetadataBaseDataType_UTF8. @const kCMMetadataDataType_Direction A string supplying degrees offset from magnetic North.  Conforms to kCMMetadataBaseDataType_UTF8.
-// KCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 returns the value of the CoreFoundation reference constant kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as an objc.ID.
-func KCMMetadataDataType_QuickTimeMetadataLocation_ISO6709() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataDataType_QuickTimeMetadataLocation_ISO6709())
+// KCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 returns the value of the constant kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709.
+func KCMMetadataDataType_QuickTimeMetadataLocation_ISO6709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709")))
 }
 
-// KCMMetadataDataType_QuickTimeMetadataDirection returns the value of the CoreFoundation reference constant kCMMetadataDataType_QuickTimeMetadataDirection as an objc.ID.
-func KCMMetadataDataType_QuickTimeMetadataDirection() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataDataType_QuickTimeMetadataDirection())
+// KCMMetadataDataType_QuickTimeMetadataDirection returns the value of the constant kCMMetadataDataType_QuickTimeMetadataDirection.
+func KCMMetadataDataType_QuickTimeMetadataDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataDirection")))
 }
 
-// @const kCMMetadataDataType_QuickTimeMetadataUUID A string supplying a universally unique identifier.  Conforms to kCMMetadataBaseDataType_UTF8.
-// KCMMetadataDataType_QuickTimeMetadataUUID returns the value of the CoreFoundation reference constant kCMMetadataDataType_QuickTimeMetadataUUID as an objc.ID.
-func KCMMetadataDataType_QuickTimeMetadataUUID() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataDataType_QuickTimeMetadataUUID())
+// KCMMetadataDataType_QuickTimeMetadataUUID returns the value of the constant kCMMetadataDataType_QuickTimeMetadataUUID.
+func KCMMetadataDataType_QuickTimeMetadataUUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataUUID")))
 }
 
-// @const kCMMetadataDataType_QuickTimeMetadataMilliLux 1/1000 of a Lux.  An unsigned value between 0 - 100,000,000.  Conforms to kCMMetadataBaseDataType_UInt32.
-// KCMMetadataDataType_QuickTimeMetadataMilliLux returns the value of the CoreFoundation reference constant kCMMetadataDataType_QuickTimeMetadataMilliLux as an objc.ID.
-func KCMMetadataDataType_QuickTimeMetadataMilliLux() objc.ID {
-	return purego.CFConstant(raw.KCMMetadataDataType_QuickTimeMetadataMilliLux())
+// KCMMetadataDataType_QuickTimeMetadataMilliLux returns the value of the constant kCMMetadataDataType_QuickTimeMetadataMilliLux.
+func KCMMetadataDataType_QuickTimeMetadataMilliLux() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataMilliLux")))
 }

@@ -6,118 +6,82 @@ package avfaudio
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// RequestRecordPermissionWithCompletionHandler calls the underlying AVAudioApplicationRequestRecordPermissionWithCompletionHandler.
+// RequestRecordPermissionWithCompletionHandler determines whether the app has permission to record audio.
 func RequestRecordPermissionWithCompletionHandler(response func(bool)) {
-	raw.AVAudioApplicationRequestRecordPermissionWithCompletionHandler(response)
+	objc.Send[objc.ID](objc.ID(_class("AVAudioApplication")), objc.RegisterName("requestRecordPermissionWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { response(_b0) }))
 }
 
-// SharedInstance calls the underlying AVAudioApplicationSharedInstance.
+// SharedInstance returns the singleton instance
 func SharedInstance() *AudioApplication {
-	_r := raw.AVAudioApplicationSharedInstance()
-	if _r == nil {
-		return nil
-	}
-	return &AudioApplication{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioApplication")), objc.RegisterName("sharedInstance"))
+	return AudioApplicationFromID(_r)
 }
 
-// LayoutWithLayoutTag calls the underlying AVAudioChannelLayoutLayoutWithLayoutTag.
-func LayoutWithLayoutTag(layoutTag uint) *AudioChannelLayout {
-	_r := raw.AVAudioChannelLayoutLayoutWithLayoutTag(layoutTag)
-	if _r == nil {
-		return nil
-	}
-	return &AudioChannelLayout{inner: _r}
+// LayoutWithLayoutTag creates an audio channel layout object from an audio channel layout tag.
+func LayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioChannelLayout")), objc.RegisterName("layoutWithLayoutTag:"), layoutTag)
+	return AudioChannelLayoutFromID(_r)
 }
 
-// LayoutWithLayout calls the underlying AVAudioChannelLayoutLayoutWithLayout.
-func LayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
-	_r := raw.AVAudioChannelLayoutLayoutWithLayout(layout)
-	if _r == nil {
-		return nil
-	}
-	return &AudioChannelLayout{inner: _r}
-}
-
-// SharedRoutingArbiter calls the underlying AVAudioRoutingArbiterSharedRoutingArbiter.
+// SharedRoutingArbiter returns the singleton AVAudioRoutingArbiter instance.
 func SharedRoutingArbiter() *AudioRoutingArbiter {
-	_r := raw.AVAudioRoutingArbiterSharedRoutingArbiter()
-	if _r == nil {
-		return nil
-	}
-	return &AudioRoutingArbiter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioRoutingArbiter")), objc.RegisterName("sharedRoutingArbiter"))
+	return AudioRoutingArbiterFromID(_r)
 }
 
-// TimeWithAudioTimeStampSampleRate calls the underlying AVAudioTimeTimeWithAudioTimeStampSampleRate.
-func TimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AudioTime {
-	_r := raw.AVAudioTimeTimeWithAudioTimeStampSampleRate(ts, sampleRate)
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
-}
-
-// TimeWithHostTime calls the underlying AVAudioTimeTimeWithHostTime.
+// TimeWithHostTime creates an audio time object with the specified host time.
 func TimeWithHostTime(hostTime uint64) *AudioTime {
-	_r := raw.AVAudioTimeTimeWithHostTime(hostTime)
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("timeWithHostTime:"), hostTime)
+	return AudioTimeFromID(_r)
 }
 
-// TimeWithSampleTimeAtRate calls the underlying AVAudioTimeTimeWithSampleTimeAtRate.
+// TimeWithSampleTimeAtRate creates an audio time object with the specified sample time and sample rate.
 func TimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AudioTime {
-	_r := raw.AVAudioTimeTimeWithSampleTimeAtRate(sampleTime, sampleRate)
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("timeWithSampleTime:atRate:"), sampleTime, sampleRate)
+	return AudioTimeFromID(_r)
 }
 
-// TimeWithHostTimeSampleTimeAtRate calls the underlying AVAudioTimeTimeWithHostTimeSampleTimeAtRate.
+// TimeWithHostTimeSampleTimeAtRate creates an audio time object with the specified host time, sample time, and sample rate.
 func TimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AudioTime {
-	_r := raw.AVAudioTimeTimeWithHostTimeSampleTimeAtRate(hostTime, sampleTime, sampleRate)
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("timeWithHostTime:sampleTime:atRate:"), hostTime, sampleTime, sampleRate)
+	return AudioTimeFromID(_r)
 }
 
-// HostTimeForSeconds calls the underlying AVAudioTimeHostTimeForSeconds.
+// HostTimeForSeconds converts seconds to host time.
 func HostTimeForSeconds(seconds float64) uint64 {
-	return raw.AVAudioTimeHostTimeForSeconds(seconds)
+	_r := objc.Send[uint64](objc.ID(_class("AVAudioTime")), objc.RegisterName("hostTimeForSeconds:"), seconds)
+	return _r
 }
 
-// SecondsForHostTime calls the underlying AVAudioTimeSecondsForHostTime.
+// SecondsForHostTime converts host time to seconds.
 func SecondsForHostTime(hostTime uint64) float64 {
-	return raw.AVAudioTimeSecondsForHostTime(hostTime)
+	_r := objc.Send[float64](objc.ID(_class("AVAudioTime")), objc.RegisterName("secondsForHostTime:"), hostTime)
+	return _r
 }
 
+// InstantiateWithComponentDescriptionOptions creates an instance of an audio unit component asynchronously and wraps it in an audio unit class.
+//
 // InstantiateWithComponentDescriptionOptions blocks until the operation completes or ctx is cancelled.
-func InstantiateWithComponentDescriptionOptions(ctx context.Context, audioComponentDescription objc.ID, options objc.ID) (*AudioUnit, error) {
+func InstantiateWithComponentDescriptionOptions(ctx context.Context, audioComponentDescription obj.Object, options obj.Object) (result *AudioUnit, err error) {
 	type _result struct {
 		val *AudioUnit
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.AVAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(audioComponentDescription, options, func(_p0 *raw.AVAudioUnit, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AudioUnit{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AudioUnitFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("AVAudioUnit")), objc.RegisterName("instantiateWithComponentDescription:options:completionHandler:"), objref.IDOf(audioComponentDescription), objref.IDOf(options), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -127,93 +91,66 @@ func InstantiateWithComponentDescriptionOptions(ctx context.Context, audioCompon
 	}
 }
 
-// SharedAudioUnitComponentManager calls the underlying AVAudioUnitComponentManagerSharedAudioUnitComponentManager.
+// SharedAudioUnitComponentManager gets the shared component manager instance.
 func SharedAudioUnitComponentManager() *AudioUnitComponentManager {
-	_r := raw.AVAudioUnitComponentManagerSharedAudioUnitComponentManager()
-	if _r == nil {
-		return nil
-	}
-	return &AudioUnitComponentManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitComponentManager")), objc.RegisterName("sharedAudioUnitComponentManager"))
+	return AudioUnitComponentManagerFromID(_r)
 }
 
-// UpdateSpeechVoices calls the underlying AVSpeechSynthesisProviderVoiceUpdateSpeechVoices.
+// UpdateSpeechVoices updates the voices your app provides to the system.
 func UpdateSpeechVoices() {
-	raw.AVSpeechSynthesisProviderVoiceUpdateSpeechVoices()
+	objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderVoice")), objc.RegisterName("updateSpeechVoices"))
 }
 
+// SpeechVoices retrieves all available voices on the device.
+//
 // SpeechVoices returns the collection as a Go slice.
 func SpeechVoices() []*SpeechSynthesisVoice {
-	arr := raw.AVSpeechSynthesisVoiceSpeechVoices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpeechSynthesisVoice {
-		return &SpeechSynthesisVoice{inner: raw.AVSpeechSynthesisVoiceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisVoice")), objc.RegisterName("speechVoices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeechSynthesisVoice { return SpeechSynthesisVoiceFromID(_id) })
 }
 
-// CurrentLanguageCode calls the underlying AVSpeechSynthesisVoiceCurrentLanguageCode.
+// CurrentLanguageCode returns the language and locale code for the user’s current locale.
 func CurrentLanguageCode() string {
-	_r := raw.AVSpeechSynthesisVoiceCurrentLanguageCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisVoice")), objc.RegisterName("currentLanguageCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// VoiceWithLanguage calls the underlying AVSpeechSynthesisVoiceVoiceWithLanguage.
+// VoiceWithLanguage retrieves a voice for the BCP 47 code language code you specify.
 func VoiceWithLanguage(languageCode string) *SpeechSynthesisVoice {
-	_r := raw.AVSpeechSynthesisVoiceVoiceWithLanguage(foundation.NSStringStringWithUTF8String(languageCode))
-	if _r == nil {
-		return nil
-	}
-	return &SpeechSynthesisVoice{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisVoice")), objc.RegisterName("voiceWithLanguage:"), purego.NSString(languageCode))
+	return SpeechSynthesisVoiceFromID(_r)
 }
 
-// VoiceWithIdentifier calls the underlying AVSpeechSynthesisVoiceVoiceWithIdentifier.
+// VoiceWithIdentifier retrieves a voice for the identifier you specify.
 func VoiceWithIdentifier(identifier string) *SpeechSynthesisVoice {
-	_r := raw.AVSpeechSynthesisVoiceVoiceWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &SpeechSynthesisVoice{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisVoice")), objc.RegisterName("voiceWithIdentifier:"), purego.NSString(identifier))
+	return SpeechSynthesisVoiceFromID(_r)
 }
 
-// RequestPersonalVoiceAuthorizationWithCompletionHandler calls the underlying AVSpeechSynthesizerRequestPersonalVoiceAuthorizationWithCompletionHandler.
-func RequestPersonalVoiceAuthorizationWithCompletionHandler(handler func(AVSpeechSynthesisPersonalVoiceAuthorizationStatus)) {
-	raw.AVSpeechSynthesizerRequestPersonalVoiceAuthorizationWithCompletionHandler(func(_a0 raw.AVSpeechSynthesisPersonalVoiceAuthorizationStatus) {
-		handler(AVSpeechSynthesisPersonalVoiceAuthorizationStatus(_a0))
-	})
+// PersonalVoiceAuthorizationStatus returns your app's current authorization to use personal voices.
+func PersonalVoiceAuthorizationStatus() SpeechSynthesisPersonalVoiceAuthorizationStatus {
+	_r := objc.Send[SpeechSynthesisPersonalVoiceAuthorizationStatus](objc.ID(_class("AVSpeechSynthesizer")), objc.RegisterName("personalVoiceAuthorizationStatus"))
+	return _r
 }
 
-// PersonalVoiceAuthorizationStatus calls the underlying AVSpeechSynthesizerPersonalVoiceAuthorizationStatus.
-func PersonalVoiceAuthorizationStatus() AVSpeechSynthesisPersonalVoiceAuthorizationStatus {
-	return AVSpeechSynthesisPersonalVoiceAuthorizationStatus(raw.AVSpeechSynthesizerPersonalVoiceAuthorizationStatus())
-}
-
-// SpeechUtteranceWithString calls the underlying AVSpeechUtteranceSpeechUtteranceWithString.
+// SpeechUtteranceWithString creates an utterance with the text string that you specify for the speech synthesizer to speak.
 func SpeechUtteranceWithString(string_ string) *SpeechUtterance {
-	_r := raw.AVSpeechUtteranceSpeechUtteranceWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &SpeechUtterance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithString:"), purego.NSString(string_))
+	return SpeechUtteranceFromID(_r)
 }
 
-// SpeechUtteranceWithAttributedString calls the underlying AVSpeechUtteranceSpeechUtteranceWithAttributedString.
-func SpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedString) *SpeechUtterance {
-	_r := raw.AVSpeechUtteranceSpeechUtteranceWithAttributedString(string_)
-	if _r == nil {
-		return nil
-	}
-	return &SpeechUtterance{inner: _r}
+// SpeechUtteranceWithAttributedString creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
+func SpeechUtteranceWithAttributedString(string_ obj.Object) *SpeechUtterance {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithAttributedString:"), objref.IDOf(string_))
+	return SpeechUtteranceFromID(_r)
 }
 
-// SpeechUtteranceWithSSMLRepresentation calls the underlying AVSpeechUtteranceSpeechUtteranceWithSSMLRepresentation.
+// SpeechUtteranceWithSSMLRepresentation returns a new speech utterance with an Speech Synthesis Markup Language (SSML) string.
 func SpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
-	_r := raw.AVSpeechUtteranceSpeechUtteranceWithSSMLRepresentation(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &SpeechUtterance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithSSMLRepresentation:"), purego.NSString(string_))
+	return SpeechUtteranceFromID(_r)
 }

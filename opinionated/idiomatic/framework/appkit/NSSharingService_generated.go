@@ -5,260 +5,219 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.
+// SharingService is an idiomatic wrapper over the Objective-C class NSSharingService.
 //
-// SharingService wraps [raw.NSSharingService] with a fluent Go API.
+// An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.
 type SharingService struct {
-	inner *raw.NSSharingService
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSharingService].
-func (x *SharingService) Unwrap() *raw.NSSharingService { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharingService) ID() objc.ID { return x.inner.Ptr() }
-
-// SharingServiceFromID adopts an existing object pointer as a SharingService (nil for 0).
+// SharingServiceFromID adopts an existing Objective-C object as a SharingService
+// (nil for 0), retaining it and registering a release finalizer.
 func SharingServiceFromID(id objc.ID) *SharingService {
 	if id == 0 {
 		return nil
 	}
-	return &SharingService{inner: raw.NSSharingServiceFromID(id)}
-}
-
-// Creates a custom sharing service object.
-//
-// NewSharingServiceWithTitleImageAlternateImageHandler creates a new [SharingService].
-func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *raw.NSImage, alternateImage *raw.NSImage, block func()) *SharingService {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingService")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:image:alternateImage:handler:"), foundation.NSStringStringWithUTF8String(title).Ptr(), image.Ptr(), alternateImage.Ptr(), block)
-	return &SharingService{inner: raw.NSSharingServiceFromID(_id)}
-}
-
-// Specifies the delegate of the sharing service.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SharingService) WithDelegate(delegate raw.NSSharingServiceDelegate) *SharingService {
-	x.inner.SetDelegate(delegate)
+	x := &SharingService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The title of the service in the Share menu.
-//
-// WithMenuItemTitle sets the menuItemTitle property and returns the receiver for chaining.
+// sharingServiceAdopt wraps an Objective-C object that this code just created as a
+// SharingService (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharingServiceAdopt(id objc.ID) *SharingService {
+	if id == 0 {
+		return nil
+	}
+	x := &SharingService{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharingService) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharingService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharingService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharingService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharingServiceWithTitleImageAlternateImageHandler creates a custom sharing service object.
+func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *Image, alternateImage *Image, block func()) *SharingService {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingService")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:image:alternateImage:handler:"), purego.NSString(title), objref.IDOf(image), objref.IDOf(alternateImage), objc.NewBlock(func(_ objc.Block) { block() }))
+	return sharingServiceAdopt(_id)
+}
+
+// WithMenuItemTitle the title of the service in the Share menu.
 func (x *SharingService) WithMenuItemTitle(menuItemTitle string) *SharingService {
-	x.inner.SetMenuItemTitle(foundation.NSStringStringWithUTF8String(menuItemTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItemTitle:"), purego.NSString(menuItemTitle))
 	return x
 }
 
-// An array containing the user handles of the desired recipients.
-//
-// WithRecipients sets the collection, converting the Go slice to an NSArray.
-func (x *SharingService) WithRecipients(items ...*foundation.NSString) *SharingService {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRecipients(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRecipients(_arr)
+// WithRecipients an array containing the user handles of the desired recipients.
+func (x *SharingService) WithRecipients(items ...obj.Object) *SharingService {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipients:"), _arr)
 	return x
 }
 
-// The subject of the post.
-//
-// WithSubject sets the subject property and returns the receiver for chaining.
+// WithSubject the subject of the post.
 func (x *SharingService) WithSubject(subject string) *SharingService {
-	x.inner.SetSubject(foundation.NSStringStringWithUTF8String(subject))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubject:"), purego.NSString(subject))
 	return x
 }
 
-// Returns whether the service can share all the specified items.
-//
-// CanPerformWithItems calls the underlying CanPerformWithItems.
-func (x *SharingService) CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool {
-	return x.inner.CanPerformWithItems(items)
+// CanPerformWithItems returns whether the service can share all the specified items.
+func (x *SharingService) CanPerformWithItems(items obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformWithItems:"), objref.IDOf(items))
+	return _r
 }
 
-// Manually performs the service on the provided items.
-//
-// PerformWithItems calls the underlying PerformWithItems.
-func (x *SharingService) PerformWithItems(items *foundation.NSArray[objc.ID]) {
-	x.inner.PerformWithItems(items)
+// PerformWithItems manually performs the service on the provided items.
+func (x *SharingService) PerformWithItems(items obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performWithItems:"), objref.IDOf(items))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *SharingService) Delegate() raw.NSSharingServiceDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SharingService) SetDelegate(delegate raw.NSSharingServiceDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *SharingService) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Image calls the underlying Image.
+// Image wraps the corresponding Objective-C method.
 func (x *SharingService) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
-// AlternateImage calls the underlying AlternateImage.
+// AlternateImage wraps the corresponding Objective-C method.
 func (x *SharingService) AlternateImage() *Image {
-	_r := x.inner.AlternateImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateImage"))
+	return ImageFromID(_r)
 }
 
-// Title of the service in the Share menu. Can be modified.
-//
-// MenuItemTitle calls the underlying MenuItemTitle.
+// MenuItemTitle title of the service in the Share menu. Can be modified.
 func (x *SharingService) MenuItemTitle() string {
-	_r := x.inner.MenuItemTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItemTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Title of the service in the Share menu. Can be modified.
-//
-// SetMenuItemTitle calls the underlying SetMenuItemTitle.
+// SetMenuItemTitle title of the service in the Share menu. Can be modified.
 func (x *SharingService) SetMenuItemTitle(menuItemTitle string) {
-	x.inner.SetMenuItemTitle(foundation.NSStringStringWithUTF8String(menuItemTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItemTitle:"), purego.NSString(menuItemTitle))
 }
 
-// NSArray of NSString objects representing handles (example: email adresses)
+// Recipients NSArray of NSString objects representing handles (example: email adresses)
 //
 // Recipients returns the collection as a Go slice.
 func (x *SharingService) Recipients() []string {
-	arr := x.inner.Recipients()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipients"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NSArray of NSString objects representing handles (example: email adresses)
-//
-// SetRecipients calls the underlying SetRecipients.
-func (x *SharingService) SetRecipients(recipients *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetRecipients(recipients)
+// SetRecipients NSArray of NSString objects representing handles (example: email adresses)
+func (x *SharingService) SetRecipients(recipients []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipients:"), purego.SliceToNSArray(recipients, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Subject calls the underlying Subject.
+// Subject wraps the corresponding Objective-C method.
 func (x *SharingService) Subject() string {
-	_r := x.inner.Subject()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSubject calls the underlying SetSubject.
+// SetSubject wraps the corresponding Objective-C method.
 func (x *SharingService) SetSubject(subject string) {
-	x.inner.SetSubject(foundation.NSStringStringWithUTF8String(subject))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubject:"), purego.NSString(subject))
 }
 
-// Message body as string
-//
-// MessageBody calls the underlying MessageBody.
+// MessageBody message body as string
 func (x *SharingService) MessageBody() string {
-	_r := x.inner.MessageBody()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageBody"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
-//
-// PermanentLink calls the underlying PermanentLink.
-func (x *SharingService) PermanentLink() *foundation.NSURL {
-	return x.inner.PermanentLink()
+// PermanentLink URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
+func (x *SharingService) PermanentLink() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("permanentLink"))
+	return obj.Wrap(_r)
 }
 
-// Account name used for sending on Twitter or Sina Weibo
-//
-// AccountName calls the underlying AccountName.
+// AccountName account name used for sending on Twitter or Sina Weibo
 func (x *SharingService) AccountName() string {
-	_r := x.inner.AccountName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// NSArray of NSURL objects representing the files that were shared
+// AttachmentFileURLs NSArray of NSURL objects representing the files that were shared
 //
 // AttachmentFileURLs returns the collection as a Go slice.
-func (x *SharingService) AttachmentFileURLs() []*foundation.NSURL {
-	arr := x.inner.AttachmentFileURLs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
-		return foundation.NSURLFromID(purego.Retain(_id))
-	})
+func (x *SharingService) AttachmentFileURLs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachmentFileURLs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SharingServiceable is the interface implemented by [SharingService], for mocking and DI.
 type SharingServiceable interface {
-	Unwrap() *raw.NSSharingService
-	WithDelegate(delegate raw.NSSharingServiceDelegate) *SharingService
+	obj.Object
 	WithMenuItemTitle(menuItemTitle string) *SharingService
-	WithRecipients(items ...*foundation.NSString) *SharingService
+	WithRecipients(items ...obj.Object) *SharingService
 	WithSubject(subject string) *SharingService
-	CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool
-	PerformWithItems(items *foundation.NSArray[objc.ID])
-	Delegate() raw.NSSharingServiceDelegate
-	SetDelegate(delegate raw.NSSharingServiceDelegate)
+	CanPerformWithItems(items obj.Object) bool
+	PerformWithItems(items obj.Object)
 	Title() string
 	Image() *Image
 	AlternateImage() *Image
 	MenuItemTitle() string
 	SetMenuItemTitle(menuItemTitle string)
 	Recipients() []string
-	SetRecipients(recipients *foundation.NSArray[*foundation.NSString])
+	SetRecipients(recipients []string)
 	Subject() string
 	SetSubject(subject string)
 	MessageBody() string
-	PermanentLink() *foundation.NSURL
+	PermanentLink() obj.Object
 	AccountName() string
-	AttachmentFileURLs() []*foundation.NSURL
+	AttachmentFileURLs() []obj.Object
 }
 
 var _ SharingServiceable = (*SharingService)(nil)

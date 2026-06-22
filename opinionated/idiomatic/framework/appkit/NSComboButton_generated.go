@@ -5,742 +5,597 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A button with a pull-down menu and a default action.
+// ComboButton is an idiomatic wrapper over the Objective-C class NSComboButton.
 //
-// ComboButton wraps [raw.NSComboButton] with a fluent Go API.
+// It embeds [Control], promoting that type's methods.
+//
+// A button with a pull-down menu and a default action.
 type ComboButton struct {
-	inner *raw.NSComboButton
+	Control
 }
 
-// Unwrap returns the underlying [raw.NSComboButton].
-func (x *ComboButton) Unwrap() *raw.NSComboButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComboButton) ID() objc.ID { return x.inner.Ptr() }
-
-// ComboButtonFromID adopts an existing object pointer as a ComboButton (nil for 0).
+// ComboButtonFromID adopts an existing Objective-C object as a ComboButton
+// (nil for 0), retaining it and registering a release finalizer.
 func ComboButtonFromID(id objc.ID) *ComboButton {
 	if id == 0 {
 		return nil
 	}
-	return &ComboButton{inner: raw.NSComboButtonFromID(id)}
-}
-
-// NewComboButton creates a new [ComboButton].
-func NewComboButton() *ComboButton {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComboButton")), objc.RegisterName("new"))
-	return &ComboButton{inner: raw.NSComboButtonFromID(_id)}
-}
-
-// The localized string that the button displays.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *ComboButton) WithTitle(title string) *ComboButton {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
-	return x
-}
-
-// The image that the button displays.
-//
-// WithImage sets the image property and returns the receiver for chaining.
-func (x *ComboButton) WithImage(image *Image) *ComboButton {
-	x.inner.SetImage(image.Unwrap())
-	return x
-}
-
-// The scaling behavior to apply to the button’s image.
-//
-// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ComboButton) WithImageScaling(imageScaling NSImageScaling) *ComboButton {
-	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
-	return x
-}
-
-// The appearance setting that determines how the button presents its menu .
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *ComboButton) WithStyle(style NSComboButtonStyle) *ComboButton {
-	x.inner.SetStyle(raw.NSComboButtonStyle(style))
-	return x
-}
-
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ComboButton) WithTarget(target objc.ID) *ComboButton {
-	x.inner.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ComboButton) WithAction(action objc.SEL) *ComboButton {
-	x.inner.NSControl.SetAction(action)
-	return x
-}
-
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets the tag property and returns the receiver for chaining.
-func (x *ComboButton) WithTag(tag int) *ComboButton {
-	x.inner.NSControl.SetTag(tag)
-	return x
-}
-
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
-func (x *ComboButton) WithIgnoresMultiClick(ignoresMultiClick bool) *ComboButton {
-	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
-	return x
-}
-
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
-func (x *ComboButton) WithContinuous(continuous bool) *ComboButton {
-	x.inner.NSControl.SetContinuous(continuous)
-	return x
-}
-
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *ComboButton) WithEnabled(enabled bool) *ComboButton {
-	x.inner.NSControl.SetEnabled(enabled)
-	return x
-}
-
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
-func (x *ComboButton) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboButton {
-	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
-	return x
-}
-
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
-func (x *ComboButton) WithHighlighted(highlighted bool) *ComboButton {
-	x.inner.NSControl.SetHighlighted(highlighted)
-	return x
-}
-
-// The size of the control.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ComboButton) WithControlSize(controlSize NSControlSize) *ComboButton {
-	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
-	return x
-}
-
-// The receiver’s formatter.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *ComboButton) WithFormatter(formatter *foundation.NSFormatter) *ComboButton {
-	x.inner.NSControl.SetFormatter(formatter)
-	return x
-}
-
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *ComboButton) WithObjectValue(objectValue objc.ID) *ComboButton {
-	x.inner.NSControl.SetObjectValue(objectValue)
-	return x
-}
-
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
-func (x *ComboButton) WithStringValue(stringValue string) *ComboButton {
-	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
-	return x
-}
-
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *ComboButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboButton {
-	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
-	return x
-}
-
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
-func (x *ComboButton) WithIntValue(intValue int) *ComboButton {
-	x.inner.NSControl.SetIntValue(intValue)
-	return x
-}
-
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
-func (x *ComboButton) WithIntegerValue(integerValue int) *ComboButton {
-	x.inner.NSControl.SetIntegerValue(integerValue)
-	return x
-}
-
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
-func (x *ComboButton) WithFloatValue(floatValue float32) *ComboButton {
-	x.inner.NSControl.SetFloatValue(floatValue)
-	return x
-}
-
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
-func (x *ComboButton) WithDoubleValue(doubleValue float64) *ComboButton {
-	x.inner.NSControl.SetDoubleValue(doubleValue)
-	return x
-}
-
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets the font property and returns the receiver for chaining.
-func (x *ComboButton) WithFont(font *Font) *ComboButton {
-	x.inner.NSControl.SetFont(font.Unwrap())
-	return x
-}
-
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
-func (x *ComboButton) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton {
-	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
-	return x
-}
-
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ComboButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboButton {
-	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
-	return x
-}
-
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ComboButton) WithAlignment(alignment NSTextAlignment) *ComboButton {
-	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
-	return x
-}
-
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ComboButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboButton {
-	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
-	return x
-}
-
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
-func (x *ComboButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboButton {
-	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
-	return x
-}
-
-// WithCell sets the cell property and returns the receiver for chaining.
-func (x *ComboButton) WithCell(cell CellProvider) *ComboButton {
-	x.inner.NSControl.SetCell(cell.asCell())
-	return x
-}
-
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
-func (x *ComboButton) WithSubviews(items ...ViewProvider) *ComboButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetSubviews(_arr)
-	return x
-}
-
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *ComboButton) WithHidden(hidden bool) *ComboButton {
-	x.inner.NSControl.NSView.SetHidden(hidden)
-	return x
-}
-
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
-func (x *ComboButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboButton {
-	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
-	return x
-}
-
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
-func (x *ComboButton) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboButton {
-	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
-	return x
-}
-
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ComboButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ComboButton {
-	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
-	return x
-}
-
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *ComboButton) WithFrame(frame corefoundation.CGRect) *ComboButton {
-	x.inner.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
-func (x *ComboButton) WithFrameRotation(frameRotation float64) *ComboButton {
-	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
-	return x
-}
-
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
-func (x *ComboButton) WithFrameCenterRotation(frameCenterRotation float64) *ComboButton {
-	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
-	return x
-}
-
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
-func (x *ComboButton) WithBoundsRotation(boundsRotation float64) *ComboButton {
-	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
-	return x
-}
-
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *ComboButton) WithBounds(bounds corefoundation.CGRect) *ComboButton {
-	x.inner.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
-func (x *ComboButton) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboButton {
-	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	x := &ComboButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
-}
-
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
-func (x *ComboButton) WithNeedsDisplay(needsDisplay bool) *ComboButton {
-	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
-	return x
-}
-
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
-func (x *ComboButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboButton {
-	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
-	return x
-}
-
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
-func (x *ComboButton) WithWantsRestingTouches(wantsRestingTouches bool) *ComboButton {
-	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
-	return x
-}
-
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ComboButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ComboButton {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
-	return x
-}
-
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ComboButton) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ComboButton {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
-	return x
-}
-
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
-func (x *ComboButton) WithWantsLayer(wantsLayer bool) *ComboButton {
-	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
-	return x
-}
-
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *ComboButton) WithLayer(layer *quartzcore.CALayer) *ComboButton {
-	x.inner.NSControl.NSView.SetLayer(layer)
-	return x
-}
-
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
-func (x *ComboButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboButton {
-	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
-	return x
-}
-
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
-func (x *ComboButton) WithNeedsLayout(needsLayout bool) *ComboButton {
-	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
-	return x
-}
-
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
-func (x *ComboButton) WithAlphaValue(alphaValue float64) *ComboButton {
-	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
-	return x
-}
-
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
-func (x *ComboButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboButton {
-	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
-	return x
-}
-
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ComboButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
-	return x
-}
-
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *ComboButton) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ComboButton {
-	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
-	return x
-}
-
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ComboButton) WithContentFilters(items ...*coreimage.CIFilter) *ComboButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetContentFilters(_arr)
-	return x
-}
-
-// WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ComboButton) WithShadow(shadow *Shadow) *ComboButton {
-	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
-	return x
-}
-
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
-func (x *ComboButton) WithClipsToBounds(clipsToBounds bool) *ComboButton {
-	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
-	return x
-}
-
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
-func (x *ComboButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton {
-	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
-	return x
-}
-
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
-func (x *ComboButton) WithToolTip(toolTip string) *ComboButton {
-	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
-	return x
-}
-
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ComboButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboButton {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
-	return x
-}
-
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *ComboButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboButton {
-	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
-func (x *ComboButton) WithNextKeyView(nextKeyView ViewProvider) *ComboButton {
-	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
-	return x
-}
-
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ComboButton) WithFocusRingType(focusRingType NSFocusRingType) *ComboButton {
-	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
-	return x
-}
-
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
-func (x *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
-	return x
-}
-
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ComboButton) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ComboButton {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *ComboButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton {
-	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
-	return x
-}
-
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
-func (x *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton {
-	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
-	return x
-}
-
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
-	return x
-}
-
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
-func (x *ComboButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboButton {
-	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
-	return x
-}
-
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
-func (x *ComboButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboButton {
-	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
-	return x
-}
-
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *ComboButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboButton {
-	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
-	return x
-}
-
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
-func (x *ComboButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboButton {
-	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
-	return x
-}
-
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
-func (x *ComboButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboButton {
-	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
-	return x
-}
-
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
-func (x *ComboButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboButton {
-	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
-	return x
-}
-
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
-	return x
-}
-
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
-func (x *ComboButton) WithNextResponder(nextResponder ResponderProvider) *ComboButton {
-	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
-	return x
-}
-
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ComboButton) WithMenu(menu *Menu) *ComboButton {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
-	return x
-}
-
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ComboButton) WithUserActivity(userActivity *foundation.NSUserActivity) *ComboButton {
-	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
-	return x
-}
-
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
-	return x
-}
-
-// The title displayed on the control. The default value is an empty string.
-//
-// Title calls the underlying Title.
-func (x *ComboButton) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// The title displayed on the control. The default value is an empty string.
-//
-// SetTitle calls the underlying SetTitle.
-func (x *ComboButton) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
-// The image displayed on the control. The default value is `nil`.
-//
-// Image calls the underlying Image.
-func (x *ComboButton) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
+// comboButtonAdopt wraps an Objective-C object that this code just created as a
+// ComboButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func comboButtonAdopt(id objc.ID) *ComboButton {
+	if id == 0 {
 		return nil
 	}
-	return &Image{inner: _r}
+	x := &ComboButton{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The image displayed on the control. The default value is `nil`.
-//
-// SetImage calls the underlying SetImage.
-func (x *ComboButton) SetImage(image *raw.NSImage) {
-	x.inner.SetImage(image)
+// NewComboButton creates a new ComboButton.
+func NewComboButton() *ComboButton {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSComboButton")), objc.RegisterName("new"))
+	return comboButtonAdopt(_id)
 }
 
-// The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
-//
-// ImageScaling calls the underlying ImageScaling.
-func (x *ComboButton) ImageScaling() NSImageScaling {
-	return NSImageScaling(x.inner.ImageScaling())
+// WithTitle the localized string that the button displays.
+func (x *ComboButton) WithTitle(title string) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
 }
 
-// The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
-//
-// SetImageScaling calls the underlying SetImageScaling.
-func (x *ComboButton) SetImageScaling(imageScaling NSImageScaling) {
-	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
+// WithImage the image that the button displays.
+func (x *ComboButton) WithImage(image *Image) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return x
 }
 
-// Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
-//
-// Style calls the underlying Style.
-func (x *ComboButton) Style() NSComboButtonStyle {
-	return NSComboButtonStyle(x.inner.Style())
+// WithImageScaling the scaling behavior to apply to the button’s image.
+func (x *ComboButton) WithImageScaling(imageScaling ImageScaling) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
+	return x
 }
 
-// Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
-//
-// SetStyle calls the underlying SetStyle.
-func (x *ComboButton) SetStyle(style NSComboButtonStyle) {
-	x.inner.SetStyle(raw.NSComboButtonStyle(style))
+// WithStyle the appearance setting that determines how the button presents its menu .
+func (x *ComboButton) WithStyle(style ComboButtonStyle) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
+	return x
 }
 
-func (x *ComboButton) asControl() *raw.NSControl { return &x.inner.NSControl }
+// WithTarget the target object that receives action messages from the cell.
+func (x *ComboButton) WithTarget(target obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return x
+}
 
-func (x *ComboButton) asView() *raw.NSView { return &x.inner.NSControl.NSView }
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
+func (x *ComboButton) WithTag(tag int) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
+	return x
+}
 
-func (x *ComboButton) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (x *ComboButton) WithIgnoresMultiClick(ignoresMultiClick bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return x
+}
+
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (x *ComboButton) WithContinuous(continuous bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
+	return x
+}
+
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
+func (x *ComboButton) WithEnabled(enabled bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
+func (x *ComboButton) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
+func (x *ComboButton) WithHighlighted(highlighted bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
+	return x
+}
+
+// WithControlSize the size of the control.
+func (x *ComboButton) WithControlSize(controlSize ControlSize) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
+	return x
+}
+
+// WithFormatter the receiver’s formatter.
+func (x *ComboButton) WithFormatter(formatter obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return x
+}
+
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
+func (x *ComboButton) WithObjectValue(objectValue obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return x
+}
+
+// WithStringValue the value of the receiver’s cell as an NSString object.
+func (x *ComboButton) WithStringValue(stringValue string) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return x
+}
+
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
+func (x *ComboButton) WithAttributedStringValue(attributedStringValue obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return x
+}
+
+// WithIntValue the value of the receiver’s cell as an integer.
+func (x *ComboButton) WithIntValue(intValue int) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
+	return x
+}
+
+// WithIntegerValue the value of the receiver’s cell as an integer value.
+func (x *ComboButton) WithIntegerValue(integerValue int) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
+	return x
+}
+
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
+func (x *ComboButton) WithFloatValue(floatValue float32) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
+	return x
+}
+
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
+func (x *ComboButton) WithDoubleValue(doubleValue float64) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return x
+}
+
+// WithFont the font used to draw text in the receiver’s cell.
+func (x *ComboButton) WithFont(font *Font) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return x
+}
+
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (x *ComboButton) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
+func (x *ComboButton) WithLineBreakMode(lineBreakMode LineBreakMode) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return x
+}
+
+// WithAlignment the alignment mode of the text in the receiver’s cell.
+func (x *ComboButton) WithAlignment(alignment TextAlignment) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
+	return x
+}
+
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *ComboButton) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (x *ComboButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithCell(cell CellProvider) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return x
+}
+
+// WithSubviews sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithSubviews(items ...ViewProvider) *ComboButton {
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
+	return x
+}
+
+// WithHidden sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithHidden(hidden bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return x
+}
+
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (x *ComboButton) WithFrame(frame corefoundation.CGRect) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
+	return x
+}
+
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithFrameRotation(frameRotation float64) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithFrameCenterRotation(frameCenterRotation float64) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithBoundsRotation(boundsRotation float64) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return x
+}
+
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (x *ComboButton) WithBounds(bounds corefoundation.CGRect) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (x *ComboButton) WithNeedsDisplay(needsDisplay bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithWantsRestingTouches(wantsRestingTouches bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithWantsLayer(wantsLayer bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return x
+}
+
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithLayer(layer obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithNeedsLayout(needsLayout bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithAlphaValue(alphaValue float64) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithBackgroundFilters(items ...obj.Object) *ComboButton {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return x
+}
+
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithCompositingFilter(compositingFilter obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return x
+}
+
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithContentFilters(items ...obj.Object) *ComboButton {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
+	return x
+}
+
+// WithShadow sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithShadow(shadow *Shadow) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return x
+}
+
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithClipsToBounds(clipsToBounds bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithToolTip(toolTip string) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithNextKeyView(nextKeyView ViewProvider) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return x
+}
+
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithFocusRingType(focusRingType FocusRingType) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton {
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (x *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+func (x *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return x
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
+func (x *ComboButton) WithNextResponder(nextResponder ResponderProvider) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return x
+}
+
+// WithMenu returns the responder’s menu.
+func (x *ComboButton) WithMenu(menu *Menu) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return x
+}
+
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *ComboButton) WithUserActivity(userActivity obj.Object) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// WithTouchBar the NSTouchBar object associated with the responder.
+func (x *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return x
+}
+
+// Title the title displayed on the control. The default value is an empty string.
+func (x *ComboButton) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetTitle the title displayed on the control. The default value is an empty string.
+func (x *ComboButton) SetTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+}
+
+// Image the image displayed on the control. The default value is `nil`.
+func (x *ComboButton) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
+}
+
+// SetImage the image displayed on the control. The default value is `nil`.
+func (x *ComboButton) SetImage(image *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
+}
+
+// ImageScaling the scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
+func (x *ComboButton) ImageScaling() ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScaling"))
+	return _r
+}
+
+// SetImageScaling the scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
+func (x *ComboButton) SetImageScaling(imageScaling ImageScaling) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
+}
+
+// Style specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
+func (x *ComboButton) Style() ComboButtonStyle {
+	_r := objc.Send[ComboButtonStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
+}
+
+// SetStyle specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
+func (x *ComboButton) SetStyle(style ComboButtonStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
+}
 
 // ComboButtonable is the interface implemented by [ComboButton], for mocking and DI.
 type ComboButtonable interface {
-	Unwrap() *raw.NSComboButton
+	obj.Object
 	WithTitle(title string) *ComboButton
 	WithImage(image *Image) *ComboButton
-	WithImageScaling(imageScaling NSImageScaling) *ComboButton
-	WithStyle(style NSComboButtonStyle) *ComboButton
-	WithTarget(target objc.ID) *ComboButton
-	WithAction(action objc.SEL) *ComboButton
+	WithImageScaling(imageScaling ImageScaling) *ComboButton
+	WithStyle(style ComboButtonStyle) *ComboButton
+	WithTarget(target obj.Object) *ComboButton
 	WithTag(tag int) *ComboButton
 	WithIgnoresMultiClick(ignoresMultiClick bool) *ComboButton
 	WithContinuous(continuous bool) *ComboButton
 	WithEnabled(enabled bool) *ComboButton
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ComboButton
 	WithHighlighted(highlighted bool) *ComboButton
-	WithControlSize(controlSize NSControlSize) *ComboButton
-	WithFormatter(formatter *foundation.NSFormatter) *ComboButton
-	WithObjectValue(objectValue objc.ID) *ComboButton
+	WithControlSize(controlSize ControlSize) *ComboButton
+	WithFormatter(formatter obj.Object) *ComboButton
+	WithObjectValue(objectValue obj.Object) *ComboButton
 	WithStringValue(stringValue string) *ComboButton
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboButton
+	WithAttributedStringValue(attributedStringValue obj.Object) *ComboButton
 	WithIntValue(intValue int) *ComboButton
 	WithIntegerValue(integerValue int) *ComboButton
 	WithFloatValue(floatValue float32) *ComboButton
 	WithDoubleValue(doubleValue float64) *ComboButton
 	WithFont(font *Font) *ComboButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboButton
-	WithAlignment(alignment NSTextAlignment) *ComboButton
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboButton
+	WithLineBreakMode(lineBreakMode LineBreakMode) *ComboButton
+	WithAlignment(alignment TextAlignment) *ComboButton
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ComboButton
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboButton
 	WithCell(cell CellProvider) *ComboButton
 	WithSubviews(items ...ViewProvider) *ComboButton
 	WithHidden(hidden bool) *ComboButton
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboButton
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ComboButton
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ComboButton
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ComboButton
 	WithFrame(frame corefoundation.CGRect) *ComboButton
 	WithFrameRotation(frameRotation float64) *ComboButton
 	WithFrameCenterRotation(frameCenterRotation float64) *ComboButton
@@ -750,27 +605,27 @@ type ComboButtonable interface {
 	WithNeedsDisplay(needsDisplay bool) *ComboButton
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboButton
 	WithWantsRestingTouches(wantsRestingTouches bool) *ComboButton
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ComboButton
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ComboButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ComboButton
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ComboButton
 	WithWantsLayer(wantsLayer bool) *ComboButton
-	WithLayer(layer *quartzcore.CALayer) *ComboButton
+	WithLayer(layer obj.Object) *ComboButton
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboButton
 	WithNeedsLayout(needsLayout bool) *ComboButton
 	WithAlphaValue(alphaValue float64) *ComboButton
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboButton
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboButton
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ComboButton
-	WithContentFilters(items ...*coreimage.CIFilter) *ComboButton
+	WithBackgroundFilters(items ...obj.Object) *ComboButton
+	WithCompositingFilter(compositingFilter obj.Object) *ComboButton
+	WithContentFilters(items ...obj.Object) *ComboButton
 	WithShadow(shadow *Shadow) *ComboButton
 	WithClipsToBounds(clipsToBounds bool) *ComboButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton
 	WithToolTip(toolTip string) *ComboButton
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboButton
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboButton
 	WithNextKeyView(nextKeyView ViewProvider) *ComboButton
-	WithFocusRingType(focusRingType NSFocusRingType) *ComboButton
+	WithFocusRingType(focusRingType FocusRingType) *ComboButton
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ComboButton
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboButton
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton
@@ -783,16 +638,22 @@ type ComboButtonable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton
 	WithNextResponder(nextResponder ResponderProvider) *ComboButton
 	WithMenu(menu *Menu) *ComboButton
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ComboButton
+	WithUserActivity(userActivity obj.Object) *ComboButton
 	WithTouchBar(touchBar *TouchBar) *ComboButton
 	Title() string
 	SetTitle(title string)
 	Image() *Image
-	SetImage(image *raw.NSImage)
-	ImageScaling() NSImageScaling
-	SetImageScaling(imageScaling NSImageScaling)
-	Style() NSComboButtonStyle
-	SetStyle(style NSComboButtonStyle)
+	SetImage(image *Image)
+	ImageScaling() ImageScaling
+	SetImageScaling(imageScaling ImageScaling)
+	Style() ComboButtonStyle
+	SetStyle(style ComboButtonStyle)
 }
 
 var _ ComboButtonable = (*ComboButton)(nil)
+
+var _ ControlProvider = (*ComboButton)(nil)
+
+var _ ViewProvider = (*ComboButton)(nil)
+
+var _ ResponderProvider = (*ComboButton)(nil)

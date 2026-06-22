@@ -6,384 +6,265 @@ package intents
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// SuccessWithResolvedValue calls the underlying INBooleanResolutionResultSuccessWithResolvedValue.
+// SuccessWithResolvedValue creates an object whose resolution involves the successful matching of the specified value.
 func SuccessWithResolvedValue(resolvedValue bool) *BooleanResolutionResult {
-	_r := raw.INBooleanResolutionResultSuccessWithResolvedValue(resolvedValue)
-	if _r == nil {
-		return nil
-	}
-	return &BooleanResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INBooleanResolutionResult")), objc.RegisterName("successWithResolvedValue:"), resolvedValue)
+	return BooleanResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithValueToConfirm calls the underlying INBooleanResolutionResultConfirmationRequiredWithValueToConfirm.
-func ConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *BooleanResolutionResult {
-	_r := raw.INBooleanResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &BooleanResolutionResult{inner: _r}
+// ConfirmationRequiredWithValueToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithValueToConfirm(valueToConfirm obj.Object) *BooleanResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INBooleanResolutionResult")), objc.RegisterName("confirmationRequiredWithValueToConfirm:"), objref.IDOf(valueToConfirm))
+	return BooleanResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedCallCapability calls the underlying INCallCapabilityResolutionResultSuccessWithResolvedCallCapability.
-func SuccessWithResolvedCallCapability(resolvedCallCapability INCallCapability) *CallCapabilityResolutionResult {
-	_r := raw.INCallCapabilityResolutionResultSuccessWithResolvedCallCapability(raw.INCallCapability(resolvedCallCapability))
-	if _r == nil {
-		return nil
-	}
-	return &CallCapabilityResolutionResult{inner: _r}
+// SuccessWithResolvedCallCapability creates an object whose resolution involves the successful matching of the specified call capability.
+func SuccessWithResolvedCallCapability(resolvedCallCapability CallCapability) *CallCapabilityResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallCapabilityResolutionResult")), objc.RegisterName("successWithResolvedCallCapability:"), resolvedCallCapability)
+	return CallCapabilityResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithCallCapabilityToConfirm calls the underlying INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm.
-func ConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm INCallCapability) *CallCapabilityResolutionResult {
-	_r := raw.INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm(raw.INCallCapability(callCapabilityToConfirm))
-	if _r == nil {
-		return nil
-	}
-	return &CallCapabilityResolutionResult{inner: _r}
+// ConfirmationRequiredWithCallCapabilityToConfirm creates a result that asks Siri to verify the request that the user wants to continue.
+func ConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm CallCapability) *CallCapabilityResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallCapabilityResolutionResult")), objc.RegisterName("confirmationRequiredWithCallCapabilityToConfirm:"), callCapabilityToConfirm)
+	return CallCapabilityResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedCallDestinationType calls the underlying INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType.
-func SuccessWithResolvedCallDestinationType(resolvedCallDestinationType INCallDestinationType) *CallDestinationTypeResolutionResult {
-	_r := raw.INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType(raw.INCallDestinationType(resolvedCallDestinationType))
-	if _r == nil {
-		return nil
-	}
-	return &CallDestinationTypeResolutionResult{inner: _r}
+// SuccessWithResolvedCallDestinationType creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedCallDestinationType(resolvedCallDestinationType CallDestinationType) *CallDestinationTypeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallDestinationTypeResolutionResult")), objc.RegisterName("successWithResolvedCallDestinationType:"), resolvedCallDestinationType)
+	return CallDestinationTypeResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithCallDestinationTypeToConfirm calls the underlying INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm.
-func ConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm INCallDestinationType) *CallDestinationTypeResolutionResult {
-	_r := raw.INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm(raw.INCallDestinationType(callDestinationTypeToConfirm))
-	if _r == nil {
-		return nil
-	}
-	return &CallDestinationTypeResolutionResult{inner: _r}
+// ConfirmationRequiredWithCallDestinationTypeToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm CallDestinationType) *CallDestinationTypeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallDestinationTypeResolutionResult")), objc.RegisterName("confirmationRequiredWithCallDestinationTypeToConfirm:"), callDestinationTypeToConfirm)
+	return CallDestinationTypeResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedCallRecord calls the underlying INCallRecordResolutionResultSuccessWithResolvedCallRecord.
-func SuccessWithResolvedCallRecord(resolvedCallRecord *raw.INCallRecord) *CallRecordResolutionResult {
-	_r := raw.INCallRecordResolutionResultSuccessWithResolvedCallRecord(resolvedCallRecord)
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordResolutionResult{inner: _r}
+// SuccessWithResolvedCallRecord creates a result that contains the call record that matches the users request.
+func SuccessWithResolvedCallRecord(resolvedCallRecord *CallRecord) *CallRecordResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordResolutionResult")), objc.RegisterName("successWithResolvedCallRecord:"), objref.IDOf(resolvedCallRecord))
+	return CallRecordResolutionResultFromID(_r)
 }
 
-// DisambiguationWithCallRecordsToDisambiguate calls the underlying INCallRecordResolutionResultDisambiguationWithCallRecordsToDisambiguate.
-func DisambiguationWithCallRecordsToDisambiguate(callRecordsToDisambiguate *foundation.NSArray[*raw.INCallRecord]) *CallRecordResolutionResult {
-	_r := raw.INCallRecordResolutionResultDisambiguationWithCallRecordsToDisambiguate(callRecordsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordResolutionResult{inner: _r}
+// DisambiguationWithCallRecordsToDisambiguate creates a result that requires the user to select from an array of choices.
+func DisambiguationWithCallRecordsToDisambiguate(callRecordsToDisambiguate []*CallRecord) *CallRecordResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordResolutionResult")), objc.RegisterName("disambiguationWithCallRecordsToDisambiguate:"), purego.SliceToNSArray(callRecordsToDisambiguate, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) }))
+	return CallRecordResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithCallRecordToConfirm calls the underlying INCallRecordResolutionResultConfirmationRequiredWithCallRecordToConfirm.
-func ConfirmationRequiredWithCallRecordToConfirm(callRecordToConfirm *raw.INCallRecord) *CallRecordResolutionResult {
-	_r := raw.INCallRecordResolutionResultConfirmationRequiredWithCallRecordToConfirm(callRecordToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordResolutionResult{inner: _r}
+// ConfirmationRequiredWithCallRecordToConfirm creates a result that requires the user to confirm the value before proceeding.
+func ConfirmationRequiredWithCallRecordToConfirm(callRecordToConfirm *CallRecord) *CallRecordResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordResolutionResult")), objc.RegisterName("confirmationRequiredWithCallRecordToConfirm:"), objref.IDOf(callRecordToConfirm))
+	return CallRecordResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedCallRecordTypeOptions calls the underlying INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions.
-func SuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions INCallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
-	_r := raw.INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions(raw.INCallRecordTypeOptions(resolvedCallRecordTypeOptions))
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordTypeOptionsResolutionResult{inner: _r}
+// SuccessWithResolvedCallRecordTypeOptions creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions CallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeOptionsResolutionResult")), objc.RegisterName("successWithResolvedCallRecordTypeOptions:"), resolvedCallRecordTypeOptions)
+	return CallRecordTypeOptionsResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithCallRecordTypeOptionsToConfirm calls the underlying INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm.
-func ConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm INCallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
-	_r := raw.INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm(raw.INCallRecordTypeOptions(callRecordTypeOptionsToConfirm))
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordTypeOptionsResolutionResult{inner: _r}
+// ConfirmationRequiredWithCallRecordTypeOptionsToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm CallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeOptionsResolutionResult")), objc.RegisterName("confirmationRequiredWithCallRecordTypeOptionsToConfirm:"), callRecordTypeOptionsToConfirm)
+	return CallRecordTypeOptionsResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedCallRecordType calls the underlying INCallRecordTypeResolutionResultSuccessWithResolvedCallRecordType.
-func SuccessWithResolvedCallRecordType(resolvedCallRecordType INCallRecordType) *CallRecordTypeResolutionResult {
-	_r := raw.INCallRecordTypeResolutionResultSuccessWithResolvedCallRecordType(raw.INCallRecordType(resolvedCallRecordType))
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordTypeResolutionResult{inner: _r}
+// SuccessWithResolvedCallRecordType creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedCallRecordType(resolvedCallRecordType CallRecordType) *CallRecordTypeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeResolutionResult")), objc.RegisterName("successWithResolvedCallRecordType:"), resolvedCallRecordType)
+	return CallRecordTypeResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithCallRecordTypeToConfirm calls the underlying INCallRecordTypeResolutionResultConfirmationRequiredWithCallRecordTypeToConfirm.
-func ConfirmationRequiredWithCallRecordTypeToConfirm(callRecordTypeToConfirm INCallRecordType) *CallRecordTypeResolutionResult {
-	_r := raw.INCallRecordTypeResolutionResultConfirmationRequiredWithCallRecordTypeToConfirm(raw.INCallRecordType(callRecordTypeToConfirm))
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordTypeResolutionResult{inner: _r}
+// ConfirmationRequiredWithCallRecordTypeToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithCallRecordTypeToConfirm(callRecordTypeToConfirm CallRecordType) *CallRecordTypeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeResolutionResult")), objc.RegisterName("confirmationRequiredWithCallRecordTypeToConfirm:"), callRecordTypeToConfirm)
+	return CallRecordTypeResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedCurrencyAmount calls the underlying INCurrencyAmountResolutionResultSuccessWithResolvedCurrencyAmount.
-func SuccessWithResolvedCurrencyAmount(resolvedCurrencyAmount *raw.INCurrencyAmount) *CurrencyAmountResolutionResult {
-	_r := raw.INCurrencyAmountResolutionResultSuccessWithResolvedCurrencyAmount(resolvedCurrencyAmount)
-	if _r == nil {
-		return nil
-	}
-	return &CurrencyAmountResolutionResult{inner: _r}
+// SuccessWithResolvedCurrencyAmount creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedCurrencyAmount(resolvedCurrencyAmount *CurrencyAmount) *CurrencyAmountResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmountResolutionResult")), objc.RegisterName("successWithResolvedCurrencyAmount:"), objref.IDOf(resolvedCurrencyAmount))
+	return CurrencyAmountResolutionResultFromID(_r)
 }
 
-// DisambiguationWithCurrencyAmountsToDisambiguate calls the underlying INCurrencyAmountResolutionResultDisambiguationWithCurrencyAmountsToDisambiguate.
-func DisambiguationWithCurrencyAmountsToDisambiguate(currencyAmountsToDisambiguate *foundation.NSArray[*raw.INCurrencyAmount]) *CurrencyAmountResolutionResult {
-	_r := raw.INCurrencyAmountResolutionResultDisambiguationWithCurrencyAmountsToDisambiguate(currencyAmountsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &CurrencyAmountResolutionResult{inner: _r}
+// DisambiguationWithCurrencyAmountsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithCurrencyAmountsToDisambiguate(currencyAmountsToDisambiguate []*CurrencyAmount) *CurrencyAmountResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmountResolutionResult")), objc.RegisterName("disambiguationWithCurrencyAmountsToDisambiguate:"), purego.SliceToNSArray(currencyAmountsToDisambiguate, func(_v *CurrencyAmount) objc.ID { return objref.IDOf(_v) }))
+	return CurrencyAmountResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithCurrencyAmountToConfirm calls the underlying INCurrencyAmountResolutionResultConfirmationRequiredWithCurrencyAmountToConfirm.
-func ConfirmationRequiredWithCurrencyAmountToConfirm(currencyAmountToConfirm *raw.INCurrencyAmount) *CurrencyAmountResolutionResult {
-	_r := raw.INCurrencyAmountResolutionResultConfirmationRequiredWithCurrencyAmountToConfirm(currencyAmountToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &CurrencyAmountResolutionResult{inner: _r}
+// ConfirmationRequiredWithCurrencyAmountToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithCurrencyAmountToConfirm(currencyAmountToConfirm *CurrencyAmount) *CurrencyAmountResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmountResolutionResult")), objc.RegisterName("confirmationRequiredWithCurrencyAmountToConfirm:"), objref.IDOf(currencyAmountToConfirm))
+	return CurrencyAmountResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedDateComponents calls the underlying INDateComponentsResolutionResultSuccessWithResolvedDateComponents.
-func SuccessWithResolvedDateComponents(resolvedDateComponents *foundation.NSDateComponents) *DateComponentsResolutionResult {
-	_r := raw.INDateComponentsResolutionResultSuccessWithResolvedDateComponents(resolvedDateComponents)
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsResolutionResult{inner: _r}
+// SuccessWithResolvedDateComponents creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedDateComponents(resolvedDateComponents obj.Object) *DateComponentsResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INDateComponentsResolutionResult")), objc.RegisterName("successWithResolvedDateComponents:"), objref.IDOf(resolvedDateComponents))
+	return DateComponentsResolutionResultFromID(_r)
 }
 
-// DisambiguationWithDateComponentsToDisambiguate calls the underlying INDateComponentsResolutionResultDisambiguationWithDateComponentsToDisambiguate.
-func DisambiguationWithDateComponentsToDisambiguate(dateComponentsToDisambiguate *foundation.NSArray[*foundation.NSDateComponents]) *DateComponentsResolutionResult {
-	_r := raw.INDateComponentsResolutionResultDisambiguationWithDateComponentsToDisambiguate(dateComponentsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsResolutionResult{inner: _r}
+// DisambiguationWithDateComponentsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithDateComponentsToDisambiguate(dateComponentsToDisambiguate []obj.Object) *DateComponentsResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INDateComponentsResolutionResult")), objc.RegisterName("disambiguationWithDateComponentsToDisambiguate:"), purego.SliceToNSArray(dateComponentsToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return DateComponentsResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithDateComponentsToConfirm calls the underlying INDateComponentsResolutionResultConfirmationRequiredWithDateComponentsToConfirm.
-func ConfirmationRequiredWithDateComponentsToConfirm(dateComponentsToConfirm *foundation.NSDateComponents) *DateComponentsResolutionResult {
-	_r := raw.INDateComponentsResolutionResultConfirmationRequiredWithDateComponentsToConfirm(dateComponentsToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsResolutionResult{inner: _r}
+// ConfirmationRequiredWithDateComponentsToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithDateComponentsToConfirm(dateComponentsToConfirm obj.Object) *DateComponentsResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INDateComponentsResolutionResult")), objc.RegisterName("confirmationRequiredWithDateComponentsToConfirm:"), objref.IDOf(dateComponentsToConfirm))
+	return DateComponentsResolutionResultFromID(_r)
 }
 
-// INDoubleResolutionResultSuccessWithResolvedValue calls the underlying INDoubleResolutionResultSuccessWithResolvedValue.
+// INDoubleResolutionResultSuccessWithResolvedValue creates an object whose resolution involves the successful matching of the specified value.
 func INDoubleResolutionResultSuccessWithResolvedValue(resolvedValue float64) *DoubleResolutionResult {
-	_r := raw.INDoubleResolutionResultSuccessWithResolvedValue(resolvedValue)
-	if _r == nil {
-		return nil
-	}
-	return &DoubleResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INDoubleResolutionResult")), objc.RegisterName("successWithResolvedValue:"), resolvedValue)
+	return DoubleResolutionResultFromID(_r)
 }
 
-// INDoubleResolutionResultConfirmationRequiredWithValueToConfirm calls the underlying INDoubleResolutionResultConfirmationRequiredWithValueToConfirm.
-func INDoubleResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *DoubleResolutionResult {
-	_r := raw.INDoubleResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &DoubleResolutionResult{inner: _r}
+// INDoubleResolutionResultConfirmationRequiredWithValueToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func INDoubleResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm obj.Object) *DoubleResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INDoubleResolutionResult")), objc.RegisterName("confirmationRequiredWithValueToConfirm:"), objref.IDOf(valueToConfirm))
+	return DoubleResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedEnergy calls the underlying INEnergyResolutionResultSuccessWithResolvedEnergy.
-func SuccessWithResolvedEnergy(resolvedEnergy *foundation.NSMeasurement[*foundation.NSUnitEnergy]) *EnergyResolutionResult {
-	_r := raw.INEnergyResolutionResultSuccessWithResolvedEnergy(resolvedEnergy)
-	if _r == nil {
-		return nil
-	}
-	return &EnergyResolutionResult{inner: _r}
+// SuccessWithResolvedEnergy creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedEnergy(resolvedEnergy obj.Object) *EnergyResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INEnergyResolutionResult")), objc.RegisterName("successWithResolvedEnergy:"), objref.IDOf(resolvedEnergy))
+	return EnergyResolutionResultFromID(_r)
 }
 
-// DisambiguationWithEnergyToDisambiguate calls the underlying INEnergyResolutionResultDisambiguationWithEnergyToDisambiguate.
-func DisambiguationWithEnergyToDisambiguate(energyToDisambiguate *foundation.NSArray[objc.ID]) *EnergyResolutionResult {
-	_r := raw.INEnergyResolutionResultDisambiguationWithEnergyToDisambiguate(energyToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &EnergyResolutionResult{inner: _r}
+// DisambiguationWithEnergyToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithEnergyToDisambiguate(energyToDisambiguate []obj.Object) *EnergyResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INEnergyResolutionResult")), objc.RegisterName("disambiguationWithEnergyToDisambiguate:"), purego.SliceToNSArray(energyToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return EnergyResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithEnergyToConfirm calls the underlying INEnergyResolutionResultConfirmationRequiredWithEnergyToConfirm.
-func ConfirmationRequiredWithEnergyToConfirm(energyToConfirm *foundation.NSMeasurement[*foundation.NSUnitEnergy]) *EnergyResolutionResult {
-	_r := raw.INEnergyResolutionResultConfirmationRequiredWithEnergyToConfirm(energyToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &EnergyResolutionResult{inner: _r}
+// ConfirmationRequiredWithEnergyToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithEnergyToConfirm(energyToConfirm obj.Object) *EnergyResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INEnergyResolutionResult")), objc.RegisterName("confirmationRequiredWithEnergyToConfirm:"), objref.IDOf(energyToConfirm))
+	return EnergyResolutionResultFromID(_r)
 }
 
-// INEnumResolutionResultSuccessWithResolvedValue calls the underlying INEnumResolutionResultSuccessWithResolvedValue.
+// INEnumResolutionResultSuccessWithResolvedValue creates an object whose resolution involves the successful matching of the specified parameter.
 func INEnumResolutionResultSuccessWithResolvedValue(resolvedValue int) *EnumResolutionResult {
-	_r := raw.INEnumResolutionResultSuccessWithResolvedValue(resolvedValue)
-	if _r == nil {
-		return nil
-	}
-	return &EnumResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INEnumResolutionResult")), objc.RegisterName("successWithResolvedValue:"), resolvedValue)
+	return EnumResolutionResultFromID(_r)
 }
 
-// INEnumResolutionResultConfirmationRequiredWithValueToConfirm calls the underlying INEnumResolutionResultConfirmationRequiredWithValueToConfirm.
+// INEnumResolutionResultConfirmationRequiredWithValueToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INEnumResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm int) *EnumResolutionResult {
-	_r := raw.INEnumResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &EnumResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INEnumResolutionResult")), objc.RegisterName("confirmationRequiredWithValueToConfirm:"), valueToConfirm)
+	return EnumResolutionResultFromID(_r)
 }
 
-// FileWithDataFilenameTypeIdentifier calls the underlying INFileFileWithDataFilenameTypeIdentifier.
-func FileWithDataFilenameTypeIdentifier(data *foundation.NSData, filename string, typeIdentifier string) *File {
-	_r := raw.INFileFileWithDataFilenameTypeIdentifier(data, foundation.NSStringStringWithUTF8String(filename), foundation.NSStringStringWithUTF8String(typeIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+// FileWithDataFilenameTypeIdentifier creates a new file object with the specified data and identifier.
+func FileWithDataFilenameTypeIdentifier(data obj.Object, filename string, typeIdentifier string) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("INFile")), objc.RegisterName("fileWithData:filename:typeIdentifier:"), objref.IDOf(data), purego.NSString(filename), purego.NSString(typeIdentifier))
+	return FileFromID(_r)
 }
 
-// FileWithFileURLFilenameTypeIdentifier calls the underlying INFileFileWithFileURLFilenameTypeIdentifier.
+// FileWithFileURLFilenameTypeIdentifier creates a new file object with the specified URL and identifier.
 func FileWithFileURLFilenameTypeIdentifier(fileURL string, filename string, typeIdentifier string) *File {
-	_r := raw.INFileFileWithFileURLFilenameTypeIdentifier(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), foundation.NSStringStringWithUTF8String(filename), foundation.NSStringStringWithUTF8String(typeIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INFile")), objc.RegisterName("fileWithFileURL:filename:typeIdentifier:"), rt.FileURL(fileURL), purego.NSString(filename), purego.NSString(typeIdentifier))
+	return FileFromID(_r)
 }
 
-// SuccessWithResolvedFile calls the underlying INFileResolutionResultSuccessWithResolvedFile.
-func SuccessWithResolvedFile(resolvedFile *raw.INFile) *FileResolutionResult {
-	_r := raw.INFileResolutionResultSuccessWithResolvedFile(resolvedFile)
-	if _r == nil {
-		return nil
-	}
-	return &FileResolutionResult{inner: _r}
+// SuccessWithResolvedFile creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedFile(resolvedFile *File) *FileResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INFileResolutionResult")), objc.RegisterName("successWithResolvedFile:"), objref.IDOf(resolvedFile))
+	return FileResolutionResultFromID(_r)
 }
 
-// DisambiguationWithFilesToDisambiguate calls the underlying INFileResolutionResultDisambiguationWithFilesToDisambiguate.
-func DisambiguationWithFilesToDisambiguate(filesToDisambiguate *foundation.NSArray[*raw.INFile]) *FileResolutionResult {
-	_r := raw.INFileResolutionResultDisambiguationWithFilesToDisambiguate(filesToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &FileResolutionResult{inner: _r}
+// DisambiguationWithFilesToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithFilesToDisambiguate(filesToDisambiguate []*File) *FileResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INFileResolutionResult")), objc.RegisterName("disambiguationWithFilesToDisambiguate:"), purego.SliceToNSArray(filesToDisambiguate, func(_v *File) objc.ID { return objref.IDOf(_v) }))
+	return FileResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithFileToConfirm calls the underlying INFileResolutionResultConfirmationRequiredWithFileToConfirm.
-func ConfirmationRequiredWithFileToConfirm(fileToConfirm *raw.INFile) *FileResolutionResult {
-	_r := raw.INFileResolutionResultConfirmationRequiredWithFileToConfirm(fileToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &FileResolutionResult{inner: _r}
+// ConfirmationRequiredWithFileToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithFileToConfirm(fileToConfirm *File) *FileResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INFileResolutionResult")), objc.RegisterName("confirmationRequiredWithFileToConfirm:"), objref.IDOf(fileToConfirm))
+	return FileResolutionResultFromID(_r)
 }
 
-// DefaultCenter calls the underlying INFocusStatusCenterDefaultCenter.
+// DefaultCenter wraps the corresponding Objective-C method.
 func DefaultCenter() *FocusStatusCenter {
-	_r := raw.INFocusStatusCenterDefaultCenter()
-	if _r == nil {
-		return nil
-	}
-	return &FocusStatusCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INFocusStatusCenter")), objc.RegisterName("defaultCenter"))
+	return FocusStatusCenterFromID(_r)
 }
 
-// ImageNamed calls the underlying INImageImageNamed.
+// ImageNamed creates an image object from an image file in the extension’s bundle.
 func ImageNamed(name string) *Image {
-	_r := raw.INImageImageNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INImage")), objc.RegisterName("imageNamed:"), purego.NSString(name))
+	return ImageFromID(_r)
 }
 
-// INIntegerResolutionResultSuccessWithResolvedValue calls the underlying INIntegerResolutionResultSuccessWithResolvedValue.
+// INIntegerResolutionResultSuccessWithResolvedValue creates an object whose resolution involves the successful matching of the specified value.
 func INIntegerResolutionResultSuccessWithResolvedValue(resolvedValue int) *IntegerResolutionResult {
-	_r := raw.INIntegerResolutionResultSuccessWithResolvedValue(resolvedValue)
-	if _r == nil {
-		return nil
-	}
-	return &IntegerResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntegerResolutionResult")), objc.RegisterName("successWithResolvedValue:"), resolvedValue)
+	return IntegerResolutionResultFromID(_r)
 }
 
-// INIntegerResolutionResultConfirmationRequiredWithValueToConfirm calls the underlying INIntegerResolutionResultConfirmationRequiredWithValueToConfirm.
-func INIntegerResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *IntegerResolutionResult {
-	_r := raw.INIntegerResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &IntegerResolutionResult{inner: _r}
+// INIntegerResolutionResultConfirmationRequiredWithValueToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func INIntegerResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm obj.Object) *IntegerResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntegerResolutionResult")), objc.RegisterName("confirmationRequiredWithValueToConfirm:"), objref.IDOf(valueToConfirm))
+	return IntegerResolutionResultFromID(_r)
 }
 
-// NeedsValue calls the underlying INIntentResolutionResultNeedsValue.
+// NeedsValue creates an object whose resolution indicates that a required parameter value is missing.
 func NeedsValue() *IntentResolutionResult {
-	_r := raw.INIntentResolutionResultNeedsValue()
-	if _r == nil {
-		return nil
-	}
-	return &IntentResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntentResolutionResult")), objc.RegisterName("needsValue"))
+	return IntentResolutionResultFromID(_r)
 }
 
-// NotRequired calls the underlying INIntentResolutionResultNotRequired.
+// NotRequired creates an object whose resolution indicates that you don’t need the value of the parameter.
 func NotRequired() *IntentResolutionResult {
-	_r := raw.INIntentResolutionResultNotRequired()
-	if _r == nil {
-		return nil
-	}
-	return &IntentResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntentResolutionResult")), objc.RegisterName("notRequired"))
+	return IntentResolutionResultFromID(_r)
 }
 
-// Unsupported calls the underlying INIntentResolutionResultUnsupported.
+// Unsupported creates an object whose resolution indicates that your app doesn’t support the specified value.
 func Unsupported() *IntentResolutionResult {
-	_r := raw.INIntentResolutionResultUnsupported()
-	if _r == nil {
-		return nil
-	}
-	return &IntentResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntentResolutionResult")), objc.RegisterName("unsupported"))
+	return IntentResolutionResultFromID(_r)
 }
 
-// UnsupportedWithReason calls the underlying INIntentResolutionResultUnsupportedWithReason.
+// UnsupportedWithReason creates an object whose resolution indicates that your app doesn’t support the specified value.
 func UnsupportedWithReason(reason int) *IntentResolutionResult {
-	_r := raw.INIntentResolutionResultUnsupportedWithReason(reason)
-	if _r == nil {
-		return nil
-	}
-	return &IntentResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntentResolutionResult")), objc.RegisterName("unsupportedWithReason:"), reason)
+	return IntentResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithItemToConfirmForReason calls the underlying INIntentResolutionResultConfirmationRequiredWithItemToConfirmForReason.
-func ConfirmationRequiredWithItemToConfirmForReason(itemToConfirm objc.ID, reason int) *IntentResolutionResult {
-	_r := raw.INIntentResolutionResultConfirmationRequiredWithItemToConfirmForReason(itemToConfirm, reason)
-	if _r == nil {
-		return nil
-	}
-	return &IntentResolutionResult{inner: _r}
+// ConfirmationRequiredWithItemToConfirmForReason creates an object whose resolution indicates that your app requires confirmation of the specified value.
+func ConfirmationRequiredWithItemToConfirmForReason(itemToConfirm obj.Object, reason int) *IntentResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INIntentResolutionResult")), objc.RegisterName("confirmationRequiredWithItemToConfirm:forReason:"), objref.IDOf(itemToConfirm), reason)
+	return IntentResolutionResultFromID(_r)
 }
 
+// DeleteAllInteractionsWithCompletion deletes all interactions that you donated previously.
+//
 // DeleteAllInteractionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func DeleteAllInteractionsWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.INInteractionDeleteAllInteractionsWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("INInteraction")), objc.RegisterName("deleteAllInteractionsWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -392,16 +273,17 @@ func DeleteAllInteractionsWithCompletion(ctx context.Context) error {
 	}
 }
 
+// DeleteInteractionsWithIdentifiersCompletion deletes the specified interactions that were donated by the calling app.
+//
 // DeleteInteractionsWithIdentifiersCompletion blocks until the operation completes or ctx is cancelled.
-func DeleteInteractionsWithIdentifiersCompletion(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) error {
+func DeleteInteractionsWithIdentifiersCompletion(ctx context.Context, identifiers []string) error {
 	_ch := make(chan error, 1)
-	raw.INInteractionDeleteInteractionsWithIdentifiersCompletion(identifiers, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("INInteraction")), objc.RegisterName("deleteInteractionsWithIdentifiers:completion:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -410,16 +292,17 @@ func DeleteInteractionsWithIdentifiersCompletion(ctx context.Context, identifier
 	}
 }
 
+// DeleteInteractionsWithGroupIdentifierCompletion deletes the interactions with the specified group identifier.
+//
 // DeleteInteractionsWithGroupIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func DeleteInteractionsWithGroupIdentifierCompletion(ctx context.Context, groupIdentifier string) error {
 	_ch := make(chan error, 1)
-	raw.INInteractionDeleteInteractionsWithGroupIdentifierCompletion(foundation.NSStringStringWithUTF8String(groupIdentifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("INInteraction")), objc.RegisterName("deleteInteractionsWithGroupIdentifier:completion:"), purego.NSString(groupIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -428,380 +311,254 @@ func DeleteInteractionsWithGroupIdentifierCompletion(ctx context.Context, groupI
 	}
 }
 
-// SuccessWithResolvedLength calls the underlying INLengthResolutionResultSuccessWithResolvedLength.
-func SuccessWithResolvedLength(resolvedLength *foundation.NSMeasurement[*foundation.NSUnitLength]) *LengthResolutionResult {
-	_r := raw.INLengthResolutionResultSuccessWithResolvedLength(resolvedLength)
-	if _r == nil {
-		return nil
-	}
-	return &LengthResolutionResult{inner: _r}
+// SuccessWithResolvedLength creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedLength(resolvedLength obj.Object) *LengthResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INLengthResolutionResult")), objc.RegisterName("successWithResolvedLength:"), objref.IDOf(resolvedLength))
+	return LengthResolutionResultFromID(_r)
 }
 
-// DisambiguationWithLengthsToDisambiguate calls the underlying INLengthResolutionResultDisambiguationWithLengthsToDisambiguate.
-func DisambiguationWithLengthsToDisambiguate(lengthsToDisambiguate *foundation.NSArray[objc.ID]) *LengthResolutionResult {
-	_r := raw.INLengthResolutionResultDisambiguationWithLengthsToDisambiguate(lengthsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &LengthResolutionResult{inner: _r}
+// DisambiguationWithLengthsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithLengthsToDisambiguate(lengthsToDisambiguate []obj.Object) *LengthResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INLengthResolutionResult")), objc.RegisterName("disambiguationWithLengthsToDisambiguate:"), purego.SliceToNSArray(lengthsToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return LengthResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithLengthToConfirm calls the underlying INLengthResolutionResultConfirmationRequiredWithLengthToConfirm.
-func ConfirmationRequiredWithLengthToConfirm(lengthToConfirm *foundation.NSMeasurement[*foundation.NSUnitLength]) *LengthResolutionResult {
-	_r := raw.INLengthResolutionResultConfirmationRequiredWithLengthToConfirm(lengthToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &LengthResolutionResult{inner: _r}
+// ConfirmationRequiredWithLengthToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithLengthToConfirm(lengthToConfirm obj.Object) *LengthResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INLengthResolutionResult")), objc.RegisterName("confirmationRequiredWithLengthToConfirm:"), objref.IDOf(lengthToConfirm))
+	return LengthResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedMass calls the underlying INMassResolutionResultSuccessWithResolvedMass.
-func SuccessWithResolvedMass(resolvedMass *foundation.NSMeasurement[*foundation.NSUnitMass]) *MassResolutionResult {
-	_r := raw.INMassResolutionResultSuccessWithResolvedMass(resolvedMass)
-	if _r == nil {
-		return nil
-	}
-	return &MassResolutionResult{inner: _r}
+// SuccessWithResolvedMass creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedMass(resolvedMass obj.Object) *MassResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INMassResolutionResult")), objc.RegisterName("successWithResolvedMass:"), objref.IDOf(resolvedMass))
+	return MassResolutionResultFromID(_r)
 }
 
-// DisambiguationWithMassToDisambiguate calls the underlying INMassResolutionResultDisambiguationWithMassToDisambiguate.
-func DisambiguationWithMassToDisambiguate(massToDisambiguate *foundation.NSArray[objc.ID]) *MassResolutionResult {
-	_r := raw.INMassResolutionResultDisambiguationWithMassToDisambiguate(massToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &MassResolutionResult{inner: _r}
+// DisambiguationWithMassToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithMassToDisambiguate(massToDisambiguate []obj.Object) *MassResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INMassResolutionResult")), objc.RegisterName("disambiguationWithMassToDisambiguate:"), purego.SliceToNSArray(massToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return MassResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithMassToConfirm calls the underlying INMassResolutionResultConfirmationRequiredWithMassToConfirm.
-func ConfirmationRequiredWithMassToConfirm(massToConfirm *foundation.NSMeasurement[*foundation.NSUnitMass]) *MassResolutionResult {
-	_r := raw.INMassResolutionResultConfirmationRequiredWithMassToConfirm(massToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &MassResolutionResult{inner: _r}
+// ConfirmationRequiredWithMassToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithMassToConfirm(massToConfirm obj.Object) *MassResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INMassResolutionResult")), objc.RegisterName("confirmationRequiredWithMassToConfirm:"), objref.IDOf(massToConfirm))
+	return MassResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedObject calls the underlying INObjectResolutionResultSuccessWithResolvedObject.
-func SuccessWithResolvedObject(resolvedObject *raw.INObject) *ObjectResolutionResult {
-	_r := raw.INObjectResolutionResultSuccessWithResolvedObject(resolvedObject)
-	if _r == nil {
-		return nil
-	}
-	return &ObjectResolutionResult{inner: _r}
+// SuccessWithResolvedObject creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedObject(resolvedObject *Object) *ObjectResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INObjectResolutionResult")), objc.RegisterName("successWithResolvedObject:"), objref.IDOf(resolvedObject))
+	return ObjectResolutionResultFromID(_r)
 }
 
-// DisambiguationWithObjectsToDisambiguate calls the underlying INObjectResolutionResultDisambiguationWithObjectsToDisambiguate.
-func DisambiguationWithObjectsToDisambiguate(objectsToDisambiguate *foundation.NSArray[*raw.INObject]) *ObjectResolutionResult {
-	_r := raw.INObjectResolutionResultDisambiguationWithObjectsToDisambiguate(objectsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &ObjectResolutionResult{inner: _r}
+// DisambiguationWithObjectsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithObjectsToDisambiguate(objectsToDisambiguate []*Object) *ObjectResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INObjectResolutionResult")), objc.RegisterName("disambiguationWithObjectsToDisambiguate:"), purego.SliceToNSArray(objectsToDisambiguate, func(_v *Object) objc.ID { return objref.IDOf(_v) }))
+	return ObjectResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithObjectToConfirm calls the underlying INObjectResolutionResultConfirmationRequiredWithObjectToConfirm.
-func ConfirmationRequiredWithObjectToConfirm(objectToConfirm *raw.INObject) *ObjectResolutionResult {
-	_r := raw.INObjectResolutionResultConfirmationRequiredWithObjectToConfirm(objectToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &ObjectResolutionResult{inner: _r}
+// ConfirmationRequiredWithObjectToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithObjectToConfirm(objectToConfirm *Object) *ObjectResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INObjectResolutionResult")), objc.RegisterName("confirmationRequiredWithObjectToConfirm:"), objref.IDOf(objectToConfirm))
+	return ObjectResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedOutgoingMessageType calls the underlying INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType.
-func SuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType INOutgoingMessageType) *OutgoingMessageTypeResolutionResult {
-	_r := raw.INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType(raw.INOutgoingMessageType(resolvedOutgoingMessageType))
-	if _r == nil {
-		return nil
-	}
-	return &OutgoingMessageTypeResolutionResult{inner: _r}
+// SuccessWithResolvedOutgoingMessageType creates an object with a resolution that involves the successful matching of the specified parameter.
+func SuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType OutgoingMessageType) *OutgoingMessageTypeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INOutgoingMessageTypeResolutionResult")), objc.RegisterName("successWithResolvedOutgoingMessageType:"), resolvedOutgoingMessageType)
+	return OutgoingMessageTypeResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithOutgoingMessageTypeToConfirm calls the underlying INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm.
-func ConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm INOutgoingMessageType) *OutgoingMessageTypeResolutionResult {
-	_r := raw.INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm(raw.INOutgoingMessageType(outgoingMessageTypeToConfirm))
-	if _r == nil {
-		return nil
-	}
-	return &OutgoingMessageTypeResolutionResult{inner: _r}
+// ConfirmationRequiredWithOutgoingMessageTypeToConfirm creates an object with a resolution that requires the user to confirm the value before proceeding.
+func ConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm OutgoingMessageType) *OutgoingMessageTypeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INOutgoingMessageTypeResolutionResult")), objc.RegisterName("confirmationRequiredWithOutgoingMessageTypeToConfirm:"), outgoingMessageTypeToConfirm)
+	return OutgoingMessageTypeResolutionResultFromID(_r)
 }
 
-// ApplePayPaymentMethod calls the underlying INPaymentMethodApplePayPaymentMethod.
+// ApplePayPaymentMethod creates and returns a payment method object that represents payment through Apple Pay.
 func ApplePayPaymentMethod() *PaymentMethod {
-	_r := raw.INPaymentMethodApplePayPaymentMethod()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentMethod{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INPaymentMethod")), objc.RegisterName("applePayPaymentMethod"))
+	return PaymentMethodFromID(_r)
 }
 
-// SuccessWithResolvedPaymentMethod calls the underlying INPaymentMethodResolutionResultSuccessWithResolvedPaymentMethod.
-func SuccessWithResolvedPaymentMethod(resolvedPaymentMethod *raw.INPaymentMethod) *PaymentMethodResolutionResult {
-	_r := raw.INPaymentMethodResolutionResultSuccessWithResolvedPaymentMethod(resolvedPaymentMethod)
-	if _r == nil {
-		return nil
-	}
-	return &PaymentMethodResolutionResult{inner: _r}
+// SuccessWithResolvedPaymentMethod creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedPaymentMethod(resolvedPaymentMethod *PaymentMethod) *PaymentMethodResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPaymentMethodResolutionResult")), objc.RegisterName("successWithResolvedPaymentMethod:"), objref.IDOf(resolvedPaymentMethod))
+	return PaymentMethodResolutionResultFromID(_r)
 }
 
-// DisambiguationWithPaymentMethodsToDisambiguate calls the underlying INPaymentMethodResolutionResultDisambiguationWithPaymentMethodsToDisambiguate.
-func DisambiguationWithPaymentMethodsToDisambiguate(paymentMethodsToDisambiguate *foundation.NSArray[*raw.INPaymentMethod]) *PaymentMethodResolutionResult {
-	_r := raw.INPaymentMethodResolutionResultDisambiguationWithPaymentMethodsToDisambiguate(paymentMethodsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &PaymentMethodResolutionResult{inner: _r}
+// DisambiguationWithPaymentMethodsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithPaymentMethodsToDisambiguate(paymentMethodsToDisambiguate []*PaymentMethod) *PaymentMethodResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPaymentMethodResolutionResult")), objc.RegisterName("disambiguationWithPaymentMethodsToDisambiguate:"), purego.SliceToNSArray(paymentMethodsToDisambiguate, func(_v *PaymentMethod) objc.ID { return objref.IDOf(_v) }))
+	return PaymentMethodResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithPaymentMethodToConfirm calls the underlying INPaymentMethodResolutionResultConfirmationRequiredWithPaymentMethodToConfirm.
-func ConfirmationRequiredWithPaymentMethodToConfirm(paymentMethodToConfirm *raw.INPaymentMethod) *PaymentMethodResolutionResult {
-	_r := raw.INPaymentMethodResolutionResultConfirmationRequiredWithPaymentMethodToConfirm(paymentMethodToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &PaymentMethodResolutionResult{inner: _r}
+// ConfirmationRequiredWithPaymentMethodToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithPaymentMethodToConfirm(paymentMethodToConfirm *PaymentMethod) *PaymentMethodResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPaymentMethodResolutionResult")), objc.RegisterName("confirmationRequiredWithPaymentMethodToConfirm:"), objref.IDOf(paymentMethodToConfirm))
+	return PaymentMethodResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedPerson calls the underlying INPersonResolutionResultSuccessWithResolvedPerson.
-func SuccessWithResolvedPerson(resolvedPerson *raw.INPerson) *PersonResolutionResult {
-	_r := raw.INPersonResolutionResultSuccessWithResolvedPerson(resolvedPerson)
-	if _r == nil {
-		return nil
-	}
-	return &PersonResolutionResult{inner: _r}
+// SuccessWithResolvedPerson creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedPerson(resolvedPerson *Person) *PersonResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPersonResolutionResult")), objc.RegisterName("successWithResolvedPerson:"), objref.IDOf(resolvedPerson))
+	return PersonResolutionResultFromID(_r)
 }
 
-// DisambiguationWithPeopleToDisambiguate calls the underlying INPersonResolutionResultDisambiguationWithPeopleToDisambiguate.
-func DisambiguationWithPeopleToDisambiguate(peopleToDisambiguate *foundation.NSArray[*raw.INPerson]) *PersonResolutionResult {
-	_r := raw.INPersonResolutionResultDisambiguationWithPeopleToDisambiguate(peopleToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &PersonResolutionResult{inner: _r}
+// DisambiguationWithPeopleToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithPeopleToDisambiguate(peopleToDisambiguate []*Person) *PersonResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPersonResolutionResult")), objc.RegisterName("disambiguationWithPeopleToDisambiguate:"), purego.SliceToNSArray(peopleToDisambiguate, func(_v *Person) objc.ID { return objref.IDOf(_v) }))
+	return PersonResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithPersonToConfirm calls the underlying INPersonResolutionResultConfirmationRequiredWithPersonToConfirm.
-func ConfirmationRequiredWithPersonToConfirm(personToConfirm *raw.INPerson) *PersonResolutionResult {
-	_r := raw.INPersonResolutionResultConfirmationRequiredWithPersonToConfirm(personToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &PersonResolutionResult{inner: _r}
+// ConfirmationRequiredWithPersonToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithPersonToConfirm(personToConfirm *Person) *PersonResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPersonResolutionResult")), objc.RegisterName("confirmationRequiredWithPersonToConfirm:"), objref.IDOf(personToConfirm))
+	return PersonResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedPlacemark calls the underlying INPlacemarkResolutionResultSuccessWithResolvedPlacemark.
-func SuccessWithResolvedPlacemark(resolvedPlacemark *corelocation.CLPlacemark) *PlacemarkResolutionResult {
-	_r := raw.INPlacemarkResolutionResultSuccessWithResolvedPlacemark(resolvedPlacemark)
-	if _r == nil {
-		return nil
-	}
-	return &PlacemarkResolutionResult{inner: _r}
+// SuccessWithResolvedPlacemark creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedPlacemark(resolvedPlacemark obj.Object) *PlacemarkResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPlacemarkResolutionResult")), objc.RegisterName("successWithResolvedPlacemark:"), objref.IDOf(resolvedPlacemark))
+	return PlacemarkResolutionResultFromID(_r)
 }
 
-// DisambiguationWithPlacemarksToDisambiguate calls the underlying INPlacemarkResolutionResultDisambiguationWithPlacemarksToDisambiguate.
-func DisambiguationWithPlacemarksToDisambiguate(placemarksToDisambiguate *foundation.NSArray[*corelocation.CLPlacemark]) *PlacemarkResolutionResult {
-	_r := raw.INPlacemarkResolutionResultDisambiguationWithPlacemarksToDisambiguate(placemarksToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &PlacemarkResolutionResult{inner: _r}
+// DisambiguationWithPlacemarksToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithPlacemarksToDisambiguate(placemarksToDisambiguate []obj.Object) *PlacemarkResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPlacemarkResolutionResult")), objc.RegisterName("disambiguationWithPlacemarksToDisambiguate:"), purego.SliceToNSArray(placemarksToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PlacemarkResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithPlacemarkToConfirm calls the underlying INPlacemarkResolutionResultConfirmationRequiredWithPlacemarkToConfirm.
-func ConfirmationRequiredWithPlacemarkToConfirm(placemarkToConfirm *corelocation.CLPlacemark) *PlacemarkResolutionResult {
-	_r := raw.INPlacemarkResolutionResultConfirmationRequiredWithPlacemarkToConfirm(placemarkToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &PlacemarkResolutionResult{inner: _r}
+// ConfirmationRequiredWithPlacemarkToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithPlacemarkToConfirm(placemarkToConfirm obj.Object) *PlacemarkResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INPlacemarkResolutionResult")), objc.RegisterName("confirmationRequiredWithPlacemarkToConfirm:"), objref.IDOf(placemarkToConfirm))
+	return PlacemarkResolutionResultFromID(_r)
 }
 
-// AttachmentWithAudioMessageFile calls the underlying INSendMessageAttachmentAttachmentWithAudioMessageFile.
-func AttachmentWithAudioMessageFile(audioMessageFile *raw.INFile) *SendMessageAttachment {
-	_r := raw.INSendMessageAttachmentAttachmentWithAudioMessageFile(audioMessageFile)
-	if _r == nil {
-		return nil
-	}
-	return &SendMessageAttachment{inner: _r}
+// AttachmentWithAudioMessageFile creates a message attachment with an audio file.
+func AttachmentWithAudioMessageFile(audioMessageFile *File) *SendMessageAttachment {
+	_r := objc.Send[objc.ID](objc.ID(_class("INSendMessageAttachment")), objc.RegisterName("attachmentWithAudioMessageFile:"), objref.IDOf(audioMessageFile))
+	return SendMessageAttachmentFromID(_r)
 }
 
-// UnsupportedForReason calls the underlying INSendMessageRecipientResolutionResultUnsupportedForReason.
-func UnsupportedForReason(reason INSendMessageRecipientUnsupportedReason) *SendMessageRecipientResolutionResult {
-	_r := raw.INSendMessageRecipientResolutionResultUnsupportedForReason(raw.INSendMessageRecipientUnsupportedReason(reason))
-	if _r == nil {
-		return nil
-	}
-	return &SendMessageRecipientResolutionResult{inner: _r}
+// UnsupportedForReason creates an object whose resolution indicates that your app can’t use the specified person as a message recipient.
+func UnsupportedForReason(reason SendMessageRecipientUnsupportedReason) *SendMessageRecipientResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INSendMessageRecipientResolutionResult")), objc.RegisterName("unsupportedForReason:"), reason)
+	return SendMessageRecipientResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedSpeed calls the underlying INSpeedResolutionResultSuccessWithResolvedSpeed.
-func SuccessWithResolvedSpeed(resolvedSpeed *foundation.NSMeasurement[*foundation.NSUnitSpeed]) *SpeedResolutionResult {
-	_r := raw.INSpeedResolutionResultSuccessWithResolvedSpeed(resolvedSpeed)
-	if _r == nil {
-		return nil
-	}
-	return &SpeedResolutionResult{inner: _r}
+// SuccessWithResolvedSpeed creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedSpeed(resolvedSpeed obj.Object) *SpeedResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INSpeedResolutionResult")), objc.RegisterName("successWithResolvedSpeed:"), objref.IDOf(resolvedSpeed))
+	return SpeedResolutionResultFromID(_r)
 }
 
-// DisambiguationWithSpeedToDisambiguate calls the underlying INSpeedResolutionResultDisambiguationWithSpeedToDisambiguate.
-func DisambiguationWithSpeedToDisambiguate(speedToDisambiguate *foundation.NSArray[objc.ID]) *SpeedResolutionResult {
-	_r := raw.INSpeedResolutionResultDisambiguationWithSpeedToDisambiguate(speedToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &SpeedResolutionResult{inner: _r}
+// DisambiguationWithSpeedToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithSpeedToDisambiguate(speedToDisambiguate []obj.Object) *SpeedResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INSpeedResolutionResult")), objc.RegisterName("disambiguationWithSpeedToDisambiguate:"), purego.SliceToNSArray(speedToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return SpeedResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithSpeedToConfirm calls the underlying INSpeedResolutionResultConfirmationRequiredWithSpeedToConfirm.
-func ConfirmationRequiredWithSpeedToConfirm(speedToConfirm *foundation.NSMeasurement[*foundation.NSUnitSpeed]) *SpeedResolutionResult {
-	_r := raw.INSpeedResolutionResultConfirmationRequiredWithSpeedToConfirm(speedToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &SpeedResolutionResult{inner: _r}
+// ConfirmationRequiredWithSpeedToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithSpeedToConfirm(speedToConfirm obj.Object) *SpeedResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INSpeedResolutionResult")), objc.RegisterName("confirmationRequiredWithSpeedToConfirm:"), objref.IDOf(speedToConfirm))
+	return SpeedResolutionResultFromID(_r)
 }
 
-// INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason calls the underlying INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason.
-func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason INStartCallCallRecordToCallBackUnsupportedReason) *StartCallCallRecordToCallBackResolutionResult {
-	_r := raw.INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(raw.INStartCallCallRecordToCallBackUnsupportedReason(reason))
-	if _r == nil {
-		return nil
-	}
-	return &StartCallCallRecordToCallBackResolutionResult{inner: _r}
+// INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason creates a result that requires the user to confirm the request, because your app is unable to support the current request.
+func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason StartCallCallRecordToCallBackUnsupportedReason) *StartCallCallRecordToCallBackResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INStartCallCallRecordToCallBackResolutionResult")), objc.RegisterName("unsupportedForReason:"), reason)
+	return StartCallCallRecordToCallBackResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedString calls the underlying INStringResolutionResultSuccessWithResolvedString.
+// SuccessWithResolvedString creates an object whose resolution involves the successful matching of the specified parameter.
 func SuccessWithResolvedString(resolvedString string) *StringResolutionResult {
-	_r := raw.INStringResolutionResultSuccessWithResolvedString(foundation.NSStringStringWithUTF8String(resolvedString))
-	if _r == nil {
-		return nil
-	}
-	return &StringResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INStringResolutionResult")), objc.RegisterName("successWithResolvedString:"), purego.NSString(resolvedString))
+	return StringResolutionResultFromID(_r)
 }
 
-// DisambiguationWithStringsToDisambiguate calls the underlying INStringResolutionResultDisambiguationWithStringsToDisambiguate.
-func DisambiguationWithStringsToDisambiguate(stringsToDisambiguate *foundation.NSArray[*foundation.NSString]) *StringResolutionResult {
-	_r := raw.INStringResolutionResultDisambiguationWithStringsToDisambiguate(stringsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &StringResolutionResult{inner: _r}
+// DisambiguationWithStringsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithStringsToDisambiguate(stringsToDisambiguate []string) *StringResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INStringResolutionResult")), objc.RegisterName("disambiguationWithStringsToDisambiguate:"), purego.SliceToNSArray(stringsToDisambiguate, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return StringResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithStringToConfirm calls the underlying INStringResolutionResultConfirmationRequiredWithStringToConfirm.
+// ConfirmationRequiredWithStringToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
 func ConfirmationRequiredWithStringToConfirm(stringToConfirm string) *StringResolutionResult {
-	_r := raw.INStringResolutionResultConfirmationRequiredWithStringToConfirm(foundation.NSStringStringWithUTF8String(stringToConfirm))
-	if _r == nil {
-		return nil
-	}
-	return &StringResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INStringResolutionResult")), objc.RegisterName("confirmationRequiredWithStringToConfirm:"), purego.NSString(stringToConfirm))
+	return StringResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedTemperature calls the underlying INTemperatureResolutionResultSuccessWithResolvedTemperature.
-func SuccessWithResolvedTemperature(resolvedTemperature *foundation.NSMeasurement[*foundation.NSUnitTemperature]) *TemperatureResolutionResult {
-	_r := raw.INTemperatureResolutionResultSuccessWithResolvedTemperature(resolvedTemperature)
-	if _r == nil {
-		return nil
-	}
-	return &TemperatureResolutionResult{inner: _r}
+// SuccessWithResolvedTemperature creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedTemperature(resolvedTemperature obj.Object) *TemperatureResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INTemperatureResolutionResult")), objc.RegisterName("successWithResolvedTemperature:"), objref.IDOf(resolvedTemperature))
+	return TemperatureResolutionResultFromID(_r)
 }
 
-// DisambiguationWithTemperaturesToDisambiguate calls the underlying INTemperatureResolutionResultDisambiguationWithTemperaturesToDisambiguate.
-func DisambiguationWithTemperaturesToDisambiguate(temperaturesToDisambiguate *foundation.NSArray[objc.ID]) *TemperatureResolutionResult {
-	_r := raw.INTemperatureResolutionResultDisambiguationWithTemperaturesToDisambiguate(temperaturesToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &TemperatureResolutionResult{inner: _r}
+// DisambiguationWithTemperaturesToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithTemperaturesToDisambiguate(temperaturesToDisambiguate []obj.Object) *TemperatureResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INTemperatureResolutionResult")), objc.RegisterName("disambiguationWithTemperaturesToDisambiguate:"), purego.SliceToNSArray(temperaturesToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return TemperatureResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithTemperatureToConfirm calls the underlying INTemperatureResolutionResultConfirmationRequiredWithTemperatureToConfirm.
-func ConfirmationRequiredWithTemperatureToConfirm(temperatureToConfirm *foundation.NSMeasurement[*foundation.NSUnitTemperature]) *TemperatureResolutionResult {
-	_r := raw.INTemperatureResolutionResultConfirmationRequiredWithTemperatureToConfirm(temperatureToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &TemperatureResolutionResult{inner: _r}
+// ConfirmationRequiredWithTemperatureToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithTemperatureToConfirm(temperatureToConfirm obj.Object) *TemperatureResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INTemperatureResolutionResult")), objc.RegisterName("confirmationRequiredWithTemperatureToConfirm:"), objref.IDOf(temperatureToConfirm))
+	return TemperatureResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedTimeInterval calls the underlying INTimeIntervalResolutionResultSuccessWithResolvedTimeInterval.
+// SuccessWithResolvedTimeInterval creates an object whose resolution involves the successful matching of the specified parameter.
 func SuccessWithResolvedTimeInterval(resolvedTimeInterval float64) *TimeIntervalResolutionResult {
-	_r := raw.INTimeIntervalResolutionResultSuccessWithResolvedTimeInterval(resolvedTimeInterval)
-	if _r == nil {
-		return nil
-	}
-	return &TimeIntervalResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INTimeIntervalResolutionResult")), objc.RegisterName("successWithResolvedTimeInterval:"), resolvedTimeInterval)
+	return TimeIntervalResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithTimeIntervalToConfirm calls the underlying INTimeIntervalResolutionResultConfirmationRequiredWithTimeIntervalToConfirm.
+// ConfirmationRequiredWithTimeIntervalToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
 func ConfirmationRequiredWithTimeIntervalToConfirm(timeIntervalToConfirm float64) *TimeIntervalResolutionResult {
-	_r := raw.INTimeIntervalResolutionResultConfirmationRequiredWithTimeIntervalToConfirm(timeIntervalToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &TimeIntervalResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INTimeIntervalResolutionResult")), objc.RegisterName("confirmationRequiredWithTimeIntervalToConfirm:"), timeIntervalToConfirm)
+	return TimeIntervalResolutionResultFromID(_r)
 }
 
-// SuccessWithResolvedURL calls the underlying INURLResolutionResultSuccessWithResolvedURL.
+// SuccessWithResolvedURL creates an object whose resolution involves the successful matching of the specified parameter.
 func SuccessWithResolvedURL(resolvedURL string) *URLResolutionResult {
-	_r := raw.INURLResolutionResultSuccessWithResolvedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resolvedURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URLResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INURLResolutionResult")), objc.RegisterName("successWithResolvedURL:"), rt.FileURL(resolvedURL))
+	return URLResolutionResultFromID(_r)
 }
 
-// DisambiguationWithURLsToDisambiguate calls the underlying INURLResolutionResultDisambiguationWithURLsToDisambiguate.
-func DisambiguationWithURLsToDisambiguate(urlsToDisambiguate *foundation.NSArray[*foundation.NSURL]) *URLResolutionResult {
-	_r := raw.INURLResolutionResultDisambiguationWithURLsToDisambiguate(urlsToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &URLResolutionResult{inner: _r}
+// DisambiguationWithURLsToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithURLsToDisambiguate(urlsToDisambiguate []obj.Object) *URLResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INURLResolutionResult")), objc.RegisterName("disambiguationWithURLsToDisambiguate:"), purego.SliceToNSArray(urlsToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return URLResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithURLToConfirm calls the underlying INURLResolutionResultConfirmationRequiredWithURLToConfirm.
+// ConfirmationRequiredWithURLToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
 func ConfirmationRequiredWithURLToConfirm(urlToConfirm string) *URLResolutionResult {
-	_r := raw.INURLResolutionResultConfirmationRequiredWithURLToConfirm(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(urlToConfirm)))
-	if _r == nil {
-		return nil
-	}
-	return &URLResolutionResult{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INURLResolutionResult")), objc.RegisterName("confirmationRequiredWithURLToConfirm:"), rt.FileURL(urlToConfirm))
+	return URLResolutionResultFromID(_r)
 }
 
-// SharedCenter calls the underlying INVoiceShortcutCenterSharedCenter.
+// SharedCenter wraps the corresponding Objective-C method.
 func SharedCenter() *VoiceShortcutCenter {
-	_r := raw.INVoiceShortcutCenterSharedCenter()
-	if _r == nil {
-		return nil
-	}
-	return &VoiceShortcutCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("INVoiceShortcutCenter")), objc.RegisterName("sharedCenter"))
+	return VoiceShortcutCenterFromID(_r)
 }
 
-// SuccessWithResolvedVolume calls the underlying INVolumeResolutionResultSuccessWithResolvedVolume.
-func SuccessWithResolvedVolume(resolvedVolume *foundation.NSMeasurement[*foundation.NSUnitVolume]) *VolumeResolutionResult {
-	_r := raw.INVolumeResolutionResultSuccessWithResolvedVolume(resolvedVolume)
-	if _r == nil {
-		return nil
-	}
-	return &VolumeResolutionResult{inner: _r}
+// SuccessWithResolvedVolume creates an object whose resolution involves the successful matching of the specified parameter.
+func SuccessWithResolvedVolume(resolvedVolume obj.Object) *VolumeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INVolumeResolutionResult")), objc.RegisterName("successWithResolvedVolume:"), objref.IDOf(resolvedVolume))
+	return VolumeResolutionResultFromID(_r)
 }
 
-// DisambiguationWithVolumeToDisambiguate calls the underlying INVolumeResolutionResultDisambiguationWithVolumeToDisambiguate.
-func DisambiguationWithVolumeToDisambiguate(volumeToDisambiguate *foundation.NSArray[objc.ID]) *VolumeResolutionResult {
-	_r := raw.INVolumeResolutionResultDisambiguationWithVolumeToDisambiguate(volumeToDisambiguate)
-	if _r == nil {
-		return nil
-	}
-	return &VolumeResolutionResult{inner: _r}
+// DisambiguationWithVolumeToDisambiguate creates an object whose resolution requires the user to select from among the specified objects.
+func DisambiguationWithVolumeToDisambiguate(volumeToDisambiguate []obj.Object) *VolumeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INVolumeResolutionResult")), objc.RegisterName("disambiguationWithVolumeToDisambiguate:"), purego.SliceToNSArray(volumeToDisambiguate, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return VolumeResolutionResultFromID(_r)
 }
 
-// ConfirmationRequiredWithVolumeToConfirm calls the underlying INVolumeResolutionResultConfirmationRequiredWithVolumeToConfirm.
-func ConfirmationRequiredWithVolumeToConfirm(volumeToConfirm *foundation.NSMeasurement[*foundation.NSUnitVolume]) *VolumeResolutionResult {
-	_r := raw.INVolumeResolutionResultConfirmationRequiredWithVolumeToConfirm(volumeToConfirm)
-	if _r == nil {
-		return nil
-	}
-	return &VolumeResolutionResult{inner: _r}
+// ConfirmationRequiredWithVolumeToConfirm creates an object whose resolution requires that the user must confirm the value before proceeding.
+func ConfirmationRequiredWithVolumeToConfirm(volumeToConfirm obj.Object) *VolumeResolutionResult {
+	_r := objc.Send[objc.ID](objc.ID(_class("INVolumeResolutionResult")), objc.RegisterName("confirmationRequiredWithVolumeToConfirm:"), objref.IDOf(volumeToConfirm))
+	return VolumeResolutionResultFromID(_r)
 }

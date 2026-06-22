@@ -5,157 +5,89 @@
 package shazamkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SHMediaItemShazamID returns the string constant SHMediaItemShazamID as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemShazamID() objc.ID {
-	if _r := raw.SHMediaItemShazamID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemShazamID returns the string constant SHMediaItemShazamID, for use as a dictionary key or argument.
+func SHMediaItemShazamID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemShazamID")))
 }
 
-// SHMediaItemTitle returns the string constant SHMediaItemTitle as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemTitle() objc.ID {
-	if _r := raw.SHMediaItemTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemTitle returns the string constant SHMediaItemTitle, for use as a dictionary key or argument.
+func SHMediaItemTitle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemTitle"))) }
+
+// SHMediaItemSubtitle returns the string constant SHMediaItemSubtitle, for use as a dictionary key or argument.
+func SHMediaItemSubtitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemSubtitle")))
 }
 
-// SHMediaItemSubtitle returns the string constant SHMediaItemSubtitle as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemSubtitle() objc.ID {
-	if _r := raw.SHMediaItemSubtitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemArtist returns the string constant SHMediaItemArtist, for use as a dictionary key or argument.
+func SHMediaItemArtist() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemArtist"))) }
+
+// SHMediaItemWebURL returns the string constant SHMediaItemWebURL, for use as a dictionary key or argument.
+func SHMediaItemWebURL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemWebURL"))) }
+
+// SHMediaItemAppleMusicID returns the string constant SHMediaItemAppleMusicID, for use as a dictionary key or argument.
+func SHMediaItemAppleMusicID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemAppleMusicID")))
 }
 
-// SHMediaItemArtist returns the string constant SHMediaItemArtist as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemArtist() objc.ID {
-	if _r := raw.SHMediaItemArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemAppleMusicURL returns the string constant SHMediaItemAppleMusicURL, for use as a dictionary key or argument.
+func SHMediaItemAppleMusicURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemAppleMusicURL")))
 }
 
-// SHMediaItemWebURL returns the string constant SHMediaItemWebURL as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemWebURL() objc.ID {
-	if _r := raw.SHMediaItemWebURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemArtworkURL returns the string constant SHMediaItemArtworkURL, for use as a dictionary key or argument.
+func SHMediaItemArtworkURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemArtworkURL")))
 }
 
-// SHMediaItemAppleMusicID returns the string constant SHMediaItemAppleMusicID as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemAppleMusicID() objc.ID {
-	if _r := raw.SHMediaItemAppleMusicID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemVideoURL returns the string constant SHMediaItemVideoURL, for use as a dictionary key or argument.
+func SHMediaItemVideoURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemVideoURL")))
 }
 
-// SHMediaItemAppleMusicURL returns the string constant SHMediaItemAppleMusicURL as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemAppleMusicURL() objc.ID {
-	if _r := raw.SHMediaItemAppleMusicURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemExplicitContent returns the string constant SHMediaItemExplicitContent, for use as a dictionary key or argument.
+func SHMediaItemExplicitContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemExplicitContent")))
 }
 
-// SHMediaItemArtworkURL returns the string constant SHMediaItemArtworkURL as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemArtworkURL() objc.ID {
-	if _r := raw.SHMediaItemArtworkURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemGenres returns the string constant SHMediaItemGenres, for use as a dictionary key or argument.
+func SHMediaItemGenres() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemGenres"))) }
+
+// SHMediaItemISRC returns the string constant SHMediaItemISRC, for use as a dictionary key or argument.
+func SHMediaItemISRC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemISRC"))) }
+
+// SHMediaItemTimeRanges returns the string constant SHMediaItemTimeRanges, for use as a dictionary key or argument.
+func SHMediaItemTimeRanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemTimeRanges")))
 }
 
-// SHMediaItemVideoURL returns the string constant SHMediaItemVideoURL as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemVideoURL() objc.ID {
-	if _r := raw.SHMediaItemVideoURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemFrequencySkewRanges returns the string constant SHMediaItemFrequencySkewRanges, for use as a dictionary key or argument.
+func SHMediaItemFrequencySkewRanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemFrequencySkewRanges")))
 }
 
-// SHMediaItemExplicitContent returns the string constant SHMediaItemExplicitContent as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemExplicitContent() objc.ID {
-	if _r := raw.SHMediaItemExplicitContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemCreationDate returns the string constant SHMediaItemCreationDate, for use as a dictionary key or argument.
+func SHMediaItemCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemCreationDate")))
 }
 
-// SHMediaItemGenres returns the string constant SHMediaItemGenres as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemGenres() objc.ID {
-	if _r := raw.SHMediaItemGenres(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHErrorDomain returns the string constant SHErrorDomain, for use as a dictionary key or argument.
+func SHErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SHErrorDomain"))) }
+
+// SHMediaItemMatchOffset returns the string constant SHMediaItemMatchOffset, for use as a dictionary key or argument.
+func SHMediaItemMatchOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemMatchOffset")))
 }
 
-// SHMediaItemISRC returns the string constant SHMediaItemISRC as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemISRC() objc.ID {
-	if _r := raw.SHMediaItemISRC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemFrequencySkew returns the string constant SHMediaItemFrequencySkew, for use as a dictionary key or argument.
+func SHMediaItemFrequencySkew() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemFrequencySkew")))
 }
 
-// The key to access the time ranges property of a media item.
-// SHMediaItemTimeRanges returns the string constant SHMediaItemTimeRanges as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemTimeRanges() objc.ID {
-	return purego.CFConstant(raw.SHMediaItemTimeRanges())
-}
-
-// The key to access the frequency skew ranges property of a media item.
-// SHMediaItemFrequencySkewRanges returns the string constant SHMediaItemFrequencySkewRanges as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemFrequencySkewRanges() objc.ID {
-	return purego.CFConstant(raw.SHMediaItemFrequencySkewRanges())
-}
-
-// The date when the media item was created
-// SHMediaItemCreationDate returns the string constant SHMediaItemCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemCreationDate() objc.ID {
-	if _r := raw.SHMediaItemCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// The error domain for specific errors for ShazamKit.
-// SHErrorDomain returns the string constant SHErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SHErrorDomain() objc.ID {
-	if _r := raw.SHErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// SHMediaItemMatchOffset returns the string constant SHMediaItemMatchOffset as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemMatchOffset() objc.ID {
-	if _r := raw.SHMediaItemMatchOffset(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// SHMediaItemFrequencySkew returns the string constant SHMediaItemFrequencySkew as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemFrequencySkew() objc.ID {
-	if _r := raw.SHMediaItemFrequencySkew(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// SHMediaItemConfidence returns the string constant SHMediaItemConfidence as an objc.ID, for use as a dictionary key or selector argument.
-func SHMediaItemConfidence() objc.ID {
-	if _r := raw.SHMediaItemConfidence(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SHMediaItemConfidence returns the string constant SHMediaItemConfidence, for use as a dictionary key or argument.
+func SHMediaItemConfidence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SHMediaItemConfidence")))
 }

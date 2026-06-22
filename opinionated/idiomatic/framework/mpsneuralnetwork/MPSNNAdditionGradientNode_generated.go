@@ -5,128 +5,125 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns gradient for either primary or secondary source image from the inference pass. Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient for the primary or secondary source image from the inference pass.
+// NNAdditionGradientNode is an idiomatic wrapper over the Objective-C class MPSNNAdditionGradientNode.
 //
-// NNAdditionGradientNode wraps [raw.MPSNNAdditionGradientNode] with a fluent Go API.
+// It embeds [NNArithmeticGradientNode], promoting that type's methods.
+//
+// returns gradient for either primary or secondary source image from the inference pass. Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient for the primary or secondary source image from the inference pass.
 type NNAdditionGradientNode struct {
-	inner *raw.MPSNNAdditionGradientNode
+	NNArithmeticGradientNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNAdditionGradientNode].
-func (x *NNAdditionGradientNode) Unwrap() *raw.MPSNNAdditionGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNAdditionGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNAdditionGradientNodeFromID adopts an existing object pointer as a NNAdditionGradientNode (nil for 0).
+// NNAdditionGradientNodeFromID adopts an existing Objective-C object as a NNAdditionGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNAdditionGradientNodeFromID(id objc.ID) *NNAdditionGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNAdditionGradientNode{inner: raw.MPSNNAdditionGradientNodeFromID(id)}
+	x := &NNAdditionGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNNAdditionGradientNode creates a new [NNAdditionGradientNode].
+// nNAdditionGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// NNAdditionGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNAdditionGradientNodeAdopt(id objc.ID) *NNAdditionGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNAdditionGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNAdditionGradientNode creates a new NNAdditionGradientNode.
 func NewNNAdditionGradientNode() *NNAdditionGradientNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNAdditionGradientNode")), objc.RegisterName("new"))
-	return &NNAdditionGradientNode{inner: raw.MPSNNAdditionGradientNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNAdditionGradientNode")), objc.RegisterName("new"))
+	return nNAdditionGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNAdditionGradientNode) WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *NNAdditionGradientNode) WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *NNAdditionGradientNode) WithBias(bias float32) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *NNAdditionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+func (x *NNAdditionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNAdditionGradientNode) WithMinimumValue(minimumValue float32) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue sets the property and returns the receiver so calls can be chained.
 func (x *NNAdditionGradientNode) WithMaximumValue(maximumValue float32) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNAdditionGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *NNAdditionGradientNode) WithLabel(label string) *NNAdditionGradientNode {
-	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NNAdditionGradientNode) asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode {
-	return &x.inner.MPSNNArithmeticGradientNode
-}
-
-func (x *NNAdditionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode
-}
-
-func (x *NNAdditionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // NNAdditionGradientNodeable is the interface implemented by [NNAdditionGradientNode], for mocking and DI.
 type NNAdditionGradientNodeable interface {
-	Unwrap() *raw.MPSNNAdditionGradientNode
+	obj.Object
 	WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode
 	WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode
 	WithBias(bias float32) *NNAdditionGradientNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNAdditionGradientNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNAdditionGradientNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNAdditionGradientNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionGradientNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionGradientNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionGradientNode
 	WithMinimumValue(minimumValue float32) *NNAdditionGradientNode
 	WithMaximumValue(maximumValue float32) *NNAdditionGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNAdditionGradientNode
 	WithLabel(label string) *NNAdditionGradientNode
 }
 
 var _ NNAdditionGradientNodeable = (*NNAdditionGradientNode)(nil)
+
+var _ NNArithmeticGradientNodeProvider = (*NNAdditionGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNAdditionGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNAdditionGradientNode)(nil)

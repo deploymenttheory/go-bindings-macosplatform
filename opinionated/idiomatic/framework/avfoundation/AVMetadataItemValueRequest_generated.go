@@ -5,67 +5,88 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that responds to a request to load the value of a metadata item.
+// MetadataItemValueRequest is an idiomatic wrapper over the Objective-C class AVMetadataItemValueRequest.
 //
-// MetadataItemValueRequest wraps [raw.AVMetadataItemValueRequest] with a fluent Go API.
+// An object that responds to a request to load the value of a metadata item.
 type MetadataItemValueRequest struct {
-	inner *raw.AVMetadataItemValueRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataItemValueRequest].
-func (x *MetadataItemValueRequest) Unwrap() *raw.AVMetadataItemValueRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataItemValueRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataItemValueRequestFromID adopts an existing object pointer as a MetadataItemValueRequest (nil for 0).
+// MetadataItemValueRequestFromID adopts an existing Objective-C object as a MetadataItemValueRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataItemValueRequestFromID(id objc.ID) *MetadataItemValueRequest {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataItemValueRequest{inner: raw.AVMetadataItemValueRequestFromID(id)}
+	x := &MetadataItemValueRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataItemValueRequest creates a new [MetadataItemValueRequest].
-func NewMetadataItemValueRequest() *MetadataItemValueRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataItemValueRequest")), objc.RegisterName("new"))
-	return &MetadataItemValueRequest{inner: raw.AVMetadataItemValueRequestFromID(_id)}
-}
-
-// Returns the metadata item’s value.
-//
-// RespondWithValue calls the underlying RespondWithValue.
-func (x *MetadataItemValueRequest) RespondWithValue(value objc.ID) {
-	x.inner.RespondWithValue(value)
-}
-
-// Returns an error when the system fails to load the value.
-//
-// RespondWithError calls the underlying RespondWithError.
-func (x *MetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
-	x.inner.RespondWithError(error_)
-}
-
-// MetadataItem calls the underlying MetadataItem.
-func (x *MetadataItemValueRequest) MetadataItem() *MetadataItem {
-	_r := x.inner.MetadataItem()
-	if _r == nil {
+// metadataItemValueRequestAdopt wraps an Objective-C object that this code just created as a
+// MetadataItemValueRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataItemValueRequestAdopt(id objc.ID) *MetadataItemValueRequest {
+	if id == 0 {
 		return nil
 	}
-	return &MetadataItem{inner: _r}
+	x := &MetadataItemValueRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataItemValueRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataItemValueRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataItemValueRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataItemValueRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetadataItemValueRequest creates a new MetadataItemValueRequest.
+func NewMetadataItemValueRequest() *MetadataItemValueRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataItemValueRequest")), objc.RegisterName("new"))
+	return metadataItemValueRequestAdopt(_id)
+}
+
+// RespondWithValue returns the metadata item’s value.
+func (x *MetadataItemValueRequest) RespondWithValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondWithValue:"), objref.IDOf(value))
+}
+
+// MetadataItem wraps the corresponding Objective-C method.
+func (x *MetadataItemValueRequest) MetadataItem() *MetadataItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataItem"))
+	return MetadataItemFromID(_r)
 }
 
 // MetadataItemValueRequestable is the interface implemented by [MetadataItemValueRequest], for mocking and DI.
 type MetadataItemValueRequestable interface {
-	Unwrap() *raw.AVMetadataItemValueRequest
-	RespondWithValue(value objc.ID)
-	RespondWithError(error_ unsafe.Pointer)
+	obj.Object
+	RespondWithValue(value obj.Object)
 	MetadataItem() *MetadataItem
 }
 

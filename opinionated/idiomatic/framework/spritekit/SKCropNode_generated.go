@@ -5,283 +5,225 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A node that masks pixels drawn by its children so that only some pixels are seen.
+// CropNode is an idiomatic wrapper over the Objective-C class SKCropNode.
 //
-// CropNode wraps [raw.SKCropNode] with a fluent Go API.
+// It embeds [Node], promoting that type's methods.
+//
+// A node that masks pixels drawn by its children so that only some pixels are seen.
 type CropNode struct {
-	inner *raw.SKCropNode
+	Node
 }
 
-// Unwrap returns the underlying [raw.SKCropNode].
-func (x *CropNode) Unwrap() *raw.SKCropNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CropNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CropNodeFromID adopts an existing object pointer as a CropNode (nil for 0).
+// CropNodeFromID adopts an existing Objective-C object as a CropNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CropNodeFromID(id objc.ID) *CropNode {
 	if id == 0 {
 		return nil
 	}
-	return &CropNode{inner: raw.SKCropNodeFromID(id)}
-}
-
-// NewCropNode creates a new [CropNode].
-func NewCropNode() *CropNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKCropNode")), objc.RegisterName("new"))
-	return &CropNode{inner: raw.SKCropNodeFromID(_id)}
-}
-
-// The node used to determine the crop node’s mask.
-//
-// WithMaskNode sets the maskNode property and returns the receiver for chaining.
-func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
-	x.inner.SetMaskNode(maskNode.asNode())
+	x := &CropNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *CropNode) WithPosition(position corefoundation.CGPoint) *CropNode {
-	x.inner.SKNode.SetPosition(position)
-	return x
-}
-
-// The height of the node relative to its parent.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
-func (x *CropNode) WithZPosition(zPosition float64) *CropNode {
-	x.inner.SKNode.SetZPosition(zPosition)
-	return x
-}
-
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
-func (x *CropNode) WithZRotation(zRotation float64) *CropNode {
-	x.inner.SKNode.SetZRotation(zRotation)
-	return x
-}
-
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets the xScale property and returns the receiver for chaining.
-func (x *CropNode) WithXScale(xScale float64) *CropNode {
-	x.inner.SKNode.SetXScale(xScale)
-	return x
-}
-
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets the yScale property and returns the receiver for chaining.
-func (x *CropNode) WithYScale(yScale float64) *CropNode {
-	x.inner.SKNode.SetYScale(yScale)
-	return x
-}
-
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
-func (x *CropNode) WithSpeed(speed float64) *CropNode {
-	x.inner.SKNode.SetSpeed(speed)
-	return x
-}
-
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
-func (x *CropNode) WithAlpha(alpha float64) *CropNode {
-	x.inner.SKNode.SetAlpha(alpha)
-	return x
-}
-
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
-func (x *CropNode) WithPaused(paused bool) *CropNode {
-	x.inner.SKNode.SetPaused(paused)
-	return x
-}
-
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
-func (x *CropNode) WithHidden(hidden bool) *CropNode {
-	x.inner.SKNode.SetHidden(hidden)
-	return x
-}
-
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
-func (x *CropNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
-	return x
-}
-
-// The node’s assignable name.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *CropNode) WithName(name string) *CropNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *CropNode) WithPhysicsBody(physicsBody *PhysicsBody) *CropNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
-	return x
-}
-
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *CropNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode {
-	x.inner.SKNode.SetUserData(userData)
-	return x
-}
-
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *CropNode) WithReachConstraints(reachConstraints *ReachConstraints) *CropNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
-	return x
-}
-
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *CropNode) WithConstraints(items ...*raw.SKConstraint) *CropNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
-	return x
-}
-
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *CropNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
-	return x
-}
-
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityElement(accessibilityElement bool) *CropNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
-	return x
-}
-
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityRole(accessibilityRole string) *CropNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
-	return x
-}
-
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CropNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
-	return x
-}
-
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilitySubrole(accessibilitySubrole string) *CropNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
-	return x
-}
-
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CropNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
-	return x
-}
-
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityParent(accessibilityParent objc.ID) *CropNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
-	return x
-}
-
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityHelp(accessibilityHelp string) *CropNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
-	return x
-}
-
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityLabel(accessibilityLabel string) *CropNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
-	return x
-}
-
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
-func (x *CropNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CropNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
-	return x
-}
-
-// MaskNode calls the underlying MaskNode.
-func (x *CropNode) MaskNode() *Node {
-	_r := x.inner.MaskNode()
-	if _r == nil {
+// cropNodeAdopt wraps an Objective-C object that this code just created as a
+// CropNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cropNodeAdopt(id objc.ID) *CropNode {
+	if id == 0 {
 		return nil
 	}
-	return &Node{inner: _r}
+	x := &CropNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMaskNode calls the underlying SetMaskNode.
-func (x *CropNode) SetMaskNode(maskNode *raw.SKNode) {
-	x.inner.SetMaskNode(maskNode)
+// NewCropNode creates a new CropNode.
+func NewCropNode() *CropNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKCropNode")), objc.RegisterName("new"))
+	return cropNodeAdopt(_id)
 }
 
-func (x *CropNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+// WithMaskNode the node used to determine the crop node’s mask.
+func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskNode:"), objref.IDOf(maskNode))
+	return x
+}
+
+// WithPosition the position of the node in its parent’s coordinate system.
+func (x *CropNode) WithPosition(position corefoundation.CGPoint) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
+	return x
+}
+
+// WithZPosition the height of the node relative to its parent.
+func (x *CropNode) WithZPosition(zPosition float64) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
+	return x
+}
+
+// WithZRotation the Euler rotation about the z axis (in radians).
+func (x *CropNode) WithZRotation(zRotation float64) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
+	return x
+}
+
+// WithXScale a scaling factor that multiplies the width of a node and its children.
+func (x *CropNode) WithXScale(xScale float64) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
+	return x
+}
+
+// WithYScale a scaling factor that multiplies the height of a node and its children.
+func (x *CropNode) WithYScale(yScale float64) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
+	return x
+}
+
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
+func (x *CropNode) WithSpeed(speed float64) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
+	return x
+}
+
+// WithAlpha the transparency value applied to the node’s contents.
+func (x *CropNode) WithAlpha(alpha float64) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
+	return x
+}
+
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
+func (x *CropNode) WithPaused(paused bool) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
+	return x
+}
+
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
+func (x *CropNode) WithHidden(hidden bool) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
+	return x
+}
+
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
+func (x *CropNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return x
+}
+
+// WithName the node’s assignable name.
+func (x *CropNode) WithName(name string) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithPhysicsBody the physics body associated with the node.
+func (x *CropNode) WithPhysicsBody(physicsBody *PhysicsBody) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return x
+}
+
+// WithUserData a dictionary containing arbitrary data.
+func (x *CropNode) WithUserData(userData obj.Object) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return x
+}
+
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
+func (x *CropNode) WithReachConstraints(reachConstraints *ReachConstraints) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return x
+}
+
+// WithConstraints a list of constraints to apply to the node.
+func (x *CropNode) WithConstraints(items ...*Constraint) *CropNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
+	return x
+}
+
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
+func (x *CropNode) WithAttributeValues(attributeValues obj.Object) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return x
+}
+
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (x *CropNode) WithAccessibilityElement(accessibilityElement bool) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
+func (x *CropNode) WithAccessibilityRole(accessibilityRole string) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
+func (x *CropNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (x *CropNode) WithAccessibilitySubrole(accessibilitySubrole string) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame the size of this user interface element, in screen points.
+func (x *CropNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent the user interface element that contains this element.
+func (x *CropNode) WithAccessibilityParent(accessibilityParent obj.Object) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return x
+}
+
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
+func (x *CropNode) WithAccessibilityHelp(accessibilityHelp string) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel a short description of this user interface element.
+func (x *CropNode) WithAccessibilityLabel(accessibilityLabel string) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (x *CropNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CropNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return x
+}
+
+// MaskNode wraps the corresponding Objective-C method.
+func (x *CropNode) MaskNode() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maskNode"))
+	return NodeFromID(_r)
+}
+
+// SetMaskNode wraps the corresponding Objective-C method.
+func (x *CropNode) SetMaskNode(maskNode *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskNode:"), objref.IDOf(maskNode))
+}
 
 // CropNodeable is the interface implemented by [CropNode], for mocking and DI.
 type CropNodeable interface {
-	Unwrap() *raw.SKCropNode
+	obj.Object
 	WithMaskNode(maskNode NodeProvider) *CropNode
 	WithPosition(position corefoundation.CGPoint) *CropNode
 	WithZPosition(zPosition float64) *CropNode
@@ -295,21 +237,23 @@ type CropNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode
 	WithName(name string) *CropNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *CropNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode
+	WithUserData(userData obj.Object) *CropNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *CropNode
-	WithConstraints(items ...*raw.SKConstraint) *CropNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode
+	WithConstraints(items ...*Constraint) *CropNode
+	WithAttributeValues(attributeValues obj.Object) *CropNode
 	WithAccessibilityElement(accessibilityElement bool) *CropNode
 	WithAccessibilityRole(accessibilityRole string) *CropNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CropNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *CropNode
 	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CropNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *CropNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *CropNode
 	WithAccessibilityHelp(accessibilityHelp string) *CropNode
 	WithAccessibilityLabel(accessibilityLabel string) *CropNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *CropNode
 	MaskNode() *Node
-	SetMaskNode(maskNode *raw.SKNode)
+	SetMaskNode(maskNode *Node)
 }
 
 var _ CropNodeable = (*CropNode)(nil)
+
+var _ NodeProvider = (*CropNode)(nil)

@@ -5,64 +5,76 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object that coordinates your app’s authentication requests with a TV provider’s authentication service.
+// VSAccountManager is an idiomatic wrapper over the Objective-C class VSAccountManager.
 //
-// VSAccountManager wraps [raw.VSAccountManager] with a fluent Go API.
+// The object that coordinates your app’s authentication requests with a TV provider’s authentication service.
 type VSAccountManager struct {
-	inner *raw.VSAccountManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAccountManager].
-func (x *VSAccountManager) Unwrap() *raw.VSAccountManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAccountManager) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAccountManagerFromID adopts an existing object pointer as a VSAccountManager (nil for 0).
+// VSAccountManagerFromID adopts an existing Objective-C object as a VSAccountManager
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAccountManagerFromID(id objc.ID) *VSAccountManager {
 	if id == 0 {
 		return nil
 	}
-	return &VSAccountManager{inner: raw.VSAccountManagerFromID(id)}
-}
-
-// NewVSAccountManager creates a new [VSAccountManager].
-func NewVSAccountManager() *VSAccountManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountManager")), objc.RegisterName("new"))
-	return &VSAccountManager{inner: raw.VSAccountManagerFromID(_id)}
-}
-
-// The delegate of the account manager object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *VSAccountManager) WithDelegate(delegate raw.VSAccountManagerDelegate) *VSAccountManager {
-	x.inner.SetDelegate(delegate)
+	x := &VSAccountManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// An object that can help the account manager by presenting and dismissing view controllers when needed, and deciding whether to allow authentication with the selected provider. Some requests may fail if a delegate is not provided.  For example, an account metadata request may require a delegate if it allows interruption.
-//
-// Delegate calls the underlying Delegate.
-func (x *VSAccountManager) Delegate() raw.VSAccountManagerDelegate {
-	return x.inner.Delegate()
+// vSAccountManagerAdopt wraps an Objective-C object that this code just created as a
+// VSAccountManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAccountManagerAdopt(id objc.ID) *VSAccountManager {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAccountManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *VSAccountManager) SetDelegate(delegate raw.VSAccountManagerDelegate) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *VSAccountManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAccountManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAccountManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVSAccountManager creates a new VSAccountManager.
+func NewVSAccountManager() *VSAccountManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountManager")), objc.RegisterName("new"))
+	return vSAccountManagerAdopt(_id)
 }
 
 // VSAccountManagerable is the interface implemented by [VSAccountManager], for mocking and DI.
 type VSAccountManagerable interface {
-	Unwrap() *raw.VSAccountManager
-	WithDelegate(delegate raw.VSAccountManagerDelegate) *VSAccountManager
-	Delegate() raw.VSAccountManagerDelegate
-	SetDelegate(delegate raw.VSAccountManagerDelegate)
+	obj.Object
 }
 
 var _ VSAccountManagerable = (*VSAccountManager)(nil)

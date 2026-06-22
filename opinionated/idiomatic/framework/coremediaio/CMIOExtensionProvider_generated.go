@@ -5,112 +5,129 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that manages device connections for a provider.
+// ExtensionProvider is an idiomatic wrapper over the Objective-C class CMIOExtensionProvider.
 //
-// ExtensionProvider wraps [raw.CMIOExtensionProvider] with a fluent Go API.
+// An object that manages device connections for a provider.
 type ExtensionProvider struct {
-	inner *raw.CMIOExtensionProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionProvider].
-func (x *ExtensionProvider) Unwrap() *raw.CMIOExtensionProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionProviderFromID adopts an existing object pointer as a ExtensionProvider (nil for 0).
+// ExtensionProviderFromID adopts an existing Objective-C object as a ExtensionProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionProviderFromID(id objc.ID) *ExtensionProvider {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(id)}
+	x := &ExtensionProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an extension provider with the specified source and dispatch queue.
-//
-// NewExtensionProviderWithSourceClientQueue creates a new [ExtensionProvider].
-func NewExtensionProviderWithSourceClientQueue(source raw.CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *ExtensionProvider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:clientQueue:"), source, clientQueue.Ptr())
-	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(_id)}
+// extensionProviderAdopt wraps an Objective-C object that this code just created as a
+// ExtensionProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionProviderAdopt(id objc.ID) *ExtensionProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionProvider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Adds a device to a provider.
-//
-// AddDeviceError calls the underlying AddDeviceError.
-func (x *ExtensionProvider) AddDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
-	return x.inner.AddDeviceError(device)
+// Description returns the object's -description text.
+func (x *ExtensionProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Removes a device from a provider.
-//
-// RemoveDeviceError calls the underlying RemoveDeviceError.
-func (x *ExtensionProvider) RemoveDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
-	return x.inner.RemoveDeviceError(device)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Notifies connected clients of device property changes.
-//
-// NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
-func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.NotifyPropertiesChanged(propertyStates)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property source @abstract The provider source.
-//
-// Source calls the underlying Source.
-func (x *ExtensionProvider) Source() raw.CMIOExtensionProviderSource {
-	return x.inner.Source()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionProvider) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property clientQueue @abstract The dispatch queue on which source methods from the provider/device/stream will be called.
-//
-// ClientQueue calls the underlying ClientQueue.
-func (x *ExtensionProvider) ClientQueue() *foundation.NSObject {
-	return x.inner.ClientQueue()
+// NewExtensionProvider creates a new ExtensionProvider.
+func NewExtensionProvider() *ExtensionProvider {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("new"))
+	return extensionProviderAdopt(_id)
 }
 
-// @property connectedClients @abstract The array of connected clients. @discussion This property is key-value observable.
+// AddDevice adds a device to a provider.
+func (x *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RemoveDevice removes a device from a provider.
+func (x *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// NotifyPropertiesChanged notifies connected clients of device property changes.
+func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
+}
+
+// ClientQueue the dispatch queue on which source methods from the provider/device/stream will be called.
+func (x *ExtensionProvider) ClientQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientQueue"))
+	return obj.Wrap(_r)
+}
+
+// ConnectedClients the array of connected clients. This property is key-value observable.
 //
 // ConnectedClients returns the collection as a Go slice.
 func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
-	arr := x.inner.ConnectedClients()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionClient {
-		return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedClients"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }
 
-// @property devices @abstract The devices array of the provider. @discussion This property is not key-value observable.
+// Devices the devices array of the provider. This property is not key-value observable.
 //
 // Devices returns the collection as a Go slice.
 func (x *ExtensionProvider) Devices() []*ExtensionDevice {
-	arr := x.inner.Devices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionDevice {
-		return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionDevice { return ExtensionDeviceFromID(_id) })
 }
 
 // ExtensionProviderable is the interface implemented by [ExtensionProvider], for mocking and DI.
 type ExtensionProviderable interface {
-	Unwrap() *raw.CMIOExtensionProvider
-	AddDeviceError(device *raw.CMIOExtensionDevice) (bool, error)
-	RemoveDeviceError(device *raw.CMIOExtensionDevice) (bool, error)
-	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	Source() raw.CMIOExtensionProviderSource
-	ClientQueue() *foundation.NSObject
+	obj.Object
+	AddDevice(device *ExtensionDevice) error
+	RemoveDevice(device *ExtensionDevice) error
+	NotifyPropertiesChanged(propertyStates obj.Object)
+	ClientQueue() obj.Object
 	ConnectedClients() []*ExtensionClient
 	Devices() []*ExtensionDevice
 }

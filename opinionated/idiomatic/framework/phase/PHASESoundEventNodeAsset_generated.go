@@ -5,43 +5,58 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A template object for sounds that can play in reaction to environmental state.
+// SoundEventNodeAsset is an idiomatic wrapper over the Objective-C class PHASESoundEventNodeAsset.
 //
-// SoundEventNodeAsset wraps [raw.PHASESoundEventNodeAsset] with a fluent Go API.
+// It embeds [Asset], promoting that type's methods.
+//
+// A template object for sounds that can play in reaction to environmental state.
 type SoundEventNodeAsset struct {
-	inner *raw.PHASESoundEventNodeAsset
+	Asset
 }
 
-// Unwrap returns the underlying [raw.PHASESoundEventNodeAsset].
-func (x *SoundEventNodeAsset) Unwrap() *raw.PHASESoundEventNodeAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SoundEventNodeAsset) ID() objc.ID { return x.inner.Ptr() }
-
-// SoundEventNodeAssetFromID adopts an existing object pointer as a SoundEventNodeAsset (nil for 0).
+// SoundEventNodeAssetFromID adopts an existing Objective-C object as a SoundEventNodeAsset
+// (nil for 0), retaining it and registering a release finalizer.
 func SoundEventNodeAssetFromID(id objc.ID) *SoundEventNodeAsset {
 	if id == 0 {
 		return nil
 	}
-	return &SoundEventNodeAsset{inner: raw.PHASESoundEventNodeAssetFromID(id)}
+	x := &SoundEventNodeAsset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSoundEventNodeAsset creates a new [SoundEventNodeAsset].
+// soundEventNodeAssetAdopt wraps an Objective-C object that this code just created as a
+// SoundEventNodeAsset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func soundEventNodeAssetAdopt(id objc.ID) *SoundEventNodeAsset {
+	if id == 0 {
+		return nil
+	}
+	x := &SoundEventNodeAsset{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSoundEventNodeAsset creates a new SoundEventNodeAsset.
 func NewSoundEventNodeAsset() *SoundEventNodeAsset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESoundEventNodeAsset")), objc.RegisterName("new"))
-	return &SoundEventNodeAsset{inner: raw.PHASESoundEventNodeAssetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASESoundEventNodeAsset")), objc.RegisterName("new"))
+	return soundEventNodeAssetAdopt(_id)
 }
-
-func (x *SoundEventNodeAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
 
 // SoundEventNodeAssetable is the interface implemented by [SoundEventNodeAsset], for mocking and DI.
 type SoundEventNodeAssetable interface {
-	Unwrap() *raw.PHASESoundEventNodeAsset
+	obj.Object
 }
 
 var _ SoundEventNodeAssetable = (*SoundEventNodeAsset)(nil)
+
+var _ AssetProvider = (*SoundEventNodeAsset)(nil)

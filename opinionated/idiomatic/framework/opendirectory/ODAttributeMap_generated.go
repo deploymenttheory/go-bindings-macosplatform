@@ -5,125 +5,155 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AttributeMap wraps [raw.ODAttributeMap] with a fluent Go API.
+// AttributeMap is an idiomatic wrapper over the Objective-C class ODAttributeMap.
 type AttributeMap struct {
-	inner *raw.ODAttributeMap
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODAttributeMap].
-func (x *AttributeMap) Unwrap() *raw.ODAttributeMap { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributeMap) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeMapFromID adopts an existing object pointer as a AttributeMap (nil for 0).
+// AttributeMapFromID adopts an existing Objective-C object as a AttributeMap
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeMapFromID(id objc.ID) *AttributeMap {
 	if id == 0 {
 		return nil
 	}
-	return &AttributeMap{inner: raw.ODAttributeMapFromID(id)}
+	x := &AttributeMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAttributeMap creates a new [AttributeMap].
+// attributeMapAdopt wraps an Objective-C object that this code just created as a
+// AttributeMap (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeMapAdopt(id objc.ID) *AttributeMap {
+	if id == 0 {
+		return nil
+	}
+	x := &AttributeMap{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AttributeMap) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributeMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributeMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributeMap) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttributeMap creates a new AttributeMap.
 func NewAttributeMap() *AttributeMap {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ODAttributeMap")), objc.RegisterName("new"))
-	return &AttributeMap{inner: raw.ODAttributeMapFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ODAttributeMap")), objc.RegisterName("new"))
+	return attributeMapAdopt(_id)
 }
 
-// WithCustomQueryFunction sets the customQueryFunction property and returns the receiver for chaining.
+// WithCustomQueryFunction sets the property and returns the receiver so calls can be chained.
 func (x *AttributeMap) WithCustomQueryFunction(customQueryFunction string) *AttributeMap {
-	x.inner.SetCustomQueryFunction(foundation.NSStringStringWithUTF8String(customQueryFunction))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomQueryFunction:"), purego.NSString(customQueryFunction))
 	return x
 }
 
-// WithCustomTranslationFunction sets the customTranslationFunction property and returns the receiver for chaining.
+// WithCustomTranslationFunction sets the property and returns the receiver so calls can be chained.
 func (x *AttributeMap) WithCustomTranslationFunction(customTranslationFunction string) *AttributeMap {
-	x.inner.SetCustomTranslationFunction(foundation.NSStringStringWithUTF8String(customTranslationFunction))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomTranslationFunction:"), purego.NSString(customTranslationFunction))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *AttributeMap) WithValue(value string) *AttributeMap {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
-// @method setStaticValue: @abstract Sets a static value that will always be returned for this mapping. @discussion Sets a static value that will always be returned for this mapping, i.e., "20".
-//
-// SetStaticValue calls the underlying SetStaticValue.
+// SetStaticValue sets a static value that will always be returned for this mapping. Sets a static value that will always be returned for this mapping, i.e., "20".
 func (x *AttributeMap) SetStaticValue(staticValue string) {
-	x.inner.SetStaticValue(foundation.NSStringStringWithUTF8String(staticValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStaticValue:"), purego.NSString(staticValue))
 }
 
-// @method setVariableSubstitution: @abstract Sets a variable substitution-based value. @discussion Value should be using the syntax '$native$' for all substited values.  For example, to form a home directory using the "cn" of an LDAP record, substitution could be done with "/home/$cn$".
-//
-// SetVariableSubstitution calls the underlying SetVariableSubstitution.
+// SetVariableSubstitution sets a variable substitution-based value. Value should be using the syntax '$native$' for all substited values.  For example, to form a home directory using the "cn" of an LDAP record, substitution could be done with "/home/$cn$".
 func (x *AttributeMap) SetVariableSubstitution(variableSubstitution string) {
-	x.inner.SetVariableSubstitution(foundation.NSStringStringWithUTF8String(variableSubstitution))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableSubstitution:"), purego.NSString(variableSubstitution))
 }
 
-// CustomQueryFunction calls the underlying CustomQueryFunction.
+// CustomQueryFunction wraps the corresponding Objective-C method.
 func (x *AttributeMap) CustomQueryFunction() string {
-	_r := x.inner.CustomQueryFunction()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customQueryFunction"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCustomQueryFunction calls the underlying SetCustomQueryFunction.
+// SetCustomQueryFunction wraps the corresponding Objective-C method.
 func (x *AttributeMap) SetCustomQueryFunction(customQueryFunction string) {
-	x.inner.SetCustomQueryFunction(foundation.NSStringStringWithUTF8String(customQueryFunction))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomQueryFunction:"), purego.NSString(customQueryFunction))
 }
 
-// CustomTranslationFunction calls the underlying CustomTranslationFunction.
+// CustomTranslationFunction wraps the corresponding Objective-C method.
 func (x *AttributeMap) CustomTranslationFunction() string {
-	_r := x.inner.CustomTranslationFunction()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customTranslationFunction"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCustomTranslationFunction calls the underlying SetCustomTranslationFunction.
+// SetCustomTranslationFunction wraps the corresponding Objective-C method.
 func (x *AttributeMap) SetCustomTranslationFunction(customTranslationFunction string) {
-	x.inner.SetCustomTranslationFunction(foundation.NSStringStringWithUTF8String(customTranslationFunction))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomTranslationFunction:"), purego.NSString(customTranslationFunction))
 }
 
-// CustomAttributes calls the underlying CustomAttributes.
-func (x *AttributeMap) CustomAttributes() *foundation.NSArray[objc.ID] {
-	return x.inner.CustomAttributes()
+// CustomAttributes wraps the corresponding Objective-C method.
+func (x *AttributeMap) CustomAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customAttributes"))
+	return obj.Wrap(_r)
 }
 
-// SetCustomAttributes calls the underlying SetCustomAttributes.
-func (x *AttributeMap) SetCustomAttributes(customAttributes *foundation.NSArray[objc.ID]) {
-	x.inner.SetCustomAttributes(customAttributes)
+// SetCustomAttributes wraps the corresponding Objective-C method.
+func (x *AttributeMap) SetCustomAttributes(customAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomAttributes:"), objref.IDOf(customAttributes))
 }
 
-// Value calls the underlying Value.
+// Value wraps the corresponding Objective-C method.
 func (x *AttributeMap) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetValue calls the underlying SetValue.
+// SetValue wraps the corresponding Objective-C method.
 func (x *AttributeMap) SetValue(value string) {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
 // AttributeMapable is the interface implemented by [AttributeMap], for mocking and DI.
 type AttributeMapable interface {
-	Unwrap() *raw.ODAttributeMap
+	obj.Object
 	WithCustomQueryFunction(customQueryFunction string) *AttributeMap
 	WithCustomTranslationFunction(customTranslationFunction string) *AttributeMap
 	WithValue(value string) *AttributeMap
@@ -133,8 +163,8 @@ type AttributeMapable interface {
 	SetCustomQueryFunction(customQueryFunction string)
 	CustomTranslationFunction() string
 	SetCustomTranslationFunction(customTranslationFunction string)
-	CustomAttributes() *foundation.NSArray[objc.ID]
-	SetCustomAttributes(customAttributes *foundation.NSArray[objc.ID])
+	CustomAttributes() obj.Object
+	SetCustomAttributes(customAttributes obj.Object)
 	Value() string
 	SetValue(value string)
 }

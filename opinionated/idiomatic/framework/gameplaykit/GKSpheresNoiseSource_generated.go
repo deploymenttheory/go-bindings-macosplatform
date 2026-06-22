@@ -5,67 +5,79 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A procedural noise generator whose output is a 3D field of concentric spherical shells.
+// SpheresNoiseSource is an idiomatic wrapper over the Objective-C class GKSpheresNoiseSource.
 //
-// SpheresNoiseSource wraps [raw.GKSpheresNoiseSource] with a fluent Go API.
+// It embeds [NoiseSource], promoting that type's methods.
+//
+// A procedural noise generator whose output is a 3D field of concentric spherical shells.
 type SpheresNoiseSource struct {
-	inner *raw.GKSpheresNoiseSource
+	NoiseSource
 }
 
-// Unwrap returns the underlying [raw.GKSpheresNoiseSource].
-func (x *SpheresNoiseSource) Unwrap() *raw.GKSpheresNoiseSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpheresNoiseSource) ID() objc.ID { return x.inner.Ptr() }
-
-// SpheresNoiseSourceFromID adopts an existing object pointer as a SpheresNoiseSource (nil for 0).
+// SpheresNoiseSourceFromID adopts an existing Objective-C object as a SpheresNoiseSource
+// (nil for 0), retaining it and registering a release finalizer.
 func SpheresNoiseSourceFromID(id objc.ID) *SpheresNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	return &SpheresNoiseSource{inner: raw.GKSpheresNoiseSourceFromID(id)}
-}
-
-// Initializes a sphere noise source with the specified frequency.
-//
-// NewSpheresNoiseSourceWithFrequency creates a new [SpheresNoiseSource].
-func NewSpheresNoiseSourceWithFrequency(frequency float64) *SpheresNoiseSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSpheresNoiseSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:"), frequency)
-	return &SpheresNoiseSource{inner: raw.GKSpheresNoiseSourceFromID(_id)}
-}
-
-// A value that determines the size and spacing of concentric spheres.
-//
-// WithFrequency sets the frequency property and returns the receiver for chaining.
-func (x *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSource {
-	x.inner.SetFrequency(frequency)
+	x := &SpheresNoiseSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Frequency calls the underlying Frequency.
+// spheresNoiseSourceAdopt wraps an Objective-C object that this code just created as a
+// SpheresNoiseSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func spheresNoiseSourceAdopt(id objc.ID) *SpheresNoiseSource {
+	if id == 0 {
+		return nil
+	}
+	x := &SpheresNoiseSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSpheresNoiseSourceWithFrequency initializes a sphere noise source with the specified frequency.
+func NewSpheresNoiseSourceWithFrequency(frequency float64) *SpheresNoiseSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSpheresNoiseSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:"), frequency)
+	return spheresNoiseSourceAdopt(_id)
+}
+
+// WithFrequency a value that determines the size and spacing of concentric spheres.
+func (x *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
+	return x
+}
+
+// Frequency wraps the corresponding Objective-C method.
 func (x *SpheresNoiseSource) Frequency() float64 {
-	return x.inner.Frequency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+	return _r
 }
 
-// SetFrequency calls the underlying SetFrequency.
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *SpheresNoiseSource) SetFrequency(frequency float64) {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
-
-func (x *SpheresNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
 
 // SpheresNoiseSourceable is the interface implemented by [SpheresNoiseSource], for mocking and DI.
 type SpheresNoiseSourceable interface {
-	Unwrap() *raw.GKSpheresNoiseSource
+	obj.Object
 	WithFrequency(frequency float64) *SpheresNoiseSource
 	Frequency() float64
 	SetFrequency(frequency float64)
 }
 
 var _ SpheresNoiseSourceable = (*SpheresNoiseSource)(nil)
+
+var _ NoiseSourceProvider = (*SpheresNoiseSource)(nil)

@@ -5,161 +5,131 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a @ref MPSNNLossGradient kernel
+// NNLossGradientNode is an idiomatic wrapper over the Objective-C class MPSNNLossGradientNode.
 //
-// NNLossGradientNode wraps [raw.MPSNNLossGradientNode] with a fluent Go API.
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// Node representing a
 type NNLossGradientNode struct {
-	inner *raw.MPSNNLossGradientNode
+	NNGradientFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNLossGradientNode].
-func (x *NNLossGradientNode) Unwrap() *raw.MPSNNLossGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNLossGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNLossGradientNodeFromID adopts an existing object pointer as a NNLossGradientNode (nil for 0).
+// NNLossGradientNodeFromID adopts an existing Objective-C object as a NNLossGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNLossGradientNodeFromID(id objc.ID) *NNLossGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNLossGradientNode{inner: raw.MPSNNLossGradientNodeFromID(id)}
-}
-
-// NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter creates a new [NNLossGradientNode].
-func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, labels *mpsneuralnetwork.MPSNNImageNode, weights *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:"), sourceGradient.Ptr(), sourceImage.Ptr(), labels.Ptr(), weights.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	return &NNLossGradientNode{inner: raw.MPSNNLossGradientNodeFromID(_id)}
-}
-
-// NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter creates a new [NNLossGradientNode].
-func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, labels *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:"), sourceGradient.Ptr(), sourceImage.Ptr(), labels.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	return &NNLossGradientNode{inner: raw.MPSNNLossGradientNodeFromID(_id)}
-}
-
-// NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter creates a new [NNLossGradientNode].
-func NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], gradientState *mpsneuralnetwork.MPSNNGradientStateNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:"), sourceNodes.Ptr(), gradientState.Ptr(), descriptor.Ptr(), isLabelsGradientFilter)
-	return &NNLossGradientNode{inner: raw.MPSNNLossGradientNodeFromID(_id)}
-}
-
-// @property   propertyCallBack @abstract   Optional callback option - setting this allows the scalar weight value to be changed dynamically at encode time. Default value: nil.
-//
-// WithPropertyCallBack sets the propertyCallBack property and returns the receiver for chaining.
-func (x *NNLossGradientNode) WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNLossGradientNode {
-	x.inner.SetPropertyCallBack(propertyCallBack)
+	x := &NNLossGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNLossGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNLossGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+// nNLossGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// NNLossGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNLossGradientNodeAdopt(id objc.ID) *NNLossGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNLossGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
+func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient obj.Object, sourceImage obj.Object, labels obj.Object, weights obj.Object, gradientState obj.Object, descriptor obj.Object, isLabelsGradientFilter bool) *NNLossGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
+	return nNLossGradientNodeAdopt(_id)
+}
+
+// NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
+func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient obj.Object, sourceImage obj.Object, labels obj.Object, gradientState obj.Object, descriptor obj.Object, isLabelsGradientFilter bool) *NNLossGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
+	return nNLossGradientNodeAdopt(_id)
+}
+
+// NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
+func NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes []obj.Object, gradientState obj.Object, descriptor obj.Object, isLabelsGradientFilter bool) *NNLossGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:"), purego.SliceToNSArray(sourceNodes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
+	return nNLossGradientNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// LossType calls the underlying LossType.
-func (x *NNLossGradientNode) LossType() mpsneuralnetwork.MPSCNNLossType {
-	return x.inner.LossType()
+// NumberOfClasses wraps the corresponding Objective-C method.
+func (x *NNLossGradientNode) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+	return _r
 }
 
-// ReductionType calls the underlying ReductionType.
-func (x *NNLossGradientNode) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
-	return x.inner.ReductionType()
-}
-
-// NumberOfClasses calls the underlying NumberOfClasses.
-func (x *NNLossGradientNode) NumberOfClasses() uint {
-	return x.inner.NumberOfClasses()
-}
-
-// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+// ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) ReduceAcrossBatch() bool {
-	return x.inner.ReduceAcrossBatch()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+	return _r
 }
 
-// Weight calls the underlying Weight.
+// Weight wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) Weight() float32 {
-	return x.inner.Weight()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
 }
 
-// LabelSmoothing calls the underlying LabelSmoothing.
+// LabelSmoothing wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) LabelSmoothing() float32 {
-	return x.inner.LabelSmoothing()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+	return _r
 }
 
-// Epsilon calls the underlying Epsilon.
+// Epsilon wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// Delta calls the underlying Delta.
+// Delta wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) Delta() float32 {
-	return x.inner.Delta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+	return _r
 }
 
-// IsLabelsGradientFilter calls the underlying IsLabelsGradientFilter.
+// IsLabelsGradientFilter wraps the corresponding Objective-C method.
 func (x *NNLossGradientNode) IsLabelsGradientFilter() bool {
-	return x.inner.IsLabelsGradientFilter()
-}
-
-// @property   propertyCallBack @abstract   Optional callback option - setting this allows the scalar weight value to be changed dynamically at encode time. Default value: nil.
-//
-// PropertyCallBack calls the underlying PropertyCallBack.
-func (x *NNLossGradientNode) PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback {
-	return x.inner.PropertyCallBack()
-}
-
-// SetPropertyCallBack calls the underlying SetPropertyCallBack.
-func (x *NNLossGradientNode) SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) {
-	x.inner.SetPropertyCallBack(propertyCallBack)
-}
-
-func (x *NNLossGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *NNLossGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLabelsGradientFilter"))
+	return _r
 }
 
 // NNLossGradientNodeable is the interface implemented by [NNLossGradientNode], for mocking and DI.
 type NNLossGradientNodeable interface {
-	Unwrap() *raw.MPSNNLossGradientNode
-	WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNLossGradientNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNLossGradientNode
+	obj.Object
 	WithLabel(label string) *NNLossGradientNode
-	LossType() mpsneuralnetwork.MPSCNNLossType
-	ReductionType() mpsneuralnetwork.MPSCNNReductionType
-	NumberOfClasses() uint
+	NumberOfClasses() int
 	ReduceAcrossBatch() bool
 	Weight() float32
 	LabelSmoothing() float32
 	Epsilon() float32
 	Delta() float32
 	IsLabelsGradientFilter() bool
-	PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback
-	SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback)
 }
 
 var _ NNLossGradientNodeable = (*NNLossGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*NNLossGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNLossGradientNode)(nil)

@@ -4,12 +4,17 @@
 
 package scenekit
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
-)
+// A representation of a three-component vector.
+type SCNVector3 struct {
+	X float64
+	Y float64
+	Z float64
+}
 
-// SCNVector3 is a type alias for the raw SCNVector3 value-type struct.
-type SCNVector3 = raw.SCNVector3
-
-// SCNVector4 is a type alias for the raw SCNVector4 value-type struct.
-type SCNVector4 = raw.SCNVector4
+// A representation of a four-component vector.
+type SCNVector4 struct {
+	X float64
+	Y float64
+	Z float64
+	W float64
+}

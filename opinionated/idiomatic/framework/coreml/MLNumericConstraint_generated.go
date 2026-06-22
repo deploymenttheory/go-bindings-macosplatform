@@ -5,60 +5,97 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The value limitations of a number.
+// NumericConstraint is an idiomatic wrapper over the Objective-C class MLNumericConstraint.
 //
-// NumericConstraint wraps [raw.MLNumericConstraint] with a fluent Go API.
+// The value limitations of a number.
 type NumericConstraint struct {
-	inner *raw.MLNumericConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLNumericConstraint].
-func (x *NumericConstraint) Unwrap() *raw.MLNumericConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NumericConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// NumericConstraintFromID adopts an existing object pointer as a NumericConstraint (nil for 0).
+// NumericConstraintFromID adopts an existing Objective-C object as a NumericConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func NumericConstraintFromID(id objc.ID) *NumericConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &NumericConstraint{inner: raw.MLNumericConstraintFromID(id)}
+	x := &NumericConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNumericConstraint creates a new [NumericConstraint].
+// numericConstraintAdopt wraps an Objective-C object that this code just created as a
+// NumericConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func numericConstraintAdopt(id objc.ID) *NumericConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &NumericConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NumericConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NumericConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NumericConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NumericConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNumericConstraint creates a new NumericConstraint.
 func NewNumericConstraint() *NumericConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLNumericConstraint")), objc.RegisterName("new"))
-	return &NumericConstraint{inner: raw.MLNumericConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLNumericConstraint")), objc.RegisterName("new"))
+	return numericConstraintAdopt(_id)
 }
 
-// MinNumber calls the underlying MinNumber.
-func (x *NumericConstraint) MinNumber() *foundation.NSNumber {
-	return x.inner.MinNumber()
+// MinNumber wraps the corresponding Objective-C method.
+func (x *NumericConstraint) MinNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minNumber"))
+	return obj.Wrap(_r)
 }
 
-// MaxNumber calls the underlying MaxNumber.
-func (x *NumericConstraint) MaxNumber() *foundation.NSNumber {
-	return x.inner.MaxNumber()
+// MaxNumber wraps the corresponding Objective-C method.
+func (x *NumericConstraint) MaxNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxNumber"))
+	return obj.Wrap(_r)
 }
 
-// EnumeratedNumbers calls the underlying EnumeratedNumbers.
-func (x *NumericConstraint) EnumeratedNumbers() *foundation.NSSet[*foundation.NSNumber] {
-	return x.inner.EnumeratedNumbers()
+// EnumeratedNumbers wraps the corresponding Objective-C method.
+func (x *NumericConstraint) EnumeratedNumbers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedNumbers"))
+	return obj.Wrap(_r)
 }
 
 // NumericConstraintable is the interface implemented by [NumericConstraint], for mocking and DI.
 type NumericConstraintable interface {
-	Unwrap() *raw.MLNumericConstraint
-	MinNumber() *foundation.NSNumber
-	MaxNumber() *foundation.NSNumber
-	EnumeratedNumbers() *foundation.NSSet[*foundation.NSNumber]
+	obj.Object
+	MinNumber() obj.Object
+	MaxNumber() obj.Object
+	EnumeratedNumbers() obj.Object
 }
 
 var _ NumericConstraintable = (*NumericConstraint)(nil)

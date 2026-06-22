@@ -5,97 +5,117 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that uses the Attribute Protocol (ATT).
+// ATTRequest is an idiomatic wrapper over the Objective-C class CBATTRequest.
 //
-// ATTRequest wraps [raw.CBATTRequest] with a fluent Go API.
+// A request that uses the Attribute Protocol (ATT).
 type ATTRequest struct {
-	inner *raw.CBATTRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBATTRequest].
-func (x *ATTRequest) Unwrap() *raw.CBATTRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ATTRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ATTRequestFromID adopts an existing object pointer as a ATTRequest (nil for 0).
+// ATTRequestFromID adopts an existing Objective-C object as a ATTRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ATTRequestFromID(id objc.ID) *ATTRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ATTRequest{inner: raw.CBATTRequestFromID(id)}
-}
-
-// NewATTRequest creates a new [ATTRequest].
-func NewATTRequest() *ATTRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBATTRequest")), objc.RegisterName("new"))
-	return &ATTRequest{inner: raw.CBATTRequestFromID(_id)}
-}
-
-// The data that the central reads from or writes to the peripheral.
-//
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *ATTRequest) WithValue(value *foundation.NSData) *ATTRequest {
-	x.inner.SetValue(value)
+	x := &ATTRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property central @discussion The central that originated the request.
-//
-// Central calls the underlying Central.
+// aTTRequestAdopt wraps an Objective-C object that this code just created as a
+// ATTRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aTTRequestAdopt(id objc.ID) *ATTRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ATTRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ATTRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ATTRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ATTRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ATTRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewATTRequest creates a new ATTRequest.
+func NewATTRequest() *ATTRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBATTRequest")), objc.RegisterName("new"))
+	return aTTRequestAdopt(_id)
+}
+
+// WithValue the data that the central reads from or writes to the peripheral.
+func (x *ATTRequest) WithValue(value obj.Object) *ATTRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return x
+}
+
+// Central the central that originated the request.
 func (x *ATTRequest) Central() *Central {
-	_r := x.inner.Central()
-	if _r == nil {
-		return nil
-	}
-	return &Central{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("central"))
+	return CentralFromID(_r)
 }
 
-// @property characteristic @discussion The characteristic whose value will be read or written.
-//
-// Characteristic calls the underlying Characteristic.
+// Characteristic the characteristic whose value will be read or written.
 func (x *ATTRequest) Characteristic() *Characteristic {
-	_r := x.inner.Characteristic()
-	if _r == nil {
-		return nil
-	}
-	return &Characteristic{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristic"))
+	return CharacteristicFromID(_r)
 }
 
-// @property offset @discussion The zero-based index of the first byte for the read or write.
-//
-// Offset calls the underlying Offset.
-func (x *ATTRequest) Offset() uint {
-	return x.inner.Offset()
+// Offset the zero-based index of the first byte for the read or write.
+func (x *ATTRequest) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
-// @property value @discussion The data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via @link respondToRequest:withResult: @/link. For write requests, <i>value</i> will contain the data to be written.
-//
-// Value calls the underlying Value.
-func (x *ATTRequest) Value() *foundation.NSData {
-	return x.inner.Value()
+// Value the data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via
+func (x *ATTRequest) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *ATTRequest) SetValue(value *foundation.NSData) {
-	x.inner.SetValue(value)
+// SetValue wraps the corresponding Objective-C method.
+func (x *ATTRequest) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
 // ATTRequestable is the interface implemented by [ATTRequest], for mocking and DI.
 type ATTRequestable interface {
-	Unwrap() *raw.CBATTRequest
-	WithValue(value *foundation.NSData) *ATTRequest
+	obj.Object
+	WithValue(value obj.Object) *ATTRequest
 	Central() *Central
 	Characteristic() *Characteristic
-	Offset() uint
-	Value() *foundation.NSData
-	SetValue(value *foundation.NSData)
+	Offset() int
+	Value() obj.Object
+	SetValue(value obj.Object)
 }
 
 var _ ATTRequestable = (*ATTRequest)(nil)

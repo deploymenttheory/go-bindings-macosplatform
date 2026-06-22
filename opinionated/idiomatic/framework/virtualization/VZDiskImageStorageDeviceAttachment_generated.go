@@ -5,102 +5,105 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A device that stores content in a disk image.
+// DiskImageStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZDiskImageStorageDeviceAttachment.
 //
-// DiskImageStorageDeviceAttachment wraps [raw.VZDiskImageStorageDeviceAttachment] with a fluent Go API.
+// It embeds [StorageDeviceAttachment], promoting that type's methods.
+//
+// A device that stores content in a disk image.
 type DiskImageStorageDeviceAttachment struct {
-	inner *raw.VZDiskImageStorageDeviceAttachment
+	StorageDeviceAttachment
 }
 
-// Unwrap returns the underlying [raw.VZDiskImageStorageDeviceAttachment].
-func (x *DiskImageStorageDeviceAttachment) Unwrap() *raw.VZDiskImageStorageDeviceAttachment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiskImageStorageDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// DiskImageStorageDeviceAttachmentFromID adopts an existing object pointer as a DiskImageStorageDeviceAttachment (nil for 0).
+// DiskImageStorageDeviceAttachmentFromID adopts an existing Objective-C object as a DiskImageStorageDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func DiskImageStorageDeviceAttachmentFromID(id objc.ID) *DiskImageStorageDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(id)}
+	x := &DiskImageStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates the attachment object from the specified disk image.
-//
-// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError creates a new [DiskImageStorageDeviceAttachment].
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnly bool) (*DiskImageStorageDeviceAttachment, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), readOnly, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// diskImageStorageDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// DiskImageStorageDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diskImageStorageDeviceAttachmentAdopt(id objc.ID) *DiskImageStorageDeviceAttachment {
+	if id == 0 {
+		return nil
 	}
-	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(_id)}, nil
+	x := &DiskImageStorageDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initialize the attachment from a local file URL.
-//
-// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError creates a new [DiskImageStorageDeviceAttachment].
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode VZDiskImageCachingMode, synchronizationMode VZDiskImageSynchronizationMode) (*DiskImageStorageDeviceAttachment, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
+// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError creates the attachment object from the specified disk image.
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnly bool) (result *DiskImageStorageDeviceAttachment, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), readOnly, raw.VZDiskImageCachingMode(cachingMode), raw.VZDiskImageSynchronizationMode(synchronizationMode), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:error:"), rt.FileURL(url), readOnly, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(_id)}, nil
+	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// @abstract URL of the underlying disk image.
-//
-// URL calls the underlying URL.
-func (x *DiskImageStorageDeviceAttachment) URL() *foundation.NSURL {
-	return x.inner.URL()
+// NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError initialize the attachment from a local file URL.
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode DiskImageCachingMode, synchronizationMode DiskImageSynchronizationMode) (result *DiskImageStorageDeviceAttachment, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:"), rt.FileURL(url), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return diskImageStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// @abstract Whether the underlying disk image is read-only.
-//
-// IsReadOnly calls the underlying IsReadOnly.
+// URL URL of the underlying disk image.
+func (x *DiskImageStorageDeviceAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
+}
+
+// IsReadOnly whether the underlying disk image is read-only.
 func (x *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
-	return x.inner.IsReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+	return _r
 }
 
-// @abstract How disk image data is cached by the host.
-//
-// CachingMode calls the underlying CachingMode.
-func (x *DiskImageStorageDeviceAttachment) CachingMode() VZDiskImageCachingMode {
-	return VZDiskImageCachingMode(x.inner.CachingMode())
+// CachingMode how disk image data is cached by the host.
+func (x *DiskImageStorageDeviceAttachment) CachingMode() DiskImageCachingMode {
+	_r := objc.Send[DiskImageCachingMode](objref.IDOf(x), objc.RegisterName("cachingMode"))
+	return _r
 }
 
-// @abstract The mode in which the disk image synchronizes data with the underlying storage device.
-//
-// SynchronizationMode calls the underlying SynchronizationMode.
-func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() VZDiskImageSynchronizationMode {
-	return VZDiskImageSynchronizationMode(x.inner.SynchronizationMode())
-}
-
-func (x *DiskImageStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
-	return &x.inner.VZStorageDeviceAttachment
+// SynchronizationMode the mode in which the disk image synchronizes data with the underlying storage device.
+func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() DiskImageSynchronizationMode {
+	_r := objc.Send[DiskImageSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
+	return _r
 }
 
 // DiskImageStorageDeviceAttachmentable is the interface implemented by [DiskImageStorageDeviceAttachment], for mocking and DI.
 type DiskImageStorageDeviceAttachmentable interface {
-	Unwrap() *raw.VZDiskImageStorageDeviceAttachment
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 	IsReadOnly() bool
-	CachingMode() VZDiskImageCachingMode
-	SynchronizationMode() VZDiskImageSynchronizationMode
+	CachingMode() DiskImageCachingMode
+	SynchronizationMode() DiskImageSynchronizationMode
 }
 
 var _ DiskImageStorageDeviceAttachmentable = (*DiskImageStorageDeviceAttachment)(nil)
+
+var _ StorageDeviceAttachmentProvider = (*DiskImageStorageDeviceAttachment)(nil)

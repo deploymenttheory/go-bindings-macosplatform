@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package mpscore provides a fluent Go API over the macOS MPSCore framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Image: [TemporaryImage]
+//   - Matrix: [TemporaryMatrix]
+//   - NDArray: [TemporaryNDArray]
+//   - Vector: [TemporaryVector]
 package mpscore

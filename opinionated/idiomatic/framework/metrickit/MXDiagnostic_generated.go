@@ -5,95 +5,119 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract data class for a diagnostic.
+// Diagnostic is an idiomatic wrapper over the Objective-C class MXDiagnostic.
 //
-// Diagnostic wraps [raw.MXDiagnostic] with a fluent Go API.
+// Diagnostic is an abstract base — you do not construct it directly. Construct one of [CPUExceptionDiagnostic], [CrashDiagnostic], [DiskWriteExceptionDiagnostic], [HangDiagnostic] and pass it where a Diagnostic is accepted.
+//
+// An abstract data class for a diagnostic.
 type Diagnostic struct {
-	inner *raw.MXDiagnostic
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXDiagnostic].
-func (x *Diagnostic) Unwrap() *raw.MXDiagnostic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Diagnostic) ID() objc.ID { return x.inner.Ptr() }
-
-// DiagnosticFromID adopts an existing object pointer as a Diagnostic (nil for 0).
+// DiagnosticFromID adopts an existing Objective-C object as a Diagnostic
+// (nil for 0), retaining it and registering a release finalizer.
 func DiagnosticFromID(id objc.ID) *Diagnostic {
 	if id == 0 {
 		return nil
 	}
-	return &Diagnostic{inner: raw.MXDiagnosticFromID(id)}
+	x := &Diagnostic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDiagnostic creates a new [Diagnostic].
-func NewDiagnostic() *Diagnostic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXDiagnostic")), objc.RegisterName("new"))
-	return &Diagnostic{inner: raw.MXDiagnosticFromID(_id)}
-}
-
-// Returns the contents of the diagnostic in JSON format.
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *Diagnostic) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
-}
-
-// Returns the contents of a diagnostic as a dictionary.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *Diagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
-}
-
-// MetaData calls the underlying MetaData.
-func (x *Diagnostic) MetaData() *MetaData {
-	_r := x.inner.MetaData()
-	if _r == nil {
+// diagnosticAdopt wraps an Objective-C object that this code just created as a
+// Diagnostic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diagnosticAdopt(id objc.ID) *Diagnostic {
+	if id == 0 {
 		return nil
 	}
-	return &MetaData{inner: _r}
+	x := &Diagnostic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property      applicationVersion @abstract      An NSString representation of the application version from which this diagnostic was generated.
-//
-// ApplicationVersion calls the underlying ApplicationVersion.
+// Description returns the object's -description text.
+func (x *Diagnostic) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Diagnostic) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Diagnostic) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Diagnostic) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// JSONRepresentation returns the contents of the diagnostic in JSON format.
+func (x *Diagnostic) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
+}
+
+// DictionaryRepresentation returns the contents of a diagnostic as a dictionary.
+func (x *Diagnostic) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
+}
+
+// MetaData wraps the corresponding Objective-C method.
+func (x *Diagnostic) MetaData() *MetaData {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
+	return MetaDataFromID(_r)
+}
+
+// ApplicationVersion an NSString representation of the application version from which this diagnostic was generated.
 func (x *Diagnostic) ApplicationVersion() string {
-	_r := x.inner.ApplicationVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
+// SignpostData wraps the corresponding Objective-C method.
+//
 // SignpostData returns the collection as a Go slice.
 func (x *Diagnostic) SignpostData() []*SignpostRecord {
-	arr := x.inner.SignpostData()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SignpostRecord {
-		return &SignpostRecord{inner: raw.MXSignpostRecordFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostData"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SignpostRecord { return SignpostRecordFromID(_id) })
 }
-
-func (x *Diagnostic) asDiagnostic() *raw.MXDiagnostic { return x.inner }
 
 // Diagnosticable is the interface implemented by [Diagnostic], for mocking and DI.
 type Diagnosticable interface {
-	Unwrap() *raw.MXDiagnostic
-	JSONRepresentation() *foundation.NSData
-	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	JSONRepresentation() obj.Object
+	DictionaryRepresentation() obj.Object
 	MetaData() *MetaData
 	ApplicationVersion() string
 	SignpostData() []*SignpostRecord
 }
 
 var _ Diagnosticable = (*Diagnostic)(nil)
+
+// isDiagnostic marks Diagnostic — and, by embedding promotion, its
+// subclasses — as a member of the Diagnostic hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Diagnostic) isDiagnostic() {}
+
+var _ DiagnosticProvider = (*Diagnostic)(nil)

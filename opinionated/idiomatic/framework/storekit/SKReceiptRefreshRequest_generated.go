@@ -5,63 +5,66 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.
+// ReceiptRefreshRequest is an idiomatic wrapper over the Objective-C class SKReceiptRefreshRequest.
 //
-// ReceiptRefreshRequest wraps [raw.SKReceiptRefreshRequest] with a fluent Go API.
+// It embeds [Request], promoting that type's methods.
+//
+// A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.
 type ReceiptRefreshRequest struct {
-	inner *raw.SKReceiptRefreshRequest
+	Request
 }
 
-// Unwrap returns the underlying [raw.SKReceiptRefreshRequest].
-func (x *ReceiptRefreshRequest) Unwrap() *raw.SKReceiptRefreshRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReceiptRefreshRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ReceiptRefreshRequestFromID adopts an existing object pointer as a ReceiptRefreshRequest (nil for 0).
+// ReceiptRefreshRequestFromID adopts an existing Objective-C object as a ReceiptRefreshRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ReceiptRefreshRequestFromID(id objc.ID) *ReceiptRefreshRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(id)}
-}
-
-// Creates a receipt refresh request with optional properties.
-//
-// NewReceiptRefreshRequestWithReceiptProperties creates a new [ReceiptRefreshRequest].
-func NewReceiptRefreshRequestWithReceiptProperties(properties purego.IDer) *ReceiptRefreshRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReceiptRefreshRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), properties.ID())
-	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(_id)}
-}
-
-// The delegate of the request object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ReceiptRefreshRequest) WithDelegate(delegate raw.SKRequestDelegate) *ReceiptRefreshRequest {
-	x.inner.SKRequest.SetDelegate(delegate)
+	x := &ReceiptRefreshRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ReceiptProperties calls the underlying ReceiptProperties.
-func (x *ReceiptRefreshRequest) ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReceiptProperties()
+// receiptRefreshRequestAdopt wraps an Objective-C object that this code just created as a
+// ReceiptRefreshRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func receiptRefreshRequestAdopt(id objc.ID) *ReceiptRefreshRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ReceiptRefreshRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ReceiptRefreshRequest) asRequest() *raw.SKRequest { return &x.inner.SKRequest }
+// NewReceiptRefreshRequestWithReceiptProperties creates a receipt refresh request with optional properties.
+func NewReceiptRefreshRequestWithReceiptProperties(properties obj.Object) *ReceiptRefreshRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReceiptRefreshRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), objref.IDOf(properties))
+	return receiptRefreshRequestAdopt(_id)
+}
+
+// ReceiptProperties wraps the corresponding Objective-C method.
+func (x *ReceiptRefreshRequest) ReceiptProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receiptProperties"))
+	return obj.Wrap(_r)
+}
 
 // ReceiptRefreshRequestable is the interface implemented by [ReceiptRefreshRequest], for mocking and DI.
 type ReceiptRefreshRequestable interface {
-	Unwrap() *raw.SKReceiptRefreshRequest
-	WithDelegate(delegate raw.SKRequestDelegate) *ReceiptRefreshRequest
-	ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReceiptProperties() obj.Object
 }
 
 var _ ReceiptRefreshRequestable = (*ReceiptRefreshRequest)(nil)
+
+var _ RequestProvider = (*ReceiptRefreshRequest)(nil)

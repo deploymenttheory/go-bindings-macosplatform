@@ -5,466 +5,159 @@
 package directoryservice
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/directoryservice"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// DsAddAttribute calls [raw.DsAddAttribute] (C function dsAddAttribute).
-func DsAddAttribute(inRecordReference uint, inNewAttribute *raw.TDataBuffer, inNewAttributeAccess *raw.TAccessControlEntry, inFirstAttributeValue *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsAddAttribute(inRecordReference, inNewAttribute, inNewAttributeAccess, inFirstAttributeValue))
+var _fnDsAddChildPIDToReference func(int, int, int) TDirStatus
+
+// DsAddChildPIDToReference calls the DirectoryService framework function dsAddChildPIDToReference.
+func DsAddChildPIDToReference(inDirRef int, inValidChildPID int, inValidAPIReferenceToGrantChild int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsAddChildPIDToReference == nil {
+		ebipurego.RegisterLibFunc(&_fnDsAddChildPIDToReference, _lib, "dsAddChildPIDToReference")
+	}
+	return _fnDsAddChildPIDToReference(inDirRef, inValidChildPID, inValidAPIReferenceToGrantChild)
 }
 
-// DsAddAttributeValue calls [raw.DsAddAttributeValue] (C function dsAddAttributeValue).
-func DsAddAttributeValue(inRecordReference uint, inAttributeType *raw.TDataBuffer, inAttributeValue *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsAddAttributeValue(inRecordReference, inAttributeType, inAttributeValue))
+var _fnDsCloseAttributeList func(int) TDirStatus
+
+// DsCloseAttributeList calls the DirectoryService framework function dsCloseAttributeList.
+func DsCloseAttributeList(inAttributeListRef int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsCloseAttributeList == nil {
+		ebipurego.RegisterLibFunc(&_fnDsCloseAttributeList, _lib, "dsCloseAttributeList")
+	}
+	return _fnDsCloseAttributeList(inAttributeListRef)
 }
 
-// DsAddChildPIDToReference calls [raw.DsAddChildPIDToReference] (C function dsAddChildPIDToReference).
-func DsAddChildPIDToReference(inDirRef uint, inValidChildPID int, inValidAPIReferenceToGrantChild uint) TDirStatus {
-	return TDirStatus(raw.DsAddChildPIDToReference(inDirRef, inValidChildPID, inValidAPIReferenceToGrantChild))
+var _fnDsCloseAttributeValueList func(int) TDirStatus
+
+// DsCloseAttributeValueList calls the DirectoryService framework function dsCloseAttributeValueList.
+func DsCloseAttributeValueList(inAttributeValueListRef int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsCloseAttributeValueList == nil {
+		ebipurego.RegisterLibFunc(&_fnDsCloseAttributeValueList, _lib, "dsCloseAttributeValueList")
+	}
+	return _fnDsCloseAttributeValueList(inAttributeValueListRef)
 }
 
-// DsAllocAttributeValueEntry calls [raw.DsAllocAttributeValueEntry] (C function dsAllocAttributeValueEntry).
-func DsAllocAttributeValueEntry(inDirRef uint, inAttrValueID uint, inAttrValueData unsafe.Pointer, inAttrValueDataLen uint) *raw.TAttributeValueEntry {
-	return raw.DsAllocAttributeValueEntry(inDirRef, inAttrValueID, inAttrValueData, inAttrValueDataLen)
+var _fnDsCloseDirNode func(int) TDirStatus
+
+// DsCloseDirNode calls the DirectoryService framework function dsCloseDirNode.
+func DsCloseDirNode(inDirNodeReference int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsCloseDirNode == nil {
+		ebipurego.RegisterLibFunc(&_fnDsCloseDirNode, _lib, "dsCloseDirNode")
+	}
+	return _fnDsCloseDirNode(inDirNodeReference)
 }
 
-// DsAllocStringsFromList calls [raw.DsAllocStringsFromList] (C function dsAllocStringsFromList).
-func DsAllocStringsFromList(inDirRef uint, inDataList *raw.TDataList) string {
-	return raw.DsAllocStringsFromList(inDirRef, inDataList)
+var _fnDsCloseDirService func(int) TDirStatus
+
+// DsCloseDirService calls the DirectoryService framework function dsCloseDirService.
+func DsCloseDirService(inDirReference int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsCloseDirService == nil {
+		ebipurego.RegisterLibFunc(&_fnDsCloseDirService, _lib, "dsCloseDirService")
+	}
+	return _fnDsCloseDirService(inDirReference)
 }
 
-// DsAppendAuthBufferWithAuthorityAttribute calls [raw.DsAppendAuthBufferWithAuthorityAttribute] (C function dsAppendAuthBufferWithAuthorityAttribute).
-func DsAppendAuthBufferWithAuthorityAttribute(inNodeRef uint, inRecordListBuffPtr *raw.TDataBuffer, inAttributePtr *raw.TAttributeEntry, inValueRef uint, inUserName string, inOutAuthBuffer *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsAppendAuthBufferWithAuthorityAttribute(inNodeRef, inRecordListBuffPtr, inAttributePtr, inValueRef, inUserName, inOutAuthBuffer))
+var _fnDsCloseRecord func(int) TDirStatus
+
+// DsCloseRecord calls the DirectoryService framework function dsCloseRecord.
+func DsCloseRecord(inRecordReference int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsCloseRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnDsCloseRecord, _lib, "dsCloseRecord")
+	}
+	return _fnDsCloseRecord(inRecordReference)
 }
 
-// DsAppendAuthBufferWithAuthorityStrings calls [raw.DsAppendAuthBufferWithAuthorityStrings] (C function dsAppendAuthBufferWithAuthorityStrings).
-func DsAppendAuthBufferWithAuthorityStrings(inUserName string, inAuthAuthority string, inOutAuthBuffer *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsAppendAuthBufferWithAuthorityStrings(inUserName, inAuthAuthority, inOutAuthBuffer))
-}
+var _fnDsCopyDirStatusName func(int) string
 
-// DsAppendStringToList calls [raw.DsAppendStringToList] (C function dsAppendStringToList).
-func DsAppendStringToList(inDataList *raw.TDataList, inCString string) TDirStatus {
-	return TDirStatus(raw.DsAppendStringToList(inDataList, inCString))
-}
-
-// DsAppendStringToListAlloc calls [raw.DsAppendStringToListAlloc] (C function dsAppendStringToListAlloc).
-func DsAppendStringToListAlloc(inDirReferences uint, inDataList *raw.TDataList, inCString string) TDirStatus {
-	return TDirStatus(raw.DsAppendStringToListAlloc(inDirReferences, inDataList, inCString))
-}
-
-// DsBuildFromPath calls [raw.DsBuildFromPath] (C function dsBuildFromPath).
-func DsBuildFromPath(inDirReference uint, inPathCString string, inPathSeparatorCString string) *raw.TDataList {
-	return raw.DsBuildFromPath(inDirReference, inPathCString, inPathSeparatorCString)
-}
-
-// DsBuildListFromPathAlloc calls [raw.DsBuildListFromPathAlloc] (C function dsBuildListFromPathAlloc).
-func DsBuildListFromPathAlloc(inDirReference uint, inDataList *raw.TDataList, inPathCString string, inPathSeparatorCString string) TDirStatus {
-	return TDirStatus(raw.DsBuildListFromPathAlloc(inDirReference, inDataList, inPathCString, inPathSeparatorCString))
-}
-
-// DsBuildListFromStringsAllocV calls [raw.DsBuildListFromStringsAllocV] (C function dsBuildListFromStringsAllocV).
-func DsBuildListFromStringsAllocV(inDirRef uint, inDataList *raw.TDataList, in1stCString string, args string) TDirStatus {
-	return TDirStatus(raw.DsBuildListFromStringsAllocV(inDirRef, inDataList, in1stCString, args))
-}
-
-// DsCloseAttributeList calls [raw.DsCloseAttributeList] (C function dsCloseAttributeList).
-func DsCloseAttributeList(inAttributeListRef uint) TDirStatus {
-	return TDirStatus(raw.DsCloseAttributeList(inAttributeListRef))
-}
-
-// DsCloseAttributeValueList calls [raw.DsCloseAttributeValueList] (C function dsCloseAttributeValueList).
-func DsCloseAttributeValueList(inAttributeValueListRef uint) TDirStatus {
-	return TDirStatus(raw.DsCloseAttributeValueList(inAttributeValueListRef))
-}
-
-// DsCloseDirNode calls [raw.DsCloseDirNode] (C function dsCloseDirNode).
-func DsCloseDirNode(inDirNodeReference uint) TDirStatus {
-	return TDirStatus(raw.DsCloseDirNode(inDirNodeReference))
-}
-
-// DsCloseDirService calls [raw.DsCloseDirService] (C function dsCloseDirService).
-func DsCloseDirService(inDirReference uint) TDirStatus {
-	return TDirStatus(raw.DsCloseDirService(inDirReference))
-}
-
-// DsCloseRecord calls [raw.DsCloseRecord] (C function dsCloseRecord).
-func DsCloseRecord(inRecordReference uint) TDirStatus {
-	return TDirStatus(raw.DsCloseRecord(inRecordReference))
-}
-
-// DsCopyDirStatusName calls [raw.DsCopyDirStatusName] (C function dsCopyDirStatusName).
+// DsCopyDirStatusName calls the DirectoryService framework function dsCopyDirStatusName.
 func DsCopyDirStatusName(inDirStatus int) string {
-	return raw.DsCopyDirStatusName(inDirStatus)
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsCopyDirStatusName == nil {
+		ebipurego.RegisterLibFunc(&_fnDsCopyDirStatusName, _lib, "dsCopyDirStatusName")
+	}
+	return _fnDsCopyDirStatusName(inDirStatus)
 }
 
-// DsCreateRecord calls [raw.DsCreateRecord] (C function dsCreateRecord).
-func DsCreateRecord(inDirNodeReference uint, inRecordType *raw.TDataBuffer, inRecordName *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsCreateRecord(inDirNodeReference, inRecordType, inRecordName))
+var _fnDsDeleteRecord func(int) TDirStatus
+
+// DsDeleteRecord calls the DirectoryService framework function dsDeleteRecord.
+func DsDeleteRecord(inRecordReference int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsDeleteRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnDsDeleteRecord, _lib, "dsDeleteRecord")
+	}
+	return _fnDsDeleteRecord(inRecordReference)
 }
 
-// DsCreateRecordAndOpen calls [raw.DsCreateRecordAndOpen] (C function dsCreateRecordAndOpen).
-func DsCreateRecordAndOpen(inDirNodeReference uint, inRecordType *raw.TDataBuffer, inRecordName *raw.TDataBuffer, outRecordReference *uint) TDirStatus {
-	return TDirStatus(raw.DsCreateRecordAndOpen(inDirNodeReference, inRecordType, inRecordName, outRecordReference))
+var _fnDsFlushRecord func(int) TDirStatus
+
+// DsFlushRecord calls the DirectoryService framework function dsFlushRecord.
+func DsFlushRecord(inRecordReference int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsFlushRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnDsFlushRecord, _lib, "dsFlushRecord")
+	}
+	return _fnDsFlushRecord(inRecordReference)
 }
 
-// DsDataBufferAllocate calls [raw.DsDataBufferAllocate] (C function dsDataBufferAllocate).
-func DsDataBufferAllocate(inDirReference uint, inBufferSize uint) *raw.TDataBuffer {
-	return raw.DsDataBufferAllocate(inDirReference, inBufferSize)
-}
+var _fnDsIsDirServiceLocalRunning func() TDirStatus
 
-// DsDataBufferDeAllocate calls [raw.DsDataBufferDeAllocate] (C function dsDataBufferDeAllocate).
-func DsDataBufferDeAllocate(inDirReference uint, inDataBufferPtr *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDataBufferDeAllocate(inDirReference, inDataBufferPtr))
-}
-
-// DsDataListAllocate calls [raw.DsDataListAllocate] (C function dsDataListAllocate).
-func DsDataListAllocate(inDirReference uint) *raw.TDataList {
-	return raw.DsDataListAllocate(inDirReference)
-}
-
-// DsDataListCopyList calls [raw.DsDataListCopyList] (C function dsDataListCopyList).
-func DsDataListCopyList(inDirReference uint, inDataListSource *raw.TDataList) *raw.TDataList {
-	return raw.DsDataListCopyList(inDirReference, inDataListSource)
-}
-
-// DsDataListDeAllocate calls [raw.DsDataListDeAllocate] (C function dsDataListDeAllocate).
-func DsDataListDeAllocate(inDirReference uint, inDataList *raw.TDataList, inDeAllocateNodesFlag int) TDirStatus {
-	return TDirStatus(raw.DsDataListDeAllocate(inDirReference, inDataList, inDeAllocateNodesFlag))
-}
-
-// DsDataListDeallocate calls [raw.DsDataListDeallocate] (C function dsDataListDeallocate).
-func DsDataListDeallocate(inDirReference uint, inDataList *raw.TDataList) TDirStatus {
-	return TDirStatus(raw.DsDataListDeallocate(inDirReference, inDataList))
-}
-
-// DsDataListDeleteThisNode calls [raw.DsDataListDeleteThisNode] (C function dsDataListDeleteThisNode).
-func DsDataListDeleteThisNode(inDirReference uint, inDataList *raw.TDataList, inNodeIndex uint) TDirStatus {
-	return TDirStatus(raw.DsDataListDeleteThisNode(inDirReference, inDataList, inNodeIndex))
-}
-
-// DsDataListGetNode calls [raw.DsDataListGetNode] (C function dsDataListGetNode).
-func DsDataListGetNode(inDataListPtr *raw.TDataList, inNodeIndex uint, outDataNode **raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDataListGetNode(inDataListPtr, inNodeIndex, outDataNode))
-}
-
-// DsDataListGetNodeAlloc calls [raw.DsDataListGetNodeAlloc] (C function dsDataListGetNodeAlloc).
-func DsDataListGetNodeAlloc(inDirReference uint, inDataListPtr *raw.TDataList, inNodeIndex uint, outDataNode **raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDataListGetNodeAlloc(inDirReference, inDataListPtr, inNodeIndex, outDataNode))
-}
-
-// DsDataListGetNodeCount calls [raw.DsDataListGetNodeCount] (C function dsDataListGetNodeCount).
-func DsDataListGetNodeCount(inDataList *raw.TDataList) uint {
-	return raw.DsDataListGetNodeCount(inDataList)
-}
-
-// DsDataListInsertAfter calls [raw.DsDataListInsertAfter] (C function dsDataListInsertAfter).
-func DsDataListInsertAfter(inDirReferences uint, inDataList *raw.TDataList, inInsertDataNode *raw.TDataBuffer, inNodeIndex uint) TDirStatus {
-	return TDirStatus(raw.DsDataListInsertAfter(inDirReferences, inDataList, inInsertDataNode, inNodeIndex))
-}
-
-// DsDataListInsertNode calls [raw.DsDataListInsertNode] (C function dsDataListInsertNode).
-func DsDataListInsertNode(inDataList *raw.TDataList, inAfterDataNode *raw.TDataBuffer, inInsertDataNode *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDataListInsertNode(inDataList, inAfterDataNode, inInsertDataNode))
-}
-
-// DsDataListMergeList calls [raw.DsDataListMergeList] (C function dsDataListMergeList).
-func DsDataListMergeList(inDataList *raw.TDataList, inAfterDataNode *raw.TDataBuffer, inMergeDataList *raw.TDataList) TDirStatus {
-	return TDirStatus(raw.DsDataListMergeList(inDataList, inAfterDataNode, inMergeDataList))
-}
-
-// DsDataListMergeListAfter calls [raw.DsDataListMergeListAfter] (C function dsDataListMergeListAfter).
-func DsDataListMergeListAfter(inTargetList *raw.TDataList, inSourceList *raw.TDataList, inNodeIndex uint) TDirStatus {
-	return TDirStatus(raw.DsDataListMergeListAfter(inTargetList, inSourceList, inNodeIndex))
-}
-
-// DsDataListRemoveNodes calls [raw.DsDataListRemoveNodes] (C function dsDataListRemoveNodes).
-func DsDataListRemoveNodes(inDataList *raw.TDataList, in1stDataNode *raw.TDataBuffer, inDeleteCount uint) TDirStatus {
-	return TDirStatus(raw.DsDataListRemoveNodes(inDataList, in1stDataNode, inDeleteCount))
-}
-
-// DsDataListRemoveThisNode calls [raw.DsDataListRemoveThisNode] (C function dsDataListRemoveThisNode).
-func DsDataListRemoveThisNode(inDataList *raw.TDataList, inNodeIndex uint, inDeleteCount uint) TDirStatus {
-	return TDirStatus(raw.DsDataListRemoveThisNode(inDataList, inNodeIndex, inDeleteCount))
-}
-
-// DsDataNodeAllocateBlock calls [raw.DsDataNodeAllocateBlock] (C function dsDataNodeAllocateBlock).
-func DsDataNodeAllocateBlock(inDirReference uint, inDataNodeSize uint, inDataNodeLength uint, inDataNodeBuffer unsafe.Pointer) *raw.TDataBuffer {
-	return raw.DsDataNodeAllocateBlock(inDirReference, inDataNodeSize, inDataNodeLength, inDataNodeBuffer)
-}
-
-// DsDataNodeAllocateString calls [raw.DsDataNodeAllocateString] (C function dsDataNodeAllocateString).
-func DsDataNodeAllocateString(inDirReference uint, inCString string) *raw.TDataBuffer {
-	return raw.DsDataNodeAllocateString(inDirReference, inCString)
-}
-
-// DsDataNodeDeAllocate calls [raw.DsDataNodeDeAllocate] (C function dsDataNodeDeAllocate).
-func DsDataNodeDeAllocate(inDirReference uint, inDataNodePtr *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDataNodeDeAllocate(inDirReference, inDataNodePtr))
-}
-
-// DsDataNodeGetLength calls [raw.DsDataNodeGetLength] (C function dsDataNodeGetLength).
-func DsDataNodeGetLength(inDataNodePtr *raw.TDataBuffer) uint {
-	return raw.DsDataNodeGetLength(inDataNodePtr)
-}
-
-// DsDataNodeGetSize calls [raw.DsDataNodeGetSize] (C function dsDataNodeGetSize).
-func DsDataNodeGetSize(inDataNodePtr *raw.TDataBuffer) uint {
-	return raw.DsDataNodeGetSize(inDataNodePtr)
-}
-
-// DsDataNodeSetLength calls [raw.DsDataNodeSetLength] (C function dsDataNodeSetLength).
-func DsDataNodeSetLength(inDataNodePtr *raw.TDataBuffer, inDataNodeLength uint) TDirStatus {
-	return TDirStatus(raw.DsDataNodeSetLength(inDataNodePtr, inDataNodeLength))
-}
-
-// DsDeallocAttributeEntry calls [raw.DsDeallocAttributeEntry] (C function dsDeallocAttributeEntry).
-func DsDeallocAttributeEntry(inDirRef uint, inAttrEntry *raw.TAttributeEntry) TDirStatus {
-	return TDirStatus(raw.DsDeallocAttributeEntry(inDirRef, inAttrEntry))
-}
-
-// DsDeallocAttributeValueEntry calls [raw.DsDeallocAttributeValueEntry] (C function dsDeallocAttributeValueEntry).
-func DsDeallocAttributeValueEntry(inDirRef uint, inAttrValueEntry *raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsDeallocAttributeValueEntry(inDirRef, inAttrValueEntry))
-}
-
-// DsDeallocRecordEntry calls [raw.DsDeallocRecordEntry] (C function dsDeallocRecordEntry).
-func DsDeallocRecordEntry(inDirRef uint, inRecEntry *raw.TRecordEntry) TDirStatus {
-	return TDirStatus(raw.DsDeallocRecordEntry(inDirRef, inRecEntry))
-}
-
-// DsDeleteRecord calls [raw.DsDeleteRecord] (C function dsDeleteRecord).
-func DsDeleteRecord(inRecordReference uint) TDirStatus {
-	return TDirStatus(raw.DsDeleteRecord(inRecordReference))
-}
-
-// DsDoAttributeValueSearch calls [raw.DsDoAttributeValueSearch] (C function dsDoAttributeValueSearch).
-func DsDoAttributeValueSearch(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inRecordTypeList *raw.TDataList, inAttributeType *raw.TDataBuffer, inPatternMatchType TDirPatternMatch, inPattern2Match *raw.TDataBuffer, inOutMatchRecordCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsDoAttributeValueSearch(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeType, raw.TDirPatternMatch(inPatternMatchType), inPattern2Match, inOutMatchRecordCount, inOutContinueData))
-}
-
-// DsDoAttributeValueSearchWithData calls [raw.DsDoAttributeValueSearchWithData] (C function dsDoAttributeValueSearchWithData).
-func DsDoAttributeValueSearchWithData(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inRecordTypeList *raw.TDataList, inAttributeMatchType *raw.TDataBuffer, inPatternMatchType TDirPatternMatch, inPatternToMatch *raw.TDataBuffer, inAttributeTypeRequestList *raw.TDataList, inAttributeInfoOnly int, inOutMatchRecordCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsDoAttributeValueSearchWithData(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeMatchType, raw.TDirPatternMatch(inPatternMatchType), inPatternToMatch, inAttributeTypeRequestList, inAttributeInfoOnly, inOutMatchRecordCount, inOutContinueData))
-}
-
-// DsDoDirNodeAuth calls [raw.DsDoDirNodeAuth] (C function dsDoDirNodeAuth).
-func DsDoDirNodeAuth(inDirNodeReference uint, inDirNodeAuthName *raw.TDataBuffer, inDirNodeAuthOnlyFlag int, inAuthStepData *raw.TDataBuffer, outAuthStepDataResponse *raw.TDataBuffer, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsDoDirNodeAuth(inDirNodeReference, inDirNodeAuthName, inDirNodeAuthOnlyFlag, inAuthStepData, outAuthStepDataResponse, inOutContinueData))
-}
-
-// DsDoDirNodeAuthOnRecordType calls [raw.DsDoDirNodeAuthOnRecordType] (C function dsDoDirNodeAuthOnRecordType).
-func DsDoDirNodeAuthOnRecordType(inDirNodeReference uint, inDirNodeAuthName *raw.TDataBuffer, inDirNodeAuthOnlyFlag int, inAuthStepData *raw.TDataBuffer, outAuthStepDataResponse *raw.TDataBuffer, inOutContinueData *uint, inRecordType *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDoDirNodeAuthOnRecordType(inDirNodeReference, inDirNodeAuthName, inDirNodeAuthOnlyFlag, inAuthStepData, outAuthStepDataResponse, inOutContinueData, inRecordType))
-}
-
-// DsDoMultipleAttributeValueSearch calls [raw.DsDoMultipleAttributeValueSearch] (C function dsDoMultipleAttributeValueSearch).
-func DsDoMultipleAttributeValueSearch(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inRecordTypeList *raw.TDataList, inAttributeType *raw.TDataBuffer, inPatternMatchType TDirPatternMatch, inPatterns2Match *raw.TDataList, inOutMatchRecordCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsDoMultipleAttributeValueSearch(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeType, raw.TDirPatternMatch(inPatternMatchType), inPatterns2Match, inOutMatchRecordCount, inOutContinueData))
-}
-
-// DsDoMultipleAttributeValueSearchWithData calls [raw.DsDoMultipleAttributeValueSearchWithData] (C function dsDoMultipleAttributeValueSearchWithData).
-func DsDoMultipleAttributeValueSearchWithData(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inRecordTypeList *raw.TDataList, inAttributeMatchType *raw.TDataBuffer, inPatternMatchType TDirPatternMatch, inPatternsToMatch *raw.TDataList, inAttributeTypeRequestList *raw.TDataList, inAttributeInfoOnly int, inOutMatchRecordCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsDoMultipleAttributeValueSearchWithData(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeMatchType, raw.TDirPatternMatch(inPatternMatchType), inPatternsToMatch, inAttributeTypeRequestList, inAttributeInfoOnly, inOutMatchRecordCount, inOutContinueData))
-}
-
-// DsDoPlugInCustomCall calls [raw.DsDoPlugInCustomCall] (C function dsDoPlugInCustomCall).
-func DsDoPlugInCustomCall(inDirNodeReference uint, inCustomRequestCode uint, inCustomRequestData *raw.TDataBuffer, outCustomRequestResponse *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsDoPlugInCustomCall(inDirNodeReference, inCustomRequestCode, inCustomRequestData, outCustomRequestResponse))
-}
-
-// DsFindDirNodes calls [raw.DsFindDirNodes] (C function dsFindDirNodes).
-func DsFindDirNodes(inDirReference uint, inOutDataBufferPtr *raw.TDataBuffer, inNodeNamePattern *raw.TDataList, inPatternMatchType TDirPatternMatch, outDirNodeCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsFindDirNodes(inDirReference, inOutDataBufferPtr, inNodeNamePattern, raw.TDirPatternMatch(inPatternMatchType), outDirNodeCount, inOutContinueData))
-}
-
-// DsFlushRecord calls [raw.DsFlushRecord] (C function dsFlushRecord).
-func DsFlushRecord(inRecordReference uint) TDirStatus {
-	return TDirStatus(raw.DsFlushRecord(inRecordReference))
-}
-
-// DsGetAttributeEntry calls [raw.DsGetAttributeEntry] (C function dsGetAttributeEntry).
-func DsGetAttributeEntry(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inAttributeListRef uint, inAttributeInfoIndex uint, outAttributeValueListRef *uint, outAttributeInfoPtr **raw.TAttributeEntry) TDirStatus {
-	return TDirStatus(raw.DsGetAttributeEntry(inDirNodeReference, inOutDataBuffer, inAttributeListRef, inAttributeInfoIndex, outAttributeValueListRef, outAttributeInfoPtr))
-}
-
-// DsGetAttributeValue calls [raw.DsGetAttributeValue] (C function dsGetAttributeValue).
-func DsGetAttributeValue(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inAttributeValueIndex uint, inAttributeValueListRef uint, outAttributeValue **raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsGetAttributeValue(inDirNodeReference, inOutDataBuffer, inAttributeValueIndex, inAttributeValueListRef, outAttributeValue))
-}
-
-// DsGetDataLength calls [raw.DsGetDataLength] (C function dsGetDataLength).
-func DsGetDataLength(inDataList *raw.TDataList) uint {
-	return raw.DsGetDataLength(inDataList)
-}
-
-// DsGetDirNodeCount calls [raw.DsGetDirNodeCount] (C function dsGetDirNodeCount).
-func DsGetDirNodeCount(inDirReference uint, outDirectoryNodeCount *uint) TDirStatus {
-	return TDirStatus(raw.DsGetDirNodeCount(inDirReference, outDirectoryNodeCount))
-}
-
-// DsGetDirNodeCountWithInfo calls [raw.DsGetDirNodeCountWithInfo] (C function dsGetDirNodeCountWithInfo).
-func DsGetDirNodeCountWithInfo(inDirReference uint, outDirectoryNodeCount *uint, outDirectoryNodeChangeToken *uint) TDirStatus {
-	return TDirStatus(raw.DsGetDirNodeCountWithInfo(inDirReference, outDirectoryNodeCount, outDirectoryNodeChangeToken))
-}
-
-// DsGetDirNodeInfo calls [raw.DsGetDirNodeInfo] (C function dsGetDirNodeInfo).
-func DsGetDirNodeInfo(inDirNodeReference uint, inDirNodeInfoTypeList *raw.TDataList, inOutDataBuffer *raw.TDataBuffer, inAttributeInfoOnly int, outAttributeInfoCount *uint, outAttributeListRef *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsGetDirNodeInfo(inDirNodeReference, inDirNodeInfoTypeList, inOutDataBuffer, inAttributeInfoOnly, outAttributeInfoCount, outAttributeListRef, inOutContinueData))
-}
-
-// DsGetDirNodeList calls [raw.DsGetDirNodeList] (C function dsGetDirNodeList).
-func DsGetDirNodeList(inDirReference uint, inOutDataBufferPtr *raw.TDataBuffer, outDirNodeCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsGetDirNodeList(inDirReference, inOutDataBufferPtr, outDirNodeCount, inOutContinueData))
-}
-
-// DsGetDirNodeName calls [raw.DsGetDirNodeName] (C function dsGetDirNodeName).
-func DsGetDirNodeName(inDirReference uint, inOutDataBuffer *raw.TDataBuffer, inDirNodeIndex uint, inOutDataList **raw.TDataList) TDirStatus {
-	return TDirStatus(raw.DsGetDirNodeName(inDirReference, inOutDataBuffer, inDirNodeIndex, inOutDataList))
-}
-
-// DsGetNextAttributeEntry calls [raw.DsGetNextAttributeEntry] (C function dsGetNextAttributeEntry).
-func DsGetNextAttributeEntry(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inAttributeListRef uint, inAttributeInfoIndex uint, inOutAttributeOffset *int, outAttributeValueListRef *uint, outAttributeInfoPtr **raw.TAttributeEntry) TDirStatus {
-	return TDirStatus(raw.DsGetNextAttributeEntry(inDirNodeReference, inOutDataBuffer, inAttributeListRef, inAttributeInfoIndex, inOutAttributeOffset, outAttributeValueListRef, outAttributeInfoPtr))
-}
-
-// DsGetNextAttributeValue calls [raw.DsGetNextAttributeValue] (C function dsGetNextAttributeValue).
-func DsGetNextAttributeValue(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inAttributeValueIndex uint, inOutAttributeValueOffset *int, inAttributeValueListRef uint, outAttributeValue **raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsGetNextAttributeValue(inDirNodeReference, inOutDataBuffer, inAttributeValueIndex, inOutAttributeValueOffset, inAttributeValueListRef, outAttributeValue))
-}
-
-// DsGetPathFromList calls [raw.DsGetPathFromList] (C function dsGetPathFromList).
-func DsGetPathFromList(inDirReference uint, inDataList *raw.TDataList, inDelimiter string) string {
-	return raw.DsGetPathFromList(inDirReference, inDataList, inDelimiter)
-}
-
-// DsGetRecordAttributeInfo calls [raw.DsGetRecordAttributeInfo] (C function dsGetRecordAttributeInfo).
-func DsGetRecordAttributeInfo(inRecordReference uint, inAttributeType *raw.TDataBuffer, outAttributeInfoPtr **raw.TAttributeEntry) TDirStatus {
-	return TDirStatus(raw.DsGetRecordAttributeInfo(inRecordReference, inAttributeType, outAttributeInfoPtr))
-}
-
-// DsGetRecordAttributeValueByID calls [raw.DsGetRecordAttributeValueByID] (C function dsGetRecordAttributeValueByID).
-func DsGetRecordAttributeValueByID(inRecordReference uint, inAttributeType *raw.TDataBuffer, inValueID uint, outEntryPtr **raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsGetRecordAttributeValueByID(inRecordReference, inAttributeType, inValueID, outEntryPtr))
-}
-
-// DsGetRecordAttributeValueByIndex calls [raw.DsGetRecordAttributeValueByIndex] (C function dsGetRecordAttributeValueByIndex).
-func DsGetRecordAttributeValueByIndex(inRecordReference uint, inAttributeType *raw.TDataBuffer, inValueIndex uint, outEntryPtr **raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsGetRecordAttributeValueByIndex(inRecordReference, inAttributeType, inValueIndex, outEntryPtr))
-}
-
-// DsGetRecordAttributeValueByValue calls [raw.DsGetRecordAttributeValueByValue] (C function dsGetRecordAttributeValueByValue).
-func DsGetRecordAttributeValueByValue(inRecordReference uint, inAttributeType *raw.TDataBuffer, inAttributeValue *raw.TDataBuffer, outEntryPtr **raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsGetRecordAttributeValueByValue(inRecordReference, inAttributeType, inAttributeValue, outEntryPtr))
-}
-
-// DsGetRecordEntry calls [raw.DsGetRecordEntry] (C function dsGetRecordEntry).
-func DsGetRecordEntry(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inRecordEntryIndex uint, outAttributeListRef *uint, outRecordEntryPtr **raw.TRecordEntry) TDirStatus {
-	return TDirStatus(raw.DsGetRecordEntry(inDirNodeReference, inOutDataBuffer, inRecordEntryIndex, outAttributeListRef, outRecordEntryPtr))
-}
-
-// DsGetRecordList calls [raw.DsGetRecordList] (C function dsGetRecordList).
-func DsGetRecordList(inDirNodeReference uint, inOutDataBuffer *raw.TDataBuffer, inRecordNameList *raw.TDataList, inPatternMatchType TDirPatternMatch, inRecordTypeList *raw.TDataList, inAttributeTypeList *raw.TDataList, inAttributeInfoOnly int, inOutRecordEntryCount *uint, inOutContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsGetRecordList(inDirNodeReference, inOutDataBuffer, inRecordNameList, raw.TDirPatternMatch(inPatternMatchType), inRecordTypeList, inAttributeTypeList, inAttributeInfoOnly, inOutRecordEntryCount, inOutContinueData))
-}
-
-// DsGetRecordNameFromEntry calls [raw.DsGetRecordNameFromEntry] (C function dsGetRecordNameFromEntry).
-func DsGetRecordNameFromEntry(inRecEntryPtr *raw.TRecordEntry, outRecName string) TDirStatus {
-	return TDirStatus(raw.DsGetRecordNameFromEntry(inRecEntryPtr, outRecName))
-}
-
-// DsGetRecordReferenceInfo calls [raw.DsGetRecordReferenceInfo] (C function dsGetRecordReferenceInfo).
-func DsGetRecordReferenceInfo(inRecordReference uint, outRecordInfo **raw.TRecordEntry) TDirStatus {
-	return TDirStatus(raw.DsGetRecordReferenceInfo(inRecordReference, outRecordInfo))
-}
-
-// DsGetRecordTypeFromEntry calls [raw.DsGetRecordTypeFromEntry] (C function dsGetRecordTypeFromEntry).
-func DsGetRecordTypeFromEntry(inRecEntryPtr *raw.TRecordEntry, outRecType string) TDirStatus {
-	return TDirStatus(raw.DsGetRecordTypeFromEntry(inRecEntryPtr, outRecType))
-}
-
-// DsIsDirServiceLocalRunning calls [raw.DsIsDirServiceLocalRunning] (C function dsIsDirServiceLocalRunning).
+// DsIsDirServiceLocalRunning calls the DirectoryService framework function dsIsDirServiceLocalRunning.
 func DsIsDirServiceLocalRunning() TDirStatus {
-	return TDirStatus(raw.DsIsDirServiceLocalRunning())
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsIsDirServiceLocalRunning == nil {
+		ebipurego.RegisterLibFunc(&_fnDsIsDirServiceLocalRunning, _lib, "dsIsDirServiceLocalRunning")
+	}
+	return _fnDsIsDirServiceLocalRunning()
 }
 
-// DsIsDirServiceRunning calls [raw.DsIsDirServiceRunning] (C function dsIsDirServiceRunning).
+var _fnDsIsDirServiceRunning func() TDirStatus
+
+// DsIsDirServiceRunning calls the DirectoryService framework function dsIsDirServiceRunning.
 func DsIsDirServiceRunning() TDirStatus {
-	return TDirStatus(raw.DsIsDirServiceRunning())
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsIsDirServiceRunning == nil {
+		ebipurego.RegisterLibFunc(&_fnDsIsDirServiceRunning, _lib, "dsIsDirServiceRunning")
+	}
+	return _fnDsIsDirServiceRunning()
 }
 
-// DsOpenDirNode calls [raw.DsOpenDirNode] (C function dsOpenDirNode).
-func DsOpenDirNode(inDirReference uint, inDirNodeName *raw.TDataList, outDirNodeReference *uint) TDirStatus {
-	return TDirStatus(raw.DsOpenDirNode(inDirReference, inDirNodeName, outDirNodeReference))
-}
+var _fnDsParseAuthAuthority func(string, string, string, string) TDirStatus
 
-// DsOpenDirService calls [raw.DsOpenDirService] (C function dsOpenDirService).
-func DsOpenDirService(outDirReference *uint) TDirStatus {
-	return TDirStatus(raw.DsOpenDirService(outDirReference))
-}
-
-// DsOpenDirServiceLocal calls [raw.DsOpenDirServiceLocal] (C function dsOpenDirServiceLocal).
-func DsOpenDirServiceLocal(outDirRef *uint, inFilePath string) TDirStatus {
-	return TDirStatus(raw.DsOpenDirServiceLocal(outDirRef, inFilePath))
-}
-
-// DsOpenDirServiceProxy calls [raw.DsOpenDirServiceProxy] (C function dsOpenDirServiceProxy).
-func DsOpenDirServiceProxy(outDirRef *uint, inHostOrIPAddress string, inIPPort uint, inAuthMethod *raw.TDataBuffer, inAuthStepData *raw.TDataBuffer, outAuthStepDataResponse *raw.TDataBuffer, ioContinueData *uint) TDirStatus {
-	return TDirStatus(raw.DsOpenDirServiceProxy(outDirRef, inHostOrIPAddress, inIPPort, inAuthMethod, inAuthStepData, outAuthStepDataResponse, ioContinueData))
-}
-
-// DsOpenRecord calls [raw.DsOpenRecord] (C function dsOpenRecord).
-func DsOpenRecord(inDirNodeReference uint, inRecordType *raw.TDataBuffer, inRecordName *raw.TDataBuffer, outRecordReference *uint) TDirStatus {
-	return TDirStatus(raw.DsOpenRecord(inDirNodeReference, inRecordType, inRecordName, outRecordReference))
-}
-
-// DsParseAuthAuthority calls [raw.DsParseAuthAuthority] (C function dsParseAuthAuthority).
+// DsParseAuthAuthority calls the DirectoryService framework function dsParseAuthAuthority.
 func DsParseAuthAuthority(inAuthAuthority string, outVersion string, outAuthTag string, outAuthData string) TDirStatus {
-	return TDirStatus(raw.DsParseAuthAuthority(inAuthAuthority, outVersion, outAuthTag, outAuthData))
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsParseAuthAuthority == nil {
+		ebipurego.RegisterLibFunc(&_fnDsParseAuthAuthority, _lib, "dsParseAuthAuthority")
+	}
+	return _fnDsParseAuthAuthority(inAuthAuthority, outVersion, outAuthTag, outAuthData)
 }
 
-// DsReleaseContinueData calls [raw.DsReleaseContinueData] (C function dsReleaseContinueData).
-func DsReleaseContinueData(inDirReference uint, inContinueData uint) TDirStatus {
-	return TDirStatus(raw.DsReleaseContinueData(inDirReference, inContinueData))
+var _fnDsReleaseContinueData func(int, int) TDirStatus
+
+// DsReleaseContinueData calls the DirectoryService framework function dsReleaseContinueData.
+func DsReleaseContinueData(inDirReference int, inContinueData int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsReleaseContinueData == nil {
+		ebipurego.RegisterLibFunc(&_fnDsReleaseContinueData, _lib, "dsReleaseContinueData")
+	}
+	return _fnDsReleaseContinueData(inDirReference, inContinueData)
 }
 
-// DsRemoveAttribute calls [raw.DsRemoveAttribute] (C function dsRemoveAttribute).
-func DsRemoveAttribute(inRecordReference uint, inAttribute *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsRemoveAttribute(inRecordReference, inAttribute))
-}
+var _fnDsVerifyDirRefNum func(int) TDirStatus
 
-// DsRemoveAttributeValue calls [raw.DsRemoveAttributeValue] (C function dsRemoveAttributeValue).
-func DsRemoveAttributeValue(inRecordReference uint, inAttributeType *raw.TDataBuffer, inAttributeValueID uint) TDirStatus {
-	return TDirStatus(raw.DsRemoveAttributeValue(inRecordReference, inAttributeType, inAttributeValueID))
-}
-
-// DsServiceInformationAllocate calls [raw.DsServiceInformationAllocate] (C function dsServiceInformationAllocate).
-func DsServiceInformationAllocate(inServiceInfo unsafe.Pointer, inBufferSize uint, outPackedServiceInfo **raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsServiceInformationAllocate(inServiceInfo, inBufferSize, outPackedServiceInfo))
-}
-
-// DsSetAttributeValue calls [raw.DsSetAttributeValue] (C function dsSetAttributeValue).
-func DsSetAttributeValue(inRecordReference uint, inAttributeType *raw.TDataBuffer, inAttributeValuePtr *raw.TAttributeValueEntry) TDirStatus {
-	return TDirStatus(raw.DsSetAttributeValue(inRecordReference, inAttributeType, inAttributeValuePtr))
-}
-
-// DsSetAttributeValues calls [raw.DsSetAttributeValues] (C function dsSetAttributeValues).
-func DsSetAttributeValues(inRecordReference uint, inAttributeType *raw.TDataBuffer, inAttributeValuesPtr *raw.TDataList) TDirStatus {
-	return TDirStatus(raw.DsSetAttributeValues(inRecordReference, inAttributeType, inAttributeValuesPtr))
-}
-
-// DsSetRecordName calls [raw.DsSetRecordName] (C function dsSetRecordName).
-func DsSetRecordName(inRecordReference uint, inNewRecordName *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsSetRecordName(inRecordReference, inNewRecordName))
-}
-
-// DsSetRecordType calls [raw.DsSetRecordType] (C function dsSetRecordType).
-func DsSetRecordType(inRecordReference uint, inNewRecordType *raw.TDataBuffer) TDirStatus {
-	return TDirStatus(raw.DsSetRecordType(inRecordReference, inNewRecordType))
-}
-
-// DsVerifyDirRefNum calls [raw.DsVerifyDirRefNum] (C function dsVerifyDirRefNum).
-func DsVerifyDirRefNum(inDirReference uint) TDirStatus {
-	return TDirStatus(raw.DsVerifyDirRefNum(inDirReference))
+// DsVerifyDirRefNum calls the DirectoryService framework function dsVerifyDirRefNum.
+func DsVerifyDirRefNum(inDirReference int) TDirStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsVerifyDirRefNum == nil {
+		ebipurego.RegisterLibFunc(&_fnDsVerifyDirRefNum, _lib, "dsVerifyDirRefNum")
+	}
+	return _fnDsVerifyDirRefNum(inDirReference)
 }

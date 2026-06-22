@@ -5,60 +5,93 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract data class for a metric.
+// Metric is an idiomatic wrapper over the Objective-C class MXMetric.
 //
-// Metric wraps [raw.MXMetric] with a fluent Go API.
+// Metric is an abstract base — you do not construct it directly. Construct one of [AnimationMetric], [AppExitMetric], [AppLaunchMetric], [AppResponsivenessMetric], [AppRunTimeMetric], [CPUMetric], [CellularConditionMetric], [DiskIOMetric], [DiskSpaceUsageMetric], [DisplayMetric], [GPUMetric], [LocationActivityMetric], [MemoryMetric], [NetworkTransferMetric], [SignpostMetric] and pass it where a Metric is accepted.
+//
+// An abstract data class for a metric.
 type Metric struct {
-	inner *raw.MXMetric
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXMetric].
-func (x *Metric) Unwrap() *raw.MXMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Metric) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricFromID adopts an existing object pointer as a Metric (nil for 0).
+// MetricFromID adopts an existing Objective-C object as a Metric
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricFromID(id objc.ID) *Metric {
 	if id == 0 {
 		return nil
 	}
-	return &Metric{inner: raw.MXMetricFromID(id)}
+	x := &Metric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetric creates a new [Metric].
-func NewMetric() *Metric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXMetric")), objc.RegisterName("new"))
-	return &Metric{inner: raw.MXMetricFromID(_id)}
+// metricAdopt wraps an Objective-C object that this code just created as a
+// Metric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricAdopt(id objc.ID) *Metric {
+	if id == 0 {
+		return nil
+	}
+	x := &Metric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the contents of the metric in JSON format.
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *Metric) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
+// Description returns the object's -description text.
+func (x *Metric) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the contents of a metric as a dictionary.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *Metric) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Metric) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *Metric) asMetric() *raw.MXMetric { return x.inner }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Metric) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Metric) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// JSONRepresentation returns the contents of the metric in JSON format.
+func (x *Metric) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
+}
+
+// DictionaryRepresentation returns the contents of a metric as a dictionary.
+func (x *Metric) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
+}
 
 // Metricable is the interface implemented by [Metric], for mocking and DI.
 type Metricable interface {
-	Unwrap() *raw.MXMetric
-	JSONRepresentation() *foundation.NSData
-	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	JSONRepresentation() obj.Object
+	DictionaryRepresentation() obj.Object
 }
 
 var _ Metricable = (*Metric)(nil)
+
+// isMetric marks Metric — and, by embedding promotion, its
+// subclasses — as a member of the Metric hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Metric) isMetric() {}
+
+var _ MetricProvider = (*Metric)(nil)

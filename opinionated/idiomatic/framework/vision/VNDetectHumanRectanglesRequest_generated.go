@@ -5,109 +5,109 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that finds rectangular regions that contain people in an image.
+// DetectHumanRectanglesRequest is an idiomatic wrapper over the Objective-C class VNDetectHumanRectanglesRequest.
 //
-// DetectHumanRectanglesRequest wraps [raw.VNDetectHumanRectanglesRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that finds rectangular regions that contain people in an image.
 type DetectHumanRectanglesRequest struct {
-	inner *raw.VNDetectHumanRectanglesRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectHumanRectanglesRequest].
-func (x *DetectHumanRectanglesRequest) Unwrap() *raw.VNDetectHumanRectanglesRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectHumanRectanglesRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectHumanRectanglesRequestFromID adopts an existing object pointer as a DetectHumanRectanglesRequest (nil for 0).
+// DetectHumanRectanglesRequestFromID adopts an existing Objective-C object as a DetectHumanRectanglesRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectHumanRectanglesRequestFromID(id objc.ID) *DetectHumanRectanglesRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectHumanRectanglesRequest{inner: raw.VNDetectHumanRectanglesRequestFromID(id)}
+	x := &DetectHumanRectanglesRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectHumanRectanglesRequest creates a new [DetectHumanRectanglesRequest].
+// detectHumanRectanglesRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectHumanRectanglesRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectHumanRectanglesRequestAdopt(id objc.ID) *DetectHumanRectanglesRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectHumanRectanglesRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectHumanRectanglesRequest creates a new DetectHumanRectanglesRequest.
 func NewDetectHumanRectanglesRequest() *DetectHumanRectanglesRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectHumanRectanglesRequest")), objc.RegisterName("new"))
-	return &DetectHumanRectanglesRequest{inner: raw.VNDetectHumanRectanglesRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanRectanglesRequest")), objc.RegisterName("new"))
+	return detectHumanRectanglesRequestAdopt(_id)
 }
 
-// A Boolean value that indicates whether the request requires detecting a full body or upper body only to produce a result.
-//
-// WithUpperBodyOnly sets the upperBodyOnly property and returns the receiver for chaining.
+// WithUpperBodyOnly a Boolean value that indicates whether the request requires detecting a full body or upper body only to produce a result.
 func (x *DetectHumanRectanglesRequest) WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest {
-	x.inner.SetUpperBodyOnly(upperBodyOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBodyOnly:"), upperBodyOnly)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectHumanRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanRectanglesRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectHumanRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanRectanglesRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectHumanRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanRectanglesRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectHumanRectanglesRequest) WithRevision(revision uint) *DetectHumanRectanglesRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectHumanRectanglesRequest) WithRevision(revision int) *DetectHumanRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// @brief Boolean property to specify whether the human upper body or full body needs to be detected. The default is YES, meaning the request is setup to detect upper body only
-//
-// UpperBodyOnly calls the underlying UpperBodyOnly.
+// UpperBodyOnly boolean property to specify whether the human upper body or full body needs to be detected. The default is YES, meaning the request is setup to detect upper body only
 func (x *DetectHumanRectanglesRequest) UpperBodyOnly() bool {
-	return x.inner.UpperBodyOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("upperBodyOnly"))
+	return _r
 }
 
-// SetUpperBodyOnly calls the underlying SetUpperBodyOnly.
+// SetUpperBodyOnly wraps the corresponding Objective-C method.
 func (x *DetectHumanRectanglesRequest) SetUpperBodyOnly(upperBodyOnly bool) {
-	x.inner.SetUpperBodyOnly(upperBodyOnly)
-}
-
-func (x *DetectHumanRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectHumanRectanglesRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBodyOnly:"), upperBodyOnly)
 }
 
 // DetectHumanRectanglesRequestable is the interface implemented by [DetectHumanRectanglesRequest], for mocking and DI.
 type DetectHumanRectanglesRequestable interface {
-	Unwrap() *raw.VNDetectHumanRectanglesRequest
+	obj.Object
 	WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanRectanglesRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanRectanglesRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanRectanglesRequest
-	WithRevision(revision uint) *DetectHumanRectanglesRequest
+	WithRevision(revision int) *DetectHumanRectanglesRequest
 	UpperBodyOnly() bool
 	SetUpperBodyOnly(upperBodyOnly bool)
 }
 
 var _ DetectHumanRectanglesRequestable = (*DetectHumanRectanglesRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectHumanRectanglesRequest)(nil)
+
+var _ RequestProvider = (*DetectHumanRectanglesRequest)(nil)

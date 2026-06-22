@@ -5,104 +5,86 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.
+// AchievementViewController is an idiomatic wrapper over the Objective-C class GKAchievementViewController.
 //
-// AchievementViewController wraps [raw.GKAchievementViewController] with a fluent Go API.
+// It embeds [GameCenterViewController], promoting that type's methods.
+//
+// An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.
 type AchievementViewController struct {
-	inner *raw.GKAchievementViewController
+	GameCenterViewController
 }
 
-// Unwrap returns the underlying [raw.GKAchievementViewController].
-func (x *AchievementViewController) Unwrap() *raw.GKAchievementViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AchievementViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// AchievementViewControllerFromID adopts an existing object pointer as a AchievementViewController (nil for 0).
+// AchievementViewControllerFromID adopts an existing Objective-C object as a AchievementViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func AchievementViewControllerFromID(id objc.ID) *AchievementViewController {
 	if id == 0 {
 		return nil
 	}
-	return &AchievementViewController{inner: raw.GKAchievementViewControllerFromID(id)}
+	x := &AchievementViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAchievementViewController creates a new [AchievementViewController].
+// achievementViewControllerAdopt wraps an Objective-C object that this code just created as a
+// AchievementViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func achievementViewControllerAdopt(id objc.ID) *AchievementViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &AchievementViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAchievementViewController creates a new AchievementViewController.
 func NewAchievementViewController() *AchievementViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievementViewController")), objc.RegisterName("new"))
-	return &AchievementViewController{inner: raw.GKAchievementViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKAchievementViewController")), objc.RegisterName("new"))
+	return achievementViewControllerAdopt(_id)
 }
 
-// The achievement view controller’s delegate.
-//
-// WithAchievementDelegate sets the achievementDelegate property and returns the receiver for chaining.
-func (x *AchievementViewController) WithAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) *AchievementViewController {
-	x.inner.SetAchievementDelegate(achievementDelegate)
+// WithViewState sets the property and returns the receiver so calls can be chained.
+func (x *AchievementViewController) WithViewState(viewState GameCenterViewControllerState) *AchievementViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 	return x
 }
 
-// The view controller’s delegate.
-//
-// WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
-func (x *AchievementViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetGameCenterDelegate(gameCenterDelegate)
+// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
+func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return x
 }
 
-// WithViewState sets the viewState property and returns the receiver for chaining.
-func (x *AchievementViewController) WithViewState(viewState GKGameCenterViewControllerState) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetViewState(raw.GKGameCenterViewControllerState(viewState))
-	return x
-}
-
-// WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
-func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
-	return x
-}
-
-// WithLeaderboardIdentifier sets the leaderboardIdentifier property and returns the receiver for chaining.
+// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// WithLeaderboardCategory sets the leaderboardCategory property and returns the receiver for chaining.
+// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
 func (x *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return x
-}
-
-// AchievementDelegate calls the underlying AchievementDelegate.
-func (x *AchievementViewController) AchievementDelegate() raw.GKAchievementViewControllerDelegate {
-	return x.inner.AchievementDelegate()
-}
-
-// SetAchievementDelegate calls the underlying SetAchievementDelegate.
-func (x *AchievementViewController) SetAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) {
-	x.inner.SetAchievementDelegate(achievementDelegate)
-}
-
-func (x *AchievementViewController) asGameCenterViewController() *raw.GKGameCenterViewController {
-	return &x.inner.GKGameCenterViewController
 }
 
 // AchievementViewControllerable is the interface implemented by [AchievementViewController], for mocking and DI.
 type AchievementViewControllerable interface {
-	Unwrap() *raw.GKAchievementViewController
-	WithAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) *AchievementViewController
-	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *AchievementViewController
-	WithViewState(viewState GKGameCenterViewControllerState) *AchievementViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *AchievementViewController
+	obj.Object
+	WithViewState(viewState GameCenterViewControllerState) *AchievementViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController
 	WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController
 	WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController
-	AchievementDelegate() raw.GKAchievementViewControllerDelegate
-	SetAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate)
 }
 
 var _ AchievementViewControllerable = (*AchievementViewController)(nil)
+
+var _ GameCenterViewControllerProvider = (*AchievementViewController)(nil)

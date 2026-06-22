@@ -16,6 +16,8 @@ const (
 	InstallerDirectionUndefined InstallerSectionDirection = 2
 )
 
+// String returns the InstallerSectionDirection constant's name, or its numeric form when the
+// value is not a known constant.
 func (e InstallerSectionDirection) String() string {
 	switch e {
 	case InstallerDirectionForward:

@@ -5,244 +5,220 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An authorization request that your provider extension handles.
+// AuthorizationProviderExtensionAuthorizationRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationProviderExtensionAuthorizationRequest.
 //
-// AuthorizationProviderExtensionAuthorizationRequest wraps [raw.ASAuthorizationProviderExtensionAuthorizationRequest] with a fluent Go API.
+// An authorization request that your provider extension handles.
 type AuthorizationProviderExtensionAuthorizationRequest struct {
-	inner *raw.ASAuthorizationProviderExtensionAuthorizationRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationProviderExtensionAuthorizationRequest].
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Unwrap() *raw.ASAuthorizationProviderExtensionAuthorizationRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationProviderExtensionAuthorizationRequestFromID adopts an existing object pointer as a AuthorizationProviderExtensionAuthorizationRequest (nil for 0).
+// AuthorizationProviderExtensionAuthorizationRequestFromID adopts an existing Objective-C object as a AuthorizationProviderExtensionAuthorizationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationProviderExtensionAuthorizationRequestFromID(id objc.ID) *AuthorizationProviderExtensionAuthorizationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationProviderExtensionAuthorizationRequest{inner: raw.ASAuthorizationProviderExtensionAuthorizationRequestFromID(id)}
+	x := &AuthorizationProviderExtensionAuthorizationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationProviderExtensionAuthorizationRequest creates a new [AuthorizationProviderExtensionAuthorizationRequest].
-func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProviderExtensionAuthorizationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionAuthorizationRequest")), objc.RegisterName("new"))
-	return &AuthorizationProviderExtensionAuthorizationRequest{inner: raw.ASAuthorizationProviderExtensionAuthorizationRequestFromID(_id)}
-}
-
-// Indicates the request wasn’t handled.
-//
-// DoNotHandle calls the underlying DoNotHandle.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
-	x.inner.DoNotHandle()
-}
-
-// Cancels the request, for example, because the user taps a cancel button.
-//
-// Cancel calls the underlying Cancel.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
-	x.inner.Cancel()
-}
-
-// Indicates the requested authorization completed with no output.
-//
-// Complete calls the underlying Complete.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
-	x.inner.Complete()
-}
-
-// Indicates the requested authorization succeeded with tokens in the HTTP headers.
-//
-// CompleteWithHTTPAuthorizationHeaders calls the underlying CompleteWithHTTPAuthorizationHeaders.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	x.inner.CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders)
-}
-
-// Indicates the requested authorization succeeded with an HTTP response.
-//
-// CompleteWithHTTPResponseHttpBody calls the underlying CompleteWithHTTPResponseHttpBody.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) {
-	x.inner.CompleteWithHTTPResponseHttpBody(httpResponse, httpBody)
-}
-
-// @abstract Call when authorization succeeded with @see ASAuthorizationProviderExtensionAuthorizationResult.
-//
-// CompleteWithAuthorizationResult calls the underlying CompleteWithAuthorizationResult.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *raw.ASAuthorizationProviderExtensionAuthorizationResult) {
-	x.inner.CompleteWithAuthorizationResult(authorizationResult)
-}
-
-// Indicates the requested authorization failed.
-//
-// CompleteWithError calls the underlying CompleteWithError.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
-	x.inner.CompleteWithError(error_)
-}
-
-// Asks the authorization service to show the extension’s view controller to the user.
-//
-// PresentAuthorizationViewControllerWithCompletion calls the underlying PresentAuthorizationViewControllerWithCompletion.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer)) {
-	x.inner.PresentAuthorizationViewControllerWithCompletion(completion)
-}
-
-// @abstract Request URL with all components.
-//
-// Url calls the underlying Url.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Url() *foundation.NSURL {
-	return x.inner.Url()
-}
-
-// @abstract Operation to be executed by the extension.
-//
-// RequestedOperation calls the underlying RequestedOperation.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() string {
-	_r := x.inner.RequestedOperation()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract Request HTTP headers.
-//
-// HttpHeaders calls the underlying HttpHeaders.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.HttpHeaders()
-}
-
-// @abstract Request body.
-//
-// HttpBody calls the underlying HttpBody.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpBody() *foundation.NSData {
-	return x.inner.HttpBody()
-}
-
-// @abstract Realm.
-//
-// Realm calls the underlying Realm.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
-	_r := x.inner.Realm()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract Extension data from extension configuration provided by MDM stored as a property-list.
-//
-// ExtensionData calls the underlying ExtensionData.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.ExtensionData()
-}
-
-// @abstract Identification of the calling application.
-//
-// CallerBundleIdentifier calls the underlying CallerBundleIdentifier.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
-	_r := x.inner.CallerBundleIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract Authorization options.
-//
-// AuthorizationOptions calls the underlying AuthorizationOptions.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.AuthorizationOptions()
-}
-
-// @abstract Indicates whether the calling application is managed.
-//
-// IsCallerManaged calls the underlying IsCallerManaged.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
-	return x.inner.IsCallerManaged()
-}
-
-// @abstract Team identifier of the calling application.
-//
-// CallerTeamIdentifier calls the underlying CallerTeamIdentifier.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
-	_r := x.inner.CallerTeamIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract Localized display name of the calling application.
-//
-// LocalizedCallerDisplayName calls the underlying LocalizedCallerDisplayName.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
-	_r := x.inner.LocalizedCallerDisplayName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract Audit token of the calling application.
-//
-// CallerAuditToken calls the underlying CallerAuditToken.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() *foundation.NSData {
-	return x.inner.CallerAuditToken()
-}
-
-// @abstract Indicates whether the authorization user interface is enabled. @discussion If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface via @see presentAuthorizationViewControllerWithCompletion.
-//
-// IsUserInterfaceEnabled calls the underlying IsUserInterfaceEnabled.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
-	return x.inner.IsUserInterfaceEnabled()
-}
-
-// @abstract The login manager to interface with the Platform SSO configuration.
-//
-// LoginManager calls the underlying LoginManager.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
-	_r := x.inner.LoginManager()
-	if _r == nil {
+// authorizationProviderExtensionAuthorizationRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationProviderExtensionAuthorizationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationProviderExtensionAuthorizationRequestAdopt(id objc.ID) *AuthorizationProviderExtensionAuthorizationRequest {
+	if id == 0 {
 		return nil
 	}
-	return &AuthorizationProviderExtensionLoginManager{inner: _r}
+	x := &AuthorizationProviderExtensionAuthorizationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationProviderExtensionAuthorizationRequest creates a new AuthorizationProviderExtensionAuthorizationRequest.
+func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProviderExtensionAuthorizationRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionAuthorizationRequest")), objc.RegisterName("new"))
+	return authorizationProviderExtensionAuthorizationRequestAdopt(_id)
+}
+
+// DoNotHandle indicates the request wasn’t handled.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doNotHandle"))
+}
+
+// Cancel cancels the request, for example, because the user taps a cancel button.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+}
+
+// Complete indicates the requested authorization completed with no output.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("complete"))
+}
+
+// CompleteWithHTTPAuthorizationHeaders indicates the requested authorization succeeded with tokens in the HTTP headers.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithHTTPAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
+}
+
+// CompleteWithHTTPResponseHttpBody indicates the requested authorization succeeded with an HTTP response.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse obj.Object, httpBody obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), objref.IDOf(httpBody))
+}
+
+// CompleteWithAuthorizationResult call when authorization succeeded with
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithAuthorizationResult:"), objref.IDOf(authorizationResult))
+}
+
+// Url request URL with all components.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
+}
+
+// RequestedOperation operation to be executed by the extension.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedOperation"))
+	return obj.Wrap(_r)
+}
+
+// HttpHeaders request HTTP headers.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpHeaders"))
+	return obj.Wrap(_r)
+}
+
+// HttpBody request body.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpBody() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpBody"))
+	return obj.Wrap(_r)
+}
+
+// Realm realm.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realm"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// ExtensionData extension data from extension configuration provided by MDM stored as a property-list.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionData"))
+	return obj.Wrap(_r)
+}
+
+// CallerBundleIdentifier identification of the calling application.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callerBundleIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// AuthorizationOptions authorization options.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationOptions"))
+	return obj.Wrap(_r)
+}
+
+// IsCallerManaged indicates whether the calling application is managed.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCallerManaged"))
+	return _r
+}
+
+// CallerTeamIdentifier team identifier of the calling application.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callerTeamIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// LocalizedCallerDisplayName localized display name of the calling application.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedCallerDisplayName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// CallerAuditToken audit token of the calling application.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callerAuditToken"))
+	return obj.Wrap(_r)
+}
+
+// IsUserInterfaceEnabled indicates whether the authorization user interface is enabled. If user interface is not enabled, then the authorization will fail with
+func (x *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInterfaceEnabled"))
+	return _r
+}
+
+// LoginManager the login manager to interface with the Platform SSO configuration.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loginManager"))
+	return AuthorizationProviderExtensionLoginManagerFromID(_r)
 }
 
 // AuthorizationProviderExtensionAuthorizationRequestable is the interface implemented by [AuthorizationProviderExtensionAuthorizationRequest], for mocking and DI.
 type AuthorizationProviderExtensionAuthorizationRequestable interface {
-	Unwrap() *raw.ASAuthorizationProviderExtensionAuthorizationRequest
+	obj.Object
 	DoNotHandle()
 	Cancel()
 	Complete()
-	CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
-	CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData)
-	CompleteWithAuthorizationResult(authorizationResult *raw.ASAuthorizationProviderExtensionAuthorizationResult)
-	CompleteWithError(error_ unsafe.Pointer)
-	PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer))
-	Url() *foundation.NSURL
-	RequestedOperation() string
-	HttpHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
-	HttpBody() *foundation.NSData
+	CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object)
+	CompleteWithHTTPResponseHttpBody(httpResponse obj.Object, httpBody obj.Object)
+	CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult)
+	Url() obj.Object
+	RequestedOperation() obj.Object
+	HttpHeaders() obj.Object
+	HttpBody() obj.Object
 	Realm() string
-	ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID]
+	ExtensionData() obj.Object
 	CallerBundleIdentifier() string
-	AuthorizationOptions() *foundation.NSDictionary[objc.ID, objc.ID]
+	AuthorizationOptions() obj.Object
 	IsCallerManaged() bool
 	CallerTeamIdentifier() string
 	LocalizedCallerDisplayName() string
-	CallerAuditToken() *foundation.NSData
+	CallerAuditToken() obj.Object
 	IsUserInterfaceEnabled() bool
 	LoginManager() *AuthorizationProviderExtensionLoginManager
 }

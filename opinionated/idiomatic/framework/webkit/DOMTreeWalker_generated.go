@@ -5,152 +5,131 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMTreeWalker wraps [raw.DOMTreeWalker] with a fluent Go API.
+// DOMTreeWalker is an idiomatic wrapper over the Objective-C class DOMTreeWalker.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMTreeWalker struct {
-	inner *raw.DOMTreeWalker
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMTreeWalker].
-func (x *DOMTreeWalker) Unwrap() *raw.DOMTreeWalker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMTreeWalker) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMTreeWalkerFromID adopts an existing object pointer as a DOMTreeWalker (nil for 0).
+// DOMTreeWalkerFromID adopts an existing Objective-C object as a DOMTreeWalker
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMTreeWalkerFromID(id objc.ID) *DOMTreeWalker {
 	if id == 0 {
 		return nil
 	}
-	return &DOMTreeWalker{inner: raw.DOMTreeWalkerFromID(id)}
-}
-
-// NewDOMTreeWalker creates a new [DOMTreeWalker].
-func NewDOMTreeWalker() *DOMTreeWalker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMTreeWalker")), objc.RegisterName("new"))
-	return &DOMTreeWalker{inner: raw.DOMTreeWalkerFromID(_id)}
-}
-
-// WithCurrentNode sets the currentNode property and returns the receiver for chaining.
-func (x *DOMTreeWalker) WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWalker {
-	x.inner.SetCurrentNode(currentNode.asDOMNode())
+	x := &DOMTreeWalker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ParentNode calls the underlying ParentNode.
+// dOMTreeWalkerAdopt wraps an Objective-C object that this code just created as a
+// DOMTreeWalker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMTreeWalkerAdopt(id objc.ID) *DOMTreeWalker {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMTreeWalker{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMTreeWalker creates a new DOMTreeWalker.
+func NewDOMTreeWalker() *DOMTreeWalker {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMTreeWalker")), objc.RegisterName("new"))
+	return dOMTreeWalkerAdopt(_id)
+}
+
+// WithCurrentNode sets the property and returns the receiver so calls can be chained.
+func (x *DOMTreeWalker) WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWalker {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentNode:"), objref.IDOf(currentNode))
+	return x
+}
+
+// ParentNode wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) ParentNode() *DOMNode {
-	_r := x.inner.ParentNode()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentNode"))
+	return DOMNodeFromID(_r)
 }
 
-// FirstChild calls the underlying FirstChild.
+// FirstChild wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) FirstChild() *DOMNode {
-	_r := x.inner.FirstChild()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstChild"))
+	return DOMNodeFromID(_r)
 }
 
-// LastChild calls the underlying LastChild.
+// LastChild wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) LastChild() *DOMNode {
-	_r := x.inner.LastChild()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastChild"))
+	return DOMNodeFromID(_r)
 }
 
-// PreviousSibling calls the underlying PreviousSibling.
+// PreviousSibling wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) PreviousSibling() *DOMNode {
-	_r := x.inner.PreviousSibling()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousSibling"))
+	return DOMNodeFromID(_r)
 }
 
-// NextSibling calls the underlying NextSibling.
+// NextSibling wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) NextSibling() *DOMNode {
-	_r := x.inner.NextSibling()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextSibling"))
+	return DOMNodeFromID(_r)
 }
 
-// PreviousNode calls the underlying PreviousNode.
+// PreviousNode wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) PreviousNode() *DOMNode {
-	_r := x.inner.PreviousNode()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousNode"))
+	return DOMNodeFromID(_r)
 }
 
-// NextNode calls the underlying NextNode.
+// NextNode wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) NextNode() *DOMNode {
-	_r := x.inner.NextNode()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextNode"))
+	return DOMNodeFromID(_r)
 }
 
-// Root calls the underlying Root.
+// Root wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) Root() *DOMNode {
-	_r := x.inner.Root()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("root"))
+	return DOMNodeFromID(_r)
 }
 
-// WhatToShow calls the underlying WhatToShow.
-func (x *DOMTreeWalker) WhatToShow() uint {
-	return x.inner.WhatToShow()
+// WhatToShow wraps the corresponding Objective-C method.
+func (x *DOMTreeWalker) WhatToShow() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("whatToShow"))
+	return _r
 }
 
-// Filter calls the underlying Filter.
-func (x *DOMTreeWalker) Filter() raw.DOMNodeFilter {
-	return x.inner.Filter()
-}
-
-// ExpandEntityReferences calls the underlying ExpandEntityReferences.
+// ExpandEntityReferences wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) ExpandEntityReferences() bool {
-	return x.inner.ExpandEntityReferences()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("expandEntityReferences"))
+	return _r
 }
 
-// CurrentNode calls the underlying CurrentNode.
+// CurrentNode wraps the corresponding Objective-C method.
 func (x *DOMTreeWalker) CurrentNode() *DOMNode {
-	_r := x.inner.CurrentNode()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentNode"))
+	return DOMNodeFromID(_r)
 }
 
-// SetCurrentNode calls the underlying SetCurrentNode.
-func (x *DOMTreeWalker) SetCurrentNode(currentNode *raw.DOMNode) {
-	x.inner.SetCurrentNode(currentNode)
-}
-
-func (x *DOMTreeWalker) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMTreeWalker) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// SetCurrentNode wraps the corresponding Objective-C method.
+func (x *DOMTreeWalker) SetCurrentNode(currentNode *DOMNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentNode:"), objref.IDOf(currentNode))
 }
 
 // DOMTreeWalkerable is the interface implemented by [DOMTreeWalker], for mocking and DI.
 type DOMTreeWalkerable interface {
-	Unwrap() *raw.DOMTreeWalker
+	obj.Object
 	WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWalker
 	ParentNode() *DOMNode
 	FirstChild() *DOMNode
@@ -160,11 +139,14 @@ type DOMTreeWalkerable interface {
 	PreviousNode() *DOMNode
 	NextNode() *DOMNode
 	Root() *DOMNode
-	WhatToShow() uint
-	Filter() raw.DOMNodeFilter
+	WhatToShow() int
 	ExpandEntityReferences() bool
 	CurrentNode() *DOMNode
-	SetCurrentNode(currentNode *raw.DOMNode)
+	SetCurrentNode(currentNode *DOMNode)
 }
 
 var _ DOMTreeWalkerable = (*DOMTreeWalker)(nil)
+
+var _ DOMObjectProvider = (*DOMTreeWalker)(nil)
+
+var _ WebScriptObjectProvider = (*DOMTreeWalker)(nil)

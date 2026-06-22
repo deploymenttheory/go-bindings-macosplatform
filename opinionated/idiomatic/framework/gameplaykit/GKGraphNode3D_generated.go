@@ -5,59 +5,58 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A node in a navigation graph, associated with a point in continuous 3D space.
+// GraphNode3D is an idiomatic wrapper over the Objective-C class GKGraphNode3D.
 //
-// GraphNode3D wraps [raw.GKGraphNode3D] with a fluent Go API.
+// It embeds [GraphNode], promoting that type's methods.
+//
+// A node in a navigation graph, associated with a point in continuous 3D space.
 type GraphNode3D struct {
-	inner *raw.GKGraphNode3D
+	GraphNode
 }
 
-// Unwrap returns the underlying [raw.GKGraphNode3D].
-func (x *GraphNode3D) Unwrap() *raw.GKGraphNode3D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphNode3D) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphNode3DFromID adopts an existing object pointer as a GraphNode3D (nil for 0).
+// GraphNode3DFromID adopts an existing Objective-C object as a GraphNode3D
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphNode3DFromID(id objc.ID) *GraphNode3D {
 	if id == 0 {
 		return nil
 	}
-	return &GraphNode3D{inner: raw.GKGraphNode3DFromID(id)}
+	x := &GraphNode3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph node with the specified point.
-//
-// NewGraphNode3DWithPoint creates a new [GraphNode3D].
-func NewGraphNode3DWithPoint(point unsafe.Pointer) *GraphNode3D {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraphNode3D")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPoint:"), point)
-	return &GraphNode3D{inner: raw.GKGraphNode3DFromID(_id)}
+// graphNode3DAdopt wraps an Objective-C object that this code just created as a
+// GraphNode3D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphNode3DAdopt(id objc.ID) *GraphNode3D {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphNode3D{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Position calls the underlying Position.
-func (x *GraphNode3D) Position() unsafe.Pointer {
-	return x.inner.Position()
+// NewGraphNode3D creates a new GraphNode3D.
+func NewGraphNode3D() *GraphNode3D {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKGraphNode3D")), objc.RegisterName("new"))
+	return graphNode3DAdopt(_id)
 }
-
-// SetPosition calls the underlying SetPosition.
-func (x *GraphNode3D) SetPosition(position unsafe.Pointer) {
-	x.inner.SetPosition(position)
-}
-
-func (x *GraphNode3D) asGraphNode() *raw.GKGraphNode { return &x.inner.GKGraphNode }
 
 // GraphNode3Dable is the interface implemented by [GraphNode3D], for mocking and DI.
 type GraphNode3Dable interface {
-	Unwrap() *raw.GKGraphNode3D
-	Position() unsafe.Pointer
-	SetPosition(position unsafe.Pointer)
+	obj.Object
 }
 
 var _ GraphNode3Dable = (*GraphNode3D)(nil)
+
+var _ GraphNodeProvider = (*GraphNode3D)(nil)

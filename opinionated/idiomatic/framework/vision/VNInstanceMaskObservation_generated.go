@@ -5,85 +5,65 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An observation that contains an instance mask that labels instances in the mask.
+// InstanceMaskObservation is an idiomatic wrapper over the Objective-C class VNInstanceMaskObservation.
 //
-// InstanceMaskObservation wraps [raw.VNInstanceMaskObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// An observation that contains an instance mask that labels instances in the mask.
 type InstanceMaskObservation struct {
-	inner *raw.VNInstanceMaskObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNInstanceMaskObservation].
-func (x *InstanceMaskObservation) Unwrap() *raw.VNInstanceMaskObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InstanceMaskObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// InstanceMaskObservationFromID adopts an existing object pointer as a InstanceMaskObservation (nil for 0).
+// InstanceMaskObservationFromID adopts an existing Objective-C object as a InstanceMaskObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func InstanceMaskObservationFromID(id objc.ID) *InstanceMaskObservation {
 	if id == 0 {
 		return nil
 	}
-	return &InstanceMaskObservation{inner: raw.VNInstanceMaskObservationFromID(id)}
+	x := &InstanceMaskObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewInstanceMaskObservation creates a new [InstanceMaskObservation].
+// instanceMaskObservationAdopt wraps an Objective-C object that this code just created as a
+// InstanceMaskObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func instanceMaskObservationAdopt(id objc.ID) *InstanceMaskObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &InstanceMaskObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewInstanceMaskObservation creates a new InstanceMaskObservation.
 func NewInstanceMaskObservation() *InstanceMaskObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNInstanceMaskObservation")), objc.RegisterName("new"))
-	return &InstanceMaskObservation{inner: raw.VNInstanceMaskObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNInstanceMaskObservation")), objc.RegisterName("new"))
+	return instanceMaskObservationAdopt(_id)
 }
 
-// Creates a low-resolution mask from the instances you specify.
-//
-// GenerateMaskForInstancesError calls the underlying GenerateMaskForInstancesError.
-func (x *InstanceMaskObservation) GenerateMaskForInstancesError(instances *foundation.NSIndexSet) (unsafe.Pointer, error) {
-	return x.inner.GenerateMaskForInstancesError(instances)
+// AllInstances *The IndexSet that encompases all instances except the background
+func (x *InstanceMaskObservation) AllInstances() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allInstances"))
+	return obj.Wrap(_r)
 }
-
-// Creates a high-resolution image where everything becomes transparent black, except for the instances you specify.
-//
-// GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError calls the underlying GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError.
-func (x *InstanceMaskObservation) GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler, cropResult bool) (unsafe.Pointer, error) {
-	return x.inner.GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances, requestHandler, cropResult)
-}
-
-// Creates a high-resolution mask where everything becomes transparent black, except for the instances you specify.
-//
-// GenerateScaledMaskForImageForInstancesFromRequestHandlerError calls the underlying GenerateScaledMaskForImageForInstancesFromRequestHandlerError.
-func (x *InstanceMaskObservation) GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler) (unsafe.Pointer, error) {
-	return x.inner.GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances, requestHandler)
-}
-
-// @brief The resulting mask represents all instances in a mask image where 0 represents the background and all other values represent the indices of the instances identified. Note that a pixel can only correspond to one instance and not multiple instances.
-//
-// InstanceMask calls the underlying InstanceMask.
-func (x *InstanceMaskObservation) InstanceMask() unsafe.Pointer {
-	return x.inner.InstanceMask()
-}
-
-// @brief *The IndexSet that encompases all instances except the background
-//
-// AllInstances calls the underlying AllInstances.
-func (x *InstanceMaskObservation) AllInstances() *foundation.NSIndexSet {
-	return x.inner.AllInstances()
-}
-
-func (x *InstanceMaskObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // InstanceMaskObservationable is the interface implemented by [InstanceMaskObservation], for mocking and DI.
 type InstanceMaskObservationable interface {
-	Unwrap() *raw.VNInstanceMaskObservation
-	GenerateMaskForInstancesError(instances *foundation.NSIndexSet) (unsafe.Pointer, error)
-	GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler, cropResult bool) (unsafe.Pointer, error)
-	GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler) (unsafe.Pointer, error)
-	InstanceMask() unsafe.Pointer
-	AllInstances() *foundation.NSIndexSet
+	obj.Object
+	AllInstances() obj.Object
 }
 
 var _ InstanceMaskObservationable = (*InstanceMaskObservation)(nil)
+
+var _ ObservationProvider = (*InstanceMaskObservation)(nil)

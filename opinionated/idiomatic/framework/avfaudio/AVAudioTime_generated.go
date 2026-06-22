@@ -5,132 +5,133 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to represent a moment in time.
+// AudioTime is an idiomatic wrapper over the Objective-C class AVAudioTime.
 //
-// AudioTime wraps [raw.AVAudioTime] with a fluent Go API.
+// An object you use to represent a moment in time.
 type AudioTime struct {
-	inner *raw.AVAudioTime
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioTime].
-func (x *AudioTime) Unwrap() *raw.AVAudioTime { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioTime) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioTimeFromID adopts an existing object pointer as a AudioTime (nil for 0).
+// AudioTimeFromID adopts an existing Objective-C object as a AudioTime
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioTimeFromID(id objc.ID) *AudioTime {
 	if id == 0 {
 		return nil
 	}
-	return &AudioTime{inner: raw.AVAudioTimeFromID(id)}
+	x := &AudioTime{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an audio time object with the specified timestamp and sample rate.
-//
-// NewAudioTimeWithAudioTimeStampSampleRate creates a new [AudioTime].
-func NewAudioTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AudioTime {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioTime")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTimeStamp:sampleRate:"), ts, sampleRate)
-	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
-}
-
-// Creates an audio time object with the specified host time.
-//
-// NewAudioTimeWithHostTime creates a new [AudioTime].
-func NewAudioTimeWithHostTime(hostTime uint64) *AudioTime {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioTime")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHostTime:"), hostTime)
-	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
-}
-
-// Creates an audio time object with the specified timestamp and sample rate.
-//
-// NewAudioTimeWithSampleTimeAtRate creates a new [AudioTime].
-func NewAudioTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AudioTime {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioTime")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleTime:atRate:"), sampleTime, sampleRate)
-	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
-}
-
-// Creates an audio time object with the specified host time, sample time, and sample rate.
-//
-// NewAudioTimeWithHostTimeSampleTimeAtRate creates a new [AudioTime].
-func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AudioTime {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioTime")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHostTime:sampleTime:atRate:"), hostTime, sampleTime, sampleRate)
-	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
-}
-
-// Creates an audio time object by converting between host time and sample time.
-//
-// ExtrapolateTimeFromAnchor calls the underlying ExtrapolateTimeFromAnchor.
-func (x *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *raw.AVAudioTime) *AudioTime {
-	_r := x.inner.ExtrapolateTimeFromAnchor(anchorTime)
-	if _r == nil {
+// audioTimeAdopt wraps an Objective-C object that this code just created as a
+// AudioTime (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioTimeAdopt(id objc.ID) *AudioTime {
+	if id == 0 {
 		return nil
 	}
-	return &AudioTime{inner: _r}
+	x := &AudioTime{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property hostTimeValid @abstract Whether the hostTime property is valid.
-//
-// IsHostTimeValid calls the underlying IsHostTimeValid.
+// Description returns the object's -description text.
+func (x *AudioTime) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioTime) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioTime) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioTime) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioTimeWithHostTime creates an audio time object with the specified host time.
+func NewAudioTimeWithHostTime(hostTime uint64) *AudioTime {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHostTime:"), hostTime)
+	return audioTimeAdopt(_id)
+}
+
+// NewAudioTimeWithSampleTimeAtRate creates an audio time object with the specified timestamp and sample rate.
+func NewAudioTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AudioTime {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleTime:atRate:"), sampleTime, sampleRate)
+	return audioTimeAdopt(_id)
+}
+
+// NewAudioTimeWithHostTimeSampleTimeAtRate creates an audio time object with the specified host time, sample time, and sample rate.
+func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AudioTime {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHostTime:sampleTime:atRate:"), hostTime, sampleTime, sampleRate)
+	return audioTimeAdopt(_id)
+}
+
+// ExtrapolateTimeFromAnchor creates an audio time object by converting between host time and sample time.
+func (x *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extrapolateTimeFromAnchor:"), objref.IDOf(anchorTime))
+	return AudioTimeFromID(_r)
+}
+
+// IsHostTimeValid whether the hostTime property is valid.
 func (x *AudioTime) IsHostTimeValid() bool {
-	return x.inner.IsHostTimeValid()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHostTimeValid"))
+	return _r
 }
 
-// @property hostTime @abstract The host time.
-//
-// HostTime calls the underlying HostTime.
+// HostTime the host time.
 func (x *AudioTime) HostTime() uint64 {
-	return x.inner.HostTime()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTime"))
+	return _r
 }
 
-// @property sampleTimeValid @abstract Whether the sampleTime and sampleRate properties are valid.
-//
-// IsSampleTimeValid calls the underlying IsSampleTimeValid.
+// IsSampleTimeValid whether the sampleTime and sampleRate properties are valid.
 func (x *AudioTime) IsSampleTimeValid() bool {
-	return x.inner.IsSampleTimeValid()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSampleTimeValid"))
+	return _r
 }
 
-// @property sampleTime @abstract The time as a number of audio samples, as tracked by the current audio device.
-//
-// SampleTime calls the underlying SampleTime.
+// SampleTime the time as a number of audio samples, as tracked by the current audio device.
 func (x *AudioTime) SampleTime() int64 {
-	return x.inner.SampleTime()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("sampleTime"))
+	return _r
 }
 
-// @property sampleRate @abstract The sample rate at which sampleTime is being expressed.
-//
-// SampleRate calls the underlying SampleRate.
+// SampleRate the sample rate at which sampleTime is being expressed.
 func (x *AudioTime) SampleRate() float64 {
-	return x.inner.SampleRate()
-}
-
-// @property audioTimeStamp @abstract The time expressed as an AudioTimeStamp structure. @discussion This may be useful for compatibility with lower-level CoreAudio and AudioToolbox API's.
-//
-// AudioTimeStamp calls the underlying AudioTimeStamp.
-func (x *AudioTime) AudioTimeStamp() coreaudiotypes.AudioTimeStamp {
-	return x.inner.AudioTimeStamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sampleRate"))
+	return _r
 }
 
 // AudioTimeable is the interface implemented by [AudioTime], for mocking and DI.
 type AudioTimeable interface {
-	Unwrap() *raw.AVAudioTime
-	ExtrapolateTimeFromAnchor(anchorTime *raw.AVAudioTime) *AudioTime
+	obj.Object
+	ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime
 	IsHostTimeValid() bool
 	HostTime() uint64
 	IsSampleTimeValid() bool
 	SampleTime() int64
 	SampleRate() float64
-	AudioTimeStamp() coreaudiotypes.AudioTimeStamp
 }
 
 var _ AudioTimeable = (*AudioTime)(nil)

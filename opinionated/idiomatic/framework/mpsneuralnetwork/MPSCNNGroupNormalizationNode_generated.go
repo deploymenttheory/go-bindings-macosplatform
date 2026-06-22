@@ -5,88 +5,83 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNGroupNormalizationNode wraps [raw.MPSCNNGroupNormalizationNode] with a fluent Go API.
+// CNNGroupNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNGroupNormalizationNode.
+//
+// It embeds [NNFilterNode], promoting that type's methods.
 type CNNGroupNormalizationNode struct {
-	inner *raw.MPSCNNGroupNormalizationNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNGroupNormalizationNode].
-func (x *CNNGroupNormalizationNode) Unwrap() *raw.MPSCNNGroupNormalizationNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNGroupNormalizationNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNGroupNormalizationNodeFromID adopts an existing object pointer as a CNNGroupNormalizationNode (nil for 0).
+// CNNGroupNormalizationNodeFromID adopts an existing Objective-C object as a CNNGroupNormalizationNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNGroupNormalizationNodeFromID(id objc.ID) *CNNGroupNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNGroupNormalizationNode{inner: raw.MPSCNNGroupNormalizationNodeFromID(id)}
-}
-
-// NewCNNGroupNormalizationNodeWithSourceDataSource creates a new [CNNGroupNormalizationNode].
-func NewCNNGroupNormalizationNodeWithSourceDataSource(source *raw.MPSNNImageNode, dataSource raw.MPSCNNGroupNormalizationDataSource) *CNNGroupNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNGroupNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:dataSource:"), source.Ptr(), dataSource)
-	return &CNNGroupNormalizationNode{inner: raw.MPSCNNGroupNormalizationNodeFromID(_id)}
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNGroupNormalizationNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNGroupNormalizationNode {
-	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
+	x := &CNNGroupNormalizationNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNGroupNormalizationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNGroupNormalizationNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+// cNNGroupNormalizationNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNGroupNormalizationNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNGroupNormalizationNodeAdopt(id objc.ID) *CNNGroupNormalizationNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNGroupNormalizationNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewCNNGroupNormalizationNode creates a new CNNGroupNormalizationNode.
+func NewCNNGroupNormalizationNode() *CNNGroupNormalizationNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNGroupNormalizationNode")), objc.RegisterName("new"))
+	return cNNGroupNormalizationNodeAdopt(_id)
+}
+
+// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
+func (x *CNNGroupNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNGroupNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNGroupNormalizationNode) WithLabel(label string) *CNNGroupNormalizationNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// TrainingStyle calls the underlying TrainingStyle.
-func (x *CNNGroupNormalizationNode) TrainingStyle() MPSNNTrainingStyle {
-	return MPSNNTrainingStyle(x.inner.TrainingStyle())
+// TrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
+func (x *CNNGroupNormalizationNode) TrainingStyle() NNTrainingStyle {
+	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
+	return _r
 }
 
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// SetTrainingStyle calls the underlying SetTrainingStyle.
-func (x *CNNGroupNormalizationNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
-	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
-}
-
-func (x *CNNGroupNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+// SetTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
+func (x *CNNGroupNormalizationNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 }
 
 // CNNGroupNormalizationNodeable is the interface implemented by [CNNGroupNormalizationNode], for mocking and DI.
 type CNNGroupNormalizationNodeable interface {
-	Unwrap() *raw.MPSCNNGroupNormalizationNode
-	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNGroupNormalizationNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNGroupNormalizationNode
+	obj.Object
+	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNGroupNormalizationNode
 	WithLabel(label string) *CNNGroupNormalizationNode
-	TrainingStyle() MPSNNTrainingStyle
-	SetTrainingStyle(trainingStyle MPSNNTrainingStyle)
+	TrainingStyle() NNTrainingStyle
+	SetTrainingStyle(trainingStyle NNTrainingStyle)
 }
 
 var _ CNNGroupNormalizationNodeable = (*CNNGroupNormalizationNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNGroupNormalizationNode)(nil)

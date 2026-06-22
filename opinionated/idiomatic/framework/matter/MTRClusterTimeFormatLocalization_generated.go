@@ -5,132 +5,146 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterTimeFormatLocalization wraps [raw.MTRClusterTimeFormatLocalization] with a fluent Go API.
+// MTRClusterTimeFormatLocalization is an idiomatic wrapper over the Objective-C class MTRClusterTimeFormatLocalization.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterTimeFormatLocalization struct {
-	inner *raw.MTRClusterTimeFormatLocalization
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterTimeFormatLocalization].
-func (x *MTRClusterTimeFormatLocalization) Unwrap() *raw.MTRClusterTimeFormatLocalization {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterTimeFormatLocalization) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterTimeFormatLocalizationFromID adopts an existing object pointer as a MTRClusterTimeFormatLocalization (nil for 0).
+// MTRClusterTimeFormatLocalizationFromID adopts an existing Objective-C object as a MTRClusterTimeFormatLocalization
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterTimeFormatLocalizationFromID(id objc.ID) *MTRClusterTimeFormatLocalization {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterTimeFormatLocalization{inner: raw.MTRClusterTimeFormatLocalizationFromID(id)}
+	x := &MTRClusterTimeFormatLocalization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue creates a new [MTRClusterTimeFormatLocalization].
-func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTimeFormatLocalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterTimeFormatLocalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterTimeFormatLocalization{inner: raw.MTRClusterTimeFormatLocalizationFromID(_id)}
+// mTRClusterTimeFormatLocalizationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterTimeFormatLocalization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterTimeFormatLocalizationAdopt(id objc.ID) *MTRClusterTimeFormatLocalization {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterTimeFormatLocalization{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterTimeFormatLocalizationWithDeviceEndpointQueue creates a new [MTRClusterTimeFormatLocalization].
-func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterTimeFormatLocalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterTimeFormatLocalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterTimeFormatLocalization{inner: raw.MTRClusterTimeFormatLocalizationFromID(_id)}
+// NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTimeFormatLocalization {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTimeFormatLocalization")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterTimeFormatLocalizationAdopt(_id)
 }
 
-// ReadAttributeHourFormatWithParams calls the underlying ReadAttributeHourFormatWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeHourFormatWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeHourFormatWithParams(params)
+// NewMTRClusterTimeFormatLocalizationWithDeviceEndpointQueue creates a new MTRClusterTimeFormatLocalization.
+func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterTimeFormatLocalization {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTimeFormatLocalization")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterTimeFormatLocalizationAdopt(_id)
 }
 
-// WriteAttributeHourFormatWithValueExpectedValueInterval calls the underlying WriteAttributeHourFormatWithValueExpectedValueInterval.
-func (x *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeHourFormatWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeHourFormatWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHourFormatWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeHourFormatWithValueExpectedValueIntervalParams calls the underlying WriteAttributeHourFormatWithValueExpectedValueIntervalParams.
-func (x *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeHourFormatWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeActiveCalendarTypeWithParams calls the underlying ReadAttributeActiveCalendarTypeWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeActiveCalendarTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveCalendarTypeWithParams(params)
+// WriteAttributeHourFormatWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval calls the underlying WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval.
-func (x *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeActiveCalendarTypeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeActiveCalendarTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveCalendarTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeSupportedCalendarTypesWithParams calls the underlying ReadAttributeSupportedCalendarTypesWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeSupportedCalendarTypesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedCalendarTypesWithParams(params)
+// WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeSupportedCalendarTypesWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeSupportedCalendarTypesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedCalendarTypesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterTimeFormatLocalization) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterTimeFormatLocalization) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterTimeFormatLocalizationable is the interface implemented by [MTRClusterTimeFormatLocalization], for mocking and DI.
 type MTRClusterTimeFormatLocalizationable interface {
-	Unwrap() *raw.MTRClusterTimeFormatLocalization
-	ReadAttributeHourFormatWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeActiveCalendarTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeSupportedCalendarTypesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeHourFormatWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeActiveCalendarTypeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeSupportedCalendarTypesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterTimeFormatLocalizationable = (*MTRClusterTimeFormatLocalization)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterTimeFormatLocalization)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterTimeFormatLocalization)(nil)

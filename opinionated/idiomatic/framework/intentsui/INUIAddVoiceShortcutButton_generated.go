@@ -5,129 +5,135 @@
 package intentsui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intentsui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A button that allows the user to add or edit a shortcut.
+// AddVoiceShortcutButton is an idiomatic wrapper over the Objective-C class INUIAddVoiceShortcutButton.
 //
-// AddVoiceShortcutButton wraps [raw.INUIAddVoiceShortcutButton] with a fluent Go API.
+// A button that allows the user to add or edit a shortcut.
 type AddVoiceShortcutButton struct {
-	inner *raw.INUIAddVoiceShortcutButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INUIAddVoiceShortcutButton].
-func (x *AddVoiceShortcutButton) Unwrap() *raw.INUIAddVoiceShortcutButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddVoiceShortcutButton) ID() objc.ID { return x.inner.Ptr() }
-
-// AddVoiceShortcutButtonFromID adopts an existing object pointer as a AddVoiceShortcutButton (nil for 0).
+// AddVoiceShortcutButtonFromID adopts an existing Objective-C object as a AddVoiceShortcutButton
+// (nil for 0), retaining it and registering a release finalizer.
 func AddVoiceShortcutButtonFromID(id objc.ID) *AddVoiceShortcutButton {
 	if id == 0 {
 		return nil
 	}
-	return &AddVoiceShortcutButton{inner: raw.INUIAddVoiceShortcutButtonFromID(id)}
-}
-
-// Creates an Add to Siri button with the specified style.
-//
-// NewAddVoiceShortcutButtonWithStyle creates a new [AddVoiceShortcutButton].
-func NewAddVoiceShortcutButtonWithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), raw.INUIAddVoiceShortcutButtonStyle(style))
-	return &AddVoiceShortcutButton{inner: raw.INUIAddVoiceShortcutButtonFromID(_id)}
-}
-
-// The button style.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *AddVoiceShortcutButton) WithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
-	x.inner.SetStyle(raw.INUIAddVoiceShortcutButtonStyle(style))
+	x := &AddVoiceShortcutButton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The object that receives presentation requests from the button.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AddVoiceShortcutButton) WithDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) *AddVoiceShortcutButton {
-	x.inner.SetDelegate(delegate)
+// addVoiceShortcutButtonAdopt wraps an Objective-C object that this code just created as a
+// AddVoiceShortcutButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addVoiceShortcutButtonAdopt(id objc.ID) *AddVoiceShortcutButton {
+	if id == 0 {
+		return nil
+	}
+	x := &AddVoiceShortcutButton{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The shortcut Siri invokes when the user speaks the invocation phrase.
-//
-// WithShortcut sets the shortcut property and returns the receiver for chaining.
-func (x *AddVoiceShortcutButton) WithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutButton {
-	x.inner.SetShortcut(shortcut)
+// Description returns the object's -description text.
+func (x *AddVoiceShortcutButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddVoiceShortcutButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddVoiceShortcutButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddVoiceShortcutButton) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddVoiceShortcutButtonWithStyle creates an Add to Siri button with the specified style.
+func NewAddVoiceShortcutButtonWithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
+	return addVoiceShortcutButtonAdopt(_id)
+}
+
+// WithStyle the button style.
+func (x *AddVoiceShortcutButton) WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// @abstract A custom corner radius for the @c INUIAddVoiceShortcutButton. @discussion If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
-//
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithShortcut the shortcut Siri invokes when the user speaks the invocation phrase.
+func (x *AddVoiceShortcutButton) WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
+	return x
+}
+
+// WithCornerRadius a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (x *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// Style calls the underlying Style.
-func (x *AddVoiceShortcutButton) Style() INUIAddVoiceShortcutButtonStyle {
-	return INUIAddVoiceShortcutButtonStyle(x.inner.Style())
+// Style wraps the corresponding Objective-C method.
+func (x *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
+	_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// SetStyle calls the underlying SetStyle.
-func (x *AddVoiceShortcutButton) SetStyle(style INUIAddVoiceShortcutButtonStyle) {
-	x.inner.SetStyle(raw.INUIAddVoiceShortcutButtonStyle(style))
+// SetStyle wraps the corresponding Objective-C method.
+func (x *AddVoiceShortcutButton) SetStyle(style AddVoiceShortcutButtonStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *AddVoiceShortcutButton) Delegate() raw.INUIAddVoiceShortcutButtonDelegate {
-	return x.inner.Delegate()
+// Shortcut wraps the corresponding Objective-C method.
+func (x *AddVoiceShortcutButton) Shortcut() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortcut"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *AddVoiceShortcutButton) SetDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) {
-	x.inner.SetDelegate(delegate)
+// SetShortcut wraps the corresponding Objective-C method.
+func (x *AddVoiceShortcutButton) SetShortcut(shortcut obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
 }
 
-// Shortcut calls the underlying Shortcut.
-func (x *AddVoiceShortcutButton) Shortcut() *intents.INShortcut {
-	return x.inner.Shortcut()
-}
-
-// SetShortcut calls the underlying SetShortcut.
-func (x *AddVoiceShortcutButton) SetShortcut(shortcut *intents.INShortcut) {
-	x.inner.SetShortcut(shortcut)
-}
-
-// @abstract A custom corner radius for the @c INUIAddVoiceShortcutButton. @discussion If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
-//
-// CornerRadius calls the underlying CornerRadius.
+// CornerRadius a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (x *AddVoiceShortcutButton) CornerRadius() float64 {
-	return x.inner.CornerRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+	return _r
 }
 
-// SetCornerRadius calls the underlying SetCornerRadius.
+// SetCornerRadius wraps the corresponding Objective-C method.
 func (x *AddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
 // AddVoiceShortcutButtonable is the interface implemented by [AddVoiceShortcutButton], for mocking and DI.
 type AddVoiceShortcutButtonable interface {
-	Unwrap() *raw.INUIAddVoiceShortcutButton
-	WithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton
-	WithDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) *AddVoiceShortcutButton
-	WithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutButton
+	obj.Object
+	WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton
+	WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton
 	WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton
-	Style() INUIAddVoiceShortcutButtonStyle
-	SetStyle(style INUIAddVoiceShortcutButtonStyle)
-	Delegate() raw.INUIAddVoiceShortcutButtonDelegate
-	SetDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate)
-	Shortcut() *intents.INShortcut
-	SetShortcut(shortcut *intents.INShortcut)
+	Style() AddVoiceShortcutButtonStyle
+	SetStyle(style AddVoiceShortcutButtonStyle)
+	Shortcut() obj.Object
+	SetShortcut(shortcut obj.Object)
 	CornerRadius() float64
 	SetCornerRadius(cornerRadius float64)
 }

@@ -5,39 +5,38 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DataForTag calls the underlying TKBERTLVRecordDataForTag.
-func DataForTag(tag uint64) *foundation.NSData {
-	return raw.TKBERTLVRecordDataForTag(tag)
+// DataForTag encodes a specified tag using BER-TLV tag encoding rules.
+func DataForTag(tag uint64) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("TKBERTLVRecord")), objc.RegisterName("dataForTag:"), tag)
+	return obj.Wrap(_r)
 }
 
-// DefaultManager calls the underlying TKSmartCardSlotManagerDefaultManager.
+// DefaultManager global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
 func DefaultManager() *SmartCardSlotManager {
-	_r := raw.TKSmartCardSlotManagerDefaultManager()
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardSlotManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlotManager")), objc.RegisterName("defaultManager"))
+	return SmartCardSlotManagerFromID(_r)
 }
 
-// RecordFromData calls the underlying TKTLVRecordRecordFromData.
-func RecordFromData(data *foundation.NSData) *TLVRecord {
-	_r := raw.TKTLVRecordRecordFromData(data)
-	if _r == nil {
-		return nil
-	}
-	return &TLVRecord{inner: _r}
+// RecordFromData creates and returns a TLV record from by parsing the specified data.
+func RecordFromData(data obj.Object) *TLVRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("recordFromData:"), objref.IDOf(data))
+	return TLVRecordFromID(_r)
 }
 
-// SequenceOfRecordsFromData calls the underlying TKTLVRecordSequenceOfRecordsFromData.
-func SequenceOfRecordsFromData(data *foundation.NSData) *foundation.NSArray[*raw.TKTLVRecord] {
-	return raw.TKTLVRecordSequenceOfRecordsFromData(data)
+// SequenceOfRecordsFromData creates and returns an array of TLV records from the specified data.
+func SequenceOfRecordsFromData(data obj.Object) []*TLVRecord {
+	_r := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("sequenceOfRecordsFromData:"), objref.IDOf(data))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TLVRecord { return TLVRecordFromID(_id) })
 }
 
-// DriverConfigurations calls the underlying TKTokenDriverConfigurationDriverConfigurations.
-func DriverConfigurations() *foundation.NSDictionary[*foundation.NSString, *raw.TKTokenDriverConfiguration] {
-	return raw.TKTokenDriverConfigurationDriverConfigurations()
+// DriverConfigurations contains dictionary of token class configurations keyed by TKTokenDriverClassID of token driver. Hosting application of token extension will contain the list of configurations for hosted token extensions. All other callers will get an empty array. This means that only token's hosting application can actually modify token's configuration. Typically, hosting application will contain only one token extension, therefore this dictionary will have one element.
+func DriverConfigurations() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("TKTokenDriverConfiguration")), objc.RegisterName("driverConfigurations"))
+	return obj.Wrap(_r)
 }

@@ -5,141 +5,133 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that processes image-analysis requests for each frame in a sequence.
+// SequenceRequestHandler is an idiomatic wrapper over the Objective-C class VNSequenceRequestHandler.
 //
-// SequenceRequestHandler wraps [raw.VNSequenceRequestHandler] with a fluent Go API.
+// An object that processes image-analysis requests for each frame in a sequence.
 type SequenceRequestHandler struct {
-	inner *raw.VNSequenceRequestHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNSequenceRequestHandler].
-func (x *SequenceRequestHandler) Unwrap() *raw.VNSequenceRequestHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SequenceRequestHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// SequenceRequestHandlerFromID adopts an existing object pointer as a SequenceRequestHandler (nil for 0).
+// SequenceRequestHandlerFromID adopts an existing Objective-C object as a SequenceRequestHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func SequenceRequestHandlerFromID(id objc.ID) *SequenceRequestHandler {
 	if id == 0 {
 		return nil
 	}
-	return &SequenceRequestHandler{inner: raw.VNSequenceRequestHandlerFromID(id)}
+	x := &SequenceRequestHandler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSequenceRequestHandler creates a new [SequenceRequestHandler].
+// sequenceRequestHandlerAdopt wraps an Objective-C object that this code just created as a
+// SequenceRequestHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sequenceRequestHandlerAdopt(id objc.ID) *SequenceRequestHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &SequenceRequestHandler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SequenceRequestHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SequenceRequestHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SequenceRequestHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SequenceRequestHandler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSequenceRequestHandler creates a new SequenceRequestHandler.
 func NewSequenceRequestHandler() *SequenceRequestHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNSequenceRequestHandler")), objc.RegisterName("new"))
-	return &SequenceRequestHandler{inner: raw.VNSequenceRequestHandlerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNSequenceRequestHandler")), objc.RegisterName("new"))
+	return sequenceRequestHandlerAdopt(_id)
 }
 
-// Schedules one or more Vision requests to be performed on a Core Video pixel buffer.
-//
-// PerformRequestsOnCVPixelBufferError calls the underlying PerformRequestsOnCVPixelBufferError.
-func (x *SequenceRequestHandler) PerformRequestsOnCVPixelBufferError(requests *foundation.NSArray[*raw.VNRequest], pixelBuffer unsafe.Pointer) (bool, error) {
-	return x.inner.PerformRequestsOnCVPixelBufferError(requests, pixelBuffer)
+// PerformRequestsOnCGImage schedules Vision requests to be performed on a Core Graphics image.
+func (x *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Schedules one or more Vision requests to be performed on a Core Video pixel buffer with known orientation.
-//
-// PerformRequestsOnCVPixelBufferOrientationError calls the underlying PerformRequestsOnCVPixelBufferOrientationError.
-func (x *SequenceRequestHandler) PerformRequestsOnCVPixelBufferOrientationError(requests *foundation.NSArray[*raw.VNRequest], pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error) {
-	return x.inner.PerformRequestsOnCVPixelBufferOrientationError(requests, pixelBuffer, orientation)
+// PerformRequestsOnCIImage schedules one or more Vision requests to be performed on Core Image image data.
+func (x *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, image obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCIImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Schedules Vision requests to be performed on a Core Graphics image.
-//
-// PerformRequestsOnCGImageError calls the underlying PerformRequestsOnCGImageError.
-func (x *SequenceRequestHandler) PerformRequestsOnCGImageError(requests *foundation.NSArray[*raw.VNRequest], image unsafe.Pointer) (bool, error) {
-	return x.inner.PerformRequestsOnCGImageError(requests, image)
+// PerformRequestsOnImageURL schedules one or more Vision requests to be performed on an image.
+func (x *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, imageURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onImageURL:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), rt.FileURL(imageURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Schedules one or more Vision requests to be performed on a Core Graphics image with known orientation.
-//
-// PerformRequestsOnCGImageOrientationError calls the underlying PerformRequestsOnCGImageOrientationError.
-func (x *SequenceRequestHandler) PerformRequestsOnCGImageOrientationError(requests *foundation.NSArray[*raw.VNRequest], image unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error) {
-	return x.inner.PerformRequestsOnCGImageOrientationError(requests, image, orientation)
+// PerformRequestsOnImageData schedules one or more Vision requests to be performed on raw image data.
+func (x *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onImageData:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(imageData), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Schedules one or more Vision requests to be performed on Core Image image data.
-//
-// PerformRequestsOnCIImageError calls the underlying PerformRequestsOnCIImageError.
-func (x *SequenceRequestHandler) PerformRequestsOnCIImageError(requests *foundation.NSArray[*raw.VNRequest], image *coreimage.CIImage) (bool, error) {
-	return x.inner.PerformRequestsOnCIImageError(requests, image)
-}
-
-// Schedules one or more Vision requests to be performed on Core Image image data with known orientation.
-//
-// PerformRequestsOnCIImageOrientationError calls the underlying PerformRequestsOnCIImageOrientationError.
-func (x *SequenceRequestHandler) PerformRequestsOnCIImageOrientationError(requests *foundation.NSArray[*raw.VNRequest], image *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation) (bool, error) {
-	return x.inner.PerformRequestsOnCIImageOrientationError(requests, image, orientation)
-}
-
-// Schedules one or more Vision requests to be performed on an image.
-//
-// PerformRequestsOnImageURLError calls the underlying PerformRequestsOnImageURLError.
-func (x *SequenceRequestHandler) PerformRequestsOnImageURLError(requests *foundation.NSArray[*raw.VNRequest], imageURL string) (bool, error) {
-	return x.inner.PerformRequestsOnImageURLError(requests, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)))
-}
-
-// Schedules one or more Vision requests to be performed on an image with known orientation, at a specific URL.
-//
-// PerformRequestsOnImageURLOrientationError calls the underlying PerformRequestsOnImageURLOrientationError.
-func (x *SequenceRequestHandler) PerformRequestsOnImageURLOrientationError(requests *foundation.NSArray[*raw.VNRequest], imageURL string, orientation imageio.CGImagePropertyOrientation) (bool, error) {
-	return x.inner.PerformRequestsOnImageURLOrientationError(requests, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)), orientation)
-}
-
-// Schedules one or more Vision requests to be performed on raw image data.
-//
-// PerformRequestsOnImageDataError calls the underlying PerformRequestsOnImageDataError.
-func (x *SequenceRequestHandler) PerformRequestsOnImageDataError(requests *foundation.NSArray[*raw.VNRequest], imageData *foundation.NSData) (bool, error) {
-	return x.inner.PerformRequestsOnImageDataError(requests, imageData)
-}
-
-// Schedules one or more Vision requests to be performed on raw data containing an image with known orientation.
-//
-// PerformRequestsOnImageDataOrientationError calls the underlying PerformRequestsOnImageDataOrientationError.
-func (x *SequenceRequestHandler) PerformRequestsOnImageDataOrientationError(requests *foundation.NSArray[*raw.VNRequest], imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation) (bool, error) {
-	return x.inner.PerformRequestsOnImageDataOrientationError(requests, imageData, orientation)
-}
-
-// Performs one or more requests on an image contained within a sample buffer.
-//
-// PerformRequestsOnCMSampleBufferError calls the underlying PerformRequestsOnCMSampleBufferError.
-func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBufferError(requests *foundation.NSArray[*raw.VNRequest], sampleBuffer unsafe.Pointer) (bool, error) {
-	return x.inner.PerformRequestsOnCMSampleBufferError(requests, sampleBuffer)
-}
-
-// Performs one or more requests on an image of a specified orientation contained within a sample buffer.
-//
-// PerformRequestsOnCMSampleBufferOrientationError calls the underlying PerformRequestsOnCMSampleBufferOrientationError.
-func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBufferOrientationError(requests *foundation.NSArray[*raw.VNRequest], sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error) {
-	return x.inner.PerformRequestsOnCMSampleBufferOrientationError(requests, sampleBuffer, orientation)
+// PerformRequestsOnCMSampleBuffer performs one or more requests on an image contained within a sample buffer.
+func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCMSampleBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sampleBuffer), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // SequenceRequestHandlerable is the interface implemented by [SequenceRequestHandler], for mocking and DI.
 type SequenceRequestHandlerable interface {
-	Unwrap() *raw.VNSequenceRequestHandler
-	PerformRequestsOnCVPixelBufferError(requests *foundation.NSArray[*raw.VNRequest], pixelBuffer unsafe.Pointer) (bool, error)
-	PerformRequestsOnCVPixelBufferOrientationError(requests *foundation.NSArray[*raw.VNRequest], pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error)
-	PerformRequestsOnCGImageError(requests *foundation.NSArray[*raw.VNRequest], image unsafe.Pointer) (bool, error)
-	PerformRequestsOnCGImageOrientationError(requests *foundation.NSArray[*raw.VNRequest], image unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error)
-	PerformRequestsOnCIImageError(requests *foundation.NSArray[*raw.VNRequest], image *coreimage.CIImage) (bool, error)
-	PerformRequestsOnCIImageOrientationError(requests *foundation.NSArray[*raw.VNRequest], image *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation) (bool, error)
-	PerformRequestsOnImageURLError(requests *foundation.NSArray[*raw.VNRequest], imageURL string) (bool, error)
-	PerformRequestsOnImageURLOrientationError(requests *foundation.NSArray[*raw.VNRequest], imageURL string, orientation imageio.CGImagePropertyOrientation) (bool, error)
-	PerformRequestsOnImageDataError(requests *foundation.NSArray[*raw.VNRequest], imageData *foundation.NSData) (bool, error)
-	PerformRequestsOnImageDataOrientationError(requests *foundation.NSArray[*raw.VNRequest], imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation) (bool, error)
-	PerformRequestsOnCMSampleBufferError(requests *foundation.NSArray[*raw.VNRequest], sampleBuffer unsafe.Pointer) (bool, error)
-	PerformRequestsOnCMSampleBufferOrientationError(requests *foundation.NSArray[*raw.VNRequest], sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error)
+	obj.Object
+	PerformRequestsOnCGImage(requests []*Request, image obj.Object) error
+	PerformRequestsOnCIImage(requests []*Request, image obj.Object) error
+	PerformRequestsOnImageURL(requests []*Request, imageURL string) error
+	PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error
+	PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error
 }
 
 var _ SequenceRequestHandlerable = (*SequenceRequestHandler)(nil)

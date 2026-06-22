@@ -5,102 +5,102 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An observation that provides the body points the analysis recognized.
+// HumanBodyPoseObservation is an idiomatic wrapper over the Objective-C class VNHumanBodyPoseObservation.
 //
-// HumanBodyPoseObservation wraps [raw.VNHumanBodyPoseObservation] with a fluent Go API.
+// It embeds [RecognizedPointsObservation], promoting that type's methods.
+//
+// An observation that provides the body points the analysis recognized.
 type HumanBodyPoseObservation struct {
-	inner *raw.VNHumanBodyPoseObservation
+	RecognizedPointsObservation
 }
 
-// Unwrap returns the underlying [raw.VNHumanBodyPoseObservation].
-func (x *HumanBodyPoseObservation) Unwrap() *raw.VNHumanBodyPoseObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HumanBodyPoseObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// HumanBodyPoseObservationFromID adopts an existing object pointer as a HumanBodyPoseObservation (nil for 0).
+// HumanBodyPoseObservationFromID adopts an existing Objective-C object as a HumanBodyPoseObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func HumanBodyPoseObservationFromID(id objc.ID) *HumanBodyPoseObservation {
 	if id == 0 {
 		return nil
 	}
-	return &HumanBodyPoseObservation{inner: raw.VNHumanBodyPoseObservationFromID(id)}
+	x := &HumanBodyPoseObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHumanBodyPoseObservation creates a new [HumanBodyPoseObservation].
+// humanBodyPoseObservationAdopt wraps an Objective-C object that this code just created as a
+// HumanBodyPoseObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func humanBodyPoseObservationAdopt(id objc.ID) *HumanBodyPoseObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &HumanBodyPoseObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewHumanBodyPoseObservation creates a new HumanBodyPoseObservation.
 func NewHumanBodyPoseObservation() *HumanBodyPoseObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNHumanBodyPoseObservation")), objc.RegisterName("new"))
-	return &HumanBodyPoseObservation{inner: raw.VNHumanBodyPoseObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNHumanBodyPoseObservation")), objc.RegisterName("new"))
+	return humanBodyPoseObservationAdopt(_id)
 }
 
-// Retrieves the recognized point for a joint name.
-//
-// RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
-func (x *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
-	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
-	if _err != nil {
-		return nil, _err
+// RecognizedPointForJointNameError retrieves the recognized point for a joint name.
+func (x *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return RecognizedPointFromID(_r), nil
+}
+
+// RecognizedPointsForJointsGroupNameError retrieves the recognized points associated with the joint group name.
+func (x *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RecognizedPoint{inner: _r}, nil
+	return obj.Wrap(_r), nil
 }
 
-// Retrieves the recognized points associated with the joint group name.
-//
-// RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
-func (x *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
-	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
-}
-
-// @brief All of the joint names available in the observation.
+// AvailableJointNames all of the joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
-func (x *HumanBodyPoseObservation) AvailableJointNames() []*foundation.NSString {
-	arr := x.inner.AvailableJointNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *HumanBodyPoseObservation) AvailableJointNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @brief All of the joints group names available in the observation.
+// AvailableJointsGroupNames all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
-func (x *HumanBodyPoseObservation) AvailableJointsGroupNames() []*foundation.NSString {
-	arr := x.inner.AvailableJointsGroupNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
-}
-
-func (x *HumanBodyPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
-	return &x.inner.VNRecognizedPointsObservation
-}
-
-func (x *HumanBodyPoseObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNRecognizedPointsObservation.VNObservation
+func (x *HumanBodyPoseObservation) AvailableJointsGroupNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointsGroupNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HumanBodyPoseObservationable is the interface implemented by [HumanBodyPoseObservation], for mocking and DI.
 type HumanBodyPoseObservationable interface {
-	Unwrap() *raw.VNHumanBodyPoseObservation
-	RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error)
-	RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error)
-	AvailableJointNames() []*foundation.NSString
-	AvailableJointsGroupNames() []*foundation.NSString
+	obj.Object
+	RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error)
+	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
+	AvailableJointNames() []obj.Object
+	AvailableJointsGroupNames() []obj.Object
 }
 
 var _ HumanBodyPoseObservationable = (*HumanBodyPoseObservation)(nil)
+
+var _ RecognizedPointsObservationProvider = (*HumanBodyPoseObservation)(nil)
+
+var _ ObservationProvider = (*HumanBodyPoseObservation)(nil)

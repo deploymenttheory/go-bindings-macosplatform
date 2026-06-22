@@ -5,10 +5,11 @@
 package ituneslibrary
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// LibMediaEntityProvider is implemented by LibMediaEntity and any idiomatic type wrapping a ITLibMediaEntity subclass.
+// LibMediaEntityProvider is accepted wherever a ITLibMediaEntity (or one of its subclasses) is expected.
 type LibMediaEntityProvider interface {
-	asLibMediaEntity() *raw.ITLibMediaEntity
+	objref.Object
+	isLibMediaEntity()
 }

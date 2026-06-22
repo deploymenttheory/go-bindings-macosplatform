@@ -5,150 +5,183 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRUnitTestingClusterTestEventEvent wraps [raw.MTRUnitTestingClusterTestEventEvent] with a fluent Go API.
+// MTRUnitTestingClusterTestEventEvent is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestEventEvent.
+//
+// MTRUnitTestingClusterTestEventEvent is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestEventEvent] and pass it where a MTRUnitTestingClusterTestEventEvent is accepted.
 type MTRUnitTestingClusterTestEventEvent struct {
-	inner *raw.MTRUnitTestingClusterTestEventEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEventEvent].
-func (x *MTRUnitTestingClusterTestEventEvent) Unwrap() *raw.MTRUnitTestingClusterTestEventEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestEventEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRUnitTestingClusterTestEventEventFromID adopts an existing object pointer as a MTRUnitTestingClusterTestEventEvent (nil for 0).
+// MTRUnitTestingClusterTestEventEventFromID adopts an existing Objective-C object as a MTRUnitTestingClusterTestEventEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterTestEventEventFromID(id objc.ID) *MTRUnitTestingClusterTestEventEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterTestEventEvent{inner: raw.MTRUnitTestingClusterTestEventEventFromID(id)}
-}
-
-// NewMTRUnitTestingClusterTestEventEvent creates a new [MTRUnitTestingClusterTestEventEvent].
-func NewMTRUnitTestingClusterTestEventEvent() *MTRUnitTestingClusterTestEventEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestEventEvent")), objc.RegisterName("new"))
-	return &MTRUnitTestingClusterTestEventEvent{inner: raw.MTRUnitTestingClusterTestEventEventFromID(_id)}
-}
-
-// WithArg1 sets the arg1 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestEventEvent) WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent {
-	x.inner.SetArg1(arg1)
+	x := &MTRUnitTestingClusterTestEventEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithArg2 sets the arg2 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestEventEvent) WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent {
-	x.inner.SetArg2(arg2)
-	return x
-}
-
-// WithArg3 sets the arg3 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestEventEvent) WithArg3(arg3 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent {
-	x.inner.SetArg3(arg3)
-	return x
-}
-
-// WithArg4 sets the arg4 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestEventEvent {
-	x.inner.SetArg4(arg4.asMTRUnitTestingClusterSimpleStruct())
-	return x
-}
-
-// Arg1 calls the underlying Arg1.
-func (x *MTRUnitTestingClusterTestEventEvent) Arg1() *foundation.NSNumber {
-	return x.inner.Arg1()
-}
-
-// SetArg1 calls the underlying SetArg1.
-func (x *MTRUnitTestingClusterTestEventEvent) SetArg1(arg1 *foundation.NSNumber) {
-	x.inner.SetArg1(arg1)
-}
-
-// Arg2 calls the underlying Arg2.
-func (x *MTRUnitTestingClusterTestEventEvent) Arg2() *foundation.NSNumber {
-	return x.inner.Arg2()
-}
-
-// SetArg2 calls the underlying SetArg2.
-func (x *MTRUnitTestingClusterTestEventEvent) SetArg2(arg2 *foundation.NSNumber) {
-	x.inner.SetArg2(arg2)
-}
-
-// Arg3 calls the underlying Arg3.
-func (x *MTRUnitTestingClusterTestEventEvent) Arg3() *foundation.NSNumber {
-	return x.inner.Arg3()
-}
-
-// SetArg3 calls the underlying SetArg3.
-func (x *MTRUnitTestingClusterTestEventEvent) SetArg3(arg3 *foundation.NSNumber) {
-	x.inner.SetArg3(arg3)
-}
-
-// Arg4 calls the underlying Arg4.
-func (x *MTRUnitTestingClusterTestEventEvent) Arg4() *MTRUnitTestingClusterSimpleStruct {
-	_r := x.inner.Arg4()
-	if _r == nil {
+// mTRUnitTestingClusterTestEventEventAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterTestEventEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterTestEventEventAdopt(id objc.ID) *MTRUnitTestingClusterTestEventEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+	x := &MTRUnitTestingClusterTestEventEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetArg4 calls the underlying SetArg4.
-func (x *MTRUnitTestingClusterTestEventEvent) SetArg4(arg4 *raw.MTRUnitTestingClusterSimpleStruct) {
-	x.inner.SetArg4(arg4)
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterTestEventEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Arg5 calls the underlying Arg5.
-func (x *MTRUnitTestingClusterTestEventEvent) Arg5() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg5()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterTestEventEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetArg5 calls the underlying SetArg5.
-func (x *MTRUnitTestingClusterTestEventEvent) SetArg5(arg5 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg5(arg5)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterTestEventEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Arg6 calls the underlying Arg6.
-func (x *MTRUnitTestingClusterTestEventEvent) Arg6() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg6()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestEventEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetArg6 calls the underlying SetArg6.
-func (x *MTRUnitTestingClusterTestEventEvent) SetArg6(arg6 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg6(arg6)
+// WithArg1 sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return x
 }
 
-func (x *MTRUnitTestingClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent {
-	return x.inner
+// WithArg2 sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
+	return x
+}
+
+// WithArg3 sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRUnitTestingClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
+	return x
+}
+
+// WithArg4 sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
+	return x
+}
+
+// Arg1 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+	return obj.Wrap(_r)
+}
+
+// SetArg1 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg1(arg1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+}
+
+// Arg2 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg2"))
+	return obj.Wrap(_r)
+}
+
+// SetArg2 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg2(arg2 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
+}
+
+// Arg3 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg3() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg3"))
+	return obj.Wrap(_r)
+}
+
+// SetArg3 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg3(arg3 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
+}
+
+// Arg4 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg4() *MTRUnitTestingClusterSimpleStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg4"))
+	return MTRUnitTestingClusterSimpleStructFromID(_r)
+}
+
+// SetArg4 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg4(arg4 *MTRUnitTestingClusterSimpleStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
+}
+
+// Arg5 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg5() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg5"))
+	return obj.Wrap(_r)
+}
+
+// SetArg5 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg5(arg5 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
+}
+
+// Arg6 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg6() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg6"))
+	return obj.Wrap(_r)
+}
+
+// SetArg6 wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg6(arg6 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 }
 
 // MTRUnitTestingClusterTestEventEventable is the interface implemented by [MTRUnitTestingClusterTestEventEvent], for mocking and DI.
 type MTRUnitTestingClusterTestEventEventable interface {
-	Unwrap() *raw.MTRUnitTestingClusterTestEventEvent
-	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent
-	WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent
-	WithArg3(arg3 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent
+	obj.Object
+	WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEventEvent
+	WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestEventEvent
+	WithArg3(arg3 obj.Object) *MTRUnitTestingClusterTestEventEvent
 	WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestEventEvent
-	Arg1() *foundation.NSNumber
-	SetArg1(arg1 *foundation.NSNumber)
-	Arg2() *foundation.NSNumber
-	SetArg2(arg2 *foundation.NSNumber)
-	Arg3() *foundation.NSNumber
-	SetArg3(arg3 *foundation.NSNumber)
+	Arg1() obj.Object
+	SetArg1(arg1 obj.Object)
+	Arg2() obj.Object
+	SetArg2(arg2 obj.Object)
+	Arg3() obj.Object
+	SetArg3(arg3 obj.Object)
 	Arg4() *MTRUnitTestingClusterSimpleStruct
-	SetArg4(arg4 *raw.MTRUnitTestingClusterSimpleStruct)
-	Arg5() *foundation.NSArray[objc.ID]
-	SetArg5(arg5 *foundation.NSArray[objc.ID])
-	Arg6() *foundation.NSArray[objc.ID]
-	SetArg6(arg6 *foundation.NSArray[objc.ID])
+	SetArg4(arg4 *MTRUnitTestingClusterSimpleStruct)
+	Arg5() obj.Object
+	SetArg5(arg5 obj.Object)
+	Arg6() obj.Object
+	SetArg6(arg6 obj.Object)
 }
 
 var _ MTRUnitTestingClusterTestEventEventable = (*MTRUnitTestingClusterTestEventEvent)(nil)
+
+// isMTRUnitTestingClusterTestEventEvent marks MTRUnitTestingClusterTestEventEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestEventEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestEventEvent) isMTRUnitTestingClusterTestEventEvent() {}
+
+var _ MTRUnitTestingClusterTestEventEventProvider = (*MTRUnitTestingClusterTestEventEvent)(nil)

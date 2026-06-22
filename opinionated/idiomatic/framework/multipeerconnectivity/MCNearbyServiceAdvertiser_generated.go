@@ -5,108 +5,112 @@
 package multipeerconnectivity
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
+// NearbyServiceAdvertiser is an idiomatic wrapper over the Objective-C class MCNearbyServiceAdvertiser.
 //
-// NearbyServiceAdvertiser wraps [raw.MCNearbyServiceAdvertiser] with a fluent Go API.
+// The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
 type NearbyServiceAdvertiser struct {
-	inner *raw.MCNearbyServiceAdvertiser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MCNearbyServiceAdvertiser].
-func (x *NearbyServiceAdvertiser) Unwrap() *raw.MCNearbyServiceAdvertiser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NearbyServiceAdvertiser) ID() objc.ID { return x.inner.Ptr() }
-
-// NearbyServiceAdvertiserFromID adopts an existing object pointer as a NearbyServiceAdvertiser (nil for 0).
+// NearbyServiceAdvertiserFromID adopts an existing Objective-C object as a NearbyServiceAdvertiser
+// (nil for 0), retaining it and registering a release finalizer.
 func NearbyServiceAdvertiserFromID(id objc.ID) *NearbyServiceAdvertiser {
 	if id == 0 {
 		return nil
 	}
-	return &NearbyServiceAdvertiser{inner: raw.MCNearbyServiceAdvertiserFromID(id)}
-}
-
-// Initializes an advertiser object.
-//
-// NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType creates a new [NearbyServiceAdvertiser].
-func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *raw.MCPeerID, info purego.IDer, serviceType string) *NearbyServiceAdvertiser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCNearbyServiceAdvertiser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), myPeerID.Ptr(), info.ID(), foundation.NSStringStringWithUTF8String(serviceType).Ptr())
-	return &NearbyServiceAdvertiser{inner: raw.MCNearbyServiceAdvertiserFromID(_id)}
-}
-
-// The delegate object that handles advertising-related events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *NearbyServiceAdvertiser) WithDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate) *NearbyServiceAdvertiser {
-	x.inner.SetDelegate(delegate)
+	x := &NearbyServiceAdvertiser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Begins advertising the service provided by a local peer.
-//
-// StartAdvertisingPeer calls the underlying StartAdvertisingPeer.
-func (x *NearbyServiceAdvertiser) StartAdvertisingPeer() {
-	x.inner.StartAdvertisingPeer()
-}
-
-// Stops advertising the service provided by a local peer.
-//
-// StopAdvertisingPeer calls the underlying StopAdvertisingPeer.
-func (x *NearbyServiceAdvertiser) StopAdvertisingPeer() {
-	x.inner.StopAdvertisingPeer()
-}
-
-// Delegate calls the underlying Delegate.
-func (x *NearbyServiceAdvertiser) Delegate() raw.MCNearbyServiceAdvertiserDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *NearbyServiceAdvertiser) SetDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// MyPeerID calls the underlying MyPeerID.
-func (x *NearbyServiceAdvertiser) MyPeerID() *PeerID {
-	_r := x.inner.MyPeerID()
-	if _r == nil {
+// nearbyServiceAdvertiserAdopt wraps an Objective-C object that this code just created as a
+// NearbyServiceAdvertiser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nearbyServiceAdvertiserAdopt(id objc.ID) *NearbyServiceAdvertiser {
+	if id == 0 {
 		return nil
 	}
-	return &PeerID{inner: _r}
+	x := &NearbyServiceAdvertiser{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DiscoveryInfo calls the underlying DiscoveryInfo.
-func (x *NearbyServiceAdvertiser) DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.DiscoveryInfo()
+// Description returns the object's -description text.
+func (x *NearbyServiceAdvertiser) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ServiceType calls the underlying ServiceType.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NearbyServiceAdvertiser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NearbyServiceAdvertiser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NearbyServiceAdvertiser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType initializes an advertiser object.
+func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *PeerID, info obj.Object, serviceType string) *NearbyServiceAdvertiser {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MCNearbyServiceAdvertiser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), objref.IDOf(myPeerID), objref.IDOf(info), purego.NSString(serviceType))
+	return nearbyServiceAdvertiserAdopt(_id)
+}
+
+// StartAdvertisingPeer begins advertising the service provided by a local peer.
+func (x *NearbyServiceAdvertiser) StartAdvertisingPeer() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAdvertisingPeer"))
+}
+
+// StopAdvertisingPeer stops advertising the service provided by a local peer.
+func (x *NearbyServiceAdvertiser) StopAdvertisingPeer() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAdvertisingPeer"))
+}
+
+// MyPeerID wraps the corresponding Objective-C method.
+func (x *NearbyServiceAdvertiser) MyPeerID() *PeerID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
+	return PeerIDFromID(_r)
+}
+
+// DiscoveryInfo wraps the corresponding Objective-C method.
+func (x *NearbyServiceAdvertiser) DiscoveryInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryInfo"))
+	return obj.Wrap(_r)
+}
+
+// ServiceType wraps the corresponding Objective-C method.
 func (x *NearbyServiceAdvertiser) ServiceType() string {
-	_r := x.inner.ServiceType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NearbyServiceAdvertiserable is the interface implemented by [NearbyServiceAdvertiser], for mocking and DI.
 type NearbyServiceAdvertiserable interface {
-	Unwrap() *raw.MCNearbyServiceAdvertiser
-	WithDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate) *NearbyServiceAdvertiser
+	obj.Object
 	StartAdvertisingPeer()
 	StopAdvertisingPeer()
-	Delegate() raw.MCNearbyServiceAdvertiserDelegate
-	SetDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate)
 	MyPeerID() *PeerID
-	DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	DiscoveryInfo() obj.Object
 	ServiceType() string
 }
 

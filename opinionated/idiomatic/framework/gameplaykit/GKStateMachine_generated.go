@@ -5,92 +5,89 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.
+// StateMachine is an idiomatic wrapper over the Objective-C class GKStateMachine.
 //
-// StateMachine wraps [raw.GKStateMachine] with a fluent Go API.
+// A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.
 type StateMachine struct {
-	inner *raw.GKStateMachine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKStateMachine].
-func (x *StateMachine) Unwrap() *raw.GKStateMachine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StateMachine) ID() objc.ID { return x.inner.Ptr() }
-
-// StateMachineFromID adopts an existing object pointer as a StateMachine (nil for 0).
+// StateMachineFromID adopts an existing Objective-C object as a StateMachine
+// (nil for 0), retaining it and registering a release finalizer.
 func StateMachineFromID(id objc.ID) *StateMachine {
 	if id == 0 {
 		return nil
 	}
-	return &StateMachine{inner: raw.GKStateMachineFromID(id)}
+	x := &StateMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a state machine with the specified states.
-//
-// NewStateMachineWithStates creates a new [StateMachine].
-func NewStateMachineWithStates(states *foundation.NSArray[*raw.GKState]) *StateMachine {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKStateMachine")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStates:"), states.Ptr())
-	return &StateMachine{inner: raw.GKStateMachineFromID(_id)}
+// stateMachineAdopt wraps an Objective-C object that this code just created as a
+// StateMachine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateMachineAdopt(id objc.ID) *StateMachine {
+	if id == 0 {
+		return nil
+	}
+	x := &StateMachine{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Tells the current state object to perform per-frame updates.
-//
-// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
+// Description returns the object's -description text.
+func (x *StateMachine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StateMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStateMachineWithStates initializes a state machine with the specified states.
+func NewStateMachineWithStates(states []*State) *StateMachine {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKStateMachine")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStates:"), purego.SliceToNSArray(states, func(_v *State) objc.ID { return objref.IDOf(_v) }))
+	return stateMachineAdopt(_id)
+}
+
+// UpdateWithDeltaTime tells the current state object to perform per-frame updates.
 func (x *StateMachine) UpdateWithDeltaTime(sec float64) {
-	x.inner.UpdateWithDeltaTime(sec)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), sec)
 }
 
-// Returns the state object in the state machine corresponding to the specified class.
-//
-// StateForClass calls the underlying StateForClass.
-func (x *StateMachine) StateForClass(stateClass objc.Class) *State {
-	_r := x.inner.StateForClass(stateClass)
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
-}
-
-// Returns a Boolean value indicating whether it is valid for the state machine to transition from its current state to a state of the specified class.
-//
-// CanEnterState calls the underlying CanEnterState.
-func (x *StateMachine) CanEnterState(stateClass objc.Class) bool {
-	return x.inner.CanEnterState(stateClass)
-}
-
-// Attempts to transition the state machine from its current state to a state of the specified class.
-//
-// EnterState calls the underlying EnterState.
-func (x *StateMachine) EnterState(stateClass objc.Class) bool {
-	return x.inner.EnterState(stateClass)
-}
-
-// The current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
-//
-// CurrentState calls the underlying CurrentState.
+// CurrentState the current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
 func (x *StateMachine) CurrentState() *State {
-	_r := x.inner.CurrentState()
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentState"))
+	return StateFromID(_r)
 }
 
 // StateMachineable is the interface implemented by [StateMachine], for mocking and DI.
 type StateMachineable interface {
-	Unwrap() *raw.GKStateMachine
+	obj.Object
 	UpdateWithDeltaTime(sec float64)
-	StateForClass(stateClass objc.Class) *State
-	CanEnterState(stateClass objc.Class) bool
-	EnterState(stateClass objc.Class) bool
 	CurrentState() *State
 }
 

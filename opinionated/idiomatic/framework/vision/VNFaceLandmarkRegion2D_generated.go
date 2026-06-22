@@ -5,87 +5,74 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// 2D geometry information for a specific facial feature.
+// FaceLandmarkRegion2D is an idiomatic wrapper over the Objective-C class VNFaceLandmarkRegion2D.
 //
-// FaceLandmarkRegion2D wraps [raw.VNFaceLandmarkRegion2D] with a fluent Go API.
+// It embeds [FaceLandmarkRegion], promoting that type's methods.
+//
+// 2D geometry information for a specific facial feature.
 type FaceLandmarkRegion2D struct {
-	inner *raw.VNFaceLandmarkRegion2D
+	FaceLandmarkRegion
 }
 
-// Unwrap returns the underlying [raw.VNFaceLandmarkRegion2D].
-func (x *FaceLandmarkRegion2D) Unwrap() *raw.VNFaceLandmarkRegion2D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FaceLandmarkRegion2D) ID() objc.ID { return x.inner.Ptr() }
-
-// FaceLandmarkRegion2DFromID adopts an existing object pointer as a FaceLandmarkRegion2D (nil for 0).
+// FaceLandmarkRegion2DFromID adopts an existing Objective-C object as a FaceLandmarkRegion2D
+// (nil for 0), retaining it and registering a release finalizer.
 func FaceLandmarkRegion2DFromID(id objc.ID) *FaceLandmarkRegion2D {
 	if id == 0 {
 		return nil
 	}
-	return &FaceLandmarkRegion2D{inner: raw.VNFaceLandmarkRegion2DFromID(id)}
+	x := &FaceLandmarkRegion2D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFaceLandmarkRegion2D creates a new [FaceLandmarkRegion2D].
-func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNFaceLandmarkRegion2D")), objc.RegisterName("new"))
-	return &FaceLandmarkRegion2D{inner: raw.VNFaceLandmarkRegion2DFromID(_id)}
-}
-
-// A buffer in memory containing landmark points in the coordinate space of the specified image size.
-//
-// PointsInImageOfSize calls the underlying PointsInImageOfSize.
-func (x *FaceLandmarkRegion2D) PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint {
-	return x.inner.PointsInImageOfSize(imageSize)
-}
-
-// @brief	Obtains the array of normalized landmark points. @discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does. @return the address of the array of pointCount points.
-//
-// NormalizedPoints calls the underlying NormalizedPoints.
-func (x *FaceLandmarkRegion2D) NormalizedPoints() unsafe.Pointer {
-	return x.inner.NormalizedPoints()
-}
-
-// @brief    Obtains the array of accuracy placement estimates per landmark point. @discussion    Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations @return NSArray object of NSNumber(s) initialized to floating point values.
-//
-// PrecisionEstimatesPerPoint returns the collection as a Go slice.
-func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []*foundation.NSNumber {
-	arr := x.inner.PrecisionEstimatesPerPoint()
-	if arr == nil {
+// faceLandmarkRegion2DAdopt wraps an Objective-C object that this code just created as a
+// FaceLandmarkRegion2D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func faceLandmarkRegion2DAdopt(id objc.ID) *FaceLandmarkRegion2D {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &FaceLandmarkRegion2D{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief Describes how to interpret the points provided by the region.
+// NewFaceLandmarkRegion2D creates a new FaceLandmarkRegion2D.
+func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNFaceLandmarkRegion2D")), objc.RegisterName("new"))
+	return faceLandmarkRegion2DAdopt(_id)
+}
+
+// PrecisionEstimatesPerPoint obtains the array of accuracy placement estimates per landmark point. Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations
 //
-// PointsClassification calls the underlying PointsClassification.
-func (x *FaceLandmarkRegion2D) PointsClassification() VNPointsClassification {
-	return VNPointsClassification(x.inner.PointsClassification())
+// PrecisionEstimatesPerPoint returns the collection as a Go slice.
+func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("precisionEstimatesPerPoint"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-func (x *FaceLandmarkRegion2D) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion {
-	return &x.inner.VNFaceLandmarkRegion
+// PointsClassification describes how to interpret the points provided by the region.
+func (x *FaceLandmarkRegion2D) PointsClassification() PointsClassification {
+	_r := objc.Send[PointsClassification](objref.IDOf(x), objc.RegisterName("pointsClassification"))
+	return _r
 }
 
 // FaceLandmarkRegion2Dable is the interface implemented by [FaceLandmarkRegion2D], for mocking and DI.
 type FaceLandmarkRegion2Dable interface {
-	Unwrap() *raw.VNFaceLandmarkRegion2D
-	PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint
-	NormalizedPoints() unsafe.Pointer
-	PrecisionEstimatesPerPoint() []*foundation.NSNumber
-	PointsClassification() VNPointsClassification
+	obj.Object
+	PrecisionEstimatesPerPoint() []obj.Object
+	PointsClassification() PointsClassification
 }
 
 var _ FaceLandmarkRegion2Dable = (*FaceLandmarkRegion2D)(nil)
+
+var _ FaceLandmarkRegionProvider = (*FaceLandmarkRegion2D)(nil)

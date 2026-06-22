@@ -5,59 +5,74 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples that store numerical values.
+// QuantityType is an idiomatic wrapper over the Objective-C class HKQuantityType.
 //
-// QuantityType wraps [raw.HKQuantityType] with a fluent Go API.
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples that store numerical values.
 type QuantityType struct {
-	inner *raw.HKQuantityType
+	SampleType
 }
 
-// Unwrap returns the underlying [raw.HKQuantityType].
-func (x *QuantityType) Unwrap() *raw.HKQuantityType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuantityType) ID() objc.ID { return x.inner.Ptr() }
-
-// QuantityTypeFromID adopts an existing object pointer as a QuantityType (nil for 0).
+// QuantityTypeFromID adopts an existing Objective-C object as a QuantityType
+// (nil for 0), retaining it and registering a release finalizer.
 func QuantityTypeFromID(id objc.ID) *QuantityType {
 	if id == 0 {
 		return nil
 	}
-	return &QuantityType{inner: raw.HKQuantityTypeFromID(id)}
+	x := &QuantityType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQuantityType creates a new [QuantityType].
+// quantityTypeAdopt wraps an Objective-C object that this code just created as a
+// QuantityType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quantityTypeAdopt(id objc.ID) *QuantityType {
+	if id == 0 {
+		return nil
+	}
+	x := &QuantityType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewQuantityType creates a new QuantityType.
 func NewQuantityType() *QuantityType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantityType")), objc.RegisterName("new"))
-	return &QuantityType{inner: raw.HKQuantityTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantityType")), objc.RegisterName("new"))
+	return quantityTypeAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
-//
-// IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
-func (x *QuantityType) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
-	return x.inner.IsCompatibleWithUnit(unit)
+// IsCompatibleWithUnit returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
+func (x *QuantityType) IsCompatibleWithUnit(unit *Unit) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
+	return _r
 }
 
-// AggregationStyle calls the underlying AggregationStyle.
-func (x *QuantityType) AggregationStyle() HKQuantityAggregationStyle {
-	return HKQuantityAggregationStyle(x.inner.AggregationStyle())
+// AggregationStyle wraps the corresponding Objective-C method.
+func (x *QuantityType) AggregationStyle() QuantityAggregationStyle {
+	_r := objc.Send[QuantityAggregationStyle](objref.IDOf(x), objc.RegisterName("aggregationStyle"))
+	return _r
 }
-
-func (x *QuantityType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *QuantityType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
 // QuantityTypeable is the interface implemented by [QuantityType], for mocking and DI.
 type QuantityTypeable interface {
-	Unwrap() *raw.HKQuantityType
-	IsCompatibleWithUnit(unit *raw.HKUnit) bool
-	AggregationStyle() HKQuantityAggregationStyle
+	obj.Object
+	IsCompatibleWithUnit(unit *Unit) bool
+	AggregationStyle() QuantityAggregationStyle
 }
 
 var _ QuantityTypeable = (*QuantityType)(nil)
+
+var _ SampleTypeProvider = (*QuantityType)(nil)
+
+var _ ObjectTypeProvider = (*QuantityType)(nil)

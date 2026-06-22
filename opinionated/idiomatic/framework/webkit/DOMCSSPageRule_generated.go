@@ -5,84 +5,86 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSPageRule wraps [raw.DOMCSSPageRule] with a fluent Go API.
+// DOMCSSPageRule is an idiomatic wrapper over the Objective-C class DOMCSSPageRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSPageRule struct {
-	inner *raw.DOMCSSPageRule
+	DOMCSSRule
 }
 
-// Unwrap returns the underlying [raw.DOMCSSPageRule].
-func (x *DOMCSSPageRule) Unwrap() *raw.DOMCSSPageRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSPageRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSPageRuleFromID adopts an existing object pointer as a DOMCSSPageRule (nil for 0).
+// DOMCSSPageRuleFromID adopts an existing Objective-C object as a DOMCSSPageRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSPageRuleFromID(id objc.ID) *DOMCSSPageRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSPageRule{inner: raw.DOMCSSPageRuleFromID(id)}
-}
-
-// NewDOMCSSPageRule creates a new [DOMCSSPageRule].
-func NewDOMCSSPageRule() *DOMCSSPageRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSPageRule")), objc.RegisterName("new"))
-	return &DOMCSSPageRule{inner: raw.DOMCSSPageRuleFromID(_id)}
-}
-
-// WithSelectorText sets the selectorText property and returns the receiver for chaining.
-func (x *DOMCSSPageRule) WithSelectorText(selectorText string) *DOMCSSPageRule {
-	x.inner.SetSelectorText(foundation.NSStringStringWithUTF8String(selectorText))
+	x := &DOMCSSPageRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSPageRule) WithCssText(cssText string) *DOMCSSPageRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
-	return x
-}
-
-// SelectorText calls the underlying SelectorText.
-func (x *DOMCSSPageRule) SelectorText() string {
-	_r := x.inner.SelectorText()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetSelectorText calls the underlying SetSelectorText.
-func (x *DOMCSSPageRule) SetSelectorText(selectorText string) {
-	x.inner.SetSelectorText(foundation.NSStringStringWithUTF8String(selectorText))
-}
-
-// Style calls the underlying Style.
-func (x *DOMCSSPageRule) Style() *DOMCSSStyleDeclaration {
-	_r := x.inner.Style()
-	if _r == nil {
+// dOMCSSPageRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSPageRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSPageRuleAdopt(id objc.ID) *DOMCSSPageRule {
+	if id == 0 {
 		return nil
 	}
-	return &DOMCSSStyleDeclaration{inner: _r}
+	x := &DOMCSSPageRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DOMCSSPageRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
+// NewDOMCSSPageRule creates a new DOMCSSPageRule.
+func NewDOMCSSPageRule() *DOMCSSPageRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSPageRule")), objc.RegisterName("new"))
+	return dOMCSSPageRuleAdopt(_id)
+}
 
-func (x *DOMCSSPageRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
+// WithSelectorText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSPageRule) WithSelectorText(selectorText string) *DOMCSSPageRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
+	return x
+}
 
-func (x *DOMCSSPageRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSPageRule) WithCssText(cssText string) *DOMCSSPageRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+// SelectorText wraps the corresponding Objective-C method.
+func (x *DOMCSSPageRule) SelectorText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectorText"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetSelectorText wraps the corresponding Objective-C method.
+func (x *DOMCSSPageRule) SetSelectorText(selectorText string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
+}
+
+// Style wraps the corresponding Objective-C method.
+func (x *DOMCSSPageRule) Style() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
 // DOMCSSPageRuleable is the interface implemented by [DOMCSSPageRule], for mocking and DI.
 type DOMCSSPageRuleable interface {
-	Unwrap() *raw.DOMCSSPageRule
+	obj.Object
 	WithSelectorText(selectorText string) *DOMCSSPageRule
 	WithCssText(cssText string) *DOMCSSPageRule
 	SelectorText() string
@@ -91,3 +93,9 @@ type DOMCSSPageRuleable interface {
 }
 
 var _ DOMCSSPageRuleable = (*DOMCSSPageRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSPageRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSPageRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSPageRule)(nil)

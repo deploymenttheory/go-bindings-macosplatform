@@ -5,83 +5,115 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTimeSynchronizationClusterTimeZoneStatusEvent wraps [raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent] with a fluent Go API.
+// MTRTimeSynchronizationClusterTimeZoneStatusEvent is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterTimeZoneStatusEvent.
 type MTRTimeSynchronizationClusterTimeZoneStatusEvent struct {
-	inner *raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent].
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTimeSynchronizationClusterTimeZoneStatusEventFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterTimeZoneStatusEvent (nil for 0).
+// MTRTimeSynchronizationClusterTimeZoneStatusEventFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterTimeZoneStatusEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTimeSynchronizationClusterTimeZoneStatusEventFromID(id objc.ID) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTimeSynchronizationClusterTimeZoneStatusEvent{inner: raw.MTRTimeSynchronizationClusterTimeZoneStatusEventFromID(id)}
+	x := &MTRTimeSynchronizationClusterTimeZoneStatusEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTimeSynchronizationClusterTimeZoneStatusEvent creates a new [MTRTimeSynchronizationClusterTimeZoneStatusEvent].
+// mTRTimeSynchronizationClusterTimeZoneStatusEventAdopt wraps an Objective-C object that this code just created as a
+// MTRTimeSynchronizationClusterTimeZoneStatusEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTimeSynchronizationClusterTimeZoneStatusEventAdopt(id objc.ID) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTimeSynchronizationClusterTimeZoneStatusEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRTimeSynchronizationClusterTimeZoneStatusEvent creates a new MTRTimeSynchronizationClusterTimeZoneStatusEvent.
 func NewMTRTimeSynchronizationClusterTimeZoneStatusEvent() *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTimeSynchronizationClusterTimeZoneStatusEvent")), objc.RegisterName("new"))
-	return &MTRTimeSynchronizationClusterTimeZoneStatusEvent{inner: raw.MTRTimeSynchronizationClusterTimeZoneStatusEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterTimeZoneStatusEvent")), objc.RegisterName("new"))
+	return mTRTimeSynchronizationClusterTimeZoneStatusEventAdopt(_id)
 }
 
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
-	x.inner.SetOffset(offset)
+// WithOffset sets the property and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Offset calls the underlying Offset.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() *foundation.NSNumber {
-	return x.inner.Offset()
+// Offset wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offset"))
+	return obj.Wrap(_r)
 }
 
-// SetOffset calls the underlying SetOffset.
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetOffset(offset *foundation.NSNumber) {
-	x.inner.SetOffset(offset)
+// SetOffset wraps the corresponding Objective-C method.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetOffset(offset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // MTRTimeSynchronizationClusterTimeZoneStatusEventable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneStatusEvent], for mocking and DI.
 type MTRTimeSynchronizationClusterTimeZoneStatusEventable interface {
-	Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent
-	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
+	obj.Object
+	WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
 	WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
-	Offset() *foundation.NSNumber
-	SetOffset(offset *foundation.NSNumber)
+	Offset() obj.Object
+	SetOffset(offset obj.Object)
 	Name() string
 	SetName(name string)
 }

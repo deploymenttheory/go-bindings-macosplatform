@@ -5,25 +5,29 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// BasePlayerProvider is implemented by BasePlayer and any idiomatic type wrapping a GKBasePlayer subclass.
+// BasePlayerProvider is accepted wherever a GKBasePlayer (or one of its subclasses) is expected.
 type BasePlayerProvider interface {
-	asBasePlayer() *raw.GKBasePlayer
+	objref.Object
+	isBasePlayer()
 }
 
-// ChallengeProvider is implemented by Challenge and any idiomatic type wrapping a GKChallenge subclass.
+// ChallengeProvider is accepted wherever a GKChallenge (or one of its subclasses) is expected.
 type ChallengeProvider interface {
-	asChallenge() *raw.GKChallenge
+	objref.Object
+	isChallenge()
 }
 
-// GameCenterViewControllerProvider is implemented by GameCenterViewController and any idiomatic type wrapping a GKGameCenterViewController subclass.
+// GameCenterViewControllerProvider is accepted wherever a GKGameCenterViewController (or one of its subclasses) is expected.
 type GameCenterViewControllerProvider interface {
-	asGameCenterViewController() *raw.GKGameCenterViewController
+	objref.Object
+	isGameCenterViewController()
 }
 
-// PlayerProvider is implemented by Player and any idiomatic type wrapping a GKPlayer subclass.
+// PlayerProvider is accepted wherever a GKPlayer (or one of its subclasses) is expected.
 type PlayerProvider interface {
-	asPlayer() *raw.GKPlayer
+	objref.Object
+	isPlayer()
 }

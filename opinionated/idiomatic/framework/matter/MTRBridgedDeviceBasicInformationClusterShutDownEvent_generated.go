@@ -5,45 +5,78 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBridgedDeviceBasicInformationClusterShutDownEvent wraps [raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent] with a fluent Go API.
+// MTRBridgedDeviceBasicInformationClusterShutDownEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterShutDownEvent.
+//
+// MTRBridgedDeviceBasicInformationClusterShutDownEvent is an abstract base — you do not construct it directly. Construct one of [MTRBridgedDeviceBasicClusterShutDownEvent] and pass it where a MTRBridgedDeviceBasicInformationClusterShutDownEvent is accepted.
 type MTRBridgedDeviceBasicInformationClusterShutDownEvent struct {
-	inner *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent].
-func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBridgedDeviceBasicInformationClusterShutDownEventFromID adopts an existing object pointer as a MTRBridgedDeviceBasicInformationClusterShutDownEvent (nil for 0).
+// MTRBridgedDeviceBasicInformationClusterShutDownEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicInformationClusterShutDownEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBridgedDeviceBasicInformationClusterShutDownEventFromID(id objc.ID) *MTRBridgedDeviceBasicInformationClusterShutDownEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBridgedDeviceBasicInformationClusterShutDownEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterShutDownEventFromID(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterShutDownEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBridgedDeviceBasicInformationClusterShutDownEvent creates a new [MTRBridgedDeviceBasicInformationClusterShutDownEvent].
-func NewMTRBridgedDeviceBasicInformationClusterShutDownEvent() *MTRBridgedDeviceBasicInformationClusterShutDownEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBridgedDeviceBasicInformationClusterShutDownEvent")), objc.RegisterName("new"))
-	return &MTRBridgedDeviceBasicInformationClusterShutDownEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterShutDownEventFromID(_id)}
+// mTRBridgedDeviceBasicInformationClusterShutDownEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBridgedDeviceBasicInformationClusterShutDownEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBridgedDeviceBasicInformationClusterShutDownEventAdopt(id objc.ID) *MTRBridgedDeviceBasicInformationClusterShutDownEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBridgedDeviceBasicInformationClusterShutDownEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) asMTRBridgedDeviceBasicInformationClusterShutDownEvent() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent {
-	return x.inner
+// Description returns the object's -description text.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MTRBridgedDeviceBasicInformationClusterShutDownEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterShutDownEvent], for mocking and DI.
 type MTRBridgedDeviceBasicInformationClusterShutDownEventable interface {
-	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent
+	obj.Object
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterShutDownEventable = (*MTRBridgedDeviceBasicInformationClusterShutDownEvent)(nil)
+
+// isMTRBridgedDeviceBasicInformationClusterShutDownEvent marks MTRBridgedDeviceBasicInformationClusterShutDownEvent — and, by embedding promotion, its
+// subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterShutDownEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) isMTRBridgedDeviceBasicInformationClusterShutDownEvent() {
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterShutDownEventProvider = (*MTRBridgedDeviceBasicInformationClusterShutDownEvent)(nil)

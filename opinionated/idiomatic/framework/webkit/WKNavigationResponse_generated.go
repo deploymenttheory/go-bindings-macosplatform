@@ -5,65 +5,96 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.
+// WKNavigationResponse is an idiomatic wrapper over the Objective-C class WKNavigationResponse.
 //
-// WKNavigationResponse wraps [raw.WKNavigationResponse] with a fluent Go API.
+// An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.
 type WKNavigationResponse struct {
-	inner *raw.WKNavigationResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKNavigationResponse].
-func (x *WKNavigationResponse) Unwrap() *raw.WKNavigationResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKNavigationResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// WKNavigationResponseFromID adopts an existing object pointer as a WKNavigationResponse (nil for 0).
+// WKNavigationResponseFromID adopts an existing Objective-C object as a WKNavigationResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func WKNavigationResponseFromID(id objc.ID) *WKNavigationResponse {
 	if id == 0 {
 		return nil
 	}
-	return &WKNavigationResponse{inner: raw.WKNavigationResponseFromID(id)}
+	x := &WKNavigationResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKNavigationResponse creates a new [WKNavigationResponse].
+// wKNavigationResponseAdopt wraps an Objective-C object that this code just created as a
+// WKNavigationResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKNavigationResponseAdopt(id objc.ID) *WKNavigationResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &WKNavigationResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKNavigationResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKNavigationResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKNavigationResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKNavigationResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKNavigationResponse creates a new WKNavigationResponse.
 func NewWKNavigationResponse() *WKNavigationResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKNavigationResponse")), objc.RegisterName("new"))
-	return &WKNavigationResponse{inner: raw.WKNavigationResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationResponse")), objc.RegisterName("new"))
+	return wKNavigationResponseAdopt(_id)
 }
 
-// @abstract A Boolean value indicating whether the frame being navigated is the main frame.
-//
-// IsForMainFrame calls the underlying IsForMainFrame.
+// IsForMainFrame a Boolean value indicating whether the frame being navigated is the main frame.
 func (x *WKNavigationResponse) IsForMainFrame() bool {
-	return x.inner.IsForMainFrame()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForMainFrame"))
+	return _r
 }
 
-// @abstract The frame's response.
-//
-// Response calls the underlying Response.
-func (x *WKNavigationResponse) Response() *foundation.NSURLResponse {
-	return x.inner.Response()
+// Response the frame's response.
+func (x *WKNavigationResponse) Response() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
+	return obj.Wrap(_r)
 }
 
-// @abstract A Boolean value indicating whether WebKit can display the response's MIME type natively. @discussion Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
-//
-// CanShowMIMEType calls the underlying CanShowMIMEType.
+// CanShowMIMEType a Boolean value indicating whether WebKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
 func (x *WKNavigationResponse) CanShowMIMEType() bool {
-	return x.inner.CanShowMIMEType()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canShowMIMEType"))
+	return _r
 }
 
 // WKNavigationResponseable is the interface implemented by [WKNavigationResponse], for mocking and DI.
 type WKNavigationResponseable interface {
-	Unwrap() *raw.WKNavigationResponse
+	obj.Object
 	IsForMainFrame() bool
-	Response() *foundation.NSURLResponse
+	Response() obj.Object
 	CanShowMIMEType() bool
 }
 

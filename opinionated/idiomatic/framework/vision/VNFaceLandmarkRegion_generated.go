@@ -5,49 +5,86 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for information about a specific face landmark.
+// FaceLandmarkRegion is an idiomatic wrapper over the Objective-C class VNFaceLandmarkRegion.
 //
-// FaceLandmarkRegion wraps [raw.VNFaceLandmarkRegion] with a fluent Go API.
+// FaceLandmarkRegion is an abstract base — you do not construct it directly. Construct one of [FaceLandmarkRegion2D] and pass it where a FaceLandmarkRegion is accepted.
+//
+// The abstract superclass for information about a specific face landmark.
 type FaceLandmarkRegion struct {
-	inner *raw.VNFaceLandmarkRegion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNFaceLandmarkRegion].
-func (x *FaceLandmarkRegion) Unwrap() *raw.VNFaceLandmarkRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FaceLandmarkRegion) ID() objc.ID { return x.inner.Ptr() }
-
-// FaceLandmarkRegionFromID adopts an existing object pointer as a FaceLandmarkRegion (nil for 0).
+// FaceLandmarkRegionFromID adopts an existing Objective-C object as a FaceLandmarkRegion
+// (nil for 0), retaining it and registering a release finalizer.
 func FaceLandmarkRegionFromID(id objc.ID) *FaceLandmarkRegion {
 	if id == 0 {
 		return nil
 	}
-	return &FaceLandmarkRegion{inner: raw.VNFaceLandmarkRegionFromID(id)}
+	x := &FaceLandmarkRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFaceLandmarkRegion creates a new [FaceLandmarkRegion].
-func NewFaceLandmarkRegion() *FaceLandmarkRegion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNFaceLandmarkRegion")), objc.RegisterName("new"))
-	return &FaceLandmarkRegion{inner: raw.VNFaceLandmarkRegionFromID(_id)}
+// faceLandmarkRegionAdopt wraps an Objective-C object that this code just created as a
+// FaceLandmarkRegion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func faceLandmarkRegionAdopt(id objc.ID) *FaceLandmarkRegion {
+	if id == 0 {
+		return nil
+	}
+	x := &FaceLandmarkRegion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PointCount calls the underlying PointCount.
-func (x *FaceLandmarkRegion) PointCount() uint {
-	return x.inner.PointCount()
+// Description returns the object's -description text.
+func (x *FaceLandmarkRegion) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *FaceLandmarkRegion) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FaceLandmarkRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FaceLandmarkRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FaceLandmarkRegion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// PointCount wraps the corresponding Objective-C method.
+func (x *FaceLandmarkRegion) PointCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
+	return _r
+}
 
 // FaceLandmarkRegionable is the interface implemented by [FaceLandmarkRegion], for mocking and DI.
 type FaceLandmarkRegionable interface {
-	Unwrap() *raw.VNFaceLandmarkRegion
-	PointCount() uint
+	obj.Object
+	PointCount() int
 }
 
 var _ FaceLandmarkRegionable = (*FaceLandmarkRegion)(nil)
+
+// isFaceLandmarkRegion marks FaceLandmarkRegion — and, by embedding promotion, its
+// subclasses — as a member of the FaceLandmarkRegion hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *FaceLandmarkRegion) isFaceLandmarkRegion() {}
+
+var _ FaceLandmarkRegionProvider = (*FaceLandmarkRegion)(nil)

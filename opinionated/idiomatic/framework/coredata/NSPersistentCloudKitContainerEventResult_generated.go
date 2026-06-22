@@ -5,59 +5,72 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The result of a request to fetch persistent CloudKit container events.
+// PersistentCloudKitContainerEventResult is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerEventResult.
 //
-// PersistentCloudKitContainerEventResult wraps [raw.NSPersistentCloudKitContainerEventResult] with a fluent Go API.
+// It embeds [PersistentStoreResult], promoting that type's methods.
+//
+// The result of a request to fetch persistent CloudKit container events.
 type PersistentCloudKitContainerEventResult struct {
-	inner *raw.NSPersistentCloudKitContainerEventResult
+	PersistentStoreResult
 }
 
-// Unwrap returns the underlying [raw.NSPersistentCloudKitContainerEventResult].
-func (x *PersistentCloudKitContainerEventResult) Unwrap() *raw.NSPersistentCloudKitContainerEventResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentCloudKitContainerEventResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentCloudKitContainerEventResultFromID adopts an existing object pointer as a PersistentCloudKitContainerEventResult (nil for 0).
+// PersistentCloudKitContainerEventResultFromID adopts an existing Objective-C object as a PersistentCloudKitContainerEventResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentCloudKitContainerEventResultFromID(id objc.ID) *PersistentCloudKitContainerEventResult {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentCloudKitContainerEventResult{inner: raw.NSPersistentCloudKitContainerEventResultFromID(id)}
+	x := &PersistentCloudKitContainerEventResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentCloudKitContainerEventResult creates a new [PersistentCloudKitContainerEventResult].
+// persistentCloudKitContainerEventResultAdopt wraps an Objective-C object that this code just created as a
+// PersistentCloudKitContainerEventResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentCloudKitContainerEventResultAdopt(id objc.ID) *PersistentCloudKitContainerEventResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentCloudKitContainerEventResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPersistentCloudKitContainerEventResult creates a new PersistentCloudKitContainerEventResult.
 func NewPersistentCloudKitContainerEventResult() *PersistentCloudKitContainerEventResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentCloudKitContainerEventResult")), objc.RegisterName("new"))
-	return &PersistentCloudKitContainerEventResult{inner: raw.NSPersistentCloudKitContainerEventResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerEventResult")), objc.RegisterName("new"))
+	return persistentCloudKitContainerEventResultAdopt(_id)
 }
 
-// Result calls the underlying Result.
-func (x *PersistentCloudKitContainerEventResult) Result() objc.ID {
-	return x.inner.Result()
+// Result wraps the corresponding Objective-C method.
+func (x *PersistentCloudKitContainerEventResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+	return obj.Wrap(_r)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *PersistentCloudKitContainerEventResult) ResultType() NSPersistentCloudKitContainerEventResultType {
-	return NSPersistentCloudKitContainerEventResultType(x.inner.ResultType())
-}
-
-func (x *PersistentCloudKitContainerEventResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return &x.inner.NSPersistentStoreResult
+// ResultType wraps the corresponding Objective-C method.
+func (x *PersistentCloudKitContainerEventResult) ResultType() PersistentCloudKitContainerEventResultType {
+	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
 // PersistentCloudKitContainerEventResultable is the interface implemented by [PersistentCloudKitContainerEventResult], for mocking and DI.
 type PersistentCloudKitContainerEventResultable interface {
-	Unwrap() *raw.NSPersistentCloudKitContainerEventResult
-	Result() objc.ID
-	ResultType() NSPersistentCloudKitContainerEventResultType
+	obj.Object
+	Result() obj.Object
+	ResultType() PersistentCloudKitContainerEventResultType
 }
 
 var _ PersistentCloudKitContainerEventResultable = (*PersistentCloudKitContainerEventResult)(nil)
+
+var _ PersistentStoreResultProvider = (*PersistentCloudKitContainerEventResult)(nil)

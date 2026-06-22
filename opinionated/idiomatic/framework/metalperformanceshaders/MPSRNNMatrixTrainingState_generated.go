@@ -5,61 +5,72 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that holds data from a forward pass to be used in a backward pass.
+// RNNMatrixTrainingState is an idiomatic wrapper over the Objective-C class MPSRNNMatrixTrainingState.
 //
-// RNNMatrixTrainingState wraps [raw.MPSRNNMatrixTrainingState] with a fluent Go API.
+// It embeds [State], promoting that type's methods.
+//
+// A class that holds data from a forward pass to be used in a backward pass.
 type RNNMatrixTrainingState struct {
-	inner *raw.MPSRNNMatrixTrainingState
+	State
 }
 
-// Unwrap returns the underlying [raw.MPSRNNMatrixTrainingState].
-func (x *RNNMatrixTrainingState) Unwrap() *raw.MPSRNNMatrixTrainingState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNMatrixTrainingState) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNMatrixTrainingStateFromID adopts an existing object pointer as a RNNMatrixTrainingState (nil for 0).
+// RNNMatrixTrainingStateFromID adopts an existing Objective-C object as a RNNMatrixTrainingState
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNMatrixTrainingStateFromID(id objc.ID) *RNNMatrixTrainingState {
 	if id == 0 {
 		return nil
 	}
-	return &RNNMatrixTrainingState{inner: raw.MPSRNNMatrixTrainingStateFromID(id)}
+	x := &RNNMatrixTrainingState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRNNMatrixTrainingState creates a new [RNNMatrixTrainingState].
+// rNNMatrixTrainingStateAdopt wraps an Objective-C object that this code just created as a
+// RNNMatrixTrainingState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNMatrixTrainingStateAdopt(id objc.ID) *RNNMatrixTrainingState {
+	if id == 0 {
+		return nil
+	}
+	x := &RNNMatrixTrainingState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRNNMatrixTrainingState creates a new RNNMatrixTrainingState.
 func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNMatrixTrainingState")), objc.RegisterName("new"))
-	return &RNNMatrixTrainingState{inner: raw.MPSRNNMatrixTrainingStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNMatrixTrainingState")), objc.RegisterName("new"))
+	return rNNMatrixTrainingStateAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *RNNMatrixTrainingState) WithReadCount(readCount uint) *RNNMatrixTrainingState {
-	x.inner.MPSState.SetReadCount(readCount)
+// WithReadCount sets the property and returns the receiver so calls can be chained.
+func (x *RNNMatrixTrainingState) WithReadCount(readCount int) *RNNMatrixTrainingState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *RNNMatrixTrainingState) WithLabel(label string) *RNNMatrixTrainingState {
-	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-func (x *RNNMatrixTrainingState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // RNNMatrixTrainingStateable is the interface implemented by [RNNMatrixTrainingState], for mocking and DI.
 type RNNMatrixTrainingStateable interface {
-	Unwrap() *raw.MPSRNNMatrixTrainingState
-	WithReadCount(readCount uint) *RNNMatrixTrainingState
+	obj.Object
+	WithReadCount(readCount int) *RNNMatrixTrainingState
 	WithLabel(label string) *RNNMatrixTrainingState
 }
 
 var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)
+
+var _ StateProvider = (*RNNMatrixTrainingState)(nil)

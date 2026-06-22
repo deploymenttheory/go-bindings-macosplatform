@@ -5,90 +5,112 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.
+// WebArchive is an idiomatic wrapper over the Objective-C class WebArchive.
 //
-// WebArchive wraps [raw.WebArchive] with a fluent Go API.
+// A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.
 type WebArchive struct {
-	inner *raw.WebArchive
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebArchive].
-func (x *WebArchive) Unwrap() *raw.WebArchive { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebArchive) ID() objc.ID { return x.inner.Ptr() }
-
-// WebArchiveFromID adopts an existing object pointer as a WebArchive (nil for 0).
+// WebArchiveFromID adopts an existing Objective-C object as a WebArchive
+// (nil for 0), retaining it and registering a release finalizer.
 func WebArchiveFromID(id objc.ID) *WebArchive {
 	if id == 0 {
 		return nil
 	}
-	return &WebArchive{inner: raw.WebArchiveFromID(id)}
+	x := &WebArchive{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes the receiver with a resource and optional subresources and subframe archives..
-//
-// NewWebArchiveWithMainResourceSubresourcesSubframeArchives creates a new [WebArchive].
-func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *raw.WebResource, subresources *foundation.NSArray[objc.ID], subframeArchives *foundation.NSArray[objc.ID]) *WebArchive {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebArchive")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMainResource:subresources:subframeArchives:"), mainResource.Ptr(), subresources.Ptr(), subframeArchives.Ptr())
-	return &WebArchive{inner: raw.WebArchiveFromID(_id)}
-}
-
-// Initializes and returns the receiver, specifying the initial content data.
-//
-// NewWebArchiveWithData creates a new [WebArchive].
-func NewWebArchiveWithData(data *foundation.NSData) *WebArchive {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebArchive")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &WebArchive{inner: raw.WebArchiveFromID(_id)}
-}
-
-// @property mainResource @abstract The main resource of the archive.
-//
-// MainResource calls the underlying MainResource.
-func (x *WebArchive) MainResource() *WebResource {
-	_r := x.inner.MainResource()
-	if _r == nil {
+// webArchiveAdopt wraps an Objective-C object that this code just created as a
+// WebArchive (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webArchiveAdopt(id objc.ID) *WebArchive {
+	if id == 0 {
 		return nil
 	}
-	return &WebResource{inner: _r}
+	x := &WebArchive{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property subresources @abstract The subresource of the archive (can be nil).
-//
-// Subresources calls the underlying Subresources.
-func (x *WebArchive) Subresources() *foundation.NSArray[objc.ID] {
-	return x.inner.Subresources()
+// Description returns the object's -description text.
+func (x *WebArchive) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property subframeArchives @abstract The archives representing the subframes of the archive (can be nil).
-//
-// SubframeArchives calls the underlying SubframeArchives.
-func (x *WebArchive) SubframeArchives() *foundation.NSArray[objc.ID] {
-	return x.inner.SubframeArchives()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebArchive) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property data @abstract The data representation of the archive. @discussion The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
-//
-// Data calls the underlying Data.
-func (x *WebArchive) Data() *foundation.NSData {
-	return x.inner.Data()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebArchive) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebArchive) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebArchiveWithMainResourceSubresourcesSubframeArchives initializes the receiver with a resource and optional subresources and subframe archives..
+func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *WebResource, subresources obj.Object, subframeArchives obj.Object) *WebArchive {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WebArchive")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMainResource:subresources:subframeArchives:"), objref.IDOf(mainResource), objref.IDOf(subresources), objref.IDOf(subframeArchives))
+	return webArchiveAdopt(_id)
+}
+
+// NewWebArchiveWithData initializes and returns the receiver, specifying the initial content data.
+func NewWebArchiveWithData(data obj.Object) *WebArchive {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WebArchive")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return webArchiveAdopt(_id)
+}
+
+// MainResource the main resource of the archive.
+func (x *WebArchive) MainResource() *WebResource {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainResource"))
+	return WebResourceFromID(_r)
+}
+
+// Subresources the subresource of the archive (can be nil).
+func (x *WebArchive) Subresources() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subresources"))
+	return obj.Wrap(_r)
+}
+
+// SubframeArchives the archives representing the subframes of the archive (can be nil).
+func (x *WebArchive) SubframeArchives() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subframeArchives"))
+	return obj.Wrap(_r)
+}
+
+// Data the data representation of the archive. The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
+func (x *WebArchive) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // WebArchiveable is the interface implemented by [WebArchive], for mocking and DI.
 type WebArchiveable interface {
-	Unwrap() *raw.WebArchive
+	obj.Object
 	MainResource() *WebResource
-	Subresources() *foundation.NSArray[objc.ID]
-	SubframeArchives() *foundation.NSArray[objc.ID]
-	Data() *foundation.NSData
+	Subresources() obj.Object
+	SubframeArchives() obj.Object
+	Data() obj.Object
 }
 
 var _ WebArchiveable = (*WebArchive)(nil)

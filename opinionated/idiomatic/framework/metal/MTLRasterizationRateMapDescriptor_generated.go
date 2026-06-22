@@ -5,135 +5,126 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to configure new rasterization rate maps.
+// RasterizationRateMapDescriptor is an idiomatic wrapper over the Objective-C class MTLRasterizationRateMapDescriptor.
 //
-// RasterizationRateMapDescriptor wraps [raw.MTLRasterizationRateMapDescriptor] with a fluent Go API.
+// An object that you use to configure new rasterization rate maps.
 type RasterizationRateMapDescriptor struct {
-	inner *raw.MTLRasterizationRateMapDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRasterizationRateMapDescriptor].
-func (x *RasterizationRateMapDescriptor) Unwrap() *raw.MTLRasterizationRateMapDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RasterizationRateMapDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RasterizationRateMapDescriptorFromID adopts an existing object pointer as a RasterizationRateMapDescriptor (nil for 0).
+// RasterizationRateMapDescriptorFromID adopts an existing Objective-C object as a RasterizationRateMapDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RasterizationRateMapDescriptorFromID(id objc.ID) *RasterizationRateMapDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RasterizationRateMapDescriptor{inner: raw.MTLRasterizationRateMapDescriptorFromID(id)}
+	x := &RasterizationRateMapDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRasterizationRateMapDescriptor creates a new [RasterizationRateMapDescriptor].
+// rasterizationRateMapDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RasterizationRateMapDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rasterizationRateMapDescriptorAdopt(id objc.ID) *RasterizationRateMapDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RasterizationRateMapDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RasterizationRateMapDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RasterizationRateMapDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RasterizationRateMapDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RasterizationRateMapDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRasterizationRateMapDescriptor creates a new RasterizationRateMapDescriptor.
 func NewRasterizationRateMapDescriptor() *RasterizationRateMapDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateMapDescriptor")), objc.RegisterName("new"))
-	return &RasterizationRateMapDescriptor{inner: raw.MTLRasterizationRateMapDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateMapDescriptor")), objc.RegisterName("new"))
+	return rasterizationRateMapDescriptorAdopt(_id)
 }
 
-// The size of the viewport coordinate system, in logical pixels.
-//
-// WithScreenSize sets the screenSize property and returns the receiver for chaining.
-func (x *RasterizationRateMapDescriptor) WithScreenSize(screenSize raw.MTLSize) *RasterizationRateMapDescriptor {
-	x.inner.SetScreenSize(screenSize)
-	return x
-}
-
-// A string used to identify the rate map you create with the descriptor.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string used to identify the rate map you create with the descriptor.
 func (x *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationRateMapDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Returns the layer description for a layer in the rate map.
-//
-// LayerAtIndex calls the underlying LayerAtIndex.
-func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *RasterizationRateLayerDescriptor {
-	_r := x.inner.LayerAtIndex(layerIndex)
-	if _r == nil {
-		return nil
-	}
-	return &RasterizationRateLayerDescriptor{inner: _r}
+// LayerAtIndex returns the layer description for a layer in the rate map.
+func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex int) *RasterizationRateLayerDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layerAtIndex:"), layerIndex)
+	return RasterizationRateLayerDescriptorFromID(_r)
 }
 
-// Sets a configuration for a layer rate map.
-//
-// SetLayerAtIndex calls the underlying SetLayerAtIndex.
-func (x *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint) {
-	x.inner.SetLayerAtIndex(layer, layerIndex)
+// SetLayerAtIndex sets a configuration for a layer rate map.
+func (x *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *RasterizationRateLayerDescriptor, layerIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:atIndex:"), objref.IDOf(layer), layerIndex)
 }
 
-// @property layers @return A modifiable array of layers @discussion Accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
-//
-// Layers calls the underlying Layers.
+// Layers accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
 func (x *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArray {
-	_r := x.inner.Layers()
-	if _r == nil {
-		return nil
-	}
-	return &RasterizationRateLayerArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layers"))
+	return RasterizationRateLayerArrayFromID(_r)
 }
 
-// @property screenSize @return The dimensions, in screen space pixels, of the region where variable rasterization is applied. @discussion The region always has its origin at [0, 0]. The depth component of MTLSize is ignored.
-//
-// ScreenSize calls the underlying ScreenSize.
-func (x *RasterizationRateMapDescriptor) ScreenSize() raw.MTLSize {
-	return x.inner.ScreenSize()
-}
-
-// SetScreenSize calls the underlying SetScreenSize.
-func (x *RasterizationRateMapDescriptor) SetScreenSize(screenSize raw.MTLSize) {
-	x.inner.SetScreenSize(screenSize)
-}
-
-// @property label @abstract A string to help identify this object. @discussion The default value is nil.
-//
-// Label calls the underlying Label.
+// Label a string to help identify this object. The default value is nil.
 func (x *RasterizationRateMapDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *RasterizationRateMapDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @property layerCount @return The number of subsequent non-nil layer instances stored in the descriptor, starting at index 0. @discussion This property is modified by setting new layer instances using setLayer:atIndex: or assigning to layers[X]
-//
-// LayerCount calls the underlying LayerCount.
-func (x *RasterizationRateMapDescriptor) LayerCount() uint {
-	return x.inner.LayerCount()
+// LayerCount this property is modified by setting new layer instances using setLayer:atIndex: or assigning to layers[X]
+func (x *RasterizationRateMapDescriptor) LayerCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
+	return _r
 }
 
 // RasterizationRateMapDescriptorable is the interface implemented by [RasterizationRateMapDescriptor], for mocking and DI.
 type RasterizationRateMapDescriptorable interface {
-	Unwrap() *raw.MTLRasterizationRateMapDescriptor
-	WithScreenSize(screenSize raw.MTLSize) *RasterizationRateMapDescriptor
+	obj.Object
 	WithLabel(label string) *RasterizationRateMapDescriptor
-	LayerAtIndex(layerIndex uint) *RasterizationRateLayerDescriptor
-	SetLayerAtIndex(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint)
+	LayerAtIndex(layerIndex int) *RasterizationRateLayerDescriptor
+	SetLayerAtIndex(layer *RasterizationRateLayerDescriptor, layerIndex int)
 	Layers() *RasterizationRateLayerArray
-	ScreenSize() raw.MTLSize
-	SetScreenSize(screenSize raw.MTLSize)
 	Label() string
 	SetLabel(label string)
-	LayerCount() uint
+	LayerCount() int
 }
 
 var _ RasterizationRateMapDescriptorable = (*RasterizationRateMapDescriptor)(nil)

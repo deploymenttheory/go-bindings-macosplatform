@@ -5,77 +5,83 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A closed polygon overlay.
+// Polygon is an idiomatic wrapper over the Objective-C class MKPolygon.
 //
-// Polygon wraps [raw.MKPolygon] with a fluent Go API.
+// It embeds [MultiPoint], promoting that type's methods.
+//
+// A closed polygon overlay.
 type Polygon struct {
-	inner *raw.MKPolygon
+	MultiPoint
 }
 
-// Unwrap returns the underlying [raw.MKPolygon].
-func (x *Polygon) Unwrap() *raw.MKPolygon { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Polygon) ID() objc.ID { return x.inner.Ptr() }
-
-// PolygonFromID adopts an existing object pointer as a Polygon (nil for 0).
+// PolygonFromID adopts an existing Objective-C object as a Polygon
+// (nil for 0), retaining it and registering a release finalizer.
 func PolygonFromID(id objc.ID) *Polygon {
 	if id == 0 {
 		return nil
 	}
-	return &Polygon{inner: raw.MKPolygonFromID(id)}
-}
-
-// NewPolygon creates a new [Polygon].
-func NewPolygon() *Polygon {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPolygon")), objc.RegisterName("new"))
-	return &Polygon{inner: raw.MKPolygonFromID(_id)}
-}
-
-// The title of the shape annotation.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *Polygon) WithTitle(title string) *Polygon {
-	x.inner.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	x := &Polygon{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The subtitle of the shape annotation.
-//
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
-func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
-	x.inner.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
-	return x
-}
-
-// InteriorPolygons returns the collection as a Go slice.
-func (x *Polygon) InteriorPolygons() []*Polygon {
-	arr := x.inner.InteriorPolygons()
-	if arr == nil {
+// polygonAdopt wraps an Objective-C object that this code just created as a
+// Polygon (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func polygonAdopt(id objc.ID) *Polygon {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Polygon {
-		return &Polygon{inner: raw.MKPolygonFromID(purego.Retain(_id))}
-	})
+	x := &Polygon{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *Polygon) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKMultiPoint }
+// NewPolygon creates a new Polygon.
+func NewPolygon() *Polygon {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("new"))
+	return polygonAdopt(_id)
+}
 
-func (x *Polygon) asShape() *raw.MKShape { return &x.inner.MKMultiPoint.MKShape }
+// WithTitle the title of the shape annotation.
+func (x *Polygon) WithTitle(title string) *Polygon {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+// WithSubtitle the subtitle of the shape annotation.
+func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return x
+}
+
+// InteriorPolygons wraps the corresponding Objective-C method.
+//
+// InteriorPolygons returns the collection as a Go slice.
+func (x *Polygon) InteriorPolygons() []*Polygon {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interiorPolygons"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polygon { return PolygonFromID(_id) })
+}
 
 // Polygonable is the interface implemented by [Polygon], for mocking and DI.
 type Polygonable interface {
-	Unwrap() *raw.MKPolygon
+	obj.Object
 	WithTitle(title string) *Polygon
 	WithSubtitle(subtitle string) *Polygon
 	InteriorPolygons() []*Polygon
 }
 
 var _ Polygonable = (*Polygon)(nil)
+
+var _ MultiPointProvider = (*Polygon)(nil)
+
+var _ ShapeProvider = (*Polygon)(nil)

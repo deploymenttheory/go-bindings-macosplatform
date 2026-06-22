@@ -6,71 +6,103 @@ package localauthentication
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Data that’s protected by a persisted right.
+// Secret is an idiomatic wrapper over the Objective-C class LASecret.
 //
-// Secret wraps [raw.LASecret] with a fluent Go API.
+// Data that’s protected by a persisted right.
 type Secret struct {
-	inner *raw.LASecret
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LASecret].
-func (x *Secret) Unwrap() *raw.LASecret { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Secret) ID() objc.ID { return x.inner.Ptr() }
-
-// SecretFromID adopts an existing object pointer as a Secret (nil for 0).
+// SecretFromID adopts an existing Objective-C object as a Secret
+// (nil for 0), retaining it and registering a release finalizer.
 func SecretFromID(id objc.ID) *Secret {
 	if id == 0 {
 		return nil
 	}
-	return &Secret{inner: raw.LASecretFromID(id)}
+	x := &Secret{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSecret creates a new [Secret].
+// secretAdopt wraps an Objective-C object that this code just created as a
+// Secret (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func secretAdopt(id objc.ID) *Secret {
+	if id == 0 {
+		return nil
+	}
+	x := &Secret{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Secret) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Secret) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Secret) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Secret) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSecret creates a new Secret.
 func NewSecret() *Secret {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LASecret")), objc.RegisterName("new"))
-	return &Secret{inner: raw.LASecretFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LASecret")), objc.RegisterName("new"))
+	return secretAdopt(_id)
 }
 
-// Retrieves data stored in a secret.
+// LoadDataWithCompletion retrieves data stored in a secret.
 //
 // LoadDataWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Secret) LoadDataWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+func (x *Secret) LoadDataWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadDataWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadDataWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Secretable is the interface implemented by [Secret], for mocking and DI.
 type Secretable interface {
-	Unwrap() *raw.LASecret
-	LoadDataWithCompletion(ctx context.Context) (*foundation.NSData, error)
+	obj.Object
+	LoadDataWithCompletion(ctx context.Context) (obj.Object, error)
 }
 
 var _ Secretable = (*Secret)(nil)

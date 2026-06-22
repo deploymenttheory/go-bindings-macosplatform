@@ -9,176 +9,190 @@ import (
 )
 
 // The background styling of the attribution view’s contents.
-type SWAttributionViewBackgroundStyle int64
+type AttributionViewBackgroundStyle int64
 
 const (
 	// The default background style, to be chosen by SWAttributionView
-	SWAttributionViewBackgroundStyleDefault SWAttributionViewBackgroundStyle = 0
+	AttributionViewBackgroundStyleDefault AttributionViewBackgroundStyle = 0
 	// A non-material background color for the view's contents, best when placed over monochrome backgrounds
-	SWAttributionViewBackgroundStyleColor SWAttributionViewBackgroundStyle = 1
+	AttributionViewBackgroundStyleColor AttributionViewBackgroundStyle = 1
 	// A material background blur for the view's contents, best when placed over multicolored backgrounds
-	SWAttributionViewBackgroundStyleMaterial SWAttributionViewBackgroundStyle = 2
+	AttributionViewBackgroundStyleMaterial AttributionViewBackgroundStyle = 2
 )
 
-func (e SWAttributionViewBackgroundStyle) String() string {
+// String returns the AttributionViewBackgroundStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributionViewBackgroundStyle) String() string {
 	switch e {
-	case SWAttributionViewBackgroundStyleDefault:
-		return "SWAttributionViewBackgroundStyleDefault"
-	case SWAttributionViewBackgroundStyleColor:
-		return "SWAttributionViewBackgroundStyleColor"
-	case SWAttributionViewBackgroundStyleMaterial:
-		return "SWAttributionViewBackgroundStyleMaterial"
+	case AttributionViewBackgroundStyleDefault:
+		return "AttributionViewBackgroundStyleDefault"
+	case AttributionViewBackgroundStyleColor:
+		return "AttributionViewBackgroundStyleColor"
+	case AttributionViewBackgroundStyleMaterial:
+		return "AttributionViewBackgroundStyleMaterial"
 	default:
-		return fmt.Sprintf("SWAttributionViewBackgroundStyle(%d)", int64(e))
+		return fmt.Sprintf("AttributionViewBackgroundStyle(%d)", int64(e))
 	}
 }
 
 // The context for the content that influences the ranking of this view’s highlight.
-type SWAttributionViewDisplayContext int64
+type AttributionViewDisplayContext int64
 
 const (
 	// The default context. Indicates that the attributed content shown along with this view is being offered to the user for consumption
-	SWAttributionViewDisplayContextSummary SWAttributionViewDisplayContext = 0
+	AttributionViewDisplayContextSummary AttributionViewDisplayContext = 0
 	// Indicates that the attributed content shown along with this view is being actively consumed by the user
-	SWAttributionViewDisplayContextDetail SWAttributionViewDisplayContext = 1
+	AttributionViewDisplayContextDetail AttributionViewDisplayContext = 1
 )
 
-func (e SWAttributionViewDisplayContext) String() string {
+// String returns the AttributionViewDisplayContext constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributionViewDisplayContext) String() string {
 	switch e {
-	case SWAttributionViewDisplayContextSummary:
-		return "SWAttributionViewDisplayContextSummary"
-	case SWAttributionViewDisplayContextDetail:
-		return "SWAttributionViewDisplayContextDetail"
+	case AttributionViewDisplayContextSummary:
+		return "AttributionViewDisplayContextSummary"
+	case AttributionViewDisplayContextDetail:
+		return "AttributionViewDisplayContextDetail"
 	default:
-		return fmt.Sprintf("SWAttributionViewDisplayContext(%d)", int64(e))
+		return fmt.Sprintf("AttributionViewDisplayContext(%d)", int64(e))
 	}
 }
 
 // The horizontal alignment of attribution view’s contents.
-type SWAttributionViewHorizontalAlignment int64
+type AttributionViewHorizontalAlignment int64
 
 const (
 	// The default horizontal alignment, to be chosen by SWAttributionView
-	SWAttributionViewHorizontalAlignmentDefault SWAttributionViewHorizontalAlignment = 0
+	AttributionViewHorizontalAlignmentDefault AttributionViewHorizontalAlignment = 0
 	// Horizontally align with the leading edge of the view (depends on the user interface layout direction)
-	SWAttributionViewHorizontalAlignmentLeading SWAttributionViewHorizontalAlignment = 1
+	AttributionViewHorizontalAlignmentLeading AttributionViewHorizontalAlignment = 1
 	// Horizontally align with the center of the view
-	SWAttributionViewHorizontalAlignmentCenter SWAttributionViewHorizontalAlignment = 2
+	AttributionViewHorizontalAlignmentCenter AttributionViewHorizontalAlignment = 2
 	// Horizontally align with the trailing edge of the view (depends on the user interface layout direction)
-	SWAttributionViewHorizontalAlignmentTrailing SWAttributionViewHorizontalAlignment = 3
+	AttributionViewHorizontalAlignmentTrailing AttributionViewHorizontalAlignment = 3
 )
 
-func (e SWAttributionViewHorizontalAlignment) String() string {
+// String returns the AttributionViewHorizontalAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributionViewHorizontalAlignment) String() string {
 	switch e {
-	case SWAttributionViewHorizontalAlignmentDefault:
-		return "SWAttributionViewHorizontalAlignmentDefault"
-	case SWAttributionViewHorizontalAlignmentLeading:
-		return "SWAttributionViewHorizontalAlignmentLeading"
-	case SWAttributionViewHorizontalAlignmentCenter:
-		return "SWAttributionViewHorizontalAlignmentCenter"
-	case SWAttributionViewHorizontalAlignmentTrailing:
-		return "SWAttributionViewHorizontalAlignmentTrailing"
+	case AttributionViewHorizontalAlignmentDefault:
+		return "AttributionViewHorizontalAlignmentDefault"
+	case AttributionViewHorizontalAlignmentLeading:
+		return "AttributionViewHorizontalAlignmentLeading"
+	case AttributionViewHorizontalAlignmentCenter:
+		return "AttributionViewHorizontalAlignmentCenter"
+	case AttributionViewHorizontalAlignmentTrailing:
+		return "AttributionViewHorizontalAlignmentTrailing"
 	default:
-		return fmt.Sprintf("SWAttributionViewHorizontalAlignment(%d)", int64(e))
+		return fmt.Sprintf("AttributionViewHorizontalAlignment(%d)", int64(e))
 	}
 }
 
 // The error codes for the highlight center.
-type SWHighlightCenterErrorCode int64
+type HighlightCenterErrorCode int64
 
 const (
 	// Reports no error.
-	SWHighlightCenterErrorCodeNoError SWHighlightCenterErrorCode = 0
+	HighlightCenterErrorCodeNoError HighlightCenterErrorCode = 0
 	// Reports an internal error.
-	SWHighlightCenterErrorCodeInternalError SWHighlightCenterErrorCode = 1
+	HighlightCenterErrorCodeInternalError HighlightCenterErrorCode = 1
 	// Reports an invalid URL error.
-	SWHighlightCenterErrorCodeInvalidURL SWHighlightCenterErrorCode = 2
+	HighlightCenterErrorCodeInvalidURL HighlightCenterErrorCode = 2
 	// Reports and access denied error.
-	SWHighlightCenterErrorCodeAccessDenied SWHighlightCenterErrorCode = 3
+	HighlightCenterErrorCodeAccessDenied HighlightCenterErrorCode = 3
 )
 
-func (e SWHighlightCenterErrorCode) String() string {
+// String returns the HighlightCenterErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HighlightCenterErrorCode) String() string {
 	switch e {
-	case SWHighlightCenterErrorCodeNoError:
-		return "SWHighlightCenterErrorCodeNoError"
-	case SWHighlightCenterErrorCodeInternalError:
-		return "SWHighlightCenterErrorCodeInternalError"
-	case SWHighlightCenterErrorCodeInvalidURL:
-		return "SWHighlightCenterErrorCodeInvalidURL"
-	case SWHighlightCenterErrorCodeAccessDenied:
-		return "SWHighlightCenterErrorCodeAccessDenied"
+	case HighlightCenterErrorCodeNoError:
+		return "HighlightCenterErrorCodeNoError"
+	case HighlightCenterErrorCodeInternalError:
+		return "HighlightCenterErrorCodeInternalError"
+	case HighlightCenterErrorCodeInvalidURL:
+		return "HighlightCenterErrorCodeInvalidURL"
+	case HighlightCenterErrorCodeAccessDenied:
+		return "HighlightCenterErrorCodeAccessDenied"
 	default:
-		return fmt.Sprintf("SWHighlightCenterErrorCode(%d)", int64(e))
+		return fmt.Sprintf("HighlightCenterErrorCode(%d)", int64(e))
 	}
 }
 
 // The type of change event for the highlight
-type SWHighlightChangeEventTrigger int64
+type HighlightChangeEventTrigger int64
 
 const (
 	// Signifies a highlight edit.
-	SWHighlightChangeEventTriggerEdit SWHighlightChangeEventTrigger = 1
+	HighlightChangeEventTriggerEdit HighlightChangeEventTrigger = 1
 	// Signifies a highlight comment.
-	SWHighlightChangeEventTriggerComment SWHighlightChangeEventTrigger = 2
+	HighlightChangeEventTriggerComment HighlightChangeEventTrigger = 2
 )
 
-func (e SWHighlightChangeEventTrigger) String() string {
+// String returns the HighlightChangeEventTrigger constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HighlightChangeEventTrigger) String() string {
 	switch e {
-	case SWHighlightChangeEventTriggerEdit:
-		return "SWHighlightChangeEventTriggerEdit"
-	case SWHighlightChangeEventTriggerComment:
-		return "SWHighlightChangeEventTriggerComment"
+	case HighlightChangeEventTriggerEdit:
+		return "HighlightChangeEventTriggerEdit"
+	case HighlightChangeEventTriggerComment:
+		return "HighlightChangeEventTriggerComment"
 	default:
-		return fmt.Sprintf("SWHighlightChangeEventTrigger(%d)", int64(e))
+		return fmt.Sprintf("HighlightChangeEventTrigger(%d)", int64(e))
 	}
 }
 
 // The type of membership event for the highlight.
-type SWHighlightMembershipEventTrigger int64
+type HighlightMembershipEventTrigger int64
 
 const (
 	// Signifies the system added a collaborator.
-	SWHighlightMembershipEventTriggerAddedCollaborator SWHighlightMembershipEventTrigger = 1
+	HighlightMembershipEventTriggerAddedCollaborator HighlightMembershipEventTrigger = 1
 	// Signifies the system removed a collaborator.
-	SWHighlightMembershipEventTriggerRemovedCollaborator SWHighlightMembershipEventTrigger = 2
+	HighlightMembershipEventTriggerRemovedCollaborator HighlightMembershipEventTrigger = 2
 )
 
-func (e SWHighlightMembershipEventTrigger) String() string {
+// String returns the HighlightMembershipEventTrigger constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HighlightMembershipEventTrigger) String() string {
 	switch e {
-	case SWHighlightMembershipEventTriggerAddedCollaborator:
-		return "SWHighlightMembershipEventTriggerAddedCollaborator"
-	case SWHighlightMembershipEventTriggerRemovedCollaborator:
-		return "SWHighlightMembershipEventTriggerRemovedCollaborator"
+	case HighlightMembershipEventTriggerAddedCollaborator:
+		return "HighlightMembershipEventTriggerAddedCollaborator"
+	case HighlightMembershipEventTriggerRemovedCollaborator:
+		return "HighlightMembershipEventTriggerRemovedCollaborator"
 	default:
-		return fmt.Sprintf("SWHighlightMembershipEventTrigger(%d)", int64(e))
+		return fmt.Sprintf("HighlightMembershipEventTrigger(%d)", int64(e))
 	}
 }
 
 // Signifies the type of persistence event trigger.
-type SWHighlightPersistenceEventTrigger int64
+type HighlightPersistenceEventTrigger int64
 
 const (
 	// Signifies a creation event.
-	SWHighlightPersistenceEventTriggerCreated SWHighlightPersistenceEventTrigger = 1
+	HighlightPersistenceEventTriggerCreated HighlightPersistenceEventTrigger = 1
 	// Signifies a deletion event.
-	SWHighlightPersistenceEventTriggerDeleted SWHighlightPersistenceEventTrigger = 2
+	HighlightPersistenceEventTriggerDeleted HighlightPersistenceEventTrigger = 2
 	// Signifies a rename event.
-	SWHighlightPersistenceEventTriggerRenamed SWHighlightPersistenceEventTrigger = 3
+	HighlightPersistenceEventTriggerRenamed HighlightPersistenceEventTrigger = 3
 	// Signifies a move event.
-	SWHighlightPersistenceEventTriggerMoved SWHighlightPersistenceEventTrigger = 4
+	HighlightPersistenceEventTriggerMoved HighlightPersistenceEventTrigger = 4
 )
 
-func (e SWHighlightPersistenceEventTrigger) String() string {
+// String returns the HighlightPersistenceEventTrigger constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HighlightPersistenceEventTrigger) String() string {
 	switch e {
-	case SWHighlightPersistenceEventTriggerCreated:
-		return "SWHighlightPersistenceEventTriggerCreated"
-	case SWHighlightPersistenceEventTriggerDeleted:
-		return "SWHighlightPersistenceEventTriggerDeleted"
-	case SWHighlightPersistenceEventTriggerRenamed:
-		return "SWHighlightPersistenceEventTriggerRenamed"
-	case SWHighlightPersistenceEventTriggerMoved:
-		return "SWHighlightPersistenceEventTriggerMoved"
+	case HighlightPersistenceEventTriggerCreated:
+		return "HighlightPersistenceEventTriggerCreated"
+	case HighlightPersistenceEventTriggerDeleted:
+		return "HighlightPersistenceEventTriggerDeleted"
+	case HighlightPersistenceEventTriggerRenamed:
+		return "HighlightPersistenceEventTriggerRenamed"
+	case HighlightPersistenceEventTriggerMoved:
+		return "HighlightPersistenceEventTriggerMoved"
 	default:
-		return fmt.Sprintf("SWHighlightPersistenceEventTrigger(%d)", int64(e))
+		return fmt.Sprintf("HighlightPersistenceEventTrigger(%d)", int64(e))
 	}
 }

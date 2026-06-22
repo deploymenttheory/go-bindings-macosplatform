@@ -5,2861 +5,2022 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// HKErrorDomain returns the string constant HKErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func HKErrorDomain() objc.ID {
-	return purego.CFConstant(raw.HKErrorDomain())
-}
+// HKErrorDomain returns the string constant HKErrorDomain, for use as a dictionary key or argument.
+func HKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("HKErrorDomain"))) }
 
-// HKPredicateKeyPathDateComponents returns the string constant HKPredicateKeyPathDateComponents as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathDateComponents() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathDateComponents())
+// HKPredicateKeyPathDateComponents returns the string constant HKPredicateKeyPathDateComponents, for use as a dictionary key or argument.
+func HKPredicateKeyPathDateComponents() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathDateComponents")))
 }
 
-// HKPredicateKeyPathUUID returns the string constant HKPredicateKeyPathUUID as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathUUID() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathUUID())
+// HKPredicateKeyPathUUID returns the string constant HKPredicateKeyPathUUID, for use as a dictionary key or argument.
+func HKPredicateKeyPathUUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathUUID")))
 }
 
-// HKPredicateKeyPathSource returns the string constant HKPredicateKeyPathSource as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathSource() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathSource())
+// HKPredicateKeyPathSource returns the string constant HKPredicateKeyPathSource, for use as a dictionary key or argument.
+func HKPredicateKeyPathSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathSource")))
 }
 
-// HKPredicateKeyPathMetadata returns the string constant HKPredicateKeyPathMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMetadata() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMetadata())
+// HKPredicateKeyPathMetadata returns the string constant HKPredicateKeyPathMetadata, for use as a dictionary key or argument.
+func HKPredicateKeyPathMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMetadata")))
 }
 
-// HKPredicateKeyPathCorrelation returns the string constant HKPredicateKeyPathCorrelation as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCorrelation() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCorrelation())
+// HKPredicateKeyPathCorrelation returns the string constant HKPredicateKeyPathCorrelation, for use as a dictionary key or argument.
+func HKPredicateKeyPathCorrelation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCorrelation")))
 }
 
-// HKPredicateKeyPathWorkout returns the string constant HKPredicateKeyPathWorkout as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkout() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkout())
+// HKPredicateKeyPathWorkout returns the string constant HKPredicateKeyPathWorkout, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkout")))
 }
 
-// HKPredicateKeyPathDevice returns the string constant HKPredicateKeyPathDevice as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathDevice() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathDevice())
+// HKPredicateKeyPathDevice returns the string constant HKPredicateKeyPathDevice, for use as a dictionary key or argument.
+func HKPredicateKeyPathDevice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathDevice")))
 }
 
-// HKPredicateKeyPathSourceRevision returns the string constant HKPredicateKeyPathSourceRevision as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathSourceRevision() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathSourceRevision())
+// HKPredicateKeyPathSourceRevision returns the string constant HKPredicateKeyPathSourceRevision, for use as a dictionary key or argument.
+func HKPredicateKeyPathSourceRevision() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathSourceRevision")))
 }
 
-// HKPredicateKeyPathWorkoutEffortRelationship returns the string constant HKPredicateKeyPathWorkoutEffortRelationship as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutEffortRelationship() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutEffortRelationship())
+// HKPredicateKeyPathWorkoutEffortRelationship returns the string constant HKPredicateKeyPathWorkoutEffortRelationship, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutEffortRelationship() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutEffortRelationship")))
 }
 
-// HKSampleSortIdentifierStartDate returns the string constant HKSampleSortIdentifierStartDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKSampleSortIdentifierStartDate() objc.ID {
-	return purego.CFConstant(raw.HKSampleSortIdentifierStartDate())
+// HKSampleSortIdentifierStartDate returns the string constant HKSampleSortIdentifierStartDate, for use as a dictionary key or argument.
+func HKSampleSortIdentifierStartDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKSampleSortIdentifierStartDate")))
 }
 
-// HKSampleSortIdentifierEndDate returns the string constant HKSampleSortIdentifierEndDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKSampleSortIdentifierEndDate() objc.ID {
-	return purego.CFConstant(raw.HKSampleSortIdentifierEndDate())
+// HKSampleSortIdentifierEndDate returns the string constant HKSampleSortIdentifierEndDate, for use as a dictionary key or argument.
+func HKSampleSortIdentifierEndDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKSampleSortIdentifierEndDate")))
 }
 
-// HKPredicateKeyPathStartDate returns the string constant HKPredicateKeyPathStartDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathStartDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathStartDate())
+// HKPredicateKeyPathStartDate returns the string constant HKPredicateKeyPathStartDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathStartDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathStartDate")))
 }
 
-// HKPredicateKeyPathEndDate returns the string constant HKPredicateKeyPathEndDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathEndDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathEndDate())
+// HKPredicateKeyPathEndDate returns the string constant HKPredicateKeyPathEndDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathEndDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathEndDate")))
 }
 
-// HKPredicateKeyPathAverageHeartRate returns the string constant HKPredicateKeyPathAverageHeartRate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathAverageHeartRate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathAverageHeartRate())
+// HKPredicateKeyPathAverageHeartRate returns the string constant HKPredicateKeyPathAverageHeartRate, for use as a dictionary key or argument.
+func HKPredicateKeyPathAverageHeartRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathAverageHeartRate")))
 }
 
-// HKPredicateKeyPathECGClassification returns the string constant HKPredicateKeyPathECGClassification as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathECGClassification() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathECGClassification())
+// HKPredicateKeyPathECGClassification returns the string constant HKPredicateKeyPathECGClassification, for use as a dictionary key or argument.
+func HKPredicateKeyPathECGClassification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathECGClassification")))
 }
 
-// HKPredicateKeyPathECGSymptomsStatus returns the string constant HKPredicateKeyPathECGSymptomsStatus as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathECGSymptomsStatus() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathECGSymptomsStatus())
+// HKPredicateKeyPathECGSymptomsStatus returns the string constant HKPredicateKeyPathECGSymptomsStatus, for use as a dictionary key or argument.
+func HKPredicateKeyPathECGSymptomsStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathECGSymptomsStatus")))
 }
 
-// HKFHIRResourceTypeAllergyIntolerance returns the string constant HKFHIRResourceTypeAllergyIntolerance as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeAllergyIntolerance() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeAllergyIntolerance())
+// HKFHIRResourceTypeAllergyIntolerance returns the string constant HKFHIRResourceTypeAllergyIntolerance, for use as a dictionary key or argument.
+func HKFHIRResourceTypeAllergyIntolerance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeAllergyIntolerance")))
 }
 
-// HKFHIRResourceTypeCondition returns the string constant HKFHIRResourceTypeCondition as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeCondition() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeCondition())
+// HKFHIRResourceTypeCondition returns the string constant HKFHIRResourceTypeCondition, for use as a dictionary key or argument.
+func HKFHIRResourceTypeCondition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeCondition")))
 }
 
-// HKFHIRResourceTypeCoverage returns the string constant HKFHIRResourceTypeCoverage as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeCoverage() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeCoverage())
+// HKFHIRResourceTypeCoverage returns the string constant HKFHIRResourceTypeCoverage, for use as a dictionary key or argument.
+func HKFHIRResourceTypeCoverage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeCoverage")))
 }
 
-// HKFHIRResourceTypeDiagnosticReport returns the string constant HKFHIRResourceTypeDiagnosticReport as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeDiagnosticReport() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeDiagnosticReport())
+// HKFHIRResourceTypeDiagnosticReport returns the string constant HKFHIRResourceTypeDiagnosticReport, for use as a dictionary key or argument.
+func HKFHIRResourceTypeDiagnosticReport() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeDiagnosticReport")))
 }
 
-// HKFHIRResourceTypeDocumentReference returns the string constant HKFHIRResourceTypeDocumentReference as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeDocumentReference() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeDocumentReference())
+// HKFHIRResourceTypeDocumentReference returns the string constant HKFHIRResourceTypeDocumentReference, for use as a dictionary key or argument.
+func HKFHIRResourceTypeDocumentReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeDocumentReference")))
 }
 
-// HKFHIRResourceTypeImmunization returns the string constant HKFHIRResourceTypeImmunization as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeImmunization() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeImmunization())
+// HKFHIRResourceTypeImmunization returns the string constant HKFHIRResourceTypeImmunization, for use as a dictionary key or argument.
+func HKFHIRResourceTypeImmunization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeImmunization")))
 }
 
-// HKFHIRResourceTypeMedicationDispense returns the string constant HKFHIRResourceTypeMedicationDispense as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeMedicationDispense() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeMedicationDispense())
+// HKFHIRResourceTypeMedicationDispense returns the string constant HKFHIRResourceTypeMedicationDispense, for use as a dictionary key or argument.
+func HKFHIRResourceTypeMedicationDispense() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeMedicationDispense")))
 }
 
-// HKFHIRResourceTypeMedicationOrder returns the string constant HKFHIRResourceTypeMedicationOrder as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeMedicationOrder() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeMedicationOrder())
+// HKFHIRResourceTypeMedicationOrder returns the string constant HKFHIRResourceTypeMedicationOrder, for use as a dictionary key or argument.
+func HKFHIRResourceTypeMedicationOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeMedicationOrder")))
 }
 
-// HKFHIRResourceTypeMedicationRequest returns the string constant HKFHIRResourceTypeMedicationRequest as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeMedicationRequest() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeMedicationRequest())
+// HKFHIRResourceTypeMedicationRequest returns the string constant HKFHIRResourceTypeMedicationRequest, for use as a dictionary key or argument.
+func HKFHIRResourceTypeMedicationRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeMedicationRequest")))
 }
 
-// HKFHIRResourceTypeMedicationStatement returns the string constant HKFHIRResourceTypeMedicationStatement as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeMedicationStatement() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeMedicationStatement())
+// HKFHIRResourceTypeMedicationStatement returns the string constant HKFHIRResourceTypeMedicationStatement, for use as a dictionary key or argument.
+func HKFHIRResourceTypeMedicationStatement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeMedicationStatement")))
 }
 
-// HKFHIRResourceTypeObservation returns the string constant HKFHIRResourceTypeObservation as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeObservation() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeObservation())
+// HKFHIRResourceTypeObservation returns the string constant HKFHIRResourceTypeObservation, for use as a dictionary key or argument.
+func HKFHIRResourceTypeObservation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeObservation")))
 }
 
-// HKFHIRResourceTypeProcedure returns the string constant HKFHIRResourceTypeProcedure as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRResourceTypeProcedure() objc.ID {
-	return purego.CFConstant(raw.HKFHIRResourceTypeProcedure())
+// HKFHIRResourceTypeProcedure returns the string constant HKFHIRResourceTypeProcedure, for use as a dictionary key or argument.
+func HKFHIRResourceTypeProcedure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRResourceTypeProcedure")))
 }
 
-// The key path you use to create predicates that query by a dose event’s log status.
-// HKPredicateKeyPathStatus returns the string constant HKPredicateKeyPathStatus as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathStatus() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathStatus())
+// HKPredicateKeyPathStatus returns the string constant HKPredicateKeyPathStatus, for use as a dictionary key or argument.
+func HKPredicateKeyPathStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathStatus")))
 }
 
-// The key path you use to create predicates that query by the dose event's medication log origin.
-// HKPredicateKeyPathLogOrigin returns the string constant HKPredicateKeyPathLogOrigin as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathLogOrigin() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathLogOrigin())
+// HKPredicateKeyPathLogOrigin returns the string constant HKPredicateKeyPathLogOrigin, for use as a dictionary key or argument.
+func HKPredicateKeyPathLogOrigin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathLogOrigin")))
 }
 
-// The key path you use to create predicates that query by the dose event's scheduled date.
-// HKPredicateKeyPathScheduledDate returns the string constant HKPredicateKeyPathScheduledDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathScheduledDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathScheduledDate())
+// HKPredicateKeyPathScheduledDate returns the string constant HKPredicateKeyPathScheduledDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathScheduledDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathScheduledDate")))
 }
 
-// The key path you use to create predicates that query by the dose event's medication concept identifier.
-// HKPredicateKeyPathMedicationConceptIdentifier returns the string constant HKPredicateKeyPathMedicationConceptIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMedicationConceptIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMedicationConceptIdentifier())
+// HKPredicateKeyPathMedicationConceptIdentifier returns the string constant HKPredicateKeyPathMedicationConceptIdentifier, for use as a dictionary key or argument.
+func HKPredicateKeyPathMedicationConceptIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMedicationConceptIdentifier")))
 }
 
-// HKPredicateKeyPathWorkoutDuration returns the string constant HKPredicateKeyPathWorkoutDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutDuration() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutDuration())
+// HKPredicateKeyPathWorkoutDuration returns the string constant HKPredicateKeyPathWorkoutDuration, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutDuration")))
 }
 
-// HKPredicateKeyPathWorkoutTotalDistance returns the string constant HKPredicateKeyPathWorkoutTotalDistance as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutTotalDistance() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutTotalDistance())
+// HKPredicateKeyPathWorkoutTotalDistance returns the string constant HKPredicateKeyPathWorkoutTotalDistance, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutTotalDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutTotalDistance")))
 }
 
-// HKPredicateKeyPathWorkoutTotalEnergyBurned returns the string constant HKPredicateKeyPathWorkoutTotalEnergyBurned as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutTotalEnergyBurned() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutTotalEnergyBurned())
+// HKPredicateKeyPathWorkoutTotalEnergyBurned returns the string constant HKPredicateKeyPathWorkoutTotalEnergyBurned, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutTotalEnergyBurned() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutTotalEnergyBurned")))
 }
 
-// HKPredicateKeyPathWorkoutType returns the string constant HKPredicateKeyPathWorkoutType as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutType() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutType())
+// HKPredicateKeyPathWorkoutType returns the string constant HKPredicateKeyPathWorkoutType, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutType")))
 }
 
-// HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount returns the string constant HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount())
+// HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount returns the string constant HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount")))
 }
 
-// HKPredicateKeyPathWorkoutTotalFlightsClimbed returns the string constant HKPredicateKeyPathWorkoutTotalFlightsClimbed as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutTotalFlightsClimbed() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutTotalFlightsClimbed())
+// HKPredicateKeyPathWorkoutTotalFlightsClimbed returns the string constant HKPredicateKeyPathWorkoutTotalFlightsClimbed, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutTotalFlightsClimbed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutTotalFlightsClimbed")))
 }
 
-// HKPredicateKeyPathWorkoutSumQuantity returns the string constant HKPredicateKeyPathWorkoutSumQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutSumQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutSumQuantity())
+// HKPredicateKeyPathWorkoutSumQuantity returns the string constant HKPredicateKeyPathWorkoutSumQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutSumQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutSumQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutMinimumQuantity returns the string constant HKPredicateKeyPathWorkoutMinimumQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutMinimumQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutMinimumQuantity())
+// HKPredicateKeyPathWorkoutMinimumQuantity returns the string constant HKPredicateKeyPathWorkoutMinimumQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutMinimumQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutMinimumQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutMaximumQuantity returns the string constant HKPredicateKeyPathWorkoutMaximumQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutMaximumQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutMaximumQuantity())
+// HKPredicateKeyPathWorkoutMaximumQuantity returns the string constant HKPredicateKeyPathWorkoutMaximumQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutMaximumQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutMaximumQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutAverageQuantity returns the string constant HKPredicateKeyPathWorkoutAverageQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutAverageQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutAverageQuantity())
+// HKPredicateKeyPathWorkoutAverageQuantity returns the string constant HKPredicateKeyPathWorkoutAverageQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutAverageQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutAverageQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutActivity returns the string constant HKPredicateKeyPathWorkoutActivity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivity())
+// HKPredicateKeyPathWorkoutActivity returns the string constant HKPredicateKeyPathWorkoutActivity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivity")))
 }
 
-// HKWorkoutSortIdentifierDuration returns the string constant HKWorkoutSortIdentifierDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutSortIdentifierDuration() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutSortIdentifierDuration())
+// HKWorkoutSortIdentifierDuration returns the string constant HKWorkoutSortIdentifierDuration, for use as a dictionary key or argument.
+func HKWorkoutSortIdentifierDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutSortIdentifierDuration")))
 }
 
-// HKWorkoutSortIdentifierTotalDistance returns the string constant HKWorkoutSortIdentifierTotalDistance as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutSortIdentifierTotalDistance() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutSortIdentifierTotalDistance())
+// HKWorkoutSortIdentifierTotalDistance returns the string constant HKWorkoutSortIdentifierTotalDistance, for use as a dictionary key or argument.
+func HKWorkoutSortIdentifierTotalDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutSortIdentifierTotalDistance")))
 }
 
-// HKWorkoutSortIdentifierTotalEnergyBurned returns the string constant HKWorkoutSortIdentifierTotalEnergyBurned as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutSortIdentifierTotalEnergyBurned() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutSortIdentifierTotalEnergyBurned())
+// HKWorkoutSortIdentifierTotalEnergyBurned returns the string constant HKWorkoutSortIdentifierTotalEnergyBurned, for use as a dictionary key or argument.
+func HKWorkoutSortIdentifierTotalEnergyBurned() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutSortIdentifierTotalEnergyBurned")))
 }
 
-// HKWorkoutSortIdentifierTotalSwimmingStrokeCount returns the string constant HKWorkoutSortIdentifierTotalSwimmingStrokeCount as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutSortIdentifierTotalSwimmingStrokeCount() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutSortIdentifierTotalSwimmingStrokeCount())
+// HKWorkoutSortIdentifierTotalSwimmingStrokeCount returns the string constant HKWorkoutSortIdentifierTotalSwimmingStrokeCount, for use as a dictionary key or argument.
+func HKWorkoutSortIdentifierTotalSwimmingStrokeCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutSortIdentifierTotalSwimmingStrokeCount")))
 }
 
-// HKWorkoutSortIdentifierTotalFlightsClimbed returns the string constant HKWorkoutSortIdentifierTotalFlightsClimbed as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutSortIdentifierTotalFlightsClimbed() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutSortIdentifierTotalFlightsClimbed())
+// HKWorkoutSortIdentifierTotalFlightsClimbed returns the string constant HKWorkoutSortIdentifierTotalFlightsClimbed, for use as a dictionary key or argument.
+func HKWorkoutSortIdentifierTotalFlightsClimbed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutSortIdentifierTotalFlightsClimbed")))
 }
 
-// HKQuantityTypeIdentifierAppleSleepingWristTemperature returns the string constant HKQuantityTypeIdentifierAppleSleepingWristTemperature as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAppleSleepingWristTemperature() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAppleSleepingWristTemperature(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAppleSleepingWristTemperature returns the string constant HKQuantityTypeIdentifierAppleSleepingWristTemperature, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAppleSleepingWristTemperature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAppleSleepingWristTemperature")))
 }
 
-// HKQuantityTypeIdentifierBodyFatPercentage returns the string constant HKQuantityTypeIdentifierBodyFatPercentage as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBodyFatPercentage() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBodyFatPercentage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBodyFatPercentage returns the string constant HKQuantityTypeIdentifierBodyFatPercentage, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBodyFatPercentage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBodyFatPercentage")))
 }
 
-// HKQuantityTypeIdentifierBodyMass returns the string constant HKQuantityTypeIdentifierBodyMass as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBodyMass() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBodyMass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBodyMass returns the string constant HKQuantityTypeIdentifierBodyMass, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBodyMass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBodyMass")))
 }
 
-// HKQuantityTypeIdentifierBodyMassIndex returns the string constant HKQuantityTypeIdentifierBodyMassIndex as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBodyMassIndex() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBodyMassIndex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBodyMassIndex returns the string constant HKQuantityTypeIdentifierBodyMassIndex, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBodyMassIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBodyMassIndex")))
 }
 
-// HKQuantityTypeIdentifierElectrodermalActivity returns the string constant HKQuantityTypeIdentifierElectrodermalActivity as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierElectrodermalActivity() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierElectrodermalActivity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierElectrodermalActivity returns the string constant HKQuantityTypeIdentifierElectrodermalActivity, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierElectrodermalActivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierElectrodermalActivity")))
 }
 
-// HKQuantityTypeIdentifierHeight returns the string constant HKQuantityTypeIdentifierHeight as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierHeight() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierHeight(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierHeight returns the string constant HKQuantityTypeIdentifierHeight, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeight")))
 }
 
-// HKQuantityTypeIdentifierLeanBodyMass returns the string constant HKQuantityTypeIdentifierLeanBodyMass as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierLeanBodyMass() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierLeanBodyMass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierLeanBodyMass returns the string constant HKQuantityTypeIdentifierLeanBodyMass, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierLeanBodyMass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierLeanBodyMass")))
 }
 
-// HKQuantityTypeIdentifierWaistCircumference returns the string constant HKQuantityTypeIdentifierWaistCircumference as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWaistCircumference() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWaistCircumference(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWaistCircumference returns the string constant HKQuantityTypeIdentifierWaistCircumference, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWaistCircumference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWaistCircumference")))
 }
 
-// HKQuantityTypeIdentifierActiveEnergyBurned returns the string constant HKQuantityTypeIdentifierActiveEnergyBurned as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierActiveEnergyBurned() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierActiveEnergyBurned(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierActiveEnergyBurned returns the string constant HKQuantityTypeIdentifierActiveEnergyBurned, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierActiveEnergyBurned() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierActiveEnergyBurned")))
 }
 
-// HKQuantityTypeIdentifierAppleExerciseTime returns the string constant HKQuantityTypeIdentifierAppleExerciseTime as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAppleExerciseTime() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAppleExerciseTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAppleExerciseTime returns the string constant HKQuantityTypeIdentifierAppleExerciseTime, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAppleExerciseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAppleExerciseTime")))
 }
 
-// HKQuantityTypeIdentifierAppleMoveTime returns the string constant HKQuantityTypeIdentifierAppleMoveTime as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAppleMoveTime() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAppleMoveTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAppleMoveTime returns the string constant HKQuantityTypeIdentifierAppleMoveTime, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAppleMoveTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAppleMoveTime")))
 }
 
-// HKQuantityTypeIdentifierAppleStandTime returns the string constant HKQuantityTypeIdentifierAppleStandTime as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAppleStandTime() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAppleStandTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAppleStandTime returns the string constant HKQuantityTypeIdentifierAppleStandTime, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAppleStandTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAppleStandTime")))
 }
 
-// HKQuantityTypeIdentifierBasalEnergyBurned returns the string constant HKQuantityTypeIdentifierBasalEnergyBurned as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBasalEnergyBurned() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBasalEnergyBurned(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBasalEnergyBurned returns the string constant HKQuantityTypeIdentifierBasalEnergyBurned, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBasalEnergyBurned() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBasalEnergyBurned")))
 }
 
-// HKQuantityTypeIdentifierCrossCountrySkiingSpeed returns the string constant HKQuantityTypeIdentifierCrossCountrySkiingSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierCrossCountrySkiingSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierCrossCountrySkiingSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierCrossCountrySkiingSpeed returns the string constant HKQuantityTypeIdentifierCrossCountrySkiingSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierCrossCountrySkiingSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierCrossCountrySkiingSpeed")))
 }
 
-// HKQuantityTypeIdentifierCyclingCadence returns the string constant HKQuantityTypeIdentifierCyclingCadence as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierCyclingCadence() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierCyclingCadence(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierCyclingCadence returns the string constant HKQuantityTypeIdentifierCyclingCadence, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierCyclingCadence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierCyclingCadence")))
 }
 
-// HKQuantityTypeIdentifierCyclingFunctionalThresholdPower returns the string constant HKQuantityTypeIdentifierCyclingFunctionalThresholdPower as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierCyclingFunctionalThresholdPower() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierCyclingFunctionalThresholdPower(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierCyclingFunctionalThresholdPower returns the string constant HKQuantityTypeIdentifierCyclingFunctionalThresholdPower, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierCyclingFunctionalThresholdPower() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierCyclingFunctionalThresholdPower")))
 }
 
-// HKQuantityTypeIdentifierCyclingPower returns the string constant HKQuantityTypeIdentifierCyclingPower as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierCyclingPower() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierCyclingPower(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierCyclingPower returns the string constant HKQuantityTypeIdentifierCyclingPower, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierCyclingPower() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierCyclingPower")))
 }
 
-// HKQuantityTypeIdentifierCyclingSpeed returns the string constant HKQuantityTypeIdentifierCyclingSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierCyclingSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierCyclingSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierCyclingSpeed returns the string constant HKQuantityTypeIdentifierCyclingSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierCyclingSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierCyclingSpeed")))
 }
 
-// HKQuantityTypeIdentifierDistanceCrossCountrySkiing returns the string constant HKQuantityTypeIdentifierDistanceCrossCountrySkiing as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceCrossCountrySkiing() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceCrossCountrySkiing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceCrossCountrySkiing returns the string constant HKQuantityTypeIdentifierDistanceCrossCountrySkiing, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceCrossCountrySkiing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceCrossCountrySkiing")))
 }
 
-// HKQuantityTypeIdentifierDistanceCycling returns the string constant HKQuantityTypeIdentifierDistanceCycling as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceCycling() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceCycling(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceCycling returns the string constant HKQuantityTypeIdentifierDistanceCycling, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceCycling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceCycling")))
 }
 
-// HKQuantityTypeIdentifierDistanceDownhillSnowSports returns the string constant HKQuantityTypeIdentifierDistanceDownhillSnowSports as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceDownhillSnowSports() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceDownhillSnowSports(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceDownhillSnowSports returns the string constant HKQuantityTypeIdentifierDistanceDownhillSnowSports, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceDownhillSnowSports() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceDownhillSnowSports")))
 }
 
-// HKQuantityTypeIdentifierDistancePaddleSports returns the string constant HKQuantityTypeIdentifierDistancePaddleSports as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistancePaddleSports() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistancePaddleSports(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistancePaddleSports returns the string constant HKQuantityTypeIdentifierDistancePaddleSports, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistancePaddleSports() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistancePaddleSports")))
 }
 
-// HKQuantityTypeIdentifierDistanceRowing returns the string constant HKQuantityTypeIdentifierDistanceRowing as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceRowing() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceRowing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceRowing returns the string constant HKQuantityTypeIdentifierDistanceRowing, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceRowing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceRowing")))
 }
 
-// HKQuantityTypeIdentifierDistanceSkatingSports returns the string constant HKQuantityTypeIdentifierDistanceSkatingSports as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceSkatingSports() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceSkatingSports(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceSkatingSports returns the string constant HKQuantityTypeIdentifierDistanceSkatingSports, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceSkatingSports() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceSkatingSports")))
 }
 
-// HKQuantityTypeIdentifierDistanceSwimming returns the string constant HKQuantityTypeIdentifierDistanceSwimming as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceSwimming() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceSwimming(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceSwimming returns the string constant HKQuantityTypeIdentifierDistanceSwimming, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceSwimming() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceSwimming")))
 }
 
-// HKQuantityTypeIdentifierDistanceWalkingRunning returns the string constant HKQuantityTypeIdentifierDistanceWalkingRunning as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceWalkingRunning() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceWalkingRunning(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceWalkingRunning returns the string constant HKQuantityTypeIdentifierDistanceWalkingRunning, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceWalkingRunning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceWalkingRunning")))
 }
 
-// HKQuantityTypeIdentifierDistanceWheelchair returns the string constant HKQuantityTypeIdentifierDistanceWheelchair as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDistanceWheelchair() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDistanceWheelchair(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDistanceWheelchair returns the string constant HKQuantityTypeIdentifierDistanceWheelchair, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDistanceWheelchair() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDistanceWheelchair")))
 }
 
-// HKQuantityTypeIdentifierEstimatedWorkoutEffortScore returns the string constant HKQuantityTypeIdentifierEstimatedWorkoutEffortScore as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierEstimatedWorkoutEffortScore() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierEstimatedWorkoutEffortScore(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierEstimatedWorkoutEffortScore returns the string constant HKQuantityTypeIdentifierEstimatedWorkoutEffortScore, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierEstimatedWorkoutEffortScore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierEstimatedWorkoutEffortScore")))
 }
 
-// HKQuantityTypeIdentifierFlightsClimbed returns the string constant HKQuantityTypeIdentifierFlightsClimbed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierFlightsClimbed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierFlightsClimbed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierFlightsClimbed returns the string constant HKQuantityTypeIdentifierFlightsClimbed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierFlightsClimbed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierFlightsClimbed")))
 }
 
-// HKQuantityTypeIdentifierNikeFuel returns the string constant HKQuantityTypeIdentifierNikeFuel as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierNikeFuel() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierNikeFuel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierNikeFuel returns the string constant HKQuantityTypeIdentifierNikeFuel, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierNikeFuel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierNikeFuel")))
 }
 
-// HKQuantityTypeIdentifierPaddleSportsSpeed returns the string constant HKQuantityTypeIdentifierPaddleSportsSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierPaddleSportsSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierPaddleSportsSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierPaddleSportsSpeed returns the string constant HKQuantityTypeIdentifierPaddleSportsSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierPaddleSportsSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierPaddleSportsSpeed")))
 }
 
-// HKQuantityTypeIdentifierPhysicalEffort returns the string constant HKQuantityTypeIdentifierPhysicalEffort as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierPhysicalEffort() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierPhysicalEffort(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierPhysicalEffort returns the string constant HKQuantityTypeIdentifierPhysicalEffort, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierPhysicalEffort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierPhysicalEffort")))
 }
 
-// HKQuantityTypeIdentifierPushCount returns the string constant HKQuantityTypeIdentifierPushCount as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierPushCount() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierPushCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierPushCount returns the string constant HKQuantityTypeIdentifierPushCount, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierPushCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierPushCount")))
 }
 
-// HKQuantityTypeIdentifierRowingSpeed returns the string constant HKQuantityTypeIdentifierRowingSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRowingSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRowingSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRowingSpeed returns the string constant HKQuantityTypeIdentifierRowingSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRowingSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRowingSpeed")))
 }
 
-// HKQuantityTypeIdentifierRunningPower returns the string constant HKQuantityTypeIdentifierRunningPower as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRunningPower() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRunningPower(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRunningPower returns the string constant HKQuantityTypeIdentifierRunningPower, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRunningPower() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRunningPower")))
 }
 
-// HKQuantityTypeIdentifierRunningSpeed returns the string constant HKQuantityTypeIdentifierRunningSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRunningSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRunningSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRunningSpeed returns the string constant HKQuantityTypeIdentifierRunningSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRunningSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRunningSpeed")))
 }
 
-// HKQuantityTypeIdentifierStepCount returns the string constant HKQuantityTypeIdentifierStepCount as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierStepCount() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierStepCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierStepCount returns the string constant HKQuantityTypeIdentifierStepCount, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierStepCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierStepCount")))
 }
 
-// HKQuantityTypeIdentifierSwimmingStrokeCount returns the string constant HKQuantityTypeIdentifierSwimmingStrokeCount as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierSwimmingStrokeCount() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierSwimmingStrokeCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierSwimmingStrokeCount returns the string constant HKQuantityTypeIdentifierSwimmingStrokeCount, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierSwimmingStrokeCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierSwimmingStrokeCount")))
 }
 
-// HKQuantityTypeIdentifierUnderwaterDepth returns the string constant HKQuantityTypeIdentifierUnderwaterDepth as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierUnderwaterDepth() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierUnderwaterDepth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierUnderwaterDepth returns the string constant HKQuantityTypeIdentifierUnderwaterDepth, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierUnderwaterDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierUnderwaterDepth")))
 }
 
-// HKQuantityTypeIdentifierWorkoutEffortScore returns the string constant HKQuantityTypeIdentifierWorkoutEffortScore as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWorkoutEffortScore() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWorkoutEffortScore(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWorkoutEffortScore returns the string constant HKQuantityTypeIdentifierWorkoutEffortScore, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWorkoutEffortScore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWorkoutEffortScore")))
 }
 
-// HKQuantityTypeIdentifierEnvironmentalAudioExposure returns the string constant HKQuantityTypeIdentifierEnvironmentalAudioExposure as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierEnvironmentalAudioExposure() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierEnvironmentalAudioExposure(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierEnvironmentalAudioExposure returns the string constant HKQuantityTypeIdentifierEnvironmentalAudioExposure, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierEnvironmentalAudioExposure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierEnvironmentalAudioExposure")))
 }
 
-// HKQuantityTypeIdentifierEnvironmentalSoundReduction returns the string constant HKQuantityTypeIdentifierEnvironmentalSoundReduction as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierEnvironmentalSoundReduction() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierEnvironmentalSoundReduction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierEnvironmentalSoundReduction returns the string constant HKQuantityTypeIdentifierEnvironmentalSoundReduction, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierEnvironmentalSoundReduction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierEnvironmentalSoundReduction")))
 }
 
-// HKQuantityTypeIdentifierHeadphoneAudioExposure returns the string constant HKQuantityTypeIdentifierHeadphoneAudioExposure as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierHeadphoneAudioExposure() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierHeadphoneAudioExposure(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierHeadphoneAudioExposure returns the string constant HKQuantityTypeIdentifierHeadphoneAudioExposure, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierHeadphoneAudioExposure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeadphoneAudioExposure")))
 }
 
-// HKQuantityTypeIdentifierAtrialFibrillationBurden returns the string constant HKQuantityTypeIdentifierAtrialFibrillationBurden as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAtrialFibrillationBurden() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAtrialFibrillationBurden(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAtrialFibrillationBurden returns the string constant HKQuantityTypeIdentifierAtrialFibrillationBurden, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAtrialFibrillationBurden() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAtrialFibrillationBurden")))
 }
 
-// HKQuantityTypeIdentifierHeartRate returns the string constant HKQuantityTypeIdentifierHeartRate as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierHeartRate() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierHeartRate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierHeartRate returns the string constant HKQuantityTypeIdentifierHeartRate, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierHeartRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeartRate")))
 }
 
-// HKQuantityTypeIdentifierHeartRateRecoveryOneMinute returns the string constant HKQuantityTypeIdentifierHeartRateRecoveryOneMinute as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierHeartRateRecoveryOneMinute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierHeartRateRecoveryOneMinute returns the string constant HKQuantityTypeIdentifierHeartRateRecoveryOneMinute, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeartRateRecoveryOneMinute")))
 }
 
-// HKQuantityTypeIdentifierHeartRateVariabilitySDNN returns the string constant HKQuantityTypeIdentifierHeartRateVariabilitySDNN as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierHeartRateVariabilitySDNN(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierHeartRateVariabilitySDNN returns the string constant HKQuantityTypeIdentifierHeartRateVariabilitySDNN, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierHeartRateVariabilitySDNN")))
 }
 
-// HKQuantityTypeIdentifierPeripheralPerfusionIndex returns the string constant HKQuantityTypeIdentifierPeripheralPerfusionIndex as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierPeripheralPerfusionIndex() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierPeripheralPerfusionIndex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierPeripheralPerfusionIndex returns the string constant HKQuantityTypeIdentifierPeripheralPerfusionIndex, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierPeripheralPerfusionIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierPeripheralPerfusionIndex")))
 }
 
-// HKQuantityTypeIdentifierRestingHeartRate returns the string constant HKQuantityTypeIdentifierRestingHeartRate as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRestingHeartRate() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRestingHeartRate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRestingHeartRate returns the string constant HKQuantityTypeIdentifierRestingHeartRate, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRestingHeartRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRestingHeartRate")))
 }
 
-// HKQuantityTypeIdentifierVO2Max returns the string constant HKQuantityTypeIdentifierVO2Max as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierVO2Max() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierVO2Max(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierVO2Max returns the string constant HKQuantityTypeIdentifierVO2Max, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierVO2Max() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierVO2Max")))
 }
 
-// HKQuantityTypeIdentifierWalkingHeartRateAverage returns the string constant HKQuantityTypeIdentifierWalkingHeartRateAverage as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWalkingHeartRateAverage() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWalkingHeartRateAverage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWalkingHeartRateAverage returns the string constant HKQuantityTypeIdentifierWalkingHeartRateAverage, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWalkingHeartRateAverage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWalkingHeartRateAverage")))
 }
 
-// HKQuantityTypeIdentifierAppleWalkingSteadiness returns the string constant HKQuantityTypeIdentifierAppleWalkingSteadiness as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAppleWalkingSteadiness() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAppleWalkingSteadiness(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAppleWalkingSteadiness returns the string constant HKQuantityTypeIdentifierAppleWalkingSteadiness, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAppleWalkingSteadiness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAppleWalkingSteadiness")))
 }
 
-// HKQuantityTypeIdentifierRunningGroundContactTime returns the string constant HKQuantityTypeIdentifierRunningGroundContactTime as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRunningGroundContactTime() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRunningGroundContactTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRunningGroundContactTime returns the string constant HKQuantityTypeIdentifierRunningGroundContactTime, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRunningGroundContactTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRunningGroundContactTime")))
 }
 
-// HKQuantityTypeIdentifierRunningStrideLength returns the string constant HKQuantityTypeIdentifierRunningStrideLength as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRunningStrideLength() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRunningStrideLength(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRunningStrideLength returns the string constant HKQuantityTypeIdentifierRunningStrideLength, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRunningStrideLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRunningStrideLength")))
 }
 
-// HKQuantityTypeIdentifierRunningVerticalOscillation returns the string constant HKQuantityTypeIdentifierRunningVerticalOscillation as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRunningVerticalOscillation() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRunningVerticalOscillation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRunningVerticalOscillation returns the string constant HKQuantityTypeIdentifierRunningVerticalOscillation, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRunningVerticalOscillation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRunningVerticalOscillation")))
 }
 
-// HKQuantityTypeIdentifierSixMinuteWalkTestDistance returns the string constant HKQuantityTypeIdentifierSixMinuteWalkTestDistance as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierSixMinuteWalkTestDistance() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierSixMinuteWalkTestDistance(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierSixMinuteWalkTestDistance returns the string constant HKQuantityTypeIdentifierSixMinuteWalkTestDistance, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierSixMinuteWalkTestDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierSixMinuteWalkTestDistance")))
 }
 
-// HKQuantityTypeIdentifierStairAscentSpeed returns the string constant HKQuantityTypeIdentifierStairAscentSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierStairAscentSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierStairAscentSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierStairAscentSpeed returns the string constant HKQuantityTypeIdentifierStairAscentSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierStairAscentSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierStairAscentSpeed")))
 }
 
-// HKQuantityTypeIdentifierStairDescentSpeed returns the string constant HKQuantityTypeIdentifierStairDescentSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierStairDescentSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierStairDescentSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierStairDescentSpeed returns the string constant HKQuantityTypeIdentifierStairDescentSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierStairDescentSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierStairDescentSpeed")))
 }
 
-// HKQuantityTypeIdentifierWalkingAsymmetryPercentage returns the string constant HKQuantityTypeIdentifierWalkingAsymmetryPercentage as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWalkingAsymmetryPercentage() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWalkingAsymmetryPercentage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWalkingAsymmetryPercentage returns the string constant HKQuantityTypeIdentifierWalkingAsymmetryPercentage, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWalkingAsymmetryPercentage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWalkingAsymmetryPercentage")))
 }
 
-// HKQuantityTypeIdentifierWalkingDoubleSupportPercentage returns the string constant HKQuantityTypeIdentifierWalkingDoubleSupportPercentage as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWalkingDoubleSupportPercentage() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWalkingDoubleSupportPercentage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWalkingDoubleSupportPercentage returns the string constant HKQuantityTypeIdentifierWalkingDoubleSupportPercentage, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWalkingDoubleSupportPercentage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWalkingDoubleSupportPercentage")))
 }
 
-// HKQuantityTypeIdentifierWalkingSpeed returns the string constant HKQuantityTypeIdentifierWalkingSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWalkingSpeed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWalkingSpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWalkingSpeed returns the string constant HKQuantityTypeIdentifierWalkingSpeed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWalkingSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWalkingSpeed")))
 }
 
-// HKQuantityTypeIdentifierWalkingStepLength returns the string constant HKQuantityTypeIdentifierWalkingStepLength as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWalkingStepLength() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWalkingStepLength(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWalkingStepLength returns the string constant HKQuantityTypeIdentifierWalkingStepLength, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWalkingStepLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWalkingStepLength")))
 }
 
-// HKQuantityTypeIdentifierDietaryBiotin returns the string constant HKQuantityTypeIdentifierDietaryBiotin as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryBiotin() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryBiotin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryBiotin returns the string constant HKQuantityTypeIdentifierDietaryBiotin, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryBiotin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryBiotin")))
 }
 
-// HKQuantityTypeIdentifierDietaryCaffeine returns the string constant HKQuantityTypeIdentifierDietaryCaffeine as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryCaffeine() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryCaffeine(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryCaffeine returns the string constant HKQuantityTypeIdentifierDietaryCaffeine, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryCaffeine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryCaffeine")))
 }
 
-// HKQuantityTypeIdentifierDietaryCalcium returns the string constant HKQuantityTypeIdentifierDietaryCalcium as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryCalcium() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryCalcium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryCalcium returns the string constant HKQuantityTypeIdentifierDietaryCalcium, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryCalcium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryCalcium")))
 }
 
-// HKQuantityTypeIdentifierDietaryCarbohydrates returns the string constant HKQuantityTypeIdentifierDietaryCarbohydrates as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryCarbohydrates() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryCarbohydrates(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryCarbohydrates returns the string constant HKQuantityTypeIdentifierDietaryCarbohydrates, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryCarbohydrates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryCarbohydrates")))
 }
 
-// HKQuantityTypeIdentifierDietaryChloride returns the string constant HKQuantityTypeIdentifierDietaryChloride as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryChloride() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryChloride(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryChloride returns the string constant HKQuantityTypeIdentifierDietaryChloride, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryChloride() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryChloride")))
 }
 
-// HKQuantityTypeIdentifierDietaryCholesterol returns the string constant HKQuantityTypeIdentifierDietaryCholesterol as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryCholesterol() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryCholesterol(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryCholesterol returns the string constant HKQuantityTypeIdentifierDietaryCholesterol, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryCholesterol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryCholesterol")))
 }
 
-// HKQuantityTypeIdentifierDietaryChromium returns the string constant HKQuantityTypeIdentifierDietaryChromium as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryChromium() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryChromium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryChromium returns the string constant HKQuantityTypeIdentifierDietaryChromium, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryChromium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryChromium")))
 }
 
-// HKQuantityTypeIdentifierDietaryCopper returns the string constant HKQuantityTypeIdentifierDietaryCopper as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryCopper() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryCopper(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryCopper returns the string constant HKQuantityTypeIdentifierDietaryCopper, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryCopper() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryCopper")))
 }
 
-// HKQuantityTypeIdentifierDietaryEnergyConsumed returns the string constant HKQuantityTypeIdentifierDietaryEnergyConsumed as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryEnergyConsumed() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryEnergyConsumed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryEnergyConsumed returns the string constant HKQuantityTypeIdentifierDietaryEnergyConsumed, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryEnergyConsumed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryEnergyConsumed")))
 }
 
-// HKQuantityTypeIdentifierDietaryFatMonounsaturated returns the string constant HKQuantityTypeIdentifierDietaryFatMonounsaturated as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryFatMonounsaturated() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryFatMonounsaturated(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryFatMonounsaturated returns the string constant HKQuantityTypeIdentifierDietaryFatMonounsaturated, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryFatMonounsaturated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryFatMonounsaturated")))
 }
 
-// HKQuantityTypeIdentifierDietaryFatPolyunsaturated returns the string constant HKQuantityTypeIdentifierDietaryFatPolyunsaturated as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryFatPolyunsaturated() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryFatPolyunsaturated(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryFatPolyunsaturated returns the string constant HKQuantityTypeIdentifierDietaryFatPolyunsaturated, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryFatPolyunsaturated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryFatPolyunsaturated")))
 }
 
-// HKQuantityTypeIdentifierDietaryFatSaturated returns the string constant HKQuantityTypeIdentifierDietaryFatSaturated as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryFatSaturated() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryFatSaturated(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryFatSaturated returns the string constant HKQuantityTypeIdentifierDietaryFatSaturated, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryFatSaturated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryFatSaturated")))
 }
 
-// HKQuantityTypeIdentifierDietaryFatTotal returns the string constant HKQuantityTypeIdentifierDietaryFatTotal as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryFatTotal() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryFatTotal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryFatTotal returns the string constant HKQuantityTypeIdentifierDietaryFatTotal, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryFatTotal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryFatTotal")))
 }
 
-// HKQuantityTypeIdentifierDietaryFiber returns the string constant HKQuantityTypeIdentifierDietaryFiber as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryFiber() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryFiber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryFiber returns the string constant HKQuantityTypeIdentifierDietaryFiber, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryFiber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryFiber")))
 }
 
-// HKQuantityTypeIdentifierDietaryFolate returns the string constant HKQuantityTypeIdentifierDietaryFolate as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryFolate() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryFolate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryFolate returns the string constant HKQuantityTypeIdentifierDietaryFolate, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryFolate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryFolate")))
 }
 
-// HKQuantityTypeIdentifierDietaryIodine returns the string constant HKQuantityTypeIdentifierDietaryIodine as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryIodine() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryIodine(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryIodine returns the string constant HKQuantityTypeIdentifierDietaryIodine, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryIodine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryIodine")))
 }
 
-// HKQuantityTypeIdentifierDietaryIron returns the string constant HKQuantityTypeIdentifierDietaryIron as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryIron() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryIron(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryIron returns the string constant HKQuantityTypeIdentifierDietaryIron, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryIron() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryIron")))
 }
 
-// HKQuantityTypeIdentifierDietaryMagnesium returns the string constant HKQuantityTypeIdentifierDietaryMagnesium as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryMagnesium() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryMagnesium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryMagnesium returns the string constant HKQuantityTypeIdentifierDietaryMagnesium, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryMagnesium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryMagnesium")))
 }
 
-// HKQuantityTypeIdentifierDietaryManganese returns the string constant HKQuantityTypeIdentifierDietaryManganese as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryManganese() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryManganese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryManganese returns the string constant HKQuantityTypeIdentifierDietaryManganese, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryManganese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryManganese")))
 }
 
-// HKQuantityTypeIdentifierDietaryMolybdenum returns the string constant HKQuantityTypeIdentifierDietaryMolybdenum as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryMolybdenum() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryMolybdenum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryMolybdenum returns the string constant HKQuantityTypeIdentifierDietaryMolybdenum, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryMolybdenum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryMolybdenum")))
 }
 
-// HKQuantityTypeIdentifierDietaryNiacin returns the string constant HKQuantityTypeIdentifierDietaryNiacin as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryNiacin() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryNiacin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryNiacin returns the string constant HKQuantityTypeIdentifierDietaryNiacin, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryNiacin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryNiacin")))
 }
 
-// HKQuantityTypeIdentifierDietaryPantothenicAcid returns the string constant HKQuantityTypeIdentifierDietaryPantothenicAcid as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryPantothenicAcid() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryPantothenicAcid(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryPantothenicAcid returns the string constant HKQuantityTypeIdentifierDietaryPantothenicAcid, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryPantothenicAcid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryPantothenicAcid")))
 }
 
-// HKQuantityTypeIdentifierDietaryPhosphorus returns the string constant HKQuantityTypeIdentifierDietaryPhosphorus as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryPhosphorus() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryPhosphorus(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryPhosphorus returns the string constant HKQuantityTypeIdentifierDietaryPhosphorus, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryPhosphorus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryPhosphorus")))
 }
 
-// HKQuantityTypeIdentifierDietaryPotassium returns the string constant HKQuantityTypeIdentifierDietaryPotassium as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryPotassium() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryPotassium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryPotassium returns the string constant HKQuantityTypeIdentifierDietaryPotassium, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryPotassium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryPotassium")))
 }
 
-// HKQuantityTypeIdentifierDietaryProtein returns the string constant HKQuantityTypeIdentifierDietaryProtein as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryProtein() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryProtein(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryProtein returns the string constant HKQuantityTypeIdentifierDietaryProtein, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryProtein() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryProtein")))
 }
 
-// HKQuantityTypeIdentifierDietaryRiboflavin returns the string constant HKQuantityTypeIdentifierDietaryRiboflavin as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryRiboflavin() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryRiboflavin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryRiboflavin returns the string constant HKQuantityTypeIdentifierDietaryRiboflavin, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryRiboflavin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryRiboflavin")))
 }
 
-// HKQuantityTypeIdentifierDietarySelenium returns the string constant HKQuantityTypeIdentifierDietarySelenium as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietarySelenium() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietarySelenium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietarySelenium returns the string constant HKQuantityTypeIdentifierDietarySelenium, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietarySelenium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietarySelenium")))
 }
 
-// HKQuantityTypeIdentifierDietarySodium returns the string constant HKQuantityTypeIdentifierDietarySodium as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietarySodium() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietarySodium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietarySodium returns the string constant HKQuantityTypeIdentifierDietarySodium, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietarySodium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietarySodium")))
 }
 
-// HKQuantityTypeIdentifierDietarySugar returns the string constant HKQuantityTypeIdentifierDietarySugar as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietarySugar() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietarySugar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietarySugar returns the string constant HKQuantityTypeIdentifierDietarySugar, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietarySugar() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietarySugar")))
 }
 
-// HKQuantityTypeIdentifierDietaryThiamin returns the string constant HKQuantityTypeIdentifierDietaryThiamin as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryThiamin() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryThiamin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryThiamin returns the string constant HKQuantityTypeIdentifierDietaryThiamin, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryThiamin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryThiamin")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminA returns the string constant HKQuantityTypeIdentifierDietaryVitaminA as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminA() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminA(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminA returns the string constant HKQuantityTypeIdentifierDietaryVitaminA, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminA")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminB12 returns the string constant HKQuantityTypeIdentifierDietaryVitaminB12 as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminB12() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminB12(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminB12 returns the string constant HKQuantityTypeIdentifierDietaryVitaminB12, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminB12() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminB12")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminB6 returns the string constant HKQuantityTypeIdentifierDietaryVitaminB6 as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminB6() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminB6(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminB6 returns the string constant HKQuantityTypeIdentifierDietaryVitaminB6, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminB6() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminB6")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminC returns the string constant HKQuantityTypeIdentifierDietaryVitaminC as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminC() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminC returns the string constant HKQuantityTypeIdentifierDietaryVitaminC, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminC")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminD returns the string constant HKQuantityTypeIdentifierDietaryVitaminD as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminD() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminD(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminD returns the string constant HKQuantityTypeIdentifierDietaryVitaminD, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminD")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminE returns the string constant HKQuantityTypeIdentifierDietaryVitaminE as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminE() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminE(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminE returns the string constant HKQuantityTypeIdentifierDietaryVitaminE, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminE")))
 }
 
-// HKQuantityTypeIdentifierDietaryVitaminK returns the string constant HKQuantityTypeIdentifierDietaryVitaminK as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryVitaminK() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryVitaminK(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryVitaminK returns the string constant HKQuantityTypeIdentifierDietaryVitaminK, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryVitaminK() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryVitaminK")))
 }
 
-// HKQuantityTypeIdentifierDietaryWater returns the string constant HKQuantityTypeIdentifierDietaryWater as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryWater() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryWater(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryWater returns the string constant HKQuantityTypeIdentifierDietaryWater, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryWater() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryWater")))
 }
 
-// HKQuantityTypeIdentifierDietaryZinc returns the string constant HKQuantityTypeIdentifierDietaryZinc as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierDietaryZinc() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierDietaryZinc(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierDietaryZinc returns the string constant HKQuantityTypeIdentifierDietaryZinc, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierDietaryZinc() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierDietaryZinc")))
 }
 
-// HKQuantityTypeIdentifierBloodAlcoholContent returns the string constant HKQuantityTypeIdentifierBloodAlcoholContent as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBloodAlcoholContent() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBloodAlcoholContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBloodAlcoholContent returns the string constant HKQuantityTypeIdentifierBloodAlcoholContent, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBloodAlcoholContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBloodAlcoholContent")))
 }
 
-// HKQuantityTypeIdentifierBloodPressureDiastolic returns the string constant HKQuantityTypeIdentifierBloodPressureDiastolic as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBloodPressureDiastolic() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBloodPressureDiastolic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBloodPressureDiastolic returns the string constant HKQuantityTypeIdentifierBloodPressureDiastolic, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBloodPressureDiastolic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBloodPressureDiastolic")))
 }
 
-// HKQuantityTypeIdentifierBloodPressureSystolic returns the string constant HKQuantityTypeIdentifierBloodPressureSystolic as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBloodPressureSystolic() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBloodPressureSystolic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBloodPressureSystolic returns the string constant HKQuantityTypeIdentifierBloodPressureSystolic, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBloodPressureSystolic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBloodPressureSystolic")))
 }
 
-// HKQuantityTypeIdentifierInsulinDelivery returns the string constant HKQuantityTypeIdentifierInsulinDelivery as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierInsulinDelivery() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierInsulinDelivery(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierInsulinDelivery returns the string constant HKQuantityTypeIdentifierInsulinDelivery, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierInsulinDelivery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierInsulinDelivery")))
 }
 
-// HKQuantityTypeIdentifierNumberOfAlcoholicBeverages returns the string constant HKQuantityTypeIdentifierNumberOfAlcoholicBeverages as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierNumberOfAlcoholicBeverages() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierNumberOfAlcoholicBeverages(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierNumberOfAlcoholicBeverages returns the string constant HKQuantityTypeIdentifierNumberOfAlcoholicBeverages, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierNumberOfAlcoholicBeverages() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierNumberOfAlcoholicBeverages")))
 }
 
-// HKQuantityTypeIdentifierNumberOfTimesFallen returns the string constant HKQuantityTypeIdentifierNumberOfTimesFallen as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierNumberOfTimesFallen() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierNumberOfTimesFallen(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierNumberOfTimesFallen returns the string constant HKQuantityTypeIdentifierNumberOfTimesFallen, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierNumberOfTimesFallen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierNumberOfTimesFallen")))
 }
 
-// HKQuantityTypeIdentifierTimeInDaylight returns the string constant HKQuantityTypeIdentifierTimeInDaylight as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierTimeInDaylight() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierTimeInDaylight(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierTimeInDaylight returns the string constant HKQuantityTypeIdentifierTimeInDaylight, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierTimeInDaylight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierTimeInDaylight")))
 }
 
-// HKQuantityTypeIdentifierUVExposure returns the string constant HKQuantityTypeIdentifierUVExposure as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierUVExposure() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierUVExposure(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierUVExposure returns the string constant HKQuantityTypeIdentifierUVExposure, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierUVExposure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierUVExposure")))
 }
 
-// HKQuantityTypeIdentifierWaterTemperature returns the string constant HKQuantityTypeIdentifierWaterTemperature as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierWaterTemperature() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierWaterTemperature(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierWaterTemperature returns the string constant HKQuantityTypeIdentifierWaterTemperature, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierWaterTemperature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierWaterTemperature")))
 }
 
-// HKQuantityTypeIdentifierBasalBodyTemperature returns the string constant HKQuantityTypeIdentifierBasalBodyTemperature as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBasalBodyTemperature() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBasalBodyTemperature(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBasalBodyTemperature returns the string constant HKQuantityTypeIdentifierBasalBodyTemperature, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBasalBodyTemperature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBasalBodyTemperature")))
 }
 
-// HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances returns the string constant HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances returns the string constant HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances")))
 }
 
-// HKQuantityTypeIdentifierForcedExpiratoryVolume1 returns the string constant HKQuantityTypeIdentifierForcedExpiratoryVolume1 as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierForcedExpiratoryVolume1() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierForcedExpiratoryVolume1(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierForcedExpiratoryVolume1 returns the string constant HKQuantityTypeIdentifierForcedExpiratoryVolume1, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierForcedExpiratoryVolume1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierForcedExpiratoryVolume1")))
 }
 
-// HKQuantityTypeIdentifierForcedVitalCapacity returns the string constant HKQuantityTypeIdentifierForcedVitalCapacity as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierForcedVitalCapacity() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierForcedVitalCapacity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierForcedVitalCapacity returns the string constant HKQuantityTypeIdentifierForcedVitalCapacity, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierForcedVitalCapacity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierForcedVitalCapacity")))
 }
 
-// HKQuantityTypeIdentifierInhalerUsage returns the string constant HKQuantityTypeIdentifierInhalerUsage as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierInhalerUsage() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierInhalerUsage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierInhalerUsage returns the string constant HKQuantityTypeIdentifierInhalerUsage, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierInhalerUsage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierInhalerUsage")))
 }
 
-// HKQuantityTypeIdentifierOxygenSaturation returns the string constant HKQuantityTypeIdentifierOxygenSaturation as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierOxygenSaturation() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierOxygenSaturation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierOxygenSaturation returns the string constant HKQuantityTypeIdentifierOxygenSaturation, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierOxygenSaturation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierOxygenSaturation")))
 }
 
-// HKQuantityTypeIdentifierPeakExpiratoryFlowRate returns the string constant HKQuantityTypeIdentifierPeakExpiratoryFlowRate as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierPeakExpiratoryFlowRate() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierPeakExpiratoryFlowRate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierPeakExpiratoryFlowRate returns the string constant HKQuantityTypeIdentifierPeakExpiratoryFlowRate, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierPeakExpiratoryFlowRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierPeakExpiratoryFlowRate")))
 }
 
-// HKQuantityTypeIdentifierRespiratoryRate returns the string constant HKQuantityTypeIdentifierRespiratoryRate as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierRespiratoryRate() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierRespiratoryRate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierRespiratoryRate returns the string constant HKQuantityTypeIdentifierRespiratoryRate, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierRespiratoryRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierRespiratoryRate")))
 }
 
-// HKQuantityTypeIdentifierBloodGlucose returns the string constant HKQuantityTypeIdentifierBloodGlucose as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBloodGlucose() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBloodGlucose(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBloodGlucose returns the string constant HKQuantityTypeIdentifierBloodGlucose, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBloodGlucose() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBloodGlucose")))
 }
 
-// HKQuantityTypeIdentifierBodyTemperature returns the string constant HKQuantityTypeIdentifierBodyTemperature as an objc.ID, for use as a dictionary key or selector argument.
-func HKQuantityTypeIdentifierBodyTemperature() objc.ID {
-	if _r := raw.HKQuantityTypeIdentifierBodyTemperature(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKQuantityTypeIdentifierBodyTemperature returns the string constant HKQuantityTypeIdentifierBodyTemperature, for use as a dictionary key or argument.
+func HKQuantityTypeIdentifierBodyTemperature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKQuantityTypeIdentifierBodyTemperature")))
 }
 
-// HKCategoryTypeIdentifierAppleStandHour returns the string constant HKCategoryTypeIdentifierAppleStandHour as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierAppleStandHour() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierAppleStandHour(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierAppleStandHour returns the string constant HKCategoryTypeIdentifierAppleStandHour, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierAppleStandHour() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierAppleStandHour")))
 }
 
-// HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent returns the string constant HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent returns the string constant HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent")))
 }
 
-// HKCategoryTypeIdentifierHeadphoneAudioExposureEvent returns the string constant HKCategoryTypeIdentifierHeadphoneAudioExposureEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHeadphoneAudioExposureEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHeadphoneAudioExposureEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHeadphoneAudioExposureEvent returns the string constant HKCategoryTypeIdentifierHeadphoneAudioExposureEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHeadphoneAudioExposureEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHeadphoneAudioExposureEvent")))
 }
 
-// HKCategoryTypeIdentifierHighHeartRateEvent returns the string constant HKCategoryTypeIdentifierHighHeartRateEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHighHeartRateEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHighHeartRateEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHighHeartRateEvent returns the string constant HKCategoryTypeIdentifierHighHeartRateEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHighHeartRateEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHighHeartRateEvent")))
 }
 
-// HKCategoryTypeIdentifierHypertensionEvent returns the string constant HKCategoryTypeIdentifierHypertensionEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHypertensionEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHypertensionEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHypertensionEvent returns the string constant HKCategoryTypeIdentifierHypertensionEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHypertensionEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHypertensionEvent")))
 }
 
-// HKCategoryTypeIdentifierIrregularHeartRhythmEvent returns the string constant HKCategoryTypeIdentifierIrregularHeartRhythmEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierIrregularHeartRhythmEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierIrregularHeartRhythmEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierIrregularHeartRhythmEvent returns the string constant HKCategoryTypeIdentifierIrregularHeartRhythmEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierIrregularHeartRhythmEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierIrregularHeartRhythmEvent")))
 }
 
-// HKCategoryTypeIdentifierLowCardioFitnessEvent returns the string constant HKCategoryTypeIdentifierLowCardioFitnessEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierLowCardioFitnessEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierLowCardioFitnessEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierLowCardioFitnessEvent returns the string constant HKCategoryTypeIdentifierLowCardioFitnessEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierLowCardioFitnessEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLowCardioFitnessEvent")))
 }
 
-// HKCategoryTypeIdentifierLowHeartRateEvent returns the string constant HKCategoryTypeIdentifierLowHeartRateEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierLowHeartRateEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierLowHeartRateEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierLowHeartRateEvent returns the string constant HKCategoryTypeIdentifierLowHeartRateEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierLowHeartRateEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLowHeartRateEvent")))
 }
 
-// HKCategoryTypeIdentifierMindfulSession returns the string constant HKCategoryTypeIdentifierMindfulSession as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierMindfulSession() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierMindfulSession(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierMindfulSession returns the string constant HKCategoryTypeIdentifierMindfulSession, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierMindfulSession() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierMindfulSession")))
 }
 
-// HKCategoryTypeIdentifierAppleWalkingSteadinessEvent returns the string constant HKCategoryTypeIdentifierAppleWalkingSteadinessEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierAppleWalkingSteadinessEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierAppleWalkingSteadinessEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierAppleWalkingSteadinessEvent returns the string constant HKCategoryTypeIdentifierAppleWalkingSteadinessEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierAppleWalkingSteadinessEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierAppleWalkingSteadinessEvent")))
 }
 
-// HKCategoryTypeIdentifierHandwashingEvent returns the string constant HKCategoryTypeIdentifierHandwashingEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHandwashingEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHandwashingEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHandwashingEvent returns the string constant HKCategoryTypeIdentifierHandwashingEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHandwashingEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHandwashingEvent")))
 }
 
-// HKCategoryTypeIdentifierToothbrushingEvent returns the string constant HKCategoryTypeIdentifierToothbrushingEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierToothbrushingEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierToothbrushingEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierToothbrushingEvent returns the string constant HKCategoryTypeIdentifierToothbrushingEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierToothbrushingEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierToothbrushingEvent")))
 }
 
-// HKCategoryTypeIdentifierBleedingAfterPregnancy returns the string constant HKCategoryTypeIdentifierBleedingAfterPregnancy as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierBleedingAfterPregnancy() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierBleedingAfterPregnancy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierBleedingAfterPregnancy returns the string constant HKCategoryTypeIdentifierBleedingAfterPregnancy, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierBleedingAfterPregnancy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBleedingAfterPregnancy")))
 }
 
-// HKCategoryTypeIdentifierBleedingDuringPregnancy returns the string constant HKCategoryTypeIdentifierBleedingDuringPregnancy as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierBleedingDuringPregnancy() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierBleedingDuringPregnancy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierBleedingDuringPregnancy returns the string constant HKCategoryTypeIdentifierBleedingDuringPregnancy, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierBleedingDuringPregnancy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBleedingDuringPregnancy")))
 }
 
-// HKCategoryTypeIdentifierCervicalMucusQuality returns the string constant HKCategoryTypeIdentifierCervicalMucusQuality as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierCervicalMucusQuality() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierCervicalMucusQuality(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierCervicalMucusQuality returns the string constant HKCategoryTypeIdentifierCervicalMucusQuality, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierCervicalMucusQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierCervicalMucusQuality")))
 }
 
-// HKCategoryTypeIdentifierContraceptive returns the string constant HKCategoryTypeIdentifierContraceptive as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierContraceptive() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierContraceptive(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierContraceptive returns the string constant HKCategoryTypeIdentifierContraceptive, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierContraceptive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierContraceptive")))
 }
 
-// HKCategoryTypeIdentifierInfrequentMenstrualCycles returns the string constant HKCategoryTypeIdentifierInfrequentMenstrualCycles as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierInfrequentMenstrualCycles() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierInfrequentMenstrualCycles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierInfrequentMenstrualCycles returns the string constant HKCategoryTypeIdentifierInfrequentMenstrualCycles, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierInfrequentMenstrualCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierInfrequentMenstrualCycles")))
 }
 
-// HKCategoryTypeIdentifierIntermenstrualBleeding returns the string constant HKCategoryTypeIdentifierIntermenstrualBleeding as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierIntermenstrualBleeding() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierIntermenstrualBleeding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierIntermenstrualBleeding returns the string constant HKCategoryTypeIdentifierIntermenstrualBleeding, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierIntermenstrualBleeding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierIntermenstrualBleeding")))
 }
 
-// HKCategoryTypeIdentifierIrregularMenstrualCycles returns the string constant HKCategoryTypeIdentifierIrregularMenstrualCycles as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierIrregularMenstrualCycles() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierIrregularMenstrualCycles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierIrregularMenstrualCycles returns the string constant HKCategoryTypeIdentifierIrregularMenstrualCycles, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierIrregularMenstrualCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierIrregularMenstrualCycles")))
 }
 
-// HKCategoryTypeIdentifierLactation returns the string constant HKCategoryTypeIdentifierLactation as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierLactation() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierLactation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierLactation returns the string constant HKCategoryTypeIdentifierLactation, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierLactation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLactation")))
 }
 
-// HKCategoryTypeIdentifierMenstrualFlow returns the string constant HKCategoryTypeIdentifierMenstrualFlow as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierMenstrualFlow() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierMenstrualFlow(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierMenstrualFlow returns the string constant HKCategoryTypeIdentifierMenstrualFlow, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierMenstrualFlow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierMenstrualFlow")))
 }
 
-// HKCategoryTypeIdentifierOvulationTestResult returns the string constant HKCategoryTypeIdentifierOvulationTestResult as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierOvulationTestResult() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierOvulationTestResult(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierOvulationTestResult returns the string constant HKCategoryTypeIdentifierOvulationTestResult, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierOvulationTestResult() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierOvulationTestResult")))
 }
 
-// HKCategoryTypeIdentifierPersistentIntermenstrualBleeding returns the string constant HKCategoryTypeIdentifierPersistentIntermenstrualBleeding as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierPersistentIntermenstrualBleeding() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierPersistentIntermenstrualBleeding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierPersistentIntermenstrualBleeding returns the string constant HKCategoryTypeIdentifierPersistentIntermenstrualBleeding, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierPersistentIntermenstrualBleeding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierPersistentIntermenstrualBleeding")))
 }
 
-// HKCategoryTypeIdentifierPregnancy returns the string constant HKCategoryTypeIdentifierPregnancy as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierPregnancy() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierPregnancy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierPregnancy returns the string constant HKCategoryTypeIdentifierPregnancy, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierPregnancy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierPregnancy")))
 }
 
-// HKCategoryTypeIdentifierPregnancyTestResult returns the string constant HKCategoryTypeIdentifierPregnancyTestResult as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierPregnancyTestResult() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierPregnancyTestResult(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierPregnancyTestResult returns the string constant HKCategoryTypeIdentifierPregnancyTestResult, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierPregnancyTestResult() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierPregnancyTestResult")))
 }
 
-// HKCategoryTypeIdentifierProgesteroneTestResult returns the string constant HKCategoryTypeIdentifierProgesteroneTestResult as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierProgesteroneTestResult() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierProgesteroneTestResult(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierProgesteroneTestResult returns the string constant HKCategoryTypeIdentifierProgesteroneTestResult, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierProgesteroneTestResult() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierProgesteroneTestResult")))
 }
 
-// HKCategoryTypeIdentifierProlongedMenstrualPeriods returns the string constant HKCategoryTypeIdentifierProlongedMenstrualPeriods as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierProlongedMenstrualPeriods() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierProlongedMenstrualPeriods(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierProlongedMenstrualPeriods returns the string constant HKCategoryTypeIdentifierProlongedMenstrualPeriods, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierProlongedMenstrualPeriods() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierProlongedMenstrualPeriods")))
 }
 
-// HKCategoryTypeIdentifierSexualActivity returns the string constant HKCategoryTypeIdentifierSexualActivity as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSexualActivity() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSexualActivity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSexualActivity returns the string constant HKCategoryTypeIdentifierSexualActivity, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSexualActivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSexualActivity")))
 }
 
-// HKCategoryTypeIdentifierSleepApneaEvent returns the string constant HKCategoryTypeIdentifierSleepApneaEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSleepApneaEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSleepApneaEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSleepApneaEvent returns the string constant HKCategoryTypeIdentifierSleepApneaEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSleepApneaEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSleepApneaEvent")))
 }
 
-// HKCategoryTypeIdentifierSleepAnalysis returns the string constant HKCategoryTypeIdentifierSleepAnalysis as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSleepAnalysis() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSleepAnalysis(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSleepAnalysis returns the string constant HKCategoryTypeIdentifierSleepAnalysis, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSleepAnalysis() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSleepAnalysis")))
 }
 
-// HKCategoryTypeIdentifierAbdominalCramps returns the string constant HKCategoryTypeIdentifierAbdominalCramps as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierAbdominalCramps() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierAbdominalCramps(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierAbdominalCramps returns the string constant HKCategoryTypeIdentifierAbdominalCramps, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierAbdominalCramps() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierAbdominalCramps")))
 }
 
-// HKCategoryTypeIdentifierAcne returns the string constant HKCategoryTypeIdentifierAcne as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierAcne() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierAcne(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierAcne returns the string constant HKCategoryTypeIdentifierAcne, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierAcne() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierAcne")))
 }
 
-// HKCategoryTypeIdentifierAppetiteChanges returns the string constant HKCategoryTypeIdentifierAppetiteChanges as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierAppetiteChanges() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierAppetiteChanges(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierAppetiteChanges returns the string constant HKCategoryTypeIdentifierAppetiteChanges, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierAppetiteChanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierAppetiteChanges")))
 }
 
-// HKCategoryTypeIdentifierBladderIncontinence returns the string constant HKCategoryTypeIdentifierBladderIncontinence as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierBladderIncontinence() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierBladderIncontinence(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierBladderIncontinence returns the string constant HKCategoryTypeIdentifierBladderIncontinence, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierBladderIncontinence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBladderIncontinence")))
 }
 
-// HKCategoryTypeIdentifierBloating returns the string constant HKCategoryTypeIdentifierBloating as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierBloating() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierBloating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierBloating returns the string constant HKCategoryTypeIdentifierBloating, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierBloating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBloating")))
 }
 
-// HKCategoryTypeIdentifierBreastPain returns the string constant HKCategoryTypeIdentifierBreastPain as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierBreastPain() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierBreastPain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierBreastPain returns the string constant HKCategoryTypeIdentifierBreastPain, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierBreastPain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierBreastPain")))
 }
 
-// HKCategoryTypeIdentifierChestTightnessOrPain returns the string constant HKCategoryTypeIdentifierChestTightnessOrPain as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierChestTightnessOrPain() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierChestTightnessOrPain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierChestTightnessOrPain returns the string constant HKCategoryTypeIdentifierChestTightnessOrPain, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierChestTightnessOrPain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierChestTightnessOrPain")))
 }
 
-// HKCategoryTypeIdentifierChills returns the string constant HKCategoryTypeIdentifierChills as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierChills() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierChills(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierChills returns the string constant HKCategoryTypeIdentifierChills, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierChills() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierChills")))
 }
 
-// HKCategoryTypeIdentifierConstipation returns the string constant HKCategoryTypeIdentifierConstipation as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierConstipation() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierConstipation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierConstipation returns the string constant HKCategoryTypeIdentifierConstipation, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierConstipation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierConstipation")))
 }
 
-// HKCategoryTypeIdentifierCoughing returns the string constant HKCategoryTypeIdentifierCoughing as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierCoughing() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierCoughing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierCoughing returns the string constant HKCategoryTypeIdentifierCoughing, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierCoughing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierCoughing")))
 }
 
-// HKCategoryTypeIdentifierDiarrhea returns the string constant HKCategoryTypeIdentifierDiarrhea as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierDiarrhea() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierDiarrhea(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierDiarrhea returns the string constant HKCategoryTypeIdentifierDiarrhea, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierDiarrhea() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierDiarrhea")))
 }
 
-// HKCategoryTypeIdentifierDizziness returns the string constant HKCategoryTypeIdentifierDizziness as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierDizziness() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierDizziness(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierDizziness returns the string constant HKCategoryTypeIdentifierDizziness, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierDizziness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierDizziness")))
 }
 
-// HKCategoryTypeIdentifierDrySkin returns the string constant HKCategoryTypeIdentifierDrySkin as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierDrySkin() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierDrySkin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierDrySkin returns the string constant HKCategoryTypeIdentifierDrySkin, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierDrySkin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierDrySkin")))
 }
 
-// HKCategoryTypeIdentifierFainting returns the string constant HKCategoryTypeIdentifierFainting as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierFainting() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierFainting(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierFainting returns the string constant HKCategoryTypeIdentifierFainting, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierFainting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierFainting")))
 }
 
-// HKCategoryTypeIdentifierFatigue returns the string constant HKCategoryTypeIdentifierFatigue as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierFatigue() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierFatigue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierFatigue returns the string constant HKCategoryTypeIdentifierFatigue, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierFatigue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierFatigue")))
 }
 
-// HKCategoryTypeIdentifierFever returns the string constant HKCategoryTypeIdentifierFever as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierFever() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierFever(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierFever returns the string constant HKCategoryTypeIdentifierFever, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierFever() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierFever")))
 }
 
-// HKCategoryTypeIdentifierGeneralizedBodyAche returns the string constant HKCategoryTypeIdentifierGeneralizedBodyAche as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierGeneralizedBodyAche() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierGeneralizedBodyAche(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierGeneralizedBodyAche returns the string constant HKCategoryTypeIdentifierGeneralizedBodyAche, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierGeneralizedBodyAche() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierGeneralizedBodyAche")))
 }
 
-// HKCategoryTypeIdentifierHairLoss returns the string constant HKCategoryTypeIdentifierHairLoss as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHairLoss() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHairLoss(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHairLoss returns the string constant HKCategoryTypeIdentifierHairLoss, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHairLoss() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHairLoss")))
 }
 
-// HKCategoryTypeIdentifierHeadache returns the string constant HKCategoryTypeIdentifierHeadache as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHeadache() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHeadache(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHeadache returns the string constant HKCategoryTypeIdentifierHeadache, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHeadache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHeadache")))
 }
 
-// HKCategoryTypeIdentifierHeartburn returns the string constant HKCategoryTypeIdentifierHeartburn as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHeartburn() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHeartburn(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHeartburn returns the string constant HKCategoryTypeIdentifierHeartburn, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHeartburn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHeartburn")))
 }
 
-// HKCategoryTypeIdentifierHotFlashes returns the string constant HKCategoryTypeIdentifierHotFlashes as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierHotFlashes() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierHotFlashes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierHotFlashes returns the string constant HKCategoryTypeIdentifierHotFlashes, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierHotFlashes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierHotFlashes")))
 }
 
-// HKCategoryTypeIdentifierLossOfSmell returns the string constant HKCategoryTypeIdentifierLossOfSmell as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierLossOfSmell() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierLossOfSmell(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierLossOfSmell returns the string constant HKCategoryTypeIdentifierLossOfSmell, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierLossOfSmell() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLossOfSmell")))
 }
 
-// HKCategoryTypeIdentifierLossOfTaste returns the string constant HKCategoryTypeIdentifierLossOfTaste as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierLossOfTaste() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierLossOfTaste(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierLossOfTaste returns the string constant HKCategoryTypeIdentifierLossOfTaste, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierLossOfTaste() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLossOfTaste")))
 }
 
-// HKCategoryTypeIdentifierLowerBackPain returns the string constant HKCategoryTypeIdentifierLowerBackPain as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierLowerBackPain() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierLowerBackPain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierLowerBackPain returns the string constant HKCategoryTypeIdentifierLowerBackPain, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierLowerBackPain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierLowerBackPain")))
 }
 
-// HKCategoryTypeIdentifierMemoryLapse returns the string constant HKCategoryTypeIdentifierMemoryLapse as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierMemoryLapse() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierMemoryLapse(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierMemoryLapse returns the string constant HKCategoryTypeIdentifierMemoryLapse, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierMemoryLapse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierMemoryLapse")))
 }
 
-// HKCategoryTypeIdentifierMoodChanges returns the string constant HKCategoryTypeIdentifierMoodChanges as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierMoodChanges() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierMoodChanges(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierMoodChanges returns the string constant HKCategoryTypeIdentifierMoodChanges, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierMoodChanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierMoodChanges")))
 }
 
-// HKCategoryTypeIdentifierNausea returns the string constant HKCategoryTypeIdentifierNausea as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierNausea() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierNausea(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierNausea returns the string constant HKCategoryTypeIdentifierNausea, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierNausea() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierNausea")))
 }
 
-// HKCategoryTypeIdentifierNightSweats returns the string constant HKCategoryTypeIdentifierNightSweats as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierNightSweats() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierNightSweats(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierNightSweats returns the string constant HKCategoryTypeIdentifierNightSweats, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierNightSweats() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierNightSweats")))
 }
 
-// HKCategoryTypeIdentifierPelvicPain returns the string constant HKCategoryTypeIdentifierPelvicPain as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierPelvicPain() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierPelvicPain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierPelvicPain returns the string constant HKCategoryTypeIdentifierPelvicPain, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierPelvicPain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierPelvicPain")))
 }
 
-// HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat returns the string constant HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat returns the string constant HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat")))
 }
 
-// HKCategoryTypeIdentifierRunnyNose returns the string constant HKCategoryTypeIdentifierRunnyNose as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierRunnyNose() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierRunnyNose(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierRunnyNose returns the string constant HKCategoryTypeIdentifierRunnyNose, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierRunnyNose() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierRunnyNose")))
 }
 
-// HKCategoryTypeIdentifierShortnessOfBreath returns the string constant HKCategoryTypeIdentifierShortnessOfBreath as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierShortnessOfBreath() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierShortnessOfBreath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierShortnessOfBreath returns the string constant HKCategoryTypeIdentifierShortnessOfBreath, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierShortnessOfBreath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierShortnessOfBreath")))
 }
 
-// HKCategoryTypeIdentifierSinusCongestion returns the string constant HKCategoryTypeIdentifierSinusCongestion as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSinusCongestion() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSinusCongestion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSinusCongestion returns the string constant HKCategoryTypeIdentifierSinusCongestion, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSinusCongestion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSinusCongestion")))
 }
 
-// HKCategoryTypeIdentifierSkippedHeartbeat returns the string constant HKCategoryTypeIdentifierSkippedHeartbeat as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSkippedHeartbeat() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSkippedHeartbeat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSkippedHeartbeat returns the string constant HKCategoryTypeIdentifierSkippedHeartbeat, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSkippedHeartbeat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSkippedHeartbeat")))
 }
 
-// HKCategoryTypeIdentifierSleepChanges returns the string constant HKCategoryTypeIdentifierSleepChanges as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSleepChanges() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSleepChanges(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSleepChanges returns the string constant HKCategoryTypeIdentifierSleepChanges, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSleepChanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSleepChanges")))
 }
 
-// HKCategoryTypeIdentifierSoreThroat returns the string constant HKCategoryTypeIdentifierSoreThroat as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierSoreThroat() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierSoreThroat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierSoreThroat returns the string constant HKCategoryTypeIdentifierSoreThroat, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierSoreThroat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierSoreThroat")))
 }
 
-// HKCategoryTypeIdentifierVaginalDryness returns the string constant HKCategoryTypeIdentifierVaginalDryness as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierVaginalDryness() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierVaginalDryness(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierVaginalDryness returns the string constant HKCategoryTypeIdentifierVaginalDryness, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierVaginalDryness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierVaginalDryness")))
 }
 
-// HKCategoryTypeIdentifierVomiting returns the string constant HKCategoryTypeIdentifierVomiting as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierVomiting() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierVomiting(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierVomiting returns the string constant HKCategoryTypeIdentifierVomiting, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierVomiting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierVomiting")))
 }
 
-// HKCategoryTypeIdentifierWheezing returns the string constant HKCategoryTypeIdentifierWheezing as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierWheezing() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierWheezing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierWheezing returns the string constant HKCategoryTypeIdentifierWheezing, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierWheezing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierWheezing")))
 }
 
-// HKCharacteristicTypeIdentifierActivityMoveMode returns the string constant HKCharacteristicTypeIdentifierActivityMoveMode as an objc.ID, for use as a dictionary key or selector argument.
-func HKCharacteristicTypeIdentifierActivityMoveMode() objc.ID {
-	if _r := raw.HKCharacteristicTypeIdentifierActivityMoveMode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCharacteristicTypeIdentifierActivityMoveMode returns the string constant HKCharacteristicTypeIdentifierActivityMoveMode, for use as a dictionary key or argument.
+func HKCharacteristicTypeIdentifierActivityMoveMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCharacteristicTypeIdentifierActivityMoveMode")))
 }
 
-// HKCharacteristicTypeIdentifierBiologicalSex returns the string constant HKCharacteristicTypeIdentifierBiologicalSex as an objc.ID, for use as a dictionary key or selector argument.
-func HKCharacteristicTypeIdentifierBiologicalSex() objc.ID {
-	if _r := raw.HKCharacteristicTypeIdentifierBiologicalSex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCharacteristicTypeIdentifierBiologicalSex returns the string constant HKCharacteristicTypeIdentifierBiologicalSex, for use as a dictionary key or argument.
+func HKCharacteristicTypeIdentifierBiologicalSex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCharacteristicTypeIdentifierBiologicalSex")))
 }
 
-// HKCharacteristicTypeIdentifierBloodType returns the string constant HKCharacteristicTypeIdentifierBloodType as an objc.ID, for use as a dictionary key or selector argument.
-func HKCharacteristicTypeIdentifierBloodType() objc.ID {
-	if _r := raw.HKCharacteristicTypeIdentifierBloodType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCharacteristicTypeIdentifierBloodType returns the string constant HKCharacteristicTypeIdentifierBloodType, for use as a dictionary key or argument.
+func HKCharacteristicTypeIdentifierBloodType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCharacteristicTypeIdentifierBloodType")))
 }
 
-// HKCharacteristicTypeIdentifierDateOfBirth returns the string constant HKCharacteristicTypeIdentifierDateOfBirth as an objc.ID, for use as a dictionary key or selector argument.
-func HKCharacteristicTypeIdentifierDateOfBirth() objc.ID {
-	if _r := raw.HKCharacteristicTypeIdentifierDateOfBirth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCharacteristicTypeIdentifierDateOfBirth returns the string constant HKCharacteristicTypeIdentifierDateOfBirth, for use as a dictionary key or argument.
+func HKCharacteristicTypeIdentifierDateOfBirth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCharacteristicTypeIdentifierDateOfBirth")))
 }
 
-// HKCharacteristicTypeIdentifierFitzpatrickSkinType returns the string constant HKCharacteristicTypeIdentifierFitzpatrickSkinType as an objc.ID, for use as a dictionary key or selector argument.
-func HKCharacteristicTypeIdentifierFitzpatrickSkinType() objc.ID {
-	if _r := raw.HKCharacteristicTypeIdentifierFitzpatrickSkinType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCharacteristicTypeIdentifierFitzpatrickSkinType returns the string constant HKCharacteristicTypeIdentifierFitzpatrickSkinType, for use as a dictionary key or argument.
+func HKCharacteristicTypeIdentifierFitzpatrickSkinType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCharacteristicTypeIdentifierFitzpatrickSkinType")))
 }
 
-// HKCharacteristicTypeIdentifierWheelchairUse returns the string constant HKCharacteristicTypeIdentifierWheelchairUse as an objc.ID, for use as a dictionary key or selector argument.
-func HKCharacteristicTypeIdentifierWheelchairUse() objc.ID {
-	if _r := raw.HKCharacteristicTypeIdentifierWheelchairUse(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCharacteristicTypeIdentifierWheelchairUse returns the string constant HKCharacteristicTypeIdentifierWheelchairUse, for use as a dictionary key or argument.
+func HKCharacteristicTypeIdentifierWheelchairUse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCharacteristicTypeIdentifierWheelchairUse")))
 }
 
-// HKCorrelationTypeIdentifierBloodPressure returns the string constant HKCorrelationTypeIdentifierBloodPressure as an objc.ID, for use as a dictionary key or selector argument.
-func HKCorrelationTypeIdentifierBloodPressure() objc.ID {
-	if _r := raw.HKCorrelationTypeIdentifierBloodPressure(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCorrelationTypeIdentifierBloodPressure returns the string constant HKCorrelationTypeIdentifierBloodPressure, for use as a dictionary key or argument.
+func HKCorrelationTypeIdentifierBloodPressure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCorrelationTypeIdentifierBloodPressure")))
 }
 
-// HKCorrelationTypeIdentifierFood returns the string constant HKCorrelationTypeIdentifierFood as an objc.ID, for use as a dictionary key or selector argument.
-func HKCorrelationTypeIdentifierFood() objc.ID {
-	if _r := raw.HKCorrelationTypeIdentifierFood(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCorrelationTypeIdentifierFood returns the string constant HKCorrelationTypeIdentifierFood, for use as a dictionary key or argument.
+func HKCorrelationTypeIdentifierFood() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCorrelationTypeIdentifierFood")))
 }
 
-// HKDocumentTypeIdentifierCDA returns the string constant HKDocumentTypeIdentifierCDA as an objc.ID, for use as a dictionary key or selector argument.
-func HKDocumentTypeIdentifierCDA() objc.ID {
-	if _r := raw.HKDocumentTypeIdentifierCDA(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKDocumentTypeIdentifierCDA returns the string constant HKDocumentTypeIdentifierCDA, for use as a dictionary key or argument.
+func HKDocumentTypeIdentifierCDA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDocumentTypeIdentifierCDA")))
 }
 
-// HKScoredAssessmentTypeIdentifierGAD7 returns the string constant HKScoredAssessmentTypeIdentifierGAD7 as an objc.ID, for use as a dictionary key or selector argument.
-func HKScoredAssessmentTypeIdentifierGAD7() objc.ID {
-	if _r := raw.HKScoredAssessmentTypeIdentifierGAD7(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKScoredAssessmentTypeIdentifierGAD7 returns the string constant HKScoredAssessmentTypeIdentifierGAD7, for use as a dictionary key or argument.
+func HKScoredAssessmentTypeIdentifierGAD7() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKScoredAssessmentTypeIdentifierGAD7")))
 }
 
-// HKScoredAssessmentTypeIdentifierPHQ9 returns the string constant HKScoredAssessmentTypeIdentifierPHQ9 as an objc.ID, for use as a dictionary key or selector argument.
-func HKScoredAssessmentTypeIdentifierPHQ9() objc.ID {
-	if _r := raw.HKScoredAssessmentTypeIdentifierPHQ9(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKScoredAssessmentTypeIdentifierPHQ9 returns the string constant HKScoredAssessmentTypeIdentifierPHQ9, for use as a dictionary key or argument.
+func HKScoredAssessmentTypeIdentifierPHQ9() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKScoredAssessmentTypeIdentifierPHQ9")))
 }
 
-// HKWorkoutTypeIdentifier returns the string constant HKWorkoutTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutTypeIdentifier())
+// HKWorkoutTypeIdentifier returns the string constant HKWorkoutTypeIdentifier, for use as a dictionary key or argument.
+func HKWorkoutTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutTypeIdentifier")))
 }
 
-// HKWorkoutRouteTypeIdentifier returns the string constant HKWorkoutRouteTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKWorkoutRouteTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKWorkoutRouteTypeIdentifier())
+// HKWorkoutRouteTypeIdentifier returns the string constant HKWorkoutRouteTypeIdentifier, for use as a dictionary key or argument.
+func HKWorkoutRouteTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKWorkoutRouteTypeIdentifier")))
 }
 
-// HKDataTypeIdentifierHeartbeatSeries returns the string constant HKDataTypeIdentifierHeartbeatSeries as an objc.ID, for use as a dictionary key or selector argument.
-func HKDataTypeIdentifierHeartbeatSeries() objc.ID {
-	return purego.CFConstant(raw.HKDataTypeIdentifierHeartbeatSeries())
+// HKDataTypeIdentifierHeartbeatSeries returns the string constant HKDataTypeIdentifierHeartbeatSeries, for use as a dictionary key or argument.
+func HKDataTypeIdentifierHeartbeatSeries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDataTypeIdentifierHeartbeatSeries")))
 }
 
-// HKVisionPrescriptionTypeIdentifier returns the string constant HKVisionPrescriptionTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKVisionPrescriptionTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKVisionPrescriptionTypeIdentifier())
+// HKVisionPrescriptionTypeIdentifier returns the string constant HKVisionPrescriptionTypeIdentifier, for use as a dictionary key or argument.
+func HKVisionPrescriptionTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVisionPrescriptionTypeIdentifier")))
 }
 
-// A state of mind type that records the user's mental health
-// HKDataTypeIdentifierStateOfMind returns the string constant HKDataTypeIdentifierStateOfMind as an objc.ID, for use as a dictionary key or selector argument.
-func HKDataTypeIdentifierStateOfMind() objc.ID {
-	return purego.CFConstant(raw.HKDataTypeIdentifierStateOfMind())
+// HKDataTypeIdentifierStateOfMind returns the string constant HKDataTypeIdentifierStateOfMind, for use as a dictionary key or argument.
+func HKDataTypeIdentifierStateOfMind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDataTypeIdentifierStateOfMind")))
 }
 
-// A medication dose event type that represents a single dose administration for a medication.
-// HKMedicationDoseEventTypeIdentifierMedicationDoseEvent returns the string constant HKMedicationDoseEventTypeIdentifierMedicationDoseEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationDoseEventTypeIdentifierMedicationDoseEvent() objc.ID {
-	return purego.CFConstant(raw.HKMedicationDoseEventTypeIdentifierMedicationDoseEvent())
+// HKMedicationDoseEventTypeIdentifierMedicationDoseEvent returns the string constant HKMedicationDoseEventTypeIdentifierMedicationDoseEvent, for use as a dictionary key or argument.
+func HKMedicationDoseEventTypeIdentifierMedicationDoseEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationDoseEventTypeIdentifierMedicationDoseEvent")))
 }
 
-// The user annotated medication type that represents a medication concept.
-// HKDataTypeIdentifierUserAnnotatedMedicationConcept returns the string constant HKDataTypeIdentifierUserAnnotatedMedicationConcept as an objc.ID, for use as a dictionary key or selector argument.
-func HKDataTypeIdentifierUserAnnotatedMedicationConcept() objc.ID {
-	return purego.CFConstant(raw.HKDataTypeIdentifierUserAnnotatedMedicationConcept())
+// HKDataTypeIdentifierUserAnnotatedMedicationConcept returns the string constant HKDataTypeIdentifierUserAnnotatedMedicationConcept, for use as a dictionary key or argument.
+func HKDataTypeIdentifierUserAnnotatedMedicationConcept() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDataTypeIdentifierUserAnnotatedMedicationConcept")))
 }
 
-// HKCategoryTypeIdentifierAudioExposureEvent returns the string constant HKCategoryTypeIdentifierAudioExposureEvent as an objc.ID, for use as a dictionary key or selector argument.
-func HKCategoryTypeIdentifierAudioExposureEvent() objc.ID {
-	if _r := raw.HKCategoryTypeIdentifierAudioExposureEvent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKCategoryTypeIdentifierAudioExposureEvent returns the string constant HKCategoryTypeIdentifierAudioExposureEvent, for use as a dictionary key or argument.
+func HKCategoryTypeIdentifierAudioExposureEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKCategoryTypeIdentifierAudioExposureEvent")))
 }
 
-// @constant     HKPredicateKeyPathCategoryValue
-// HKPredicateKeyPathCategoryValue returns the string constant HKPredicateKeyPathCategoryValue as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCategoryValue() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCategoryValue())
+// HKPredicateKeyPathCategoryValue returns the string constant HKPredicateKeyPathCategoryValue, for use as a dictionary key or argument.
+func HKPredicateKeyPathCategoryValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCategoryValue")))
 }
 
-// @constant  HKPredicateKeyPathCDATitle
-// HKPredicateKeyPathCDATitle returns the string constant HKPredicateKeyPathCDATitle as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCDATitle() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCDATitle())
+// HKPredicateKeyPathCDATitle returns the string constant HKPredicateKeyPathCDATitle, for use as a dictionary key or argument.
+func HKPredicateKeyPathCDATitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCDATitle")))
 }
 
-// @constant  HKPredicateKeyPathCDAPatientName
-// HKPredicateKeyPathCDAPatientName returns the string constant HKPredicateKeyPathCDAPatientName as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCDAPatientName() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCDAPatientName())
+// HKPredicateKeyPathCDAPatientName returns the string constant HKPredicateKeyPathCDAPatientName, for use as a dictionary key or argument.
+func HKPredicateKeyPathCDAPatientName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCDAPatientName")))
 }
 
-// @constant  HKPredicateKeyPathCDAAuthorName
-// HKPredicateKeyPathCDAAuthorName returns the string constant HKPredicateKeyPathCDAAuthorName as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCDAAuthorName() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCDAAuthorName())
+// HKPredicateKeyPathCDAAuthorName returns the string constant HKPredicateKeyPathCDAAuthorName, for use as a dictionary key or argument.
+func HKPredicateKeyPathCDAAuthorName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCDAAuthorName")))
 }
 
-// @constant  HKPredicateKeyPathCDACustodianName
-// HKPredicateKeyPathCDACustodianName returns the string constant HKPredicateKeyPathCDACustodianName as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCDACustodianName() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCDACustodianName())
+// HKPredicateKeyPathCDACustodianName returns the string constant HKPredicateKeyPathCDACustodianName, for use as a dictionary key or argument.
+func HKPredicateKeyPathCDACustodianName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCDACustodianName")))
 }
 
-// @constant      HKDetailedCDAValidationErrorKey @discussion    This may be used with the validationError parameter of CDADocumentSampleWithData:startDate:endDate:device:metadata:validationError: to obtain a detailed description of the validation errors encountered when creating a CDA document.
-// HKDetailedCDAValidationErrorKey returns the string constant HKDetailedCDAValidationErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func HKDetailedCDAValidationErrorKey() objc.ID {
-	return purego.CFConstant(raw.HKDetailedCDAValidationErrorKey())
+// HKDetailedCDAValidationErrorKey returns the string constant HKDetailedCDAValidationErrorKey, for use as a dictionary key or argument.
+func HKDetailedCDAValidationErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDetailedCDAValidationErrorKey")))
 }
 
-// HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier returns the string constant HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier())
+// HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier returns the string constant HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier, for use as a dictionary key or argument.
+func HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier")))
 }
 
-// HKPredicateKeyPathClinicalRecordFHIRResourceType returns the string constant HKPredicateKeyPathClinicalRecordFHIRResourceType as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathClinicalRecordFHIRResourceType() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathClinicalRecordFHIRResourceType())
+// HKPredicateKeyPathClinicalRecordFHIRResourceType returns the string constant HKPredicateKeyPathClinicalRecordFHIRResourceType, for use as a dictionary key or argument.
+func HKPredicateKeyPathClinicalRecordFHIRResourceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathClinicalRecordFHIRResourceType")))
 }
 
-// A type identifier for records of allergies or intolerances.
-// HKClinicalTypeIdentifierAllergyRecord returns the string constant HKClinicalTypeIdentifierAllergyRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierAllergyRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierAllergyRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierAllergyRecord returns the string constant HKClinicalTypeIdentifierAllergyRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierAllergyRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierAllergyRecord")))
 }
 
-// A type identifier for records that represent clinical notes.
-// HKClinicalTypeIdentifierClinicalNoteRecord returns the string constant HKClinicalTypeIdentifierClinicalNoteRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierClinicalNoteRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierClinicalNoteRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierClinicalNoteRecord returns the string constant HKClinicalTypeIdentifierClinicalNoteRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierClinicalNoteRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierClinicalNoteRecord")))
 }
 
-// A type identifier for records of a condition, problem, or diagnosis.
-// HKClinicalTypeIdentifierConditionRecord returns the string constant HKClinicalTypeIdentifierConditionRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierConditionRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierConditionRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierConditionRecord returns the string constant HKClinicalTypeIdentifierConditionRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierConditionRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierConditionRecord")))
 }
 
-// A type identifier for records of vaccine administration.
-// HKClinicalTypeIdentifierImmunizationRecord returns the string constant HKClinicalTypeIdentifierImmunizationRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierImmunizationRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierImmunizationRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierImmunizationRecord returns the string constant HKClinicalTypeIdentifierImmunizationRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierImmunizationRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierImmunizationRecord")))
 }
 
-// A type identifier for records of lab results.
-// HKClinicalTypeIdentifierLabResultRecord returns the string constant HKClinicalTypeIdentifierLabResultRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierLabResultRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierLabResultRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierLabResultRecord returns the string constant HKClinicalTypeIdentifierLabResultRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierLabResultRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierLabResultRecord")))
 }
 
-// A type identifier for records of medication prescription, intake, or administration.
-// HKClinicalTypeIdentifierMedicationRecord returns the string constant HKClinicalTypeIdentifierMedicationRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierMedicationRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierMedicationRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierMedicationRecord returns the string constant HKClinicalTypeIdentifierMedicationRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierMedicationRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierMedicationRecord")))
 }
 
-// A type identifier for records of clinical procedures.
-// HKClinicalTypeIdentifierProcedureRecord returns the string constant HKClinicalTypeIdentifierProcedureRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierProcedureRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierProcedureRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierProcedureRecord returns the string constant HKClinicalTypeIdentifierProcedureRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierProcedureRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierProcedureRecord")))
 }
 
-// A type identifier for records of vital signs.
-// HKClinicalTypeIdentifierVitalSignRecord returns the string constant HKClinicalTypeIdentifierVitalSignRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierVitalSignRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierVitalSignRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierVitalSignRecord returns the string constant HKClinicalTypeIdentifierVitalSignRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierVitalSignRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierVitalSignRecord")))
 }
 
-// A type identifier for records containing information about the user’s insurance coverage.
-// HKClinicalTypeIdentifierCoverageRecord returns the string constant HKClinicalTypeIdentifierCoverageRecord as an objc.ID, for use as a dictionary key or selector argument.
-func HKClinicalTypeIdentifierCoverageRecord() objc.ID {
-	if _r := raw.HKClinicalTypeIdentifierCoverageRecord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKClinicalTypeIdentifierCoverageRecord returns the string constant HKClinicalTypeIdentifierCoverageRecord, for use as a dictionary key or argument.
+func HKClinicalTypeIdentifierCoverageRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKClinicalTypeIdentifierCoverageRecord")))
 }
 
-// HKPredicateKeyPathQuantity returns the string constant HKPredicateKeyPathQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathQuantity())
+// HKPredicateKeyPathQuantity returns the string constant HKPredicateKeyPathQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathQuantity")))
 }
 
-// HKPredicateKeyPathCount returns the string constant HKPredicateKeyPathCount as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathCount() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathCount())
+// HKPredicateKeyPathCount returns the string constant HKPredicateKeyPathCount, for use as a dictionary key or argument.
+func HKPredicateKeyPathCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathCount")))
 }
 
-// HKPredicateKeyPathSum returns the string constant HKPredicateKeyPathSum as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathSum() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathSum())
+// HKPredicateKeyPathSum returns the string constant HKPredicateKeyPathSum, for use as a dictionary key or argument.
+func HKPredicateKeyPathSum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathSum")))
 }
 
-// @constant      HKDevicePropertyKeyName @abstract      Used with predicateForObjectsWithDeviceProperty to specify a device name. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyName returns the string constant HKDevicePropertyKeyName as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyName() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyName())
+// HKDevicePropertyKeyName returns the string constant HKDevicePropertyKeyName, for use as a dictionary key or argument.
+func HKDevicePropertyKeyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyName")))
 }
 
-// @constant      HKDevicePropertyKeyManufacturer @abstract      Used with predicateForObjectsWithDeviceProperty to specify a device manufacturer. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyManufacturer returns the string constant HKDevicePropertyKeyManufacturer as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyManufacturer() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyManufacturer())
+// HKDevicePropertyKeyManufacturer returns the string constant HKDevicePropertyKeyManufacturer, for use as a dictionary key or argument.
+func HKDevicePropertyKeyManufacturer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyManufacturer")))
 }
 
-// @constant      HKDevicePropertyKeyModel @abstract      Used with predicateForObjectsWithDeviceProperty to specify a device model. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyModel returns the string constant HKDevicePropertyKeyModel as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyModel() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyModel())
+// HKDevicePropertyKeyModel returns the string constant HKDevicePropertyKeyModel, for use as a dictionary key or argument.
+func HKDevicePropertyKeyModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyModel")))
 }
 
-// @constant      HKDevicePropertyKeyHardwareVersion @abstract      Used with predicateForObjectsWithDeviceProperty to specify a hardware version. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyHardwareVersion returns the string constant HKDevicePropertyKeyHardwareVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyHardwareVersion() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyHardwareVersion())
+// HKDevicePropertyKeyHardwareVersion returns the string constant HKDevicePropertyKeyHardwareVersion, for use as a dictionary key or argument.
+func HKDevicePropertyKeyHardwareVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyHardwareVersion")))
 }
 
-// @constant      HKDevicePropertyKeyFirmwareVersion @abstract      Used with predicateForObjectsWithDeviceProperty to specify a firmware version. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyFirmwareVersion returns the string constant HKDevicePropertyKeyFirmwareVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyFirmwareVersion() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyFirmwareVersion())
+// HKDevicePropertyKeyFirmwareVersion returns the string constant HKDevicePropertyKeyFirmwareVersion, for use as a dictionary key or argument.
+func HKDevicePropertyKeyFirmwareVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyFirmwareVersion")))
 }
 
-// @constant      HKDevicePropertyKeySoftwareVersion @abstract      Used with predicateForObjectsWithDeviceProperty to specify a software version. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeySoftwareVersion returns the string constant HKDevicePropertyKeySoftwareVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeySoftwareVersion() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeySoftwareVersion())
+// HKDevicePropertyKeySoftwareVersion returns the string constant HKDevicePropertyKeySoftwareVersion, for use as a dictionary key or argument.
+func HKDevicePropertyKeySoftwareVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeySoftwareVersion")))
 }
 
-// @constant      HKDevicePropertyKeyLocalIdentifier @abstract      Used with predicateForObjectsWithDeviceProperty to specify a local identifier. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyLocalIdentifier returns the string constant HKDevicePropertyKeyLocalIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyLocalIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyLocalIdentifier())
+// HKDevicePropertyKeyLocalIdentifier returns the string constant HKDevicePropertyKeyLocalIdentifier, for use as a dictionary key or argument.
+func HKDevicePropertyKeyLocalIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyLocalIdentifier")))
 }
 
-// @constant      HKDevicePropertyKeyUDIDeviceIdentifier @abstract      Used with predicateForObjectsWithDeviceProperty to specify a UDI device identifier. @discussion    The expected value type is an NSString.
-// HKDevicePropertyKeyUDIDeviceIdentifier returns the string constant HKDevicePropertyKeyUDIDeviceIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKDevicePropertyKeyUDIDeviceIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKDevicePropertyKeyUDIDeviceIdentifier())
+// HKDevicePropertyKeyUDIDeviceIdentifier returns the string constant HKDevicePropertyKeyUDIDeviceIdentifier, for use as a dictionary key or argument.
+func HKDevicePropertyKeyUDIDeviceIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKDevicePropertyKeyUDIDeviceIdentifier")))
 }
 
-// HKPredicateKeyPathMin returns the string constant HKPredicateKeyPathMin as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMin() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMin())
+// HKPredicateKeyPathMin returns the string constant HKPredicateKeyPathMin, for use as a dictionary key or argument.
+func HKPredicateKeyPathMin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMin")))
 }
 
-// HKPredicateKeyPathAverage returns the string constant HKPredicateKeyPathAverage as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathAverage() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathAverage())
+// HKPredicateKeyPathAverage returns the string constant HKPredicateKeyPathAverage, for use as a dictionary key or argument.
+func HKPredicateKeyPathAverage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathAverage")))
 }
 
-// HKPredicateKeyPathMax returns the string constant HKPredicateKeyPathMax as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMax() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMax())
+// HKPredicateKeyPathMax returns the string constant HKPredicateKeyPathMax, for use as a dictionary key or argument.
+func HKPredicateKeyPathMax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMax")))
 }
 
-// HKPredicateKeyPathMostRecent returns the string constant HKPredicateKeyPathMostRecent as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMostRecent() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMostRecent())
+// HKPredicateKeyPathMostRecent returns the string constant HKPredicateKeyPathMostRecent, for use as a dictionary key or argument.
+func HKPredicateKeyPathMostRecent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMostRecent")))
 }
 
-// HKPredicateKeyPathMostRecentStartDate returns the string constant HKPredicateKeyPathMostRecentStartDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMostRecentStartDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMostRecentStartDate())
+// HKPredicateKeyPathMostRecentStartDate returns the string constant HKPredicateKeyPathMostRecentStartDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathMostRecentStartDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMostRecentStartDate")))
 }
 
-// HKPredicateKeyPathMostRecentEndDate returns the string constant HKPredicateKeyPathMostRecentEndDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMostRecentEndDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMostRecentEndDate())
+// HKPredicateKeyPathMostRecentEndDate returns the string constant HKPredicateKeyPathMostRecentEndDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathMostRecentEndDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMostRecentEndDate")))
 }
 
-// HKPredicateKeyPathMostRecentDuration returns the string constant HKPredicateKeyPathMostRecentDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathMostRecentDuration() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathMostRecentDuration())
+// HKPredicateKeyPathMostRecentDuration returns the string constant HKPredicateKeyPathMostRecentDuration, for use as a dictionary key or argument.
+func HKPredicateKeyPathMostRecentDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathMostRecentDuration")))
 }
 
-// @abstract      The "DSTU2" release: http://hl7.org/fhir/DSTU2/
-// HKFHIRReleaseDSTU2 returns the string constant HKFHIRReleaseDSTU2 as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRReleaseDSTU2() objc.ID {
-	return purego.CFConstant(raw.HKFHIRReleaseDSTU2())
+// HKFHIRReleaseDSTU2 returns the string constant HKFHIRReleaseDSTU2, for use as a dictionary key or argument.
+func HKFHIRReleaseDSTU2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRReleaseDSTU2")))
 }
 
-// @abstract      The "R4" release: http://hl7.org/fhir/R4/
-// HKFHIRReleaseR4 returns the string constant HKFHIRReleaseR4 as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRReleaseR4() objc.ID {
-	return purego.CFConstant(raw.HKFHIRReleaseR4())
-}
+// HKFHIRReleaseR4 returns the string constant HKFHIRReleaseR4, for use as a dictionary key or argument.
+func HKFHIRReleaseR4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("HKFHIRReleaseR4"))) }
 
-// @abstract      An unknown release
-// HKFHIRReleaseUnknown returns the string constant HKFHIRReleaseUnknown as an objc.ID, for use as a dictionary key or selector argument.
-func HKFHIRReleaseUnknown() objc.ID {
-	return purego.CFConstant(raw.HKFHIRReleaseUnknown())
+// HKFHIRReleaseUnknown returns the string constant HKFHIRReleaseUnknown, for use as a dictionary key or argument.
+func HKFHIRReleaseUnknown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKFHIRReleaseUnknown")))
 }
 
-// The domain that represents medication concepts. Use with identifiers for medications, such as ibuprofen or insulin.
-// HKHealthConceptDomainMedication returns the string constant HKHealthConceptDomainMedication as an objc.ID, for use as a dictionary key or selector argument.
-func HKHealthConceptDomainMedication() objc.ID {
-	if _r := raw.HKHealthConceptDomainMedication(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKHealthConceptDomainMedication returns the string constant HKHealthConceptDomainMedication, for use as a dictionary key or argument.
+func HKHealthConceptDomainMedication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKHealthConceptDomainMedication")))
 }
 
-// @constant      HKUserPreferencesDidChangeNotification @abstract      A notification posted every time the user updates their preferred units. @discussion    Each HKHealthStore posts a HKUserPreferencesDidChangeNotification notification when the preferred unit for a HKQuantityType is changed by the user. To guarantee your listener will only receive a single notification when this occurs, it is necessary to provide an HKHealthStore instance for the object parameter of NSNotificationCenter's addObserver methods.
-// HKUserPreferencesDidChangeNotification returns the string constant HKUserPreferencesDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func HKUserPreferencesDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.HKUserPreferencesDidChangeNotification())
+// HKUserPreferencesDidChangeNotification returns the string constant HKUserPreferencesDidChangeNotification, for use as a dictionary key or argument.
+func HKUserPreferencesDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKUserPreferencesDidChangeNotification")))
 }
 
-// The medication comes in capsule form, such as a hard-shell capsule or softgel.
-// HKMedicationGeneralFormCapsule returns the string constant HKMedicationGeneralFormCapsule as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormCapsule() objc.ID {
-	if _r := raw.HKMedicationGeneralFormCapsule(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormCapsule returns the string constant HKMedicationGeneralFormCapsule, for use as a dictionary key or argument.
+func HKMedicationGeneralFormCapsule() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormCapsule")))
 }
 
-// The medication is applied as a cream.
-// HKMedicationGeneralFormCream returns the string constant HKMedicationGeneralFormCream as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormCream() objc.ID {
-	if _r := raw.HKMedicationGeneralFormCream(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormCream returns the string constant HKMedicationGeneralFormCream, for use as a dictionary key or argument.
+func HKMedicationGeneralFormCream() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormCream")))
 }
 
-// The medication is administered through a device, such as an infusion pump for controlled fluid delivery.
-// HKMedicationGeneralFormDevice returns the string constant HKMedicationGeneralFormDevice as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormDevice() objc.ID {
-	if _r := raw.HKMedicationGeneralFormDevice(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormDevice returns the string constant HKMedicationGeneralFormDevice, for use as a dictionary key or argument.
+func HKMedicationGeneralFormDevice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormDevice")))
 }
 
-// The medication is taken as drops, for example eye drops or ear drops.
-// HKMedicationGeneralFormDrops returns the string constant HKMedicationGeneralFormDrops as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormDrops() objc.ID {
-	if _r := raw.HKMedicationGeneralFormDrops(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormDrops returns the string constant HKMedicationGeneralFormDrops, for use as a dictionary key or argument.
+func HKMedicationGeneralFormDrops() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormDrops")))
 }
 
-// The medication is applied as a foam.
-// HKMedicationGeneralFormFoam returns the string constant HKMedicationGeneralFormFoam as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormFoam() objc.ID {
-	if _r := raw.HKMedicationGeneralFormFoam(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormFoam returns the string constant HKMedicationGeneralFormFoam, for use as a dictionary key or argument.
+func HKMedicationGeneralFormFoam() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormFoam")))
 }
 
-// The medication is applied as a gel.
-// HKMedicationGeneralFormGel returns the string constant HKMedicationGeneralFormGel as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormGel() objc.ID {
-	if _r := raw.HKMedicationGeneralFormGel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormGel returns the string constant HKMedicationGeneralFormGel, for use as a dictionary key or argument.
+func HKMedicationGeneralFormGel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormGel")))
 }
 
-// The medication is delivered through an inhaler.
-// HKMedicationGeneralFormInhaler returns the string constant HKMedicationGeneralFormInhaler as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormInhaler() objc.ID {
-	if _r := raw.HKMedicationGeneralFormInhaler(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormInhaler returns the string constant HKMedicationGeneralFormInhaler, for use as a dictionary key or argument.
+func HKMedicationGeneralFormInhaler() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormInhaler")))
 }
 
-// The medication is given as an injection.
-// HKMedicationGeneralFormInjection returns the string constant HKMedicationGeneralFormInjection as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormInjection() objc.ID {
-	if _r := raw.HKMedicationGeneralFormInjection(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormInjection returns the string constant HKMedicationGeneralFormInjection, for use as a dictionary key or argument.
+func HKMedicationGeneralFormInjection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormInjection")))
 }
 
-// The medication is taken as a liquid, such as a syrup.
-// HKMedicationGeneralFormLiquid returns the string constant HKMedicationGeneralFormLiquid as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormLiquid() objc.ID {
-	if _r := raw.HKMedicationGeneralFormLiquid(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormLiquid returns the string constant HKMedicationGeneralFormLiquid, for use as a dictionary key or argument.
+func HKMedicationGeneralFormLiquid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormLiquid")))
 }
 
-// The medication is applied as a lotion.
-// HKMedicationGeneralFormLotion returns the string constant HKMedicationGeneralFormLotion as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormLotion() objc.ID {
-	if _r := raw.HKMedicationGeneralFormLotion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormLotion returns the string constant HKMedicationGeneralFormLotion, for use as a dictionary key or argument.
+func HKMedicationGeneralFormLotion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormLotion")))
 }
 
-// The medication is applied as an ointment.
-// HKMedicationGeneralFormOintment returns the string constant HKMedicationGeneralFormOintment as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormOintment() objc.ID {
-	if _r := raw.HKMedicationGeneralFormOintment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormOintment returns the string constant HKMedicationGeneralFormOintment, for use as a dictionary key or argument.
+func HKMedicationGeneralFormOintment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormOintment")))
 }
 
-// The medication is applied as a patch worn on the skin.
-// HKMedicationGeneralFormPatch returns the string constant HKMedicationGeneralFormPatch as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormPatch() objc.ID {
-	if _r := raw.HKMedicationGeneralFormPatch(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormPatch returns the string constant HKMedicationGeneralFormPatch, for use as a dictionary key or argument.
+func HKMedicationGeneralFormPatch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormPatch")))
 }
 
-// The medication is taken as a powder.
-// HKMedicationGeneralFormPowder returns the string constant HKMedicationGeneralFormPowder as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormPowder() objc.ID {
-	if _r := raw.HKMedicationGeneralFormPowder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormPowder returns the string constant HKMedicationGeneralFormPowder, for use as a dictionary key or argument.
+func HKMedicationGeneralFormPowder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormPowder")))
 }
 
-// The medication is delivered as a spray, for example a nasal spray or throat spray.
-// HKMedicationGeneralFormSpray returns the string constant HKMedicationGeneralFormSpray as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormSpray() objc.ID {
-	if _r := raw.HKMedicationGeneralFormSpray(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormSpray returns the string constant HKMedicationGeneralFormSpray, for use as a dictionary key or argument.
+func HKMedicationGeneralFormSpray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormSpray")))
 }
 
-// The medication is delivered as a suppository.
-// HKMedicationGeneralFormSuppository returns the string constant HKMedicationGeneralFormSuppository as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormSuppository() objc.ID {
-	if _r := raw.HKMedicationGeneralFormSuppository(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormSuppository returns the string constant HKMedicationGeneralFormSuppository, for use as a dictionary key or argument.
+func HKMedicationGeneralFormSuppository() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormSuppository")))
 }
 
-// The medication comes in tablet form, such as a pill or caplet.
-// HKMedicationGeneralFormTablet returns the string constant HKMedicationGeneralFormTablet as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormTablet() objc.ID {
-	if _r := raw.HKMedicationGeneralFormTablet(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormTablet returns the string constant HKMedicationGeneralFormTablet, for use as a dictionary key or argument.
+func HKMedicationGeneralFormTablet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormTablet")))
 }
 
-// The medication is applied topically in a form that wasn't specified.
-// HKMedicationGeneralFormTopical returns the string constant HKMedicationGeneralFormTopical as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormTopical() objc.ID {
-	if _r := raw.HKMedicationGeneralFormTopical(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormTopical returns the string constant HKMedicationGeneralFormTopical, for use as a dictionary key or argument.
+func HKMedicationGeneralFormTopical() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormTopical")))
 }
 
-// The system doesn't know the general form of the medication.
-// HKMedicationGeneralFormUnknown returns the string constant HKMedicationGeneralFormUnknown as an objc.ID, for use as a dictionary key or selector argument.
-func HKMedicationGeneralFormUnknown() objc.ID {
-	if _r := raw.HKMedicationGeneralFormUnknown(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKMedicationGeneralFormUnknown returns the string constant HKMedicationGeneralFormUnknown, for use as a dictionary key or argument.
+func HKMedicationGeneralFormUnknown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMedicationGeneralFormUnknown")))
 }
 
-// @constant      HKMetadataKeyUDIProductionIdentifier @abstract      Represents the serial number of the device that created the HKObject. @discussion    The expected value type is NSString.
-// HKMetadataKeyDeviceSerialNumber returns the string constant HKMetadataKeyDeviceSerialNumber as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyDeviceSerialNumber() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyDeviceSerialNumber())
+// HKMetadataKeyDeviceSerialNumber returns the string constant HKMetadataKeyDeviceSerialNumber, for use as a dictionary key or argument.
+func HKMetadataKeyDeviceSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDeviceSerialNumber")))
 }
 
-// @constant      HKMetadataKeyBodyTemperatureSensorLocation @abstract      Represents the location where a particular body temperature reading was taken. @discussion    The expected value type is an NSNumber containing a HKBodyTemperatureSensorLocation value.
-// HKMetadataKeyBodyTemperatureSensorLocation returns the string constant HKMetadataKeyBodyTemperatureSensorLocation as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyBodyTemperatureSensorLocation() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyBodyTemperatureSensorLocation())
+// HKMetadataKeyBodyTemperatureSensorLocation returns the string constant HKMetadataKeyBodyTemperatureSensorLocation, for use as a dictionary key or argument.
+func HKMetadataKeyBodyTemperatureSensorLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyBodyTemperatureSensorLocation")))
 }
 
-// @constant      HKMetadataKeyHeartRateSensorLocation @abstract      Represents the location where a particular heart rate reading was taken. @discussion    The expected value type is an NSNumber containing a HKHeartRateSensorLocation value.
-// HKMetadataKeyHeartRateSensorLocation returns the string constant HKMetadataKeyHeartRateSensorLocation as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateSensorLocation() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateSensorLocation())
+// HKMetadataKeyHeartRateSensorLocation returns the string constant HKMetadataKeyHeartRateSensorLocation, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateSensorLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateSensorLocation")))
 }
 
-// @constant      HKMetadataKeyHeartRateMotionContext @abstract      Represents the context in which a particular heart rate reading was taken. @discussion    The expected value type is an NSNumber containing a HKHeartRateMotionContext value. The value is active (HKHeartRateMotionContextActive) if the user is in motion or working out, sedentary if the user is still (HKHeartRateMotionContextSedentary), or not set (HKHeartRateMotionContextNotSet) otherwise.
-// HKMetadataKeyHeartRateMotionContext returns the string constant HKMetadataKeyHeartRateMotionContext as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateMotionContext() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateMotionContext())
+// HKMetadataKeyHeartRateMotionContext returns the string constant HKMetadataKeyHeartRateMotionContext, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateMotionContext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateMotionContext")))
 }
 
-// @constant      HKMetadataKeyUserMotionContext @abstract      Represents the user's motion when a particular sample was taken. @discussion    The expected value type is an NSNumber containing a HKUserMotionContext value. The value is active (HKUserMotionContextActive) if the user is in motion or working out, stationary if the user is still (HKUserMotionContextStationary), or not set (HKUserMotionContextNotSet) otherwise.
-// HKMetadataKeyUserMotionContext returns the string constant HKMetadataKeyUserMotionContext as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyUserMotionContext() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyUserMotionContext())
+// HKMetadataKeyUserMotionContext returns the string constant HKMetadataKeyUserMotionContext, for use as a dictionary key or argument.
+func HKMetadataKeyUserMotionContext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyUserMotionContext")))
 }
 
-// @constant      HKMetadataKeySessionEstimate @abstract      Represents a per-session estimate prior to longitudinal smoothing applied to the value stored in the associated HKQuantitySample. @discussion    The expected value type is an HKQuantity object with a unit compatible with the associated HKQuantitySample.
-// HKMetadataKeySessionEstimate returns the string constant HKMetadataKeySessionEstimate as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySessionEstimate() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySessionEstimate())
+// HKMetadataKeySessionEstimate returns the string constant HKMetadataKeySessionEstimate, for use as a dictionary key or argument.
+func HKMetadataKeySessionEstimate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySessionEstimate")))
 }
 
-// @constant      HKMetadataKeyHeartRateRecoveryTestType @abstract      Represents the test used to determine a Heart Rate Recovery value @discussion    The expected value type is an NSNumber containing a HKHeartRateRecoveryTestType value.
-// HKMetadataKeyHeartRateRecoveryTestType returns the string constant HKMetadataKeyHeartRateRecoveryTestType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateRecoveryTestType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateRecoveryTestType())
+// HKMetadataKeyHeartRateRecoveryTestType returns the string constant HKMetadataKeyHeartRateRecoveryTestType, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateRecoveryTestType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryTestType")))
 }
 
-// @constant      HKMetadataKeyHeartRateRecoveryActivityType @abstract      Represents the activity which preceded a Heart Rate Recovery value @discussion    The expected value type is an NSNumber containing a HKWorkoutActivityType value.
-// HKMetadataKeyHeartRateRecoveryActivityType returns the string constant HKMetadataKeyHeartRateRecoveryActivityType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateRecoveryActivityType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateRecoveryActivityType())
+// HKMetadataKeyHeartRateRecoveryActivityType returns the string constant HKMetadataKeyHeartRateRecoveryActivityType, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateRecoveryActivityType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryActivityType")))
 }
 
-// @constant      HKMetadataKeyHeartRateRecoveryActivityDuration @abstract      Represents the duration of activity which preceded a Heart Rate Recovery value @discussion    The expected value type is an HKQuantity object compatible with a time unit.
-// HKMetadataKeyHeartRateRecoveryActivityDuration returns the string constant HKMetadataKeyHeartRateRecoveryActivityDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateRecoveryActivityDuration() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateRecoveryActivityDuration())
+// HKMetadataKeyHeartRateRecoveryActivityDuration returns the string constant HKMetadataKeyHeartRateRecoveryActivityDuration, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateRecoveryActivityDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryActivityDuration")))
 }
 
-// @constant      HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate @abstract      Represents the maximum heart rate observed during the corresponding Heart Rate Recovery sample interval @discussion    The expected value type is an HKQuantity object compatible with "count/min" unit (eg "BPM").
-// HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate returns the string constant HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate())
+// HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate returns the string constant HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate")))
 }
 
-// @constant      HKMetadataKeyFoodType @abstract      Represents the type of food that was consumed when creating an HKObject. @discussion    This should be a short string representing the type of food, such as 'Banana'. The expected value type is NSString.
-// HKMetadataKeyFoodType returns the string constant HKMetadataKeyFoodType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyFoodType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyFoodType())
+// HKMetadataKeyFoodType returns the string constant HKMetadataKeyFoodType, for use as a dictionary key or argument.
+func HKMetadataKeyFoodType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyFoodType")))
 }
 
-// @constant      HKMetadataKeyUDIDeviceIdentifier @abstract      Represents the device identifier portion of a device's UDI (Unique Device Identifier). @discussion    The device identifier can be used to reference the GUDID (Globally Unique Device Identifier Database). The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
-// HKMetadataKeyUDIDeviceIdentifier returns the string constant HKMetadataKeyUDIDeviceIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyUDIDeviceIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyUDIDeviceIdentifier())
+// HKMetadataKeyUDIDeviceIdentifier returns the string constant HKMetadataKeyUDIDeviceIdentifier, for use as a dictionary key or argument.
+func HKMetadataKeyUDIDeviceIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyUDIDeviceIdentifier")))
 }
 
-// @constant      HKMetadataKeyUDIProductionIdentifier @abstract      Represents the production identifier portion of a device's UDI (Unique Device Identifier). @discussion    While part of a device's UDI, the production identifier is not saved in the FDA's GUDID (Globally Unique Device Identifier Database) and its use in HealthKit is now discouraged for user privacy reasons. Apps should consider handling this independently of HealthKit APIs if needed. The expected value type is NSString.
-// HKMetadataKeyUDIProductionIdentifier returns the string constant HKMetadataKeyUDIProductionIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyUDIProductionIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyUDIProductionIdentifier())
+// HKMetadataKeyUDIProductionIdentifier returns the string constant HKMetadataKeyUDIProductionIdentifier, for use as a dictionary key or argument.
+func HKMetadataKeyUDIProductionIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyUDIProductionIdentifier")))
 }
 
-// @constant      HKMetadataKeyDigitalSignature @abstract      Represents a digital signature validating the origin of an HKObject's value. @discussion    Intended to provide data integrity for sample data produced by trusted (tamper resistant) measuring devices. The digital signature format should be CMS (Cryptographic Message Syntax specified in IETF RFC 5652). It should be a “Signed-data” type signature containing the data items to be signed (e.g., timestamp, value, etc.) using ASN.1 encoding with DER (Distinguished Encoding Rules). The entire enveloping signature should be further encoded using base64. Recommended digest is SHA256, and recommended cipher is FIPS PUB 186-4 Digital Signature Standard Elliptic Curve P-256. See documentation for details.
-// HKMetadataKeyDigitalSignature returns the string constant HKMetadataKeyDigitalSignature as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyDigitalSignature() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyDigitalSignature())
+// HKMetadataKeyDigitalSignature returns the string constant HKMetadataKeyDigitalSignature, for use as a dictionary key or argument.
+func HKMetadataKeyDigitalSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDigitalSignature")))
 }
 
-// @constant      HKMetadataKeyExternalUUID @abstract      Represents a unique identifier for an HKObject that is set by its source. Uniqueness of objects with the same value of this key is not enforced by HealthKit. @discussion    The expected value type is NSString.
-// HKMetadataKeyExternalUUID returns the string constant HKMetadataKeyExternalUUID as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyExternalUUID() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyExternalUUID())
+// HKMetadataKeyExternalUUID returns the string constant HKMetadataKeyExternalUUID, for use as a dictionary key or argument.
+func HKMetadataKeyExternalUUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyExternalUUID")))
 }
 
-// @constant      HKMetadataKeySyncIdentifier @abstract      Represents an identifier for an HKObject that is set by its source and is used by HealthKit to uniquely identify an object. @discussion    Saving a HKObject with a HKMetadataKeySyncIdentifier will replace an existing HKObject with the same HKMetadataKeySyncIdentifier value if the new HKObject has a greater HKMetadataKeySyncVersion. The new sample will be added to all HKWorkouts or HKCorrelations containing the replaced sample. HKMetadataKeySyncVersion must be provided if HKMetadataKeySyncIdentifier is provided. The expected value type is NSString.
-// HKMetadataKeySyncIdentifier returns the string constant HKMetadataKeySyncIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySyncIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySyncIdentifier())
+// HKMetadataKeySyncIdentifier returns the string constant HKMetadataKeySyncIdentifier, for use as a dictionary key or argument.
+func HKMetadataKeySyncIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySyncIdentifier")))
 }
 
-// @constant      HKMetadataKeySyncVersion @abstract      Represents the version of the HKObject that is set by its source and is used by HealthKit to identify an object's version. @discussion    HKMetadataKeySyncVersion may not be provided if HKMetadataKeySyncIdentifier is not provided. The expected value type is NSNumber.
-// HKMetadataKeySyncVersion returns the string constant HKMetadataKeySyncVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySyncVersion() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySyncVersion())
+// HKMetadataKeySyncVersion returns the string constant HKMetadataKeySyncVersion, for use as a dictionary key or argument.
+func HKMetadataKeySyncVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySyncVersion")))
 }
 
-// @constant      HKMetadataKeyTimeZone @abstract      Represents the time zone that the user was in when the HKObject was created. @discussion    The expected value type is an NSString compatible with NSTimeZone's +timeZoneWithName:.
-// HKMetadataKeyTimeZone returns the string constant HKMetadataKeyTimeZone as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyTimeZone() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyTimeZone())
+// HKMetadataKeyTimeZone returns the string constant HKMetadataKeyTimeZone, for use as a dictionary key or argument.
+func HKMetadataKeyTimeZone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyTimeZone")))
 }
 
-// @constant      HKMetadataKeyDeviceName @abstract      Represents the name of the device that took the reading. @discussion    The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
-// HKMetadataKeyDeviceName returns the string constant HKMetadataKeyDeviceName as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyDeviceName() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyDeviceName())
+// HKMetadataKeyDeviceName returns the string constant HKMetadataKeyDeviceName, for use as a dictionary key or argument.
+func HKMetadataKeyDeviceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDeviceName")))
 }
 
-// @constant      HKMetadataKeyDeviceManufacturerName @abstract      Represents the name of the manufacturer of the device that took the reading. @discussion    The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
-// HKMetadataKeyDeviceManufacturerName returns the string constant HKMetadataKeyDeviceManufacturerName as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyDeviceManufacturerName() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyDeviceManufacturerName())
+// HKMetadataKeyDeviceManufacturerName returns the string constant HKMetadataKeyDeviceManufacturerName, for use as a dictionary key or argument.
+func HKMetadataKeyDeviceManufacturerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDeviceManufacturerName")))
 }
 
-// @constant      HKMetadataKeyWasTakenInLab @abstract      Represents whether or not the reading was taken in a lab. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyWasTakenInLab returns the string constant HKMetadataKeyWasTakenInLab as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWasTakenInLab() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWasTakenInLab())
+// HKMetadataKeyWasTakenInLab returns the string constant HKMetadataKeyWasTakenInLab, for use as a dictionary key or argument.
+func HKMetadataKeyWasTakenInLab() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWasTakenInLab")))
 }
 
-// @constant      HKMetadataKeyReferenceRangeLowerLimit @abstract      Represents the lower limit of the reference range for a lab result. @discussion    The expected value type is an NSNumber.
-// HKMetadataKeyReferenceRangeLowerLimit returns the string constant HKMetadataKeyReferenceRangeLowerLimit as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyReferenceRangeLowerLimit() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyReferenceRangeLowerLimit())
+// HKMetadataKeyReferenceRangeLowerLimit returns the string constant HKMetadataKeyReferenceRangeLowerLimit, for use as a dictionary key or argument.
+func HKMetadataKeyReferenceRangeLowerLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyReferenceRangeLowerLimit")))
 }
 
-// @constant      HKMetadataKeyReferenceRangeUpperLimit @abstract      Represents the upper limit of the reference range for a lab result. @discussion    The expected value type is an NSNumber.
-// HKMetadataKeyReferenceRangeUpperLimit returns the string constant HKMetadataKeyReferenceRangeUpperLimit as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyReferenceRangeUpperLimit() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyReferenceRangeUpperLimit())
+// HKMetadataKeyReferenceRangeUpperLimit returns the string constant HKMetadataKeyReferenceRangeUpperLimit, for use as a dictionary key or argument.
+func HKMetadataKeyReferenceRangeUpperLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyReferenceRangeUpperLimit")))
 }
 
-// @constant      HKMetadataKeyWasUserEntered @abstract      Represents whether or not the reading was entered by the user. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyWasUserEntered returns the string constant HKMetadataKeyWasUserEntered as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWasUserEntered() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWasUserEntered())
+// HKMetadataKeyWasUserEntered returns the string constant HKMetadataKeyWasUserEntered, for use as a dictionary key or argument.
+func HKMetadataKeyWasUserEntered() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWasUserEntered")))
 }
 
-// @constant      HKMetadataKeyWorkoutBrandName @abstract      Represents the brand name of a particular workout. @discussion    The expected value type is NSString.
-// HKMetadataKeyWorkoutBrandName returns the string constant HKMetadataKeyWorkoutBrandName as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWorkoutBrandName() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWorkoutBrandName())
+// HKMetadataKeyWorkoutBrandName returns the string constant HKMetadataKeyWorkoutBrandName, for use as a dictionary key or argument.
+func HKMetadataKeyWorkoutBrandName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWorkoutBrandName")))
 }
 
-// @constant      HKMetadataKeyGroupFitness @abstract      Represents whether or not a workout was performed as part of a group fitness class. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyGroupFitness returns the string constant HKMetadataKeyGroupFitness as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyGroupFitness() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyGroupFitness())
+// HKMetadataKeyGroupFitness returns the string constant HKMetadataKeyGroupFitness, for use as a dictionary key or argument.
+func HKMetadataKeyGroupFitness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyGroupFitness")))
 }
 
-// @constant      HKMetadataKeyAppleFitnessPlusCatalogIdentifier @abstract      Contains the catalog identifier of the Fitness+ workout. @discussion    This key only exists if the workout was completed in Fitness+. The expected value type is an NSString containing the Fitness+ catalog identifier.
-// HKMetadataKeyAppleFitnessPlusCatalogIdentifier returns the string constant HKMetadataKeyAppleFitnessPlusCatalogIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAppleFitnessPlusCatalogIdentifier() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAppleFitnessPlusCatalogIdentifier())
+// HKMetadataKeyAppleFitnessPlusCatalogIdentifier returns the string constant HKMetadataKeyAppleFitnessPlusCatalogIdentifier, for use as a dictionary key or argument.
+func HKMetadataKeyAppleFitnessPlusCatalogIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleFitnessPlusCatalogIdentifier")))
 }
 
-// @constant      HKMetadataKeyAppleFitnessPlusSession @abstract      Represents whether or not a workout is a Fitness+ workout. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyAppleFitnessPlusSession returns the string constant HKMetadataKeyAppleFitnessPlusSession as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAppleFitnessPlusSession() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAppleFitnessPlusSession())
+// HKMetadataKeyAppleFitnessPlusSession returns the string constant HKMetadataKeyAppleFitnessPlusSession, for use as a dictionary key or argument.
+func HKMetadataKeyAppleFitnessPlusSession() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleFitnessPlusSession")))
 }
 
-// @constant      HKMetadataKeyIndoorWorkout @abstract      Represents whether or not a workout was performed indoors as opposed to outdoors. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyIndoorWorkout returns the string constant HKMetadataKeyIndoorWorkout as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyIndoorWorkout() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyIndoorWorkout())
+// HKMetadataKeyIndoorWorkout returns the string constant HKMetadataKeyIndoorWorkout, for use as a dictionary key or argument.
+func HKMetadataKeyIndoorWorkout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyIndoorWorkout")))
 }
 
-// @constant      HKMetadataKeyCoachedWorkout @abstract      Represents whether or not a workout was performed with a coach or personal trainer. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyCoachedWorkout returns the string constant HKMetadataKeyCoachedWorkout as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyCoachedWorkout() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyCoachedWorkout())
+// HKMetadataKeyCoachedWorkout returns the string constant HKMetadataKeyCoachedWorkout, for use as a dictionary key or argument.
+func HKMetadataKeyCoachedWorkout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyCoachedWorkout")))
 }
 
-// @constant      HKMetadataKeyWeatherCondition @abstract      Represents the weather condition during the sample. @discussion    The expected value type is an NSNumber containing an HKWeatherCondition value. This key may be set on an HKWorkout object to represent the overall weather condition during the workout.
-// HKMetadataKeyWeatherCondition returns the string constant HKMetadataKeyWeatherCondition as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWeatherCondition() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWeatherCondition())
+// HKMetadataKeyWeatherCondition returns the string constant HKMetadataKeyWeatherCondition, for use as a dictionary key or argument.
+func HKMetadataKeyWeatherCondition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWeatherCondition")))
 }
 
-// @constant      HKMetadataKeyWeatherTemperature @abstract      Represents the weather temperature during the sample. @discussion    The expected value type is an HKQuantity expressed in a temperature unit. This key may be set on an HKWorkout object to represent the overall temperature during the workout.
-// HKMetadataKeyWeatherTemperature returns the string constant HKMetadataKeyWeatherTemperature as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWeatherTemperature() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWeatherTemperature())
+// HKMetadataKeyWeatherTemperature returns the string constant HKMetadataKeyWeatherTemperature, for use as a dictionary key or argument.
+func HKMetadataKeyWeatherTemperature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWeatherTemperature")))
 }
 
-// @constant      HKMetadataKeyWeatherHumidity @abstract      Represents the weather humidity during the sample. @discussion    The expected value type is an HKQuantity expressed in percent. This key may be set on an HKWorkout object to represent the overall humidity during the workout.
-// HKMetadataKeyWeatherHumidity returns the string constant HKMetadataKeyWeatherHumidity as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWeatherHumidity() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWeatherHumidity())
+// HKMetadataKeyWeatherHumidity returns the string constant HKMetadataKeyWeatherHumidity, for use as a dictionary key or argument.
+func HKMetadataKeyWeatherHumidity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWeatherHumidity")))
 }
 
-// @constant      HKMetadataKeySexualActivityProtectionUsed @abstract      Represents whether or not protection was used during sexual activity. This can be used to track either protection from STIs or protection from pregnancy. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeySexualActivityProtectionUsed returns the string constant HKMetadataKeySexualActivityProtectionUsed as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySexualActivityProtectionUsed() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySexualActivityProtectionUsed())
+// HKMetadataKeySexualActivityProtectionUsed returns the string constant HKMetadataKeySexualActivityProtectionUsed, for use as a dictionary key or argument.
+func HKMetadataKeySexualActivityProtectionUsed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySexualActivityProtectionUsed")))
 }
 
-// @constant      HKMetadataKeyMenstrualCycleStart @abstract      Indicates whether or not the sample represents the start of a menstrual cycle. This is a required metadata key for category samples of type HKCategoryTypeIdentifierMenstrualFlow. @discussion    The expected value type is an NSNumber containing a BOOL value.
-// HKMetadataKeyMenstrualCycleStart returns the string constant HKMetadataKeyMenstrualCycleStart as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyMenstrualCycleStart() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyMenstrualCycleStart())
+// HKMetadataKeyMenstrualCycleStart returns the string constant HKMetadataKeyMenstrualCycleStart, for use as a dictionary key or argument.
+func HKMetadataKeyMenstrualCycleStart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyMenstrualCycleStart")))
 }
 
-// @constant      HKMetadataKeyLapLength @abstract      Represents the length of a lap recorded during a workout. @discussion    The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the length of a lap.
-// HKMetadataKeyLapLength returns the string constant HKMetadataKeyLapLength as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyLapLength() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyLapLength())
+// HKMetadataKeyLapLength returns the string constant HKMetadataKeyLapLength, for use as a dictionary key or argument.
+func HKMetadataKeyLapLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyLapLength")))
 }
 
-// @constant      HKMetadataKeySwimmingLocationType @abstract      Represents the location type of a swimming workout. @discussion    The expected value type is an NSNumber containing an HKWorkoutSwimmingLocationType value. This key may be set on an HKWorkout object to represent the swimming location type.
-// HKMetadataKeySwimmingLocationType returns the string constant HKMetadataKeySwimmingLocationType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySwimmingLocationType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySwimmingLocationType())
+// HKMetadataKeySwimmingLocationType returns the string constant HKMetadataKeySwimmingLocationType, for use as a dictionary key or argument.
+func HKMetadataKeySwimmingLocationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySwimmingLocationType")))
 }
 
-// @constant      HKMetadataKeySwimmingStrokeStyle @abstract      Represents the predominant stroke style during a lap of a swimming workout. @discussion    The expected value type is an NSNumber containing an HKSwimmingStrokeStyle value. This key may be set on an HKWorkoutEvent object with the type HKWorkoutEventTypeLap to represent the predominant style used during the lap.
-// HKMetadataKeySwimmingStrokeStyle returns the string constant HKMetadataKeySwimmingStrokeStyle as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySwimmingStrokeStyle() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySwimmingStrokeStyle())
+// HKMetadataKeySwimmingStrokeStyle returns the string constant HKMetadataKeySwimmingStrokeStyle, for use as a dictionary key or argument.
+func HKMetadataKeySwimmingStrokeStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySwimmingStrokeStyle")))
 }
 
-// @constant      HKMetadataKeyInsulinDeliveryReason @abstract      Represents the medical reason for the delivery of an insulin dose. This is a required metadata key for samples of type HKQuantityTypeIdentifierInsulinDelivery. @discussion    The expected value type is an NSNumber containing a HKInsulinDeliveryReason value.
-// HKMetadataKeyInsulinDeliveryReason returns the string constant HKMetadataKeyInsulinDeliveryReason as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyInsulinDeliveryReason() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyInsulinDeliveryReason())
+// HKMetadataKeyInsulinDeliveryReason returns the string constant HKMetadataKeyInsulinDeliveryReason, for use as a dictionary key or argument.
+func HKMetadataKeyInsulinDeliveryReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyInsulinDeliveryReason")))
 }
 
-// @constant      HKMetadataKeyBloodGlucoseMealTime @abstract      Indicates the relative timing of a blood glucose reading to a meal. @discussion    This timing, as well as other factors like meal composition, can be used by medical professionals to determine the acceptable value range for a blood glucose reading. For use cases requiring the capture of precise timing and composition information, developers should record additional dietary samples, such as HKQuantityTypeIdentifierDietaryCarbohydrates. The expected value type is an NSNumber containing a HKBloodGlucoseMealTime value.
-// HKMetadataKeyBloodGlucoseMealTime returns the string constant HKMetadataKeyBloodGlucoseMealTime as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyBloodGlucoseMealTime() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyBloodGlucoseMealTime())
+// HKMetadataKeyBloodGlucoseMealTime returns the string constant HKMetadataKeyBloodGlucoseMealTime, for use as a dictionary key or argument.
+func HKMetadataKeyBloodGlucoseMealTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyBloodGlucoseMealTime")))
 }
 
-// @constant      HKMetadataKeyVO2MaxTestType @abstract      Represents the test used to create VO2 Max Sample @discussion    The expected value type is an NSNumber containing a HKVO2MaxTestType value.
-// HKMetadataKeyVO2MaxTestType returns the string constant HKMetadataKeyVO2MaxTestType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyVO2MaxTestType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyVO2MaxTestType())
+// HKMetadataKeyVO2MaxTestType returns the string constant HKMetadataKeyVO2MaxTestType, for use as a dictionary key or argument.
+func HKMetadataKeyVO2MaxTestType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyVO2MaxTestType")))
 }
 
-// @constant      HKMetadataKeyAverageSpeed @abstract      Represents the average speed for a workout segment or distance sample. @discussion    This represents the average speed when moving so it may not match the value of distance/time for a distance sample. The expected value type is an HKQuantity object compatible with a speed unit (e.g. m/s). This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
-// HKMetadataKeyAverageSpeed returns the string constant HKMetadataKeyAverageSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAverageSpeed() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAverageSpeed())
+// HKMetadataKeyAverageSpeed returns the string constant HKMetadataKeyAverageSpeed, for use as a dictionary key or argument.
+func HKMetadataKeyAverageSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAverageSpeed")))
 }
 
-// @constant      HKMetadataKeyMaximumSpeed @abstract      Represents the maximum speed for a workout segment or distance sample. @discussion    The expected value type is an HKQuantity object compatible with a speed unit (e.g. m/s). This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
-// HKMetadataKeyMaximumSpeed returns the string constant HKMetadataKeyMaximumSpeed as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyMaximumSpeed() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyMaximumSpeed())
+// HKMetadataKeyMaximumSpeed returns the string constant HKMetadataKeyMaximumSpeed, for use as a dictionary key or argument.
+func HKMetadataKeyMaximumSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyMaximumSpeed")))
 }
 
-// @constant      HKMetadataKeyAlpineSlopeGrade @abstract      Represents the grade of a ski run. @discussion    Alpine slope grade is measured in percent where 100% grade is a 45 degree slope. The expected value type is an HKQuantity object compatible with percent unit. This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
-// HKMetadataKeyAlpineSlopeGrade returns the string constant HKMetadataKeyAlpineSlopeGrade as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAlpineSlopeGrade() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAlpineSlopeGrade())
+// HKMetadataKeyAlpineSlopeGrade returns the string constant HKMetadataKeyAlpineSlopeGrade, for use as a dictionary key or argument.
+func HKMetadataKeyAlpineSlopeGrade() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAlpineSlopeGrade")))
 }
 
-// @constant      HKMetadataKeyElevationAscended @abstract      Represents the cumulative elevation ascent during a workout. @discussion    The expected value type is an HKQuantity object compatible with length unit. This key may be set on a workout, workout segments or distance samples.
-// HKMetadataKeyElevationAscended returns the string constant HKMetadataKeyElevationAscended as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyElevationAscended() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyElevationAscended())
+// HKMetadataKeyElevationAscended returns the string constant HKMetadataKeyElevationAscended, for use as a dictionary key or argument.
+func HKMetadataKeyElevationAscended() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyElevationAscended")))
 }
 
-// @constant      HKMetadataKeyElevationDescended @abstract      Represents the cumulative elevation descent during a workout. @discussion    The expected value type is an HKQuantity object compatible with length unit. This key may be set on a workout, workout segments or distance samples.
-// HKMetadataKeyElevationDescended returns the string constant HKMetadataKeyElevationDescended as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyElevationDescended() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyElevationDescended())
+// HKMetadataKeyElevationDescended returns the string constant HKMetadataKeyElevationDescended, for use as a dictionary key or argument.
+func HKMetadataKeyElevationDescended() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyElevationDescended")))
 }
 
-// @constant      HKMetadataKeyFitnessMachineDuration @abstract      Represents the workout duration as displayed by a GymKit connected fitness machine. @discussion    The expected value type is an HKQuantity object compatible with a time unit. This key may be set on an HKWorkout object to represent the duration of the workout as displayed by a GymKit connected fitness machine.
-// HKMetadataKeyFitnessMachineDuration returns the string constant HKMetadataKeyFitnessMachineDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyFitnessMachineDuration() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyFitnessMachineDuration())
+// HKMetadataKeyFitnessMachineDuration returns the string constant HKMetadataKeyFitnessMachineDuration, for use as a dictionary key or argument.
+func HKMetadataKeyFitnessMachineDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyFitnessMachineDuration")))
 }
 
-// @constant      HKMetadataKeyIndoorBikeDistance @abstract      Represents the distance covered during an indoor bike workout. @discussion    The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the distance covered during an indoor bike workout.
-// HKMetadataKeyIndoorBikeDistance returns the string constant HKMetadataKeyIndoorBikeDistance as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyIndoorBikeDistance() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyIndoorBikeDistance())
+// HKMetadataKeyIndoorBikeDistance returns the string constant HKMetadataKeyIndoorBikeDistance, for use as a dictionary key or argument.
+func HKMetadataKeyIndoorBikeDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyIndoorBikeDistance")))
 }
 
-// @constant      HKMetadataKeyCrossTrainerDistance @abstract      Represents the distance covered during a cross trainer workout. @discussion    The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the distance covered during a cross trainer workout.
-// HKMetadataKeyCrossTrainerDistance returns the string constant HKMetadataKeyCrossTrainerDistance as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyCrossTrainerDistance() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyCrossTrainerDistance())
+// HKMetadataKeyCrossTrainerDistance returns the string constant HKMetadataKeyCrossTrainerDistance, for use as a dictionary key or argument.
+func HKMetadataKeyCrossTrainerDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyCrossTrainerDistance")))
 }
 
-// @constant      HKMetadataKeyHeartRateEventThreshold @abstract      Represents the threshold heart rate that triggered a heart rate event. @discussion    The expected value is an HKQuantity object with a compatible unit (e.g. count/min). This key will be set on heart rate event samples of type HKCategoryTypeIdentifierHighHeartRateEvent and HKCategoryTypeIdentifierLowHeartRateEvent.
-// HKMetadataKeyHeartRateEventThreshold returns the string constant HKMetadataKeyHeartRateEventThreshold as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeartRateEventThreshold() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeartRateEventThreshold())
+// HKMetadataKeyHeartRateEventThreshold returns the string constant HKMetadataKeyHeartRateEventThreshold, for use as a dictionary key or argument.
+func HKMetadataKeyHeartRateEventThreshold() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeartRateEventThreshold")))
 }
 
-// @constant      HKMetadataKeyAverageMETs @abstract      Represents the average METs, or Metabolic Equivalent of Task during a workout. @discussion    The expected value type is an HKQuantity expressed in a METs (kcal/(kg*hr)) unit. This key may be set on an HKWorkout object to represent the average workout intensity represented as METs over the entire workout duration.
-// HKMetadataKeyAverageMETs returns the string constant HKMetadataKeyAverageMETs as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAverageMETs() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAverageMETs())
+// HKMetadataKeyAverageMETs returns the string constant HKMetadataKeyAverageMETs, for use as a dictionary key or argument.
+func HKMetadataKeyAverageMETs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAverageMETs")))
 }
 
-// @constant      HKMetadataKeyAudioExposureLevel @abstract      Represents the audio level associated with an audio event. @discussion    The expected value is an HKQuantity whose value is the audio level associated with the event measured in dBASPL units.
-// HKMetadataKeyAudioExposureLevel returns the string constant HKMetadataKeyAudioExposureLevel as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAudioExposureLevel() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAudioExposureLevel())
+// HKMetadataKeyAudioExposureLevel returns the string constant HKMetadataKeyAudioExposureLevel, for use as a dictionary key or argument.
+func HKMetadataKeyAudioExposureLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAudioExposureLevel")))
 }
 
-// @constant      HKMetadataKeyAudioExposureDuration @abstract      Represents the duration of time that is covered by audio samples. @discussion    The expected value type is an HKQuantity object compatible with a time unit. This key may be set on headphone audio exposure event samples to indicate the duration of time that the user was actually exposed to audio through their headphones.
-// HKMetadataKeyAudioExposureDuration returns the string constant HKMetadataKeyAudioExposureDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAudioExposureDuration() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAudioExposureDuration())
+// HKMetadataKeyAudioExposureDuration returns the string constant HKMetadataKeyAudioExposureDuration, for use as a dictionary key or argument.
+func HKMetadataKeyAudioExposureDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAudioExposureDuration")))
 }
 
-// @constant      HKMetadataKeyAppleECGAlgorithmVersion @abstract      Represents the ECG algorithm version that was used to generate a particular HKElectrocardiogram. @discussion    The expected value type is an an NSNumber containing a HKAppleECGAlgorithmVersion value.
-// HKMetadataKeyAppleECGAlgorithmVersion returns the string constant HKMetadataKeyAppleECGAlgorithmVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAppleECGAlgorithmVersion() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAppleECGAlgorithmVersion())
+// HKMetadataKeyAppleECGAlgorithmVersion returns the string constant HKMetadataKeyAppleECGAlgorithmVersion, for use as a dictionary key or argument.
+func HKMetadataKeyAppleECGAlgorithmVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleECGAlgorithmVersion")))
 }
 
-// @constant      HKMetadataKeyDevicePlacementSide @abstract      Represents the detected placement of the device during the bout of walking @discussion    The expected value type is an NSNumber containing a HKDevicePlacementSide value.  This key is expected to be written for Walking Aymmetry Percentage.
-// HKMetadataKeyDevicePlacementSide returns the string constant HKMetadataKeyDevicePlacementSide as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyDevicePlacementSide() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyDevicePlacementSide())
+// HKMetadataKeyDevicePlacementSide returns the string constant HKMetadataKeyDevicePlacementSide, for use as a dictionary key or argument.
+func HKMetadataKeyDevicePlacementSide() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDevicePlacementSide")))
 }
 
-// @constant      HKMetadataKeyBarometricPressure @abstract      Represents the barometric pressure recorded at the time of a sample. @discussion    The expected value type is an HKQuantity representing a value in units of pressure (atmospheres, pascals, millimeters of Mercury).
-// HKMetadataKeyBarometricPressure returns the string constant HKMetadataKeyBarometricPressure as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyBarometricPressure() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyBarometricPressure())
+// HKMetadataKeyBarometricPressure returns the string constant HKMetadataKeyBarometricPressure, for use as a dictionary key or argument.
+func HKMetadataKeyBarometricPressure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyBarometricPressure")))
 }
 
-// @constant      HKMetadataKeyAppleDeviceCalibrated @abstract      Represents the calibration status of the devices used to generate this sample. @discussion    The expected value is a boolean NSNumber indicating whether the sample value was estimated using a sufficient set of device calibration data. The calibration status of a device may vary per data type. This key is read-only.
-// HKMetadataKeyAppleDeviceCalibrated returns the string constant HKMetadataKeyAppleDeviceCalibrated as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAppleDeviceCalibrated() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAppleDeviceCalibrated())
+// HKMetadataKeyAppleDeviceCalibrated returns the string constant HKMetadataKeyAppleDeviceCalibrated, for use as a dictionary key or argument.
+func HKMetadataKeyAppleDeviceCalibrated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAppleDeviceCalibrated")))
 }
 
-// @constant      HKMetadataKeyVO2MaxValue @abstract      Represents a VO2Max value that can be associated with, for example, Cardio Fitness Events @discussion    This key should be used to store an HKQuantity with a unit of `ml/kg·min`
-// HKMetadataKeyVO2MaxValue returns the string constant HKMetadataKeyVO2MaxValue as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyVO2MaxValue() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyVO2MaxValue())
+// HKMetadataKeyVO2MaxValue returns the string constant HKMetadataKeyVO2MaxValue, for use as a dictionary key or argument.
+func HKMetadataKeyVO2MaxValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyVO2MaxValue")))
 }
 
-// @constant      HKMetadataKeyLowCardioFitnessEventThreshold @abstract      Can be used to store a snapshot of the threshold used to classify VO2Max values as "low" @discussion    This key should be used to store an HKQuantity, with a unit of `ml/kg·min`, representing the low fitness threshold.
-// HKMetadataKeyLowCardioFitnessEventThreshold returns the string constant HKMetadataKeyLowCardioFitnessEventThreshold as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyLowCardioFitnessEventThreshold() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyLowCardioFitnessEventThreshold())
+// HKMetadataKeyLowCardioFitnessEventThreshold returns the string constant HKMetadataKeyLowCardioFitnessEventThreshold, for use as a dictionary key or argument.
+func HKMetadataKeyLowCardioFitnessEventThreshold() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyLowCardioFitnessEventThreshold")))
 }
 
-// @constant      HKMetadataKeyDateOfEarliestDataUsedForEstimate @abstract      Represents how far back an estimation algorithm incorporated data from. @discussion    The expected value is an NSDate indicating the earliest date of data used to produce an estimated value for an HKSample.
-// HKMetadataKeyDateOfEarliestDataUsedForEstimate returns the string constant HKMetadataKeyDateOfEarliestDataUsedForEstimate as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyDateOfEarliestDataUsedForEstimate() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyDateOfEarliestDataUsedForEstimate())
+// HKMetadataKeyDateOfEarliestDataUsedForEstimate returns the string constant HKMetadataKeyDateOfEarliestDataUsedForEstimate, for use as a dictionary key or argument.
+func HKMetadataKeyDateOfEarliestDataUsedForEstimate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyDateOfEarliestDataUsedForEstimate")))
 }
 
-// @constant      HKMetadataKeyAlgorithmVersion @abstract      The version of the algorithm used to generate the sample. @discussion    The key for an NSNumber containing an NSInteger indicating the version of the algorithm used to generate the sample.
-// HKMetadataKeyAlgorithmVersion returns the string constant HKMetadataKeyAlgorithmVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyAlgorithmVersion() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyAlgorithmVersion())
+// HKMetadataKeyAlgorithmVersion returns the string constant HKMetadataKeyAlgorithmVersion, for use as a dictionary key or argument.
+func HKMetadataKeyAlgorithmVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyAlgorithmVersion")))
 }
 
-// @constant      HKMetadataKeySWOLFScore @abstract      Represents sum of strokes per length and time for the length. Calculated for each lap event and segment event during swimming workout. @discussion    The expected value type is an NSNumber containing a score. This key may be set on an HKWorkout object to represent the SWOLF Score during the whole workout.
-// HKMetadataKeySWOLFScore returns the string constant HKMetadataKeySWOLFScore as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeySWOLFScore() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeySWOLFScore())
+// HKMetadataKeySWOLFScore returns the string constant HKMetadataKeySWOLFScore, for use as a dictionary key or argument.
+func HKMetadataKeySWOLFScore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeySWOLFScore")))
 }
 
-// @constant      HKMetadataKeyQuantityClampedToLowerBound @abstract      Indicates the quantity was clamped to a lower bound. @discussion    Value is a BOOL indicating whether or not the quantity value in the sample has been clamped to some lower bound
-// HKMetadataKeyQuantityClampedToLowerBound returns the string constant HKMetadataKeyQuantityClampedToLowerBound as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyQuantityClampedToLowerBound() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyQuantityClampedToLowerBound())
+// HKMetadataKeyQuantityClampedToLowerBound returns the string constant HKMetadataKeyQuantityClampedToLowerBound, for use as a dictionary key or argument.
+func HKMetadataKeyQuantityClampedToLowerBound() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyQuantityClampedToLowerBound")))
 }
 
-// @constant      HKMetadataKeyQuantityClampedToUpperBound @abstract      Indicates the quantity was clamped to an upper bound. @discussion    Value is a BOOL indicating whether or not the quantity value in the sample has been clamped to some upper bound
-// HKMetadataKeyQuantityClampedToUpperBound returns the string constant HKMetadataKeyQuantityClampedToUpperBound as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyQuantityClampedToUpperBound() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyQuantityClampedToUpperBound())
+// HKMetadataKeyQuantityClampedToUpperBound returns the string constant HKMetadataKeyQuantityClampedToUpperBound, for use as a dictionary key or argument.
+func HKMetadataKeyQuantityClampedToUpperBound() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyQuantityClampedToUpperBound")))
 }
 
-// @constant      HKMetadataKeyGlassesPrescriptionDescription @abstract      Represents the description that may be associated with a HKGlassesPrescription. @discussion    Glasses are often customized for different purposes like reading or distance. Prescriptions received by an eye care professional can provide different ocular functions. Users may also customize their glasses for different scenarios. The value of the metadata is a NSString that describes the purpose of a HKGlassesPrescription.
-// HKMetadataKeyGlassesPrescriptionDescription returns the string constant HKMetadataKeyGlassesPrescriptionDescription as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyGlassesPrescriptionDescription() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyGlassesPrescriptionDescription())
+// HKMetadataKeyGlassesPrescriptionDescription returns the string constant HKMetadataKeyGlassesPrescriptionDescription, for use as a dictionary key or argument.
+func HKMetadataKeyGlassesPrescriptionDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyGlassesPrescriptionDescription")))
 }
 
-// @constant      HKMetadataKeyWaterSalinity @abstract      Represents the water salinity for an underwater depth or water temperature sample. @discussion    The expected value type is an NSNumber containing a HKWaterSalinity value.
-// HKMetadataKeyWaterSalinity returns the string constant HKMetadataKeyWaterSalinity as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyWaterSalinity() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyWaterSalinity())
+// HKMetadataKeyWaterSalinity returns the string constant HKMetadataKeyWaterSalinity, for use as a dictionary key or argument.
+func HKMetadataKeyWaterSalinity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyWaterSalinity")))
 }
 
-// @constant      HKMetadataKeyHeadphoneGain @abstract      Represents the headphone gain associated with a Headphone audio exposure event. @discussion    The expected value is an HKQuantity whose value is the gain associated with the event measured in decibels in A-weighted Sound Pressure Level units.
-// HKMetadataKeyHeadphoneGain returns the string constant HKMetadataKeyHeadphoneGain as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyHeadphoneGain() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyHeadphoneGain())
+// HKMetadataKeyHeadphoneGain returns the string constant HKMetadataKeyHeadphoneGain, for use as a dictionary key or argument.
+func HKMetadataKeyHeadphoneGain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyHeadphoneGain")))
 }
 
-// @constant      HKMetadataKeyCyclingFunctionalThresholdPowerTestType @abstract      Represents the test used to determine a Cycling Functional Threshold Power value. @discussion    The expected value type is an NSNumber containing a HKCyclingFunctionalThresholdPowerTestType value.
-// HKMetadataKeyCyclingFunctionalThresholdPowerTestType returns the string constant HKMetadataKeyCyclingFunctionalThresholdPowerTestType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyCyclingFunctionalThresholdPowerTestType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyCyclingFunctionalThresholdPowerTestType())
+// HKMetadataKeyCyclingFunctionalThresholdPowerTestType returns the string constant HKMetadataKeyCyclingFunctionalThresholdPowerTestType, for use as a dictionary key or argument.
+func HKMetadataKeyCyclingFunctionalThresholdPowerTestType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyCyclingFunctionalThresholdPowerTestType")))
 }
 
-// @constant      HKMetadataKeyActivityType @abstract      Represents the activity type related to the sample @discussion    The expected value type is an NSNumber containing a HKWorkoutActivityType value.
-// HKMetadataKeyActivityType returns the string constant HKMetadataKeyActivityType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyActivityType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyActivityType())
+// HKMetadataKeyActivityType returns the string constant HKMetadataKeyActivityType, for use as a dictionary key or argument.
+func HKMetadataKeyActivityType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyActivityType")))
 }
 
-// @constant      HKMetadataKeyPhysicalEffortEstimationType @abstract      Represents the estimation type used to create the Physical Effort Sample @discussion    The expected value type is an NSNumber containing a HKPhysicalEffortEstimationType value.
-// HKMetadataKeyPhysicalEffortEstimationType returns the string constant HKMetadataKeyPhysicalEffortEstimationType as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyPhysicalEffortEstimationType() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyPhysicalEffortEstimationType())
+// HKMetadataKeyPhysicalEffortEstimationType returns the string constant HKMetadataKeyPhysicalEffortEstimationType, for use as a dictionary key or argument.
+func HKMetadataKeyPhysicalEffortEstimationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyPhysicalEffortEstimationType")))
 }
 
-// @constant      HKMetadataKeyMaximumLightIntensity @abstract      Represents maximum intensity of light for an outdoor time sample. @discussion    The expected value type is an HKQuantity expressed in HKUnit Lux.
-// HKMetadataKeyMaximumLightIntensity returns the string constant HKMetadataKeyMaximumLightIntensity as an objc.ID, for use as a dictionary key or selector argument.
-func HKMetadataKeyMaximumLightIntensity() objc.ID {
-	return purego.CFConstant(raw.HKMetadataKeyMaximumLightIntensity())
+// HKMetadataKeyMaximumLightIntensity returns the string constant HKMetadataKeyMaximumLightIntensity, for use as a dictionary key or argument.
+func HKMetadataKeyMaximumLightIntensity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKMetadataKeyMaximumLightIntensity")))
 }
 
-// HKSourceRevisionAnyVersion returns the string constant HKSourceRevisionAnyVersion as an objc.ID, for use as a dictionary key or selector argument.
-func HKSourceRevisionAnyVersion() objc.ID {
-	return purego.CFConstant(raw.HKSourceRevisionAnyVersion())
+// HKSourceRevisionAnyVersion returns the string constant HKSourceRevisionAnyVersion, for use as a dictionary key or argument.
+func HKSourceRevisionAnyVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKSourceRevisionAnyVersion")))
 }
 
-// HKSourceRevisionAnyProductType returns the string constant HKSourceRevisionAnyProductType as an objc.ID, for use as a dictionary key or selector argument.
-func HKSourceRevisionAnyProductType() objc.ID {
-	return purego.CFConstant(raw.HKSourceRevisionAnyProductType())
+// HKSourceRevisionAnyProductType returns the string constant HKSourceRevisionAnyProductType, for use as a dictionary key or argument.
+func HKSourceRevisionAnyProductType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKSourceRevisionAnyProductType")))
 }
 
-// The key path you use to create predicates for the medication's archived status. Use to predicate against the “HKUserAnnotatedMedication/isArchived“ property of a medication.
-// HKUserAnnotatedMedicationPredicateKeyPathIsArchived returns the string constant HKUserAnnotatedMedicationPredicateKeyPathIsArchived as an objc.ID, for use as a dictionary key or selector argument.
-func HKUserAnnotatedMedicationPredicateKeyPathIsArchived() objc.ID {
-	return purego.CFConstant(raw.HKUserAnnotatedMedicationPredicateKeyPathIsArchived())
+// HKUserAnnotatedMedicationPredicateKeyPathIsArchived returns the string constant HKUserAnnotatedMedicationPredicateKeyPathIsArchived, for use as a dictionary key or argument.
+func HKUserAnnotatedMedicationPredicateKeyPathIsArchived() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKUserAnnotatedMedicationPredicateKeyPathIsArchived")))
 }
 
-// The key path you use to create predicates for whether or not a medication has a schedule. Use to predicate against the “HKUserAnnotatedMedication/hasSchedule“ property of a medication.
-// HKUserAnnotatedMedicationPredicateKeyPathHasSchedule returns the string constant HKUserAnnotatedMedicationPredicateKeyPathHasSchedule as an objc.ID, for use as a dictionary key or selector argument.
-func HKUserAnnotatedMedicationPredicateKeyPathHasSchedule() objc.ID {
-	return purego.CFConstant(raw.HKUserAnnotatedMedicationPredicateKeyPathHasSchedule())
+// HKUserAnnotatedMedicationPredicateKeyPathHasSchedule returns the string constant HKUserAnnotatedMedicationPredicateKeyPathHasSchedule, for use as a dictionary key or argument.
+func HKUserAnnotatedMedicationPredicateKeyPathHasSchedule() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKUserAnnotatedMedicationPredicateKeyPathHasSchedule")))
 }
 
-// @constant      HKVerifiableClinicalRecordSourceTypeSMARTHealthCard @abstract      Represents a SMART Health Card source type for a verifiable record.
-// HKVerifiableClinicalRecordSourceTypeSMARTHealthCard returns the string constant HKVerifiableClinicalRecordSourceTypeSMARTHealthCard as an objc.ID, for use as a dictionary key or selector argument.
-func HKVerifiableClinicalRecordSourceTypeSMARTHealthCard() objc.ID {
-	if _r := raw.HKVerifiableClinicalRecordSourceTypeSMARTHealthCard(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKVerifiableClinicalRecordSourceTypeSMARTHealthCard returns the string constant HKVerifiableClinicalRecordSourceTypeSMARTHealthCard, for use as a dictionary key or argument.
+func HKVerifiableClinicalRecordSourceTypeSMARTHealthCard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordSourceTypeSMARTHealthCard")))
 }
 
-// @constant      HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate @abstract      Represents a EU Digital COVID Certificate source type for a verifiable record.
-// HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate returns the string constant HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate as an objc.ID, for use as a dictionary key or selector argument.
-func HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate() objc.ID {
-	if _r := raw.HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate returns the string constant HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate, for use as a dictionary key or argument.
+func HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate")))
 }
 
-// @constant      HKVerifiableClinicalRecordCredentialTypeCOVID19 @abstract      Represents the COVID-19 credential type for a verifiable record.
-// HKVerifiableClinicalRecordCredentialTypeCOVID19 returns the string constant HKVerifiableClinicalRecordCredentialTypeCOVID19 as an objc.ID, for use as a dictionary key or selector argument.
-func HKVerifiableClinicalRecordCredentialTypeCOVID19() objc.ID {
-	return purego.CFConstant(raw.HKVerifiableClinicalRecordCredentialTypeCOVID19())
+// HKVerifiableClinicalRecordCredentialTypeCOVID19 returns the string constant HKVerifiableClinicalRecordCredentialTypeCOVID19, for use as a dictionary key or argument.
+func HKVerifiableClinicalRecordCredentialTypeCOVID19() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeCOVID19")))
 }
 
-// @constant      HKVerifiableClinicalRecordCredentialTypeImmunization @abstract      Represents the immunization credential type for a verifiable record.
-// HKVerifiableClinicalRecordCredentialTypeImmunization returns the string constant HKVerifiableClinicalRecordCredentialTypeImmunization as an objc.ID, for use as a dictionary key or selector argument.
-func HKVerifiableClinicalRecordCredentialTypeImmunization() objc.ID {
-	if _r := raw.HKVerifiableClinicalRecordCredentialTypeImmunization(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKVerifiableClinicalRecordCredentialTypeImmunization returns the string constant HKVerifiableClinicalRecordCredentialTypeImmunization, for use as a dictionary key or argument.
+func HKVerifiableClinicalRecordCredentialTypeImmunization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeImmunization")))
 }
 
-// @constant      HKVerifiableClinicalRecordCredentialTypeLaboratory @abstract      Represents the laboratory credential type for a verifiable record.
-// HKVerifiableClinicalRecordCredentialTypeLaboratory returns the string constant HKVerifiableClinicalRecordCredentialTypeLaboratory as an objc.ID, for use as a dictionary key or selector argument.
-func HKVerifiableClinicalRecordCredentialTypeLaboratory() objc.ID {
-	if _r := raw.HKVerifiableClinicalRecordCredentialTypeLaboratory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKVerifiableClinicalRecordCredentialTypeLaboratory returns the string constant HKVerifiableClinicalRecordCredentialTypeLaboratory, for use as a dictionary key or argument.
+func HKVerifiableClinicalRecordCredentialTypeLaboratory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeLaboratory")))
 }
 
-// @constant      HKVerifiableClinicalRecordCredentialTypeRecovery @abstract      Represents the recovery credential type for a verifiable record.
-// HKVerifiableClinicalRecordCredentialTypeRecovery returns the string constant HKVerifiableClinicalRecordCredentialTypeRecovery as an objc.ID, for use as a dictionary key or selector argument.
-func HKVerifiableClinicalRecordCredentialTypeRecovery() objc.ID {
-	if _r := raw.HKVerifiableClinicalRecordCredentialTypeRecovery(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// HKVerifiableClinicalRecordCredentialTypeRecovery returns the string constant HKVerifiableClinicalRecordCredentialTypeRecovery, for use as a dictionary key or argument.
+func HKVerifiableClinicalRecordCredentialTypeRecovery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKVerifiableClinicalRecordCredentialTypeRecovery")))
 }
 
-// HKPredicateKeyPathWorkoutActivityType returns the string constant HKPredicateKeyPathWorkoutActivityType as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityType() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityType())
+// HKPredicateKeyPathWorkoutActivityType returns the string constant HKPredicateKeyPathWorkoutActivityType, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityType")))
 }
 
-// HKPredicateKeyPathWorkoutActivityDuration returns the string constant HKPredicateKeyPathWorkoutActivityDuration as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityDuration() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityDuration())
+// HKPredicateKeyPathWorkoutActivityDuration returns the string constant HKPredicateKeyPathWorkoutActivityDuration, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityDuration")))
 }
 
-// HKPredicateKeyPathWorkoutActivityStartDate returns the string constant HKPredicateKeyPathWorkoutActivityStartDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityStartDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityStartDate())
+// HKPredicateKeyPathWorkoutActivityStartDate returns the string constant HKPredicateKeyPathWorkoutActivityStartDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityStartDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityStartDate")))
 }
 
-// HKPredicateKeyPathWorkoutActivityEndDate returns the string constant HKPredicateKeyPathWorkoutActivityEndDate as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityEndDate() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityEndDate())
+// HKPredicateKeyPathWorkoutActivityEndDate returns the string constant HKPredicateKeyPathWorkoutActivityEndDate, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityEndDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityEndDate")))
 }
 
-// HKPredicateKeyPathWorkoutActivitySumQuantity returns the string constant HKPredicateKeyPathWorkoutActivitySumQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivitySumQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivitySumQuantity())
+// HKPredicateKeyPathWorkoutActivitySumQuantity returns the string constant HKPredicateKeyPathWorkoutActivitySumQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivitySumQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivitySumQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutActivityMinimumQuantity returns the string constant HKPredicateKeyPathWorkoutActivityMinimumQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityMinimumQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityMinimumQuantity())
+// HKPredicateKeyPathWorkoutActivityMinimumQuantity returns the string constant HKPredicateKeyPathWorkoutActivityMinimumQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityMinimumQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityMinimumQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutActivityMaximumQuantity returns the string constant HKPredicateKeyPathWorkoutActivityMaximumQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityMaximumQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityMaximumQuantity())
+// HKPredicateKeyPathWorkoutActivityMaximumQuantity returns the string constant HKPredicateKeyPathWorkoutActivityMaximumQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityMaximumQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityMaximumQuantity")))
 }
 
-// HKPredicateKeyPathWorkoutActivityAverageQuantity returns the string constant HKPredicateKeyPathWorkoutActivityAverageQuantity as an objc.ID, for use as a dictionary key or selector argument.
-func HKPredicateKeyPathWorkoutActivityAverageQuantity() objc.ID {
-	return purego.CFConstant(raw.HKPredicateKeyPathWorkoutActivityAverageQuantity())
+// HKPredicateKeyPathWorkoutActivityAverageQuantity returns the string constant HKPredicateKeyPathWorkoutActivityAverageQuantity, for use as a dictionary key or argument.
+func HKPredicateKeyPathWorkoutActivityAverageQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityAverageQuantity")))
 }

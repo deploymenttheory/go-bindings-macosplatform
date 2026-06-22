@@ -5,67 +5,89 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A panel or sheet that allows the user to create a keychain.
+// KeychainSavePanel is an idiomatic wrapper over the Objective-C class SFKeychainSavePanel.
 //
-// KeychainSavePanel wraps [raw.SFKeychainSavePanel] with a fluent Go API.
+// A panel or sheet that allows the user to create a keychain.
 type KeychainSavePanel struct {
-	inner *raw.SFKeychainSavePanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFKeychainSavePanel].
-func (x *KeychainSavePanel) Unwrap() *raw.SFKeychainSavePanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeychainSavePanel) ID() objc.ID { return x.inner.Ptr() }
-
-// KeychainSavePanelFromID adopts an existing object pointer as a KeychainSavePanel (nil for 0).
+// KeychainSavePanelFromID adopts an existing Objective-C object as a KeychainSavePanel
+// (nil for 0), retaining it and registering a release finalizer.
 func KeychainSavePanelFromID(id objc.ID) *KeychainSavePanel {
 	if id == 0 {
 		return nil
 	}
-	return &KeychainSavePanel{inner: raw.SFKeychainSavePanelFromID(id)}
+	x := &KeychainSavePanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewKeychainSavePanel creates a new [KeychainSavePanel].
+// keychainSavePanelAdopt wraps an Objective-C object that this code just created as a
+// KeychainSavePanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keychainSavePanelAdopt(id objc.ID) *KeychainSavePanel {
+	if id == 0 {
+		return nil
+	}
+	x := &KeychainSavePanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *KeychainSavePanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeychainSavePanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeychainSavePanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *KeychainSavePanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewKeychainSavePanel creates a new KeychainSavePanel.
 func NewKeychainSavePanel() *KeychainSavePanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFKeychainSavePanel")), objc.RegisterName("new"))
-	return &KeychainSavePanel{inner: raw.SFKeychainSavePanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSavePanel")), objc.RegisterName("new"))
+	return keychainSavePanelAdopt(_id)
 }
 
-// Specifies the password for the keychain that will be created.
-//
-// SetPassword calls the underlying SetPassword.
+// SetPassword specifies the password for the keychain that will be created.
 func (x *KeychainSavePanel) SetPassword(password string) {
-	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
 }
 
-// Returns the keychain created by the keychain save panel.
-//
-// Keychain calls the underlying Keychain.
-func (x *KeychainSavePanel) Keychain() unsafe.Pointer {
-	return x.inner.Keychain()
-}
-
-// Returns the last error encountered by the keychain save panel.
-//
-// Error calls the underlying Error.
-func (x *KeychainSavePanel) Error() unsafe.Pointer {
-	return x.inner.Error()
+// Keychain returns the keychain created by the keychain save panel.
+func (x *KeychainSavePanel) Keychain() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychain"))
+	return obj.Wrap(_r)
 }
 
 // KeychainSavePanelable is the interface implemented by [KeychainSavePanel], for mocking and DI.
 type KeychainSavePanelable interface {
-	Unwrap() *raw.SFKeychainSavePanel
+	obj.Object
 	SetPassword(password string)
-	Keychain() unsafe.Pointer
-	Error() unsafe.Pointer
+	Keychain() obj.Object
 }
 
 var _ KeychainSavePanelable = (*KeychainSavePanel)(nil)

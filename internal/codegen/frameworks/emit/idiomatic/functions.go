@@ -7,9 +7,12 @@ import (
 	"fmt"
 	"maps"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -28,175 +31,197 @@ import (
 // Name collisions fall back to the full exported name; if that is also taken
 // the function is skipped with a diagnostic. Iteration is in sorted order so
 // the outcome is deterministic.
+// ebipuregoImportPath is the ebitengine purego package, used to bind a C
+// function symbol to a Go function variable at runtime.
+const ebipuregoImportPath = "github.com/ebitengine/purego"
+
+// cfuncABIType returns the type a parameter has when it is handed to the bound C
+// function, given its idiomatic type (sig) and the expression that produces the
+// argument (argExpr). When the argument is converted to an Objective-C pointer
+// (an object, an NSString, a URL, or an array), the C function receives an
+// objc.ID; otherwise the value — a C string, a number, an enum, or a value
+// struct — is passed unchanged.
+func cfuncABIType(sig, argExpr string) string {
+	if strings.HasPrefix(argExpr, "objc.NewBlock(") {
+		return "objc.Block"
+	}
+	for _, p := range []string{"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(", "rt.FileURL("} {
+		if strings.HasPrefix(argExpr, p) {
+			return "objc.ID"
+		}
+	}
+	return sig
+}
+
+// cfuncRetABI returns the type the bound C function returns, before it is
+// converted back to the idiomatic return type.
+func cfuncRetABI(kind objKind, retType string) string {
+	switch kind {
+	case kindVoid:
+		return ""
+	case kindString, kindObject, kindArray:
+		return "objc.ID"
+	default:
+		return retType
+	}
+}
+
 func emitGenericFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
-	fw *meta.FrameworkMeta,
+	fc *frameworkContext,
 	m *typemap.Mapper,
+	trialNames trialNameMap,
 	takenNames map[string]bool,
 ) error {
+	_ = rawPkgAlias
+	_ = rawPkgPath
+	fw := fc.fw
 	ctx := typemap.Context{Framework: fw.Framework}
 	prefix := naming.GoTypeName(strings.ToLower(fw.Framework))
 
-	type wrapEntry struct {
-		goName    string // wrapper name in the idiomatic package
-		rawGoName string // exported name in the raw package
-		params    []string
-		callArgs  []string
-		retType   string
-		enumRet   string   // local enum type when the return localizes, else ""
-		preLines  []string // statements before the raw call (enum out-params)
-		postLines []string // statements after the raw call (enum out-param copy-back)
-	}
+	// Imports are accumulated from what each wrapper actually emits: ebipurego is
+	// always used to bind the symbol, parameter/return type imports come from the
+	// type mapper, and objc is added below when a parameter or the return crosses
+	// the ABI as an objc.ID.
+	imports := map[string]string{"ebipurego": ebipuregoImportPath}
 
-	var entries []wrapEntry
-	var body bytes.Buffer
-
+	var funcs []view.Func
 	for _, fn := range emit.EmittableFunctions(fw, nil) {
-		// CFError out-param functions are wrapped (with error conversion) by
-		// emitFunctionWrappers.
-		if len(fn.Params) > 0 && isCFErrorOutParam(fn.Params[len(fn.Params)-1].ObjCType) {
-			continue
-		}
-
-		rawGoName := naming.ExportedFunctionName(fn.Name)
-		goName := rawGoName
-		if stripped := strings.TrimPrefix(rawGoName, prefix); stripped != rawGoName &&
-			stripped != "" && stripped[0] >= 'A' && stripped[0] <= 'Z' {
-			goName = stripped
-		}
-		if takenNames[goName] {
-			goName = rawGoName
-		}
-		if takenNames[goName] {
-			m.AppendDiagnostic(
-				"%s: idiomatic wrapper for %s skipped (name %s already taken)",
-				fw.Framework, fn.Name, goName,
-			)
-			continue
-		}
-		takenNames[goName] = true
-
-		// Mirror the raw emitter's signature exactly so the wrapper forwards
-		// arguments unchanged.
-		var params, callArgs, preLines, postLines []string
+		// Classify every parameter and the return. If any cannot yet be expressed
+		// idiomatically (a function pointer, a varargs, an out-parameter), the
+		// whole function is left out and a diagnostic is recorded. Type imports are
+		// gathered per function and merged only once the wrapper is committed, so a
+		// skipped function never contributes an unused import.
+		var sigParts, abiParts, callArgs []string
+		fnImports := map[string]string{}
+		ok := true
 		usedNames := make(map[string]int)
-		unexportedRef := false
 		for _, param := range fn.Params {
-			paramName := naming.ParamName(param.Name)
-			usedNames[paramName]++
-			if usedNames[paramName] > 1 {
-				paramName = fmt.Sprintf("%s%d", paramName, usedNames[paramName])
+			pName := safeParamName(naming.ParamName(param.Name))
+			if pName == "" {
+				pName = fmt.Sprintf("arg%d", len(sigParts))
 			}
-			impSet := make(typemap.ImportSet)
-			goType := rawParamGoType(param.ObjCType, ctx, m, impSet)
-			if isUnexportedXPkgType(goType) {
-				goType = "unsafe.Pointer"
+			usedNames[pName]++
+			if usedNames[pName] > 1 {
+				pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
 			}
-			goType = qualifyRaw(goType, fw, rawPkgAlias, nil)
-			if referencesUnexportedQualified(goType) {
-				unexportedRef = true
+			sig, argExpr, imps, pok := idiomaticArg(
+				pName,
+				param.ObjCType,
+				ctx,
+				m,
+				fc,
+				rawPkgAlias,
+				trialNames,
+			)
+			if !pok {
+				ok = false
+				break
 			}
-			sigType, callArg, pre, post := adaptCFuncParam(paramName, goType, fw, rawPkgAlias)
-			params = append(params, paramName+" "+sigType)
-			callArgs = append(callArgs, callArg)
-			preLines = append(preLines, pre...)
-			postLines = append(postLines, post...)
+			maps.Copy(fnImports, imps)
+			sigParts = append(sigParts, pName+" "+sig)
+			abiParts = append(abiParts, cfuncABIType(sig, argExpr))
+			callArgs = append(callArgs, argExpr)
 		}
-
-		retType, enumRet := "", ""
-		if _, retIsBlock := m.ResolveBlockSignature(fn.Return.ObjCType); retIsBlock {
-			retType = "objc.Block"
-		} else if fn.Return.ObjCType != "void" && fn.Return.ObjCType != "" {
-			impSet := make(typemap.ImportSet)
-			retType = m.GoReturnType(fn.Return.ObjCType, ctx, impSet)
-			if retType == "" || isUnexportedXPkgType(retType) {
-				retType = "unsafe.Pointer"
-			}
-			retType = qualifyRaw(retType, fw, rawPkgAlias, nil)
-			if referencesUnexportedQualified(retType) {
-				unexportedRef = true
-			}
-			if sig, _, isEnum := localizeEnumType(retType, fw, rawPkgAlias); isEnum {
-				retType, enumRet = sig, sig
-			}
-		}
-
-		// Some raw types stay unexported (underscore-prefixed enums like
-		// _CGLError) — they cannot be referenced from another package, so the
-		// function cannot be wrapped.
-		if unexportedRef {
-			delete(takenNames, goName)
+		if !ok {
 			m.AppendDiagnostic(
-				"%s: idiomatic wrapper for %s skipped (signature references an unexported raw type)",
+				"%s: idiomatic wrapper for %s left out (a parameter type is not yet expressible)",
 				fw.Framework,
 				fn.Name,
 			)
 			continue
 		}
+		retType, kind, wrap, _, rimps, rok := idiomaticRet(
+			fn.Return.ObjCType,
+			ctx,
+			m,
+			fc,
+			rawPkgAlias,
+			trialNames,
+		)
+		if !rok {
+			m.AppendDiagnostic(
+				"%s: idiomatic wrapper for %s left out (the return type is not yet expressible)",
+				fw.Framework,
+				fn.Name,
+			)
+			continue
+		}
+		maps.Copy(fnImports, rimps)
 
-		entries = append(entries, wrapEntry{
-			goName:    goName,
-			rawGoName: rawGoName,
-			params:    params,
-			callArgs:  callArgs,
-			retType:   retType,
-			enumRet:   enumRet,
-			preLines:  preLines,
-			postLines: postLines,
+		goName := naming.ExportedFunctionName(fn.Name)
+		if stripped := strings.TrimPrefix(goName, prefix); stripped != goName &&
+			stripped != "" && stripped[0] >= 'A' && stripped[0] <= 'Z' {
+			if !takenNames[stripped] {
+				goName = stripped
+			}
+		}
+		if goName == "" || takenNames[goName] {
+			continue
+		}
+		takenNames[goName] = true
+
+		varName := "_fn" + goName
+		retSig := ""
+		if retType != "" {
+			retSig = " " + retType
+		}
+		abiRet := cfuncRetABI(kind, retType)
+		// The wrapper is committed: merge its type imports, and add objc when a
+		// parameter or the return crosses the ABI as an objc.ID.
+		maps.Copy(imports, fnImports)
+		if abiRet == "objc.ID" || slices.Contains(abiParts, "objc.ID") {
+			imports["objc"] = objcImportPath
+		}
+		funcs = append(funcs, view.Func{
+			GoName:  goName,
+			CName:   fn.Name,
+			VarName: varName,
+			CommentLine: fmt.Sprintf(
+				"// %s calls the %s framework function %s.\n",
+				goName,
+				fw.Framework,
+				fn.Name,
+			),
+			ABIParams: abiParts,
+			ABIRet:    abiRet,
+			SigParams: sigParts,
+			RetSig:    retSig,
+			Kind:      genericFuncKind(kind),
+			Call:      fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", ")),
+			Wrap:      wrap,
 		})
 	}
 
-	if len(entries) == 0 {
+	if len(funcs) == 0 {
 		return nil
 	}
-
-	view := cfunctionsView{RawAlias: rawPkgAlias, Entries: make([]cfuncEntry, 0, len(entries))}
-	for _, entry := range entries {
-		retSig := ""
-		if entry.retType != "" {
-			retSig = " " + entry.retType
-		}
-		view.Entries = append(view.Entries, cfuncEntry{
-			GoName:    entry.goName,
-			RawGoName: entry.rawGoName,
-			CName:     cFunctionNameFor(entry.rawGoName, fw),
-			Params:    strings.Join(entry.params, ", "),
-			CallArgs:  strings.Join(entry.callArgs, ", "),
-			RetType:   entry.retType,
-			RetSig:    retSig,
-			EnumCast:  entry.enumRet,
-			PreLines:  entry.preLines,
-			PostLines: entry.postLines,
-		})
-	}
-	if err := executeTemplate(&body, "cfunctions", view); err != nil {
+	body, err := render.Funcs(funcs)
+	if err != nil {
 		return err
-	}
-
-	// Render-then-scan imports: only include packages the body references.
-	bodyStr := body.String()
-	imports := map[string]string{rawPkgAlias: rawPkgPath}
-	if strings.Contains(bodyStr, "unsafe.") {
-		imports["unsafe"] = "unsafe"
-	}
-	if referencesPackage(bodyStr, "objc") {
-		imports["objc"] = objcImportPath
-	}
-	if referencesPackage(bodyStr, "foundation") {
-		imports["foundation"] = foundationImportPath
-	}
-	for _, crossPkg := range collectCrossPackageRefs(bodyStr, rawPkgAlias) {
-		imports[crossPkg] = strings.TrimSuffix(
-			rawPkgPath,
-			naming.PackageName(fw.Framework),
-		) + crossPkg
 	}
 
 	fname := pkgName + "_cfunctions_generated.go"
 	return emit.WriteGoFile(
 		filepath.Join(outDir, fname),
-		assembleFile(pkgName, imports, body.Bytes()),
+		assembleFile(pkgName, imports, body),
 	)
+}
+
+// genericFuncKind maps the idiomatic return classification to the FuncKind a
+// generic C-function wrapper renders. Object and array results share the wrap
+// path; everything else returns the raw value.
+func genericFuncKind(k objKind) view.FuncKind {
+	switch k {
+	case kindVoid:
+		return view.FuncVoid
+	case kindString:
+		return view.FuncString
+	case kindObject, kindArray:
+		return view.FuncObject
+	default:
+		return view.FuncScalar
+	}
 }
 
 // emitClassMethodFunctions writes <pkgname>_classmethods_generated.go: one
@@ -219,21 +244,20 @@ func emitGenericFunctionWrappers(
 // generic C-function pass cannot redeclare a name reserved here.
 func emitClassMethodFunctions(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
-	fw *meta.FrameworkMeta,
+	fc *frameworkContext,
 	m *typemap.Mapper,
 	trialNames trialNameMap,
 	handFuncs map[string]bool,
 	takenNames map[string]bool,
 	abstractBases abstractBaseIndex,
 ) error {
-	candidates := map[string]string{
-		rawPkgAlias:  rawPkgPath,
-		"context":    "context",
-		"unsafe":     "unsafe",
-		"purego":     pureobjcImportPath,
-		"foundation": foundationImportPath,
-		"objc":       objcImportPath,
-	}
+	fw := fc.fw
+	// Every wrapper dispatches to a class object (objc.ID(_class(...))), so objc is
+	// always used; every other import is contributed by an emitted method's own
+	// import set. objref is added per method only when an argument actually marshals
+	// through objref.IDOf, since (unlike an instance method) the class receiver does
+	// not use it.
+	imports := map[string]string{"objc": objcImportPath}
 
 	var body bytes.Buffer
 	for _, className := range sortedKeys(fw.Classes) {
@@ -266,7 +290,7 @@ func emitClassMethodFunctions(
 				method,
 				rawName,
 				cls,
-				fw,
+				fc,
 				ctx,
 				m,
 				rawPkgAlias,
@@ -304,8 +328,14 @@ func emitClassMethodFunctions(
 			takenNames[name] = true
 			entry.goName = name
 
-			maps.Copy(candidates, entry.extraImports)
-			writeClassFunc(&body, rawPkgAlias, *entry)
+			fnImps := maps.Clone(entry.extraImports)
+			if !classFuncUsesObjref(*entry) {
+				// The class receiver is objc.ID(_class(...)), not objref.IDOf(x);
+				// objref is needed only when an argument marshals through it.
+				delete(fnImps, "objref")
+			}
+			maps.Copy(imports, fnImps)
+			writeClassFunc(&body, fmt.Sprintf("objc.ID(_class(%q))", className), *entry)
 		}
 	}
 
@@ -314,8 +344,26 @@ func emitClassMethodFunctions(
 	}
 
 	fname := pkgName + "_classmethods_generated.go"
-	file := assembleFile(pkgName, usedImports(body.Bytes(), candidates), body.Bytes())
+	file := assembleFile(pkgName, imports, body.Bytes())
 	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
+}
+
+// classFuncUsesObjref reports whether a class-method wrapper's body references
+// objref — true when any marshaled argument runs through objref.IDOf. The class
+// receiver itself dispatches via objc.ID(_class(...)), so unlike an instance
+// method the receiver contributes no objref use.
+func classFuncUsesObjref(entry methodEntry) bool {
+	for _, p := range entry.plainParams {
+		if strings.Contains(p.rawExpr, "objref.") {
+			return true
+		}
+	}
+	for _, p := range entry.asyncNonBlockParams {
+		if strings.Contains(p.rawExpr, "objref.") {
+			return true
+		}
+	}
+	return false
 }
 
 // classRawMethodNames computes, per class-method selector, the exact Go
@@ -430,13 +478,23 @@ func cfParamKind(objcType string) int {
 // here are reserved in takenNames so the generic C-function pass skips them.
 func emitCFFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
-	fw *meta.FrameworkMeta,
+	fc *frameworkContext,
 	m *typemap.Mapper,
+	trialNames trialNameMap,
 	takenNames map[string]bool,
 ) error {
+	_ = rawPkgPath
+	fw := fc.fw
 	ctx := typemap.Context{Framework: fw.Framework}
-	var body bytes.Buffer
-	view := cffunctionsView{RawAlias: rawPkgAlias}
+	// Every wrapper binds the symbol (ebipurego) and maps the OSStatus result to a
+	// Go error (purego.NewOSStatus). Reference parameters and out-parameters add
+	// obj/objref/objc/unsafe as they are emitted; other parameters' type imports
+	// come from the type mapper.
+	imports := map[string]string{
+		"ebipurego": ebipuregoImportPath,
+		"purego":    pureobjcImportPath,
+	}
+	var funcs []view.Func
 
 	for _, fn := range emit.EmittableFunctions(fw, nil) {
 		if !isOSStatusType(fn.Return.ObjCType) {
@@ -447,12 +505,13 @@ func emitCFFunctionWrappers(
 			continue
 		}
 
-		var sigParams, callArgs, preLines, outTypes, outReturns, zeros []string
+		var sigParams, abiParts, callArgs, preLines, outTypes, outReturns, zeros []string
+		fnImports := map[string]string{}
 		usedNames := map[string]int{}
 		outIdx := 0
 		ok := true
 		for _, p := range fn.Params {
-			pName := naming.ParamName(p.Name)
+			pName := safeParamName(naming.ParamName(p.Name))
 			if pName == "" {
 				pName = fmt.Sprintf("arg%d", len(callArgs))
 			}
@@ -462,34 +521,41 @@ func emitCFFunctionWrappers(
 			}
 			switch cfParamKind(p.ObjCType) {
 			case cfInputRef:
-				sigParams = append(sigParams, pName+" objc.ID")
-				callArgs = append(callArgs, "purego.CFRef("+pName+")")
+				sigParams = append(sigParams, pName+" obj.Object")
+				callArgs = append(callArgs, "objref.IDOf("+pName+")")
+				abiParts = append(abiParts, "objc.ID")
+				fnImports["obj"] = objImportPath
+				fnImports["objref"] = objrefImportPath
+				fnImports["objc"] = objcImportPath
 			case cfOutputRef:
 				outVar := fmt.Sprintf("_out%d", outIdx)
 				outIdx++
-				preLines = append(preLines, "\tvar "+outVar+" uintptr")
+				preLines = append(preLines, "var "+outVar+" uintptr")
 				callArgs = append(callArgs, "unsafe.Pointer(&"+outVar+")")
-				outTypes = append(outTypes, "objc.ID")
-				outReturns = append(outReturns, "objc.ID("+outVar+")")
-				zeros = append(zeros, "0")
+				abiParts = append(abiParts, "unsafe.Pointer")
+				outTypes = append(outTypes, "obj.Object")
+				fnImports["unsafe"] = "unsafe"
+				fnImports["obj"] = objImportPath
+				fnImports["objc"] = objcImportPath
+				outReturns = append(outReturns, "obj.Wrap(objc.ID("+outVar+"))")
+				zeros = append(zeros, "nil")
 			default:
-				// Non-CF parameter: keep the raw mapped type. Bail (leave the whole
-				// function to the generic pass) if it degrades to a pointer/block we
-				// would not improve on.
-				impSet := make(typemap.ImportSet)
-				goType := qualifyRaw(
-					rawParamGoType(p.ObjCType, ctx, m, impSet),
-					fw,
+				sig, argExpr, imps, pok := idiomaticArg(
+					pName,
+					p.ObjCType,
+					ctx,
+					m,
+					fc,
 					rawPkgAlias,
-					nil,
+					trialNames,
 				)
-				if goType == "" || strings.HasPrefix(goType, "func(") ||
-					strings.Contains(goType, "unsafe.Pointer") {
+				if !pok {
 					ok = false
 				} else {
-					sigType, callArg := localizeParam(pName, goType, fw, rawPkgAlias)
-					sigParams = append(sigParams, pName+" "+sigType)
-					callArgs = append(callArgs, callArg)
+					maps.Copy(fnImports, imps)
+					sigParams = append(sigParams, pName+" "+sig)
+					callArgs = append(callArgs, argExpr)
+					abiParts = append(abiParts, cfuncABIType(sig, argExpr))
 				}
 			}
 			if !ok {
@@ -497,12 +563,22 @@ func emitCFFunctionWrappers(
 			}
 		}
 		if !ok {
+			m.AppendDiagnostic(
+				"%s: idiomatic wrapper for %s left out (a parameter type is not yet expressible)",
+				fw.Framework,
+				fn.Name,
+			)
 			continue
 		}
 
 		takenNames[goName] = true
-
-		rawCall := fmt.Sprintf("%s.%s(%s)", rawPkgAlias, goName, strings.Join(callArgs, ", "))
+		// The wrapper is committed: merge its type imports, and add objc when a
+		// non-reference parameter also crosses the ABI as an objc.ID.
+		maps.Copy(imports, fnImports)
+		if slices.Contains(abiParts, "objc.ID") {
+			imports["objc"] = objcImportPath
+		}
+		varName := "_fn" + goName
 		retSig := "error"
 		if len(outTypes) > 0 {
 			retSig = "(" + strings.Join(
@@ -510,183 +586,46 @@ func emitCFFunctionWrappers(
 				", ",
 			) + ")"
 		}
+		failRet := "_err"
+		okRet := "nil"
+		if len(outReturns) > 0 {
+			failRet = strings.Join(zeros, ", ") + ", _err"
+			okRet = strings.Join(outReturns, ", ") + ", nil"
+		}
 
-		view.Entries = append(view.Entries, cffuncEntry{
-			GoName:     goName,
-			SigParams:  strings.Join(sigParams, ", "),
-			RetSig:     retSig,
-			PreLines:   preLines,
-			RawCall:    rawCall,
-			HasOut:     len(outReturns) > 0,
-			OutReturns: strings.Join(outReturns, ", "),
-			Zeros:      strings.Join(zeros, ", "),
+		funcs = append(funcs, view.Func{
+			GoName:  goName,
+			CName:   fn.Name,
+			VarName: varName,
+			CommentLine: fmt.Sprintf(
+				"// %s reports an error if the %s framework function %s fails.\n",
+				goName,
+				fw.Framework,
+				fn.Name,
+			),
+			ABIParams: abiParts,
+			ABIRet:    "int32",
+			SigParams: sigParams,
+			RetSig:    " " + retSig,
+			Kind:      view.FuncOSStatus,
+			PreLines:  preLines,
+			Call:      fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", ")),
+			FailRet:   failRet,
+			OkRet:     okRet,
 		})
 	}
 
-	if len(view.Entries) == 0 {
+	if len(funcs) == 0 {
 		return nil
 	}
-	if err := executeTemplate(&body, "cffunctions", view); err != nil {
+	body, err := render.Funcs(funcs)
+	if err != nil {
 		return err
-	}
-
-	// Render-then-scan imports, mirroring emitGenericFunctionWrappers so non-CF
-	// parameter/return types that reference other framework packages (e.g.
-	// coreaudiotypes, corefoundation) are imported too.
-	bodyStr := body.String()
-	imports := map[string]string{
-		rawPkgAlias: rawPkgPath,
-		"purego":    pureobjcImportPath,
-	}
-	if strings.Contains(bodyStr, "unsafe.") {
-		imports["unsafe"] = "unsafe"
-	}
-	if referencesPackage(bodyStr, "objc") {
-		imports["objc"] = objcImportPath
-	}
-	if referencesPackage(bodyStr, "foundation") {
-		imports["foundation"] = foundationImportPath
-	}
-	for _, crossPkg := range collectCrossPackageRefs(bodyStr, rawPkgAlias) {
-		imports[crossPkg] = strings.TrimSuffix(
-			rawPkgPath,
-			naming.PackageName(fw.Framework),
-		) + crossPkg
 	}
 
 	fname := pkgName + "_cffunctions_generated.go"
 	return emit.WriteGoFile(
 		filepath.Join(outDir, fname),
-		assembleFile(pkgName, imports, body.Bytes()),
+		assembleFile(pkgName, imports, body),
 	)
-}
-
-// cFunctionNameFor recovers the original C symbol for an exported Go function
-// name by scanning the framework's function list. Used only for doc comments.
-func cFunctionNameFor(rawGoName string, fw *meta.FrameworkMeta) string {
-	for _, fn := range fw.Functions {
-		if naming.ExportedFunctionName(fn.Name) == rawGoName {
-			return fn.Name
-		}
-	}
-	return rawGoName
-}
-
-// isUnexportedXPkgType reports whether a Go type string references an
-// unexported identifier from another package (compile error if emitted).
-func isUnexportedXPkgType(goType string) bool {
-	trimmed := strings.TrimPrefix(goType, "*")
-	dotIdx := strings.LastIndex(trimmed, ".")
-	if dotIdx < 0 {
-		return false
-	}
-	after := trimmed[dotIdx+1:]
-	if brIdx := strings.Index(after, "["); brIdx >= 0 {
-		after = after[:brIdx]
-	}
-	return len(after) > 0 && after[0] >= 'a' && after[0] <= 'z'
-}
-
-// referencesUnexportedQualified reports whether a (possibly qualified) Go
-// type string contains a package-qualified unexported identifier such as
-// raw._CGLError — a compile error when emitted outside the raw package.
-func referencesUnexportedQualified(goType string) bool {
-	for i := 1; i < len(goType)-1; i++ {
-		if goType[i] != '.' || !isIdentByte(goType[i-1], false) {
-			continue
-		}
-		c := goType[i+1]
-		if c == '_' || (c >= 'a' && c <= 'z') {
-			return true
-		}
-	}
-	return false
-}
-
-// referencesPackage reports whether the body references pkg as a package
-// qualifier ("pkg.") at a non-identifier boundary, avoiding false hits on
-// names like "purego." when checking for "objc.".
-func referencesPackage(body, pkg string) bool {
-	needle := pkg + "."
-	for idx := strings.Index(body, needle); idx >= 0; {
-		if idx == 0 || !isIdentByte(body[idx-1], false) {
-			return true
-		}
-		next := strings.Index(body[idx+1:], needle)
-		if next < 0 {
-			return false
-		}
-		idx += 1 + next
-	}
-	return false
-}
-
-// collectCrossPackageRefs finds cross-framework package qualifiers used in the
-// body (lowercase identifiers followed by '.' and an exported identifier),
-// excluding the raw alias and well-known packages handled explicitly.
-func collectCrossPackageRefs(body, rawPkgAlias string) []string {
-	known := map[string]bool{
-		rawPkgAlias: true, "unsafe": true, "objc": true, "foundation": true,
-		"fmt": true, "strings": true, "purego": true,
-	}
-	var refs []string
-	seen := map[string]bool{}
-	for i := 0; i < len(body); {
-		if !isIdentByte(body[i], true) {
-			i++
-			continue
-		}
-		j := i + 1
-		for j < len(body) && isIdentByte(body[j], false) {
-			j++
-		}
-		word := body[i:j]
-		prevIsDot := i > 0 && body[i-1] == '.'
-		if !prevIsDot && j < len(body)-1 && body[j] == '.' &&
-			word == strings.ToLower(word) && !known[word] && !seen[word] &&
-			body[j+1] >= 'A' && body[j+1] <= 'Z' {
-			seen[word] = true
-			refs = append(refs, word)
-		}
-		i = j
-	}
-	return refs
-}
-
-// cfuncEntry / cfunctionsView are the template data for cfunctions.tmpl. The
-// signature/argument strings are pre-joined by emitGenericFunctionWrappers.
-type cfuncEntry struct {
-	GoName    string
-	RawGoName string
-	CName     string
-	Params    string   // "name type, …"
-	CallArgs  string   // "name, …"
-	RetType   string   // "" for a void function
-	RetSig    string   // " <retType>" or ""
-	EnumCast  string   // local enum type to cast the raw return into, else ""
-	PreLines  []string // statements before the raw call (enum out-params)
-	PostLines []string // statements after the raw call (enum out-param copy-back)
-}
-
-type cfunctionsView struct {
-	RawAlias string
-	Entries  []cfuncEntry
-}
-
-// cffuncEntry / cffunctionsView are the template data for cffunctions.tmpl (the
-// OSStatus + CoreFoundation-reference bridging wrappers).
-type cffuncEntry struct {
-	GoName     string
-	SigParams  string   // "name type, …"
-	RetSig     string   // "error" or "(objc.ID, …, error)"
-	PreLines   []string // per-out-param "var _outN uintptr" lines
-	RawCall    string   // raw.Foo(args)
-	HasOut     bool     // has CF out-parameters
-	OutReturns string   // "objc.ID(_out0), …"
-	Zeros      string   // "0, …" (zero values for the error path)
-}
-
-type cffunctionsView struct {
-	RawAlias string
-	Entries  []cffuncEntry
 }

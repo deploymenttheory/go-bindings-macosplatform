@@ -5,145 +5,138 @@
 package quicklookui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The class you create when providing a data-based Quick Look preview extension.
+// PreviewReply is an idiomatic wrapper over the Objective-C class QLPreviewReply.
 //
-// PreviewReply wraps [raw.QLPreviewReply] with a fluent Go API.
+// The class you create when providing a data-based Quick Look preview extension.
 type PreviewReply struct {
-	inner *raw.QLPreviewReply
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLPreviewReply].
-func (x *PreviewReply) Unwrap() *raw.QLPreviewReply { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PreviewReply) ID() objc.ID { return x.inner.Ptr() }
-
-// PreviewReplyFromID adopts an existing object pointer as a PreviewReply (nil for 0).
+// PreviewReplyFromID adopts an existing Objective-C object as a PreviewReply
+// (nil for 0), retaining it and registering a release finalizer.
 func PreviewReplyFromID(id objc.ID) *PreviewReply {
 	if id == 0 {
 		return nil
 	}
-	return &PreviewReply{inner: raw.QLPreviewReplyFromID(id)}
+	x := &PreviewReply{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract Use this method to provide a preview by drawing into a context. @param contextSize The size of your image. @param isBitmap Whether the context should be bitmap or vector. @param drawingBlock The preview should be drawn into the context passed to this block. The QLPreviewReply passed into this block is the same as the one created by this method and is provided for convenience for any further updates to its properties during the drawing block. Return YES if the preview was successfully drawn into the context. Return NO and populate error otherwise.
-//
-// NewPreviewReplyWithContextSizeIsBitmapDrawingBlock creates a new [PreviewReply].
-func NewPreviewReplyWithContextSizeIsBitmapDrawingBlock(contextSize corefoundation.CGSize, isBitmap bool, drawingBlock func(unsafe.Pointer, *raw.QLPreviewReply, unsafe.Pointer) bool) *PreviewReply {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContextSize:isBitmap:drawingBlock:"), contextSize, isBitmap, drawingBlock)
-	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
+// previewReplyAdopt wraps an Objective-C object that this code just created as a
+// PreviewReply (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func previewReplyAdopt(id objc.ID) *PreviewReply {
+	if id == 0 {
+		return nil
+	}
+	x := &PreviewReply{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a preview reply from an existing file URL.
-//
-// NewPreviewReplyWithFileURL creates a new [PreviewReply].
+// Description returns the object's -description text.
+func (x *PreviewReply) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PreviewReply) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PreviewReply) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewReply) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPreviewReplyWithFileURL creates a preview reply from an existing file URL.
 func NewPreviewReplyWithFileURL(fileURL string) *PreviewReply {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr())
-	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewReply")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileURL:"), rt.FileURL(fileURL))
+	return previewReplyAdopt(_id)
 }
 
-// NewPreviewReplyWithDataOfContentTypeContentSizeDataCreationBlock creates a new [PreviewReply].
-func NewPreviewReplyWithDataOfContentTypeContentSizeDataCreationBlock(contentType *uniformtypeidentifiers.UTType, contentSize corefoundation.CGSize, dataCreationBlock objc.Block) *PreviewReply {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataOfContentType:contentSize:dataCreationBlock:"), contentType.Ptr(), contentSize, dataCreationBlock)
-	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
-}
-
-// @abstract Use this method to provide a preview with a PDFDocument @param defaultPageSize The size of your pages in the document. If the page size varies, use the first page's size. @param documentCreationBlock Create and return the PDFDocument. Heavy lifting should be done inside of the documentCreationBlock instead of when creating the QLPreviewReply. The QLPreviewReply passed into this block is the same as the one created by this method and is provided for convenience for any further updates to its properties during document creation. Return the PDFDocument if successfully created. Populate error if unsuccessful.
-//
-// NewPreviewReplyForPDFWithPageSizeDocumentCreationBlock creates a new [PreviewReply].
-func NewPreviewReplyForPDFWithPageSizeDocumentCreationBlock(defaultPageSize corefoundation.CGSize, documentCreationBlock objc.Block) *PreviewReply {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForPDFWithPageSize:documentCreationBlock:"), defaultPageSize, documentCreationBlock)
-	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
-}
-
-// String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
-//
-// WithStringEncoding sets the stringEncoding property and returns the receiver for chaining.
-func (x *PreviewReply) WithStringEncoding(stringEncoding uint) *PreviewReply {
-	x.inner.SetStringEncoding(stringEncoding)
+// WithStringEncoding string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+func (x *PreviewReply) WithStringEncoding(stringEncoding int) *PreviewReply {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringEncoding:"), stringEncoding)
 	return x
 }
 
-// The attachments for a preview reply that provide additional data for the system to display the preview.
-//
-// WithAttachments sets the attachments property and returns the receiver for chaining.
-func (x *PreviewReply) WithAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) *PreviewReply {
-	x.inner.SetAttachments(attachments)
+// WithAttachments the attachments for a preview reply that provide additional data for the system to display the preview.
+func (x *PreviewReply) WithAttachments(attachments obj.Object) *PreviewReply {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
 	return x
 }
 
-// The title for the system to display with the preview.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the title for the system to display with the preview.
 func (x *PreviewReply) WithTitle(title string) *PreviewReply {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
-//
-// StringEncoding calls the underlying StringEncoding.
-func (x *PreviewReply) StringEncoding() uint {
-	return x.inner.StringEncoding()
+// StringEncoding string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+func (x *PreviewReply) StringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stringEncoding"))
+	return _r
 }
 
-// SetStringEncoding calls the underlying SetStringEncoding.
-func (x *PreviewReply) SetStringEncoding(stringEncoding uint) {
-	x.inner.SetStringEncoding(stringEncoding)
+// SetStringEncoding wraps the corresponding Objective-C method.
+func (x *PreviewReply) SetStringEncoding(stringEncoding int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringEncoding:"), stringEncoding)
 }
 
-// Attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
-//
-// Attachments calls the underlying Attachments.
-func (x *PreviewReply) Attachments() *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment] {
-	return x.inner.Attachments()
+// Attachments attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
+func (x *PreviewReply) Attachments() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
+	return obj.Wrap(_r)
 }
 
-// SetAttachments calls the underlying SetAttachments.
-func (x *PreviewReply) SetAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) {
-	x.inner.SetAttachments(attachments)
+// SetAttachments wraps the corresponding Objective-C method.
+func (x *PreviewReply) SetAttachments(attachments obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
 }
 
-// Custom display title for the preview. If left as the empty string, QuickLook will use the file name.
-//
-// Title calls the underlying Title.
+// Title custom display title for the preview. If left as the empty string, QuickLook will use the file name.
 func (x *PreviewReply) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *PreviewReply) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // PreviewReplyable is the interface implemented by [PreviewReply], for mocking and DI.
 type PreviewReplyable interface {
-	Unwrap() *raw.QLPreviewReply
-	WithStringEncoding(stringEncoding uint) *PreviewReply
-	WithAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) *PreviewReply
+	obj.Object
+	WithStringEncoding(stringEncoding int) *PreviewReply
+	WithAttachments(attachments obj.Object) *PreviewReply
 	WithTitle(title string) *PreviewReply
-	StringEncoding() uint
-	SetStringEncoding(stringEncoding uint)
-	Attachments() *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]
-	SetAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment])
+	StringEncoding() int
+	SetStringEncoding(stringEncoding int)
+	Attachments() obj.Object
+	SetAttachments(attachments obj.Object)
 	Title() string
 	SetTitle(title string)
 }

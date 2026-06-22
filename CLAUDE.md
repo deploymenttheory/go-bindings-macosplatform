@@ -227,10 +227,21 @@ opinionated/library/
 └── <other frameworks>/  # generated *_generated.go only (async wrappers, typed slices, spec types)
 ```
 
-**`opinionated/idiomatic/`** — fully generated fluent layer (one package per framework), emitted by the frameworks pipeline (`go run ./cmd/generate/ idiomatic`). This replaced the former `opinionated/ergonomic/` layer, which has been removed.
+**`opinionated/idiomatic/`** — fully generated fluent layer, emitted by the frameworks pipeline
+(`go run ./cmd/generate/ idiomatic`). This replaced the former `opinionated/ergonomic/` layer,
+which has been removed. The emitter is a compiler-style pipeline: a resolution pass builds a
+pure-data IR (the `view` package under `internal/codegen/frameworks/emit/idiomatic/view/`) and a
+render pass turns it into Go source through `text/template` files only (`…/render/templates/`) —
+no Go syntax is string-built, and imports are computed from resolved types (not scanned from the
+output). The emitter source is split by construct across the `idiomatic` package
+(`classes.go`, `constructors.go`, `setters.go`, `methods.go`, `typeresolve.go`, `docs.go`,
+`naming.go`, …). Wrappers embed their same-framework base (promoting its methods), abstract-base
+setters accept a **sealed** provider interface (`<Base>Provider` with an unexported marker), and
+the layer is hermetic (never imports `bindings/frameworks`).
 
 ```
-opinionated/idiomatic/<name>/   # Go-friendly wrappers for each framework
+opinionated/idiomatic/framework/<name>/    # Go-friendly wrappers for each ObjC framework
+opinionated/idiomatic/libraries/<name>/    # wrappers for each Apple C library
 ```
 
 `opinionated/custom/` holds additional hand-crafted packages.

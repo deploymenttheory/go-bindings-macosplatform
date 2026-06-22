@@ -5,127 +5,146 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
+// URLCredential is an idiomatic wrapper over the Objective-C class NSURLCredential.
 //
-// URLCredential wraps [raw.NSURLCredential] with a fluent Go API.
+// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
 type URLCredential struct {
-	inner *raw.NSURLCredential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLCredential].
-func (x *URLCredential) Unwrap() *raw.NSURLCredential { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLCredential) ID() objc.ID { return x.inner.Ptr() }
-
-// URLCredentialFromID adopts an existing object pointer as a URLCredential (nil for 0).
+// URLCredentialFromID adopts an existing Objective-C object as a URLCredential
+// (nil for 0), retaining it and registering a release finalizer.
 func URLCredentialFromID(id objc.ID) *URLCredential {
 	if id == 0 {
 		return nil
 	}
-	return &URLCredential{inner: raw.NSURLCredentialFromID(id)}
-}
-
-// @method initWithUser:password:persistence: @abstract Initialize a NSURLCredential with a user and password @param user the username @param password the password @param persistence enum that says to store per session, permanently or not at all @result The initialized NSURLCredential
-//
-// NewURLCredentialWithUserPasswordPersistence creates a new [URLCredential].
-func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence NSURLCredentialPersistence) *URLCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:persistence:"), foundation.NSStringStringWithUTF8String(user).Ptr(), foundation.NSStringStringWithUTF8String(password).Ptr(), raw.NSURLCredentialPersistence(persistence))
-	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
-}
-
-// @method initWithIdentity:certificates:persistence: @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef) @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result the Initialized NSURLCredential
-//
-// NewURLCredentialWithIdentityCertificatesPersistence creates a new [URLCredential].
-func NewURLCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence NSURLCredentialPersistence) *URLCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentity:certificates:persistence:"), identity, certArray.Ptr(), raw.NSURLCredentialPersistence(persistence))
-	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
-}
-
-// @method initWithTrust: @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted. @result the Initialized NSURLCredential
-//
-// NewURLCredentialWithTrust creates a new [URLCredential].
-func NewURLCredentialWithTrust(trust unsafe.Pointer) *URLCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), trust)
-	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLCredential) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredential {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Persistence calls the underlying Persistence.
-func (x *URLCredential) Persistence() NSURLCredentialPersistence {
-	return NSURLCredentialPersistence(x.inner.Persistence())
-}
-
-// @abstract Get the username @result The user string
-//
-// User calls the underlying User.
-func (x *URLCredential) User() *String {
-	_r := x.inner.User()
-	if _r == nil {
+// uRLCredentialAdopt wraps an Objective-C object that this code just created as a
+// URLCredential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLCredentialAdopt(id objc.ID) *URLCredential {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &URLCredential{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract Get the password @result The password string @discussion This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
-//
-// Password calls the underlying Password.
-func (x *URLCredential) Password() *String {
-	_r := x.inner.Password()
-	if _r == nil {
-		return nil
+// Description returns the object's -description text.
+func (x *URLCredential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLCredentialWithUserPasswordPersistence initialize a NSURLCredential with a user and password
+func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence URLCredentialPersistence) *URLCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:persistence:"), purego.NSString(user), purego.NSString(password), persistence)
+	return uRLCredentialAdopt(_id)
+}
+
+// NewURLCredentialWithIdentityCertificatesPersistence initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
+func NewURLCredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentity:certificates:persistence:"), objref.IDOf(identity), objref.IDOf(certArray), persistence)
+	return uRLCredentialAdopt(_id)
+}
+
+// NewURLCredentialWithTrust initialize a new NSURLCredential which specifies that the specified trust has been accepted.
+func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
+	return uRLCredentialAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLCredential) WithScriptingProperties(scriptingProperties obj.Object) *URLCredential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Persistence wraps the corresponding Objective-C method.
+func (x *URLCredential) Persistence() URLCredentialPersistence {
+	_r := objc.Send[URLCredentialPersistence](objref.IDOf(x), objc.RegisterName("persistence"))
+	return _r
+}
+
+// User get the username
+func (x *URLCredential) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Find out if this credential has a password, without trying to get it @result YES if this credential has a password, otherwise NO @discussion If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
-//
-// HasPassword calls the underlying HasPassword.
+// Password get the password This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
+func (x *URLCredential) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// HasPassword find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
 func (x *URLCredential) HasPassword() bool {
-	return x.inner.HasPassword()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPassword"))
+	return _r
 }
 
-// @abstract Returns the SecIdentityRef of this credential, if it was created with a certificate and identity @result A SecIdentityRef or NULL if this is a username/password credential
-//
-// Identity calls the underlying Identity.
-func (x *URLCredential) Identity() unsafe.Pointer {
-	return x.inner.Identity()
+// Identity returns the SecIdentityRef of this credential, if it was created with a certificate and identity
+func (x *URLCredential) Identity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate. @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
-//
-// Certificates calls the underlying Certificates.
-func (x *URLCredential) Certificates() *raw.NSArray[objc.ID] {
-	return x.inner.Certificates()
+// Certificates returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
+func (x *URLCredential) Certificates() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificates"))
+	return obj.Wrap(_r)
 }
-
-func (x *URLCredential) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLCredentialable is the interface implemented by [URLCredential], for mocking and DI.
 type URLCredentialable interface {
-	Unwrap() *raw.NSURLCredential
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredential
-	Persistence() NSURLCredentialPersistence
-	User() *String
-	Password() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLCredential
+	Persistence() URLCredentialPersistence
+	User() string
+	Password() string
 	HasPassword() bool
-	Identity() unsafe.Pointer
-	Certificates() *raw.NSArray[objc.ID]
+	Identity() obj.Object
+	Certificates() obj.Object
 }
 
 var _ URLCredentialable = (*URLCredential)(nil)

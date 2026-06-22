@@ -5,302 +5,281 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages the communication between objects in different threads or between a thread and a process running on a local or remote system.
+// Connection is an idiomatic wrapper over the Objective-C class NSConnection.
 //
-// Connection wraps [raw.NSConnection] with a fluent Go API.
+// An object that manages the communication between objects in different threads or between a thread and a process running on a local or remote system.
 type Connection struct {
-	inner *raw.NSConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSConnection].
-func (x *Connection) Unwrap() *raw.NSConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Connection) ID() objc.ID { return x.inner.Ptr() }
-
-// ConnectionFromID adopts an existing object pointer as a Connection (nil for 0).
+// ConnectionFromID adopts an existing Objective-C object as a Connection
+// (nil for 0), retaining it and registering a release finalizer.
 func ConnectionFromID(id objc.ID) *Connection {
 	if id == 0 {
 		return nil
 	}
-	return &Connection{inner: raw.NSConnectionFromID(id)}
-}
-
-// Returns an NSConnection object initialized with given send and receive ports.
-//
-// NewConnectionWithReceivePortSendPort creates a new [Connection].
-func NewConnectionWithReceivePortSendPort(receivePort *raw.NSPort, sendPort *raw.NSPort) *Connection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceivePort:sendPort:"), receivePort.Ptr(), sendPort.Ptr())
-	return &Connection{inner: raw.NSConnectionFromID(_id)}
-}
-
-// The timeout interval for outgoing remote messages.
-//
-// WithRequestTimeout sets the requestTimeout property and returns the receiver for chaining.
-func (x *Connection) WithRequestTimeout(requestTimeout float64) *Connection {
-	x.inner.SetRequestTimeout(requestTimeout)
+	x := &Connection{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The timeout interval for replies to outgoing remote messages.
-//
-// WithReplyTimeout sets the replyTimeout property and returns the receiver for chaining.
-func (x *Connection) WithReplyTimeout(replyTimeout float64) *Connection {
-	x.inner.SetReplyTimeout(replyTimeout)
-	return x
-}
-
-// The object that the receiver (or its parent) makes available to other applications or threads.
-//
-// WithRootObject sets the rootObject property and returns the receiver for chaining.
-func (x *Connection) WithRootObject(rootObject objc.ID) *Connection {
-	x.inner.SetRootObject(rootObject)
-	return x
-}
-
-// The receiver’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Connection) WithDelegate(delegate raw.NSConnectionDelegate) *Connection {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that indicates whether the receiver handles remote messages atomically.
-//
-// WithIndependentConversationQueueing sets the independentConversationQueueing property and returns the receiver for chaining.
-func (x *Connection) WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection {
-	x.inner.SetIndependentConversationQueueing(independentConversationQueueing)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Connection) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Connection {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// Invalidates the receiver.
-//
-// Invalidate calls the underlying Invalidate.
-func (x *Connection) Invalidate() {
-	x.inner.Invalidate()
-}
-
-// Adds mode to the set of run-loop input modes that the receiver uses for connection requests.
-//
-// AddRequestMode calls the underlying AddRequestMode.
-func (x *Connection) AddRequestMode(rmode string) {
-	x.inner.AddRequestMode(foundation.NSStringStringWithUTF8String(rmode))
-}
-
-// Removes mode from the set of run-loop input modes the receiver uses for connection requests.
-//
-// RemoveRequestMode calls the underlying RemoveRequestMode.
-func (x *Connection) RemoveRequestMode(rmode string) {
-	x.inner.RemoveRequestMode(foundation.NSStringStringWithUTF8String(rmode))
-}
-
-// Registers the specified service using with the default system port name server.
-//
-// RegisterName calls the underlying RegisterName.
-func (x *Connection) RegisterName(name string) bool {
-	return x.inner.RegisterName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// Registers a service with the specified port name server.
-//
-// RegisterNameWithNameServer calls the underlying RegisterNameWithNameServer.
-func (x *Connection) RegisterNameWithNameServer(name string, server *raw.NSPortNameServer) bool {
-	return x.inner.RegisterNameWithNameServer(foundation.NSStringStringWithUTF8String(name), server)
-}
-
-// Configures the receiver to allow requests from multiple threads to the remote object, without requiring each thread to each maintain its own connection.
-//
-// EnableMultipleThreads calls the underlying EnableMultipleThreads.
-func (x *Connection) EnableMultipleThreads() {
-	x.inner.EnableMultipleThreads()
-}
-
-// Adds the specified run loop to the list of run loops the receiver monitors and from which it responds to requests.
-//
-// AddRunLoop calls the underlying AddRunLoop.
-func (x *Connection) AddRunLoop(runloop *raw.NSRunLoop) {
-	x.inner.AddRunLoop(runloop)
-}
-
-// Removes a given NSRunLoop object from the list of run loops the receiver monitors and from which it responds to requests.
-//
-// RemoveRunLoop calls the underlying RemoveRunLoop.
-func (x *Connection) RemoveRunLoop(runloop *raw.NSRunLoop) {
-	x.inner.RemoveRunLoop(runloop)
-}
-
-// Creates and starts a new NSThread object and then runs the receiving connection in the new thread.
-//
-// RunInNewThread calls the underlying RunInNewThread.
-func (x *Connection) RunInNewThread() {
-	x.inner.RunInNewThread()
-}
-
-// Allows subclasses to ask a connection object to dispatch component data.
-//
-// DispatchWithComponents calls the underlying DispatchWithComponents.
-func (x *Connection) DispatchWithComponents(components *raw.NSArray[objc.ID]) {
-	x.inner.DispatchWithComponents(components)
-}
-
-// Statistics calls the underlying Statistics.
-func (x *Connection) Statistics() *raw.NSDictionary[*raw.NSString, *raw.NSNumber] {
-	return x.inner.Statistics()
-}
-
-// RequestTimeout calls the underlying RequestTimeout.
-func (x *Connection) RequestTimeout() float64 {
-	return x.inner.RequestTimeout()
-}
-
-// SetRequestTimeout calls the underlying SetRequestTimeout.
-func (x *Connection) SetRequestTimeout(requestTimeout float64) {
-	x.inner.SetRequestTimeout(requestTimeout)
-}
-
-// ReplyTimeout calls the underlying ReplyTimeout.
-func (x *Connection) ReplyTimeout() float64 {
-	return x.inner.ReplyTimeout()
-}
-
-// SetReplyTimeout calls the underlying SetReplyTimeout.
-func (x *Connection) SetReplyTimeout(replyTimeout float64) {
-	x.inner.SetReplyTimeout(replyTimeout)
-}
-
-// RootObject calls the underlying RootObject.
-func (x *Connection) RootObject() objc.ID {
-	return x.inner.RootObject()
-}
-
-// SetRootObject calls the underlying SetRootObject.
-func (x *Connection) SetRootObject(rootObject objc.ID) {
-	x.inner.SetRootObject(rootObject)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *Connection) Delegate() raw.NSConnectionDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Connection) SetDelegate(delegate raw.NSConnectionDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IndependentConversationQueueing calls the underlying IndependentConversationQueueing.
-func (x *Connection) IndependentConversationQueueing() bool {
-	return x.inner.IndependentConversationQueueing()
-}
-
-// SetIndependentConversationQueueing calls the underlying SetIndependentConversationQueueing.
-func (x *Connection) SetIndependentConversationQueueing(independentConversationQueueing bool) {
-	x.inner.SetIndependentConversationQueueing(independentConversationQueueing)
-}
-
-// IsValid calls the underlying IsValid.
-func (x *Connection) IsValid() bool {
-	return x.inner.IsValid()
-}
-
-// RootProxy calls the underlying RootProxy.
-func (x *Connection) RootProxy() *DistantObject {
-	_r := x.inner.RootProxy()
-	if _r == nil {
+// connectionAdopt wraps an Objective-C object that this code just created as a
+// Connection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func connectionAdopt(id objc.ID) *Connection {
+	if id == 0 {
 		return nil
 	}
-	return &DistantObject{inner: _r}
+	x := &Connection{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
+// Description returns the object's -description text.
+func (x *Connection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Connection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Connection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Connection) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewConnectionWithReceivePortSendPort returns an NSConnection object initialized with given send and receive ports.
+func NewConnectionWithReceivePortSendPort(receivePort *Port, sendPort *Port) *Connection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceivePort:sendPort:"), objref.IDOf(receivePort), objref.IDOf(sendPort))
+	return connectionAdopt(_id)
+}
+
+// WithRequestTimeout the timeout interval for outgoing remote messages.
+func (x *Connection) WithRequestTimeout(requestTimeout float64) *Connection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestTimeout:"), requestTimeout)
+	return x
+}
+
+// WithReplyTimeout the timeout interval for replies to outgoing remote messages.
+func (x *Connection) WithReplyTimeout(replyTimeout float64) *Connection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplyTimeout:"), replyTimeout)
+	return x
+}
+
+// WithRootObject the object that the receiver (or its parent) makes available to other applications or threads.
+func (x *Connection) WithRootObject(rootObject obj.Object) *Connection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootObject:"), objref.IDOf(rootObject))
+	return x
+}
+
+// WithIndependentConversationQueueing a Boolean value that indicates whether the receiver handles remote messages atomically.
+func (x *Connection) WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndependentConversationQueueing:"), independentConversationQueueing)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Connection) WithScriptingProperties(scriptingProperties obj.Object) *Connection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Invalidate invalidates the receiver.
+func (x *Connection) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+}
+
+// AddRequestMode adds mode to the set of run-loop input modes that the receiver uses for connection requests.
+func (x *Connection) AddRequestMode(rmode string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestMode:"), purego.NSString(rmode))
+}
+
+// RemoveRequestMode removes mode from the set of run-loop input modes the receiver uses for connection requests.
+func (x *Connection) RemoveRequestMode(rmode string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRequestMode:"), purego.NSString(rmode))
+}
+
+// RegisterName registers the specified service using with the default system port name server.
+func (x *Connection) RegisterName(name string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerName:"), purego.NSString(name))
+	return _r
+}
+
+// RegisterNameWithNameServer registers a service with the specified port name server.
+func (x *Connection) RegisterNameWithNameServer(name string, server *PortNameServer) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerName:withNameServer:"), purego.NSString(name), objref.IDOf(server))
+	return _r
+}
+
+// EnableMultipleThreads configures the receiver to allow requests from multiple threads to the remote object, without requiring each thread to each maintain its own connection.
+func (x *Connection) EnableMultipleThreads() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableMultipleThreads"))
+}
+
+// AddRunLoop adds the specified run loop to the list of run loops the receiver monitors and from which it responds to requests.
+func (x *Connection) AddRunLoop(runloop *RunLoop) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRunLoop:"), objref.IDOf(runloop))
+}
+
+// RemoveRunLoop removes a given NSRunLoop object from the list of run loops the receiver monitors and from which it responds to requests.
+func (x *Connection) RemoveRunLoop(runloop *RunLoop) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRunLoop:"), objref.IDOf(runloop))
+}
+
+// RunInNewThread creates and starts a new NSThread object and then runs the receiving connection in the new thread.
+func (x *Connection) RunInNewThread() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runInNewThread"))
+}
+
+// DispatchWithComponents allows subclasses to ask a connection object to dispatch component data.
+func (x *Connection) DispatchWithComponents(components obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchWithComponents:"), objref.IDOf(components))
+}
+
+// Statistics wraps the corresponding Objective-C method.
+func (x *Connection) Statistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statistics"))
+	return obj.Wrap(_r)
+}
+
+// RequestTimeout wraps the corresponding Objective-C method.
+func (x *Connection) RequestTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("requestTimeout"))
+	return _r
+}
+
+// SetRequestTimeout wraps the corresponding Objective-C method.
+func (x *Connection) SetRequestTimeout(requestTimeout float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestTimeout:"), requestTimeout)
+}
+
+// ReplyTimeout wraps the corresponding Objective-C method.
+func (x *Connection) ReplyTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("replyTimeout"))
+	return _r
+}
+
+// SetReplyTimeout wraps the corresponding Objective-C method.
+func (x *Connection) SetReplyTimeout(replyTimeout float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplyTimeout:"), replyTimeout)
+}
+
+// RootObject wraps the corresponding Objective-C method.
+func (x *Connection) RootObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootObject"))
+	return obj.Wrap(_r)
+}
+
+// SetRootObject wraps the corresponding Objective-C method.
+func (x *Connection) SetRootObject(rootObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootObject:"), objref.IDOf(rootObject))
+}
+
+// IndependentConversationQueueing wraps the corresponding Objective-C method.
+func (x *Connection) IndependentConversationQueueing() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("independentConversationQueueing"))
+	return _r
+}
+
+// SetIndependentConversationQueueing wraps the corresponding Objective-C method.
+func (x *Connection) SetIndependentConversationQueueing(independentConversationQueueing bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndependentConversationQueueing:"), independentConversationQueueing)
+}
+
+// IsValid wraps the corresponding Objective-C method.
+func (x *Connection) IsValid() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
+	return _r
+}
+
+// RootProxy wraps the corresponding Objective-C method.
+func (x *Connection) RootProxy() *DistantObject {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootProxy"))
+	return DistantObjectFromID(_r)
+}
+
+// RequestModes wraps the corresponding Objective-C method.
+//
 // RequestModes returns the collection as a Go slice.
 func (x *Connection) RequestModes() []string {
-	arr := x.inner.RequestModes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestModes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SendPort calls the underlying SendPort.
+// SendPort wraps the corresponding Objective-C method.
 func (x *Connection) SendPort() *Port {
-	_r := x.inner.SendPort()
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPort"))
+	return PortFromID(_r)
 }
 
-// ReceivePort calls the underlying ReceivePort.
+// ReceivePort wraps the corresponding Objective-C method.
 func (x *Connection) ReceivePort() *Port {
-	_r := x.inner.ReceivePort()
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivePort"))
+	return PortFromID(_r)
 }
 
-// MultipleThreadsEnabled calls the underlying MultipleThreadsEnabled.
+// MultipleThreadsEnabled wraps the corresponding Objective-C method.
 func (x *Connection) MultipleThreadsEnabled() bool {
-	return x.inner.MultipleThreadsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multipleThreadsEnabled"))
+	return _r
 }
 
-// RemoteObjects calls the underlying RemoteObjects.
-func (x *Connection) RemoteObjects() *raw.NSArray[objc.ID] {
-	return x.inner.RemoteObjects()
+// RemoteObjects wraps the corresponding Objective-C method.
+func (x *Connection) RemoteObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteObjects"))
+	return obj.Wrap(_r)
 }
 
-// LocalObjects calls the underlying LocalObjects.
-func (x *Connection) LocalObjects() *raw.NSArray[objc.ID] {
-	return x.inner.LocalObjects()
+// LocalObjects wraps the corresponding Objective-C method.
+func (x *Connection) LocalObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localObjects"))
+	return obj.Wrap(_r)
 }
-
-func (x *Connection) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Connectionable is the interface implemented by [Connection], for mocking and DI.
 type Connectionable interface {
-	Unwrap() *raw.NSConnection
+	obj.Object
 	WithRequestTimeout(requestTimeout float64) *Connection
 	WithReplyTimeout(replyTimeout float64) *Connection
-	WithRootObject(rootObject objc.ID) *Connection
-	WithDelegate(delegate raw.NSConnectionDelegate) *Connection
+	WithRootObject(rootObject obj.Object) *Connection
 	WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Connection
+	WithScriptingProperties(scriptingProperties obj.Object) *Connection
 	Invalidate()
 	AddRequestMode(rmode string)
 	RemoveRequestMode(rmode string)
 	RegisterName(name string) bool
-	RegisterNameWithNameServer(name string, server *raw.NSPortNameServer) bool
+	RegisterNameWithNameServer(name string, server *PortNameServer) bool
 	EnableMultipleThreads()
-	AddRunLoop(runloop *raw.NSRunLoop)
-	RemoveRunLoop(runloop *raw.NSRunLoop)
+	AddRunLoop(runloop *RunLoop)
+	RemoveRunLoop(runloop *RunLoop)
 	RunInNewThread()
-	DispatchWithComponents(components *raw.NSArray[objc.ID])
-	Statistics() *raw.NSDictionary[*raw.NSString, *raw.NSNumber]
+	DispatchWithComponents(components obj.Object)
+	Statistics() obj.Object
 	RequestTimeout() float64
 	SetRequestTimeout(requestTimeout float64)
 	ReplyTimeout() float64
 	SetReplyTimeout(replyTimeout float64)
-	RootObject() objc.ID
-	SetRootObject(rootObject objc.ID)
-	Delegate() raw.NSConnectionDelegate
-	SetDelegate(delegate raw.NSConnectionDelegate)
+	RootObject() obj.Object
+	SetRootObject(rootObject obj.Object)
 	IndependentConversationQueueing() bool
 	SetIndependentConversationQueueing(independentConversationQueueing bool)
 	IsValid() bool
@@ -309,8 +288,8 @@ type Connectionable interface {
 	SendPort() *Port
 	ReceivePort() *Port
 	MultipleThreadsEnabled() bool
-	RemoteObjects() *raw.NSArray[objc.ID]
-	LocalObjects() *raw.NSArray[objc.ID]
+	RemoteObjects() obj.Object
+	LocalObjects() obj.Object
 }
 
 var _ Connectionable = (*Connection)(nil)

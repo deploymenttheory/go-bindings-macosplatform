@@ -5,47 +5,46 @@
 package preferencepanes
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/preferencepanes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// NSPreferencePaneDoUnselectNotification returns the string constant NSPreferencePaneDoUnselectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPreferencePaneDoUnselectNotification() objc.ID {
-	return purego.CFConstant(raw.NSPreferencePaneDoUnselectNotification())
+// NSPreferencePaneDoUnselectNotification returns the string constant NSPreferencePaneDoUnselectNotification, for use as a dictionary key or argument.
+func NSPreferencePaneDoUnselectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPreferencePaneDoUnselectNotification")))
 }
 
-// NSPreferencePaneCancelUnselectNotification returns the string constant NSPreferencePaneCancelUnselectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPreferencePaneCancelUnselectNotification() objc.ID {
-	return purego.CFConstant(raw.NSPreferencePaneCancelUnselectNotification())
+// NSPreferencePaneCancelUnselectNotification returns the string constant NSPreferencePaneCancelUnselectNotification, for use as a dictionary key or argument.
+func NSPreferencePaneCancelUnselectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPreferencePaneCancelUnselectNotification")))
 }
 
-// NSPreferencePaneSwitchToPaneNotification returns the string constant NSPreferencePaneSwitchToPaneNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPreferencePaneSwitchToPaneNotification() objc.ID {
-	return purego.CFConstant(raw.NSPreferencePaneSwitchToPaneNotification())
+// NSPreferencePaneSwitchToPaneNotification returns the string constant NSPreferencePaneSwitchToPaneNotification, for use as a dictionary key or argument.
+func NSPreferencePaneSwitchToPaneNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPreferencePaneSwitchToPaneNotification")))
 }
 
-// NSPreferencePrefPaneIsAvailableNotification returns the string constant NSPreferencePrefPaneIsAvailableNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPreferencePrefPaneIsAvailableNotification() objc.ID {
-	return purego.CFConstant(raw.NSPreferencePrefPaneIsAvailableNotification())
+// NSPreferencePrefPaneIsAvailableNotification returns the string constant NSPreferencePrefPaneIsAvailableNotification, for use as a dictionary key or argument.
+func NSPreferencePrefPaneIsAvailableNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPreferencePrefPaneIsAvailableNotification")))
 }
 
-// NSPreferencePaneUpdateHelpMenuNotification returns the string constant NSPreferencePaneUpdateHelpMenuNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPreferencePaneUpdateHelpMenuNotification() objc.ID {
-	return purego.CFConstant(raw.NSPreferencePaneUpdateHelpMenuNotification())
+// NSPreferencePaneUpdateHelpMenuNotification returns the string constant NSPreferencePaneUpdateHelpMenuNotification, for use as a dictionary key or argument.
+func NSPreferencePaneUpdateHelpMenuNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPreferencePaneUpdateHelpMenuNotification")))
 }
 
-// NSPrefPaneHelpMenuInfoPListKey returns the string constant NSPrefPaneHelpMenuInfoPListKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrefPaneHelpMenuInfoPListKey() objc.ID {
-	return purego.CFConstant(raw.NSPrefPaneHelpMenuInfoPListKey())
+// NSPrefPaneHelpMenuInfoPListKey returns the string constant NSPrefPaneHelpMenuInfoPListKey, for use as a dictionary key or argument.
+func NSPrefPaneHelpMenuInfoPListKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrefPaneHelpMenuInfoPListKey")))
 }
 
-// NSPrefPaneHelpMenuTitleKey returns the string constant NSPrefPaneHelpMenuTitleKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrefPaneHelpMenuTitleKey() objc.ID {
-	return purego.CFConstant(raw.NSPrefPaneHelpMenuTitleKey())
+// NSPrefPaneHelpMenuTitleKey returns the string constant NSPrefPaneHelpMenuTitleKey, for use as a dictionary key or argument.
+func NSPrefPaneHelpMenuTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrefPaneHelpMenuTitleKey")))
 }
 
-// NSPrefPaneHelpMenuAnchorKey returns the string constant NSPrefPaneHelpMenuAnchorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrefPaneHelpMenuAnchorKey() objc.ID {
-	return purego.CFConstant(raw.NSPrefPaneHelpMenuAnchorKey())
+// NSPrefPaneHelpMenuAnchorKey returns the string constant NSPrefPaneHelpMenuAnchorKey, for use as a dictionary key or argument.
+func NSPrefPaneHelpMenuAnchorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrefPaneHelpMenuAnchorKey")))
 }

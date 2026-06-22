@@ -5,127 +5,155 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of changes in the persistent history based on a context save or batch operation.
+// PersistentHistoryTransaction is an idiomatic wrapper over the Objective-C class NSPersistentHistoryTransaction.
 //
-// PersistentHistoryTransaction wraps [raw.NSPersistentHistoryTransaction] with a fluent Go API.
+// A set of changes in the persistent history based on a context save or batch operation.
 type PersistentHistoryTransaction struct {
-	inner *raw.NSPersistentHistoryTransaction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentHistoryTransaction].
-func (x *PersistentHistoryTransaction) Unwrap() *raw.NSPersistentHistoryTransaction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentHistoryTransaction) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentHistoryTransactionFromID adopts an existing object pointer as a PersistentHistoryTransaction (nil for 0).
+// PersistentHistoryTransactionFromID adopts an existing Objective-C object as a PersistentHistoryTransaction
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentHistoryTransactionFromID(id objc.ID) *PersistentHistoryTransaction {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentHistoryTransaction{inner: raw.NSPersistentHistoryTransactionFromID(id)}
+	x := &PersistentHistoryTransaction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentHistoryTransaction creates a new [PersistentHistoryTransaction].
+// persistentHistoryTransactionAdopt wraps an Objective-C object that this code just created as a
+// PersistentHistoryTransaction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentHistoryTransactionAdopt(id objc.ID) *PersistentHistoryTransaction {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentHistoryTransaction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentHistoryTransaction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentHistoryTransaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentHistoryTransaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersistentHistoryTransaction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersistentHistoryTransaction creates a new PersistentHistoryTransaction.
 func NewPersistentHistoryTransaction() *PersistentHistoryTransaction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentHistoryTransaction")), objc.RegisterName("new"))
-	return &PersistentHistoryTransaction{inner: raw.NSPersistentHistoryTransactionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("new"))
+	return persistentHistoryTransactionAdopt(_id)
 }
 
-// Obtains a notification for use in merging the transaction’s changes into a managed object context.
+// ObjectIDNotification obtains a notification for use in merging the transaction’s changes into a managed object context.
+func (x *PersistentHistoryTransaction) ObjectIDNotification() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectIDNotification"))
+	return obj.Wrap(_r)
+}
+
+// Timestamp wraps the corresponding Objective-C method.
+func (x *PersistentHistoryTransaction) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return obj.Wrap(_r)
+}
+
+// Changes wraps the corresponding Objective-C method.
 //
-// ObjectIDNotification calls the underlying ObjectIDNotification.
-func (x *PersistentHistoryTransaction) ObjectIDNotification() *foundation.NSNotification {
-	return x.inner.ObjectIDNotification()
-}
-
-// Timestamp calls the underlying Timestamp.
-func (x *PersistentHistoryTransaction) Timestamp() *foundation.NSDate {
-	return x.inner.Timestamp()
-}
-
 // Changes returns the collection as a Go slice.
 func (x *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
-	arr := x.inner.Changes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersistentHistoryChange {
-		return &PersistentHistoryChange{inner: raw.NSPersistentHistoryChangeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentHistoryChange { return PersistentHistoryChangeFromID(_id) })
 }
 
-// TransactionNumber calls the underlying TransactionNumber.
+// TransactionNumber wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) TransactionNumber() int64 {
-	return x.inner.TransactionNumber()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("transactionNumber"))
+	return _r
 }
 
-// StoreID calls the underlying StoreID.
+// StoreID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) StoreID() string {
-	_r := x.inner.StoreID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BundleID calls the underlying BundleID.
+// BundleID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) BundleID() string {
-	_r := x.inner.BundleID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ProcessID calls the underlying ProcessID.
+// ProcessID wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) ProcessID() string {
-	_r := x.inner.ProcessID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ContextName calls the underlying ContextName.
+// ContextName wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) ContextName() string {
-	_r := x.inner.ContextName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Author calls the underlying Author.
+// Author wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) Author() string {
-	_r := x.inner.Author()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("author"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Token calls the underlying Token.
+// Token wraps the corresponding Objective-C method.
 func (x *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
-	_r := x.inner.Token()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentHistoryToken{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+	return PersistentHistoryTokenFromID(_r)
 }
 
 // PersistentHistoryTransactionable is the interface implemented by [PersistentHistoryTransaction], for mocking and DI.
 type PersistentHistoryTransactionable interface {
-	Unwrap() *raw.NSPersistentHistoryTransaction
-	ObjectIDNotification() *foundation.NSNotification
-	Timestamp() *foundation.NSDate
+	obj.Object
+	ObjectIDNotification() obj.Object
+	Timestamp() obj.Object
 	Changes() []*PersistentHistoryChange
 	TransactionNumber() int64
 	StoreID() string

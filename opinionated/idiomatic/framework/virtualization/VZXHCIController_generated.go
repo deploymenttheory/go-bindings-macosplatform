@@ -5,43 +5,58 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a USB Extensible Host Controller Interface (XHCI) controller in a VM.
+// XHCIController is an idiomatic wrapper over the Objective-C class VZXHCIController.
 //
-// XHCIController wraps [raw.VZXHCIController] with a fluent Go API.
+// It embeds [USBController], promoting that type's methods.
+//
+// A class that represents a USB Extensible Host Controller Interface (XHCI) controller in a VM.
 type XHCIController struct {
-	inner *raw.VZXHCIController
+	USBController
 }
 
-// Unwrap returns the underlying [raw.VZXHCIController].
-func (x *XHCIController) Unwrap() *raw.VZXHCIController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XHCIController) ID() objc.ID { return x.inner.Ptr() }
-
-// XHCIControllerFromID adopts an existing object pointer as a XHCIController (nil for 0).
+// XHCIControllerFromID adopts an existing Objective-C object as a XHCIController
+// (nil for 0), retaining it and registering a release finalizer.
 func XHCIControllerFromID(id objc.ID) *XHCIController {
 	if id == 0 {
 		return nil
 	}
-	return &XHCIController{inner: raw.VZXHCIControllerFromID(id)}
+	x := &XHCIController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewXHCIController creates a new [XHCIController].
+// xHCIControllerAdopt wraps an Objective-C object that this code just created as a
+// XHCIController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xHCIControllerAdopt(id objc.ID) *XHCIController {
+	if id == 0 {
+		return nil
+	}
+	x := &XHCIController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewXHCIController creates a new XHCIController.
 func NewXHCIController() *XHCIController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZXHCIController")), objc.RegisterName("new"))
-	return &XHCIController{inner: raw.VZXHCIControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZXHCIController")), objc.RegisterName("new"))
+	return xHCIControllerAdopt(_id)
 }
-
-func (x *XHCIController) asUSBController() *raw.VZUSBController { return &x.inner.VZUSBController }
 
 // XHCIControllerable is the interface implemented by [XHCIController], for mocking and DI.
 type XHCIControllerable interface {
-	Unwrap() *raw.VZXHCIController
+	obj.Object
 }
 
 var _ XHCIControllerable = (*XHCIController)(nil)
+
+var _ USBControllerProvider = (*XHCIController)(nil)

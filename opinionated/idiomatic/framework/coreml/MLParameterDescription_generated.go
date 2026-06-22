@@ -5,66 +5,96 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a model parameter that includes a default value and a constraint, if applicable.
+// ParameterDescription is an idiomatic wrapper over the Objective-C class MLParameterDescription.
 //
-// ParameterDescription wraps [raw.MLParameterDescription] with a fluent Go API.
+// A description of a model parameter that includes a default value and a constraint, if applicable.
 type ParameterDescription struct {
-	inner *raw.MLParameterDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLParameterDescription].
-func (x *ParameterDescription) Unwrap() *raw.MLParameterDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ParameterDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// ParameterDescriptionFromID adopts an existing object pointer as a ParameterDescription (nil for 0).
+// ParameterDescriptionFromID adopts an existing Objective-C object as a ParameterDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func ParameterDescriptionFromID(id objc.ID) *ParameterDescription {
 	if id == 0 {
 		return nil
 	}
-	return &ParameterDescription{inner: raw.MLParameterDescriptionFromID(id)}
+	x := &ParameterDescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewParameterDescription creates a new [ParameterDescription].
+// parameterDescriptionAdopt wraps an Objective-C object that this code just created as a
+// ParameterDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func parameterDescriptionAdopt(id objc.ID) *ParameterDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &ParameterDescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ParameterDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ParameterDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ParameterDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ParameterDescription) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewParameterDescription creates a new ParameterDescription.
 func NewParameterDescription() *ParameterDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLParameterDescription")), objc.RegisterName("new"))
-	return &ParameterDescription{inner: raw.MLParameterDescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLParameterDescription")), objc.RegisterName("new"))
+	return parameterDescriptionAdopt(_id)
 }
 
-// Key calls the underlying Key.
+// Key wraps the corresponding Objective-C method.
 func (x *ParameterDescription) Key() *ParameterKey {
-	_r := x.inner.Key()
-	if _r == nil {
-		return nil
-	}
-	return &ParameterKey{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	return ParameterKeyFromID(_r)
 }
 
-// DefaultValue calls the underlying DefaultValue.
-func (x *ParameterDescription) DefaultValue() objc.ID {
-	return x.inner.DefaultValue()
+// DefaultValue wraps the corresponding Objective-C method.
+func (x *ParameterDescription) DefaultValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultValue"))
+	return obj.Wrap(_r)
 }
 
-// NumericConstraint calls the underlying NumericConstraint.
+// NumericConstraint wraps the corresponding Objective-C method.
 func (x *ParameterDescription) NumericConstraint() *NumericConstraint {
-	_r := x.inner.NumericConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &NumericConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numericConstraint"))
+	return NumericConstraintFromID(_r)
 }
 
 // ParameterDescriptionable is the interface implemented by [ParameterDescription], for mocking and DI.
 type ParameterDescriptionable interface {
-	Unwrap() *raw.MLParameterDescription
+	obj.Object
 	Key() *ParameterKey
-	DefaultValue() objc.ID
+	DefaultValue() obj.Object
 	NumericConstraint() *NumericConstraint
 }
 

@@ -5,99 +5,128 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a boat trip.
+// BoatTrip is an idiomatic wrapper over the Objective-C class INBoatTrip.
 //
-// BoatTrip wraps [raw.INBoatTrip] with a fluent Go API.
+// The information that describes a boat trip.
 type BoatTrip struct {
-	inner *raw.INBoatTrip
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INBoatTrip].
-func (x *BoatTrip) Unwrap() *raw.INBoatTrip { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BoatTrip) ID() objc.ID { return x.inner.Ptr() }
-
-// BoatTripFromID adopts an existing object pointer as a BoatTrip (nil for 0).
+// BoatTripFromID adopts an existing Objective-C object as a BoatTrip
+// (nil for 0), retaining it and registering a release finalizer.
 func BoatTripFromID(id objc.ID) *BoatTrip {
 	if id == 0 {
 		return nil
 	}
-	return &BoatTrip{inner: raw.INBoatTripFromID(id)}
+	x := &BoatTrip{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a boat trip with the specified contents and attributes.
-//
-// NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation creates a new [BoatTrip].
-func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation(provider string, boatName string, boatNumber string, tripDuration *raw.INDateComponentsRange, departureBoatTerminalLocation *corelocation.CLPlacemark, arrivalBoatTerminalLocation *corelocation.CLPlacemark) *BoatTrip {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBoatTrip")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:boatName:boatNumber:tripDuration:departureBoatTerminalLocation:arrivalBoatTerminalLocation:"), foundation.NSStringStringWithUTF8String(provider).Ptr(), foundation.NSStringStringWithUTF8String(boatName).Ptr(), foundation.NSStringStringWithUTF8String(boatNumber).Ptr(), tripDuration.Ptr(), departureBoatTerminalLocation.Ptr(), arrivalBoatTerminalLocation.Ptr())
-	return &BoatTrip{inner: raw.INBoatTripFromID(_id)}
-}
-
-// Provider calls the underlying Provider.
-func (x *BoatTrip) Provider() string {
-	_r := x.inner.Provider()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// BoatName calls the underlying BoatName.
-func (x *BoatTrip) BoatName() string {
-	_r := x.inner.BoatName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// BoatNumber calls the underlying BoatNumber.
-func (x *BoatTrip) BoatNumber() string {
-	_r := x.inner.BoatNumber()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// TripDuration calls the underlying TripDuration.
-func (x *BoatTrip) TripDuration() *DateComponentsRange {
-	_r := x.inner.TripDuration()
-	if _r == nil {
+// boatTripAdopt wraps an Objective-C object that this code just created as a
+// BoatTrip (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func boatTripAdopt(id objc.ID) *BoatTrip {
+	if id == 0 {
 		return nil
 	}
-	return &DateComponentsRange{inner: _r}
+	x := &BoatTrip{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DepartureBoatTerminalLocation calls the underlying DepartureBoatTerminalLocation.
-func (x *BoatTrip) DepartureBoatTerminalLocation() *corelocation.CLPlacemark {
-	return x.inner.DepartureBoatTerminalLocation()
+// Description returns the object's -description text.
+func (x *BoatTrip) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ArrivalBoatTerminalLocation calls the underlying ArrivalBoatTerminalLocation.
-func (x *BoatTrip) ArrivalBoatTerminalLocation() *corelocation.CLPlacemark {
-	return x.inner.ArrivalBoatTerminalLocation()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BoatTrip) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BoatTrip) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BoatTrip) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation creates a boat trip with the specified contents and attributes.
+func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation(provider string, boatName string, boatNumber string, tripDuration *DateComponentsRange, departureBoatTerminalLocation obj.Object, arrivalBoatTerminalLocation obj.Object) *BoatTrip {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INBoatTrip")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:boatName:boatNumber:tripDuration:departureBoatTerminalLocation:arrivalBoatTerminalLocation:"), purego.NSString(provider), purego.NSString(boatName), purego.NSString(boatNumber), objref.IDOf(tripDuration), objref.IDOf(departureBoatTerminalLocation), objref.IDOf(arrivalBoatTerminalLocation))
+	return boatTripAdopt(_id)
+}
+
+// Provider wraps the corresponding Objective-C method.
+func (x *BoatTrip) Provider() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// BoatName wraps the corresponding Objective-C method.
+func (x *BoatTrip) BoatName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// BoatNumber wraps the corresponding Objective-C method.
+func (x *BoatTrip) BoatNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatNumber"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// TripDuration wraps the corresponding Objective-C method.
+func (x *BoatTrip) TripDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
+	return DateComponentsRangeFromID(_r)
+}
+
+// DepartureBoatTerminalLocation wraps the corresponding Objective-C method.
+func (x *BoatTrip) DepartureBoatTerminalLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureBoatTerminalLocation"))
+	return obj.Wrap(_r)
+}
+
+// ArrivalBoatTerminalLocation wraps the corresponding Objective-C method.
+func (x *BoatTrip) ArrivalBoatTerminalLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalBoatTerminalLocation"))
+	return obj.Wrap(_r)
 }
 
 // BoatTripable is the interface implemented by [BoatTrip], for mocking and DI.
 type BoatTripable interface {
-	Unwrap() *raw.INBoatTrip
+	obj.Object
 	Provider() string
 	BoatName() string
 	BoatNumber() string
 	TripDuration() *DateComponentsRange
-	DepartureBoatTerminalLocation() *corelocation.CLPlacemark
-	ArrivalBoatTerminalLocation() *corelocation.CLPlacemark
+	DepartureBoatTerminalLocation() obj.Object
+	ArrivalBoatTerminalLocation() obj.Object
 }
 
 var _ BoatTripable = (*BoatTrip)(nil)

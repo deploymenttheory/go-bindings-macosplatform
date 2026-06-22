@@ -5,77 +5,54 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/ebitengine/purego/objc"
 )
 
-// BiometryRequirementWithFallback calls the underlying LAAuthenticationRequirementBiometryRequirementWithFallback.
-func BiometryRequirementWithFallback(fallback *raw.LABiometryFallbackRequirement) *AuthenticationRequirement {
-	_r := raw.LAAuthenticationRequirementBiometryRequirementWithFallback(fallback)
-	if _r == nil {
-		return nil
-	}
-	return &AuthenticationRequirement{inner: _r}
+// BiometryRequirementWithFallback creates a requirement that requires biometric authentication or a fallback requirement that you specify.
+func BiometryRequirementWithFallback(fallback *BiometryFallbackRequirement) *AuthenticationRequirement {
+	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryRequirementWithFallback:"), objref.IDOf(fallback))
+	return AuthenticationRequirementFromID(_r)
 }
 
-// DefaultRequirement calls the underlying LAAuthenticationRequirementDefaultRequirement.
+// DefaultRequirement requires user authentication
 func DefaultRequirement() *AuthenticationRequirement {
-	_r := raw.LAAuthenticationRequirementDefaultRequirement()
-	if _r == nil {
-		return nil
-	}
-	return &AuthenticationRequirement{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("defaultRequirement"))
+	return AuthenticationRequirementFromID(_r)
 }
 
-// BiometryRequirement calls the underlying LAAuthenticationRequirementBiometryRequirement.
+// BiometryRequirement requires biometric authentication The authorization will fail if:
 func BiometryRequirement() *AuthenticationRequirement {
-	_r := raw.LAAuthenticationRequirementBiometryRequirement()
-	if _r == nil {
-		return nil
-	}
-	return &AuthenticationRequirement{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryRequirement"))
+	return AuthenticationRequirementFromID(_r)
 }
 
-// BiometryCurrentSetRequirement calls the underlying LAAuthenticationRequirementBiometryCurrentSetRequirement.
+// BiometryCurrentSetRequirement requires user authentication with the current biometric set The authorization will fail if:
 func BiometryCurrentSetRequirement() *AuthenticationRequirement {
-	_r := raw.LAAuthenticationRequirementBiometryCurrentSetRequirement()
-	if _r == nil {
-		return nil
-	}
-	return &AuthenticationRequirement{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationRequirement")), objc.RegisterName("biometryCurrentSetRequirement"))
+	return AuthenticationRequirementFromID(_r)
 }
 
-// LABiometryFallbackRequirementDefaultRequirement calls the underlying LABiometryFallbackRequirementDefaultRequirement.
+// LABiometryFallbackRequirementDefaultRequirement use default biometric fallback
 func LABiometryFallbackRequirementDefaultRequirement() *BiometryFallbackRequirement {
-	_r := raw.LABiometryFallbackRequirementDefaultRequirement()
-	if _r == nil {
-		return nil
-	}
-	return &BiometryFallbackRequirement{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("defaultRequirement"))
+	return BiometryFallbackRequirementFromID(_r)
 }
 
-// DevicePasscodeRequirement calls the underlying LABiometryFallbackRequirementDevicePasscodeRequirement.
+// DevicePasscodeRequirement requires authorization using the device passcode
 func DevicePasscodeRequirement() *BiometryFallbackRequirement {
-	_r := raw.LABiometryFallbackRequirementDevicePasscodeRequirement()
-	if _r == nil {
-		return nil
-	}
-	return &BiometryFallbackRequirement{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("devicePasscodeRequirement"))
+	return BiometryFallbackRequirementFromID(_r)
 }
 
-// CurrentUser calls the underlying LAEnvironmentCurrentUser.
+// CurrentUser environment of the current user.
 func CurrentUser() *Environment {
-	_r := raw.LAEnvironmentCurrentUser()
-	if _r == nil {
-		return nil
-	}
-	return &Environment{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LAEnvironment")), objc.RegisterName("currentUser"))
+	return EnvironmentFromID(_r)
 }
 
-// SharedStore calls the underlying LARightStoreSharedStore.
+// SharedStore shared instance of
 func SharedStore() *RightStore {
-	_r := raw.LARightStoreSharedStore()
-	if _r == nil {
-		return nil
-	}
-	return &RightStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("LARightStore")), objc.RegisterName("sharedStore"))
+	return RightStoreFromID(_r)
 }

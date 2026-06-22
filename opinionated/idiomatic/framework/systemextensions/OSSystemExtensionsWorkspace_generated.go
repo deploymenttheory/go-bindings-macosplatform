@@ -5,55 +5,74 @@
 package systemextensions
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SystemExtensionsWorkspace wraps [raw.OSSystemExtensionsWorkspace] with a fluent Go API.
+// SystemExtensionsWorkspace is an idiomatic wrapper over the Objective-C class OSSystemExtensionsWorkspace.
 type SystemExtensionsWorkspace struct {
-	inner *raw.OSSystemExtensionsWorkspace
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSSystemExtensionsWorkspace].
-func (x *SystemExtensionsWorkspace) Unwrap() *raw.OSSystemExtensionsWorkspace { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SystemExtensionsWorkspace) ID() objc.ID { return x.inner.Ptr() }
-
-// SystemExtensionsWorkspaceFromID adopts an existing object pointer as a SystemExtensionsWorkspace (nil for 0).
+// SystemExtensionsWorkspaceFromID adopts an existing Objective-C object as a SystemExtensionsWorkspace
+// (nil for 0), retaining it and registering a release finalizer.
 func SystemExtensionsWorkspaceFromID(id objc.ID) *SystemExtensionsWorkspace {
 	if id == 0 {
 		return nil
 	}
-	return &SystemExtensionsWorkspace{inner: raw.OSSystemExtensionsWorkspaceFromID(id)}
+	x := &SystemExtensionsWorkspace{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSystemExtensionsWorkspace creates a new [SystemExtensionsWorkspace].
+// systemExtensionsWorkspaceAdopt wraps an Objective-C object that this code just created as a
+// SystemExtensionsWorkspace (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func systemExtensionsWorkspaceAdopt(id objc.ID) *SystemExtensionsWorkspace {
+	if id == 0 {
+		return nil
+	}
+	x := &SystemExtensionsWorkspace{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SystemExtensionsWorkspace) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SystemExtensionsWorkspace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SystemExtensionsWorkspace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SystemExtensionsWorkspace) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSystemExtensionsWorkspace creates a new SystemExtensionsWorkspace.
 func NewSystemExtensionsWorkspace() *SystemExtensionsWorkspace {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionsWorkspace")), objc.RegisterName("new"))
-	return &SystemExtensionsWorkspace{inner: raw.OSSystemExtensionsWorkspaceFromID(_id)}
-}
-
-// @brief Start observing changes to System Extension(s) which are enabled or ready to be enabled.
-//
-// AddObserverError calls the underlying AddObserverError.
-func (x *SystemExtensionsWorkspace) AddObserverError(observer raw.OSSystemExtensionsWorkspaceObserver) (bool, error) {
-	return x.inner.AddObserverError(observer)
-}
-
-// @brief Stop observing changes to System Extension(s).
-//
-// RemoveObserver calls the underlying RemoveObserver.
-func (x *SystemExtensionsWorkspace) RemoveObserver(observer raw.OSSystemExtensionsWorkspaceObserver) {
-	x.inner.RemoveObserver(observer)
+	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionsWorkspace")), objc.RegisterName("new"))
+	return systemExtensionsWorkspaceAdopt(_id)
 }
 
 // SystemExtensionsWorkspaceable is the interface implemented by [SystemExtensionsWorkspace], for mocking and DI.
 type SystemExtensionsWorkspaceable interface {
-	Unwrap() *raw.OSSystemExtensionsWorkspace
-	AddObserverError(observer raw.OSSystemExtensionsWorkspaceObserver) (bool, error)
-	RemoveObserver(observer raw.OSSystemExtensionsWorkspaceObserver)
+	obj.Object
 }
 
 var _ SystemExtensionsWorkspaceable = (*SystemExtensionsWorkspace)(nil)

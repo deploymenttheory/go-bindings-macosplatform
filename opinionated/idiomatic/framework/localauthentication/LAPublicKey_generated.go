@@ -6,135 +6,103 @@ package localauthentication
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The public portion of an asymmetric key pair.
+// PublicKey is an idiomatic wrapper over the Objective-C class LAPublicKey.
 //
-// PublicKey wraps [raw.LAPublicKey] with a fluent Go API.
+// The public portion of an asymmetric key pair.
 type PublicKey struct {
-	inner *raw.LAPublicKey
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAPublicKey].
-func (x *PublicKey) Unwrap() *raw.LAPublicKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PublicKey) ID() objc.ID { return x.inner.Ptr() }
-
-// PublicKeyFromID adopts an existing object pointer as a PublicKey (nil for 0).
+// PublicKeyFromID adopts an existing Objective-C object as a PublicKey
+// (nil for 0), retaining it and registering a release finalizer.
 func PublicKeyFromID(id objc.ID) *PublicKey {
 	if id == 0 {
 		return nil
 	}
-	return &PublicKey{inner: raw.LAPublicKeyFromID(id)}
+	x := &PublicKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPublicKey creates a new [PublicKey].
+// publicKeyAdopt wraps an Objective-C object that this code just created as a
+// PublicKey (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func publicKeyAdopt(id objc.ID) *PublicKey {
+	if id == 0 {
+		return nil
+	}
+	x := &PublicKey{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PublicKey) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PublicKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PublicKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PublicKey) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPublicKey creates a new PublicKey.
 func NewPublicKey() *PublicKey {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAPublicKey")), objc.RegisterName("new"))
-	return &PublicKey{inner: raw.LAPublicKeyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAPublicKey")), objc.RegisterName("new"))
+	return publicKeyAdopt(_id)
 }
 
-// Exports the data that represents a public key.
+// ExportBytesWithCompletion exports the data that represents a public key.
 //
 // ExportBytesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ExportBytesWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportBytesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
-}
-
-// Encrypts the data you supply with a given algorithm.
-//
-// EncryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error) {
-	type _result struct {
-		val *foundation.NSData
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.EncryptDataSecKeyAlgorithmCompletion(data, algorithm, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *foundation.NSData
-		return _zero, ctx.Err()
-	}
-}
-
-// Checks whether the algorithm you supply is valid for encrypting data with the key.
-//
-// CanEncryptUsingSecKeyAlgorithm calls the underlying CanEncryptUsingSecKeyAlgorithm.
-func (x *PublicKey) CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.CanEncryptUsingSecKeyAlgorithm(algorithm)
-}
-
-// Verifies a digital signature for the data you supply.
-//
-// VerifyDataSignatureSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Context, signedData *foundation.NSData, signature *foundation.NSData, algorithm unsafe.Pointer) error {
-	_ch := make(chan error, 1)
-	x.inner.VerifyDataSignatureSecKeyAlgorithmCompletion(signedData, signature, algorithm, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// Checks whether the algorithm you supply is valid for verifying signatures with the key.
-//
-// CanVerifyUsingSecKeyAlgorithm calls the underlying CanVerifyUsingSecKeyAlgorithm.
-func (x *PublicKey) CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.CanVerifyUsingSecKeyAlgorithm(algorithm)
 }
 
 // PublicKeyable is the interface implemented by [PublicKey], for mocking and DI.
 type PublicKeyable interface {
-	Unwrap() *raw.LAPublicKey
-	ExportBytesWithCompletion(ctx context.Context) (*foundation.NSData, error)
-	EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error)
-	CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool
-	VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Context, signedData *foundation.NSData, signature *foundation.NSData, algorithm unsafe.Pointer) error
-	CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool
+	obj.Object
+	ExportBytesWithCompletion(ctx context.Context) (obj.Object, error)
 }
 
 var _ PublicKeyable = (*PublicKey)(nil)

@@ -5,62 +5,89 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A rule for filters that combines a rule to match network traffic and an action to take when the rule matches.
+// NEFilterRule is an idiomatic wrapper over the Objective-C class NEFilterRule.
 //
-// NEFilterRule wraps [raw.NEFilterRule] with a fluent Go API.
+// A rule for filters that combines a rule to match network traffic and an action to take when the rule matches.
 type NEFilterRule struct {
-	inner *raw.NEFilterRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEFilterRule].
-func (x *NEFilterRule) Unwrap() *raw.NEFilterRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterRule) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterRuleFromID adopts an existing object pointer as a NEFilterRule (nil for 0).
+// NEFilterRuleFromID adopts an existing Objective-C object as a NEFilterRule
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterRule{inner: raw.NEFilterRuleFromID(id)}
+	x := &NEFilterRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new filter rule from a network rule and an action to take when network traffic matches.
-//
-// NewNEFilterRuleWithNetworkRuleAction creates a new [NEFilterRule].
-func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action NEFilterAction) *NEFilterRule {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkRule:action:"), networkRule.Ptr(), raw.NEFilterAction(action))
-	return &NEFilterRule{inner: raw.NEFilterRuleFromID(_id)}
-}
-
-// @property matchNetworkRule @discussion The NENetworkRule that defines the network traffic characteristics that this rule matches.
-//
-// NetworkRule calls the underlying NetworkRule.
-func (x *NEFilterRule) NetworkRule() *NENetworkRule {
-	_r := x.inner.NetworkRule()
-	if _r == nil {
+// nEFilterRuleAdopt wraps an Objective-C object that this code just created as a
+// NEFilterRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterRuleAdopt(id objc.ID) *NEFilterRule {
+	if id == 0 {
 		return nil
 	}
-	return &NENetworkRule{inner: _r}
+	x := &NEFilterRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property action @discussion The action to take when this rule matches network traffic.
-//
-// Action calls the underlying Action.
+// Description returns the object's -description text.
+func (x *NEFilterRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEFilterRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEFilterRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterRule) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEFilterRuleWithNetworkRuleAction creates a new filter rule from a network rule and an action to take when network traffic matches.
+func NewNEFilterRuleWithNetworkRuleAction(networkRule *NENetworkRule, action NEFilterAction) *NEFilterRule {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NEFilterRule")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkRule:action:"), objref.IDOf(networkRule), action)
+	return nEFilterRuleAdopt(_id)
+}
+
+// NetworkRule the NENetworkRule that defines the network traffic characteristics that this rule matches.
+func (x *NEFilterRule) NetworkRule() *NENetworkRule {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkRule"))
+	return NENetworkRuleFromID(_r)
+}
+
+// Action the action to take when this rule matches network traffic.
 func (x *NEFilterRule) Action() NEFilterAction {
-	return NEFilterAction(x.inner.Action())
+	_r := objc.Send[NEFilterAction](objref.IDOf(x), objc.RegisterName("action"))
+	return _r
 }
 
 // NEFilterRuleable is the interface implemented by [NEFilterRule], for mocking and DI.
 type NEFilterRuleable interface {
-	Unwrap() *raw.NEFilterRule
+	obj.Object
 	NetworkRule() *NENetworkRule
 	Action() NEFilterAction
 }

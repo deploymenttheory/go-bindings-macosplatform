@@ -5,126 +5,124 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that manages the queue of scheduled asset downloads.
+// DownloadManager is an idiomatic wrapper over the Objective-C class BADownloadManager.
 //
-// DownloadManager wraps [raw.BADownloadManager] with a fluent Go API.
+// An object that manages the queue of scheduled asset downloads.
 type DownloadManager struct {
-	inner *raw.BADownloadManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BADownloadManager].
-func (x *DownloadManager) Unwrap() *raw.BADownloadManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DownloadManager) ID() objc.ID { return x.inner.Ptr() }
-
-// DownloadManagerFromID adopts an existing object pointer as a DownloadManager (nil for 0).
+// DownloadManagerFromID adopts an existing Objective-C object as a DownloadManager
+// (nil for 0), retaining it and registering a release finalizer.
 func DownloadManagerFromID(id objc.ID) *DownloadManager {
 	if id == 0 {
 		return nil
 	}
-	return &DownloadManager{inner: raw.BADownloadManagerFromID(id)}
-}
-
-// NewDownloadManager creates a new [DownloadManager].
-func NewDownloadManager() *DownloadManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BADownloadManager")), objc.RegisterName("new"))
-	return &DownloadManager{inner: raw.BADownloadManagerFromID(_id)}
-}
-
-// The download manager’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *DownloadManager) WithDelegate(delegate raw.BADownloadManagerDelegate) *DownloadManager {
-	x.inner.SetDelegate(delegate)
+	x := &DownloadManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @brief Fetches current downloads. @discussion Fetches the current list of scheduled or in-flight downloads queued by your application or extension. @param error An error representing why the downloads could not be fetched. @return On success, returns a list of scheduled or in-flight downloads. On failure, returns nil and sets @c error. @warning This method can block and should not be called from the main thread. @seealso BADownloadManager:fetchCurrentDownloadsWithCompletionHandler
+// downloadManagerAdopt wraps an Objective-C object that this code just created as a
+// DownloadManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func downloadManagerAdopt(id objc.ID) *DownloadManager {
+	if id == 0 {
+		return nil
+	}
+	x := &DownloadManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DownloadManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DownloadManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DownloadManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DownloadManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDownloadManager creates a new DownloadManager.
+func NewDownloadManager() *DownloadManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("BADownloadManager")), objc.RegisterName("new"))
+	return downloadManagerAdopt(_id)
+}
+
+// FetchCurrentDownloads fetches current downloads. Fetches the current list of scheduled or in-flight downloads queued by your application or extension.
 //
 // FetchCurrentDownloads returns the collection as a Go slice.
-func (x *DownloadManager) FetchCurrentDownloads() ([]*Download, error) {
-	arr, err := x.inner.FetchCurrentDownloads()
-	if err != nil {
-		return nil, err
+func (x *DownloadManager) FetchCurrentDownloads() (result []*Download, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchCurrentDownloads:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) }), nil
+}
+
+// ScheduleDownload schedules an asset download to execute in the background at a nonspecific time in the future.
+func (x *DownloadManager) ScheduleDownload(download *Download) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("scheduleDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Download {
-		return &Download{inner: raw.BADownloadFromID(purego.Retain(_id))}
-	}), nil
+	return nil
 }
 
-// Schedules an asset download to execute in the background at a nonspecific time in the future.
-//
-// ScheduleDownloadError calls the underlying ScheduleDownloadError.
-func (x *DownloadManager) ScheduleDownloadError(download *raw.BADownload) (bool, error) {
-	return x.inner.ScheduleDownloadError(download)
+// StartForegroundDownload schedules an asset download that executes immediately in the foreground.
+func (x *DownloadManager) StartForegroundDownload(download *Download) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startForegroundDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Attempts to acquire immediate, exclusive access to the download manager.
-//
-// PerformWithExclusiveControl calls the underlying PerformWithExclusiveControl.
-func (x *DownloadManager) PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer)) {
-	x.inner.PerformWithExclusiveControl(performHandler)
-}
-
-// @brief Acquires exclusive access to the BADownloadManager across the app and application extension. @discussion Acquires exclusive access to the BADownloadManager across the app and application extension. This ensures that your extension and app do not perform operations at the same time. Both the extension and app must use this API to ensure exclusive access. @param date A date by which you want exclusive control acquired. If you pass +[NSDate date], control will attempt to be acquired and if it can not be, it will fail instantly. @param performHandler A block that will be executed once exclusive control is acquired. If an error is non-nil then a problem occurred acquiring exclusive access.
-//
-// PerformWithExclusiveControlBeforeDatePerformHandler calls the underlying PerformWithExclusiveControlBeforeDatePerformHandler.
-func (x *DownloadManager) PerformWithExclusiveControlBeforeDatePerformHandler(date *foundation.NSDate, performHandler func(bool, unsafe.Pointer)) {
-	x.inner.PerformWithExclusiveControlBeforeDatePerformHandler(date, performHandler)
-}
-
-// Schedules an asset download that executes immediately in the foreground.
-//
-// StartForegroundDownloadError calls the underlying StartForegroundDownloadError.
-func (x *DownloadManager) StartForegroundDownloadError(download *raw.BADownload) (bool, error) {
-	return x.inner.StartForegroundDownloadError(download)
-}
-
-// Cancels an asset download.
-//
-// CancelDownloadError calls the underlying CancelDownloadError.
-func (x *DownloadManager) CancelDownloadError(download *raw.BADownload) (bool, error) {
-	return x.inner.CancelDownloadError(download)
-}
-
-// @brief A object confroming to BADownloadManagerDelegate to get notified when actions occur.
-//
-// Delegate calls the underlying Delegate.
-func (x *DownloadManager) Delegate() raw.BADownloadManagerDelegate {
-	return x.inner.Delegate()
-}
-
-// @brief A object confroming to BADownloadManagerDelegate to get notified when actions occur.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *DownloadManager) SetDelegate(delegate raw.BADownloadManagerDelegate) {
-	x.inner.SetDelegate(delegate)
+// CancelDownload cancels an asset download.
+func (x *DownloadManager) CancelDownload(download *Download) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelDownload:error:"), objref.IDOf(download), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // DownloadManagerable is the interface implemented by [DownloadManager], for mocking and DI.
 type DownloadManagerable interface {
-	Unwrap() *raw.BADownloadManager
-	WithDelegate(delegate raw.BADownloadManagerDelegate) *DownloadManager
+	obj.Object
 	FetchCurrentDownloads() ([]*Download, error)
-	ScheduleDownloadError(download *raw.BADownload) (bool, error)
-	PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer))
-	PerformWithExclusiveControlBeforeDatePerformHandler(date *foundation.NSDate, performHandler func(bool, unsafe.Pointer))
-	StartForegroundDownloadError(download *raw.BADownload) (bool, error)
-	CancelDownloadError(download *raw.BADownload) (bool, error)
-	Delegate() raw.BADownloadManagerDelegate
-	SetDelegate(delegate raw.BADownloadManagerDelegate)
+	ScheduleDownload(download *Download) error
+	StartForegroundDownload(download *Download) error
+	CancelDownload(download *Download) error
 }
 
 var _ DownloadManagerable = (*DownloadManager)(nil)

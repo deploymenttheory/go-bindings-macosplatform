@@ -4,357 +4,293 @@
 
 package audiotoolbox
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-)
-
-// AUChannelInfo is a type alias for the raw AUChannelInfo value-type struct.
-type AUChannelInfo = raw.AUChannelInfo
-
-// AUDependentParameter is a type alias for the raw AUDependentParameter value-type struct.
-type AUDependentParameter = raw.AUDependentParameter
-
-// AUDistanceAttenuationData is a type alias for the raw AUDistanceAttenuationData value-type struct.
-type AUDistanceAttenuationData = raw.AUDistanceAttenuationData
-
-// AUHostIdentifier is a type alias for the raw AUHostIdentifier value-type struct.
-type AUHostIdentifier = raw.AUHostIdentifier
-
-// AUHostVersionIdentifier is a type alias for the raw AUHostVersionIdentifier value-type struct.
-type AUHostVersionIdentifier = raw.AUHostVersionIdentifier
-
-// AUInputSamplesInOutputCallbackStruct is a type alias for the raw AUInputSamplesInOutputCallbackStruct value-type struct.
-type AUInputSamplesInOutputCallbackStruct = raw.AUInputSamplesInOutputCallbackStruct
-
-// AUMIDIEvent is a type alias for the raw AUMIDIEvent value-type struct.
-type AUMIDIEvent = raw.AUMIDIEvent
-
-// AUMIDIEventList is a type alias for the raw AUMIDIEventList value-type struct.
-type AUMIDIEventList = raw.AUMIDIEventList
-
-// AUMIDIOutputCallbackStruct is a type alias for the raw AUMIDIOutputCallbackStruct value-type struct.
-type AUMIDIOutputCallbackStruct = raw.AUMIDIOutputCallbackStruct
-
-// AUNodeInteraction is a type alias for the raw AUNodeInteraction value-type struct.
-type AUNodeInteraction = raw.AUNodeInteraction
-
-// AUNodeRenderCallback is a type alias for the raw AUNodeRenderCallback value-type struct.
-type AUNodeRenderCallback = raw.AUNodeRenderCallback
-
-// AUNumVersion is a type alias for the raw AUNumVersion value-type struct.
-type AUNumVersion = raw.AUNumVersion
-
-// AUParameterAutomationEvent is a type alias for the raw AUParameterAutomationEvent value-type struct.
-type AUParameterAutomationEvent = raw.AUParameterAutomationEvent
-
-// AUParameterEvent is a type alias for the raw AUParameterEvent value-type struct.
-type AUParameterEvent = raw.AUParameterEvent
-
-// AUParameterMIDIMapping is a type alias for the raw AUParameterMIDIMapping value-type struct.
-type AUParameterMIDIMapping = raw.AUParameterMIDIMapping
-
-// AUPreset is a type alias for the raw AUPreset value-type struct.
-type AUPreset = raw.AUPreset
-
-// AUPresetEvent is a type alias for the raw AUPresetEvent value-type struct.
-type AUPresetEvent = raw.AUPresetEvent
-
-// AURecordedParameterEvent is a type alias for the raw AURecordedParameterEvent value-type struct.
-type AURecordedParameterEvent = raw.AURecordedParameterEvent
-
-// AURenderCallbackStruct is a type alias for the raw AURenderCallbackStruct value-type struct.
-type AURenderCallbackStruct = raw.AURenderCallbackStruct
-
-// AURenderEventHeader is a type alias for the raw AURenderEventHeader value-type struct.
-type AURenderEventHeader = raw.AURenderEventHeader
-
-// AUSamplerBankPresetData is a type alias for the raw AUSamplerBankPresetData value-type struct.
-type AUSamplerBankPresetData = raw.AUSamplerBankPresetData
-
-// AUSamplerInstrumentData is a type alias for the raw AUSamplerInstrumentData value-type struct.
-type AUSamplerInstrumentData = raw.AUSamplerInstrumentData
-
-// AUVoiceIOOtherAudioDuckingConfiguration is a type alias for the raw AUVoiceIOOtherAudioDuckingConfiguration value-type struct.
-type AUVoiceIOOtherAudioDuckingConfiguration = raw.AUVoiceIOOtherAudioDuckingConfiguration
-
-// AudioBalanceFade is a type alias for the raw AudioBalanceFade value-type struct.
-type AudioBalanceFade = raw.AudioBalanceFade
-
-// AudioBytePacketTranslation is a type alias for the raw AudioBytePacketTranslation value-type struct.
-type AudioBytePacketTranslation = raw.AudioBytePacketTranslation
-
-// AudioCodecMagicCookieInfo is a type alias for the raw AudioCodecMagicCookieInfo value-type struct.
-type AudioCodecMagicCookieInfo = raw.AudioCodecMagicCookieInfo
-
-// AudioCodecPrimeInfo is a type alias for the raw AudioCodecPrimeInfo value-type struct.
-type AudioCodecPrimeInfo = raw.AudioCodecPrimeInfo
-
-// AudioComponentDescription is a type alias for the raw AudioComponentDescription value-type struct.
-type AudioComponentDescription = raw.AudioComponentDescription
-
-// AudioComponentPlugInInterface is a type alias for the raw AudioComponentPlugInInterface value-type struct.
-type AudioComponentPlugInInterface = raw.AudioComponentPlugInInterface
-
-// AudioConverterPrimeInfo is a type alias for the raw AudioConverterPrimeInfo value-type struct.
-type AudioConverterPrimeInfo = raw.AudioConverterPrimeInfo
-
-// AudioFileFDFTable is a type alias for the raw AudioFileFDFTable value-type struct.
-type AudioFileFDFTable = raw.AudioFileFDFTable
-
-// AudioFileFDFTableExtended is a type alias for the raw AudioFileFDFTableExtended value-type struct.
-type AudioFileFDFTableExtended = raw.AudioFileFDFTableExtended
-
-// AudioFileMarker is a type alias for the raw AudioFileMarker value-type struct.
-type AudioFileMarker = raw.AudioFileMarker
-
-// AudioFileMarkerList is a type alias for the raw AudioFileMarkerList value-type struct.
-type AudioFileMarkerList = raw.AudioFileMarkerList
-
-// AudioFilePacketTableInfo is a type alias for the raw AudioFilePacketTableInfo value-type struct.
-type AudioFilePacketTableInfo = raw.AudioFilePacketTableInfo
-
-// AudioFileRegion is a type alias for the raw AudioFileRegion value-type struct.
-type AudioFileRegion = raw.AudioFileRegion
-
-// AudioFileRegionList is a type alias for the raw AudioFileRegionList value-type struct.
-type AudioFileRegionList = raw.AudioFileRegionList
-
-// AudioFileTypeAndFormatID is a type alias for the raw AudioFileTypeAndFormatID value-type struct.
-type AudioFileTypeAndFormatID = raw.AudioFileTypeAndFormatID
-
-// AudioFile_SMPTE_Time is a type alias for the raw AudioFile_SMPTE_Time value-type struct.
-type AudioFile_SMPTE_Time = raw.AudioFile_SMPTE_Time
-
-// AudioFormatInfo is a type alias for the raw AudioFormatInfo value-type struct.
-type AudioFormatInfo = raw.AudioFormatInfo
-
-// AudioFramePacketTranslation is a type alias for the raw AudioFramePacketTranslation value-type struct.
-type AudioFramePacketTranslation = raw.AudioFramePacketTranslation
-
-// AudioIndependentPacketTranslation is a type alias for the raw AudioIndependentPacketTranslation value-type struct.
-type AudioIndependentPacketTranslation = raw.AudioIndependentPacketTranslation
-
-// AudioOutputUnitMIDICallbacks is a type alias for the raw AudioOutputUnitMIDICallbacks value-type struct.
-type AudioOutputUnitMIDICallbacks = raw.AudioOutputUnitMIDICallbacks
-
-// AudioOutputUnitStartAtTimeParams is a type alias for the raw AudioOutputUnitStartAtTimeParams value-type struct.
-type AudioOutputUnitStartAtTimeParams = raw.AudioOutputUnitStartAtTimeParams
-
-// AudioPacketDependencyInfoTranslation is a type alias for the raw AudioPacketDependencyInfoTranslation value-type struct.
-type AudioPacketDependencyInfoTranslation = raw.AudioPacketDependencyInfoTranslation
-
-// AudioPacketRangeByteCountTranslation is a type alias for the raw AudioPacketRangeByteCountTranslation value-type struct.
-type AudioPacketRangeByteCountTranslation = raw.AudioPacketRangeByteCountTranslation
-
-// AudioPacketRollDistanceTranslation is a type alias for the raw AudioPacketRollDistanceTranslation value-type struct.
-type AudioPacketRollDistanceTranslation = raw.AudioPacketRollDistanceTranslation
-
-// AudioPanningInfo is a type alias for the raw AudioPanningInfo value-type struct.
-type AudioPanningInfo = raw.AudioPanningInfo
-
-// AudioQueueBuffer is a type alias for the raw AudioQueueBuffer value-type struct.
-type AudioQueueBuffer = raw.AudioQueueBuffer
-
-// AudioQueueChannelAssignment is a type alias for the raw AudioQueueChannelAssignment value-type struct.
-type AudioQueueChannelAssignment = raw.AudioQueueChannelAssignment
-
-// AudioQueueLevelMeterState is a type alias for the raw AudioQueueLevelMeterState value-type struct.
-type AudioQueueLevelMeterState = raw.AudioQueueLevelMeterState
-
-// AudioQueueParameterEvent is a type alias for the raw AudioQueueParameterEvent value-type struct.
-type AudioQueueParameterEvent = raw.AudioQueueParameterEvent
-
-// AudioUnitCocoaViewInfo is a type alias for the raw AudioUnitCocoaViewInfo value-type struct.
-type AudioUnitCocoaViewInfo = raw.AudioUnitCocoaViewInfo
-
-// AudioUnitConnection is a type alias for the raw AudioUnitConnection value-type struct.
-type AudioUnitConnection = raw.AudioUnitConnection
-
-// AudioUnitEvent is a type alias for the raw AudioUnitEvent value-type struct.
-type AudioUnitEvent = raw.AudioUnitEvent
-
-// AudioUnitExternalBuffer is a type alias for the raw AudioUnitExternalBuffer value-type struct.
-type AudioUnitExternalBuffer = raw.AudioUnitExternalBuffer
-
-// AudioUnitFrequencyResponseBin is a type alias for the raw AudioUnitFrequencyResponseBin value-type struct.
-type AudioUnitFrequencyResponseBin = raw.AudioUnitFrequencyResponseBin
-
-// AudioUnitMIDIControlMapping is a type alias for the raw AudioUnitMIDIControlMapping value-type struct.
-type AudioUnitMIDIControlMapping = raw.AudioUnitMIDIControlMapping
-
-// AudioUnitMeterClipping is a type alias for the raw AudioUnitMeterClipping value-type struct.
-type AudioUnitMeterClipping = raw.AudioUnitMeterClipping
-
-// AudioUnitNodeConnection is a type alias for the raw AudioUnitNodeConnection value-type struct.
-type AudioUnitNodeConnection = raw.AudioUnitNodeConnection
-
-// AudioUnitOtherPluginDesc is a type alias for the raw AudioUnitOtherPluginDesc value-type struct.
-type AudioUnitOtherPluginDesc = raw.AudioUnitOtherPluginDesc
-
-// AudioUnitParameter is a type alias for the raw AudioUnitParameter value-type struct.
-type AudioUnitParameter = raw.AudioUnitParameter
-
-// AudioUnitParameterEvent is a type alias for the raw AudioUnitParameterEvent value-type struct.
-type AudioUnitParameterEvent = raw.AudioUnitParameterEvent
-
-// AudioUnitParameterHistoryInfo is a type alias for the raw AudioUnitParameterHistoryInfo value-type struct.
-type AudioUnitParameterHistoryInfo = raw.AudioUnitParameterHistoryInfo
-
-// AudioUnitParameterInfo is a type alias for the raw AudioUnitParameterInfo value-type struct.
-type AudioUnitParameterInfo = raw.AudioUnitParameterInfo
-
-// AudioUnitParameterNameInfo is a type alias for the raw AudioUnitParameterNameInfo value-type struct.
-type AudioUnitParameterNameInfo = raw.AudioUnitParameterNameInfo
-
-// AudioUnitParameterStringFromValue is a type alias for the raw AudioUnitParameterStringFromValue value-type struct.
-type AudioUnitParameterStringFromValue = raw.AudioUnitParameterStringFromValue
-
-// AudioUnitParameterValueFromString is a type alias for the raw AudioUnitParameterValueFromString value-type struct.
-type AudioUnitParameterValueFromString = raw.AudioUnitParameterValueFromString
-
-// AudioUnitParameterValueName is a type alias for the raw AudioUnitParameterValueName value-type struct.
-type AudioUnitParameterValueName = raw.AudioUnitParameterValueName
-
-// AudioUnitParameterValueTranslation is a type alias for the raw AudioUnitParameterValueTranslation value-type struct.
-type AudioUnitParameterValueTranslation = raw.AudioUnitParameterValueTranslation
-
-// AudioUnitPresetMAS_SettingData is a type alias for the raw AudioUnitPresetMAS_SettingData value-type struct.
-type AudioUnitPresetMAS_SettingData = raw.AudioUnitPresetMAS_SettingData
-
-// AudioUnitPresetMAS_Settings is a type alias for the raw AudioUnitPresetMAS_Settings value-type struct.
-type AudioUnitPresetMAS_Settings = raw.AudioUnitPresetMAS_Settings
-
-// AudioUnitProperty is a type alias for the raw AudioUnitProperty value-type struct.
-type AudioUnitProperty = raw.AudioUnitProperty
-
-// AudioUnitRenderContext is a type alias for the raw AudioUnitRenderContext value-type struct.
-type AudioUnitRenderContext = raw.AudioUnitRenderContext
-
-// CABarBeatTime is a type alias for the raw CABarBeatTime value-type struct.
-type CABarBeatTime = raw.CABarBeatTime
-
-// CAClockTime is a type alias for the raw CAClockTime value-type struct.
-type CAClockTime = raw.CAClockTime
-
-// CAFAudioDescription is a type alias for the raw CAFAudioDescription value-type struct.
-type CAFAudioDescription = raw.CAFAudioDescription
-
-// CAFAudioFormatListItem is a type alias for the raw CAFAudioFormatListItem value-type struct.
-type CAFAudioFormatListItem = raw.CAFAudioFormatListItem
-
-// CAFChunkHeader is a type alias for the raw CAFChunkHeader value-type struct.
-type CAFChunkHeader = raw.CAFChunkHeader
-
-// CAFDataChunk is a type alias for the raw CAFDataChunk value-type struct.
-type CAFDataChunk = raw.CAFDataChunk
-
-// CAFFileHeader is a type alias for the raw CAFFileHeader value-type struct.
-type CAFFileHeader = raw.CAFFileHeader
-
-// CAFInfoStrings is a type alias for the raw CAFInfoStrings value-type struct.
-type CAFInfoStrings = raw.CAFInfoStrings
-
-// CAFInstrumentChunk is a type alias for the raw CAFInstrumentChunk value-type struct.
-type CAFInstrumentChunk = raw.CAFInstrumentChunk
-
-// CAFMarker is a type alias for the raw CAFMarker value-type struct.
-type CAFMarker = raw.CAFMarker
-
-// CAFMarkerChunk is a type alias for the raw CAFMarkerChunk value-type struct.
-type CAFMarkerChunk = raw.CAFMarkerChunk
-
-// CAFOverviewChunk is a type alias for the raw CAFOverviewChunk value-type struct.
-type CAFOverviewChunk = raw.CAFOverviewChunk
-
-// CAFOverviewSample is a type alias for the raw CAFOverviewSample value-type struct.
-type CAFOverviewSample = raw.CAFOverviewSample
-
-// CAFPacketTableHeader is a type alias for the raw CAFPacketTableHeader value-type struct.
-type CAFPacketTableHeader = raw.CAFPacketTableHeader
-
-// CAFPeakChunk is a type alias for the raw CAFPeakChunk value-type struct.
-type CAFPeakChunk = raw.CAFPeakChunk
-
-// CAFPositionPeak is a type alias for the raw CAFPositionPeak value-type struct.
-type CAFPositionPeak = raw.CAFPositionPeak
-
-// CAFRegion is a type alias for the raw CAFRegion value-type struct.
-type CAFRegion = raw.CAFRegion
-
-// CAFRegionChunk is a type alias for the raw CAFRegionChunk value-type struct.
-type CAFRegionChunk = raw.CAFRegionChunk
-
-// CAFStringID is a type alias for the raw CAFStringID value-type struct.
-type CAFStringID = raw.CAFStringID
-
-// CAFStrings is a type alias for the raw CAFStrings value-type struct.
-type CAFStrings = raw.CAFStrings
-
-// CAFUMIDChunk is a type alias for the raw CAFUMIDChunk value-type struct.
-type CAFUMIDChunk = raw.CAFUMIDChunk
-
-// CAF_SMPTE_Time is a type alias for the raw CAF_SMPTE_Time value-type struct.
-type CAF_SMPTE_Time = raw.CAF_SMPTE_Time
-
-// CAF_UUID_ChunkHeader is a type alias for the raw CAF_UUID_ChunkHeader value-type struct.
-type CAF_UUID_ChunkHeader = raw.CAF_UUID_ChunkHeader
-
-// CAMeterTrackEntry is a type alias for the raw CAMeterTrackEntry value-type struct.
-type CAMeterTrackEntry = raw.CAMeterTrackEntry
-
-// CATempoMapEntry is a type alias for the raw CATempoMapEntry value-type struct.
-type CATempoMapEntry = raw.CATempoMapEntry
-
-// ExtendedAudioFormatInfo is a type alias for the raw ExtendedAudioFormatInfo value-type struct.
-type ExtendedAudioFormatInfo = raw.ExtendedAudioFormatInfo
-
-// ExtendedControlEvent is a type alias for the raw ExtendedControlEvent value-type struct.
-type ExtendedControlEvent = raw.ExtendedControlEvent
-
-// ExtendedNoteOnEvent is a type alias for the raw ExtendedNoteOnEvent value-type struct.
-type ExtendedNoteOnEvent = raw.ExtendedNoteOnEvent
-
-// ExtendedTempoEvent is a type alias for the raw ExtendedTempoEvent value-type struct.
-type ExtendedTempoEvent = raw.ExtendedTempoEvent
-
-// HostCallbackInfo is a type alias for the raw HostCallbackInfo value-type struct.
-type HostCallbackInfo = raw.HostCallbackInfo
-
-// MIDIChannelMessage is a type alias for the raw MIDIChannelMessage value-type struct.
-type MIDIChannelMessage = raw.MIDIChannelMessage
-
-// MIDIMetaEvent is a type alias for the raw MIDIMetaEvent value-type struct.
-type MIDIMetaEvent = raw.MIDIMetaEvent
-
-// MIDINoteMessage is a type alias for the raw MIDINoteMessage value-type struct.
-type MIDINoteMessage = raw.MIDINoteMessage
-
-// MIDIRawData is a type alias for the raw MIDIRawData value-type struct.
-type MIDIRawData = raw.MIDIRawData
-
-// MixerDistanceParams is a type alias for the raw MixerDistanceParams value-type struct.
-type MixerDistanceParams = raw.MixerDistanceParams
-
-// MusicDeviceNoteParams is a type alias for the raw MusicDeviceNoteParams value-type struct.
-type MusicDeviceNoteParams = raw.MusicDeviceNoteParams
-
-// MusicDeviceStdNoteParams is a type alias for the raw MusicDeviceStdNoteParams value-type struct.
-type MusicDeviceStdNoteParams = raw.MusicDeviceStdNoteParams
-
-// MusicEventUserData is a type alias for the raw MusicEventUserData value-type struct.
-type MusicEventUserData = raw.MusicEventUserData
-
-// MusicTrackLoopInfo is a type alias for the raw MusicTrackLoopInfo value-type struct.
-type MusicTrackLoopInfo = raw.MusicTrackLoopInfo
-
-// NoteParamsControlValue is a type alias for the raw NoteParamsControlValue value-type struct.
-type NoteParamsControlValue = raw.NoteParamsControlValue
-
-// ParameterEvent is a type alias for the raw ParameterEvent value-type struct.
-type ParameterEvent = raw.ParameterEvent
-
-// ScheduledAudioFileRegion is a type alias for the raw ScheduledAudioFileRegion value-type struct.
-type ScheduledAudioFileRegion = raw.ScheduledAudioFileRegion
-
-// ScheduledAudioSlice is a type alias for the raw ScheduledAudioSlice value-type struct.
-type ScheduledAudioSlice = raw.ScheduledAudioSlice
+// The audio input and output channel capabilities for an audio unit.
+type AUChannelInfo struct {
+	InChannels  int16
+	OutChannels int16
+}
+
+// An audio unit parameter whose value can change in response to a change in its parent metaparameter.
+type AUDependentParameter struct {
+	MScope       uint
+	MParameterID uint
+}
+
+type AUNumVersion struct {
+	NonRelRev      uint8
+	Stage          uint8
+	MinorAndBugRev uint8
+	MajorRev       uint8
+}
+
+// An event recording the changing of a parameter at a particular host time.
+type AURecordedParameterEvent struct {
+	HostTime uint64
+	Address  uint64
+	Value    float32
+}
+
+// A structure specifying the number of leading and trailing empty frames to be inserted.
+type AudioCodecPrimeInfo struct {
+	LeadingFrames  uint
+	TrailingFrames uint
+}
+
+// Identifying information for an audio component.
+type AudioComponentDescription struct {
+	ComponentType         uint
+	ComponentSubType      uint
+	ComponentManufacturer uint
+	ComponentFlags        uint
+	ComponentFlagsMask    uint
+}
+
+// Specifies priming information for an audio converter.
+type AudioConverterPrimeInfo struct {
+	LeadingFrames  uint
+	TrailingFrames uint
+}
+
+// Contains information about the number of valid frames in a file and where they begin and end.
+type AudioFilePacketTableInfo struct {
+	MNumberValidFrames int64
+	MPrimingFrames     int
+	MRemainderFrames   int
+}
+
+// A specifier for the constantkAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat.
+type AudioFileTypeAndFormatID struct {
+	MFileType uint
+	MFormatID uint
+}
+
+// A data structure for describing SMPTE (Society of Motion Picture and Television Engineers) time.
+type AudioFile_SMPTE_Time struct {
+	MHours                int8
+	MMinutes              uint8
+	MSeconds              uint8
+	MFrames               uint8
+	MSubFrameSampleOffset uint
+}
+
+// A structure that specifies frame and packet translations.
+type AudioFramePacketTranslation struct {
+	MFrame               int64
+	MPacket              int64
+	MFrameOffsetInPacket uint
+}
+
+// used for property kAudioFilePropertyPreviousIndependentPacket and kAudioFilePropertyNextIndependentPacket See descriptions of kAudioFilePropertyPreviousIndependentPacket and kAudioFilePropertyNextIndependentPacket
+type AudioIndependentPacketTranslation struct {
+	MPacket                       int64
+	MIndependentlyDecodablePacket int64
+}
+
+// used for property kAudioFilePropertyPacketToDependencyInfo See descriptions of kAudioFilePropertyPacketToDependencyInfo and kAudioFilePropertyRestrictsRandomAccess
+type AudioPacketDependencyInfoTranslation struct {
+	MPacket                   int64
+	MIsIndependentlyDecodable uint
+	MNumberPrerollPackets     uint
+}
+
+// used for property kAudioFilePropertyPacketRangeByteCountUpperBound See description of kAudioFilePropertyPacketRangeByteCountUpperBound
+type AudioPacketRangeByteCountTranslation struct {
+	MPacket              int64
+	MPacketCount         int64
+	MByteCountUpperBound int64
+}
+
+// used for property kAudioFilePropertyPacketToRollDistance See descriptions of kAudioFilePropertyPacketToRollDistance and kAudioFilePropertyRestrictsRandomAccess
+type AudioPacketRollDistanceTranslation struct {
+	MPacket       int64
+	MRollDistance int64
+}
+
+// Specifies the current level metering information for one channel of an audio queue.
+type AudioQueueLevelMeterState struct {
+	MAveragePower float32
+	MPeakPower    float32
+}
+
+// Specifies an audio queue parameter and associated value.
+type AudioQueueParameterEvent struct {
+	MID    uint
+	MValue float32
+}
+
+// An audio unit’s audio level at a particular frequency.
+type AudioUnitFrequencyResponseBin struct {
+	MFrequency float64
+	MMagnitude float64
+}
+
+type AudioUnitMIDIControlMapping struct {
+	MidiNRPN    uint16
+	MidiControl uint8
+	Scope       uint8
+	Element     uint
+	Parameter   uint
+}
+
+// Audio clipping that has occurred in a mixer unit.
+type AudioUnitMeterClipping struct {
+	PeakValueSinceLastCall float32
+	SawInfinity            uint8
+	SawNotANumber          uint8
+}
+
+// A connection between two node objects in an audio processing graph.
+type AudioUnitNodeConnection struct {
+	SourceNode         int
+	SourceOutputNumber uint
+	DestNode           int
+	DestInputNumber    uint
+}
+
+// The suggested update rate and history duration for parameters which have the kAudioUnitParameterFlag_PlotHistory flag set.
+type AudioUnitParameterHistoryInfo struct {
+	UpdatesPerSecond         float32
+	HistoryDurationInSeconds float32
+}
+
+// A display representation of a musical time in beats. A clock's internal representation of musical time is in beats based on the beginning of the timeline. Normally, such times should be displayed to the user in terms of bars, beats, and subbeats (sometimes called "units" or "parts per quarter" [PPQ]). This data structure is such a display representation. By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat of the measure. In 4/4 time, beat will have a value from 1 to 4. Music applications often use beat divisions such as 480 and 960.
+type CABarBeatTime struct {
+	Bar            int
+	Beat           uint16
+	Subbeat        uint16
+	SubbeatDivisor uint16
+	Reserved       uint16
+}
+
+type CAFChunkHeader struct {
+	MChunkType uint
+	MChunkSize int64
+}
+
+type CAFFileHeader struct {
+	MFileType    uint
+	MFileVersion uint16
+	MFileFlags   uint16
+}
+
+type CAFInfoStrings struct {
+	MNumEntries uint
+}
+
+type CAFInstrumentChunk struct {
+	MBaseNote         float32
+	MMIDILowNote      uint8
+	MMIDIHighNote     uint8
+	MMIDILowVelocity  uint8
+	MMIDIHighVelocity uint8
+	MdBGain           float32
+	MStartRegionID    uint
+	MSustainRegionID  uint
+	MReleaseRegionID  uint
+	MInstrumentID     uint
+}
+
+type CAFMarker struct {
+	MType          uint
+	MFramePosition float64
+	MMarkerID      uint
+	MSMPTETime     CAF_SMPTE_Time
+	MChannel       uint
+}
+
+type CAFOverviewSample struct {
+	MMinValue int16
+	MMaxValue int16
+}
+
+type CAFPositionPeak struct {
+	MValue       float32
+	MFrameNumber uint64
+}
+
+type CAFStringID struct {
+	MStringID              uint
+	MStringStartByteOffset int64
+}
+
+type CAF_SMPTE_Time struct {
+	MHours                int8
+	MMinutes              int8
+	MSeconds              int8
+	MFrames               int8
+	MSubFrameSampleOffset uint
+}
+
+// A time signature change event. The meter track is used for converting between beats as floating-point numbers (CAClockBeats) and their display representations (CABarBeatTime).
+type CAMeterTrackEntry struct {
+	Beats      float64
+	MeterNumer uint16
+	MeterDenom uint16
+}
+
+// A tempo change event. The clock's tempo map defines the correspondence between seconds and musical beats, and is used in conversions between the two.
+type CATempoMapEntry struct {
+	Beats    float64
+	TempoBPM float64
+}
+
+type ExtendedControlEvent struct {
+	GroupID   uint
+	ControlID uint
+	Value     float32
+}
+
+// Describes a music track tempo in beats-per-minute.
+type ExtendedTempoEvent struct {
+	Bpm float64
+}
+
+// Describes a MIDI channel message.
+type MIDIChannelMessage struct {
+	Status   uint8
+	Data1    uint8
+	Data2    uint8
+	Reserved uint8
+}
+
+// Describes a MIDI note.
+type MIDINoteMessage struct {
+	Channel         uint8
+	Note            uint8
+	Velocity        uint8
+	ReleaseVelocity uint8
+	Duration        float32
+}
+
+type MixerDistanceParams struct {
+	MReferenceDistance float32
+	MMaxDistance       float32
+	MMaxAttenuation    float32
+}
+
+// convenience struct for specifying a note and velocity This struct is the common usage for MusicDeviceStartNote, as most synths that implement this functionality will only allow for the specification of a note number and velocity when starting a new note.
+type MusicDeviceStdNoteParams struct {
+	ArgCount  uint
+	MPitch    float32
+	MVelocity float32
+}
+
+// Supports control of the looping behavior of a music track.
+type MusicTrackLoopInfo struct {
+	LoopDuration  float64
+	NumberOfLoops int
+}
+
+// used to describe a control and value This struct is used to describe a parameterID (a control in MIDI terminology, though it is not limited to MIDI CC specifications) and the value of this parameter.
+type NoteParamsControlValue struct {
+	MID    uint
+	MValue float32
+}
+
+// Describes an audio unit parameter automation event.
+type ParameterEvent struct {
+	ParameterID uint
+	Scope       uint
+	Element     uint
+	Value       float32
+}

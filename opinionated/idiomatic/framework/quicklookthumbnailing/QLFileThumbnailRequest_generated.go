@@ -5,75 +5,105 @@
 package quicklookthumbnailing
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to generate a thumbnail for a custom file type.
+// FileThumbnailRequest is an idiomatic wrapper over the Objective-C class QLFileThumbnailRequest.
 //
-// FileThumbnailRequest wraps [raw.QLFileThumbnailRequest] with a fluent Go API.
+// A request to generate a thumbnail for a custom file type.
 type FileThumbnailRequest struct {
-	inner *raw.QLFileThumbnailRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLFileThumbnailRequest].
-func (x *FileThumbnailRequest) Unwrap() *raw.QLFileThumbnailRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileThumbnailRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FileThumbnailRequestFromID adopts an existing object pointer as a FileThumbnailRequest (nil for 0).
+// FileThumbnailRequestFromID adopts an existing Objective-C object as a FileThumbnailRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FileThumbnailRequestFromID(id objc.ID) *FileThumbnailRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FileThumbnailRequest{inner: raw.QLFileThumbnailRequestFromID(id)}
+	x := &FileThumbnailRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFileThumbnailRequest creates a new [FileThumbnailRequest].
+// fileThumbnailRequestAdopt wraps an Objective-C object that this code just created as a
+// FileThumbnailRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileThumbnailRequestAdopt(id objc.ID) *FileThumbnailRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &FileThumbnailRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileThumbnailRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileThumbnailRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileThumbnailRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileThumbnailRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileThumbnailRequest creates a new FileThumbnailRequest.
 func NewFileThumbnailRequest() *FileThumbnailRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLFileThumbnailRequest")), objc.RegisterName("new"))
-	return &FileThumbnailRequest{inner: raw.QLFileThumbnailRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QLFileThumbnailRequest")), objc.RegisterName("new"))
+	return fileThumbnailRequestAdopt(_id)
 }
 
-// The maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
-//
-// MaximumSize calls the underlying MaximumSize.
+// MaximumSize the maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
 func (x *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
-	return x.inner.MaximumSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumSize"))
+	return _r
 }
 
-// The minimum size of the generated thumbnail that will be accepted.
-//
-// MinimumSize calls the underlying MinimumSize.
+// MinimumSize the minimum size of the generated thumbnail that will be accepted.
 func (x *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
-	return x.inner.MinimumSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minimumSize"))
+	return _r
 }
 
-// The scale of the requested thumbnail.
-//
-// Scale calls the underlying Scale.
+// Scale the scale of the requested thumbnail.
 func (x *FileThumbnailRequest) Scale() float64 {
-	return x.inner.Scale()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
+	return _r
 }
 
-// The url of the file for which a thumbnail is being requested.
-//
-// FileURL calls the underlying FileURL.
-func (x *FileThumbnailRequest) FileURL() *foundation.NSURL {
-	return x.inner.FileURL()
+// FileURL the url of the file for which a thumbnail is being requested.
+func (x *FileThumbnailRequest) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+	return obj.Wrap(_r)
 }
 
 // FileThumbnailRequestable is the interface implemented by [FileThumbnailRequest], for mocking and DI.
 type FileThumbnailRequestable interface {
-	Unwrap() *raw.QLFileThumbnailRequest
+	obj.Object
 	MaximumSize() corefoundation.CGSize
 	MinimumSize() corefoundation.CGSize
 	Scale() float64
-	FileURL() *foundation.NSURL
+	FileURL() obj.Object
 }
 
 var _ FileThumbnailRequestable = (*FileThumbnailRequest)(nil)

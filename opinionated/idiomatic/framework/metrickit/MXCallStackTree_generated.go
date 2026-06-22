@@ -5,50 +5,83 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing the call stack for an exception.
+// CallStackTree is an idiomatic wrapper over the Objective-C class MXCallStackTree.
 //
-// CallStackTree wraps [raw.MXCallStackTree] with a fluent Go API.
+// An object representing the call stack for an exception.
 type CallStackTree struct {
-	inner *raw.MXCallStackTree
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXCallStackTree].
-func (x *CallStackTree) Unwrap() *raw.MXCallStackTree { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CallStackTree) ID() objc.ID { return x.inner.Ptr() }
-
-// CallStackTreeFromID adopts an existing object pointer as a CallStackTree (nil for 0).
+// CallStackTreeFromID adopts an existing Objective-C object as a CallStackTree
+// (nil for 0), retaining it and registering a release finalizer.
 func CallStackTreeFromID(id objc.ID) *CallStackTree {
 	if id == 0 {
 		return nil
 	}
-	return &CallStackTree{inner: raw.MXCallStackTreeFromID(id)}
+	x := &CallStackTree{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCallStackTree creates a new [CallStackTree].
+// callStackTreeAdopt wraps an Objective-C object that this code just created as a
+// CallStackTree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func callStackTreeAdopt(id objc.ID) *CallStackTree {
+	if id == 0 {
+		return nil
+	}
+	x := &CallStackTree{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CallStackTree) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CallStackTree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CallStackTree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CallStackTree) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCallStackTree creates a new CallStackTree.
 func NewCallStackTree() *CallStackTree {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXCallStackTree")), objc.RegisterName("new"))
-	return &CallStackTree{inner: raw.MXCallStackTreeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXCallStackTree")), objc.RegisterName("new"))
+	return callStackTreeAdopt(_id)
 }
 
-// Returns the contents of the stack tree in JSON format.
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *CallStackTree) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
+// JSONRepresentation returns the contents of the stack tree in JSON format.
+func (x *CallStackTree) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // CallStackTreeable is the interface implemented by [CallStackTree], for mocking and DI.
 type CallStackTreeable interface {
-	Unwrap() *raw.MXCallStackTree
-	JSONRepresentation() *foundation.NSData
+	obj.Object
+	JSONRepresentation() obj.Object
 }
 
 var _ CallStackTreeable = (*CallStackTree)(nil)

@@ -6,97 +6,130 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a file containing saved game data.
+// SavedGame is an idiomatic wrapper over the Objective-C class GKSavedGame.
 //
-// SavedGame wraps [raw.GKSavedGame] with a fluent Go API.
+// An object that represents a file containing saved game data.
 type SavedGame struct {
-	inner *raw.GKSavedGame
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKSavedGame].
-func (x *SavedGame) Unwrap() *raw.GKSavedGame { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SavedGame) ID() objc.ID { return x.inner.Ptr() }
-
-// SavedGameFromID adopts an existing object pointer as a SavedGame (nil for 0).
+// SavedGameFromID adopts an existing Objective-C object as a SavedGame
+// (nil for 0), retaining it and registering a release finalizer.
 func SavedGameFromID(id objc.ID) *SavedGame {
 	if id == 0 {
 		return nil
 	}
-	return &SavedGame{inner: raw.GKSavedGameFromID(id)}
+	x := &SavedGame{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSavedGame creates a new [SavedGame].
+// savedGameAdopt wraps an Objective-C object that this code just created as a
+// SavedGame (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func savedGameAdopt(id objc.ID) *SavedGame {
+	if id == 0 {
+		return nil
+	}
+	x := &SavedGame{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SavedGame) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SavedGame) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SavedGame) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SavedGame) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSavedGame creates a new SavedGame.
 func NewSavedGame() *SavedGame {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSavedGame")), objc.RegisterName("new"))
-	return &SavedGame{inner: raw.GKSavedGameFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKSavedGame")), objc.RegisterName("new"))
+	return savedGameAdopt(_id)
 }
 
-// Loads the game data from the file.
+// LoadData loads the game data from the file.
 //
 // LoadData blocks until the operation completes or ctx is cancelled.
-func (x *SavedGame) LoadData(ctx context.Context) (*foundation.NSData, error) {
+func (x *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadDataWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadDataWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *SavedGame) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DeviceName calls the underlying DeviceName.
+// DeviceName wraps the corresponding Objective-C method.
 func (x *SavedGame) DeviceName() string {
-	_r := x.inner.DeviceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ModificationDate calls the underlying ModificationDate.
-func (x *SavedGame) ModificationDate() *foundation.NSDate {
-	return x.inner.ModificationDate()
+// ModificationDate wraps the corresponding Objective-C method.
+func (x *SavedGame) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return obj.Wrap(_r)
 }
 
 // SavedGameable is the interface implemented by [SavedGame], for mocking and DI.
 type SavedGameable interface {
-	Unwrap() *raw.GKSavedGame
-	LoadData(ctx context.Context) (*foundation.NSData, error)
+	obj.Object
+	LoadData(ctx context.Context) (obj.Object, error)
 	Name() string
 	DeviceName() string
-	ModificationDate() *foundation.NSDate
+	ModificationDate() obj.Object
 }
 
 var _ SavedGameable = (*SavedGame)(nil)

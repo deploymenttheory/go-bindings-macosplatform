@@ -5,17 +5,32 @@
 package dictionaryservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/dictionaryservices"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DCSCopyTextDefinition calls [raw.DCSCopyTextDefinition] (C function DCSCopyTextDefinition).
-func DCSCopyTextDefinition(dictionary unsafe.Pointer, textString unsafe.Pointer, range_ corefoundation.CFRange) unsafe.Pointer {
-	return raw.DCSCopyTextDefinition(dictionary, textString, range_)
+var _fnDCSCopyTextDefinition func(objc.ID, objc.ID, corefoundation.CFRange) objc.ID
+
+// DCSCopyTextDefinition calls the DictionaryServices framework function DCSCopyTextDefinition.
+func DCSCopyTextDefinition(dictionary obj.Object, textString obj.Object, range_ corefoundation.CFRange) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDCSCopyTextDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnDCSCopyTextDefinition, _lib, "DCSCopyTextDefinition")
+	}
+	_ret := _fnDCSCopyTextDefinition(objref.IDOf(dictionary), objref.IDOf(textString), range_)
+	return obj.Wrap(_ret)
 }
 
-// DCSGetTermRangeInString calls [raw.DCSGetTermRangeInString] (C function DCSGetTermRangeInString).
-func DCSGetTermRangeInString(dictionary unsafe.Pointer, textString unsafe.Pointer, offset int) corefoundation.CFRange {
-	return raw.DCSGetTermRangeInString(dictionary, textString, offset)
+var _fnDCSGetTermRangeInString func(objc.ID, objc.ID, int) corefoundation.CFRange
+
+// DCSGetTermRangeInString calls the DictionaryServices framework function DCSGetTermRangeInString.
+func DCSGetTermRangeInString(dictionary obj.Object, textString obj.Object, offset int) corefoundation.CFRange {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDCSGetTermRangeInString == nil {
+		ebipurego.RegisterLibFunc(&_fnDCSGetTermRangeInString, _lib, "DCSGetTermRangeInString")
+	}
+	return _fnDCSGetTermRangeInString(objref.IDOf(dictionary), objref.IDOf(textString), offset)
 }

@@ -10,98 +10,104 @@ import (
 )
 
 // Error codes from CryptoTokenKit.
-type TKErrorCode int64
+type ErrorCode int64
 
 const (
-	TKErrorCodeNotImplemented       TKErrorCode = -1
-	TKErrorCodeCommunicationError   TKErrorCode = -2
-	TKErrorCodeCorruptedData        TKErrorCode = -3
-	TKErrorCodeCanceledByUser       TKErrorCode = -4
-	TKErrorCodeAuthenticationFailed TKErrorCode = -5
-	TKErrorCodeObjectNotFound       TKErrorCode = -6
-	TKErrorCodeTokenNotFound        TKErrorCode = -7
-	TKErrorCodeBadParameter         TKErrorCode = -8
-	TKErrorCodeAuthenticationNeeded TKErrorCode = -9
+	ErrorCodeNotImplemented       ErrorCode = -1
+	ErrorCodeCommunicationError   ErrorCode = -2
+	ErrorCodeCorruptedData        ErrorCode = -3
+	ErrorCodeCanceledByUser       ErrorCode = -4
+	ErrorCodeAuthenticationFailed ErrorCode = -5
+	ErrorCodeObjectNotFound       ErrorCode = -6
+	ErrorCodeTokenNotFound        ErrorCode = -7
+	ErrorCodeBadParameter         ErrorCode = -8
+	ErrorCodeAuthenticationNeeded ErrorCode = -9
 	// Deprecated: since macOS 10.11.
-	TKErrorAuthenticationFailed TKErrorCode = -5
+	ErrorAuthenticationFailed ErrorCode = -5
 	// Deprecated: since macOS 10.11.
-	TKErrorObjectNotFound TKErrorCode = -6
+	ErrorObjectNotFound ErrorCode = -6
 	// Deprecated: since macOS 10.11.
-	TKErrorTokenNotFound TKErrorCode = -7
+	ErrorTokenNotFound ErrorCode = -7
 )
 
-func (e TKErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case TKErrorCodeNotImplemented:
-		return "TKErrorCodeNotImplemented"
-	case TKErrorCodeCommunicationError:
-		return "TKErrorCodeCommunicationError"
-	case TKErrorCodeCorruptedData:
-		return "TKErrorCodeCorruptedData"
-	case TKErrorCodeCanceledByUser:
-		return "TKErrorCodeCanceledByUser"
-	case TKErrorCodeAuthenticationFailed:
-		return "TKErrorCodeAuthenticationFailed"
-	case TKErrorCodeObjectNotFound:
-		return "TKErrorCodeObjectNotFound"
-	case TKErrorCodeTokenNotFound:
-		return "TKErrorCodeTokenNotFound"
-	case TKErrorCodeBadParameter:
-		return "TKErrorCodeBadParameter"
-	case TKErrorCodeAuthenticationNeeded:
-		return "TKErrorCodeAuthenticationNeeded"
+	case ErrorCodeNotImplemented:
+		return "ErrorCodeNotImplemented"
+	case ErrorCodeCommunicationError:
+		return "ErrorCodeCommunicationError"
+	case ErrorCodeCorruptedData:
+		return "ErrorCodeCorruptedData"
+	case ErrorCodeCanceledByUser:
+		return "ErrorCodeCanceledByUser"
+	case ErrorCodeAuthenticationFailed:
+		return "ErrorCodeAuthenticationFailed"
+	case ErrorCodeObjectNotFound:
+		return "ErrorCodeObjectNotFound"
+	case ErrorCodeTokenNotFound:
+		return "ErrorCodeTokenNotFound"
+	case ErrorCodeBadParameter:
+		return "ErrorCodeBadParameter"
+	case ErrorCodeAuthenticationNeeded:
+		return "ErrorCodeAuthenticationNeeded"
 	default:
-		return fmt.Sprintf("TKErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Possible PIN character sets.
-type TKSmartCardPINCharset int64
+type SmartCardPINCharset int64
 
 const (
 	// PIN is only composed of digits.
-	TKSmartCardPINCharsetNumeric TKSmartCardPINCharset = 0
+	SmartCardPINCharsetNumeric SmartCardPINCharset = 0
 	// PIN can be composed of digits and letters.
-	TKSmartCardPINCharsetAlphanumeric TKSmartCardPINCharset = 1
+	SmartCardPINCharsetAlphanumeric SmartCardPINCharset = 1
 	// PIN can be composed of digits and uppercase letters.
-	TKSmartCardPINCharsetUpperAlphanumeric TKSmartCardPINCharset = 2
+	SmartCardPINCharsetUpperAlphanumeric SmartCardPINCharset = 2
 )
 
-func (e TKSmartCardPINCharset) String() string {
+// String returns the SmartCardPINCharset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardPINCharset) String() string {
 	switch e {
-	case TKSmartCardPINCharsetNumeric:
-		return "TKSmartCardPINCharsetNumeric"
-	case TKSmartCardPINCharsetAlphanumeric:
-		return "TKSmartCardPINCharsetAlphanumeric"
-	case TKSmartCardPINCharsetUpperAlphanumeric:
-		return "TKSmartCardPINCharsetUpperAlphanumeric"
+	case SmartCardPINCharsetNumeric:
+		return "SmartCardPINCharsetNumeric"
+	case SmartCardPINCharsetAlphanumeric:
+		return "SmartCardPINCharsetAlphanumeric"
+	case SmartCardPINCharsetUpperAlphanumeric:
+		return "SmartCardPINCharsetUpperAlphanumeric"
 	default:
-		return fmt.Sprintf("TKSmartCardPINCharset(%d)", int64(e))
+		return fmt.Sprintf("SmartCardPINCharset(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type TKSmartCardPINCompletion uint64
+type SmartCardPINCompletion uint64
 
 const (
 	// Completion by reaching the maximum PIN length.
-	TKSmartCardPINCompletionMaxLength TKSmartCardPINCompletion = 1
+	SmartCardPINCompletionMaxLength SmartCardPINCompletion = 1
 	// Completion by pressing the validation key.
-	TKSmartCardPINCompletionKey TKSmartCardPINCompletion = 2
+	SmartCardPINCompletionKey SmartCardPINCompletion = 2
 	// Completion by timeout expiration.
-	TKSmartCardPINCompletionTimeout TKSmartCardPINCompletion = 4
+	SmartCardPINCompletionTimeout SmartCardPINCompletion = 4
 )
 
-func (e TKSmartCardPINCompletion) String() string {
+// String returns the SmartCardPINCompletion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardPINCompletion) String() string {
 	var parts []string
-	if e&TKSmartCardPINCompletionMaxLength != 0 {
-		parts = append(parts, "TKSmartCardPINCompletionMaxLength")
+	if e&SmartCardPINCompletionMaxLength != 0 {
+		parts = append(parts, "SmartCardPINCompletionMaxLength")
 	}
-	if e&TKSmartCardPINCompletionKey != 0 {
-		parts = append(parts, "TKSmartCardPINCompletionKey")
+	if e&SmartCardPINCompletionKey != 0 {
+		parts = append(parts, "SmartCardPINCompletionKey")
 	}
-	if e&TKSmartCardPINCompletionTimeout != 0 {
-		parts = append(parts, "TKSmartCardPINCompletionTimeout")
+	if e&SmartCardPINCompletionTimeout != 0 {
+		parts = append(parts, "SmartCardPINCompletionTimeout")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -110,24 +116,26 @@ func (e TKSmartCardPINCompletion) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type TKSmartCardPINConfirmation uint64
+type SmartCardPINConfirmation uint64
 
 const (
 	// No confirmation requested.
-	TKSmartCardPINConfirmationNone TKSmartCardPINConfirmation = 0
+	SmartCardPINConfirmationNone SmartCardPINConfirmation = 0
 	// Confirmation (entry) of the new PIN requested.
-	TKSmartCardPINConfirmationNew TKSmartCardPINConfirmation = 1
+	SmartCardPINConfirmationNew SmartCardPINConfirmation = 1
 	// Confirmation (entry) of the current PIN requested.
-	TKSmartCardPINConfirmationCurrent TKSmartCardPINConfirmation = 2
+	SmartCardPINConfirmationCurrent SmartCardPINConfirmation = 2
 )
 
-func (e TKSmartCardPINConfirmation) String() string {
+// String returns the SmartCardPINConfirmation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardPINConfirmation) String() string {
 	var parts []string
-	if e&TKSmartCardPINConfirmationNew != 0 {
-		parts = append(parts, "TKSmartCardPINConfirmationNew")
+	if e&SmartCardPINConfirmationNew != 0 {
+		parts = append(parts, "SmartCardPINConfirmationNew")
 	}
-	if e&TKSmartCardPINConfirmationCurrent != 0 {
-		parts = append(parts, "TKSmartCardPINConfirmationCurrent")
+	if e&SmartCardPINConfirmationCurrent != 0 {
+		parts = append(parts, "SmartCardPINConfirmationCurrent")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -136,76 +144,82 @@ func (e TKSmartCardPINConfirmation) String() string {
 }
 
 // Possible PIN encoding types.
-type TKSmartCardPINEncoding int64
+type SmartCardPINEncoding int64
 
 const (
 	// Characters are encoded in Binary format (1234 => 01h 02h 03h 04h).
-	TKSmartCardPINEncodingBinary TKSmartCardPINEncoding = 0
+	SmartCardPINEncodingBinary SmartCardPINEncoding = 0
 	// Characters are encoded in ASCII format (1234 => 31h 32h 33h 34h).
-	TKSmartCardPINEncodingASCII TKSmartCardPINEncoding = 1
+	SmartCardPINEncodingASCII SmartCardPINEncoding = 1
 	// Characters (only digits) are encoded in BCD format (1234 => 12h 34h).
-	TKSmartCardPINEncodingBCD TKSmartCardPINEncoding = 2
+	SmartCardPINEncodingBCD SmartCardPINEncoding = 2
 )
 
-func (e TKSmartCardPINEncoding) String() string {
+// String returns the SmartCardPINEncoding constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardPINEncoding) String() string {
 	switch e {
-	case TKSmartCardPINEncodingBinary:
-		return "TKSmartCardPINEncodingBinary"
-	case TKSmartCardPINEncodingASCII:
-		return "TKSmartCardPINEncodingASCII"
-	case TKSmartCardPINEncodingBCD:
-		return "TKSmartCardPINEncodingBCD"
+	case SmartCardPINEncodingBinary:
+		return "SmartCardPINEncodingBinary"
+	case SmartCardPINEncodingASCII:
+		return "SmartCardPINEncodingASCII"
+	case SmartCardPINEncodingBCD:
+		return "SmartCardPINEncodingBCD"
 	default:
-		return fmt.Sprintf("TKSmartCardPINEncoding(%d)", int64(e))
+		return fmt.Sprintf("SmartCardPINEncoding(%d)", int64(e))
 	}
 }
 
 // Possible PIN justification types
-type TKSmartCardPINJustification int64
+type SmartCardPINJustification int64
 
 const (
 	// Justify to the left.
-	TKSmartCardPINJustificationLeft TKSmartCardPINJustification = 0
+	SmartCardPINJustificationLeft SmartCardPINJustification = 0
 	// Justify to the right.
-	TKSmartCardPINJustificationRight TKSmartCardPINJustification = 1
+	SmartCardPINJustificationRight SmartCardPINJustification = 1
 )
 
-func (e TKSmartCardPINJustification) String() string {
+// String returns the SmartCardPINJustification constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardPINJustification) String() string {
 	switch e {
-	case TKSmartCardPINJustificationLeft:
-		return "TKSmartCardPINJustificationLeft"
-	case TKSmartCardPINJustificationRight:
-		return "TKSmartCardPINJustificationRight"
+	case SmartCardPINJustificationLeft:
+		return "SmartCardPINJustificationLeft"
+	case SmartCardPINJustificationRight:
+		return "SmartCardPINJustificationRight"
 	default:
-		return fmt.Sprintf("TKSmartCardPINJustification(%d)", int64(e))
+		return fmt.Sprintf("SmartCardPINJustification(%d)", int64(e))
 	}
 }
 
 // Smart Card transmission protocols.
 // Bitmask — values may be combined with |.
-type TKSmartCardProtocol uint64
+type SmartCardProtocol uint64
 
 const (
-	TKSmartCardProtocolNone TKSmartCardProtocol = 0
-	TKSmartCardProtocolT0   TKSmartCardProtocol = 1
-	TKSmartCardProtocolT1   TKSmartCardProtocol = 2
-	TKSmartCardProtocolT15  TKSmartCardProtocol = 32768
-	TKSmartCardProtocolAny  TKSmartCardProtocol = 65535
+	SmartCardProtocolNone SmartCardProtocol = 0
+	SmartCardProtocolT0   SmartCardProtocol = 1
+	SmartCardProtocolT1   SmartCardProtocol = 2
+	SmartCardProtocolT15  SmartCardProtocol = 32768
+	SmartCardProtocolAny  SmartCardProtocol = 65535
 )
 
-func (e TKSmartCardProtocol) String() string {
+// String returns the SmartCardProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardProtocol) String() string {
 	var parts []string
-	if e&TKSmartCardProtocolT0 != 0 {
-		parts = append(parts, "TKSmartCardProtocolT0")
+	if e&SmartCardProtocolT0 != 0 {
+		parts = append(parts, "SmartCardProtocolT0")
 	}
-	if e&TKSmartCardProtocolT1 != 0 {
-		parts = append(parts, "TKSmartCardProtocolT1")
+	if e&SmartCardProtocolT1 != 0 {
+		parts = append(parts, "SmartCardProtocolT1")
 	}
-	if e&TKSmartCardProtocolT15 != 0 {
-		parts = append(parts, "TKSmartCardProtocolT15")
+	if e&SmartCardProtocolT15 != 0 {
+		parts = append(parts, "SmartCardProtocolT15")
 	}
-	if e&TKSmartCardProtocolAny != 0 {
-		parts = append(parts, "TKSmartCardProtocolAny")
+	if e&SmartCardProtocolAny != 0 {
+		parts = append(parts, "SmartCardProtocolAny")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -214,34 +228,36 @@ func (e TKSmartCardProtocol) String() string {
 }
 
 // All smart card slot states.
-type TKSmartCardSlotState int64
+type SmartCardSlotState int64
 
 const (
 	// Slot is no longer known to the system.  This is terminal state for TKSmartCardSlot instance, once reached, the slot instance can never be revived.
-	TKSmartCardSlotStateMissing TKSmartCardSlotState = 0
+	SmartCardSlotStateMissing SmartCardSlotState = 0
 	// The slot is empty, no card is inserted.
-	TKSmartCardSlotStateEmpty TKSmartCardSlotState = 1
+	SmartCardSlotStateEmpty SmartCardSlotState = 1
 	// The card was inserted into the slot and an initial probe is in progress.
-	TKSmartCardSlotStateProbing TKSmartCardSlotState = 2
+	SmartCardSlotStateProbing SmartCardSlotState = 2
 	// The card inserted in the slot does not answer.
-	TKSmartCardSlotStateMuteCard TKSmartCardSlotState = 3
+	SmartCardSlotStateMuteCard SmartCardSlotState = 3
 	// Card properly answered to reset.
-	TKSmartCardSlotStateValidCard TKSmartCardSlotState = 4
+	SmartCardSlotStateValidCard SmartCardSlotState = 4
 )
 
-func (e TKSmartCardSlotState) String() string {
+// String returns the SmartCardSlotState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SmartCardSlotState) String() string {
 	switch e {
-	case TKSmartCardSlotStateMissing:
-		return "TKSmartCardSlotStateMissing"
-	case TKSmartCardSlotStateEmpty:
-		return "TKSmartCardSlotStateEmpty"
-	case TKSmartCardSlotStateProbing:
-		return "TKSmartCardSlotStateProbing"
-	case TKSmartCardSlotStateMuteCard:
-		return "TKSmartCardSlotStateMuteCard"
-	case TKSmartCardSlotStateValidCard:
-		return "TKSmartCardSlotStateValidCard"
+	case SmartCardSlotStateMissing:
+		return "SmartCardSlotStateMissing"
+	case SmartCardSlotStateEmpty:
+		return "SmartCardSlotStateEmpty"
+	case SmartCardSlotStateProbing:
+		return "SmartCardSlotStateProbing"
+	case SmartCardSlotStateMuteCard:
+		return "SmartCardSlotStateMuteCard"
+	case SmartCardSlotStateValidCard:
+		return "SmartCardSlotStateValidCard"
 	default:
-		return fmt.Sprintf("TKSmartCardSlotState(%d)", int64(e))
+		return fmt.Sprintf("SmartCardSlotState(%d)", int64(e))
 	}
 }

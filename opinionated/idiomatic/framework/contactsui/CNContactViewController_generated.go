@@ -5,63 +5,96 @@
 package contactsui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contactsui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that displays a new, unknown, or existing contact.
+// ContactViewController is an idiomatic wrapper over the Objective-C class CNContactViewController.
 //
-// ContactViewController wraps [raw.CNContactViewController] with a fluent Go API.
+// A view controller that displays a new, unknown, or existing contact.
 type ContactViewController struct {
-	inner *raw.CNContactViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactViewController].
-func (x *ContactViewController) Unwrap() *raw.CNContactViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactViewControllerFromID adopts an existing object pointer as a ContactViewController (nil for 0).
+// ContactViewControllerFromID adopts an existing Objective-C object as a ContactViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactViewControllerFromID(id objc.ID) *ContactViewController {
 	if id == 0 {
 		return nil
 	}
-	return &ContactViewController{inner: raw.CNContactViewControllerFromID(id)}
-}
-
-// NewContactViewController creates a new [ContactViewController].
-func NewContactViewController() *ContactViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactViewController")), objc.RegisterName("new"))
-	return &ContactViewController{inner: raw.CNContactViewControllerFromID(_id)}
-}
-
-// The contact being displayed.
-//
-// WithContact sets the contact property and returns the receiver for chaining.
-func (x *ContactViewController) WithContact(contact *contacts.CNContact) *ContactViewController {
-	x.inner.SetContact(contact)
+	x := &ContactViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Contact calls the underlying Contact.
-func (x *ContactViewController) Contact() *contacts.CNContact {
-	return x.inner.Contact()
+// contactViewControllerAdopt wraps an Objective-C object that this code just created as a
+// ContactViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactViewControllerAdopt(id objc.ID) *ContactViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetContact calls the underlying SetContact.
-func (x *ContactViewController) SetContact(contact *contacts.CNContact) {
-	x.inner.SetContact(contact)
+// Description returns the object's -description text.
+func (x *ContactViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContactViewController creates a new ContactViewController.
+func NewContactViewController() *ContactViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactViewController")), objc.RegisterName("new"))
+	return contactViewControllerAdopt(_id)
+}
+
+// WithContact the contact being displayed.
+func (x *ContactViewController) WithContact(contact obj.Object) *ContactViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContact:"), objref.IDOf(contact))
+	return x
+}
+
+// Contact wraps the corresponding Objective-C method.
+func (x *ContactViewController) Contact() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+	return obj.Wrap(_r)
+}
+
+// SetContact wraps the corresponding Objective-C method.
+func (x *ContactViewController) SetContact(contact obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContact:"), objref.IDOf(contact))
 }
 
 // ContactViewControllerable is the interface implemented by [ContactViewController], for mocking and DI.
 type ContactViewControllerable interface {
-	Unwrap() *raw.CNContactViewController
-	WithContact(contact *contacts.CNContact) *ContactViewController
-	Contact() *contacts.CNContact
-	SetContact(contact *contacts.CNContact)
+	obj.Object
+	WithContact(contact obj.Object) *ContactViewController
+	Contact() obj.Object
+	SetContact(contact obj.Object)
 }
 
 var _ ContactViewControllerable = (*ContactViewController)(nil)

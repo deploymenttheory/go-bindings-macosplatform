@@ -5,91 +5,99 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A constraint that orients a node to always point toward the current camera.
+// BillboardConstraint is an idiomatic wrapper over the Objective-C class SCNBillboardConstraint.
 //
-// BillboardConstraint wraps [raw.SCNBillboardConstraint] with a fluent Go API.
+// It embeds [Constraint], promoting that type's methods.
+//
+// A constraint that orients a node to always point toward the current camera.
 type BillboardConstraint struct {
-	inner *raw.SCNBillboardConstraint
+	Constraint
 }
 
-// Unwrap returns the underlying [raw.SCNBillboardConstraint].
-func (x *BillboardConstraint) Unwrap() *raw.SCNBillboardConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BillboardConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// BillboardConstraintFromID adopts an existing object pointer as a BillboardConstraint (nil for 0).
+// BillboardConstraintFromID adopts an existing Objective-C object as a BillboardConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func BillboardConstraintFromID(id objc.ID) *BillboardConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &BillboardConstraint{inner: raw.SCNBillboardConstraintFromID(id)}
+	x := &BillboardConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBillboardConstraint creates a new [BillboardConstraint].
+// billboardConstraintAdopt wraps an Objective-C object that this code just created as a
+// BillboardConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func billboardConstraintAdopt(id objc.ID) *BillboardConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &BillboardConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBillboardConstraint creates a new BillboardConstraint.
 func NewBillboardConstraint() *BillboardConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNBillboardConstraint")), objc.RegisterName("new"))
-	return &BillboardConstraint{inner: raw.SCNBillboardConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNBillboardConstraint")), objc.RegisterName("new"))
+	return billboardConstraintAdopt(_id)
 }
 
-// An option that specifies which degrees of freedom the constraint affects.
-//
-// WithFreeAxes sets the freeAxes property and returns the receiver for chaining.
-func (x *BillboardConstraint) WithFreeAxes(freeAxes SCNBillboardAxis) *BillboardConstraint {
-	x.inner.SetFreeAxes(raw.SCNBillboardAxis(freeAxes))
+// WithFreeAxes an option that specifies which degrees of freedom the constraint affects.
+func (x *BillboardConstraint) WithFreeAxes(freeAxes BillboardAxis) *BillboardConstraint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeAxes:"), freeAxes)
 	return x
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
 func (x *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
 func (x *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// FreeAxes calls the underlying FreeAxes.
-func (x *BillboardConstraint) FreeAxes() SCNBillboardAxis {
-	return SCNBillboardAxis(x.inner.FreeAxes())
+// FreeAxes wraps the corresponding Objective-C method.
+func (x *BillboardConstraint) FreeAxes() BillboardAxis {
+	_r := objc.Send[BillboardAxis](objref.IDOf(x), objc.RegisterName("freeAxes"))
+	return _r
 }
 
-// SetFreeAxes calls the underlying SetFreeAxes.
-func (x *BillboardConstraint) SetFreeAxes(freeAxes SCNBillboardAxis) {
-	x.inner.SetFreeAxes(raw.SCNBillboardAxis(freeAxes))
+// SetFreeAxes wraps the corresponding Objective-C method.
+func (x *BillboardConstraint) SetFreeAxes(freeAxes BillboardAxis) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeAxes:"), freeAxes)
 }
-
-func (x *BillboardConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // BillboardConstraintable is the interface implemented by [BillboardConstraint], for mocking and DI.
 type BillboardConstraintable interface {
-	Unwrap() *raw.SCNBillboardConstraint
-	WithFreeAxes(freeAxes SCNBillboardAxis) *BillboardConstraint
+	obj.Object
+	WithFreeAxes(freeAxes BillboardAxis) *BillboardConstraint
 	WithEnabled(enabled bool) *BillboardConstraint
 	WithInfluenceFactor(influenceFactor float64) *BillboardConstraint
 	WithIncremental(incremental bool) *BillboardConstraint
-	FreeAxes() SCNBillboardAxis
-	SetFreeAxes(freeAxes SCNBillboardAxis)
+	FreeAxes() BillboardAxis
+	SetFreeAxes(freeAxes BillboardAxis)
 }
 
 var _ BillboardConstraintable = (*BillboardConstraint)(nil)
+
+var _ ConstraintProvider = (*BillboardConstraint)(nil)

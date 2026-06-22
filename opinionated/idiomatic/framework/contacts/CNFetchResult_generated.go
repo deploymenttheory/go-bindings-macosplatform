@@ -5,54 +5,90 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the result of a change-history fetch request.
+// FetchResult is an idiomatic wrapper over the Objective-C class CNFetchResult.
 //
-// FetchResult wraps [raw.CNFetchResult] with a fluent Go API.
+// An object that represents the result of a change-history fetch request.
 type FetchResult struct {
-	inner *raw.CNFetchResult[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNFetchResult].
-func (x *FetchResult) Unwrap() *raw.CNFetchResult[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchResult) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchResultFromID adopts an existing object pointer as a FetchResult (nil for 0).
+// FetchResultFromID adopts an existing Objective-C object as a FetchResult
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchResultFromID(id objc.ID) *FetchResult {
 	if id == 0 {
 		return nil
 	}
-	return &FetchResult{inner: raw.CNFetchResultFromID[objc.ID](id)}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFetchResult creates a new [FetchResult].
+// fetchResultAdopt wraps an Objective-C object that this code just created as a
+// FetchResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchResultAdopt(id objc.ID) *FetchResult {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchResult) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFetchResult creates a new FetchResult.
 func NewFetchResult() *FetchResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFetchResult")), objc.RegisterName("new"))
-	return &FetchResult{inner: raw.CNFetchResultFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNFetchResult")), objc.RegisterName("new"))
+	return fetchResultAdopt(_id)
 }
 
-// Value calls the underlying Value.
-func (x *FetchResult) Value() objc.ID {
-	return x.inner.Value()
+// Value wraps the corresponding Objective-C method.
+func (x *FetchResult) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// CurrentHistoryToken calls the underlying CurrentHistoryToken.
-func (x *FetchResult) CurrentHistoryToken() *foundation.NSData {
-	return x.inner.CurrentHistoryToken()
+// CurrentHistoryToken wraps the corresponding Objective-C method.
+func (x *FetchResult) CurrentHistoryToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentHistoryToken"))
+	return obj.Wrap(_r)
 }
 
 // FetchResultable is the interface implemented by [FetchResult], for mocking and DI.
 type FetchResultable interface {
-	Unwrap() *raw.CNFetchResult[objc.ID]
-	Value() objc.ID
-	CurrentHistoryToken() *foundation.NSData
+	obj.Object
+	Value() obj.Object
+	CurrentHistoryToken() obj.Object
 }
 
 var _ FetchResultable = (*FetchResult)(nil)

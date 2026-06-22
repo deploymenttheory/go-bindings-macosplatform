@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent wraps [raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent] with a fluent Go API.
+// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent is an idiomatic wrapper over the Objective-C class MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent.
 type MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent struct {
-	inner *raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent].
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID adopts an existing object pointer as a MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent (nil for 0).
+// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID adopts an existing Objective-C object as a MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID(id objc.ID) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{inner: raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID(id)}
-}
-
-// NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent creates a new [MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent].
-func NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent() *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent")), objc.RegisterName("new"))
-	return &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{inner: raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventFromID(_id)}
-}
-
-// WithConnectionStatus sets the connectionStatus property and returns the receiver for chaining.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
-	x.inner.SetConnectionStatus(connectionStatus)
+	x := &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ConnectionStatus calls the underlying ConnectionStatus.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.NSNumber {
-	return x.inner.ConnectionStatus()
+// mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt wraps an Objective-C object that this code just created as a
+// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetConnectionStatus calls the underlying SetConnectionStatus.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus *foundation.NSNumber) {
-	x.inner.SetConnectionStatus(connectionStatus)
+// Description returns the object's -description text.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent creates a new MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent.
+func NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent() *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent")), objc.RegisterName("new"))
+	return mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(_id)
+}
+
+// WithConnectionStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
+	return x
+}
+
+// ConnectionStatus wraps the corresponding Objective-C method.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionStatus"))
+	return obj.Wrap(_r)
+}
+
+// SetConnectionStatus wraps the corresponding Objective-C method.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 }
 
 // MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent], for mocking and DI.
 type MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable interface {
-	Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
-	WithConnectionStatus(connectionStatus *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
-	ConnectionStatus() *foundation.NSNumber
-	SetConnectionStatus(connectionStatus *foundation.NSNumber)
+	obj.Object
+	WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
+	ConnectionStatus() obj.Object
+	SetConnectionStatus(connectionStatus obj.Object)
 }
 
 var _ MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent)(nil)

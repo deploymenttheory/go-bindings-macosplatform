@@ -5,92 +5,94 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract  A node for a unary MPSNNReduce node. @discussion This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSNNReduction subclasses instead.
+// NNUnaryReductionNode is an idiomatic wrapper over the Objective-C class MPSNNUnaryReductionNode.
 //
-// NNUnaryReductionNode wraps [raw.MPSNNUnaryReductionNode] with a fluent Go API.
+// NNUnaryReductionNode is an abstract base — you do not construct it directly. Construct one of [NNReductionColumnMaxNode], [NNReductionColumnMeanNode], [NNReductionColumnMinNode], [NNReductionColumnSumNode], [NNReductionFeatureChannelsArgumentMaxNode], [NNReductionFeatureChannelsArgumentMinNode], [NNReductionFeatureChannelsMaxNode], [NNReductionFeatureChannelsMeanNode], [NNReductionFeatureChannelsMinNode], [NNReductionFeatureChannelsSumNode], [NNReductionRowMaxNode], [NNReductionRowMeanNode], [NNReductionRowMinNode], [NNReductionRowSumNode], [NNReductionSpatialMeanNode] and pass it where a NNUnaryReductionNode is accepted.
+//
+// A node for a unary MPSNNReduce node. This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSNNReduction subclasses instead.
 type NNUnaryReductionNode struct {
-	inner *raw.MPSNNUnaryReductionNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNUnaryReductionNode].
-func (x *NNUnaryReductionNode) Unwrap() *raw.MPSNNUnaryReductionNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNUnaryReductionNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNUnaryReductionNodeFromID adopts an existing object pointer as a NNUnaryReductionNode (nil for 0).
+// NNUnaryReductionNodeFromID adopts an existing Objective-C object as a NNUnaryReductionNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNUnaryReductionNodeFromID(id objc.ID) *NNUnaryReductionNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNUnaryReductionNode{inner: raw.MPSNNUnaryReductionNodeFromID(id)}
+	x := &NNUnaryReductionNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Init a node representing an MPS reduction kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for an MPS reduction kernel.
-//
-// NewNNUnaryReductionNodeWithSource creates a new [NNUnaryReductionNode].
-func NewNNUnaryReductionNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *NNUnaryReductionNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNUnaryReductionNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &NNUnaryReductionNode{inner: raw.MPSNNUnaryReductionNodeFromID(_id)}
+// nNUnaryReductionNodeAdopt wraps an Objective-C object that this code just created as a
+// NNUnaryReductionNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNUnaryReductionNodeAdopt(id objc.ID) *NNUnaryReductionNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNUnaryReductionNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   The clip rectangle to apply to the source image.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// NewNNUnaryReductionNodeWithSource init a node representing an MPS reduction kernel.
+func NewNNUnaryReductionNodeWithSource(sourceNode obj.Object) *NNUnaryReductionNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNUnaryReductionNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return nNUnaryReductionNodeAdopt(_id)
+}
+
+// WithClipRectSource the clip rectangle to apply to the source image.
 func (x *NNUnaryReductionNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode {
-	x.inner.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNUnaryReductionNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNUnaryReductionNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *NNUnaryReductionNode) WithLabel(label string) *NNUnaryReductionNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   The clip rectangle to apply to the source image.
-//
-// ClipRectSource calls the underlying ClipRectSource.
+// ClipRectSource the clip rectangle to apply to the source image.
 func (x *NNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+	return _r
 }
 
-// SetClipRectSource calls the underlying SetClipRectSource.
+// SetClipRectSource wraps the corresponding Objective-C method.
 func (x *NNUnaryReductionNode) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
-}
-
-func (x *NNUnaryReductionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 }
 
 // NNUnaryReductionNodeable is the interface implemented by [NNUnaryReductionNode], for mocking and DI.
 type NNUnaryReductionNodeable interface {
-	Unwrap() *raw.MPSNNUnaryReductionNode
+	obj.Object
 	WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNUnaryReductionNode
 	WithLabel(label string) *NNUnaryReductionNode
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }
 
 var _ NNUnaryReductionNodeable = (*NNUnaryReductionNode)(nil)
+
+// isNNUnaryReductionNode marks NNUnaryReductionNode — and, by embedding promotion, its
+// subclasses — as a member of the NNUnaryReductionNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNUnaryReductionNode) isNNUnaryReductionNode() {}
+
+var _ NNUnaryReductionNodeProvider = (*NNUnaryReductionNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNUnaryReductionNode)(nil)

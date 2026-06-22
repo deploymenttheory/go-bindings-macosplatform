@@ -5,54 +5,65 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to requests to change the current playback position of the playing item.
+// ChangePlaybackPositionCommand is an idiomatic wrapper over the Objective-C class MPChangePlaybackPositionCommand.
 //
-// ChangePlaybackPositionCommand wraps [raw.MPChangePlaybackPositionCommand] with a fluent Go API.
+// It embeds [RemoteCommand], promoting that type's methods.
+//
+// An object that responds to requests to change the current playback position of the playing item.
 type ChangePlaybackPositionCommand struct {
-	inner *raw.MPChangePlaybackPositionCommand
+	RemoteCommand
 }
 
-// Unwrap returns the underlying [raw.MPChangePlaybackPositionCommand].
-func (x *ChangePlaybackPositionCommand) Unwrap() *raw.MPChangePlaybackPositionCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangePlaybackPositionCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangePlaybackPositionCommandFromID adopts an existing object pointer as a ChangePlaybackPositionCommand (nil for 0).
+// ChangePlaybackPositionCommandFromID adopts an existing Objective-C object as a ChangePlaybackPositionCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangePlaybackPositionCommandFromID(id objc.ID) *ChangePlaybackPositionCommand {
 	if id == 0 {
 		return nil
 	}
-	return &ChangePlaybackPositionCommand{inner: raw.MPChangePlaybackPositionCommandFromID(id)}
-}
-
-// NewChangePlaybackPositionCommand creates a new [ChangePlaybackPositionCommand].
-func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangePlaybackPositionCommand")), objc.RegisterName("new"))
-	return &ChangePlaybackPositionCommand{inner: raw.MPChangePlaybackPositionCommandFromID(_id)}
-}
-
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	x := &ChangePlaybackPositionCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *ChangePlaybackPositionCommand) asRemoteCommand() *raw.MPRemoteCommand {
-	return &x.inner.MPRemoteCommand
+// changePlaybackPositionCommandAdopt wraps an Objective-C object that this code just created as a
+// ChangePlaybackPositionCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changePlaybackPositionCommandAdopt(id objc.ID) *ChangePlaybackPositionCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangePlaybackPositionCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangePlaybackPositionCommand creates a new ChangePlaybackPositionCommand.
+func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangePlaybackPositionCommand")), objc.RegisterName("new"))
+	return changePlaybackPositionCommandAdopt(_id)
+}
+
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
+func (x *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
 }
 
 // ChangePlaybackPositionCommandable is the interface implemented by [ChangePlaybackPositionCommand], for mocking and DI.
 type ChangePlaybackPositionCommandable interface {
-	Unwrap() *raw.MPChangePlaybackPositionCommand
+	obj.Object
 	WithEnabled(enabled bool) *ChangePlaybackPositionCommand
 }
 
 var _ ChangePlaybackPositionCommandable = (*ChangePlaybackPositionCommand)(nil)
+
+var _ RemoteCommandProvider = (*ChangePlaybackPositionCommand)(nil)

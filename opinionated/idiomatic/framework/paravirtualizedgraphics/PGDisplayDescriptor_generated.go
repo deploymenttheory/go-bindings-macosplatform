@@ -5,231 +5,178 @@
 package paravirtualizedgraphics
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/paravirtualizedgraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A descriptor for a virtual display.
+// PGDisplayDescriptor is an idiomatic wrapper over the Objective-C class PGDisplayDescriptor.
 //
-// PGDisplayDescriptor wraps [raw.PGDisplayDescriptor] with a fluent Go API.
+// A descriptor for a virtual display.
 type PGDisplayDescriptor struct {
-	inner *raw.PGDisplayDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PGDisplayDescriptor].
-func (x *PGDisplayDescriptor) Unwrap() *raw.PGDisplayDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PGDisplayDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// PGDisplayDescriptorFromID adopts an existing object pointer as a PGDisplayDescriptor (nil for 0).
+// PGDisplayDescriptorFromID adopts an existing Objective-C object as a PGDisplayDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func PGDisplayDescriptorFromID(id objc.ID) *PGDisplayDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &PGDisplayDescriptor{inner: raw.PGDisplayDescriptorFromID(id)}
+	x := &PGDisplayDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPGDisplayDescriptor creates a new [PGDisplayDescriptor].
+// pGDisplayDescriptorAdopt wraps an Objective-C object that this code just created as a
+// PGDisplayDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pGDisplayDescriptorAdopt(id objc.ID) *PGDisplayDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &PGDisplayDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PGDisplayDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PGDisplayDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PGDisplayDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PGDisplayDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPGDisplayDescriptor creates a new PGDisplayDescriptor.
 func NewPGDisplayDescriptor() *PGDisplayDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PGDisplayDescriptor")), objc.RegisterName("new"))
-	return &PGDisplayDescriptor{inner: raw.PGDisplayDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PGDisplayDescriptor")), objc.RegisterName("new"))
+	return pGDisplayDescriptorAdopt(_id)
 }
 
-// The display’s name as seen in the guest operating environment.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the display’s name as seen in the guest operating environment.
 func (x *PGDisplayDescriptor) WithName(name string) *PGDisplayDescriptor {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The size in millimeters of the virtual display.
-//
-// WithSizeInMillimeters sets the sizeInMillimeters property and returns the receiver for chaining.
+// WithSizeInMillimeters the size in millimeters of the virtual display.
 func (x *PGDisplayDescriptor) WithSizeInMillimeters(sizeInMillimeters corefoundation.CGSize) *PGDisplayDescriptor {
-	x.inner.SetSizeInMillimeters(sizeInMillimeters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSizeInMillimeters:"), sizeInMillimeters)
 	return x
 }
 
-// The queue that the framework uses when dispatching messages to any of the display’s registered handlers.
-//
-// WithQueue sets the queue property and returns the receiver for chaining.
-func (x *PGDisplayDescriptor) WithQueue(queue *foundation.NSObject) *PGDisplayDescriptor {
-	x.inner.SetQueue(queue)
+// WithQueue the queue that the framework uses when dispatching messages to any of the display’s registered handlers.
+func (x *PGDisplayDescriptor) WithQueue(queue obj.Object) *PGDisplayDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueue:"), objref.IDOf(queue))
 	return x
 }
 
-// A handler that the framework calls to change the virtual display’s graphics mode.
-//
-// WithModeChangeHandler sets the modeChangeHandler property and returns the receiver for chaining.
-func (x *PGDisplayDescriptor) WithModeChangeHandler(modeChangeHandler objc.Block) *PGDisplayDescriptor {
-	x.inner.SetModeChangeHandler(modeChangeHandler)
-	return x
-}
-
-// A handler that the framework calls when the guest environment has a new frame to display.
-//
-// WithNewFrameEventHandler sets the newFrameEventHandler property and returns the receiver for chaining.
+// WithNewFrameEventHandler a handler that the framework calls when the guest environment has a new frame to display.
 func (x *PGDisplayDescriptor) WithNewFrameEventHandler(newFrameEventHandler func()) *PGDisplayDescriptor {
-	x.inner.SetNewFrameEventHandler(newFrameEventHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewFrameEventHandler:"), newFrameEventHandler)
 	return x
 }
 
-// A handler that the framework calls to change the cursor’s appearance.
-//
-// WithCursorGlyphHandler sets the cursorGlyphHandler property and returns the receiver for chaining.
-func (x *PGDisplayDescriptor) WithCursorGlyphHandler(cursorGlyphHandler objc.Block) *PGDisplayDescriptor {
-	x.inner.SetCursorGlyphHandler(cursorGlyphHandler)
-	return x
-}
-
-// A handler that the framework calls to change the cursor’s visibility.
-//
-// WithCursorShowHandler sets the cursorShowHandler property and returns the receiver for chaining.
+// WithCursorShowHandler a handler that the framework calls to change the cursor’s visibility.
 func (x *PGDisplayDescriptor) WithCursorShowHandler(cursorShowHandler func(bool)) *PGDisplayDescriptor {
-	x.inner.SetCursorShowHandler(cursorShowHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursorShowHandler:"), cursorShowHandler)
 	return x
 }
 
-// @property cursorMoveHandler @abstract The block to invoke to handle cursor movement. @discussion Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
-//
-// WithCursorMoveHandler sets the cursorMoveHandler property and returns the receiver for chaining.
+// WithCursorMoveHandler the block to invoke to handle cursor movement. Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
 func (x *PGDisplayDescriptor) WithCursorMoveHandler(cursorMoveHandler func()) *PGDisplayDescriptor {
-	x.inner.SetCursorMoveHandler(cursorMoveHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursorMoveHandler:"), cursorMoveHandler)
 	return x
 }
 
-// @property name @abstract Client supplied name of display, as seen by guest. @discussion Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
-//
-// Name calls the underlying Name.
+// Name client supplied name of display, as seen by guest. Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
 func (x *PGDisplayDescriptor) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *PGDisplayDescriptor) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @property sizeInMillimeters @abstract Client supplied display size conveyed to guest compositor. @discussion Conveyed size contributes to guest compositor layout, but host-side VM app can scale to UI of its own choosing.
-//
-// SizeInMillimeters calls the underlying SizeInMillimeters.
+// SizeInMillimeters client supplied display size conveyed to guest compositor. Conveyed size contributes to guest compositor layout, but host-side VM app can scale to UI of its own choosing.
 func (x *PGDisplayDescriptor) SizeInMillimeters() corefoundation.CGSize {
-	return x.inner.SizeInMillimeters()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeInMillimeters"))
+	return _r
 }
 
-// SetSizeInMillimeters calls the underlying SetSizeInMillimeters.
+// SetSizeInMillimeters wraps the corresponding Objective-C method.
 func (x *PGDisplayDescriptor) SetSizeInMillimeters(sizeInMillimeters corefoundation.CGSize) {
-	x.inner.SetSizeInMillimeters(sizeInMillimeters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSizeInMillimeters:"), sizeInMillimeters)
 }
 
-// @property queue @abstract Client supplied dispatch_queue on which to invoke client supplied blocks. @discussion Typical client provides serial queue, and redispatches if beneficial to process out of order.
-//
-// Queue calls the underlying Queue.
-func (x *PGDisplayDescriptor) Queue() *foundation.NSObject {
-	return x.inner.Queue()
+// Queue client supplied dispatch_queue on which to invoke client supplied blocks. Typical client provides serial queue, and redispatches if beneficial to process out of order.
+func (x *PGDisplayDescriptor) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+	return obj.Wrap(_r)
 }
 
-// SetQueue calls the underlying SetQueue.
-func (x *PGDisplayDescriptor) SetQueue(queue *foundation.NSObject) {
-	x.inner.SetQueue(queue)
+// SetQueue wraps the corresponding Objective-C method.
+func (x *PGDisplayDescriptor) SetQueue(queue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueue:"), objref.IDOf(queue))
 }
 
-// @property modeChangeHandler @abstract The block to invoke to handle display mode change. @discussion Handler invocation indicative of display mode change.
-//
-// ModeChangeHandler calls the underlying ModeChangeHandler.
-func (x *PGDisplayDescriptor) ModeChangeHandler() objc.Block {
-	return x.inner.ModeChangeHandler()
-}
-
-// SetModeChangeHandler calls the underlying SetModeChangeHandler.
-func (x *PGDisplayDescriptor) SetModeChangeHandler(modeChangeHandler objc.Block) {
-	x.inner.SetModeChangeHandler(modeChangeHandler)
-}
-
-// @property newFrameEventHandler @abstract The block to invoke to handle notification of the presence of a new Guest compositor frame. @discussion Handler invocation indicates presence of new frame to be processed for display.  Only one of newFrameEventHandler or presentHandler may be non-nil.
-//
-// NewFrameEventHandler calls the underlying NewFrameEventHandler.
-func (x *PGDisplayDescriptor) NewFrameEventHandler() objc.Block {
-	return x.inner.NewFrameEventHandler()
-}
-
-// SetNewFrameEventHandler calls the underlying SetNewFrameEventHandler.
+// SetNewFrameEventHandler wraps the corresponding Objective-C method.
 func (x *PGDisplayDescriptor) SetNewFrameEventHandler(newFrameEventHandler func()) {
-	x.inner.SetNewFrameEventHandler(newFrameEventHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewFrameEventHandler:"), newFrameEventHandler)
 }
 
-// @property cursorGlyphHandler @abstract The block to invoke to handle cursor glyph updates. @discussion Handler invocation indicative of new cursor image for display.  If this block is not set, cursor will be precomposited in presented image.
-//
-// CursorGlyphHandler calls the underlying CursorGlyphHandler.
-func (x *PGDisplayDescriptor) CursorGlyphHandler() objc.Block {
-	return x.inner.CursorGlyphHandler()
-}
-
-// SetCursorGlyphHandler calls the underlying SetCursorGlyphHandler.
-func (x *PGDisplayDescriptor) SetCursorGlyphHandler(cursorGlyphHandler objc.Block) {
-	x.inner.SetCursorGlyphHandler(cursorGlyphHandler)
-}
-
-// @property cursorShowHandler @abstract The block to invoke to handle cursor show/hide updates. @discussion Handler invocation indicative of hide/show of cursor glyph.  If this block is not set, cursor will be precomposited in presented image.
-//
-// CursorShowHandler calls the underlying CursorShowHandler.
-func (x *PGDisplayDescriptor) CursorShowHandler() objc.Block {
-	return x.inner.CursorShowHandler()
-}
-
-// SetCursorShowHandler calls the underlying SetCursorShowHandler.
+// SetCursorShowHandler wraps the corresponding Objective-C method.
 func (x *PGDisplayDescriptor) SetCursorShowHandler(cursorShowHandler func(bool)) {
-	x.inner.SetCursorShowHandler(cursorShowHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursorShowHandler:"), cursorShowHandler)
 }
 
-// @property cursorMoveHandler @abstract The block to invoke to handle cursor movement. @discussion Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
-//
-// CursorMoveHandler calls the underlying CursorMoveHandler.
-func (x *PGDisplayDescriptor) CursorMoveHandler() objc.Block {
-	return x.inner.CursorMoveHandler()
-}
-
-// SetCursorMoveHandler calls the underlying SetCursorMoveHandler.
+// SetCursorMoveHandler wraps the corresponding Objective-C method.
 func (x *PGDisplayDescriptor) SetCursorMoveHandler(cursorMoveHandler func()) {
-	x.inner.SetCursorMoveHandler(cursorMoveHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursorMoveHandler:"), cursorMoveHandler)
 }
 
 // PGDisplayDescriptorable is the interface implemented by [PGDisplayDescriptor], for mocking and DI.
 type PGDisplayDescriptorable interface {
-	Unwrap() *raw.PGDisplayDescriptor
+	obj.Object
 	WithName(name string) *PGDisplayDescriptor
 	WithSizeInMillimeters(sizeInMillimeters corefoundation.CGSize) *PGDisplayDescriptor
-	WithQueue(queue *foundation.NSObject) *PGDisplayDescriptor
-	WithModeChangeHandler(modeChangeHandler objc.Block) *PGDisplayDescriptor
+	WithQueue(queue obj.Object) *PGDisplayDescriptor
 	WithNewFrameEventHandler(newFrameEventHandler func()) *PGDisplayDescriptor
-	WithCursorGlyphHandler(cursorGlyphHandler objc.Block) *PGDisplayDescriptor
 	WithCursorShowHandler(cursorShowHandler func(bool)) *PGDisplayDescriptor
 	WithCursorMoveHandler(cursorMoveHandler func()) *PGDisplayDescriptor
 	Name() string
 	SetName(name string)
 	SizeInMillimeters() corefoundation.CGSize
 	SetSizeInMillimeters(sizeInMillimeters corefoundation.CGSize)
-	Queue() *foundation.NSObject
-	SetQueue(queue *foundation.NSObject)
-	ModeChangeHandler() objc.Block
-	SetModeChangeHandler(modeChangeHandler objc.Block)
-	NewFrameEventHandler() objc.Block
+	Queue() obj.Object
+	SetQueue(queue obj.Object)
 	SetNewFrameEventHandler(newFrameEventHandler func())
-	CursorGlyphHandler() objc.Block
-	SetCursorGlyphHandler(cursorGlyphHandler objc.Block)
-	CursorShowHandler() objc.Block
 	SetCursorShowHandler(cursorShowHandler func(bool))
-	CursorMoveHandler() objc.Block
 	SetCursorMoveHandler(cursorMoveHandler func())
 }
 

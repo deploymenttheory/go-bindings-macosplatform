@@ -5,11 +5,20 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports calls [raw.ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports] (C function ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports).
-func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() *foundation.NSArray[*foundation.NSString] {
-	return raw.ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
+var _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports func() objc.ID
+
+// ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports calls the AuthenticationServices framework function ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports.
+func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() []obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports == nil {
+		ebipurego.RegisterLibFunc(&_fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, _lib, "ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports")
+	}
+	_ret := _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

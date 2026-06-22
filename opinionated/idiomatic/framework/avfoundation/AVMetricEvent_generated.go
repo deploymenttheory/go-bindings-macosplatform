@@ -5,74 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class that represents a metric event.
+// MetricEvent is an idiomatic wrapper over the Objective-C class AVMetricEvent.
 //
-// MetricEvent wraps [raw.AVMetricEvent] with a fluent Go API.
+// MetricEvent is an abstract base — you do not construct it directly. Construct one of [MetricContentKeyRequestEvent], [MetricDownloadSummaryEvent], [MetricErrorEvent], [MetricHLSMediaSegmentRequestEvent], [MetricHLSPlaylistRequestEvent], [MetricMediaResourceRequestEvent], [MetricPlayerItemLikelyToKeepUpEvent], [MetricPlayerItemPlaybackSummaryEvent], [MetricPlayerItemRateChangeEvent], [MetricPlayerItemVariantSwitchEvent], [MetricPlayerItemVariantSwitchStartEvent] and pass it where a MetricEvent is accepted.
+//
+// A base class that represents a metric event.
 type MetricEvent struct {
-	inner *raw.AVMetricEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetricEvent].
-func (x *MetricEvent) Unwrap() *raw.AVMetricEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricEventFromID adopts an existing object pointer as a MetricEvent (nil for 0).
+// MetricEventFromID adopts an existing Objective-C object as a MetricEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricEventFromID(id objc.ID) *MetricEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricEvent{inner: raw.AVMetricEventFromID(id)}
+	x := &MetricEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricEvent creates a new [MetricEvent].
-func NewMetricEvent() *MetricEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricEvent")), objc.RegisterName("new"))
-	return &MetricEvent{inner: raw.AVMetricEventFromID(_id)}
+// metricEventAdopt wraps an Objective-C object that this code just created as a
+// MetricEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricEventAdopt(id objc.ID) *MetricEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the date when the event occurred.
-//
-// Date calls the underlying Date.
-func (x *MetricEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
+// Description returns the object's -description text.
+func (x *MetricEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the time in the media timeline when the event occured.
-//
-// MediaTime calls the underlying MediaTime.
-func (x *MetricEvent) MediaTime() coremedia.CMTime {
-	return x.inner.MediaTime()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// A GUID that identifies the media session. If not available, value is nil.
-//
-// SessionID calls the underlying SessionID.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Date returns the date when the event occurred.
+func (x *MetricEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
+}
+
+// SessionID a GUID that identifies the media session. If not available, value is nil.
 func (x *MetricEvent) SessionID() string {
-	_r := x.inner.SessionID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MetricEvent) asMetricEvent() *raw.AVMetricEvent { return x.inner }
 
 // MetricEventable is the interface implemented by [MetricEvent], for mocking and DI.
 type MetricEventable interface {
-	Unwrap() *raw.AVMetricEvent
-	Date() *foundation.NSDate
-	MediaTime() coremedia.CMTime
+	obj.Object
+	Date() obj.Object
 	SessionID() string
 }
 
 var _ MetricEventable = (*MetricEvent)(nil)
+
+// isMetricEvent marks MetricEvent — and, by embedding promotion, its
+// subclasses — as a member of the MetricEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetricEvent) isMetricEvent() {}
+
+var _ MetricEventProvider = (*MetricEvent)(nil)

@@ -5,100 +5,101 @@
 package mpsmatrix
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixLogSoftMax wraps [raw.MPSMatrixLogSoftMax] with a fluent Go API.
+// MatrixLogSoftMax is an idiomatic wrapper over the Objective-C class MPSMatrixLogSoftMax.
+//
+// It embeds [MatrixSoftMax], promoting that type's methods.
 type MatrixLogSoftMax struct {
-	inner *raw.MPSMatrixLogSoftMax
+	MatrixSoftMax
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixLogSoftMax].
-func (x *MatrixLogSoftMax) Unwrap() *raw.MPSMatrixLogSoftMax { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixLogSoftMax) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixLogSoftMaxFromID adopts an existing object pointer as a MatrixLogSoftMax (nil for 0).
+// MatrixLogSoftMaxFromID adopts an existing Objective-C object as a MatrixLogSoftMax
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixLogSoftMaxFromID(id objc.ID) *MatrixLogSoftMax {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixLogSoftMax{inner: raw.MPSMatrixLogSoftMaxFromID(id)}
+	x := &MatrixLogSoftMax{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatrixLogSoftMax creates a new [MatrixLogSoftMax].
+// matrixLogSoftMaxAdopt wraps an Objective-C object that this code just created as a
+// MatrixLogSoftMax (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixLogSoftMaxAdopt(id objc.ID) *MatrixLogSoftMax {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixLogSoftMax{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatrixLogSoftMax creates a new MatrixLogSoftMax.
 func NewMatrixLogSoftMax() *MatrixLogSoftMax {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixLogSoftMax")), objc.RegisterName("new"))
-	return &MatrixLogSoftMax{inner: raw.MPSMatrixLogSoftMaxFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixLogSoftMax")), objc.RegisterName("new"))
+	return matrixLogSoftMaxAdopt(_id)
 }
 
-// @property   sourceRows @discussion The number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-//
-// WithSourceRows sets the sourceRows property and returns the receiver for chaining.
-func (x *MatrixLogSoftMax) WithSourceRows(sourceRows uint) *MatrixLogSoftMax {
-	x.inner.MPSMatrixSoftMax.SetSourceRows(sourceRows)
+// WithSourceRows the number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (x *MatrixLogSoftMax) WithSourceRows(sourceRows int) *MatrixLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRows:"), sourceRows)
 	return x
 }
 
-// @property   sourceColumns @discussion The number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-//
-// WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
-func (x *MatrixLogSoftMax) WithSourceColumns(sourceColumns uint) *MatrixLogSoftMax {
-	x.inner.MPSMatrixSoftMax.SetSourceColumns(sourceColumns)
+// WithSourceColumns the number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (x *MatrixLogSoftMax) WithSourceColumns(sourceColumns int) *MatrixLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceColumns:"), sourceColumns)
 	return x
 }
 
-// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixLogSoftMax) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax {
-	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
 	return x
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixLogSoftMax) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax {
-	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
 	return x
 }
 
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixLogSoftMax) WithBatchStart(batchStart uint) *MatrixLogSoftMax {
-	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (x *MatrixLogSoftMax) WithBatchStart(batchStart int) *MatrixLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixLogSoftMax) WithBatchSize(batchSize uint) *MatrixLogSoftMax {
-	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (x *MatrixLogSoftMax) WithBatchSize(batchSize int) *MatrixLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
-}
-
-func (x *MatrixLogSoftMax) asMatrixSoftMax() *raw.MPSMatrixSoftMax { return &x.inner.MPSMatrixSoftMax }
-
-func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel {
-	return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel
 }
 
 // MatrixLogSoftMaxable is the interface implemented by [MatrixLogSoftMax], for mocking and DI.
 type MatrixLogSoftMaxable interface {
-	Unwrap() *raw.MPSMatrixLogSoftMax
-	WithSourceRows(sourceRows uint) *MatrixLogSoftMax
-	WithSourceColumns(sourceColumns uint) *MatrixLogSoftMax
+	obj.Object
+	WithSourceRows(sourceRows int) *MatrixLogSoftMax
+	WithSourceColumns(sourceColumns int) *MatrixLogSoftMax
 	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax
-	WithBatchStart(batchStart uint) *MatrixLogSoftMax
-	WithBatchSize(batchSize uint) *MatrixLogSoftMax
+	WithBatchStart(batchStart int) *MatrixLogSoftMax
+	WithBatchSize(batchSize int) *MatrixLogSoftMax
 }
 
 var _ MatrixLogSoftMaxable = (*MatrixLogSoftMax)(nil)
+
+var _ MatrixSoftMaxProvider = (*MatrixLogSoftMax)(nil)
+
+var _ MatrixUnaryKernelProvider = (*MatrixLogSoftMax)(nil)

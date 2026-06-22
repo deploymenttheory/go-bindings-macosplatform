@@ -5,92 +5,85 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class         MPSNNPadNode @abstract      A node for a MPSNNPad kernel @discussion    You should not use this node to zero pad your data in the XY-plane. This node copies the input image and therefore should only be used in special circumstances where the normal padding operation, defined for most filters and nodes through @ref MPSNNPadding, cannot achieve the necessary padding. Therefore use this node only when you need one of the special edge modes: @ref MPSImageEdgeModeConstant, @ref MPSImageEdgeModeMirror, @ref MPSImageEdgeModeMirrorWithEdge or, if you need padding in the feature-channel dimesion. In other cases use to @ref MPSNNPadding to get best performance.
+// NNPadNode is an idiomatic wrapper over the Objective-C class MPSNNPadNode.
 //
-// NNPadNode wraps [raw.MPSNNPadNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A node for a MPSNNPad kernel You should not use this node to zero pad your data in the XY-plane. This node copies the input image and therefore should only be used in special circumstances where the normal padding operation, defined for most filters and nodes through
 type NNPadNode struct {
-	inner *raw.MPSNNPadNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNPadNode].
-func (x *NNPadNode) Unwrap() *raw.MPSNNPadNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNPadNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNPadNodeFromID adopts an existing object pointer as a NNPadNode (nil for 0).
+// NNPadNodeFromID adopts an existing Objective-C object as a NNPadNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNPadNodeFromID(id objc.ID) *NNPadNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNPadNode{inner: raw.MPSNNPadNodeFromID(id)}
+	x := &NNPadNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Init a node representing a MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @param      paddingSizeBefore       The amount of padding to apply before the image in each dimension. @param      paddingSizeAfter        The amount of padding to apply after the image in each dimension. @param      edgeMode                The @ref MPSImageEdgeMode for the padding node - Note that for now the pad-node and its gradient are the only nodes that support the extended edge-modes, ie. the ones beyond MPSImageEdgeModeClamp. @return     A new MPSNNFilter node for a MPSNNPad kernel.
-//
-// NewNNPadNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode creates a new [NNPadNode].
-func NewNNPadNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source *mpsneuralnetwork.MPSNNImageNode, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, edgeMode mpscore.MPSImageEdgeMode) *NNPadNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNPadNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:paddingSizeBefore:paddingSizeAfter:edgeMode:"), source.Ptr(), paddingSizeBefore, paddingSizeAfter, edgeMode)
-	return &NNPadNode{inner: raw.MPSNNPadNodeFromID(_id)}
+// nNPadNodeAdopt wraps an Objective-C object that this code just created as a
+// NNPadNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNPadNodeAdopt(id objc.ID) *NNPadNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNPadNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   fillValue @abstract   Determines the constant value to apply when using @ref MPSImageEdgeModeConstant. Default: 0.0f.
-//
-// WithFillValue sets the fillValue property and returns the receiver for chaining.
+// NewNNPadNode creates a new NNPadNode.
+func NewNNPadNode() *NNPadNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNPadNode")), objc.RegisterName("new"))
+	return nNPadNodeAdopt(_id)
+}
+
+// WithFillValue determines the constant value to apply when using
 func (x *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
-	x.inner.SetFillValue(fillValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNPadNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNPadNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *NNPadNode) WithLabel(label string) *NNPadNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   fillValue @abstract   Determines the constant value to apply when using @ref MPSImageEdgeModeConstant. Default: 0.0f.
-//
-// FillValue calls the underlying FillValue.
+// FillValue determines the constant value to apply when using
 func (x *NNPadNode) FillValue() float32 {
-	return x.inner.FillValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fillValue"))
+	return _r
 }
 
-// SetFillValue calls the underlying SetFillValue.
+// SetFillValue wraps the corresponding Objective-C method.
 func (x *NNPadNode) SetFillValue(fillValue float32) {
-	x.inner.SetFillValue(fillValue)
-}
-
-func (x *NNPadNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
 }
 
 // NNPadNodeable is the interface implemented by [NNPadNode], for mocking and DI.
 type NNPadNodeable interface {
-	Unwrap() *raw.MPSNNPadNode
+	obj.Object
 	WithFillValue(fillValue float32) *NNPadNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNPadNode
 	WithLabel(label string) *NNPadNode
 	FillValue() float32
 	SetFillValue(fillValue float32)
 }
 
 var _ NNPadNodeable = (*NNPadNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNPadNode)(nil)

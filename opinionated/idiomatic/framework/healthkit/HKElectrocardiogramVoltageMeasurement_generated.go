@@ -5,62 +5,89 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The voltage for all leads at a single point in time.
+// ElectrocardiogramVoltageMeasurement is an idiomatic wrapper over the Objective-C class HKElectrocardiogramVoltageMeasurement.
 //
-// ElectrocardiogramVoltageMeasurement wraps [raw.HKElectrocardiogramVoltageMeasurement] with a fluent Go API.
+// The voltage for all leads at a single point in time.
 type ElectrocardiogramVoltageMeasurement struct {
-	inner *raw.HKElectrocardiogramVoltageMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKElectrocardiogramVoltageMeasurement].
-func (x *ElectrocardiogramVoltageMeasurement) Unwrap() *raw.HKElectrocardiogramVoltageMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ElectrocardiogramVoltageMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// ElectrocardiogramVoltageMeasurementFromID adopts an existing object pointer as a ElectrocardiogramVoltageMeasurement (nil for 0).
+// ElectrocardiogramVoltageMeasurementFromID adopts an existing Objective-C object as a ElectrocardiogramVoltageMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func ElectrocardiogramVoltageMeasurementFromID(id objc.ID) *ElectrocardiogramVoltageMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &ElectrocardiogramVoltageMeasurement{inner: raw.HKElectrocardiogramVoltageMeasurementFromID(id)}
+	x := &ElectrocardiogramVoltageMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewElectrocardiogramVoltageMeasurement creates a new [ElectrocardiogramVoltageMeasurement].
-func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasurement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKElectrocardiogramVoltageMeasurement")), objc.RegisterName("new"))
-	return &ElectrocardiogramVoltageMeasurement{inner: raw.HKElectrocardiogramVoltageMeasurementFromID(_id)}
-}
-
-// @method        quantityForLead: @abstract      Returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit]. @param         lead      The HKElectrocardiogramLead for which voltage quantity will be returned.
-//
-// QuantityForLead calls the underlying QuantityForLead.
-func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead HKElectrocardiogramLead) *Quantity {
-	_r := x.inner.QuantityForLead(raw.HKElectrocardiogramLead(lead))
-	if _r == nil {
+// electrocardiogramVoltageMeasurementAdopt wraps an Objective-C object that this code just created as a
+// ElectrocardiogramVoltageMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func electrocardiogramVoltageMeasurementAdopt(id objc.ID) *ElectrocardiogramVoltageMeasurement {
+	if id == 0 {
 		return nil
 	}
-	return &Quantity{inner: _r}
+	x := &ElectrocardiogramVoltageMeasurement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The time interval between this voltage measurement and the start of the sample.
-//
-// TimeSinceSampleStart calls the underlying TimeSinceSampleStart.
+// Description returns the object's -description text.
+func (x *ElectrocardiogramVoltageMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ElectrocardiogramVoltageMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ElectrocardiogramVoltageMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ElectrocardiogramVoltageMeasurement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewElectrocardiogramVoltageMeasurement creates a new ElectrocardiogramVoltageMeasurement.
+func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasurement {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogramVoltageMeasurement")), objc.RegisterName("new"))
+	return electrocardiogramVoltageMeasurementAdopt(_id)
+}
+
+// QuantityForLead returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit].
+func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead ElectrocardiogramLead) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityForLead:"), lead)
+	return QuantityFromID(_r)
+}
+
+// TimeSinceSampleStart the time interval between this voltage measurement and the start of the sample.
 func (x *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
-	return x.inner.TimeSinceSampleStart()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSinceSampleStart"))
+	return _r
 }
 
 // ElectrocardiogramVoltageMeasurementable is the interface implemented by [ElectrocardiogramVoltageMeasurement], for mocking and DI.
 type ElectrocardiogramVoltageMeasurementable interface {
-	Unwrap() *raw.HKElectrocardiogramVoltageMeasurement
-	QuantityForLead(lead HKElectrocardiogramLead) *Quantity
+	obj.Object
+	QuantityForLead(lead ElectrocardiogramLead) *Quantity
 	TimeSinceSampleStart() float64
 }
 

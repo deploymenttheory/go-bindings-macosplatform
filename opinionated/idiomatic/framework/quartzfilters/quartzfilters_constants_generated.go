@@ -5,62 +5,41 @@
 package quartzfilters
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzfilters"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KQuartzFilterApplicationDomain returns the string constant kQuartzFilterApplicationDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterApplicationDomain() objc.ID {
-	if _r := raw.KQuartzFilterApplicationDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterApplicationDomain returns the string constant kQuartzFilterApplicationDomain, for use as a dictionary key or argument.
+func KQuartzFilterApplicationDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterApplicationDomain")))
 }
 
-// KQuartzFilterPDFWorkflowDomain returns the string constant kQuartzFilterPDFWorkflowDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterPDFWorkflowDomain() objc.ID {
-	if _r := raw.KQuartzFilterPDFWorkflowDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterPDFWorkflowDomain returns the string constant kQuartzFilterPDFWorkflowDomain, for use as a dictionary key or argument.
+func KQuartzFilterPDFWorkflowDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterPDFWorkflowDomain")))
 }
 
-// KQuartzFilterPrintingDomain returns the string constant kQuartzFilterPrintingDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterPrintingDomain() objc.ID {
-	if _r := raw.KQuartzFilterPrintingDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterPrintingDomain returns the string constant kQuartzFilterPrintingDomain, for use as a dictionary key or argument.
+func KQuartzFilterPrintingDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterPrintingDomain")))
 }
 
-// KQuartzFilterManagerDidAddFilterNotification returns the string constant kQuartzFilterManagerDidAddFilterNotification as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterManagerDidAddFilterNotification() objc.ID {
-	if _r := raw.KQuartzFilterManagerDidAddFilterNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterManagerDidAddFilterNotification returns the string constant kQuartzFilterManagerDidAddFilterNotification, for use as a dictionary key or argument.
+func KQuartzFilterManagerDidAddFilterNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterManagerDidAddFilterNotification")))
 }
 
-// KQuartzFilterManagerDidRemoveFilterNotification returns the string constant kQuartzFilterManagerDidRemoveFilterNotification as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterManagerDidRemoveFilterNotification() objc.ID {
-	if _r := raw.KQuartzFilterManagerDidRemoveFilterNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterManagerDidRemoveFilterNotification returns the string constant kQuartzFilterManagerDidRemoveFilterNotification, for use as a dictionary key or argument.
+func KQuartzFilterManagerDidRemoveFilterNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterManagerDidRemoveFilterNotification")))
 }
 
-// KQuartzFilterManagerDidModifyFilterNotification returns the string constant kQuartzFilterManagerDidModifyFilterNotification as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterManagerDidModifyFilterNotification() objc.ID {
-	if _r := raw.KQuartzFilterManagerDidModifyFilterNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterManagerDidModifyFilterNotification returns the string constant kQuartzFilterManagerDidModifyFilterNotification, for use as a dictionary key or argument.
+func KQuartzFilterManagerDidModifyFilterNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterManagerDidModifyFilterNotification")))
 }
 
-// KQuartzFilterManagerDidSelectFilterNotification returns the string constant kQuartzFilterManagerDidSelectFilterNotification as an objc.ID, for use as a dictionary key or selector argument.
-func KQuartzFilterManagerDidSelectFilterNotification() objc.ID {
-	if _r := raw.KQuartzFilterManagerDidSelectFilterNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KQuartzFilterManagerDidSelectFilterNotification returns the string constant kQuartzFilterManagerDidSelectFilterNotification, for use as a dictionary key or argument.
+func KQuartzFilterManagerDidSelectFilterNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterManagerDidSelectFilterNotification")))
 }

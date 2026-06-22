@@ -5,45 +5,56 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterContentSearch wraps [raw.MTRContentLauncherClusterContentSearch] with a fluent Go API.
+// MTRContentLauncherClusterContentSearch is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterContentSearch.
+//
+// It embeds [MTRContentLauncherClusterContentSearchStruct], promoting that type's methods.
 type MTRContentLauncherClusterContentSearch struct {
-	inner *raw.MTRContentLauncherClusterContentSearch
+	MTRContentLauncherClusterContentSearchStruct
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterContentSearch].
-func (x *MTRContentLauncherClusterContentSearch) Unwrap() *raw.MTRContentLauncherClusterContentSearch {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterContentSearch) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterContentSearchFromID adopts an existing object pointer as a MTRContentLauncherClusterContentSearch (nil for 0).
+// MTRContentLauncherClusterContentSearchFromID adopts an existing Objective-C object as a MTRContentLauncherClusterContentSearch
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterContentSearchFromID(id objc.ID) *MTRContentLauncherClusterContentSearch {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterContentSearch{inner: raw.MTRContentLauncherClusterContentSearchFromID(id)}
+	x := &MTRContentLauncherClusterContentSearch{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRContentLauncherClusterContentSearch creates a new [MTRContentLauncherClusterContentSearch].
+// mTRContentLauncherClusterContentSearchAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterContentSearch (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterContentSearchAdopt(id objc.ID) *MTRContentLauncherClusterContentSearch {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentLauncherClusterContentSearch{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRContentLauncherClusterContentSearch creates a new MTRContentLauncherClusterContentSearch.
 func NewMTRContentLauncherClusterContentSearch() *MTRContentLauncherClusterContentSearch {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterContentSearch")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterContentSearch{inner: raw.MTRContentLauncherClusterContentSearchFromID(_id)}
-}
-
-func (x *MTRContentLauncherClusterContentSearch) asMTRContentLauncherClusterContentSearchStruct() *raw.MTRContentLauncherClusterContentSearchStruct {
-	return &x.inner.MTRContentLauncherClusterContentSearchStruct
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterContentSearch")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterContentSearchAdopt(_id)
 }
 
 // MTRContentLauncherClusterContentSearchable is the interface implemented by [MTRContentLauncherClusterContentSearch], for mocking and DI.
 type MTRContentLauncherClusterContentSearchable interface {
-	Unwrap() *raw.MTRContentLauncherClusterContentSearch
+	obj.Object
 }
 
 var _ MTRContentLauncherClusterContentSearchable = (*MTRContentLauncherClusterContentSearch)(nil)
+
+var _ MTRContentLauncherClusterContentSearchStructProvider = (*MTRContentLauncherClusterContentSearch)(nil)

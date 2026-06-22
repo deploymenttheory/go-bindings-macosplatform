@@ -5,129 +5,145 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CIDevice wraps [raw.MIDICIDevice] with a fluent Go API.
+// CIDevice is an idiomatic wrapper over the Objective-C class MIDICIDevice.
 type CIDevice struct {
-	inner *raw.MIDICIDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIDevice].
-func (x *CIDevice) Unwrap() *raw.MIDICIDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// CIDeviceFromID adopts an existing object pointer as a CIDevice (nil for 0).
+// CIDeviceFromID adopts an existing Objective-C object as a CIDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func CIDeviceFromID(id objc.ID) *CIDevice {
 	if id == 0 {
 		return nil
 	}
-	return &CIDevice{inner: raw.MIDICIDeviceFromID(id)}
+	x := &CIDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCIDevice creates a new [CIDevice].
-func NewCIDevice() *CIDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDevice")), objc.RegisterName("new"))
-	return &CIDevice{inner: raw.MIDICIDeviceFromID(_id)}
-}
-
-// @property   deviceInfo @brief      The basic information describing the CI device.
-//
-// DeviceInfo calls the underlying DeviceInfo.
-func (x *CIDevice) DeviceInfo() *MIDI2DeviceInfo {
-	_r := x.inner.DeviceInfo()
-	if _r == nil {
+// cIDeviceAdopt wraps an Objective-C object that this code just created as a
+// CIDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIDeviceAdopt(id objc.ID) *CIDevice {
+	if id == 0 {
 		return nil
 	}
-	return &MIDI2DeviceInfo{inner: _r}
+	x := &CIDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property	MUID @brief		The MIDI unique identifier (MUID) assigned to the CI device.
-//
-// MUID calls the underlying MUID.
-func (x *CIDevice) MUID() uint {
-	return x.inner.MUID()
+// Description returns the object's -description text.
+func (x *CIDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property	supportsProtocolNegotiation @brief		MIDI-CI Protocol Negotiation capability.
-//
-// SupportsProtocolNegotiation calls the underlying SupportsProtocolNegotiation.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CIDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCIDevice creates a new CIDevice.
+func NewCIDevice() *CIDevice {
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDevice")), objc.RegisterName("new"))
+	return cIDeviceAdopt(_id)
+}
+
+// DeviceInfo the basic information describing the CI device.
+func (x *CIDevice) DeviceInfo() *MIDI2DeviceInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+	return MIDI2DeviceInfoFromID(_r)
+}
+
+// MUID the MIDI unique identifier (MUID) assigned to the CI device.
+func (x *CIDevice) MUID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("MUID"))
+	return _r
+}
+
+// SupportsProtocolNegotiation MIDI-CI Protocol Negotiation capability.
 func (x *CIDevice) SupportsProtocolNegotiation() bool {
-	return x.inner.SupportsProtocolNegotiation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProtocolNegotiation"))
+	return _r
 }
 
-// @property	supportsProfileConfiguration @brief		MIDI-CI Profile Configuration capability.
-//
-// SupportsProfileConfiguration calls the underlying SupportsProfileConfiguration.
+// SupportsProfileConfiguration MIDI-CI Profile Configuration capability.
 func (x *CIDevice) SupportsProfileConfiguration() bool {
-	return x.inner.SupportsProfileConfiguration()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfileConfiguration"))
+	return _r
 }
 
-// @property	supportsPropertyExchange @brief		MIDI-CI Property Exchange capability.
-//
-// SupportsPropertyExchange calls the underlying SupportsPropertyExchange.
+// SupportsPropertyExchange MIDI-CI Property Exchange capability.
 func (x *CIDevice) SupportsPropertyExchange() bool {
-	return x.inner.SupportsPropertyExchange()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPropertyExchange"))
+	return _r
 }
 
-// @property	supportsProcessInquiry @brief		MIDI-CI Process Inquiry capability.
-//
-// SupportsProcessInquiry calls the underlying SupportsProcessInquiry.
+// SupportsProcessInquiry MIDI-CI Process Inquiry capability.
 func (x *CIDevice) SupportsProcessInquiry() bool {
-	return x.inner.SupportsProcessInquiry()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProcessInquiry"))
+	return _r
 }
 
-// @property 	maxSysExSize @brief		The maximum receivable MIDI System Exclusive size for this CI device.
-//
-// MaxSysExSize calls the underlying MaxSysExSize.
-func (x *CIDevice) MaxSysExSize() uint {
-	return x.inner.MaxSysExSize()
+// MaxSysExSize the maximum receivable MIDI System Exclusive size for this CI device.
+func (x *CIDevice) MaxSysExSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSysExSize"))
+	return _r
 }
 
-// @property 	maxPropertyExchangeRequests @brief		The maximum number of simultaneous Property Exchange requests, if supported.
-//
-// MaxPropertyExchangeRequests calls the underlying MaxPropertyExchangeRequests.
-func (x *CIDevice) MaxPropertyExchangeRequests() uint {
-	return x.inner.MaxPropertyExchangeRequests()
+// MaxPropertyExchangeRequests the maximum number of simultaneous Property Exchange requests, if supported.
+func (x *CIDevice) MaxPropertyExchangeRequests() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxPropertyExchangeRequests"))
+	return _r
 }
 
-// @property 	deviceType @brief		The type of MIDI-CI device.
-//
-// DeviceType calls the underlying DeviceType.
-func (x *CIDevice) DeviceType() MIDICIDeviceType {
-	return MIDICIDeviceType(x.inner.DeviceType())
+// DeviceType the type of MIDI-CI device.
+func (x *CIDevice) DeviceType() CIDeviceType {
+	_r := objc.Send[CIDeviceType](objref.IDOf(x), objc.RegisterName("deviceType"))
+	return _r
 }
 
-// @property	profiles @brief		The MIDI-CI Profiles that are registered to the  Function Block.
+// Profiles the MIDI-CI Profiles that are registered to the  Function Block.
 //
 // Profiles returns the collection as a Go slice.
 func (x *CIDevice) Profiles() []*UMPCIProfile {
-	arr := x.inner.Profiles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UMPCIProfile {
-		return &UMPCIProfile{inner: raw.MIDIUMPCIProfileFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profiles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPCIProfile { return UMPCIProfileFromID(_id) })
 }
 
 // CIDeviceable is the interface implemented by [CIDevice], for mocking and DI.
 type CIDeviceable interface {
-	Unwrap() *raw.MIDICIDevice
+	obj.Object
 	DeviceInfo() *MIDI2DeviceInfo
-	MUID() uint
+	MUID() int
 	SupportsProtocolNegotiation() bool
 	SupportsProfileConfiguration() bool
 	SupportsPropertyExchange() bool
 	SupportsProcessInquiry() bool
-	MaxSysExSize() uint
-	MaxPropertyExchangeRequests() uint
-	DeviceType() MIDICIDeviceType
+	MaxSysExSize() int
+	MaxPropertyExchangeRequests() int
+	DeviceType() CIDeviceType
 	Profiles() []*UMPCIProfile
 }
 

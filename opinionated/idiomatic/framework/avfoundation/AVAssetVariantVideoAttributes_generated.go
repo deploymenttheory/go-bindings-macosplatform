@@ -5,97 +5,115 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the video attributes for an asset variant.
+// AssetVariantVideoAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantVideoAttributes.
 //
-// AssetVariantVideoAttributes wraps [raw.AVAssetVariantVideoAttributes] with a fluent Go API.
+// An object that defines the video attributes for an asset variant.
 type AssetVariantVideoAttributes struct {
-	inner *raw.AVAssetVariantVideoAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetVariantVideoAttributes].
-func (x *AssetVariantVideoAttributes) Unwrap() *raw.AVAssetVariantVideoAttributes { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetVariantVideoAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetVariantVideoAttributesFromID adopts an existing object pointer as a AssetVariantVideoAttributes (nil for 0).
+// AssetVariantVideoAttributesFromID adopts an existing Objective-C object as a AssetVariantVideoAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetVariantVideoAttributesFromID(id objc.ID) *AssetVariantVideoAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &AssetVariantVideoAttributes{inner: raw.AVAssetVariantVideoAttributesFromID(id)}
+	x := &AssetVariantVideoAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetVariantVideoAttributes creates a new [AssetVariantVideoAttributes].
-func NewAssetVariantVideoAttributes() *AssetVariantVideoAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariantVideoAttributes")), objc.RegisterName("new"))
-	return &AssetVariantVideoAttributes{inner: raw.AVAssetVariantVideoAttributesFromID(_id)}
-}
-
-// Provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
-//
-// VideoRange calls the underlying VideoRange.
-func (x *AssetVariantVideoAttributes) VideoRange() string {
-	_r := x.inner.VideoRange()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
-//
-// CodecTypes returns the collection as a Go slice.
-func (x *AssetVariantVideoAttributes) CodecTypes() []*foundation.NSNumber {
-	arr := x.inner.CodecTypes()
-	if arr == nil {
+// assetVariantVideoAttributesAdopt wraps an Objective-C object that this code just created as a
+// AssetVariantVideoAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetVariantVideoAttributesAdopt(id objc.ID) *AssetVariantVideoAttributes {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &AssetVariantVideoAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// If it is not declared, it will be CGSizeZero.
+// Description returns the object's -description text.
+func (x *AssetVariantVideoAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetVariantVideoAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetVariantVideoAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantVideoAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetVariantVideoAttributes creates a new AssetVariantVideoAttributes.
+func NewAssetVariantVideoAttributes() *AssetVariantVideoAttributes {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantVideoAttributes")), objc.RegisterName("new"))
+	return assetVariantVideoAttributesAdopt(_id)
+}
+
+// VideoRange provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
+func (x *AssetVariantVideoAttributes) VideoRange() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoRange"))
+	return obj.Wrap(_r)
+}
+
+// CodecTypes provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
 //
-// PresentationSize calls the underlying PresentationSize.
+// CodecTypes returns the collection as a Go slice.
+func (x *AssetVariantVideoAttributes) CodecTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("codecTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// PresentationSize if it is not declared, it will be CGSizeZero.
 func (x *AssetVariantVideoAttributes) PresentationSize() corefoundation.CGSize {
-	return x.inner.PresentationSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("presentationSize"))
+	return _r
 }
 
-// If it is not declared, the value will be negative.
-//
-// NominalFrameRate calls the underlying NominalFrameRate.
+// NominalFrameRate if it is not declared, the value will be negative.
 func (x *AssetVariantVideoAttributes) NominalFrameRate() float64 {
-	return x.inner.NominalFrameRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("nominalFrameRate"))
+	return _r
 }
 
-// Describes the video layout attributes. videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
+// VideoLayoutAttributes describes the video layout attributes. videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
 //
 // VideoLayoutAttributes returns the collection as a Go slice.
 func (x *AssetVariantVideoAttributes) VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes {
-	arr := x.inner.VideoLayoutAttributes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariantVideoLayoutAttributes {
-		return &AssetVariantVideoLayoutAttributes{inner: raw.AVAssetVariantVideoLayoutAttributesFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoLayoutAttributes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariantVideoLayoutAttributes {
+		return AssetVariantVideoLayoutAttributesFromID(_id)
 	})
 }
 
 // AssetVariantVideoAttributesable is the interface implemented by [AssetVariantVideoAttributes], for mocking and DI.
 type AssetVariantVideoAttributesable interface {
-	Unwrap() *raw.AVAssetVariantVideoAttributes
-	VideoRange() string
-	CodecTypes() []*foundation.NSNumber
+	obj.Object
+	VideoRange() obj.Object
+	CodecTypes() []obj.Object
 	PresentationSize() corefoundation.CGSize
 	NominalFrameRate() float64
 	VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes

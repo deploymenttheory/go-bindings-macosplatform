@@ -5,55 +5,65 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMAbstractView wraps [raw.DOMAbstractView] with a fluent Go API.
+// DOMAbstractView is an idiomatic wrapper over the Objective-C class DOMAbstractView.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMAbstractView struct {
-	inner *raw.DOMAbstractView
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMAbstractView].
-func (x *DOMAbstractView) Unwrap() *raw.DOMAbstractView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMAbstractView) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMAbstractViewFromID adopts an existing object pointer as a DOMAbstractView (nil for 0).
+// DOMAbstractViewFromID adopts an existing Objective-C object as a DOMAbstractView
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMAbstractViewFromID(id objc.ID) *DOMAbstractView {
 	if id == 0 {
 		return nil
 	}
-	return &DOMAbstractView{inner: raw.DOMAbstractViewFromID(id)}
+	x := &DOMAbstractView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMAbstractView creates a new [DOMAbstractView].
-func NewDOMAbstractView() *DOMAbstractView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMAbstractView")), objc.RegisterName("new"))
-	return &DOMAbstractView{inner: raw.DOMAbstractViewFromID(_id)}
-}
-
-// Document calls the underlying Document.
-func (x *DOMAbstractView) Document() *DOMDocument {
-	_r := x.inner.Document()
-	if _r == nil {
+// dOMAbstractViewAdopt wraps an Objective-C object that this code just created as a
+// DOMAbstractView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMAbstractViewAdopt(id objc.ID) *DOMAbstractView {
+	if id == 0 {
 		return nil
 	}
-	return &DOMDocument{inner: _r}
+	x := &DOMAbstractView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DOMAbstractView) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
+// NewDOMAbstractView creates a new DOMAbstractView.
+func NewDOMAbstractView() *DOMAbstractView {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMAbstractView")), objc.RegisterName("new"))
+	return dOMAbstractViewAdopt(_id)
+}
 
-func (x *DOMAbstractView) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// Document wraps the corresponding Objective-C method.
+func (x *DOMAbstractView) Document() *DOMDocument {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+	return DOMDocumentFromID(_r)
 }
 
 // DOMAbstractViewable is the interface implemented by [DOMAbstractView], for mocking and DI.
 type DOMAbstractViewable interface {
-	Unwrap() *raw.DOMAbstractView
+	obj.Object
 	Document() *DOMDocument
 }
 
 var _ DOMAbstractViewable = (*DOMAbstractView)(nil)
+
+var _ DOMObjectProvider = (*DOMAbstractView)(nil)
+
+var _ WebScriptObjectProvider = (*DOMAbstractView)(nil)

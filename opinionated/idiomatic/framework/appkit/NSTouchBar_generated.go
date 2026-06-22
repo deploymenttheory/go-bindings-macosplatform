@@ -5,325 +5,254 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that provides dynamic contextual controls in the Touch Bar of supported models of MacBook Pro.
+// TouchBar is an idiomatic wrapper over the Objective-C class NSTouchBar.
 //
-// TouchBar wraps [raw.NSTouchBar] with a fluent Go API.
+// An object that provides dynamic contextual controls in the Touch Bar of supported models of MacBook Pro.
 type TouchBar struct {
-	inner *raw.NSTouchBar
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTouchBar].
-func (x *TouchBar) Unwrap() *raw.NSTouchBar { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TouchBar) ID() objc.ID { return x.inner.Ptr() }
-
-// TouchBarFromID adopts an existing object pointer as a TouchBar (nil for 0).
+// TouchBarFromID adopts an existing Objective-C object as a TouchBar
+// (nil for 0), retaining it and registering a release finalizer.
 func TouchBarFromID(id objc.ID) *TouchBar {
 	if id == 0 {
 		return nil
 	}
-	return &TouchBar{inner: raw.NSTouchBarFromID(id)}
+	x := &TouchBar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTouchBar creates a new [TouchBar].
+// touchBarAdopt wraps an Objective-C object that this code just created as a
+// TouchBar (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func touchBarAdopt(id objc.ID) *TouchBar {
+	if id == 0 {
+		return nil
+	}
+	x := &TouchBar{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TouchBar) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TouchBar) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TouchBar) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TouchBar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTouchBar creates a new TouchBar.
 func NewTouchBar() *TouchBar {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBar")), objc.RegisterName("new"))
-	return &TouchBar{inner: raw.NSTouchBarFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTouchBar")), objc.RegisterName("new"))
+	return touchBarAdopt(_id)
 }
 
-// Creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
-//
-// NewTouchBarWithCoder creates a new [TouchBar].
-func NewTouchBarWithCoder(coder *foundation.NSCoder) *TouchBar {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBar")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &TouchBar{inner: raw.NSTouchBarFromID(_id)}
+// NewTouchBarWithCoder creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
+func NewTouchBarWithCoder(coder obj.Object) *TouchBar {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBar")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return touchBarAdopt(_id)
 }
 
-// A globally unique string that makes the Touch Bar eligible for user customization.
-//
-// WithCustomizationIdentifier sets the customizationIdentifier property and returns the receiver for chaining.
-func (x *TouchBar) WithCustomizationIdentifier(customizationIdentifier *foundation.NSString) *TouchBar {
-	x.inner.SetCustomizationIdentifier(customizationIdentifier)
+// WithCustomizationIdentifier a globally unique string that makes the Touch Bar eligible for user customization.
+func (x *TouchBar) WithCustomizationIdentifier(customizationIdentifier obj.Object) *TouchBar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationIdentifier:"), objref.IDOf(customizationIdentifier))
 	return x
 }
 
-// A list of identifiers for items to show in the Touch Bar’s customization UI.
-//
-// WithCustomizationAllowedItemIdentifiers sets the collection, converting the Go slice to an NSArray.
-func (x *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...*foundation.NSString) *TouchBar {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCustomizationAllowedItemIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCustomizationAllowedItemIdentifiers(_arr)
+// WithCustomizationAllowedItemIdentifiers a list of identifiers for items to show in the Touch Bar’s customization UI.
+func (x *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...obj.Object) *TouchBar {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationAllowedItemIdentifiers:"), _arr)
 	return x
 }
 
-// An optional list of identifiers for items you want to always appear in the Touch Bar and which the user can’t remove during customization.
-//
-// WithCustomizationRequiredItemIdentifiers sets the collection, converting the Go slice to an NSArray.
-func (x *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...*foundation.NSString) *TouchBar {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCustomizationRequiredItemIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCustomizationRequiredItemIdentifiers(_arr)
+// WithCustomizationRequiredItemIdentifiers an optional list of identifiers for items you want to always appear in the Touch Bar and which the user can’t remove during customization.
+func (x *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...obj.Object) *TouchBar {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationRequiredItemIdentifiers:"), _arr)
 	return x
 }
 
-// A required list of identifiers for items that you want to appear in the Touch Bar after instantiating it.
-//
-// WithDefaultItemIdentifiers sets the collection, converting the Go slice to an NSArray.
-func (x *TouchBar) WithDefaultItemIdentifiers(items ...*foundation.NSString) *TouchBar {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDefaultItemIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDefaultItemIdentifiers(_arr)
+// WithDefaultItemIdentifiers a required list of identifiers for items that you want to appear in the Touch Bar after instantiating it.
+func (x *TouchBar) WithDefaultItemIdentifiers(items ...obj.Object) *TouchBar {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultItemIdentifiers:"), _arr)
 	return x
 }
 
-// The identifier of an item you want the system to center in the Touch Bar.
-//
-// WithPrincipalItemIdentifier sets the principalItemIdentifier property and returns the receiver for chaining.
-func (x *TouchBar) WithPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) *TouchBar {
-	x.inner.SetPrincipalItemIdentifier(principalItemIdentifier)
+// WithPrincipalItemIdentifier the identifier of an item you want the system to center in the Touch Bar.
+func (x *TouchBar) WithPrincipalItemIdentifier(principalItemIdentifier obj.Object) *TouchBar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrincipalItemIdentifier:"), objref.IDOf(principalItemIdentifier))
 	return x
 }
 
-// The identifier of an item that replaces the system-provided button in the Touch Bar.
-//
-// WithEscapeKeyReplacementItemIdentifier sets the escapeKeyReplacementItemIdentifier property and returns the receiver for chaining.
-func (x *TouchBar) WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) *TouchBar {
-	x.inner.SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier)
+// WithEscapeKeyReplacementItemIdentifier the identifier of an item that replaces the system-provided button in the Touch Bar.
+func (x *TouchBar) WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier obj.Object) *TouchBar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEscapeKeyReplacementItemIdentifier:"), objref.IDOf(escapeKeyReplacementItemIdentifier))
 	return x
 }
 
-// The primary source of items that the Touch Bar uses to fill its private items array, unless you provide items using a delegate.
-//
-// WithTemplateItems sets the templateItems property and returns the receiver for chaining.
-func (x *TouchBar) WithTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem]) *TouchBar {
-	x.inner.SetTemplateItems(templateItems)
+// WithTemplateItems the primary source of items that the Touch Bar uses to fill its private items array, unless you provide items using a delegate.
+func (x *TouchBar) WithTemplateItems(templateItems obj.Object) *TouchBar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateItems:"), objref.IDOf(templateItems))
 	return x
 }
 
-// The delegate that provides items to the Touch Bar.
+// ItemForIdentifier returns the Touch Bar item that corresponds to a given identifier.
+func (x *TouchBar) ItemForIdentifier(identifier obj.Object) *TouchBarItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemForIdentifier:"), objref.IDOf(identifier))
+	return TouchBarItemFromID(_r)
+}
+
+// CustomizationIdentifier wraps the corresponding Objective-C method.
+func (x *TouchBar) CustomizationIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customizationIdentifier"))
+	return obj.Wrap(_r)
+}
+
+// SetCustomizationIdentifier wraps the corresponding Objective-C method.
+func (x *TouchBar) SetCustomizationIdentifier(customizationIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationIdentifier:"), objref.IDOf(customizationIdentifier))
+}
+
+// CustomizationAllowedItemIdentifiers wraps the corresponding Objective-C method.
 //
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TouchBar) WithDelegate(delegate raw.NSTouchBarDelegate) *TouchBar {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Returns the Touch Bar item that corresponds to a given identifier.
-//
-// ItemForIdentifier calls the underlying ItemForIdentifier.
-func (x *TouchBar) ItemForIdentifier(identifier *foundation.NSString) *TouchBarItem {
-	_r := x.inner.ItemForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &TouchBarItem{inner: _r}
-}
-
-// CustomizationIdentifier calls the underlying CustomizationIdentifier.
-func (x *TouchBar) CustomizationIdentifier() string {
-	_r := x.inner.CustomizationIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetCustomizationIdentifier calls the underlying SetCustomizationIdentifier.
-func (x *TouchBar) SetCustomizationIdentifier(customizationIdentifier *foundation.NSString) {
-	x.inner.SetCustomizationIdentifier(customizationIdentifier)
-}
-
 // CustomizationAllowedItemIdentifiers returns the collection as a Go slice.
-func (x *TouchBar) CustomizationAllowedItemIdentifiers() []*foundation.NSString {
-	arr := x.inner.CustomizationAllowedItemIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *TouchBar) CustomizationAllowedItemIdentifiers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customizationAllowedItemIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetCustomizationAllowedItemIdentifiers calls the underlying SetCustomizationAllowedItemIdentifiers.
-func (x *TouchBar) SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers)
+// SetCustomizationAllowedItemIdentifiers wraps the corresponding Objective-C method.
+func (x *TouchBar) SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationAllowedItemIdentifiers:"), purego.SliceToNSArray(customizationAllowedItemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// CustomizationRequiredItemIdentifiers wraps the corresponding Objective-C method.
+//
 // CustomizationRequiredItemIdentifiers returns the collection as a Go slice.
-func (x *TouchBar) CustomizationRequiredItemIdentifiers() []*foundation.NSString {
-	arr := x.inner.CustomizationRequiredItemIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *TouchBar) CustomizationRequiredItemIdentifiers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customizationRequiredItemIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetCustomizationRequiredItemIdentifiers calls the underlying SetCustomizationRequiredItemIdentifiers.
-func (x *TouchBar) SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers)
+// SetCustomizationRequiredItemIdentifiers wraps the corresponding Objective-C method.
+func (x *TouchBar) SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationRequiredItemIdentifiers:"), purego.SliceToNSArray(customizationRequiredItemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// DefaultItemIdentifiers wraps the corresponding Objective-C method.
+//
 // DefaultItemIdentifiers returns the collection as a Go slice.
-func (x *TouchBar) DefaultItemIdentifiers() []*foundation.NSString {
-	arr := x.inner.DefaultItemIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *TouchBar) DefaultItemIdentifiers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultItemIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDefaultItemIdentifiers calls the underlying SetDefaultItemIdentifiers.
-func (x *TouchBar) SetDefaultItemIdentifiers(defaultItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDefaultItemIdentifiers(defaultItemIdentifiers)
+// SetDefaultItemIdentifiers wraps the corresponding Objective-C method.
+func (x *TouchBar) SetDefaultItemIdentifiers(defaultItemIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultItemIdentifiers:"), purego.SliceToNSArray(defaultItemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// ItemIdentifiers wraps the corresponding Objective-C method.
+//
 // ItemIdentifiers returns the collection as a Go slice.
-func (x *TouchBar) ItemIdentifiers() []*foundation.NSString {
-	arr := x.inner.ItemIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *TouchBar) ItemIdentifiers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PrincipalItemIdentifier calls the underlying PrincipalItemIdentifier.
-func (x *TouchBar) PrincipalItemIdentifier() string {
-	_r := x.inner.PrincipalItemIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// PrincipalItemIdentifier wraps the corresponding Objective-C method.
+func (x *TouchBar) PrincipalItemIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("principalItemIdentifier"))
+	return obj.Wrap(_r)
 }
 
-// SetPrincipalItemIdentifier calls the underlying SetPrincipalItemIdentifier.
-func (x *TouchBar) SetPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) {
-	x.inner.SetPrincipalItemIdentifier(principalItemIdentifier)
+// SetPrincipalItemIdentifier wraps the corresponding Objective-C method.
+func (x *TouchBar) SetPrincipalItemIdentifier(principalItemIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrincipalItemIdentifier:"), objref.IDOf(principalItemIdentifier))
 }
 
-// EscapeKeyReplacementItemIdentifier calls the underlying EscapeKeyReplacementItemIdentifier.
-func (x *TouchBar) EscapeKeyReplacementItemIdentifier() string {
-	_r := x.inner.EscapeKeyReplacementItemIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// EscapeKeyReplacementItemIdentifier wraps the corresponding Objective-C method.
+func (x *TouchBar) EscapeKeyReplacementItemIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("escapeKeyReplacementItemIdentifier"))
+	return obj.Wrap(_r)
 }
 
-// SetEscapeKeyReplacementItemIdentifier calls the underlying SetEscapeKeyReplacementItemIdentifier.
-func (x *TouchBar) SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) {
-	x.inner.SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier)
+// SetEscapeKeyReplacementItemIdentifier wraps the corresponding Objective-C method.
+func (x *TouchBar) SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEscapeKeyReplacementItemIdentifier:"), objref.IDOf(escapeKeyReplacementItemIdentifier))
 }
 
-// TemplateItems calls the underlying TemplateItems.
-func (x *TouchBar) TemplateItems() *foundation.NSSet[*raw.NSTouchBarItem] {
-	return x.inner.TemplateItems()
+// TemplateItems wraps the corresponding Objective-C method.
+func (x *TouchBar) TemplateItems() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateItems"))
+	return obj.Wrap(_r)
 }
 
-// SetTemplateItems calls the underlying SetTemplateItems.
-func (x *TouchBar) SetTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem]) {
-	x.inner.SetTemplateItems(templateItems)
+// SetTemplateItems wraps the corresponding Objective-C method.
+func (x *TouchBar) SetTemplateItems(templateItems obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateItems:"), objref.IDOf(templateItems))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *TouchBar) Delegate() raw.NSTouchBarDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *TouchBar) SetDelegate(delegate raw.NSTouchBarDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IsVisible calls the underlying IsVisible.
+// IsVisible wraps the corresponding Objective-C method.
 func (x *TouchBar) IsVisible() bool {
-	return x.inner.IsVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+	return _r
 }
 
 // TouchBarable is the interface implemented by [TouchBar], for mocking and DI.
 type TouchBarable interface {
-	Unwrap() *raw.NSTouchBar
-	WithCustomizationIdentifier(customizationIdentifier *foundation.NSString) *TouchBar
-	WithCustomizationAllowedItemIdentifiers(items ...*foundation.NSString) *TouchBar
-	WithCustomizationRequiredItemIdentifiers(items ...*foundation.NSString) *TouchBar
-	WithDefaultItemIdentifiers(items ...*foundation.NSString) *TouchBar
-	WithPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) *TouchBar
-	WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) *TouchBar
-	WithTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem]) *TouchBar
-	WithDelegate(delegate raw.NSTouchBarDelegate) *TouchBar
-	ItemForIdentifier(identifier *foundation.NSString) *TouchBarItem
-	CustomizationIdentifier() string
-	SetCustomizationIdentifier(customizationIdentifier *foundation.NSString)
-	CustomizationAllowedItemIdentifiers() []*foundation.NSString
-	SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers *foundation.NSArray[*foundation.NSString])
-	CustomizationRequiredItemIdentifiers() []*foundation.NSString
-	SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers *foundation.NSArray[*foundation.NSString])
-	DefaultItemIdentifiers() []*foundation.NSString
-	SetDefaultItemIdentifiers(defaultItemIdentifiers *foundation.NSArray[*foundation.NSString])
-	ItemIdentifiers() []*foundation.NSString
-	PrincipalItemIdentifier() string
-	SetPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString)
-	EscapeKeyReplacementItemIdentifier() string
-	SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString)
-	TemplateItems() *foundation.NSSet[*raw.NSTouchBarItem]
-	SetTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem])
-	Delegate() raw.NSTouchBarDelegate
-	SetDelegate(delegate raw.NSTouchBarDelegate)
+	obj.Object
+	WithCustomizationIdentifier(customizationIdentifier obj.Object) *TouchBar
+	WithCustomizationAllowedItemIdentifiers(items ...obj.Object) *TouchBar
+	WithCustomizationRequiredItemIdentifiers(items ...obj.Object) *TouchBar
+	WithDefaultItemIdentifiers(items ...obj.Object) *TouchBar
+	WithPrincipalItemIdentifier(principalItemIdentifier obj.Object) *TouchBar
+	WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier obj.Object) *TouchBar
+	WithTemplateItems(templateItems obj.Object) *TouchBar
+	ItemForIdentifier(identifier obj.Object) *TouchBarItem
+	CustomizationIdentifier() obj.Object
+	SetCustomizationIdentifier(customizationIdentifier obj.Object)
+	CustomizationAllowedItemIdentifiers() []obj.Object
+	SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers []obj.Object)
+	CustomizationRequiredItemIdentifiers() []obj.Object
+	SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers []obj.Object)
+	DefaultItemIdentifiers() []obj.Object
+	SetDefaultItemIdentifiers(defaultItemIdentifiers []obj.Object)
+	ItemIdentifiers() []obj.Object
+	PrincipalItemIdentifier() obj.Object
+	SetPrincipalItemIdentifier(principalItemIdentifier obj.Object)
+	EscapeKeyReplacementItemIdentifier() obj.Object
+	SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier obj.Object)
+	TemplateItems() obj.Object
+	SetTemplateItems(templateItems obj.Object)
 	IsVisible() bool
 }
 

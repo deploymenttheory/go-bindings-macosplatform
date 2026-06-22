@@ -5,15 +5,11 @@
 package pushkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// A push type for file provider updates. Use file provider notifications to update your File Provider extension's content from your server. For more information, see <doc://com.apple.documentation/documentation/fileprovider/nonreplicated_file_provider_extension/content_and_change_tracking/tracking_your_file_provider_s_changes>.
-// PKPushTypeFileProvider returns the string constant PKPushTypeFileProvider as an objc.ID, for use as a dictionary key or selector argument.
-func PKPushTypeFileProvider() objc.ID {
-	if _r := raw.PKPushTypeFileProvider(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKPushTypeFileProvider returns the string constant PKPushTypeFileProvider, for use as a dictionary key or argument.
+func PKPushTypeFileProvider() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKPushTypeFileProvider")))
 }

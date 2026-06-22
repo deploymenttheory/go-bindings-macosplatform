@@ -5,43 +5,58 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object representing the currently signed-in iCloud user.
+// CloudPlayer is an idiomatic wrapper over the Objective-C class GKCloudPlayer.
 //
-// CloudPlayer wraps [raw.GKCloudPlayer] with a fluent Go API.
+// It embeds [BasePlayer], promoting that type's methods.
+//
+// The object representing the currently signed-in iCloud user.
 type CloudPlayer struct {
-	inner *raw.GKCloudPlayer
+	BasePlayer
 }
 
-// Unwrap returns the underlying [raw.GKCloudPlayer].
-func (x *CloudPlayer) Unwrap() *raw.GKCloudPlayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CloudPlayer) ID() objc.ID { return x.inner.Ptr() }
-
-// CloudPlayerFromID adopts an existing object pointer as a CloudPlayer (nil for 0).
+// CloudPlayerFromID adopts an existing Objective-C object as a CloudPlayer
+// (nil for 0), retaining it and registering a release finalizer.
 func CloudPlayerFromID(id objc.ID) *CloudPlayer {
 	if id == 0 {
 		return nil
 	}
-	return &CloudPlayer{inner: raw.GKCloudPlayerFromID(id)}
+	x := &CloudPlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCloudPlayer creates a new [CloudPlayer].
+// cloudPlayerAdopt wraps an Objective-C object that this code just created as a
+// CloudPlayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cloudPlayerAdopt(id objc.ID) *CloudPlayer {
+	if id == 0 {
+		return nil
+	}
+	x := &CloudPlayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCloudPlayer creates a new CloudPlayer.
 func NewCloudPlayer() *CloudPlayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCloudPlayer")), objc.RegisterName("new"))
-	return &CloudPlayer{inner: raw.GKCloudPlayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKCloudPlayer")), objc.RegisterName("new"))
+	return cloudPlayerAdopt(_id)
 }
-
-func (x *CloudPlayer) asBasePlayer() *raw.GKBasePlayer { return &x.inner.GKBasePlayer }
 
 // CloudPlayerable is the interface implemented by [CloudPlayer], for mocking and DI.
 type CloudPlayerable interface {
-	Unwrap() *raw.GKCloudPlayer
+	obj.Object
 }
 
 var _ CloudPlayerable = (*CloudPlayer)(nil)
+
+var _ BasePlayerProvider = (*CloudPlayer)(nil)

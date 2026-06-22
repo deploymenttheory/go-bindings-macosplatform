@@ -5,12 +5,9 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// BAErrorDomain returns the string constant BAErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func BAErrorDomain() objc.ID {
-	return purego.CFConstant(raw.BAErrorDomain())
-}
+// BAErrorDomain returns the string constant BAErrorDomain, for use as a dictionary key or argument.
+func BAErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("BAErrorDomain"))) }

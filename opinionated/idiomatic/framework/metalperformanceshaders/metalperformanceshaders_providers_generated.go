@@ -5,365 +5,431 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AccelerationStructureProvider is implemented by AccelerationStructure and any idiomatic type wrapping a MPSAccelerationStructure subclass.
+// AccelerationStructureProvider is accepted wherever a MPSAccelerationStructure (or one of its subclasses) is expected.
 type AccelerationStructureProvider interface {
-	asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure
+	objref.Object
+	isAccelerationStructure()
 }
 
-// BinaryImageKernelProvider is implemented by BinaryImageKernel and any idiomatic type wrapping a MPSBinaryImageKernel subclass.
+// BinaryImageKernelProvider is accepted wherever a MPSBinaryImageKernel (or one of its subclasses) is expected.
 type BinaryImageKernelProvider interface {
-	asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel
+	objref.Object
+	isBinaryImageKernel()
 }
 
-// CNNArithmeticProvider is implemented by CNNArithmetic and any idiomatic type wrapping a MPSCNNArithmetic subclass.
+// CNNArithmeticProvider is accepted wherever a MPSCNNArithmetic (or one of its subclasses) is expected.
 type CNNArithmeticProvider interface {
-	asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic
+	objref.Object
+	isCNNArithmetic()
 }
 
-// CNNArithmeticGradientProvider is implemented by CNNArithmeticGradient and any idiomatic type wrapping a MPSCNNArithmeticGradient subclass.
+// CNNArithmeticGradientProvider is accepted wherever a MPSCNNArithmeticGradient (or one of its subclasses) is expected.
 type CNNArithmeticGradientProvider interface {
-	asCNNArithmeticGradient() *mpsneuralnetwork.MPSCNNArithmeticGradient
+	objref.Object
+	isCNNArithmeticGradient()
 }
 
-// CNNBinaryConvolutionProvider is implemented by CNNBinaryConvolution and any idiomatic type wrapping a MPSCNNBinaryConvolution subclass.
+// CNNBinaryConvolutionProvider is accepted wherever a MPSCNNBinaryConvolution (or one of its subclasses) is expected.
 type CNNBinaryConvolutionProvider interface {
-	asCNNBinaryConvolution() *mpsneuralnetwork.MPSCNNBinaryConvolution
+	objref.Object
+	isCNNBinaryConvolution()
 }
 
-// CNNBinaryConvolutionNodeProvider is implemented by CNNBinaryConvolutionNode and any idiomatic type wrapping a MPSCNNBinaryConvolutionNode subclass.
+// CNNBinaryConvolutionNodeProvider is accepted wherever a MPSCNNBinaryConvolutionNode (or one of its subclasses) is expected.
 type CNNBinaryConvolutionNodeProvider interface {
-	asCNNBinaryConvolutionNode() *mpsneuralnetwork.MPSCNNBinaryConvolutionNode
+	objref.Object
+	isCNNBinaryConvolutionNode()
 }
 
-// CNNBinaryKernelProvider is implemented by CNNBinaryKernel and any idiomatic type wrapping a MPSCNNBinaryKernel subclass.
+// CNNBinaryKernelProvider is accepted wherever a MPSCNNBinaryKernel (or one of its subclasses) is expected.
 type CNNBinaryKernelProvider interface {
-	asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel
+	objref.Object
+	isCNNBinaryKernel()
 }
 
-// CNNConvolutionProvider is implemented by CNNConvolution and any idiomatic type wrapping a MPSCNNConvolution subclass.
+// CNNConvolutionProvider is accepted wherever a MPSCNNConvolution (or one of its subclasses) is expected.
 type CNNConvolutionProvider interface {
-	asCNNConvolution() *mpsneuralnetwork.MPSCNNConvolution
+	objref.Object
+	isCNNConvolution()
 }
 
-// CNNConvolutionDescriptorProvider is implemented by CNNConvolutionDescriptor and any idiomatic type wrapping a MPSCNNConvolutionDescriptor subclass.
+// CNNConvolutionDescriptorProvider is accepted wherever a MPSCNNConvolutionDescriptor (or one of its subclasses) is expected.
 type CNNConvolutionDescriptorProvider interface {
-	asCNNConvolutionDescriptor() *mpsneuralnetwork.MPSCNNConvolutionDescriptor
+	objref.Object
+	isCNNConvolutionDescriptor()
 }
 
-// CNNConvolutionGradientProvider is implemented by CNNConvolutionGradient and any idiomatic type wrapping a MPSCNNConvolutionGradient subclass.
+// CNNConvolutionGradientProvider is accepted wherever a MPSCNNConvolutionGradient (or one of its subclasses) is expected.
 type CNNConvolutionGradientProvider interface {
-	asCNNConvolutionGradient() *mpsneuralnetwork.MPSCNNConvolutionGradient
+	objref.Object
+	isCNNConvolutionGradient()
 }
 
-// CNNConvolutionGradientNodeProvider is implemented by CNNConvolutionGradientNode and any idiomatic type wrapping a MPSCNNConvolutionGradientNode subclass.
+// CNNConvolutionGradientNodeProvider is accepted wherever a MPSCNNConvolutionGradientNode (or one of its subclasses) is expected.
 type CNNConvolutionGradientNodeProvider interface {
-	asCNNConvolutionGradientNode() *mpsneuralnetwork.MPSCNNConvolutionGradientNode
+	objref.Object
+	isCNNConvolutionGradientNode()
 }
 
-// CNNConvolutionGradientStateProvider is implemented by CNNConvolutionGradientState and any idiomatic type wrapping a MPSCNNConvolutionGradientState subclass.
+// CNNConvolutionGradientStateProvider is accepted wherever a MPSCNNConvolutionGradientState (or one of its subclasses) is expected.
 type CNNConvolutionGradientStateProvider interface {
-	asCNNConvolutionGradientState() *mpsneuralnetwork.MPSCNNConvolutionGradientState
+	objref.Object
+	isCNNConvolutionGradientState()
 }
 
-// CNNConvolutionGradientStateNodeProvider is implemented by CNNConvolutionGradientStateNode and any idiomatic type wrapping a MPSCNNConvolutionGradientStateNode subclass.
+// CNNConvolutionGradientStateNodeProvider is accepted wherever a MPSCNNConvolutionGradientStateNode (or one of its subclasses) is expected.
 type CNNConvolutionGradientStateNodeProvider interface {
-	asCNNConvolutionGradientStateNode() *mpsneuralnetwork.MPSCNNConvolutionGradientStateNode
+	objref.Object
+	isCNNConvolutionGradientStateNode()
 }
 
-// CNNConvolutionNodeProvider is implemented by CNNConvolutionNode and any idiomatic type wrapping a MPSCNNConvolutionNode subclass.
+// CNNConvolutionNodeProvider is accepted wherever a MPSCNNConvolutionNode (or one of its subclasses) is expected.
 type CNNConvolutionNodeProvider interface {
-	asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode
+	objref.Object
+	isCNNConvolutionNode()
 }
 
-// CNNGradientKernelProvider is implemented by CNNGradientKernel and any idiomatic type wrapping a MPSCNNGradientKernel subclass.
+// CNNGradientKernelProvider is accepted wherever a MPSCNNGradientKernel (or one of its subclasses) is expected.
 type CNNGradientKernelProvider interface {
-	asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel
+	objref.Object
+	isCNNGradientKernel()
 }
 
-// CNNKernelProvider is implemented by CNNKernel and any idiomatic type wrapping a MPSCNNKernel subclass.
+// CNNKernelProvider is accepted wherever a MPSCNNKernel (or one of its subclasses) is expected.
 type CNNKernelProvider interface {
-	asCNNKernel() *mpsneuralnetwork.MPSCNNKernel
+	objref.Object
+	isCNNKernel()
 }
 
-// CNNNeuronProvider is implemented by CNNNeuron and any idiomatic type wrapping a MPSCNNNeuron subclass.
+// CNNNeuronProvider is accepted wherever a MPSCNNNeuron (or one of its subclasses) is expected.
 type CNNNeuronProvider interface {
-	asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron
+	objref.Object
+	isCNNNeuron()
 }
 
-// CNNNeuronNodeProvider is implemented by CNNNeuronNode and any idiomatic type wrapping a MPSCNNNeuronNode subclass.
+// CNNNeuronNodeProvider is accepted wherever a MPSCNNNeuronNode (or one of its subclasses) is expected.
 type CNNNeuronNodeProvider interface {
-	asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode
+	objref.Object
+	isCNNNeuronNode()
 }
 
-// CNNNormalizationNodeProvider is implemented by CNNNormalizationNode and any idiomatic type wrapping a MPSCNNNormalizationNode subclass.
+// CNNNormalizationNodeProvider is accepted wherever a MPSCNNNormalizationNode (or one of its subclasses) is expected.
 type CNNNormalizationNodeProvider interface {
-	asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode
+	objref.Object
+	isCNNNormalizationNode()
 }
 
-// CNNPoolingProvider is implemented by CNNPooling and any idiomatic type wrapping a MPSCNNPooling subclass.
+// CNNPoolingProvider is accepted wherever a MPSCNNPooling (or one of its subclasses) is expected.
 type CNNPoolingProvider interface {
-	asCNNPooling() *mpsneuralnetwork.MPSCNNPooling
+	objref.Object
+	isCNNPooling()
 }
 
-// CNNPoolingGradientProvider is implemented by CNNPoolingGradient and any idiomatic type wrapping a MPSCNNPoolingGradient subclass.
+// CNNPoolingGradientProvider is accepted wherever a MPSCNNPoolingGradient (or one of its subclasses) is expected.
 type CNNPoolingGradientProvider interface {
-	asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient
+	objref.Object
+	isCNNPoolingGradient()
 }
 
-// CNNPoolingGradientNodeProvider is implemented by CNNPoolingGradientNode and any idiomatic type wrapping a MPSCNNPoolingGradientNode subclass.
+// CNNPoolingGradientNodeProvider is accepted wherever a MPSCNNPoolingGradientNode (or one of its subclasses) is expected.
 type CNNPoolingGradientNodeProvider interface {
-	asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode
+	objref.Object
+	isCNNPoolingGradientNode()
 }
 
-// CNNPoolingNodeProvider is implemented by CNNPoolingNode and any idiomatic type wrapping a MPSCNNPoolingNode subclass.
+// CNNPoolingNodeProvider is accepted wherever a MPSCNNPoolingNode (or one of its subclasses) is expected.
 type CNNPoolingNodeProvider interface {
-	asCNNPoolingNode() *mpsneuralnetwork.MPSCNNPoolingNode
+	objref.Object
+	isCNNPoolingNode()
 }
 
-// CNNUpsamplingProvider is implemented by CNNUpsampling and any idiomatic type wrapping a MPSCNNUpsampling subclass.
+// CNNUpsamplingProvider is accepted wherever a MPSCNNUpsampling (or one of its subclasses) is expected.
 type CNNUpsamplingProvider interface {
-	asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling
+	objref.Object
+	isCNNUpsampling()
 }
 
-// CNNUpsamplingGradientProvider is implemented by CNNUpsamplingGradient and any idiomatic type wrapping a MPSCNNUpsamplingGradient subclass.
+// CNNUpsamplingGradientProvider is accepted wherever a MPSCNNUpsamplingGradient (or one of its subclasses) is expected.
 type CNNUpsamplingGradientProvider interface {
-	asCNNUpsamplingGradient() *mpsneuralnetwork.MPSCNNUpsamplingGradient
+	objref.Object
+	isCNNUpsamplingGradient()
 }
 
-// ImageProvider is implemented by Image and any idiomatic type wrapping a MPSImage subclass.
+// ImageProvider is accepted wherever a MPSImage (or one of its subclasses) is expected.
 type ImageProvider interface {
-	asImage() *mpscore.MPSImage
+	objref.Object
+	isImage()
 }
 
-// ImageAreaMaxProvider is implemented by ImageAreaMax and any idiomatic type wrapping a MPSImageAreaMax subclass.
+// ImageAreaMaxProvider is accepted wherever a MPSImageAreaMax (or one of its subclasses) is expected.
 type ImageAreaMaxProvider interface {
-	asImageAreaMax() *mpsimage.MPSImageAreaMax
+	objref.Object
+	isImageAreaMax()
 }
 
-// ImageArithmeticProvider is implemented by ImageArithmetic and any idiomatic type wrapping a MPSImageArithmetic subclass.
+// ImageArithmeticProvider is accepted wherever a MPSImageArithmetic (or one of its subclasses) is expected.
 type ImageArithmeticProvider interface {
-	asImageArithmetic() *mpsimage.MPSImageArithmetic
+	objref.Object
+	isImageArithmetic()
 }
 
-// ImageBoxProvider is implemented by ImageBox and any idiomatic type wrapping a MPSImageBox subclass.
+// ImageBoxProvider is accepted wherever a MPSImageBox (or one of its subclasses) is expected.
 type ImageBoxProvider interface {
-	asImageBox() *mpsimage.MPSImageBox
+	objref.Object
+	isImageBox()
 }
 
-// ImageDilateProvider is implemented by ImageDilate and any idiomatic type wrapping a MPSImageDilate subclass.
+// ImageDilateProvider is accepted wherever a MPSImageDilate (or one of its subclasses) is expected.
 type ImageDilateProvider interface {
-	asImageDilate() *mpsimage.MPSImageDilate
+	objref.Object
+	isImageDilate()
 }
 
-// ImageLaplacianPyramidProvider is implemented by ImageLaplacianPyramid and any idiomatic type wrapping a MPSImageLaplacianPyramid subclass.
+// ImageLaplacianPyramidProvider is accepted wherever a MPSImageLaplacianPyramid (or one of its subclasses) is expected.
 type ImageLaplacianPyramidProvider interface {
-	asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid
+	objref.Object
+	isImageLaplacianPyramid()
 }
 
-// ImagePyramidProvider is implemented by ImagePyramid and any idiomatic type wrapping a MPSImagePyramid subclass.
+// ImagePyramidProvider is accepted wherever a MPSImagePyramid (or one of its subclasses) is expected.
 type ImagePyramidProvider interface {
-	asImagePyramid() *mpsimage.MPSImagePyramid
+	objref.Object
+	isImagePyramid()
 }
 
-// ImageReduceUnaryProvider is implemented by ImageReduceUnary and any idiomatic type wrapping a MPSImageReduceUnary subclass.
+// ImageReduceUnaryProvider is accepted wherever a MPSImageReduceUnary (or one of its subclasses) is expected.
 type ImageReduceUnaryProvider interface {
-	asImageReduceUnary() *mpsimage.MPSImageReduceUnary
+	objref.Object
+	isImageReduceUnary()
 }
 
-// ImageScaleProvider is implemented by ImageScale and any idiomatic type wrapping a MPSImageScale subclass.
+// ImageScaleProvider is accepted wherever a MPSImageScale (or one of its subclasses) is expected.
 type ImageScaleProvider interface {
-	asImageScale() *mpsimage.MPSImageScale
+	objref.Object
+	isImageScale()
 }
 
-// KernelProvider is implemented by Kernel and any idiomatic type wrapping a MPSKernel subclass.
+// KernelProvider is accepted wherever a MPSKernel (or one of its subclasses) is expected.
 type KernelProvider interface {
-	asKernel() *mpscore.MPSKernel
+	objref.Object
+	isKernel()
 }
 
-// MatrixProvider is implemented by Matrix and any idiomatic type wrapping a MPSMatrix subclass.
+// MatrixProvider is accepted wherever a MPSMatrix (or one of its subclasses) is expected.
 type MatrixProvider interface {
-	asMatrix() *mpscore.MPSMatrix
+	objref.Object
+	isMatrix()
 }
 
-// MatrixBinaryKernelProvider is implemented by MatrixBinaryKernel and any idiomatic type wrapping a MPSMatrixBinaryKernel subclass.
+// MatrixBinaryKernelProvider is accepted wherever a MPSMatrixBinaryKernel (or one of its subclasses) is expected.
 type MatrixBinaryKernelProvider interface {
-	asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel
+	objref.Object
+	isMatrixBinaryKernel()
 }
 
-// MatrixRandomProvider is implemented by MatrixRandom and any idiomatic type wrapping a MPSMatrixRandom subclass.
+// MatrixRandomProvider is accepted wherever a MPSMatrixRandom (or one of its subclasses) is expected.
 type MatrixRandomProvider interface {
-	asMatrixRandom() *mpsmatrix.MPSMatrixRandom
+	objref.Object
+	isMatrixRandom()
 }
 
-// MatrixSoftMaxProvider is implemented by MatrixSoftMax and any idiomatic type wrapping a MPSMatrixSoftMax subclass.
+// MatrixSoftMaxProvider is accepted wherever a MPSMatrixSoftMax (or one of its subclasses) is expected.
 type MatrixSoftMaxProvider interface {
-	asMatrixSoftMax() *mpsmatrix.MPSMatrixSoftMax
+	objref.Object
+	isMatrixSoftMax()
 }
 
-// MatrixSoftMaxGradientProvider is implemented by MatrixSoftMaxGradient and any idiomatic type wrapping a MPSMatrixSoftMaxGradient subclass.
+// MatrixSoftMaxGradientProvider is accepted wherever a MPSMatrixSoftMaxGradient (or one of its subclasses) is expected.
 type MatrixSoftMaxGradientProvider interface {
-	asMatrixSoftMaxGradient() *mpsmatrix.MPSMatrixSoftMaxGradient
+	objref.Object
+	isMatrixSoftMaxGradient()
 }
 
-// MatrixUnaryKernelProvider is implemented by MatrixUnaryKernel and any idiomatic type wrapping a MPSMatrixUnaryKernel subclass.
+// MatrixUnaryKernelProvider is accepted wherever a MPSMatrixUnaryKernel (or one of its subclasses) is expected.
 type MatrixUnaryKernelProvider interface {
-	asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel
+	objref.Object
+	isMatrixUnaryKernel()
 }
 
-// NDArrayProvider is implemented by NDArray and any idiomatic type wrapping a MPSNDArray subclass.
+// NDArrayProvider is accepted wherever a MPSNDArray (or one of its subclasses) is expected.
 type NDArrayProvider interface {
-	asNDArray() *mpscore.MPSNDArray
+	objref.Object
+	isNDArray()
 }
 
-// NDArrayBinaryKernelProvider is implemented by NDArrayBinaryKernel and any idiomatic type wrapping a MPSNDArrayBinaryKernel subclass.
+// NDArrayBinaryKernelProvider is accepted wherever a MPSNDArrayBinaryKernel (or one of its subclasses) is expected.
 type NDArrayBinaryKernelProvider interface {
-	asNDArrayBinaryKernel() *mpsndarray.MPSNDArrayBinaryKernel
+	objref.Object
+	isNDArrayBinaryKernel()
 }
 
-// NDArrayBinaryPrimaryGradientKernelProvider is implemented by NDArrayBinaryPrimaryGradientKernel and any idiomatic type wrapping a MPSNDArrayBinaryPrimaryGradientKernel subclass.
+// NDArrayBinaryPrimaryGradientKernelProvider is accepted wherever a MPSNDArrayBinaryPrimaryGradientKernel (or one of its subclasses) is expected.
 type NDArrayBinaryPrimaryGradientKernelProvider interface {
-	asNDArrayBinaryPrimaryGradientKernel() *mpsndarray.MPSNDArrayBinaryPrimaryGradientKernel
+	objref.Object
+	isNDArrayBinaryPrimaryGradientKernel()
 }
 
-// NDArrayGradientStateProvider is implemented by NDArrayGradientState and any idiomatic type wrapping a MPSNDArrayGradientState subclass.
+// NDArrayGradientStateProvider is accepted wherever a MPSNDArrayGradientState (or one of its subclasses) is expected.
 type NDArrayGradientStateProvider interface {
-	asNDArrayGradientState() *mpsndarray.MPSNDArrayGradientState
+	objref.Object
+	isNDArrayGradientState()
 }
 
-// NDArrayMatrixMultiplicationProvider is implemented by NDArrayMatrixMultiplication and any idiomatic type wrapping a MPSNDArrayMatrixMultiplication subclass.
+// NDArrayMatrixMultiplicationProvider is accepted wherever a MPSNDArrayMatrixMultiplication (or one of its subclasses) is expected.
 type NDArrayMatrixMultiplicationProvider interface {
-	asNDArrayMatrixMultiplication() *mpsndarray.MPSNDArrayMatrixMultiplication
+	objref.Object
+	isNDArrayMatrixMultiplication()
 }
 
-// NDArrayMultiaryBaseProvider is implemented by NDArrayMultiaryBase and any idiomatic type wrapping a MPSNDArrayMultiaryBase subclass.
+// NDArrayMultiaryBaseProvider is accepted wherever a MPSNDArrayMultiaryBase (or one of its subclasses) is expected.
 type NDArrayMultiaryBaseProvider interface {
-	asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase
+	objref.Object
+	isNDArrayMultiaryBase()
 }
 
-// NDArrayMultiaryGradientKernelProvider is implemented by NDArrayMultiaryGradientKernel and any idiomatic type wrapping a MPSNDArrayMultiaryGradientKernel subclass.
+// NDArrayMultiaryGradientKernelProvider is accepted wherever a MPSNDArrayMultiaryGradientKernel (or one of its subclasses) is expected.
 type NDArrayMultiaryGradientKernelProvider interface {
-	asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel
+	objref.Object
+	isNDArrayMultiaryGradientKernel()
 }
 
-// NDArrayMultiaryKernelProvider is implemented by NDArrayMultiaryKernel and any idiomatic type wrapping a MPSNDArrayMultiaryKernel subclass.
+// NDArrayMultiaryKernelProvider is accepted wherever a MPSNDArrayMultiaryKernel (or one of its subclasses) is expected.
 type NDArrayMultiaryKernelProvider interface {
-	asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel
+	objref.Object
+	isNDArrayMultiaryKernel()
 }
 
-// NDArrayQuantizationDescriptorProvider is implemented by NDArrayQuantizationDescriptor and any idiomatic type wrapping a MPSNDArrayQuantizationDescriptor subclass.
+// NDArrayQuantizationDescriptorProvider is accepted wherever a MPSNDArrayQuantizationDescriptor (or one of its subclasses) is expected.
 type NDArrayQuantizationDescriptorProvider interface {
-	asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor
+	objref.Object
+	isNDArrayQuantizationDescriptor()
 }
 
-// NDArrayUnaryGradientKernelProvider is implemented by NDArrayUnaryGradientKernel and any idiomatic type wrapping a MPSNDArrayUnaryGradientKernel subclass.
+// NDArrayUnaryGradientKernelProvider is accepted wherever a MPSNDArrayUnaryGradientKernel (or one of its subclasses) is expected.
 type NDArrayUnaryGradientKernelProvider interface {
-	asNDArrayUnaryGradientKernel() *mpsndarray.MPSNDArrayUnaryGradientKernel
+	objref.Object
+	isNDArrayUnaryGradientKernel()
 }
 
-// NDArrayUnaryKernelProvider is implemented by NDArrayUnaryKernel and any idiomatic type wrapping a MPSNDArrayUnaryKernel subclass.
+// NDArrayUnaryKernelProvider is accepted wherever a MPSNDArrayUnaryKernel (or one of its subclasses) is expected.
 type NDArrayUnaryKernelProvider interface {
-	asNDArrayUnaryKernel() *mpsndarray.MPSNDArrayUnaryKernel
+	objref.Object
+	isNDArrayUnaryKernel()
 }
 
-// NNArithmeticGradientNodeProvider is implemented by NNArithmeticGradientNode and any idiomatic type wrapping a MPSNNArithmeticGradientNode subclass.
+// NNArithmeticGradientNodeProvider is accepted wherever a MPSNNArithmeticGradientNode (or one of its subclasses) is expected.
 type NNArithmeticGradientNodeProvider interface {
-	asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode
+	objref.Object
+	isNNArithmeticGradientNode()
 }
 
-// NNBinaryArithmeticNodeProvider is implemented by NNBinaryArithmeticNode and any idiomatic type wrapping a MPSNNBinaryArithmeticNode subclass.
+// NNBinaryArithmeticNodeProvider is accepted wherever a MPSNNBinaryArithmeticNode (or one of its subclasses) is expected.
 type NNBinaryArithmeticNodeProvider interface {
-	asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode
+	objref.Object
+	isNNBinaryArithmeticNode()
 }
 
-// NNBinaryGradientStateProvider is implemented by NNBinaryGradientState and any idiomatic type wrapping a MPSNNBinaryGradientState subclass.
+// NNBinaryGradientStateProvider is accepted wherever a MPSNNBinaryGradientState (or one of its subclasses) is expected.
 type NNBinaryGradientStateProvider interface {
-	asNNBinaryGradientState() *mpsneuralnetwork.MPSNNBinaryGradientState
+	objref.Object
+	isNNBinaryGradientState()
 }
 
-// NNBinaryGradientStateNodeProvider is implemented by NNBinaryGradientStateNode and any idiomatic type wrapping a MPSNNBinaryGradientStateNode subclass.
+// NNBinaryGradientStateNodeProvider is accepted wherever a MPSNNBinaryGradientStateNode (or one of its subclasses) is expected.
 type NNBinaryGradientStateNodeProvider interface {
-	asNNBinaryGradientStateNode() *mpsneuralnetwork.MPSNNBinaryGradientStateNode
+	objref.Object
+	isNNBinaryGradientStateNode()
 }
 
-// NNFilterNodeProvider is implemented by NNFilterNode and any idiomatic type wrapping a MPSNNFilterNode subclass.
+// NNFilterNodeProvider is accepted wherever a MPSNNFilterNode (or one of its subclasses) is expected.
 type NNFilterNodeProvider interface {
-	asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode
+	objref.Object
+	isNNFilterNode()
 }
 
-// NNGradientFilterNodeProvider is implemented by NNGradientFilterNode and any idiomatic type wrapping a MPSNNGradientFilterNode subclass.
+// NNGradientFilterNodeProvider is accepted wherever a MPSNNGradientFilterNode (or one of its subclasses) is expected.
 type NNGradientFilterNodeProvider interface {
-	asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode
+	objref.Object
+	isNNGradientFilterNode()
 }
 
-// NNGradientStateProvider is implemented by NNGradientState and any idiomatic type wrapping a MPSNNGradientState subclass.
+// NNGradientStateProvider is accepted wherever a MPSNNGradientState (or one of its subclasses) is expected.
 type NNGradientStateProvider interface {
-	asNNGradientState() *mpsneuralnetwork.MPSNNGradientState
+	objref.Object
+	isNNGradientState()
 }
 
-// NNGradientStateNodeProvider is implemented by NNGradientStateNode and any idiomatic type wrapping a MPSNNGradientStateNode subclass.
+// NNGradientStateNodeProvider is accepted wherever a MPSNNGradientStateNode (or one of its subclasses) is expected.
 type NNGradientStateNodeProvider interface {
-	asNNGradientStateNode() *mpsneuralnetwork.MPSNNGradientStateNode
+	objref.Object
+	isNNGradientStateNode()
 }
 
-// NNOptimizerProvider is implemented by NNOptimizer and any idiomatic type wrapping a MPSNNOptimizer subclass.
+// NNOptimizerProvider is accepted wherever a MPSNNOptimizer (or one of its subclasses) is expected.
 type NNOptimizerProvider interface {
-	asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer
+	objref.Object
+	isNNOptimizer()
 }
 
-// NNReduceBinaryProvider is implemented by NNReduceBinary and any idiomatic type wrapping a MPSNNReduceBinary subclass.
+// NNReduceBinaryProvider is accepted wherever a MPSNNReduceBinary (or one of its subclasses) is expected.
 type NNReduceBinaryProvider interface {
-	asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary
+	objref.Object
+	isNNReduceBinary()
 }
 
-// NNReduceUnaryProvider is implemented by NNReduceUnary and any idiomatic type wrapping a MPSNNReduceUnary subclass.
+// NNReduceUnaryProvider is accepted wherever a MPSNNReduceUnary (or one of its subclasses) is expected.
 type NNReduceUnaryProvider interface {
-	asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary
+	objref.Object
+	isNNReduceUnary()
 }
 
-// NNScaleNodeProvider is implemented by NNScaleNode and any idiomatic type wrapping a MPSNNScaleNode subclass.
+// NNScaleNodeProvider is accepted wherever a MPSNNScaleNode (or one of its subclasses) is expected.
 type NNScaleNodeProvider interface {
-	asNNScaleNode() *mpsneuralnetwork.MPSNNScaleNode
+	objref.Object
+	isNNScaleNode()
 }
 
-// NNStateNodeProvider is implemented by NNStateNode and any idiomatic type wrapping a MPSNNStateNode subclass.
+// NNStateNodeProvider is accepted wherever a MPSNNStateNode (or one of its subclasses) is expected.
 type NNStateNodeProvider interface {
-	asNNStateNode() *mpsneuralnetwork.MPSNNStateNode
+	objref.Object
+	isNNStateNode()
 }
 
-// NNUnaryReductionNodeProvider is implemented by NNUnaryReductionNode and any idiomatic type wrapping a MPSNNUnaryReductionNode subclass.
+// NNUnaryReductionNodeProvider is accepted wherever a MPSNNUnaryReductionNode (or one of its subclasses) is expected.
 type NNUnaryReductionNodeProvider interface {
-	asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode
+	objref.Object
+	isNNUnaryReductionNode()
 }
 
-// PolygonAccelerationStructureProvider is implemented by PolygonAccelerationStructure and any idiomatic type wrapping a MPSPolygonAccelerationStructure subclass.
+// PolygonAccelerationStructureProvider is accepted wherever a MPSPolygonAccelerationStructure (or one of its subclasses) is expected.
 type PolygonAccelerationStructureProvider interface {
-	asPolygonAccelerationStructure() *mpsrayintersector.MPSPolygonAccelerationStructure
+	objref.Object
+	isPolygonAccelerationStructure()
 }
 
-// RNNDescriptorProvider is implemented by RNNDescriptor and any idiomatic type wrapping a MPSRNNDescriptor subclass.
+// RNNDescriptorProvider is accepted wherever a MPSRNNDescriptor (or one of its subclasses) is expected.
 type RNNDescriptorProvider interface {
-	asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor
+	objref.Object
+	isRNNDescriptor()
 }
 
-// StateProvider is implemented by State and any idiomatic type wrapping a MPSState subclass.
+// StateProvider is accepted wherever a MPSState (or one of its subclasses) is expected.
 type StateProvider interface {
-	asState() *mpscore.MPSState
+	objref.Object
+	isState()
 }
 
-// UnaryImageKernelProvider is implemented by UnaryImageKernel and any idiomatic type wrapping a MPSUnaryImageKernel subclass.
+// UnaryImageKernelProvider is accepted wherever a MPSUnaryImageKernel (or one of its subclasses) is expected.
 type UnaryImageKernelProvider interface {
-	asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel
+	objref.Object
+	isUnaryImageKernel()
 }
 
-// VectorProvider is implemented by Vector and any idiomatic type wrapping a MPSVector subclass.
+// VectorProvider is accepted wherever a MPSVector (or one of its subclasses) is expected.
 type VectorProvider interface {
-	asVector() *mpscore.MPSVector
+	objref.Object
+	isVector()
 }

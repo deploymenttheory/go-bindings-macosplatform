@@ -5,148 +5,137 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A collection similar to an array, but with a broader range of available memory semantics.
+// PointerArray is an idiomatic wrapper over the Objective-C class NSPointerArray.
 //
-// PointerArray wraps [raw.NSPointerArray] with a fluent Go API.
+// A collection similar to an array, but with a broader range of available memory semantics.
 type PointerArray struct {
-	inner *raw.NSPointerArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPointerArray].
-func (x *PointerArray) Unwrap() *raw.NSPointerArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PointerArray) ID() objc.ID { return x.inner.Ptr() }
-
-// PointerArrayFromID adopts an existing object pointer as a PointerArray (nil for 0).
+// PointerArrayFromID adopts an existing Objective-C object as a PointerArray
+// (nil for 0), retaining it and registering a release finalizer.
 func PointerArrayFromID(id objc.ID) *PointerArray {
 	if id == 0 {
 		return nil
 	}
-	return &PointerArray{inner: raw.NSPointerArrayFromID(id)}
-}
-
-// Initializes the receiver to use the given options.
-//
-// NewPointerArrayWithOptions creates a new [PointerArray].
-func NewPointerArrayWithOptions(options NSPointerFunctionsOptions) *PointerArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), raw.NSPointerFunctionsOptions(options))
-	return &PointerArray{inner: raw.NSPointerArrayFromID(_id)}
-}
-
-// Initializes the receiver to use the given functions.
-//
-// NewPointerArrayWithPointerFunctions creates a new [PointerArray].
-func NewPointerArrayWithPointerFunctions(functions *raw.NSPointerFunctions) *PointerArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:"), functions.Ptr())
-	return &PointerArray{inner: raw.NSPointerArrayFromID(_id)}
-}
-
-// The number of elements in the receiver.
-//
-// WithCount sets the count property and returns the receiver for chaining.
-func (x *PointerArray) WithCount(count uint) *PointerArray {
-	x.inner.SetCount(count)
+	x := &PointerArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PointerArray) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerArray {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// Returns the pointer at a given index.
-//
-// PointerAtIndex calls the underlying PointerAtIndex.
-func (x *PointerArray) PointerAtIndex(index uint) unsafe.Pointer {
-	return x.inner.PointerAtIndex(index)
-}
-
-// Adds a given pointer to the receiver.
-//
-// AddPointer calls the underlying AddPointer.
-func (x *PointerArray) AddPointer(pointer unsafe.Pointer) {
-	x.inner.AddPointer(pointer)
-}
-
-// Removes the pointer at a given index.
-//
-// RemovePointerAtIndex calls the underlying RemovePointerAtIndex.
-func (x *PointerArray) RemovePointerAtIndex(index uint) {
-	x.inner.RemovePointerAtIndex(index)
-}
-
-// Inserts a pointer at a given index.
-//
-// InsertPointerAtIndex calls the underlying InsertPointerAtIndex.
-func (x *PointerArray) InsertPointerAtIndex(item unsafe.Pointer, index uint) {
-	x.inner.InsertPointerAtIndex(item, index)
-}
-
-// Replaces the pointer at a given index.
-//
-// ReplacePointerAtIndexWithPointer calls the underlying ReplacePointerAtIndexWithPointer.
-func (x *PointerArray) ReplacePointerAtIndexWithPointer(index uint, item unsafe.Pointer) {
-	x.inner.ReplacePointerAtIndexWithPointer(index, item)
-}
-
-// Removes NULL values from the receiver.
-//
-// Compact calls the underlying Compact.
-func (x *PointerArray) Compact() {
-	x.inner.Compact()
-}
-
-// PointerFunctions calls the underlying PointerFunctions.
-func (x *PointerArray) PointerFunctions() *PointerFunctions {
-	_r := x.inner.PointerFunctions()
-	if _r == nil {
+// pointerArrayAdopt wraps an Objective-C object that this code just created as a
+// PointerArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointerArrayAdopt(id objc.ID) *PointerArray {
+	if id == 0 {
 		return nil
 	}
-	return &PointerFunctions{inner: _r}
+	x := &PointerArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Count calls the underlying Count.
-func (x *PointerArray) Count() uint {
-	return x.inner.Count()
+// Description returns the object's -description text.
+func (x *PointerArray) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetCount calls the underlying SetCount.
-func (x *PointerArray) SetCount(count uint) {
-	x.inner.SetCount(count)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PointerArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// AllObjects calls the underlying AllObjects.
-func (x *PointerArray) AllObjects() *raw.NSArray[objc.ID] {
-	return x.inner.AllObjects()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PointerArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *PointerArray) asObject() *raw.NSObject { return &x.inner.NSObject }
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PointerArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPointerArrayWithOptions initializes the receiver to use the given options.
+func NewPointerArrayWithOptions(options PointerFunctionsOptions) *PointerArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options)
+	return pointerArrayAdopt(_id)
+}
+
+// NewPointerArrayWithPointerFunctions initializes the receiver to use the given functions.
+func NewPointerArrayWithPointerFunctions(functions *PointerFunctions) *PointerArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:"), objref.IDOf(functions))
+	return pointerArrayAdopt(_id)
+}
+
+// WithCount the number of elements in the receiver.
+func (x *PointerArray) WithCount(count int) *PointerArray {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// RemovePointerAtIndex removes the pointer at a given index.
+func (x *PointerArray) RemovePointerAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePointerAtIndex:"), index)
+}
+
+// Compact removes NULL values from the receiver.
+func (x *PointerArray) Compact() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compact"))
+}
+
+// PointerFunctions wraps the corresponding Objective-C method.
+func (x *PointerArray) PointerFunctions() *PointerFunctions {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerFunctions"))
+	return PointerFunctionsFromID(_r)
+}
+
+// Count wraps the corresponding Objective-C method.
+func (x *PointerArray) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
+}
+
+// SetCount wraps the corresponding Objective-C method.
+func (x *PointerArray) SetCount(count int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
+}
+
+// AllObjects wraps the corresponding Objective-C method.
+func (x *PointerArray) AllObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
+	return obj.Wrap(_r)
+}
 
 // PointerArrayable is the interface implemented by [PointerArray], for mocking and DI.
 type PointerArrayable interface {
-	Unwrap() *raw.NSPointerArray
-	WithCount(count uint) *PointerArray
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerArray
-	PointerAtIndex(index uint) unsafe.Pointer
-	AddPointer(pointer unsafe.Pointer)
-	RemovePointerAtIndex(index uint)
-	InsertPointerAtIndex(item unsafe.Pointer, index uint)
-	ReplacePointerAtIndexWithPointer(index uint, item unsafe.Pointer)
+	obj.Object
+	WithCount(count int) *PointerArray
+	WithScriptingProperties(scriptingProperties obj.Object) *PointerArray
+	RemovePointerAtIndex(index int)
 	Compact()
 	PointerFunctions() *PointerFunctions
-	Count() uint
-	SetCount(count uint)
-	AllObjects() *raw.NSArray[objc.ID]
+	Count() int
+	SetCount(count int)
+	AllObjects() obj.Object
 }
 
 var _ PointerArrayable = (*PointerArray)(nil)

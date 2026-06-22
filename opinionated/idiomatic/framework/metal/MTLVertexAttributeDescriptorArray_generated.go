@@ -5,63 +5,89 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of vertex attribute descriptor instances.
+// VertexAttributeDescriptorArray is an idiomatic wrapper over the Objective-C class MTLVertexAttributeDescriptorArray.
 //
-// VertexAttributeDescriptorArray wraps [raw.MTLVertexAttributeDescriptorArray] with a fluent Go API.
+// An array of vertex attribute descriptor instances.
 type VertexAttributeDescriptorArray struct {
-	inner *raw.MTLVertexAttributeDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVertexAttributeDescriptorArray].
-func (x *VertexAttributeDescriptorArray) Unwrap() *raw.MTLVertexAttributeDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexAttributeDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexAttributeDescriptorArrayFromID adopts an existing object pointer as a VertexAttributeDescriptorArray (nil for 0).
+// VertexAttributeDescriptorArrayFromID adopts an existing Objective-C object as a VertexAttributeDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexAttributeDescriptorArrayFromID(id objc.ID) *VertexAttributeDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &VertexAttributeDescriptorArray{inner: raw.MTLVertexAttributeDescriptorArrayFromID(id)}
+	x := &VertexAttributeDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVertexAttributeDescriptorArray creates a new [VertexAttributeDescriptorArray].
-func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexAttributeDescriptorArray")), objc.RegisterName("new"))
-	return &VertexAttributeDescriptorArray{inner: raw.MTLVertexAttributeDescriptorArrayFromID(_id)}
-}
-
-// Returns the state of the specified vertex attribute.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *VertexAttributeDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(index)
-	if _r == nil {
+// vertexAttributeDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// VertexAttributeDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexAttributeDescriptorArrayAdopt(id objc.ID) *VertexAttributeDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &VertexAttributeDescriptor{inner: _r}
+	x := &VertexAttributeDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets state for the specified vertex attribute.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *raw.MTLVertexAttributeDescriptor, index uint) {
-	x.inner.SetObjectAtIndexedSubscript(attributeDesc, index)
+// Description returns the object's -description text.
+func (x *VertexAttributeDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexAttributeDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexAttributeDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttributeDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVertexAttributeDescriptorArray creates a new VertexAttributeDescriptorArray.
+func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexAttributeDescriptorArray")), objc.RegisterName("new"))
+	return vertexAttributeDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript returns the state of the specified vertex attribute.
+func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+	return VertexAttributeDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript sets state for the specified vertex attribute.
+func (x *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }
 
 // VertexAttributeDescriptorArrayable is the interface implemented by [VertexAttributeDescriptorArray], for mocking and DI.
 type VertexAttributeDescriptorArrayable interface {
-	Unwrap() *raw.MTLVertexAttributeDescriptorArray
-	ObjectAtIndexedSubscript(index uint) *VertexAttributeDescriptor
-	SetObjectAtIndexedSubscript(attributeDesc *raw.MTLVertexAttributeDescriptor, index uint)
+	obj.Object
+	ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor
+	SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int)
 }
 
 var _ VertexAttributeDescriptorArrayable = (*VertexAttributeDescriptorArray)(nil)

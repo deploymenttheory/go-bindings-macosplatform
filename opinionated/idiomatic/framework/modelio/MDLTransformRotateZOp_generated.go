@@ -5,58 +5,89 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TransformRotateZOp wraps [raw.MDLTransformRotateZOp] with a fluent Go API.
+// TransformRotateZOp is an idiomatic wrapper over the Objective-C class MDLTransformRotateZOp.
 type TransformRotateZOp struct {
-	inner *raw.MDLTransformRotateZOp
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTransformRotateZOp].
-func (x *TransformRotateZOp) Unwrap() *raw.MDLTransformRotateZOp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformRotateZOp) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformRotateZOpFromID adopts an existing object pointer as a TransformRotateZOp (nil for 0).
+// TransformRotateZOpFromID adopts an existing Objective-C object as a TransformRotateZOp
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformRotateZOpFromID(id objc.ID) *TransformRotateZOp {
 	if id == 0 {
 		return nil
 	}
-	return &TransformRotateZOp{inner: raw.MDLTransformRotateZOpFromID(id)}
+	x := &TransformRotateZOp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTransformRotateZOp creates a new [TransformRotateZOp].
-func NewTransformRotateZOp() *TransformRotateZOp {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformRotateZOp")), objc.RegisterName("new"))
-	return &TransformRotateZOp{inner: raw.MDLTransformRotateZOpFromID(_id)}
-}
-
-// Name calls the underlying Name.
-func (x *TransformRotateZOp) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// AnimatedValue calls the underlying AnimatedValue.
-func (x *TransformRotateZOp) AnimatedValue() *AnimatedScalar {
-	_r := x.inner.AnimatedValue()
-	if _r == nil {
+// transformRotateZOpAdopt wraps an Objective-C object that this code just created as a
+// TransformRotateZOp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformRotateZOpAdopt(id objc.ID) *TransformRotateZOp {
+	if id == 0 {
 		return nil
 	}
-	return &AnimatedScalar{inner: _r}
+	x := &TransformRotateZOp{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TransformRotateZOp) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TransformRotateZOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TransformRotateZOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TransformRotateZOp) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTransformRotateZOp creates a new TransformRotateZOp.
+func NewTransformRotateZOp() *TransformRotateZOp {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformRotateZOp")), objc.RegisterName("new"))
+	return transformRotateZOpAdopt(_id)
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *TransformRotateZOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// AnimatedValue wraps the corresponding Objective-C method.
+func (x *TransformRotateZOp) AnimatedValue() *AnimatedScalar {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+	return AnimatedScalarFromID(_r)
 }
 
 // TransformRotateZOpable is the interface implemented by [TransformRotateZOp], for mocking and DI.
 type TransformRotateZOpable interface {
-	Unwrap() *raw.MDLTransformRotateZOp
+	obj.Object
 	Name() string
 	AnimatedValue() *AnimatedScalar
 }

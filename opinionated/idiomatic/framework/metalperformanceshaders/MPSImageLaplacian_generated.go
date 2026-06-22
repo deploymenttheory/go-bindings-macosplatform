@@ -5,119 +5,103 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An optimized Laplacian filter, provided for ease of use.
+// ImageLaplacian is an idiomatic wrapper over the Objective-C class MPSImageLaplacian.
 //
-// ImageLaplacian wraps [raw.MPSImageLaplacian] with a fluent Go API.
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// An optimized Laplacian filter, provided for ease of use.
 type ImageLaplacian struct {
-	inner *raw.MPSImageLaplacian
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageLaplacian].
-func (x *ImageLaplacian) Unwrap() *raw.MPSImageLaplacian { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageLaplacian) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageLaplacianFromID adopts an existing object pointer as a ImageLaplacian (nil for 0).
+// ImageLaplacianFromID adopts an existing Objective-C object as a ImageLaplacian
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageLaplacianFromID(id objc.ID) *ImageLaplacian {
 	if id == 0 {
 		return nil
 	}
-	return &ImageLaplacian{inner: raw.MPSImageLaplacianFromID(id)}
+	x := &ImageLaplacian{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageLaplacian creates a new [ImageLaplacian].
+// imageLaplacianAdopt wraps an Objective-C object that this code just created as a
+// ImageLaplacian (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageLaplacianAdopt(id objc.ID) *ImageLaplacian {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageLaplacian{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageLaplacian creates a new ImageLaplacian.
 func NewImageLaplacian() *ImageLaplacian {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageLaplacian")), objc.RegisterName("new"))
-	return &ImageLaplacian{inner: raw.MPSImageLaplacianFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageLaplacian")), objc.RegisterName("new"))
+	return imageLaplacianAdopt(_id)
 }
 
-// The value added to a convolved pixel before it is converted back to its intended storage format.
-//
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias the value added to a convolved pixel before it is converted back to its intended storage format.
 func (x *ImageLaplacian) WithBias(bias float32) *ImageLaplacian {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageLaplacian) WithOffset(offset mpscore.MPSOffset) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageLaplacian) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageLaplacian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageLaplacian) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageLaplacian) WithLabel(label string) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property    bias @discussion  The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
-//
-// Bias calls the underlying Bias.
+// Bias the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 func (x *ImageLaplacian) Bias() float32 {
-	return x.inner.Bias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+	return _r
 }
 
-// SetBias calls the underlying SetBias.
+// SetBias wraps the corresponding Objective-C method.
 func (x *ImageLaplacian) SetBias(bias float32) {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
-
-func (x *ImageLaplacian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageLaplacian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageLaplacianable is the interface implemented by [ImageLaplacian], for mocking and DI.
 type ImageLaplacianable interface {
-	Unwrap() *raw.MPSImageLaplacian
+	obj.Object
 	WithBias(bias float32) *ImageLaplacian
 	WithOffset(offset mpscore.MPSOffset) *ImageLaplacian
 	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian
-	WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacian
 	WithLabel(label string) *ImageLaplacian
 	Bias() float32
 	SetBias(bias float32)
 }
 
 var _ ImageLaplacianable = (*ImageLaplacian)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLaplacian)(nil)
+
+var _ KernelProvider = (*ImageLaplacian)(nil)

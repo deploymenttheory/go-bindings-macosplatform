@@ -5,70 +5,77 @@
 package externalaccessory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The object you use to manage communications between your app and a connected hardware accessory.
+// Session is an idiomatic wrapper over the Objective-C class EASession.
 //
-// Session wraps [raw.EASession] with a fluent Go API.
+// The object you use to manage communications between your app and a connected hardware accessory.
 type Session struct {
-	inner *raw.EASession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EASession].
-func (x *Session) Unwrap() *raw.EASession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Session) ID() objc.ID { return x.inner.Ptr() }
-
-// SessionFromID adopts an existing object pointer as a Session (nil for 0).
+// SessionFromID adopts an existing Objective-C object as a Session
+// (nil for 0), retaining it and registering a release finalizer.
 func SessionFromID(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	return &Session{inner: raw.EASessionFromID(id)}
+	x := &Session{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes the session for the specified accessory and protocol.
-//
-// NewSessionWithAccessoryForProtocol creates a new [Session].
-func NewSessionWithAccessoryForProtocol(accessory *raw.EAAccessory, protocolString string) *Session {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EASession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessory:forProtocol:"), accessory.Ptr(), foundation.NSStringStringWithUTF8String(protocolString).Ptr())
-	return &Session{inner: raw.EASessionFromID(_id)}
+// sessionAdopt wraps an Objective-C object that this code just created as a
+// Session (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sessionAdopt(id objc.ID) *Session {
+	if id == 0 {
+		return nil
+	}
+	x := &Session{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Accessory calls the underlying Accessory.
-func (x *Session) Accessory() unsafe.Pointer {
-	return x.inner.Accessory()
+// Description returns the object's -description text.
+func (x *Session) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ProtocolString calls the underlying ProtocolString.
-func (x *Session) ProtocolString() unsafe.Pointer {
-	return x.inner.ProtocolString()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// InputStream calls the underlying InputStream.
-func (x *Session) InputStream() unsafe.Pointer {
-	return x.inner.InputStream()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// OutputStream calls the underlying OutputStream.
-func (x *Session) OutputStream() unsafe.Pointer {
-	return x.inner.OutputStream()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Session) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSessionWithAccessoryForProtocol initializes the session for the specified accessory and protocol.
+func NewSessionWithAccessoryForProtocol(accessory *Accessory, protocolString string) *Session {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("EASession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessory:forProtocol:"), objref.IDOf(accessory), purego.NSString(protocolString))
+	return sessionAdopt(_id)
 }
 
 // Sessionable is the interface implemented by [Session], for mocking and DI.
 type Sessionable interface {
-	Unwrap() *raw.EASession
-	Accessory() unsafe.Pointer
-	ProtocolString() unsafe.Pointer
-	InputStream() unsafe.Pointer
-	OutputStream() unsafe.Pointer
+	obj.Object
 }
 
 var _ Sessionable = (*Session)(nil)

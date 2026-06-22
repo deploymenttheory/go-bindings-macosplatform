@@ -5,80 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEModeClusterModeTagStruct wraps [raw.MTREnergyEVSEModeClusterModeTagStruct] with a fluent Go API.
+// MTREnergyEVSEModeClusterModeTagStruct is an idiomatic wrapper over the Objective-C class MTREnergyEVSEModeClusterModeTagStruct.
 type MTREnergyEVSEModeClusterModeTagStruct struct {
-	inner *raw.MTREnergyEVSEModeClusterModeTagStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEModeClusterModeTagStruct].
-func (x *MTREnergyEVSEModeClusterModeTagStruct) Unwrap() *raw.MTREnergyEVSEModeClusterModeTagStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEModeClusterModeTagStructFromID adopts an existing object pointer as a MTREnergyEVSEModeClusterModeTagStruct (nil for 0).
+// MTREnergyEVSEModeClusterModeTagStructFromID adopts an existing Objective-C object as a MTREnergyEVSEModeClusterModeTagStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEModeClusterModeTagStructFromID(id objc.ID) *MTREnergyEVSEModeClusterModeTagStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEModeClusterModeTagStruct{inner: raw.MTREnergyEVSEModeClusterModeTagStructFromID(id)}
+	x := &MTREnergyEVSEModeClusterModeTagStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTREnergyEVSEModeClusterModeTagStruct creates a new [MTREnergyEVSEModeClusterModeTagStruct].
+// mTREnergyEVSEModeClusterModeTagStructAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEModeClusterModeTagStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEModeClusterModeTagStructAdopt(id objc.ID) *MTREnergyEVSEModeClusterModeTagStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEModeClusterModeTagStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEModeClusterModeTagStruct creates a new MTREnergyEVSEModeClusterModeTagStruct.
 func NewMTREnergyEVSEModeClusterModeTagStruct() *MTREnergyEVSEModeClusterModeTagStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEModeClusterModeTagStruct")), objc.RegisterName("new"))
-	return &MTREnergyEVSEModeClusterModeTagStruct{inner: raw.MTREnergyEVSEModeClusterModeTagStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEModeClusterModeTagStruct")), objc.RegisterName("new"))
+	return mTREnergyEVSEModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the mfgCode property and returns the receiver for chaining.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) WithMfgCode(mfgCode *foundation.NSNumber) *MTREnergyEVSEModeClusterModeTagStruct {
-	x.inner.SetMfgCode(mfgCode)
+// WithMfgCode sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value *foundation.NSNumber) *MTREnergyEVSEModeClusterModeTagStruct {
-	x.inner.SetValue(value)
+// WithValue sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// MfgCode calls the underlying MfgCode.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
-	return x.inner.MfgCode()
+// MfgCode wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+	return obj.Wrap(_r)
 }
 
-// SetMfgCode calls the underlying SetMfgCode.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
-	x.inner.SetMfgCode(mfgCode)
+// SetMfgCode wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
-// Value calls the underlying Value.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) Value() *foundation.NSNumber {
-	return x.inner.Value()
+// Value wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
-	x.inner.SetValue(value)
+// SetValue wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
 // MTREnergyEVSEModeClusterModeTagStructable is the interface implemented by [MTREnergyEVSEModeClusterModeTagStruct], for mocking and DI.
 type MTREnergyEVSEModeClusterModeTagStructable interface {
-	Unwrap() *raw.MTREnergyEVSEModeClusterModeTagStruct
-	WithMfgCode(mfgCode *foundation.NSNumber) *MTREnergyEVSEModeClusterModeTagStruct
-	WithValue(value *foundation.NSNumber) *MTREnergyEVSEModeClusterModeTagStruct
-	MfgCode() *foundation.NSNumber
-	SetMfgCode(mfgCode *foundation.NSNumber)
-	Value() *foundation.NSNumber
-	SetValue(value *foundation.NSNumber)
+	obj.Object
+	WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct
+	WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct
+	MfgCode() obj.Object
+	SetMfgCode(mfgCode obj.Object)
+	Value() obj.Object
+	SetValue(value obj.Object)
 }
 
 var _ MTREnergyEVSEModeClusterModeTagStructable = (*MTREnergyEVSEModeClusterModeTagStruct)(nil)

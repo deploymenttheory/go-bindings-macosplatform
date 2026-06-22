@@ -5,88 +5,112 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a version of macOS to install on to a virtual machine.
+// MacOSRestoreImage is an idiomatic wrapper over the Objective-C class VZMacOSRestoreImage.
 //
-// MacOSRestoreImage wraps [raw.VZMacOSRestoreImage] with a fluent Go API.
+// An object that describes a version of macOS to install on to a virtual machine.
 type MacOSRestoreImage struct {
-	inner *raw.VZMacOSRestoreImage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacOSRestoreImage].
-func (x *MacOSRestoreImage) Unwrap() *raw.VZMacOSRestoreImage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacOSRestoreImage) ID() objc.ID { return x.inner.Ptr() }
-
-// MacOSRestoreImageFromID adopts an existing object pointer as a MacOSRestoreImage (nil for 0).
+// MacOSRestoreImageFromID adopts an existing Objective-C object as a MacOSRestoreImage
+// (nil for 0), retaining it and registering a release finalizer.
 func MacOSRestoreImageFromID(id objc.ID) *MacOSRestoreImage {
 	if id == 0 {
 		return nil
 	}
-	return &MacOSRestoreImage{inner: raw.VZMacOSRestoreImageFromID(id)}
+	x := &MacOSRestoreImage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMacOSRestoreImage creates a new [MacOSRestoreImage].
-func NewMacOSRestoreImage() *MacOSRestoreImage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacOSRestoreImage")), objc.RegisterName("new"))
-	return &MacOSRestoreImage{inner: raw.VZMacOSRestoreImageFromID(_id)}
-}
-
-// @abstract Whether this restore image is supported on the current host.
-//
-// IsSupported calls the underlying IsSupported.
-func (x *MacOSRestoreImage) IsSupported() bool {
-	return x.inner.IsSupported()
-}
-
-// @abstract The URL of this restore image. @discussion If the restore image was loaded using +[VZMacOSRestoreImage loadFileURL:completionHandler:], the value of this property will be a file URL. If the restore image was fetched using +[VZMacOSRestoreImage fetchLatestSupportedWithCompletionHandler:], the value of this property will be a network URL referring to an installation media file.
-//
-// URL calls the underlying URL.
-func (x *MacOSRestoreImage) URL() *foundation.NSURL {
-	return x.inner.URL()
-}
-
-// @abstract The build version this restore image contains.
-//
-// BuildVersion calls the underlying BuildVersion.
-func (x *MacOSRestoreImage) BuildVersion() string {
-	_r := x.inner.BuildVersion()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract The operating system version this restore image contains.
-//
-// OperatingSystemVersion calls the underlying OperatingSystemVersion.
-func (x *MacOSRestoreImage) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
-	return x.inner.OperatingSystemVersion()
-}
-
-// @abstract The configuration requirements for the most featureful configuration supported by the current host and by this restore image. @discussion A VZMacOSRestoreImage can contain installation media for multiple Mac hardware models (VZMacHardwareModel). Some of these hardware models may not be supported by the current host. The mostFeaturefulSupportedConfiguration property can be used to determine the hardware model and configuration requirements that will provide the most complete feature set on the current host. If none of the hardware models are supported on the current host, this property is nil.
-//
-// MostFeaturefulSupportedConfiguration calls the underlying MostFeaturefulSupportedConfiguration.
-func (x *MacOSRestoreImage) MostFeaturefulSupportedConfiguration() *MacOSConfigurationRequirements {
-	_r := x.inner.MostFeaturefulSupportedConfiguration()
-	if _r == nil {
+// macOSRestoreImageAdopt wraps an Objective-C object that this code just created as a
+// MacOSRestoreImage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macOSRestoreImageAdopt(id objc.ID) *MacOSRestoreImage {
+	if id == 0 {
 		return nil
 	}
-	return &MacOSConfigurationRequirements{inner: _r}
+	x := &MacOSRestoreImage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacOSRestoreImage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacOSRestoreImage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacOSRestoreImage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MacOSRestoreImage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMacOSRestoreImage creates a new MacOSRestoreImage.
+func NewMacOSRestoreImage() *MacOSRestoreImage {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacOSRestoreImage")), objc.RegisterName("new"))
+	return macOSRestoreImageAdopt(_id)
+}
+
+// IsSupported whether this restore image is supported on the current host.
+func (x *MacOSRestoreImage) IsSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+	return _r
+}
+
+// URL the URL of this restore image. If the restore image was loaded using +[VZMacOSRestoreImage loadFileURL:completionHandler:], the value of this property will be a file URL. If the restore image was fetched using +[VZMacOSRestoreImage fetchLatestSupportedWithCompletionHandler:], the value of this property will be a network URL referring to an installation media file.
+func (x *MacOSRestoreImage) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
+}
+
+// BuildVersion the build version this restore image contains.
+func (x *MacOSRestoreImage) BuildVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buildVersion"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// OperatingSystemVersion the operating system version this restore image contains.
+func (x *MacOSRestoreImage) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	_r := objc.Send[foundation.NSOperatingSystemVersion](objref.IDOf(x), objc.RegisterName("operatingSystemVersion"))
+	return _r
+}
+
+// MostFeaturefulSupportedConfiguration the configuration requirements for the most featureful configuration supported by the current host and by this restore image. A VZMacOSRestoreImage can contain installation media for multiple Mac hardware models (VZMacHardwareModel). Some of these hardware models may not be supported by the current host. The mostFeaturefulSupportedConfiguration property can be used to determine the hardware model and configuration requirements that will provide the most complete feature set on the current host. If none of the hardware models are supported on the current host, this property is nil.
+func (x *MacOSRestoreImage) MostFeaturefulSupportedConfiguration() *MacOSConfigurationRequirements {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostFeaturefulSupportedConfiguration"))
+	return MacOSConfigurationRequirementsFromID(_r)
 }
 
 // MacOSRestoreImageable is the interface implemented by [MacOSRestoreImage], for mocking and DI.
 type MacOSRestoreImageable interface {
-	Unwrap() *raw.VZMacOSRestoreImage
+	obj.Object
 	IsSupported() bool
-	URL() *foundation.NSURL
+	URL() obj.Object
 	BuildVersion() string
 	OperatingSystemVersion() foundation.NSOperatingSystemVersion
 	MostFeaturefulSupportedConfiguration() *MacOSConfigurationRequirements

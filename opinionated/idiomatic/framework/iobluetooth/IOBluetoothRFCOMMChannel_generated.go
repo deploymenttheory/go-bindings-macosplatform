@@ -5,198 +5,149 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An instance of this class represents an RFCOMM channel as defined by the Bluetooth SDP spec..
+// IOBluetoothRFCOMMChannel is an idiomatic wrapper over the Objective-C class IOBluetoothRFCOMMChannel.
 //
-// IOBluetoothRFCOMMChannel wraps [raw.IOBluetoothRFCOMMChannel] with a fluent Go API.
+// It embeds [IOBluetoothObject], promoting that type's methods.
+//
+// An instance of this class represents an RFCOMM channel as defined by the Bluetooth SDP spec..
 type IOBluetoothRFCOMMChannel struct {
-	inner *raw.IOBluetoothRFCOMMChannel
+	IOBluetoothObject
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothRFCOMMChannel].
-func (x *IOBluetoothRFCOMMChannel) Unwrap() *raw.IOBluetoothRFCOMMChannel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothRFCOMMChannel) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothRFCOMMChannelFromID adopts an existing object pointer as a IOBluetoothRFCOMMChannel (nil for 0).
+// IOBluetoothRFCOMMChannelFromID adopts an existing Objective-C object as a IOBluetoothRFCOMMChannel
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothRFCOMMChannelFromID(id objc.ID) *IOBluetoothRFCOMMChannel {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothRFCOMMChannel{inner: raw.IOBluetoothRFCOMMChannelFromID(id)}
+	x := &IOBluetoothRFCOMMChannel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIOBluetoothRFCOMMChannel creates a new [IOBluetoothRFCOMMChannel].
+// iOBluetoothRFCOMMChannelAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothRFCOMMChannel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothRFCOMMChannelAdopt(id objc.ID) *IOBluetoothRFCOMMChannel {
+	if id == 0 {
+		return nil
+	}
+	x := &IOBluetoothRFCOMMChannel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewIOBluetoothRFCOMMChannel creates a new IOBluetoothRFCOMMChannel.
 func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothRFCOMMChannel")), objc.RegisterName("new"))
-	return &IOBluetoothRFCOMMChannel{inner: raw.IOBluetoothRFCOMMChannelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothRFCOMMChannel")), objc.RegisterName("new"))
+	return iOBluetoothRFCOMMChannelAdopt(_id)
 }
 
-// Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
-//
-// GetRFCOMMChannelRef calls the underlying GetRFCOMMChannelRef.
-func (x *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() unsafe.Pointer {
-	return x.inner.GetRFCOMMChannelRef()
+// GetRFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
+func (x *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRFCOMMChannelRef"))
+	return obj.Wrap(_r)
 }
 
-// Close the channel.
-//
-// CloseChannel calls the underlying CloseChannel.
+// CloseChannel close the channel.
 func (x *IOBluetoothRFCOMMChannel) CloseChannel() int {
-	return x.inner.CloseChannel()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("closeChannel"))
+	return _r
 }
 
-// Returns the state of the channel.
-//
-// IsOpen calls the underlying IsOpen.
+// IsOpen returns the state of the channel.
 func (x *IOBluetoothRFCOMMChannel) IsOpen() bool {
-	return x.inner.IsOpen()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
+	return _r
 }
 
-// Returns the channel maximum transfer unit.
-//
-// GetMTU calls the underlying GetMTU.
+// GetMTU returns the channel maximum transfer unit.
 func (x *IOBluetoothRFCOMMChannel) GetMTU() uint16 {
-	return x.inner.GetMTU()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getMTU"))
+	return _r
 }
 
-// Returns TRUE if flow control is off.
-//
-// IsTransmissionPaused calls the underlying IsTransmissionPaused.
+// IsTransmissionPaused returns TRUE if flow control is off.
 func (x *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
-	return x.inner.IsTransmissionPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransmissionPaused"))
+	return _r
 }
 
-// Sends a block of data in the channel syncronously.
-//
-// WriteLengthSleep calls the underlying WriteLengthSleep.
-func (x *IOBluetoothRFCOMMChannel) WriteLengthSleep(data unsafe.Pointer, length uint16, sleep bool) int {
-	return x.inner.WriteLengthSleep(data, length, sleep)
+// SetSerialParametersDataBitsParityStopBits changes the parameters of the serial connection.
+func (x *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:"), speed, nBits, parity, bitStop)
+	return _r
 }
 
-// Sends a block of data in the channel asynchronously.
-//
-// WriteAsyncLengthRefcon calls the underlying WriteAsyncLengthRefcon.
-func (x *IOBluetoothRFCOMMChannel) WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
-	return x.inner.WriteAsyncLengthRefcon(data, length, refcon)
-}
-
-// Sends a block of data in the channel synchronously.
-//
-// WriteSyncLength calls the underlying WriteSyncLength.
-func (x *IOBluetoothRFCOMMChannel) WriteSyncLength(data unsafe.Pointer, length uint16) int {
-	return x.inner.WriteSyncLength(data, length)
-}
-
-// Sends a block of data in the channel.
-//
-// WriteSimpleLengthSleepBytesSent calls the underlying WriteSimpleLengthSleepBytesSent.
-func (x *IOBluetoothRFCOMMChannel) WriteSimpleLengthSleepBytesSent(data unsafe.Pointer, length uint16, sleep bool, numBytesSent *uint) int {
-	return x.inner.WriteSimpleLengthSleepBytesSent(data, length, sleep, numBytesSent)
-}
-
-// Changes the parameters of the serial connection.
-//
-// SetSerialParametersDataBitsParityStopBits calls the underlying SetSerialParametersDataBitsParityStopBits.
-func (x *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
-	return x.inner.SetSerialParametersDataBitsParityStopBits(speed, nBits, raw.BluetoothRFCOMMParityType(parity), bitStop)
-}
-
-// Sends an error to the remote side.
-//
-// SendRemoteLineStatus calls the underlying SendRemoteLineStatus.
+// SendRemoteLineStatus sends an error to the remote side.
 func (x *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
-	return x.inner.SendRemoteLineStatus(raw.BluetoothRFCOMMLineStatus(lineStatus))
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendRemoteLineStatus:"), lineStatus)
+	return _r
 }
 
-// Allows an object to register itself as a client of the RFCOMM channel.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *IOBluetoothRFCOMMChannel) SetDelegate(delegate objc.ID) int {
-	return x.inner.SetDelegate(delegate)
+// SetDelegate allows an object to register itself as a client of the RFCOMM channel.
+func (x *IOBluetoothRFCOMMChannel) SetDelegate(delegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return _r
 }
 
-// Returns the object delegate
-//
-// Delegate calls the underlying Delegate.
-func (x *IOBluetoothRFCOMMChannel) Delegate() objc.ID {
-	return x.inner.Delegate()
+// Delegate returns the object delegate
+func (x *IOBluetoothRFCOMMChannel) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// Returns the object rfcomm channel ID.
-//
-// GetChannelID calls the underlying GetChannelID.
+// GetChannelID returns the object rfcomm channel ID.
 func (x *IOBluetoothRFCOMMChannel) GetChannelID() uint8 {
-	return x.inner.GetChannelID()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getChannelID"))
+	return _r
 }
 
-// Returns the direction of the channel. An incoming channel is one that was opened by the remote device.
-//
-// IsIncoming calls the underlying IsIncoming.
+// IsIncoming returns the direction of the channel. An incoming channel is one that was opened by the remote device.
 func (x *IOBluetoothRFCOMMChannel) IsIncoming() bool {
-	return x.inner.IsIncoming()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncoming"))
+	return _r
 }
 
-// Returns the Bluetooth Device that carries the rfcomm data.
-//
-// GetDevice calls the underlying GetDevice.
+// GetDevice returns the Bluetooth Device that carries the rfcomm data.
 func (x *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
-	_r := x.inner.GetDevice()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
+	return IOBluetoothDeviceFromID(_r)
 }
 
-// Returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
-//
-// GetObjectID calls the underlying GetObjectID.
-func (x *IOBluetoothRFCOMMChannel) GetObjectID() uint {
-	return x.inner.GetObjectID()
-}
-
-// Allows a client to register for a channel close notification.
-//
-// RegisterForChannelCloseNotificationSelector calls the underlying RegisterForChannelCloseNotificationSelector.
-func (x *IOBluetoothRFCOMMChannel) RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
-	_r := x.inner.RegisterForChannelCloseNotificationSelector(observer, inSelector)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothUserNotification{inner: _r}
-}
-
-func (x *IOBluetoothRFCOMMChannel) asIOBluetoothObject() *raw.IOBluetoothObject {
-	return &x.inner.IOBluetoothObject
+// GetObjectID returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
+func (x *IOBluetoothRFCOMMChannel) GetObjectID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getObjectID"))
+	return _r
 }
 
 // IOBluetoothRFCOMMChannelable is the interface implemented by [IOBluetoothRFCOMMChannel], for mocking and DI.
 type IOBluetoothRFCOMMChannelable interface {
-	Unwrap() *raw.IOBluetoothRFCOMMChannel
-	GetRFCOMMChannelRef() unsafe.Pointer
+	obj.Object
+	GetRFCOMMChannelRef() obj.Object
 	CloseChannel() int
 	IsOpen() bool
 	GetMTU() uint16
 	IsTransmissionPaused() bool
-	WriteLengthSleep(data unsafe.Pointer, length uint16, sleep bool) int
-	WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int
-	WriteSyncLength(data unsafe.Pointer, length uint16) int
-	WriteSimpleLengthSleepBytesSent(data unsafe.Pointer, length uint16, sleep bool, numBytesSent *uint) int
-	SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int
+	SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int
 	SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int
-	SetDelegate(delegate objc.ID) int
-	Delegate() objc.ID
+	SetDelegate(delegate obj.Object) int
+	Delegate() obj.Object
 	GetChannelID() uint8
 	IsIncoming() bool
 	GetDevice() *IOBluetoothDevice
-	GetObjectID() uint
-	RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification
+	GetObjectID() int
 }
 
 var _ IOBluetoothRFCOMMChannelable = (*IOBluetoothRFCOMMChannel)(nil)
+
+var _ IOBluetoothObjectProvider = (*IOBluetoothRFCOMMChannel)(nil)

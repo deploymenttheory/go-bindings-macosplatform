@@ -5,93 +5,101 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSMediaRule wraps [raw.DOMCSSMediaRule] with a fluent Go API.
+// DOMCSSMediaRule is an idiomatic wrapper over the Objective-C class DOMCSSMediaRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSMediaRule struct {
-	inner *raw.DOMCSSMediaRule
+	DOMCSSRule
 }
 
-// Unwrap returns the underlying [raw.DOMCSSMediaRule].
-func (x *DOMCSSMediaRule) Unwrap() *raw.DOMCSSMediaRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSMediaRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSMediaRuleFromID adopts an existing object pointer as a DOMCSSMediaRule (nil for 0).
+// DOMCSSMediaRuleFromID adopts an existing Objective-C object as a DOMCSSMediaRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSMediaRuleFromID(id objc.ID) *DOMCSSMediaRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSMediaRule{inner: raw.DOMCSSMediaRuleFromID(id)}
-}
-
-// NewDOMCSSMediaRule creates a new [DOMCSSMediaRule].
-func NewDOMCSSMediaRule() *DOMCSSMediaRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSMediaRule")), objc.RegisterName("new"))
-	return &DOMCSSMediaRule{inner: raw.DOMCSSMediaRuleFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSMediaRule) WithCssText(cssText string) *DOMCSSMediaRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSMediaRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// InsertRuleIndex calls the underlying InsertRuleIndex.
-func (x *DOMCSSMediaRule) InsertRuleIndex(rule string, index uint) uint {
-	return x.inner.InsertRuleIndex(foundation.NSStringStringWithUTF8String(rule), index)
+// dOMCSSMediaRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSMediaRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSMediaRuleAdopt(id objc.ID) *DOMCSSMediaRule {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSMediaRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DeleteRule calls the underlying DeleteRule.
-func (x *DOMCSSMediaRule) DeleteRule(index uint) {
-	x.inner.DeleteRule(index)
+// NewDOMCSSMediaRule creates a new DOMCSSMediaRule.
+func NewDOMCSSMediaRule() *DOMCSSMediaRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSMediaRule")), objc.RegisterName("new"))
+	return dOMCSSMediaRuleAdopt(_id)
 }
 
-// Media calls the underlying Media.
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSMediaRule) WithCssText(cssText string) *DOMCSSMediaRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+// InsertRuleIndex wraps the corresponding Objective-C method.
+func (x *DOMCSSMediaRule) InsertRuleIndex(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
+	return _r
+}
+
+// DeleteRule wraps the corresponding Objective-C method.
+func (x *DOMCSSMediaRule) DeleteRule(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRule:"), index)
+}
+
+// Media wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) Media() *DOMMediaList {
-	_r := x.inner.Media()
-	if _r == nil {
-		return nil
-	}
-	return &DOMMediaList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+	return DOMMediaListFromID(_r)
 }
 
-// CssRules calls the underlying CssRules.
+// CssRules wraps the corresponding Objective-C method.
 func (x *DOMCSSMediaRule) CssRules() *DOMCSSRuleList {
-	_r := x.inner.CssRules()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRuleList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssRules"))
+	return DOMCSSRuleListFromID(_r)
 }
 
-// InsertRule calls the underlying InsertRule.
-func (x *DOMCSSMediaRule) InsertRule(rule string, index uint) uint {
-	return x.inner.InsertRule(foundation.NSStringStringWithUTF8String(rule), index)
-}
-
-func (x *DOMCSSMediaRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
-
-func (x *DOMCSSMediaRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
-
-func (x *DOMCSSMediaRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+// InsertRule wraps the corresponding Objective-C method.
+func (x *DOMCSSMediaRule) InsertRule(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
+	return _r
 }
 
 // DOMCSSMediaRuleable is the interface implemented by [DOMCSSMediaRule], for mocking and DI.
 type DOMCSSMediaRuleable interface {
-	Unwrap() *raw.DOMCSSMediaRule
+	obj.Object
 	WithCssText(cssText string) *DOMCSSMediaRule
-	InsertRuleIndex(rule string, index uint) uint
-	DeleteRule(index uint)
+	InsertRuleIndex(rule string, index int) int
+	DeleteRule(index int)
 	Media() *DOMMediaList
 	CssRules() *DOMCSSRuleList
-	InsertRule(rule string, index uint) uint
+	InsertRule(rule string, index int) int
 }
 
 var _ DOMCSSMediaRuleable = (*DOMCSSMediaRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSMediaRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSMediaRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSMediaRule)(nil)

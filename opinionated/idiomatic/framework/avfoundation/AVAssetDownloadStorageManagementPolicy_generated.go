@@ -5,69 +5,93 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a policy to automatically manage the storage of downloaded assets.
+// AssetDownloadStorageManagementPolicy is an idiomatic wrapper over the Objective-C class AVAssetDownloadStorageManagementPolicy.
 //
-// AssetDownloadStorageManagementPolicy wraps [raw.AVAssetDownloadStorageManagementPolicy] with a fluent Go API.
+// AssetDownloadStorageManagementPolicy is an abstract base — you do not construct it directly. Construct one of [MutableAssetDownloadStorageManagementPolicy] and pass it where a AssetDownloadStorageManagementPolicy is accepted.
+//
+// An object that defines a policy to automatically manage the storage of downloaded assets.
 type AssetDownloadStorageManagementPolicy struct {
-	inner *raw.AVAssetDownloadStorageManagementPolicy
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetDownloadStorageManagementPolicy].
-func (x *AssetDownloadStorageManagementPolicy) Unwrap() *raw.AVAssetDownloadStorageManagementPolicy {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetDownloadStorageManagementPolicy) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetDownloadStorageManagementPolicyFromID adopts an existing object pointer as a AssetDownloadStorageManagementPolicy (nil for 0).
+// AssetDownloadStorageManagementPolicyFromID adopts an existing Objective-C object as a AssetDownloadStorageManagementPolicy
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetDownloadStorageManagementPolicyFromID(id objc.ID) *AssetDownloadStorageManagementPolicy {
 	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadStorageManagementPolicy{inner: raw.AVAssetDownloadStorageManagementPolicyFromID(id)}
+	x := &AssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetDownloadStorageManagementPolicy creates a new [AssetDownloadStorageManagementPolicy].
-func NewAssetDownloadStorageManagementPolicy() *AssetDownloadStorageManagementPolicy {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadStorageManagementPolicy")), objc.RegisterName("new"))
-	return &AssetDownloadStorageManagementPolicy{inner: raw.AVAssetDownloadStorageManagementPolicyFromID(_id)}
-}
-
-// Indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
-//
-// Priority calls the underlying Priority.
-func (x *AssetDownloadStorageManagementPolicy) Priority() string {
-	_r := x.inner.Priority()
-	if _r == nil {
-		return ""
+// assetDownloadStorageManagementPolicyAdopt wraps an Objective-C object that this code just created as a
+// AssetDownloadStorageManagementPolicy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetDownloadStorageManagementPolicyAdopt(id objc.ID) *AssetDownloadStorageManagementPolicy {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &AssetDownloadStorageManagementPolicy{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the expiration date of asset.
-//
-// ExpirationDate calls the underlying ExpirationDate.
-func (x *AssetDownloadStorageManagementPolicy) ExpirationDate() *foundation.NSDate {
-	return x.inner.ExpirationDate()
+// Description returns the object's -description text.
+func (x *AssetDownloadStorageManagementPolicy) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *AssetDownloadStorageManagementPolicy) asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy {
-	return x.inner
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetDownloadStorageManagementPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetDownloadStorageManagementPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetDownloadStorageManagementPolicy) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Priority indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
+func (x *AssetDownloadStorageManagementPolicy) Priority() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
+	return obj.Wrap(_r)
+}
+
+// ExpirationDate returns the expiration date of asset.
+func (x *AssetDownloadStorageManagementPolicy) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+	return obj.Wrap(_r)
 }
 
 // AssetDownloadStorageManagementPolicyable is the interface implemented by [AssetDownloadStorageManagementPolicy], for mocking and DI.
 type AssetDownloadStorageManagementPolicyable interface {
-	Unwrap() *raw.AVAssetDownloadStorageManagementPolicy
-	Priority() string
-	ExpirationDate() *foundation.NSDate
+	obj.Object
+	Priority() obj.Object
+	ExpirationDate() obj.Object
 }
 
 var _ AssetDownloadStorageManagementPolicyable = (*AssetDownloadStorageManagementPolicy)(nil)
+
+// isAssetDownloadStorageManagementPolicy marks AssetDownloadStorageManagementPolicy — and, by embedding promotion, its
+// subclasses — as a member of the AssetDownloadStorageManagementPolicy hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AssetDownloadStorageManagementPolicy) isAssetDownloadStorageManagementPolicy() {}
+
+var _ AssetDownloadStorageManagementPolicyProvider = (*AssetDownloadStorageManagementPolicy)(nil)

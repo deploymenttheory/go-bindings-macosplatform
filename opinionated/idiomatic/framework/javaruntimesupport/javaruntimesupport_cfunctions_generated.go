@@ -5,193 +5,108 @@
 package javaruntimesupport
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// JRSAccessibilityUnregisterUniqueIdForUIElement calls [raw.JRSAccessibilityUnregisterUniqueIdForUIElement] (C function JRSAccessibilityUnregisterUniqueIdForUIElement).
-func JRSAccessibilityUnregisterUniqueIdForUIElement(element objc.ID) {
-	raw.JRSAccessibilityUnregisterUniqueIdForUIElement(element)
+var _fnJRSAccessibilityUnregisterUniqueIdForUIElement func(objc.ID)
+
+// JRSAccessibilityUnregisterUniqueIdForUIElement calls the JavaRuntimeSupport framework function JRSAccessibilityUnregisterUniqueIdForUIElement.
+func JRSAccessibilityUnregisterUniqueIdForUIElement(element obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSAccessibilityUnregisterUniqueIdForUIElement == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSAccessibilityUnregisterUniqueIdForUIElement, _lib, "JRSAccessibilityUnregisterUniqueIdForUIElement")
+	}
+	_fnJRSAccessibilityUnregisterUniqueIdForUIElement(objref.IDOf(element))
 }
 
-// JRSFontAlignStyleForFractionalMeasurement calls [raw.JRSFontAlignStyleForFractionalMeasurement] (C function JRSFontAlignStyleForFractionalMeasurement).
+var _fnJRSFontAlignStyleForFractionalMeasurement func(uint32) uint32
+
+// JRSFontAlignStyleForFractionalMeasurement calls the JavaRuntimeSupport framework function JRSFontAlignStyleForFractionalMeasurement.
 func JRSFontAlignStyleForFractionalMeasurement(style uint32) uint32 {
-	return raw.JRSFontAlignStyleForFractionalMeasurement(style)
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontAlignStyleForFractionalMeasurement == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontAlignStyleForFractionalMeasurement, _lib, "JRSFontAlignStyleForFractionalMeasurement")
+	}
+	return _fnJRSFontAlignStyleForFractionalMeasurement(style)
 }
 
-// JRSFontAlignStyleForIntegerMeasurement calls [raw.JRSFontAlignStyleForIntegerMeasurement] (C function JRSFontAlignStyleForIntegerMeasurement).
+var _fnJRSFontAlignStyleForIntegerMeasurement func(uint32) uint32
+
+// JRSFontAlignStyleForIntegerMeasurement calls the JavaRuntimeSupport framework function JRSFontAlignStyleForIntegerMeasurement.
 func JRSFontAlignStyleForIntegerMeasurement(style uint32) uint32 {
-	return raw.JRSFontAlignStyleForIntegerMeasurement(style)
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontAlignStyleForIntegerMeasurement == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontAlignStyleForIntegerMeasurement, _lib, "JRSFontAlignStyleForIntegerMeasurement")
+	}
+	return _fnJRSFontAlignStyleForIntegerMeasurement(style)
 }
 
-// JRSFontCreateFallbackFontForCharacters calls [raw.JRSFontCreateFallbackFontForCharacters] (C function JRSFontCreateFallbackFontForCharacters).
-func JRSFontCreateFallbackFontForCharacters(font unsafe.Pointer, unichars *uint16, length int) unsafe.Pointer {
-	return raw.JRSFontCreateFallbackFontForCharacters(font, unichars, length)
+var _fnJRSFontGetRenderingStyleForContext func(objc.ID) uint32
+
+// JRSFontGetRenderingStyleForContext calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForContext.
+func JRSFontGetRenderingStyleForContext(context_ obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontGetRenderingStyleForContext == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForContext, _lib, "JRSFontGetRenderingStyleForContext")
+	}
+	return _fnJRSFontGetRenderingStyleForContext(objref.IDOf(context_))
 }
 
-// JRSFontGetAdvancesForGlyphsAndStyle calls [raw.JRSFontGetAdvancesForGlyphsAndStyle] (C function JRSFontGetAdvancesForGlyphsAndStyle).
-func JRSFontGetAdvancesForGlyphsAndStyle(font unsafe.Pointer, tx *corefoundation.CGAffineTransform, style uint32, glyphs *uint16, count uint, advances *corefoundation.CGSize) float64 {
-	return raw.JRSFontGetAdvancesForGlyphsAndStyle(font, tx, style, glyphs, count, advances)
+var _fnJRSFontSetRenderingStyleOnContext func(objc.ID, uint32)
+
+// JRSFontSetRenderingStyleOnContext calls the JavaRuntimeSupport framework function JRSFontSetRenderingStyleOnContext.
+func JRSFontSetRenderingStyleOnContext(context_ obj.Object, style uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontSetRenderingStyleOnContext == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontSetRenderingStyleOnContext, _lib, "JRSFontSetRenderingStyleOnContext")
+	}
+	_fnJRSFontSetRenderingStyleOnContext(objref.IDOf(context_), style)
 }
 
-// JRSFontGetBoundingBoxesForGlyphsAndStyle calls [raw.JRSFontGetBoundingBoxesForGlyphsAndStyle] (C function JRSFontGetBoundingBoxesForGlyphsAndStyle).
-func JRSFontGetBoundingBoxesForGlyphsAndStyle(font unsafe.Pointer, tx *corefoundation.CGAffineTransform, style uint32, glyphs *uint16, count uint, bboxes *corefoundation.CGRect) corefoundation.CGRect {
-	return raw.JRSFontGetBoundingBoxesForGlyphsAndStyle(font, tx, style, glyphs, count, bboxes)
-}
+var _fnJRSFontStyleIsAntialiased func(uint32) bool
 
-// JRSFontGetRenderingStyleForContext calls [raw.JRSFontGetRenderingStyleForContext] (C function JRSFontGetRenderingStyleForContext).
-func JRSFontGetRenderingStyleForContext(context_ unsafe.Pointer) uint32 {
-	return raw.JRSFontGetRenderingStyleForContext(context_)
-}
-
-// JRSFontGetRenderingStyleForHints calls [raw.JRSFontGetRenderingStyleForHints] (C function JRSFontGetRenderingStyleForHints).
-func JRSFontGetRenderingStyleForHints(fmHint unsafe.Pointer, aaHint unsafe.Pointer) uint32 {
-	return raw.JRSFontGetRenderingStyleForHints(fmHint, aaHint)
-}
-
-// JRSFontSetRenderingStyleOnContext calls [raw.JRSFontSetRenderingStyleOnContext] (C function JRSFontSetRenderingStyleOnContext).
-func JRSFontSetRenderingStyleOnContext(context_ unsafe.Pointer, style uint32) {
-	raw.JRSFontSetRenderingStyleOnContext(context_, style)
-}
-
-// JRSFontStyleIsAntialiased calls [raw.JRSFontStyleIsAntialiased] (C function JRSFontStyleIsAntialiased).
+// JRSFontStyleIsAntialiased calls the JavaRuntimeSupport framework function JRSFontStyleIsAntialiased.
 func JRSFontStyleIsAntialiased(style uint32) bool {
-	return raw.JRSFontStyleIsAntialiased(style)
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontStyleIsAntialiased == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontStyleIsAntialiased, _lib, "JRSFontStyleIsAntialiased")
+	}
+	return _fnJRSFontStyleIsAntialiased(style)
 }
 
-// JRSFontStyleUsesFractionalMetrics calls [raw.JRSFontStyleUsesFractionalMetrics] (C function JRSFontStyleUsesFractionalMetrics).
+var _fnJRSFontStyleUsesFractionalMetrics func(uint32) bool
+
+// JRSFontStyleUsesFractionalMetrics calls the JavaRuntimeSupport framework function JRSFontStyleUsesFractionalMetrics.
 func JRSFontStyleUsesFractionalMetrics(style uint32) bool {
-	return raw.JRSFontStyleUsesFractionalMetrics(style)
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontStyleUsesFractionalMetrics == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontStyleUsesFractionalMetrics, _lib, "JRSFontStyleUsesFractionalMetrics")
+	}
+	return _fnJRSFontStyleUsesFractionalMetrics(style)
 }
 
-// JRSUIControlCreate calls [raw.JRSUIControlCreate] (C function JRSUIControlCreate).
-func JRSUIControlCreate(isFlipped uint8) unsafe.Pointer {
-	return raw.JRSUIControlCreate(isFlipped)
-}
+var _fnJRSUIControlShouldScrollToClick func() uint8
 
-// JRSUIControlDraw calls [raw.JRSUIControlDraw] (C function JRSUIControlDraw).
-func JRSUIControlDraw(renderer unsafe.Pointer, control unsafe.Pointer, context_ unsafe.Pointer, bounds corefoundation.CGRect) {
-	raw.JRSUIControlDraw(renderer, control, context_, bounds)
-}
-
-// JRSUIControlGetHitPart calls [raw.JRSUIControlGetHitPart] (C function JRSUIControlGetHitPart).
-func JRSUIControlGetHitPart(renderer unsafe.Pointer, control unsafe.Pointer, bounds corefoundation.CGRect, point corefoundation.CGPoint) int {
-	return raw.JRSUIControlGetHitPart(renderer, control, bounds, point)
-}
-
-// JRSUIControlGetScrollBarOffsetFor calls [raw.JRSUIControlGetScrollBarOffsetFor] (C function JRSUIControlGetScrollBarOffsetFor).
-func JRSUIControlGetScrollBarOffsetFor(control unsafe.Pointer, frame corefoundation.CGRect, offset float64, visibleAmount float64, extent float64) float64 {
-	return raw.JRSUIControlGetScrollBarOffsetFor(control, frame, offset, visibleAmount, extent)
-}
-
-// JRSUIControlGetScrollBarPartBounds calls [raw.JRSUIControlGetScrollBarPartBounds] (C function JRSUIControlGetScrollBarPartBounds).
-func JRSUIControlGetScrollBarPartBounds(control unsafe.Pointer, frame corefoundation.CGRect, part int) corefoundation.CGRect {
-	return raw.JRSUIControlGetScrollBarPartBounds(control, frame, part)
-}
-
-// JRSUIControlRelease calls [raw.JRSUIControlRelease] (C function JRSUIControlRelease).
-func JRSUIControlRelease(control unsafe.Pointer) {
-	raw.JRSUIControlRelease(control)
-}
-
-// JRSUIControlSetAlignmentHorizontal calls [raw.JRSUIControlSetAlignmentHorizontal] (C function JRSUIControlSetAlignmentHorizontal).
-func JRSUIControlSetAlignmentHorizontal(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetAlignmentHorizontal(control, value)
-}
-
-// JRSUIControlSetAlignmentVertical calls [raw.JRSUIControlSetAlignmentVertical] (C function JRSUIControlSetAlignmentVertical).
-func JRSUIControlSetAlignmentVertical(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetAlignmentVertical(control, value)
-}
-
-// JRSUIControlSetAnimating calls [raw.JRSUIControlSetAnimating] (C function JRSUIControlSetAnimating).
-func JRSUIControlSetAnimating(control unsafe.Pointer, value uint8) {
-	raw.JRSUIControlSetAnimating(control, value)
-}
-
-// JRSUIControlSetDirection calls [raw.JRSUIControlSetDirection] (C function JRSUIControlSetDirection).
-func JRSUIControlSetDirection(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetDirection(control, value)
-}
-
-// JRSUIControlSetOrientation calls [raw.JRSUIControlSetOrientation] (C function JRSUIControlSetOrientation).
-func JRSUIControlSetOrientation(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetOrientation(control, value)
-}
-
-// JRSUIControlSetPresentationState calls [raw.JRSUIControlSetPresentationState] (C function JRSUIControlSetPresentationState).
-func JRSUIControlSetPresentationState(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetPresentationState(control, value)
-}
-
-// JRSUIControlSetScrollBarPart calls [raw.JRSUIControlSetScrollBarPart] (C function JRSUIControlSetScrollBarPart).
-func JRSUIControlSetScrollBarPart(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetScrollBarPart(control, value)
-}
-
-// JRSUIControlSetSegmentPosition calls [raw.JRSUIControlSetSegmentPosition] (C function JRSUIControlSetSegmentPosition).
-func JRSUIControlSetSegmentPosition(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetSegmentPosition(control, value)
-}
-
-// JRSUIControlSetShowArrows calls [raw.JRSUIControlSetShowArrows] (C function JRSUIControlSetShowArrows).
-func JRSUIControlSetShowArrows(control unsafe.Pointer, value uint8) {
-	raw.JRSUIControlSetShowArrows(control, value)
-}
-
-// JRSUIControlSetSize calls [raw.JRSUIControlSetSize] (C function JRSUIControlSetSize).
-func JRSUIControlSetSize(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetSize(control, value)
-}
-
-// JRSUIControlSetState calls [raw.JRSUIControlSetState] (C function JRSUIControlSetState).
-func JRSUIControlSetState(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetState(control, value)
-}
-
-// JRSUIControlSetUserInterfaceLayoutDirection calls [raw.JRSUIControlSetUserInterfaceLayoutDirection] (C function JRSUIControlSetUserInterfaceLayoutDirection).
-func JRSUIControlSetUserInterfaceLayoutDirection(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetUserInterfaceLayoutDirection(control, value)
-}
-
-// JRSUIControlSetValueByKey calls [raw.JRSUIControlSetValueByKey] (C function JRSUIControlSetValueByKey).
-func JRSUIControlSetValueByKey(control unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) {
-	raw.JRSUIControlSetValueByKey(control, key, value)
-}
-
-// JRSUIControlSetVariant calls [raw.JRSUIControlSetVariant] (C function JRSUIControlSetVariant).
-func JRSUIControlSetVariant(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetVariant(control, value)
-}
-
-// JRSUIControlSetWidget calls [raw.JRSUIControlSetWidget] (C function JRSUIControlSetWidget).
-func JRSUIControlSetWidget(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetWidget(control, value)
-}
-
-// JRSUIControlSetWindowType calls [raw.JRSUIControlSetWindowType] (C function JRSUIControlSetWindowType).
-func JRSUIControlSetWindowType(control unsafe.Pointer, value int) {
-	raw.JRSUIControlSetWindowType(control, value)
-}
-
-// JRSUIControlShouldScrollToClick calls [raw.JRSUIControlShouldScrollToClick] (C function JRSUIControlShouldScrollToClick).
+// JRSUIControlShouldScrollToClick calls the JavaRuntimeSupport framework function JRSUIControlShouldScrollToClick.
 func JRSUIControlShouldScrollToClick() uint8 {
-	return raw.JRSUIControlShouldScrollToClick()
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlShouldScrollToClick == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlShouldScrollToClick, _lib, "JRSUIControlShouldScrollToClick")
+	}
+	return _fnJRSUIControlShouldScrollToClick()
 }
 
-// JRSUIGetKey calls [raw.JRSUIGetKey] (C function JRSUIGetKey).
-func JRSUIGetKey(value int) unsafe.Pointer {
-	return raw.JRSUIGetKey(value)
-}
+var _fnJRSUIGetKey func(int) objc.ID
 
-// JRSUIRendererCreate calls [raw.JRSUIRendererCreate] (C function JRSUIRendererCreate).
-func JRSUIRendererCreate() unsafe.Pointer {
-	return raw.JRSUIRendererCreate()
-}
-
-// JRSUIRendererRelease calls [raw.JRSUIRendererRelease] (C function JRSUIRendererRelease).
-func JRSUIRendererRelease(renderer unsafe.Pointer) {
-	raw.JRSUIRendererRelease(renderer)
+// JRSUIGetKey calls the JavaRuntimeSupport framework function JRSUIGetKey.
+func JRSUIGetKey(value int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIGetKey == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIGetKey, _lib, "JRSUIGetKey")
+	}
+	_ret := _fnJRSUIGetKey(value)
+	return obj.Wrap(_ret)
 }

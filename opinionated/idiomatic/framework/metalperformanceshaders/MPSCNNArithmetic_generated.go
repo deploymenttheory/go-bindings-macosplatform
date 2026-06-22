@@ -5,375 +5,279 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The base class for arithmetic operators.
+// CNNArithmetic is an idiomatic wrapper over the Objective-C class MPSCNNArithmetic.
 //
-// CNNArithmetic wraps [raw.MPSCNNArithmetic] with a fluent Go API.
+// CNNArithmetic is an abstract base — you do not construct it directly. Construct one of [CNNAdd], [CNNDivide], [CNNMultiply], [CNNSubtract], [NNCompare] and pass it where a CNNArithmetic is accepted.
+//
+// The base class for arithmetic operators.
 type CNNArithmetic struct {
-	inner *raw.MPSCNNArithmetic
+	CNNBinaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSCNNArithmetic].
-func (x *CNNArithmetic) Unwrap() *raw.MPSCNNArithmetic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNArithmetic) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNArithmeticFromID adopts an existing object pointer as a CNNArithmetic (nil for 0).
+// CNNArithmeticFromID adopts an existing Objective-C object as a CNNArithmetic
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNArithmeticFromID(id objc.ID) *CNNArithmetic {
 	if id == 0 {
 		return nil
 	}
-	return &CNNArithmetic{inner: raw.MPSCNNArithmeticFromID(id)}
+	x := &CNNArithmetic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNArithmetic creates a new [CNNArithmetic].
-func NewCNNArithmetic() *CNNArithmetic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNArithmetic")), objc.RegisterName("new"))
-	return &CNNArithmetic{inner: raw.MPSCNNArithmeticFromID(_id)}
+// cNNArithmeticAdopt wraps an Objective-C object that this code just created as a
+// CNNArithmetic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNArithmeticAdopt(id objc.ID) *CNNArithmetic {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNArithmetic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
 func (x *CNNArithmetic) WithPrimaryScale(primaryScale float32) *CNNArithmetic {
-	x.inner.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
 func (x *CNNArithmetic) WithSecondaryScale(secondaryScale float32) *CNNArithmetic {
-	x.inner.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets the property and returns the receiver so calls can be chained.
 func (x *CNNArithmetic) WithBias(bias float32) *CNNArithmetic {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property   primaryStrideInPixels @abstract   The primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNArithmetic {
-	x.inner.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+// WithPrimaryStrideInFeatureChannels the primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *CNNArithmetic) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return x
 }
 
-// @property   secondaryStrideInPixels @abstract   The secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNArithmetic {
-	x.inner.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+// WithSecondaryStrideInFeatureChannels the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *CNNArithmetic) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// @property   minimumValue @abstract   minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *CNNArithmetic) WithMinimumValue(minimumValue float32) *CNNArithmetic {
-	x.inner.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// @property   maximumValue @abstract   maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *CNNArithmetic) WithMaximumValue(maximumValue float32) *CNNArithmetic {
-	x.inner.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
 func (x *CNNArithmetic) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
 func (x *CNNArithmetic) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
 func (x *CNNArithmetic) WithClipRect(clipRect metal.MTLRegion) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (x *CNNArithmetic) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (x *CNNArithmetic) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (x *CNNArithmetic) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNArithmetic) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNArithmetic) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNArithmetic) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNArithmetic) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNArithmetic) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNArithmetic) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNArithmetic {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
-	return x
-}
-
-// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNArithmetic) WithOptions(options mpscore.MPSKernelOptions) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *CNNArithmetic) WithLabel(label string) *CNNArithmetic {
-	x.inner.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract       Encode call that operates on a state for later consumption by a gradient kernel in training @discussion     This is the older style of encode which reads the offset, doesn't change it, and ignores the padding method. @param          commandBuffer       The command buffer @param          primaryImage        A MPSImage to use as the source images for the filter. @param          secondaryImage      A MPSImage to use as the source images for the filter. @param          destinationState    MPSCNNArithmeticGradientState to be consumed by the gradient layer @param          destinationImage    A valid MPSImage to be overwritten by result image. destinationImage may not alias primarySourceImage or secondarySourceImage.
-//
-// EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage calls the underlying EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage.
-func (x *CNNArithmetic) EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationState *mpsneuralnetwork.MPSCNNArithmeticGradientState, destinationImage *mpscore.MPSImage) {
-	x.inner.EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer, primaryImage, secondaryImage, destinationState, destinationImage)
-}
-
-// @abstract   Encode call that operates on a state for later consumption by a gradient kernel in training @discussion This is the older style of encode which reads the offset, doesn't change it, and ignores the padding method. Multiple images are processed concurrently. All images must have MPSImage.numberOfImages = 1. @param      commandBuffer         A valid MTLCommandBuffer to receive the encoded filter @param      primaryImages         An array of MPSImage objects containing the primary source images. @param      secondaryImages       An array MPSImage objects containing the secondary source images. @param      destinationStates     An array of MPSCNNArithmeticGradientStateBatch to be consumed by the gradient layer @param      destinationImages     An array of MPSImage objects to contain the result images. destinationImages may not alias primarySourceImages or secondarySourceImages in any manner.
-//
-// EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages calls the underlying EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages.
-func (x *CNNArithmetic) EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, primaryImages unsafe.Pointer, secondaryImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer) {
-	x.inner.EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer, primaryImages, secondaryImages, destinationStates, destinationImages)
-}
-
-// PrimaryScale calls the underlying PrimaryScale.
+// PrimaryScale wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) PrimaryScale() float32 {
-	return x.inner.PrimaryScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("primaryScale"))
+	return _r
 }
 
-// SetPrimaryScale calls the underlying SetPrimaryScale.
+// SetPrimaryScale wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) SetPrimaryScale(primaryScale float32) {
-	x.inner.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 }
 
-// SecondaryScale calls the underlying SecondaryScale.
+// SecondaryScale wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) SecondaryScale() float32 {
-	return x.inner.SecondaryScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("secondaryScale"))
+	return _r
 }
 
-// SetSecondaryScale calls the underlying SetSecondaryScale.
+// SetSecondaryScale wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) SetSecondaryScale(secondaryScale float32) {
-	x.inner.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 }
 
-// Bias calls the underlying Bias.
+// Bias wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) Bias() float32 {
-	return x.inner.Bias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+	return _r
 }
 
-// SetBias calls the underlying SetBias.
+// SetBias wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) SetBias(bias float32) {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
 
-// @property   primaryStrideInPixels @abstract   The primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// PrimaryStrideInFeatureChannels calls the underlying PrimaryStrideInFeatureChannels.
-func (x *CNNArithmetic) PrimaryStrideInFeatureChannels() uint {
-	return x.inner.PrimaryStrideInFeatureChannels()
+// PrimaryStrideInFeatureChannels the primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *CNNArithmetic) PrimaryStrideInFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryStrideInFeatureChannels"))
+	return _r
 }
 
-// SetPrimaryStrideInFeatureChannels calls the underlying SetPrimaryStrideInFeatureChannels.
-func (x *CNNArithmetic) SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) {
-	x.inner.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+// SetPrimaryStrideInFeatureChannels wraps the corresponding Objective-C method.
+func (x *CNNArithmetic) SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 }
 
-// @property   secondaryStrideInPixels @abstract   The secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// SecondaryStrideInFeatureChannels calls the underlying SecondaryStrideInFeatureChannels.
-func (x *CNNArithmetic) SecondaryStrideInFeatureChannels() uint {
-	return x.inner.SecondaryStrideInFeatureChannels()
+// SecondaryStrideInFeatureChannels the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (x *CNNArithmetic) SecondaryStrideInFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInFeatureChannels"))
+	return _r
 }
 
-// SetSecondaryStrideInFeatureChannels calls the underlying SetSecondaryStrideInFeatureChannels.
-func (x *CNNArithmetic) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) {
-	x.inner.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+// SetSecondaryStrideInFeatureChannels wraps the corresponding Objective-C method.
+func (x *CNNArithmetic) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 }
 
-// @property   minimumValue @abstract   minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// MinimumValue calls the underlying MinimumValue.
+// MinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 func (x *CNNArithmetic) MinimumValue() float32 {
-	return x.inner.MinimumValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
+	return _r
 }
 
-// SetMinimumValue calls the underlying SetMinimumValue.
+// SetMinimumValue wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) SetMinimumValue(minimumValue float32) {
-	x.inner.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 }
 
-// @property   maximumValue @abstract   maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-//
-// MaximumValue calls the underlying MaximumValue.
+// MaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 func (x *CNNArithmetic) MaximumValue() float32 {
-	return x.inner.MaximumValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+	return _r
 }
 
-// SetMaximumValue calls the underlying SetMaximumValue.
+// SetMaximumValue wraps the corresponding Objective-C method.
 func (x *CNNArithmetic) SetMaximumValue(maximumValue float32) {
-	x.inner.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 }
-
-func (x *CNNArithmetic) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
-	return &x.inner.MPSCNNBinaryKernel
-}
-
-func (x *CNNArithmetic) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
 
 // CNNArithmeticable is the interface implemented by [CNNArithmetic], for mocking and DI.
 type CNNArithmeticable interface {
-	Unwrap() *raw.MPSCNNArithmetic
+	obj.Object
 	WithPrimaryScale(primaryScale float32) *CNNArithmetic
 	WithSecondaryScale(secondaryScale float32) *CNNArithmetic
 	WithBias(bias float32) *CNNArithmetic
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNArithmetic
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNArithmetic
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *CNNArithmetic
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNArithmetic
 	WithMinimumValue(minimumValue float32) *CNNArithmetic
 	WithMaximumValue(maximumValue float32) *CNNArithmetic
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNArithmetic
 	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNArithmetic
 	WithClipRect(clipRect metal.MTLRegion) *CNNArithmetic
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNArithmetic
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNArithmetic
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNArithmetic
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNArithmetic
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNArithmetic
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNArithmetic
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNArithmetic
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNArithmetic
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNArithmetic
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNArithmetic
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNArithmetic
-	WithOptions(options mpscore.MPSKernelOptions) *CNNArithmetic
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNArithmetic
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNArithmetic
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNArithmetic
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNArithmetic
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNArithmetic
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNArithmetic
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNArithmetic
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNArithmetic
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNArithmetic
 	WithLabel(label string) *CNNArithmetic
-	EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationState *mpsneuralnetwork.MPSCNNArithmeticGradientState, destinationImage *mpscore.MPSImage)
-	EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, primaryImages unsafe.Pointer, secondaryImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer)
 	PrimaryScale() float32
 	SetPrimaryScale(primaryScale float32)
 	SecondaryScale() float32
 	SetSecondaryScale(secondaryScale float32)
 	Bias() float32
 	SetBias(bias float32)
-	PrimaryStrideInFeatureChannels() uint
-	SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint)
-	SecondaryStrideInFeatureChannels() uint
-	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint)
+	PrimaryStrideInFeatureChannels() int
+	SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int)
+	SecondaryStrideInFeatureChannels() int
+	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int)
 	MinimumValue() float32
 	SetMinimumValue(minimumValue float32)
 	MaximumValue() float32
@@ -381,3 +285,14 @@ type CNNArithmeticable interface {
 }
 
 var _ CNNArithmeticable = (*CNNArithmetic)(nil)
+
+// isCNNArithmetic marks CNNArithmetic — and, by embedding promotion, its
+// subclasses — as a member of the CNNArithmetic hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNArithmetic) isCNNArithmetic() {}
+
+var _ CNNArithmeticProvider = (*CNNArithmetic)(nil)
+
+var _ CNNBinaryKernelProvider = (*CNNArithmetic)(nil)
+
+var _ KernelProvider = (*CNNArithmetic)(nil)

@@ -5,81 +5,110 @@
 package mediaextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that guides the video decoder operation on a per-frame basis.
+// DecodeFrameOptions is an idiomatic wrapper over the Objective-C class MEDecodeFrameOptions.
 //
-// DecodeFrameOptions wraps [raw.MEDecodeFrameOptions] with a fluent Go API.
+// An object that guides the video decoder operation on a per-frame basis.
 type DecodeFrameOptions struct {
-	inner *raw.MEDecodeFrameOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEDecodeFrameOptions].
-func (x *DecodeFrameOptions) Unwrap() *raw.MEDecodeFrameOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecodeFrameOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// DecodeFrameOptionsFromID adopts an existing object pointer as a DecodeFrameOptions (nil for 0).
+// DecodeFrameOptionsFromID adopts an existing Objective-C object as a DecodeFrameOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func DecodeFrameOptionsFromID(id objc.ID) *DecodeFrameOptions {
 	if id == 0 {
 		return nil
 	}
-	return &DecodeFrameOptions{inner: raw.MEDecodeFrameOptionsFromID(id)}
+	x := &DecodeFrameOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDecodeFrameOptions creates a new [DecodeFrameOptions].
+// decodeFrameOptionsAdopt wraps an Objective-C object that this code just created as a
+// DecodeFrameOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decodeFrameOptionsAdopt(id objc.ID) *DecodeFrameOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &DecodeFrameOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DecodeFrameOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DecodeFrameOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DecodeFrameOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecodeFrameOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDecodeFrameOptions creates a new DecodeFrameOptions.
 func NewDecodeFrameOptions() *DecodeFrameOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEDecodeFrameOptions")), objc.RegisterName("new"))
-	return &DecodeFrameOptions{inner: raw.MEDecodeFrameOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEDecodeFrameOptions")), objc.RegisterName("new"))
+	return decodeFrameOptionsAdopt(_id)
 }
 
-// A Boolean value that hints to the decoder whether or not it should emit an image buffer for the frame.
-//
-// WithDoNotOutputFrame sets the doNotOutputFrame property and returns the receiver for chaining.
+// WithDoNotOutputFrame a Boolean value that hints to the decoder whether or not it should emit an image buffer for the frame.
 func (x *DecodeFrameOptions) WithDoNotOutputFrame(doNotOutputFrame bool) *DecodeFrameOptions {
-	x.inner.SetDoNotOutputFrame(doNotOutputFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoNotOutputFrame:"), doNotOutputFrame)
 	return x
 }
 
-// A Boolean value that hints to the decoder to use a low-power mode that can’t decode faster than 1x real-time.
-//
-// WithRealTimePlayback sets the realTimePlayback property and returns the receiver for chaining.
+// WithRealTimePlayback a Boolean value that hints to the decoder to use a low-power mode that can’t decode faster than 1x real-time.
 func (x *DecodeFrameOptions) WithRealTimePlayback(realTimePlayback bool) *DecodeFrameOptions {
-	x.inner.SetRealTimePlayback(realTimePlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRealTimePlayback:"), realTimePlayback)
 	return x
 }
 
-// @property		doNotOutputFrame @abstract		A hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
-//
-// DoNotOutputFrame calls the underlying DoNotOutputFrame.
+// DoNotOutputFrame a hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
 func (x *DecodeFrameOptions) DoNotOutputFrame() bool {
-	return x.inner.DoNotOutputFrame()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doNotOutputFrame"))
+	return _r
 }
 
-// SetDoNotOutputFrame calls the underlying SetDoNotOutputFrame.
+// SetDoNotOutputFrame wraps the corresponding Objective-C method.
 func (x *DecodeFrameOptions) SetDoNotOutputFrame(doNotOutputFrame bool) {
-	x.inner.SetDoNotOutputFrame(doNotOutputFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoNotOutputFrame:"), doNotOutputFrame)
 }
 
-// @property		realTimePlayback @abstract		A hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. @discussion		Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
-//
-// RealTimePlayback calls the underlying RealTimePlayback.
+// RealTimePlayback a hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
 func (x *DecodeFrameOptions) RealTimePlayback() bool {
-	return x.inner.RealTimePlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("realTimePlayback"))
+	return _r
 }
 
-// SetRealTimePlayback calls the underlying SetRealTimePlayback.
+// SetRealTimePlayback wraps the corresponding Objective-C method.
 func (x *DecodeFrameOptions) SetRealTimePlayback(realTimePlayback bool) {
-	x.inner.SetRealTimePlayback(realTimePlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRealTimePlayback:"), realTimePlayback)
 }
 
 // DecodeFrameOptionsable is the interface implemented by [DecodeFrameOptions], for mocking and DI.
 type DecodeFrameOptionsable interface {
-	Unwrap() *raw.MEDecodeFrameOptions
+	obj.Object
 	WithDoNotOutputFrame(doNotOutputFrame bool) *DecodeFrameOptions
 	WithRealTimePlayback(realTimePlayback bool) *DecodeFrameOptions
 	DoNotOutputFrame() bool

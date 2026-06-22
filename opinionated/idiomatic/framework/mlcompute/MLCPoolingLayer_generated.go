@@ -5,74 +5,79 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that summarizes the average presence of a feature.
+// PoolingLayer is an idiomatic wrapper over the Objective-C class MLCPoolingLayer.
 //
-// PoolingLayer wraps [raw.MLCPoolingLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that summarizes the average presence of a feature.
 type PoolingLayer struct {
-	inner *raw.MLCPoolingLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCPoolingLayer].
-func (x *PoolingLayer) Unwrap() *raw.MLCPoolingLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PoolingLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// PoolingLayerFromID adopts an existing object pointer as a PoolingLayer (nil for 0).
+// PoolingLayerFromID adopts an existing Objective-C object as a PoolingLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func PoolingLayerFromID(id objc.ID) *PoolingLayer {
 	if id == 0 {
 		return nil
 	}
-	return &PoolingLayer{inner: raw.MLCPoolingLayerFromID(id)}
-}
-
-// NewPoolingLayer creates a new [PoolingLayer].
-func NewPoolingLayer() *PoolingLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCPoolingLayer")), objc.RegisterName("new"))
-	return &PoolingLayer{inner: raw.MLCPoolingLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *PoolingLayer) WithLabel(label string) *PoolingLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &PoolingLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *PoolingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   descriptor @abstract   The pooling descriptor
-//
-// Descriptor calls the underlying Descriptor.
-func (x *PoolingLayer) Descriptor() *PoolingDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
+// poolingLayerAdopt wraps an Objective-C object that this code just created as a
+// PoolingLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func poolingLayerAdopt(id objc.ID) *PoolingLayer {
+	if id == 0 {
 		return nil
 	}
-	return &PoolingDescriptor{inner: _r}
+	x := &PoolingLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *PoolingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+// NewPoolingLayer creates a new PoolingLayer.
+func NewPoolingLayer() *PoolingLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCPoolingLayer")), objc.RegisterName("new"))
+	return poolingLayerAdopt(_id)
+}
+
+// WithLabel a string that helps identify this layer.
+func (x *PoolingLayer) WithLabel(label string) *PoolingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *PoolingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// Descriptor the pooling descriptor
+func (x *PoolingLayer) Descriptor() *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return PoolingDescriptorFromID(_r)
+}
 
 // PoolingLayerable is the interface implemented by [PoolingLayer], for mocking and DI.
 type PoolingLayerable interface {
-	Unwrap() *raw.MLCPoolingLayer
+	obj.Object
 	WithLabel(label string) *PoolingLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer
 	Descriptor() *PoolingDescriptor
 }
 
 var _ PoolingLayerable = (*PoolingLayer)(nil)
+
+var _ LayerProvider = (*PoolingLayer)(nil)

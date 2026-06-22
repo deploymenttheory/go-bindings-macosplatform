@@ -5,172 +5,132 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An OpenID authorization request that provides single sign-on (SSO) functionality.
+// AuthorizationSingleSignOnRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationSingleSignOnRequest.
 //
-// AuthorizationSingleSignOnRequest wraps [raw.ASAuthorizationSingleSignOnRequest] with a fluent Go API.
+// It embeds [AuthorizationOpenIDRequest], promoting that type's methods.
+//
+// An OpenID authorization request that provides single sign-on (SSO) functionality.
 type AuthorizationSingleSignOnRequest struct {
-	inner *raw.ASAuthorizationSingleSignOnRequest
+	AuthorizationOpenIDRequest
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationSingleSignOnRequest].
-func (x *AuthorizationSingleSignOnRequest) Unwrap() *raw.ASAuthorizationSingleSignOnRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSingleSignOnRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationSingleSignOnRequestFromID adopts an existing object pointer as a AuthorizationSingleSignOnRequest (nil for 0).
+// AuthorizationSingleSignOnRequestFromID adopts an existing Objective-C object as a AuthorizationSingleSignOnRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationSingleSignOnRequestFromID(id objc.ID) *AuthorizationSingleSignOnRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationSingleSignOnRequest{inner: raw.ASAuthorizationSingleSignOnRequestFromID(id)}
-}
-
-// NewAuthorizationSingleSignOnRequest creates a new [AuthorizationSingleSignOnRequest].
-func NewAuthorizationSingleSignOnRequest() *AuthorizationSingleSignOnRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSingleSignOnRequest")), objc.RegisterName("new"))
-	return &AuthorizationSingleSignOnRequest{inner: raw.ASAuthorizationSingleSignOnRequestFromID(_id)}
-}
-
-// Options that control the authorization process.
-//
-// WithAuthorizationOptions sets the collection, converting the Go slice to an NSArray.
-func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAuthorizationOptions(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSURLQueryItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAuthorizationOptions(_arr)
+	x := &AuthorizationSingleSignOnRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract Enables or disables the authorization user interface. @discussion The default values is YES. If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface.
-//
-// WithUserInterfaceEnabled sets the userInterfaceEnabled property and returns the receiver for chaining.
-func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest {
-	x.inner.SetUserInterfaceEnabled(userInterfaceEnabled)
-	return x
-}
-
-// The contact information to be requested from the user during authentication.
-//
-// WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
-func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(_arr)
-	return x
-}
-
-// Data that’s returned to you unmodified in the corresponding credential after a successful authentication.
-//
-// WithState sets the state property and returns the receiver for chaining.
-func (x *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
-	x.inner.ASAuthorizationOpenIDRequest.SetState(foundation.NSStringStringWithUTF8String(state))
-	return x
-}
-
-// A string value to pass to the identity provider.
-//
-// WithNonce sets the nonce property and returns the receiver for chaining.
-func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
-	x.inner.ASAuthorizationOpenIDRequest.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
-	return x
-}
-
-// The OpenID authentication operation you want this request to perform.
-//
-// WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
-func (x *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationSingleSignOnRequest {
-	x.inner.ASAuthorizationOpenIDRequest.SetRequestedOperation(requestedOperation)
-	return x
-}
-
-// @abstract Parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
-//
-// AuthorizationOptions returns the collection as a Go slice.
-func (x *AuthorizationSingleSignOnRequest) AuthorizationOptions() []*foundation.NSURLQueryItem {
-	arr := x.inner.AuthorizationOptions()
-	if arr == nil {
+// authorizationSingleSignOnRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationSingleSignOnRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationSingleSignOnRequestAdopt(id objc.ID) *AuthorizationSingleSignOnRequest {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
-		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
-	})
+	x := &AuthorizationSingleSignOnRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetAuthorizationOptions calls the underlying SetAuthorizationOptions.
-func (x *AuthorizationSingleSignOnRequest) SetAuthorizationOptions(authorizationOptions *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	x.inner.SetAuthorizationOptions(authorizationOptions)
+// NewAuthorizationSingleSignOnRequest creates a new AuthorizationSingleSignOnRequest.
+func NewAuthorizationSingleSignOnRequest() *AuthorizationSingleSignOnRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSingleSignOnRequest")), objc.RegisterName("new"))
+	return authorizationSingleSignOnRequestAdopt(_id)
 }
 
-// @abstract Enables or disables the authorization user interface. @discussion The default values is YES. If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface.
+// WithAuthorizationOptions options that control the authorization process.
+func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...obj.Object) *AuthorizationSingleSignOnRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorizationOptions:"), _arr)
+	return x
+}
+
+// WithUserInterfaceEnabled enables or disables the authorization user interface. The default values is YES. If user interface is not enabled, then the authorization will fail with
+func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceEnabled:"), userInterfaceEnabled)
+	return x
+}
+
+// WithRequestedScopes the contact information to be requested from the user during authentication.
+func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...obj.Object) *AuthorizationSingleSignOnRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedScopes:"), _arr)
+	return x
+}
+
+// WithState data that’s returned to you unmodified in the corresponding credential after a successful authentication.
+func (x *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
+	return x
+}
+
+// WithNonce a string value to pass to the identity provider.
+func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), purego.NSString(nonce))
+	return x
+}
+
+// WithRequestedOperation the OpenID authentication operation you want this request to perform.
+func (x *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationSingleSignOnRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
+	return x
+}
+
+// AuthorizationOptions parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
 //
-// IsUserInterfaceEnabled calls the underlying IsUserInterfaceEnabled.
+// AuthorizationOptions returns the collection as a Go slice.
+func (x *AuthorizationSingleSignOnRequest) AuthorizationOptions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetAuthorizationOptions wraps the corresponding Objective-C method.
+func (x *AuthorizationSingleSignOnRequest) SetAuthorizationOptions(authorizationOptions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthorizationOptions:"), purego.SliceToNSArray(authorizationOptions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// IsUserInterfaceEnabled enables or disables the authorization user interface. The default values is YES. If user interface is not enabled, then the authorization will fail with
 func (x *AuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
-	return x.inner.IsUserInterfaceEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInterfaceEnabled"))
+	return _r
 }
 
-// SetUserInterfaceEnabled calls the underlying SetUserInterfaceEnabled.
+// SetUserInterfaceEnabled wraps the corresponding Objective-C method.
 func (x *AuthorizationSingleSignOnRequest) SetUserInterfaceEnabled(userInterfaceEnabled bool) {
-	x.inner.SetUserInterfaceEnabled(userInterfaceEnabled)
-}
-
-func (x *AuthorizationSingleSignOnRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest {
-	return &x.inner.ASAuthorizationOpenIDRequest
-}
-
-func (x *AuthorizationSingleSignOnRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
-	return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceEnabled:"), userInterfaceEnabled)
 }
 
 // AuthorizationSingleSignOnRequestable is the interface implemented by [AuthorizationSingleSignOnRequest], for mocking and DI.
 type AuthorizationSingleSignOnRequestable interface {
-	Unwrap() *raw.ASAuthorizationSingleSignOnRequest
-	WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest
+	obj.Object
+	WithAuthorizationOptions(items ...obj.Object) *AuthorizationSingleSignOnRequest
 	WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest
-	WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest
+	WithRequestedScopes(items ...obj.Object) *AuthorizationSingleSignOnRequest
 	WithState(state string) *AuthorizationSingleSignOnRequest
 	WithNonce(nonce string) *AuthorizationSingleSignOnRequest
-	WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationSingleSignOnRequest
-	AuthorizationOptions() []*foundation.NSURLQueryItem
-	SetAuthorizationOptions(authorizationOptions *foundation.NSArray[*foundation.NSURLQueryItem])
+	WithRequestedOperation(requestedOperation obj.Object) *AuthorizationSingleSignOnRequest
+	AuthorizationOptions() []obj.Object
+	SetAuthorizationOptions(authorizationOptions []obj.Object)
 	IsUserInterfaceEnabled() bool
 	SetUserInterfaceEnabled(userInterfaceEnabled bool)
 }
 
 var _ AuthorizationSingleSignOnRequestable = (*AuthorizationSingleSignOnRequest)(nil)
+
+var _ AuthorizationOpenIDRequestProvider = (*AuthorizationSingleSignOnRequest)(nil)
+
+var _ AuthorizationRequestProvider = (*AuthorizationSingleSignOnRequest)(nil)

@@ -5,67 +5,79 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a tempo change to a specific beats-per-minute value.
+// ExtendedTempoEvent is an idiomatic wrapper over the Objective-C class AVExtendedTempoEvent.
 //
-// ExtendedTempoEvent wraps [raw.AVExtendedTempoEvent] with a fluent Go API.
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents a tempo change to a specific beats-per-minute value.
 type ExtendedTempoEvent struct {
-	inner *raw.AVExtendedTempoEvent
+	MusicEvent
 }
 
-// Unwrap returns the underlying [raw.AVExtendedTempoEvent].
-func (x *ExtendedTempoEvent) Unwrap() *raw.AVExtendedTempoEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtendedTempoEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtendedTempoEventFromID adopts an existing object pointer as a ExtendedTempoEvent (nil for 0).
+// ExtendedTempoEventFromID adopts an existing Objective-C object as a ExtendedTempoEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtendedTempoEventFromID(id objc.ID) *ExtendedTempoEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ExtendedTempoEvent{inner: raw.AVExtendedTempoEventFromID(id)}
-}
-
-// Creates an extended tempo event.
-//
-// NewExtendedTempoEventWithTempo creates a new [ExtendedTempoEvent].
-func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExtendedTempoEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTempo:"), tempo)
-	return &ExtendedTempoEvent{inner: raw.AVExtendedTempoEventFromID(_id)}
-}
-
-// The tempo in beats per minute as a positive value.
-//
-// WithTempo sets the tempo property and returns the receiver for chaining.
-func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
-	x.inner.SetTempo(tempo)
+	x := &ExtendedTempoEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Tempo calls the underlying Tempo.
+// extendedTempoEventAdopt wraps an Objective-C object that this code just created as a
+// ExtendedTempoEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extendedTempoEventAdopt(id objc.ID) *ExtendedTempoEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtendedTempoEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewExtendedTempoEventWithTempo creates an extended tempo event.
+func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVExtendedTempoEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTempo:"), tempo)
+	return extendedTempoEventAdopt(_id)
+}
+
+// WithTempo the tempo in beats per minute as a positive value.
+func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), tempo)
+	return x
+}
+
+// Tempo wraps the corresponding Objective-C method.
 func (x *ExtendedTempoEvent) Tempo() float64 {
-	return x.inner.Tempo()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tempo"))
+	return _r
 }
 
-// SetTempo calls the underlying SetTempo.
+// SetTempo wraps the corresponding Objective-C method.
 func (x *ExtendedTempoEvent) SetTempo(tempo float64) {
-	x.inner.SetTempo(tempo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempo:"), tempo)
 }
-
-func (x *ExtendedTempoEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
 
 // ExtendedTempoEventable is the interface implemented by [ExtendedTempoEvent], for mocking and DI.
 type ExtendedTempoEventable interface {
-	Unwrap() *raw.AVExtendedTempoEvent
+	obj.Object
 	WithTempo(tempo float64) *ExtendedTempoEvent
 	Tempo() float64
 	SetTempo(tempo float64)
 }
 
 var _ ExtendedTempoEventable = (*ExtendedTempoEvent)(nil)
+
+var _ MusicEventProvider = (*ExtendedTempoEvent)(nil)

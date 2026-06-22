@@ -5,4543 +5,2285 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The optimized representation of a compute graph of operations and tensors.
+// Graph is an idiomatic wrapper over the Objective-C class MPSGraph.
 //
-// Graph wraps [raw.MPSGraph] with a fluent Go API.
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The optimized representation of a compute graph of operations and tensors.
 type Graph struct {
-	inner *raw.MPSGraph
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraph].
-func (x *Graph) Unwrap() *raw.MPSGraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Graph) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphFromID adopts an existing object pointer as a Graph (nil for 0).
+// GraphFromID adopts an existing Objective-C object as a Graph
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphFromID(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	return &Graph{inner: raw.MPSGraphFromID(id)}
-}
-
-// NewGraph creates a new [Graph].
-func NewGraph() *Graph {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraph")), objc.RegisterName("new"))
-	return &Graph{inner: raw.MPSGraphFromID(_id)}
-}
-
-// Options for the graph.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *Graph) WithOptions(options MPSGraphOptions) *Graph {
-	x.inner.SetOptions(raw.MPSGraphOptions(options))
+	x := &Graph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Compiles the graph for the given feeds to returns the target tensor values, ensuring all target operations would be executed.
-//
-// CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor calls the underlying CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor.
-func (x *Graph) CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device *raw.MPSGraphDevice, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutable {
-	_r := x.inner.CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device, feeds, targetTensors, targetOperations, compilationDescriptor)
-	if _r == nil {
+// graphAdopt wraps an Objective-C object that this code just created as a
+// Graph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphAdopt(id objc.ID) *Graph {
+	if id == 0 {
 		return nil
 	}
-	return &GraphExecutable{inner: _r}
+	x := &Graph{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
-//
-// RunWithFeedsTargetTensorsTargetOperations calls the underlying RunWithFeedsTargetTensorsTargetOperations.
-func (x *Graph) RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer {
-	_ptrs := make([]objc.ID, len(targetOperations))
-	for _i, _v := range targetOperations {
-		_ptrs[_i] = _v.asGraphOperation().Ptr()
-	}
-	var _arg2 *foundation.NSArray[*raw.MPSGraphOperation]
-	if len(_ptrs) > 0 {
-		_arg2 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.RunWithFeedsTargetTensorsTargetOperations(feeds, targetTensors, _arg2)
+// NewGraph creates a new Graph.
+func NewGraph() *Graph {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraph")), objc.RegisterName("new"))
+	return graphAdopt(_id)
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
-//
-// RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations calls the underlying RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations.
-func (x *Graph) RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer {
-	_ptrs := make([]objc.ID, len(targetOperations))
-	for _i, _v := range targetOperations {
-		_ptrs[_i] = _v.asGraphOperation().Ptr()
-	}
-	var _arg3 *foundation.NSArray[*raw.MPSGraphOperation]
-	if len(_ptrs) > 0 {
-		_arg3 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg3 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue, feeds, targetTensors, _arg3)
+// WithOptions options for the graph.
+func (x *Graph) WithOptions(options GraphOptions) *Graph {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
+	return x
 }
 
-// Runs the graph for the given feeds and returns the target tensor values in the results dictionary provided by the user.
-//
-// RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary calls the underlying RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary.
-func (x *Graph) RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer) {
-	x.inner.RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary(commandQueue, feeds, targetOperations, resultsDictionary)
+// Options options for the graph. The default value is `MPSGraphOptionsDefault`.
+func (x *Graph) Options() GraphOptions {
+	_r := objc.Send[GraphOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
-//
-// RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor calls the underlying RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor.
-func (x *Graph) RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer {
-	return x.inner.RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds, targetTensors, targetOperations, executionDescriptor)
+// SetOptions wraps the corresponding Objective-C method.
+func (x *Graph) SetOptions(options GraphOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
-//
-// RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor calls the underlying RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor.
-func (x *Graph) RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer {
-	return x.inner.RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue, feeds, targetTensors, targetOperations, executionDescriptor)
-}
-
-// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
-//
-// RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor calls the underlying RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor.
-func (x *Graph) RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor) {
-	x.inner.RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue, feeds, targetOperations, resultsDictionary, executionDescriptor)
-}
-
-// Encodes the graph for the given feeds to returns the target tensor values, ensuring all target operations also executed.
-//
-// EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor calls the underlying EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor.
-func (x *Graph) EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer {
-	return x.inner.EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer, feeds, targetTensors, targetOperations, executionDescriptor)
-}
-
-// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
-//
-// EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor calls the underlying EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor.
-func (x *Graph) EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor) {
-	x.inner.EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer, feeds, targetOperations, resultsDictionary, executionDescriptor)
-}
-
-// Options for the graph. The default value is `MPSGraphOptionsDefault`.
-//
-// Options calls the underlying Options.
-func (x *Graph) Options() MPSGraphOptions {
-	return MPSGraphOptions(x.inner.Options())
-}
-
-// SetOptions calls the underlying SetOptions.
-func (x *Graph) SetOptions(options MPSGraphOptions) {
-	x.inner.SetOptions(raw.MPSGraphOptions(options))
-}
-
-// Array of all the placeholder tensors.
+// PlaceholderTensors array of all the placeholder tensors.
 //
 // PlaceholderTensors returns the collection as a Go slice.
 func (x *Graph) PlaceholderTensors() []*GraphTensor {
-	arr := x.inner.PlaceholderTensors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
-		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
-	})
-}
-
-// Calculates a partial derivative of primaryTensor with respect to the tensors.
-//
-// GradientForPrimaryTensorWithTensorsName calls the underlying GradientForPrimaryTensorWithTensorsName.
-func (x *Graph) GradientForPrimaryTensorWithTensorsName(primaryTensor *raw.MPSGraphTensor, tensors *foundation.NSArray[*raw.MPSGraphTensor], name string) *foundation.NSDictionary[*raw.MPSGraphTensor, *raw.MPSGraphTensor] {
-	return x.inner.GradientForPrimaryTensorWithTensorsName(primaryTensor, tensors, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Computes the ReLU (rectified linear activation unit) function with the input tensor.
-//
-// ReLUWithTensorName calls the underlying ReLUWithTensorName.
-func (x *Graph) ReLUWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReLUWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the gradient of the ReLU (rectified linear activation unit) function using the incoming gradient.
-//
-// ReLUGradientWithIncomingGradientSourceTensorName calls the underlying ReLUGradientWithIncomingGradientSourceTensorName.
-func (x *Graph) ReLUGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReLUGradientWithIncomingGradientSourceTensorName(gradient, source, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the sigmoid operation on an input tensor.
-//
-// SigmoidWithTensorName calls the underlying SigmoidWithTensorName.
-func (x *Graph) SigmoidWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SigmoidWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the gradient of the sigmoid function using the incoming gradient tensor.
-//
-// SigmoidGradientWithIncomingGradientSourceTensorName calls the underlying SigmoidGradientWithIncomingGradientSourceTensorName.
-func (x *Graph) SigmoidGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SigmoidGradientWithIncomingGradientSourceTensorName(gradient, source, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the softmax function on the input tensor along the specified axis.
-//
-// SoftMaxWithTensorAxisName calls the underlying SoftMaxWithTensorAxisName.
-func (x *Graph) SoftMaxWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.SoftMaxWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the gradient of the softmax function along the specified axis using the incoming gradient tensor.
-//
-// SoftMaxGradientWithIncomingGradientSourceTensorAxisName calls the underlying SoftMaxGradientWithIncomingGradientSourceTensorAxisName.
-func (x *Graph) SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient, source, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
-//
-// LeakyReLUWithTensorAlphaName calls the underlying LeakyReLUWithTensorAlphaName.
-func (x *Graph) LeakyReLUWithTensorAlphaName(tensor *raw.MPSGraphTensor, alpha float64, name string) *GraphTensor {
-	_r := x.inner.LeakyReLUWithTensorAlphaName(tensor, alpha, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
-//
-// LeakyReLUWithTensorAlphaTensorName calls the underlying LeakyReLUWithTensorAlphaTensorName.
-func (x *Graph) LeakyReLUWithTensorAlphaTensorName(tensor *raw.MPSGraphTensor, alphaTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LeakyReLUWithTensorAlphaTensorName(tensor, alphaTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the gradient of the leaky rectified linear unit (ReLU) activation.
-//
-// LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName calls the underlying LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName.
-func (x *Graph) LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, alphaTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient, source, alphaTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Copies the input tensor values into the output, behaving as an identity operation.
-//
-// IdentityWithTensorName calls the underlying IdentityWithTensorName.
-func (x *Graph) IdentityWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.IdentityWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the natural exponent to the input tensor elements.
-//
-// ExponentWithTensorName calls the underlying ExponentWithTensorName.
-func (x *Graph) ExponentWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ExponentWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies an exponent with base 2 to the input tensor elements.
-//
-// ExponentBase2WithTensorName calls the underlying ExponentBase2WithTensorName.
-func (x *Graph) ExponentBase2WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ExponentBase2WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies an exponent with base 10 to the input tensor elements.
-//
-// ExponentBase10WithTensorName calls the underlying ExponentBase10WithTensorName.
-func (x *Graph) ExponentBase10WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ExponentBase10WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the natural logarithm to the input tensor elements.
-//
-// LogarithmWithTensorName calls the underlying LogarithmWithTensorName.
-func (x *Graph) LogarithmWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogarithmWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the logarithm with base 2 to the input tensor elements.
-//
-// LogarithmBase2WithTensorName calls the underlying LogarithmBase2WithTensorName.
-func (x *Graph) LogarithmBase2WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogarithmBase2WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the logarithm with base 10 to the input tensor elements.
-//
-// LogarithmBase10WithTensorName calls the underlying LogarithmBase10WithTensorName.
-func (x *Graph) LogarithmBase10WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogarithmBase10WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the square operation to the input tensor elements.
-//
-// SquareWithTensorName calls the underlying SquareWithTensorName.
-func (x *Graph) SquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SquareWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the square root operation to the input tensor elements.
-//
-// SquareRootWithTensorName calls the underlying SquareRootWithTensorName.
-func (x *Graph) SquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SquareRootWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the reciprocal square root operation to the input tensor elements.
-//
-// ReciprocalSquareRootWithTensorName calls the underlying ReciprocalSquareRootWithTensorName.
-func (x *Graph) ReciprocalSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReciprocalSquareRootWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the reverse square root operation to the input tensor elements.
-//
-// ReverseSquareRootWithTensorName calls the underlying ReverseSquareRootWithTensorName.
-func (x *Graph) ReverseSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReverseSquareRootWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the reciprocal operation to the input tensor elements.
-//
-// ReciprocalWithTensorName calls the underlying ReciprocalWithTensorName.
-func (x *Graph) ReciprocalWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReciprocalWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the absolute values of the input tensor elements.
-//
-// AbsoluteWithTensorName calls the underlying AbsoluteWithTensorName.
-func (x *Graph) AbsoluteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AbsoluteWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the absolute square of the input tensor elements.
-//
-// AbsoluteSquareWithTensorName calls the underlying AbsoluteSquareWithTensorName.
-func (x *Graph) AbsoluteSquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AbsoluteSquareWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies negative to the input tensor elements.
-//
-// NegativeWithTensorName calls the underlying NegativeWithTensorName.
-func (x *Graph) NegativeWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.NegativeWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the sign of the input tensor elements.
-//
-// SignWithTensorName calls the underlying SignWithTensorName.
-func (x *Graph) SignWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SignWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the sign bit of the input tensor elements.
-//
-// SignbitWithTensorName calls the underlying SignbitWithTensorName.
-func (x *Graph) SignbitWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SignbitWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the ceiling operation to the input tensor elements.
-//
-// CeilWithTensorName calls the underlying CeilWithTensorName.
-func (x *Graph) CeilWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CeilWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the floor operation to the input tensor elements.
-//
-// FloorWithTensorName calls the underlying FloorWithTensorName.
-func (x *Graph) FloorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.FloorWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Rounds the input tensor elements.
-//
-// RoundWithTensorName calls the underlying RoundWithTensorName.
-func (x *Graph) RoundWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.RoundWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Rounds the input tensor elements by rounding to nearest even.
-//
-// RintWithTensorName calls the underlying RintWithTensorName.
-func (x *Graph) RintWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.RintWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the sine operation to the input tensor elements.
-//
-// SinWithTensorName calls the underlying SinWithTensorName.
-func (x *Graph) SinWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SinWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the cosine operation to the input tensor elements.
-//
-// CosWithTensorName calls the underlying CosWithTensorName.
-func (x *Graph) CosWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CosWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the tangent operation to the input tensor elements.
-//
-// TanWithTensorName calls the underlying TanWithTensorName.
-func (x *Graph) TanWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.TanWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the hyperbolic sine operation to the input tensor elements.
-//
-// SinhWithTensorName calls the underlying SinhWithTensorName.
-func (x *Graph) SinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SinhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the hyperbolic cosine operation to the input tensor elements.
-//
-// CoshWithTensorName calls the underlying CoshWithTensorName.
-func (x *Graph) CoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CoshWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the hyperbolic tangent operation to the input tensor elements.
-//
-// TanhWithTensorName calls the underlying TanhWithTensorName.
-func (x *Graph) TanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.TanhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the inverse sine operation to the input tensor elements.
-//
-// AsinWithTensorName calls the underlying AsinWithTensorName.
-func (x *Graph) AsinWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AsinWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the inverse cosine operation to the input tensor elements.
-//
-// AcosWithTensorName calls the underlying AcosWithTensorName.
-func (x *Graph) AcosWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AcosWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the inverse tangent operation to the input tensor elements.
-//
-// AtanWithTensorName calls the underlying AtanWithTensorName.
-func (x *Graph) AtanWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AtanWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the inverse hyperbolic sine operation to the input tensor elements.
-//
-// AsinhWithTensorName calls the underlying AsinhWithTensorName.
-func (x *Graph) AsinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AsinhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the inverse hyperbolic cosine operation to the input tensor elements.
-//
-// AcoshWithTensorName calls the underlying AcoshWithTensorName.
-func (x *Graph) AcoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AcoshWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the inverse hyperbolic tangent operation to the input tensor elements.
-//
-// AtanhWithTensorName calls the underlying AtanhWithTensorName.
-func (x *Graph) AtanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AtanhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the logical NOT operation to the input tensor elements.
-//
-// NotWithTensorName calls the underlying NotWithTensorName.
-func (x *Graph) NotWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.NotWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks if the input tensor elements are infinite or not.
-//
-// IsInfiniteWithTensorName calls the underlying IsInfiniteWithTensorName.
-func (x *Graph) IsInfiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.IsInfiniteWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks if the input tensor elements are finite or not.
-//
-// IsFiniteWithTensorName calls the underlying IsFiniteWithTensorName.
-func (x *Graph) IsFiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.IsFiniteWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks if the input tensor elements are NaN or not.
-//
-// IsNaNWithTensorName calls the underlying IsNaNWithTensorName.
-func (x *Graph) IsNaNWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.IsNaNWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the error function to the input tensor elements.
-//
-// ErfWithTensorName calls the underlying ErfWithTensorName.
-func (x *Graph) ErfWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ErfWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the truncate operation to the input tensor elements.
-//
-// TruncateWithTensorName calls the underlying TruncateWithTensorName.
-func (x *Graph) TruncateWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.TruncateWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Applies the bitwise NOT operation to the input tensor element.
-//
-// BitwiseNOTWithTensorName calls the underlying BitwiseNOTWithTensorName.
-func (x *Graph) BitwiseNOTWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwiseNOTWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the population count of the input tensor elements.
-//
-// BitwisePopulationCountWithTensorName calls the underlying BitwisePopulationCountWithTensorName.
-func (x *Graph) BitwisePopulationCountWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwisePopulationCountWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the complex conjugate of the input tensor elements.
-//
-// ConjugateWithTensorName calls the underlying ConjugateWithTensorName.
-func (x *Graph) ConjugateWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ConjugateWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Adds two input tensors.
-//
-// AdditionWithPrimaryTensorSecondaryTensorName calls the underlying AdditionWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Subtracts the second input tensor from the first.
-//
-// SubtractionWithPrimaryTensorSecondaryTensorName calls the underlying SubtractionWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Multiplies two input tensors.
-//
-// MultiplicationWithPrimaryTensorSecondaryTensorName calls the underlying MultiplicationWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Divides the first input tensor by the second.
-//
-// DivisionWithPrimaryTensorSecondaryTensorName calls the underlying DivisionWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the remainder obtained by dividing the first input tensor by the second.
-//
-// ModuloWithPrimaryTensorSecondaryTensorName calls the underlying ModuloWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise result of raising the first tensor to the power of the second tensor.
-//
-// PowerWithPrimaryTensorSecondaryTensorName calls the underlying PowerWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.PowerWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise minimum of the input tensors.
-//
-// MinimumWithPrimaryTensorSecondaryTensorName calls the underlying MinimumWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise maximum of the input tensors.
-//
-// MaximumWithPrimaryTensorSecondaryTensorName calls the underlying MaximumWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise minimum of the input tensors, while propagating NaN values.
-//
-// MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName calls the underlying MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise maximum of the input tensors, while propagating NaN values.
-//
-// MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName calls the underlying MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise equality check of the input tensors.
-//
-// EqualWithPrimaryTensorSecondaryTensorName calls the underlying EqualWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.EqualWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise inequality check of the input tensors.
-//
-// NotEqualWithPrimaryTensorSecondaryTensorName calls the underlying NotEqualWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks in an elementwise manner if the first input tensor is less than the second.
-//
-// LessThanWithPrimaryTensorSecondaryTensorName calls the underlying LessThanWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks in an elementwise manner if the first input tensor is less than or equal to the second.
-//
-// LessThanOrEqualToWithPrimaryTensorSecondaryTensorName calls the underlying LessThanOrEqualToWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks in an elementwise manner if the first input tensor is greater than the second.
-//
-// GreaterThanWithPrimaryTensorSecondaryTensorName calls the underlying GreaterThanWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Checks in an elementwise manner if the first input tensor is greater than or equal to the second.
-//
-// GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName calls the underlying GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise logical AND of the input tensors.
-//
-// LogicalANDWithPrimaryTensorSecondaryTensorName calls the underlying LogicalANDWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise logical OR of the input tensors.
-//
-// LogicalORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalORWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise logical NAND of the input tensors.
-//
-// LogicalNANDWithPrimaryTensorSecondaryTensorName calls the underlying LogicalNANDWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise logical NOR of the input tensors.
-//
-// LogicalNORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalNORWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise logical XOR of the input tensors.
-//
-// LogicalXORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalXORWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise logical XNOR of the input tensors.
-//
-// LogicalXNORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalXNORWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise two-argument arctangent of the input tensors.
-//
-// Atan2WithPrimaryTensorSecondaryTensorName calls the underlying Atan2WithPrimaryTensorSecondaryTensorName.
-func (x *Graph) Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise bitwise AND of binary representations of two integer tensors.
-//
-// BitwiseANDWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseANDWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise bitwise OR of binary representations of two integer tensors.
-//
-// BitwiseORWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseORWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise bitwise XOR of binary representations of two integer tensors.
-//
-// BitwiseXORWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseXORWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise left-shifted binary representations of the primary integer by the secondary tensor amount.
-//
-// BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the elementwise right-shifted binary representations of the primary integer by the secondary tensor amount.
-//
-// BitwiseRightShiftWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseRightShiftWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Selects values from either the true or false predicate tensor, depending on the values in the first input.
-//
-// SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName calls the underlying SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName.
-func (x *Graph) SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor *raw.MPSGraphTensor, truePredicateTensor *raw.MPSGraphTensor, falseSelectTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor, truePredicateTensor, falseSelectTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Clamps the values in the first tensor between the corresponding values in the minimum and maximum value tensor.
-//
-// ClampWithTensorMinValueTensorMaxValueTensorName calls the underlying ClampWithTensorMinValueTensorMaxValueTensorName.
-func (x *Graph) ClampWithTensorMinValueTensorMaxValueTensorName(tensor *raw.MPSGraphTensor, minValueTensor *raw.MPSGraphTensor, maxValueTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ClampWithTensorMinValueTensorMaxValueTensorName(tensor, minValueTensor, maxValueTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Divides the first input tensor by the second, with the result being 0 if the denominator is 0.
-//
-// DivisionNoNaNWithPrimaryTensorSecondaryTensorName calls the underlying DivisionNoNaNWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the remainder of floor divison between the primary and secondary tensor.
-//
-// FloorModuloWithPrimaryTensorSecondaryTensorName calls the underlying FloorModuloWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the real part of a tensor.
-//
-// RealPartOfTensorName calls the underlying RealPartOfTensorName.
-func (x *Graph) RealPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.RealPartOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the imaginary part of a tensor.
-//
-// ImaginaryPartOfTensorName calls the underlying ImaginaryPartOfTensorName.
-func (x *Graph) ImaginaryPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ImaginaryPartOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns a complex tensor from the two input tensors.
-//
-// ComplexTensorWithRealTensorImaginaryTensorName calls the underlying ComplexTensorWithRealTensorImaginaryTensorName.
-func (x *Graph) ComplexTensorWithRealTensorImaginaryTensorName(realTensor *raw.MPSGraphTensor, imaginaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ComplexTensorWithRealTensorImaginaryTensorName(realTensor, imaginaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns a real-valued tensor from a complex-valued tensor with real and imaginary planes separated.
-//
-// PlanarTensorWithComplexTensorName calls the underlying PlanarTensorWithComplexTensorName.
-func (x *Graph) PlanarTensorWithComplexTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.PlanarTensorWithComplexTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an operation which invokes another executable.
-//
-// CallSymbolNameInputTensorsOutputTypesName calls the underlying CallSymbolNameInputTensorsOutputTypesName.
-func (x *Graph) CallSymbolNameInputTensorsOutputTypesName(symbolName string, inputTensors *foundation.NSArray[*raw.MPSGraphTensor], outputTypes *foundation.NSArray[*raw.MPSGraphType], name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.CallSymbolNameInputTensorsOutputTypesName(foundation.NSStringStringWithUTF8String(symbolName), inputTensors, outputTypes, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a 2D (forward) convolution operation and returns the result tensor.
-//
-// Convolution2DWithSourceTensorWeightsTensorDescriptorName calls the underlying Convolution2DWithSourceTensorWeightsTensorDescriptorName.
-func (x *Graph) Convolution2DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution2DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution.
-//
-// Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName.
-func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution.
-//
-// Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName.
-func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, weights, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D convolution gradient operation with respect to the weights tensor of the forward convolution.
-//
-// Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName.
-func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D convolution gradient operation with respect to weights tensor of forward convolution.
-//
-// Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName.
-func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, source, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D forward convolution operation and returns the result tensor.
-//
-// Convolution3DWithSourceTensorWeightsTensorDescriptorName calls the underlying Convolution3DWithSourceTensorWeightsTensorDescriptorName.
-func (x *Graph) Convolution3DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution3DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution.
-//
-// Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName.
-func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution.
-//
-// Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName.
-func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, weights, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution.
-//
-// Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName.
-func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution.
-//
-// Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName.
-func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, source, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a convolution transpose operation and returns the result tensor.
-//
-// ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName calls the underlying ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName.
-func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName(source, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a convolution transpose operation and returns the result tensor.
-//
-// ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName calls the underlying ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName.
-func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor.
-//
-// ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName.
-func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor.
-//
-// ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName.
-func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor.
-//
-// ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName.
-func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradientTensor *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradientTensor, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor.
-//
-// ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName.
-func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
-//
-// ControlDependencyWithOperationsDependentBlockName calls the underlying ControlDependencyWithOperationsDependentBlockName.
-func (x *Graph) ControlDependencyWithOperationsDependentBlockName(operations *foundation.NSArray[*raw.MPSGraphOperation], dependentBlock objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.ControlDependencyWithOperationsDependentBlockName(operations, dependentBlock, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Adds an if-then-else operation to the graph.
-//
-// IfWithPredicateTensorThenBlockElseBlockName calls the underlying IfWithPredicateTensorThenBlockElseBlockName.
-func (x *Graph) IfWithPredicateTensorThenBlockElseBlockName(predicateTensor *raw.MPSGraphTensor, thenBlock objc.Block, elseBlock objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.IfWithPredicateTensorThenBlockElseBlockName(predicateTensor, thenBlock, elseBlock, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Adds a while loop operation.
-//
-// WhileWithInitialInputsBeforeAfterName calls the underlying WhileWithInitialInputsBeforeAfterName.
-func (x *Graph) WhileWithInitialInputsBeforeAfterName(initialInputs *foundation.NSArray[*raw.MPSGraphTensor], before objc.Block, after objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.WhileWithInitialInputsBeforeAfterName(initialInputs, before, after, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Adds a for loop operation, The lower and upper bounds specify a half-open range: the range includes the lower bound but does not include the upper bound.
-//
-// ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName calls the underlying ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName.
-func (x *Graph) ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName(lowerBound *raw.MPSGraphTensor, upperBound *raw.MPSGraphTensor, step *raw.MPSGraphTensor, initialBodyArguments *foundation.NSArray[*raw.MPSGraphTensor], body objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName(lowerBound, upperBound, step, initialBodyArguments, body, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Adds a for loop operation, with a specific number of iterations.
-//
-// ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName calls the underlying ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName.
-func (x *Graph) ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName(numberOfIterations *raw.MPSGraphTensor, initialBodyArguments *foundation.NSArray[*raw.MPSGraphTensor], body objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName(numberOfIterations, initialBodyArguments, body, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Computes the cumulative sum of the input tensor along the specified axis.
-//
-// CumulativeSumWithTensorAxisExclusiveReverseName calls the underlying CumulativeSumWithTensorAxisExclusiveReverseName.
-func (x *Graph) CumulativeSumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeSumWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative sum of the input tensor along the specified axis.
-//
-// CumulativeSumWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeSumWithTensorAxisTensorExclusiveReverseName.
-func (x *Graph) CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative sum of the input tensor along the specified axis.
-//
-// CumulativeSumWithTensorAxisName calls the underlying CumulativeSumWithTensorAxisName.
-func (x *Graph) CumulativeSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.CumulativeSumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative sum of the input tensor along the specified axis.
-//
-// CumulativeSumWithTensorAxisTensorName calls the underlying CumulativeSumWithTensorAxisTensorName.
-func (x *Graph) CumulativeSumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CumulativeSumWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative product of the input tensor along the specified axis.
-//
-// CumulativeProductWithTensorAxisExclusiveReverseName calls the underlying CumulativeProductWithTensorAxisExclusiveReverseName.
-func (x *Graph) CumulativeProductWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeProductWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative product of the input tensor along the specified axis.
-//
-// CumulativeProductWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeProductWithTensorAxisTensorExclusiveReverseName.
-func (x *Graph) CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative product of the input tensor along the specified axis.
-//
-// CumulativeProductWithTensorAxisName calls the underlying CumulativeProductWithTensorAxisName.
-func (x *Graph) CumulativeProductWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.CumulativeProductWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative product of the input tensor along the specified axis.
-//
-// CumulativeProductWithTensorAxisTensorName calls the underlying CumulativeProductWithTensorAxisTensorName.
-func (x *Graph) CumulativeProductWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CumulativeProductWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative minimum of the input tensor along the specified axis.
-//
-// CumulativeMinimumWithTensorAxisExclusiveReverseName calls the underlying CumulativeMinimumWithTensorAxisExclusiveReverseName.
-func (x *Graph) CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative minimum of the input tensor along the specified axis.
-//
-// CumulativeMinimumWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeMinimumWithTensorAxisTensorExclusiveReverseName.
-func (x *Graph) CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative minimum of the input tensor along the specified axis.
-//
-// CumulativeMinimumWithTensorAxisName calls the underlying CumulativeMinimumWithTensorAxisName.
-func (x *Graph) CumulativeMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.CumulativeMinimumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative minimum of the input tensor along the specified axis.
-//
-// CumulativeMinimumWithTensorAxisTensorName calls the underlying CumulativeMinimumWithTensorAxisTensorName.
-func (x *Graph) CumulativeMinimumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CumulativeMinimumWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative maximum of the input tensor along the specified axis.
-//
-// CumulativeMaximumWithTensorAxisExclusiveReverseName calls the underlying CumulativeMaximumWithTensorAxisExclusiveReverseName.
-func (x *Graph) CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative maximum of the input tensor along the specified axis.
-//
-// CumulativeMaximumWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeMaximumWithTensorAxisTensorExclusiveReverseName.
-func (x *Graph) CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
-	_r := x.inner.CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative maximum of the input tensor along the specified axis.
-//
-// CumulativeMaximumWithTensorAxisName calls the underlying CumulativeMaximumWithTensorAxisName.
-func (x *Graph) CumulativeMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.CumulativeMaximumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the cumulative maximum of the input tensor along the specified axis.
-//
-// CumulativeMaximumWithTensorAxisTensorName calls the underlying CumulativeMaximumWithTensorAxisTensorName.
-func (x *Graph) CumulativeMaximumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CumulativeMaximumWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D-depthwise convolution operation and returns the result tensor.
-//
-// DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName calls the underlying DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName.
-func (x *Graph) DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D-depthwise convolution gradient for data operation and returns the result tensor.
-//
-// DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName.
-func (x *Graph) DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D-depthwise convolution gradient for weights operation and returns the result tensor.
-//
-// DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName.
-func (x *Graph) DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient, source, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D depthwise convolution operation and returns the result tensor.
-//
-// DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName calls the underlying DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName.
-func (x *Graph) DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D depthwise convolution gradient for data operation and returns the result tensor.
-//
-// DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName.
-func (x *Graph) DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 3D depthwise convolution gradient for weights operation and returns the result tensor.
-//
-// DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName.
-func (x *Graph) DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient, source, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a fast Fourier transform operation and returns the result tensor.
-//
-// FastFourierTransformWithTensorAxesDescriptorName calls the underlying FastFourierTransformWithTensorAxesDescriptorName.
-func (x *Graph) FastFourierTransformWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
-	_r := x.inner.FastFourierTransformWithTensorAxesDescriptorName(tensor, axes, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a fast Fourier transform operation and returns the result tensor.
-//
-// FastFourierTransformWithTensorAxesTensorDescriptorName calls the underlying FastFourierTransformWithTensorAxesTensorDescriptorName.
-func (x *Graph) FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
-	_r := x.inner.FastFourierTransformWithTensorAxesTensorDescriptorName(tensor, axesTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
-//
-// RealToHermiteanFFTWithTensorAxesDescriptorName calls the underlying RealToHermiteanFFTWithTensorAxesDescriptorName.
-func (x *Graph) RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
-	_r := x.inner.RealToHermiteanFFTWithTensorAxesDescriptorName(tensor, axes, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
-//
-// RealToHermiteanFFTWithTensorAxesTensorDescriptorName calls the underlying RealToHermiteanFFTWithTensorAxesTensorDescriptorName.
-func (x *Graph) RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
-	_r := x.inner.RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor, axesTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
-//
-// HermiteanToRealFFTWithTensorAxesDescriptorName calls the underlying HermiteanToRealFFTWithTensorAxesDescriptorName.
-func (x *Graph) HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
-	_r := x.inner.HermiteanToRealFFTWithTensorAxesDescriptorName(tensor, axes, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
-//
-// HermiteanToRealFFTWithTensorAxesTensorDescriptorName calls the underlying HermiteanToRealFFTWithTensorAxesTensorDescriptorName.
-func (x *Graph) HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
-	_r := x.inner.HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor, axesTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a GatherND operation and returns the result tensor.
-//
-// GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName calls the underlying GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName.
-func (x *Graph) GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, name string) *GraphTensor {
-	_r := x.inner.GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor, indicesTensor, batchDimensions, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Gather operation and returns the result tensor.
-//
-// GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName calls the underlying GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName.
-func (x *Graph) GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis uint, batchDimensions uint, name string) *GraphTensor {
-	_r := x.inner.GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor, indicesTensor, axis, batchDimensions, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a GatherAlongAxis operation and returns the result tensor.
-//
-// GatherAlongAxisWithUpdatesTensorIndicesTensorName calls the underlying GatherAlongAxisWithUpdatesTensorIndicesTensorName.
-func (x *Graph) GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis, updatesTensor, indicesTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a GatherAlongAxis operation and returns the result tensor.
-//
-// GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName calls the underlying GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName.
-func (x *Graph) GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor, updatesTensor, indicesTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an imToCol operation and returns the result tensor.
-//
-// ImToColWithSourceTensorDescriptorName calls the underlying ImToColWithSourceTensorDescriptorName.
-func (x *Graph) ImToColWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ImToColWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a column to image operation and returns the result tensor.
-//
-// ColToImWithSourceTensorOutputShapeDescriptorName calls the underlying ColToImWithSourceTensorOutputShapeDescriptorName.
-func (x *Graph) ColToImWithSourceTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.ColToImWithSourceTensorOutputShapeDescriptorName(source, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the band part of an input tensor.
-//
-// BandPartWithTensorNumLowerNumUpperName calls the underlying BandPartWithTensorNumLowerNumUpperName.
-func (x *Graph) BandPartWithTensorNumLowerNumUpperName(inputTensor *raw.MPSGraphTensor, numLower int, numUpper int, name string) *GraphTensor {
-	_r := x.inner.BandPartWithTensorNumLowerNumUpperName(inputTensor, numLower, numUpper, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates the band part operation and returns the result.
-//
-// BandPartWithTensorNumLowerTensorNumUpperTensorName calls the underlying BandPartWithTensorNumLowerTensorNumUpperTensorName.
-func (x *Graph) BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *raw.MPSGraphTensor, numLowerTensor *raw.MPSGraphTensor, numUpperTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor, numLowerTensor, numUpperTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a softmax cross-entropy loss operation and returns the result tensor.
-//
-// SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName calls the underlying SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName.
-func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor {
-	_r := x.inner.SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor, labelsTensor, axis, raw.MPSGraphLossReductionType(reductionType), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates the gradient of a softmax cross-entropy loss operation and returns the result tensor.
-//
-// SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName calls the underlying SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName.
-func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor {
-	_r := x.inner.SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor, sourceTensor, labelsTensor, axis, raw.MPSGraphLossReductionType(reductionType), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the inverse of an input tensor.
-//
-// InverseOfTensorName calls the underlying InverseOfTensorName.
-func (x *Graph) InverseOfTensorName(inputTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.InverseOfTensorName(inputTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the matrix multiplication of 2 input tensors with support for broadcasting.
-//
-// MatrixMultiplicationWithPrimaryTensorSecondaryTensorName calls the underlying MatrixMultiplicationWithPrimaryTensorSecondaryTensorName.
-func (x *Graph) MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the hamming distance of two input tensors with support for broadcasting.
-//
-// HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName calls the underlying HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName.
-func (x *Graph) HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, resultDataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName(primaryTensor, secondaryTensor, resultDataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a scaled dot product attention (SDPA) operation and returns the result tensor.
-//
-// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName calls the underlying ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName.
-func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor *raw.MPSGraphTensor, keyTensor *raw.MPSGraphTensor, valueTensor *raw.MPSGraphTensor, maskTensor *raw.MPSGraphTensor, scale float32, name string) *GraphTensor {
-	_r := x.inner.ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor, keyTensor, valueTensor, maskTensor, scale, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor.
-//
-// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName calls the underlying ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName.
-func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *raw.MPSGraphTensor, keyTensor *raw.MPSGraphTensor, valueTensor *raw.MPSGraphTensor, scale float32, name string) *GraphTensor {
-	_r := x.inner.ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor, keyTensor, valueTensor, scale, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a placeholder operation and returns the result tensor.
-//
-// PlaceholderWithShapeDataTypeName calls the underlying PlaceholderWithShapeDataTypeName.
-func (x *Graph) PlaceholderWithShapeDataTypeName(shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.PlaceholderWithShapeDataTypeName(shape, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a placeholder operation and returns the result tensor with the dataType of the placeholder tensor set to 32 bit float.
-//
-// PlaceholderWithShapeName calls the underlying PlaceholderWithShapeName.
-func (x *Graph) PlaceholderWithShapeName(shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.PlaceholderWithShapeName(shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a constant op with a given shape and data, and returns the result tensor.
-//
-// ConstantWithDataShapeDataType calls the underlying ConstantWithDataShapeDataType.
-func (x *Graph) ConstantWithDataShapeDataType(data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor {
-	_r := x.inner.ConstantWithDataShapeDataType(data, shape, dataType)
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a constant operation and returns the result tensor.
-//
-// ConstantWithScalarDataType calls the underlying ConstantWithScalarDataType.
-func (x *Graph) ConstantWithScalarDataType(scalar float64, dataType mpscore.MPSDataType) *GraphTensor {
-	_r := x.inner.ConstantWithScalarDataType(scalar, dataType)
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a constant op with a given shape and returns the result tensor.
-//
-// ConstantWithScalarShapeDataType calls the underlying ConstantWithScalarShapeDataType.
-func (x *Graph) ConstantWithScalarShapeDataType(scalar float64, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor {
-	_r := x.inner.ConstantWithScalarShapeDataType(scalar, shape, dataType)
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a complex constant op with the MPSDataTypeComplexFloat32 data type and returns the result tensor.
-//
-// ConstantWithRealPartImaginaryPart calls the underlying ConstantWithRealPartImaginaryPart.
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderTensors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GradientForPrimaryTensorWithTensorsName calculates a partial derivative of primaryTensor with respect to the tensors.
+func (x *Graph) GradientForPrimaryTensorWithTensorsName(primaryTensor *GraphTensor, tensors []*GraphTensor, name string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientForPrimaryTensor:withTensors:name:"), objref.IDOf(primaryTensor), purego.SliceToNSArray(tensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return obj.Wrap(_r)
+}
+
+// ReLUWithTensorName computes the ReLU (rectified linear activation unit) function with the input tensor.
+func (x *Graph) ReLUWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reLUWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReLUGradientWithIncomingGradientSourceTensorName computes the gradient of the ReLU (rectified linear activation unit) function using the incoming gradient.
+func (x *Graph) ReLUGradientWithIncomingGradientSourceTensorName(gradient *GraphTensor, source *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reLUGradientWithIncomingGradient:sourceTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SigmoidWithTensorName computes the sigmoid operation on an input tensor.
+func (x *Graph) SigmoidWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sigmoidWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SigmoidGradientWithIncomingGradientSourceTensorName computes the gradient of the sigmoid function using the incoming gradient tensor.
+func (x *Graph) SigmoidGradientWithIncomingGradientSourceTensorName(gradient *GraphTensor, source *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sigmoidGradientWithIncomingGradient:sourceTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SoftMaxWithTensorAxisName computes the softmax function on the input tensor along the specified axis.
+func (x *Graph) SoftMaxWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SoftMaxGradientWithIncomingGradientSourceTensorAxisName computes the gradient of the softmax function along the specified axis using the incoming gradient tensor.
+func (x *Graph) SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient *GraphTensor, source *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxGradientWithIncomingGradient:sourceTensor:axis:name:"), objref.IDOf(gradient), objref.IDOf(source), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LeakyReLUWithTensorAlphaName computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
+func (x *Graph) LeakyReLUWithTensorAlphaName(tensor *GraphTensor, alpha float64, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leakyReLUWithTensor:alpha:name:"), objref.IDOf(tensor), alpha, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LeakyReLUWithTensorAlphaTensorName computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
+func (x *Graph) LeakyReLUWithTensorAlphaTensorName(tensor *GraphTensor, alphaTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leakyReLUWithTensor:alphaTensor:name:"), objref.IDOf(tensor), objref.IDOf(alphaTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName computes the gradient of the leaky rectified linear unit (ReLU) activation.
+func (x *Graph) LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient *GraphTensor, source *GraphTensor, alphaTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leakyReLUGradientWithIncomingGradient:sourceTensor:alphaTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(alphaTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// IdentityWithTensorName copies the input tensor values into the output, behaving as an identity operation.
+func (x *Graph) IdentityWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ExponentWithTensorName applies the natural exponent to the input tensor elements.
+func (x *Graph) ExponentWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ExponentBase2WithTensorName applies an exponent with base 2 to the input tensor elements.
+func (x *Graph) ExponentBase2WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentBase2WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ExponentBase10WithTensorName applies an exponent with base 10 to the input tensor elements.
+func (x *Graph) ExponentBase10WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exponentBase10WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogarithmWithTensorName computes the natural logarithm to the input tensor elements.
+func (x *Graph) LogarithmWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logarithmWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogarithmBase2WithTensorName computes the logarithm with base 2 to the input tensor elements.
+func (x *Graph) LogarithmBase2WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logarithmBase2WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogarithmBase10WithTensorName computes the logarithm with base 10 to the input tensor elements.
+func (x *Graph) LogarithmBase10WithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logarithmBase10WithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SquareWithTensorName applies the square operation to the input tensor elements.
+func (x *Graph) SquareWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squareWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SquareRootWithTensorName applies the square root operation to the input tensor elements.
+func (x *Graph) SquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squareRootWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReciprocalSquareRootWithTensorName applies the reciprocal square root operation to the input tensor elements.
+func (x *Graph) ReciprocalSquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalSquareRootWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReverseSquareRootWithTensorName applies the reverse square root operation to the input tensor elements.
+func (x *Graph) ReverseSquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseSquareRootWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReciprocalWithTensorName applies the reciprocal operation to the input tensor elements.
+func (x *Graph) ReciprocalWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AbsoluteWithTensorName returns the absolute values of the input tensor elements.
+func (x *Graph) AbsoluteWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AbsoluteSquareWithTensorName returns the absolute square of the input tensor elements.
+func (x *Graph) AbsoluteSquareWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteSquareWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NegativeWithTensorName applies negative to the input tensor elements.
+func (x *Graph) NegativeWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negativeWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SignWithTensorName returns the sign of the input tensor elements.
+func (x *Graph) SignWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SignbitWithTensorName returns the sign bit of the input tensor elements.
+func (x *Graph) SignbitWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signbitWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CeilWithTensorName applies the ceiling operation to the input tensor elements.
+func (x *Graph) CeilWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ceilWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// FloorWithTensorName applies the floor operation to the input tensor elements.
+func (x *Graph) FloorWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RoundWithTensorName rounds the input tensor elements.
+func (x *Graph) RoundWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roundWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RintWithTensorName rounds the input tensor elements by rounding to nearest even.
+func (x *Graph) RintWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rintWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SinWithTensorName applies the sine operation to the input tensor elements.
+func (x *Graph) SinWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CosWithTensorName applies the cosine operation to the input tensor elements.
+func (x *Graph) CosWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cosWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TanWithTensorName applies the tangent operation to the input tensor elements.
+func (x *Graph) TanWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tanWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SinhWithTensorName applies the hyperbolic sine operation to the input tensor elements.
+func (x *Graph) SinhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CoshWithTensorName applies the hyperbolic cosine operation to the input tensor elements.
+func (x *Graph) CoshWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coshWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TanhWithTensorName applies the hyperbolic tangent operation to the input tensor elements.
+func (x *Graph) TanhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tanhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AsinWithTensorName applies the inverse sine operation to the input tensor elements.
+func (x *Graph) AsinWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asinWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AcosWithTensorName applies the inverse cosine operation to the input tensor elements.
+func (x *Graph) AcosWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acosWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AtanWithTensorName applies the inverse tangent operation to the input tensor elements.
+func (x *Graph) AtanWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atanWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AsinhWithTensorName applies the inverse hyperbolic sine operation to the input tensor elements.
+func (x *Graph) AsinhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asinhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AcoshWithTensorName applies the inverse hyperbolic cosine operation to the input tensor elements.
+func (x *Graph) AcoshWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acoshWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AtanhWithTensorName applies the inverse hyperbolic tangent operation to the input tensor elements.
+func (x *Graph) AtanhWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atanhWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NotWithTensorName applies the logical NOT operation to the input tensor elements.
+func (x *Graph) NotWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// IsInfiniteWithTensorName checks if the input tensor elements are infinite or not.
+func (x *Graph) IsInfiniteWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isInfiniteWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// IsFiniteWithTensorName checks if the input tensor elements are finite or not.
+func (x *Graph) IsFiniteWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFiniteWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// IsNaNWithTensorName checks if the input tensor elements are NaN or not.
+func (x *Graph) IsNaNWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isNaNWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ErfWithTensorName applies the error function to the input tensor elements.
+func (x *Graph) ErfWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erfWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TruncateWithTensorName applies the truncate operation to the input tensor elements.
+func (x *Graph) TruncateWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("truncateWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwiseNOTWithTensorName applies the bitwise NOT operation to the input tensor element.
+func (x *Graph) BitwiseNOTWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseNOTWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwisePopulationCountWithTensorName returns the population count of the input tensor elements.
+func (x *Graph) BitwisePopulationCountWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwisePopulationCountWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConjugateWithTensorName returns the complex conjugate of the input tensor elements.
+func (x *Graph) ConjugateWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conjugateWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AdditionWithPrimaryTensorSecondaryTensorName adds two input tensors.
+func (x *Graph) AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SubtractionWithPrimaryTensorSecondaryTensorName subtracts the second input tensor from the first.
+func (x *Graph) SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtractionWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MultiplicationWithPrimaryTensorSecondaryTensorName multiplies two input tensors.
+func (x *Graph) MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplicationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DivisionWithPrimaryTensorSecondaryTensorName divides the first input tensor by the second.
+func (x *Graph) DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("divisionWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ModuloWithPrimaryTensorSecondaryTensorName returns the remainder obtained by dividing the first input tensor by the second.
+func (x *Graph) ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moduloWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// PowerWithPrimaryTensorSecondaryTensorName returns the elementwise result of raising the first tensor to the power of the second tensor.
+func (x *Graph) PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("powerWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MinimumWithPrimaryTensorSecondaryTensorName returns the elementwise minimum of the input tensors.
+func (x *Graph) MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaximumWithPrimaryTensorSecondaryTensorName returns the elementwise maximum of the input tensors.
+func (x *Graph) MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName returns the elementwise minimum of the input tensors, while propagating NaN values.
+func (x *Graph) MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumWithNaNPropagationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName returns the elementwise maximum of the input tensors, while propagating NaN values.
+func (x *Graph) MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumWithNaNPropagationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// EqualWithPrimaryTensorSecondaryTensorName returns the elementwise equality check of the input tensors.
+func (x *Graph) EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("equalWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NotEqualWithPrimaryTensorSecondaryTensorName returns the elementwise inequality check of the input tensors.
+func (x *Graph) NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notEqualWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LessThanWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is less than the second.
+func (x *Graph) LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lessThanWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LessThanOrEqualToWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is less than or equal to the second.
+func (x *Graph) LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lessThanOrEqualToWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// GreaterThanWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is greater than the second.
+func (x *Graph) GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("greaterThanWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName checks in an elementwise manner if the first input tensor is greater than or equal to the second.
+func (x *Graph) GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("greaterThanOrEqualToWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogicalANDWithPrimaryTensorSecondaryTensorName returns the elementwise logical AND of the input tensors.
+func (x *Graph) LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalANDWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogicalORWithPrimaryTensorSecondaryTensorName returns the elementwise logical OR of the input tensors.
+func (x *Graph) LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogicalNANDWithPrimaryTensorSecondaryTensorName returns the elementwise logical NAND of the input tensors.
+func (x *Graph) LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalNANDWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogicalNORWithPrimaryTensorSecondaryTensorName returns the elementwise logical NOR of the input tensors.
+func (x *Graph) LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalNORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogicalXORWithPrimaryTensorSecondaryTensorName returns the elementwise logical XOR of the input tensors.
+func (x *Graph) LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalXORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// LogicalXNORWithPrimaryTensorSecondaryTensorName returns the elementwise logical XNOR of the input tensors.
+func (x *Graph) LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logicalXNORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Atan2WithPrimaryTensorSecondaryTensorName returns the elementwise two-argument arctangent of the input tensors.
+func (x *Graph) Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atan2WithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwiseANDWithPrimaryTensorSecondaryTensorName returns the elementwise bitwise AND of binary representations of two integer tensors.
+func (x *Graph) BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseANDWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwiseORWithPrimaryTensorSecondaryTensorName returns the elementwise bitwise OR of binary representations of two integer tensors.
+func (x *Graph) BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwiseXORWithPrimaryTensorSecondaryTensorName returns the elementwise bitwise XOR of binary representations of two integer tensors.
+func (x *Graph) BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseXORWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName returns the elementwise left-shifted binary representations of the primary integer by the secondary tensor amount.
+func (x *Graph) BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseLeftShiftWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BitwiseRightShiftWithPrimaryTensorSecondaryTensorName returns the elementwise right-shifted binary representations of the primary integer by the secondary tensor amount.
+func (x *Graph) BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitwiseRightShiftWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName selects values from either the true or false predicate tensor, depending on the values in the first input.
+func (x *Graph) SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor *GraphTensor, truePredicateTensor *GraphTensor, falseSelectTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectWithPredicateTensor:truePredicateTensor:falsePredicateTensor:name:"), objref.IDOf(predicateTensor), objref.IDOf(truePredicateTensor), objref.IDOf(falseSelectTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ClampWithTensorMinValueTensorMaxValueTensorName clamps the values in the first tensor between the corresponding values in the minimum and maximum value tensor.
+func (x *Graph) ClampWithTensorMinValueTensorMaxValueTensorName(tensor *GraphTensor, minValueTensor *GraphTensor, maxValueTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clampWithTensor:minValueTensor:maxValueTensor:name:"), objref.IDOf(tensor), objref.IDOf(minValueTensor), objref.IDOf(maxValueTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DivisionNoNaNWithPrimaryTensorSecondaryTensorName divides the first input tensor by the second, with the result being 0 if the denominator is 0.
+func (x *Graph) DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("divisionNoNaNWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// FloorModuloWithPrimaryTensorSecondaryTensorName returns the remainder of floor divison between the primary and secondary tensor.
+func (x *Graph) FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorModuloWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RealPartOfTensorName returns the real part of a tensor.
+func (x *Graph) RealPartOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realPartOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ImaginaryPartOfTensorName returns the imaginary part of a tensor.
+func (x *Graph) ImaginaryPartOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imaginaryPartOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ComplexTensorWithRealTensorImaginaryTensorName returns a complex tensor from the two input tensors.
+func (x *Graph) ComplexTensorWithRealTensorImaginaryTensorName(realTensor *GraphTensor, imaginaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("complexTensorWithRealTensor:imaginaryTensor:name:"), objref.IDOf(realTensor), objref.IDOf(imaginaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// PlanarTensorWithComplexTensorName returns a real-valued tensor from a complex-valued tensor with real and imaginary planes separated.
+func (x *Graph) PlanarTensorWithComplexTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("planarTensorWithComplexTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CallSymbolNameInputTensorsOutputTypesName creates an operation which invokes another executable.
+func (x *Graph) CallSymbolNameInputTensorsOutputTypesName(symbolName string, inputTensors []*GraphTensor, outputTypes []*GraphType, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callSymbolName:inputTensors:outputTypes:name:"), purego.NSString(symbolName), purego.SliceToNSArray(inputTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(outputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// Convolution2DWithSourceTensorWeightsTensorDescriptorName creates a 2D (forward) convolution operation and returns the result tensor.
+func (x *Graph) Convolution2DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution2DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution.
+func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, weights *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution2DDataGradientWithIncomingGradientTensor:weightsTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(weights), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 2D convolution gradient operation with respect to weights tensor of forward convolution.
+func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, source *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution2DWeightsGradientWithIncomingGradientTensor:sourceTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Convolution3DWithSourceTensorWeightsTensorDescriptorName creates a 3D forward convolution operation and returns the result tensor.
+func (x *Graph) Convolution3DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution3DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution.
+func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, weights *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution3DDataGradientWithIncomingGradientTensor:weightsTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(weights), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution.
+func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, source *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution3DWeightsGradientWithIncomingGradientTensor:sourceTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(outputShapeTensor), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName creates a convolution transpose operation and returns the result tensor.
+func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source *GraphTensor, weights *GraphTensor, outputShape *GraphTensor, descriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose2DWithSourceTensor:weightsTensor:outputShapeTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(outputShape), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor.
+func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient *GraphTensor, weights *GraphTensor, outputShape *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose2DDataGradientWithIncomingGradientTensor:weightsTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(incomingGradient), objref.IDOf(weights), objref.IDOf(outputShape), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor.
+func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor *GraphTensor, source *GraphTensor, outputShape *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose2DWeightsGradientWithIncomingGradientTensor:sourceTensor:outputShapeTensor:forwardConvolutionDescriptor:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(source), objref.IDOf(outputShape), objref.IDOf(forwardConvolutionDescriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeSumWithTensorAxisExclusiveReverseName computes the cumulative sum of the input tensor along the specified axis.
+func (x *Graph) CumulativeSumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeSumWithTensorAxisTensorExclusiveReverseName computes the cumulative sum of the input tensor along the specified axis.
+func (x *Graph) CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeSumWithTensorAxisName computes the cumulative sum of the input tensor along the specified axis.
+func (x *Graph) CumulativeSumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeSumWithTensorAxisTensorName computes the cumulative sum of the input tensor along the specified axis.
+func (x *Graph) CumulativeSumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeSumWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeProductWithTensorAxisExclusiveReverseName computes the cumulative product of the input tensor along the specified axis.
+func (x *Graph) CumulativeProductWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeProductWithTensorAxisTensorExclusiveReverseName computes the cumulative product of the input tensor along the specified axis.
+func (x *Graph) CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeProductWithTensorAxisName computes the cumulative product of the input tensor along the specified axis.
+func (x *Graph) CumulativeProductWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeProductWithTensorAxisTensorName computes the cumulative product of the input tensor along the specified axis.
+func (x *Graph) CumulativeProductWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeProductWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMinimumWithTensorAxisExclusiveReverseName computes the cumulative minimum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMinimumWithTensorAxisTensorExclusiveReverseName computes the cumulative minimum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMinimumWithTensorAxisName computes the cumulative minimum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMinimumWithTensorAxisTensorName computes the cumulative minimum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMinimumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMinimumWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMaximumWithTensorAxisExclusiveReverseName computes the cumulative maximum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axis:exclusive:reverse:name:"), objref.IDOf(tensor), axis, exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMaximumWithTensorAxisTensorExclusiveReverseName computes the cumulative maximum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axisTensor:exclusive:reverse:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), exclusive, reverse, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMaximumWithTensorAxisName computes the cumulative maximum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CumulativeMaximumWithTensorAxisTensorName computes the cumulative maximum of the input tensor along the specified axis.
+func (x *Graph) CumulativeMaximumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeMaximumWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName creates a 2D-depthwise convolution operation and returns the result tensor.
+func (x *Graph) DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthwiseConvolution2DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName creates a 3D depthwise convolution operation and returns the result tensor.
+func (x *Graph) DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthwiseConvolution3DWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// FastFourierTransformWithTensorAxesDescriptorName creates a fast Fourier transform operation and returns the result tensor.
+func (x *Graph) FastFourierTransformWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastFourierTransformWithTensor:axes:descriptor:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// FastFourierTransformWithTensorAxesTensorDescriptorName creates a fast Fourier transform operation and returns the result tensor.
+func (x *Graph) FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastFourierTransformWithTensor:axesTensor:descriptor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RealToHermiteanFFTWithTensorAxesDescriptorName creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
+func (x *Graph) RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realToHermiteanFFTWithTensor:axes:descriptor:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RealToHermiteanFFTWithTensorAxesTensorDescriptorName creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor.
+func (x *Graph) RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realToHermiteanFFTWithTensor:axesTensor:descriptor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// HermiteanToRealFFTWithTensorAxesDescriptorName creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
+func (x *Graph) HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HermiteanToRealFFTWithTensor:axes:descriptor:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// HermiteanToRealFFTWithTensorAxesTensorDescriptorName creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
+func (x *Graph) HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName creates a GatherND operation and returns the result tensor.
+func (x *Graph) GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor *GraphTensor, indicesTensor *GraphTensor, batchDimensions int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherNDWithUpdatesTensor:indicesTensor:batchDimensions:name:"), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), batchDimensions, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName creates a Gather operation and returns the result tensor.
+func (x *Graph) GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor *GraphTensor, indicesTensor *GraphTensor, axis int, batchDimensions int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherWithUpdatesTensor:indicesTensor:axis:batchDimensions:name:"), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), axis, batchDimensions, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// GatherAlongAxisWithUpdatesTensorIndicesTensorName creates a GatherAlongAxis operation and returns the result tensor.
+func (x *Graph) GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis int, updatesTensor *GraphTensor, indicesTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherAlongAxis:withUpdatesTensor:indicesTensor:name:"), axis, objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName creates a GatherAlongAxis operation and returns the result tensor.
+func (x *Graph) GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherAlongAxisTensor:withUpdatesTensor:indicesTensor:name:"), objref.IDOf(axisTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ImToColWithSourceTensorDescriptorName creates an imToCol operation and returns the result tensor.
+func (x *Graph) ImToColWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphImToColOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imToColWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BandPartWithTensorNumLowerNumUpperName computes the band part of an input tensor.
+func (x *Graph) BandPartWithTensorNumLowerNumUpperName(inputTensor *GraphTensor, numLower int, numUpper int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bandPartWithTensor:numLower:numUpper:name:"), objref.IDOf(inputTensor), numLower, numUpper, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BandPartWithTensorNumLowerTensorNumUpperTensorName creates the band part operation and returns the result.
+func (x *Graph) BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *GraphTensor, numLowerTensor *GraphTensor, numUpperTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bandPartWithTensor:numLowerTensor:numUpperTensor:name:"), objref.IDOf(inputTensor), objref.IDOf(numLowerTensor), objref.IDOf(numUpperTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName creates a softmax cross-entropy loss operation and returns the result tensor.
+func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *GraphTensor, labelsTensor *GraphTensor, axis int, reductionType GraphLossReductionType, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxCrossEntropyWithSourceTensor:labelsTensor:axis:reductionType:name:"), objref.IDOf(sourceTensor), objref.IDOf(labelsTensor), axis, reductionType, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName creates the gradient of a softmax cross-entropy loss operation and returns the result tensor.
+func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *GraphTensor, sourceTensor *GraphTensor, labelsTensor *GraphTensor, axis int, reductionType GraphLossReductionType, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softMaxCrossEntropyGradientWithIncomingGradientTensor:sourceTensor:labelsTensor:axis:reductionType:name:"), objref.IDOf(gradientTensor), objref.IDOf(sourceTensor), objref.IDOf(labelsTensor), axis, reductionType, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// InverseOfTensorName computes the inverse of an input tensor.
+func (x *Graph) InverseOfTensorName(inputTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseOfTensor:name:"), objref.IDOf(inputTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MatrixMultiplicationWithPrimaryTensorSecondaryTensorName computes the matrix multiplication of 2 input tensors with support for broadcasting.
+func (x *Graph) MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matrixMultiplicationWithPrimaryTensor:secondaryTensor:name:"), objref.IDOf(primaryTensor), objref.IDOf(secondaryTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName creates a scaled dot product attention (SDPA) operation and returns the result tensor.
+func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, maskTensor *GraphTensor, scale float32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:maskTensor:scale:name:"), objref.IDOf(queryTensor), objref.IDOf(keyTensor), objref.IDOf(valueTensor), objref.IDOf(maskTensor), scale, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor.
+func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, scale float32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaledDotProductAttentionWithQueryTensor:keyTensor:valueTensor:scale:name:"), objref.IDOf(queryTensor), objref.IDOf(keyTensor), objref.IDOf(valueTensor), scale, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConstantWithRealPartImaginaryPart creates a complex constant op with the MPSDataTypeComplexFloat32 data type and returns the result tensor.
 func (x *Graph) ConstantWithRealPartImaginaryPart(realPart float64, imaginaryPart float64) *GraphTensor {
-	_r := x.inner.ConstantWithRealPartImaginaryPart(realPart, imaginaryPart)
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a complex constant operation and returns the result tensor.
-//
-// ConstantWithRealPartImaginaryPartDataType calls the underlying ConstantWithRealPartImaginaryPartDataType.
-func (x *Graph) ConstantWithRealPartImaginaryPartDataType(realPart float64, imaginaryPart float64, dataType mpscore.MPSDataType) *GraphTensor {
-	_r := x.inner.ConstantWithRealPartImaginaryPartDataType(realPart, imaginaryPart, dataType)
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a complex constant op with a given shape and returns the result tensor.
-//
-// ConstantWithRealPartImaginaryPartShapeDataType calls the underlying ConstantWithRealPartImaginaryPartShapeDataType.
-func (x *Graph) ConstantWithRealPartImaginaryPartShapeDataType(realPart float64, imaginaryPart float64, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor {
-	_r := x.inner.ConstantWithRealPartImaginaryPartShapeDataType(realPart, imaginaryPart, shape, dataType)
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a variable operation and returns the result tensor.
-//
-// VariableWithDataShapeDataTypeName calls the underlying VariableWithDataShapeDataTypeName.
-func (x *Graph) VariableWithDataShapeDataTypeName(data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.VariableWithDataShapeDataTypeName(data, shape, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a variable from an input tensor.
-//
-// VariableFromTensorWithTensorName calls the underlying VariableFromTensorWithTensorName.
-func (x *Graph) VariableFromTensorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.VariableFromTensorWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a read op which reads at this point of execution of the graph and returns the result tensor.
-//
-// ReadVariableName calls the underlying ReadVariableName.
-func (x *Graph) ReadVariableName(variable *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReadVariableName(variable, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an assign operation which writes at this point of execution of the graph.
-//
-// AssignVariableWithValueOfTensorName calls the underlying AssignVariableWithValueOfTensorName.
-func (x *Graph) AssignVariableWithValueOfTensorName(variable *raw.MPSGraphTensor, tensor *raw.MPSGraphTensor, name string) *GraphOperation {
-	_r := x.inner.AssignVariableWithValueOfTensorName(variable, tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphOperation{inner: _r}
-}
-
-// Creates a nonMaximumumSuppression operation and returns the result tensor.
-//
-// NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName calls the underlying NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName.
-func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
-	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, iOUThreshold, scoreThreshold, perClassSuppression, raw.MPSGraphNonMaximumSuppressionCoordinateMode(coordinateMode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a nonMaximumumSuppression operation and returns the result tensor.
-//
-// NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName calls the underlying NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName.
-func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
-	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, classIndicesTensor, iOUThreshold, scoreThreshold, perClassSuppression, raw.MPSGraphNonMaximumSuppressionCoordinateMode(coordinateMode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the indices of the non-zero elements of the input tensor.
-//
-// NonZeroIndicesOfTensorName calls the underlying NonZeroIndicesOfTensorName.
-func (x *Graph) NonZeroIndicesOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.NonZeroIndicesOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the mean of the first input along the specified axes.
-//
-// MeanOfTensorAxesName calls the underlying MeanOfTensorAxesName.
-func (x *Graph) MeanOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.MeanOfTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the variance of the first input along the specified axes when the mean has been precomputed.
-//
-// VarianceOfTensorMeanTensorAxesName calls the underlying VarianceOfTensorMeanTensorAxesName.
-func (x *Graph) VarianceOfTensorMeanTensorAxesName(tensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.VarianceOfTensorMeanTensorAxesName(tensor, meanTensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Returns the variance of the first input along the specified axes.
-//
-// VarianceOfTensorAxesName calls the underlying VarianceOfTensorAxesName.
-func (x *Graph) VarianceOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.VarianceOfTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a batch normalization operation and returns the result tensor.
-//
-// NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName calls the underlying NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName.
-func (x *Graph) NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor *raw.MPSGraphTensor, mean *raw.MPSGraphTensor, variance *raw.MPSGraphTensor, gamma *raw.MPSGraphTensor, beta *raw.MPSGraphTensor, epsilon float32, name string) *GraphTensor {
-	_r := x.inner.NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor, mean, variance, gamma, beta, epsilon, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a normalization gamma-gradient operation and returns the result tensor.
-//
-// NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName calls the underlying NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName.
-func (x *Graph) NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, varianceTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], epsilon float32, name string) *GraphTensor {
-	_r := x.inner.NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor, sourceTensor, meanTensor, varianceTensor, axes, epsilon, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a normalization beta-gradient operation and returns the result tensor.
-//
-// NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName calls the underlying NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName.
-func (x *Graph) NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor, sourceTensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a normalization input gradient operation and returns the result tensor.
-//
-// NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName calls the underlying NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName.
-func (x *Graph) NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, varianceTensor *raw.MPSGraphTensor, gamma *raw.MPSGraphTensor, gammaGradient *raw.MPSGraphTensor, betaGradient *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], epsilon float32, name string) *GraphTensor {
-	_r := x.inner.NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor, sourceTensor, meanTensor, varianceTensor, gamma, gammaGradient, betaGradient, axes, epsilon, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a oneHot operation and returns the result tensor.
-//
-// OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName calls the underlying OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName.
-func (x *Graph) OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, dataType mpscore.MPSDataType, onValue float64, offValue float64, name string) *GraphTensor {
-	_r := x.inner.OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName(indicesTensor, depth, axis, dataType, onValue, offValue, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a oneHot operation and returns the result tensor.
-//
-// OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName calls the underlying OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName.
-func (x *Graph) OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName(indicesTensor *raw.MPSGraphTensor, depth uint, dataType mpscore.MPSDataType, onValue float64, offValue float64, name string) *GraphTensor {
-	_r := x.inner.OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName(indicesTensor, depth, dataType, onValue, offValue, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a oneHot operation and returns the result tensor.
-//
-// OneHotWithIndicesTensorDepthAxisDataTypeName calls the underlying OneHotWithIndicesTensorDepthAxisDataTypeName.
-func (x *Graph) OneHotWithIndicesTensorDepthAxisDataTypeName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.OneHotWithIndicesTensorDepthAxisDataTypeName(indicesTensor, depth, axis, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a oneHot operation and returns the result tensor.
-//
-// OneHotWithIndicesTensorDepthAxisName calls the underlying OneHotWithIndicesTensorDepthAxisName.
-func (x *Graph) OneHotWithIndicesTensorDepthAxisName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, name string) *GraphTensor {
-	_r := x.inner.OneHotWithIndicesTensorDepthAxisName(indicesTensor, depth, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a oneHot operation and returns the result tensor.
-//
-// OneHotWithIndicesTensorDepthDataTypeName calls the underlying OneHotWithIndicesTensorDepthDataTypeName.
-func (x *Graph) OneHotWithIndicesTensorDepthDataTypeName(indicesTensor *raw.MPSGraphTensor, depth uint, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.OneHotWithIndicesTensorDepthDataTypeName(indicesTensor, depth, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a oneHot operation and returns the result tensor.
-//
-// OneHotWithIndicesTensorDepthName calls the underlying OneHotWithIndicesTensorDepthName.
-func (x *Graph) OneHotWithIndicesTensorDepthName(indicesTensor *raw.MPSGraphTensor, depth uint, name string) *GraphTensor {
-	_r := x.inner.OneHotWithIndicesTensorDepthName(indicesTensor, depth, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// The Stochastic gradient descent performs a gradient descent.
-//
-// StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName calls the underlying StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName.
-func (x *Graph) StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor, valuesTensor, gradientTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// The Stochastic gradient descent performs a gradient descent variable = variable - (learningRate * g) where, g is gradient of error wrt variable this op directly writes to the variable
-//
-// ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName calls the underlying ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName.
-func (x *Graph) ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor *raw.MPSGraphTensor, variable *raw.MPSGraphVariableOp, gradientTensor *raw.MPSGraphTensor, name string) *GraphOperation {
-	_r := x.inner.ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor, variable, gradientTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphOperation{inner: _r}
-}
-
-// Creates operations to apply Adam optimization.
-//
-// AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName calls the underlying AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName.
-func (x *Graph) AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor *raw.MPSGraphTensor, beta1Tensor *raw.MPSGraphTensor, beta2Tensor *raw.MPSGraphTensor, epsilonTensor *raw.MPSGraphTensor, beta1PowerTensor *raw.MPSGraphTensor, beta2PowerTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, momentumTensor *raw.MPSGraphTensor, velocityTensor *raw.MPSGraphTensor, maximumVelocityTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor, beta1Tensor, beta2Tensor, epsilonTensor, beta1PowerTensor, beta2PowerTensor, valuesTensor, momentumTensor, velocityTensor, maximumVelocityTensor, gradientTensor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates operations to apply Adam optimization.
-//
-// AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName calls the underlying AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName.
-func (x *Graph) AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor *raw.MPSGraphTensor, beta1Tensor *raw.MPSGraphTensor, beta2Tensor *raw.MPSGraphTensor, epsilonTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, momentumTensor *raw.MPSGraphTensor, velocityTensor *raw.MPSGraphTensor, maximumVelocityTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor, beta1Tensor, beta2Tensor, epsilonTensor, valuesTensor, momentumTensor, velocityTensor, maximumVelocityTensor, gradientTensor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a 2D max-pooling operation and returns the result tensor.
-//
-// MaxPooling2DWithSourceTensorDescriptorName calls the underlying MaxPooling2DWithSourceTensorDescriptorName.
-func (x *Graph) MaxPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling2DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D max-pooling operation and returns the result tensor and the corresponding indices tensor.
-//
-// MaxPooling2DReturnIndicesWithSourceTensorDescriptorName calls the underlying MaxPooling2DReturnIndicesWithSourceTensorDescriptorName.
-func (x *Graph) MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a max-pooling gradient operation and returns the result tensor.
-//
-// MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName.
-func (x *Graph) MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a max-pooling gradient operation and returns the result tensor.
-//
-// MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName calls the underlying MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName.
-func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a max-pooling gradient operation and returns the result tensor.
-//
-// MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName calls the underlying MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName.
-func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D average-pooling operation and returns the result tensor.
-//
-// AvgPooling2DWithSourceTensorDescriptorName calls the underlying AvgPooling2DWithSourceTensorDescriptorName.
-func (x *Graph) AvgPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.AvgPooling2DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 2D average pooling gradient operation and returns the result tensor.
-//
-// AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName.
-func (x *Graph) AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 4D max-pooling operation and returns the result tensor.
-//
-// MaxPooling4DWithSourceTensorDescriptorName calls the underlying MaxPooling4DWithSourceTensorDescriptorName.
-func (x *Graph) MaxPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling4DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 4D max-pooling operation and returns the result tensor and the corresponding indices tensor.
-//
-// MaxPooling4DReturnIndicesWithSourceTensorDescriptorName calls the underlying MaxPooling4DReturnIndicesWithSourceTensorDescriptorName.
-func (x *Graph) MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a max-pooling gradient operation and returns the result tensor.
-//
-// MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName.
-func (x *Graph) MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a max-pooling gradient operation and returns the result tensor.
-//
-// MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName calls the underlying MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName.
-func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a max-pooling gradient operation and returns the result tensor.
-//
-// MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName calls the underlying MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName.
-func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 4D average pooling operation and returns the result tensor.
-//
-// AvgPooling4DWithSourceTensorDescriptorName calls the underlying AvgPooling4DWithSourceTensorDescriptorName.
-func (x *Graph) AvgPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.AvgPooling4DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an average pooling gradient operation and returns the result tensor.
-//
-// AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName.
-func (x *Graph) AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a 4D L2-norm pooling operation and returns the result tensor.
-//
-// L2NormPooling4DWithSourceTensorDescriptorName calls the underlying L2NormPooling4DWithSourceTensorDescriptorName.
-func (x *Graph) L2NormPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.L2NormPooling4DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a L2-Norm pooling gradient operation and returns the result tensor.
-//
-// L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName.
-func (x *Graph) L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Quantize operation and returns the result tensor.
-//
-// QuantizeTensorScaleZeroPointDataTypeName calls the underlying QuantizeTensorScaleZeroPointDataTypeName.
-func (x *Graph) QuantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTensor, scale float64, zeroPoint float64, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.QuantizeTensorScaleZeroPointDataTypeName(tensor, scale, zeroPoint, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates Dequantize operation and returns the result tensor.
-//
-// DequantizeTensorScaleZeroPointDataTypeName calls the underlying DequantizeTensorScaleZeroPointDataTypeName.
-func (x *Graph) DequantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTensor, scale float64, zeroPoint float64, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorScaleZeroPointDataTypeName(tensor, scale, zeroPoint, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Quantize operation and returns the result tensor.
-//
-// QuantizeTensorScaleTensorZeroPointDataTypeAxisName calls the underlying QuantizeTensorScaleTensorZeroPointDataTypeAxisName.
-func (x *Graph) QuantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPoint float64, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
-	_r := x.inner.QuantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor, scaleTensor, zeroPoint, dataType, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates Dequantize operation and returns the result tensor.
-//
-// DequantizeTensorScaleTensorZeroPointDataTypeAxisName calls the underlying DequantizeTensorScaleTensorZeroPointDataTypeAxisName.
-func (x *Graph) DequantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPoint float64, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor, scaleTensor, zeroPoint, dataType, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Quantize operation and returns the result tensor.
-//
-// QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName calls the underlying QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName.
-func (x *Graph) QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
-	_r := x.inner.QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor, scaleTensor, zeroPointTensor, dataType, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a dequantize operation and returns the result tensor.
-//
-// DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName calls the underlying DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName.
-func (x *Graph) DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor, scaleTensor, zeroPointTensor, dataType, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a dequantize operation and returns the result tensor.
-//
-// DequantizeTensorScaleTensorZeroPointTensorDataTypeName calls the underlying DequantizeTensorScaleTensorZeroPointTensorDataTypeName.
-func (x *Graph) DequantizeTensorScaleTensorZeroPointTensorDataTypeName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorScaleTensorZeroPointTensorDataTypeName(tensor, scaleTensor, zeroPointTensor, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a dequantize operation and returns the result tensor.
-//
-// DequantizeTensorScaleTensorDataTypeName calls the underlying DequantizeTensorScaleTensorDataTypeName.
-func (x *Graph) DequantizeTensorScaleTensorDataTypeName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorScaleTensorDataTypeName(tensor, scaleTensor, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a lookup-table based quantization operation and returns the result tensor.
-//
-// DequantizeTensorLUTTensorName calls the underlying DequantizeTensorLUTTensorName.
-func (x *Graph) DequantizeTensorLUTTensorName(tensor *raw.MPSGraphTensor, lUTTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorLUTTensorName(tensor, lUTTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a vector lookup-table based quantization operation and returns the result tensor.
-//
-// DequantizeTensorLUTTensorAxisName calls the underlying DequantizeTensorLUTTensorAxisName.
-func (x *Graph) DequantizeTensorLUTTensorAxisName(tensor *raw.MPSGraphTensor, lUTTensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.DequantizeTensorLUTTensorAxisName(tensor, lUTTensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a tensor representing state using the Philox algorithm with given counter and key values.
-//
-// RandomPhiloxStateTensorWithSeedName calls the underlying RandomPhiloxStateTensorWithSeedName.
-func (x *Graph) RandomPhiloxStateTensorWithSeedName(seed uint, name string) *GraphTensor {
-	_r := x.inner.RandomPhiloxStateTensorWithSeedName(seed, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a tensor representing state using the Philox algorithm with given counter and key values.
-//
-// RandomPhiloxStateTensorWithCounterLowCounterHighKeyName calls the underlying RandomPhiloxStateTensorWithCounterLowCounterHighKeyName.
-func (x *Graph) RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow uint, counterHigh uint, key uint, name string) *GraphTensor {
-	_r := x.inner.RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow, counterHigh, key, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Random op of type matching distribution in descriptor and returns random values.
-//
-// RandomTensorWithShapeDescriptorName calls the underlying RandomTensorWithShapeDescriptorName.
-func (x *Graph) RandomTensorWithShapeDescriptorName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.RandomTensorWithShapeDescriptorName(shape, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Random op of type matching distribution in descriptor and returns random values.
-//
-// RandomTensorWithShapeTensorDescriptorName calls the underlying RandomTensorWithShapeTensorDescriptorName.
-func (x *Graph) RandomTensorWithShapeTensorDescriptorName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.RandomTensorWithShapeTensorDescriptorName(shapeTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Random op of type matching distribution in descriptor and returns random values.
-//
-// RandomTensorWithShapeDescriptorSeedName calls the underlying RandomTensorWithShapeDescriptorSeedName.
-func (x *Graph) RandomTensorWithShapeDescriptorSeedName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, seed uint, name string) *GraphTensor {
-	_r := x.inner.RandomTensorWithShapeDescriptorSeedName(shape, descriptor, seed, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Random op of type matching distribution in descriptor and returns random values.
-//
-// RandomTensorWithShapeTensorDescriptorSeedName calls the underlying RandomTensorWithShapeTensorDescriptorSeedName.
-func (x *Graph) RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, seed uint, name string) *GraphTensor {
-	_r := x.inner.RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor, descriptor, seed, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
-//
-// RandomTensorWithShapeDescriptorStateTensorName calls the underlying RandomTensorWithShapeDescriptorStateTensorName.
-func (x *Graph) RandomTensorWithShapeDescriptorStateTensorName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.RandomTensorWithShapeDescriptorStateTensorName(shape, descriptor, state, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
-//
-// RandomTensorWithShapeTensorDescriptorStateTensorName calls the underlying RandomTensorWithShapeTensorDescriptorStateTensorName.
-func (x *Graph) RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor, descriptor, state, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a RandomUniform operation and returns random uniform values
-//
-// RandomUniformTensorWithShapeName calls the underlying RandomUniformTensorWithShapeName.
-func (x *Graph) RandomUniformTensorWithShapeName(shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.RandomUniformTensorWithShapeName(shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a RandomUniform operation and returns random uniform values
-//
-// RandomUniformTensorWithShapeTensorName calls the underlying RandomUniformTensorWithShapeTensorName.
-func (x *Graph) RandomUniformTensorWithShapeTensorName(shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.RandomUniformTensorWithShapeTensorName(shapeTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a RandomUniform operation and returns random uniform values
-//
-// RandomUniformTensorWithShapeSeedName calls the underlying RandomUniformTensorWithShapeSeedName.
-func (x *Graph) RandomUniformTensorWithShapeSeedName(shape unsafe.Pointer, seed uint, name string) *GraphTensor {
-	_r := x.inner.RandomUniformTensorWithShapeSeedName(shape, seed, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a RandomUniform operation and returns random uniform values
-//
-// RandomUniformTensorWithShapeTensorSeedName calls the underlying RandomUniformTensorWithShapeTensorSeedName.
-func (x *Graph) RandomUniformTensorWithShapeTensorSeedName(shapeTensor *raw.MPSGraphTensor, seed uint, name string) *GraphTensor {
-	_r := x.inner.RandomUniformTensorWithShapeTensorSeedName(shapeTensor, seed, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a RandomUniform operation and returns random uniform values and updated state
-//
-// RandomUniformTensorWithShapeStateTensorName calls the underlying RandomUniformTensorWithShapeStateTensorName.
-func (x *Graph) RandomUniformTensorWithShapeStateTensorName(shape unsafe.Pointer, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.RandomUniformTensorWithShapeStateTensorName(shape, state, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a RandomUniform operation and returns random uniform values and updated state
-//
-// RandomUniformTensorWithShapeTensorStateTensorName calls the underlying RandomUniformTensorWithShapeTensorStateTensorName.
-func (x *Graph) RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor *raw.MPSGraphTensor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor, state, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a dropout operation and returns the result
-//
-// DropoutTensorRateName calls the underlying DropoutTensorRateName.
-func (x *Graph) DropoutTensorRateName(tensor *raw.MPSGraphTensor, rate float64, name string) *GraphTensor {
-	_r := x.inner.DropoutTensorRateName(tensor, rate, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a dropout operation and returns the result
-//
-// DropoutTensorRateTensorName calls the underlying DropoutTensorRateTensorName.
-func (x *Graph) DropoutTensorRateTensorName(tensor *raw.MPSGraphTensor, rate *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.DropoutTensorRateTensorName(tensor, rate, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction sum operation and returns the result tensor.
-//
-// ReductionSumWithTensorAxisName calls the underlying ReductionSumWithTensorAxisName.
-func (x *Graph) ReductionSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionSumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction sum operation and returns the result tensor.
-//
-// ReductionSumWithTensorAxesName calls the underlying ReductionSumWithTensorAxesName.
-func (x *Graph) ReductionSumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionSumWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction max operation and returns the result tensor.
-//
-// ReductionMaximumWithTensorAxisName calls the underlying ReductionMaximumWithTensorAxisName.
-func (x *Graph) ReductionMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionMaximumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction max operation and returns the result tensor.
-//
-// ReductionMaximumWithTensorAxesName calls the underlying ReductionMaximumWithTensorAxesName.
-func (x *Graph) ReductionMaximumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionMaximumWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction minimum operation and returns the result tensor.
-//
-// ReductionMinimumWithTensorAxisName calls the underlying ReductionMinimumWithTensorAxisName.
-func (x *Graph) ReductionMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionMinimumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction min operation and returns the result tensor.
-//
-// ReductionMinimumWithTensorAxesName calls the underlying ReductionMinimumWithTensorAxesName.
-func (x *Graph) ReductionMinimumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionMinimumWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction max propagate NaN operation and returns the result tensor.
-//
-// ReductionMaximumPropagateNaNWithTensorAxisName calls the underlying ReductionMaximumPropagateNaNWithTensorAxisName.
-func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionMaximumPropagateNaNWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction max propagate NaN operation and returns the result tensor.
-//
-// ReductionMaximumPropagateNaNWithTensorAxesName calls the underlying ReductionMaximumPropagateNaNWithTensorAxesName.
-func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionMaximumPropagateNaNWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction min propagate NaN operation and returns the result tensor.
-//
-// ReductionMinimumPropagateNaNWithTensorAxisName calls the underlying ReductionMinimumPropagateNaNWithTensorAxisName.
-func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionMinimumPropagateNaNWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction min propagate NaN operation and returns the result tensor.
-//
-// ReductionMinimumPropagateNaNWithTensorAxesName calls the underlying ReductionMinimumPropagateNaNWithTensorAxesName.
-func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionMinimumPropagateNaNWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction product operation and returns the result tensor.
-//
-// ReductionProductWithTensorAxisName calls the underlying ReductionProductWithTensorAxisName.
-func (x *Graph) ReductionProductWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionProductWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction product operation and returns the result tensor.
-//
-// ReductionProductWithTensorAxesName calls the underlying ReductionProductWithTensorAxesName.
-func (x *Graph) ReductionProductWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionProductWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction argMax operation and returns the result tensor.
-//
-// ReductionArgMaximumWithTensorAxisName calls the underlying ReductionArgMaximumWithTensorAxisName.
-func (x *Graph) ReductionArgMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionArgMaximumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction argMin operation and returns the result tensor.
-//
-// ReductionArgMinimumWithTensorAxisName calls the underlying ReductionArgMinimumWithTensorAxisName.
-func (x *Graph) ReductionArgMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionArgMinimumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction and operation and returns the result tensor.
-//
-// ReductionAndWithTensorAxisName calls the underlying ReductionAndWithTensorAxisName.
-func (x *Graph) ReductionAndWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionAndWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction and operation and returns the result tensor.
-//
-// ReductionAndWithTensorAxesName calls the underlying ReductionAndWithTensorAxesName.
-func (x *Graph) ReductionAndWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionAndWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction or operation and returns the result tensor.
-//
-// ReductionOrWithTensorAxisName calls the underlying ReductionOrWithTensorAxisName.
-func (x *Graph) ReductionOrWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ReductionOrWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reduction or operation and returns the result tensor.
-//
-// ReductionOrWithTensorAxesName calls the underlying ReductionOrWithTensorAxesName.
-func (x *Graph) ReductionOrWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReductionOrWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeTensorSizeModeCenterResultAlignCornersLayoutName calls the underlying ResizeTensorSizeModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName calls the underlying ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeTensorSizeTensorModeCenterResultAlignCornersName calls the underlying ResizeTensorSizeTensorModeCenterResultAlignCornersName.
-func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Resamples input images to given size using nearest neighbor sampling.
-//
-// ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName calls the underlying ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName calls the underlying ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor, size, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Resamples input images to given size using bilinear sampling.
-//
-// ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName calls the underlying ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor, size, centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName calls the underlying ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName.
-func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor, size, centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Resamples input images to given size using the provided scale and offset. Destination indices are computed using
-//
-// ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName calls the underlying ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName.
-func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphResizeMode(mode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeTensorSizeTensorScaleTensorOffsetTensorModeName calls the underlying ResizeTensorSizeTensorScaleTensorOffsetTensorModeName.
-func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor, size, scale, offset, raw.MPSGraphResizeMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Resamples input images to given size using the provided scale and offset and nearest neighbor sampling See above discussion for more details.
-//
-// ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName calls the underlying ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName calls the underlying ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor, size, scale, offset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Resamples input images to given size using the provided scale and offset and bilinear sampling See above discussion for more details.
-//
-// ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName calls the underlying ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName.
-func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize operation and returns the result tensor.
-//
-// ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName calls the underlying ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName.
-func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor, size, scale, offset, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName calls the underlying ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient, input, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName calls the underlying ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient, input, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName calls the underlying ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient, input, centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName calls the underlying ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName.
-func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient, input, scaleOffset, raw.MPSGraphResizeMode(mode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName calls the underlying ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName.
-func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor {
-	_r := x.inner.ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient, input, scale, offset, raw.MPSGraphResizeMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName calls the underlying ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName.
-func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient, input, scaleOffset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName calls the underlying ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName.
-func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient, input, scale, offset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName calls the underlying ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName.
-func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient, input, scaleOffset, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Resize gradient operation and returns the result tensor.
-//
-// ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName calls the underlying ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName.
-func (x *Graph) ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient, input, scale, offset, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
-//
-// SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName calls the underlying SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName.
-func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source, recurrentWeight, inputWeight, bias, initState, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
-//
-// SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName calls the underlying SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName.
-func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source, recurrentWeight, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
-//
-// SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName calls the underlying SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName.
-func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source, recurrentWeight, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
-//
-// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName.
-func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source, recurrentWeight, sourceGradient, zState, stateGradient, inputWeight, bias, initState, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
-//
-// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName.
-func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source, recurrentWeight, sourceGradient, zState, inputWeight, bias, initState, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
-//
-// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName.
-func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source, recurrentWeight, sourceGradient, zState, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a single-gate RNN gradient operation and returns the gradient tensor values.
-//
-// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName.
-func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source, recurrentWeight, sourceGradient, zState, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
-//
-// LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName calls the underlying LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName.
-func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, peephole *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source, recurrentWeight, inputWeight, bias, initState, initCell, mask, peephole, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
-//
-// LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName calls the underlying LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName.
-func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source, recurrentWeight, inputWeight, bias, initState, initCell, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
-//
-// LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName calls the underlying LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName.
-func (x *Graph) LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source, recurrentWeight, initState, initCell, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM gradient operation and returns the gradient tensor values.
-//
-// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName.
-func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, cellGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, peephole *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, stateGradient, cellGradient, inputWeight, bias, initState, initCell, mask, peephole, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM gradient operation and returns the gradient tensor values.
-//
-// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName.
-func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, inputWeight, bias, initState, initCell, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM gradient operation and returns the gradient tensor values.
-//
-// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName.
-func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, inputWeight, bias, initState, initCell, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates an LSTM gradient operation and returns the gradient tensor values.
-//
-// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName.
-func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a GRU operation and returns the value and optionally the training state tensor.
-//
-// GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName calls the underlying GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName.
-func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source, recurrentWeight, inputWeight, bias, initState, mask, secondaryBias, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a GRU operation and returns the value and optionally the training state tensor.
-//
-// GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName calls the underlying GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName.
-func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source, recurrentWeight, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a GRU operation and returns the value and optionally the training state tensor.
-//
-// GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName calls the underlying GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName.
-func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source, recurrentWeight, inputWeight, bias, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a GRU gradient operation and returns the gradient tensor values.
-//
-// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName calls the underlying GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName.
-func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source, recurrentWeight, sourceGradient, zState, outputFwd, stateGradient, inputWeight, bias, initState, mask, secondaryBias, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a GRU gradient operation and returns the gradient tensor values.
-//
-// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName calls the underlying GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName.
-func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source, recurrentWeight, sourceGradient, zState, outputFwd, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a GRU gradient operation and returns the gradient tensor values.
-//
-// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName calls the underlying GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName.
-func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source, recurrentWeight, sourceGradient, zState, outputFwd, inputWeight, bias, descriptor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Samples a tensor using the coordinates provided.
-//
-// SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName calls the underlying SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName.
-func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, samplingMode MPSGraphResizeMode, constantValue float64, name string) *GraphTensor {
-	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source, coordinates, raw.MPSGraphTensorNamedDataLayout(layout), normalizeCoordinates, relativeCoordinates, alignCorners, raw.MPSGraphPaddingMode(paddingMode), raw.MPSGraphResizeMode(samplingMode), constantValue, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Samples a tensor using the coordinates provided, using nearest neighbor sampling with specified rounding mode.
-//
-// SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName calls the underlying SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName.
-func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, nearestRoundingMode MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor {
-	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source, coordinates, raw.MPSGraphTensorNamedDataLayout(layout), normalizeCoordinates, relativeCoordinates, alignCorners, raw.MPSGraphPaddingMode(paddingMode), raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), constantValue, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterND operation and returns the result tensor.
-//
-// ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName calls the underlying ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName.
-func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor, indicesTensor, shape, batchDimensions, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterND operation and returns the result tensor.
-//
-// ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName calls the underlying ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName.
-func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, name string) *GraphTensor {
-	_r := x.inner.ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(updatesTensor, indicesTensor, shape, batchDimensions, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterND operation and returns the result tensor.
-//
-// ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName calls the underlying ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName.
-func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor, updatesTensor, indicesTensor, batchDimensions, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Scatter operation and returns the result tensor.
-//
-// ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName calls the underlying ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName.
-func (x *Graph) ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor, indicesTensor, shape, axis, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a Scatter operation and returns the result tensor.
-//
-// ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName calls the underlying ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName.
-func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor, updatesTensor, indicesTensor, axis, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterAlongAxis operation and returns the result tensor.
-//
-// ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName calls the underlying ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName.
-func (x *Graph) ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis, updatesTensor, indicesTensor, shape, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterAlongAxis operation and returns the result tensor.
-//
-// ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName calls the underlying ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName.
-func (x *Graph) ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor, updatesTensor, indicesTensor, shape, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterAlongAxis operation and returns the result tensor.
-//
-// ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName calls the underlying ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName.
-func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis, dataTensor, updatesTensor, indicesTensor, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a ScatterAlongAxis operation and returns the result tensor.
-//
-// ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName calls the underlying ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName.
-func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor, dataTensor, updatesTensor, indicesTensor, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Sorts the elements of the input tensor along the specified axis.
-//
-// SortWithTensorAxisDescendingName calls the underlying SortWithTensorAxisDescendingName.
-func (x *Graph) SortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor {
-	_r := x.inner.SortWithTensorAxisDescendingName(tensor, axis, descending, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Sorts the elements of the input tensor along the specified axis.
-//
-// SortWithTensorAxisTensorDescendingName calls the underlying SortWithTensorAxisTensorDescendingName.
-func (x *Graph) SortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor {
-	_r := x.inner.SortWithTensorAxisTensorDescendingName(tensor, axisTensor, descending, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Sorts the elements of the input tensor along the specified axis.
-//
-// SortWithTensorAxisName calls the underlying SortWithTensorAxisName.
-func (x *Graph) SortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.SortWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Sorts the elements of the input tensor along the specified axis.
-//
-// SortWithTensorAxisTensorName calls the underlying SortWithTensorAxisTensorName.
-func (x *Graph) SortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SortWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the indices that sort the elements of the input tensor along the specified axis.
-//
-// ArgSortWithTensorAxisDescendingName calls the underlying ArgSortWithTensorAxisDescendingName.
-func (x *Graph) ArgSortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor {
-	_r := x.inner.ArgSortWithTensorAxisDescendingName(tensor, axis, descending, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the indices that sort the elements of the input tensor along the specified axis.
-//
-// ArgSortWithTensorAxisTensorDescendingName calls the underlying ArgSortWithTensorAxisTensorDescendingName.
-func (x *Graph) ArgSortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor {
-	_r := x.inner.ArgSortWithTensorAxisTensorDescendingName(tensor, axisTensor, descending, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the indices that sort the elements of the input tensor along the specified axis.
-//
-// ArgSortWithTensorAxisName calls the underlying ArgSortWithTensorAxisName.
-func (x *Graph) ArgSortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ArgSortWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Computes the indices that sort the elements of the input tensor along the specified axis.
-//
-// ArgSortWithTensorAxisTensorName calls the underlying ArgSortWithTensorAxisTensorName.
-func (x *Graph) ArgSortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ArgSortWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a sparse tensor representation.
-//
-// SparseTensorWithTypeTensorsShapeDataTypeName calls the underlying SparseTensorWithTypeTensorsShapeDataTypeName.
-func (x *Graph) SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.SparseTensorWithTypeTensorsShapeDataTypeName(raw.MPSGraphSparseStorageType(sparseStorageType), inputTensorArray, shape, dataType, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a sparse tensor representation.
-//
-// SparseTensorWithDescriptorTensorsShapeName calls the underlying SparseTensorWithDescriptorTensorsShapeName.
-func (x *Graph) SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor *raw.MPSGraphCreateSparseOpDescriptor, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor, inputTensorArray, shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a stencil operation and returns the result tensor.
-//
-// StencilWithSourceTensorWeightsTensorDescriptorName calls the underlying StencilWithSourceTensorWeightsTensorDescriptorName.
-func (x *Graph) StencilWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphStencilOpDescriptor, name string) *GraphTensor {
-	_r := x.inner.StencilWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reshape operation and returns the result tensor.
-//
-// ReshapeTensorWithShapeName calls the underlying ReshapeTensorWithShapeName.
-func (x *Graph) ReshapeTensorWithShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.ReshapeTensorWithShapeName(tensor, shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reshape operation and returns the result tensor.
-//
-// ReshapeTensorWithShapeTensorName calls the underlying ReshapeTensorWithShapeTensorName.
-func (x *Graph) ReshapeTensorWithShapeTensorName(tensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReshapeTensorWithShapeTensorName(tensor, shapeTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a transpose operation and returns the result tensor.
-//
-// TransposeTensorDimensionWithDimensionName calls the underlying TransposeTensorDimensionWithDimensionName.
-func (x *Graph) TransposeTensorDimensionWithDimensionName(tensor *raw.MPSGraphTensor, dimensionIndex uint, dimensionIndex2 uint, name string) *GraphTensor {
-	_r := x.inner.TransposeTensorDimensionWithDimensionName(tensor, dimensionIndex, dimensionIndex2, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a permutation operation and returns the result tensor.
-//
-// TransposeTensorPermutationName calls the underlying TransposeTensorPermutationName.
-func (x *Graph) TransposeTensorPermutationName(tensor *raw.MPSGraphTensor, permutation *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.TransposeTensorPermutationName(tensor, permutation, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a slice operation and returns the result tensor.
-//
-// SliceTensorDimensionStartLengthName calls the underlying SliceTensorDimensionStartLengthName.
-func (x *Graph) SliceTensorDimensionStartLengthName(tensor *raw.MPSGraphTensor, dimensionIndex uint, start int, length int, name string) *GraphTensor {
-	_r := x.inner.SliceTensorDimensionStartLengthName(tensor, dimensionIndex, start, length, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice operation and returns the result tensor.
-//
-// SliceTensorStartsEndsStridesName calls the underlying SliceTensorStartsEndsStridesName.
-func (x *Graph) SliceTensorStartsEndsStridesName(tensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.SliceTensorStartsEndsStridesName(tensor, starts, ends, strides, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice operation and returns the result tensor.
-//
-// SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName calls the underlying SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName.
-func (x *Graph) SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor, starts, ends, strides, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice operation and returns the result tensor.
-//
-// SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName calls the underlying SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName.
-func (x *Graph) SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, endTensor *raw.MPSGraphTensor, strideTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor, startTensor, endTensor, strideTensor, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a slice operation and returns the result tensor.
-//
-// SliceTensorStartTensorSizeTensorSqueezeMaskName calls the underlying SliceTensorStartTensorSizeTensorSqueezeMaskName.
-func (x *Graph) SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, sizeTensor *raw.MPSGraphTensor, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor, startTensor, sizeTensor, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice gradient operation and returns the result tensor.
-//
-// SliceGradientTensorFwdInShapeTensorStartsEndsStridesName calls the underlying SliceGradientTensorFwdInShapeTensorStartsEndsStridesName.
-func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor, fwdInShapeTensor, starts, ends, strides, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice gradient operation and returns the result tensor.
-//
-// SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName calls the underlying SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName.
-func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, endTensor *raw.MPSGraphTensor, strideTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor, fwdInShapeTensor, startTensor, endTensor, strideTensor, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a slice gradient operation and returns the result tensor.
-//
-// SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName calls the underlying SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName.
-func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, sizeTensor *raw.MPSGraphTensor, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor, fwdInShapeTensor, startTensor, sizeTensor, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice gradient operation and returns the result tensor.
-//
-// SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName calls the underlying SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName.
-func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor, fwdInShapeTensor, starts, ends, strides, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice update operation and returns the result tensor.
-//
-// SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName calls the underlying SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName.
-func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, startsTensor *raw.MPSGraphTensor, endsTensor *raw.MPSGraphTensor, stridesTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor, updateTensor, startsTensor, endsTensor, stridesTensor, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice update operation and returns the result tensor.
-//
-// SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName calls the underlying SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName.
-func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
-	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor, updateTensor, starts, ends, strides, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice update operation with zero masks and returns the result tensor.
-//
-// SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName calls the underlying SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName.
-func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, startsTensor *raw.MPSGraphTensor, endsTensor *raw.MPSGraphTensor, stridesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor, updateTensor, startsTensor, endsTensor, stridesTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a strided-slice update operation with zero masks and returns the result tensor.
-//
-// SliceUpdateDataTensorUpdateTensorStartsEndsStridesName calls the underlying SliceUpdateDataTensorUpdateTensorStartsEndsStridesName.
-func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor, updateTensor, starts, ends, strides, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a concatenation operation and returns the result tensor.
-//
-// ConcatTensorWithTensorDimensionName calls the underlying ConcatTensorWithTensorDimensionName.
-func (x *Graph) ConcatTensorWithTensorDimensionName(tensor *raw.MPSGraphTensor, tensor2 *raw.MPSGraphTensor, dimensionIndex int, name string) *GraphTensor {
-	_r := x.inner.ConcatTensorWithTensorDimensionName(tensor, tensor2, dimensionIndex, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a concatenation operation and returns the result tensor.
-//
-// ConcatTensorsDimensionName calls the underlying ConcatTensorsDimensionName.
-func (x *Graph) ConcatTensorsDimensionName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, name string) *GraphTensor {
-	_r := x.inner.ConcatTensorsDimensionName(tensors, dimensionIndex, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a concatenation operation and returns the result tensor.
-//
-// ConcatTensorsDimensionInterleaveName calls the underlying ConcatTensorsDimensionInterleaveName.
-func (x *Graph) ConcatTensorsDimensionInterleaveName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, interleave bool, name string) *GraphTensor {
-	_r := x.inner.ConcatTensorsDimensionInterleaveName(tensors, dimensionIndex, interleave, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a tile operation and returns the result tensor.
-//
-// TileTensorWithMultiplierName calls the underlying TileTensorWithMultiplierName.
-func (x *Graph) TileTensorWithMultiplierName(tensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.TileTensorWithMultiplierName(tensor, multiplier, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a tile gradient operation and returns the result tensor.
-//
-// TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName calls the underlying TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName.
-func (x *Graph) TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName(incomingGradientTensor, sourceTensor, multiplier, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a padding operation and returns the result tensor.
-//
-// PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName calls the underlying PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName.
-func (x *Graph) PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor {
-	_r := x.inner.PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor, raw.MPSGraphPaddingMode(paddingMode), leftPadding, rightPadding, constantValue, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a padding gradient operation and returns the result tensor.
-//
-// PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName calls the underlying PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName.
-func (x *Graph) PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor, sourceTensor, raw.MPSGraphPaddingMode(paddingMode), leftPadding, rightPadding, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a space-to-depth2D operation and returns the result tensor.
-//
-// SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName calls the underlying SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName.
-func (x *Graph) SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor, widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a space-to-depth2D operation and returns the result tensor.
-//
-// SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName calls the underlying SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName.
-func (x *Graph) SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor, widthAxisTensor, heightAxisTensor, depthAxisTensor, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a depth-to-space2D operation and returns the result tensor.
-//
-// DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName calls the underlying DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName.
-func (x *Graph) DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor, widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a depth-to-space2D operation and returns the result tensor.
-//
-// DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName calls the underlying DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName.
-func (x *Graph) DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor, widthAxisTensor, heightAxisTensor, depthAxisTensor, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a space-to-batch operation and returns the result tensor.
-//
-// SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName calls the underlying SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName.
-func (x *Graph) SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxes *foundation.NSArray[*foundation.NSNumber], batchAxis int, blockDimensions *foundation.NSArray[*foundation.NSNumber], usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor, spatialAxes, batchAxis, blockDimensions, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a space-to-batch operation and returns the result tensor.
-//
-// SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName calls the underlying SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName.
-func (x *Graph) SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxesTensor *raw.MPSGraphTensor, batchAxisTensor *raw.MPSGraphTensor, blockDimensionsTensor *raw.MPSGraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor, spatialAxesTensor, batchAxisTensor, blockDimensionsTensor, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a batch-to-space operation and returns the result tensor.
-//
-// BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName calls the underlying BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName.
-func (x *Graph) BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxes *foundation.NSArray[*foundation.NSNumber], batchAxis int, blockDimensions *foundation.NSArray[*foundation.NSNumber], usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor, spatialAxes, batchAxis, blockDimensions, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a batch-to-space operation and returns the result tensor.
-//
-// BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName calls the underlying BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName.
-func (x *Graph) BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxesTensor *raw.MPSGraphTensor, batchAxisTensor *raw.MPSGraphTensor, blockDimensionsTensor *raw.MPSGraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
-	_r := x.inner.BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor, spatialAxesTensor, batchAxisTensor, blockDimensionsTensor, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reverse operation and returns the result tensor.
-//
-// ReverseTensorAxesTensorName calls the underlying ReverseTensorAxesTensorName.
-func (x *Graph) ReverseTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReverseTensorAxesTensorName(tensor, axesTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reverse operation and returns the result tensor.
-//
-// ReverseTensorAxesName calls the underlying ReverseTensorAxesName.
-func (x *Graph) ReverseTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ReverseTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reverse operation and returns the result tensor.
-//
-// ReverseTensorName calls the underlying ReverseTensorName.
-func (x *Graph) ReverseTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ReverseTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a flatten2D operation and returns the result tensor.
-//
-// Flatten2DTensorAxisName calls the underlying Flatten2DTensorAxisName.
-func (x *Graph) Flatten2DTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.Flatten2DTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a flatten2D operation and returns the result tensor.
-//
-// Flatten2DTensorAxisTensorName calls the underlying Flatten2DTensorAxisTensorName.
-func (x *Graph) Flatten2DTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.Flatten2DTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a broadcast operation and returns the result tensor.
-//
-// BroadcastTensorToShapeName calls the underlying BroadcastTensorToShapeName.
-func (x *Graph) BroadcastTensorToShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.BroadcastTensorToShapeName(tensor, shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a broadcast operation and returns the result tensor.
-//
-// BroadcastTensorToShapeTensorName calls the underlying BroadcastTensorToShapeTensorName.
-func (x *Graph) BroadcastTensorToShapeTensorName(tensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BroadcastTensorToShapeTensorName(tensor, shapeTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a shape-of operation and returns the result tensor.
-//
-// ShapeOfTensorName calls the underlying ShapeOfTensorName.
-func (x *Graph) ShapeOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ShapeOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a cast operation and returns the result tensor.
-//
-// CastTensorToTypeName calls the underlying CastTensorToTypeName.
-func (x *Graph) CastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.CastTensorToTypeName(tensor, type_, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a reinterpret cast operation and returns the result tensor.
-//
-// ReinterpretCastTensorToTypeName calls the underlying ReinterpretCastTensorToTypeName.
-func (x *Graph) ReinterpretCastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.ReinterpretCastTensorToTypeName(tensor, type_, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a stack operation and returns the result tensor.
-//
-// StackTensorsAxisName calls the underlying StackTensorsAxisName.
-func (x *Graph) StackTensorsAxisName(inputTensors *foundation.NSArray[*raw.MPSGraphTensor], axis int, name string) *GraphTensor {
-	_r := x.inner.StackTensorsAxisName(inputTensors, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a split operation and returns the result tensor.
-//
-// SplitTensorSplitSizesAxisName calls the underlying SplitTensorSplitSizesAxisName.
-func (x *Graph) SplitTensorSplitSizesAxisName(tensor *raw.MPSGraphTensor, splitSizes *foundation.NSArray[*foundation.NSNumber], axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SplitTensorSplitSizesAxisName(tensor, splitSizes, axis, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a split operation and returns the result tensor.
-//
-// SplitTensorSplitSizesTensorAxisName calls the underlying SplitTensorSplitSizesTensorAxisName.
-func (x *Graph) SplitTensorSplitSizesTensorAxisName(tensor *raw.MPSGraphTensor, splitSizesTensor *raw.MPSGraphTensor, axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SplitTensorSplitSizesTensorAxisName(tensor, splitSizesTensor, axis, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a split operation and returns the result tensor.
-//
-// SplitTensorNumSplitsAxisName calls the underlying SplitTensorNumSplitsAxisName.
-func (x *Graph) SplitTensorNumSplitsAxisName(tensor *raw.MPSGraphTensor, numSplits uint, axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.SplitTensorNumSplitsAxisName(tensor, numSplits, axis, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a squeeze operation and returns the result tensor.
-//
-// SqueezeTensorName calls the underlying SqueezeTensorName.
-func (x *Graph) SqueezeTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SqueezeTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a squeeze operation and returns the result tensor.
-//
-// SqueezeTensorAxisName calls the underlying SqueezeTensorAxisName.
-func (x *Graph) SqueezeTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.SqueezeTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a squeeze operation and returns the result tensor.
-//
-// SqueezeTensorAxesName calls the underlying SqueezeTensorAxesName.
-func (x *Graph) SqueezeTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.SqueezeTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a squeeze operation and returns the result tensor.
-//
-// SqueezeTensorAxesTensorName calls the underlying SqueezeTensorAxesTensorName.
-func (x *Graph) SqueezeTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.SqueezeTensorAxesTensorName(tensor, axesTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an expand-dimensions operation and returns the result tensor.
-//
-// ExpandDimsOfTensorAxisName calls the underlying ExpandDimsOfTensorAxisName.
-func (x *Graph) ExpandDimsOfTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
-	_r := x.inner.ExpandDimsOfTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an expand-dimensions operation and returns the result tensor.
-//
-// ExpandDimsOfTensorAxesName calls the underlying ExpandDimsOfTensorAxesName.
-func (x *Graph) ExpandDimsOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
-	_r := x.inner.ExpandDimsOfTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates an expand-dimensions operation and returns the result tensor.
-//
-// ExpandDimsOfTensorAxesTensorName calls the underlying ExpandDimsOfTensorAxesTensorName.
-func (x *Graph) ExpandDimsOfTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.ExpandDimsOfTensorAxesTensorName(tensor, axesTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a get-coordindate operation and returns the result tensor.
-//
-// CoordinateAlongAxisWithShapeName calls the underlying CoordinateAlongAxisWithShapeName.
-func (x *Graph) CoordinateAlongAxisWithShapeName(axis int, shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.CoordinateAlongAxisWithShapeName(axis, shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a get-coordindate operation and returns the result tensor.
-//
-// CoordinateAlongAxisTensorWithShapeName calls the underlying CoordinateAlongAxisTensorWithShapeName.
-func (x *Graph) CoordinateAlongAxisTensorWithShapeName(axisTensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.CoordinateAlongAxisTensorWithShapeName(axisTensor, shape, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a get-coordindate operation and returns the result tensor.
-//
-// CoordinateAlongAxisWithShapeTensorName calls the underlying CoordinateAlongAxisWithShapeTensorName.
-func (x *Graph) CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CoordinateAlongAxisWithShapeTensorName(axis, shapeTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a get-coordindate operation and returns the result tensor.
-//
-// CoordinateAlongAxisTensorWithShapeTensorName calls the underlying CoordinateAlongAxisTensorWithShapeTensorName.
-func (x *Graph) CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.CoordinateAlongAxisTensorWithShapeTensorName(axisTensor, shapeTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a TopK operation and returns the value and indices tensors
-//
-// TopKWithSourceTensorKName calls the underlying TopKWithSourceTensorKName.
-func (x *Graph) TopKWithSourceTensorKName(source *raw.MPSGraphTensor, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.TopKWithSourceTensorKName(source, k, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a TopK operation and returns the result tensor.
-//
-// TopKWithSourceTensorKTensorName calls the underlying TopKWithSourceTensorKTensorName.
-func (x *Graph) TopKWithSourceTensorKTensorName(source *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.TopKWithSourceTensorKTensorName(source, kTensor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a TopK operation and returns the value and indices tensors.
-//
-// TopKWithSourceTensorAxisKName calls the underlying TopKWithSourceTensorAxisKName.
-func (x *Graph) TopKWithSourceTensorAxisKName(source *raw.MPSGraphTensor, axis int, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.TopKWithSourceTensorAxisKName(source, axis, k, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a BottomK operation and returns the value and indices tensors.
-//
-// BottomKWithSourceTensorAxisKName calls the underlying BottomKWithSourceTensorAxisKName.
-func (x *Graph) BottomKWithSourceTensorAxisKName(source *raw.MPSGraphTensor, axis int, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.BottomKWithSourceTensorAxisKName(source, axis, k, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a TopK operation and returns the result tensor.
-//
-// TopKWithSourceTensorAxisTensorKTensorName calls the underlying TopKWithSourceTensorAxisTensorKTensorName.
-func (x *Graph) TopKWithSourceTensorAxisTensorKTensorName(source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.TopKWithSourceTensorAxisTensorKTensorName(source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a BottomK operation and returns the result tensor.
-//
-// BottomKWithSourceTensorAxisTensorKTensorName calls the underlying BottomKWithSourceTensorAxisTensorKTensorName.
-func (x *Graph) BottomKWithSourceTensorAxisTensorKTensorName(source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
-	return x.inner.BottomKWithSourceTensorAxisTensorKTensorName(source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Creates a TopKGradient operation and returns the result tensor.
-//
-// TopKWithGradientTensorSourceKName calls the underlying TopKWithGradientTensorSourceKName.
-func (x *Graph) TopKWithGradientTensorSourceKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, k uint, name string) *GraphTensor {
-	_r := x.inner.TopKWithGradientTensorSourceKName(gradient, source, k, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a TopKGradient operation and returns the result tensor.
-//
-// TopKWithGradientTensorSourceAxisKName calls the underlying TopKWithGradientTensorSourceAxisKName.
-func (x *Graph) TopKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, k uint, name string) *GraphTensor {
-	_r := x.inner.TopKWithGradientTensorSourceAxisKName(gradient, source, axis, k, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a BottomKGradient operation and returns the result tensor.
-//
-// BottomKWithGradientTensorSourceAxisKName calls the underlying BottomKWithGradientTensorSourceAxisKName.
-func (x *Graph) BottomKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, k uint, name string) *GraphTensor {
-	_r := x.inner.BottomKWithGradientTensorSourceAxisKName(gradient, source, axis, k, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a TopKGradient operation and returns the result tensor.
-//
-// TopKWithGradientTensorSourceKTensorName calls the underlying TopKWithGradientTensorSourceKTensorName.
-func (x *Graph) TopKWithGradientTensorSourceKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.TopKWithGradientTensorSourceKTensorName(gradient, source, kTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a TopKGradient operation and returns the result tensor.
-//
-// TopKWithGradientTensorSourceAxisTensorKTensorName calls the underlying TopKWithGradientTensorSourceAxisTensorKTensorName.
-func (x *Graph) TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.TopKWithGradientTensorSourceAxisTensorKTensorName(gradient, source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-// Creates a BottomKGradient operation and returns the result tensor.
-//
-// BottomKWithGradientTensorSourceAxisTensorKTensorName calls the underlying BottomKWithGradientTensorSourceAxisTensorKTensorName.
-func (x *Graph) BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor {
-	_r := x.inner.BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient, source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &GraphTensor{inner: _r}
-}
-
-func (x *Graph) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantWithRealPart:imaginaryPart:"), realPart, imaginaryPart)
+	return GraphTensorFromID(_r)
+}
+
+// VariableFromTensorWithTensorName creates a variable from an input tensor.
+func (x *Graph) VariableFromTensorWithTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variableFromTensorWithTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReadVariableName creates a read op which reads at this point of execution of the graph and returns the result tensor.
+func (x *Graph) ReadVariableName(variable *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readVariable:name:"), objref.IDOf(variable), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AssignVariableWithValueOfTensorName creates an assign operation which writes at this point of execution of the graph.
+func (x *Graph) AssignVariableWithValueOfTensorName(variable *GraphTensor, tensor *GraphTensor, name string) *GraphOperation {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assignVariable:withValueOfTensor:name:"), objref.IDOf(variable), objref.IDOf(tensor), purego.NSString(name))
+	return GraphOperationFromID(_r)
+}
+
+// NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName creates a nonMaximumumSuppression operation and returns the result tensor.
+func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *GraphTensor, scoresTensor *GraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode GraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonMaximumSuppressionWithBoxesTensor:scoresTensor:IOUThreshold:scoreThreshold:perClassSuppression:coordinateMode:name:"), objref.IDOf(boxesTensor), objref.IDOf(scoresTensor), iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName creates a nonMaximumumSuppression operation and returns the result tensor.
+func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *GraphTensor, scoresTensor *GraphTensor, classIndicesTensor *GraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode GraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonMaximumSuppressionWithBoxesTensor:scoresTensor:classIndicesTensor:IOUThreshold:scoreThreshold:perClassSuppression:coordinateMode:name:"), objref.IDOf(boxesTensor), objref.IDOf(scoresTensor), objref.IDOf(classIndicesTensor), iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NonZeroIndicesOfTensorName computes the indices of the non-zero elements of the input tensor.
+func (x *Graph) NonZeroIndicesOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonZeroIndicesOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MeanOfTensorAxesName returns the mean of the first input along the specified axes.
+func (x *Graph) MeanOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("meanOfTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// VarianceOfTensorMeanTensorAxesName returns the variance of the first input along the specified axes when the mean has been precomputed.
+func (x *Graph) VarianceOfTensorMeanTensorAxesName(tensor *GraphTensor, meanTensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("varianceOfTensor:meanTensor:axes:name:"), objref.IDOf(tensor), objref.IDOf(meanTensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// VarianceOfTensorAxesName returns the variance of the first input along the specified axes.
+func (x *Graph) VarianceOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("varianceOfTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName creates a batch normalization operation and returns the result tensor.
+func (x *Graph) NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor *GraphTensor, mean *GraphTensor, variance *GraphTensor, gamma *GraphTensor, beta *GraphTensor, epsilon float32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationWithTensor:meanTensor:varianceTensor:gammaTensor:betaTensor:epsilon:name:"), objref.IDOf(tensor), objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(gamma), objref.IDOf(beta), epsilon, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName creates a normalization gamma-gradient operation and returns the result tensor.
+func (x *Graph) NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, meanTensor *GraphTensor, varianceTensor *GraphTensor, axes []obj.Object, epsilon float32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationGammaGradientWithIncomingGradientTensor:sourceTensor:meanTensor:varianceTensor:reductionAxes:epsilon:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(sourceTensor), objref.IDOf(meanTensor), objref.IDOf(varianceTensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), epsilon, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName creates a normalization beta-gradient operation and returns the result tensor.
+func (x *Graph) NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationBetaGradientWithIncomingGradientTensor:sourceTensor:reductionAxes:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(sourceTensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName creates a normalization input gradient operation and returns the result tensor.
+func (x *Graph) NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, meanTensor *GraphTensor, varianceTensor *GraphTensor, gamma *GraphTensor, gammaGradient *GraphTensor, betaGradient *GraphTensor, axes []obj.Object, epsilon float32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizationGradientWithIncomingGradientTensor:sourceTensor:meanTensor:varianceTensor:gammaTensor:gammaGradientTensor:betaGradientTensor:reductionAxes:epsilon:name:"), objref.IDOf(incomingGradientTensor), objref.IDOf(sourceTensor), objref.IDOf(meanTensor), objref.IDOf(varianceTensor), objref.IDOf(gamma), objref.IDOf(gammaGradient), objref.IDOf(betaGradient), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), epsilon, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// OneHotWithIndicesTensorDepthAxisName creates a oneHot operation and returns the result tensor.
+func (x *Graph) OneHotWithIndicesTensorDepthAxisName(indicesTensor *GraphTensor, depth int, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oneHotWithIndicesTensor:depth:axis:name:"), objref.IDOf(indicesTensor), depth, axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// OneHotWithIndicesTensorDepthName creates a oneHot operation and returns the result tensor.
+func (x *Graph) OneHotWithIndicesTensorDepthName(indicesTensor *GraphTensor, depth int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oneHotWithIndicesTensor:depth:name:"), objref.IDOf(indicesTensor), depth, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName the Stochastic gradient descent performs a gradient descent.
+func (x *Graph) StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor *GraphTensor, valuesTensor *GraphTensor, gradientTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stochasticGradientDescentWithLearningRateTensor:valuesTensor:gradientTensor:name:"), objref.IDOf(learningRateTensor), objref.IDOf(valuesTensor), objref.IDOf(gradientTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName the Stochastic gradient descent performs a gradient descent variable = variable - (learningRate * g) where, g is gradient of error wrt variable this op directly writes to the variable
+func (x *Graph) ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor *GraphTensor, variable *GraphVariableOp, gradientTensor *GraphTensor, name string) *GraphOperation {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyStochasticGradientDescentWithLearningRateTensor:variable:gradientTensor:name:"), objref.IDOf(learningRateTensor), objref.IDOf(variable), objref.IDOf(gradientTensor), purego.NSString(name))
+	return GraphOperationFromID(_r)
+}
+
+// AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName creates operations to apply Adam optimization.
+func (x *Graph) AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor *GraphTensor, beta1Tensor *GraphTensor, beta2Tensor *GraphTensor, epsilonTensor *GraphTensor, beta1PowerTensor *GraphTensor, beta2PowerTensor *GraphTensor, valuesTensor *GraphTensor, momentumTensor *GraphTensor, velocityTensor *GraphTensor, maximumVelocityTensor *GraphTensor, gradientTensor *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adamWithLearningRateTensor:beta1Tensor:beta2Tensor:epsilonTensor:beta1PowerTensor:beta2PowerTensor:valuesTensor:momentumTensor:velocityTensor:maximumVelocityTensor:gradientTensor:name:"), objref.IDOf(learningRateTensor), objref.IDOf(beta1Tensor), objref.IDOf(beta2Tensor), objref.IDOf(epsilonTensor), objref.IDOf(beta1PowerTensor), objref.IDOf(beta2PowerTensor), objref.IDOf(valuesTensor), objref.IDOf(momentumTensor), objref.IDOf(velocityTensor), objref.IDOf(maximumVelocityTensor), objref.IDOf(gradientTensor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName creates operations to apply Adam optimization.
+func (x *Graph) AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor *GraphTensor, beta1Tensor *GraphTensor, beta2Tensor *GraphTensor, epsilonTensor *GraphTensor, valuesTensor *GraphTensor, momentumTensor *GraphTensor, velocityTensor *GraphTensor, maximumVelocityTensor *GraphTensor, gradientTensor *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adamWithCurrentLearningRateTensor:beta1Tensor:beta2Tensor:epsilonTensor:valuesTensor:momentumTensor:velocityTensor:maximumVelocityTensor:gradientTensor:name:"), objref.IDOf(currentLearningRateTensor), objref.IDOf(beta1Tensor), objref.IDOf(beta2Tensor), objref.IDOf(epsilonTensor), objref.IDOf(valuesTensor), objref.IDOf(momentumTensor), objref.IDOf(velocityTensor), objref.IDOf(maximumVelocityTensor), objref.IDOf(gradientTensor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// MaxPooling2DWithSourceTensorDescriptorName creates a 2D max-pooling operation and returns the result tensor.
+func (x *Graph) MaxPooling2DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaxPooling2DReturnIndicesWithSourceTensorDescriptorName creates a 2D max-pooling operation and returns the result tensor and the corresponding indices tensor.
+func (x *Graph) MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
+func (x *Graph) MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
+func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *GraphTensor, indices *GraphTensor, outputShape *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling2DGradientWithGradientTensor:indicesTensor:outputShapeTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(indices), objref.IDOf(outputShape), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AvgPooling2DWithSourceTensorDescriptorName creates a 2D average-pooling operation and returns the result tensor.
+func (x *Graph) AvgPooling2DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling2DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName creates a 2D average pooling gradient operation and returns the result tensor.
+func (x *Graph) AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling2DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaxPooling4DWithSourceTensorDescriptorName creates a 4D max-pooling operation and returns the result tensor.
+func (x *Graph) MaxPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaxPooling4DReturnIndicesWithSourceTensorDescriptorName creates a 4D max-pooling operation and returns the result tensor and the corresponding indices tensor.
+func (x *Graph) MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
+func (x *Graph) MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName creates a max-pooling gradient operation and returns the result tensor.
+func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *GraphTensor, indices *GraphTensor, outputShape *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPooling4DGradientWithGradientTensor:indicesTensor:outputShapeTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(indices), objref.IDOf(outputShape), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AvgPooling4DWithSourceTensorDescriptorName creates a 4D average pooling operation and returns the result tensor.
+func (x *Graph) AvgPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling4DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName creates an average pooling gradient operation and returns the result tensor.
+func (x *Graph) AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avgPooling4DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// L2NormPooling4DWithSourceTensorDescriptorName creates a 4D L2-norm pooling operation and returns the result tensor.
+func (x *Graph) L2NormPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("L2NormPooling4DWithSourceTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName creates a L2-Norm pooling gradient operation and returns the result tensor.
+func (x *Graph) L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("L2NormPooling4DGradientWithGradientTensor:sourceTensor:descriptor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DequantizeTensorLUTTensorName creates a lookup-table based quantization operation and returns the result tensor.
+func (x *Graph) DequantizeTensorLUTTensorName(tensor *GraphTensor, lUTTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequantizeTensor:LUTTensor:name:"), objref.IDOf(tensor), objref.IDOf(lUTTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DequantizeTensorLUTTensorAxisName creates a vector lookup-table based quantization operation and returns the result tensor.
+func (x *Graph) DequantizeTensorLUTTensorAxisName(tensor *GraphTensor, lUTTensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequantizeTensor:LUTTensor:axis:name:"), objref.IDOf(tensor), objref.IDOf(lUTTensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomPhiloxStateTensorWithSeedName creates a tensor representing state using the Philox algorithm with given counter and key values.
+func (x *Graph) RandomPhiloxStateTensorWithSeedName(seed int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomPhiloxStateTensorWithSeed:name:"), seed, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomPhiloxStateTensorWithCounterLowCounterHighKeyName creates a tensor representing state using the Philox algorithm with given counter and key values.
+func (x *Graph) RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow int, counterHigh int, key int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomPhiloxStateTensorWithCounterLow:counterHigh:key:name:"), counterLow, counterHigh, key, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomTensorWithShapeTensorDescriptorName creates a Random op of type matching distribution in descriptor and returns random values.
+func (x *Graph) RandomTensorWithShapeTensorDescriptorName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomTensorWithShapeTensor:descriptor:name:"), objref.IDOf(shapeTensor), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomTensorWithShapeTensorDescriptorSeedName creates a Random op of type matching distribution in descriptor and returns random values.
+func (x *Graph) RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, seed int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomTensorWithShapeTensor:descriptor:seed:name:"), objref.IDOf(shapeTensor), objref.IDOf(descriptor), seed, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomTensorWithShapeTensorDescriptorStateTensorName creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
+func (x *Graph) RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, state *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomTensorWithShapeTensor:descriptor:stateTensor:name:"), objref.IDOf(shapeTensor), objref.IDOf(descriptor), objref.IDOf(state), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// RandomUniformTensorWithShapeTensorName creates a RandomUniform operation and returns random uniform values
+func (x *Graph) RandomUniformTensorWithShapeTensorName(shapeTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomUniformTensorWithShapeTensor:name:"), objref.IDOf(shapeTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomUniformTensorWithShapeTensorSeedName creates a RandomUniform operation and returns random uniform values
+func (x *Graph) RandomUniformTensorWithShapeTensorSeedName(shapeTensor *GraphTensor, seed int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomUniformTensorWithShapeTensor:seed:name:"), objref.IDOf(shapeTensor), seed, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// RandomUniformTensorWithShapeTensorStateTensorName creates a RandomUniform operation and returns random uniform values and updated state
+func (x *Graph) RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor *GraphTensor, state *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomUniformTensorWithShapeTensor:stateTensor:name:"), objref.IDOf(shapeTensor), objref.IDOf(state), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// DropoutTensorRateName creates a dropout operation and returns the result
+func (x *Graph) DropoutTensorRateName(tensor *GraphTensor, rate float64, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropoutTensor:rate:name:"), objref.IDOf(tensor), rate, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DropoutTensorRateTensorName creates a dropout operation and returns the result
+func (x *Graph) DropoutTensorRateTensorName(tensor *GraphTensor, rate *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropoutTensor:rateTensor:name:"), objref.IDOf(tensor), objref.IDOf(rate), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionSumWithTensorAxisName creates a reduction sum operation and returns the result tensor.
+func (x *Graph) ReductionSumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionSumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionSumWithTensorAxesName creates a reduction sum operation and returns the result tensor.
+func (x *Graph) ReductionSumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionSumWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMaximumWithTensorAxisName creates a reduction max operation and returns the result tensor.
+func (x *Graph) ReductionMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMaximumWithTensorAxesName creates a reduction max operation and returns the result tensor.
+func (x *Graph) ReductionMaximumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMinimumWithTensorAxisName creates a reduction minimum operation and returns the result tensor.
+func (x *Graph) ReductionMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMinimumWithTensorAxesName creates a reduction min operation and returns the result tensor.
+func (x *Graph) ReductionMinimumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMaximumPropagateNaNWithTensorAxisName creates a reduction max propagate NaN operation and returns the result tensor.
+func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumPropagateNaNWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMaximumPropagateNaNWithTensorAxesName creates a reduction max propagate NaN operation and returns the result tensor.
+func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMaximumPropagateNaNWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMinimumPropagateNaNWithTensorAxisName creates a reduction min propagate NaN operation and returns the result tensor.
+func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumPropagateNaNWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionMinimumPropagateNaNWithTensorAxesName creates a reduction min propagate NaN operation and returns the result tensor.
+func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionMinimumPropagateNaNWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionProductWithTensorAxisName creates a reduction product operation and returns the result tensor.
+func (x *Graph) ReductionProductWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionProductWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionProductWithTensorAxesName creates a reduction product operation and returns the result tensor.
+func (x *Graph) ReductionProductWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionProductWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionArgMaximumWithTensorAxisName creates a reduction argMax operation and returns the result tensor.
+func (x *Graph) ReductionArgMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionArgMaximumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionArgMinimumWithTensorAxisName creates a reduction argMin operation and returns the result tensor.
+func (x *Graph) ReductionArgMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionArgMinimumWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionAndWithTensorAxisName creates a reduction and operation and returns the result tensor.
+func (x *Graph) ReductionAndWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionAndWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionAndWithTensorAxesName creates a reduction and operation and returns the result tensor.
+func (x *Graph) ReductionAndWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionAndWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionOrWithTensorAxisName creates a reduction or operation and returns the result tensor.
+func (x *Graph) ReductionOrWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionOrWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReductionOrWithTensorAxesName creates a reduction or operation and returns the result tensor.
+func (x *Graph) ReductionOrWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reductionOrWithTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:mode:centerResult:alignCorners:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), mode, centerResult, alignCorners, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeTensorSizeTensorModeCenterResultAlignCornersName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:mode:centerResult:alignCorners:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), mode, centerResult, alignCorners, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName resamples input images to given size using nearest neighbor sampling.
+func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:nearestRoundingMode:centerResult:alignCorners:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), nearestRoundingMode, centerResult, alignCorners, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:nearestRoundingMode:centerResult:alignCorners:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), nearestRoundingMode, centerResult, alignCorners, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName resamples input images to given size using bilinear sampling.
+func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:centerResult:alignCorners:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), centerResult, alignCorners, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:centerResult:alignCorners:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), centerResult, alignCorners, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName resamples input images to given size using the provided scale and offset. Destination indices are computed using
+func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, mode GraphResizeMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:scaleOffsetTensor:mode:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scaleOffset), mode, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeTensorSizeTensorScaleTensorOffsetTensorModeName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, mode GraphResizeMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeTensor:sizeTensor:scaleTensor:offsetTensor:mode:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scale), objref.IDOf(offset), mode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName resamples input images to given size using the provided scale and offset and nearest neighbor sampling See above discussion for more details.
+func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:scaleOffsetTensor:nearestRoundingMode:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scaleOffset), nearestRoundingMode, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithTensor:sizeTensor:scaleTensor:offsetTensor:nearestRoundingMode:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scale), objref.IDOf(offset), nearestRoundingMode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName resamples input images to given size using the provided scale and offset and bilinear sampling See above discussion for more details.
+func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:scaleOffsetTensor:layout:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scaleOffset), layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName creates a Resize operation and returns the result tensor.
+func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithTensor:sizeTensor:scaleTensor:offsetTensor:name:"), objref.IDOf(imagesTensor), objref.IDOf(size), objref.IDOf(scale), objref.IDOf(offset), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithGradientTensor:input:mode:centerResult:alignCorners:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), mode, centerResult, alignCorners, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithGradientTensor:input:nearestRoundingMode:centerResult:alignCorners:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), nearestRoundingMode, centerResult, alignCorners, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithGradientTensor:input:centerResult:alignCorners:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), centerResult, alignCorners, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, mode GraphResizeMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithGradientTensor:input:scaleOffsetTensor:mode:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scaleOffset), mode, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, mode GraphResizeMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithGradientTensor:input:scaleTensor:offsetTensor:mode:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scale), objref.IDOf(offset), mode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithGradientTensor:input:scaleOffsetTensor:nearestRoundingMode:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scaleOffset), nearestRoundingMode, layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeNearestWithGradientTensor:input:scaleTensor:offsetTensor:nearestRoundingMode:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scale), objref.IDOf(offset), nearestRoundingMode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, layout GraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithGradientTensor:input:scaleOffsetTensor:layout:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scaleOffset), layout, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName creates a Resize gradient operation and returns the result tensor.
+func (x *Graph) ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeBilinearWithGradientTensor:input:scaleTensor:offsetTensor:name:"), objref.IDOf(gradient), objref.IDOf(input), objref.IDOf(scale), objref.IDOf(offset), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName creates a single-gate RNN operation and returns the value and optionally the training state tensor.
+func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName creates a single-gate RNN operation and returns the value and optionally the training state tensor.
+func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName creates a single-gate RNN operation and returns the value and optionally the training state tensor.
+func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNWithSourceTensor:recurrentWeight:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
+func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, stateGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:stateGradient:inputWeight:bias:initState:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(stateGradient), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
+func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
+func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName creates a single-gate RNN gradient operation and returns the gradient tensor values.
+func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
+func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, peephole *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(mask), objref.IDOf(peephole), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
+func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName creates an LSTM operation and returns the value tensor and optionally the cell state tensor and the training state tensor.
+func (x *Graph) LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMWithSourceTensor:recurrentWeight:initState:initCell:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
+func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, stateGradient *GraphTensor, cellGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, peephole *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:stateGradient:cellGradient:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(stateGradient), objref.IDOf(cellGradient), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(mask), objref.IDOf(peephole), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
+func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:mask:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(mask), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
+func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(initCell), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName creates an LSTM gradient operation and returns the gradient tensor values.
+func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(cellOutputFwd), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName creates a GRU operation and returns the value and optionally the training state tensor.
+func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, secondaryBias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(secondaryBias), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName creates a GRU operation and returns the value and optionally the training state tensor.
+func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName creates a GRU operation and returns the value and optionally the training state tensor.
+func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUWithSourceTensor:recurrentWeight:inputWeight:bias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName creates a GRU gradient operation and returns the gradient tensor values.
+func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, stateGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, secondaryBias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:stateGradient:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(outputFwd), objref.IDOf(stateGradient), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(mask), objref.IDOf(secondaryBias), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName creates a GRU gradient operation and returns the gradient tensor values.
+func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:initState:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(outputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(initState), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName creates a GRU gradient operation and returns the gradient tensor values.
+func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:descriptor:name:"), objref.IDOf(source), objref.IDOf(recurrentWeight), objref.IDOf(sourceGradient), objref.IDOf(zState), objref.IDOf(outputFwd), objref.IDOf(inputWeight), objref.IDOf(bias), objref.IDOf(descriptor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName samples a tensor using the coordinates provided.
+func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *GraphTensor, coordinates *GraphTensor, layout GraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode GraphPaddingMode, samplingMode GraphResizeMode, constantValue float64, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleGridWithSourceTensor:coordinateTensor:layout:normalizeCoordinates:relativeCoordinates:alignCorners:paddingMode:samplingMode:constantValue:name:"), objref.IDOf(source), objref.IDOf(coordinates), layout, normalizeCoordinates, relativeCoordinates, alignCorners, paddingMode, samplingMode, constantValue, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName samples a tensor using the coordinates provided, using nearest neighbor sampling with specified rounding mode.
+func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *GraphTensor, coordinates *GraphTensor, layout GraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode GraphPaddingMode, nearestRoundingMode GraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleGridWithSourceTensor:coordinateTensor:layout:normalizeCoordinates:relativeCoordinates:alignCorners:paddingMode:nearestRoundingMode:constantValue:name:"), objref.IDOf(source), objref.IDOf(coordinates), layout, normalizeCoordinates, relativeCoordinates, alignCorners, paddingMode, nearestRoundingMode, constantValue, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName creates a ScatterND operation and returns the result tensor.
+func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, batchDimensions int, mode GraphScatterMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterNDWithDataTensor:updatesTensor:indicesTensor:batchDimensions:mode:name:"), objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), batchDimensions, mode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName creates a Scatter operation and returns the result tensor.
+func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, axis int, mode GraphScatterMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterWithDataTensor:updatesTensor:indicesTensor:axis:mode:name:"), objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), axis, mode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName creates a ScatterAlongAxis operation and returns the result tensor.
+func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, mode GraphScatterMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterAlongAxis:withDataTensor:updatesTensor:indicesTensor:mode:name:"), axis, objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), mode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName creates a ScatterAlongAxis operation and returns the result tensor.
+func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *GraphTensor, dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, mode GraphScatterMode, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterAlongAxisTensor:withDataTensor:updatesTensor:indicesTensor:mode:name:"), objref.IDOf(axisTensor), objref.IDOf(dataTensor), objref.IDOf(updatesTensor), objref.IDOf(indicesTensor), mode, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SortWithTensorAxisDescendingName sorts the elements of the input tensor along the specified axis.
+func (x *Graph) SortWithTensorAxisDescendingName(tensor *GraphTensor, axis int, descending bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axis:descending:name:"), objref.IDOf(tensor), axis, descending, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SortWithTensorAxisTensorDescendingName sorts the elements of the input tensor along the specified axis.
+func (x *Graph) SortWithTensorAxisTensorDescendingName(tensor *GraphTensor, axisTensor *GraphTensor, descending bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axisTensor:descending:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), descending, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SortWithTensorAxisName sorts the elements of the input tensor along the specified axis.
+func (x *Graph) SortWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SortWithTensorAxisTensorName sorts the elements of the input tensor along the specified axis.
+func (x *Graph) SortWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ArgSortWithTensorAxisDescendingName computes the indices that sort the elements of the input tensor along the specified axis.
+func (x *Graph) ArgSortWithTensorAxisDescendingName(tensor *GraphTensor, axis int, descending bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axis:descending:name:"), objref.IDOf(tensor), axis, descending, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ArgSortWithTensorAxisTensorDescendingName computes the indices that sort the elements of the input tensor along the specified axis.
+func (x *Graph) ArgSortWithTensorAxisTensorDescendingName(tensor *GraphTensor, axisTensor *GraphTensor, descending bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axisTensor:descending:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), descending, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ArgSortWithTensorAxisName computes the indices that sort the elements of the input tensor along the specified axis.
+func (x *Graph) ArgSortWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ArgSortWithTensorAxisTensorName computes the indices that sort the elements of the input tensor along the specified axis.
+func (x *Graph) ArgSortWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argSortWithTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// StencilWithSourceTensorWeightsTensorDescriptorName creates a stencil operation and returns the result tensor.
+func (x *Graph) StencilWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphStencilOpDescriptor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stencilWithSourceTensor:weightsTensor:descriptor:name:"), objref.IDOf(source), objref.IDOf(weights), objref.IDOf(descriptor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReshapeTensorWithShapeTensorName creates a reshape operation and returns the result tensor.
+func (x *Graph) ReshapeTensorWithShapeTensorName(tensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshapeTensor:withShapeTensor:name:"), objref.IDOf(tensor), objref.IDOf(shapeTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TransposeTensorDimensionWithDimensionName creates a transpose operation and returns the result tensor.
+func (x *Graph) TransposeTensorDimensionWithDimensionName(tensor *GraphTensor, dimensionIndex int, dimensionIndex2 int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeTensor:dimension:withDimension:name:"), objref.IDOf(tensor), dimensionIndex, dimensionIndex2, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TransposeTensorPermutationName creates a permutation operation and returns the result tensor.
+func (x *Graph) TransposeTensorPermutationName(tensor *GraphTensor, permutation []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeTensor:permutation:name:"), objref.IDOf(tensor), purego.SliceToNSArray(permutation, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceTensorDimensionStartLengthName creates a slice operation and returns the result tensor.
+func (x *Graph) SliceTensorDimensionStartLengthName(tensor *GraphTensor, dimensionIndex int, start int, length int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:dimension:start:length:name:"), objref.IDOf(tensor), dimensionIndex, start, length, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceTensorStartsEndsStridesName creates a strided-slice operation and returns the result tensor.
+func (x *Graph) SliceTensorStartsEndsStridesName(tensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:starts:ends:strides:name:"), objref.IDOf(tensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName creates a strided-slice operation and returns the result tensor.
+func (x *Graph) SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:starts:ends:strides:startMask:endMask:squeezeMask:name:"), objref.IDOf(tensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), startMask, endMask, squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName creates a strided-slice operation and returns the result tensor.
+func (x *Graph) SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor *GraphTensor, startTensor *GraphTensor, endTensor *GraphTensor, strideTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:startTensor:endTensor:strideTensor:startMask:endMask:squeezeMask:name:"), objref.IDOf(tensor), objref.IDOf(startTensor), objref.IDOf(endTensor), objref.IDOf(strideTensor), startMask, endMask, squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceTensorStartTensorSizeTensorSqueezeMaskName creates a slice operation and returns the result tensor.
+func (x *Graph) SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *GraphTensor, startTensor *GraphTensor, sizeTensor *GraphTensor, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceTensor:startTensor:sizeTensor:squeezeMask:name:"), objref.IDOf(tensor), objref.IDOf(startTensor), objref.IDOf(sizeTensor), squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceGradientTensorFwdInShapeTensorStartsEndsStridesName creates a strided-slice gradient operation and returns the result tensor.
+func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:starts:ends:strides:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName creates a strided-slice gradient operation and returns the result tensor.
+func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, startTensor *GraphTensor, endTensor *GraphTensor, strideTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:startTensor:endTensor:strideTensor:startMask:endMask:squeezeMask:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), objref.IDOf(startTensor), objref.IDOf(endTensor), objref.IDOf(strideTensor), startMask, endMask, squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName creates a slice gradient operation and returns the result tensor.
+func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, startTensor *GraphTensor, sizeTensor *GraphTensor, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:startTensor:sizeTensor:squeezeMask:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), objref.IDOf(startTensor), objref.IDOf(sizeTensor), squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName creates a strided-slice gradient operation and returns the result tensor.
+func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceGradientTensor:fwdInShapeTensor:starts:ends:strides:startMask:endMask:squeezeMask:name:"), objref.IDOf(inputGradientTensor), objref.IDOf(fwdInShapeTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), startMask, endMask, squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName creates a strided-slice update operation and returns the result tensor.
+func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor *GraphTensor, updateTensor *GraphTensor, startsTensor *GraphTensor, endsTensor *GraphTensor, stridesTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:startsTensor:endsTensor:stridesTensor:startMask:endMask:squeezeMask:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), objref.IDOf(startsTensor), objref.IDOf(endsTensor), objref.IDOf(stridesTensor), startMask, endMask, squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName creates a strided-slice update operation and returns the result tensor.
+func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor *GraphTensor, updateTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:starts:ends:strides:startMask:endMask:squeezeMask:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), startMask, endMask, squeezeMask, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName creates a strided-slice update operation with zero masks and returns the result tensor.
+func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor *GraphTensor, updateTensor *GraphTensor, startsTensor *GraphTensor, endsTensor *GraphTensor, stridesTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:startsTensor:endsTensor:stridesTensor:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), objref.IDOf(startsTensor), objref.IDOf(endsTensor), objref.IDOf(stridesTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SliceUpdateDataTensorUpdateTensorStartsEndsStridesName creates a strided-slice update operation with zero masks and returns the result tensor.
+func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor *GraphTensor, updateTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sliceUpdateDataTensor:updateTensor:starts:ends:strides:name:"), objref.IDOf(dataTensor), objref.IDOf(updateTensor), purego.SliceToNSArray(starts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(ends, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConcatTensorWithTensorDimensionName creates a concatenation operation and returns the result tensor.
+func (x *Graph) ConcatTensorWithTensorDimensionName(tensor *GraphTensor, tensor2 *GraphTensor, dimensionIndex int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatTensor:withTensor:dimension:name:"), objref.IDOf(tensor), objref.IDOf(tensor2), dimensionIndex, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConcatTensorsDimensionName creates a concatenation operation and returns the result tensor.
+func (x *Graph) ConcatTensorsDimensionName(tensors []*GraphTensor, dimensionIndex int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatTensors:dimension:name:"), purego.SliceToNSArray(tensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), dimensionIndex, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ConcatTensorsDimensionInterleaveName creates a concatenation operation and returns the result tensor.
+func (x *Graph) ConcatTensorsDimensionInterleaveName(tensors []*GraphTensor, dimensionIndex int, interleave bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatTensors:dimension:interleave:name:"), purego.SliceToNSArray(tensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), dimensionIndex, interleave, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName creates a space-to-depth2D operation and returns the result tensor.
+func (x *Graph) SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxis int, heightAxis int, depthAxis int, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToDepth2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName creates a space-to-depth2D operation and returns the result tensor.
+func (x *Graph) SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxisTensor *GraphTensor, heightAxisTensor *GraphTensor, depthAxisTensor *GraphTensor, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToDepth2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(widthAxisTensor), objref.IDOf(heightAxisTensor), objref.IDOf(depthAxisTensor), blockSize, usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName creates a depth-to-space2D operation and returns the result tensor.
+func (x *Graph) DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxis int, heightAxis int, depthAxis int, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthToSpace2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName creates a depth-to-space2D operation and returns the result tensor.
+func (x *Graph) DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxisTensor *GraphTensor, heightAxisTensor *GraphTensor, depthAxisTensor *GraphTensor, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthToSpace2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(widthAxisTensor), objref.IDOf(heightAxisTensor), objref.IDOf(depthAxisTensor), blockSize, usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName creates a space-to-batch operation and returns the result tensor.
+func (x *Graph) SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxes []obj.Object, batchAxis int, blockDimensions []obj.Object, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToBatchTensor:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:"), objref.IDOf(tensor), purego.SliceToNSArray(spatialAxes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), batchAxis, purego.SliceToNSArray(blockDimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName creates a space-to-batch operation and returns the result tensor.
+func (x *Graph) SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxesTensor *GraphTensor, batchAxisTensor *GraphTensor, blockDimensionsTensor *GraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spaceToBatchTensor:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(spatialAxesTensor), objref.IDOf(batchAxisTensor), objref.IDOf(blockDimensionsTensor), usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName creates a batch-to-space operation and returns the result tensor.
+func (x *Graph) BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxes []obj.Object, batchAxis int, blockDimensions []obj.Object, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchToSpaceTensor:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:"), objref.IDOf(tensor), purego.SliceToNSArray(spatialAxes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), batchAxis, purego.SliceToNSArray(blockDimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName creates a batch-to-space operation and returns the result tensor.
+func (x *Graph) BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxesTensor *GraphTensor, batchAxisTensor *GraphTensor, blockDimensionsTensor *GraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchToSpaceTensor:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:"), objref.IDOf(tensor), objref.IDOf(spatialAxesTensor), objref.IDOf(batchAxisTensor), objref.IDOf(blockDimensionsTensor), usePixelShuffleOrder, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReverseTensorAxesTensorName creates a reverse operation and returns the result tensor.
+func (x *Graph) ReverseTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTensor:axesTensor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReverseTensorAxesName creates a reverse operation and returns the result tensor.
+func (x *Graph) ReverseTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ReverseTensorName creates a reverse operation and returns the result tensor.
+func (x *Graph) ReverseTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Flatten2DTensorAxisName creates a flatten2D operation and returns the result tensor.
+func (x *Graph) Flatten2DTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flatten2DTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// Flatten2DTensorAxisTensorName creates a flatten2D operation and returns the result tensor.
+func (x *Graph) Flatten2DTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flatten2DTensor:axisTensor:name:"), objref.IDOf(tensor), objref.IDOf(axisTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BroadcastTensorToShapeTensorName creates a broadcast operation and returns the result tensor.
+func (x *Graph) BroadcastTensorToShapeTensorName(tensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastTensor:toShapeTensor:name:"), objref.IDOf(tensor), objref.IDOf(shapeTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ShapeOfTensorName creates a shape-of operation and returns the result tensor.
+func (x *Graph) ShapeOfTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapeOfTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// StackTensorsAxisName creates a stack operation and returns the result tensor.
+func (x *Graph) StackTensorsAxisName(inputTensors []*GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stackTensors:axis:name:"), purego.SliceToNSArray(inputTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SplitTensorSplitSizesAxisName creates a split operation and returns the result tensor.
+func (x *Graph) SplitTensorSplitSizesAxisName(tensor *GraphTensor, splitSizes []obj.Object, axis int, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitTensor:splitSizes:axis:name:"), objref.IDOf(tensor), purego.SliceToNSArray(splitSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), axis, purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SplitTensorSplitSizesTensorAxisName creates a split operation and returns the result tensor.
+func (x *Graph) SplitTensorSplitSizesTensorAxisName(tensor *GraphTensor, splitSizesTensor *GraphTensor, axis int, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitTensor:splitSizesTensor:axis:name:"), objref.IDOf(tensor), objref.IDOf(splitSizesTensor), axis, purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SplitTensorNumSplitsAxisName creates a split operation and returns the result tensor.
+func (x *Graph) SplitTensorNumSplitsAxisName(tensor *GraphTensor, numSplits int, axis int, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitTensor:numSplits:axis:name:"), objref.IDOf(tensor), numSplits, axis, purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// SqueezeTensorName creates a squeeze operation and returns the result tensor.
+func (x *Graph) SqueezeTensorName(tensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:name:"), objref.IDOf(tensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SqueezeTensorAxisName creates a squeeze operation and returns the result tensor.
+func (x *Graph) SqueezeTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SqueezeTensorAxesName creates a squeeze operation and returns the result tensor.
+func (x *Graph) SqueezeTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// SqueezeTensorAxesTensorName creates a squeeze operation and returns the result tensor.
+func (x *Graph) SqueezeTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("squeezeTensor:axesTensor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ExpandDimsOfTensorAxisName creates an expand-dimensions operation and returns the result tensor.
+func (x *Graph) ExpandDimsOfTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandDimsOfTensor:axis:name:"), objref.IDOf(tensor), axis, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ExpandDimsOfTensorAxesName creates an expand-dimensions operation and returns the result tensor.
+func (x *Graph) ExpandDimsOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandDimsOfTensor:axes:name:"), objref.IDOf(tensor), purego.SliceToNSArray(axes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// ExpandDimsOfTensorAxesTensorName creates an expand-dimensions operation and returns the result tensor.
+func (x *Graph) ExpandDimsOfTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandDimsOfTensor:axesTensor:name:"), objref.IDOf(tensor), objref.IDOf(axesTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CoordinateAlongAxisWithShapeTensorName creates a get-coordindate operation and returns the result tensor.
+func (x *Graph) CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateAlongAxis:withShapeTensor:name:"), axis, objref.IDOf(shapeTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// CoordinateAlongAxisTensorWithShapeTensorName creates a get-coordindate operation and returns the result tensor.
+func (x *Graph) CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateAlongAxisTensor:withShapeTensor:name:"), objref.IDOf(axisTensor), objref.IDOf(shapeTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TopKWithSourceTensorKName creates a TopK operation and returns the value and indices tensors
+func (x *Graph) TopKWithSourceTensorKName(source *GraphTensor, k int, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:k:name:"), objref.IDOf(source), k, purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// TopKWithSourceTensorKTensorName creates a TopK operation and returns the result tensor.
+func (x *Graph) TopKWithSourceTensorKTensorName(source *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:kTensor:name:"), objref.IDOf(source), objref.IDOf(kTensor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// TopKWithSourceTensorAxisKName creates a TopK operation and returns the value and indices tensors.
+func (x *Graph) TopKWithSourceTensorAxisKName(source *GraphTensor, axis int, k int, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:axis:k:name:"), objref.IDOf(source), axis, k, purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// BottomKWithSourceTensorAxisKName creates a BottomK operation and returns the value and indices tensors.
+func (x *Graph) BottomKWithSourceTensorAxisKName(source *GraphTensor, axis int, k int, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithSourceTensor:axis:k:name:"), objref.IDOf(source), axis, k, purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// TopKWithSourceTensorAxisTensorKTensorName creates a TopK operation and returns the result tensor.
+func (x *Graph) TopKWithSourceTensorAxisTensorKTensorName(source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithSourceTensor:axisTensor:kTensor:name:"), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// BottomKWithSourceTensorAxisTensorKTensorName creates a BottomK operation and returns the result tensor.
+func (x *Graph) BottomKWithSourceTensorAxisTensorKTensorName(source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithSourceTensor:axisTensor:kTensor:name:"), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
+}
+
+// TopKWithGradientTensorSourceKName creates a TopKGradient operation and returns the result tensor.
+func (x *Graph) TopKWithGradientTensorSourceKName(gradient *GraphTensor, source *GraphTensor, k int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:k:name:"), objref.IDOf(gradient), objref.IDOf(source), k, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TopKWithGradientTensorSourceAxisKName creates a TopKGradient operation and returns the result tensor.
+func (x *Graph) TopKWithGradientTensorSourceAxisKName(gradient *GraphTensor, source *GraphTensor, axis int, k int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:axis:k:name:"), objref.IDOf(gradient), objref.IDOf(source), axis, k, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BottomKWithGradientTensorSourceAxisKName creates a BottomKGradient operation and returns the result tensor.
+func (x *Graph) BottomKWithGradientTensorSourceAxisKName(gradient *GraphTensor, source *GraphTensor, axis int, k int, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithGradientTensor:source:axis:k:name:"), objref.IDOf(gradient), objref.IDOf(source), axis, k, purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TopKWithGradientTensorSourceKTensorName creates a TopKGradient operation and returns the result tensor.
+func (x *Graph) TopKWithGradientTensorSourceKTensorName(gradient *GraphTensor, source *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:kTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(kTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// TopKWithGradientTensorSourceAxisTensorKTensorName creates a TopKGradient operation and returns the result tensor.
+func (x *Graph) TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *GraphTensor, source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topKWithGradientTensor:source:axisTensor:kTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
+
+// BottomKWithGradientTensorSourceAxisTensorKTensorName creates a BottomKGradient operation and returns the result tensor.
+func (x *Graph) BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient *GraphTensor, source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomKWithGradientTensor:source:axisTensor:kTensor:name:"), objref.IDOf(gradient), objref.IDOf(source), objref.IDOf(axisTensor), objref.IDOf(kTensor), purego.NSString(name))
+	return GraphTensorFromID(_r)
+}
 
 // Graphable is the interface implemented by [Graph], for mocking and DI.
 type Graphable interface {
-	Unwrap() *raw.MPSGraph
-	WithOptions(options MPSGraphOptions) *Graph
-	CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device *raw.MPSGraphDevice, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutable
-	RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer
-	RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer
-	RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer)
-	RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer
-	RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer
-	RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor)
-	EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer
-	EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor)
-	Options() MPSGraphOptions
-	SetOptions(options MPSGraphOptions)
+	obj.Object
+	WithOptions(options GraphOptions) *Graph
+	Options() GraphOptions
+	SetOptions(options GraphOptions)
 	PlaceholderTensors() []*GraphTensor
-	GradientForPrimaryTensorWithTensorsName(primaryTensor *raw.MPSGraphTensor, tensors *foundation.NSArray[*raw.MPSGraphTensor], name string) *foundation.NSDictionary[*raw.MPSGraphTensor, *raw.MPSGraphTensor]
-	ReLUWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ReLUGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor
-	SigmoidWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SigmoidGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor
-	SoftMaxWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	LeakyReLUWithTensorAlphaName(tensor *raw.MPSGraphTensor, alpha float64, name string) *GraphTensor
-	LeakyReLUWithTensorAlphaTensorName(tensor *raw.MPSGraphTensor, alphaTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, alphaTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	IdentityWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ExponentWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ExponentBase2WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ExponentBase10WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogarithmWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogarithmBase2WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogarithmBase10WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ReciprocalSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ReverseSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ReciprocalWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AbsoluteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AbsoluteSquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	NegativeWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SignWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SignbitWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CeilWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	FloorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	RoundWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	RintWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SinWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CosWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	TanWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	TanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AsinWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AcosWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AtanWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AsinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AcoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AtanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	NotWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	IsInfiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	IsFiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	IsNaNWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ErfWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	TruncateWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwiseNOTWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwisePopulationCountWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ConjugateWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor *raw.MPSGraphTensor, truePredicateTensor *raw.MPSGraphTensor, falseSelectTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ClampWithTensorMinValueTensorMaxValueTensorName(tensor *raw.MPSGraphTensor, minValueTensor *raw.MPSGraphTensor, maxValueTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	RealPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ImaginaryPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ComplexTensorWithRealTensorImaginaryTensorName(realTensor *raw.MPSGraphTensor, imaginaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	PlanarTensorWithComplexTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CallSymbolNameInputTensorsOutputTypesName(symbolName string, inputTensors *foundation.NSArray[*raw.MPSGraphTensor], outputTypes *foundation.NSArray[*raw.MPSGraphType], name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	Convolution2DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	Convolution3DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor
-	Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor
-	Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor
-	Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor
-	Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor
-	ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradientTensor *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor
-	ControlDependencyWithOperationsDependentBlockName(operations *foundation.NSArray[*raw.MPSGraphOperation], dependentBlock objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	IfWithPredicateTensorThenBlockElseBlockName(predicateTensor *raw.MPSGraphTensor, thenBlock objc.Block, elseBlock objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	WhileWithInitialInputsBeforeAfterName(initialInputs *foundation.NSArray[*raw.MPSGraphTensor], before objc.Block, after objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName(lowerBound *raw.MPSGraphTensor, upperBound *raw.MPSGraphTensor, step *raw.MPSGraphTensor, initialBodyArguments *foundation.NSArray[*raw.MPSGraphTensor], body objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName(numberOfIterations *raw.MPSGraphTensor, initialBodyArguments *foundation.NSArray[*raw.MPSGraphTensor], body objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	CumulativeSumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	CumulativeSumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CumulativeProductWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeProductWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	CumulativeProductWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	CumulativeMinimumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
-	CumulativeMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	CumulativeMaximumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor
-	DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor
-	DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor
-	DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor
-	DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor
-	DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor
-	FastFourierTransformWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor
-	FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor
-	RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor
-	RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor
-	HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor
-	HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor
-	GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, name string) *GraphTensor
-	GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis uint, batchDimensions uint, name string) *GraphTensor
-	GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ImToColWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor
-	ColToImWithSourceTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor
-	BandPartWithTensorNumLowerNumUpperName(inputTensor *raw.MPSGraphTensor, numLower int, numUpper int, name string) *GraphTensor
-	BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *raw.MPSGraphTensor, numLowerTensor *raw.MPSGraphTensor, numUpperTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor
-	SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor
-	InverseOfTensorName(inputTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, resultDataType mpscore.MPSDataType, name string) *GraphTensor
-	ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor *raw.MPSGraphTensor, keyTensor *raw.MPSGraphTensor, valueTensor *raw.MPSGraphTensor, maskTensor *raw.MPSGraphTensor, scale float32, name string) *GraphTensor
-	ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *raw.MPSGraphTensor, keyTensor *raw.MPSGraphTensor, valueTensor *raw.MPSGraphTensor, scale float32, name string) *GraphTensor
-	PlaceholderWithShapeDataTypeName(shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor
-	PlaceholderWithShapeName(shape unsafe.Pointer, name string) *GraphTensor
-	ConstantWithDataShapeDataType(data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor
-	ConstantWithScalarDataType(scalar float64, dataType mpscore.MPSDataType) *GraphTensor
-	ConstantWithScalarShapeDataType(scalar float64, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor
+	GradientForPrimaryTensorWithTensorsName(primaryTensor *GraphTensor, tensors []*GraphTensor, name string) obj.Object
+	ReLUWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ReLUGradientWithIncomingGradientSourceTensorName(gradient *GraphTensor, source *GraphTensor, name string) *GraphTensor
+	SigmoidWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SigmoidGradientWithIncomingGradientSourceTensorName(gradient *GraphTensor, source *GraphTensor, name string) *GraphTensor
+	SoftMaxWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient *GraphTensor, source *GraphTensor, axis int, name string) *GraphTensor
+	LeakyReLUWithTensorAlphaName(tensor *GraphTensor, alpha float64, name string) *GraphTensor
+	LeakyReLUWithTensorAlphaTensorName(tensor *GraphTensor, alphaTensor *GraphTensor, name string) *GraphTensor
+	LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient *GraphTensor, source *GraphTensor, alphaTensor *GraphTensor, name string) *GraphTensor
+	IdentityWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ExponentWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ExponentBase2WithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ExponentBase10WithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	LogarithmWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	LogarithmBase2WithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	LogarithmBase10WithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SquareWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ReciprocalSquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ReverseSquareRootWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ReciprocalWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AbsoluteWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AbsoluteSquareWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	NegativeWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SignWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SignbitWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	CeilWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	FloorWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	RoundWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	RintWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SinWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	CosWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	TanWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SinhWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	CoshWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	TanhWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AsinWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AcosWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AtanWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AsinhWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AcoshWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AtanhWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	NotWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	IsInfiniteWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	IsFiniteWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	IsNaNWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ErfWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	TruncateWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	BitwiseNOTWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	BitwisePopulationCountWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ConjugateWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor *GraphTensor, truePredicateTensor *GraphTensor, falseSelectTensor *GraphTensor, name string) *GraphTensor
+	ClampWithTensorMinValueTensorMaxValueTensorName(tensor *GraphTensor, minValueTensor *GraphTensor, maxValueTensor *GraphTensor, name string) *GraphTensor
+	DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	RealPartOfTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ImaginaryPartOfTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ComplexTensorWithRealTensorImaginaryTensorName(realTensor *GraphTensor, imaginaryTensor *GraphTensor, name string) *GraphTensor
+	PlanarTensorWithComplexTensorName(tensor *GraphTensor, name string) *GraphTensor
+	CallSymbolNameInputTensorsOutputTypesName(symbolName string, inputTensors []*GraphTensor, outputTypes []*GraphType, name string) []*GraphTensor
+	Convolution2DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor
+	Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, weights *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor
+	Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, source *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor
+	Convolution3DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor
+	Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, weights *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor
+	Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *GraphTensor, source *GraphTensor, outputShapeTensor *GraphTensor, forwardConvolutionDescriptor *GraphConvolution3DOpDescriptor, name string) *GraphTensor
+	ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source *GraphTensor, weights *GraphTensor, outputShape *GraphTensor, descriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor
+	ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient *GraphTensor, weights *GraphTensor, outputShape *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor
+	ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor *GraphTensor, source *GraphTensor, outputShape *GraphTensor, forwardConvolutionDescriptor *GraphConvolution2DOpDescriptor, name string) *GraphTensor
+	CumulativeSumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeSumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	CumulativeSumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	CumulativeProductWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeProductWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	CumulativeProductWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	CumulativeMinimumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *GraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor *GraphTensor, axisTensor *GraphTensor, exclusive bool, reverse bool, name string) *GraphTensor
+	CumulativeMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	CumulativeMaximumWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor
+	DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor
+	FastFourierTransformWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor
+	FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor
+	RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor
+	RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor
+	HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *GraphTensor, axes []obj.Object, descriptor *GraphFFTDescriptor, name string) *GraphTensor
+	HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *GraphTensor, axesTensor *GraphTensor, descriptor *GraphFFTDescriptor, name string) *GraphTensor
+	GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor *GraphTensor, indicesTensor *GraphTensor, batchDimensions int, name string) *GraphTensor
+	GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor *GraphTensor, indicesTensor *GraphTensor, axis int, batchDimensions int, name string) *GraphTensor
+	GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis int, updatesTensor *GraphTensor, indicesTensor *GraphTensor, name string) *GraphTensor
+	GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, name string) *GraphTensor
+	ImToColWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphImToColOpDescriptor, name string) *GraphTensor
+	BandPartWithTensorNumLowerNumUpperName(inputTensor *GraphTensor, numLower int, numUpper int, name string) *GraphTensor
+	BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *GraphTensor, numLowerTensor *GraphTensor, numUpperTensor *GraphTensor, name string) *GraphTensor
+	SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *GraphTensor, labelsTensor *GraphTensor, axis int, reductionType GraphLossReductionType, name string) *GraphTensor
+	SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *GraphTensor, sourceTensor *GraphTensor, labelsTensor *GraphTensor, axis int, reductionType GraphLossReductionType, name string) *GraphTensor
+	InverseOfTensorName(inputTensor *GraphTensor, name string) *GraphTensor
+	MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *GraphTensor, secondaryTensor *GraphTensor, name string) *GraphTensor
+	ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, maskTensor *GraphTensor, scale float32, name string) *GraphTensor
+	ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *GraphTensor, keyTensor *GraphTensor, valueTensor *GraphTensor, scale float32, name string) *GraphTensor
 	ConstantWithRealPartImaginaryPart(realPart float64, imaginaryPart float64) *GraphTensor
-	ConstantWithRealPartImaginaryPartDataType(realPart float64, imaginaryPart float64, dataType mpscore.MPSDataType) *GraphTensor
-	ConstantWithRealPartImaginaryPartShapeDataType(realPart float64, imaginaryPart float64, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor
-	VariableWithDataShapeDataTypeName(data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor
-	VariableFromTensorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ReadVariableName(variable *raw.MPSGraphTensor, name string) *GraphTensor
-	AssignVariableWithValueOfTensorName(variable *raw.MPSGraphTensor, tensor *raw.MPSGraphTensor, name string) *GraphOperation
-	NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
-	NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
-	NonZeroIndicesOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	MeanOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	VarianceOfTensorMeanTensorAxesName(tensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	VarianceOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor *raw.MPSGraphTensor, mean *raw.MPSGraphTensor, variance *raw.MPSGraphTensor, gamma *raw.MPSGraphTensor, beta *raw.MPSGraphTensor, epsilon float32, name string) *GraphTensor
-	NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, varianceTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], epsilon float32, name string) *GraphTensor
-	NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, varianceTensor *raw.MPSGraphTensor, gamma *raw.MPSGraphTensor, gammaGradient *raw.MPSGraphTensor, betaGradient *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], epsilon float32, name string) *GraphTensor
-	OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, dataType mpscore.MPSDataType, onValue float64, offValue float64, name string) *GraphTensor
-	OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName(indicesTensor *raw.MPSGraphTensor, depth uint, dataType mpscore.MPSDataType, onValue float64, offValue float64, name string) *GraphTensor
-	OneHotWithIndicesTensorDepthAxisDataTypeName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, dataType mpscore.MPSDataType, name string) *GraphTensor
-	OneHotWithIndicesTensorDepthAxisName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, name string) *GraphTensor
-	OneHotWithIndicesTensorDepthDataTypeName(indicesTensor *raw.MPSGraphTensor, depth uint, dataType mpscore.MPSDataType, name string) *GraphTensor
-	OneHotWithIndicesTensorDepthName(indicesTensor *raw.MPSGraphTensor, depth uint, name string) *GraphTensor
-	StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor *raw.MPSGraphTensor, variable *raw.MPSGraphVariableOp, gradientTensor *raw.MPSGraphTensor, name string) *GraphOperation
-	AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor *raw.MPSGraphTensor, beta1Tensor *raw.MPSGraphTensor, beta2Tensor *raw.MPSGraphTensor, epsilonTensor *raw.MPSGraphTensor, beta1PowerTensor *raw.MPSGraphTensor, beta2PowerTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, momentumTensor *raw.MPSGraphTensor, velocityTensor *raw.MPSGraphTensor, maximumVelocityTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor *raw.MPSGraphTensor, beta1Tensor *raw.MPSGraphTensor, beta2Tensor *raw.MPSGraphTensor, epsilonTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, momentumTensor *raw.MPSGraphTensor, velocityTensor *raw.MPSGraphTensor, maximumVelocityTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	MaxPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor
-	MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor
-	MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor
-	MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor
-	AvgPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor
-	AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor
-	MaxPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	AvgPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	L2NormPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor
-	QuantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTensor, scale float64, zeroPoint float64, dataType mpscore.MPSDataType, name string) *GraphTensor
-	DequantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTensor, scale float64, zeroPoint float64, dataType mpscore.MPSDataType, name string) *GraphTensor
-	QuantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPoint float64, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor
-	DequantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPoint float64, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor
-	QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor
-	DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor
-	DequantizeTensorScaleTensorZeroPointTensorDataTypeName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, name string) *GraphTensor
-	DequantizeTensorScaleTensorDataTypeName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, name string) *GraphTensor
-	DequantizeTensorLUTTensorName(tensor *raw.MPSGraphTensor, lUTTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	DequantizeTensorLUTTensorAxisName(tensor *raw.MPSGraphTensor, lUTTensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	RandomPhiloxStateTensorWithSeedName(seed uint, name string) *GraphTensor
-	RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow uint, counterHigh uint, key uint, name string) *GraphTensor
-	RandomTensorWithShapeDescriptorName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, name string) *GraphTensor
-	RandomTensorWithShapeTensorDescriptorName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, name string) *GraphTensor
-	RandomTensorWithShapeDescriptorSeedName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, seed uint, name string) *GraphTensor
-	RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, seed uint, name string) *GraphTensor
-	RandomTensorWithShapeDescriptorStateTensorName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	RandomUniformTensorWithShapeName(shape unsafe.Pointer, name string) *GraphTensor
-	RandomUniformTensorWithShapeTensorName(shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	RandomUniformTensorWithShapeSeedName(shape unsafe.Pointer, seed uint, name string) *GraphTensor
-	RandomUniformTensorWithShapeTensorSeedName(shapeTensor *raw.MPSGraphTensor, seed uint, name string) *GraphTensor
-	RandomUniformTensorWithShapeStateTensorName(shape unsafe.Pointer, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor *raw.MPSGraphTensor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	DropoutTensorRateName(tensor *raw.MPSGraphTensor, rate float64, name string) *GraphTensor
-	DropoutTensorRateTensorName(tensor *raw.MPSGraphTensor, rate *raw.MPSGraphTensor, name string) *GraphTensor
-	ReductionSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionSumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionMaximumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionMinimumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionMaximumPropagateNaNWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionMaximumPropagateNaNWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionMinimumPropagateNaNWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionMinimumPropagateNaNWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionProductWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionProductWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionArgMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionArgMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionAndWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionAndWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReductionOrWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ReductionOrWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor
-	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor
-	ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor
-	ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor
-	ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor
-	ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor
-	ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor
-	SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, peephole *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, cellGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, peephole *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, samplingMode MPSGraphResizeMode, constantValue float64, name string) *GraphTensor
-	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, nearestRoundingMode MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor
-	ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, name string) *GraphTensor
-	ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor
-	SortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor
-	SortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor
-	SortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	SortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ArgSortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor
-	ArgSortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor
-	ArgSortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ArgSortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor
-	SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor *raw.MPSGraphCreateSparseOpDescriptor, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, name string) *GraphTensor
-	StencilWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphStencilOpDescriptor, name string) *GraphTensor
-	ReshapeTensorWithShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor
-	ReshapeTensorWithShapeTensorName(tensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	TransposeTensorDimensionWithDimensionName(tensor *raw.MPSGraphTensor, dimensionIndex uint, dimensionIndex2 uint, name string) *GraphTensor
-	TransposeTensorPermutationName(tensor *raw.MPSGraphTensor, permutation *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	SliceTensorDimensionStartLengthName(tensor *raw.MPSGraphTensor, dimensionIndex uint, start int, length int, name string) *GraphTensor
-	SliceTensorStartsEndsStridesName(tensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
-	SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, endTensor *raw.MPSGraphTensor, strideTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
-	SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, sizeTensor *raw.MPSGraphTensor, squeezeMask uint32, name string) *GraphTensor
-	SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, endTensor *raw.MPSGraphTensor, strideTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
-	SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, sizeTensor *raw.MPSGraphTensor, squeezeMask uint32, name string) *GraphTensor
-	SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
-	SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, startsTensor *raw.MPSGraphTensor, endsTensor *raw.MPSGraphTensor, stridesTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
-	SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
-	SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, startsTensor *raw.MPSGraphTensor, endsTensor *raw.MPSGraphTensor, stridesTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ConcatTensorWithTensorDimensionName(tensor *raw.MPSGraphTensor, tensor2 *raw.MPSGraphTensor, dimensionIndex int, name string) *GraphTensor
-	ConcatTensorsDimensionName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, name string) *GraphTensor
-	ConcatTensorsDimensionInterleaveName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, interleave bool, name string) *GraphTensor
-	TileTensorWithMultiplierName(tensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor
-	TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor
-	PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor
-	PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor
-	SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor
-	SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor
-	DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor
-	DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor
-	SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxes *foundation.NSArray[*foundation.NSNumber], batchAxis int, blockDimensions *foundation.NSArray[*foundation.NSNumber], usePixelShuffleOrder bool, name string) *GraphTensor
-	SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxesTensor *raw.MPSGraphTensor, batchAxisTensor *raw.MPSGraphTensor, blockDimensionsTensor *raw.MPSGraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor
-	BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxes *foundation.NSArray[*foundation.NSNumber], batchAxis int, blockDimensions *foundation.NSArray[*foundation.NSNumber], usePixelShuffleOrder bool, name string) *GraphTensor
-	BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxesTensor *raw.MPSGraphTensor, batchAxisTensor *raw.MPSGraphTensor, blockDimensionsTensor *raw.MPSGraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor
-	ReverseTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ReverseTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ReverseTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	Flatten2DTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	Flatten2DTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BroadcastTensorToShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor
-	BroadcastTensorToShapeTensorName(tensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ShapeOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.MPSDataType, name string) *GraphTensor
-	ReinterpretCastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.MPSDataType, name string) *GraphTensor
-	StackTensorsAxisName(inputTensors *foundation.NSArray[*raw.MPSGraphTensor], axis int, name string) *GraphTensor
-	SplitTensorSplitSizesAxisName(tensor *raw.MPSGraphTensor, splitSizes *foundation.NSArray[*foundation.NSNumber], axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SplitTensorSplitSizesTensorAxisName(tensor *raw.MPSGraphTensor, splitSizesTensor *raw.MPSGraphTensor, axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SplitTensorNumSplitsAxisName(tensor *raw.MPSGraphTensor, numSplits uint, axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SqueezeTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SqueezeTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	SqueezeTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	SqueezeTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	ExpandDimsOfTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
-	ExpandDimsOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ExpandDimsOfTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CoordinateAlongAxisWithShapeName(axis int, shape unsafe.Pointer, name string) *GraphTensor
-	CoordinateAlongAxisTensorWithShapeName(axisTensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor
-	CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	TopKWithSourceTensorKName(source *raw.MPSGraphTensor, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	TopKWithSourceTensorKTensorName(source *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	TopKWithSourceTensorAxisKName(source *raw.MPSGraphTensor, axis int, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	BottomKWithSourceTensorAxisKName(source *raw.MPSGraphTensor, axis int, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	TopKWithSourceTensorAxisTensorKTensorName(source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	BottomKWithSourceTensorAxisTensorKTensorName(source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	TopKWithGradientTensorSourceKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, k uint, name string) *GraphTensor
-	TopKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, k uint, name string) *GraphTensor
-	BottomKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, k uint, name string) *GraphTensor
-	TopKWithGradientTensorSourceKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor
+	VariableFromTensorWithTensorName(tensor *GraphTensor, name string) *GraphTensor
+	ReadVariableName(variable *GraphTensor, name string) *GraphTensor
+	AssignVariableWithValueOfTensorName(variable *GraphTensor, tensor *GraphTensor, name string) *GraphOperation
+	NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *GraphTensor, scoresTensor *GraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode GraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
+	NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *GraphTensor, scoresTensor *GraphTensor, classIndicesTensor *GraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode GraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
+	NonZeroIndicesOfTensorName(tensor *GraphTensor, name string) *GraphTensor
+	MeanOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	VarianceOfTensorMeanTensorAxesName(tensor *GraphTensor, meanTensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	VarianceOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor *GraphTensor, mean *GraphTensor, variance *GraphTensor, gamma *GraphTensor, beta *GraphTensor, epsilon float32, name string) *GraphTensor
+	NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, meanTensor *GraphTensor, varianceTensor *GraphTensor, axes []obj.Object, epsilon float32, name string) *GraphTensor
+	NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor *GraphTensor, sourceTensor *GraphTensor, meanTensor *GraphTensor, varianceTensor *GraphTensor, gamma *GraphTensor, gammaGradient *GraphTensor, betaGradient *GraphTensor, axes []obj.Object, epsilon float32, name string) *GraphTensor
+	OneHotWithIndicesTensorDepthAxisName(indicesTensor *GraphTensor, depth int, axis int, name string) *GraphTensor
+	OneHotWithIndicesTensorDepthName(indicesTensor *GraphTensor, depth int, name string) *GraphTensor
+	StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor *GraphTensor, valuesTensor *GraphTensor, gradientTensor *GraphTensor, name string) *GraphTensor
+	ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor *GraphTensor, variable *GraphVariableOp, gradientTensor *GraphTensor, name string) *GraphOperation
+	AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor *GraphTensor, beta1Tensor *GraphTensor, beta2Tensor *GraphTensor, epsilonTensor *GraphTensor, beta1PowerTensor *GraphTensor, beta2PowerTensor *GraphTensor, valuesTensor *GraphTensor, momentumTensor *GraphTensor, velocityTensor *GraphTensor, maximumVelocityTensor *GraphTensor, gradientTensor *GraphTensor, name string) []*GraphTensor
+	AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor *GraphTensor, beta1Tensor *GraphTensor, beta2Tensor *GraphTensor, epsilonTensor *GraphTensor, valuesTensor *GraphTensor, momentumTensor *GraphTensor, velocityTensor *GraphTensor, maximumVelocityTensor *GraphTensor, gradientTensor *GraphTensor, name string) []*GraphTensor
+	MaxPooling2DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor
+	MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) []*GraphTensor
+	MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor
+	MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *GraphTensor, indices *GraphTensor, outputShape *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor
+	AvgPooling2DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor
+	AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling2DOpDescriptor, name string) *GraphTensor
+	MaxPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) []*GraphTensor
+	MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *GraphTensor, indices *GraphTensor, outputShape *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	AvgPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	L2NormPooling4DWithSourceTensorDescriptorName(source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *GraphTensor, source *GraphTensor, descriptor *GraphPooling4DOpDescriptor, name string) *GraphTensor
+	DequantizeTensorLUTTensorName(tensor *GraphTensor, lUTTensor *GraphTensor, name string) *GraphTensor
+	DequantizeTensorLUTTensorAxisName(tensor *GraphTensor, lUTTensor *GraphTensor, axis int, name string) *GraphTensor
+	RandomPhiloxStateTensorWithSeedName(seed int, name string) *GraphTensor
+	RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow int, counterHigh int, key int, name string) *GraphTensor
+	RandomTensorWithShapeTensorDescriptorName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, name string) *GraphTensor
+	RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, seed int, name string) *GraphTensor
+	RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor *GraphTensor, descriptor *GraphRandomOpDescriptor, state *GraphTensor, name string) []*GraphTensor
+	RandomUniformTensorWithShapeTensorName(shapeTensor *GraphTensor, name string) *GraphTensor
+	RandomUniformTensorWithShapeTensorSeedName(shapeTensor *GraphTensor, seed int, name string) *GraphTensor
+	RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor *GraphTensor, state *GraphTensor, name string) []*GraphTensor
+	DropoutTensorRateName(tensor *GraphTensor, rate float64, name string) *GraphTensor
+	DropoutTensorRateTensorName(tensor *GraphTensor, rate *GraphTensor, name string) *GraphTensor
+	ReductionSumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionSumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionMaximumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionMinimumWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionMaximumPropagateNaNWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionMaximumPropagateNaNWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionMinimumPropagateNaNWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionMinimumPropagateNaNWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionProductWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionProductWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionArgMaximumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionArgMinimumWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionAndWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionAndWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReductionOrWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ReductionOrWithTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor
+	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *GraphTensor, size *GraphTensor, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *GraphTensor, size *GraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor
+	ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, mode GraphResizeMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, mode GraphResizeMode, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, name string) *GraphTensor
+	ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *GraphTensor, size *GraphTensor, scaleOffset *GraphTensor, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *GraphTensor, size *GraphTensor, scale *GraphTensor, offset *GraphTensor, name string) *GraphTensor
+	ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, mode GraphResizeMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *GraphTensor, input *GraphTensor, centerResult bool, alignCorners bool, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, mode GraphResizeMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, mode GraphResizeMode, name string) *GraphTensor
+	ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, nearestRoundingMode GraphResizeNearestRoundingMode, name string) *GraphTensor
+	ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *GraphTensor, input *GraphTensor, scaleOffset *GraphTensor, layout GraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *GraphTensor, input *GraphTensor, scale *GraphTensor, offset *GraphTensor, name string) *GraphTensor
+	SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, stateGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, initState *GraphTensor, descriptor *GraphSingleGateRNNDescriptor, name string) []*GraphTensor
+	LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, peephole *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, stateGradient *GraphTensor, cellGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, peephole *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, mask *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, initCell *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, cellOutputFwd *GraphTensor, descriptor *GraphLSTMDescriptor, name string) []*GraphTensor
+	GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, secondaryBias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor
+	GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor
+	GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor
+	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, stateGradient *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, mask *GraphTensor, secondaryBias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor
+	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, initState *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor
+	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *GraphTensor, recurrentWeight *GraphTensor, sourceGradient *GraphTensor, zState *GraphTensor, outputFwd *GraphTensor, inputWeight *GraphTensor, bias *GraphTensor, descriptor *GraphGRUDescriptor, name string) []*GraphTensor
+	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *GraphTensor, coordinates *GraphTensor, layout GraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode GraphPaddingMode, samplingMode GraphResizeMode, constantValue float64, name string) *GraphTensor
+	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *GraphTensor, coordinates *GraphTensor, layout GraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode GraphPaddingMode, nearestRoundingMode GraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor
+	ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, batchDimensions int, mode GraphScatterMode, name string) *GraphTensor
+	ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, axis int, mode GraphScatterMode, name string) *GraphTensor
+	ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, mode GraphScatterMode, name string) *GraphTensor
+	ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *GraphTensor, dataTensor *GraphTensor, updatesTensor *GraphTensor, indicesTensor *GraphTensor, mode GraphScatterMode, name string) *GraphTensor
+	SortWithTensorAxisDescendingName(tensor *GraphTensor, axis int, descending bool, name string) *GraphTensor
+	SortWithTensorAxisTensorDescendingName(tensor *GraphTensor, axisTensor *GraphTensor, descending bool, name string) *GraphTensor
+	SortWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	SortWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	ArgSortWithTensorAxisDescendingName(tensor *GraphTensor, axis int, descending bool, name string) *GraphTensor
+	ArgSortWithTensorAxisTensorDescendingName(tensor *GraphTensor, axisTensor *GraphTensor, descending bool, name string) *GraphTensor
+	ArgSortWithTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ArgSortWithTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	StencilWithSourceTensorWeightsTensorDescriptorName(source *GraphTensor, weights *GraphTensor, descriptor *GraphStencilOpDescriptor, name string) *GraphTensor
+	ReshapeTensorWithShapeTensorName(tensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor
+	TransposeTensorDimensionWithDimensionName(tensor *GraphTensor, dimensionIndex int, dimensionIndex2 int, name string) *GraphTensor
+	TransposeTensorPermutationName(tensor *GraphTensor, permutation []obj.Object, name string) *GraphTensor
+	SliceTensorDimensionStartLengthName(tensor *GraphTensor, dimensionIndex int, start int, length int, name string) *GraphTensor
+	SliceTensorStartsEndsStridesName(tensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor
+	SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
+	SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor *GraphTensor, startTensor *GraphTensor, endTensor *GraphTensor, strideTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
+	SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *GraphTensor, startTensor *GraphTensor, sizeTensor *GraphTensor, squeezeMask uint32, name string) *GraphTensor
+	SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor
+	SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, startTensor *GraphTensor, endTensor *GraphTensor, strideTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
+	SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, startTensor *GraphTensor, sizeTensor *GraphTensor, squeezeMask uint32, name string) *GraphTensor
+	SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor *GraphTensor, fwdInShapeTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
+	SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor *GraphTensor, updateTensor *GraphTensor, startsTensor *GraphTensor, endsTensor *GraphTensor, stridesTensor *GraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
+	SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor *GraphTensor, updateTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor
+	SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor *GraphTensor, updateTensor *GraphTensor, startsTensor *GraphTensor, endsTensor *GraphTensor, stridesTensor *GraphTensor, name string) *GraphTensor
+	SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor *GraphTensor, updateTensor *GraphTensor, starts []obj.Object, ends []obj.Object, strides []obj.Object, name string) *GraphTensor
+	ConcatTensorWithTensorDimensionName(tensor *GraphTensor, tensor2 *GraphTensor, dimensionIndex int, name string) *GraphTensor
+	ConcatTensorsDimensionName(tensors []*GraphTensor, dimensionIndex int, name string) *GraphTensor
+	ConcatTensorsDimensionInterleaveName(tensors []*GraphTensor, dimensionIndex int, interleave bool, name string) *GraphTensor
+	SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxis int, heightAxis int, depthAxis int, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor
+	SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxisTensor *GraphTensor, heightAxisTensor *GraphTensor, depthAxisTensor *GraphTensor, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor
+	DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxis int, heightAxis int, depthAxis int, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor
+	DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *GraphTensor, widthAxisTensor *GraphTensor, heightAxisTensor *GraphTensor, depthAxisTensor *GraphTensor, blockSize int, usePixelShuffleOrder bool, name string) *GraphTensor
+	SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxes []obj.Object, batchAxis int, blockDimensions []obj.Object, usePixelShuffleOrder bool, name string) *GraphTensor
+	SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxesTensor *GraphTensor, batchAxisTensor *GraphTensor, blockDimensionsTensor *GraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor
+	BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxes []obj.Object, batchAxis int, blockDimensions []obj.Object, usePixelShuffleOrder bool, name string) *GraphTensor
+	BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *GraphTensor, spatialAxesTensor *GraphTensor, batchAxisTensor *GraphTensor, blockDimensionsTensor *GraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor
+	ReverseTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor
+	ReverseTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ReverseTensorName(tensor *GraphTensor, name string) *GraphTensor
+	Flatten2DTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	Flatten2DTensorAxisTensorName(tensor *GraphTensor, axisTensor *GraphTensor, name string) *GraphTensor
+	BroadcastTensorToShapeTensorName(tensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor
+	ShapeOfTensorName(tensor *GraphTensor, name string) *GraphTensor
+	StackTensorsAxisName(inputTensors []*GraphTensor, axis int, name string) *GraphTensor
+	SplitTensorSplitSizesAxisName(tensor *GraphTensor, splitSizes []obj.Object, axis int, name string) []*GraphTensor
+	SplitTensorSplitSizesTensorAxisName(tensor *GraphTensor, splitSizesTensor *GraphTensor, axis int, name string) []*GraphTensor
+	SplitTensorNumSplitsAxisName(tensor *GraphTensor, numSplits int, axis int, name string) []*GraphTensor
+	SqueezeTensorName(tensor *GraphTensor, name string) *GraphTensor
+	SqueezeTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	SqueezeTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	SqueezeTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor
+	ExpandDimsOfTensorAxisName(tensor *GraphTensor, axis int, name string) *GraphTensor
+	ExpandDimsOfTensorAxesName(tensor *GraphTensor, axes []obj.Object, name string) *GraphTensor
+	ExpandDimsOfTensorAxesTensorName(tensor *GraphTensor, axesTensor *GraphTensor, name string) *GraphTensor
+	CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *GraphTensor, name string) *GraphTensor
+	CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *GraphTensor, shapeTensor *GraphTensor, name string) *GraphTensor
+	TopKWithSourceTensorKName(source *GraphTensor, k int, name string) []*GraphTensor
+	TopKWithSourceTensorKTensorName(source *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor
+	TopKWithSourceTensorAxisKName(source *GraphTensor, axis int, k int, name string) []*GraphTensor
+	BottomKWithSourceTensorAxisKName(source *GraphTensor, axis int, k int, name string) []*GraphTensor
+	TopKWithSourceTensorAxisTensorKTensorName(source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor
+	BottomKWithSourceTensorAxisTensorKTensorName(source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) []*GraphTensor
+	TopKWithGradientTensorSourceKName(gradient *GraphTensor, source *GraphTensor, k int, name string) *GraphTensor
+	TopKWithGradientTensorSourceAxisKName(gradient *GraphTensor, source *GraphTensor, axis int, k int, name string) *GraphTensor
+	BottomKWithGradientTensorSourceAxisKName(gradient *GraphTensor, source *GraphTensor, axis int, k int, name string) *GraphTensor
+	TopKWithGradientTensorSourceKTensorName(gradient *GraphTensor, source *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor
+	TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *GraphTensor, source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor
+	BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient *GraphTensor, source *GraphTensor, axisTensor *GraphTensor, kTensor *GraphTensor, name string) *GraphTensor
 }
 
 var _ Graphable = (*Graph)(nil)
+
+var _ GraphObjectProvider = (*Graph)(nil)

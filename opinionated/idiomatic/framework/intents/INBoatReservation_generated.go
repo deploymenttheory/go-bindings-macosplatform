@@ -5,67 +5,74 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a boat reservation.
+// BoatReservation is an idiomatic wrapper over the Objective-C class INBoatReservation.
 //
-// BoatReservation wraps [raw.INBoatReservation] with a fluent Go API.
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a boat reservation.
 type BoatReservation struct {
-	inner *raw.INBoatReservation
+	Reservation
 }
 
-// Unwrap returns the underlying [raw.INBoatReservation].
-func (x *BoatReservation) Unwrap() *raw.INBoatReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BoatReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// BoatReservationFromID adopts an existing object pointer as a BoatReservation (nil for 0).
+// BoatReservationFromID adopts an existing Objective-C object as a BoatReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func BoatReservationFromID(id objc.ID) *BoatReservation {
 	if id == 0 {
 		return nil
 	}
-	return &BoatReservation{inner: raw.INBoatReservationFromID(id)}
+	x := &BoatReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a boat reservation with the specified contents and attributes.
-//
-// NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip creates a new [BoatReservation].
-func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, boatTrip *raw.INBoatTrip) *BoatReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBoatReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:boatTrip:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservedSeat.Ptr(), boatTrip.Ptr())
-	return &BoatReservation{inner: raw.INBoatReservationFromID(_id)}
+// boatReservationAdopt wraps an Objective-C object that this code just created as a
+// BoatReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func boatReservationAdopt(id objc.ID) *BoatReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &BoatReservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ReservedSeat calls the underlying ReservedSeat.
+// NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip creates a boat reservation with the specified contents and attributes.
+func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, boatTrip *BoatTrip) *BoatReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INBoatReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:boatTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(boatTrip))
+	return boatReservationAdopt(_id)
+}
+
+// ReservedSeat wraps the corresponding Objective-C method.
 func (x *BoatReservation) ReservedSeat() *Seat {
-	_r := x.inner.ReservedSeat()
-	if _r == nil {
-		return nil
-	}
-	return &Seat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+	return SeatFromID(_r)
 }
 
-// BoatTrip calls the underlying BoatTrip.
+// BoatTrip wraps the corresponding Objective-C method.
 func (x *BoatReservation) BoatTrip() *BoatTrip {
-	_r := x.inner.BoatTrip()
-	if _r == nil {
-		return nil
-	}
-	return &BoatTrip{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatTrip"))
+	return BoatTripFromID(_r)
 }
-
-func (x *BoatReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // BoatReservationable is the interface implemented by [BoatReservation], for mocking and DI.
 type BoatReservationable interface {
-	Unwrap() *raw.INBoatReservation
+	obj.Object
 	ReservedSeat() *Seat
 	BoatTrip() *BoatTrip
 }
 
 var _ BoatReservationable = (*BoatReservation)(nil)
+
+var _ ReservationProvider = (*BoatReservation)(nil)

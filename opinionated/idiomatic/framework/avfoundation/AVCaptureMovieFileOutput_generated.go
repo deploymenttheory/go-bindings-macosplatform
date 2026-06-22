@@ -5,270 +5,184 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A capture output that records video and audio to a QuickTime movie file.
+// CaptureMovieFileOutput is an idiomatic wrapper over the Objective-C class AVCaptureMovieFileOutput.
 //
-// CaptureMovieFileOutput wraps [raw.AVCaptureMovieFileOutput] with a fluent Go API.
+// It embeds [CaptureFileOutput], promoting that type's methods.
+//
+// A capture output that records video and audio to a QuickTime movie file.
 type CaptureMovieFileOutput struct {
-	inner *raw.AVCaptureMovieFileOutput
+	CaptureFileOutput
 }
 
-// Unwrap returns the underlying [raw.AVCaptureMovieFileOutput].
-func (x *CaptureMovieFileOutput) Unwrap() *raw.AVCaptureMovieFileOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureMovieFileOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureMovieFileOutputFromID adopts an existing object pointer as a CaptureMovieFileOutput (nil for 0).
+// CaptureMovieFileOutputFromID adopts an existing Objective-C object as a CaptureMovieFileOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureMovieFileOutputFromID(id objc.ID) *CaptureMovieFileOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureMovieFileOutput{inner: raw.AVCaptureMovieFileOutputFromID(id)}
+	x := &CaptureMovieFileOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureMovieFileOutput creates a new [CaptureMovieFileOutput].
+// captureMovieFileOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureMovieFileOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureMovieFileOutputAdopt(id objc.ID) *CaptureMovieFileOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureMovieFileOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCaptureMovieFileOutput creates a new CaptureMovieFileOutput.
 func NewCaptureMovieFileOutput() *CaptureMovieFileOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureMovieFileOutput")), objc.RegisterName("new"))
-	return &CaptureMovieFileOutput{inner: raw.AVCaptureMovieFileOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureMovieFileOutput")), objc.RegisterName("new"))
+	return captureMovieFileOutputAdopt(_id)
 }
 
-// The number of seconds of output that are written per fragment.
-//
-// WithMovieFragmentInterval sets the movieFragmentInterval property and returns the receiver for chaining.
-func (x *CaptureMovieFileOutput) WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *CaptureMovieFileOutput {
-	x.inner.SetMovieFragmentInterval(movieFragmentInterval)
-	return x
-}
-
-// The metadata for the output file.
-//
-// WithMetadata sets the collection, converting the Go slice to an NSArray.
+// WithMetadata the metadata for the output file.
 func (x *CaptureMovieFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureMovieFileOutput {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMetadata(foundation.NSArrayFromID[*raw.AVMetadataItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMetadata(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether to restrict constituent device switching behavior during recording.
-//
-// WithPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled sets the primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled property and returns the receiver for chaining.
+// WithPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled a Boolean value that indicates whether to restrict constituent device switching behavior during recording.
 func (x *CaptureMovieFileOutput) WithPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool) *CaptureMovieFileOutput {
-	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled:"), primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether a movie file output captures spatial videos.
-//
-// WithSpatialVideoCaptureEnabled sets the spatialVideoCaptureEnabled property and returns the receiver for chaining.
+// WithSpatialVideoCaptureEnabled a Boolean value that indicates whether a movie file output captures spatial videos.
 func (x *CaptureMovieFileOutput) WithSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) *CaptureMovieFileOutput {
-	x.inner.SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpatialVideoCaptureEnabled:"), spatialVideoCaptureEnabled)
 	return x
 }
 
-// The delegate object for the capture file output.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CaptureMovieFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureMovieFileOutput {
-	x.inner.AVCaptureFileOutput.SetDelegate(delegate)
-	return x
-}
-
-// The longest duration allowed for the recording.
-//
-// WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
-func (x *CaptureMovieFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureMovieFileOutput {
-	x.inner.AVCaptureFileOutput.SetMaxRecordedDuration(maxRecordedDuration)
-	return x
-}
-
-// The maximum size, in bytes, of the data that should be recorded by the receiver.
-//
-// WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
+// WithMaxRecordedFileSize the maximum size, in bytes, of the data that should be recorded by the receiver.
 func (x *CaptureMovieFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureMovieFileOutput {
-	x.inner.AVCaptureFileOutput.SetMaxRecordedFileSize(maxRecordedFileSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
 	return x
 }
 
-// The minimum amount of free space, in bytes, required for recording to continue on a given volume.
-//
-// WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
+// WithMinFreeDiskSpaceLimit the minimum amount of free space, in bytes, required for recording to continue on a given volume.
 func (x *CaptureMovieFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureMovieFileOutput {
-	x.inner.AVCaptureFileOutput.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
 	return x
 }
 
-// A Boolean value that indicates whether to defer starting this capture output.
-//
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
 func (x *CaptureMovieFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMovieFileOutput {
-	x.inner.AVCaptureFileOutput.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Returns the settings the output uses to encode media from the specified connection.
-//
-// OutputSettingsForConnection calls the underlying OutputSettingsForConnection.
-func (x *CaptureMovieFileOutput) OutputSettingsForConnection(connection *raw.AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.OutputSettingsForConnection(connection)
+// OutputSettingsForConnection returns the settings the output uses to encode media from the specified connection.
+func (x *CaptureMovieFileOutput) OutputSettingsForConnection(connection *CaptureConnection) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputSettingsForConnection:"), objref.IDOf(connection))
+	return obj.Wrap(_r)
 }
 
-// Sets the options the output uses to encode media from the given connection while recording.
-//
-// SetOutputSettingsForConnection calls the underlying SetOutputSettingsForConnection.
-func (x *CaptureMovieFileOutput) SetOutputSettingsForConnection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], connection *raw.AVCaptureConnection) {
-	x.inner.SetOutputSettingsForConnection(outputSettings, connection)
+// SetOutputSettingsForConnection sets the options the output uses to encode media from the given connection while recording.
+func (x *CaptureMovieFileOutput) SetOutputSettingsForConnection(outputSettings obj.Object, connection *CaptureConnection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputSettings:forConnection:"), objref.IDOf(outputSettings), objref.IDOf(connection))
 }
 
-// Sets the camera switching behavior to use during recording.
-//
-// SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions calls the underlying SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions.
-func (x *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
-	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior(switchingBehavior), raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions(restrictedSwitchingBehaviorConditions))
+// SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions sets the camera switching behavior to use during recording.
+func (x *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior CapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:"), switchingBehavior, restrictedSwitchingBehaviorConditions)
 }
 
-// @property movieFragmentInterval @abstract Specifies the frequency with which movie fragments should be written. @discussion When movie fragments are used, a partially written QuickTime movie file whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. A value of kCMTimeInvalid indicates that movie fragments should not be used, but that only a movie atom describing all of the media in the file should be written. The default value of this property is ten seconds. Changing the value of this property will not affect the movie fragment interval of the file currently being written, if there is one. For best writing performance on external storage devices, set the movieFragmentInterval to 10 seconds or greater. If the size of a movie fragment is greater than or equal to 2GB, an interval is added at 2GB mark.
-//
-// MovieFragmentInterval calls the underlying MovieFragmentInterval.
-func (x *CaptureMovieFileOutput) MovieFragmentInterval() coremedia.CMTime {
-	return x.inner.MovieFragmentInterval()
-}
-
-// SetMovieFragmentInterval calls the underlying SetMovieFragmentInterval.
-func (x *CaptureMovieFileOutput) SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) {
-	x.inner.SetMovieFragmentInterval(movieFragmentInterval)
-}
-
-// @property metadata @abstract A collection of metadata to be written to the receiver's output files. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file.
+// Metadata a collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file.
 //
 // Metadata returns the collection as a Go slice.
 func (x *CaptureMovieFileOutput) Metadata() []*MetadataItem {
-	arr := x.inner.Metadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// SetMetadata calls the underlying SetMetadata.
-func (x *CaptureMovieFileOutput) SetMetadata(metadata ...MetadataItemProvider) {
-	_ptrs := make([]objc.ID, len(metadata))
-	for _i, _v := range metadata {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetMetadata(_arg0)
+// SetMetadata wraps the corresponding Objective-C method.
+func (x *CaptureMovieFileOutput) SetMetadata(metadata []*MetadataItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled @abstract Enable or disable a constituent device selection behavior when recording. @discussion This property enables a camera selection behavior to be applied when recording a movie. Once recording starts, the specified behavior and conditions take effect. Once recording stops the camera selection will change back to the primaryConstituentDeviceSwitchingBehavior specified by the AVCaptureDevice. By default, this property is set to YES when connected to an AVCaptureDevice that supports constituent device switching.
-//
-// IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled calls the underlying IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled.
+// IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled enable or disable a constituent device selection behavior when recording. This property enables a camera selection behavior to be applied when recording a movie. Once recording starts, the specified behavior and conditions take effect. Once recording stops the camera selection will change back to the primaryConstituentDeviceSwitchingBehavior specified by the AVCaptureDevice. By default, this property is set to YES when connected to an AVCaptureDevice that supports constituent device switching.
 func (x *CaptureMovieFileOutput) IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled() bool {
-	return x.inner.IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled"))
+	return _r
 }
 
-// SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled calls the underlying SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled.
+// SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled wraps the corresponding Objective-C method.
 func (x *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool) {
-	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled:"), primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled)
 }
 
-// @property primaryConstituentDeviceSwitchingBehaviorForRecording @abstract The primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:]. @discussion By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. This property is key-value observable.
-//
-// PrimaryConstituentDeviceSwitchingBehaviorForRecording calls the underlying PrimaryConstituentDeviceSwitchingBehaviorForRecording.
-func (x *CaptureMovieFileOutput) PrimaryConstituentDeviceSwitchingBehaviorForRecording() AVCapturePrimaryConstituentDeviceSwitchingBehavior {
-	return AVCapturePrimaryConstituentDeviceSwitchingBehavior(x.inner.PrimaryConstituentDeviceSwitchingBehaviorForRecording())
+// PrimaryConstituentDeviceSwitchingBehaviorForRecording the primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:]. By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. This property is key-value observable.
+func (x *CaptureMovieFileOutput) PrimaryConstituentDeviceSwitchingBehaviorForRecording() CapturePrimaryConstituentDeviceSwitchingBehavior {
+	_r := objc.Send[CapturePrimaryConstituentDeviceSwitchingBehavior](objref.IDOf(x), objc.RegisterName("primaryConstituentDeviceSwitchingBehaviorForRecording"))
+	return _r
 }
 
-// @property primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording @abstract The primaryConstituentDeviceRestrictedSwitchingBehaviorConditions as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:]. @discussion By default, this property is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorCondition{VideoZoomChanged | FocusModeChanged | ExposureModeChanged}. This property is key-value observable.
-//
-// PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording calls the underlying PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording.
-func (x *CaptureMovieFileOutput) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
-	return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions(x.inner.PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording())
+// PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording the primaryConstituentDeviceRestrictedSwitchingBehaviorConditions as set by -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:]. By default, this property is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorCondition{VideoZoomChanged | FocusModeChanged | ExposureModeChanged}. This property is key-value observable.
+func (x *CaptureMovieFileOutput) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	_r := objc.Send[CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions](objref.IDOf(x), objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording"))
+	return _r
 }
 
-// @property spatialVideoCaptureSupported @abstract Returns whether or not capturing spatial video to a file is supported. Note that in order to be supported, two conditions must be met. (1) The source AVCaptureDevice's activeFormat.spatialVideoCaptureSupported property must return YES. (2) The video AVCaptureConnection's activeVideoStabilizationMode property must return AVCaptureVideoStabilizationModeCinematic, AVCaptureVideoStabilizationModeCinematicExtended, or AVCaptureVideoStabilizationModeCinematicExtendedEnhanced.
-//
-// IsSpatialVideoCaptureSupported calls the underlying IsSpatialVideoCaptureSupported.
+// IsSpatialVideoCaptureSupported returns whether or not capturing spatial video to a file is supported. Note that in order to be supported, two conditions must be met. (1) The source AVCaptureDevice's activeFormat.spatialVideoCaptureSupported property must return YES. (2) The video AVCaptureConnection's activeVideoStabilizationMode property must return AVCaptureVideoStabilizationModeCinematic, AVCaptureVideoStabilizationModeCinematicExtended, or AVCaptureVideoStabilizationModeCinematicExtendedEnhanced.
 func (x *CaptureMovieFileOutput) IsSpatialVideoCaptureSupported() bool {
-	return x.inner.IsSpatialVideoCaptureSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpatialVideoCaptureSupported"))
+	return _r
 }
 
-// @property spatialVideoCaptureEnabled @abstract Enable or disable capturing spatial video to a file. @discussion This property enables capturing spatial video to a file. By default, this property is set to NO. Check spatialVideoCaptureSupported before setting this property, as setting to YES will throw an exception if the feature is not supported. On iOS, enabling spatial video will overwrite the connected AVCaptureDevice's `videoZoomFactor`, `minAvailableVideoZoomFactor`, and `maxAvailableVideoZoomFactor` to the field of view of the narrower camera in the pair. When spatialVideoCaptureEnabled is true, setting -[AVCaptureDeviceInput activeVideoMinFrameDuration] or -[AVCaptureDeviceInput activeVideoMaxFrameDuration] throws an NSInvalidArgumentException. Enabling this property throws an NSInvalidArgumentException if -[AVCaptureDevice isVideoFrameDurationLocked] or -[AVCaptureDevice isFollowingExternalSyncDevice] is true.
-//
-// IsSpatialVideoCaptureEnabled calls the underlying IsSpatialVideoCaptureEnabled.
+// IsSpatialVideoCaptureEnabled enable or disable capturing spatial video to a file. This property enables capturing spatial video to a file. By default, this property is set to NO. Check spatialVideoCaptureSupported before setting this property, as setting to YES will throw an exception if the feature is not supported. On iOS, enabling spatial video will overwrite the connected AVCaptureDevice's `videoZoomFactor`, `minAvailableVideoZoomFactor`, and `maxAvailableVideoZoomFactor` to the field of view of the narrower camera in the pair. When spatialVideoCaptureEnabled is true, setting -[AVCaptureDeviceInput activeVideoMinFrameDuration] or -[AVCaptureDeviceInput activeVideoMaxFrameDuration] throws an NSInvalidArgumentException. Enabling this property throws an NSInvalidArgumentException if -[AVCaptureDevice isVideoFrameDurationLocked] or -[AVCaptureDevice isFollowingExternalSyncDevice] is true.
 func (x *CaptureMovieFileOutput) IsSpatialVideoCaptureEnabled() bool {
-	return x.inner.IsSpatialVideoCaptureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpatialVideoCaptureEnabled"))
+	return _r
 }
 
-// SetSpatialVideoCaptureEnabled calls the underlying SetSpatialVideoCaptureEnabled.
+// SetSpatialVideoCaptureEnabled wraps the corresponding Objective-C method.
 func (x *CaptureMovieFileOutput) SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) {
-	x.inner.SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled)
-}
-
-func (x *CaptureMovieFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput {
-	return &x.inner.AVCaptureFileOutput
-}
-
-func (x *CaptureMovieFileOutput) asCaptureOutput() *raw.AVCaptureOutput {
-	return &x.inner.AVCaptureFileOutput.AVCaptureOutput
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpatialVideoCaptureEnabled:"), spatialVideoCaptureEnabled)
 }
 
 // CaptureMovieFileOutputable is the interface implemented by [CaptureMovieFileOutput], for mocking and DI.
 type CaptureMovieFileOutputable interface {
-	Unwrap() *raw.AVCaptureMovieFileOutput
-	WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *CaptureMovieFileOutput
+	obj.Object
 	WithMetadata(items ...MetadataItemProvider) *CaptureMovieFileOutput
 	WithPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool) *CaptureMovieFileOutput
 	WithSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) *CaptureMovieFileOutput
-	WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureMovieFileOutput
-	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureMovieFileOutput
 	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureMovieFileOutput
 	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureMovieFileOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMovieFileOutput
-	OutputSettingsForConnection(connection *raw.AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetOutputSettingsForConnection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], connection *raw.AVCaptureConnection)
-	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)
-	MovieFragmentInterval() coremedia.CMTime
-	SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime)
+	OutputSettingsForConnection(connection *CaptureConnection) obj.Object
+	SetOutputSettingsForConnection(outputSettings obj.Object, connection *CaptureConnection)
+	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior CapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)
 	Metadata() []*MetadataItem
-	SetMetadata(metadata ...MetadataItemProvider)
+	SetMetadata(metadata []*MetadataItem)
 	IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled() bool
 	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool)
-	PrimaryConstituentDeviceSwitchingBehaviorForRecording() AVCapturePrimaryConstituentDeviceSwitchingBehavior
-	PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+	PrimaryConstituentDeviceSwitchingBehaviorForRecording() CapturePrimaryConstituentDeviceSwitchingBehavior
+	PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
 	IsSpatialVideoCaptureSupported() bool
 	IsSpatialVideoCaptureEnabled() bool
 	SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool)
 }
 
 var _ CaptureMovieFileOutputable = (*CaptureMovieFileOutput)(nil)
+
+var _ CaptureFileOutputProvider = (*CaptureMovieFileOutput)(nil)
+
+var _ CaptureOutputProvider = (*CaptureMovieFileOutput)(nil)

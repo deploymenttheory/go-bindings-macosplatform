@@ -5,91 +5,95 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a reverb effect.
+// AudioUnitReverb is an idiomatic wrapper over the Objective-C class AVAudioUnitReverb.
 //
-// AudioUnitReverb wraps [raw.AVAudioUnitReverb] with a fluent Go API.
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a reverb effect.
 type AudioUnitReverb struct {
-	inner *raw.AVAudioUnitReverb
+	AudioUnitEffect
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnitReverb].
-func (x *AudioUnitReverb) Unwrap() *raw.AVAudioUnitReverb { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitReverb) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitReverbFromID adopts an existing object pointer as a AudioUnitReverb (nil for 0).
+// AudioUnitReverbFromID adopts an existing Objective-C object as a AudioUnitReverb
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitReverbFromID(id objc.ID) *AudioUnitReverb {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitReverb{inner: raw.AVAudioUnitReverbFromID(id)}
+	x := &AudioUnitReverb{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioUnitReverb creates a new [AudioUnitReverb].
+// audioUnitReverbAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitReverb (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitReverbAdopt(id objc.ID) *AudioUnitReverb {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitReverb{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAudioUnitReverb creates a new AudioUnitReverb.
 func NewAudioUnitReverb() *AudioUnitReverb {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitReverb")), objc.RegisterName("new"))
-	return &AudioUnitReverb{inner: raw.AVAudioUnitReverbFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitReverb")), objc.RegisterName("new"))
+	return audioUnitReverbAdopt(_id)
 }
 
-// The blend of the wet and dry signals.
-//
-// WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
+// WithWetDryMix the blend of the wet and dry signals.
 func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
-	x.inner.SetWetDryMix(wetDryMix)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets the bypass property and returns the receiver for chaining.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
-	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Configures the audio unit as a reverb preset.
-//
-// LoadFactoryPreset calls the underlying LoadFactoryPreset.
-func (x *AudioUnitReverb) LoadFactoryPreset(preset AVAudioUnitReverbPreset) {
-	x.inner.LoadFactoryPreset(raw.AVAudioUnitReverbPreset(preset))
+// LoadFactoryPreset configures the audio unit as a reverb preset.
+func (x *AudioUnitReverb) LoadFactoryPreset(preset AudioUnitReverbPreset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
-// WetDryMix calls the underlying WetDryMix.
+// WetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitReverb) WetDryMix() float32 {
-	return x.inner.WetDryMix()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
+	return _r
 }
 
-// SetWetDryMix calls the underlying SetWetDryMix.
+// SetWetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitReverb) SetWetDryMix(wetDryMix float32) {
-	x.inner.SetWetDryMix(wetDryMix)
-}
-
-func (x *AudioUnitReverb) asAudioUnitEffect() *raw.AVAudioUnitEffect {
-	return &x.inner.AVAudioUnitEffect
-}
-
-func (x *AudioUnitReverb) asAudioUnit() *raw.AVAudioUnit {
-	return &x.inner.AVAudioUnitEffect.AVAudioUnit
-}
-
-func (x *AudioUnitReverb) asAudioNode() *raw.AVAudioNode {
-	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 }
 
 // AudioUnitReverbable is the interface implemented by [AudioUnitReverb], for mocking and DI.
 type AudioUnitReverbable interface {
-	Unwrap() *raw.AVAudioUnitReverb
+	obj.Object
 	WithWetDryMix(wetDryMix float32) *AudioUnitReverb
 	WithBypass(bypass bool) *AudioUnitReverb
-	LoadFactoryPreset(preset AVAudioUnitReverbPreset)
+	LoadFactoryPreset(preset AudioUnitReverbPreset)
 	WetDryMix() float32
 	SetWetDryMix(wetDryMix float32)
 }
 
 var _ AudioUnitReverbable = (*AudioUnitReverb)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitReverb)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitReverb)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitReverb)(nil)

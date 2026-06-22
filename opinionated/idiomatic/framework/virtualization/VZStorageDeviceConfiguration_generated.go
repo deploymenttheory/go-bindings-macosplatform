@@ -5,55 +5,86 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for storage device requests.
+// StorageDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZStorageDeviceConfiguration.
 //
-// StorageDeviceConfiguration wraps [raw.VZStorageDeviceConfiguration] with a fluent Go API.
+// StorageDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [NVMExpressControllerDeviceConfiguration], [USBMassStorageDeviceConfiguration], [VirtioBlockDeviceConfiguration] and pass it where a StorageDeviceConfiguration is accepted.
+//
+// The common configuration traits for storage device requests.
 type StorageDeviceConfiguration struct {
-	inner *raw.VZStorageDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZStorageDeviceConfiguration].
-func (x *StorageDeviceConfiguration) Unwrap() *raw.VZStorageDeviceConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StorageDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// StorageDeviceConfigurationFromID adopts an existing object pointer as a StorageDeviceConfiguration (nil for 0).
+// StorageDeviceConfigurationFromID adopts an existing Objective-C object as a StorageDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func StorageDeviceConfigurationFromID(id objc.ID) *StorageDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &StorageDeviceConfiguration{inner: raw.VZStorageDeviceConfigurationFromID(id)}
+	x := &StorageDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStorageDeviceConfiguration creates a new [StorageDeviceConfiguration].
-func NewStorageDeviceConfiguration() *StorageDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZStorageDeviceConfiguration")), objc.RegisterName("new"))
-	return &StorageDeviceConfiguration{inner: raw.VZStorageDeviceConfigurationFromID(_id)}
-}
-
-// Attachment calls the underlying Attachment.
-func (x *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
-	_r := x.inner.Attachment()
-	if _r == nil {
+// storageDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// StorageDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storageDeviceConfigurationAdopt(id objc.ID) *StorageDeviceConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &StorageDeviceAttachment{inner: _r}
+	x := &StorageDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *StorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *StorageDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StorageDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StorageDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StorageDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Attachment wraps the corresponding Objective-C method.
+func (x *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+	return StorageDeviceAttachmentFromID(_r)
 }
 
 // StorageDeviceConfigurationable is the interface implemented by [StorageDeviceConfiguration], for mocking and DI.
 type StorageDeviceConfigurationable interface {
-	Unwrap() *raw.VZStorageDeviceConfiguration
+	obj.Object
 	Attachment() *StorageDeviceAttachment
 }
 
 var _ StorageDeviceConfigurationable = (*StorageDeviceConfiguration)(nil)
+
+// isStorageDeviceConfiguration marks StorageDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the StorageDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *StorageDeviceConfiguration) isStorageDeviceConfiguration() {}
+
+var _ StorageDeviceConfigurationProvider = (*StorageDeviceConfiguration)(nil)

@@ -4,48 +4,42 @@
 
 package foundation
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-)
+// A structure that defines the three-by-three matrix that performs an affine transform between two coordinate systems.
+type NSAffineTransformStruct struct {
+	M11 float64
+	M12 float64
+	M21 float64
+	M22 float64
+	TX  float64
+	TY  float64
+}
 
-// NSAffineTransformStruct is a type alias for the raw NSAffineTransformStruct value-type struct.
-type NSAffineTransformStruct = raw.NSAffineTransformStruct
+// A description of the distance between the edges of two rectangles.
+type NSEdgeInsets struct {
+	Top    float64
+	Left   float64
+	Bottom float64
+	Right  float64
+}
 
-// NSDecimal is a type alias for the raw NSDecimal value-type struct.
-type NSDecimal = raw.NSDecimal
+// A structure that contains version information about the currently executing operating system, including major, minor, and patch version numbers.
+type NSOperatingSystemVersion struct {
+	MajorVersion int
+	MinorVersion int
+	PatchVersion int
+}
 
-// NSEdgeInsets is a type alias for the raw NSEdgeInsets value-type struct.
-type NSEdgeInsets = raw.NSEdgeInsets
+type NSRange struct {
+	Location uint
+	Length   uint
+}
 
-// NSFastEnumerationState is a type alias for the raw NSFastEnumerationState value-type struct.
-type NSFastEnumerationState = raw.NSFastEnumerationState
+// Opaque structure containing endian-independent double value.
+type NSSwappedDouble struct {
+	V uint64
+}
 
-// NSHashEnumerator is a type alias for the raw NSHashEnumerator value-type struct.
-type NSHashEnumerator = raw.NSHashEnumerator
-
-// NSHashTableCallBacks is a type alias for the raw NSHashTableCallBacks value-type struct.
-type NSHashTableCallBacks = raw.NSHashTableCallBacks
-
-// NSMapEnumerator is a type alias for the raw NSMapEnumerator value-type struct.
-type NSMapEnumerator = raw.NSMapEnumerator
-
-// NSMapTableKeyCallBacks is a type alias for the raw NSMapTableKeyCallBacks value-type struct.
-type NSMapTableKeyCallBacks = raw.NSMapTableKeyCallBacks
-
-// NSMapTableValueCallBacks is a type alias for the raw NSMapTableValueCallBacks value-type struct.
-type NSMapTableValueCallBacks = raw.NSMapTableValueCallBacks
-
-// NSOperatingSystemVersion is a type alias for the raw NSOperatingSystemVersion value-type struct.
-type NSOperatingSystemVersion = raw.NSOperatingSystemVersion
-
-// NSSwappedDouble is a type alias for the raw NSSwappedDouble value-type struct.
-type NSSwappedDouble = raw.NSSwappedDouble
-
-// NSSwappedFloat is a type alias for the raw NSSwappedFloat value-type struct.
-type NSSwappedFloat = raw.NSSwappedFloat
-
-// NSRange is a type alias for the raw NSRange value-type struct.
-type NSRange = raw.NSRange
-
-// ObjcObject is a type alias for the raw ObjcObject value-type struct.
-type ObjcObject = raw.ObjcObject
+// Opaque type containing an endian-independent float value.
+type NSSwappedFloat struct {
+	V uint
+}

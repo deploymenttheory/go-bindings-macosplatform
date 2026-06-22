@@ -5,151 +5,133 @@
 package mpscore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Matrix wraps [raw.MPSMatrix] with a fluent Go API.
+// Matrix is an idiomatic wrapper over the Objective-C class MPSMatrix.
+//
+// Matrix is an abstract base — you do not construct it directly. Construct one of [TemporaryMatrix] and pass it where a Matrix is accepted.
 type Matrix struct {
-	inner *raw.MPSMatrix
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrix].
-func (x *Matrix) Unwrap() *raw.MPSMatrix { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Matrix) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixFromID adopts an existing object pointer as a Matrix (nil for 0).
+// MatrixFromID adopts an existing Objective-C object as a Matrix
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixFromID(id objc.ID) *Matrix {
 	if id == 0 {
 		return nil
 	}
-	return &Matrix{inner: raw.MPSMatrixFromID(id)}
+	x := &Matrix{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a MPSMatrix object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSMatrix. May not be NULL. @param      descriptor      The MPSMatrixDescriptor. May not be NULL. @return     A valid MPSMatrix object or nil, if failure. @discussion This function returns a MPSMatrix object which uses the supplied MTLBuffer.  The dimensions and stride of the matrix are specified by the MPSMatrixDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.matrices-1) * descriptor.matrixBytes + (descriptor.rows-1) * descriptor.rowBytes + descriptor.columns * (element size) bytes.
-//
-// NewMatrixWithBufferDescriptor creates a new [Matrix].
-func NewMatrixWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *raw.MPSMatrixDescriptor) *Matrix {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:descriptor:"), buffer, descriptor.Ptr())
-	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
+// matrixAdopt wraps an Objective-C object that this code just created as a
+// Matrix (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixAdopt(id objc.ID) *Matrix {
+	if id == 0 {
+		return nil
+	}
+	x := &Matrix{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a MPSMatrix object with a MTLBuffer at a given offset. @param      buffer      The MTLBuffer object which contains the data to use for the MPSMatrix.  May not be NULL. @param      offset      The offset, in bytes, into the buffer at which the data begins. @param      descriptor  The MPSMatrixDescriptor describing the shape of the matrix.
-//
-// NewMatrixWithBufferOffsetDescriptor creates a new [Matrix].
-func NewMatrixWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *raw.MPSMatrixDescriptor) *Matrix {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:offset:descriptor:"), buffer, offset, descriptor.Ptr())
-	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
+// Description returns the object's -description text.
+func (x *Matrix) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Initialize a MPSMatrix object with a descriptor. Allocate the buffer. @param      device      The device with which it will be used @param      descriptor  The shape and style of the matrix @return     A valid MPSMatrix object or nil @discussion The matrix object will be created, but the storage to hold the matrix data will only be allocated when it is needed, typically when the data property is invoked.  In conjunction with -resourceSize, this will allow you to estimate storage needs without actually creating the backing store for the matrix.
-//
-// NewMatrixWithDeviceDescriptor creates a new [Matrix].
-func NewMatrixWithDeviceDescriptor(device metal.MTLDevice, descriptor *raw.MPSMatrixDescriptor) *Matrix {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:descriptor:"), device, descriptor.Ptr())
-	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Matrix) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Flush the underlying MTLBuffer from the device's caches, and invalidate any CPU caches if needed. @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the matrix's MTLBuffer, if any. This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary resources (these are all MTLStorageModePrivate), and buffers that have not yet been allocated, nothing is done. It is more efficient to use this method than to attempt to do this yourself with the data property. @param      commandBuffer       The commandbuffer on which to synchronize
-//
-// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
-func (x *Matrix) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
-	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Matrix) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract       Get the number of bytes used to allocate underyling MTLResources @discussion     This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
-//
-// ResourceSize calls the underlying ResourceSize.
-func (x *Matrix) ResourceSize() uint {
-	return x.inner.ResourceSize()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Matrix) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property   device @discussion The device on which the MPSMatrix will be used.
-//
-// Device calls the underlying Device.
-func (x *Matrix) Device() metal.MTLDevice {
-	return x.inner.Device()
+// ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
+func (x *Matrix) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+	return _r
 }
 
-// @property   rows @discussion The number of rows in a matrix in the MPSMatrix.
-//
-// Rows calls the underlying Rows.
-func (x *Matrix) Rows() uint {
-	return x.inner.Rows()
+// Rows the number of rows in a matrix in the MPSMatrix.
+func (x *Matrix) Rows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+	return _r
 }
 
-// @property   columns @discussion The number of columns in a matrix in the MPSMatrix.
-//
-// Columns calls the underlying Columns.
-func (x *Matrix) Columns() uint {
-	return x.inner.Columns()
+// Columns the number of columns in a matrix in the MPSMatrix.
+func (x *Matrix) Columns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+	return _r
 }
 
-// @property   matrices @discussion The number of matrices in the MPSMatrix.
-//
-// Matrices calls the underlying Matrices.
-func (x *Matrix) Matrices() uint {
-	return x.inner.Matrices()
+// Matrices the number of matrices in the MPSMatrix.
+func (x *Matrix) Matrices() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrices"))
+	return _r
 }
 
-// @property   dataType @discussion The type of the MPSMatrix data.
-//
-// DataType calls the underlying DataType.
-func (x *Matrix) DataType() MPSDataType {
-	return MPSDataType(x.inner.DataType())
+// DataType the type of the MPSMatrix data.
+func (x *Matrix) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// @property   rowBytes @discussion The stride, in bytes, between corresponding elements of consecutive rows.
-//
-// RowBytes calls the underlying RowBytes.
-func (x *Matrix) RowBytes() uint {
-	return x.inner.RowBytes()
+// RowBytes the stride, in bytes, between corresponding elements of consecutive rows.
+func (x *Matrix) RowBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowBytes"))
+	return _r
 }
 
-// @property   matrixBytes @discussion The stride, in bytes, between corresponding elements of consecutive matrices.
-//
-// MatrixBytes calls the underlying MatrixBytes.
-func (x *Matrix) MatrixBytes() uint {
-	return x.inner.MatrixBytes()
+// MatrixBytes the stride, in bytes, between corresponding elements of consecutive matrices.
+func (x *Matrix) MatrixBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrixBytes"))
+	return _r
 }
 
-// @property   offset @discussion Byte-offset to the buffer where the matrix data begins - see @ref initWithBuffer: offset: descriptor: .
-//
-// Offset calls the underlying Offset.
-func (x *Matrix) Offset() uint {
-	return x.inner.Offset()
+// Offset byte-offset to the buffer where the matrix data begins - see
+func (x *Matrix) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
-
-// @property   data @discussion An MTLBuffer to store the data.
-//
-// Data calls the underlying Data.
-func (x *Matrix) Data() metal.MTLBuffer {
-	return x.inner.Data()
-}
-
-func (x *Matrix) asMatrix() *raw.MPSMatrix { return x.inner }
 
 // Matrixable is the interface implemented by [Matrix], for mocking and DI.
 type Matrixable interface {
-	Unwrap() *raw.MPSMatrix
-	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
-	ResourceSize() uint
-	Device() metal.MTLDevice
-	Rows() uint
-	Columns() uint
-	Matrices() uint
-	DataType() MPSDataType
-	RowBytes() uint
-	MatrixBytes() uint
-	Offset() uint
-	Data() metal.MTLBuffer
+	obj.Object
+	ResourceSize() int
+	Rows() int
+	Columns() int
+	Matrices() int
+	DataType() DataType
+	RowBytes() int
+	MatrixBytes() int
+	Offset() int
 }
 
 var _ Matrixable = (*Matrix)(nil)
+
+// isMatrix marks Matrix — and, by embedding promotion, its
+// subclasses — as a member of the Matrix hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Matrix) isMatrix() {}
+
+var _ MatrixProvider = (*Matrix)(nil)

@@ -4,33 +4,40 @@
 
 package forcefeedback
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/forcefeedback"
-)
+// A structure containing type-specific information for certain effects.
+type FFCONDITION struct {
+	LOffset              int
+	LPositiveCoefficient int
+	LNegativeCoefficient int
+	DwPositiveSaturation uint
+	DwNegativeSaturation uint
+	LDeadBand            int
+}
 
-// FFCAPABILITIES is a type alias for the raw FFCAPABILITIES value-type struct.
-type FFCAPABILITIES = raw.FFCAPABILITIES
+// Contains type-specific information for the CONSTANTFORCE effect.
+type FFCONSTANTFORCE struct {
+	LMagnitude int
+}
 
-// FFCONDITION is a type alias for the raw FFCONDITION value-type struct.
-type FFCONDITION = raw.FFCONDITION
+// Used by the FFEFFECT structure to specify the optional envelope parameters for an effect.
+type FFENVELOPE struct {
+	DwSize        uint
+	DwAttackLevel uint
+	DwAttackTime  uint
+	DwFadeLevel   uint
+	DwFadeTime    uint
+}
 
-// FFCONSTANTFORCE is a type alias for the raw FFCONSTANTFORCE value-type struct.
-type FFCONSTANTFORCE = raw.FFCONSTANTFORCE
+// A structure containing type-specific information for certain effects.
+type FFPERIODIC struct {
+	DwMagnitude uint
+	LOffset     int
+	DwPhase     uint
+	DwPeriod    uint
+}
 
-// FFCUSTOMFORCE is a type alias for the raw FFCUSTOMFORCE value-type struct.
-type FFCUSTOMFORCE = raw.FFCUSTOMFORCE
-
-// FFEFFECT is a type alias for the raw FFEFFECT value-type struct.
-type FFEFFECT = raw.FFEFFECT
-
-// FFEFFESCAPE is a type alias for the raw FFEFFESCAPE value-type struct.
-type FFEFFESCAPE = raw.FFEFFESCAPE
-
-// FFENVELOPE is a type alias for the raw FFENVELOPE value-type struct.
-type FFENVELOPE = raw.FFENVELOPE
-
-// FFPERIODIC is a type alias for the raw FFPERIODIC value-type struct.
-type FFPERIODIC = raw.FFPERIODIC
-
-// FFRAMPFORCE is a type alias for the raw FFRAMPFORCE value-type struct.
-type FFRAMPFORCE = raw.FFRAMPFORCE
+// Contains type-specific information for the RAMPFORCE effect.
+type FFRAMPFORCE struct {
+	LStart int
+	LEnd   int
+}

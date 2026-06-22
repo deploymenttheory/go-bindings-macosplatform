@@ -5,58 +5,80 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RecordingOutput wraps [raw.SCRecordingOutput] with a fluent Go API.
+// RecordingOutput is an idiomatic wrapper over the Objective-C class SCRecordingOutput.
 type RecordingOutput struct {
-	inner *raw.SCRecordingOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCRecordingOutput].
-func (x *RecordingOutput) Unwrap() *raw.SCRecordingOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecordingOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordingOutputFromID adopts an existing object pointer as a RecordingOutput (nil for 0).
+// RecordingOutputFromID adopts an existing Objective-C object as a RecordingOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordingOutputFromID(id objc.ID) *RecordingOutput {
 	if id == 0 {
 		return nil
 	}
-	return &RecordingOutput{inner: raw.SCRecordingOutputFromID(id)}
+	x := &RecordingOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @method initWithConfiguration:delegate: @abstract initialize SCRecordingOutput object with SCRecordingOutputConfiguration and SCRecordingOutputDelegate @param recordingOutputConfiguration the requested recording configuration to be applied to the SCRecordingOutput @parame delegate object conforming SCRecordingOutputDelegate protocol. Clients must specify a delegate so that they can be notified about recording event. @discussion Client can create a SCRecordingOutput with this initializer and add to SCStream to record all captured media into one recording file given output url specified in recordingOutputConfig. The recording will be using H264 and file format is MPEG-4.
-//
-// NewRecordingOutputWithConfigurationDelegate creates a new [RecordingOutput].
-func NewRecordingOutputWithConfigurationDelegate(recordingOutputConfiguration *raw.SCRecordingOutputConfiguration, delegate raw.SCRecordingOutputDelegate) *RecordingOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCRecordingOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:delegate:"), recordingOutputConfiguration.Ptr(), delegate)
-	return &RecordingOutput{inner: raw.SCRecordingOutputFromID(_id)}
+// recordingOutputAdopt wraps an Objective-C object that this code just created as a
+// RecordingOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordingOutputAdopt(id objc.ID) *RecordingOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &RecordingOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract Indicates current duration of recording to the output file.
-//
-// RecordedDuration calls the underlying RecordedDuration.
-func (x *RecordingOutput) RecordedDuration() coremedia.CMTime {
-	return x.inner.RecordedDuration()
+// Description returns the object's -description text.
+func (x *RecordingOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract Indicates current size, in bytes, of the data recorded to the output file.
-//
-// RecordedFileSize calls the underlying RecordedFileSize.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecordingOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecordingOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RecordingOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRecordingOutput creates a new RecordingOutput.
+func NewRecordingOutput() *RecordingOutput {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCRecordingOutput")), objc.RegisterName("new"))
+	return recordingOutputAdopt(_id)
+}
+
+// RecordedFileSize indicates current size, in bytes, of the data recorded to the output file.
 func (x *RecordingOutput) RecordedFileSize() int {
-	return x.inner.RecordedFileSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recordedFileSize"))
+	return _r
 }
 
 // RecordingOutputable is the interface implemented by [RecordingOutput], for mocking and DI.
 type RecordingOutputable interface {
-	Unwrap() *raw.SCRecordingOutput
-	RecordedDuration() coremedia.CMTime
+	obj.Object
 	RecordedFileSize() int
 }
 

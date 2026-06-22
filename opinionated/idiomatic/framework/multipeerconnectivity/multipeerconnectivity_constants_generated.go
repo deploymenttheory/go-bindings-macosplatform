@@ -5,12 +5,9 @@
 package multipeerconnectivity
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// MCErrorDomain returns the string constant MCErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MCErrorDomain() objc.ID {
-	return purego.CFConstant(raw.MCErrorDomain())
-}
+// MCErrorDomain returns the string constant MCErrorDomain, for use as a dictionary key or argument.
+func MCErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MCErrorDomain"))) }

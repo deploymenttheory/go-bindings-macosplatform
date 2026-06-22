@@ -5,86 +5,93 @@
 package soundanalysis
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
+// TimeDurationConstraint is an idiomatic wrapper over the Objective-C class SNTimeDurationConstraint.
 //
-// TimeDurationConstraint wraps [raw.SNTimeDurationConstraint] with a fluent Go API.
+// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
 type TimeDurationConstraint struct {
-	inner *raw.SNTimeDurationConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SNTimeDurationConstraint].
-func (x *TimeDurationConstraint) Unwrap() *raw.SNTimeDurationConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TimeDurationConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// TimeDurationConstraintFromID adopts an existing object pointer as a TimeDurationConstraint (nil for 0).
+// TimeDurationConstraintFromID adopts an existing Objective-C object as a TimeDurationConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func TimeDurationConstraintFromID(id objc.ID) *TimeDurationConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(id)}
+	x := &TimeDurationConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
-//
-// NewTimeDurationConstraintWithEnumeratedDurations creates a new [TimeDurationConstraint].
-func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations *foundation.NSArray[*foundation.NSValue]) *TimeDurationConstraint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnumeratedDurations:"), enumeratedDurations.Ptr())
-	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(_id)}
-}
-
-// Initializes a range-type constraint. - Parameter durationRange: A continuous range of duration values (represented as CMTime values) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeRange`, and which constrains durations values to the provided range.
-//
-// NewTimeDurationConstraintWithDurationRange creates a new [TimeDurationConstraint].
-func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRange) *TimeDurationConstraint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDurationRange:"), durationRange)
-	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(_id)}
-}
-
-// The time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
-//
-// Type calls the underlying Type.
-func (x *TimeDurationConstraint) Type() SNTimeDurationConstraintType {
-	return SNTimeDurationConstraintType(x.inner.Type())
-}
-
-// If the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
-//
-// EnumeratedDurations returns the collection as a Go slice.
-func (x *TimeDurationConstraint) EnumeratedDurations() []*foundation.NSValue {
-	arr := x.inner.EnumeratedDurations()
-	if arr == nil {
+// timeDurationConstraintAdopt wraps an Objective-C object that this code just created as a
+// TimeDurationConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func timeDurationConstraintAdopt(id objc.ID) *TimeDurationConstraint {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+	x := &TimeDurationConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// If the constraint type is range, then the range of allowable window durations. - Returns: If the constraint type is range, a CMTimeRange representing the range of allowable window durations. If the constraint type is not range, `kCMTimeRangeInvalid`. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'range'. The constraint type is considered to be 'range' if the `type` property is equal to `SNTimeDurationConstraintTypeRange`.
+// Description returns the object's -description text.
+func (x *TimeDurationConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TimeDurationConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TimeDurationConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TimeDurationConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTimeDurationConstraintWithEnumeratedDurations initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
+func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations []obj.Object) *TimeDurationConstraint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnumeratedDurations:"), purego.SliceToNSArray(enumeratedDurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return timeDurationConstraintAdopt(_id)
+}
+
+// Type the time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
+func (x *TimeDurationConstraint) Type() TimeDurationConstraintType {
+	_r := objc.Send[TimeDurationConstraintType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
+
+// EnumeratedDurations if the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
 //
-// DurationRange calls the underlying DurationRange.
-func (x *TimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
-	return x.inner.DurationRange()
+// EnumeratedDurations returns the collection as a Go slice.
+func (x *TimeDurationConstraint) EnumeratedDurations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedDurations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TimeDurationConstraintable is the interface implemented by [TimeDurationConstraint], for mocking and DI.
 type TimeDurationConstraintable interface {
-	Unwrap() *raw.SNTimeDurationConstraint
-	Type() SNTimeDurationConstraintType
-	EnumeratedDurations() []*foundation.NSValue
-	DurationRange() coremedia.CMTimeRange
+	obj.Object
+	Type() TimeDurationConstraintType
+	EnumeratedDurations() []obj.Object
 }
 
 var _ TimeDurationConstraintable = (*TimeDurationConstraint)(nil)

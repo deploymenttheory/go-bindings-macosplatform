@@ -5,57 +5,112 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AXAnimatedImagesEnabled calls [raw.AXAnimatedImagesEnabled] (C function AXAnimatedImagesEnabled).
+var _fnAXAnimatedImagesEnabled func() bool
+
+// AXAnimatedImagesEnabled calls the Accessibility framework function AXAnimatedImagesEnabled.
 func AXAnimatedImagesEnabled() bool {
-	return raw.AXAnimatedImagesEnabled()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXAnimatedImagesEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnAXAnimatedImagesEnabled, _lib, "AXAnimatedImagesEnabled")
+	}
+	return _fnAXAnimatedImagesEnabled()
 }
 
-// AXAssistiveAccessEnabled calls [raw.AXAssistiveAccessEnabled] (C function AXAssistiveAccessEnabled).
+var _fnAXAssistiveAccessEnabled func() bool
+
+// AXAssistiveAccessEnabled calls the Accessibility framework function AXAssistiveAccessEnabled.
 func AXAssistiveAccessEnabled() bool {
-	return raw.AXAssistiveAccessEnabled()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXAssistiveAccessEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnAXAssistiveAccessEnabled, _lib, "AXAssistiveAccessEnabled")
+	}
+	return _fnAXAssistiveAccessEnabled()
 }
 
-// AXNameFromColor calls [raw.AXNameFromColor] (C function AXNameFromColor).
-func AXNameFromColor(color unsafe.Pointer) *foundation.NSString {
-	return raw.AXNameFromColor(color)
+var _fnAXNameFromColor func(objc.ID) objc.ID
+
+// AXNameFromColor calls the Accessibility framework function AXNameFromColor.
+func AXNameFromColor(color obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXNameFromColor == nil {
+		ebipurego.RegisterLibFunc(&_fnAXNameFromColor, _lib, "AXNameFromColor")
+	}
+	_ret := _fnAXNameFromColor(objref.IDOf(color))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// AXOpenSettingsFeature calls [raw.AXOpenSettingsFeature] (C function AXOpenSettingsFeature).
-func AXOpenSettingsFeature(feature AXSettingsFeature, completionHandler func(unsafe.Pointer)) {
-	raw.AXOpenSettingsFeature(raw.AXSettingsFeature(feature), completionHandler)
+var _fnAXOpenSettingsFeatureIsSupported func(SettingsFeature) uint8
+
+// AXOpenSettingsFeatureIsSupported calls the Accessibility framework function AXOpenSettingsFeatureIsSupported.
+func AXOpenSettingsFeatureIsSupported(feature SettingsFeature) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXOpenSettingsFeatureIsSupported == nil {
+		ebipurego.RegisterLibFunc(&_fnAXOpenSettingsFeatureIsSupported, _lib, "AXOpenSettingsFeatureIsSupported")
+	}
+	return _fnAXOpenSettingsFeatureIsSupported(feature)
 }
 
-// AXOpenSettingsFeatureIsSupported calls [raw.AXOpenSettingsFeatureIsSupported] (C function AXOpenSettingsFeatureIsSupported).
-func AXOpenSettingsFeatureIsSupported(feature AXSettingsFeature) uint8 {
-	return raw.AXOpenSettingsFeatureIsSupported(raw.AXSettingsFeature(feature))
-}
+var _fnAXPrefersActionSliderAlternative func() bool
 
-// AXPrefersActionSliderAlternative calls [raw.AXPrefersActionSliderAlternative] (C function AXPrefersActionSliderAlternative).
+// AXPrefersActionSliderAlternative calls the Accessibility framework function AXPrefersActionSliderAlternative.
 func AXPrefersActionSliderAlternative() bool {
-	return raw.AXPrefersActionSliderAlternative()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXPrefersActionSliderAlternative == nil {
+		ebipurego.RegisterLibFunc(&_fnAXPrefersActionSliderAlternative, _lib, "AXPrefersActionSliderAlternative")
+	}
+	return _fnAXPrefersActionSliderAlternative()
 }
 
-// AXPrefersHorizontalTextLayout calls [raw.AXPrefersHorizontalTextLayout] (C function AXPrefersHorizontalTextLayout).
+var _fnAXPrefersHorizontalTextLayout func() bool
+
+// AXPrefersHorizontalTextLayout calls the Accessibility framework function AXPrefersHorizontalTextLayout.
 func AXPrefersHorizontalTextLayout() bool {
-	return raw.AXPrefersHorizontalTextLayout()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXPrefersHorizontalTextLayout == nil {
+		ebipurego.RegisterLibFunc(&_fnAXPrefersHorizontalTextLayout, _lib, "AXPrefersHorizontalTextLayout")
+	}
+	return _fnAXPrefersHorizontalTextLayout()
 }
 
-// AXPrefersNonBlinkingTextInsertionIndicator calls [raw.AXPrefersNonBlinkingTextInsertionIndicator] (C function AXPrefersNonBlinkingTextInsertionIndicator).
+var _fnAXPrefersNonBlinkingTextInsertionIndicator func() bool
+
+// AXPrefersNonBlinkingTextInsertionIndicator calls the Accessibility framework function AXPrefersNonBlinkingTextInsertionIndicator.
 func AXPrefersNonBlinkingTextInsertionIndicator() bool {
-	return raw.AXPrefersNonBlinkingTextInsertionIndicator()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXPrefersNonBlinkingTextInsertionIndicator == nil {
+		ebipurego.RegisterLibFunc(&_fnAXPrefersNonBlinkingTextInsertionIndicator, _lib, "AXPrefersNonBlinkingTextInsertionIndicator")
+	}
+	return _fnAXPrefersNonBlinkingTextInsertionIndicator()
 }
 
-// AXReduceHighlightingEffectsEnabled calls [raw.AXReduceHighlightingEffectsEnabled] (C function AXReduceHighlightingEffectsEnabled).
+var _fnAXReduceHighlightingEffectsEnabled func() bool
+
+// AXReduceHighlightingEffectsEnabled calls the Accessibility framework function AXReduceHighlightingEffectsEnabled.
 func AXReduceHighlightingEffectsEnabled() bool {
-	return raw.AXReduceHighlightingEffectsEnabled()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXReduceHighlightingEffectsEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnAXReduceHighlightingEffectsEnabled, _lib, "AXReduceHighlightingEffectsEnabled")
+	}
+	return _fnAXReduceHighlightingEffectsEnabled()
 }
 
-// AXShowBordersEnabled calls [raw.AXShowBordersEnabled] (C function AXShowBordersEnabled).
+var _fnAXShowBordersEnabled func() bool
+
+// AXShowBordersEnabled calls the Accessibility framework function AXShowBordersEnabled.
 func AXShowBordersEnabled() bool {
-	return raw.AXShowBordersEnabled()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXShowBordersEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnAXShowBordersEnabled, _lib, "AXShowBordersEnabled")
+	}
+	return _fnAXShowBordersEnabled()
 }

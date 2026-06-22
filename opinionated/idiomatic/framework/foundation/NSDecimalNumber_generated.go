@@ -5,241 +5,124 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for representing and performing arithmetic on base-10 numbers.
+// DecimalNumber is an idiomatic wrapper over the Objective-C class NSDecimalNumber.
 //
-// DecimalNumber wraps [raw.NSDecimalNumber] with a fluent Go API.
+// It embeds [Number], promoting that type's methods.
+//
+// An object for representing and performing arithmetic on base-10 numbers.
 type DecimalNumber struct {
-	inner *raw.NSDecimalNumber
+	Number
 }
 
-// Unwrap returns the underlying [raw.NSDecimalNumber].
-func (x *DecimalNumber) Unwrap() *raw.NSDecimalNumber { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecimalNumber) ID() objc.ID { return x.inner.Ptr() }
-
-// DecimalNumberFromID adopts an existing object pointer as a DecimalNumber (nil for 0).
+// DecimalNumberFromID adopts an existing Objective-C object as a DecimalNumber
+// (nil for 0), retaining it and registering a release finalizer.
 func DecimalNumberFromID(id objc.ID) *DecimalNumber {
 	if id == 0 {
 		return nil
 	}
-	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(id)}
-}
-
-// Initializes a decimal number using the given mantissa, exponent, and sign.
-//
-// NewDecimalNumberWithMantissaExponentIsNegative creates a new [DecimalNumber].
-func NewDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *DecimalNumber {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMantissa:exponent:isNegative:"), mantissa, exponent, flag)
-	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
-}
-
-// Initializes a decimal number to represent a given decimal.
-//
-// NewDecimalNumberWithDecimal creates a new [DecimalNumber].
-func NewDecimalNumberWithDecimal(dcm raw.NSDecimal) *DecimalNumber {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDecimal:"), dcm)
-	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
-}
-
-// Initializes a decimal number so that its value is equivalent to that in a given numeric string.
-//
-// NewDecimalNumberWithString creates a new [DecimalNumber].
-func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(numberValue).Ptr())
-	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
-}
-
-// Initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
-//
-// NewDecimalNumberWithStringLocale creates a new [DecimalNumber].
-func NewDecimalNumberWithStringLocale(numberValue string, locale objc.ID) *DecimalNumber {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumber")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:locale:"), foundation.NSStringStringWithUTF8String(numberValue).Ptr(), locale)
-	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DecimalNumber) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumber {
-	x.inner.NSNumber.NSValue.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &DecimalNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Adds this number to another given number.
-//
-// DecimalNumberByAdding calls the underlying DecimalNumberByAdding.
-func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
-	_r := x.inner.DecimalNumberByAdding(decimalNumber)
-	if _r == nil {
+// decimalNumberAdopt wraps an Objective-C object that this code just created as a
+// DecimalNumber (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decimalNumberAdopt(id objc.ID) *DecimalNumber {
+	if id == 0 {
 		return nil
 	}
-	return &DecimalNumber{inner: _r}
+	x := &DecimalNumber{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Adds this number to another given number using the specified behavior.
-//
-// DecimalNumberByAddingWithBehavior calls the underlying DecimalNumberByAddingWithBehavior.
-func (x *DecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberByAddingWithBehavior(decimalNumber, behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// NewDecimalNumberWithMantissaExponentIsNegative initializes a decimal number using the given mantissa, exponent, and sign.
+func NewDecimalNumberWithMantissaExponentIsNegative(mantissa uint64, exponent int16, flag bool) *DecimalNumber {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMantissa:exponent:isNegative:"), mantissa, exponent, flag)
+	return decimalNumberAdopt(_id)
 }
 
-// Subtracts another given number from this one.
-//
-// DecimalNumberBySubtracting calls the underlying DecimalNumberBySubtracting.
-func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
-	_r := x.inner.DecimalNumberBySubtracting(decimalNumber)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// NewDecimalNumberWithString initializes a decimal number so that its value is equivalent to that in a given numeric string.
+func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(numberValue))
+	return decimalNumberAdopt(_id)
 }
 
-// Subtracts this a given number from this one using the specified behavior.
-//
-// DecimalNumberBySubtractingWithBehavior calls the underlying DecimalNumberBySubtractingWithBehavior.
-func (x *DecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberBySubtractingWithBehavior(decimalNumber, behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// NewDecimalNumberWithStringLocale initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
+func NewDecimalNumberWithStringLocale(numberValue string, locale obj.Object) *DecimalNumber {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:locale:"), purego.NSString(numberValue), objref.IDOf(locale))
+	return decimalNumberAdopt(_id)
 }
 
-// Multiplies the number by another given number.
-//
-// DecimalNumberByMultiplyingBy calls the underlying DecimalNumberByMultiplyingBy.
-func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
-	_r := x.inner.DecimalNumberByMultiplyingBy(decimalNumber)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *DecimalNumber) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
-// Multiplies this number by another given number using the specified behavior.
-//
-// DecimalNumberByMultiplyingByWithBehavior calls the underlying DecimalNumberByMultiplyingByWithBehavior.
-func (x *DecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberByMultiplyingByWithBehavior(decimalNumber, behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// DecimalNumberByAdding adds this number to another given number.
+func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByAdding:"), objref.IDOf(decimalNumber))
+	return DecimalNumberFromID(_r)
 }
 
-// Divides the number by another given number.
-//
-// DecimalNumberByDividingBy calls the underlying DecimalNumberByDividingBy.
-func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
-	_r := x.inner.DecimalNumberByDividingBy(decimalNumber)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// DecimalNumberBySubtracting subtracts another given number from this one.
+func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberBySubtracting:"), objref.IDOf(decimalNumber))
+	return DecimalNumberFromID(_r)
 }
 
-// Divides this number by another given number using the specified behavior.
-//
-// DecimalNumberByDividingByWithBehavior calls the underlying DecimalNumberByDividingByWithBehavior.
-func (x *DecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberByDividingByWithBehavior(decimalNumber, behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// DecimalNumberByMultiplyingBy multiplies the number by another given number.
+func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByMultiplyingBy:"), objref.IDOf(decimalNumber))
+	return DecimalNumberFromID(_r)
 }
 
-// Raises the number to a given power.
-//
-// DecimalNumberByRaisingToPower calls the underlying DecimalNumberByRaisingToPower.
-func (x *DecimalNumber) DecimalNumberByRaisingToPower(power uint) *DecimalNumber {
-	_r := x.inner.DecimalNumberByRaisingToPower(power)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// DecimalNumberByDividingBy divides the number by another given number.
+func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByDividingBy:"), objref.IDOf(decimalNumber))
+	return DecimalNumberFromID(_r)
 }
 
-// Raises the number to a given power using the specified behavior.
-//
-// DecimalNumberByRaisingToPowerWithBehavior calls the underlying DecimalNumberByRaisingToPowerWithBehavior.
-func (x *DecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberByRaisingToPowerWithBehavior(power, behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+// DecimalNumberByRaisingToPower raises the number to a given power.
+func (x *DecimalNumber) DecimalNumberByRaisingToPower(power int) *DecimalNumber {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByRaisingToPower:"), power)
+	return DecimalNumberFromID(_r)
 }
 
-// Multiplies the number by 10 raised to the given power.
-//
-// DecimalNumberByMultiplyingByPowerOf10 calls the underlying DecimalNumberByMultiplyingByPowerOf10.
+// DecimalNumberByMultiplyingByPowerOf10 multiplies the number by 10 raised to the given power.
 func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
-	_r := x.inner.DecimalNumberByMultiplyingByPowerOf10(power)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:"), power)
+	return DecimalNumberFromID(_r)
 }
-
-// Multiplies the number by 10 raised to the given power using the specified behavior.
-//
-// DecimalNumberByMultiplyingByPowerOf10WithBehavior calls the underlying DecimalNumberByMultiplyingByPowerOf10WithBehavior.
-func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberByMultiplyingByPowerOf10WithBehavior(power, behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
-}
-
-// Returns a rounded version of the decimal number using the specified rounding behavior.
-//
-// DecimalNumberByRoundingAccordingToBehavior calls the underlying DecimalNumberByRoundingAccordingToBehavior.
-func (x *DecimalNumber) DecimalNumberByRoundingAccordingToBehavior(behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
-	_r := x.inner.DecimalNumberByRoundingAccordingToBehavior(behavior)
-	if _r == nil {
-		return nil
-	}
-	return &DecimalNumber{inner: _r}
-}
-
-func (x *DecimalNumber) asNumber() *raw.NSNumber { return &x.inner.NSNumber }
-
-func (x *DecimalNumber) asValue() *raw.NSValue { return &x.inner.NSNumber.NSValue }
-
-func (x *DecimalNumber) asObject() *raw.NSObject { return &x.inner.NSNumber.NSValue.NSObject }
 
 // DecimalNumberable is the interface implemented by [DecimalNumber], for mocking and DI.
 type DecimalNumberable interface {
-	Unwrap() *raw.NSDecimalNumber
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumber
-	DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
-	DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
-	DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
-	DecimalNumberBySubtractingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
-	DecimalNumberByMultiplyingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
-	DecimalNumberByMultiplyingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
-	DecimalNumberByDividingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
-	DecimalNumberByDividingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
-	DecimalNumberByRaisingToPower(power uint) *DecimalNumber
-	DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber
+	DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber
+	DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber
+	DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber
+	DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber
+	DecimalNumberByRaisingToPower(power int) *DecimalNumber
 	DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber
-	DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
-	DecimalNumberByRoundingAccordingToBehavior(behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
 }
 
 var _ DecimalNumberable = (*DecimalNumber)(nil)
+
+var _ NumberProvider = (*DecimalNumber)(nil)
+
+var _ ValueProvider = (*DecimalNumber)(nil)

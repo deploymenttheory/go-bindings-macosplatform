@@ -1,0 +1,8 @@
+func (x *Array) ComponentsJoinedByString(separator string) string {
+_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsJoinedByString:"), purego.NSString(separator))
+if _r == 0 {
+return ""
+}
+return purego.GoString(_r)
+}
+

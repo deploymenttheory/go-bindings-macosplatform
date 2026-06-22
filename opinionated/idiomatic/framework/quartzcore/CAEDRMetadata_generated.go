@@ -5,41 +5,76 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Metadata describing how extended dynamic range (EDR) values should be tone mapped.
+// EDRMetadata is an idiomatic wrapper over the Objective-C class CAEDRMetadata.
 //
-// EDRMetadata wraps [raw.CAEDRMetadata] with a fluent Go API.
+// Metadata describing how extended dynamic range (EDR) values should be tone mapped.
 type EDRMetadata struct {
-	inner *raw.CAEDRMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAEDRMetadata].
-func (x *EDRMetadata) Unwrap() *raw.CAEDRMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EDRMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// EDRMetadataFromID adopts an existing object pointer as a EDRMetadata (nil for 0).
+// EDRMetadataFromID adopts an existing Objective-C object as a EDRMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func EDRMetadataFromID(id objc.ID) *EDRMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &EDRMetadata{inner: raw.CAEDRMetadataFromID(id)}
+	x := &EDRMetadata{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEDRMetadata creates a new [EDRMetadata].
+// eDRMetadataAdopt wraps an Objective-C object that this code just created as a
+// EDRMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eDRMetadataAdopt(id objc.ID) *EDRMetadata {
+	if id == 0 {
+		return nil
+	}
+	x := &EDRMetadata{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EDRMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EDRMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EDRMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EDRMetadata) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEDRMetadata creates a new EDRMetadata.
 func NewEDRMetadata() *EDRMetadata {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAEDRMetadata")), objc.RegisterName("new"))
-	return &EDRMetadata{inner: raw.CAEDRMetadataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("new"))
+	return eDRMetadataAdopt(_id)
 }
 
 // EDRMetadataable is the interface implemented by [EDRMetadata], for mocking and DI.
 type EDRMetadataable interface {
-	Unwrap() *raw.CAEDRMetadata
+	obj.Object
 }
 
 var _ EDRMetadataable = (*EDRMetadata)(nil)

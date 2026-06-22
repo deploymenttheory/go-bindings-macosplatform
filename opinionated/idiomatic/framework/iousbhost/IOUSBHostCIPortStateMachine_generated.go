@@ -5,171 +5,186 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// @class   IOUSBHostCIPortStateMachine @brief   The object representing the state of a user-mode USB host controller root port @details This class assists with tracking internal state transitions of a user-mode USB host controller root port, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses. IOUSBHostCIPortStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
+// HostCIPortStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIPortStateMachine.
 //
-// HostCIPortStateMachine wraps [raw.IOUSBHostCIPortStateMachine] with a fluent Go API.
+// The object representing the state of a user-mode USB host controller root port This class assists with tracking internal state transitions of a user-mode USB host controller root port, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses. IOUSBHostCIPortStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
 type HostCIPortStateMachine struct {
-	inner *raw.IOUSBHostCIPortStateMachine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostCIPortStateMachine].
-func (x *HostCIPortStateMachine) Unwrap() *raw.IOUSBHostCIPortStateMachine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostCIPortStateMachine) ID() objc.ID { return x.inner.Ptr() }
-
-// HostCIPortStateMachineFromID adopts an existing object pointer as a HostCIPortStateMachine (nil for 0).
+// HostCIPortStateMachineFromID adopts an existing Objective-C object as a HostCIPortStateMachine
+// (nil for 0), retaining it and registering a release finalizer.
 func HostCIPortStateMachineFromID(id objc.ID) *HostCIPortStateMachine {
 	if id == 0 {
 		return nil
 	}
-	return &HostCIPortStateMachine{inner: raw.IOUSBHostCIPortStateMachineFromID(id)}
-}
-
-// @brief       Initializes an IOUSBHostCIPortStateMachine object @discussion  The IOUSBHostCIPortStateMachine defaults to the IOUSBHostCIPortStateOff state. @param       interface IOUSBHostControllerInterface which will be used to send command responses. @param       portNumber NSUInteger for the root port number tracked by this instance @return      IOUSBHostCIPortStateMachine instance, to be released by the caller.
-//
-// NewHostCIPortStateMachineWithInterfacePortNumberError creates a new [HostCIPortStateMachine].
-func NewHostCIPortStateMachineWithInterfacePortNumberError(interface_ *raw.IOUSBHostControllerInterface, portNumber uint) (*HostCIPortStateMachine, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostCIPortStateMachine")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:portNumber:error:"), interface_.Ptr(), portNumber, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &HostCIPortStateMachine{inner: raw.IOUSBHostCIPortStateMachineFromID(_id)}, nil
-}
-
-// @brief       Set the powered state of the port @discussion  Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to NO.
-//
-// WithPowered sets the powered property and returns the receiver for chaining.
-func (x *HostCIPortStateMachine) WithPowered(powered bool) *HostCIPortStateMachine {
-	x.inner.SetPowered(powered)
+	x := &HostCIPortStateMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @brief       Set the connection state of the port @discussion  The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
-//
-// WithConnected sets the connected property and returns the receiver for chaining.
-func (x *HostCIPortStateMachine) WithConnected(connected bool) *HostCIPortStateMachine {
-	x.inner.SetConnected(connected)
-	return x
-}
-
-// @brief       Set the overcurrent state of the port @discussion  The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
-//
-// WithOvercurrent sets the overcurrent property and returns the receiver for chaining.
-func (x *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPortStateMachine {
-	x.inner.SetOvercurrent(overcurrent)
-	return x
-}
-
-// @brief       Inspect an IOUSBHostCIMessage command @discussion  The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @return      BOOL YES if the command is targeting a controller, and can be handled in the current state BOOL NO if the command does not target a controller, or cannot be handled in the current state
-//
-// InspectCommandError calls the underlying InspectCommandError.
-func (x *HostCIPortStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
-	return x.inner.InspectCommandError(command)
-}
-
-// @brief       Advance the state machine and respond to an IOUSBHostCIMessage command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
-//
-// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
-func (x *HostCIPortStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
-	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
-}
-
-// UpdateLinkStateSpeedInhibitLinkStateChangeError calls the underlying UpdateLinkStateSpeedInhibitLinkStateChangeError.
-func (x *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChangeError(linkState IOUSBHostCILinkState, speed IOUSBHostCIDeviceSpeed, inhibitLinkStateChange bool) (bool, error) {
-	return x.inner.UpdateLinkStateSpeedInhibitLinkStateChangeError(raw.IOUSBHostCILinkState(linkState), raw.IOUSBHostCIDeviceSpeed(speed), inhibitLinkStateChange)
-}
-
-// PortNumber calls the underlying PortNumber.
-func (x *HostCIPortStateMachine) PortNumber() uint {
-	return x.inner.PortNumber()
-}
-
-// PortState calls the underlying PortState.
-func (x *HostCIPortStateMachine) PortState() IOUSBHostCIPortState {
-	return IOUSBHostCIPortState(x.inner.PortState())
-}
-
-// PortStatus calls the underlying PortStatus.
-func (x *HostCIPortStateMachine) PortStatus() uint32 {
-	return x.inner.PortStatus()
-}
-
-// ControllerInterface calls the underlying ControllerInterface.
-func (x *HostCIPortStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := x.inner.ControllerInterface()
-	if _r == nil {
+// hostCIPortStateMachineAdopt wraps an Objective-C object that this code just created as a
+// HostCIPortStateMachine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostCIPortStateMachineAdopt(id objc.ID) *HostCIPortStateMachine {
+	if id == 0 {
 		return nil
 	}
-	return &HostControllerInterface{inner: _r}
+	x := &HostCIPortStateMachine{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief       Set the powered state of the port @discussion  Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to NO.
-//
-// Powered calls the underlying Powered.
+// Description returns the object's -description text.
+func (x *HostCIPortStateMachine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostCIPortStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostCIPortStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HostCIPortStateMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHostCIPortStateMachineWithInterfacePortNumberError initializes an IOUSBHostCIPortStateMachine object The IOUSBHostCIPortStateMachine defaults to the IOUSBHostCIPortStateOff state.
+func NewHostCIPortStateMachineWithInterfacePortNumberError(interface_ *HostControllerInterface, portNumber int) (result *HostCIPortStateMachine, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIPortStateMachine")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:portNumber:error:"), objref.IDOf(interface_), portNumber, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return hostCIPortStateMachineAdopt(_id), nil
+}
+
+// WithPowered set the powered state of the port Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to NO.
+func (x *HostCIPortStateMachine) WithPowered(powered bool) *HostCIPortStateMachine {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPowered:"), powered)
+	return x
+}
+
+// WithConnected set the connection state of the port The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
+func (x *HostCIPortStateMachine) WithConnected(connected bool) *HostCIPortStateMachine {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), connected)
+	return x
+}
+
+// WithOvercurrent set the overcurrent state of the port The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
+func (x *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPortStateMachine {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOvercurrent:"), overcurrent)
+	return x
+}
+
+// UpdateLinkStateSpeedInhibitLinkStateChange wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChange(linkState HostCILinkState, speed HostCIDeviceSpeed, inhibitLinkStateChange bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateLinkState:speed:inhibitLinkStateChange:error:"), linkState, speed, inhibitLinkStateChange, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// PortNumber wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) PortNumber() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("portNumber"))
+	return _r
+}
+
+// PortState wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) PortState() HostCIPortState {
+	_r := objc.Send[HostCIPortState](objref.IDOf(x), objc.RegisterName("portState"))
+	return _r
+}
+
+// PortStatus wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) PortStatus() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("portStatus"))
+	return _r
+}
+
+// ControllerInterface wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+	return HostControllerInterfaceFromID(_r)
+}
+
+// Powered set the powered state of the port Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to NO.
 func (x *HostCIPortStateMachine) Powered() bool {
-	return x.inner.Powered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("powered"))
+	return _r
 }
 
-// SetPowered calls the underlying SetPowered.
+// SetPowered wraps the corresponding Objective-C method.
 func (x *HostCIPortStateMachine) SetPowered(powered bool) {
-	x.inner.SetPowered(powered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPowered:"), powered)
 }
 
-// @brief       Set the connection state of the port @discussion  The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
-//
-// Connected calls the underlying Connected.
+// Connected set the connection state of the port The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
 func (x *HostCIPortStateMachine) Connected() bool {
-	return x.inner.Connected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("connected"))
+	return _r
 }
 
-// SetConnected calls the underlying SetConnected.
+// SetConnected wraps the corresponding Objective-C method.
 func (x *HostCIPortStateMachine) SetConnected(connected bool) {
-	x.inner.SetConnected(connected)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), connected)
 }
 
-// @brief       Set the overcurrent state of the port @discussion  The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
-//
-// Overcurrent calls the underlying Overcurrent.
+// Overcurrent set the overcurrent state of the port The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
 func (x *HostCIPortStateMachine) Overcurrent() bool {
-	return x.inner.Overcurrent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("overcurrent"))
+	return _r
 }
 
-// SetOvercurrent calls the underlying SetOvercurrent.
+// SetOvercurrent wraps the corresponding Objective-C method.
 func (x *HostCIPortStateMachine) SetOvercurrent(overcurrent bool) {
-	x.inner.SetOvercurrent(overcurrent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOvercurrent:"), overcurrent)
 }
 
-// LinkState calls the underlying LinkState.
-func (x *HostCIPortStateMachine) LinkState() IOUSBHostCILinkState {
-	return IOUSBHostCILinkState(x.inner.LinkState())
+// LinkState wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) LinkState() HostCILinkState {
+	_r := objc.Send[HostCILinkState](objref.IDOf(x), objc.RegisterName("linkState"))
+	return _r
 }
 
-// Speed calls the underlying Speed.
-func (x *HostCIPortStateMachine) Speed() IOUSBHostCIDeviceSpeed {
-	return IOUSBHostCIDeviceSpeed(x.inner.Speed())
+// Speed wraps the corresponding Objective-C method.
+func (x *HostCIPortStateMachine) Speed() HostCIDeviceSpeed {
+	_r := objc.Send[HostCIDeviceSpeed](objref.IDOf(x), objc.RegisterName("speed"))
+	return _r
 }
 
 // HostCIPortStateMachineable is the interface implemented by [HostCIPortStateMachine], for mocking and DI.
 type HostCIPortStateMachineable interface {
-	Unwrap() *raw.IOUSBHostCIPortStateMachine
+	obj.Object
 	WithPowered(powered bool) *HostCIPortStateMachine
 	WithConnected(connected bool) *HostCIPortStateMachine
 	WithOvercurrent(overcurrent bool) *HostCIPortStateMachine
-	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
-	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error)
-	UpdateLinkStateSpeedInhibitLinkStateChangeError(linkState IOUSBHostCILinkState, speed IOUSBHostCIDeviceSpeed, inhibitLinkStateChange bool) (bool, error)
-	PortNumber() uint
-	PortState() IOUSBHostCIPortState
+	UpdateLinkStateSpeedInhibitLinkStateChange(linkState HostCILinkState, speed HostCIDeviceSpeed, inhibitLinkStateChange bool) error
+	PortNumber() int
+	PortState() HostCIPortState
 	PortStatus() uint32
 	ControllerInterface() *HostControllerInterface
 	Powered() bool
@@ -178,8 +193,8 @@ type HostCIPortStateMachineable interface {
 	SetConnected(connected bool)
 	Overcurrent() bool
 	SetOvercurrent(overcurrent bool)
-	LinkState() IOUSBHostCILinkState
-	Speed() IOUSBHostCIDeviceSpeed
+	LinkState() HostCILinkState
+	Speed() HostCIDeviceSpeed
 }
 
 var _ HostCIPortStateMachineable = (*HostCIPortStateMachine)(nil)

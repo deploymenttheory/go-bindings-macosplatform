@@ -5,53 +5,85 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.
+// WKContentWorld is an idiomatic wrapper over the Objective-C class WKContentWorld.
 //
-// WKContentWorld wraps [raw.WKContentWorld] with a fluent Go API.
+// An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.
 type WKContentWorld struct {
-	inner *raw.WKContentWorld
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKContentWorld].
-func (x *WKContentWorld) Unwrap() *raw.WKContentWorld { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKContentWorld) ID() objc.ID { return x.inner.Ptr() }
-
-// WKContentWorldFromID adopts an existing object pointer as a WKContentWorld (nil for 0).
+// WKContentWorldFromID adopts an existing Objective-C object as a WKContentWorld
+// (nil for 0), retaining it and registering a release finalizer.
 func WKContentWorldFromID(id objc.ID) *WKContentWorld {
 	if id == 0 {
 		return nil
 	}
-	return &WKContentWorld{inner: raw.WKContentWorldFromID(id)}
+	x := &WKContentWorld{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKContentWorld creates a new [WKContentWorld].
+// wKContentWorldAdopt wraps an Objective-C object that this code just created as a
+// WKContentWorld (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKContentWorldAdopt(id objc.ID) *WKContentWorld {
+	if id == 0 {
+		return nil
+	}
+	x := &WKContentWorld{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKContentWorld) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKContentWorld) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKContentWorld) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKContentWorld) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKContentWorld creates a new WKContentWorld.
 func NewWKContentWorld() *WKContentWorld {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKContentWorld")), objc.RegisterName("new"))
-	return &WKContentWorld{inner: raw.WKContentWorldFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("new"))
+	return wKContentWorldAdopt(_id)
 }
 
-// @abstract The name of the WKContentWorld @discussion The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
-//
-// Name calls the underlying Name.
+// Name the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
 func (x *WKContentWorld) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // WKContentWorldable is the interface implemented by [WKContentWorld], for mocking and DI.
 type WKContentWorldable interface {
-	Unwrap() *raw.WKContentWorld
+	obj.Object
 	Name() string
 }
 

@@ -5,120 +5,123 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that downloads a resource asynchronously and saves the data to a file.
+// URLDownload is an idiomatic wrapper over the Objective-C class NSURLDownload.
 //
-// URLDownload wraps [raw.NSURLDownload] with a fluent Go API.
+// An object that downloads a resource asynchronously and saves the data to a file.
 type URLDownload struct {
-	inner *raw.NSURLDownload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLDownload].
-func (x *URLDownload) Unwrap() *raw.NSURLDownload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLDownload) ID() objc.ID { return x.inner.Ptr() }
-
-// URLDownloadFromID adopts an existing object pointer as a URLDownload (nil for 0).
+// URLDownloadFromID adopts an existing Objective-C object as a URLDownload
+// (nil for 0), retaining it and registering a release finalizer.
 func URLDownloadFromID(id objc.ID) *URLDownload {
 	if id == 0 {
 		return nil
 	}
-	return &URLDownload{inner: raw.NSURLDownloadFromID(id)}
+	x := &URLDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns an initialized URL download for a URL request and begins to download the data for the request.
-//
-// NewURLDownloadWithRequestDelegate creates a new [URLDownload].
-func NewURLDownloadWithRequestDelegate(request *raw.NSURLRequest, delegate raw.NSURLDownloadDelegate) *URLDownload {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLDownload")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:delegate:"), request.Ptr(), delegate)
-	return &URLDownload{inner: raw.NSURLDownloadFromID(_id)}
+// uRLDownloadAdopt wraps an Objective-C object that this code just created as a
+// URLDownload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLDownloadAdopt(id objc.ID) *URLDownload {
+	if id == 0 {
+		return nil
+	}
+	x := &URLDownload{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns an initialized NSURLDownload object that will resume downloading the specified data to the specified file and begins the download.
-//
-// NewURLDownloadWithResumeDataDelegatePath creates a new [URLDownload].
-func NewURLDownloadWithResumeDataDelegatePath(resumeData *raw.NSData, delegate raw.NSURLDownloadDelegate, path string) *URLDownload {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLDownload")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResumeData:delegate:path:"), resumeData.Ptr(), delegate, foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &URLDownload{inner: raw.NSURLDownloadFromID(_id)}
+// Description returns the object's -description text.
+func (x *URLDownload) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns whether the receiver deletes partially downloaded files when a download stops prematurely.
-//
-// WithDeletesFileUponFailure sets the deletesFileUponFailure property and returns the receiver for chaining.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLDownload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLDownload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLDownload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLDownload creates a new URLDownload.
+func NewURLDownload() *URLDownload {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLDownload")), objc.RegisterName("new"))
+	return uRLDownloadAdopt(_id)
+}
+
+// WithDeletesFileUponFailure returns whether the receiver deletes partially downloaded files when a download stops prematurely.
 func (x *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload {
-	x.inner.SetDeletesFileUponFailure(deletesFileUponFailure)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLDownload) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLDownload {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLDownload) WithScriptingProperties(scriptingProperties obj.Object) *URLDownload {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Cancels the receiver’s download and deletes the downloaded file.
-//
-// Cancel calls the underlying Cancel.
+// Cancel cancels the receiver’s download and deletes the downloaded file.
 func (x *URLDownload) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Sets the destination path of the downloaded file.
-//
-// SetDestinationAllowOverwrite calls the underlying SetDestinationAllowOverwrite.
+// SetDestinationAllowOverwrite sets the destination path of the downloaded file.
 func (x *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
-	x.inner.SetDestinationAllowOverwrite(foundation.NSStringStringWithUTF8String(path), allowOverwrite)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:allowOverwrite:"), purego.NSString(path), allowOverwrite)
 }
 
-// @abstract Returns the request of the download. @result The request of the download.
-//
-// Request calls the underlying Request.
+// Request returns the request of the download.
 func (x *URLDownload) Request() *URLRequest {
-	_r := x.inner.Request()
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+	return URLRequestFromID(_r)
 }
 
-// @abstract Returns the resume data of a download that is incomplete. @result The resume data. @description resumeData returns the resume data of a download that is incomplete. This data represents the necessary state information that NSURLDownload needs to resume a download. The resume data can later be used when initializing a download with initWithResumeData:delegate:path:. Non-nil is returned if resuming the download seems possible. Non-nil is returned if the download was cancelled or ended in error after some but not all data has been received. The protocol of the download as well as the server must support resuming for non-nil to be returned. In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
-//
-// ResumeData calls the underlying ResumeData.
+// ResumeData returns the resume data of a download that is incomplete.
 func (x *URLDownload) ResumeData() *Data {
-	_r := x.inner.ResumeData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeData"))
+	return DataFromID(_r)
 }
 
-// @abstract Sets whether or not the downloaded file should be deleted upon failure. 1    @description To allow the download to be resumed in case the download ends prematurely, deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file from being deleted. deletesFileUponFailure is YES by default.
-//
-// DeletesFileUponFailure calls the underlying DeletesFileUponFailure.
+// DeletesFileUponFailure sets whether or not the downloaded file should be deleted upon failure. 1
 func (x *URLDownload) DeletesFileUponFailure() bool {
-	return x.inner.DeletesFileUponFailure()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deletesFileUponFailure"))
+	return _r
 }
 
-// SetDeletesFileUponFailure calls the underlying SetDeletesFileUponFailure.
+// SetDeletesFileUponFailure wraps the corresponding Objective-C method.
 func (x *URLDownload) SetDeletesFileUponFailure(deletesFileUponFailure bool) {
-	x.inner.SetDeletesFileUponFailure(deletesFileUponFailure)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
 }
-
-func (x *URLDownload) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLDownloadable is the interface implemented by [URLDownload], for mocking and DI.
 type URLDownloadable interface {
-	Unwrap() *raw.NSURLDownload
+	obj.Object
 	WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLDownload
+	WithScriptingProperties(scriptingProperties obj.Object) *URLDownload
 	Cancel()
 	SetDestinationAllowOverwrite(path string, allowOverwrite bool)
 	Request() *URLRequest

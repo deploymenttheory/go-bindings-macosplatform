@@ -5,140 +5,157 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of windows that display together as a single tabbed window.
+// WindowTabGroup is an idiomatic wrapper over the Objective-C class NSWindowTabGroup.
 //
-// WindowTabGroup wraps [raw.NSWindowTabGroup] with a fluent Go API.
+// A group of windows that display together as a single tabbed window.
 type WindowTabGroup struct {
-	inner *raw.NSWindowTabGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWindowTabGroup].
-func (x *WindowTabGroup) Unwrap() *raw.NSWindowTabGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WindowTabGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// WindowTabGroupFromID adopts an existing object pointer as a WindowTabGroup (nil for 0).
+// WindowTabGroupFromID adopts an existing Objective-C object as a WindowTabGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func WindowTabGroupFromID(id objc.ID) *WindowTabGroup {
 	if id == 0 {
 		return nil
 	}
-	return &WindowTabGroup{inner: raw.NSWindowTabGroupFromID(id)}
-}
-
-// NewWindowTabGroup creates a new [WindowTabGroup].
-func NewWindowTabGroup() *WindowTabGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowTabGroup")), objc.RegisterName("new"))
-	return &WindowTabGroup{inner: raw.NSWindowTabGroupFromID(_id)}
-}
-
-// A Boolean value indicating if the tab overview is currently displayed.
-//
-// WithOverviewVisible sets the overviewVisible property and returns the receiver for chaining.
-func (x *WindowTabGroup) WithOverviewVisible(overviewVisible bool) *WindowTabGroup {
-	x.inner.SetOverviewVisible(overviewVisible)
+	x := &WindowTabGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The selected, or frontmost, window in the tab group.
-//
-// WithSelectedWindow sets the selectedWindow property and returns the receiver for chaining.
-func (x *WindowTabGroup) WithSelectedWindow(selectedWindow WindowProvider) *WindowTabGroup {
-	x.inner.SetSelectedWindow(selectedWindow.asWindow())
-	return x
-}
-
-// Adds a window to the tab group.
-//
-// AddWindow calls the underlying AddWindow.
-func (x *WindowTabGroup) AddWindow(window *raw.NSWindow) {
-	x.inner.AddWindow(window)
-}
-
-// Inserts a window at a specific location within the tab group.
-//
-// InsertWindowAtIndex calls the underlying InsertWindowAtIndex.
-func (x *WindowTabGroup) InsertWindowAtIndex(window *raw.NSWindow, index int) {
-	x.inner.InsertWindowAtIndex(window, index)
-}
-
-// Removes a window from the tab group.
-//
-// RemoveWindow calls the underlying RemoveWindow.
-func (x *WindowTabGroup) RemoveWindow(window *raw.NSWindow) {
-	x.inner.RemoveWindow(window)
-}
-
-// Identifier calls the underlying Identifier.
-func (x *WindowTabGroup) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
+// windowTabGroupAdopt wraps an Objective-C object that this code just created as a
+// WindowTabGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func windowTabGroupAdopt(id objc.ID) *WindowTabGroup {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &WindowTabGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
+// Description returns the object's -description text.
+func (x *WindowTabGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WindowTabGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WindowTabGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WindowTabGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWindowTabGroup creates a new WindowTabGroup.
+func NewWindowTabGroup() *WindowTabGroup {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSWindowTabGroup")), objc.RegisterName("new"))
+	return windowTabGroupAdopt(_id)
+}
+
+// WithOverviewVisible a Boolean value indicating if the tab overview is currently displayed.
+func (x *WindowTabGroup) WithOverviewVisible(overviewVisible bool) *WindowTabGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewVisible:"), overviewVisible)
+	return x
+}
+
+// WithSelectedWindow the selected, or frontmost, window in the tab group.
+func (x *WindowTabGroup) WithSelectedWindow(selectedWindow WindowProvider) *WindowTabGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedWindow:"), objref.IDOf(selectedWindow))
+	return x
+}
+
+// AddWindow adds a window to the tab group.
+func (x *WindowTabGroup) AddWindow(window *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addWindow:"), objref.IDOf(window))
+}
+
+// InsertWindowAtIndex inserts a window at a specific location within the tab group.
+func (x *WindowTabGroup) InsertWindowAtIndex(window *Window, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertWindow:atIndex:"), objref.IDOf(window), index)
+}
+
+// RemoveWindow removes a window from the tab group.
+func (x *WindowTabGroup) RemoveWindow(window *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeWindow:"), objref.IDOf(window))
+}
+
+// Identifier wraps the corresponding Objective-C method.
+func (x *WindowTabGroup) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
+}
+
+// Windows wraps the corresponding Objective-C method.
+//
 // Windows returns the collection as a Go slice.
 func (x *WindowTabGroup) Windows() []*Window {
-	arr := x.inner.Windows()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
-		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windows"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// IsOverviewVisible calls the underlying IsOverviewVisible.
+// IsOverviewVisible wraps the corresponding Objective-C method.
 func (x *WindowTabGroup) IsOverviewVisible() bool {
-	return x.inner.IsOverviewVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOverviewVisible"))
+	return _r
 }
 
-// SetOverviewVisible calls the underlying SetOverviewVisible.
+// SetOverviewVisible wraps the corresponding Objective-C method.
 func (x *WindowTabGroup) SetOverviewVisible(overviewVisible bool) {
-	x.inner.SetOverviewVisible(overviewVisible)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewVisible:"), overviewVisible)
 }
 
-// IsTabBarVisible calls the underlying IsTabBarVisible.
+// IsTabBarVisible wraps the corresponding Objective-C method.
 func (x *WindowTabGroup) IsTabBarVisible() bool {
-	return x.inner.IsTabBarVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTabBarVisible"))
+	return _r
 }
 
-// SelectedWindow calls the underlying SelectedWindow.
+// SelectedWindow wraps the corresponding Objective-C method.
 func (x *WindowTabGroup) SelectedWindow() *Window {
-	_r := x.inner.SelectedWindow()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedWindow"))
+	return WindowFromID(_r)
 }
 
-// SetSelectedWindow calls the underlying SetSelectedWindow.
-func (x *WindowTabGroup) SetSelectedWindow(selectedWindow *raw.NSWindow) {
-	x.inner.SetSelectedWindow(selectedWindow)
+// SetSelectedWindow wraps the corresponding Objective-C method.
+func (x *WindowTabGroup) SetSelectedWindow(selectedWindow *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedWindow:"), objref.IDOf(selectedWindow))
 }
 
 // WindowTabGroupable is the interface implemented by [WindowTabGroup], for mocking and DI.
 type WindowTabGroupable interface {
-	Unwrap() *raw.NSWindowTabGroup
+	obj.Object
 	WithOverviewVisible(overviewVisible bool) *WindowTabGroup
 	WithSelectedWindow(selectedWindow WindowProvider) *WindowTabGroup
-	AddWindow(window *raw.NSWindow)
-	InsertWindowAtIndex(window *raw.NSWindow, index int)
-	RemoveWindow(window *raw.NSWindow)
-	Identifier() string
+	AddWindow(window *Window)
+	InsertWindowAtIndex(window *Window, index int)
+	RemoveWindow(window *Window)
+	Identifier() obj.Object
 	Windows() []*Window
 	IsOverviewVisible() bool
 	SetOverviewVisible(overviewVisible bool)
 	IsTabBarVisible() bool
 	SelectedWindow() *Window
-	SetSelectedWindow(selectedWindow *raw.NSWindow)
+	SetSelectedWindow(selectedWindow *Window)
 }
 
 var _ WindowTabGroupable = (*WindowTabGroup)(nil)

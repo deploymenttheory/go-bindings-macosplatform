@@ -5,106 +5,119 @@
 package oslog
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A set of entries from the unified logging system.
+// LogStore is an idiomatic wrapper over the Objective-C class OSLogStore.
 //
-// LogStore wraps [raw.OSLogStore] with a fluent Go API.
+// A set of entries from the unified logging system.
 type LogStore struct {
-	inner *raw.OSLogStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogStore].
-func (x *LogStore) Unwrap() *raw.OSLogStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogStore) ID() objc.ID { return x.inner.Ptr() }
-
-// LogStoreFromID adopts an existing object pointer as a LogStore (nil for 0).
+// LogStoreFromID adopts an existing Objective-C object as a LogStore
+// (nil for 0), retaining it and registering a release finalizer.
 func LogStoreFromID(id objc.ID) *LogStore {
 	if id == 0 {
 		return nil
 	}
-	return &LogStore{inner: raw.OSLogStoreFromID(id)}
+	x := &LogStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLogStore creates a new [LogStore].
+// logStoreAdopt wraps an Objective-C object that this code just created as a
+// LogStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logStoreAdopt(id objc.ID) *LogStore {
+	if id == 0 {
+		return nil
+	}
+	x := &LogStore{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLogStore creates a new LogStore.
 func NewLogStore() *LogStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogStore")), objc.RegisterName("new"))
-	return &LogStore{inner: raw.OSLogStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("new"))
+	return logStoreAdopt(_id)
 }
 
-// Returns a log enumerator based on an underlying store.
-//
-// EntriesEnumeratorWithOptionsPositionPredicateError calls the underlying EntriesEnumeratorWithOptionsPositionPredicateError.
-func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error) {
-	_r, _err := x.inner.EntriesEnumeratorWithOptionsPositionPredicateError(raw.OSLogEnumeratorOptions(options), position, predicate)
-	if _err != nil {
-		return nil, _err
+// EntriesEnumeratorWithOptionsPositionPredicateError returns a log enumerator based on an underlying store.
+func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesEnumeratorWithOptions:position:predicate:error:"), options, objref.IDOf(position), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &LogEnumerator{inner: _r}, nil
+	return LogEnumeratorFromID(_r), nil
 }
 
-// Returns a log enumerator with default options for viewing the entries.
-//
-// EntriesEnumeratorAndReturnError calls the underlying EntriesEnumeratorAndReturnError.
-func (x *LogStore) EntriesEnumeratorAndReturnError() (*LogEnumerator, error) {
-	_r, _err := x.inner.EntriesEnumeratorAndReturnError()
-	if _err != nil {
-		return nil, _err
+// EntriesEnumeratorAndReturnError returns a log enumerator with default options for viewing the entries.
+func (x *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesEnumeratorAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &LogEnumerator{inner: _r}, nil
+	return LogEnumeratorFromID(_r), nil
 }
 
-// Returns a position representing the time specified.
-//
-// PositionWithDate calls the underlying PositionWithDate.
-func (x *LogStore) PositionWithDate(date *foundation.NSDate) *LogPosition {
-	_r := x.inner.PositionWithDate(date)
-	if _r == nil {
-		return nil
-	}
-	return &LogPosition{inner: _r}
+// PositionWithDate returns a position representing the time specified.
+func (x *LogStore) PositionWithDate(date obj.Object) *LogPosition {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithDate:"), objref.IDOf(date))
+	return LogPositionFromID(_r)
 }
 
-// Returns a position representing time since the end of the time range that the entries span.
-//
-// PositionWithTimeIntervalSinceEnd calls the underlying PositionWithTimeIntervalSinceEnd.
+// PositionWithTimeIntervalSinceEnd returns a position representing time since the end of the time range that the entries span.
 func (x *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
-	_r := x.inner.PositionWithTimeIntervalSinceEnd(seconds)
-	if _r == nil {
-		return nil
-	}
-	return &LogPosition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithTimeIntervalSinceEnd:"), seconds)
+	return LogPositionFromID(_r)
 }
 
-// Returns a position representing time since the last boot in the series of entries.
-//
-// PositionWithTimeIntervalSinceLatestBoot calls the underlying PositionWithTimeIntervalSinceLatestBoot.
+// PositionWithTimeIntervalSinceLatestBoot returns a position representing time since the last boot in the series of entries.
 func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {
-	_r := x.inner.PositionWithTimeIntervalSinceLatestBoot(seconds)
-	if _r == nil {
-		return nil
-	}
-	return &LogPosition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:"), seconds)
+	return LogPositionFromID(_r)
 }
 
 // LogStoreable is the interface implemented by [LogStore], for mocking and DI.
 type LogStoreable interface {
-	Unwrap() *raw.OSLogStore
-	EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error)
-	EntriesEnumeratorAndReturnError() (*LogEnumerator, error)
-	PositionWithDate(date *foundation.NSDate) *LogPosition
+	obj.Object
+	EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error)
+	EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error)
+	PositionWithDate(date obj.Object) *LogPosition
 	PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition
 	PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition
 }

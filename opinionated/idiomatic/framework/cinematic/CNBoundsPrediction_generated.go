@@ -5,82 +5,111 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure representing the bounds of the predicted subject.
+// BoundsPrediction is an idiomatic wrapper over the Objective-C class CNBoundsPrediction.
 //
-// BoundsPrediction wraps [raw.CNBoundsPrediction] with a fluent Go API.
+// A structure representing the bounds of the predicted subject.
 type BoundsPrediction struct {
-	inner *raw.CNBoundsPrediction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNBoundsPrediction].
-func (x *BoundsPrediction) Unwrap() *raw.CNBoundsPrediction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BoundsPrediction) ID() objc.ID { return x.inner.Ptr() }
-
-// BoundsPredictionFromID adopts an existing object pointer as a BoundsPrediction (nil for 0).
+// BoundsPredictionFromID adopts an existing Objective-C object as a BoundsPrediction
+// (nil for 0), retaining it and registering a release finalizer.
 func BoundsPredictionFromID(id objc.ID) *BoundsPrediction {
 	if id == 0 {
 		return nil
 	}
-	return &BoundsPrediction{inner: raw.CNBoundsPredictionFromID(id)}
+	x := &BoundsPrediction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBoundsPrediction creates a new [BoundsPrediction].
+// boundsPredictionAdopt wraps an Objective-C object that this code just created as a
+// BoundsPrediction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func boundsPredictionAdopt(id objc.ID) *BoundsPrediction {
+	if id == 0 {
+		return nil
+	}
+	x := &BoundsPrediction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BoundsPrediction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BoundsPrediction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BoundsPrediction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BoundsPrediction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBoundsPrediction creates a new BoundsPrediction.
 func NewBoundsPrediction() *BoundsPrediction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNBoundsPrediction")), objc.RegisterName("new"))
-	return &BoundsPrediction{inner: raw.CNBoundsPredictionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNBoundsPrediction")), objc.RegisterName("new"))
+	return boundsPredictionAdopt(_id)
 }
 
-// bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
-//
-// WithNormalizedBounds sets the normalizedBounds property and returns the receiver for chaining.
+// WithNormalizedBounds bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
 func (x *BoundsPrediction) WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction {
-	x.inner.SetNormalizedBounds(normalizedBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
 	return x
 }
 
-// the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
-//
-// WithConfidence sets the confidence property and returns the receiver for chaining.
+// WithConfidence the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
 func (x *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction {
-	x.inner.SetConfidence(confidence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidence:"), confidence)
 	return x
 }
 
-// bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
-//
-// NormalizedBounds calls the underlying NormalizedBounds.
+// NormalizedBounds bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
 func (x *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
-	return x.inner.NormalizedBounds()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("normalizedBounds"))
+	return _r
 }
 
-// SetNormalizedBounds calls the underlying SetNormalizedBounds.
+// SetNormalizedBounds wraps the corresponding Objective-C method.
 func (x *BoundsPrediction) SetNormalizedBounds(normalizedBounds corefoundation.CGRect) {
-	x.inner.SetNormalizedBounds(normalizedBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
 }
 
-// the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
-//
-// Confidence calls the underlying Confidence.
+// Confidence the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
 func (x *BoundsPrediction) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
 
-// SetConfidence calls the underlying SetConfidence.
+// SetConfidence wraps the corresponding Objective-C method.
 func (x *BoundsPrediction) SetConfidence(confidence float32) {
-	x.inner.SetConfidence(confidence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidence:"), confidence)
 }
 
 // BoundsPredictionable is the interface implemented by [BoundsPrediction], for mocking and DI.
 type BoundsPredictionable interface {
-	Unwrap() *raw.CNBoundsPrediction
+	obj.Object
 	WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction
 	WithConfidence(confidence float32) *BoundsPrediction
 	NormalizedBounds() corefoundation.CGRect

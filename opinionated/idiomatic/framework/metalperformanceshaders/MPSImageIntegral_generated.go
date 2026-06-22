@@ -5,96 +5,83 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that calculates the sum of pixels over a specified region in an image.
+// ImageIntegral is an idiomatic wrapper over the Objective-C class MPSImageIntegral.
 //
-// ImageIntegral wraps [raw.MPSImageIntegral] with a fluent Go API.
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that calculates the sum of pixels over a specified region in an image.
 type ImageIntegral struct {
-	inner *raw.MPSImageIntegral
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageIntegral].
-func (x *ImageIntegral) Unwrap() *raw.MPSImageIntegral { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageIntegral) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageIntegralFromID adopts an existing object pointer as a ImageIntegral (nil for 0).
+// ImageIntegralFromID adopts an existing Objective-C object as a ImageIntegral
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageIntegralFromID(id objc.ID) *ImageIntegral {
 	if id == 0 {
 		return nil
 	}
-	return &ImageIntegral{inner: raw.MPSImageIntegralFromID(id)}
+	x := &ImageIntegral{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageIntegral creates a new [ImageIntegral].
+// imageIntegralAdopt wraps an Objective-C object that this code just created as a
+// ImageIntegral (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageIntegralAdopt(id objc.ID) *ImageIntegral {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageIntegral{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageIntegral creates a new ImageIntegral.
 func NewImageIntegral() *ImageIntegral {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageIntegral")), objc.RegisterName("new"))
-	return &ImageIntegral{inner: raw.MPSImageIntegralFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageIntegral")), objc.RegisterName("new"))
+	return imageIntegralAdopt(_id)
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageIntegral) WithOffset(offset mpscore.MPSOffset) *ImageIntegral {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageIntegral) WithClipRect(clipRect metal.MTLRegion) *ImageIntegral {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageIntegral) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegral {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageIntegral) WithOptions(options mpscore.MPSKernelOptions) *ImageIntegral {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageIntegral) WithLabel(label string) *ImageIntegral {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-func (x *ImageIntegral) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageIntegral) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
 type ImageIntegralable interface {
-	Unwrap() *raw.MPSImageIntegral
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageIntegral
 	WithClipRect(clipRect metal.MTLRegion) *ImageIntegral
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegral
-	WithOptions(options mpscore.MPSKernelOptions) *ImageIntegral
 	WithLabel(label string) *ImageIntegral
 }
 
 var _ ImageIntegralable = (*ImageIntegral)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageIntegral)(nil)
+
+var _ KernelProvider = (*ImageIntegral)(nil)

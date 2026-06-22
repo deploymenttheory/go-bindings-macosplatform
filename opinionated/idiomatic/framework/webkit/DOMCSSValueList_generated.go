@@ -5,71 +5,81 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSValueList wraps [raw.DOMCSSValueList] with a fluent Go API.
+// DOMCSSValueList is an idiomatic wrapper over the Objective-C class DOMCSSValueList.
+//
+// It embeds [DOMCSSValue], promoting that type's methods.
 type DOMCSSValueList struct {
-	inner *raw.DOMCSSValueList
+	DOMCSSValue
 }
 
-// Unwrap returns the underlying [raw.DOMCSSValueList].
-func (x *DOMCSSValueList) Unwrap() *raw.DOMCSSValueList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSValueList) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSValueListFromID adopts an existing object pointer as a DOMCSSValueList (nil for 0).
+// DOMCSSValueListFromID adopts an existing Objective-C object as a DOMCSSValueList
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSValueListFromID(id objc.ID) *DOMCSSValueList {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSValueList{inner: raw.DOMCSSValueListFromID(id)}
-}
-
-// NewDOMCSSValueList creates a new [DOMCSSValueList].
-func NewDOMCSSValueList() *DOMCSSValueList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSValueList")), objc.RegisterName("new"))
-	return &DOMCSSValueList{inner: raw.DOMCSSValueListFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSValueList) WithCssText(cssText string) *DOMCSSValueList {
-	x.inner.DOMCSSValue.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSValueList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Item calls the underlying Item.
-func (x *DOMCSSValueList) Item(index uint) *DOMCSSValue {
-	_r := x.inner.Item(index)
-	if _r == nil {
+// dOMCSSValueListAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSValueList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSValueListAdopt(id objc.ID) *DOMCSSValueList {
+	if id == 0 {
 		return nil
 	}
-	return &DOMCSSValue{inner: _r}
+	x := &DOMCSSValueList{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Length calls the underlying Length.
-func (x *DOMCSSValueList) Length() uint {
-	return x.inner.Length()
+// NewDOMCSSValueList creates a new DOMCSSValueList.
+func NewDOMCSSValueList() *DOMCSSValueList {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSValueList")), objc.RegisterName("new"))
+	return dOMCSSValueListAdopt(_id)
 }
 
-func (x *DOMCSSValueList) asDOMCSSValue() *raw.DOMCSSValue { return &x.inner.DOMCSSValue }
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSValueList) WithCssText(cssText string) *DOMCSSValueList {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
 
-func (x *DOMCSSValueList) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSValue.DOMObject }
+// Item wraps the corresponding Objective-C method.
+func (x *DOMCSSValueList) Item(index int) *DOMCSSValue {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMCSSValueFromID(_r)
+}
 
-func (x *DOMCSSValueList) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSValue.DOMObject.WebScriptObject
+// Length wraps the corresponding Objective-C method.
+func (x *DOMCSSValueList) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // DOMCSSValueListable is the interface implemented by [DOMCSSValueList], for mocking and DI.
 type DOMCSSValueListable interface {
-	Unwrap() *raw.DOMCSSValueList
+	obj.Object
 	WithCssText(cssText string) *DOMCSSValueList
-	Item(index uint) *DOMCSSValue
-	Length() uint
+	Item(index int) *DOMCSSValue
+	Length() int
 }
 
 var _ DOMCSSValueListable = (*DOMCSSValueList)(nil)
+
+var _ DOMCSSValueProvider = (*DOMCSSValueList)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSValueList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSValueList)(nil)

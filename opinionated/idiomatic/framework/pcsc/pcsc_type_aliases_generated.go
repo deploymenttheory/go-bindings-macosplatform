@@ -4,51 +4,45 @@
 
 package pcsc
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pcsc"
-)
+type MSCKeyACL struct {
+	ReadPermission  uint16
+	WritePermission uint16
+	UsePermission   uint16
+}
 
-// CFDyLibPointers is a type alias for the raw CFDyLibPointers value-type struct.
-type CFDyLibPointers = raw.CFDyLibPointers
+type MSCKeyInfo struct {
+	KeyNum     uint8
+	KeyType    uint8
+	KeyPartner uint8
+	KeyMapping uint8
+	KeySize    uint16
+	KeyPolicy  MSCKeyPolicy
+	KeyACL     MSCKeyACL
+}
 
-// MSCCryptInit is a type alias for the raw MSCCryptInit value-type struct.
-type MSCCryptInit = raw.MSCCryptInit
+type MSCKeyPolicy struct {
+	CipherMode      uint16
+	CipherDirection uint16
+}
 
-// MSCEventWaitInfo is a type alias for the raw MSCEventWaitInfo value-type struct.
-type MSCEventWaitInfo = raw.MSCEventWaitInfo
+type MSCObjectACL struct {
+	ReadPermission   uint16
+	WritePermission  uint16
+	DeletePermission uint16
+}
 
-// MSCGenKeyParams is a type alias for the raw MSCGenKeyParams value-type struct.
-type MSCGenKeyParams = raw.MSCGenKeyParams
+type MSCStatusInfo struct {
+	AppVersion  uint16
+	SwVersion   uint16
+	FreeMemory  uint32
+	TotalMemory uint32
+	UsedPINs    uint8
+	UsedKeys    uint8
+	LoggedID    uint16
+}
 
-// MSCInitTokenParams is a type alias for the raw MSCInitTokenParams value-type struct.
-type MSCInitTokenParams = raw.MSCInitTokenParams
-
-// MSCKeyACL is a type alias for the raw MSCKeyACL value-type struct.
-type MSCKeyACL = raw.MSCKeyACL
-
-// MSCKeyInfo is a type alias for the raw MSCKeyInfo value-type struct.
-type MSCKeyInfo = raw.MSCKeyInfo
-
-// MSCKeyPolicy is a type alias for the raw MSCKeyPolicy value-type struct.
-type MSCKeyPolicy = raw.MSCKeyPolicy
-
-// MSCObjectACL is a type alias for the raw MSCObjectACL value-type struct.
-type MSCObjectACL = raw.MSCObjectACL
-
-// MSCObjectInfo is a type alias for the raw MSCObjectInfo value-type struct.
-type MSCObjectInfo = raw.MSCObjectInfo
-
-// MSCStatusInfo is a type alias for the raw MSCStatusInfo value-type struct.
-type MSCStatusInfo = raw.MSCStatusInfo
-
-// MSCTokenConnection is a type alias for the raw MSCTokenConnection value-type struct.
-type MSCTokenConnection = raw.MSCTokenConnection
-
-// MSCTokenInfo is a type alias for the raw MSCTokenInfo value-type struct.
-type MSCTokenInfo = raw.MSCTokenInfo
-
-// SCARD_READERSTATE_A is a type alias for the raw SCARD_READERSTATE_A value-type struct.
-type SCARD_READERSTATE_A = raw.SCARD_READERSTATE_A
-
-// SCARDIOREQUEST is a type alias for the raw SCARDIOREQUEST value-type struct.
-type SCARDIOREQUEST = raw.SCARDIOREQUEST
+// Protocol Control Information (PCI)
+type SCARDIOREQUEST struct {
+	DwProtocol  uint32
+	CbPciLength uint32
+}

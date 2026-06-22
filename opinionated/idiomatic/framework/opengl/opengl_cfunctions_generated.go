@@ -5,76 +5,158 @@
 package opengl
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opengl"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CGLGetContextRetainCount calls [raw.CGLGetContextRetainCount] (C function CGLGetContextRetainCount).
-func CGLGetContextRetainCount(ctx unsafe.Pointer) uint32 {
-	return raw.CGLGetContextRetainCount(ctx)
+var _fnCGLGetContextRetainCount func(objc.ID) uint32
+
+// CGLGetContextRetainCount calls the OpenGL framework function CGLGetContextRetainCount.
+func CGLGetContextRetainCount(ctx obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetContextRetainCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetContextRetainCount, _lib, "CGLGetContextRetainCount")
+	}
+	return _fnCGLGetContextRetainCount(objref.IDOf(ctx))
 }
 
-// CGLGetCurrentContext calls [raw.CGLGetCurrentContext] (C function CGLGetCurrentContext).
-func CGLGetCurrentContext() unsafe.Pointer {
-	return raw.CGLGetCurrentContext()
+var _fnCGLGetCurrentContext func() objc.ID
+
+// CGLGetCurrentContext calls the OpenGL framework function CGLGetCurrentContext.
+func CGLGetCurrentContext() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetCurrentContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetCurrentContext, _lib, "CGLGetCurrentContext")
+	}
+	_ret := _fnCGLGetCurrentContext()
+	return obj.Wrap(_ret)
 }
 
-// CGLGetDeviceFromGLRenderer calls [raw.CGLGetDeviceFromGLRenderer] (C function CGLGetDeviceFromGLRenderer).
-func CGLGetDeviceFromGLRenderer(rendererID int32) unsafe.Pointer {
-	return raw.CGLGetDeviceFromGLRenderer(rendererID)
+var _fnCGLGetDeviceFromGLRenderer func(int32) objc.ID
+
+// CGLGetDeviceFromGLRenderer calls the OpenGL framework function CGLGetDeviceFromGLRenderer.
+func CGLGetDeviceFromGLRenderer(rendererID int32) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetDeviceFromGLRenderer == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetDeviceFromGLRenderer, _lib, "CGLGetDeviceFromGLRenderer")
+	}
+	_ret := _fnCGLGetDeviceFromGLRenderer(rendererID)
+	return obj.Wrap(_ret)
 }
 
-// CGLGetPBufferRetainCount calls [raw.CGLGetPBufferRetainCount] (C function CGLGetPBufferRetainCount).
-func CGLGetPBufferRetainCount(pbuffer unsafe.Pointer) uint32 {
-	return raw.CGLGetPBufferRetainCount(pbuffer)
+var _fnCGLGetPBufferRetainCount func(objc.ID) uint32
+
+// CGLGetPBufferRetainCount calls the OpenGL framework function CGLGetPBufferRetainCount.
+func CGLGetPBufferRetainCount(pbuffer obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetPBufferRetainCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetPBufferRetainCount, _lib, "CGLGetPBufferRetainCount")
+	}
+	return _fnCGLGetPBufferRetainCount(objref.IDOf(pbuffer))
 }
 
-// CGLGetPixelFormat calls [raw.CGLGetPixelFormat] (C function CGLGetPixelFormat).
-func CGLGetPixelFormat(ctx unsafe.Pointer) unsafe.Pointer {
-	return raw.CGLGetPixelFormat(ctx)
+var _fnCGLGetPixelFormat func(objc.ID) objc.ID
+
+// CGLGetPixelFormat calls the OpenGL framework function CGLGetPixelFormat.
+func CGLGetPixelFormat(ctx obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetPixelFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetPixelFormat, _lib, "CGLGetPixelFormat")
+	}
+	_ret := _fnCGLGetPixelFormat(objref.IDOf(ctx))
+	return obj.Wrap(_ret)
 }
 
-// CGLGetPixelFormatRetainCount calls [raw.CGLGetPixelFormatRetainCount] (C function CGLGetPixelFormatRetainCount).
-func CGLGetPixelFormatRetainCount(pix unsafe.Pointer) uint32 {
-	return raw.CGLGetPixelFormatRetainCount(pix)
+var _fnCGLGetPixelFormatRetainCount func(objc.ID) uint32
+
+// CGLGetPixelFormatRetainCount calls the OpenGL framework function CGLGetPixelFormatRetainCount.
+func CGLGetPixelFormatRetainCount(pix obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetPixelFormatRetainCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetPixelFormatRetainCount, _lib, "CGLGetPixelFormatRetainCount")
+	}
+	return _fnCGLGetPixelFormatRetainCount(objref.IDOf(pix))
 }
 
-// CGLGetShareGroup calls [raw.CGLGetShareGroup] (C function CGLGetShareGroup).
-func CGLGetShareGroup(ctx unsafe.Pointer) unsafe.Pointer {
-	return raw.CGLGetShareGroup(ctx)
+var _fnCGLGetShareGroup func(objc.ID) objc.ID
+
+// CGLGetShareGroup calls the OpenGL framework function CGLGetShareGroup.
+func CGLGetShareGroup(ctx obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetShareGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetShareGroup, _lib, "CGLGetShareGroup")
+	}
+	_ret := _fnCGLGetShareGroup(objref.IDOf(ctx))
+	return obj.Wrap(_ret)
 }
 
-// CGLGetVersion calls [raw.CGLGetVersion] (C function CGLGetVersion).
-func CGLGetVersion(majorvers *int32, minorvers *int32) {
-	raw.CGLGetVersion(majorvers, minorvers)
+var _fnCGLReleaseContext func(objc.ID)
+
+// CGLReleaseContext calls the OpenGL framework function CGLReleaseContext.
+func CGLReleaseContext(ctx obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLReleaseContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLReleaseContext, _lib, "CGLReleaseContext")
+	}
+	_fnCGLReleaseContext(objref.IDOf(ctx))
 }
 
-// CGLReleaseContext calls [raw.CGLReleaseContext] (C function CGLReleaseContext).
-func CGLReleaseContext(ctx unsafe.Pointer) {
-	raw.CGLReleaseContext(ctx)
+var _fnCGLReleasePBuffer func(objc.ID)
+
+// CGLReleasePBuffer calls the OpenGL framework function CGLReleasePBuffer.
+func CGLReleasePBuffer(pbuffer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLReleasePBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLReleasePBuffer, _lib, "CGLReleasePBuffer")
+	}
+	_fnCGLReleasePBuffer(objref.IDOf(pbuffer))
 }
 
-// CGLReleasePBuffer calls [raw.CGLReleasePBuffer] (C function CGLReleasePBuffer).
-func CGLReleasePBuffer(pbuffer unsafe.Pointer) {
-	raw.CGLReleasePBuffer(pbuffer)
+var _fnCGLReleasePixelFormat func(objc.ID)
+
+// CGLReleasePixelFormat calls the OpenGL framework function CGLReleasePixelFormat.
+func CGLReleasePixelFormat(pix obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLReleasePixelFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLReleasePixelFormat, _lib, "CGLReleasePixelFormat")
+	}
+	_fnCGLReleasePixelFormat(objref.IDOf(pix))
 }
 
-// CGLReleasePixelFormat calls [raw.CGLReleasePixelFormat] (C function CGLReleasePixelFormat).
-func CGLReleasePixelFormat(pix unsafe.Pointer) {
-	raw.CGLReleasePixelFormat(pix)
+var _fnCGLRetainContext func(objc.ID) objc.ID
+
+// CGLRetainContext calls the OpenGL framework function CGLRetainContext.
+func CGLRetainContext(ctx obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLRetainContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLRetainContext, _lib, "CGLRetainContext")
+	}
+	_ret := _fnCGLRetainContext(objref.IDOf(ctx))
+	return obj.Wrap(_ret)
 }
 
-// CGLRetainContext calls [raw.CGLRetainContext] (C function CGLRetainContext).
-func CGLRetainContext(ctx unsafe.Pointer) unsafe.Pointer {
-	return raw.CGLRetainContext(ctx)
+var _fnCGLRetainPBuffer func(objc.ID) objc.ID
+
+// CGLRetainPBuffer calls the OpenGL framework function CGLRetainPBuffer.
+func CGLRetainPBuffer(pbuffer obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLRetainPBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLRetainPBuffer, _lib, "CGLRetainPBuffer")
+	}
+	_ret := _fnCGLRetainPBuffer(objref.IDOf(pbuffer))
+	return obj.Wrap(_ret)
 }
 
-// CGLRetainPBuffer calls [raw.CGLRetainPBuffer] (C function CGLRetainPBuffer).
-func CGLRetainPBuffer(pbuffer unsafe.Pointer) unsafe.Pointer {
-	return raw.CGLRetainPBuffer(pbuffer)
-}
+var _fnCGLRetainPixelFormat func(objc.ID) objc.ID
 
-// CGLRetainPixelFormat calls [raw.CGLRetainPixelFormat] (C function CGLRetainPixelFormat).
-func CGLRetainPixelFormat(pix unsafe.Pointer) unsafe.Pointer {
-	return raw.CGLRetainPixelFormat(pix)
+// CGLRetainPixelFormat calls the OpenGL framework function CGLRetainPixelFormat.
+func CGLRetainPixelFormat(pix obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLRetainPixelFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLRetainPixelFormat, _lib, "CGLRetainPixelFormat")
+	}
+	_ret := _fnCGLRetainPixelFormat(objref.IDOf(pix))
+	return obj.Wrap(_ret)
 }

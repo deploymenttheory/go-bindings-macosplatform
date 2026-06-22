@@ -5,14 +5,9 @@
 package executionpolicy
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/executionpolicy"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// EPErrorDomain returns the string constant EPErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func EPErrorDomain() objc.ID {
-	if _r := raw.EPErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// EPErrorDomain returns the string constant EPErrorDomain, for use as a dictionary key or argument.
+func EPErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("EPErrorDomain"))) }

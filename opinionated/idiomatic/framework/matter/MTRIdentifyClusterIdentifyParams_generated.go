@@ -5,107 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRIdentifyClusterIdentifyParams wraps [raw.MTRIdentifyClusterIdentifyParams] with a fluent Go API.
+// MTRIdentifyClusterIdentifyParams is an idiomatic wrapper over the Objective-C class MTRIdentifyClusterIdentifyParams.
 type MTRIdentifyClusterIdentifyParams struct {
-	inner *raw.MTRIdentifyClusterIdentifyParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRIdentifyClusterIdentifyParams].
-func (x *MTRIdentifyClusterIdentifyParams) Unwrap() *raw.MTRIdentifyClusterIdentifyParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRIdentifyClusterIdentifyParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRIdentifyClusterIdentifyParamsFromID adopts an existing object pointer as a MTRIdentifyClusterIdentifyParams (nil for 0).
+// MTRIdentifyClusterIdentifyParamsFromID adopts an existing Objective-C object as a MTRIdentifyClusterIdentifyParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRIdentifyClusterIdentifyParamsFromID(id objc.ID) *MTRIdentifyClusterIdentifyParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRIdentifyClusterIdentifyParams{inner: raw.MTRIdentifyClusterIdentifyParamsFromID(id)}
+	x := &MTRIdentifyClusterIdentifyParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRIdentifyClusterIdentifyParams creates a new [MTRIdentifyClusterIdentifyParams].
+// mTRIdentifyClusterIdentifyParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRIdentifyClusterIdentifyParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRIdentifyClusterIdentifyParamsAdopt(id objc.ID) *MTRIdentifyClusterIdentifyParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRIdentifyClusterIdentifyParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRIdentifyClusterIdentifyParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRIdentifyClusterIdentifyParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRIdentifyClusterIdentifyParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRIdentifyClusterIdentifyParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRIdentifyClusterIdentifyParams creates a new MTRIdentifyClusterIdentifyParams.
 func NewMTRIdentifyClusterIdentifyParams() *MTRIdentifyClusterIdentifyParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRIdentifyClusterIdentifyParams")), objc.RegisterName("new"))
-	return &MTRIdentifyClusterIdentifyParams{inner: raw.MTRIdentifyClusterIdentifyParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRIdentifyClusterIdentifyParams")), objc.RegisterName("new"))
+	return mTRIdentifyClusterIdentifyParamsAdopt(_id)
 }
 
-// WithIdentifyTime sets the identifyTime property and returns the receiver for chaining.
-func (x *MTRIdentifyClusterIdentifyParams) WithIdentifyTime(identifyTime *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams {
-	x.inner.SetIdentifyTime(identifyTime)
+// WithIdentifyTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRIdentifyClusterIdentifyParams) WithIdentifyTime(identifyTime obj.Object) *MTRIdentifyClusterIdentifyParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifyTime:"), objref.IDOf(identifyTime))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRIdentifyClusterIdentifyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRIdentifyClusterIdentifyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRIdentifyClusterIdentifyParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRIdentifyClusterIdentifyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRIdentifyClusterIdentifyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRIdentifyClusterIdentifyParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// IdentifyTime calls the underlying IdentifyTime.
-func (x *MTRIdentifyClusterIdentifyParams) IdentifyTime() *foundation.NSNumber {
-	return x.inner.IdentifyTime()
+// IdentifyTime wraps the corresponding Objective-C method.
+func (x *MTRIdentifyClusterIdentifyParams) IdentifyTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifyTime"))
+	return obj.Wrap(_r)
 }
 
-// SetIdentifyTime calls the underlying SetIdentifyTime.
-func (x *MTRIdentifyClusterIdentifyParams) SetIdentifyTime(identifyTime *foundation.NSNumber) {
-	x.inner.SetIdentifyTime(identifyTime)
+// SetIdentifyTime wraps the corresponding Objective-C method.
+func (x *MTRIdentifyClusterIdentifyParams) SetIdentifyTime(identifyTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifyTime:"), objref.IDOf(identifyTime))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRIdentifyClusterIdentifyParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRIdentifyClusterIdentifyParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRIdentifyClusterIdentifyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRIdentifyClusterIdentifyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRIdentifyClusterIdentifyParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRIdentifyClusterIdentifyParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRIdentifyClusterIdentifyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRIdentifyClusterIdentifyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRIdentifyClusterIdentifyParamsable is the interface implemented by [MTRIdentifyClusterIdentifyParams], for mocking and DI.
 type MTRIdentifyClusterIdentifyParamsable interface {
-	Unwrap() *raw.MTRIdentifyClusterIdentifyParams
-	WithIdentifyTime(identifyTime *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams
-	IdentifyTime() *foundation.NSNumber
-	SetIdentifyTime(identifyTime *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithIdentifyTime(identifyTime obj.Object) *MTRIdentifyClusterIdentifyParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRIdentifyClusterIdentifyParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRIdentifyClusterIdentifyParams
+	IdentifyTime() obj.Object
+	SetIdentifyTime(identifyTime obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRIdentifyClusterIdentifyParamsable = (*MTRIdentifyClusterIdentifyParams)(nil)

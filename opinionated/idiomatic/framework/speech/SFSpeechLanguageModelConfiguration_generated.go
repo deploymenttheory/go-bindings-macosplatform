@@ -5,89 +5,112 @@
 package speech
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object describing the location of a custom language model and specialized vocabulary.
+// SpeechLanguageModelConfiguration is an idiomatic wrapper over the Objective-C class SFSpeechLanguageModelConfiguration.
 //
-// SpeechLanguageModelConfiguration wraps [raw.SFSpeechLanguageModelConfiguration] with a fluent Go API.
+// An object describing the location of a custom language model and specialized vocabulary.
 type SpeechLanguageModelConfiguration struct {
-	inner *raw.SFSpeechLanguageModelConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSpeechLanguageModelConfiguration].
-func (x *SpeechLanguageModelConfiguration) Unwrap() *raw.SFSpeechLanguageModelConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechLanguageModelConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechLanguageModelConfigurationFromID adopts an existing object pointer as a SpeechLanguageModelConfiguration (nil for 0).
+// SpeechLanguageModelConfigurationFromID adopts an existing Objective-C object as a SpeechLanguageModelConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechLanguageModelConfigurationFromID(id objc.ID) *SpeechLanguageModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(id)}
+	x := &SpeechLanguageModelConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a configuration with the location of a language model file.
-//
-// NewSpeechLanguageModelConfigurationWithLanguageModel creates a new [SpeechLanguageModelConfiguration].
+// speechLanguageModelConfigurationAdopt wraps an Objective-C object that this code just created as a
+// SpeechLanguageModelConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechLanguageModelConfigurationAdopt(id objc.ID) *SpeechLanguageModelConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechLanguageModelConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechLanguageModelConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechLanguageModelConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechLanguageModelConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechLanguageModelConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechLanguageModelConfigurationWithLanguageModel creates a configuration with the location of a language model file.
 func NewSpeechLanguageModelConfigurationWithLanguageModel(languageModel string) *SpeechLanguageModelConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(languageModel)).Ptr())
-	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:"), rt.FileURL(languageModel))
+	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// Creates a configuration with the locations of language model and vocabulary files.
-//
-// NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary creates a new [SpeechLanguageModelConfiguration].
+// NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary creates a configuration with the locations of language model and vocabulary files.
 func NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary(languageModel string, vocabulary string) *SpeechLanguageModelConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(languageModel)).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(vocabulary)).Ptr())
-	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:"), rt.FileURL(languageModel), rt.FileURL(vocabulary))
+	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// Creates a configuration with the locations of language model and vocabulary files, and custom weight.
-//
-// NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight creates a new [SpeechLanguageModelConfiguration].
-func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(languageModel string, vocabulary string, weight *foundation.NSNumber) *SpeechLanguageModelConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:weight:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(languageModel)).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(vocabulary)).Ptr(), weight.Ptr())
-	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
+// NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight creates a configuration with the locations of language model and vocabulary files, and custom weight.
+func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(languageModel string, vocabulary string, weight obj.Object) *SpeechLanguageModelConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:weight:"), rt.FileURL(languageModel), rt.FileURL(vocabulary), objref.IDOf(weight))
+	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// The location of a compiled language model file.
-//
-// LanguageModel calls the underlying LanguageModel.
-func (x *SpeechLanguageModelConfiguration) LanguageModel() *foundation.NSURL {
-	return x.inner.LanguageModel()
+// LanguageModel the location of a compiled language model file.
+func (x *SpeechLanguageModelConfiguration) LanguageModel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageModel"))
+	return obj.Wrap(_r)
 }
 
-// The location of a compiled vocabulary file.
-//
-// Vocabulary calls the underlying Vocabulary.
-func (x *SpeechLanguageModelConfiguration) Vocabulary() *foundation.NSURL {
-	return x.inner.Vocabulary()
+// Vocabulary the location of a compiled vocabulary file.
+func (x *SpeechLanguageModelConfiguration) Vocabulary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vocabulary"))
+	return obj.Wrap(_r)
 }
 
-// The relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
-//
-// Weight calls the underlying Weight.
-func (x *SpeechLanguageModelConfiguration) Weight() *foundation.NSNumber {
-	return x.inner.Weight()
+// Weight the relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
+func (x *SpeechLanguageModelConfiguration) Weight() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weight"))
+	return obj.Wrap(_r)
 }
 
 // SpeechLanguageModelConfigurationable is the interface implemented by [SpeechLanguageModelConfiguration], for mocking and DI.
 type SpeechLanguageModelConfigurationable interface {
-	Unwrap() *raw.SFSpeechLanguageModelConfiguration
-	LanguageModel() *foundation.NSURL
-	Vocabulary() *foundation.NSURL
-	Weight() *foundation.NSNumber
+	obj.Object
+	LanguageModel() obj.Object
+	Vocabulary() obj.Object
+	Weight() obj.Object
 }
 
 var _ SpeechLanguageModelConfigurationable = (*SpeechLanguageModelConfiguration)(nil)

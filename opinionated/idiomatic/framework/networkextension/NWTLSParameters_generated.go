@@ -5,142 +5,156 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TLS properties for creating a connection.
+// NWTLSParameters is an idiomatic wrapper over the Objective-C class NWTLSParameters.
 //
-// NWTLSParameters wraps [raw.NWTLSParameters] with a fluent Go API.
+// TLS properties for creating a connection.
 type NWTLSParameters struct {
-	inner *raw.NWTLSParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NWTLSParameters].
-func (x *NWTLSParameters) Unwrap() *raw.NWTLSParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NWTLSParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// NWTLSParametersFromID adopts an existing object pointer as a NWTLSParameters (nil for 0).
+// NWTLSParametersFromID adopts an existing Objective-C object as a NWTLSParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func NWTLSParametersFromID(id objc.ID) *NWTLSParameters {
 	if id == 0 {
 		return nil
 	}
-	return &NWTLSParameters{inner: raw.NWTLSParametersFromID(id)}
+	x := &NWTLSParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNWTLSParameters creates a new [NWTLSParameters].
+// nWTLSParametersAdopt wraps an Objective-C object that this code just created as a
+// NWTLSParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nWTLSParametersAdopt(id objc.ID) *NWTLSParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &NWTLSParameters{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NWTLSParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NWTLSParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NWTLSParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NWTLSParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNWTLSParameters creates a new NWTLSParameters.
 func NewNWTLSParameters() *NWTLSParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NWTLSParameters")), objc.RegisterName("new"))
-	return &NWTLSParameters{inner: raw.NWTLSParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NWTLSParameters")), objc.RegisterName("new"))
+	return nWTLSParametersAdopt(_id)
 }
 
-// The Session ID to use for the associated TCP connection.
-//
-// WithTLSSessionID sets the tLSSessionID property and returns the receiver for chaining.
-func (x *NWTLSParameters) WithTLSSessionID(tLSSessionID *foundation.NSData) *NWTLSParameters {
-	x.inner.SetTLSSessionID(tLSSessionID)
+// WithTLSSessionID the Session ID to use for the associated TCP connection.
+func (x *NWTLSParameters) WithTLSSessionID(tLSSessionID obj.Object) *NWTLSParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTLSSessionID:"), objref.IDOf(tLSSessionID))
 	return x
 }
 
-// The set of allowed cipher suites when negotiating TLS.
-//
-// WithSSLCipherSuites sets the sSLCipherSuites property and returns the receiver for chaining.
-func (x *NWTLSParameters) WithSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) *NWTLSParameters {
-	x.inner.SetSSLCipherSuites(sSLCipherSuites)
+// WithSSLCipherSuites the set of allowed cipher suites when negotiating TLS.
+func (x *NWTLSParameters) WithSSLCipherSuites(sSLCipherSuites obj.Object) *NWTLSParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSLCipherSuites:"), objref.IDOf(sSLCipherSuites))
 	return x
 }
 
-// The minimum allowed SSLProtocol value to use when negotiating TLS.
-//
-// WithMinimumSSLProtocolVersion sets the minimumSSLProtocolVersion property and returns the receiver for chaining.
-func (x *NWTLSParameters) WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) *NWTLSParameters {
-	x.inner.SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion)
+// WithMinimumSSLProtocolVersion the minimum allowed SSLProtocol value to use when negotiating TLS.
+func (x *NWTLSParameters) WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion int) *NWTLSParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSSLProtocolVersion:"), minimumSSLProtocolVersion)
 	return x
 }
 
-// The maximum allowed SSLProtocol value to use when negotiating TLS.
-//
-// WithMaximumSSLProtocolVersion sets the maximumSSLProtocolVersion property and returns the receiver for chaining.
-func (x *NWTLSParameters) WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) *NWTLSParameters {
-	x.inner.SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion)
+// WithMaximumSSLProtocolVersion the maximum allowed SSLProtocol value to use when negotiating TLS.
+func (x *NWTLSParameters) WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion int) *NWTLSParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSSLProtocolVersion:"), maximumSSLProtocolVersion)
 	return x
 }
 
-// @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
-//
-// TLSSessionID calls the underlying TLSSessionID.
-func (x *NWTLSParameters) TLSSessionID() *foundation.NSData {
-	return x.inner.TLSSessionID()
+// TLSSessionID the session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
+func (x *NWTLSParameters) TLSSessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TLSSessionID"))
+	return obj.Wrap(_r)
 }
 
-// @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
-//
-// SetTLSSessionID calls the underlying SetTLSSessionID.
-func (x *NWTLSParameters) SetTLSSessionID(tLSSessionID *foundation.NSData) {
-	x.inner.SetTLSSessionID(tLSSessionID)
+// SetTLSSessionID the session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
+func (x *NWTLSParameters) SetTLSSessionID(tLSSessionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTLSSessionID:"), objref.IDOf(tLSSessionID))
 }
 
-// @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
-//
-// SSLCipherSuites calls the underlying SSLCipherSuites.
-func (x *NWTLSParameters) SSLCipherSuites() *foundation.NSSet[*foundation.NSNumber] {
-	return x.inner.SSLCipherSuites()
+// SSLCipherSuites the set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
+func (x *NWTLSParameters) SSLCipherSuites() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("SSLCipherSuites"))
+	return obj.Wrap(_r)
 }
 
-// @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
-//
-// SetSSLCipherSuites calls the underlying SetSSLCipherSuites.
-func (x *NWTLSParameters) SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) {
-	x.inner.SetSSLCipherSuites(sSLCipherSuites)
+// SetSSLCipherSuites the set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
+func (x *NWTLSParameters) SetSSLCipherSuites(sSLCipherSuites obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSLCipherSuites:"), objref.IDOf(sSLCipherSuites))
 }
 
-// @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
-//
-// MinimumSSLProtocolVersion calls the underlying MinimumSSLProtocolVersion.
-func (x *NWTLSParameters) MinimumSSLProtocolVersion() uint {
-	return x.inner.MinimumSSLProtocolVersion()
+// MinimumSSLProtocolVersion the minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
+func (x *NWTLSParameters) MinimumSSLProtocolVersion() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumSSLProtocolVersion"))
+	return _r
 }
 
-// @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
-//
-// SetMinimumSSLProtocolVersion calls the underlying SetMinimumSSLProtocolVersion.
-func (x *NWTLSParameters) SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) {
-	x.inner.SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion)
+// SetMinimumSSLProtocolVersion the minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
+func (x *NWTLSParameters) SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSSLProtocolVersion:"), minimumSSLProtocolVersion)
 }
 
-// @property maximumSSLProtocolVersion @discussion The maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
-//
-// MaximumSSLProtocolVersion calls the underlying MaximumSSLProtocolVersion.
-func (x *NWTLSParameters) MaximumSSLProtocolVersion() uint {
-	return x.inner.MaximumSSLProtocolVersion()
+// MaximumSSLProtocolVersion the maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
+func (x *NWTLSParameters) MaximumSSLProtocolVersion() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumSSLProtocolVersion"))
+	return _r
 }
 
-// @property maximumSSLProtocolVersion @discussion The maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
-//
-// SetMaximumSSLProtocolVersion calls the underlying SetMaximumSSLProtocolVersion.
-func (x *NWTLSParameters) SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) {
-	x.inner.SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion)
+// SetMaximumSSLProtocolVersion the maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
+func (x *NWTLSParameters) SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSSLProtocolVersion:"), maximumSSLProtocolVersion)
 }
 
 // NWTLSParametersable is the interface implemented by [NWTLSParameters], for mocking and DI.
 type NWTLSParametersable interface {
-	Unwrap() *raw.NWTLSParameters
-	WithTLSSessionID(tLSSessionID *foundation.NSData) *NWTLSParameters
-	WithSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) *NWTLSParameters
-	WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) *NWTLSParameters
-	WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) *NWTLSParameters
-	TLSSessionID() *foundation.NSData
-	SetTLSSessionID(tLSSessionID *foundation.NSData)
-	SSLCipherSuites() *foundation.NSSet[*foundation.NSNumber]
-	SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber])
-	MinimumSSLProtocolVersion() uint
-	SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint)
-	MaximumSSLProtocolVersion() uint
-	SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint)
+	obj.Object
+	WithTLSSessionID(tLSSessionID obj.Object) *NWTLSParameters
+	WithSSLCipherSuites(sSLCipherSuites obj.Object) *NWTLSParameters
+	WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion int) *NWTLSParameters
+	WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion int) *NWTLSParameters
+	TLSSessionID() obj.Object
+	SetTLSSessionID(tLSSessionID obj.Object)
+	SSLCipherSuites() obj.Object
+	SetSSLCipherSuites(sSLCipherSuites obj.Object)
+	MinimumSSLProtocolVersion() int
+	SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion int)
+	MaximumSSLProtocolVersion() int
+	SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion int)
 }
 
 var _ NWTLSParametersable = (*NWTLSParameters)(nil)

@@ -5,145 +5,146 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable request to the App Store to process payment for additional functionality that your app offers.
+// MutablePayment is an idiomatic wrapper over the Objective-C class SKMutablePayment.
 //
-// MutablePayment wraps [raw.SKMutablePayment] with a fluent Go API.
+// It embeds [Payment], promoting that type's methods.
+//
+// A mutable request to the App Store to process payment for additional functionality that your app offers.
 type MutablePayment struct {
-	inner *raw.SKMutablePayment
+	Payment
 }
 
-// Unwrap returns the underlying [raw.SKMutablePayment].
-func (x *MutablePayment) Unwrap() *raw.SKMutablePayment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutablePayment) ID() objc.ID { return x.inner.Ptr() }
-
-// MutablePaymentFromID adopts an existing object pointer as a MutablePayment (nil for 0).
+// MutablePaymentFromID adopts an existing Objective-C object as a MutablePayment
+// (nil for 0), retaining it and registering a release finalizer.
 func MutablePaymentFromID(id objc.ID) *MutablePayment {
 	if id == 0 {
 		return nil
 	}
-	return &MutablePayment{inner: raw.SKMutablePaymentFromID(id)}
+	x := &MutablePayment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutablePayment creates a new [MutablePayment].
+// mutablePaymentAdopt wraps an Objective-C object that this code just created as a
+// MutablePayment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutablePaymentAdopt(id objc.ID) *MutablePayment {
+	if id == 0 {
+		return nil
+	}
+	x := &MutablePayment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutablePayment creates a new MutablePayment.
 func NewMutablePayment() *MutablePayment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKMutablePayment")), objc.RegisterName("new"))
-	return &MutablePayment{inner: raw.SKMutablePaymentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKMutablePayment")), objc.RegisterName("new"))
+	return mutablePaymentAdopt(_id)
 }
 
-// A string that associates the transaction with a user account on your service.
-//
-// WithApplicationUsername sets the applicationUsername property and returns the receiver for chaining.
+// WithApplicationUsername a string that associates the transaction with a user account on your service.
 func (x *MutablePayment) WithApplicationUsername(applicationUsername string) *MutablePayment {
-	x.inner.SetApplicationUsername(foundation.NSStringStringWithUTF8String(applicationUsername))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
 	return x
 }
 
-// The details of the discount offer to apply to the payment.
-//
-// WithPaymentDiscount sets the paymentDiscount property and returns the receiver for chaining.
+// WithPaymentDiscount the details of the discount offer to apply to the payment.
 func (x *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
-	x.inner.SetPaymentDiscount(paymentDiscount.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
 	return x
 }
 
-// A string that identifies a product that can be purchased from within your app.
-//
-// WithProductIdentifier sets the productIdentifier property and returns the receiver for chaining.
+// WithProductIdentifier a string that identifies a product that can be purchased from within your app.
 func (x *MutablePayment) WithProductIdentifier(productIdentifier string) *MutablePayment {
-	x.inner.SetProductIdentifier(foundation.NSStringStringWithUTF8String(productIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
 	return x
 }
 
-// The number of items the user wants to purchase.
-//
-// WithQuantity sets the quantity property and returns the receiver for chaining.
+// WithQuantity the number of items the user wants to purchase.
 func (x *MutablePayment) WithQuantity(quantity int) *MutablePayment {
-	x.inner.SetQuantity(quantity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 	return x
 }
 
-// Reserved for future use.
-//
-// WithRequestData sets the requestData property and returns the receiver for chaining.
-func (x *MutablePayment) WithRequestData(requestData *foundation.NSData) *MutablePayment {
-	x.inner.SetRequestData(requestData)
+// WithRequestData reserved for future use.
+func (x *MutablePayment) WithRequestData(requestData obj.Object) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
 	return x
 }
 
-// A Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
-//
-// WithSimulatesAskToBuyInSandbox sets the simulatesAskToBuyInSandbox property and returns the receiver for chaining.
+// WithSimulatesAskToBuyInSandbox a Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
 func (x *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment {
-	x.inner.SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
 	return x
 }
 
-// SetApplicationUsername calls the underlying SetApplicationUsername.
+// SetApplicationUsername wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetApplicationUsername(applicationUsername string) {
-	x.inner.SetApplicationUsername(foundation.NSStringStringWithUTF8String(applicationUsername))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
 }
 
-// SetPaymentDiscount calls the underlying SetPaymentDiscount.
-func (x *MutablePayment) SetPaymentDiscount(paymentDiscount *raw.SKPaymentDiscount) {
-	x.inner.SetPaymentDiscount(paymentDiscount)
+// SetPaymentDiscount wraps the corresponding Objective-C method.
+func (x *MutablePayment) SetPaymentDiscount(paymentDiscount *PaymentDiscount) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
 }
 
-// ProductIdentifier calls the underlying ProductIdentifier.
+// ProductIdentifier wraps the corresponding Objective-C method.
 func (x *MutablePayment) ProductIdentifier() string {
-	_r := x.inner.ProductIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetProductIdentifier calls the underlying SetProductIdentifier.
+// SetProductIdentifier wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetProductIdentifier(productIdentifier string) {
-	x.inner.SetProductIdentifier(foundation.NSStringStringWithUTF8String(productIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
 }
 
-// SetQuantity calls the underlying SetQuantity.
+// SetQuantity wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetQuantity(quantity int) {
-	x.inner.SetQuantity(quantity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 }
 
-// SetRequestData calls the underlying SetRequestData.
-func (x *MutablePayment) SetRequestData(requestData *foundation.NSData) {
-	x.inner.SetRequestData(requestData)
+// SetRequestData wraps the corresponding Objective-C method.
+func (x *MutablePayment) SetRequestData(requestData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
 }
 
-// SetSimulatesAskToBuyInSandbox calls the underlying SetSimulatesAskToBuyInSandbox.
+// SetSimulatesAskToBuyInSandbox wraps the corresponding Objective-C method.
 func (x *MutablePayment) SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) {
-	x.inner.SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
 }
-
-func (x *MutablePayment) asPayment() *raw.SKPayment { return &x.inner.SKPayment }
 
 // MutablePaymentable is the interface implemented by [MutablePayment], for mocking and DI.
 type MutablePaymentable interface {
-	Unwrap() *raw.SKMutablePayment
+	obj.Object
 	WithApplicationUsername(applicationUsername string) *MutablePayment
 	WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment
 	WithProductIdentifier(productIdentifier string) *MutablePayment
 	WithQuantity(quantity int) *MutablePayment
-	WithRequestData(requestData *foundation.NSData) *MutablePayment
+	WithRequestData(requestData obj.Object) *MutablePayment
 	WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment
 	SetApplicationUsername(applicationUsername string)
-	SetPaymentDiscount(paymentDiscount *raw.SKPaymentDiscount)
+	SetPaymentDiscount(paymentDiscount *PaymentDiscount)
 	ProductIdentifier() string
 	SetProductIdentifier(productIdentifier string)
 	SetQuantity(quantity int)
-	SetRequestData(requestData *foundation.NSData)
+	SetRequestData(requestData obj.Object)
 	SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool)
 }
 
 var _ MutablePaymentable = (*MutablePayment)(nil)
+
+var _ PaymentProvider = (*MutablePayment)(nil)

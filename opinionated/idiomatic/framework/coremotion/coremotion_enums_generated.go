@@ -9,142 +9,133 @@ import (
 )
 
 // The authorization status for motion-related features.
-type CMAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// The status has not yet been determined.
-	CMAuthorizationStatusNotDetermined CMAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// Access is denied due to system-wide restrictions.
-	CMAuthorizationStatusRestricted CMAuthorizationStatus = 1
+	AuthorizationStatusRestricted AuthorizationStatus = 1
 	// Access was denied by the user.
-	CMAuthorizationStatusDenied CMAuthorizationStatus = 2
+	AuthorizationStatusDenied AuthorizationStatus = 2
 	// Access was granted by the user.
-	CMAuthorizationStatusAuthorized CMAuthorizationStatus = 3
+	AuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
-func (e CMAuthorizationStatus) String() string {
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case CMAuthorizationStatusNotDetermined:
-		return "CMAuthorizationStatusNotDetermined"
-	case CMAuthorizationStatusRestricted:
-		return "CMAuthorizationStatusRestricted"
-	case CMAuthorizationStatusDenied:
-		return "CMAuthorizationStatusDenied"
-	case CMAuthorizationStatusAuthorized:
-		return "CMAuthorizationStatusAuthorized"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusRestricted:
+		return "AuthorizationStatusRestricted"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusAuthorized:
+		return "AuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("CMAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Defines the device’s sensor locations.
-type CMDeviceMotionSensorLocation int64
+type DeviceMotionSensorLocation int64
 
 const (
-	CMDeviceMotionSensorLocationDefault        CMDeviceMotionSensorLocation = 0
-	CMDeviceMotionSensorLocationHeadphoneLeft  CMDeviceMotionSensorLocation = 1
-	CMDeviceMotionSensorLocationHeadphoneRight CMDeviceMotionSensorLocation = 2
+	DeviceMotionSensorLocationDefault        DeviceMotionSensorLocation = 0
+	DeviceMotionSensorLocationHeadphoneLeft  DeviceMotionSensorLocation = 1
+	DeviceMotionSensorLocationHeadphoneRight DeviceMotionSensorLocation = 2
 )
 
-func (e CMDeviceMotionSensorLocation) String() string {
+// String returns the DeviceMotionSensorLocation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceMotionSensorLocation) String() string {
 	switch e {
-	case CMDeviceMotionSensorLocationDefault:
-		return "CMDeviceMotionSensorLocationDefault"
-	case CMDeviceMotionSensorLocationHeadphoneLeft:
-		return "CMDeviceMotionSensorLocationHeadphoneLeft"
-	case CMDeviceMotionSensorLocationHeadphoneRight:
-		return "CMDeviceMotionSensorLocationHeadphoneRight"
+	case DeviceMotionSensorLocationDefault:
+		return "DeviceMotionSensorLocationDefault"
+	case DeviceMotionSensorLocationHeadphoneLeft:
+		return "DeviceMotionSensorLocationHeadphoneLeft"
+	case DeviceMotionSensorLocationHeadphoneRight:
+		return "DeviceMotionSensorLocationHeadphoneRight"
 	default:
-		return fmt.Sprintf("CMDeviceMotionSensorLocation(%d)", int64(e))
-	}
-}
-
-// Headphone connection status updates.
-type CMHeadphoneActivityStatus int64
-
-const (
-	CMHeadphoneActivityStatusDisconnected CMHeadphoneActivityStatus = 0
-	CMHeadphoneActivityStatusConnected    CMHeadphoneActivityStatus = 1
-)
-
-func (e CMHeadphoneActivityStatus) String() string {
-	switch e {
-	case CMHeadphoneActivityStatusDisconnected:
-		return "CMHeadphoneActivityStatusDisconnected"
-	case CMHeadphoneActivityStatusConnected:
-		return "CMHeadphoneActivityStatusConnected"
-	default:
-		return fmt.Sprintf("CMHeadphoneActivityStatus(%d)", int64(e))
+		return fmt.Sprintf("DeviceMotionSensorLocation(%d)", int64(e))
 	}
 }
 
 // The confidence that the motion data is accurate.
-type CMMotionActivityConfidence int64
+type MotionActivityConfidence int64
 
 const (
 	// Confidence is low.
-	CMMotionActivityConfidenceLow CMMotionActivityConfidence = 0
+	MotionActivityConfidenceLow MotionActivityConfidence = 0
 	// Confidence is good.
-	CMMotionActivityConfidenceMedium CMMotionActivityConfidence = 1
+	MotionActivityConfidenceMedium MotionActivityConfidence = 1
 	// Confidence is high.
-	CMMotionActivityConfidenceHigh CMMotionActivityConfidence = 2
+	MotionActivityConfidenceHigh MotionActivityConfidence = 2
 )
 
-func (e CMMotionActivityConfidence) String() string {
+// String returns the MotionActivityConfidence constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MotionActivityConfidence) String() string {
 	switch e {
-	case CMMotionActivityConfidenceLow:
-		return "CMMotionActivityConfidenceLow"
-	case CMMotionActivityConfidenceMedium:
-		return "CMMotionActivityConfidenceMedium"
-	case CMMotionActivityConfidenceHigh:
-		return "CMMotionActivityConfidenceHigh"
+	case MotionActivityConfidenceLow:
+		return "MotionActivityConfidenceLow"
+	case MotionActivityConfidenceMedium:
+		return "MotionActivityConfidenceMedium"
+	case MotionActivityConfidenceHigh:
+		return "MotionActivityConfidenceHigh"
 	default:
-		return fmt.Sprintf("CMMotionActivityConfidence(%d)", int64(e))
+		return fmt.Sprintf("MotionActivityConfidence(%d)", int64(e))
 	}
 }
 
 // The device that the odometer sample originates from.
-type CMOdometerOriginDevice int64
+type OdometerOriginDevice int64
 
 const (
 	// The origin of the odometer sample is unknown.
-	CMOdometerOriginDeviceUnknown CMOdometerOriginDevice = 0
+	OdometerOriginDeviceUnknown OdometerOriginDevice = 0
 	// The origin of the odometer sample comes from the same device that requests the sample.
-	CMOdometerOriginDeviceLocal CMOdometerOriginDevice = 1
+	OdometerOriginDeviceLocal OdometerOriginDevice = 1
 	// The origin of the odometer sample comes from a device that’s paired with the local device.
-	CMOdometerOriginDeviceRemote CMOdometerOriginDevice = 2
+	OdometerOriginDeviceRemote OdometerOriginDevice = 2
 )
 
-func (e CMOdometerOriginDevice) String() string {
+// String returns the OdometerOriginDevice constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OdometerOriginDevice) String() string {
 	switch e {
-	case CMOdometerOriginDeviceUnknown:
-		return "CMOdometerOriginDeviceUnknown"
-	case CMOdometerOriginDeviceLocal:
-		return "CMOdometerOriginDeviceLocal"
-	case CMOdometerOriginDeviceRemote:
-		return "CMOdometerOriginDeviceRemote"
+	case OdometerOriginDeviceUnknown:
+		return "OdometerOriginDeviceUnknown"
+	case OdometerOriginDeviceLocal:
+		return "OdometerOriginDeviceLocal"
+	case OdometerOriginDeviceRemote:
+		return "OdometerOriginDeviceRemote"
 	default:
-		return fmt.Sprintf("CMOdometerOriginDevice(%d)", int64(e))
+		return fmt.Sprintf("OdometerOriginDevice(%d)", int64(e))
 	}
 }
 
 // Constants indicating the change that occurred to the user’s pedestrian activity.
-type CMPedometerEventType int64
+type PedometerEventType int64
 
 const (
 	// The user’s pedestrian activity stopped.
-	CMPedometerEventTypePause CMPedometerEventType = 0
+	PedometerEventTypePause PedometerEventType = 0
 	// The user’s pedestrian activity resumed.
-	CMPedometerEventTypeResume CMPedometerEventType = 1
+	PedometerEventTypeResume PedometerEventType = 1
 )
 
-func (e CMPedometerEventType) String() string {
+// String returns the PedometerEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PedometerEventType) String() string {
 	switch e {
-	case CMPedometerEventTypePause:
-		return "CMPedometerEventTypePause"
-	case CMPedometerEventTypeResume:
-		return "CMPedometerEventTypeResume"
+	case PedometerEventTypePause:
+		return "PedometerEventTypePause"
+	case PedometerEventTypeResume:
+		return "PedometerEventTypeResume"
 	default:
-		return fmt.Sprintf("CMPedometerEventType(%d)", int64(e))
+		return fmt.Sprintf("PedometerEventType(%d)", int64(e))
 	}
 }

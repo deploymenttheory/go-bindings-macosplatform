@@ -5,57 +5,90 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The charge level and state of a device’s battery.
+// DeviceBattery is an idiomatic wrapper over the Objective-C class GCDeviceBattery.
 //
-// DeviceBattery wraps [raw.GCDeviceBattery] with a fluent Go API.
+// The charge level and state of a device’s battery.
 type DeviceBattery struct {
-	inner *raw.GCDeviceBattery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCDeviceBattery].
-func (x *DeviceBattery) Unwrap() *raw.GCDeviceBattery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeviceBattery) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceBatteryFromID adopts an existing object pointer as a DeviceBattery (nil for 0).
+// DeviceBatteryFromID adopts an existing Objective-C object as a DeviceBattery
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceBatteryFromID(id objc.ID) *DeviceBattery {
 	if id == 0 {
 		return nil
 	}
-	return &DeviceBattery{inner: raw.GCDeviceBatteryFromID(id)}
+	x := &DeviceBattery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDeviceBattery creates a new [DeviceBattery].
+// deviceBatteryAdopt wraps an Objective-C object that this code just created as a
+// DeviceBattery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceBatteryAdopt(id objc.ID) *DeviceBattery {
+	if id == 0 {
+		return nil
+	}
+	x := &DeviceBattery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeviceBattery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeviceBattery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeviceBattery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DeviceBattery) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDeviceBattery creates a new DeviceBattery.
 func NewDeviceBattery() *DeviceBattery {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDeviceBattery")), objc.RegisterName("new"))
-	return &DeviceBattery{inner: raw.GCDeviceBatteryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceBattery")), objc.RegisterName("new"))
+	return deviceBatteryAdopt(_id)
 }
 
-// This is the battery level for controller. Battery level ranges from 0.0 (fully discharged) to 1.0 (100% charged) and defaults to 0
-//
-// BatteryLevel calls the underlying BatteryLevel.
+// BatteryLevel this is the battery level for controller. Battery level ranges from 0.0 (fully discharged) to 1.0 (100% charged) and defaults to 0
 func (x *DeviceBattery) BatteryLevel() float32 {
-	return x.inner.BatteryLevel()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("batteryLevel"))
+	return _r
 }
 
-// A battery state for controller, defaults to GCControllerBatteryStateUnknown @note This property might be useful if you display the information about currently connected controller for player's convenience
-//
-// BatteryState calls the underlying BatteryState.
-func (x *DeviceBattery) BatteryState() GCDeviceBatteryState {
-	return GCDeviceBatteryState(x.inner.BatteryState())
+// BatteryState a battery state for controller, defaults to GCControllerBatteryStateUnknown
+func (x *DeviceBattery) BatteryState() DeviceBatteryState {
+	_r := objc.Send[DeviceBatteryState](objref.IDOf(x), objc.RegisterName("batteryState"))
+	return _r
 }
 
 // DeviceBatteryable is the interface implemented by [DeviceBattery], for mocking and DI.
 type DeviceBatteryable interface {
-	Unwrap() *raw.GCDeviceBattery
+	obj.Object
 	BatteryLevel() float32
-	BatteryState() GCDeviceBatteryState
+	BatteryState() DeviceBatteryState
 }
 
 var _ DeviceBatteryable = (*DeviceBattery)(nil)

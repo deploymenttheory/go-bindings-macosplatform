@@ -5,20 +5,23 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// EntityIdentifierProvider is implemented by EntityIdentifier and any idiomatic type wrapping a FSEntityIdentifier subclass.
+// EntityIdentifierProvider is accepted wherever a FSEntityIdentifier (or one of its subclasses) is expected.
 type EntityIdentifierProvider interface {
-	asEntityIdentifier() *raw.FSEntityIdentifier
+	objref.Object
+	isEntityIdentifier()
 }
 
-// ItemAttributesProvider is implemented by ItemAttributes and any idiomatic type wrapping a FSItemAttributes subclass.
+// ItemAttributesProvider is accepted wherever a FSItemAttributes (or one of its subclasses) is expected.
 type ItemAttributesProvider interface {
-	asItemAttributes() *raw.FSItemAttributes
+	objref.Object
+	isItemAttributes()
 }
 
-// ResourceProvider is implemented by Resource and any idiomatic type wrapping a FSResource subclass.
+// ResourceProvider is accepted wherever a FSResource (or one of its subclasses) is expected.
 type ResourceProvider interface {
-	asResource() *raw.FSResource
+	objref.Object
+	isResource()
 }

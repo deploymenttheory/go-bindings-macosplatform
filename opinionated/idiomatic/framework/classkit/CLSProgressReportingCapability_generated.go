@@ -5,68 +5,76 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A progress reporting capability supported by a context.
+// ProgressReportingCapability is an idiomatic wrapper over the Objective-C class CLSProgressReportingCapability.
 //
-// ProgressReportingCapability wraps [raw.CLSProgressReportingCapability] with a fluent Go API.
+// It embeds [Object], promoting that type's methods.
+//
+// A progress reporting capability supported by a context.
 type ProgressReportingCapability struct {
-	inner *raw.CLSProgressReportingCapability
+	Object
 }
 
-// Unwrap returns the underlying [raw.CLSProgressReportingCapability].
-func (x *ProgressReportingCapability) Unwrap() *raw.CLSProgressReportingCapability { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProgressReportingCapability) ID() objc.ID { return x.inner.Ptr() }
-
-// ProgressReportingCapabilityFromID adopts an existing object pointer as a ProgressReportingCapability (nil for 0).
+// ProgressReportingCapabilityFromID adopts an existing Objective-C object as a ProgressReportingCapability
+// (nil for 0), retaining it and registering a release finalizer.
 func ProgressReportingCapabilityFromID(id objc.ID) *ProgressReportingCapability {
 	if id == 0 {
 		return nil
 	}
-	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(id)}
+	x := &ProgressReportingCapability{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new progress reporting capability of the given type with a descriptive string.
-//
-// NewProgressReportingCapabilityWithKindDetails creates a new [ProgressReportingCapability].
-func NewProgressReportingCapabilityWithKindDetails(kind CLSProgressReportingCapabilityKind, details string) *ProgressReportingCapability {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSProgressReportingCapability")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:details:"), raw.CLSProgressReportingCapabilityKind(kind), foundation.NSStringStringWithUTF8String(details).Ptr())
-	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(_id)}
+// progressReportingCapabilityAdopt wraps an Objective-C object that this code just created as a
+// ProgressReportingCapability (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func progressReportingCapabilityAdopt(id objc.ID) *ProgressReportingCapability {
+	if id == 0 {
+		return nil
+	}
+	x := &ProgressReportingCapability{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract      Returns the kind of progress reporting capability
-//
-// Kind calls the underlying Kind.
-func (x *ProgressReportingCapability) Kind() CLSProgressReportingCapabilityKind {
-	return CLSProgressReportingCapabilityKind(x.inner.Kind())
+// NewProgressReportingCapabilityWithKindDetails creates a new progress reporting capability of the given type with a descriptive string.
+func NewProgressReportingCapabilityWithKindDetails(kind ProgressReportingCapabilityKind, details string) *ProgressReportingCapability {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSProgressReportingCapability")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:details:"), kind, purego.NSString(details))
+	return progressReportingCapabilityAdopt(_id)
 }
 
-// @abstract      Returns progress reporting details
-//
-// Details calls the underlying Details.
+// Kind returns the kind of progress reporting capability
+func (x *ProgressReportingCapability) Kind() ProgressReportingCapabilityKind {
+	_r := objc.Send[ProgressReportingCapabilityKind](objref.IDOf(x), objc.RegisterName("kind"))
+	return _r
+}
+
+// Details returns progress reporting details
 func (x *ProgressReportingCapability) Details() string {
-	_r := x.inner.Details()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("details"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *ProgressReportingCapability) asObject() *raw.CLSObject { return &x.inner.CLSObject }
 
 // ProgressReportingCapabilityable is the interface implemented by [ProgressReportingCapability], for mocking and DI.
 type ProgressReportingCapabilityable interface {
-	Unwrap() *raw.CLSProgressReportingCapability
-	Kind() CLSProgressReportingCapabilityKind
+	obj.Object
+	Kind() ProgressReportingCapabilityKind
 	Details() string
 }
 
 var _ ProgressReportingCapabilityable = (*ProgressReportingCapability)(nil)
+
+var _ ObjectProvider = (*ProgressReportingCapability)(nil)

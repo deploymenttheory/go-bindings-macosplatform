@@ -5,108 +5,92 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageStatisticsMeanAndVariance wraps [raw.MPSImageStatisticsMeanAndVariance] with a fluent Go API.
+// ImageStatisticsMeanAndVariance is an idiomatic wrapper over the Objective-C class MPSImageStatisticsMeanAndVariance.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageStatisticsMeanAndVariance struct {
-	inner *raw.MPSImageStatisticsMeanAndVariance
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageStatisticsMeanAndVariance].
-func (x *ImageStatisticsMeanAndVariance) Unwrap() *raw.MPSImageStatisticsMeanAndVariance {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageStatisticsMeanAndVariance) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageStatisticsMeanAndVarianceFromID adopts an existing object pointer as a ImageStatisticsMeanAndVariance (nil for 0).
+// ImageStatisticsMeanAndVarianceFromID adopts an existing Objective-C object as a ImageStatisticsMeanAndVariance
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageStatisticsMeanAndVarianceFromID(id objc.ID) *ImageStatisticsMeanAndVariance {
 	if id == 0 {
 		return nil
 	}
-	return &ImageStatisticsMeanAndVariance{inner: raw.MPSImageStatisticsMeanAndVarianceFromID(id)}
+	x := &ImageStatisticsMeanAndVariance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageStatisticsMeanAndVarianceWithDevice creates a new [ImageStatisticsMeanAndVariance].
-func NewImageStatisticsMeanAndVarianceWithDevice(device metal.MTLDevice) *ImageStatisticsMeanAndVariance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageStatisticsMeanAndVariance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageStatisticsMeanAndVariance{inner: raw.MPSImageStatisticsMeanAndVarianceFromID(_id)}
+// imageStatisticsMeanAndVarianceAdopt wraps an Objective-C object that this code just created as a
+// ImageStatisticsMeanAndVariance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageStatisticsMeanAndVarianceAdopt(id objc.ID) *ImageStatisticsMeanAndVariance {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageStatisticsMeanAndVariance{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageStatisticsMeanAndVarianceWithCoderDevice creates a new [ImageStatisticsMeanAndVariance].
-func NewImageStatisticsMeanAndVarianceWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageStatisticsMeanAndVariance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageStatisticsMeanAndVariance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageStatisticsMeanAndVariance{inner: raw.MPSImageStatisticsMeanAndVarianceFromID(_id)}
+// NewImageStatisticsMeanAndVariance creates a new ImageStatisticsMeanAndVariance.
+func NewImageStatisticsMeanAndVariance() *ImageStatisticsMeanAndVariance {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageStatisticsMeanAndVariance")), objc.RegisterName("new"))
+	return imageStatisticsMeanAndVarianceAdopt(_id)
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
 func (x *ImageStatisticsMeanAndVariance) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMeanAndVariance {
-	x.inner.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (x *ImageStatisticsMeanAndVariance) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMeanAndVariance {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageStatisticsMeanAndVariance) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMeanAndVariance {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageStatisticsMeanAndVariance) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMeanAndVariance {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
-//
-// ClipRectSource calls the underlying ClipRectSource.
+// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
 func (x *ImageStatisticsMeanAndVariance) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+	return _r
 }
 
-// SetClipRectSource calls the underlying SetClipRectSource.
+// SetClipRectSource wraps the corresponding Objective-C method.
 func (x *ImageStatisticsMeanAndVariance) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
-}
-
-func (x *ImageStatisticsMeanAndVariance) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 }
 
 // ImageStatisticsMeanAndVarianceable is the interface implemented by [ImageStatisticsMeanAndVariance], for mocking and DI.
 type ImageStatisticsMeanAndVarianceable interface {
-	Unwrap() *raw.MPSImageStatisticsMeanAndVariance
+	obj.Object
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMeanAndVariance
 	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMeanAndVariance
 	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMeanAndVariance
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMeanAndVariance
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }
 
 var _ ImageStatisticsMeanAndVarianceable = (*ImageStatisticsMeanAndVariance)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageStatisticsMeanAndVariance)(nil)

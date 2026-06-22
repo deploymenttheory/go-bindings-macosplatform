@@ -5,10 +5,9 @@
 package arkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/arkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// Ar_error_domain returns the value of the CoreFoundation reference constant ar_error_domain as an objc.ID.
-func Ar_error_domain() objc.ID { return purego.CFConstant(raw.Ar_error_domain()) }
+// Ar_error_domain returns the value of the constant ar_error_domain.
+func Ar_error_domain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ar_error_domain"))) }

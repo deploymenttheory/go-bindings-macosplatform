@@ -5,4023 +5,2229 @@
 package carboncore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AbsoluteDeltaToDuration calls [raw.AbsoluteDeltaToDuration] (C function AbsoluteDeltaToDuration).
-func AbsoluteDeltaToDuration(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime unsafe.Pointer) int {
-	return raw.AbsoluteDeltaToDuration(leftAbsoluteTime, rightAbsoluteTime)
-}
+var _fnBitAnd func(int, int) int
 
-// AbsoluteDeltaToNanoseconds calls [raw.AbsoluteDeltaToNanoseconds] (C function AbsoluteDeltaToNanoseconds).
-func AbsoluteDeltaToNanoseconds(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.AbsoluteDeltaToNanoseconds(leftAbsoluteTime, rightAbsoluteTime)
-}
-
-// AbsoluteToDuration calls [raw.AbsoluteToDuration] (C function AbsoluteToDuration).
-func AbsoluteToDuration(absoluteTime unsafe.Pointer) int {
-	return raw.AbsoluteToDuration(absoluteTime)
-}
-
-// AbsoluteToNanoseconds calls [raw.AbsoluteToNanoseconds] (C function AbsoluteToNanoseconds).
-func AbsoluteToNanoseconds(absoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.AbsoluteToNanoseconds(absoluteTime)
-}
-
-// AddAbsoluteToAbsolute calls [raw.AddAbsoluteToAbsolute] (C function AddAbsoluteToAbsolute).
-func AddAbsoluteToAbsolute(absoluteTime1 unsafe.Pointer, absoluteTime2 unsafe.Pointer) unsafe.Pointer {
-	return raw.AddAbsoluteToAbsolute(absoluteTime1, absoluteTime2)
-}
-
-// AddAtomic calls [raw.AddAtomic] (C function AddAtomic).
-func AddAtomic(amount int, address *int) int {
-	return raw.AddAtomic(amount, address)
-}
-
-// AddAtomic16 calls [raw.AddAtomic16] (C function AddAtomic16).
-func AddAtomic16(amount int, address *int16) int16 {
-	return raw.AddAtomic16(amount, address)
-}
-
-// AddAtomic8 calls [raw.AddAtomic8] (C function AddAtomic8).
-func AddAtomic8(amount int, address *int8) int8 {
-	return raw.AddAtomic8(amount, address)
-}
-
-// AddCollectionItem calls [raw.AddCollectionItem] (C function AddCollectionItem).
-func AddCollectionItem(c unsafe.Pointer, tag uint, id_ int, itemSize int, itemData unsafe.Pointer) int16 {
-	return raw.AddCollectionItem(c, tag, id_, itemSize, itemData)
-}
-
-// AddCollectionItemHdl calls [raw.AddCollectionItemHdl] (C function AddCollectionItemHdl).
-func AddCollectionItemHdl(aCollection unsafe.Pointer, tag uint, id_ int, itemData *string) int16 {
-	return raw.AddCollectionItemHdl(aCollection, tag, id_, itemData)
-}
-
-// AddDurationToAbsolute calls [raw.AddDurationToAbsolute] (C function AddDurationToAbsolute).
-func AddDurationToAbsolute(duration int, absoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.AddDurationToAbsolute(duration, absoluteTime)
-}
-
-// AddFolderDescriptor calls [raw.AddFolderDescriptor] (C function AddFolderDescriptor).
-func AddFolderDescriptor(foldType uint, flags uint, foldClass uint, foldLocation uint, badgeSignature uint, badgeType uint, name *uint8, replaceFlag uint8) int16 {
-	return raw.AddFolderDescriptor(foldType, flags, foldClass, foldLocation, badgeSignature, badgeType, name, replaceFlag)
-}
-
-// AddNanosecondsToAbsolute calls [raw.AddNanosecondsToAbsolute] (C function AddNanosecondsToAbsolute).
-func AddNanosecondsToAbsolute(nanoseconds unsafe.Pointer, absoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.AddNanosecondsToAbsolute(nanoseconds, absoluteTime)
-}
-
-// AddResource calls [raw.AddResource] (C function AddResource).
-func AddResource(theData *string, theType uint, theID int16, name *uint8) {
-	raw.AddResource(theData, theType, theID, name)
-}
-
-// BitAnd calls [raw.BitAnd] (C function BitAnd).
+// BitAnd calls the CarbonCore framework function BitAnd.
 func BitAnd(value1 int, value2 int) int {
-	return raw.BitAnd(value1, value2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitAnd == nil {
+		ebipurego.RegisterLibFunc(&_fnBitAnd, _lib, "BitAnd")
+	}
+	return _fnBitAnd(value1, value2)
 }
 
-// BitAndAtomic calls [raw.BitAndAtomic] (C function BitAndAtomic).
-func BitAndAtomic(mask uint, address *uint) uint {
-	return raw.BitAndAtomic(mask, address)
-}
+var _fnBitNot func(int) int
 
-// BitAndAtomic16 calls [raw.BitAndAtomic16] (C function BitAndAtomic16).
-func BitAndAtomic16(mask uint, address *uint16) uint16 {
-	return raw.BitAndAtomic16(mask, address)
-}
-
-// BitAndAtomic8 calls [raw.BitAndAtomic8] (C function BitAndAtomic8).
-func BitAndAtomic8(mask uint, address *uint8) uint8 {
-	return raw.BitAndAtomic8(mask, address)
-}
-
-// BitClr calls [raw.BitClr] (C function BitClr).
-func BitClr(bytePtr unsafe.Pointer, bitNum int) {
-	raw.BitClr(bytePtr, bitNum)
-}
-
-// BitNot calls [raw.BitNot] (C function BitNot).
+// BitNot calls the CarbonCore framework function BitNot.
 func BitNot(value int) int {
-	return raw.BitNot(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitNot == nil {
+		ebipurego.RegisterLibFunc(&_fnBitNot, _lib, "BitNot")
+	}
+	return _fnBitNot(value)
 }
 
-// BitOr calls [raw.BitOr] (C function BitOr).
+var _fnBitOr func(int, int) int
+
+// BitOr calls the CarbonCore framework function BitOr.
 func BitOr(value1 int, value2 int) int {
-	return raw.BitOr(value1, value2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitOr == nil {
+		ebipurego.RegisterLibFunc(&_fnBitOr, _lib, "BitOr")
+	}
+	return _fnBitOr(value1, value2)
 }
 
-// BitOrAtomic calls [raw.BitOrAtomic] (C function BitOrAtomic).
-func BitOrAtomic(mask uint, address *uint) uint {
-	return raw.BitOrAtomic(mask, address)
-}
+var _fnBitShift func(int, int16) int
 
-// BitOrAtomic16 calls [raw.BitOrAtomic16] (C function BitOrAtomic16).
-func BitOrAtomic16(mask uint, address *uint16) uint16 {
-	return raw.BitOrAtomic16(mask, address)
-}
-
-// BitOrAtomic8 calls [raw.BitOrAtomic8] (C function BitOrAtomic8).
-func BitOrAtomic8(mask uint, address *uint8) uint8 {
-	return raw.BitOrAtomic8(mask, address)
-}
-
-// BitSet calls [raw.BitSet] (C function BitSet).
-func BitSet(bytePtr unsafe.Pointer, bitNum int) {
-	raw.BitSet(bytePtr, bitNum)
-}
-
-// BitShift calls [raw.BitShift] (C function BitShift).
+// BitShift calls the CarbonCore framework function BitShift.
 func BitShift(value int, count int16) int {
-	return raw.BitShift(value, count)
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitShift == nil {
+		ebipurego.RegisterLibFunc(&_fnBitShift, _lib, "BitShift")
+	}
+	return _fnBitShift(value, count)
 }
 
-// BitTst calls [raw.BitTst] (C function BitTst).
-func BitTst(bytePtr unsafe.Pointer, bitNum int) uint8 {
-	return raw.BitTst(bytePtr, bitNum)
-}
+var _fnBitXor func(int, int) int
 
-// BitXor calls [raw.BitXor] (C function BitXor).
+// BitXor calls the CarbonCore framework function BitXor.
 func BitXor(value1 int, value2 int) int {
-	return raw.BitXor(value1, value2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitXor == nil {
+		ebipurego.RegisterLibFunc(&_fnBitXor, _lib, "BitXor")
+	}
+	return _fnBitXor(value1, value2)
 }
 
-// BitXorAtomic calls [raw.BitXorAtomic] (C function BitXorAtomic).
-func BitXorAtomic(mask uint, address *uint) uint {
-	return raw.BitXorAtomic(mask, address)
+var _fnCSCopyMachineName func() objc.ID
+
+// CSCopyMachineName calls the CarbonCore framework function CSCopyMachineName.
+func CSCopyMachineName() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSCopyMachineName == nil {
+		ebipurego.RegisterLibFunc(&_fnCSCopyMachineName, _lib, "CSCopyMachineName")
+	}
+	_ret := _fnCSCopyMachineName()
+	return obj.Wrap(_ret)
 }
 
-// BitXorAtomic16 calls [raw.BitXorAtomic16] (C function BitXorAtomic16).
-func BitXorAtomic16(mask uint, address *uint16) uint16 {
-	return raw.BitXorAtomic16(mask, address)
+var _fnCSCopyUserName func(uint8) objc.ID
+
+// CSCopyUserName calls the CarbonCore framework function CSCopyUserName.
+func CSCopyUserName(useShortName uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSCopyUserName == nil {
+		ebipurego.RegisterLibFunc(&_fnCSCopyUserName, _lib, "CSCopyUserName")
+	}
+	_ret := _fnCSCopyUserName(useShortName)
+	return obj.Wrap(_ret)
 }
 
-// BitXorAtomic8 calls [raw.BitXorAtomic8] (C function BitXorAtomic8).
-func BitXorAtomic8(mask uint, address *uint8) uint8 {
-	return raw.BitXorAtomic8(mask, address)
+var _fnCSDiskSpaceCancelRecovery func(objc.ID)
+
+// CSDiskSpaceCancelRecovery calls the CarbonCore framework function CSDiskSpaceCancelRecovery.
+func CSDiskSpaceCancelRecovery(operationUUID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSDiskSpaceCancelRecovery == nil {
+		ebipurego.RegisterLibFunc(&_fnCSDiskSpaceCancelRecovery, _lib, "CSDiskSpaceCancelRecovery")
+	}
+	_fnCSDiskSpaceCancelRecovery(objref.IDOf(operationUUID))
 }
 
-// CSBackupIsItemExcluded calls [raw.CSBackupIsItemExcluded] (C function CSBackupIsItemExcluded).
-func CSBackupIsItemExcluded(item unsafe.Pointer, excludeByPath *uint8) uint8 {
-	return raw.CSBackupIsItemExcluded(item, excludeByPath)
+var _fnCSDiskSpaceGetRecoveryEstimate func(objc.ID) uint64
+
+// CSDiskSpaceGetRecoveryEstimate calls the CarbonCore framework function CSDiskSpaceGetRecoveryEstimate.
+func CSDiskSpaceGetRecoveryEstimate(volumeURL obj.Object) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSDiskSpaceGetRecoveryEstimate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSDiskSpaceGetRecoveryEstimate, _lib, "CSDiskSpaceGetRecoveryEstimate")
+	}
+	return _fnCSDiskSpaceGetRecoveryEstimate(objref.IDOf(volumeURL))
 }
 
-// CSCopyMachineName calls [raw.CSCopyMachineName] (C function CSCopyMachineName).
-func CSCopyMachineName() unsafe.Pointer {
-	return raw.CSCopyMachineName()
+var _fnCSGetComponentsThreadMode func() int
+
+// CSGetComponentsThreadMode calls the CarbonCore framework function CSGetComponentsThreadMode.
+func CSGetComponentsThreadMode() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSGetComponentsThreadMode == nil {
+		ebipurego.RegisterLibFunc(&_fnCSGetComponentsThreadMode, _lib, "CSGetComponentsThreadMode")
+	}
+	return _fnCSGetComponentsThreadMode()
 }
 
-// CSCopyUserName calls [raw.CSCopyUserName] (C function CSCopyUserName).
-func CSCopyUserName(useShortName uint8) unsafe.Pointer {
-	return raw.CSCopyUserName(useShortName)
+var _fnCSSetComponentsThreadMode func(int)
+
+// CSSetComponentsThreadMode calls the CarbonCore framework function CSSetComponentsThreadMode.
+func CSSetComponentsThreadMode(mode int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSetComponentsThreadMode == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSetComponentsThreadMode, _lib, "CSSetComponentsThreadMode")
+	}
+	_fnCSSetComponentsThreadMode(mode)
 }
 
-// CSDiskSpaceCancelRecovery calls [raw.CSDiskSpaceCancelRecovery] (C function CSDiskSpaceCancelRecovery).
-func CSDiskSpaceCancelRecovery(operationUUID unsafe.Pointer) {
-	raw.CSDiskSpaceCancelRecovery(operationUUID)
+var _fnCloneCollection func(objc.ID) objc.ID
+
+// CloneCollection calls the CarbonCore framework function CloneCollection.
+func CloneCollection(c obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCloneCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnCloneCollection, _lib, "CloneCollection")
+	}
+	_ret := _fnCloneCollection(objref.IDOf(c))
+	return obj.Wrap(_ret)
 }
 
-// CSDiskSpaceGetRecoveryEstimate calls [raw.CSDiskSpaceGetRecoveryEstimate] (C function CSDiskSpaceGetRecoveryEstimate).
-func CSDiskSpaceGetRecoveryEstimate(volumeURL unsafe.Pointer) uint64 {
-	return raw.CSDiskSpaceGetRecoveryEstimate(volumeURL)
-}
+var _fnCloseComponentResFile func(int) int16
 
-// CSDiskSpaceStartRecovery calls [raw.CSDiskSpaceStartRecovery] (C function CSDiskSpaceStartRecovery).
-func CSDiskSpaceStartRecovery(volumeURL unsafe.Pointer, bytesNeeded uint64, options int, outOperationUUID unsafe.Pointer, callbackQueue *foundation.NSObject, callback func(uint8, uint64, unsafe.Pointer)) {
-	raw.CSDiskSpaceStartRecovery(volumeURL, bytesNeeded, options, outOperationUUID, callbackQueue, callback)
-}
-
-// CSGetComponentsThreadMode calls [raw.CSGetComponentsThreadMode] (C function CSGetComponentsThreadMode).
-func CSGetComponentsThreadMode() uint {
-	return raw.CSGetComponentsThreadMode()
-}
-
-// CSSetComponentsThreadMode calls [raw.CSSetComponentsThreadMode] (C function CSSetComponentsThreadMode).
-func CSSetComponentsThreadMode(mode uint) {
-	raw.CSSetComponentsThreadMode(mode)
-}
-
-// CallComponentCanDo calls [raw.CallComponentCanDo] (C function CallComponentCanDo).
-func CallComponentCanDo(ci *raw.ComponentInstanceRecord, ftnNumber int16) int {
-	return raw.CallComponentCanDo(ci, ftnNumber)
-}
-
-// CallComponentClose calls [raw.CallComponentClose] (C function CallComponentClose).
-func CallComponentClose(ci *raw.ComponentInstanceRecord, self *raw.ComponentInstanceRecord) int {
-	return raw.CallComponentClose(ci, self)
-}
-
-// CallComponentDispatch calls [raw.CallComponentDispatch] (C function CallComponentDispatch).
-func CallComponentDispatch(cp *raw.ComponentParameters) int {
-	return raw.CallComponentDispatch(cp)
-}
-
-// CallComponentFunction calls [raw.CallComponentFunction] (C function CallComponentFunction).
-func CallComponentFunction(params *raw.ComponentParameters, func_ unsafe.Pointer) int {
-	return raw.CallComponentFunction(params, func_)
-}
-
-// CallComponentFunctionWithStorage calls [raw.CallComponentFunctionWithStorage] (C function CallComponentFunctionWithStorage).
-func CallComponentFunctionWithStorage(storage *string, params *raw.ComponentParameters, func_ unsafe.Pointer) int {
-	return raw.CallComponentFunctionWithStorage(storage, params, func_)
-}
-
-// CallComponentFunctionWithStorageProcInfo calls [raw.CallComponentFunctionWithStorageProcInfo] (C function CallComponentFunctionWithStorageProcInfo).
-func CallComponentFunctionWithStorageProcInfo(storage *string, params *raw.ComponentParameters, func_ unsafe.Pointer, funcProcInfo uint) int {
-	return raw.CallComponentFunctionWithStorageProcInfo(storage, params, func_, funcProcInfo)
-}
-
-// CallComponentGetMPWorkFunction calls [raw.CallComponentGetMPWorkFunction] (C function CallComponentGetMPWorkFunction).
-func CallComponentGetMPWorkFunction(ci *raw.ComponentInstanceRecord, workFunction unsafe.Pointer, refCon unsafe.Pointer) int {
-	return raw.CallComponentGetMPWorkFunction(ci, workFunction, refCon)
-}
-
-// CallComponentGetPublicResource calls [raw.CallComponentGetPublicResource] (C function CallComponentGetPublicResource).
-func CallComponentGetPublicResource(ci *raw.ComponentInstanceRecord, resourceType uint, resourceID int16, resource **string) int {
-	return raw.CallComponentGetPublicResource(ci, resourceType, resourceID, resource)
-}
-
-// CallComponentOpen calls [raw.CallComponentOpen] (C function CallComponentOpen).
-func CallComponentOpen(ci *raw.ComponentInstanceRecord, self *raw.ComponentInstanceRecord) int {
-	return raw.CallComponentOpen(ci, self)
-}
-
-// CallComponentRegister calls [raw.CallComponentRegister] (C function CallComponentRegister).
-func CallComponentRegister(ci *raw.ComponentInstanceRecord) int {
-	return raw.CallComponentRegister(ci)
-}
-
-// CallComponentTarget calls [raw.CallComponentTarget] (C function CallComponentTarget).
-func CallComponentTarget(ci *raw.ComponentInstanceRecord, target *raw.ComponentInstanceRecord) int {
-	return raw.CallComponentTarget(ci, target)
-}
-
-// CallComponentUnregister calls [raw.CallComponentUnregister] (C function CallComponentUnregister).
-func CallComponentUnregister(ci *raw.ComponentInstanceRecord) int {
-	return raw.CallComponentUnregister(ci)
-}
-
-// CallComponentVersion calls [raw.CallComponentVersion] (C function CallComponentVersion).
-func CallComponentVersion(ci *raw.ComponentInstanceRecord) int {
-	return raw.CallComponentVersion(ci)
-}
-
-// CaptureComponent calls [raw.CaptureComponent] (C function CaptureComponent).
-func CaptureComponent(capturedComponent *raw.ComponentRecord, capturingComponent *raw.ComponentRecord) *raw.ComponentRecord {
-	return raw.CaptureComponent(capturedComponent, capturingComponent)
-}
-
-// ChangeTextToUnicodeInfo calls [raw.ChangeTextToUnicodeInfo] (C function ChangeTextToUnicodeInfo).
-func ChangeTextToUnicodeInfo(ioTextToUnicodeInfo unsafe.Pointer, iUnicodeMapping *raw.UnicodeMapping) int {
-	return raw.ChangeTextToUnicodeInfo(ioTextToUnicodeInfo, iUnicodeMapping)
-}
-
-// ChangeUnicodeToTextInfo calls [raw.ChangeUnicodeToTextInfo] (C function ChangeUnicodeToTextInfo).
-func ChangeUnicodeToTextInfo(ioUnicodeToTextInfo unsafe.Pointer, iUnicodeMapping *raw.UnicodeMapping) int {
-	return raw.ChangeUnicodeToTextInfo(ioUnicodeToTextInfo, iUnicodeMapping)
-}
-
-// ChangedResource calls [raw.ChangedResource] (C function ChangedResource).
-func ChangedResource(theResource *string) {
-	raw.ChangedResource(theResource)
-}
-
-// CloneCollection calls [raw.CloneCollection] (C function CloneCollection).
-func CloneCollection(c unsafe.Pointer) unsafe.Pointer {
-	return raw.CloneCollection(c)
-}
-
-// CloseComponent calls [raw.CloseComponent] (C function CloseComponent).
-func CloseComponent(aComponentInstance *raw.ComponentInstanceRecord) int16 {
-	return raw.CloseComponent(aComponentInstance)
-}
-
-// CloseComponentResFile calls [raw.CloseComponentResFile] (C function CloseComponentResFile).
+// CloseComponentResFile calls the CarbonCore framework function CloseComponentResFile.
 func CloseComponentResFile(refnum int) int16 {
-	return raw.CloseComponentResFile(refnum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCloseComponentResFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCloseComponentResFile, _lib, "CloseComponentResFile")
+	}
+	return _fnCloseComponentResFile(refnum)
 }
 
-// CloseResFile calls [raw.CloseResFile] (C function CloseResFile).
+var _fnCloseResFile func(int)
+
+// CloseResFile calls the CarbonCore framework function CloseResFile.
 func CloseResFile(refNum int) {
-	raw.CloseResFile(refNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCloseResFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCloseResFile, _lib, "CloseResFile")
+	}
+	_fnCloseResFile(refNum)
 }
 
-// CollectionTagExists calls [raw.CollectionTagExists] (C function CollectionTagExists).
-func CollectionTagExists(c unsafe.Pointer, tag uint) uint8 {
-	return raw.CollectionTagExists(c, tag)
+var _fnCollectionTagExists func(objc.ID, int) uint8
+
+// CollectionTagExists calls the CarbonCore framework function CollectionTagExists.
+func CollectionTagExists(c obj.Object, tag int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCollectionTagExists == nil {
+		ebipurego.RegisterLibFunc(&_fnCollectionTagExists, _lib, "CollectionTagExists")
+	}
+	return _fnCollectionTagExists(objref.IDOf(c), tag)
 }
 
-// CompareAndSwap calls [raw.CompareAndSwap] (C function CompareAndSwap).
-func CompareAndSwap(oldValue uint, newValue uint, address *uint) uint8 {
-	return raw.CompareAndSwap(oldValue, newValue, address)
+var _fnCopyCollection func(objc.ID, objc.ID) objc.ID
+
+// CopyCollection calls the CarbonCore framework function CopyCollection.
+func CopyCollection(srcCollection obj.Object, dstCollection obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCopyCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnCopyCollection, _lib, "CopyCollection")
+	}
+	_ret := _fnCopyCollection(objref.IDOf(srcCollection), objref.IDOf(dstCollection))
+	return obj.Wrap(_ret)
 }
 
-// ConvertFromPStringToUnicode calls [raw.ConvertFromPStringToUnicode] (C function ConvertFromPStringToUnicode).
-func ConvertFromPStringToUnicode(iTextToUnicodeInfo unsafe.Pointer, iPascalStr *uint8, iOutputBufLen uint, oUnicodeLen *uint, oUnicodeStr *uint16) int {
-	return raw.ConvertFromPStringToUnicode(iTextToUnicodeInfo, iPascalStr, iOutputBufLen, oUnicodeLen, oUnicodeStr)
+var _fnCount1Resources func(int) int16
+
+// Count1Resources calls the CarbonCore framework function Count1Resources.
+func Count1Resources(theType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCount1Resources == nil {
+		ebipurego.RegisterLibFunc(&_fnCount1Resources, _lib, "Count1Resources")
+	}
+	return _fnCount1Resources(theType)
 }
 
-// ConvertFromTextToUnicode calls [raw.ConvertFromTextToUnicode] (C function ConvertFromTextToUnicode).
-func ConvertFromTextToUnicode(iTextToUnicodeInfo unsafe.Pointer, iSourceLen uint, iSourceStr unsafe.Pointer, iControlFlags uint, iOffsetCount uint, iOffsetArray *uint, oOffsetCount *uint, oOffsetArray *uint, iOutputBufLen uint, oSourceRead *uint, oUnicodeLen *uint, oUnicodeStr *uint16) int {
-	return raw.ConvertFromTextToUnicode(iTextToUnicodeInfo, iSourceLen, iSourceStr, iControlFlags, iOffsetCount, iOffsetArray, oOffsetCount, oOffsetArray, iOutputBufLen, oSourceRead, oUnicodeLen, oUnicodeStr)
-}
+var _fnCount1Types func() int16
 
-// ConvertFromUnicodeToPString calls [raw.ConvertFromUnicodeToPString] (C function ConvertFromUnicodeToPString).
-func ConvertFromUnicodeToPString(iUnicodeToTextInfo unsafe.Pointer, iUnicodeLen uint, iUnicodeStr *uint16, oPascalStr *uint8) int {
-	return raw.ConvertFromUnicodeToPString(iUnicodeToTextInfo, iUnicodeLen, iUnicodeStr, oPascalStr)
-}
-
-// ConvertFromUnicodeToScriptCodeRun calls [raw.ConvertFromUnicodeToScriptCodeRun] (C function ConvertFromUnicodeToScriptCodeRun).
-func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo unsafe.Pointer, iUnicodeLen uint, iUnicodeStr *uint16, iControlFlags uint, iOffsetCount uint, iOffsetArray *uint, oOffsetCount *uint, oOffsetArray *uint, iOutputBufLen uint, oInputRead *uint, oOutputLen *uint, oOutputStr unsafe.Pointer, iScriptRunBufLen uint, oScriptRunOutLen *uint, oScriptCodeRuns *raw.ScriptCodeRun) int {
-	return raw.ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo, iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, oOffsetCount, oOffsetArray, iOutputBufLen, oInputRead, oOutputLen, oOutputStr, iScriptRunBufLen, oScriptRunOutLen, oScriptCodeRuns)
-}
-
-// ConvertFromUnicodeToText calls [raw.ConvertFromUnicodeToText] (C function ConvertFromUnicodeToText).
-func ConvertFromUnicodeToText(iUnicodeToTextInfo unsafe.Pointer, iUnicodeLen uint, iUnicodeStr *uint16, iControlFlags uint, iOffsetCount uint, iOffsetArray *uint, oOffsetCount *uint, oOffsetArray *uint, iOutputBufLen uint, oInputRead *uint, oOutputLen *uint, oOutputStr unsafe.Pointer) int {
-	return raw.ConvertFromUnicodeToText(iUnicodeToTextInfo, iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, oOffsetCount, oOffsetArray, iOutputBufLen, oInputRead, oOutputLen, oOutputStr)
-}
-
-// ConvertFromUnicodeToTextRun calls [raw.ConvertFromUnicodeToTextRun] (C function ConvertFromUnicodeToTextRun).
-func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo unsafe.Pointer, iUnicodeLen uint, iUnicodeStr *uint16, iControlFlags uint, iOffsetCount uint, iOffsetArray *uint, oOffsetCount *uint, oOffsetArray *uint, iOutputBufLen uint, oInputRead *uint, oOutputLen *uint, oOutputStr unsafe.Pointer, iEncodingRunBufLen uint, oEncodingRunOutLen *uint, oEncodingRuns *raw.TextEncodingRun) int {
-	return raw.ConvertFromUnicodeToTextRun(iUnicodeToTextInfo, iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, oOffsetCount, oOffsetArray, iOutputBufLen, oInputRead, oOutputLen, oOutputStr, iEncodingRunBufLen, oEncodingRunOutLen, oEncodingRuns)
-}
-
-// CopyCollection calls [raw.CopyCollection] (C function CopyCollection).
-func CopyCollection(srcCollection unsafe.Pointer, dstCollection unsafe.Pointer) unsafe.Pointer {
-	return raw.CopyCollection(srcCollection, dstCollection)
-}
-
-// CoreEndianFlipData calls [raw.CoreEndianFlipData] (C function CoreEndianFlipData).
-func CoreEndianFlipData(dataDomain uint, dataType uint, id_ int16, data unsafe.Pointer, dataLen uint, currentlyNative uint8) int {
-	return raw.CoreEndianFlipData(dataDomain, dataType, id_, data, dataLen, currentlyNative)
-}
-
-// CoreEndianGetFlipper calls [raw.CoreEndianGetFlipper] (C function CoreEndianGetFlipper).
-func CoreEndianGetFlipper(dataDomain uint, dataType uint, proc unsafe.Pointer, refcon unsafe.Pointer) int {
-	return raw.CoreEndianGetFlipper(dataDomain, dataType, proc, refcon)
-}
-
-// CoreEndianInstallFlipper calls [raw.CoreEndianInstallFlipper] (C function CoreEndianInstallFlipper).
-func CoreEndianInstallFlipper(dataDomain uint, dataType uint, proc unsafe.Pointer, refcon unsafe.Pointer) int {
-	return raw.CoreEndianInstallFlipper(dataDomain, dataType, proc, refcon)
-}
-
-// Count1Resources calls [raw.Count1Resources] (C function Count1Resources).
-func Count1Resources(theType uint) int16 {
-	return raw.Count1Resources(theType)
-}
-
-// Count1Types calls [raw.Count1Types] (C function Count1Types).
+// Count1Types calls the CarbonCore framework function Count1Types.
 func Count1Types() int16 {
-	return raw.Count1Types()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCount1Types == nil {
+		ebipurego.RegisterLibFunc(&_fnCount1Types, _lib, "Count1Types")
+	}
+	return _fnCount1Types()
 }
 
-// CountCollectionItems calls [raw.CountCollectionItems] (C function CountCollectionItems).
-func CountCollectionItems(c unsafe.Pointer) int {
-	return raw.CountCollectionItems(c)
+var _fnCountCollectionItems func(objc.ID) int
+
+// CountCollectionItems calls the CarbonCore framework function CountCollectionItems.
+func CountCollectionItems(c obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCountCollectionItems == nil {
+		ebipurego.RegisterLibFunc(&_fnCountCollectionItems, _lib, "CountCollectionItems")
+	}
+	return _fnCountCollectionItems(objref.IDOf(c))
 }
 
-// CountCollectionOwners calls [raw.CountCollectionOwners] (C function CountCollectionOwners).
-func CountCollectionOwners(c unsafe.Pointer) int {
-	return raw.CountCollectionOwners(c)
+var _fnCountCollectionOwners func(objc.ID) int
+
+// CountCollectionOwners calls the CarbonCore framework function CountCollectionOwners.
+func CountCollectionOwners(c obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCountCollectionOwners == nil {
+		ebipurego.RegisterLibFunc(&_fnCountCollectionOwners, _lib, "CountCollectionOwners")
+	}
+	return _fnCountCollectionOwners(objref.IDOf(c))
 }
 
-// CountCollectionTags calls [raw.CountCollectionTags] (C function CountCollectionTags).
-func CountCollectionTags(c unsafe.Pointer) int {
-	return raw.CountCollectionTags(c)
+var _fnCountCollectionTags func(objc.ID) int
+
+// CountCollectionTags calls the CarbonCore framework function CountCollectionTags.
+func CountCollectionTags(c obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCountCollectionTags == nil {
+		ebipurego.RegisterLibFunc(&_fnCountCollectionTags, _lib, "CountCollectionTags")
+	}
+	return _fnCountCollectionTags(objref.IDOf(c))
 }
 
-// CountComponentInstances calls [raw.CountComponentInstances] (C function CountComponentInstances).
-func CountComponentInstances(aComponent *raw.ComponentRecord) int {
-	return raw.CountComponentInstances(aComponent)
+var _fnCountResources func(int) int16
+
+// CountResources calls the CarbonCore framework function CountResources.
+func CountResources(theType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCountResources == nil {
+		ebipurego.RegisterLibFunc(&_fnCountResources, _lib, "CountResources")
+	}
+	return _fnCountResources(theType)
 }
 
-// CountComponents calls [raw.CountComponents] (C function CountComponents).
-func CountComponents(looking *raw.ComponentDescription) int {
-	return raw.CountComponents(looking)
+var _fnCountTaggedCollectionItems func(objc.ID, int) int
+
+// CountTaggedCollectionItems calls the CarbonCore framework function CountTaggedCollectionItems.
+func CountTaggedCollectionItems(c obj.Object, tag int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCountTaggedCollectionItems == nil {
+		ebipurego.RegisterLibFunc(&_fnCountTaggedCollectionItems, _lib, "CountTaggedCollectionItems")
+	}
+	return _fnCountTaggedCollectionItems(objref.IDOf(c), tag)
 }
 
-// CountResources calls [raw.CountResources] (C function CountResources).
-func CountResources(theType uint) int16 {
-	return raw.CountResources(theType)
-}
+var _fnCountTypes func() int16
 
-// CountTaggedCollectionItems calls [raw.CountTaggedCollectionItems] (C function CountTaggedCollectionItems).
-func CountTaggedCollectionItems(c unsafe.Pointer, tag uint) int {
-	return raw.CountTaggedCollectionItems(c, tag)
-}
-
-// CountTypes calls [raw.CountTypes] (C function CountTypes).
+// CountTypes calls the CarbonCore framework function CountTypes.
 func CountTypes() int16 {
-	return raw.CountTypes()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCountTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnCountTypes, _lib, "CountTypes")
+	}
+	return _fnCountTypes()
 }
 
-// CreateTextEncoding calls [raw.CreateTextEncoding] (C function CreateTextEncoding).
-func CreateTextEncoding(encodingBase uint, encodingVariant uint, encodingFormat uint) uint {
-	return raw.CreateTextEncoding(encodingBase, encodingVariant, encodingFormat)
+var _fnCreateTextEncoding func(int, int, int) int
+
+// CreateTextEncoding calls the CarbonCore framework function CreateTextEncoding.
+func CreateTextEncoding(encodingBase int, encodingVariant int, encodingFormat int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateTextEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateTextEncoding, _lib, "CreateTextEncoding")
+	}
+	return _fnCreateTextEncoding(encodingBase, encodingVariant, encodingFormat)
 }
 
-// CreateTextToUnicodeInfo calls [raw.CreateTextToUnicodeInfo] (C function CreateTextToUnicodeInfo).
-func CreateTextToUnicodeInfo(iUnicodeMapping *raw.UnicodeMapping, oTextToUnicodeInfo unsafe.Pointer) int {
-	return raw.CreateTextToUnicodeInfo(iUnicodeMapping, oTextToUnicodeInfo)
+var _fnCreateThreadPool func(int, int16, int) int16
+
+// CreateThreadPool calls the CarbonCore framework function CreateThreadPool.
+func CreateThreadPool(threadStyle int, numToCreate int16, stackSize int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateThreadPool == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateThreadPool, _lib, "CreateThreadPool")
+	}
+	return _fnCreateThreadPool(threadStyle, numToCreate, stackSize)
 }
 
-// CreateTextToUnicodeInfoByEncoding calls [raw.CreateTextToUnicodeInfoByEncoding] (C function CreateTextToUnicodeInfoByEncoding).
-func CreateTextToUnicodeInfoByEncoding(iEncoding uint, oTextToUnicodeInfo unsafe.Pointer) int {
-	return raw.CreateTextToUnicodeInfoByEncoding(iEncoding, oTextToUnicodeInfo)
-}
+var _fnCurResFile func() int
 
-// CreateThreadPool calls [raw.CreateThreadPool] (C function CreateThreadPool).
-func CreateThreadPool(threadStyle uint, numToCreate int16, stackSize int) int16 {
-	return raw.CreateThreadPool(threadStyle, numToCreate, stackSize)
-}
-
-// CreateUnicodeToTextInfo calls [raw.CreateUnicodeToTextInfo] (C function CreateUnicodeToTextInfo).
-func CreateUnicodeToTextInfo(iUnicodeMapping *raw.UnicodeMapping, oUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.CreateUnicodeToTextInfo(iUnicodeMapping, oUnicodeToTextInfo)
-}
-
-// CreateUnicodeToTextInfoByEncoding calls [raw.CreateUnicodeToTextInfoByEncoding] (C function CreateUnicodeToTextInfoByEncoding).
-func CreateUnicodeToTextInfoByEncoding(iEncoding uint, oUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.CreateUnicodeToTextInfoByEncoding(iEncoding, oUnicodeToTextInfo)
-}
-
-// CreateUnicodeToTextRunInfo calls [raw.CreateUnicodeToTextRunInfo] (C function CreateUnicodeToTextRunInfo).
-func CreateUnicodeToTextRunInfo(iNumberOfMappings uint, iUnicodeMappings *raw.UnicodeMapping, oUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.CreateUnicodeToTextRunInfo(iNumberOfMappings, iUnicodeMappings, oUnicodeToTextInfo)
-}
-
-// CreateUnicodeToTextRunInfoByEncoding calls [raw.CreateUnicodeToTextRunInfoByEncoding] (C function CreateUnicodeToTextRunInfoByEncoding).
-func CreateUnicodeToTextRunInfoByEncoding(iNumberOfEncodings uint, iEncodings *uint, oUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.CreateUnicodeToTextRunInfoByEncoding(iNumberOfEncodings, iEncodings, oUnicodeToTextInfo)
-}
-
-// CreateUnicodeToTextRunInfoByScriptCode calls [raw.CreateUnicodeToTextRunInfoByScriptCode] (C function CreateUnicodeToTextRunInfoByScriptCode).
-func CreateUnicodeToTextRunInfoByScriptCode(iNumberOfScriptCodes uint, iScripts *int16, oUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.CreateUnicodeToTextRunInfoByScriptCode(iNumberOfScriptCodes, iScripts, oUnicodeToTextInfo)
-}
-
-// CurResFile calls [raw.CurResFile] (C function CurResFile).
+// CurResFile calls the CarbonCore framework function CurResFile.
 func CurResFile() int {
-	return raw.CurResFile()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCurResFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCurResFile, _lib, "CurResFile")
+	}
+	return _fnCurResFile()
 }
 
-// DebugAssert calls [raw.DebugAssert] (C function DebugAssert).
-func DebugAssert(componentSignature uint, options uint, assertionString string, exceptionLabelString string, errorString string, fileName string, lineNumber int, value unsafe.Pointer) {
-	raw.DebugAssert(componentSignature, options, assertionString, exceptionLabelString, errorString, fileName, lineNumber, value)
+var _fnDeleteGestaltValue func(int) int16
+
+// DeleteGestaltValue calls the CarbonCore framework function DeleteGestaltValue.
+func DeleteGestaltValue(selector int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDeleteGestaltValue == nil {
+		ebipurego.RegisterLibFunc(&_fnDeleteGestaltValue, _lib, "DeleteGestaltValue")
+	}
+	return _fnDeleteGestaltValue(selector)
 }
 
-// DecrementAtomic calls [raw.DecrementAtomic] (C function DecrementAtomic).
-func DecrementAtomic(address *int) int {
-	return raw.DecrementAtomic(address)
-}
+var _fnDetachResourceFile func(int) int16
 
-// DecrementAtomic16 calls [raw.DecrementAtomic16] (C function DecrementAtomic16).
-func DecrementAtomic16(address *int16) int16 {
-	return raw.DecrementAtomic16(address)
-}
-
-// DecrementAtomic8 calls [raw.DecrementAtomic8] (C function DecrementAtomic8).
-func DecrementAtomic8(address *int8) int8 {
-	return raw.DecrementAtomic8(address)
-}
-
-// Delay calls [raw.Delay] (C function Delay).
-func Delay(numTicks uint, finalTicks unsafe.Pointer) {
-	raw.Delay(numTicks, finalTicks)
-}
-
-// DelegateComponentCall calls [raw.DelegateComponentCall] (C function DelegateComponentCall).
-func DelegateComponentCall(originalParams *raw.ComponentParameters, ci *raw.ComponentInstanceRecord) int {
-	return raw.DelegateComponentCall(originalParams, ci)
-}
-
-// DeleteGestaltValue calls [raw.DeleteGestaltValue] (C function DeleteGestaltValue).
-func DeleteGestaltValue(selector uint) int16 {
-	return raw.DeleteGestaltValue(selector)
-}
-
-// Dequeue calls [raw.Dequeue] (C function Dequeue).
-func Dequeue(qElement *raw.QElem, qHeader *raw.QHdr) int16 {
-	return raw.Dequeue(qElement, qHeader)
-}
-
-// DetachResource calls [raw.DetachResource] (C function DetachResource).
-func DetachResource(theResource *string) {
-	raw.DetachResource(theResource)
-}
-
-// DetachResourceFile calls [raw.DetachResourceFile] (C function DetachResourceFile).
+// DetachResourceFile calls the CarbonCore framework function DetachResourceFile.
 func DetachResourceFile(refNum int) int16 {
-	return raw.DetachResourceFile(refNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnDetachResourceFile == nil {
+		ebipurego.RegisterLibFunc(&_fnDetachResourceFile, _lib, "DetachResourceFile")
+	}
+	return _fnDetachResourceFile(refNum)
 }
 
-// DetermineIfPathIsEnclosedByFolder calls [raw.DetermineIfPathIsEnclosedByFolder] (C function DetermineIfPathIsEnclosedByFolder).
-func DetermineIfPathIsEnclosedByFolder(domainOrVRefNum int16, folderType uint, utf8Path *uint8, pathIsRealPath uint8, outResult *uint8) int16 {
-	return raw.DetermineIfPathIsEnclosedByFolder(domainOrVRefNum, folderType, utf8Path, pathIsRealPath, outResult)
+var _fnDisposeCollection func(objc.ID)
+
+// DisposeCollection calls the CarbonCore framework function DisposeCollection.
+func DisposeCollection(c obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeCollection, _lib, "DisposeCollection")
+	}
+	_fnDisposeCollection(objref.IDOf(c))
 }
 
-// DisposeCollection calls [raw.DisposeCollection] (C function DisposeCollection).
-func DisposeCollection(c unsafe.Pointer) {
-	raw.DisposeCollection(c)
-}
+var _fnDisposePtr func(string)
 
-// DisposeCollectionExceptionUPP calls [raw.DisposeCollectionExceptionUPP] (C function DisposeCollectionExceptionUPP).
-func DisposeCollectionExceptionUPP(userUPP unsafe.Pointer) {
-	raw.DisposeCollectionExceptionUPP(userUPP)
-}
-
-// DisposeCollectionFlattenUPP calls [raw.DisposeCollectionFlattenUPP] (C function DisposeCollectionFlattenUPP).
-func DisposeCollectionFlattenUPP(userUPP unsafe.Pointer) {
-	raw.DisposeCollectionFlattenUPP(userUPP)
-}
-
-// DisposeComponentFunctionUPP calls [raw.DisposeComponentFunctionUPP] (C function DisposeComponentFunctionUPP).
-func DisposeComponentFunctionUPP(userUPP unsafe.Pointer) {
-	raw.DisposeComponentFunctionUPP(userUPP)
-}
-
-// DisposeComponentMPWorkFunctionUPP calls [raw.DisposeComponentMPWorkFunctionUPP] (C function DisposeComponentMPWorkFunctionUPP).
-func DisposeComponentMPWorkFunctionUPP(userUPP unsafe.Pointer) {
-	raw.DisposeComponentMPWorkFunctionUPP(userUPP)
-}
-
-// DisposeComponentRoutineUPP calls [raw.DisposeComponentRoutineUPP] (C function DisposeComponentRoutineUPP).
-func DisposeComponentRoutineUPP(userUPP unsafe.Pointer) {
-	raw.DisposeComponentRoutineUPP(userUPP)
-}
-
-// DisposeDebugAssertOutputHandlerUPP calls [raw.DisposeDebugAssertOutputHandlerUPP] (C function DisposeDebugAssertOutputHandlerUPP).
-func DisposeDebugAssertOutputHandlerUPP(userUPP unsafe.Pointer) {
-	raw.DisposeDebugAssertOutputHandlerUPP(userUPP)
-}
-
-// DisposeDebugComponentCallbackUPP calls [raw.DisposeDebugComponentCallbackUPP] (C function DisposeDebugComponentCallbackUPP).
-func DisposeDebugComponentCallbackUPP(userUPP unsafe.Pointer) {
-	raw.DisposeDebugComponentCallbackUPP(userUPP)
-}
-
-// DisposeDebuggerDisposeThreadUPP calls [raw.DisposeDebuggerDisposeThreadUPP] (C function DisposeDebuggerDisposeThreadUPP).
-func DisposeDebuggerDisposeThreadUPP(userUPP unsafe.Pointer) {
-	raw.DisposeDebuggerDisposeThreadUPP(userUPP)
-}
-
-// DisposeDebuggerNewThreadUPP calls [raw.DisposeDebuggerNewThreadUPP] (C function DisposeDebuggerNewThreadUPP).
-func DisposeDebuggerNewThreadUPP(userUPP unsafe.Pointer) {
-	raw.DisposeDebuggerNewThreadUPP(userUPP)
-}
-
-// DisposeDebuggerThreadSchedulerUPP calls [raw.DisposeDebuggerThreadSchedulerUPP] (C function DisposeDebuggerThreadSchedulerUPP).
-func DisposeDebuggerThreadSchedulerUPP(userUPP unsafe.Pointer) {
-	raw.DisposeDebuggerThreadSchedulerUPP(userUPP)
-}
-
-// DisposeDeferredTaskUPP calls [raw.DisposeDeferredTaskUPP] (C function DisposeDeferredTaskUPP).
-func DisposeDeferredTaskUPP(userUPP unsafe.Pointer) {
-	raw.DisposeDeferredTaskUPP(userUPP)
-}
-
-// DisposeExceptionHandlerUPP calls [raw.DisposeExceptionHandlerUPP] (C function DisposeExceptionHandlerUPP).
-func DisposeExceptionHandlerUPP(userUPP unsafe.Pointer) {
-	raw.DisposeExceptionHandlerUPP(userUPP)
-}
-
-// DisposeFNSubscriptionUPP calls [raw.DisposeFNSubscriptionUPP] (C function DisposeFNSubscriptionUPP).
-func DisposeFNSubscriptionUPP(userUPP unsafe.Pointer) {
-	raw.DisposeFNSubscriptionUPP(userUPP)
-}
-
-// DisposeFSVolumeEjectUPP calls [raw.DisposeFSVolumeEjectUPP] (C function DisposeFSVolumeEjectUPP).
-func DisposeFSVolumeEjectUPP(userUPP unsafe.Pointer) {
-	raw.DisposeFSVolumeEjectUPP(userUPP)
-}
-
-// DisposeFSVolumeMountUPP calls [raw.DisposeFSVolumeMountUPP] (C function DisposeFSVolumeMountUPP).
-func DisposeFSVolumeMountUPP(userUPP unsafe.Pointer) {
-	raw.DisposeFSVolumeMountUPP(userUPP)
-}
-
-// DisposeFSVolumeUnmountUPP calls [raw.DisposeFSVolumeUnmountUPP] (C function DisposeFSVolumeUnmountUPP).
-func DisposeFSVolumeUnmountUPP(userUPP unsafe.Pointer) {
-	raw.DisposeFSVolumeUnmountUPP(userUPP)
-}
-
-// DisposeFolderManagerNotificationUPP calls [raw.DisposeFolderManagerNotificationUPP] (C function DisposeFolderManagerNotificationUPP).
-func DisposeFolderManagerNotificationUPP(userUPP unsafe.Pointer) {
-	raw.DisposeFolderManagerNotificationUPP(userUPP)
-}
-
-// DisposeGetMissingComponentResourceUPP calls [raw.DisposeGetMissingComponentResourceUPP] (C function DisposeGetMissingComponentResourceUPP).
-func DisposeGetMissingComponentResourceUPP(userUPP unsafe.Pointer) {
-	raw.DisposeGetMissingComponentResourceUPP(userUPP)
-}
-
-// DisposeHandle calls [raw.DisposeHandle] (C function DisposeHandle).
-func DisposeHandle(h *string) {
-	raw.DisposeHandle(h)
-}
-
-// DisposeIOCompletionUPP calls [raw.DisposeIOCompletionUPP] (C function DisposeIOCompletionUPP).
-func DisposeIOCompletionUPP(userUPP unsafe.Pointer) {
-	raw.DisposeIOCompletionUPP(userUPP)
-}
-
-// DisposeIndexToUCStringUPP calls [raw.DisposeIndexToUCStringUPP] (C function DisposeIndexToUCStringUPP).
-func DisposeIndexToUCStringUPP(userUPP unsafe.Pointer) {
-	raw.DisposeIndexToUCStringUPP(userUPP)
-}
-
-// DisposePtr calls [raw.DisposePtr] (C function DisposePtr).
+// DisposePtr calls the CarbonCore framework function DisposePtr.
 func DisposePtr(p string) {
-	raw.DisposePtr(p)
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposePtr == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposePtr, _lib, "DisposePtr")
+	}
+	_fnDisposePtr(p)
 }
 
-// DisposeResErrUPP calls [raw.DisposeResErrUPP] (C function DisposeResErrUPP).
-func DisposeResErrUPP(userUPP unsafe.Pointer) {
-	raw.DisposeResErrUPP(userUPP)
+var _fnEmptyCollection func(objc.ID)
+
+// EmptyCollection calls the CarbonCore framework function EmptyCollection.
+func EmptyCollection(c obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnEmptyCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnEmptyCollection, _lib, "EmptyCollection")
+	}
+	_fnEmptyCollection(objref.IDOf(c))
 }
 
-// DisposeSelectorFunctionUPP calls [raw.DisposeSelectorFunctionUPP] (C function DisposeSelectorFunctionUPP).
-func DisposeSelectorFunctionUPP(userUPP unsafe.Pointer) {
-	raw.DisposeSelectorFunctionUPP(userUPP)
-}
+var _fnFSCloseFork func(int) int16
 
-// DisposeTextToUnicodeInfo calls [raw.DisposeTextToUnicodeInfo] (C function DisposeTextToUnicodeInfo).
-func DisposeTextToUnicodeInfo(ioTextToUnicodeInfo unsafe.Pointer) int {
-	return raw.DisposeTextToUnicodeInfo(ioTextToUnicodeInfo)
-}
-
-// DisposeThread calls [raw.DisposeThread] (C function DisposeThread).
-func DisposeThread(threadToDump uint, threadResult unsafe.Pointer, recycleThread uint8) int16 {
-	return raw.DisposeThread(threadToDump, threadResult, recycleThread)
-}
-
-// DisposeThreadEntryUPP calls [raw.DisposeThreadEntryUPP] (C function DisposeThreadEntryUPP).
-func DisposeThreadEntryUPP(userUPP unsafe.Pointer) {
-	raw.DisposeThreadEntryUPP(userUPP)
-}
-
-// DisposeThreadSchedulerUPP calls [raw.DisposeThreadSchedulerUPP] (C function DisposeThreadSchedulerUPP).
-func DisposeThreadSchedulerUPP(userUPP unsafe.Pointer) {
-	raw.DisposeThreadSchedulerUPP(userUPP)
-}
-
-// DisposeThreadSwitchUPP calls [raw.DisposeThreadSwitchUPP] (C function DisposeThreadSwitchUPP).
-func DisposeThreadSwitchUPP(userUPP unsafe.Pointer) {
-	raw.DisposeThreadSwitchUPP(userUPP)
-}
-
-// DisposeThreadTerminationUPP calls [raw.DisposeThreadTerminationUPP] (C function DisposeThreadTerminationUPP).
-func DisposeThreadTerminationUPP(userUPP unsafe.Pointer) {
-	raw.DisposeThreadTerminationUPP(userUPP)
-}
-
-// DisposeTimerUPP calls [raw.DisposeTimerUPP] (C function DisposeTimerUPP).
-func DisposeTimerUPP(userUPP unsafe.Pointer) {
-	raw.DisposeTimerUPP(userUPP)
-}
-
-// DisposeUnicodeToTextFallbackUPP calls [raw.DisposeUnicodeToTextFallbackUPP] (C function DisposeUnicodeToTextFallbackUPP).
-func DisposeUnicodeToTextFallbackUPP(userUPP unsafe.Pointer) {
-	raw.DisposeUnicodeToTextFallbackUPP(userUPP)
-}
-
-// DisposeUnicodeToTextInfo calls [raw.DisposeUnicodeToTextInfo] (C function DisposeUnicodeToTextInfo).
-func DisposeUnicodeToTextInfo(ioUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.DisposeUnicodeToTextInfo(ioUnicodeToTextInfo)
-}
-
-// DisposeUnicodeToTextRunInfo calls [raw.DisposeUnicodeToTextRunInfo] (C function DisposeUnicodeToTextRunInfo).
-func DisposeUnicodeToTextRunInfo(ioUnicodeToTextRunInfo unsafe.Pointer) int {
-	return raw.DisposeUnicodeToTextRunInfo(ioUnicodeToTextRunInfo)
-}
-
-// DurationToAbsolute calls [raw.DurationToAbsolute] (C function DurationToAbsolute).
-func DurationToAbsolute(duration int) unsafe.Pointer {
-	return raw.DurationToAbsolute(duration)
-}
-
-// DurationToNanoseconds calls [raw.DurationToNanoseconds] (C function DurationToNanoseconds).
-func DurationToNanoseconds(theDuration int) unsafe.Pointer {
-	return raw.DurationToNanoseconds(theDuration)
-}
-
-// EmptyCollection calls [raw.EmptyCollection] (C function EmptyCollection).
-func EmptyCollection(c unsafe.Pointer) {
-	raw.EmptyCollection(c)
-}
-
-// EmptyHandle calls [raw.EmptyHandle] (C function EmptyHandle).
-func EmptyHandle(h *string) {
-	raw.EmptyHandle(h)
-}
-
-// Enqueue calls [raw.Enqueue] (C function Enqueue).
-func Enqueue(qElement *raw.QElem, qHeader *raw.QHdr) {
-	raw.Enqueue(qElement, qHeader)
-}
-
-// FNGetDirectoryForSubscription calls [raw.FNGetDirectoryForSubscription] (C function FNGetDirectoryForSubscription).
-func FNGetDirectoryForSubscription(subscription unsafe.Pointer, ref *raw.FSRef) int {
-	return raw.FNGetDirectoryForSubscription(subscription, ref)
-}
-
-// FNSubscribe calls [raw.FNSubscribe] (C function FNSubscribe).
-func FNSubscribe(directoryRef *raw.FSRef, callback unsafe.Pointer, refcon unsafe.Pointer, flags uint, subscription unsafe.Pointer) int {
-	return raw.FNSubscribe(directoryRef, callback, refcon, flags, subscription)
-}
-
-// FNSubscribeByPath calls [raw.FNSubscribeByPath] (C function FNSubscribeByPath).
-func FNSubscribeByPath(directoryPath *uint8, callback unsafe.Pointer, refcon unsafe.Pointer, flags uint, subscription unsafe.Pointer) int {
-	return raw.FNSubscribeByPath(directoryPath, callback, refcon, flags, subscription)
-}
-
-// FNUnsubscribe calls [raw.FNUnsubscribe] (C function FNUnsubscribe).
-func FNUnsubscribe(subscription unsafe.Pointer) int {
-	return raw.FNUnsubscribe(subscription)
-}
-
-// FSAllocateFork calls [raw.FSAllocateFork] (C function FSAllocateFork).
-func FSAllocateFork(forkRefNum int, flags uint16, positionMode uint16, positionOffset int64, requestCount uint64, actualCount *uint64) int16 {
-	return raw.FSAllocateFork(forkRefNum, flags, positionMode, positionOffset, requestCount, actualCount)
-}
-
-// FSCancelVolumeOperation calls [raw.FSCancelVolumeOperation] (C function FSCancelVolumeOperation).
-func FSCancelVolumeOperation(volumeOp unsafe.Pointer) int {
-	return raw.FSCancelVolumeOperation(volumeOp)
-}
-
-// FSCatalogSearch calls [raw.FSCatalogSearch] (C function FSCatalogSearch).
-func FSCatalogSearch(iterator unsafe.Pointer, searchCriteria *raw.FSSearchParams, maximumObjects uint, actualObjects *uint, containerChanged *uint8, whichInfo uint, catalogInfos *raw.FSCatalogInfo, refs *raw.FSRef, specs *raw.FSSpec, names unsafe.Pointer) int16 {
-	return raw.FSCatalogSearch(iterator, searchCriteria, maximumObjects, actualObjects, containerChanged, whichInfo, catalogInfos, refs, specs, names)
-}
-
-// FSCloseFork calls [raw.FSCloseFork] (C function FSCloseFork).
+// FSCloseFork calls the CarbonCore framework function FSCloseFork.
 func FSCloseFork(forkRefNum int) int16 {
-	return raw.FSCloseFork(forkRefNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSCloseFork == nil {
+		ebipurego.RegisterLibFunc(&_fnFSCloseFork, _lib, "FSCloseFork")
+	}
+	return _fnFSCloseFork(forkRefNum)
 }
 
-// FSCloseIterator calls [raw.FSCloseIterator] (C function FSCloseIterator).
-func FSCloseIterator(iterator unsafe.Pointer) int16 {
-	return raw.FSCloseIterator(iterator)
+var _fnFSCloseIterator func(objc.ID) int16
+
+// FSCloseIterator calls the CarbonCore framework function FSCloseIterator.
+func FSCloseIterator(iterator obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSCloseIterator == nil {
+		ebipurego.RegisterLibFunc(&_fnFSCloseIterator, _lib, "FSCloseIterator")
+	}
+	return _fnFSCloseIterator(objref.IDOf(iterator))
 }
 
-// FSCompareFSRefs calls [raw.FSCompareFSRefs] (C function FSCompareFSRefs).
-func FSCompareFSRefs(ref1 *raw.FSRef, ref2 *raw.FSRef) int16 {
-	return raw.FSCompareFSRefs(ref1, ref2)
+var _fnFSFileOperationCreate func(objc.ID) objc.ID
+
+// FSFileOperationCreate calls the CarbonCore framework function FSFileOperationCreate.
+func FSFileOperationCreate(alloc obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileOperationCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileOperationCreate, _lib, "FSFileOperationCreate")
+	}
+	_ret := _fnFSFileOperationCreate(objref.IDOf(alloc))
+	return obj.Wrap(_ret)
 }
 
-// FSCopyAliasInfo calls [raw.FSCopyAliasInfo] (C function FSCopyAliasInfo).
-func FSCopyAliasInfo(inAlias **raw.AliasRecord, targetName unsafe.Pointer, volumeName unsafe.Pointer, pathString unsafe.Pointer, whichInfo *uint, info *raw.FSAliasInfo) int {
-	return raw.FSCopyAliasInfo(inAlias, targetName, volumeName, pathString, whichInfo, info)
+var _fnFSFileOperationGetTypeID func() int
+
+// FSFileOperationGetTypeID calls the CarbonCore framework function FSFileOperationGetTypeID.
+func FSFileOperationGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileOperationGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileOperationGetTypeID, _lib, "FSFileOperationGetTypeID")
+	}
+	return _fnFSFileOperationGetTypeID()
 }
 
-// FSCopyDADiskForVolume calls [raw.FSCopyDADiskForVolume] (C function FSCopyDADiskForVolume).
-func FSCopyDADiskForVolume(vRefNum int16, disk unsafe.Pointer) int {
-	return raw.FSCopyDADiskForVolume(vRefNum, disk)
+var _fnFSFileSecurityCreate func(objc.ID) objc.ID
+
+// FSFileSecurityCreate calls the CarbonCore framework function FSFileSecurityCreate.
+func FSFileSecurityCreate(alloc obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecurityCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecurityCreate, _lib, "FSFileSecurityCreate")
+	}
+	_ret := _fnFSFileSecurityCreate(objref.IDOf(alloc))
+	return obj.Wrap(_ret)
 }
 
-// FSCopyObjectAsync calls [raw.FSCopyObjectAsync] (C function FSCopyObjectAsync).
-func FSCopyObjectAsync(fileOp unsafe.Pointer, source *raw.FSRef, destDir *raw.FSRef, destName unsafe.Pointer, flags uint, callback unsafe.Pointer, statusChangeInterval float64, clientContext *raw.FSFileOperationClientContext) int {
-	return raw.FSCopyObjectAsync(fileOp, source, destDir, destName, flags, callback, statusChangeInterval, clientContext)
+var _fnFSFileSecurityGetTypeID func() int
+
+// FSFileSecurityGetTypeID calls the CarbonCore framework function FSFileSecurityGetTypeID.
+func FSFileSecurityGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecurityGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecurityGetTypeID, _lib, "FSFileSecurityGetTypeID")
+	}
+	return _fnFSFileSecurityGetTypeID()
 }
 
-// FSCreateDirectoryUnicode calls [raw.FSCreateDirectoryUnicode] (C function FSCreateDirectoryUnicode).
-func FSCreateDirectoryUnicode(parentRef *raw.FSRef, nameLength uint, name *uint16, whichInfo uint, catalogInfo *raw.FSCatalogInfo, newRef *raw.FSRef, newSpec *raw.FSSpec, newDirID *uint) int16 {
-	return raw.FSCreateDirectoryUnicode(parentRef, nameLength, name, whichInfo, catalogInfo, newRef, newSpec, newDirID)
+var _fnFSFileSecurityRefCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// FSFileSecurityRefCreateCopy calls the CarbonCore framework function FSFileSecurityRefCreateCopy.
+func FSFileSecurityRefCreateCopy(alloc obj.Object, fileSec obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecurityRefCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecurityRefCreateCopy, _lib, "FSFileSecurityRefCreateCopy")
+	}
+	_ret := _fnFSFileSecurityRefCreateCopy(objref.IDOf(alloc), objref.IDOf(fileSec))
+	return obj.Wrap(_ret)
 }
 
-// FSCreateFileUnicode calls [raw.FSCreateFileUnicode] (C function FSCreateFileUnicode).
-func FSCreateFileUnicode(parentRef *raw.FSRef, nameLength uint, name *uint16, whichInfo uint, catalogInfo *raw.FSCatalogInfo, newRef *raw.FSRef, newSpec *raw.FSSpec) int16 {
-	return raw.FSCreateFileUnicode(parentRef, nameLength, name, whichInfo, catalogInfo, newRef, newSpec)
-}
+var _fnFSFlushFork func(int) int16
 
-// FSCreateFork calls [raw.FSCreateFork] (C function FSCreateFork).
-func FSCreateFork(ref *raw.FSRef, forkNameLength uint, forkName *uint16) int16 {
-	return raw.FSCreateFork(ref, forkNameLength, forkName)
-}
-
-// FSCreateResFile calls [raw.FSCreateResFile] (C function FSCreateResFile).
-func FSCreateResFile(parentRef *raw.FSRef, nameLength uint, name *uint16, whichInfo uint, catalogInfo *raw.FSCatalogInfo, newRef *raw.FSRef, newSpec *raw.FSSpec) {
-	raw.FSCreateResFile(parentRef, nameLength, name, whichInfo, catalogInfo, newRef, newSpec)
-}
-
-// FSCreateResourceFile calls [raw.FSCreateResourceFile] (C function FSCreateResourceFile).
-func FSCreateResourceFile(parentRef *raw.FSRef, nameLength uint, name *uint16, whichInfo uint, catalogInfo *raw.FSCatalogInfo, forkNameLength uint, forkName *uint16, newRef *raw.FSRef, newSpec *raw.FSSpec) int16 {
-	return raw.FSCreateResourceFile(parentRef, nameLength, name, whichInfo, catalogInfo, forkNameLength, forkName, newRef, newSpec)
-}
-
-// FSCreateResourceFork calls [raw.FSCreateResourceFork] (C function FSCreateResourceFork).
-func FSCreateResourceFork(ref *raw.FSRef, forkNameLength uint, forkName *uint16, flags uint) int16 {
-	return raw.FSCreateResourceFork(ref, forkNameLength, forkName, flags)
-}
-
-// FSCreateStringFromHFSUniStr calls [raw.FSCreateStringFromHFSUniStr] (C function FSCreateStringFromHFSUniStr).
-func FSCreateStringFromHFSUniStr(alloc unsafe.Pointer, uniStr unsafe.Pointer) unsafe.Pointer {
-	return raw.FSCreateStringFromHFSUniStr(alloc, uniStr)
-}
-
-// FSCreateVolumeOperation calls [raw.FSCreateVolumeOperation] (C function FSCreateVolumeOperation).
-func FSCreateVolumeOperation(volumeOp unsafe.Pointer) int {
-	return raw.FSCreateVolumeOperation(volumeOp)
-}
-
-// FSDeleteFork calls [raw.FSDeleteFork] (C function FSDeleteFork).
-func FSDeleteFork(ref *raw.FSRef, forkNameLength uint, forkName *uint16) int16 {
-	return raw.FSDeleteFork(ref, forkNameLength, forkName)
-}
-
-// FSDeleteObject calls [raw.FSDeleteObject] (C function FSDeleteObject).
-func FSDeleteObject(ref *raw.FSRef) int16 {
-	return raw.FSDeleteObject(ref)
-}
-
-// FSDetermineIfRefIsEnclosedByFolder calls [raw.FSDetermineIfRefIsEnclosedByFolder] (C function FSDetermineIfRefIsEnclosedByFolder).
-func FSDetermineIfRefIsEnclosedByFolder(domainOrVRefNum int16, folderType uint, inRef *raw.FSRef, outResult *uint8) int16 {
-	return raw.FSDetermineIfRefIsEnclosedByFolder(domainOrVRefNum, folderType, inRef, outResult)
-}
-
-// FSDisposeVolumeOperation calls [raw.FSDisposeVolumeOperation] (C function FSDisposeVolumeOperation).
-func FSDisposeVolumeOperation(volumeOp unsafe.Pointer) int {
-	return raw.FSDisposeVolumeOperation(volumeOp)
-}
-
-// FSEjectVolumeAsync calls [raw.FSEjectVolumeAsync] (C function FSEjectVolumeAsync).
-func FSEjectVolumeAsync(vRefNum int16, flags uint, volumeOp unsafe.Pointer, clientData unsafe.Pointer, callback unsafe.Pointer, runloop unsafe.Pointer, runloopMode unsafe.Pointer) int {
-	return raw.FSEjectVolumeAsync(vRefNum, flags, volumeOp, clientData, callback, runloop, runloopMode)
-}
-
-// FSExchangeObjects calls [raw.FSExchangeObjects] (C function FSExchangeObjects).
-func FSExchangeObjects(ref *raw.FSRef, destRef *raw.FSRef) int16 {
-	return raw.FSExchangeObjects(ref, destRef)
-}
-
-// FSFileOperationCancel calls [raw.FSFileOperationCancel] (C function FSFileOperationCancel).
-func FSFileOperationCancel(fileOp unsafe.Pointer) int {
-	return raw.FSFileOperationCancel(fileOp)
-}
-
-// FSFileOperationCopyStatus calls [raw.FSFileOperationCopyStatus] (C function FSFileOperationCopyStatus).
-func FSFileOperationCopyStatus(fileOp unsafe.Pointer, currentItem *raw.FSRef, stage *uint, error_ *int, statusDictionary unsafe.Pointer, info unsafe.Pointer) int {
-	return raw.FSFileOperationCopyStatus(fileOp, currentItem, stage, error_, statusDictionary, info)
-}
-
-// FSFileOperationCreate calls [raw.FSFileOperationCreate] (C function FSFileOperationCreate).
-func FSFileOperationCreate(alloc unsafe.Pointer) unsafe.Pointer {
-	return raw.FSFileOperationCreate(alloc)
-}
-
-// FSFileOperationGetTypeID calls [raw.FSFileOperationGetTypeID] (C function FSFileOperationGetTypeID).
-func FSFileOperationGetTypeID() uint {
-	return raw.FSFileOperationGetTypeID()
-}
-
-// FSFileOperationScheduleWithRunLoop calls [raw.FSFileOperationScheduleWithRunLoop] (C function FSFileOperationScheduleWithRunLoop).
-func FSFileOperationScheduleWithRunLoop(fileOp unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) int {
-	return raw.FSFileOperationScheduleWithRunLoop(fileOp, runLoop, runLoopMode)
-}
-
-// FSFileOperationUnscheduleFromRunLoop calls [raw.FSFileOperationUnscheduleFromRunLoop] (C function FSFileOperationUnscheduleFromRunLoop).
-func FSFileOperationUnscheduleFromRunLoop(fileOp unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) int {
-	return raw.FSFileOperationUnscheduleFromRunLoop(fileOp, runLoop, runLoopMode)
-}
-
-// FSFileSecurityCopyAccessControlList calls [raw.FSFileSecurityCopyAccessControlList] (C function FSFileSecurityCopyAccessControlList).
-func FSFileSecurityCopyAccessControlList(fileSec unsafe.Pointer, accessControlList unsafe.Pointer) int {
-	return raw.FSFileSecurityCopyAccessControlList(fileSec, accessControlList)
-}
-
-// FSFileSecurityCreate calls [raw.FSFileSecurityCreate] (C function FSFileSecurityCreate).
-func FSFileSecurityCreate(alloc unsafe.Pointer) unsafe.Pointer {
-	return raw.FSFileSecurityCreate(alloc)
-}
-
-// FSFileSecurityCreateWithFSPermissionInfo calls [raw.FSFileSecurityCreateWithFSPermissionInfo] (C function FSFileSecurityCreateWithFSPermissionInfo).
-func FSFileSecurityCreateWithFSPermissionInfo(alloc unsafe.Pointer, permissions *raw.FSPermissionInfo) unsafe.Pointer {
-	return raw.FSFileSecurityCreateWithFSPermissionInfo(alloc, permissions)
-}
-
-// FSFileSecurityGetGroup calls [raw.FSFileSecurityGetGroup] (C function FSFileSecurityGetGroup).
-func FSFileSecurityGetGroup(fileSec unsafe.Pointer, group *uint) int {
-	return raw.FSFileSecurityGetGroup(fileSec, group)
-}
-
-// FSFileSecurityGetGroupUUID calls [raw.FSFileSecurityGetGroupUUID] (C function FSFileSecurityGetGroupUUID).
-func FSFileSecurityGetGroupUUID(fileSec unsafe.Pointer, group *corefoundation.CFUUIDBytes) int {
-	return raw.FSFileSecurityGetGroupUUID(fileSec, group)
-}
-
-// FSFileSecurityGetMode calls [raw.FSFileSecurityGetMode] (C function FSFileSecurityGetMode).
-func FSFileSecurityGetMode(fileSec unsafe.Pointer, mode *uint16) int {
-	return raw.FSFileSecurityGetMode(fileSec, mode)
-}
-
-// FSFileSecurityGetOwner calls [raw.FSFileSecurityGetOwner] (C function FSFileSecurityGetOwner).
-func FSFileSecurityGetOwner(fileSec unsafe.Pointer, owner *uint) int {
-	return raw.FSFileSecurityGetOwner(fileSec, owner)
-}
-
-// FSFileSecurityGetOwnerUUID calls [raw.FSFileSecurityGetOwnerUUID] (C function FSFileSecurityGetOwnerUUID).
-func FSFileSecurityGetOwnerUUID(fileSec unsafe.Pointer, owner *corefoundation.CFUUIDBytes) int {
-	return raw.FSFileSecurityGetOwnerUUID(fileSec, owner)
-}
-
-// FSFileSecurityGetTypeID calls [raw.FSFileSecurityGetTypeID] (C function FSFileSecurityGetTypeID).
-func FSFileSecurityGetTypeID() uint {
-	return raw.FSFileSecurityGetTypeID()
-}
-
-// FSFileSecurityRefCreateCopy calls [raw.FSFileSecurityRefCreateCopy] (C function FSFileSecurityRefCreateCopy).
-func FSFileSecurityRefCreateCopy(alloc unsafe.Pointer, fileSec unsafe.Pointer) unsafe.Pointer {
-	return raw.FSFileSecurityRefCreateCopy(alloc, fileSec)
-}
-
-// FSFileSecuritySetAccessControlList calls [raw.FSFileSecuritySetAccessControlList] (C function FSFileSecuritySetAccessControlList).
-func FSFileSecuritySetAccessControlList(fileSec unsafe.Pointer, accessControlList unsafe.Pointer) int {
-	return raw.FSFileSecuritySetAccessControlList(fileSec, accessControlList)
-}
-
-// FSFileSecuritySetGroup calls [raw.FSFileSecuritySetGroup] (C function FSFileSecuritySetGroup).
-func FSFileSecuritySetGroup(fileSec unsafe.Pointer, group uint) int {
-	return raw.FSFileSecuritySetGroup(fileSec, group)
-}
-
-// FSFileSecuritySetGroupUUID calls [raw.FSFileSecuritySetGroupUUID] (C function FSFileSecuritySetGroupUUID).
-func FSFileSecuritySetGroupUUID(fileSec unsafe.Pointer, group *corefoundation.CFUUIDBytes) int {
-	return raw.FSFileSecuritySetGroupUUID(fileSec, group)
-}
-
-// FSFileSecuritySetMode calls [raw.FSFileSecuritySetMode] (C function FSFileSecuritySetMode).
-func FSFileSecuritySetMode(fileSec unsafe.Pointer, mode uint16) int {
-	return raw.FSFileSecuritySetMode(fileSec, mode)
-}
-
-// FSFileSecuritySetOwner calls [raw.FSFileSecuritySetOwner] (C function FSFileSecuritySetOwner).
-func FSFileSecuritySetOwner(fileSec unsafe.Pointer, owner uint) int {
-	return raw.FSFileSecuritySetOwner(fileSec, owner)
-}
-
-// FSFileSecuritySetOwnerUUID calls [raw.FSFileSecuritySetOwnerUUID] (C function FSFileSecuritySetOwnerUUID).
-func FSFileSecuritySetOwnerUUID(fileSec unsafe.Pointer, owner *corefoundation.CFUUIDBytes) int {
-	return raw.FSFileSecuritySetOwnerUUID(fileSec, owner)
-}
-
-// FSFindFolder calls [raw.FSFindFolder] (C function FSFindFolder).
-func FSFindFolder(vRefNum int16, folderType uint, createFolder uint8, foundRef *raw.FSRef) int16 {
-	return raw.FSFindFolder(vRefNum, folderType, createFolder, foundRef)
-}
-
-// FSFlushFork calls [raw.FSFlushFork] (C function FSFlushFork).
+// FSFlushFork calls the CarbonCore framework function FSFlushFork.
 func FSFlushFork(forkRefNum int) int16 {
-	return raw.FSFlushFork(forkRefNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFlushFork == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFlushFork, _lib, "FSFlushFork")
+	}
+	return _fnFSFlushFork(forkRefNum)
 }
 
-// FSFollowFinderAlias calls [raw.FSFollowFinderAlias] (C function FSFollowFinderAlias).
-func FSFollowFinderAlias(fromFile *raw.FSRef, alias **raw.AliasRecord, logon uint8, target *raw.FSRef, wasChanged *uint8) int16 {
-	return raw.FSFollowFinderAlias(fromFile, alias, logon, target, wasChanged)
-}
+var _fnFSSetForkPosition func(int, uint16, int64) int16
 
-// FSGetAsyncEjectStatus calls [raw.FSGetAsyncEjectStatus] (C function FSGetAsyncEjectStatus).
-func FSGetAsyncEjectStatus(volumeOp unsafe.Pointer, status *uint, volumeOpStatus *int, volumeRefNum *int16, dissenter *int, clientData unsafe.Pointer) int {
-	return raw.FSGetAsyncEjectStatus(volumeOp, status, volumeOpStatus, volumeRefNum, dissenter, clientData)
-}
-
-// FSGetAsyncMountStatus calls [raw.FSGetAsyncMountStatus] (C function FSGetAsyncMountStatus).
-func FSGetAsyncMountStatus(volumeOp unsafe.Pointer, status *uint, volumeOpStatus *int, mountedVolumeRefNum *int16, clientData unsafe.Pointer) int {
-	return raw.FSGetAsyncMountStatus(volumeOp, status, volumeOpStatus, mountedVolumeRefNum, clientData)
-}
-
-// FSGetAsyncUnmountStatus calls [raw.FSGetAsyncUnmountStatus] (C function FSGetAsyncUnmountStatus).
-func FSGetAsyncUnmountStatus(volumeOp unsafe.Pointer, status *uint, volumeOpStatus *int, volumeRefNum *int16, dissenter *int, clientData unsafe.Pointer) int {
-	return raw.FSGetAsyncUnmountStatus(volumeOp, status, volumeOpStatus, volumeRefNum, dissenter, clientData)
-}
-
-// FSGetCatalogInfo calls [raw.FSGetCatalogInfo] (C function FSGetCatalogInfo).
-func FSGetCatalogInfo(ref *raw.FSRef, whichInfo uint, catalogInfo *raw.FSCatalogInfo, outName unsafe.Pointer, fsSpec *raw.FSSpec, parentRef *raw.FSRef) int16 {
-	return raw.FSGetCatalogInfo(ref, whichInfo, catalogInfo, outName, fsSpec, parentRef)
-}
-
-// FSGetCatalogInfoBulk calls [raw.FSGetCatalogInfoBulk] (C function FSGetCatalogInfoBulk).
-func FSGetCatalogInfoBulk(iterator unsafe.Pointer, maximumObjects uint, actualObjects *uint, containerChanged *uint8, whichInfo uint, catalogInfos *raw.FSCatalogInfo, refs *raw.FSRef, specs *raw.FSSpec, names unsafe.Pointer) int16 {
-	return raw.FSGetCatalogInfoBulk(iterator, maximumObjects, actualObjects, containerChanged, whichInfo, catalogInfos, refs, specs, names)
-}
-
-// FSGetDataForkName calls [raw.FSGetDataForkName] (C function FSGetDataForkName).
-func FSGetDataForkName(dataForkName unsafe.Pointer) int16 {
-	return raw.FSGetDataForkName(dataForkName)
-}
-
-// FSGetForkCBInfo calls [raw.FSGetForkCBInfo] (C function FSGetForkCBInfo).
-func FSGetForkCBInfo(desiredRefNum int, volume int16, iterator *int16, actualRefNum *int, forkInfo *raw.FSForkInfo, ref *raw.FSRef, outForkName unsafe.Pointer) int16 {
-	return raw.FSGetForkCBInfo(desiredRefNum, volume, iterator, actualRefNum, forkInfo, ref, outForkName)
-}
-
-// FSGetForkPosition calls [raw.FSGetForkPosition] (C function FSGetForkPosition).
-func FSGetForkPosition(forkRefNum int, position *int64) int16 {
-	return raw.FSGetForkPosition(forkRefNum, position)
-}
-
-// FSGetForkSize calls [raw.FSGetForkSize] (C function FSGetForkSize).
-func FSGetForkSize(forkRefNum int, forkSize *int64) int16 {
-	return raw.FSGetForkSize(forkRefNum, forkSize)
-}
-
-// FSGetHFSUniStrFromString calls [raw.FSGetHFSUniStrFromString] (C function FSGetHFSUniStrFromString).
-func FSGetHFSUniStrFromString(theString unsafe.Pointer, uniStr unsafe.Pointer) int {
-	return raw.FSGetHFSUniStrFromString(theString, uniStr)
-}
-
-// FSGetResourceForkName calls [raw.FSGetResourceForkName] (C function FSGetResourceForkName).
-func FSGetResourceForkName(resourceForkName unsafe.Pointer) int16 {
-	return raw.FSGetResourceForkName(resourceForkName)
-}
-
-// FSGetVolumeForDADisk calls [raw.FSGetVolumeForDADisk] (C function FSGetVolumeForDADisk).
-func FSGetVolumeForDADisk(disk unsafe.Pointer, vRefNum *int16) int {
-	return raw.FSGetVolumeForDADisk(disk, vRefNum)
-}
-
-// FSGetVolumeInfo calls [raw.FSGetVolumeInfo] (C function FSGetVolumeInfo).
-func FSGetVolumeInfo(volume int16, volumeIndex uint, actualVolume *int16, whichInfo uint, info *raw.FSVolumeInfo, volumeName unsafe.Pointer, rootDirectory *raw.FSRef) int16 {
-	return raw.FSGetVolumeInfo(volume, volumeIndex, actualVolume, whichInfo, info, volumeName, rootDirectory)
-}
-
-// FSIsAliasFile calls [raw.FSIsAliasFile] (C function FSIsAliasFile).
-func FSIsAliasFile(fileRef *raw.FSRef, aliasFileFlag *uint8, folderFlag *uint8) int16 {
-	return raw.FSIsAliasFile(fileRef, aliasFileFlag, folderFlag)
-}
-
-// FSIsFSRefValid calls [raw.FSIsFSRefValid] (C function FSIsFSRefValid).
-func FSIsFSRefValid(ref *raw.FSRef) uint8 {
-	return raw.FSIsFSRefValid(ref)
-}
-
-// FSIterateForks calls [raw.FSIterateForks] (C function FSIterateForks).
-func FSIterateForks(ref *raw.FSRef, forkIterator *raw.CatPositionRec, forkName unsafe.Pointer, forkSize *int64, forkPhysicalSize *uint64) int16 {
-	return raw.FSIterateForks(ref, forkIterator, forkName, forkSize, forkPhysicalSize)
-}
-
-// FSMakeFSRefUnicode calls [raw.FSMakeFSRefUnicode] (C function FSMakeFSRefUnicode).
-func FSMakeFSRefUnicode(parentRef *raw.FSRef, nameLength uint, name *uint16, textEncodingHint uint, newRef *raw.FSRef) int16 {
-	return raw.FSMakeFSRefUnicode(parentRef, nameLength, name, textEncodingHint, newRef)
-}
-
-// FSMatchAliasBulk calls [raw.FSMatchAliasBulk] (C function FSMatchAliasBulk).
-func FSMatchAliasBulk(fromFile *raw.FSRef, rulesMask uint, inAlias **raw.AliasRecord, aliasCount *int16, aliasList *raw.FSRef, needsUpdate *uint8, aliasFilter unsafe.Pointer, yourDataPtr unsafe.Pointer) int {
-	return raw.FSMatchAliasBulk(fromFile, rulesMask, inAlias, aliasCount, aliasList, needsUpdate, aliasFilter, yourDataPtr)
-}
-
-// FSMountLocalVolumeAsync calls [raw.FSMountLocalVolumeAsync] (C function FSMountLocalVolumeAsync).
-func FSMountLocalVolumeAsync(diskID unsafe.Pointer, mountDir unsafe.Pointer, volumeOp unsafe.Pointer, clientData unsafe.Pointer, flags uint, callback unsafe.Pointer, runloop unsafe.Pointer, runloopMode unsafe.Pointer) int {
-	return raw.FSMountLocalVolumeAsync(diskID, mountDir, volumeOp, clientData, flags, callback, runloop, runloopMode)
-}
-
-// FSMountServerVolumeAsync calls [raw.FSMountServerVolumeAsync] (C function FSMountServerVolumeAsync).
-func FSMountServerVolumeAsync(url unsafe.Pointer, mountDir unsafe.Pointer, user unsafe.Pointer, password unsafe.Pointer, volumeOp unsafe.Pointer, clientData unsafe.Pointer, flags uint, callback unsafe.Pointer, runloop unsafe.Pointer, runloopMode unsafe.Pointer) int {
-	return raw.FSMountServerVolumeAsync(url, mountDir, user, password, volumeOp, clientData, flags, callback, runloop, runloopMode)
-}
-
-// FSMoveObject calls [raw.FSMoveObject] (C function FSMoveObject).
-func FSMoveObject(ref *raw.FSRef, destDirectory *raw.FSRef, newRef *raw.FSRef) int16 {
-	return raw.FSMoveObject(ref, destDirectory, newRef)
-}
-
-// FSMoveObjectAsync calls [raw.FSMoveObjectAsync] (C function FSMoveObjectAsync).
-func FSMoveObjectAsync(fileOp unsafe.Pointer, source *raw.FSRef, destDir *raw.FSRef, destName unsafe.Pointer, flags uint, callback unsafe.Pointer, statusChangeInterval float64, clientContext *raw.FSFileOperationClientContext) int {
-	return raw.FSMoveObjectAsync(fileOp, source, destDir, destName, flags, callback, statusChangeInterval, clientContext)
-}
-
-// FSMoveObjectToTrashAsync calls [raw.FSMoveObjectToTrashAsync] (C function FSMoveObjectToTrashAsync).
-func FSMoveObjectToTrashAsync(fileOp unsafe.Pointer, source *raw.FSRef, flags uint, callback unsafe.Pointer, statusChangeInterval float64, clientContext *raw.FSFileOperationClientContext) int {
-	return raw.FSMoveObjectToTrashAsync(fileOp, source, flags, callback, statusChangeInterval, clientContext)
-}
-
-// FSNewAlias calls [raw.FSNewAlias] (C function FSNewAlias).
-func FSNewAlias(fromFile *raw.FSRef, target *raw.FSRef, inAlias ***raw.AliasRecord) int16 {
-	return raw.FSNewAlias(fromFile, target, inAlias)
-}
-
-// FSNewAliasMinimal calls [raw.FSNewAliasMinimal] (C function FSNewAliasMinimal).
-func FSNewAliasMinimal(target *raw.FSRef, inAlias ***raw.AliasRecord) int16 {
-	return raw.FSNewAliasMinimal(target, inAlias)
-}
-
-// FSNewAliasMinimalUnicode calls [raw.FSNewAliasMinimalUnicode] (C function FSNewAliasMinimalUnicode).
-func FSNewAliasMinimalUnicode(targetParentRef *raw.FSRef, targetNameLength uint, targetName *uint16, inAlias ***raw.AliasRecord, isDirectory *uint8) int16 {
-	return raw.FSNewAliasMinimalUnicode(targetParentRef, targetNameLength, targetName, inAlias, isDirectory)
-}
-
-// FSNewAliasUnicode calls [raw.FSNewAliasUnicode] (C function FSNewAliasUnicode).
-func FSNewAliasUnicode(fromFile *raw.FSRef, targetParentRef *raw.FSRef, targetNameLength uint, targetName *uint16, inAlias ***raw.AliasRecord, isDirectory *uint8) int16 {
-	return raw.FSNewAliasUnicode(fromFile, targetParentRef, targetNameLength, targetName, inAlias, isDirectory)
-}
-
-// FSOpenFork calls [raw.FSOpenFork] (C function FSOpenFork).
-func FSOpenFork(ref *raw.FSRef, forkNameLength uint, forkName *uint16, permissions int8, forkRefNum *int) int16 {
-	return raw.FSOpenFork(ref, forkNameLength, forkName, permissions, forkRefNum)
-}
-
-// FSOpenIterator calls [raw.FSOpenIterator] (C function FSOpenIterator).
-func FSOpenIterator(container *raw.FSRef, iteratorFlags uint, iterator unsafe.Pointer) int16 {
-	return raw.FSOpenIterator(container, iteratorFlags, iterator)
-}
-
-// FSOpenOrphanResFile calls [raw.FSOpenOrphanResFile] (C function FSOpenOrphanResFile).
-func FSOpenOrphanResFile(ref *raw.FSRef, permission int8, refNum *int) int16 {
-	return raw.FSOpenOrphanResFile(ref, permission, refNum)
-}
-
-// FSOpenResFile calls [raw.FSOpenResFile] (C function FSOpenResFile).
-func FSOpenResFile(ref *raw.FSRef, permission int8) int {
-	return raw.FSOpenResFile(ref, permission)
-}
-
-// FSOpenResourceFile calls [raw.FSOpenResourceFile] (C function FSOpenResourceFile).
-func FSOpenResourceFile(ref *raw.FSRef, forkNameLength uint, forkName *uint16, permissions int8, refNum *int) int16 {
-	return raw.FSOpenResourceFile(ref, forkNameLength, forkName, permissions, refNum)
-}
-
-// FSPathCopyObjectAsync calls [raw.FSPathCopyObjectAsync] (C function FSPathCopyObjectAsync).
-func FSPathCopyObjectAsync(fileOp unsafe.Pointer, sourcePath string, destDirPath string, destName unsafe.Pointer, flags uint, callback unsafe.Pointer, statusChangeInterval float64, clientContext *raw.FSFileOperationClientContext) int {
-	return raw.FSPathCopyObjectAsync(fileOp, sourcePath, destDirPath, destName, flags, callback, statusChangeInterval, clientContext)
-}
-
-// FSPathFileOperationCopyStatus calls [raw.FSPathFileOperationCopyStatus] (C function FSPathFileOperationCopyStatus).
-func FSPathFileOperationCopyStatus(fileOp unsafe.Pointer, currentItem string, stage *uint, error_ *int, statusDictionary unsafe.Pointer, info unsafe.Pointer) int {
-	return raw.FSPathFileOperationCopyStatus(fileOp, currentItem, stage, error_, statusDictionary, info)
-}
-
-// FSPathMoveObjectAsync calls [raw.FSPathMoveObjectAsync] (C function FSPathMoveObjectAsync).
-func FSPathMoveObjectAsync(fileOp unsafe.Pointer, sourcePath string, destDirPath string, destName unsafe.Pointer, flags uint, callback unsafe.Pointer, statusChangeInterval float64, clientContext *raw.FSFileOperationClientContext) int {
-	return raw.FSPathMoveObjectAsync(fileOp, sourcePath, destDirPath, destName, flags, callback, statusChangeInterval, clientContext)
-}
-
-// FSPathMoveObjectToTrashAsync calls [raw.FSPathMoveObjectToTrashAsync] (C function FSPathMoveObjectToTrashAsync).
-func FSPathMoveObjectToTrashAsync(fileOp unsafe.Pointer, sourcePath string, flags uint, callback unsafe.Pointer, statusChangeInterval float64, clientContext *raw.FSFileOperationClientContext) int {
-	return raw.FSPathMoveObjectToTrashAsync(fileOp, sourcePath, flags, callback, statusChangeInterval, clientContext)
-}
-
-// FSReadFork calls [raw.FSReadFork] (C function FSReadFork).
-func FSReadFork(forkRefNum int, positionMode uint16, positionOffset int64, requestCount uint, buffer unsafe.Pointer, actualCount *uint) int16 {
-	return raw.FSReadFork(forkRefNum, positionMode, positionOffset, requestCount, buffer, actualCount)
-}
-
-// FSRenameUnicode calls [raw.FSRenameUnicode] (C function FSRenameUnicode).
-func FSRenameUnicode(ref *raw.FSRef, nameLength uint, name *uint16, textEncodingHint uint, newRef *raw.FSRef) int16 {
-	return raw.FSRenameUnicode(ref, nameLength, name, textEncodingHint, newRef)
-}
-
-// FSResolveAlias calls [raw.FSResolveAlias] (C function FSResolveAlias).
-func FSResolveAlias(fromFile *raw.FSRef, alias **raw.AliasRecord, target *raw.FSRef, wasChanged *uint8) int16 {
-	return raw.FSResolveAlias(fromFile, alias, target, wasChanged)
-}
-
-// FSResolveAliasFile calls [raw.FSResolveAliasFile] (C function FSResolveAliasFile).
-func FSResolveAliasFile(theRef *raw.FSRef, resolveAliasChains uint8, targetIsFolder *uint8, wasAliased *uint8) int16 {
-	return raw.FSResolveAliasFile(theRef, resolveAliasChains, targetIsFolder, wasAliased)
-}
-
-// FSResolveAliasFileWithMountFlags calls [raw.FSResolveAliasFileWithMountFlags] (C function FSResolveAliasFileWithMountFlags).
-func FSResolveAliasFileWithMountFlags(theRef *raw.FSRef, resolveAliasChains uint8, targetIsFolder *uint8, wasAliased *uint8, mountFlags uint) int16 {
-	return raw.FSResolveAliasFileWithMountFlags(theRef, resolveAliasChains, targetIsFolder, wasAliased, mountFlags)
-}
-
-// FSResolveAliasWithMountFlags calls [raw.FSResolveAliasWithMountFlags] (C function FSResolveAliasWithMountFlags).
-func FSResolveAliasWithMountFlags(fromFile *raw.FSRef, inAlias **raw.AliasRecord, target *raw.FSRef, wasChanged *uint8, mountFlags uint) int16 {
-	return raw.FSResolveAliasWithMountFlags(fromFile, inAlias, target, wasChanged, mountFlags)
-}
-
-// FSResourceFileAlreadyOpen calls [raw.FSResourceFileAlreadyOpen] (C function FSResourceFileAlreadyOpen).
-func FSResourceFileAlreadyOpen(resourceFileRef *raw.FSRef, inChain *uint8, refNum *int) uint8 {
-	return raw.FSResourceFileAlreadyOpen(resourceFileRef, inChain, refNum)
-}
-
-// FSSetCatalogInfo calls [raw.FSSetCatalogInfo] (C function FSSetCatalogInfo).
-func FSSetCatalogInfo(ref *raw.FSRef, whichInfo uint, catalogInfo *raw.FSCatalogInfo) int16 {
-	return raw.FSSetCatalogInfo(ref, whichInfo, catalogInfo)
-}
-
-// FSSetForkPosition calls [raw.FSSetForkPosition] (C function FSSetForkPosition).
+// FSSetForkPosition calls the CarbonCore framework function FSSetForkPosition.
 func FSSetForkPosition(forkRefNum int, positionMode uint16, positionOffset int64) int16 {
-	return raw.FSSetForkPosition(forkRefNum, positionMode, positionOffset)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSSetForkPosition == nil {
+		ebipurego.RegisterLibFunc(&_fnFSSetForkPosition, _lib, "FSSetForkPosition")
+	}
+	return _fnFSSetForkPosition(forkRefNum, positionMode, positionOffset)
 }
 
-// FSSetForkSize calls [raw.FSSetForkSize] (C function FSSetForkSize).
+var _fnFSSetForkSize func(int, uint16, int64) int16
+
+// FSSetForkSize calls the CarbonCore framework function FSSetForkSize.
 func FSSetForkSize(forkRefNum int, positionMode uint16, positionOffset int64) int16 {
-	return raw.FSSetForkSize(forkRefNum, positionMode, positionOffset)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSSetForkSize == nil {
+		ebipurego.RegisterLibFunc(&_fnFSSetForkSize, _lib, "FSSetForkSize")
+	}
+	return _fnFSSetForkSize(forkRefNum, positionMode, positionOffset)
 }
 
-// FSSetVolumeInfo calls [raw.FSSetVolumeInfo] (C function FSSetVolumeInfo).
-func FSSetVolumeInfo(volume int16, whichInfo uint, info *raw.FSVolumeInfo) int16 {
-	return raw.FSSetVolumeInfo(volume, whichInfo, info)
-}
+var _fnFix2Frac func(int) int
 
-// FSUnlinkObject calls [raw.FSUnlinkObject] (C function FSUnlinkObject).
-func FSUnlinkObject(ref *raw.FSRef) int16 {
-	return raw.FSUnlinkObject(ref)
-}
-
-// FSUnmountVolumeAsync calls [raw.FSUnmountVolumeAsync] (C function FSUnmountVolumeAsync).
-func FSUnmountVolumeAsync(vRefNum int16, flags uint, volumeOp unsafe.Pointer, clientData unsafe.Pointer, callback unsafe.Pointer, runloop unsafe.Pointer, runloopMode unsafe.Pointer) int {
-	return raw.FSUnmountVolumeAsync(vRefNum, flags, volumeOp, clientData, callback, runloop, runloopMode)
-}
-
-// FSUpdateAlias calls [raw.FSUpdateAlias] (C function FSUpdateAlias).
-func FSUpdateAlias(fromFile *raw.FSRef, target *raw.FSRef, alias **raw.AliasRecord, wasChanged *uint8) int16 {
-	return raw.FSUpdateAlias(fromFile, target, alias, wasChanged)
-}
-
-// FSWriteFork calls [raw.FSWriteFork] (C function FSWriteFork).
-func FSWriteFork(forkRefNum int, positionMode uint16, positionOffset int64, requestCount uint, buffer unsafe.Pointer, actualCount *uint) int16 {
-	return raw.FSWriteFork(forkRefNum, positionMode, positionOffset, requestCount, buffer, actualCount)
-}
-
-// FindFolder calls [raw.FindFolder] (C function FindFolder).
-func FindFolder(vRefNum int16, folderType uint, createFolder uint8, foundVRefNum *int16, foundDirID *int) int16 {
-	return raw.FindFolder(vRefNum, folderType, createFolder, foundVRefNum, foundDirID)
-}
-
-// FindNextComponent calls [raw.FindNextComponent] (C function FindNextComponent).
-func FindNextComponent(aComponent *raw.ComponentRecord, looking *raw.ComponentDescription) *raw.ComponentRecord {
-	return raw.FindNextComponent(aComponent, looking)
-}
-
-// Fix2Frac calls [raw.Fix2Frac] (C function Fix2Frac).
+// Fix2Frac calls the CarbonCore framework function Fix2Frac.
 func Fix2Frac(x int) int {
-	return raw.Fix2Frac(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFix2Frac == nil {
+		ebipurego.RegisterLibFunc(&_fnFix2Frac, _lib, "Fix2Frac")
+	}
+	return _fnFix2Frac(x)
 }
 
-// Fix2Long calls [raw.Fix2Long] (C function Fix2Long).
+var _fnFix2Long func(int) int
+
+// Fix2Long calls the CarbonCore framework function Fix2Long.
 func Fix2Long(x int) int {
-	return raw.Fix2Long(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFix2Long == nil {
+		ebipurego.RegisterLibFunc(&_fnFix2Long, _lib, "Fix2Long")
+	}
+	return _fnFix2Long(x)
 }
 
-// Fix2X calls [raw.Fix2X] (C function Fix2X).
+var _fnFix2X func(int) float64
+
+// Fix2X calls the CarbonCore framework function Fix2X.
 func Fix2X(x int) float64 {
-	return raw.Fix2X(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFix2X == nil {
+		ebipurego.RegisterLibFunc(&_fnFix2X, _lib, "Fix2X")
+	}
+	return _fnFix2X(x)
 }
 
-// FixATan2 calls [raw.FixATan2] (C function FixATan2).
+var _fnFixATan2 func(int, int) int
+
+// FixATan2 calls the CarbonCore framework function FixATan2.
 func FixATan2(x int, y int) int {
-	return raw.FixATan2(x, y)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFixATan2 == nil {
+		ebipurego.RegisterLibFunc(&_fnFixATan2, _lib, "FixATan2")
+	}
+	return _fnFixATan2(x, y)
 }
 
-// FixDiv calls [raw.FixDiv] (C function FixDiv).
+var _fnFixDiv func(int, int) int
+
+// FixDiv calls the CarbonCore framework function FixDiv.
 func FixDiv(x int, y int) int {
-	return raw.FixDiv(x, y)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFixDiv == nil {
+		ebipurego.RegisterLibFunc(&_fnFixDiv, _lib, "FixDiv")
+	}
+	return _fnFixDiv(x, y)
 }
 
-// FixMul calls [raw.FixMul] (C function FixMul).
+var _fnFixMul func(int, int) int
+
+// FixMul calls the CarbonCore framework function FixMul.
 func FixMul(a int, b int) int {
-	return raw.FixMul(a, b)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFixMul == nil {
+		ebipurego.RegisterLibFunc(&_fnFixMul, _lib, "FixMul")
+	}
+	return _fnFixMul(a, b)
 }
 
-// FixRatio calls [raw.FixRatio] (C function FixRatio).
+var _fnFixRatio func(int16, int16) int
+
+// FixRatio calls the CarbonCore framework function FixRatio.
 func FixRatio(numer int16, denom int16) int {
-	return raw.FixRatio(numer, denom)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFixRatio == nil {
+		ebipurego.RegisterLibFunc(&_fnFixRatio, _lib, "FixRatio")
+	}
+	return _fnFixRatio(numer, denom)
 }
 
-// FixRound calls [raw.FixRound] (C function FixRound).
+var _fnFixRound func(int) int16
+
+// FixRound calls the CarbonCore framework function FixRound.
 func FixRound(x int) int16 {
-	return raw.FixRound(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFixRound == nil {
+		ebipurego.RegisterLibFunc(&_fnFixRound, _lib, "FixRound")
+	}
+	return _fnFixRound(x)
 }
 
-// FlattenCollection calls [raw.FlattenCollection] (C function FlattenCollection).
-func FlattenCollection(c unsafe.Pointer, flattenProc unsafe.Pointer, refCon unsafe.Pointer) int16 {
-	return raw.FlattenCollection(c, flattenProc, refCon)
-}
+var _fnFrac2Fix func(int) int
 
-// FlattenCollectionToHdl calls [raw.FlattenCollectionToHdl] (C function FlattenCollectionToHdl).
-func FlattenCollectionToHdl(aCollection unsafe.Pointer, flattened *string) int16 {
-	return raw.FlattenCollectionToHdl(aCollection, flattened)
-}
-
-// FlattenPartialCollection calls [raw.FlattenPartialCollection] (C function FlattenPartialCollection).
-func FlattenPartialCollection(c unsafe.Pointer, flattenProc unsafe.Pointer, refCon unsafe.Pointer, whichAttributes int, matchingAttributes int) int16 {
-	return raw.FlattenPartialCollection(c, flattenProc, refCon, whichAttributes, matchingAttributes)
-}
-
-// Frac2Fix calls [raw.Frac2Fix] (C function Frac2Fix).
+// Frac2Fix calls the CarbonCore framework function Frac2Fix.
 func Frac2Fix(x int) int {
-	return raw.Frac2Fix(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFrac2Fix == nil {
+		ebipurego.RegisterLibFunc(&_fnFrac2Fix, _lib, "Frac2Fix")
+	}
+	return _fnFrac2Fix(x)
 }
 
-// Frac2X calls [raw.Frac2X] (C function Frac2X).
+var _fnFrac2X func(int) float64
+
+// Frac2X calls the CarbonCore framework function Frac2X.
 func Frac2X(x int) float64 {
-	return raw.Frac2X(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFrac2X == nil {
+		ebipurego.RegisterLibFunc(&_fnFrac2X, _lib, "Frac2X")
+	}
+	return _fnFrac2X(x)
 }
 
-// FracCos calls [raw.FracCos] (C function FracCos).
+var _fnFracCos func(int) int
+
+// FracCos calls the CarbonCore framework function FracCos.
 func FracCos(x int) int {
-	return raw.FracCos(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFracCos == nil {
+		ebipurego.RegisterLibFunc(&_fnFracCos, _lib, "FracCos")
+	}
+	return _fnFracCos(x)
 }
 
-// FracDiv calls [raw.FracDiv] (C function FracDiv).
+var _fnFracDiv func(int, int) int
+
+// FracDiv calls the CarbonCore framework function FracDiv.
 func FracDiv(x int, y int) int {
-	return raw.FracDiv(x, y)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFracDiv == nil {
+		ebipurego.RegisterLibFunc(&_fnFracDiv, _lib, "FracDiv")
+	}
+	return _fnFracDiv(x, y)
 }
 
-// FracMul calls [raw.FracMul] (C function FracMul).
+var _fnFracMul func(int, int) int
+
+// FracMul calls the CarbonCore framework function FracMul.
 func FracMul(x int, y int) int {
-	return raw.FracMul(x, y)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFracMul == nil {
+		ebipurego.RegisterLibFunc(&_fnFracMul, _lib, "FracMul")
+	}
+	return _fnFracMul(x, y)
 }
 
-// FracSin calls [raw.FracSin] (C function FracSin).
+var _fnFracSin func(int) int
+
+// FracSin calls the CarbonCore framework function FracSin.
 func FracSin(x int) int {
-	return raw.FracSin(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFracSin == nil {
+		ebipurego.RegisterLibFunc(&_fnFracSin, _lib, "FracSin")
+	}
+	return _fnFracSin(x)
 }
 
-// FracSqrt calls [raw.FracSqrt] (C function FracSqrt).
+var _fnFracSqrt func(int) int
+
+// FracSqrt calls the CarbonCore framework function FracSqrt.
 func FracSqrt(x int) int {
-	return raw.FracSqrt(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFracSqrt == nil {
+		ebipurego.RegisterLibFunc(&_fnFracSqrt, _lib, "FracSqrt")
+	}
+	return _fnFracSqrt(x)
 }
 
-// Gestalt calls [raw.Gestalt] (C function Gestalt).
-func Gestalt(selector uint, response *int) int16 {
-	return raw.Gestalt(selector, response)
+var _fnGetCollectionDefaultAttributes func(objc.ID) int
+
+// GetCollectionDefaultAttributes calls the CarbonCore framework function GetCollectionDefaultAttributes.
+func GetCollectionDefaultAttributes(c obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetCollectionDefaultAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnGetCollectionDefaultAttributes, _lib, "GetCollectionDefaultAttributes")
+	}
+	return _fnGetCollectionDefaultAttributes(objref.IDOf(c))
 }
 
-// Get1IndResource calls [raw.Get1IndResource] (C function Get1IndResource).
-func Get1IndResource(theType uint, itemIndex int16) *string {
-	return raw.Get1IndResource(theType, itemIndex)
+var _fnGetCollectionRetainCount func(objc.ID) int
+
+// GetCollectionRetainCount calls the CarbonCore framework function GetCollectionRetainCount.
+func GetCollectionRetainCount(c obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetCollectionRetainCount == nil {
+		ebipurego.RegisterLibFunc(&_fnGetCollectionRetainCount, _lib, "GetCollectionRetainCount")
+	}
+	return _fnGetCollectionRetainCount(objref.IDOf(c))
 }
 
-// Get1IndType calls [raw.Get1IndType] (C function Get1IndType).
-func Get1IndType(theType *uint, itemIndex int16) {
-	raw.Get1IndType(theType, itemIndex)
-}
+var _fnGetComponentListModSeed func() int
 
-// Get1NamedResource calls [raw.Get1NamedResource] (C function Get1NamedResource).
-func Get1NamedResource(theType uint, name *uint8) *string {
-	return raw.Get1NamedResource(theType, name)
-}
-
-// Get1Resource calls [raw.Get1Resource] (C function Get1Resource).
-func Get1Resource(theType uint, theID int16) *string {
-	return raw.Get1Resource(theType, theID)
-}
-
-// GetAliasSize calls [raw.GetAliasSize] (C function GetAliasSize).
-func GetAliasSize(alias **raw.AliasRecord) int {
-	return raw.GetAliasSize(alias)
-}
-
-// GetAliasSizeFromPtr calls [raw.GetAliasSizeFromPtr] (C function GetAliasSizeFromPtr).
-func GetAliasSizeFromPtr(alias *raw.AliasRecord) int {
-	return raw.GetAliasSizeFromPtr(alias)
-}
-
-// GetAliasUserType calls [raw.GetAliasUserType] (C function GetAliasUserType).
-func GetAliasUserType(alias **raw.AliasRecord) uint {
-	return raw.GetAliasUserType(alias)
-}
-
-// GetAliasUserTypeFromPtr calls [raw.GetAliasUserTypeFromPtr] (C function GetAliasUserTypeFromPtr).
-func GetAliasUserTypeFromPtr(alias *raw.AliasRecord) uint {
-	return raw.GetAliasUserTypeFromPtr(alias)
-}
-
-// GetCollectionDefaultAttributes calls [raw.GetCollectionDefaultAttributes] (C function GetCollectionDefaultAttributes).
-func GetCollectionDefaultAttributes(c unsafe.Pointer) int {
-	return raw.GetCollectionDefaultAttributes(c)
-}
-
-// GetCollectionExceptionProc calls [raw.GetCollectionExceptionProc] (C function GetCollectionExceptionProc).
-func GetCollectionExceptionProc(c unsafe.Pointer) unsafe.Pointer {
-	return raw.GetCollectionExceptionProc(c)
-}
-
-// GetCollectionItem calls [raw.GetCollectionItem] (C function GetCollectionItem).
-func GetCollectionItem(c unsafe.Pointer, tag uint, id_ int, itemSize *int, itemData unsafe.Pointer) int16 {
-	return raw.GetCollectionItem(c, tag, id_, itemSize, itemData)
-}
-
-// GetCollectionItemHdl calls [raw.GetCollectionItemHdl] (C function GetCollectionItemHdl).
-func GetCollectionItemHdl(aCollection unsafe.Pointer, tag uint, id_ int, itemData *string) int16 {
-	return raw.GetCollectionItemHdl(aCollection, tag, id_, itemData)
-}
-
-// GetCollectionItemInfo calls [raw.GetCollectionItemInfo] (C function GetCollectionItemInfo).
-func GetCollectionItemInfo(c unsafe.Pointer, tag uint, id_ int, itemIndex *int, itemSize *int, attributes *int) int16 {
-	return raw.GetCollectionItemInfo(c, tag, id_, itemIndex, itemSize, attributes)
-}
-
-// GetCollectionRetainCount calls [raw.GetCollectionRetainCount] (C function GetCollectionRetainCount).
-func GetCollectionRetainCount(c unsafe.Pointer) uint {
-	return raw.GetCollectionRetainCount(c)
-}
-
-// GetComponentIndString calls [raw.GetComponentIndString] (C function GetComponentIndString).
-func GetComponentIndString(aComponent *raw.ComponentRecord, theString *uint8, strListID int16, index int16) int16 {
-	return raw.GetComponentIndString(aComponent, theString, strListID, index)
-}
-
-// GetComponentInfo calls [raw.GetComponentInfo] (C function GetComponentInfo).
-func GetComponentInfo(aComponent *raw.ComponentRecord, cd *raw.ComponentDescription, componentName *string, componentInfo *string, componentIcon *string) int16 {
-	return raw.GetComponentInfo(aComponent, cd, componentName, componentInfo, componentIcon)
-}
-
-// GetComponentInstanceError calls [raw.GetComponentInstanceError] (C function GetComponentInstanceError).
-func GetComponentInstanceError(aComponentInstance *raw.ComponentInstanceRecord) int16 {
-	return raw.GetComponentInstanceError(aComponentInstance)
-}
-
-// GetComponentInstanceStorage calls [raw.GetComponentInstanceStorage] (C function GetComponentInstanceStorage).
-func GetComponentInstanceStorage(aComponentInstance *raw.ComponentInstanceRecord) *string {
-	return raw.GetComponentInstanceStorage(aComponentInstance)
-}
-
-// GetComponentListModSeed calls [raw.GetComponentListModSeed] (C function GetComponentListModSeed).
+// GetComponentListModSeed calls the CarbonCore framework function GetComponentListModSeed.
 func GetComponentListModSeed() int {
-	return raw.GetComponentListModSeed()
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetComponentListModSeed == nil {
+		ebipurego.RegisterLibFunc(&_fnGetComponentListModSeed, _lib, "GetComponentListModSeed")
+	}
+	return _fnGetComponentListModSeed()
 }
 
-// GetComponentPublicIndString calls [raw.GetComponentPublicIndString] (C function GetComponentPublicIndString).
-func GetComponentPublicIndString(aComponent *raw.ComponentRecord, theString *uint8, strListID int16, index int16) int16 {
-	return raw.GetComponentPublicIndString(aComponent, theString, strListID, index)
+var _fnGetComponentTypeModSeed func(int) int
+
+// GetComponentTypeModSeed calls the CarbonCore framework function GetComponentTypeModSeed.
+func GetComponentTypeModSeed(componentType int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetComponentTypeModSeed == nil {
+		ebipurego.RegisterLibFunc(&_fnGetComponentTypeModSeed, _lib, "GetComponentTypeModSeed")
+	}
+	return _fnGetComponentTypeModSeed(componentType)
 }
 
-// GetComponentPublicResource calls [raw.GetComponentPublicResource] (C function GetComponentPublicResource).
-func GetComponentPublicResource(aComponent *raw.ComponentRecord, resourceType uint, resourceID int16, theResource **string) int16 {
-	return raw.GetComponentPublicResource(aComponent, resourceType, resourceID, theResource)
-}
+var _fnGetMacOSStatusCommentString func(int) string
 
-// GetComponentPublicResourceList calls [raw.GetComponentPublicResourceList] (C function GetComponentPublicResourceList).
-func GetComponentPublicResourceList(resourceType uint, resourceID int16, flags int, cd *raw.ComponentDescription, missingProc unsafe.Pointer, refCon unsafe.Pointer, atomContainerPtr unsafe.Pointer) int16 {
-	return raw.GetComponentPublicResourceList(resourceType, resourceID, flags, cd, missingProc, refCon, atomContainerPtr)
-}
-
-// GetComponentRefcon calls [raw.GetComponentRefcon] (C function GetComponentRefcon).
-func GetComponentRefcon(aComponent *raw.ComponentRecord) int {
-	return raw.GetComponentRefcon(aComponent)
-}
-
-// GetComponentResource calls [raw.GetComponentResource] (C function GetComponentResource).
-func GetComponentResource(aComponent *raw.ComponentRecord, resType uint, resID int16, theResource **string) int16 {
-	return raw.GetComponentResource(aComponent, resType, resID, theResource)
-}
-
-// GetComponentTypeModSeed calls [raw.GetComponentTypeModSeed] (C function GetComponentTypeModSeed).
-func GetComponentTypeModSeed(componentType uint) int {
-	return raw.GetComponentTypeModSeed(componentType)
-}
-
-// GetCurrentThread calls [raw.GetCurrentThread] (C function GetCurrentThread).
-func GetCurrentThread(currentThreadID *uint) int16 {
-	return raw.GetCurrentThread(currentThreadID)
-}
-
-// GetDefaultThreadStackSize calls [raw.GetDefaultThreadStackSize] (C function GetDefaultThreadStackSize).
-func GetDefaultThreadStackSize(threadStyle uint, stackSize *int) int16 {
-	return raw.GetDefaultThreadStackSize(threadStyle, stackSize)
-}
-
-// GetFolderNameUnicode calls [raw.GetFolderNameUnicode] (C function GetFolderNameUnicode).
-func GetFolderNameUnicode(vRefNum int16, foldType uint, foundVRefNum *int16, name unsafe.Pointer) int {
-	return raw.GetFolderNameUnicode(vRefNum, foldType, foundVRefNum, name)
-}
-
-// GetFolderTypes calls [raw.GetFolderTypes] (C function GetFolderTypes).
-func GetFolderTypes(requestedTypeCount uint, totalTypeCount *uint, theTypes *uint) int16 {
-	return raw.GetFolderTypes(requestedTypeCount, totalTypeCount, theTypes)
-}
-
-// GetHandleSize calls [raw.GetHandleSize] (C function GetHandleSize).
-func GetHandleSize(h *string) int {
-	return raw.GetHandleSize(h)
-}
-
-// GetIndResource calls [raw.GetIndResource] (C function GetIndResource).
-func GetIndResource(theType uint, itemIndex int16) *string {
-	return raw.GetIndResource(theType, itemIndex)
-}
-
-// GetIndType calls [raw.GetIndType] (C function GetIndType).
-func GetIndType(theType *uint, itemIndex int16) {
-	raw.GetIndType(theType, itemIndex)
-}
-
-// GetIndexedCollectionItem calls [raw.GetIndexedCollectionItem] (C function GetIndexedCollectionItem).
-func GetIndexedCollectionItem(c unsafe.Pointer, itemIndex int, itemSize *int, itemData unsafe.Pointer) int16 {
-	return raw.GetIndexedCollectionItem(c, itemIndex, itemSize, itemData)
-}
-
-// GetIndexedCollectionItemHdl calls [raw.GetIndexedCollectionItemHdl] (C function GetIndexedCollectionItemHdl).
-func GetIndexedCollectionItemHdl(aCollection unsafe.Pointer, itemIndex int, itemData *string) int16 {
-	return raw.GetIndexedCollectionItemHdl(aCollection, itemIndex, itemData)
-}
-
-// GetIndexedCollectionItemInfo calls [raw.GetIndexedCollectionItemInfo] (C function GetIndexedCollectionItemInfo).
-func GetIndexedCollectionItemInfo(c unsafe.Pointer, itemIndex int, tag *uint, id_ *int, itemSize *int, attributes *int) int16 {
-	return raw.GetIndexedCollectionItemInfo(c, itemIndex, tag, id_, itemSize, attributes)
-}
-
-// GetIndexedCollectionTag calls [raw.GetIndexedCollectionTag] (C function GetIndexedCollectionTag).
-func GetIndexedCollectionTag(c unsafe.Pointer, tagIndex int, tag *uint) int16 {
-	return raw.GetIndexedCollectionTag(c, tagIndex, tag)
-}
-
-// GetMacOSStatusCommentString calls [raw.GetMacOSStatusCommentString] (C function GetMacOSStatusCommentString).
+// GetMacOSStatusCommentString calls the CarbonCore framework function GetMacOSStatusCommentString.
 func GetMacOSStatusCommentString(err int) string {
-	return raw.GetMacOSStatusCommentString(err)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetMacOSStatusCommentString == nil {
+		ebipurego.RegisterLibFunc(&_fnGetMacOSStatusCommentString, _lib, "GetMacOSStatusCommentString")
+	}
+	return _fnGetMacOSStatusCommentString(err)
 }
 
-// GetMacOSStatusErrorString calls [raw.GetMacOSStatusErrorString] (C function GetMacOSStatusErrorString).
+var _fnGetMacOSStatusErrorString func(int) string
+
+// GetMacOSStatusErrorString calls the CarbonCore framework function GetMacOSStatusErrorString.
 func GetMacOSStatusErrorString(err int) string {
-	return raw.GetMacOSStatusErrorString(err)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetMacOSStatusErrorString == nil {
+		ebipurego.RegisterLibFunc(&_fnGetMacOSStatusErrorString, _lib, "GetMacOSStatusErrorString")
+	}
+	return _fnGetMacOSStatusErrorString(err)
 }
 
-// GetMaxResourceSize calls [raw.GetMaxResourceSize] (C function GetMaxResourceSize).
-func GetMaxResourceSize(theResource *string) int {
-	return raw.GetMaxResourceSize(theResource)
+var _fnGetNewCollection func(int16) objc.ID
+
+// GetNewCollection calls the CarbonCore framework function GetNewCollection.
+func GetNewCollection(collectionID int16) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetNewCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnGetNewCollection, _lib, "GetNewCollection")
+	}
+	_ret := _fnGetNewCollection(collectionID)
+	return obj.Wrap(_ret)
 }
 
-// GetNamedResource calls [raw.GetNamedResource] (C function GetNamedResource).
-func GetNamedResource(theType uint, name *uint8) *string {
-	return raw.GetNamedResource(theType, name)
-}
+var _fnGetPtrSize func(string) int
 
-// GetNewCollection calls [raw.GetNewCollection] (C function GetNewCollection).
-func GetNewCollection(collectionID int16) unsafe.Pointer {
-	return raw.GetNewCollection(collectionID)
-}
-
-// GetNextFOND calls [raw.GetNextFOND] (C function GetNextFOND).
-func GetNextFOND(fondHandle *string) *string {
-	return raw.GetNextFOND(fondHandle)
-}
-
-// GetNextResourceFile calls [raw.GetNextResourceFile] (C function GetNextResourceFile).
-func GetNextResourceFile(curRefNum int, nextRefNum *int) int16 {
-	return raw.GetNextResourceFile(curRefNum, nextRefNum)
-}
-
-// GetPtrSize calls [raw.GetPtrSize] (C function GetPtrSize).
+// GetPtrSize calls the CarbonCore framework function GetPtrSize.
 func GetPtrSize(p string) int {
-	return raw.GetPtrSize(p)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetPtrSize == nil {
+		ebipurego.RegisterLibFunc(&_fnGetPtrSize, _lib, "GetPtrSize")
+	}
+	return _fnGetPtrSize(p)
 }
 
-// GetResAttrs calls [raw.GetResAttrs] (C function GetResAttrs).
-func GetResAttrs(theResource *string) int16 {
-	return raw.GetResAttrs(theResource)
-}
+var _fnGetResFileAttrs func(int) int16
 
-// GetResFileAttrs calls [raw.GetResFileAttrs] (C function GetResFileAttrs).
+// GetResFileAttrs calls the CarbonCore framework function GetResFileAttrs.
 func GetResFileAttrs(refNum int) int16 {
-	return raw.GetResFileAttrs(refNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetResFileAttrs == nil {
+		ebipurego.RegisterLibFunc(&_fnGetResFileAttrs, _lib, "GetResFileAttrs")
+	}
+	return _fnGetResFileAttrs(refNum)
 }
 
-// GetResInfo calls [raw.GetResInfo] (C function GetResInfo).
-func GetResInfo(theResource *string, theID *int16, theType *uint, name *uint8) {
-	raw.GetResInfo(theResource, theID, theType, name)
-}
+var _fnGetScriptManagerVariable func(int16) int
 
-// GetResource calls [raw.GetResource] (C function GetResource).
-func GetResource(theType uint, theID int16) *string {
-	return raw.GetResource(theType, theID)
-}
-
-// GetResourceSizeOnDisk calls [raw.GetResourceSizeOnDisk] (C function GetResourceSizeOnDisk).
-func GetResourceSizeOnDisk(theResource *string) int {
-	return raw.GetResourceSizeOnDisk(theResource)
-}
-
-// GetScriptManagerVariable calls [raw.GetScriptManagerVariable] (C function GetScriptManagerVariable).
+// GetScriptManagerVariable calls the CarbonCore framework function GetScriptManagerVariable.
 func GetScriptManagerVariable(selector int16) int {
-	return raw.GetScriptManagerVariable(selector)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetScriptManagerVariable == nil {
+		ebipurego.RegisterLibFunc(&_fnGetScriptManagerVariable, _lib, "GetScriptManagerVariable")
+	}
+	return _fnGetScriptManagerVariable(selector)
 }
 
-// GetTaggedCollectionItem calls [raw.GetTaggedCollectionItem] (C function GetTaggedCollectionItem).
-func GetTaggedCollectionItem(c unsafe.Pointer, tag uint, whichItem int, itemSize *int, itemData unsafe.Pointer) int16 {
-	return raw.GetTaggedCollectionItem(c, tag, whichItem, itemSize, itemData)
+var _fnGetTextEncodingBase func(int) int
+
+// GetTextEncodingBase calls the CarbonCore framework function GetTextEncodingBase.
+func GetTextEncodingBase(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetTextEncodingBase == nil {
+		ebipurego.RegisterLibFunc(&_fnGetTextEncodingBase, _lib, "GetTextEncodingBase")
+	}
+	return _fnGetTextEncodingBase(encoding)
 }
 
-// GetTaggedCollectionItemInfo calls [raw.GetTaggedCollectionItemInfo] (C function GetTaggedCollectionItemInfo).
-func GetTaggedCollectionItemInfo(c unsafe.Pointer, tag uint, whichItem int, id_ *int, itemIndex *int, itemSize *int, attributes *int) int16 {
-	return raw.GetTaggedCollectionItemInfo(c, tag, whichItem, id_, itemIndex, itemSize, attributes)
+var _fnGetTextEncodingFormat func(int) int
+
+// GetTextEncodingFormat calls the CarbonCore framework function GetTextEncodingFormat.
+func GetTextEncodingFormat(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetTextEncodingFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnGetTextEncodingFormat, _lib, "GetTextEncodingFormat")
+	}
+	return _fnGetTextEncodingFormat(encoding)
 }
 
-// GetTextEncodingBase calls [raw.GetTextEncodingBase] (C function GetTextEncodingBase).
-func GetTextEncodingBase(encoding uint) uint {
-	return raw.GetTextEncodingBase(encoding)
+var _fnGetTextEncodingVariant func(int) int
+
+// GetTextEncodingVariant calls the CarbonCore framework function GetTextEncodingVariant.
+func GetTextEncodingVariant(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetTextEncodingVariant == nil {
+		ebipurego.RegisterLibFunc(&_fnGetTextEncodingVariant, _lib, "GetTextEncodingVariant")
+	}
+	return _fnGetTextEncodingVariant(encoding)
 }
 
-// GetTextEncodingFormat calls [raw.GetTextEncodingFormat] (C function GetTextEncodingFormat).
-func GetTextEncodingFormat(encoding uint) uint {
-	return raw.GetTextEncodingFormat(encoding)
-}
+var _fnInsertResourceFile func(int, int16) int16
 
-// GetTextEncodingVariant calls [raw.GetTextEncodingVariant] (C function GetTextEncodingVariant).
-func GetTextEncodingVariant(encoding uint) uint {
-	return raw.GetTextEncodingVariant(encoding)
-}
-
-// GetThreadCurrentTaskRef calls [raw.GetThreadCurrentTaskRef] (C function GetThreadCurrentTaskRef).
-func GetThreadCurrentTaskRef(threadTRef unsafe.Pointer) int16 {
-	return raw.GetThreadCurrentTaskRef(threadTRef)
-}
-
-// GetThreadState calls [raw.GetThreadState] (C function GetThreadState).
-func GetThreadState(threadToGet uint, threadState *uint16) int16 {
-	return raw.GetThreadState(threadToGet, threadState)
-}
-
-// GetThreadStateGivenTaskRef calls [raw.GetThreadStateGivenTaskRef] (C function GetThreadStateGivenTaskRef).
-func GetThreadStateGivenTaskRef(threadTRef unsafe.Pointer, threadToGet uint, threadState *uint16) int16 {
-	return raw.GetThreadStateGivenTaskRef(threadTRef, threadToGet, threadState)
-}
-
-// GetTopResourceFile calls [raw.GetTopResourceFile] (C function GetTopResourceFile).
-func GetTopResourceFile(refNum *int) int16 {
-	return raw.GetTopResourceFile(refNum)
-}
-
-// HClrRBit calls [raw.HClrRBit] (C function HClrRBit).
-func HClrRBit(h *string) {
-	raw.HClrRBit(h)
-}
-
-// HGetState calls [raw.HGetState] (C function HGetState).
-func HGetState(h *string) int8 {
-	return raw.HGetState(h)
-}
-
-// HLock calls [raw.HLock] (C function HLock).
-func HLock(h *string) {
-	raw.HLock(h)
-}
-
-// HLockHi calls [raw.HLockHi] (C function HLockHi).
-func HLockHi(h *string) {
-	raw.HLockHi(h)
-}
-
-// HSetRBit calls [raw.HSetRBit] (C function HSetRBit).
-func HSetRBit(h *string) {
-	raw.HSetRBit(h)
-}
-
-// HSetState calls [raw.HSetState] (C function HSetState).
-func HSetState(h *string, flags int8) {
-	raw.HSetState(h, flags)
-}
-
-// HUnlock calls [raw.HUnlock] (C function HUnlock).
-func HUnlock(h *string) {
-	raw.HUnlock(h)
-}
-
-// HandAndHand calls [raw.HandAndHand] (C function HandAndHand).
-func HandAndHand(hand1 *string, hand2 *string) int16 {
-	return raw.HandAndHand(hand1, hand2)
-}
-
-// HandToHand calls [raw.HandToHand] (C function HandToHand).
-func HandToHand(theHndl **string) int16 {
-	return raw.HandToHand(theHndl)
-}
-
-// HomeResFile calls [raw.HomeResFile] (C function HomeResFile).
-func HomeResFile(theResource *string) int {
-	return raw.HomeResFile(theResource)
-}
-
-// IdentifyFolder calls [raw.IdentifyFolder] (C function IdentifyFolder).
-func IdentifyFolder(vRefNum int16, dirID int, foldType *uint) int16 {
-	return raw.IdentifyFolder(vRefNum, dirID, foldType)
-}
-
-// IncrementAtomic calls [raw.IncrementAtomic] (C function IncrementAtomic).
-func IncrementAtomic(address *int) int {
-	return raw.IncrementAtomic(address)
-}
-
-// IncrementAtomic16 calls [raw.IncrementAtomic16] (C function IncrementAtomic16).
-func IncrementAtomic16(address *int16) int16 {
-	return raw.IncrementAtomic16(address)
-}
-
-// IncrementAtomic8 calls [raw.IncrementAtomic8] (C function IncrementAtomic8).
-func IncrementAtomic8(address *int8) int8 {
-	return raw.IncrementAtomic8(address)
-}
-
-// InsTime calls [raw.InsTime] (C function InsTime).
-func InsTime(tmTaskPtr *raw.QElem) {
-	raw.InsTime(tmTaskPtr)
-}
-
-// InsXTime calls [raw.InsXTime] (C function InsXTime).
-func InsXTime(tmTaskPtr *raw.QElem) {
-	raw.InsXTime(tmTaskPtr)
-}
-
-// InsertResourceFile calls [raw.InsertResourceFile] (C function InsertResourceFile).
+// InsertResourceFile calls the CarbonCore framework function InsertResourceFile.
 func InsertResourceFile(refNum int, where int16) int16 {
-	return raw.InsertResourceFile(refNum, where)
+	_loadOnce.Do(_loadLibrary)
+	if _fnInsertResourceFile == nil {
+		ebipurego.RegisterLibFunc(&_fnInsertResourceFile, _lib, "InsertResourceFile")
+	}
+	return _fnInsertResourceFile(refNum, where)
 }
 
-// InstallDebugAssertOutputHandler calls [raw.InstallDebugAssertOutputHandler] (C function InstallDebugAssertOutputHandler).
-func InstallDebugAssertOutputHandler(handler unsafe.Pointer) {
-	raw.InstallDebugAssertOutputHandler(handler)
-}
+var _fnInvalidateFolderDescriptorCache func(int16, int) int16
 
-// InstallExceptionHandler calls [raw.InstallExceptionHandler] (C function InstallExceptionHandler).
-func InstallExceptionHandler(theHandler unsafe.Pointer) unsafe.Pointer {
-	return raw.InstallExceptionHandler(theHandler)
-}
-
-// InstallTimeTask calls [raw.InstallTimeTask] (C function InstallTimeTask).
-func InstallTimeTask(tmTaskPtr *raw.QElem) int16 {
-	return raw.InstallTimeTask(tmTaskPtr)
-}
-
-// InstallXTimeTask calls [raw.InstallXTimeTask] (C function InstallXTimeTask).
-func InstallXTimeTask(tmTaskPtr *raw.QElem) int16 {
-	return raw.InstallXTimeTask(tmTaskPtr)
-}
-
-// InvalidateFolderDescriptorCache calls [raw.InvalidateFolderDescriptorCache] (C function InvalidateFolderDescriptorCache).
+// InvalidateFolderDescriptorCache calls the CarbonCore framework function InvalidateFolderDescriptorCache.
 func InvalidateFolderDescriptorCache(vRefNum int16, dirID int) int16 {
-	return raw.InvalidateFolderDescriptorCache(vRefNum, dirID)
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvalidateFolderDescriptorCache == nil {
+		ebipurego.RegisterLibFunc(&_fnInvalidateFolderDescriptorCache, _lib, "InvalidateFolderDescriptorCache")
+	}
+	return _fnInvalidateFolderDescriptorCache(vRefNum, dirID)
 }
 
-// InvokeCollectionExceptionUPP calls [raw.InvokeCollectionExceptionUPP] (C function InvokeCollectionExceptionUPP).
-func InvokeCollectionExceptionUPP(c unsafe.Pointer, status int16, userUPP unsafe.Pointer) int16 {
-	return raw.InvokeCollectionExceptionUPP(c, status, userUPP)
-}
+var _fnIsHeapValid func() uint8
 
-// InvokeCollectionFlattenUPP calls [raw.InvokeCollectionFlattenUPP] (C function InvokeCollectionFlattenUPP).
-func InvokeCollectionFlattenUPP(size int, data unsafe.Pointer, refCon unsafe.Pointer, userUPP unsafe.Pointer) int16 {
-	return raw.InvokeCollectionFlattenUPP(size, data, refCon, userUPP)
-}
-
-// InvokeComponentMPWorkFunctionUPP calls [raw.InvokeComponentMPWorkFunctionUPP] (C function InvokeComponentMPWorkFunctionUPP).
-func InvokeComponentMPWorkFunctionUPP(globalRefCon unsafe.Pointer, header *raw.ComponentMPWorkFunctionHeaderRecord, userUPP unsafe.Pointer) int {
-	return raw.InvokeComponentMPWorkFunctionUPP(globalRefCon, header, userUPP)
-}
-
-// InvokeComponentRoutineUPP calls [raw.InvokeComponentRoutineUPP] (C function InvokeComponentRoutineUPP).
-func InvokeComponentRoutineUPP(cp *raw.ComponentParameters, componentStorage *string, userUPP unsafe.Pointer) int {
-	return raw.InvokeComponentRoutineUPP(cp, componentStorage, userUPP)
-}
-
-// InvokeDebugAssertOutputHandlerUPP calls [raw.InvokeDebugAssertOutputHandlerUPP] (C function InvokeDebugAssertOutputHandlerUPP).
-func InvokeDebugAssertOutputHandlerUPP(componentSignature uint, options uint, assertionString string, exceptionLabelString string, errorString string, fileName string, lineNumber int, value unsafe.Pointer, outputMsg *uint8, userUPP unsafe.Pointer) {
-	raw.InvokeDebugAssertOutputHandlerUPP(componentSignature, options, assertionString, exceptionLabelString, errorString, fileName, lineNumber, value, outputMsg, userUPP)
-}
-
-// InvokeDebugComponentCallbackUPP calls [raw.InvokeDebugComponentCallbackUPP] (C function InvokeDebugComponentCallbackUPP).
-func InvokeDebugComponentCallbackUPP(optionSelectorNum int, command uint, optionSetting *uint8, userUPP unsafe.Pointer) {
-	raw.InvokeDebugComponentCallbackUPP(optionSelectorNum, command, optionSetting, userUPP)
-}
-
-// InvokeDebuggerDisposeThreadUPP calls [raw.InvokeDebuggerDisposeThreadUPP] (C function InvokeDebuggerDisposeThreadUPP).
-func InvokeDebuggerDisposeThreadUPP(threadDeleted uint, userUPP unsafe.Pointer) {
-	raw.InvokeDebuggerDisposeThreadUPP(threadDeleted, userUPP)
-}
-
-// InvokeDebuggerNewThreadUPP calls [raw.InvokeDebuggerNewThreadUPP] (C function InvokeDebuggerNewThreadUPP).
-func InvokeDebuggerNewThreadUPP(threadCreated uint, userUPP unsafe.Pointer) {
-	raw.InvokeDebuggerNewThreadUPP(threadCreated, userUPP)
-}
-
-// InvokeDebuggerThreadSchedulerUPP calls [raw.InvokeDebuggerThreadSchedulerUPP] (C function InvokeDebuggerThreadSchedulerUPP).
-func InvokeDebuggerThreadSchedulerUPP(schedulerInfo *raw.SchedulerInfoRec, userUPP unsafe.Pointer) uint {
-	return raw.InvokeDebuggerThreadSchedulerUPP(schedulerInfo, userUPP)
-}
-
-// InvokeDeferredTaskUPP calls [raw.InvokeDeferredTaskUPP] (C function InvokeDeferredTaskUPP).
-func InvokeDeferredTaskUPP(dtParam int, userUPP unsafe.Pointer) {
-	raw.InvokeDeferredTaskUPP(dtParam, userUPP)
-}
-
-// InvokeExceptionHandlerUPP calls [raw.InvokeExceptionHandlerUPP] (C function InvokeExceptionHandlerUPP).
-func InvokeExceptionHandlerUPP(theException *raw.ExceptionInformation, userUPP unsafe.Pointer) int {
-	return raw.InvokeExceptionHandlerUPP(theException, userUPP)
-}
-
-// InvokeFNSubscriptionUPP calls [raw.InvokeFNSubscriptionUPP] (C function InvokeFNSubscriptionUPP).
-func InvokeFNSubscriptionUPP(message uint, flags uint, refcon unsafe.Pointer, subscription unsafe.Pointer, userUPP unsafe.Pointer) {
-	raw.InvokeFNSubscriptionUPP(message, flags, refcon, subscription, userUPP)
-}
-
-// InvokeFSVolumeEjectUPP calls [raw.InvokeFSVolumeEjectUPP] (C function InvokeFSVolumeEjectUPP).
-func InvokeFSVolumeEjectUPP(volumeOp unsafe.Pointer, clientData unsafe.Pointer, err int, volumeRefNum int16, dissenter int, userUPP unsafe.Pointer) {
-	raw.InvokeFSVolumeEjectUPP(volumeOp, clientData, err, volumeRefNum, dissenter, userUPP)
-}
-
-// InvokeFSVolumeMountUPP calls [raw.InvokeFSVolumeMountUPP] (C function InvokeFSVolumeMountUPP).
-func InvokeFSVolumeMountUPP(volumeOp unsafe.Pointer, clientData unsafe.Pointer, err int, mountedVolumeRefNum int16, userUPP unsafe.Pointer) {
-	raw.InvokeFSVolumeMountUPP(volumeOp, clientData, err, mountedVolumeRefNum, userUPP)
-}
-
-// InvokeFSVolumeUnmountUPP calls [raw.InvokeFSVolumeUnmountUPP] (C function InvokeFSVolumeUnmountUPP).
-func InvokeFSVolumeUnmountUPP(volumeOp unsafe.Pointer, clientData unsafe.Pointer, err int, volumeRefNum int16, dissenter int, userUPP unsafe.Pointer) {
-	raw.InvokeFSVolumeUnmountUPP(volumeOp, clientData, err, volumeRefNum, dissenter, userUPP)
-}
-
-// InvokeFolderManagerNotificationUPP calls [raw.InvokeFolderManagerNotificationUPP] (C function InvokeFolderManagerNotificationUPP).
-func InvokeFolderManagerNotificationUPP(message uint, arg unsafe.Pointer, userRefCon unsafe.Pointer, userUPP unsafe.Pointer) int {
-	return raw.InvokeFolderManagerNotificationUPP(message, arg, userRefCon, userUPP)
-}
-
-// InvokeGetMissingComponentResourceUPP calls [raw.InvokeGetMissingComponentResourceUPP] (C function InvokeGetMissingComponentResourceUPP).
-func InvokeGetMissingComponentResourceUPP(c *raw.ComponentRecord, resType uint, resID int16, refCon unsafe.Pointer, resource **string, userUPP unsafe.Pointer) int16 {
-	return raw.InvokeGetMissingComponentResourceUPP(c, resType, resID, refCon, resource, userUPP)
-}
-
-// InvokeIOCompletionUPP calls [raw.InvokeIOCompletionUPP] (C function InvokeIOCompletionUPP).
-func InvokeIOCompletionUPP(paramBlock unsafe.Pointer, userUPP unsafe.Pointer) {
-	raw.InvokeIOCompletionUPP(paramBlock, userUPP)
-}
-
-// InvokeIndexToUCStringUPP calls [raw.InvokeIndexToUCStringUPP] (C function InvokeIndexToUCStringUPP).
-func InvokeIndexToUCStringUPP(index uint, listDataPtr unsafe.Pointer, refcon unsafe.Pointer, outString unsafe.Pointer, tsOptions *uint16, userUPP unsafe.Pointer) uint8 {
-	return raw.InvokeIndexToUCStringUPP(index, listDataPtr, refcon, outString, tsOptions, userUPP)
-}
-
-// InvokeResErrUPP calls [raw.InvokeResErrUPP] (C function InvokeResErrUPP).
-func InvokeResErrUPP(thErr int16, userUPP unsafe.Pointer) {
-	raw.InvokeResErrUPP(thErr, userUPP)
-}
-
-// InvokeSelectorFunctionUPP calls [raw.InvokeSelectorFunctionUPP] (C function InvokeSelectorFunctionUPP).
-func InvokeSelectorFunctionUPP(selector uint, response *int, userUPP unsafe.Pointer) int16 {
-	return raw.InvokeSelectorFunctionUPP(selector, response, userUPP)
-}
-
-// InvokeThreadEntryUPP calls [raw.InvokeThreadEntryUPP] (C function InvokeThreadEntryUPP).
-func InvokeThreadEntryUPP(threadParam unsafe.Pointer, userUPP unsafe.Pointer) unsafe.Pointer {
-	return raw.InvokeThreadEntryUPP(threadParam, userUPP)
-}
-
-// InvokeThreadSchedulerUPP calls [raw.InvokeThreadSchedulerUPP] (C function InvokeThreadSchedulerUPP).
-func InvokeThreadSchedulerUPP(schedulerInfo *raw.SchedulerInfoRec, userUPP unsafe.Pointer) uint {
-	return raw.InvokeThreadSchedulerUPP(schedulerInfo, userUPP)
-}
-
-// InvokeThreadSwitchUPP calls [raw.InvokeThreadSwitchUPP] (C function InvokeThreadSwitchUPP).
-func InvokeThreadSwitchUPP(threadBeingSwitched uint, switchProcParam unsafe.Pointer, userUPP unsafe.Pointer) {
-	raw.InvokeThreadSwitchUPP(threadBeingSwitched, switchProcParam, userUPP)
-}
-
-// InvokeThreadTerminationUPP calls [raw.InvokeThreadTerminationUPP] (C function InvokeThreadTerminationUPP).
-func InvokeThreadTerminationUPP(threadTerminated uint, terminationProcParam unsafe.Pointer, userUPP unsafe.Pointer) {
-	raw.InvokeThreadTerminationUPP(threadTerminated, terminationProcParam, userUPP)
-}
-
-// InvokeTimerUPP calls [raw.InvokeTimerUPP] (C function InvokeTimerUPP).
-func InvokeTimerUPP(tmTaskPtr *raw.TMTask, userUPP unsafe.Pointer) {
-	raw.InvokeTimerUPP(tmTaskPtr, userUPP)
-}
-
-// InvokeUnicodeToTextFallbackUPP calls [raw.InvokeUnicodeToTextFallbackUPP] (C function InvokeUnicodeToTextFallbackUPP).
-func InvokeUnicodeToTextFallbackUPP(iSrcUniStr *uint16, iSrcUniStrLen uint, oSrcConvLen *uint, oDestStr *uint8, iDestStrLen uint, oDestConvLen *uint, iInfoPtr unsafe.Pointer, iUnicodeMappingPtr *raw.UnicodeMapping, userUPP unsafe.Pointer) int {
-	return raw.InvokeUnicodeToTextFallbackUPP(iSrcUniStr, iSrcUniStrLen, oSrcConvLen, oDestStr, iDestStrLen, oDestConvLen, iInfoPtr, iUnicodeMappingPtr, userUPP)
-}
-
-// IsHandleValid calls [raw.IsHandleValid] (C function IsHandleValid).
-func IsHandleValid(h *string) uint8 {
-	return raw.IsHandleValid(h)
-}
-
-// IsHeapValid calls [raw.IsHeapValid] (C function IsHeapValid).
+// IsHeapValid calls the CarbonCore framework function IsHeapValid.
 func IsHeapValid() uint8 {
-	return raw.IsHeapValid()
+	_loadOnce.Do(_loadLibrary)
+	if _fnIsHeapValid == nil {
+		ebipurego.RegisterLibFunc(&_fnIsHeapValid, _lib, "IsHeapValid")
+	}
+	return _fnIsHeapValid()
 }
 
-// IsMetric calls [raw.IsMetric] (C function IsMetric).
+var _fnIsMetric func() uint8
+
+// IsMetric calls the CarbonCore framework function IsMetric.
 func IsMetric() uint8 {
-	return raw.IsMetric()
+	_loadOnce.Do(_loadLibrary)
+	if _fnIsMetric == nil {
+		ebipurego.RegisterLibFunc(&_fnIsMetric, _lib, "IsMetric")
+	}
+	return _fnIsMetric()
 }
 
-// IsPointerValid calls [raw.IsPointerValid] (C function IsPointerValid).
+var _fnIsPointerValid func(string) uint8
+
+// IsPointerValid calls the CarbonCore framework function IsPointerValid.
 func IsPointerValid(p string) uint8 {
-	return raw.IsPointerValid(p)
+	_loadOnce.Do(_loadLibrary)
+	if _fnIsPointerValid == nil {
+		ebipurego.RegisterLibFunc(&_fnIsPointerValid, _lib, "IsPointerValid")
+	}
+	return _fnIsPointerValid(p)
 }
 
-// LMGetApFontID calls [raw.LMGetApFontID] (C function LMGetApFontID).
+var _fnLMGetApFontID func() int16
+
+// LMGetApFontID calls the CarbonCore framework function LMGetApFontID.
 func LMGetApFontID() int16 {
-	return raw.LMGetApFontID()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetApFontID == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetApFontID, _lib, "LMGetApFontID")
+	}
+	return _fnLMGetApFontID()
 }
 
-// LMGetBootDrive calls [raw.LMGetBootDrive] (C function LMGetBootDrive).
+var _fnLMGetBootDrive func() int16
+
+// LMGetBootDrive calls the CarbonCore framework function LMGetBootDrive.
 func LMGetBootDrive() int16 {
-	return raw.LMGetBootDrive()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetBootDrive == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetBootDrive, _lib, "LMGetBootDrive")
+	}
+	return _fnLMGetBootDrive()
 }
 
-// LMGetIntlSpec calls [raw.LMGetIntlSpec] (C function LMGetIntlSpec).
+var _fnLMGetIntlSpec func() string
+
+// LMGetIntlSpec calls the CarbonCore framework function LMGetIntlSpec.
 func LMGetIntlSpec() string {
-	return raw.LMGetIntlSpec()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetIntlSpec == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetIntlSpec, _lib, "LMGetIntlSpec")
+	}
+	return _fnLMGetIntlSpec()
 }
 
-// LMGetMemErr calls [raw.LMGetMemErr] (C function LMGetMemErr).
+var _fnLMGetMemErr func() int16
+
+// LMGetMemErr calls the CarbonCore framework function LMGetMemErr.
 func LMGetMemErr() int16 {
-	return raw.LMGetMemErr()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetMemErr == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetMemErr, _lib, "LMGetMemErr")
+	}
+	return _fnLMGetMemErr()
 }
 
-// LMGetResErr calls [raw.LMGetResErr] (C function LMGetResErr).
+var _fnLMGetResErr func() int16
+
+// LMGetResErr calls the CarbonCore framework function LMGetResErr.
 func LMGetResErr() int16 {
-	return raw.LMGetResErr()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetResErr == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetResErr, _lib, "LMGetResErr")
+	}
+	return _fnLMGetResErr()
 }
 
-// LMGetResLoad calls [raw.LMGetResLoad] (C function LMGetResLoad).
+var _fnLMGetResLoad func() uint8
+
+// LMGetResLoad calls the CarbonCore framework function LMGetResLoad.
 func LMGetResLoad() uint8 {
-	return raw.LMGetResLoad()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetResLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetResLoad, _lib, "LMGetResLoad")
+	}
+	return _fnLMGetResLoad()
 }
 
-// LMGetSysFontSize calls [raw.LMGetSysFontSize] (C function LMGetSysFontSize).
+var _fnLMGetSysFontSize func() int16
+
+// LMGetSysFontSize calls the CarbonCore framework function LMGetSysFontSize.
 func LMGetSysFontSize() int16 {
-	return raw.LMGetSysFontSize()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetSysFontSize == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetSysFontSize, _lib, "LMGetSysFontSize")
+	}
+	return _fnLMGetSysFontSize()
 }
 
-// LMGetSysMap calls [raw.LMGetSysMap] (C function LMGetSysMap).
+var _fnLMGetSysMap func() int16
+
+// LMGetSysMap calls the CarbonCore framework function LMGetSysMap.
 func LMGetSysMap() int16 {
-	return raw.LMGetSysMap()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetSysMap == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetSysMap, _lib, "LMGetSysMap")
+	}
+	return _fnLMGetSysMap()
 }
 
-// LMGetTmpResLoad calls [raw.LMGetTmpResLoad] (C function LMGetTmpResLoad).
+var _fnLMGetTmpResLoad func() uint8
+
+// LMGetTmpResLoad calls the CarbonCore framework function LMGetTmpResLoad.
 func LMGetTmpResLoad() uint8 {
-	return raw.LMGetTmpResLoad()
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMGetTmpResLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnLMGetTmpResLoad, _lib, "LMGetTmpResLoad")
+	}
+	return _fnLMGetTmpResLoad()
 }
 
-// LMSetApFontID calls [raw.LMSetApFontID] (C function LMSetApFontID).
+var _fnLMSetApFontID func(int16)
+
+// LMSetApFontID calls the CarbonCore framework function LMSetApFontID.
 func LMSetApFontID(value int16) {
-	raw.LMSetApFontID(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetApFontID == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetApFontID, _lib, "LMSetApFontID")
+	}
+	_fnLMSetApFontID(value)
 }
 
-// LMSetBootDrive calls [raw.LMSetBootDrive] (C function LMSetBootDrive).
+var _fnLMSetBootDrive func(int16)
+
+// LMSetBootDrive calls the CarbonCore framework function LMSetBootDrive.
 func LMSetBootDrive(value int16) {
-	raw.LMSetBootDrive(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetBootDrive == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetBootDrive, _lib, "LMSetBootDrive")
+	}
+	_fnLMSetBootDrive(value)
 }
 
-// LMSetIntlSpec calls [raw.LMSetIntlSpec] (C function LMSetIntlSpec).
+var _fnLMSetIntlSpec func(string)
+
+// LMSetIntlSpec calls the CarbonCore framework function LMSetIntlSpec.
 func LMSetIntlSpec(value string) {
-	raw.LMSetIntlSpec(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetIntlSpec == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetIntlSpec, _lib, "LMSetIntlSpec")
+	}
+	_fnLMSetIntlSpec(value)
 }
 
-// LMSetMemErr calls [raw.LMSetMemErr] (C function LMSetMemErr).
+var _fnLMSetMemErr func(int16)
+
+// LMSetMemErr calls the CarbonCore framework function LMSetMemErr.
 func LMSetMemErr(value int16) {
-	raw.LMSetMemErr(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetMemErr == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetMemErr, _lib, "LMSetMemErr")
+	}
+	_fnLMSetMemErr(value)
 }
 
-// LMSetResErr calls [raw.LMSetResErr] (C function LMSetResErr).
+var _fnLMSetResErr func(int16)
+
+// LMSetResErr calls the CarbonCore framework function LMSetResErr.
 func LMSetResErr(value int16) {
-	raw.LMSetResErr(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetResErr == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetResErr, _lib, "LMSetResErr")
+	}
+	_fnLMSetResErr(value)
 }
 
-// LMSetResLoad calls [raw.LMSetResLoad] (C function LMSetResLoad).
+var _fnLMSetResLoad func(uint8)
+
+// LMSetResLoad calls the CarbonCore framework function LMSetResLoad.
 func LMSetResLoad(value uint8) {
-	raw.LMSetResLoad(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetResLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetResLoad, _lib, "LMSetResLoad")
+	}
+	_fnLMSetResLoad(value)
 }
 
-// LMSetSysFontFam calls [raw.LMSetSysFontFam] (C function LMSetSysFontFam).
+var _fnLMSetSysFontFam func(int16)
+
+// LMSetSysFontFam calls the CarbonCore framework function LMSetSysFontFam.
 func LMSetSysFontFam(value int16) {
-	raw.LMSetSysFontFam(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetSysFontFam == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetSysFontFam, _lib, "LMSetSysFontFam")
+	}
+	_fnLMSetSysFontFam(value)
 }
 
-// LMSetSysFontSize calls [raw.LMSetSysFontSize] (C function LMSetSysFontSize).
+var _fnLMSetSysFontSize func(int16)
+
+// LMSetSysFontSize calls the CarbonCore framework function LMSetSysFontSize.
 func LMSetSysFontSize(value int16) {
-	raw.LMSetSysFontSize(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetSysFontSize == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetSysFontSize, _lib, "LMSetSysFontSize")
+	}
+	_fnLMSetSysFontSize(value)
 }
 
-// LMSetSysMap calls [raw.LMSetSysMap] (C function LMSetSysMap).
+var _fnLMSetSysMap func(int16)
+
+// LMSetSysMap calls the CarbonCore framework function LMSetSysMap.
 func LMSetSysMap(value int16) {
-	raw.LMSetSysMap(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetSysMap == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetSysMap, _lib, "LMSetSysMap")
+	}
+	_fnLMSetSysMap(value)
 }
 
-// LMSetTmpResLoad calls [raw.LMSetTmpResLoad] (C function LMSetTmpResLoad).
+var _fnLMSetTmpResLoad func(uint8)
+
+// LMSetTmpResLoad calls the CarbonCore framework function LMSetTmpResLoad.
 func LMSetTmpResLoad(value uint8) {
-	raw.LMSetTmpResLoad(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLMSetTmpResLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnLMSetTmpResLoad, _lib, "LMSetTmpResLoad")
+	}
+	_fnLMSetTmpResLoad(value)
 }
 
-// LoadResource calls [raw.LoadResource] (C function LoadResource).
-func LoadResource(theResource *string) {
-	raw.LoadResource(theResource)
-}
+var _fnLong2Fix func(int) int
 
-// LocaleCountNames calls [raw.LocaleCountNames] (C function LocaleCountNames).
-func LocaleCountNames(locale unsafe.Pointer, opVariant uint, nameMask uint, nameCount *uint) int {
-	return raw.LocaleCountNames(locale, opVariant, nameMask, nameCount)
-}
-
-// LocaleGetIndName calls [raw.LocaleGetIndName] (C function LocaleGetIndName).
-func LocaleGetIndName(locale unsafe.Pointer, opVariant uint, nameMask uint, nameIndex uint, maxNameLen uint, actualNameLen *uint, displayName *uint16, displayLocale unsafe.Pointer) int {
-	return raw.LocaleGetIndName(locale, opVariant, nameMask, nameIndex, maxNameLen, actualNameLen, displayName, displayLocale)
-}
-
-// LocaleGetName calls [raw.LocaleGetName] (C function LocaleGetName).
-func LocaleGetName(locale unsafe.Pointer, opVariant uint, nameMask uint, displayLocale unsafe.Pointer, maxNameLen uint, actualNameLen *uint, displayName *uint16) int {
-	return raw.LocaleGetName(locale, opVariant, nameMask, displayLocale, maxNameLen, actualNameLen, displayName)
-}
-
-// LocaleOperationGetIndName calls [raw.LocaleOperationGetIndName] (C function LocaleOperationGetIndName).
-func LocaleOperationGetIndName(opClass uint, nameIndex uint, maxNameLen uint, actualNameLen *uint, displayName *uint16, displayLocale unsafe.Pointer) int {
-	return raw.LocaleOperationGetIndName(opClass, nameIndex, maxNameLen, actualNameLen, displayName, displayLocale)
-}
-
-// LocaleOperationGetName calls [raw.LocaleOperationGetName] (C function LocaleOperationGetName).
-func LocaleOperationGetName(opClass uint, displayLocale unsafe.Pointer, maxNameLen uint, actualNameLen *uint, displayName *uint16) int {
-	return raw.LocaleOperationGetName(opClass, displayLocale, maxNameLen, actualNameLen, displayName)
-}
-
-// LocaleRefFromLangOrRegionCode calls [raw.LocaleRefFromLangOrRegionCode] (C function LocaleRefFromLangOrRegionCode).
-func LocaleRefFromLangOrRegionCode(lang int16, region int16, locale unsafe.Pointer) int {
-	return raw.LocaleRefFromLangOrRegionCode(lang, region, locale)
-}
-
-// LocaleRefFromLocaleString calls [raw.LocaleRefFromLocaleString] (C function LocaleRefFromLocaleString).
-func LocaleRefFromLocaleString(localeString string, locale unsafe.Pointer) int {
-	return raw.LocaleRefFromLocaleString(localeString, locale)
-}
-
-// LocaleRefGetPartString calls [raw.LocaleRefGetPartString] (C function LocaleRefGetPartString).
-func LocaleRefGetPartString(locale unsafe.Pointer, partMask uint, maxStringLen uint, partString string) int {
-	return raw.LocaleRefGetPartString(locale, partMask, maxStringLen, partString)
-}
-
-// Long2Fix calls [raw.Long2Fix] (C function Long2Fix).
+// Long2Fix calls the CarbonCore framework function Long2Fix.
 func Long2Fix(x int) int {
-	return raw.Long2Fix(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLong2Fix == nil {
+		ebipurego.RegisterLibFunc(&_fnLong2Fix, _lib, "Long2Fix")
+	}
+	return _fnLong2Fix(x)
 }
 
-// LongDoubleToSInt64 calls [raw.LongDoubleToSInt64] (C function LongDoubleToSInt64).
+var _fnLongDoubleToSInt64 func(float64) int64
+
+// LongDoubleToSInt64 calls the CarbonCore framework function LongDoubleToSInt64.
 func LongDoubleToSInt64(value float64) int64 {
-	return raw.LongDoubleToSInt64(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLongDoubleToSInt64 == nil {
+		ebipurego.RegisterLibFunc(&_fnLongDoubleToSInt64, _lib, "LongDoubleToSInt64")
+	}
+	return _fnLongDoubleToSInt64(value)
 }
 
-// LongDoubleToUInt64 calls [raw.LongDoubleToUInt64] (C function LongDoubleToUInt64).
+var _fnLongDoubleToUInt64 func(float64) uint64
+
+// LongDoubleToUInt64 calls the CarbonCore framework function LongDoubleToUInt64.
 func LongDoubleToUInt64(value float64) uint64 {
-	return raw.LongDoubleToUInt64(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnLongDoubleToUInt64 == nil {
+		ebipurego.RegisterLibFunc(&_fnLongDoubleToUInt64, _lib, "LongDoubleToUInt64")
+	}
+	return _fnLongDoubleToUInt64(value)
 }
 
-// MPAllocate calls [raw.MPAllocate] (C function MPAllocate).
-func MPAllocate(size uint) unsafe.Pointer {
-	return raw.MPAllocate(size)
+var _fnMPCurrentTaskID func() objc.ID
+
+// MPCurrentTaskID calls the CarbonCore framework function MPCurrentTaskID.
+func MPCurrentTaskID() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPCurrentTaskID == nil {
+		ebipurego.RegisterLibFunc(&_fnMPCurrentTaskID, _lib, "MPCurrentTaskID")
+	}
+	_ret := _fnMPCurrentTaskID()
+	return obj.Wrap(_ret)
 }
 
-// MPAllocateAligned calls [raw.MPAllocateAligned] (C function MPAllocateAligned).
-func MPAllocateAligned(size uint, alignment uint8, options uint) unsafe.Pointer {
-	return raw.MPAllocateAligned(size, alignment, options)
-}
+var _fnMPExit func(int)
 
-// MPArmTimer calls [raw.MPArmTimer] (C function MPArmTimer).
-func MPArmTimer(timerID unsafe.Pointer, expirationTime unsafe.Pointer, options uint) int {
-	return raw.MPArmTimer(timerID, expirationTime, options)
-}
-
-// MPBlockClear calls [raw.MPBlockClear] (C function MPBlockClear).
-func MPBlockClear(address unsafe.Pointer, size uint) {
-	raw.MPBlockClear(address, size)
-}
-
-// MPBlockCopy calls [raw.MPBlockCopy] (C function MPBlockCopy).
-func MPBlockCopy(source unsafe.Pointer, destination unsafe.Pointer, size uint) {
-	raw.MPBlockCopy(source, destination, size)
-}
-
-// MPCancelTimer calls [raw.MPCancelTimer] (C function MPCancelTimer).
-func MPCancelTimer(timerID unsafe.Pointer, timeRemaining unsafe.Pointer) int {
-	return raw.MPCancelTimer(timerID, timeRemaining)
-}
-
-// MPCauseNotification calls [raw.MPCauseNotification] (C function MPCauseNotification).
-func MPCauseNotification(notificationID unsafe.Pointer) int {
-	return raw.MPCauseNotification(notificationID)
-}
-
-// MPCreateCriticalRegion calls [raw.MPCreateCriticalRegion] (C function MPCreateCriticalRegion).
-func MPCreateCriticalRegion(criticalRegion unsafe.Pointer) int {
-	return raw.MPCreateCriticalRegion(criticalRegion)
-}
-
-// MPCreateEvent calls [raw.MPCreateEvent] (C function MPCreateEvent).
-func MPCreateEvent(event unsafe.Pointer) int {
-	return raw.MPCreateEvent(event)
-}
-
-// MPCreateNotification calls [raw.MPCreateNotification] (C function MPCreateNotification).
-func MPCreateNotification(notificationID unsafe.Pointer) int {
-	return raw.MPCreateNotification(notificationID)
-}
-
-// MPCreateQueue calls [raw.MPCreateQueue] (C function MPCreateQueue).
-func MPCreateQueue(queue unsafe.Pointer) int {
-	return raw.MPCreateQueue(queue)
-}
-
-// MPCreateSemaphore calls [raw.MPCreateSemaphore] (C function MPCreateSemaphore).
-func MPCreateSemaphore(maximumValue uint, initialValue uint, semaphore unsafe.Pointer) int {
-	return raw.MPCreateSemaphore(maximumValue, initialValue, semaphore)
-}
-
-// MPCreateTask calls [raw.MPCreateTask] (C function MPCreateTask).
-func MPCreateTask(entryPoint unsafe.Pointer, parameter unsafe.Pointer, stackSize uint, notifyQueue unsafe.Pointer, terminationParameter1 unsafe.Pointer, terminationParameter2 unsafe.Pointer, options uint, task unsafe.Pointer) int {
-	return raw.MPCreateTask(entryPoint, parameter, stackSize, notifyQueue, terminationParameter1, terminationParameter2, options, task)
-}
-
-// MPCreateTimer calls [raw.MPCreateTimer] (C function MPCreateTimer).
-func MPCreateTimer(timerID unsafe.Pointer) int {
-	return raw.MPCreateTimer(timerID)
-}
-
-// MPCurrentTaskID calls [raw.MPCurrentTaskID] (C function MPCurrentTaskID).
-func MPCurrentTaskID() unsafe.Pointer {
-	return raw.MPCurrentTaskID()
-}
-
-// MPDelayUntil calls [raw.MPDelayUntil] (C function MPDelayUntil).
-func MPDelayUntil(expirationTime unsafe.Pointer) int {
-	return raw.MPDelayUntil(expirationTime)
-}
-
-// MPDeleteCriticalRegion calls [raw.MPDeleteCriticalRegion] (C function MPDeleteCriticalRegion).
-func MPDeleteCriticalRegion(criticalRegion unsafe.Pointer) int {
-	return raw.MPDeleteCriticalRegion(criticalRegion)
-}
-
-// MPDeleteEvent calls [raw.MPDeleteEvent] (C function MPDeleteEvent).
-func MPDeleteEvent(event unsafe.Pointer) int {
-	return raw.MPDeleteEvent(event)
-}
-
-// MPDeleteNotification calls [raw.MPDeleteNotification] (C function MPDeleteNotification).
-func MPDeleteNotification(notificationID unsafe.Pointer) int {
-	return raw.MPDeleteNotification(notificationID)
-}
-
-// MPDeleteQueue calls [raw.MPDeleteQueue] (C function MPDeleteQueue).
-func MPDeleteQueue(queue unsafe.Pointer) int {
-	return raw.MPDeleteQueue(queue)
-}
-
-// MPDeleteSemaphore calls [raw.MPDeleteSemaphore] (C function MPDeleteSemaphore).
-func MPDeleteSemaphore(semaphore unsafe.Pointer) int {
-	return raw.MPDeleteSemaphore(semaphore)
-}
-
-// MPDeleteTimer calls [raw.MPDeleteTimer] (C function MPDeleteTimer).
-func MPDeleteTimer(timerID unsafe.Pointer) int {
-	return raw.MPDeleteTimer(timerID)
-}
-
-// MPDisposeTaskException calls [raw.MPDisposeTaskException] (C function MPDisposeTaskException).
-func MPDisposeTaskException(task unsafe.Pointer, action uint) int {
-	return raw.MPDisposeTaskException(task, action)
-}
-
-// MPEnterCriticalRegion calls [raw.MPEnterCriticalRegion] (C function MPEnterCriticalRegion).
-func MPEnterCriticalRegion(criticalRegion unsafe.Pointer, timeout int) int {
-	return raw.MPEnterCriticalRegion(criticalRegion, timeout)
-}
-
-// MPExit calls [raw.MPExit] (C function MPExit).
+// MPExit calls the CarbonCore framework function MPExit.
 func MPExit(status int) {
-	raw.MPExit(status)
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPExit == nil {
+		ebipurego.RegisterLibFunc(&_fnMPExit, _lib, "MPExit")
+	}
+	_fnMPExit(status)
 }
 
-// MPExitCriticalRegion calls [raw.MPExitCriticalRegion] (C function MPExitCriticalRegion).
-func MPExitCriticalRegion(criticalRegion unsafe.Pointer) int {
-	return raw.MPExitCriticalRegion(criticalRegion)
+var _fnMPProcessors func() int
+
+// MPProcessors calls the CarbonCore framework function MPProcessors.
+func MPProcessors() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPProcessors == nil {
+		ebipurego.RegisterLibFunc(&_fnMPProcessors, _lib, "MPProcessors")
+	}
+	return _fnMPProcessors()
 }
 
-// MPExtractTaskState calls [raw.MPExtractTaskState] (C function MPExtractTaskState).
-func MPExtractTaskState(task unsafe.Pointer, kind uint, info unsafe.Pointer) int {
-	return raw.MPExtractTaskState(task, kind, info)
+var _fnMPProcessorsScheduled func() int
+
+// MPProcessorsScheduled calls the CarbonCore framework function MPProcessorsScheduled.
+func MPProcessorsScheduled() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPProcessorsScheduled == nil {
+		ebipurego.RegisterLibFunc(&_fnMPProcessorsScheduled, _lib, "MPProcessorsScheduled")
+	}
+	return _fnMPProcessorsScheduled()
 }
 
-// MPFree calls [raw.MPFree] (C function MPFree).
-func MPFree(object unsafe.Pointer) {
-	raw.MPFree(object)
+var _fnMPTaskIsPreemptive func(objc.ID) uint8
+
+// MPTaskIsPreemptive calls the CarbonCore framework function MPTaskIsPreemptive.
+func MPTaskIsPreemptive(taskID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPTaskIsPreemptive == nil {
+		ebipurego.RegisterLibFunc(&_fnMPTaskIsPreemptive, _lib, "MPTaskIsPreemptive")
+	}
+	return _fnMPTaskIsPreemptive(objref.IDOf(taskID))
 }
 
-// MPGetAllocatedBlockSize calls [raw.MPGetAllocatedBlockSize] (C function MPGetAllocatedBlockSize).
-func MPGetAllocatedBlockSize(object unsafe.Pointer) uint {
-	return raw.MPGetAllocatedBlockSize(object)
-}
+var _fnMPYield func()
 
-// MPGetNextCpuID calls [raw.MPGetNextCpuID] (C function MPGetNextCpuID).
-func MPGetNextCpuID(owningCoherenceID unsafe.Pointer, cpuID unsafe.Pointer) int {
-	return raw.MPGetNextCpuID(owningCoherenceID, cpuID)
-}
-
-// MPGetNextTaskID calls [raw.MPGetNextTaskID] (C function MPGetNextTaskID).
-func MPGetNextTaskID(owningProcessID unsafe.Pointer, taskID unsafe.Pointer) int {
-	return raw.MPGetNextTaskID(owningProcessID, taskID)
-}
-
-// MPGetTaskStorageValue calls [raw.MPGetTaskStorageValue] (C function MPGetTaskStorageValue).
-func MPGetTaskStorageValue(taskIndex uint) unsafe.Pointer {
-	return raw.MPGetTaskStorageValue(taskIndex)
-}
-
-// MPModifyNotification calls [raw.MPModifyNotification] (C function MPModifyNotification).
-func MPModifyNotification(notificationID unsafe.Pointer, anID unsafe.Pointer, notifyParam1 unsafe.Pointer, notifyParam2 unsafe.Pointer, notifyParam3 unsafe.Pointer) int {
-	return raw.MPModifyNotification(notificationID, anID, notifyParam1, notifyParam2, notifyParam3)
-}
-
-// MPModifyNotificationParameters calls [raw.MPModifyNotificationParameters] (C function MPModifyNotificationParameters).
-func MPModifyNotificationParameters(notificationID unsafe.Pointer, kind uint, notifyParam1 unsafe.Pointer, notifyParam2 unsafe.Pointer, notifyParam3 unsafe.Pointer) int {
-	return raw.MPModifyNotificationParameters(notificationID, kind, notifyParam1, notifyParam2, notifyParam3)
-}
-
-// MPNotifyQueue calls [raw.MPNotifyQueue] (C function MPNotifyQueue).
-func MPNotifyQueue(queue unsafe.Pointer, param1 unsafe.Pointer, param2 unsafe.Pointer, param3 unsafe.Pointer) int {
-	return raw.MPNotifyQueue(queue, param1, param2, param3)
-}
-
-// MPProcessors calls [raw.MPProcessors] (C function MPProcessors).
-func MPProcessors() uint {
-	return raw.MPProcessors()
-}
-
-// MPProcessorsScheduled calls [raw.MPProcessorsScheduled] (C function MPProcessorsScheduled).
-func MPProcessorsScheduled() uint {
-	return raw.MPProcessorsScheduled()
-}
-
-// MPRegisterDebugger calls [raw.MPRegisterDebugger] (C function MPRegisterDebugger).
-func MPRegisterDebugger(queue unsafe.Pointer, level uint) int {
-	return raw.MPRegisterDebugger(queue, level)
-}
-
-// MPRemoteCall calls [raw.MPRemoteCall] (C function MPRemoteCall).
-func MPRemoteCall(remoteProc unsafe.Pointer, parameter unsafe.Pointer, context_ uint8) unsafe.Pointer {
-	return raw.MPRemoteCall(remoteProc, parameter, context_)
-}
-
-// MPRemoteCallCFM calls [raw.MPRemoteCallCFM] (C function MPRemoteCallCFM).
-func MPRemoteCallCFM(remoteProc unsafe.Pointer, parameter unsafe.Pointer, context_ uint8) unsafe.Pointer {
-	return raw.MPRemoteCallCFM(remoteProc, parameter, context_)
-}
-
-// MPSetEvent calls [raw.MPSetEvent] (C function MPSetEvent).
-func MPSetEvent(event unsafe.Pointer, flags uint) int {
-	return raw.MPSetEvent(event, flags)
-}
-
-// MPSetExceptionHandler calls [raw.MPSetExceptionHandler] (C function MPSetExceptionHandler).
-func MPSetExceptionHandler(task unsafe.Pointer, exceptionQ unsafe.Pointer) int {
-	return raw.MPSetExceptionHandler(task, exceptionQ)
-}
-
-// MPSetQueueReserve calls [raw.MPSetQueueReserve] (C function MPSetQueueReserve).
-func MPSetQueueReserve(queue unsafe.Pointer, count uint) int {
-	return raw.MPSetQueueReserve(queue, count)
-}
-
-// MPSetTaskState calls [raw.MPSetTaskState] (C function MPSetTaskState).
-func MPSetTaskState(task unsafe.Pointer, kind uint, info unsafe.Pointer) int {
-	return raw.MPSetTaskState(task, kind, info)
-}
-
-// MPSetTaskStorageValue calls [raw.MPSetTaskStorageValue] (C function MPSetTaskStorageValue).
-func MPSetTaskStorageValue(taskIndex uint, value unsafe.Pointer) int {
-	return raw.MPSetTaskStorageValue(taskIndex, value)
-}
-
-// MPSetTaskType calls [raw.MPSetTaskType] (C function MPSetTaskType).
-func MPSetTaskType(task unsafe.Pointer, taskType uint) int {
-	return raw.MPSetTaskType(task, taskType)
-}
-
-// MPSetTaskWeight calls [raw.MPSetTaskWeight] (C function MPSetTaskWeight).
-func MPSetTaskWeight(task unsafe.Pointer, weight uint) int {
-	return raw.MPSetTaskWeight(task, weight)
-}
-
-// MPSetTimerNotify calls [raw.MPSetTimerNotify] (C function MPSetTimerNotify).
-func MPSetTimerNotify(timerID unsafe.Pointer, anID unsafe.Pointer, notifyParam1 unsafe.Pointer, notifyParam2 unsafe.Pointer, notifyParam3 unsafe.Pointer) int {
-	return raw.MPSetTimerNotify(timerID, anID, notifyParam1, notifyParam2, notifyParam3)
-}
-
-// MPSignalSemaphore calls [raw.MPSignalSemaphore] (C function MPSignalSemaphore).
-func MPSignalSemaphore(semaphore unsafe.Pointer) int {
-	return raw.MPSignalSemaphore(semaphore)
-}
-
-// MPTaskIsPreemptive calls [raw.MPTaskIsPreemptive] (C function MPTaskIsPreemptive).
-func MPTaskIsPreemptive(taskID unsafe.Pointer) uint8 {
-	return raw.MPTaskIsPreemptive(taskID)
-}
-
-// MPTerminateTask calls [raw.MPTerminateTask] (C function MPTerminateTask).
-func MPTerminateTask(task unsafe.Pointer, terminationStatus int) int {
-	return raw.MPTerminateTask(task, terminationStatus)
-}
-
-// MPThrowException calls [raw.MPThrowException] (C function MPThrowException).
-func MPThrowException(task unsafe.Pointer, kind uint) int {
-	return raw.MPThrowException(task, kind)
-}
-
-// MPUnregisterDebugger calls [raw.MPUnregisterDebugger] (C function MPUnregisterDebugger).
-func MPUnregisterDebugger(queue unsafe.Pointer) int {
-	return raw.MPUnregisterDebugger(queue)
-}
-
-// MPWaitForEvent calls [raw.MPWaitForEvent] (C function MPWaitForEvent).
-func MPWaitForEvent(event unsafe.Pointer, flags *uint, timeout int) int {
-	return raw.MPWaitForEvent(event, flags, timeout)
-}
-
-// MPWaitOnQueue calls [raw.MPWaitOnQueue] (C function MPWaitOnQueue).
-func MPWaitOnQueue(queue unsafe.Pointer, param1 unsafe.Pointer, param2 unsafe.Pointer, param3 unsafe.Pointer, timeout int) int {
-	return raw.MPWaitOnQueue(queue, param1, param2, param3, timeout)
-}
-
-// MPWaitOnSemaphore calls [raw.MPWaitOnSemaphore] (C function MPWaitOnSemaphore).
-func MPWaitOnSemaphore(semaphore unsafe.Pointer, timeout int) int {
-	return raw.MPWaitOnSemaphore(semaphore, timeout)
-}
-
-// MPYield calls [raw.MPYield] (C function MPYield).
+// MPYield calls the CarbonCore framework function MPYield.
 func MPYield() {
-	raw.MPYield()
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPYield == nil {
+		ebipurego.RegisterLibFunc(&_fnMPYield, _lib, "MPYield")
+	}
+	_fnMPYield()
 }
 
-// MemError calls [raw.MemError] (C function MemError).
+var _fnMemError func() int16
+
+// MemError calls the CarbonCore framework function MemError.
 func MemError() int16 {
-	return raw.MemError()
+	_loadOnce.Do(_loadLibrary)
+	if _fnMemError == nil {
+		ebipurego.RegisterLibFunc(&_fnMemError, _lib, "MemError")
+	}
+	return _fnMemError()
 }
 
-// Microseconds calls [raw.Microseconds] (C function Microseconds).
-func Microseconds(microTickCount unsafe.Pointer) {
-	raw.Microseconds(microTickCount)
+var _fnNewCollection func() objc.ID
+
+// NewCollection calls the CarbonCore framework function NewCollection.
+func NewCollection() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCollection, _lib, "NewCollection")
+	}
+	_ret := _fnNewCollection()
+	return obj.Wrap(_ret)
 }
 
-// Munger calls [raw.Munger] (C function Munger).
-func Munger(h *string, offset int, ptr1 unsafe.Pointer, len1 int, ptr2 unsafe.Pointer, len2 int) int {
-	return raw.Munger(h, offset, ptr1, len1, ptr2, len2)
+var _fnNewGestaltValue func(int, int) int16
+
+// NewGestaltValue calls the CarbonCore framework function NewGestaltValue.
+func NewGestaltValue(selector int, newValue int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewGestaltValue == nil {
+		ebipurego.RegisterLibFunc(&_fnNewGestaltValue, _lib, "NewGestaltValue")
+	}
+	return _fnNewGestaltValue(selector, newValue)
 }
 
-// NanosecondsToAbsolute calls [raw.NanosecondsToAbsolute] (C function NanosecondsToAbsolute).
-func NanosecondsToAbsolute(nanoseconds unsafe.Pointer) unsafe.Pointer {
-	return raw.NanosecondsToAbsolute(nanoseconds)
-}
+var _fnNewPtr func(int) string
 
-// NanosecondsToDuration calls [raw.NanosecondsToDuration] (C function NanosecondsToDuration).
-func NanosecondsToDuration(theNanoseconds unsafe.Pointer) int {
-	return raw.NanosecondsToDuration(theNanoseconds)
-}
-
-// NewCollection calls [raw.NewCollection] (C function NewCollection).
-func NewCollection() unsafe.Pointer {
-	return raw.NewCollection()
-}
-
-// NewCollectionExceptionUPP calls [raw.NewCollectionExceptionUPP] (C function NewCollectionExceptionUPP).
-func NewCollectionExceptionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewCollectionExceptionUPP(userRoutine)
-}
-
-// NewCollectionFlattenUPP calls [raw.NewCollectionFlattenUPP] (C function NewCollectionFlattenUPP).
-func NewCollectionFlattenUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewCollectionFlattenUPP(userRoutine)
-}
-
-// NewComponentFunctionUPP calls [raw.NewComponentFunctionUPP] (C function NewComponentFunctionUPP).
-func NewComponentFunctionUPP(userRoutine unsafe.Pointer, procInfo uint) unsafe.Pointer {
-	return raw.NewComponentFunctionUPP(userRoutine, procInfo)
-}
-
-// NewComponentMPWorkFunctionUPP calls [raw.NewComponentMPWorkFunctionUPP] (C function NewComponentMPWorkFunctionUPP).
-func NewComponentMPWorkFunctionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewComponentMPWorkFunctionUPP(userRoutine)
-}
-
-// NewComponentRoutineUPP calls [raw.NewComponentRoutineUPP] (C function NewComponentRoutineUPP).
-func NewComponentRoutineUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewComponentRoutineUPP(userRoutine)
-}
-
-// NewDebugAssertOutputHandlerUPP calls [raw.NewDebugAssertOutputHandlerUPP] (C function NewDebugAssertOutputHandlerUPP).
-func NewDebugAssertOutputHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewDebugAssertOutputHandlerUPP(userRoutine)
-}
-
-// NewDebugComponent calls [raw.NewDebugComponent] (C function NewDebugComponent).
-func NewDebugComponent(componentSignature uint, componentName *uint8, componentCallback unsafe.Pointer) int {
-	return raw.NewDebugComponent(componentSignature, componentName, componentCallback)
-}
-
-// NewDebugComponentCallbackUPP calls [raw.NewDebugComponentCallbackUPP] (C function NewDebugComponentCallbackUPP).
-func NewDebugComponentCallbackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewDebugComponentCallbackUPP(userRoutine)
-}
-
-// NewDebuggerDisposeThreadUPP calls [raw.NewDebuggerDisposeThreadUPP] (C function NewDebuggerDisposeThreadUPP).
-func NewDebuggerDisposeThreadUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewDebuggerDisposeThreadUPP(userRoutine)
-}
-
-// NewDebuggerNewThreadUPP calls [raw.NewDebuggerNewThreadUPP] (C function NewDebuggerNewThreadUPP).
-func NewDebuggerNewThreadUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewDebuggerNewThreadUPP(userRoutine)
-}
-
-// NewDebuggerThreadSchedulerUPP calls [raw.NewDebuggerThreadSchedulerUPP] (C function NewDebuggerThreadSchedulerUPP).
-func NewDebuggerThreadSchedulerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewDebuggerThreadSchedulerUPP(userRoutine)
-}
-
-// NewDeferredTaskUPP calls [raw.NewDeferredTaskUPP] (C function NewDeferredTaskUPP).
-func NewDeferredTaskUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewDeferredTaskUPP(userRoutine)
-}
-
-// NewEmptyHandle calls [raw.NewEmptyHandle] (C function NewEmptyHandle).
-func NewEmptyHandle() *string {
-	return raw.NewEmptyHandle()
-}
-
-// NewExceptionHandlerUPP calls [raw.NewExceptionHandlerUPP] (C function NewExceptionHandlerUPP).
-func NewExceptionHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewExceptionHandlerUPP(userRoutine)
-}
-
-// NewFNSubscriptionUPP calls [raw.NewFNSubscriptionUPP] (C function NewFNSubscriptionUPP).
-func NewFNSubscriptionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewFNSubscriptionUPP(userRoutine)
-}
-
-// NewFSVolumeEjectUPP calls [raw.NewFSVolumeEjectUPP] (C function NewFSVolumeEjectUPP).
-func NewFSVolumeEjectUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewFSVolumeEjectUPP(userRoutine)
-}
-
-// NewFSVolumeMountUPP calls [raw.NewFSVolumeMountUPP] (C function NewFSVolumeMountUPP).
-func NewFSVolumeMountUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewFSVolumeMountUPP(userRoutine)
-}
-
-// NewFSVolumeUnmountUPP calls [raw.NewFSVolumeUnmountUPP] (C function NewFSVolumeUnmountUPP).
-func NewFSVolumeUnmountUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewFSVolumeUnmountUPP(userRoutine)
-}
-
-// NewFolderManagerNotificationUPP calls [raw.NewFolderManagerNotificationUPP] (C function NewFolderManagerNotificationUPP).
-func NewFolderManagerNotificationUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewFolderManagerNotificationUPP(userRoutine)
-}
-
-// NewGestaltValue calls [raw.NewGestaltValue] (C function NewGestaltValue).
-func NewGestaltValue(selector uint, newValue int) int16 {
-	return raw.NewGestaltValue(selector, newValue)
-}
-
-// NewGetMissingComponentResourceUPP calls [raw.NewGetMissingComponentResourceUPP] (C function NewGetMissingComponentResourceUPP).
-func NewGetMissingComponentResourceUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewGetMissingComponentResourceUPP(userRoutine)
-}
-
-// NewHandle calls [raw.NewHandle] (C function NewHandle).
-func NewHandle(byteCount int) *string {
-	return raw.NewHandle(byteCount)
-}
-
-// NewHandleClear calls [raw.NewHandleClear] (C function NewHandleClear).
-func NewHandleClear(byteCount int) *string {
-	return raw.NewHandleClear(byteCount)
-}
-
-// NewIOCompletionUPP calls [raw.NewIOCompletionUPP] (C function NewIOCompletionUPP).
-func NewIOCompletionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewIOCompletionUPP(userRoutine)
-}
-
-// NewIndexToUCStringUPP calls [raw.NewIndexToUCStringUPP] (C function NewIndexToUCStringUPP).
-func NewIndexToUCStringUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewIndexToUCStringUPP(userRoutine)
-}
-
-// NewPtr calls [raw.NewPtr] (C function NewPtr).
+// NewPtr calls the CarbonCore framework function NewPtr.
 func NewPtr(byteCount int) string {
-	return raw.NewPtr(byteCount)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnNewPtr, _lib, "NewPtr")
+	}
+	return _fnNewPtr(byteCount)
 }
 
-// NewPtrClear calls [raw.NewPtrClear] (C function NewPtrClear).
+var _fnNewPtrClear func(int) string
+
+// NewPtrClear calls the CarbonCore framework function NewPtrClear.
 func NewPtrClear(byteCount int) string {
-	return raw.NewPtrClear(byteCount)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewPtrClear == nil {
+		ebipurego.RegisterLibFunc(&_fnNewPtrClear, _lib, "NewPtrClear")
+	}
+	return _fnNewPtrClear(byteCount)
 }
 
-// NewResErrUPP calls [raw.NewResErrUPP] (C function NewResErrUPP).
-func NewResErrUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewResErrUPP(userRoutine)
-}
-
-// NewSelectorFunctionUPP calls [raw.NewSelectorFunctionUPP] (C function NewSelectorFunctionUPP).
-func NewSelectorFunctionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewSelectorFunctionUPP(userRoutine)
-}
-
-// NewThread calls [raw.NewThread] (C function NewThread).
-func NewThread(threadStyle uint, threadEntry unsafe.Pointer, threadParam unsafe.Pointer, stackSize int, options uint, threadResult unsafe.Pointer, threadMade *uint) int16 {
-	return raw.NewThread(threadStyle, threadEntry, threadParam, stackSize, options, threadResult, threadMade)
-}
-
-// NewThreadEntryUPP calls [raw.NewThreadEntryUPP] (C function NewThreadEntryUPP).
-func NewThreadEntryUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewThreadEntryUPP(userRoutine)
-}
-
-// NewThreadSchedulerUPP calls [raw.NewThreadSchedulerUPP] (C function NewThreadSchedulerUPP).
-func NewThreadSchedulerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewThreadSchedulerUPP(userRoutine)
-}
-
-// NewThreadSwitchUPP calls [raw.NewThreadSwitchUPP] (C function NewThreadSwitchUPP).
-func NewThreadSwitchUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewThreadSwitchUPP(userRoutine)
-}
-
-// NewThreadTerminationUPP calls [raw.NewThreadTerminationUPP] (C function NewThreadTerminationUPP).
-func NewThreadTerminationUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewThreadTerminationUPP(userRoutine)
-}
-
-// NewTimerUPP calls [raw.NewTimerUPP] (C function NewTimerUPP).
-func NewTimerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewTimerUPP(userRoutine)
-}
-
-// NewUnicodeToTextFallbackUPP calls [raw.NewUnicodeToTextFallbackUPP] (C function NewUnicodeToTextFallbackUPP).
-func NewUnicodeToTextFallbackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewUnicodeToTextFallbackUPP(userRoutine)
-}
-
-// OpenAComponent calls [raw.OpenAComponent] (C function OpenAComponent).
-func OpenAComponent(aComponent *raw.ComponentRecord, ci **raw.ComponentInstanceRecord) int16 {
-	return raw.OpenAComponent(aComponent, ci)
-}
-
-// OpenAComponentResFile calls [raw.OpenAComponentResFile] (C function OpenAComponentResFile).
-func OpenAComponentResFile(aComponent *raw.ComponentRecord, resRef *int) int16 {
-	return raw.OpenAComponentResFile(aComponent, resRef)
-}
-
-// OpenADefaultComponent calls [raw.OpenADefaultComponent] (C function OpenADefaultComponent).
-func OpenADefaultComponent(componentType uint, componentSubType uint, ci **raw.ComponentInstanceRecord) int16 {
-	return raw.OpenADefaultComponent(componentType, componentSubType, ci)
-}
-
-// OpenComponent calls [raw.OpenComponent] (C function OpenComponent).
-func OpenComponent(aComponent *raw.ComponentRecord) *raw.ComponentInstanceRecord {
-	return raw.OpenComponent(aComponent)
-}
-
-// OpenComponentResFile calls [raw.OpenComponentResFile] (C function OpenComponentResFile).
-func OpenComponentResFile(aComponent *raw.ComponentRecord) int {
-	return raw.OpenComponentResFile(aComponent)
-}
-
-// OpenDefaultComponent calls [raw.OpenDefaultComponent] (C function OpenDefaultComponent).
-func OpenDefaultComponent(componentType uint, componentSubType uint) *raw.ComponentInstanceRecord {
-	return raw.OpenDefaultComponent(componentType, componentSubType)
-}
-
-// PBAllocateForkAsync calls [raw.PBAllocateForkAsync] (C function PBAllocateForkAsync).
-func PBAllocateForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBAllocateForkAsync(paramBlock)
-}
-
-// PBAllocateForkSync calls [raw.PBAllocateForkSync] (C function PBAllocateForkSync).
-func PBAllocateForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBAllocateForkSync(paramBlock)
-}
-
-// PBCatalogSearchAsync calls [raw.PBCatalogSearchAsync] (C function PBCatalogSearchAsync).
-func PBCatalogSearchAsync(paramBlock *raw.FSCatalogBulkParam) {
-	raw.PBCatalogSearchAsync(paramBlock)
-}
-
-// PBCatalogSearchSync calls [raw.PBCatalogSearchSync] (C function PBCatalogSearchSync).
-func PBCatalogSearchSync(paramBlock *raw.FSCatalogBulkParam) int16 {
-	return raw.PBCatalogSearchSync(paramBlock)
-}
-
-// PBCloseForkAsync calls [raw.PBCloseForkAsync] (C function PBCloseForkAsync).
-func PBCloseForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBCloseForkAsync(paramBlock)
-}
-
-// PBCloseForkSync calls [raw.PBCloseForkSync] (C function PBCloseForkSync).
-func PBCloseForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBCloseForkSync(paramBlock)
-}
-
-// PBCloseIteratorAsync calls [raw.PBCloseIteratorAsync] (C function PBCloseIteratorAsync).
-func PBCloseIteratorAsync(paramBlock *raw.FSCatalogBulkParam) {
-	raw.PBCloseIteratorAsync(paramBlock)
-}
-
-// PBCloseIteratorSync calls [raw.PBCloseIteratorSync] (C function PBCloseIteratorSync).
-func PBCloseIteratorSync(paramBlock *raw.FSCatalogBulkParam) int16 {
-	return raw.PBCloseIteratorSync(paramBlock)
-}
-
-// PBCompareFSRefsAsync calls [raw.PBCompareFSRefsAsync] (C function PBCompareFSRefsAsync).
-func PBCompareFSRefsAsync(paramBlock *raw.FSRefParam) {
-	raw.PBCompareFSRefsAsync(paramBlock)
-}
-
-// PBCompareFSRefsSync calls [raw.PBCompareFSRefsSync] (C function PBCompareFSRefsSync).
-func PBCompareFSRefsSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBCompareFSRefsSync(paramBlock)
-}
-
-// PBCreateDirectoryUnicodeAsync calls [raw.PBCreateDirectoryUnicodeAsync] (C function PBCreateDirectoryUnicodeAsync).
-func PBCreateDirectoryUnicodeAsync(paramBlock *raw.FSRefParam) {
-	raw.PBCreateDirectoryUnicodeAsync(paramBlock)
-}
-
-// PBCreateDirectoryUnicodeSync calls [raw.PBCreateDirectoryUnicodeSync] (C function PBCreateDirectoryUnicodeSync).
-func PBCreateDirectoryUnicodeSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBCreateDirectoryUnicodeSync(paramBlock)
-}
-
-// PBCreateFileAndOpenForkUnicodeAsync calls [raw.PBCreateFileAndOpenForkUnicodeAsync] (C function PBCreateFileAndOpenForkUnicodeAsync).
-func PBCreateFileAndOpenForkUnicodeAsync(paramBlock *raw.FSRefForkIOParam) {
-	raw.PBCreateFileAndOpenForkUnicodeAsync(paramBlock)
-}
-
-// PBCreateFileUnicodeAsync calls [raw.PBCreateFileUnicodeAsync] (C function PBCreateFileUnicodeAsync).
-func PBCreateFileUnicodeAsync(paramBlock *raw.FSRefParam) {
-	raw.PBCreateFileUnicodeAsync(paramBlock)
-}
-
-// PBCreateFileUnicodeSync calls [raw.PBCreateFileUnicodeSync] (C function PBCreateFileUnicodeSync).
-func PBCreateFileUnicodeSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBCreateFileUnicodeSync(paramBlock)
-}
-
-// PBCreateForkAsync calls [raw.PBCreateForkAsync] (C function PBCreateForkAsync).
-func PBCreateForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBCreateForkAsync(paramBlock)
-}
-
-// PBCreateForkSync calls [raw.PBCreateForkSync] (C function PBCreateForkSync).
-func PBCreateForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBCreateForkSync(paramBlock)
-}
-
-// PBDeleteForkAsync calls [raw.PBDeleteForkAsync] (C function PBDeleteForkAsync).
-func PBDeleteForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBDeleteForkAsync(paramBlock)
-}
-
-// PBDeleteForkSync calls [raw.PBDeleteForkSync] (C function PBDeleteForkSync).
-func PBDeleteForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBDeleteForkSync(paramBlock)
-}
-
-// PBDeleteObjectAsync calls [raw.PBDeleteObjectAsync] (C function PBDeleteObjectAsync).
-func PBDeleteObjectAsync(paramBlock *raw.FSRefParam) {
-	raw.PBDeleteObjectAsync(paramBlock)
-}
-
-// PBDeleteObjectSync calls [raw.PBDeleteObjectSync] (C function PBDeleteObjectSync).
-func PBDeleteObjectSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBDeleteObjectSync(paramBlock)
-}
-
-// PBExchangeObjectsAsync calls [raw.PBExchangeObjectsAsync] (C function PBExchangeObjectsAsync).
-func PBExchangeObjectsAsync(paramBlock *raw.FSRefParam) {
-	raw.PBExchangeObjectsAsync(paramBlock)
-}
-
-// PBExchangeObjectsSync calls [raw.PBExchangeObjectsSync] (C function PBExchangeObjectsSync).
-func PBExchangeObjectsSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBExchangeObjectsSync(paramBlock)
-}
-
-// PBFlushForkAsync calls [raw.PBFlushForkAsync] (C function PBFlushForkAsync).
-func PBFlushForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBFlushForkAsync(paramBlock)
-}
-
-// PBFlushForkSync calls [raw.PBFlushForkSync] (C function PBFlushForkSync).
-func PBFlushForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBFlushForkSync(paramBlock)
-}
-
-// PBGetCatalogInfoAsync calls [raw.PBGetCatalogInfoAsync] (C function PBGetCatalogInfoAsync).
-func PBGetCatalogInfoAsync(paramBlock *raw.FSRefParam) {
-	raw.PBGetCatalogInfoAsync(paramBlock)
-}
-
-// PBGetCatalogInfoBulkAsync calls [raw.PBGetCatalogInfoBulkAsync] (C function PBGetCatalogInfoBulkAsync).
-func PBGetCatalogInfoBulkAsync(paramBlock *raw.FSCatalogBulkParam) {
-	raw.PBGetCatalogInfoBulkAsync(paramBlock)
-}
-
-// PBGetCatalogInfoBulkSync calls [raw.PBGetCatalogInfoBulkSync] (C function PBGetCatalogInfoBulkSync).
-func PBGetCatalogInfoBulkSync(paramBlock *raw.FSCatalogBulkParam) int16 {
-	return raw.PBGetCatalogInfoBulkSync(paramBlock)
-}
-
-// PBGetCatalogInfoSync calls [raw.PBGetCatalogInfoSync] (C function PBGetCatalogInfoSync).
-func PBGetCatalogInfoSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBGetCatalogInfoSync(paramBlock)
-}
-
-// PBGetForkCBInfoAsync calls [raw.PBGetForkCBInfoAsync] (C function PBGetForkCBInfoAsync).
-func PBGetForkCBInfoAsync(paramBlock *raw.FSForkCBInfoParam) {
-	raw.PBGetForkCBInfoAsync(paramBlock)
-}
-
-// PBGetForkCBInfoSync calls [raw.PBGetForkCBInfoSync] (C function PBGetForkCBInfoSync).
-func PBGetForkCBInfoSync(paramBlock *raw.FSForkCBInfoParam) int16 {
-	return raw.PBGetForkCBInfoSync(paramBlock)
-}
-
-// PBGetForkPositionAsync calls [raw.PBGetForkPositionAsync] (C function PBGetForkPositionAsync).
-func PBGetForkPositionAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBGetForkPositionAsync(paramBlock)
-}
-
-// PBGetForkPositionSync calls [raw.PBGetForkPositionSync] (C function PBGetForkPositionSync).
-func PBGetForkPositionSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBGetForkPositionSync(paramBlock)
-}
-
-// PBGetForkSizeAsync calls [raw.PBGetForkSizeAsync] (C function PBGetForkSizeAsync).
-func PBGetForkSizeAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBGetForkSizeAsync(paramBlock)
-}
-
-// PBGetForkSizeSync calls [raw.PBGetForkSizeSync] (C function PBGetForkSizeSync).
-func PBGetForkSizeSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBGetForkSizeSync(paramBlock)
-}
-
-// PBGetVolumeInfoAsync calls [raw.PBGetVolumeInfoAsync] (C function PBGetVolumeInfoAsync).
-func PBGetVolumeInfoAsync(paramBlock *raw.FSVolumeInfoParam) {
-	raw.PBGetVolumeInfoAsync(paramBlock)
-}
-
-// PBGetVolumeInfoSync calls [raw.PBGetVolumeInfoSync] (C function PBGetVolumeInfoSync).
-func PBGetVolumeInfoSync(paramBlock *raw.FSVolumeInfoParam) int16 {
-	return raw.PBGetVolumeInfoSync(paramBlock)
-}
-
-// PBIterateForksAsync calls [raw.PBIterateForksAsync] (C function PBIterateForksAsync).
-func PBIterateForksAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBIterateForksAsync(paramBlock)
-}
-
-// PBIterateForksSync calls [raw.PBIterateForksSync] (C function PBIterateForksSync).
-func PBIterateForksSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBIterateForksSync(paramBlock)
-}
-
-// PBMakeFSRefUnicodeAsync calls [raw.PBMakeFSRefUnicodeAsync] (C function PBMakeFSRefUnicodeAsync).
-func PBMakeFSRefUnicodeAsync(paramBlock *raw.FSRefParam) {
-	raw.PBMakeFSRefUnicodeAsync(paramBlock)
-}
-
-// PBMakeFSRefUnicodeSync calls [raw.PBMakeFSRefUnicodeSync] (C function PBMakeFSRefUnicodeSync).
-func PBMakeFSRefUnicodeSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBMakeFSRefUnicodeSync(paramBlock)
-}
-
-// PBMoveObjectAsync calls [raw.PBMoveObjectAsync] (C function PBMoveObjectAsync).
-func PBMoveObjectAsync(paramBlock *raw.FSRefParam) {
-	raw.PBMoveObjectAsync(paramBlock)
-}
-
-// PBMoveObjectSync calls [raw.PBMoveObjectSync] (C function PBMoveObjectSync).
-func PBMoveObjectSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBMoveObjectSync(paramBlock)
-}
-
-// PBOpenForkAsync calls [raw.PBOpenForkAsync] (C function PBOpenForkAsync).
-func PBOpenForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBOpenForkAsync(paramBlock)
-}
-
-// PBOpenForkSync calls [raw.PBOpenForkSync] (C function PBOpenForkSync).
-func PBOpenForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBOpenForkSync(paramBlock)
-}
-
-// PBOpenIteratorAsync calls [raw.PBOpenIteratorAsync] (C function PBOpenIteratorAsync).
-func PBOpenIteratorAsync(paramBlock *raw.FSCatalogBulkParam) {
-	raw.PBOpenIteratorAsync(paramBlock)
-}
-
-// PBOpenIteratorSync calls [raw.PBOpenIteratorSync] (C function PBOpenIteratorSync).
-func PBOpenIteratorSync(paramBlock *raw.FSCatalogBulkParam) int16 {
-	return raw.PBOpenIteratorSync(paramBlock)
-}
-
-// PBReadForkAsync calls [raw.PBReadForkAsync] (C function PBReadForkAsync).
-func PBReadForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBReadForkAsync(paramBlock)
-}
-
-// PBReadForkSync calls [raw.PBReadForkSync] (C function PBReadForkSync).
-func PBReadForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBReadForkSync(paramBlock)
-}
-
-// PBRenameUnicodeAsync calls [raw.PBRenameUnicodeAsync] (C function PBRenameUnicodeAsync).
-func PBRenameUnicodeAsync(paramBlock *raw.FSRefParam) {
-	raw.PBRenameUnicodeAsync(paramBlock)
-}
-
-// PBRenameUnicodeSync calls [raw.PBRenameUnicodeSync] (C function PBRenameUnicodeSync).
-func PBRenameUnicodeSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBRenameUnicodeSync(paramBlock)
-}
-
-// PBSetCatalogInfoAsync calls [raw.PBSetCatalogInfoAsync] (C function PBSetCatalogInfoAsync).
-func PBSetCatalogInfoAsync(paramBlock *raw.FSRefParam) {
-	raw.PBSetCatalogInfoAsync(paramBlock)
-}
-
-// PBSetCatalogInfoSync calls [raw.PBSetCatalogInfoSync] (C function PBSetCatalogInfoSync).
-func PBSetCatalogInfoSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBSetCatalogInfoSync(paramBlock)
-}
-
-// PBSetForkPositionAsync calls [raw.PBSetForkPositionAsync] (C function PBSetForkPositionAsync).
-func PBSetForkPositionAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBSetForkPositionAsync(paramBlock)
-}
-
-// PBSetForkPositionSync calls [raw.PBSetForkPositionSync] (C function PBSetForkPositionSync).
-func PBSetForkPositionSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBSetForkPositionSync(paramBlock)
-}
-
-// PBSetForkSizeAsync calls [raw.PBSetForkSizeAsync] (C function PBSetForkSizeAsync).
-func PBSetForkSizeAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBSetForkSizeAsync(paramBlock)
-}
-
-// PBSetForkSizeSync calls [raw.PBSetForkSizeSync] (C function PBSetForkSizeSync).
-func PBSetForkSizeSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBSetForkSizeSync(paramBlock)
-}
-
-// PBSetVolumeInfoAsync calls [raw.PBSetVolumeInfoAsync] (C function PBSetVolumeInfoAsync).
-func PBSetVolumeInfoAsync(paramBlock *raw.FSVolumeInfoParam) {
-	raw.PBSetVolumeInfoAsync(paramBlock)
-}
-
-// PBSetVolumeInfoSync calls [raw.PBSetVolumeInfoSync] (C function PBSetVolumeInfoSync).
-func PBSetVolumeInfoSync(paramBlock *raw.FSVolumeInfoParam) int16 {
-	return raw.PBSetVolumeInfoSync(paramBlock)
-}
-
-// PBUnlinkObjectAsync calls [raw.PBUnlinkObjectAsync] (C function PBUnlinkObjectAsync).
-func PBUnlinkObjectAsync(paramBlock *raw.FSRefParam) {
-	raw.PBUnlinkObjectAsync(paramBlock)
-}
-
-// PBUnlinkObjectSync calls [raw.PBUnlinkObjectSync] (C function PBUnlinkObjectSync).
-func PBUnlinkObjectSync(paramBlock *raw.FSRefParam) int16 {
-	return raw.PBUnlinkObjectSync(paramBlock)
-}
-
-// PBWriteForkAsync calls [raw.PBWriteForkAsync] (C function PBWriteForkAsync).
-func PBWriteForkAsync(paramBlock *raw.FSForkIOParam) {
-	raw.PBWriteForkAsync(paramBlock)
-}
+var _fnPurgeCollection func(objc.ID, int, int)
 
-// PBWriteForkSync calls [raw.PBWriteForkSync] (C function PBWriteForkSync).
-func PBWriteForkSync(paramBlock *raw.FSForkIOParam) int16 {
-	return raw.PBWriteForkSync(paramBlock)
+// PurgeCollection calls the CarbonCore framework function PurgeCollection.
+func PurgeCollection(c obj.Object, whichAttributes int, matchingAttributes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPurgeCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnPurgeCollection, _lib, "PurgeCollection")
+	}
+	_fnPurgeCollection(objref.IDOf(c), whichAttributes, matchingAttributes)
 }
 
-// PLpos calls [raw.PLpos] (C function PLpos).
-func PLpos(str1 *uint8, searchStr *uint8) int16 {
-	return raw.PLpos(str1, searchStr)
-}
-
-// PLstrcat calls [raw.PLstrcat] (C function PLstrcat).
-func PLstrcat(str *uint8, append_ *uint8) unsafe.Pointer {
-	return raw.PLstrcat(str, append_)
-}
-
-// PLstrchr calls [raw.PLstrchr] (C function PLstrchr).
-func PLstrchr(str1 *uint8, ch1 int16) string {
-	return raw.PLstrchr(str1, ch1)
-}
-
-// PLstrcmp calls [raw.PLstrcmp] (C function PLstrcmp).
-func PLstrcmp(str1 *uint8, str2 *uint8) int16 {
-	return raw.PLstrcmp(str1, str2)
-}
-
-// PLstrcpy calls [raw.PLstrcpy] (C function PLstrcpy).
-func PLstrcpy(dest *uint8, source *uint8) unsafe.Pointer {
-	return raw.PLstrcpy(dest, source)
-}
-
-// PLstrlen calls [raw.PLstrlen] (C function PLstrlen).
-func PLstrlen(str *uint8) int16 {
-	return raw.PLstrlen(str)
-}
-
-// PLstrncat calls [raw.PLstrncat] (C function PLstrncat).
-func PLstrncat(str1 *uint8, append_ *uint8, num int16) unsafe.Pointer {
-	return raw.PLstrncat(str1, append_, num)
-}
-
-// PLstrncmp calls [raw.PLstrncmp] (C function PLstrncmp).
-func PLstrncmp(str1 *uint8, str2 *uint8, num int16) int16 {
-	return raw.PLstrncmp(str1, str2, num)
-}
-
-// PLstrncpy calls [raw.PLstrncpy] (C function PLstrncpy).
-func PLstrncpy(dest *uint8, source *uint8, num int16) unsafe.Pointer {
-	return raw.PLstrncpy(dest, source, num)
-}
-
-// PLstrpbrk calls [raw.PLstrpbrk] (C function PLstrpbrk).
-func PLstrpbrk(str1 *uint8, charSet *uint8) string {
-	return raw.PLstrpbrk(str1, charSet)
-}
-
-// PLstrrchr calls [raw.PLstrrchr] (C function PLstrrchr).
-func PLstrrchr(str1 *uint8, ch1 int16) string {
-	return raw.PLstrrchr(str1, ch1)
-}
-
-// PLstrspn calls [raw.PLstrspn] (C function PLstrspn).
-func PLstrspn(str1 *uint8, charSet *uint8) int16 {
-	return raw.PLstrspn(str1, charSet)
-}
-
-// PLstrstr calls [raw.PLstrstr] (C function PLstrstr).
-func PLstrstr(str1 *uint8, searchStr *uint8) string {
-	return raw.PLstrstr(str1, searchStr)
-}
-
-// PrimeTime calls [raw.PrimeTime] (C function PrimeTime).
-func PrimeTime(tmTaskPtr *raw.QElem, count int) {
-	raw.PrimeTime(tmTaskPtr, count)
-}
-
-// PrimeTimeTask calls [raw.PrimeTimeTask] (C function PrimeTimeTask).
-func PrimeTimeTask(tmTaskPtr *raw.QElem, count int) int16 {
-	return raw.PrimeTimeTask(tmTaskPtr, count)
-}
-
-// PtrAndHand calls [raw.PtrAndHand] (C function PtrAndHand).
-func PtrAndHand(ptr1 unsafe.Pointer, hand2 *string, size int) int16 {
-	return raw.PtrAndHand(ptr1, hand2, size)
-}
-
-// PtrToHand calls [raw.PtrToHand] (C function PtrToHand).
-func PtrToHand(srcPtr unsafe.Pointer, dstHndl **string, size int) int16 {
-	return raw.PtrToHand(srcPtr, dstHndl, size)
-}
-
-// PtrToXHand calls [raw.PtrToXHand] (C function PtrToXHand).
-func PtrToXHand(srcPtr unsafe.Pointer, dstHndl *string, size int) int16 {
-	return raw.PtrToXHand(srcPtr, dstHndl, size)
-}
-
-// PurgeCollection calls [raw.PurgeCollection] (C function PurgeCollection).
-func PurgeCollection(c unsafe.Pointer, whichAttributes int, matchingAttributes int) {
-	raw.PurgeCollection(c, whichAttributes, matchingAttributes)
-}
-
-// PurgeCollectionTag calls [raw.PurgeCollectionTag] (C function PurgeCollectionTag).
-func PurgeCollectionTag(c unsafe.Pointer, tag uint) {
-	raw.PurgeCollectionTag(c, tag)
-}
+var _fnPurgeCollectionTag func(objc.ID, int)
 
-// ReadLocation calls [raw.ReadLocation] (C function ReadLocation).
-func ReadLocation(loc *raw.MachineLocation) {
-	raw.ReadLocation(loc)
+// PurgeCollectionTag calls the CarbonCore framework function PurgeCollectionTag.
+func PurgeCollectionTag(c obj.Object, tag int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPurgeCollectionTag == nil {
+		ebipurego.RegisterLibFunc(&_fnPurgeCollectionTag, _lib, "PurgeCollectionTag")
+	}
+	_fnPurgeCollectionTag(objref.IDOf(c), tag)
 }
 
-// ReadPartialResource calls [raw.ReadPartialResource] (C function ReadPartialResource).
-func ReadPartialResource(theResource *string, offset int, buffer unsafe.Pointer, count int) {
-	raw.ReadPartialResource(theResource, offset, buffer, count)
-}
-
-// ReallocateHandle calls [raw.ReallocateHandle] (C function ReallocateHandle).
-func ReallocateHandle(h *string, byteCount int) {
-	raw.ReallocateHandle(h, byteCount)
-}
-
-// RecoverHandle calls [raw.RecoverHandle] (C function RecoverHandle).
-func RecoverHandle(p string) *string {
-	return raw.RecoverHandle(p)
-}
-
-// RegisterComponent calls [raw.RegisterComponent] (C function RegisterComponent).
-func RegisterComponent(cd *raw.ComponentDescription, componentEntryPoint unsafe.Pointer, global int16, componentName *string, componentInfo *string, componentIcon *string) *raw.ComponentRecord {
-	return raw.RegisterComponent(cd, componentEntryPoint, global, componentName, componentInfo, componentIcon)
-}
-
-// RegisterComponentFileRef calls [raw.RegisterComponentFileRef] (C function RegisterComponentFileRef).
-func RegisterComponentFileRef(ref *raw.FSRef, global int16) int16 {
-	return raw.RegisterComponentFileRef(ref, global)
-}
-
-// RegisterComponentFileRefEntries calls [raw.RegisterComponentFileRefEntries] (C function RegisterComponentFileRefEntries).
-func RegisterComponentFileRefEntries(ref *raw.FSRef, global int16, toRegister *raw.ComponentDescription, registerCount uint) int16 {
-	return raw.RegisterComponentFileRefEntries(ref, global, toRegister, registerCount)
-}
-
-// RegisterComponentResource calls [raw.RegisterComponentResource] (C function RegisterComponentResource).
-func RegisterComponentResource(cr **raw.ComponentResource, global int16) *raw.ComponentRecord {
-	return raw.RegisterComponentResource(cr, global)
-}
+var _fnRegisterComponentResourceFile func(int16, int16) int
 
-// RegisterComponentResourceFile calls [raw.RegisterComponentResourceFile] (C function RegisterComponentResourceFile).
+// RegisterComponentResourceFile calls the CarbonCore framework function RegisterComponentResourceFile.
 func RegisterComponentResourceFile(resRefNum int16, global int16) int {
-	return raw.RegisterComponentResourceFile(resRefNum, global)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRegisterComponentResourceFile == nil {
+		ebipurego.RegisterLibFunc(&_fnRegisterComponentResourceFile, _lib, "RegisterComponentResourceFile")
+	}
+	return _fnRegisterComponentResourceFile(resRefNum, global)
 }
 
-// ReleaseCollection calls [raw.ReleaseCollection] (C function ReleaseCollection).
-func ReleaseCollection(c unsafe.Pointer) int {
-	return raw.ReleaseCollection(c)
+var _fnReleaseFolder func(int16, int) int16
+
+// ReleaseFolder calls the CarbonCore framework function ReleaseFolder.
+func ReleaseFolder(vRefNum int16, folderType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReleaseFolder == nil {
+		ebipurego.RegisterLibFunc(&_fnReleaseFolder, _lib, "ReleaseFolder")
+	}
+	return _fnReleaseFolder(vRefNum, folderType)
 }
 
-// ReleaseFolder calls [raw.ReleaseFolder] (C function ReleaseFolder).
-func ReleaseFolder(vRefNum int16, folderType uint) int16 {
-	return raw.ReleaseFolder(vRefNum, folderType)
+var _fnRemoveCollectionItem func(objc.ID, int, int) int16
+
+// RemoveCollectionItem calls the CarbonCore framework function RemoveCollectionItem.
+func RemoveCollectionItem(c obj.Object, tag int, id_ int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRemoveCollectionItem == nil {
+		ebipurego.RegisterLibFunc(&_fnRemoveCollectionItem, _lib, "RemoveCollectionItem")
+	}
+	return _fnRemoveCollectionItem(objref.IDOf(c), tag, id_)
 }
 
-// ReleaseResource calls [raw.ReleaseResource] (C function ReleaseResource).
-func ReleaseResource(theResource *string) {
-	raw.ReleaseResource(theResource)
+var _fnRemoveFolderDescriptor func(int) int16
+
+// RemoveFolderDescriptor calls the CarbonCore framework function RemoveFolderDescriptor.
+func RemoveFolderDescriptor(foldType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRemoveFolderDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnRemoveFolderDescriptor, _lib, "RemoveFolderDescriptor")
+	}
+	return _fnRemoveFolderDescriptor(foldType)
 }
 
-// RemoveCollectionItem calls [raw.RemoveCollectionItem] (C function RemoveCollectionItem).
-func RemoveCollectionItem(c unsafe.Pointer, tag uint, id_ int) int16 {
-	return raw.RemoveCollectionItem(c, tag, id_)
+var _fnRemoveIndexedCollectionItem func(objc.ID, int) int16
+
+// RemoveIndexedCollectionItem calls the CarbonCore framework function RemoveIndexedCollectionItem.
+func RemoveIndexedCollectionItem(c obj.Object, itemIndex int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRemoveIndexedCollectionItem == nil {
+		ebipurego.RegisterLibFunc(&_fnRemoveIndexedCollectionItem, _lib, "RemoveIndexedCollectionItem")
+	}
+	return _fnRemoveIndexedCollectionItem(objref.IDOf(c), itemIndex)
 }
 
-// RemoveFolderDescriptor calls [raw.RemoveFolderDescriptor] (C function RemoveFolderDescriptor).
-func RemoveFolderDescriptor(foldType uint) int16 {
-	return raw.RemoveFolderDescriptor(foldType)
+var _fnReplaceGestaltValue func(int, int) int16
+
+// ReplaceGestaltValue calls the CarbonCore framework function ReplaceGestaltValue.
+func ReplaceGestaltValue(selector int, replacementValue int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReplaceGestaltValue == nil {
+		ebipurego.RegisterLibFunc(&_fnReplaceGestaltValue, _lib, "ReplaceGestaltValue")
+	}
+	return _fnReplaceGestaltValue(selector, replacementValue)
 }
 
-// RemoveIndexedCollectionItem calls [raw.RemoveIndexedCollectionItem] (C function RemoveIndexedCollectionItem).
-func RemoveIndexedCollectionItem(c unsafe.Pointer, itemIndex int) int16 {
-	return raw.RemoveIndexedCollectionItem(c, itemIndex)
-}
+var _fnResError func() int16
 
-// RemoveResource calls [raw.RemoveResource] (C function RemoveResource).
-func RemoveResource(theResource *string) {
-	raw.RemoveResource(theResource)
-}
-
-// RemoveTimeTask calls [raw.RemoveTimeTask] (C function RemoveTimeTask).
-func RemoveTimeTask(tmTaskPtr *raw.QElem) int16 {
-	return raw.RemoveTimeTask(tmTaskPtr)
-}
-
-// ReplaceGestaltValue calls [raw.ReplaceGestaltValue] (C function ReplaceGestaltValue).
-func ReplaceGestaltValue(selector uint, replacementValue int) int16 {
-	return raw.ReplaceGestaltValue(selector, replacementValue)
-}
-
-// ReplaceIndexedCollectionItem calls [raw.ReplaceIndexedCollectionItem] (C function ReplaceIndexedCollectionItem).
-func ReplaceIndexedCollectionItem(c unsafe.Pointer, itemIndex int, itemSize int, itemData unsafe.Pointer) int16 {
-	return raw.ReplaceIndexedCollectionItem(c, itemIndex, itemSize, itemData)
-}
-
-// ReplaceIndexedCollectionItemHdl calls [raw.ReplaceIndexedCollectionItemHdl] (C function ReplaceIndexedCollectionItemHdl).
-func ReplaceIndexedCollectionItemHdl(aCollection unsafe.Pointer, itemIndex int, itemData *string) int16 {
-	return raw.ReplaceIndexedCollectionItemHdl(aCollection, itemIndex, itemData)
-}
-
-// ResError calls [raw.ResError] (C function ResError).
+// ResError calls the CarbonCore framework function ResError.
 func ResError() int16 {
-	return raw.ResError()
+	_loadOnce.Do(_loadLibrary)
+	if _fnResError == nil {
+		ebipurego.RegisterLibFunc(&_fnResError, _lib, "ResError")
+	}
+	return _fnResError()
 }
 
-// ResetTextToUnicodeInfo calls [raw.ResetTextToUnicodeInfo] (C function ResetTextToUnicodeInfo).
-func ResetTextToUnicodeInfo(ioTextToUnicodeInfo unsafe.Pointer) int {
-	return raw.ResetTextToUnicodeInfo(ioTextToUnicodeInfo)
+var _fnResolveDefaultTextEncoding func(int) int
+
+// ResolveDefaultTextEncoding calls the CarbonCore framework function ResolveDefaultTextEncoding.
+func ResolveDefaultTextEncoding(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnResolveDefaultTextEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnResolveDefaultTextEncoding, _lib, "ResolveDefaultTextEncoding")
+	}
+	return _fnResolveDefaultTextEncoding(encoding)
 }
 
-// ResetUnicodeToTextInfo calls [raw.ResetUnicodeToTextInfo] (C function ResetUnicodeToTextInfo).
-func ResetUnicodeToTextInfo(ioUnicodeToTextInfo unsafe.Pointer) int {
-	return raw.ResetUnicodeToTextInfo(ioUnicodeToTextInfo)
-}
+var _fnS32Set func(int64) int
 
-// ResetUnicodeToTextRunInfo calls [raw.ResetUnicodeToTextRunInfo] (C function ResetUnicodeToTextRunInfo).
-func ResetUnicodeToTextRunInfo(ioUnicodeToTextRunInfo unsafe.Pointer) int {
-	return raw.ResetUnicodeToTextRunInfo(ioUnicodeToTextRunInfo)
-}
-
-// ResolveComponentAlias calls [raw.ResolveComponentAlias] (C function ResolveComponentAlias).
-func ResolveComponentAlias(aComponent *raw.ComponentRecord) *raw.ComponentRecord {
-	return raw.ResolveComponentAlias(aComponent)
-}
-
-// ResolveDefaultTextEncoding calls [raw.ResolveDefaultTextEncoding] (C function ResolveDefaultTextEncoding).
-func ResolveDefaultTextEncoding(encoding uint) uint {
-	return raw.ResolveDefaultTextEncoding(encoding)
-}
-
-// RetainCollection calls [raw.RetainCollection] (C function RetainCollection).
-func RetainCollection(c unsafe.Pointer) int {
-	return raw.RetainCollection(c)
-}
-
-// RmvTime calls [raw.RmvTime] (C function RmvTime).
-func RmvTime(tmTaskPtr *raw.QElem) {
-	raw.RmvTime(tmTaskPtr)
-}
-
-// S32Set calls [raw.S32Set] (C function S32Set).
+// S32Set calls the CarbonCore framework function S32Set.
 func S32Set(value int64) int {
-	return raw.S32Set(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS32Set == nil {
+		ebipurego.RegisterLibFunc(&_fnS32Set, _lib, "S32Set")
+	}
+	return _fnS32Set(value)
 }
 
-// S64Absolute calls [raw.S64Absolute] (C function S64Absolute).
+var _fnS64Absolute func(int64) int64
+
+// S64Absolute calls the CarbonCore framework function S64Absolute.
 func S64Absolute(value int64) int64 {
-	return raw.S64Absolute(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Absolute == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Absolute, _lib, "S64Absolute")
+	}
+	return _fnS64Absolute(value)
 }
 
-// S64Add calls [raw.S64Add] (C function S64Add).
+var _fnS64Add func(int64, int64) int64
+
+// S64Add calls the CarbonCore framework function S64Add.
 func S64Add(left int64, right int64) int64 {
-	return raw.S64Add(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Add == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Add, _lib, "S64Add")
+	}
+	return _fnS64Add(left, right)
 }
 
-// S64And calls [raw.S64And] (C function S64And).
+var _fnS64And func(int64, int64) uint8
+
+// S64And calls the CarbonCore framework function S64And.
 func S64And(left int64, right int64) uint8 {
-	return raw.S64And(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64And == nil {
+		ebipurego.RegisterLibFunc(&_fnS64And, _lib, "S64And")
+	}
+	return _fnS64And(left, right)
 }
 
-// S64BitwiseAnd calls [raw.S64BitwiseAnd] (C function S64BitwiseAnd).
+var _fnS64BitwiseAnd func(int64, int64) int64
+
+// S64BitwiseAnd calls the CarbonCore framework function S64BitwiseAnd.
 func S64BitwiseAnd(left int64, right int64) int64 {
-	return raw.S64BitwiseAnd(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64BitwiseAnd == nil {
+		ebipurego.RegisterLibFunc(&_fnS64BitwiseAnd, _lib, "S64BitwiseAnd")
+	}
+	return _fnS64BitwiseAnd(left, right)
 }
 
-// S64BitwiseEor calls [raw.S64BitwiseEor] (C function S64BitwiseEor).
+var _fnS64BitwiseEor func(int64, int64) int64
+
+// S64BitwiseEor calls the CarbonCore framework function S64BitwiseEor.
 func S64BitwiseEor(left int64, right int64) int64 {
-	return raw.S64BitwiseEor(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64BitwiseEor == nil {
+		ebipurego.RegisterLibFunc(&_fnS64BitwiseEor, _lib, "S64BitwiseEor")
+	}
+	return _fnS64BitwiseEor(left, right)
 }
 
-// S64BitwiseNot calls [raw.S64BitwiseNot] (C function S64BitwiseNot).
+var _fnS64BitwiseNot func(int64) int64
+
+// S64BitwiseNot calls the CarbonCore framework function S64BitwiseNot.
 func S64BitwiseNot(value int64) int64 {
-	return raw.S64BitwiseNot(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64BitwiseNot == nil {
+		ebipurego.RegisterLibFunc(&_fnS64BitwiseNot, _lib, "S64BitwiseNot")
+	}
+	return _fnS64BitwiseNot(value)
 }
 
-// S64BitwiseOr calls [raw.S64BitwiseOr] (C function S64BitwiseOr).
+var _fnS64BitwiseOr func(int64, int64) int64
+
+// S64BitwiseOr calls the CarbonCore framework function S64BitwiseOr.
 func S64BitwiseOr(left int64, right int64) int64 {
-	return raw.S64BitwiseOr(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64BitwiseOr == nil {
+		ebipurego.RegisterLibFunc(&_fnS64BitwiseOr, _lib, "S64BitwiseOr")
+	}
+	return _fnS64BitwiseOr(left, right)
 }
 
-// S64Compare calls [raw.S64Compare] (C function S64Compare).
+var _fnS64Compare func(int64, int64) int
+
+// S64Compare calls the CarbonCore framework function S64Compare.
 func S64Compare(left int64, right int64) int {
-	return raw.S64Compare(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Compare == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Compare, _lib, "S64Compare")
+	}
+	return _fnS64Compare(left, right)
 }
 
-// S64Div calls [raw.S64Div] (C function S64Div).
+var _fnS64Div func(int64, int64) int64
+
+// S64Div calls the CarbonCore framework function S64Div.
 func S64Div(dividend int64, divisor int64) int64 {
-	return raw.S64Div(dividend, divisor)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Div == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Div, _lib, "S64Div")
+	}
+	return _fnS64Div(dividend, divisor)
 }
 
-// S64Divide calls [raw.S64Divide] (C function S64Divide).
-func S64Divide(dividend int64, divisor int64, remainderP *int64) int64 {
-	return raw.S64Divide(dividend, divisor, remainderP)
-}
+var _fnS64Eor func(int64, int64) uint8
 
-// S64Eor calls [raw.S64Eor] (C function S64Eor).
+// S64Eor calls the CarbonCore framework function S64Eor.
 func S64Eor(left int64, right int64) uint8 {
-	return raw.S64Eor(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Eor == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Eor, _lib, "S64Eor")
+	}
+	return _fnS64Eor(left, right)
 }
 
-// S64Max calls [raw.S64Max] (C function S64Max).
+var _fnS64Max func() int64
+
+// S64Max calls the CarbonCore framework function S64Max.
 func S64Max() int64 {
-	return raw.S64Max()
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Max == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Max, _lib, "S64Max")
+	}
+	return _fnS64Max()
 }
 
-// S64Min calls [raw.S64Min] (C function S64Min).
+var _fnS64Min func() int64
+
+// S64Min calls the CarbonCore framework function S64Min.
 func S64Min() int64 {
-	return raw.S64Min()
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Min == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Min, _lib, "S64Min")
+	}
+	return _fnS64Min()
 }
 
-// S64Mod calls [raw.S64Mod] (C function S64Mod).
+var _fnS64Mod func(int64, int64) int64
+
+// S64Mod calls the CarbonCore framework function S64Mod.
 func S64Mod(dividend int64, divisor int64) int64 {
-	return raw.S64Mod(dividend, divisor)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Mod == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Mod, _lib, "S64Mod")
+	}
+	return _fnS64Mod(dividend, divisor)
 }
 
-// S64Multiply calls [raw.S64Multiply] (C function S64Multiply).
+var _fnS64Multiply func(int64, int64) int64
+
+// S64Multiply calls the CarbonCore framework function S64Multiply.
 func S64Multiply(left int64, right int64) int64 {
-	return raw.S64Multiply(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Multiply, _lib, "S64Multiply")
+	}
+	return _fnS64Multiply(left, right)
 }
 
-// S64Negate calls [raw.S64Negate] (C function S64Negate).
+var _fnS64Negate func(int64) int64
+
+// S64Negate calls the CarbonCore framework function S64Negate.
 func S64Negate(value int64) int64 {
-	return raw.S64Negate(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Negate == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Negate, _lib, "S64Negate")
+	}
+	return _fnS64Negate(value)
 }
 
-// S64Not calls [raw.S64Not] (C function S64Not).
+var _fnS64Not func(int64) uint8
+
+// S64Not calls the CarbonCore framework function S64Not.
 func S64Not(value int64) uint8 {
-	return raw.S64Not(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Not == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Not, _lib, "S64Not")
+	}
+	return _fnS64Not(value)
 }
 
-// S64Or calls [raw.S64Or] (C function S64Or).
+var _fnS64Or func(int64, int64) uint8
+
+// S64Or calls the CarbonCore framework function S64Or.
 func S64Or(left int64, right int64) uint8 {
-	return raw.S64Or(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Or == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Or, _lib, "S64Or")
+	}
+	return _fnS64Or(left, right)
 }
 
-// S64Set calls [raw.S64Set] (C function S64Set).
+var _fnS64Set func(int) int64
+
+// S64Set calls the CarbonCore framework function S64Set.
 func S64Set(value int) int64 {
-	return raw.S64Set(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Set == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Set, _lib, "S64Set")
+	}
+	return _fnS64Set(value)
 }
 
-// S64SetU calls [raw.S64SetU] (C function S64SetU).
-func S64SetU(value uint) int64 {
-	return raw.S64SetU(value)
+var _fnS64SetU func(int) int64
+
+// S64SetU calls the CarbonCore framework function S64SetU.
+func S64SetU(value int) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64SetU == nil {
+		ebipurego.RegisterLibFunc(&_fnS64SetU, _lib, "S64SetU")
+	}
+	return _fnS64SetU(value)
 }
 
-// S64ShiftLeft calls [raw.S64ShiftLeft] (C function S64ShiftLeft).
-func S64ShiftLeft(value int64, shift uint) int64 {
-	return raw.S64ShiftLeft(value, shift)
+var _fnS64ShiftLeft func(int64, int) int64
+
+// S64ShiftLeft calls the CarbonCore framework function S64ShiftLeft.
+func S64ShiftLeft(value int64, shift int) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64ShiftLeft == nil {
+		ebipurego.RegisterLibFunc(&_fnS64ShiftLeft, _lib, "S64ShiftLeft")
+	}
+	return _fnS64ShiftLeft(value, shift)
 }
 
-// S64ShiftRight calls [raw.S64ShiftRight] (C function S64ShiftRight).
-func S64ShiftRight(value int64, shift uint) int64 {
-	return raw.S64ShiftRight(value, shift)
+var _fnS64ShiftRight func(int64, int) int64
+
+// S64ShiftRight calls the CarbonCore framework function S64ShiftRight.
+func S64ShiftRight(value int64, shift int) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64ShiftRight == nil {
+		ebipurego.RegisterLibFunc(&_fnS64ShiftRight, _lib, "S64ShiftRight")
+	}
+	return _fnS64ShiftRight(value, shift)
 }
 
-// S64Subtract calls [raw.S64Subtract] (C function S64Subtract).
+var _fnS64Subtract func(int64, int64) int64
+
+// S64Subtract calls the CarbonCore framework function S64Subtract.
 func S64Subtract(left int64, right int64) int64 {
-	return raw.S64Subtract(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnS64Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnS64Subtract, _lib, "S64Subtract")
+	}
+	return _fnS64Subtract(left, right)
 }
 
-// SInt64ToLongDouble calls [raw.SInt64ToLongDouble] (C function SInt64ToLongDouble).
+var _fnSInt64ToLongDouble func(int64) float64
+
+// SInt64ToLongDouble calls the CarbonCore framework function SInt64ToLongDouble.
 func SInt64ToLongDouble(value int64) float64 {
-	return raw.SInt64ToLongDouble(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSInt64ToLongDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSInt64ToLongDouble, _lib, "SInt64ToLongDouble")
+	}
+	return _fnSInt64ToLongDouble(value)
 }
 
-// SInt64ToUInt64 calls [raw.SInt64ToUInt64] (C function SInt64ToUInt64).
+var _fnSInt64ToUInt64 func(int64) uint64
+
+// SInt64ToUInt64 calls the CarbonCore framework function SInt64ToUInt64.
 func SInt64ToUInt64(value int64) uint64 {
-	return raw.SInt64ToUInt64(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSInt64ToUInt64 == nil {
+		ebipurego.RegisterLibFunc(&_fnSInt64ToUInt64, _lib, "SInt64ToUInt64")
+	}
+	return _fnSInt64ToUInt64(value)
 }
 
-// SInt64ToWide calls [raw.SInt64ToWide] (C function SInt64ToWide).
-func SInt64ToWide(s int64) unsafe.Pointer {
-	return raw.SInt64ToWide(s)
+var _fnSetCollectionDefaultAttributes func(objc.ID, int, int)
+
+// SetCollectionDefaultAttributes calls the CarbonCore framework function SetCollectionDefaultAttributes.
+func SetCollectionDefaultAttributes(c obj.Object, whichAttributes int, newAttributes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetCollectionDefaultAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnSetCollectionDefaultAttributes, _lib, "SetCollectionDefaultAttributes")
+	}
+	_fnSetCollectionDefaultAttributes(objref.IDOf(c), whichAttributes, newAttributes)
 }
 
-// SetAliasUserType calls [raw.SetAliasUserType] (C function SetAliasUserType).
-func SetAliasUserType(alias **raw.AliasRecord, userType uint) {
-	raw.SetAliasUserType(alias, userType)
+var _fnSetCollectionItemInfo func(objc.ID, int, int, int, int) int16
+
+// SetCollectionItemInfo calls the CarbonCore framework function SetCollectionItemInfo.
+func SetCollectionItemInfo(c obj.Object, tag int, id_ int, whichAttributes int, newAttributes int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetCollectionItemInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnSetCollectionItemInfo, _lib, "SetCollectionItemInfo")
+	}
+	return _fnSetCollectionItemInfo(objref.IDOf(c), tag, id_, whichAttributes, newAttributes)
 }
 
-// SetAliasUserTypeWithPtr calls [raw.SetAliasUserTypeWithPtr] (C function SetAliasUserTypeWithPtr).
-func SetAliasUserTypeWithPtr(alias *raw.AliasRecord, userType uint) {
-	raw.SetAliasUserTypeWithPtr(alias, userType)
+var _fnSetGestaltValue func(int, int) int16
+
+// SetGestaltValue calls the CarbonCore framework function SetGestaltValue.
+func SetGestaltValue(selector int, newValue int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetGestaltValue == nil {
+		ebipurego.RegisterLibFunc(&_fnSetGestaltValue, _lib, "SetGestaltValue")
+	}
+	return _fnSetGestaltValue(selector, newValue)
 }
 
-// SetCollectionDefaultAttributes calls [raw.SetCollectionDefaultAttributes] (C function SetCollectionDefaultAttributes).
-func SetCollectionDefaultAttributes(c unsafe.Pointer, whichAttributes int, newAttributes int) {
-	raw.SetCollectionDefaultAttributes(c, whichAttributes, newAttributes)
+var _fnSetIndexedCollectionItemInfo func(objc.ID, int, int, int) int16
+
+// SetIndexedCollectionItemInfo calls the CarbonCore framework function SetIndexedCollectionItemInfo.
+func SetIndexedCollectionItemInfo(c obj.Object, itemIndex int, whichAttributes int, newAttributes int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetIndexedCollectionItemInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnSetIndexedCollectionItemInfo, _lib, "SetIndexedCollectionItemInfo")
+	}
+	return _fnSetIndexedCollectionItemInfo(objref.IDOf(c), itemIndex, whichAttributes, newAttributes)
 }
 
-// SetCollectionExceptionProc calls [raw.SetCollectionExceptionProc] (C function SetCollectionExceptionProc).
-func SetCollectionExceptionProc(c unsafe.Pointer, exceptionProc unsafe.Pointer) {
-	raw.SetCollectionExceptionProc(c, exceptionProc)
-}
+var _fnSetPtrSize func(string, int)
 
-// SetCollectionItemInfo calls [raw.SetCollectionItemInfo] (C function SetCollectionItemInfo).
-func SetCollectionItemInfo(c unsafe.Pointer, tag uint, id_ int, whichAttributes int, newAttributes int) int16 {
-	return raw.SetCollectionItemInfo(c, tag, id_, whichAttributes, newAttributes)
-}
-
-// SetComponentInstanceError calls [raw.SetComponentInstanceError] (C function SetComponentInstanceError).
-func SetComponentInstanceError(aComponentInstance *raw.ComponentInstanceRecord, theError int16) {
-	raw.SetComponentInstanceError(aComponentInstance, theError)
-}
-
-// SetComponentInstanceStorage calls [raw.SetComponentInstanceStorage] (C function SetComponentInstanceStorage).
-func SetComponentInstanceStorage(aComponentInstance *raw.ComponentInstanceRecord, theStorage *string) {
-	raw.SetComponentInstanceStorage(aComponentInstance, theStorage)
-}
-
-// SetComponentRefcon calls [raw.SetComponentRefcon] (C function SetComponentRefcon).
-func SetComponentRefcon(aComponent *raw.ComponentRecord, theRefcon int) {
-	raw.SetComponentRefcon(aComponent, theRefcon)
-}
-
-// SetDebuggerNotificationProcs calls [raw.SetDebuggerNotificationProcs] (C function SetDebuggerNotificationProcs).
-func SetDebuggerNotificationProcs(notifyNewThread unsafe.Pointer, notifyDisposeThread unsafe.Pointer, notifyThreadScheduler unsafe.Pointer) int16 {
-	return raw.SetDebuggerNotificationProcs(notifyNewThread, notifyDisposeThread, notifyThreadScheduler)
-}
-
-// SetDefaultComponent calls [raw.SetDefaultComponent] (C function SetDefaultComponent).
-func SetDefaultComponent(aComponent *raw.ComponentRecord, flags int16) int16 {
-	return raw.SetDefaultComponent(aComponent, flags)
-}
-
-// SetFallbackUnicodeToText calls [raw.SetFallbackUnicodeToText] (C function SetFallbackUnicodeToText).
-func SetFallbackUnicodeToText(iUnicodeToTextInfo unsafe.Pointer, iFallback unsafe.Pointer, iControlFlags uint, iInfoPtr unsafe.Pointer) int {
-	return raw.SetFallbackUnicodeToText(iUnicodeToTextInfo, iFallback, iControlFlags, iInfoPtr)
-}
-
-// SetFallbackUnicodeToTextRun calls [raw.SetFallbackUnicodeToTextRun] (C function SetFallbackUnicodeToTextRun).
-func SetFallbackUnicodeToTextRun(iUnicodeToTextRunInfo unsafe.Pointer, iFallback unsafe.Pointer, iControlFlags uint, iInfoPtr unsafe.Pointer) int {
-	return raw.SetFallbackUnicodeToTextRun(iUnicodeToTextRunInfo, iFallback, iControlFlags, iInfoPtr)
-}
-
-// SetGestaltValue calls [raw.SetGestaltValue] (C function SetGestaltValue).
-func SetGestaltValue(selector uint, newValue int) int16 {
-	return raw.SetGestaltValue(selector, newValue)
-}
-
-// SetHandleSize calls [raw.SetHandleSize] (C function SetHandleSize).
-func SetHandleSize(h *string, newSize int) {
-	raw.SetHandleSize(h, newSize)
-}
-
-// SetIndexedCollectionItemInfo calls [raw.SetIndexedCollectionItemInfo] (C function SetIndexedCollectionItemInfo).
-func SetIndexedCollectionItemInfo(c unsafe.Pointer, itemIndex int, whichAttributes int, newAttributes int) int16 {
-	return raw.SetIndexedCollectionItemInfo(c, itemIndex, whichAttributes, newAttributes)
-}
-
-// SetPtrSize calls [raw.SetPtrSize] (C function SetPtrSize).
+// SetPtrSize calls the CarbonCore framework function SetPtrSize.
 func SetPtrSize(p string, newSize int) {
-	raw.SetPtrSize(p, newSize)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetPtrSize == nil {
+		ebipurego.RegisterLibFunc(&_fnSetPtrSize, _lib, "SetPtrSize")
+	}
+	_fnSetPtrSize(p, newSize)
 }
 
-// SetResAttrs calls [raw.SetResAttrs] (C function SetResAttrs).
-func SetResAttrs(theResource *string, attrs int16) {
-	raw.SetResAttrs(theResource, attrs)
-}
+var _fnSetResFileAttrs func(int, int16)
 
-// SetResFileAttrs calls [raw.SetResFileAttrs] (C function SetResFileAttrs).
+// SetResFileAttrs calls the CarbonCore framework function SetResFileAttrs.
 func SetResFileAttrs(refNum int, attrs int16) {
-	raw.SetResFileAttrs(refNum, attrs)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetResFileAttrs == nil {
+		ebipurego.RegisterLibFunc(&_fnSetResFileAttrs, _lib, "SetResFileAttrs")
+	}
+	_fnSetResFileAttrs(refNum, attrs)
 }
 
-// SetResInfo calls [raw.SetResInfo] (C function SetResInfo).
-func SetResInfo(theResource *string, theID int16, name *uint8) {
-	raw.SetResInfo(theResource, theID, name)
-}
+var _fnSetResLoad func(uint8)
 
-// SetResLoad calls [raw.SetResLoad] (C function SetResLoad).
+// SetResLoad calls the CarbonCore framework function SetResLoad.
 func SetResLoad(load uint8) {
-	raw.SetResLoad(load)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetResLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnSetResLoad, _lib, "SetResLoad")
+	}
+	_fnSetResLoad(load)
 }
 
-// SetResPurge calls [raw.SetResPurge] (C function SetResPurge).
+var _fnSetResPurge func(uint8)
+
+// SetResPurge calls the CarbonCore framework function SetResPurge.
 func SetResPurge(install uint8) {
-	raw.SetResPurge(install)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetResPurge == nil {
+		ebipurego.RegisterLibFunc(&_fnSetResPurge, _lib, "SetResPurge")
+	}
+	_fnSetResPurge(install)
 }
 
-// SetResourceSize calls [raw.SetResourceSize] (C function SetResourceSize).
-func SetResourceSize(theResource *string, newSize int) {
-	raw.SetResourceSize(theResource, newSize)
-}
+var _fnSetScriptManagerVariable func(int16, int) int16
 
-// SetScriptManagerVariable calls [raw.SetScriptManagerVariable] (C function SetScriptManagerVariable).
+// SetScriptManagerVariable calls the CarbonCore framework function SetScriptManagerVariable.
 func SetScriptManagerVariable(selector int16, param int) int16 {
-	return raw.SetScriptManagerVariable(selector, param)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetScriptManagerVariable == nil {
+		ebipurego.RegisterLibFunc(&_fnSetScriptManagerVariable, _lib, "SetScriptManagerVariable")
+	}
+	return _fnSetScriptManagerVariable(selector, param)
 }
 
-// SetThreadReadyGivenTaskRef calls [raw.SetThreadReadyGivenTaskRef] (C function SetThreadReadyGivenTaskRef).
-func SetThreadReadyGivenTaskRef(threadTRef unsafe.Pointer, threadToSet uint) int16 {
-	return raw.SetThreadReadyGivenTaskRef(threadTRef, threadToSet)
+var _fnSetThreadState func(int, uint16, int) int16
+
+// SetThreadState calls the CarbonCore framework function SetThreadState.
+func SetThreadState(threadToSet int, newState uint16, suggestedThread int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetThreadState == nil {
+		ebipurego.RegisterLibFunc(&_fnSetThreadState, _lib, "SetThreadState")
+	}
+	return _fnSetThreadState(threadToSet, newState, suggestedThread)
 }
 
-// SetThreadScheduler calls [raw.SetThreadScheduler] (C function SetThreadScheduler).
-func SetThreadScheduler(threadScheduler unsafe.Pointer) int16 {
-	return raw.SetThreadScheduler(threadScheduler)
+var _fnSetThreadStateEndCritical func(int, uint16, int) int16
+
+// SetThreadStateEndCritical calls the CarbonCore framework function SetThreadStateEndCritical.
+func SetThreadStateEndCritical(threadToSet int, newState uint16, suggestedThread int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetThreadStateEndCritical == nil {
+		ebipurego.RegisterLibFunc(&_fnSetThreadStateEndCritical, _lib, "SetThreadStateEndCritical")
+	}
+	return _fnSetThreadStateEndCritical(threadToSet, newState, suggestedThread)
 }
 
-// SetThreadState calls [raw.SetThreadState] (C function SetThreadState).
-func SetThreadState(threadToSet uint, newState uint16, suggestedThread uint) int16 {
-	return raw.SetThreadState(threadToSet, newState, suggestedThread)
-}
+var _fnSysError func(int16)
 
-// SetThreadStateEndCritical calls [raw.SetThreadStateEndCritical] (C function SetThreadStateEndCritical).
-func SetThreadStateEndCritical(threadToSet uint, newState uint16, suggestedThread uint) int16 {
-	return raw.SetThreadStateEndCritical(threadToSet, newState, suggestedThread)
-}
-
-// SetThreadSwitcher calls [raw.SetThreadSwitcher] (C function SetThreadSwitcher).
-func SetThreadSwitcher(thread uint, threadSwitcher unsafe.Pointer, switchProcParam unsafe.Pointer, inOrOut uint8) int16 {
-	return raw.SetThreadSwitcher(thread, threadSwitcher, switchProcParam, inOrOut)
-}
-
-// SetThreadTerminator calls [raw.SetThreadTerminator] (C function SetThreadTerminator).
-func SetThreadTerminator(thread uint, threadTerminator unsafe.Pointer, terminationProcParam unsafe.Pointer) int16 {
-	return raw.SetThreadTerminator(thread, threadTerminator, terminationProcParam)
-}
-
-// SubAbsoluteFromAbsolute calls [raw.SubAbsoluteFromAbsolute] (C function SubAbsoluteFromAbsolute).
-func SubAbsoluteFromAbsolute(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.SubAbsoluteFromAbsolute(leftAbsoluteTime, rightAbsoluteTime)
-}
-
-// SubDurationFromAbsolute calls [raw.SubDurationFromAbsolute] (C function SubDurationFromAbsolute).
-func SubDurationFromAbsolute(duration int, absoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.SubDurationFromAbsolute(duration, absoluteTime)
-}
-
-// SubNanosecondsFromAbsolute calls [raw.SubNanosecondsFromAbsolute] (C function SubNanosecondsFromAbsolute).
-func SubNanosecondsFromAbsolute(nanoseconds unsafe.Pointer, absoluteTime unsafe.Pointer) unsafe.Pointer {
-	return raw.SubNanosecondsFromAbsolute(nanoseconds, absoluteTime)
-}
-
-// SysError calls [raw.SysError] (C function SysError).
+// SysError calls the CarbonCore framework function SysError.
 func SysError(errorCode int16) {
-	raw.SysError(errorCode)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSysError == nil {
+		ebipurego.RegisterLibFunc(&_fnSysError, _lib, "SysError")
+	}
+	_fnSysError(errorCode)
 }
 
-// TECClearConverterContextInfo calls [raw.TECClearConverterContextInfo] (C function TECClearConverterContextInfo).
-func TECClearConverterContextInfo(encodingConverter unsafe.Pointer) int {
-	return raw.TECClearConverterContextInfo(encodingConverter)
+var _fnTaskLevel func() int
+
+// TaskLevel calls the CarbonCore framework function TaskLevel.
+func TaskLevel() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTaskLevel == nil {
+		ebipurego.RegisterLibFunc(&_fnTaskLevel, _lib, "TaskLevel")
+	}
+	return _fnTaskLevel()
 }
 
-// TECClearSnifferContextInfo calls [raw.TECClearSnifferContextInfo] (C function TECClearSnifferContextInfo).
-func TECClearSnifferContextInfo(encodingSniffer unsafe.Pointer) int {
-	return raw.TECClearSnifferContextInfo(encodingSniffer)
-}
+var _fnThreadBeginCritical func() int16
 
-// TECConvertText calls [raw.TECConvertText] (C function TECConvertText).
-func TECConvertText(encodingConverter unsafe.Pointer, inputBuffer *uint8, inputBufferLength uint, actualInputLength *uint, outputBuffer *uint8, outputBufferLength uint, actualOutputLength *uint) int {
-	return raw.TECConvertText(encodingConverter, inputBuffer, inputBufferLength, actualInputLength, outputBuffer, outputBufferLength, actualOutputLength)
-}
-
-// TECConvertTextToMultipleEncodings calls [raw.TECConvertTextToMultipleEncodings] (C function TECConvertTextToMultipleEncodings).
-func TECConvertTextToMultipleEncodings(encodingConverter unsafe.Pointer, inputBuffer *uint8, inputBufferLength uint, actualInputLength *uint, outputBuffer *uint8, outputBufferLength uint, actualOutputLength *uint, outEncodingsBuffer *raw.TextEncodingRun, maxOutEncodingRuns uint, actualOutEncodingRuns *uint) int {
-	return raw.TECConvertTextToMultipleEncodings(encodingConverter, inputBuffer, inputBufferLength, actualInputLength, outputBuffer, outputBufferLength, actualOutputLength, outEncodingsBuffer, maxOutEncodingRuns, actualOutEncodingRuns)
-}
-
-// TECCreateConverter calls [raw.TECCreateConverter] (C function TECCreateConverter).
-func TECCreateConverter(newEncodingConverter unsafe.Pointer, inputEncoding uint, outputEncoding uint) int {
-	return raw.TECCreateConverter(newEncodingConverter, inputEncoding, outputEncoding)
-}
-
-// TECCreateConverterFromPath calls [raw.TECCreateConverterFromPath] (C function TECCreateConverterFromPath).
-func TECCreateConverterFromPath(newEncodingConverter unsafe.Pointer, inPath *uint, inEncodings uint) int {
-	return raw.TECCreateConverterFromPath(newEncodingConverter, inPath, inEncodings)
-}
-
-// TECCreateOneToManyConverter calls [raw.TECCreateOneToManyConverter] (C function TECCreateOneToManyConverter).
-func TECCreateOneToManyConverter(newEncodingConverter unsafe.Pointer, inputEncoding uint, numOutputEncodings uint, outputEncodings *uint) int {
-	return raw.TECCreateOneToManyConverter(newEncodingConverter, inputEncoding, numOutputEncodings, outputEncodings)
-}
-
-// TECCreateSniffer calls [raw.TECCreateSniffer] (C function TECCreateSniffer).
-func TECCreateSniffer(encodingSniffer unsafe.Pointer, testEncodings *uint, numTextEncodings uint) int {
-	return raw.TECCreateSniffer(encodingSniffer, testEncodings, numTextEncodings)
-}
-
-// TECDisposeConverter calls [raw.TECDisposeConverter] (C function TECDisposeConverter).
-func TECDisposeConverter(newEncodingConverter unsafe.Pointer) int {
-	return raw.TECDisposeConverter(newEncodingConverter)
-}
-
-// TECDisposeSniffer calls [raw.TECDisposeSniffer] (C function TECDisposeSniffer).
-func TECDisposeSniffer(encodingSniffer unsafe.Pointer) int {
-	return raw.TECDisposeSniffer(encodingSniffer)
-}
-
-// TECFlushMultipleEncodings calls [raw.TECFlushMultipleEncodings] (C function TECFlushMultipleEncodings).
-func TECFlushMultipleEncodings(encodingConverter unsafe.Pointer, outputBuffer *uint8, outputBufferLength uint, actualOutputLength *uint, outEncodingsBuffer *raw.TextEncodingRun, maxOutEncodingRuns uint, actualOutEncodingRuns *uint) int {
-	return raw.TECFlushMultipleEncodings(encodingConverter, outputBuffer, outputBufferLength, actualOutputLength, outEncodingsBuffer, maxOutEncodingRuns, actualOutEncodingRuns)
-}
-
-// TECFlushText calls [raw.TECFlushText] (C function TECFlushText).
-func TECFlushText(encodingConverter unsafe.Pointer, outputBuffer *uint8, outputBufferLength uint, actualOutputLength *uint) int {
-	return raw.TECFlushText(encodingConverter, outputBuffer, outputBufferLength, actualOutputLength)
-}
-
-// TECGetEncodingList calls [raw.TECGetEncodingList] (C function TECGetEncodingList).
-func TECGetEncodingList(encodingConverter unsafe.Pointer, numEncodings *uint, encodingList **string) int {
-	return raw.TECGetEncodingList(encodingConverter, numEncodings, encodingList)
-}
-
-// TECSetBasicOptions calls [raw.TECSetBasicOptions] (C function TECSetBasicOptions).
-func TECSetBasicOptions(encodingConverter unsafe.Pointer, controlFlags uint) int {
-	return raw.TECSetBasicOptions(encodingConverter, controlFlags)
-}
-
-// TECSniffTextEncoding calls [raw.TECSniffTextEncoding] (C function TECSniffTextEncoding).
-func TECSniffTextEncoding(encodingSniffer unsafe.Pointer, inputBuffer *uint8, inputBufferLength uint, testEncodings *uint, numTextEncodings uint, numErrsArray *uint, maxErrs uint, numFeaturesArray *uint, maxFeatures uint) int {
-	return raw.TECSniffTextEncoding(encodingSniffer, inputBuffer, inputBufferLength, testEncodings, numTextEncodings, numErrsArray, maxErrs, numFeaturesArray, maxFeatures)
-}
-
-// TaskLevel calls [raw.TaskLevel] (C function TaskLevel).
-func TaskLevel() uint {
-	return raw.TaskLevel()
-}
-
-// TempNewHandle calls [raw.TempNewHandle] (C function TempNewHandle).
-func TempNewHandle(logicalSize int, resultCode *int16) *string {
-	return raw.TempNewHandle(logicalSize, resultCode)
-}
-
-// TestAndClear calls [raw.TestAndClear] (C function TestAndClear).
-func TestAndClear(bit uint, address *uint8) uint8 {
-	return raw.TestAndClear(bit, address)
-}
-
-// TestAndSet calls [raw.TestAndSet] (C function TestAndSet).
-func TestAndSet(bit uint, address *uint8) uint8 {
-	return raw.TestAndSet(bit, address)
-}
-
-// ThreadBeginCritical calls [raw.ThreadBeginCritical] (C function ThreadBeginCritical).
+// ThreadBeginCritical calls the CarbonCore framework function ThreadBeginCritical.
 func ThreadBeginCritical() int16 {
-	return raw.ThreadBeginCritical()
+	_loadOnce.Do(_loadLibrary)
+	if _fnThreadBeginCritical == nil {
+		ebipurego.RegisterLibFunc(&_fnThreadBeginCritical, _lib, "ThreadBeginCritical")
+	}
+	return _fnThreadBeginCritical()
 }
 
-// ThreadCurrentStackSpace calls [raw.ThreadCurrentStackSpace] (C function ThreadCurrentStackSpace).
-func ThreadCurrentStackSpace(thread uint, freeStack *uint) int16 {
-	return raw.ThreadCurrentStackSpace(thread, freeStack)
-}
+var _fnThreadEndCritical func() int16
 
-// ThreadEndCritical calls [raw.ThreadEndCritical] (C function ThreadEndCritical).
+// ThreadEndCritical calls the CarbonCore framework function ThreadEndCritical.
 func ThreadEndCritical() int16 {
-	return raw.ThreadEndCritical()
+	_loadOnce.Do(_loadLibrary)
+	if _fnThreadEndCritical == nil {
+		ebipurego.RegisterLibFunc(&_fnThreadEndCritical, _lib, "ThreadEndCritical")
+	}
+	return _fnThreadEndCritical()
 }
 
-// TickCount calls [raw.TickCount] (C function TickCount).
-func TickCount() uint {
-	return raw.TickCount()
+var _fnTickCount func() int
+
+// TickCount calls the CarbonCore framework function TickCount.
+func TickCount() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTickCount == nil {
+		ebipurego.RegisterLibFunc(&_fnTickCount, _lib, "TickCount")
+	}
+	return _fnTickCount()
 }
 
-// TruncateForTextToUnicode calls [raw.TruncateForTextToUnicode] (C function TruncateForTextToUnicode).
-func TruncateForTextToUnicode(iTextToUnicodeInfo unsafe.Pointer, iSourceLen uint, iSourceStr unsafe.Pointer, iMaxLen uint, oTruncatedLen *uint) int {
-	return raw.TruncateForTextToUnicode(iTextToUnicodeInfo, iSourceLen, iSourceStr, iMaxLen, oTruncatedLen)
+var _fnU32SetU func(uint64) int
+
+// U32SetU calls the CarbonCore framework function U32SetU.
+func U32SetU(value uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnU32SetU == nil {
+		ebipurego.RegisterLibFunc(&_fnU32SetU, _lib, "U32SetU")
+	}
+	return _fnU32SetU(value)
 }
 
-// TruncateForUnicodeToText calls [raw.TruncateForUnicodeToText] (C function TruncateForUnicodeToText).
-func TruncateForUnicodeToText(iUnicodeToTextInfo unsafe.Pointer, iSourceLen uint, iSourceStr *uint16, iControlFlags uint, iMaxLen uint, oTruncatedLen *uint) int {
-	return raw.TruncateForUnicodeToText(iUnicodeToTextInfo, iSourceLen, iSourceStr, iControlFlags, iMaxLen, oTruncatedLen)
-}
+var _fnU64Add func(uint64, uint64) uint64
 
-// U32SetU calls [raw.U32SetU] (C function U32SetU).
-func U32SetU(value uint64) uint {
-	return raw.U32SetU(value)
-}
-
-// U64Add calls [raw.U64Add] (C function U64Add).
+// U64Add calls the CarbonCore framework function U64Add.
 func U64Add(left uint64, right uint64) uint64 {
-	return raw.U64Add(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Add == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Add, _lib, "U64Add")
+	}
+	return _fnU64Add(left, right)
 }
 
-// U64And calls [raw.U64And] (C function U64And).
+var _fnU64And func(uint64, uint64) uint8
+
+// U64And calls the CarbonCore framework function U64And.
 func U64And(left uint64, right uint64) uint8 {
-	return raw.U64And(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64And == nil {
+		ebipurego.RegisterLibFunc(&_fnU64And, _lib, "U64And")
+	}
+	return _fnU64And(left, right)
 }
 
-// U64BitwiseAnd calls [raw.U64BitwiseAnd] (C function U64BitwiseAnd).
+var _fnU64BitwiseAnd func(uint64, uint64) uint64
+
+// U64BitwiseAnd calls the CarbonCore framework function U64BitwiseAnd.
 func U64BitwiseAnd(left uint64, right uint64) uint64 {
-	return raw.U64BitwiseAnd(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64BitwiseAnd == nil {
+		ebipurego.RegisterLibFunc(&_fnU64BitwiseAnd, _lib, "U64BitwiseAnd")
+	}
+	return _fnU64BitwiseAnd(left, right)
 }
 
-// U64BitwiseEor calls [raw.U64BitwiseEor] (C function U64BitwiseEor).
+var _fnU64BitwiseEor func(uint64, uint64) uint64
+
+// U64BitwiseEor calls the CarbonCore framework function U64BitwiseEor.
 func U64BitwiseEor(left uint64, right uint64) uint64 {
-	return raw.U64BitwiseEor(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64BitwiseEor == nil {
+		ebipurego.RegisterLibFunc(&_fnU64BitwiseEor, _lib, "U64BitwiseEor")
+	}
+	return _fnU64BitwiseEor(left, right)
 }
 
-// U64BitwiseNot calls [raw.U64BitwiseNot] (C function U64BitwiseNot).
+var _fnU64BitwiseNot func(uint64) uint64
+
+// U64BitwiseNot calls the CarbonCore framework function U64BitwiseNot.
 func U64BitwiseNot(value uint64) uint64 {
-	return raw.U64BitwiseNot(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64BitwiseNot == nil {
+		ebipurego.RegisterLibFunc(&_fnU64BitwiseNot, _lib, "U64BitwiseNot")
+	}
+	return _fnU64BitwiseNot(value)
 }
 
-// U64BitwiseOr calls [raw.U64BitwiseOr] (C function U64BitwiseOr).
+var _fnU64BitwiseOr func(uint64, uint64) uint64
+
+// U64BitwiseOr calls the CarbonCore framework function U64BitwiseOr.
 func U64BitwiseOr(left uint64, right uint64) uint64 {
-	return raw.U64BitwiseOr(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64BitwiseOr == nil {
+		ebipurego.RegisterLibFunc(&_fnU64BitwiseOr, _lib, "U64BitwiseOr")
+	}
+	return _fnU64BitwiseOr(left, right)
 }
 
-// U64Compare calls [raw.U64Compare] (C function U64Compare).
+var _fnU64Compare func(uint64, uint64) int
+
+// U64Compare calls the CarbonCore framework function U64Compare.
 func U64Compare(left uint64, right uint64) int {
-	return raw.U64Compare(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Compare == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Compare, _lib, "U64Compare")
+	}
+	return _fnU64Compare(left, right)
 }
 
-// U64Div calls [raw.U64Div] (C function U64Div).
+var _fnU64Div func(uint64, uint64) uint64
+
+// U64Div calls the CarbonCore framework function U64Div.
 func U64Div(dividend uint64, divisor uint64) uint64 {
-	return raw.U64Div(dividend, divisor)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Div == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Div, _lib, "U64Div")
+	}
+	return _fnU64Div(dividend, divisor)
 }
 
-// U64Divide calls [raw.U64Divide] (C function U64Divide).
-func U64Divide(dividend uint64, divisor uint64, remainder *uint64) uint64 {
-	return raw.U64Divide(dividend, divisor, remainder)
-}
+var _fnU64Eor func(uint64, uint64) uint8
 
-// U64Eor calls [raw.U64Eor] (C function U64Eor).
+// U64Eor calls the CarbonCore framework function U64Eor.
 func U64Eor(left uint64, right uint64) uint8 {
-	return raw.U64Eor(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Eor == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Eor, _lib, "U64Eor")
+	}
+	return _fnU64Eor(left, right)
 }
 
-// U64Max calls [raw.U64Max] (C function U64Max).
+var _fnU64Max func() uint64
+
+// U64Max calls the CarbonCore framework function U64Max.
 func U64Max() uint64 {
-	return raw.U64Max()
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Max == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Max, _lib, "U64Max")
+	}
+	return _fnU64Max()
 }
 
-// U64Mod calls [raw.U64Mod] (C function U64Mod).
+var _fnU64Mod func(uint64, uint64) uint64
+
+// U64Mod calls the CarbonCore framework function U64Mod.
 func U64Mod(dividend uint64, divisor uint64) uint64 {
-	return raw.U64Mod(dividend, divisor)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Mod == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Mod, _lib, "U64Mod")
+	}
+	return _fnU64Mod(dividend, divisor)
 }
 
-// U64Multiply calls [raw.U64Multiply] (C function U64Multiply).
+var _fnU64Multiply func(uint64, uint64) uint64
+
+// U64Multiply calls the CarbonCore framework function U64Multiply.
 func U64Multiply(left uint64, right uint64) uint64 {
-	return raw.U64Multiply(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Multiply, _lib, "U64Multiply")
+	}
+	return _fnU64Multiply(left, right)
 }
 
-// U64Not calls [raw.U64Not] (C function U64Not).
+var _fnU64Not func(uint64) uint8
+
+// U64Not calls the CarbonCore framework function U64Not.
 func U64Not(value uint64) uint8 {
-	return raw.U64Not(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Not == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Not, _lib, "U64Not")
+	}
+	return _fnU64Not(value)
 }
 
-// U64Or calls [raw.U64Or] (C function U64Or).
+var _fnU64Or func(uint64, uint64) uint8
+
+// U64Or calls the CarbonCore framework function U64Or.
 func U64Or(left uint64, right uint64) uint8 {
-	return raw.U64Or(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Or == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Or, _lib, "U64Or")
+	}
+	return _fnU64Or(left, right)
 }
 
-// U64Set calls [raw.U64Set] (C function U64Set).
+var _fnU64Set func(int) uint64
+
+// U64Set calls the CarbonCore framework function U64Set.
 func U64Set(value int) uint64 {
-	return raw.U64Set(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Set == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Set, _lib, "U64Set")
+	}
+	return _fnU64Set(value)
 }
 
-// U64SetU calls [raw.U64SetU] (C function U64SetU).
-func U64SetU(value uint) uint64 {
-	return raw.U64SetU(value)
+var _fnU64SetU func(int) uint64
+
+// U64SetU calls the CarbonCore framework function U64SetU.
+func U64SetU(value int) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64SetU == nil {
+		ebipurego.RegisterLibFunc(&_fnU64SetU, _lib, "U64SetU")
+	}
+	return _fnU64SetU(value)
 }
 
-// U64ShiftLeft calls [raw.U64ShiftLeft] (C function U64ShiftLeft).
-func U64ShiftLeft(value uint64, shift uint) uint64 {
-	return raw.U64ShiftLeft(value, shift)
+var _fnU64ShiftLeft func(uint64, int) uint64
+
+// U64ShiftLeft calls the CarbonCore framework function U64ShiftLeft.
+func U64ShiftLeft(value uint64, shift int) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64ShiftLeft == nil {
+		ebipurego.RegisterLibFunc(&_fnU64ShiftLeft, _lib, "U64ShiftLeft")
+	}
+	return _fnU64ShiftLeft(value, shift)
 }
 
-// U64ShiftRight calls [raw.U64ShiftRight] (C function U64ShiftRight).
-func U64ShiftRight(value uint64, shift uint) uint64 {
-	return raw.U64ShiftRight(value, shift)
+var _fnU64ShiftRight func(uint64, int) uint64
+
+// U64ShiftRight calls the CarbonCore framework function U64ShiftRight.
+func U64ShiftRight(value uint64, shift int) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64ShiftRight == nil {
+		ebipurego.RegisterLibFunc(&_fnU64ShiftRight, _lib, "U64ShiftRight")
+	}
+	return _fnU64ShiftRight(value, shift)
 }
 
-// U64Subtract calls [raw.U64Subtract] (C function U64Subtract).
+var _fnU64Subtract func(uint64, uint64) uint64
+
+// U64Subtract calls the CarbonCore framework function U64Subtract.
 func U64Subtract(left uint64, right uint64) uint64 {
-	return raw.U64Subtract(left, right)
+	_loadOnce.Do(_loadLibrary)
+	if _fnU64Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnU64Subtract, _lib, "U64Subtract")
+	}
+	return _fnU64Subtract(left, right)
 }
 
-// UCCompareText calls [raw.UCCompareText] (C function UCCompareText).
-func UCCompareText(collatorRef unsafe.Pointer, text1Ptr *uint16, text1Length uint, text2Ptr *uint16, text2Length uint, equivalent *uint8, order *int) int {
-	return raw.UCCompareText(collatorRef, text1Ptr, text1Length, text2Ptr, text2Length, equivalent, order)
+var _fnUCGetUnicodeScalarValueForSurrogatePair func(uint16, uint16) int
+
+// UCGetUnicodeScalarValueForSurrogatePair calls the CarbonCore framework function UCGetUnicodeScalarValueForSurrogatePair.
+func UCGetUnicodeScalarValueForSurrogatePair(surrogateHigh uint16, surrogateLow uint16) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCGetUnicodeScalarValueForSurrogatePair == nil {
+		ebipurego.RegisterLibFunc(&_fnUCGetUnicodeScalarValueForSurrogatePair, _lib, "UCGetUnicodeScalarValueForSurrogatePair")
+	}
+	return _fnUCGetUnicodeScalarValueForSurrogatePair(surrogateHigh, surrogateLow)
 }
 
-// UCCreateCollator calls [raw.UCCreateCollator] (C function UCCreateCollator).
-func UCCreateCollator(locale unsafe.Pointer, opVariant uint, options uint, collatorRef unsafe.Pointer) int {
-	return raw.UCCreateCollator(locale, opVariant, options, collatorRef)
-}
+var _fnUCIsSurrogateHighCharacter func(uint16) uint8
 
-// UCCreateTextBreakLocator calls [raw.UCCreateTextBreakLocator] (C function UCCreateTextBreakLocator).
-func UCCreateTextBreakLocator(locale unsafe.Pointer, opVariant uint, breakTypes uint, breakRef unsafe.Pointer) int {
-	return raw.UCCreateTextBreakLocator(locale, opVariant, breakTypes, breakRef)
-}
-
-// UCDisposeCollator calls [raw.UCDisposeCollator] (C function UCDisposeCollator).
-func UCDisposeCollator(collatorRef unsafe.Pointer) int {
-	return raw.UCDisposeCollator(collatorRef)
-}
-
-// UCDisposeTextBreakLocator calls [raw.UCDisposeTextBreakLocator] (C function UCDisposeTextBreakLocator).
-func UCDisposeTextBreakLocator(breakRef unsafe.Pointer) int {
-	return raw.UCDisposeTextBreakLocator(breakRef)
-}
-
-// UCFindTextBreak calls [raw.UCFindTextBreak] (C function UCFindTextBreak).
-func UCFindTextBreak(breakRef unsafe.Pointer, breakType uint, options uint, textPtr *uint16, textLength uint, startOffset uint, breakOffset *uint) int {
-	return raw.UCFindTextBreak(breakRef, breakType, options, textPtr, textLength, startOffset, breakOffset)
-}
-
-// UCGetCollationKey calls [raw.UCGetCollationKey] (C function UCGetCollationKey).
-func UCGetCollationKey(collatorRef unsafe.Pointer, textPtr *uint16, textLength uint, maxKeySize uint, actualKeySize *uint, collationKey *uint) int {
-	return raw.UCGetCollationKey(collatorRef, textPtr, textLength, maxKeySize, actualKeySize, collationKey)
-}
-
-// UCGetUnicodeScalarValueForSurrogatePair calls [raw.UCGetUnicodeScalarValueForSurrogatePair] (C function UCGetUnicodeScalarValueForSurrogatePair).
-func UCGetUnicodeScalarValueForSurrogatePair(surrogateHigh uint16, surrogateLow uint16) uint {
-	return raw.UCGetUnicodeScalarValueForSurrogatePair(surrogateHigh, surrogateLow)
-}
-
-// UCIsSurrogateHighCharacter calls [raw.UCIsSurrogateHighCharacter] (C function UCIsSurrogateHighCharacter).
+// UCIsSurrogateHighCharacter calls the CarbonCore framework function UCIsSurrogateHighCharacter.
 func UCIsSurrogateHighCharacter(character uint16) uint8 {
-	return raw.UCIsSurrogateHighCharacter(character)
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCIsSurrogateHighCharacter == nil {
+		ebipurego.RegisterLibFunc(&_fnUCIsSurrogateHighCharacter, _lib, "UCIsSurrogateHighCharacter")
+	}
+	return _fnUCIsSurrogateHighCharacter(character)
 }
 
-// UCIsSurrogateLowCharacter calls [raw.UCIsSurrogateLowCharacter] (C function UCIsSurrogateLowCharacter).
+var _fnUCIsSurrogateLowCharacter func(uint16) uint8
+
+// UCIsSurrogateLowCharacter calls the CarbonCore framework function UCIsSurrogateLowCharacter.
 func UCIsSurrogateLowCharacter(character uint16) uint8 {
-	return raw.UCIsSurrogateLowCharacter(character)
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCIsSurrogateLowCharacter == nil {
+		ebipurego.RegisterLibFunc(&_fnUCIsSurrogateLowCharacter, _lib, "UCIsSurrogateLowCharacter")
+	}
+	return _fnUCIsSurrogateLowCharacter(character)
 }
 
-// UCTypeSelectAddKeyToSelector calls [raw.UCTypeSelectAddKeyToSelector] (C function UCTypeSelectAddKeyToSelector).
-func UCTypeSelectAddKeyToSelector(inRef unsafe.Pointer, inText unsafe.Pointer, inEventTime float64, updateFlag *uint8) int {
-	return raw.UCTypeSelectAddKeyToSelector(inRef, inText, inEventTime, updateFlag)
+var _fnUCTypeSelectWouldResetBuffer func(objc.ID, objc.ID, float64) uint8
+
+// UCTypeSelectWouldResetBuffer calls the CarbonCore framework function UCTypeSelectWouldResetBuffer.
+func UCTypeSelectWouldResetBuffer(inRef obj.Object, inText obj.Object, inEventTime float64) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCTypeSelectWouldResetBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnUCTypeSelectWouldResetBuffer, _lib, "UCTypeSelectWouldResetBuffer")
+	}
+	return _fnUCTypeSelectWouldResetBuffer(objref.IDOf(inRef), objref.IDOf(inText), inEventTime)
 }
 
-// UCTypeSelectCompare calls [raw.UCTypeSelectCompare] (C function UCTypeSelectCompare).
-func UCTypeSelectCompare(ref unsafe.Pointer, inText unsafe.Pointer, result *int) int {
-	return raw.UCTypeSelectCompare(ref, inText, result)
-}
+var _fnUInt64ToLongDouble func(uint64) float64
 
-// UCTypeSelectCreateSelector calls [raw.UCTypeSelectCreateSelector] (C function UCTypeSelectCreateSelector).
-func UCTypeSelectCreateSelector(locale unsafe.Pointer, opVariant uint, options uint, newSelector unsafe.Pointer) int {
-	return raw.UCTypeSelectCreateSelector(locale, opVariant, options, newSelector)
-}
-
-// UCTypeSelectFindItem calls [raw.UCTypeSelectFindItem] (C function UCTypeSelectFindItem).
-func UCTypeSelectFindItem(ref unsafe.Pointer, listSize uint, listDataPtr unsafe.Pointer, refcon unsafe.Pointer, userUPP unsafe.Pointer, closestItem *uint) int {
-	return raw.UCTypeSelectFindItem(ref, listSize, listDataPtr, refcon, userUPP, closestItem)
-}
-
-// UCTypeSelectFlushSelectorData calls [raw.UCTypeSelectFlushSelectorData] (C function UCTypeSelectFlushSelectorData).
-func UCTypeSelectFlushSelectorData(ref unsafe.Pointer) int {
-	return raw.UCTypeSelectFlushSelectorData(ref)
-}
-
-// UCTypeSelectReleaseSelector calls [raw.UCTypeSelectReleaseSelector] (C function UCTypeSelectReleaseSelector).
-func UCTypeSelectReleaseSelector(ref unsafe.Pointer) int {
-	return raw.UCTypeSelectReleaseSelector(ref)
-}
-
-// UCTypeSelectWalkList calls [raw.UCTypeSelectWalkList] (C function UCTypeSelectWalkList).
-func UCTypeSelectWalkList(ref unsafe.Pointer, currSelect unsafe.Pointer, direction uint16, listSize uint, listDataPtr unsafe.Pointer, refcon unsafe.Pointer, userUPP unsafe.Pointer, closestItem *uint) int {
-	return raw.UCTypeSelectWalkList(ref, currSelect, direction, listSize, listDataPtr, refcon, userUPP, closestItem)
-}
-
-// UCTypeSelectWouldResetBuffer calls [raw.UCTypeSelectWouldResetBuffer] (C function UCTypeSelectWouldResetBuffer).
-func UCTypeSelectWouldResetBuffer(inRef unsafe.Pointer, inText unsafe.Pointer, inEventTime float64) uint8 {
-	return raw.UCTypeSelectWouldResetBuffer(inRef, inText, inEventTime)
-}
-
-// UInt64ToLongDouble calls [raw.UInt64ToLongDouble] (C function UInt64ToLongDouble).
+// UInt64ToLongDouble calls the CarbonCore framework function UInt64ToLongDouble.
 func UInt64ToLongDouble(value uint64) float64 {
-	return raw.UInt64ToLongDouble(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnUInt64ToLongDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnUInt64ToLongDouble, _lib, "UInt64ToLongDouble")
+	}
+	return _fnUInt64ToLongDouble(value)
 }
 
-// UInt64ToSInt64 calls [raw.UInt64ToSInt64] (C function UInt64ToSInt64).
+var _fnUInt64ToSInt64 func(uint64) int64
+
+// UInt64ToSInt64 calls the CarbonCore framework function UInt64ToSInt64.
 func UInt64ToSInt64(value uint64) int64 {
-	return raw.UInt64ToSInt64(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnUInt64ToSInt64 == nil {
+		ebipurego.RegisterLibFunc(&_fnUInt64ToSInt64, _lib, "UInt64ToSInt64")
+	}
+	return _fnUInt64ToSInt64(value)
 }
 
-// UInt64ToUnsignedWide calls [raw.UInt64ToUnsignedWide] (C function UInt64ToUnsignedWide).
-func UInt64ToUnsignedWide(u uint64) unsafe.Pointer {
-	return raw.UInt64ToUnsignedWide(u)
+var _fnUnique1ID func(int) int16
+
+// Unique1ID calls the CarbonCore framework function Unique1ID.
+func Unique1ID(theType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUnique1ID == nil {
+		ebipurego.RegisterLibFunc(&_fnUnique1ID, _lib, "Unique1ID")
+	}
+	return _fnUnique1ID(theType)
 }
 
-// UncaptureComponent calls [raw.UncaptureComponent] (C function UncaptureComponent).
-func UncaptureComponent(aComponent *raw.ComponentRecord) int16 {
-	return raw.UncaptureComponent(aComponent)
+var _fnUniqueID func(int) int16
+
+// UniqueID calls the CarbonCore framework function UniqueID.
+func UniqueID(theType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUniqueID == nil {
+		ebipurego.RegisterLibFunc(&_fnUniqueID, _lib, "UniqueID")
+	}
+	return _fnUniqueID(theType)
 }
 
-// UnflattenCollection calls [raw.UnflattenCollection] (C function UnflattenCollection).
-func UnflattenCollection(c unsafe.Pointer, flattenProc unsafe.Pointer, refCon unsafe.Pointer) int16 {
-	return raw.UnflattenCollection(c, flattenProc, refCon)
+var _fnUnsignedFixedMulDiv func(int, int, int) int
+
+// UnsignedFixedMulDiv calls the CarbonCore framework function UnsignedFixedMulDiv.
+func UnsignedFixedMulDiv(value int, multiplier int, divisor int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUnsignedFixedMulDiv == nil {
+		ebipurego.RegisterLibFunc(&_fnUnsignedFixedMulDiv, _lib, "UnsignedFixedMulDiv")
+	}
+	return _fnUnsignedFixedMulDiv(value, multiplier, divisor)
 }
 
-// UnflattenCollectionFromHdl calls [raw.UnflattenCollectionFromHdl] (C function UnflattenCollectionFromHdl).
-func UnflattenCollectionFromHdl(aCollection unsafe.Pointer, flattened *string) int16 {
-	return raw.UnflattenCollectionFromHdl(aCollection, flattened)
-}
+var _fnUpdateResFile func(int)
 
-// Unique1ID calls [raw.Unique1ID] (C function Unique1ID).
-func Unique1ID(theType uint) int16 {
-	return raw.Unique1ID(theType)
-}
-
-// UniqueID calls [raw.UniqueID] (C function UniqueID).
-func UniqueID(theType uint) int16 {
-	return raw.UniqueID(theType)
-}
-
-// UnregisterComponent calls [raw.UnregisterComponent] (C function UnregisterComponent).
-func UnregisterComponent(aComponent *raw.ComponentRecord) int16 {
-	return raw.UnregisterComponent(aComponent)
-}
-
-// UnsignedFixedMulDiv calls [raw.UnsignedFixedMulDiv] (C function UnsignedFixedMulDiv).
-func UnsignedFixedMulDiv(value uint, multiplier uint, divisor uint) uint {
-	return raw.UnsignedFixedMulDiv(value, multiplier, divisor)
-}
-
-// UnsignedWideToUInt64 calls [raw.UnsignedWideToUInt64] (C function UnsignedWideToUInt64).
-func UnsignedWideToUInt64(uw unsafe.Pointer) uint64 {
-	return raw.UnsignedWideToUInt64(uw)
-}
-
-// UpTime calls [raw.UpTime] (C function UpTime).
-func UpTime() unsafe.Pointer {
-	return raw.UpTime()
-}
-
-// UpdateResFile calls [raw.UpdateResFile] (C function UpdateResFile).
+// UpdateResFile calls the CarbonCore framework function UpdateResFile.
 func UpdateResFile(refNum int) {
-	raw.UpdateResFile(refNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnUpdateResFile == nil {
+		ebipurego.RegisterLibFunc(&_fnUpdateResFile, _lib, "UpdateResFile")
+	}
+	_fnUpdateResFile(refNum)
 }
 
-// UseResFile calls [raw.UseResFile] (C function UseResFile).
+var _fnUseResFile func(int)
+
+// UseResFile calls the CarbonCore framework function UseResFile.
 func UseResFile(refNum int) {
-	raw.UseResFile(refNum)
+	_loadOnce.Do(_loadLibrary)
+	if _fnUseResFile == nil {
+		ebipurego.RegisterLibFunc(&_fnUseResFile, _lib, "UseResFile")
+	}
+	_fnUseResFile(refNum)
 }
 
-// WideAdd calls [raw.WideAdd] (C function WideAdd).
-func WideAdd(target unsafe.Pointer, source unsafe.Pointer) unsafe.Pointer {
-	return raw.WideAdd(target, source)
-}
+var _fnX2Fix func(float64) int
 
-// WideBitShift calls [raw.WideBitShift] (C function WideBitShift).
-func WideBitShift(target unsafe.Pointer, shift int) unsafe.Pointer {
-	return raw.WideBitShift(target, shift)
-}
-
-// WideCompare calls [raw.WideCompare] (C function WideCompare).
-func WideCompare(target unsafe.Pointer, source unsafe.Pointer) int16 {
-	return raw.WideCompare(target, source)
-}
-
-// WideDivide calls [raw.WideDivide] (C function WideDivide).
-func WideDivide(dividend unsafe.Pointer, divisor int, remainder *int) int {
-	return raw.WideDivide(dividend, divisor, remainder)
-}
-
-// WideMultiply calls [raw.WideMultiply] (C function WideMultiply).
-func WideMultiply(multiplicand int, multiplier int, target unsafe.Pointer) unsafe.Pointer {
-	return raw.WideMultiply(multiplicand, multiplier, target)
-}
-
-// WideNegate calls [raw.WideNegate] (C function WideNegate).
-func WideNegate(target unsafe.Pointer) unsafe.Pointer {
-	return raw.WideNegate(target)
-}
-
-// WideShift calls [raw.WideShift] (C function WideShift).
-func WideShift(target unsafe.Pointer, shift int) unsafe.Pointer {
-	return raw.WideShift(target, shift)
-}
-
-// WideSquareRoot calls [raw.WideSquareRoot] (C function WideSquareRoot).
-func WideSquareRoot(source unsafe.Pointer) uint {
-	return raw.WideSquareRoot(source)
-}
-
-// WideSubtract calls [raw.WideSubtract] (C function WideSubtract).
-func WideSubtract(target unsafe.Pointer, source unsafe.Pointer) unsafe.Pointer {
-	return raw.WideSubtract(target, source)
-}
-
-// WideToSInt64 calls [raw.WideToSInt64] (C function WideToSInt64).
-func WideToSInt64(w unsafe.Pointer) int64 {
-	return raw.WideToSInt64(w)
-}
-
-// WideWideDivide calls [raw.WideWideDivide] (C function WideWideDivide).
-func WideWideDivide(dividend unsafe.Pointer, divisor int, remainder *int) unsafe.Pointer {
-	return raw.WideWideDivide(dividend, divisor, remainder)
-}
-
-// WritePartialResource calls [raw.WritePartialResource] (C function WritePartialResource).
-func WritePartialResource(theResource *string, offset int, buffer unsafe.Pointer, count int) {
-	raw.WritePartialResource(theResource, offset, buffer, count)
-}
-
-// WriteResource calls [raw.WriteResource] (C function WriteResource).
-func WriteResource(theResource *string) {
-	raw.WriteResource(theResource)
-}
-
-// X2Fix calls [raw.X2Fix] (C function X2Fix).
+// X2Fix calls the CarbonCore framework function X2Fix.
 func X2Fix(x float64) int {
-	return raw.X2Fix(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnX2Fix == nil {
+		ebipurego.RegisterLibFunc(&_fnX2Fix, _lib, "X2Fix")
+	}
+	return _fnX2Fix(x)
 }
 
-// X2Frac calls [raw.X2Frac] (C function X2Frac).
+var _fnX2Frac func(float64) int
+
+// X2Frac calls the CarbonCore framework function X2Frac.
 func X2Frac(x float64) int {
-	return raw.X2Frac(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnX2Frac == nil {
+		ebipurego.RegisterLibFunc(&_fnX2Frac, _lib, "X2Frac")
+	}
+	return _fnX2Frac(x)
 }
 
-// YieldToAnyThread calls [raw.YieldToAnyThread] (C function YieldToAnyThread).
+var _fnYieldToAnyThread func() int16
+
+// YieldToAnyThread calls the CarbonCore framework function YieldToAnyThread.
 func YieldToAnyThread() int16 {
-	return raw.YieldToAnyThread()
+	_loadOnce.Do(_loadLibrary)
+	if _fnYieldToAnyThread == nil {
+		ebipurego.RegisterLibFunc(&_fnYieldToAnyThread, _lib, "YieldToAnyThread")
+	}
+	return _fnYieldToAnyThread()
 }
 
-// YieldToThread calls [raw.YieldToThread] (C function YieldToThread).
-func YieldToThread(suggestedThread uint) int16 {
-	return raw.YieldToThread(suggestedThread)
+var _fnYieldToThread func(int) int16
+
+// YieldToThread calls the CarbonCore framework function YieldToThread.
+func YieldToThread(suggestedThread int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnYieldToThread == nil {
+		ebipurego.RegisterLibFunc(&_fnYieldToThread, _lib, "YieldToThread")
+	}
+	return _fnYieldToThread(suggestedThread)
 }
 
-// MPIsFullyInitialized calls [raw.MPIsFullyInitialized] (C function _MPIsFullyInitialized).
+var _fnMPIsFullyInitialized func() uint8
+
+// MPIsFullyInitialized calls the CarbonCore framework function _MPIsFullyInitialized.
 func MPIsFullyInitialized() uint8 {
-	return raw.MPIsFullyInitialized()
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPIsFullyInitialized == nil {
+		ebipurego.RegisterLibFunc(&_fnMPIsFullyInitialized, _lib, "_MPIsFullyInitialized")
+	}
+	return _fnMPIsFullyInitialized()
 }
 
-// MPLibraryIsCompatible calls [raw.MPLibraryIsCompatible] (C function _MPLibraryIsCompatible).
-func MPLibraryIsCompatible(versionCString string, major uint, minor uint, release uint, revision uint) uint8 {
-	return raw.MPLibraryIsCompatible(versionCString, major, minor, release, revision)
+var _fnMPLibraryIsCompatible func(string, int, int, int, int) uint8
+
+// MPLibraryIsCompatible calls the CarbonCore framework function _MPLibraryIsCompatible.
+func MPLibraryIsCompatible(versionCString string, major int, minor int, release int, revision int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPLibraryIsCompatible == nil {
+		ebipurego.RegisterLibFunc(&_fnMPLibraryIsCompatible, _lib, "_MPLibraryIsCompatible")
+	}
+	return _fnMPLibraryIsCompatible(versionCString, major, minor, release, revision)
 }
 
-// MPLibraryVersion calls [raw.MPLibraryVersion] (C function _MPLibraryVersion).
-func MPLibraryVersion(versionCString string, major *uint, minor *uint, release *uint, revision *uint) {
-	raw.MPLibraryVersion(versionCString, major, minor, release, revision)
-}
+var _fnAnnuity func(float64, float64) float64
 
-// Annuity calls [raw.Annuity] (C function annuity).
+// Annuity calls the CarbonCore framework function annuity.
 func Annuity(rate float64, periods float64) float64 {
-	return raw.Annuity(rate, periods)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAnnuity == nil {
+		ebipurego.RegisterLibFunc(&_fnAnnuity, _lib, "annuity")
+	}
+	return _fnAnnuity(rate, periods)
 }
 
-// Compound calls [raw.Compound] (C function compound).
+var _fnCompound func(float64, float64) float64
+
+// Compound calls the CarbonCore framework function compound.
 func Compound(rate float64, periods float64) float64 {
-	return raw.Compound(rate, periods)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCompound == nil {
+		ebipurego.RegisterLibFunc(&_fnCompound, _lib, "compound")
+	}
+	return _fnCompound(rate, periods)
 }
 
-// Dec2f calls [raw.Dec2f] (C function dec2f).
-func Dec2f(d *raw.Decimal) float32 {
-	return raw.Dec2f(d)
-}
+var _fnNumtostring func(int, string)
 
-// Dec2l calls [raw.Dec2l] (C function dec2l).
-func Dec2l(d *raw.Decimal) int {
-	return raw.Dec2l(d)
-}
-
-// Dec2num calls [raw.Dec2num] (C function dec2num).
-func Dec2num(d *raw.Decimal) float64 {
-	return raw.Dec2num(d)
-}
-
-// Dec2numl calls [raw.Dec2numl] (C function dec2numl).
-func Dec2numl(d *raw.Decimal) float64 {
-	return raw.Dec2numl(d)
-}
-
-// Dec2s calls [raw.Dec2s] (C function dec2s).
-func Dec2s(d *raw.Decimal) int16 {
-	return raw.Dec2s(d)
-}
-
-// Dec2str calls [raw.Dec2str] (C function dec2str).
-func Dec2str(f *raw.Decform, d *raw.Decimal, s string) {
-	raw.Dec2str(f, d, s)
-}
-
-// Dtox80 calls [raw.Dtox80] (C function dtox80).
-func Dtox80(x *float64, x80 unsafe.Pointer) {
-	raw.Dtox80(x, x80)
-}
-
-// Ldtox80 calls [raw.Ldtox80] (C function ldtox80).
-func Ldtox80(x unsafe.Pointer, x80 unsafe.Pointer) {
-	raw.Ldtox80(x, x80)
-}
-
-// Num2dec calls [raw.Num2dec] (C function num2dec).
-func Num2dec(f *raw.Decform, x float64, d *raw.Decimal) {
-	raw.Num2dec(f, x, d)
-}
-
-// Num2decl calls [raw.Num2decl] (C function num2decl).
-func Num2decl(f *raw.Decform, x float64, d *raw.Decimal) {
-	raw.Num2decl(f, x, d)
-}
-
-// Numtostring calls [raw.Numtostring] (C function numtostring).
+// Numtostring calls the CarbonCore framework function numtostring.
 func Numtostring(theNum int, theString string) {
-	raw.Numtostring(theNum, theString)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNumtostring == nil {
+		ebipurego.RegisterLibFunc(&_fnNumtostring, _lib, "numtostring")
+	}
+	_fnNumtostring(theNum, theString)
 }
 
-// Randomx calls [raw.Randomx] (C function randomx).
-func Randomx(x *float64) float64 {
-	return raw.Randomx(x)
-}
+var _fnRelation func(float64, float64) int16
 
-// Relation calls [raw.Relation] (C function relation).
+// Relation calls the CarbonCore framework function relation.
 func Relation(x float64, y float64) int16 {
-	return raw.Relation(x, y)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRelation == nil {
+		ebipurego.RegisterLibFunc(&_fnRelation, _lib, "relation")
+	}
+	return _fnRelation(x, y)
 }
 
-// Relationl calls [raw.Relationl] (C function relationl).
+var _fnRelationl func(float64, float64) int16
+
+// Relationl calls the CarbonCore framework function relationl.
 func Relationl(x float64, y float64) int16 {
-	return raw.Relationl(x, y)
-}
-
-// Str2dec calls [raw.Str2dec] (C function str2dec).
-func Str2dec(s string, ix *int16, d *raw.Decimal, vp *int16) {
-	raw.Str2dec(s, ix, d, vp)
-}
-
-// X80tod calls [raw.X80tod] (C function x80tod).
-func X80tod(x80 unsafe.Pointer) float64 {
-	return raw.X80tod(x80)
-}
-
-// X80told calls [raw.X80told] (C function x80told).
-func X80told(x80 unsafe.Pointer, x unsafe.Pointer) {
-	raw.X80told(x80, x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRelationl == nil {
+		ebipurego.RegisterLibFunc(&_fnRelationl, _lib, "relationl")
+	}
+	return _fnRelationl(x, y)
 }

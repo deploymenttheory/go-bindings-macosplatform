@@ -6,223 +6,151 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object you use to create and manage a network relay configuration.
+// NERelayManager is an idiomatic wrapper over the Objective-C class NERelayManager.
 //
-// NERelayManager wraps [raw.NERelayManager] with a fluent Go API.
+// An object you use to create and manage a network relay configuration.
 type NERelayManager struct {
-	inner *raw.NERelayManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NERelayManager].
-func (x *NERelayManager) Unwrap() *raw.NERelayManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NERelayManager) ID() objc.ID { return x.inner.Ptr() }
-
-// NERelayManagerFromID adopts an existing object pointer as a NERelayManager (nil for 0).
+// NERelayManagerFromID adopts an existing Objective-C object as a NERelayManager
+// (nil for 0), retaining it and registering a release finalizer.
 func NERelayManagerFromID(id objc.ID) *NERelayManager {
 	if id == 0 {
 		return nil
 	}
-	return &NERelayManager{inner: raw.NERelayManagerFromID(id)}
+	x := &NERelayManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNERelayManager creates a new [NERelayManager].
+// nERelayManagerAdopt wraps an Objective-C object that this code just created as a
+// NERelayManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nERelayManagerAdopt(id objc.ID) *NERelayManager {
+	if id == 0 {
+		return nil
+	}
+	x := &NERelayManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NERelayManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NERelayManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NERelayManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NERelayManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNERelayManager creates a new NERelayManager.
 func NewNERelayManager() *NERelayManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NERelayManager")), objc.RegisterName("new"))
-	return &NERelayManager{inner: raw.NERelayManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NERelayManager")), objc.RegisterName("new"))
+	return nERelayManagerAdopt(_id)
 }
 
-// A string that contains the display name of the relay configuration.
-//
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+// WithLocalizedDescription a string that contains the display name of the relay configuration.
 func (x *NERelayManager) WithLocalizedDescription(localizedDescription string) *NERelayManager {
-	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// A Boolean used to toggle the enabled state of the relay configuration.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean used to toggle the enabled state of the relay configuration.
 func (x *NERelayManager) WithEnabled(enabled bool) *NERelayManager {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// @property uiToggleEnabled @discussion Determines if the user will have the ability to enable and disable the relay
-//
-// WithUIToggleEnabled sets the uIToggleEnabled property and returns the receiver for chaining.
+// WithUIToggleEnabled determines if the user will have the ability to enable and disable the relay
 func (x *NERelayManager) WithUIToggleEnabled(uIToggleEnabled bool) *NERelayManager {
-	x.inner.SetUIToggleEnabled(uIToggleEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUIToggleEnabled:"), uIToggleEnabled)
 	return x
 }
 
-// @property allowDNSFailover @discussion Determines if DNS queries that fail over relay can fallback to default DNS
-//
-// WithAllowDNSFailover sets the allowDNSFailover property and returns the receiver for chaining.
+// WithAllowDNSFailover determines if DNS queries that fail over relay can fallback to default DNS
 func (x *NERelayManager) WithAllowDNSFailover(allowDNSFailover bool) *NERelayManager {
-	x.inner.SetAllowDNSFailover(allowDNSFailover)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDNSFailover:"), allowDNSFailover)
 	return x
 }
 
-// An array of one or two relay server configurations. If multiple relays are configured, application traffic routes through both of them in the order they appear in the array.
-//
-// WithRelays sets the collection, converting the Go slice to an NSArray.
-func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRelays(foundation.NSArrayFromID[*raw.NERelay](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NERelay](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRelays(_arr)
+// WithRelays an array of one or two relay server configurations. If multiple relays are configured, application traffic routes through both of them in the order they appear in the array.
+func (x *NERelayManager) WithRelays(items ...*NERelay) *NERelayManager {
+	_arr := purego.SliceToNSArray(items, func(_v *NERelay) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelays:"), _arr)
 	return x
 }
 
-// A list of domain strings used to determine which connections will use the relay configuration contained in this object.
-//
-// WithMatchDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NERelayManager) WithMatchDomains(items ...*foundation.NSString) *NERelayManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMatchDomains(_arr)
+// WithMatchDomains a list of domain strings used to determine which connections will use the relay configuration contained in this object.
+func (x *NERelayManager) WithMatchDomains(items ...obj.Object) *NERelayManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), _arr)
 	return x
 }
 
-// @property matchFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
-//
-// WithMatchFQDNs sets the collection, converting the Go slice to an NSArray.
-func (x *NERelayManager) WithMatchFQDNs(items ...*foundation.NSString) *NERelayManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMatchFQDNs(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMatchFQDNs(_arr)
+// WithMatchFQDNs an array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
+func (x *NERelayManager) WithMatchFQDNs(items ...obj.Object) *NERelayManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchFQDNs:"), _arr)
 	return x
 }
 
-// A list of domain strings used to determine which connections won’t use the relay configuration contained in this object.
-//
-// WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NERelayManager) WithExcludedDomains(items ...*foundation.NSString) *NERelayManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExcludedDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExcludedDomains(_arr)
+// WithExcludedDomains a list of domain strings used to determine which connections won’t use the relay configuration contained in this object.
+func (x *NERelayManager) WithExcludedDomains(items ...obj.Object) *NERelayManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), _arr)
 	return x
 }
 
-// @property excludedFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
-//
-// WithExcludedFQDNs sets the collection, converting the Go slice to an NSArray.
-func (x *NERelayManager) WithExcludedFQDNs(items ...*foundation.NSString) *NERelayManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExcludedFQDNs(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExcludedFQDNs(_arr)
+// WithExcludedFQDNs an array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
+func (x *NERelayManager) WithExcludedFQDNs(items ...obj.Object) *NERelayManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFQDNs:"), _arr)
 	return x
 }
 
-// An array of rules you use to determine which networks the relay uses.
-//
-// WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
+// WithOnDemandRules an array of rules you use to determine which networks the relay uses.
 func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NERelayManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetOnDemandRules(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// Load your relay configuration from the system networking preferences.
+// LoadFromPreferences load your relay configuration from the system networking preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.LoadFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -231,18 +159,17 @@ func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Remove your relay configuration from the system networking preferences.
+// RemoveFromPreferences remove your relay configuration from the system networking preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.RemoveFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -251,18 +178,17 @@ func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// Save your relay configuration to the system networking preferences.
+// SaveToPreferences save your relay configuration to the system networking preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SaveToPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveToPreferencesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -271,217 +197,172 @@ func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
-// @method getLastClientErrors @discussion This function will get errors that the client detected while using this relay configuration within the specified time period.  Errors will be from the NERelayClientErrorDomain and the NERelayManagerClientErrorNone value will be set for successful connections. @param seconds A NSTimeInterval that specifies how many seconds to report errors for.  The maximum supported value is 24 hours and any larger values will be automatically reduced to 24 hours. @param completionHandler A block that will be called when once the errors have been collected. The NSArray will contain a list of NERelayManagerClientError values detected within the last number of seconds as specified by the "seconds" parameter.  The values will be ordered from the error most recently detected to the oldest.  The error value of NERelayManagerClientErrorNone indicates the last successful use of the relay without error.  The NSArray will be empty if there are no values detected within the specified time period or nil if there was a problem in retrieving the errors.
+// GetLastClientErrors this function will get errors that the client detected while using this relay configuration within the specified time period.  Errors will be from the NERelayClientErrorDomain and the NERelayManagerClientErrorNone value will be set for successful connections.
 //
 // GetLastClientErrors blocks until the operation completes or ctx is cancelled.
-func (x *NERelayManager) GetLastClientErrors(ctx context.Context, seconds float64) (*foundation.NSArray[objc.ID], error) {
+func (x *NERelayManager) GetLastClientErrors(ctx context.Context, seconds float64) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetLastClientErrorsCompletionHandler(seconds, func(_p0 *foundation.NSArray[objc.ID]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastClientErrors:completionHandler:"), seconds, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// @property localizedDescription @discussion A string containing a description of the relay.
-//
-// LocalizedDescription calls the underlying LocalizedDescription.
+// LocalizedDescription a string containing a description of the relay.
 func (x *NERelayManager) LocalizedDescription() string {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+// SetLocalizedDescription wraps the corresponding Objective-C method.
 func (x *NERelayManager) SetLocalizedDescription(localizedDescription string) {
-	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
 
-// @property enabled @discussion Toggles the enabled status of the relay.
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled toggles the enabled status of the relay.
 func (x *NERelayManager) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *NERelayManager) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// @property uiToggleEnabled @discussion Determines if the user will have the ability to enable and disable the relay
-//
-// IsUIToggleEnabled calls the underlying IsUIToggleEnabled.
+// IsUIToggleEnabled determines if the user will have the ability to enable and disable the relay
 func (x *NERelayManager) IsUIToggleEnabled() bool {
-	return x.inner.IsUIToggleEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUIToggleEnabled"))
+	return _r
 }
 
-// SetUIToggleEnabled calls the underlying SetUIToggleEnabled.
+// SetUIToggleEnabled wraps the corresponding Objective-C method.
 func (x *NERelayManager) SetUIToggleEnabled(uIToggleEnabled bool) {
-	x.inner.SetUIToggleEnabled(uIToggleEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUIToggleEnabled:"), uIToggleEnabled)
 }
 
-// @property allowDNSFailover @discussion Determines if DNS queries that fail over relay can fallback to default DNS
-//
-// IsDNSFailoverAllowed calls the underlying IsDNSFailoverAllowed.
+// IsDNSFailoverAllowed determines if DNS queries that fail over relay can fallback to default DNS
 func (x *NERelayManager) IsDNSFailoverAllowed() bool {
-	return x.inner.IsDNSFailoverAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDNSFailoverAllowed"))
+	return _r
 }
 
-// SetAllowDNSFailover calls the underlying SetAllowDNSFailover.
+// SetAllowDNSFailover wraps the corresponding Objective-C method.
 func (x *NERelayManager) SetAllowDNSFailover(allowDNSFailover bool) {
-	x.inner.SetAllowDNSFailover(allowDNSFailover)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDNSFailover:"), allowDNSFailover)
 }
 
-// @property relays @discussion An array of relay configurations describing one or more relay hops.
+// Relays an array of relay configurations describing one or more relay hops.
 //
 // Relays returns the collection as a Go slice.
 func (x *NERelayManager) Relays() []*NERelay {
-	arr := x.inner.Relays()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NERelay {
-		return &NERelay{inner: raw.NERelayFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relays"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NERelay { return NERelayFromID(_id) })
 }
 
-// SetRelays calls the underlying SetRelays.
-func (x *NERelayManager) SetRelays(relays *foundation.NSArray[*raw.NERelay]) {
-	x.inner.SetRelays(relays)
+// SetRelays wraps the corresponding Objective-C method.
+func (x *NERelayManager) SetRelays(relays []*NERelay) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelays:"), purego.SliceToNSArray(relays, func(_v *NERelay) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property matchDomains @discussion An array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
+// MatchDomains an array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
 //
 // MatchDomains returns the collection as a Go slice.
 func (x *NERelayManager) MatchDomains() []string {
-	arr := x.inner.MatchDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetMatchDomains calls the underlying SetMatchDomains.
-func (x *NERelayManager) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetMatchDomains(matchDomains)
+// SetMatchDomains wraps the corresponding Objective-C method.
+func (x *NERelayManager) SetMatchDomains(matchDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), purego.SliceToNSArray(matchDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property matchFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
+// MatchFQDNs an array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
 //
 // MatchFQDNs returns the collection as a Go slice.
 func (x *NERelayManager) MatchFQDNs() []string {
-	arr := x.inner.MatchFQDNs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchFQDNs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetMatchFQDNs calls the underlying SetMatchFQDNs.
-func (x *NERelayManager) SetMatchFQDNs(matchFQDNs *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetMatchFQDNs(matchFQDNs)
+// SetMatchFQDNs wraps the corresponding Objective-C method.
+func (x *NERelayManager) SetMatchFQDNs(matchFQDNs []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchFQDNs:"), purego.SliceToNSArray(matchFQDNs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property excludedDomains @discussion An array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
+// ExcludedDomains an array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
 //
 // ExcludedDomains returns the collection as a Go slice.
 func (x *NERelayManager) ExcludedDomains() []string {
-	arr := x.inner.ExcludedDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetExcludedDomains calls the underlying SetExcludedDomains.
-func (x *NERelayManager) SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetExcludedDomains(excludedDomains)
+// SetExcludedDomains wraps the corresponding Objective-C method.
+func (x *NERelayManager) SetExcludedDomains(excludedDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), purego.SliceToNSArray(excludedDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property excludedFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
+// ExcludedFQDNs an array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
 //
 // ExcludedFQDNs returns the collection as a Go slice.
 func (x *NERelayManager) ExcludedFQDNs() []string {
-	arr := x.inner.ExcludedFQDNs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedFQDNs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetExcludedFQDNs calls the underlying SetExcludedFQDNs.
-func (x *NERelayManager) SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetExcludedFQDNs(excludedFQDNs)
+// SetExcludedFQDNs wraps the corresponding Objective-C method.
+func (x *NERelayManager) SetExcludedFQDNs(excludedFQDNs []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFQDNs:"), purego.SliceToNSArray(excludedFQDNs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.
+// OnDemandRules an array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.
 //
 // OnDemandRules returns the collection as a Go slice.
 func (x *NERelayManager) OnDemandRules() []*NEOnDemandRule {
-	arr := x.inner.OnDemandRules()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEOnDemandRule {
-		return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("onDemandRules"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEOnDemandRule { return NEOnDemandRuleFromID(_id) })
 }
 
-// SetOnDemandRules calls the underlying SetOnDemandRules.
-func (x *NERelayManager) SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider) {
-	_ptrs := make([]objc.ID, len(onDemandRules))
-	for _i, _v := range onDemandRules {
-		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NEOnDemandRule]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetOnDemandRules(_arg0)
+// SetOnDemandRules wraps the corresponding Objective-C method.
+func (x *NERelayManager) SetOnDemandRules(onDemandRules []*NEOnDemandRule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), purego.SliceToNSArray(onDemandRules, func(_v *NEOnDemandRule) objc.ID { return objref.IDOf(_v) }))
 }
 
 // NERelayManagerable is the interface implemented by [NERelayManager], for mocking and DI.
 type NERelayManagerable interface {
-	Unwrap() *raw.NERelayManager
+	obj.Object
 	WithLocalizedDescription(localizedDescription string) *NERelayManager
 	WithEnabled(enabled bool) *NERelayManager
 	WithUIToggleEnabled(uIToggleEnabled bool) *NERelayManager
 	WithAllowDNSFailover(allowDNSFailover bool) *NERelayManager
-	WithRelays(items ...*raw.NERelay) *NERelayManager
-	WithMatchDomains(items ...*foundation.NSString) *NERelayManager
-	WithMatchFQDNs(items ...*foundation.NSString) *NERelayManager
-	WithExcludedDomains(items ...*foundation.NSString) *NERelayManager
-	WithExcludedFQDNs(items ...*foundation.NSString) *NERelayManager
+	WithRelays(items ...*NERelay) *NERelayManager
+	WithMatchDomains(items ...obj.Object) *NERelayManager
+	WithMatchFQDNs(items ...obj.Object) *NERelayManager
+	WithExcludedDomains(items ...obj.Object) *NERelayManager
+	WithExcludedFQDNs(items ...obj.Object) *NERelayManager
 	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NERelayManager
 	LoadFromPreferences(ctx context.Context) error
 	RemoveFromPreferences(ctx context.Context) error
 	SaveToPreferences(ctx context.Context) error
-	GetLastClientErrors(ctx context.Context, seconds float64) (*foundation.NSArray[objc.ID], error)
+	GetLastClientErrors(ctx context.Context, seconds float64) (obj.Object, error)
 	LocalizedDescription() string
 	SetLocalizedDescription(localizedDescription string)
 	IsEnabled() bool
@@ -491,17 +372,17 @@ type NERelayManagerable interface {
 	IsDNSFailoverAllowed() bool
 	SetAllowDNSFailover(allowDNSFailover bool)
 	Relays() []*NERelay
-	SetRelays(relays *foundation.NSArray[*raw.NERelay])
+	SetRelays(relays []*NERelay)
 	MatchDomains() []string
-	SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString])
+	SetMatchDomains(matchDomains []string)
 	MatchFQDNs() []string
-	SetMatchFQDNs(matchFQDNs *foundation.NSArray[*foundation.NSString])
+	SetMatchFQDNs(matchFQDNs []string)
 	ExcludedDomains() []string
-	SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString])
+	SetExcludedDomains(excludedDomains []string)
 	ExcludedFQDNs() []string
-	SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString])
+	SetExcludedFQDNs(excludedFQDNs []string)
 	OnDemandRules() []*NEOnDemandRule
-	SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider)
+	SetOnDemandRules(onDemandRules []*NEOnDemandRule)
 }
 
 var _ NERelayManagerable = (*NERelayManager)(nil)

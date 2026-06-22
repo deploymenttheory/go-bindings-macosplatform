@@ -5,125 +5,114 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to change asset data in a Photos project extension.
+// ProjectChangeRequest is an idiomatic wrapper over the Objective-C class PHProjectChangeRequest.
 //
-// ProjectChangeRequest wraps [raw.PHProjectChangeRequest] with a fluent Go API.
+// It embeds [ChangeRequest], promoting that type's methods.
+//
+// A request to change asset data in a Photos project extension.
 type ProjectChangeRequest struct {
-	inner *raw.PHProjectChangeRequest
+	ChangeRequest
 }
 
-// Unwrap returns the underlying [raw.PHProjectChangeRequest].
-func (x *ProjectChangeRequest) Unwrap() *raw.PHProjectChangeRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectChangeRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectChangeRequestFromID adopts an existing object pointer as a ProjectChangeRequest (nil for 0).
+// ProjectChangeRequestFromID adopts an existing Objective-C object as a ProjectChangeRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectChangeRequestFromID(id objc.ID) *ProjectChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectChangeRequest{inner: raw.PHProjectChangeRequestFromID(id)}
+	x := &ProjectChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a change request around the specified project.
-//
-// NewProjectChangeRequestWithProject creates a new [ProjectChangeRequest].
-func NewProjectChangeRequestWithProject(project *raw.PHProject) *ProjectChangeRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectChangeRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProject:"), project.Ptr())
-	return &ProjectChangeRequest{inner: raw.PHProjectChangeRequestFromID(_id)}
+// projectChangeRequestAdopt wraps an Objective-C object that this code just created as a
+// ProjectChangeRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectChangeRequestAdopt(id objc.ID) *ProjectChangeRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectChangeRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The title of the change request.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// NewProjectChangeRequestWithProject creates a change request around the specified project.
+func NewProjectChangeRequestWithProject(project *Project) *ProjectChangeRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHProjectChangeRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProject:"), objref.IDOf(project))
+	return projectChangeRequestAdopt(_id)
+}
+
+// WithTitle the title of the change request.
 func (x *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Compressed project-specific data to use in the change request.
-//
-// WithProjectExtensionData sets the projectExtensionData property and returns the receiver for chaining.
-func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData *foundation.NSData) *ProjectChangeRequest {
-	x.inner.SetProjectExtensionData(projectExtensionData)
+// WithProjectExtensionData compressed project-specific data to use in the change request.
+func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
 	return x
 }
 
-// Sets the key asset representing the project.
-//
-// SetKeyAsset calls the underlying SetKeyAsset.
-func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *raw.PHAsset) {
-	x.inner.SetKeyAsset(keyAsset)
+// SetKeyAsset sets the key asset representing the project.
+func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *Asset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyAsset:"), objref.IDOf(keyAsset))
 }
 
-// Updates the project preview in Photos.
-//
-// SetProjectPreviewImage calls the underlying SetProjectPreviewImage.
-func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage *appkit.NSImage) {
-	x.inner.SetProjectPreviewImage(previewImage)
+// SetProjectPreviewImage updates the project preview in Photos.
+func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectPreviewImage:"), objref.IDOf(previewImage))
 }
 
-// Removes the specified assets from the project.
-//
-// RemoveAssets calls the underlying RemoveAssets.
-func (x *ProjectChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
-	x.inner.RemoveAssets(assets)
-}
-
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *ProjectChangeRequest) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ProjectChangeRequest) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
-//
-// ProjectExtensionData calls the underlying ProjectExtensionData.
-func (x *ProjectChangeRequest) ProjectExtensionData() *foundation.NSData {
-	return x.inner.ProjectExtensionData()
+// ProjectExtensionData the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+func (x *ProjectChangeRequest) ProjectExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectExtensionData"))
+	return obj.Wrap(_r)
 }
 
-// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
-//
-// SetProjectExtensionData calls the underlying SetProjectExtensionData.
-func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData *foundation.NSData) {
-	x.inner.SetProjectExtensionData(projectExtensionData)
-}
-
-func (x *ProjectChangeRequest) asChangeRequest() *raw.PHChangeRequest {
-	return &x.inner.PHChangeRequest
+// SetProjectExtensionData the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
 }
 
 // ProjectChangeRequestable is the interface implemented by [ProjectChangeRequest], for mocking and DI.
 type ProjectChangeRequestable interface {
-	Unwrap() *raw.PHProjectChangeRequest
+	obj.Object
 	WithTitle(title string) *ProjectChangeRequest
-	WithProjectExtensionData(projectExtensionData *foundation.NSData) *ProjectChangeRequest
-	SetKeyAsset(keyAsset *raw.PHAsset)
-	SetProjectPreviewImage(previewImage *appkit.NSImage)
-	RemoveAssets(assets foundation.NSFastEnumeration)
+	WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest
+	SetKeyAsset(keyAsset *Asset)
+	SetProjectPreviewImage(previewImage obj.Object)
 	Title() string
 	SetTitle(title string)
-	ProjectExtensionData() *foundation.NSData
-	SetProjectExtensionData(projectExtensionData *foundation.NSData)
+	ProjectExtensionData() obj.Object
+	SetProjectExtensionData(projectExtensionData obj.Object)
 }
 
 var _ ProjectChangeRequestable = (*ProjectChangeRequest)(nil)
+
+var _ ChangeRequestProvider = (*ProjectChangeRequest)(nil)

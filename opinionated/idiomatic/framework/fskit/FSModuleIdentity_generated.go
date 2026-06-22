@@ -5,68 +5,99 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An installed file system module.
+// ModuleIdentity is an idiomatic wrapper over the Objective-C class FSModuleIdentity.
 //
-// ModuleIdentity wraps [raw.FSModuleIdentity] with a fluent Go API.
+// An installed file system module.
 type ModuleIdentity struct {
-	inner *raw.FSModuleIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSModuleIdentity].
-func (x *ModuleIdentity) Unwrap() *raw.FSModuleIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModuleIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// ModuleIdentityFromID adopts an existing object pointer as a ModuleIdentity (nil for 0).
+// ModuleIdentityFromID adopts an existing Objective-C object as a ModuleIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func ModuleIdentityFromID(id objc.ID) *ModuleIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &ModuleIdentity{inner: raw.FSModuleIdentityFromID(id)}
+	x := &ModuleIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewModuleIdentity creates a new [ModuleIdentity].
+// moduleIdentityAdopt wraps an Objective-C object that this code just created as a
+// ModuleIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func moduleIdentityAdopt(id objc.ID) *ModuleIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &ModuleIdentity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModuleIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModuleIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModuleIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModuleIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModuleIdentity creates a new ModuleIdentity.
 func NewModuleIdentity() *ModuleIdentity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSModuleIdentity")), objc.RegisterName("new"))
-	return &ModuleIdentity{inner: raw.FSModuleIdentityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSModuleIdentity")), objc.RegisterName("new"))
+	return moduleIdentityAdopt(_id)
 }
 
-// The module's bundle identifier.
-//
-// BundleIdentifier calls the underlying BundleIdentifier.
+// BundleIdentifier the module's bundle identifier.
 func (x *ModuleIdentity) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The module's URL.
-//
-// Url calls the underlying Url.
-func (x *ModuleIdentity) Url() *foundation.NSURL {
-	return x.inner.Url()
+// Url the module's URL.
+func (x *ModuleIdentity) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *ModuleIdentity) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
 // ModuleIdentityable is the interface implemented by [ModuleIdentity], for mocking and DI.
 type ModuleIdentityable interface {
-	Unwrap() *raw.FSModuleIdentity
+	obj.Object
 	BundleIdentifier() string
-	Url() *foundation.NSURL
+	Url() obj.Object
 	IsEnabled() bool
 }
 

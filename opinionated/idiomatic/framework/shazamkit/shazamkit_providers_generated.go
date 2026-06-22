@@ -5,15 +5,17 @@
 package shazamkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CatalogProvider is implemented by Catalog and any idiomatic type wrapping a SHCatalog subclass.
+// CatalogProvider is accepted wherever a SHCatalog (or one of its subclasses) is expected.
 type CatalogProvider interface {
-	asCatalog() *raw.SHCatalog
+	objref.Object
+	isCatalog()
 }
 
-// MediaItemProvider is implemented by MediaItem and any idiomatic type wrapping a SHMediaItem subclass.
+// MediaItemProvider is accepted wherever a SHMediaItem (or one of its subclasses) is expected.
 type MediaItemProvider interface {
-	asMediaItem() *raw.SHMediaItem
+	objref.Object
+	isMediaItem()
 }

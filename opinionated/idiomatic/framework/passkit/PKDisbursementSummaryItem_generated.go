@@ -5,73 +5,79 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A summary item that represents a disbursement.
+// DisbursementSummaryItem is an idiomatic wrapper over the Objective-C class PKDisbursementSummaryItem.
 //
-// DisbursementSummaryItem wraps [raw.PKDisbursementSummaryItem] with a fluent Go API.
+// It embeds [PaymentSummaryItem], promoting that type's methods.
+//
+// A summary item that represents a disbursement.
 type DisbursementSummaryItem struct {
-	inner *raw.PKDisbursementSummaryItem
+	PaymentSummaryItem
 }
 
-// Unwrap returns the underlying [raw.PKDisbursementSummaryItem].
-func (x *DisbursementSummaryItem) Unwrap() *raw.PKDisbursementSummaryItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DisbursementSummaryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// DisbursementSummaryItemFromID adopts an existing object pointer as a DisbursementSummaryItem (nil for 0).
+// DisbursementSummaryItemFromID adopts an existing Objective-C object as a DisbursementSummaryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func DisbursementSummaryItemFromID(id objc.ID) *DisbursementSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	return &DisbursementSummaryItem{inner: raw.PKDisbursementSummaryItemFromID(id)}
+	x := &DisbursementSummaryItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDisbursementSummaryItem creates a new [DisbursementSummaryItem].
+// disbursementSummaryItemAdopt wraps an Objective-C object that this code just created as a
+// DisbursementSummaryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func disbursementSummaryItemAdopt(id objc.ID) *DisbursementSummaryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &DisbursementSummaryItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDisbursementSummaryItem creates a new DisbursementSummaryItem.
 func NewDisbursementSummaryItem() *DisbursementSummaryItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDisbursementSummaryItem")), objc.RegisterName("new"))
-	return &DisbursementSummaryItem{inner: raw.PKDisbursementSummaryItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKDisbursementSummaryItem")), objc.RegisterName("new"))
+	return disbursementSummaryItemAdopt(_id)
 }
 
-// A short, localized description of the item.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a short, localized description of the item.
 func (x *DisbursementSummaryItem) WithLabel(label string) *DisbursementSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The summary item’s amount.
-//
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *DisbursementSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *DisbursementSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+// WithAmount the summary item’s amount.
+func (x *DisbursementSummaryItem) WithAmount(amount obj.Object) *DisbursementSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// The summary item’s type that indicates whether the amount is final.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *DisbursementSummaryItem) WithType(type_ PKPaymentSummaryItemType) *DisbursementSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
+// WithType the summary item’s type that indicates whether the amount is final.
+func (x *DisbursementSummaryItem) WithType(type_ PaymentSummaryItemType) *DisbursementSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
-}
-
-func (x *DisbursementSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
-	return &x.inner.PKPaymentSummaryItem
 }
 
 // DisbursementSummaryItemable is the interface implemented by [DisbursementSummaryItem], for mocking and DI.
 type DisbursementSummaryItemable interface {
-	Unwrap() *raw.PKDisbursementSummaryItem
+	obj.Object
 	WithLabel(label string) *DisbursementSummaryItem
-	WithAmount(amount *foundation.NSDecimalNumber) *DisbursementSummaryItem
-	WithType(type_ PKPaymentSummaryItemType) *DisbursementSummaryItem
+	WithAmount(amount obj.Object) *DisbursementSummaryItem
+	WithType(type_ PaymentSummaryItemType) *DisbursementSummaryItem
 }
 
 var _ DisbursementSummaryItemable = (*DisbursementSummaryItem)(nil)
+
+var _ PaymentSummaryItemProvider = (*DisbursementSummaryItem)(nil)

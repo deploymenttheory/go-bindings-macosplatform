@@ -5,64 +5,94 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Allows you to easily specify color attachment remapping from logical to physical indices.
+// LogicalToPhysicalColorAttachmentMap is an idiomatic wrapper over the Objective-C class MTLLogicalToPhysicalColorAttachmentMap.
 //
-// LogicalToPhysicalColorAttachmentMap wraps [raw.MTLLogicalToPhysicalColorAttachmentMap] with a fluent Go API.
+// Allows you to easily specify color attachment remapping from logical to physical indices.
 type LogicalToPhysicalColorAttachmentMap struct {
-	inner *raw.MTLLogicalToPhysicalColorAttachmentMap
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLLogicalToPhysicalColorAttachmentMap].
-func (x *LogicalToPhysicalColorAttachmentMap) Unwrap() *raw.MTLLogicalToPhysicalColorAttachmentMap {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogicalToPhysicalColorAttachmentMap) ID() objc.ID { return x.inner.Ptr() }
-
-// LogicalToPhysicalColorAttachmentMapFromID adopts an existing object pointer as a LogicalToPhysicalColorAttachmentMap (nil for 0).
+// LogicalToPhysicalColorAttachmentMapFromID adopts an existing Objective-C object as a LogicalToPhysicalColorAttachmentMap
+// (nil for 0), retaining it and registering a release finalizer.
 func LogicalToPhysicalColorAttachmentMapFromID(id objc.ID) *LogicalToPhysicalColorAttachmentMap {
 	if id == 0 {
 		return nil
 	}
-	return &LogicalToPhysicalColorAttachmentMap{inner: raw.MTLLogicalToPhysicalColorAttachmentMapFromID(id)}
+	x := &LogicalToPhysicalColorAttachmentMap{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLogicalToPhysicalColorAttachmentMap creates a new [LogicalToPhysicalColorAttachmentMap].
+// logicalToPhysicalColorAttachmentMapAdopt wraps an Objective-C object that this code just created as a
+// LogicalToPhysicalColorAttachmentMap (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logicalToPhysicalColorAttachmentMapAdopt(id objc.ID) *LogicalToPhysicalColorAttachmentMap {
+	if id == 0 {
+		return nil
+	}
+	x := &LogicalToPhysicalColorAttachmentMap{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogicalToPhysicalColorAttachmentMap) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogicalToPhysicalColorAttachmentMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogicalToPhysicalColorAttachmentMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogicalToPhysicalColorAttachmentMap) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLogicalToPhysicalColorAttachmentMap creates a new LogicalToPhysicalColorAttachmentMap.
 func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentMap {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLLogicalToPhysicalColorAttachmentMap")), objc.RegisterName("new"))
-	return &LogicalToPhysicalColorAttachmentMap{inner: raw.MTLLogicalToPhysicalColorAttachmentMapFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLLogicalToPhysicalColorAttachmentMap")), objc.RegisterName("new"))
+	return logicalToPhysicalColorAttachmentMapAdopt(_id)
 }
 
-// Maps a physical color attachment index to a logical index.
-//
-// SetPhysicalIndexForLogicalIndex calls the underlying SetPhysicalIndexForLogicalIndex.
-func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint) {
-	x.inner.SetPhysicalIndexForLogicalIndex(physicalIndex, logicalIndex)
+// SetPhysicalIndexForLogicalIndex maps a physical color attachment index to a logical index.
+func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicalIndex:forLogicalIndex:"), physicalIndex, logicalIndex)
 }
 
-// Queries the physical color attachment index corresponding to a logical index.
-//
-// GetPhysicalIndexForLogicalIndex calls the underlying GetPhysicalIndexForLogicalIndex.
-func (x *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex uint) uint {
-	return x.inner.GetPhysicalIndexForLogicalIndex(logicalIndex)
+// GetPhysicalIndexForLogicalIndex queries the physical color attachment index corresponding to a logical index.
+func (x *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getPhysicalIndexForLogicalIndex:"), logicalIndex)
+	return _r
 }
 
-// Reset calls the underlying Reset.
+// Reset wraps the corresponding Objective-C method.
 func (x *LogicalToPhysicalColorAttachmentMap) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // LogicalToPhysicalColorAttachmentMapable is the interface implemented by [LogicalToPhysicalColorAttachmentMap], for mocking and DI.
 type LogicalToPhysicalColorAttachmentMapable interface {
-	Unwrap() *raw.MTLLogicalToPhysicalColorAttachmentMap
-	SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint)
-	GetPhysicalIndexForLogicalIndex(logicalIndex uint) uint
+	obj.Object
+	SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int)
+	GetPhysicalIndexForLogicalIndex(logicalIndex int) int
 	Reset()
 }
 

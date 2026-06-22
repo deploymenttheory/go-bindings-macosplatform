@@ -5,90 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information on a track in segment data.
+// AssetSegmentTrackReport is an idiomatic wrapper over the Objective-C class AVAssetSegmentTrackReport.
 //
-// AssetSegmentTrackReport wraps [raw.AVAssetSegmentTrackReport] with a fluent Go API.
+// An object that provides information on a track in segment data.
 type AssetSegmentTrackReport struct {
-	inner *raw.AVAssetSegmentTrackReport
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetSegmentTrackReport].
-func (x *AssetSegmentTrackReport) Unwrap() *raw.AVAssetSegmentTrackReport { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetSegmentTrackReport) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetSegmentTrackReportFromID adopts an existing object pointer as a AssetSegmentTrackReport (nil for 0).
+// AssetSegmentTrackReportFromID adopts an existing Objective-C object as a AssetSegmentTrackReport
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetSegmentTrackReportFromID(id objc.ID) *AssetSegmentTrackReport {
 	if id == 0 {
 		return nil
 	}
-	return &AssetSegmentTrackReport{inner: raw.AVAssetSegmentTrackReportFromID(id)}
+	x := &AssetSegmentTrackReport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetSegmentTrackReport creates a new [AssetSegmentTrackReport].
-func NewAssetSegmentTrackReport() *AssetSegmentTrackReport {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetSegmentTrackReport")), objc.RegisterName("new"))
-	return &AssetSegmentTrackReport{inner: raw.AVAssetSegmentTrackReportFromID(_id)}
-}
-
-// @property	trackID @abstract	Indicates the persistent unique identifier for this track.
-//
-// TrackID calls the underlying TrackID.
-func (x *AssetSegmentTrackReport) TrackID() int32 {
-	return x.inner.TrackID()
-}
-
-// @property	mediaType @abstract	Indicates the media type for this track. Media types are declared in AVMediaFormat.h.
-//
-// MediaType calls the underlying MediaType.
-func (x *AssetSegmentTrackReport) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @property	earliestPresentationTimeStamp @abstract	Indicates the earliest presentation timestamp (PTS) for this track. The value is kCMTimeInvalid if there is no information available.
-//
-// EarliestPresentationTimeStamp calls the underlying EarliestPresentationTimeStamp.
-func (x *AssetSegmentTrackReport) EarliestPresentationTimeStamp() coremedia.CMTime {
-	return x.inner.EarliestPresentationTimeStamp()
-}
-
-// @property	duration @abstract	Indicates the duration for this track. The value is kCMTimeInvalid if there is no information available.
-//
-// Duration calls the underlying Duration.
-func (x *AssetSegmentTrackReport) Duration() coremedia.CMTime {
-	return x.inner.Duration()
-}
-
-// @property	firstVideoSampleInformation @abstract	Provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
-//
-// FirstVideoSampleInformation calls the underlying FirstVideoSampleInformation.
-func (x *AssetSegmentTrackReport) FirstVideoSampleInformation() *AssetSegmentReportSampleInformation {
-	_r := x.inner.FirstVideoSampleInformation()
-	if _r == nil {
+// assetSegmentTrackReportAdopt wraps an Objective-C object that this code just created as a
+// AssetSegmentTrackReport (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetSegmentTrackReportAdopt(id objc.ID) *AssetSegmentTrackReport {
+	if id == 0 {
 		return nil
 	}
-	return &AssetSegmentReportSampleInformation{inner: _r}
+	x := &AssetSegmentTrackReport{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetSegmentTrackReport) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetSegmentTrackReport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetSegmentTrackReport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetSegmentTrackReport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetSegmentTrackReport creates a new AssetSegmentTrackReport.
+func NewAssetSegmentTrackReport() *AssetSegmentTrackReport {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentTrackReport")), objc.RegisterName("new"))
+	return assetSegmentTrackReportAdopt(_id)
+}
+
+// TrackID indicates the persistent unique identifier for this track.
+func (x *AssetSegmentTrackReport) TrackID() int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
+	return _r
+}
+
+// MediaType indicates the media type for this track. Media types are declared in AVMediaFormat.h.
+func (x *AssetSegmentTrackReport) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
+}
+
+// FirstVideoSampleInformation provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
+func (x *AssetSegmentTrackReport) FirstVideoSampleInformation() *AssetSegmentReportSampleInformation {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstVideoSampleInformation"))
+	return AssetSegmentReportSampleInformationFromID(_r)
 }
 
 // AssetSegmentTrackReportable is the interface implemented by [AssetSegmentTrackReport], for mocking and DI.
 type AssetSegmentTrackReportable interface {
-	Unwrap() *raw.AVAssetSegmentTrackReport
+	obj.Object
 	TrackID() int32
-	MediaType() string
-	EarliestPresentationTimeStamp() coremedia.CMTime
-	Duration() coremedia.CMTime
+	MediaType() obj.Object
 	FirstVideoSampleInformation() *AssetSegmentReportSampleInformation
 }
 

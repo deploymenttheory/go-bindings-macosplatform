@@ -5,41 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSmokeCOAlarmClusterMuteEndedEvent wraps [raw.MTRSmokeCOAlarmClusterMuteEndedEvent] with a fluent Go API.
+// MTRSmokeCOAlarmClusterMuteEndedEvent is an idiomatic wrapper over the Objective-C class MTRSmokeCOAlarmClusterMuteEndedEvent.
 type MTRSmokeCOAlarmClusterMuteEndedEvent struct {
-	inner *raw.MTRSmokeCOAlarmClusterMuteEndedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterMuteEndedEvent].
-func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterMuteEndedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSmokeCOAlarmClusterMuteEndedEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterMuteEndedEvent (nil for 0).
+// MTRSmokeCOAlarmClusterMuteEndedEventFromID adopts an existing Objective-C object as a MTRSmokeCOAlarmClusterMuteEndedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSmokeCOAlarmClusterMuteEndedEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterMuteEndedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSmokeCOAlarmClusterMuteEndedEvent{inner: raw.MTRSmokeCOAlarmClusterMuteEndedEventFromID(id)}
+	x := &MTRSmokeCOAlarmClusterMuteEndedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRSmokeCOAlarmClusterMuteEndedEvent creates a new [MTRSmokeCOAlarmClusterMuteEndedEvent].
+// mTRSmokeCOAlarmClusterMuteEndedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSmokeCOAlarmClusterMuteEndedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSmokeCOAlarmClusterMuteEndedEventAdopt(id objc.ID) *MTRSmokeCOAlarmClusterMuteEndedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSmokeCOAlarmClusterMuteEndedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRSmokeCOAlarmClusterMuteEndedEvent creates a new MTRSmokeCOAlarmClusterMuteEndedEvent.
 func NewMTRSmokeCOAlarmClusterMuteEndedEvent() *MTRSmokeCOAlarmClusterMuteEndedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSmokeCOAlarmClusterMuteEndedEvent")), objc.RegisterName("new"))
-	return &MTRSmokeCOAlarmClusterMuteEndedEvent{inner: raw.MTRSmokeCOAlarmClusterMuteEndedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterMuteEndedEvent")), objc.RegisterName("new"))
+	return mTRSmokeCOAlarmClusterMuteEndedEventAdopt(_id)
 }
 
 // MTRSmokeCOAlarmClusterMuteEndedEventable is the interface implemented by [MTRSmokeCOAlarmClusterMuteEndedEvent], for mocking and DI.
 type MTRSmokeCOAlarmClusterMuteEndedEventable interface {
-	Unwrap() *raw.MTRSmokeCOAlarmClusterMuteEndedEvent
+	obj.Object
 }
 
 var _ MTRSmokeCOAlarmClusterMuteEndedEventable = (*MTRSmokeCOAlarmClusterMuteEndedEvent)(nil)

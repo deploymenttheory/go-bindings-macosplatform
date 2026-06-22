@@ -4,24 +4,10 @@
 
 package directoryservice
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/directoryservice"
-)
-
-// TAccessControlEntry is a type alias for the raw TAccessControlEntry value-type struct.
-type TAccessControlEntry = raw.TAccessControlEntry
-
-// TAttributeEntry is a type alias for the raw TAttributeEntry value-type struct.
-type TAttributeEntry = raw.TAttributeEntry
-
-// TAttributeValueEntry is a type alias for the raw TAttributeValueEntry value-type struct.
-type TAttributeValueEntry = raw.TAttributeValueEntry
-
-// TDataBuffer is a type alias for the raw TDataBuffer value-type struct.
-type TDataBuffer = raw.TDataBuffer
-
-// TDataList is a type alias for the raw TDataList value-type struct.
-type TDataList = raw.TDataList
-
-// TRecordEntry is a type alias for the raw TRecordEntry value-type struct.
-type TRecordEntry = raw.TRecordEntry
+type TAccessControlEntry struct {
+	FGuestAccessFlags   uint
+	FDirMemberFlags     uint
+	FDirNodeMemberFlags uint
+	FOwnerFlags         uint
+	FAdministratorFlags uint
+}

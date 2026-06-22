@@ -5,61 +5,93 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The superclass for all basic randomization classes in GameplayKit.
+// RandomSource is an idiomatic wrapper over the Objective-C class GKRandomSource.
 //
-// RandomSource wraps [raw.GKRandomSource] with a fluent Go API.
+// RandomSource is an abstract base — you do not construct it directly. Construct one of [ARC4RandomSource], [LinearCongruentialRandomSource], [MersenneTwisterRandomSource] and pass it where a RandomSource is accepted.
+//
+// The superclass for all basic randomization classes in GameplayKit.
 type RandomSource struct {
-	inner *raw.GKRandomSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKRandomSource].
-func (x *RandomSource) Unwrap() *raw.GKRandomSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RandomSource) ID() objc.ID { return x.inner.Ptr() }
-
-// RandomSourceFromID adopts an existing object pointer as a RandomSource (nil for 0).
+// RandomSourceFromID adopts an existing Objective-C object as a RandomSource
+// (nil for 0), retaining it and registering a release finalizer.
 func RandomSourceFromID(id objc.ID) *RandomSource {
 	if id == 0 {
 		return nil
 	}
-	return &RandomSource{inner: raw.GKRandomSourceFromID(id)}
+	x := &RandomSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRandomSource creates a new [RandomSource].
-func NewRandomSource() *RandomSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRandomSource")), objc.RegisterName("new"))
-	return &RandomSource{inner: raw.GKRandomSourceFromID(_id)}
+// randomSourceAdopt wraps an Objective-C object that this code just created as a
+// RandomSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func randomSourceAdopt(id objc.ID) *RandomSource {
+	if id == 0 {
+		return nil
+	}
+	x := &RandomSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
-//
-// NewRandomSourceWithCoder creates a new [RandomSource].
-func NewRandomSourceWithCoder(aDecoder *foundation.NSCoder) *RandomSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRandomSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &RandomSource{inner: raw.GKRandomSourceFromID(_id)}
+// Description returns the object's -description text.
+func (x *RandomSource) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
-//
-// ArrayByShufflingObjectsInArray calls the underlying ArrayByShufflingObjectsInArray.
-func (x *RandomSource) ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	return x.inner.ArrayByShufflingObjectsInArray(array)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RandomSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *RandomSource) asRandomSource() *raw.GKRandomSource { return x.inner }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RandomSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RandomSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRandomSourceWithCoder deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
+func NewRandomSourceWithCoder(aDecoder obj.Object) *RandomSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRandomSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return randomSourceAdopt(_id)
+}
+
+// ArrayByShufflingObjectsInArray returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
+func (x *RandomSource) ArrayByShufflingObjectsInArray(array obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByShufflingObjectsInArray:"), objref.IDOf(array))
+	return obj.Wrap(_r)
+}
 
 // RandomSourceable is the interface implemented by [RandomSource], for mocking and DI.
 type RandomSourceable interface {
-	Unwrap() *raw.GKRandomSource
-	ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
+	obj.Object
+	ArrayByShufflingObjectsInArray(array obj.Object) obj.Object
 }
 
 var _ RandomSourceable = (*RandomSource)(nil)
+
+// isRandomSource marks RandomSource — and, by embedding promotion, its
+// subclasses — as a member of the RandomSource hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RandomSource) isRandomSource() {}
+
+var _ RandomSourceProvider = (*RandomSource)(nil)

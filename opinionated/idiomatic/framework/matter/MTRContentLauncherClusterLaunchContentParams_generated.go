@@ -5,173 +5,197 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterLaunchContentParams wraps [raw.MTRContentLauncherClusterLaunchContentParams] with a fluent Go API.
+// MTRContentLauncherClusterLaunchContentParams is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterLaunchContentParams.
 type MTRContentLauncherClusterLaunchContentParams struct {
-	inner *raw.MTRContentLauncherClusterLaunchContentParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterLaunchContentParams].
-func (x *MTRContentLauncherClusterLaunchContentParams) Unwrap() *raw.MTRContentLauncherClusterLaunchContentParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterLaunchContentParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterLaunchContentParamsFromID adopts an existing object pointer as a MTRContentLauncherClusterLaunchContentParams (nil for 0).
+// MTRContentLauncherClusterLaunchContentParamsFromID adopts an existing Objective-C object as a MTRContentLauncherClusterLaunchContentParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterLaunchContentParamsFromID(id objc.ID) *MTRContentLauncherClusterLaunchContentParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterLaunchContentParams{inner: raw.MTRContentLauncherClusterLaunchContentParamsFromID(id)}
-}
-
-// NewMTRContentLauncherClusterLaunchContentParams creates a new [MTRContentLauncherClusterLaunchContentParams].
-func NewMTRContentLauncherClusterLaunchContentParams() *MTRContentLauncherClusterLaunchContentParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterLaunchContentParams")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterLaunchContentParams{inner: raw.MTRContentLauncherClusterLaunchContentParamsFromID(_id)}
-}
-
-// WithSearch sets the search property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchContentParams) WithSearch(search MTRContentLauncherClusterContentSearchStructProvider) *MTRContentLauncherClusterLaunchContentParams {
-	x.inner.SetSearch(search.asMTRContentLauncherClusterContentSearchStruct())
+	x := &MTRContentLauncherClusterLaunchContentParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithAutoPlay sets the autoPlay property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchContentParams) WithAutoPlay(autoPlay *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams {
-	x.inner.SetAutoPlay(autoPlay)
-	return x
-}
-
-// WithData sets the data property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchContentParams) WithData(data string) *MTRContentLauncherClusterLaunchContentParams {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
-	return x
-}
-
-// WithUseCurrentContext sets the useCurrentContext property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchContentParams) WithUseCurrentContext(useCurrentContext *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams {
-	x.inner.SetUseCurrentContext(useCurrentContext)
-	return x
-}
-
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchContentParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
-	return x
-}
-
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchContentParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
-	return x
-}
-
-// Search calls the underlying Search.
-func (x *MTRContentLauncherClusterLaunchContentParams) Search() *MTRContentLauncherClusterContentSearchStruct {
-	_r := x.inner.Search()
-	if _r == nil {
+// mTRContentLauncherClusterLaunchContentParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterLaunchContentParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterLaunchContentParamsAdopt(id objc.ID) *MTRContentLauncherClusterLaunchContentParams {
+	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterContentSearchStruct{inner: _r}
+	x := &MTRContentLauncherClusterLaunchContentParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSearch calls the underlying SetSearch.
-func (x *MTRContentLauncherClusterLaunchContentParams) SetSearch(search *raw.MTRContentLauncherClusterContentSearchStruct) {
-	x.inner.SetSearch(search)
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterLaunchContentParams) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// AutoPlay calls the underlying AutoPlay.
-func (x *MTRContentLauncherClusterLaunchContentParams) AutoPlay() *foundation.NSNumber {
-	return x.inner.AutoPlay()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterLaunchContentParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetAutoPlay calls the underlying SetAutoPlay.
-func (x *MTRContentLauncherClusterLaunchContentParams) SetAutoPlay(autoPlay *foundation.NSNumber) {
-	x.inner.SetAutoPlay(autoPlay)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterLaunchContentParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Data calls the underlying Data.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterLaunchContentParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRContentLauncherClusterLaunchContentParams creates a new MTRContentLauncherClusterLaunchContentParams.
+func NewMTRContentLauncherClusterLaunchContentParams() *MTRContentLauncherClusterLaunchContentParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterLaunchContentParams")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterLaunchContentParamsAdopt(_id)
+}
+
+// WithSearch sets the property and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterLaunchContentParams) WithSearch(search MTRContentLauncherClusterContentSearchStructProvider) *MTRContentLauncherClusterLaunchContentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearch:"), objref.IDOf(search))
+	return x
+}
+
+// WithAutoPlay sets the property and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterLaunchContentParams) WithAutoPlay(autoPlay obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlay:"), objref.IDOf(autoPlay))
+	return x
+}
+
+// WithData sets the property and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterLaunchContentParams) WithData(data string) *MTRContentLauncherClusterLaunchContentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
+	return x
+}
+
+// WithUseCurrentContext sets the property and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterLaunchContentParams) WithUseCurrentContext(useCurrentContext obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseCurrentContext:"), objref.IDOf(useCurrentContext))
+	return x
+}
+
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRContentLauncherClusterLaunchContentParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
+}
+
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRContentLauncherClusterLaunchContentParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentLauncherClusterLaunchContentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return x
+}
+
+// Search wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) Search() *MTRContentLauncherClusterContentSearchStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("search"))
+	return MTRContentLauncherClusterContentSearchStructFromID(_r)
+}
+
+// SetSearch wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetSearch(search *MTRContentLauncherClusterContentSearchStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearch:"), objref.IDOf(search))
+}
+
+// AutoPlay wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) AutoPlay() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("autoPlay"))
+	return obj.Wrap(_r)
+}
+
+// SetAutoPlay wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetAutoPlay(autoPlay obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlay:"), objref.IDOf(autoPlay))
+}
+
+// Data wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchContentParams) Data() string {
-	_r := x.inner.Data()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetData calls the underlying SetData.
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterLaunchContentParams) SetData(data string) {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
-// UseCurrentContext calls the underlying UseCurrentContext.
-func (x *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() *foundation.NSNumber {
-	return x.inner.UseCurrentContext()
+// UseCurrentContext wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useCurrentContext"))
+	return obj.Wrap(_r)
 }
 
-// SetUseCurrentContext calls the underlying SetUseCurrentContext.
-func (x *MTRContentLauncherClusterLaunchContentParams) SetUseCurrentContext(useCurrentContext *foundation.NSNumber) {
-	x.inner.SetUseCurrentContext(useCurrentContext)
+// SetUseCurrentContext wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetUseCurrentContext(useCurrentContext obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseCurrentContext:"), objref.IDOf(useCurrentContext))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRContentLauncherClusterLaunchContentParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRContentLauncherClusterLaunchContentParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRContentLauncherClusterLaunchContentParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRContentLauncherClusterLaunchContentParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRContentLauncherClusterLaunchContentParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRContentLauncherClusterLaunchContentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRContentLauncherClusterLaunchContentParamsable is the interface implemented by [MTRContentLauncherClusterLaunchContentParams], for mocking and DI.
 type MTRContentLauncherClusterLaunchContentParamsable interface {
-	Unwrap() *raw.MTRContentLauncherClusterLaunchContentParams
+	obj.Object
 	WithSearch(search MTRContentLauncherClusterContentSearchStructProvider) *MTRContentLauncherClusterLaunchContentParams
-	WithAutoPlay(autoPlay *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
+	WithAutoPlay(autoPlay obj.Object) *MTRContentLauncherClusterLaunchContentParams
 	WithData(data string) *MTRContentLauncherClusterLaunchContentParams
-	WithUseCurrentContext(useCurrentContext *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
+	WithUseCurrentContext(useCurrentContext obj.Object) *MTRContentLauncherClusterLaunchContentParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchContentParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentLauncherClusterLaunchContentParams
 	Search() *MTRContentLauncherClusterContentSearchStruct
-	SetSearch(search *raw.MTRContentLauncherClusterContentSearchStruct)
-	AutoPlay() *foundation.NSNumber
-	SetAutoPlay(autoPlay *foundation.NSNumber)
+	SetSearch(search *MTRContentLauncherClusterContentSearchStruct)
+	AutoPlay() obj.Object
+	SetAutoPlay(autoPlay obj.Object)
 	Data() string
 	SetData(data string)
-	UseCurrentContext() *foundation.NSNumber
-	SetUseCurrentContext(useCurrentContext *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	UseCurrentContext() obj.Object
+	SetUseCurrentContext(useCurrentContext obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRContentLauncherClusterLaunchContentParamsable = (*MTRContentLauncherClusterLaunchContentParams)(nil)

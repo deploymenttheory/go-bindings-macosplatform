@@ -5,102 +5,128 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A generator for random numbers that fall within a specific range and that exhibit a specific distribution over multiple samplings.
+// RandomDistribution is an idiomatic wrapper over the Objective-C class GKRandomDistribution.
 //
-// RandomDistribution wraps [raw.GKRandomDistribution] with a fluent Go API.
+// RandomDistribution is an abstract base — you do not construct it directly. Construct one of [GaussianDistribution], [ShuffledDistribution] and pass it where a RandomDistribution is accepted.
+//
+// A generator for random numbers that fall within a specific range and that exhibit a specific distribution over multiple samplings.
 type RandomDistribution struct {
-	inner *raw.GKRandomDistribution
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKRandomDistribution].
-func (x *RandomDistribution) Unwrap() *raw.GKRandomDistribution { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RandomDistribution) ID() objc.ID { return x.inner.Ptr() }
-
-// RandomDistributionFromID adopts an existing object pointer as a RandomDistribution (nil for 0).
+// RandomDistributionFromID adopts an existing Objective-C object as a RandomDistribution
+// (nil for 0), retaining it and registering a release finalizer.
 func RandomDistributionFromID(id objc.ID) *RandomDistribution {
 	if id == 0 {
 		return nil
 	}
-	return &RandomDistribution{inner: raw.GKRandomDistributionFromID(id)}
+	x := &RandomDistribution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a uniform random distribution with the specified lower and upper bounds, using the specified source randomizer.
-//
-// NewRandomDistributionWithRandomSourceLowestValueHighestValue creates a new [RandomDistribution].
-func NewRandomDistributionWithRandomSourceLowestValueHighestValue(source raw.GKRandom, lowestInclusive int, highestInclusive int) *RandomDistribution {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRandomDistribution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRandomSource:lowestValue:highestValue:"), source, lowestInclusive, highestInclusive)
-	return &RandomDistribution{inner: raw.GKRandomDistributionFromID(_id)}
+// randomDistributionAdopt wraps an Objective-C object that this code just created as a
+// RandomDistribution (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func randomDistributionAdopt(id objc.ID) *RandomDistribution {
+	if id == 0 {
+		return nil
+	}
+	x := &RandomDistribution{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Generates and returns a new random integer within the bounds of the distribution.
-//
-// NextInt calls the underlying NextInt.
+// Description returns the object's -description text.
+func (x *RandomDistribution) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RandomDistribution) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RandomDistribution) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RandomDistribution) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NextInt generates and returns a new random integer within the bounds of the distribution.
 func (x *RandomDistribution) NextInt() int {
-	return x.inner.NextInt()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextInt"))
+	return _r
 }
 
-// Generates and returns a new random integer within the bounds of the distribution and less than the specified limit.
-//
-// NextIntWithUpperBound calls the underlying NextIntWithUpperBound.
-func (x *RandomDistribution) NextIntWithUpperBound(upperBound uint) uint {
-	return x.inner.NextIntWithUpperBound(upperBound)
+// NextIntWithUpperBound generates and returns a new random integer within the bounds of the distribution and less than the specified limit.
+func (x *RandomDistribution) NextIntWithUpperBound(upperBound int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextIntWithUpperBound:"), upperBound)
+	return _r
 }
 
-// Generates and returns a new random floating-point value within the characteristics of the distribution.
-//
-// NextUniform calls the underlying NextUniform.
+// NextUniform generates and returns a new random floating-point value within the characteristics of the distribution.
 func (x *RandomDistribution) NextUniform() float32 {
-	return x.inner.NextUniform()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("nextUniform"))
+	return _r
 }
 
-// Generates and returns a new random Boolean value within the characteristics of the distribution.
-//
-// NextBool calls the underlying NextBool.
+// NextBool generates and returns a new random Boolean value within the characteristics of the distribution.
 func (x *RandomDistribution) NextBool() bool {
-	return x.inner.NextBool()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("nextBool"))
+	return _r
 }
 
-// The lowest value the distribution will output.
-//
-// LowestValue calls the underlying LowestValue.
+// LowestValue the lowest value the distribution will output.
 func (x *RandomDistribution) LowestValue() int {
-	return x.inner.LowestValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lowestValue"))
+	return _r
 }
 
-// The highest value the distribution will output.
-//
-// HighestValue calls the underlying HighestValue.
+// HighestValue the highest value the distribution will output.
 func (x *RandomDistribution) HighestValue() int {
-	return x.inner.HighestValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("highestValue"))
+	return _r
 }
 
-// The number of unique possible outcomes, depending on the distribution type this is not always highest - lowest + 1.
-//
-// NumberOfPossibleOutcomes calls the underlying NumberOfPossibleOutcomes.
-func (x *RandomDistribution) NumberOfPossibleOutcomes() uint {
-	return x.inner.NumberOfPossibleOutcomes()
+// NumberOfPossibleOutcomes the number of unique possible outcomes, depending on the distribution type this is not always highest - lowest + 1.
+func (x *RandomDistribution) NumberOfPossibleOutcomes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfPossibleOutcomes"))
+	return _r
 }
-
-func (x *RandomDistribution) asRandomDistribution() *raw.GKRandomDistribution { return x.inner }
 
 // RandomDistributionable is the interface implemented by [RandomDistribution], for mocking and DI.
 type RandomDistributionable interface {
-	Unwrap() *raw.GKRandomDistribution
+	obj.Object
 	NextInt() int
-	NextIntWithUpperBound(upperBound uint) uint
+	NextIntWithUpperBound(upperBound int) int
 	NextUniform() float32
 	NextBool() bool
 	LowestValue() int
 	HighestValue() int
-	NumberOfPossibleOutcomes() uint
+	NumberOfPossibleOutcomes() int
 }
 
 var _ RandomDistributionable = (*RandomDistribution)(nil)
+
+// isRandomDistribution marks RandomDistribution — and, by embedding promotion, its
+// subclasses — as a member of the RandomDistribution hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RandomDistribution) isRandomDistribution() {}
+
+var _ RandomDistributionProvider = (*RandomDistribution)(nil)

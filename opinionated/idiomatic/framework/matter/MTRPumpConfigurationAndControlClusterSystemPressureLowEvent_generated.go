@@ -5,43 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterSystemPressureLowEvent wraps [raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterSystemPressureLowEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterSystemPressureLowEvent.
 type MTRPumpConfigurationAndControlClusterSystemPressureLowEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent].
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSystemPressureLowEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterSystemPressureLowEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterSystemPressureLowEvent{inner: raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterSystemPressureLowEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterSystemPressureLowEvent creates a new [MTRPumpConfigurationAndControlClusterSystemPressureLowEvent].
+// mTRPumpConfigurationAndControlClusterSystemPressureLowEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterSystemPressureLowEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterSystemPressureLowEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterSystemPressureLowEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRPumpConfigurationAndControlClusterSystemPressureLowEvent creates a new MTRPumpConfigurationAndControlClusterSystemPressureLowEvent.
 func NewMTRPumpConfigurationAndControlClusterSystemPressureLowEvent() *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterSystemPressureLowEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterSystemPressureLowEvent{inner: raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSystemPressureLowEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterSystemPressureLowEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterSystemPressureLowEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSystemPressureLowEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterSystemPressureLowEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterSystemPressureLowEventable = (*MTRPumpConfigurationAndControlClusterSystemPressureLowEvent)(nil)

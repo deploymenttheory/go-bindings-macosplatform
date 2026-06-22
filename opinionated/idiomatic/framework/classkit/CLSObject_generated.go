@@ -5,60 +5,93 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for objects managed by ClassKit.
+// Object is an idiomatic wrapper over the Objective-C class CLSObject.
 //
-// Object wraps [raw.CLSObject] with a fluent Go API.
+// Object is an abstract base — you do not construct it directly. Construct one of [ActivityItem], [Activity], [Context], [ProgressReportingCapability] and pass it where a Object is accepted.
+//
+// The abstract base class for objects managed by ClassKit.
 type Object struct {
-	inner *raw.CLSObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLSObject].
-func (x *Object) Unwrap() *raw.CLSObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Object) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
+// ObjectFromID adopts an existing Objective-C object as a Object
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	return &Object{inner: raw.CLSObjectFromID(id)}
+	x := &Object{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObject creates a new [Object].
-func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSObject")), objc.RegisterName("new"))
-	return &Object{inner: raw.CLSObjectFromID(_id)}
+// objectAdopt wraps an Objective-C object that this code just created as a
+// Object (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectAdopt(id objc.ID) *Object {
+	if id == 0 {
+		return nil
+	}
+	x := &Object{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract      The date this object was created.
-//
-// DateCreated calls the underlying DateCreated.
-func (x *Object) DateCreated() *foundation.NSDate {
-	return x.inner.DateCreated()
+// Description returns the object's -description text.
+func (x *Object) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract      The date this object was last modified.
-//
-// DateLastModified calls the underlying DateLastModified.
-func (x *Object) DateLastModified() *foundation.NSDate {
-	return x.inner.DateLastModified()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *Object) asObject() *raw.CLSObject { return x.inner }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Object) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// DateCreated the date this object was created.
+func (x *Object) DateCreated() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateCreated"))
+	return obj.Wrap(_r)
+}
+
+// DateLastModified the date this object was last modified.
+func (x *Object) DateLastModified() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateLastModified"))
+	return obj.Wrap(_r)
+}
 
 // Objectable is the interface implemented by [Object], for mocking and DI.
 type Objectable interface {
-	Unwrap() *raw.CLSObject
-	DateCreated() *foundation.NSDate
-	DateLastModified() *foundation.NSDate
+	obj.Object
+	DateCreated() obj.Object
+	DateLastModified() obj.Object
 }
 
 var _ Objectable = (*Object)(nil)
+
+// isObject marks Object — and, by embedding promotion, its
+// subclasses — as a member of the Object hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Object) isObject() {}
+
+var _ ObjectProvider = (*Object)(nil)

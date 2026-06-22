@@ -5,177 +5,212 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The relationship between two user interface objects that must be satisfied by the constraint-based layout system.
+// LayoutConstraint is an idiomatic wrapper over the Objective-C class NSLayoutConstraint.
 //
-// LayoutConstraint wraps [raw.NSLayoutConstraint] with a fluent Go API.
+// The relationship between two user interface objects that must be satisfied by the constraint-based layout system.
 type LayoutConstraint struct {
-	inner *raw.NSLayoutConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLayoutConstraint].
-func (x *LayoutConstraint) Unwrap() *raw.NSLayoutConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LayoutConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// LayoutConstraintFromID adopts an existing object pointer as a LayoutConstraint (nil for 0).
+// LayoutConstraintFromID adopts an existing Objective-C object as a LayoutConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func LayoutConstraintFromID(id objc.ID) *LayoutConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(id)}
+	x := &LayoutConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLayoutConstraint creates a new [LayoutConstraint].
+// layoutConstraintAdopt wraps an Objective-C object that this code just created as a
+// LayoutConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func layoutConstraintAdopt(id objc.ID) *LayoutConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &LayoutConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LayoutConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LayoutConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LayoutConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LayoutConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLayoutConstraint creates a new LayoutConstraint.
 func NewLayoutConstraint() *LayoutConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLayoutConstraint")), objc.RegisterName("new"))
-	return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLayoutConstraint")), objc.RegisterName("new"))
+	return layoutConstraintAdopt(_id)
 }
 
-// The priority of the constraint.
-//
-// WithPriority sets the priority property and returns the receiver for chaining.
+// WithPriority the priority of the constraint.
 func (x *LayoutConstraint) WithPriority(priority float32) *LayoutConstraint {
-	x.inner.SetPriority(priority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// A Boolean value that determines whether the constraint should be archived by its owning view.
-//
-// WithShouldBeArchived sets the shouldBeArchived property and returns the receiver for chaining.
+// WithShouldBeArchived a Boolean value that determines whether the constraint should be archived by its owning view.
 func (x *LayoutConstraint) WithShouldBeArchived(shouldBeArchived bool) *LayoutConstraint {
-	x.inner.SetShouldBeArchived(shouldBeArchived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBeArchived:"), shouldBeArchived)
 	return x
 }
 
-// The constant added to the multiplied second attribute participating in the constraint.
-//
-// WithConstant sets the constant property and returns the receiver for chaining.
+// WithConstant the constant added to the multiplied second attribute participating in the constraint.
 func (x *LayoutConstraint) WithConstant(constant float64) *LayoutConstraint {
-	x.inner.SetConstant(constant)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstant:"), constant)
 	return x
 }
 
-// The active state of the constraint.
-//
-// WithActive sets the active property and returns the receiver for chaining.
+// WithActive the active state of the constraint.
 func (x *LayoutConstraint) WithActive(active bool) *LayoutConstraint {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 	return x
 }
 
-// The name that identifies the constraint.
-//
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
+// WithIdentifier the name that identifies the constraint.
 func (x *LayoutConstraint) WithIdentifier(identifier string) *LayoutConstraint {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
-// Priority calls the underlying Priority.
+// Priority wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) Priority() float32 {
-	return x.inner.Priority()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("priority"))
+	return _r
 }
 
-// SetPriority calls the underlying SetPriority.
+// SetPriority wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) SetPriority(priority float32) {
-	x.inner.SetPriority(priority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 }
 
-// ShouldBeArchived calls the underlying ShouldBeArchived.
+// ShouldBeArchived wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) ShouldBeArchived() bool {
-	return x.inner.ShouldBeArchived()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeArchived"))
+	return _r
 }
 
-// SetShouldBeArchived calls the underlying SetShouldBeArchived.
+// SetShouldBeArchived wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) SetShouldBeArchived(shouldBeArchived bool) {
-	x.inner.SetShouldBeArchived(shouldBeArchived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBeArchived:"), shouldBeArchived)
 }
 
-// FirstItem calls the underlying FirstItem.
-func (x *LayoutConstraint) FirstItem() objc.ID {
-	return x.inner.FirstItem()
+// FirstItem wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) FirstItem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstItem"))
+	return obj.Wrap(_r)
 }
 
-// SecondItem calls the underlying SecondItem.
-func (x *LayoutConstraint) SecondItem() objc.ID {
-	return x.inner.SecondItem()
+// SecondItem wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) SecondItem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secondItem"))
+	return obj.Wrap(_r)
 }
 
-// FirstAttribute calls the underlying FirstAttribute.
-func (x *LayoutConstraint) FirstAttribute() NSLayoutAttribute {
-	return NSLayoutAttribute(x.inner.FirstAttribute())
+// FirstAttribute wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) FirstAttribute() LayoutAttribute {
+	_r := objc.Send[LayoutAttribute](objref.IDOf(x), objc.RegisterName("firstAttribute"))
+	return _r
 }
 
-// SecondAttribute calls the underlying SecondAttribute.
-func (x *LayoutConstraint) SecondAttribute() NSLayoutAttribute {
-	return NSLayoutAttribute(x.inner.SecondAttribute())
+// SecondAttribute wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) SecondAttribute() LayoutAttribute {
+	_r := objc.Send[LayoutAttribute](objref.IDOf(x), objc.RegisterName("secondAttribute"))
+	return _r
 }
 
-// FirstAnchor calls the underlying FirstAnchor.
-func (x *LayoutConstraint) FirstAnchor() *raw.NSLayoutAnchor[objc.ID] {
-	return x.inner.FirstAnchor()
+// FirstAnchor wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) FirstAnchor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstAnchor"))
+	return obj.Wrap(_r)
 }
 
-// SecondAnchor calls the underlying SecondAnchor.
-func (x *LayoutConstraint) SecondAnchor() *raw.NSLayoutAnchor[objc.ID] {
-	return x.inner.SecondAnchor()
+// SecondAnchor wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) SecondAnchor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secondAnchor"))
+	return obj.Wrap(_r)
 }
 
-// Relation calls the underlying Relation.
-func (x *LayoutConstraint) Relation() NSLayoutRelation {
-	return NSLayoutRelation(x.inner.Relation())
+// Relation wraps the corresponding Objective-C method.
+func (x *LayoutConstraint) Relation() LayoutRelation {
+	_r := objc.Send[LayoutRelation](objref.IDOf(x), objc.RegisterName("relation"))
+	return _r
 }
 
-// Multiplier calls the underlying Multiplier.
+// Multiplier wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) Multiplier() float64 {
-	return x.inner.Multiplier()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("multiplier"))
+	return _r
 }
 
-// Constant calls the underlying Constant.
+// Constant wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) Constant() float64 {
-	return x.inner.Constant()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("constant"))
+	return _r
 }
 
-// SetConstant calls the underlying SetConstant.
+// SetConstant wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) SetConstant(constant float64) {
-	x.inner.SetConstant(constant)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstant:"), constant)
 }
 
-// IsActive calls the underlying IsActive.
+// IsActive wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// SetActive calls the underlying SetActive.
+// SetActive wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) SetActive(active bool) {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
+// SetIdentifier wraps the corresponding Objective-C method.
 func (x *LayoutConstraint) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
 // LayoutConstraintable is the interface implemented by [LayoutConstraint], for mocking and DI.
 type LayoutConstraintable interface {
-	Unwrap() *raw.NSLayoutConstraint
+	obj.Object
 	WithPriority(priority float32) *LayoutConstraint
 	WithShouldBeArchived(shouldBeArchived bool) *LayoutConstraint
 	WithConstant(constant float64) *LayoutConstraint
@@ -185,13 +220,13 @@ type LayoutConstraintable interface {
 	SetPriority(priority float32)
 	ShouldBeArchived() bool
 	SetShouldBeArchived(shouldBeArchived bool)
-	FirstItem() objc.ID
-	SecondItem() objc.ID
-	FirstAttribute() NSLayoutAttribute
-	SecondAttribute() NSLayoutAttribute
-	FirstAnchor() *raw.NSLayoutAnchor[objc.ID]
-	SecondAnchor() *raw.NSLayoutAnchor[objc.ID]
-	Relation() NSLayoutRelation
+	FirstItem() obj.Object
+	SecondItem() obj.Object
+	FirstAttribute() LayoutAttribute
+	SecondAttribute() LayoutAttribute
+	FirstAnchor() obj.Object
+	SecondAnchor() obj.Object
+	Relation() LayoutRelation
 	Multiplier() float64
 	Constant() float64
 	SetConstant(constant float64)

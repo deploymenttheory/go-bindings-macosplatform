@@ -5,215 +5,179 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A light source that illuminates a 3D scene from an area with a specific shape.
+// AreaLight is an idiomatic wrapper over the Objective-C class MDLAreaLight.
 //
-// AreaLight wraps [raw.MDLAreaLight] with a fluent Go API.
+// It embeds [PhysicallyPlausibleLight], promoting that type's methods.
+//
+// A light source that illuminates a 3D scene from an area with a specific shape.
 type AreaLight struct {
-	inner *raw.MDLAreaLight
+	PhysicallyPlausibleLight
 }
 
-// Unwrap returns the underlying [raw.MDLAreaLight].
-func (x *AreaLight) Unwrap() *raw.MDLAreaLight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AreaLight) ID() objc.ID { return x.inner.Ptr() }
-
-// AreaLightFromID adopts an existing object pointer as a AreaLight (nil for 0).
+// AreaLightFromID adopts an existing Objective-C object as a AreaLight
+// (nil for 0), retaining it and registering a release finalizer.
 func AreaLightFromID(id objc.ID) *AreaLight {
 	if id == 0 {
 		return nil
 	}
-	return &AreaLight{inner: raw.MDLAreaLightFromID(id)}
+	x := &AreaLight{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAreaLight creates a new [AreaLight].
+// areaLightAdopt wraps an Objective-C object that this code just created as a
+// AreaLight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func areaLightAdopt(id objc.ID) *AreaLight {
+	if id == 0 {
+		return nil
+	}
+	x := &AreaLight{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAreaLight creates a new AreaLight.
 func NewAreaLight() *AreaLight {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAreaLight")), objc.RegisterName("new"))
-	return &AreaLight{inner: raw.MDLAreaLightFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAreaLight")), objc.RegisterName("new"))
+	return areaLightAdopt(_id)
 }
 
-// The radius, in units of local coordinate space, of the area from which light emanates.
-//
-// WithAreaRadius sets the areaRadius property and returns the receiver for chaining.
+// WithAreaRadius the radius, in units of local coordinate space, of the area from which light emanates.
 func (x *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
-	x.inner.SetAreaRadius(areaRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaRadius:"), areaRadius)
 	return x
 }
 
-// The aspect ratio of the light’s shape.
-//
-// WithAspect sets the aspect property and returns the receiver for chaining.
+// WithAspect the aspect ratio of the light’s shape.
 func (x *AreaLight) WithAspect(aspect float32) *AreaLight {
-	x.inner.SetAspect(aspect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspect:"), aspect)
 	return x
 }
 
-// The total visible intensity of the light source, in lumens.
-//
-// WithLumens sets the lumens property and returns the receiver for chaining.
+// WithColor the color of the light source.
+func (x *AreaLight) WithColor(color obj.Object) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return x
+}
+
+// WithLumens the total visible intensity of the light source, in lumens.
 func (x *AreaLight) WithLumens(lumens float32) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetLumens(lumens)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
 	return x
 }
 
-// The radial angle, in degrees, of the area fully illuminated by the light.
-//
-// WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
+// WithInnerConeAngle the radial angle, in degrees, of the area fully illuminated by the light.
 func (x *AreaLight) WithInnerConeAngle(innerConeAngle float32) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetInnerConeAngle(innerConeAngle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
 	return x
 }
 
-// The radial angle, in degrees, at which the illumination from a spotlight becomes zero.
-//
-// WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
+// WithOuterConeAngle the radial angle, in degrees, at which the illumination from a spotlight becomes zero.
 func (x *AreaLight) WithOuterConeAngle(outerConeAngle float32) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetOuterConeAngle(outerConeAngle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
 	return x
 }
 
-// The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
-//
-// WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
+// WithAttenuationStartDistance the distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
 func (x *AreaLight) WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationStartDistance(attenuationStartDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
 	return x
 }
 
-// The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
-//
-// WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
+// WithAttenuationEndDistance the distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
 func (x *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationEndDistance(attenuationEndDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
 	return x
 }
 
-// The type of the light.
-//
-// WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *AreaLight) WithLightType(lightType MDLLightType) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(raw.MDLLightType(lightType))
+// WithLightType the type of the light.
+func (x *AreaLight) WithLightType(lightType LightType) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 	return x
 }
 
-// The name of the Core Graphics color space to be used for interpreting the light’s color information.
-//
-// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
 func (x *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent the parent object that contains this object.
 func (x *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetInstance(instance.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *AreaLight) WithTransform(transform raw.MDLTransformComponent) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *AreaLight) WithChildren(children raw.MDLObjectContainerComponent) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetChildren(children)
-	return x
-}
-
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *AreaLight) WithHidden(hidden bool) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// AreaRadius calls the underlying AreaRadius.
+// AreaRadius wraps the corresponding Objective-C method.
 func (x *AreaLight) AreaRadius() float32 {
-	return x.inner.AreaRadius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("areaRadius"))
+	return _r
 }
 
-// SetAreaRadius calls the underlying SetAreaRadius.
+// SetAreaRadius wraps the corresponding Objective-C method.
 func (x *AreaLight) SetAreaRadius(areaRadius float32) {
-	x.inner.SetAreaRadius(areaRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaRadius:"), areaRadius)
 }
 
-// SuperEllipticPower calls the underlying SuperEllipticPower.
-func (x *AreaLight) SuperEllipticPower() unsafe.Pointer {
-	return x.inner.SuperEllipticPower()
-}
-
-// SetSuperEllipticPower calls the underlying SetSuperEllipticPower.
-func (x *AreaLight) SetSuperEllipticPower(superEllipticPower unsafe.Pointer) {
-	x.inner.SetSuperEllipticPower(superEllipticPower)
-}
-
-// Aspect calls the underlying Aspect.
+// Aspect wraps the corresponding Objective-C method.
 func (x *AreaLight) Aspect() float32 {
-	return x.inner.Aspect()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("aspect"))
+	return _r
 }
 
-// SetAspect calls the underlying SetAspect.
+// SetAspect wraps the corresponding Objective-C method.
 func (x *AreaLight) SetAspect(aspect float32) {
-	x.inner.SetAspect(aspect)
-}
-
-func (x *AreaLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight {
-	return &x.inner.MDLPhysicallyPlausibleLight
-}
-
-func (x *AreaLight) asLight() *raw.MDLLight { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight }
-
-func (x *AreaLight) asObject() *raw.MDLObject {
-	return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspect:"), aspect)
 }
 
 // AreaLightable is the interface implemented by [AreaLight], for mocking and DI.
 type AreaLightable interface {
-	Unwrap() *raw.MDLAreaLight
+	obj.Object
 	WithAreaRadius(areaRadius float32) *AreaLight
 	WithAspect(aspect float32) *AreaLight
+	WithColor(color obj.Object) *AreaLight
 	WithLumens(lumens float32) *AreaLight
 	WithInnerConeAngle(innerConeAngle float32) *AreaLight
 	WithOuterConeAngle(outerConeAngle float32) *AreaLight
 	WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight
 	WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight
-	WithLightType(lightType MDLLightType) *AreaLight
+	WithLightType(lightType LightType) *AreaLight
 	WithColorSpace(colorSpace string) *AreaLight
 	WithParent(parent ObjectProvider) *AreaLight
 	WithInstance(instance ObjectProvider) *AreaLight
-	WithTransform(transform raw.MDLTransformComponent) *AreaLight
-	WithChildren(children raw.MDLObjectContainerComponent) *AreaLight
 	WithHidden(hidden bool) *AreaLight
 	AreaRadius() float32
 	SetAreaRadius(areaRadius float32)
-	SuperEllipticPower() unsafe.Pointer
-	SetSuperEllipticPower(superEllipticPower unsafe.Pointer)
 	Aspect() float32
 	SetAspect(aspect float32)
 }
 
 var _ AreaLightable = (*AreaLight)(nil)
+
+var _ PhysicallyPlausibleLightProvider = (*AreaLight)(nil)
+
+var _ LightProvider = (*AreaLight)(nil)
+
+var _ ObjectProvider = (*AreaLight)(nil)

@@ -5,53 +5,87 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAsyncCallbackWorkQueue wraps [raw.MTRAsyncCallbackWorkQueue] with a fluent Go API.
+// MTRAsyncCallbackWorkQueue is an idiomatic wrapper over the Objective-C class MTRAsyncCallbackWorkQueue.
 type MTRAsyncCallbackWorkQueue struct {
-	inner *raw.MTRAsyncCallbackWorkQueue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAsyncCallbackWorkQueue].
-func (x *MTRAsyncCallbackWorkQueue) Unwrap() *raw.MTRAsyncCallbackWorkQueue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAsyncCallbackWorkQueue) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAsyncCallbackWorkQueueFromID adopts an existing object pointer as a MTRAsyncCallbackWorkQueue (nil for 0).
+// MTRAsyncCallbackWorkQueueFromID adopts an existing Objective-C object as a MTRAsyncCallbackWorkQueue
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAsyncCallbackWorkQueueFromID(id objc.ID) *MTRAsyncCallbackWorkQueue {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAsyncCallbackWorkQueue{inner: raw.MTRAsyncCallbackWorkQueueFromID(id)}
+	x := &MTRAsyncCallbackWorkQueue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAsyncCallbackWorkQueueWithContextQueue creates a new [MTRAsyncCallbackWorkQueue].
-func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ objc.ID, queue *foundation.NSObject) *MTRAsyncCallbackWorkQueue {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAsyncCallbackWorkQueue")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:queue:"), context_, queue.Ptr())
-	return &MTRAsyncCallbackWorkQueue{inner: raw.MTRAsyncCallbackWorkQueueFromID(_id)}
+// mTRAsyncCallbackWorkQueueAdopt wraps an Objective-C object that this code just created as a
+// MTRAsyncCallbackWorkQueue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAsyncCallbackWorkQueueAdopt(id objc.ID) *MTRAsyncCallbackWorkQueue {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAsyncCallbackWorkQueue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Invalidate calls the underlying Invalidate.
+// Description returns the object's -description text.
+func (x *MTRAsyncCallbackWorkQueue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAsyncCallbackWorkQueue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAsyncCallbackWorkQueue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAsyncCallbackWorkQueue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAsyncCallbackWorkQueueWithContextQueue creates a new MTRAsyncCallbackWorkQueue.
+func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ obj.Object, queue obj.Object) *MTRAsyncCallbackWorkQueue {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackWorkQueue")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:queue:"), objref.IDOf(context_), objref.IDOf(queue))
+	return mTRAsyncCallbackWorkQueueAdopt(_id)
+}
+
+// Invalidate wraps the corresponding Objective-C method.
 func (x *MTRAsyncCallbackWorkQueue) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// EnqueueWorkItem calls the underlying EnqueueWorkItem.
-func (x *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *raw.MTRAsyncCallbackQueueWorkItem) {
-	x.inner.EnqueueWorkItem(item)
+// EnqueueWorkItem wraps the corresponding Objective-C method.
+func (x *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueWorkItem:"), objref.IDOf(item))
 }
 
 // MTRAsyncCallbackWorkQueueable is the interface implemented by [MTRAsyncCallbackWorkQueue], for mocking and DI.
 type MTRAsyncCallbackWorkQueueable interface {
-	Unwrap() *raw.MTRAsyncCallbackWorkQueue
+	obj.Object
 	Invalidate()
-	EnqueueWorkItem(item *raw.MTRAsyncCallbackQueueWorkItem)
+	EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem)
 }
 
 var _ MTRAsyncCallbackWorkQueueable = (*MTRAsyncCallbackWorkQueue)(nil)

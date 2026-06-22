@@ -5,107 +5,72 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A physics behavior that connects two physics bodies and allows them to pivot around each other in any direction.
+// PhysicsBallSocketJoint is an idiomatic wrapper over the Objective-C class SCNPhysicsBallSocketJoint.
 //
-// PhysicsBallSocketJoint wraps [raw.SCNPhysicsBallSocketJoint] with a fluent Go API.
+// It embeds [PhysicsBehavior], promoting that type's methods.
+//
+// A physics behavior that connects two physics bodies and allows them to pivot around each other in any direction.
 type PhysicsBallSocketJoint struct {
-	inner *raw.SCNPhysicsBallSocketJoint
+	PhysicsBehavior
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsBallSocketJoint].
-func (x *PhysicsBallSocketJoint) Unwrap() *raw.SCNPhysicsBallSocketJoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsBallSocketJoint) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsBallSocketJointFromID adopts an existing object pointer as a PhysicsBallSocketJoint (nil for 0).
+// PhysicsBallSocketJointFromID adopts an existing Objective-C object as a PhysicsBallSocketJoint
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsBallSocketJointFromID(id objc.ID) *PhysicsBallSocketJoint {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsBallSocketJoint{inner: raw.SCNPhysicsBallSocketJointFromID(id)}
+	x := &PhysicsBallSocketJoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsBallSocketJoint creates a new [PhysicsBallSocketJoint].
+// physicsBallSocketJointAdopt wraps an Objective-C object that this code just created as a
+// PhysicsBallSocketJoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsBallSocketJointAdopt(id objc.ID) *PhysicsBallSocketJoint {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsBallSocketJoint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPhysicsBallSocketJoint creates a new PhysicsBallSocketJoint.
 func NewPhysicsBallSocketJoint() *PhysicsBallSocketJoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsBallSocketJoint")), objc.RegisterName("new"))
-	return &PhysicsBallSocketJoint{inner: raw.SCNPhysicsBallSocketJointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBallSocketJoint")), objc.RegisterName("new"))
+	return physicsBallSocketJointAdopt(_id)
 }
 
-// The point at which the joint connects, relative to the node containing the first body.
-//
-// WithAnchorA sets the anchorA property and returns the receiver for chaining.
-func (x *PhysicsBallSocketJoint) WithAnchorA(anchorA raw.SCNVector3) *PhysicsBallSocketJoint {
-	x.inner.SetAnchorA(anchorA)
-	return x
-}
-
-// The point at which the joint connects, relative to the node containing the second body.
-//
-// WithAnchorB sets the anchorB property and returns the receiver for chaining.
-func (x *PhysicsBallSocketJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsBallSocketJoint {
-	x.inner.SetAnchorB(anchorB)
-	return x
-}
-
-// BodyA calls the underlying BodyA.
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
-	_r := x.inner.BodyA()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+	return PhysicsBodyFromID(_r)
 }
 
-// AnchorA calls the underlying AnchorA.
-func (x *PhysicsBallSocketJoint) AnchorA() raw.SCNVector3 {
-	return x.inner.AnchorA()
-}
-
-// SetAnchorA calls the underlying SetAnchorA.
-func (x *PhysicsBallSocketJoint) SetAnchorA(anchorA raw.SCNVector3) {
-	x.inner.SetAnchorA(anchorA)
-}
-
-// BodyB calls the underlying BodyB.
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
-	_r := x.inner.BodyB()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
-}
-
-// AnchorB calls the underlying AnchorB.
-func (x *PhysicsBallSocketJoint) AnchorB() raw.SCNVector3 {
-	return x.inner.AnchorB()
-}
-
-// SetAnchorB calls the underlying SetAnchorB.
-func (x *PhysicsBallSocketJoint) SetAnchorB(anchorB raw.SCNVector3) {
-	x.inner.SetAnchorB(anchorB)
-}
-
-func (x *PhysicsBallSocketJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
-	return &x.inner.SCNPhysicsBehavior
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+	return PhysicsBodyFromID(_r)
 }
 
 // PhysicsBallSocketJointable is the interface implemented by [PhysicsBallSocketJoint], for mocking and DI.
 type PhysicsBallSocketJointable interface {
-	Unwrap() *raw.SCNPhysicsBallSocketJoint
-	WithAnchorA(anchorA raw.SCNVector3) *PhysicsBallSocketJoint
-	WithAnchorB(anchorB raw.SCNVector3) *PhysicsBallSocketJoint
+	obj.Object
 	BodyA() *PhysicsBody
-	AnchorA() raw.SCNVector3
-	SetAnchorA(anchorA raw.SCNVector3)
 	BodyB() *PhysicsBody
-	AnchorB() raw.SCNVector3
-	SetAnchorB(anchorB raw.SCNVector3)
 }
 
 var _ PhysicsBallSocketJointable = (*PhysicsBallSocketJoint)(nil)
+
+var _ PhysicsBehaviorProvider = (*PhysicsBallSocketJoint)(nil)

@@ -5,144 +5,163 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// This object represents the client data for a public key credential request, as defined in the WebAuthentication standard.
+// PublicKeyCredentialClientData is an idiomatic wrapper over the Objective-C class ASPublicKeyCredentialClientData.
 //
-// PublicKeyCredentialClientData wraps [raw.ASPublicKeyCredentialClientData] with a fluent Go API.
+// This object represents the client data for a public key credential request, as defined in the WebAuthentication standard.
 type PublicKeyCredentialClientData struct {
-	inner *raw.ASPublicKeyCredentialClientData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPublicKeyCredentialClientData].
-func (x *PublicKeyCredentialClientData) Unwrap() *raw.ASPublicKeyCredentialClientData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PublicKeyCredentialClientData) ID() objc.ID { return x.inner.Ptr() }
-
-// PublicKeyCredentialClientDataFromID adopts an existing object pointer as a PublicKeyCredentialClientData (nil for 0).
+// PublicKeyCredentialClientDataFromID adopts an existing Objective-C object as a PublicKeyCredentialClientData
+// (nil for 0), retaining it and registering a release finalizer.
 func PublicKeyCredentialClientDataFromID(id objc.ID) *PublicKeyCredentialClientData {
 	if id == 0 {
 		return nil
 	}
-	return &PublicKeyCredentialClientData{inner: raw.ASPublicKeyCredentialClientDataFromID(id)}
-}
-
-// NewPublicKeyCredentialClientDataWithChallengeOrigin creates a new [PublicKeyCredentialClientData].
-func NewPublicKeyCredentialClientDataWithChallengeOrigin(challenge *foundation.NSData, origin string) *PublicKeyCredentialClientData {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPublicKeyCredentialClientData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChallenge:origin:"), challenge.Ptr(), foundation.NSStringStringWithUTF8String(origin).Ptr())
-	return &PublicKeyCredentialClientData{inner: raw.ASPublicKeyCredentialClientDataFromID(_id)}
-}
-
-// The challenge to be signed during the operation.
-//
-// WithChallenge sets the challenge property and returns the receiver for chaining.
-func (x *PublicKeyCredentialClientData) WithChallenge(challenge *foundation.NSData) *PublicKeyCredentialClientData {
-	x.inner.SetChallenge(challenge)
+	x := &PublicKeyCredentialClientData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The origin for where the request was performed.
-//
-// WithOrigin sets the origin property and returns the receiver for chaining.
+// publicKeyCredentialClientDataAdopt wraps an Objective-C object that this code just created as a
+// PublicKeyCredentialClientData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func publicKeyCredentialClientDataAdopt(id objc.ID) *PublicKeyCredentialClientData {
+	if id == 0 {
+		return nil
+	}
+	x := &PublicKeyCredentialClientData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PublicKeyCredentialClientData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PublicKeyCredentialClientData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PublicKeyCredentialClientData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PublicKeyCredentialClientData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPublicKeyCredentialClientDataWithChallengeOrigin creates a new PublicKeyCredentialClientData.
+func NewPublicKeyCredentialClientDataWithChallengeOrigin(challenge obj.Object, origin string) *PublicKeyCredentialClientData {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPublicKeyCredentialClientData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChallenge:origin:"), objref.IDOf(challenge), purego.NSString(origin))
+	return publicKeyCredentialClientDataAdopt(_id)
+}
+
+// WithChallenge the challenge to be signed during the operation.
+func (x *PublicKeyCredentialClientData) WithChallenge(challenge obj.Object) *PublicKeyCredentialClientData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChallenge:"), objref.IDOf(challenge))
+	return x
+}
+
+// WithOrigin the origin for where the request was performed.
 func (x *PublicKeyCredentialClientData) WithOrigin(origin string) *PublicKeyCredentialClientData {
-	x.inner.SetOrigin(foundation.NSStringStringWithUTF8String(origin))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrigin:"), purego.NSString(origin))
 	return x
 }
 
-// The top-level origin, if applicable.
-//
-// WithTopOrigin sets the topOrigin property and returns the receiver for chaining.
+// WithTopOrigin the top-level origin, if applicable.
 func (x *PublicKeyCredentialClientData) WithTopOrigin(topOrigin string) *PublicKeyCredentialClientData {
-	x.inner.SetTopOrigin(foundation.NSStringStringWithUTF8String(topOrigin))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopOrigin:"), purego.NSString(topOrigin))
 	return x
 }
 
-// Indicates whether this is a cross-origin request, if applicable.
-//
-// WithCrossOrigin sets the crossOrigin property and returns the receiver for chaining.
-func (x *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData {
-	x.inner.SetCrossOrigin(raw.ASPublicKeyCredentialClientDataCrossOriginValue(crossOrigin))
+// WithCrossOrigin indicates whether this is a cross-origin request, if applicable.
+func (x *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin PublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCrossOrigin:"), crossOrigin)
 	return x
 }
 
-// The challenge to be signed during the operation.
-//
-// Challenge calls the underlying Challenge.
-func (x *PublicKeyCredentialClientData) Challenge() *foundation.NSData {
-	return x.inner.Challenge()
+// Challenge the challenge to be signed during the operation.
+func (x *PublicKeyCredentialClientData) Challenge() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("challenge"))
+	return obj.Wrap(_r)
 }
 
-// SetChallenge calls the underlying SetChallenge.
-func (x *PublicKeyCredentialClientData) SetChallenge(challenge *foundation.NSData) {
-	x.inner.SetChallenge(challenge)
+// SetChallenge wraps the corresponding Objective-C method.
+func (x *PublicKeyCredentialClientData) SetChallenge(challenge obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChallenge:"), objref.IDOf(challenge))
 }
 
-// The origin for where the request was performed.
-//
-// Origin calls the underlying Origin.
+// Origin the origin for where the request was performed.
 func (x *PublicKeyCredentialClientData) Origin() string {
-	_r := x.inner.Origin()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("origin"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOrigin calls the underlying SetOrigin.
+// SetOrigin wraps the corresponding Objective-C method.
 func (x *PublicKeyCredentialClientData) SetOrigin(origin string) {
-	x.inner.SetOrigin(foundation.NSStringStringWithUTF8String(origin))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrigin:"), purego.NSString(origin))
 }
 
-// The top-level origin, if applicable.
-//
-// TopOrigin calls the underlying TopOrigin.
+// TopOrigin the top-level origin, if applicable.
 func (x *PublicKeyCredentialClientData) TopOrigin() string {
-	_r := x.inner.TopOrigin()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topOrigin"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTopOrigin calls the underlying SetTopOrigin.
+// SetTopOrigin wraps the corresponding Objective-C method.
 func (x *PublicKeyCredentialClientData) SetTopOrigin(topOrigin string) {
-	x.inner.SetTopOrigin(foundation.NSStringStringWithUTF8String(topOrigin))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopOrigin:"), purego.NSString(topOrigin))
 }
 
-// Indicates whether this is a cross-origin request, if applicable.
-//
-// CrossOrigin calls the underlying CrossOrigin.
-func (x *PublicKeyCredentialClientData) CrossOrigin() ASPublicKeyCredentialClientDataCrossOriginValue {
-	return ASPublicKeyCredentialClientDataCrossOriginValue(x.inner.CrossOrigin())
+// CrossOrigin indicates whether this is a cross-origin request, if applicable.
+func (x *PublicKeyCredentialClientData) CrossOrigin() PublicKeyCredentialClientDataCrossOriginValue {
+	_r := objc.Send[PublicKeyCredentialClientDataCrossOriginValue](objref.IDOf(x), objc.RegisterName("crossOrigin"))
+	return _r
 }
 
-// SetCrossOrigin calls the underlying SetCrossOrigin.
-func (x *PublicKeyCredentialClientData) SetCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) {
-	x.inner.SetCrossOrigin(raw.ASPublicKeyCredentialClientDataCrossOriginValue(crossOrigin))
+// SetCrossOrigin wraps the corresponding Objective-C method.
+func (x *PublicKeyCredentialClientData) SetCrossOrigin(crossOrigin PublicKeyCredentialClientDataCrossOriginValue) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCrossOrigin:"), crossOrigin)
 }
 
 // PublicKeyCredentialClientDataable is the interface implemented by [PublicKeyCredentialClientData], for mocking and DI.
 type PublicKeyCredentialClientDataable interface {
-	Unwrap() *raw.ASPublicKeyCredentialClientData
-	WithChallenge(challenge *foundation.NSData) *PublicKeyCredentialClientData
+	obj.Object
+	WithChallenge(challenge obj.Object) *PublicKeyCredentialClientData
 	WithOrigin(origin string) *PublicKeyCredentialClientData
 	WithTopOrigin(topOrigin string) *PublicKeyCredentialClientData
-	WithCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData
-	Challenge() *foundation.NSData
-	SetChallenge(challenge *foundation.NSData)
+	WithCrossOrigin(crossOrigin PublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData
+	Challenge() obj.Object
+	SetChallenge(challenge obj.Object)
 	Origin() string
 	SetOrigin(origin string)
 	TopOrigin() string
 	SetTopOrigin(topOrigin string)
-	CrossOrigin() ASPublicKeyCredentialClientDataCrossOriginValue
-	SetCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue)
+	CrossOrigin() PublicKeyCredentialClientDataCrossOriginValue
+	SetCrossOrigin(crossOrigin PublicKeyCredentialClientDataCrossOriginValue)
 }
 
 var _ PublicKeyCredentialClientDataable = (*PublicKeyCredentialClientData)(nil)

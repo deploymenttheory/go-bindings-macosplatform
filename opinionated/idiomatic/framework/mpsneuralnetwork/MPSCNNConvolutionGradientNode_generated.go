@@ -5,73 +5,66 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNConvolutionGradientNode wraps [raw.MPSCNNConvolutionGradientNode] with a fluent Go API.
+// CNNConvolutionGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionGradientNode.
+//
+// CNNConvolutionGradientNode is an abstract base — you do not construct it directly. Construct one of [CNNConvolutionTransposeGradientNode], [CNNFullyConnectedGradientNode] and pass it where a CNNConvolutionGradientNode is accepted.
 type CNNConvolutionGradientNode struct {
-	inner *raw.MPSCNNConvolutionGradientNode
+	NNGradientFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionGradientNode].
-func (x *CNNConvolutionGradientNode) Unwrap() *raw.MPSCNNConvolutionGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionGradientNodeFromID adopts an existing object pointer as a CNNConvolutionGradientNode (nil for 0).
+// CNNConvolutionGradientNodeFromID adopts an existing Objective-C object as a CNNConvolutionGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionGradientNodeFromID(id objc.ID) *CNNConvolutionGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionGradientNode{inner: raw.MPSCNNConvolutionGradientNodeFromID(id)}
-}
-
-// @abstract   A node to represent the gradient calculation for convolution training. @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often that is a neuron gradient filter node. @param sourceImage      The input image from the forward convolution node @param gradientState    The gradient state from the forward convolution @param weights          The data source from the forward convolution. It may not contain an integrated neuron. Similary, any normalization should be broken out into a separate node. Pass nil to use the weights from the forward convolution pass. @return  A MPSCNNConvolutionGradientNode
-//
-// NewCNNConvolutionGradientNodeWithSourceGradientSourceImageConvolutionGradientStateWeights creates a new [CNNConvolutionGradientNode].
-func NewCNNConvolutionGradientNodeWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSCNNConvolutionGradientStateNode, weights raw.MPSCNNConvolutionDataSource) *CNNConvolutionGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:convolutionGradientState:weights:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), weights)
-	return &CNNConvolutionGradientNode{inner: raw.MPSCNNConvolutionGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNConvolutionGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNConvolutionGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNConvolutionGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionGradientNodeAdopt(id objc.ID) *CNNConvolutionGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNConvolutionGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNConvolutionGradientNode) WithLabel(label string) *CNNConvolutionGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNConvolutionGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode {
-	return x.inner
-}
-
-func (x *CNNConvolutionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *CNNConvolutionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // CNNConvolutionGradientNodeable is the interface implemented by [CNNConvolutionGradientNode], for mocking and DI.
 type CNNConvolutionGradientNodeable interface {
-	Unwrap() *raw.MPSCNNConvolutionGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionGradientNode
+	obj.Object
 	WithLabel(label string) *CNNConvolutionGradientNode
 }
 
 var _ CNNConvolutionGradientNodeable = (*CNNConvolutionGradientNode)(nil)
+
+// isCNNConvolutionGradientNode marks CNNConvolutionGradientNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNConvolutionGradientNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNConvolutionGradientNode) isCNNConvolutionGradientNode() {}
+
+var _ CNNConvolutionGradientNodeProvider = (*CNNConvolutionGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNConvolutionGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNConvolutionGradientNode)(nil)

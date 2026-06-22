@@ -5,32 +5,20 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CWKeychainCopyEAPIdentity calls [raw.CWKeychainCopyEAPIdentity] (C function CWKeychainCopyEAPIdentity).
-func CWKeychainCopyEAPIdentity(ssidData unsafe.Pointer, identity unsafe.Pointer) int {
-	return raw.CWKeychainCopyEAPIdentity(ssidData, identity)
-}
+var _fnCWMergeNetworks func(objc.ID) objc.ID
 
-// CWKeychainCopyWiFiEAPIdentity calls [raw.CWKeychainCopyWiFiEAPIdentity] (C function CWKeychainCopyWiFiEAPIdentity).
-func CWKeychainCopyWiFiEAPIdentity(domain CWKeychainDomain, ssid *foundation.NSData, identity unsafe.Pointer) int {
-	return raw.CWKeychainCopyWiFiEAPIdentity(raw.CWKeychainDomain(domain), ssid, identity)
-}
-
-// CWKeychainSetEAPIdentity calls [raw.CWKeychainSetEAPIdentity] (C function CWKeychainSetEAPIdentity).
-func CWKeychainSetEAPIdentity(ssidData unsafe.Pointer, identity unsafe.Pointer) int {
-	return raw.CWKeychainSetEAPIdentity(ssidData, identity)
-}
-
-// CWKeychainSetWiFiEAPIdentity calls [raw.CWKeychainSetWiFiEAPIdentity] (C function CWKeychainSetWiFiEAPIdentity).
-func CWKeychainSetWiFiEAPIdentity(domain CWKeychainDomain, ssid *foundation.NSData, identity unsafe.Pointer) int {
-	return raw.CWKeychainSetWiFiEAPIdentity(raw.CWKeychainDomain(domain), ssid, identity)
-}
-
-// CWMergeNetworks calls [raw.CWMergeNetworks] (C function CWMergeNetworks).
-func CWMergeNetworks(networks *foundation.NSSet[*raw.CWNetwork]) *foundation.NSSet[*raw.CWNetwork] {
-	return raw.CWMergeNetworks(networks)
+// CWMergeNetworks calls the CoreWLAN framework function CWMergeNetworks.
+func CWMergeNetworks(networks obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWMergeNetworks == nil {
+		ebipurego.RegisterLibFunc(&_fnCWMergeNetworks, _lib, "CWMergeNetworks")
+	}
+	_ret := _fnCWMergeNetworks(objref.IDOf(networks))
+	return obj.Wrap(_ret)
 }

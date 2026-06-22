@@ -5,251 +5,203 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A representation of a Document Type Definition.
+// XMLDTD is an idiomatic wrapper over the Objective-C class NSXMLDTD.
 //
-// XMLDTD wraps [raw.NSXMLDTD] with a fluent Go API.
+// It embeds [XMLNode], promoting that type's methods.
+//
+// A representation of a Document Type Definition.
 type XMLDTD struct {
-	inner *raw.NSXMLDTD
+	XMLNode
 }
 
-// Unwrap returns the underlying [raw.NSXMLDTD].
-func (x *XMLDTD) Unwrap() *raw.NSXMLDTD { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XMLDTD) ID() objc.ID { return x.inner.Ptr() }
-
-// XMLDTDFromID adopts an existing object pointer as a XMLDTD (nil for 0).
+// XMLDTDFromID adopts an existing Objective-C object as a XMLDTD
+// (nil for 0), retaining it and registering a release finalizer.
 func XMLDTDFromID(id objc.ID) *XMLDTD {
 	if id == 0 {
 		return nil
 	}
-	return &XMLDTD{inner: raw.NSXMLDTDFromID(id)}
+	x := &XMLDTD{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewXMLDTD creates a new [XMLDTD].
+// xMLDTDAdopt wraps an Objective-C object that this code just created as a
+// XMLDTD (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xMLDTDAdopt(id objc.ID) *XMLDTD {
+	if id == 0 {
+		return nil
+	}
+	x := &XMLDTD{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewXMLDTD creates a new XMLDTD.
 func NewXMLDTD() *XMLDTD {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDTD")), objc.RegisterName("new"))
-	return &XMLDTD{inner: raw.NSXMLDTDFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSXMLDTD")), objc.RegisterName("new"))
+	return xMLDTDAdopt(_id)
 }
 
-// @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
-//
-// WithPublicID sets the publicID property and returns the receiver for chaining.
-func (x *XMLDTD) WithPublicID(publicID string) *XMLDTD {
-	x.inner.SetPublicID(foundation.NSStringStringWithUTF8String(publicID))
+// WithPublicID sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
+func (x *XMLDTD) WithPublicID(publicID StringProvider) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicID:"), objref.IDOf(publicID))
 	return x
 }
 
-// @abstract Sets the system id. This should be a URL that points to a valid DTD.
-//
-// WithSystemID sets the systemID property and returns the receiver for chaining.
-func (x *XMLDTD) WithSystemID(systemID string) *XMLDTD {
-	x.inner.SetSystemID(foundation.NSStringStringWithUTF8String(systemID))
+// WithSystemID sets the system id. This should be a URL that points to a valid DTD.
+func (x *XMLDTD) WithSystemID(systemID StringProvider) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemID:"), objref.IDOf(systemID))
 	return x
 }
 
-// @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *XMLDTD) WithName(name string) *XMLDTD {
-	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+func (x *XMLDTD) WithName(name StringProvider) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *XMLDTD) WithObjectValue(objectValue objc.ID) *XMLDTD {
-	x.inner.NSXMLNode.SetObjectValue(objectValue)
+// WithObjectValue sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+func (x *XMLDTD) WithObjectValue(objectValue obj.Object) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
-func (x *XMLDTD) WithStringValue(stringValue string) *XMLDTD {
-	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+// WithStringValue sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+func (x *XMLDTD) WithStringValue(stringValue StringProvider) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
 	return x
 }
 
-// @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-//
-// WithURI sets the uRI property and returns the receiver for chaining.
-func (x *XMLDTD) WithURI(uRI string) *XMLDTD {
-	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+// WithURI set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+func (x *XMLDTD) WithURI(uRI StringProvider) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uRI))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XMLDTD) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTD {
-	x.inner.NSXMLNode.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *XMLDTD) WithScriptingProperties(scriptingProperties obj.Object) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// @method insertChild:atIndex: @abstract Inserts a child at a particular index.
-//
-// InsertChildAtIndex calls the underlying InsertChildAtIndex.
-func (x *XMLDTD) InsertChildAtIndex(child *raw.NSXMLNode, index uint) {
-	x.inner.InsertChildAtIndex(child, index)
+// InsertChildAtIndex inserts a child at a particular index.
+func (x *XMLDTD) InsertChildAtIndex(child *XMLNode, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
-// @method insertChildren:atIndex: @abstract Insert several children at a particular index.
-//
-// InsertChildrenAtIndex calls the underlying InsertChildrenAtIndex.
-func (x *XMLDTD) InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint) {
-	x.inner.InsertChildrenAtIndex(children, index)
+// InsertChildrenAtIndex insert several children at a particular index.
+func (x *XMLDTD) InsertChildrenAtIndex(children []*XMLNode, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildren:atIndex:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), index)
 }
 
-// @method removeChildAtIndex: @abstract Removes a child at a particular index.
-//
-// RemoveChildAtIndex calls the underlying RemoveChildAtIndex.
-func (x *XMLDTD) RemoveChildAtIndex(index uint) {
-	x.inner.RemoveChildAtIndex(index)
+// RemoveChildAtIndex removes a child at a particular index.
+func (x *XMLDTD) RemoveChildAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildAtIndex:"), index)
 }
 
-// @method setChildren: @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
-//
-// SetChildren calls the underlying SetChildren.
-func (x *XMLDTD) SetChildren(children ...XMLNodeProvider) {
-	_ptrs := make([]objc.ID, len(children))
-	for _i, _v := range children {
-		_ptrs[_i] = _v.asXMLNode().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSXMLNode]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetChildren(_arg0)
+// SetChildren removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+func (x *XMLDTD) SetChildren(children []*XMLNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildren:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @method addChild: @abstract Adds a child to the end of the existing children.
-//
-// AddChild calls the underlying AddChild.
-func (x *XMLDTD) AddChild(child *raw.NSXMLNode) {
-	x.inner.AddChild(child)
+// AddChild adds a child to the end of the existing children.
+func (x *XMLDTD) AddChild(child *XMLNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// @method replaceChildAtIndex:withNode: @abstract Replaces a child at a particular index with another child.
-//
-// ReplaceChildAtIndexWithNode calls the underlying ReplaceChildAtIndexWithNode.
-func (x *XMLDTD) ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode) {
-	x.inner.ReplaceChildAtIndexWithNode(index, node)
+// ReplaceChildAtIndexWithNode replaces a child at a particular index with another child.
+func (x *XMLDTD) ReplaceChildAtIndexWithNode(index int, node *XMLNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceChildAtIndex:withNode:"), index, objref.IDOf(node))
 }
 
-// @method entityDeclarationForName: @abstract Returns the entity declaration matching this name.
-//
-// EntityDeclarationForName calls the underlying EntityDeclarationForName.
+// EntityDeclarationForName returns the entity declaration matching this name.
 func (x *XMLDTD) EntityDeclarationForName(name string) *XMLDTDNode {
-	_r := x.inner.EntityDeclarationForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &XMLDTDNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityDeclarationForName:"), purego.NSString(name))
+	return XMLDTDNodeFromID(_r)
 }
 
-// @method notationDeclarationForName: @abstract Returns the notation declaration matching this name.
-//
-// NotationDeclarationForName calls the underlying NotationDeclarationForName.
+// NotationDeclarationForName returns the notation declaration matching this name.
 func (x *XMLDTD) NotationDeclarationForName(name string) *XMLDTDNode {
-	_r := x.inner.NotationDeclarationForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &XMLDTDNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notationDeclarationForName:"), purego.NSString(name))
+	return XMLDTDNodeFromID(_r)
 }
 
-// @method elementDeclarationForName: @abstract Returns the element declaration matching this name.
-//
-// ElementDeclarationForName calls the underlying ElementDeclarationForName.
+// ElementDeclarationForName returns the element declaration matching this name.
 func (x *XMLDTD) ElementDeclarationForName(name string) *XMLDTDNode {
-	_r := x.inner.ElementDeclarationForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &XMLDTDNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementDeclarationForName:"), purego.NSString(name))
+	return XMLDTDNodeFromID(_r)
 }
 
-// @method attributeDeclarationForName: @abstract Returns the attribute declaration matching this name.
-//
-// AttributeDeclarationForNameElementName calls the underlying AttributeDeclarationForNameElementName.
+// AttributeDeclarationForNameElementName returns the attribute declaration matching this name.
 func (x *XMLDTD) AttributeDeclarationForNameElementName(name string, elementName string) *XMLDTDNode {
-	_r := x.inner.AttributeDeclarationForNameElementName(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(elementName))
-	if _r == nil {
-		return nil
-	}
-	return &XMLDTDNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeDeclarationForName:elementName:"), purego.NSString(name), purego.NSString(elementName))
+	return XMLDTDNodeFromID(_r)
 }
 
-// @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
-//
-// PublicID calls the underlying PublicID.
-func (x *XMLDTD) PublicID() *String {
-	_r := x.inner.PublicID()
-	if _r == nil {
-		return nil
+// PublicID sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
+func (x *XMLDTD) PublicID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicID"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPublicID calls the underlying SetPublicID.
+// SetPublicID wraps the corresponding Objective-C method.
 func (x *XMLDTD) SetPublicID(publicID string) {
-	x.inner.SetPublicID(foundation.NSStringStringWithUTF8String(publicID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicID:"), purego.NSString(publicID))
 }
 
-// @abstract Sets the system id. This should be a URL that points to a valid DTD.
-//
-// SystemID calls the underlying SystemID.
-func (x *XMLDTD) SystemID() *String {
-	_r := x.inner.SystemID()
-	if _r == nil {
-		return nil
+// SystemID sets the system id. This should be a URL that points to a valid DTD.
+func (x *XMLDTD) SystemID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemID"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetSystemID calls the underlying SetSystemID.
+// SetSystemID wraps the corresponding Objective-C method.
 func (x *XMLDTD) SetSystemID(systemID string) {
-	x.inner.SetSystemID(foundation.NSStringStringWithUTF8String(systemID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemID:"), purego.NSString(systemID))
 }
-
-func (x *XMLDTD) asXMLNode() *raw.NSXMLNode { return &x.inner.NSXMLNode }
-
-func (x *XMLDTD) asObject() *raw.NSObject { return &x.inner.NSXMLNode.NSObject }
 
 // XMLDTDable is the interface implemented by [XMLDTD], for mocking and DI.
 type XMLDTDable interface {
-	Unwrap() *raw.NSXMLDTD
-	WithPublicID(publicID string) *XMLDTD
-	WithSystemID(systemID string) *XMLDTD
-	WithName(name string) *XMLDTD
-	WithObjectValue(objectValue objc.ID) *XMLDTD
-	WithStringValue(stringValue string) *XMLDTD
-	WithURI(uRI string) *XMLDTD
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTD
-	InsertChildAtIndex(child *raw.NSXMLNode, index uint)
-	InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint)
-	RemoveChildAtIndex(index uint)
-	SetChildren(children ...XMLNodeProvider)
-	AddChild(child *raw.NSXMLNode)
-	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
+	obj.Object
+	WithPublicID(publicID StringProvider) *XMLDTD
+	WithSystemID(systemID StringProvider) *XMLDTD
+	WithName(name StringProvider) *XMLDTD
+	WithObjectValue(objectValue obj.Object) *XMLDTD
+	WithStringValue(stringValue StringProvider) *XMLDTD
+	WithURI(uRI StringProvider) *XMLDTD
+	WithScriptingProperties(scriptingProperties obj.Object) *XMLDTD
+	InsertChildAtIndex(child *XMLNode, index int)
+	InsertChildrenAtIndex(children []*XMLNode, index int)
+	RemoveChildAtIndex(index int)
+	SetChildren(children []*XMLNode)
+	AddChild(child *XMLNode)
+	ReplaceChildAtIndexWithNode(index int, node *XMLNode)
 	EntityDeclarationForName(name string) *XMLDTDNode
 	NotationDeclarationForName(name string) *XMLDTDNode
 	ElementDeclarationForName(name string) *XMLDTDNode
 	AttributeDeclarationForNameElementName(name string, elementName string) *XMLDTDNode
-	PublicID() *String
+	PublicID() string
 	SetPublicID(publicID string)
-	SystemID() *String
+	SystemID() string
 	SetSystemID(systemID string)
 }
 
 var _ XMLDTDable = (*XMLDTD)(nil)
+
+var _ XMLNodeProvider = (*XMLDTD)(nil)

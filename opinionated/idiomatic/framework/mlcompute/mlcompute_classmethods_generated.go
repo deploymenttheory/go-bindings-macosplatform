@@ -5,1660 +5,1093 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// DescriptorWithType calls the underlying MLCActivationDescriptorDescriptorWithType.
-func DescriptorWithType(activationType MLCActivationType) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithType(raw.MLCActivationType(activationType))
-	if _r == nil {
-		return nil
-	}
-	return &ActivationDescriptor{inner: _r}
+// DescriptorWithType creates an activation descriptor with the activation type you specify.
+func DescriptorWithType(activationType ActivationType) *ActivationDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationDescriptor")), objc.RegisterName("descriptorWithType:"), activationType)
+	return ActivationDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeA calls the underlying MLCActivationDescriptorDescriptorWithTypeA.
-func DescriptorWithTypeA(activationType MLCActivationType, a float32) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithTypeA(raw.MLCActivationType(activationType), a)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationDescriptor{inner: _r}
+// DescriptorWithTypeA creates an activation descriptor with the activation type and parameter a that you specify.
+func DescriptorWithTypeA(activationType ActivationType, a float32) *ActivationDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationDescriptor")), objc.RegisterName("descriptorWithType:a:"), activationType, a)
+	return ActivationDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeAB calls the underlying MLCActivationDescriptorDescriptorWithTypeAB.
-func DescriptorWithTypeAB(activationType MLCActivationType, a float32, b float32) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithTypeAB(raw.MLCActivationType(activationType), a, b)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationDescriptor{inner: _r}
+// DescriptorWithTypeAB creates an activation descriptor with the activation type and parameters a and b that you specify.
+func DescriptorWithTypeAB(activationType ActivationType, a float32, b float32) *ActivationDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationDescriptor")), objc.RegisterName("descriptorWithType:a:b:"), activationType, a, b)
+	return ActivationDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeABC calls the underlying MLCActivationDescriptorDescriptorWithTypeABC.
-func DescriptorWithTypeABC(activationType MLCActivationType, a float32, b float32, c float32) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithTypeABC(raw.MLCActivationType(activationType), a, b, c)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationDescriptor{inner: _r}
+// DescriptorWithTypeABC creates an activation descriptor with the activation type and parameters a, b, and c that you specify.
+func DescriptorWithTypeABC(activationType ActivationType, a float32, b float32, c float32) *ActivationDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationDescriptor")), objc.RegisterName("descriptorWithType:a:b:c:"), activationType, a, b, c)
+	return ActivationDescriptorFromID(_r)
 }
 
-// LayerWithDescriptor calls the underlying MLCActivationLayerLayerWithDescriptor.
-func LayerWithDescriptor(descriptor *raw.MLCActivationDescriptor) *ActivationLayer {
-	_r := raw.MLCActivationLayerLayerWithDescriptor(descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+// LayerWithDescriptor creates an activation layer with the descriptor you specify.
+func LayerWithDescriptor(descriptor *ActivationDescriptor) *ActivationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(descriptor))
+	return ActivationLayerFromID(_r)
 }
 
-// LeakyReLULayerWithNegativeSlope calls the underlying MLCActivationLayerLeakyReLULayerWithNegativeSlope.
+// LeakyReLULayerWithNegativeSlope create a leaky ReLU activation layer
 func LeakyReLULayerWithNegativeSlope(negativeSlope float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerLeakyReLULayerWithNegativeSlope(negativeSlope)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("leakyReLULayerWithNegativeSlope:"), negativeSlope)
+	return ActivationLayerFromID(_r)
 }
 
-// LinearLayerWithScaleBias calls the underlying MLCActivationLayerLinearLayerWithScaleBias.
+// LinearLayerWithScaleBias create a linear activation layer
 func LinearLayerWithScaleBias(scale float32, bias float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerLinearLayerWithScaleBias(scale, bias)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("linearLayerWithScale:bias:"), scale, bias)
+	return ActivationLayerFromID(_r)
 }
 
-// SoftPlusLayerWithBeta calls the underlying MLCActivationLayerSoftPlusLayerWithBeta.
+// SoftPlusLayerWithBeta create a soft plus activation layer
 func SoftPlusLayerWithBeta(beta float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerSoftPlusLayerWithBeta(beta)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("softPlusLayerWithBeta:"), beta)
+	return ActivationLayerFromID(_r)
 }
 
-// EluLayerWithA calls the underlying MLCActivationLayerEluLayerWithA.
+// EluLayerWithA create an ELU activation layer
 func EluLayerWithA(a float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerEluLayerWithA(a)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("eluLayerWithA:"), a)
+	return ActivationLayerFromID(_r)
 }
 
-// RelunLayerWithAB calls the underlying MLCActivationLayerRelunLayerWithAB.
+// RelunLayerWithAB create a ReLUN activation layer This can be used to implement layers such as ReLU6 for example.
 func RelunLayerWithAB(a float32, b float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerRelunLayerWithAB(a, b)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("relunLayerWithA:b:"), a, b)
+	return ActivationLayerFromID(_r)
 }
 
-// CeluLayerWithA calls the underlying MLCActivationLayerCeluLayerWithA.
+// CeluLayerWithA create a CELU activation layer
 func CeluLayerWithA(a float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerCeluLayerWithA(a)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("celuLayerWithA:"), a)
+	return ActivationLayerFromID(_r)
 }
 
-// HardShrinkLayerWithA calls the underlying MLCActivationLayerHardShrinkLayerWithA.
+// HardShrinkLayerWithA create a hard shrink activation layer
 func HardShrinkLayerWithA(a float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerHardShrinkLayerWithA(a)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("hardShrinkLayerWithA:"), a)
+	return ActivationLayerFromID(_r)
 }
 
-// SoftShrinkLayerWithA calls the underlying MLCActivationLayerSoftShrinkLayerWithA.
+// SoftShrinkLayerWithA create a soft shrink activation layer
 func SoftShrinkLayerWithA(a float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerSoftShrinkLayerWithA(a)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("softShrinkLayerWithA:"), a)
+	return ActivationLayerFromID(_r)
 }
 
-// ThresholdLayerWithThresholdReplacement calls the underlying MLCActivationLayerThresholdLayerWithThresholdReplacement.
+// ThresholdLayerWithThresholdReplacement create a threshold activation layer
 func ThresholdLayerWithThresholdReplacement(threshold float32, replacement float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerThresholdLayerWithThresholdReplacement(threshold, replacement)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("thresholdLayerWithThreshold:replacement:"), threshold, replacement)
+	return ActivationLayerFromID(_r)
 }
 
-// ClampLayerWithMinValueMaxValue calls the underlying MLCActivationLayerClampLayerWithMinValueMaxValue.
+// ClampLayerWithMinValueMaxValue create a clamp activation layer
 func ClampLayerWithMinValueMaxValue(minValue float32, maxValue float32) *ActivationLayer {
-	_r := raw.MLCActivationLayerClampLayerWithMinValueMaxValue(minValue, maxValue)
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("clampLayerWithMinValue:maxValue:"), minValue, maxValue)
+	return ActivationLayerFromID(_r)
 }
 
-// ReluLayer calls the underlying MLCActivationLayerReluLayer.
+// ReluLayer create a ReLU activation layer
 func ReluLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerReluLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("reluLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// Relu6Layer calls the underlying MLCActivationLayerRelu6Layer.
+// Relu6Layer create a ReLU6 activation layer
 func Relu6Layer() *ActivationLayer {
-	_r := raw.MLCActivationLayerRelu6Layer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("relu6Layer"))
+	return ActivationLayerFromID(_r)
 }
 
-// LeakyReLULayer calls the underlying MLCActivationLayerLeakyReLULayer.
+// LeakyReLULayer create a leaky ReLU activation layer
 func LeakyReLULayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerLeakyReLULayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("leakyReLULayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// SigmoidLayer calls the underlying MLCActivationLayerSigmoidLayer.
+// SigmoidLayer create a sigmoid activation layer
 func SigmoidLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerSigmoidLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("sigmoidLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// HardSigmoidLayer calls the underlying MLCActivationLayerHardSigmoidLayer.
+// HardSigmoidLayer create a hard sigmoid activation layer
 func HardSigmoidLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerHardSigmoidLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("hardSigmoidLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// TanhLayer calls the underlying MLCActivationLayerTanhLayer.
+// TanhLayer create a tanh activation layer
 func TanhLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerTanhLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("tanhLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// AbsoluteLayer calls the underlying MLCActivationLayerAbsoluteLayer.
+// AbsoluteLayer create an absolute activation layer
 func AbsoluteLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerAbsoluteLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("absoluteLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// SoftPlusLayer calls the underlying MLCActivationLayerSoftPlusLayer.
+// SoftPlusLayer create a soft plus activation layer
 func SoftPlusLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerSoftPlusLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("softPlusLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// SoftSignLayer calls the underlying MLCActivationLayerSoftSignLayer.
+// SoftSignLayer create a soft sign activation layer
 func SoftSignLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerSoftSignLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("softSignLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// EluLayer calls the underlying MLCActivationLayerEluLayer.
+// EluLayer create an ELU activation layer
 func EluLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerEluLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("eluLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// LogSigmoidLayer calls the underlying MLCActivationLayerLogSigmoidLayer.
+// LogSigmoidLayer create a log sigmoid activation layer
 func LogSigmoidLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerLogSigmoidLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("logSigmoidLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// SeluLayer calls the underlying MLCActivationLayerSeluLayer.
+// SeluLayer create a SELU activation layer
 func SeluLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerSeluLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("seluLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// CeluLayer calls the underlying MLCActivationLayerCeluLayer.
+// CeluLayer create a CELU activation layer
 func CeluLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerCeluLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("celuLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// HardShrinkLayer calls the underlying MLCActivationLayerHardShrinkLayer.
+// HardShrinkLayer create a hard shrink activation layer
 func HardShrinkLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerHardShrinkLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("hardShrinkLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// SoftShrinkLayer calls the underlying MLCActivationLayerSoftShrinkLayer.
+// SoftShrinkLayer create a soft shrink activation layer
 func SoftShrinkLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerSoftShrinkLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("softShrinkLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// TanhShrinkLayer calls the underlying MLCActivationLayerTanhShrinkLayer.
+// TanhShrinkLayer create a TanhShrink activation layer
 func TanhShrinkLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerTanhShrinkLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("tanhShrinkLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// GeluLayer calls the underlying MLCActivationLayerGeluLayer.
+// GeluLayer create a GELU activation layer
 func GeluLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerGeluLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("geluLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// HardSwishLayer calls the underlying MLCActivationLayerHardSwishLayer.
+// HardSwishLayer create a hardswish activation layer
 func HardSwishLayer() *ActivationLayer {
-	_r := raw.MLCActivationLayerHardSwishLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("hardSwishLayer"))
+	return ActivationLayerFromID(_r)
 }
 
-// OptimizerWithDescriptor calls the underlying MLCAdamOptimizerOptimizerWithDescriptor.
-func OptimizerWithDescriptor(optimizerDescriptor *raw.MLCOptimizerDescriptor) *AdamOptimizer {
-	_r := raw.MLCAdamOptimizerOptimizerWithDescriptor(optimizerDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &AdamOptimizer{inner: _r}
+// OptimizerWithDescriptor creates an Adam optimizer with the descriptor you specify.
+func OptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *AdamOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
+	return AdamOptimizerFromID(_r)
 }
 
-// OptimizerWithDescriptorBeta1Beta2EpsilonTimeStep calls the underlying MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonTimeStep.
-func OptimizerWithDescriptorBeta1Beta2EpsilonTimeStep(optimizerDescriptor *raw.MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, timeStep uint) *AdamOptimizer {
-	_r := raw.MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonTimeStep(optimizerDescriptor, beta1, beta2, epsilon, timeStep)
-	if _r == nil {
-		return nil
-	}
-	return &AdamOptimizer{inner: _r}
+// OptimizerWithDescriptorBeta1Beta2EpsilonTimeStep creates an Adam optimizer with the values you specify.
+func OptimizerWithDescriptorBeta1Beta2EpsilonTimeStep(optimizerDescriptor *OptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, timeStep int) *AdamOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:timeStep:"), objref.IDOf(optimizerDescriptor), beta1, beta2, epsilon, timeStep)
+	return AdamOptimizerFromID(_r)
 }
 
-// OptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep calls the underlying MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep.
-func OptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *raw.MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep uint) *AdamOptimizer {
-	_r := raw.MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor, beta1, beta2, epsilon, usesAMSGrad, timeStep)
-	if _r == nil {
-		return nil
-	}
-	return &AdamOptimizer{inner: _r}
+// OptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep creates an Adam optimizer with the values you specify.
+func OptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *OptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep int) *AdamOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:"), objref.IDOf(optimizerDescriptor), beta1, beta2, epsilon, usesAMSGrad, timeStep)
+	return AdamOptimizerFromID(_r)
 }
 
-// MLCAdamWOptimizerOptimizerWithDescriptor calls the underlying MLCAdamWOptimizerOptimizerWithDescriptor.
-func MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor *raw.MLCOptimizerDescriptor) *AdamWOptimizer {
-	_r := raw.MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &AdamWOptimizer{inner: _r}
+// MLCAdamWOptimizerOptimizerWithDescriptor creates a default optimizer with the descriptor you specify.
+func MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *AdamWOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamWOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
+	return AdamWOptimizerFromID(_r)
 }
 
-// MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep calls the underlying MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep.
-func MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *raw.MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep uint) *AdamWOptimizer {
-	_r := raw.MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor, beta1, beta2, epsilon, usesAMSGrad, timeStep)
-	if _r == nil {
-		return nil
-	}
-	return &AdamWOptimizer{inner: _r}
+// MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep creates an AdamW optimizer with the values you specify.
+func MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *OptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep int) *AdamWOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamWOptimizer")), objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:"), objref.IDOf(optimizerDescriptor), beta1, beta2, epsilon, usesAMSGrad, timeStep)
+	return AdamWOptimizerFromID(_r)
 }
 
-// LayerWithOperation calls the underlying MLCArithmeticLayerLayerWithOperation.
-func LayerWithOperation(operation MLCArithmeticOperation) *ArithmeticLayer {
-	_r := raw.MLCArithmeticLayerLayerWithOperation(raw.MLCArithmeticOperation(operation))
-	if _r == nil {
-		return nil
-	}
-	return &ArithmeticLayer{inner: _r}
+// LayerWithOperation creates an arithmetic layer with the operation you specify.
+func LayerWithOperation(operation ArithmeticOperation) *ArithmeticLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCArithmeticLayer")), objc.RegisterName("layerWithOperation:"), operation)
+	return ArithmeticLayerFromID(_r)
 }
 
-// LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon calls the underlying MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon.
-func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon(featureChannelCount uint, mean *raw.MLCTensor, variance *raw.MLCTensor, beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32) *BatchNormalizationLayer {
-	_r := raw.MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon(featureChannelCount, mean, variance, beta, gamma, varianceEpsilon)
-	if _r == nil {
-		return nil
-	}
-	return &BatchNormalizationLayer{inner: _r}
+// LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon creates a batch normalization layer with the number of feature channels, tensors, and variance epsilon you specify.
+func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon(featureChannelCount int, mean *Tensor, variance *Tensor, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *BatchNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCBatchNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:"), featureChannelCount, objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
+	return BatchNormalizationLayerFromID(_r)
 }
 
-// LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum calls the underlying MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum.
-func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, mean *raw.MLCTensor, variance *raw.MLCTensor, beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32, momentum float32) *BatchNormalizationLayer {
-	_r := raw.MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount, mean, variance, beta, gamma, varianceEpsilon, momentum)
-	if _r == nil {
-		return nil
-	}
-	return &BatchNormalizationLayer{inner: _r}
+// LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum creates a batch normalization layer with the number of feature channels, tensors, variance epsilon, and momentum you specify.
+func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount int, mean *Tensor, variance *Tensor, beta *Tensor, gamma *Tensor, varianceEpsilon float32, momentum float32) *BatchNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCBatchNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:"), featureChannelCount, objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon, momentum)
+	return BatchNormalizationLayerFromID(_r)
 }
 
-// MLCComparisonLayerLayerWithOperation calls the underlying MLCComparisonLayerLayerWithOperation.
-func MLCComparisonLayerLayerWithOperation(operation MLCComparisonOperation) *ComparisonLayer {
-	_r := raw.MLCComparisonLayerLayerWithOperation(raw.MLCComparisonOperation(operation))
-	if _r == nil {
-		return nil
-	}
-	return &ComparisonLayer{inner: _r}
+// MLCComparisonLayerLayerWithOperation creates a comparison layer with the operation you specify.
+func MLCComparisonLayerLayerWithOperation(operation ComparisonOperation) *ComparisonLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCComparisonLayer")), objc.RegisterName("layerWithOperation:"), operation)
+	return ComparisonLayerFromID(_r)
 }
 
-// MLCConcatenationLayerLayer calls the underlying MLCConcatenationLayerLayer.
+// MLCConcatenationLayerLayer creates a concatenation layer with a dimension value of 1, which typically represents feature channels.
 func MLCConcatenationLayerLayer() *ConcatenationLayer {
-	_r := raw.MLCConcatenationLayerLayer()
-	if _r == nil {
-		return nil
-	}
-	return &ConcatenationLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConcatenationLayer")), objc.RegisterName("layer"))
+	return ConcatenationLayerFromID(_r)
 }
 
-// LayerWithDimension calls the underlying MLCConcatenationLayerLayerWithDimension.
-func LayerWithDimension(dimension uint) *ConcatenationLayer {
-	_r := raw.MLCConcatenationLayerLayerWithDimension(dimension)
-	if _r == nil {
-		return nil
-	}
-	return &ConcatenationLayer{inner: _r}
+// LayerWithDimension creates a concatenation layer with the dimension you specify.
+func LayerWithDimension(dimension int) *ConcatenationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConcatenationLayer")), objc.RegisterName("layerWithDimension:"), dimension)
+	return ConcatenationLayerFromID(_r)
 }
 
-// DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes.
-func DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType MLCConvolutionType, kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(raw.MLCConvolutionType(convolutionType), kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes creates a descriptor with the type, kernel sizes, number of feature channels and groups, strides, dilation rates, and padding policy you specify.
+func DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType ConvolutionType, kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithType:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), convolutionType, purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// DescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount calls the underlying MLCConvolutionDescriptorDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount.
-func DescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth uint, kernelHeight uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth, kernelHeight, inputFeatureChannelCount, outputFeatureChannelCount)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount creates a convolution descriptor with the kernel sizes and number of feature channels you specify.
+func DescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth int, kernelHeight int, inputFeatureChannelCount int, outputFeatureChannelCount int) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:"), kernelWidth, kernelHeight, inputFeatureChannelCount, outputFeatureChannelCount)
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes.
-func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes creates a convolution descriptor with the kernel sizes, number of feature channels, strides, padding policy, and padding sizes you specify.
+func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes.
-func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes creates a convolution descriptor with the kernel and padding options, number of feature channels and groups, and dilation rates you specify.
+func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// ConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount calls the underlying MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount.
-func ConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth uint, kernelHeight uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth, kernelHeight, inputFeatureChannelCount, outputFeatureChannelCount)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// ConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount creates a descriptor for convolution transpose with the kernel sizes and number of feature channels you specify.
+func ConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth int, kernelHeight int, inputFeatureChannelCount int, outputFeatureChannelCount int) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:"), kernelWidth, kernelHeight, inputFeatureChannelCount, outputFeatureChannelCount)
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes.
-func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes creates a convolution transpose descriptor with the kernel sizes, number of feature channels, strides, and padding options you specify.
+func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes.
-func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes creates a convolution transpose descriptor with the kernel and padding options, number of feature channels and groups, and dilation rates you specify.
+func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// DepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier calls the underlying MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier.
-func DepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier(kernelWidth uint, kernelHeight uint, inputFeatureChannelCount uint, channelMultiplier uint) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier(kernelWidth, kernelHeight, inputFeatureChannelCount, channelMultiplier)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier creates a descriptor for depthwise convolution with the kernel sizes, number of input feature channels, and channel multiplier you specify.
+func DepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier(kernelWidth int, kernelHeight int, inputFeatureChannelCount int, channelMultiplier int) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:channelMultiplier:"), kernelWidth, kernelHeight, inputFeatureChannelCount, channelMultiplier)
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes.
-func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes creates a depthwise convolution descriptor with the kernel and padding options, number of input feature channels, and channel multiplier you specify.
+func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, channelMultiplier int, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, channelMultiplier, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes.
-func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+// DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes creates a convolution descriptor with the kernel and padding options, number of input channels, channel multiplier, and dilation rates you specify.
+func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, channelMultiplier int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, channelMultiplier, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// LayerWithWeightsBiasesDescriptor calls the underlying MLCConvolutionLayerLayerWithWeightsBiasesDescriptor.
-func LayerWithWeightsBiasesDescriptor(weights *raw.MLCTensor, biases *raw.MLCTensor, descriptor *raw.MLCConvolutionDescriptor) *ConvolutionLayer {
-	_r := raw.MLCConvolutionLayerLayerWithWeightsBiasesDescriptor(weights, biases, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionLayer{inner: _r}
+// LayerWithWeightsBiasesDescriptor creates a convolution layer with the weights, biases, and descriptor you specify.
+func LayerWithWeightsBiasesDescriptor(weights *Tensor, biases *Tensor, descriptor *ConvolutionDescriptor) *ConvolutionLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionLayer")), objc.RegisterName("layerWithWeights:biases:descriptor:"), objref.IDOf(weights), objref.IDOf(biases), objref.IDOf(descriptor))
+	return ConvolutionLayerFromID(_r)
 }
 
-// CpuDevice calls the underlying MLCDeviceCpuDevice.
+// CpuDevice creates a device that uses the CPU.
 func CpuDevice() *Device {
-	_r := raw.MLCDeviceCpuDevice()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("cpuDevice"))
+	return DeviceFromID(_r)
 }
 
-// GpuDevice calls the underlying MLCDeviceGpuDevice.
+// GpuDevice creates a device that uses a GPU, if one exists.
 func GpuDevice() *Device {
-	_r := raw.MLCDeviceGpuDevice()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("gpuDevice"))
+	return DeviceFromID(_r)
 }
 
-// AneDevice calls the underlying MLCDeviceAneDevice.
+// AneDevice creates a device that uses the Apple Neural Engine, if one exists.
 func AneDevice() *Device {
-	_r := raw.MLCDeviceAneDevice()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("aneDevice"))
+	return DeviceFromID(_r)
 }
 
-// DeviceWithType calls the underlying MLCDeviceDeviceWithType.
-func DeviceWithType(type_ MLCDeviceType) *Device {
-	_r := raw.MLCDeviceDeviceWithType(raw.MLCDeviceType(type_))
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+// DeviceWithType creates a device of the type you specify.
+func DeviceWithType(type_ DeviceType) *Device {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("deviceWithType:"), type_)
+	return DeviceFromID(_r)
 }
 
-// DeviceWithTypeSelectsMultipleComputeDevices calls the underlying MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices.
-func DeviceWithTypeSelectsMultipleComputeDevices(type_ MLCDeviceType, selectsMultipleComputeDevices bool) *Device {
-	_r := raw.MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices(raw.MLCDeviceType(type_), selectsMultipleComputeDevices)
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+// DeviceWithTypeSelectsMultipleComputeDevices creates a device that you can configure to use multiple compute devices.
+func DeviceWithTypeSelectsMultipleComputeDevices(type_ DeviceType, selectsMultipleComputeDevices bool) *Device {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("deviceWithType:selectsMultipleComputeDevices:"), type_, selectsMultipleComputeDevices)
+	return DeviceFromID(_r)
 }
 
-// DeviceWithGPUDevices calls the underlying MLCDeviceDeviceWithGPUDevices.
-func DeviceWithGPUDevices(gpus *foundation.NSArray[metal.MTLDevice]) *Device {
-	_r := raw.MLCDeviceDeviceWithGPUDevices(gpus)
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+// DeviceWithGPUDevices creates a device using the GPUs you specify.
+func DeviceWithGPUDevices(gpus []obj.Object) *Device {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDevice")), objc.RegisterName("deviceWithGPUDevices:"), purego.SliceToNSArray(gpus, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return DeviceFromID(_r)
 }
 
-// LayerWithRateSeed calls the underlying MLCDropoutLayerLayerWithRateSeed.
-func LayerWithRateSeed(rate float32, seed uint) *DropoutLayer {
-	_r := raw.MLCDropoutLayerLayerWithRateSeed(rate, seed)
-	if _r == nil {
-		return nil
-	}
-	return &DropoutLayer{inner: _r}
+// LayerWithRateSeed creates a dropout layer with the probability rate and random number generator seed you specify.
+func LayerWithRateSeed(rate float32, seed int) *DropoutLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCDropoutLayer")), objc.RegisterName("layerWithRate:seed:"), rate, seed)
+	return DropoutLayerFromID(_r)
 }
 
-// DescriptorWithEmbeddingCountEmbeddingDimension calls the underlying MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimension.
-func DescriptorWithEmbeddingCountEmbeddingDimension(embeddingCount *foundation.NSNumber, embeddingDimension *foundation.NSNumber) *EmbeddingDescriptor {
-	_r := raw.MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimension(embeddingCount, embeddingDimension)
-	if _r == nil {
-		return nil
-	}
-	return &EmbeddingDescriptor{inner: _r}
+// DescriptorWithEmbeddingCountEmbeddingDimension creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.
+func DescriptorWithEmbeddingCountEmbeddingDimension(embeddingCount obj.Object, embeddingDimension obj.Object) *EmbeddingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingDescriptor")), objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:"), objref.IDOf(embeddingCount), objref.IDOf(embeddingDimension))
+	return EmbeddingDescriptorFromID(_r)
 }
 
-// DescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency calls the underlying MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency.
-func DescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency(embeddingCount *foundation.NSNumber, embeddingDimension *foundation.NSNumber, paddingIndex *foundation.NSNumber, maximumNorm *foundation.NSNumber, pNorm *foundation.NSNumber, scalesGradientByFrequency bool) *EmbeddingDescriptor {
-	_r := raw.MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency(embeddingCount, embeddingDimension, paddingIndex, maximumNorm, pNorm, scalesGradientByFrequency)
-	if _r == nil {
-		return nil
-	}
-	return &EmbeddingDescriptor{inner: _r}
+// DescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency creates a new embedding descriptor with the size and dimension of embedding vectors, padding index, and norm and scaling options that you specify.
+func DescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency(embeddingCount obj.Object, embeddingDimension obj.Object, paddingIndex obj.Object, maximumNorm obj.Object, pNorm obj.Object, scalesGradientByFrequency bool) *EmbeddingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingDescriptor")), objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:paddingIndex:maximumNorm:pNorm:scalesGradientByFrequency:"), objref.IDOf(embeddingCount), objref.IDOf(embeddingDimension), objref.IDOf(paddingIndex), objref.IDOf(maximumNorm), objref.IDOf(pNorm), scalesGradientByFrequency)
+	return EmbeddingDescriptorFromID(_r)
 }
 
-// LayerWithDescriptorWeights calls the underlying MLCEmbeddingLayerLayerWithDescriptorWeights.
-func LayerWithDescriptorWeights(descriptor *raw.MLCEmbeddingDescriptor, weights *raw.MLCTensor) *EmbeddingLayer {
-	_r := raw.MLCEmbeddingLayerLayerWithDescriptorWeights(descriptor, weights)
-	if _r == nil {
-		return nil
-	}
-	return &EmbeddingLayer{inner: _r}
+// LayerWithDescriptorWeights creates an embedding layer with the descriptor and word embedding weights tensor you specify.
+func LayerWithDescriptorWeights(descriptor *EmbeddingDescriptor, weights *Tensor) *EmbeddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingLayer")), objc.RegisterName("layerWithDescriptor:weights:"), objref.IDOf(descriptor), objref.IDOf(weights))
+	return EmbeddingLayerFromID(_r)
 }
 
-// MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor calls the underlying MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor.
-func MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor(weights *raw.MLCTensor, biases *raw.MLCTensor, descriptor *raw.MLCConvolutionDescriptor) *FullyConnectedLayer {
-	_r := raw.MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor(weights, biases, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &FullyConnectedLayer{inner: _r}
+// MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor creates a fully connected layer with the weights, biases, and convolution descriptor you specify.
+func MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor(weights *Tensor, biases *Tensor, descriptor *ConvolutionDescriptor) *FullyConnectedLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCFullyConnectedLayer")), objc.RegisterName("layerWithWeights:biases:descriptor:"), objref.IDOf(weights), objref.IDOf(biases), objref.IDOf(descriptor))
+	return FullyConnectedLayerFromID(_r)
 }
 
-// MLCGatherLayerLayerWithDimension calls the underlying MLCGatherLayerLayerWithDimension.
-func MLCGatherLayerLayerWithDimension(dimension uint) *GatherLayer {
-	_r := raw.MLCGatherLayerLayerWithDimension(dimension)
-	if _r == nil {
-		return nil
-	}
-	return &GatherLayer{inner: _r}
+// MLCGatherLayerLayerWithDimension creates a gather layer with the dimension you specify.
+func MLCGatherLayerLayerWithDimension(dimension int) *GatherLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCGatherLayer")), objc.RegisterName("layerWithDimension:"), dimension)
+	return GatherLayerFromID(_r)
 }
 
-// LayerWithScale calls the underlying MLCGramMatrixLayerLayerWithScale.
+// LayerWithScale creates a gram matrix layer with the scaling factor you specify.
 func LayerWithScale(scale float32) *GramMatrixLayer {
-	_r := raw.MLCGramMatrixLayerLayerWithScale(scale)
-	if _r == nil {
-		return nil
-	}
-	return &GramMatrixLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCGramMatrixLayer")), objc.RegisterName("layerWithScale:"), scale)
+	return GramMatrixLayerFromID(_r)
 }
 
-// MLCGraphGraph calls the underlying MLCGraphGraph.
+// MLCGraphGraph creates a new graph.
 func MLCGraphGraph() *Graph {
-	_r := raw.MLCGraphGraph()
-	if _r == nil {
-		return nil
-	}
-	return &Graph{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCGraph")), objc.RegisterName("graph"))
+	return GraphFromID(_r)
 }
 
-// LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon calls the underlying MLCGroupNormalizationLayerLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon.
-func LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChannelCount uint, groupCount uint, beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32) *GroupNormalizationLayer {
-	_r := raw.MLCGroupNormalizationLayerLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChannelCount, groupCount, beta, gamma, varianceEpsilon)
-	if _r == nil {
-		return nil
-	}
-	return &GroupNormalizationLayer{inner: _r}
+// LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon creates a group normalization layer with the number of feature channels and groups, beta and gamma tensors, and variance epsilon you specify.
+func LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChannelCount int, groupCount int, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *GroupNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCGroupNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:groupCount:beta:gamma:varianceEpsilon:"), featureChannelCount, groupCount, objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
+	return GroupNormalizationLayerFromID(_r)
 }
 
-// GraphWithGraphObjects calls the underlying MLCInferenceGraphGraphWithGraphObjects.
-func GraphWithGraphObjects(graphObjects ...GraphProvider) *InferenceGraph {
-	_ptrs := make([]objc.ID, len(graphObjects))
-	for _i, _v := range graphObjects {
-		_ptrs[_i] = _v.asGraph().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.MLCGraph]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.MLCGraph](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.MLCGraph](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := raw.MLCInferenceGraphGraphWithGraphObjects(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &InferenceGraph{inner: _r}
+// GraphWithGraphObjects creates an inference graph with the layers from the graph objects you specify.
+func GraphWithGraphObjects(graphObjects []*Graph) *InferenceGraph {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCInferenceGraph")), objc.RegisterName("graphWithGraphObjects:"), purego.SliceToNSArray(graphObjects, func(_v *Graph) objc.ID { return objref.IDOf(_v) }))
+	return InferenceGraphFromID(_r)
 }
 
-// LayerWithFeatureChannelCountBetaGammaVarianceEpsilon calls the underlying MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceEpsilon.
-func LayerWithFeatureChannelCountBetaGammaVarianceEpsilon(featureChannelCount uint, beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32) *InstanceNormalizationLayer {
-	_r := raw.MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceEpsilon(featureChannelCount, beta, gamma, varianceEpsilon)
-	if _r == nil {
-		return nil
-	}
-	return &InstanceNormalizationLayer{inner: _r}
+// LayerWithFeatureChannelCountBetaGammaVarianceEpsilon creates an instance normalization layer with the number of feature channels, beta and gamma tensors, and variance epsilon you specify.
+func LayerWithFeatureChannelCountBetaGammaVarianceEpsilon(featureChannelCount int, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *InstanceNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:beta:gamma:varianceEpsilon:"), featureChannelCount, objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
+	return InstanceNormalizationLayerFromID(_r)
 }
 
-// LayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum calls the underlying MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum.
-func LayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32, momentum float32) *InstanceNormalizationLayer {
-	_r := raw.MLCInstanceNormalizationLayerLayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum(featureChannelCount, beta, gamma, varianceEpsilon, momentum)
-	if _r == nil {
-		return nil
-	}
-	return &InstanceNormalizationLayer{inner: _r}
+// LayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum creates an instance normalization layer with the number of feature channels, beta and gamma tensors, variance epsilon, and momentum you specify.
+func LayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum(featureChannelCount int, beta *Tensor, gamma *Tensor, varianceEpsilon float32, momentum float32) *InstanceNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:beta:gamma:varianceEpsilon:momentum:"), featureChannelCount, objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon, momentum)
+	return InstanceNormalizationLayerFromID(_r)
 }
 
-// MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum calls the underlying MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum.
-func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, mean *raw.MLCTensor, variance *raw.MLCTensor, beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32, momentum float32) *InstanceNormalizationLayer {
-	_r := raw.MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount, mean, variance, beta, gamma, varianceEpsilon, momentum)
-	if _r == nil {
-		return nil
-	}
-	return &InstanceNormalizationLayer{inner: _r}
+// MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum creates an instance normalization layer with the number of feature channels, mean, variance, beta and gamma tensors, variance epsilon, and momentum you specify.
+func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount int, mean *Tensor, variance *Tensor, beta *Tensor, gamma *Tensor, varianceEpsilon float32, momentum float32) *InstanceNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:"), featureChannelCount, objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon, momentum)
+	return InstanceNormalizationLayerFromID(_r)
 }
 
-// DescriptorWithInputSizeHiddenSizeLayerCount calls the underlying MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCount.
-func DescriptorWithInputSizeHiddenSizeLayerCount(inputSize uint, hiddenSize uint, layerCount uint) *LSTMDescriptor {
-	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCount(inputSize, hiddenSize, layerCount)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMDescriptor{inner: _r}
+// DescriptorWithInputSizeHiddenSizeLayerCount creates a batch first LSTM descriptor with the input size and number of layers you specify.
+func DescriptorWithInputSizeHiddenSizeLayerCount(inputSize int, hiddenSize int, layerCount int) *LSTMDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("descriptorWithInputSize:hiddenSize:layerCount:"), inputSize, hiddenSize, layerCount)
+	return LSTMDescriptorFromID(_r)
 }
 
-// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout calls the underlying MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout.
-func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, isBidirectional bool, dropout float32) *LSTMDescriptor {
-	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout(inputSize, hiddenSize, layerCount, usesBiases, isBidirectional, dropout)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMDescriptor{inner: _r}
+// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout creates a batch first LSTM descriptor with bias and bidirectional options you specify.
+func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout(inputSize int, hiddenSize int, layerCount int, usesBiases bool, isBidirectional bool, dropout float32) *LSTMDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("descriptorWithInputSize:hiddenSize:layerCount:usesBiases:isBidirectional:dropout:"), inputSize, hiddenSize, layerCount, usesBiases, isBidirectional, dropout)
+	return LSTMDescriptorFromID(_r)
 }
 
-// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout calls the underlying MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout.
-func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, dropout float32) *LSTMDescriptor {
-	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout(inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, dropout)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMDescriptor{inner: _r}
+// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout creates a batch first LSTM descriptor that allows you to indicate whether the input and output shape is batch first.
+func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout(inputSize int, hiddenSize int, layerCount int, usesBiases bool, batchFirst bool, isBidirectional bool, dropout float32) *LSTMDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:dropout:"), inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, dropout)
+	return LSTMDescriptorFromID(_r)
 }
 
-// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout calls the underlying MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout.
-func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32) *LSTMDescriptor {
-	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout(inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMDescriptor{inner: _r}
+// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout creates a batch first LSTM descriptor that allows you to indicate whether the layer returns output for all sequences, or output for only the last sequence.
+func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout(inputSize int, hiddenSize int, layerCount int, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32) *LSTMDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:returnsSequences:dropout:"), inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout)
+	return LSTMDescriptorFromID(_r)
 }
 
-// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode calls the underlying MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode.
-func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32, resultMode MLCLSTMResultMode) *LSTMDescriptor {
-	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout, raw.MLCLSTMResultMode(resultMode))
-	if _r == nil {
-		return nil
-	}
-	return &LSTMDescriptor{inner: _r}
+// DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode creates a descriptor with the number of features and layers, dropout, and options for use of biases, batch order, return sequences, bidirectionality, and expected tensors you specify.
+func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize int, hiddenSize int, layerCount int, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32, resultMode LSTMResultMode) *LSTMDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:returnsSequences:dropout:resultMode:"), inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout, resultMode)
+	return LSTMDescriptorFromID(_r)
 }
 
-// LayerWithDescriptorInputWeightsHiddenWeightsBiases calls the underlying MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsBiases.
-func LayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor *raw.MLCLSTMDescriptor, inputWeights *foundation.NSArray[*raw.MLCTensor], hiddenWeights *foundation.NSArray[*raw.MLCTensor], biases *foundation.NSArray[*raw.MLCTensor]) *LSTMLayer {
-	_r := raw.MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor, inputWeights, hiddenWeights, biases)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMLayer{inner: _r}
+// LayerWithDescriptorInputWeightsHiddenWeightsBiases creates an LSTM layer with the descriptor, input and hidden weights, and biases you specify.
+func LayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor *LSTMDescriptor, inputWeights []*Tensor, hiddenWeights []*Tensor, biases []*Tensor) *LSTMLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMLayer")), objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:biases:"), objref.IDOf(descriptor), purego.SliceToNSArray(inputWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(hiddenWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+	return LSTMLayerFromID(_r)
 }
 
-// LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases calls the underlying MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases.
-func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases(descriptor *raw.MLCLSTMDescriptor, inputWeights *foundation.NSArray[*raw.MLCTensor], hiddenWeights *foundation.NSArray[*raw.MLCTensor], peepholeWeights *foundation.NSArray[*raw.MLCTensor], biases *foundation.NSArray[*raw.MLCTensor]) *LSTMLayer {
-	_r := raw.MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases(descriptor, inputWeights, hiddenWeights, peepholeWeights, biases)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMLayer{inner: _r}
+// LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases creates an LSTM layer with the descriptor, weights, and biases you specify.
+func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases(descriptor *LSTMDescriptor, inputWeights []*Tensor, hiddenWeights []*Tensor, peepholeWeights []*Tensor, biases []*Tensor) *LSTMLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMLayer")), objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:"), objref.IDOf(descriptor), purego.SliceToNSArray(inputWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(hiddenWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(peepholeWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+	return LSTMLayerFromID(_r)
 }
 
-// LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation calls the underlying MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation.
-func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation(descriptor *raw.MLCLSTMDescriptor, inputWeights *foundation.NSArray[*raw.MLCTensor], hiddenWeights *foundation.NSArray[*raw.MLCTensor], peepholeWeights *foundation.NSArray[*raw.MLCTensor], biases *foundation.NSArray[*raw.MLCTensor], gateActivations *foundation.NSArray[*raw.MLCActivationDescriptor], outputResultActivation *raw.MLCActivationDescriptor) *LSTMLayer {
-	_r := raw.MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation(descriptor, inputWeights, hiddenWeights, peepholeWeights, biases, gateActivations, outputResultActivation)
-	if _r == nil {
-		return nil
-	}
-	return &LSTMLayer{inner: _r}
+// LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation creates an LSTM layer using the descriptor, weights, biases, gate activations, and output result activation that you specify.
+func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation(descriptor *LSTMDescriptor, inputWeights []*Tensor, hiddenWeights []*Tensor, peepholeWeights []*Tensor, biases []*Tensor, gateActivations []*ActivationDescriptor, outputResultActivation *ActivationDescriptor) *LSTMLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMLayer")), objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:gateActivations:outputResultActivation:"), objref.IDOf(descriptor), purego.SliceToNSArray(inputWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(hiddenWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(peepholeWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(gateActivations, func(_v *ActivationDescriptor) objc.ID { return objref.IDOf(_v) }), objref.IDOf(outputResultActivation))
+	return LSTMLayerFromID(_r)
 }
 
-// SupportsDataTypeOnDevice calls the underlying MLCLayerSupportsDataTypeOnDevice.
-func SupportsDataTypeOnDevice(dataType MLCDataType, device *raw.MLCDevice) bool {
-	return raw.MLCLayerSupportsDataTypeOnDevice(raw.MLCDataType(dataType), device)
+// SupportsDataTypeOnDevice returns a Boolean that indicates whether instances of this layer accept source tensors for the data type and device that you specify.
+func SupportsDataTypeOnDevice(dataType DataType, device *Device) bool {
+	_r := objc.Send[bool](objc.ID(_class("MLCLayer")), objc.RegisterName("supportsDataType:onDevice:"), dataType, objref.IDOf(device))
+	return _r
 }
 
-// LayerWithNormalizedShapeBetaGammaVarianceEpsilon calls the underlying MLCLayerNormalizationLayerLayerWithNormalizedShapeBetaGammaVarianceEpsilon.
-func LayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape *foundation.NSArray[*foundation.NSNumber], beta *raw.MLCTensor, gamma *raw.MLCTensor, varianceEpsilon float32) *LayerNormalizationLayer {
-	_r := raw.MLCLayerNormalizationLayerLayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape, beta, gamma, varianceEpsilon)
-	if _r == nil {
-		return nil
-	}
-	return &LayerNormalizationLayer{inner: _r}
+// LayerWithNormalizedShapeBetaGammaVarianceEpsilon creates a normalization layer with a shape, beta and gamma tensors, and variance epsilon you specify.
+func LayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape []obj.Object, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *LayerNormalizationLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLayerNormalizationLayer")), objc.RegisterName("layerWithNormalizedShape:beta:gamma:varianceEpsilon:"), purego.SliceToNSArray(normalizedShape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
+	return LayerNormalizationLayerFromID(_r)
 }
 
-// DescriptorWithTypeReductionType calls the underlying MLCLossDescriptorDescriptorWithTypeReductionType.
-func DescriptorWithTypeReductionType(lossType MLCLossType, reductionType MLCReductionType) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionType(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType))
-	if _r == nil {
-		return nil
-	}
-	return &LossDescriptor{inner: _r}
+// DescriptorWithTypeReductionType creates a loss descriptor with the loss function and reduction type you specify.
+func DescriptorWithTypeReductionType(lossType LossType, reductionType ReductionType) *LossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossDescriptor")), objc.RegisterName("descriptorWithType:reductionType:"), lossType, reductionType)
+	return LossDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeReductionTypeWeight calls the underlying MLCLossDescriptorDescriptorWithTypeReductionTypeWeight.
-func DescriptorWithTypeReductionTypeWeight(lossType MLCLossType, reductionType MLCReductionType, weight float32) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeight(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType), weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossDescriptor{inner: _r}
+// DescriptorWithTypeReductionTypeWeight creates a loss descriptor with the loss function, reduction type, and weight you specify.
+func DescriptorWithTypeReductionTypeWeight(lossType LossType, reductionType ReductionType, weight float32) *LossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossDescriptor")), objc.RegisterName("descriptorWithType:reductionType:weight:"), lossType, reductionType, weight)
+	return LossDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount calls the underlying MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount.
-func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType), weight, labelSmoothing, classCount)
-	if _r == nil {
-		return nil
-	}
-	return &LossDescriptor{inner: _r}
+// DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount creates a loss descriptor with the loss function, reduction type, weight, label smoothing, and number of classes you specify.
+func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType LossType, reductionType ReductionType, weight float32, labelSmoothing float32, classCount int) *LossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossDescriptor")), objc.RegisterName("descriptorWithType:reductionType:weight:labelSmoothing:classCount:"), lossType, reductionType, weight, labelSmoothing, classCount)
+	return LossDescriptorFromID(_r)
 }
 
-// DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta calls the underlying MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta.
-func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint, epsilon float32, delta float32) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType), weight, labelSmoothing, classCount, epsilon, delta)
-	if _r == nil {
-		return nil
-	}
-	return &LossDescriptor{inner: _r}
+// DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta creates a loss descriptor with the loss function, reduction type, weight, label smoothing, and number of classes, epsilon, and delta that you specify.
+func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType LossType, reductionType ReductionType, weight float32, labelSmoothing float32, classCount int, epsilon float32, delta float32) *LossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossDescriptor")), objc.RegisterName("descriptorWithType:reductionType:weight:labelSmoothing:classCount:epsilon:delta:"), lossType, reductionType, weight, labelSmoothing, classCount, epsilon, delta)
+	return LossDescriptorFromID(_r)
 }
 
-// MLCLossLayerLayerWithDescriptor calls the underlying MLCLossLayerLayerWithDescriptor.
-func MLCLossLayerLayerWithDescriptor(lossDescriptor *raw.MLCLossDescriptor) *LossLayer {
-	_r := raw.MLCLossLayerLayerWithDescriptor(lossDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// MLCLossLayerLayerWithDescriptor creates a loss layer with the descriptor you specify.
+func MLCLossLayerLayerWithDescriptor(lossDescriptor *LossDescriptor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(lossDescriptor))
+	return LossLayerFromID(_r)
 }
 
-// MLCLossLayerLayerWithDescriptorWeights calls the underlying MLCLossLayerLayerWithDescriptorWeights.
-func MLCLossLayerLayerWithDescriptorWeights(lossDescriptor *raw.MLCLossDescriptor, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerLayerWithDescriptorWeights(lossDescriptor, weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// MLCLossLayerLayerWithDescriptorWeights creates a loss layer with the descriptor and weights you specify.
+func MLCLossLayerLayerWithDescriptorWeights(lossDescriptor *LossDescriptor, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("layerWithDescriptor:weights:"), objref.IDOf(lossDescriptor), objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight calls the underlying MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight.
-func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight creates a softmax cross entropy loss layer with the reduction type, label smoothing, number of classes, and weight you specify.
+func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType ReductionType, labelSmoothing float32, classCount int, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:"), reductionType, labelSmoothing, classCount, weight)
+	return LossLayerFromID(_r)
 }
 
-// SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights calls the underlying MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights.
-func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights creates a softmax cross entropy loss layer with the reduction type, label smoothing, number of classes, and weights you specify.
+func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType ReductionType, labelSmoothing float32, classCount int, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:"), reductionType, labelSmoothing, classCount, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight calls the underlying MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight.
-func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight creates a categorical cross entropy loss layer with the reduction type, label smoothing, number of classes, and weight you specify.
+func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType ReductionType, labelSmoothing float32, classCount int, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:"), reductionType, labelSmoothing, classCount, weight)
+	return LossLayerFromID(_r)
 }
 
-// CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights calls the underlying MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights.
-func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights creates a categorical cross entropy loss layer with the reduction type, label smoothing, number of classes, and weights you specify.
+func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType ReductionType, labelSmoothing float32, classCount int, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:"), reductionType, labelSmoothing, classCount, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight calls the underlying MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight.
-func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType MLCReductionType, labelSmoothing float32, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(raw.MLCReductionType(reductionType), labelSmoothing, weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight creates a sigmoid cross entropy loss layer with the reduction type, label smoothing, and weight you specify.
+func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType ReductionType, labelSmoothing float32, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weight:"), reductionType, labelSmoothing, weight)
+	return LossLayerFromID(_r)
 }
 
-// SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights calls the underlying MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights.
-func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType MLCReductionType, labelSmoothing float32, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(raw.MLCReductionType(reductionType), labelSmoothing, weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights creates a sigmoid cross entropy loss layer with the reduction type, label smoothing, and weights you specify.
+func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType ReductionType, labelSmoothing float32, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weights:"), reductionType, labelSmoothing, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// LogLossWithReductionTypeEpsilonWeight calls the underlying MLCLossLayerLogLossWithReductionTypeEpsilonWeight.
-func LogLossWithReductionTypeEpsilonWeight(reductionType MLCReductionType, epsilon float32, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerLogLossWithReductionTypeEpsilonWeight(raw.MLCReductionType(reductionType), epsilon, weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// LogLossWithReductionTypeEpsilonWeight creates a log loss layer with the reduction type, epsilon, and weight you specify.
+func LogLossWithReductionTypeEpsilonWeight(reductionType ReductionType, epsilon float32, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("logLossWithReductionType:epsilon:weight:"), reductionType, epsilon, weight)
+	return LossLayerFromID(_r)
 }
 
-// LogLossWithReductionTypeEpsilonWeights calls the underlying MLCLossLayerLogLossWithReductionTypeEpsilonWeights.
-func LogLossWithReductionTypeEpsilonWeights(reductionType MLCReductionType, epsilon float32, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerLogLossWithReductionTypeEpsilonWeights(raw.MLCReductionType(reductionType), epsilon, weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// LogLossWithReductionTypeEpsilonWeights creates a log loss layer with the reduction type, epsilon, and weights you specify.
+func LogLossWithReductionTypeEpsilonWeights(reductionType ReductionType, epsilon float32, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("logLossWithReductionType:epsilon:weights:"), reductionType, epsilon, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// HuberLossWithReductionTypeDeltaWeight calls the underlying MLCLossLayerHuberLossWithReductionTypeDeltaWeight.
-func HuberLossWithReductionTypeDeltaWeight(reductionType MLCReductionType, delta float32, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerHuberLossWithReductionTypeDeltaWeight(raw.MLCReductionType(reductionType), delta, weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// HuberLossWithReductionTypeDeltaWeight creates a huber loss layer with the reduction type, delta, and weight you specify.
+func HuberLossWithReductionTypeDeltaWeight(reductionType ReductionType, delta float32, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("huberLossWithReductionType:delta:weight:"), reductionType, delta, weight)
+	return LossLayerFromID(_r)
 }
 
-// HuberLossWithReductionTypeDeltaWeights calls the underlying MLCLossLayerHuberLossWithReductionTypeDeltaWeights.
-func HuberLossWithReductionTypeDeltaWeights(reductionType MLCReductionType, delta float32, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerHuberLossWithReductionTypeDeltaWeights(raw.MLCReductionType(reductionType), delta, weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// HuberLossWithReductionTypeDeltaWeights creates a huber loss layer with the reduction type, delta, and weights you specify.
+func HuberLossWithReductionTypeDeltaWeights(reductionType ReductionType, delta float32, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("huberLossWithReductionType:delta:weights:"), reductionType, delta, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// MeanAbsoluteErrorLossWithReductionTypeWeight calls the underlying MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeight.
-func MeanAbsoluteErrorLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// MeanAbsoluteErrorLossWithReductionTypeWeight creates a mean absolute loss layer with the reduction type and weight.
+func MeanAbsoluteErrorLossWithReductionTypeWeight(reductionType ReductionType, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weight:"), reductionType, weight)
+	return LossLayerFromID(_r)
 }
 
-// MeanAbsoluteErrorLossWithReductionTypeWeights calls the underlying MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeights.
-func MeanAbsoluteErrorLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// MeanAbsoluteErrorLossWithReductionTypeWeights creates a mean absolute loss layer with the reduction type and weights you specify.
+func MeanAbsoluteErrorLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// MeanSquaredErrorLossWithReductionTypeWeight calls the underlying MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeight.
-func MeanSquaredErrorLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// MeanSquaredErrorLossWithReductionTypeWeight creates a mean squared loss layer with the reduction type and weight you specify.
+func MeanSquaredErrorLossWithReductionTypeWeight(reductionType ReductionType, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("meanSquaredErrorLossWithReductionType:weight:"), reductionType, weight)
+	return LossLayerFromID(_r)
 }
 
-// MeanSquaredErrorLossWithReductionTypeWeights calls the underlying MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeights.
-func MeanSquaredErrorLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// MeanSquaredErrorLossWithReductionTypeWeights creates a mean squared loss layer with the reduction type and weights you specify.
+func MeanSquaredErrorLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("meanSquaredErrorLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// HingeLossWithReductionTypeWeight calls the underlying MLCLossLayerHingeLossWithReductionTypeWeight.
-func HingeLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerHingeLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// HingeLossWithReductionTypeWeight creates a hinge loss layer with the reduction type and weight you specify.
+func HingeLossWithReductionTypeWeight(reductionType ReductionType, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("hingeLossWithReductionType:weight:"), reductionType, weight)
+	return LossLayerFromID(_r)
 }
 
-// HingeLossWithReductionTypeWeights calls the underlying MLCLossLayerHingeLossWithReductionTypeWeights.
-func HingeLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerHingeLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// HingeLossWithReductionTypeWeights creates a hinge loss layer with the reduction type and weights you specify.
+func HingeLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("hingeLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// CosineDistanceLossWithReductionTypeWeight calls the underlying MLCLossLayerCosineDistanceLossWithReductionTypeWeight.
-func CosineDistanceLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerCosineDistanceLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// CosineDistanceLossWithReductionTypeWeight creates a cosine distance loss layer with the reduction type and weight you specify.
+func CosineDistanceLossWithReductionTypeWeight(reductionType ReductionType, weight float32) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("cosineDistanceLossWithReductionType:weight:"), reductionType, weight)
+	return LossLayerFromID(_r)
 }
 
-// CosineDistanceLossWithReductionTypeWeights calls the underlying MLCLossLayerCosineDistanceLossWithReductionTypeWeights.
-func CosineDistanceLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerCosineDistanceLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
-	if _r == nil {
-		return nil
-	}
-	return &LossLayer{inner: _r}
+// CosineDistanceLossWithReductionTypeWeights creates a cosine distance loss layer with the reduction type and weights you specify.
+func CosineDistanceLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("cosineDistanceLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
+	return LossLayerFromID(_r)
 }
 
-// DescriptorWithAlphaTransposesXTransposesY calls the underlying MLCMatMulDescriptorDescriptorWithAlphaTransposesXTransposesY.
+// DescriptorWithAlphaTransposesXTransposesY creates a batched matrix multiplication descriptor with the alpha value and transpose options you specify.
 func DescriptorWithAlphaTransposesXTransposesY(alpha float32, transposesX bool, transposesY bool) *MatMulDescriptor {
-	_r := raw.MLCMatMulDescriptorDescriptorWithAlphaTransposesXTransposesY(alpha, transposesX, transposesY)
-	if _r == nil {
-		return nil
-	}
-	return &MatMulDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCMatMulDescriptor")), objc.RegisterName("descriptorWithAlpha:transposesX:transposesY:"), alpha, transposesX, transposesY)
+	return MatMulDescriptorFromID(_r)
 }
 
-// Descriptor calls the underlying MLCMatMulDescriptorDescriptor.
+// Descriptor creates a batched matrix multiplication descriptor.
 func Descriptor() *MatMulDescriptor {
-	_r := raw.MLCMatMulDescriptorDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &MatMulDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCMatMulDescriptor")), objc.RegisterName("descriptor"))
+	return MatMulDescriptorFromID(_r)
 }
 
-// MLCMatMulLayerLayerWithDescriptor calls the underlying MLCMatMulLayerLayerWithDescriptor.
-func MLCMatMulLayerLayerWithDescriptor(descriptor *raw.MLCMatMulDescriptor) *MatMulLayer {
-	_r := raw.MLCMatMulLayerLayerWithDescriptor(descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &MatMulLayer{inner: _r}
+// MLCMatMulLayerLayerWithDescriptor creates a matrix multiplication layer with the specified descriptor you specify.
+func MLCMatMulLayerLayerWithDescriptor(descriptor *MatMulDescriptor) *MatMulLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCMatMulLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(descriptor))
+	return MatMulLayerFromID(_r)
 }
 
-// DescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention calls the underlying MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention.
-func DescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention(modelDimension uint, keyDimension uint, valueDimension uint, headCount uint, dropout float32, hasBiases bool, hasAttentionBiases bool, addsZeroAttention bool) *MultiheadAttentionDescriptor {
-	_r := raw.MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention(modelDimension, keyDimension, valueDimension, headCount, dropout, hasBiases, hasAttentionBiases, addsZeroAttention)
-	if _r == nil {
-		return nil
-	}
-	return &MultiheadAttentionDescriptor{inner: _r}
+// DescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention creates a multi-head attention descriptor with the dimensions, number of attention heads, dropout rate, and bias and padding options you specify.
+func DescriptorWithModelDimensionKeyDimensionValueDimensionHeadCountDropoutHasBiasesHasAttentionBiasesAddsZeroAttention(modelDimension int, keyDimension int, valueDimension int, headCount int, dropout float32, hasBiases bool, hasAttentionBiases bool, addsZeroAttention bool) *MultiheadAttentionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCMultiheadAttentionDescriptor")), objc.RegisterName("descriptorWithModelDimension:keyDimension:valueDimension:headCount:dropout:hasBiases:hasAttentionBiases:addsZeroAttention:"), modelDimension, keyDimension, valueDimension, headCount, dropout, hasBiases, hasAttentionBiases, addsZeroAttention)
+	return MultiheadAttentionDescriptorFromID(_r)
 }
 
-// DescriptorWithModelDimensionHeadCount calls the underlying MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionHeadCount.
-func DescriptorWithModelDimensionHeadCount(modelDimension uint, headCount uint) *MultiheadAttentionDescriptor {
-	_r := raw.MLCMultiheadAttentionDescriptorDescriptorWithModelDimensionHeadCount(modelDimension, headCount)
-	if _r == nil {
-		return nil
-	}
-	return &MultiheadAttentionDescriptor{inner: _r}
+// DescriptorWithModelDimensionHeadCount creates a multi-head attention descriptor with the model dimension and number of parallel attention heads you specify.
+func DescriptorWithModelDimensionHeadCount(modelDimension int, headCount int) *MultiheadAttentionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCMultiheadAttentionDescriptor")), objc.RegisterName("descriptorWithModelDimension:headCount:"), modelDimension, headCount)
+	return MultiheadAttentionDescriptorFromID(_r)
 }
 
-// LayerWithDescriptorWeightsBiasesAttentionBiases calls the underlying MLCMultiheadAttentionLayerLayerWithDescriptorWeightsBiasesAttentionBiases.
-func LayerWithDescriptorWeightsBiasesAttentionBiases(descriptor *raw.MLCMultiheadAttentionDescriptor, weights *foundation.NSArray[*raw.MLCTensor], biases *foundation.NSArray[*raw.MLCTensor], attentionBiases *foundation.NSArray[*raw.MLCTensor]) *MultiheadAttentionLayer {
-	_r := raw.MLCMultiheadAttentionLayerLayerWithDescriptorWeightsBiasesAttentionBiases(descriptor, weights, biases, attentionBiases)
-	if _r == nil {
-		return nil
-	}
-	return &MultiheadAttentionLayer{inner: _r}
+// LayerWithDescriptorWeightsBiasesAttentionBiases creates a multi-head attention layer with the descriptor, weights, and biases you specify.
+func LayerWithDescriptorWeightsBiasesAttentionBiases(descriptor *MultiheadAttentionDescriptor, weights []*Tensor, biases []*Tensor, attentionBiases []*Tensor) *MultiheadAttentionLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCMultiheadAttentionLayer")), objc.RegisterName("layerWithDescriptor:weights:biases:attentionBiases:"), objref.IDOf(descriptor), purego.SliceToNSArray(weights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(attentionBiases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+	return MultiheadAttentionLayerFromID(_r)
 }
 
-// DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale calls the underlying MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale.
-func DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
-	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate, gradientRescale, raw.MLCRegularizationType(regularizationType), regularizationScale)
-	if _r == nil {
-		return nil
-	}
-	return &OptimizerDescriptor{inner: _r}
+// DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale creates an optimizer descriptor with the learning rate, gradient rescale, regularization type, and regulation scale that you specify.
+func DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType RegularizationType, regularizationScale float32) *OptimizerDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCOptimizerDescriptor")), objc.RegisterName("descriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:"), learningRate, gradientRescale, regularizationType, regularizationScale)
+	return OptimizerDescriptorFromID(_r)
 }
 
-// DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale calls the underlying MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale.
-func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
-	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate, gradientRescale, appliesGradientClipping, gradientClipMax, gradientClipMin, raw.MLCRegularizationType(regularizationType), regularizationScale)
-	if _r == nil {
-		return nil
-	}
-	return &OptimizerDescriptor{inner: _r}
+// DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale creates a descriptor with the learning rate, gradient rescale, clipping option and values, and regularization type and scale that you specify.
+func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType RegularizationType, regularizationScale float32) *OptimizerDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCOptimizerDescriptor")), objc.RegisterName("descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:"), learningRate, gradientRescale, appliesGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
+	return OptimizerDescriptorFromID(_r)
 }
 
-// DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale calls the underlying MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale.
-func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClippingType MLCGradientClippingType, gradientClipMax float32, gradientClipMin float32, maximumClippingNorm float32, customGlobalNorm float32, regularizationType MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
-	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate, gradientRescale, appliesGradientClipping, raw.MLCGradientClippingType(gradientClippingType), gradientClipMax, gradientClipMin, maximumClippingNorm, customGlobalNorm, raw.MLCRegularizationType(regularizationType), regularizationScale)
-	if _r == nil {
-		return nil
-	}
-	return &OptimizerDescriptor{inner: _r}
+// DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale creates a descriptor with the learning rate, gradient rescale, clipping option and values, and regularization type and scale that you specify.
+func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClippingType GradientClippingType, gradientClipMax float32, gradientClipMin float32, maximumClippingNorm float32, customGlobalNorm float32, regularizationType RegularizationType, regularizationScale float32) *OptimizerDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCOptimizerDescriptor")), objc.RegisterName("descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClippingType:gradientClipMax:gradientClipMin:maximumClippingNorm:customGlobalNorm:regularizationType:regularizationScale:"), learningRate, gradientRescale, appliesGradientClipping, gradientClippingType, gradientClipMax, gradientClipMin, maximumClippingNorm, customGlobalNorm, regularizationType, regularizationScale)
+	return OptimizerDescriptorFromID(_r)
 }
 
-// LayerWithReflectionPadding calls the underlying MLCPaddingLayerLayerWithReflectionPadding.
-func LayerWithReflectionPadding(padding *foundation.NSArray[*foundation.NSNumber]) *PaddingLayer {
-	_r := raw.MLCPaddingLayerLayerWithReflectionPadding(padding)
-	if _r == nil {
-		return nil
-	}
-	return &PaddingLayer{inner: _r}
+// LayerWithReflectionPadding creates a padding layer with the reflection padding sizes you specify.
+func LayerWithReflectionPadding(padding []obj.Object) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithReflectionPadding:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PaddingLayerFromID(_r)
 }
 
-// LayerWithSymmetricPadding calls the underlying MLCPaddingLayerLayerWithSymmetricPadding.
-func LayerWithSymmetricPadding(padding *foundation.NSArray[*foundation.NSNumber]) *PaddingLayer {
-	_r := raw.MLCPaddingLayerLayerWithSymmetricPadding(padding)
-	if _r == nil {
-		return nil
-	}
-	return &PaddingLayer{inner: _r}
+// LayerWithSymmetricPadding creates a padding layer with the symmetric padding sizes you specify.
+func LayerWithSymmetricPadding(padding []obj.Object) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithSymmetricPadding:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PaddingLayerFromID(_r)
 }
 
-// LayerWithZeroPadding calls the underlying MLCPaddingLayerLayerWithZeroPadding.
-func LayerWithZeroPadding(padding *foundation.NSArray[*foundation.NSNumber]) *PaddingLayer {
-	_r := raw.MLCPaddingLayerLayerWithZeroPadding(padding)
-	if _r == nil {
-		return nil
-	}
-	return &PaddingLayer{inner: _r}
+// LayerWithZeroPadding creates a padding layer with the zero padding sizes you specify.
+func LayerWithZeroPadding(padding []obj.Object) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithZeroPadding:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PaddingLayerFromID(_r)
 }
 
-// LayerWithConstantPaddingConstantValue calls the underlying MLCPaddingLayerLayerWithConstantPaddingConstantValue.
-func LayerWithConstantPaddingConstantValue(padding *foundation.NSArray[*foundation.NSNumber], constantValue float32) *PaddingLayer {
-	_r := raw.MLCPaddingLayerLayerWithConstantPaddingConstantValue(padding, constantValue)
-	if _r == nil {
-		return nil
-	}
-	return &PaddingLayer{inner: _r}
+// LayerWithConstantPaddingConstantValue creates a padding layer with the constant padding sizes and constant valu you specify.
+func LayerWithConstantPaddingConstantValue(padding []obj.Object, constantValue float32) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithConstantPadding:constantValue:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), constantValue)
+	return PaddingLayerFromID(_r)
 }
 
-// SetRNGSeedTo calls the underlying MLCPlatformSetRNGSeedTo.
-func SetRNGSeedTo(seed *foundation.NSNumber) {
-	raw.MLCPlatformSetRNGSeedTo(seed)
+// SetRNGSeedTo sets the global random number generator seed value.
+func SetRNGSeedTo(seed obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("MLCPlatform")), objc.RegisterName("setRNGSeedTo:"), objref.IDOf(seed))
 }
 
-// GetRNGseed calls the underlying MLCPlatformGetRNGseed.
-func GetRNGseed() *foundation.NSNumber {
-	return raw.MLCPlatformGetRNGseed()
+// GetRNGseed returns the global random number generator seed value.
+func GetRNGseed() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPlatform")), objc.RegisterName("getRNGseed"))
+	return obj.Wrap(_r)
 }
 
-// PoolingDescriptorWithTypeKernelSizeStride calls the underlying MLCPoolingDescriptorPoolingDescriptorWithTypeKernelSizeStride.
-func PoolingDescriptorWithTypeKernelSizeStride(poolingType MLCPoolingType, kernelSize uint, stride uint) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorPoolingDescriptorWithTypeKernelSizeStride(raw.MLCPoolingType(poolingType), kernelSize, stride)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// PoolingDescriptorWithTypeKernelSizeStride creates a pooling descriptor with the pooling function, kernel size, and stride you specify.
+func PoolingDescriptorWithTypeKernelSizeStride(poolingType PoolingType, kernelSize int, stride int) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("poolingDescriptorWithType:kernelSize:stride:"), poolingType, kernelSize, stride)
+	return PoolingDescriptorFromID(_r)
 }
 
-// MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes.
-func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes creates a descriptor for a max pooling function with the kernel sizes, strides, padding policy, and padding sizes that you specify.
+func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PoolingDescriptorFromID(_r)
 }
 
-// MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes.
-func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes creates a descriptor for a max pooling function with the kernel sizes, strides, dilation rates, padding policy, and padding sizes that you specify.
+func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PoolingDescriptorFromID(_r)
 }
 
-// AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding calls the underlying MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding.
-func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes, countIncludesPadding)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding creates an average pooling descriptor with the kernel sizes, strides, padding policy, padding sizes, and zero padding option that you specify.
+func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes []obj.Object, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object, countIncludesPadding bool) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:countIncludesPadding:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), countIncludesPadding)
+	return PoolingDescriptorFromID(_r)
 }
 
-// AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding calls the underlying MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding.
-func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes, countIncludesPadding)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding creates an average pooling descriptor with the kernel sizes, strides, dilution rates, padding policy and sizes, and zero padding option you specify.
+func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object, countIncludesPadding bool) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:countIncludesPadding:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), countIncludesPadding)
+	return PoolingDescriptorFromID(_r)
 }
 
-// L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes.
-func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes creates a descriptor for an L2 norm pooling function with the kernel sizes, strides, padding policy, and padding sizes that you specify.
+func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PoolingDescriptorFromID(_r)
 }
 
-// L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes.
-func L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingDescriptor{inner: _r}
+// L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes creates a descriptor for an L2 norm pooling function with the kernel sizes, strides, dilation rates, padding policy, and padding sizes you specify.
+func L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PoolingDescriptorFromID(_r)
 }
 
-// MLCPoolingLayerLayerWithDescriptor calls the underlying MLCPoolingLayerLayerWithDescriptor.
-func MLCPoolingLayerLayerWithDescriptor(descriptor *raw.MLCPoolingDescriptor) *PoolingLayer {
-	_r := raw.MLCPoolingLayerLayerWithDescriptor(descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &PoolingLayer{inner: _r}
+// MLCPoolingLayerLayerWithDescriptor creates a pooling layer with the descriptor you specify.
+func MLCPoolingLayerLayerWithDescriptor(descriptor *PoolingDescriptor) *PoolingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(descriptor))
+	return PoolingLayerFromID(_r)
 }
 
-// MLCRMSPropOptimizerOptimizerWithDescriptor calls the underlying MLCRMSPropOptimizerOptimizerWithDescriptor.
-func MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor *raw.MLCOptimizerDescriptor) *RMSPropOptimizer {
-	_r := raw.MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &RMSPropOptimizer{inner: _r}
+// MLCRMSPropOptimizerOptimizerWithDescriptor creates an RMSProp optimizer with the descriptor you specify.
+func MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *RMSPropOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCRMSPropOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
+	return RMSPropOptimizerFromID(_r)
 }
 
-// OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered calls the underlying MLCRMSPropOptimizerOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered.
-func OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescriptor *raw.MLCOptimizerDescriptor, momentumScale float32, alpha float32, epsilon float32, isCentered bool) *RMSPropOptimizer {
-	_r := raw.MLCRMSPropOptimizerOptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescriptor, momentumScale, alpha, epsilon, isCentered)
-	if _r == nil {
-		return nil
-	}
-	return &RMSPropOptimizer{inner: _r}
+// OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered creates an RMSProp optimizer with the descriptor, momentum scale, smoothing, epsilon, and option to compute the centered RMSProp that you specify.
+func OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescriptor *OptimizerDescriptor, momentumScale float32, alpha float32, epsilon float32, isCentered bool) *RMSPropOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCRMSPropOptimizer")), objc.RegisterName("optimizerWithDescriptor:momentumScale:alpha:epsilon:isCentered:"), objref.IDOf(optimizerDescriptor), momentumScale, alpha, epsilon, isCentered)
+	return RMSPropOptimizerFromID(_r)
 }
 
-// LayerWithReductionTypeDimension calls the underlying MLCReductionLayerLayerWithReductionTypeDimension.
-func LayerWithReductionTypeDimension(reductionType MLCReductionType, dimension uint) *ReductionLayer {
-	_r := raw.MLCReductionLayerLayerWithReductionTypeDimension(raw.MLCReductionType(reductionType), dimension)
-	if _r == nil {
-		return nil
-	}
-	return &ReductionLayer{inner: _r}
+// LayerWithReductionTypeDimension creates a reduction layer using the reduction type and dimension you specify.
+func LayerWithReductionTypeDimension(reductionType ReductionType, dimension int) *ReductionLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCReductionLayer")), objc.RegisterName("layerWithReductionType:dimension:"), reductionType, dimension)
+	return ReductionLayerFromID(_r)
 }
 
-// LayerWithReductionTypeDimensions calls the underlying MLCReductionLayerLayerWithReductionTypeDimensions.
-func LayerWithReductionTypeDimensions(reductionType MLCReductionType, dimensions *foundation.NSArray[*foundation.NSNumber]) *ReductionLayer {
-	_r := raw.MLCReductionLayerLayerWithReductionTypeDimensions(raw.MLCReductionType(reductionType), dimensions)
-	if _r == nil {
-		return nil
-	}
-	return &ReductionLayer{inner: _r}
+// LayerWithReductionTypeDimensions creates a reduction layer using the reduction type and dimensions you specify.
+func LayerWithReductionTypeDimensions(reductionType ReductionType, dimensions []obj.Object) *ReductionLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCReductionLayer")), objc.RegisterName("layerWithReductionType:dimensions:"), reductionType, purego.SliceToNSArray(dimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ReductionLayerFromID(_r)
 }
 
-// LayerWithShape calls the underlying MLCReshapeLayerLayerWithShape.
-func LayerWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *ReshapeLayer {
-	_r := raw.MLCReshapeLayerLayerWithShape(shape)
-	if _r == nil {
-		return nil
-	}
-	return &ReshapeLayer{inner: _r}
+// LayerWithShape creates a reshape layer with the shape you specify.
+func LayerWithShape(shape []obj.Object) *ReshapeLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCReshapeLayer")), objc.RegisterName("layerWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ReshapeLayerFromID(_r)
 }
 
-// MLCSGDOptimizerOptimizerWithDescriptor calls the underlying MLCSGDOptimizerOptimizerWithDescriptor.
-func MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor *raw.MLCOptimizerDescriptor) *SGDOptimizer {
-	_r := raw.MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &SGDOptimizer{inner: _r}
+// MLCSGDOptimizerOptimizerWithDescriptor creates an SGD optimizer with the descriptor you specify.
+func MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *SGDOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSGDOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
+	return SGDOptimizerFromID(_r)
 }
 
-// OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum calls the underlying MLCSGDOptimizerOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum.
-func OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescriptor *raw.MLCOptimizerDescriptor, momentumScale float32, usesNesterovMomentum bool) *SGDOptimizer {
-	_r := raw.MLCSGDOptimizerOptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescriptor, momentumScale, usesNesterovMomentum)
-	if _r == nil {
-		return nil
-	}
-	return &SGDOptimizer{inner: _r}
+// OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum create an SGD optimizer with the descriptor, momentum scale, and option to enable Nesterov momentum that you specify.
+func OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescriptor *OptimizerDescriptor, momentumScale float32, usesNesterovMomentum bool) *SGDOptimizer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSGDOptimizer")), objc.RegisterName("optimizerWithDescriptor:momentumScale:usesNesterovMomentum:"), objref.IDOf(optimizerDescriptor), momentumScale, usesNesterovMomentum)
+	return SGDOptimizerFromID(_r)
 }
 
-// LayerWithDimensionReductionType calls the underlying MLCScatterLayerLayerWithDimensionReductionType.
-func LayerWithDimensionReductionType(dimension uint, reductionType MLCReductionType) *ScatterLayer {
-	_r := raw.MLCScatterLayerLayerWithDimensionReductionType(dimension, raw.MLCReductionType(reductionType))
-	if _r == nil {
-		return nil
-	}
-	return &ScatterLayer{inner: _r}
+// LayerWithDimensionReductionType creates a scatter layer with the dimension and reduction type you specify.
+func LayerWithDimensionReductionType(dimension int, reductionType ReductionType) *ScatterLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCScatterLayer")), objc.RegisterName("layerWithDimension:reductionType:"), dimension, reductionType)
+	return ScatterLayerFromID(_r)
 }
 
-// MLCSelectionLayerLayer calls the underlying MLCSelectionLayerLayer.
+// MLCSelectionLayerLayer creates a selection layer.
 func MLCSelectionLayerLayer() *SelectionLayer {
-	_r := raw.MLCSelectionLayerLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SelectionLayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSelectionLayer")), objc.RegisterName("layer"))
+	return SelectionLayerFromID(_r)
 }
 
-// SliceLayerWithStartEndStride calls the underlying MLCSliceLayerSliceLayerWithStartEndStride.
-func SliceLayerWithStartEndStride(start *foundation.NSArray[*foundation.NSNumber], end *foundation.NSArray[*foundation.NSNumber], stride *foundation.NSArray[*foundation.NSNumber]) *SliceLayer {
-	_r := raw.MLCSliceLayerSliceLayerWithStartEndStride(start, end, stride)
-	if _r == nil {
-		return nil
-	}
-	return &SliceLayer{inner: _r}
+// SliceLayerWithStartEndStride creates a slice layer with the specified start, end, and stride.
+func SliceLayerWithStartEndStride(start []obj.Object, end []obj.Object, stride []obj.Object) *SliceLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSliceLayer")), objc.RegisterName("sliceLayerWithStart:end:stride:"), purego.SliceToNSArray(start, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(end, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(stride, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return SliceLayerFromID(_r)
 }
 
-// MLCSoftmaxLayerLayerWithOperation calls the underlying MLCSoftmaxLayerLayerWithOperation.
-func MLCSoftmaxLayerLayerWithOperation(operation MLCSoftmaxOperation) *SoftmaxLayer {
-	_r := raw.MLCSoftmaxLayerLayerWithOperation(raw.MLCSoftmaxOperation(operation))
-	if _r == nil {
-		return nil
-	}
-	return &SoftmaxLayer{inner: _r}
+// MLCSoftmaxLayerLayerWithOperation creates a softmax layer with the operation you specify.
+func MLCSoftmaxLayerLayerWithOperation(operation SoftmaxOperation) *SoftmaxLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSoftmaxLayer")), objc.RegisterName("layerWithOperation:"), operation)
+	return SoftmaxLayerFromID(_r)
 }
 
-// LayerWithOperationDimension calls the underlying MLCSoftmaxLayerLayerWithOperationDimension.
-func LayerWithOperationDimension(operation MLCSoftmaxOperation, dimension uint) *SoftmaxLayer {
-	_r := raw.MLCSoftmaxLayerLayerWithOperationDimension(raw.MLCSoftmaxOperation(operation), dimension)
-	if _r == nil {
-		return nil
-	}
-	return &SoftmaxLayer{inner: _r}
+// LayerWithOperationDimension creates a softmax layer with the operation and dimension you specify.
+func LayerWithOperationDimension(operation SoftmaxOperation, dimension int) *SoftmaxLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSoftmaxLayer")), objc.RegisterName("layerWithOperation:dimension:"), operation, dimension)
+	return SoftmaxLayerFromID(_r)
 }
 
-// LayerWithSplitCountDimension calls the underlying MLCSplitLayerLayerWithSplitCountDimension.
-func LayerWithSplitCountDimension(splitCount uint, dimension uint) *SplitLayer {
-	_r := raw.MLCSplitLayerLayerWithSplitCountDimension(splitCount, dimension)
-	if _r == nil {
-		return nil
-	}
-	return &SplitLayer{inner: _r}
+// LayerWithSplitCountDimension creates a split layer with the number of splits and dimension you specify.
+func LayerWithSplitCountDimension(splitCount int, dimension int) *SplitLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSplitLayer")), objc.RegisterName("layerWithSplitCount:dimension:"), splitCount, dimension)
+	return SplitLayerFromID(_r)
 }
 
-// LayerWithSplitSectionLengthsDimension calls the underlying MLCSplitLayerLayerWithSplitSectionLengthsDimension.
-func LayerWithSplitSectionLengthsDimension(splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *SplitLayer {
-	_r := raw.MLCSplitLayerLayerWithSplitSectionLengthsDimension(splitSectionLengths, dimension)
-	if _r == nil {
-		return nil
-	}
-	return &SplitLayer{inner: _r}
+// LayerWithSplitSectionLengthsDimension creates a split layer with the lengths of each split section and dimension you specify.
+func LayerWithSplitSectionLengthsDimension(splitSectionLengths []obj.Object, dimension int) *SplitLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSplitLayer")), objc.RegisterName("layerWithSplitSectionLengths:dimension:"), purego.SliceToNSArray(splitSectionLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dimension)
+	return SplitLayerFromID(_r)
 }
 
-// TensorWithDescriptor calls the underlying MLCTensorTensorWithDescriptor.
-func TensorWithDescriptor(tensorDescriptor *raw.MLCTensorDescriptor) *Tensor {
-	_r := raw.MLCTensorTensorWithDescriptor(tensorDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithDescriptor creates a tensor without data, using the descriptor you specify.
+func TensorWithDescriptor(tensorDescriptor *TensorDescriptor) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:"), objref.IDOf(tensorDescriptor))
+	return TensorFromID(_r)
 }
 
-// TensorWithDescriptorRandomInitializerType calls the underlying MLCTensorTensorWithDescriptorRandomInitializerType.
-func TensorWithDescriptorRandomInitializerType(tensorDescriptor *raw.MLCTensorDescriptor, randomInitializerType MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithDescriptorRandomInitializerType(tensorDescriptor, raw.MLCRandomInitializerType(randomInitializerType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithDescriptorRandomInitializerType creates a tensor with the descriptor and random initializer type you specify.
+func TensorWithDescriptorRandomInitializerType(tensorDescriptor *TensorDescriptor, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:randomInitializerType:"), objref.IDOf(tensorDescriptor), randomInitializerType)
+	return TensorFromID(_r)
 }
 
-// TensorWithDescriptorFillWithData calls the underlying MLCTensorTensorWithDescriptorFillWithData.
-func TensorWithDescriptorFillWithData(tensorDescriptor *raw.MLCTensorDescriptor, fillData *foundation.NSNumber) *Tensor {
-	_r := raw.MLCTensorTensorWithDescriptorFillWithData(tensorDescriptor, fillData)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithDescriptorFillWithData creates a tensor with the descriptor and scalar value you specify.
+func TensorWithDescriptorFillWithData(tensorDescriptor *TensorDescriptor, fillData obj.Object) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:fillWithData:"), objref.IDOf(tensorDescriptor), objref.IDOf(fillData))
+	return TensorFromID(_r)
 }
 
-// TensorWithDescriptorData calls the underlying MLCTensorTensorWithDescriptorData.
-func TensorWithDescriptorData(tensorDescriptor *raw.MLCTensorDescriptor, data *raw.MLCTensorData) *Tensor {
-	_r := raw.MLCTensorTensorWithDescriptorData(tensorDescriptor, data)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithDescriptorData creates a tensor with the descriptor and data you specify.
+func TensorWithDescriptorData(tensorDescriptor *TensorDescriptor, data *TensorData) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:data:"), objref.IDOf(tensorDescriptor), objref.IDOf(data))
+	return TensorFromID(_r)
 }
 
-// TensorWithShape calls the underlying MLCTensorTensorWithShape.
-func TensorWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *Tensor {
-	_r := raw.MLCTensorTensorWithShape(shape)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithShape creates a tensor without data, with the shape you specify.
+func TensorWithShape(shape []obj.Object) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return TensorFromID(_r)
 }
 
-// TensorWithShapeRandomInitializerType calls the underlying MLCTensorTensorWithShapeRandomInitializerType.
-func TensorWithShapeRandomInitializerType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeRandomInitializerType(shape, raw.MLCRandomInitializerType(randomInitializerType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithShapeRandomInitializerType creates a tensor with the shape and random initializer type you specify.
+func TensorWithShapeRandomInitializerType(shape []obj.Object, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:randomInitializerType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), randomInitializerType)
+	return TensorFromID(_r)
 }
 
-// TensorWithShapeRandomInitializerTypeDataType calls the underlying MLCTensorTensorWithShapeRandomInitializerTypeDataType.
-func TensorWithShapeRandomInitializerTypeDataType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType MLCRandomInitializerType, dataType MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeRandomInitializerTypeDataType(shape, raw.MLCRandomInitializerType(randomInitializerType), raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithShapeRandomInitializerTypeDataType creates a tensor with the shape, random initializer, and data type you specify.
+func TensorWithShapeRandomInitializerTypeDataType(shape []obj.Object, randomInitializerType RandomInitializerType, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:randomInitializerType:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), randomInitializerType, dataType)
+	return TensorFromID(_r)
 }
 
-// TensorWithShapeDataType calls the underlying MLCTensorTensorWithShapeDataType.
-func TensorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeDataType(shape, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithShapeDataType creates a tensor without data, with the shape and data type you specify.
+func TensorWithShapeDataType(shape []obj.Object, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType)
+	return TensorFromID(_r)
 }
 
-// TensorWithShapeDataDataType calls the underlying MLCTensorTensorWithShapeDataDataType.
-func TensorWithShapeDataDataType(shape *foundation.NSArray[*foundation.NSNumber], data *raw.MLCTensorData, dataType MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeDataDataType(shape, data, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithShapeDataDataType creates a tensor with the shape, data, and data type you specify.
+func TensorWithShapeDataDataType(shape []obj.Object, data *TensorData, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:data:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(data), dataType)
+	return TensorFromID(_r)
 }
 
-// TensorWithShapeFillWithDataDataType calls the underlying MLCTensorTensorWithShapeFillWithDataDataType.
-func TensorWithShapeFillWithDataDataType(shape *foundation.NSArray[*foundation.NSNumber], fillData *foundation.NSNumber, dataType MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeFillWithDataDataType(shape, fillData, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithShapeFillWithDataDataType creates a tensor with the shape, scalar value, and data type you specify.
+func TensorWithShapeFillWithDataDataType(shape []obj.Object, fillData obj.Object, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:fillWithData:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(fillData), dataType)
+	return TensorFromID(_r)
 }
 
-// TensorWithWidthHeightFeatureChannelCountBatchSize calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSize.
-func TensorWithWidthHeightFeatureChannelCountBatchSize(width uint, height uint, featureChannelCount uint, batchSize uint) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSize(width, height, featureChannelCount, batchSize)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithWidthHeightFeatureChannelCountBatchSize creates a tensor without data, with the sizes and number of feature channels you specify.
+func TensorWithWidthHeightFeatureChannelCountBatchSize(width int, height int, featureChannelCount int, batchSize int) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:"), width, height, featureChannelCount, batchSize)
+	return TensorFromID(_r)
 }
 
-// TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, fillData float32, dataType MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width, height, featureChannelCount, batchSize, fillData, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType creates a tensor with the sizes and number of feature channels, and filled with the data and type you specify.
+func TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width int, height int, featureChannelCount int, batchSize int, fillData float32, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:fillWithData:dataType:"), width, height, featureChannelCount, batchSize, fillData, dataType)
+	return TensorFromID(_r)
 }
 
-// TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width uint, height uint, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width, height, featureChannelCount, batchSize, raw.MLCRandomInitializerType(randomInitializerType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType creates a tensor with the sizes, number of feature channels, and random data using the random initializer type you specify.
+func TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width int, height int, featureChannelCount int, batchSize int, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:randomInitializerType:"), width, height, featureChannelCount, batchSize, randomInitializerType)
+	return TensorFromID(_r)
 }
 
-// TensorWithWidthHeightFeatureChannelCountBatchSizeData calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeData.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeData(width uint, height uint, featureChannelCount uint, batchSize uint, data *raw.MLCTensorData) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeData(width, height, featureChannelCount, batchSize, data)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithWidthHeightFeatureChannelCountBatchSizeData creates a tensor with the sizes, number of feature channels, and data you specify.
+func TensorWithWidthHeightFeatureChannelCountBatchSizeData(width int, height int, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:"), width, height, featureChannelCount, batchSize, objref.IDOf(data))
+	return TensorFromID(_r)
 }
 
-// TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, data *raw.MLCTensorData, dataType MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width, height, featureChannelCount, batchSize, data, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType creates a tensor with the sizes, number of feature channels, data, and data type you specify.
+func TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width int, height int, featureChannelCount int, batchSize int, data *TensorData, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:dataType:"), width, height, featureChannelCount, batchSize, objref.IDOf(data), dataType)
+	return TensorFromID(_r)
 }
 
-// TensorWithSequenceLengthFeatureChannelCountBatchSize calls the underlying MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSize.
-func TensorWithSequenceLengthFeatureChannelCountBatchSize(sequenceLength uint, featureChannelCount uint, batchSize uint) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSize(sequenceLength, featureChannelCount, batchSize)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithSequenceLengthFeatureChannelCountBatchSize creates a tensor without data, with the sequence length, number of feature channels, and batch size you specify.
+func TensorWithSequenceLengthFeatureChannelCountBatchSize(sequenceLength int, featureChannelCount int, batchSize int) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:"), sequenceLength, featureChannelCount, batchSize)
+	return TensorFromID(_r)
 }
 
-// TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType calls the underlying MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType.
-func TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength uint, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength, featureChannelCount, batchSize, raw.MLCRandomInitializerType(randomInitializerType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType creates a tensor with the sequence length, number of feature channels, batch size, and random initializer type you specify.
+func TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength int, featureChannelCount int, batchSize int, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:randomInitializerType:"), sequenceLength, featureChannelCount, batchSize, randomInitializerType)
+	return TensorFromID(_r)
 }
 
-// TensorWithSequenceLengthFeatureChannelCountBatchSizeData calls the underlying MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeData.
-func TensorWithSequenceLengthFeatureChannelCountBatchSizeData(sequenceLength uint, featureChannelCount uint, batchSize uint, data *raw.MLCTensorData) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeData(sequenceLength, featureChannelCount, batchSize, data)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithSequenceLengthFeatureChannelCountBatchSizeData creates a tensor with the sequence length, number of feature channels, batch size, and data you specify.
+func TensorWithSequenceLengthFeatureChannelCountBatchSizeData(sequenceLength int, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:data:"), sequenceLength, featureChannelCount, batchSize, objref.IDOf(data))
+	return TensorFromID(_r)
 }
 
-// TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType calls the underlying MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType.
-func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths, sortedSequences, featureChannelCount, batchSize, raw.MLCRandomInitializerType(randomInitializerType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and random initializer type you specify.
+func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths []obj.Object, sortedSequences bool, featureChannelCount int, batchSize int, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:randomInitializerType:"), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, randomInitializerType)
+	return TensorFromID(_r)
 }
 
-// TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData calls the underlying MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData.
-func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, featureChannelCount uint, batchSize uint, data *raw.MLCTensorData) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths, sortedSequences, featureChannelCount, batchSize, data)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and data you specify.
+func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths []obj.Object, sortedSequences bool, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:"), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, objref.IDOf(data))
+	return TensorFromID(_r)
 }
 
-// DataWithBytesNoCopyLength calls the underlying MLCTensorDataDataWithBytesNoCopyLength.
-func DataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *TensorData {
-	_r := raw.MLCTensorDataDataWithBytesNoCopyLength(bytes_, length)
-	if _r == nil {
-		return nil
-	}
-	return &TensorData{inner: _r}
+// DescriptorWithShapeDataType creates a tensor descriptor with the shape and data type you specify.
+func DescriptorWithShapeDataType(shape []obj.Object, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType)
+	return TensorDescriptorFromID(_r)
 }
 
-// DataWithImmutableBytesNoCopyLength calls the underlying MLCTensorDataDataWithImmutableBytesNoCopyLength.
-func DataWithImmutableBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *TensorData {
-	_r := raw.MLCTensorDataDataWithImmutableBytesNoCopyLength(bytes_, length)
-	if _r == nil {
-		return nil
-	}
-	return &TensorData{inner: _r}
+// DescriptorWithShapeSequenceLengthsSortedSequencesDataType creates a tensor descriptor with the shape, variable sequence lengths, sorting indicator, and data type you specify.
+func DescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape []obj.Object, sequenceLengths []obj.Object, sortedSequences bool, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:sequenceLengths:sortedSequences:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, dataType)
+	return TensorDescriptorFromID(_r)
 }
 
-// DataWithBytesNoCopyLengthDeallocator calls the underlying MLCTensorDataDataWithBytesNoCopyLengthDeallocator.
-func DataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint, deallocator func(unsafe.Pointer, uint)) *TensorData {
-	_r := raw.MLCTensorDataDataWithBytesNoCopyLengthDeallocator(bytes_, length, deallocator)
-	if _r == nil {
-		return nil
-	}
-	return &TensorData{inner: _r}
+// DescriptorWithWidthHeightFeatureChannelCountBatchSize creates a tensor descriptor with the width and height, number of feature channels, and batch size you specify.
+func DescriptorWithWidthHeightFeatureChannelCountBatchSize(width int, height int, featureChannels int, batchSize int) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithWidth:height:featureChannelCount:batchSize:"), width, height, featureChannels, batchSize)
+	return TensorDescriptorFromID(_r)
 }
 
-// DescriptorWithShapeDataType calls the underlying MLCTensorDescriptorDescriptorWithShapeDataType.
-func DescriptorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithShapeDataType(shape, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType creates a tensor descriptor with the width and height, number of feature channels, batch size, and data type you specify.
+func DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width int, height int, featureChannelCount int, batchSize int, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithWidth:height:featureChannelCount:batchSize:dataType:"), width, height, featureChannelCount, batchSize, dataType)
+	return TensorDescriptorFromID(_r)
 }
 
-// DescriptorWithShapeSequenceLengthsSortedSequencesDataType calls the underlying MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType.
-func DescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape *foundation.NSArray[*foundation.NSNumber], sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, dataType MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape, sequenceLengths, sortedSequences, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType creates a tensor descriptor with the sizing, number of feature channels, and data type you specify.
+func ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width int, height int, inputFeatureChannelCount int, outputFeatureChannelCount int, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("convolutionWeightsDescriptorWithWidth:height:inputFeatureChannelCount:outputFeatureChannelCount:dataType:"), width, height, inputFeatureChannelCount, outputFeatureChannelCount, dataType)
+	return TensorDescriptorFromID(_r)
 }
 
-// DescriptorWithWidthHeightFeatureChannelCountBatchSize calls the underlying MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSize.
-func DescriptorWithWidthHeightFeatureChannelCountBatchSize(width uint, height uint, featureChannels uint, batchSize uint) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSize(width, height, featureChannels, batchSize)
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType creates a tensor descriptor with the number of feature channels and data type you specify.
+func ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount int, outputFeatureChannelCount int, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("convolutionWeightsDescriptorWithInputFeatureChannelCount:outputFeatureChannelCount:dataType:"), inputFeatureChannelCount, outputFeatureChannelCount, dataType)
+	return TensorDescriptorFromID(_r)
 }
 
-// DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType calls the underlying MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType.
-func DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width uint, height uint, featureChannelCount uint, batchSize uint, dataType MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width, height, featureChannelCount, batchSize, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// ConvolutionBiasesDescriptorWithFeatureChannelCountDataType creates a tensor descriptor with the number of feature channels and data type you specify.
+func ConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount int, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("convolutionBiasesDescriptorWithFeatureChannelCount:dataType:"), featureChannelCount, dataType)
+	return TensorDescriptorFromID(_r)
 }
 
-// ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType calls the underlying MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType.
-func ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width uint, height uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width, height, inputFeatureChannelCount, outputFeatureChannelCount, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// MaxTensorDimensions the maximum number of tensor dimensions supported
+func MaxTensorDimensions() int {
+	_r := objc.Send[int](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("maxTensorDimensions"))
+	return _r
 }
 
-// ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType calls the underlying MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType.
-func ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount, outputFeatureChannelCount, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// ParameterWithTensor creates a tensor parameter with the tensor you specify.
+func ParameterWithTensor(tensor *Tensor) *TensorParameter {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorParameter")), objc.RegisterName("parameterWithTensor:"), objref.IDOf(tensor))
+	return TensorParameterFromID(_r)
 }
 
-// ConvolutionBiasesDescriptorWithFeatureChannelCountDataType calls the underlying MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType.
-func ConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount uint, dataType MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount, raw.MLCDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+// ParameterWithTensorOptimizerData creates a tensor parameter with the tensor and optimizer data you specify.
+func ParameterWithTensorOptimizerData(tensor *Tensor, optimizerData []*TensorData) *TensorParameter {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorParameter")), objc.RegisterName("parameterWithTensor:optimizerData:"), objref.IDOf(tensor), purego.SliceToNSArray(optimizerData, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }))
+	return TensorParameterFromID(_r)
 }
 
-// MaxTensorDimensions calls the underlying MLCTensorDescriptorMaxTensorDimensions.
-func MaxTensorDimensions() uint {
-	return raw.MLCTensorDescriptorMaxTensorDimensions()
+// GraphWithGraphObjectsLossLayerOptimizer creates a training graph with the layers from the graph objects, loss layer, and optimizer you specify.
+func GraphWithGraphObjectsLossLayerOptimizer(graphObjects []*Graph, lossLayer *Layer, optimizer *Optimizer) *TrainingGraph {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTrainingGraph")), objc.RegisterName("graphWithGraphObjects:lossLayer:optimizer:"), purego.SliceToNSArray(graphObjects, func(_v *Graph) objc.ID { return objref.IDOf(_v) }), objref.IDOf(lossLayer), objref.IDOf(optimizer))
+	return TrainingGraphFromID(_r)
 }
 
-// ParameterWithTensor calls the underlying MLCTensorParameterParameterWithTensor.
-func ParameterWithTensor(tensor *raw.MLCTensor) *TensorParameter {
-	_r := raw.MLCTensorParameterParameterWithTensor(tensor)
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+// LayerWithDimensions creates a transpose layer with the dimensions you specify.
+func LayerWithDimensions(dimensions []obj.Object) *TransposeLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTransposeLayer")), objc.RegisterName("layerWithDimensions:"), purego.SliceToNSArray(dimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return TransposeLayerFromID(_r)
 }
 
-// ParameterWithTensorOptimizerData calls the underlying MLCTensorParameterParameterWithTensorOptimizerData.
-func ParameterWithTensorOptimizerData(tensor *raw.MLCTensor, optimizerData *foundation.NSArray[*raw.MLCTensorData]) *TensorParameter {
-	_r := raw.MLCTensorParameterParameterWithTensorOptimizerData(tensor, optimizerData)
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+// MLCUpsampleLayerLayerWithShape creates an upsample layer with the shape you specify.
+func MLCUpsampleLayerLayerWithShape(shape []obj.Object) *UpsampleLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("layerWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return UpsampleLayerFromID(_r)
 }
 
-// GraphWithGraphObjectsLossLayerOptimizer calls the underlying MLCTrainingGraphGraphWithGraphObjectsLossLayerOptimizer.
-func GraphWithGraphObjectsLossLayerOptimizer(graphObjects *foundation.NSArray[*raw.MLCGraph], lossLayer *raw.MLCLayer, optimizer *raw.MLCOptimizer) *TrainingGraph {
-	_r := raw.MLCTrainingGraphGraphWithGraphObjectsLossLayerOptimizer(graphObjects, lossLayer, optimizer)
-	if _r == nil {
-		return nil
-	}
-	return &TrainingGraph{inner: _r}
+// LayerWithShapeSampleModeAlignsCorners creates an upsample layer with the shape, upsampling algorithm, and corner alignement option you specify.
+func LayerWithShapeSampleModeAlignsCorners(shape []obj.Object, sampleMode SampleMode, alignsCorners bool) *UpsampleLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("layerWithShape:sampleMode:alignsCorners:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sampleMode, alignsCorners)
+	return UpsampleLayerFromID(_r)
 }
 
-// LayerWithDimensions calls the underlying MLCTransposeLayerLayerWithDimensions.
-func LayerWithDimensions(dimensions *foundation.NSArray[*foundation.NSNumber]) *TransposeLayer {
-	_r := raw.MLCTransposeLayerLayerWithDimensions(dimensions)
-	if _r == nil {
-		return nil
-	}
-	return &TransposeLayer{inner: _r}
+// DescriptorWithAnchorBoxesAnchorBoxCount creates a YOLO loss filter descriptor with the anchor box data and number of anchor boxes you specify.
+func DescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes obj.Object, anchorBoxCount int) *YOLOLossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCYOLOLossDescriptor")), objc.RegisterName("descriptorWithAnchorBoxes:anchorBoxCount:"), objref.IDOf(anchorBoxes), anchorBoxCount)
+	return YOLOLossDescriptorFromID(_r)
 }
 
-// MLCUpsampleLayerLayerWithShape calls the underlying MLCUpsampleLayerLayerWithShape.
-func MLCUpsampleLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *UpsampleLayer {
-	_r := raw.MLCUpsampleLayerLayerWithShape(shape)
-	if _r == nil {
-		return nil
-	}
-	return &UpsampleLayer{inner: _r}
-}
-
-// LayerWithShapeSampleModeAlignsCorners calls the underlying MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners.
-func LayerWithShapeSampleModeAlignsCorners(shape *foundation.NSArray[*foundation.NSNumber], sampleMode MLCSampleMode, alignsCorners bool) *UpsampleLayer {
-	_r := raw.MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners(shape, raw.MLCSampleMode(sampleMode), alignsCorners)
-	if _r == nil {
-		return nil
-	}
-	return &UpsampleLayer{inner: _r}
-}
-
-// DescriptorWithAnchorBoxesAnchorBoxCount calls the underlying MLCYOLOLossDescriptorDescriptorWithAnchorBoxesAnchorBoxCount.
-func DescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes *foundation.NSData, anchorBoxCount uint) *YOLOLossDescriptor {
-	_r := raw.MLCYOLOLossDescriptorDescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes, anchorBoxCount)
-	if _r == nil {
-		return nil
-	}
-	return &YOLOLossDescriptor{inner: _r}
-}
-
-// MLCYOLOLossLayerLayerWithDescriptor calls the underlying MLCYOLOLossLayerLayerWithDescriptor.
-func MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor *raw.MLCYOLOLossDescriptor) *YOLOLossLayer {
-	_r := raw.MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &YOLOLossLayer{inner: _r}
+// MLCYOLOLossLayerLayerWithDescriptor creates a YOLO loss layer with the descriptor you specify.
+func MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor *YOLOLossDescriptor) *YOLOLossLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCYOLOLossLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(lossDescriptor))
+	return YOLOLossLayerFromID(_r)
 }

@@ -5,67 +5,90 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that maintains the user’s current focus status and your app’s ability to access it.
+// FocusStatusCenter is an idiomatic wrapper over the Objective-C class INFocusStatusCenter.
 //
-// FocusStatusCenter wraps [raw.INFocusStatusCenter] with a fluent Go API.
+// An object that maintains the user’s current focus status and your app’s ability to access it.
 type FocusStatusCenter struct {
-	inner *raw.INFocusStatusCenter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INFocusStatusCenter].
-func (x *FocusStatusCenter) Unwrap() *raw.INFocusStatusCenter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FocusStatusCenter) ID() objc.ID { return x.inner.Ptr() }
-
-// FocusStatusCenterFromID adopts an existing object pointer as a FocusStatusCenter (nil for 0).
+// FocusStatusCenterFromID adopts an existing Objective-C object as a FocusStatusCenter
+// (nil for 0), retaining it and registering a release finalizer.
 func FocusStatusCenterFromID(id objc.ID) *FocusStatusCenter {
 	if id == 0 {
 		return nil
 	}
-	return &FocusStatusCenter{inner: raw.INFocusStatusCenterFromID(id)}
+	x := &FocusStatusCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFocusStatusCenter creates a new [FocusStatusCenter].
-func NewFocusStatusCenter() *FocusStatusCenter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INFocusStatusCenter")), objc.RegisterName("new"))
-	return &FocusStatusCenter{inner: raw.INFocusStatusCenterFromID(_id)}
-}
-
-// Asks the system for access to the user’s focus status.
-//
-// RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
-func (x *FocusStatusCenter) RequestAuthorizationWithCompletionHandler(completionHandler func(INFocusStatusAuthorizationStatus)) {
-	x.inner.RequestAuthorizationWithCompletionHandler(func(_a0 raw.INFocusStatusAuthorizationStatus) {
-		completionHandler(INFocusStatusAuthorizationStatus(_a0))
-	})
-}
-
-// FocusStatus calls the underlying FocusStatus.
-func (x *FocusStatusCenter) FocusStatus() *FocusStatus {
-	_r := x.inner.FocusStatus()
-	if _r == nil {
+// focusStatusCenterAdopt wraps an Objective-C object that this code just created as a
+// FocusStatusCenter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func focusStatusCenterAdopt(id objc.ID) *FocusStatusCenter {
+	if id == 0 {
 		return nil
 	}
-	return &FocusStatus{inner: _r}
+	x := &FocusStatusCenter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *FocusStatusCenter) AuthorizationStatus() INFocusStatusAuthorizationStatus {
-	return INFocusStatusAuthorizationStatus(x.inner.AuthorizationStatus())
+// Description returns the object's -description text.
+func (x *FocusStatusCenter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FocusStatusCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FocusStatusCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FocusStatusCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFocusStatusCenter creates a new FocusStatusCenter.
+func NewFocusStatusCenter() *FocusStatusCenter {
+	_id := objc.Send[objc.ID](objc.ID(_class("INFocusStatusCenter")), objc.RegisterName("new"))
+	return focusStatusCenterAdopt(_id)
+}
+
+// FocusStatus wraps the corresponding Objective-C method.
+func (x *FocusStatusCenter) FocusStatus() *FocusStatus {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusStatus"))
+	return FocusStatusFromID(_r)
+}
+
+// AuthorizationStatus wraps the corresponding Objective-C method.
+func (x *FocusStatusCenter) AuthorizationStatus() FocusStatusAuthorizationStatus {
+	_r := objc.Send[FocusStatusAuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
 // FocusStatusCenterable is the interface implemented by [FocusStatusCenter], for mocking and DI.
 type FocusStatusCenterable interface {
-	Unwrap() *raw.INFocusStatusCenter
-	RequestAuthorizationWithCompletionHandler(completionHandler func(INFocusStatusAuthorizationStatus))
+	obj.Object
 	FocusStatus() *FocusStatus
-	AuthorizationStatus() INFocusStatusAuthorizationStatus
+	AuthorizationStatus() FocusStatusAuthorizationStatus
 }
 
 var _ FocusStatusCenterable = (*FocusStatusCenter)(nil)

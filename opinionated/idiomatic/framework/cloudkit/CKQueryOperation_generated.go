@@ -6,309 +6,231 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An operation for executing queries in a database.
+// QueryOperation is an idiomatic wrapper over the Objective-C class CKQueryOperation.
 //
-// QueryOperation wraps [raw.CKQueryOperation] with a fluent Go API.
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation for executing queries in a database.
 type QueryOperation struct {
-	inner *raw.CKQueryOperation
+	DatabaseOperation
 }
 
-// Unwrap returns the underlying [raw.CKQueryOperation].
-func (x *QueryOperation) Unwrap() *raw.CKQueryOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QueryOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryOperationFromID adopts an existing object pointer as a QueryOperation (nil for 0).
+// QueryOperationFromID adopts an existing Objective-C object as a QueryOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryOperationFromID(id objc.ID) *QueryOperation {
 	if id == 0 {
 		return nil
 	}
-	return &QueryOperation{inner: raw.CKQueryOperationFromID(id)}
+	x := &QueryOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQueryOperation creates a new [QueryOperation].
+// queryOperationAdopt wraps an Objective-C object that this code just created as a
+// QueryOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryOperationAdopt(id objc.ID) *QueryOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &QueryOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewQueryOperation creates a new QueryOperation.
 func NewQueryOperation() *QueryOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQueryOperation")), objc.RegisterName("new"))
-	return &QueryOperation{inner: raw.CKQueryOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKQueryOperation")), objc.RegisterName("new"))
+	return queryOperationAdopt(_id)
 }
 
-// Creates an operation that searches for records in the specified record zone.
-//
-// NewQueryOperationWithQuery creates a new [QueryOperation].
-func NewQueryOperationWithQuery(query *raw.CKQuery) *QueryOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQueryOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuery:"), query.Ptr())
-	return &QueryOperation{inner: raw.CKQueryOperationFromID(_id)}
+// NewQueryOperationWithQuery creates an operation that searches for records in the specified record zone.
+func NewQueryOperationWithQuery(query *Query) *QueryOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQueryOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuery:"), objref.IDOf(query))
+	return queryOperationAdopt(_id)
 }
 
-// Creates an operation with additional results from a previous search.
-//
-// NewQueryOperationWithCursor creates a new [QueryOperation].
-func NewQueryOperationWithCursor(cursor *raw.CKQueryCursor) *QueryOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQueryOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCursor:"), cursor.Ptr())
-	return &QueryOperation{inner: raw.CKQueryOperationFromID(_id)}
+// NewQueryOperationWithCursor creates an operation with additional results from a previous search.
+func NewQueryOperationWithCursor(cursor *QueryCursor) *QueryOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQueryOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCursor:"), objref.IDOf(cursor))
+	return queryOperationAdopt(_id)
 }
 
-// The query for the search.
-//
-// WithQuery sets the query property and returns the receiver for chaining.
+// WithQuery the query for the search.
 func (x *QueryOperation) WithQuery(query *Query) *QueryOperation {
-	x.inner.SetQuery(query.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuery:"), objref.IDOf(query))
 	return x
 }
 
-// The cursor for continuing the search.
-//
-// WithCursor sets the cursor property and returns the receiver for chaining.
+// WithCursor the cursor for continuing the search.
 func (x *QueryOperation) WithCursor(cursor *QueryCursor) *QueryOperation {
-	x.inner.SetCursor(cursor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursor:"), objref.IDOf(cursor))
 	return x
 }
 
-// The ID of the record zone that contains the records to search.
-//
-// WithZoneID sets the zoneID property and returns the receiver for chaining.
+// WithZoneID the ID of the record zone that contains the records to search.
 func (x *QueryOperation) WithZoneID(zoneID *RecordZoneID) *QueryOperation {
-	x.inner.SetZoneID(zoneID.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
 	return x
 }
 
-// The maximum number of records to return at one time.
-//
-// WithResultsLimit sets the resultsLimit property and returns the receiver for chaining.
-func (x *QueryOperation) WithResultsLimit(resultsLimit uint) *QueryOperation {
-	x.inner.SetResultsLimit(resultsLimit)
+// WithResultsLimit the maximum number of records to return at one time.
+func (x *QueryOperation) WithResultsLimit(resultsLimit int) *QueryOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
 	return x
 }
 
-// The fields of the records to fetch.
-//
-// WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
-func (x *QueryOperation) WithDesiredKeys(items ...*foundation.NSString) *QueryOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDesiredKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDesiredKeys(_arr)
+// WithDesiredKeys the fields of the records to fetch.
+func (x *QueryOperation) WithDesiredKeys(items ...obj.Object) *QueryOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
 	return x
 }
 
-// The closure to execute when a record becomes available.
-//
-// WithRecordFetchedBlock sets the recordFetchedBlock property and returns the receiver for chaining.
-func (x *QueryOperation) WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKRecord)) *QueryOperation {
-	x.inner.SetRecordFetchedBlock(recordFetchedBlock)
+// WithRecordFetchedBlock the closure to execute when a record becomes available.
+func (x *QueryOperation) WithRecordFetchedBlock(recordFetchedBlock func(obj.Object)) *QueryOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordFetchedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordFetchedBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The closure to execute when a record match is available.
-//
-// WithRecordMatchedBlock sets the recordMatchedBlock property and returns the receiver for chaining.
-func (x *QueryOperation) WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *QueryOperation {
-	x.inner.SetRecordMatchedBlock(recordMatchedBlock)
-	return x
-}
-
-// The closure to execute after CloudKit retrieves all of the records.
-//
-// WithQueryCompletionBlock sets the queryCompletionBlock property and returns the receiver for chaining.
-func (x *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(*raw.CKQueryCursor, unsafe.Pointer)) *QueryOperation {
-	x.inner.SetQueryCompletionBlock(queryCompletionBlock)
-	return x
-}
-
-// The database that the operation uses.
-//
-// WithDatabase sets the database property and returns the receiver for chaining.
+// WithDatabase the database that the operation uses.
 func (x *QueryOperation) WithDatabase(database *Database) *QueryOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The operation’s configuration.
-//
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration the operation’s configuration.
 func (x *QueryOperation) WithConfiguration(configuration *OperationConfiguration) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// The operation’s group.
-//
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup the operation’s group.
 func (x *QueryOperation) WithGroup(group *OperationGroup) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
 func (x *QueryOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
-//
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer the operation's container.
 func (x *QueryOperation) WithContainer(container *Container) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
-//
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *QueryOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
 func (x *QueryOperation) WithLongLived(longLived bool) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
-//
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
 func (x *QueryOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
-//
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
 func (x *QueryOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *QueryOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// The query for the search. The initial value of this property is the query that you provide to the “CKQueryOperation/init(query:)“ method. When the value in the “CKQueryOperation/cursor“ property is `nil`, the operation uses this property's value to execute a new search and return its results to your completion handler. If “CKQueryOperation/cursor“ isn't `nil`, the operation uses the cursor instead. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
-//
-// Query calls the underlying Query.
+// Query the query for the search. The initial value of this property is the query that you provide to the “CKQueryOperation/init(query:)“ method. When the value in the “CKQueryOperation/cursor“ property is `nil`, the operation uses this property's value to execute a new search and return its results to your completion handler. If “CKQueryOperation/cursor“ isn't `nil`, the operation uses the cursor instead. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
 func (x *QueryOperation) Query() *Query {
-	_r := x.inner.Query()
-	if _r == nil {
-		return nil
-	}
-	return &Query{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("query"))
+	return QueryFromID(_r)
 }
 
-// SetQuery calls the underlying SetQuery.
-func (x *QueryOperation) SetQuery(query *raw.CKQuery) {
-	x.inner.SetQuery(query)
+// SetQuery wraps the corresponding Objective-C method.
+func (x *QueryOperation) SetQuery(query *Query) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuery:"), objref.IDOf(query))
 }
 
-// The cursor for continuing the search. The initial value of this property is the cursor that you provide to the “CKQueryOperation/init(cursor:)“ method. When you use a cursor, the operation ignores the contents of the “CKQueryOperation/query“ property. This property's value is an opaque value that CloudKit provides. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. If you intend to specify or change the value in this property, do so before you execute the operation or submit it to a queue.
-//
-// Cursor calls the underlying Cursor.
+// Cursor the cursor for continuing the search. The initial value of this property is the cursor that you provide to the “CKQueryOperation/init(cursor:)“ method. When you use a cursor, the operation ignores the contents of the “CKQueryOperation/query“ property. This property's value is an opaque value that CloudKit provides. For more information, see the “CKQueryOperation/queryCompletionBlock“ property. If you intend to specify or change the value in this property, do so before you execute the operation or submit it to a queue.
 func (x *QueryOperation) Cursor() *QueryCursor {
-	_r := x.inner.Cursor()
-	if _r == nil {
-		return nil
-	}
-	return &QueryCursor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cursor"))
+	return QueryCursorFromID(_r)
 }
 
-// SetCursor calls the underlying SetCursor.
-func (x *QueryOperation) SetCursor(cursor *raw.CKQueryCursor) {
-	x.inner.SetCursor(cursor)
+// SetCursor wraps the corresponding Objective-C method.
+func (x *QueryOperation) SetCursor(cursor *QueryCursor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursor:"), objref.IDOf(cursor))
 }
 
-// The ID of the record zone that contains the records to search. The value of this property limits the scope of the search to only the records in the specified record zone. If you don't specify a record zone, the search includes all record zones. When you create an operation using the “CKQueryOperation/init(cursor:)“ method, this property's value is `nil` and CloudKit ignores any changes that you make to it. When the operation executes, the cursor provides the record zone information from the original search that provides the cursor.
-//
-// ZoneID calls the underlying ZoneID.
+// ZoneID the ID of the record zone that contains the records to search. The value of this property limits the scope of the search to only the records in the specified record zone. If you don't specify a record zone, the search includes all record zones. When you create an operation using the “CKQueryOperation/init(cursor:)“ method, this property's value is `nil` and CloudKit ignores any changes that you make to it. When the operation executes, the cursor provides the record zone information from the original search that provides the cursor.
 func (x *QueryOperation) ZoneID() *RecordZoneID {
-	_r := x.inner.ZoneID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordZoneID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+	return RecordZoneIDFromID(_r)
 }
 
-// SetZoneID calls the underlying SetZoneID.
-func (x *QueryOperation) SetZoneID(zoneID *raw.CKRecordZoneID) {
-	x.inner.SetZoneID(zoneID)
+// SetZoneID wraps the corresponding Objective-C method.
+func (x *QueryOperation) SetZoneID(zoneID *RecordZoneID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoneID:"), objref.IDOf(zoneID))
 }
 
-// The maximum number of records to return at one time. For most queries, leave the value of this property as the default value, which is the “CKQueryOperation/maximumResults“ constant. When using that value, CloudKit returns as many records as possible while minimizing delays in receiving those records. If you want to process a fixed number of results, change the value of this property accordingly.
-//
-// ResultsLimit calls the underlying ResultsLimit.
-func (x *QueryOperation) ResultsLimit() uint {
-	return x.inner.ResultsLimit()
+// ResultsLimit the maximum number of records to return at one time. For most queries, leave the value of this property as the default value, which is the “CKQueryOperation/maximumResults“ constant. When using that value, CloudKit returns as many records as possible while minimizing delays in receiving those records. If you want to process a fixed number of results, change the value of this property accordingly.
+func (x *QueryOperation) ResultsLimit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultsLimit"))
+	return _r
 }
 
-// SetResultsLimit calls the underlying SetResultsLimit.
-func (x *QueryOperation) SetResultsLimit(resultsLimit uint) {
-	x.inner.SetResultsLimit(resultsLimit)
+// SetResultsLimit wraps the corresponding Objective-C method.
+func (x *QueryOperation) SetResultsLimit(resultsLimit int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
 }
 
-// The fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
+// DesiredKeys the fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
 //
 // DesiredKeys returns the collection as a Go slice.
-func (x *QueryOperation) DesiredKeys() []*foundation.NSString {
-	arr := x.inner.DesiredKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *QueryOperation) DesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDesiredKeys calls the underlying SetDesiredKeys.
-func (x *QueryOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDesiredKeys(desiredKeys)
+// SetDesiredKeys wraps the corresponding Objective-C method.
+func (x *QueryOperation) SetDesiredKeys(desiredKeys []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The closure to execute when a record becomes available. The closure returns no value and takes the following parameter: - A single record that matches the search criteria. After identifying and sorting the records, the query operation executes this closure once for each of the result's records. The closure executes serially with respect to all other closures of the operation, so you can expect only one closure at a time to execute for this operation. Set the property's value before you execute the operation or submit it to a queue. - Warning: Query indexes update asynchronously so they aren't always current. If you query for records that you recently changed and don't allow enough time for those changes to process, the query's results may be incorrect. The results may not contain the correct records, and the records may be out of order.
+// SetRecordFetchedBlock wraps the corresponding Objective-C method.
 //
-// RecordFetchedBlock calls the underlying RecordFetchedBlock.
-func (x *QueryOperation) RecordFetchedBlock() objc.Block {
-	return x.inner.RecordFetchedBlock()
-}
-
 // SetRecordFetchedBlock blocks until the operation completes or ctx is cancelled.
-func (x *QueryOperation) SetRecordFetchedBlock(ctx context.Context) (*Record, error) {
+func (x *QueryOperation) SetRecordFetchedBlock(ctx context.Context) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetRecordFetchedBlock(func(_p0 *raw.CKRecord) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Record{inner: _p0}
-		}
+		_o.val = RecordFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordFetchedBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -318,42 +240,22 @@ func (x *QueryOperation) SetRecordFetchedBlock(ctx context.Context) (*Record, er
 	}
 }
 
-// The closure to execute when a record match is available. The closure returns no value and takes the following parameters: - The ID of the record. - The record, or `nil` if CloudKit can't retrieve the record. - If CloudKit can't retrieve the record, an error that provides information about the failure; otherwise, `nil`. After identifying and sorting the records, the query operation executes this closure once for each of the result's records. The closure executes serially with respect to all other closures of the operation, so you can expect only one closure at a time to execute for this operation. Set the property's value before you execute the operation or submit it to a queue. - Warning: Query indexes update asynchronously so they aren't always current. If you query for records that you recently changed and don't allow enough time for those changes to process, the query's results may be incorrect. The results may not contain the correct records, and the records may be out of order.
+// SetQueryCompletionBlock wraps the corresponding Objective-C method.
 //
-// RecordMatchedBlock calls the underlying RecordMatchedBlock.
-func (x *QueryOperation) RecordMatchedBlock() objc.Block {
-	return x.inner.RecordMatchedBlock()
-}
-
-// SetRecordMatchedBlock calls the underlying SetRecordMatchedBlock.
-func (x *QueryOperation) SetRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) {
-	x.inner.SetRecordMatchedBlock(recordMatchedBlock)
-}
-
-// The closure to execute after CloudKit retrieves all of the records. The closure returns no value and takes the following parameters: - A cursor that indicates there are more results to fetch, or `nil` if there are no additional results. Use the cursor to create a new query operation when you're ready to retrieve the next batch of results. - An error that contains information about a problem, or `nil` if CloudKit retrieves the results successfully. This closure executes only once, and represents your final opportunity to process the results. It executes after all of the individual record fetch closures. The closure executes serially with respect to the other closures of the operation. If the number of records that the operation intends to return exceeds “CKQueryOperation/resultsLimit“, the operation provides a cursor that you can use to retrieve the next batch of results. You must create a separate operation using the cursor to fetch the next batch of results. Update the value of this property before you execute the operation or submit it to a queue.
-//
-// QueryCompletionBlock calls the underlying QueryCompletionBlock.
-func (x *QueryOperation) QueryCompletionBlock() objc.Block {
-	return x.inner.QueryCompletionBlock()
-}
-
 // SetQueryCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (*QueryCursor, error) {
+func (x *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (result *QueryCursor, err error) {
 	type _result struct {
 		val *QueryCursor
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetQueryCompletionBlock(func(_p0 *raw.CKQueryCursor, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &QueryCursor{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = QueryCursorFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryCompletionBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -363,25 +265,15 @@ func (x *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (*QueryCur
 	}
 }
 
-func (x *QueryOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
-	return &x.inner.CKDatabaseOperation
-}
-
-func (x *QueryOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKDatabaseOperation.CKOperation
-}
-
 // QueryOperationable is the interface implemented by [QueryOperation], for mocking and DI.
 type QueryOperationable interface {
-	Unwrap() *raw.CKQueryOperation
+	obj.Object
 	WithQuery(query *Query) *QueryOperation
 	WithCursor(cursor *QueryCursor) *QueryOperation
 	WithZoneID(zoneID *RecordZoneID) *QueryOperation
-	WithResultsLimit(resultsLimit uint) *QueryOperation
-	WithDesiredKeys(items ...*foundation.NSString) *QueryOperation
-	WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKRecord)) *QueryOperation
-	WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *QueryOperation
-	WithQueryCompletionBlock(queryCompletionBlock func(*raw.CKQueryCursor, unsafe.Pointer)) *QueryOperation
+	WithResultsLimit(resultsLimit int) *QueryOperation
+	WithDesiredKeys(items ...obj.Object) *QueryOperation
+	WithRecordFetchedBlock(recordFetchedBlock func(obj.Object)) *QueryOperation
 	WithDatabase(database *Database) *QueryOperation
 	WithConfiguration(configuration *OperationConfiguration) *QueryOperation
 	WithGroup(group *OperationGroup) *QueryOperation
@@ -392,21 +284,21 @@ type QueryOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *QueryOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *QueryOperation
 	Query() *Query
-	SetQuery(query *raw.CKQuery)
+	SetQuery(query *Query)
 	Cursor() *QueryCursor
-	SetCursor(cursor *raw.CKQueryCursor)
+	SetCursor(cursor *QueryCursor)
 	ZoneID() *RecordZoneID
-	SetZoneID(zoneID *raw.CKRecordZoneID)
-	ResultsLimit() uint
-	SetResultsLimit(resultsLimit uint)
-	DesiredKeys() []*foundation.NSString
-	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
-	RecordFetchedBlock() objc.Block
+	SetZoneID(zoneID *RecordZoneID)
+	ResultsLimit() int
+	SetResultsLimit(resultsLimit int)
+	DesiredKeys() []obj.Object
+	SetDesiredKeys(desiredKeys []obj.Object)
 	SetRecordFetchedBlock(ctx context.Context) (*Record, error)
-	RecordMatchedBlock() objc.Block
-	SetRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer))
-	QueryCompletionBlock() objc.Block
 	SetQueryCompletionBlock(ctx context.Context) (*QueryCursor, error)
 }
 
 var _ QueryOperationable = (*QueryOperation)(nil)
+
+var _ DatabaseOperationProvider = (*QueryOperation)(nil)
+
+var _ OperationProvider = (*QueryOperation)(nil)

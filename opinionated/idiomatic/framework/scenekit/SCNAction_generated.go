@@ -5,143 +5,141 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A simple, reusable animation that changes attributes of any node you attach it to.
+// Action is an idiomatic wrapper over the Objective-C class SCNAction.
 //
-// Action wraps [raw.SCNAction] with a fluent Go API.
+// A simple, reusable animation that changes attributes of any node you attach it to.
 type Action struct {
-	inner *raw.SCNAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNAction].
-func (x *Action) Unwrap() *raw.SCNAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Action) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionFromID adopts an existing object pointer as a Action (nil for 0).
+// ActionFromID adopts an existing Objective-C object as a Action
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	return &Action{inner: raw.SCNActionFromID(id)}
-}
-
-// NewAction creates a new [Action].
-func NewAction() *Action {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAction")), objc.RegisterName("new"))
-	return &Action{inner: raw.SCNActionFromID(_id)}
-}
-
-// The duration required to complete an action.
-//
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *Action) WithDuration(duration float64) *Action {
-	x.inner.SetDuration(duration)
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The timing mode used to execute an action.
-//
-// WithTimingMode sets the timingMode property and returns the receiver for chaining.
-func (x *Action) WithTimingMode(timingMode SCNActionTimingMode) *Action {
-	x.inner.SetTimingMode(raw.SCNActionTimingMode(timingMode))
-	return x
-}
-
-// A block SceneKit calls to determine the action’s animation timing.
-//
-// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
-	x.inner.SetTimingFunction(timingFunction)
-	return x
-}
-
-// A speed factor that modifies how fast an action runs.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
-func (x *Action) WithSpeed(speed float64) *Action {
-	x.inner.SetSpeed(speed)
-	return x
-}
-
-// Creates an action that reverses the behavior of another action.
-//
-// ReversedAction calls the underlying ReversedAction.
-func (x *Action) ReversedAction() *Action {
-	_r := x.inner.ReversedAction()
-	if _r == nil {
+// actionAdopt wraps an Objective-C object that this code just created as a
+// Action (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionAdopt(id objc.ID) *Action {
+	if id == 0 {
 		return nil
 	}
-	return &Action{inner: _r}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property duration @abstract This is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
-//
-// Duration calls the underlying Duration.
+// Description returns the object's -description text.
+func (x *Action) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAction creates a new Action.
+func NewAction() *Action {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("new"))
+	return actionAdopt(_id)
+}
+
+// WithDuration the duration required to complete an action.
+func (x *Action) WithDuration(duration float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
+	return x
+}
+
+// WithTimingMode the timing mode used to execute an action.
+func (x *Action) WithTimingMode(timingMode ActionTimingMode) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
+	return x
+}
+
+// WithSpeed a speed factor that modifies how fast an action runs.
+func (x *Action) WithSpeed(speed float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
+	return x
+}
+
+// ReversedAction creates an action that reverses the behavior of another action.
+func (x *Action) ReversedAction() *Action {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedAction"))
+	return ActionFromID(_r)
+}
+
+// Duration this is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
 func (x *Action) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// SetDuration calls the underlying SetDuration.
+// SetDuration wraps the corresponding Objective-C method.
 func (x *Action) SetDuration(duration float64) {
-	x.inner.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
-// @property timingMode @abstract The timing mode used to execute an action.
-//
-// TimingMode calls the underlying TimingMode.
-func (x *Action) TimingMode() SCNActionTimingMode {
-	return SCNActionTimingMode(x.inner.TimingMode())
+// TimingMode the timing mode used to execute an action.
+func (x *Action) TimingMode() ActionTimingMode {
+	_r := objc.Send[ActionTimingMode](objref.IDOf(x), objc.RegisterName("timingMode"))
+	return _r
 }
 
-// SetTimingMode calls the underlying SetTimingMode.
-func (x *Action) SetTimingMode(timingMode SCNActionTimingMode) {
-	x.inner.SetTimingMode(raw.SCNActionTimingMode(timingMode))
+// SetTimingMode wraps the corresponding Objective-C method.
+func (x *Action) SetTimingMode(timingMode ActionTimingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
 }
 
-// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SCNActionTimingFunction
-//
-// TimingFunction calls the underlying TimingFunction.
-func (x *Action) TimingFunction() objc.Block {
-	return x.inner.TimingFunction()
-}
-
-// SetTimingFunction calls the underlying SetTimingFunction.
-func (x *Action) SetTimingFunction(timingFunction objc.Block) {
-	x.inner.SetTimingFunction(timingFunction)
-}
-
-// @property speed @abstract A speed factor that modifies how fast an action runs. Defaults to 1.
-//
-// Speed calls the underlying Speed.
+// Speed a speed factor that modifies how fast an action runs. Defaults to 1.
 func (x *Action) Speed() float64 {
-	return x.inner.Speed()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
+	return _r
 }
 
-// SetSpeed calls the underlying SetSpeed.
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *Action) SetSpeed(speed float64) {
-	x.inner.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
 // Actionable is the interface implemented by [Action], for mocking and DI.
 type Actionable interface {
-	Unwrap() *raw.SCNAction
+	obj.Object
 	WithDuration(duration float64) *Action
-	WithTimingMode(timingMode SCNActionTimingMode) *Action
-	WithTimingFunction(timingFunction objc.Block) *Action
+	WithTimingMode(timingMode ActionTimingMode) *Action
 	WithSpeed(speed float64) *Action
 	ReversedAction() *Action
 	Duration() float64
 	SetDuration(duration float64)
-	TimingMode() SCNActionTimingMode
-	SetTimingMode(timingMode SCNActionTimingMode)
-	TimingFunction() objc.Block
-	SetTimingFunction(timingFunction objc.Block)
+	TimingMode() ActionTimingMode
+	SetTimingMode(timingMode ActionTimingMode)
 	Speed() float64
 	SetSpeed(speed float64)
 }

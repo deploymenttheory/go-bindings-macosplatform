@@ -17,6 +17,8 @@ const (
 	BluetoothRFCOMMLineStatusFramingError BluetoothRFCOMMLineStatus = 3
 )
 
+// String returns the BluetoothRFCOMMLineStatus constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BluetoothRFCOMMLineStatus) String() string {
 	switch e {
 	case BluetoothRFCOMMLineStatusNoError:
@@ -41,6 +43,8 @@ const (
 	KBluetoothRFCOMMParityTypeMaxParity  BluetoothRFCOMMParityType = 3
 )
 
+// String returns the BluetoothRFCOMMParityType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e BluetoothRFCOMMParityType) String() string {
 	switch e {
 	case KBluetoothRFCOMMParityTypeNoParity:
@@ -63,6 +67,8 @@ const (
 	IOBluetoothSMSModeText IOBluetoothSMSMode = 1
 )
 
+// String returns the IOBluetoothSMSMode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOBluetoothSMSMode) String() string {
 	switch e {
 	case IOBluetoothSMSModePDU:
@@ -71,26 +77,5 @@ func (e IOBluetoothSMSMode) String() string {
 		return "IOBluetoothSMSModeText"
 	default:
 		return fmt.Sprintf("IOBluetoothSMSMode(%d)", int64(e))
-	}
-}
-
-type IOBluetoothUserNotificationChannelDirection int64
-
-const (
-	KIOBluetoothUserNotificationChannelDirectionAny      IOBluetoothUserNotificationChannelDirection = 0
-	KIOBluetoothUserNotificationChannelDirectionIncoming IOBluetoothUserNotificationChannelDirection = 1
-	KIOBluetoothUserNotificationChannelDirectionOutgoing IOBluetoothUserNotificationChannelDirection = 2
-)
-
-func (e IOBluetoothUserNotificationChannelDirection) String() string {
-	switch e {
-	case KIOBluetoothUserNotificationChannelDirectionAny:
-		return "KIOBluetoothUserNotificationChannelDirectionAny"
-	case KIOBluetoothUserNotificationChannelDirectionIncoming:
-		return "KIOBluetoothUserNotificationChannelDirectionIncoming"
-	case KIOBluetoothUserNotificationChannelDirectionOutgoing:
-		return "KIOBluetoothUserNotificationChannelDirectionOutgoing"
-	default:
-		return fmt.Sprintf("IOBluetoothUserNotificationChannelDirection(%d)", int64(e))
 	}
 }

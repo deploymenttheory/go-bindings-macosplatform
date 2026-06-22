@@ -5,23 +5,17 @@
 package notificationcenter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/notificationcenter"
+	"github.com/ebitengine/purego/objc"
 )
 
-// NCWidgetControllerWidgetController calls the underlying NCWidgetControllerWidgetController.
+// NCWidgetControllerWidgetController returns a widget controller used to specify whether a widget has content to display.
 func NCWidgetControllerWidgetController() *WidgetController {
-	_r := raw.NCWidgetControllerWidgetController()
-	if _r == nil {
-		return nil
-	}
-	return &WidgetController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NCWidgetController")), objc.RegisterName("widgetController"))
+	return WidgetControllerFromID(_r)
 }
 
-// DefaultWidgetController calls the underlying NCWidgetControllerDefaultWidgetController.
+// DefaultWidgetController wraps the corresponding Objective-C method.
 func DefaultWidgetController() *WidgetController {
-	_r := raw.NCWidgetControllerDefaultWidgetController()
-	if _r == nil {
-		return nil
-	}
-	return &WidgetController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NCWidgetController")), objc.RegisterName("defaultWidgetController"))
+	return WidgetControllerFromID(_r)
 }

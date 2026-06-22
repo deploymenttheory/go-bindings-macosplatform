@@ -5,68 +5,78 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a flight number that the data detection system matches.
+// MatchFlightNumber is an idiomatic wrapper over the Objective-C class DDMatchFlightNumber.
 //
-// MatchFlightNumber wraps [raw.DDMatchFlightNumber] with a fluent Go API.
+// It embeds [Match], promoting that type's methods.
+//
+// An object that contains a flight number that the data detection system matches.
 type MatchFlightNumber struct {
-	inner *raw.DDMatchFlightNumber
+	Match
 }
 
-// Unwrap returns the underlying [raw.DDMatchFlightNumber].
-func (x *MatchFlightNumber) Unwrap() *raw.DDMatchFlightNumber { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchFlightNumber) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchFlightNumberFromID adopts an existing object pointer as a MatchFlightNumber (nil for 0).
+// MatchFlightNumberFromID adopts an existing Objective-C object as a MatchFlightNumber
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchFlightNumberFromID(id objc.ID) *MatchFlightNumber {
 	if id == 0 {
 		return nil
 	}
-	return &MatchFlightNumber{inner: raw.DDMatchFlightNumberFromID(id)}
+	x := &MatchFlightNumber{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatchFlightNumber creates a new [MatchFlightNumber].
+// matchFlightNumberAdopt wraps an Objective-C object that this code just created as a
+// MatchFlightNumber (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchFlightNumberAdopt(id objc.ID) *MatchFlightNumber {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchFlightNumber{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatchFlightNumber creates a new MatchFlightNumber.
 func NewMatchFlightNumber() *MatchFlightNumber {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchFlightNumber")), objc.RegisterName("new"))
-	return &MatchFlightNumber{inner: raw.DDMatchFlightNumberFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchFlightNumber")), objc.RegisterName("new"))
+	return matchFlightNumberAdopt(_id)
 }
 
-// The name of an airline.
-//
-// Airline calls the underlying Airline.
+// Airline the name of an airline.
 func (x *MatchFlightNumber) Airline() string {
-	_r := x.inner.Airline()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airline"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// A string that represents a flight number.
-//
-// FlightNumber calls the underlying FlightNumber.
+// FlightNumber a string that represents a flight number.
 func (x *MatchFlightNumber) FlightNumber() string {
-	_r := x.inner.FlightNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MatchFlightNumber) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchFlightNumberable is the interface implemented by [MatchFlightNumber], for mocking and DI.
 type MatchFlightNumberable interface {
-	Unwrap() *raw.DDMatchFlightNumber
+	obj.Object
 	Airline() string
 	FlightNumber() string
 }
 
 var _ MatchFlightNumberable = (*MatchFlightNumber)(nil)
+
+var _ MatchProvider = (*MatchFlightNumber)(nil)

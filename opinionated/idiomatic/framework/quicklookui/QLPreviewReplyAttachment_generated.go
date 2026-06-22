@@ -5,62 +5,91 @@
 package quicklookui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.
+// PreviewReplyAttachment is an idiomatic wrapper over the Objective-C class QLPreviewReplyAttachment.
 //
-// PreviewReplyAttachment wraps [raw.QLPreviewReplyAttachment] with a fluent Go API.
+// An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.
 type PreviewReplyAttachment struct {
-	inner *raw.QLPreviewReplyAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLPreviewReplyAttachment].
-func (x *PreviewReplyAttachment) Unwrap() *raw.QLPreviewReplyAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PreviewReplyAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// PreviewReplyAttachmentFromID adopts an existing object pointer as a PreviewReplyAttachment (nil for 0).
+// PreviewReplyAttachmentFromID adopts an existing Objective-C object as a PreviewReplyAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func PreviewReplyAttachmentFromID(id objc.ID) *PreviewReplyAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &PreviewReplyAttachment{inner: raw.QLPreviewReplyAttachmentFromID(id)}
+	x := &PreviewReplyAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a preview reply attachment with the specified type.
-//
-// NewPreviewReplyAttachmentWithDataContentType creates a new [PreviewReplyAttachment].
-func NewPreviewReplyAttachmentWithDataContentType(data *foundation.NSData, contentType *uniformtypeidentifiers.UTType) *PreviewReplyAttachment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReplyAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:contentType:"), data.Ptr(), contentType.Ptr())
-	return &PreviewReplyAttachment{inner: raw.QLPreviewReplyAttachmentFromID(_id)}
+// previewReplyAttachmentAdopt wraps an Objective-C object that this code just created as a
+// PreviewReplyAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func previewReplyAttachmentAdopt(id objc.ID) *PreviewReplyAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &PreviewReplyAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The data content of an html preview
-//
-// Data calls the underlying Data.
-func (x *PreviewReplyAttachment) Data() *foundation.NSData {
-	return x.inner.Data()
+// Description returns the object's -description text.
+func (x *PreviewReplyAttachment) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The content type of the attachment for an html preview
-//
-// ContentType calls the underlying ContentType.
-func (x *PreviewReplyAttachment) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PreviewReplyAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PreviewReplyAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewReplyAttachment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPreviewReplyAttachmentWithDataContentType creates a preview reply attachment with the specified type.
+func NewPreviewReplyAttachmentWithDataContentType(data obj.Object, contentType obj.Object) *PreviewReplyAttachment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewReplyAttachment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:contentType:"), objref.IDOf(data), objref.IDOf(contentType))
+	return previewReplyAttachmentAdopt(_id)
+}
+
+// Data the data content of an html preview
+func (x *PreviewReplyAttachment) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
+}
+
+// ContentType the content type of the attachment for an html preview
+func (x *PreviewReplyAttachment) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
 // PreviewReplyAttachmentable is the interface implemented by [PreviewReplyAttachment], for mocking and DI.
 type PreviewReplyAttachmentable interface {
-	Unwrap() *raw.QLPreviewReplyAttachment
-	Data() *foundation.NSData
-	ContentType() *uniformtypeidentifiers.UTType
+	obj.Object
+	Data() obj.Object
+	ContentType() obj.Object
 }
 
 var _ PreviewReplyAttachmentable = (*PreviewReplyAttachment)(nil)

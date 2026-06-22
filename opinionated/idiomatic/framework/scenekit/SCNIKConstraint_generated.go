@@ -5,124 +5,100 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A constraint that applies inverse kinematics to make a chain of nodes “reach” toward a target point.
+// IKConstraint is an idiomatic wrapper over the Objective-C class SCNIKConstraint.
 //
-// IKConstraint wraps [raw.SCNIKConstraint] with a fluent Go API.
+// It embeds [Constraint], promoting that type's methods.
+//
+// A constraint that applies inverse kinematics to make a chain of nodes “reach” toward a target point.
 type IKConstraint struct {
-	inner *raw.SCNIKConstraint
+	Constraint
 }
 
-// Unwrap returns the underlying [raw.SCNIKConstraint].
-func (x *IKConstraint) Unwrap() *raw.SCNIKConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// IKConstraintFromID adopts an existing object pointer as a IKConstraint (nil for 0).
+// IKConstraintFromID adopts an existing Objective-C object as a IKConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func IKConstraintFromID(id objc.ID) *IKConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &IKConstraint{inner: raw.SCNIKConstraintFromID(id)}
-}
-
-// Initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
-//
-// NewIKConstraintWithChainRootNode creates a new [IKConstraint].
-func NewIKConstraintWithChainRootNode(chainRootNode *raw.SCNNode) *IKConstraint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNIKConstraint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChainRootNode:"), chainRootNode.Ptr())
-	return &IKConstraint{inner: raw.SCNIKConstraintFromID(_id)}
-}
-
-// The desired position for the constrained node, in the scene’s world coordinate space. Animatable.
-//
-// WithTargetPosition sets the targetPosition property and returns the receiver for chaining.
-func (x *IKConstraint) WithTargetPosition(targetPosition raw.SCNVector3) *IKConstraint {
-	x.inner.SetTargetPosition(targetPosition)
+	x := &IKConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
-	return x
-}
-
-// The influence of the constraint on the node’s transformation.
-//
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
-func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
-	return x
-}
-
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// WithIncremental sets the incremental property and returns the receiver for chaining.
-func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
-	return x
-}
-
-// Sets the rotation limit, in degrees, for the specified node.
-//
-// SetMaxAllowedRotationAngleForJoint calls the underlying SetMaxAllowedRotationAngleForJoint.
-func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode) {
-	x.inner.SetMaxAllowedRotationAngleForJoint(angle, node)
-}
-
-// Returns the rotation limit, in degrees, for the specified node.
-//
-// MaxAllowedRotationAngleForJoint calls the underlying MaxAllowedRotationAngleForJoint.
-func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float64 {
-	return x.inner.MaxAllowedRotationAngleForJoint(node)
-}
-
-// @property chainRootNode @abstract Specifies the root node of the kinematic chain.
-//
-// ChainRootNode calls the underlying ChainRootNode.
-func (x *IKConstraint) ChainRootNode() *Node {
-	_r := x.inner.ChainRootNode()
-	if _r == nil {
+// iKConstraintAdopt wraps an Objective-C object that this code just created as a
+// IKConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKConstraintAdopt(id objc.ID) *IKConstraint {
+	if id == 0 {
 		return nil
 	}
-	return &Node{inner: _r}
+	x := &IKConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property target @abstract Specifies the target position (in world space coordinates) of the end joint (i.e the node that owns the IK constraint). Defaults to (0,0,0). Animatable.
-//
-// TargetPosition calls the underlying TargetPosition.
-func (x *IKConstraint) TargetPosition() raw.SCNVector3 {
-	return x.inner.TargetPosition()
+// NewIKConstraintWithChainRootNode initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
+func NewIKConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNIKConstraint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChainRootNode:"), objref.IDOf(chainRootNode))
+	return iKConstraintAdopt(_id)
 }
 
-// SetTargetPosition calls the underlying SetTargetPosition.
-func (x *IKConstraint) SetTargetPosition(targetPosition raw.SCNVector3) {
-	x.inner.SetTargetPosition(targetPosition)
+// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
+func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
 }
 
-func (x *IKConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+// WithInfluenceFactor the influence of the constraint on the node’s transformation.
+func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return x
+}
+
+// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
+	return x
+}
+
+// SetMaxAllowedRotationAngleForJoint sets the rotation limit, in degrees, for the specified node.
+func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAllowedRotationAngle:forJoint:"), angle, objref.IDOf(node))
+}
+
+// MaxAllowedRotationAngleForJoint returns the rotation limit, in degrees, for the specified node.
+func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *Node) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxAllowedRotationAngleForJoint:"), objref.IDOf(node))
+	return _r
+}
+
+// ChainRootNode specifies the root node of the kinematic chain.
+func (x *IKConstraint) ChainRootNode() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chainRootNode"))
+	return NodeFromID(_r)
+}
 
 // IKConstraintable is the interface implemented by [IKConstraint], for mocking and DI.
 type IKConstraintable interface {
-	Unwrap() *raw.SCNIKConstraint
-	WithTargetPosition(targetPosition raw.SCNVector3) *IKConstraint
+	obj.Object
 	WithEnabled(enabled bool) *IKConstraint
 	WithInfluenceFactor(influenceFactor float64) *IKConstraint
 	WithIncremental(incremental bool) *IKConstraint
-	SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode)
-	MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float64
+	SetMaxAllowedRotationAngleForJoint(angle float64, node *Node)
+	MaxAllowedRotationAngleForJoint(node *Node) float64
 	ChainRootNode() *Node
-	TargetPosition() raw.SCNVector3
-	SetTargetPosition(targetPosition raw.SCNVector3)
 }
 
 var _ IKConstraintable = (*IKConstraint)(nil)
+
+var _ ConstraintProvider = (*IKConstraint)(nil)

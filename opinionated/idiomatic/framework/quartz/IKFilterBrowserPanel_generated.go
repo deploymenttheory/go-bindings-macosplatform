@@ -5,53 +5,85 @@
 package quartz
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Presents a user interface for browsing filters.
+// IKFilterBrowserPanel is an idiomatic wrapper over the Objective-C class IKFilterBrowserPanel.
 //
-// IKFilterBrowserPanel wraps [raw.IKFilterBrowserPanel] with a fluent Go API.
+// Presents a user interface for browsing filters.
 type IKFilterBrowserPanel struct {
-	inner *raw.IKFilterBrowserPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKFilterBrowserPanel].
-func (x *IKFilterBrowserPanel) Unwrap() *raw.IKFilterBrowserPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKFilterBrowserPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// IKFilterBrowserPanelFromID adopts an existing object pointer as a IKFilterBrowserPanel (nil for 0).
+// IKFilterBrowserPanelFromID adopts an existing Objective-C object as a IKFilterBrowserPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
 	if id == 0 {
 		return nil
 	}
-	return &IKFilterBrowserPanel{inner: raw.IKFilterBrowserPanelFromID(id)}
+	x := &IKFilterBrowserPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIKFilterBrowserPanel creates a new [IKFilterBrowserPanel].
+// iKFilterBrowserPanelAdopt wraps an Objective-C object that this code just created as a
+// IKFilterBrowserPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKFilterBrowserPanelAdopt(id objc.ID) *IKFilterBrowserPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &IKFilterBrowserPanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IKFilterBrowserPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IKFilterBrowserPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IKFilterBrowserPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKFilterBrowserPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIKFilterBrowserPanel creates a new IKFilterBrowserPanel.
 func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterBrowserPanel")), objc.RegisterName("new"))
-	return &IKFilterBrowserPanel{inner: raw.IKFilterBrowserPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
+	return iKFilterBrowserPanelAdopt(_id)
 }
 
-// Returns the name of the filter that is currently selected in the filter browser.
-//
-// FilterName calls the underlying FilterName.
+// FilterName returns the name of the filter that is currently selected in the filter browser.
 func (x *IKFilterBrowserPanel) FilterName() string {
-	_r := x.inner.FilterName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // IKFilterBrowserPanelable is the interface implemented by [IKFilterBrowserPanel], for mocking and DI.
 type IKFilterBrowserPanelable interface {
-	Unwrap() *raw.IKFilterBrowserPanel
+	obj.Object
 	FilterName() string
 }
 

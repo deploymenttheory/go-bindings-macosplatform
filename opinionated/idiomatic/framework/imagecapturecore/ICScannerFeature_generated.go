@@ -5,88 +5,116 @@
 package imagecapturecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that describes a scanner feature.
+// ScannerFeature is an idiomatic wrapper over the Objective-C class ICScannerFeature.
 //
-// ScannerFeature wraps [raw.ICScannerFeature] with a fluent Go API.
+// ScannerFeature is an abstract base — you do not construct it directly. Construct one of [ScannerFeatureBoolean], [ScannerFeatureEnumeration], [ScannerFeatureRange], [ScannerFeatureTemplate] and pass it where a ScannerFeature is accepted.
+//
+// An abstract class that describes a scanner feature.
 type ScannerFeature struct {
-	inner *raw.ICScannerFeature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICScannerFeature].
-func (x *ScannerFeature) Unwrap() *raw.ICScannerFeature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerFeature) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerFeatureFromID adopts an existing object pointer as a ScannerFeature (nil for 0).
+// ScannerFeatureFromID adopts an existing Objective-C object as a ScannerFeature
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerFeatureFromID(id objc.ID) *ScannerFeature {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerFeature{inner: raw.ICScannerFeatureFromID(id)}
+	x := &ScannerFeature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScannerFeature creates a new [ScannerFeature].
-func NewScannerFeature() *ScannerFeature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerFeature")), objc.RegisterName("new"))
-	return &ScannerFeature{inner: raw.ICScannerFeatureFromID(_id)}
+// scannerFeatureAdopt wraps an Objective-C object that this code just created as a
+// ScannerFeature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerFeatureAdopt(id objc.ID) *ScannerFeature {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerFeature{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property type @abstract ￼Scanner feature type.
-//
-// Type calls the underlying Type.
-func (x *ScannerFeature) Type() ICScannerFeatureType {
-	return ICScannerFeatureType(x.inner.Type())
+// Description returns the object's -description text.
+func (x *ScannerFeature) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property internalName @abstract ￼The internal name of this feature.
-//
-// InternalName calls the underlying InternalName.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScannerFeature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Type ￼Scanner feature type.
+func (x *ScannerFeature) Type() ScannerFeatureType {
+	_r := objc.Send[ScannerFeatureType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
+
+// InternalName ￼The internal name of this feature.
 func (x *ScannerFeature) InternalName() string {
-	_r := x.inner.InternalName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("internalName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property humanReadableName @abstract The human readable name of this feature.
-//
-// HumanReadableName calls the underlying HumanReadableName.
+// HumanReadableName the human readable name of this feature.
 func (x *ScannerFeature) HumanReadableName() string {
-	_r := x.inner.HumanReadableName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("humanReadableName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property tooltip @abstract ￼Tooltip text describing the feature.
-//
-// Tooltip calls the underlying Tooltip.
+// Tooltip ￼Tooltip text describing the feature.
 func (x *ScannerFeature) Tooltip() string {
-	_r := x.inner.Tooltip()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tooltip"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *ScannerFeature) asScannerFeature() *raw.ICScannerFeature { return x.inner }
 
 // ScannerFeatureable is the interface implemented by [ScannerFeature], for mocking and DI.
 type ScannerFeatureable interface {
-	Unwrap() *raw.ICScannerFeature
-	Type() ICScannerFeatureType
+	obj.Object
+	Type() ScannerFeatureType
 	InternalName() string
 	HumanReadableName() string
 	Tooltip() string
 }
 
 var _ ScannerFeatureable = (*ScannerFeature)(nil)
+
+// isScannerFeature marks ScannerFeature — and, by embedding promotion, its
+// subclasses — as a member of the ScannerFeature hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScannerFeature) isScannerFeature() {}
+
+var _ ScannerFeatureProvider = (*ScannerFeature)(nil)

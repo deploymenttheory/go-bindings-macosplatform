@@ -5,55 +5,88 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration details of a file upload control in your web content.
+// WKOpenPanelParameters is an idiomatic wrapper over the Objective-C class WKOpenPanelParameters.
 //
-// WKOpenPanelParameters wraps [raw.WKOpenPanelParameters] with a fluent Go API.
+// The configuration details of a file upload control in your web content.
 type WKOpenPanelParameters struct {
-	inner *raw.WKOpenPanelParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKOpenPanelParameters].
-func (x *WKOpenPanelParameters) Unwrap() *raw.WKOpenPanelParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKOpenPanelParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// WKOpenPanelParametersFromID adopts an existing object pointer as a WKOpenPanelParameters (nil for 0).
+// WKOpenPanelParametersFromID adopts an existing Objective-C object as a WKOpenPanelParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func WKOpenPanelParametersFromID(id objc.ID) *WKOpenPanelParameters {
 	if id == 0 {
 		return nil
 	}
-	return &WKOpenPanelParameters{inner: raw.WKOpenPanelParametersFromID(id)}
+	x := &WKOpenPanelParameters{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKOpenPanelParameters creates a new [WKOpenPanelParameters].
+// wKOpenPanelParametersAdopt wraps an Objective-C object that this code just created as a
+// WKOpenPanelParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKOpenPanelParametersAdopt(id objc.ID) *WKOpenPanelParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &WKOpenPanelParameters{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKOpenPanelParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKOpenPanelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKOpenPanelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKOpenPanelParameters) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKOpenPanelParameters creates a new WKOpenPanelParameters.
 func NewWKOpenPanelParameters() *WKOpenPanelParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKOpenPanelParameters")), objc.RegisterName("new"))
-	return &WKOpenPanelParameters{inner: raw.WKOpenPanelParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKOpenPanelParameters")), objc.RegisterName("new"))
+	return wKOpenPanelParametersAdopt(_id)
 }
 
-// @abstract Whether the file upload control supports multiple files.
-//
-// AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
+// AllowsMultipleSelection whether the file upload control supports multiple files.
 func (x *WKOpenPanelParameters) AllowsMultipleSelection() bool {
-	return x.inner.AllowsMultipleSelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
+	return _r
 }
 
-// @abstract Whether the file upload control supports selecting directories.
-//
-// AllowsDirectories calls the underlying AllowsDirectories.
+// AllowsDirectories whether the file upload control supports selecting directories.
 func (x *WKOpenPanelParameters) AllowsDirectories() bool {
-	return x.inner.AllowsDirectories()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDirectories"))
+	return _r
 }
 
 // WKOpenPanelParametersable is the interface implemented by [WKOpenPanelParameters], for mocking and DI.
 type WKOpenPanelParametersable interface {
-	Unwrap() *raw.WKOpenPanelParameters
+	obj.Object
 	AllowsMultipleSelection() bool
 	AllowsDirectories() bool
 }

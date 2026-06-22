@@ -5,131 +5,128 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable description of how to order a collection of objects according to a property common to all the objects.
+// SortDescriptor is an idiomatic wrapper over the Objective-C class NSSortDescriptor.
 //
-// SortDescriptor wraps [raw.NSSortDescriptor] with a fluent Go API.
+// An immutable description of how to order a collection of objects according to a property common to all the objects.
 type SortDescriptor struct {
-	inner *raw.NSSortDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSortDescriptor].
-func (x *SortDescriptor) Unwrap() *raw.NSSortDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SortDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// SortDescriptorFromID adopts an existing object pointer as a SortDescriptor (nil for 0).
+// SortDescriptorFromID adopts an existing Objective-C object as a SortDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func SortDescriptorFromID(id objc.ID) *SortDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(id)}
-}
-
-// Creates a sort descriptor with a specified string key path and sort order.
-//
-// NewSortDescriptorWithKeyAscending creates a new [SortDescriptor].
-func NewSortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:"), foundation.NSStringStringWithUTF8String(key).Ptr(), ascending)
-	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
-}
-
-// Creates a sort descriptor with a specified string key path, ordering, and comparison selector.
-//
-// NewSortDescriptorWithKeyAscendingSelector creates a new [SortDescriptor].
-func NewSortDescriptorWithKeyAscendingSelector(key string, ascending bool, selector objc.SEL) *SortDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:selector:"), foundation.NSStringStringWithUTF8String(key).Ptr(), ascending, selector)
-	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
-}
-
-// Creates a sort descriptor by decoding from the coder you specify.
-//
-// NewSortDescriptorWithCoder creates a new [SortDescriptor].
-func NewSortDescriptorWithCoder(coder *raw.NSCoder) *SortDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
-}
-
-// Creates a sort descriptor with a specified string key path and ordering, and a comparator block.
-//
-// NewSortDescriptorWithKeyAscendingComparator creates a new [SortDescriptor].
-func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *SortDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:comparator:"), foundation.NSStringStringWithUTF8String(key).Ptr(), ascending, func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
-	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SortDescriptor) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SortDescriptor {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &SortDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Forces a securely decoded sort descriptor to allow evaluation.
-//
-// AllowEvaluation calls the underlying AllowEvaluation.
-func (x *SortDescriptor) AllowEvaluation() {
-	x.inner.AllowEvaluation()
-}
-
-// Returns a comparison result value that indicates the sort order of two objects.
-//
-// CompareObjectToObject calls the underlying CompareObjectToObject.
-func (x *SortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.ID) NSComparisonResult {
-	return NSComparisonResult(x.inner.CompareObjectToObject(object1, object2))
-}
-
-// Key calls the underlying Key.
-func (x *SortDescriptor) Key() *String {
-	_r := x.inner.Key()
-	if _r == nil {
+// sortDescriptorAdopt wraps an Objective-C object that this code just created as a
+// SortDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sortDescriptorAdopt(id objc.ID) *SortDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &SortDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Ascending calls the underlying Ascending.
+// Description returns the object's -description text.
+func (x *SortDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SortDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SortDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SortDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSortDescriptorWithKeyAscending creates a sort descriptor with a specified string key path and sort order.
+func NewSortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:"), purego.NSString(key), ascending)
+	return sortDescriptorAdopt(_id)
+}
+
+// NewSortDescriptorWithCoder creates a sort descriptor by decoding from the coder you specify.
+func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return sortDescriptorAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *SortDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// AllowEvaluation forces a securely decoded sort descriptor to allow evaluation.
+func (x *SortDescriptor) AllowEvaluation() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
+}
+
+// CompareObjectToObject returns a comparison result value that indicates the sort order of two objects.
+func (x *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compareObject:toObject:"), objref.IDOf(object1), objref.IDOf(object2))
+	return _r
+}
+
+// Key wraps the corresponding Objective-C method.
+func (x *SortDescriptor) Key() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Ascending wraps the corresponding Objective-C method.
 func (x *SortDescriptor) Ascending() bool {
-	return x.inner.Ascending()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ascending"))
+	return _r
 }
 
-// Selector calls the underlying Selector.
-func (x *SortDescriptor) Selector() objc.SEL {
-	return x.inner.Selector()
+// ReversedSortDescriptor wraps the corresponding Objective-C method.
+func (x *SortDescriptor) ReversedSortDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedSortDescriptor"))
+	return obj.Wrap(_r)
 }
-
-// Comparator calls the underlying Comparator.
-func (x *SortDescriptor) Comparator() objc.Block {
-	return x.inner.Comparator()
-}
-
-// ReversedSortDescriptor calls the underlying ReversedSortDescriptor.
-func (x *SortDescriptor) ReversedSortDescriptor() objc.ID {
-	return x.inner.ReversedSortDescriptor()
-}
-
-func (x *SortDescriptor) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // SortDescriptorable is the interface implemented by [SortDescriptor], for mocking and DI.
 type SortDescriptorable interface {
-	Unwrap() *raw.NSSortDescriptor
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SortDescriptor
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor
 	AllowEvaluation()
-	CompareObjectToObject(object1 objc.ID, object2 objc.ID) NSComparisonResult
-	Key() *String
+	CompareObjectToObject(object1 obj.Object, object2 obj.Object) ComparisonResult
+	Key() string
 	Ascending() bool
-	Selector() objc.SEL
-	Comparator() objc.Block
-	ReversedSortDescriptor() objc.ID
+	ReversedSortDescriptor() obj.Object
 }
 
 var _ SortDescriptorable = (*SortDescriptor)(nil)

@@ -3,4 +3,52 @@
 //go:build darwin
 
 // Package appkit provides a fluent Go API over the macOS AppKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - ActionCell: [ButtonCell], [DatePickerCell], [FormCell], [LevelIndicatorCell], [PathCell], [SegmentedCell], [SliderCell], [StepperCell], [TextFieldCell]
+//   - Animation: [ViewAnimation]
+//   - ArrayController: [DictionaryController]
+//   - Button: [PopUpButton], [StatusBarButton]
+//   - ButtonCell: [MenuItemCell]
+//   - Cell: [ActionCell], [BrowserCell], [ImageCell], [TextAttachmentCell]
+//   - CollectionLayoutItem: [CollectionLayoutDecorationItem], [CollectionLayoutGroup], [CollectionLayoutSupplementaryItem]
+//   - CollectionLayoutSupplementaryItem: [CollectionLayoutBoundarySupplementaryItem]
+//   - CollectionViewLayout: [CollectionViewCompositionalLayout], [CollectionViewFlowLayout], [CollectionViewGridLayout], [CollectionViewTransitionLayout]
+//   - CollectionViewLayoutInvalidationContext: [CollectionViewFlowLayoutInvalidationContext]
+//   - Control: [Browser], [Button], [ColorWell], [ComboButton], [DatePicker], [ImageView], [LevelIndicator], [Matrix], [PathControl], [RuleEditor], [Scroller], [SegmentedControl], [Slider], [Stepper], [Switch], [TableView], [TextField]
+//   - Controller: [ObjectController], [UserDefaultsController]
+//   - Document: [PersistentDocument]
+//   - FontCollection: [MutableFontCollection]
+//   - GestureRecognizer: [ClickGestureRecognizer], [MagnificationGestureRecognizer], [PanGestureRecognizer], [PressGestureRecognizer], [RotationGestureRecognizer]
+//   - ImageRep: [BitmapImageRep], [CIImageRep], [CachedImageRep], [CustomImageRep], [EPSImageRep], [PDFImageRep], [PICTImageRep]
+//   - LayoutAnchor: [LayoutDimension], [LayoutXAxisAnchor], [LayoutYAxisAnchor]
+//   - Matrix: [Form]
+//   - MenuItemCell: [PopUpButtonCell]
+//   - ObjectController: [ArrayController], [TreeController]
+//   - Panel: [ColorPanel], [FontPanel], [SavePanel]
+//   - ParagraphStyle: [MutableParagraphStyle]
+//   - Responder: [Application], [Drawer], [Popover], [View], [ViewController], [Window], [WindowController]
+//   - RuleEditor: [PredicateEditor]
+//   - SavePanel: [OpenPanel]
+//   - ScrubberArrangedView: [ScrubberItemView], [ScrubberSelectionView]
+//   - ScrubberItemView: [ScrubberImageItemView], [ScrubberTextItemView]
+//   - ScrubberLayout: [ScrubberFlowLayout], [ScrubberProportionalLayout]
+//   - TableView: [OutlineView]
+//   - Text: [TextView]
+//   - TextBlock: [TextTable], [TextTableBlock]
+//   - TextContentManager: [TextContentStorage]
+//   - TextElement: [TextParagraph]
+//   - TextField: [ComboBox], [SearchField], [SecureTextField], [TokenField]
+//   - TextFieldCell: [ComboBoxCell], [PathComponentCell], [SearchFieldCell], [SecureTextFieldCell], [TableHeaderCell], [TokenFieldCell]
+//   - TextParagraph: [TextListElement]
+//   - ToolbarItem: [MenuToolbarItem], [SearchToolbarItem], [SharingServicePickerToolbarItem], [ToolbarItemGroup], [TrackingSeparatorToolbarItem]
+//   - TouchBarItem: [ButtonTouchBarItem], [CandidateListTouchBarItem], [ColorPickerTouchBarItem], [CustomTouchBarItem], [GroupTouchBarItem], [PickerTouchBarItem], [PopoverTouchBarItem], [SharingServicePickerTouchBarItem], [SliderTouchBarItem], [StepperTouchBarItem]
+//   - Typesetter: [ATSTypesetter]
+//   - View: [BackgroundExtensionView], [Box], [ClipView], [CollectionView], [Control], [GlassEffectContainerView], [GlassEffectView], [GridView], [OpenGLView], [ProgressIndicator], [RulerView], [ScrollView], [Scrubber], [ScrubberArrangedView], [SplitView], [StackView], [TabView], [TableCellView], [TableHeaderView], [TableRowView], [Text], [TextInsertionIndicator], [VisualEffectView]
+//   - ViewController: [CollectionViewItem], [PageController], [SplitViewController], [SplitViewItemAccessoryViewController], [TabViewController], [TitlebarAccessoryViewController]
+//   - Window: [Panel]
 package appkit

@@ -9,290 +9,308 @@ import (
 )
 
 // An authorization status the user can grant for an app to access the specified entity type.
-type CNAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// The user has not yet made a choice regarding whether the application may access contact data.
-	CNAuthorizationStatusNotDetermined CNAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The application is not authorized to access contact data. The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place.
-	CNAuthorizationStatusRestricted CNAuthorizationStatus = 1
+	AuthorizationStatusRestricted AuthorizationStatus = 1
 	// The user explicitly denied access to contact data for the application.
-	CNAuthorizationStatusDenied CNAuthorizationStatus = 2
+	AuthorizationStatusDenied AuthorizationStatus = 2
 	// The application is authorized to access contact data.
-	CNAuthorizationStatusAuthorized CNAuthorizationStatus = 3
+	AuthorizationStatusAuthorized AuthorizationStatus = 3
 	// The app has access to a limited subset of contacts, chosen by the person using the app.
-	CNAuthorizationStatusLimited CNAuthorizationStatus = 4
+	AuthorizationStatusLimited AuthorizationStatus = 4
 )
 
-func (e CNAuthorizationStatus) String() string {
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case CNAuthorizationStatusNotDetermined:
-		return "CNAuthorizationStatusNotDetermined"
-	case CNAuthorizationStatusRestricted:
-		return "CNAuthorizationStatusRestricted"
-	case CNAuthorizationStatusDenied:
-		return "CNAuthorizationStatusDenied"
-	case CNAuthorizationStatusAuthorized:
-		return "CNAuthorizationStatusAuthorized"
-	case CNAuthorizationStatusLimited:
-		return "CNAuthorizationStatusLimited"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusRestricted:
+		return "AuthorizationStatusRestricted"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusAuthorized:
+		return "AuthorizationStatusAuthorized"
+	case AuthorizationStatusLimited:
+		return "AuthorizationStatusLimited"
 	default:
-		return fmt.Sprintf("CNAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // The formatting orders for contact names component.
-type CNContactDisplayNameOrder int64
+type ContactDisplayNameOrder int64
 
 const (
 	// Display name order by user default.
-	CNContactDisplayNameOrderUserDefault CNContactDisplayNameOrder = 0
+	ContactDisplayNameOrderUserDefault ContactDisplayNameOrder = 0
 	// Display name order by given name first.
-	CNContactDisplayNameOrderGivenNameFirst CNContactDisplayNameOrder = 1
+	ContactDisplayNameOrderGivenNameFirst ContactDisplayNameOrder = 1
 	// Display name order by family name first.
-	CNContactDisplayNameOrderFamilyNameFirst CNContactDisplayNameOrder = 2
+	ContactDisplayNameOrderFamilyNameFirst ContactDisplayNameOrder = 2
 )
 
-func (e CNContactDisplayNameOrder) String() string {
+// String returns the ContactDisplayNameOrder constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContactDisplayNameOrder) String() string {
 	switch e {
-	case CNContactDisplayNameOrderUserDefault:
-		return "CNContactDisplayNameOrderUserDefault"
-	case CNContactDisplayNameOrderGivenNameFirst:
-		return "CNContactDisplayNameOrderGivenNameFirst"
-	case CNContactDisplayNameOrderFamilyNameFirst:
-		return "CNContactDisplayNameOrderFamilyNameFirst"
+	case ContactDisplayNameOrderUserDefault:
+		return "ContactDisplayNameOrderUserDefault"
+	case ContactDisplayNameOrderGivenNameFirst:
+		return "ContactDisplayNameOrderGivenNameFirst"
+	case ContactDisplayNameOrderFamilyNameFirst:
+		return "ContactDisplayNameOrderFamilyNameFirst"
 	default:
-		return fmt.Sprintf("CNContactDisplayNameOrder(%d)", int64(e))
+		return fmt.Sprintf("ContactDisplayNameOrder(%d)", int64(e))
 	}
 }
 
 // The formatting styles for contact names.
-type CNContactFormatterStyle int64
+type ContactFormatterStyle int64
 
 const (
 	// Combines the contact name components into a full name.
-	CNContactFormatterStyleFullName CNContactFormatterStyle = 0
+	ContactFormatterStyleFullName ContactFormatterStyle = 0
 	// Combines the contact phonetic name components into a phonetic full name.
-	CNContactFormatterStylePhoneticFullName CNContactFormatterStyle = 1
+	ContactFormatterStylePhoneticFullName ContactFormatterStyle = 1
 )
 
-func (e CNContactFormatterStyle) String() string {
+// String returns the ContactFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContactFormatterStyle) String() string {
 	switch e {
-	case CNContactFormatterStyleFullName:
-		return "CNContactFormatterStyleFullName"
-	case CNContactFormatterStylePhoneticFullName:
-		return "CNContactFormatterStylePhoneticFullName"
+	case ContactFormatterStyleFullName:
+		return "ContactFormatterStyleFullName"
+	case ContactFormatterStylePhoneticFullName:
+		return "ContactFormatterStylePhoneticFullName"
 	default:
-		return fmt.Sprintf("CNContactFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("ContactFormatterStyle(%d)", int64(e))
 	}
 }
 
 // Indicates the sorting order for contacts.
-type CNContactSortOrder int64
+type ContactSortOrder int64
 
 const (
 	// No sorting order.
-	CNContactSortOrderNone CNContactSortOrder = 0
+	ContactSortOrderNone ContactSortOrder = 0
 	// The user’s default sorting order.
-	CNContactSortOrderUserDefault CNContactSortOrder = 1
+	ContactSortOrderUserDefault ContactSortOrder = 1
 	// Sorting contacts by given name.
-	CNContactSortOrderGivenName CNContactSortOrder = 2
+	ContactSortOrderGivenName ContactSortOrder = 2
 	// Sorting contacts by family name.
-	CNContactSortOrderFamilyName CNContactSortOrder = 3
+	ContactSortOrderFamilyName ContactSortOrder = 3
 )
 
-func (e CNContactSortOrder) String() string {
+// String returns the ContactSortOrder constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContactSortOrder) String() string {
 	switch e {
-	case CNContactSortOrderNone:
-		return "CNContactSortOrderNone"
-	case CNContactSortOrderUserDefault:
-		return "CNContactSortOrderUserDefault"
-	case CNContactSortOrderGivenName:
-		return "CNContactSortOrderGivenName"
-	case CNContactSortOrderFamilyName:
-		return "CNContactSortOrderFamilyName"
+	case ContactSortOrderNone:
+		return "ContactSortOrderNone"
+	case ContactSortOrderUserDefault:
+		return "ContactSortOrderUserDefault"
+	case ContactSortOrderGivenName:
+		return "ContactSortOrderGivenName"
+	case ContactSortOrderFamilyName:
+		return "ContactSortOrderFamilyName"
 	default:
-		return fmt.Sprintf("CNContactSortOrder(%d)", int64(e))
+		return fmt.Sprintf("ContactSortOrder(%d)", int64(e))
 	}
 }
 
 // The types a contact can be.
-type CNContactType int64
+type ContactType int64
 
 const (
 	// The contact is a person.
-	CNContactTypePerson CNContactType = 0
+	ContactTypePerson ContactType = 0
 	// The contact is an Organization.
-	CNContactTypeOrganization CNContactType = 1
+	ContactTypeOrganization ContactType = 1
 )
 
-func (e CNContactType) String() string {
+// String returns the ContactType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContactType) String() string {
 	switch e {
-	case CNContactTypePerson:
-		return "CNContactTypePerson"
-	case CNContactTypeOrganization:
-		return "CNContactTypeOrganization"
+	case ContactTypePerson:
+		return "ContactTypePerson"
+	case ContactTypeOrganization:
+		return "ContactTypeOrganization"
 	default:
-		return fmt.Sprintf("CNContactType(%d)", int64(e))
+		return fmt.Sprintf("ContactType(%d)", int64(e))
 	}
 }
 
 // The container may be local on the device or associated with a server account that has contacts.
-type CNContainerType int64
+type ContainerType int64
 
 const (
 	// A container where the system hasn’t assigned the container type.
-	CNContainerTypeUnassigned CNContainerType = 0
+	ContainerTypeUnassigned ContainerType = 0
 	// A container for contacts only stored locally on the device.
-	CNContainerTypeLocal CNContainerType = 1
+	ContainerTypeLocal ContainerType = 1
 	// A container for contacts stored in an Exchange folder from an Exchange server.
-	CNContainerTypeExchange CNContainerType = 2
+	ContainerTypeExchange ContainerType = 2
 	// A container for contacts stored in an CardDAV server, such as iCloud.
-	CNContainerTypeCardDAV CNContainerType = 3
+	ContainerTypeCardDAV ContainerType = 3
 )
 
-func (e CNContainerType) String() string {
+// String returns the ContainerType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContainerType) String() string {
 	switch e {
-	case CNContainerTypeUnassigned:
-		return "CNContainerTypeUnassigned"
-	case CNContainerTypeLocal:
-		return "CNContainerTypeLocal"
-	case CNContainerTypeExchange:
-		return "CNContainerTypeExchange"
-	case CNContainerTypeCardDAV:
-		return "CNContainerTypeCardDAV"
+	case ContainerTypeUnassigned:
+		return "ContainerTypeUnassigned"
+	case ContainerTypeLocal:
+		return "ContainerTypeLocal"
+	case ContainerTypeExchange:
+		return "ContainerTypeExchange"
+	case ContainerTypeCardDAV:
+		return "ContainerTypeCardDAV"
 	default:
-		return fmt.Sprintf("CNContainerType(%d)", int64(e))
+		return fmt.Sprintf("ContainerType(%d)", int64(e))
 	}
 }
 
 // The entities the user can grant access to.
-type CNEntityType int64
+type EntityType int64
 
 const (
 	// The user’s contacts.
-	CNEntityTypeContacts CNEntityType = 0
+	EntityTypeContacts EntityType = 0
 )
 
-func (e CNEntityType) String() string {
+// String returns the EntityType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntityType) String() string {
 	switch e {
-	case CNEntityTypeContacts:
-		return "CNEntityTypeContacts"
+	case EntityTypeContacts:
+		return "EntityTypeContacts"
 	default:
-		return fmt.Sprintf("CNEntityType(%d)", int64(e))
+		return fmt.Sprintf("EntityType(%d)", int64(e))
 	}
 }
 
 // Error codes that the system may return when you use Contacts framework methods.
-type CNErrorCode int64
+type ErrorCode int64
 
 const (
-	CNErrorCodeCommunicationError               CNErrorCode = 1
-	CNErrorCodeDataAccessError                  CNErrorCode = 2
-	CNErrorCodeAuthorizationDenied              CNErrorCode = 100
-	CNErrorCodeNoAccessableWritableContainers   CNErrorCode = 101
-	CNErrorCodeUnauthorizedKeys                 CNErrorCode = 102
-	CNErrorCodeFeatureDisabledByUser            CNErrorCode = 103
-	CNErrorCodeFeatureNotAvailable              CNErrorCode = 104
-	CNErrorCodeRecordDoesNotExist               CNErrorCode = 200
-	CNErrorCodeInsertedRecordAlreadyExists      CNErrorCode = 201
-	CNErrorCodeContainmentCycle                 CNErrorCode = 202
-	CNErrorCodeContainmentScope                 CNErrorCode = 203
-	CNErrorCodeParentRecordDoesNotExist         CNErrorCode = 204
-	CNErrorCodeRecordIdentifierInvalid          CNErrorCode = 205
-	CNErrorCodeRecordNotWritable                CNErrorCode = 206
-	CNErrorCodeParentContainerNotWritable       CNErrorCode = 207
-	CNErrorCodeValidationMultipleErrors         CNErrorCode = 300
-	CNErrorCodeValidationTypeMismatch           CNErrorCode = 301
-	CNErrorCodeValidationConfigurationError     CNErrorCode = 302
-	CNErrorCodePredicateInvalid                 CNErrorCode = 400
-	CNErrorCodePolicyViolation                  CNErrorCode = 500
-	CNErrorCodeClientIdentifierInvalid          CNErrorCode = 600
-	CNErrorCodeClientIdentifierDoesNotExist     CNErrorCode = 601
-	CNErrorCodeClientIdentifierCollision        CNErrorCode = 602
-	CNErrorCodeChangeHistoryExpired             CNErrorCode = 603
-	CNErrorCodeChangeHistoryInvalidAnchor       CNErrorCode = 604
-	CNErrorCodeChangeHistoryInvalidFetchRequest CNErrorCode = 605
-	CNErrorCodeVCardMalformed                   CNErrorCode = 700
-	CNErrorCodeVCardSummarizationError          CNErrorCode = 701
+	ErrorCodeCommunicationError               ErrorCode = 1
+	ErrorCodeDataAccessError                  ErrorCode = 2
+	ErrorCodeAuthorizationDenied              ErrorCode = 100
+	ErrorCodeNoAccessableWritableContainers   ErrorCode = 101
+	ErrorCodeUnauthorizedKeys                 ErrorCode = 102
+	ErrorCodeFeatureDisabledByUser            ErrorCode = 103
+	ErrorCodeFeatureNotAvailable              ErrorCode = 104
+	ErrorCodeRecordDoesNotExist               ErrorCode = 200
+	ErrorCodeInsertedRecordAlreadyExists      ErrorCode = 201
+	ErrorCodeContainmentCycle                 ErrorCode = 202
+	ErrorCodeContainmentScope                 ErrorCode = 203
+	ErrorCodeParentRecordDoesNotExist         ErrorCode = 204
+	ErrorCodeRecordIdentifierInvalid          ErrorCode = 205
+	ErrorCodeRecordNotWritable                ErrorCode = 206
+	ErrorCodeParentContainerNotWritable       ErrorCode = 207
+	ErrorCodeValidationMultipleErrors         ErrorCode = 300
+	ErrorCodeValidationTypeMismatch           ErrorCode = 301
+	ErrorCodeValidationConfigurationError     ErrorCode = 302
+	ErrorCodePredicateInvalid                 ErrorCode = 400
+	ErrorCodePolicyViolation                  ErrorCode = 500
+	ErrorCodeClientIdentifierInvalid          ErrorCode = 600
+	ErrorCodeClientIdentifierDoesNotExist     ErrorCode = 601
+	ErrorCodeClientIdentifierCollision        ErrorCode = 602
+	ErrorCodeChangeHistoryExpired             ErrorCode = 603
+	ErrorCodeChangeHistoryInvalidAnchor       ErrorCode = 604
+	ErrorCodeChangeHistoryInvalidFetchRequest ErrorCode = 605
+	ErrorCodeVCardMalformed                   ErrorCode = 700
+	ErrorCodeVCardSummarizationError          ErrorCode = 701
 )
 
-func (e CNErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case CNErrorCodeCommunicationError:
-		return "CNErrorCodeCommunicationError"
-	case CNErrorCodeDataAccessError:
-		return "CNErrorCodeDataAccessError"
-	case CNErrorCodeAuthorizationDenied:
-		return "CNErrorCodeAuthorizationDenied"
-	case CNErrorCodeNoAccessableWritableContainers:
-		return "CNErrorCodeNoAccessableWritableContainers"
-	case CNErrorCodeUnauthorizedKeys:
-		return "CNErrorCodeUnauthorizedKeys"
-	case CNErrorCodeFeatureDisabledByUser:
-		return "CNErrorCodeFeatureDisabledByUser"
-	case CNErrorCodeFeatureNotAvailable:
-		return "CNErrorCodeFeatureNotAvailable"
-	case CNErrorCodeRecordDoesNotExist:
-		return "CNErrorCodeRecordDoesNotExist"
-	case CNErrorCodeInsertedRecordAlreadyExists:
-		return "CNErrorCodeInsertedRecordAlreadyExists"
-	case CNErrorCodeContainmentCycle:
-		return "CNErrorCodeContainmentCycle"
-	case CNErrorCodeContainmentScope:
-		return "CNErrorCodeContainmentScope"
-	case CNErrorCodeParentRecordDoesNotExist:
-		return "CNErrorCodeParentRecordDoesNotExist"
-	case CNErrorCodeRecordIdentifierInvalid:
-		return "CNErrorCodeRecordIdentifierInvalid"
-	case CNErrorCodeRecordNotWritable:
-		return "CNErrorCodeRecordNotWritable"
-	case CNErrorCodeParentContainerNotWritable:
-		return "CNErrorCodeParentContainerNotWritable"
-	case CNErrorCodeValidationMultipleErrors:
-		return "CNErrorCodeValidationMultipleErrors"
-	case CNErrorCodeValidationTypeMismatch:
-		return "CNErrorCodeValidationTypeMismatch"
-	case CNErrorCodeValidationConfigurationError:
-		return "CNErrorCodeValidationConfigurationError"
-	case CNErrorCodePredicateInvalid:
-		return "CNErrorCodePredicateInvalid"
-	case CNErrorCodePolicyViolation:
-		return "CNErrorCodePolicyViolation"
-	case CNErrorCodeClientIdentifierInvalid:
-		return "CNErrorCodeClientIdentifierInvalid"
-	case CNErrorCodeClientIdentifierDoesNotExist:
-		return "CNErrorCodeClientIdentifierDoesNotExist"
-	case CNErrorCodeClientIdentifierCollision:
-		return "CNErrorCodeClientIdentifierCollision"
-	case CNErrorCodeChangeHistoryExpired:
-		return "CNErrorCodeChangeHistoryExpired"
-	case CNErrorCodeChangeHistoryInvalidAnchor:
-		return "CNErrorCodeChangeHistoryInvalidAnchor"
-	case CNErrorCodeChangeHistoryInvalidFetchRequest:
-		return "CNErrorCodeChangeHistoryInvalidFetchRequest"
-	case CNErrorCodeVCardMalformed:
-		return "CNErrorCodeVCardMalformed"
-	case CNErrorCodeVCardSummarizationError:
-		return "CNErrorCodeVCardSummarizationError"
+	case ErrorCodeCommunicationError:
+		return "ErrorCodeCommunicationError"
+	case ErrorCodeDataAccessError:
+		return "ErrorCodeDataAccessError"
+	case ErrorCodeAuthorizationDenied:
+		return "ErrorCodeAuthorizationDenied"
+	case ErrorCodeNoAccessableWritableContainers:
+		return "ErrorCodeNoAccessableWritableContainers"
+	case ErrorCodeUnauthorizedKeys:
+		return "ErrorCodeUnauthorizedKeys"
+	case ErrorCodeFeatureDisabledByUser:
+		return "ErrorCodeFeatureDisabledByUser"
+	case ErrorCodeFeatureNotAvailable:
+		return "ErrorCodeFeatureNotAvailable"
+	case ErrorCodeRecordDoesNotExist:
+		return "ErrorCodeRecordDoesNotExist"
+	case ErrorCodeInsertedRecordAlreadyExists:
+		return "ErrorCodeInsertedRecordAlreadyExists"
+	case ErrorCodeContainmentCycle:
+		return "ErrorCodeContainmentCycle"
+	case ErrorCodeContainmentScope:
+		return "ErrorCodeContainmentScope"
+	case ErrorCodeParentRecordDoesNotExist:
+		return "ErrorCodeParentRecordDoesNotExist"
+	case ErrorCodeRecordIdentifierInvalid:
+		return "ErrorCodeRecordIdentifierInvalid"
+	case ErrorCodeRecordNotWritable:
+		return "ErrorCodeRecordNotWritable"
+	case ErrorCodeParentContainerNotWritable:
+		return "ErrorCodeParentContainerNotWritable"
+	case ErrorCodeValidationMultipleErrors:
+		return "ErrorCodeValidationMultipleErrors"
+	case ErrorCodeValidationTypeMismatch:
+		return "ErrorCodeValidationTypeMismatch"
+	case ErrorCodeValidationConfigurationError:
+		return "ErrorCodeValidationConfigurationError"
+	case ErrorCodePredicateInvalid:
+		return "ErrorCodePredicateInvalid"
+	case ErrorCodePolicyViolation:
+		return "ErrorCodePolicyViolation"
+	case ErrorCodeClientIdentifierInvalid:
+		return "ErrorCodeClientIdentifierInvalid"
+	case ErrorCodeClientIdentifierDoesNotExist:
+		return "ErrorCodeClientIdentifierDoesNotExist"
+	case ErrorCodeClientIdentifierCollision:
+		return "ErrorCodeClientIdentifierCollision"
+	case ErrorCodeChangeHistoryExpired:
+		return "ErrorCodeChangeHistoryExpired"
+	case ErrorCodeChangeHistoryInvalidAnchor:
+		return "ErrorCodeChangeHistoryInvalidAnchor"
+	case ErrorCodeChangeHistoryInvalidFetchRequest:
+		return "ErrorCodeChangeHistoryInvalidFetchRequest"
+	case ErrorCodeVCardMalformed:
+		return "ErrorCodeVCardMalformed"
+	case ErrorCodeVCardSummarizationError:
+		return "ErrorCodeVCardSummarizationError"
 	default:
-		return fmt.Sprintf("CNErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants for postal formatting styles.
-type CNPostalAddressFormatterStyle int64
+type PostalAddressFormatterStyle int64
 
 const (
 	// A style that combines the postal address components into a multi-line mailing address.
-	CNPostalAddressFormatterStyleMailingAddress CNPostalAddressFormatterStyle = 0
+	PostalAddressFormatterStyleMailingAddress PostalAddressFormatterStyle = 0
 )
 
-func (e CNPostalAddressFormatterStyle) String() string {
+// String returns the PostalAddressFormatterStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PostalAddressFormatterStyle) String() string {
 	switch e {
-	case CNPostalAddressFormatterStyleMailingAddress:
-		return "CNPostalAddressFormatterStyleMailingAddress"
+	case PostalAddressFormatterStyleMailingAddress:
+		return "PostalAddressFormatterStyleMailingAddress"
 	default:
-		return fmt.Sprintf("CNPostalAddressFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("PostalAddressFormatterStyle(%d)", int64(e))
 	}
 }

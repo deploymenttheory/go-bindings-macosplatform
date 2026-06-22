@@ -5,130 +5,113 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An image-analysis request that tracks the movement of a previously identified object across multiple images or video frames.
+// TrackObjectRequest is an idiomatic wrapper over the Objective-C class VNTrackObjectRequest.
 //
-// TrackObjectRequest wraps [raw.VNTrackObjectRequest] with a fluent Go API.
+// It embeds [TrackingRequest], promoting that type's methods.
+//
+// An image-analysis request that tracks the movement of a previously identified object across multiple images or video frames.
 type TrackObjectRequest struct {
-	inner *raw.VNTrackObjectRequest
+	TrackingRequest
 }
 
-// Unwrap returns the underlying [raw.VNTrackObjectRequest].
-func (x *TrackObjectRequest) Unwrap() *raw.VNTrackObjectRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrackObjectRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// TrackObjectRequestFromID adopts an existing object pointer as a TrackObjectRequest (nil for 0).
+// TrackObjectRequestFromID adopts an existing Objective-C object as a TrackObjectRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func TrackObjectRequestFromID(id objc.ID) *TrackObjectRequest {
 	if id == 0 {
 		return nil
 	}
-	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(id)}
+	x := &TrackObjectRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new object tracking request with a detected object observation.
-//
-// NewTrackObjectRequestWithDetectedObjectObservation creates a new [TrackObjectRequest].
-func NewTrackObjectRequestWithDetectedObjectObservation(observation *raw.VNDetectedObjectObservation) *TrackObjectRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackObjectRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetectedObjectObservation:"), observation.Ptr())
-	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(_id)}
+// trackObjectRequestAdopt wraps an Objective-C object that this code just created as a
+// TrackObjectRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trackObjectRequestAdopt(id objc.ID) *TrackObjectRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &TrackObjectRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a new object tracking request with a detected object observation.
-//
-// NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler creates a new [TrackObjectRequest].
-func NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler(observation *raw.VNDetectedObjectObservation, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TrackObjectRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackObjectRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetectedObjectObservation:completionHandler:"), observation.Ptr(), completionHandler)
-	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(_id)}
+// NewTrackObjectRequestWithDetectedObjectObservation creates a new object tracking request with a detected object observation.
+func NewTrackObjectRequestWithDetectedObjectObservation(observation *DetectedObjectObservation) *TrackObjectRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackObjectRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetectedObjectObservation:"), objref.IDOf(observation))
+	return trackObjectRequestAdopt(_id)
 }
 
-// The observation object defining a region to track.
-//
-// WithInputObservation sets the inputObservation property and returns the receiver for chaining.
+// WithInputObservation the observation object defining a region to track.
 func (x *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.SetInputObservation(inputObservation.asDetectedObjectObservation())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
 	return x
 }
 
-// A value for specifying whether to prioritize speed or location accuracy.
-//
-// WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
-func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.SetTrackingLevel(raw.VNRequestTrackingLevel(trackingLevel))
+// WithTrackingLevel a value for specifying whether to prioritize speed or location accuracy.
+func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingLevel:"), trackingLevel)
 	return x
 }
 
-// A Boolean that indicates the last frame in a tracking sequence.
-//
-// WithLastFrame sets the lastFrame property and returns the receiver for chaining.
+// WithLastFrame a Boolean that indicates the last frame in a tracking sequence.
 func (x *TrackObjectRequest) WithLastFrame(lastFrame bool) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.SetLastFrame(lastFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastFrame:"), lastFrame)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *TrackObjectRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *TrackObjectRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *TrackObjectRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *TrackObjectRequest) WithRevision(revision uint) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *TrackObjectRequest) WithRevision(revision int) *TrackObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *TrackObjectRequest) asTrackingRequest() *raw.VNTrackingRequest {
-	return &x.inner.VNTrackingRequest
-}
-
-func (x *TrackObjectRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNTrackingRequest.VNImageBasedRequest
-}
-
-func (x *TrackObjectRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest
 }
 
 // TrackObjectRequestable is the interface implemented by [TrackObjectRequest], for mocking and DI.
 type TrackObjectRequestable interface {
-	Unwrap() *raw.VNTrackObjectRequest
+	obj.Object
 	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest
-	WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackObjectRequest
+	WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackObjectRequest
 	WithLastFrame(lastFrame bool) *TrackObjectRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest
-	WithRevision(revision uint) *TrackObjectRequest
+	WithRevision(revision int) *TrackObjectRequest
 }
 
 var _ TrackObjectRequestable = (*TrackObjectRequest)(nil)
+
+var _ TrackingRequestProvider = (*TrackObjectRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*TrackObjectRequest)(nil)
+
+var _ RequestProvider = (*TrackObjectRequest)(nil)

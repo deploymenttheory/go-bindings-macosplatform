@@ -5,106 +5,116 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A set of options affecting the delivery of Live Photo assets you request from an image manager.
+// LivePhotoRequestOptions is an idiomatic wrapper over the Objective-C class PHLivePhotoRequestOptions.
 //
-// LivePhotoRequestOptions wraps [raw.PHLivePhotoRequestOptions] with a fluent Go API.
+// A set of options affecting the delivery of Live Photo assets you request from an image manager.
 type LivePhotoRequestOptions struct {
-	inner *raw.PHLivePhotoRequestOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHLivePhotoRequestOptions].
-func (x *LivePhotoRequestOptions) Unwrap() *raw.PHLivePhotoRequestOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LivePhotoRequestOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// LivePhotoRequestOptionsFromID adopts an existing object pointer as a LivePhotoRequestOptions (nil for 0).
+// LivePhotoRequestOptionsFromID adopts an existing Objective-C object as a LivePhotoRequestOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func LivePhotoRequestOptionsFromID(id objc.ID) *LivePhotoRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	return &LivePhotoRequestOptions{inner: raw.PHLivePhotoRequestOptionsFromID(id)}
+	x := &LivePhotoRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLivePhotoRequestOptions creates a new [LivePhotoRequestOptions].
+// livePhotoRequestOptionsAdopt wraps an Objective-C object that this code just created as a
+// LivePhotoRequestOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func livePhotoRequestOptionsAdopt(id objc.ID) *LivePhotoRequestOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &LivePhotoRequestOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LivePhotoRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LivePhotoRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LivePhotoRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LivePhotoRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLivePhotoRequestOptions creates a new LivePhotoRequestOptions.
 func NewLivePhotoRequestOptions() *LivePhotoRequestOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLivePhotoRequestOptions")), objc.RegisterName("new"))
-	return &LivePhotoRequestOptions{inner: raw.PHLivePhotoRequestOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHLivePhotoRequestOptions")), objc.RegisterName("new"))
+	return livePhotoRequestOptionsAdopt(_id)
 }
 
-// The requested Live Photo quality and delivery priority.
-//
-// WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
-func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
-	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
+// WithDeliveryMode the requested Live Photo quality and delivery priority.
+func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 	return x
 }
 
-// A Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
-//
-// WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
 func (x *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
-// A block that Photos calls periodically while downloading the Live Photo.
-//
-// WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
-func (x *LivePhotoRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *LivePhotoRequestOptions {
-	x.inner.SetProgressHandler(progressHandler)
-	return x
+// DeliveryMode wraps the corresponding Objective-C method.
+func (x *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
+	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
+	return _r
 }
 
-// DeliveryMode calls the underlying DeliveryMode.
-func (x *LivePhotoRequestOptions) DeliveryMode() PHImageRequestOptionsDeliveryMode {
-	return PHImageRequestOptionsDeliveryMode(x.inner.DeliveryMode())
+// SetDeliveryMode wraps the corresponding Objective-C method.
+func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 }
 
-// SetDeliveryMode calls the underlying SetDeliveryMode.
-func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) {
-	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
-}
-
-// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
-	return x.inner.IsNetworkAccessAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+	return _r
 }
 
-// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *LivePhotoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
-}
-
-// ProgressHandler calls the underlying ProgressHandler.
-func (x *LivePhotoRequestOptions) ProgressHandler() objc.Block {
-	return x.inner.ProgressHandler()
-}
-
-// SetProgressHandler calls the underlying SetProgressHandler.
-func (x *LivePhotoRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
-	x.inner.SetProgressHandler(progressHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
 // LivePhotoRequestOptionsable is the interface implemented by [LivePhotoRequestOptions], for mocking and DI.
 type LivePhotoRequestOptionsable interface {
-	Unwrap() *raw.PHLivePhotoRequestOptions
-	WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
+	obj.Object
+	WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions
-	WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *LivePhotoRequestOptions
-	DeliveryMode() PHImageRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode)
+	DeliveryMode() ImageRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode)
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	ProgressHandler() objc.Block
-	SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID]))
 }
 
 var _ LivePhotoRequestOptionsable = (*LivePhotoRequestOptions)(nil)

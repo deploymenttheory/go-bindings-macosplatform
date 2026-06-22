@@ -9,129 +9,137 @@ import (
 )
 
 // Error codes that can be thrown under the Speech framework’s error domain.
-type SFSpeechErrorCode int64
+type SpeechErrorCode int64
 
 const (
 	// There was an internal error.
-	SFSpeechErrorCodeInternalServiceError SFSpeechErrorCode = 1
+	SpeechErrorCodeInternalServiceError SpeechErrorCode = 1
 	// The audio file could not be read.
-	SFSpeechErrorCodeAudioReadFailed SFSpeechErrorCode = 2
+	SpeechErrorCodeAudioReadFailed SpeechErrorCode = 2
 	// The custom language model templates were malformed.
-	SFSpeechErrorCodeUndefinedTemplateClassName SFSpeechErrorCode = 7
+	SpeechErrorCodeUndefinedTemplateClassName SpeechErrorCode = 7
 	// The custom language model file was malformed.
-	SFSpeechErrorCodeMalformedSupplementalModel SFSpeechErrorCode = 8
+	SpeechErrorCodeMalformedSupplementalModel SpeechErrorCode = 8
 	// The operation timed out.
-	SFSpeechErrorCodeTimeout SFSpeechErrorCode = 12
+	SpeechErrorCodeTimeout SpeechErrorCode = 12
 	// A required parameter is missing/nil.
-	SFSpeechErrorCodeMissingParameter SFSpeechErrorCode = 13
+	SpeechErrorCodeMissingParameter SpeechErrorCode = 13
 )
 
-func (e SFSpeechErrorCode) String() string {
+// String returns the SpeechErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechErrorCode) String() string {
 	switch e {
-	case SFSpeechErrorCodeInternalServiceError:
-		return "SFSpeechErrorCodeInternalServiceError"
-	case SFSpeechErrorCodeAudioReadFailed:
-		return "SFSpeechErrorCodeAudioReadFailed"
-	case SFSpeechErrorCodeUndefinedTemplateClassName:
-		return "SFSpeechErrorCodeUndefinedTemplateClassName"
-	case SFSpeechErrorCodeMalformedSupplementalModel:
-		return "SFSpeechErrorCodeMalformedSupplementalModel"
-	case SFSpeechErrorCodeTimeout:
-		return "SFSpeechErrorCodeTimeout"
-	case SFSpeechErrorCodeMissingParameter:
-		return "SFSpeechErrorCodeMissingParameter"
+	case SpeechErrorCodeInternalServiceError:
+		return "SpeechErrorCodeInternalServiceError"
+	case SpeechErrorCodeAudioReadFailed:
+		return "SpeechErrorCodeAudioReadFailed"
+	case SpeechErrorCodeUndefinedTemplateClassName:
+		return "SpeechErrorCodeUndefinedTemplateClassName"
+	case SpeechErrorCodeMalformedSupplementalModel:
+		return "SpeechErrorCodeMalformedSupplementalModel"
+	case SpeechErrorCodeTimeout:
+		return "SpeechErrorCodeTimeout"
+	case SpeechErrorCodeMissingParameter:
+		return "SpeechErrorCodeMissingParameter"
 	default:
-		return fmt.Sprintf("SFSpeechErrorCode(%d)", int64(e))
+		return fmt.Sprintf("SpeechErrorCode(%d)", int64(e))
 	}
 }
 
 // The type of task for which you are using speech recognition.
-type SFSpeechRecognitionTaskHint int64
+type SpeechRecognitionTaskHint int64
 
 const (
 	// An unspecified type of task.
-	SFSpeechRecognitionTaskHintUnspecified SFSpeechRecognitionTaskHint = 0
+	SpeechRecognitionTaskHintUnspecified SpeechRecognitionTaskHint = 0
 	// A task that uses captured speech for text entry.
-	SFSpeechRecognitionTaskHintDictation SFSpeechRecognitionTaskHint = 1
+	SpeechRecognitionTaskHintDictation SpeechRecognitionTaskHint = 1
 	// A task that uses captured speech to specify search terms.
-	SFSpeechRecognitionTaskHintSearch SFSpeechRecognitionTaskHint = 2
+	SpeechRecognitionTaskHintSearch SpeechRecognitionTaskHint = 2
 	// A task that uses captured speech for short, confirmation-style requests.
-	SFSpeechRecognitionTaskHintConfirmation SFSpeechRecognitionTaskHint = 3
+	SpeechRecognitionTaskHintConfirmation SpeechRecognitionTaskHint = 3
 )
 
-func (e SFSpeechRecognitionTaskHint) String() string {
+// String returns the SpeechRecognitionTaskHint constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechRecognitionTaskHint) String() string {
 	switch e {
-	case SFSpeechRecognitionTaskHintUnspecified:
-		return "SFSpeechRecognitionTaskHintUnspecified"
-	case SFSpeechRecognitionTaskHintDictation:
-		return "SFSpeechRecognitionTaskHintDictation"
-	case SFSpeechRecognitionTaskHintSearch:
-		return "SFSpeechRecognitionTaskHintSearch"
-	case SFSpeechRecognitionTaskHintConfirmation:
-		return "SFSpeechRecognitionTaskHintConfirmation"
+	case SpeechRecognitionTaskHintUnspecified:
+		return "SpeechRecognitionTaskHintUnspecified"
+	case SpeechRecognitionTaskHintDictation:
+		return "SpeechRecognitionTaskHintDictation"
+	case SpeechRecognitionTaskHintSearch:
+		return "SpeechRecognitionTaskHintSearch"
+	case SpeechRecognitionTaskHintConfirmation:
+		return "SpeechRecognitionTaskHintConfirmation"
 	default:
-		return fmt.Sprintf("SFSpeechRecognitionTaskHint(%d)", int64(e))
+		return fmt.Sprintf("SpeechRecognitionTaskHint(%d)", int64(e))
 	}
 }
 
 // The state of the task associated with the recognition request.
-type SFSpeechRecognitionTaskState int64
+type SpeechRecognitionTaskState int64
 
 const (
 	// Speech recognition (potentially including audio recording) has not yet started.
-	SFSpeechRecognitionTaskStateStarting SFSpeechRecognitionTaskState = 0
+	SpeechRecognitionTaskStateStarting SpeechRecognitionTaskState = 0
 	// Speech recognition (potentially including audio recording) is in progress.
-	SFSpeechRecognitionTaskStateRunning SFSpeechRecognitionTaskState = 1
+	SpeechRecognitionTaskStateRunning SpeechRecognitionTaskState = 1
 	// Audio recording has stopped, but delivery of recognition results may continue.
-	SFSpeechRecognitionTaskStateFinishing SFSpeechRecognitionTaskState = 2
+	SpeechRecognitionTaskStateFinishing SpeechRecognitionTaskState = 2
 	// Delivery of recognition results has finished, but audio recording may be ongoing.
-	SFSpeechRecognitionTaskStateCanceling SFSpeechRecognitionTaskState = 3
+	SpeechRecognitionTaskStateCanceling SpeechRecognitionTaskState = 3
 	// Delivery of recognition requests has finished and audio recording has stopped.
-	SFSpeechRecognitionTaskStateCompleted SFSpeechRecognitionTaskState = 4
+	SpeechRecognitionTaskStateCompleted SpeechRecognitionTaskState = 4
 )
 
-func (e SFSpeechRecognitionTaskState) String() string {
+// String returns the SpeechRecognitionTaskState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechRecognitionTaskState) String() string {
 	switch e {
-	case SFSpeechRecognitionTaskStateStarting:
-		return "SFSpeechRecognitionTaskStateStarting"
-	case SFSpeechRecognitionTaskStateRunning:
-		return "SFSpeechRecognitionTaskStateRunning"
-	case SFSpeechRecognitionTaskStateFinishing:
-		return "SFSpeechRecognitionTaskStateFinishing"
-	case SFSpeechRecognitionTaskStateCanceling:
-		return "SFSpeechRecognitionTaskStateCanceling"
-	case SFSpeechRecognitionTaskStateCompleted:
-		return "SFSpeechRecognitionTaskStateCompleted"
+	case SpeechRecognitionTaskStateStarting:
+		return "SpeechRecognitionTaskStateStarting"
+	case SpeechRecognitionTaskStateRunning:
+		return "SpeechRecognitionTaskStateRunning"
+	case SpeechRecognitionTaskStateFinishing:
+		return "SpeechRecognitionTaskStateFinishing"
+	case SpeechRecognitionTaskStateCanceling:
+		return "SpeechRecognitionTaskStateCanceling"
+	case SpeechRecognitionTaskStateCompleted:
+		return "SpeechRecognitionTaskStateCompleted"
 	default:
-		return fmt.Sprintf("SFSpeechRecognitionTaskState(%d)", int64(e))
+		return fmt.Sprintf("SpeechRecognitionTaskState(%d)", int64(e))
 	}
 }
 
 // The app’s authorization to perform speech recognition.
-type SFSpeechRecognizerAuthorizationStatus int64
+type SpeechRecognizerAuthorizationStatus int64
 
 const (
 	// The app’s authorization status has not yet been determined.
-	SFSpeechRecognizerAuthorizationStatusNotDetermined SFSpeechRecognizerAuthorizationStatus = 0
+	SpeechRecognizerAuthorizationStatusNotDetermined SpeechRecognizerAuthorizationStatus = 0
 	// The user denied your app’s request to perform speech recognition.
-	SFSpeechRecognizerAuthorizationStatusDenied SFSpeechRecognizerAuthorizationStatus = 1
+	SpeechRecognizerAuthorizationStatusDenied SpeechRecognizerAuthorizationStatus = 1
 	// The device prevents your app from performing speech recognition.
-	SFSpeechRecognizerAuthorizationStatusRestricted SFSpeechRecognizerAuthorizationStatus = 2
+	SpeechRecognizerAuthorizationStatusRestricted SpeechRecognizerAuthorizationStatus = 2
 	// The user granted your app’s request to perform speech recognition.
-	SFSpeechRecognizerAuthorizationStatusAuthorized SFSpeechRecognizerAuthorizationStatus = 3
+	SpeechRecognizerAuthorizationStatusAuthorized SpeechRecognizerAuthorizationStatus = 3
 )
 
-func (e SFSpeechRecognizerAuthorizationStatus) String() string {
+// String returns the SpeechRecognizerAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechRecognizerAuthorizationStatus) String() string {
 	switch e {
-	case SFSpeechRecognizerAuthorizationStatusNotDetermined:
-		return "SFSpeechRecognizerAuthorizationStatusNotDetermined"
-	case SFSpeechRecognizerAuthorizationStatusDenied:
-		return "SFSpeechRecognizerAuthorizationStatusDenied"
-	case SFSpeechRecognizerAuthorizationStatusRestricted:
-		return "SFSpeechRecognizerAuthorizationStatusRestricted"
-	case SFSpeechRecognizerAuthorizationStatusAuthorized:
-		return "SFSpeechRecognizerAuthorizationStatusAuthorized"
+	case SpeechRecognizerAuthorizationStatusNotDetermined:
+		return "SpeechRecognizerAuthorizationStatusNotDetermined"
+	case SpeechRecognizerAuthorizationStatusDenied:
+		return "SpeechRecognizerAuthorizationStatusDenied"
+	case SpeechRecognizerAuthorizationStatusRestricted:
+		return "SpeechRecognizerAuthorizationStatusRestricted"
+	case SpeechRecognizerAuthorizationStatusAuthorized:
+		return "SpeechRecognizerAuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("SFSpeechRecognizerAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("SpeechRecognizerAuthorizationStatus(%d)", int64(e))
 	}
 }

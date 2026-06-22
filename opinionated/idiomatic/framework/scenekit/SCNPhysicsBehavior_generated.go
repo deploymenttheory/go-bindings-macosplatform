@@ -5,43 +5,79 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for joints, vehicle simulations, and other high-level behaviors that incorporate multiple physics bodies.
+// PhysicsBehavior is an idiomatic wrapper over the Objective-C class SCNPhysicsBehavior.
 //
-// PhysicsBehavior wraps [raw.SCNPhysicsBehavior] with a fluent Go API.
+// PhysicsBehavior is an abstract base — you do not construct it directly. Construct one of [PhysicsBallSocketJoint], [PhysicsConeTwistJoint], [PhysicsHingeJoint], [PhysicsSliderJoint], [PhysicsVehicle] and pass it where a PhysicsBehavior is accepted.
+//
+// The abstract superclass for joints, vehicle simulations, and other high-level behaviors that incorporate multiple physics bodies.
 type PhysicsBehavior struct {
-	inner *raw.SCNPhysicsBehavior
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsBehavior].
-func (x *PhysicsBehavior) Unwrap() *raw.SCNPhysicsBehavior { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsBehavior) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsBehaviorFromID adopts an existing object pointer as a PhysicsBehavior (nil for 0).
+// PhysicsBehaviorFromID adopts an existing Objective-C object as a PhysicsBehavior
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsBehaviorFromID(id objc.ID) *PhysicsBehavior {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsBehavior{inner: raw.SCNPhysicsBehaviorFromID(id)}
+	x := &PhysicsBehavior{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsBehavior creates a new [PhysicsBehavior].
-func NewPhysicsBehavior() *PhysicsBehavior {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsBehavior")), objc.RegisterName("new"))
-	return &PhysicsBehavior{inner: raw.SCNPhysicsBehaviorFromID(_id)}
+// physicsBehaviorAdopt wraps an Objective-C object that this code just created as a
+// PhysicsBehavior (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsBehaviorAdopt(id objc.ID) *PhysicsBehavior {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsBehavior{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *PhysicsBehavior) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return x.inner }
+// Description returns the object's -description text.
+func (x *PhysicsBehavior) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsBehavior) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // PhysicsBehaviorable is the interface implemented by [PhysicsBehavior], for mocking and DI.
 type PhysicsBehaviorable interface {
-	Unwrap() *raw.SCNPhysicsBehavior
+	obj.Object
 }
 
 var _ PhysicsBehaviorable = (*PhysicsBehavior)(nil)
+
+// isPhysicsBehavior marks PhysicsBehavior — and, by embedding promotion, its
+// subclasses — as a member of the PhysicsBehavior hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PhysicsBehavior) isPhysicsBehavior() {}
+
+var _ PhysicsBehaviorProvider = (*PhysicsBehavior)(nil)

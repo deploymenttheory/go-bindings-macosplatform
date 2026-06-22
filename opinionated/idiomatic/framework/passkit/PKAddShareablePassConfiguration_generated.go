@@ -5,93 +5,98 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the data and action for a shared copy of pass.
+// AddShareablePassConfiguration is an idiomatic wrapper over the Objective-C class PKAddShareablePassConfiguration.
 //
-// AddShareablePassConfiguration wraps [raw.PKAddShareablePassConfiguration] with a fluent Go API.
+// It embeds [AddSecureElementPassConfiguration], promoting that type's methods.
+//
+// An object that represents the data and action for a shared copy of pass.
 type AddShareablePassConfiguration struct {
-	inner *raw.PKAddShareablePassConfiguration
+	AddSecureElementPassConfiguration
 }
 
-// Unwrap returns the underlying [raw.PKAddShareablePassConfiguration].
-func (x *AddShareablePassConfiguration) Unwrap() *raw.PKAddShareablePassConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddShareablePassConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AddShareablePassConfigurationFromID adopts an existing object pointer as a AddShareablePassConfiguration (nil for 0).
+// AddShareablePassConfigurationFromID adopts an existing Objective-C object as a AddShareablePassConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AddShareablePassConfigurationFromID(id objc.ID) *AddShareablePassConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AddShareablePassConfiguration{inner: raw.PKAddShareablePassConfigurationFromID(id)}
-}
-
-// NewAddShareablePassConfiguration creates a new [AddShareablePassConfiguration].
-func NewAddShareablePassConfiguration() *AddShareablePassConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddShareablePassConfiguration")), objc.RegisterName("new"))
-	return &AddShareablePassConfiguration{inner: raw.PKAddShareablePassConfigurationFromID(_id)}
-}
-
-// An opaque value for the configuration.
-//
-// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
-func (x *AddShareablePassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration {
-	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	x := &AddShareablePassConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The configuration’s localized description.
-//
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
-func (x *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration {
-	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-	return x
-}
-
-// PrimaryAction calls the underlying PrimaryAction.
-func (x *AddShareablePassConfiguration) PrimaryAction() PKAddShareablePassConfigurationPrimaryAction {
-	return PKAddShareablePassConfigurationPrimaryAction(x.inner.PrimaryAction())
-}
-
-// CredentialsMetadata returns the collection as a Go slice.
-func (x *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
-	arr := x.inner.CredentialsMetadata()
-	if arr == nil {
+// addShareablePassConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AddShareablePassConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addShareablePassConfigurationAdopt(id objc.ID) *AddShareablePassConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareablePassMetadata {
-		return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(purego.Retain(_id))}
-	})
+	x := &AddShareablePassConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ProvisioningPolicyIdentifier calls the underlying ProvisioningPolicyIdentifier.
+// NewAddShareablePassConfiguration creates a new AddShareablePassConfiguration.
+func NewAddShareablePassConfiguration() *AddShareablePassConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("PKAddShareablePassConfiguration")), objc.RegisterName("new"))
+	return addShareablePassConfigurationAdopt(_id)
+}
+
+// WithIssuerIdentifier an opaque value for the configuration.
+func (x *AddShareablePassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
+	return x
+}
+
+// WithLocalizedDescription the configuration’s localized description.
+func (x *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return x
+}
+
+// PrimaryAction wraps the corresponding Objective-C method.
+func (x *AddShareablePassConfiguration) PrimaryAction() AddShareablePassConfigurationPrimaryAction {
+	_r := objc.Send[AddShareablePassConfigurationPrimaryAction](objref.IDOf(x), objc.RegisterName("primaryAction"))
+	return _r
+}
+
+// CredentialsMetadata wraps the corresponding Objective-C method.
+//
+// CredentialsMetadata returns the collection as a Go slice.
+func (x *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialsMetadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareablePassMetadata { return ShareablePassMetadataFromID(_id) })
+}
+
+// ProvisioningPolicyIdentifier wraps the corresponding Objective-C method.
 func (x *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
-	_r := x.inner.ProvisioningPolicyIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provisioningPolicyIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *AddShareablePassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
-	return &x.inner.PKAddSecureElementPassConfiguration
+	return purego.GoString(_r)
 }
 
 // AddShareablePassConfigurationable is the interface implemented by [AddShareablePassConfiguration], for mocking and DI.
 type AddShareablePassConfigurationable interface {
-	Unwrap() *raw.PKAddShareablePassConfiguration
+	obj.Object
 	WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration
 	WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration
-	PrimaryAction() PKAddShareablePassConfigurationPrimaryAction
+	PrimaryAction() AddShareablePassConfigurationPrimaryAction
 	CredentialsMetadata() []*ShareablePassMetadata
 	ProvisioningPolicyIdentifier() string
 }
 
 var _ AddShareablePassConfigurationable = (*AddShareablePassConfiguration)(nil)
+
+var _ AddSecureElementPassConfigurationProvider = (*AddShareablePassConfiguration)(nil)

@@ -5,66 +5,96 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized view that displays and controls the zoom level of the map view.
+// ZoomControl is an idiomatic wrapper over the Objective-C class MKZoomControl.
 //
-// ZoomControl wraps [raw.MKZoomControl] with a fluent Go API.
+// A specialized view that displays and controls the zoom level of the map view.
 type ZoomControl struct {
-	inner *raw.MKZoomControl
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKZoomControl].
-func (x *ZoomControl) Unwrap() *raw.MKZoomControl { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ZoomControl) ID() objc.ID { return x.inner.Ptr() }
-
-// ZoomControlFromID adopts an existing object pointer as a ZoomControl (nil for 0).
+// ZoomControlFromID adopts an existing Objective-C object as a ZoomControl
+// (nil for 0), retaining it and registering a release finalizer.
 func ZoomControlFromID(id objc.ID) *ZoomControl {
 	if id == 0 {
 		return nil
 	}
-	return &ZoomControl{inner: raw.MKZoomControlFromID(id)}
-}
-
-// NewZoomControl creates a new [ZoomControl].
-func NewZoomControl() *ZoomControl {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKZoomControl")), objc.RegisterName("new"))
-	return &ZoomControl{inner: raw.MKZoomControlFromID(_id)}
-}
-
-// The map view associated with this control.
-//
-// WithMapView sets the mapView property and returns the receiver for chaining.
-func (x *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
-	x.inner.SetMapView(mapView.Unwrap())
+	x := &ZoomControl{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// MapView calls the underlying MapView.
-func (x *ZoomControl) MapView() *MapView {
-	_r := x.inner.MapView()
-	if _r == nil {
+// zoomControlAdopt wraps an Objective-C object that this code just created as a
+// ZoomControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func zoomControlAdopt(id objc.ID) *ZoomControl {
+	if id == 0 {
 		return nil
 	}
-	return &MapView{inner: _r}
+	x := &ZoomControl{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMapView calls the underlying SetMapView.
-func (x *ZoomControl) SetMapView(mapView *raw.MKMapView) {
-	x.inner.SetMapView(mapView)
+// Description returns the object's -description text.
+func (x *ZoomControl) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ZoomControl) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ZoomControl) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ZoomControl) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewZoomControl creates a new ZoomControl.
+func NewZoomControl() *ZoomControl {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("new"))
+	return zoomControlAdopt(_id)
+}
+
+// WithMapView the map view associated with this control.
+func (x *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	return x
+}
+
+// MapView wraps the corresponding Objective-C method.
+func (x *ZoomControl) MapView() *MapView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
+	return MapViewFromID(_r)
+}
+
+// SetMapView wraps the corresponding Objective-C method.
+func (x *ZoomControl) SetMapView(mapView *MapView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 }
 
 // ZoomControlable is the interface implemented by [ZoomControl], for mocking and DI.
 type ZoomControlable interface {
-	Unwrap() *raw.MKZoomControl
+	obj.Object
 	WithMapView(mapView *MapView) *ZoomControl
 	MapView() *MapView
-	SetMapView(mapView *raw.MKMapView)
+	SetMapView(mapView *MapView)
 }
 
 var _ ZoomControlable = (*ZoomControl)(nil)

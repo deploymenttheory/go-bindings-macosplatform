@@ -5,76 +5,101 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the response from the account provider.
+// VSAccountProviderResponse is an idiomatic wrapper over the Objective-C class VSAccountProviderResponse.
 //
-// VSAccountProviderResponse wraps [raw.VSAccountProviderResponse] with a fluent Go API.
+// An object that contains the response from the account provider.
 type VSAccountProviderResponse struct {
-	inner *raw.VSAccountProviderResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAccountProviderResponse].
-func (x *VSAccountProviderResponse) Unwrap() *raw.VSAccountProviderResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAccountProviderResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAccountProviderResponseFromID adopts an existing object pointer as a VSAccountProviderResponse (nil for 0).
+// VSAccountProviderResponseFromID adopts an existing Objective-C object as a VSAccountProviderResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAccountProviderResponseFromID(id objc.ID) *VSAccountProviderResponse {
 	if id == 0 {
 		return nil
 	}
-	return &VSAccountProviderResponse{inner: raw.VSAccountProviderResponseFromID(id)}
+	x := &VSAccountProviderResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVSAccountProviderResponse creates a new [VSAccountProviderResponse].
+// vSAccountProviderResponseAdopt wraps an Objective-C object that this code just created as a
+// VSAccountProviderResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAccountProviderResponseAdopt(id objc.ID) *VSAccountProviderResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAccountProviderResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSAccountProviderResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAccountProviderResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAccountProviderResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VSAccountProviderResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVSAccountProviderResponse creates a new VSAccountProviderResponse.
 func NewVSAccountProviderResponse() *VSAccountProviderResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountProviderResponse")), objc.RegisterName("new"))
-	return &VSAccountProviderResponse{inner: raw.VSAccountProviderResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountProviderResponse")), objc.RegisterName("new"))
+	return vSAccountProviderResponseAdopt(_id)
 }
 
-// Identifies the protocol used in constructing this response.
-//
-// AuthenticationScheme calls the underlying AuthenticationScheme.
-func (x *VSAccountProviderResponse) AuthenticationScheme() string {
-	_r := x.inner.AuthenticationScheme()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// AuthenticationScheme identifies the protocol used in constructing this response.
+func (x *VSAccountProviderResponse) AuthenticationScheme() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationScheme"))
+	return obj.Wrap(_r)
 }
 
-// The status code for this response. May be nil if there is no meaningful value for this type of response.
-//
-// Status calls the underlying Status.
+// Status the status code for this response. May be nil if there is no meaningful value for this type of response.
 func (x *VSAccountProviderResponse) Status() string {
-	_r := x.inner.Status()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The raw response from the provider. May be nil if the response contained security-sensitive information.
-//
-// Body calls the underlying Body.
+// Body the raw response from the provider. May be nil if the response contained security-sensitive information.
 func (x *VSAccountProviderResponse) Body() string {
-	_r := x.inner.Body()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // VSAccountProviderResponseable is the interface implemented by [VSAccountProviderResponse], for mocking and DI.
 type VSAccountProviderResponseable interface {
-	Unwrap() *raw.VSAccountProviderResponse
-	AuthenticationScheme() string
+	obj.Object
+	AuthenticationScheme() obj.Object
 	Status() string
 	Body() string
 }

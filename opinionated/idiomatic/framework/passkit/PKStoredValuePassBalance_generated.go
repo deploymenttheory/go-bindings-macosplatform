@@ -5,83 +5,114 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a balance that’s available for transactions, such as points or money.
+// StoredValuePassBalance is an idiomatic wrapper over the Objective-C class PKStoredValuePassBalance.
 //
-// StoredValuePassBalance wraps [raw.PKStoredValuePassBalance] with a fluent Go API.
+// An object that represents a balance that’s available for transactions, such as points or money.
 type StoredValuePassBalance struct {
-	inner *raw.PKStoredValuePassBalance
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKStoredValuePassBalance].
-func (x *StoredValuePassBalance) Unwrap() *raw.PKStoredValuePassBalance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StoredValuePassBalance) ID() objc.ID { return x.inner.Ptr() }
-
-// StoredValuePassBalanceFromID adopts an existing object pointer as a StoredValuePassBalance (nil for 0).
+// StoredValuePassBalanceFromID adopts an existing Objective-C object as a StoredValuePassBalance
+// (nil for 0), retaining it and registering a release finalizer.
 func StoredValuePassBalanceFromID(id objc.ID) *StoredValuePassBalance {
 	if id == 0 {
 		return nil
 	}
-	return &StoredValuePassBalance{inner: raw.PKStoredValuePassBalanceFromID(id)}
+	x := &StoredValuePassBalance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStoredValuePassBalance creates a new [StoredValuePassBalance].
+// storedValuePassBalanceAdopt wraps an Objective-C object that this code just created as a
+// StoredValuePassBalance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storedValuePassBalanceAdopt(id objc.ID) *StoredValuePassBalance {
+	if id == 0 {
+		return nil
+	}
+	x := &StoredValuePassBalance{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StoredValuePassBalance) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StoredValuePassBalance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StoredValuePassBalance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StoredValuePassBalance) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStoredValuePassBalance creates a new StoredValuePassBalance.
 func NewStoredValuePassBalance() *StoredValuePassBalance {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStoredValuePassBalance")), objc.RegisterName("new"))
-	return &StoredValuePassBalance{inner: raw.PKStoredValuePassBalanceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKStoredValuePassBalance")), objc.RegisterName("new"))
+	return storedValuePassBalanceAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether two pass balance objects contain the same values.
-//
-// IsEqualToBalance calls the underlying IsEqualToBalance.
-func (x *StoredValuePassBalance) IsEqualToBalance(balance *raw.PKStoredValuePassBalance) bool {
-	return x.inner.IsEqualToBalance(balance)
+// IsEqualToBalance returns a Boolean value that indicates whether two pass balance objects contain the same values.
+func (x *StoredValuePassBalance) IsEqualToBalance(balance *StoredValuePassBalance) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToBalance:"), objref.IDOf(balance))
+	return _r
 }
 
-// Amount calls the underlying Amount.
-func (x *StoredValuePassBalance) Amount() *foundation.NSDecimalNumber {
-	return x.inner.Amount()
+// Amount wraps the corresponding Objective-C method.
+func (x *StoredValuePassBalance) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+	return obj.Wrap(_r)
 }
 
-// CurrencyCode calls the underlying CurrencyCode.
+// CurrencyCode wraps the corresponding Objective-C method.
 func (x *StoredValuePassBalance) CurrencyCode() string {
-	_r := x.inner.CurrencyCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BalanceType calls the underlying BalanceType.
-func (x *StoredValuePassBalance) BalanceType() string {
-	_r := x.inner.BalanceType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// BalanceType wraps the corresponding Objective-C method.
+func (x *StoredValuePassBalance) BalanceType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("balanceType"))
+	return obj.Wrap(_r)
 }
 
-// ExpiryDate calls the underlying ExpiryDate.
-func (x *StoredValuePassBalance) ExpiryDate() *foundation.NSDate {
-	return x.inner.ExpiryDate()
+// ExpiryDate wraps the corresponding Objective-C method.
+func (x *StoredValuePassBalance) ExpiryDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expiryDate"))
+	return obj.Wrap(_r)
 }
 
 // StoredValuePassBalanceable is the interface implemented by [StoredValuePassBalance], for mocking and DI.
 type StoredValuePassBalanceable interface {
-	Unwrap() *raw.PKStoredValuePassBalance
-	IsEqualToBalance(balance *raw.PKStoredValuePassBalance) bool
-	Amount() *foundation.NSDecimalNumber
+	obj.Object
+	IsEqualToBalance(balance *StoredValuePassBalance) bool
+	Amount() obj.Object
 	CurrencyCode() string
-	BalanceType() string
-	ExpiryDate() *foundation.NSDate
+	BalanceType() obj.Object
+	ExpiryDate() obj.Object
 }
 
 var _ StoredValuePassBalanceable = (*StoredValuePassBalance)(nil)

@@ -5,257 +5,223 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An abstract class that defines the interface and general characteristics of Automator actions.
+// Action is an idiomatic wrapper over the Objective-C class AMAction.
 //
-// Action wraps [raw.AMAction] with a fluent Go API.
+// Action is an abstract base — you do not construct it directly. Construct one of [BundleAction] and pass it where a Action is accepted.
+//
+// An abstract class that defines the interface and general characteristics of Automator actions.
 type Action struct {
-	inner *raw.AMAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AMAction].
-func (x *Action) Unwrap() *raw.AMAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Action) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionFromID adopts an existing object pointer as a Action (nil for 0).
+// ActionFromID adopts an existing Objective-C object as a Action
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	return &Action{inner: raw.AMActionFromID(id)}
-}
-
-// Initializes the action with the specified definition.
-//
-// NewActionWithDefinitionFromArchive creates a new [Action].
-func NewActionWithDefinitionFromArchive(dict purego.IDer, archived bool) *Action {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), dict.ID(), archived)
-	return &Action{inner: raw.AMActionFromID(_id)}
-}
-
-// Loads an Automator action from a file URL.
-//
-// NewActionWithContentsOfURLError creates a new [Action].
-func NewActionWithContentsOfURLError(fileURL string) (*Action, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMAction")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &Action{inner: raw.AMActionFromID(_id)}, nil
-}
-
-// A float value between 0 and 1, which indicates how far along the action is while processing.
-//
-// WithProgressValue sets the progressValue property and returns the receiver for chaining.
-func (x *Action) WithProgressValue(progressValue float64) *Action {
-	x.inner.SetProgressValue(progressValue)
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Requests the action to perform its task using the specified input from the specified action.
-//
-// RunWithInputFromActionError calls the underlying RunWithInputFromActionError.
-func (x *Action) RunWithInputFromActionError(input objc.ID, anAction *raw.AMAction, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID {
-	return x.inner.RunWithInputFromActionError(input, anAction, errorInfo)
+// actionAdopt wraps an Objective-C object that this code just created as a
+// Action (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionAdopt(id objc.ID) *Action {
+	if id == 0 {
+		return nil
+	}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Requests the action to perform its task using the specified input.
-//
-// RunWithInputError calls the underlying RunWithInputError.
-func (x *Action) RunWithInputError(input objc.ID) (objc.ID, error) {
-	return x.inner.RunWithInputError(input)
+// Description returns the object's -description text.
+func (x *Action) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
-//
-// RunAsynchronouslyWithInput calls the underlying RunAsynchronouslyWithInput.
-func (x *Action) RunAsynchronouslyWithInput(input objc.ID) {
-	x.inner.RunAsynchronouslyWithInput(input)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
-//
-// WillFinishRunning calls the underlying WillFinishRunning.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewActionWithDefinitionFromArchive initializes the action with the specified definition.
+func NewActionWithDefinitionFromArchive(dict obj.Object, archived bool) *Action {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AMAction")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), objref.IDOf(dict), archived)
+	return actionAdopt(_id)
+}
+
+// NewActionWithContentsOfURLError loads an Automator action from a file URL.
+func NewActionWithContentsOfURLError(fileURL string) (result *Action, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AMAction")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return actionAdopt(_id), nil
+}
+
+// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
+func (x *Action) WithProgressValue(progressValue float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
+	return x
+}
+
+// RunWithInputFromActionError requests the action to perform its task using the specified input from the specified action.
+func (x *Action) RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWithInput:fromAction:error:"), objref.IDOf(input), objref.IDOf(anAction), objref.IDOf(errorInfo))
+	return obj.Wrap(_r)
+}
+
+// RunWithInputError requests the action to perform its task using the specified input.
+func (x *Action) RunWithInputError(input obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWithInput:error:"), objref.IDOf(input), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
+}
+
+// RunAsynchronouslyWithInput causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
+func (x *Action) RunAsynchronouslyWithInput(input obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runAsynchronouslyWithInput:"), objref.IDOf(input))
+}
+
+// WillFinishRunning provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
 func (x *Action) WillFinishRunning() {
-	x.inner.WillFinishRunning()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFinishRunning"))
 }
 
-// Sent by the action to itself when it has finished running asynchronously.
-//
-// DidFinishRunningWithError calls the underlying DidFinishRunningWithError.
-func (x *Action) DidFinishRunningWithError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.DidFinishRunningWithError(errorInfo)
+// DidFinishRunningWithError sent by the action to itself when it has finished running asynchronously.
+func (x *Action) DidFinishRunningWithError(errorInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFinishRunningWithError:"), objref.IDOf(errorInfo))
 }
 
-// Causes the action to stop running and return an error, which, in turn, causes the workflow to stop.
-//
-// FinishRunningWithError calls the underlying FinishRunningWithError.
-func (x *Action) FinishRunningWithError(error_ unsafe.Pointer) {
-	x.inner.FinishRunningWithError(error_)
-}
-
-// Stops the action from running.
-//
-// Stop calls the underlying Stop.
+// Stop stops the action from running.
 func (x *Action) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Resets the action to its initial state.
-//
-// Reset calls the underlying Reset.
+// Reset resets the action to its initial state.
 func (x *Action) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
-//
-// WriteToDictionary calls the underlying WriteToDictionary.
-func (x *Action) WriteToDictionary(dictionary *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.WriteToDictionary(dictionary)
+// WriteToDictionary examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
+func (x *Action) WriteToDictionary(dictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeToDictionary:"), objref.IDOf(dictionary))
 }
 
-// Allows the action to initialize its user interface.
-//
-// Opened calls the underlying Opened.
+// Opened allows the action to initialize its user interface.
 func (x *Action) Opened() {
-	x.inner.Opened()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opened"))
 }
 
-// Allows the action to synchronize its information with settings in another app.
-//
-// Activated calls the underlying Activated.
+// Activated allows the action to synchronize its information with settings in another app.
 func (x *Action) Activated() {
-	x.inner.Activated()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activated"))
 }
 
-// Invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
-//
-// Closed calls the underlying Closed.
+// Closed invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
 func (x *Action) Closed() {
-	x.inner.Closed()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closed"))
 }
 
-// Requests the action to update its stored set of parameters from the settings in the action’s user interface.
-//
-// UpdateParameters calls the underlying UpdateParameters.
+// UpdateParameters requests the action to update its stored set of parameters from the settings in the action’s user interface.
 func (x *Action) UpdateParameters() {
-	x.inner.UpdateParameters()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateParameters"))
 }
 
-// Requests the action to update its user interface from its stored parameters, which have changed.
-//
-// ParametersUpdated calls the underlying ParametersUpdated.
+// ParametersUpdated requests the action to update its user interface from its stored parameters, which have changed.
 func (x *Action) ParametersUpdated() {
-	x.inner.ParametersUpdated()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parametersUpdated"))
 }
 
-// Displays a message in Automator’s log area.
-//
-// LogMessageWithLevelFormat calls the underlying LogMessageWithLevelFormat.
-func (x *Action) LogMessageWithLevelFormat(level AMLogLevel, format string) {
-	x.inner.LogMessageWithLevelFormat(raw.AMLogLevel(level), foundation.NSStringStringWithUTF8String(format))
+// LogMessageWithLevelFormat displays a message in Automator’s log area.
+func (x *Action) LogMessageWithLevelFormat(level LogLevel, format string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logMessageWithLevel:format:"), level, purego.NSString(format))
 }
 
-// Name calls the underlying Name.
-func (x *Action) Name() unsafe.Pointer {
-	return x.inner.Name()
-}
-
-// IgnoresInput calls the underlying IgnoresInput.
+// IgnoresInput wraps the corresponding Objective-C method.
 func (x *Action) IgnoresInput() bool {
-	return x.inner.IgnoresInput()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresInput"))
+	return _r
 }
 
-// SelectedInputType calls the underlying SelectedInputType.
-func (x *Action) SelectedInputType() unsafe.Pointer {
-	return x.inner.SelectedInputType()
-}
-
-// SetSelectedInputType calls the underlying SetSelectedInputType.
-func (x *Action) SetSelectedInputType(selectedInputType unsafe.Pointer) {
-	x.inner.SetSelectedInputType(selectedInputType)
-}
-
-// SelectedOutputType calls the underlying SelectedOutputType.
-func (x *Action) SelectedOutputType() unsafe.Pointer {
-	return x.inner.SelectedOutputType()
-}
-
-// SetSelectedOutputType calls the underlying SetSelectedOutputType.
-func (x *Action) SetSelectedOutputType(selectedOutputType unsafe.Pointer) {
-	x.inner.SetSelectedOutputType(selectedOutputType)
-}
-
-// ProgressValue calls the underlying ProgressValue.
+// ProgressValue wraps the corresponding Objective-C method.
 func (x *Action) ProgressValue() float64 {
-	return x.inner.ProgressValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("progressValue"))
+	return _r
 }
 
-// SetProgressValue calls the underlying SetProgressValue.
+// SetProgressValue wraps the corresponding Objective-C method.
 func (x *Action) SetProgressValue(progressValue float64) {
-	x.inner.SetProgressValue(progressValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 }
 
-// Output calls the underlying Output.
-func (x *Action) Output() unsafe.Pointer {
-	return x.inner.Output()
-}
-
-// SetOutput calls the underlying SetOutput.
-func (x *Action) SetOutput(output unsafe.Pointer) {
-	x.inner.SetOutput(output)
-}
-
-// IsStopped calls the underlying IsStopped.
+// IsStopped wraps the corresponding Objective-C method.
 func (x *Action) IsStopped() bool {
-	return x.inner.IsStopped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStopped"))
+	return _r
 }
-
-func (x *Action) asAction() *raw.AMAction { return x.inner }
 
 // Actionable is the interface implemented by [Action], for mocking and DI.
 type Actionable interface {
-	Unwrap() *raw.AMAction
+	obj.Object
 	WithProgressValue(progressValue float64) *Action
-	RunWithInputFromActionError(input objc.ID, anAction *raw.AMAction, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID
-	RunWithInputError(input objc.ID) (objc.ID, error)
-	RunAsynchronouslyWithInput(input objc.ID)
+	RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object
+	RunWithInputError(input obj.Object) (result obj.Object, err error)
+	RunAsynchronouslyWithInput(input obj.Object)
 	WillFinishRunning()
-	DidFinishRunningWithError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	FinishRunningWithError(error_ unsafe.Pointer)
+	DidFinishRunningWithError(errorInfo obj.Object)
 	Stop()
 	Reset()
-	WriteToDictionary(dictionary *foundation.NSMutableDictionary[*foundation.NSString, objc.ID])
+	WriteToDictionary(dictionary obj.Object)
 	Opened()
 	Activated()
 	Closed()
 	UpdateParameters()
 	ParametersUpdated()
-	LogMessageWithLevelFormat(level AMLogLevel, format string)
-	Name() unsafe.Pointer
+	LogMessageWithLevelFormat(level LogLevel, format string)
 	IgnoresInput() bool
-	SelectedInputType() unsafe.Pointer
-	SetSelectedInputType(selectedInputType unsafe.Pointer)
-	SelectedOutputType() unsafe.Pointer
-	SetSelectedOutputType(selectedOutputType unsafe.Pointer)
 	ProgressValue() float64
 	SetProgressValue(progressValue float64)
-	Output() unsafe.Pointer
-	SetOutput(output unsafe.Pointer)
 	IsStopped() bool
 }
 
 var _ Actionable = (*Action)(nil)
+
+// isAction marks Action — and, by embedding promotion, its
+// subclasses — as a member of the Action hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Action) isAction() {}
+
+var _ ActionProvider = (*Action)(nil)

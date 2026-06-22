@@ -9,189 +9,197 @@ import (
 )
 
 // The kinds of outcomes that a binary activity item can represent.
-type CLSBinaryValueType int64
+type BinaryValueType int64
 
 const (
 	// True or false.
-	CLSBinaryValueTypeTrueFalse CLSBinaryValueType = 0
+	BinaryValueTypeTrueFalse BinaryValueType = 0
 	// Pass or fail.
-	CLSBinaryValueTypePassFail CLSBinaryValueType = 1
+	BinaryValueTypePassFail BinaryValueType = 1
 	// Yes or no.
-	CLSBinaryValueTypeYesNo CLSBinaryValueType = 2
+	BinaryValueTypeYesNo BinaryValueType = 2
 	// Correct or incorrect.
-	CLSBinaryValueTypeCorrectIncorrect CLSBinaryValueType = 3
+	BinaryValueTypeCorrectIncorrect BinaryValueType = 3
 )
 
-func (e CLSBinaryValueType) String() string {
+// String returns the BinaryValueType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BinaryValueType) String() string {
 	switch e {
-	case CLSBinaryValueTypeTrueFalse:
-		return "CLSBinaryValueTypeTrueFalse"
-	case CLSBinaryValueTypePassFail:
-		return "CLSBinaryValueTypePassFail"
-	case CLSBinaryValueTypeYesNo:
-		return "CLSBinaryValueTypeYesNo"
-	case CLSBinaryValueTypeCorrectIncorrect:
-		return "CLSBinaryValueTypeCorrectIncorrect"
+	case BinaryValueTypeTrueFalse:
+		return "BinaryValueTypeTrueFalse"
+	case BinaryValueTypePassFail:
+		return "BinaryValueTypePassFail"
+	case BinaryValueTypeYesNo:
+		return "BinaryValueTypeYesNo"
+	case BinaryValueTypeCorrectIncorrect:
+		return "BinaryValueTypeCorrectIncorrect"
 	default:
-		return fmt.Sprintf("CLSBinaryValueType(%d)", int64(e))
+		return fmt.Sprintf("BinaryValueType(%d)", int64(e))
 	}
 }
 
 // The kinds of assignable content a context can contain.
-type CLSContextType int64
+type ContextType int64
 
 const (
 	// No type is assigned.
-	CLSContextTypeNone CLSContextType = 0
+	ContextTypeNone ContextType = 0
 	// An app context.
-	CLSContextTypeApp CLSContextType = 1
+	ContextTypeApp ContextType = 1
 	// A chapter context.
-	CLSContextTypeChapter CLSContextType = 2
+	ContextTypeChapter ContextType = 2
 	// A section context.
-	CLSContextTypeSection CLSContextType = 3
+	ContextTypeSection ContextType = 3
 	// A level context.
-	CLSContextTypeLevel CLSContextType = 4
+	ContextTypeLevel ContextType = 4
 	// A page context.
-	CLSContextTypePage CLSContextType = 5
+	ContextTypePage ContextType = 5
 	// A task context.
-	CLSContextTypeTask CLSContextType = 6
+	ContextTypeTask ContextType = 6
 	// A challenge context.
-	CLSContextTypeChallenge CLSContextType = 7
+	ContextTypeChallenge ContextType = 7
 	// A quiz context.
-	CLSContextTypeQuiz CLSContextType = 8
+	ContextTypeQuiz ContextType = 8
 	// An exercise context.
-	CLSContextTypeExercise CLSContextType = 9
+	ContextTypeExercise ContextType = 9
 	// A lesson context.
-	CLSContextTypeLesson CLSContextType = 10
+	ContextTypeLesson ContextType = 10
 	// A book context.
-	CLSContextTypeBook CLSContextType = 11
+	ContextTypeBook ContextType = 11
 	// A game context.
-	CLSContextTypeGame CLSContextType = 12
+	ContextTypeGame ContextType = 12
 	// A document context.
-	CLSContextTypeDocument CLSContextType = 13
+	ContextTypeDocument ContextType = 13
 	// An audio context.
-	CLSContextTypeAudio CLSContextType = 14
+	ContextTypeAudio ContextType = 14
 	// A video context.
-	CLSContextTypeVideo CLSContextType = 15
+	ContextTypeVideo ContextType = 15
 	// A context that represents an entire course.
-	CLSContextTypeCourse CLSContextType = 16
+	ContextTypeCourse ContextType = 16
 	// A context for assignable content that isn’t represented by one of the built-in context types.
-	CLSContextTypeCustom CLSContextType = 17
+	ContextTypeCustom ContextType = 17
 )
 
-func (e CLSContextType) String() string {
+// String returns the ContextType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContextType) String() string {
 	switch e {
-	case CLSContextTypeNone:
-		return "CLSContextTypeNone"
-	case CLSContextTypeApp:
-		return "CLSContextTypeApp"
-	case CLSContextTypeChapter:
-		return "CLSContextTypeChapter"
-	case CLSContextTypeSection:
-		return "CLSContextTypeSection"
-	case CLSContextTypeLevel:
-		return "CLSContextTypeLevel"
-	case CLSContextTypePage:
-		return "CLSContextTypePage"
-	case CLSContextTypeTask:
-		return "CLSContextTypeTask"
-	case CLSContextTypeChallenge:
-		return "CLSContextTypeChallenge"
-	case CLSContextTypeQuiz:
-		return "CLSContextTypeQuiz"
-	case CLSContextTypeExercise:
-		return "CLSContextTypeExercise"
-	case CLSContextTypeLesson:
-		return "CLSContextTypeLesson"
-	case CLSContextTypeBook:
-		return "CLSContextTypeBook"
-	case CLSContextTypeGame:
-		return "CLSContextTypeGame"
-	case CLSContextTypeDocument:
-		return "CLSContextTypeDocument"
-	case CLSContextTypeAudio:
-		return "CLSContextTypeAudio"
-	case CLSContextTypeVideo:
-		return "CLSContextTypeVideo"
-	case CLSContextTypeCourse:
-		return "CLSContextTypeCourse"
-	case CLSContextTypeCustom:
-		return "CLSContextTypeCustom"
+	case ContextTypeNone:
+		return "ContextTypeNone"
+	case ContextTypeApp:
+		return "ContextTypeApp"
+	case ContextTypeChapter:
+		return "ContextTypeChapter"
+	case ContextTypeSection:
+		return "ContextTypeSection"
+	case ContextTypeLevel:
+		return "ContextTypeLevel"
+	case ContextTypePage:
+		return "ContextTypePage"
+	case ContextTypeTask:
+		return "ContextTypeTask"
+	case ContextTypeChallenge:
+		return "ContextTypeChallenge"
+	case ContextTypeQuiz:
+		return "ContextTypeQuiz"
+	case ContextTypeExercise:
+		return "ContextTypeExercise"
+	case ContextTypeLesson:
+		return "ContextTypeLesson"
+	case ContextTypeBook:
+		return "ContextTypeBook"
+	case ContextTypeGame:
+		return "ContextTypeGame"
+	case ContextTypeDocument:
+		return "ContextTypeDocument"
+	case ContextTypeAudio:
+		return "ContextTypeAudio"
+	case ContextTypeVideo:
+		return "ContextTypeVideo"
+	case ContextTypeCourse:
+		return "ContextTypeCourse"
+	case ContextTypeCustom:
+		return "ContextTypeCustom"
 	default:
-		return fmt.Sprintf("CLSContextType(%d)", int64(e))
+		return fmt.Sprintf("ContextType(%d)", int64(e))
 	}
 }
 
 // Error codes that ClassKit issues.
-type CLSErrorCode int64
+type ErrorCode int64
 
 const (
-	CLSErrorCodeNone                      CLSErrorCode = 0
-	CLSErrorCodeClassKitUnavailable       CLSErrorCode = 1
-	CLSErrorCodeInvalidArgument           CLSErrorCode = 2
-	CLSErrorCodeInvalidModification       CLSErrorCode = 3
-	CLSErrorCodeAuthorizationDenied       CLSErrorCode = 4
-	CLSErrorCodeDatabaseInaccessible      CLSErrorCode = 5
-	CLSErrorCodeLimits                    CLSErrorCode = 6
-	CLSErrorCodeInvalidCreate             CLSErrorCode = 7
-	CLSErrorCodeInvalidUpdate             CLSErrorCode = 8
-	CLSErrorCodePartialFailure            CLSErrorCode = 9
-	CLSErrorCodeInvalidAccountCredentials CLSErrorCode = 10
+	ErrorCodeNone                      ErrorCode = 0
+	ErrorCodeClassKitUnavailable       ErrorCode = 1
+	ErrorCodeInvalidArgument           ErrorCode = 2
+	ErrorCodeInvalidModification       ErrorCode = 3
+	ErrorCodeAuthorizationDenied       ErrorCode = 4
+	ErrorCodeDatabaseInaccessible      ErrorCode = 5
+	ErrorCodeLimits                    ErrorCode = 6
+	ErrorCodeInvalidCreate             ErrorCode = 7
+	ErrorCodeInvalidUpdate             ErrorCode = 8
+	ErrorCodePartialFailure            ErrorCode = 9
+	ErrorCodeInvalidAccountCredentials ErrorCode = 10
 )
 
-func (e CLSErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case CLSErrorCodeNone:
-		return "CLSErrorCodeNone"
-	case CLSErrorCodeClassKitUnavailable:
-		return "CLSErrorCodeClassKitUnavailable"
-	case CLSErrorCodeInvalidArgument:
-		return "CLSErrorCodeInvalidArgument"
-	case CLSErrorCodeInvalidModification:
-		return "CLSErrorCodeInvalidModification"
-	case CLSErrorCodeAuthorizationDenied:
-		return "CLSErrorCodeAuthorizationDenied"
-	case CLSErrorCodeDatabaseInaccessible:
-		return "CLSErrorCodeDatabaseInaccessible"
-	case CLSErrorCodeLimits:
-		return "CLSErrorCodeLimits"
-	case CLSErrorCodeInvalidCreate:
-		return "CLSErrorCodeInvalidCreate"
-	case CLSErrorCodeInvalidUpdate:
-		return "CLSErrorCodeInvalidUpdate"
-	case CLSErrorCodePartialFailure:
-		return "CLSErrorCodePartialFailure"
-	case CLSErrorCodeInvalidAccountCredentials:
-		return "CLSErrorCodeInvalidAccountCredentials"
+	case ErrorCodeNone:
+		return "ErrorCodeNone"
+	case ErrorCodeClassKitUnavailable:
+		return "ErrorCodeClassKitUnavailable"
+	case ErrorCodeInvalidArgument:
+		return "ErrorCodeInvalidArgument"
+	case ErrorCodeInvalidModification:
+		return "ErrorCodeInvalidModification"
+	case ErrorCodeAuthorizationDenied:
+		return "ErrorCodeAuthorizationDenied"
+	case ErrorCodeDatabaseInaccessible:
+		return "ErrorCodeDatabaseInaccessible"
+	case ErrorCodeLimits:
+		return "ErrorCodeLimits"
+	case ErrorCodeInvalidCreate:
+		return "ErrorCodeInvalidCreate"
+	case ErrorCodeInvalidUpdate:
+		return "ErrorCodeInvalidUpdate"
+	case ErrorCodePartialFailure:
+		return "ErrorCodePartialFailure"
+	case ErrorCodeInvalidAccountCredentials:
+		return "ErrorCodeInvalidAccountCredentials"
 	default:
-		return fmt.Sprintf("CLSErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // The available kinds of progress reporting that a context can perform.
-type CLSProgressReportingCapabilityKind int64
+type ProgressReportingCapabilityKind int64
 
 const (
-	CLSProgressReportingCapabilityKindDuration CLSProgressReportingCapabilityKind = 0
-	CLSProgressReportingCapabilityKindPercent  CLSProgressReportingCapabilityKind = 1
-	CLSProgressReportingCapabilityKindBinary   CLSProgressReportingCapabilityKind = 2
-	CLSProgressReportingCapabilityKindQuantity CLSProgressReportingCapabilityKind = 3
-	CLSProgressReportingCapabilityKindScore    CLSProgressReportingCapabilityKind = 4
+	ProgressReportingCapabilityKindDuration ProgressReportingCapabilityKind = 0
+	ProgressReportingCapabilityKindPercent  ProgressReportingCapabilityKind = 1
+	ProgressReportingCapabilityKindBinary   ProgressReportingCapabilityKind = 2
+	ProgressReportingCapabilityKindQuantity ProgressReportingCapabilityKind = 3
+	ProgressReportingCapabilityKindScore    ProgressReportingCapabilityKind = 4
 )
 
-func (e CLSProgressReportingCapabilityKind) String() string {
+// String returns the ProgressReportingCapabilityKind constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProgressReportingCapabilityKind) String() string {
 	switch e {
-	case CLSProgressReportingCapabilityKindDuration:
-		return "CLSProgressReportingCapabilityKindDuration"
-	case CLSProgressReportingCapabilityKindPercent:
-		return "CLSProgressReportingCapabilityKindPercent"
-	case CLSProgressReportingCapabilityKindBinary:
-		return "CLSProgressReportingCapabilityKindBinary"
-	case CLSProgressReportingCapabilityKindQuantity:
-		return "CLSProgressReportingCapabilityKindQuantity"
-	case CLSProgressReportingCapabilityKindScore:
-		return "CLSProgressReportingCapabilityKindScore"
+	case ProgressReportingCapabilityKindDuration:
+		return "ProgressReportingCapabilityKindDuration"
+	case ProgressReportingCapabilityKindPercent:
+		return "ProgressReportingCapabilityKindPercent"
+	case ProgressReportingCapabilityKindBinary:
+		return "ProgressReportingCapabilityKindBinary"
+	case ProgressReportingCapabilityKindQuantity:
+		return "ProgressReportingCapabilityKindQuantity"
+	case ProgressReportingCapabilityKindScore:
+		return "ProgressReportingCapabilityKindScore"
 	default:
-		return fmt.Sprintf("CLSProgressReportingCapabilityKind(%d)", int64(e))
+		return fmt.Sprintf("ProgressReportingCapabilityKind(%d)", int64(e))
 	}
 }

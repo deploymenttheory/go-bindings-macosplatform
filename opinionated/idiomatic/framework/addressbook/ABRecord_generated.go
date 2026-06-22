@@ -5,110 +5,129 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An abstract class that defines the common properties for all Address Book records.
+// Record is an idiomatic wrapper over the Objective-C class ABRecord.
 //
-// Record wraps [raw.ABRecord] with a fluent Go API.
+// Record is an abstract base — you do not construct it directly. Construct one of [Group], [Person] and pass it where a Record is accepted.
+//
+// An abstract class that defines the common properties for all Address Book records.
 type Record struct {
-	inner *raw.ABRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ABRecord].
-func (x *Record) Unwrap() *raw.ABRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Record) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordFromID adopts an existing object pointer as a Record (nil for 0).
+// RecordFromID adopts an existing Objective-C object as a Record
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordFromID(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	return &Record{inner: raw.ABRecordFromID(id)}
+	x := &Record{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecord creates a new [Record].
-func NewRecord() *Record {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ABRecord")), objc.RegisterName("new"))
-	return &Record{inner: raw.ABRecordFromID(_id)}
+// recordAdopt wraps an Objective-C object that this code just created as a
+// Record (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordAdopt(id objc.ID) *Record {
+	if id == 0 {
+		return nil
+	}
+	x := &Record{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a record using the given address book.
-//
-// NewRecordWithAddressBook creates a new [Record].
-func NewRecordWithAddressBook(addressBook *raw.ABAddressBook) *Record {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ABRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddressBook:"), addressBook.Ptr())
-	return &Record{inner: raw.ABRecordFromID(_id)}
+// Description returns the object's -description text.
+func (x *Record) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the value of a given property for a record.
-//
-// ValueForProperty calls the underlying ValueForProperty.
-func (x *Record) ValueForProperty(property string) objc.ID {
-	return x.inner.ValueForProperty(foundation.NSStringStringWithUTF8String(property))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Record) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Sets the value of a given property for a record, returning error information.
-//
-// SetValueForPropertyError calls the underlying SetValueForPropertyError.
-func (x *Record) SetValueForPropertyError(value objc.ID, property string) (bool, error) {
-	return x.inner.SetValueForPropertyError(value, foundation.NSStringStringWithUTF8String(property))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Record) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Sets the value of a given property for a record.
-//
-// SetValueForProperty calls the underlying SetValueForProperty.
-func (x *Record) SetValueForProperty(value objc.ID, property string) bool {
-	return x.inner.SetValueForProperty(value, foundation.NSStringStringWithUTF8String(property))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Record) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Removes the value for a given property.
-//
-// RemoveValueForProperty calls the underlying RemoveValueForProperty.
+// NewRecordWithAddressBook initializes a record using the given address book.
+func NewRecordWithAddressBook(addressBook *AddressBook) *Record {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ABRecord")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddressBook:"), objref.IDOf(addressBook))
+	return recordAdopt(_id)
+}
+
+// ValueForProperty returns the value of a given property for a record.
+func (x *Record) ValueForProperty(property string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), purego.NSString(property))
+	return obj.Wrap(_r)
+}
+
+// SetValueForProperty sets the value of a given property for a record, returning error information.
+func (x *Record) SetValueForProperty(value obj.Object, property string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forProperty:error:"), objref.IDOf(value), purego.NSString(property), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RemoveValueForProperty removes the value for a given property.
 func (x *Record) RemoveValueForProperty(property string) bool {
-	return x.inner.RemoveValueForProperty(foundation.NSStringStringWithUTF8String(property))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValueForProperty:"), purego.NSString(property))
+	return _r
 }
 
-// Returns whether a record is read-only.
-//
-// IsReadOnly calls the underlying IsReadOnly.
+// IsReadOnly returns whether a record is read-only.
 func (x *Record) IsReadOnly() bool {
-	return x.inner.IsReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+	return _r
 }
 
-// UniqueId calls the underlying UniqueId.
+// UniqueId wraps the corresponding Objective-C method.
 func (x *Record) UniqueId() string {
-	_r := x.inner.UniqueId()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueId"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DisplayName calls the underlying DisplayName.
+// DisplayName wraps the corresponding Objective-C method.
 func (x *Record) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Record) asRecord() *raw.ABRecord { return x.inner }
 
 // Recordable is the interface implemented by [Record], for mocking and DI.
 type Recordable interface {
-	Unwrap() *raw.ABRecord
-	ValueForProperty(property string) objc.ID
-	SetValueForPropertyError(value objc.ID, property string) (bool, error)
-	SetValueForProperty(value objc.ID, property string) bool
+	obj.Object
+	ValueForProperty(property string) obj.Object
+	SetValueForProperty(value obj.Object, property string) error
 	RemoveValueForProperty(property string) bool
 	IsReadOnly() bool
 	UniqueId() string
@@ -116,3 +135,10 @@ type Recordable interface {
 }
 
 var _ Recordable = (*Record)(nil)
+
+// isRecord marks Record — and, by embedding promotion, its
+// subclasses — as a member of the Record hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Record) isRecord() {}
+
+var _ RecordProvider = (*Record)(nil)

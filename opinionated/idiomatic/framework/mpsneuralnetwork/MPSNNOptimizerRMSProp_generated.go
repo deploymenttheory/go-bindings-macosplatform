@@ -5,128 +5,84 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNOptimizerRMSProp wraps [raw.MPSNNOptimizerRMSProp] with a fluent Go API.
+// NNOptimizerRMSProp is an idiomatic wrapper over the Objective-C class MPSNNOptimizerRMSProp.
+//
+// It embeds [NNOptimizer], promoting that type's methods.
 type NNOptimizerRMSProp struct {
-	inner *raw.MPSNNOptimizerRMSProp
+	NNOptimizer
 }
 
-// Unwrap returns the underlying [raw.MPSNNOptimizerRMSProp].
-func (x *NNOptimizerRMSProp) Unwrap() *raw.MPSNNOptimizerRMSProp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNOptimizerRMSProp) ID() objc.ID { return x.inner.Ptr() }
-
-// NNOptimizerRMSPropFromID adopts an existing object pointer as a NNOptimizerRMSProp (nil for 0).
+// NNOptimizerRMSPropFromID adopts an existing Objective-C object as a NNOptimizerRMSProp
+// (nil for 0), retaining it and registering a release finalizer.
 func NNOptimizerRMSPropFromID(id objc.ID) *NNOptimizerRMSProp {
 	if id == 0 {
 		return nil
 	}
-	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(id)}
+	x := &NNOptimizerRMSProp{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Convenience initialization for the RMSProp update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate which will be applied @return     A valid MPSNNOptimizerRMSProp object or nil, if failure.
-//
-// NewNNOptimizerRMSPropWithDeviceLearningRate creates a new [NNOptimizerRMSProp].
-func NewNNOptimizerRMSPropWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *NNOptimizerRMSProp {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerRMSProp")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:learningRate:"), device, learningRate)
-	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(_id)}
+// nNOptimizerRMSPropAdopt wraps an Objective-C object that this code just created as a
+// NNOptimizerRMSProp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNOptimizerRMSPropAdopt(id objc.ID) *NNOptimizerRMSProp {
+	if id == 0 {
+		return nil
+	}
+	x := &NNOptimizerRMSProp{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Full initialization for the rmsProp update @param      device                     The device on which the kernel will execute. @param      decay                      The decay to update sumOfSquares @param      epsilon                    The epsilon which will be applied @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerRMSProp object or nil, if failure.
-//
-// NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor creates a new [NNOptimizerRMSProp].
-func NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor(device metal.MTLDevice, decay float64, epsilon float32, optimizerDescriptor *raw.MPSNNOptimizerDescriptor) *NNOptimizerRMSProp {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerRMSProp")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:decay:epsilon:optimizerDescriptor:"), device, decay, epsilon, optimizerDescriptor.Ptr())
-	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(_id)}
+// NewNNOptimizerRMSProp creates a new NNOptimizerRMSProp.
+func NewNNOptimizerRMSProp() *NNOptimizerRMSProp {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNOptimizerRMSProp")), objc.RegisterName("new"))
+	return nNOptimizerRMSPropAdopt(_id)
 }
 
-// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
-//
-// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+// WithLearningRate the learningRate at which we update values The default value is 1e-3
 func (x *NNOptimizerRMSProp) WithLearningRate(learningRate float32) *NNOptimizerRMSProp {
-	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
-//
-// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
 func (x *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp {
-	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 	return x
 }
 
-// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      inputGradientVector        A valid MPSVector object which specifies the input vector of gradients for this update. @param      inputValuesVector          A valid MPSVector object which specifies the input vector of values to be updated. @param      inputSumOfSquaresVector    A valid MPSVector object which specifies the gradient velocity vector which will be updated and overwritten. @param      resultValuesVector         A valid MPSVector object which specifies the resultValues vector which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
-//
-// EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector.
-func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputSumOfSquaresVector, resultValuesVector)
-}
-
-// EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix calls the underlying EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix.
-func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputSumOfSquaresMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputSumOfSquaresMatrix, resultValuesMatrix)
-}
-
-// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      convolutionGradientState   A valid MPSCNNConvolutionGradientState object which specifies the input state with gradients for this update. @param      convolutionSourceState     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the input state with values to be updated. @param      inputSumOfSquaresVectors   An array MPSVector object which specifies the gradient sumOfSquares vectors which will be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of size 1 in which case biases won't be updated @param      resultState                A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
-//
-// EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState.
-func (x *NNOptimizerRMSProp) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *raw.MPSCNNConvolutionGradientState, convolutionSourceState *raw.MPSCNNConvolutionWeightsAndBiasesState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNConvolutionWeightsAndBiasesState) {
-	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputSumOfSquaresVectors, resultState)
-}
-
-// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationState                    A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients and original gamma/beta for this update. @param      inputSumOfSquaresVectors                   An array MPSVector object which specifies the gradient sumOfSquares vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
-//
-// EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState.
-func (x *NNOptimizerRMSProp) EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *raw.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer, batchNormalizationState, inputSumOfSquaresVectors, resultState)
-}
-
-// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationGradientState            A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients for this update. @param      batchNormalizationSourceState              A valid MPSCNNBatchNormalizationState object which specifies the input state with original gamma/beta for this update. @param      inputSumOfSquaresVectors                   An array MPSVector object which specifies the gradient sumOfSquares vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
-//
-// EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState.
-func (x *NNOptimizerRMSProp) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *raw.MPSCNNBatchNormalizationState, batchNormalizationSourceState *raw.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputSumOfSquaresVectors, resultState)
-}
-
-// @property   decay @abstract   The decay at which we update sumOfSquares @discussion Default value is 0.9
-//
-// Decay calls the underlying Decay.
+// Decay the decay at which we update sumOfSquares Default value is 0.9
 func (x *NNOptimizerRMSProp) Decay() float64 {
-	return x.inner.Decay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decay"))
+	return _r
 }
 
-// @property   epsilon @abstract   The epsilon at which we update values @discussion This value is usually used to ensure to avoid divide by 0, default value is 1e-8
-//
-// Epsilon calls the underlying Epsilon.
+// Epsilon the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
 func (x *NNOptimizerRMSProp) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
-
-func (x *NNOptimizerRMSProp) asNNOptimizer() *raw.MPSNNOptimizer { return &x.inner.MPSNNOptimizer }
 
 // NNOptimizerRMSPropable is the interface implemented by [NNOptimizerRMSProp], for mocking and DI.
 type NNOptimizerRMSPropable interface {
-	Unwrap() *raw.MPSNNOptimizerRMSProp
+	obj.Object
 	WithLearningRate(learningRate float32) *NNOptimizerRMSProp
 	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp
-	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
-	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputSumOfSquaresMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
-	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *raw.MPSCNNConvolutionGradientState, convolutionSourceState *raw.MPSCNNConvolutionWeightsAndBiasesState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNConvolutionWeightsAndBiasesState)
-	EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *raw.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState)
-	EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *raw.MPSCNNBatchNormalizationState, batchNormalizationSourceState *raw.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState)
 	Decay() float64
 	Epsilon() float32
 }
 
 var _ NNOptimizerRMSPropable = (*NNOptimizerRMSProp)(nil)
+
+var _ NNOptimizerProvider = (*NNOptimizerRMSProp)(nil)

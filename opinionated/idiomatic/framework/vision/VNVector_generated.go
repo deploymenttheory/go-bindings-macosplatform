@@ -5,104 +5,127 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable 2D vector represented by its x-axis and y-axis projections.
+// Vector is an idiomatic wrapper over the Objective-C class VNVector.
 //
-// Vector wraps [raw.VNVector] with a fluent Go API.
+// An immutable 2D vector represented by its x-axis and y-axis projections.
 type Vector struct {
-	inner *raw.VNVector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNVector].
-func (x *Vector) Unwrap() *raw.VNVector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Vector) ID() objc.ID { return x.inner.Ptr() }
-
-// VectorFromID adopts an existing object pointer as a Vector (nil for 0).
+// VectorFromID adopts an existing Objective-C object as a Vector
+// (nil for 0), retaining it and registering a release finalizer.
 func VectorFromID(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	return &Vector{inner: raw.VNVectorFromID(id)}
+	x := &Vector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
-//
-// NewVectorWithXComponentYComponent creates a new [Vector].
+// vectorAdopt wraps an Objective-C object that this code just created as a
+// Vector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vectorAdopt(id objc.ID) *Vector {
+	if id == 0 {
+		return nil
+	}
+	x := &Vector{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Vector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Vector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Vector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Vector) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVectorWithXComponentYComponent creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
 func NewVectorWithXComponentYComponent(x float64, y float64) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVector")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXComponent:yComponent:"), x, y)
-	return &Vector{inner: raw.VNVectorFromID(_id)}
+	return vectorAdopt(_id)
 }
 
-// Creates a new vector in polar coordinate space.
-//
-// NewVectorWithRTheta creates a new [Vector].
+// NewVectorWithRTheta creates a new vector in polar coordinate space.
 func NewVectorWithRTheta(r float64, theta float64) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVector")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithR:theta:"), r, theta)
-	return &Vector{inner: raw.VNVectorFromID(_id)}
+	return vectorAdopt(_id)
 }
 
-// Creates a new vector in Cartesian coordinate space.
-//
-// NewVectorWithVectorHeadTail creates a new [Vector].
-func NewVectorWithVectorHeadTail(head *raw.VNPoint, tail *raw.VNPoint) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVectorHead:tail:"), head.Ptr(), tail.Ptr())
-	return &Vector{inner: raw.VNVectorFromID(_id)}
+// NewVectorWithVectorHeadTail creates a new vector in Cartesian coordinate space.
+func NewVectorWithVectorHeadTail(head *Point, tail *Point) *Vector {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVectorHead:tail:"), objref.IDOf(head), objref.IDOf(tail))
+	return vectorAdopt(_id)
 }
 
-// @brief Signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
-//
-// X calls the underlying X.
+// X signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
 func (x *Vector) X() float64 {
-	return x.inner.X()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
+	return _r
 }
 
-// @brief Signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
-//
-// Y calls the underlying Y.
+// Y signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
 func (x *Vector) Y() float64 {
-	return x.inner.Y()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
+	return _r
 }
 
-// @brief Radius, or absolute value, or length of the vector.
-//
-// R calls the underlying R.
+// R radius, or absolute value, or length of the vector.
 func (x *Vector) R() float64 {
-	return x.inner.R()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("r"))
+	return _r
 }
 
-// @brief Angle between the vector direction and positive direction of X axis.
-//
-// Theta calls the underlying Theta.
+// Theta angle between the vector direction and positive direction of X axis.
 func (x *Vector) Theta() float64 {
-	return x.inner.Theta()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("theta"))
+	return _r
 }
 
-// @brief Returns a length, or absolute value, of the vector.
-//
-// Length calls the underlying Length.
+// Length returns a length, or absolute value, of the vector.
 func (x *Vector) Length() float64 {
-	return x.inner.Length()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// @brief Returns a length ^ 2 of a vector.
-//
-// SquaredLength calls the underlying SquaredLength.
+// SquaredLength returns a length ^ 2 of a vector.
 func (x *Vector) SquaredLength() float64 {
-	return x.inner.SquaredLength()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("squaredLength"))
+	return _r
 }
 
 // Vectorable is the interface implemented by [Vector], for mocking and DI.
 type Vectorable interface {
-	Unwrap() *raw.VNVector
+	obj.Object
 	X() float64
 	Y() float64
 	R() float64

@@ -5,83 +5,81 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A texture whose contents can be dynamically updated.
+// MutableTexture is an idiomatic wrapper over the Objective-C class SKMutableTexture.
 //
-// MutableTexture wraps [raw.SKMutableTexture] with a fluent Go API.
+// It embeds [Texture], promoting that type's methods.
+//
+// A texture whose contents can be dynamically updated.
 type MutableTexture struct {
-	inner *raw.SKMutableTexture
+	Texture
 }
 
-// Unwrap returns the underlying [raw.SKMutableTexture].
-func (x *MutableTexture) Unwrap() *raw.SKMutableTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableTextureFromID adopts an existing object pointer as a MutableTexture (nil for 0).
+// MutableTextureFromID adopts an existing Objective-C object as a MutableTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableTextureFromID(id objc.ID) *MutableTexture {
 	if id == 0 {
 		return nil
 	}
-	return &MutableTexture{inner: raw.SKMutableTextureFromID(id)}
+	x := &MutableTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an empty texture with a specific size.
-//
-// NewMutableTextureWithSize creates a new [MutableTexture].
+// mutableTextureAdopt wraps an Objective-C object that this code just created as a
+// MutableTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableTextureAdopt(id objc.ID) *MutableTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableTexture{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableTextureWithSize initializes an empty texture with a specific size.
 func NewMutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKMutableTexture")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKMutableTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
-	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
+	return mutableTextureAdopt(_id)
 }
 
-// Initializes an empty texture with a specific size and format.
-//
-// NewMutableTextureWithSizePixelFormat creates a new [MutableTexture].
+// NewMutableTextureWithSizePixelFormat initializes an empty texture with a specific size and format.
 func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int) *MutableTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKMutableTexture")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKMutableTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:pixelFormat:"), size, format)
-	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
+	return mutableTextureAdopt(_id)
 }
 
-// The filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
-//
-// WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
-func (x *MutableTexture) WithFilteringMode(filteringMode SKTextureFilteringMode) *MutableTexture {
-	x.inner.SKTexture.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
+// WithFilteringMode the filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
+func (x *MutableTexture) WithFilteringMode(filteringMode TextureFilteringMode) *MutableTexture {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilteringMode:"), filteringMode)
 	return x
 }
 
-// A Boolean value that indicates whether the texture attempts to generate mipmaps.
-//
-// WithUsesMipmaps sets the usesMipmaps property and returns the receiver for chaining.
+// WithUsesMipmaps a Boolean value that indicates whether the texture attempts to generate mipmaps.
 func (x *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
-	x.inner.SKTexture.SetUsesMipmaps(usesMipmaps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
 	return x
 }
-
-// Modifies the contents of a mutable texture.
-//
-// ModifyPixelDataWith calls the underlying ModifyPixelDataWith.
-func (x *MutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, uint)) {
-	x.inner.ModifyPixelDataWith(block)
-}
-
-func (x *MutableTexture) asTexture() *raw.SKTexture { return &x.inner.SKTexture }
 
 // MutableTextureable is the interface implemented by [MutableTexture], for mocking and DI.
 type MutableTextureable interface {
-	Unwrap() *raw.SKMutableTexture
-	WithFilteringMode(filteringMode SKTextureFilteringMode) *MutableTexture
+	obj.Object
+	WithFilteringMode(filteringMode TextureFilteringMode) *MutableTexture
 	WithUsesMipmaps(usesMipmaps bool) *MutableTexture
-	ModifyPixelDataWith(block func(unsafe.Pointer, uint))
 }
 
 var _ MutableTextureable = (*MutableTexture)(nil)
+
+var _ TextureProvider = (*MutableTexture)(nil)

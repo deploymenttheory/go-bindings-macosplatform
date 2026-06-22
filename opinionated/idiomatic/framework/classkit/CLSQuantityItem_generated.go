@@ -5,77 +5,80 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Activity information that signifies a quantity.
+// QuantityItem is an idiomatic wrapper over the Objective-C class CLSQuantityItem.
 //
-// QuantityItem wraps [raw.CLSQuantityItem] with a fluent Go API.
+// It embeds [ActivityItem], promoting that type's methods.
+//
+// Activity information that signifies a quantity.
 type QuantityItem struct {
-	inner *raw.CLSQuantityItem
+	ActivityItem
 }
 
-// Unwrap returns the underlying [raw.CLSQuantityItem].
-func (x *QuantityItem) Unwrap() *raw.CLSQuantityItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuantityItem) ID() objc.ID { return x.inner.Ptr() }
-
-// QuantityItemFromID adopts an existing object pointer as a QuantityItem (nil for 0).
+// QuantityItemFromID adopts an existing Objective-C object as a QuantityItem
+// (nil for 0), retaining it and registering a release finalizer.
 func QuantityItemFromID(id objc.ID) *QuantityItem {
 	if id == 0 {
 		return nil
 	}
-	return &QuantityItem{inner: raw.CLSQuantityItemFromID(id)}
+	x := &QuantityItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an activity item that records a discrete quantity.
-//
-// NewQuantityItemWithIdentifierTitle creates a new [QuantityItem].
+// quantityItemAdopt wraps an Objective-C object that this code just created as a
+// QuantityItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quantityItemAdopt(id objc.ID) *QuantityItem {
+	if id == 0 {
+		return nil
+	}
+	x := &QuantityItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewQuantityItemWithIdentifierTitle initializes an activity item that records a discrete quantity.
 func NewQuantityItemWithIdentifierTitle(identifier string, title string) *QuantityItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSQuantityItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr())
-	return &QuantityItem{inner: raw.CLSQuantityItemFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSQuantityItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:"), purego.NSString(identifier), purego.NSString(title))
+	return quantityItemAdopt(_id)
 }
 
-// A quantity associated with the task.
-//
-// WithQuantity sets the quantity property and returns the receiver for chaining.
+// WithQuantity a quantity associated with the task.
 func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
-	x.inner.SetQuantity(quantity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 	return x
 }
 
-// A human readable name for the activity item.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle a human readable name for the activity item.
 func (x *QuantityItem) WithTitle(title string) *QuantityItem {
-	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// @abstract      Quantity awarded.
-//
-// Quantity calls the underlying Quantity.
+// Quantity quantity awarded.
 func (x *QuantityItem) Quantity() float64 {
-	return x.inner.Quantity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("quantity"))
+	return _r
 }
 
-// SetQuantity calls the underlying SetQuantity.
+// SetQuantity wraps the corresponding Objective-C method.
 func (x *QuantityItem) SetQuantity(quantity float64) {
-	x.inner.SetQuantity(quantity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
 }
-
-func (x *QuantityItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
-
-func (x *QuantityItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem.CLSObject }
 
 // QuantityItemable is the interface implemented by [QuantityItem], for mocking and DI.
 type QuantityItemable interface {
-	Unwrap() *raw.CLSQuantityItem
+	obj.Object
 	WithQuantity(quantity float64) *QuantityItem
 	WithTitle(title string) *QuantityItem
 	Quantity() float64
@@ -83,3 +86,7 @@ type QuantityItemable interface {
 }
 
 var _ QuantityItemable = (*QuantityItem)(nil)
+
+var _ ActivityItemProvider = (*QuantityItem)(nil)
+
+var _ ObjectProvider = (*QuantityItem)(nil)

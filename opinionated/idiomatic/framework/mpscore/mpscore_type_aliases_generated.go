@@ -4,51 +4,81 @@
 
 package mpscore
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-)
+type MPSCustomKernelArgumentCount struct {
+	DestinationTextureCount uint
+	SourceTextureCount      uint
+	BroadcastTextureCount   uint
+}
 
-// MPSCustomKernelArgumentCount is a type alias for the raw MPSCustomKernelArgumentCount value-type struct.
-type MPSCustomKernelArgumentCount = raw.MPSCustomKernelArgumentCount
+// Describes a sub-region of an array dimension
+type MPSDimensionSlice struct {
+	Start  uint
+	Length uint
+}
 
-// MPSCustomKernelInfo is a type alias for the raw MPSCustomKernelInfo value-type struct.
-type MPSCustomKernelInfo = raw.MPSCustomKernelInfo
+// A unsigned coordinate with x, y and channel components
+type MPSImageCoordinate struct {
+	X       uint
+	Y       uint
+	Channel uint
+}
 
-// MPSCustomKernelSourceInfo is a type alias for the raw MPSCustomKernelSourceInfo value-type struct.
-type MPSCustomKernelSourceInfo = raw.MPSCustomKernelSourceInfo
+// these parameters are passed in to allow user to read/write to a particular set of featureChannels in an MPSImage
+type MPSImageReadWriteParams struct {
+	FeatureChannelOffset               uint
+	NumberOfFeatureChannelsToReadWrite uint
+}
 
-// MPSDimensionSlice is a type alias for the raw MPSDimensionSlice value-type struct.
-type MPSDimensionSlice = raw.MPSDimensionSlice
+// A rectangular subregion of a MPSImage
+type MPSImageRegion struct {
+	Offset MPSImageCoordinate
+	Size   MPSImageCoordinate
+}
 
-// MPSImageCoordinate is a type alias for the raw MPSImageCoordinate value-type struct.
-type MPSImageCoordinate = raw.MPSImageCoordinate
+type MPSIntegerDivisionParams struct {
+	Divisor uint16
+	Recip   uint16
+	Addend  uint16
+	Shift   uint16
+}
 
-// MPSImageReadWriteParams is a type alias for the raw MPSImageReadWriteParams value-type struct.
-type MPSImageReadWriteParams = raw.MPSImageReadWriteParams
+// Specifies a row and column offset into an MPSMatrix.
+type MPSMatrixOffset struct {
+	RowOffset    uint32
+	ColumnOffset uint32
+}
 
-// MPSImageRegion is a type alias for the raw MPSImageRegion value-type struct.
-type MPSImageRegion = raw.MPSImageRegion
+// A signed coordinate with x, y and z components
+type MPSOffset struct {
+	X int
+	Y int
+	Z int
+}
 
-// MPSIntegerDivisionParams is a type alias for the raw MPSIntegerDivisionParams value-type struct.
-type MPSIntegerDivisionParams = raw.MPSIntegerDivisionParams
+// A position in an image
+type MPSOrigin struct {
+	X float64
+	Y float64
+	Z float64
+}
 
-// MPSMatrixOffset is a type alias for the raw MPSMatrixOffset value-type struct.
-type MPSMatrixOffset = raw.MPSMatrixOffset
+// A region of an image
+type MPSRegion struct {
+	Origin MPSOrigin
+	Size   MPSSize
+}
 
-// MPSOffset is a type alias for the raw MPSOffset value-type struct.
-type MPSOffset = raw.MPSOffset
+// Transform matrix for explict control over resampling in MPSImageScale. The MPSScaleTransform is equivalent to:
+type MPSScaleTransform struct {
+	ScaleX     float64
+	ScaleY     float64
+	TranslateX float64
+	TranslateY float64
+}
 
-// MPSOrigin is a type alias for the raw MPSOrigin value-type struct.
-type MPSOrigin = raw.MPSOrigin
-
-// MPSRegion is a type alias for the raw MPSRegion value-type struct.
-type MPSRegion = raw.MPSRegion
-
-// MPSScaleTransform is a type alias for the raw MPSScaleTransform value-type struct.
-type MPSScaleTransform = raw.MPSScaleTransform
-
-// MPSSize is a type alias for the raw MPSSize value-type struct.
-type MPSSize = raw.MPSSize
-
-// MPSStateTextureInfo is a type alias for the raw MPSStateTextureInfo value-type struct.
-type MPSStateTextureInfo = raw.MPSStateTextureInfo
+// A size of a region in an image
+type MPSSize struct {
+	Width  float64
+	Height float64
+	Depth  float64
+}

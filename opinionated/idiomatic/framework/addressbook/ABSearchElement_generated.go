@@ -5,49 +5,83 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to specify a search query for records in the Address Book database.
+// SearchElement is an idiomatic wrapper over the Objective-C class ABSearchElement.
 //
-// SearchElement wraps [raw.ABSearchElement] with a fluent Go API.
+// An object you use to specify a search query for records in the Address Book database.
 type SearchElement struct {
-	inner *raw.ABSearchElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ABSearchElement].
-func (x *SearchElement) Unwrap() *raw.ABSearchElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SearchElement) ID() objc.ID { return x.inner.Ptr() }
-
-// SearchElementFromID adopts an existing object pointer as a SearchElement (nil for 0).
+// SearchElementFromID adopts an existing Objective-C object as a SearchElement
+// (nil for 0), retaining it and registering a release finalizer.
 func SearchElementFromID(id objc.ID) *SearchElement {
 	if id == 0 {
 		return nil
 	}
-	return &SearchElement{inner: raw.ABSearchElementFromID(id)}
+	x := &SearchElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSearchElement creates a new [SearchElement].
+// searchElementAdopt wraps an Objective-C object that this code just created as a
+// SearchElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func searchElementAdopt(id objc.ID) *SearchElement {
+	if id == 0 {
+		return nil
+	}
+	x := &SearchElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SearchElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SearchElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SearchElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SearchElement) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSearchElement creates a new SearchElement.
 func NewSearchElement() *SearchElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ABSearchElement")), objc.RegisterName("new"))
-	return &SearchElement{inner: raw.ABSearchElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ABSearchElement")), objc.RegisterName("new"))
+	return searchElementAdopt(_id)
 }
 
-// Tests whether or not a record matches a search element.
-//
-// MatchesRecord calls the underlying MatchesRecord.
-func (x *SearchElement) MatchesRecord(record *raw.ABRecord) bool {
-	return x.inner.MatchesRecord(record)
+// MatchesRecord tests whether or not a record matches a search element.
+func (x *SearchElement) MatchesRecord(record *Record) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesRecord:"), objref.IDOf(record))
+	return _r
 }
 
 // SearchElementable is the interface implemented by [SearchElement], for mocking and DI.
 type SearchElementable interface {
-	Unwrap() *raw.ABSearchElement
-	MatchesRecord(record *raw.ABRecord) bool
+	obj.Object
+	MatchesRecord(record *Record) bool
 }
 
 var _ SearchElementable = (*SearchElement)(nil)

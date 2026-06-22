@@ -5,49 +5,82 @@
 package devicediscoveryextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicediscoveryextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that relays device discovery events from the extension to the system.
+// DDDiscoverySession is an idiomatic wrapper over the Objective-C class DDDiscoverySession.
 //
-// DDDiscoverySession wraps [raw.DDDiscoverySession] with a fluent Go API.
+// An object that relays device discovery events from the extension to the system.
 type DDDiscoverySession struct {
-	inner *raw.DDDiscoverySession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DDDiscoverySession].
-func (x *DDDiscoverySession) Unwrap() *raw.DDDiscoverySession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DDDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
-
-// DDDiscoverySessionFromID adopts an existing object pointer as a DDDiscoverySession (nil for 0).
+// DDDiscoverySessionFromID adopts an existing Objective-C object as a DDDiscoverySession
+// (nil for 0), retaining it and registering a release finalizer.
 func DDDiscoverySessionFromID(id objc.ID) *DDDiscoverySession {
 	if id == 0 {
 		return nil
 	}
-	return &DDDiscoverySession{inner: raw.DDDiscoverySessionFromID(id)}
+	x := &DDDiscoverySession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDDDiscoverySession creates a new [DDDiscoverySession].
+// dDDiscoverySessionAdopt wraps an Objective-C object that this code just created as a
+// DDDiscoverySession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dDDiscoverySessionAdopt(id objc.ID) *DDDiscoverySession {
+	if id == 0 {
+		return nil
+	}
+	x := &DDDiscoverySession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DDDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DDDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DDDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DDDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDDDiscoverySession creates a new DDDiscoverySession.
 func NewDDDiscoverySession() *DDDiscoverySession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDDiscoverySession")), objc.RegisterName("new"))
-	return &DDDiscoverySession{inner: raw.DDDiscoverySessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDDiscoverySession")), objc.RegisterName("new"))
+	return dDDiscoverySessionAdopt(_id)
 }
 
-// Reports an event to the system.
-//
-// ReportEvent calls the underlying ReportEvent.
-func (x *DDDiscoverySession) ReportEvent(inEvent *raw.DDDeviceEvent) {
-	x.inner.ReportEvent(inEvent)
+// ReportEvent reports an event to the system.
+func (x *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportEvent:"), objref.IDOf(inEvent))
 }
 
 // DDDiscoverySessionable is the interface implemented by [DDDiscoverySession], for mocking and DI.
 type DDDiscoverySessionable interface {
-	Unwrap() *raw.DDDiscoverySession
-	ReportEvent(inEvent *raw.DDDeviceEvent)
+	obj.Object
+	ReportEvent(inEvent *DDDeviceEvent)
 }
 
 var _ DDDiscoverySessionable = (*DDDiscoverySession)(nil)

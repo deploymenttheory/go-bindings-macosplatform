@@ -10,39 +10,43 @@ import (
 )
 
 // Options that determine how PHASE manages sound assets in memory.
-type PHASEAssetType int64
+type AssetType int64
 
 const (
-	PHASEAssetTypeResident PHASEAssetType = 0
-	PHASEAssetTypeStreamed PHASEAssetType = 1
+	AssetTypeResident AssetType = 0
+	AssetTypeStreamed AssetType = 1
 )
 
-func (e PHASEAssetType) String() string {
+// String returns the AssetType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetType) String() string {
 	switch e {
-	case PHASEAssetTypeResident:
-		return "PHASEAssetTypeResident"
-	case PHASEAssetTypeStreamed:
-		return "PHASEAssetTypeStreamed"
+	case AssetTypeResident:
+		return "AssetTypeResident"
+	case AssetTypeStreamed:
+		return "AssetTypeStreamed"
 	default:
-		return fmt.Sprintf("PHASEAssetType(%d)", int64(e))
+		return fmt.Sprintf("AssetType(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type PHASEAutomaticHeadTrackingFlags uint64
+type AutomaticHeadTrackingFlags uint64
 
 const (
-	PHASEAutomaticHeadTrackingFlagOrientation PHASEAutomaticHeadTrackingFlags = 1
-	PHASEAutomaticHeadTrackingFlagPosition    PHASEAutomaticHeadTrackingFlags = 2
+	AutomaticHeadTrackingFlagOrientation AutomaticHeadTrackingFlags = 1
+	AutomaticHeadTrackingFlagPosition    AutomaticHeadTrackingFlags = 2
 )
 
-func (e PHASEAutomaticHeadTrackingFlags) String() string {
+// String returns the AutomaticHeadTrackingFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AutomaticHeadTrackingFlags) String() string {
 	var parts []string
-	if e&PHASEAutomaticHeadTrackingFlagOrientation != 0 {
-		parts = append(parts, "PHASEAutomaticHeadTrackingFlagOrientation")
+	if e&AutomaticHeadTrackingFlagOrientation != 0 {
+		parts = append(parts, "AutomaticHeadTrackingFlagOrientation")
 	}
-	if e&PHASEAutomaticHeadTrackingFlagPosition != 0 {
-		parts = append(parts, "PHASEAutomaticHeadTrackingFlagPosition")
+	if e&AutomaticHeadTrackingFlagPosition != 0 {
+		parts = append(parts, "AutomaticHeadTrackingFlagPosition")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -51,243 +55,259 @@ func (e PHASEAutomaticHeadTrackingFlags) String() string {
 }
 
 // Calibration options for sound pressure level.
-type PHASECalibrationMode int64
+type CalibrationMode int64
 
 const (
 	// An option that specifies no loudness calibration.
-	PHASECalibrationModeNone PHASECalibrationMode = 0
+	CalibrationModeNone CalibrationMode = 0
 	// A sound pressure level that’s tuned for the device.
-	PHASECalibrationModeRelativeSpl PHASECalibrationMode = 1
+	CalibrationModeRelativeSpl CalibrationMode = 1
 	// A sound pressure level based on the current output device.
-	PHASECalibrationModeAbsoluteSpl PHASECalibrationMode = 2
+	CalibrationModeAbsoluteSpl CalibrationMode = 2
 )
 
-func (e PHASECalibrationMode) String() string {
+// String returns the CalibrationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CalibrationMode) String() string {
 	switch e {
-	case PHASECalibrationModeNone:
-		return "PHASECalibrationModeNone"
-	case PHASECalibrationModeRelativeSpl:
-		return "PHASECalibrationModeRelativeSpl"
-	case PHASECalibrationModeAbsoluteSpl:
-		return "PHASECalibrationModeAbsoluteSpl"
+	case CalibrationModeNone:
+		return "CalibrationModeNone"
+	case CalibrationModeRelativeSpl:
+		return "CalibrationModeRelativeSpl"
+	case CalibrationModeAbsoluteSpl:
+		return "CalibrationModeAbsoluteSpl"
 	default:
-		return fmt.Sprintf("PHASECalibrationMode(%d)", int64(e))
+		return fmt.Sprintf("CalibrationMode(%d)", int64(e))
 	}
 }
 
 // The actions the engine takes when it culls sound.
-type PHASECullOption int64
+type CullOption int64
 
 const (
 	// An option that culls sound by stopping playback.
-	PHASECullOptionTerminate PHASECullOption = 0
+	CullOptionTerminate CullOption = 0
 	// An option that pauses playback and resumes at the beginning.
-	PHASECullOptionSleepWakeAtZero PHASECullOption = 1
+	CullOptionSleepWakeAtZero CullOption = 1
 	// An option that pauses playback and resumes at a random position.
-	PHASECullOptionSleepWakeAtRandomOffset PHASECullOption = 2
+	CullOptionSleepWakeAtRandomOffset CullOption = 2
 	// An option that pauses playback and resumes where it left off.
-	PHASECullOptionSleepWakeAtRealtimeOffset PHASECullOption = 3
+	CullOptionSleepWakeAtRealtimeOffset CullOption = 3
 	// An option that indicates the framework takes no action to cull sound.
-	PHASECullOptionDoNotCull PHASECullOption = 4
+	CullOptionDoNotCull CullOption = 4
 )
 
-func (e PHASECullOption) String() string {
+// String returns the CullOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CullOption) String() string {
 	switch e {
-	case PHASECullOptionTerminate:
-		return "PHASECullOptionTerminate"
-	case PHASECullOptionSleepWakeAtZero:
-		return "PHASECullOptionSleepWakeAtZero"
-	case PHASECullOptionSleepWakeAtRandomOffset:
-		return "PHASECullOptionSleepWakeAtRandomOffset"
-	case PHASECullOptionSleepWakeAtRealtimeOffset:
-		return "PHASECullOptionSleepWakeAtRealtimeOffset"
-	case PHASECullOptionDoNotCull:
-		return "PHASECullOptionDoNotCull"
+	case CullOptionTerminate:
+		return "CullOptionTerminate"
+	case CullOptionSleepWakeAtZero:
+		return "CullOptionSleepWakeAtZero"
+	case CullOptionSleepWakeAtRandomOffset:
+		return "CullOptionSleepWakeAtRandomOffset"
+	case CullOptionSleepWakeAtRealtimeOffset:
+		return "CullOptionSleepWakeAtRealtimeOffset"
+	case CullOptionDoNotCull:
+		return "CullOptionDoNotCull"
 	default:
-		return fmt.Sprintf("PHASECullOption(%d)", int64(e))
+		return fmt.Sprintf("CullOption(%d)", int64(e))
 	}
 }
 
 // Options that apply a mathematical function to an input value.
-type PHASECurveType int64
+type CurveType int64
 
 const (
 	// A curve that increases uniformly with its input.
-	PHASECurveTypeLinear PHASECurveType = 1668435054
+	CurveTypeLinear CurveType = 1668435054
 	// A curve that increases at a rate that squares its input.
-	PHASECurveTypeSquared PHASECurveType = 1668436849
+	CurveTypeSquared CurveType = 1668436849
 	// A curve that increases at a rate of one divided by the input’s square.
-	PHASECurveTypeInverseSquared PHASECurveType = 1668434257
+	CurveTypeInverseSquared CurveType = 1668434257
 	// A curve that increases at a rate that cubes its input.
-	PHASECurveTypeCubed PHASECurveType = 1668432757
+	CurveTypeCubed CurveType = 1668432757
 	// A curve that increases at a rate of one divided by the input’s cube.
-	PHASECurveTypeInverseCubed PHASECurveType = 1668434243
+	CurveTypeInverseCubed CurveType = 1668434243
 	// A sine curve.
-	PHASECurveTypeSine PHASECurveType = 1668436846
+	CurveTypeSine CurveType = 1668436846
 	// An inverse sine curve.
-	PHASECurveTypeInverseSine PHASECurveType = 1668434259
+	CurveTypeInverseSine CurveType = 1668434259
 	// A sigmoid curve.
-	PHASECurveTypeSigmoid PHASECurveType = 1668436839
+	CurveTypeSigmoid CurveType = 1668436839
 	// An inverse sigmoid curve.
-	PHASECurveTypeInverseSigmoid PHASECurveType = 1668434247
+	CurveTypeInverseSigmoid CurveType = 1668434247
 	// A curve that equals its start value for the entire duration.
-	PHASECurveTypeHoldStartValue PHASECurveType = 1668434003
+	CurveTypeHoldStartValue CurveType = 1668434003
 	// A curve that equals its end value for the entire duration.
-	PHASECurveTypeJumpToEndValue PHASECurveType = 1668434501
+	CurveTypeJumpToEndValue CurveType = 1668434501
 )
 
-func (e PHASECurveType) String() string {
+// String returns the CurveType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CurveType) String() string {
 	switch e {
-	case PHASECurveTypeLinear:
-		return "PHASECurveTypeLinear"
-	case PHASECurveTypeSquared:
-		return "PHASECurveTypeSquared"
-	case PHASECurveTypeInverseSquared:
-		return "PHASECurveTypeInverseSquared"
-	case PHASECurveTypeCubed:
-		return "PHASECurveTypeCubed"
-	case PHASECurveTypeInverseCubed:
-		return "PHASECurveTypeInverseCubed"
-	case PHASECurveTypeSine:
-		return "PHASECurveTypeSine"
-	case PHASECurveTypeInverseSine:
-		return "PHASECurveTypeInverseSine"
-	case PHASECurveTypeSigmoid:
-		return "PHASECurveTypeSigmoid"
-	case PHASECurveTypeInverseSigmoid:
-		return "PHASECurveTypeInverseSigmoid"
-	case PHASECurveTypeHoldStartValue:
-		return "PHASECurveTypeHoldStartValue"
-	case PHASECurveTypeJumpToEndValue:
-		return "PHASECurveTypeJumpToEndValue"
+	case CurveTypeLinear:
+		return "CurveTypeLinear"
+	case CurveTypeSquared:
+		return "CurveTypeSquared"
+	case CurveTypeInverseSquared:
+		return "CurveTypeInverseSquared"
+	case CurveTypeCubed:
+		return "CurveTypeCubed"
+	case CurveTypeInverseCubed:
+		return "CurveTypeInverseCubed"
+	case CurveTypeSine:
+		return "CurveTypeSine"
+	case CurveTypeInverseSine:
+		return "CurveTypeInverseSine"
+	case CurveTypeSigmoid:
+		return "CurveTypeSigmoid"
+	case CurveTypeInverseSigmoid:
+		return "CurveTypeInverseSigmoid"
+	case CurveTypeHoldStartValue:
+		return "CurveTypeHoldStartValue"
+	case CurveTypeJumpToEndValue:
+		return "CurveTypeJumpToEndValue"
 	default:
-		return fmt.Sprintf("PHASECurveType(%d)", int64(e))
+		return fmt.Sprintf("CurveType(%d)", int64(e))
 	}
 }
 
 // A collection of physical surfaces that each add a unique acoustic quality to your app’s audio.
-type PHASEMaterialPreset int64
+type MaterialPreset int64
 
 const (
 	// A surface characteristic that produces the acoustic quality of cardboard.
-	PHASEMaterialPresetCardboard PHASEMaterialPreset = 1833136740
+	MaterialPresetCardboard MaterialPreset = 1833136740
 	// A surface characteristic that produces the acoustic quality of glass.
-	PHASEMaterialPresetGlass PHASEMaterialPreset = 1833397363
+	MaterialPresetGlass MaterialPreset = 1833397363
 	// A surface characteristic that produces the acoustic quality of brick.
-	PHASEMaterialPresetBrick PHASEMaterialPreset = 1833071211
+	MaterialPresetBrick MaterialPreset = 1833071211
 	// A surface characteristic that produces the acoustic quality of concrete.
-	PHASEMaterialPresetConcrete PHASEMaterialPreset = 1833132914
+	MaterialPresetConcrete MaterialPreset = 1833132914
 	// A surface characteristic that produces the acoustic quality of drywall.
-	PHASEMaterialPresetDrywall PHASEMaterialPreset = 1833202295
+	MaterialPresetDrywall MaterialPreset = 1833202295
 	// A surface characteristic that produces the acoustic quality of wood.
-	PHASEMaterialPresetWood PHASEMaterialPreset = 1834448228
+	MaterialPresetWood MaterialPreset = 1834448228
 )
 
-func (e PHASEMaterialPreset) String() string {
+// String returns the MaterialPreset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MaterialPreset) String() string {
 	switch e {
-	case PHASEMaterialPresetCardboard:
-		return "PHASEMaterialPresetCardboard"
-	case PHASEMaterialPresetGlass:
-		return "PHASEMaterialPresetGlass"
-	case PHASEMaterialPresetBrick:
-		return "PHASEMaterialPresetBrick"
-	case PHASEMaterialPresetConcrete:
-		return "PHASEMaterialPresetConcrete"
-	case PHASEMaterialPresetDrywall:
-		return "PHASEMaterialPresetDrywall"
-	case PHASEMaterialPresetWood:
-		return "PHASEMaterialPresetWood"
+	case MaterialPresetCardboard:
+		return "MaterialPresetCardboard"
+	case MaterialPresetGlass:
+		return "MaterialPresetGlass"
+	case MaterialPresetBrick:
+		return "MaterialPresetBrick"
+	case MaterialPresetConcrete:
+		return "MaterialPresetConcrete"
+	case MaterialPresetDrywall:
+		return "MaterialPresetDrywall"
+	case MaterialPresetWood:
+		return "MaterialPresetWood"
 	default:
-		return fmt.Sprintf("PHASEMaterialPreset(%d)", int64(e))
+		return fmt.Sprintf("MaterialPreset(%d)", int64(e))
 	}
 }
 
 // Predetermined qualities of an environment that affect how sound transmits.
-type PHASEMediumPreset int64
+type MediumPreset int64
 
 const (
-	PHASEMediumPresetAir PHASEMediumPreset = 1835286898
+	MediumPresetAir MediumPreset = 1835286898
 )
 
-func (e PHASEMediumPreset) String() string {
+// String returns the MediumPreset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MediumPreset) String() string {
 	switch e {
-	case PHASEMediumPresetAir:
-		return "PHASEMediumPresetAir"
+	case MediumPresetAir:
+		return "MediumPresetAir"
 	default:
-		return fmt.Sprintf("PHASEMediumPreset(%d)", int64(e))
+		return fmt.Sprintf("MediumPreset(%d)", int64(e))
 	}
 }
 
 // Options that determine whether the framework adjusts a sound asset’s loudness for the user’s output device.
-type PHASENormalizationMode int64
+type NormalizationMode int64
 
 const (
 	// A mode that instructs the framework not to adjust a sound’s volume according to the user’s output device.
-	PHASENormalizationModeNone PHASENormalizationMode = 0
+	NormalizationModeNone NormalizationMode = 0
 	// A mode that instructs the framework to adjust a sound’s volume according to the user’s output device.
-	PHASENormalizationModeDynamic PHASENormalizationMode = 1
+	NormalizationModeDynamic NormalizationMode = 1
 )
 
-func (e PHASENormalizationMode) String() string {
+// String returns the NormalizationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NormalizationMode) String() string {
 	switch e {
-	case PHASENormalizationModeNone:
-		return "PHASENormalizationModeNone"
-	case PHASENormalizationModeDynamic:
-		return "PHASENormalizationModeDynamic"
+	case NormalizationModeNone:
+		return "NormalizationModeNone"
+	case NormalizationModeDynamic:
+		return "NormalizationModeDynamic"
 	default:
-		return fmt.Sprintf("PHASENormalizationMode(%d)", int64(e))
+		return fmt.Sprintf("NormalizationMode(%d)", int64(e))
 	}
 }
 
 // Loop options for audio playback.
-type PHASEPlaybackMode int64
+type PlaybackMode int64
 
 const (
 	// An option that plays a sound only once.
-	PHASEPlaybackModeOneShot PHASEPlaybackMode = 0
+	PlaybackModeOneShot PlaybackMode = 0
 	// An option that restarts a sound from the begining after it finishes.
-	PHASEPlaybackModeLooping PHASEPlaybackMode = 1
+	PlaybackModeLooping PlaybackMode = 1
 )
 
-func (e PHASEPlaybackMode) String() string {
+// String returns the PlaybackMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PlaybackMode) String() string {
 	switch e {
-	case PHASEPlaybackModeOneShot:
-		return "PHASEPlaybackModeOneShot"
-	case PHASEPlaybackModeLooping:
-		return "PHASEPlaybackModeLooping"
+	case PlaybackModeOneShot:
+		return "PlaybackModeOneShot"
+	case PlaybackModeLooping:
+		return "PlaybackModeLooping"
 	default:
-		return fmt.Sprintf("PHASEPlaybackMode(%d)", int64(e))
+		return fmt.Sprintf("PlaybackMode(%d)", int64(e))
 	}
 }
 
 // Options that inform PHASE of an audio-stream buffer’s playback priority.
 // Bitmask — values may be combined with |.
-type PHASEPushStreamBufferOptions uint64
+type PushStreamBufferOptions uint64
 
 const (
 	// Indicates a buffer processes after existing buffers in the queue.
-	PHASEPushStreamBufferDefault PHASEPushStreamBufferOptions = 1
+	PushStreamBufferDefault PushStreamBufferOptions = 1
 	// Indicates a buffer restarts after it finishes processing.
-	PHASEPushStreamBufferLoops PHASEPushStreamBufferOptions = 2
+	PushStreamBufferLoops PushStreamBufferOptions = 2
 	// Indicates a buffer begins processing immediately.
-	PHASEPushStreamBufferInterrupts PHASEPushStreamBufferOptions = 4
+	PushStreamBufferInterrupts PushStreamBufferOptions = 4
 	// Indicates a buffer begins processing when an existing buffer loops.
-	PHASEPushStreamBufferInterruptsAtLoop PHASEPushStreamBufferOptions = 8
+	PushStreamBufferInterruptsAtLoop PushStreamBufferOptions = 8
 )
 
-func (e PHASEPushStreamBufferOptions) String() string {
+// String returns the PushStreamBufferOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PushStreamBufferOptions) String() string {
 	var parts []string
-	if e&PHASEPushStreamBufferDefault != 0 {
-		parts = append(parts, "PHASEPushStreamBufferDefault")
+	if e&PushStreamBufferDefault != 0 {
+		parts = append(parts, "PushStreamBufferDefault")
 	}
-	if e&PHASEPushStreamBufferLoops != 0 {
-		parts = append(parts, "PHASEPushStreamBufferLoops")
+	if e&PushStreamBufferLoops != 0 {
+		parts = append(parts, "PushStreamBufferLoops")
 	}
-	if e&PHASEPushStreamBufferInterrupts != 0 {
-		parts = append(parts, "PHASEPushStreamBufferInterrupts")
+	if e&PushStreamBufferInterrupts != 0 {
+		parts = append(parts, "PushStreamBufferInterrupts")
 	}
-	if e&PHASEPushStreamBufferInterruptsAtLoop != 0 {
-		parts = append(parts, "PHASEPushStreamBufferInterruptsAtLoop")
+	if e&PushStreamBufferInterruptsAtLoop != 0 {
+		parts = append(parts, "PushStreamBufferInterruptsAtLoop")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -296,217 +316,161 @@ func (e PHASEPushStreamBufferOptions) String() string {
 }
 
 // A status that describes the results after the app schedules a push-stream buffer.
-type PHASEPushStreamCompletionCallbackCondition int64
+type PushStreamCompletionCallbackCondition int64
 
 const (
 	// Indicates the framework invokes the callback when the engine processes the audio for output.
-	PHASEPushStreamCompletionDataRendered PHASEPushStreamCompletionCallbackCondition = 0
+	PushStreamCompletionDataRendered PushStreamCompletionCallbackCondition = 0
 )
 
-func (e PHASEPushStreamCompletionCallbackCondition) String() string {
+// String returns the PushStreamCompletionCallbackCondition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PushStreamCompletionCallbackCondition) String() string {
 	switch e {
-	case PHASEPushStreamCompletionDataRendered:
-		return "PHASEPushStreamCompletionDataRendered"
+	case PushStreamCompletionDataRendered:
+		return "PushStreamCompletionDataRendered"
 	default:
-		return fmt.Sprintf("PHASEPushStreamCompletionCallbackCondition(%d)", int64(e))
+		return fmt.Sprintf("PushStreamCompletionCallbackCondition(%d)", int64(e))
 	}
 }
 
 // The playback status of audio.
-type PHASERenderingState int64
+type RenderingState int64
 
 const (
-	PHASERenderingStateStopped PHASERenderingState = 0
-	PHASERenderingStateStarted PHASERenderingState = 1
-	PHASERenderingStatePaused  PHASERenderingState = 2
+	RenderingStateStopped RenderingState = 0
+	RenderingStateStarted RenderingState = 1
+	RenderingStatePaused  RenderingState = 2
 )
 
-func (e PHASERenderingState) String() string {
+// String returns the RenderingState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RenderingState) String() string {
 	switch e {
-	case PHASERenderingStateStopped:
-		return "PHASERenderingStateStopped"
-	case PHASERenderingStateStarted:
-		return "PHASERenderingStateStarted"
-	case PHASERenderingStatePaused:
-		return "PHASERenderingStatePaused"
+	case RenderingStateStopped:
+		return "RenderingStateStopped"
+	case RenderingStateStarted:
+		return "RenderingStateStarted"
+	case RenderingStatePaused:
+		return "RenderingStatePaused"
 	default:
-		return fmt.Sprintf("PHASERenderingState(%d)", int64(e))
+		return fmt.Sprintf("RenderingState(%d)", int64(e))
 	}
 }
 
 // The manner in which PHASE diffuses resonating sound.
-type PHASEReverbPreset int64
+type ReverbPreset int64
 
 const (
 	// An option that adds no reverberation to a sound.
-	PHASEReverbPresetNone PHASEReverbPreset = 1917742958
+	ReverbPresetNone ReverbPreset = 1917742958
 	// A resonation that simulates the experience of hearing a sound in a small room with specific dimensions.
-	PHASEReverbPresetSmallRoom PHASEReverbPreset = 1918063213
+	ReverbPresetSmallRoom ReverbPreset = 1918063213
 	// A resonation that simulates the experience of hearing a sound in a medium-size room with specific dimensions.
-	PHASEReverbPresetMediumRoom PHASEReverbPreset = 1917669997
+	ReverbPresetMediumRoom ReverbPreset = 1917669997
 	// A resonation that simulates the experience of hearing a sound in a large room with specific dimensions.
-	PHASEReverbPresetLargeRoom PHASEReverbPreset = 1917604401
+	ReverbPresetLargeRoom ReverbPreset = 1917604401
 	// A resonation that simulates the experience of hearing a sound in one kind of large room with specific dimensions.
-	PHASEReverbPresetLargeRoom2 PHASEReverbPreset = 1917604402
+	ReverbPresetLargeRoom2 ReverbPreset = 1917604402
 	// A resonation that simulates the experience of hearing a sound in a medium-size chamber with specific dimensions.
-	PHASEReverbPresetMediumChamber PHASEReverbPreset = 1917666152
+	ReverbPresetMediumChamber ReverbPreset = 1917666152
 	// A resonation that simulates the experience of hearing a sound in a large chamber with specific dimensions.
-	PHASEReverbPresetLargeChamber PHASEReverbPreset = 1917600616
+	ReverbPresetLargeChamber ReverbPreset = 1917600616
 	// A resonation that simulates the experience of hearing a sound in a medium-size hall with specific dimensions.
-	PHASEReverbPresetMediumHall PHASEReverbPreset = 1917667377
+	ReverbPresetMediumHall ReverbPreset = 1917667377
 	// A resonation that simulates the experience of hearing a sound in one kind of medium-size hall with specific dimensions.
-	PHASEReverbPresetMediumHall2 PHASEReverbPreset = 1917667378
+	ReverbPresetMediumHall2 ReverbPreset = 1917667378
 	// A resonation that simulates the experience of hearing a sound in another kind of medium-size hall with specific dimensions.
-	PHASEReverbPresetMediumHall3 PHASEReverbPreset = 1917667379
+	ReverbPresetMediumHall3 ReverbPreset = 1917667379
 	// A resonation that simulates the experience of hearing a sound in a large hall with specific dimensions.
-	PHASEReverbPresetLargeHall PHASEReverbPreset = 1917601841
+	ReverbPresetLargeHall ReverbPreset = 1917601841
 	// A resonation that simulates the experience of hearing a sound in one kind of large hall with specific dimensions.
-	PHASEReverbPresetLargeHall2 PHASEReverbPreset = 1917601842
+	ReverbPresetLargeHall2 ReverbPreset = 1917601842
 	// A resonation that simulates the experience of hearing a sound in a cathedral.
-	PHASEReverbPresetCathedral PHASEReverbPreset = 1917023336
+	ReverbPresetCathedral ReverbPreset = 1917023336
 )
 
-func (e PHASEReverbPreset) String() string {
+// String returns the ReverbPreset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReverbPreset) String() string {
 	switch e {
-	case PHASEReverbPresetNone:
-		return "PHASEReverbPresetNone"
-	case PHASEReverbPresetSmallRoom:
-		return "PHASEReverbPresetSmallRoom"
-	case PHASEReverbPresetMediumRoom:
-		return "PHASEReverbPresetMediumRoom"
-	case PHASEReverbPresetLargeRoom:
-		return "PHASEReverbPresetLargeRoom"
-	case PHASEReverbPresetLargeRoom2:
-		return "PHASEReverbPresetLargeRoom2"
-	case PHASEReverbPresetMediumChamber:
-		return "PHASEReverbPresetMediumChamber"
-	case PHASEReverbPresetLargeChamber:
-		return "PHASEReverbPresetLargeChamber"
-	case PHASEReverbPresetMediumHall:
-		return "PHASEReverbPresetMediumHall"
-	case PHASEReverbPresetMediumHall2:
-		return "PHASEReverbPresetMediumHall2"
-	case PHASEReverbPresetMediumHall3:
-		return "PHASEReverbPresetMediumHall3"
-	case PHASEReverbPresetLargeHall:
-		return "PHASEReverbPresetLargeHall"
-	case PHASEReverbPresetLargeHall2:
-		return "PHASEReverbPresetLargeHall2"
-	case PHASEReverbPresetCathedral:
-		return "PHASEReverbPresetCathedral"
+	case ReverbPresetNone:
+		return "ReverbPresetNone"
+	case ReverbPresetSmallRoom:
+		return "ReverbPresetSmallRoom"
+	case ReverbPresetMediumRoom:
+		return "ReverbPresetMediumRoom"
+	case ReverbPresetLargeRoom:
+		return "ReverbPresetLargeRoom"
+	case ReverbPresetLargeRoom2:
+		return "ReverbPresetLargeRoom2"
+	case ReverbPresetMediumChamber:
+		return "ReverbPresetMediumChamber"
+	case ReverbPresetLargeChamber:
+		return "ReverbPresetLargeChamber"
+	case ReverbPresetMediumHall:
+		return "ReverbPresetMediumHall"
+	case ReverbPresetMediumHall2:
+		return "ReverbPresetMediumHall2"
+	case ReverbPresetMediumHall3:
+		return "ReverbPresetMediumHall3"
+	case ReverbPresetLargeHall:
+		return "ReverbPresetLargeHall"
+	case ReverbPresetLargeHall2:
+		return "ReverbPresetLargeHall2"
+	case ReverbPresetCathedral:
+		return "ReverbPresetCathedral"
 	default:
-		return fmt.Sprintf("PHASEReverbPreset(%d)", int64(e))
-	}
-}
-
-// Indicates the results of sound-event preparation.
-type PHASESoundEventPrepareHandlerReason int64
-
-const (
-	PHASESoundEventPrepareHandlerReasonFailure    PHASESoundEventPrepareHandlerReason = 0
-	PHASESoundEventPrepareHandlerReasonPrepared   PHASESoundEventPrepareHandlerReason = 1
-	PHASESoundEventPrepareHandlerReasonTerminated PHASESoundEventPrepareHandlerReason = 2
-)
-
-func (e PHASESoundEventPrepareHandlerReason) String() string {
-	switch e {
-	case PHASESoundEventPrepareHandlerReasonFailure:
-		return "PHASESoundEventPrepareHandlerReasonFailure"
-	case PHASESoundEventPrepareHandlerReasonPrepared:
-		return "PHASESoundEventPrepareHandlerReasonPrepared"
-	case PHASESoundEventPrepareHandlerReasonTerminated:
-		return "PHASESoundEventPrepareHandlerReasonTerminated"
-	default:
-		return fmt.Sprintf("PHASESoundEventPrepareHandlerReason(%d)", int64(e))
+		return fmt.Sprintf("ReverbPreset(%d)", int64(e))
 	}
 }
 
 // Indicates the state of sound-event preparation.
-type PHASESoundEventPrepareState int64
+type SoundEventPrepareState int64
 
 const (
-	PHASESoundEventPrepareStatePrepareNotStarted PHASESoundEventPrepareState = 0
-	PHASESoundEventPrepareStatePrepareInProgress PHASESoundEventPrepareState = 1
-	PHASESoundEventPrepareStatePrepared          PHASESoundEventPrepareState = 2
+	SoundEventPrepareStatePrepareNotStarted SoundEventPrepareState = 0
+	SoundEventPrepareStatePrepareInProgress SoundEventPrepareState = 1
+	SoundEventPrepareStatePrepared          SoundEventPrepareState = 2
 )
 
-func (e PHASESoundEventPrepareState) String() string {
+// String returns the SoundEventPrepareState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SoundEventPrepareState) String() string {
 	switch e {
-	case PHASESoundEventPrepareStatePrepareNotStarted:
-		return "PHASESoundEventPrepareStatePrepareNotStarted"
-	case PHASESoundEventPrepareStatePrepareInProgress:
-		return "PHASESoundEventPrepareStatePrepareInProgress"
-	case PHASESoundEventPrepareStatePrepared:
-		return "PHASESoundEventPrepareStatePrepared"
+	case SoundEventPrepareStatePrepareNotStarted:
+		return "SoundEventPrepareStatePrepareNotStarted"
+	case SoundEventPrepareStatePrepareInProgress:
+		return "SoundEventPrepareStatePrepareInProgress"
+	case SoundEventPrepareStatePrepared:
+		return "SoundEventPrepareStatePrepared"
 	default:
-		return fmt.Sprintf("PHASESoundEventPrepareState(%d)", int64(e))
-	}
-}
-
-// Indicates the status after a sound event changes its playback position.
-type PHASESoundEventSeekHandlerReason int64
-
-const (
-	PHASESoundEventSeekHandlerReasonFailure                      PHASESoundEventSeekHandlerReason = 0
-	PHASESoundEventSeekHandlerReasonFailureSeekAlreadyInProgress PHASESoundEventSeekHandlerReason = 1
-	PHASESoundEventSeekHandlerReasonSeekSuccessful               PHASESoundEventSeekHandlerReason = 2
-)
-
-func (e PHASESoundEventSeekHandlerReason) String() string {
-	switch e {
-	case PHASESoundEventSeekHandlerReasonFailure:
-		return "PHASESoundEventSeekHandlerReasonFailure"
-	case PHASESoundEventSeekHandlerReasonFailureSeekAlreadyInProgress:
-		return "PHASESoundEventSeekHandlerReasonFailureSeekAlreadyInProgress"
-	case PHASESoundEventSeekHandlerReasonSeekSuccessful:
-		return "PHASESoundEventSeekHandlerReasonSeekSuccessful"
-	default:
-		return fmt.Sprintf("PHASESoundEventSeekHandlerReason(%d)", int64(e))
-	}
-}
-
-// Indicates the status after starting a sound event.
-type PHASESoundEventStartHandlerReason int64
-
-const (
-	PHASESoundEventStartHandlerReasonFailure         PHASESoundEventStartHandlerReason = 0
-	PHASESoundEventStartHandlerReasonFinishedPlaying PHASESoundEventStartHandlerReason = 1
-	PHASESoundEventStartHandlerReasonTerminated      PHASESoundEventStartHandlerReason = 2
-)
-
-func (e PHASESoundEventStartHandlerReason) String() string {
-	switch e {
-	case PHASESoundEventStartHandlerReasonFailure:
-		return "PHASESoundEventStartHandlerReasonFailure"
-	case PHASESoundEventStartHandlerReasonFinishedPlaying:
-		return "PHASESoundEventStartHandlerReasonFinishedPlaying"
-	case PHASESoundEventStartHandlerReasonTerminated:
-		return "PHASESoundEventStartHandlerReasonTerminated"
-	default:
-		return fmt.Sprintf("PHASESoundEventStartHandlerReason(%d)", int64(e))
+		return fmt.Sprintf("SoundEventPrepareState(%d)", int64(e))
 	}
 }
 
 // Sound resonance options for a spatial pipeline.
 // Bitmask — values may be combined with |.
-type PHASESpatialPipelineFlags uint64
+type SpatialPipelineFlags uint64
 
 const (
-	PHASESpatialPipelineFlagDirectPathTransmission PHASESpatialPipelineFlags = 1
-	PHASESpatialPipelineFlagEarlyReflections       PHASESpatialPipelineFlags = 2
-	PHASESpatialPipelineFlagLateReverb             PHASESpatialPipelineFlags = 4
+	SpatialPipelineFlagDirectPathTransmission SpatialPipelineFlags = 1
+	SpatialPipelineFlagEarlyReflections       SpatialPipelineFlags = 2
+	SpatialPipelineFlagLateReverb             SpatialPipelineFlags = 4
 )
 
-func (e PHASESpatialPipelineFlags) String() string {
+// String returns the SpatialPipelineFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpatialPipelineFlags) String() string {
 	var parts []string
-	if e&PHASESpatialPipelineFlagDirectPathTransmission != 0 {
-		parts = append(parts, "PHASESpatialPipelineFlagDirectPathTransmission")
+	if e&SpatialPipelineFlagDirectPathTransmission != 0 {
+		parts = append(parts, "SpatialPipelineFlagDirectPathTransmission")
 	}
-	if e&PHASESpatialPipelineFlagEarlyReflections != 0 {
-		parts = append(parts, "PHASESpatialPipelineFlagEarlyReflections")
+	if e&SpatialPipelineFlagEarlyReflections != 0 {
+		parts = append(parts, "SpatialPipelineFlagEarlyReflections")
 	}
-	if e&PHASESpatialPipelineFlagLateReverb != 0 {
-		parts = append(parts, "PHASESpatialPipelineFlagLateReverb")
+	if e&SpatialPipelineFlagLateReverb != 0 {
+		parts = append(parts, "SpatialPipelineFlagLateReverb")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -515,45 +479,49 @@ func (e PHASESpatialPipelineFlags) String() string {
 }
 
 // The manner in which PHASE outputs spatial audio.
-type PHASESpatializationMode int64
+type SpatializationMode int64
 
 const (
 	// A mode that indicates that the framework chooses the spatialization mode.
-	PHASESpatializationModeAutomatic PHASESpatializationMode = 0
+	SpatializationModeAutomatic SpatializationMode = 0
 	// A mode that introduces special processing to replicate a realistic spatial listening experience.
-	PHASESpatializationModeAlwaysUseBinaural PHASESpatializationMode = 1
+	SpatializationModeAlwaysUseBinaural SpatializationMode = 1
 	// A mode that adds a 3D position and orientation to sound by panning across the available output channels.
-	PHASESpatializationModeAlwaysUseChannelBased PHASESpatializationMode = 2
+	SpatializationModeAlwaysUseChannelBased SpatializationMode = 2
 )
 
-func (e PHASESpatializationMode) String() string {
+// String returns the SpatializationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpatializationMode) String() string {
 	switch e {
-	case PHASESpatializationModeAutomatic:
-		return "PHASESpatializationModeAutomatic"
-	case PHASESpatializationModeAlwaysUseBinaural:
-		return "PHASESpatializationModeAlwaysUseBinaural"
-	case PHASESpatializationModeAlwaysUseChannelBased:
-		return "PHASESpatializationModeAlwaysUseChannelBased"
+	case SpatializationModeAutomatic:
+		return "SpatializationModeAutomatic"
+	case SpatializationModeAlwaysUseBinaural:
+		return "SpatializationModeAlwaysUseBinaural"
+	case SpatializationModeAlwaysUseChannelBased:
+		return "SpatializationModeAlwaysUseChannelBased"
 	default:
-		return fmt.Sprintf("PHASESpatializationMode(%d)", int64(e))
+		return fmt.Sprintf("SpatializationMode(%d)", int64(e))
 	}
 }
 
 // Modes that determine when the framework consumes API calls and updates internal state.
-type PHASEUpdateMode int64
+type UpdateMode int64
 
 const (
-	PHASEUpdateModeAutomatic PHASEUpdateMode = 0
-	PHASEUpdateModeManual    PHASEUpdateMode = 1
+	UpdateModeAutomatic UpdateMode = 0
+	UpdateModeManual    UpdateMode = 1
 )
 
-func (e PHASEUpdateMode) String() string {
+// String returns the UpdateMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UpdateMode) String() string {
 	switch e {
-	case PHASEUpdateModeAutomatic:
-		return "PHASEUpdateModeAutomatic"
-	case PHASEUpdateModeManual:
-		return "PHASEUpdateModeManual"
+	case UpdateModeAutomatic:
+		return "UpdateModeAutomatic"
+	case UpdateModeManual:
+		return "UpdateModeManual"
 	default:
-		return fmt.Sprintf("PHASEUpdateMode(%d)", int64(e))
+		return fmt.Sprintf("UpdateMode(%d)", int64(e))
 	}
 }

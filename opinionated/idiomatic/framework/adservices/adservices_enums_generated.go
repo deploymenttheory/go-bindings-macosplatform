@@ -9,26 +9,28 @@ import (
 )
 
 // The error code that the parent class issues.
-type AAAttributionErrorCode int64
+type AttributionErrorCode int64
 
 const (
 	// attributionTokenWithError: is unable to provide a token because the internet isn’t available. To receive an attribution token, you must have unimpeded internet access. Make sure you’re not using a simulator when generating a token.
-	AAAttributionErrorCodeNetworkError AAAttributionErrorCode = 1
+	AttributionErrorCodeNetworkError AttributionErrorCode = 1
 	// attributionTokenWithError: is unable to provide a token because of an internal error.
-	AAAttributionErrorCodeInternalError AAAttributionErrorCode = 2
+	AttributionErrorCodeInternalError AttributionErrorCode = 2
 	// attributionTokenWithError: is unable to provide a token because of an unsupported operating system.
-	AAAttributionErrorCodePlatformNotSupported AAAttributionErrorCode = 3
+	AttributionErrorCodePlatformNotSupported AttributionErrorCode = 3
 )
 
-func (e AAAttributionErrorCode) String() string {
+// String returns the AttributionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributionErrorCode) String() string {
 	switch e {
-	case AAAttributionErrorCodeNetworkError:
-		return "AAAttributionErrorCodeNetworkError"
-	case AAAttributionErrorCodeInternalError:
-		return "AAAttributionErrorCodeInternalError"
-	case AAAttributionErrorCodePlatformNotSupported:
-		return "AAAttributionErrorCodePlatformNotSupported"
+	case AttributionErrorCodeNetworkError:
+		return "AttributionErrorCodeNetworkError"
+	case AttributionErrorCodeInternalError:
+		return "AttributionErrorCodeInternalError"
+	case AttributionErrorCodePlatformNotSupported:
+		return "AttributionErrorCodePlatformNotSupported"
 	default:
-		return fmt.Sprintf("AAAttributionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("AttributionErrorCode(%d)", int64(e))
 	}
 }

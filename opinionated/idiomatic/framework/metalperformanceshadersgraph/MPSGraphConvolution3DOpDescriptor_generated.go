@@ -5,423 +5,384 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes the properties of a 3D-convolution operator.
+// GraphConvolution3DOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphConvolution3DOpDescriptor.
 //
-// GraphConvolution3DOpDescriptor wraps [raw.MPSGraphConvolution3DOpDescriptor] with a fluent Go API.
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that describes the properties of a 3D-convolution operator.
 type GraphConvolution3DOpDescriptor struct {
-	inner *raw.MPSGraphConvolution3DOpDescriptor
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraphConvolution3DOpDescriptor].
-func (x *GraphConvolution3DOpDescriptor) Unwrap() *raw.MPSGraphConvolution3DOpDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphConvolution3DOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphConvolution3DOpDescriptorFromID adopts an existing object pointer as a GraphConvolution3DOpDescriptor (nil for 0).
+// GraphConvolution3DOpDescriptorFromID adopts an existing Objective-C object as a GraphConvolution3DOpDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphConvolution3DOpDescriptorFromID(id objc.ID) *GraphConvolution3DOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphConvolution3DOpDescriptor{inner: raw.MPSGraphConvolution3DOpDescriptorFromID(id)}
+	x := &GraphConvolution3DOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphConvolution3DOpDescriptor creates a new [GraphConvolution3DOpDescriptor].
+// graphConvolution3DOpDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphConvolution3DOpDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphConvolution3DOpDescriptorAdopt(id objc.ID) *GraphConvolution3DOpDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphConvolution3DOpDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGraphConvolution3DOpDescriptor creates a new GraphConvolution3DOpDescriptor.
 func NewGraphConvolution3DOpDescriptor() *GraphConvolution3DOpDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphConvolution3DOpDescriptor")), objc.RegisterName("new"))
-	return &GraphConvolution3DOpDescriptor{inner: raw.MPSGraphConvolution3DOpDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphConvolution3DOpDescriptor")), objc.RegisterName("new"))
+	return graphConvolution3DOpDescriptorAdopt(_id)
 }
 
-// The scale that mapsx-coordinate of destination to x-coordinate of source.
-//
-// WithStrideInX sets the strideInX property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithStrideInX(strideInX uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetStrideInX(strideInX)
+// WithStrideInX the scale that mapsx-coordinate of destination to x-coordinate of source.
+func (x *GraphConvolution3DOpDescriptor) WithStrideInX(strideInX int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 	return x
 }
 
-// The scale that mapsy-coordinate of destination to y-coordinate of source.
-//
-// WithStrideInY sets the strideInY property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithStrideInY(strideInY uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetStrideInY(strideInY)
+// WithStrideInY the scale that mapsy-coordinate of destination to y-coordinate of source.
+func (x *GraphConvolution3DOpDescriptor) WithStrideInY(strideInY int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 	return x
 }
 
-// The scale that mapsz-coordinate of destination to z-coordinate of source.
-//
-// WithStrideInZ sets the strideInZ property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithStrideInZ(strideInZ uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetStrideInZ(strideInZ)
+// WithStrideInZ the scale that mapsz-coordinate of destination to z-coordinate of source.
+func (x *GraphConvolution3DOpDescriptor) WithStrideInZ(strideInZ int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInZ:"), strideInZ)
 	return x
 }
 
-// The amount by which weights tensor expands in the x-direction.
-//
-// WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetDilationRateInX(dilationRateInX)
+// WithDilationRateInX the amount by which weights tensor expands in the x-direction.
+func (x *GraphConvolution3DOpDescriptor) WithDilationRateInX(dilationRateInX int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 	return x
 }
 
-// The amount by which weights tensor expands in the y-direction.
-//
-// WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetDilationRateInY(dilationRateInY)
+// WithDilationRateInY the amount by which weights tensor expands in the y-direction.
+func (x *GraphConvolution3DOpDescriptor) WithDilationRateInY(dilationRateInY int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 	return x
 }
 
-// The amount by which weights tensor expands in the z-direction.
-//
-// WithDilationRateInZ sets the dilationRateInZ property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithDilationRateInZ(dilationRateInZ uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetDilationRateInZ(dilationRateInZ)
+// WithDilationRateInZ the amount by which weights tensor expands in the z-direction.
+func (x *GraphConvolution3DOpDescriptor) WithDilationRateInZ(dilationRateInZ int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInZ:"), dilationRateInZ)
 	return x
 }
 
-// The number of zeros added on the left side of the source tensor.
-//
-// WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingLeft(paddingLeft)
+// WithPaddingLeft the number of zeros added on the left side of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingLeft(paddingLeft int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 	return x
 }
 
-// The number of zeros added on the right side of the source tensor.
-//
-// WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingRight(paddingRight uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingRight(paddingRight)
+// WithPaddingRight the number of zeros added on the right side of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingRight(paddingRight int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 	return x
 }
 
-// The number of zeros added at the top of the source tensor.
-//
-// WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingTop(paddingTop uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingTop(paddingTop)
+// WithPaddingTop the number of zeros added at the top of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingTop(paddingTop int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 	return x
 }
 
-// The number of zeros added at the bottom of the source tensor.
-//
-// WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingBottom(paddingBottom)
+// WithPaddingBottom the number of zeros added at the bottom of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingBottom(paddingBottom int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 	return x
 }
 
-// The number of zeros added at the front of the source tensor.
-//
-// WithPaddingFront sets the paddingFront property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingFront(paddingFront uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingFront(paddingFront)
+// WithPaddingFront the number of zeros added at the front of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingFront(paddingFront int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingFront:"), paddingFront)
 	return x
 }
 
-// The number of zeros added at the back of the source tensor.
-//
-// WithPaddingBack sets the paddingBack property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingBack(paddingBack uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingBack(paddingBack)
+// WithPaddingBack the number of zeros added at the back of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingBack(paddingBack int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBack:"), paddingBack)
 	return x
 }
 
-// The type of padding that is applied to the source tensor.
-//
-// WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphConvolution3DOpDescriptor {
-	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
+// WithPaddingStyle the type of padding that is applied to the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 	return x
 }
 
-// The named layout of data in the source tensor.
-//
-// WithDataLayout sets the dataLayout property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
-	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
+// WithDataLayout the named layout of data in the source tensor.
+func (x *GraphConvolution3DOpDescriptor) WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 	return x
 }
 
-// The named layout of data in the weights tensor.
-//
-// WithWeightsLayout sets the weightsLayout property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
-	x.inner.SetWeightsLayout(raw.MPSGraphTensorNamedDataLayout(weightsLayout))
+// WithWeightsLayout the named layout of data in the weights tensor.
+func (x *GraphConvolution3DOpDescriptor) WithWeightsLayout(weightsLayout GraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeightsLayout:"), weightsLayout)
 	return x
 }
 
-// The number of partitions of the input and output channels.
-//
-// WithGroups sets the groups property and returns the receiver for chaining.
-func (x *GraphConvolution3DOpDescriptor) WithGroups(groups uint) *GraphConvolution3DOpDescriptor {
-	x.inner.SetGroups(groups)
+// WithGroups the number of partitions of the input and output channels.
+func (x *GraphConvolution3DOpDescriptor) WithGroups(groups int) *GraphConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), groups)
 	return x
 }
 
-// Sets the left, right, top, bottom, front, and back padding values.
-//
-// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack.
-func (x *GraphConvolution3DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint) {
-	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack)
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack sets the left, right, top, bottom, front, and back padding values.
+func (x *GraphConvolution3DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingFront int, paddingBack int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:paddingFront:paddingBack:"), paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack)
 }
 
-// The scale that maps`x`-coordinate of destination to `x`-coordinate of source. Source `x`-coordinate, `sx` is computed from destination `x`-coordinate, `dx` as `sx = strideInX*dx`. Default value is 1.
-//
-// StrideInX calls the underlying StrideInX.
-func (x *GraphConvolution3DOpDescriptor) StrideInX() uint {
-	return x.inner.StrideInX()
+// StrideInX the scale that maps`x`-coordinate of destination to `x`-coordinate of source. Source `x`-coordinate, `sx` is computed from destination `x`-coordinate, `dx` as `sx = strideInX*dx`. Default value is 1.
+func (x *GraphConvolution3DOpDescriptor) StrideInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
+	return _r
 }
 
-// SetStrideInX calls the underlying SetStrideInX.
-func (x *GraphConvolution3DOpDescriptor) SetStrideInX(strideInX uint) {
-	x.inner.SetStrideInX(strideInX)
+// SetStrideInX wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetStrideInX(strideInX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 }
 
-// The scale that maps`y`-coordinate of destination to `y`-coordinate of source. Source `y`-coordinate, `sy` is computed from destination `y`-coordinate, `dy` as `sy = strideInY*dy`. Default value is 1.
-//
-// StrideInY calls the underlying StrideInY.
-func (x *GraphConvolution3DOpDescriptor) StrideInY() uint {
-	return x.inner.StrideInY()
+// StrideInY the scale that maps`y`-coordinate of destination to `y`-coordinate of source. Source `y`-coordinate, `sy` is computed from destination `y`-coordinate, `dy` as `sy = strideInY*dy`. Default value is 1.
+func (x *GraphConvolution3DOpDescriptor) StrideInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
+	return _r
 }
 
-// SetStrideInY calls the underlying SetStrideInY.
-func (x *GraphConvolution3DOpDescriptor) SetStrideInY(strideInY uint) {
-	x.inner.SetStrideInY(strideInY)
+// SetStrideInY wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetStrideInY(strideInY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 }
 
-// The scale that maps`z`-coordinate of destination to `z`-coordinate of source. Source `z`-coordinate, `sz` is computed from destination `z`-coordinate, `dz` as `sz = strideInZ*dz`. Default value is 1.
-//
-// StrideInZ calls the underlying StrideInZ.
-func (x *GraphConvolution3DOpDescriptor) StrideInZ() uint {
-	return x.inner.StrideInZ()
+// StrideInZ the scale that maps`z`-coordinate of destination to `z`-coordinate of source. Source `z`-coordinate, `sz` is computed from destination `z`-coordinate, `dz` as `sz = strideInZ*dz`. Default value is 1.
+func (x *GraphConvolution3DOpDescriptor) StrideInZ() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInZ"))
+	return _r
 }
 
-// SetStrideInZ calls the underlying SetStrideInZ.
-func (x *GraphConvolution3DOpDescriptor) SetStrideInZ(strideInZ uint) {
-	x.inner.SetStrideInZ(strideInZ)
+// SetStrideInZ wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetStrideInZ(strideInZ int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInZ:"), strideInZ)
 }
 
-// The amount by which weights tensor expands in the `x`-direction. The weights tensor is dilated by inserting `dilationRateInX-1` zeros between consecutive values in `x`-dimension. Dilated weights tensor width is `(dilationRateInX-1)*kernelWidth+1`. Default value is 1.
-//
-// DilationRateInX calls the underlying DilationRateInX.
-func (x *GraphConvolution3DOpDescriptor) DilationRateInX() uint {
-	return x.inner.DilationRateInX()
+// DilationRateInX the amount by which weights tensor expands in the `x`-direction. The weights tensor is dilated by inserting `dilationRateInX-1` zeros between consecutive values in `x`-dimension. Dilated weights tensor width is `(dilationRateInX-1)*kernelWidth+1`. Default value is 1.
+func (x *GraphConvolution3DOpDescriptor) DilationRateInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
+	return _r
 }
 
-// SetDilationRateInX calls the underlying SetDilationRateInX.
-func (x *GraphConvolution3DOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
-	x.inner.SetDilationRateInX(dilationRateInX)
+// SetDilationRateInX wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetDilationRateInX(dilationRateInX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 }
 
-// The amount by which weights tensor expands in the `y`-direction. The weights tensor is dilated by inserting `dilationRateInY-1` zeros between consecutive values in `y`-dimension. Dilated weights tensor width is `(dilationRateInY-1)*kernelHeight+1`. Default value is 1.
-//
-// DilationRateInY calls the underlying DilationRateInY.
-func (x *GraphConvolution3DOpDescriptor) DilationRateInY() uint {
-	return x.inner.DilationRateInY()
+// DilationRateInY the amount by which weights tensor expands in the `y`-direction. The weights tensor is dilated by inserting `dilationRateInY-1` zeros between consecutive values in `y`-dimension. Dilated weights tensor width is `(dilationRateInY-1)*kernelHeight+1`. Default value is 1.
+func (x *GraphConvolution3DOpDescriptor) DilationRateInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
+	return _r
 }
 
-// SetDilationRateInY calls the underlying SetDilationRateInY.
-func (x *GraphConvolution3DOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
-	x.inner.SetDilationRateInY(dilationRateInY)
+// SetDilationRateInY wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetDilationRateInY(dilationRateInY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 }
 
-// The amount by which weights tensor expands in the `z`-direction. The weights tensor is dilated by inserting `dilationRateInZ-1` zeros between consecutive values in `z`-dimension. Dilated weights tensor depth is `(dilationRateInZ-1)*kernelDepth+1`. Default value is 1.
-//
-// DilationRateInZ calls the underlying DilationRateInZ.
-func (x *GraphConvolution3DOpDescriptor) DilationRateInZ() uint {
-	return x.inner.DilationRateInZ()
+// DilationRateInZ the amount by which weights tensor expands in the `z`-direction. The weights tensor is dilated by inserting `dilationRateInZ-1` zeros between consecutive values in `z`-dimension. Dilated weights tensor depth is `(dilationRateInZ-1)*kernelDepth+1`. Default value is 1.
+func (x *GraphConvolution3DOpDescriptor) DilationRateInZ() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInZ"))
+	return _r
 }
 
-// SetDilationRateInZ calls the underlying SetDilationRateInZ.
-func (x *GraphConvolution3DOpDescriptor) SetDilationRateInZ(dilationRateInZ uint) {
-	x.inner.SetDilationRateInZ(dilationRateInZ)
+// SetDilationRateInZ wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetDilationRateInZ(dilationRateInZ int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInZ:"), dilationRateInZ)
 }
 
-// The number of zeros added on the left side of the source tensor.
-//
-// PaddingLeft calls the underlying PaddingLeft.
-func (x *GraphConvolution3DOpDescriptor) PaddingLeft() uint {
-	return x.inner.PaddingLeft()
+// PaddingLeft the number of zeros added on the left side of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) PaddingLeft() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
+	return _r
 }
 
-// SetPaddingLeft calls the underlying SetPaddingLeft.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingLeft(paddingLeft uint) {
-	x.inner.SetPaddingLeft(paddingLeft)
+// SetPaddingLeft wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingLeft(paddingLeft int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 }
 
-// The number of zeros added on the right side of the source tensor.
-//
-// PaddingRight calls the underlying PaddingRight.
-func (x *GraphConvolution3DOpDescriptor) PaddingRight() uint {
-	return x.inner.PaddingRight()
+// PaddingRight the number of zeros added on the right side of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) PaddingRight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
+	return _r
 }
 
-// SetPaddingRight calls the underlying SetPaddingRight.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingRight(paddingRight uint) {
-	x.inner.SetPaddingRight(paddingRight)
+// SetPaddingRight wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingRight(paddingRight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 }
 
-// The number of zeros added at the top of the source tensor.
-//
-// PaddingTop calls the underlying PaddingTop.
-func (x *GraphConvolution3DOpDescriptor) PaddingTop() uint {
-	return x.inner.PaddingTop()
+// PaddingTop the number of zeros added at the top of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) PaddingTop() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
+	return _r
 }
 
-// SetPaddingTop calls the underlying SetPaddingTop.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingTop(paddingTop uint) {
-	x.inner.SetPaddingTop(paddingTop)
+// SetPaddingTop wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingTop(paddingTop int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 }
 
-// The number of zeros added at the bottom of the source tensor.
-//
-// PaddingBottom calls the underlying PaddingBottom.
-func (x *GraphConvolution3DOpDescriptor) PaddingBottom() uint {
-	return x.inner.PaddingBottom()
+// PaddingBottom the number of zeros added at the bottom of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) PaddingBottom() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
+	return _r
 }
 
-// SetPaddingBottom calls the underlying SetPaddingBottom.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingBottom(paddingBottom uint) {
-	x.inner.SetPaddingBottom(paddingBottom)
+// SetPaddingBottom wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingBottom(paddingBottom int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 }
 
-// The number of zeros added at the front of the source tensor.
-//
-// PaddingFront calls the underlying PaddingFront.
-func (x *GraphConvolution3DOpDescriptor) PaddingFront() uint {
-	return x.inner.PaddingFront()
+// PaddingFront the number of zeros added at the front of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) PaddingFront() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingFront"))
+	return _r
 }
 
-// SetPaddingFront calls the underlying SetPaddingFront.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingFront(paddingFront uint) {
-	x.inner.SetPaddingFront(paddingFront)
+// SetPaddingFront wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingFront(paddingFront int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingFront:"), paddingFront)
 }
 
-// The number of zeros added at the back of the source tensor.
-//
-// PaddingBack calls the underlying PaddingBack.
-func (x *GraphConvolution3DOpDescriptor) PaddingBack() uint {
-	return x.inner.PaddingBack()
+// PaddingBack the number of zeros added at the back of the source tensor.
+func (x *GraphConvolution3DOpDescriptor) PaddingBack() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBack"))
+	return _r
 }
 
-// SetPaddingBack calls the underlying SetPaddingBack.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingBack(paddingBack uint) {
-	x.inner.SetPaddingBack(paddingBack)
+// SetPaddingBack wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingBack(paddingBack int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBack:"), paddingBack)
 }
 
-// The type of padding that is applied to the source tensor. If paddingStyle is `MPSGraphPaddingStyleExplicit`, `paddingLeft`, `laddingRight`, `paddingTop`, `paddingBottom`,   `paddingFront` and `paddingBack` must to be specified. For all other padding styles, framework compute these values so you dont need to provide these values.
-//
-// PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphConvolution3DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
-	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
+// PaddingStyle the type of padding that is applied to the source tensor. If paddingStyle is `MPSGraphPaddingStyleExplicit`, `paddingLeft`, `laddingRight`, `paddingTop`, `paddingBottom`,   `paddingFront` and `paddingBack` must to be specified. For all other padding styles, framework compute these values so you dont need to provide these values.
+func (x *GraphConvolution3DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
+	return _r
 }
 
-// SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
+// SetPaddingStyle wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 }
 
-// The named layout of data in the source tensor. It defines the order of named dimensions (Batch, Channel, Depth, Height, Width). The convolution operation uses this to interpret data in the source tensor. For example, if `dataLayout` is `MPSGraphTensorNamedDataLayoutNCDHW`, frameork interprets data in source tensor as `batch x channels x depth x height x width` with `width` as fastest moving dimension.
-//
-// DataLayout calls the underlying DataLayout.
-func (x *GraphConvolution3DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
-	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
+// DataLayout the named layout of data in the source tensor. It defines the order of named dimensions (Batch, Channel, Depth, Height, Width). The convolution operation uses this to interpret data in the source tensor. For example, if `dataLayout` is `MPSGraphTensorNamedDataLayoutNCDHW`, frameork interprets data in source tensor as `batch x channels x depth x height x width` with `width` as fastest moving dimension.
+func (x *GraphConvolution3DOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
+	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("dataLayout"))
+	return _r
 }
 
-// SetDataLayout calls the underlying SetDataLayout.
-func (x *GraphConvolution3DOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout) {
-	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
+// SetDataLayout wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetDataLayout(dataLayout GraphTensorNamedDataLayout) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 }
 
-// The named layout of data in the weights tensor. It defines the order of named dimensions (Output channels, Input channels, Kernel depth, Kernel height, Kernel width). The convolution operation uses this to interpret data in the weights tensor. For example, if `weightsLayout` is `MPSGraphTensorNamedDataLayoutOIDHW`, frameork interprets data in weights tensor as `outputChannels x inputChannels x kernelDepth x kernelHeight x kernelWidth` with `kernelWidth` as fastest moving dimension.
-//
-// WeightsLayout calls the underlying WeightsLayout.
-func (x *GraphConvolution3DOpDescriptor) WeightsLayout() MPSGraphTensorNamedDataLayout {
-	return MPSGraphTensorNamedDataLayout(x.inner.WeightsLayout())
+// WeightsLayout the named layout of data in the weights tensor. It defines the order of named dimensions (Output channels, Input channels, Kernel depth, Kernel height, Kernel width). The convolution operation uses this to interpret data in the weights tensor. For example, if `weightsLayout` is `MPSGraphTensorNamedDataLayoutOIDHW`, frameork interprets data in weights tensor as `outputChannels x inputChannels x kernelDepth x kernelHeight x kernelWidth` with `kernelWidth` as fastest moving dimension.
+func (x *GraphConvolution3DOpDescriptor) WeightsLayout() GraphTensorNamedDataLayout {
+	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("weightsLayout"))
+	return _r
 }
 
-// SetWeightsLayout calls the underlying SetWeightsLayout.
-func (x *GraphConvolution3DOpDescriptor) SetWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) {
-	x.inner.SetWeightsLayout(raw.MPSGraphTensorNamedDataLayout(weightsLayout))
+// SetWeightsLayout wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetWeightsLayout(weightsLayout GraphTensorNamedDataLayout) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeightsLayout:"), weightsLayout)
 }
 
-// The number of partitions of the input and output channels. The convolution operation divides input and output channels in `groups` partitions. input channels in a group or partition are only connected to output channels in corresponding group. Number of weights the convolution needs is `outputFeatureChannels x inputFeatureChannels/groups x kernelDepth x kernelWidth x kernelHeight`
-//
-// Groups calls the underlying Groups.
-func (x *GraphConvolution3DOpDescriptor) Groups() uint {
-	return x.inner.Groups()
+// Groups the number of partitions of the input and output channels. The convolution operation divides input and output channels in `groups` partitions. input channels in a group or partition are only connected to output channels in corresponding group. Number of weights the convolution needs is `outputFeatureChannels x inputFeatureChannels/groups x kernelDepth x kernelWidth x kernelHeight`
+func (x *GraphConvolution3DOpDescriptor) Groups() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groups"))
+	return _r
 }
 
-// SetGroups calls the underlying SetGroups.
-func (x *GraphConvolution3DOpDescriptor) SetGroups(groups uint) {
-	x.inner.SetGroups(groups)
-}
-
-func (x *GraphConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+// SetGroups wraps the corresponding Objective-C method.
+func (x *GraphConvolution3DOpDescriptor) SetGroups(groups int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), groups)
 }
 
 // GraphConvolution3DOpDescriptorable is the interface implemented by [GraphConvolution3DOpDescriptor], for mocking and DI.
 type GraphConvolution3DOpDescriptorable interface {
-	Unwrap() *raw.MPSGraphConvolution3DOpDescriptor
-	WithStrideInX(strideInX uint) *GraphConvolution3DOpDescriptor
-	WithStrideInY(strideInY uint) *GraphConvolution3DOpDescriptor
-	WithStrideInZ(strideInZ uint) *GraphConvolution3DOpDescriptor
-	WithDilationRateInX(dilationRateInX uint) *GraphConvolution3DOpDescriptor
-	WithDilationRateInY(dilationRateInY uint) *GraphConvolution3DOpDescriptor
-	WithDilationRateInZ(dilationRateInZ uint) *GraphConvolution3DOpDescriptor
-	WithPaddingLeft(paddingLeft uint) *GraphConvolution3DOpDescriptor
-	WithPaddingRight(paddingRight uint) *GraphConvolution3DOpDescriptor
-	WithPaddingTop(paddingTop uint) *GraphConvolution3DOpDescriptor
-	WithPaddingBottom(paddingBottom uint) *GraphConvolution3DOpDescriptor
-	WithPaddingFront(paddingFront uint) *GraphConvolution3DOpDescriptor
-	WithPaddingBack(paddingBack uint) *GraphConvolution3DOpDescriptor
-	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphConvolution3DOpDescriptor
-	WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor
-	WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor
-	WithGroups(groups uint) *GraphConvolution3DOpDescriptor
-	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint)
-	StrideInX() uint
-	SetStrideInX(strideInX uint)
-	StrideInY() uint
-	SetStrideInY(strideInY uint)
-	StrideInZ() uint
-	SetStrideInZ(strideInZ uint)
-	DilationRateInX() uint
-	SetDilationRateInX(dilationRateInX uint)
-	DilationRateInY() uint
-	SetDilationRateInY(dilationRateInY uint)
-	DilationRateInZ() uint
-	SetDilationRateInZ(dilationRateInZ uint)
-	PaddingLeft() uint
-	SetPaddingLeft(paddingLeft uint)
-	PaddingRight() uint
-	SetPaddingRight(paddingRight uint)
-	PaddingTop() uint
-	SetPaddingTop(paddingTop uint)
-	PaddingBottom() uint
-	SetPaddingBottom(paddingBottom uint)
-	PaddingFront() uint
-	SetPaddingFront(paddingFront uint)
-	PaddingBack() uint
-	SetPaddingBack(paddingBack uint)
-	PaddingStyle() MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
-	DataLayout() MPSGraphTensorNamedDataLayout
-	SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout)
-	WeightsLayout() MPSGraphTensorNamedDataLayout
-	SetWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout)
-	Groups() uint
-	SetGroups(groups uint)
+	obj.Object
+	WithStrideInX(strideInX int) *GraphConvolution3DOpDescriptor
+	WithStrideInY(strideInY int) *GraphConvolution3DOpDescriptor
+	WithStrideInZ(strideInZ int) *GraphConvolution3DOpDescriptor
+	WithDilationRateInX(dilationRateInX int) *GraphConvolution3DOpDescriptor
+	WithDilationRateInY(dilationRateInY int) *GraphConvolution3DOpDescriptor
+	WithDilationRateInZ(dilationRateInZ int) *GraphConvolution3DOpDescriptor
+	WithPaddingLeft(paddingLeft int) *GraphConvolution3DOpDescriptor
+	WithPaddingRight(paddingRight int) *GraphConvolution3DOpDescriptor
+	WithPaddingTop(paddingTop int) *GraphConvolution3DOpDescriptor
+	WithPaddingBottom(paddingBottom int) *GraphConvolution3DOpDescriptor
+	WithPaddingFront(paddingFront int) *GraphConvolution3DOpDescriptor
+	WithPaddingBack(paddingBack int) *GraphConvolution3DOpDescriptor
+	WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphConvolution3DOpDescriptor
+	WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor
+	WithWeightsLayout(weightsLayout GraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor
+	WithGroups(groups int) *GraphConvolution3DOpDescriptor
+	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int, paddingFront int, paddingBack int)
+	StrideInX() int
+	SetStrideInX(strideInX int)
+	StrideInY() int
+	SetStrideInY(strideInY int)
+	StrideInZ() int
+	SetStrideInZ(strideInZ int)
+	DilationRateInX() int
+	SetDilationRateInX(dilationRateInX int)
+	DilationRateInY() int
+	SetDilationRateInY(dilationRateInY int)
+	DilationRateInZ() int
+	SetDilationRateInZ(dilationRateInZ int)
+	PaddingLeft() int
+	SetPaddingLeft(paddingLeft int)
+	PaddingRight() int
+	SetPaddingRight(paddingRight int)
+	PaddingTop() int
+	SetPaddingTop(paddingTop int)
+	PaddingBottom() int
+	SetPaddingBottom(paddingBottom int)
+	PaddingFront() int
+	SetPaddingFront(paddingFront int)
+	PaddingBack() int
+	SetPaddingBack(paddingBack int)
+	PaddingStyle() GraphPaddingStyle
+	SetPaddingStyle(paddingStyle GraphPaddingStyle)
+	DataLayout() GraphTensorNamedDataLayout
+	SetDataLayout(dataLayout GraphTensorNamedDataLayout)
+	WeightsLayout() GraphTensorNamedDataLayout
+	SetWeightsLayout(weightsLayout GraphTensorNamedDataLayout)
+	Groups() int
+	SetGroups(groups int)
 }
 
 var _ GraphConvolution3DOpDescriptorable = (*GraphConvolution3DOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphConvolution3DOpDescriptor)(nil)

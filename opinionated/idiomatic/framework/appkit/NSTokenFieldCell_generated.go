@@ -5,570 +5,428 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A text field cell subclass that enables tokenized editing of an array of objects.
+// TokenFieldCell is an idiomatic wrapper over the Objective-C class NSTokenFieldCell.
 //
-// TokenFieldCell wraps [raw.NSTokenFieldCell] with a fluent Go API.
+// It embeds [TextFieldCell], promoting that type's methods.
+//
+// A text field cell subclass that enables tokenized editing of an array of objects.
 type TokenFieldCell struct {
-	inner *raw.NSTokenFieldCell
+	TextFieldCell
 }
 
-// Unwrap returns the underlying [raw.NSTokenFieldCell].
-func (x *TokenFieldCell) Unwrap() *raw.NSTokenFieldCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenFieldCell) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenFieldCellFromID adopts an existing object pointer as a TokenFieldCell (nil for 0).
+// TokenFieldCellFromID adopts an existing Objective-C object as a TokenFieldCell
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenFieldCellFromID(id objc.ID) *TokenFieldCell {
 	if id == 0 {
 		return nil
 	}
-	return &TokenFieldCell{inner: raw.NSTokenFieldCellFromID(id)}
+	x := &TokenFieldCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTokenFieldCell creates a new [TokenFieldCell].
+// tokenFieldCellAdopt wraps an Objective-C object that this code just created as a
+// TokenFieldCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenFieldCellAdopt(id objc.ID) *TokenFieldCell {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenFieldCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTokenFieldCell creates a new TokenFieldCell.
 func NewTokenFieldCell() *TokenFieldCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTokenFieldCell")), objc.RegisterName("new"))
-	return &TokenFieldCell{inner: raw.NSTokenFieldCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTokenFieldCell")), objc.RegisterName("new"))
+	return tokenFieldCellAdopt(_id)
 }
 
-// The token style of the receiver.
-//
-// WithTokenStyle sets the tokenStyle property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithTokenStyle(tokenStyle NSTokenStyle) *TokenFieldCell {
-	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
+// WithTokenStyle the token style of the receiver.
+func (x *TokenFieldCell) WithTokenStyle(tokenStyle TokenStyle) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenStyle:"), tokenStyle)
 	return x
 }
 
-// The receiver’s completion delay to a given delay.
-//
-// WithCompletionDelay sets the completionDelay property and returns the receiver for chaining.
+// WithCompletionDelay the receiver’s completion delay to a given delay.
 func (x *TokenFieldCell) WithCompletionDelay(completionDelay float64) *TokenFieldCell {
-	x.inner.SetCompletionDelay(completionDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDelay:"), completionDelay)
 	return x
 }
 
-// The receiver’s tokenizing character set to a given character set.
-//
-// WithTokenizingCharacterSet sets the tokenizingCharacterSet property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenFieldCell {
-	x.inner.SetTokenizingCharacterSet(tokenizingCharacterSet)
+// WithTokenizingCharacterSet the receiver’s tokenizing character set to a given character set.
+func (x *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
 	return x
 }
 
-// The receiver’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithDelegate(delegate raw.NSTokenFieldCellDelegate) *TokenFieldCell {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The color of the cell’s background.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the color of the cell’s background.
 func (x *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the cell draws its background color.
-//
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
 func (x *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// The color to use to draw the cell’s text.
-//
-// WithTextColor sets the textColor property and returns the receiver for chaining.
+// WithTextColor the color to use to draw the cell’s text.
 func (x *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
-// The bezel style to use when drawing the text field.
-//
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
+// WithBezelStyle the bezel style to use when drawing the text field.
+func (x *TokenFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
-// The placeholder text for the cell, specified as a plain text string.
-//
-// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
 func (x *TokenFieldCell) WithPlaceholderString(placeholderString string) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
-// The placeholder text for the cell, specified as an attributed string.
-//
-// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
+// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
+func (x *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
-// An array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-//
-// WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
-func (x *TokenFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TokenFieldCell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(_arr)
+// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+func (x *TokenFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TokenFieldCell {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithType(type_ NSCellType) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *TokenFieldCell) WithType(type_ CellType) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *TokenFieldCell) WithState(state int) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithTarget(target objc.ID) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *TokenFieldCell) WithTarget(target obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithAction(action objc.SEL) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *TokenFieldCell) WithTag(tag int) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *TokenFieldCell) WithTitle(title string) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *TokenFieldCell) WithEnabled(enabled bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *TokenFieldCell) WithContinuous(continuous bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *TokenFieldCell) WithEditable(editable bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *TokenFieldCell) WithSelectable(selectable bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *TokenFieldCell) WithBordered(bordered bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *TokenFieldCell) WithBezeled(bezeled bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *TokenFieldCell) WithScrollable(scrollable bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *TokenFieldCell) WithHighlighted(highlighted bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithAlignment(alignment NSTextAlignment) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *TokenFieldCell) WithAlignment(alignment TextAlignment) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithFormatter(formatter *foundation.NSFormatter) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *TokenFieldCell) WithFormatter(formatter obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithObjectValue(objectValue objc.ID) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *TokenFieldCell) WithObjectValue(objectValue obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *TokenFieldCell) WithStringValue(stringValue string) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *TokenFieldCell) WithIntValue(intValue int) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *TokenFieldCell) WithFloatValue(floatValue float32) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *TokenFieldCell) WithDoubleValue(doubleValue float64) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithControlSize(controlSize NSControlSize) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *TokenFieldCell) WithControlSize(controlSize ControlSize) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithRepresentedObject(representedObject objc.ID) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *TokenFieldCell) WithRepresentedObject(representedObject obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *TokenFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *TokenFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *TokenFieldCell) WithAllowsUndo(allowsUndo bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *TokenFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *TokenFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *TokenFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *TokenFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *TokenFieldCell) WithFocusRingType(focusRingType FocusRingType) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *TokenFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *TokenFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *TokenFieldCell) WithImportsGraphics(importsGraphics bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *TokenFieldCell) WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *TokenFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithControlTint(controlTint NSControlTint) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *TokenFieldCell) WithControlTint(controlTint ControlTint) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// TokenStyle calls the underlying TokenStyle.
-func (x *TokenFieldCell) TokenStyle() NSTokenStyle {
-	return NSTokenStyle(x.inner.TokenStyle())
+// TokenStyle wraps the corresponding Objective-C method.
+func (x *TokenFieldCell) TokenStyle() TokenStyle {
+	_r := objc.Send[TokenStyle](objref.IDOf(x), objc.RegisterName("tokenStyle"))
+	return _r
 }
 
-// SetTokenStyle calls the underlying SetTokenStyle.
-func (x *TokenFieldCell) SetTokenStyle(tokenStyle NSTokenStyle) {
-	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
+// SetTokenStyle wraps the corresponding Objective-C method.
+func (x *TokenFieldCell) SetTokenStyle(tokenStyle TokenStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenStyle:"), tokenStyle)
 }
 
-// CompletionDelay calls the underlying CompletionDelay.
+// CompletionDelay wraps the corresponding Objective-C method.
 func (x *TokenFieldCell) CompletionDelay() float64 {
-	return x.inner.CompletionDelay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("completionDelay"))
+	return _r
 }
 
-// SetCompletionDelay calls the underlying SetCompletionDelay.
+// SetCompletionDelay wraps the corresponding Objective-C method.
 func (x *TokenFieldCell) SetCompletionDelay(completionDelay float64) {
-	x.inner.SetCompletionDelay(completionDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDelay:"), completionDelay)
 }
 
-// TokenizingCharacterSet calls the underlying TokenizingCharacterSet.
-func (x *TokenFieldCell) TokenizingCharacterSet() *foundation.NSCharacterSet {
-	return x.inner.TokenizingCharacterSet()
+// TokenizingCharacterSet wraps the corresponding Objective-C method.
+func (x *TokenFieldCell) TokenizingCharacterSet() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenizingCharacterSet"))
+	return obj.Wrap(_r)
 }
 
-// SetTokenizingCharacterSet calls the underlying SetTokenizingCharacterSet.
-func (x *TokenFieldCell) SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) {
-	x.inner.SetTokenizingCharacterSet(tokenizingCharacterSet)
+// SetTokenizingCharacterSet wraps the corresponding Objective-C method.
+func (x *TokenFieldCell) SetTokenizingCharacterSet(tokenizingCharacterSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
 }
-
-// Delegate calls the underlying Delegate.
-func (x *TokenFieldCell) Delegate() raw.NSTokenFieldCellDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *TokenFieldCell) SetDelegate(delegate raw.NSTokenFieldCellDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *TokenFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
-
-func (x *TokenFieldCell) asActionCell() *raw.NSActionCell {
-	return &x.inner.NSTextFieldCell.NSActionCell
-}
-
-func (x *TokenFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
 
 // TokenFieldCellable is the interface implemented by [TokenFieldCell], for mocking and DI.
 type TokenFieldCellable interface {
-	Unwrap() *raw.NSTokenFieldCell
-	WithTokenStyle(tokenStyle NSTokenStyle) *TokenFieldCell
+	obj.Object
+	WithTokenStyle(tokenStyle TokenStyle) *TokenFieldCell
 	WithCompletionDelay(completionDelay float64) *TokenFieldCell
-	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenFieldCell
-	WithDelegate(delegate raw.NSTokenFieldCellDelegate) *TokenFieldCell
+	WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell
 	WithBackgroundColor(backgroundColor *Color) *TokenFieldCell
 	WithDrawsBackground(drawsBackground bool) *TokenFieldCell
 	WithTextColor(textColor *Color) *TokenFieldCell
-	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenFieldCell
+	WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenFieldCell
 	WithPlaceholderString(placeholderString string) *TokenFieldCell
-	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TokenFieldCell
-	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TokenFieldCell
+	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell
+	WithAllowedInputSourceLocales(items ...obj.Object) *TokenFieldCell
 	WithControlView(controlView ViewProvider) *TokenFieldCell
-	WithType(type_ NSCellType) *TokenFieldCell
+	WithType(type_ CellType) *TokenFieldCell
 	WithState(state int) *TokenFieldCell
-	WithTarget(target objc.ID) *TokenFieldCell
-	WithAction(action objc.SEL) *TokenFieldCell
+	WithTarget(target obj.Object) *TokenFieldCell
 	WithTag(tag int) *TokenFieldCell
 	WithTitle(title string) *TokenFieldCell
 	WithEnabled(enabled bool) *TokenFieldCell
@@ -579,44 +437,48 @@ type TokenFieldCellable interface {
 	WithBezeled(bezeled bool) *TokenFieldCell
 	WithScrollable(scrollable bool) *TokenFieldCell
 	WithHighlighted(highlighted bool) *TokenFieldCell
-	WithAlignment(alignment NSTextAlignment) *TokenFieldCell
+	WithAlignment(alignment TextAlignment) *TokenFieldCell
 	WithWraps(wraps bool) *TokenFieldCell
 	WithFont(font *Font) *TokenFieldCell
-	WithFormatter(formatter *foundation.NSFormatter) *TokenFieldCell
-	WithObjectValue(objectValue objc.ID) *TokenFieldCell
+	WithFormatter(formatter obj.Object) *TokenFieldCell
+	WithObjectValue(objectValue obj.Object) *TokenFieldCell
 	WithStringValue(stringValue string) *TokenFieldCell
 	WithIntValue(intValue int) *TokenFieldCell
 	WithFloatValue(floatValue float32) *TokenFieldCell
 	WithDoubleValue(doubleValue float64) *TokenFieldCell
 	WithIntegerValue(integerValue int) *TokenFieldCell
 	WithImage(image *Image) *TokenFieldCell
-	WithControlSize(controlSize NSControlSize) *TokenFieldCell
-	WithRepresentedObject(representedObject objc.ID) *TokenFieldCell
+	WithControlSize(controlSize ControlSize) *TokenFieldCell
+	WithRepresentedObject(representedObject obj.Object) *TokenFieldCell
 	WithMenu(menu *Menu) *TokenFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenFieldCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenFieldCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenFieldCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *TokenFieldCell
 	WithAllowsUndo(allowsUndo bool) *TokenFieldCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenFieldCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell
 	WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell
-	WithFocusRingType(focusRingType NSFocusRingType) *TokenFieldCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TokenFieldCell
+	WithFocusRingType(focusRingType FocusRingType) *TokenFieldCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell
 	WithImportsGraphics(importsGraphics bool) *TokenFieldCell
 	WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TokenFieldCell
-	WithControlTint(controlTint NSControlTint) *TokenFieldCell
-	TokenStyle() NSTokenStyle
-	SetTokenStyle(tokenStyle NSTokenStyle)
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TokenFieldCell
+	WithControlTint(controlTint ControlTint) *TokenFieldCell
+	TokenStyle() TokenStyle
+	SetTokenStyle(tokenStyle TokenStyle)
 	CompletionDelay() float64
 	SetCompletionDelay(completionDelay float64)
-	TokenizingCharacterSet() *foundation.NSCharacterSet
-	SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet)
-	Delegate() raw.NSTokenFieldCellDelegate
-	SetDelegate(delegate raw.NSTokenFieldCellDelegate)
+	TokenizingCharacterSet() obj.Object
+	SetTokenizingCharacterSet(tokenizingCharacterSet obj.Object)
 }
 
 var _ TokenFieldCellable = (*TokenFieldCell)(nil)
+
+var _ TextFieldCellProvider = (*TokenFieldCell)(nil)
+
+var _ ActionCellProvider = (*TokenFieldCell)(nil)
+
+var _ CellProvider = (*TokenFieldCell)(nil)

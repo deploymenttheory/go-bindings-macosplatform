@@ -5,113 +5,108 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents a live streaming media segment resource request.
+// MetricHLSMediaSegmentRequestEvent is an idiomatic wrapper over the Objective-C class AVMetricHLSMediaSegmentRequestEvent.
 //
-// MetricHLSMediaSegmentRequestEvent wraps [raw.AVMetricHLSMediaSegmentRequestEvent] with a fluent Go API.
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents a live streaming media segment resource request.
 type MetricHLSMediaSegmentRequestEvent struct {
-	inner *raw.AVMetricHLSMediaSegmentRequestEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricHLSMediaSegmentRequestEvent].
-func (x *MetricHLSMediaSegmentRequestEvent) Unwrap() *raw.AVMetricHLSMediaSegmentRequestEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricHLSMediaSegmentRequestEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricHLSMediaSegmentRequestEventFromID adopts an existing object pointer as a MetricHLSMediaSegmentRequestEvent (nil for 0).
+// MetricHLSMediaSegmentRequestEventFromID adopts an existing Objective-C object as a MetricHLSMediaSegmentRequestEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricHLSMediaSegmentRequestEventFromID(id objc.ID) *MetricHLSMediaSegmentRequestEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricHLSMediaSegmentRequestEvent{inner: raw.AVMetricHLSMediaSegmentRequestEventFromID(id)}
+	x := &MetricHLSMediaSegmentRequestEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricHLSMediaSegmentRequestEvent creates a new [MetricHLSMediaSegmentRequestEvent].
-func NewMetricHLSMediaSegmentRequestEvent() *MetricHLSMediaSegmentRequestEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricHLSMediaSegmentRequestEvent")), objc.RegisterName("new"))
-	return &MetricHLSMediaSegmentRequestEvent{inner: raw.AVMetricHLSMediaSegmentRequestEventFromID(_id)}
-}
-
-// Returns the URL of the media segment. If no value is available, returns nil.
-//
-// Url calls the underlying Url.
-func (x *MetricHLSMediaSegmentRequestEvent) Url() *foundation.NSURL {
-	return x.inner.Url()
-}
-
-// Returns true if the media segment request is for a map segment.
-//
-// IsMapSegment calls the underlying IsMapSegment.
-func (x *MetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
-	return x.inner.IsMapSegment()
-}
-
-// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-//
-// MediaType calls the underlying MediaType.
-func (x *MetricHLSMediaSegmentRequestEvent) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Returns the byte range for the media segment. If not available, the range start and end will be 0.
-//
-// ByteRange calls the underlying ByteRange.
-func (x *MetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
-	return x.inner.ByteRange()
-}
-
-// Returns the URL of the index file in which this segment was declared. If not available, returns nil.
-//
-// IndexFileURL calls the underlying IndexFileURL.
-func (x *MetricHLSMediaSegmentRequestEvent) IndexFileURL() *foundation.NSURL {
-	return x.inner.IndexFileURL()
-}
-
-// Returns the duration of segment in seconds.
-//
-// SegmentDuration calls the underlying SegmentDuration.
-func (x *MetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
-	return x.inner.SegmentDuration()
-}
-
-// Returns the media resource request event which was used to satisfy the media segment.
-//
-// MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
-func (x *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
-	_r := x.inner.MediaResourceRequestEvent()
-	if _r == nil {
+// metricHLSMediaSegmentRequestEventAdopt wraps an Objective-C object that this code just created as a
+// MetricHLSMediaSegmentRequestEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricHLSMediaSegmentRequestEventAdopt(id objc.ID) *MetricHLSMediaSegmentRequestEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MetricMediaResourceRequestEvent{inner: _r}
+	x := &MetricHLSMediaSegmentRequestEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MetricHLSMediaSegmentRequestEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+// NewMetricHLSMediaSegmentRequestEvent creates a new MetricHLSMediaSegmentRequestEvent.
+func NewMetricHLSMediaSegmentRequestEvent() *MetricHLSMediaSegmentRequestEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricHLSMediaSegmentRequestEvent")), objc.RegisterName("new"))
+	return metricHLSMediaSegmentRequestEventAdopt(_id)
+}
+
+// Url returns the URL of the media segment. If no value is available, returns nil.
+func (x *MetricHLSMediaSegmentRequestEvent) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
+}
+
+// IsMapSegment returns true if the media segment request is for a map segment.
+func (x *MetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMapSegment"))
+	return _r
+}
+
+// MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+func (x *MetricHLSMediaSegmentRequestEvent) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
+}
+
+// ByteRange returns the byte range for the media segment. If not available, the range start and end will be 0.
+func (x *MetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("byteRange"))
+	return _r
+}
+
+// IndexFileURL returns the URL of the index file in which this segment was declared. If not available, returns nil.
+func (x *MetricHLSMediaSegmentRequestEvent) IndexFileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexFileURL"))
+	return obj.Wrap(_r)
+}
+
+// SegmentDuration returns the duration of segment in seconds.
+func (x *MetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("segmentDuration"))
+	return _r
+}
+
+// MediaResourceRequestEvent returns the media resource request event which was used to satisfy the media segment.
+func (x *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaResourceRequestEvent"))
+	return MetricMediaResourceRequestEventFromID(_r)
 }
 
 // MetricHLSMediaSegmentRequestEventable is the interface implemented by [MetricHLSMediaSegmentRequestEvent], for mocking and DI.
 type MetricHLSMediaSegmentRequestEventable interface {
-	Unwrap() *raw.AVMetricHLSMediaSegmentRequestEvent
-	Url() *foundation.NSURL
+	obj.Object
+	Url() obj.Object
 	IsMapSegment() bool
-	MediaType() string
+	MediaType() obj.Object
 	ByteRange() foundation.NSRange
-	IndexFileURL() *foundation.NSURL
+	IndexFileURL() obj.Object
 	SegmentDuration() float64
 	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
 }
 
 var _ MetricHLSMediaSegmentRequestEventable = (*MetricHLSMediaSegmentRequestEvent)(nil)
+
+var _ MetricEventProvider = (*MetricHLSMediaSegmentRequestEvent)(nil)

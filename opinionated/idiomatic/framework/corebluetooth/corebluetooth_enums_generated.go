@@ -10,100 +10,104 @@ import (
 )
 
 // An error that Core Bluetooth returns while using Attribute Protocol (ATT).
-type CBATTError int64
+type ATTError int64
 
 const (
-	CBATTErrorSuccess                       CBATTError = 0
-	CBATTErrorInvalidHandle                 CBATTError = 1
-	CBATTErrorReadNotPermitted              CBATTError = 2
-	CBATTErrorWriteNotPermitted             CBATTError = 3
-	CBATTErrorInvalidPdu                    CBATTError = 4
-	CBATTErrorInsufficientAuthentication    CBATTError = 5
-	CBATTErrorRequestNotSupported           CBATTError = 6
-	CBATTErrorInvalidOffset                 CBATTError = 7
-	CBATTErrorInsufficientAuthorization     CBATTError = 8
-	CBATTErrorPrepareQueueFull              CBATTError = 9
-	CBATTErrorAttributeNotFound             CBATTError = 10
-	CBATTErrorAttributeNotLong              CBATTError = 11
-	CBATTErrorInsufficientEncryptionKeySize CBATTError = 12
-	CBATTErrorInvalidAttributeValueLength   CBATTError = 13
-	CBATTErrorUnlikelyError                 CBATTError = 14
-	CBATTErrorInsufficientEncryption        CBATTError = 15
-	CBATTErrorUnsupportedGroupType          CBATTError = 16
-	CBATTErrorInsufficientResources         CBATTError = 17
+	ATTErrorSuccess                       ATTError = 0
+	ATTErrorInvalidHandle                 ATTError = 1
+	ATTErrorReadNotPermitted              ATTError = 2
+	ATTErrorWriteNotPermitted             ATTError = 3
+	ATTErrorInvalidPdu                    ATTError = 4
+	ATTErrorInsufficientAuthentication    ATTError = 5
+	ATTErrorRequestNotSupported           ATTError = 6
+	ATTErrorInvalidOffset                 ATTError = 7
+	ATTErrorInsufficientAuthorization     ATTError = 8
+	ATTErrorPrepareQueueFull              ATTError = 9
+	ATTErrorAttributeNotFound             ATTError = 10
+	ATTErrorAttributeNotLong              ATTError = 11
+	ATTErrorInsufficientEncryptionKeySize ATTError = 12
+	ATTErrorInvalidAttributeValueLength   ATTError = 13
+	ATTErrorUnlikelyError                 ATTError = 14
+	ATTErrorInsufficientEncryption        ATTError = 15
+	ATTErrorUnsupportedGroupType          ATTError = 16
+	ATTErrorInsufficientResources         ATTError = 17
 )
 
-func (e CBATTError) String() string {
+// String returns the ATTError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ATTError) String() string {
 	switch e {
-	case CBATTErrorSuccess:
-		return "CBATTErrorSuccess"
-	case CBATTErrorInvalidHandle:
-		return "CBATTErrorInvalidHandle"
-	case CBATTErrorReadNotPermitted:
-		return "CBATTErrorReadNotPermitted"
-	case CBATTErrorWriteNotPermitted:
-		return "CBATTErrorWriteNotPermitted"
-	case CBATTErrorInvalidPdu:
-		return "CBATTErrorInvalidPdu"
-	case CBATTErrorInsufficientAuthentication:
-		return "CBATTErrorInsufficientAuthentication"
-	case CBATTErrorRequestNotSupported:
-		return "CBATTErrorRequestNotSupported"
-	case CBATTErrorInvalidOffset:
-		return "CBATTErrorInvalidOffset"
-	case CBATTErrorInsufficientAuthorization:
-		return "CBATTErrorInsufficientAuthorization"
-	case CBATTErrorPrepareQueueFull:
-		return "CBATTErrorPrepareQueueFull"
-	case CBATTErrorAttributeNotFound:
-		return "CBATTErrorAttributeNotFound"
-	case CBATTErrorAttributeNotLong:
-		return "CBATTErrorAttributeNotLong"
-	case CBATTErrorInsufficientEncryptionKeySize:
-		return "CBATTErrorInsufficientEncryptionKeySize"
-	case CBATTErrorInvalidAttributeValueLength:
-		return "CBATTErrorInvalidAttributeValueLength"
-	case CBATTErrorUnlikelyError:
-		return "CBATTErrorUnlikelyError"
-	case CBATTErrorInsufficientEncryption:
-		return "CBATTErrorInsufficientEncryption"
-	case CBATTErrorUnsupportedGroupType:
-		return "CBATTErrorUnsupportedGroupType"
-	case CBATTErrorInsufficientResources:
-		return "CBATTErrorInsufficientResources"
+	case ATTErrorSuccess:
+		return "ATTErrorSuccess"
+	case ATTErrorInvalidHandle:
+		return "ATTErrorInvalidHandle"
+	case ATTErrorReadNotPermitted:
+		return "ATTErrorReadNotPermitted"
+	case ATTErrorWriteNotPermitted:
+		return "ATTErrorWriteNotPermitted"
+	case ATTErrorInvalidPdu:
+		return "ATTErrorInvalidPdu"
+	case ATTErrorInsufficientAuthentication:
+		return "ATTErrorInsufficientAuthentication"
+	case ATTErrorRequestNotSupported:
+		return "ATTErrorRequestNotSupported"
+	case ATTErrorInvalidOffset:
+		return "ATTErrorInvalidOffset"
+	case ATTErrorInsufficientAuthorization:
+		return "ATTErrorInsufficientAuthorization"
+	case ATTErrorPrepareQueueFull:
+		return "ATTErrorPrepareQueueFull"
+	case ATTErrorAttributeNotFound:
+		return "ATTErrorAttributeNotFound"
+	case ATTErrorAttributeNotLong:
+		return "ATTErrorAttributeNotLong"
+	case ATTErrorInsufficientEncryptionKeySize:
+		return "ATTErrorInsufficientEncryptionKeySize"
+	case ATTErrorInvalidAttributeValueLength:
+		return "ATTErrorInvalidAttributeValueLength"
+	case ATTErrorUnlikelyError:
+		return "ATTErrorUnlikelyError"
+	case ATTErrorInsufficientEncryption:
+		return "ATTErrorInsufficientEncryption"
+	case ATTErrorUnsupportedGroupType:
+		return "ATTErrorUnsupportedGroupType"
+	case ATTErrorInsufficientResources:
+		return "ATTErrorInsufficientResources"
 	default:
-		return fmt.Sprintf("CBATTError(%d)", int64(e))
+		return fmt.Sprintf("ATTError(%d)", int64(e))
 	}
 }
 
 // Values that represent the read, write, and encryption permissions for a characteristic’s value.
 // Bitmask — values may be combined with |.
-type CBAttributePermissions uint64
+type AttributePermissions uint64
 
 const (
 	// A permission that indicates a peripheral can read the attribute’s value.
-	CBAttributePermissionsReadable CBAttributePermissions = 1
+	AttributePermissionsReadable AttributePermissions = 1
 	// A permission that indicates a peripheral can write the attribute’s value.
-	CBAttributePermissionsWriteable CBAttributePermissions = 2
+	AttributePermissionsWriteable AttributePermissions = 2
 	// A permission that indicates only trusted devices can read the attribute’s value.
-	CBAttributePermissionsReadEncryptionRequired CBAttributePermissions = 4
+	AttributePermissionsReadEncryptionRequired AttributePermissions = 4
 	// A permission that indicates only trusted devices can write the attribute’s value.
-	CBAttributePermissionsWriteEncryptionRequired CBAttributePermissions = 8
+	AttributePermissionsWriteEncryptionRequired AttributePermissions = 8
 )
 
-func (e CBAttributePermissions) String() string {
+// String returns the AttributePermissions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributePermissions) String() string {
 	var parts []string
-	if e&CBAttributePermissionsReadable != 0 {
-		parts = append(parts, "CBAttributePermissionsReadable")
+	if e&AttributePermissionsReadable != 0 {
+		parts = append(parts, "AttributePermissionsReadable")
 	}
-	if e&CBAttributePermissionsWriteable != 0 {
-		parts = append(parts, "CBAttributePermissionsWriteable")
+	if e&AttributePermissionsWriteable != 0 {
+		parts = append(parts, "AttributePermissionsWriteable")
 	}
-	if e&CBAttributePermissionsReadEncryptionRequired != 0 {
-		parts = append(parts, "CBAttributePermissionsReadEncryptionRequired")
+	if e&AttributePermissionsReadEncryptionRequired != 0 {
+		parts = append(parts, "AttributePermissionsReadEncryptionRequired")
 	}
-	if e&CBAttributePermissionsWriteEncryptionRequired != 0 {
-		parts = append(parts, "CBAttributePermissionsWriteEncryptionRequired")
+	if e&AttributePermissionsWriteEncryptionRequired != 0 {
+		parts = append(parts, "AttributePermissionsWriteEncryptionRequired")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -113,62 +117,64 @@ func (e CBAttributePermissions) String() string {
 
 // Values that represent the possible properties of a characteristic.
 // Bitmask — values may be combined with |.
-type CBCharacteristicProperties uint64
+type CharacteristicProperties uint64
 
 const (
 	// A property that indicates the characteristic can broadcast its value using a characteristic configuration descriptor.
-	CBCharacteristicPropertyBroadcast CBCharacteristicProperties = 1
+	CharacteristicPropertyBroadcast CharacteristicProperties = 1
 	// A property that indicates a peripheral can read the characteristic’s value.
-	CBCharacteristicPropertyRead CBCharacteristicProperties = 2
+	CharacteristicPropertyRead CharacteristicProperties = 2
 	// A property that indicates a peripheral can write the characteristic’s value, without a response to indicate that the write succeeded.
-	CBCharacteristicPropertyWriteWithoutResponse CBCharacteristicProperties = 4
+	CharacteristicPropertyWriteWithoutResponse CharacteristicProperties = 4
 	// A property that indicates a peripheral can write the characteristic’s value, with a response to indicate that the write succeeded.
-	CBCharacteristicPropertyWrite CBCharacteristicProperties = 8
+	CharacteristicPropertyWrite CharacteristicProperties = 8
 	// A property that indicates the peripheral permits notifications of the characteristic’s value, without a response from the central to indicate receipt of the notification.
-	CBCharacteristicPropertyNotify CBCharacteristicProperties = 16
+	CharacteristicPropertyNotify CharacteristicProperties = 16
 	// A property that indicates the peripheral permits notifications of the characteristic’s value, with a response from the central to indicate receipt of the notification.
-	CBCharacteristicPropertyIndicate CBCharacteristicProperties = 32
+	CharacteristicPropertyIndicate CharacteristicProperties = 32
 	// A property that indicates the perhipheral allows signed writes of the characteristic’s value, without a response to indicate the write succeeded.
-	CBCharacteristicPropertyAuthenticatedSignedWrites CBCharacteristicProperties = 64
+	CharacteristicPropertyAuthenticatedSignedWrites CharacteristicProperties = 64
 	// A property that indicates the characteristic defines additional properties in the extended properties descriptor.
-	CBCharacteristicPropertyExtendedProperties CBCharacteristicProperties = 128
+	CharacteristicPropertyExtendedProperties CharacteristicProperties = 128
 	// A property that indicates that only trusted devices can enable notifications of the characteristic’s value.
-	CBCharacteristicPropertyNotifyEncryptionRequired CBCharacteristicProperties = 256
+	CharacteristicPropertyNotifyEncryptionRequired CharacteristicProperties = 256
 	// A property that indicates only trusted devices can enable indications of the characteristic’s value.
-	CBCharacteristicPropertyIndicateEncryptionRequired CBCharacteristicProperties = 512
+	CharacteristicPropertyIndicateEncryptionRequired CharacteristicProperties = 512
 )
 
-func (e CBCharacteristicProperties) String() string {
+// String returns the CharacteristicProperties constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CharacteristicProperties) String() string {
 	var parts []string
-	if e&CBCharacteristicPropertyBroadcast != 0 {
-		parts = append(parts, "CBCharacteristicPropertyBroadcast")
+	if e&CharacteristicPropertyBroadcast != 0 {
+		parts = append(parts, "CharacteristicPropertyBroadcast")
 	}
-	if e&CBCharacteristicPropertyRead != 0 {
-		parts = append(parts, "CBCharacteristicPropertyRead")
+	if e&CharacteristicPropertyRead != 0 {
+		parts = append(parts, "CharacteristicPropertyRead")
 	}
-	if e&CBCharacteristicPropertyWriteWithoutResponse != 0 {
-		parts = append(parts, "CBCharacteristicPropertyWriteWithoutResponse")
+	if e&CharacteristicPropertyWriteWithoutResponse != 0 {
+		parts = append(parts, "CharacteristicPropertyWriteWithoutResponse")
 	}
-	if e&CBCharacteristicPropertyWrite != 0 {
-		parts = append(parts, "CBCharacteristicPropertyWrite")
+	if e&CharacteristicPropertyWrite != 0 {
+		parts = append(parts, "CharacteristicPropertyWrite")
 	}
-	if e&CBCharacteristicPropertyNotify != 0 {
-		parts = append(parts, "CBCharacteristicPropertyNotify")
+	if e&CharacteristicPropertyNotify != 0 {
+		parts = append(parts, "CharacteristicPropertyNotify")
 	}
-	if e&CBCharacteristicPropertyIndicate != 0 {
-		parts = append(parts, "CBCharacteristicPropertyIndicate")
+	if e&CharacteristicPropertyIndicate != 0 {
+		parts = append(parts, "CharacteristicPropertyIndicate")
 	}
-	if e&CBCharacteristicPropertyAuthenticatedSignedWrites != 0 {
-		parts = append(parts, "CBCharacteristicPropertyAuthenticatedSignedWrites")
+	if e&CharacteristicPropertyAuthenticatedSignedWrites != 0 {
+		parts = append(parts, "CharacteristicPropertyAuthenticatedSignedWrites")
 	}
-	if e&CBCharacteristicPropertyExtendedProperties != 0 {
-		parts = append(parts, "CBCharacteristicPropertyExtendedProperties")
+	if e&CharacteristicPropertyExtendedProperties != 0 {
+		parts = append(parts, "CharacteristicPropertyExtendedProperties")
 	}
-	if e&CBCharacteristicPropertyNotifyEncryptionRequired != 0 {
-		parts = append(parts, "CBCharacteristicPropertyNotifyEncryptionRequired")
+	if e&CharacteristicPropertyNotifyEncryptionRequired != 0 {
+		parts = append(parts, "CharacteristicPropertyNotifyEncryptionRequired")
 	}
-	if e&CBCharacteristicPropertyIndicateEncryptionRequired != 0 {
-		parts = append(parts, "CBCharacteristicPropertyIndicateEncryptionRequired")
+	if e&CharacteristicPropertyIndicateEncryptionRequired != 0 {
+		parts = append(parts, "CharacteristicPropertyIndicateEncryptionRequired")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -177,173 +183,185 @@ func (e CBCharacteristicProperties) String() string {
 }
 
 // Values representing the possible write types to a characteristic’s value.
-type CBCharacteristicWriteType int64
+type CharacteristicWriteType int64
 
 const (
 	// Write a characteristic value, with a response from the peripheral to indicate whether the write was successful.
-	CBCharacteristicWriteWithResponse CBCharacteristicWriteType = 0
+	CharacteristicWriteWithResponse CharacteristicWriteType = 0
 	// Write a characteristic value, without any response from the peripheral to indicate whether the write was successful.
-	CBCharacteristicWriteWithoutResponse CBCharacteristicWriteType = 1
+	CharacteristicWriteWithoutResponse CharacteristicWriteType = 1
 )
 
-func (e CBCharacteristicWriteType) String() string {
+// String returns the CharacteristicWriteType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CharacteristicWriteType) String() string {
 	switch e {
-	case CBCharacteristicWriteWithResponse:
-		return "CBCharacteristicWriteWithResponse"
-	case CBCharacteristicWriteWithoutResponse:
-		return "CBCharacteristicWriteWithoutResponse"
+	case CharacteristicWriteWithResponse:
+		return "CharacteristicWriteWithResponse"
+	case CharacteristicWriteWithoutResponse:
+		return "CharacteristicWriteWithoutResponse"
 	default:
-		return fmt.Sprintf("CBCharacteristicWriteType(%d)", int64(e))
+		return fmt.Sprintf("CharacteristicWriteType(%d)", int64(e))
 	}
 }
 
 // The current authorization state of a Core Bluetooth manager.
-type CBManagerAuthorization int64
+type ManagerAuthorization int64
 
 const (
 	// A state that indicates the user has yet to authorize Bluetooth for this app.
-	CBManagerAuthorizationNotDetermined CBManagerAuthorization = 0
+	ManagerAuthorizationNotDetermined ManagerAuthorization = 0
 	// A state that indicates this app isn’t authorized to use Bluetooth.
-	CBManagerAuthorizationRestricted CBManagerAuthorization = 1
+	ManagerAuthorizationRestricted ManagerAuthorization = 1
 	// A state that indicates the user explicitly denied Bluetooth access for this app.
-	CBManagerAuthorizationDenied CBManagerAuthorization = 2
+	ManagerAuthorizationDenied ManagerAuthorization = 2
 	// A state that indicates the user has authorized Bluetooth at any time.
-	CBManagerAuthorizationAllowedAlways CBManagerAuthorization = 3
+	ManagerAuthorizationAllowedAlways ManagerAuthorization = 3
 )
 
-func (e CBManagerAuthorization) String() string {
+// String returns the ManagerAuthorization constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ManagerAuthorization) String() string {
 	switch e {
-	case CBManagerAuthorizationNotDetermined:
-		return "CBManagerAuthorizationNotDetermined"
-	case CBManagerAuthorizationRestricted:
-		return "CBManagerAuthorizationRestricted"
-	case CBManagerAuthorizationDenied:
-		return "CBManagerAuthorizationDenied"
-	case CBManagerAuthorizationAllowedAlways:
-		return "CBManagerAuthorizationAllowedAlways"
+	case ManagerAuthorizationNotDetermined:
+		return "ManagerAuthorizationNotDetermined"
+	case ManagerAuthorizationRestricted:
+		return "ManagerAuthorizationRestricted"
+	case ManagerAuthorizationDenied:
+		return "ManagerAuthorizationDenied"
+	case ManagerAuthorizationAllowedAlways:
+		return "ManagerAuthorizationAllowedAlways"
 	default:
-		return fmt.Sprintf("CBManagerAuthorization(%d)", int64(e))
+		return fmt.Sprintf("ManagerAuthorization(%d)", int64(e))
 	}
 }
 
 // The possible states of a Core Bluetooth manager.
-type CBManagerState int64
+type ManagerState int64
 
 const (
 	// The manager’s state is unknown.
-	CBManagerStateUnknown CBManagerState = 0
+	ManagerStateUnknown ManagerState = 0
 	// A state that indicates the connection with the system service was momentarily lost.
-	CBManagerStateResetting CBManagerState = 1
+	ManagerStateResetting ManagerState = 1
 	// A state that indicates this device doesn’t support the Bluetooth low energy central or client role.
-	CBManagerStateUnsupported CBManagerState = 2
+	ManagerStateUnsupported ManagerState = 2
 	// A state that indicates the application isn’t authorized to use the Bluetooth low energy role.
-	CBManagerStateUnauthorized CBManagerState = 3
+	ManagerStateUnauthorized ManagerState = 3
 	// A state that indicates Bluetooth is currently powered off.
-	CBManagerStatePoweredOff CBManagerState = 4
+	ManagerStatePoweredOff ManagerState = 4
 	// A state that indicates Bluetooth is currently powered on and available to use.
-	CBManagerStatePoweredOn CBManagerState = 5
+	ManagerStatePoweredOn ManagerState = 5
 )
 
-func (e CBManagerState) String() string {
+// String returns the ManagerState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ManagerState) String() string {
 	switch e {
-	case CBManagerStateUnknown:
-		return "CBManagerStateUnknown"
-	case CBManagerStateResetting:
-		return "CBManagerStateResetting"
-	case CBManagerStateUnsupported:
-		return "CBManagerStateUnsupported"
-	case CBManagerStateUnauthorized:
-		return "CBManagerStateUnauthorized"
-	case CBManagerStatePoweredOff:
-		return "CBManagerStatePoweredOff"
-	case CBManagerStatePoweredOn:
-		return "CBManagerStatePoweredOn"
+	case ManagerStateUnknown:
+		return "ManagerStateUnknown"
+	case ManagerStateResetting:
+		return "ManagerStateResetting"
+	case ManagerStateUnsupported:
+		return "ManagerStateUnsupported"
+	case ManagerStateUnauthorized:
+		return "ManagerStateUnauthorized"
+	case ManagerStatePoweredOff:
+		return "ManagerStatePoweredOff"
+	case ManagerStatePoweredOn:
+		return "ManagerStatePoweredOn"
 	default:
-		return fmt.Sprintf("CBManagerState(%d)", int64(e))
+		return fmt.Sprintf("ManagerState(%d)", int64(e))
 	}
 }
 
 // Values representing the current authorization state of the peripheral manager.
 //
 // Deprecated: since macOS 10.15.
-type CBPeripheralManagerAuthorizationStatus int64
+type PeripheralManagerAuthorizationStatus int64
 
 const (
 	// An authorization status that indicates the user hasn’t indicated whether this app can share data using Bluetooth while in the background.
-	CBPeripheralManagerAuthorizationStatusNotDetermined CBPeripheralManagerAuthorizationStatus = 0
+	PeripheralManagerAuthorizationStatusNotDetermined PeripheralManagerAuthorizationStatus = 0
 	// An authorization status that indicates this app isn’t authorized to share data using Bluetooth while in the background.
-	CBPeripheralManagerAuthorizationStatusRestricted CBPeripheralManagerAuthorizationStatus = 1
+	PeripheralManagerAuthorizationStatusRestricted PeripheralManagerAuthorizationStatus = 1
 	// An authorization status that indicates the user explicitly denied this app from sharing data using Bluetooth while in the background.
-	CBPeripheralManagerAuthorizationStatusDenied CBPeripheralManagerAuthorizationStatus = 2
+	PeripheralManagerAuthorizationStatusDenied PeripheralManagerAuthorizationStatus = 2
 	// An authorization status that indicates the user authorized this app to share data using Bluetooth while in the background.
-	CBPeripheralManagerAuthorizationStatusAuthorized CBPeripheralManagerAuthorizationStatus = 3
+	PeripheralManagerAuthorizationStatusAuthorized PeripheralManagerAuthorizationStatus = 3
 )
 
-func (e CBPeripheralManagerAuthorizationStatus) String() string {
+// String returns the PeripheralManagerAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PeripheralManagerAuthorizationStatus) String() string {
 	switch e {
-	case CBPeripheralManagerAuthorizationStatusNotDetermined:
-		return "CBPeripheralManagerAuthorizationStatusNotDetermined"
-	case CBPeripheralManagerAuthorizationStatusRestricted:
-		return "CBPeripheralManagerAuthorizationStatusRestricted"
-	case CBPeripheralManagerAuthorizationStatusDenied:
-		return "CBPeripheralManagerAuthorizationStatusDenied"
-	case CBPeripheralManagerAuthorizationStatusAuthorized:
-		return "CBPeripheralManagerAuthorizationStatusAuthorized"
+	case PeripheralManagerAuthorizationStatusNotDetermined:
+		return "PeripheralManagerAuthorizationStatusNotDetermined"
+	case PeripheralManagerAuthorizationStatusRestricted:
+		return "PeripheralManagerAuthorizationStatusRestricted"
+	case PeripheralManagerAuthorizationStatusDenied:
+		return "PeripheralManagerAuthorizationStatusDenied"
+	case PeripheralManagerAuthorizationStatusAuthorized:
+		return "PeripheralManagerAuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("CBPeripheralManagerAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("PeripheralManagerAuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Values representing the connection latency of the peripheral manager.
-type CBPeripheralManagerConnectionLatency int64
+type PeripheralManagerConnectionLatency int64
 
 const (
 	// A latency setting indicating that prioritizes rapid communication over battery life.
-	CBPeripheralManagerConnectionLatencyLow CBPeripheralManagerConnectionLatency = 0
+	PeripheralManagerConnectionLatencyLow PeripheralManagerConnectionLatency = 0
 	// A latency setting that balances communication frequency and battery life.
-	CBPeripheralManagerConnectionLatencyMedium CBPeripheralManagerConnectionLatency = 1
+	PeripheralManagerConnectionLatencyMedium PeripheralManagerConnectionLatency = 1
 	// A latency setting that prioritizes extending battery life over rapid communication.
-	CBPeripheralManagerConnectionLatencyHigh CBPeripheralManagerConnectionLatency = 2
+	PeripheralManagerConnectionLatencyHigh PeripheralManagerConnectionLatency = 2
 )
 
-func (e CBPeripheralManagerConnectionLatency) String() string {
+// String returns the PeripheralManagerConnectionLatency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PeripheralManagerConnectionLatency) String() string {
 	switch e {
-	case CBPeripheralManagerConnectionLatencyLow:
-		return "CBPeripheralManagerConnectionLatencyLow"
-	case CBPeripheralManagerConnectionLatencyMedium:
-		return "CBPeripheralManagerConnectionLatencyMedium"
-	case CBPeripheralManagerConnectionLatencyHigh:
-		return "CBPeripheralManagerConnectionLatencyHigh"
+	case PeripheralManagerConnectionLatencyLow:
+		return "PeripheralManagerConnectionLatencyLow"
+	case PeripheralManagerConnectionLatencyMedium:
+		return "PeripheralManagerConnectionLatencyMedium"
+	case PeripheralManagerConnectionLatencyHigh:
+		return "PeripheralManagerConnectionLatencyHigh"
 	default:
-		return fmt.Sprintf("CBPeripheralManagerConnectionLatency(%d)", int64(e))
+		return fmt.Sprintf("PeripheralManagerConnectionLatency(%d)", int64(e))
 	}
 }
 
 // Values representing the connection state of a peripheral.
-type CBPeripheralState int64
+type PeripheralState int64
 
 const (
 	// The peripheral isn’t connected to the central manager.
-	CBPeripheralStateDisconnected CBPeripheralState = 0
+	PeripheralStateDisconnected PeripheralState = 0
 	// The peripheral is in the process of connecting to the central manager.
-	CBPeripheralStateConnecting CBPeripheralState = 1
+	PeripheralStateConnecting PeripheralState = 1
 	// The peripheral is connected to the central manager.
-	CBPeripheralStateConnected CBPeripheralState = 2
+	PeripheralStateConnected PeripheralState = 2
 	// The peripheral is disconnecting from the central manager.
-	CBPeripheralStateDisconnecting CBPeripheralState = 3
+	PeripheralStateDisconnecting PeripheralState = 3
 )
 
-func (e CBPeripheralState) String() string {
+// String returns the PeripheralState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PeripheralState) String() string {
 	switch e {
-	case CBPeripheralStateDisconnected:
-		return "CBPeripheralStateDisconnected"
-	case CBPeripheralStateConnecting:
-		return "CBPeripheralStateConnecting"
-	case CBPeripheralStateConnected:
-		return "CBPeripheralStateConnected"
-	case CBPeripheralStateDisconnecting:
-		return "CBPeripheralStateDisconnecting"
+	case PeripheralStateDisconnected:
+		return "PeripheralStateDisconnected"
+	case PeripheralStateConnecting:
+		return "PeripheralStateConnecting"
+	case PeripheralStateConnected:
+		return "PeripheralStateConnected"
+	case PeripheralStateDisconnecting:
+		return "PeripheralStateDisconnecting"
 	default:
-		return fmt.Sprintf("CBPeripheralState(%d)", int64(e))
+		return fmt.Sprintf("PeripheralState(%d)", int64(e))
 	}
 }

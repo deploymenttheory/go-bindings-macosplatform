@@ -5,142 +5,98 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for creating different kinds of pyramid images.
+// ImagePyramid is an idiomatic wrapper over the Objective-C class MPSImagePyramid.
 //
-// ImagePyramid wraps [raw.MPSImagePyramid] with a fluent Go API.
+// ImagePyramid is an abstract base — you do not construct it directly. Construct one of [ImageGaussianPyramid], [ImageLaplacianPyramid] and pass it where a ImagePyramid is accepted.
+//
+// A base class for creating different kinds of pyramid images.
 type ImagePyramid struct {
-	inner *raw.MPSImagePyramid
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImagePyramid].
-func (x *ImagePyramid) Unwrap() *raw.MPSImagePyramid { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImagePyramid) ID() objc.ID { return x.inner.Ptr() }
-
-// ImagePyramidFromID adopts an existing object pointer as a ImagePyramid (nil for 0).
+// ImagePyramidFromID adopts an existing Objective-C object as a ImagePyramid
+// (nil for 0), retaining it and registering a release finalizer.
 func ImagePyramidFromID(id objc.ID) *ImagePyramid {
 	if id == 0 {
 		return nil
 	}
-	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(id)}
+	x := &ImagePyramid{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a downwards 5-tap image pyramid with the default filter kernel and device.
-//
-// NewImagePyramidWithDevice creates a new [ImagePyramid].
-func NewImagePyramidWithDevice(device metal.MTLDevice) *ImagePyramid {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
+// imagePyramidAdopt wraps an Objective-C object that this code just created as a
+// ImagePyramid (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imagePyramidAdopt(id objc.ID) *ImagePyramid {
+	if id == 0 {
+		return nil
+	}
+	x := &ImagePyramid{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initialize a downwards 5-tap image pyramid with a central weight parameter and device.
-//
-// NewImagePyramidWithDeviceCenterWeight creates a new [ImagePyramid].
-func NewImagePyramidWithDeviceCenterWeight(device metal.MTLDevice, centerWeight float32) *ImagePyramid {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:centerWeight:"), device, centerWeight)
-	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
-}
-
-// Initialize a downwards n-tap image pyramid with a custom filter kernel and device.
-//
-// NewImagePyramidWithDeviceKernelWidthKernelHeightWeights creates a new [ImagePyramid].
-func NewImagePyramidWithDeviceKernelWidthKernelHeightWeights(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, kernelWeights *float32) *ImagePyramid {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:weights:"), device, kernelWidth, kernelHeight, kernelWeights)
-	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
-//
-// NewImagePyramidWithCoderDevice creates a new [ImagePyramid].
-func NewImagePyramidWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImagePyramid {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImagePyramid) WithOffset(offset mpscore.MPSOffset) *ImagePyramid {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImagePyramid) WithClipRect(clipRect metal.MTLRegion) *ImagePyramid {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImagePyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImagePyramid) WithOptions(options mpscore.MPSKernelOptions) *ImagePyramid {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImagePyramid) WithLabel(label string) *ImagePyramid {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *ImagePyramid) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// KernelHeight the height of the filter window. Must be an odd number.
+func (x *ImagePyramid) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *ImagePyramid) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// KernelWidth the width of the filter window. Must be an odd number.
+func (x *ImagePyramid) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
-
-func (x *ImagePyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImagePyramid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImagePyramidable is the interface implemented by [ImagePyramid], for mocking and DI.
 type ImagePyramidable interface {
-	Unwrap() *raw.MPSImagePyramid
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImagePyramid
 	WithClipRect(clipRect metal.MTLRegion) *ImagePyramid
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid
-	WithOptions(options mpscore.MPSKernelOptions) *ImagePyramid
 	WithLabel(label string) *ImagePyramid
-	KernelHeight() uint
-	KernelWidth() uint
+	KernelHeight() int
+	KernelWidth() int
 }
 
 var _ ImagePyramidable = (*ImagePyramid)(nil)
+
+// isImagePyramid marks ImagePyramid — and, by embedding promotion, its
+// subclasses — as a member of the ImagePyramid hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ImagePyramid) isImagePyramid() {}
+
+var _ ImagePyramidProvider = (*ImagePyramid)(nil)
+
+var _ UnaryImageKernelProvider = (*ImagePyramid)(nil)
+
+var _ KernelProvider = (*ImagePyramid)(nil)

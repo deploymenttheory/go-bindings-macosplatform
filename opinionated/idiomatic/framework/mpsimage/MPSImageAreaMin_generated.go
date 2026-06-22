@@ -5,74 +5,74 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageAreaMin wraps [raw.MPSImageAreaMin] with a fluent Go API.
+// ImageAreaMin is an idiomatic wrapper over the Objective-C class MPSImageAreaMin.
+//
+// It embeds [ImageAreaMax], promoting that type's methods.
 type ImageAreaMin struct {
-	inner *raw.MPSImageAreaMin
+	ImageAreaMax
 }
 
-// Unwrap returns the underlying [raw.MPSImageAreaMin].
-func (x *ImageAreaMin) Unwrap() *raw.MPSImageAreaMin { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAreaMin) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAreaMinFromID adopts an existing object pointer as a ImageAreaMin (nil for 0).
+// ImageAreaMinFromID adopts an existing Objective-C object as a ImageAreaMin
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAreaMinFromID(id objc.ID) *ImageAreaMin {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(id)}
+	x := &ImageAreaMin{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageAreaMin creates a new [ImageAreaMin].
+// imageAreaMinAdopt wraps an Objective-C object that this code just created as a
+// ImageAreaMin (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAreaMinAdopt(id objc.ID) *ImageAreaMin {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAreaMin{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageAreaMin creates a new ImageAreaMin.
 func NewImageAreaMin() *ImageAreaMin {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAreaMin")), objc.RegisterName("new"))
-	return &ImageAreaMin{inner: raw.MPSImageAreaMinFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageAreaMin")), objc.RegisterName("new"))
+	return imageAreaMinAdopt(_id)
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (x *ImageAreaMin) WithOffset(offset mpscore.MPSOffset) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageAreaMin) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageAreaMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin {
-	x.inner.MPSImageAreaMax.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-func (x *ImageAreaMin) asImageAreaMax() *raw.MPSImageAreaMax { return &x.inner.MPSImageAreaMax }
-
-func (x *ImageAreaMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel
 }
 
 // ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
 type ImageAreaMinable interface {
-	Unwrap() *raw.MPSImageAreaMin
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageAreaMin
 	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMin
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMin
 }
 
 var _ ImageAreaMinable = (*ImageAreaMin)(nil)
+
+var _ ImageAreaMaxProvider = (*ImageAreaMin)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageAreaMin)(nil)

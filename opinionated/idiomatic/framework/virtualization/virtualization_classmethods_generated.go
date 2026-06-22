@@ -6,44 +6,44 @@ package virtualization
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
+// NetworkInterfaces return the list of network interfaces available for bridging.
+//
 // NetworkInterfaces returns the collection as a Go slice.
 func NetworkInterfaces() []*BridgedNetworkInterface {
-	arr := raw.VZBridgedNetworkInterfaceNetworkInterfaces()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *BridgedNetworkInterface {
-		return &BridgedNetworkInterface{inner: raw.VZBridgedNetworkInterfaceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("VZBridgedNetworkInterface")), objc.RegisterName("networkInterfaces"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BridgedNetworkInterface { return BridgedNetworkInterfaceFromID(_id) })
 }
 
-// IsNestedVirtualizationSupported calls the underlying VZGenericPlatformConfigurationIsNestedVirtualizationSupported.
+// IsNestedVirtualizationSupported indicate whether or not nested virtualization is available. Nested virtualization is only available on some hardware and software configurations. It may also be disabled by policy. Use this property to check if support is available for the platform. If nested virtualization is supported, use `nestedVirtualizationEnabled` to enable the feature.
 func IsNestedVirtualizationSupported() bool {
-	return raw.VZGenericPlatformConfigurationIsNestedVirtualizationSupported()
+	_r := objc.Send[bool](objc.ID(_class("VZGenericPlatformConfiguration")), objc.RegisterName("isNestedVirtualizationSupported"))
+	return _r
 }
 
-// MaximumNameLength calls the underlying VZLinuxRosettaAbstractSocketCachingOptionsMaximumNameLength.
-func MaximumNameLength() uint {
-	return raw.VZLinuxRosettaAbstractSocketCachingOptionsMaximumNameLength()
+// MaximumNameLength the maximum allowed length of name, as defined by the sockaddr_un structure in Linux.
+func MaximumNameLength() int {
+	_r := objc.Send[int](objc.ID(_class("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("maximumNameLength"))
+	return _r
 }
 
+// InstallRosetta starts the installation of Rosetta.
+//
 // InstallRosetta blocks until the operation completes or ctx is cancelled.
 func InstallRosetta(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.VZLinuxRosettaDirectoryShareInstallRosettaWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaDirectoryShare")), objc.RegisterName("installRosettaWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -52,42 +52,40 @@ func InstallRosetta(ctx context.Context) error {
 	}
 }
 
-// Availability calls the underlying VZLinuxRosettaDirectoryShareAvailability.
-func Availability() VZLinuxRosettaAvailability {
-	return VZLinuxRosettaAvailability(raw.VZLinuxRosettaDirectoryShareAvailability())
+// Availability check the availability of Rosetta support for the directory share.
+func Availability() LinuxRosettaAvailability {
+	_r := objc.Send[LinuxRosettaAvailability](objc.ID(_class("VZLinuxRosettaDirectoryShare")), objc.RegisterName("availability"))
+	return _r
 }
 
-// MaximumPathLength calls the underlying VZLinuxRosettaUnixSocketCachingOptionsMaximumPathLength.
-func MaximumPathLength() uint {
-	return raw.VZLinuxRosettaUnixSocketCachingOptionsMaximumPathLength()
+// MaximumPathLength the maximum allowed length of path, as defined by the sockaddr_un structure in Linux.
+func MaximumPathLength() int {
+	_r := objc.Send[int](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("maximumPathLength"))
+	return _r
 }
 
-// RandomLocallyAdministeredAddress calls the underlying VZMACAddressRandomLocallyAdministeredAddress.
+// RandomLocallyAdministeredAddress returns a valid, random, locally administered, unicast MAC address.
 func RandomLocallyAdministeredAddress() *MACAddress {
-	_r := raw.VZMACAddressRandomLocallyAdministeredAddress()
-	if _r == nil {
-		return nil
-	}
-	return &MACAddress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("randomLocallyAdministeredAddress"))
+	return MACAddressFromID(_r)
 }
 
+// LoadFileURL load a restore image from a file on the local file system.
+//
 // LoadFileURL blocks until the operation completes or ctx is cancelled.
-func LoadFileURL(ctx context.Context, fileURL string) (*MacOSRestoreImage, error) {
+func LoadFileURL(ctx context.Context, fileURL string) (result *MacOSRestoreImage, err error) {
 	type _result struct {
 		val *MacOSRestoreImage
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.VZMacOSRestoreImageLoadFileURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), func(_p0 *raw.VZMacOSRestoreImage, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MacOSRestoreImage{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MacOSRestoreImageFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("VZMacOSRestoreImage")), objc.RegisterName("loadFileURL:completionHandler:"), rt.FileURL(fileURL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -97,23 +95,22 @@ func LoadFileURL(ctx context.Context, fileURL string) (*MacOSRestoreImage, error
 	}
 }
 
+// FetchLatestSupported fetches the latest restore image supported by this host from the network.
+//
 // FetchLatestSupported blocks until the operation completes or ctx is cancelled.
-func FetchLatestSupported(ctx context.Context) (*MacOSRestoreImage, error) {
+func FetchLatestSupported(ctx context.Context) (result *MacOSRestoreImage, err error) {
 	type _result struct {
 		val *MacOSRestoreImage
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.VZMacOSRestoreImageFetchLatestSupportedWithCompletionHandler(func(_p0 *raw.VZMacOSRestoreImage, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MacOSRestoreImage{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MacOSRestoreImageFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("VZMacOSRestoreImage")), objc.RegisterName("fetchLatestSupportedWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -123,74 +120,99 @@ func FetchLatestSupported(ctx context.Context) (*MacOSRestoreImage, error) {
 	}
 }
 
-// ValidateNameError calls the underlying VZMultipleDirectoryShareValidateNameError.
-func ValidateNameError(name string) (bool, error) {
-	return raw.VZMultipleDirectoryShareValidateNameError(foundation.NSStringStringWithUTF8String(name))
+// ValidateName check if a name is a valid directory name.
+func ValidateName(name string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("validateName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// CanonicalizedNameFromName calls the underlying VZMultipleDirectoryShareCanonicalizedNameFromName.
+// CanonicalizedNameFromName transforms a string to be a valid directory name.
 func CanonicalizedNameFromName(name string) string {
-	_r := raw.VZMultipleDirectoryShareCanonicalizedNameFromName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("canonicalizedNameFromName:"), purego.NSString(name))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ValidateURLError calls the underlying VZNetworkBlockDeviceStorageDeviceAttachmentValidateURLError.
-func ValidateURLError(uRL string) (bool, error) {
-	return raw.VZNetworkBlockDeviceStorageDeviceAttachmentValidateURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+// ValidateURL checks if the URL is a valid network block device URL.
+func ValidateURL(uRL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("validateURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// SpiceAgentPortName calls the underlying VZSpiceAgentPortAttachmentSpiceAgentPortName.
+// SpiceAgentPortName the Spice agent port name. A console port configured with this name will spawn a Spice guest agent if supported by the guest. VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment. VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
 func SpiceAgentPortName() string {
-	_r := raw.VZSpiceAgentPortAttachmentSpiceAgentPortName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("VZSpiceAgentPortAttachment")), objc.RegisterName("spiceAgentPortName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ValidateBlockDeviceIdentifierError calls the underlying VZVirtioBlockDeviceConfigurationValidateBlockDeviceIdentifierError.
-func ValidateBlockDeviceIdentifierError(blockDeviceIdentifier string) (bool, error) {
-	return raw.VZVirtioBlockDeviceConfigurationValidateBlockDeviceIdentifierError(foundation.NSStringStringWithUTF8String(blockDeviceIdentifier))
+// ValidateBlockDeviceIdentifier checks the validity of a block device identifier.
+func ValidateBlockDeviceIdentifier(blockDeviceIdentifier string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("validateBlockDeviceIdentifier:error:"), purego.NSString(blockDeviceIdentifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// ValidateTagError calls the underlying VZVirtioFileSystemDeviceConfigurationValidateTagError.
-func ValidateTagError(tag string) (bool, error) {
-	return raw.VZVirtioFileSystemDeviceConfigurationValidateTagError(foundation.NSStringStringWithUTF8String(tag))
+// ValidateTag checks to see whether a Virtio tag is valid.
+func ValidateTag(tag string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("validateTag:error:"), purego.NSString(tag), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// MacOSGuestAutomountTag calls the underlying VZVirtioFileSystemDeviceConfigurationMacOSGuestAutomountTag.
+// MacOSGuestAutomountTag the macOS automount tag. A device configured with this tag will be automatically mounted in a macOS guest.
 func MacOSGuestAutomountTag() string {
-	_r := raw.VZVirtioFileSystemDeviceConfigurationMacOSGuestAutomountTag()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("macOSGuestAutomountTag"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsSupported calls the underlying VZVirtualMachineIsSupported.
+// IsSupported indicate whether or not virtualization is available. If virtualization is unavailable, no VZVirtualMachineConfiguration will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why virtualization is unavailable.
 func IsSupported() bool {
-	return raw.VZVirtualMachineIsSupported()
+	_r := objc.Send[bool](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("isSupported"))
+	return _r
 }
 
-// MinimumAllowedMemorySize calls the underlying VZVirtualMachineConfigurationMinimumAllowedMemorySize.
+// MinimumAllowedMemorySize minimum amount of memory required by virtual machines.
 func MinimumAllowedMemorySize() uint64 {
-	return raw.VZVirtualMachineConfigurationMinimumAllowedMemorySize()
+	_r := objc.Send[uint64](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("minimumAllowedMemorySize"))
+	return _r
 }
 
-// MaximumAllowedMemorySize calls the underlying VZVirtualMachineConfigurationMaximumAllowedMemorySize.
+// MaximumAllowedMemorySize maximum amount of memory allowed for a virtual machine.
 func MaximumAllowedMemorySize() uint64 {
-	return raw.VZVirtualMachineConfigurationMaximumAllowedMemorySize()
+	_r := objc.Send[uint64](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("maximumAllowedMemorySize"))
+	return _r
 }
 
-// MinimumAllowedCPUCount calls the underlying VZVirtualMachineConfigurationMinimumAllowedCPUCount.
-func MinimumAllowedCPUCount() uint {
-	return raw.VZVirtualMachineConfigurationMinimumAllowedCPUCount()
+// MinimumAllowedCPUCount minimum number of CPUs for a virtual machine.
+func MinimumAllowedCPUCount() int {
+	_r := objc.Send[int](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("minimumAllowedCPUCount"))
+	return _r
 }
 
-// MaximumAllowedCPUCount calls the underlying VZVirtualMachineConfigurationMaximumAllowedCPUCount.
-func MaximumAllowedCPUCount() uint {
-	return raw.VZVirtualMachineConfigurationMaximumAllowedCPUCount()
+// MaximumAllowedCPUCount maximum number of CPUs for a virtual machine.
+func MaximumAllowedCPUCount() int {
+	_r := objc.Send[int](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("maximumAllowedCPUCount"))
+	return _r
 }

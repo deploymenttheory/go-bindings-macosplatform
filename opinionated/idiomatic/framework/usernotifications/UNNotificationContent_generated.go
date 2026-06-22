@@ -5,186 +5,203 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The uneditable content of a notification.
+// NotificationContent is an idiomatic wrapper over the Objective-C class UNNotificationContent.
 //
-// NotificationContent wraps [raw.UNNotificationContent] with a fluent Go API.
+// NotificationContent is an abstract base — you do not construct it directly. Construct one of [MutableNotificationContent] and pass it where a NotificationContent is accepted.
+//
+// The uneditable content of a notification.
 type NotificationContent struct {
-	inner *raw.UNNotificationContent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationContent].
-func (x *NotificationContent) Unwrap() *raw.UNNotificationContent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationContent) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationContentFromID adopts an existing object pointer as a NotificationContent (nil for 0).
+// NotificationContentFromID adopts an existing Objective-C object as a NotificationContent
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationContentFromID(id objc.ID) *NotificationContent {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationContent{inner: raw.UNNotificationContentFromID(id)}
+	x := &NotificationContent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationContent creates a new [NotificationContent].
-func NewNotificationContent() *NotificationContent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationContent")), objc.RegisterName("new"))
-	return &NotificationContent{inner: raw.UNNotificationContentFromID(_id)}
-}
-
-// Returns a copy of the notification that includes content from the specified provider.
-//
-// ContentByUpdatingWithProviderError calls the underlying ContentByUpdatingWithProviderError.
-func (x *NotificationContent) ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error) {
-	_r, _err := x.inner.ContentByUpdatingWithProviderError(provider)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &NotificationContent{inner: _r}, nil
-}
-
-// Attachments returns the collection as a Go slice.
-func (x *NotificationContent) Attachments() []*NotificationAttachment {
-	arr := x.inner.Attachments()
-	if arr == nil {
+// notificationContentAdopt wraps an Objective-C object that this code just created as a
+// NotificationContent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationContentAdopt(id objc.ID) *NotificationContent {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NotificationAttachment {
-		return &NotificationAttachment{inner: raw.UNNotificationAttachmentFromID(purego.Retain(_id))}
-	})
+	x := &NotificationContent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Badge calls the underlying Badge.
-func (x *NotificationContent) Badge() *foundation.NSNumber {
-	return x.inner.Badge()
+// Description returns the object's -description text.
+func (x *NotificationContent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Body calls the underlying Body.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationContent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Attachments wraps the corresponding Objective-C method.
+//
+// Attachments returns the collection as a Go slice.
+func (x *NotificationContent) Attachments() []*NotificationAttachment {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAttachment { return NotificationAttachmentFromID(_id) })
+}
+
+// Badge wraps the corresponding Objective-C method.
+func (x *NotificationContent) Badge() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badge"))
+	return obj.Wrap(_r)
+}
+
+// Body wraps the corresponding Objective-C method.
 func (x *NotificationContent) Body() string {
-	_r := x.inner.Body()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CategoryIdentifier calls the underlying CategoryIdentifier.
+// CategoryIdentifier wraps the corresponding Objective-C method.
 func (x *NotificationContent) CategoryIdentifier() string {
-	_r := x.inner.CategoryIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Subtitle calls the underlying Subtitle.
+// Subtitle wraps the corresponding Objective-C method.
 func (x *NotificationContent) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ThreadIdentifier calls the underlying ThreadIdentifier.
+// ThreadIdentifier wraps the corresponding Objective-C method.
 func (x *NotificationContent) ThreadIdentifier() string {
-	_r := x.inner.ThreadIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("threadIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *NotificationContent) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *NotificationContent) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+// UserInfo wraps the corresponding Objective-C method.
+func (x *NotificationContent) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// The argument to be inserted in the summary for this notification.
-//
-// SummaryArgument calls the underlying SummaryArgument.
+// SummaryArgument the argument to be inserted in the summary for this notification.
 func (x *NotificationContent) SummaryArgument() string {
-	_r := x.inner.SummaryArgument()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summaryArgument"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// A number that indicates how many items in the summary are represented in the summary. For example if a podcast app sends one notification for 3 new episodes in a show, the argument should be the name of the show and the count should be 3. Default is 1 and cannot be 0.
-//
-// SummaryArgumentCount calls the underlying SummaryArgumentCount.
-func (x *NotificationContent) SummaryArgumentCount() uint {
-	return x.inner.SummaryArgumentCount()
+// SummaryArgumentCount a number that indicates how many items in the summary are represented in the summary. For example if a podcast app sends one notification for 3 new episodes in a show, the argument should be the name of the show and the count should be 3. Default is 1 and cannot be 0.
+func (x *NotificationContent) SummaryArgumentCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("summaryArgumentCount"))
+	return _r
 }
 
-// TargetContentIdentifier calls the underlying TargetContentIdentifier.
+// TargetContentIdentifier wraps the corresponding Objective-C method.
 func (x *NotificationContent) TargetContentIdentifier() string {
-	_r := x.inner.TargetContentIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetContentIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// InterruptionLevel calls the underlying InterruptionLevel.
-func (x *NotificationContent) InterruptionLevel() UNNotificationInterruptionLevel {
-	return UNNotificationInterruptionLevel(x.inner.InterruptionLevel())
+// InterruptionLevel wraps the corresponding Objective-C method.
+func (x *NotificationContent) InterruptionLevel() NotificationInterruptionLevel {
+	_r := objc.Send[NotificationInterruptionLevel](objref.IDOf(x), objc.RegisterName("interruptionLevel"))
+	return _r
 }
 
-// RelevanceScore calls the underlying RelevanceScore.
+// RelevanceScore wraps the corresponding Objective-C method.
 func (x *NotificationContent) RelevanceScore() float64 {
-	return x.inner.RelevanceScore()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relevanceScore"))
+	return _r
 }
 
-// FilterCriteria calls the underlying FilterCriteria.
+// FilterCriteria wraps the corresponding Objective-C method.
 func (x *NotificationContent) FilterCriteria() string {
-	_r := x.inner.FilterCriteria()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterCriteria"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *NotificationContent) asNotificationContent() *raw.UNNotificationContent { return x.inner }
 
 // NotificationContentable is the interface implemented by [NotificationContent], for mocking and DI.
 type NotificationContentable interface {
-	Unwrap() *raw.UNNotificationContent
-	ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error)
+	obj.Object
 	Attachments() []*NotificationAttachment
-	Badge() *foundation.NSNumber
+	Badge() obj.Object
 	Body() string
 	CategoryIdentifier() string
 	Subtitle() string
 	ThreadIdentifier() string
 	Title() string
-	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	UserInfo() obj.Object
 	SummaryArgument() string
-	SummaryArgumentCount() uint
+	SummaryArgumentCount() int
 	TargetContentIdentifier() string
-	InterruptionLevel() UNNotificationInterruptionLevel
+	InterruptionLevel() NotificationInterruptionLevel
 	RelevanceScore() float64
 	FilterCriteria() string
 }
 
 var _ NotificationContentable = (*NotificationContent)(nil)
+
+// isNotificationContent marks NotificationContent — and, by embedding promotion, its
+// subclasses — as a member of the NotificationContent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NotificationContent) isNotificationContent() {}
+
+var _ NotificationContentProvider = (*NotificationContent)(nil)

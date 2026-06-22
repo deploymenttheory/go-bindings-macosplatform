@@ -5,115 +5,258 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams wraps [raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams] with a fluent Go API.
-type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams struct {
-	inner *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams is an idiomatic wrapper over the Objective-C class MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.
+//
+// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams is an abstract base — you do not construct it directly. Construct one of [MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams] and pass it where a MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams is accepted.
+type MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams struct {
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams].
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams (nil for 0).
-func MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsFromID adopts an existing Objective-C object as a MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+// (nil for 0), retaining it and registering a release finalizer.
+func MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams{inner: raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID(id)}
-}
-
-// NewMTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams creates a new [MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams].
-func NewMTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams() *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams")), objc.RegisterName("new"))
-	return &MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams{inner: raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID(_id)}
-}
-
-// WithProviderNodeID sets the providerNodeID property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithProviderNodeID(providerNodeID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetProviderNodeID(providerNodeID)
+	x := &MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithVendorID sets the vendorID property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithVendorID(vendorID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetVendorID(vendorID)
+// mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsAdopt(id objc.ID) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithAnnouncementReason sets the announcementReason property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithAnnouncementReason(announcementReason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetAnnouncementReason(announcementReason)
+// Description returns the object's -description text.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithProviderNodeID sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return x
 }
 
-// WithMetadataForNode sets the metadataForNode property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithMetadataForNode(metadataForNode *foundation.NSData) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetMetadataForNode(metadataForNode)
+// WithVendorID sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithVendorID(vendorID obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return x
 }
 
-// WithEndpoint sets the endpoint property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithEndpoint(endpoint *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetEndpoint(endpoint)
+// WithAnnouncementReason sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithAnnouncementReason(announcementReason obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnnouncementReason:"), objref.IDOf(announcementReason))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithMetadataForNode sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithMetadataForNode(metadataForNode obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataForNode:"), objref.IDOf(metadataForNode))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithEndpoint sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return x
 }
 
-// WithProviderNodeId sets the providerNodeId property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithProviderNodeId(providerNodeId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetProviderNodeId(providerNodeId)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// WithVendorId sets the vendorId property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithVendorId(vendorId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
-	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetVendorId(vendorId)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) asMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() *raw.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
-	return &x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+// WithProviderNodeId sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithProviderNodeId(providerNodeId obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeId:"), objref.IDOf(providerNodeId))
+	return x
 }
 
-// MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable interface {
-	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithProviderNodeID(providerNodeID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithVendorID(vendorID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithAnnouncementReason(announcementReason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithMetadataForNode(metadataForNode *foundation.NSData) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithEndpoint(endpoint *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithProviderNodeId(providerNodeId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
-	WithVendorId(vendorId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+// WithVendorId sets the property and returns the receiver so calls can be chained.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithVendorId(vendorId obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
+	return x
 }
 
-var _ MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable = (*MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams)(nil)
+// ProviderNodeID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ProviderNodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerNodeID"))
+	return obj.Wrap(_r)
+}
+
+// SetProviderNodeID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetProviderNodeID(providerNodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
+}
+
+// VendorID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return obj.Wrap(_r)
+}
+
+// SetVendorID wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetVendorID(vendorID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
+}
+
+// AnnouncementReason wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) AnnouncementReason() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("announcementReason"))
+	return obj.Wrap(_r)
+}
+
+// SetAnnouncementReason wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetAnnouncementReason(announcementReason obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnnouncementReason:"), objref.IDOf(announcementReason))
+}
+
+// MetadataForNode wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) MetadataForNode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataForNode"))
+	return obj.Wrap(_r)
+}
+
+// SetMetadataForNode wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetMetadataForNode(metadataForNode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataForNode:"), objref.IDOf(metadataForNode))
+}
+
+// Endpoint wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+	return obj.Wrap(_r)
+}
+
+// SetEndpoint wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetEndpoint(endpoint obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+}
+
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+}
+
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
+}
+
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+}
+
+// ProviderNodeId wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ProviderNodeId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerNodeId"))
+	return obj.Wrap(_r)
+}
+
+// SetProviderNodeId wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetProviderNodeId(providerNodeId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeId:"), objref.IDOf(providerNodeId))
+}
+
+// VendorId wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) VendorId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorId"))
+	return obj.Wrap(_r)
+}
+
+// SetVendorId wraps the corresponding Objective-C method.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetVendorId(vendorId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
+}
+
+// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsable is the interface implemented by [MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams], for mocking and DI.
+type MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsable interface {
+	obj.Object
+	WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithVendorID(vendorID obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithAnnouncementReason(announcementReason obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithMetadataForNode(metadataForNode obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithProviderNodeId(providerNodeId obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	WithVendorId(vendorId obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	ProviderNodeID() obj.Object
+	SetProviderNodeID(providerNodeID obj.Object)
+	VendorID() obj.Object
+	SetVendorID(vendorID obj.Object)
+	AnnouncementReason() obj.Object
+	SetAnnouncementReason(announcementReason obj.Object)
+	MetadataForNode() obj.Object
+	SetMetadataForNode(metadataForNode obj.Object)
+	Endpoint() obj.Object
+	SetEndpoint(endpoint obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
+	ProviderNodeId() obj.Object
+	SetProviderNodeId(providerNodeId obj.Object)
+	VendorId() obj.Object
+	SetVendorId(vendorId obj.Object)
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsable = (*MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams)(nil)
+
+// isMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams marks MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams — and, by embedding promotion, its
+// subclasses — as a member of the MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) isMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() {
+}
+
+var _ MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsProvider = (*MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams)(nil)

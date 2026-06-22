@@ -6,269 +6,209 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
+// LoadAllFromPreferences load all of the App Proxy configurations associated with the calling app that have previously been saved to the Network Extension preferences.
+//
 // LoadAllFromPreferences blocks until the operation completes or ctx is cancelled.
-func LoadAllFromPreferences(ctx context.Context) (*foundation.NSArray[*raw.NEAppProxyProviderManager], error) {
+func LoadAllFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.NEAppProxyProviderManager]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.NEAppProxyProviderManagerLoadAllFromPreferencesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NEAppProxyProviderManager], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("NEAppProxyProviderManager")), objc.RegisterName("loadAllFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.NEAppProxyProviderManager]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// SharedManager calls the underlying NEDNSProxyManagerSharedManager.
+// SharedManager returns a singleton DNS proxy manager instance.
 func SharedManager() *NEDNSProxyManager {
-	_r := raw.NEDNSProxyManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &NEDNSProxyManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEDNSProxyManager")), objc.RegisterName("sharedManager"))
+	return NEDNSProxyManagerFromID(_r)
 }
 
-// NEDNSSettingsManagerSharedManager calls the underlying NEDNSSettingsManagerSharedManager.
+// NEDNSSettingsManagerSharedManager access the single instance of a DNS settings manager.
 func NEDNSSettingsManagerSharedManager() *NEDNSSettingsManager {
-	_r := raw.NEDNSSettingsManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &NEDNSSettingsManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEDNSSettingsManager")), objc.RegisterName("sharedManager"))
+	return NEDNSSettingsManagerFromID(_r)
 }
 
-// AllowVerdict calls the underlying NEFilterDataVerdictAllowVerdict.
+// AllowVerdict creates a verdict that tells the system to pass the current chunk of network data and all subsequent data for the current flow to its final destination.
 func AllowVerdict() *NEFilterDataVerdict {
-	_r := raw.NEFilterDataVerdictAllowVerdict()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("allowVerdict"))
+	return NEFilterDataVerdictFromID(_r)
 }
 
-// DropVerdict calls the underlying NEFilterDataVerdictDropVerdict.
+// DropVerdict creates a verdict that tells the system to drop the current chunk of network data and all subsequent data for the current flow.
 func DropVerdict() *NEFilterDataVerdict {
-	_r := raw.NEFilterDataVerdictDropVerdict()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("dropVerdict"))
+	return NEFilterDataVerdictFromID(_r)
 }
 
-// DataVerdictWithPassBytesPeekBytes calls the underlying NEFilterDataVerdictDataVerdictWithPassBytesPeekBytes.
-func DataVerdictWithPassBytesPeekBytes(passBytes uint, peekBytes uint) *NEFilterDataVerdict {
-	_r := raw.NEFilterDataVerdictDataVerdictWithPassBytesPeekBytes(passBytes, peekBytes)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+// DataVerdictWithPassBytesPeekBytes creates a verdict that tells the system to pass a chunk of network data to its final destination, and specifies the next chunk of data to provide.
+func DataVerdictWithPassBytesPeekBytes(passBytes int, peekBytes int) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("dataVerdictWithPassBytes:peekBytes:"), passBytes, peekBytes)
+	return NEFilterDataVerdictFromID(_r)
 }
 
-// PauseVerdict calls the underlying NEFilterDataVerdictPauseVerdict.
+// PauseVerdict creates a verdict that tells the system to pause the flow.
 func PauseVerdict() *NEFilterDataVerdict {
-	_r := raw.NEFilterDataVerdictPauseVerdict()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterDataVerdict")), objc.RegisterName("pauseVerdict"))
+	return NEFilterDataVerdictFromID(_r)
 }
 
-// NEFilterManagerSharedManager calls the underlying NEFilterManagerSharedManager.
+// NEFilterManagerSharedManager access the single instance of NEFilterManager.
 func NEFilterManagerSharedManager() *NEFilterManager {
-	_r := raw.NEFilterManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterManager")), objc.RegisterName("sharedManager"))
+	return NEFilterManagerFromID(_r)
 }
 
-// NEFilterNewFlowVerdictAllowVerdict calls the underlying NEFilterNewFlowVerdictAllowVerdict.
+// NEFilterNewFlowVerdictAllowVerdict create a verdict that indicates to the system that the all of the new flow’s data should be allowed to pass to its final destination.
 func NEFilterNewFlowVerdictAllowVerdict() *NEFilterNewFlowVerdict {
-	_r := raw.NEFilterNewFlowVerdictAllowVerdict()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterNewFlowVerdict{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("allowVerdict"))
+	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// NEFilterNewFlowVerdictDropVerdict calls the underlying NEFilterNewFlowVerdictDropVerdict.
+// NEFilterNewFlowVerdictDropVerdict create a verdict that indicates to the system that all of the new flow’s data should dropped, and the user should not be given the opportunity to request access.
 func NEFilterNewFlowVerdictDropVerdict() *NEFilterNewFlowVerdict {
-	_r := raw.NEFilterNewFlowVerdictDropVerdict()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterNewFlowVerdict{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("dropVerdict"))
+	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// FilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes calls the underlying NEFilterNewFlowVerdictFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes.
-func FilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes(filterInbound bool, peekInboundBytes uint, filterOutbound bool, peekOutboundBytes uint) *NEFilterNewFlowVerdict {
-	_r := raw.NEFilterNewFlowVerdictFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes(filterInbound, peekInboundBytes, filterOutbound, peekOutboundBytes)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterNewFlowVerdict{inner: _r}
+// FilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes create a verdict that indicates to the system that the filter needs to make a decision about a new flow after seeing a portion of the flow’s data.
+func FilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes(filterInbound bool, peekInboundBytes int, filterOutbound bool, peekOutboundBytes int) *NEFilterNewFlowVerdict {
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes:"), filterInbound, peekInboundBytes, filterOutbound, peekOutboundBytes)
+	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// NEFilterNewFlowVerdictPauseVerdict calls the underlying NEFilterNewFlowVerdictPauseVerdict.
+// NEFilterNewFlowVerdictPauseVerdict creates a verdict that tells the system to pause the flow.
 func NEFilterNewFlowVerdictPauseVerdict() *NEFilterNewFlowVerdict {
-	_r := raw.NEFilterNewFlowVerdictPauseVerdict()
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterNewFlowVerdict{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEFilterNewFlowVerdict")), objc.RegisterName("pauseVerdict"))
+	return NEFilterNewFlowVerdictFromID(_r)
 }
 
-// DefaultRoute calls the underlying NEIPv4RouteDefaultRoute.
-func DefaultRoute() unsafe.Pointer {
-	return raw.NEIPv4RouteDefaultRoute()
-}
-
-// NEIPv6RouteDefaultRoute calls the underlying NEIPv6RouteDefaultRoute.
-func NEIPv6RouteDefaultRoute() unsafe.Pointer {
-	return raw.NEIPv6RouteDefaultRoute()
-}
-
-// StartSystemExtensionMode calls the underlying NEProviderStartSystemExtensionMode.
+// StartSystemExtensionMode starts the Network Extension machinery from inside a System Extension.
 func StartSystemExtensionMode() {
-	raw.NEProviderStartSystemExtensionMode()
+	objc.Send[objc.ID](objc.ID(_class("NEProvider")), objc.RegisterName("startSystemExtensionMode"))
 }
 
-// NERelayManagerSharedManager calls the underlying NERelayManagerSharedManager.
+// NERelayManagerSharedManager access the single instance of a network relay manager.
 func NERelayManagerSharedManager() *NERelayManager {
-	_r := raw.NERelayManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &NERelayManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NERelayManager")), objc.RegisterName("sharedManager"))
+	return NERelayManagerFromID(_r)
 }
 
+// LoadAllManagersFromPreferences asynchronously reads all the relay configurations previously created and saved by the calling app.
+//
 // LoadAllManagersFromPreferences blocks until the operation completes or ctx is cancelled.
-func LoadAllManagersFromPreferences(ctx context.Context) (*foundation.NSArray[*raw.NERelayManager], error) {
+func LoadAllManagersFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.NERelayManager]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.NERelayManagerLoadAllManagersFromPreferencesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NERelayManager], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("NERelayManager")), objc.RegisterName("loadAllManagersFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.NERelayManager]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// NETransparentProxyManagerLoadAllFromPreferences loads all previously-saved transparent proxy configurations.
+//
 // NETransparentProxyManagerLoadAllFromPreferences blocks until the operation completes or ctx is cancelled.
-func NETransparentProxyManagerLoadAllFromPreferences(ctx context.Context) (*foundation.NSArray[*raw.NETransparentProxyManager], error) {
+func NETransparentProxyManagerLoadAllFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.NETransparentProxyManager]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.NETransparentProxyManagerLoadAllFromPreferencesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NETransparentProxyManager], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("NETransparentProxyManager")), objc.RegisterName("loadAllFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.NETransparentProxyManager]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// NETunnelProviderManagerLoadAllFromPreferences read all of the VPN configurations created by the calling app that have previously been saved to the Network Extension preferences.
+//
 // NETunnelProviderManagerLoadAllFromPreferences blocks until the operation completes or ctx is cancelled.
-func NETunnelProviderManagerLoadAllFromPreferences(ctx context.Context) (*foundation.NSArray[*raw.NETunnelProviderManager], error) {
+func NETunnelProviderManagerLoadAllFromPreferences(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.NETunnelProviderManager]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.NETunnelProviderManagerLoadAllFromPreferencesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NETunnelProviderManager], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("NETunnelProviderManager")), objc.RegisterName("loadAllFromPreferencesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.NETunnelProviderManager]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// ForPerAppVPN calls the underlying NETunnelProviderManagerForPerAppVPN.
+// ForPerAppVPN returns a tunnel provider manager for managing a per-app VPN configuration.
 func ForPerAppVPN() *NETunnelProviderManager {
-	_r := raw.NETunnelProviderManagerForPerAppVPN()
-	if _r == nil {
-		return nil
-	}
-	return &NETunnelProviderManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NETunnelProviderManager")), objc.RegisterName("forPerAppVPN"))
+	return NETunnelProviderManagerFromID(_r)
 }
 
-// VerdictForURLCompletionHandler calls the underlying NEURLFilterVerdictForURLCompletionHandler.
-func VerdictForURLCompletionHandler(url string, completionHandler func(NEURLFilterVerdict)) {
-	raw.NEURLFilterVerdictForURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_a0 raw.NEURLFilterVerdict) { completionHandler(NEURLFilterVerdict(_a0)) })
-}
-
-// NEVPNManagerSharedManager calls the underlying NEVPNManagerSharedManager.
+// NEVPNManagerSharedManager access the single instance of NEVPNManager.
 func NEVPNManagerSharedManager() *NEVPNManager {
-	_r := raw.NEVPNManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &NEVPNManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NEVPNManager")), objc.RegisterName("sharedManager"))
+	return NEVPNManagerFromID(_r)
 }
 
-// EndpointWithNameTypeDomain calls the underlying NWBonjourServiceEndpointEndpointWithNameTypeDomain.
+// EndpointWithNameTypeDomain create an endpoint with a Bonjour service name, type, and domain. All fields must be specified.
 func EndpointWithNameTypeDomain(name string, type_ string, domain string) *NWBonjourServiceEndpoint {
-	_r := raw.NWBonjourServiceEndpointEndpointWithNameTypeDomain(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(domain))
-	if _r == nil {
-		return nil
-	}
-	return &NWBonjourServiceEndpoint{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NWBonjourServiceEndpoint")), objc.RegisterName("endpointWithName:type:domain:"), purego.NSString(name), purego.NSString(type_), purego.NSString(domain))
+	return NWBonjourServiceEndpointFromID(_r)
 }
 
-// EndpointWithHostnamePort calls the underlying NWHostEndpointEndpointWithHostnamePort.
+// EndpointWithHostnamePort create a host endpoint with a hostname and port.
 func EndpointWithHostnamePort(hostname string, port string) *NWHostEndpoint {
-	_r := raw.NWHostEndpointEndpointWithHostnamePort(foundation.NSStringStringWithUTF8String(hostname), foundation.NSStringStringWithUTF8String(port))
-	if _r == nil {
-		return nil
-	}
-	return &NWHostEndpoint{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NWHostEndpoint")), objc.RegisterName("endpointWithHostname:port:"), purego.NSString(hostname), purego.NSString(port))
+	return NWHostEndpointFromID(_r)
 }

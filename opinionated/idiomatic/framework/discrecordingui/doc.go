@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package discrecordingui provides a fluent Go API over the macOS DiscRecordingUI framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - SetupPanel: [BurnSetupPanel], [EraseSetupPanel]
 package discrecordingui

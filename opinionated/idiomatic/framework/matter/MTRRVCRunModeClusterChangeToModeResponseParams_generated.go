@@ -5,91 +5,122 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRRVCRunModeClusterChangeToModeResponseParams wraps [raw.MTRRVCRunModeClusterChangeToModeResponseParams] with a fluent Go API.
+// MTRRVCRunModeClusterChangeToModeResponseParams is an idiomatic wrapper over the Objective-C class MTRRVCRunModeClusterChangeToModeResponseParams.
 type MTRRVCRunModeClusterChangeToModeResponseParams struct {
-	inner *raw.MTRRVCRunModeClusterChangeToModeResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRRVCRunModeClusterChangeToModeResponseParams].
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Unwrap() *raw.MTRRVCRunModeClusterChangeToModeResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRRVCRunModeClusterChangeToModeResponseParamsFromID adopts an existing object pointer as a MTRRVCRunModeClusterChangeToModeResponseParams (nil for 0).
+// MTRRVCRunModeClusterChangeToModeResponseParamsFromID adopts an existing Objective-C object as a MTRRVCRunModeClusterChangeToModeResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRRVCRunModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRVCRunModeClusterChangeToModeResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRRVCRunModeClusterChangeToModeResponseParams{inner: raw.MTRRVCRunModeClusterChangeToModeResponseParamsFromID(id)}
+	x := &MTRRVCRunModeClusterChangeToModeResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRRVCRunModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError creates a new [MTRRVCRunModeClusterChangeToModeResponseParams].
-func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRRVCRunModeClusterChangeToModeResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRRVCRunModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRRVCRunModeClusterChangeToModeResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRRVCRunModeClusterChangeToModeResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRRVCRunModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTRRVCRunModeClusterChangeToModeResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRRVCRunModeClusterChangeToModeResponseParams{inner: raw.MTRRVCRunModeClusterChangeToModeResponseParamsFromID(_id)}, nil
-}
-
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatus(status *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeResponseParams {
-	x.inner.SetStatus(status)
+	x := &MTRRVCRunModeClusterChangeToModeResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithStatusText sets the statusText property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRRVCRunModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRRVCRunModeClusterChangeToModeResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRRVCRunModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRRVCRunModeClusterChangeToModeResponseParamsAdopt(_id), nil
+}
+
+// WithStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return x
+}
+
+// WithStatusText sets the property and returns the receiver so calls can be chained.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams {
-	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
-	return x.inner.Status()
+// Status wraps the corresponding Objective-C method.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
-	x.inner.SetStatus(status)
+// SetStatus wraps the corresponding Objective-C method.
+func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
-// StatusText calls the underlying StatusText.
+// StatusText wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() string {
-	_r := x.inner.StatusText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetStatusText calls the underlying SetStatusText.
+// SetStatusText wraps the corresponding Objective-C method.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
-	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 }
 
 // MTRRVCRunModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRRVCRunModeClusterChangeToModeResponseParams], for mocking and DI.
 type MTRRVCRunModeClusterChangeToModeResponseParamsable interface {
-	Unwrap() *raw.MTRRVCRunModeClusterChangeToModeResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeResponseParams
+	obj.Object
+	WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams
 	WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams
-	Status() *foundation.NSNumber
-	SetStatus(status *foundation.NSNumber)
+	Status() obj.Object
+	SetStatus(status obj.Object)
 	StatusText() string
 	SetStatusText(statusText string)
 }

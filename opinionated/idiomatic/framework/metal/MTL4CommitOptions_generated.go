@@ -5,49 +5,76 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents options to configure a commit operation on a command queue.
+// MTL4CommitOptions is an idiomatic wrapper over the Objective-C class MTL4CommitOptions.
 //
-// MTL4CommitOptions wraps [raw.MTL4CommitOptions] with a fluent Go API.
+// Represents options to configure a commit operation on a command queue.
 type MTL4CommitOptions struct {
-	inner *raw.MTL4CommitOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4CommitOptions].
-func (x *MTL4CommitOptions) Unwrap() *raw.MTL4CommitOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4CommitOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4CommitOptionsFromID adopts an existing object pointer as a MTL4CommitOptions (nil for 0).
+// MTL4CommitOptionsFromID adopts an existing Objective-C object as a MTL4CommitOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4CommitOptionsFromID(id objc.ID) *MTL4CommitOptions {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4CommitOptions{inner: raw.MTL4CommitOptionsFromID(id)}
+	x := &MTL4CommitOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4CommitOptions creates a new [MTL4CommitOptions].
+// mTL4CommitOptionsAdopt wraps an Objective-C object that this code just created as a
+// MTL4CommitOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4CommitOptionsAdopt(id objc.ID) *MTL4CommitOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4CommitOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4CommitOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4CommitOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4CommitOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CommitOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTL4CommitOptions creates a new MTL4CommitOptions.
 func NewMTL4CommitOptions() *MTL4CommitOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CommitOptions")), objc.RegisterName("new"))
-	return &MTL4CommitOptions{inner: raw.MTL4CommitOptionsFromID(_id)}
-}
-
-// Registers a commit feedback handler that Metal calls with feedback data when available.
-//
-// AddFeedbackHandler calls the underlying AddFeedbackHandler.
-func (x *MTL4CommitOptions) AddFeedbackHandler(block func(objc.ID)) {
-	x.inner.AddFeedbackHandler(block)
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommitOptions")), objc.RegisterName("new"))
+	return mTL4CommitOptionsAdopt(_id)
 }
 
 // MTL4CommitOptionsable is the interface implemented by [MTL4CommitOptions], for mocking and DI.
 type MTL4CommitOptionsable interface {
-	Unwrap() *raw.MTL4CommitOptions
-	AddFeedbackHandler(block func(objc.ID))
+	obj.Object
 }
 
 var _ MTL4CommitOptionsable = (*MTL4CommitOptions)(nil)

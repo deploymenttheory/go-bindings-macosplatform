@@ -5,137 +5,101 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A playback coordinator subclass that coordinates the playback of custom player objects in a connected group.
+// DelegatingPlaybackCoordinator is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinator.
 //
-// DelegatingPlaybackCoordinator wraps [raw.AVDelegatingPlaybackCoordinator] with a fluent Go API.
+// It embeds [PlaybackCoordinator], promoting that type's methods.
+//
+// A playback coordinator subclass that coordinates the playback of custom player objects in a connected group.
 type DelegatingPlaybackCoordinator struct {
-	inner *raw.AVDelegatingPlaybackCoordinator
+	PlaybackCoordinator
 }
 
-// Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinator].
-func (x *DelegatingPlaybackCoordinator) Unwrap() *raw.AVDelegatingPlaybackCoordinator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DelegatingPlaybackCoordinator) ID() objc.ID { return x.inner.Ptr() }
-
-// DelegatingPlaybackCoordinatorFromID adopts an existing object pointer as a DelegatingPlaybackCoordinator (nil for 0).
+// DelegatingPlaybackCoordinatorFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinator
+// (nil for 0), retaining it and registering a release finalizer.
 func DelegatingPlaybackCoordinatorFromID(id objc.ID) *DelegatingPlaybackCoordinator {
 	if id == 0 {
 		return nil
 	}
-	return &DelegatingPlaybackCoordinator{inner: raw.AVDelegatingPlaybackCoordinatorFromID(id)}
-}
-
-// Creates a playback coordinator for a custom playback object.
-//
-// NewDelegatingPlaybackCoordinatorWithPlaybackControlDelegate creates a new [DelegatingPlaybackCoordinator].
-func NewDelegatingPlaybackCoordinatorWithPlaybackControlDelegate(playbackControlDelegate raw.AVPlaybackCoordinatorPlaybackControlDelegate) *DelegatingPlaybackCoordinator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDelegatingPlaybackCoordinator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlaybackControlDelegate:"), playbackControlDelegate)
-	return &DelegatingPlaybackCoordinator{inner: raw.AVDelegatingPlaybackCoordinatorFromID(_id)}
-}
-
-// The reasons that cause a coordinator to suspend playback.
-//
-// WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
-func (x *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *DelegatingPlaybackCoordinator {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.AVPlaybackCoordinator.SetSuspensionReasonsThatTriggerWaiting(_arr)
+	x := &DelegatingPlaybackCoordinator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-//
-// WithPauseSnapsToMediaTimeOfOriginator sets the pauseSnapsToMediaTimeOfOriginator property and returns the receiver for chaining.
+// delegatingPlaybackCoordinatorAdopt wraps an Objective-C object that this code just created as a
+// DelegatingPlaybackCoordinator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func delegatingPlaybackCoordinatorAdopt(id objc.ID) *DelegatingPlaybackCoordinator {
+	if id == 0 {
+		return nil
+	}
+	x := &DelegatingPlaybackCoordinator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDelegatingPlaybackCoordinator creates a new DelegatingPlaybackCoordinator.
+func NewDelegatingPlaybackCoordinator() *DelegatingPlaybackCoordinator {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinator")), objc.RegisterName("new"))
+	return delegatingPlaybackCoordinatorAdopt(_id)
+}
+
+// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
+func (x *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *DelegatingPlaybackCoordinator {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
+	return x
+}
+
+// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
 func (x *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator {
-	x.inner.AVPlaybackCoordinator.SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
 	return x
 }
 
-// Coordinates a rate change across all participants, waiting for others to become ready, if necessary.
-//
-// CoordinateRateChangeToRateOptions calls the underlying CoordinateRateChangeToRateOptions.
-func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options AVDelegatingPlaybackCoordinatorRateChangeOptions) {
-	x.inner.CoordinateRateChangeToRateOptions(rate, raw.AVDelegatingPlaybackCoordinatorRateChangeOptions(options))
+// CoordinateRateChangeToRateOptions coordinates a rate change across all participants, waiting for others to become ready, if necessary.
+func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateRateChangeToRate:options:"), rate, options)
 }
 
-// Coordinates a seek to the specified time for all connected participants.
-//
-// CoordinateSeekToTimeOptions calls the underlying CoordinateSeekToTimeOptions.
-func (x *DelegatingPlaybackCoordinator) CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options AVDelegatingPlaybackCoordinatorSeekOptions) {
-	x.inner.CoordinateSeekToTimeOptions(time_, raw.AVDelegatingPlaybackCoordinatorSeekOptions(options))
+// TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase tells the coordinator to transition to a new item.
+func (x *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:"), purego.NSString(itemIdentifier), objref.IDOf(snapshotTimebase))
 }
 
-// Tells the coordinator to transition to a new item.
-//
-// TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase calls the underlying TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase.
-func (x *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase unsafe.Pointer) {
-	x.inner.TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(foundation.NSStringStringWithUTF8String(itemIdentifier), snapshotTimebase)
-}
-
-// Tells the coordinator to reissue current play state commands to synchronize the current item to the state of other participants.
-//
-// ReapplyCurrentItemStateToPlaybackControlDelegate calls the underlying ReapplyCurrentItemStateToPlaybackControlDelegate.
+// ReapplyCurrentItemStateToPlaybackControlDelegate tells the coordinator to reissue current play state commands to synchronize the current item to the state of other participants.
 func (x *DelegatingPlaybackCoordinator) ReapplyCurrentItemStateToPlaybackControlDelegate() {
-	x.inner.ReapplyCurrentItemStateToPlaybackControlDelegate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate"))
 }
 
-// The custom player implementation controlled by the coordinator.
-//
-// PlaybackControlDelegate calls the underlying PlaybackControlDelegate.
-func (x *DelegatingPlaybackCoordinator) PlaybackControlDelegate() raw.AVPlaybackCoordinatorPlaybackControlDelegate {
-	return x.inner.PlaybackControlDelegate()
-}
-
-// The item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
-//
-// CurrentItemIdentifier calls the underlying CurrentItemIdentifier.
+// CurrentItemIdentifier the item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
 func (x *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
-	_r := x.inner.CurrentItemIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItemIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DelegatingPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator {
-	return &x.inner.AVPlaybackCoordinator
+	return purego.GoString(_r)
 }
 
 // DelegatingPlaybackCoordinatorable is the interface implemented by [DelegatingPlaybackCoordinator], for mocking and DI.
 type DelegatingPlaybackCoordinatorable interface {
-	Unwrap() *raw.AVDelegatingPlaybackCoordinator
-	WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *DelegatingPlaybackCoordinator
+	obj.Object
+	WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *DelegatingPlaybackCoordinator
 	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator
-	CoordinateRateChangeToRateOptions(rate float32, options AVDelegatingPlaybackCoordinatorRateChangeOptions)
-	CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options AVDelegatingPlaybackCoordinatorSeekOptions)
-	TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase unsafe.Pointer)
+	CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions)
+	TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object)
 	ReapplyCurrentItemStateToPlaybackControlDelegate()
-	PlaybackControlDelegate() raw.AVPlaybackCoordinatorPlaybackControlDelegate
 	CurrentItemIdentifier() string
 }
 
 var _ DelegatingPlaybackCoordinatorable = (*DelegatingPlaybackCoordinator)(nil)
+
+var _ PlaybackCoordinatorProvider = (*DelegatingPlaybackCoordinator)(nil)

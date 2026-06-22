@@ -5,149 +5,148 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// IPAddress wraps [raw.AVBIPAddress] with a fluent Go API.
+// IPAddress is an idiomatic wrapper over the Objective-C class AVBIPAddress.
 type IPAddress struct {
-	inner *raw.AVBIPAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVBIPAddress].
-func (x *IPAddress) Unwrap() *raw.AVBIPAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IPAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// IPAddressFromID adopts an existing object pointer as a IPAddress (nil for 0).
+// IPAddressFromID adopts an existing Objective-C object as a IPAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func IPAddressFromID(id objc.ID) *IPAddress {
 	if id == 0 {
 		return nil
 	}
-	return &IPAddress{inner: raw.AVBIPAddressFromID(id)}
+	x := &IPAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @method	initWithIPv6Address: @abstract	This method initializes the receiver to contain the IPv6 address specified. @param		ipv6Address A pointer to 16 octets of memory containing the IPv6 address. @result	The initialized receiver.
-//
-// NewIPAddressWithIPv6Address creates a new [IPAddress].
-func NewIPAddressWithIPv6Address(ipv6Address *uint8) *IPAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBIPAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv6Address:"), ipv6Address)
-	return &IPAddress{inner: raw.AVBIPAddressFromID(_id)}
+// iPAddressAdopt wraps an Objective-C object that this code just created as a
+// IPAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iPAddressAdopt(id objc.ID) *IPAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &IPAddress{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @method	initWithIPv6AddressData: @abstract	This method initializes the receiver to contain the IPv6 address specified. @param		ipv6Address An NSData containing 16 octets with the IPv6 address. @result	The initialized receiver.
-//
-// NewIPAddressWithIPv6AddressData creates a new [IPAddress].
-func NewIPAddressWithIPv6AddressData(ipv6Address *foundation.NSData) *IPAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBIPAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv6AddressData:"), ipv6Address.Ptr())
-	return &IPAddress{inner: raw.AVBIPAddressFromID(_id)}
+// Description returns the object's -description text.
+func (x *IPAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @method	initWithIPv4Address: @abstract	This method initializes the receiver to contain the IPv4 address specified. @param		ipv4Address A uint32_t containing the IPv4 address in host byte order. @result	The initialized receiver.
-//
-// NewIPAddressWithIPv4Address creates a new [IPAddress].
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IPAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IPAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IPAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIPAddressWithIPv6AddressData this method initializes the receiver to contain the IPv6 address specified.
+func NewIPAddressWithIPv6AddressData(ipv6Address obj.Object) *IPAddress {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBIPAddress")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv6AddressData:"), objref.IDOf(ipv6Address))
+	return iPAddressAdopt(_id)
+}
+
+// NewIPAddressWithIPv4Address this method initializes the receiver to contain the IPv4 address specified.
 func NewIPAddressWithIPv4Address(ipv4Address uint32) *IPAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBIPAddress")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBIPAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv4Address:"), ipv4Address)
-	return &IPAddress{inner: raw.AVBIPAddressFromID(_id)}
+	return iPAddressAdopt(_id)
 }
 
-// @method	initWithSockAddr: @abstract	This method initializes the receiver to contain the address specified. @param		sockAddr A pointer to a sock_addr containing either an IPv4 or IPv6 address. @result	The initialized receiver.
-//
-// NewIPAddressWithSockAddr creates a new [IPAddress].
-func NewIPAddressWithSockAddr(sockAddr unsafe.Pointer) *IPAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBIPAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSockAddr:"), sockAddr)
-	return &IPAddress{inner: raw.AVBIPAddressFromID(_id)}
-}
-
-// @property	ipv6Address @abstract	An NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
-//
-// WithIpv6Address sets the ipv6Address property and returns the receiver for chaining.
-func (x *IPAddress) WithIpv6Address(ipv6Address *foundation.NSData) *IPAddress {
-	x.inner.SetIpv6Address(ipv6Address)
+// WithIpv6Address an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
+func (x *IPAddress) WithIpv6Address(ipv6Address obj.Object) *IPAddress {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
 	return x
 }
 
-// @property	ipv4Address @abstract	An unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
-//
-// WithIpv4Address sets the ipv4Address property and returns the receiver for chaining.
+// WithIpv4Address an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
 func (x *IPAddress) WithIpv4Address(ipv4Address uint32) *IPAddress {
-	x.inner.SetIpv4Address(ipv4Address)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv4Address:"), ipv4Address)
 	return x
 }
 
-// @property	stringRepresentation @abstract	A strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
-//
-// WithStringRepresentation sets the stringRepresentation property and returns the receiver for chaining.
+// WithStringRepresentation a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
 func (x *IPAddress) WithStringRepresentation(stringRepresentation string) *IPAddress {
-	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 	return x
 }
 
-// @property	representsIPv4Address @abstract	A boolean indicating if the address is an IPv4 address.
-//
-// RepresentsIPv4Address calls the underlying RepresentsIPv4Address.
+// RepresentsIPv4Address a boolean indicating if the address is an IPv4 address.
 func (x *IPAddress) RepresentsIPv4Address() bool {
-	return x.inner.RepresentsIPv4Address()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("representsIPv4Address"))
+	return _r
 }
 
-// @property	ipv6Address @abstract	An NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
-//
-// Ipv6Address calls the underlying Ipv6Address.
-func (x *IPAddress) Ipv6Address() *foundation.NSData {
-	return x.inner.Ipv6Address()
+// Ipv6Address an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
+func (x *IPAddress) Ipv6Address() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ipv6Address"))
+	return obj.Wrap(_r)
 }
 
-// SetIpv6Address calls the underlying SetIpv6Address.
-func (x *IPAddress) SetIpv6Address(ipv6Address *foundation.NSData) {
-	x.inner.SetIpv6Address(ipv6Address)
+// SetIpv6Address wraps the corresponding Objective-C method.
+func (x *IPAddress) SetIpv6Address(ipv6Address obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
 }
 
-// @property	ipv4Address @abstract	An unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
-//
-// Ipv4Address calls the underlying Ipv4Address.
+// Ipv4Address an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
 func (x *IPAddress) Ipv4Address() uint32 {
-	return x.inner.Ipv4Address()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("ipv4Address"))
+	return _r
 }
 
-// SetIpv4Address calls the underlying SetIpv4Address.
+// SetIpv4Address wraps the corresponding Objective-C method.
 func (x *IPAddress) SetIpv4Address(ipv4Address uint32) {
-	x.inner.SetIpv4Address(ipv4Address)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv4Address:"), ipv4Address)
 }
 
-// @property	stringRepresentation @abstract	A strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
-//
-// StringRepresentation calls the underlying StringRepresentation.
+// StringRepresentation a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
 func (x *IPAddress) StringRepresentation() string {
-	_r := x.inner.StringRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetStringRepresentation calls the underlying SetStringRepresentation.
+// SetStringRepresentation wraps the corresponding Objective-C method.
 func (x *IPAddress) SetStringRepresentation(stringRepresentation string) {
-	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 }
 
 // IPAddressable is the interface implemented by [IPAddress], for mocking and DI.
 type IPAddressable interface {
-	Unwrap() *raw.AVBIPAddress
-	WithIpv6Address(ipv6Address *foundation.NSData) *IPAddress
+	obj.Object
+	WithIpv6Address(ipv6Address obj.Object) *IPAddress
 	WithIpv4Address(ipv4Address uint32) *IPAddress
 	WithStringRepresentation(stringRepresentation string) *IPAddress
 	RepresentsIPv4Address() bool
-	Ipv6Address() *foundation.NSData
-	SetIpv6Address(ipv6Address *foundation.NSData)
+	Ipv6Address() obj.Object
+	SetIpv6Address(ipv6Address obj.Object)
 	Ipv4Address() uint32
 	SetIpv4Address(ipv4Address uint32)
 	StringRepresentation() string

@@ -5,94 +5,78 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes the properties of a create sparse operation.
+// GraphCreateSparseOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphCreateSparseOpDescriptor.
 //
-// GraphCreateSparseOpDescriptor wraps [raw.MPSGraphCreateSparseOpDescriptor] with a fluent Go API.
+// It embeds [GraphObject], promoting that type's methods.
+//
+// A class that describes the properties of a create sparse operation.
 type GraphCreateSparseOpDescriptor struct {
-	inner *raw.MPSGraphCreateSparseOpDescriptor
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraphCreateSparseOpDescriptor].
-func (x *GraphCreateSparseOpDescriptor) Unwrap() *raw.MPSGraphCreateSparseOpDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphCreateSparseOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphCreateSparseOpDescriptorFromID adopts an existing object pointer as a GraphCreateSparseOpDescriptor (nil for 0).
+// GraphCreateSparseOpDescriptorFromID adopts an existing Objective-C object as a GraphCreateSparseOpDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphCreateSparseOpDescriptorFromID(id objc.ID) *GraphCreateSparseOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphCreateSparseOpDescriptor{inner: raw.MPSGraphCreateSparseOpDescriptorFromID(id)}
+	x := &GraphCreateSparseOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphCreateSparseOpDescriptor creates a new [GraphCreateSparseOpDescriptor].
+// graphCreateSparseOpDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphCreateSparseOpDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphCreateSparseOpDescriptorAdopt(id objc.ID) *GraphCreateSparseOpDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphCreateSparseOpDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGraphCreateSparseOpDescriptor creates a new GraphCreateSparseOpDescriptor.
 func NewGraphCreateSparseOpDescriptor() *GraphCreateSparseOpDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphCreateSparseOpDescriptor")), objc.RegisterName("new"))
-	return &GraphCreateSparseOpDescriptor{inner: raw.MPSGraphCreateSparseOpDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphCreateSparseOpDescriptor")), objc.RegisterName("new"))
+	return graphCreateSparseOpDescriptorAdopt(_id)
 }
 
-// Defines the storage format of the sparse tensor.
-//
-// WithSparseStorageType sets the sparseStorageType property and returns the receiver for chaining.
-func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor {
-	x.inner.SetSparseStorageType(raw.MPSGraphSparseStorageType(sparseStorageType))
+// WithSparseStorageType defines the storage format of the sparse tensor.
+func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType GraphSparseStorageType) *GraphCreateSparseOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
 	return x
 }
 
-// Defines the datatype of the sparse tensor.
-//
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *GraphCreateSparseOpDescriptor) WithDataType(dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor {
-	x.inner.SetDataType(dataType)
-	return x
+// SparseStorageType defines the storage format of the sparse tensor.
+func (x *GraphCreateSparseOpDescriptor) SparseStorageType() GraphSparseStorageType {
+	_r := objc.Send[GraphSparseStorageType](objref.IDOf(x), objc.RegisterName("sparseStorageType"))
+	return _r
 }
 
-// Defines the storage format of the sparse tensor.
-//
-// SparseStorageType calls the underlying SparseStorageType.
-func (x *GraphCreateSparseOpDescriptor) SparseStorageType() MPSGraphSparseStorageType {
-	return MPSGraphSparseStorageType(x.inner.SparseStorageType())
-}
-
-// SetSparseStorageType calls the underlying SetSparseStorageType.
-func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType MPSGraphSparseStorageType) {
-	x.inner.SetSparseStorageType(raw.MPSGraphSparseStorageType(sparseStorageType))
-}
-
-// Defines the datatype of the sparse tensor.
-//
-// DataType calls the underlying DataType.
-func (x *GraphCreateSparseOpDescriptor) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
-}
-
-// SetDataType calls the underlying SetDataType.
-func (x *GraphCreateSparseOpDescriptor) SetDataType(dataType mpscore.MPSDataType) {
-	x.inner.SetDataType(dataType)
-}
-
-func (x *GraphCreateSparseOpDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+// SetSparseStorageType wraps the corresponding Objective-C method.
+func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType GraphSparseStorageType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
 }
 
 // GraphCreateSparseOpDescriptorable is the interface implemented by [GraphCreateSparseOpDescriptor], for mocking and DI.
 type GraphCreateSparseOpDescriptorable interface {
-	Unwrap() *raw.MPSGraphCreateSparseOpDescriptor
-	WithSparseStorageType(sparseStorageType MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor
-	WithDataType(dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor
-	SparseStorageType() MPSGraphSparseStorageType
-	SetSparseStorageType(sparseStorageType MPSGraphSparseStorageType)
-	DataType() mpscore.MPSDataType
-	SetDataType(dataType mpscore.MPSDataType)
+	obj.Object
+	WithSparseStorageType(sparseStorageType GraphSparseStorageType) *GraphCreateSparseOpDescriptor
+	SparseStorageType() GraphSparseStorageType
+	SetSparseStorageType(sparseStorageType GraphSparseStorageType)
 }
 
 var _ GraphCreateSparseOpDescriptorable = (*GraphCreateSparseOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphCreateSparseOpDescriptor)(nil)

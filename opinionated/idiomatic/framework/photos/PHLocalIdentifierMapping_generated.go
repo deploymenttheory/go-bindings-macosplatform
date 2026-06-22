@@ -5,63 +5,86 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains the local identifier result from looking up a cloud identifier, or an error indicating why the lookup failed.
+// LocalIdentifierMapping is an idiomatic wrapper over the Objective-C class PHLocalIdentifierMapping.
 //
-// LocalIdentifierMapping wraps [raw.PHLocalIdentifierMapping] with a fluent Go API.
+// An object that contains the local identifier result from looking up a cloud identifier, or an error indicating why the lookup failed.
 type LocalIdentifierMapping struct {
-	inner *raw.PHLocalIdentifierMapping
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHLocalIdentifierMapping].
-func (x *LocalIdentifierMapping) Unwrap() *raw.PHLocalIdentifierMapping { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalIdentifierMapping) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalIdentifierMappingFromID adopts an existing object pointer as a LocalIdentifierMapping (nil for 0).
+// LocalIdentifierMappingFromID adopts an existing Objective-C object as a LocalIdentifierMapping
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalIdentifierMappingFromID(id objc.ID) *LocalIdentifierMapping {
 	if id == 0 {
 		return nil
 	}
-	return &LocalIdentifierMapping{inner: raw.PHLocalIdentifierMappingFromID(id)}
+	x := &LocalIdentifierMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLocalIdentifierMapping creates a new [LocalIdentifierMapping].
+// localIdentifierMappingAdopt wraps an Objective-C object that this code just created as a
+// LocalIdentifierMapping (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localIdentifierMappingAdopt(id objc.ID) *LocalIdentifierMapping {
+	if id == 0 {
+		return nil
+	}
+	x := &LocalIdentifierMapping{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocalIdentifierMapping) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalIdentifierMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalIdentifierMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LocalIdentifierMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLocalIdentifierMapping creates a new LocalIdentifierMapping.
 func NewLocalIdentifierMapping() *LocalIdentifierMapping {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLocalIdentifierMapping")), objc.RegisterName("new"))
-	return &LocalIdentifierMapping{inner: raw.PHLocalIdentifierMappingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHLocalIdentifierMapping")), objc.RegisterName("new"))
+	return localIdentifierMappingAdopt(_id)
 }
 
-// The \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
-//
-// LocalIdentifier calls the underlying LocalIdentifier.
+// LocalIdentifier the \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
 func (x *LocalIdentifierMapping) LocalIdentifier() string {
-	_r := x.inner.LocalIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-// An error indicating why the \c localIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided cloud identifier. \c PHPhotosErrorMultipleLocalIdentifiersFound if the cloud identifier matched more than one photo library resource, so there were multiple local identifiers found. The array of matching local identifiers can be retrieved from the error's user info via the \c PHLocalIdentifiersErrorKey
-//
-// Error calls the underlying Error.
-func (x *LocalIdentifierMapping) Error() unsafe.Pointer {
-	return x.inner.Error()
+	return purego.GoString(_r)
 }
 
 // LocalIdentifierMappingable is the interface implemented by [LocalIdentifierMapping], for mocking and DI.
 type LocalIdentifierMappingable interface {
-	Unwrap() *raw.PHLocalIdentifierMapping
+	obj.Object
 	LocalIdentifier() string
-	Error() unsafe.Pointer
 }
 
 var _ LocalIdentifierMappingable = (*LocalIdentifierMapping)(nil)

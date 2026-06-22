@@ -5,71 +5,80 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An attachment point that writes data from the guest system to a file.
+// FileSerialPortAttachment is an idiomatic wrapper over the Objective-C class VZFileSerialPortAttachment.
 //
-// FileSerialPortAttachment wraps [raw.VZFileSerialPortAttachment] with a fluent Go API.
+// It embeds [SerialPortAttachment], promoting that type's methods.
+//
+// An attachment point that writes data from the guest system to a file.
 type FileSerialPortAttachment struct {
-	inner *raw.VZFileSerialPortAttachment
+	SerialPortAttachment
 }
 
-// Unwrap returns the underlying [raw.VZFileSerialPortAttachment].
-func (x *FileSerialPortAttachment) Unwrap() *raw.VZFileSerialPortAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileSerialPortAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// FileSerialPortAttachmentFromID adopts an existing object pointer as a FileSerialPortAttachment (nil for 0).
+// FileSerialPortAttachmentFromID adopts an existing Objective-C object as a FileSerialPortAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func FileSerialPortAttachmentFromID(id objc.ID) *FileSerialPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &FileSerialPortAttachment{inner: raw.VZFileSerialPortAttachmentFromID(id)}
+	x := &FileSerialPortAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a file-based serial port attachment object.
-//
-// NewFileSerialPortAttachmentWithURLAppendError creates a new [FileSerialPortAttachment].
-func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool) (*FileSerialPortAttachment, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZFileSerialPortAttachment")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), shouldAppend, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// fileSerialPortAttachmentAdopt wraps an Objective-C object that this code just created as a
+// FileSerialPortAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileSerialPortAttachmentAdopt(id objc.ID) *FileSerialPortAttachment {
+	if id == 0 {
+		return nil
 	}
-	return &FileSerialPortAttachment{inner: raw.VZFileSerialPortAttachmentFromID(_id)}, nil
+	x := &FileSerialPortAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract The URL of the file for the attachment on the local file system.
-//
-// URL calls the underlying URL.
-func (x *FileSerialPortAttachment) URL() *foundation.NSURL {
-	return x.inner.URL()
+// NewFileSerialPortAttachmentWithURLAppendError creates a file-based serial port attachment object.
+func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool) (result *FileSerialPortAttachment, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileSerialPortAttachment")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:error:"), rt.FileURL(url), shouldAppend, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return fileSerialPortAttachmentAdopt(_id), nil
 }
 
-// @abstract True if the file should be opened in append mode, false otherwise.
-//
-// Append calls the underlying Append.
+// URL the URL of the file for the attachment on the local file system.
+func (x *FileSerialPortAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
+}
+
+// Append true if the file should be opened in append mode, false otherwise.
 func (x *FileSerialPortAttachment) Append() bool {
-	return x.inner.Append()
-}
-
-func (x *FileSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment {
-	return &x.inner.VZSerialPortAttachment
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("append"))
+	return _r
 }
 
 // FileSerialPortAttachmentable is the interface implemented by [FileSerialPortAttachment], for mocking and DI.
 type FileSerialPortAttachmentable interface {
-	Unwrap() *raw.VZFileSerialPortAttachment
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 	Append() bool
 }
 
 var _ FileSerialPortAttachmentable = (*FileSerialPortAttachment)(nil)
+
+var _ SerialPortAttachmentProvider = (*FileSerialPortAttachment)(nil)

@@ -5,154 +5,184 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGroupsClusterViewGroupResponseParams wraps [raw.MTRGroupsClusterViewGroupResponseParams] with a fluent Go API.
+// MTRGroupsClusterViewGroupResponseParams is an idiomatic wrapper over the Objective-C class MTRGroupsClusterViewGroupResponseParams.
 type MTRGroupsClusterViewGroupResponseParams struct {
-	inner *raw.MTRGroupsClusterViewGroupResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupsClusterViewGroupResponseParams].
-func (x *MTRGroupsClusterViewGroupResponseParams) Unwrap() *raw.MTRGroupsClusterViewGroupResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupsClusterViewGroupResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupsClusterViewGroupResponseParamsFromID adopts an existing object pointer as a MTRGroupsClusterViewGroupResponseParams (nil for 0).
+// MTRGroupsClusterViewGroupResponseParamsFromID adopts an existing Objective-C object as a MTRGroupsClusterViewGroupResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupsClusterViewGroupResponseParamsFromID(id objc.ID) *MTRGroupsClusterViewGroupResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupsClusterViewGroupResponseParams{inner: raw.MTRGroupsClusterViewGroupResponseParamsFromID(id)}
+	x := &MTRGroupsClusterViewGroupResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRGroupsClusterViewGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRGroupsClusterViewGroupResponseParamsWithResponseValueError creates a new [MTRGroupsClusterViewGroupResponseParams].
-func NewMTRGroupsClusterViewGroupResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGroupsClusterViewGroupResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupsClusterViewGroupResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRGroupsClusterViewGroupResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupsClusterViewGroupResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupsClusterViewGroupResponseParamsAdopt(id objc.ID) *MTRGroupsClusterViewGroupResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRGroupsClusterViewGroupResponseParams{inner: raw.MTRGroupsClusterViewGroupResponseParamsFromID(_id)}, nil
-}
-
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRGroupsClusterViewGroupResponseParams) WithStatus(status *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams {
-	x.inner.SetStatus(status)
+	x := &MTRGroupsClusterViewGroupResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithGroupID sets the groupID property and returns the receiver for chaining.
-func (x *MTRGroupsClusterViewGroupResponseParams) WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams {
-	x.inner.SetGroupID(groupID)
+// Description returns the object's -description text.
+func (x *MTRGroupsClusterViewGroupResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupsClusterViewGroupResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupsClusterViewGroupResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupsClusterViewGroupResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGroupsClusterViewGroupResponseParamsWithResponseValueError initialize an MTRGroupsClusterViewGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRGroupsClusterViewGroupResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGroupsClusterViewGroupResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGroupsClusterViewGroupResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRGroupsClusterViewGroupResponseParamsAdopt(_id), nil
+}
+
+// WithStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterViewGroupResponseParams) WithStatus(status obj.Object) *MTRGroupsClusterViewGroupResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithGroupName sets the groupName property and returns the receiver for chaining.
+// WithGroupID sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterViewGroupResponseParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterViewGroupResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
+	return x
+}
+
+// WithGroupName sets the property and returns the receiver so calls can be chained.
 func (x *MTRGroupsClusterViewGroupResponseParams) WithGroupName(groupName string) *MTRGroupsClusterViewGroupResponseParams {
-	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGroupsClusterViewGroupResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGroupsClusterViewGroupResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterViewGroupResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// WithGroupId sets the groupId property and returns the receiver for chaining.
-func (x *MTRGroupsClusterViewGroupResponseParams) WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams {
-	x.inner.SetGroupId(groupId)
+// WithGroupId sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterViewGroupResponseParams) WithGroupId(groupId obj.Object) *MTRGroupsClusterViewGroupResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *MTRGroupsClusterViewGroupResponseParams) Status() *foundation.NSNumber {
-	return x.inner.Status()
+// Status wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *MTRGroupsClusterViewGroupResponseParams) SetStatus(status *foundation.NSNumber) {
-	x.inner.SetStatus(status)
+// SetStatus wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetStatus(status obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
-// GroupID calls the underlying GroupID.
-func (x *MTRGroupsClusterViewGroupResponseParams) GroupID() *foundation.NSNumber {
-	return x.inner.GroupID()
+// GroupID wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) GroupID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupID"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupID calls the underlying SetGroupID.
-func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupID(groupID *foundation.NSNumber) {
-	x.inner.SetGroupID(groupID)
+// SetGroupID wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupID(groupID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 }
 
-// GroupName calls the underlying GroupName.
+// GroupName wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterViewGroupResponseParams) GroupName() string {
-	_r := x.inner.GroupName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetGroupName calls the underlying SetGroupName.
+// SetGroupName wraps the corresponding Objective-C method.
 func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupName(groupName string) {
-	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGroupsClusterViewGroupResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGroupsClusterViewGroupResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGroupsClusterViewGroupResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// GroupId calls the underlying GroupId.
-func (x *MTRGroupsClusterViewGroupResponseParams) GroupId() *foundation.NSNumber {
-	return x.inner.GroupId()
+// GroupId wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) GroupId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupId calls the underlying SetGroupId.
-func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupId(groupId *foundation.NSNumber) {
-	x.inner.SetGroupId(groupId)
+// SetGroupId wraps the corresponding Objective-C method.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupId(groupId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 }
 
 // MTRGroupsClusterViewGroupResponseParamsable is the interface implemented by [MTRGroupsClusterViewGroupResponseParams], for mocking and DI.
 type MTRGroupsClusterViewGroupResponseParamsable interface {
-	Unwrap() *raw.MTRGroupsClusterViewGroupResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
-	WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
+	obj.Object
+	WithStatus(status obj.Object) *MTRGroupsClusterViewGroupResponseParams
+	WithGroupID(groupID obj.Object) *MTRGroupsClusterViewGroupResponseParams
 	WithGroupName(groupName string) *MTRGroupsClusterViewGroupResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
-	WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
-	Status() *foundation.NSNumber
-	SetStatus(status *foundation.NSNumber)
-	GroupID() *foundation.NSNumber
-	SetGroupID(groupID *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterViewGroupResponseParams
+	WithGroupId(groupId obj.Object) *MTRGroupsClusterViewGroupResponseParams
+	Status() obj.Object
+	SetStatus(status obj.Object)
+	GroupID() obj.Object
+	SetGroupID(groupID obj.Object)
 	GroupName() string
 	SetGroupName(groupName string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	GroupId() *foundation.NSNumber
-	SetGroupId(groupId *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	GroupId() obj.Object
+	SetGroupId(groupId obj.Object)
 }
 
 var _ MTRGroupsClusterViewGroupResponseParamsable = (*MTRGroupsClusterViewGroupResponseParams)(nil)

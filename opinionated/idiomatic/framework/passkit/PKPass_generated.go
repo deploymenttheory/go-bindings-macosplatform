@@ -5,199 +5,234 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that represents a single pass.
+// Pass is an idiomatic wrapper over the Objective-C class PKPass.
 //
-// Pass wraps [raw.PKPass] with a fluent Go API.
+// Pass is an abstract base — you do not construct it directly. Construct one of [SecureElementPass] and pass it where a Pass is accepted.
+//
+// An object that represents a single pass.
 type Pass struct {
-	inner *raw.PKPass
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPass].
-func (x *Pass) Unwrap() *raw.PKPass { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Pass) ID() objc.ID { return x.inner.Ptr() }
-
-// PassFromID adopts an existing object pointer as a Pass (nil for 0).
+// PassFromID adopts an existing Objective-C object as a Pass
+// (nil for 0), retaining it and registering a release finalizer.
 func PassFromID(id objc.ID) *Pass {
 	if id == 0 {
 		return nil
 	}
-	return &Pass{inner: raw.PKPassFromID(id)}
+	x := &Pass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a pass using the data you provide.
-//
-// NewPassWithDataError creates a new [Pass].
-func NewPassWithDataError(data *foundation.NSData) (*Pass, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPass")), objc.RegisterName("alloc"))
+// passAdopt wraps an Objective-C object that this code just created as a
+// Pass (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passAdopt(id objc.ID) *Pass {
+	if id == 0 {
+		return nil
+	}
+	x := &Pass{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Pass) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Pass) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Pass) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Pass) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPassWithDataError creates a pass using the data you provide.
+func NewPassWithDataError(data obj.Object) (result *Pass, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPass")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), data.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Pass{inner: raw.PKPassFromID(_id)}, nil
+	return passAdopt(_id), nil
 }
 
-// Returns the localized value for a specified field of the pass.
-//
-// LocalizedValueForFieldKey calls the underlying LocalizedValueForFieldKey.
-func (x *Pass) LocalizedValueForFieldKey(key string) objc.ID {
-	return x.inner.LocalizedValueForFieldKey(foundation.NSStringStringWithUTF8String(key))
+// LocalizedValueForFieldKey returns the localized value for a specified field of the pass.
+func (x *Pass) LocalizedValueForFieldKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedValueForFieldKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// PassType calls the underlying PassType.
-func (x *Pass) PassType() PKPassType {
-	return PKPassType(x.inner.PassType())
+// PassType wraps the corresponding Objective-C method.
+func (x *Pass) PassType() PassType {
+	_r := objc.Send[PassType](objref.IDOf(x), objc.RegisterName("passType"))
+	return _r
 }
 
-// PaymentPass calls the underlying PaymentPass.
+// PaymentPass wraps the corresponding Objective-C method.
 func (x *Pass) PaymentPass() *PaymentPass {
-	_r := x.inner.PaymentPass()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentPass{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentPass"))
+	return PaymentPassFromID(_r)
 }
 
-// SecureElementPass calls the underlying SecureElementPass.
+// SecureElementPass wraps the corresponding Objective-C method.
 func (x *Pass) SecureElementPass() *SecureElementPass {
-	_r := x.inner.SecureElementPass()
-	if _r == nil {
-		return nil
-	}
-	return &SecureElementPass{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secureElementPass"))
+	return SecureElementPassFromID(_r)
 }
 
-// SerialNumber calls the underlying SerialNumber.
+// SerialNumber wraps the corresponding Objective-C method.
 func (x *Pass) SerialNumber() string {
-	_r := x.inner.SerialNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serialNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PassTypeIdentifier calls the underlying PassTypeIdentifier.
+// PassTypeIdentifier wraps the corresponding Objective-C method.
 func (x *Pass) PassTypeIdentifier() string {
-	_r := x.inner.PassTypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passTypeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// WebServiceURL calls the underlying WebServiceURL.
-func (x *Pass) WebServiceURL() *foundation.NSURL {
-	return x.inner.WebServiceURL()
+// WebServiceURL wraps the corresponding Objective-C method.
+func (x *Pass) WebServiceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webServiceURL"))
+	return obj.Wrap(_r)
 }
 
-// AuthenticationToken calls the underlying AuthenticationToken.
+// AuthenticationToken wraps the corresponding Objective-C method.
 func (x *Pass) AuthenticationToken() string {
-	_r := x.inner.AuthenticationToken()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationToken"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LocalizedName calls the underlying LocalizedName.
+// LocalizedName wraps the corresponding Objective-C method.
 func (x *Pass) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LocalizedDescription calls the underlying LocalizedDescription.
+// LocalizedDescription wraps the corresponding Objective-C method.
 func (x *Pass) LocalizedDescription() string {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// OrganizationName calls the underlying OrganizationName.
+// OrganizationName wraps the corresponding Objective-C method.
 func (x *Pass) OrganizationName() string {
-	_r := x.inner.OrganizationName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("organizationName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RelevantDate calls the underlying RelevantDate.
-func (x *Pass) RelevantDate() *foundation.NSDate {
-	return x.inner.RelevantDate()
+// RelevantDate wraps the corresponding Objective-C method.
+func (x *Pass) RelevantDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relevantDate"))
+	return obj.Wrap(_r)
 }
 
+// RelevantDates wraps the corresponding Objective-C method.
+//
 // RelevantDates returns the collection as a Go slice.
 func (x *Pass) RelevantDates() []*PassRelevantDate {
-	arr := x.inner.RelevantDates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PassRelevantDate {
-		return &PassRelevantDate{inner: raw.PKPassRelevantDateFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relevantDates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PassRelevantDate { return PassRelevantDateFromID(_id) })
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *Pass) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+// UserInfo wraps the corresponding Objective-C method.
+func (x *Pass) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// PassURL calls the underlying PassURL.
-func (x *Pass) PassURL() *foundation.NSURL {
-	return x.inner.PassURL()
+// PassURL wraps the corresponding Objective-C method.
+func (x *Pass) PassURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passURL"))
+	return obj.Wrap(_r)
 }
 
-// IsRemotePass calls the underlying IsRemotePass.
+// IsRemotePass wraps the corresponding Objective-C method.
 func (x *Pass) IsRemotePass() bool {
-	return x.inner.IsRemotePass()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemotePass"))
+	return _r
 }
 
-// DeviceName calls the underlying DeviceName.
+// DeviceName wraps the corresponding Objective-C method.
 func (x *Pass) DeviceName() string {
-	_r := x.inner.DeviceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Pass) asPass() *raw.PKPass { return x.inner }
 
 // Passable is the interface implemented by [Pass], for mocking and DI.
 type Passable interface {
-	Unwrap() *raw.PKPass
-	LocalizedValueForFieldKey(key string) objc.ID
-	PassType() PKPassType
+	obj.Object
+	LocalizedValueForFieldKey(key string) obj.Object
+	PassType() PassType
 	PaymentPass() *PaymentPass
 	SecureElementPass() *SecureElementPass
 	SerialNumber() string
 	PassTypeIdentifier() string
-	WebServiceURL() *foundation.NSURL
+	WebServiceURL() obj.Object
 	AuthenticationToken() string
 	LocalizedName() string
 	LocalizedDescription() string
 	OrganizationName() string
-	RelevantDate() *foundation.NSDate
+	RelevantDate() obj.Object
 	RelevantDates() []*PassRelevantDate
-	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
-	PassURL() *foundation.NSURL
+	UserInfo() obj.Object
+	PassURL() obj.Object
 	IsRemotePass() bool
 	DeviceName() string
 }
 
 var _ Passable = (*Pass)(nil)
+
+// isPass marks Pass — and, by embedding promotion, its
+// subclasses — as a member of the Pass hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Pass) isPass() {}
+
+var _ PassProvider = (*Pass)(nil)

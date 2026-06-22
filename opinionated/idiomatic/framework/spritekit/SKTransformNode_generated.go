@@ -5,323 +5,242 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A node that allows its children to rotate in 3D.
+// TransformNode is an idiomatic wrapper over the Objective-C class SKTransformNode.
 //
-// TransformNode wraps [raw.SKTransformNode] with a fluent Go API.
+// It embeds [Node], promoting that type's methods.
+//
+// A node that allows its children to rotate in 3D.
 type TransformNode struct {
-	inner *raw.SKTransformNode
+	Node
 }
 
-// Unwrap returns the underlying [raw.SKTransformNode].
-func (x *TransformNode) Unwrap() *raw.SKTransformNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformNode) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformNodeFromID adopts an existing object pointer as a TransformNode (nil for 0).
+// TransformNodeFromID adopts an existing Objective-C object as a TransformNode
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformNodeFromID(id objc.ID) *TransformNode {
 	if id == 0 {
 		return nil
 	}
-	return &TransformNode{inner: raw.SKTransformNodeFromID(id)}
+	x := &TransformNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTransformNode creates a new [TransformNode].
+// transformNodeAdopt wraps an Objective-C object that this code just created as a
+// TransformNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformNodeAdopt(id objc.ID) *TransformNode {
+	if id == 0 {
+		return nil
+	}
+	x := &TransformNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTransformNode creates a new TransformNode.
 func NewTransformNode() *TransformNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTransformNode")), objc.RegisterName("new"))
-	return &TransformNode{inner: raw.SKTransformNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKTransformNode")), objc.RegisterName("new"))
+	return transformNodeAdopt(_id)
 }
 
-// WithXRotation sets the xRotation property and returns the receiver for chaining.
+// WithXRotation sets the property and returns the receiver so calls can be chained.
 func (x *TransformNode) WithXRotation(xRotation float64) *TransformNode {
-	x.inner.SetXRotation(xRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXRotation:"), xRotation)
 	return x
 }
 
-// WithYRotation sets the yRotation property and returns the receiver for chaining.
+// WithYRotation sets the property and returns the receiver so calls can be chained.
 func (x *TransformNode) WithYRotation(yRotation float64) *TransformNode {
-	x.inner.SetYRotation(yRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYRotation:"), yRotation)
 	return x
 }
 
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
+// WithPosition the position of the node in its parent’s coordinate system.
 func (x *TransformNode) WithPosition(position corefoundation.CGPoint) *TransformNode {
-	x.inner.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition the height of the node relative to its parent.
 func (x *TransformNode) WithZPosition(zPosition float64) *TransformNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *TransformNode) WithZRotation(zRotation float64) *TransformNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *TransformNode) WithXScale(xScale float64) *TransformNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *TransformNode) WithYScale(yScale float64) *TransformNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *TransformNode) WithSpeed(speed float64) *TransformNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *TransformNode) WithAlpha(alpha float64) *TransformNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *TransformNode) WithPaused(paused bool) *TransformNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *TransformNode) WithHidden(hidden bool) *TransformNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the node’s assignable name.
 func (x *TransformNode) WithName(name string) *TransformNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody the physics body associated with the node.
 func (x *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *TransformNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TransformNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData a dictionary containing arbitrary data.
+func (x *TransformNode) WithUserData(userData obj.Object) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *TransformNode) WithConstraints(items ...*raw.SKConstraint) *TransformNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints a list of constraints to apply to the node.
+func (x *TransformNode) WithConstraints(items ...*Constraint) *TransformNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *TransformNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TransformNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
+func (x *TransformNode) WithAttributeValues(attributeValues obj.Object) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *TransformNode) WithAccessibilityElement(accessibilityElement bool) *TransformNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *TransformNode) WithAccessibilityRole(accessibilityRole string) *TransformNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *TransformNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *TransformNode) WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
 func (x *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *TransformNode) WithAccessibilityParent(accessibilityParent objc.ID) *TransformNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent the user interface element that contains this element.
+func (x *TransformNode) WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *TransformNode) WithAccessibilityHelp(accessibilityHelp string) *TransformNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *TransformNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// SetEulerAngles calls the underlying SetEulerAngles.
-func (x *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
-	x.inner.SetEulerAngles(euler)
-}
-
-// EulerAngles calls the underlying EulerAngles.
-func (x *TransformNode) EulerAngles() unsafe.Pointer {
-	return x.inner.EulerAngles()
-}
-
-// SetRotationMatrix calls the underlying SetRotationMatrix.
-func (x *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
-	x.inner.SetRotationMatrix(rotationMatrix)
-}
-
-// RotationMatrix calls the underlying RotationMatrix.
-func (x *TransformNode) RotationMatrix() unsafe.Pointer {
-	return x.inner.RotationMatrix()
-}
-
-// SetQuaternion calls the underlying SetQuaternion.
-func (x *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
-	x.inner.SetQuaternion(quaternion)
-}
-
-// Quaternion calls the underlying Quaternion.
-func (x *TransformNode) Quaternion() unsafe.Pointer {
-	return x.inner.Quaternion()
-}
-
-// XRotation calls the underlying XRotation.
+// XRotation wraps the corresponding Objective-C method.
 func (x *TransformNode) XRotation() float64 {
-	return x.inner.XRotation()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xRotation"))
+	return _r
 }
 
-// SetXRotation calls the underlying SetXRotation.
+// SetXRotation wraps the corresponding Objective-C method.
 func (x *TransformNode) SetXRotation(xRotation float64) {
-	x.inner.SetXRotation(xRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXRotation:"), xRotation)
 }
 
-// YRotation calls the underlying YRotation.
+// YRotation wraps the corresponding Objective-C method.
 func (x *TransformNode) YRotation() float64 {
-	return x.inner.YRotation()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yRotation"))
+	return _r
 }
 
-// SetYRotation calls the underlying SetYRotation.
+// SetYRotation wraps the corresponding Objective-C method.
 func (x *TransformNode) SetYRotation(yRotation float64) {
-	x.inner.SetYRotation(yRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYRotation:"), yRotation)
 }
-
-func (x *TransformNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // TransformNodeable is the interface implemented by [TransformNode], for mocking and DI.
 type TransformNodeable interface {
-	Unwrap() *raw.SKTransformNode
+	obj.Object
 	WithXRotation(xRotation float64) *TransformNode
 	WithYRotation(yRotation float64) *TransformNode
 	WithPosition(position corefoundation.CGPoint) *TransformNode
@@ -336,25 +255,19 @@ type TransformNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode
 	WithName(name string) *TransformNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TransformNode
+	WithUserData(userData obj.Object) *TransformNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode
-	WithConstraints(items ...*raw.SKConstraint) *TransformNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TransformNode
+	WithConstraints(items ...*Constraint) *TransformNode
+	WithAttributeValues(attributeValues obj.Object) *TransformNode
 	WithAccessibilityElement(accessibilityElement bool) *TransformNode
 	WithAccessibilityRole(accessibilityRole string) *TransformNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode
 	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *TransformNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode
 	WithAccessibilityHelp(accessibilityHelp string) *TransformNode
 	WithAccessibilityLabel(accessibilityLabel string) *TransformNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode
-	SetEulerAngles(euler unsafe.Pointer)
-	EulerAngles() unsafe.Pointer
-	SetRotationMatrix(rotationMatrix unsafe.Pointer)
-	RotationMatrix() unsafe.Pointer
-	SetQuaternion(quaternion unsafe.Pointer)
-	Quaternion() unsafe.Pointer
 	XRotation() float64
 	SetXRotation(xRotation float64)
 	YRotation() float64
@@ -362,3 +275,5 @@ type TransformNodeable interface {
 }
 
 var _ TransformNodeable = (*TransformNode)(nil)
+
+var _ NodeProvider = (*TransformNode)(nil)

@@ -5,67 +5,93 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an unsent database modification.
+// SyncEnginePendingDatabaseChange is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingDatabaseChange.
 //
-// SyncEnginePendingDatabaseChange wraps [raw.CKSyncEnginePendingDatabaseChange] with a fluent Go API.
+// SyncEnginePendingDatabaseChange is an abstract base — you do not construct it directly. Construct one of [SyncEnginePendingZoneDelete], [SyncEnginePendingZoneSave] and pass it where a SyncEnginePendingDatabaseChange is accepted.
+//
+// An object that describes an unsent database modification.
 type SyncEnginePendingDatabaseChange struct {
-	inner *raw.CKSyncEnginePendingDatabaseChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEnginePendingDatabaseChange].
-func (x *SyncEnginePendingDatabaseChange) Unwrap() *raw.CKSyncEnginePendingDatabaseChange {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEnginePendingDatabaseChange) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEnginePendingDatabaseChangeFromID adopts an existing object pointer as a SyncEnginePendingDatabaseChange (nil for 0).
+// SyncEnginePendingDatabaseChangeFromID adopts an existing Objective-C object as a SyncEnginePendingDatabaseChange
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEnginePendingDatabaseChangeFromID(id objc.ID) *SyncEnginePendingDatabaseChange {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEnginePendingDatabaseChange{inner: raw.CKSyncEnginePendingDatabaseChangeFromID(id)}
+	x := &SyncEnginePendingDatabaseChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEnginePendingDatabaseChange creates a new [SyncEnginePendingDatabaseChange].
-func NewSyncEnginePendingDatabaseChange() *SyncEnginePendingDatabaseChange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingDatabaseChange")), objc.RegisterName("new"))
-	return &SyncEnginePendingDatabaseChange{inner: raw.CKSyncEnginePendingDatabaseChangeFromID(_id)}
-}
-
-// The identifier of the record zone to change.
-//
-// ZoneID calls the underlying ZoneID.
-func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
-	_r := x.inner.ZoneID()
-	if _r == nil {
+// syncEnginePendingDatabaseChangeAdopt wraps an Objective-C object that this code just created as a
+// SyncEnginePendingDatabaseChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEnginePendingDatabaseChangeAdopt(id objc.ID) *SyncEnginePendingDatabaseChange {
+	if id == 0 {
 		return nil
 	}
-	return &RecordZoneID{inner: _r}
+	x := &SyncEnginePendingDatabaseChange{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The type of database change.
-//
-// Type calls the underlying Type.
-func (x *SyncEnginePendingDatabaseChange) Type() CKSyncEnginePendingDatabaseChangeType {
-	return CKSyncEnginePendingDatabaseChangeType(x.inner.Type())
+// Description returns the object's -description text.
+func (x *SyncEnginePendingDatabaseChange) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *SyncEnginePendingDatabaseChange) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange {
-	return x.inner
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEnginePendingDatabaseChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEnginePendingDatabaseChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEnginePendingDatabaseChange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// ZoneID the identifier of the record zone to change.
+func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+	return RecordZoneIDFromID(_r)
+}
+
+// Type the type of database change.
+func (x *SyncEnginePendingDatabaseChange) Type() SyncEnginePendingDatabaseChangeType {
+	_r := objc.Send[SyncEnginePendingDatabaseChangeType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // SyncEnginePendingDatabaseChangeable is the interface implemented by [SyncEnginePendingDatabaseChange], for mocking and DI.
 type SyncEnginePendingDatabaseChangeable interface {
-	Unwrap() *raw.CKSyncEnginePendingDatabaseChange
+	obj.Object
 	ZoneID() *RecordZoneID
-	Type() CKSyncEnginePendingDatabaseChangeType
+	Type() SyncEnginePendingDatabaseChangeType
 }
 
 var _ SyncEnginePendingDatabaseChangeable = (*SyncEnginePendingDatabaseChange)(nil)
+
+// isSyncEnginePendingDatabaseChange marks SyncEnginePendingDatabaseChange — and, by embedding promotion, its
+// subclasses — as a member of the SyncEnginePendingDatabaseChange hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SyncEnginePendingDatabaseChange) isSyncEnginePendingDatabaseChange() {}
+
+var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingDatabaseChange)(nil)

@@ -5,61 +5,72 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMFileList wraps [raw.DOMFileList] with a fluent Go API.
+// DOMFileList is an idiomatic wrapper over the Objective-C class DOMFileList.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMFileList struct {
-	inner *raw.DOMFileList
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMFileList].
-func (x *DOMFileList) Unwrap() *raw.DOMFileList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMFileList) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMFileListFromID adopts an existing object pointer as a DOMFileList (nil for 0).
+// DOMFileListFromID adopts an existing Objective-C object as a DOMFileList
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMFileListFromID(id objc.ID) *DOMFileList {
 	if id == 0 {
 		return nil
 	}
-	return &DOMFileList{inner: raw.DOMFileListFromID(id)}
+	x := &DOMFileList{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMFileList creates a new [DOMFileList].
-func NewDOMFileList() *DOMFileList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMFileList")), objc.RegisterName("new"))
-	return &DOMFileList{inner: raw.DOMFileListFromID(_id)}
-}
-
-// Item calls the underlying Item.
-func (x *DOMFileList) Item(index uint) *DOMFile {
-	_r := x.inner.Item(index)
-	if _r == nil {
+// dOMFileListAdopt wraps an Objective-C object that this code just created as a
+// DOMFileList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMFileListAdopt(id objc.ID) *DOMFileList {
+	if id == 0 {
 		return nil
 	}
-	return &DOMFile{inner: _r}
+	x := &DOMFileList{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Length calls the underlying Length.
-func (x *DOMFileList) Length() uint {
-	return x.inner.Length()
+// NewDOMFileList creates a new DOMFileList.
+func NewDOMFileList() *DOMFileList {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMFileList")), objc.RegisterName("new"))
+	return dOMFileListAdopt(_id)
 }
 
-func (x *DOMFileList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
+// Item wraps the corresponding Objective-C method.
+func (x *DOMFileList) Item(index int) *DOMFile {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMFileFromID(_r)
+}
 
-func (x *DOMFileList) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// Length wraps the corresponding Objective-C method.
+func (x *DOMFileList) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // DOMFileListable is the interface implemented by [DOMFileList], for mocking and DI.
 type DOMFileListable interface {
-	Unwrap() *raw.DOMFileList
-	Item(index uint) *DOMFile
-	Length() uint
+	obj.Object
+	Item(index int) *DOMFile
+	Length() int
 }
 
 var _ DOMFileListable = (*DOMFileList)(nil)
+
+var _ DOMObjectProvider = (*DOMFileList)(nil)
+
+var _ WebScriptObjectProvider = (*DOMFileList)(nil)

@@ -5,43 +5,79 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common base class for all Metal Performance Shaders Graph objects.
+// GraphObject is an idiomatic wrapper over the Objective-C class MPSGraphObject.
 //
-// GraphObject wraps [raw.MPSGraphObject] with a fluent Go API.
+// GraphObject is an abstract base — you do not construct it directly. Construct one of [GraphCompilationDescriptor], [GraphConvolution2DOpDescriptor], [GraphConvolution3DOpDescriptor], [GraphCreateSparseOpDescriptor], [GraphDepthwiseConvolution2DOpDescriptor], [GraphDepthwiseConvolution3DOpDescriptor], [GraphDevice], [GraphExecutableExecutionDescriptor], [GraphExecutableSerializationDescriptor], [GraphExecutable], [GraphExecutionDescriptor], [GraphFFTDescriptor], [GraphGRUDescriptor], [GraphImToColOpDescriptor], [GraphLSTMDescriptor], [GraphOperation], [GraphPooling2DOpDescriptor], [GraphPooling4DOpDescriptor], [GraphRandomOpDescriptor], [GraphSingleGateRNNDescriptor], [GraphStencilOpDescriptor], [GraphTensorData], [GraphTensor], [GraphType], [Graph] and pass it where a GraphObject is accepted.
+//
+// The common base class for all Metal Performance Shaders Graph objects.
 type GraphObject struct {
-	inner *raw.MPSGraphObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphObject].
-func (x *GraphObject) Unwrap() *raw.MPSGraphObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphObject) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphObjectFromID adopts an existing object pointer as a GraphObject (nil for 0).
+// GraphObjectFromID adopts an existing Objective-C object as a GraphObject
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphObjectFromID(id objc.ID) *GraphObject {
 	if id == 0 {
 		return nil
 	}
-	return &GraphObject{inner: raw.MPSGraphObjectFromID(id)}
+	x := &GraphObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphObject creates a new [GraphObject].
-func NewGraphObject() *GraphObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphObject")), objc.RegisterName("new"))
-	return &GraphObject{inner: raw.MPSGraphObjectFromID(_id)}
+// graphObjectAdopt wraps an Objective-C object that this code just created as a
+// GraphObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphObjectAdopt(id objc.ID) *GraphObject {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *GraphObject) asGraphObject() *raw.MPSGraphObject { return x.inner }
+// Description returns the object's -description text.
+func (x *GraphObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // GraphObjectable is the interface implemented by [GraphObject], for mocking and DI.
 type GraphObjectable interface {
-	Unwrap() *raw.MPSGraphObject
+	obj.Object
 }
 
 var _ GraphObjectable = (*GraphObject)(nil)
+
+// isGraphObject marks GraphObject — and, by embedding promotion, its
+// subclasses — as a member of the GraphObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *GraphObject) isGraphObject() {}
+
+var _ GraphObjectProvider = (*GraphObject)(nil)

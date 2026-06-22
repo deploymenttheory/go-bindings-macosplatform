@@ -3,4 +3,20 @@
 //go:build darwin
 
 // Package passkit provides a fluent Go API over the macOS PassKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AddPassMetadataPreview: [ShareablePassMetadataPreview]
+//   - AddSecureElementPassConfiguration: [AddCarKeyPassConfiguration], [AddIdentityDocumentConfiguration], [AddShareablePassConfiguration]
+//   - IdentityDocumentMetadata: [AddIdentityDocumentMetadata], [JapanIndividualNumberCardMetadata]
+//   - IssuerProvisioningExtensionPassEntry: [IssuerProvisioningExtensionPaymentPassEntry]
+//   - Pass: [SecureElementPass]
+//   - PaymentRequestUpdate: [PaymentRequestCouponCodeUpdate], [PaymentRequestPaymentMethodUpdate], [PaymentRequestShippingContactUpdate], [PaymentRequestShippingMethodUpdate]
+//   - PaymentSummaryItem: [AutomaticReloadPaymentSummaryItem], [DeferredPaymentSummaryItem], [DisbursementSummaryItem], [InstantFundsOutFeeSummaryItem], [RecurringPaymentSummaryItem], [ShippingMethod]
+//   - SecureElementPass: [PaymentPass]
+//   - StoredValuePassProperties: [TransitPassProperties]
+//   - TransitPassProperties: [SuicaPassProperties]
 package passkit

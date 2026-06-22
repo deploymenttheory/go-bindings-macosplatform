@@ -5,67 +5,72 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user removing a contact from a group.
+// ChangeHistoryRemoveMemberFromGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryRemoveMemberFromGroupEvent.
 //
-// ChangeHistoryRemoveMemberFromGroupEvent wraps [raw.CNChangeHistoryRemoveMemberFromGroupEvent] with a fluent Go API.
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user removing a contact from a group.
 type ChangeHistoryRemoveMemberFromGroupEvent struct {
-	inner *raw.CNChangeHistoryRemoveMemberFromGroupEvent
+	ChangeHistoryEvent
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryRemoveMemberFromGroupEvent].
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) Unwrap() *raw.CNChangeHistoryRemoveMemberFromGroupEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryRemoveMemberFromGroupEventFromID adopts an existing object pointer as a ChangeHistoryRemoveMemberFromGroupEvent (nil for 0).
+// ChangeHistoryRemoveMemberFromGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryRemoveMemberFromGroupEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryRemoveMemberFromGroupEventFromID(id objc.ID) *ChangeHistoryRemoveMemberFromGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryRemoveMemberFromGroupEvent{inner: raw.CNChangeHistoryRemoveMemberFromGroupEventFromID(id)}
+	x := &ChangeHistoryRemoveMemberFromGroupEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryRemoveMemberFromGroupEvent creates a new [ChangeHistoryRemoveMemberFromGroupEvent].
+// changeHistoryRemoveMemberFromGroupEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryRemoveMemberFromGroupEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryRemoveMemberFromGroupEventAdopt(id objc.ID) *ChangeHistoryRemoveMemberFromGroupEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryRemoveMemberFromGroupEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangeHistoryRemoveMemberFromGroupEvent creates a new ChangeHistoryRemoveMemberFromGroupEvent.
 func NewChangeHistoryRemoveMemberFromGroupEvent() *ChangeHistoryRemoveMemberFromGroupEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryRemoveMemberFromGroupEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryRemoveMemberFromGroupEvent{inner: raw.CNChangeHistoryRemoveMemberFromGroupEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryRemoveMemberFromGroupEvent")), objc.RegisterName("new"))
+	return changeHistoryRemoveMemberFromGroupEventAdopt(_id)
 }
 
-// Member calls the underlying Member.
+// Member wraps the corresponding Objective-C method.
 func (x *ChangeHistoryRemoveMemberFromGroupEvent) Member() *Contact {
-	_r := x.inner.Member()
-	if _r == nil {
-		return nil
-	}
-	return &Contact{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member"))
+	return ContactFromID(_r)
 }
 
-// Group calls the underlying Group.
+// Group wraps the corresponding Objective-C method.
 func (x *ChangeHistoryRemoveMemberFromGroupEvent) Group() *Group {
-	_r := x.inner.Group()
-	if _r == nil {
-		return nil
-	}
-	return &Group{inner: _r}
-}
-
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return GroupFromID(_r)
 }
 
 // ChangeHistoryRemoveMemberFromGroupEventable is the interface implemented by [ChangeHistoryRemoveMemberFromGroupEvent], for mocking and DI.
 type ChangeHistoryRemoveMemberFromGroupEventable interface {
-	Unwrap() *raw.CNChangeHistoryRemoveMemberFromGroupEvent
+	obj.Object
 	Member() *Contact
 	Group() *Group
 }
 
 var _ ChangeHistoryRemoveMemberFromGroupEventable = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)

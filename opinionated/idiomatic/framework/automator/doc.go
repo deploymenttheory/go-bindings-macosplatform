@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package automator provides a fluent Go API over the macOS Automator framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Action: [BundleAction]
+//   - BundleAction: [AppleScriptAction], [ShellScriptAction]
 package automator

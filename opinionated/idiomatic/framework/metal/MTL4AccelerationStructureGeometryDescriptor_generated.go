@@ -5,214 +5,203 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Base class for all Metal 4 acceleration structure geometry descriptors.
+// MTL4AccelerationStructureGeometryDescriptor is an idiomatic wrapper over the Objective-C class MTL4AccelerationStructureGeometryDescriptor.
 //
-// MTL4AccelerationStructureGeometryDescriptor wraps [raw.MTL4AccelerationStructureGeometryDescriptor] with a fluent Go API.
+// MTL4AccelerationStructureGeometryDescriptor is an abstract base — you do not construct it directly. Construct one of [MTL4AccelerationStructureBoundingBoxGeometryDescriptor], [MTL4AccelerationStructureCurveGeometryDescriptor], [MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor], [MTL4AccelerationStructureMotionCurveGeometryDescriptor], [MTL4AccelerationStructureMotionTriangleGeometryDescriptor], [MTL4AccelerationStructureTriangleGeometryDescriptor] and pass it where a MTL4AccelerationStructureGeometryDescriptor is accepted.
+//
+// Base class for all Metal 4 acceleration structure geometry descriptors.
 type MTL4AccelerationStructureGeometryDescriptor struct {
-	inner *raw.MTL4AccelerationStructureGeometryDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4AccelerationStructureGeometryDescriptor].
-func (x *MTL4AccelerationStructureGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureGeometryDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4AccelerationStructureGeometryDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4AccelerationStructureGeometryDescriptorFromID adopts an existing object pointer as a MTL4AccelerationStructureGeometryDescriptor (nil for 0).
+// MTL4AccelerationStructureGeometryDescriptorFromID adopts an existing Objective-C object as a MTL4AccelerationStructureGeometryDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4AccelerationStructureGeometryDescriptorFromID(id objc.ID) *MTL4AccelerationStructureGeometryDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4AccelerationStructureGeometryDescriptor{inner: raw.MTL4AccelerationStructureGeometryDescriptorFromID(id)}
-}
-
-// NewMTL4AccelerationStructureGeometryDescriptor creates a new [MTL4AccelerationStructureGeometryDescriptor].
-func NewMTL4AccelerationStructureGeometryDescriptor() *MTL4AccelerationStructureGeometryDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4AccelerationStructureGeometryDescriptor")), objc.RegisterName("new"))
-	return &MTL4AccelerationStructureGeometryDescriptor{inner: raw.MTL4AccelerationStructureGeometryDescriptorFromID(_id)}
-}
-
-// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
-//
-// WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
-func (x *MTL4AccelerationStructureGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+	x := &MTL4AccelerationStructureGeometryDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// mTL4AccelerationStructureGeometryDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4AccelerationStructureGeometryDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4AccelerationStructureGeometryDescriptorAdopt(id objc.ID) *MTL4AccelerationStructureGeometryDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4AccelerationStructureGeometryDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4AccelerationStructureGeometryDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4AccelerationStructureGeometryDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4AccelerationStructureGeometryDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4AccelerationStructureGeometryDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithIntersectionFunctionTableOffset sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
+func (x *MTL4AccelerationStructureGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return x
+}
+
+// WithOpaque provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
 func (x *MTL4AccelerationStructureGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
-//
-// WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
+// WithAllowDuplicateIntersectionFunctionInvocation a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
 func (x *MTL4AccelerationStructureGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
-// Assigns an optional label you can assign to this geometry for debugging purposes.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel assigns an optional label you can assign to this geometry for debugging purposes.
 func (x *MTL4AccelerationStructureGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Assigns optional buffer containing data to associate with each primitive in this geometry.
-//
-// WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
-func (x *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetPrimitiveDataBuffer(primitiveDataBuffer)
+// WithPrimitiveDataStride defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
+func (x *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
 	return x
 }
 
-// Defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
-//
-// WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
-func (x *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetPrimitiveDataStride(primitiveDataStride)
+// WithPrimitiveDataElementSize sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
+func (x *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 	return x
 }
 
-// Sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
-//
-// WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
-func (x *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureGeometryDescriptor {
-	x.inner.SetPrimitiveDataElementSize(primitiveDataElementSize)
-	return x
+// IntersectionFunctionTableOffset sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+func (x *MTL4AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intersectionFunctionTableOffset"))
+	return _r
 }
 
-// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
-//
-// IntersectionFunctionTableOffset calls the underlying IntersectionFunctionTableOffset.
-func (x *MTL4AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() uint {
-	return x.inner.IntersectionFunctionTableOffset()
+// SetIntersectionFunctionTableOffset wraps the corresponding Objective-C method.
+func (x *MTL4AccelerationStructureGeometryDescriptor) SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
 }
 
-// SetIntersectionFunctionTableOffset calls the underlying SetIntersectionFunctionTableOffset.
-func (x *MTL4AccelerationStructureGeometryDescriptor) SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) {
-	x.inner.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
-}
-
-// Provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
-//
-// Opaque calls the underlying Opaque.
+// Opaque provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
 func (x *MTL4AccelerationStructureGeometryDescriptor) Opaque() bool {
-	return x.inner.Opaque()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("opaque"))
+	return _r
 }
 
-// SetOpaque calls the underlying SetOpaque.
+// SetOpaque wraps the corresponding Objective-C method.
 func (x *MTL4AccelerationStructureGeometryDescriptor) SetOpaque(opaque bool) {
-	x.inner.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 }
 
-// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
-//
-// AllowDuplicateIntersectionFunctionInvocation calls the underlying AllowDuplicateIntersectionFunctionInvocation.
+// AllowDuplicateIntersectionFunctionInvocation a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *MTL4AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
-	return x.inner.AllowDuplicateIntersectionFunctionInvocation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowDuplicateIntersectionFunctionInvocation"))
+	return _r
 }
 
-// SetAllowDuplicateIntersectionFunctionInvocation calls the underlying SetAllowDuplicateIntersectionFunctionInvocation.
+// SetAllowDuplicateIntersectionFunctionInvocation wraps the corresponding Objective-C method.
 func (x *MTL4AccelerationStructureGeometryDescriptor) SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) {
-	x.inner.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
 }
 
-// Assigns an optional label you can assign to this geometry for debugging purposes.
-//
-// Label calls the underlying Label.
+// Label assigns an optional label you can assign to this geometry for debugging purposes.
 func (x *MTL4AccelerationStructureGeometryDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTL4AccelerationStructureGeometryDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
-//
-// PrimitiveDataBuffer calls the underlying PrimitiveDataBuffer.
-func (x *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataBuffer() raw.MTL4BufferRange {
-	return x.inner.PrimitiveDataBuffer()
+// PrimitiveDataStride defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
+func (x *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataStride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primitiveDataStride"))
+	return _r
 }
 
-// SetPrimitiveDataBuffer calls the underlying SetPrimitiveDataBuffer.
-func (x *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) {
-	x.inner.SetPrimitiveDataBuffer(primitiveDataBuffer)
+// SetPrimitiveDataStride wraps the corresponding Objective-C method.
+func (x *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataStride(primitiveDataStride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
 }
 
-// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
-//
-// PrimitiveDataStride calls the underlying PrimitiveDataStride.
-func (x *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataStride() uint {
-	return x.inner.PrimitiveDataStride()
+// PrimitiveDataElementSize sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+func (x *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primitiveDataElementSize"))
+	return _r
 }
 
-// SetPrimitiveDataStride calls the underlying SetPrimitiveDataStride.
-func (x *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataStride(primitiveDataStride uint) {
-	x.inner.SetPrimitiveDataStride(primitiveDataStride)
-}
-
-// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
-//
-// PrimitiveDataElementSize calls the underlying PrimitiveDataElementSize.
-func (x *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() uint {
-	return x.inner.PrimitiveDataElementSize()
-}
-
-// SetPrimitiveDataElementSize calls the underlying SetPrimitiveDataElementSize.
-func (x *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(primitiveDataElementSize uint) {
-	x.inner.SetPrimitiveDataElementSize(primitiveDataElementSize)
-}
-
-func (x *MTL4AccelerationStructureGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor {
-	return x.inner
+// SetPrimitiveDataElementSize wraps the corresponding Objective-C method.
+func (x *MTL4AccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(primitiveDataElementSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
 }
 
 // MTL4AccelerationStructureGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureGeometryDescriptor], for mocking and DI.
 type MTL4AccelerationStructureGeometryDescriptorable interface {
-	Unwrap() *raw.MTL4AccelerationStructureGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureGeometryDescriptor
+	obj.Object
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureGeometryDescriptor
 	WithOpaque(opaque bool) *MTL4AccelerationStructureGeometryDescriptor
 	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureGeometryDescriptor
 	WithLabel(label string) *MTL4AccelerationStructureGeometryDescriptor
-	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureGeometryDescriptor
-	IntersectionFunctionTableOffset() uint
-	SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint)
+	WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureGeometryDescriptor
+	IntersectionFunctionTableOffset() int
+	SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset int)
 	Opaque() bool
 	SetOpaque(opaque bool)
 	AllowDuplicateIntersectionFunctionInvocation() bool
 	SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool)
 	Label() string
 	SetLabel(label string)
-	PrimitiveDataBuffer() raw.MTL4BufferRange
-	SetPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange)
-	PrimitiveDataStride() uint
-	SetPrimitiveDataStride(primitiveDataStride uint)
-	PrimitiveDataElementSize() uint
-	SetPrimitiveDataElementSize(primitiveDataElementSize uint)
+	PrimitiveDataStride() int
+	SetPrimitiveDataStride(primitiveDataStride int)
+	PrimitiveDataElementSize() int
+	SetPrimitiveDataElementSize(primitiveDataElementSize int)
 }
 
 var _ MTL4AccelerationStructureGeometryDescriptorable = (*MTL4AccelerationStructureGeometryDescriptor)(nil)
+
+// isMTL4AccelerationStructureGeometryDescriptor marks MTL4AccelerationStructureGeometryDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the MTL4AccelerationStructureGeometryDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTL4AccelerationStructureGeometryDescriptor) isMTL4AccelerationStructureGeometryDescriptor() {
+}
+
+var _ MTL4AccelerationStructureGeometryDescriptorProvider = (*MTL4AccelerationStructureGeometryDescriptor)(nil)

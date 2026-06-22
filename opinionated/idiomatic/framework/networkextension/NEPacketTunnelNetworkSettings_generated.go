@@ -5,168 +5,153 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The configuration for a packet tunnel provider’s virtual interface.
+// NEPacketTunnelNetworkSettings is an idiomatic wrapper over the Objective-C class NEPacketTunnelNetworkSettings.
 //
-// NEPacketTunnelNetworkSettings wraps [raw.NEPacketTunnelNetworkSettings] with a fluent Go API.
+// NEPacketTunnelNetworkSettings is an abstract base — you do not construct it directly. Construct one of [NEEthernetTunnelNetworkSettings] and pass it where a NEPacketTunnelNetworkSettings is accepted.
+//
+// The configuration for a packet tunnel provider’s virtual interface.
 type NEPacketTunnelNetworkSettings struct {
-	inner *raw.NEPacketTunnelNetworkSettings
+	NETunnelNetworkSettings
 }
 
-// Unwrap returns the underlying [raw.NEPacketTunnelNetworkSettings].
-func (x *NEPacketTunnelNetworkSettings) Unwrap() *raw.NEPacketTunnelNetworkSettings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEPacketTunnelNetworkSettings) ID() objc.ID { return x.inner.Ptr() }
-
-// NEPacketTunnelNetworkSettingsFromID adopts an existing object pointer as a NEPacketTunnelNetworkSettings (nil for 0).
+// NEPacketTunnelNetworkSettingsFromID adopts an existing Objective-C object as a NEPacketTunnelNetworkSettings
+// (nil for 0), retaining it and registering a release finalizer.
 func NEPacketTunnelNetworkSettingsFromID(id objc.ID) *NEPacketTunnelNetworkSettings {
 	if id == 0 {
 		return nil
 	}
-	return &NEPacketTunnelNetworkSettings{inner: raw.NEPacketTunnelNetworkSettingsFromID(id)}
+	x := &NEPacketTunnelNetworkSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEPacketTunnelNetworkSettings creates a new [NEPacketTunnelNetworkSettings].
-func NewNEPacketTunnelNetworkSettings() *NEPacketTunnelNetworkSettings {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEPacketTunnelNetworkSettings")), objc.RegisterName("new"))
-	return &NEPacketTunnelNetworkSettings{inner: raw.NEPacketTunnelNetworkSettingsFromID(_id)}
+// nEPacketTunnelNetworkSettingsAdopt wraps an Objective-C object that this code just created as a
+// NEPacketTunnelNetworkSettings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEPacketTunnelNetworkSettingsAdopt(id objc.ID) *NEPacketTunnelNetworkSettings {
+	if id == 0 {
+		return nil
+	}
+	x := &NEPacketTunnelNetworkSettings{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The tunnel IP version 4 settings.
-//
-// WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
+// WithIPv4Settings the tunnel IP version 4 settings.
 func (x *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings {
-	x.inner.SetIPv4Settings(iPv4Settings.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIPv4Settings:"), objref.IDOf(iPv4Settings))
 	return x
 }
 
-// The tunnel IP version 6 settings.
-//
-// WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
+// WithIPv6Settings the tunnel IP version 6 settings.
 func (x *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings {
-	x.inner.SetIPv6Settings(iPv6Settings.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIPv6Settings:"), objref.IDOf(iPv6Settings))
 	return x
 }
 
-// The number of bytes added to each tunneled packet for storing tunneling protocol headers.
-//
-// WithTunnelOverheadBytes sets the tunnelOverheadBytes property and returns the receiver for chaining.
-func (x *NEPacketTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings {
-	x.inner.SetTunnelOverheadBytes(tunnelOverheadBytes)
+// WithTunnelOverheadBytes the number of bytes added to each tunneled packet for storing tunneling protocol headers.
+func (x *NEPacketTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes obj.Object) *NEPacketTunnelNetworkSettings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTunnelOverheadBytes:"), objref.IDOf(tunnelOverheadBytes))
 	return x
 }
 
-// The size of the maximum trasnmission unit, in bytes.
-//
-// WithMTU sets the mTU property and returns the receiver for chaining.
-func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings {
-	x.inner.SetMTU(mTU)
+// WithMTU the size of the maximum trasnmission unit, in bytes.
+func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU obj.Object) *NEPacketTunnelNetworkSettings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMTU:"), objref.IDOf(mTU))
 	return x
 }
 
-// The tunnel DNS settings.
-//
-// WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
+// WithDNSSettings the tunnel DNS settings.
 func (x *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings {
-	x.inner.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
 	return x
 }
 
-// The tunnel HTTP proxy settings.
-//
-// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+// WithProxySettings the tunnel HTTP proxy settings.
 func (x *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings {
-	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
-// @property IPv4Settings @discussion An NEIPv4Settings object that contains the desired tunnel IPv4 settings.
-//
-// IPv4Settings calls the underlying IPv4Settings.
+// IPv4Settings an NEIPv4Settings object that contains the desired tunnel IPv4 settings.
 func (x *NEPacketTunnelNetworkSettings) IPv4Settings() *NEIPv4Settings {
-	_r := x.inner.IPv4Settings()
-	if _r == nil {
-		return nil
-	}
-	return &NEIPv4Settings{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("IPv4Settings"))
+	return NEIPv4SettingsFromID(_r)
 }
 
-// SetIPv4Settings calls the underlying SetIPv4Settings.
-func (x *NEPacketTunnelNetworkSettings) SetIPv4Settings(iPv4Settings *raw.NEIPv4Settings) {
-	x.inner.SetIPv4Settings(iPv4Settings)
+// SetIPv4Settings wraps the corresponding Objective-C method.
+func (x *NEPacketTunnelNetworkSettings) SetIPv4Settings(iPv4Settings *NEIPv4Settings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIPv4Settings:"), objref.IDOf(iPv4Settings))
 }
 
-// @property IPv6Settings @discussion An NEIPv6Settings object that contains the desired tunnel IPv6 settings.
-//
-// IPv6Settings calls the underlying IPv6Settings.
+// IPv6Settings an NEIPv6Settings object that contains the desired tunnel IPv6 settings.
 func (x *NEPacketTunnelNetworkSettings) IPv6Settings() *NEIPv6Settings {
-	_r := x.inner.IPv6Settings()
-	if _r == nil {
-		return nil
-	}
-	return &NEIPv6Settings{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("IPv6Settings"))
+	return NEIPv6SettingsFromID(_r)
 }
 
-// SetIPv6Settings calls the underlying SetIPv6Settings.
-func (x *NEPacketTunnelNetworkSettings) SetIPv6Settings(iPv6Settings *raw.NEIPv6Settings) {
-	x.inner.SetIPv6Settings(iPv6Settings)
+// SetIPv6Settings wraps the corresponding Objective-C method.
+func (x *NEPacketTunnelNetworkSettings) SetIPv6Settings(iPv6Settings *NEIPv6Settings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIPv6Settings:"), objref.IDOf(iPv6Settings))
 }
 
-// @property tunnelOverheadBytes @discussion An NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
-//
-// TunnelOverheadBytes calls the underlying TunnelOverheadBytes.
-func (x *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() *foundation.NSNumber {
-	return x.inner.TunnelOverheadBytes()
+// TunnelOverheadBytes an NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
+func (x *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tunnelOverheadBytes"))
+	return obj.Wrap(_r)
 }
 
-// SetTunnelOverheadBytes calls the underlying SetTunnelOverheadBytes.
-func (x *NEPacketTunnelNetworkSettings) SetTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) {
-	x.inner.SetTunnelOverheadBytes(tunnelOverheadBytes)
+// SetTunnelOverheadBytes wraps the corresponding Objective-C method.
+func (x *NEPacketTunnelNetworkSettings) SetTunnelOverheadBytes(tunnelOverheadBytes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTunnelOverheadBytes:"), objref.IDOf(tunnelOverheadBytes))
 }
 
-// @property MTU @discussion An NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
-//
-// MTU calls the underlying MTU.
-func (x *NEPacketTunnelNetworkSettings) MTU() *foundation.NSNumber {
-	return x.inner.MTU()
+// MTU an NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
+func (x *NEPacketTunnelNetworkSettings) MTU() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MTU"))
+	return obj.Wrap(_r)
 }
 
-// SetMTU calls the underlying SetMTU.
-func (x *NEPacketTunnelNetworkSettings) SetMTU(mTU *foundation.NSNumber) {
-	x.inner.SetMTU(mTU)
-}
-
-func (x *NEPacketTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings {
-	return x.inner
-}
-
-func (x *NEPacketTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings {
-	return &x.inner.NETunnelNetworkSettings
+// SetMTU wraps the corresponding Objective-C method.
+func (x *NEPacketTunnelNetworkSettings) SetMTU(mTU obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMTU:"), objref.IDOf(mTU))
 }
 
 // NEPacketTunnelNetworkSettingsable is the interface implemented by [NEPacketTunnelNetworkSettings], for mocking and DI.
 type NEPacketTunnelNetworkSettingsable interface {
-	Unwrap() *raw.NEPacketTunnelNetworkSettings
+	obj.Object
 	WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings
 	WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings
-	WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings
-	WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings
+	WithTunnelOverheadBytes(tunnelOverheadBytes obj.Object) *NEPacketTunnelNetworkSettings
+	WithMTU(mTU obj.Object) *NEPacketTunnelNetworkSettings
 	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings
 	WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings
 	IPv4Settings() *NEIPv4Settings
-	SetIPv4Settings(iPv4Settings *raw.NEIPv4Settings)
+	SetIPv4Settings(iPv4Settings *NEIPv4Settings)
 	IPv6Settings() *NEIPv6Settings
-	SetIPv6Settings(iPv6Settings *raw.NEIPv6Settings)
-	TunnelOverheadBytes() *foundation.NSNumber
-	SetTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber)
-	MTU() *foundation.NSNumber
-	SetMTU(mTU *foundation.NSNumber)
+	SetIPv6Settings(iPv6Settings *NEIPv6Settings)
+	TunnelOverheadBytes() obj.Object
+	SetTunnelOverheadBytes(tunnelOverheadBytes obj.Object)
+	MTU() obj.Object
+	SetMTU(mTU obj.Object)
 }
 
 var _ NEPacketTunnelNetworkSettingsable = (*NEPacketTunnelNetworkSettings)(nil)
+
+// isNEPacketTunnelNetworkSettings marks NEPacketTunnelNetworkSettings — and, by embedding promotion, its
+// subclasses — as a member of the NEPacketTunnelNetworkSettings hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEPacketTunnelNetworkSettings) isNEPacketTunnelNetworkSettings() {}
+
+var _ NEPacketTunnelNetworkSettingsProvider = (*NEPacketTunnelNetworkSettings)(nil)
+
+var _ NETunnelNetworkSettingsProvider = (*NEPacketTunnelNetworkSettings)(nil)

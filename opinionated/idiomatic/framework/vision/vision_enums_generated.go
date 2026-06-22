@@ -9,406 +9,432 @@ import (
 )
 
 // Composite types for barcode requests.
-type VNBarcodeCompositeType int64
+type BarcodeCompositeType int64
 
 const (
 	// A type that represents no composite type.
-	VNBarcodeCompositeTypeNone VNBarcodeCompositeType = 0
+	BarcodeCompositeTypeNone BarcodeCompositeType = 0
 	// A type that represents a linked composite type.
-	VNBarcodeCompositeTypeLinked VNBarcodeCompositeType = 1
+	BarcodeCompositeTypeLinked BarcodeCompositeType = 1
 	// A type that represents trade items in bulk.
-	VNBarcodeCompositeTypeGS1TypeA VNBarcodeCompositeType = 2
+	BarcodeCompositeTypeGS1TypeA BarcodeCompositeType = 2
 	// A type that represents trade items by piece.
-	VNBarcodeCompositeTypeGS1TypeB VNBarcodeCompositeType = 3
+	BarcodeCompositeTypeGS1TypeB BarcodeCompositeType = 3
 	// A type that represents trade items in varying quantity.
-	VNBarcodeCompositeTypeGS1TypeC VNBarcodeCompositeType = 4
+	BarcodeCompositeTypeGS1TypeC BarcodeCompositeType = 4
 )
 
-func (e VNBarcodeCompositeType) String() string {
+// String returns the BarcodeCompositeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BarcodeCompositeType) String() string {
 	switch e {
-	case VNBarcodeCompositeTypeNone:
-		return "VNBarcodeCompositeTypeNone"
-	case VNBarcodeCompositeTypeLinked:
-		return "VNBarcodeCompositeTypeLinked"
-	case VNBarcodeCompositeTypeGS1TypeA:
-		return "VNBarcodeCompositeTypeGS1TypeA"
-	case VNBarcodeCompositeTypeGS1TypeB:
-		return "VNBarcodeCompositeTypeGS1TypeB"
-	case VNBarcodeCompositeTypeGS1TypeC:
-		return "VNBarcodeCompositeTypeGS1TypeC"
+	case BarcodeCompositeTypeNone:
+		return "BarcodeCompositeTypeNone"
+	case BarcodeCompositeTypeLinked:
+		return "BarcodeCompositeTypeLinked"
+	case BarcodeCompositeTypeGS1TypeA:
+		return "BarcodeCompositeTypeGS1TypeA"
+	case BarcodeCompositeTypeGS1TypeB:
+		return "BarcodeCompositeTypeGS1TypeB"
+	case BarcodeCompositeTypeGS1TypeC:
+		return "BarcodeCompositeTypeGS1TypeC"
 	default:
-		return fmt.Sprintf("VNBarcodeCompositeType(%d)", int64(e))
+		return fmt.Sprintf("BarcodeCompositeType(%d)", int64(e))
 	}
 }
 
 // Constants that the define the chirality, or handedness, of a pose.
-type VNChirality int64
+type Chirality int64
 
 const (
 	// Indicates that the pose chirality is unknown.
-	VNChiralityUnknown VNChirality = 0
+	ChiralityUnknown Chirality = 0
 	// Indicates a left-handed pose.
-	VNChiralityLeft VNChirality = -1
+	ChiralityLeft Chirality = -1
 	// Indicates a right-handed pose.
-	VNChiralityRight VNChirality = 1
+	ChiralityRight Chirality = 1
 )
 
-func (e VNChirality) String() string {
+// String returns the Chirality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Chirality) String() string {
 	switch e {
-	case VNChiralityUnknown:
-		return "VNChiralityUnknown"
-	case VNChiralityLeft:
-		return "VNChiralityLeft"
-	case VNChiralityRight:
-		return "VNChiralityRight"
+	case ChiralityUnknown:
+		return "ChiralityUnknown"
+	case ChiralityLeft:
+		return "ChiralityLeft"
+	case ChiralityRight:
+		return "ChiralityRight"
 	default:
-		return fmt.Sprintf("VNChirality(%d)", int64(e))
+		return fmt.Sprintf("Chirality(%d)", int64(e))
 	}
 }
 
 // An enumeration of the type of element in feature print data.
-type VNElementType uint64
+type ElementType uint64
 
 const (
 	// The element type isn’t known.
-	VNElementTypeUnknown VNElementType = 0
+	ElementTypeUnknown ElementType = 0
 	// The elements are floating-point numbers.
-	VNElementTypeFloat VNElementType = 1
+	ElementTypeFloat ElementType = 1
 	// The elements are double-precision floating-point numbers.
-	VNElementTypeDouble VNElementType = 2
+	ElementTypeDouble ElementType = 2
 )
 
-func (e VNElementType) String() string {
+// String returns the ElementType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ElementType) String() string {
 	switch e {
-	case VNElementTypeUnknown:
-		return "VNElementTypeUnknown"
-	case VNElementTypeFloat:
-		return "VNElementTypeFloat"
-	case VNElementTypeDouble:
-		return "VNElementTypeDouble"
+	case ElementTypeUnknown:
+		return "ElementTypeUnknown"
+	case ElementTypeFloat:
+		return "ElementTypeFloat"
+	case ElementTypeDouble:
+		return "ElementTypeDouble"
 	default:
-		return fmt.Sprintf("VNElementType(%d)", int64(e))
+		return fmt.Sprintf("ElementType(%d)", int64(e))
 	}
 }
 
 // Constants that identify errors from the framework.
-type VNErrorCode int64
+type ErrorCode int64
 
 const (
 	// An error occurred during Create ML training due to an invalid transformation or image.
-	VNErrorTuriCoreErrorCode VNErrorCode = -1
+	ErrorTuriCoreErrorCode ErrorCode = -1
 	// The operation finished without error.
-	VNErrorOK VNErrorCode = 0
+	ErrorOK ErrorCode = 0
 	// An app canceled the request.
-	VNErrorRequestCancelled VNErrorCode = 1
+	ErrorRequestCancelled ErrorCode = 1
 	// The format of the image is invalid.
-	VNErrorInvalidFormat VNErrorCode = 2
+	ErrorInvalidFormat ErrorCode = 2
 	// The requested operation failed.
-	VNErrorOperationFailed VNErrorCode = 3
+	ErrorOperationFailed ErrorCode = 3
 	// An app attempted to access data that’s out-of-bounds.
-	VNErrorOutOfBoundsError VNErrorCode = 4
+	ErrorOutOfBoundsError ErrorCode = 4
 	// An app specified an invalid option on a request.
-	VNErrorInvalidOption VNErrorCode = 5
+	ErrorInvalidOption ErrorCode = 5
 	// An I/O error for an image, image sequence, or Core ML model.
-	VNErrorIOError VNErrorCode = 6
+	ErrorIOError ErrorCode = 6
 	// A request is missing a required option.
-	VNErrorMissingOption VNErrorCode = 7
+	ErrorMissingOption ErrorCode = 7
 	// The method isn’t implemented in the underlying model.
-	VNErrorNotImplemented VNErrorCode = 8
+	ErrorNotImplemented ErrorCode = 8
 	// An internal error occurred within the framework.
-	VNErrorInternalError VNErrorCode = 9
+	ErrorInternalError ErrorCode = 9
 	// The system doesn’t have enough memory to complete the request.
-	VNErrorOutOfMemory VNErrorCode = 10
+	ErrorOutOfMemory ErrorCode = 10
 	// An unidentified error occurred.
-	VNErrorUnknownError VNErrorCode = 11
+	ErrorUnknownError ErrorCode = 11
 	// An app requested an unsupported operation.
-	VNErrorInvalidOperation VNErrorCode = 12
+	ErrorInvalidOperation ErrorCode = 12
 	// The image is invalid.
-	VNErrorInvalidImage VNErrorCode = 13
+	ErrorInvalidImage ErrorCode = 13
 	// An app passed an invalid parameter to a request.
-	VNErrorInvalidArgument VNErrorCode = 14
+	ErrorInvalidArgument ErrorCode = 14
 	// The Core ML model is incompatible with the request.
-	VNErrorInvalidModel VNErrorCode = 15
+	ErrorInvalidModel ErrorCode = 15
 	// An app specified an unsupported request revision.
-	VNErrorUnsupportedRevision VNErrorCode = 16
+	ErrorUnsupportedRevision ErrorCode = 16
 	// The data isn’t available.
-	VNErrorDataUnavailable VNErrorCode = 17
+	ErrorDataUnavailable ErrorCode = 17
 	// The system can’t find a timestamp.
-	VNErrorTimeStampNotFound VNErrorCode = 18
+	ErrorTimeStampNotFound ErrorCode = 18
 	// An app attempted an unsupported request.
-	VNErrorUnsupportedRequest VNErrorCode = 19
+	ErrorUnsupportedRequest ErrorCode = 19
 	// The requested operation timed out.
-	VNErrorTimeout VNErrorCode = 20
+	ErrorTimeout ErrorCode = 20
 	// An app requested an unsupported compute stage.
-	VNErrorUnsupportedComputeStage VNErrorCode = 21
+	ErrorUnsupportedComputeStage ErrorCode = 21
 	// An app requested an unsupported compute device.
-	VNErrorUnsupportedComputeDevice VNErrorCode = 22
+	ErrorUnsupportedComputeDevice ErrorCode = 22
 )
 
-func (e VNErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case VNErrorTuriCoreErrorCode:
-		return "VNErrorTuriCoreErrorCode"
-	case VNErrorOK:
-		return "VNErrorOK"
-	case VNErrorRequestCancelled:
-		return "VNErrorRequestCancelled"
-	case VNErrorInvalidFormat:
-		return "VNErrorInvalidFormat"
-	case VNErrorOperationFailed:
-		return "VNErrorOperationFailed"
-	case VNErrorOutOfBoundsError:
-		return "VNErrorOutOfBoundsError"
-	case VNErrorInvalidOption:
-		return "VNErrorInvalidOption"
-	case VNErrorIOError:
-		return "VNErrorIOError"
-	case VNErrorMissingOption:
-		return "VNErrorMissingOption"
-	case VNErrorNotImplemented:
-		return "VNErrorNotImplemented"
-	case VNErrorInternalError:
-		return "VNErrorInternalError"
-	case VNErrorOutOfMemory:
-		return "VNErrorOutOfMemory"
-	case VNErrorUnknownError:
-		return "VNErrorUnknownError"
-	case VNErrorInvalidOperation:
-		return "VNErrorInvalidOperation"
-	case VNErrorInvalidImage:
-		return "VNErrorInvalidImage"
-	case VNErrorInvalidArgument:
-		return "VNErrorInvalidArgument"
-	case VNErrorInvalidModel:
-		return "VNErrorInvalidModel"
-	case VNErrorUnsupportedRevision:
-		return "VNErrorUnsupportedRevision"
-	case VNErrorDataUnavailable:
-		return "VNErrorDataUnavailable"
-	case VNErrorTimeStampNotFound:
-		return "VNErrorTimeStampNotFound"
-	case VNErrorUnsupportedRequest:
-		return "VNErrorUnsupportedRequest"
-	case VNErrorTimeout:
-		return "VNErrorTimeout"
-	case VNErrorUnsupportedComputeStage:
-		return "VNErrorUnsupportedComputeStage"
-	case VNErrorUnsupportedComputeDevice:
-		return "VNErrorUnsupportedComputeDevice"
+	case ErrorTuriCoreErrorCode:
+		return "ErrorTuriCoreErrorCode"
+	case ErrorOK:
+		return "ErrorOK"
+	case ErrorRequestCancelled:
+		return "ErrorRequestCancelled"
+	case ErrorInvalidFormat:
+		return "ErrorInvalidFormat"
+	case ErrorOperationFailed:
+		return "ErrorOperationFailed"
+	case ErrorOutOfBoundsError:
+		return "ErrorOutOfBoundsError"
+	case ErrorInvalidOption:
+		return "ErrorInvalidOption"
+	case ErrorIOError:
+		return "ErrorIOError"
+	case ErrorMissingOption:
+		return "ErrorMissingOption"
+	case ErrorNotImplemented:
+		return "ErrorNotImplemented"
+	case ErrorInternalError:
+		return "ErrorInternalError"
+	case ErrorOutOfMemory:
+		return "ErrorOutOfMemory"
+	case ErrorUnknownError:
+		return "ErrorUnknownError"
+	case ErrorInvalidOperation:
+		return "ErrorInvalidOperation"
+	case ErrorInvalidImage:
+		return "ErrorInvalidImage"
+	case ErrorInvalidArgument:
+		return "ErrorInvalidArgument"
+	case ErrorInvalidModel:
+		return "ErrorInvalidModel"
+	case ErrorUnsupportedRevision:
+		return "ErrorUnsupportedRevision"
+	case ErrorDataUnavailable:
+		return "ErrorDataUnavailable"
+	case ErrorTimeStampNotFound:
+		return "ErrorTimeStampNotFound"
+	case ErrorUnsupportedRequest:
+		return "ErrorUnsupportedRequest"
+	case ErrorTimeout:
+		return "ErrorTimeout"
+	case ErrorUnsupportedComputeStage:
+		return "ErrorUnsupportedComputeStage"
+	case ErrorUnsupportedComputeDevice:
+		return "ErrorUnsupportedComputeDevice"
 	default:
-		return fmt.Sprintf("VNErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // The supported optical flow accuracy levels.
-type VNGenerateOpticalFlowRequestComputationAccuracy uint64
+type GenerateOpticalFlowRequestComputationAccuracy uint64
 
 const (
-	VNGenerateOpticalFlowRequestComputationAccuracyLow      VNGenerateOpticalFlowRequestComputationAccuracy = 0
-	VNGenerateOpticalFlowRequestComputationAccuracyMedium   VNGenerateOpticalFlowRequestComputationAccuracy = 1
-	VNGenerateOpticalFlowRequestComputationAccuracyHigh     VNGenerateOpticalFlowRequestComputationAccuracy = 2
-	VNGenerateOpticalFlowRequestComputationAccuracyVeryHigh VNGenerateOpticalFlowRequestComputationAccuracy = 3
+	GenerateOpticalFlowRequestComputationAccuracyLow      GenerateOpticalFlowRequestComputationAccuracy = 0
+	GenerateOpticalFlowRequestComputationAccuracyMedium   GenerateOpticalFlowRequestComputationAccuracy = 1
+	GenerateOpticalFlowRequestComputationAccuracyHigh     GenerateOpticalFlowRequestComputationAccuracy = 2
+	GenerateOpticalFlowRequestComputationAccuracyVeryHigh GenerateOpticalFlowRequestComputationAccuracy = 3
 )
 
-func (e VNGenerateOpticalFlowRequestComputationAccuracy) String() string {
+// String returns the GenerateOpticalFlowRequestComputationAccuracy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GenerateOpticalFlowRequestComputationAccuracy) String() string {
 	switch e {
-	case VNGenerateOpticalFlowRequestComputationAccuracyLow:
-		return "VNGenerateOpticalFlowRequestComputationAccuracyLow"
-	case VNGenerateOpticalFlowRequestComputationAccuracyMedium:
-		return "VNGenerateOpticalFlowRequestComputationAccuracyMedium"
-	case VNGenerateOpticalFlowRequestComputationAccuracyHigh:
-		return "VNGenerateOpticalFlowRequestComputationAccuracyHigh"
-	case VNGenerateOpticalFlowRequestComputationAccuracyVeryHigh:
-		return "VNGenerateOpticalFlowRequestComputationAccuracyVeryHigh"
+	case GenerateOpticalFlowRequestComputationAccuracyLow:
+		return "GenerateOpticalFlowRequestComputationAccuracyLow"
+	case GenerateOpticalFlowRequestComputationAccuracyMedium:
+		return "GenerateOpticalFlowRequestComputationAccuracyMedium"
+	case GenerateOpticalFlowRequestComputationAccuracyHigh:
+		return "GenerateOpticalFlowRequestComputationAccuracyHigh"
+	case GenerateOpticalFlowRequestComputationAccuracyVeryHigh:
+		return "GenerateOpticalFlowRequestComputationAccuracyVeryHigh"
 	default:
-		return fmt.Sprintf("VNGenerateOpticalFlowRequestComputationAccuracy(%d)", int64(e))
+		return fmt.Sprintf("GenerateOpticalFlowRequestComputationAccuracy(%d)", int64(e))
 	}
 }
 
 // Constants that define the levels of quality for a person segmentation request.
-type VNGeneratePersonSegmentationRequestQualityLevel uint64
+type GeneratePersonSegmentationRequestQualityLevel uint64
 
 const (
-	VNGeneratePersonSegmentationRequestQualityLevelAccurate VNGeneratePersonSegmentationRequestQualityLevel = 0
-	VNGeneratePersonSegmentationRequestQualityLevelBalanced VNGeneratePersonSegmentationRequestQualityLevel = 1
-	VNGeneratePersonSegmentationRequestQualityLevelFast     VNGeneratePersonSegmentationRequestQualityLevel = 2
+	GeneratePersonSegmentationRequestQualityLevelAccurate GeneratePersonSegmentationRequestQualityLevel = 0
+	GeneratePersonSegmentationRequestQualityLevelBalanced GeneratePersonSegmentationRequestQualityLevel = 1
+	GeneratePersonSegmentationRequestQualityLevelFast     GeneratePersonSegmentationRequestQualityLevel = 2
 )
 
-func (e VNGeneratePersonSegmentationRequestQualityLevel) String() string {
+// String returns the GeneratePersonSegmentationRequestQualityLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GeneratePersonSegmentationRequestQualityLevel) String() string {
 	switch e {
-	case VNGeneratePersonSegmentationRequestQualityLevelAccurate:
-		return "VNGeneratePersonSegmentationRequestQualityLevelAccurate"
-	case VNGeneratePersonSegmentationRequestQualityLevelBalanced:
-		return "VNGeneratePersonSegmentationRequestQualityLevelBalanced"
-	case VNGeneratePersonSegmentationRequestQualityLevelFast:
-		return "VNGeneratePersonSegmentationRequestQualityLevelFast"
+	case GeneratePersonSegmentationRequestQualityLevelAccurate:
+		return "GeneratePersonSegmentationRequestQualityLevelAccurate"
+	case GeneratePersonSegmentationRequestQualityLevelBalanced:
+		return "GeneratePersonSegmentationRequestQualityLevelBalanced"
+	case GeneratePersonSegmentationRequestQualityLevelFast:
+		return "GeneratePersonSegmentationRequestQualityLevelFast"
 	default:
-		return fmt.Sprintf("VNGeneratePersonSegmentationRequestQualityLevel(%d)", int64(e))
+		return fmt.Sprintf("GeneratePersonSegmentationRequestQualityLevel(%d)", int64(e))
 	}
 }
 
 // Constants that identify body height estimation techniques.
-type VNHumanBodyPose3DObservationHeightEstimation int64
+type HumanBodyPose3DObservationHeightEstimation int64
 
 const (
-	VNHumanBodyPose3DObservationHeightEstimationReference VNHumanBodyPose3DObservationHeightEstimation = 0
-	VNHumanBodyPose3DObservationHeightEstimationMeasured  VNHumanBodyPose3DObservationHeightEstimation = 1
+	HumanBodyPose3DObservationHeightEstimationReference HumanBodyPose3DObservationHeightEstimation = 0
+	HumanBodyPose3DObservationHeightEstimationMeasured  HumanBodyPose3DObservationHeightEstimation = 1
 )
 
-func (e VNHumanBodyPose3DObservationHeightEstimation) String() string {
+// String returns the HumanBodyPose3DObservationHeightEstimation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HumanBodyPose3DObservationHeightEstimation) String() string {
 	switch e {
-	case VNHumanBodyPose3DObservationHeightEstimationReference:
-		return "VNHumanBodyPose3DObservationHeightEstimationReference"
-	case VNHumanBodyPose3DObservationHeightEstimationMeasured:
-		return "VNHumanBodyPose3DObservationHeightEstimationMeasured"
+	case HumanBodyPose3DObservationHeightEstimationReference:
+		return "HumanBodyPose3DObservationHeightEstimationReference"
+	case HumanBodyPose3DObservationHeightEstimationMeasured:
+		return "HumanBodyPose3DObservationHeightEstimationMeasured"
 	default:
-		return fmt.Sprintf("VNHumanBodyPose3DObservationHeightEstimation(%d)", int64(e))
+		return fmt.Sprintf("HumanBodyPose3DObservationHeightEstimation(%d)", int64(e))
 	}
 }
 
 // Options that define how Vision crops and scales an input-image.
-type VNImageCropAndScaleOption uint64
+type ImageCropAndScaleOption uint64
 
 const (
 	// An option that scales the image to fit its shorter side within the input dimensions, while preserving its aspect ratio, and center-crops the image.
-	VNImageCropAndScaleOptionCenterCrop VNImageCropAndScaleOption = 0
+	ImageCropAndScaleOptionCenterCrop ImageCropAndScaleOption = 0
 	// An option that scales the image to fit its longer side within the input dimensions, while preserving its aspect ratio, and center-crops the image.
-	VNImageCropAndScaleOptionScaleFit VNImageCropAndScaleOption = 1
+	ImageCropAndScaleOptionScaleFit ImageCropAndScaleOption = 1
 	// An option that scales the image to fill the input dimensions, resizing it if necessary.
-	VNImageCropAndScaleOptionScaleFill VNImageCropAndScaleOption = 2
+	ImageCropAndScaleOptionScaleFill ImageCropAndScaleOption = 2
 	// An option that rotates the image 90 degrees counterclockwise and then scales it, while preserving its aspect ratio, to fit on the long side.
-	VNImageCropAndScaleOptionScaleFitRotate90CCW VNImageCropAndScaleOption = 257
+	ImageCropAndScaleOptionScaleFitRotate90CCW ImageCropAndScaleOption = 257
 	// An option that rotates the image 90 degrees counterclockwise and then scales it to fill the input dimensions.
-	VNImageCropAndScaleOptionScaleFillRotate90CCW VNImageCropAndScaleOption = 258
+	ImageCropAndScaleOptionScaleFillRotate90CCW ImageCropAndScaleOption = 258
 )
 
-func (e VNImageCropAndScaleOption) String() string {
+// String returns the ImageCropAndScaleOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageCropAndScaleOption) String() string {
 	switch e {
-	case VNImageCropAndScaleOptionCenterCrop:
-		return "VNImageCropAndScaleOptionCenterCrop"
-	case VNImageCropAndScaleOptionScaleFit:
-		return "VNImageCropAndScaleOptionScaleFit"
-	case VNImageCropAndScaleOptionScaleFill:
-		return "VNImageCropAndScaleOptionScaleFill"
-	case VNImageCropAndScaleOptionScaleFitRotate90CCW:
-		return "VNImageCropAndScaleOptionScaleFitRotate90CCW"
-	case VNImageCropAndScaleOptionScaleFillRotate90CCW:
-		return "VNImageCropAndScaleOptionScaleFillRotate90CCW"
+	case ImageCropAndScaleOptionCenterCrop:
+		return "ImageCropAndScaleOptionCenterCrop"
+	case ImageCropAndScaleOptionScaleFit:
+		return "ImageCropAndScaleOptionScaleFit"
+	case ImageCropAndScaleOptionScaleFill:
+		return "ImageCropAndScaleOptionScaleFill"
+	case ImageCropAndScaleOptionScaleFitRotate90CCW:
+		return "ImageCropAndScaleOptionScaleFitRotate90CCW"
+	case ImageCropAndScaleOptionScaleFillRotate90CCW:
+		return "ImageCropAndScaleOptionScaleFillRotate90CCW"
 	default:
-		return fmt.Sprintf("VNImageCropAndScaleOption(%d)", int64(e))
+		return fmt.Sprintf("ImageCropAndScaleOption(%d)", int64(e))
 	}
 }
 
 // The set of classifications that describe how to interpret the points the region provides.
-type VNPointsClassification int64
+type PointsClassification int64
 
 const (
-	VNPointsClassificationDisconnected VNPointsClassification = 0
-	VNPointsClassificationOpenPath     VNPointsClassification = 1
-	VNPointsClassificationClosedPath   VNPointsClassification = 2
+	PointsClassificationDisconnected PointsClassification = 0
+	PointsClassificationOpenPath     PointsClassification = 1
+	PointsClassificationClosedPath   PointsClassification = 2
 )
 
-func (e VNPointsClassification) String() string {
+// String returns the PointsClassification constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PointsClassification) String() string {
 	switch e {
-	case VNPointsClassificationDisconnected:
-		return "VNPointsClassificationDisconnected"
-	case VNPointsClassificationOpenPath:
-		return "VNPointsClassificationOpenPath"
-	case VNPointsClassificationClosedPath:
-		return "VNPointsClassificationClosedPath"
+	case PointsClassificationDisconnected:
+		return "PointsClassificationDisconnected"
+	case PointsClassificationOpenPath:
+		return "PointsClassificationOpenPath"
+	case PointsClassificationClosedPath:
+		return "PointsClassificationClosedPath"
 	default:
-		return fmt.Sprintf("VNPointsClassification(%d)", int64(e))
+		return fmt.Sprintf("PointsClassification(%d)", int64(e))
 	}
 }
 
 // An enumeration of face landmarks in a constellation object.
-type VNRequestFaceLandmarksConstellation uint64
+type RequestFaceLandmarksConstellation uint64
 
 const (
 	// An undefined constellation.
-	VNRequestFaceLandmarksConstellationNotDefined VNRequestFaceLandmarksConstellation = 0
+	RequestFaceLandmarksConstellationNotDefined RequestFaceLandmarksConstellation = 0
 	// A constellation with 65 points.
-	VNRequestFaceLandmarksConstellation65Points VNRequestFaceLandmarksConstellation = 1
+	RequestFaceLandmarksConstellation65Points RequestFaceLandmarksConstellation = 1
 	// A constellation with 76 points.
-	VNRequestFaceLandmarksConstellation76Points VNRequestFaceLandmarksConstellation = 2
+	RequestFaceLandmarksConstellation76Points RequestFaceLandmarksConstellation = 2
 )
 
-func (e VNRequestFaceLandmarksConstellation) String() string {
+// String returns the RequestFaceLandmarksConstellation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RequestFaceLandmarksConstellation) String() string {
 	switch e {
-	case VNRequestFaceLandmarksConstellationNotDefined:
-		return "VNRequestFaceLandmarksConstellationNotDefined"
-	case VNRequestFaceLandmarksConstellation65Points:
-		return "VNRequestFaceLandmarksConstellation65Points"
-	case VNRequestFaceLandmarksConstellation76Points:
-		return "VNRequestFaceLandmarksConstellation76Points"
+	case RequestFaceLandmarksConstellationNotDefined:
+		return "RequestFaceLandmarksConstellationNotDefined"
+	case RequestFaceLandmarksConstellation65Points:
+		return "RequestFaceLandmarksConstellation65Points"
+	case RequestFaceLandmarksConstellation76Points:
+		return "RequestFaceLandmarksConstellation76Points"
 	default:
-		return fmt.Sprintf("VNRequestFaceLandmarksConstellation(%d)", int64(e))
+		return fmt.Sprintf("RequestFaceLandmarksConstellation(%d)", int64(e))
 	}
 }
 
 // Constants that identify the performance and accuracy of the text recognition.
-type VNRequestTextRecognitionLevel int64
+type RequestTextRecognitionLevel int64
 
 const (
 	// Accurate text recognition takes more time to produce a more comprehensive result.
-	VNRequestTextRecognitionLevelAccurate VNRequestTextRecognitionLevel = 0
+	RequestTextRecognitionLevelAccurate RequestTextRecognitionLevel = 0
 	// Fast text recognition returns results more quickly at the expense of accuracy.
-	VNRequestTextRecognitionLevelFast VNRequestTextRecognitionLevel = 1
+	RequestTextRecognitionLevelFast RequestTextRecognitionLevel = 1
 )
 
-func (e VNRequestTextRecognitionLevel) String() string {
+// String returns the RequestTextRecognitionLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RequestTextRecognitionLevel) String() string {
 	switch e {
-	case VNRequestTextRecognitionLevelAccurate:
-		return "VNRequestTextRecognitionLevelAccurate"
-	case VNRequestTextRecognitionLevelFast:
-		return "VNRequestTextRecognitionLevelFast"
+	case RequestTextRecognitionLevelAccurate:
+		return "RequestTextRecognitionLevelAccurate"
+	case RequestTextRecognitionLevelFast:
+		return "RequestTextRecognitionLevelFast"
 	default:
-		return fmt.Sprintf("VNRequestTextRecognitionLevel(%d)", int64(e))
+		return fmt.Sprintf("RequestTextRecognitionLevel(%d)", int64(e))
 	}
 }
 
 // An enumeration of tracking priorities.
-type VNRequestTrackingLevel uint64
+type RequestTrackingLevel uint64
 
 const (
 	// Tracking level that favors location accuracy over speed.
-	VNRequestTrackingLevelAccurate VNRequestTrackingLevel = 0
+	RequestTrackingLevelAccurate RequestTrackingLevel = 0
 	// Tracking level that favors speed over location accuracy.
-	VNRequestTrackingLevelFast VNRequestTrackingLevel = 1
+	RequestTrackingLevelFast RequestTrackingLevel = 1
 )
 
-func (e VNRequestTrackingLevel) String() string {
+// String returns the RequestTrackingLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RequestTrackingLevel) String() string {
 	switch e {
-	case VNRequestTrackingLevelAccurate:
-		return "VNRequestTrackingLevelAccurate"
-	case VNRequestTrackingLevelFast:
-		return "VNRequestTrackingLevelFast"
+	case RequestTrackingLevelAccurate:
+		return "RequestTrackingLevelAccurate"
+	case RequestTrackingLevelFast:
+		return "RequestTrackingLevelFast"
 	default:
-		return fmt.Sprintf("VNRequestTrackingLevel(%d)", int64(e))
+		return fmt.Sprintf("RequestTrackingLevel(%d)", int64(e))
 	}
 }
 
 // Computational accuracy options.
-type VNTrackOpticalFlowRequestComputationAccuracy uint64
+type TrackOpticalFlowRequestComputationAccuracy uint64
 
 const (
-	VNTrackOpticalFlowRequestComputationAccuracyLow      VNTrackOpticalFlowRequestComputationAccuracy = 0
-	VNTrackOpticalFlowRequestComputationAccuracyMedium   VNTrackOpticalFlowRequestComputationAccuracy = 1
-	VNTrackOpticalFlowRequestComputationAccuracyHigh     VNTrackOpticalFlowRequestComputationAccuracy = 2
-	VNTrackOpticalFlowRequestComputationAccuracyVeryHigh VNTrackOpticalFlowRequestComputationAccuracy = 3
+	TrackOpticalFlowRequestComputationAccuracyLow      TrackOpticalFlowRequestComputationAccuracy = 0
+	TrackOpticalFlowRequestComputationAccuracyMedium   TrackOpticalFlowRequestComputationAccuracy = 1
+	TrackOpticalFlowRequestComputationAccuracyHigh     TrackOpticalFlowRequestComputationAccuracy = 2
+	TrackOpticalFlowRequestComputationAccuracyVeryHigh TrackOpticalFlowRequestComputationAccuracy = 3
 )
 
-func (e VNTrackOpticalFlowRequestComputationAccuracy) String() string {
+// String returns the TrackOpticalFlowRequestComputationAccuracy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TrackOpticalFlowRequestComputationAccuracy) String() string {
 	switch e {
-	case VNTrackOpticalFlowRequestComputationAccuracyLow:
-		return "VNTrackOpticalFlowRequestComputationAccuracyLow"
-	case VNTrackOpticalFlowRequestComputationAccuracyMedium:
-		return "VNTrackOpticalFlowRequestComputationAccuracyMedium"
-	case VNTrackOpticalFlowRequestComputationAccuracyHigh:
-		return "VNTrackOpticalFlowRequestComputationAccuracyHigh"
-	case VNTrackOpticalFlowRequestComputationAccuracyVeryHigh:
-		return "VNTrackOpticalFlowRequestComputationAccuracyVeryHigh"
+	case TrackOpticalFlowRequestComputationAccuracyLow:
+		return "TrackOpticalFlowRequestComputationAccuracyLow"
+	case TrackOpticalFlowRequestComputationAccuracyMedium:
+		return "TrackOpticalFlowRequestComputationAccuracyMedium"
+	case TrackOpticalFlowRequestComputationAccuracyHigh:
+		return "TrackOpticalFlowRequestComputationAccuracyHigh"
+	case TrackOpticalFlowRequestComputationAccuracyVeryHigh:
+		return "TrackOpticalFlowRequestComputationAccuracyVeryHigh"
 	default:
-		return fmt.Sprintf("VNTrackOpticalFlowRequestComputationAccuracy(%d)", int64(e))
+		return fmt.Sprintf("TrackOpticalFlowRequestComputationAccuracy(%d)", int64(e))
 	}
 }

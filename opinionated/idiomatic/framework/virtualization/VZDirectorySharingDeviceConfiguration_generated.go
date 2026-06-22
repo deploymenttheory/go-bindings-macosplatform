@@ -5,47 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The base class for a directory sharing device configuration.
+// DirectorySharingDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZDirectorySharingDeviceConfiguration.
 //
-// DirectorySharingDeviceConfiguration wraps [raw.VZDirectorySharingDeviceConfiguration] with a fluent Go API.
+// DirectorySharingDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioFileSystemDeviceConfiguration] and pass it where a DirectorySharingDeviceConfiguration is accepted.
+//
+// The base class for a directory sharing device configuration.
 type DirectorySharingDeviceConfiguration struct {
-	inner *raw.VZDirectorySharingDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZDirectorySharingDeviceConfiguration].
-func (x *DirectorySharingDeviceConfiguration) Unwrap() *raw.VZDirectorySharingDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectorySharingDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectorySharingDeviceConfigurationFromID adopts an existing object pointer as a DirectorySharingDeviceConfiguration (nil for 0).
+// DirectorySharingDeviceConfigurationFromID adopts an existing Objective-C object as a DirectorySharingDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectorySharingDeviceConfigurationFromID(id objc.ID) *DirectorySharingDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &DirectorySharingDeviceConfiguration{inner: raw.VZDirectorySharingDeviceConfigurationFromID(id)}
+	x := &DirectorySharingDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDirectorySharingDeviceConfiguration creates a new [DirectorySharingDeviceConfiguration].
-func NewDirectorySharingDeviceConfiguration() *DirectorySharingDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDirectorySharingDeviceConfiguration")), objc.RegisterName("new"))
-	return &DirectorySharingDeviceConfiguration{inner: raw.VZDirectorySharingDeviceConfigurationFromID(_id)}
+// directorySharingDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// DirectorySharingDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directorySharingDeviceConfigurationAdopt(id objc.ID) *DirectorySharingDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectorySharingDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DirectorySharingDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *DirectorySharingDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectorySharingDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectorySharingDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DirectorySharingDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // DirectorySharingDeviceConfigurationable is the interface implemented by [DirectorySharingDeviceConfiguration], for mocking and DI.
 type DirectorySharingDeviceConfigurationable interface {
-	Unwrap() *raw.VZDirectorySharingDeviceConfiguration
+	obj.Object
 }
 
 var _ DirectorySharingDeviceConfigurationable = (*DirectorySharingDeviceConfiguration)(nil)
+
+// isDirectorySharingDeviceConfiguration marks DirectorySharingDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the DirectorySharingDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DirectorySharingDeviceConfiguration) isDirectorySharingDeviceConfiguration() {}
+
+var _ DirectorySharingDeviceConfigurationProvider = (*DirectorySharingDeviceConfiguration)(nil)

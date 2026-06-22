@@ -5,70 +5,100 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class for all the query classes in HealthKit.
+// Query is an idiomatic wrapper over the Objective-C class HKQuery.
 //
-// Query wraps [raw.HKQuery] with a fluent Go API.
+// Query is an abstract base — you do not construct it directly. Construct one of [ActivitySummaryQuery], [AnchoredObjectQuery], [CorrelationQuery], [DocumentQuery], [ElectrocardiogramQuery], [HeartbeatSeriesQuery], [ObserverQuery], [QuantitySeriesSampleQuery], [SampleQuery], [SourceQuery], [StatisticsCollectionQuery], [StatisticsQuery], [UserAnnotatedMedicationQuery], [VerifiableClinicalRecordQuery], [WorkoutEffortRelationshipQuery], [WorkoutRouteQuery] and pass it where a Query is accepted.
+//
+// An abstract class for all the query classes in HealthKit.
 type Query struct {
-	inner *raw.HKQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQuery].
-func (x *Query) Unwrap() *raw.HKQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Query) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryFromID adopts an existing object pointer as a Query (nil for 0).
+// QueryFromID adopts an existing Objective-C object as a Query
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	return &Query{inner: raw.HKQueryFromID(id)}
+	x := &Query{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQuery creates a new [Query].
-func NewQuery() *Query {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuery")), objc.RegisterName("new"))
-	return &Query{inner: raw.HKQueryFromID(_id)}
+// queryAdopt wraps an Objective-C object that this code just created as a
+// Query (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryAdopt(id objc.ID) *Query {
+	if id == 0 {
+		return nil
+	}
+	x := &Query{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ObjectType calls the underlying ObjectType.
+// Description returns the object's -description text.
+func (x *Query) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Query) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Query) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Query) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// ObjectType wraps the corresponding Objective-C method.
 func (x *Query) ObjectType() *ObjectType {
-	_r := x.inner.ObjectType()
-	if _r == nil {
-		return nil
-	}
-	return &ObjectType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectType"))
+	return ObjectTypeFromID(_r)
 }
 
-// SampleType calls the underlying SampleType.
+// SampleType wraps the corresponding Objective-C method.
 func (x *Query) SampleType() *SampleType {
-	_r := x.inner.SampleType()
-	if _r == nil {
-		return nil
-	}
-	return &SampleType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
+	return SampleTypeFromID(_r)
 }
 
-// Predicate calls the underlying Predicate.
-func (x *Query) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
+// Predicate wraps the corresponding Objective-C method.
+func (x *Query) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
-
-func (x *Query) asQuery() *raw.HKQuery { return x.inner }
 
 // Queryable is the interface implemented by [Query], for mocking and DI.
 type Queryable interface {
-	Unwrap() *raw.HKQuery
+	obj.Object
 	ObjectType() *ObjectType
 	SampleType() *SampleType
-	Predicate() *foundation.NSPredicate
+	Predicate() obj.Object
 }
 
 var _ Queryable = (*Query)(nil)
+
+// isQuery marks Query — and, by embedding promotion, its
+// subclasses — as a member of the Query hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Query) isQuery() {}
+
+var _ QueryProvider = (*Query)(nil)

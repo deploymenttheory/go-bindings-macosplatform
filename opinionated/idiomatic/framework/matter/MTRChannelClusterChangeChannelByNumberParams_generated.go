@@ -5,126 +5,154 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterChangeChannelByNumberParams wraps [raw.MTRChannelClusterChangeChannelByNumberParams] with a fluent Go API.
+// MTRChannelClusterChangeChannelByNumberParams is an idiomatic wrapper over the Objective-C class MTRChannelClusterChangeChannelByNumberParams.
 type MTRChannelClusterChangeChannelByNumberParams struct {
-	inner *raw.MTRChannelClusterChangeChannelByNumberParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterChangeChannelByNumberParams].
-func (x *MTRChannelClusterChangeChannelByNumberParams) Unwrap() *raw.MTRChannelClusterChangeChannelByNumberParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterChangeChannelByNumberParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterChangeChannelByNumberParamsFromID adopts an existing object pointer as a MTRChannelClusterChangeChannelByNumberParams (nil for 0).
+// MTRChannelClusterChangeChannelByNumberParamsFromID adopts an existing Objective-C object as a MTRChannelClusterChangeChannelByNumberParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterChangeChannelByNumberParamsFromID(id objc.ID) *MTRChannelClusterChangeChannelByNumberParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterChangeChannelByNumberParams{inner: raw.MTRChannelClusterChangeChannelByNumberParamsFromID(id)}
+	x := &MTRChannelClusterChangeChannelByNumberParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterChangeChannelByNumberParams creates a new [MTRChannelClusterChangeChannelByNumberParams].
+// mTRChannelClusterChangeChannelByNumberParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterChangeChannelByNumberParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterChangeChannelByNumberParamsAdopt(id objc.ID) *MTRChannelClusterChangeChannelByNumberParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterChangeChannelByNumberParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterChangeChannelByNumberParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterChangeChannelByNumberParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterChangeChannelByNumberParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRChannelClusterChangeChannelByNumberParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRChannelClusterChangeChannelByNumberParams creates a new MTRChannelClusterChangeChannelByNumberParams.
 func NewMTRChannelClusterChangeChannelByNumberParams() *MTRChannelClusterChangeChannelByNumberParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterChangeChannelByNumberParams")), objc.RegisterName("new"))
-	return &MTRChannelClusterChangeChannelByNumberParams{inner: raw.MTRChannelClusterChangeChannelByNumberParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterChangeChannelByNumberParams")), objc.RegisterName("new"))
+	return mTRChannelClusterChangeChannelByNumberParamsAdopt(_id)
 }
 
-// WithMajorNumber sets the majorNumber property and returns the receiver for chaining.
-func (x *MTRChannelClusterChangeChannelByNumberParams) WithMajorNumber(majorNumber *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams {
-	x.inner.SetMajorNumber(majorNumber)
+// WithMajorNumber sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterChangeChannelByNumberParams) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return x
 }
 
-// WithMinorNumber sets the minorNumber property and returns the receiver for chaining.
-func (x *MTRChannelClusterChangeChannelByNumberParams) WithMinorNumber(minorNumber *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams {
-	x.inner.SetMinorNumber(minorNumber)
+// WithMinorNumber sets the property and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterChangeChannelByNumberParams) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRChannelClusterChangeChannelByNumberParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRChannelClusterChangeChannelByNumberParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRChannelClusterChangeChannelByNumberParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRChannelClusterChangeChannelByNumberParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// MajorNumber calls the underlying MajorNumber.
-func (x *MTRChannelClusterChangeChannelByNumberParams) MajorNumber() *foundation.NSNumber {
-	return x.inner.MajorNumber()
+// MajorNumber wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterChangeChannelByNumberParams) MajorNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("majorNumber"))
+	return obj.Wrap(_r)
 }
 
-// SetMajorNumber calls the underlying SetMajorNumber.
-func (x *MTRChannelClusterChangeChannelByNumberParams) SetMajorNumber(majorNumber *foundation.NSNumber) {
-	x.inner.SetMajorNumber(majorNumber)
+// SetMajorNumber wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetMajorNumber(majorNumber obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 }
 
-// MinorNumber calls the underlying MinorNumber.
-func (x *MTRChannelClusterChangeChannelByNumberParams) MinorNumber() *foundation.NSNumber {
-	return x.inner.MinorNumber()
+// MinorNumber wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterChangeChannelByNumberParams) MinorNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minorNumber"))
+	return obj.Wrap(_r)
 }
 
-// SetMinorNumber calls the underlying SetMinorNumber.
-func (x *MTRChannelClusterChangeChannelByNumberParams) SetMinorNumber(minorNumber *foundation.NSNumber) {
-	x.inner.SetMinorNumber(minorNumber)
+// SetMinorNumber wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetMinorNumber(minorNumber obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRChannelClusterChangeChannelByNumberParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRChannelClusterChangeChannelByNumberParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRChannelClusterChangeChannelByNumberParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRChannelClusterChangeChannelByNumberParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRChannelClusterChangeChannelByNumberParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRChannelClusterChangeChannelByNumberParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRChannelClusterChangeChannelByNumberParamsable is the interface implemented by [MTRChannelClusterChangeChannelByNumberParams], for mocking and DI.
 type MTRChannelClusterChangeChannelByNumberParamsable interface {
-	Unwrap() *raw.MTRChannelClusterChangeChannelByNumberParams
-	WithMajorNumber(majorNumber *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
-	WithMinorNumber(minorNumber *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
-	MajorNumber() *foundation.NSNumber
-	SetMajorNumber(majorNumber *foundation.NSNumber)
-	MinorNumber() *foundation.NSNumber
-	SetMinorNumber(minorNumber *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams
+	WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelByNumberParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterChangeChannelByNumberParams
+	MajorNumber() obj.Object
+	SetMajorNumber(majorNumber obj.Object)
+	MinorNumber() obj.Object
+	SetMinorNumber(minorNumber obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRChannelClusterChangeChannelByNumberParamsable = (*MTRChannelClusterChangeChannelByNumberParams)(nil)

@@ -5,78 +5,86 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that outputs a probability distribution as attention weights.
+// SoftmaxLayer is an idiomatic wrapper over the Objective-C class MLCSoftmaxLayer.
 //
-// SoftmaxLayer wraps [raw.MLCSoftmaxLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that outputs a probability distribution as attention weights.
 type SoftmaxLayer struct {
-	inner *raw.MLCSoftmaxLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCSoftmaxLayer].
-func (x *SoftmaxLayer) Unwrap() *raw.MLCSoftmaxLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SoftmaxLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// SoftmaxLayerFromID adopts an existing object pointer as a SoftmaxLayer (nil for 0).
+// SoftmaxLayerFromID adopts an existing Objective-C object as a SoftmaxLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func SoftmaxLayerFromID(id objc.ID) *SoftmaxLayer {
 	if id == 0 {
 		return nil
 	}
-	return &SoftmaxLayer{inner: raw.MLCSoftmaxLayerFromID(id)}
+	x := &SoftmaxLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSoftmaxLayer creates a new [SoftmaxLayer].
+// softmaxLayerAdopt wraps an Objective-C object that this code just created as a
+// SoftmaxLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func softmaxLayerAdopt(id objc.ID) *SoftmaxLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &SoftmaxLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSoftmaxLayer creates a new SoftmaxLayer.
 func NewSoftmaxLayer() *SoftmaxLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCSoftmaxLayer")), objc.RegisterName("new"))
-	return &SoftmaxLayer{inner: raw.MLCSoftmaxLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCSoftmaxLayer")), objc.RegisterName("new"))
+	return softmaxLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *SoftmaxLayer) WithLabel(label string) *SoftmaxLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   operation @abstract   The softmax operation.  Supported values are softmax and log softmax.
-//
-// Operation calls the underlying Operation.
-func (x *SoftmaxLayer) Operation() MLCSoftmaxOperation {
-	return MLCSoftmaxOperation(x.inner.Operation())
+// Operation the softmax operation.  Supported values are softmax and log softmax.
+func (x *SoftmaxLayer) Operation() SoftmaxOperation {
+	_r := objc.Send[SoftmaxOperation](objref.IDOf(x), objc.RegisterName("operation"))
+	return _r
 }
 
-// @property   dimension @abstract   The  dimension over which softmax operation should be performed
-//
-// Dimension calls the underlying Dimension.
-func (x *SoftmaxLayer) Dimension() uint {
-	return x.inner.Dimension()
+// Dimension the  dimension over which softmax operation should be performed
+func (x *SoftmaxLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
-
-func (x *SoftmaxLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // SoftmaxLayerable is the interface implemented by [SoftmaxLayer], for mocking and DI.
 type SoftmaxLayerable interface {
-	Unwrap() *raw.MLCSoftmaxLayer
+	obj.Object
 	WithLabel(label string) *SoftmaxLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer
-	Operation() MLCSoftmaxOperation
-	Dimension() uint
+	Operation() SoftmaxOperation
+	Dimension() int
 }
 
 var _ SoftmaxLayerable = (*SoftmaxLayer)(nil)
+
+var _ LayerProvider = (*SoftmaxLayer)(nil)

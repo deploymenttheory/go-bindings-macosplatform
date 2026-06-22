@@ -5,128 +5,121 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMImplementation wraps [raw.DOMImplementation] with a fluent Go API.
+// DOMImplementation is an idiomatic wrapper over the Objective-C class DOMImplementation.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMImplementation struct {
-	inner *raw.DOMImplementation
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMImplementation].
-func (x *DOMImplementation) Unwrap() *raw.DOMImplementation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMImplementation) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMImplementationFromID adopts an existing object pointer as a DOMImplementation (nil for 0).
+// DOMImplementationFromID adopts an existing Objective-C object as a DOMImplementation
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMImplementationFromID(id objc.ID) *DOMImplementation {
 	if id == 0 {
 		return nil
 	}
-	return &DOMImplementation{inner: raw.DOMImplementationFromID(id)}
+	x := &DOMImplementation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMImplementation creates a new [DOMImplementation].
+// dOMImplementationAdopt wraps an Objective-C object that this code just created as a
+// DOMImplementation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMImplementationAdopt(id objc.ID) *DOMImplementation {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMImplementation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMImplementation creates a new DOMImplementation.
 func NewDOMImplementation() *DOMImplementation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMImplementation")), objc.RegisterName("new"))
-	return &DOMImplementation{inner: raw.DOMImplementationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMImplementation")), objc.RegisterName("new"))
+	return dOMImplementationAdopt(_id)
 }
 
-// HasFeatureVersion calls the underlying HasFeatureVersion.
+// HasFeatureVersion wraps the corresponding Objective-C method.
 func (x *DOMImplementation) HasFeatureVersion(feature string, version string) bool {
-	return x.inner.HasFeatureVersion(foundation.NSStringStringWithUTF8String(feature), foundation.NSStringStringWithUTF8String(version))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFeature:version:"), purego.NSString(feature), purego.NSString(version))
+	return _r
 }
 
-// CreateDocumentTypePublicIdSystemId calls the underlying CreateDocumentTypePublicIdSystemId.
+// CreateDocumentTypePublicIdSystemId wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateDocumentTypePublicIdSystemId(qualifiedName string, publicId string, systemId string) *DOMDocumentType {
-	_r := x.inner.CreateDocumentTypePublicIdSystemId(foundation.NSStringStringWithUTF8String(qualifiedName), foundation.NSStringStringWithUTF8String(publicId), foundation.NSStringStringWithUTF8String(systemId))
-	if _r == nil {
-		return nil
-	}
-	return &DOMDocumentType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentType:publicId:systemId:"), purego.NSString(qualifiedName), purego.NSString(publicId), purego.NSString(systemId))
+	return DOMDocumentTypeFromID(_r)
 }
 
-// CreateDocumentQualifiedNameDoctype calls the underlying CreateDocumentQualifiedNameDoctype.
-func (x *DOMImplementation) CreateDocumentQualifiedNameDoctype(namespaceURI string, qualifiedName string, doctype *raw.DOMDocumentType) *DOMDocument {
-	_r := x.inner.CreateDocumentQualifiedNameDoctype(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName), doctype)
-	if _r == nil {
-		return nil
-	}
-	return &DOMDocument{inner: _r}
+// CreateDocumentQualifiedNameDoctype wraps the corresponding Objective-C method.
+func (x *DOMImplementation) CreateDocumentQualifiedNameDoctype(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocument:qualifiedName:doctype:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), objref.IDOf(doctype))
+	return DOMDocumentFromID(_r)
 }
 
-// CreateCSSStyleSheetMedia calls the underlying CreateCSSStyleSheetMedia.
+// CreateCSSStyleSheetMedia wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateCSSStyleSheetMedia(title string, media string) *DOMCSSStyleSheet {
-	_r := x.inner.CreateCSSStyleSheetMedia(foundation.NSStringStringWithUTF8String(title), foundation.NSStringStringWithUTF8String(media))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleSheet{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCSSStyleSheet:media:"), purego.NSString(title), purego.NSString(media))
+	return DOMCSSStyleSheetFromID(_r)
 }
 
-// CreateHTMLDocument calls the underlying CreateHTMLDocument.
+// CreateHTMLDocument wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateHTMLDocument(title string) *DOMHTMLDocument {
-	_r := x.inner.CreateHTMLDocument(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLDocument{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createHTMLDocument:"), purego.NSString(title))
+	return DOMHTMLDocumentFromID(_r)
 }
 
-// HasFeature calls the underlying HasFeature.
+// HasFeature wraps the corresponding Objective-C method.
 func (x *DOMImplementation) HasFeature(feature string, version string) bool {
-	return x.inner.HasFeature(foundation.NSStringStringWithUTF8String(feature), foundation.NSStringStringWithUTF8String(version))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFeature::"), purego.NSString(feature), purego.NSString(version))
+	return _r
 }
 
-// CreateDocumentType calls the underlying CreateDocumentType.
+// CreateDocumentType wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateDocumentType(qualifiedName string, publicId string, systemId string) *DOMDocumentType {
-	_r := x.inner.CreateDocumentType(foundation.NSStringStringWithUTF8String(qualifiedName), foundation.NSStringStringWithUTF8String(publicId), foundation.NSStringStringWithUTF8String(systemId))
-	if _r == nil {
-		return nil
-	}
-	return &DOMDocumentType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocumentType:::"), purego.NSString(qualifiedName), purego.NSString(publicId), purego.NSString(systemId))
+	return DOMDocumentTypeFromID(_r)
 }
 
-// CreateDocument calls the underlying CreateDocument.
-func (x *DOMImplementation) CreateDocument(namespaceURI string, qualifiedName string, doctype *raw.DOMDocumentType) *DOMDocument {
-	_r := x.inner.CreateDocument(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName), doctype)
-	if _r == nil {
-		return nil
-	}
-	return &DOMDocument{inner: _r}
+// CreateDocument wraps the corresponding Objective-C method.
+func (x *DOMImplementation) CreateDocument(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createDocument:::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), objref.IDOf(doctype))
+	return DOMDocumentFromID(_r)
 }
 
-// CreateCSSStyleSheet calls the underlying CreateCSSStyleSheet.
+// CreateCSSStyleSheet wraps the corresponding Objective-C method.
 func (x *DOMImplementation) CreateCSSStyleSheet(title string, media string) *DOMCSSStyleSheet {
-	_r := x.inner.CreateCSSStyleSheet(foundation.NSStringStringWithUTF8String(title), foundation.NSStringStringWithUTF8String(media))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleSheet{inner: _r}
-}
-
-func (x *DOMImplementation) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMImplementation) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCSSStyleSheet::"), purego.NSString(title), purego.NSString(media))
+	return DOMCSSStyleSheetFromID(_r)
 }
 
 // DOMImplementationable is the interface implemented by [DOMImplementation], for mocking and DI.
 type DOMImplementationable interface {
-	Unwrap() *raw.DOMImplementation
+	obj.Object
 	HasFeatureVersion(feature string, version string) bool
 	CreateDocumentTypePublicIdSystemId(qualifiedName string, publicId string, systemId string) *DOMDocumentType
-	CreateDocumentQualifiedNameDoctype(namespaceURI string, qualifiedName string, doctype *raw.DOMDocumentType) *DOMDocument
+	CreateDocumentQualifiedNameDoctype(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument
 	CreateCSSStyleSheetMedia(title string, media string) *DOMCSSStyleSheet
 	CreateHTMLDocument(title string) *DOMHTMLDocument
 	HasFeature(feature string, version string) bool
 	CreateDocumentType(qualifiedName string, publicId string, systemId string) *DOMDocumentType
-	CreateDocument(namespaceURI string, qualifiedName string, doctype *raw.DOMDocumentType) *DOMDocument
+	CreateDocument(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument
 	CreateCSSStyleSheet(title string, media string) *DOMCSSStyleSheet
 }
 
 var _ DOMImplementationable = (*DOMImplementation)(nil)
+
+var _ DOMObjectProvider = (*DOMImplementation)(nil)
+
+var _ WebScriptObjectProvider = (*DOMImplementation)(nil)

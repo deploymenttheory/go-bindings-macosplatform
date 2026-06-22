@@ -5,82 +5,81 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSImportRule wraps [raw.DOMCSSImportRule] with a fluent Go API.
+// DOMCSSImportRule is an idiomatic wrapper over the Objective-C class DOMCSSImportRule.
+//
+// It embeds [DOMCSSRule], promoting that type's methods.
 type DOMCSSImportRule struct {
-	inner *raw.DOMCSSImportRule
+	DOMCSSRule
 }
 
-// Unwrap returns the underlying [raw.DOMCSSImportRule].
-func (x *DOMCSSImportRule) Unwrap() *raw.DOMCSSImportRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSImportRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSImportRuleFromID adopts an existing object pointer as a DOMCSSImportRule (nil for 0).
+// DOMCSSImportRuleFromID adopts an existing Objective-C object as a DOMCSSImportRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSImportRuleFromID(id objc.ID) *DOMCSSImportRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSImportRule{inner: raw.DOMCSSImportRuleFromID(id)}
-}
-
-// NewDOMCSSImportRule creates a new [DOMCSSImportRule].
-func NewDOMCSSImportRule() *DOMCSSImportRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSImportRule")), objc.RegisterName("new"))
-	return &DOMCSSImportRule{inner: raw.DOMCSSImportRuleFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSImportRule) WithCssText(cssText string) *DOMCSSImportRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSImportRule{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Href calls the underlying Href.
+// dOMCSSImportRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSImportRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSImportRuleAdopt(id objc.ID) *DOMCSSImportRule {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSImportRule{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMCSSImportRule creates a new DOMCSSImportRule.
+func NewDOMCSSImportRule() *DOMCSSImportRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSImportRule")), objc.RegisterName("new"))
+	return dOMCSSImportRuleAdopt(_id)
+}
+
+// WithCssText sets the property and returns the receiver so calls can be chained.
+func (x *DOMCSSImportRule) WithCssText(cssText string) *DOMCSSImportRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+// Href wraps the corresponding Objective-C method.
 func (x *DOMCSSImportRule) Href() string {
-	_r := x.inner.Href()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Media calls the underlying Media.
+// Media wraps the corresponding Objective-C method.
 func (x *DOMCSSImportRule) Media() *DOMMediaList {
-	_r := x.inner.Media()
-	if _r == nil {
-		return nil
-	}
-	return &DOMMediaList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+	return DOMMediaListFromID(_r)
 }
 
-// StyleSheet calls the underlying StyleSheet.
+// StyleSheet wraps the corresponding Objective-C method.
 func (x *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
-	_r := x.inner.StyleSheet()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSStyleSheet{inner: _r}
-}
-
-func (x *DOMCSSImportRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
-
-func (x *DOMCSSImportRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
-
-func (x *DOMCSSImportRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("styleSheet"))
+	return DOMCSSStyleSheetFromID(_r)
 }
 
 // DOMCSSImportRuleable is the interface implemented by [DOMCSSImportRule], for mocking and DI.
 type DOMCSSImportRuleable interface {
-	Unwrap() *raw.DOMCSSImportRule
+	obj.Object
 	WithCssText(cssText string) *DOMCSSImportRule
 	Href() string
 	Media() *DOMMediaList
@@ -88,3 +87,9 @@ type DOMCSSImportRuleable interface {
 }
 
 var _ DOMCSSImportRuleable = (*DOMCSSImportRule)(nil)
+
+var _ DOMCSSRuleProvider = (*DOMCSSImportRule)(nil)
+
+var _ DOMObjectProvider = (*DOMCSSImportRule)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCSSImportRule)(nil)

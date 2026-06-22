@@ -6,73 +6,94 @@ package virtualization
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that manages the overall state and configuration of your VM.
+// VirtualMachine is an idiomatic wrapper over the Objective-C class VZVirtualMachine.
 //
-// VirtualMachine wraps [raw.VZVirtualMachine] with a fluent Go API.
+// An object that manages the overall state and configuration of your VM.
 type VirtualMachine struct {
-	inner *raw.VZVirtualMachine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtualMachine].
-func (x *VirtualMachine) Unwrap() *raw.VZVirtualMachine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtualMachine) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtualMachineFromID adopts an existing object pointer as a VirtualMachine (nil for 0).
+// VirtualMachineFromID adopts an existing Objective-C object as a VirtualMachine
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtualMachineFromID(id objc.ID) *VirtualMachine {
 	if id == 0 {
 		return nil
 	}
-	return &VirtualMachine{inner: raw.VZVirtualMachineFromID(id)}
-}
-
-// Creates the VM and configures it with the specified data.
-//
-// NewVirtualMachineWithConfiguration creates a new [VirtualMachine].
-func NewVirtualMachineWithConfiguration(configuration *raw.VZVirtualMachineConfiguration) *VirtualMachine {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtualMachine")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), configuration.Ptr())
-	return &VirtualMachine{inner: raw.VZVirtualMachineFromID(_id)}
-}
-
-// Creates and configures the VM with the specified data and dispatch queue.
-//
-// NewVirtualMachineWithConfigurationQueue creates a new [VirtualMachine].
-func NewVirtualMachineWithConfigurationQueue(configuration *raw.VZVirtualMachineConfiguration, queue *foundation.NSObject) *VirtualMachine {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtualMachine")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:queue:"), configuration.Ptr(), queue.Ptr())
-	return &VirtualMachine{inner: raw.VZVirtualMachineFromID(_id)}
-}
-
-// A custom object you use to determine when the VM stops.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *VirtualMachine) WithDelegate(delegate raw.VZVirtualMachineDelegate) *VirtualMachine {
-	x.inner.SetDelegate(delegate)
+	x := &VirtualMachine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Starts the VM and notifies the specified completion handler if startup was successful.
+// virtualMachineAdopt wraps an Objective-C object that this code just created as a
+// VirtualMachine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtualMachineAdopt(id objc.ID) *VirtualMachine {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtualMachine{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtualMachine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtualMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtualMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualMachine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVirtualMachineWithConfiguration creates the VM and configures it with the specified data.
+func NewVirtualMachineWithConfiguration(configuration *VirtualMachineConfiguration) *VirtualMachine {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+	return virtualMachineAdopt(_id)
+}
+
+// NewVirtualMachineWithConfigurationQueue creates and configures the VM with the specified data and dispatch queue.
+func NewVirtualMachineWithConfigurationQueue(configuration *VirtualMachineConfiguration, queue obj.Object) *VirtualMachine {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:queue:"), objref.IDOf(configuration), objref.IDOf(queue))
+	return virtualMachineAdopt(_id)
+}
+
+// Start starts the VM and notifies the specified completion handler if startup was successful.
 //
 // Start blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Start(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StartWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -81,18 +102,17 @@ func (x *VirtualMachine) Start(ctx context.Context) error {
 	}
 }
 
-// Starts the VM with the options and a completion handler you provide.
+// StartWithOptions starts the VM with the options and a completion handler you provide.
 //
 // StartWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVirtualMachineStartOptions) error {
+func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.StartWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -101,18 +121,17 @@ func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVi
 	}
 }
 
-// Stops a VM that’s in either a running or paused state.
+// Stop stops a VM that’s in either a running or paused state.
 //
 // Stop blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Stop(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StopWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -121,18 +140,17 @@ func (x *VirtualMachine) Stop(ctx context.Context) error {
 	}
 }
 
-// Pauses a running VM and notifies the specified completion handler of the results.
+// Pause pauses a running VM and notifies the specified completion handler of the results.
 //
 // Pause blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Pause(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PauseWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -141,18 +159,17 @@ func (x *VirtualMachine) Pause(ctx context.Context) error {
 	}
 }
 
-// Resumes a paused VM and notifies the specified completion handler of the results.
+// Resume resumes a paused VM and notifies the specified completion handler of the results.
 //
 // Resume blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Resume(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.ResumeWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -161,18 +178,17 @@ func (x *VirtualMachine) Resume(ctx context.Context) error {
 	}
 }
 
-// Restores a VM from a previously saved state.
+// RestoreMachineStateFromURL restores a VM from a previously saved state.
 //
 // RestoreMachineStateFromURL blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
-	x.inner.RestoreMachineStateFromURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(saveFileURL)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreMachineStateFromURL:completionHandler:"), rt.FileURL(saveFileURL), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -181,18 +197,17 @@ func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFil
 	}
 }
 
-// Saves the state of a VM.
+// SaveMachineStateToURL saves the state of a VM.
 //
 // SaveMachineStateToURL blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
-	x.inner.SaveMachineStateToURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(saveFileURL)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveMachineStateToURL:completionHandler:"), rt.FileURL(saveFileURL), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -201,182 +216,129 @@ func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL 
 	}
 }
 
-// Asks the guest operating system to stop running.
+// RequestStop asks the guest operating system to stop running.
 //
-// RequestStop returns any validation error.
+// RequestStop returns an error if the operation did not succeed.
 func (x *VirtualMachine) RequestStop() error {
-	_, err := x.inner.RequestStopWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("requestStopWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @abstract The queue associated with this virtual machine. @discussion This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
-//
-// Queue calls the underlying Queue.
-func (x *VirtualMachine) Queue() *foundation.NSObject {
-	return x.inner.Queue()
+// Queue the queue associated with this virtual machine. This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
+func (x *VirtualMachine) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Execution state of the virtual machine.
-//
-// State calls the underlying State.
-func (x *VirtualMachine) State() VZVirtualMachineState {
-	return VZVirtualMachineState(x.inner.State())
+// State execution state of the virtual machine.
+func (x *VirtualMachine) State() VirtualMachineState {
+	_r := objc.Send[VirtualMachineState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @abstract The virtual machine delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *VirtualMachine) Delegate() raw.VZVirtualMachineDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *VirtualMachine) SetDelegate(delegate raw.VZVirtualMachineDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @abstract Return YES if the machine is in a state that can be started. @see -[VZVirtualMachine startWithCompletionHandler:]. @see -[VZVirtualMachine state]
-//
-// CanStart calls the underlying CanStart.
+// CanStart return YES if the machine is in a state that can be started.
 func (x *VirtualMachine) CanStart() bool {
-	return x.inner.CanStart()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStart"))
+	return _r
 }
 
-// @abstract Return YES if the machine is in a state that can be stopped. @see -[VZVirtualMachine stopWithCompletionHandler:] @see -[VZVirtualMachine state]
-//
-// CanStop calls the underlying CanStop.
+// CanStop return YES if the machine is in a state that can be stopped.
 func (x *VirtualMachine) CanStop() bool {
-	return x.inner.CanStop()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStop"))
+	return _r
 }
 
-// @abstract Return YES if the machine is in a state that can be paused. @see -[VZVirtualMachine pauseWithCompletionHandler:] @see -[VZVirtualMachine state]
-//
-// CanPause calls the underlying CanPause.
+// CanPause return YES if the machine is in a state that can be paused.
 func (x *VirtualMachine) CanPause() bool {
-	return x.inner.CanPause()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPause"))
+	return _r
 }
 
-// @abstract Return YES if the machine is in a state that can be resumed. @see -[VZVirtualMachine resumeWithCompletionHandler:] @see -[VZVirtualMachine state]
-//
-// CanResume calls the underlying CanResume.
+// CanResume return YES if the machine is in a state that can be resumed.
 func (x *VirtualMachine) CanResume() bool {
-	return x.inner.CanResume()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canResume"))
+	return _r
 }
 
-// @abstract Returns whether the machine is in a state where the guest can be asked to stop. @see -[VZVirtualMachine requestStopWithError:] @see -[VZVirtualMachine state]
-//
-// CanRequestStop calls the underlying CanRequestStop.
+// CanRequestStop returns whether the machine is in a state where the guest can be asked to stop.
 func (x *VirtualMachine) CanRequestStop() bool {
-	return x.inner.CanRequestStop()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRequestStop"))
+	return _r
 }
 
-// @abstract Return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured. @see VZVirtioConsoleDeviceConfiguration @see VZVirtualMachineConfiguration
+// ConsoleDevices return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured.
 //
 // ConsoleDevices returns the collection as a Go slice.
 func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
-	arr := x.inner.ConsoleDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ConsoleDevice {
-		return &ConsoleDevice{inner: raw.VZConsoleDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("consoleDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDevice { return ConsoleDeviceFromID(_id) })
 }
 
-// @abstract Return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured. @see VZVirtioFileSystemDeviceConfiguration @see VZVirtualMachineConfiguration
+// DirectorySharingDevices return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
 //
 // DirectorySharingDevices returns the collection as a Go slice.
 func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
-	arr := x.inner.DirectorySharingDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DirectorySharingDevice {
-		return &DirectorySharingDevice{inner: raw.VZDirectorySharingDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directorySharingDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DirectorySharingDevice { return DirectorySharingDeviceFromID(_id) })
 }
 
-// @abstract Return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured. @see VZGraphicsDeviceConfiguration @see VZVirtualMachineConfiguration
+// GraphicsDevices return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured.
 //
 // GraphicsDevices returns the collection as a Go slice.
 func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
-	arr := x.inner.GraphicsDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphicsDevice {
-		return &GraphicsDevice{inner: raw.VZGraphicsDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graphicsDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDevice { return GraphicsDeviceFromID(_id) })
 }
 
-// @abstract Return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured. @see VZVirtioTraditionalMemoryBalloonDeviceConfiguration @see VZVirtualMachineConfiguration
+// MemoryBalloonDevices return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured.
 //
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
-	arr := x.inner.MemoryBalloonDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MemoryBalloonDevice {
-		return &MemoryBalloonDevice{inner: raw.VZMemoryBalloonDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryBalloonDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MemoryBalloonDevice { return MemoryBalloonDeviceFromID(_id) })
 }
 
-// @abstract Return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured. @see VZVirtioNetworkDeviceConfiguration @see VZVirtualMachineConfiguration
+// NetworkDevices return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured.
 //
 // NetworkDevices returns the collection as a Go slice.
 func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
-	arr := x.inner.NetworkDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NetworkDevice {
-		return &NetworkDevice{inner: raw.VZNetworkDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NetworkDevice { return NetworkDeviceFromID(_id) })
 }
 
-// @abstract Return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured. @see VZVirtioSocketDeviceConfiguration @see VZVirtualMachineConfiguration
+// SocketDevices return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured.
 //
 // SocketDevices returns the collection as a Go slice.
 func (x *VirtualMachine) SocketDevices() []*SocketDevice {
-	arr := x.inner.SocketDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SocketDevice {
-		return &SocketDevice{inner: raw.VZSocketDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("socketDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SocketDevice { return SocketDeviceFromID(_id) })
 }
 
-// @abstract Return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured. @see VZUSBControllerConfiguration @see VZVirtualMachineConfiguration
+// UsbControllers return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured.
 //
 // UsbControllers returns the collection as a Go slice.
 func (x *VirtualMachine) UsbControllers() []*USBController {
-	arr := x.inner.UsbControllers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *USBController {
-		return &USBController{inner: raw.VZUSBControllerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbControllers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *USBController { return USBControllerFromID(_id) })
 }
 
 // VirtualMachineable is the interface implemented by [VirtualMachine], for mocking and DI.
 type VirtualMachineable interface {
-	Unwrap() *raw.VZVirtualMachine
-	WithDelegate(delegate raw.VZVirtualMachineDelegate) *VirtualMachine
+	obj.Object
 	Start(ctx context.Context) error
-	StartWithOptions(ctx context.Context, options *raw.VZVirtualMachineStartOptions) error
+	StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error
 	Stop(ctx context.Context) error
 	Pause(ctx context.Context) error
 	Resume(ctx context.Context) error
 	RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error
 	SaveMachineStateToURL(ctx context.Context, saveFileURL string) error
 	RequestStop() error
-	Queue() *foundation.NSObject
-	State() VZVirtualMachineState
-	Delegate() raw.VZVirtualMachineDelegate
-	SetDelegate(delegate raw.VZVirtualMachineDelegate)
+	Queue() obj.Object
+	State() VirtualMachineState
 	CanStart() bool
 	CanStop() bool
 	CanPause() bool

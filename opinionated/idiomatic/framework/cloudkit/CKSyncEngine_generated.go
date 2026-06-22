@@ -6,55 +6,86 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that manages the synchronization of local and remote record data.
+// SyncEngine is an idiomatic wrapper over the Objective-C class CKSyncEngine.
 //
-// SyncEngine wraps [raw.CKSyncEngine] with a fluent Go API.
+// An object that manages the synchronization of local and remote record data.
 type SyncEngine struct {
-	inner *raw.CKSyncEngine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngine].
-func (x *SyncEngine) Unwrap() *raw.CKSyncEngine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngine) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFromID adopts an existing object pointer as a SyncEngine (nil for 0).
+// SyncEngineFromID adopts an existing Objective-C object as a SyncEngine
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFromID(id objc.ID) *SyncEngine {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngine{inner: raw.CKSyncEngineFromID(id)}
+	x := &SyncEngine{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a sync engine with the specified configuration. - Parameters: - configuration: The attributes of the new sync engine, such as the associated database and the object to use as the engine's delegate. For more information, see “CKSyncEngineConfiguration“. - Returns: A configured sync engine.
-//
-// NewSyncEngineWithConfiguration creates a new [SyncEngine].
-func NewSyncEngineWithConfiguration(configuration *raw.CKSyncEngineConfiguration) *SyncEngine {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngine")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), configuration.Ptr())
-	return &SyncEngine{inner: raw.CKSyncEngineFromID(_id)}
+// syncEngineAdopt wraps an Objective-C object that this code just created as a
+// SyncEngine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineAdopt(id objc.ID) *SyncEngine {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngine{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Fetches pending remote changes from the server. - Parameters: - completionHandler: The block to execute when the fetch completes. If the fetch fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine immediately fetches all pending remote changes before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require more control over sync, such as pull-to-refresh or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related fetch events.
+// Description returns the object's -description text.
+func (x *SyncEngine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngine) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineWithConfiguration creates a sync engine with the specified configuration. - Parameters: - configuration: The attributes of the new sync engine, such as the associated database and the object to use as the engine's delegate. For more information, see “CKSyncEngineConfiguration“. - Returns: A configured sync engine.
+func NewSyncEngineWithConfiguration(configuration *SyncEngineConfiguration) *SyncEngine {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngine")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+	return syncEngineAdopt(_id)
+}
+
+// FetchChanges fetches pending remote changes from the server. - Parameters: - completionHandler: The block to execute when the fetch completes. If the fetch fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine immediately fetches all pending remote changes before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require more control over sync, such as pull-to-refresh or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related fetch events.
 //
 // FetchChanges blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) FetchChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.FetchChangesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchChangesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -63,18 +94,17 @@ func (x *SyncEngine) FetchChanges(ctx context.Context) error {
 	}
 }
 
-// Fetches pending remote changes from the server using the specified options. - Parameters: - options: The options to use when fetching changes. For more information, see “CKSyncEngineFetchChangesOptions“. - completionHandler: The block to execute when the fetch completes. If the fetch fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine immediately fetches all pending remote changes before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require more control over sync, such as pull-to-refresh or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related fetch events.
+// FetchChangesWithOptions fetches pending remote changes from the server using the specified options. - Parameters: - options: The options to use when fetching changes. For more information, see “CKSyncEngineFetchChangesOptions“. - completionHandler: The block to execute when the fetch completes. If the fetch fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine immediately fetches all pending remote changes before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require more control over sync, such as pull-to-refresh or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related fetch events.
 //
 // FetchChangesWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineFetchChangesOptions) error {
+func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *SyncEngineFetchChangesOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.FetchChangesWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchChangesWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -83,18 +113,17 @@ func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *raw.C
 	}
 }
 
-// Sends pending local changes to the server. - Parameters: - completionHandler: The block to execute when the send completes. If the send fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine sends all pending local changes to the server before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require greater control over sync, such as a "Backup now" button or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related send events.
+// SendChanges sends pending local changes to the server. - Parameters: - completionHandler: The block to execute when the send completes. If the send fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine sends all pending local changes to the server before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require greater control over sync, such as a "Backup now" button or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related send events.
 //
 // SendChanges blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) SendChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SendChangesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendChangesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -103,18 +132,17 @@ func (x *SyncEngine) SendChanges(ctx context.Context) error {
 	}
 }
 
-// Sends pending local changes to the server using the specified options. - Parameters: - options: The options to use when sending changes. For more information, see “CKSyncEngineSendChangesOptions“. - completionHandler: The block to execute when the send completes. If the send fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine sends all pending local changes to the server before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require greater control over sync, such as a "Backup now" button or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related send events.
+// SendChangesWithOptions sends pending local changes to the server using the specified options. - Parameters: - options: The options to use when sending changes. For more information, see “CKSyncEngineSendChangesOptions“. - completionHandler: The block to execute when the send completes. If the send fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine sends all pending local changes to the server before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require greater control over sync, such as a "Backup now" button or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related send events.
 //
 // SendChangesWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *SyncEngine) SendChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineSendChangesOptions) error {
+func (x *SyncEngine) SendChangesWithOptions(ctx context.Context, options *SyncEngineSendChangesOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.SendChangesWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendChangesWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -123,14 +151,15 @@ func (x *SyncEngine) SendChangesWithOptions(ctx context.Context, options *raw.CK
 	}
 }
 
-// Cancels any in-progress or pending sync operations. The sync engine processes cancelation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
+// CancelOperations cancels any in-progress or pending sync operations. The sync engine processes cancelation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
 //
 // CancelOperations blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) CancelOperations(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.CancelOperationsWithCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelOperationsWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -139,35 +168,25 @@ func (x *SyncEngine) CancelOperations(ctx context.Context) error {
 	}
 }
 
-// The associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database.
-//
-// Database calls the underlying Database.
+// Database the associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database.
 func (x *SyncEngine) Database() *Database {
-	_r := x.inner.Database()
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("database"))
+	return DatabaseFromID(_r)
 }
 
-// A collection of state properties used to efficiently manage sync engine operation. - SeeAlso: “CKSyncEngineState“
-//
-// State calls the underlying State.
+// State a collection of state properties used to efficiently manage sync engine operation. - SeeAlso: “CKSyncEngineState“
 func (x *SyncEngine) State() *SyncEngineState {
-	_r := x.inner.State()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineState{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	return SyncEngineStateFromID(_r)
 }
 
 // SyncEngineable is the interface implemented by [SyncEngine], for mocking and DI.
 type SyncEngineable interface {
-	Unwrap() *raw.CKSyncEngine
+	obj.Object
 	FetchChanges(ctx context.Context) error
-	FetchChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineFetchChangesOptions) error
+	FetchChangesWithOptions(ctx context.Context, options *SyncEngineFetchChangesOptions) error
 	SendChanges(ctx context.Context) error
-	SendChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineSendChangesOptions) error
+	SendChangesWithOptions(ctx context.Context, options *SyncEngineSendChangesOptions) error
 	CancelOperations(ctx context.Context) error
 	Database() *Database
 	State() *SyncEngineState

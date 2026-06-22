@@ -5,126 +5,101 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PackedJointAnimation wraps [raw.MDLPackedJointAnimation] with a fluent Go API.
+// PackedJointAnimation is an idiomatic wrapper over the Objective-C class MDLPackedJointAnimation.
+//
+// It embeds [Object], promoting that type's methods.
 type PackedJointAnimation struct {
-	inner *raw.MDLPackedJointAnimation
+	Object
 }
 
-// Unwrap returns the underlying [raw.MDLPackedJointAnimation].
-func (x *PackedJointAnimation) Unwrap() *raw.MDLPackedJointAnimation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PackedJointAnimation) ID() objc.ID { return x.inner.Ptr() }
-
-// PackedJointAnimationFromID adopts an existing object pointer as a PackedJointAnimation (nil for 0).
+// PackedJointAnimationFromID adopts an existing Objective-C object as a PackedJointAnimation
+// (nil for 0), retaining it and registering a release finalizer.
 func PackedJointAnimationFromID(id objc.ID) *PackedJointAnimation {
 	if id == 0 {
 		return nil
 	}
-	return &PackedJointAnimation{inner: raw.MDLPackedJointAnimationFromID(id)}
+	x := &PackedJointAnimation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPackedJointAnimationWithNameJointPaths creates a new [PackedJointAnimation].
-func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths *foundation.NSArray[*foundation.NSString]) *PackedJointAnimation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLPackedJointAnimation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:jointPaths:"), foundation.NSStringStringWithUTF8String(name).Ptr(), jointPaths.Ptr())
-	return &PackedJointAnimation{inner: raw.MDLPackedJointAnimationFromID(_id)}
+// packedJointAnimationAdopt wraps an Objective-C object that this code just created as a
+// PackedJointAnimation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func packedJointAnimationAdopt(id objc.ID) *PackedJointAnimation {
+	if id == 0 {
+		return nil
+	}
+	x := &PackedJointAnimation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets the parent property and returns the receiver for chaining.
+// NewPackedJointAnimationWithNameJointPaths creates a new PackedJointAnimation.
+func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths []string) *PackedJointAnimation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLPackedJointAnimation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:jointPaths:"), purego.NSString(name), purego.SliceToNSArray(jointPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return packedJointAnimationAdopt(_id)
+}
+
+// WithParent the parent object that contains this object.
 func (x *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
-	x.inner.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
-	x.inner.MDLObject.SetInstance(instance.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *PackedJointAnimation) WithTransform(transform raw.MDLTransformComponent) *PackedJointAnimation {
-	x.inner.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *PackedJointAnimation) WithChildren(children raw.MDLObjectContainerComponent) *PackedJointAnimation {
-	x.inner.MDLObject.SetChildren(children)
-	return x
-}
-
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
-	x.inner.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// JointPaths wraps the corresponding Objective-C method.
+//
 // JointPaths returns the collection as a Go slice.
 func (x *PackedJointAnimation) JointPaths() []string {
-	arr := x.inner.JointPaths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Translations calls the underlying Translations.
+// Translations wraps the corresponding Objective-C method.
 func (x *PackedJointAnimation) Translations() *AnimatedVector3Array {
-	_r := x.inner.Translations()
-	if _r == nil {
-		return nil
-	}
-	return &AnimatedVector3Array{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translations"))
+	return AnimatedVector3ArrayFromID(_r)
 }
 
-// Rotations calls the underlying Rotations.
+// Rotations wraps the corresponding Objective-C method.
 func (x *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
-	_r := x.inner.Rotations()
-	if _r == nil {
-		return nil
-	}
-	return &AnimatedQuaternionArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotations"))
+	return AnimatedQuaternionArrayFromID(_r)
 }
 
-// Scales calls the underlying Scales.
+// Scales wraps the corresponding Objective-C method.
 func (x *PackedJointAnimation) Scales() *AnimatedVector3Array {
-	_r := x.inner.Scales()
-	if _r == nil {
-		return nil
-	}
-	return &AnimatedVector3Array{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scales"))
+	return AnimatedVector3ArrayFromID(_r)
 }
-
-func (x *PackedJointAnimation) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 
 // PackedJointAnimationable is the interface implemented by [PackedJointAnimation], for mocking and DI.
 type PackedJointAnimationable interface {
-	Unwrap() *raw.MDLPackedJointAnimation
+	obj.Object
 	WithParent(parent ObjectProvider) *PackedJointAnimation
 	WithInstance(instance ObjectProvider) *PackedJointAnimation
-	WithTransform(transform raw.MDLTransformComponent) *PackedJointAnimation
-	WithChildren(children raw.MDLObjectContainerComponent) *PackedJointAnimation
 	WithHidden(hidden bool) *PackedJointAnimation
 	JointPaths() []string
 	Translations() *AnimatedVector3Array
@@ -133,3 +108,5 @@ type PackedJointAnimationable interface {
 }
 
 var _ PackedJointAnimationable = (*PackedJointAnimation)(nil)
+
+var _ ObjectProvider = (*PackedJointAnimation)(nil)

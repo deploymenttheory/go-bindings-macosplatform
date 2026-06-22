@@ -5,130 +5,142 @@
 package discrecordingui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// @class		DRSetupPanel @discussion	This class is the base class for setup panels in the DiscRecordingUI framework. It provides a base framework for handling device selection, media ejection and confirming or cancelling the panel.
+// SetupPanel is an idiomatic wrapper over the Objective-C class DRSetupPanel.
 //
-// SetupPanel wraps [raw.DRSetupPanel] with a fluent Go API.
+// SetupPanel is an abstract base — you do not construct it directly. Construct one of [BurnSetupPanel], [EraseSetupPanel] and pass it where a SetupPanel is accepted.
+//
+// This class is the base class for setup panels in the DiscRecordingUI framework. It provides a base framework for handling device selection, media ejection and confirming or cancelling the panel.
 type SetupPanel struct {
-	inner *raw.DRSetupPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DRSetupPanel].
-func (x *SetupPanel) Unwrap() *raw.DRSetupPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SetupPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// SetupPanelFromID adopts an existing object pointer as a SetupPanel (nil for 0).
+// SetupPanelFromID adopts an existing Objective-C object as a SetupPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func SetupPanelFromID(id objc.ID) *SetupPanel {
 	if id == 0 {
 		return nil
 	}
-	return &SetupPanel{inner: raw.DRSetupPanelFromID(id)}
+	x := &SetupPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @method		initWithNibName: @abstract	Initializes the receiver to use the panel from the nibName nib file. @param		nibName		Nib filename. @result		The receiver.
-//
-// NewSetupPanelWithNibName creates a new [SetupPanel].
+// setupPanelAdopt wraps an Objective-C object that this code just created as a
+// SetupPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func setupPanelAdopt(id objc.ID) *SetupPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &SetupPanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SetupPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SetupPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SetupPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SetupPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSetupPanelWithNibName initializes the receiver to use the panel from the nibName nib file.
 func NewSetupPanelWithNibName(nibName string) *SetupPanel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRSetupPanel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:"), foundation.NSStringStringWithUTF8String(nibName).Ptr())
-	return &SetupPanel{inner: raw.DRSetupPanelFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRSetupPanel")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:"), purego.NSString(nibName))
+	return setupPanelAdopt(_id)
 }
 
-// @method		runSetupPanel @abstract	Displays the receiver and begins its event loop. @discussion	Invokes NSApplication's @link //apple_ref/occ/instm/NSApplication/runModalForWindow: runModalForWindow: @/link method with self as the argument. @result		Returns @link //apple_ref/c/econst/NSOKButton NSOKButton @/link (if the user clicks the default button) or @link //apple_ref/c/econst/NSCancelButton NSCancelButton @/link (if the user clicks the Cancel button).
-//
-// RunSetupPanel calls the underlying RunSetupPanel.
+// RunSetupPanel displays the receiver and begins its event loop. Invokes NSApplication's
 func (x *SetupPanel) RunSetupPanel() int {
-	return x.inner.RunSetupPanel()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runSetupPanel"))
+	return _r
 }
 
-// @method		beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @abstract	Presents a setup panel as a sheet. @param		owner				The window the sheet will be attached to. If owner is not nil, the setup panel slides down as a sheet running as a document modal window. If owner is nil, this is an error. @param		modalDelegate		The modal delegate. The object that implements the didEndSelector. @param		didEndSelector		Selector to invoke when the sheet ends. This selector is optional. If implemented by the modal delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. didEndSelector may dismiss the save panel itself; otherwise it will be dismissed on return from the method. didEndSelector should have the following signature: <pre>@textblock - (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo; @/textblock</pre> @param		contextInfo			Context information to be passed when the selector named by didEndSelector is invoked.
-//
-// BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo.
-func (x *SetupPanel) BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo(owner *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo(owner, modalDelegate, didEndSelector, contextInfo)
+// Ok invoked when the user clicks the panel's default button.
+func (x *SetupPanel) Ok(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ok:"), objref.IDOf(sender))
 }
 
-// @method		ok: @abstract	Invoked when the user clicks the panel's default button. @param		sender		The object that invoked this method.
-//
-// Ok calls the underlying Ok.
-func (x *SetupPanel) Ok(sender objc.ID) {
-	x.inner.Ok(sender)
+// Cancel invoked when the user clicks the panel's cancel button.
+func (x *SetupPanel) Cancel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel:"), objref.IDOf(sender))
 }
 
-// @method		cancel: @abstract	Invoked when the user clicks the panel's cancel button. @param		sender		The object that invoked this method.
-//
-// Cancel calls the underlying Cancel.
-func (x *SetupPanel) Cancel(sender objc.ID) {
-	x.inner.Cancel(sender)
+// Eject invoked when the user clicks the panel's eject button.
+func (x *SetupPanel) Eject(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eject:"), objref.IDOf(sender))
 }
 
-// @method		eject: @abstract	Invoked when the user clicks the panel's eject button. @param		sender		The object that invoked this method.
-//
-// Eject calls the underlying Eject.
-func (x *SetupPanel) Eject(sender objc.ID) {
-	x.inner.Eject(sender)
+// Open invoked when the user clicks the panel's open button.
+func (x *SetupPanel) Open(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open:"), objref.IDOf(sender))
 }
 
-// @method		open: @abstract	Invoked when the user clicks the panel's open button. @param		sender		The object that invoked this method.
-//
-// Open calls the underlying Open.
-func (x *SetupPanel) Open(sender objc.ID) {
-	x.inner.Open(sender)
+// Close invoked when the user clicks the panel's close button.
+func (x *SetupPanel) Close(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close:"), objref.IDOf(sender))
 }
 
-// @method		close: @abstract	Invoked when the user clicks the panel's close button. @param		sender		The object that invoked this method.
-//
-// Close calls the underlying Close.
-func (x *SetupPanel) Close(sender objc.ID) {
-	x.inner.Close(sender)
+// DeviceSelectionChanged invoked when the user changes the device selected in the device popup. If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine.
+func (x *SetupPanel) DeviceSelectionChanged(device obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceSelectionChanged:"), objref.IDOf(device))
 }
 
-// @method		deviceSelectionChanged: @abstract	Invoked when the user changes the device selected in the device popup. @discussion	If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine. @param		device		The newly selected device, or nil.
-//
-// DeviceSelectionChanged calls the underlying DeviceSelectionChanged.
-func (x *SetupPanel) DeviceSelectionChanged(device *discrecording.DRDevice) {
-	x.inner.DeviceSelectionChanged(device)
+// MediaStateChanged invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc.
+func (x *SetupPanel) MediaStateChanged(status obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaStateChanged:"), objref.IDOf(status))
+	return _r
 }
 
-// @method		mediaStateChanged: @abstract	Invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc. @param		status		The new device status dictionary. @result		<i>YES</i> if the inserted media is valid for use, <i>NO</i> otherwise.
-//
-// MediaStateChanged calls the underlying MediaStateChanged.
-func (x *SetupPanel) MediaStateChanged(status *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.MediaStateChanged(status)
-}
-
-// @method		setupForDisplay @abstract	This method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
-//
-// SetupForDisplay calls the underlying SetupForDisplay.
+// SetupForDisplay this method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
 func (x *SetupPanel) SetupForDisplay() {
-	x.inner.SetupForDisplay()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupForDisplay"))
 }
-
-func (x *SetupPanel) asSetupPanel() *raw.DRSetupPanel { return x.inner }
 
 // SetupPanelable is the interface implemented by [SetupPanel], for mocking and DI.
 type SetupPanelable interface {
-	Unwrap() *raw.DRSetupPanel
+	obj.Object
 	RunSetupPanel() int
-	BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo(owner *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	Ok(sender objc.ID)
-	Cancel(sender objc.ID)
-	Eject(sender objc.ID)
-	Open(sender objc.ID)
-	Close(sender objc.ID)
-	DeviceSelectionChanged(device *discrecording.DRDevice)
-	MediaStateChanged(status *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	Ok(sender obj.Object)
+	Cancel(sender obj.Object)
+	Eject(sender obj.Object)
+	Open(sender obj.Object)
+	Close(sender obj.Object)
+	DeviceSelectionChanged(device obj.Object)
+	MediaStateChanged(status obj.Object) bool
 	SetupForDisplay()
 }
 
 var _ SetupPanelable = (*SetupPanel)(nil)
+
+// isSetupPanel marks SetupPanel — and, by embedding promotion, its
+// subclasses — as a member of the SetupPanel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SetupPanel) isSetupPanel() {}
+
+var _ SetupPanelProvider = (*SetupPanel)(nil)

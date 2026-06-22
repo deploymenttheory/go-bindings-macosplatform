@@ -5,51 +5,85 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract base class for building series samples.
+// SeriesBuilder is an idiomatic wrapper over the Objective-C class HKSeriesBuilder.
 //
-// SeriesBuilder wraps [raw.HKSeriesBuilder] with a fluent Go API.
+// SeriesBuilder is an abstract base — you do not construct it directly. Construct one of [HeartbeatSeriesBuilder], [WorkoutRouteBuilder] and pass it where a SeriesBuilder is accepted.
+//
+// An abstract base class for building series samples.
 type SeriesBuilder struct {
-	inner *raw.HKSeriesBuilder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKSeriesBuilder].
-func (x *SeriesBuilder) Unwrap() *raw.HKSeriesBuilder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SeriesBuilder) ID() objc.ID { return x.inner.Ptr() }
-
-// SeriesBuilderFromID adopts an existing object pointer as a SeriesBuilder (nil for 0).
+// SeriesBuilderFromID adopts an existing Objective-C object as a SeriesBuilder
+// (nil for 0), retaining it and registering a release finalizer.
 func SeriesBuilderFromID(id objc.ID) *SeriesBuilder {
 	if id == 0 {
 		return nil
 	}
-	return &SeriesBuilder{inner: raw.HKSeriesBuilderFromID(id)}
+	x := &SeriesBuilder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSeriesBuilder creates a new [SeriesBuilder].
-func NewSeriesBuilder() *SeriesBuilder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSeriesBuilder")), objc.RegisterName("new"))
-	return &SeriesBuilder{inner: raw.HKSeriesBuilderFromID(_id)}
+// seriesBuilderAdopt wraps an Objective-C object that this code just created as a
+// SeriesBuilder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func seriesBuilderAdopt(id objc.ID) *SeriesBuilder {
+	if id == 0 {
+		return nil
+	}
+	x := &SeriesBuilder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Invalidates the builder and discards the collected data.
-//
-// Discard calls the underlying Discard.
+// Description returns the object's -description text.
+func (x *SeriesBuilder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SeriesBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SeriesBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SeriesBuilder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Discard invalidates the builder and discards the collected data.
 func (x *SeriesBuilder) Discard() {
-	x.inner.Discard()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discard"))
 }
-
-func (x *SeriesBuilder) asSeriesBuilder() *raw.HKSeriesBuilder { return x.inner }
 
 // SeriesBuilderable is the interface implemented by [SeriesBuilder], for mocking and DI.
 type SeriesBuilderable interface {
-	Unwrap() *raw.HKSeriesBuilder
+	obj.Object
 	Discard()
 }
 
 var _ SeriesBuilderable = (*SeriesBuilder)(nil)
+
+// isSeriesBuilder marks SeriesBuilder — and, by embedding promotion, its
+// subclasses — as a member of the SeriesBuilder hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SeriesBuilder) isSeriesBuilder() {}
+
+var _ SeriesBuilderProvider = (*SeriesBuilder)(nil)

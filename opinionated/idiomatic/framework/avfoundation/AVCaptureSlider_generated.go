@@ -5,225 +5,189 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A slider control that selects a value from a bounded range.
+// CaptureSlider is an idiomatic wrapper over the Objective-C class AVCaptureSlider.
 //
-// CaptureSlider wraps [raw.AVCaptureSlider] with a fluent Go API.
+// It embeds [CaptureControl], promoting that type's methods.
+//
+// A slider control that selects a value from a bounded range.
 type CaptureSlider struct {
-	inner *raw.AVCaptureSlider
+	CaptureControl
 }
 
-// Unwrap returns the underlying [raw.AVCaptureSlider].
-func (x *CaptureSlider) Unwrap() *raw.AVCaptureSlider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureSlider) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureSliderFromID adopts an existing object pointer as a CaptureSlider (nil for 0).
+// CaptureSliderFromID adopts an existing Objective-C object as a CaptureSlider
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureSliderFromID(id objc.ID) *CaptureSlider {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(id)}
-}
-
-// Creates a continuous slider control that selects a value from a bounded range.
-//
-// NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue creates a new [CaptureSlider].
-func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue(localizedTitle string, symbolName string, minValue float32, maxValue float32) *CaptureSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:"), foundation.NSStringStringWithUTF8String(localizedTitle).Ptr(), foundation.NSStringStringWithUTF8String(symbolName).Ptr(), minValue, maxValue)
-	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(_id)}
-}
-
-// Creates a discrete slider control that selects a stepped value from a bounded range.
-//
-// NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep creates a new [CaptureSlider].
-func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedTitle string, symbolName string, minValue float32, maxValue float32, step float32) *CaptureSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:step:"), foundation.NSStringStringWithUTF8String(localizedTitle).Ptr(), foundation.NSStringStringWithUTF8String(symbolName).Ptr(), minValue, maxValue, step)
-	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(_id)}
-}
-
-// Creates a discrete slider control that selects a value from a list.
-//
-// NewCaptureSliderWithLocalizedTitleSymbolNameValues creates a new [CaptureSlider].
-func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, symbolName string, values *foundation.NSArray[*foundation.NSNumber]) *CaptureSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:values:"), foundation.NSStringStringWithUTF8String(localizedTitle).Ptr(), foundation.NSStringStringWithUTF8String(symbolName).Ptr(), values.Ptr())
-	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(_id)}
-}
-
-// The current value of the slider.
-//
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *CaptureSlider) WithValue(value float32) *CaptureSlider {
-	x.inner.SetValue(value)
+	x := &CaptureSlider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A localized string that defines the presentation of the slider’s value.
-//
-// WithLocalizedValueFormat sets the localizedValueFormat property and returns the receiver for chaining.
-func (x *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider {
-	x.inner.SetLocalizedValueFormat(foundation.NSStringStringWithUTF8String(localizedValueFormat))
-	return x
-}
-
-// Values in this array may receive unique visual representations or behaviors.
-//
-// WithProminentValues sets the collection, converting the Go slice to an NSArray.
-func (x *CaptureSlider) WithProminentValues(items ...*foundation.NSNumber) *CaptureSlider {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetProminentValues(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetProminentValues(_arr)
-	return x
-}
-
-// A string identifier for the slider.
-//
-// WithAccessibilityIdentifier sets the accessibilityIdentifier property and returns the receiver for chaining.
-func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider {
-	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
-	return x
-}
-
-// A Boolean value that indicates whether this control supports user interaction.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
-	x.inner.AVCaptureControl.SetEnabled(enabled)
-	return x
-}
-
-// Sets the action to perform on the specified dispatch queue when the slider’s value changes.
-//
-// SetActionQueueAction calls the underlying SetActionQueueAction.
-func (x *CaptureSlider) SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32)) {
-	x.inner.SetActionQueueAction(actionQueue, action)
-}
-
-// @property value @abstract The current value of the slider. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `value` must be changed on `actionQueue` – the queue provided to `setActionQueue:action:`. The default value is the slider's minimum value. A value may only be set if it is within the slider's minimum and maximum values, otherwise an `NSInvalidArgumentException` is thrown.
-//
-// Value calls the underlying Value.
-func (x *CaptureSlider) Value() float32 {
-	return x.inner.Value()
-}
-
-// SetValue calls the underlying SetValue.
-func (x *CaptureSlider) SetValue(value float32) {
-	x.inner.SetValue(value)
-}
-
-// @property localizedValueFormat @abstract A localized string defining the presentation of the slider's value. @discussion To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%@` and no other placeholders like `%d`, `%s`, etc. Invalid format strings will result in the value's default presentation. Examples of valid format strings are: - `%@%%` for "40%" - `%@ fps` for "60 fps" - `+ %@` for "+ 20"
-//
-// LocalizedValueFormat calls the underlying LocalizedValueFormat.
-func (x *CaptureSlider) LocalizedValueFormat() string {
-	_r := x.inner.LocalizedValueFormat()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetLocalizedValueFormat calls the underlying SetLocalizedValueFormat.
-func (x *CaptureSlider) SetLocalizedValueFormat(localizedValueFormat string) {
-	x.inner.SetLocalizedValueFormat(foundation.NSStringStringWithUTF8String(localizedValueFormat))
-}
-
-// @property prominentValues @abstract Values in this array may receive unique visual representations or behaviors.
-//
-// ProminentValues returns the collection as a Go slice.
-func (x *CaptureSlider) ProminentValues() []*foundation.NSNumber {
-	arr := x.inner.ProminentValues()
-	if arr == nil {
+// captureSliderAdopt wraps an Objective-C object that this code just created as a
+// CaptureSlider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureSliderAdopt(id objc.ID) *CaptureSlider {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &CaptureSlider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetProminentValues calls the underlying SetProminentValues.
-func (x *CaptureSlider) SetProminentValues(prominentValues *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetProminentValues(prominentValues)
+// NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue creates a continuous slider control that selects a value from a bounded range.
+func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue(localizedTitle string, symbolName string, minValue float32, maxValue float32) *CaptureSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:"), purego.NSString(localizedTitle), purego.NSString(symbolName), minValue, maxValue)
+	return captureSliderAdopt(_id)
 }
 
-// @property localizedTitle @abstract A localized string that describes the slider's `action`.
+// NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep creates a discrete slider control that selects a stepped value from a bounded range.
+func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedTitle string, symbolName string, minValue float32, maxValue float32, step float32) *CaptureSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:minValue:maxValue:step:"), purego.NSString(localizedTitle), purego.NSString(symbolName), minValue, maxValue, step)
+	return captureSliderAdopt(_id)
+}
+
+// NewCaptureSliderWithLocalizedTitleSymbolNameValues creates a discrete slider control that selects a value from a list.
+func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, symbolName string, values []obj.Object) *CaptureSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedTitle:symbolName:values:"), purego.NSString(localizedTitle), purego.NSString(symbolName), purego.SliceToNSArray(values, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return captureSliderAdopt(_id)
+}
+
+// WithValue the current value of the slider.
+func (x *CaptureSlider) WithValue(value float32) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
+	return x
+}
+
+// WithLocalizedValueFormat a localized string that defines the presentation of the slider’s value.
+func (x *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedValueFormat:"), purego.NSString(localizedValueFormat))
+	return x
+}
+
+// WithProminentValues values in this array may receive unique visual representations or behaviors.
+func (x *CaptureSlider) WithProminentValues(items ...obj.Object) *CaptureSlider {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProminentValues:"), _arr)
+	return x
+}
+
+// WithAccessibilityIdentifier a string identifier for the slider.
+func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
+	return x
+}
+
+// WithEnabled a Boolean value that indicates whether this control supports user interaction.
+func (x *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// SetActionQueueAction sets the action to perform on the specified dispatch queue when the slider’s value changes.
+func (x *CaptureSlider) SetActionQueueAction(actionQueue obj.Object, action func(float32)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
+}
+
+// Value the current value of the slider. Because the camera system may be independent from the main thread or `
+func (x *CaptureSlider) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
+}
+
+// SetValue wraps the corresponding Objective-C method.
+func (x *CaptureSlider) SetValue(value float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
+}
+
+// LocalizedValueFormat a localized string defining the presentation of the slider's value. To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%
+func (x *CaptureSlider) LocalizedValueFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedValueFormat"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetLocalizedValueFormat wraps the corresponding Objective-C method.
+func (x *CaptureSlider) SetLocalizedValueFormat(localizedValueFormat string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedValueFormat:"), purego.NSString(localizedValueFormat))
+}
+
+// ProminentValues values in this array may receive unique visual representations or behaviors.
 //
-// LocalizedTitle calls the underlying LocalizedTitle.
+// ProminentValues returns the collection as a Go slice.
+func (x *CaptureSlider) ProminentValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prominentValues"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetProminentValues wraps the corresponding Objective-C method.
+func (x *CaptureSlider) SetProminentValues(prominentValues []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProminentValues:"), purego.SliceToNSArray(prominentValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// LocalizedTitle a localized string that describes the slider's `action`.
 func (x *CaptureSlider) LocalizedTitle() string {
-	_r := x.inner.LocalizedTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property symbolName @abstract The name of a symbol to represent the slider.
-//
-// SymbolName calls the underlying SymbolName.
+// SymbolName the name of a symbol to represent the slider.
 func (x *CaptureSlider) SymbolName() string {
-	_r := x.inner.SymbolName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property accessibilityIdentifier @abstract A string that identifies the slider.
-//
-// AccessibilityIdentifier calls the underlying AccessibilityIdentifier.
+// AccessibilityIdentifier a string that identifies the slider.
 func (x *CaptureSlider) AccessibilityIdentifier() string {
-	_r := x.inner.AccessibilityIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAccessibilityIdentifier calls the underlying SetAccessibilityIdentifier.
+// SetAccessibilityIdentifier wraps the corresponding Objective-C method.
 func (x *CaptureSlider) SetAccessibilityIdentifier(accessibilityIdentifier string) {
-	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
 }
-
-func (x *CaptureSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
 
 // CaptureSliderable is the interface implemented by [CaptureSlider], for mocking and DI.
 type CaptureSliderable interface {
-	Unwrap() *raw.AVCaptureSlider
+	obj.Object
 	WithValue(value float32) *CaptureSlider
 	WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider
-	WithProminentValues(items ...*foundation.NSNumber) *CaptureSlider
+	WithProminentValues(items ...obj.Object) *CaptureSlider
 	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider
 	WithEnabled(enabled bool) *CaptureSlider
-	SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32))
+	SetActionQueueAction(actionQueue obj.Object, action func(float32))
 	Value() float32
 	SetValue(value float32)
 	LocalizedValueFormat() string
 	SetLocalizedValueFormat(localizedValueFormat string)
-	ProminentValues() []*foundation.NSNumber
-	SetProminentValues(prominentValues *foundation.NSArray[*foundation.NSNumber])
+	ProminentValues() []obj.Object
+	SetProminentValues(prominentValues []obj.Object)
 	LocalizedTitle() string
 	SymbolName() string
 	AccessibilityIdentifier() string
@@ -231,3 +195,5 @@ type CaptureSliderable interface {
 }
 
 var _ CaptureSliderable = (*CaptureSlider)(nil)
+
+var _ CaptureControlProvider = (*CaptureSlider)(nil)

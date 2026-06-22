@@ -5,129 +5,111 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that generates speech from text.
+// SpeechSynthesisProviderAudioUnit is an idiomatic wrapper over the Objective-C class AVSpeechSynthesisProviderAudioUnit.
 //
-// SpeechSynthesisProviderAudioUnit wraps [raw.AVSpeechSynthesisProviderAudioUnit] with a fluent Go API.
+// An object that generates speech from text.
 type SpeechSynthesisProviderAudioUnit struct {
-	inner *raw.AVSpeechSynthesisProviderAudioUnit
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSpeechSynthesisProviderAudioUnit].
-func (x *SpeechSynthesisProviderAudioUnit) Unwrap() *raw.AVSpeechSynthesisProviderAudioUnit {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechSynthesisProviderAudioUnit) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechSynthesisProviderAudioUnitFromID adopts an existing object pointer as a SpeechSynthesisProviderAudioUnit (nil for 0).
+// SpeechSynthesisProviderAudioUnitFromID adopts an existing Objective-C object as a SpeechSynthesisProviderAudioUnit
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechSynthesisProviderAudioUnitFromID(id objc.ID) *SpeechSynthesisProviderAudioUnit {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechSynthesisProviderAudioUnit{inner: raw.AVSpeechSynthesisProviderAudioUnitFromID(id)}
+	x := &SpeechSynthesisProviderAudioUnit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechSynthesisProviderAudioUnit creates a new [SpeechSynthesisProviderAudioUnit].
+// speechSynthesisProviderAudioUnitAdopt wraps an Objective-C object that this code just created as a
+// SpeechSynthesisProviderAudioUnit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechSynthesisProviderAudioUnitAdopt(id objc.ID) *SpeechSynthesisProviderAudioUnit {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechSynthesisProviderAudioUnit{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechSynthesisProviderAudioUnit) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechSynthesisProviderAudioUnit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechSynthesisProviderAudioUnit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpeechSynthesisProviderAudioUnit) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpeechSynthesisProviderAudioUnit creates a new SpeechSynthesisProviderAudioUnit.
 func NewSpeechSynthesisProviderAudioUnit() *SpeechSynthesisProviderAudioUnit {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisProviderAudioUnit")), objc.RegisterName("new"))
-	return &SpeechSynthesisProviderAudioUnit{inner: raw.AVSpeechSynthesisProviderAudioUnitFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderAudioUnit")), objc.RegisterName("new"))
+	return speechSynthesisProviderAudioUnitAdopt(_id)
 }
 
-// A list of voices the audio unit provides to the system.
-//
-// WithSpeechVoices sets the collection, converting the Go slice to an NSArray.
-func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSpeechVoices(foundation.NSArrayFromID[*raw.AVSpeechSynthesisProviderVoice](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVSpeechSynthesisProviderVoice](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSpeechVoices(_arr)
+// WithSpeechVoices a list of voices the audio unit provides to the system.
+func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*SpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit {
+	_arr := purego.SliceToNSArray(items, func(_v *SpeechSynthesisProviderVoice) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeechVoices:"), _arr)
 	return x
 }
 
-// A block that subclasses use to send marker information to the host.
-//
-// WithSpeechSynthesisOutputMetadataBlock sets the speechSynthesisOutputMetadataBlock property and returns the receiver for chaining.
-func (x *SpeechSynthesisProviderAudioUnit) WithSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) *SpeechSynthesisProviderAudioUnit {
-	x.inner.SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock)
-	return x
+// SynthesizeSpeechRequest sets the text to synthesize and the voice to use.
+func (x *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synthesizeSpeechRequest:"), objref.IDOf(speechRequest))
 }
 
-// Sets the text to synthesize and the voice to use.
-//
-// SynthesizeSpeechRequest calls the underlying SynthesizeSpeechRequest.
-func (x *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *raw.AVSpeechSynthesisProviderRequest) {
-	x.inner.SynthesizeSpeechRequest(speechRequest)
-}
-
-// Informs the audio unit to discard the speech request.
-//
-// CancelSpeechRequest calls the underlying CancelSpeechRequest.
+// CancelSpeechRequest informs the audio unit to discard the speech request.
 func (x *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
-	x.inner.CancelSpeechRequest()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelSpeechRequest"))
 }
 
-// @brief  Returns the voices this audio unit has available and ready for synthesis. @discussion This method should fetch and return the voices ready to synthesize that a user can select from (usually through Settings). Required for speech synthesizer audio unit extensions. An audio unit with a dynamic list of voices can override this property's getter to perform a more complex fetch.
+// SpeechVoices returns the voices this audio unit has available and ready for synthesis. This method should fetch and return the voices ready to synthesize that a user can select from (usually through Settings). Required for speech synthesizer audio unit extensions. An audio unit with a dynamic list of voices can override this property's getter to perform a more complex fetch.
 //
 // SpeechVoices returns the collection as a Go slice.
 func (x *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*SpeechSynthesisProviderVoice {
-	arr := x.inner.SpeechVoices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpeechSynthesisProviderVoice {
-		return &SpeechSynthesisProviderVoice{inner: raw.AVSpeechSynthesisProviderVoiceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechVoices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeechSynthesisProviderVoice { return SpeechSynthesisProviderVoiceFromID(_id) })
 }
 
-// SetSpeechVoices calls the underlying SetSpeechVoices.
-func (x *SpeechSynthesisProviderAudioUnit) SetSpeechVoices(speechVoices *foundation.NSArray[*raw.AVSpeechSynthesisProviderVoice]) {
-	x.inner.SetSpeechVoices(speechVoices)
-}
-
-// @brief A property set by the host that is called by the audio unit to supply metadata for a speech request. @discussion A synthesizer should call this method when it has produced relevant data to the audio buffers it is sending back to the host. In some cases speech output may be delayed until these markers are delivered. For example, word highlighting depends on marker data from synthesizers in order to properly time which words are highlighted. Many speech synthesizers generate this information on the fly, while synthesizing the audio. The array of markers can reference future audio buffers that have yet to be delivered. There may be cases in which marker data is not fully known until further audio processing is done. In these cases, and other casers where marker data has changed, calling this block with marker data that contains perviously delivered audio buffer ranges will replace that audio buffer range's marker data, as it will be considered stale.
-//
-// SpeechSynthesisOutputMetadataBlock calls the underlying SpeechSynthesisOutputMetadataBlock.
-func (x *SpeechSynthesisProviderAudioUnit) SpeechSynthesisOutputMetadataBlock() objc.Block {
-	return x.inner.SpeechSynthesisOutputMetadataBlock()
-}
-
-// SetSpeechSynthesisOutputMetadataBlock calls the underlying SetSpeechSynthesisOutputMetadataBlock.
-func (x *SpeechSynthesisProviderAudioUnit) SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) {
-	x.inner.SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock)
+// SetSpeechVoices wraps the corresponding Objective-C method.
+func (x *SpeechSynthesisProviderAudioUnit) SetSpeechVoices(speechVoices []*SpeechSynthesisProviderVoice) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeechVoices:"), purego.SliceToNSArray(speechVoices, func(_v *SpeechSynthesisProviderVoice) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SpeechSynthesisProviderAudioUnitable is the interface implemented by [SpeechSynthesisProviderAudioUnit], for mocking and DI.
 type SpeechSynthesisProviderAudioUnitable interface {
-	Unwrap() *raw.AVSpeechSynthesisProviderAudioUnit
-	WithSpeechVoices(items ...*raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit
-	WithSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) *SpeechSynthesisProviderAudioUnit
-	SynthesizeSpeechRequest(speechRequest *raw.AVSpeechSynthesisProviderRequest)
+	obj.Object
+	WithSpeechVoices(items ...*SpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit
+	SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest)
 	CancelSpeechRequest()
 	SpeechVoices() []*SpeechSynthesisProviderVoice
-	SetSpeechVoices(speechVoices *foundation.NSArray[*raw.AVSpeechSynthesisProviderVoice])
-	SpeechSynthesisOutputMetadataBlock() objc.Block
-	SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest))
+	SetSpeechVoices(speechVoices []*SpeechSynthesisProviderVoice)
 }
 
 var _ SpeechSynthesisProviderAudioUnitable = (*SpeechSynthesisProviderAudioUnit)(nil)

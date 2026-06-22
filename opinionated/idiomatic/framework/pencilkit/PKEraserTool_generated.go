@@ -5,69 +5,80 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A tool for erasing previously drawn content in a canvas view.
+// EraserTool is an idiomatic wrapper over the Objective-C class PKEraserTool.
 //
-// EraserTool wraps [raw.PKEraserTool] with a fluent Go API.
+// It embeds [Tool], promoting that type's methods.
+//
+// A tool for erasing previously drawn content in a canvas view.
 type EraserTool struct {
-	inner *raw.PKEraserTool
+	Tool
 }
 
-// Unwrap returns the underlying [raw.PKEraserTool].
-func (x *EraserTool) Unwrap() *raw.PKEraserTool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EraserTool) ID() objc.ID { return x.inner.Ptr() }
-
-// EraserToolFromID adopts an existing object pointer as a EraserTool (nil for 0).
+// EraserToolFromID adopts an existing Objective-C object as a EraserTool
+// (nil for 0), retaining it and registering a release finalizer.
 func EraserToolFromID(id objc.ID) *EraserTool {
 	if id == 0 {
 		return nil
 	}
-	return &EraserTool{inner: raw.PKEraserToolFromID(id)}
+	x := &EraserTool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEraserToolWithEraserType creates a new [EraserTool].
-func NewEraserToolWithEraserType(eraserType PKEraserType) *EraserTool {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKEraserTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), raw.PKEraserType(eraserType))
-	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
+// eraserToolAdopt wraps an Objective-C object that this code just created as a
+// EraserTool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eraserToolAdopt(id objc.ID) *EraserTool {
+	if id == 0 {
+		return nil
+	}
+	x := &EraserTool{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Create a new eraser tool with a width. @param eraserType The type of eraser. @param width The width of the eraser.
-//
-// NewEraserToolWithEraserTypeWidth creates a new [EraserTool].
-func NewEraserToolWithEraserTypeWidth(eraserType PKEraserType, width float64) *EraserTool {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKEraserTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), raw.PKEraserType(eraserType), width)
-	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
+// NewEraserToolWithEraserType creates a new EraserTool.
+func NewEraserToolWithEraserType(eraserType EraserType) *EraserTool {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKEraserTool")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), eraserType)
+	return eraserToolAdopt(_id)
 }
 
-// The eraser type.
-//
-// EraserType calls the underlying EraserType.
-func (x *EraserTool) EraserType() PKEraserType {
-	return PKEraserType(x.inner.EraserType())
+// NewEraserToolWithEraserTypeWidth create a new eraser tool with a width.
+func NewEraserToolWithEraserTypeWidth(eraserType EraserType, width float64) *EraserTool {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKEraserTool")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), eraserType, width)
+	return eraserToolAdopt(_id)
 }
 
-// The width of the eraser.
-//
-// Width calls the underlying Width.
+// EraserType the eraser type.
+func (x *EraserTool) EraserType() EraserType {
+	_r := objc.Send[EraserType](objref.IDOf(x), objc.RegisterName("eraserType"))
+	return _r
+}
+
+// Width the width of the eraser.
 func (x *EraserTool) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
-
-func (x *EraserTool) asTool() *raw.PKTool { return &x.inner.PKTool }
 
 // EraserToolable is the interface implemented by [EraserTool], for mocking and DI.
 type EraserToolable interface {
-	Unwrap() *raw.PKEraserTool
-	EraserType() PKEraserType
+	obj.Object
+	EraserType() EraserType
 	Width() float64
 }
 
 var _ EraserToolable = (*EraserTool)(nil)
+
+var _ ToolProvider = (*EraserTool)(nil)

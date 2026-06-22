@@ -5,47 +5,74 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRAttributeCacheContainer wraps [raw.MTRAttributeCacheContainer] with a fluent Go API.
+// MTRAttributeCacheContainer is an idiomatic wrapper over the Objective-C class MTRAttributeCacheContainer.
 type MTRAttributeCacheContainer struct {
-	inner *raw.MTRAttributeCacheContainer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAttributeCacheContainer].
-func (x *MTRAttributeCacheContainer) Unwrap() *raw.MTRAttributeCacheContainer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAttributeCacheContainer) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAttributeCacheContainerFromID adopts an existing object pointer as a MTRAttributeCacheContainer (nil for 0).
+// MTRAttributeCacheContainerFromID adopts an existing Objective-C object as a MTRAttributeCacheContainer
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAttributeCacheContainerFromID(id objc.ID) *MTRAttributeCacheContainer {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAttributeCacheContainer{inner: raw.MTRAttributeCacheContainerFromID(id)}
+	x := &MTRAttributeCacheContainer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAttributeCacheContainer creates a new [MTRAttributeCacheContainer].
+// mTRAttributeCacheContainerAdopt wraps an Objective-C object that this code just created as a
+// MTRAttributeCacheContainer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAttributeCacheContainerAdopt(id objc.ID) *MTRAttributeCacheContainer {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAttributeCacheContainer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAttributeCacheContainer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAttributeCacheContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAttributeCacheContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRAttributeCacheContainer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRAttributeCacheContainer creates a new MTRAttributeCacheContainer.
 func NewMTRAttributeCacheContainer() *MTRAttributeCacheContainer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeCacheContainer")), objc.RegisterName("new"))
-	return &MTRAttributeCacheContainer{inner: raw.MTRAttributeCacheContainerFromID(_id)}
-}
-
-// ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion calls the underlying ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion.
-func (x *MTRAttributeCacheContainer) ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
-	x.inner.ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId, clusterId, attributeId, clientQueue, completion)
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributeCacheContainer")), objc.RegisterName("new"))
+	return mTRAttributeCacheContainerAdopt(_id)
 }
 
 // MTRAttributeCacheContainerable is the interface implemented by [MTRAttributeCacheContainer], for mocking and DI.
 type MTRAttributeCacheContainerable interface {
-	Unwrap() *raw.MTRAttributeCacheContainer
-	ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer))
+	obj.Object
 }
 
 var _ MTRAttributeCacheContainerable = (*MTRAttributeCacheContainer)(nil)

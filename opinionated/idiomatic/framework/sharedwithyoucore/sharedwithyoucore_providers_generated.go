@@ -5,20 +5,23 @@
 package sharedwithyoucore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ActionProvider is implemented by Action and any idiomatic type wrapping a SWAction subclass.
+// ActionProvider is accepted wherever a SWAction (or one of its subclasses) is expected.
 type ActionProvider interface {
-	asAction() *raw.SWAction
+	objref.Object
+	isAction()
 }
 
-// CollaborationOptionsGroupProvider is implemented by CollaborationOptionsGroup and any idiomatic type wrapping a SWCollaborationOptionsGroup subclass.
+// CollaborationOptionsGroupProvider is accepted wherever a SWCollaborationOptionsGroup (or one of its subclasses) is expected.
 type CollaborationOptionsGroupProvider interface {
-	asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup
+	objref.Object
+	isCollaborationOptionsGroup()
 }
 
-// PersonIdentityProofProvider is implemented by PersonIdentityProof and any idiomatic type wrapping a SWPersonIdentityProof subclass.
+// PersonIdentityProofProvider is accepted wherever a SWPersonIdentityProof (or one of its subclasses) is expected.
 type PersonIdentityProofProvider interface {
-	asPersonIdentityProof() *raw.SWPersonIdentityProof
+	objref.Object
+	isPersonIdentityProof()
 }

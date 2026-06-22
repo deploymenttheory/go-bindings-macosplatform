@@ -5,91 +5,111 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies the preferred languages and media characteristics for a player.
+// PlayerMediaSelectionCriteria is an idiomatic wrapper over the Objective-C class AVPlayerMediaSelectionCriteria.
 //
-// PlayerMediaSelectionCriteria wraps [raw.AVPlayerMediaSelectionCriteria] with a fluent Go API.
+// An object that specifies the preferred languages and media characteristics for a player.
 type PlayerMediaSelectionCriteria struct {
-	inner *raw.AVPlayerMediaSelectionCriteria
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerMediaSelectionCriteria].
-func (x *PlayerMediaSelectionCriteria) Unwrap() *raw.AVPlayerMediaSelectionCriteria { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerMediaSelectionCriteria) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerMediaSelectionCriteriaFromID adopts an existing object pointer as a PlayerMediaSelectionCriteria (nil for 0).
+// PlayerMediaSelectionCriteriaFromID adopts an existing Objective-C object as a PlayerMediaSelectionCriteria
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerMediaSelectionCriteriaFromID(id objc.ID) *PlayerMediaSelectionCriteria {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerMediaSelectionCriteria{inner: raw.AVPlayerMediaSelectionCriteriaFromID(id)}
+	x := &PlayerMediaSelectionCriteria{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates media selection criteria with the preferred languages and media characteristics.
+// playerMediaSelectionCriteriaAdopt wraps an Objective-C object that this code just created as a
+// PlayerMediaSelectionCriteria (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerMediaSelectionCriteriaAdopt(id objc.ID) *PlayerMediaSelectionCriteria {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerMediaSelectionCriteria{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerMediaSelectionCriteria) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerMediaSelectionCriteria) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerMediaSelectionCriteria) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerMediaSelectionCriteria) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics creates media selection criteria with the preferred languages and media characteristics.
+func NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics(preferredLanguages []string, preferredMediaCharacteristics []obj.Object) *PlayerMediaSelectionCriteria {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerMediaSelectionCriteria")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPreferredLanguages:preferredMediaCharacteristics:"), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(preferredMediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return playerMediaSelectionCriteriaAdopt(_id)
+}
+
+// NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics creates media selection criteria with the principal media characteristics, and preferred languages and media characteristics.
+func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics(principalMediaCharacteristics []obj.Object, preferredLanguages []string, preferredMediaCharacteristics []obj.Object) *PlayerMediaSelectionCriteria {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerMediaSelectionCriteria")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrincipalMediaCharacteristics:preferredLanguages:preferredMediaCharacteristics:"), purego.SliceToNSArray(principalMediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(preferredMediaCharacteristics, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return playerMediaSelectionCriteriaAdopt(_id)
+}
+
+// PreferredLanguages wraps the corresponding Objective-C method.
 //
-// NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics creates a new [PlayerMediaSelectionCriteria].
-func NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics(preferredLanguages *foundation.NSArray[*foundation.NSString], preferredMediaCharacteristics *foundation.NSArray[*foundation.NSString]) *PlayerMediaSelectionCriteria {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerMediaSelectionCriteria")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPreferredLanguages:preferredMediaCharacteristics:"), preferredLanguages.Ptr(), preferredMediaCharacteristics.Ptr())
-	return &PlayerMediaSelectionCriteria{inner: raw.AVPlayerMediaSelectionCriteriaFromID(_id)}
-}
-
-// Creates media selection criteria with the principal media characteristics, and preferred languages and media characteristics.
-//
-// NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics creates a new [PlayerMediaSelectionCriteria].
-func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics(principalMediaCharacteristics *foundation.NSArray[*foundation.NSString], preferredLanguages *foundation.NSArray[*foundation.NSString], preferredMediaCharacteristics *foundation.NSArray[*foundation.NSString]) *PlayerMediaSelectionCriteria {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerMediaSelectionCriteria")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrincipalMediaCharacteristics:preferredLanguages:preferredMediaCharacteristics:"), principalMediaCharacteristics.Ptr(), preferredLanguages.Ptr(), preferredMediaCharacteristics.Ptr())
-	return &PlayerMediaSelectionCriteria{inner: raw.AVPlayerMediaSelectionCriteriaFromID(_id)}
-}
-
 // PreferredLanguages returns the collection as a Go slice.
 func (x *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
-	arr := x.inner.PreferredLanguages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLanguages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// PreferredMediaCharacteristics wraps the corresponding Objective-C method.
+//
 // PreferredMediaCharacteristics returns the collection as a Go slice.
-func (x *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []*foundation.NSString {
-	arr := x.inner.PreferredMediaCharacteristics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredMediaCharacteristics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// PrincipalMediaCharacteristics wraps the corresponding Objective-C method.
+//
 // PrincipalMediaCharacteristics returns the collection as a Go slice.
-func (x *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []*foundation.NSString {
-	arr := x.inner.PrincipalMediaCharacteristics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("principalMediaCharacteristics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PlayerMediaSelectionCriteriaable is the interface implemented by [PlayerMediaSelectionCriteria], for mocking and DI.
 type PlayerMediaSelectionCriteriaable interface {
-	Unwrap() *raw.AVPlayerMediaSelectionCriteria
+	obj.Object
 	PreferredLanguages() []string
-	PreferredMediaCharacteristics() []*foundation.NSString
-	PrincipalMediaCharacteristics() []*foundation.NSString
+	PreferredMediaCharacteristics() []obj.Object
+	PrincipalMediaCharacteristics() []obj.Object
 }
 
 var _ PlayerMediaSelectionCriteriaable = (*PlayerMediaSelectionCriteria)(nil)

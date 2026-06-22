@@ -5,52 +5,82 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a physical mouse connected to a device.
+// Mouse is an idiomatic wrapper over the Objective-C class GCMouse.
 //
-// Mouse wraps [raw.GCMouse] with a fluent Go API.
+// An object that represents a physical mouse connected to a device.
 type Mouse struct {
-	inner *raw.GCMouse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCMouse].
-func (x *Mouse) Unwrap() *raw.GCMouse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Mouse) ID() objc.ID { return x.inner.Ptr() }
-
-// MouseFromID adopts an existing object pointer as a Mouse (nil for 0).
+// MouseFromID adopts an existing Objective-C object as a Mouse
+// (nil for 0), retaining it and registering a release finalizer.
 func MouseFromID(id objc.ID) *Mouse {
 	if id == 0 {
 		return nil
 	}
-	return &Mouse{inner: raw.GCMouseFromID(id)}
+	x := &Mouse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMouse creates a new [Mouse].
-func NewMouse() *Mouse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCMouse")), objc.RegisterName("new"))
-	return &Mouse{inner: raw.GCMouseFromID(_id)}
-}
-
-// Unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
-//
-// MouseInput calls the underlying MouseInput.
-func (x *Mouse) MouseInput() *MouseInput {
-	_r := x.inner.MouseInput()
-	if _r == nil {
+// mouseAdopt wraps an Objective-C object that this code just created as a
+// Mouse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mouseAdopt(id objc.ID) *Mouse {
+	if id == 0 {
 		return nil
 	}
-	return &MouseInput{inner: _r}
+	x := &Mouse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Mouse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Mouse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Mouse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Mouse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMouse creates a new Mouse.
+func NewMouse() *Mouse {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCMouse")), objc.RegisterName("new"))
+	return mouseAdopt(_id)
+}
+
+// MouseInput unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
+func (x *Mouse) MouseInput() *MouseInput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseInput"))
+	return MouseInputFromID(_r)
 }
 
 // Mouseable is the interface implemented by [Mouse], for mocking and DI.
 type Mouseable interface {
-	Unwrap() *raw.GCMouse
+	obj.Object
 	MouseInput() *MouseInput
 }
 

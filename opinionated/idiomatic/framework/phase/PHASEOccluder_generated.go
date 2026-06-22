@@ -5,60 +5,68 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object with a shape and position that blocks audio from reaching the listener.
+// Occluder is an idiomatic wrapper over the Objective-C class PHASEOccluder.
 //
-// Occluder wraps [raw.PHASEOccluder] with a fluent Go API.
+// It embeds [Object], promoting that type's methods.
+//
+// An object with a shape and position that blocks audio from reaching the listener.
 type Occluder struct {
-	inner *raw.PHASEOccluder
+	Object
 }
 
-// Unwrap returns the underlying [raw.PHASEOccluder].
-func (x *Occluder) Unwrap() *raw.PHASEOccluder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Occluder) ID() objc.ID { return x.inner.Ptr() }
-
-// OccluderFromID adopts an existing object pointer as a Occluder (nil for 0).
+// OccluderFromID adopts an existing Objective-C object as a Occluder
+// (nil for 0), retaining it and registering a release finalizer.
 func OccluderFromID(id objc.ID) *Occluder {
 	if id == 0 {
 		return nil
 	}
-	return &Occluder{inner: raw.PHASEOccluderFromID(id)}
+	x := &Occluder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an occluder with the given engine and shapes.
-//
-// NewOccluderWithEngineShapes creates a new [Occluder].
-func NewOccluderWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArray[*raw.PHASEShape]) *Occluder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEOccluder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), engine.Ptr(), shapes.Ptr())
-	return &Occluder{inner: raw.PHASEOccluderFromID(_id)}
-}
-
-// Shapes returns the collection as a Go slice.
-func (x *Occluder) Shapes() []*Shape {
-	arr := x.inner.Shapes()
-	if arr == nil {
+// occluderAdopt wraps an Objective-C object that this code just created as a
+// Occluder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func occluderAdopt(id objc.ID) *Occluder {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Shape {
-		return &Shape{inner: raw.PHASEShapeFromID(purego.Retain(_id))}
-	})
+	x := &Occluder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *Occluder) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
+// NewOccluderWithEngineShapes creates an occluder with the given engine and shapes.
+func NewOccluderWithEngineShapes(engine *Engine, shapes []*Shape) *Occluder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEOccluder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
+	return occluderAdopt(_id)
+}
+
+// Shapes wraps the corresponding Objective-C method.
+//
+// Shapes returns the collection as a Go slice.
+func (x *Occluder) Shapes() []*Shape {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
+}
 
 // Occluderable is the interface implemented by [Occluder], for mocking and DI.
 type Occluderable interface {
-	Unwrap() *raw.PHASEOccluder
+	obj.Object
 	Shapes() []*Shape
 }
 
 var _ Occluderable = (*Occluder)(nil)
+
+var _ ObjectProvider = (*Occluder)(nil)

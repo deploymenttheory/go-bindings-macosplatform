@@ -5,84 +5,118 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRNetworkCommissioningClusterNetworkInfoStruct wraps [raw.MTRNetworkCommissioningClusterNetworkInfoStruct] with a fluent Go API.
+// MTRNetworkCommissioningClusterNetworkInfoStruct is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterNetworkInfoStruct.
+//
+// MTRNetworkCommissioningClusterNetworkInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRNetworkCommissioningClusterNetworkInfo] and pass it where a MTRNetworkCommissioningClusterNetworkInfoStruct is accepted.
 type MTRNetworkCommissioningClusterNetworkInfoStruct struct {
-	inner *raw.MTRNetworkCommissioningClusterNetworkInfoStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterNetworkInfoStruct].
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRNetworkCommissioningClusterNetworkInfoStructFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterNetworkInfoStruct (nil for 0).
+// MTRNetworkCommissioningClusterNetworkInfoStructFromID adopts an existing Objective-C object as a MTRNetworkCommissioningClusterNetworkInfoStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRNetworkCommissioningClusterNetworkInfoStructFromID(id objc.ID) *MTRNetworkCommissioningClusterNetworkInfoStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRNetworkCommissioningClusterNetworkInfoStruct{inner: raw.MTRNetworkCommissioningClusterNetworkInfoStructFromID(id)}
-}
-
-// NewMTRNetworkCommissioningClusterNetworkInfoStruct creates a new [MTRNetworkCommissioningClusterNetworkInfoStruct].
-func NewMTRNetworkCommissioningClusterNetworkInfoStruct() *MTRNetworkCommissioningClusterNetworkInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRNetworkCommissioningClusterNetworkInfoStruct")), objc.RegisterName("new"))
-	return &MTRNetworkCommissioningClusterNetworkInfoStruct{inner: raw.MTRNetworkCommissioningClusterNetworkInfoStructFromID(_id)}
-}
-
-// WithNetworkID sets the networkID property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterNetworkInfoStruct {
-	x.inner.SetNetworkID(networkID)
+	x := &MTRNetworkCommissioningClusterNetworkInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithConnected sets the connected property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithConnected(connected *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkInfoStruct {
-	x.inner.SetConnected(connected)
+// mTRNetworkCommissioningClusterNetworkInfoStructAdopt wraps an Objective-C object that this code just created as a
+// MTRNetworkCommissioningClusterNetworkInfoStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRNetworkCommissioningClusterNetworkInfoStructAdopt(id objc.ID) *MTRNetworkCommissioningClusterNetworkInfoStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRNetworkCommissioningClusterNetworkInfoStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// NetworkID calls the underlying NetworkID.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() *foundation.NSData {
-	return x.inner.NetworkID()
+// Description returns the object's -description text.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetNetworkID calls the underlying SetNetworkID.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetNetworkID(networkID *foundation.NSData) {
-	x.inner.SetNetworkID(networkID)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Connected calls the underlying Connected.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() *foundation.NSNumber {
-	return x.inner.Connected()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetConnected calls the underlying SetConnected.
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetConnected(connected *foundation.NSNumber) {
-	x.inner.SetConnected(connected)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct {
-	return x.inner
+// WithNetworkID sets the property and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
+	return x
+}
+
+// WithConnected sets the property and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), objref.IDOf(connected))
+	return x
+}
+
+// NetworkID wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkID"))
+	return obj.Wrap(_r)
+}
+
+// SetNetworkID wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetNetworkID(networkID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
+}
+
+// Connected wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connected"))
+	return obj.Wrap(_r)
+}
+
+// SetConnected wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetConnected(connected obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 }
 
 // MTRNetworkCommissioningClusterNetworkInfoStructable is the interface implemented by [MTRNetworkCommissioningClusterNetworkInfoStruct], for mocking and DI.
 type MTRNetworkCommissioningClusterNetworkInfoStructable interface {
-	Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct
-	WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterNetworkInfoStruct
-	WithConnected(connected *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkInfoStruct
-	NetworkID() *foundation.NSData
-	SetNetworkID(networkID *foundation.NSData)
-	Connected() *foundation.NSNumber
-	SetConnected(connected *foundation.NSNumber)
+	obj.Object
+	WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct
+	WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct
+	NetworkID() obj.Object
+	SetNetworkID(networkID obj.Object)
+	Connected() obj.Object
+	SetConnected(connected obj.Object)
 }
 
 var _ MTRNetworkCommissioningClusterNetworkInfoStructable = (*MTRNetworkCommissioningClusterNetworkInfoStruct)(nil)
+
+// isMTRNetworkCommissioningClusterNetworkInfoStruct marks MTRNetworkCommissioningClusterNetworkInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRNetworkCommissioningClusterNetworkInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) isMTRNetworkCommissioningClusterNetworkInfoStruct() {
+}
+
+var _ MTRNetworkCommissioningClusterNetworkInfoStructProvider = (*MTRNetworkCommissioningClusterNetworkInfoStruct)(nil)

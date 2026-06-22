@@ -5,122 +5,129 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A parsed ATR (Answer To Reset) message from a Smart Card.
+// SmartCardATR is an idiomatic wrapper over the Objective-C class TKSmartCardATR.
 //
-// SmartCardATR wraps [raw.TKSmartCardATR] with a fluent Go API.
+// A parsed ATR (Answer To Reset) message from a Smart Card.
 type SmartCardATR struct {
-	inner *raw.TKSmartCardATR
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardATR].
-func (x *SmartCardATR) Unwrap() *raw.TKSmartCardATR { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardATR) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardATRFromID adopts an existing object pointer as a SmartCardATR (nil for 0).
+// SmartCardATRFromID adopts an existing Objective-C object as a SmartCardATR
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardATRFromID(id objc.ID) *SmartCardATR {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(id)}
+	x := &SmartCardATR{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a TKSmartCardATR object from a provided data object.
-//
-// NewSmartCardATRWithBytes creates a new [SmartCardATR].
-func NewSmartCardATRWithBytes(bytes_ *foundation.NSData) *SmartCardATR {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardATR")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:"), bytes_.Ptr())
-	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
+// smartCardATRAdopt wraps an Objective-C object that this code just created as a
+// SmartCardATR (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardATRAdopt(id objc.ID) *SmartCardATR {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardATR{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Initializes a TKSmartCardATR object from a provided data source.
-//
-// NewSmartCardATRWithSource creates a new [SmartCardATR].
+// Description returns the object's -description text.
+func (x *SmartCardATR) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardATR) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardATR) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardATR) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSmartCardATRWithBytes initializes a TKSmartCardATR object from a provided data object.
+func NewSmartCardATRWithBytes(bytes_ obj.Object) *SmartCardATR {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSmartCardATR")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:"), objref.IDOf(bytes_))
+	return smartCardATRAdopt(_id)
+}
+
+// NewSmartCardATRWithSource initializes a TKSmartCardATR object from a provided data source.
 func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardATR")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), source)
-	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSmartCardATR")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objc.NewBlock(func(_ objc.Block) int { return source() }))
+	return smartCardATRAdopt(_id)
 }
 
-// Returns the interface group at the specified index.
-//
-// InterfaceGroupAtIndex calls the underlying InterfaceGroupAtIndex.
+// InterfaceGroupAtIndex returns the interface group at the specified index.
 func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup {
-	_r := x.inner.InterfaceGroupAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardATRInterfaceGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceGroupAtIndex:"), index)
+	return SmartCardATRInterfaceGroupFromID(_r)
 }
 
-// Returns the interface group with the specified protocol.
-//
-// InterfaceGroupForProtocol calls the underlying InterfaceGroupForProtocol.
-func (x *SmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *SmartCardATRInterfaceGroup {
-	_r := x.inner.InterfaceGroupForProtocol(raw.TKSmartCardProtocol(protocol))
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardATRInterfaceGroup{inner: _r}
+// InterfaceGroupForProtocol returns the interface group with the specified protocol.
+func (x *SmartCardATR) InterfaceGroupForProtocol(protocol SmartCardProtocol) *SmartCardATRInterfaceGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceGroupForProtocol:"), protocol)
+	return SmartCardATRInterfaceGroupFromID(_r)
 }
 
-// Full ATR as string of bytes
-//
-// Bytes calls the underlying Bytes.
-func (x *SmartCardATR) Bytes() *foundation.NSData {
-	return x.inner.Bytes()
+// Bytes full ATR as string of bytes
+func (x *SmartCardATR) Bytes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bytes"))
+	return obj.Wrap(_r)
 }
 
-// Array of NSNumber of protocols indicated in ATR, in the correct order (i.e. the default protocol comes first), duplicates sorted out.
+// Protocols array of NSNumber of protocols indicated in ATR, in the correct order (i.e. the default protocol comes first), duplicates sorted out.
 //
 // Protocols returns the collection as a Go slice.
-func (x *SmartCardATR) Protocols() []*foundation.NSNumber {
-	arr := x.inner.Protocols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *SmartCardATR) Protocols() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Just historical bytes of ATR, without Tck and interface bytes.
-//
-// HistoricalBytes calls the underlying HistoricalBytes.
-func (x *SmartCardATR) HistoricalBytes() *foundation.NSData {
-	return x.inner.HistoricalBytes()
+// HistoricalBytes just historical bytes of ATR, without Tck and interface bytes.
+func (x *SmartCardATR) HistoricalBytes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("historicalBytes"))
+	return obj.Wrap(_r)
 }
 
-// An array of TKCompactTLVRecord instances with TLV records parsed from historical bytes.  If historical bytes are not structured using Compact TLV encoding, nil is returned. @note In case that ATR historical bytes begin with 0x00, the last three bytes (status indicator) are automatically appended into the returned records as if historical bytes would begin with 0x80 and 0x8 record is present in historical bytes.
+// HistoricalRecords an array of TKCompactTLVRecord instances with TLV records parsed from historical bytes.  If historical bytes are not structured using Compact TLV encoding, nil is returned.
 //
 // HistoricalRecords returns the collection as a Go slice.
 func (x *SmartCardATR) HistoricalRecords() []*CompactTLVRecord {
-	arr := x.inner.HistoricalRecords()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CompactTLVRecord {
-		return &CompactTLVRecord{inner: raw.TKCompactTLVRecordFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("historicalRecords"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CompactTLVRecord { return CompactTLVRecordFromID(_id) })
 }
 
 // SmartCardATRable is the interface implemented by [SmartCardATR], for mocking and DI.
 type SmartCardATRable interface {
-	Unwrap() *raw.TKSmartCardATR
+	obj.Object
 	InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup
-	InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *SmartCardATRInterfaceGroup
-	Bytes() *foundation.NSData
-	Protocols() []*foundation.NSNumber
-	HistoricalBytes() *foundation.NSData
+	InterfaceGroupForProtocol(protocol SmartCardProtocol) *SmartCardATRInterfaceGroup
+	Bytes() obj.Object
+	Protocols() []obj.Object
+	HistoricalBytes() obj.Object
 	HistoricalRecords() []*CompactTLVRecord
 }
 

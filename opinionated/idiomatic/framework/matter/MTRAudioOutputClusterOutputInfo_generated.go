@@ -5,67 +5,77 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAudioOutputClusterOutputInfo wraps [raw.MTRAudioOutputClusterOutputInfo] with a fluent Go API.
+// MTRAudioOutputClusterOutputInfo is an idiomatic wrapper over the Objective-C class MTRAudioOutputClusterOutputInfo.
+//
+// It embeds [MTRAudioOutputClusterOutputInfoStruct], promoting that type's methods.
 type MTRAudioOutputClusterOutputInfo struct {
-	inner *raw.MTRAudioOutputClusterOutputInfo
+	MTRAudioOutputClusterOutputInfoStruct
 }
 
-// Unwrap returns the underlying [raw.MTRAudioOutputClusterOutputInfo].
-func (x *MTRAudioOutputClusterOutputInfo) Unwrap() *raw.MTRAudioOutputClusterOutputInfo {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAudioOutputClusterOutputInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAudioOutputClusterOutputInfoFromID adopts an existing object pointer as a MTRAudioOutputClusterOutputInfo (nil for 0).
+// MTRAudioOutputClusterOutputInfoFromID adopts an existing Objective-C object as a MTRAudioOutputClusterOutputInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAudioOutputClusterOutputInfoFromID(id objc.ID) *MTRAudioOutputClusterOutputInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAudioOutputClusterOutputInfo{inner: raw.MTRAudioOutputClusterOutputInfoFromID(id)}
+	x := &MTRAudioOutputClusterOutputInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAudioOutputClusterOutputInfo creates a new [MTRAudioOutputClusterOutputInfo].
+// mTRAudioOutputClusterOutputInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRAudioOutputClusterOutputInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAudioOutputClusterOutputInfoAdopt(id objc.ID) *MTRAudioOutputClusterOutputInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAudioOutputClusterOutputInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRAudioOutputClusterOutputInfo creates a new MTRAudioOutputClusterOutputInfo.
 func NewMTRAudioOutputClusterOutputInfo() *MTRAudioOutputClusterOutputInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAudioOutputClusterOutputInfo")), objc.RegisterName("new"))
-	return &MTRAudioOutputClusterOutputInfo{inner: raw.MTRAudioOutputClusterOutputInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAudioOutputClusterOutputInfo")), objc.RegisterName("new"))
+	return mTRAudioOutputClusterOutputInfoAdopt(_id)
 }
 
-// WithIndex sets the index property and returns the receiver for chaining.
-func (x *MTRAudioOutputClusterOutputInfo) WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo {
-	x.inner.MTRAudioOutputClusterOutputInfoStruct.SetIndex(index)
+// WithIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRAudioOutputClusterOutputInfo) WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return x
 }
 
-// WithOutputType sets the outputType property and returns the receiver for chaining.
-func (x *MTRAudioOutputClusterOutputInfo) WithOutputType(outputType *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo {
-	x.inner.MTRAudioOutputClusterOutputInfoStruct.SetOutputType(outputType)
+// WithOutputType sets the property and returns the receiver so calls can be chained.
+func (x *MTRAudioOutputClusterOutputInfo) WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRAudioOutputClusterOutputInfo) WithName(name string) *MTRAudioOutputClusterOutputInfo {
-	x.inner.MTRAudioOutputClusterOutputInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
-}
-
-func (x *MTRAudioOutputClusterOutputInfo) asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct {
-	return &x.inner.MTRAudioOutputClusterOutputInfoStruct
 }
 
 // MTRAudioOutputClusterOutputInfoable is the interface implemented by [MTRAudioOutputClusterOutputInfo], for mocking and DI.
 type MTRAudioOutputClusterOutputInfoable interface {
-	Unwrap() *raw.MTRAudioOutputClusterOutputInfo
-	WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo
-	WithOutputType(outputType *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo
+	obj.Object
+	WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfo
+	WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfo
 	WithName(name string) *MTRAudioOutputClusterOutputInfo
 }
 
 var _ MTRAudioOutputClusterOutputInfoable = (*MTRAudioOutputClusterOutputInfo)(nil)
+
+var _ MTRAudioOutputClusterOutputInfoStructProvider = (*MTRAudioOutputClusterOutputInfo)(nil)

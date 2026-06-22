@@ -5,99 +5,92 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about a sent batch of database changes.
+// SyncEngineSentDatabaseChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineSentDatabaseChangesEvent.
 //
-// SyncEngineSentDatabaseChangesEvent wraps [raw.CKSyncEngineSentDatabaseChangesEvent] with a fluent Go API.
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// An object that provides information about a sent batch of database changes.
 type SyncEngineSentDatabaseChangesEvent struct {
-	inner *raw.CKSyncEngineSentDatabaseChangesEvent
+	SyncEngineEvent
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineSentDatabaseChangesEvent].
-func (x *SyncEngineSentDatabaseChangesEvent) Unwrap() *raw.CKSyncEngineSentDatabaseChangesEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineSentDatabaseChangesEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineSentDatabaseChangesEventFromID adopts an existing object pointer as a SyncEngineSentDatabaseChangesEvent (nil for 0).
+// SyncEngineSentDatabaseChangesEventFromID adopts an existing Objective-C object as a SyncEngineSentDatabaseChangesEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineSentDatabaseChangesEventFromID(id objc.ID) *SyncEngineSentDatabaseChangesEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineSentDatabaseChangesEvent{inner: raw.CKSyncEngineSentDatabaseChangesEventFromID(id)}
+	x := &SyncEngineSentDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineSentDatabaseChangesEvent creates a new [SyncEngineSentDatabaseChangesEvent].
+// syncEngineSentDatabaseChangesEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineSentDatabaseChangesEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineSentDatabaseChangesEventAdopt(id objc.ID) *SyncEngineSentDatabaseChangesEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineSentDatabaseChangesEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSyncEngineSentDatabaseChangesEvent creates a new SyncEngineSentDatabaseChangesEvent.
 func NewSyncEngineSentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineSentDatabaseChangesEvent")), objc.RegisterName("new"))
-	return &SyncEngineSentDatabaseChangesEvent{inner: raw.CKSyncEngineSentDatabaseChangesEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSentDatabaseChangesEvent")), objc.RegisterName("new"))
+	return syncEngineSentDatabaseChangesEventAdopt(_id)
 }
 
-// The modified record zones.
+// SavedZones the modified record zones.
 //
 // SavedZones returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
-	arr := x.inner.SavedZones()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZone {
-		return &RecordZone{inner: raw.CKRecordZoneFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("savedZones"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
 
-// The record zones that CloudKit is unable to modify.
+// FailedZoneSaves the record zones that CloudKit is unable to modify.
 //
 // FailedZoneSaves returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngineFailedZoneSave {
-	arr := x.inner.FailedZoneSaves()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEngineFailedZoneSave {
-		return &SyncEngineFailedZoneSave{inner: raw.CKSyncEngineFailedZoneSaveFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failedZoneSaves"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFailedZoneSave { return SyncEngineFailedZoneSaveFromID(_id) })
 }
 
-// The unique identifiers of the deleted record zones.
+// DeletedZoneIDs the unique identifiers of the deleted record zones.
 //
 // DeletedZoneIDs returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) DeletedZoneIDs() []*RecordZoneID {
-	arr := x.inner.DeletedZoneIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
-		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedZoneIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
-// The unique identifiers of the record zones CloudKit is unable to delete, and the reasons why.
-//
-// FailedZoneDeletes calls the underlying FailedZoneDeletes.
-func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneDeletes() *foundation.NSDictionary[*raw.CKRecordZoneID, objc.ID] {
-	return x.inner.FailedZoneDeletes()
-}
-
-func (x *SyncEngineSentDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+// FailedZoneDeletes the unique identifiers of the record zones CloudKit is unable to delete, and the reasons why.
+func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneDeletes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failedZoneDeletes"))
+	return obj.Wrap(_r)
 }
 
 // SyncEngineSentDatabaseChangesEventable is the interface implemented by [SyncEngineSentDatabaseChangesEvent], for mocking and DI.
 type SyncEngineSentDatabaseChangesEventable interface {
-	Unwrap() *raw.CKSyncEngineSentDatabaseChangesEvent
+	obj.Object
 	SavedZones() []*RecordZone
 	FailedZoneSaves() []*SyncEngineFailedZoneSave
 	DeletedZoneIDs() []*RecordZoneID
-	FailedZoneDeletes() *foundation.NSDictionary[*raw.CKRecordZoneID, objc.ID]
+	FailedZoneDeletes() obj.Object
 }
 
 var _ SyncEngineSentDatabaseChangesEventable = (*SyncEngineSentDatabaseChangesEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineSentDatabaseChangesEvent)(nil)

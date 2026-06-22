@@ -5,342 +5,440 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An ODRecord object serves as a Cocoa wrapper for an Open Directory record.
+// Record is an idiomatic wrapper over the Objective-C class ODRecord.
 //
-// Record wraps [raw.ODRecord] with a fluent Go API.
+// An ODRecord object serves as a Cocoa wrapper for an Open Directory record.
 type Record struct {
-	inner *raw.ODRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODRecord].
-func (x *Record) Unwrap() *raw.ODRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Record) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordFromID adopts an existing object pointer as a Record (nil for 0).
+// RecordFromID adopts an existing Objective-C object as a Record
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordFromID(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	return &Record{inner: raw.ODRecordFromID(id)}
+	x := &Record{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecord creates a new [Record].
+// recordAdopt wraps an Objective-C object that this code just created as a
+// Record (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordAdopt(id objc.ID) *Record {
+	if id == 0 {
+		return nil
+	}
+	x := &Record{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Record) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Record) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Record) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Record) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRecord creates a new Record.
 func NewRecord() *Record {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ODRecord")), objc.RegisterName("new"))
-	return &Record{inner: raw.ODRecordFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ODRecord")), objc.RegisterName("new"))
+	return recordAdopt(_id)
 }
 
-// Sets credentials for the record’s node.
-//
-// SetNodeCredentialsPasswordError calls the underlying SetNodeCredentialsPasswordError.
-func (x *Record) SetNodeCredentialsPasswordError(inUsername string, inPassword string) (bool, error) {
-	return x.inner.SetNodeCredentialsPasswordError(foundation.NSStringStringWithUTF8String(inUsername), foundation.NSStringStringWithUTF8String(inPassword))
+// SetNodeCredentialsPassword sets credentials for the record’s node.
+func (x *Record) SetNodeCredentialsPassword(inUsername string, inPassword string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setNodeCredentials:password:error:"), purego.NSString(inUsername), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Sets the credentials for interaction with the record’s node using other types of authentication available to Open Directory.
-//
-// SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError.
-func (x *Record) SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
-	return x.inner.SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType, inType, inItems, outItems, outContext)
+// SetNodeCredentialsUsingKerberosCache sets the credentials for interaction with the record’s node using a Kerberos cache.
+func (x *Record) SetNodeCredentialsUsingKerberosCache(inCacheName string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setNodeCredentialsUsingKerberosCache:error:"), purego.NSString(inCacheName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Sets the credentials for interaction with the record’s node using a Kerberos cache.
-//
-// SetNodeCredentialsUsingKerberosCacheError calls the underlying SetNodeCredentialsUsingKerberosCacheError.
-func (x *Record) SetNodeCredentialsUsingKerberosCacheError(inCacheName string) (bool, error) {
-	return x.inner.SetNodeCredentialsUsingKerberosCacheError(foundation.NSStringStringWithUTF8String(inCacheName))
+// PasswordPolicyAndReturnError returns a dictionary containing the password policy for the record.
+func (x *Record) PasswordPolicyAndReturnError() (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passwordPolicyAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Returns a dictionary containing the password policy for the record.
-//
-// PasswordPolicyAndReturnError calls the underlying PasswordPolicyAndReturnError.
-func (x *Record) PasswordPolicyAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
-	return x.inner.PasswordPolicyAndReturnError()
+// VerifyPassword verifies the password for interaction with the record.
+func (x *Record) VerifyPassword(inPassword string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("verifyPassword:error:"), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Verifies the password for interaction with the record.
-//
-// VerifyPasswordError calls the underlying VerifyPasswordError.
-func (x *Record) VerifyPasswordError(inPassword string) (bool, error) {
-	return x.inner.VerifyPasswordError(foundation.NSStringStringWithUTF8String(inPassword))
+// ChangePasswordToPassword changes the record’s password.
+func (x *Record) ChangePasswordToPassword(oldPassword string, newPassword string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("changePassword:toPassword:error:"), purego.NSString(oldPassword), purego.NSString(newPassword), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Verifies the credentials for interaction with the record’s node using other types of authentication available to Open Directory.
+// SynchronizeAndReturnError synchronizes the record from the directory to get current data and commit changes.
 //
-// VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError.
-func (x *Record) VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError(inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
-	return x.inner.VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError(inType, inItems, outItems, outContext)
-}
-
-// Changes the record’s password.
-//
-// ChangePasswordToPasswordError calls the underlying ChangePasswordToPasswordError.
-func (x *Record) ChangePasswordToPasswordError(oldPassword string, newPassword string) (bool, error) {
-	return x.inner.ChangePasswordToPasswordError(foundation.NSStringStringWithUTF8String(oldPassword), foundation.NSStringStringWithUTF8String(newPassword))
-}
-
-// Synchronizes the record from the directory to get current data and commit changes.
-//
-// SynchronizeAndReturnError returns any validation error.
+// SynchronizeAndReturnError returns an error if the operation did not succeed.
 func (x *Record) SynchronizeAndReturnError() error {
-	_, err := x.inner.SynchronizeAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Returns a dictionary of attributes with their respective values.
-//
-// RecordDetailsForAttributesError calls the underlying RecordDetailsForAttributesError.
-func (x *Record) RecordDetailsForAttributesError(inAttributes *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error) {
-	return x.inner.RecordDetailsForAttributesError(inAttributes)
+// RecordDetailsForAttributesError returns a dictionary of attributes with their respective values.
+func (x *Record) RecordDetailsForAttributesError(inAttributes obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordDetailsForAttributes:error:"), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Returns the values of an attribute of the record.
-//
-// ValuesForAttributeError calls the underlying ValuesForAttributeError.
-func (x *Record) ValuesForAttributeError(inAttribute *foundation.NSString) (*foundation.NSArray[objc.ID], error) {
-	return x.inner.ValuesForAttributeError(inAttribute)
+// ValuesForAttributeError returns the values of an attribute of the record.
+func (x *Record) ValuesForAttributeError(inAttribute obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuesForAttribute:error:"), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Sets the values of an attribute of the record.
-//
-// SetValueForAttributeError calls the underlying SetValueForAttributeError.
-func (x *Record) SetValueForAttributeError(inValueOrValues objc.ID, inAttribute *foundation.NSString) (bool, error) {
-	return x.inner.SetValueForAttributeError(inValueOrValues, inAttribute)
+// SetValueForAttribute sets the values of an attribute of the record.
+func (x *Record) SetValueForAttribute(inValueOrValues obj.Object, inAttribute obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forAttribute:error:"), objref.IDOf(inValueOrValues), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Removes all values from an attribute of the record.
-//
-// RemoveValuesForAttributeError calls the underlying RemoveValuesForAttributeError.
-func (x *Record) RemoveValuesForAttributeError(inAttribute *foundation.NSString) (bool, error) {
-	return x.inner.RemoveValuesForAttributeError(inAttribute)
+// RemoveValuesForAttribute removes all values from an attribute of the record.
+func (x *Record) RemoveValuesForAttribute(inAttribute obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValuesForAttribute:error:"), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Adds a value to an attribute of the record.
-//
-// AddValueToAttributeError calls the underlying AddValueToAttributeError.
-func (x *Record) AddValueToAttributeError(inValue objc.ID, inAttribute *foundation.NSString) (bool, error) {
-	return x.inner.AddValueToAttributeError(inValue, inAttribute)
+// AddValueToAttribute adds a value to an attribute of the record.
+func (x *Record) AddValueToAttribute(inValue obj.Object, inAttribute obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addValue:toAttribute:error:"), objref.IDOf(inValue), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Removes a value from an attribute of the record.
-//
-// RemoveValueFromAttributeError calls the underlying RemoveValueFromAttributeError.
-func (x *Record) RemoveValueFromAttributeError(inValue objc.ID, inAttribute *foundation.NSString) (bool, error) {
-	return x.inner.RemoveValueFromAttributeError(inValue, inAttribute)
+// RemoveValueFromAttribute removes a value from an attribute of the record.
+func (x *Record) RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeValue:fromAttribute:error:"), objref.IDOf(inValue), objref.IDOf(inAttribute), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Deletes the record from its node and invalidates it.
+// DeleteRecordAndReturnError deletes the record from its node and invalidates it.
 //
-// DeleteRecordAndReturnError returns any validation error.
+// DeleteRecordAndReturnError returns an error if the operation did not succeed.
 func (x *Record) DeleteRecordAndReturnError() error {
-	_, err := x.inner.DeleteRecordAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("deleteRecordAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     policiesAndReturnError: @abstract   This will copy any policies configured for the record. @discussion This will copy any policies configured for the record.
-//
-// PoliciesAndReturnError calls the underlying PoliciesAndReturnError.
-func (x *Record) PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
-	return x.inner.PoliciesAndReturnError()
+// PoliciesAndReturnError this will copy any policies configured for the record. This will copy any policies configured for the record.
+func (x *Record) PoliciesAndReturnError() (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policiesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @method     effectivePoliciesAndReturnError: @abstract   This will copy any policies configured for the record. @discussion This will copy any policies configured for the record.
-//
-// EffectivePoliciesAndReturnError calls the underlying EffectivePoliciesAndReturnError.
-func (x *Record) EffectivePoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
-	return x.inner.EffectivePoliciesAndReturnError()
+// EffectivePoliciesAndReturnError this will copy any policies configured for the record. This will copy any policies configured for the record.
+func (x *Record) EffectivePoliciesAndReturnError() (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectivePoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @function   supportedPoliciesAndReturnError: @abstract   This will return a dictionary of supported policies. @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
-//
-// SupportedPoliciesAndReturnError calls the underlying SupportedPoliciesAndReturnError.
-func (x *Record) SupportedPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
-	return x.inner.SupportedPoliciesAndReturnError()
+// SupportedPoliciesAndReturnError this will return a dictionary of supported policies. This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
+func (x *Record) SupportedPoliciesAndReturnError() (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @function   setPolicies:error: @abstract   This will set the policy for the record. @discussion This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
-//
-// SetPoliciesError calls the underlying SetPoliciesError.
-func (x *Record) SetPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
-	return x.inner.SetPoliciesError(policies)
+// SetPolicies this will set the policy for the record. This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
+func (x *Record) SetPolicies(policies obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @function   setPolicy:value:error: @abstract   This will set a specific policy setting for the record. @discussion This will set a specific policy setting for the record.
-//
-// SetPolicyValueError calls the underlying SetPolicyValueError.
-func (x *Record) SetPolicyValueError(policy *foundation.NSString, value objc.ID) (bool, error) {
-	return x.inner.SetPolicyValueError(policy, value)
+// SetPolicyValue this will set a specific policy setting for the record. This will set a specific policy setting for the record.
+func (x *Record) SetPolicyValue(policy obj.Object, value obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPolicy:value:error:"), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @function   removePolicy:error: @abstract   This will remove a specific policy setting from the record. @discussion This will remove a specific policy setting from the record.
-//
-// RemovePolicyError calls the underlying RemovePolicyError.
-func (x *Record) RemovePolicyError(policy *foundation.NSString) (bool, error) {
-	return x.inner.RemovePolicyError(policy)
+// RemovePolicy this will remove a specific policy setting from the record. This will remove a specific policy setting from the record.
+func (x *Record) RemovePolicy(policy obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePolicy:error:"), objref.IDOf(policy), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     addAccountPolicy:toCategory:error: @abstract   This will add a specific policy to the specific category for the record. @discussion This will add a specific policy to the specific category for the record. The specified policy will be applied, in combination with any node policies, to the specified record when policies are evaluated. @param      policy a dictionary containing the specific policy to be added. The dictionary may contain the following keys: kODPolicyKeyIdentifier a required key identifying the policy. kODPolicyKeyParameters an optional key containing a dictionary of parameters that can be used for informational purposes or in the policy format string. kODPolicyKeyContent a required key specifying the policy, from which a predicate will be created for evaluating the policy. @param      category a valid ODPolicyCategoryType to which the policy will be added. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy addition succeeded, otherwise error is set.
-//
-// AddAccountPolicyToCategoryError calls the underlying AddAccountPolicyToCategoryError.
-func (x *Record) AddAccountPolicyToCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
-	return x.inner.AddAccountPolicyToCategoryError(policy, category)
+// AddAccountPolicyToCategory this will add a specific policy to the specific category for the record. This will add a specific policy to the specific category for the record. The specified policy will be applied, in combination with any node policies, to the specified record when policies are evaluated.
+func (x *Record) AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addAccountPolicy:toCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     removeAccountPolicy:fromCategory:error: @abstract   This will remove a specific policy from the specific category for the record. @discussion This will remove a specific policy from the specific category for the record. @param      policy a dictionary containing the specific policy to be removed, with the same format as described in addAccountPolicy. @param      category a valid ODPolicyCategoryType from which the policy will be removed. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy removal succeeded, otherwise error is set.
-//
-// RemoveAccountPolicyFromCategoryError calls the underlying RemoveAccountPolicyFromCategoryError.
-func (x *Record) RemoveAccountPolicyFromCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
-	return x.inner.RemoveAccountPolicyFromCategoryError(policy, category)
+// RemoveAccountPolicyFromCategory this will remove a specific policy from the specific category for the record. This will remove a specific policy from the specific category for the record.
+func (x *Record) RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeAccountPolicy:fromCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     setAccountPolicies:error: @abstract   This will set the policies for the record. @discussion This will set the policies for the record, replacing any existing policies.  All of the policies in the set will be applied to the record when policies are evaluated. @param      policies a dictionary containing all of the policies to be set for the node.  The dictionary may contain the following keys: kODPolicyCategoryAuthentication an optional key with a value of an array of policy dictionaries that specify when authentications should be allowed. kODPolicyCategoryPasswordContent an optional key with a value of an array of policy dictionaries the specify the required content of passwords. kODPolicyCategoryPasswordChange an optional key with a value of an array of policy dictionaries that specify when passwords are required to be changed. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy set succeeded, otherwise error is set.
-//
-// SetAccountPoliciesError calls the underlying SetAccountPoliciesError.
-func (x *Record) SetAccountPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
-	return x.inner.SetAccountPoliciesError(policies)
+// SetAccountPolicies this will set the policies for the record. This will set the policies for the record, replacing any existing policies.  All of the policies in the set will be applied to the record when policies are evaluated.
+func (x *Record) SetAccountPolicies(policies obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setAccountPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     accountPoliciesAndReturnError: @abstract   Returns a dictionary containing any policies configured for the record. @discussion Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. @discussion Returns a dictionary containing any policies configured for the record. @param      error an optional NSError reference for error details. @result     a NSDictionary containing all currently set policies.  The format of the dictionary is the same as described in setAccountPolicies.
-//
-// AccountPoliciesAndReturnError calls the underlying AccountPoliciesAndReturnError.
-func (x *Record) AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
-	return x.inner.AccountPoliciesAndReturnError()
+// AccountPoliciesAndReturnError returns a dictionary containing any policies configured for the record. Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. Returns a dictionary containing any policies configured for the record.
+func (x *Record) AccountPoliciesAndReturnError() (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @function   authenticationAllowedAndReturnError: @abstract   Determines if policies allow the account to authenticate. @discussion Determines if policies allow the account to authenticate. Authentication and password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the authentication. This check is only definitive at the time it was requested. The policy or the environment could change before the authentication is actually requested.  Errors from the authentication request should be consulted. It is not necessary to call this function when calling verifyPassword or verifyPasswordExtended since those methods perform the same policy evaluation. @param      error an optional NSError reference for error details. @result     a bool which signifies if the authentication is allowed, otherwise error is set.
+// AuthenticationAllowedAndReturnError determines if policies allow the account to authenticate. Determines if policies allow the account to authenticate. Authentication and password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the authentication. This check is only definitive at the time it was requested. The policy or the environment could change before the authentication is actually requested.  Errors from the authentication request should be consulted. It is not necessary to call this function when calling verifyPassword or verifyPasswordExtended since those methods perform the same policy evaluation.
 //
-// AuthenticationAllowedAndReturnError returns any validation error.
+// AuthenticationAllowedAndReturnError returns an error if the operation did not succeed.
 func (x *Record) AuthenticationAllowedAndReturnError() error {
-	_, err := x.inner.AuthenticationAllowedAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("authenticationAllowedAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     passwordChangeAllowed:error: @abstract   Determines if policies allow the password change. @discussion Determines if policies allow the password change.  Password content policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the password change. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted. @param      newPassword contains the password to be evaluated. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the password change is allowed, otherwise error is set.
-//
-// PasswordChangeAllowedError calls the underlying PasswordChangeAllowedError.
-func (x *Record) PasswordChangeAllowedError(newPassword string) (bool, error) {
-	return x.inner.PasswordChangeAllowedError(foundation.NSStringStringWithUTF8String(newPassword))
+// PasswordChangeAllowed determines if policies allow the password change. Determines if policies allow the password change.  Password content policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the password change. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted.
+func (x *Record) PasswordChangeAllowed(newPassword string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("passwordChangeAllowed:error:"), purego.NSString(newPassword), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method     willPasswordExpire: @abstract   Determines if the password will expire within the specified time. @discussion Determines if the password will expire (i.e. need to be changed) between now and the specified number of seconds in the future. Password change policies are evaluated.  Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @param      willExpireIn the number of seconds from the current time to be used as the upper-bound for the password expiration period. @result     a BOOL which signifies if the password will expire within the specified time.
-//
-// WillPasswordExpire calls the underlying WillPasswordExpire.
+// WillPasswordExpire determines if the password will expire within the specified time. Determines if the password will expire (i.e. need to be changed) between now and the specified number of seconds in the future. Password change policies are evaluated.  Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) WillPasswordExpire(willExpireIn uint64) bool {
-	return x.inner.WillPasswordExpire(willExpireIn)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willPasswordExpire:"), willExpireIn)
+	return _r
 }
 
-// @method     willAuthenticationsExpire: @abstract   Determines if authentications will expire within the specified time. @discussion Determines if authentications will expire (i.e. session and/or account expires) between now and the specified number of seconds in the future.  Authentication policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @param      willExpireIn the number of seconds from the current time to be used as the upper-bound for the authentication expiration period. @result     a BOOL which signifies if authentications will expire within the specified time.
-//
-// WillAuthenticationsExpire calls the underlying WillAuthenticationsExpire.
+// WillAuthenticationsExpire determines if authentications will expire within the specified time. Determines if authentications will expire (i.e. session and/or account expires) between now and the specified number of seconds in the future.  Authentication policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) WillAuthenticationsExpire(willExpireIn uint64) bool {
-	return x.inner.WillAuthenticationsExpire(willExpireIn)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willAuthenticationsExpire:"), willExpireIn)
+	return _r
 }
 
-// @property   recordType @abstract   Type of the record. @discussion The record type.
-//
-// RecordType calls the underlying RecordType.
+// RecordType type of the record. The record type.
 func (x *Record) RecordType() string {
-	_r := x.inner.RecordType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property   recordName @abstract   Name of the record. @discussion This is the official record name.
-//
-// RecordName calls the underlying RecordName.
+// RecordName name of the record. This is the official record name.
 func (x *Record) RecordName() string {
-	_r := x.inner.RecordName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method     secondsUntilPasswordExpires @abstract   Determines how many seconds until the password expires. @discussion Determines how many seconds until the password expires (i.e. needs changing).  Password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @result     the number of seconds until the password expires.  If multiple policies will cause the password to expire, the soonest expiration time is returned.  If already expired, kODExpirationTimeExpired is returned.  If there are no password change policies, kODExpirationTimeNeverExpires is returned.
-//
-// SecondsUntilPasswordExpires calls the underlying SecondsUntilPasswordExpires.
+// SecondsUntilPasswordExpires determines how many seconds until the password expires. Determines how many seconds until the password expires (i.e. needs changing).  Password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) SecondsUntilPasswordExpires() int64 {
-	return x.inner.SecondsUntilPasswordExpires()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("secondsUntilPasswordExpires"))
+	return _r
 }
 
-// @method     secondsUntilAuthenticationsExpire @abstract   Determines how many seconds until authentications expire. @discussion Determines how many seconds until authentications expire (i.e. session and/or account expires). Authentication policies are evaluated.   Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @result     the number of seconds until authentications expire.  If multiple policies will cause authentications to expire, the soonest expiration time is returned. If already expired, kODExpirationTimeExpired is returned.  If there are no authentication policies controlling expiration, kODExpirationTimeNeverExpires is returned.
-//
-// SecondsUntilAuthenticationsExpire calls the underlying SecondsUntilAuthenticationsExpire.
+// SecondsUntilAuthenticationsExpire determines how many seconds until authentications expire. Determines how many seconds until authentications expire (i.e. session and/or account expires). Authentication policies are evaluated.   Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.
 func (x *Record) SecondsUntilAuthenticationsExpire() int64 {
-	return x.inner.SecondsUntilAuthenticationsExpire()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("secondsUntilAuthenticationsExpire"))
+	return _r
 }
 
-// Adds a member record to this group record.
-//
-// AddMemberRecordError calls the underlying AddMemberRecordError.
-func (x *Record) AddMemberRecordError(inRecord *raw.ODRecord) (bool, error) {
-	return x.inner.AddMemberRecordError(inRecord)
+// AddMemberRecord adds a member record to this group record.
+func (x *Record) AddMemberRecord(inRecord *Record) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Removes a record as a member of this group record.
-//
-// RemoveMemberRecordError calls the underlying RemoveMemberRecordError.
-func (x *Record) RemoveMemberRecordError(inRecord *raw.ODRecord) (bool, error) {
-	return x.inner.RemoveMemberRecordError(inRecord)
+// RemoveMemberRecord removes a record as a member of this group record.
+func (x *Record) RemoveMemberRecord(inRecord *Record) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Determines whether a given record is a member of this group record.
-//
-// IsMemberRecordError calls the underlying IsMemberRecordError.
-func (x *Record) IsMemberRecordError(inRecord *raw.ODRecord) (bool, error) {
-	return x.inner.IsMemberRecordError(inRecord)
+// IsMemberRecord determines whether a given record is a member of this group record.
+func (x *Record) IsMemberRecord(inRecord *Record) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMemberRecord:error:"), objref.IDOf(inRecord), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Recordable is the interface implemented by [Record], for mocking and DI.
 type Recordable interface {
-	Unwrap() *raw.ODRecord
-	SetNodeCredentialsPasswordError(inUsername string, inPassword string) (bool, error)
-	SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error)
-	SetNodeCredentialsUsingKerberosCacheError(inCacheName string) (bool, error)
-	PasswordPolicyAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
-	VerifyPasswordError(inPassword string) (bool, error)
-	VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError(inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error)
-	ChangePasswordToPasswordError(oldPassword string, newPassword string) (bool, error)
+	obj.Object
+	SetNodeCredentialsPassword(inUsername string, inPassword string) error
+	SetNodeCredentialsUsingKerberosCache(inCacheName string) error
+	PasswordPolicyAndReturnError() (result obj.Object, err error)
+	VerifyPassword(inPassword string) error
+	ChangePasswordToPassword(oldPassword string, newPassword string) error
 	SynchronizeAndReturnError() error
-	RecordDetailsForAttributesError(inAttributes *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error)
-	ValuesForAttributeError(inAttribute *foundation.NSString) (*foundation.NSArray[objc.ID], error)
-	SetValueForAttributeError(inValueOrValues objc.ID, inAttribute *foundation.NSString) (bool, error)
-	RemoveValuesForAttributeError(inAttribute *foundation.NSString) (bool, error)
-	AddValueToAttributeError(inValue objc.ID, inAttribute *foundation.NSString) (bool, error)
-	RemoveValueFromAttributeError(inValue objc.ID, inAttribute *foundation.NSString) (bool, error)
+	RecordDetailsForAttributesError(inAttributes obj.Object) (result obj.Object, err error)
+	ValuesForAttributeError(inAttribute obj.Object) (result obj.Object, err error)
+	SetValueForAttribute(inValueOrValues obj.Object, inAttribute obj.Object) error
+	RemoveValuesForAttribute(inAttribute obj.Object) error
+	AddValueToAttribute(inValue obj.Object, inAttribute obj.Object) error
+	RemoveValueFromAttribute(inValue obj.Object, inAttribute obj.Object) error
 	DeleteRecordAndReturnError() error
-	PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
-	EffectivePoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
-	SupportedPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
-	SetPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error)
-	SetPolicyValueError(policy *foundation.NSString, value objc.ID) (bool, error)
-	RemovePolicyError(policy *foundation.NSString) (bool, error)
-	AddAccountPolicyToCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error)
-	RemoveAccountPolicyFromCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error)
-	SetAccountPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error)
-	AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
+	PoliciesAndReturnError() (result obj.Object, err error)
+	EffectivePoliciesAndReturnError() (result obj.Object, err error)
+	SupportedPoliciesAndReturnError() (result obj.Object, err error)
+	SetPolicies(policies obj.Object) error
+	SetPolicyValue(policy obj.Object, value obj.Object) error
+	RemovePolicy(policy obj.Object) error
+	AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error
+	RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error
+	SetAccountPolicies(policies obj.Object) error
+	AccountPoliciesAndReturnError() (result obj.Object, err error)
 	AuthenticationAllowedAndReturnError() error
-	PasswordChangeAllowedError(newPassword string) (bool, error)
+	PasswordChangeAllowed(newPassword string) error
 	WillPasswordExpire(willExpireIn uint64) bool
 	WillAuthenticationsExpire(willExpireIn uint64) bool
 	RecordType() string
 	RecordName() string
 	SecondsUntilPasswordExpires() int64
 	SecondsUntilAuthenticationsExpire() int64
-	AddMemberRecordError(inRecord *raw.ODRecord) (bool, error)
-	RemoveMemberRecordError(inRecord *raw.ODRecord) (bool, error)
-	IsMemberRecordError(inRecord *raw.ODRecord) (bool, error)
+	AddMemberRecord(inRecord *Record) error
+	RemoveMemberRecord(inRecord *Record) error
+	IsMemberRecord(inRecord *Record) error
 }
 
 var _ Recordable = (*Record)(nil)

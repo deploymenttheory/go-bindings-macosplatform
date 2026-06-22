@@ -5,125 +5,113 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A request to fetch or purge persistent history.
+// PersistentHistoryChangeRequest is an idiomatic wrapper over the Objective-C class NSPersistentHistoryChangeRequest.
 //
-// PersistentHistoryChangeRequest wraps [raw.NSPersistentHistoryChangeRequest] with a fluent Go API.
+// It embeds [PersistentStoreRequest], promoting that type's methods.
+//
+// A request to fetch or purge persistent history.
 type PersistentHistoryChangeRequest struct {
-	inner *raw.NSPersistentHistoryChangeRequest
+	PersistentStoreRequest
 }
 
-// Unwrap returns the underlying [raw.NSPersistentHistoryChangeRequest].
-func (x *PersistentHistoryChangeRequest) Unwrap() *raw.NSPersistentHistoryChangeRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentHistoryChangeRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentHistoryChangeRequestFromID adopts an existing object pointer as a PersistentHistoryChangeRequest (nil for 0).
+// PersistentHistoryChangeRequestFromID adopts an existing Objective-C object as a PersistentHistoryChangeRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentHistoryChangeRequestFromID(id objc.ID) *PersistentHistoryChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentHistoryChangeRequest{inner: raw.NSPersistentHistoryChangeRequestFromID(id)}
-}
-
-// NewPersistentHistoryChangeRequest creates a new [PersistentHistoryChangeRequest].
-func NewPersistentHistoryChangeRequest() *PersistentHistoryChangeRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentHistoryChangeRequest")), objc.RegisterName("new"))
-	return &PersistentHistoryChangeRequest{inner: raw.NSPersistentHistoryChangeRequestFromID(_id)}
-}
-
-// The type of result that this request returns.
-//
-// WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *PersistentHistoryChangeRequest) WithResultType(resultType NSPersistentHistoryResultType) *PersistentHistoryChangeRequest {
-	x.inner.SetResultType(raw.NSPersistentHistoryResultType(resultType))
+	x := &PersistentHistoryChangeRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The specified fetch request, when retrieving history.
-//
-// WithFetchRequest sets the fetchRequest property and returns the receiver for chaining.
-func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *PersistentHistoryChangeRequest {
-	x.inner.SetFetchRequest(fetchRequest)
-	return x
-}
-
-// The stores the request should be sent to.
-//
-// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
-func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
-	return x
-}
-
-// ResultType calls the underlying ResultType.
-func (x *PersistentHistoryChangeRequest) ResultType() NSPersistentHistoryResultType {
-	return NSPersistentHistoryResultType(x.inner.ResultType())
-}
-
-// SetResultType calls the underlying SetResultType.
-func (x *PersistentHistoryChangeRequest) SetResultType(resultType NSPersistentHistoryResultType) {
-	x.inner.SetResultType(raw.NSPersistentHistoryResultType(resultType))
-}
-
-// Token calls the underlying Token.
-func (x *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
-	_r := x.inner.Token()
-	if _r == nil {
+// persistentHistoryChangeRequestAdopt wraps an Objective-C object that this code just created as a
+// PersistentHistoryChangeRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentHistoryChangeRequestAdopt(id objc.ID) *PersistentHistoryChangeRequest {
+	if id == 0 {
 		return nil
 	}
-	return &PersistentHistoryToken{inner: _r}
+	x := &PersistentHistoryChangeRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// FetchRequest calls the underlying FetchRequest.
-func (x *PersistentHistoryChangeRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
-	return x.inner.FetchRequest()
+// NewPersistentHistoryChangeRequest creates a new PersistentHistoryChangeRequest.
+func NewPersistentHistoryChangeRequest() *PersistentHistoryChangeRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChangeRequest")), objc.RegisterName("new"))
+	return persistentHistoryChangeRequestAdopt(_id)
 }
 
-// SetFetchRequest calls the underlying SetFetchRequest.
-func (x *PersistentHistoryChangeRequest) SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) {
-	x.inner.SetFetchRequest(fetchRequest)
+// WithResultType the type of result that this request returns.
+func (x *PersistentHistoryChangeRequest) WithResultType(resultType PersistentHistoryResultType) *PersistentHistoryChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
+	return x
 }
 
-func (x *PersistentHistoryChangeRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
-	return &x.inner.NSPersistentStoreRequest
+// WithFetchRequest the specified fetch request, when retrieving history.
+func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
+	return x
+}
+
+// WithAffectedStores the stores the request should be sent to.
+func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
+	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
+	return x
+}
+
+// ResultType wraps the corresponding Objective-C method.
+func (x *PersistentHistoryChangeRequest) ResultType() PersistentHistoryResultType {
+	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
+}
+
+// SetResultType wraps the corresponding Objective-C method.
+func (x *PersistentHistoryChangeRequest) SetResultType(resultType PersistentHistoryResultType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
+}
+
+// Token wraps the corresponding Objective-C method.
+func (x *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+	return PersistentHistoryTokenFromID(_r)
+}
+
+// FetchRequest wraps the corresponding Objective-C method.
+func (x *PersistentHistoryChangeRequest) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+	return obj.Wrap(_r)
+}
+
+// SetFetchRequest wraps the corresponding Objective-C method.
+func (x *PersistentHistoryChangeRequest) SetFetchRequest(fetchRequest obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 }
 
 // PersistentHistoryChangeRequestable is the interface implemented by [PersistentHistoryChangeRequest], for mocking and DI.
 type PersistentHistoryChangeRequestable interface {
-	Unwrap() *raw.NSPersistentHistoryChangeRequest
-	WithResultType(resultType NSPersistentHistoryResultType) *PersistentHistoryChangeRequest
-	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *PersistentHistoryChangeRequest
+	obj.Object
+	WithResultType(resultType PersistentHistoryResultType) *PersistentHistoryChangeRequest
+	WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest
-	ResultType() NSPersistentHistoryResultType
-	SetResultType(resultType NSPersistentHistoryResultType)
+	ResultType() PersistentHistoryResultType
+	SetResultType(resultType PersistentHistoryResultType)
 	Token() *PersistentHistoryToken
-	FetchRequest() *raw.NSFetchRequest[objc.ID]
-	SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID])
+	FetchRequest() obj.Object
+	SetFetchRequest(fetchRequest obj.Object)
 }
 
 var _ PersistentHistoryChangeRequestable = (*PersistentHistoryChangeRequest)(nil)
+
+var _ PersistentStoreRequestProvider = (*PersistentHistoryChangeRequest)(nil)

@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for specific quantities of dispersion.
+// UnitDispersion is an idiomatic wrapper over the Objective-C class NSUnitDispersion.
 //
-// UnitDispersion wraps [raw.NSUnitDispersion] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for specific quantities of dispersion.
 type UnitDispersion struct {
-	inner *raw.NSUnitDispersion
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitDispersion].
-func (x *UnitDispersion) Unwrap() *raw.NSUnitDispersion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitDispersion) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitDispersionFromID adopts an existing object pointer as a UnitDispersion (nil for 0).
+// UnitDispersionFromID adopts an existing Objective-C object as a UnitDispersion
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitDispersionFromID(id objc.ID) *UnitDispersion {
 	if id == 0 {
 		return nil
 	}
-	return &UnitDispersion{inner: raw.NSUnitDispersionFromID(id)}
-}
-
-// NewUnitDispersion creates a new [UnitDispersion].
-func NewUnitDispersion() *UnitDispersion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitDispersion")), objc.RegisterName("new"))
-	return &UnitDispersion{inner: raw.NSUnitDispersionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitDispersion) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDispersion {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitDispersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitDispersion) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitDispersionAdopt wraps an Objective-C object that this code just created as a
+// UnitDispersion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitDispersionAdopt(id objc.ID) *UnitDispersion {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitDispersion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitDispersion) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitDispersion creates a new UnitDispersion.
+func NewUnitDispersion() *UnitDispersion {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitDispersion")), objc.RegisterName("new"))
+	return unitDispersionAdopt(_id)
+}
 
-func (x *UnitDispersion) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitDispersion) WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitDispersionable is the interface implemented by [UnitDispersion], for mocking and DI.
 type UnitDispersionable interface {
-	Unwrap() *raw.NSUnitDispersion
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDispersion
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion
 }
 
 var _ UnitDispersionable = (*UnitDispersion)(nil)
+
+var _ DimensionProvider = (*UnitDispersion)(nil)
+
+var _ UnitProvider = (*UnitDispersion)(nil)

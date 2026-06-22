@@ -16,6 +16,8 @@ const (
 	KPMDataFormatXMLCompressed PMDataFormat = 2
 )
 
+// String returns the PMDataFormat constant's name, or its numeric form when the
+// value is not a known constant.
 func (e PMDataFormat) String() string {
 	switch e {
 	case KPMDataFormatXMLDefault:

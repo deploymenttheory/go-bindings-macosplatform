@@ -5,89 +5,111 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains the RFC 2822 data for a message, without encryption or digital signatures.
+// DecodedMessage is an idiomatic wrapper over the Objective-C class MEDecodedMessage.
 //
-// DecodedMessage wraps [raw.MEDecodedMessage] with a fluent Go API.
+// An object that contains the RFC 2822 data for a message, without encryption or digital signatures.
 type DecodedMessage struct {
-	inner *raw.MEDecodedMessage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEDecodedMessage].
-func (x *DecodedMessage) Unwrap() *raw.MEDecodedMessage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecodedMessage) ID() objc.ID { return x.inner.Ptr() }
-
-// DecodedMessageFromID adopts an existing object pointer as a DecodedMessage (nil for 0).
+// DecodedMessageFromID adopts an existing Objective-C object as a DecodedMessage
+// (nil for 0), retaining it and registering a release finalizer.
 func DecodedMessageFromID(id objc.ID) *DecodedMessage {
 	if id == 0 {
 		return nil
 	}
-	return &DecodedMessage{inner: raw.MEDecodedMessageFromID(id)}
+	x := &DecodedMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDecodedMessageWithDataSecurityInformationContext creates a new [DecodedMessage].
-func NewDecodedMessageWithDataSecurityInformationContext(rawData *foundation.NSData, securityInformation *raw.MEMessageSecurityInformation, context_ *foundation.NSData) *DecodedMessage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEDecodedMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:securityInformation:context:"), rawData.Ptr(), securityInformation.Ptr(), context_.Ptr())
-	return &DecodedMessage{inner: raw.MEDecodedMessageFromID(_id)}
+// decodedMessageAdopt wraps an Objective-C object that this code just created as a
+// DecodedMessage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decodedMessageAdopt(id objc.ID) *DecodedMessage {
+	if id == 0 {
+		return nil
+	}
+	x := &DecodedMessage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewDecodedMessageWithDataSecurityInformationContextBanner creates a new [DecodedMessage].
-func NewDecodedMessageWithDataSecurityInformationContextBanner(rawData *foundation.NSData, securityInformation *raw.MEMessageSecurityInformation, context_ *foundation.NSData, banner *raw.MEDecodedMessageBanner) *DecodedMessage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEDecodedMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:securityInformation:context:banner:"), rawData.Ptr(), securityInformation.Ptr(), context_.Ptr(), banner.Ptr())
-	return &DecodedMessage{inner: raw.MEDecodedMessageFromID(_id)}
+// Description returns the object's -description text.
+func (x *DecodedMessage) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief The decoded MIME data for the message The decoded data should not be encrypted or contain any signatures that were decoded. The @c rawData here should only contain MIME parts that a standard email parser can decode without needing to decrypt. All information on the encryption and signature status should be defined in @c securityInformation. If the message is unable to be decrypted this should be left nil and an error message will be displayed to the user.
-//
-// RawData calls the underlying RawData.
-func (x *DecodedMessage) RawData() *foundation.NSData {
-	return x.inner.RawData()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DecodedMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @brief The security information for whether or not the message was signed, encrypted, or had an errors in decoding.
-//
-// SecurityInformation calls the underlying SecurityInformation.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DecodedMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DecodedMessage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDecodedMessageWithDataSecurityInformationContext creates a new DecodedMessage.
+func NewDecodedMessageWithDataSecurityInformationContext(rawData obj.Object, securityInformation *MessageSecurityInformation, context_ obj.Object) *DecodedMessage {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEDecodedMessage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:securityInformation:context:"), objref.IDOf(rawData), objref.IDOf(securityInformation), objref.IDOf(context_))
+	return decodedMessageAdopt(_id)
+}
+
+// NewDecodedMessageWithDataSecurityInformationContextBanner creates a new DecodedMessage.
+func NewDecodedMessageWithDataSecurityInformationContextBanner(rawData obj.Object, securityInformation *MessageSecurityInformation, context_ obj.Object, banner *DecodedMessageBanner) *DecodedMessage {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEDecodedMessage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:securityInformation:context:banner:"), objref.IDOf(rawData), objref.IDOf(securityInformation), objref.IDOf(context_), objref.IDOf(banner))
+	return decodedMessageAdopt(_id)
+}
+
+// RawData the decoded MIME data for the message The decoded data should not be encrypted or contain any signatures that were decoded. The
+func (x *DecodedMessage) RawData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
+	return obj.Wrap(_r)
+}
+
+// SecurityInformation the security information for whether or not the message was signed, encrypted, or had an errors in decoding.
 func (x *DecodedMessage) SecurityInformation() *MessageSecurityInformation {
-	_r := x.inner.SecurityInformation()
-	if _r == nil {
-		return nil
-	}
-	return &MessageSecurityInformation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityInformation"))
+	return MessageSecurityInformationFromID(_r)
 }
 
-// @brief The context for the decoded message. This will be passed back to the extension when Mail loads the extension's custom view controller for the message.
-//
-// Context calls the underlying Context.
-func (x *DecodedMessage) Context() *foundation.NSData {
-	return x.inner.Context()
+// Context the context for the decoded message. This will be passed back to the extension when Mail loads the extension's custom view controller for the message.
+func (x *DecodedMessage) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return obj.Wrap(_r)
 }
 
-// @brief Suggestion information used to populate a suggestion banner at the top of the message view. Clicking on the action associated with the suggestion banner will present the extension's view controller for the provided message context.
-//
-// Banner calls the underlying Banner.
+// Banner suggestion information used to populate a suggestion banner at the top of the message view. Clicking on the action associated with the suggestion banner will present the extension's view controller for the provided message context.
 func (x *DecodedMessage) Banner() *DecodedMessageBanner {
-	_r := x.inner.Banner()
-	if _r == nil {
-		return nil
-	}
-	return &DecodedMessageBanner{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("banner"))
+	return DecodedMessageBannerFromID(_r)
 }
 
 // DecodedMessageable is the interface implemented by [DecodedMessage], for mocking and DI.
 type DecodedMessageable interface {
-	Unwrap() *raw.MEDecodedMessage
-	RawData() *foundation.NSData
+	obj.Object
+	RawData() obj.Object
 	SecurityInformation() *MessageSecurityInformation
-	Context() *foundation.NSData
+	Context() obj.Object
 	Banner() *DecodedMessageBanner
 }
 

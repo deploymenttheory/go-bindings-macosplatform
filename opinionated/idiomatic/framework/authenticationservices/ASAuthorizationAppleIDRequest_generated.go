@@ -5,128 +5,112 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An OpenID authorization request that relies on the user’s Apple ID.
+// AuthorizationAppleIDRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationAppleIDRequest.
 //
-// AuthorizationAppleIDRequest wraps [raw.ASAuthorizationAppleIDRequest] with a fluent Go API.
+// It embeds [AuthorizationOpenIDRequest], promoting that type's methods.
+//
+// An OpenID authorization request that relies on the user’s Apple ID.
 type AuthorizationAppleIDRequest struct {
-	inner *raw.ASAuthorizationAppleIDRequest
+	AuthorizationOpenIDRequest
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationAppleIDRequest].
-func (x *AuthorizationAppleIDRequest) Unwrap() *raw.ASAuthorizationAppleIDRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationAppleIDRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationAppleIDRequestFromID adopts an existing object pointer as a AuthorizationAppleIDRequest (nil for 0).
+// AuthorizationAppleIDRequestFromID adopts an existing Objective-C object as a AuthorizationAppleIDRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationAppleIDRequestFromID(id objc.ID) *AuthorizationAppleIDRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationAppleIDRequest{inner: raw.ASAuthorizationAppleIDRequestFromID(id)}
+	x := &AuthorizationAppleIDRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationAppleIDRequest creates a new [AuthorizationAppleIDRequest].
+// authorizationAppleIDRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationAppleIDRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationAppleIDRequestAdopt(id objc.ID) *AuthorizationAppleIDRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationAppleIDRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAuthorizationAppleIDRequest creates a new AuthorizationAppleIDRequest.
 func NewAuthorizationAppleIDRequest() *AuthorizationAppleIDRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationAppleIDRequest")), objc.RegisterName("new"))
-	return &AuthorizationAppleIDRequest{inner: raw.ASAuthorizationAppleIDRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDRequest")), objc.RegisterName("new"))
+	return authorizationAppleIDRequestAdopt(_id)
 }
 
-// An identifier associated with the user’s Apple ID.
-//
-// WithUser sets the user property and returns the receiver for chaining.
+// WithUser an identifier associated with the user’s Apple ID.
 func (x *AuthorizationAppleIDRequest) WithUser(user string) *AuthorizationAppleIDRequest {
-	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUser:"), purego.NSString(user))
 	return x
 }
 
-// The contact information to be requested from the user during authentication.
-//
-// WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
-func (x *AuthorizationAppleIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationAppleIDRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(_arr)
+// WithRequestedScopes the contact information to be requested from the user during authentication.
+func (x *AuthorizationAppleIDRequest) WithRequestedScopes(items ...obj.Object) *AuthorizationAppleIDRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedScopes:"), _arr)
 	return x
 }
 
-// Data that’s returned to you unmodified in the corresponding credential after a successful authentication.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState data that’s returned to you unmodified in the corresponding credential after a successful authentication.
 func (x *AuthorizationAppleIDRequest) WithState(state string) *AuthorizationAppleIDRequest {
-	x.inner.ASAuthorizationOpenIDRequest.SetState(foundation.NSStringStringWithUTF8String(state))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
 	return x
 }
 
-// A string value to pass to the identity provider.
-//
-// WithNonce sets the nonce property and returns the receiver for chaining.
+// WithNonce a string value to pass to the identity provider.
 func (x *AuthorizationAppleIDRequest) WithNonce(nonce string) *AuthorizationAppleIDRequest {
-	x.inner.ASAuthorizationOpenIDRequest.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), purego.NSString(nonce))
 	return x
 }
 
-// The OpenID authentication operation you want this request to perform.
-//
-// WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
-func (x *AuthorizationAppleIDRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationAppleIDRequest {
-	x.inner.ASAuthorizationOpenIDRequest.SetRequestedOperation(requestedOperation)
+// WithRequestedOperation the OpenID authentication operation you want this request to perform.
+func (x *AuthorizationAppleIDRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationAppleIDRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
 	return x
 }
 
-// User calls the underlying User.
+// User wraps the corresponding Objective-C method.
 func (x *AuthorizationAppleIDRequest) User() string {
-	_r := x.inner.User()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUser calls the underlying SetUser.
+// SetUser wraps the corresponding Objective-C method.
 func (x *AuthorizationAppleIDRequest) SetUser(user string) {
-	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
-}
-
-func (x *AuthorizationAppleIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest {
-	return &x.inner.ASAuthorizationOpenIDRequest
-}
-
-func (x *AuthorizationAppleIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
-	return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUser:"), purego.NSString(user))
 }
 
 // AuthorizationAppleIDRequestable is the interface implemented by [AuthorizationAppleIDRequest], for mocking and DI.
 type AuthorizationAppleIDRequestable interface {
-	Unwrap() *raw.ASAuthorizationAppleIDRequest
+	obj.Object
 	WithUser(user string) *AuthorizationAppleIDRequest
-	WithRequestedScopes(items ...*foundation.NSString) *AuthorizationAppleIDRequest
+	WithRequestedScopes(items ...obj.Object) *AuthorizationAppleIDRequest
 	WithState(state string) *AuthorizationAppleIDRequest
 	WithNonce(nonce string) *AuthorizationAppleIDRequest
-	WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationAppleIDRequest
+	WithRequestedOperation(requestedOperation obj.Object) *AuthorizationAppleIDRequest
 	User() string
 	SetUser(user string)
 }
 
 var _ AuthorizationAppleIDRequestable = (*AuthorizationAppleIDRequest)(nil)
+
+var _ AuthorizationOpenIDRequestProvider = (*AuthorizationAppleIDRequest)(nil)
+
+var _ AuthorizationRequestProvider = (*AuthorizationAppleIDRequest)(nil)

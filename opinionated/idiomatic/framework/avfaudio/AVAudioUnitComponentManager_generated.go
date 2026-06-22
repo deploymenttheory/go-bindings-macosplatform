@@ -5,91 +5,116 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An object that provides a way to search and query audio components that the system registers.
+// AudioUnitComponentManager is an idiomatic wrapper over the Objective-C class AVAudioUnitComponentManager.
 //
-// AudioUnitComponentManager wraps [raw.AVAudioUnitComponentManager] with a fluent Go API.
+// An object that provides a way to search and query audio components that the system registers.
 type AudioUnitComponentManager struct {
-	inner *raw.AVAudioUnitComponentManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnitComponentManager].
-func (x *AudioUnitComponentManager) Unwrap() *raw.AVAudioUnitComponentManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitComponentManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitComponentManagerFromID adopts an existing object pointer as a AudioUnitComponentManager (nil for 0).
+// AudioUnitComponentManagerFromID adopts an existing Objective-C object as a AudioUnitComponentManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitComponentManagerFromID(id objc.ID) *AudioUnitComponentManager {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitComponentManager{inner: raw.AVAudioUnitComponentManagerFromID(id)}
+	x := &AudioUnitComponentManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioUnitComponentManager creates a new [AudioUnitComponentManager].
+// audioUnitComponentManagerAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitComponentManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitComponentManagerAdopt(id objc.ID) *AudioUnitComponentManager {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitComponentManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioUnitComponentManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioUnitComponentManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioUnitComponentManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitComponentManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioUnitComponentManager creates a new AudioUnitComponentManager.
 func NewAudioUnitComponentManager() *AudioUnitComponentManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitComponentManager")), objc.RegisterName("new"))
-	return &AudioUnitComponentManager{inner: raw.AVAudioUnitComponentManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitComponentManager")), objc.RegisterName("new"))
+	return audioUnitComponentManagerAdopt(_id)
 }
 
-// Gets an array of audio component objects that match the search predicate.
-//
-// ComponentsMatchingPredicate calls the underlying ComponentsMatchingPredicate.
-func (x *AudioUnitComponentManager) ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*raw.AVAudioUnitComponent] {
-	return x.inner.ComponentsMatchingPredicate(predicate)
+// ComponentsMatchingPredicate gets an array of audio component objects that match the search predicate.
+func (x *AudioUnitComponentManager) ComponentsMatchingPredicate(predicate obj.Object) []*AudioUnitComponent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsMatchingPredicate:"), objref.IDOf(predicate))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
-// Gets an array of audio components that pass the block method.
-//
-// ComponentsPassingTest calls the underlying ComponentsPassingTest.
-func (x *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(*raw.AVAudioUnitComponent, *bool) bool) *foundation.NSArray[*raw.AVAudioUnitComponent] {
-	return x.inner.ComponentsPassingTest(testHandler)
+// ComponentsPassingTest gets an array of audio components that pass the block method.
+func (x *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(obj.Object, *bool) bool) []*AudioUnitComponent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
+		return testHandler(obj.Wrap(_b0), (*bool)(_b1))
+	}))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
-// Gets an array of audio component objects that match the description.
-//
-// ComponentsMatchingDescription calls the underlying ComponentsMatchingDescription.
-func (x *AudioUnitComponentManager) ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*raw.AVAudioUnitComponent] {
-	return x.inner.ComponentsMatchingDescription(desc)
+// ComponentsMatchingDescription gets an array of audio component objects that match the description.
+func (x *AudioUnitComponentManager) ComponentsMatchingDescription(desc obj.Object) []*AudioUnitComponent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsMatchingDescription:"), objref.IDOf(desc))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioUnitComponent { return AudioUnitComponentFromID(_id) })
 }
 
-// @discussion returns all tags associated with the current user as well as all system tags defined by the audio unit(s).
+// TagNames returns all tags associated with the current user as well as all system tags defined by the audio unit(s).
 //
 // TagNames returns the collection as a Go slice.
 func (x *AudioUnitComponentManager) TagNames() []string {
-	arr := x.inner.TagNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// StandardLocalizedTagNames wraps the corresponding Objective-C method.
+//
 // StandardLocalizedTagNames returns the collection as a Go slice.
 func (x *AudioUnitComponentManager) StandardLocalizedTagNames() []string {
-	arr := x.inner.StandardLocalizedTagNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardLocalizedTagNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AudioUnitComponentManagerable is the interface implemented by [AudioUnitComponentManager], for mocking and DI.
 type AudioUnitComponentManagerable interface {
-	Unwrap() *raw.AVAudioUnitComponentManager
-	ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*raw.AVAudioUnitComponent]
-	ComponentsPassingTest(testHandler func(*raw.AVAudioUnitComponent, *bool) bool) *foundation.NSArray[*raw.AVAudioUnitComponent]
-	ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*raw.AVAudioUnitComponent]
+	obj.Object
+	ComponentsMatchingPredicate(predicate obj.Object) []*AudioUnitComponent
+	ComponentsPassingTest(testHandler func(obj.Object, *bool) bool) []*AudioUnitComponent
+	ComponentsMatchingDescription(desc obj.Object) []*AudioUnitComponent
 	TagNames() []string
 	StandardLocalizedTagNames() []string
 }

@@ -5,152 +5,130 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A light source described in terms of the variations in color and intensity of its illumination in all directions.
+// LightProbe is an idiomatic wrapper over the Objective-C class MDLLightProbe.
 //
-// LightProbe wraps [raw.MDLLightProbe] with a fluent Go API.
+// It embeds [Light], promoting that type's methods.
+//
+// A light source described in terms of the variations in color and intensity of its illumination in all directions.
 type LightProbe struct {
-	inner *raw.MDLLightProbe
+	Light
 }
 
-// Unwrap returns the underlying [raw.MDLLightProbe].
-func (x *LightProbe) Unwrap() *raw.MDLLightProbe { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LightProbe) ID() objc.ID { return x.inner.Ptr() }
-
-// LightProbeFromID adopts an existing object pointer as a LightProbe (nil for 0).
+// LightProbeFromID adopts an existing Objective-C object as a LightProbe
+// (nil for 0), retaining it and registering a release finalizer.
 func LightProbeFromID(id objc.ID) *LightProbe {
 	if id == 0 {
 		return nil
 	}
-	return &LightProbe{inner: raw.MDLLightProbeFromID(id)}
-}
-
-// Initializes a light probe with the specified cube map textures.
-//
-// NewLightProbeWithReflectiveTextureIrradianceTexture creates a new [LightProbe].
-func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *raw.MDLTexture, irradianceTexture *raw.MDLTexture) *LightProbe {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLLightProbe")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReflectiveTexture:irradianceTexture:"), reflectiveTexture.Ptr(), irradianceTexture.Ptr())
-	return &LightProbe{inner: raw.MDLLightProbeFromID(_id)}
-}
-
-// The type of the light.
-//
-// WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *LightProbe) WithLightType(lightType MDLLightType) *LightProbe {
-	x.inner.MDLLight.SetLightType(raw.MDLLightType(lightType))
+	x := &LightProbe{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The name of the Core Graphics color space to be used for interpreting the light’s color information.
-//
-// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+// lightProbeAdopt wraps an Objective-C object that this code just created as a
+// LightProbe (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lightProbeAdopt(id objc.ID) *LightProbe {
+	if id == 0 {
+		return nil
+	}
+	x := &LightProbe{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewLightProbeWithReflectiveTextureIrradianceTexture initializes a light probe with the specified cube map textures.
+func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *Texture, irradianceTexture *Texture) *LightProbe {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLLightProbe")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReflectiveTexture:irradianceTexture:"), objref.IDOf(reflectiveTexture), objref.IDOf(irradianceTexture))
+	return lightProbeAdopt(_id)
+}
+
+// WithLightType the type of the light.
+func (x *LightProbe) WithLightType(lightType LightType) *LightProbe {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
+	return x
+}
+
+// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
 func (x *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
-	x.inner.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent the parent object that contains this object.
 func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
-	x.inner.MDLLight.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
-	x.inner.MDLLight.MDLObject.SetInstance(instance.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *LightProbe) WithTransform(transform raw.MDLTransformComponent) *LightProbe {
-	x.inner.MDLLight.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *LightProbe) WithChildren(children raw.MDLObjectContainerComponent) *LightProbe {
-	x.inner.MDLLight.MDLObject.SetChildren(children)
-	return x
-}
-
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *LightProbe) WithHidden(hidden bool) *LightProbe {
-	x.inner.MDLLight.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Generates spherical harmonics information based on the light probe’s irradiance texture.
-//
-// GenerateSphericalHarmonicsFromIrradiance calls the underlying GenerateSphericalHarmonicsFromIrradiance.
-func (x *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel uint) {
-	x.inner.GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel)
+// GenerateSphericalHarmonicsFromIrradiance generates spherical harmonics information based on the light probe’s irradiance texture.
+func (x *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateSphericalHarmonicsFromIrradiance:"), sphericalHarmonicsLevel)
 }
 
-// ReflectiveTexture calls the underlying ReflectiveTexture.
+// ReflectiveTexture wraps the corresponding Objective-C method.
 func (x *LightProbe) ReflectiveTexture() *Texture {
-	_r := x.inner.ReflectiveTexture()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reflectiveTexture"))
+	return TextureFromID(_r)
 }
 
-// IrradianceTexture calls the underlying IrradianceTexture.
+// IrradianceTexture wraps the corresponding Objective-C method.
 func (x *LightProbe) IrradianceTexture() *Texture {
-	_r := x.inner.IrradianceTexture()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("irradianceTexture"))
+	return TextureFromID(_r)
 }
 
-// SphericalHarmonicsLevel calls the underlying SphericalHarmonicsLevel.
-func (x *LightProbe) SphericalHarmonicsLevel() uint {
-	return x.inner.SphericalHarmonicsLevel()
+// SphericalHarmonicsLevel wraps the corresponding Objective-C method.
+func (x *LightProbe) SphericalHarmonicsLevel() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsLevel"))
+	return _r
 }
 
-// SphericalHarmonicsCoefficients calls the underlying SphericalHarmonicsCoefficients.
-func (x *LightProbe) SphericalHarmonicsCoefficients() *foundation.NSData {
-	return x.inner.SphericalHarmonicsCoefficients()
+// SphericalHarmonicsCoefficients wraps the corresponding Objective-C method.
+func (x *LightProbe) SphericalHarmonicsCoefficients() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsCoefficients"))
+	return obj.Wrap(_r)
 }
-
-func (x *LightProbe) asLight() *raw.MDLLight { return &x.inner.MDLLight }
-
-func (x *LightProbe) asObject() *raw.MDLObject { return &x.inner.MDLLight.MDLObject }
 
 // LightProbeable is the interface implemented by [LightProbe], for mocking and DI.
 type LightProbeable interface {
-	Unwrap() *raw.MDLLightProbe
-	WithLightType(lightType MDLLightType) *LightProbe
+	obj.Object
+	WithLightType(lightType LightType) *LightProbe
 	WithColorSpace(colorSpace string) *LightProbe
 	WithParent(parent ObjectProvider) *LightProbe
 	WithInstance(instance ObjectProvider) *LightProbe
-	WithTransform(transform raw.MDLTransformComponent) *LightProbe
-	WithChildren(children raw.MDLObjectContainerComponent) *LightProbe
 	WithHidden(hidden bool) *LightProbe
-	GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel uint)
+	GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int)
 	ReflectiveTexture() *Texture
 	IrradianceTexture() *Texture
-	SphericalHarmonicsLevel() uint
-	SphericalHarmonicsCoefficients() *foundation.NSData
+	SphericalHarmonicsLevel() int
+	SphericalHarmonicsCoefficients() obj.Object
 }
 
 var _ LightProbeable = (*LightProbe)(nil)
+
+var _ LightProvider = (*LightProbe)(nil)
+
+var _ ObjectProvider = (*LightProbe)(nil)

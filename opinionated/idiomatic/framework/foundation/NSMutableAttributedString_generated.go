@@ -5,171 +5,108 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable string with associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
+// MutableAttributedString is an idiomatic wrapper over the Objective-C class NSMutableAttributedString.
 //
-// MutableAttributedString wraps [raw.NSMutableAttributedString] with a fluent Go API.
+// It embeds [AttributedString], promoting that type's methods.
+//
+// A mutable string with associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
 type MutableAttributedString struct {
-	inner *raw.NSMutableAttributedString
+	AttributedString
 }
 
-// Unwrap returns the underlying [raw.NSMutableAttributedString].
-func (x *MutableAttributedString) Unwrap() *raw.NSMutableAttributedString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableAttributedString) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableAttributedStringFromID adopts an existing object pointer as a MutableAttributedString (nil for 0).
+// MutableAttributedStringFromID adopts an existing Objective-C object as a MutableAttributedString
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableAttributedStringFromID(id objc.ID) *MutableAttributedString {
 	if id == 0 {
 		return nil
 	}
-	return &MutableAttributedString{inner: raw.NSMutableAttributedStringFromID(id)}
-}
-
-// NewMutableAttributedString creates a new [MutableAttributedString].
-func NewMutableAttributedString() *MutableAttributedString {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableAttributedString")), objc.RegisterName("new"))
-	return &MutableAttributedString{inner: raw.NSMutableAttributedStringFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableAttributedString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableAttributedString {
-	x.inner.NSAttributedString.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MutableAttributedString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Replaces the characters in the given range with the characters of the given string.
-//
-// ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
-func (x *MutableAttributedString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string) {
-	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(str))
-}
-
-// Sets the attributes for the characters in the specified range to the specified attributes.
-//
-// SetAttributesRange calls the underlying SetAttributesRange.
-func (x *MutableAttributedString) SetAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange) {
-	x.inner.SetAttributesRange(attrs, range_)
-}
-
-// Adds an attribute with the given name and value to the characters in the specified range.
-//
-// AddAttributeValueRange calls the underlying AddAttributeValueRange.
-func (x *MutableAttributedString) AddAttributeValueRange(name *raw.NSString, value objc.ID, range_ raw.NSRange) {
-	x.inner.AddAttributeValueRange(name, value, range_)
-}
-
-// Adds the given collection of attributes to the characters in the specified range.
-//
-// AddAttributesRange calls the underlying AddAttributesRange.
-func (x *MutableAttributedString) AddAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange) {
-	x.inner.AddAttributesRange(attrs, range_)
-}
-
-// Removes the named attribute from the characters in the specified range.
-//
-// RemoveAttributeRange calls the underlying RemoveAttributeRange.
-func (x *MutableAttributedString) RemoveAttributeRange(name *raw.NSString, range_ raw.NSRange) {
-	x.inner.RemoveAttributeRange(name, range_)
-}
-
-// Replaces the characters and attributes in a given range with the characters and attributes of the given attributed string.
-//
-// ReplaceCharactersInRangeWithAttributedString calls the underlying ReplaceCharactersInRangeWithAttributedString.
-func (x *MutableAttributedString) ReplaceCharactersInRangeWithAttributedString(range_ raw.NSRange, attrString *raw.NSAttributedString) {
-	x.inner.ReplaceCharactersInRangeWithAttributedString(range_, attrString)
-}
-
-// Inserts the characters and attributes of the given attributed string into the receiver at the given index.
-//
-// InsertAttributedStringAtIndex calls the underlying InsertAttributedStringAtIndex.
-func (x *MutableAttributedString) InsertAttributedStringAtIndex(attrString *raw.NSAttributedString, loc uint) {
-	x.inner.InsertAttributedStringAtIndex(attrString, loc)
-}
-
-// Adds the characters and attributes of a given attributed string to the end of the receiver.
-//
-// AppendAttributedString calls the underlying AppendAttributedString.
-func (x *MutableAttributedString) AppendAttributedString(attrString *raw.NSAttributedString) {
-	x.inner.AppendAttributedString(attrString)
-}
-
-// Deletes the characters in the given range along with their associated attributes.
-//
-// DeleteCharactersInRange calls the underlying DeleteCharactersInRange.
-func (x *MutableAttributedString) DeleteCharactersInRange(range_ raw.NSRange) {
-	x.inner.DeleteCharactersInRange(range_)
-}
-
-// Replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
-//
-// SetAttributedString calls the underlying SetAttributedString.
-func (x *MutableAttributedString) SetAttributedString(attrString *raw.NSAttributedString) {
-	x.inner.SetAttributedString(attrString)
-}
-
-// Begins the buffering of changes to the string’s characters and attributes.
-//
-// BeginEditing calls the underlying BeginEditing.
-func (x *MutableAttributedString) BeginEditing() {
-	x.inner.BeginEditing()
-}
-
-// Ends the buffering of changes to the string’s characters and attributes.
-//
-// EndEditing calls the underlying EndEditing.
-func (x *MutableAttributedString) EndEditing() {
-	x.inner.EndEditing()
-}
-
-// MutableString calls the underlying MutableString.
-func (x *MutableAttributedString) MutableString() *MutableString {
-	_r := x.inner.MutableString()
-	if _r == nil {
+// mutableAttributedStringAdopt wraps an Objective-C object that this code just created as a
+// MutableAttributedString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableAttributedStringAdopt(id objc.ID) *MutableAttributedString {
+	if id == 0 {
 		return nil
 	}
-	return &MutableString{inner: _r}
+	x := &MutableAttributedString{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Formats the specified string and arguments with the current locale, then appends the result to the receiver.
-//
-// AppendLocalizedFormat calls the underlying AppendLocalizedFormat.
-func (x *MutableAttributedString) AppendLocalizedFormat(format *raw.NSAttributedString) {
-	x.inner.AppendLocalizedFormat(format)
+// NewMutableAttributedString creates a new MutableAttributedString.
+func NewMutableAttributedString() *MutableAttributedString {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableAttributedString")), objc.RegisterName("new"))
+	return mutableAttributedStringAdopt(_id)
 }
 
-func (x *MutableAttributedString) asAttributedString() *raw.NSAttributedString {
-	return &x.inner.NSAttributedString
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MutableAttributedString) WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
-func (x *MutableAttributedString) asObject() *raw.NSObject {
-	return &x.inner.NSAttributedString.NSObject
+// InsertAttributedStringAtIndex inserts the characters and attributes of the given attributed string into the receiver at the given index.
+func (x *MutableAttributedString) InsertAttributedStringAtIndex(attrString *AttributedString, loc int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertAttributedString:atIndex:"), objref.IDOf(attrString), loc)
+}
+
+// AppendAttributedString adds the characters and attributes of a given attributed string to the end of the receiver.
+func (x *MutableAttributedString) AppendAttributedString(attrString *AttributedString) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAttributedString:"), objref.IDOf(attrString))
+}
+
+// SetAttributedString replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
+func (x *MutableAttributedString) SetAttributedString(attrString *AttributedString) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attrString))
+}
+
+// BeginEditing begins the buffering of changes to the string’s characters and attributes.
+func (x *MutableAttributedString) BeginEditing() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginEditing"))
+}
+
+// EndEditing ends the buffering of changes to the string’s characters and attributes.
+func (x *MutableAttributedString) EndEditing() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endEditing"))
+}
+
+// MutableString wraps the corresponding Objective-C method.
+func (x *MutableAttributedString) MutableString() *MutableString {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableString"))
+	return MutableStringFromID(_r)
+}
+
+// AppendLocalizedFormat formats the specified string and arguments with the current locale, then appends the result to the receiver.
+func (x *MutableAttributedString) AppendLocalizedFormat(format *AttributedString) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendLocalizedFormat:"), objref.IDOf(format))
 }
 
 // MutableAttributedStringable is the interface implemented by [MutableAttributedString], for mocking and DI.
 type MutableAttributedStringable interface {
-	Unwrap() *raw.NSMutableAttributedString
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableAttributedString
-	ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string)
-	SetAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange)
-	AddAttributeValueRange(name *raw.NSString, value objc.ID, range_ raw.NSRange)
-	AddAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange)
-	RemoveAttributeRange(name *raw.NSString, range_ raw.NSRange)
-	ReplaceCharactersInRangeWithAttributedString(range_ raw.NSRange, attrString *raw.NSAttributedString)
-	InsertAttributedStringAtIndex(attrString *raw.NSAttributedString, loc uint)
-	AppendAttributedString(attrString *raw.NSAttributedString)
-	DeleteCharactersInRange(range_ raw.NSRange)
-	SetAttributedString(attrString *raw.NSAttributedString)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString
+	InsertAttributedStringAtIndex(attrString *AttributedString, loc int)
+	AppendAttributedString(attrString *AttributedString)
+	SetAttributedString(attrString *AttributedString)
 	BeginEditing()
 	EndEditing()
 	MutableString() *MutableString
-	AppendLocalizedFormat(format *raw.NSAttributedString)
+	AppendLocalizedFormat(format *AttributedString)
 }
 
 var _ MutableAttributedStringable = (*MutableAttributedString)(nil)
+
+var _ AttributedStringProvider = (*MutableAttributedString)(nil)

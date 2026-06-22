@@ -4,21 +4,11 @@
 
 package commonpanels
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
-)
-
-// CalibratorInfo is a type alias for the raw CalibratorInfo value-type struct.
-type CalibratorInfo = raw.CalibratorInfo
-
-// FontSelectionQDStyle is a type alias for the raw FontSelectionQDStyle value-type struct.
-type FontSelectionQDStyle = raw.FontSelectionQDStyle
-
-// NColorPickerInfo is a type alias for the raw NColorPickerInfo value-type struct.
-type NColorPickerInfo = raw.NColorPickerInfo
-
-// NPMColor is a type alias for the raw NPMColor value-type struct.
-type NPMColor = raw.NPMColor
-
-// PickerMenuItemInfo is a type alias for the raw PickerMenuItemInfo value-type struct.
-type PickerMenuItemInfo = raw.PickerMenuItemInfo
+type PickerMenuItemInfo struct {
+	EditMenuID int16
+	CutItem    int16
+	CopyItem   int16
+	PasteItem  int16
+	ClearItem  int16
+	UndoItem   int16
+}

@@ -5,65 +5,83 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A mechanism for generating requests to authenticate users based on their Apple ID.
+// AuthorizationAppleIDProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationAppleIDProvider.
 //
-// AuthorizationAppleIDProvider wraps [raw.ASAuthorizationAppleIDProvider] with a fluent Go API.
+// A mechanism for generating requests to authenticate users based on their Apple ID.
 type AuthorizationAppleIDProvider struct {
-	inner *raw.ASAuthorizationAppleIDProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationAppleIDProvider].
-func (x *AuthorizationAppleIDProvider) Unwrap() *raw.ASAuthorizationAppleIDProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationAppleIDProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationAppleIDProviderFromID adopts an existing object pointer as a AuthorizationAppleIDProvider (nil for 0).
+// AuthorizationAppleIDProviderFromID adopts an existing Objective-C object as a AuthorizationAppleIDProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationAppleIDProviderFromID(id objc.ID) *AuthorizationAppleIDProvider {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationAppleIDProvider{inner: raw.ASAuthorizationAppleIDProviderFromID(id)}
+	x := &AuthorizationAppleIDProvider{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationAppleIDProvider creates a new [AuthorizationAppleIDProvider].
-func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationAppleIDProvider")), objc.RegisterName("new"))
-	return &AuthorizationAppleIDProvider{inner: raw.ASAuthorizationAppleIDProviderFromID(_id)}
-}
-
-// Creates a new Apple ID authorization request.
-//
-// CreateRequest calls the underlying CreateRequest.
-func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
-	_r := x.inner.CreateRequest()
-	if _r == nil {
+// authorizationAppleIDProviderAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationAppleIDProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationAppleIDProviderAdopt(id objc.ID) *AuthorizationAppleIDProvider {
+	if id == 0 {
 		return nil
 	}
-	return &AuthorizationAppleIDRequest{inner: _r}
+	x := &AuthorizationAppleIDProvider{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the credential state for the given user in a completion handler.
-//
-// GetCredentialStateForUserIDCompletion calls the underlying GetCredentialStateForUserIDCompletion.
-func (x *AuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID string, completion func(ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {
-	x.inner.GetCredentialStateForUserIDCompletion(foundation.NSStringStringWithUTF8String(userID), func(_a0 raw.ASAuthorizationAppleIDProviderCredentialState, _a1 unsafe.Pointer) {
-		completion(ASAuthorizationAppleIDProviderCredentialState(_a0), _a1)
-	})
+// Description returns the object's -description text.
+func (x *AuthorizationAppleIDProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationAppleIDProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationAppleIDProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationAppleIDProvider) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationAppleIDProvider creates a new AuthorizationAppleIDProvider.
+func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDProvider")), objc.RegisterName("new"))
+	return authorizationAppleIDProviderAdopt(_id)
+}
+
+// CreateRequest creates a new Apple ID authorization request.
+func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
+	return AuthorizationAppleIDRequestFromID(_r)
 }
 
 // AuthorizationAppleIDProviderable is the interface implemented by [AuthorizationAppleIDProvider], for mocking and DI.
 type AuthorizationAppleIDProviderable interface {
-	Unwrap() *raw.ASAuthorizationAppleIDProvider
+	obj.Object
 	CreateRequest() *AuthorizationAppleIDRequest
-	GetCredentialStateForUserIDCompletion(userID string, completion func(ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer))
 }
 
 var _ AuthorizationAppleIDProviderable = (*AuthorizationAppleIDProvider)(nil)

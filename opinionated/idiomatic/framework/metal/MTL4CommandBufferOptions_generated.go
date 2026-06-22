@@ -5,62 +5,76 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Options to configure a command buffer before encoding work into it.
+// MTL4CommandBufferOptions is an idiomatic wrapper over the Objective-C class MTL4CommandBufferOptions.
 //
-// MTL4CommandBufferOptions wraps [raw.MTL4CommandBufferOptions] with a fluent Go API.
+// Options to configure a command buffer before encoding work into it.
 type MTL4CommandBufferOptions struct {
-	inner *raw.MTL4CommandBufferOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4CommandBufferOptions].
-func (x *MTL4CommandBufferOptions) Unwrap() *raw.MTL4CommandBufferOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4CommandBufferOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4CommandBufferOptionsFromID adopts an existing object pointer as a MTL4CommandBufferOptions (nil for 0).
+// MTL4CommandBufferOptionsFromID adopts an existing Objective-C object as a MTL4CommandBufferOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4CommandBufferOptionsFromID(id objc.ID) *MTL4CommandBufferOptions {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4CommandBufferOptions{inner: raw.MTL4CommandBufferOptionsFromID(id)}
-}
-
-// NewMTL4CommandBufferOptions creates a new [MTL4CommandBufferOptions].
-func NewMTL4CommandBufferOptions() *MTL4CommandBufferOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CommandBufferOptions")), objc.RegisterName("new"))
-	return &MTL4CommandBufferOptions{inner: raw.MTL4CommandBufferOptionsFromID(_id)}
-}
-
-// Contains information related to shader logging.
-//
-// WithLogState sets the logState property and returns the receiver for chaining.
-func (x *MTL4CommandBufferOptions) WithLogState(logState raw.MTLLogState) *MTL4CommandBufferOptions {
-	x.inner.SetLogState(logState)
+	x := &MTL4CommandBufferOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// LogState calls the underlying LogState.
-func (x *MTL4CommandBufferOptions) LogState() raw.MTLLogState {
-	return x.inner.LogState()
+// mTL4CommandBufferOptionsAdopt wraps an Objective-C object that this code just created as a
+// MTL4CommandBufferOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4CommandBufferOptionsAdopt(id objc.ID) *MTL4CommandBufferOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4CommandBufferOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetLogState calls the underlying SetLogState.
-func (x *MTL4CommandBufferOptions) SetLogState(logState raw.MTLLogState) {
-	x.inner.SetLogState(logState)
+// Description returns the object's -description text.
+func (x *MTL4CommandBufferOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4CommandBufferOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4CommandBufferOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CommandBufferOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTL4CommandBufferOptions creates a new MTL4CommandBufferOptions.
+func NewMTL4CommandBufferOptions() *MTL4CommandBufferOptions {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommandBufferOptions")), objc.RegisterName("new"))
+	return mTL4CommandBufferOptionsAdopt(_id)
 }
 
 // MTL4CommandBufferOptionsable is the interface implemented by [MTL4CommandBufferOptions], for mocking and DI.
 type MTL4CommandBufferOptionsable interface {
-	Unwrap() *raw.MTL4CommandBufferOptions
-	WithLogState(logState raw.MTLLogState) *MTL4CommandBufferOptions
-	LogState() raw.MTLLogState
-	SetLogState(logState raw.MTLLogState)
+	obj.Object
 }
 
 var _ MTL4CommandBufferOptionsable = (*MTL4CommandBufferOptions)(nil)

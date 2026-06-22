@@ -5,210 +5,217 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.
+// FetchOptions is an idiomatic wrapper over the Objective-C class PHFetchOptions.
 //
-// FetchOptions wraps [raw.PHFetchOptions] with a fluent Go API.
+// A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.
 type FetchOptions struct {
-	inner *raw.PHFetchOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHFetchOptions].
-func (x *FetchOptions) Unwrap() *raw.PHFetchOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchOptionsFromID adopts an existing object pointer as a FetchOptions (nil for 0).
+// FetchOptionsFromID adopts an existing Objective-C object as a FetchOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchOptionsFromID(id objc.ID) *FetchOptions {
 	if id == 0 {
 		return nil
 	}
-	return &FetchOptions{inner: raw.PHFetchOptionsFromID(id)}
-}
-
-// NewFetchOptions creates a new [FetchOptions].
-func NewFetchOptions() *FetchOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHFetchOptions")), objc.RegisterName("new"))
-	return &FetchOptions{inner: raw.PHFetchOptionsFromID(_id)}
-}
-
-// A predicate that specifies which properties to select results by and that also specifies any constraints on selection.
-//
-// WithPredicate sets the predicate property and returns the receiver for chaining.
-func (x *FetchOptions) WithPredicate(predicate *foundation.NSPredicate) *FetchOptions {
-	x.inner.SetPredicate(predicate)
+	x := &FetchOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A list of sort descriptors, specifying an order for the fetched objects.
-//
-// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
-func (x *FetchOptions) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchOptions {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSortDescriptors(_arr)
-	return x
-}
-
-// A Boolean value that determines whether the fetch result includes assets marked as hidden.
-//
-// WithIncludeHiddenAssets sets the includeHiddenAssets property and returns the receiver for chaining.
-func (x *FetchOptions) WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions {
-	x.inner.SetIncludeHiddenAssets(includeHiddenAssets)
-	return x
-}
-
-// A Boolean value that determines whether the fetch result includes all assets from burst photo sequences.
-//
-// WithIncludeAllBurstAssets sets the includeAllBurstAssets property and returns the receiver for chaining.
-func (x *FetchOptions) WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions {
-	x.inner.SetIncludeAllBurstAssets(includeAllBurstAssets)
-	return x
-}
-
-// The set of source types for which to include assets in the fetch result.
-//
-// WithIncludeAssetSourceTypes sets the includeAssetSourceTypes property and returns the receiver for chaining.
-func (x *FetchOptions) WithIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) *FetchOptions {
-	x.inner.SetIncludeAssetSourceTypes(raw.PHAssetSourceType(includeAssetSourceTypes))
-	return x
-}
-
-// The maximum number of objects to include in the fetch result.
-//
-// WithFetchLimit sets the fetchLimit property and returns the receiver for chaining.
-func (x *FetchOptions) WithFetchLimit(fetchLimit uint) *FetchOptions {
-	x.inner.SetFetchLimit(fetchLimit)
-	return x
-}
-
-// A Boolean value that determines whether your app receives detailed change information for the objects in the fetch result.
-//
-// WithWantsIncrementalChangeDetails sets the wantsIncrementalChangeDetails property and returns the receiver for chaining.
-func (x *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions {
-	x.inner.SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails)
-	return x
-}
-
-// Predicate calls the underlying Predicate.
-func (x *FetchOptions) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
-}
-
-// SetPredicate calls the underlying SetPredicate.
-func (x *FetchOptions) SetPredicate(predicate *foundation.NSPredicate) {
-	x.inner.SetPredicate(predicate)
-}
-
-// SortDescriptors returns the collection as a Go slice.
-func (x *FetchOptions) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
+// fetchOptionsAdopt wraps an Objective-C object that this code just created as a
+// FetchOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchOptionsAdopt(id objc.ID) *FetchOptions {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+	x := &FetchOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSortDescriptors calls the underlying SetSortDescriptors.
-func (x *FetchOptions) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	x.inner.SetSortDescriptors(sortDescriptors)
+// Description returns the object's -description text.
+func (x *FetchOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// IncludeHiddenAssets calls the underlying IncludeHiddenAssets.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FetchOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFetchOptions creates a new FetchOptions.
+func NewFetchOptions() *FetchOptions {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHFetchOptions")), objc.RegisterName("new"))
+	return fetchOptionsAdopt(_id)
+}
+
+// WithPredicate a predicate that specifies which properties to select results by and that also specifies any constraints on selection.
+func (x *FetchOptions) WithPredicate(predicate obj.Object) *FetchOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+	return x
+}
+
+// WithSortDescriptors a list of sort descriptors, specifying an order for the fetched objects.
+func (x *FetchOptions) WithSortDescriptors(items ...obj.Object) *FetchOptions {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
+	return x
+}
+
+// WithIncludeHiddenAssets a Boolean value that determines whether the fetch result includes assets marked as hidden.
+func (x *FetchOptions) WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeHiddenAssets:"), includeHiddenAssets)
+	return x
+}
+
+// WithIncludeAllBurstAssets a Boolean value that determines whether the fetch result includes all assets from burst photo sequences.
+func (x *FetchOptions) WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllBurstAssets:"), includeAllBurstAssets)
+	return x
+}
+
+// WithIncludeAssetSourceTypes the set of source types for which to include assets in the fetch result.
+func (x *FetchOptions) WithIncludeAssetSourceTypes(includeAssetSourceTypes AssetSourceType) *FetchOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAssetSourceTypes:"), includeAssetSourceTypes)
+	return x
+}
+
+// WithFetchLimit the maximum number of objects to include in the fetch result.
+func (x *FetchOptions) WithFetchLimit(fetchLimit int) *FetchOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
+	return x
+}
+
+// WithWantsIncrementalChangeDetails a Boolean value that determines whether your app receives detailed change information for the objects in the fetch result.
+func (x *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsIncrementalChangeDetails:"), wantsIncrementalChangeDetails)
+	return x
+}
+
+// Predicate wraps the corresponding Objective-C method.
+func (x *FetchOptions) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
+}
+
+// SetPredicate wraps the corresponding Objective-C method.
+func (x *FetchOptions) SetPredicate(predicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+}
+
+// SortDescriptors wraps the corresponding Objective-C method.
+//
+// SortDescriptors returns the collection as a Go slice.
+func (x *FetchOptions) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetSortDescriptors wraps the corresponding Objective-C method.
+func (x *FetchOptions) SetSortDescriptors(sortDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// IncludeHiddenAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) IncludeHiddenAssets() bool {
-	return x.inner.IncludeHiddenAssets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeHiddenAssets"))
+	return _r
 }
 
-// SetIncludeHiddenAssets calls the underlying SetIncludeHiddenAssets.
+// SetIncludeHiddenAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetIncludeHiddenAssets(includeHiddenAssets bool) {
-	x.inner.SetIncludeHiddenAssets(includeHiddenAssets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeHiddenAssets:"), includeHiddenAssets)
 }
 
-// IncludeAllBurstAssets calls the underlying IncludeAllBurstAssets.
+// IncludeAllBurstAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) IncludeAllBurstAssets() bool {
-	return x.inner.IncludeAllBurstAssets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeAllBurstAssets"))
+	return _r
 }
 
-// SetIncludeAllBurstAssets calls the underlying SetIncludeAllBurstAssets.
+// SetIncludeAllBurstAssets wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetIncludeAllBurstAssets(includeAllBurstAssets bool) {
-	x.inner.SetIncludeAllBurstAssets(includeAllBurstAssets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllBurstAssets:"), includeAllBurstAssets)
 }
 
-// IncludeAssetSourceTypes calls the underlying IncludeAssetSourceTypes.
-func (x *FetchOptions) IncludeAssetSourceTypes() PHAssetSourceType {
-	return PHAssetSourceType(x.inner.IncludeAssetSourceTypes())
+// IncludeAssetSourceTypes wraps the corresponding Objective-C method.
+func (x *FetchOptions) IncludeAssetSourceTypes() AssetSourceType {
+	_r := objc.Send[AssetSourceType](objref.IDOf(x), objc.RegisterName("includeAssetSourceTypes"))
+	return _r
 }
 
-// SetIncludeAssetSourceTypes calls the underlying SetIncludeAssetSourceTypes.
-func (x *FetchOptions) SetIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) {
-	x.inner.SetIncludeAssetSourceTypes(raw.PHAssetSourceType(includeAssetSourceTypes))
+// SetIncludeAssetSourceTypes wraps the corresponding Objective-C method.
+func (x *FetchOptions) SetIncludeAssetSourceTypes(includeAssetSourceTypes AssetSourceType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAssetSourceTypes:"), includeAssetSourceTypes)
 }
 
-// FetchLimit calls the underlying FetchLimit.
-func (x *FetchOptions) FetchLimit() uint {
-	return x.inner.FetchLimit()
+// FetchLimit wraps the corresponding Objective-C method.
+func (x *FetchOptions) FetchLimit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchLimit"))
+	return _r
 }
 
-// SetFetchLimit calls the underlying SetFetchLimit.
-func (x *FetchOptions) SetFetchLimit(fetchLimit uint) {
-	x.inner.SetFetchLimit(fetchLimit)
+// SetFetchLimit wraps the corresponding Objective-C method.
+func (x *FetchOptions) SetFetchLimit(fetchLimit int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
 }
 
-// WantsIncrementalChangeDetails calls the underlying WantsIncrementalChangeDetails.
+// WantsIncrementalChangeDetails wraps the corresponding Objective-C method.
 func (x *FetchOptions) WantsIncrementalChangeDetails() bool {
-	return x.inner.WantsIncrementalChangeDetails()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsIncrementalChangeDetails"))
+	return _r
 }
 
-// SetWantsIncrementalChangeDetails calls the underlying SetWantsIncrementalChangeDetails.
+// SetWantsIncrementalChangeDetails wraps the corresponding Objective-C method.
 func (x *FetchOptions) SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) {
-	x.inner.SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsIncrementalChangeDetails:"), wantsIncrementalChangeDetails)
 }
 
 // FetchOptionsable is the interface implemented by [FetchOptions], for mocking and DI.
 type FetchOptionsable interface {
-	Unwrap() *raw.PHFetchOptions
-	WithPredicate(predicate *foundation.NSPredicate) *FetchOptions
-	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchOptions
+	obj.Object
+	WithPredicate(predicate obj.Object) *FetchOptions
+	WithSortDescriptors(items ...obj.Object) *FetchOptions
 	WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions
 	WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions
-	WithIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) *FetchOptions
-	WithFetchLimit(fetchLimit uint) *FetchOptions
+	WithIncludeAssetSourceTypes(includeAssetSourceTypes AssetSourceType) *FetchOptions
+	WithFetchLimit(fetchLimit int) *FetchOptions
 	WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions
-	Predicate() *foundation.NSPredicate
-	SetPredicate(predicate *foundation.NSPredicate)
-	SortDescriptors() []*foundation.NSSortDescriptor
-	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
+	Predicate() obj.Object
+	SetPredicate(predicate obj.Object)
+	SortDescriptors() []obj.Object
+	SetSortDescriptors(sortDescriptors []obj.Object)
 	IncludeHiddenAssets() bool
 	SetIncludeHiddenAssets(includeHiddenAssets bool)
 	IncludeAllBurstAssets() bool
 	SetIncludeAllBurstAssets(includeAllBurstAssets bool)
-	IncludeAssetSourceTypes() PHAssetSourceType
-	SetIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType)
-	FetchLimit() uint
-	SetFetchLimit(fetchLimit uint)
+	IncludeAssetSourceTypes() AssetSourceType
+	SetIncludeAssetSourceTypes(includeAssetSourceTypes AssetSourceType)
+	FetchLimit() int
+	SetFetchLimit(fetchLimit int)
 	WantsIncrementalChangeDetails() bool
 	SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool)
 }

@@ -5,111 +5,112 @@
 package imagekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// PictureTaker wraps [raw.IKPictureTaker] with a fluent Go API.
+// PictureTaker is an idiomatic wrapper over the Objective-C class IKPictureTaker.
 type PictureTaker struct {
-	inner *raw.IKPictureTaker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKPictureTaker].
-func (x *PictureTaker) Unwrap() *raw.IKPictureTaker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PictureTaker) ID() objc.ID { return x.inner.Ptr() }
-
-// PictureTakerFromID adopts an existing object pointer as a PictureTaker (nil for 0).
+// PictureTakerFromID adopts an existing Objective-C object as a PictureTaker
+// (nil for 0), retaining it and registering a release finalizer.
 func PictureTakerFromID(id objc.ID) *PictureTaker {
 	if id == 0 {
 		return nil
 	}
-	return &PictureTaker{inner: raw.IKPictureTakerFromID(id)}
+	x := &PictureTaker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPictureTaker creates a new [PictureTaker].
+// pictureTakerAdopt wraps an Objective-C object that this code just created as a
+// PictureTaker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pictureTakerAdopt(id objc.ID) *PictureTaker {
+	if id == 0 {
+		return nil
+	}
+	x := &PictureTaker{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PictureTaker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PictureTaker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PictureTaker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PictureTaker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPictureTaker creates a new PictureTaker.
 func NewPictureTaker() *PictureTaker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKPictureTaker")), objc.RegisterName("new"))
-	return &PictureTaker{inner: raw.IKPictureTakerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("new"))
+	return pictureTakerAdopt(_id)
 }
 
-// @method runModal @abstract Launches a modal PictureTaker session. @result Returns NSOKButton if the user edits or chooses an image and confirm panel, NSCancelButton if the user canceled or didn't change the image.
-//
-// RunModal calls the underlying RunModal.
+// RunModal launches a modal PictureTaker session.
 func (x *PictureTaker) RunModal() int {
-	return x.inner.RunModal()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+	return _r
 }
 
-// @method beginPictureTakerWithDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker. @param delegate the object to invoke didEndSelector when the PictureTaker terminates. @param didEndSelector the selector to invoke when the PictureTaker terminates. @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended. @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
-//
-// BeginPictureTakerWithDelegateDidEndSelectorContextInfo calls the underlying BeginPictureTakerWithDelegateDidEndSelectorContextInfo.
-func (x *PictureTaker) BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate, didEndSelector, contextInfo)
+// SetInputImage set the image input for the PictureTaker. The input image is never modified by the PictureTaker.
+func (x *PictureTaker) SetInputImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 }
 
-// @method beginPictureTakerSheetForWindow:withDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker as a sheet for aWindow @param delegate the object to invoke didEndSelector when the PictureTaker terminates @param didEndSelector the selector to invoke when the PictureTaker terminates @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
-//
-// BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo calls the underlying BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo.
-func (x *PictureTaker) BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow, delegate, didEndSelector, contextInfo)
+// InputImage return the original PictureTaker's input-image. The input image is never modified by the PictureTaker.
+func (x *PictureTaker) InputImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImage"))
+	return obj.Wrap(_r)
 }
 
-// @method popUpRecentsMenuForView:withDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker's recent popup. @param delegate the object to invoke didEndSelector when the PictureTaker terminates. @param didEndSelector the selector to invoke when the PictureTaker terminates. @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended. @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
-//
-// PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo calls the underlying PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo.
-func (x *PictureTaker) PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView, delegate, didEndSelector, contextInfo)
+// OutputImage return the edited image.
+func (x *PictureTaker) OutputImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputImage"))
+	return obj.Wrap(_r)
 }
 
-// @method setInputImage: @abstract Set the image input for the PictureTaker. @param image A valid NSImage. @discussion The input image is never modified by the PictureTaker.
-//
-// SetInputImage calls the underlying SetInputImage.
-func (x *PictureTaker) SetInputImage(image *appkit.NSImage) {
-	x.inner.SetInputImage(image)
-}
-
-// @method inputImage @abstract return the original PictureTaker's input-image. @discussion The input image is never modified by the PictureTaker.
-//
-// InputImage calls the underlying InputImage.
-func (x *PictureTaker) InputImage() *appkit.NSImage {
-	return x.inner.InputImage()
-}
-
-// @method outputImage @abstract return the edited image.
-//
-// OutputImage calls the underlying OutputImage.
-func (x *PictureTaker) OutputImage() *appkit.NSImage {
-	return x.inner.OutputImage()
-}
-
-// @method setMirroring: @abstract Controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
-//
-// SetMirroring calls the underlying SetMirroring.
+// SetMirroring controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
 func (x *PictureTaker) SetMirroring(b bool) {
-	x.inner.SetMirroring(b)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMirroring:"), b)
 }
 
-// @method mirroring @abstract Returns YES if video mirroring is enabled, NO otherwise.
-//
-// Mirroring calls the underlying Mirroring.
+// Mirroring returns YES if video mirroring is enabled, NO otherwise.
 func (x *PictureTaker) Mirroring() bool {
-	return x.inner.Mirroring()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mirroring"))
+	return _r
 }
 
 // PictureTakerable is the interface implemented by [PictureTaker], for mocking and DI.
 type PictureTakerable interface {
-	Unwrap() *raw.IKPictureTaker
+	obj.Object
 	RunModal() int
-	BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	SetInputImage(image *appkit.NSImage)
-	InputImage() *appkit.NSImage
-	OutputImage() *appkit.NSImage
+	SetInputImage(image obj.Object)
+	InputImage() obj.Object
+	OutputImage() obj.Object
 	SetMirroring(b bool)
 	Mirroring() bool
 }

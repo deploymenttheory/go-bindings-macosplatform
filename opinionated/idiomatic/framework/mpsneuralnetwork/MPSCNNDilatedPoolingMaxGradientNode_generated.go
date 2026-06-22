@@ -5,87 +5,82 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNDilatedPoolingMaxGradientNode wraps [raw.MPSCNNDilatedPoolingMaxGradientNode] with a fluent Go API.
+// CNNDilatedPoolingMaxGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNDilatedPoolingMaxGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
 type CNNDilatedPoolingMaxGradientNode struct {
-	inner *raw.MPSCNNDilatedPoolingMaxGradientNode
+	CNNPoolingGradientNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDilatedPoolingMaxGradientNode].
-func (x *CNNDilatedPoolingMaxGradientNode) Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDilatedPoolingMaxGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDilatedPoolingMaxGradientNodeFromID adopts an existing object pointer as a CNNDilatedPoolingMaxGradientNode (nil for 0).
+// CNNDilatedPoolingMaxGradientNodeFromID adopts an existing Objective-C object as a CNNDilatedPoolingMaxGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDilatedPoolingMaxGradientNodeFromID(id objc.ID) *CNNDilatedPoolingMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDilatedPoolingMaxGradientNode{inner: raw.MPSCNNDilatedPoolingMaxGradientNodeFromID(id)}
-}
-
-// @abstract make a pooling gradient node @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead. @param      sourceGradient  The gradient from the downstream gradient filter. @param      sourceImage     The input image to the inference pooling filter @param      gradientState   The gradient state produced by the inference poolin filter @param      kernelWidth     The kernel width of the inference filter @param      kernelHeight    The kernel height of the inference filter @param      strideInPixelsX The X stride from the inference filter @param      strideInPixelsY The Y stride from the inference filter
-//
-// NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY creates a new [CNNDilatedPoolingMaxGradientNode].
-func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *CNNDilatedPoolingMaxGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
-	return &CNNDilatedPoolingMaxGradientNode{inner: raw.MPSCNNDilatedPoolingMaxGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDilatedPoolingMaxGradientNode {
-	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNDilatedPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNDilatedPoolingMaxGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNDilatedPoolingMaxGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDilatedPoolingMaxGradientNodeAdopt(id objc.ID) *CNNDilatedPoolingMaxGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDilatedPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY make a pooling gradient node It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
+func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
+	return cNNDilatedPoolingMaxGradientNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDilatedPoolingMaxGradientNode {
-	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// DilationRateX calls the underlying DilationRateX.
-func (x *CNNDilatedPoolingMaxGradientNode) DilationRateX() uint {
-	return x.inner.DilationRateX()
+// DilationRateX wraps the corresponding Objective-C method.
+func (x *CNNDilatedPoolingMaxGradientNode) DilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
+	return _r
 }
 
-// DilationRateY calls the underlying DilationRateY.
-func (x *CNNDilatedPoolingMaxGradientNode) DilationRateY() uint {
-	return x.inner.DilationRateY()
-}
-
-func (x *CNNDilatedPoolingMaxGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode {
-	return &x.inner.MPSCNNPoolingGradientNode
-}
-
-func (x *CNNDilatedPoolingMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode
-}
-
-func (x *CNNDilatedPoolingMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+// DilationRateY wraps the corresponding Objective-C method.
+func (x *CNNDilatedPoolingMaxGradientNode) DilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
+	return _r
 }
 
 // CNNDilatedPoolingMaxGradientNodeable is the interface implemented by [CNNDilatedPoolingMaxGradientNode], for mocking and DI.
 type CNNDilatedPoolingMaxGradientNodeable interface {
-	Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDilatedPoolingMaxGradientNode
+	obj.Object
 	WithLabel(label string) *CNNDilatedPoolingMaxGradientNode
-	DilationRateX() uint
-	DilationRateY() uint
+	DilationRateX() int
+	DilationRateY() int
 }
 
 var _ CNNDilatedPoolingMaxGradientNodeable = (*CNNDilatedPoolingMaxGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)

@@ -6,50 +6,41 @@ package mailkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ErrorWithLocalizedDescription calls the underlying MEAddressAnnotationErrorWithLocalizedDescription.
+// ErrorWithLocalizedDescription indicates an address is invalid and may result in failure to deliver a message.
 func ErrorWithLocalizedDescription(localizedDescription string) *AddressAnnotation {
-	_r := raw.MEAddressAnnotationErrorWithLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-	if _r == nil {
-		return nil
-	}
-	return &AddressAnnotation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("errorWithLocalizedDescription:"), purego.NSString(localizedDescription))
+	return AddressAnnotationFromID(_r)
 }
 
-// WarningWithLocalizedDescription calls the underlying MEAddressAnnotationWarningWithLocalizedDescription.
+// WarningWithLocalizedDescription indicates an address may be invalid or needs attention.
 func WarningWithLocalizedDescription(localizedDescription string) *AddressAnnotation {
-	_r := raw.MEAddressAnnotationWarningWithLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-	if _r == nil {
-		return nil
-	}
-	return &AddressAnnotation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("warningWithLocalizedDescription:"), purego.NSString(localizedDescription))
+	return AddressAnnotationFromID(_r)
 }
 
-// SuccessWithLocalizedDescription calls the underlying MEAddressAnnotationSuccessWithLocalizedDescription.
+// SuccessWithLocalizedDescription indicates an address is valid and correct.
 func SuccessWithLocalizedDescription(localizedDescription string) *AddressAnnotation {
-	_r := raw.MEAddressAnnotationSuccessWithLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-	if _r == nil {
-		return nil
-	}
-	return &AddressAnnotation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("successWithLocalizedDescription:"), purego.NSString(localizedDescription))
+	return AddressAnnotationFromID(_r)
 }
 
+// ReloadContentBlockerWithIdentifier this will call on Mail to reload the content rule list associated with the given identifier. Mail May throttle reloading the content blocker to once every few minutes.
+//
 // ReloadContentBlockerWithIdentifier blocks until the operation completes or ctx is cancelled.
 func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
-	raw.MEExtensionManagerReloadContentBlockerWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("MEExtensionManager")), objc.RegisterName("reloadContentBlockerWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -58,16 +49,17 @@ func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) 
 	}
 }
 
+// ReloadVisibleMessages this will call on Mail to reload the currently visible messages.  Mail may throttle reloading visible messages.
+//
 // ReloadVisibleMessages blocks until the operation completes or ctx is cancelled.
 func ReloadVisibleMessages(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.MEExtensionManagerReloadVisibleMessagesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("MEExtensionManager")), objc.RegisterName("reloadVisibleMessagesWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -76,92 +68,62 @@ func ReloadVisibleMessages(ctx context.Context) error {
 	}
 }
 
-// FlagActionWithFlag calls the underlying MEMessageActionFlagActionWithFlag.
-func FlagActionWithFlag(flag MEMessageActionFlag) *MessageAction {
-	_r := raw.MEMessageActionFlagActionWithFlag(raw.MEMessageActionFlag(flag))
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+// FlagActionWithFlag marks the message as flagged with the provided color.
+func FlagActionWithFlag(flag MessageActionFlag) *MessageAction {
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("flagActionWithFlag:"), flag)
+	return MessageActionFromID(_r)
 }
 
-// SetBackgroundColorActionWithColor calls the underlying MEMessageActionSetBackgroundColorActionWithColor.
-func SetBackgroundColorActionWithColor(color MEMessageActionMessageColor) *MessageAction {
-	_r := raw.MEMessageActionSetBackgroundColorActionWithColor(raw.MEMessageActionMessageColor(color))
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+// SetBackgroundColorActionWithColor adds a color to the message when shown in the message list.
+func SetBackgroundColorActionWithColor(color MessageActionMessageColor) *MessageAction {
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("setBackgroundColorActionWithColor:"), color)
+	return MessageActionFromID(_r)
 }
 
-// MoveToTrashAction calls the underlying MEMessageActionMoveToTrashAction.
+// MoveToTrashAction moves the mail message to the user's trash mailbox for the account.
 func MoveToTrashAction() *MessageAction {
-	_r := raw.MEMessageActionMoveToTrashAction()
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToTrashAction"))
+	return MessageActionFromID(_r)
 }
 
-// MoveToArchiveAction calls the underlying MEMessageActionMoveToArchiveAction.
+// MoveToArchiveAction moves the mail message to the user's archive mailbox for the account.
 func MoveToArchiveAction() *MessageAction {
-	_r := raw.MEMessageActionMoveToArchiveAction()
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToArchiveAction"))
+	return MessageActionFromID(_r)
 }
 
-// MoveToJunkAction calls the underlying MEMessageActionMoveToJunkAction.
+// MoveToJunkAction moves the mail message to the user's junk mailbox for the account.
 func MoveToJunkAction() *MessageAction {
-	_r := raw.MEMessageActionMoveToJunkAction()
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToJunkAction"))
+	return MessageActionFromID(_r)
 }
 
-// MarkAsReadAction calls the underlying MEMessageActionMarkAsReadAction.
+// MarkAsReadAction marks the mail message as read.
 func MarkAsReadAction() *MessageAction {
-	_r := raw.MEMessageActionMarkAsReadAction()
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("markAsReadAction"))
+	return MessageActionFromID(_r)
 }
 
-// MarkAsUnreadAction calls the underlying MEMessageActionMarkAsUnreadAction.
+// MarkAsUnreadAction marks the mail  message as unread.
 func MarkAsUnreadAction() *MessageAction {
-	_r := raw.MEMessageActionMarkAsUnreadAction()
-	if _r == nil {
-		return nil
-	}
-	return &MessageAction{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("markAsUnreadAction"))
+	return MessageActionFromID(_r)
 }
 
-// DecisionApplyingAction calls the underlying MEMessageActionDecisionDecisionApplyingAction.
-func DecisionApplyingAction(action *raw.MEMessageAction) *MessageActionDecision {
-	_r := raw.MEMessageActionDecisionDecisionApplyingAction(action)
-	if _r == nil {
-		return nil
-	}
-	return &MessageActionDecision{inner: _r}
+// DecisionApplyingAction wraps the corresponding Objective-C method.
+func DecisionApplyingAction(action *MessageAction) *MessageActionDecision {
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("decisionApplyingAction:"), objref.IDOf(action))
+	return MessageActionDecisionFromID(_r)
 }
 
-// DecisionApplyingActions calls the underlying MEMessageActionDecisionDecisionApplyingActions.
-func DecisionApplyingActions(actions *foundation.NSArray[*raw.MEMessageAction]) *MessageActionDecision {
-	_r := raw.MEMessageActionDecisionDecisionApplyingActions(actions)
-	if _r == nil {
-		return nil
-	}
-	return &MessageActionDecision{inner: _r}
+// DecisionApplyingActions creates an
+func DecisionApplyingActions(actions []*MessageAction) *MessageActionDecision {
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("decisionApplyingActions:"), purego.SliceToNSArray(actions, func(_v *MessageAction) objc.ID { return objref.IDOf(_v) }))
+	return MessageActionDecisionFromID(_r)
 }
 
-// InvokeAgainWithBody calls the underlying MEMessageActionDecisionInvokeAgainWithBody.
+// InvokeAgainWithBody wraps the corresponding Objective-C method.
 func InvokeAgainWithBody() *MessageActionDecision {
-	_r := raw.MEMessageActionDecisionInvokeAgainWithBody()
-	if _r == nil {
-		return nil
-	}
-	return &MessageActionDecision{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("invokeAgainWithBody"))
+	return MessageActionDecisionFromID(_r)
 }

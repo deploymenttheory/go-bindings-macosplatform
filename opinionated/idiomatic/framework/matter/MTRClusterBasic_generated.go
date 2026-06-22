@@ -5,66 +5,61 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterBasic wraps [raw.MTRClusterBasic] with a fluent Go API.
+// MTRClusterBasic is an idiomatic wrapper over the Objective-C class MTRClusterBasic.
+//
+// It embeds [MTRClusterBasicInformation], promoting that type's methods.
 type MTRClusterBasic struct {
-	inner *raw.MTRClusterBasic
+	MTRClusterBasicInformation
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBasic].
-func (x *MTRClusterBasic) Unwrap() *raw.MTRClusterBasic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBasic) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBasicFromID adopts an existing object pointer as a MTRClusterBasic (nil for 0).
+// MTRClusterBasicFromID adopts an existing Objective-C object as a MTRClusterBasic
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBasicFromID(id objc.ID) *MTRClusterBasic {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBasic{inner: raw.MTRClusterBasicFromID(id)}
+	x := &MTRClusterBasic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterBasicWithDeviceEndpointQueue creates a new [MTRClusterBasic].
-func NewMTRClusterBasicWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBasic {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBasic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterBasic{inner: raw.MTRClusterBasicFromID(_id)}
+// mTRClusterBasicAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBasic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBasicAdopt(id objc.ID) *MTRClusterBasic {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBasic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterBasic) MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRBasicClusterMfgSpecificPingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterBasic) asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation {
-	return &x.inner.MTRClusterBasicInformation
-}
-
-func (x *MTRClusterBasic) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRClusterBasicInformation.MTRGenericCluster
-}
-
-func (x *MTRClusterBasic) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRClusterBasicInformation.MTRGenericCluster.MTRCluster
+// NewMTRClusterBasicWithDeviceEndpointQueue creates a new MTRClusterBasic.
+func NewMTRClusterBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBasic {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBasic")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterBasicAdopt(_id)
 }
 
 // MTRClusterBasicable is the interface implemented by [MTRClusterBasic], for mocking and DI.
 type MTRClusterBasicable interface {
-	Unwrap() *raw.MTRClusterBasic
-	MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRBasicClusterMfgSpecificPingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
 }
 
 var _ MTRClusterBasicable = (*MTRClusterBasic)(nil)
+
+var _ MTRClusterBasicInformationProvider = (*MTRClusterBasic)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterBasic)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterBasic)(nil)

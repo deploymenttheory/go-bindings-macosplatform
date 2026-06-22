@@ -5,56 +5,66 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A 3D point that includes an identifier to the point.
+// RecognizedPoint3D is an idiomatic wrapper over the Objective-C class VNRecognizedPoint3D.
 //
-// RecognizedPoint3D wraps [raw.VNRecognizedPoint3D] with a fluent Go API.
+// RecognizedPoint3D is an abstract base — you do not construct it directly. Construct one of [HumanBodyRecognizedPoint3D] and pass it where a RecognizedPoint3D is accepted.
+//
+// A 3D point that includes an identifier to the point.
 type RecognizedPoint3D struct {
-	inner *raw.VNRecognizedPoint3D
+	Point3D
 }
 
-// Unwrap returns the underlying [raw.VNRecognizedPoint3D].
-func (x *RecognizedPoint3D) Unwrap() *raw.VNRecognizedPoint3D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizedPoint3D) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizedPoint3DFromID adopts an existing object pointer as a RecognizedPoint3D (nil for 0).
+// RecognizedPoint3DFromID adopts an existing Objective-C object as a RecognizedPoint3D
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizedPoint3DFromID(id objc.ID) *RecognizedPoint3D {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizedPoint3D{inner: raw.VNRecognizedPoint3DFromID(id)}
+	x := &RecognizedPoint3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizedPoint3D creates a new [RecognizedPoint3D].
-func NewRecognizedPoint3D() *RecognizedPoint3D {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedPoint3D")), objc.RegisterName("new"))
-	return &RecognizedPoint3D{inner: raw.VNRecognizedPoint3DFromID(_id)}
-}
-
-// Identifier calls the underlying Identifier.
-func (x *RecognizedPoint3D) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
+// recognizedPoint3DAdopt wraps an Objective-C object that this code just created as a
+// RecognizedPoint3D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizedPoint3DAdopt(id objc.ID) *RecognizedPoint3D {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &RecognizedPoint3D{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *RecognizedPoint3D) asRecognizedPoint3D() *raw.VNRecognizedPoint3D { return x.inner }
-
-func (x *RecognizedPoint3D) asPoint3D() *raw.VNPoint3D { return &x.inner.VNPoint3D }
+// Identifier wraps the corresponding Objective-C method.
+func (x *RecognizedPoint3D) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
+}
 
 // RecognizedPoint3Dable is the interface implemented by [RecognizedPoint3D], for mocking and DI.
 type RecognizedPoint3Dable interface {
-	Unwrap() *raw.VNRecognizedPoint3D
-	Identifier() string
+	obj.Object
+	Identifier() obj.Object
 }
 
 var _ RecognizedPoint3Dable = (*RecognizedPoint3D)(nil)
+
+// isRecognizedPoint3D marks RecognizedPoint3D — and, by embedding promotion, its
+// subclasses — as a member of the RecognizedPoint3D hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RecognizedPoint3D) isRecognizedPoint3D() {}
+
+var _ RecognizedPoint3DProvider = (*RecognizedPoint3D)(nil)
+
+var _ Point3DProvider = (*RecognizedPoint3D)(nil)

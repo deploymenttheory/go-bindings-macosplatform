@@ -5,14 +5,11 @@
 package mediaaccessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager calls the underlying MAMusicHapticsManagerSharedManager.
+// SharedManager wraps the corresponding Objective-C method.
 func SharedManager() *MusicHapticsManager {
-	_r := raw.MAMusicHapticsManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &MusicHapticsManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MAMusicHapticsManager")), objc.RegisterName("sharedManager"))
+	return MusicHapticsManagerFromID(_r)
 }

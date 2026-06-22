@@ -5,70 +5,101 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRICDManagementClusterRegisterClientResponseParams wraps [raw.MTRICDManagementClusterRegisterClientResponseParams] with a fluent Go API.
+// MTRICDManagementClusterRegisterClientResponseParams is an idiomatic wrapper over the Objective-C class MTRICDManagementClusterRegisterClientResponseParams.
 type MTRICDManagementClusterRegisterClientResponseParams struct {
-	inner *raw.MTRICDManagementClusterRegisterClientResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRICDManagementClusterRegisterClientResponseParams].
-func (x *MTRICDManagementClusterRegisterClientResponseParams) Unwrap() *raw.MTRICDManagementClusterRegisterClientResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRICDManagementClusterRegisterClientResponseParamsFromID adopts an existing object pointer as a MTRICDManagementClusterRegisterClientResponseParams (nil for 0).
+// MTRICDManagementClusterRegisterClientResponseParamsFromID adopts an existing Objective-C object as a MTRICDManagementClusterRegisterClientResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRICDManagementClusterRegisterClientResponseParamsFromID(id objc.ID) *MTRICDManagementClusterRegisterClientResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRICDManagementClusterRegisterClientResponseParams{inner: raw.MTRICDManagementClusterRegisterClientResponseParamsFromID(id)}
-}
-
-// Initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError creates a new [MTRICDManagementClusterRegisterClientResponseParams].
-func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRICDManagementClusterRegisterClientResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRICDManagementClusterRegisterClientResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRICDManagementClusterRegisterClientResponseParams{inner: raw.MTRICDManagementClusterRegisterClientResponseParamsFromID(_id)}, nil
-}
-
-// WithIcdCounter sets the icdCounter property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter *foundation.NSNumber) *MTRICDManagementClusterRegisterClientResponseParams {
-	x.inner.SetIcdCounter(icdCounter)
+	x := &MTRICDManagementClusterRegisterClientResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// IcdCounter calls the underlying IcdCounter.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() *foundation.NSNumber {
-	return x.inner.IcdCounter()
+// mTRICDManagementClusterRegisterClientResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRICDManagementClusterRegisterClientResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRICDManagementClusterRegisterClientResponseParamsAdopt(id objc.ID) *MTRICDManagementClusterRegisterClientResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRICDManagementClusterRegisterClientResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetIcdCounter calls the underlying SetIcdCounter.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) SetIcdCounter(icdCounter *foundation.NSNumber) {
-	x.inner.SetIcdCounter(icdCounter)
+// Description returns the object's -description text.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterRegisterClientResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRICDManagementClusterRegisterClientResponseParamsAdopt(_id), nil
+}
+
+// WithIcdCounter sets the property and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
+	return x
+}
+
+// IcdCounter wraps the corresponding Objective-C method.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icdCounter"))
+	return obj.Wrap(_r)
+}
+
+// SetIcdCounter wraps the corresponding Objective-C method.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) SetIcdCounter(icdCounter obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
 }
 
 // MTRICDManagementClusterRegisterClientResponseParamsable is the interface implemented by [MTRICDManagementClusterRegisterClientResponseParams], for mocking and DI.
 type MTRICDManagementClusterRegisterClientResponseParamsable interface {
-	Unwrap() *raw.MTRICDManagementClusterRegisterClientResponseParams
-	WithIcdCounter(icdCounter *foundation.NSNumber) *MTRICDManagementClusterRegisterClientResponseParams
-	IcdCounter() *foundation.NSNumber
-	SetIcdCounter(icdCounter *foundation.NSNumber)
+	obj.Object
+	WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams
+	IcdCounter() obj.Object
+	SetIcdCounter(icdCounter obj.Object)
 }
 
 var _ MTRICDManagementClusterRegisterClientResponseParamsable = (*MTRICDManagementClusterRegisterClientResponseParams)(nil)

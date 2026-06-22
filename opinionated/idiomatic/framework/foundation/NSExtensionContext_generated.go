@@ -5,82 +5,102 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The host app context from which an app extension is invoked.
+// ExtensionContext is an idiomatic wrapper over the Objective-C class NSExtensionContext.
 //
-// ExtensionContext wraps [raw.NSExtensionContext] with a fluent Go API.
+// The host app context from which an app extension is invoked.
 type ExtensionContext struct {
-	inner *raw.NSExtensionContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSExtensionContext].
-func (x *ExtensionContext) Unwrap() *raw.NSExtensionContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionContext) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionContextFromID adopts an existing object pointer as a ExtensionContext (nil for 0).
+// ExtensionContextFromID adopts an existing Objective-C object as a ExtensionContext
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionContextFromID(id objc.ID) *ExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionContext{inner: raw.NSExtensionContextFromID(id)}
-}
-
-// NewExtensionContext creates a new [ExtensionContext].
-func NewExtensionContext() *ExtensionContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExtensionContext")), objc.RegisterName("new"))
-	return &ExtensionContext{inner: raw.NSExtensionContextFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ExtensionContext) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ExtensionContext {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ExtensionContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Tells the host app to complete the app extension request with an array of result items.
-//
-// CompleteRequestReturningItemsCompletionHandler calls the underlying CompleteRequestReturningItemsCompletionHandler.
-func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool)) {
-	x.inner.CompleteRequestReturningItemsCompletionHandler(items, completionHandler)
+// extensionContextAdopt wraps an Objective-C object that this code just created as a
+// ExtensionContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionContextAdopt(id objc.ID) *ExtensionContext {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Tells the host app to cancel the app extension request, with a supplied error.
-//
-// CancelRequestWithError calls the underlying CancelRequestWithError.
-func (x *ExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
-	x.inner.CancelRequestWithError(error_)
+// Description returns the object's -description text.
+func (x *ExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Asks the system to open a URL on behalf of the currently running app extension.
-//
-// OpenURLCompletionHandler calls the underlying OpenURLCompletionHandler.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionContext creates a new ExtensionContext.
+func NewExtensionContext() *ExtensionContext {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSExtensionContext")), objc.RegisterName("new"))
+	return extensionContextAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// CompleteRequestReturningItemsCompletionHandler tells the host app to complete the app extension request with an array of result items.
+func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequestReturningItems:completionHandler:"), objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+}
+
+// OpenURLCompletionHandler asks the system to open a URL on behalf of the currently running app extension.
 func (x *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
-	x.inner.OpenURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(uRL), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// InputItems calls the underlying InputItems.
-func (x *ExtensionContext) InputItems() *raw.NSArray[objc.ID] {
-	return x.inner.InputItems()
+// InputItems wraps the corresponding Objective-C method.
+func (x *ExtensionContext) InputItems() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputItems"))
+	return obj.Wrap(_r)
 }
-
-func (x *ExtensionContext) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // ExtensionContextable is the interface implemented by [ExtensionContext], for mocking and DI.
 type ExtensionContextable interface {
-	Unwrap() *raw.NSExtensionContext
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ExtensionContext
-	CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool))
-	CancelRequestWithError(error_ unsafe.Pointer)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext
+	CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool))
 	OpenURLCompletionHandler(uRL string, completionHandler func(bool))
-	InputItems() *raw.NSArray[objc.ID]
+	InputItems() obj.Object
 }
 
 var _ ExtensionContextable = (*ExtensionContext)(nil)

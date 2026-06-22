@@ -5,95 +5,102 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A joint that simulates a spring connecting two physics bodies.
+// PhysicsJointSpring is an idiomatic wrapper over the Objective-C class SKPhysicsJointSpring.
 //
-// PhysicsJointSpring wraps [raw.SKPhysicsJointSpring] with a fluent Go API.
+// It embeds [PhysicsJoint], promoting that type's methods.
+//
+// A joint that simulates a spring connecting two physics bodies.
 type PhysicsJointSpring struct {
-	inner *raw.SKPhysicsJointSpring
+	PhysicsJoint
 }
 
-// Unwrap returns the underlying [raw.SKPhysicsJointSpring].
-func (x *PhysicsJointSpring) Unwrap() *raw.SKPhysicsJointSpring { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsJointSpring) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsJointSpringFromID adopts an existing object pointer as a PhysicsJointSpring (nil for 0).
+// PhysicsJointSpringFromID adopts an existing Objective-C object as a PhysicsJointSpring
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsJointSpringFromID(id objc.ID) *PhysicsJointSpring {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsJointSpring{inner: raw.SKPhysicsJointSpringFromID(id)}
+	x := &PhysicsJointSpring{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsJointSpring creates a new [PhysicsJointSpring].
+// physicsJointSpringAdopt wraps an Objective-C object that this code just created as a
+// PhysicsJointSpring (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsJointSpringAdopt(id objc.ID) *PhysicsJointSpring {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsJointSpring{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPhysicsJointSpring creates a new PhysicsJointSpring.
 func NewPhysicsJointSpring() *PhysicsJointSpring {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPhysicsJointSpring")), objc.RegisterName("new"))
-	return &PhysicsJointSpring{inner: raw.SKPhysicsJointSpringFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointSpring")), objc.RegisterName("new"))
+	return physicsJointSpringAdopt(_id)
 }
 
-// Defines how the spring’s motion should be damped due to the forces of friction.
-//
-// WithDamping sets the damping property and returns the receiver for chaining.
+// WithDamping defines how the spring’s motion should be damped due to the forces of friction.
 func (x *PhysicsJointSpring) WithDamping(damping float64) *PhysicsJointSpring {
-	x.inner.SetDamping(damping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 	return x
 }
 
-// Defines the frequency or stiffness characteristics of the spring.
-//
-// WithFrequency sets the frequency property and returns the receiver for chaining.
+// WithFrequency defines the frequency or stiffness characteristics of the spring.
 func (x *PhysicsJointSpring) WithFrequency(frequency float64) *PhysicsJointSpring {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
-// The first body connected by the joint.
-//
-// WithBodyA sets the bodyA property and returns the receiver for chaining.
+// WithBodyA the first body connected by the joint.
 func (x *PhysicsJointSpring) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
-// The second body connected by the joint.
-//
-// WithBodyB sets the bodyB property and returns the receiver for chaining.
+// WithBodyB the second body connected by the joint.
 func (x *PhysicsJointSpring) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
-// Damping calls the underlying Damping.
+// Damping wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) Damping() float64 {
-	return x.inner.Damping()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
+	return _r
 }
 
-// SetDamping calls the underlying SetDamping.
+// SetDamping wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) SetDamping(damping float64) {
-	x.inner.SetDamping(damping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
 
-// Frequency calls the underlying Frequency.
+// Frequency wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) Frequency() float64 {
-	return x.inner.Frequency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+	return _r
 }
 
-// SetFrequency calls the underlying SetFrequency.
+// SetFrequency wraps the corresponding Objective-C method.
 func (x *PhysicsJointSpring) SetFrequency(frequency float64) {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
-
-func (x *PhysicsJointSpring) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
 
 // PhysicsJointSpringable is the interface implemented by [PhysicsJointSpring], for mocking and DI.
 type PhysicsJointSpringable interface {
-	Unwrap() *raw.SKPhysicsJointSpring
+	obj.Object
 	WithDamping(damping float64) *PhysicsJointSpring
 	WithFrequency(frequency float64) *PhysicsJointSpring
 	WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring
@@ -105,3 +112,5 @@ type PhysicsJointSpringable interface {
 }
 
 var _ PhysicsJointSpringable = (*PhysicsJointSpring)(nil)
+
+var _ PhysicsJointProvider = (*PhysicsJointSpring)(nil)

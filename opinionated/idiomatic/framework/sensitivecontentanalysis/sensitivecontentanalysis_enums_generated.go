@@ -9,26 +9,28 @@ import (
 )
 
 // Configurations that represent the way the framework checks for sensitive content and how the app responds.
-type SCSensitivityAnalysisPolicy int64
+type SensitivityAnalysisPolicy int64
 
 const (
 	// An indicator that the app lacks access to use the framework.
-	SCSensitivityAnalysisPolicyDisabled SCSensitivityAnalysisPolicy = 0
+	SensitivityAnalysisPolicyDisabled SensitivityAnalysisPolicy = 0
 	// An indicator that user preference requests discrete detection of sensitive content.
-	SCSensitivityAnalysisPolicySimpleInterventions SCSensitivityAnalysisPolicy = 1
+	SensitivityAnalysisPolicySimpleInterventions SensitivityAnalysisPolicy = 1
 	// An indicator that the person requests overt detection of sensitive content.
-	SCSensitivityAnalysisPolicyDescriptiveInterventions SCSensitivityAnalysisPolicy = 2
+	SensitivityAnalysisPolicyDescriptiveInterventions SensitivityAnalysisPolicy = 2
 )
 
-func (e SCSensitivityAnalysisPolicy) String() string {
+// String returns the SensitivityAnalysisPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SensitivityAnalysisPolicy) String() string {
 	switch e {
-	case SCSensitivityAnalysisPolicyDisabled:
-		return "SCSensitivityAnalysisPolicyDisabled"
-	case SCSensitivityAnalysisPolicySimpleInterventions:
-		return "SCSensitivityAnalysisPolicySimpleInterventions"
-	case SCSensitivityAnalysisPolicyDescriptiveInterventions:
-		return "SCSensitivityAnalysisPolicyDescriptiveInterventions"
+	case SensitivityAnalysisPolicyDisabled:
+		return "SensitivityAnalysisPolicyDisabled"
+	case SensitivityAnalysisPolicySimpleInterventions:
+		return "SensitivityAnalysisPolicySimpleInterventions"
+	case SensitivityAnalysisPolicyDescriptiveInterventions:
+		return "SensitivityAnalysisPolicyDescriptiveInterventions"
 	default:
-		return fmt.Sprintf("SCSensitivityAnalysisPolicy(%d)", int64(e))
+		return fmt.Sprintf("SensitivityAnalysisPolicy(%d)", int64(e))
 	}
 }

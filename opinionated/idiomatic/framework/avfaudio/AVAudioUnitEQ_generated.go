@@ -5,94 +5,88 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a multiband equalizer.
+// AudioUnitEQ is an idiomatic wrapper over the Objective-C class AVAudioUnitEQ.
 //
-// AudioUnitEQ wraps [raw.AVAudioUnitEQ] with a fluent Go API.
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a multiband equalizer.
 type AudioUnitEQ struct {
-	inner *raw.AVAudioUnitEQ
+	AudioUnitEffect
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnitEQ].
-func (x *AudioUnitEQ) Unwrap() *raw.AVAudioUnitEQ { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitEQ) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitEQFromID adopts an existing object pointer as a AudioUnitEQ (nil for 0).
+// AudioUnitEQFromID adopts an existing Objective-C object as a AudioUnitEQ
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitEQFromID(id objc.ID) *AudioUnitEQ {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitEQ{inner: raw.AVAudioUnitEQFromID(id)}
+	x := &AudioUnitEQ{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an audio unit equalizer object with the specified number of bands.
-//
-// NewAudioUnitEQWithNumberOfBands creates a new [AudioUnitEQ].
-func NewAudioUnitEQWithNumberOfBands(numberOfBands uint) *AudioUnitEQ {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitEQ")), objc.RegisterName("alloc"))
+// audioUnitEQAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitEQ (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitEQAdopt(id objc.ID) *AudioUnitEQ {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitEQ{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAudioUnitEQWithNumberOfBands creates an audio unit equalizer object with the specified number of bands.
+func NewAudioUnitEQWithNumberOfBands(numberOfBands int) *AudioUnitEQ {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitEQ")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumberOfBands:"), numberOfBands)
-	return &AudioUnitEQ{inner: raw.AVAudioUnitEQFromID(_id)}
+	return audioUnitEQAdopt(_id)
 }
 
-// The overall gain adjustment that the audio unit applies to the signal, in decibels.
-//
-// WithGlobalGain sets the globalGain property and returns the receiver for chaining.
+// WithGlobalGain the overall gain adjustment that the audio unit applies to the signal, in decibels.
 func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
-	x.inner.SetGlobalGain(globalGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalGain:"), globalGain)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets the bypass property and returns the receiver for chaining.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
-	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// @property bands @abstract Array of AVAudioUnitEQFilterParameters objects. @discussion The number of elements in the array is equal to the number of bands.
+// Bands array of AVAudioUnitEQFilterParameters objects. The number of elements in the array is equal to the number of bands.
 //
 // Bands returns the collection as a Go slice.
 func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
-	arr := x.inner.Bands()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioUnitEQFilterParameters {
-		return &AudioUnitEQFilterParameters{inner: raw.AVAudioUnitEQFilterParametersFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bands"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioUnitEQFilterParameters { return AudioUnitEQFilterParametersFromID(_id) })
 }
 
-// @property globalGain @abstract Overall gain adjustment applied to the signal. @discussion Range:     -96 -> 24 Default:   0 Unit:      dB
-//
-// GlobalGain calls the underlying GlobalGain.
+// GlobalGain overall gain adjustment applied to the signal. Range:     -96 -> 24 Default:   0 Unit:      dB
 func (x *AudioUnitEQ) GlobalGain() float32 {
-	return x.inner.GlobalGain()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("globalGain"))
+	return _r
 }
 
-// SetGlobalGain calls the underlying SetGlobalGain.
+// SetGlobalGain wraps the corresponding Objective-C method.
 func (x *AudioUnitEQ) SetGlobalGain(globalGain float32) {
-	x.inner.SetGlobalGain(globalGain)
-}
-
-func (x *AudioUnitEQ) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
-
-func (x *AudioUnitEQ) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
-
-func (x *AudioUnitEQ) asAudioNode() *raw.AVAudioNode {
-	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalGain:"), globalGain)
 }
 
 // AudioUnitEQable is the interface implemented by [AudioUnitEQ], for mocking and DI.
 type AudioUnitEQable interface {
-	Unwrap() *raw.AVAudioUnitEQ
+	obj.Object
 	WithGlobalGain(globalGain float32) *AudioUnitEQ
 	WithBypass(bypass bool) *AudioUnitEQ
 	Bands() []*AudioUnitEQFilterParameters
@@ -101,3 +95,9 @@ type AudioUnitEQable interface {
 }
 
 var _ AudioUnitEQable = (*AudioUnitEQ)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitEQ)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitEQ)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitEQ)(nil)

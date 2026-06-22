@@ -5,76 +5,81 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a ticketed event reservation.
+// TicketedEventReservation is an idiomatic wrapper over the Objective-C class INTicketedEventReservation.
 //
-// TicketedEventReservation wraps [raw.INTicketedEventReservation] with a fluent Go API.
+// It embeds [Reservation], promoting that type's methods.
+//
+// The information that describes a ticketed event reservation.
 type TicketedEventReservation struct {
-	inner *raw.INTicketedEventReservation
+	Reservation
 }
 
-// Unwrap returns the underlying [raw.INTicketedEventReservation].
-func (x *TicketedEventReservation) Unwrap() *raw.INTicketedEventReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TicketedEventReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// TicketedEventReservationFromID adopts an existing object pointer as a TicketedEventReservation (nil for 0).
+// TicketedEventReservationFromID adopts an existing Objective-C object as a TicketedEventReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func TicketedEventReservationFromID(id objc.ID) *TicketedEventReservation {
 	if id == 0 {
 		return nil
 	}
-	return &TicketedEventReservation{inner: raw.INTicketedEventReservationFromID(id)}
+	x := &TicketedEventReservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a ticketed event reservation with the specified contents and attributes.
-//
-// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent creates a new [TicketedEventReservation].
-func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, event *raw.INTicketedEvent) *TicketedEventReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEventReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:event:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservedSeat.Ptr(), event.Ptr())
-	return &TicketedEventReservation{inner: raw.INTicketedEventReservationFromID(_id)}
+// ticketedEventReservationAdopt wraps an Objective-C object that this code just created as a
+// TicketedEventReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ticketedEventReservationAdopt(id objc.ID) *TicketedEventReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &TicketedEventReservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a new ticketed event reservation with the specified contents and attributes.
-//
-// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent creates a new [TicketedEventReservation].
-func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservedSeat *raw.INSeat, event *raw.INTicketedEvent) *TicketedEventReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEventReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:event:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), reservedSeat.Ptr(), event.Ptr())
-	return &TicketedEventReservation{inner: raw.INTicketedEventReservationFromID(_id)}
+// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent creates a ticketed event reservation with the specified contents and attributes.
+func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEventReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(event))
+	return ticketedEventReservationAdopt(_id)
 }
 
-// Event calls the underlying Event.
+// NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent creates a new ticketed event reservation with the specified contents and attributes.
+func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, event *TicketedEvent) *TicketedEventReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEventReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:event:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(event))
+	return ticketedEventReservationAdopt(_id)
+}
+
+// Event wraps the corresponding Objective-C method.
 func (x *TicketedEventReservation) Event() *TicketedEvent {
-	_r := x.inner.Event()
-	if _r == nil {
-		return nil
-	}
-	return &TicketedEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
+	return TicketedEventFromID(_r)
 }
 
-// ReservedSeat calls the underlying ReservedSeat.
+// ReservedSeat wraps the corresponding Objective-C method.
 func (x *TicketedEventReservation) ReservedSeat() *Seat {
-	_r := x.inner.ReservedSeat()
-	if _r == nil {
-		return nil
-	}
-	return &Seat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+	return SeatFromID(_r)
 }
-
-func (x *TicketedEventReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // TicketedEventReservationable is the interface implemented by [TicketedEventReservation], for mocking and DI.
 type TicketedEventReservationable interface {
-	Unwrap() *raw.INTicketedEventReservation
+	obj.Object
 	Event() *TicketedEvent
 	ReservedSeat() *Seat
 }
 
 var _ TicketedEventReservationable = (*TicketedEventReservation)(nil)
+
+var _ ReservationProvider = (*TicketedEventReservation)(nil)

@@ -5,64 +5,94 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRRVCOperationalStateClusterOperationalErrorEvent wraps [raw.MTRRVCOperationalStateClusterOperationalErrorEvent] with a fluent Go API.
+// MTRRVCOperationalStateClusterOperationalErrorEvent is an idiomatic wrapper over the Objective-C class MTRRVCOperationalStateClusterOperationalErrorEvent.
 type MTRRVCOperationalStateClusterOperationalErrorEvent struct {
-	inner *raw.MTRRVCOperationalStateClusterOperationalErrorEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterOperationalErrorEvent].
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTRRVCOperationalStateClusterOperationalErrorEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRRVCOperationalStateClusterOperationalErrorEventFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterOperationalErrorEvent (nil for 0).
+// MTRRVCOperationalStateClusterOperationalErrorEventFromID adopts an existing Objective-C object as a MTRRVCOperationalStateClusterOperationalErrorEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRRVCOperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTRRVCOperationalStateClusterOperationalErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRRVCOperationalStateClusterOperationalErrorEvent{inner: raw.MTRRVCOperationalStateClusterOperationalErrorEventFromID(id)}
-}
-
-// NewMTRRVCOperationalStateClusterOperationalErrorEvent creates a new [MTRRVCOperationalStateClusterOperationalErrorEvent].
-func NewMTRRVCOperationalStateClusterOperationalErrorEvent() *MTRRVCOperationalStateClusterOperationalErrorEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRRVCOperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
-	return &MTRRVCOperationalStateClusterOperationalErrorEvent{inner: raw.MTRRVCOperationalStateClusterOperationalErrorEventFromID(_id)}
-}
-
-// WithErrorState sets the errorState property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
-	x.inner.SetErrorState(errorState.Unwrap())
+	x := &MTRRVCOperationalStateClusterOperationalErrorEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ErrorState calls the underlying ErrorState.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct {
-	_r := x.inner.ErrorState()
-	if _r == nil {
+// mTRRVCOperationalStateClusterOperationalErrorEventAdopt wraps an Objective-C object that this code just created as a
+// MTRRVCOperationalStateClusterOperationalErrorEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRRVCOperationalStateClusterOperationalErrorEventAdopt(id objc.ID) *MTRRVCOperationalStateClusterOperationalErrorEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MTRRVCOperationalStateClusterErrorStateStruct{inner: _r}
+	x := &MTRRVCOperationalStateClusterOperationalErrorEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetErrorState calls the underlying SetErrorState.
-func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *raw.MTRRVCOperationalStateClusterErrorStateStruct) {
-	x.inner.SetErrorState(errorState)
+// Description returns the object's -description text.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRRVCOperationalStateClusterOperationalErrorEvent creates a new MTRRVCOperationalStateClusterOperationalErrorEvent.
+func NewMTRRVCOperationalStateClusterOperationalErrorEvent() *MTRRVCOperationalStateClusterOperationalErrorEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCOperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
+	return mTRRVCOperationalStateClusterOperationalErrorEventAdopt(_id)
+}
+
+// WithErrorState sets the property and returns the receiver so calls can be chained.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
+	return x
+}
+
+// ErrorState wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorState"))
+	return MTRRVCOperationalStateClusterErrorStateStructFromID(_r)
+}
+
+// SetErrorState wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 }
 
 // MTRRVCOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTRRVCOperationalStateClusterOperationalErrorEvent], for mocking and DI.
 type MTRRVCOperationalStateClusterOperationalErrorEventable interface {
-	Unwrap() *raw.MTRRVCOperationalStateClusterOperationalErrorEvent
+	obj.Object
 	WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent
 	ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct
-	SetErrorState(errorState *raw.MTRRVCOperationalStateClusterErrorStateStruct)
+	SetErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct)
 }
 
 var _ MTRRVCOperationalStateClusterOperationalErrorEventable = (*MTRRVCOperationalStateClusterOperationalErrorEvent)(nil)

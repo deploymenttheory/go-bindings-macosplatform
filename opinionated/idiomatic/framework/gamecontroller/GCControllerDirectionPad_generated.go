@@ -5,178 +5,127 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element associated with a directional pad or a thumbstick.
+// ControllerDirectionPad is an idiomatic wrapper over the Objective-C class GCControllerDirectionPad.
 //
-// ControllerDirectionPad wraps [raw.GCControllerDirectionPad] with a fluent Go API.
+// ControllerDirectionPad is an abstract base — you do not construct it directly. Construct one of [DeviceCursor] and pass it where a ControllerDirectionPad is accepted.
+//
+// A control element associated with a directional pad or a thumbstick.
 type ControllerDirectionPad struct {
-	inner *raw.GCControllerDirectionPad
+	ControllerElement
 }
 
-// Unwrap returns the underlying [raw.GCControllerDirectionPad].
-func (x *ControllerDirectionPad) Unwrap() *raw.GCControllerDirectionPad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ControllerDirectionPad) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerDirectionPadFromID adopts an existing object pointer as a ControllerDirectionPad (nil for 0).
+// ControllerDirectionPadFromID adopts an existing Objective-C object as a ControllerDirectionPad
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerDirectionPadFromID(id objc.ID) *ControllerDirectionPad {
 	if id == 0 {
 		return nil
 	}
-	return &ControllerDirectionPad{inner: raw.GCControllerDirectionPadFromID(id)}
-}
-
-// NewControllerDirectionPad creates a new [ControllerDirectionPad].
-func NewControllerDirectionPad() *ControllerDirectionPad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCControllerDirectionPad")), objc.RegisterName("new"))
-	return &ControllerDirectionPad{inner: raw.GCControllerDirectionPadFromID(_id)}
-}
-
-// The block that the directional pad calls when the user changes its values.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	x := &ControllerDirectionPad{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerDirectionPad {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+// controllerDirectionPadAdopt wraps an Objective-C object that this code just created as a
+// ControllerDirectionPad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerDirectionPadAdopt(id objc.ID) *ControllerDirectionPad {
+	if id == 0 {
+		return nil
+	}
+	x := &ControllerDirectionPad{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
+func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerDirectionPad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad {
-	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *ControllerDirectionPad) WithLocalizedName(localizedName string) *ControllerDirectionPad {
-	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad {
-	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad {
-	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
-// Sets the input values of a snapshot of a directional pad.
-//
-// SetValueForXAxisYAxis calls the underlying SetValueForXAxisYAxis.
+// SetValueForXAxisYAxis sets the input values of a snapshot of a directional pad.
 func (x *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {
-	x.inner.SetValueForXAxisYAxis(xAxis, yAxis)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueForXAxis:yAxis:"), xAxis, yAxis)
 }
 
-// ValueChangedHandler calls the underlying ValueChangedHandler.
-func (x *ControllerDirectionPad) ValueChangedHandler() objc.Block {
-	return x.inner.ValueChangedHandler()
-}
-
-// SetValueChangedHandler calls the underlying SetValueChangedHandler.
-func (x *ControllerDirectionPad) SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
-}
-
-// XAxis calls the underlying XAxis.
+// XAxis wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) XAxis() *ControllerAxisInput {
-	_r := x.inner.XAxis()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerAxisInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xAxis"))
+	return ControllerAxisInputFromID(_r)
 }
 
-// YAxis calls the underlying YAxis.
+// YAxis wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) YAxis() *ControllerAxisInput {
-	_r := x.inner.YAxis()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerAxisInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yAxis"))
+	return ControllerAxisInputFromID(_r)
 }
 
-// Up calls the underlying Up.
+// Up wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Up() *ControllerButtonInput {
-	_r := x.inner.Up()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("up"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// Down calls the underlying Down.
+// Down wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Down() *ControllerButtonInput {
-	_r := x.inner.Down()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("down"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// Left calls the underlying Left.
+// Left wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Left() *ControllerButtonInput {
-	_r := x.inner.Left()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("left"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// Right calls the underlying Right.
+// Right wraps the corresponding Objective-C method.
 func (x *ControllerDirectionPad) Right() *ControllerButtonInput {
-	_r := x.inner.Right()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
-}
-
-func (x *ControllerDirectionPad) asControllerDirectionPad() *raw.GCControllerDirectionPad {
-	return x.inner
-}
-
-func (x *ControllerDirectionPad) asControllerElement() *raw.GCControllerElement {
-	return &x.inner.GCControllerElement
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("right"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // ControllerDirectionPadable is the interface implemented by [ControllerDirectionPad], for mocking and DI.
 type ControllerDirectionPadable interface {
-	Unwrap() *raw.GCControllerDirectionPad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerDirectionPad
+	obj.Object
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerDirectionPad
 	WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad
 	WithLocalizedName(localizedName string) *ControllerDirectionPad
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad
 	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad
 	SetValueForXAxisYAxis(xAxis float32, yAxis float32)
-	ValueChangedHandler() objc.Block
-	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32))
 	XAxis() *ControllerAxisInput
 	YAxis() *ControllerAxisInput
 	Up() *ControllerButtonInput
@@ -186,3 +135,12 @@ type ControllerDirectionPadable interface {
 }
 
 var _ ControllerDirectionPadable = (*ControllerDirectionPad)(nil)
+
+// isControllerDirectionPad marks ControllerDirectionPad — and, by embedding promotion, its
+// subclasses — as a member of the ControllerDirectionPad hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ControllerDirectionPad) isControllerDirectionPad() {}
+
+var _ ControllerDirectionPadProvider = (*ControllerDirectionPad)(nil)
+
+var _ ControllerElementProvider = (*ControllerDirectionPad)(nil)

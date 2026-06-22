@@ -5,41 +5,76 @@
 package mailkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates the validity of an email address.
+// AddressAnnotation is an idiomatic wrapper over the Objective-C class MEAddressAnnotation.
 //
-// AddressAnnotation wraps [raw.MEAddressAnnotation] with a fluent Go API.
+// An object that indicates the validity of an email address.
 type AddressAnnotation struct {
-	inner *raw.MEAddressAnnotation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEAddressAnnotation].
-func (x *AddressAnnotation) Unwrap() *raw.MEAddressAnnotation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddressAnnotation) ID() objc.ID { return x.inner.Ptr() }
-
-// AddressAnnotationFromID adopts an existing object pointer as a AddressAnnotation (nil for 0).
+// AddressAnnotationFromID adopts an existing Objective-C object as a AddressAnnotation
+// (nil for 0), retaining it and registering a release finalizer.
 func AddressAnnotationFromID(id objc.ID) *AddressAnnotation {
 	if id == 0 {
 		return nil
 	}
-	return &AddressAnnotation{inner: raw.MEAddressAnnotationFromID(id)}
+	x := &AddressAnnotation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAddressAnnotation creates a new [AddressAnnotation].
+// addressAnnotationAdopt wraps an Objective-C object that this code just created as a
+// AddressAnnotation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addressAnnotationAdopt(id objc.ID) *AddressAnnotation {
+	if id == 0 {
+		return nil
+	}
+	x := &AddressAnnotation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddressAnnotation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddressAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddressAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddressAnnotation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddressAnnotation creates a new AddressAnnotation.
 func NewAddressAnnotation() *AddressAnnotation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEAddressAnnotation")), objc.RegisterName("new"))
-	return &AddressAnnotation{inner: raw.MEAddressAnnotationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("new"))
+	return addressAnnotationAdopt(_id)
 }
 
 // AddressAnnotationable is the interface implemented by [AddressAnnotation], for mocking and DI.
 type AddressAnnotationable interface {
-	Unwrap() *raw.MEAddressAnnotation
+	obj.Object
 }
 
 var _ AddressAnnotationable = (*AddressAnnotation)(nil)

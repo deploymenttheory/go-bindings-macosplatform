@@ -5,88 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that analyzes an image for aesthetically pleasing attributes.
+// CalculateImageAestheticsScoresRequest is an idiomatic wrapper over the Objective-C class VNCalculateImageAestheticsScoresRequest.
 //
-// CalculateImageAestheticsScoresRequest wraps [raw.VNCalculateImageAestheticsScoresRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An object that analyzes an image for aesthetically pleasing attributes.
 type CalculateImageAestheticsScoresRequest struct {
-	inner *raw.VNCalculateImageAestheticsScoresRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNCalculateImageAestheticsScoresRequest].
-func (x *CalculateImageAestheticsScoresRequest) Unwrap() *raw.VNCalculateImageAestheticsScoresRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalculateImageAestheticsScoresRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// CalculateImageAestheticsScoresRequestFromID adopts an existing object pointer as a CalculateImageAestheticsScoresRequest (nil for 0).
+// CalculateImageAestheticsScoresRequestFromID adopts an existing Objective-C object as a CalculateImageAestheticsScoresRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func CalculateImageAestheticsScoresRequestFromID(id objc.ID) *CalculateImageAestheticsScoresRequest {
 	if id == 0 {
 		return nil
 	}
-	return &CalculateImageAestheticsScoresRequest{inner: raw.VNCalculateImageAestheticsScoresRequestFromID(id)}
+	x := &CalculateImageAestheticsScoresRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCalculateImageAestheticsScoresRequest creates a new [CalculateImageAestheticsScoresRequest].
+// calculateImageAestheticsScoresRequestAdopt wraps an Objective-C object that this code just created as a
+// CalculateImageAestheticsScoresRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calculateImageAestheticsScoresRequestAdopt(id objc.ID) *CalculateImageAestheticsScoresRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &CalculateImageAestheticsScoresRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCalculateImageAestheticsScoresRequest creates a new CalculateImageAestheticsScoresRequest.
 func NewCalculateImageAestheticsScoresRequest() *CalculateImageAestheticsScoresRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCalculateImageAestheticsScoresRequest")), objc.RegisterName("new"))
-	return &CalculateImageAestheticsScoresRequest{inner: raw.VNCalculateImageAestheticsScoresRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNCalculateImageAestheticsScoresRequest")), objc.RegisterName("new"))
+	return calculateImageAestheticsScoresRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *CalculateImageAestheticsScoresRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *CalculateImageAestheticsScoresRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *CalculateImageAestheticsScoresRequest) WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *CalculateImageAestheticsScoresRequest) WithRevision(revision uint) *CalculateImageAestheticsScoresRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *CalculateImageAestheticsScoresRequest) WithRevision(revision int) *CalculateImageAestheticsScoresRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *CalculateImageAestheticsScoresRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *CalculateImageAestheticsScoresRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // CalculateImageAestheticsScoresRequestable is the interface implemented by [CalculateImageAestheticsScoresRequest], for mocking and DI.
 type CalculateImageAestheticsScoresRequestable interface {
-	Unwrap() *raw.VNCalculateImageAestheticsScoresRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest
-	WithRevision(revision uint) *CalculateImageAestheticsScoresRequest
+	WithRevision(revision int) *CalculateImageAestheticsScoresRequest
 }
 
 var _ CalculateImageAestheticsScoresRequestable = (*CalculateImageAestheticsScoresRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*CalculateImageAestheticsScoresRequest)(nil)
+
+var _ RequestProvider = (*CalculateImageAestheticsScoresRequest)(nil)

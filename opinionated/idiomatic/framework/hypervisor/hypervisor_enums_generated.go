@@ -18,6 +18,8 @@ const (
 	HV_CACHE_TYPE_INSTRUCTION Hv_cache_type_t = 1
 )
 
+// String returns the Hv_cache_type_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_cache_type_t) String() string {
 	switch e {
 	case HV_CACHE_TYPE_DATA:
@@ -49,6 +51,8 @@ const (
 	HV_FEATURE_REG_ID_AA64ZFR0_EL1  Hv_feature_reg_t = 13
 )
 
+// String returns the Hv_feature_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_feature_reg_t) String() string {
 	switch e {
 	case HV_FEATURE_REG_ID_AA64DFR0_EL1:
@@ -1623,6 +1627,8 @@ const (
 	HV_GIC_DISTRIBUTOR_REG_GICD_PIDR2         Hv_gic_distributor_reg_t = 65512
 )
 
+// String returns the Hv_gic_distributor_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_distributor_reg_t) String() string {
 	switch e {
 	case HV_GIC_DISTRIBUTOR_REG_GICD_CTLR:
@@ -4714,6 +4720,8 @@ const (
 	HV_GIC_ICC_REG_SRE_EL2     Hv_gic_icc_reg_t = 58957
 )
 
+// String returns the Hv_gic_icc_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_icc_reg_t) String() string {
 	switch e {
 	case HV_GIC_ICC_REG_PMR_EL1:
@@ -4772,6 +4780,8 @@ const (
 	HV_GIC_ICH_REG_LR15_EL2  Hv_gic_ich_reg_t = 58991
 )
 
+// String returns the Hv_gic_ich_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_ich_reg_t) String() string {
 	switch e {
 	case HV_GIC_ICH_REG_AP0R0_EL2:
@@ -4842,6 +4852,8 @@ const (
 	HV_GIC_ICV_REG_IGRPEN1_EL1 Hv_gic_icv_reg_t = 50791
 )
 
+// String returns the Hv_gic_icv_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_icv_reg_t) String() string {
 	switch e {
 	case HV_GIC_ICV_REG_PMR_EL1:
@@ -4879,6 +4891,8 @@ const (
 	HV_GIC_INT_EL1_PHYSICAL_TIMER  Hv_gic_intid_t = 30
 )
 
+// String returns the Hv_gic_intid_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_intid_t) String() string {
 	switch e {
 	case HV_GIC_INT_PERFORMANCE_MONITOR:
@@ -4903,6 +4917,8 @@ const (
 	HV_GIC_REG_GICM_SET_SPI_NSR Hv_gic_msi_reg_t = 64
 )
 
+// String returns the Hv_gic_msi_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_msi_reg_t) String() string {
 	switch e {
 	case HV_GIC_REG_GICM_TYPER:
@@ -4938,6 +4954,8 @@ const (
 	HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR1      Hv_gic_redistributor_reg_t = 68612
 )
 
+// String returns the Hv_gic_redistributor_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_gic_redistributor_reg_t) String() string {
 	switch e {
 	case HV_GIC_REDISTRIBUTOR_REG_GICR_TYPER:
@@ -4993,6 +5011,8 @@ const (
 	HV_INTERRUPT_TYPE_FIQ Hv_interrupt_type_t = 1
 )
 
+// String returns the Hv_interrupt_type_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_interrupt_type_t) String() string {
 	switch e {
 	case HV_INTERRUPT_TYPE_IRQ:
@@ -5011,6 +5031,8 @@ const (
 	HV_IPA_GRANULE_16KB Hv_ipa_granule_t = 1
 )
 
+// String returns the Hv_ipa_granule_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_ipa_granule_t) String() string {
 	switch e {
 	case HV_IPA_GRANULE_4KB:
@@ -5065,6 +5087,8 @@ const (
 	HV_REG_CPSR Hv_reg_t = 34
 )
 
+// String returns the Hv_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_reg_t) String() string {
 	switch e {
 	case HV_REG_X0:
@@ -5180,6 +5204,8 @@ const (
 	HV_SIMD_FP_REG_Q31 Hv_simd_fp_reg_t = 31
 )
 
+// String returns the Hv_simd_fp_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_simd_fp_reg_t) String() string {
 	switch e {
 	case HV_SIMD_FP_REG_Q0:
@@ -5272,6 +5298,8 @@ const (
 	HV_SME_P_REG_15 Hv_sme_p_reg_t = 15
 )
 
+// String returns the Hv_sme_p_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_sme_p_reg_t) String() string {
 	switch e {
 	case HV_SME_P_REG_0:
@@ -5348,6 +5376,8 @@ const (
 	HV_SME_Z_REG_31 Hv_sme_z_reg_t = 31
 )
 
+// String returns the Hv_sme_z_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_sme_z_reg_t) String() string {
 	switch e {
 	case HV_SME_Z_REG_0:
@@ -5503,7 +5533,7 @@ const (
 	HV_SYS_REG_ID_AA64MMFR1_EL1 Hv_sys_reg_t = 49209
 	HV_SYS_REG_ID_AA64MMFR2_EL1 Hv_sys_reg_t = 49210
 	HV_SYS_REG_SCTLR_EL1        Hv_sys_reg_t = 49280
-	// @abstract The ACTLR_EL1 register @discussion This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
+	// The ACTLR_EL1 register This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
 	HV_SYS_REG_ACTLR_EL1      Hv_sys_reg_t = 49281
 	HV_SYS_REG_CPACR_EL1      Hv_sys_reg_t = 49282
 	HV_SYS_REG_SMPRI_EL1      Hv_sys_reg_t = 49300
@@ -5574,6 +5604,8 @@ const (
 	HV_SYS_REG_VTTBR_EL2      Hv_sys_reg_t = 57608
 )
 
+// String returns the Hv_sys_reg_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Hv_sys_reg_t) String() string {
 	switch e {
 	case HV_SYS_REG_DBGBVR0_EL1:

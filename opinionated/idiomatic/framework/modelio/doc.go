@@ -3,4 +3,18 @@
 //go:build darwin
 
 // Package modelio provides a fluent Go API over the macOS ModelIO framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AnimatedValue: [AnimatedMatrix4x4], [AnimatedQuaternion], [AnimatedQuaternionArray], [AnimatedScalar], [AnimatedScalarArray], [AnimatedVector2], [AnimatedVector3], [AnimatedVector3Array], [AnimatedVector4]
+//   - Camera: [StereoscopicCamera]
+//   - Light: [LightProbe], [PhysicallyPlausibleLight]
+//   - MaterialPropertyNode: [MaterialPropertyGraph]
+//   - Object: [Camera], [Light], [Mesh], [PackedJointAnimation], [Skeleton], [VoxelArray]
+//   - PhysicallyPlausibleLight: [AreaLight], [PhotometricLight]
+//   - ScatteringFunction: [PhysicallyPlausibleScatteringFunction]
+//   - Texture: [CheckerboardTexture], [ColorSwatchTexture], [NoiseTexture], [NormalMapTexture], [SkyCubeTexture], [URLTexture]
 package modelio

@@ -5,85 +5,69 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayGatherGradient wraps [raw.MPSNDArrayGatherGradient] with a fluent Go API.
+// NDArrayGatherGradient is an idiomatic wrapper over the Objective-C class MPSNDArrayGatherGradient.
+//
+// It embeds [NDArrayBinaryPrimaryGradientKernel], promoting that type's methods.
 type NDArrayGatherGradient struct {
-	inner *raw.MPSNDArrayGatherGradient
+	NDArrayBinaryPrimaryGradientKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayGatherGradient].
-func (x *NDArrayGatherGradient) Unwrap() *raw.MPSNDArrayGatherGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayGatherGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayGatherGradientFromID adopts an existing object pointer as a NDArrayGatherGradient (nil for 0).
+// NDArrayGatherGradientFromID adopts an existing Objective-C object as a NDArrayGatherGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayGatherGradientFromID(id objc.ID) *NDArrayGatherGradient {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(id)}
+	x := &NDArrayGatherGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNDArrayGatherGradient creates a new [NDArrayGatherGradient].
+// nDArrayGatherGradientAdopt wraps an Objective-C object that this code just created as a
+// NDArrayGatherGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayGatherGradientAdopt(id objc.ID) *NDArrayGatherGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayGatherGradient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNDArrayGatherGradient creates a new NDArrayGatherGradient.
 func NewNDArrayGatherGradient() *NDArrayGatherGradient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayGatherGradient")), objc.RegisterName("new"))
-	return &NDArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGatherGradient")), objc.RegisterName("new"))
+	return nDArrayGatherGradientAdopt(_id)
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGatherGradient {
-	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayGatherGradient) WithOptions(options mpscore.MPSKernelOptions) *NDArrayGatherGradient {
-	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayGatherGradient) WithLabel(label string) *NDArrayGatherGradient {
-	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NDArrayGatherGradient) asNDArrayBinaryPrimaryGradientKernel() *mpsndarray.MPSNDArrayBinaryPrimaryGradientKernel {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel
-}
-
-func (x *NDArrayGatherGradient) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel
-}
-
-func (x *NDArrayGatherGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayGatherGradient) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayGatherGradientable is the interface implemented by [NDArrayGatherGradient], for mocking and DI.
 type NDArrayGatherGradientable interface {
-	Unwrap() *raw.MPSNDArrayGatherGradient
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGatherGradient
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayGatherGradient
+	obj.Object
 	WithLabel(label string) *NDArrayGatherGradient
 }
 
 var _ NDArrayGatherGradientable = (*NDArrayGatherGradient)(nil)
+
+var _ NDArrayBinaryPrimaryGradientKernelProvider = (*NDArrayGatherGradient)(nil)
+
+var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayGatherGradient)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayGatherGradient)(nil)
+
+var _ KernelProvider = (*NDArrayGatherGradient)(nil)

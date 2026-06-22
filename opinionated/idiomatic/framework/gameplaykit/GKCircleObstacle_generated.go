@@ -5,84 +5,79 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A circular impassable area to be avoided by agents.
+// CircleObstacle is an idiomatic wrapper over the Objective-C class GKCircleObstacle.
 //
-// CircleObstacle wraps [raw.GKCircleObstacle] with a fluent Go API.
+// It embeds [Obstacle], promoting that type's methods.
+//
+// A circular impassable area to be avoided by agents.
 type CircleObstacle struct {
-	inner *raw.GKCircleObstacle
+	Obstacle
 }
 
-// Unwrap returns the underlying [raw.GKCircleObstacle].
-func (x *CircleObstacle) Unwrap() *raw.GKCircleObstacle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CircleObstacle) ID() objc.ID { return x.inner.Ptr() }
-
-// CircleObstacleFromID adopts an existing object pointer as a CircleObstacle (nil for 0).
+// CircleObstacleFromID adopts an existing Objective-C object as a CircleObstacle
+// (nil for 0), retaining it and registering a release finalizer.
 func CircleObstacleFromID(id objc.ID) *CircleObstacle {
 	if id == 0 {
 		return nil
 	}
-	return &CircleObstacle{inner: raw.GKCircleObstacleFromID(id)}
-}
-
-// Initializes a circular obstacle with the specified radius.
-//
-// NewCircleObstacleWithRadius creates a new [CircleObstacle].
-func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCircleObstacle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
-	return &CircleObstacle{inner: raw.GKCircleObstacleFromID(_id)}
-}
-
-// The radius of the obstacle.
-//
-// WithRadius sets the radius property and returns the receiver for chaining.
-func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
-	x.inner.SetRadius(radius)
+	x := &CircleObstacle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Radius of the impassible circle
-//
-// Radius calls the underlying Radius.
+// circleObstacleAdopt wraps an Objective-C object that this code just created as a
+// CircleObstacle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func circleObstacleAdopt(id objc.ID) *CircleObstacle {
+	if id == 0 {
+		return nil
+	}
+	x := &CircleObstacle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCircleObstacleWithRadius initializes a circular obstacle with the specified radius.
+func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKCircleObstacle")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadius:"), radius)
+	return circleObstacleAdopt(_id)
+}
+
+// WithRadius the radius of the obstacle.
+func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
+	return x
+}
+
+// Radius radius of the impassible circle
 func (x *CircleObstacle) Radius() float32 {
-	return x.inner.Radius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
+// SetRadius wraps the corresponding Objective-C method.
 func (x *CircleObstacle) SetRadius(radius float32) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
-
-// Position of the center of the circle in 2D space.
-//
-// Position calls the underlying Position.
-func (x *CircleObstacle) Position() unsafe.Pointer {
-	return x.inner.Position()
-}
-
-// SetPosition calls the underlying SetPosition.
-func (x *CircleObstacle) SetPosition(position unsafe.Pointer) {
-	x.inner.SetPosition(position)
-}
-
-func (x *CircleObstacle) asObstacle() *raw.GKObstacle { return &x.inner.GKObstacle }
 
 // CircleObstacleable is the interface implemented by [CircleObstacle], for mocking and DI.
 type CircleObstacleable interface {
-	Unwrap() *raw.GKCircleObstacle
+	obj.Object
 	WithRadius(radius float32) *CircleObstacle
 	Radius() float32
 	SetRadius(radius float32)
-	Position() unsafe.Pointer
-	SetPosition(position unsafe.Pointer)
 }
 
 var _ CircleObstacleable = (*CircleObstacle)(nil)
+
+var _ ObstacleProvider = (*CircleObstacle)(nil)

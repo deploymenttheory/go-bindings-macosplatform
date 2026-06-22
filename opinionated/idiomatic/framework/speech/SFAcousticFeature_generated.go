@@ -5,64 +5,91 @@
 package speech
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The value of a voice analysis metric.
+// AcousticFeature is an idiomatic wrapper over the Objective-C class SFAcousticFeature.
 //
-// AcousticFeature wraps [raw.SFAcousticFeature] with a fluent Go API.
+// The value of a voice analysis metric.
 type AcousticFeature struct {
-	inner *raw.SFAcousticFeature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFAcousticFeature].
-func (x *AcousticFeature) Unwrap() *raw.SFAcousticFeature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AcousticFeature) ID() objc.ID { return x.inner.Ptr() }
-
-// AcousticFeatureFromID adopts an existing object pointer as a AcousticFeature (nil for 0).
+// AcousticFeatureFromID adopts an existing Objective-C object as a AcousticFeature
+// (nil for 0), retaining it and registering a release finalizer.
 func AcousticFeatureFromID(id objc.ID) *AcousticFeature {
 	if id == 0 {
 		return nil
 	}
-	return &AcousticFeature{inner: raw.SFAcousticFeatureFromID(id)}
+	x := &AcousticFeature{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAcousticFeature creates a new [AcousticFeature].
-func NewAcousticFeature() *AcousticFeature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFAcousticFeature")), objc.RegisterName("new"))
-	return &AcousticFeature{inner: raw.SFAcousticFeatureFromID(_id)}
-}
-
-// An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.
-//
-// AcousticFeatureValuePerFrame returns the collection as a Go slice.
-func (x *AcousticFeature) AcousticFeatureValuePerFrame() []*foundation.NSNumber {
-	arr := x.inner.AcousticFeatureValuePerFrame()
-	if arr == nil {
+// acousticFeatureAdopt wraps an Objective-C object that this code just created as a
+// AcousticFeature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func acousticFeatureAdopt(id objc.ID) *AcousticFeature {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &AcousticFeature{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The duration of the audio frame.
+// Description returns the object's -description text.
+func (x *AcousticFeature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AcousticFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AcousticFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AcousticFeature) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAcousticFeature creates a new AcousticFeature.
+func NewAcousticFeature() *AcousticFeature {
+	_id := objc.Send[objc.ID](objc.ID(_class("SFAcousticFeature")), objc.RegisterName("new"))
+	return acousticFeatureAdopt(_id)
+}
+
+// AcousticFeatureValuePerFrame an array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.
 //
-// FrameDuration calls the underlying FrameDuration.
+// AcousticFeatureValuePerFrame returns the collection as a Go slice.
+func (x *AcousticFeature) AcousticFeatureValuePerFrame() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acousticFeatureValuePerFrame"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// FrameDuration the duration of the audio frame.
 func (x *AcousticFeature) FrameDuration() float64 {
-	return x.inner.FrameDuration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frameDuration"))
+	return _r
 }
 
 // AcousticFeatureable is the interface implemented by [AcousticFeature], for mocking and DI.
 type AcousticFeatureable interface {
-	Unwrap() *raw.SFAcousticFeature
-	AcousticFeatureValuePerFrame() []*foundation.NSNumber
+	obj.Object
+	AcousticFeatureValuePerFrame() []obj.Object
 	FrameDuration() float64
 }
 

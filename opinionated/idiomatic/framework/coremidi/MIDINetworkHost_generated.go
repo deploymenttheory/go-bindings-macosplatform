@@ -5,94 +5,128 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the host’s network address.
+// NetworkHost is an idiomatic wrapper over the Objective-C class MIDINetworkHost.
 //
-// NetworkHost wraps [raw.MIDINetworkHost] with a fluent Go API.
+// An object that represents the host’s network address.
 type NetworkHost struct {
-	inner *raw.MIDINetworkHost
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDINetworkHost].
-func (x *NetworkHost) Unwrap() *raw.MIDINetworkHost { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetworkHost) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkHostFromID adopts an existing object pointer as a NetworkHost (nil for 0).
+// NetworkHostFromID adopts an existing Objective-C object as a NetworkHost
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkHostFromID(id objc.ID) *NetworkHost {
 	if id == 0 {
 		return nil
 	}
-	return &NetworkHost{inner: raw.MIDINetworkHostFromID(id)}
+	x := &NetworkHost{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNetworkHost creates a new [NetworkHost].
+// networkHostAdopt wraps an Objective-C object that this code just created as a
+// NetworkHost (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkHostAdopt(id objc.ID) *NetworkHost {
+	if id == 0 {
+		return nil
+	}
+	x := &NetworkHost{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NetworkHost) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NetworkHost) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NetworkHost) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetworkHost) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNetworkHost creates a new NetworkHost.
 func NewNetworkHost() *NetworkHost {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDINetworkHost")), objc.RegisterName("new"))
-	return &NetworkHost{inner: raw.MIDINetworkHostFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("new"))
+	return networkHostAdopt(_id)
 }
 
-// Compares this host instance with another to see if they share the same address value.
-//
-// HasSameAddressAs calls the underlying HasSameAddressAs.
-func (x *NetworkHost) HasSameAddressAs(other *raw.MIDINetworkHost) bool {
-	return x.inner.HasSameAddressAs(other)
+// HasSameAddressAs compares this host instance with another to see if they share the same address value.
+func (x *NetworkHost) HasSameAddressAs(other *NetworkHost) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSameAddressAs:"), objref.IDOf(other))
+	return _r
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *NetworkHost) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Address calls the underlying Address.
+// Address wraps the corresponding Objective-C method.
 func (x *NetworkHost) Address() string {
-	_r := x.inner.Address()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Port calls the underlying Port.
-func (x *NetworkHost) Port() uint {
-	return x.inner.Port()
+// Port wraps the corresponding Objective-C method.
+func (x *NetworkHost) Port() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+	return _r
 }
 
-// NetServiceName calls the underlying NetServiceName.
+// NetServiceName wraps the corresponding Objective-C method.
 func (x *NetworkHost) NetServiceName() string {
-	_r := x.inner.NetServiceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("netServiceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// NetServiceDomain calls the underlying NetServiceDomain.
+// NetServiceDomain wraps the corresponding Objective-C method.
 func (x *NetworkHost) NetServiceDomain() string {
-	_r := x.inner.NetServiceDomain()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("netServiceDomain"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NetworkHostable is the interface implemented by [NetworkHost], for mocking and DI.
 type NetworkHostable interface {
-	Unwrap() *raw.MIDINetworkHost
-	HasSameAddressAs(other *raw.MIDINetworkHost) bool
+	obj.Object
+	HasSameAddressAs(other *NetworkHost) bool
 	Name() string
 	Address() string
-	Port() uint
+	Port() int
 	NetServiceName() string
 	NetServiceDomain() string
 }

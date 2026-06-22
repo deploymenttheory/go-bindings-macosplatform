@@ -5,55 +5,85 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A group of related tracks in an asset.
+// AssetTrackGroup is an idiomatic wrapper over the Objective-C class AVAssetTrackGroup.
 //
-// AssetTrackGroup wraps [raw.AVAssetTrackGroup] with a fluent Go API.
+// A group of related tracks in an asset.
 type AssetTrackGroup struct {
-	inner *raw.AVAssetTrackGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetTrackGroup].
-func (x *AssetTrackGroup) Unwrap() *raw.AVAssetTrackGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetTrackGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetTrackGroupFromID adopts an existing object pointer as a AssetTrackGroup (nil for 0).
+// AssetTrackGroupFromID adopts an existing Objective-C object as a AssetTrackGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetTrackGroupFromID(id objc.ID) *AssetTrackGroup {
 	if id == 0 {
 		return nil
 	}
-	return &AssetTrackGroup{inner: raw.AVAssetTrackGroupFromID(id)}
+	x := &AssetTrackGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetTrackGroup creates a new [AssetTrackGroup].
-func NewAssetTrackGroup() *AssetTrackGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetTrackGroup")), objc.RegisterName("new"))
-	return &AssetTrackGroup{inner: raw.AVAssetTrackGroupFromID(_id)}
-}
-
-// TrackIDs returns the collection as a Go slice.
-func (x *AssetTrackGroup) TrackIDs() []*foundation.NSNumber {
-	arr := x.inner.TrackIDs()
-	if arr == nil {
+// assetTrackGroupAdopt wraps an Objective-C object that this code just created as a
+// AssetTrackGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetTrackGroupAdopt(id objc.ID) *AssetTrackGroup {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &AssetTrackGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetTrackGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetTrackGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetTrackGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetTrackGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetTrackGroup creates a new AssetTrackGroup.
+func NewAssetTrackGroup() *AssetTrackGroup {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetTrackGroup")), objc.RegisterName("new"))
+	return assetTrackGroupAdopt(_id)
+}
+
+// TrackIDs wraps the corresponding Objective-C method.
+//
+// TrackIDs returns the collection as a Go slice.
+func (x *AssetTrackGroup) TrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AssetTrackGroupable is the interface implemented by [AssetTrackGroup], for mocking and DI.
 type AssetTrackGroupable interface {
-	Unwrap() *raw.AVAssetTrackGroup
-	TrackIDs() []*foundation.NSNumber
+	obj.Object
+	TrackIDs() []obj.Object
 }
 
 var _ AssetTrackGroupable = (*AssetTrackGroup)(nil)

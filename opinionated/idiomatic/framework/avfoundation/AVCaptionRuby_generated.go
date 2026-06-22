@@ -5,79 +5,108 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that presents ruby characters.
+// CaptionRuby is an idiomatic wrapper over the Objective-C class AVCaptionRuby.
 //
-// CaptionRuby wraps [raw.AVCaptionRuby] with a fluent Go API.
+// An object that presents ruby characters.
 type CaptionRuby struct {
-	inner *raw.AVCaptionRuby
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionRuby].
-func (x *CaptionRuby) Unwrap() *raw.AVCaptionRuby { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionRuby) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionRubyFromID adopts an existing object pointer as a CaptionRuby (nil for 0).
+// CaptionRubyFromID adopts an existing Objective-C object as a CaptionRuby
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionRubyFromID(id objc.ID) *CaptionRuby {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionRuby{inner: raw.AVCaptionRubyFromID(id)}
+	x := &CaptionRuby{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionRubyWithText creates a new [CaptionRuby].
+// captionRubyAdopt wraps an Objective-C object that this code just created as a
+// CaptionRuby (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionRubyAdopt(id objc.ID) *CaptionRuby {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionRuby{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionRuby) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionRuby) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionRuby) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionRuby) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptionRubyWithText creates a new CaptionRuby.
 func NewCaptionRubyWithText(text string) *CaptionRuby {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRuby")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:"), foundation.NSStringStringWithUTF8String(text).Ptr())
-	return &CaptionRuby{inner: raw.AVCaptionRubyFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionRuby")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:"), purego.NSString(text))
+	return captionRubyAdopt(_id)
 }
 
-// NewCaptionRubyWithTextPositionAlignment creates a new [CaptionRuby].
-func NewCaptionRubyWithTextPositionAlignment(text string, position AVCaptionRubyPosition, alignment AVCaptionRubyAlignment) *CaptionRuby {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRuby")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:position:alignment:"), foundation.NSStringStringWithUTF8String(text).Ptr(), raw.AVCaptionRubyPosition(position), raw.AVCaptionRubyAlignment(alignment))
-	return &CaptionRuby{inner: raw.AVCaptionRubyFromID(_id)}
+// NewCaptionRubyWithTextPositionAlignment creates a new CaptionRuby.
+func NewCaptionRubyWithTextPositionAlignment(text string, position CaptionRubyPosition, alignment CaptionRubyAlignment) *CaptionRuby {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionRuby")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:position:alignment:"), purego.NSString(text), position, alignment)
+	return captionRubyAdopt(_id)
 }
 
-// @property text @abstract The ruby text
-//
-// Text calls the underlying Text.
+// Text the ruby text
 func (x *CaptionRuby) Text() string {
-	_r := x.inner.Text()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property position @abstract The position of ruby text with respect to the ruby base.
-//
-// Position calls the underlying Position.
-func (x *CaptionRuby) Position() AVCaptionRubyPosition {
-	return AVCaptionRubyPosition(x.inner.Position())
+// Position the position of ruby text with respect to the ruby base.
+func (x *CaptionRuby) Position() CaptionRubyPosition {
+	_r := objc.Send[CaptionRubyPosition](objref.IDOf(x), objc.RegisterName("position"))
+	return _r
 }
 
-// @property alignment @abstract The alignment of ruby text.
-//
-// Alignment calls the underlying Alignment.
-func (x *CaptionRuby) Alignment() AVCaptionRubyAlignment {
-	return AVCaptionRubyAlignment(x.inner.Alignment())
+// Alignment the alignment of ruby text.
+func (x *CaptionRuby) Alignment() CaptionRubyAlignment {
+	_r := objc.Send[CaptionRubyAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
 // CaptionRubyable is the interface implemented by [CaptionRuby], for mocking and DI.
 type CaptionRubyable interface {
-	Unwrap() *raw.AVCaptionRuby
+	obj.Object
 	Text() string
-	Position() AVCaptionRubyPosition
-	Alignment() AVCaptionRubyAlignment
+	Position() CaptionRubyPosition
+	Alignment() CaptionRubyAlignment
 }
 
 var _ CaptionRubyable = (*CaptionRuby)(nil)

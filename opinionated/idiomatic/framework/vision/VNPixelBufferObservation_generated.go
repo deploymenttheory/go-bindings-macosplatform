@@ -5,69 +5,69 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents an image that an image-analysis request produces.
+// PixelBufferObservation is an idiomatic wrapper over the Objective-C class VNPixelBufferObservation.
 //
-// PixelBufferObservation wraps [raw.VNPixelBufferObservation] with a fluent Go API.
+// PixelBufferObservation is an abstract base — you do not construct it directly. Construct one of [SaliencyImageObservation] and pass it where a PixelBufferObservation is accepted.
+//
+// An object that represents an image that an image-analysis request produces.
 type PixelBufferObservation struct {
-	inner *raw.VNPixelBufferObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNPixelBufferObservation].
-func (x *PixelBufferObservation) Unwrap() *raw.VNPixelBufferObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PixelBufferObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// PixelBufferObservationFromID adopts an existing object pointer as a PixelBufferObservation (nil for 0).
+// PixelBufferObservationFromID adopts an existing Objective-C object as a PixelBufferObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func PixelBufferObservationFromID(id objc.ID) *PixelBufferObservation {
 	if id == 0 {
 		return nil
 	}
-	return &PixelBufferObservation{inner: raw.VNPixelBufferObservationFromID(id)}
+	x := &PixelBufferObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPixelBufferObservation creates a new [PixelBufferObservation].
-func NewPixelBufferObservation() *PixelBufferObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPixelBufferObservation")), objc.RegisterName("new"))
-	return &PixelBufferObservation{inner: raw.VNPixelBufferObservationFromID(_id)}
+// pixelBufferObservationAdopt wraps an Objective-C object that this code just created as a
+// PixelBufferObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pixelBufferObservationAdopt(id objc.ID) *PixelBufferObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &PixelBufferObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief The resulting image from a request like VNCoreMLRequest where the model produces an image as an output.
-//
-// PixelBuffer calls the underlying PixelBuffer.
-func (x *PixelBufferObservation) PixelBuffer() unsafe.Pointer {
-	return x.inner.PixelBuffer()
-}
-
-// @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
-//
-// FeatureName calls the underlying FeatureName.
+// FeatureName the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
 func (x *PixelBufferObservation) FeatureName() string {
-	_r := x.inner.FeatureName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *PixelBufferObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation {
-	return x.inner
-}
-
-func (x *PixelBufferObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
 // PixelBufferObservationable is the interface implemented by [PixelBufferObservation], for mocking and DI.
 type PixelBufferObservationable interface {
-	Unwrap() *raw.VNPixelBufferObservation
-	PixelBuffer() unsafe.Pointer
+	obj.Object
 	FeatureName() string
 }
 
 var _ PixelBufferObservationable = (*PixelBufferObservation)(nil)
+
+// isPixelBufferObservation marks PixelBufferObservation — and, by embedding promotion, its
+// subclasses — as a member of the PixelBufferObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *PixelBufferObservation) isPixelBufferObservation() {}
+
+var _ PixelBufferObservationProvider = (*PixelBufferObservation)(nil)
+
+var _ ObservationProvider = (*PixelBufferObservation)(nil)

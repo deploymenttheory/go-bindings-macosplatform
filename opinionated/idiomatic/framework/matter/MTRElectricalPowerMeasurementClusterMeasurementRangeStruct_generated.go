@@ -5,253 +5,294 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRElectricalPowerMeasurementClusterMeasurementRangeStruct wraps [raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct] with a fluent Go API.
+// MTRElectricalPowerMeasurementClusterMeasurementRangeStruct is an idiomatic wrapper over the Objective-C class MTRElectricalPowerMeasurementClusterMeasurementRangeStruct.
 type MTRElectricalPowerMeasurementClusterMeasurementRangeStruct struct {
-	inner *raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct].
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID adopts an existing object pointer as a MTRElectricalPowerMeasurementClusterMeasurementRangeStruct (nil for 0).
+// MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID adopts an existing Objective-C object as a MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRElectricalPowerMeasurementClusterMeasurementRangeStruct{inner: raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID(id)}
+	x := &MTRElectricalPowerMeasurementClusterMeasurementRangeStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRElectricalPowerMeasurementClusterMeasurementRangeStruct creates a new [MTRElectricalPowerMeasurementClusterMeasurementRangeStruct].
+// mTRElectricalPowerMeasurementClusterMeasurementRangeStructAdopt wraps an Objective-C object that this code just created as a
+// MTRElectricalPowerMeasurementClusterMeasurementRangeStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRElectricalPowerMeasurementClusterMeasurementRangeStructAdopt(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRElectricalPowerMeasurementClusterMeasurementRangeStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRElectricalPowerMeasurementClusterMeasurementRangeStruct creates a new MTRElectricalPowerMeasurementClusterMeasurementRangeStruct.
 func NewMTRElectricalPowerMeasurementClusterMeasurementRangeStruct() *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRElectricalPowerMeasurementClusterMeasurementRangeStruct")), objc.RegisterName("new"))
-	return &MTRElectricalPowerMeasurementClusterMeasurementRangeStruct{inner: raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRElectricalPowerMeasurementClusterMeasurementRangeStruct")), objc.RegisterName("new"))
+	return mTRElectricalPowerMeasurementClusterMeasurementRangeStructAdopt(_id)
 }
 
-// WithMeasurementType sets the measurementType property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMeasurementType(measurementType *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMeasurementType(measurementType)
+// WithMeasurementType sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMeasurementType(measurementType obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementType:"), objref.IDOf(measurementType))
 	return x
 }
 
-// WithMin sets the min property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMin(min *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMin(min)
+// WithMin sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMin(min obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMin:"), objref.IDOf(min))
 	return x
 }
 
-// WithMax sets the max property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMax(max *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMax(max)
+// WithMax sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMax(max obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMax:"), objref.IDOf(max))
 	return x
 }
 
-// WithStartTimestamp sets the startTimestamp property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithStartTimestamp(startTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetStartTimestamp(startTimestamp)
+// WithStartTimestamp sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
 	return x
 }
 
-// WithEndTimestamp sets the endTimestamp property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithEndTimestamp(endTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetEndTimestamp(endTimestamp)
+// WithEndTimestamp sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
 	return x
 }
 
-// WithMinTimestamp sets the minTimestamp property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMinTimestamp(minTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMinTimestamp(minTimestamp)
+// WithMinTimestamp sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMinTimestamp(minTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinTimestamp:"), objref.IDOf(minTimestamp))
 	return x
 }
 
-// WithMaxTimestamp sets the maxTimestamp property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMaxTimestamp(maxTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMaxTimestamp(maxTimestamp)
+// WithMaxTimestamp sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMaxTimestamp(maxTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTimestamp:"), objref.IDOf(maxTimestamp))
 	return x
 }
 
-// WithStartSystime sets the startSystime property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithStartSystime(startSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetStartSystime(startSystime)
+// WithStartSystime sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithStartSystime(startSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
 	return x
 }
 
-// WithEndSystime sets the endSystime property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithEndSystime(endSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetEndSystime(endSystime)
+// WithEndSystime sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithEndSystime(endSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
 	return x
 }
 
-// WithMinSystime sets the minSystime property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMinSystime(minSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMinSystime(minSystime)
+// WithMinSystime sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMinSystime(minSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSystime:"), objref.IDOf(minSystime))
 	return x
 }
 
-// WithMaxSystime sets the maxSystime property and returns the receiver for chaining.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMaxSystime(maxSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
-	x.inner.SetMaxSystime(maxSystime)
+// WithMaxSystime sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMaxSystime(maxSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSystime:"), objref.IDOf(maxSystime))
 	return x
 }
 
-// MeasurementType calls the underlying MeasurementType.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MeasurementType() *foundation.NSNumber {
-	return x.inner.MeasurementType()
+// MeasurementType wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MeasurementType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementType"))
+	return obj.Wrap(_r)
 }
 
-// SetMeasurementType calls the underlying SetMeasurementType.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMeasurementType(measurementType *foundation.NSNumber) {
-	x.inner.SetMeasurementType(measurementType)
+// SetMeasurementType wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMeasurementType(measurementType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementType:"), objref.IDOf(measurementType))
 }
 
-// Min calls the underlying Min.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Min() *foundation.NSNumber {
-	return x.inner.Min()
+// Min wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Min() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("min"))
+	return obj.Wrap(_r)
 }
 
-// SetMin calls the underlying SetMin.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMin(min *foundation.NSNumber) {
-	x.inner.SetMin(min)
+// SetMin wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMin(min obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMin:"), objref.IDOf(min))
 }
 
-// Max calls the underlying Max.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Max() *foundation.NSNumber {
-	return x.inner.Max()
+// Max wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Max() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("max"))
+	return obj.Wrap(_r)
 }
 
-// SetMax calls the underlying SetMax.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMax(max *foundation.NSNumber) {
-	x.inner.SetMax(max)
+// SetMax wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMax(max obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMax:"), objref.IDOf(max))
 }
 
-// StartTimestamp calls the underlying StartTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartTimestamp() *foundation.NSNumber {
-	return x.inner.StartTimestamp()
+// StartTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTimestamp"))
+	return obj.Wrap(_r)
 }
 
-// SetStartTimestamp calls the underlying SetStartTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartTimestamp(startTimestamp *foundation.NSNumber) {
-	x.inner.SetStartTimestamp(startTimestamp)
+// SetStartTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartTimestamp(startTimestamp obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
 }
 
-// EndTimestamp calls the underlying EndTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndTimestamp() *foundation.NSNumber {
-	return x.inner.EndTimestamp()
+// EndTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimestamp"))
+	return obj.Wrap(_r)
 }
 
-// SetEndTimestamp calls the underlying SetEndTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndTimestamp(endTimestamp *foundation.NSNumber) {
-	x.inner.SetEndTimestamp(endTimestamp)
+// SetEndTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndTimestamp(endTimestamp obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
 }
 
-// MinTimestamp calls the underlying MinTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinTimestamp() *foundation.NSNumber {
-	return x.inner.MinTimestamp()
+// MinTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minTimestamp"))
+	return obj.Wrap(_r)
 }
 
-// SetMinTimestamp calls the underlying SetMinTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinTimestamp(minTimestamp *foundation.NSNumber) {
-	x.inner.SetMinTimestamp(minTimestamp)
+// SetMinTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinTimestamp(minTimestamp obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinTimestamp:"), objref.IDOf(minTimestamp))
 }
 
-// MaxTimestamp calls the underlying MaxTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxTimestamp() *foundation.NSNumber {
-	return x.inner.MaxTimestamp()
+// MaxTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxTimestamp"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxTimestamp calls the underlying SetMaxTimestamp.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxTimestamp(maxTimestamp *foundation.NSNumber) {
-	x.inner.SetMaxTimestamp(maxTimestamp)
+// SetMaxTimestamp wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxTimestamp(maxTimestamp obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTimestamp:"), objref.IDOf(maxTimestamp))
 }
 
-// StartSystime calls the underlying StartSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartSystime() *foundation.NSNumber {
-	return x.inner.StartSystime()
+// StartSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSystime"))
+	return obj.Wrap(_r)
 }
 
-// SetStartSystime calls the underlying SetStartSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartSystime(startSystime *foundation.NSNumber) {
-	x.inner.SetStartSystime(startSystime)
+// SetStartSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartSystime(startSystime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
 }
 
-// EndSystime calls the underlying EndSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndSystime() *foundation.NSNumber {
-	return x.inner.EndSystime()
+// EndSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSystime"))
+	return obj.Wrap(_r)
 }
 
-// SetEndSystime calls the underlying SetEndSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndSystime(endSystime *foundation.NSNumber) {
-	x.inner.SetEndSystime(endSystime)
+// SetEndSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndSystime(endSystime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
 }
 
-// MinSystime calls the underlying MinSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinSystime() *foundation.NSNumber {
-	return x.inner.MinSystime()
+// MinSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minSystime"))
+	return obj.Wrap(_r)
 }
 
-// SetMinSystime calls the underlying SetMinSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinSystime(minSystime *foundation.NSNumber) {
-	x.inner.SetMinSystime(minSystime)
+// SetMinSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinSystime(minSystime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSystime:"), objref.IDOf(minSystime))
 }
 
-// MaxSystime calls the underlying MaxSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxSystime() *foundation.NSNumber {
-	return x.inner.MaxSystime()
+// MaxSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxSystime"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxSystime calls the underlying SetMaxSystime.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxSystime(maxSystime *foundation.NSNumber) {
-	x.inner.SetMaxSystime(maxSystime)
+// SetMaxSystime wraps the corresponding Objective-C method.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxSystime(maxSystime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSystime:"), objref.IDOf(maxSystime))
 }
 
 // MTRElectricalPowerMeasurementClusterMeasurementRangeStructable is the interface implemented by [MTRElectricalPowerMeasurementClusterMeasurementRangeStruct], for mocking and DI.
 type MTRElectricalPowerMeasurementClusterMeasurementRangeStructable interface {
-	Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMeasurementType(measurementType *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMin(min *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMax(max *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithStartTimestamp(startTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithEndTimestamp(endTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMinTimestamp(minTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMaxTimestamp(maxTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithStartSystime(startSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithEndSystime(endSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMinSystime(minSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	WithMaxSystime(maxSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
-	MeasurementType() *foundation.NSNumber
-	SetMeasurementType(measurementType *foundation.NSNumber)
-	Min() *foundation.NSNumber
-	SetMin(min *foundation.NSNumber)
-	Max() *foundation.NSNumber
-	SetMax(max *foundation.NSNumber)
-	StartTimestamp() *foundation.NSNumber
-	SetStartTimestamp(startTimestamp *foundation.NSNumber)
-	EndTimestamp() *foundation.NSNumber
-	SetEndTimestamp(endTimestamp *foundation.NSNumber)
-	MinTimestamp() *foundation.NSNumber
-	SetMinTimestamp(minTimestamp *foundation.NSNumber)
-	MaxTimestamp() *foundation.NSNumber
-	SetMaxTimestamp(maxTimestamp *foundation.NSNumber)
-	StartSystime() *foundation.NSNumber
-	SetStartSystime(startSystime *foundation.NSNumber)
-	EndSystime() *foundation.NSNumber
-	SetEndSystime(endSystime *foundation.NSNumber)
-	MinSystime() *foundation.NSNumber
-	SetMinSystime(minSystime *foundation.NSNumber)
-	MaxSystime() *foundation.NSNumber
-	SetMaxSystime(maxSystime *foundation.NSNumber)
+	obj.Object
+	WithMeasurementType(measurementType obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMin(min obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMax(max obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMinTimestamp(minTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMaxTimestamp(maxTimestamp obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithStartSystime(startSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithEndSystime(endSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMinSystime(minSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMaxSystime(maxSystime obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	MeasurementType() obj.Object
+	SetMeasurementType(measurementType obj.Object)
+	Min() obj.Object
+	SetMin(min obj.Object)
+	Max() obj.Object
+	SetMax(max obj.Object)
+	StartTimestamp() obj.Object
+	SetStartTimestamp(startTimestamp obj.Object)
+	EndTimestamp() obj.Object
+	SetEndTimestamp(endTimestamp obj.Object)
+	MinTimestamp() obj.Object
+	SetMinTimestamp(minTimestamp obj.Object)
+	MaxTimestamp() obj.Object
+	SetMaxTimestamp(maxTimestamp obj.Object)
+	StartSystime() obj.Object
+	SetStartSystime(startSystime obj.Object)
+	EndSystime() obj.Object
+	SetEndSystime(endSystime obj.Object)
+	MinSystime() obj.Object
+	SetMinSystime(minSystime obj.Object)
+	MaxSystime() obj.Object
+	SetMaxSystime(maxSystime obj.Object)
 }
 
 var _ MTRElectricalPowerMeasurementClusterMeasurementRangeStructable = (*MTRElectricalPowerMeasurementClusterMeasurementRangeStruct)(nil)

@@ -5,75 +5,101 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTROperationalStateClusterOperationalCommandResponseParams wraps [raw.MTROperationalStateClusterOperationalCommandResponseParams] with a fluent Go API.
+// MTROperationalStateClusterOperationalCommandResponseParams is an idiomatic wrapper over the Objective-C class MTROperationalStateClusterOperationalCommandResponseParams.
 type MTROperationalStateClusterOperationalCommandResponseParams struct {
-	inner *raw.MTROperationalStateClusterOperationalCommandResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalCommandResponseParams].
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) Unwrap() *raw.MTROperationalStateClusterOperationalCommandResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTROperationalStateClusterOperationalCommandResponseParamsFromID adopts an existing object pointer as a MTROperationalStateClusterOperationalCommandResponseParams (nil for 0).
+// MTROperationalStateClusterOperationalCommandResponseParamsFromID adopts an existing Objective-C object as a MTROperationalStateClusterOperationalCommandResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTROperationalStateClusterOperationalCommandResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalStateClusterOperationalCommandResponseParams{inner: raw.MTROperationalStateClusterOperationalCommandResponseParamsFromID(id)}
-}
-
-// Initialize an MTROperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError creates a new [MTROperationalStateClusterOperationalCommandResponseParams].
-func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTROperationalStateClusterOperationalCommandResponseParams{inner: raw.MTROperationalStateClusterOperationalCommandResponseParamsFromID(_id)}, nil
-}
-
-// WithCommandResponseState sets the commandResponseState property and returns the receiver for chaining.
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
-	x.inner.SetCommandResponseState(commandResponseState.Unwrap())
+	x := &MTROperationalStateClusterOperationalCommandResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// CommandResponseState calls the underlying CommandResponseState.
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROperationalStateClusterErrorStateStruct {
-	_r := x.inner.CommandResponseState()
-	if _r == nil {
+// mTROperationalStateClusterOperationalCommandResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalStateClusterOperationalCommandResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalStateClusterOperationalCommandResponseParamsAdopt(id objc.ID) *MTROperationalStateClusterOperationalCommandResponseParams {
+	if id == 0 {
 		return nil
 	}
-	return &MTROperationalStateClusterErrorStateStruct{inner: _r}
+	x := &MTROperationalStateClusterOperationalCommandResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetCommandResponseState calls the underlying SetCommandResponseState.
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *raw.MTROperationalStateClusterErrorStateStruct) {
-	x.inner.SetCommandResponseState(commandResponseState)
+// Description returns the object's -description text.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError initialize an MTROperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTROperationalStateClusterOperationalCommandResponseParamsAdopt(_id), nil
+}
+
+// WithCommandResponseState sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
+	return x
+}
+
+// CommandResponseState wraps the corresponding Objective-C method.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandResponseState"))
+	return MTROperationalStateClusterErrorStateStructFromID(_r)
+}
+
+// SetCommandResponseState wraps the corresponding Objective-C method.
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
 }
 
 // MTROperationalStateClusterOperationalCommandResponseParamsable is the interface implemented by [MTROperationalStateClusterOperationalCommandResponseParams], for mocking and DI.
 type MTROperationalStateClusterOperationalCommandResponseParamsable interface {
-	Unwrap() *raw.MTROperationalStateClusterOperationalCommandResponseParams
+	obj.Object
 	WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams
 	CommandResponseState() *MTROperationalStateClusterErrorStateStruct
-	SetCommandResponseState(commandResponseState *raw.MTROperationalStateClusterErrorStateStruct)
+	SetCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct)
 }
 
 var _ MTROperationalStateClusterOperationalCommandResponseParamsable = (*MTROperationalStateClusterOperationalCommandResponseParams)(nil)

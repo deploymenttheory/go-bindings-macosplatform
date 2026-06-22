@@ -5,304 +5,316 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRUnitTestingClusterTestComplexNullableOptionalRequestParams wraps [raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams] with a fluent Go API.
+// MTRUnitTestingClusterTestComplexNullableOptionalRequestParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.
+//
+// MTRUnitTestingClusterTestComplexNullableOptionalRequestParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestComplexNullableOptionalRequestParams] and pass it where a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams is accepted.
 type MTRUnitTestingClusterTestComplexNullableOptionalRequestParams struct {
-	inner *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams].
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams (nil for 0).
+// MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID adopts an existing Objective-C object as a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterTestComplexNullableOptionalRequestParams{inner: raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID(id)}
-}
-
-// NewMTRUnitTestingClusterTestComplexNullableOptionalRequestParams creates a new [MTRUnitTestingClusterTestComplexNullableOptionalRequestParams].
-func NewMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestComplexNullableOptionalRequestParams")), objc.RegisterName("new"))
-	return &MTRUnitTestingClusterTestComplexNullableOptionalRequestParams{inner: raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsFromID(_id)}
-}
-
-// WithNullableInt sets the nullableInt property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableInt(nullableInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetNullableInt(nullableInt)
+	x := &MTRUnitTestingClusterTestComplexNullableOptionalRequestParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithOptionalInt sets the optionalInt property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithOptionalInt(optionalInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetOptionalInt(optionalInt)
+// mTRUnitTestingClusterTestComplexNullableOptionalRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterTestComplexNullableOptionalRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterTestComplexNullableOptionalRequestParamsAdopt(id objc.ID) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRUnitTestingClusterTestComplexNullableOptionalRequestParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithNullableOptionalInt sets the nullableOptionalInt property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetNullableOptionalInt(nullableOptionalInt)
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithNullableInt sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableInt(nullableInt obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
 	return x
 }
 
-// WithNullableString sets the nullableString property and returns the receiver for chaining.
+// WithOptionalInt sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithOptionalInt(optionalInt obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
+	return x
+}
+
+// WithNullableOptionalInt sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
+	return x
+}
+
+// WithNullableString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableString(nullableString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetNullableString(foundation.NSStringStringWithUTF8String(nullableString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableString:"), purego.NSString(nullableString))
 	return x
 }
 
-// WithOptionalString sets the optionalString property and returns the receiver for chaining.
+// WithOptionalString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithOptionalString(optionalString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetOptionalString(foundation.NSStringStringWithUTF8String(optionalString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalString:"), purego.NSString(optionalString))
 	return x
 }
 
-// WithNullableOptionalString sets the nullableOptionalString property and returns the receiver for chaining.
+// WithNullableOptionalString sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalString(nullableOptionalString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetNullableOptionalString(foundation.NSStringStringWithUTF8String(nullableOptionalString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalString:"), purego.NSString(nullableOptionalString))
 	return x
 }
 
-// WithNullableStruct sets the nullableStruct property and returns the receiver for chaining.
+// WithNullableStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetNullableStruct(nullableStruct.asMTRUnitTestingClusterSimpleStruct())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
 	return x
 }
 
-// WithOptionalStruct sets the optionalStruct property and returns the receiver for chaining.
+// WithOptionalStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetOptionalStruct(optionalStruct.asMTRUnitTestingClusterSimpleStruct())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
 	return x
 }
 
-// WithNullableOptionalStruct sets the nullableOptionalStruct property and returns the receiver for chaining.
+// WithNullableOptionalStruct sets the property and returns the receiver so calls can be chained.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetNullableOptionalStruct(nullableOptionalStruct.asMTRUnitTestingClusterSimpleStruct())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// NullableInt calls the underlying NullableInt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableInt() *foundation.NSNumber {
-	return x.inner.NullableInt()
+// NullableInt wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableInt() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableInt"))
+	return obj.Wrap(_r)
 }
 
-// SetNullableInt calls the underlying SetNullableInt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableInt(nullableInt *foundation.NSNumber) {
-	x.inner.SetNullableInt(nullableInt)
+// SetNullableInt wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableInt(nullableInt obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
 }
 
-// OptionalInt calls the underlying OptionalInt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalInt() *foundation.NSNumber {
-	return x.inner.OptionalInt()
+// OptionalInt wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalInt() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalInt"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionalInt calls the underlying SetOptionalInt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalInt(optionalInt *foundation.NSNumber) {
-	x.inner.SetOptionalInt(optionalInt)
+// SetOptionalInt wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalInt(optionalInt obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
 }
 
-// NullableOptionalInt calls the underlying NullableOptionalInt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalInt() *foundation.NSNumber {
-	return x.inner.NullableOptionalInt()
+// NullableOptionalInt wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalInt() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalInt"))
+	return obj.Wrap(_r)
 }
 
-// SetNullableOptionalInt calls the underlying SetNullableOptionalInt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) {
-	x.inner.SetNullableOptionalInt(nullableOptionalInt)
+// SetNullableOptionalInt wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalInt(nullableOptionalInt obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
 }
 
-// NullableString calls the underlying NullableString.
+// NullableString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableString() string {
-	_r := x.inner.NullableString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetNullableString calls the underlying SetNullableString.
+// SetNullableString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableString(nullableString string) {
-	x.inner.SetNullableString(foundation.NSStringStringWithUTF8String(nullableString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableString:"), purego.NSString(nullableString))
 }
 
-// OptionalString calls the underlying OptionalString.
+// OptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalString() string {
-	_r := x.inner.OptionalString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOptionalString calls the underlying SetOptionalString.
+// SetOptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalString(optionalString string) {
-	x.inner.SetOptionalString(foundation.NSStringStringWithUTF8String(optionalString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalString:"), purego.NSString(optionalString))
 }
 
-// NullableOptionalString calls the underlying NullableOptionalString.
+// NullableOptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalString() string {
-	_r := x.inner.NullableOptionalString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetNullableOptionalString calls the underlying SetNullableOptionalString.
+// SetNullableOptionalString wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalString(nullableOptionalString string) {
-	x.inner.SetNullableOptionalString(foundation.NSStringStringWithUTF8String(nullableOptionalString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalString:"), purego.NSString(nullableOptionalString))
 }
 
-// NullableStruct calls the underlying NullableStruct.
+// NullableStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableStruct() *MTRUnitTestingClusterSimpleStruct {
-	_r := x.inner.NullableStruct()
-	if _r == nil {
-		return nil
-	}
-	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableStruct"))
+	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// SetNullableStruct calls the underlying SetNullableStruct.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableStruct(nullableStruct *raw.MTRUnitTestingClusterSimpleStruct) {
-	x.inner.SetNullableStruct(nullableStruct)
+// SetNullableStruct wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableStruct(nullableStruct *MTRUnitTestingClusterSimpleStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
 }
 
-// OptionalStruct calls the underlying OptionalStruct.
+// OptionalStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalStruct() *MTRUnitTestingClusterSimpleStruct {
-	_r := x.inner.OptionalStruct()
-	if _r == nil {
-		return nil
-	}
-	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalStruct"))
+	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// SetOptionalStruct calls the underlying SetOptionalStruct.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalStruct(optionalStruct *raw.MTRUnitTestingClusterSimpleStruct) {
-	x.inner.SetOptionalStruct(optionalStruct)
+// SetOptionalStruct wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalStruct(optionalStruct *MTRUnitTestingClusterSimpleStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
 }
 
-// NullableOptionalStruct calls the underlying NullableOptionalStruct.
+// NullableOptionalStruct wraps the corresponding Objective-C method.
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct {
-	_r := x.inner.NullableOptionalStruct()
-	if _r == nil {
-		return nil
-	}
-	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStruct"))
+	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// SetNullableOptionalStruct calls the underlying SetNullableOptionalStruct.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalStruct(nullableOptionalStruct *raw.MTRUnitTestingClusterSimpleStruct) {
-	x.inner.SetNullableOptionalStruct(nullableOptionalStruct)
+// SetNullableOptionalStruct wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalStruct(nullableOptionalStruct *MTRUnitTestingClusterSimpleStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
 }
 
-// NullableList calls the underlying NullableList.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableList() *foundation.NSArray[objc.ID] {
-	return x.inner.NullableList()
+// NullableList wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableList"))
+	return obj.Wrap(_r)
 }
 
-// SetNullableList calls the underlying SetNullableList.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableList(nullableList *foundation.NSArray[objc.ID]) {
-	x.inner.SetNullableList(nullableList)
+// SetNullableList wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableList(nullableList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableList:"), objref.IDOf(nullableList))
 }
 
-// OptionalList calls the underlying OptionalList.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalList() *foundation.NSArray[objc.ID] {
-	return x.inner.OptionalList()
+// OptionalList wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalList"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionalList calls the underlying SetOptionalList.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalList(optionalList *foundation.NSArray[objc.ID]) {
-	x.inner.SetOptionalList(optionalList)
+// SetOptionalList wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalList(optionalList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalList:"), objref.IDOf(optionalList))
 }
 
-// NullableOptionalList calls the underlying NullableOptionalList.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalList() *foundation.NSArray[objc.ID] {
-	return x.inner.NullableOptionalList()
+// NullableOptionalList wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalList"))
+	return obj.Wrap(_r)
 }
 
-// SetNullableOptionalList calls the underlying SetNullableOptionalList.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID]) {
-	x.inner.SetNullableOptionalList(nullableOptionalList)
+// SetNullableOptionalList wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalList(nullableOptionalList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalList:"), objref.IDOf(nullableOptionalList))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
-}
-
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) asMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams {
-	return x.inner
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestComplexNullableOptionalRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable interface {
-	Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
-	WithNullableInt(nullableInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
-	WithOptionalInt(optionalInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
-	WithNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	obj.Object
+	WithNullableInt(nullableInt obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithOptionalInt(optionalInt obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
 	WithNullableString(nullableString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
 	WithOptionalString(optionalString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
 	WithNullableOptionalString(nullableOptionalString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
 	WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
 	WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
 	WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
-	NullableInt() *foundation.NSNumber
-	SetNullableInt(nullableInt *foundation.NSNumber)
-	OptionalInt() *foundation.NSNumber
-	SetOptionalInt(optionalInt *foundation.NSNumber)
-	NullableOptionalInt() *foundation.NSNumber
-	SetNullableOptionalInt(nullableOptionalInt *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	NullableInt() obj.Object
+	SetNullableInt(nullableInt obj.Object)
+	OptionalInt() obj.Object
+	SetOptionalInt(optionalInt obj.Object)
+	NullableOptionalInt() obj.Object
+	SetNullableOptionalInt(nullableOptionalInt obj.Object)
 	NullableString() string
 	SetNullableString(nullableString string)
 	OptionalString() string
@@ -310,21 +322,29 @@ type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable interface
 	NullableOptionalString() string
 	SetNullableOptionalString(nullableOptionalString string)
 	NullableStruct() *MTRUnitTestingClusterSimpleStruct
-	SetNullableStruct(nullableStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	SetNullableStruct(nullableStruct *MTRUnitTestingClusterSimpleStruct)
 	OptionalStruct() *MTRUnitTestingClusterSimpleStruct
-	SetOptionalStruct(optionalStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	SetOptionalStruct(optionalStruct *MTRUnitTestingClusterSimpleStruct)
 	NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct
-	SetNullableOptionalStruct(nullableOptionalStruct *raw.MTRUnitTestingClusterSimpleStruct)
-	NullableList() *foundation.NSArray[objc.ID]
-	SetNullableList(nullableList *foundation.NSArray[objc.ID])
-	OptionalList() *foundation.NSArray[objc.ID]
-	SetOptionalList(optionalList *foundation.NSArray[objc.ID])
-	NullableOptionalList() *foundation.NSArray[objc.ID]
-	SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID])
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	SetNullableOptionalStruct(nullableOptionalStruct *MTRUnitTestingClusterSimpleStruct)
+	NullableList() obj.Object
+	SetNullableList(nullableList obj.Object)
+	OptionalList() obj.Object
+	SetOptionalList(optionalList obj.Object)
+	NullableOptionalList() obj.Object
+	SetNullableOptionalList(nullableOptionalList obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable = (*MTRUnitTestingClusterTestComplexNullableOptionalRequestParams)(nil)
+
+// isMTRUnitTestingClusterTestComplexNullableOptionalRequestParams marks MTRUnitTestingClusterTestComplexNullableOptionalRequestParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestComplexNullableOptionalRequestParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) isMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() {
+}
+
+var _ MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider = (*MTRUnitTestingClusterTestComplexNullableOptionalRequestParams)(nil)

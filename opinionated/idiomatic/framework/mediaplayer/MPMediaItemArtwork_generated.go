@@ -5,64 +5,96 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A graphical image, such as music album cover art, associated with a media item.
+// MediaItemArtwork is an idiomatic wrapper over the Objective-C class MPMediaItemArtwork.
 //
-// MediaItemArtwork wraps [raw.MPMediaItemArtwork] with a fluent Go API.
+// A graphical image, such as music album cover art, associated with a media item.
 type MediaItemArtwork struct {
-	inner *raw.MPMediaItemArtwork
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPMediaItemArtwork].
-func (x *MediaItemArtwork) Unwrap() *raw.MPMediaItemArtwork { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaItemArtwork) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaItemArtworkFromID adopts an existing object pointer as a MediaItemArtwork (nil for 0).
+// MediaItemArtworkFromID adopts an existing Objective-C object as a MediaItemArtwork
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaItemArtworkFromID(id objc.ID) *MediaItemArtwork {
 	if id == 0 {
 		return nil
 	}
-	return &MediaItemArtwork{inner: raw.MPMediaItemArtworkFromID(id)}
+	x := &MediaItemArtwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new image from existing artwork with the specified bounds.
-//
-// NewMediaItemArtworkWithBoundsSizeRequestHandler creates a new [MediaItemArtwork].
-func NewMediaItemArtworkWithBoundsSizeRequestHandler(boundsSize corefoundation.CGSize, requestHandler objc.Block) *MediaItemArtwork {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPMediaItemArtwork")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBoundsSize:requestHandler:"), boundsSize, requestHandler)
-	return &MediaItemArtwork{inner: raw.MPMediaItemArtworkFromID(_id)}
+// mediaItemArtworkAdopt wraps an Objective-C object that this code just created as a
+// MediaItemArtwork (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaItemArtworkAdopt(id objc.ID) *MediaItemArtwork {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaItemArtwork{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the artwork image for an item at the given size.
-//
-// ImageWithSize calls the underlying ImageWithSize.
-func (x *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) *appkit.NSImage {
-	return x.inner.ImageWithSize(size)
+// Description returns the object's -description text.
+func (x *MediaItemArtwork) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Bounds calls the underlying Bounds.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaItemArtwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaItemArtwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaItemArtwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaItemArtwork creates a new MediaItemArtwork.
+func NewMediaItemArtwork() *MediaItemArtwork {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPMediaItemArtwork")), objc.RegisterName("new"))
+	return mediaItemArtworkAdopt(_id)
+}
+
+// ImageWithSize returns the artwork image for an item at the given size.
+func (x *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageWithSize:"), size)
+	return obj.Wrap(_r)
+}
+
+// Bounds wraps the corresponding Objective-C method.
 func (x *MediaItemArtwork) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
 }
 
-// ImageCropRect calls the underlying ImageCropRect.
+// ImageCropRect wraps the corresponding Objective-C method.
 func (x *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
-	return x.inner.ImageCropRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageCropRect"))
+	return _r
 }
 
 // MediaItemArtworkable is the interface implemented by [MediaItemArtwork], for mocking and DI.
 type MediaItemArtworkable interface {
-	Unwrap() *raw.MPMediaItemArtwork
-	ImageWithSize(size corefoundation.CGSize) *appkit.NSImage
+	obj.Object
+	ImageWithSize(size corefoundation.CGSize) obj.Object
 	Bounds() corefoundation.CGRect
 	ImageCropRect() corefoundation.CGRect
 }

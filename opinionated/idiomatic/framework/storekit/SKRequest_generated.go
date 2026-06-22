@@ -5,80 +5,91 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a request to the App Store.
+// Request is an idiomatic wrapper over the Objective-C class SKRequest.
 //
-// Request wraps [raw.SKRequest] with a fluent Go API.
+// Request is an abstract base — you do not construct it directly. Construct one of [ProductsRequest], [ReceiptRefreshRequest] and pass it where a Request is accepted.
+//
+// An abstract class that represents a request to the App Store.
 type Request struct {
-	inner *raw.SKRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKRequest].
-func (x *Request) Unwrap() *raw.SKRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Request) ID() objc.ID { return x.inner.Ptr() }
-
-// RequestFromID adopts an existing object pointer as a Request (nil for 0).
+// RequestFromID adopts an existing Objective-C object as a Request
+// (nil for 0), retaining it and registering a release finalizer.
 func RequestFromID(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	return &Request{inner: raw.SKRequestFromID(id)}
-}
-
-// NewRequest creates a new [Request].
-func NewRequest() *Request {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRequest")), objc.RegisterName("new"))
-	return &Request{inner: raw.SKRequestFromID(_id)}
-}
-
-// The delegate of the request object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Request) WithDelegate(delegate raw.SKRequestDelegate) *Request {
-	x.inner.SetDelegate(delegate)
+	x := &Request{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Cancels a previously started request.
-//
-// Cancel calls the underlying Cancel.
+// requestAdopt wraps an Objective-C object that this code just created as a
+// Request (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func requestAdopt(id objc.ID) *Request {
+	if id == 0 {
+		return nil
+	}
+	x := &Request{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Request) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Request) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Request) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Request) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Cancel cancels a previously started request.
 func (x *Request) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Sends the request to the Apple App Store.
-//
-// Start calls the underlying Start.
+// Start sends the request to the Apple App Store.
 func (x *Request) Start() {
-	x.inner.Start()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
-
-// Delegate calls the underlying Delegate.
-func (x *Request) Delegate() raw.SKRequestDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Request) SetDelegate(delegate raw.SKRequestDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *Request) asRequest() *raw.SKRequest { return x.inner }
 
 // Requestable is the interface implemented by [Request], for mocking and DI.
 type Requestable interface {
-	Unwrap() *raw.SKRequest
-	WithDelegate(delegate raw.SKRequestDelegate) *Request
+	obj.Object
 	Cancel()
 	Start()
-	Delegate() raw.SKRequestDelegate
-	SetDelegate(delegate raw.SKRequestDelegate)
 }
 
 var _ Requestable = (*Request)(nil)
+
+// isRequest marks Request — and, by embedding promotion, its
+// subclasses — as a member of the Request hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Request) isRequest() {}
+
+var _ RequestProvider = (*Request)(nil)

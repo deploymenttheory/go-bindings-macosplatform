@@ -5,155 +5,148 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMEvent wraps [raw.DOMEvent] with a fluent Go API.
+// DOMEvent is an idiomatic wrapper over the Objective-C class DOMEvent.
+//
+// DOMEvent is an abstract base — you do not construct it directly. Construct one of [DOMMutationEvent], [DOMOverflowEvent], [DOMProgressEvent], [DOMUIEvent] and pass it where a DOMEvent is accepted.
 type DOMEvent struct {
-	inner *raw.DOMEvent
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMEvent].
-func (x *DOMEvent) Unwrap() *raw.DOMEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMEventFromID adopts an existing object pointer as a DOMEvent (nil for 0).
+// DOMEventFromID adopts an existing Objective-C object as a DOMEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMEventFromID(id objc.ID) *DOMEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DOMEvent{inner: raw.DOMEventFromID(id)}
+	x := &DOMEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMEventEventCanBubbleArgCancelableArg creates a new [DOMEvent].
+// dOMEventAdopt wraps an Objective-C object that this code just created as a
+// DOMEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMEventAdopt(id objc.ID) *DOMEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMEventEventCanBubbleArgCancelableArg creates a new DOMEvent.
 func NewDOMEventEventCanBubbleArgCancelableArg(eventTypeArg string, canBubbleArg bool, cancelableArg bool) *DOMEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initEvent:canBubbleArg:cancelableArg:"), foundation.NSStringStringWithUTF8String(eventTypeArg).Ptr(), canBubbleArg, cancelableArg)
-	return &DOMEvent{inner: raw.DOMEventFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initEvent:canBubbleArg:cancelableArg:"), purego.NSString(eventTypeArg), canBubbleArg, cancelableArg)
+	return dOMEventAdopt(_id)
 }
 
-// NewDOMEventEvent creates a new [DOMEvent].
+// NewDOMEventEvent creates a new DOMEvent.
 func NewDOMEventEvent(eventTypeArg string, canBubbleArg bool, cancelableArg bool) *DOMEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initEvent:::"), foundation.NSStringStringWithUTF8String(eventTypeArg).Ptr(), canBubbleArg, cancelableArg)
-	return &DOMEvent{inner: raw.DOMEventFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initEvent:::"), purego.NSString(eventTypeArg), canBubbleArg, cancelableArg)
+	return dOMEventAdopt(_id)
 }
 
-// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+// WithReturnValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMEvent) WithReturnValue(returnValue bool) *DOMEvent {
-	x.inner.SetReturnValue(returnValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+// WithCancelBubble sets the property and returns the receiver so calls can be chained.
 func (x *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
-	x.inner.SetCancelBubble(cancelBubble)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
-// StopPropagation calls the underlying StopPropagation.
+// StopPropagation wraps the corresponding Objective-C method.
 func (x *DOMEvent) StopPropagation() {
-	x.inner.StopPropagation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPropagation"))
 }
 
-// PreventDefault calls the underlying PreventDefault.
+// PreventDefault wraps the corresponding Objective-C method.
 func (x *DOMEvent) PreventDefault() {
-	x.inner.PreventDefault()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preventDefault"))
 }
 
-// Type calls the underlying Type.
+// Type wraps the corresponding Objective-C method.
 func (x *DOMEvent) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Target calls the underlying Target.
-func (x *DOMEvent) Target() raw.DOMEventTarget {
-	return x.inner.Target()
-}
-
-// CurrentTarget calls the underlying CurrentTarget.
-func (x *DOMEvent) CurrentTarget() raw.DOMEventTarget {
-	return x.inner.CurrentTarget()
-}
-
-// EventPhase calls the underlying EventPhase.
+// EventPhase wraps the corresponding Objective-C method.
 func (x *DOMEvent) EventPhase() uint16 {
-	return x.inner.EventPhase()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("eventPhase"))
+	return _r
 }
 
-// Bubbles calls the underlying Bubbles.
+// Bubbles wraps the corresponding Objective-C method.
 func (x *DOMEvent) Bubbles() bool {
-	return x.inner.Bubbles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bubbles"))
+	return _r
 }
 
-// Cancelable calls the underlying Cancelable.
+// Cancelable wraps the corresponding Objective-C method.
 func (x *DOMEvent) Cancelable() bool {
-	return x.inner.Cancelable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelable"))
+	return _r
 }
 
-// TimeStamp calls the underlying TimeStamp.
+// TimeStamp wraps the corresponding Objective-C method.
 func (x *DOMEvent) TimeStamp() uint64 {
-	return x.inner.TimeStamp()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("timeStamp"))
+	return _r
 }
 
-// SrcElement calls the underlying SrcElement.
-func (x *DOMEvent) SrcElement() raw.DOMEventTarget {
-	return x.inner.SrcElement()
-}
-
-// ReturnValue calls the underlying ReturnValue.
+// ReturnValue wraps the corresponding Objective-C method.
 func (x *DOMEvent) ReturnValue() bool {
-	return x.inner.ReturnValue()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnValue"))
+	return _r
 }
 
-// SetReturnValue calls the underlying SetReturnValue.
+// SetReturnValue wraps the corresponding Objective-C method.
 func (x *DOMEvent) SetReturnValue(returnValue bool) {
-	x.inner.SetReturnValue(returnValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 }
 
-// CancelBubble calls the underlying CancelBubble.
+// CancelBubble wraps the corresponding Objective-C method.
 func (x *DOMEvent) CancelBubble() bool {
-	return x.inner.CancelBubble()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancelBubble"))
+	return _r
 }
 
-// SetCancelBubble calls the underlying SetCancelBubble.
+// SetCancelBubble wraps the corresponding Objective-C method.
 func (x *DOMEvent) SetCancelBubble(cancelBubble bool) {
-	x.inner.SetCancelBubble(cancelBubble)
-}
-
-func (x *DOMEvent) asDOMEvent() *raw.DOMEvent { return x.inner }
-
-func (x *DOMEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMEvent) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 }
 
 // DOMEventable is the interface implemented by [DOMEvent], for mocking and DI.
 type DOMEventable interface {
-	Unwrap() *raw.DOMEvent
+	obj.Object
 	WithReturnValue(returnValue bool) *DOMEvent
 	WithCancelBubble(cancelBubble bool) *DOMEvent
 	StopPropagation()
 	PreventDefault()
 	Type() string
-	Target() raw.DOMEventTarget
-	CurrentTarget() raw.DOMEventTarget
 	EventPhase() uint16
 	Bubbles() bool
 	Cancelable() bool
 	TimeStamp() uint64
-	SrcElement() raw.DOMEventTarget
 	ReturnValue() bool
 	SetReturnValue(returnValue bool)
 	CancelBubble() bool
@@ -161,3 +154,14 @@ type DOMEventable interface {
 }
 
 var _ DOMEventable = (*DOMEvent)(nil)
+
+// isDOMEvent marks DOMEvent — and, by embedding promotion, its
+// subclasses — as a member of the DOMEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMEvent) isDOMEvent() {}
+
+var _ DOMEventProvider = (*DOMEvent)(nil)
+
+var _ DOMObjectProvider = (*DOMEvent)(nil)
+
+var _ WebScriptObjectProvider = (*DOMEvent)(nil)

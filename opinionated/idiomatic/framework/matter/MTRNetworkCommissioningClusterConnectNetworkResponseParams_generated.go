@@ -5,137 +5,164 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRNetworkCommissioningClusterConnectNetworkResponseParams wraps [raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams] with a fluent Go API.
+// MTRNetworkCommissioningClusterConnectNetworkResponseParams is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterConnectNetworkResponseParams.
 type MTRNetworkCommissioningClusterConnectNetworkResponseParams struct {
-	inner *raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams].
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) Unwrap() *raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterConnectNetworkResponseParams (nil for 0).
+// MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID adopts an existing Objective-C object as a MTRNetworkCommissioningClusterConnectNetworkResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRNetworkCommissioningClusterConnectNetworkResponseParams{inner: raw.MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID(id)}
+	x := &MTRNetworkCommissioningClusterConnectNetworkResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRNetworkCommissioningClusterConnectNetworkResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRNetworkCommissioningClusterConnectNetworkResponseParamsWithResponseValueError creates a new [MTRNetworkCommissioningClusterConnectNetworkResponseParams].
-func NewMTRNetworkCommissioningClusterConnectNetworkResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRNetworkCommissioningClusterConnectNetworkResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRNetworkCommissioningClusterConnectNetworkResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRNetworkCommissioningClusterConnectNetworkResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRNetworkCommissioningClusterConnectNetworkResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRNetworkCommissioningClusterConnectNetworkResponseParamsAdopt(id objc.ID) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRNetworkCommissioningClusterConnectNetworkResponseParams{inner: raw.MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID(_id)}, nil
-}
-
-// WithNetworkingStatus sets the networkingStatus property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithNetworkingStatus(networkingStatus *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
-	x.inner.SetNetworkingStatus(networkingStatus)
+	x := &MTRNetworkCommissioningClusterConnectNetworkResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithDebugText sets the debugText property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRNetworkCommissioningClusterConnectNetworkResponseParamsWithResponseValueError initialize an MTRNetworkCommissioningClusterConnectNetworkResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRNetworkCommissioningClusterConnectNetworkResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterConnectNetworkResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRNetworkCommissioningClusterConnectNetworkResponseParamsAdopt(_id), nil
+}
+
+// WithNetworkingStatus sets the property and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
+	return x
+}
+
+// WithDebugText sets the property and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return x
 }
 
-// WithErrorValue sets the errorValue property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithErrorValue(errorValue *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
-	x.inner.SetErrorValue(errorValue)
+// WithErrorValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithErrorValue(errorValue obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorValue:"), objref.IDOf(errorValue))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// NetworkingStatus calls the underlying NetworkingStatus.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) NetworkingStatus() *foundation.NSNumber {
-	return x.inner.NetworkingStatus()
+// NetworkingStatus wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) NetworkingStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkingStatus"))
+	return obj.Wrap(_r)
 }
 
-// SetNetworkingStatus calls the underlying SetNetworkingStatus.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetNetworkingStatus(networkingStatus *foundation.NSNumber) {
-	x.inner.SetNetworkingStatus(networkingStatus)
+// SetNetworkingStatus wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetNetworkingStatus(networkingStatus obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 }
 
-// DebugText calls the underlying DebugText.
+// DebugText wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) DebugText() string {
-	_r := x.inner.DebugText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDebugText calls the underlying SetDebugText.
+// SetDebugText wraps the corresponding Objective-C method.
 func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetDebugText(debugText string) {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 }
 
-// ErrorValue calls the underlying ErrorValue.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ErrorValue() *foundation.NSNumber {
-	return x.inner.ErrorValue()
+// ErrorValue wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ErrorValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorValue"))
+	return obj.Wrap(_r)
 }
 
-// SetErrorValue calls the underlying SetErrorValue.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetErrorValue(errorValue *foundation.NSNumber) {
-	x.inner.SetErrorValue(errorValue)
+// SetErrorValue wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetErrorValue(errorValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorValue:"), objref.IDOf(errorValue))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRNetworkCommissioningClusterConnectNetworkResponseParamsable is the interface implemented by [MTRNetworkCommissioningClusterConnectNetworkResponseParams], for mocking and DI.
 type MTRNetworkCommissioningClusterConnectNetworkResponseParamsable interface {
-	Unwrap() *raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams
-	WithNetworkingStatus(networkingStatus *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	obj.Object
+	WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
 	WithDebugText(debugText string) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
-	WithErrorValue(errorValue *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
-	NetworkingStatus() *foundation.NSNumber
-	SetNetworkingStatus(networkingStatus *foundation.NSNumber)
+	WithErrorValue(errorValue obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	NetworkingStatus() obj.Object
+	SetNetworkingStatus(networkingStatus obj.Object)
 	DebugText() string
 	SetDebugText(debugText string)
-	ErrorValue() *foundation.NSNumber
-	SetErrorValue(errorValue *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ErrorValue() obj.Object
+	SetErrorValue(errorValue obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRNetworkCommissioningClusterConnectNetworkResponseParamsable = (*MTRNetworkCommissioningClusterConnectNetworkResponseParams)(nil)

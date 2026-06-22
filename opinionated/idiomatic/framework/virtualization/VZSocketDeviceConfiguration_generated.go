@@ -5,45 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common configuration traits for socket device requests.
+// SocketDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZSocketDeviceConfiguration.
 //
-// SocketDeviceConfiguration wraps [raw.VZSocketDeviceConfiguration] with a fluent Go API.
+// SocketDeviceConfiguration is an abstract base — you do not construct it directly. Construct one of [VirtioSocketDeviceConfiguration] and pass it where a SocketDeviceConfiguration is accepted.
+//
+// The common configuration traits for socket device requests.
 type SocketDeviceConfiguration struct {
-	inner *raw.VZSocketDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZSocketDeviceConfiguration].
-func (x *SocketDeviceConfiguration) Unwrap() *raw.VZSocketDeviceConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SocketDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// SocketDeviceConfigurationFromID adopts an existing object pointer as a SocketDeviceConfiguration (nil for 0).
+// SocketDeviceConfigurationFromID adopts an existing Objective-C object as a SocketDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func SocketDeviceConfigurationFromID(id objc.ID) *SocketDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &SocketDeviceConfiguration{inner: raw.VZSocketDeviceConfigurationFromID(id)}
+	x := &SocketDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSocketDeviceConfiguration creates a new [SocketDeviceConfiguration].
-func NewSocketDeviceConfiguration() *SocketDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSocketDeviceConfiguration")), objc.RegisterName("new"))
-	return &SocketDeviceConfiguration{inner: raw.VZSocketDeviceConfigurationFromID(_id)}
+// socketDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// SocketDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func socketDeviceConfigurationAdopt(id objc.ID) *SocketDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &SocketDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SocketDeviceConfiguration) asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration {
-	return x.inner
+// Description returns the object's -description text.
+func (x *SocketDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SocketDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SocketDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SocketDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // SocketDeviceConfigurationable is the interface implemented by [SocketDeviceConfiguration], for mocking and DI.
 type SocketDeviceConfigurationable interface {
-	Unwrap() *raw.VZSocketDeviceConfiguration
+	obj.Object
 }
 
 var _ SocketDeviceConfigurationable = (*SocketDeviceConfiguration)(nil)
+
+// isSocketDeviceConfiguration marks SocketDeviceConfiguration — and, by embedding promotion, its
+// subclasses — as a member of the SocketDeviceConfiguration hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SocketDeviceConfiguration) isSocketDeviceConfiguration() {}
+
+var _ SocketDeviceConfigurationProvider = (*SocketDeviceConfiguration)(nil)

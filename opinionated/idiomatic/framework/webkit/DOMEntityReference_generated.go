@@ -5,69 +5,81 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMEntityReference wraps [raw.DOMEntityReference] with a fluent Go API.
+// DOMEntityReference is an idiomatic wrapper over the Objective-C class DOMEntityReference.
+//
+// It embeds [DOMNode], promoting that type's methods.
 type DOMEntityReference struct {
-	inner *raw.DOMEntityReference
+	DOMNode
 }
 
-// Unwrap returns the underlying [raw.DOMEntityReference].
-func (x *DOMEntityReference) Unwrap() *raw.DOMEntityReference { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMEntityReference) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMEntityReferenceFromID adopts an existing object pointer as a DOMEntityReference (nil for 0).
+// DOMEntityReferenceFromID adopts an existing Objective-C object as a DOMEntityReference
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMEntityReferenceFromID(id objc.ID) *DOMEntityReference {
 	if id == 0 {
 		return nil
 	}
-	return &DOMEntityReference{inner: raw.DOMEntityReferenceFromID(id)}
+	x := &DOMEntityReference{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMEntityReference creates a new [DOMEntityReference].
+// dOMEntityReferenceAdopt wraps an Objective-C object that this code just created as a
+// DOMEntityReference (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMEntityReferenceAdopt(id objc.ID) *DOMEntityReference {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMEntityReference{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMEntityReference creates a new DOMEntityReference.
 func NewDOMEntityReference() *DOMEntityReference {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMEntityReference")), objc.RegisterName("new"))
-	return &DOMEntityReference{inner: raw.DOMEntityReferenceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMEntityReference")), objc.RegisterName("new"))
+	return dOMEntityReferenceAdopt(_id)
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMEntityReference) WithNodeValue(nodeValue string) *DOMEntityReference {
-	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMEntityReference) WithPrefix(prefix string) *DOMEntityReference {
-	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMEntityReference) WithTextContent(textContent string) *DOMEntityReference {
-	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
-}
-
-func (x *DOMEntityReference) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
-
-func (x *DOMEntityReference) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
-
-func (x *DOMEntityReference) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMNode.DOMObject.WebScriptObject
 }
 
 // DOMEntityReferenceable is the interface implemented by [DOMEntityReference], for mocking and DI.
 type DOMEntityReferenceable interface {
-	Unwrap() *raw.DOMEntityReference
+	obj.Object
 	WithNodeValue(nodeValue string) *DOMEntityReference
 	WithPrefix(prefix string) *DOMEntityReference
 	WithTextContent(textContent string) *DOMEntityReference
 }
 
 var _ DOMEntityReferenceable = (*DOMEntityReference)(nil)
+
+var _ DOMNodeProvider = (*DOMEntityReference)(nil)
+
+var _ DOMObjectProvider = (*DOMEntityReference)(nil)
+
+var _ WebScriptObjectProvider = (*DOMEntityReference)(nil)

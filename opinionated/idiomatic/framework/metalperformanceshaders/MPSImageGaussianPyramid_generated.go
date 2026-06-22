@@ -5,102 +5,85 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that convolves an image with a Gaussian pyramid.
+// ImageGaussianPyramid is an idiomatic wrapper over the Objective-C class MPSImageGaussianPyramid.
 //
-// ImageGaussianPyramid wraps [raw.MPSImageGaussianPyramid] with a fluent Go API.
+// It embeds [ImagePyramid], promoting that type's methods.
+//
+// A filter that convolves an image with a Gaussian pyramid.
 type ImageGaussianPyramid struct {
-	inner *raw.MPSImageGaussianPyramid
+	ImagePyramid
 }
 
-// Unwrap returns the underlying [raw.MPSImageGaussianPyramid].
-func (x *ImageGaussianPyramid) Unwrap() *raw.MPSImageGaussianPyramid { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageGaussianPyramid) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageGaussianPyramidFromID adopts an existing object pointer as a ImageGaussianPyramid (nil for 0).
+// ImageGaussianPyramidFromID adopts an existing Objective-C object as a ImageGaussianPyramid
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageGaussianPyramidFromID(id objc.ID) *ImageGaussianPyramid {
 	if id == 0 {
 		return nil
 	}
-	return &ImageGaussianPyramid{inner: raw.MPSImageGaussianPyramidFromID(id)}
+	x := &ImageGaussianPyramid{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageGaussianPyramid creates a new [ImageGaussianPyramid].
+// imageGaussianPyramidAdopt wraps an Objective-C object that this code just created as a
+// ImageGaussianPyramid (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageGaussianPyramidAdopt(id objc.ID) *ImageGaussianPyramid {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageGaussianPyramid{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageGaussianPyramid creates a new ImageGaussianPyramid.
 func NewImageGaussianPyramid() *ImageGaussianPyramid {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageGaussianPyramid")), objc.RegisterName("new"))
-	return &ImageGaussianPyramid{inner: raw.MPSImageGaussianPyramidFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageGaussianPyramid")), objc.RegisterName("new"))
+	return imageGaussianPyramidAdopt(_id)
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageGaussianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageGaussianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageGaussianPyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageGaussianPyramid) WithOptions(options mpscore.MPSKernelOptions) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageGaussianPyramid) WithLabel(label string) *ImageGaussianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageGaussianPyramid) asImagePyramid() *mpsimage.MPSImagePyramid {
-	return &x.inner.MPSImagePyramid
-}
-
-func (x *ImageGaussianPyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel
-}
-
-func (x *ImageGaussianPyramid) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
 type ImageGaussianPyramidable interface {
-	Unwrap() *raw.MPSImageGaussianPyramid
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid
 	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianPyramid
-	WithOptions(options mpscore.MPSKernelOptions) *ImageGaussianPyramid
 	WithLabel(label string) *ImageGaussianPyramid
 }
 
 var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)
+
+var _ ImagePyramidProvider = (*ImageGaussianPyramid)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageGaussianPyramid)(nil)
+
+var _ KernelProvider = (*ImageGaussianPyramid)(nil)

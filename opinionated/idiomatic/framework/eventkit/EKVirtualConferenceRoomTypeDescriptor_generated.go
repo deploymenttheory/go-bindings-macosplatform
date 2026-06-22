@@ -5,68 +5,94 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Details about a room where virtual conferences take place.
+// VirtualConferenceRoomTypeDescriptor is an idiomatic wrapper over the Objective-C class EKVirtualConferenceRoomTypeDescriptor.
 //
-// VirtualConferenceRoomTypeDescriptor wraps [raw.EKVirtualConferenceRoomTypeDescriptor] with a fluent Go API.
+// Details about a room where virtual conferences take place.
 type VirtualConferenceRoomTypeDescriptor struct {
-	inner *raw.EKVirtualConferenceRoomTypeDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKVirtualConferenceRoomTypeDescriptor].
-func (x *VirtualConferenceRoomTypeDescriptor) Unwrap() *raw.EKVirtualConferenceRoomTypeDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtualConferenceRoomTypeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtualConferenceRoomTypeDescriptorFromID adopts an existing object pointer as a VirtualConferenceRoomTypeDescriptor (nil for 0).
+// VirtualConferenceRoomTypeDescriptorFromID adopts an existing Objective-C object as a VirtualConferenceRoomTypeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtualConferenceRoomTypeDescriptorFromID(id objc.ID) *VirtualConferenceRoomTypeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VirtualConferenceRoomTypeDescriptor{inner: raw.EKVirtualConferenceRoomTypeDescriptorFromID(id)}
+	x := &VirtualConferenceRoomTypeDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that describes a location where a virtual conference takes place.
-//
-// NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier creates a new [VirtualConferenceRoomTypeDescriptor].
-func NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier(title string, identifier *foundation.NSString) *VirtualConferenceRoomTypeDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKVirtualConferenceRoomTypeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), foundation.NSStringStringWithUTF8String(title).Ptr(), identifier.Ptr())
-	return &VirtualConferenceRoomTypeDescriptor{inner: raw.EKVirtualConferenceRoomTypeDescriptorFromID(_id)}
+// virtualConferenceRoomTypeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VirtualConferenceRoomTypeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtualConferenceRoomTypeDescriptorAdopt(id objc.ID) *VirtualConferenceRoomTypeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtualConferenceRoomTypeDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Title calls the underlying Title.
+// Description returns the object's -description text.
+func (x *VirtualConferenceRoomTypeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtualConferenceRoomTypeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtualConferenceRoomTypeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualConferenceRoomTypeDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier creates an object that describes a location where a virtual conference takes place.
+func NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier(title string, identifier obj.Object) *VirtualConferenceRoomTypeDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceRoomTypeDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), purego.NSString(title), objref.IDOf(identifier))
+	return virtualConferenceRoomTypeDescriptorAdopt(_id)
+}
+
+// Title wraps the corresponding Objective-C method.
 func (x *VirtualConferenceRoomTypeDescriptor) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Identifier calls the underlying Identifier.
-func (x *VirtualConferenceRoomTypeDescriptor) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Identifier wraps the corresponding Objective-C method.
+func (x *VirtualConferenceRoomTypeDescriptor) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
 // VirtualConferenceRoomTypeDescriptorable is the interface implemented by [VirtualConferenceRoomTypeDescriptor], for mocking and DI.
 type VirtualConferenceRoomTypeDescriptorable interface {
-	Unwrap() *raw.EKVirtualConferenceRoomTypeDescriptor
+	obj.Object
 	Title() string
-	Identifier() string
+	Identifier() obj.Object
 }
 
 var _ VirtualConferenceRoomTypeDescriptorable = (*VirtualConferenceRoomTypeDescriptor)(nil)

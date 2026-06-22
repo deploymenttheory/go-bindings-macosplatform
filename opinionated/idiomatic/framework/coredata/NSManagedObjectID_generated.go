@@ -5,73 +5,101 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A compact, universal identifier for a managed object.
+// ManagedObjectID is an idiomatic wrapper over the Objective-C class NSManagedObjectID.
 //
-// ManagedObjectID wraps [raw.NSManagedObjectID] with a fluent Go API.
+// A compact, universal identifier for a managed object.
 type ManagedObjectID struct {
-	inner *raw.NSManagedObjectID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSManagedObjectID].
-func (x *ManagedObjectID) Unwrap() *raw.NSManagedObjectID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ManagedObjectID) ID() objc.ID { return x.inner.Ptr() }
-
-// ManagedObjectIDFromID adopts an existing object pointer as a ManagedObjectID (nil for 0).
+// ManagedObjectIDFromID adopts an existing Objective-C object as a ManagedObjectID
+// (nil for 0), retaining it and registering a release finalizer.
 func ManagedObjectIDFromID(id objc.ID) *ManagedObjectID {
 	if id == 0 {
 		return nil
 	}
-	return &ManagedObjectID{inner: raw.NSManagedObjectIDFromID(id)}
+	x := &ManagedObjectID{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewManagedObjectID creates a new [ManagedObjectID].
+// managedObjectIDAdopt wraps an Objective-C object that this code just created as a
+// ManagedObjectID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func managedObjectIDAdopt(id objc.ID) *ManagedObjectID {
+	if id == 0 {
+		return nil
+	}
+	x := &ManagedObjectID{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ManagedObjectID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ManagedObjectID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ManagedObjectID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ManagedObjectID) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewManagedObjectID creates a new ManagedObjectID.
 func NewManagedObjectID() *ManagedObjectID {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectID")), objc.RegisterName("new"))
-	return &ManagedObjectID{inner: raw.NSManagedObjectIDFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectID")), objc.RegisterName("new"))
+	return managedObjectIDAdopt(_id)
 }
 
-// Returns a URI that provides an archiveable reference to the object for the object ID.
-//
-// URIRepresentation calls the underlying URIRepresentation.
-func (x *ManagedObjectID) URIRepresentation() *foundation.NSURL {
-	return x.inner.URIRepresentation()
+// URIRepresentation returns a URI that provides an archiveable reference to the object for the object ID.
+func (x *ManagedObjectID) URIRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URIRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// Entity calls the underlying Entity.
+// Entity wraps the corresponding Objective-C method.
 func (x *ManagedObjectID) Entity() *EntityDescription {
-	_r := x.inner.Entity()
-	if _r == nil {
-		return nil
-	}
-	return &EntityDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+	return EntityDescriptionFromID(_r)
 }
 
-// PersistentStore calls the underlying PersistentStore.
+// PersistentStore wraps the corresponding Objective-C method.
 func (x *ManagedObjectID) PersistentStore() *PersistentStore {
-	_r := x.inner.PersistentStore()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentStore{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStore"))
+	return PersistentStoreFromID(_r)
 }
 
-// IsTemporaryID calls the underlying IsTemporaryID.
+// IsTemporaryID wraps the corresponding Objective-C method.
 func (x *ManagedObjectID) IsTemporaryID() bool {
-	return x.inner.IsTemporaryID()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTemporaryID"))
+	return _r
 }
 
 // ManagedObjectIDable is the interface implemented by [ManagedObjectID], for mocking and DI.
 type ManagedObjectIDable interface {
-	Unwrap() *raw.NSManagedObjectID
-	URIRepresentation() *foundation.NSURL
+	obj.Object
+	URIRepresentation() obj.Object
 	Entity() *EntityDescription
 	PersistentStore() *PersistentStore
 	IsTemporaryID() bool

@@ -5,137 +5,154 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a user’s participation in a share.
+// ShareParticipant is an idiomatic wrapper over the Objective-C class CKShareParticipant.
 //
-// ShareParticipant wraps [raw.CKShareParticipant] with a fluent Go API.
+// An object that describes a user’s participation in a share.
 type ShareParticipant struct {
-	inner *raw.CKShareParticipant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKShareParticipant].
-func (x *ShareParticipant) Unwrap() *raw.CKShareParticipant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareParticipant) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareParticipantFromID adopts an existing object pointer as a ShareParticipant (nil for 0).
+// ShareParticipantFromID adopts an existing Objective-C object as a ShareParticipant
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareParticipantFromID(id objc.ID) *ShareParticipant {
 	if id == 0 {
 		return nil
 	}
-	return &ShareParticipant{inner: raw.CKShareParticipantFromID(id)}
-}
-
-// NewShareParticipant creates a new [ShareParticipant].
-func NewShareParticipant() *ShareParticipant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareParticipant")), objc.RegisterName("new"))
-	return &ShareParticipant{inner: raw.CKShareParticipantFromID(_id)}
-}
-
-// The participant's role for the share.
-//
-// WithRole sets the role property and returns the receiver for chaining.
-func (x *ShareParticipant) WithRole(role CKShareParticipantRole) *ShareParticipant {
-	x.inner.SetRole(raw.CKShareParticipantRole(role))
+	x := &ShareParticipant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
-//
-// WithPermission sets the permission property and returns the receiver for chaining.
-func (x *ShareParticipant) WithPermission(permission CKShareParticipantPermission) *ShareParticipant {
-	x.inner.SetPermission(raw.CKShareParticipantPermission(permission))
-	return x
-}
-
-// The identity of the participant. This property contains a reference to the user identity for the share participant.
-//
-// UserIdentity calls the underlying UserIdentity.
-func (x *ShareParticipant) UserIdentity() *UserIdentity {
-	_r := x.inner.UserIdentity()
-	if _r == nil {
+// shareParticipantAdopt wraps an Objective-C object that this code just created as a
+// ShareParticipant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareParticipantAdopt(id objc.ID) *ShareParticipant {
+	if id == 0 {
 		return nil
 	}
-	return &UserIdentity{inner: _r}
+	x := &ShareParticipant{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The participant's role for the share.
-//
-// Role calls the underlying Role.
-func (x *ShareParticipant) Role() CKShareParticipantRole {
-	return CKShareParticipantRole(x.inner.Role())
+// Description returns the object's -description text.
+func (x *ShareParticipant) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetRole calls the underlying SetRole.
-func (x *ShareParticipant) SetRole(role CKShareParticipantRole) {
-	x.inner.SetRole(raw.CKShareParticipantRole(role))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareParticipant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
-//
-// AcceptanceStatus calls the underlying AcceptanceStatus.
-func (x *ShareParticipant) AcceptanceStatus() CKShareParticipantAcceptanceStatus {
-	return CKShareParticipantAcceptanceStatus(x.inner.AcceptanceStatus())
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareParticipant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
-//
-// Permission calls the underlying Permission.
-func (x *ShareParticipant) Permission() CKShareParticipantPermission {
-	return CKShareParticipantPermission(x.inner.Permission())
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareParticipant) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetPermission calls the underlying SetPermission.
-func (x *ShareParticipant) SetPermission(permission CKShareParticipantPermission) {
-	x.inner.SetPermission(raw.CKShareParticipantPermission(permission))
+// NewShareParticipant creates a new ShareParticipant.
+func NewShareParticipant() *ShareParticipant {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKShareParticipant")), objc.RegisterName("new"))
+	return shareParticipantAdopt(_id)
 }
 
-// A unique identifier for this participant.
-//
-// ParticipantID calls the underlying ParticipantID.
+// WithRole the participant's role for the share.
+func (x *ShareParticipant) WithRole(role ShareParticipantRole) *ShareParticipant {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), role)
+	return x
+}
+
+// WithPermission the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+func (x *ShareParticipant) WithPermission(permission ShareParticipantPermission) *ShareParticipant {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermission:"), permission)
+	return x
+}
+
+// UserIdentity the identity of the participant. This property contains a reference to the user identity for the share participant.
+func (x *ShareParticipant) UserIdentity() *UserIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
+	return UserIdentityFromID(_r)
+}
+
+// Role the participant's role for the share.
+func (x *ShareParticipant) Role() ShareParticipantRole {
+	_r := objc.Send[ShareParticipantRole](objref.IDOf(x), objc.RegisterName("role"))
+	return _r
+}
+
+// SetRole wraps the corresponding Objective-C method.
+func (x *ShareParticipant) SetRole(role ShareParticipantRole) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), role)
+}
+
+// AcceptanceStatus the current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
+func (x *ShareParticipant) AcceptanceStatus() ShareParticipantAcceptanceStatus {
+	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(x), objc.RegisterName("acceptanceStatus"))
+	return _r
+}
+
+// Permission the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+func (x *ShareParticipant) Permission() ShareParticipantPermission {
+	_r := objc.Send[ShareParticipantPermission](objref.IDOf(x), objc.RegisterName("permission"))
+	return _r
+}
+
+// SetPermission wraps the corresponding Objective-C method.
+func (x *ShareParticipant) SetPermission(permission ShareParticipantPermission) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermission:"), permission)
+}
+
+// ParticipantID a unique identifier for this participant.
 func (x *ShareParticipant) ParticipantID() string {
-	_r := x.inner.ParticipantID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participantID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
-//
-// IsApprovedRequester calls the underlying IsApprovedRequester.
+// IsApprovedRequester indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
 func (x *ShareParticipant) IsApprovedRequester() bool {
-	return x.inner.IsApprovedRequester()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isApprovedRequester"))
+	return _r
 }
 
-// The date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
-//
-// DateAddedToShare calls the underlying DateAddedToShare.
-func (x *ShareParticipant) DateAddedToShare() *foundation.NSDate {
-	return x.inner.DateAddedToShare()
+// DateAddedToShare the date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
+func (x *ShareParticipant) DateAddedToShare() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateAddedToShare"))
+	return obj.Wrap(_r)
 }
 
 // ShareParticipantable is the interface implemented by [ShareParticipant], for mocking and DI.
 type ShareParticipantable interface {
-	Unwrap() *raw.CKShareParticipant
-	WithRole(role CKShareParticipantRole) *ShareParticipant
-	WithPermission(permission CKShareParticipantPermission) *ShareParticipant
+	obj.Object
+	WithRole(role ShareParticipantRole) *ShareParticipant
+	WithPermission(permission ShareParticipantPermission) *ShareParticipant
 	UserIdentity() *UserIdentity
-	Role() CKShareParticipantRole
-	SetRole(role CKShareParticipantRole)
-	AcceptanceStatus() CKShareParticipantAcceptanceStatus
-	Permission() CKShareParticipantPermission
-	SetPermission(permission CKShareParticipantPermission)
+	Role() ShareParticipantRole
+	SetRole(role ShareParticipantRole)
+	AcceptanceStatus() ShareParticipantAcceptanceStatus
+	Permission() ShareParticipantPermission
+	SetPermission(permission ShareParticipantPermission)
 	ParticipantID() string
 	IsApprovedRequester() bool
-	DateAddedToShare() *foundation.NSDate
+	DateAddedToShare() obj.Object
 }
 
 var _ ShareParticipantable = (*ShareParticipant)(nil)

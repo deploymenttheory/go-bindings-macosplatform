@@ -5,64 +5,79 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for building token drivers.
+// TokenDriver is an idiomatic wrapper over the Objective-C class TKTokenDriver.
 //
-// TokenDriver wraps [raw.TKTokenDriver] with a fluent Go API.
+// TokenDriver is an abstract base — you do not construct it directly. Construct one of [SmartCardTokenDriver] and pass it where a TokenDriver is accepted.
+//
+// A base class for building token drivers.
 type TokenDriver struct {
-	inner *raw.TKTokenDriver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenDriver].
-func (x *TokenDriver) Unwrap() *raw.TKTokenDriver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenDriver) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenDriverFromID adopts an existing object pointer as a TokenDriver (nil for 0).
+// TokenDriverFromID adopts an existing Objective-C object as a TokenDriver
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenDriverFromID(id objc.ID) *TokenDriver {
 	if id == 0 {
 		return nil
 	}
-	return &TokenDriver{inner: raw.TKTokenDriverFromID(id)}
-}
-
-// NewTokenDriver creates a new [TokenDriver].
-func NewTokenDriver() *TokenDriver {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenDriver")), objc.RegisterName("new"))
-	return &TokenDriver{inner: raw.TKTokenDriverFromID(_id)}
-}
-
-// The token driver delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TokenDriver) WithDelegate(delegate raw.TKTokenDriverDelegate) *TokenDriver {
-	x.inner.SetDelegate(delegate)
+	x := &TokenDriver{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *TokenDriver) Delegate() raw.TKTokenDriverDelegate {
-	return x.inner.Delegate()
+// tokenDriverAdopt wraps an Objective-C object that this code just created as a
+// TokenDriver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenDriverAdopt(id objc.ID) *TokenDriver {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenDriver{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *TokenDriver) SetDelegate(delegate raw.TKTokenDriverDelegate) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *TokenDriver) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *TokenDriver) asTokenDriver() *raw.TKTokenDriver { return x.inner }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenDriver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenDriver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TokenDriver) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // TokenDriverable is the interface implemented by [TokenDriver], for mocking and DI.
 type TokenDriverable interface {
-	Unwrap() *raw.TKTokenDriver
-	WithDelegate(delegate raw.TKTokenDriverDelegate) *TokenDriver
-	Delegate() raw.TKTokenDriverDelegate
-	SetDelegate(delegate raw.TKTokenDriverDelegate)
+	obj.Object
 }
 
 var _ TokenDriverable = (*TokenDriver)(nil)
+
+// isTokenDriver marks TokenDriver — and, by embedding promotion, its
+// subclasses — as a member of the TokenDriver hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *TokenDriver) isTokenDriver() {}
+
+var _ TokenDriverProvider = (*TokenDriver)(nil)

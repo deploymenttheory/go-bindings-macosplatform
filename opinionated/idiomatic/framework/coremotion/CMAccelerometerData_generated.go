@@ -5,49 +5,58 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A data sample from the device’s three accelerometers.
+// AccelerometerData is an idiomatic wrapper over the Objective-C class CMAccelerometerData.
 //
-// AccelerometerData wraps [raw.CMAccelerometerData] with a fluent Go API.
+// It embeds [LogItem], promoting that type's methods.
+//
+// A data sample from the device’s three accelerometers.
 type AccelerometerData struct {
-	inner *raw.CMAccelerometerData
+	LogItem
 }
 
-// Unwrap returns the underlying [raw.CMAccelerometerData].
-func (x *AccelerometerData) Unwrap() *raw.CMAccelerometerData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerometerData) ID() objc.ID { return x.inner.Ptr() }
-
-// AccelerometerDataFromID adopts an existing object pointer as a AccelerometerData (nil for 0).
+// AccelerometerDataFromID adopts an existing Objective-C object as a AccelerometerData
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerometerDataFromID(id objc.ID) *AccelerometerData {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerometerData{inner: raw.CMAccelerometerDataFromID(id)}
+	x := &AccelerometerData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAccelerometerData creates a new [AccelerometerData].
+// accelerometerDataAdopt wraps an Objective-C object that this code just created as a
+// AccelerometerData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerometerDataAdopt(id objc.ID) *AccelerometerData {
+	if id == 0 {
+		return nil
+	}
+	x := &AccelerometerData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAccelerometerData creates a new AccelerometerData.
 func NewAccelerometerData() *AccelerometerData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMAccelerometerData")), objc.RegisterName("new"))
-	return &AccelerometerData{inner: raw.CMAccelerometerDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMAccelerometerData")), objc.RegisterName("new"))
+	return accelerometerDataAdopt(_id)
 }
-
-// Acceleration calls the underlying Acceleration.
-func (x *AccelerometerData) Acceleration() raw.CMAcceleration {
-	return x.inner.Acceleration()
-}
-
-func (x *AccelerometerData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
 
 // AccelerometerDataable is the interface implemented by [AccelerometerData], for mocking and DI.
 type AccelerometerDataable interface {
-	Unwrap() *raw.CMAccelerometerData
-	Acceleration() raw.CMAcceleration
+	obj.Object
 }
 
 var _ AccelerometerDataable = (*AccelerometerData)(nil)
+
+var _ LogItemProvider = (*AccelerometerData)(nil)

@@ -4,132 +4,183 @@
 
 package metal
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-)
+// A struct representing a range of a Metal buffer. The offset into the buffer is included in the address. The length is generally optional, which a value of (uint64_t)-1 representing the range from the given address to the end of the buffer. However, providing the length can enable more accurate API validation, especially when sub-allocating ranges of a buffer.
+type MTL4BufferRange struct {
+	BufferAddress uint64
+	Length        uint64
+}
 
-// MTL4BufferRange is a type alias for the raw MTL4BufferRange value-type struct.
-type MTL4BufferRange = raw.MTL4BufferRange
+// Groups together arguments for an operation to copy a sparse texture mapping.
+type MTL4CopySparseTextureMappingOperation struct {
+	SourceRegion      MTLRegion
+	SourceLevel       uint
+	SourceSlice       uint
+	DestinationOrigin MTLOrigin
+	DestinationLevel  uint
+	DestinationSlice  uint
+}
 
-// MTL4CopySparseBufferMappingOperation is a type alias for the raw MTL4CopySparseBufferMappingOperation value-type struct.
-type MTL4CopySparseBufferMappingOperation = raw.MTL4CopySparseBufferMappingOperation
+// Represents a timestamp data entry in a counter heap of type MTL4CounterHeapTypeTimestamp.
+type MTL4TimestampHeapEntry struct {
+	Timestamp uint64
+}
 
-// MTL4CopySparseTextureMappingOperation is a type alias for the raw MTL4CopySparseTextureMappingOperation value-type struct.
-type MTL4CopySparseTextureMappingOperation = raw.MTL4CopySparseTextureMappingOperation
+// The expected sizes for a ray-tracing acceleration structure.
+type MTLAccelerationStructureSizes struct {
+	AccelerationStructureSize uint
+	BuildScratchBufferSize    uint
+	RefitScratchBufferSize    uint
+}
 
-// MTL4TimestampHeapEntry is a type alias for the raw MTL4TimestampHeapEntry value-type struct.
-type MTL4TimestampHeapEntry = raw.MTL4TimestampHeapEntry
+// An RGBA value used for a color pixel.
+type MTLClearColor struct {
+	Red   float64
+	Green float64
+	Blue  float64
+	Alpha float64
+}
 
-// MTL4UpdateSparseBufferMappingOperation is a type alias for the raw MTL4UpdateSparseBufferMappingOperation value-type struct.
-type MTL4UpdateSparseBufferMappingOperation = raw.MTL4UpdateSparseBufferMappingOperation
+// The data structure for storing the data you resolve from a stage-utilization counter set.
+type MTLCounterResultStageUtilization struct {
+	TotalCycles                  uint64
+	VertexCycles                 uint64
+	TessellationCycles           uint64
+	PostTessellationVertexCycles uint64
+	FragmentCycles               uint64
+	RenderTargetCycles           uint64
+}
 
-// MTL4UpdateSparseTextureMappingOperation is a type alias for the raw MTL4UpdateSparseTextureMappingOperation value-type struct.
-type MTL4UpdateSparseTextureMappingOperation = raw.MTL4UpdateSparseTextureMappingOperation
+// The data structure for storing the data you resolve from a statistic counter set.
+type MTLCounterResultStatistic struct {
+	TessellationInputPatches          uint64
+	VertexInvocations                 uint64
+	PostTessellationVertexInvocations uint64
+	ClipperInvocations                uint64
+	ClipperPrimitivesOut              uint64
+	FragmentInvocations               uint64
+	FragmentsPassed                   uint64
+	ComputeKernelInvocations          uint64
+}
 
-// MTLAccelerationStructureInstanceDescriptor is a type alias for the raw MTLAccelerationStructureInstanceDescriptor value-type struct.
-type MTLAccelerationStructureInstanceDescriptor = raw.MTLAccelerationStructureInstanceDescriptor
+// The data structure for storing the data you resolve from a timestamp counter set.
+type MTLCounterResultTimestamp struct {
+	Timestamp uint64
+}
 
-// MTLAccelerationStructureMotionInstanceDescriptor is a type alias for the raw MTLAccelerationStructureMotionInstanceDescriptor value-type struct.
-type MTLAccelerationStructureMotionInstanceDescriptor = raw.MTLAccelerationStructureMotionInstanceDescriptor
+// The data layout required for drawing indexed primitives via indirect buffer calls.
+type MTLDrawIndexedPrimitivesIndirectArguments struct {
+	IndexCount    uint32
+	InstanceCount uint32
+	IndexStart    uint32
+	BaseVertex    int32
+	BaseInstance  uint32
+}
 
-// MTLAccelerationStructureSizes is a type alias for the raw MTLAccelerationStructureSizes value-type struct.
-type MTLAccelerationStructureSizes = raw.MTLAccelerationStructureSizes
+// The data layout required for drawing patches via indirect buffer calls.
+type MTLDrawPatchIndirectArguments struct {
+	PatchCount    uint32
+	InstanceCount uint32
+	PatchStart    uint32
+	BaseInstance  uint32
+}
 
-// MTLAccelerationStructureUserIDInstanceDescriptor is a type alias for the raw MTLAccelerationStructureUserIDInstanceDescriptor value-type struct.
-type MTLAccelerationStructureUserIDInstanceDescriptor = raw.MTLAccelerationStructureUserIDInstanceDescriptor
+// The data layout required for drawing primitives via indirect buffer calls.
+type MTLDrawPrimitivesIndirectArguments struct {
+	VertexCount   uint32
+	InstanceCount uint32
+	VertexStart   uint32
+	BaseInstance  uint32
+}
 
-// MTLClearColor is a type alias for the raw MTLClearColor value-type struct.
-type MTLClearColor = raw.MTLClearColor
+// A range of commands in an indirect command buffer.
+type MTLIndirectCommandBufferExecutionRange struct {
+	Location uint32
+	Length   uint32
+}
 
-// MTLComponentTransform is a type alias for the raw MTLComponentTransform value-type struct.
-type MTLComponentTransform = raw.MTLComponentTransform
+// struct containing arguments for intersection function buffers.
+type MTLIntersectionFunctionBufferArguments struct {
+	IntersectionFunctionBuffer     uint64
+	IntersectionFunctionBufferSize uint64
+	IntersectionFunctionStride     uint64
+}
 
-// MTLCounterResultStageUtilization is a type alias for the raw MTLCounterResultStageUtilization value-type struct.
-type MTLCounterResultStageUtilization = raw.MTLCounterResultStageUtilization
+// The data layout for mapping sparse texture regions when using indirect commands.
+type MTLMapIndirectArguments struct {
+	RegionOriginX    uint32
+	RegionOriginY    uint32
+	RegionOriginZ    uint32
+	RegionSizeWidth  uint32
+	RegionSizeHeight uint32
+	RegionSizeDepth  uint32
+	MipMapLevel      uint32
+	SliceId          uint32
+}
 
-// MTLCounterResultStatistic is a type alias for the raw MTLCounterResultStatistic value-type struct.
-type MTLCounterResultStatistic = raw.MTLCounterResultStatistic
+// The coordinates for the front upper-left corner of a region.
+type MTLOrigin struct {
+	X uint
+	Y uint
+	Z uint
+}
 
-// MTLCounterResultTimestamp is a type alias for the raw MTLCounterResultTimestamp value-type struct.
-type MTLCounterResultTimestamp = raw.MTLCounterResultTimestamp
+type MTLPackedFloatQuaternion struct {
+	X float32
+	Y float32
+	Z float32
+	W float32
+}
 
-// MTLDispatchThreadgroupsIndirectArguments is a type alias for the raw MTLDispatchThreadgroupsIndirectArguments value-type struct.
-type MTLDispatchThreadgroupsIndirectArguments = raw.MTLDispatchThreadgroupsIndirectArguments
+// The bounds for a subset of an instance’s elements.
+type MTLRegion struct {
+	Origin MTLOrigin
+	Size   MTLSize
+}
 
-// MTLDispatchThreadsIndirectArguments is a type alias for the raw MTLDispatchThreadsIndirectArguments value-type struct.
-type MTLDispatchThreadsIndirectArguments = raw.MTLDispatchThreadsIndirectArguments
+// Handle of the GPU resource used for binding resources to argument tables, navigating resource view pools and storing resources in an argument buffer MTLResourceID represents a specific GPU resource. This handle can be mutated by modifying textureID or samplerID values to get to individual resource views in a resource view pool.
+type MTLResourceID struct {
+	_impl uint64
+}
 
-// MTLDrawIndexedPrimitivesIndirectArguments is a type alias for the raw MTLDrawIndexedPrimitivesIndirectArguments value-type struct.
-type MTLDrawIndexedPrimitivesIndirectArguments = raw.MTLDrawIndexedPrimitivesIndirectArguments
+// A subpixel sample position for use in multisample antialiasing (MSAA).
+type MTLSamplePosition struct {
+	X float32
+	Y float32
+}
 
-// MTLDrawPatchIndirectArguments is a type alias for the raw MTLDrawPatchIndirectArguments value-type struct.
-type MTLDrawPatchIndirectArguments = raw.MTLDrawPatchIndirectArguments
+// A rectangle for the scissor fragment test.
+type MTLScissorRect struct {
+	X      uint
+	Y      uint
+	Width  uint
+	Height uint
+}
 
-// MTLDrawPrimitivesIndirectArguments is a type alias for the raw MTLDrawPrimitivesIndirectArguments value-type struct.
-type MTLDrawPrimitivesIndirectArguments = raw.MTLDrawPrimitivesIndirectArguments
+// A type that represents one, two, or three dimensions of a type instance, such as an array or texture.
+type MTLSize struct {
+	Width  uint
+	Height uint
+	Depth  uint
+}
 
-// MTLIndirectAccelerationStructureInstanceDescriptor is a type alias for the raw MTLIndirectAccelerationStructureInstanceDescriptor value-type struct.
-type MTLIndirectAccelerationStructureInstanceDescriptor = raw.MTLIndirectAccelerationStructureInstanceDescriptor
+// The size and alignment of a resource, in bytes.
+type MTLSizeAndAlign struct {
+	Size  uint
+	Align uint
+}
 
-// MTLIndirectAccelerationStructureMotionInstanceDescriptor is a type alias for the raw MTLIndirectAccelerationStructureMotionInstanceDescriptor value-type struct.
-type MTLIndirectAccelerationStructureMotionInstanceDescriptor = raw.MTLIndirectAccelerationStructureMotionInstanceDescriptor
+// An offset applied to a render target index and viewport index.
+type MTLVertexAmplificationViewMapping struct {
+	ViewportArrayIndexOffset     uint32
+	RenderTargetArrayIndexOffset uint32
+}
 
-// MTLIndirectCommandBufferExecutionRange is a type alias for the raw MTLIndirectCommandBufferExecutionRange value-type struct.
-type MTLIndirectCommandBufferExecutionRange = raw.MTLIndirectCommandBufferExecutionRange
-
-// MTLIntersectionFunctionBufferArguments is a type alias for the raw MTLIntersectionFunctionBufferArguments value-type struct.
-type MTLIntersectionFunctionBufferArguments = raw.MTLIntersectionFunctionBufferArguments
-
-// MTLMapIndirectArguments is a type alias for the raw MTLMapIndirectArguments value-type struct.
-type MTLMapIndirectArguments = raw.MTLMapIndirectArguments
-
-// MTLOrigin is a type alias for the raw MTLOrigin value-type struct.
-type MTLOrigin = raw.MTLOrigin
-
-// MTLPackedFloatQuaternion is a type alias for the raw MTLPackedFloatQuaternion value-type struct.
-type MTLPackedFloatQuaternion = raw.MTLPackedFloatQuaternion
-
-// MTLQuadTessellationFactorsHalf is a type alias for the raw MTLQuadTessellationFactorsHalf value-type struct.
-type MTLQuadTessellationFactorsHalf = raw.MTLQuadTessellationFactorsHalf
-
-// MTLRegion is a type alias for the raw MTLRegion value-type struct.
-type MTLRegion = raw.MTLRegion
-
-// MTLResourceID is a type alias for the raw MTLResourceID value-type struct.
-type MTLResourceID = raw.MTLResourceID
-
-// MTLSamplePosition is a type alias for the raw MTLSamplePosition value-type struct.
-type MTLSamplePosition = raw.MTLSamplePosition
-
-// MTLScissorRect is a type alias for the raw MTLScissorRect value-type struct.
-type MTLScissorRect = raw.MTLScissorRect
-
-// MTLSize is a type alias for the raw MTLSize value-type struct.
-type MTLSize = raw.MTLSize
-
-// MTLSizeAndAlign is a type alias for the raw MTLSizeAndAlign value-type struct.
-type MTLSizeAndAlign = raw.MTLSizeAndAlign
-
-// MTLStageInRegionIndirectArguments is a type alias for the raw MTLStageInRegionIndirectArguments value-type struct.
-type MTLStageInRegionIndirectArguments = raw.MTLStageInRegionIndirectArguments
-
-// MTLTextureSwizzleChannels is a type alias for the raw MTLTextureSwizzleChannels value-type struct.
-type MTLTextureSwizzleChannels = raw.MTLTextureSwizzleChannels
-
-// MTLTriangleTessellationFactorsHalf is a type alias for the raw MTLTriangleTessellationFactorsHalf value-type struct.
-type MTLTriangleTessellationFactorsHalf = raw.MTLTriangleTessellationFactorsHalf
-
-// MTLVertexAmplificationViewMapping is a type alias for the raw MTLVertexAmplificationViewMapping value-type struct.
-type MTLVertexAmplificationViewMapping = raw.MTLVertexAmplificationViewMapping
-
-// MTLViewport is a type alias for the raw MTLViewport value-type struct.
-type MTLViewport = raw.MTLViewport
-
-// MTLAxisAlignedBoundingBox is a type alias for the raw MTLAxisAlignedBoundingBox value-type struct.
-type MTLAxisAlignedBoundingBox = raw.MTLAxisAlignedBoundingBox
-
-// MTLPackedFloat3 is a type alias for the raw MTLPackedFloat3 value-type struct.
-type MTLPackedFloat3 = raw.MTLPackedFloat3
-
-// MTLPackedFloat4x3 is a type alias for the raw MTLPackedFloat4x3 value-type struct.
-type MTLPackedFloat4x3 = raw.MTLPackedFloat4x3
+// A 3D rectangular region for the viewport clipping.
+type MTLViewport struct {
+	OriginX float64
+	OriginY float64
+	Width   float64
+	Height  float64
+	Znear   float64
+	Zfar    float64
+}

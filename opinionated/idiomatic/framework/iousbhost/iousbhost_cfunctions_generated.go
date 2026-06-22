@@ -5,226 +5,137 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// IOUSBGetBillboardDescriptor calls [raw.IOUSBGetBillboardDescriptor] (C function IOUSBGetBillboardDescriptor).
-func IOUSBGetBillboardDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetBillboardDescriptor(bosDescriptor)
+var _fnIOUSBHostCIControllerStateToString func(HostCIControllerState) string
+
+// IOUSBHostCIControllerStateToString calls the IOUSBHost framework function IOUSBHostCIControllerStateToString.
+func IOUSBHostCIControllerStateToString(controllerState HostCIControllerState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIControllerStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIControllerStateToString, _lib, "IOUSBHostCIControllerStateToString")
+	}
+	return _fnIOUSBHostCIControllerStateToString(controllerState)
 }
 
-// IOUSBGetConfigurationMaxPowerMilliAmps calls [raw.IOUSBGetConfigurationMaxPowerMilliAmps] (C function IOUSBGetConfigurationMaxPowerMilliAmps).
-func IOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed, descriptor)
+var _fnIOUSBHostCIDeviceSpeedToString func(HostCIDeviceSpeed) string
+
+// IOUSBHostCIDeviceSpeedToString calls the IOUSBHost framework function IOUSBHostCIDeviceSpeedToString.
+func IOUSBHostCIDeviceSpeedToString(speed HostCIDeviceSpeed) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIDeviceSpeedToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIDeviceSpeedToString, _lib, "IOUSBHostCIDeviceSpeedToString")
+	}
+	return _fnIOUSBHostCIDeviceSpeedToString(speed)
 }
 
-// IOUSBGetContainerIDDescriptor calls [raw.IOUSBGetContainerIDDescriptor] (C function IOUSBGetContainerIDDescriptor).
-func IOUSBGetContainerIDDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetContainerIDDescriptor(bosDescriptor)
+var _fnIOUSBHostCIDeviceStateToString func(HostCIDeviceState) string
+
+// IOUSBHostCIDeviceStateToString calls the IOUSBHost framework function IOUSBHostCIDeviceStateToString.
+func IOUSBHostCIDeviceStateToString(deviceState HostCIDeviceState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIDeviceStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIDeviceStateToString, _lib, "IOUSBHostCIDeviceStateToString")
+	}
+	return _fnIOUSBHostCIDeviceStateToString(deviceState)
 }
 
-// IOUSBGetEndpointAddress calls [raw.IOUSBGetEndpointAddress] (C function IOUSBGetEndpointAddress).
-func IOUSBGetEndpointAddress(descriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointAddress(descriptor)
+var _fnIOUSBHostCIEndpointStateToString func(HostCIEndpointState) string
+
+// IOUSBHostCIEndpointStateToString calls the IOUSBHost framework function IOUSBHostCIEndpointStateToString.
+func IOUSBHostCIEndpointStateToString(endpointState HostCIEndpointState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIEndpointStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIEndpointStateToString, _lib, "IOUSBHostCIEndpointStateToString")
+	}
+	return _fnIOUSBHostCIEndpointStateToString(endpointState)
 }
 
-// IOUSBGetEndpointBurstSize calls [raw.IOUSBGetEndpointBurstSize] (C function IOUSBGetEndpointBurstSize).
-func IOUSBGetEndpointBurstSize(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer, sspCompanionDescriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetEndpointBurstSize(usbDeviceSpeed, descriptor, companionDescriptor, sspCompanionDescriptor)
+var _fnIOUSBHostCIExceptionTypeToString func(HostCIExceptionType) string
+
+// IOUSBHostCIExceptionTypeToString calls the IOUSBHost framework function IOUSBHostCIExceptionTypeToString.
+func IOUSBHostCIExceptionTypeToString(exceptionType HostCIExceptionType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIExceptionTypeToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIExceptionTypeToString, _lib, "IOUSBHostCIExceptionTypeToString")
+	}
+	return _fnIOUSBHostCIExceptionTypeToString(exceptionType)
 }
 
-// IOUSBGetEndpointDirection calls [raw.IOUSBGetEndpointDirection] (C function IOUSBGetEndpointDirection).
-func IOUSBGetEndpointDirection(descriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointDirection(descriptor)
+var _fnIOUSBHostCILinkStateEnabled func(HostCILinkState) bool
+
+// IOUSBHostCILinkStateEnabled calls the IOUSBHost framework function IOUSBHostCILinkStateEnabled.
+func IOUSBHostCILinkStateEnabled(linkState HostCILinkState) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCILinkStateEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCILinkStateEnabled, _lib, "IOUSBHostCILinkStateEnabled")
+	}
+	return _fnIOUSBHostCILinkStateEnabled(linkState)
 }
 
-// IOUSBGetEndpointIntervalEncodedMicroframes calls [raw.IOUSBGetEndpointIntervalEncodedMicroframes] (C function IOUSBGetEndpointIntervalEncodedMicroframes).
-func IOUSBGetEndpointIntervalEncodedMicroframes(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetEndpointIntervalEncodedMicroframes(usbDeviceSpeed, descriptor)
+var _fnIOUSBHostCILinkStateToString func(HostCILinkState) string
+
+// IOUSBHostCILinkStateToString calls the IOUSBHost framework function IOUSBHostCILinkStateToString.
+func IOUSBHostCILinkStateToString(linkState HostCILinkState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCILinkStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCILinkStateToString, _lib, "IOUSBHostCILinkStateToString")
+	}
+	return _fnIOUSBHostCILinkStateToString(linkState)
 }
 
-// IOUSBGetEndpointIntervalFrames calls [raw.IOUSBGetEndpointIntervalFrames] (C function IOUSBGetEndpointIntervalFrames).
-func IOUSBGetEndpointIntervalFrames(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetEndpointIntervalFrames(usbDeviceSpeed, descriptor)
+var _fnIOUSBHostCIMessageStatusFromIOReturn func(int) HostCIMessageStatus
+
+// IOUSBHostCIMessageStatusFromIOReturn calls the IOUSBHost framework function IOUSBHostCIMessageStatusFromIOReturn.
+func IOUSBHostCIMessageStatusFromIOReturn(status int) HostCIMessageStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIMessageStatusFromIOReturn == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIMessageStatusFromIOReturn, _lib, "IOUSBHostCIMessageStatusFromIOReturn")
+	}
+	return _fnIOUSBHostCIMessageStatusFromIOReturn(status)
 }
 
-// IOUSBGetEndpointIntervalMicroframes calls [raw.IOUSBGetEndpointIntervalMicroframes] (C function IOUSBGetEndpointIntervalMicroframes).
-func IOUSBGetEndpointIntervalMicroframes(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetEndpointIntervalMicroframes(usbDeviceSpeed, descriptor)
+var _fnIOUSBHostCIMessageStatusToIOReturn func(HostCIMessageStatus) int
+
+// IOUSBHostCIMessageStatusToIOReturn calls the IOUSBHost framework function IOUSBHostCIMessageStatusToIOReturn.
+func IOUSBHostCIMessageStatusToIOReturn(status HostCIMessageStatus) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIMessageStatusToIOReturn == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIMessageStatusToIOReturn, _lib, "IOUSBHostCIMessageStatusToIOReturn")
+	}
+	return _fnIOUSBHostCIMessageStatusToIOReturn(status)
 }
 
-// IOUSBGetEndpointMaxPacketSize calls [raw.IOUSBGetEndpointMaxPacketSize] (C function IOUSBGetEndpointMaxPacketSize).
-func IOUSBGetEndpointMaxPacketSize(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint16 {
-	return raw.IOUSBGetEndpointMaxPacketSize(usbDeviceSpeed, descriptor)
+var _fnIOUSBHostCIMessageStatusToString func(HostCIMessageStatus) string
+
+// IOUSBHostCIMessageStatusToString calls the IOUSBHost framework function IOUSBHostCIMessageStatusToString.
+func IOUSBHostCIMessageStatusToString(status HostCIMessageStatus) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIMessageStatusToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIMessageStatusToString, _lib, "IOUSBHostCIMessageStatusToString")
+	}
+	return _fnIOUSBHostCIMessageStatusToString(status)
 }
 
-// IOUSBGetEndpointMaxStreams calls [raw.IOUSBGetEndpointMaxStreams] (C function IOUSBGetEndpointMaxStreams).
-func IOUSBGetEndpointMaxStreams(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetEndpointMaxStreams(usbDeviceSpeed, descriptor, companionDescriptor)
+var _fnIOUSBHostCIMessageTypeToString func(HostCIMessageType) string
+
+// IOUSBHostCIMessageTypeToString calls the IOUSBHost framework function IOUSBHostCIMessageTypeToString.
+func IOUSBHostCIMessageTypeToString(type_ HostCIMessageType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIMessageTypeToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIMessageTypeToString, _lib, "IOUSBHostCIMessageTypeToString")
+	}
+	return _fnIOUSBHostCIMessageTypeToString(type_)
 }
 
-// IOUSBGetEndpointMaxStreamsEncoded calls [raw.IOUSBGetEndpointMaxStreamsEncoded] (C function IOUSBGetEndpointMaxStreamsEncoded).
-func IOUSBGetEndpointMaxStreamsEncoded(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer) uint32 {
-	return raw.IOUSBGetEndpointMaxStreamsEncoded(usbDeviceSpeed, descriptor, companionDescriptor)
-}
+var _fnIOUSBHostCIPortStateToString func(HostCIPortState) string
 
-// IOUSBGetEndpointMult calls [raw.IOUSBGetEndpointMult] (C function IOUSBGetEndpointMult).
-func IOUSBGetEndpointMult(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer, sspCompanionDescriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointMult(usbDeviceSpeed, descriptor, companionDescriptor, sspCompanionDescriptor)
-}
-
-// IOUSBGetEndpointNumber calls [raw.IOUSBGetEndpointNumber] (C function IOUSBGetEndpointNumber).
-func IOUSBGetEndpointNumber(descriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointNumber(descriptor)
-}
-
-// IOUSBGetEndpointSynchronizationType calls [raw.IOUSBGetEndpointSynchronizationType] (C function IOUSBGetEndpointSynchronizationType).
-func IOUSBGetEndpointSynchronizationType(descriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointSynchronizationType(descriptor)
-}
-
-// IOUSBGetEndpointType calls [raw.IOUSBGetEndpointType] (C function IOUSBGetEndpointType).
-func IOUSBGetEndpointType(descriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointType(descriptor)
-}
-
-// IOUSBGetEndpointUsageType calls [raw.IOUSBGetEndpointUsageType] (C function IOUSBGetEndpointUsageType).
-func IOUSBGetEndpointUsageType(descriptor unsafe.Pointer) uint8 {
-	return raw.IOUSBGetEndpointUsageType(descriptor)
-}
-
-// IOUSBGetNextAssociatedDescriptor calls [raw.IOUSBGetNextAssociatedDescriptor] (C function IOUSBGetNextAssociatedDescriptor).
-func IOUSBGetNextAssociatedDescriptor(configurationDescriptor unsafe.Pointer, parentDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetNextAssociatedDescriptor(configurationDescriptor, parentDescriptor, currentDescriptor)
-}
-
-// IOUSBGetNextAssociatedDescriptorWithType calls [raw.IOUSBGetNextAssociatedDescriptorWithType] (C function IOUSBGetNextAssociatedDescriptorWithType).
-func IOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor unsafe.Pointer, parentDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
-	return raw.IOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor, parentDescriptor, currentDescriptor, type_)
-}
-
-// IOUSBGetNextCapabilityDescriptor calls [raw.IOUSBGetNextCapabilityDescriptor] (C function IOUSBGetNextCapabilityDescriptor).
-func IOUSBGetNextCapabilityDescriptor(bosDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetNextCapabilityDescriptor(bosDescriptor, currentDescriptor)
-}
-
-// IOUSBGetNextCapabilityDescriptorWithType calls [raw.IOUSBGetNextCapabilityDescriptorWithType] (C function IOUSBGetNextCapabilityDescriptorWithType).
-func IOUSBGetNextCapabilityDescriptorWithType(bosDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
-	return raw.IOUSBGetNextCapabilityDescriptorWithType(bosDescriptor, currentDescriptor, type_)
-}
-
-// IOUSBGetNextDescriptor calls [raw.IOUSBGetNextDescriptor] (C function IOUSBGetNextDescriptor).
-func IOUSBGetNextDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetNextDescriptor(configurationDescriptor, currentDescriptor)
-}
-
-// IOUSBGetNextDescriptorWithType calls [raw.IOUSBGetNextDescriptorWithType] (C function IOUSBGetNextDescriptorWithType).
-func IOUSBGetNextDescriptorWithType(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
-	return raw.IOUSBGetNextDescriptorWithType(configurationDescriptor, currentDescriptor, type_)
-}
-
-// IOUSBGetNextEndpointDescriptor calls [raw.IOUSBGetNextEndpointDescriptor] (C function IOUSBGetNextEndpointDescriptor).
-func IOUSBGetNextEndpointDescriptor(configurationDescriptor unsafe.Pointer, interfaceDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetNextEndpointDescriptor(configurationDescriptor, interfaceDescriptor, currentDescriptor)
-}
-
-// IOUSBGetNextInterfaceAssociationDescriptor calls [raw.IOUSBGetNextInterfaceAssociationDescriptor] (C function IOUSBGetNextInterfaceAssociationDescriptor).
-func IOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor, currentDescriptor)
-}
-
-// IOUSBGetNextInterfaceDescriptor calls [raw.IOUSBGetNextInterfaceDescriptor] (C function IOUSBGetNextInterfaceDescriptor).
-func IOUSBGetNextInterfaceDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetNextInterfaceDescriptor(configurationDescriptor, currentDescriptor)
-}
-
-// IOUSBGetPlatformCapabilityDescriptor calls [raw.IOUSBGetPlatformCapabilityDescriptor] (C function IOUSBGetPlatformCapabilityDescriptor).
-func IOUSBGetPlatformCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetPlatformCapabilityDescriptor(bosDescriptor)
-}
-
-// IOUSBGetPlatformCapabilityDescriptorWithUUID calls [raw.IOUSBGetPlatformCapabilityDescriptorWithUUID] (C function IOUSBGetPlatformCapabilityDescriptorWithUUID).
-func IOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor unsafe.Pointer, uuid *uint8) unsafe.Pointer {
-	return raw.IOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor, uuid)
-}
-
-// IOUSBGetSuperSpeedDeviceCapabilityDescriptor calls [raw.IOUSBGetSuperSpeedDeviceCapabilityDescriptor] (C function IOUSBGetSuperSpeedDeviceCapabilityDescriptor).
-func IOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor)
-}
-
-// IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor calls [raw.IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor] (C function IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor).
-func IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor)
-}
-
-// IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor calls [raw.IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor] (C function IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor).
-func IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
-	return raw.IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor)
-}
-
-// IOUSBHostCIControllerStateToString calls [raw.IOUSBHostCIControllerStateToString] (C function IOUSBHostCIControllerStateToString).
-func IOUSBHostCIControllerStateToString(controllerState IOUSBHostCIControllerState) string {
-	return raw.IOUSBHostCIControllerStateToString(raw.IOUSBHostCIControllerState(controllerState))
-}
-
-// IOUSBHostCIDeviceSpeedToString calls [raw.IOUSBHostCIDeviceSpeedToString] (C function IOUSBHostCIDeviceSpeedToString).
-func IOUSBHostCIDeviceSpeedToString(speed IOUSBHostCIDeviceSpeed) string {
-	return raw.IOUSBHostCIDeviceSpeedToString(raw.IOUSBHostCIDeviceSpeed(speed))
-}
-
-// IOUSBHostCIDeviceStateToString calls [raw.IOUSBHostCIDeviceStateToString] (C function IOUSBHostCIDeviceStateToString).
-func IOUSBHostCIDeviceStateToString(deviceState IOUSBHostCIDeviceState) string {
-	return raw.IOUSBHostCIDeviceStateToString(raw.IOUSBHostCIDeviceState(deviceState))
-}
-
-// IOUSBHostCIEndpointStateToString calls [raw.IOUSBHostCIEndpointStateToString] (C function IOUSBHostCIEndpointStateToString).
-func IOUSBHostCIEndpointStateToString(endpointState IOUSBHostCIEndpointState) string {
-	return raw.IOUSBHostCIEndpointStateToString(raw.IOUSBHostCIEndpointState(endpointState))
-}
-
-// IOUSBHostCIExceptionTypeToString calls [raw.IOUSBHostCIExceptionTypeToString] (C function IOUSBHostCIExceptionTypeToString).
-func IOUSBHostCIExceptionTypeToString(exceptionType IOUSBHostCIExceptionType) string {
-	return raw.IOUSBHostCIExceptionTypeToString(raw.IOUSBHostCIExceptionType(exceptionType))
-}
-
-// IOUSBHostCILinkStateEnabled calls [raw.IOUSBHostCILinkStateEnabled] (C function IOUSBHostCILinkStateEnabled).
-func IOUSBHostCILinkStateEnabled(linkState IOUSBHostCILinkState) bool {
-	return raw.IOUSBHostCILinkStateEnabled(raw.IOUSBHostCILinkState(linkState))
-}
-
-// IOUSBHostCILinkStateToString calls [raw.IOUSBHostCILinkStateToString] (C function IOUSBHostCILinkStateToString).
-func IOUSBHostCILinkStateToString(linkState IOUSBHostCILinkState) string {
-	return raw.IOUSBHostCILinkStateToString(raw.IOUSBHostCILinkState(linkState))
-}
-
-// IOUSBHostCIMessageStatusFromIOReturn calls [raw.IOUSBHostCIMessageStatusFromIOReturn] (C function IOUSBHostCIMessageStatusFromIOReturn).
-func IOUSBHostCIMessageStatusFromIOReturn(status int) IOUSBHostCIMessageStatus {
-	return IOUSBHostCIMessageStatus(raw.IOUSBHostCIMessageStatusFromIOReturn(status))
-}
-
-// IOUSBHostCIMessageStatusToIOReturn calls [raw.IOUSBHostCIMessageStatusToIOReturn] (C function IOUSBHostCIMessageStatusToIOReturn).
-func IOUSBHostCIMessageStatusToIOReturn(status IOUSBHostCIMessageStatus) int {
-	return raw.IOUSBHostCIMessageStatusToIOReturn(raw.IOUSBHostCIMessageStatus(status))
-}
-
-// IOUSBHostCIMessageStatusToString calls [raw.IOUSBHostCIMessageStatusToString] (C function IOUSBHostCIMessageStatusToString).
-func IOUSBHostCIMessageStatusToString(status IOUSBHostCIMessageStatus) string {
-	return raw.IOUSBHostCIMessageStatusToString(raw.IOUSBHostCIMessageStatus(status))
-}
-
-// IOUSBHostCIMessageTypeToString calls [raw.IOUSBHostCIMessageTypeToString] (C function IOUSBHostCIMessageTypeToString).
-func IOUSBHostCIMessageTypeToString(type_ IOUSBHostCIMessageType) string {
-	return raw.IOUSBHostCIMessageTypeToString(raw.IOUSBHostCIMessageType(type_))
-}
-
-// IOUSBHostCIPortStateToString calls [raw.IOUSBHostCIPortStateToString] (C function IOUSBHostCIPortStateToString).
-func IOUSBHostCIPortStateToString(portState IOUSBHostCIPortState) string {
-	return raw.IOUSBHostCIPortStateToString(raw.IOUSBHostCIPortState(portState))
-}
-
-// IOUSBHostDeviceRequestType calls [raw.IOUSBHostDeviceRequestType] (C function IOUSBHostDeviceRequestType).
-func IOUSBHostDeviceRequestType(direction unsafe.Pointer, type_ unsafe.Pointer, recipient unsafe.Pointer) uint8 {
-	return raw.IOUSBHostDeviceRequestType(direction, type_, recipient)
+// IOUSBHostCIPortStateToString calls the IOUSBHost framework function IOUSBHostCIPortStateToString.
+func IOUSBHostCIPortStateToString(portState HostCIPortState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBHostCIPortStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIPortStateToString, _lib, "IOUSBHostCIPortStateToString")
+	}
+	return _fnIOUSBHostCIPortStateToString(portState)
 }

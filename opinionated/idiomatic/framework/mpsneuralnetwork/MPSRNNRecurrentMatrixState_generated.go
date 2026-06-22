@@ -5,56 +5,88 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RNNRecurrentMatrixState wraps [raw.MPSRNNRecurrentMatrixState] with a fluent Go API.
+// RNNRecurrentMatrixState is an idiomatic wrapper over the Objective-C class MPSRNNRecurrentMatrixState.
 type RNNRecurrentMatrixState struct {
-	inner *raw.MPSRNNRecurrentMatrixState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSRNNRecurrentMatrixState].
-func (x *RNNRecurrentMatrixState) Unwrap() *raw.MPSRNNRecurrentMatrixState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNRecurrentMatrixState) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNRecurrentMatrixStateFromID adopts an existing object pointer as a RNNRecurrentMatrixState (nil for 0).
+// RNNRecurrentMatrixStateFromID adopts an existing Objective-C object as a RNNRecurrentMatrixState
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNRecurrentMatrixStateFromID(id objc.ID) *RNNRecurrentMatrixState {
 	if id == 0 {
 		return nil
 	}
-	return &RNNRecurrentMatrixState{inner: raw.MPSRNNRecurrentMatrixStateFromID(id)}
+	x := &RNNRecurrentMatrixState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRNNRecurrentMatrixState creates a new [RNNRecurrentMatrixState].
+// rNNRecurrentMatrixStateAdopt wraps an Objective-C object that this code just created as a
+// RNNRecurrentMatrixState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNRecurrentMatrixStateAdopt(id objc.ID) *RNNRecurrentMatrixState {
+	if id == 0 {
+		return nil
+	}
+	x := &RNNRecurrentMatrixState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RNNRecurrentMatrixState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RNNRecurrentMatrixState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RNNRecurrentMatrixState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RNNRecurrentMatrixState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRNNRecurrentMatrixState creates a new RNNRecurrentMatrixState.
 func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNRecurrentMatrixState")), objc.RegisterName("new"))
-	return &RNNRecurrentMatrixState{inner: raw.MPSRNNRecurrentMatrixStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNRecurrentMatrixState")), objc.RegisterName("new"))
+	return rNNRecurrentMatrixStateAdopt(_id)
 }
 
-// @abstract   Access the stored recurrent matrix data. @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the recurrent output matrix data, otherwise nil.
-//
-// GetRecurrentOutputMatrixForLayerIndex calls the underlying GetRecurrentOutputMatrixForLayerIndex.
-func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
-	return x.inner.GetRecurrentOutputMatrixForLayerIndex(layerIndex)
+// GetRecurrentOutputMatrixForLayerIndex access the stored recurrent matrix data.
+func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
+	return obj.Wrap(_r)
 }
 
-// @abstract   Access the stored memory cell matrix data (if present). @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the memory cell image matrix, otherwise nil.
-//
-// GetMemoryCellMatrixForLayerIndex calls the underlying GetMemoryCellMatrixForLayerIndex.
-func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
-	return x.inner.GetMemoryCellMatrixForLayerIndex(layerIndex)
+// GetMemoryCellMatrixForLayerIndex access the stored memory cell matrix data (if present).
+func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
+	return obj.Wrap(_r)
 }
 
 // RNNRecurrentMatrixStateable is the interface implemented by [RNNRecurrentMatrixState], for mocking and DI.
 type RNNRecurrentMatrixStateable interface {
-	Unwrap() *raw.MPSRNNRecurrentMatrixState
-	GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix
-	GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix
+	obj.Object
+	GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object
+	GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object
 }
 
 var _ RNNRecurrentMatrixStateable = (*RNNRecurrentMatrixState)(nil)

@@ -5,200 +5,189 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that detects the contours of the edges of an image.
+// DetectContoursRequest is an idiomatic wrapper over the Objective-C class VNDetectContoursRequest.
 //
-// DetectContoursRequest wraps [raw.VNDetectContoursRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that detects the contours of the edges of an image.
 type DetectContoursRequest struct {
-	inner *raw.VNDetectContoursRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectContoursRequest].
-func (x *DetectContoursRequest) Unwrap() *raw.VNDetectContoursRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectContoursRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectContoursRequestFromID adopts an existing object pointer as a DetectContoursRequest (nil for 0).
+// DetectContoursRequestFromID adopts an existing Objective-C object as a DetectContoursRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectContoursRequestFromID(id objc.ID) *DetectContoursRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectContoursRequest{inner: raw.VNDetectContoursRequestFromID(id)}
+	x := &DetectContoursRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectContoursRequest creates a new [DetectContoursRequest].
+// detectContoursRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectContoursRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectContoursRequestAdopt(id objc.ID) *DetectContoursRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectContoursRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectContoursRequest creates a new DetectContoursRequest.
 func NewDetectContoursRequest() *DetectContoursRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectContoursRequest")), objc.RegisterName("new"))
-	return &DetectContoursRequest{inner: raw.VNDetectContoursRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectContoursRequest")), objc.RegisterName("new"))
+	return detectContoursRequestAdopt(_id)
 }
 
-// The amount by which to adjust the image contrast.
-//
-// WithContrastAdjustment sets the contrastAdjustment property and returns the receiver for chaining.
+// WithContrastAdjustment the amount by which to adjust the image contrast.
 func (x *DetectContoursRequest) WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest {
-	x.inner.SetContrastAdjustment(contrastAdjustment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastAdjustment:"), contrastAdjustment)
 	return x
 }
 
-// The pixel value to use as a pivot for the contrast.
-//
-// WithContrastPivot sets the contrastPivot property and returns the receiver for chaining.
-func (x *DetectContoursRequest) WithContrastPivot(contrastPivot *foundation.NSNumber) *DetectContoursRequest {
-	x.inner.SetContrastPivot(contrastPivot)
+// WithContrastPivot the pixel value to use as a pivot for the contrast.
+func (x *DetectContoursRequest) WithContrastPivot(contrastPivot obj.Object) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastPivot:"), objref.IDOf(contrastPivot))
 	return x
 }
 
-// A Boolean value that indicates whether the request detects a dark object on a light background to aid in detection.
-//
-// WithDetectsDarkOnLight sets the detectsDarkOnLight property and returns the receiver for chaining.
+// WithDetectsDarkOnLight a Boolean value that indicates whether the request detects a dark object on a light background to aid in detection.
 func (x *DetectContoursRequest) WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest {
-	x.inner.SetDetectsDarkOnLight(detectsDarkOnLight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectsDarkOnLight:"), detectsDarkOnLight)
 	return x
 }
 
-// A Boolean value that indicates whether the request detects a dark object on a light background.
-//
-// WithDetectDarkOnLight sets the detectDarkOnLight property and returns the receiver for chaining.
+// WithDetectDarkOnLight a Boolean value that indicates whether the request detects a dark object on a light background.
 func (x *DetectContoursRequest) WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest {
-	x.inner.SetDetectDarkOnLight(detectDarkOnLight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectDarkOnLight:"), detectDarkOnLight)
 	return x
 }
 
-// The maximum image dimension to use for contour detection.
-//
-// WithMaximumImageDimension sets the maximumImageDimension property and returns the receiver for chaining.
-func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension uint) *DetectContoursRequest {
-	x.inner.SetMaximumImageDimension(maximumImageDimension)
+// WithMaximumImageDimension the maximum image dimension to use for contour detection.
+func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension int) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumImageDimension:"), maximumImageDimension)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectContoursRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectContoursRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectContoursRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectContoursRequest) WithRevision(revision uint) *DetectContoursRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectContoursRequest) WithRevision(revision int) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// @brief The amount to adjust the image's contrast by. A value of +1.0 means that the contrast is not adjusted. The default value is +2.0. @discussion Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
-//
-// ContrastAdjustment calls the underlying ContrastAdjustment.
+// ContrastAdjustment the amount to adjust the image's contrast by. A value of +1.0 means that the contrast is not adjusted. The default value is +2.0. Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
 func (x *DetectContoursRequest) ContrastAdjustment() float32 {
-	return x.inner.ContrastAdjustment()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contrastAdjustment"))
+	return _r
 }
 
-// SetContrastAdjustment calls the underlying SetContrastAdjustment.
+// SetContrastAdjustment wraps the corresponding Objective-C method.
 func (x *DetectContoursRequest) SetContrastAdjustment(contrastAdjustment float32) {
-	x.inner.SetContrastAdjustment(contrastAdjustment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastAdjustment:"), contrastAdjustment)
 }
 
-// @brief The pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
-//
-// ContrastPivot calls the underlying ContrastPivot.
-func (x *DetectContoursRequest) ContrastPivot() *foundation.NSNumber {
-	return x.inner.ContrastPivot()
+// ContrastPivot the pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
+func (x *DetectContoursRequest) ContrastPivot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contrastPivot"))
+	return obj.Wrap(_r)
 }
 
-// SetContrastPivot calls the underlying SetContrastPivot.
-func (x *DetectContoursRequest) SetContrastPivot(contrastPivot *foundation.NSNumber) {
-	x.inner.SetContrastPivot(contrastPivot)
+// SetContrastPivot wraps the corresponding Objective-C method.
+func (x *DetectContoursRequest) SetContrastPivot(contrastPivot obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastPivot:"), objref.IDOf(contrastPivot))
 }
 
-// @brief Identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is YES.
-//
-// DetectsDarkOnLight calls the underlying DetectsDarkOnLight.
+// DetectsDarkOnLight identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is YES.
 func (x *DetectContoursRequest) DetectsDarkOnLight() bool {
-	return x.inner.DetectsDarkOnLight()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detectsDarkOnLight"))
+	return _r
 }
 
-// SetDetectsDarkOnLight calls the underlying SetDetectsDarkOnLight.
+// SetDetectsDarkOnLight wraps the corresponding Objective-C method.
 func (x *DetectContoursRequest) SetDetectsDarkOnLight(detectsDarkOnLight bool) {
-	x.inner.SetDetectsDarkOnLight(detectsDarkOnLight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectsDarkOnLight:"), detectsDarkOnLight)
 }
 
-// DetectDarkOnLight calls the underlying DetectDarkOnLight.
+// DetectDarkOnLight wraps the corresponding Objective-C method.
 func (x *DetectContoursRequest) DetectDarkOnLight() bool {
-	return x.inner.DetectDarkOnLight()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detectDarkOnLight"))
+	return _r
 }
 
-// SetDetectDarkOnLight calls the underlying SetDetectDarkOnLight.
+// SetDetectDarkOnLight wraps the corresponding Objective-C method.
 func (x *DetectContoursRequest) SetDetectDarkOnLight(detectDarkOnLight bool) {
-	x.inner.SetDetectDarkOnLight(detectDarkOnLight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectDarkOnLight:"), detectDarkOnLight)
 }
 
-// @brief The limit on the maximum dimension of the image to be used for contour detection. Valid range of values is [64 ... NSUIntegerMax]. The default value is 512. @discussion As the contour request is compute intensive, the input image is scaled down maintaining aspect ratio (if needed), such that its maximum dimension is the value of this property. The image never gets scaled up, so specifying the maximum value ensures that the image gets processed in its original size and not downscaled.
-//
-// MaximumImageDimension calls the underlying MaximumImageDimension.
-func (x *DetectContoursRequest) MaximumImageDimension() uint {
-	return x.inner.MaximumImageDimension()
+// MaximumImageDimension the limit on the maximum dimension of the image to be used for contour detection. Valid range of values is [64 ... NSUIntegerMax]. The default value is 512. As the contour request is compute intensive, the input image is scaled down maintaining aspect ratio (if needed), such that its maximum dimension is the value of this property. The image never gets scaled up, so specifying the maximum value ensures that the image gets processed in its original size and not downscaled.
+func (x *DetectContoursRequest) MaximumImageDimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumImageDimension"))
+	return _r
 }
 
-// SetMaximumImageDimension calls the underlying SetMaximumImageDimension.
-func (x *DetectContoursRequest) SetMaximumImageDimension(maximumImageDimension uint) {
-	x.inner.SetMaximumImageDimension(maximumImageDimension)
-}
-
-func (x *DetectContoursRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectContoursRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+// SetMaximumImageDimension wraps the corresponding Objective-C method.
+func (x *DetectContoursRequest) SetMaximumImageDimension(maximumImageDimension int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumImageDimension:"), maximumImageDimension)
 }
 
 // DetectContoursRequestable is the interface implemented by [DetectContoursRequest], for mocking and DI.
 type DetectContoursRequestable interface {
-	Unwrap() *raw.VNDetectContoursRequest
+	obj.Object
 	WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest
-	WithContrastPivot(contrastPivot *foundation.NSNumber) *DetectContoursRequest
+	WithContrastPivot(contrastPivot obj.Object) *DetectContoursRequest
 	WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest
 	WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest
-	WithMaximumImageDimension(maximumImageDimension uint) *DetectContoursRequest
+	WithMaximumImageDimension(maximumImageDimension int) *DetectContoursRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest
-	WithRevision(revision uint) *DetectContoursRequest
+	WithRevision(revision int) *DetectContoursRequest
 	ContrastAdjustment() float32
 	SetContrastAdjustment(contrastAdjustment float32)
-	ContrastPivot() *foundation.NSNumber
-	SetContrastPivot(contrastPivot *foundation.NSNumber)
+	ContrastPivot() obj.Object
+	SetContrastPivot(contrastPivot obj.Object)
 	DetectsDarkOnLight() bool
 	SetDetectsDarkOnLight(detectsDarkOnLight bool)
 	DetectDarkOnLight() bool
 	SetDetectDarkOnLight(detectDarkOnLight bool)
-	MaximumImageDimension() uint
-	SetMaximumImageDimension(maximumImageDimension uint)
+	MaximumImageDimension() int
+	SetMaximumImageDimension(maximumImageDimension int)
 }
 
 var _ DetectContoursRequestable = (*DetectContoursRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectContoursRequest)(nil)
+
+var _ RequestProvider = (*DetectContoursRequest)(nil)

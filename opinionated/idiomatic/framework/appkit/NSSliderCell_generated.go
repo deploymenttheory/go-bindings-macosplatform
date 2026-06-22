@@ -5,710 +5,582 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The appearance and behavior of an NSSlider object.
+// SliderCell is an idiomatic wrapper over the Objective-C class NSSliderCell.
 //
-// SliderCell wraps [raw.NSSliderCell] with a fluent Go API.
+// It embeds [ActionCell], promoting that type's methods.
+//
+// The appearance and behavior of an NSSlider object.
 type SliderCell struct {
-	inner *raw.NSSliderCell
+	ActionCell
 }
 
-// Unwrap returns the underlying [raw.NSSliderCell].
-func (x *SliderCell) Unwrap() *raw.NSSliderCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SliderCell) ID() objc.ID { return x.inner.Ptr() }
-
-// SliderCellFromID adopts an existing object pointer as a SliderCell (nil for 0).
+// SliderCellFromID adopts an existing Objective-C object as a SliderCell
+// (nil for 0), retaining it and registering a release finalizer.
 func SliderCellFromID(id objc.ID) *SliderCell {
 	if id == 0 {
 		return nil
 	}
-	return &SliderCell{inner: raw.NSSliderCellFromID(id)}
+	x := &SliderCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSliderCell creates a new [SliderCell].
+// sliderCellAdopt wraps an Objective-C object that this code just created as a
+// SliderCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sliderCellAdopt(id objc.ID) *SliderCell {
+	if id == 0 {
+		return nil
+	}
+	x := &SliderCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSliderCell creates a new SliderCell.
 func NewSliderCell() *SliderCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSliderCell")), objc.RegisterName("new"))
-	return &SliderCell{inner: raw.NSSliderCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderCell")), objc.RegisterName("new"))
+	return sliderCellAdopt(_id)
 }
 
-// The minimum value the slider can send to its target.
-//
-// WithMinValue sets the minValue property and returns the receiver for chaining.
+// WithMinValue the minimum value the slider can send to its target.
 func (x *SliderCell) WithMinValue(minValue float64) *SliderCell {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 	return x
 }
 
-// The maximum value the slider can send to its target.
-//
-// WithMaxValue sets the maxValue property and returns the receiver for chaining.
+// WithMaxValue the maximum value the slider can send to its target.
 func (x *SliderCell) WithMaxValue(maxValue float64) *SliderCell {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 	return x
 }
 
-// The amount by which the slider changes its value when the user Option-drags the knob.
-//
-// WithAltIncrementValue sets the altIncrementValue property and returns the receiver for chaining.
+// WithAltIncrementValue the amount by which the slider changes its value when the user Option-drags the knob.
 func (x *SliderCell) WithAltIncrementValue(altIncrementValue float64) *SliderCell {
-	x.inner.SetAltIncrementValue(altIncrementValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
 	return x
 }
 
-// The slider type, either linear or circular.
-//
-// WithSliderType sets the sliderType property and returns the receiver for chaining.
-func (x *SliderCell) WithSliderType(sliderType NSSliderType) *SliderCell {
-	x.inner.SetSliderType(raw.NSSliderType(sliderType))
+// WithSliderType the slider type, either linear or circular.
+func (x *SliderCell) WithSliderType(sliderType SliderType) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSliderType:"), sliderType)
 	return x
 }
 
-// An integer indicating the orientation (vertical or horizontal) of the slider.
-//
-// WithVertical sets the vertical property and returns the receiver for chaining.
+// WithVertical an integer indicating the orientation (vertical or horizontal) of the slider.
 func (x *SliderCell) WithVertical(vertical bool) *SliderCell {
-	x.inner.SetVertical(vertical)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertical:"), vertical)
 	return x
 }
 
-// The thickness of the slider knob, in pixels.
-//
-// WithKnobThickness sets the knobThickness property and returns the receiver for chaining.
+// WithKnobThickness the thickness of the slider knob, in pixels.
 func (x *SliderCell) WithKnobThickness(knobThickness float64) *SliderCell {
-	x.inner.SetKnobThickness(knobThickness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobThickness:"), knobThickness)
 	return x
 }
 
-// The number of tick marks associated with the slider, including the tick marks assigned to the minimum and maximum values.
-//
-// WithNumberOfTickMarks sets the numberOfTickMarks property and returns the receiver for chaining.
+// WithNumberOfTickMarks the number of tick marks associated with the slider, including the tick marks assigned to the minimum and maximum values.
 func (x *SliderCell) WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell {
-	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
 	return x
 }
 
-// The position of the tick marks relative to the receiver.
-//
-// WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
-func (x *SliderCell) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *SliderCell {
-	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
+// WithTickMarkPosition the position of the tick marks relative to the receiver.
+func (x *SliderCell) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
 	return x
 }
 
-// A Boolean value indicating whether the receiver fixes its values to those values represented by its tick marks.
-//
-// WithAllowsTickMarkValuesOnly sets the allowsTickMarkValuesOnly property and returns the receiver for chaining.
+// WithAllowsTickMarkValuesOnly a Boolean value indicating whether the receiver fixes its values to those values represented by its tick marks.
 func (x *SliderCell) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell {
-	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *SliderCell) WithControlView(controlView ViewProvider) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *SliderCell) WithType(type_ NSCellType) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *SliderCell) WithType(type_ CellType) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *SliderCell) WithState(state int) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *SliderCell) WithTarget(target objc.ID) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *SliderCell) WithTarget(target obj.Object) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *SliderCell) WithAction(action objc.SEL) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *SliderCell) WithTag(tag int) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *SliderCell) WithTitle(title string) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *SliderCell) WithEnabled(enabled bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *SliderCell) WithContinuous(continuous bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *SliderCell) WithEditable(editable bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *SliderCell) WithSelectable(selectable bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *SliderCell) WithBordered(bordered bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *SliderCell) WithBezeled(bezeled bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *SliderCell) WithScrollable(scrollable bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *SliderCell) WithHighlighted(highlighted bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SliderCell) WithAlignment(alignment NSTextAlignment) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *SliderCell) WithAlignment(alignment TextAlignment) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *SliderCell) WithWraps(wraps bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *SliderCell) WithFont(font *Font) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *SliderCell) WithFormatter(formatter *foundation.NSFormatter) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *SliderCell) WithFormatter(formatter obj.Object) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *SliderCell) WithObjectValue(objectValue objc.ID) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *SliderCell) WithObjectValue(objectValue obj.Object) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *SliderCell) WithStringValue(stringValue string) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *SliderCell) WithIntValue(intValue int) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *SliderCell) WithFloatValue(floatValue float32) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *SliderCell) WithDoubleValue(doubleValue float64) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *SliderCell) WithIntegerValue(integerValue int) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *SliderCell) WithImage(image *Image) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SliderCell) WithControlSize(controlSize NSControlSize) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *SliderCell) WithControlSize(controlSize ControlSize) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *SliderCell) WithRepresentedObject(representedObject objc.ID) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *SliderCell) WithRepresentedObject(representedObject obj.Object) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *SliderCell) WithMenu(menu *Menu) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *SliderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SliderCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *SliderCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SliderCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *SliderCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *SliderCell) WithAllowsUndo(allowsUndo bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *SliderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *SliderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *SliderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *SliderCell) WithShowsFirstResponder(showsFirstResponder bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SliderCell) WithFocusRingType(focusRingType NSFocusRingType) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *SliderCell) WithFocusRingType(focusRingType FocusRingType) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *SliderCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *SliderCell) WithAttributedStringValue(attributedStringValue obj.Object) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *SliderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *SliderCell) WithImportsGraphics(importsGraphics bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *SliderCell) WithAllowsMixedState(allowsMixedState bool) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *SliderCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *SliderCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *SliderCell) WithControlTint(controlTint NSControlTint) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *SliderCell) WithControlTint(controlTint ControlTint) *SliderCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Returns the rectangle in which the slider knob is drawn.
-//
-// KnobRectFlipped calls the underlying KnobRectFlipped.
+// KnobRectFlipped returns the rectangle in which the slider knob is drawn.
 func (x *SliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
-	return x.inner.KnobRectFlipped(flipped)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("knobRectFlipped:"), flipped)
+	return _r
 }
 
-// Returns the rectangle in which the bar is drawn.
-//
-// BarRectFlipped calls the underlying BarRectFlipped.
+// BarRectFlipped returns the rectangle in which the bar is drawn.
 func (x *SliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
-	return x.inner.BarRectFlipped(flipped)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("barRectFlipped:"), flipped)
+	return _r
 }
 
-// Draws the slider knob in the given rectangle.
-//
-// DrawKnob calls the underlying DrawKnob.
+// DrawKnob draws the slider knob in the given rectangle.
 func (x *SliderCell) DrawKnob(knobRect corefoundation.CGRect) {
-	x.inner.DrawKnob(knobRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawKnob:"), knobRect)
 }
 
-// Calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
-//
-// DrawKnob2 calls the underlying DrawKnob2.
+// DrawKnob2 calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
 func (x *SliderCell) DrawKnob2() {
-	x.inner.DrawKnob2()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawKnob"))
 }
 
-// Draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
-//
-// DrawBarInsideFlipped calls the underlying DrawBarInsideFlipped.
+// DrawBarInsideFlipped draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
 func (x *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
-	x.inner.DrawBarInsideFlipped(rect, flipped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBarInside:flipped:"), rect, flipped)
 }
 
-// MinValue calls the underlying MinValue.
+// MinValue wraps the corresponding Objective-C method.
 func (x *SliderCell) MinValue() float64 {
-	return x.inner.MinValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+	return _r
 }
 
-// SetMinValue calls the underlying SetMinValue.
+// SetMinValue wraps the corresponding Objective-C method.
 func (x *SliderCell) SetMinValue(minValue float64) {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
-// MaxValue calls the underlying MaxValue.
+// MaxValue wraps the corresponding Objective-C method.
 func (x *SliderCell) MaxValue() float64 {
-	return x.inner.MaxValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+	return _r
 }
 
-// SetMaxValue calls the underlying SetMaxValue.
+// SetMaxValue wraps the corresponding Objective-C method.
 func (x *SliderCell) SetMaxValue(maxValue float64) {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
-// AltIncrementValue calls the underlying AltIncrementValue.
+// AltIncrementValue wraps the corresponding Objective-C method.
 func (x *SliderCell) AltIncrementValue() float64 {
-	return x.inner.AltIncrementValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("altIncrementValue"))
+	return _r
 }
 
-// SetAltIncrementValue calls the underlying SetAltIncrementValue.
+// SetAltIncrementValue wraps the corresponding Objective-C method.
 func (x *SliderCell) SetAltIncrementValue(altIncrementValue float64) {
-	x.inner.SetAltIncrementValue(altIncrementValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
 }
 
-// SliderType calls the underlying SliderType.
-func (x *SliderCell) SliderType() NSSliderType {
-	return NSSliderType(x.inner.SliderType())
+// SliderType wraps the corresponding Objective-C method.
+func (x *SliderCell) SliderType() SliderType {
+	_r := objc.Send[SliderType](objref.IDOf(x), objc.RegisterName("sliderType"))
+	return _r
 }
 
-// SetSliderType calls the underlying SetSliderType.
-func (x *SliderCell) SetSliderType(sliderType NSSliderType) {
-	x.inner.SetSliderType(raw.NSSliderType(sliderType))
+// SetSliderType wraps the corresponding Objective-C method.
+func (x *SliderCell) SetSliderType(sliderType SliderType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSliderType:"), sliderType)
 }
 
-// IsVertical calls the underlying IsVertical.
+// IsVertical wraps the corresponding Objective-C method.
 func (x *SliderCell) IsVertical() bool {
-	return x.inner.IsVertical()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+	return _r
 }
 
-// SetVertical calls the underlying SetVertical.
+// SetVertical wraps the corresponding Objective-C method.
 func (x *SliderCell) SetVertical(vertical bool) {
-	x.inner.SetVertical(vertical)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertical:"), vertical)
 }
 
-// TrackRect calls the underlying TrackRect.
+// TrackRect wraps the corresponding Objective-C method.
 func (x *SliderCell) TrackRect() corefoundation.CGRect {
-	return x.inner.TrackRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("trackRect"))
+	return _r
 }
 
-// KnobThickness calls the underlying KnobThickness.
+// KnobThickness wraps the corresponding Objective-C method.
 func (x *SliderCell) KnobThickness() float64 {
-	return x.inner.KnobThickness()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("knobThickness"))
+	return _r
 }
 
-// Returns the receiver’s value represented by the tick mark at the specified index.
-//
-// TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
+// TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at the specified index.
 func (x *SliderCell) TickMarkValueAtIndex(index int) float64 {
-	return x.inner.TickMarkValueAtIndex(index)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tickMarkValueAtIndex:"), index)
+	return _r
 }
 
-// Returns the bounding rectangle of the tick mark at the specified index.
-//
-// RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
+// RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark at the specified index.
 func (x *SliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	return x.inner.RectOfTickMarkAtIndex(index)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+	return _r
 }
 
-// Returns the index of the tick mark closest to the location of the slider represented by the specified point.
-//
-// IndexOfTickMarkAtPoint calls the underlying IndexOfTickMarkAtPoint.
+// IndexOfTickMarkAtPoint returns the index of the tick mark closest to the location of the slider represented by the specified point.
 func (x *SliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
-	return x.inner.IndexOfTickMarkAtPoint(point)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfTickMarkAtPoint:"), point)
+	return _r
 }
 
-// Returns the value of the tick mark closest to the specified value.
-//
-// ClosestTickMarkValueToValue calls the underlying ClosestTickMarkValueToValue.
+// ClosestTickMarkValueToValue returns the value of the tick mark closest to the specified value.
 func (x *SliderCell) ClosestTickMarkValueToValue(value float64) float64 {
-	return x.inner.ClosestTickMarkValueToValue(value)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("closestTickMarkValueToValue:"), value)
+	return _r
 }
 
-// Draws the slider’s tick marks.
-//
-// DrawTickMarks calls the underlying DrawTickMarks.
+// DrawTickMarks draws the slider’s tick marks.
 func (x *SliderCell) DrawTickMarks() {
-	x.inner.DrawTickMarks()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawTickMarks"))
 }
 
-// NumberOfTickMarks calls the underlying NumberOfTickMarks.
+// NumberOfTickMarks wraps the corresponding Objective-C method.
 func (x *SliderCell) NumberOfTickMarks() int {
-	return x.inner.NumberOfTickMarks()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTickMarks"))
+	return _r
 }
 
-// SetNumberOfTickMarks calls the underlying SetNumberOfTickMarks.
+// SetNumberOfTickMarks wraps the corresponding Objective-C method.
 func (x *SliderCell) SetNumberOfTickMarks(numberOfTickMarks int) {
-	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
 }
 
-// TickMarkPosition calls the underlying TickMarkPosition.
-func (x *SliderCell) TickMarkPosition() NSTickMarkPosition {
-	return NSTickMarkPosition(x.inner.TickMarkPosition())
+// TickMarkPosition wraps the corresponding Objective-C method.
+func (x *SliderCell) TickMarkPosition() TickMarkPosition {
+	_r := objc.Send[TickMarkPosition](objref.IDOf(x), objc.RegisterName("tickMarkPosition"))
+	return _r
 }
 
-// SetTickMarkPosition calls the underlying SetTickMarkPosition.
-func (x *SliderCell) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
-	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
+// SetTickMarkPosition wraps the corresponding Objective-C method.
+func (x *SliderCell) SetTickMarkPosition(tickMarkPosition TickMarkPosition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
 }
 
-// AllowsTickMarkValuesOnly calls the underlying AllowsTickMarkValuesOnly.
+// AllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
 func (x *SliderCell) AllowsTickMarkValuesOnly() bool {
-	return x.inner.AllowsTickMarkValuesOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTickMarkValuesOnly"))
+	return _r
 }
 
-// SetAllowsTickMarkValuesOnly calls the underlying SetAllowsTickMarkValuesOnly.
+// SetAllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
 func (x *SliderCell) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
-	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
 }
 
-// Sets the cell used to draw the slider’s title.
-//
-// SetTitleCell calls the underlying SetTitleCell.
-func (x *SliderCell) SetTitleCell(cell *raw.NSCell) {
-	x.inner.SetTitleCell(cell)
+// SetTitleCell sets the cell used to draw the slider’s title.
+func (x *SliderCell) SetTitleCell(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
 }
 
-// Returns nil.
-//
-// TitleCell calls the underlying TitleCell.
-func (x *SliderCell) TitleCell() objc.ID {
-	return x.inner.TitleCell()
+// TitleCell returns nil.
+func (x *SliderCell) TitleCell() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleCell"))
+	return obj.Wrap(_r)
 }
 
-// Sets the color used to draw the slider’s title.
-//
-// SetTitleColor calls the underlying SetTitleColor.
-func (x *SliderCell) SetTitleColor(newColor *raw.NSColor) {
-	x.inner.SetTitleColor(newColor)
+// SetTitleColor sets the color used to draw the slider’s title.
+func (x *SliderCell) SetTitleColor(newColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
 }
 
-// Returns nil.
-//
-// TitleColor calls the underlying TitleColor.
+// TitleColor returns nil.
 func (x *SliderCell) TitleColor() *Color {
-	_r := x.inner.TitleColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleColor"))
+	return ColorFromID(_r)
 }
 
-// Sets the font used to draw the slider’s title.
-//
-// SetTitleFont calls the underlying SetTitleFont.
-func (x *SliderCell) SetTitleFont(fontObj *raw.NSFont) {
-	x.inner.SetTitleFont(fontObj)
+// SetTitleFont sets the font used to draw the slider’s title.
+func (x *SliderCell) SetTitleFont(fontObj *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
 }
 
-// Returns nil.
-//
-// TitleFont calls the underlying TitleFont.
+// TitleFont returns nil.
 func (x *SliderCell) TitleFont() *Font {
-	_r := x.inner.TitleFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleFont"))
+	return FontFromID(_r)
 }
 
-// The thickness of the slider knob, in pixels.
-//
-// SetKnobThickness calls the underlying SetKnobThickness.
+// SetKnobThickness the thickness of the slider knob, in pixels.
 func (x *SliderCell) SetKnobThickness(thickness float64) {
-	x.inner.SetKnobThickness(thickness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobThickness:"), thickness)
 }
-
-func (x *SliderCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
-
-func (x *SliderCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 
 // SliderCellable is the interface implemented by [SliderCell], for mocking and DI.
 type SliderCellable interface {
-	Unwrap() *raw.NSSliderCell
+	obj.Object
 	WithMinValue(minValue float64) *SliderCell
 	WithMaxValue(maxValue float64) *SliderCell
 	WithAltIncrementValue(altIncrementValue float64) *SliderCell
-	WithSliderType(sliderType NSSliderType) *SliderCell
+	WithSliderType(sliderType SliderType) *SliderCell
 	WithVertical(vertical bool) *SliderCell
 	WithKnobThickness(knobThickness float64) *SliderCell
 	WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell
-	WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *SliderCell
+	WithTickMarkPosition(tickMarkPosition TickMarkPosition) *SliderCell
 	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell
 	WithControlView(controlView ViewProvider) *SliderCell
-	WithType(type_ NSCellType) *SliderCell
+	WithType(type_ CellType) *SliderCell
 	WithState(state int) *SliderCell
-	WithTarget(target objc.ID) *SliderCell
-	WithAction(action objc.SEL) *SliderCell
+	WithTarget(target obj.Object) *SliderCell
 	WithTag(tag int) *SliderCell
 	WithTitle(title string) *SliderCell
 	WithEnabled(enabled bool) *SliderCell
@@ -719,36 +591,36 @@ type SliderCellable interface {
 	WithBezeled(bezeled bool) *SliderCell
 	WithScrollable(scrollable bool) *SliderCell
 	WithHighlighted(highlighted bool) *SliderCell
-	WithAlignment(alignment NSTextAlignment) *SliderCell
+	WithAlignment(alignment TextAlignment) *SliderCell
 	WithWraps(wraps bool) *SliderCell
 	WithFont(font *Font) *SliderCell
-	WithFormatter(formatter *foundation.NSFormatter) *SliderCell
-	WithObjectValue(objectValue objc.ID) *SliderCell
+	WithFormatter(formatter obj.Object) *SliderCell
+	WithObjectValue(objectValue obj.Object) *SliderCell
 	WithStringValue(stringValue string) *SliderCell
 	WithIntValue(intValue int) *SliderCell
 	WithFloatValue(floatValue float32) *SliderCell
 	WithDoubleValue(doubleValue float64) *SliderCell
 	WithIntegerValue(integerValue int) *SliderCell
 	WithImage(image *Image) *SliderCell
-	WithControlSize(controlSize NSControlSize) *SliderCell
-	WithRepresentedObject(representedObject objc.ID) *SliderCell
+	WithControlSize(controlSize ControlSize) *SliderCell
+	WithRepresentedObject(representedObject obj.Object) *SliderCell
 	WithMenu(menu *Menu) *SliderCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SliderCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SliderCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *SliderCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *SliderCell
 	WithAllowsUndo(allowsUndo bool) *SliderCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SliderCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SliderCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell
 	WithShowsFirstResponder(showsFirstResponder bool) *SliderCell
-	WithFocusRingType(focusRingType NSFocusRingType) *SliderCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SliderCell
+	WithFocusRingType(focusRingType FocusRingType) *SliderCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *SliderCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell
 	WithImportsGraphics(importsGraphics bool) *SliderCell
 	WithAllowsMixedState(allowsMixedState bool) *SliderCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SliderCell
-	WithControlTint(controlTint NSControlTint) *SliderCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *SliderCell
+	WithControlTint(controlTint ControlTint) *SliderCell
 	KnobRectFlipped(flipped bool) corefoundation.CGRect
 	BarRectFlipped(flipped bool) corefoundation.CGRect
 	DrawKnob(knobRect corefoundation.CGRect)
@@ -760,8 +632,8 @@ type SliderCellable interface {
 	SetMaxValue(maxValue float64)
 	AltIncrementValue() float64
 	SetAltIncrementValue(altIncrementValue float64)
-	SliderType() NSSliderType
-	SetSliderType(sliderType NSSliderType)
+	SliderType() SliderType
+	SetSliderType(sliderType SliderType)
 	IsVertical() bool
 	SetVertical(vertical bool)
 	TrackRect() corefoundation.CGRect
@@ -773,17 +645,21 @@ type SliderCellable interface {
 	DrawTickMarks()
 	NumberOfTickMarks() int
 	SetNumberOfTickMarks(numberOfTickMarks int)
-	TickMarkPosition() NSTickMarkPosition
-	SetTickMarkPosition(tickMarkPosition NSTickMarkPosition)
+	TickMarkPosition() TickMarkPosition
+	SetTickMarkPosition(tickMarkPosition TickMarkPosition)
 	AllowsTickMarkValuesOnly() bool
 	SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
-	SetTitleCell(cell *raw.NSCell)
-	TitleCell() objc.ID
-	SetTitleColor(newColor *raw.NSColor)
+	SetTitleCell(cell *Cell)
+	TitleCell() obj.Object
+	SetTitleColor(newColor *Color)
 	TitleColor() *Color
-	SetTitleFont(fontObj *raw.NSFont)
+	SetTitleFont(fontObj *Font)
 	TitleFont() *Font
 	SetKnobThickness(thickness float64)
 }
 
 var _ SliderCellable = (*SliderCell)(nil)
+
+var _ ActionCellProvider = (*SliderCell)(nil)
+
+var _ CellProvider = (*SliderCell)(nil)

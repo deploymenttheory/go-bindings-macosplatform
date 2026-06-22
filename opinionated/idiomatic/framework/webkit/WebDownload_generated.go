@@ -5,41 +5,76 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebDownload objects initiate download client requests on behalf of a delegate. A download request involves loading the data, decoding it (if necessary), and saving it to a file. Instances of this class behave similar to NSURLDownload except delegates of WebDownload may implement an additional delegate method. The method allows the delegate to specify the window to be used for authentication sheets. If the delegate does not implement this method, the WebDownload object will prompt the user for authentication using the standard WebKit authentication panel, as either a sheet or window. There are no additional methods defined in this class. See WebDownloadDelegate for the delegate method.
+// WebDownload is an idiomatic wrapper over the Objective-C class WebDownload.
 //
-// WebDownload wraps [raw.WebDownload] with a fluent Go API.
+// WebDownload objects initiate download client requests on behalf of a delegate. A download request involves loading the data, decoding it (if necessary), and saving it to a file. Instances of this class behave similar to NSURLDownload except delegates of WebDownload may implement an additional delegate method. The method allows the delegate to specify the window to be used for authentication sheets. If the delegate does not implement this method, the WebDownload object will prompt the user for authentication using the standard WebKit authentication panel, as either a sheet or window. There are no additional methods defined in this class. See WebDownloadDelegate for the delegate method.
 type WebDownload struct {
-	inner *raw.WebDownload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebDownload].
-func (x *WebDownload) Unwrap() *raw.WebDownload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebDownload) ID() objc.ID { return x.inner.Ptr() }
-
-// WebDownloadFromID adopts an existing object pointer as a WebDownload (nil for 0).
+// WebDownloadFromID adopts an existing Objective-C object as a WebDownload
+// (nil for 0), retaining it and registering a release finalizer.
 func WebDownloadFromID(id objc.ID) *WebDownload {
 	if id == 0 {
 		return nil
 	}
-	return &WebDownload{inner: raw.WebDownloadFromID(id)}
+	x := &WebDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWebDownload creates a new [WebDownload].
+// webDownloadAdopt wraps an Objective-C object that this code just created as a
+// WebDownload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webDownloadAdopt(id objc.ID) *WebDownload {
+	if id == 0 {
+		return nil
+	}
+	x := &WebDownload{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebDownload) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebDownload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebDownload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebDownload) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebDownload creates a new WebDownload.
 func NewWebDownload() *WebDownload {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WebDownload")), objc.RegisterName("new"))
-	return &WebDownload{inner: raw.WebDownloadFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WebDownload")), objc.RegisterName("new"))
+	return webDownloadAdopt(_id)
 }
 
 // WebDownloadable is the interface implemented by [WebDownload], for mocking and DI.
 type WebDownloadable interface {
-	Unwrap() *raw.WebDownload
+	obj.Object
 }
 
 var _ WebDownloadable = (*WebDownload)(nil)

@@ -5,69 +5,79 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A specialized regular expression object that matches natural language text for predefined data patterns.
+// DataDetector is an idiomatic wrapper over the Objective-C class NSDataDetector.
 //
-// DataDetector wraps [raw.NSDataDetector] with a fluent Go API.
+// It embeds [RegularExpression], promoting that type's methods.
+//
+// A specialized regular expression object that matches natural language text for predefined data patterns.
 type DataDetector struct {
-	inner *raw.NSDataDetector
+	RegularExpression
 }
 
-// Unwrap returns the underlying [raw.NSDataDetector].
-func (x *DataDetector) Unwrap() *raw.NSDataDetector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DataDetector) ID() objc.ID { return x.inner.Ptr() }
-
-// DataDetectorFromID adopts an existing object pointer as a DataDetector (nil for 0).
+// DataDetectorFromID adopts an existing Objective-C object as a DataDetector
+// (nil for 0), retaining it and registering a release finalizer.
 func DataDetectorFromID(id objc.ID) *DataDetector {
 	if id == 0 {
 		return nil
 	}
-	return &DataDetector{inner: raw.NSDataDetectorFromID(id)}
-}
-
-// Initializes and returns a data detector instance.
-//
-// NewDataDetectorWithTypesError creates a new [DataDetector].
-func NewDataDetectorWithTypesError(checkingTypes uint64) (*DataDetector, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDataDetector")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTypes:error:"), checkingTypes, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &DataDetector{inner: raw.NSDataDetectorFromID(_id)}, nil
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DataDetector) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DataDetector {
-	x.inner.NSRegularExpression.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &DataDetector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// CheckingTypes calls the underlying CheckingTypes.
+// dataDetectorAdopt wraps an Objective-C object that this code just created as a
+// DataDetector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dataDetectorAdopt(id objc.ID) *DataDetector {
+	if id == 0 {
+		return nil
+	}
+	x := &DataDetector{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDataDetectorWithTypesError initializes and returns a data detector instance.
+func NewDataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataDetector")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTypes:error:"), checkingTypes, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return dataDetectorAdopt(_id), nil
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *DataDetector) WithScriptingProperties(scriptingProperties obj.Object) *DataDetector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// CheckingTypes wraps the corresponding Objective-C method.
 func (x *DataDetector) CheckingTypes() uint64 {
-	return x.inner.CheckingTypes()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("checkingTypes"))
+	return _r
 }
-
-func (x *DataDetector) asRegularExpression() *raw.NSRegularExpression {
-	return &x.inner.NSRegularExpression
-}
-
-func (x *DataDetector) asObject() *raw.NSObject { return &x.inner.NSRegularExpression.NSObject }
 
 // DataDetectorable is the interface implemented by [DataDetector], for mocking and DI.
 type DataDetectorable interface {
-	Unwrap() *raw.NSDataDetector
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DataDetector
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *DataDetector
 	CheckingTypes() uint64
 }
 
 var _ DataDetectorable = (*DataDetector)(nil)
+
+var _ RegularExpressionProvider = (*DataDetector)(nil)

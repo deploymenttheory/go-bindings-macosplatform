@@ -5,56 +5,89 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The constraints for a sequence feature.
+// SequenceConstraint is an idiomatic wrapper over the Objective-C class MLSequenceConstraint.
 //
-// SequenceConstraint wraps [raw.MLSequenceConstraint] with a fluent Go API.
+// The constraints for a sequence feature.
 type SequenceConstraint struct {
-	inner *raw.MLSequenceConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLSequenceConstraint].
-func (x *SequenceConstraint) Unwrap() *raw.MLSequenceConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SequenceConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// SequenceConstraintFromID adopts an existing object pointer as a SequenceConstraint (nil for 0).
+// SequenceConstraintFromID adopts an existing Objective-C object as a SequenceConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func SequenceConstraintFromID(id objc.ID) *SequenceConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &SequenceConstraint{inner: raw.MLSequenceConstraintFromID(id)}
+	x := &SequenceConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSequenceConstraint creates a new [SequenceConstraint].
-func NewSequenceConstraint() *SequenceConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLSequenceConstraint")), objc.RegisterName("new"))
-	return &SequenceConstraint{inner: raw.MLSequenceConstraintFromID(_id)}
-}
-
-// ValueDescription calls the underlying ValueDescription.
-func (x *SequenceConstraint) ValueDescription() *FeatureDescription {
-	_r := x.inner.ValueDescription()
-	if _r == nil {
+// sequenceConstraintAdopt wraps an Objective-C object that this code just created as a
+// SequenceConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sequenceConstraintAdopt(id objc.ID) *SequenceConstraint {
+	if id == 0 {
 		return nil
 	}
-	return &FeatureDescription{inner: _r}
+	x := &SequenceConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// CountRange calls the underlying CountRange.
+// Description returns the object's -description text.
+func (x *SequenceConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SequenceConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SequenceConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SequenceConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSequenceConstraint creates a new SequenceConstraint.
+func NewSequenceConstraint() *SequenceConstraint {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLSequenceConstraint")), objc.RegisterName("new"))
+	return sequenceConstraintAdopt(_id)
+}
+
+// ValueDescription wraps the corresponding Objective-C method.
+func (x *SequenceConstraint) ValueDescription() *FeatureDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueDescription"))
+	return FeatureDescriptionFromID(_r)
+}
+
+// CountRange wraps the corresponding Objective-C method.
 func (x *SequenceConstraint) CountRange() foundation.NSRange {
-	return x.inner.CountRange()
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("countRange"))
+	return _r
 }
 
 // SequenceConstraintable is the interface implemented by [SequenceConstraint], for mocking and DI.
 type SequenceConstraintable interface {
-	Unwrap() *raw.MLSequenceConstraint
+	obj.Object
 	ValueDescription() *FeatureDescription
 	CountRange() foundation.NSRange
 }

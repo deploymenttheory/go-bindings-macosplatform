@@ -5,51 +5,82 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for evaluating navigation events in an authentication session.
+// WebAuthenticationSessionCallback is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSessionCallback.
 //
-// WebAuthenticationSessionCallback wraps [raw.ASWebAuthenticationSessionCallback] with a fluent Go API.
+// An object for evaluating navigation events in an authentication session.
 type WebAuthenticationSessionCallback struct {
-	inner *raw.ASWebAuthenticationSessionCallback
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASWebAuthenticationSessionCallback].
-func (x *WebAuthenticationSessionCallback) Unwrap() *raw.ASWebAuthenticationSessionCallback {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebAuthenticationSessionCallback) ID() objc.ID { return x.inner.Ptr() }
-
-// WebAuthenticationSessionCallbackFromID adopts an existing object pointer as a WebAuthenticationSessionCallback (nil for 0).
+// WebAuthenticationSessionCallbackFromID adopts an existing Objective-C object as a WebAuthenticationSessionCallback
+// (nil for 0), retaining it and registering a release finalizer.
 func WebAuthenticationSessionCallbackFromID(id objc.ID) *WebAuthenticationSessionCallback {
 	if id == 0 {
 		return nil
 	}
-	return &WebAuthenticationSessionCallback{inner: raw.ASWebAuthenticationSessionCallbackFromID(id)}
+	x := &WebAuthenticationSessionCallback{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWebAuthenticationSessionCallback creates a new [WebAuthenticationSessionCallback].
+// webAuthenticationSessionCallbackAdopt wraps an Objective-C object that this code just created as a
+// WebAuthenticationSessionCallback (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webAuthenticationSessionCallbackAdopt(id objc.ID) *WebAuthenticationSessionCallback {
+	if id == 0 {
+		return nil
+	}
+	x := &WebAuthenticationSessionCallback{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebAuthenticationSessionCallback) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebAuthenticationSessionCallback) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebAuthenticationSessionCallback) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAuthenticationSessionCallback) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebAuthenticationSessionCallback creates a new WebAuthenticationSessionCallback.
 func NewWebAuthenticationSessionCallback() *WebAuthenticationSessionCallback {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSessionCallback")), objc.RegisterName("new"))
-	return &WebAuthenticationSessionCallback{inner: raw.ASWebAuthenticationSessionCallbackFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionCallback")), objc.RegisterName("new"))
+	return webAuthenticationSessionCallbackAdopt(_id)
 }
 
-// Check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes. @param url The URL to check.
-//
-// MatchesURL calls the underlying MatchesURL.
+// MatchesURL check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes.
 func (x *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
-	return x.inner.MatchesURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesURL:"), rt.FileURL(url))
+	return _r
 }
 
 // WebAuthenticationSessionCallbackable is the interface implemented by [WebAuthenticationSessionCallback], for mocking and DI.
 type WebAuthenticationSessionCallbackable interface {
-	Unwrap() *raw.ASWebAuthenticationSessionCallback
+	obj.Object
 	MatchesURL(url string) bool
 }
 

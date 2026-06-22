@@ -5,58 +5,92 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BarcodeEventMetadataRequest wraps [raw.PKBarcodeEventMetadataRequest] with a fluent Go API.
+// BarcodeEventMetadataRequest is an idiomatic wrapper over the Objective-C class PKBarcodeEventMetadataRequest.
 type BarcodeEventMetadataRequest struct {
-	inner *raw.PKBarcodeEventMetadataRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKBarcodeEventMetadataRequest].
-func (x *BarcodeEventMetadataRequest) Unwrap() *raw.PKBarcodeEventMetadataRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BarcodeEventMetadataRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// BarcodeEventMetadataRequestFromID adopts an existing object pointer as a BarcodeEventMetadataRequest (nil for 0).
+// BarcodeEventMetadataRequestFromID adopts an existing Objective-C object as a BarcodeEventMetadataRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func BarcodeEventMetadataRequestFromID(id objc.ID) *BarcodeEventMetadataRequest {
 	if id == 0 {
 		return nil
 	}
-	return &BarcodeEventMetadataRequest{inner: raw.PKBarcodeEventMetadataRequestFromID(id)}
+	x := &BarcodeEventMetadataRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBarcodeEventMetadataRequest creates a new [BarcodeEventMetadataRequest].
+// barcodeEventMetadataRequestAdopt wraps an Objective-C object that this code just created as a
+// BarcodeEventMetadataRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func barcodeEventMetadataRequestAdopt(id objc.ID) *BarcodeEventMetadataRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &BarcodeEventMetadataRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BarcodeEventMetadataRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BarcodeEventMetadataRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BarcodeEventMetadataRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BarcodeEventMetadataRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBarcodeEventMetadataRequest creates a new BarcodeEventMetadataRequest.
 func NewBarcodeEventMetadataRequest() *BarcodeEventMetadataRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventMetadataRequest")), objc.RegisterName("new"))
-	return &BarcodeEventMetadataRequest{inner: raw.PKBarcodeEventMetadataRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventMetadataRequest")), objc.RegisterName("new"))
+	return barcodeEventMetadataRequestAdopt(_id)
 }
 
-// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
+// DeviceAccountIdentifier wraps the corresponding Objective-C method.
 func (x *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
-	_r := x.inner.DeviceAccountIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LastUsedBarcodeIdentifier calls the underlying LastUsedBarcodeIdentifier.
+// LastUsedBarcodeIdentifier wraps the corresponding Objective-C method.
 func (x *BarcodeEventMetadataRequest) LastUsedBarcodeIdentifier() string {
-	_r := x.inner.LastUsedBarcodeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastUsedBarcodeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // BarcodeEventMetadataRequestable is the interface implemented by [BarcodeEventMetadataRequest], for mocking and DI.
 type BarcodeEventMetadataRequestable interface {
-	Unwrap() *raw.PKBarcodeEventMetadataRequest
+	obj.Object
 	DeviceAccountIdentifier() string
 	LastUsedBarcodeIdentifier() string
 }

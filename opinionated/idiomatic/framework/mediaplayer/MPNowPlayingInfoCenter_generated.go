@@ -5,88 +5,116 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object for setting the Now Playing information for media that your app plays.
+// NowPlayingInfoCenter is an idiomatic wrapper over the Objective-C class MPNowPlayingInfoCenter.
 //
-// NowPlayingInfoCenter wraps [raw.MPNowPlayingInfoCenter] with a fluent Go API.
+// An object for setting the Now Playing information for media that your app plays.
 type NowPlayingInfoCenter struct {
-	inner *raw.MPNowPlayingInfoCenter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPNowPlayingInfoCenter].
-func (x *NowPlayingInfoCenter) Unwrap() *raw.MPNowPlayingInfoCenter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NowPlayingInfoCenter) ID() objc.ID { return x.inner.Ptr() }
-
-// NowPlayingInfoCenterFromID adopts an existing object pointer as a NowPlayingInfoCenter (nil for 0).
+// NowPlayingInfoCenterFromID adopts an existing Objective-C object as a NowPlayingInfoCenter
+// (nil for 0), retaining it and registering a release finalizer.
 func NowPlayingInfoCenterFromID(id objc.ID) *NowPlayingInfoCenter {
 	if id == 0 {
 		return nil
 	}
-	return &NowPlayingInfoCenter{inner: raw.MPNowPlayingInfoCenterFromID(id)}
+	x := &NowPlayingInfoCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNowPlayingInfoCenter creates a new [NowPlayingInfoCenter].
+// nowPlayingInfoCenterAdopt wraps an Objective-C object that this code just created as a
+// NowPlayingInfoCenter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nowPlayingInfoCenterAdopt(id objc.ID) *NowPlayingInfoCenter {
+	if id == 0 {
+		return nil
+	}
+	x := &NowPlayingInfoCenter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NowPlayingInfoCenter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NowPlayingInfoCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NowPlayingInfoCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NowPlayingInfoCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNowPlayingInfoCenter creates a new NowPlayingInfoCenter.
 func NewNowPlayingInfoCenter() *NowPlayingInfoCenter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPNowPlayingInfoCenter")), objc.RegisterName("new"))
-	return &NowPlayingInfoCenter{inner: raw.MPNowPlayingInfoCenterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoCenter")), objc.RegisterName("new"))
+	return nowPlayingInfoCenterAdopt(_id)
 }
 
-// The current Now Playing information for the default Now Playing info center.
-//
-// WithNowPlayingInfo sets the nowPlayingInfo property and returns the receiver for chaining.
-func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NowPlayingInfoCenter {
-	x.inner.SetNowPlayingInfo(nowPlayingInfo)
+// WithNowPlayingInfo the current Now Playing information for the default Now Playing info center.
+func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
 	return x
 }
 
-// The current playback state of the app.
-//
-// WithPlaybackState sets the playbackState property and returns the receiver for chaining.
-func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState MPNowPlayingPlaybackState) *NowPlayingInfoCenter {
-	x.inner.SetPlaybackState(raw.MPNowPlayingPlaybackState(playbackState))
+// WithPlaybackState the current playback state of the app.
+func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState NowPlayingPlaybackState) *NowPlayingInfoCenter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackState:"), playbackState)
 	return x
 }
 
-// The current now playing info for the center. Setting the info to nil will clear it.
-//
-// NowPlayingInfo calls the underlying NowPlayingInfo.
-func (x *NowPlayingInfoCenter) NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.NowPlayingInfo()
+// NowPlayingInfo the current now playing info for the center. Setting the info to nil will clear it.
+func (x *NowPlayingInfoCenter) NowPlayingInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nowPlayingInfo"))
+	return obj.Wrap(_r)
 }
 
-// SetNowPlayingInfo calls the underlying SetNowPlayingInfo.
-func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetNowPlayingInfo(nowPlayingInfo)
+// SetNowPlayingInfo wraps the corresponding Objective-C method.
+func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
 }
 
-// The current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
-//
-// PlaybackState calls the underlying PlaybackState.
-func (x *NowPlayingInfoCenter) PlaybackState() MPNowPlayingPlaybackState {
-	return MPNowPlayingPlaybackState(x.inner.PlaybackState())
+// PlaybackState the current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
+func (x *NowPlayingInfoCenter) PlaybackState() NowPlayingPlaybackState {
+	_r := objc.Send[NowPlayingPlaybackState](objref.IDOf(x), objc.RegisterName("playbackState"))
+	return _r
 }
 
-// SetPlaybackState calls the underlying SetPlaybackState.
-func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState MPNowPlayingPlaybackState) {
-	x.inner.SetPlaybackState(raw.MPNowPlayingPlaybackState(playbackState))
+// SetPlaybackState wraps the corresponding Objective-C method.
+func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState NowPlayingPlaybackState) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackState:"), playbackState)
 }
 
 // NowPlayingInfoCenterable is the interface implemented by [NowPlayingInfoCenter], for mocking and DI.
 type NowPlayingInfoCenterable interface {
-	Unwrap() *raw.MPNowPlayingInfoCenter
-	WithNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NowPlayingInfoCenter
-	WithPlaybackState(playbackState MPNowPlayingPlaybackState) *NowPlayingInfoCenter
-	NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	PlaybackState() MPNowPlayingPlaybackState
-	SetPlaybackState(playbackState MPNowPlayingPlaybackState)
+	obj.Object
+	WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter
+	WithPlaybackState(playbackState NowPlayingPlaybackState) *NowPlayingInfoCenter
+	NowPlayingInfo() obj.Object
+	SetNowPlayingInfo(nowPlayingInfo obj.Object)
+	PlaybackState() NowPlayingPlaybackState
+	SetPlaybackState(playbackState NowPlayingPlaybackState)
 }
 
 var _ NowPlayingInfoCenterable = (*NowPlayingInfoCenter)(nil)

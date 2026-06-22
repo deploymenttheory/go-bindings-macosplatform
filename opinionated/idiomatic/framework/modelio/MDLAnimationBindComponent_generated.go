@@ -5,136 +5,117 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnimationBindComponent wraps [raw.MDLAnimationBindComponent] with a fluent Go API.
+// AnimationBindComponent is an idiomatic wrapper over the Objective-C class MDLAnimationBindComponent.
 type AnimationBindComponent struct {
-	inner *raw.MDLAnimationBindComponent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimationBindComponent].
-func (x *AnimationBindComponent) Unwrap() *raw.MDLAnimationBindComponent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimationBindComponent) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimationBindComponentFromID adopts an existing object pointer as a AnimationBindComponent (nil for 0).
+// AnimationBindComponentFromID adopts an existing Objective-C object as a AnimationBindComponent
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimationBindComponentFromID(id objc.ID) *AnimationBindComponent {
 	if id == 0 {
 		return nil
 	}
-	return &AnimationBindComponent{inner: raw.MDLAnimationBindComponentFromID(id)}
-}
-
-// NewAnimationBindComponent creates a new [AnimationBindComponent].
-func NewAnimationBindComponent() *AnimationBindComponent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimationBindComponent")), objc.RegisterName("new"))
-	return &AnimationBindComponent{inner: raw.MDLAnimationBindComponentFromID(_id)}
-}
-
-// WithSkeleton sets the skeleton property and returns the receiver for chaining.
-func (x *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
-	x.inner.SetSkeleton(skeleton.Unwrap())
+	x := &AnimationBindComponent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithJointAnimation sets the jointAnimation property and returns the receiver for chaining.
-func (x *AnimationBindComponent) WithJointAnimation(jointAnimation raw.MDLJointAnimation) *AnimationBindComponent {
-	x.inner.SetJointAnimation(jointAnimation)
-	return x
-}
-
-// WithJointPaths sets the collection, converting the Go slice to an NSArray.
-func (x *AnimationBindComponent) WithJointPaths(items ...*foundation.NSString) *AnimationBindComponent {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetJointPaths(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetJointPaths(_arr)
-	return x
-}
-
-// Skeleton calls the underlying Skeleton.
-func (x *AnimationBindComponent) Skeleton() *Skeleton {
-	_r := x.inner.Skeleton()
-	if _r == nil {
+// animationBindComponentAdopt wraps an Objective-C object that this code just created as a
+// AnimationBindComponent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animationBindComponentAdopt(id objc.ID) *AnimationBindComponent {
+	if id == 0 {
 		return nil
 	}
-	return &Skeleton{inner: _r}
+	x := &AnimationBindComponent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSkeleton calls the underlying SetSkeleton.
-func (x *AnimationBindComponent) SetSkeleton(skeleton *raw.MDLSkeleton) {
-	x.inner.SetSkeleton(skeleton)
+// Description returns the object's -description text.
+func (x *AnimationBindComponent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// JointAnimation calls the underlying JointAnimation.
-func (x *AnimationBindComponent) JointAnimation() raw.MDLJointAnimation {
-	return x.inner.JointAnimation()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimationBindComponent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetJointAnimation calls the underlying SetJointAnimation.
-func (x *AnimationBindComponent) SetJointAnimation(jointAnimation raw.MDLJointAnimation) {
-	x.inner.SetJointAnimation(jointAnimation)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimationBindComponent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AnimationBindComponent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAnimationBindComponent creates a new AnimationBindComponent.
+func NewAnimationBindComponent() *AnimationBindComponent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimationBindComponent")), objc.RegisterName("new"))
+	return animationBindComponentAdopt(_id)
+}
+
+// WithSkeleton sets the property and returns the receiver so calls can be chained.
+func (x *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
+	return x
+}
+
+// WithJointPaths sets the property and returns the receiver so calls can be chained.
+func (x *AnimationBindComponent) WithJointPaths(items ...obj.Object) *AnimationBindComponent {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJointPaths:"), _arr)
+	return x
+}
+
+// Skeleton wraps the corresponding Objective-C method.
+func (x *AnimationBindComponent) Skeleton() *Skeleton {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skeleton"))
+	return SkeletonFromID(_r)
+}
+
+// SetSkeleton wraps the corresponding Objective-C method.
+func (x *AnimationBindComponent) SetSkeleton(skeleton *Skeleton) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
+}
+
+// JointPaths wraps the corresponding Objective-C method.
+//
 // JointPaths returns the collection as a Go slice.
 func (x *AnimationBindComponent) JointPaths() []string {
-	arr := x.inner.JointPaths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetJointPaths calls the underlying SetJointPaths.
-func (x *AnimationBindComponent) SetJointPaths(jointPaths *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetJointPaths(jointPaths)
-}
-
-// GeometryBindTransform calls the underlying GeometryBindTransform.
-func (x *AnimationBindComponent) GeometryBindTransform() unsafe.Pointer {
-	return x.inner.GeometryBindTransform()
-}
-
-// SetGeometryBindTransform calls the underlying SetGeometryBindTransform.
-func (x *AnimationBindComponent) SetGeometryBindTransform(geometryBindTransform unsafe.Pointer) {
-	x.inner.SetGeometryBindTransform(geometryBindTransform)
+// SetJointPaths wraps the corresponding Objective-C method.
+func (x *AnimationBindComponent) SetJointPaths(jointPaths []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJointPaths:"), purego.SliceToNSArray(jointPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // AnimationBindComponentable is the interface implemented by [AnimationBindComponent], for mocking and DI.
 type AnimationBindComponentable interface {
-	Unwrap() *raw.MDLAnimationBindComponent
+	obj.Object
 	WithSkeleton(skeleton *Skeleton) *AnimationBindComponent
-	WithJointAnimation(jointAnimation raw.MDLJointAnimation) *AnimationBindComponent
-	WithJointPaths(items ...*foundation.NSString) *AnimationBindComponent
+	WithJointPaths(items ...obj.Object) *AnimationBindComponent
 	Skeleton() *Skeleton
-	SetSkeleton(skeleton *raw.MDLSkeleton)
-	JointAnimation() raw.MDLJointAnimation
-	SetJointAnimation(jointAnimation raw.MDLJointAnimation)
+	SetSkeleton(skeleton *Skeleton)
 	JointPaths() []string
-	SetJointPaths(jointPaths *foundation.NSArray[*foundation.NSString])
-	GeometryBindTransform() unsafe.Pointer
-	SetGeometryBindTransform(geometryBindTransform unsafe.Pointer)
+	SetJointPaths(jointPaths []string)
 }
 
 var _ AnimationBindComponentable = (*AnimationBindComponent)(nil)

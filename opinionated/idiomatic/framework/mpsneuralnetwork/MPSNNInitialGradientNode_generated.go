@@ -5,67 +5,66 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class         MPSNNInitialGradientNode @abstract      A node for a MPSNNInitialGradient kernel @discussion    This node can be used to generate a starting point for an arbitrary gradient computation. Simply add this node after the node for which you want to compute gradients and then call the function @ref trainingGraphWithSourceGradient: of this node to automatically generate the nodes needed for gradient computations or add the desired nodes manually. This is generally used with MPSNNLossGradientNode and MPSNNForwardLossNode
+// NNInitialGradientNode is an idiomatic wrapper over the Objective-C class MPSNNInitialGradientNode.
 //
-// NNInitialGradientNode wraps [raw.MPSNNInitialGradientNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// A node for a MPSNNInitialGradient kernel This node can be used to generate a starting point for an arbitrary gradient computation. Simply add this node after the node for which you want to compute gradients and then call the function
 type NNInitialGradientNode struct {
-	inner *raw.MPSNNInitialGradientNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNInitialGradientNode].
-func (x *NNInitialGradientNode) Unwrap() *raw.MPSNNInitialGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNInitialGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNInitialGradientNodeFromID adopts an existing object pointer as a NNInitialGradientNode (nil for 0).
+// NNInitialGradientNodeFromID adopts an existing Objective-C object as a NNInitialGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNInitialGradientNodeFromID(id objc.ID) *NNInitialGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNInitialGradientNode{inner: raw.MPSNNInitialGradientNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSNNInitialGradient MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for a MPSNNInitialGradient kernel.
-//
-// NewNNInitialGradientNodeWithSource creates a new [NNInitialGradientNode].
-func NewNNInitialGradientNodeWithSource(source *raw.MPSNNImageNode) *NNInitialGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNInitialGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), source.Ptr())
-	return &NNInitialGradientNode{inner: raw.MPSNNInitialGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNInitialGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNInitialGradientNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &NNInitialGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// nNInitialGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// NNInitialGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNInitialGradientNodeAdopt(id objc.ID) *NNInitialGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNInitialGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNInitialGradientNodeWithSource init a node representing a MPSNNInitialGradient MPSNNPad kernel
+func NewNNInitialGradientNodeWithSource(source *NNImageNode) *NNInitialGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNInitialGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
+	return nNInitialGradientNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNInitialGradientNode) WithLabel(label string) *NNInitialGradientNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NNInitialGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
 }
 
 // NNInitialGradientNodeable is the interface implemented by [NNInitialGradientNode], for mocking and DI.
 type NNInitialGradientNodeable interface {
-	Unwrap() *raw.MPSNNInitialGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNInitialGradientNode
+	obj.Object
 	WithLabel(label string) *NNInitialGradientNode
 }
 
 var _ NNInitialGradientNodeable = (*NNInitialGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNInitialGradientNode)(nil)

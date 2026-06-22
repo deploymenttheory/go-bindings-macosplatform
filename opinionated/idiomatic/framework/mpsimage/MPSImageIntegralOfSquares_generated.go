@@ -5,72 +5,72 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageIntegralOfSquares wraps [raw.MPSImageIntegralOfSquares] with a fluent Go API.
+// ImageIntegralOfSquares is an idiomatic wrapper over the Objective-C class MPSImageIntegralOfSquares.
+//
+// It embeds [UnaryImageKernel], promoting that type's methods.
 type ImageIntegralOfSquares struct {
-	inner *raw.MPSImageIntegralOfSquares
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageIntegralOfSquares].
-func (x *ImageIntegralOfSquares) Unwrap() *raw.MPSImageIntegralOfSquares { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageIntegralOfSquares) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageIntegralOfSquaresFromID adopts an existing object pointer as a ImageIntegralOfSquares (nil for 0).
+// ImageIntegralOfSquaresFromID adopts an existing Objective-C object as a ImageIntegralOfSquares
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageIntegralOfSquaresFromID(id objc.ID) *ImageIntegralOfSquares {
 	if id == 0 {
 		return nil
 	}
-	return &ImageIntegralOfSquares{inner: raw.MPSImageIntegralOfSquaresFromID(id)}
+	x := &ImageIntegralOfSquares{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageIntegralOfSquares creates a new [ImageIntegralOfSquares].
+// imageIntegralOfSquaresAdopt wraps an Objective-C object that this code just created as a
+// ImageIntegralOfSquares (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageIntegralOfSquaresAdopt(id objc.ID) *ImageIntegralOfSquares {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageIntegralOfSquares{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageIntegralOfSquares creates a new ImageIntegralOfSquares.
 func NewImageIntegralOfSquares() *ImageIntegralOfSquares {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageIntegralOfSquares")), objc.RegisterName("new"))
-	return &ImageIntegralOfSquares{inner: raw.MPSImageIntegralOfSquaresFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageIntegralOfSquares")), objc.RegisterName("new"))
+	return imageIntegralOfSquaresAdopt(_id)
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (x *ImageIntegralOfSquares) WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (x *ImageIntegralOfSquares) WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageIntegralOfSquares) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-func (x *ImageIntegralOfSquares) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
 }
 
 // ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
 type ImageIntegralOfSquaresable interface {
-	Unwrap() *raw.MPSImageIntegralOfSquares
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares
 	WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegralOfSquares
 }
 
 var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageIntegralOfSquares)(nil)

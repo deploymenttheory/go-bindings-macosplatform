@@ -5,76 +5,106 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides metrics related to video playback quality.
+// VideoPerformanceMetrics is an idiomatic wrapper over the Objective-C class AVVideoPerformanceMetrics.
 //
-// VideoPerformanceMetrics wraps [raw.AVVideoPerformanceMetrics] with a fluent Go API.
+// An object that provides metrics related to video playback quality.
 type VideoPerformanceMetrics struct {
-	inner *raw.AVVideoPerformanceMetrics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVVideoPerformanceMetrics].
-func (x *VideoPerformanceMetrics) Unwrap() *raw.AVVideoPerformanceMetrics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoPerformanceMetrics) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoPerformanceMetricsFromID adopts an existing object pointer as a VideoPerformanceMetrics (nil for 0).
+// VideoPerformanceMetricsFromID adopts an existing Objective-C object as a VideoPerformanceMetrics
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoPerformanceMetricsFromID(id objc.ID) *VideoPerformanceMetrics {
 	if id == 0 {
 		return nil
 	}
-	return &VideoPerformanceMetrics{inner: raw.AVVideoPerformanceMetricsFromID(id)}
+	x := &VideoPerformanceMetrics{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVideoPerformanceMetrics creates a new [VideoPerformanceMetrics].
+// videoPerformanceMetricsAdopt wraps an Objective-C object that this code just created as a
+// VideoPerformanceMetrics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoPerformanceMetricsAdopt(id objc.ID) *VideoPerformanceMetrics {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoPerformanceMetrics{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VideoPerformanceMetrics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoPerformanceMetrics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoPerformanceMetrics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoPerformanceMetrics) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVideoPerformanceMetrics creates a new VideoPerformanceMetrics.
 func NewVideoPerformanceMetrics() *VideoPerformanceMetrics {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVVideoPerformanceMetrics")), objc.RegisterName("new"))
-	return &VideoPerformanceMetrics{inner: raw.AVVideoPerformanceMetricsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoPerformanceMetrics")), objc.RegisterName("new"))
+	return videoPerformanceMetricsAdopt(_id)
 }
 
-// @property		totalNumberOfFrames @abstract		[SPI] The total number of frames that would have been displayed if no frames are dropped.
-//
-// TotalNumberOfFrames calls the underlying TotalNumberOfFrames.
+// TotalNumberOfFrames [SPI] The total number of frames that would have been displayed if no frames are dropped.
 func (x *VideoPerformanceMetrics) TotalNumberOfFrames() int {
-	return x.inner.TotalNumberOfFrames()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalNumberOfFrames"))
+	return _r
 }
 
-// @property		numberOfDroppedFrames @abstract		[SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
-//
-// NumberOfDroppedFrames calls the underlying NumberOfDroppedFrames.
+// NumberOfDroppedFrames [SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
 func (x *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
-	return x.inner.NumberOfDroppedFrames()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDroppedFrames"))
+	return _r
 }
 
-// @property		numberOfCorruptedFrames @abstract		[SPI] The total number of corrupted frames that have been detected.
-//
-// NumberOfCorruptedFrames calls the underlying NumberOfCorruptedFrames.
+// NumberOfCorruptedFrames [SPI] The total number of corrupted frames that have been detected.
 func (x *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
-	return x.inner.NumberOfCorruptedFrames()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCorruptedFrames"))
+	return _r
 }
 
-// @property		numberOfFramesDisplayedUsingOptimizedCompositing @abstract		[SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
-//
-// NumberOfFramesDisplayedUsingOptimizedCompositing calls the underlying NumberOfFramesDisplayedUsingOptimizedCompositing.
+// NumberOfFramesDisplayedUsingOptimizedCompositing [SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
 func (x *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
-	return x.inner.NumberOfFramesDisplayedUsingOptimizedCompositing()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfFramesDisplayedUsingOptimizedCompositing"))
+	return _r
 }
 
-// @property		totalAccumulatedFrameDelay @abstract		[SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. @discussion	This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
-//
-// TotalAccumulatedFrameDelay calls the underlying TotalAccumulatedFrameDelay.
+// TotalAccumulatedFrameDelay [SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
 func (x *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
-	return x.inner.TotalAccumulatedFrameDelay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("totalAccumulatedFrameDelay"))
+	return _r
 }
 
 // VideoPerformanceMetricsable is the interface implemented by [VideoPerformanceMetrics], for mocking and DI.
 type VideoPerformanceMetricsable interface {
-	Unwrap() *raw.AVVideoPerformanceMetrics
+	obj.Object
 	TotalNumberOfFrames() int
 	NumberOfDroppedFrames() int
 	NumberOfCorruptedFrames() int

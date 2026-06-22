@@ -5,98 +5,106 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract class that implements the NSEditor and NSEditorRegistration informal protocols required for controller classes.
+// Controller is an idiomatic wrapper over the Objective-C class NSController.
 //
-// Controller wraps [raw.NSController] with a fluent Go API.
+// Controller is an abstract base — you do not construct it directly. Construct one of [ObjectController], [UserDefaultsController] and pass it where a Controller is accepted.
+//
+// An abstract class that implements the NSEditor and NSEditorRegistration informal protocols required for controller classes.
 type Controller struct {
-	inner *raw.NSController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSController].
-func (x *Controller) Unwrap() *raw.NSController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Controller) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerFromID adopts an existing object pointer as a Controller (nil for 0).
+// ControllerFromID adopts an existing Objective-C object as a Controller
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerFromID(id objc.ID) *Controller {
 	if id == 0 {
 		return nil
 	}
-	return &Controller{inner: raw.NSControllerFromID(id)}
+	x := &Controller{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewController creates a new [Controller].
-func NewController() *Controller {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSController")), objc.RegisterName("new"))
-	return &Controller{inner: raw.NSControllerFromID(_id)}
+// controllerAdopt wraps an Objective-C object that this code just created as a
+// Controller (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerAdopt(id objc.ID) *Controller {
+	if id == 0 {
+		return nil
+	}
+	x := &Controller{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewControllerWithCoder creates a new [Controller].
-func NewControllerWithCoder(coder *foundation.NSCoder) *Controller {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Controller{inner: raw.NSControllerFromID(_id)}
+// Description returns the object's -description text.
+func (x *Controller) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Invoked to inform the receiver that editor has uncommitted changes that can affect the receiver.
-//
-// ObjectDidBeginEditing calls the underlying ObjectDidBeginEditing.
-func (x *Controller) ObjectDidBeginEditing(editor raw.NSEditor) {
-	x.inner.ObjectDidBeginEditing(editor)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Controller) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Invoked to inform the receiver that editor has committed or discarded its changes.
-//
-// ObjectDidEndEditing calls the underlying ObjectDidEndEditing.
-func (x *Controller) ObjectDidEndEditing(editor raw.NSEditor) {
-	x.inner.ObjectDidEndEditing(editor)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Controller) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Discards any pending changes by registered editors.
-//
-// DiscardEditing calls the underlying DiscardEditing.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Controller) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewControllerWithCoder creates a new Controller.
+func NewControllerWithCoder(coder obj.Object) *Controller {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return controllerAdopt(_id)
+}
+
+// DiscardEditing discards any pending changes by registered editors.
 func (x *Controller) DiscardEditing() {
-	x.inner.DiscardEditing()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEditing"))
 }
 
-// Attempts to commit any pending edits.
-//
-// CommitEditing calls the underlying CommitEditing.
+// CommitEditing attempts to commit any pending edits.
 func (x *Controller) CommitEditing() bool {
-	return x.inner.CommitEditing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commitEditing"))
+	return _r
 }
 
-// Attempts to commit any pending changes in known editors of the receiver.
-//
-// CommitEditingWithDelegateDidCommitSelectorContextInfo calls the underlying CommitEditingWithDelegateDidCommitSelectorContextInfo.
-func (x *Controller) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate, didCommitSelector, contextInfo)
-}
-
-// IsEditing calls the underlying IsEditing.
+// IsEditing wraps the corresponding Objective-C method.
 func (x *Controller) IsEditing() bool {
-	return x.inner.IsEditing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditing"))
+	return _r
 }
-
-func (x *Controller) asController() *raw.NSController { return x.inner }
 
 // Controllerable is the interface implemented by [Controller], for mocking and DI.
 type Controllerable interface {
-	Unwrap() *raw.NSController
-	ObjectDidBeginEditing(editor raw.NSEditor)
-	ObjectDidEndEditing(editor raw.NSEditor)
+	obj.Object
 	DiscardEditing()
 	CommitEditing() bool
-	CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer)
 	IsEditing() bool
 }
 
 var _ Controllerable = (*Controller)(nil)
+
+// isController marks Controller — and, by embedding promotion, its
+// subclasses — as a member of the Controller hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Controller) isController() {}
+
+var _ ControllerProvider = (*Controller)(nil)

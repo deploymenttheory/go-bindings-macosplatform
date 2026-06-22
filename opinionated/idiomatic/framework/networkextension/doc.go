@@ -3,4 +3,27 @@
 //go:build darwin
 
 // Package networkextension provides a fluent Go API over the macOS NetworkExtension framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - NEAppProxyFlow: [NEAppProxyTCPFlow], [NEAppProxyUDPFlow]
+//   - NEAppProxyProvider: [NETransparentProxyProvider]
+//   - NEDNSSettings: [NEDNSOverHTTPSSettings], [NEDNSOverTLSSettings]
+//   - NEFilterFlow: [NEFilterSocketFlow]
+//   - NEFilterProvider: [NEFilterDataProvider], [NEFilterPacketProvider]
+//   - NEFilterVerdict: [NEFilterDataVerdict], [NEFilterNewFlowVerdict]
+//   - NEOnDemandRule: [NEOnDemandRuleConnect], [NEOnDemandRuleDisconnect], [NEOnDemandRuleEvaluateConnection], [NEOnDemandRuleIgnore]
+//   - NEPacketTunnelNetworkSettings: [NEEthernetTunnelNetworkSettings]
+//   - NEPacketTunnelProvider: [NEEthernetTunnelProvider]
+//   - NEProvider: [NEDNSProxyProvider], [NEFilterProvider], [NETunnelProvider]
+//   - NETunnelNetworkSettings: [NEPacketTunnelNetworkSettings], [NETransparentProxyNetworkSettings]
+//   - NETunnelProvider: [NEAppProxyProvider], [NEPacketTunnelProvider]
+//   - NETunnelProviderManager: [NEAppProxyProviderManager]
+//   - NEVPNConnection: [NETunnelProviderSession]
+//   - NEVPNManager: [NETransparentProxyManager], [NETunnelProviderManager]
+//   - NEVPNProtocol: [NEDNSProxyProviderProtocol], [NETunnelProviderProtocol], [NEVPNProtocolIPSec]
+//   - NEVPNProtocolIPSec: [NEVPNProtocolIKEv2]
 package networkextension

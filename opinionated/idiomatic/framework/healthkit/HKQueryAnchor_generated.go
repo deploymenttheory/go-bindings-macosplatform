@@ -5,41 +5,76 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to identify all the samples previously returned by an anchored object query.
+// QueryAnchor is an idiomatic wrapper over the Objective-C class HKQueryAnchor.
 //
-// QueryAnchor wraps [raw.HKQueryAnchor] with a fluent Go API.
+// An object used to identify all the samples previously returned by an anchored object query.
 type QueryAnchor struct {
-	inner *raw.HKQueryAnchor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQueryAnchor].
-func (x *QueryAnchor) Unwrap() *raw.HKQueryAnchor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QueryAnchor) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryAnchorFromID adopts an existing object pointer as a QueryAnchor (nil for 0).
+// QueryAnchorFromID adopts an existing Objective-C object as a QueryAnchor
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryAnchorFromID(id objc.ID) *QueryAnchor {
 	if id == 0 {
 		return nil
 	}
-	return &QueryAnchor{inner: raw.HKQueryAnchorFromID(id)}
+	x := &QueryAnchor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewQueryAnchor creates a new [QueryAnchor].
+// queryAnchorAdopt wraps an Objective-C object that this code just created as a
+// QueryAnchor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryAnchorAdopt(id objc.ID) *QueryAnchor {
+	if id == 0 {
+		return nil
+	}
+	x := &QueryAnchor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QueryAnchor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QueryAnchor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QueryAnchor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QueryAnchor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQueryAnchor creates a new QueryAnchor.
 func NewQueryAnchor() *QueryAnchor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQueryAnchor")), objc.RegisterName("new"))
-	return &QueryAnchor{inner: raw.HKQueryAnchorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKQueryAnchor")), objc.RegisterName("new"))
+	return queryAnchorAdopt(_id)
 }
 
 // QueryAnchorable is the interface implemented by [QueryAnchor], for mocking and DI.
 type QueryAnchorable interface {
-	Unwrap() *raw.HKQueryAnchor
+	obj.Object
 }
 
 var _ QueryAnchorable = (*QueryAnchor)(nil)

@@ -6,273 +6,235 @@ package passkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Provides an interface to the user’s library of passes.
+// PassLibrary is an idiomatic wrapper over the Objective-C class PKPassLibrary.
 //
-// PassLibrary wraps [raw.PKPassLibrary] with a fluent Go API.
+// Provides an interface to the user’s library of passes.
 type PassLibrary struct {
-	inner *raw.PKPassLibrary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPassLibrary].
-func (x *PassLibrary) Unwrap() *raw.PKPassLibrary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PassLibrary) ID() objc.ID { return x.inner.Ptr() }
-
-// PassLibraryFromID adopts an existing object pointer as a PassLibrary (nil for 0).
+// PassLibraryFromID adopts an existing Objective-C object as a PassLibrary
+// (nil for 0), retaining it and registering a release finalizer.
 func PassLibraryFromID(id objc.ID) *PassLibrary {
 	if id == 0 {
 		return nil
 	}
-	return &PassLibrary{inner: raw.PKPassLibraryFromID(id)}
+	x := &PassLibrary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPassLibrary creates a new [PassLibrary].
+// passLibraryAdopt wraps an Objective-C object that this code just created as a
+// PassLibrary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passLibraryAdopt(id objc.ID) *PassLibrary {
+	if id == 0 {
+		return nil
+	}
+	x := &PassLibrary{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PassLibrary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PassLibrary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PassLibrary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PassLibrary) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPassLibrary creates a new PassLibrary.
 func NewPassLibrary() *PassLibrary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPassLibrary")), objc.RegisterName("new"))
-	return &PassLibrary{inner: raw.PKPassLibraryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPassLibrary")), objc.RegisterName("new"))
+	return passLibraryAdopt(_id)
 }
 
-// IsPaymentPassActivationAvailable calls the underlying IsPaymentPassActivationAvailable.
+// IsPaymentPassActivationAvailable wraps the corresponding Objective-C method.
 func (x *PassLibrary) IsPaymentPassActivationAvailable() bool {
-	return x.inner.IsPaymentPassActivationAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaymentPassActivationAvailable"))
+	return _r
 }
 
-// Returns the passes in the user’s pass library that the app can access.
+// Passes returns the passes in the user’s pass library that the app can access.
 //
 // Passes returns the collection as a Go slice.
 func (x *PassLibrary) Passes() []*Pass {
-	arr := x.inner.Passes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Pass {
-		return &Pass{inner: raw.PKPassFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Pass { return PassFromID(_id) })
 }
 
-// Returns the pass with the specified pass type identifier and serial number.
-//
-// PassWithPassTypeIdentifierSerialNumber calls the underlying PassWithPassTypeIdentifierSerialNumber.
+// PassWithPassTypeIdentifierSerialNumber returns the pass with the specified pass type identifier and serial number.
 func (x *PassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass {
-	_r := x.inner.PassWithPassTypeIdentifierSerialNumber(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(serialNumber))
-	if _r == nil {
-		return nil
-	}
-	return &Pass{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passWithPassTypeIdentifier:serialNumber:"), purego.NSString(identifier), purego.NSString(serialNumber))
+	return PassFromID(_r)
 }
 
-// PassesWithReaderIdentifier calls the underlying PassesWithReaderIdentifier.
-func (x *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) *foundation.NSSet[*raw.PKSecureElementPass] {
-	return x.inner.PassesWithReaderIdentifier(foundation.NSStringStringWithUTF8String(readerIdentifier))
+// PassesWithReaderIdentifier wraps the corresponding Objective-C method.
+func (x *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passesWithReaderIdentifier:"), purego.NSString(readerIdentifier))
+	return obj.Wrap(_r)
 }
 
-// Returns the passes of the specified pass type.
+// PassesOfType returns the passes of the specified pass type.
+func (x *PassLibrary) PassesOfType(passType PassType) []*Pass {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passesOfType:"), passType)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Pass { return PassFromID(_id) })
+}
+
+// RemotePaymentPasses wraps the corresponding Objective-C method.
 //
-// PassesOfType calls the underlying PassesOfType.
-func (x *PassLibrary) PassesOfType(passType PKPassType) *foundation.NSArray[*raw.PKPass] {
-	return x.inner.PassesOfType(raw.PKPassType(passType))
-}
-
 // RemotePaymentPasses returns the collection as a Go slice.
 func (x *PassLibrary) RemotePaymentPasses() []*PaymentPass {
-	arr := x.inner.RemotePaymentPasses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentPass {
-		return &PaymentPass{inner: raw.PKPaymentPassFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remotePaymentPasses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentPass { return PaymentPassFromID(_id) })
 }
 
-// Removes the pass from the user’s pass library.
-//
-// RemovePass calls the underlying RemovePass.
-func (x *PassLibrary) RemovePass(pass *raw.PKPass) {
-	x.inner.RemovePass(pass)
+// RemovePass removes the pass from the user’s pass library.
+func (x *PassLibrary) RemovePass(pass *Pass) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePass:"), objref.IDOf(pass))
 }
 
-// Returns a Boolean value that indicates whether the user’s pass library contains the specified pass.
-//
-// ContainsPass calls the underlying ContainsPass.
-func (x *PassLibrary) ContainsPass(pass *raw.PKPass) bool {
-	return x.inner.ContainsPass(pass)
+// ContainsPass returns a Boolean value that indicates whether the user’s pass library contains the specified pass.
+func (x *PassLibrary) ContainsPass(pass *Pass) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPass:"), objref.IDOf(pass))
+	return _r
 }
 
-// Replaces a pass in the user’s pass library with the specified pass.
-//
-// ReplacePassWithPass calls the underlying ReplacePassWithPass.
-func (x *PassLibrary) ReplacePassWithPass(pass *raw.PKPass) bool {
-	return x.inner.ReplacePassWithPass(pass)
+// ReplacePassWithPass replaces a pass in the user’s pass library with the specified pass.
+func (x *PassLibrary) ReplacePassWithPass(pass *Pass) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replacePassWithPass:"), objref.IDOf(pass))
+	return _r
 }
 
-// Presents a user interface for adding multiple passes at once.
-//
-// AddPassesWithCompletionHandler calls the underlying AddPassesWithCompletionHandler.
-func (x *PassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(PKPassLibraryAddPassesStatus)) {
-	x.inner.AddPassesWithCompletionHandler(passes, func(_a0 raw.PKPassLibraryAddPassesStatus) { completion(PKPassLibraryAddPassesStatus(_a0)) })
-}
-
-// Opens the user interface to set up credit cards for Apple Pay.
-//
-// OpenPaymentSetup calls the underlying OpenPaymentSetup.
+// OpenPaymentSetup opens the user interface to set up credit cards for Apple Pay.
 func (x *PassLibrary) OpenPaymentSetup() {
-	x.inner.OpenPaymentSetup()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openPaymentSetup"))
 }
 
-// OpenPaymentSetupWithMerchantIdentifier calls the underlying OpenPaymentSetupWithMerchantIdentifier.
+// OpenPaymentSetupWithMerchantIdentifier wraps the corresponding Objective-C method.
 func (x *PassLibrary) OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string) {
-	x.inner.OpenPaymentSetupWithMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openPaymentSetupWithMerchantIdentifier:"), purego.NSString(merchantIdentifier))
 }
 
-// PresentPaymentPass calls the underlying PresentPaymentPass.
-func (x *PassLibrary) PresentPaymentPass(pass *raw.PKPaymentPass) {
-	x.inner.PresentPaymentPass(pass)
+// PresentPaymentPass wraps the corresponding Objective-C method.
+func (x *PassLibrary) PresentPaymentPass(pass *PaymentPass) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentPaymentPass:"), objref.IDOf(pass))
 }
 
-// Presents a Secure Element pass.
-//
-// PresentSecureElementPass calls the underlying PresentSecureElementPass.
-func (x *PassLibrary) PresentSecureElementPass(pass *raw.PKSecureElementPass) {
-	x.inner.PresentSecureElementPass(pass)
+// PresentSecureElementPass presents a Secure Element pass.
+func (x *PassLibrary) PresentSecureElementPass(pass *SecureElementPass) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentSecureElementPass:"), objref.IDOf(pass))
 }
 
-// CanAddPaymentPassWithPrimaryAccountIdentifier calls the underlying CanAddPaymentPassWithPrimaryAccountIdentifier.
+// CanAddPaymentPassWithPrimaryAccountIdentifier wraps the corresponding Objective-C method.
 func (x *PassLibrary) CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
-	return x.inner.CanAddPaymentPassWithPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddPaymentPassWithPrimaryAccountIdentifier:"), purego.NSString(primaryAccountIdentifier))
+	return _r
 }
 
-// Returns a Boolean value that indicates whether PassKit can add a Secure Element pass for the specified account.
-//
-// CanAddSecureElementPassWithPrimaryAccountIdentifier calls the underlying CanAddSecureElementPassWithPrimaryAccountIdentifier.
+// CanAddSecureElementPassWithPrimaryAccountIdentifier returns a Boolean value that indicates whether PassKit can add a Secure Element pass for the specified account.
 func (x *PassLibrary) CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
-	return x.inner.CanAddSecureElementPassWithPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddSecureElementPassWithPrimaryAccountIdentifier:"), purego.NSString(primaryAccountIdentifier))
+	return _r
 }
 
-// Returns a Boolean value that indicates whether the library can add FeliCa™ passes.
-//
-// CanAddFelicaPass calls the underlying CanAddFelicaPass.
+// CanAddFelicaPass returns a Boolean value that indicates whether the library can add FeliCa™ passes.
 func (x *PassLibrary) CanAddFelicaPass() bool {
-	return x.inner.CanAddFelicaPass()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddFelicaPass"))
+	return _r
 }
 
-// ActivatePaymentPassWithActivationDataCompletion calls the underlying ActivatePaymentPassWithActivationDataCompletion.
-func (x *PassLibrary) ActivatePaymentPassWithActivationDataCompletion(paymentPass *raw.PKPaymentPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer)) {
-	x.inner.ActivatePaymentPassWithActivationDataCompletion(paymentPass, activationData, completion)
-}
-
-// ActivatePaymentPassWithActivationCodeCompletion calls the underlying ActivatePaymentPassWithActivationCodeCompletion.
-func (x *PassLibrary) ActivatePaymentPassWithActivationCodeCompletion(paymentPass *raw.PKPaymentPass, activationCode string, completion func(bool, unsafe.Pointer)) {
-	x.inner.ActivatePaymentPassWithActivationCodeCompletion(paymentPass, foundation.NSStringStringWithUTF8String(activationCode), completion)
-}
-
-// Activates a Secure Element pass using the specified data.
-//
-// ActivateSecureElementPassWithActivationDataCompletion calls the underlying ActivateSecureElementPassWithActivationDataCompletion.
-func (x *PassLibrary) ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *raw.PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer)) {
-	x.inner.ActivateSecureElementPassWithActivationDataCompletion(secureElementPass, activationData, completion)
-}
-
-// Signs an opaque value using a cryptographic signature.
-//
-// SignDataWithSecureElementPassCompletion calls the underlying SignDataWithSecureElementPassCompletion.
-func (x *PassLibrary) SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {
-	x.inner.SignDataWithSecureElementPassCompletion(signData, secureElementPass, completion)
-}
-
-// EncryptedServiceProviderDataForSecureElementPassCompletion calls the underlying EncryptedServiceProviderDataForSecureElementPassCompletion.
-func (x *PassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer)) {
-	x.inner.EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass, completion)
-}
-
-// Calls a completion handler that returns the custom data for a Secure Element pass.
+// ServiceProviderDataForSecureElementPassCompletion calls a completion handler that returns the custom data for a Secure Element pass.
 //
 // ServiceProviderDataForSecureElementPassCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error) {
+func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *SecureElementPass) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ServiceProviderDataForSecureElementPassCompletion(secureElementPass, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceProviderDataForSecureElementPass:completion:"), objref.IDOf(secureElementPass), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// AuthorizationStatusForCapability calls the underlying AuthorizationStatusForCapability.
-func (x *PassLibrary) AuthorizationStatusForCapability(capability PKPassLibraryCapability) PKPassLibraryAuthorizationStatus {
-	return PKPassLibraryAuthorizationStatus(x.inner.AuthorizationStatusForCapability(raw.PKPassLibraryCapability(capability)))
+// AuthorizationStatusForCapability wraps the corresponding Objective-C method.
+func (x *PassLibrary) AuthorizationStatusForCapability(capability PassLibraryCapability) PassLibraryAuthorizationStatus {
+	_r := objc.Send[PassLibraryAuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatusForCapability:"), capability)
+	return _r
 }
 
-// RequestAuthorizationForCapabilityCompletion calls the underlying RequestAuthorizationForCapabilityCompletion.
-func (x *PassLibrary) RequestAuthorizationForCapabilityCompletion(capability PKPassLibraryCapability, completion func(PKPassLibraryAuthorizationStatus)) {
-	x.inner.RequestAuthorizationForCapabilityCompletion(raw.PKPassLibraryCapability(capability), func(_a0 raw.PKPassLibraryAuthorizationStatus) { completion(PKPassLibraryAuthorizationStatus(_a0)) })
-}
-
-// IsSecureElementPassActivationAvailable calls the underlying IsSecureElementPassActivationAvailable.
+// IsSecureElementPassActivationAvailable wraps the corresponding Objective-C method.
 func (x *PassLibrary) IsSecureElementPassActivationAvailable() bool {
-	return x.inner.IsSecureElementPassActivationAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSecureElementPassActivationAvailable"))
+	return _r
 }
 
+// RemoteSecureElementPasses wraps the corresponding Objective-C method.
+//
 // RemoteSecureElementPasses returns the collection as a Go slice.
 func (x *PassLibrary) RemoteSecureElementPasses() []*SecureElementPass {
-	arr := x.inner.RemoteSecureElementPasses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SecureElementPass {
-		return &SecureElementPass{inner: raw.PKSecureElementPassFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteSecureElementPasses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SecureElementPass { return SecureElementPassFromID(_id) })
 }
 
 // PassLibraryable is the interface implemented by [PassLibrary], for mocking and DI.
 type PassLibraryable interface {
-	Unwrap() *raw.PKPassLibrary
+	obj.Object
 	IsPaymentPassActivationAvailable() bool
 	Passes() []*Pass
 	PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass
-	PassesWithReaderIdentifier(readerIdentifier string) *foundation.NSSet[*raw.PKSecureElementPass]
-	PassesOfType(passType PKPassType) *foundation.NSArray[*raw.PKPass]
+	PassesWithReaderIdentifier(readerIdentifier string) obj.Object
+	PassesOfType(passType PassType) []*Pass
 	RemotePaymentPasses() []*PaymentPass
-	RemovePass(pass *raw.PKPass)
-	ContainsPass(pass *raw.PKPass) bool
-	ReplacePassWithPass(pass *raw.PKPass) bool
-	AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(PKPassLibraryAddPassesStatus))
+	RemovePass(pass *Pass)
+	ContainsPass(pass *Pass) bool
+	ReplacePassWithPass(pass *Pass) bool
 	OpenPaymentSetup()
 	OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string)
-	PresentPaymentPass(pass *raw.PKPaymentPass)
-	PresentSecureElementPass(pass *raw.PKSecureElementPass)
+	PresentPaymentPass(pass *PaymentPass)
+	PresentSecureElementPass(pass *SecureElementPass)
 	CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool
 	CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool
 	CanAddFelicaPass() bool
-	ActivatePaymentPassWithActivationDataCompletion(paymentPass *raw.PKPaymentPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer))
-	ActivatePaymentPassWithActivationCodeCompletion(paymentPass *raw.PKPaymentPass, activationCode string, completion func(bool, unsafe.Pointer))
-	ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *raw.PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer))
-	SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer))
-	EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer))
-	ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error)
-	AuthorizationStatusForCapability(capability PKPassLibraryCapability) PKPassLibraryAuthorizationStatus
-	RequestAuthorizationForCapabilityCompletion(capability PKPassLibraryCapability, completion func(PKPassLibraryAuthorizationStatus))
+	ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *SecureElementPass) (obj.Object, error)
+	AuthorizationStatusForCapability(capability PassLibraryCapability) PassLibraryAuthorizationStatus
 	IsSecureElementPassActivationAvailable() bool
 	RemoteSecureElementPasses() []*SecureElementPass
 }

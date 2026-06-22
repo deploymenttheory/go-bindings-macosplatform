@@ -5,91 +5,122 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a rental car.
+// RentalCar is an idiomatic wrapper over the Objective-C class INRentalCar.
 //
-// RentalCar wraps [raw.INRentalCar] with a fluent Go API.
+// The information that describes a rental car.
 type RentalCar struct {
-	inner *raw.INRentalCar
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INRentalCar].
-func (x *RentalCar) Unwrap() *raw.INRentalCar { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RentalCar) ID() objc.ID { return x.inner.Ptr() }
-
-// RentalCarFromID adopts an existing object pointer as a RentalCar (nil for 0).
+// RentalCarFromID adopts an existing Objective-C object as a RentalCar
+// (nil for 0), retaining it and registering a release finalizer.
 func RentalCarFromID(id objc.ID) *RentalCar {
 	if id == 0 {
 		return nil
 	}
-	return &RentalCar{inner: raw.INRentalCarFromID(id)}
+	x := &RentalCar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new rental car object with the specified contents and attributes.
-//
-// NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription creates a new [RentalCar].
+// rentalCarAdopt wraps an Objective-C object that this code just created as a
+// RentalCar (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rentalCarAdopt(id objc.ID) *RentalCar {
+	if id == 0 {
+		return nil
+	}
+	x := &RentalCar{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RentalCar) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RentalCar) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RentalCar) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RentalCar) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription creates a new rental car object with the specified contents and attributes.
 func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCompanyName string, type_ string, make_ string, model string, rentalCarDescription string) *RentalCar {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRentalCar")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRentalCompanyName:type:make:model:rentalCarDescription:"), foundation.NSStringStringWithUTF8String(rentalCompanyName).Ptr(), foundation.NSStringStringWithUTF8String(type_).Ptr(), foundation.NSStringStringWithUTF8String(make_).Ptr(), foundation.NSStringStringWithUTF8String(model).Ptr(), foundation.NSStringStringWithUTF8String(rentalCarDescription).Ptr())
-	return &RentalCar{inner: raw.INRentalCarFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INRentalCar")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRentalCompanyName:type:make:model:rentalCarDescription:"), purego.NSString(rentalCompanyName), purego.NSString(type_), purego.NSString(make_), purego.NSString(model), purego.NSString(rentalCarDescription))
+	return rentalCarAdopt(_id)
 }
 
-// RentalCompanyName calls the underlying RentalCompanyName.
+// RentalCompanyName wraps the corresponding Objective-C method.
 func (x *RentalCar) RentalCompanyName() string {
-	_r := x.inner.RentalCompanyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCompanyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type calls the underlying Type.
+// Type wraps the corresponding Objective-C method.
 func (x *RentalCar) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Make calls the underlying Make.
+// Make wraps the corresponding Objective-C method.
 func (x *RentalCar) Make() string {
-	_r := x.inner.Make()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("make"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Model calls the underlying Model.
+// Model wraps the corresponding Objective-C method.
 func (x *RentalCar) Model() string {
-	_r := x.inner.Model()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RentalCarDescription calls the underlying RentalCarDescription.
+// RentalCarDescription wraps the corresponding Objective-C method.
 func (x *RentalCar) RentalCarDescription() string {
-	_r := x.inner.RentalCarDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCarDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // RentalCarable is the interface implemented by [RentalCar], for mocking and DI.
 type RentalCarable interface {
-	Unwrap() *raw.INRentalCar
+	obj.Object
 	RentalCompanyName() string
 	Type() string
 	Make() string

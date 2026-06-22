@@ -5,39 +5,74 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ViewLayoutRegion wraps [raw.NSViewLayoutRegion] with a fluent Go API.
+// ViewLayoutRegion is an idiomatic wrapper over the Objective-C class NSViewLayoutRegion.
 type ViewLayoutRegion struct {
-	inner *raw.NSViewLayoutRegion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSViewLayoutRegion].
-func (x *ViewLayoutRegion) Unwrap() *raw.NSViewLayoutRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ViewLayoutRegion) ID() objc.ID { return x.inner.Ptr() }
-
-// ViewLayoutRegionFromID adopts an existing object pointer as a ViewLayoutRegion (nil for 0).
+// ViewLayoutRegionFromID adopts an existing Objective-C object as a ViewLayoutRegion
+// (nil for 0), retaining it and registering a release finalizer.
 func ViewLayoutRegionFromID(id objc.ID) *ViewLayoutRegion {
 	if id == 0 {
 		return nil
 	}
-	return &ViewLayoutRegion{inner: raw.NSViewLayoutRegionFromID(id)}
+	x := &ViewLayoutRegion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewViewLayoutRegion creates a new [ViewLayoutRegion].
+// viewLayoutRegionAdopt wraps an Objective-C object that this code just created as a
+// ViewLayoutRegion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func viewLayoutRegionAdopt(id objc.ID) *ViewLayoutRegion {
+	if id == 0 {
+		return nil
+	}
+	x := &ViewLayoutRegion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ViewLayoutRegion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ViewLayoutRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ViewLayoutRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ViewLayoutRegion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewViewLayoutRegion creates a new ViewLayoutRegion.
 func NewViewLayoutRegion() *ViewLayoutRegion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSViewLayoutRegion")), objc.RegisterName("new"))
-	return &ViewLayoutRegion{inner: raw.NSViewLayoutRegionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSViewLayoutRegion")), objc.RegisterName("new"))
+	return viewLayoutRegionAdopt(_id)
 }
 
 // ViewLayoutRegionable is the interface implemented by [ViewLayoutRegion], for mocking and DI.
 type ViewLayoutRegionable interface {
-	Unwrap() *raw.NSViewLayoutRegion
+	obj.Object
 }
 
 var _ ViewLayoutRegionable = (*ViewLayoutRegion)(nil)

@@ -5,118 +5,89 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// TemporalAA wraps [raw.MPSTemporalAA] with a fluent Go API.
+// TemporalAA is an idiomatic wrapper over the Objective-C class MPSTemporalAA.
+//
+// It embeds [Kernel], promoting that type's methods.
 type TemporalAA struct {
-	inner *raw.MPSTemporalAA
+	Kernel
 }
 
-// Unwrap returns the underlying [raw.MPSTemporalAA].
-func (x *TemporalAA) Unwrap() *raw.MPSTemporalAA { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TemporalAA) ID() objc.ID { return x.inner.Ptr() }
-
-// TemporalAAFromID adopts an existing object pointer as a TemporalAA (nil for 0).
+// TemporalAAFromID adopts an existing Objective-C object as a TemporalAA
+// (nil for 0), retaining it and registering a release finalizer.
 func TemporalAAFromID(id objc.ID) *TemporalAA {
 	if id == 0 {
 		return nil
 	}
-	return &TemporalAA{inner: raw.MPSTemporalAAFromID(id)}
-}
-
-// NewTemporalAAWithDevice creates a new [TemporalAA].
-func NewTemporalAAWithDevice(device metal.MTLDevice) *TemporalAA {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSTemporalAA")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &TemporalAA{inner: raw.MPSTemporalAAFromID(_id)}
-}
-
-// NewTemporalAAWithCoderDevice creates a new [TemporalAA].
-func NewTemporalAAWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *TemporalAA {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSTemporalAA")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &TemporalAA{inner: raw.MPSTemporalAAFromID(_id)}
-}
-
-// @brief How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
-//
-// WithBlendFactor sets the blendFactor property and returns the receiver for chaining.
-func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
-	x.inner.SetBlendFactor(blendFactor)
+	x := &TemporalAA{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *TemporalAA) WithOptions(options mpscore.MPSKernelOptions) *TemporalAA {
-	x.inner.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *TemporalAA) WithLabel(label string) *TemporalAA {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
-	return x
-}
-
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *TemporalAA) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *TemporalAA {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
+// temporalAAAdopt wraps an Objective-C object that this code just created as a
+// TemporalAA (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func temporalAAAdopt(id objc.ID) *TemporalAA {
+	if id == 0 {
 		return nil
 	}
-	return &TemporalAA{inner: _r}
+	x := &TemporalAA{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// EncodeWithCoder calls the underlying EncodeWithCoder.
-func (x *TemporalAA) EncodeWithCoder(coder *foundation.NSCoder) {
-	x.inner.EncodeWithCoder(coder)
+// NewTemporalAA creates a new TemporalAA.
+func NewTemporalAA() *TemporalAA {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSTemporalAA")), objc.RegisterName("new"))
+	return temporalAAAdopt(_id)
 }
 
-// @brief Encode temporal antialiasing a command buffer @discussion The motion vector texture must be at least a two channel texture representing how many texels each texel in the source image(s) have moved since the previous frame. The remaining channels will be ignored if present. This texture may be nil, in which case the motion vector is assumed to be zero, which is suitable for static images. The depth texture must contain the depth values for directly visible geometry for the current frame for each pixel. The first channel must store the depth value from zero to infinity. The depth texture may be nil, but this will prevent motion vectors from being dilated and may introduce aliasing along silhouette edges. The destination texture should be used as the previous texture in the next frame. @param commandBuffer       Command buffer to encode into @param sourceTexture       Current frame to denoise @param previousTexture     Previous denoised frame to reproject into current frame @param destinationTexture  Output blended image @param motionVectorTexture Motion vector texture @param depthTexture        The depth values for the current frame
-//
-// EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture calls the underlying EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture.
-func (x *TemporalAA) EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthTexture metal.MTLTexture) {
-	x.inner.EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, motionVectorTexture, depthTexture)
+// WithBlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
+	return x
 }
 
-// @brief How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
-//
-// BlendFactor calls the underlying BlendFactor.
+// WithLabel the string that identifies the kernel.
+func (x *TemporalAA) WithLabel(label string) *TemporalAA {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// EncodeWithCoder wraps the corresponding Objective-C method.
+func (x *TemporalAA) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
+}
+
+// BlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (x *TemporalAA) BlendFactor() float32 {
-	return x.inner.BlendFactor()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blendFactor"))
+	return _r
 }
 
-// SetBlendFactor calls the underlying SetBlendFactor.
+// SetBlendFactor wraps the corresponding Objective-C method.
 func (x *TemporalAA) SetBlendFactor(blendFactor float32) {
-	x.inner.SetBlendFactor(blendFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 }
-
-func (x *TemporalAA) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // TemporalAAable is the interface implemented by [TemporalAA], for mocking and DI.
 type TemporalAAable interface {
-	Unwrap() *raw.MPSTemporalAA
+	obj.Object
 	WithBlendFactor(blendFactor float32) *TemporalAA
-	WithOptions(options mpscore.MPSKernelOptions) *TemporalAA
 	WithLabel(label string) *TemporalAA
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *TemporalAA
-	EncodeWithCoder(coder *foundation.NSCoder)
-	EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthTexture metal.MTLTexture)
+	EncodeWithCoder(coder obj.Object)
 	BlendFactor() float32
 	SetBlendFactor(blendFactor float32)
 }
 
 var _ TemporalAAable = (*TemporalAA)(nil)
+
+var _ KernelProvider = (*TemporalAA)(nil)

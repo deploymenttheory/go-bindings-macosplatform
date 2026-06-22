@@ -5,87 +5,110 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterAdditionalInfoStruct wraps [raw.MTRContentLauncherClusterAdditionalInfoStruct] with a fluent Go API.
+// MTRContentLauncherClusterAdditionalInfoStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterAdditionalInfoStruct.
+//
+// MTRContentLauncherClusterAdditionalInfoStruct is an abstract base — you do not construct it directly. Construct one of [MTRContentLauncherClusterAdditionalInfo] and pass it where a MTRContentLauncherClusterAdditionalInfoStruct is accepted.
 type MTRContentLauncherClusterAdditionalInfoStruct struct {
-	inner *raw.MTRContentLauncherClusterAdditionalInfoStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterAdditionalInfoStruct].
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) Unwrap() *raw.MTRContentLauncherClusterAdditionalInfoStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterAdditionalInfoStructFromID adopts an existing object pointer as a MTRContentLauncherClusterAdditionalInfoStruct (nil for 0).
+// MTRContentLauncherClusterAdditionalInfoStructFromID adopts an existing Objective-C object as a MTRContentLauncherClusterAdditionalInfoStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterAdditionalInfoStructFromID(id objc.ID) *MTRContentLauncherClusterAdditionalInfoStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterAdditionalInfoStruct{inner: raw.MTRContentLauncherClusterAdditionalInfoStructFromID(id)}
+	x := &MTRContentLauncherClusterAdditionalInfoStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRContentLauncherClusterAdditionalInfoStruct creates a new [MTRContentLauncherClusterAdditionalInfoStruct].
-func NewMTRContentLauncherClusterAdditionalInfoStruct() *MTRContentLauncherClusterAdditionalInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterAdditionalInfoStruct")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterAdditionalInfoStruct{inner: raw.MTRContentLauncherClusterAdditionalInfoStructFromID(_id)}
+// mTRContentLauncherClusterAdditionalInfoStructAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterAdditionalInfoStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterAdditionalInfoStructAdopt(id objc.ID) *MTRContentLauncherClusterAdditionalInfoStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentLauncherClusterAdditionalInfoStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets the property and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// Value calls the underlying Value.
+// Value wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetValue calls the underlying SetValue.
+// SetValue wraps the corresponding Objective-C method.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetValue(value string) {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
-}
-
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
 // MTRContentLauncherClusterAdditionalInfoStructable is the interface implemented by [MTRContentLauncherClusterAdditionalInfoStruct], for mocking and DI.
 type MTRContentLauncherClusterAdditionalInfoStructable interface {
-	Unwrap() *raw.MTRContentLauncherClusterAdditionalInfoStruct
+	obj.Object
 	WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct
 	WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct
 	Name() string
@@ -95,3 +118,11 @@ type MTRContentLauncherClusterAdditionalInfoStructable interface {
 }
 
 var _ MTRContentLauncherClusterAdditionalInfoStructable = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)
+
+// isMTRContentLauncherClusterAdditionalInfoStruct marks MTRContentLauncherClusterAdditionalInfoStruct — and, by embedding promotion, its
+// subclasses — as a member of the MTRContentLauncherClusterAdditionalInfoStruct hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) isMTRContentLauncherClusterAdditionalInfoStruct() {
+}
+
+var _ MTRContentLauncherClusterAdditionalInfoStructProvider = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)

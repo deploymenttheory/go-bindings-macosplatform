@@ -5,115 +5,93 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNLogSoftMax wraps [raw.MPSCNNLogSoftMax] with a fluent Go API.
+// CNNLogSoftMax is an idiomatic wrapper over the Objective-C class MPSCNNLogSoftMax.
+//
+// It embeds [CNNKernel], promoting that type's methods.
 type CNNLogSoftMax struct {
-	inner *raw.MPSCNNLogSoftMax
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSCNNLogSoftMax].
-func (x *CNNLogSoftMax) Unwrap() *raw.MPSCNNLogSoftMax { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNLogSoftMax) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNLogSoftMaxFromID adopts an existing object pointer as a CNNLogSoftMax (nil for 0).
+// CNNLogSoftMaxFromID adopts an existing Objective-C object as a CNNLogSoftMax
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNLogSoftMaxFromID(id objc.ID) *CNNLogSoftMax {
 	if id == 0 {
 		return nil
 	}
-	return &CNNLogSoftMax{inner: raw.MPSCNNLogSoftMaxFromID(id)}
+	x := &CNNLogSoftMax{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNLogSoftMax creates a new [CNNLogSoftMax].
+// cNNLogSoftMaxAdopt wraps an Objective-C object that this code just created as a
+// CNNLogSoftMax (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNLogSoftMaxAdopt(id objc.ID) *CNNLogSoftMax {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNLogSoftMax{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNLogSoftMax creates a new CNNLogSoftMax.
 func NewCNNLogSoftMax() *CNNLogSoftMax {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLogSoftMax")), objc.RegisterName("new"))
-	return &CNNLogSoftMax{inner: raw.MPSCNNLogSoftMaxFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMax")), objc.RegisterName("new"))
+	return cNNLogSoftMaxAdopt(_id)
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
 func (x *CNNLogSoftMax) WithOffset(offset mpscore.MPSOffset) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
 func (x *CNNLogSoftMax) WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNLogSoftMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (x *CNNLogSoftMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNLogSoftMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *CNNLogSoftMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNLogSoftMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNLogSoftMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLogSoftMax {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNLogSoftMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNLogSoftMax) WithPadding(padding raw.MPSNNPadding) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNLogSoftMax) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLogSoftMax {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-func (x *CNNLogSoftMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 // CNNLogSoftMaxable is the interface implemented by [CNNLogSoftMax], for mocking and DI.
 type CNNLogSoftMaxable interface {
-	Unwrap() *raw.MPSCNNLogSoftMax
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *CNNLogSoftMax
 	WithClipRect(clipRect metal.MTLRegion) *CNNLogSoftMax
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLogSoftMax
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLogSoftMax
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLogSoftMax
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLogSoftMax
-	WithPadding(padding raw.MPSNNPadding) *CNNLogSoftMax
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLogSoftMax
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLogSoftMax
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLogSoftMax
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLogSoftMax
 }
 
 var _ CNNLogSoftMaxable = (*CNNLogSoftMax)(nil)
+
+var _ CNNKernelProvider = (*CNNLogSoftMax)(nil)

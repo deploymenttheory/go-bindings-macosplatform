@@ -5,127 +5,123 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can render an image from a Core Image object.
+// CIImageRep is an idiomatic wrapper over the Objective-C class NSCIImageRep.
 //
-// CIImageRep wraps [raw.NSCIImageRep] with a fluent Go API.
+// It embeds [ImageRep], promoting that type's methods.
+//
+// An object that can render an image from a Core Image object.
 type CIImageRep struct {
-	inner *raw.NSCIImageRep
+	ImageRep
 }
 
-// Unwrap returns the underlying [raw.NSCIImageRep].
-func (x *CIImageRep) Unwrap() *raw.NSCIImageRep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIImageRep) ID() objc.ID { return x.inner.Ptr() }
-
-// CIImageRepFromID adopts an existing object pointer as a CIImageRep (nil for 0).
+// CIImageRepFromID adopts an existing Objective-C object as a CIImageRep
+// (nil for 0), retaining it and registering a release finalizer.
 func CIImageRepFromID(id objc.ID) *CIImageRep {
 	if id == 0 {
 		return nil
 	}
-	return &CIImageRep{inner: raw.NSCIImageRepFromID(id)}
+	x := &CIImageRep{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns a representation of an image initialized to the specified Core Image instance.
-//
-// NewCIImageRepWithCIImage creates a new [CIImageRep].
-func NewCIImageRepWithCIImage(image *coreimage.CIImage) *CIImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCIImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:"), image.Ptr())
-	return &CIImageRep{inner: raw.NSCIImageRepFromID(_id)}
+// cIImageRepAdopt wraps an Objective-C object that this code just created as a
+// CIImageRep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIImageRepAdopt(id objc.ID) *CIImageRep {
+	if id == 0 {
+		return nil
+	}
+	x := &CIImageRep{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The size of the image representation, measured in points in the user coordinate space.
-//
-// WithSize sets the size property and returns the receiver for chaining.
+// NewCIImageRepWithCIImage returns a representation of an image initialized to the specified Core Image instance.
+func NewCIImageRepWithCIImage(image obj.Object) *CIImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCIImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCIImage:"), objref.IDOf(image))
+	return cIImageRepAdopt(_id)
+}
+
+// WithSize the size of the image representation, measured in points in the user coordinate space.
 func (x *CIImageRep) WithSize(size corefoundation.CGSize) *CIImageRep {
-	x.inner.NSImageRep.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
-// A Boolean value that indicates whether the image data has an alpha channel.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
 func (x *CIImageRep) WithAlpha(alpha bool) *CIImageRep {
-	x.inner.NSImageRep.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that indicates whether the image is opaque.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque a Boolean value that indicates whether the image is opaque.
 func (x *CIImageRep) WithOpaque(opaque bool) *CIImageRep {
-	x.inner.NSImageRep.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// The name of the color space used by the image data.
-//
-// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
-func (x *CIImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CIImageRep {
-	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+// WithColorSpaceName the name of the color space used by the image data.
+func (x *CIImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
-// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-//
-// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 func (x *CIImageRep) WithBitsPerSample(bitsPerSample int) *CIImageRep {
-	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
-// The width of the image, measured in pixels.
-//
-// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+// WithPixelsWide the width of the image, measured in pixels.
 func (x *CIImageRep) WithPixelsWide(pixelsWide int) *CIImageRep {
-	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
-// The height of the image, measured in pixels.
-//
-// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+// WithPixelsHigh the height of the image, measured in pixels.
 func (x *CIImageRep) WithPixelsHigh(pixelsHigh int) *CIImageRep {
-	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
-// The layout direction for the image.
-//
-// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *CIImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CIImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
+// WithLayoutDirection the layout direction for the image.
+func (x *CIImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
-// CIImage calls the underlying CIImage.
-func (x *CIImageRep) CIImage() *coreimage.CIImage {
-	return x.inner.CIImage()
+// CIImage wraps the corresponding Objective-C method.
+func (x *CIImageRep) CIImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CIImage"))
+	return obj.Wrap(_r)
 }
-
-func (x *CIImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 
 // CIImageRepable is the interface implemented by [CIImageRep], for mocking and DI.
 type CIImageRepable interface {
-	Unwrap() *raw.NSCIImageRep
+	obj.Object
 	WithSize(size corefoundation.CGSize) *CIImageRep
 	WithAlpha(alpha bool) *CIImageRep
 	WithOpaque(opaque bool) *CIImageRep
-	WithColorSpaceName(colorSpaceName *foundation.NSString) *CIImageRep
+	WithColorSpaceName(colorSpaceName obj.Object) *CIImageRep
 	WithBitsPerSample(bitsPerSample int) *CIImageRep
 	WithPixelsWide(pixelsWide int) *CIImageRep
 	WithPixelsHigh(pixelsHigh int) *CIImageRep
-	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CIImageRep
-	CIImage() *coreimage.CIImage
+	WithLayoutDirection(layoutDirection ImageLayoutDirection) *CIImageRep
+	CIImage() obj.Object
 }
 
 var _ CIImageRepable = (*CIImageRep)(nil)
+
+var _ ImageRepProvider = (*CIImageRep)(nil)

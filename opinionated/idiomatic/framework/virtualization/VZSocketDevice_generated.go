@@ -5,43 +5,79 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behavior of socket devices.
+// SocketDevice is an idiomatic wrapper over the Objective-C class VZSocketDevice.
 //
-// SocketDevice wraps [raw.VZSocketDevice] with a fluent Go API.
+// SocketDevice is an abstract base — you do not construct it directly. Construct one of [VirtioSocketDevice] and pass it where a SocketDevice is accepted.
+//
+// The common behavior of socket devices.
 type SocketDevice struct {
-	inner *raw.VZSocketDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZSocketDevice].
-func (x *SocketDevice) Unwrap() *raw.VZSocketDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SocketDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// SocketDeviceFromID adopts an existing object pointer as a SocketDevice (nil for 0).
+// SocketDeviceFromID adopts an existing Objective-C object as a SocketDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func SocketDeviceFromID(id objc.ID) *SocketDevice {
 	if id == 0 {
 		return nil
 	}
-	return &SocketDevice{inner: raw.VZSocketDeviceFromID(id)}
+	x := &SocketDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSocketDevice creates a new [SocketDevice].
-func NewSocketDevice() *SocketDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSocketDevice")), objc.RegisterName("new"))
-	return &SocketDevice{inner: raw.VZSocketDeviceFromID(_id)}
+// socketDeviceAdopt wraps an Objective-C object that this code just created as a
+// SocketDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func socketDeviceAdopt(id objc.ID) *SocketDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &SocketDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SocketDevice) asSocketDevice() *raw.VZSocketDevice { return x.inner }
+// Description returns the object's -description text.
+func (x *SocketDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SocketDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SocketDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SocketDevice) String() string {
+	return rt.Description(objref.IDOf(x))
+}
 
 // SocketDeviceable is the interface implemented by [SocketDevice], for mocking and DI.
 type SocketDeviceable interface {
-	Unwrap() *raw.VZSocketDevice
+	obj.Object
 }
 
 var _ SocketDeviceable = (*SocketDevice)(nil)
+
+// isSocketDevice marks SocketDevice — and, by embedding promotion, its
+// subclasses — as a member of the SocketDevice hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SocketDevice) isSocketDevice() {}
+
+var _ SocketDeviceProvider = (*SocketDevice)(nil)

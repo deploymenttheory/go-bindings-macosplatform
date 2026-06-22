@@ -5,39 +5,74 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Utility wraps [raw.MDLUtility] with a fluent Go API.
+// Utility is an idiomatic wrapper over the Objective-C class MDLUtility.
 type Utility struct {
-	inner *raw.MDLUtility
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLUtility].
-func (x *Utility) Unwrap() *raw.MDLUtility { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Utility) ID() objc.ID { return x.inner.Ptr() }
-
-// UtilityFromID adopts an existing object pointer as a Utility (nil for 0).
+// UtilityFromID adopts an existing Objective-C object as a Utility
+// (nil for 0), retaining it and registering a release finalizer.
 func UtilityFromID(id objc.ID) *Utility {
 	if id == 0 {
 		return nil
 	}
-	return &Utility{inner: raw.MDLUtilityFromID(id)}
+	x := &Utility{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUtility creates a new [Utility].
+// utilityAdopt wraps an Objective-C object that this code just created as a
+// Utility (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func utilityAdopt(id objc.ID) *Utility {
+	if id == 0 {
+		return nil
+	}
+	x := &Utility{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Utility) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Utility) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Utility) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Utility) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUtility creates a new Utility.
 func NewUtility() *Utility {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLUtility")), objc.RegisterName("new"))
-	return &Utility{inner: raw.MDLUtilityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLUtility")), objc.RegisterName("new"))
+	return utilityAdopt(_id)
 }
 
 // Utilityable is the interface implemented by [Utility], for mocking and DI.
 type Utilityable interface {
-	Unwrap() *raw.MDLUtility
+	obj.Object
 }
 
 var _ Utilityable = (*Utility)(nil)

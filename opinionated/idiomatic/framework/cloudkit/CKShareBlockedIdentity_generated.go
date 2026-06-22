@@ -5,59 +5,88 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ShareBlockedIdentity wraps [raw.CKShareBlockedIdentity] with a fluent Go API.
+// ShareBlockedIdentity is an idiomatic wrapper over the Objective-C class CKShareBlockedIdentity.
 type ShareBlockedIdentity struct {
-	inner *raw.CKShareBlockedIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKShareBlockedIdentity].
-func (x *ShareBlockedIdentity) Unwrap() *raw.CKShareBlockedIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareBlockedIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareBlockedIdentityFromID adopts an existing object pointer as a ShareBlockedIdentity (nil for 0).
+// ShareBlockedIdentityFromID adopts an existing Objective-C object as a ShareBlockedIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareBlockedIdentityFromID(id objc.ID) *ShareBlockedIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &ShareBlockedIdentity{inner: raw.CKShareBlockedIdentityFromID(id)}
+	x := &ShareBlockedIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewShareBlockedIdentity creates a new [ShareBlockedIdentity].
-func NewShareBlockedIdentity() *ShareBlockedIdentity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareBlockedIdentity")), objc.RegisterName("new"))
-	return &ShareBlockedIdentity{inner: raw.CKShareBlockedIdentityFromID(_id)}
-}
-
-// The identity of the user who has been blocked from requesting access to the share.
-//
-// UserIdentity calls the underlying UserIdentity.
-func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
-	_r := x.inner.UserIdentity()
-	if _r == nil {
+// shareBlockedIdentityAdopt wraps an Objective-C object that this code just created as a
+// ShareBlockedIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareBlockedIdentityAdopt(id objc.ID) *ShareBlockedIdentity {
+	if id == 0 {
 		return nil
 	}
-	return &UserIdentity{inner: _r}
+	x := &ShareBlockedIdentity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
-//
-// Contact calls the underlying Contact.
-func (x *ShareBlockedIdentity) Contact() objc.ID {
-	return x.inner.Contact()
+// Description returns the object's -description text.
+func (x *ShareBlockedIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareBlockedIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareBlockedIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ShareBlockedIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewShareBlockedIdentity creates a new ShareBlockedIdentity.
+func NewShareBlockedIdentity() *ShareBlockedIdentity {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKShareBlockedIdentity")), objc.RegisterName("new"))
+	return shareBlockedIdentityAdopt(_id)
+}
+
+// UserIdentity the identity of the user who has been blocked from requesting access to the share.
+func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
+	return UserIdentityFromID(_r)
+}
+
+// Contact a displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
+func (x *ShareBlockedIdentity) Contact() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+	return obj.Wrap(_r)
 }
 
 // ShareBlockedIdentityable is the interface implemented by [ShareBlockedIdentity], for mocking and DI.
 type ShareBlockedIdentityable interface {
-	Unwrap() *raw.CKShareBlockedIdentity
+	obj.Object
 	UserIdentity() *UserIdentity
-	Contact() objc.ID
+	Contact() obj.Object
 }
 
 var _ ShareBlockedIdentityable = (*ShareBlockedIdentity)(nil)

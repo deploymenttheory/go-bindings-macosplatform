@@ -5,67 +5,72 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the types of foreground and background app exits.
+// AppExitMetric is an idiomatic wrapper over the Objective-C class MXAppExitMetric.
 //
-// AppExitMetric wraps [raw.MXAppExitMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the types of foreground and background app exits.
 type AppExitMetric struct {
-	inner *raw.MXAppExitMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXAppExitMetric].
-func (x *AppExitMetric) Unwrap() *raw.MXAppExitMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppExitMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// AppExitMetricFromID adopts an existing object pointer as a AppExitMetric (nil for 0).
+// AppExitMetricFromID adopts an existing Objective-C object as a AppExitMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func AppExitMetricFromID(id objc.ID) *AppExitMetric {
 	if id == 0 {
 		return nil
 	}
-	return &AppExitMetric{inner: raw.MXAppExitMetricFromID(id)}
+	x := &AppExitMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAppExitMetric creates a new [AppExitMetric].
+// appExitMetricAdopt wraps an Objective-C object that this code just created as a
+// AppExitMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appExitMetricAdopt(id objc.ID) *AppExitMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &AppExitMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAppExitMetric creates a new AppExitMetric.
 func NewAppExitMetric() *AppExitMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXAppExitMetric")), objc.RegisterName("new"))
-	return &AppExitMetric{inner: raw.MXAppExitMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXAppExitMetric")), objc.RegisterName("new"))
+	return appExitMetricAdopt(_id)
 }
 
-// @property      foregroundExitData @abstract      Cumulative foreground exit data. @discussion    This includes application exit data when the application was on screen and visible to the user.
-//
-// ForegroundExitData calls the underlying ForegroundExitData.
+// ForegroundExitData cumulative foreground exit data. This includes application exit data when the application was on screen and visible to the user.
 func (x *AppExitMetric) ForegroundExitData() *ForegroundExitData {
-	_r := x.inner.ForegroundExitData()
-	if _r == nil {
-		return nil
-	}
-	return &ForegroundExitData{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foregroundExitData"))
+	return ForegroundExitDataFromID(_r)
 }
 
-// @property      backgroundExitData @abstract      Cumulative background exit data. @discussion    This includes application exit data when the application was off screen and not visible to the user.
-//
-// BackgroundExitData calls the underlying BackgroundExitData.
+// BackgroundExitData cumulative background exit data. This includes application exit data when the application was off screen and not visible to the user.
 func (x *AppExitMetric) BackgroundExitData() *BackgroundExitData {
-	_r := x.inner.BackgroundExitData()
-	if _r == nil {
-		return nil
-	}
-	return &BackgroundExitData{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundExitData"))
+	return BackgroundExitDataFromID(_r)
 }
-
-func (x *AppExitMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // AppExitMetricable is the interface implemented by [AppExitMetric], for mocking and DI.
 type AppExitMetricable interface {
-	Unwrap() *raw.MXAppExitMetric
+	obj.Object
 	ForegroundExitData() *ForegroundExitData
 	BackgroundExitData() *BackgroundExitData
 }
 
 var _ AppExitMetricable = (*AppExitMetric)(nil)
+
+var _ MetricProvider = (*AppExitMetric)(nil)

@@ -5,88 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRRVCOperationalStateClusterResumeParams wraps [raw.MTRRVCOperationalStateClusterResumeParams] with a fluent Go API.
+// MTRRVCOperationalStateClusterResumeParams is an idiomatic wrapper over the Objective-C class MTRRVCOperationalStateClusterResumeParams.
 type MTRRVCOperationalStateClusterResumeParams struct {
-	inner *raw.MTRRVCOperationalStateClusterResumeParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterResumeParams].
-func (x *MTRRVCOperationalStateClusterResumeParams) Unwrap() *raw.MTRRVCOperationalStateClusterResumeParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRRVCOperationalStateClusterResumeParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRRVCOperationalStateClusterResumeParamsFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterResumeParams (nil for 0).
+// MTRRVCOperationalStateClusterResumeParamsFromID adopts an existing Objective-C object as a MTRRVCOperationalStateClusterResumeParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRRVCOperationalStateClusterResumeParamsFromID(id objc.ID) *MTRRVCOperationalStateClusterResumeParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRRVCOperationalStateClusterResumeParams{inner: raw.MTRRVCOperationalStateClusterResumeParamsFromID(id)}
+	x := &MTRRVCOperationalStateClusterResumeParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRRVCOperationalStateClusterResumeParams creates a new [MTRRVCOperationalStateClusterResumeParams].
+// mTRRVCOperationalStateClusterResumeParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRRVCOperationalStateClusterResumeParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRRVCOperationalStateClusterResumeParamsAdopt(id objc.ID) *MTRRVCOperationalStateClusterResumeParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRRVCOperationalStateClusterResumeParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRRVCOperationalStateClusterResumeParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRRVCOperationalStateClusterResumeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRRVCOperationalStateClusterResumeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRRVCOperationalStateClusterResumeParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRRVCOperationalStateClusterResumeParams creates a new MTRRVCOperationalStateClusterResumeParams.
 func NewMTRRVCOperationalStateClusterResumeParams() *MTRRVCOperationalStateClusterResumeParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRRVCOperationalStateClusterResumeParams")), objc.RegisterName("new"))
-	return &MTRRVCOperationalStateClusterResumeParams{inner: raw.MTRRVCOperationalStateClusterResumeParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCOperationalStateClusterResumeParams")), objc.RegisterName("new"))
+	return mTRRVCOperationalStateClusterResumeParamsAdopt(_id)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterResumeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRRVCOperationalStateClusterResumeParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRRVCOperationalStateClusterResumeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCOperationalStateClusterResumeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRRVCOperationalStateClusterResumeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRRVCOperationalStateClusterResumeParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRRVCOperationalStateClusterResumeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCOperationalStateClusterResumeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRRVCOperationalStateClusterResumeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRRVCOperationalStateClusterResumeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRRVCOperationalStateClusterResumeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterResumeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRRVCOperationalStateClusterResumeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRRVCOperationalStateClusterResumeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRRVCOperationalStateClusterResumeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRRVCOperationalStateClusterResumeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRRVCOperationalStateClusterResumeParamsable is the interface implemented by [MTRRVCOperationalStateClusterResumeParams], for mocking and DI.
 type MTRRVCOperationalStateClusterResumeParamsable interface {
-	Unwrap() *raw.MTRRVCOperationalStateClusterResumeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRRVCOperationalStateClusterResumeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRRVCOperationalStateClusterResumeParams
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCOperationalStateClusterResumeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCOperationalStateClusterResumeParams
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRRVCOperationalStateClusterResumeParamsable = (*MTRRVCOperationalStateClusterResumeParams)(nil)

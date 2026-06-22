@@ -5,87 +5,84 @@
 package accounts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// ACAccountTypeIdentifierTwitter returns the string constant ACAccountTypeIdentifierTwitter as an objc.ID, for use as a dictionary key or selector argument.
-func ACAccountTypeIdentifierTwitter() objc.ID {
-	return purego.CFConstant(raw.ACAccountTypeIdentifierTwitter())
+// ACAccountTypeIdentifierTwitter returns the string constant ACAccountTypeIdentifierTwitter, for use as a dictionary key or argument.
+func ACAccountTypeIdentifierTwitter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACAccountTypeIdentifierTwitter")))
 }
 
-// ACAccountTypeIdentifierFacebook returns the string constant ACAccountTypeIdentifierFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func ACAccountTypeIdentifierFacebook() objc.ID {
-	return purego.CFConstant(raw.ACAccountTypeIdentifierFacebook())
+// ACAccountTypeIdentifierFacebook returns the string constant ACAccountTypeIdentifierFacebook, for use as a dictionary key or argument.
+func ACAccountTypeIdentifierFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACAccountTypeIdentifierFacebook")))
 }
 
-// ACAccountTypeIdentifierSinaWeibo returns the string constant ACAccountTypeIdentifierSinaWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func ACAccountTypeIdentifierSinaWeibo() objc.ID {
-	return purego.CFConstant(raw.ACAccountTypeIdentifierSinaWeibo())
+// ACAccountTypeIdentifierSinaWeibo returns the string constant ACAccountTypeIdentifierSinaWeibo, for use as a dictionary key or argument.
+func ACAccountTypeIdentifierSinaWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACAccountTypeIdentifierSinaWeibo")))
 }
 
-// ACAccountTypeIdentifierTencentWeibo returns the string constant ACAccountTypeIdentifierTencentWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func ACAccountTypeIdentifierTencentWeibo() objc.ID {
-	return purego.CFConstant(raw.ACAccountTypeIdentifierTencentWeibo())
+// ACAccountTypeIdentifierTencentWeibo returns the string constant ACAccountTypeIdentifierTencentWeibo, for use as a dictionary key or argument.
+func ACAccountTypeIdentifierTencentWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACAccountTypeIdentifierTencentWeibo")))
 }
 
-// ACAccountTypeIdentifierLinkedIn returns the string constant ACAccountTypeIdentifierLinkedIn as an objc.ID, for use as a dictionary key or selector argument.
-func ACAccountTypeIdentifierLinkedIn() objc.ID {
-	return purego.CFConstant(raw.ACAccountTypeIdentifierLinkedIn())
+// ACAccountTypeIdentifierLinkedIn returns the string constant ACAccountTypeIdentifierLinkedIn, for use as a dictionary key or argument.
+func ACAccountTypeIdentifierLinkedIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACAccountTypeIdentifierLinkedIn")))
 }
 
-// ACFacebookAppIdKey returns the string constant ACFacebookAppIdKey as an objc.ID, for use as a dictionary key or selector argument.
-func ACFacebookAppIdKey() objc.ID {
-	return purego.CFConstant(raw.ACFacebookAppIdKey())
+// ACFacebookAppIdKey returns the string constant ACFacebookAppIdKey, for use as a dictionary key or argument.
+func ACFacebookAppIdKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACFacebookAppIdKey")))
 }
 
-// ACFacebookPermissionsKey returns the string constant ACFacebookPermissionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func ACFacebookPermissionsKey() objc.ID {
-	return purego.CFConstant(raw.ACFacebookPermissionsKey())
+// ACFacebookPermissionsKey returns the string constant ACFacebookPermissionsKey, for use as a dictionary key or argument.
+func ACFacebookPermissionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACFacebookPermissionsKey")))
 }
 
-// ACFacebookAudienceKey returns the string constant ACFacebookAudienceKey as an objc.ID, for use as a dictionary key or selector argument.
-func ACFacebookAudienceKey() objc.ID {
-	return purego.CFConstant(raw.ACFacebookAudienceKey())
+// ACFacebookAudienceKey returns the string constant ACFacebookAudienceKey, for use as a dictionary key or argument.
+func ACFacebookAudienceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACFacebookAudienceKey")))
 }
 
-// ACFacebookAudienceEveryone returns the string constant ACFacebookAudienceEveryone as an objc.ID, for use as a dictionary key or selector argument.
-func ACFacebookAudienceEveryone() objc.ID {
-	return purego.CFConstant(raw.ACFacebookAudienceEveryone())
+// ACFacebookAudienceEveryone returns the string constant ACFacebookAudienceEveryone, for use as a dictionary key or argument.
+func ACFacebookAudienceEveryone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACFacebookAudienceEveryone")))
 }
 
-// ACFacebookAudienceFriends returns the string constant ACFacebookAudienceFriends as an objc.ID, for use as a dictionary key or selector argument.
-func ACFacebookAudienceFriends() objc.ID {
-	return purego.CFConstant(raw.ACFacebookAudienceFriends())
+// ACFacebookAudienceFriends returns the string constant ACFacebookAudienceFriends, for use as a dictionary key or argument.
+func ACFacebookAudienceFriends() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACFacebookAudienceFriends")))
 }
 
-// ACFacebookAudienceOnlyMe returns the string constant ACFacebookAudienceOnlyMe as an objc.ID, for use as a dictionary key or selector argument.
-func ACFacebookAudienceOnlyMe() objc.ID {
-	return purego.CFConstant(raw.ACFacebookAudienceOnlyMe())
+// ACFacebookAudienceOnlyMe returns the string constant ACFacebookAudienceOnlyMe, for use as a dictionary key or argument.
+func ACFacebookAudienceOnlyMe() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACFacebookAudienceOnlyMe")))
 }
 
-// ACLinkedInAppIdKey returns the string constant ACLinkedInAppIdKey as an objc.ID, for use as a dictionary key or selector argument.
-func ACLinkedInAppIdKey() objc.ID {
-	return purego.CFConstant(raw.ACLinkedInAppIdKey())
+// ACLinkedInAppIdKey returns the string constant ACLinkedInAppIdKey, for use as a dictionary key or argument.
+func ACLinkedInAppIdKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACLinkedInAppIdKey")))
 }
 
-// ACLinkedInPermissionsKey returns the string constant ACLinkedInPermissionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func ACLinkedInPermissionsKey() objc.ID {
-	return purego.CFConstant(raw.ACLinkedInPermissionsKey())
+// ACLinkedInPermissionsKey returns the string constant ACLinkedInPermissionsKey, for use as a dictionary key or argument.
+func ACLinkedInPermissionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACLinkedInPermissionsKey")))
 }
 
-// ACTencentWeiboAppIdKey returns the string constant ACTencentWeiboAppIdKey as an objc.ID, for use as a dictionary key or selector argument.
-func ACTencentWeiboAppIdKey() objc.ID {
-	return purego.CFConstant(raw.ACTencentWeiboAppIdKey())
+// ACTencentWeiboAppIdKey returns the string constant ACTencentWeiboAppIdKey, for use as a dictionary key or argument.
+func ACTencentWeiboAppIdKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACTencentWeiboAppIdKey")))
 }
 
-// ACAccountStoreDidChangeNotification returns the string constant ACAccountStoreDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func ACAccountStoreDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.ACAccountStoreDidChangeNotification())
+// ACAccountStoreDidChangeNotification returns the string constant ACAccountStoreDidChangeNotification, for use as a dictionary key or argument.
+func ACAccountStoreDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ACAccountStoreDidChangeNotification")))
 }
 
-// ACErrorDomain returns the string constant ACErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ACErrorDomain() objc.ID {
-	return purego.CFConstant(raw.ACErrorDomain())
-}
+// ACErrorDomain returns the string constant ACErrorDomain, for use as a dictionary key or argument.
+func ACErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ACErrorDomain"))) }

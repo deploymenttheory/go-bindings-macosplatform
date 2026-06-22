@@ -5,700 +5,538 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A special kind of window that typically performs a function that is auxiliary to the main window.
+// Panel is an idiomatic wrapper over the Objective-C class NSPanel.
 //
-// Panel wraps [raw.NSPanel] with a fluent Go API.
+// Panel is an abstract base — you do not construct it directly. Construct one of [ColorPanel], [FontPanel], [SavePanel] and pass it where a Panel is accepted.
+//
+// A special kind of window that typically performs a function that is auxiliary to the main window.
 type Panel struct {
-	inner *raw.NSPanel
+	Window
 }
 
-// Unwrap returns the underlying [raw.NSPanel].
-func (x *Panel) Unwrap() *raw.NSPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Panel) ID() objc.ID { return x.inner.Ptr() }
-
-// PanelFromID adopts an existing object pointer as a Panel (nil for 0).
+// PanelFromID adopts an existing Objective-C object as a Panel
+// (nil for 0), retaining it and registering a release finalizer.
 func PanelFromID(id objc.ID) *Panel {
 	if id == 0 {
 		return nil
 	}
-	return &Panel{inner: raw.NSPanelFromID(id)}
+	x := &Panel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPanel creates a new [Panel].
-func NewPanel() *Panel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPanel")), objc.RegisterName("new"))
-	return &Panel{inner: raw.NSPanelFromID(_id)}
+// panelAdopt wraps an Objective-C object that this code just created as a
+// Panel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func panelAdopt(id objc.ID) *Panel {
+	if id == 0 {
+		return nil
+	}
+	x := &Panel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A Boolean value that indicates whether the receiver is a floating panel.
-//
-// WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
+// WithFloatingPanel a Boolean value that indicates whether the receiver is a floating panel.
 func (x *Panel) WithFloatingPanel(floatingPanel bool) *Panel {
-	x.inner.SetFloatingPanel(floatingPanel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPanel:"), floatingPanel)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver becomes the key window only when needed.
-//
-// WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
+// WithBecomesKeyOnlyIfNeeded a Boolean value that indicates whether the receiver becomes the key window only when needed.
 func (x *Panel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *Panel {
-	x.inner.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
 	return x
 }
 
-// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
-//
-// WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
+// WithWorksWhenModal a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
 func (x *Panel) WithWorksWhenModal(worksWhenModal bool) *Panel {
-	x.inner.SetWorksWhenModal(worksWhenModal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
 	return x
 }
 
-// The string that appears in the title bar of the window or the path to the represented file.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the string that appears in the title bar of the window or the path to the represented file.
 func (x *Panel) WithTitle(title string) *Panel {
-	x.inner.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A secondary line of text that appears in the title bar of the window.
-//
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle a secondary line of text that appears in the title bar of the window.
 func (x *Panel) WithSubtitle(subtitle string) *Panel {
-	x.inner.NSWindow.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// A value that indicates the visibility of the window’s title and title bar buttons.
-//
-// WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *Panel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Panel {
-	x.inner.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
+// WithTitleVisibility a value that indicates the visibility of the window’s title and title bar buttons.
+func (x *Panel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
 	return x
 }
 
-// A Boolean value that indicates whether the title bar draws its background.
-//
-// WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
+// WithTitlebarAppearsTransparent a Boolean value that indicates whether the title bar draws its background.
 func (x *Panel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Panel {
-	x.inner.NSWindow.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
 	return x
 }
 
-// The style that determines the appearance and location of the toolbar in relation to the title bar.
-//
-// WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *Panel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel {
-	x.inner.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
+// WithToolbarStyle the style that determines the appearance and location of the toolbar in relation to the title bar.
+func (x *Panel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
 	return x
 }
 
-// An array of title bar accessory view controllers that are currently added to the window.
-//
-// WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
-func (x *Panel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Panel {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSWindow.SetTitlebarAccessoryViewControllers(foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSWindow.SetTitlebarAccessoryViewControllers(_arr)
+// WithTitlebarAccessoryViewControllers an array of title bar accessory view controllers that are currently added to the window.
+func (x *Panel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *Panel {
+	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
 	return x
 }
 
-// The URL of the file the window represents.
-//
-// WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
+// WithRepresentedURL the URL of the file the window represents.
 func (x *Panel) WithRepresentedURL(representedURL string) *Panel {
-	x.inner.NSWindow.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
 	return x
 }
 
-// The path to the file of the window’s represented file.
-//
-// WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
+// WithRepresentedFilename the path to the file of the window’s represented file.
 func (x *Panel) WithRepresentedFilename(representedFilename string) *Panel {
-	x.inner.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
 	return x
 }
 
-// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
-//
-// WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
+// WithExcludedFromWindowsMenu a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
 func (x *Panel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Panel {
-	x.inner.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
 	return x
 }
 
-// The window’s content view, the highest accessible view object in the window’s view hierarchy.
-//
-// WithContentView sets the contentView property and returns the receiver for chaining.
+// WithContentView the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (x *Panel) WithContentView(contentView ViewProvider) *Panel {
-	x.inner.NSWindow.SetContentView(contentView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// The window’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Panel) WithDelegate(delegate raw.NSWindowDelegate) *Panel {
-	x.inner.NSWindow.SetDelegate(delegate)
+// WithStyleMask flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
+func (x *Panel) WithStyleMask(styleMask WindowStyleMask) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyleMask:"), styleMask)
 	return x
 }
 
-// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
-//
-// WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *Panel) WithStyleMask(styleMask NSWindowStyleMask) *Panel {
-	x.inner.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
-	return x
-}
-
-// The window’s resizing increments.
-//
-// WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
+// WithResizeIncrements the window’s resizing increments.
 func (x *Panel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetResizeIncrements(resizeIncrements)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
 	return x
 }
 
-// The window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
-//
-// WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
+// WithAspectRatio the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
 func (x *Panel) WithAspectRatio(aspectRatio corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetAspectRatio(aspectRatio)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspectRatio:"), aspectRatio)
 	return x
 }
 
-// The window’s content-view resizing increments.
-//
-// WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
+// WithContentResizeIncrements the window’s content-view resizing increments.
 func (x *Panel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
 	return x
 }
 
-// The window’s content aspect ratio.
-//
-// WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
+// WithContentAspectRatio the window’s content aspect ratio.
 func (x *Panel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetContentAspectRatio(contentAspectRatio)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
 	return x
 }
 
-// A Boolean value that indicates whether any of the window’s views need to be displayed.
-//
-// WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
+// WithViewsNeedDisplay a Boolean value that indicates whether any of the window’s views need to be displayed.
 func (x *Panel) WithViewsNeedDisplay(viewsNeedDisplay bool) *Panel {
-	x.inner.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
 	return x
 }
 
-// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
-//
-// WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
+// WithPreservesContentDuringLiveResize a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
 func (x *Panel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *Panel {
-	x.inner.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
 	return x
 }
 
-// A Boolean value that indicates whether the window is released when it receives the close message.
-//
-// WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
+// WithReleasedWhenClosed a Boolean value that indicates whether the window is released when it receives the close message.
 func (x *Panel) WithReleasedWhenClosed(releasedWhenClosed bool) *Panel {
-	x.inner.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
 	return x
 }
 
-// The color of the window’s background.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the color of the window’s background.
 func (x *Panel) WithBackgroundColor(backgroundColor *Color) *Panel {
-	x.inner.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
-//
-// WithMovable sets the movable property and returns the receiver for chaining.
+// WithMovable a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
 func (x *Panel) WithMovable(movable bool) *Panel {
-	x.inner.NSWindow.SetMovable(movable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 	return x
 }
 
-// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
-//
-// WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
+// WithMovableByWindowBackground a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
 func (x *Panel) WithMovableByWindowBackground(movableByWindowBackground bool) *Panel {
-	x.inner.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
 	return x
 }
 
-// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
-//
-// WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
+// WithHidesOnDeactivate a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
 func (x *Panel) WithHidesOnDeactivate(hidesOnDeactivate bool) *Panel {
-	x.inner.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
 	return x
 }
 
-// A Boolean value that indicates whether the window can hide when its application becomes hidden.
-//
-// WithCanHide sets the canHide property and returns the receiver for chaining.
+// WithCanHide a Boolean value that indicates whether the window can hide when its application becomes hidden.
 func (x *Panel) WithCanHide(canHide bool) *Panel {
-	x.inner.NSWindow.SetCanHide(canHide)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHide:"), canHide)
 	return x
 }
 
-// The custom miniaturized window image of the window.
-//
-// WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
+// WithMiniwindowImage the custom miniaturized window image of the window.
 func (x *Panel) WithMiniwindowImage(miniwindowImage *Image) *Panel {
-	x.inner.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	return x
 }
 
-// The title displayed in the window’s minimized window.
-//
-// WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
+// WithMiniwindowTitle the title displayed in the window’s minimized window.
 func (x *Panel) WithMiniwindowTitle(miniwindowTitle string) *Panel {
-	x.inner.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
 	return x
 }
 
-// A Boolean value that indicates whether the window’s document has been edited.
-//
-// WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
+// WithDocumentEdited a Boolean value that indicates whether the window’s document has been edited.
 func (x *Panel) WithDocumentEdited(documentEdited bool) *Panel {
-	x.inner.NSWindow.SetDocumentEdited(documentEdited)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether the window prevents application termination when modal.
-//
-// WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
+// WithPreventsApplicationTerminationWhenModal a Boolean value that indicates whether the window prevents application termination when modal.
 func (x *Panel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Panel {
-	x.inner.NSWindow.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
 	return x
 }
 
-// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
-//
-// WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
+// WithAllowsToolTipsWhenApplicationIsInactive a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 func (x *Panel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Panel {
-	x.inner.NSWindow.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
 	return x
 }
 
-// The window’s backing store type.
-//
-// WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *Panel) WithBackingType(backingType NSBackingStoreType) *Panel {
-	x.inner.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
+// WithBackingType the window’s backing store type.
+func (x *Panel) WithBackingType(backingType BackingStoreType) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackingType:"), backingType)
 	return x
 }
 
-// The window level of the window.
-//
-// WithLevel sets the level property and returns the receiver for chaining.
+// WithLevel the window level of the window.
 func (x *Panel) WithLevel(level int) *Panel {
-	x.inner.NSWindow.SetLevel(level)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
-// The depth limit of the window.
-//
-// WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *Panel) WithDepthLimit(depthLimit NSWindowDepth) *Panel {
-	x.inner.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
+// WithDepthLimit the depth limit of the window.
+func (x *Panel) WithDepthLimit(depthLimit WindowDepth) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthLimit:"), depthLimit)
 	return x
 }
 
-// A Boolean value that indicates whether the window has a shadow.
-//
-// WithHasShadow sets the hasShadow property and returns the receiver for chaining.
+// WithHasShadow a Boolean value that indicates whether the window has a shadow.
 func (x *Panel) WithHasShadow(hasShadow bool) *Panel {
-	x.inner.NSWindow.SetHasShadow(hasShadow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShadow:"), hasShadow)
 	return x
 }
 
-// The window’s alpha value.
-//
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue the window’s alpha value.
 func (x *Panel) WithAlphaValue(alphaValue float64) *Panel {
-	x.inner.NSWindow.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// A Boolean value that indicates whether the window is opaque.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque a Boolean value that indicates whether the window is opaque.
 func (x *Panel) WithOpaque(opaque bool) *Panel {
-	x.inner.NSWindow.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A Boolean value that indicates the level of access other processes have to the window’s content.
-//
-// WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *Panel) WithSharingType(sharingType NSWindowSharingType) *Panel {
-	x.inner.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
+// WithSharingType a Boolean value that indicates the level of access other processes have to the window’s content.
+func (x *Panel) WithSharingType(sharingType WindowSharingType) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharingType:"), sharingType)
 	return x
 }
 
-// A Boolean value that indicates whether the window allows multithreaded view drawing.
-//
-// WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
+// WithAllowsConcurrentViewDrawing a Boolean value that indicates whether the window allows multithreaded view drawing.
 func (x *Panel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Panel {
-	x.inner.NSWindow.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
 	return x
 }
 
-// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
-//
-// WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
+// WithDisplaysWhenScreenProfileChanges a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
 func (x *Panel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Panel {
-	x.inner.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
 	return x
 }
 
-// A Boolean value that indicates whether the window can be displayed at the login window.
-//
-// WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
+// WithCanBecomeVisibleWithoutLogin a Boolean value that indicates whether the window can be displayed at the login window.
 func (x *Panel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Panel {
-	x.inner.NSWindow.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
 	return x
 }
 
-// A value that identifies the window’s behavior in window collections.
-//
-// WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *Panel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Panel {
-	x.inner.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
+// WithCollectionBehavior a value that identifies the window’s behavior in window collections.
+func (x *Panel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
 	return x
 }
 
-// The window’s automatic animation behavior.
-//
-// WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *Panel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Panel {
-	x.inner.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
+// WithAnimationBehavior the window’s automatic animation behavior.
+func (x *Panel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
 	return x
 }
 
-// The name used to automatically save the window’s frame rectangle data in the defaults system.
-//
-// WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
-func (x *Panel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *Panel {
-	x.inner.NSWindow.SetFrameAutosaveName(frameAutosaveName)
+// WithFrameAutosaveName the name used to automatically save the window’s frame rectangle data in the defaults system.
+func (x *Panel) WithFrameAutosaveName(frameAutosaveName obj.Object) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	return x
 }
 
-// The minimum size to which the window’s frame (including its title bar) can be sized.
-//
-// WithMinSize sets the minSize property and returns the receiver for chaining.
+// WithMinSize the minimum size to which the window’s frame (including its title bar) can be sized.
 func (x *Panel) WithMinSize(minSize corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetMinSize(minSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
 	return x
 }
 
-// The maximum size to which the window’s frame (including its title bar) can be sized.
-//
-// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+// WithMaxSize the maximum size to which the window’s frame (including its title bar) can be sized.
 func (x *Panel) WithMaxSize(maxSize corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetMaxSize(maxSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
 	return x
 }
 
-// The minimum size of the window’s content view in the window’s base coordinate system.
-//
-// WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
+// WithContentMinSize the minimum size of the window’s content view in the window’s base coordinate system.
 func (x *Panel) WithContentMinSize(contentMinSize corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetContentMinSize(contentMinSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMinSize:"), contentMinSize)
 	return x
 }
 
-// The maximum size of the window’s content view in the window’s base coordinate system.
-//
-// WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
+// WithContentMaxSize the maximum size of the window’s content view in the window’s base coordinate system.
 func (x *Panel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetContentMaxSize(contentMaxSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
 	return x
 }
 
-// A minimum size that is used to determine if a window can fit when it is in full screen in a tile.
-//
-// WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
+// WithMinFullScreenContentSize a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
 func (x *Panel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
 	return x
 }
 
-// A maximum size that is used to determine if a window can fit when it is in full screen in a tile.
-//
-// WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
+// WithMaxFullScreenContentSize a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
 func (x *Panel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Panel {
-	x.inner.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
 	return x
 }
 
-// The window’s window controller.
-//
-// WithWindowController sets the windowController property and returns the receiver for chaining.
+// WithWindowController the window’s window controller.
 func (x *Panel) WithWindowController(windowController *WindowController) *Panel {
-	x.inner.NSWindow.SetWindowController(windowController.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	return x
 }
 
-// The parent window to which the window is attached as a child.
-//
-// WithParentWindow sets the parentWindow property and returns the receiver for chaining.
+// WithParentWindow the parent window to which the window is attached as a child.
 func (x *Panel) WithParentWindow(parentWindow WindowProvider) *Panel {
-	x.inner.NSWindow.SetParentWindow(parentWindow.asWindow())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	return x
 }
 
-// An object that the window inherits its appearance from.
-//
-// WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
-func (x *Panel) WithAppearanceSource(appearanceSource *foundation.NSObject) *Panel {
-	x.inner.NSWindow.SetAppearanceSource(appearanceSource)
+// WithAppearanceSource an object that the window inherits its appearance from.
+func (x *Panel) WithAppearanceSource(appearanceSource obj.Object) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	return x
 }
 
-// The window’s color space.
-//
-// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+// WithColorSpace the window’s color space.
 func (x *Panel) WithColorSpace(colorSpace *ColorSpace) *Panel {
-	x.inner.NSWindow.SetColorSpace(colorSpace.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	return x
 }
 
-// The type of separator that the app displays between the title bar and content of a window.
-//
-// WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Panel {
-	x.inner.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
+// WithTitlebarSeparatorStyle the type of separator that the app displays between the title bar and content of a window.
+func (x *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
 	return x
 }
 
-// The main content view controller for the window.
-//
-// WithContentViewController sets the contentViewController property and returns the receiver for chaining.
+// WithContentViewController the main content view controller for the window.
 func (x *Panel) WithContentViewController(contentViewController ViewControllerProvider) *Panel {
-	x.inner.NSWindow.SetContentViewController(contentViewController.asViewController())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	return x
 }
 
-// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
-//
-// WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
+// WithInitialFirstResponder the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (x *Panel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *Panel {
-	x.inner.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	return x
 }
 
-// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
-//
-// WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
+// WithDefaultButtonCell the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (x *Panel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Panel {
-	x.inner.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	return x
 }
 
-// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
-//
-// WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
+// WithAutorecalculatesKeyViewLoop a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
 func (x *Panel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Panel {
-	x.inner.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
 	return x
 }
 
-// The window’s toolbar.
-//
-// WithToolbar sets the toolbar property and returns the receiver for chaining.
+// WithToolbar the window’s toolbar.
 func (x *Panel) WithToolbar(toolbar *Toolbar) *Panel {
-	x.inner.NSWindow.SetToolbar(toolbar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar control button is currently displayed.
-//
-// WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
+// WithShowsToolbarButton a Boolean value that indicates whether the toolbar control button is currently displayed.
 func (x *Panel) WithShowsToolbarButton(showsToolbarButton bool) *Panel {
-	x.inner.NSWindow.SetShowsToolbarButton(showsToolbarButton)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
 	return x
 }
 
-// A value that indicates when a window displays tabs.
-//
-// WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *Panel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Panel {
-	x.inner.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
+// WithTabbingMode a value that indicates when a window displays tabs.
+func (x *Panel) WithTabbingMode(tabbingMode WindowTabbingMode) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingMode:"), tabbingMode)
 	return x
 }
 
-// A value that allows a group of related windows.
-//
-// WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
-func (x *Panel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Panel {
-	x.inner.NSWindow.SetTabbingIdentifier(tabbingIdentifier)
+// WithTabbingIdentifier a value that allows a group of related windows.
+func (x *Panel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	return x
 }
 
-// A Boolean value that indicates whether the window accepts mouse-moved events.
-//
-// WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
+// WithAcceptsMouseMovedEvents a Boolean value that indicates whether the window accepts mouse-moved events.
 func (x *Panel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Panel {
-	x.inner.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
 	return x
 }
 
-// A Boolean value that indicates whether the window is transparent to mouse events.
-//
-// WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
+// WithIgnoresMouseEvents a Boolean value that indicates whether the window is transparent to mouse events.
 func (x *Panel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *Panel {
-	x.inner.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
 	return x
 }
 
-// WithAutodisplay sets the autodisplay property and returns the receiver for chaining.
+// WithAutodisplay sets the property and returns the receiver so calls can be chained.
 func (x *Panel) WithAutodisplay(autodisplay bool) *Panel {
-	x.inner.NSWindow.SetAutodisplay(autodisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return x
 }
 
-// WithOneShot sets the oneShot property and returns the receiver for chaining.
+// WithOneShot sets the property and returns the receiver so calls can be chained.
 func (x *Panel) WithOneShot(oneShot bool) *Panel {
-	x.inner.NSWindow.SetOneShot(oneShot)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), oneShot)
 	return x
 }
 
-// WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *Panel) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *Panel {
-	x.inner.NSWindow.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
+// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+func (x *Panel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return x
 }
 
-// WithShowsResizeIndicator sets the showsResizeIndicator property and returns the receiver for chaining.
+// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
 func (x *Panel) WithShowsResizeIndicator(showsResizeIndicator bool) *Panel {
-	x.inner.NSWindow.SetShowsResizeIndicator(showsResizeIndicator)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return x
 }
 
-// The zero-based position of the window, based on its order from front to back among all visible application windows.
-//
-// WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
+// WithOrderedIndex the zero-based position of the window, based on its order from front to back among all visible application windows.
 func (x *Panel) WithOrderedIndex(orderedIndex int) *Panel {
-	x.inner.NSWindow.SetOrderedIndex(orderedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderedIndex:"), orderedIndex)
 	return x
 }
 
-// A Boolean value indicating whether the window configuration is preserved between application launches.
-//
-// WithRestorable sets the restorable property and returns the receiver for chaining.
+// WithRestorable a Boolean value indicating whether the window configuration is preserved between application launches.
 func (x *Panel) WithRestorable(restorable bool) *Panel {
-	x.inner.NSWindow.SetRestorable(restorable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestorable:"), restorable)
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Panel) WithNextResponder(nextResponder ResponderProvider) *Panel {
-	x.inner.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *Panel) WithMenu(menu *Menu) *Panel {
-	x.inner.NSWindow.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Panel) WithUserActivity(userActivity *foundation.NSUserActivity) *Panel {
-	x.inner.NSWindow.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *Panel) WithUserActivity(userActivity obj.Object) *Panel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Panel) WithTouchBar(touchBar *TouchBar) *Panel {
-	x.inner.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// SetFloatingPanel calls the underlying SetFloatingPanel.
+// SetFloatingPanel wraps the corresponding Objective-C method.
 func (x *Panel) SetFloatingPanel(floatingPanel bool) {
-	x.inner.SetFloatingPanel(floatingPanel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPanel:"), floatingPanel)
 }
 
-// BecomesKeyOnlyIfNeeded calls the underlying BecomesKeyOnlyIfNeeded.
+// BecomesKeyOnlyIfNeeded wraps the corresponding Objective-C method.
 func (x *Panel) BecomesKeyOnlyIfNeeded() bool {
-	return x.inner.BecomesKeyOnlyIfNeeded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("becomesKeyOnlyIfNeeded"))
+	return _r
 }
 
-// SetBecomesKeyOnlyIfNeeded calls the underlying SetBecomesKeyOnlyIfNeeded.
+// SetBecomesKeyOnlyIfNeeded wraps the corresponding Objective-C method.
 func (x *Panel) SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) {
-	x.inner.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
 }
 
-// SetWorksWhenModal calls the underlying SetWorksWhenModal.
+// SetWorksWhenModal wraps the corresponding Objective-C method.
 func (x *Panel) SetWorksWhenModal(worksWhenModal bool) {
-	x.inner.SetWorksWhenModal(worksWhenModal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
 }
-
-func (x *Panel) asPanel() *raw.NSPanel { return x.inner }
-
-func (x *Panel) asWindow() *raw.NSWindow { return &x.inner.NSWindow }
-
-func (x *Panel) asResponder() *raw.NSResponder { return &x.inner.NSWindow.NSResponder }
 
 // Panelable is the interface implemented by [Panel], for mocking and DI.
 type Panelable interface {
-	Unwrap() *raw.NSPanel
+	obj.Object
 	WithFloatingPanel(floatingPanel bool) *Panel
 	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *Panel
 	WithWorksWhenModal(worksWhenModal bool) *Panel
 	WithTitle(title string) *Panel
 	WithSubtitle(subtitle string) *Panel
-	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Panel
+	WithTitleVisibility(titleVisibility WindowTitleVisibility) *Panel
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Panel
-	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel
-	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Panel
+	WithToolbarStyle(toolbarStyle WindowToolbarStyle) *Panel
+	WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *Panel
 	WithRepresentedURL(representedURL string) *Panel
 	WithRepresentedFilename(representedFilename string) *Panel
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Panel
 	WithContentView(contentView ViewProvider) *Panel
-	WithDelegate(delegate raw.NSWindowDelegate) *Panel
-	WithStyleMask(styleMask NSWindowStyleMask) *Panel
+	WithStyleMask(styleMask WindowStyleMask) *Panel
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Panel
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *Panel
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Panel
@@ -716,19 +554,19 @@ type Panelable interface {
 	WithDocumentEdited(documentEdited bool) *Panel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Panel
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Panel
-	WithBackingType(backingType NSBackingStoreType) *Panel
+	WithBackingType(backingType BackingStoreType) *Panel
 	WithLevel(level int) *Panel
-	WithDepthLimit(depthLimit NSWindowDepth) *Panel
+	WithDepthLimit(depthLimit WindowDepth) *Panel
 	WithHasShadow(hasShadow bool) *Panel
 	WithAlphaValue(alphaValue float64) *Panel
 	WithOpaque(opaque bool) *Panel
-	WithSharingType(sharingType NSWindowSharingType) *Panel
+	WithSharingType(sharingType WindowSharingType) *Panel
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Panel
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Panel
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Panel
-	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Panel
-	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Panel
-	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *Panel
+	WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *Panel
+	WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *Panel
+	WithFrameAutosaveName(frameAutosaveName obj.Object) *Panel
 	WithMinSize(minSize corefoundation.CGSize) *Panel
 	WithMaxSize(maxSize corefoundation.CGSize) *Panel
 	WithContentMinSize(contentMinSize corefoundation.CGSize) *Panel
@@ -737,28 +575,28 @@ type Panelable interface {
 	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Panel
 	WithWindowController(windowController *WindowController) *Panel
 	WithParentWindow(parentWindow WindowProvider) *Panel
-	WithAppearanceSource(appearanceSource *foundation.NSObject) *Panel
+	WithAppearanceSource(appearanceSource obj.Object) *Panel
 	WithColorSpace(colorSpace *ColorSpace) *Panel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Panel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *Panel
 	WithContentViewController(contentViewController ViewControllerProvider) *Panel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *Panel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Panel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Panel
 	WithToolbar(toolbar *Toolbar) *Panel
 	WithShowsToolbarButton(showsToolbarButton bool) *Panel
-	WithTabbingMode(tabbingMode NSWindowTabbingMode) *Panel
-	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Panel
+	WithTabbingMode(tabbingMode WindowTabbingMode) *Panel
+	WithTabbingIdentifier(tabbingIdentifier obj.Object) *Panel
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Panel
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *Panel
 	WithAutodisplay(autodisplay bool) *Panel
 	WithOneShot(oneShot bool) *Panel
-	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *Panel
+	WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *Panel
 	WithShowsResizeIndicator(showsResizeIndicator bool) *Panel
 	WithOrderedIndex(orderedIndex int) *Panel
 	WithRestorable(restorable bool) *Panel
 	WithNextResponder(nextResponder ResponderProvider) *Panel
 	WithMenu(menu *Menu) *Panel
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Panel
+	WithUserActivity(userActivity obj.Object) *Panel
 	WithTouchBar(touchBar *TouchBar) *Panel
 	SetFloatingPanel(floatingPanel bool)
 	BecomesKeyOnlyIfNeeded() bool
@@ -767,3 +605,14 @@ type Panelable interface {
 }
 
 var _ Panelable = (*Panel)(nil)
+
+// isPanel marks Panel — and, by embedding promotion, its
+// subclasses — as a member of the Panel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Panel) isPanel() {}
+
+var _ PanelProvider = (*Panel)(nil)
+
+var _ WindowProvider = (*Panel)(nil)
+
+var _ ResponderProvider = (*Panel)(nil)

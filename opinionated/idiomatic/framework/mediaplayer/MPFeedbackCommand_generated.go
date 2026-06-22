@@ -5,121 +5,119 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that reflects the feedback state for the playing item.
+// FeedbackCommand is an idiomatic wrapper over the Objective-C class MPFeedbackCommand.
 //
-// FeedbackCommand wraps [raw.MPFeedbackCommand] with a fluent Go API.
+// It embeds [RemoteCommand], promoting that type's methods.
+//
+// An object that reflects the feedback state for the playing item.
 type FeedbackCommand struct {
-	inner *raw.MPFeedbackCommand
+	RemoteCommand
 }
 
-// Unwrap returns the underlying [raw.MPFeedbackCommand].
-func (x *FeedbackCommand) Unwrap() *raw.MPFeedbackCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FeedbackCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// FeedbackCommandFromID adopts an existing object pointer as a FeedbackCommand (nil for 0).
+// FeedbackCommandFromID adopts an existing Objective-C object as a FeedbackCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func FeedbackCommandFromID(id objc.ID) *FeedbackCommand {
 	if id == 0 {
 		return nil
 	}
-	return &FeedbackCommand{inner: raw.MPFeedbackCommandFromID(id)}
+	x := &FeedbackCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFeedbackCommand creates a new [FeedbackCommand].
+// feedbackCommandAdopt wraps an Objective-C object that this code just created as a
+// FeedbackCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func feedbackCommandAdopt(id objc.ID) *FeedbackCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &FeedbackCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewFeedbackCommand creates a new FeedbackCommand.
 func NewFeedbackCommand() *FeedbackCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPFeedbackCommand")), objc.RegisterName("new"))
-	return &FeedbackCommand{inner: raw.MPFeedbackCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPFeedbackCommand")), objc.RegisterName("new"))
+	return feedbackCommandAdopt(_id)
 }
 
-// A Boolean value that indicates whether the feedback’s action is on or off.
-//
-// WithActive sets the active property and returns the receiver for chaining.
+// WithActive a Boolean value that indicates whether the feedback’s action is on or off.
 func (x *FeedbackCommand) WithActive(active bool) *FeedbackCommand {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 	return x
 }
 
-// A localized string used to describe the context of a command.
-//
-// WithLocalizedTitle sets the localizedTitle property and returns the receiver for chaining.
+// WithLocalizedTitle a localized string used to describe the context of a command.
 func (x *FeedbackCommand) WithLocalizedTitle(localizedTitle string) *FeedbackCommand {
-	x.inner.SetLocalizedTitle(foundation.NSStringStringWithUTF8String(localizedTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedTitle:"), purego.NSString(localizedTitle))
 	return x
 }
 
-// A shortened version of the string used to describe the context of a command.
-//
-// WithLocalizedShortTitle sets the localizedShortTitle property and returns the receiver for chaining.
+// WithLocalizedShortTitle a shortened version of the string used to describe the context of a command.
 func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand {
-	x.inner.SetLocalizedShortTitle(foundation.NSStringStringWithUTF8String(localizedShortTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedShortTitle:"), purego.NSString(localizedShortTitle))
 	return x
 }
 
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
 func (x *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
-//
-// IsActive calls the underlying IsActive.
+// IsActive whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
 func (x *FeedbackCommand) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// SetActive calls the underlying SetActive.
+// SetActive wraps the corresponding Objective-C method.
 func (x *FeedbackCommand) SetActive(active bool) {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 }
 
-// A localized string briefly describing the context of the command.
-//
-// LocalizedTitle calls the underlying LocalizedTitle.
+// LocalizedTitle a localized string briefly describing the context of the command.
 func (x *FeedbackCommand) LocalizedTitle() string {
-	_r := x.inner.LocalizedTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedTitle calls the underlying SetLocalizedTitle.
+// SetLocalizedTitle wraps the corresponding Objective-C method.
 func (x *FeedbackCommand) SetLocalizedTitle(localizedTitle string) {
-	x.inner.SetLocalizedTitle(foundation.NSStringStringWithUTF8String(localizedTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedTitle:"), purego.NSString(localizedTitle))
 }
 
-// An optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
-//
-// LocalizedShortTitle calls the underlying LocalizedShortTitle.
+// LocalizedShortTitle an optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
 func (x *FeedbackCommand) LocalizedShortTitle() string {
-	_r := x.inner.LocalizedShortTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedShortTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedShortTitle calls the underlying SetLocalizedShortTitle.
+// SetLocalizedShortTitle wraps the corresponding Objective-C method.
 func (x *FeedbackCommand) SetLocalizedShortTitle(localizedShortTitle string) {
-	x.inner.SetLocalizedShortTitle(foundation.NSStringStringWithUTF8String(localizedShortTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedShortTitle:"), purego.NSString(localizedShortTitle))
 }
-
-func (x *FeedbackCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
 
 // FeedbackCommandable is the interface implemented by [FeedbackCommand], for mocking and DI.
 type FeedbackCommandable interface {
-	Unwrap() *raw.MPFeedbackCommand
+	obj.Object
 	WithActive(active bool) *FeedbackCommand
 	WithLocalizedTitle(localizedTitle string) *FeedbackCommand
 	WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand
@@ -133,3 +131,5 @@ type FeedbackCommandable interface {
 }
 
 var _ FeedbackCommandable = (*FeedbackCommand)(nil)
+
+var _ RemoteCommandProvider = (*FeedbackCommand)(nil)

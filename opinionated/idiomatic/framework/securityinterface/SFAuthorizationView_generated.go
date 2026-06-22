@@ -5,163 +5,155 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class responsible for displaying a lock icon that can be used to indicate that a user interface has restricted access.
+// AuthorizationView is an idiomatic wrapper over the Objective-C class SFAuthorizationView.
 //
-// AuthorizationView wraps [raw.SFAuthorizationView] with a fluent Go API.
+// The class responsible for displaying a lock icon that can be used to indicate that a user interface has restricted access.
 type AuthorizationView struct {
-	inner *raw.SFAuthorizationView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFAuthorizationView].
-func (x *AuthorizationView) Unwrap() *raw.SFAuthorizationView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationView) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationViewFromID adopts an existing object pointer as a AuthorizationView (nil for 0).
+// AuthorizationViewFromID adopts an existing Objective-C object as a AuthorizationView
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationViewFromID(id objc.ID) *AuthorizationView {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationView{inner: raw.SFAuthorizationViewFromID(id)}
+	x := &AuthorizationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationView creates a new [AuthorizationView].
+// authorizationViewAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationViewAdopt(id objc.ID) *AuthorizationView {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationView creates a new AuthorizationView.
 func NewAuthorizationView() *AuthorizationView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFAuthorizationView")), objc.RegisterName("new"))
-	return &AuthorizationView{inner: raw.SFAuthorizationViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationView")), objc.RegisterName("new"))
+	return authorizationViewAdopt(_id)
 }
 
-// Sets the requested-right string to use with the default authorization rights set.
-//
-// SetString calls the underlying SetString.
+// SetString sets the requested-right string to use with the default authorization rights set.
 func (x *AuthorizationView) SetString(authorizationString string) {
-	x.inner.SetString(authorizationString)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), authorizationString)
 }
 
-// Sets the authorization rights for this view.
-//
-// SetAuthorizationRights calls the underlying SetAuthorizationRights.
-func (x *AuthorizationView) SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet) {
-	x.inner.SetAuthorizationRights(authorizationRights)
+// Authorization returns the authorization object associated with this view.
+func (x *AuthorizationView) Authorization() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorization"))
+	return obj.Wrap(_r)
 }
 
-// Returns the authorization rights for this view.
-//
-// AuthorizationRights calls the underlying AuthorizationRights.
-func (x *AuthorizationView) AuthorizationRights() *security.AuthorizationItemSet {
-	return x.inner.AuthorizationRights()
+// UpdateStatus manually updates the authorization view.
+func (x *AuthorizationView) UpdateStatus(inSender obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateStatus:"), objref.IDOf(inSender))
+	return _r
 }
 
-// Returns the authorization object associated with this view.
-//
-// Authorization calls the underlying Authorization.
-func (x *AuthorizationView) Authorization() *securityfoundation.SFAuthorization {
-	return x.inner.Authorization()
-}
-
-// Manually updates the authorization view.
-//
-// UpdateStatus calls the underlying UpdateStatus.
-func (x *AuthorizationView) UpdateStatus(inSender objc.ID) bool {
-	return x.inner.UpdateStatus(inSender)
-}
-
-// Sets the authorization view to update itself automatically.
-//
-// SetAutoupdate calls the underlying SetAutoupdate.
+// SetAutoupdate sets the authorization view to update itself automatically.
 func (x *AuthorizationView) SetAutoupdate(autoupdate bool) {
-	x.inner.SetAutoupdate(autoupdate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoupdate:"), autoupdate)
 }
 
-// Sets the authorization view to update itself at a specific interval.
-//
-// SetAutoupdateInterval calls the underlying SetAutoupdateInterval.
+// SetAutoupdateInterval sets the authorization view to update itself at a specific interval.
 func (x *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
-	x.inner.SetAutoupdateInterval(autoupdate, interval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoupdate:interval:"), autoupdate, interval)
 }
 
-// Returns the current state of the authorization view.
-//
-// AuthorizationState calls the underlying AuthorizationState.
-func (x *AuthorizationView) AuthorizationState() SFAuthorizationViewState {
-	return SFAuthorizationViewState(x.inner.AuthorizationState())
+// AuthorizationState returns the current state of the authorization view.
+func (x *AuthorizationView) AuthorizationState() AuthorizationViewState {
+	_r := objc.Send[AuthorizationViewState](objref.IDOf(x), objc.RegisterName("authorizationState"))
+	return _r
 }
 
-// Sets the current state of the authorization view.
-//
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled sets the current state of the authorization view.
 func (x *AuthorizationView) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Indicates whether the authorization view is enabled (true) or disabled (false).
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled indicates whether the authorization view is enabled (true) or disabled (false).
 func (x *AuthorizationView) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// Sets the current authorization flags for the view.
-//
-// SetFlags calls the underlying SetFlags.
-func (x *AuthorizationView) SetFlags(flags security.AuthorizationFlags) {
-	x.inner.SetFlags(flags)
+// SetDelegate sets the delegate for this authorization view.
+func (x *AuthorizationView) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Sets the delegate for this authorization view.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *AuthorizationView) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+// Delegate returns the delegate for this view.
+func (x *AuthorizationView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// Returns the delegate for this view.
-//
-// Delegate calls the underlying Delegate.
-func (x *AuthorizationView) Delegate() objc.ID {
-	return x.inner.Delegate()
+// Authorize attempts to unlock the lock icon in the view.
+func (x *AuthorizationView) Authorize(inSender obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorize:"), objref.IDOf(inSender))
+	return _r
 }
 
-// Attempts to unlock the lock icon in the view.
-//
-// Authorize calls the underlying Authorize.
-func (x *AuthorizationView) Authorize(inSender objc.ID) bool {
-	return x.inner.Authorize(inSender)
-}
-
-// Sets the authorization state to unauthorized and locks the lock icon in the view.
-//
-// Deauthorize calls the underlying Deauthorize.
-func (x *AuthorizationView) Deauthorize(inSender objc.ID) bool {
-	return x.inner.Deauthorize(inSender)
+// Deauthorize sets the authorization state to unauthorized and locks the lock icon in the view.
+func (x *AuthorizationView) Deauthorize(inSender obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deauthorize:"), objref.IDOf(inSender))
+	return _r
 }
 
 // AuthorizationViewable is the interface implemented by [AuthorizationView], for mocking and DI.
 type AuthorizationViewable interface {
-	Unwrap() *raw.SFAuthorizationView
+	obj.Object
 	SetString(authorizationString string)
-	SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet)
-	AuthorizationRights() *security.AuthorizationItemSet
-	Authorization() *securityfoundation.SFAuthorization
-	UpdateStatus(inSender objc.ID) bool
+	Authorization() obj.Object
+	UpdateStatus(inSender obj.Object) bool
 	SetAutoupdate(autoupdate bool)
 	SetAutoupdateInterval(autoupdate bool, interval float64)
-	AuthorizationState() SFAuthorizationViewState
+	AuthorizationState() AuthorizationViewState
 	SetEnabled(enabled bool)
 	IsEnabled() bool
-	SetFlags(flags security.AuthorizationFlags)
-	SetDelegate(delegate objc.ID)
-	Delegate() objc.ID
-	Authorize(inSender objc.ID) bool
-	Deauthorize(inSender objc.ID) bool
+	SetDelegate(delegate obj.Object)
+	Delegate() obj.Object
+	Authorize(inSender obj.Object) bool
+	Deauthorize(inSender obj.Object) bool
 }
 
 var _ AuthorizationViewable = (*AuthorizationView)(nil)

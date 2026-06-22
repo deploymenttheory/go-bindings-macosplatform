@@ -5,83 +5,113 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single data value.
+// DataPointValue is an idiomatic wrapper over the Objective-C class AXDataPointValue.
 //
-// DataPointValue wraps [raw.AXDataPointValue] with a fluent Go API.
+// A single data value.
 type DataPointValue struct {
-	inner *raw.AXDataPointValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXDataPointValue].
-func (x *DataPointValue) Unwrap() *raw.AXDataPointValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DataPointValue) ID() objc.ID { return x.inner.Ptr() }
-
-// DataPointValueFromID adopts an existing object pointer as a DataPointValue (nil for 0).
+// DataPointValueFromID adopts an existing Objective-C object as a DataPointValue
+// (nil for 0), retaining it and registering a release finalizer.
 func DataPointValueFromID(id objc.ID) *DataPointValue {
 	if id == 0 {
 		return nil
 	}
-	return &DataPointValue{inner: raw.AXDataPointValueFromID(id)}
+	x := &DataPointValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDataPointValue creates a new [DataPointValue].
+// dataPointValueAdopt wraps an Objective-C object that this code just created as a
+// DataPointValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dataPointValueAdopt(id objc.ID) *DataPointValue {
+	if id == 0 {
+		return nil
+	}
+	x := &DataPointValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DataPointValue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DataPointValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DataPointValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DataPointValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDataPointValue creates a new DataPointValue.
 func NewDataPointValue() *DataPointValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AXDataPointValue")), objc.RegisterName("new"))
-	return &DataPointValue{inner: raw.AXDataPointValueFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AXDataPointValue")), objc.RegisterName("new"))
+	return dataPointValueAdopt(_id)
 }
 
-// A number that represents the numeric data value.
-//
-// WithNumber sets the number property and returns the receiver for chaining.
+// WithNumber a number that represents the numeric data value.
 func (x *DataPointValue) WithNumber(number float64) *DataPointValue {
-	x.inner.SetNumber(number)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 	return x
 }
 
-// A string that represents the categorical data value.
-//
-// WithCategory sets the category property and returns the receiver for chaining.
+// WithCategory a string that represents the categorical data value.
 func (x *DataPointValue) WithCategory(category string) *DataPointValue {
-	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return x
 }
 
-// Number calls the underlying Number.
+// Number wraps the corresponding Objective-C method.
 func (x *DataPointValue) Number() float64 {
-	return x.inner.Number()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("number"))
+	return _r
 }
 
-// SetNumber calls the underlying SetNumber.
+// SetNumber wraps the corresponding Objective-C method.
 func (x *DataPointValue) SetNumber(number float64) {
-	x.inner.SetNumber(number)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 }
 
-// Category calls the underlying Category.
+// Category wraps the corresponding Objective-C method.
 func (x *DataPointValue) Category() string {
-	_r := x.inner.Category()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCategory calls the underlying SetCategory.
+// SetCategory wraps the corresponding Objective-C method.
 func (x *DataPointValue) SetCategory(category string) {
-	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }
 
 // DataPointValueable is the interface implemented by [DataPointValue], for mocking and DI.
 type DataPointValueable interface {
-	Unwrap() *raw.AXDataPointValue
+	obj.Object
 	WithNumber(number float64) *DataPointValue
 	WithCategory(category string) *DataPointValue
 	Number() float64

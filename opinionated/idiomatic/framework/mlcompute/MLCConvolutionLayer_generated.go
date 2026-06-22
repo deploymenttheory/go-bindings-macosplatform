@@ -5,115 +5,98 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that applies a convolution over a signal.
+// ConvolutionLayer is an idiomatic wrapper over the Objective-C class MLCConvolutionLayer.
 //
-// ConvolutionLayer wraps [raw.MLCConvolutionLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that applies a convolution over a signal.
 type ConvolutionLayer struct {
-	inner *raw.MLCConvolutionLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCConvolutionLayer].
-func (x *ConvolutionLayer) Unwrap() *raw.MLCConvolutionLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConvolutionLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ConvolutionLayerFromID adopts an existing object pointer as a ConvolutionLayer (nil for 0).
+// ConvolutionLayerFromID adopts an existing Objective-C object as a ConvolutionLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ConvolutionLayerFromID(id objc.ID) *ConvolutionLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ConvolutionLayer{inner: raw.MLCConvolutionLayerFromID(id)}
+	x := &ConvolutionLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewConvolutionLayer creates a new [ConvolutionLayer].
+// convolutionLayerAdopt wraps an Objective-C object that this code just created as a
+// ConvolutionLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func convolutionLayerAdopt(id objc.ID) *ConvolutionLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ConvolutionLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewConvolutionLayer creates a new ConvolutionLayer.
 func NewConvolutionLayer() *ConvolutionLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCConvolutionLayer")), objc.RegisterName("new"))
-	return &ConvolutionLayer{inner: raw.MLCConvolutionLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionLayer")), objc.RegisterName("new"))
+	return convolutionLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *ConvolutionLayer) WithLabel(label string) *ConvolutionLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *ConvolutionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   descriptor @abstract   The convolution descriptor
-//
-// Descriptor calls the underlying Descriptor.
+// Descriptor the convolution descriptor
 func (x *ConvolutionLayer) Descriptor() *ConvolutionDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
-		return nil
-	}
-	return &ConvolutionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return ConvolutionDescriptorFromID(_r)
 }
 
-// @property   weights @abstract   The weights tensor used by the convolution layer
-//
-// Weights calls the underlying Weights.
+// Weights the weights tensor used by the convolution layer
 func (x *ConvolutionLayer) Weights() *Tensor {
-	_r := x.inner.Weights()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+	return TensorFromID(_r)
 }
 
-// @property   biases @abstract   The bias tensor used by the convolution layer
-//
-// Biases calls the underlying Biases.
+// Biases the bias tensor used by the convolution layer
 func (x *ConvolutionLayer) Biases() *Tensor {
-	_r := x.inner.Biases()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biases"))
+	return TensorFromID(_r)
 }
 
-// @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
-//
-// WeightsParameter calls the underlying WeightsParameter.
+// WeightsParameter the weights tensor parameter used for optimizer update
 func (x *ConvolutionLayer) WeightsParameter() *TensorParameter {
-	_r := x.inner.WeightsParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   biasesParameter @abstract   The bias tensor parameter used for optimizer update
-//
-// BiasesParameter calls the underlying BiasesParameter.
+// BiasesParameter the bias tensor parameter used for optimizer update
 func (x *ConvolutionLayer) BiasesParameter() *TensorParameter {
-	_r := x.inner.BiasesParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasesParameter"))
+	return TensorParameterFromID(_r)
 }
-
-func (x *ConvolutionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // ConvolutionLayerable is the interface implemented by [ConvolutionLayer], for mocking and DI.
 type ConvolutionLayerable interface {
-	Unwrap() *raw.MLCConvolutionLayer
+	obj.Object
 	WithLabel(label string) *ConvolutionLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConvolutionLayer
 	Descriptor() *ConvolutionDescriptor
@@ -124,3 +107,5 @@ type ConvolutionLayerable interface {
 }
 
 var _ ConvolutionLayerable = (*ConvolutionLayer)(nil)
+
+var _ LayerProvider = (*ConvolutionLayer)(nil)

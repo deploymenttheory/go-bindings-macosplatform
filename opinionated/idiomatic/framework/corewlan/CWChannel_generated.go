@@ -5,73 +5,104 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates an IEEE 802.11 channel.
+// Channel is an idiomatic wrapper over the Objective-C class CWChannel.
 //
-// Channel wraps [raw.CWChannel] with a fluent Go API.
+// Encapsulates an IEEE 802.11 channel.
 type Channel struct {
-	inner *raw.CWChannel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CWChannel].
-func (x *Channel) Unwrap() *raw.CWChannel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Channel) ID() objc.ID { return x.inner.Ptr() }
-
-// ChannelFromID adopts an existing object pointer as a Channel (nil for 0).
+// ChannelFromID adopts an existing Objective-C object as a Channel
+// (nil for 0), retaining it and registering a release finalizer.
 func ChannelFromID(id objc.ID) *Channel {
 	if id == 0 {
 		return nil
 	}
-	return &Channel{inner: raw.CWChannelFromID(id)}
+	x := &Channel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChannel creates a new [Channel].
+// channelAdopt wraps an Objective-C object that this code just created as a
+// Channel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func channelAdopt(id objc.ID) *Channel {
+	if id == 0 {
+		return nil
+	}
+	x := &Channel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Channel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Channel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Channel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Channel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewChannel creates a new Channel.
 func NewChannel() *Channel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CWChannel")), objc.RegisterName("new"))
-	return &Channel{inner: raw.CWChannelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CWChannel")), objc.RegisterName("new"))
+	return channelAdopt(_id)
 }
 
-// Determine CWChannel object equality.
-//
-// IsEqualToChannel calls the underlying IsEqualToChannel.
-func (x *Channel) IsEqualToChannel(channel *raw.CWChannel) bool {
-	return x.inner.IsEqualToChannel(channel)
+// IsEqualToChannel determine CWChannel object equality.
+func (x *Channel) IsEqualToChannel(channel *Channel) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToChannel:"), objref.IDOf(channel))
+	return _r
 }
 
-// @property @abstract The channel number represented as an integer value.
-//
-// ChannelNumber calls the underlying ChannelNumber.
+// ChannelNumber the channel number represented as an integer value.
 func (x *Channel) ChannelNumber() int {
-	return x.inner.ChannelNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelNumber"))
+	return _r
 }
 
-// @property @abstract The channel width as indicated by the CWChannelWidth type.
-//
-// ChannelWidth calls the underlying ChannelWidth.
-func (x *Channel) ChannelWidth() CWChannelWidth {
-	return CWChannelWidth(x.inner.ChannelWidth())
+// ChannelWidth the channel width as indicated by the CWChannelWidth type.
+func (x *Channel) ChannelWidth() ChannelWidth {
+	_r := objc.Send[ChannelWidth](objref.IDOf(x), objc.RegisterName("channelWidth"))
+	return _r
 }
 
-// @property @abstract The channel band as indicated by the CWChannelBand type.
-//
-// ChannelBand calls the underlying ChannelBand.
-func (x *Channel) ChannelBand() CWChannelBand {
-	return CWChannelBand(x.inner.ChannelBand())
+// ChannelBand the channel band as indicated by the CWChannelBand type.
+func (x *Channel) ChannelBand() ChannelBand {
+	_r := objc.Send[ChannelBand](objref.IDOf(x), objc.RegisterName("channelBand"))
+	return _r
 }
 
 // Channelable is the interface implemented by [Channel], for mocking and DI.
 type Channelable interface {
-	Unwrap() *raw.CWChannel
-	IsEqualToChannel(channel *raw.CWChannel) bool
+	obj.Object
+	IsEqualToChannel(channel *Channel) bool
 	ChannelNumber() int
-	ChannelWidth() CWChannelWidth
-	ChannelBand() CWChannelBand
+	ChannelWidth() ChannelWidth
+	ChannelBand() ChannelBand
 }
 
 var _ Channelable = (*Channel)(nil)

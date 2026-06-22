@@ -5,115 +5,113 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that handles the loading of protocol-specific URL data.
+// URLProtocol is an idiomatic wrapper over the Objective-C class NSURLProtocol.
 //
-// URLProtocol wraps [raw.NSURLProtocol] with a fluent Go API.
+// An abstract class that handles the loading of protocol-specific URL data.
 type URLProtocol struct {
-	inner *raw.NSURLProtocol
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLProtocol].
-func (x *URLProtocol) Unwrap() *raw.NSURLProtocol { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLProtocol) ID() objc.ID { return x.inner.Ptr() }
-
-// URLProtocolFromID adopts an existing object pointer as a URLProtocol (nil for 0).
+// URLProtocolFromID adopts an existing Objective-C object as a URLProtocol
+// (nil for 0), retaining it and registering a release finalizer.
 func URLProtocolFromID(id objc.ID) *URLProtocol {
 	if id == 0 {
 		return nil
 	}
-	return &URLProtocol{inner: raw.NSURLProtocolFromID(id)}
-}
-
-// @method initWithRequest:cachedResponse:client: @abstract Initializes an NSURLProtocol given request, cached response, and client. @param request The request to load. @param cachedResponse A response that has been retrieved from the cache for the given request. The protocol implementation should apply protocol-specific validity checks if such tests are necessary. @param client The NSURLProtocolClient object that serves as the interface the protocol implementation can use to report results back to the URL loading system.
-//
-// NewURLProtocolWithRequestCachedResponseClient creates a new [URLProtocol].
-func NewURLProtocolWithRequestCachedResponseClient(request *raw.NSURLRequest, cachedResponse *raw.NSCachedURLResponse, client raw.NSURLProtocolClient) *URLProtocol {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLProtocol")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:cachedResponse:client:"), request.Ptr(), cachedResponse.Ptr(), client)
-	return &URLProtocol{inner: raw.NSURLProtocolFromID(_id)}
-}
-
-// NewURLProtocolWithTaskCachedResponseClient creates a new [URLProtocol].
-func NewURLProtocolWithTaskCachedResponseClient(task *raw.NSURLSessionTask, cachedResponse *raw.NSCachedURLResponse, client raw.NSURLProtocolClient) *URLProtocol {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLProtocol")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTask:cachedResponse:client:"), task.Ptr(), cachedResponse.Ptr(), client)
-	return &URLProtocol{inner: raw.NSURLProtocolFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLProtocol) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLProtocol {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLProtocol{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @method startLoading @abstract Starts protocol-specific loading of a request. @discussion When this method is called, the protocol implementation should start loading a request.
-//
-// StartLoading calls the underlying StartLoading.
+// uRLProtocolAdopt wraps an Objective-C object that this code just created as a
+// URLProtocol (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLProtocolAdopt(id objc.ID) *URLProtocol {
+	if id == 0 {
+		return nil
+	}
+	x := &URLProtocol{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLProtocol) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLProtocol) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLProtocol) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLProtocol) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLProtocol creates a new URLProtocol.
+func NewURLProtocol() *URLProtocol {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("new"))
+	return uRLProtocolAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLProtocol) WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// StartLoading starts protocol-specific loading of a request. When this method is called, the protocol implementation should start loading a request.
 func (x *URLProtocol) StartLoading() {
-	x.inner.StartLoading()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startLoading"))
 }
 
-// @method stopLoading @abstract Stops protocol-specific loading of a request. @discussion When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
-//
-// StopLoading calls the underlying StopLoading.
+// StopLoading stops protocol-specific loading of a request. When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
 func (x *URLProtocol) StopLoading() {
-	x.inner.StopLoading()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopLoading"))
 }
 
-// @abstract Returns the NSURLProtocolClient of the receiver. @result The NSURLProtocolClient of the receiver.
-//
-// Client calls the underlying Client.
-func (x *URLProtocol) Client() raw.NSURLProtocolClient {
-	return x.inner.Client()
-}
-
-// @abstract Returns the NSURLRequest of the receiver. @result The NSURLRequest of the receiver.
-//
-// Request calls the underlying Request.
+// Request returns the NSURLRequest of the receiver.
 func (x *URLProtocol) Request() *URLRequest {
-	_r := x.inner.Request()
-	if _r == nil {
-		return nil
-	}
-	return &URLRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+	return URLRequestFromID(_r)
 }
 
-// @abstract Returns the NSCachedURLResponse of the receiver. @result The NSCachedURLResponse of the receiver.
-//
-// CachedResponse calls the underlying CachedResponse.
+// CachedResponse returns the NSCachedURLResponse of the receiver.
 func (x *URLProtocol) CachedResponse() *CachedURLResponse {
-	_r := x.inner.CachedResponse()
-	if _r == nil {
-		return nil
-	}
-	return &CachedURLResponse{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cachedResponse"))
+	return CachedURLResponseFromID(_r)
 }
 
-// Task calls the underlying Task.
+// Task wraps the corresponding Objective-C method.
 func (x *URLProtocol) Task() *URLSessionTask {
-	_r := x.inner.Task()
-	if _r == nil {
-		return nil
-	}
-	return &URLSessionTask{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("task"))
+	return URLSessionTaskFromID(_r)
 }
-
-func (x *URLProtocol) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLProtocolable is the interface implemented by [URLProtocol], for mocking and DI.
 type URLProtocolable interface {
-	Unwrap() *raw.NSURLProtocol
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLProtocol
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol
 	StartLoading()
 	StopLoading()
-	Client() raw.NSURLProtocolClient
 	Request() *URLRequest
 	CachedResponse() *CachedURLResponse
 	Task() *URLSessionTask

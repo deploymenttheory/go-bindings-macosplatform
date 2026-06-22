@@ -5,119 +5,136 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterElectricalEnergyMeasurement wraps [raw.MTRClusterElectricalEnergyMeasurement] with a fluent Go API.
+// MTRClusterElectricalEnergyMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterElectricalEnergyMeasurement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterElectricalEnergyMeasurement struct {
-	inner *raw.MTRClusterElectricalEnergyMeasurement
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterElectricalEnergyMeasurement].
-func (x *MTRClusterElectricalEnergyMeasurement) Unwrap() *raw.MTRClusterElectricalEnergyMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterElectricalEnergyMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterElectricalEnergyMeasurementFromID adopts an existing object pointer as a MTRClusterElectricalEnergyMeasurement (nil for 0).
+// MTRClusterElectricalEnergyMeasurementFromID adopts an existing Objective-C object as a MTRClusterElectricalEnergyMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterElectricalEnergyMeasurementFromID(id objc.ID) *MTRClusterElectricalEnergyMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterElectricalEnergyMeasurement{inner: raw.MTRClusterElectricalEnergyMeasurementFromID(id)}
+	x := &MTRClusterElectricalEnergyMeasurement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterElectricalEnergyMeasurement].
-func NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterElectricalEnergyMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterElectricalEnergyMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterElectricalEnergyMeasurement{inner: raw.MTRClusterElectricalEnergyMeasurementFromID(_id)}
+// mTRClusterElectricalEnergyMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterElectricalEnergyMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterElectricalEnergyMeasurementAdopt(id objc.ID) *MTRClusterElectricalEnergyMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterElectricalEnergyMeasurement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ReadAttributeAccuracyWithParams calls the underlying ReadAttributeAccuracyWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAccuracyWithParams(params)
+// NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterElectricalEnergyMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterElectricalEnergyMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterElectricalEnergyMeasurementAdopt(_id)
 }
 
-// ReadAttributeCumulativeEnergyImportedWithParams calls the underlying ReadAttributeCumulativeEnergyImportedWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCumulativeEnergyImportedWithParams(params)
+// ReadAttributeAccuracyWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAccuracyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCumulativeEnergyExportedWithParams calls the underlying ReadAttributeCumulativeEnergyExportedWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCumulativeEnergyExportedWithParams(params)
+// ReadAttributeCumulativeEnergyImportedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCumulativeEnergyImportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePeriodicEnergyImportedWithParams calls the underlying ReadAttributePeriodicEnergyImportedWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePeriodicEnergyImportedWithParams(params)
+// ReadAttributeCumulativeEnergyExportedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCumulativeEnergyExportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePeriodicEnergyExportedWithParams calls the underlying ReadAttributePeriodicEnergyExportedWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePeriodicEnergyExportedWithParams(params)
+// ReadAttributePeriodicEnergyImportedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeriodicEnergyImportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCumulativeEnergyResetWithParams calls the underlying ReadAttributeCumulativeEnergyResetWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCumulativeEnergyResetWithParams(params)
+// ReadAttributePeriodicEnergyExportedWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeriodicEnergyExportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeCumulativeEnergyResetWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCumulativeEnergyResetWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterElectricalEnergyMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterElectricalEnergyMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterElectricalEnergyMeasurementable is the interface implemented by [MTRClusterElectricalEnergyMeasurement], for mocking and DI.
 type MTRClusterElectricalEnergyMeasurementable interface {
-	Unwrap() *raw.MTRClusterElectricalEnergyMeasurement
-	ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCumulativeEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCumulativeEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePeriodicEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePeriodicEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCumulativeEnergyResetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCumulativeEnergyImportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCumulativeEnergyExportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePeriodicEnergyImportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePeriodicEnergyExportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCumulativeEnergyResetWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterElectricalEnergyMeasurementable = (*MTRClusterElectricalEnergyMeasurement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterElectricalEnergyMeasurement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterElectricalEnergyMeasurement)(nil)

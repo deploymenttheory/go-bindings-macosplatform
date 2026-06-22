@@ -5,95 +5,119 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a Clinical Document Architecture (CDA) document in HealthKit.
+// CDADocument is an idiomatic wrapper over the Objective-C class HKCDADocument.
 //
-// CDADocument wraps [raw.HKCDADocument] with a fluent Go API.
+// An object representing a Clinical Document Architecture (CDA) document in HealthKit.
 type CDADocument struct {
-	inner *raw.HKCDADocument
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCDADocument].
-func (x *CDADocument) Unwrap() *raw.HKCDADocument { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CDADocument) ID() objc.ID { return x.inner.Ptr() }
-
-// CDADocumentFromID adopts an existing object pointer as a CDADocument (nil for 0).
+// CDADocumentFromID adopts an existing Objective-C object as a CDADocument
+// (nil for 0), retaining it and registering a release finalizer.
 func CDADocumentFromID(id objc.ID) *CDADocument {
 	if id == 0 {
 		return nil
 	}
-	return &CDADocument{inner: raw.HKCDADocumentFromID(id)}
+	x := &CDADocument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCDADocument creates a new [CDADocument].
+// cDADocumentAdopt wraps an Objective-C object that this code just created as a
+// CDADocument (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cDADocumentAdopt(id objc.ID) *CDADocument {
+	if id == 0 {
+		return nil
+	}
+	x := &CDADocument{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CDADocument) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CDADocument) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CDADocument) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CDADocument) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCDADocument creates a new CDADocument.
 func NewCDADocument() *CDADocument {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCDADocument")), objc.RegisterName("new"))
-	return &CDADocument{inner: raw.HKCDADocumentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCDADocument")), objc.RegisterName("new"))
+	return cDADocumentAdopt(_id)
 }
 
-// @property  documentData @abstract  The CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
-//
-// DocumentData calls the underlying DocumentData.
-func (x *CDADocument) DocumentData() *foundation.NSData {
-	return x.inner.DocumentData()
+// DocumentData the CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
+func (x *CDADocument) DocumentData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentData"))
+	return obj.Wrap(_r)
 }
 
-// @property      title @abstract      The title of the document. @discussion    This property is extracted automatically from the document.
-//
-// Title calls the underlying Title.
+// Title the title of the document. This property is extracted automatically from the document.
 func (x *CDADocument) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      patientName @abstract      The name of the patient receiving treatment. @discussion    This property is extracted automatically from the document.
-//
-// PatientName calls the underlying PatientName.
+// PatientName the name of the patient receiving treatment. This property is extracted automatically from the document.
 func (x *CDADocument) PatientName() string {
-	_r := x.inner.PatientName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("patientName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      authorName @abstract      The person responsible for authoring the document.  Usually, this is the treating physician. @discussion    This property is extracted automatically from the document.
-//
-// AuthorName calls the underlying AuthorName.
+// AuthorName the person responsible for authoring the document.  Usually, this is the treating physician. This property is extracted automatically from the document.
 func (x *CDADocument) AuthorName() string {
-	_r := x.inner.AuthorName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      custodianName @abstract      The organization responsible for the document.  This is usually the treating institution name. @discussion    This property is extracted automatically from the document.
-//
-// CustodianName calls the underlying CustodianName.
+// CustodianName the organization responsible for the document.  This is usually the treating institution name. This property is extracted automatically from the document.
 func (x *CDADocument) CustodianName() string {
-	_r := x.inner.CustodianName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("custodianName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CDADocumentable is the interface implemented by [CDADocument], for mocking and DI.
 type CDADocumentable interface {
-	Unwrap() *raw.HKCDADocument
-	DocumentData() *foundation.NSData
+	obj.Object
+	DocumentData() obj.Object
 	Title() string
 	PatientName() string
 	AuthorName() string

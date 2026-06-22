@@ -10,266 +10,284 @@ import (
 )
 
 // The set of processing-unit configurations the model can use to make predictions.
-type MLComputeUnits int64
+type ComputeUnits int64
 
 const (
 	// The option you choose to limit the model to only use the CPU.
-	MLComputeUnitsCPUOnly MLComputeUnits = 0
+	ComputeUnitsCPUOnly ComputeUnits = 0
 	// The option you choose to allow the model to use both the CPU and GPU, but not the neural engine.
-	MLComputeUnitsCPUAndGPU MLComputeUnits = 1
+	ComputeUnitsCPUAndGPU ComputeUnits = 1
 	// The option you choose to allow the model to use all compute units available, including the neural engine.
-	MLComputeUnitsAll MLComputeUnits = 2
+	ComputeUnitsAll ComputeUnits = 2
 	// The option you choose to allow the model to use both the CPU and neural engine, but not the GPU.
-	MLComputeUnitsCPUAndNeuralEngine MLComputeUnits = 3
+	ComputeUnitsCPUAndNeuralEngine ComputeUnits = 3
 )
 
-func (e MLComputeUnits) String() string {
+// String returns the ComputeUnits constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ComputeUnits) String() string {
 	switch e {
-	case MLComputeUnitsCPUOnly:
-		return "MLComputeUnitsCPUOnly"
-	case MLComputeUnitsCPUAndGPU:
-		return "MLComputeUnitsCPUAndGPU"
-	case MLComputeUnitsAll:
-		return "MLComputeUnitsAll"
-	case MLComputeUnitsCPUAndNeuralEngine:
-		return "MLComputeUnitsCPUAndNeuralEngine"
+	case ComputeUnitsCPUOnly:
+		return "ComputeUnitsCPUOnly"
+	case ComputeUnitsCPUAndGPU:
+		return "ComputeUnitsCPUAndGPU"
+	case ComputeUnitsAll:
+		return "ComputeUnitsAll"
+	case ComputeUnitsCPUAndNeuralEngine:
+		return "ComputeUnitsCPUAndNeuralEngine"
 	default:
-		return fmt.Sprintf("MLComputeUnits(%d)", int64(e))
+		return fmt.Sprintf("ComputeUnits(%d)", int64(e))
 	}
 }
 
 // The possible types for feature values, input features, and output features.
-type MLFeatureType int64
+type FeatureType int64
 
 const (
 	// The type for invalid feature values.
-	MLFeatureTypeInvalid MLFeatureType = 0
+	FeatureTypeInvalid FeatureType = 0
 	// The type for integer features and feature values.
-	MLFeatureTypeInt64 MLFeatureType = 1
+	FeatureTypeInt64 FeatureType = 1
 	// The type for double features and feature values.
-	MLFeatureTypeDouble MLFeatureType = 2
+	FeatureTypeDouble FeatureType = 2
 	// The type for string features and feature values.
-	MLFeatureTypeString MLFeatureType = 3
+	FeatureTypeString FeatureType = 3
 	// The type for image features and feature values.
-	MLFeatureTypeImage MLFeatureType = 4
+	FeatureTypeImage FeatureType = 4
 	// The type for multidimensional array features and feature values.
-	MLFeatureTypeMultiArray MLFeatureType = 5
+	FeatureTypeMultiArray FeatureType = 5
 	// The type for dictionary features and feature values.
-	MLFeatureTypeDictionary MLFeatureType = 6
+	FeatureTypeDictionary FeatureType = 6
 	// The type for sequence features and feature values.
-	MLFeatureTypeSequence MLFeatureType = 7
+	FeatureTypeSequence FeatureType = 7
 	// MLState. Represents a model state that may be updated in each inference.
-	MLFeatureTypeState MLFeatureType = 8
+	FeatureTypeState FeatureType = 8
 )
 
-func (e MLFeatureType) String() string {
+// String returns the FeatureType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FeatureType) String() string {
 	switch e {
-	case MLFeatureTypeInvalid:
-		return "MLFeatureTypeInvalid"
-	case MLFeatureTypeInt64:
-		return "MLFeatureTypeInt64"
-	case MLFeatureTypeDouble:
-		return "MLFeatureTypeDouble"
-	case MLFeatureTypeString:
-		return "MLFeatureTypeString"
-	case MLFeatureTypeImage:
-		return "MLFeatureTypeImage"
-	case MLFeatureTypeMultiArray:
-		return "MLFeatureTypeMultiArray"
-	case MLFeatureTypeDictionary:
-		return "MLFeatureTypeDictionary"
-	case MLFeatureTypeSequence:
-		return "MLFeatureTypeSequence"
-	case MLFeatureTypeState:
-		return "MLFeatureTypeState"
+	case FeatureTypeInvalid:
+		return "FeatureTypeInvalid"
+	case FeatureTypeInt64:
+		return "FeatureTypeInt64"
+	case FeatureTypeDouble:
+		return "FeatureTypeDouble"
+	case FeatureTypeString:
+		return "FeatureTypeString"
+	case FeatureTypeImage:
+		return "FeatureTypeImage"
+	case FeatureTypeMultiArray:
+		return "FeatureTypeMultiArray"
+	case FeatureTypeDictionary:
+		return "FeatureTypeDictionary"
+	case FeatureTypeSequence:
+		return "FeatureTypeSequence"
+	case FeatureTypeState:
+		return "FeatureTypeState"
 	default:
-		return fmt.Sprintf("MLFeatureType(%d)", int64(e))
+		return fmt.Sprintf("FeatureType(%d)", int64(e))
 	}
 }
 
 // The modes that determine how the model defines a feature’s image size constraint.
-type MLImageSizeConstraintType int64
+type ImageSizeConstraintType int64
 
 const (
 	// The image size constraint is not configured and should be ignored.
-	MLImageSizeConstraintTypeUnspecified MLImageSizeConstraintType = 0
+	ImageSizeConstraintTypeUnspecified ImageSizeConstraintType = 0
 	// The image feature accepts image sizes listed in an array.
-	MLImageSizeConstraintTypeEnumerated MLImageSizeConstraintType = 2
+	ImageSizeConstraintTypeEnumerated ImageSizeConstraintType = 2
 	// The image feature accepts image sizes defined by a range of widths and a range of heights.
-	MLImageSizeConstraintTypeRange MLImageSizeConstraintType = 3
+	ImageSizeConstraintTypeRange ImageSizeConstraintType = 3
 )
 
-func (e MLImageSizeConstraintType) String() string {
+// String returns the ImageSizeConstraintType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageSizeConstraintType) String() string {
 	switch e {
-	case MLImageSizeConstraintTypeUnspecified:
-		return "MLImageSizeConstraintTypeUnspecified"
-	case MLImageSizeConstraintTypeEnumerated:
-		return "MLImageSizeConstraintTypeEnumerated"
-	case MLImageSizeConstraintTypeRange:
-		return "MLImageSizeConstraintTypeRange"
+	case ImageSizeConstraintTypeUnspecified:
+		return "ImageSizeConstraintTypeUnspecified"
+	case ImageSizeConstraintTypeEnumerated:
+		return "ImageSizeConstraintTypeEnumerated"
+	case ImageSizeConstraintTypeRange:
+		return "ImageSizeConstraintTypeRange"
 	default:
-		return fmt.Sprintf("MLImageSizeConstraintType(%d)", int64(e))
+		return fmt.Sprintf("ImageSizeConstraintType(%d)", int64(e))
 	}
 }
 
 // Constants that define the underlying element types a multiarray can store.
-type MLMultiArrayDataType int64
+type MultiArrayDataType int64
 
 const (
 	// Designates the multiarray’s elements as doubles.
-	MLMultiArrayDataTypeDouble MLMultiArrayDataType = 65600
+	MultiArrayDataTypeDouble MultiArrayDataType = 65600
 	// Designates the multiarray’s elements as 64-bit floats.
-	MLMultiArrayDataTypeFloat64 MLMultiArrayDataType = 65600
+	MultiArrayDataTypeFloat64 MultiArrayDataType = 65600
 	// Designates the multiarray’s elements as 32-bit floats.
-	MLMultiArrayDataTypeFloat32 MLMultiArrayDataType = 65568
+	MultiArrayDataTypeFloat32 MultiArrayDataType = 65568
 	// Designates the multiarray’s elements as 16-bit floats.
-	MLMultiArrayDataTypeFloat16 MLMultiArrayDataType = 65552
+	MultiArrayDataTypeFloat16 MultiArrayDataType = 65552
 	// Designates the multiarray’s elements as floats.
-	MLMultiArrayDataTypeFloat MLMultiArrayDataType = 65568
+	MultiArrayDataTypeFloat MultiArrayDataType = 65568
 	// Designates the multiarray’s elements as 32-bit integers.
-	MLMultiArrayDataTypeInt32 MLMultiArrayDataType = 131104
-	MLMultiArrayDataTypeInt8  MLMultiArrayDataType = 131080
+	MultiArrayDataTypeInt32 MultiArrayDataType = 131104
+	MultiArrayDataTypeInt8  MultiArrayDataType = 131080
 )
 
-func (e MLMultiArrayDataType) String() string {
+// String returns the MultiArrayDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MultiArrayDataType) String() string {
 	switch e {
-	case MLMultiArrayDataTypeDouble:
-		return "MLMultiArrayDataTypeDouble"
-	case MLMultiArrayDataTypeFloat32:
-		return "MLMultiArrayDataTypeFloat32"
-	case MLMultiArrayDataTypeFloat16:
-		return "MLMultiArrayDataTypeFloat16"
-	case MLMultiArrayDataTypeInt32:
-		return "MLMultiArrayDataTypeInt32"
-	case MLMultiArrayDataTypeInt8:
-		return "MLMultiArrayDataTypeInt8"
+	case MultiArrayDataTypeDouble:
+		return "MultiArrayDataTypeDouble"
+	case MultiArrayDataTypeFloat32:
+		return "MultiArrayDataTypeFloat32"
+	case MultiArrayDataTypeFloat16:
+		return "MultiArrayDataTypeFloat16"
+	case MultiArrayDataTypeInt32:
+		return "MultiArrayDataTypeInt32"
+	case MultiArrayDataTypeInt8:
+		return "MultiArrayDataTypeInt8"
 	default:
-		return fmt.Sprintf("MLMultiArrayDataType(%d)", int64(e))
+		return fmt.Sprintf("MultiArrayDataType(%d)", int64(e))
 	}
 }
 
 // The possible types of shape constraints.
-type MLMultiArrayShapeConstraintType int64
+type MultiArrayShapeConstraintType int64
 
 const (
 	// The constraint type is undefined.
-	MLMultiArrayShapeConstraintTypeUnspecified MLMultiArrayShapeConstraintType = 1
+	MultiArrayShapeConstraintTypeUnspecified MultiArrayShapeConstraintType = 1
 	// The constraint is an array of allowed shapes.
-	MLMultiArrayShapeConstraintTypeEnumerated MLMultiArrayShapeConstraintType = 2
+	MultiArrayShapeConstraintTypeEnumerated MultiArrayShapeConstraintType = 2
 	// The constraint is a set of ranges allowed for the array shape.
-	MLMultiArrayShapeConstraintTypeRange MLMultiArrayShapeConstraintType = 3
+	MultiArrayShapeConstraintTypeRange MultiArrayShapeConstraintType = 3
 )
 
-func (e MLMultiArrayShapeConstraintType) String() string {
+// String returns the MultiArrayShapeConstraintType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MultiArrayShapeConstraintType) String() string {
 	switch e {
-	case MLMultiArrayShapeConstraintTypeUnspecified:
-		return "MLMultiArrayShapeConstraintTypeUnspecified"
-	case MLMultiArrayShapeConstraintTypeEnumerated:
-		return "MLMultiArrayShapeConstraintTypeEnumerated"
-	case MLMultiArrayShapeConstraintTypeRange:
-		return "MLMultiArrayShapeConstraintTypeRange"
+	case MultiArrayShapeConstraintTypeUnspecified:
+		return "MultiArrayShapeConstraintTypeUnspecified"
+	case MultiArrayShapeConstraintTypeEnumerated:
+		return "MultiArrayShapeConstraintTypeEnumerated"
+	case MultiArrayShapeConstraintTypeRange:
+		return "MultiArrayShapeConstraintTypeRange"
 	default:
-		return fmt.Sprintf("MLMultiArrayShapeConstraintType(%d)", int64(e))
+		return fmt.Sprintf("MultiArrayShapeConstraintType(%d)", int64(e))
 	}
 }
 
-type MLReshapeFrequencyHint int64
+type ReshapeFrequencyHint int64
 
 const (
 	// The input shape is expected to change frequently on each prediction sent to this loaded model instance. Core ML will try to minimize the latency associated with shape changes and avoid expensive shape-specific optimizations prior to prediction computation. While prediction computation may be slower for each specific shape, switching between shapes should be faster. This is the default.
-	MLReshapeFrequencyHintFrequent MLReshapeFrequencyHint = 0
+	ReshapeFrequencyHintFrequent ReshapeFrequencyHint = 0
 	// The input shape is expected to be stable and many/all predictions sent to this loaded model instance would use the same input shapes repeatedly. On the shape change, Core ML re-optimizes the internal engine for the new shape if possible. The re-optimization takes some time, but the subsequent predictions for the shape should run faster.
-	MLReshapeFrequencyHintInfrequent MLReshapeFrequencyHint = 1
+	ReshapeFrequencyHintInfrequent ReshapeFrequencyHint = 1
 )
 
-func (e MLReshapeFrequencyHint) String() string {
+// String returns the ReshapeFrequencyHint constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReshapeFrequencyHint) String() string {
 	switch e {
-	case MLReshapeFrequencyHintFrequent:
-		return "MLReshapeFrequencyHintFrequent"
-	case MLReshapeFrequencyHintInfrequent:
-		return "MLReshapeFrequencyHintInfrequent"
+	case ReshapeFrequencyHintFrequent:
+		return "ReshapeFrequencyHintFrequent"
+	case ReshapeFrequencyHintInfrequent:
+		return "ReshapeFrequencyHintInfrequent"
 	default:
-		return fmt.Sprintf("MLReshapeFrequencyHint(%d)", int64(e))
+		return fmt.Sprintf("ReshapeFrequencyHint(%d)", int64(e))
 	}
 }
 
 // The optimization strategy for the model specialization.
-type MLSpecializationStrategy int64
+type SpecializationStrategy int64
 
 const (
 	// The strategy that works well for most applications.
-	MLSpecializationStrategyDefault MLSpecializationStrategy = 0
+	SpecializationStrategyDefault SpecializationStrategy = 0
 	// Prefer the prediction latency at the potential cost of specialization time, memory footprint, and the disk space usage of specialized artifacts.
-	MLSpecializationStrategyFastPrediction MLSpecializationStrategy = 1
+	SpecializationStrategyFastPrediction SpecializationStrategy = 1
 )
 
-func (e MLSpecializationStrategy) String() string {
+// String returns the SpecializationStrategy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpecializationStrategy) String() string {
 	switch e {
-	case MLSpecializationStrategyDefault:
-		return "MLSpecializationStrategyDefault"
-	case MLSpecializationStrategyFastPrediction:
-		return "MLSpecializationStrategyFastPrediction"
+	case SpecializationStrategyDefault:
+		return "SpecializationStrategyDefault"
+	case SpecializationStrategyFastPrediction:
+		return "SpecializationStrategyFastPrediction"
 	default:
-		return fmt.Sprintf("MLSpecializationStrategy(%d)", int64(e))
+		return fmt.Sprintf("SpecializationStrategy(%d)", int64(e))
 	}
 }
 
 // The state of a machine learning task.
-type MLTaskState int64
+type TaskState int64
 
 const (
 	// The state of a machine learning task that’s paused.
-	MLTaskStateSuspended MLTaskState = 1
+	TaskStateSuspended TaskState = 1
 	// The state of a machine learning task that’s executing.
-	MLTaskStateRunning MLTaskState = 2
+	TaskStateRunning TaskState = 2
 	// The state of a machine learning task that’s in mid-termination, before it could finish successfully.
-	MLTaskStateCancelling MLTaskState = 3
+	TaskStateCancelling TaskState = 3
 	// The state of a machine learning task that has finished successfully.
-	MLTaskStateCompleted MLTaskState = 4
+	TaskStateCompleted TaskState = 4
 	// The state of a machine learning task that has terminated due to an error.
-	MLTaskStateFailed MLTaskState = 5
+	TaskStateFailed TaskState = 5
 )
 
-func (e MLTaskState) String() string {
+// String returns the TaskState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaskState) String() string {
 	switch e {
-	case MLTaskStateSuspended:
-		return "MLTaskStateSuspended"
-	case MLTaskStateRunning:
-		return "MLTaskStateRunning"
-	case MLTaskStateCancelling:
-		return "MLTaskStateCancelling"
-	case MLTaskStateCompleted:
-		return "MLTaskStateCompleted"
-	case MLTaskStateFailed:
-		return "MLTaskStateFailed"
+	case TaskStateSuspended:
+		return "TaskStateSuspended"
+	case TaskStateRunning:
+		return "TaskStateRunning"
+	case TaskStateCancelling:
+		return "TaskStateCancelling"
+	case TaskStateCompleted:
+		return "TaskStateCompleted"
+	case TaskStateFailed:
+		return "TaskStateFailed"
 	default:
-		return fmt.Sprintf("MLTaskState(%d)", int64(e))
+		return fmt.Sprintf("TaskState(%d)", int64(e))
 	}
 }
 
 // A type of event during a model update task.
 // Bitmask — values may be combined with |.
-type MLUpdateProgressEvent int64
+type UpdateProgressEvent int64
 
 const (
 	// An event that represents the start of training.
-	MLUpdateProgressEventTrainingBegin MLUpdateProgressEvent = 1
+	UpdateProgressEventTrainingBegin UpdateProgressEvent = 1
 	// An event that represents the end of training epoch.
-	MLUpdateProgressEventEpochEnd MLUpdateProgressEvent = 2
+	UpdateProgressEventEpochEnd UpdateProgressEvent = 2
 	// An event that represents the end of a mini-batch within a training epoch.
-	MLUpdateProgressEventMiniBatchEnd MLUpdateProgressEvent = 4
+	UpdateProgressEventMiniBatchEnd UpdateProgressEvent = 4
 )
 
-func (e MLUpdateProgressEvent) String() string {
+// String returns the UpdateProgressEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UpdateProgressEvent) String() string {
 	var parts []string
-	if e&MLUpdateProgressEventTrainingBegin != 0 {
-		parts = append(parts, "MLUpdateProgressEventTrainingBegin")
+	if e&UpdateProgressEventTrainingBegin != 0 {
+		parts = append(parts, "UpdateProgressEventTrainingBegin")
 	}
-	if e&MLUpdateProgressEventEpochEnd != 0 {
-		parts = append(parts, "MLUpdateProgressEventEpochEnd")
+	if e&UpdateProgressEventEpochEnd != 0 {
+		parts = append(parts, "UpdateProgressEventEpochEnd")
 	}
-	if e&MLUpdateProgressEventMiniBatchEnd != 0 {
-		parts = append(parts, "MLUpdateProgressEventMiniBatchEnd")
+	if e&UpdateProgressEventMiniBatchEnd != 0 {
+		parts = append(parts, "UpdateProgressEventMiniBatchEnd")
 	}
 	if len(parts) == 0 {
 		return "0"

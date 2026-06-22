@@ -5,209 +5,161 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.
+// RuleSystem is an idiomatic wrapper over the Objective-C class GKRuleSystem.
 //
-// RuleSystem wraps [raw.GKRuleSystem] with a fluent Go API.
+// A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.
 type RuleSystem struct {
-	inner *raw.GKRuleSystem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKRuleSystem].
-func (x *RuleSystem) Unwrap() *raw.GKRuleSystem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RuleSystem) ID() objc.ID { return x.inner.Ptr() }
-
-// RuleSystemFromID adopts an existing object pointer as a RuleSystem (nil for 0).
+// RuleSystemFromID adopts an existing Objective-C object as a RuleSystem
+// (nil for 0), retaining it and registering a release finalizer.
 func RuleSystemFromID(id objc.ID) *RuleSystem {
 	if id == 0 {
 		return nil
 	}
-	return &RuleSystem{inner: raw.GKRuleSystemFromID(id)}
+	x := &RuleSystem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRuleSystem creates a new [RuleSystem].
+// ruleSystemAdopt wraps an Objective-C object that this code just created as a
+// RuleSystem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ruleSystemAdopt(id objc.ID) *RuleSystem {
+	if id == 0 {
+		return nil
+	}
+	x := &RuleSystem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RuleSystem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RuleSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RuleSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RuleSystem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRuleSystem creates a new RuleSystem.
 func NewRuleSystem() *RuleSystem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRuleSystem")), objc.RegisterName("new"))
-	return &RuleSystem{inner: raw.GKRuleSystemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKRuleSystem")), objc.RegisterName("new"))
+	return ruleSystemAdopt(_id)
 }
 
-// Evaluates the rule system, executing the list of rules in its agenda.
-//
-// Evaluate calls the underlying Evaluate.
+// Evaluate evaluates the rule system, executing the list of rules in its agenda.
 func (x *RuleSystem) Evaluate() {
-	x.inner.Evaluate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate"))
 }
 
-// Adds the specified rule to the system.
-//
-// AddRule calls the underlying AddRule.
-func (x *RuleSystem) AddRule(rule *raw.GKRule) {
-	x.inner.AddRule(rule)
+// AddRule adds the specified rule to the system.
+func (x *RuleSystem) AddRule(rule *Rule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRule:"), objref.IDOf(rule))
 }
 
-// Adds the specified list of rules to the system.
-//
-// AddRulesFromArray calls the underlying AddRulesFromArray.
-func (x *RuleSystem) AddRulesFromArray(rules ...RuleProvider) {
-	_ptrs := make([]objc.ID, len(rules))
-	for _i, _v := range rules {
-		_ptrs[_i] = _v.asRule().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.GKRule]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.GKRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.GKRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.AddRulesFromArray(_arg0)
+// AddRulesFromArray adds the specified list of rules to the system.
+func (x *RuleSystem) AddRulesFromArray(rules []*Rule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRulesFromArray:"), purego.SliceToNSArray(rules, func(_v *Rule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Removes all rules from the system.
-//
-// RemoveAllRules calls the underlying RemoveAllRules.
+// RemoveAllRules removes all rules from the system.
 func (x *RuleSystem) RemoveAllRules() {
-	x.inner.RemoveAllRules()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRules"))
 }
 
-// Returns the membership grade of the specified fact.
-//
-// GradeForFact calls the underlying GradeForFact.
-func (x *RuleSystem) GradeForFact(fact foundation.NSObjectProtocol) float32 {
-	return x.inner.GradeForFact(fact)
+// MinimumGradeForFacts returns the lowest membership grade among the specified facts.
+func (x *RuleSystem) MinimumGradeForFacts(facts obj.Object) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumGradeForFacts:"), objref.IDOf(facts))
+	return _r
 }
 
-// Returns the lowest membership grade among the specified facts.
-//
-// MinimumGradeForFacts calls the underlying MinimumGradeForFacts.
-func (x *RuleSystem) MinimumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
-	return x.inner.MinimumGradeForFacts(facts)
+// MaximumGradeForFacts returns the highest membership grade among the specified facts.
+func (x *RuleSystem) MaximumGradeForFacts(facts obj.Object) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumGradeForFacts:"), objref.IDOf(facts))
+	return _r
 }
 
-// Returns the highest membership grade among the specified facts.
-//
-// MaximumGradeForFacts calls the underlying MaximumGradeForFacts.
-func (x *RuleSystem) MaximumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
-	return x.inner.MaximumGradeForFacts(facts)
-}
-
-// Adds the specified fact to the fact set with a membership grade of 1.0, and reevaluates the rules in the system’s agenda.
-//
-// AssertFact calls the underlying AssertFact.
-func (x *RuleSystem) AssertFact(fact foundation.NSObjectProtocol) {
-	x.inner.AssertFact(fact)
-}
-
-// Increases the membership grade of the specified fact by the specified amount, adding it to the fact set if necessary, and reevaluates the rules in the system’s agenda.
-//
-// AssertFactGrade calls the underlying AssertFactGrade.
-func (x *RuleSystem) AssertFactGrade(fact foundation.NSObjectProtocol, grade float32) {
-	x.inner.AssertFactGrade(fact, grade)
-}
-
-// Removes the specified fact from the fact set, and reevaluates the rules in the system’s agenda.
-//
-// RetractFact calls the underlying RetractFact.
-func (x *RuleSystem) RetractFact(fact foundation.NSObjectProtocol) {
-	x.inner.RetractFact(fact)
-}
-
-// Reduces the membership grade of the specified fact by the specified amount, removing it from the fact set if necessary, and reevaluates the rules in the system’s agenda.
-//
-// RetractFactGrade calls the underlying RetractFactGrade.
-func (x *RuleSystem) RetractFactGrade(fact foundation.NSObjectProtocol, grade float32) {
-	x.inner.RetractFactGrade(fact, grade)
-}
-
-// Returns the rule system to its original agenda and clears all facts.
-//
-// Reset calls the underlying Reset.
+// Reset returns the rule system to its original agenda and clears all facts.
 func (x *RuleSystem) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// The implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes. @see evaluate
-//
-// State calls the underlying State.
-func (x *RuleSystem) State() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	return x.inner.State()
+// State the implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes.
+func (x *RuleSystem) State() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	return obj.Wrap(_r)
 }
 
-// The current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets. @see agenda @see executed
+// Rules the current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets.
 //
 // Rules returns the collection as a Go slice.
 func (x *RuleSystem) Rules() []*Rule {
-	arr := x.inner.Rules()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Rule {
-		return &Rule{inner: raw.GKRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// The current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets. @see rules @see executed @see reset
+// Agenda the current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets.
 //
 // Agenda returns the collection as a Go slice.
 func (x *RuleSystem) Agenda() []*Rule {
-	arr := x.inner.Agenda()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Rule {
-		return &Rule{inner: raw.GKRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("agenda"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// The current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets. @see rules @see agenda @see reset
+// Executed the current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets.
 //
 // Executed returns the collection as a Go slice.
 func (x *RuleSystem) Executed() []*Rule {
-	arr := x.inner.Executed()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Rule {
-		return &Rule{inner: raw.GKRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executed"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// The current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact: @see gradeForFact:
-//
-// Facts calls the underlying Facts.
-func (x *RuleSystem) Facts() *foundation.NSArray[objc.ID] {
-	return x.inner.Facts()
+// Facts the current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact:
+func (x *RuleSystem) Facts() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("facts"))
+	return obj.Wrap(_r)
 }
 
 // RuleSystemable is the interface implemented by [RuleSystem], for mocking and DI.
 type RuleSystemable interface {
-	Unwrap() *raw.GKRuleSystem
+	obj.Object
 	Evaluate()
-	AddRule(rule *raw.GKRule)
-	AddRulesFromArray(rules ...RuleProvider)
+	AddRule(rule *Rule)
+	AddRulesFromArray(rules []*Rule)
 	RemoveAllRules()
-	GradeForFact(fact foundation.NSObjectProtocol) float32
-	MinimumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32
-	MaximumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32
-	AssertFact(fact foundation.NSObjectProtocol)
-	AssertFactGrade(fact foundation.NSObjectProtocol, grade float32)
-	RetractFact(fact foundation.NSObjectProtocol)
-	RetractFactGrade(fact foundation.NSObjectProtocol, grade float32)
+	MinimumGradeForFacts(facts obj.Object) float32
+	MaximumGradeForFacts(facts obj.Object) float32
 	Reset()
-	State() *foundation.NSMutableDictionary[objc.ID, objc.ID]
+	State() obj.Object
 	Rules() []*Rule
 	Agenda() []*Rule
 	Executed() []*Rule
-	Facts() *foundation.NSArray[objc.ID]
+	Facts() obj.Object
 }
 
 var _ RuleSystemable = (*RuleSystem)(nil)

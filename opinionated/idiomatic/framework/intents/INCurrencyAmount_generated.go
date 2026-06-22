@@ -5,61 +5,93 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An amount of money to transfer during a financial transaction.
+// CurrencyAmount is an idiomatic wrapper over the Objective-C class INCurrencyAmount.
 //
-// CurrencyAmount wraps [raw.INCurrencyAmount] with a fluent Go API.
+// An amount of money to transfer during a financial transaction.
 type CurrencyAmount struct {
-	inner *raw.INCurrencyAmount
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INCurrencyAmount].
-func (x *CurrencyAmount) Unwrap() *raw.INCurrencyAmount { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CurrencyAmount) ID() objc.ID { return x.inner.Ptr() }
-
-// CurrencyAmountFromID adopts an existing object pointer as a CurrencyAmount (nil for 0).
+// CurrencyAmountFromID adopts an existing Objective-C object as a CurrencyAmount
+// (nil for 0), retaining it and registering a release finalizer.
 func CurrencyAmountFromID(id objc.ID) *CurrencyAmount {
 	if id == 0 {
 		return nil
 	}
-	return &CurrencyAmount{inner: raw.INCurrencyAmountFromID(id)}
+	x := &CurrencyAmount{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a currency amount object with the specified values.
-//
-// NewCurrencyAmountWithAmountCurrencyCode creates a new [CurrencyAmount].
-func NewCurrencyAmountWithAmountCurrencyCode(amount *foundation.NSDecimalNumber, currencyCode string) *CurrencyAmount {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCurrencyAmount")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:currencyCode:"), amount.Ptr(), foundation.NSStringStringWithUTF8String(currencyCode).Ptr())
-	return &CurrencyAmount{inner: raw.INCurrencyAmountFromID(_id)}
+// currencyAmountAdopt wraps an Objective-C object that this code just created as a
+// CurrencyAmount (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func currencyAmountAdopt(id objc.ID) *CurrencyAmount {
+	if id == 0 {
+		return nil
+	}
+	x := &CurrencyAmount{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Amount calls the underlying Amount.
-func (x *CurrencyAmount) Amount() *foundation.NSDecimalNumber {
-	return x.inner.Amount()
+// Description returns the object's -description text.
+func (x *CurrencyAmount) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// CurrencyCode calls the underlying CurrencyCode.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CurrencyAmount) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CurrencyAmount) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CurrencyAmount) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCurrencyAmountWithAmountCurrencyCode initializes a currency amount object with the specified values.
+func NewCurrencyAmountWithAmountCurrencyCode(amount obj.Object, currencyCode string) *CurrencyAmount {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INCurrencyAmount")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:currencyCode:"), objref.IDOf(amount), purego.NSString(currencyCode))
+	return currencyAmountAdopt(_id)
+}
+
+// Amount wraps the corresponding Objective-C method.
+func (x *CurrencyAmount) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+	return obj.Wrap(_r)
+}
+
+// CurrencyCode wraps the corresponding Objective-C method.
 func (x *CurrencyAmount) CurrencyCode() string {
-	_r := x.inner.CurrencyCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CurrencyAmountable is the interface implemented by [CurrencyAmount], for mocking and DI.
 type CurrencyAmountable interface {
-	Unwrap() *raw.INCurrencyAmount
-	Amount() *foundation.NSDecimalNumber
+	obj.Object
+	Amount() obj.Object
 	CurrencyCode() string
 }
 

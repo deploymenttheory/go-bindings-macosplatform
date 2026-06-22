@@ -5,47 +5,58 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that applies the default animation to a symbol-based image in a context-sensitive manner.
+// SymbolAutomaticContentTransition is an idiomatic wrapper over the Objective-C class NSSymbolAutomaticContentTransition.
 //
-// SymbolAutomaticContentTransition wraps [raw.NSSymbolAutomaticContentTransition] with a fluent Go API.
+// It embeds [SymbolContentTransition], promoting that type's methods.
+//
+// A type that applies the default animation to a symbol-based image in a context-sensitive manner.
 type SymbolAutomaticContentTransition struct {
-	inner *raw.NSSymbolAutomaticContentTransition
+	SymbolContentTransition
 }
 
-// Unwrap returns the underlying [raw.NSSymbolAutomaticContentTransition].
-func (x *SymbolAutomaticContentTransition) Unwrap() *raw.NSSymbolAutomaticContentTransition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolAutomaticContentTransition) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolAutomaticContentTransitionFromID adopts an existing object pointer as a SymbolAutomaticContentTransition (nil for 0).
+// SymbolAutomaticContentTransitionFromID adopts an existing Objective-C object as a SymbolAutomaticContentTransition
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolAutomaticContentTransitionFromID(id objc.ID) *SymbolAutomaticContentTransition {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolAutomaticContentTransition{inner: raw.NSSymbolAutomaticContentTransitionFromID(id)}
+	x := &SymbolAutomaticContentTransition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolAutomaticContentTransition creates a new [SymbolAutomaticContentTransition].
+// symbolAutomaticContentTransitionAdopt wraps an Objective-C object that this code just created as a
+// SymbolAutomaticContentTransition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolAutomaticContentTransitionAdopt(id objc.ID) *SymbolAutomaticContentTransition {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolAutomaticContentTransition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolAutomaticContentTransition creates a new SymbolAutomaticContentTransition.
 func NewSymbolAutomaticContentTransition() *SymbolAutomaticContentTransition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolAutomaticContentTransition")), objc.RegisterName("new"))
-	return &SymbolAutomaticContentTransition{inner: raw.NSSymbolAutomaticContentTransitionFromID(_id)}
-}
-
-func (x *SymbolAutomaticContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
-	return &x.inner.NSSymbolContentTransition
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolAutomaticContentTransition")), objc.RegisterName("new"))
+	return symbolAutomaticContentTransitionAdopt(_id)
 }
 
 // SymbolAutomaticContentTransitionable is the interface implemented by [SymbolAutomaticContentTransition], for mocking and DI.
 type SymbolAutomaticContentTransitionable interface {
-	Unwrap() *raw.NSSymbolAutomaticContentTransition
+	obj.Object
 }
 
 var _ SymbolAutomaticContentTransitionable = (*SymbolAutomaticContentTransition)(nil)
+
+var _ SymbolContentTransitionProvider = (*SymbolAutomaticContentTransition)(nil)

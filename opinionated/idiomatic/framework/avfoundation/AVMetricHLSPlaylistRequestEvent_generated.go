@@ -5,87 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An event that represents a live streaming playlist resource request.
+// MetricHLSPlaylistRequestEvent is an idiomatic wrapper over the Objective-C class AVMetricHLSPlaylistRequestEvent.
 //
-// MetricHLSPlaylistRequestEvent wraps [raw.AVMetricHLSPlaylistRequestEvent] with a fluent Go API.
+// It embeds [MetricEvent], promoting that type's methods.
+//
+// An event that represents a live streaming playlist resource request.
 type MetricHLSPlaylistRequestEvent struct {
-	inner *raw.AVMetricHLSPlaylistRequestEvent
+	MetricEvent
 }
 
-// Unwrap returns the underlying [raw.AVMetricHLSPlaylistRequestEvent].
-func (x *MetricHLSPlaylistRequestEvent) Unwrap() *raw.AVMetricHLSPlaylistRequestEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricHLSPlaylistRequestEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricHLSPlaylistRequestEventFromID adopts an existing object pointer as a MetricHLSPlaylistRequestEvent (nil for 0).
+// MetricHLSPlaylistRequestEventFromID adopts an existing Objective-C object as a MetricHLSPlaylistRequestEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricHLSPlaylistRequestEventFromID(id objc.ID) *MetricHLSPlaylistRequestEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricHLSPlaylistRequestEvent{inner: raw.AVMetricHLSPlaylistRequestEventFromID(id)}
+	x := &MetricHLSPlaylistRequestEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricHLSPlaylistRequestEvent creates a new [MetricHLSPlaylistRequestEvent].
-func NewMetricHLSPlaylistRequestEvent() *MetricHLSPlaylistRequestEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricHLSPlaylistRequestEvent")), objc.RegisterName("new"))
-	return &MetricHLSPlaylistRequestEvent{inner: raw.AVMetricHLSPlaylistRequestEventFromID(_id)}
-}
-
-// Returns the URL of the playlist. If no value is available, returns nil.
-//
-// Url calls the underlying Url.
-func (x *MetricHLSPlaylistRequestEvent) Url() *foundation.NSURL {
-	return x.inner.Url()
-}
-
-// Returns true if the playlist request is for a multivariant playlist.
-//
-// IsMultivariantPlaylist calls the underlying IsMultivariantPlaylist.
-func (x *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
-	return x.inner.IsMultivariantPlaylist()
-}
-
-// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-//
-// MediaType calls the underlying MediaType.
-func (x *MetricHLSPlaylistRequestEvent) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Returns the media resource request event which was used to satisfy the playlist.
-//
-// MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
-func (x *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
-	_r := x.inner.MediaResourceRequestEvent()
-	if _r == nil {
+// metricHLSPlaylistRequestEventAdopt wraps an Objective-C object that this code just created as a
+// MetricHLSPlaylistRequestEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricHLSPlaylistRequestEventAdopt(id objc.ID) *MetricHLSPlaylistRequestEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MetricMediaResourceRequestEvent{inner: _r}
+	x := &MetricHLSPlaylistRequestEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MetricHLSPlaylistRequestEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+// NewMetricHLSPlaylistRequestEvent creates a new MetricHLSPlaylistRequestEvent.
+func NewMetricHLSPlaylistRequestEvent() *MetricHLSPlaylistRequestEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricHLSPlaylistRequestEvent")), objc.RegisterName("new"))
+	return metricHLSPlaylistRequestEventAdopt(_id)
+}
+
+// Url returns the URL of the playlist. If no value is available, returns nil.
+func (x *MetricHLSPlaylistRequestEvent) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
+}
+
+// IsMultivariantPlaylist returns true if the playlist request is for a multivariant playlist.
+func (x *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultivariantPlaylist"))
+	return _r
+}
+
+// MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+func (x *MetricHLSPlaylistRequestEvent) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
+}
+
+// MediaResourceRequestEvent returns the media resource request event which was used to satisfy the playlist.
+func (x *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaResourceRequestEvent"))
+	return MetricMediaResourceRequestEventFromID(_r)
 }
 
 // MetricHLSPlaylistRequestEventable is the interface implemented by [MetricHLSPlaylistRequestEvent], for mocking and DI.
 type MetricHLSPlaylistRequestEventable interface {
-	Unwrap() *raw.AVMetricHLSPlaylistRequestEvent
-	Url() *foundation.NSURL
+	obj.Object
+	Url() obj.Object
 	IsMultivariantPlaylist() bool
-	MediaType() string
+	MediaType() obj.Object
 	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
 }
 
 var _ MetricHLSPlaylistRequestEventable = (*MetricHLSPlaylistRequestEvent)(nil)
+
+var _ MetricEventProvider = (*MetricHLSPlaylistRequestEvent)(nil)

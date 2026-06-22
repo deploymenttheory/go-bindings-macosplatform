@@ -5,60 +5,71 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AgentProvider is implemented by Agent and any idiomatic type wrapping a GKAgent subclass.
+// AgentProvider is accepted wherever a GKAgent (or one of its subclasses) is expected.
 type AgentProvider interface {
-	asAgent() *raw.GKAgent
+	objref.Object
+	isAgent()
 }
 
-// BehaviorProvider is implemented by Behavior and any idiomatic type wrapping a GKBehavior subclass.
+// BehaviorProvider is accepted wherever a GKBehavior (or one of its subclasses) is expected.
 type BehaviorProvider interface {
-	asBehavior() *raw.GKBehavior
+	objref.Object
+	isBehavior()
 }
 
-// CoherentNoiseSourceProvider is implemented by CoherentNoiseSource and any idiomatic type wrapping a GKCoherentNoiseSource subclass.
+// CoherentNoiseSourceProvider is accepted wherever a GKCoherentNoiseSource (or one of its subclasses) is expected.
 type CoherentNoiseSourceProvider interface {
-	asCoherentNoiseSource() *raw.GKCoherentNoiseSource
+	objref.Object
+	isCoherentNoiseSource()
 }
 
-// ComponentProvider is implemented by Component and any idiomatic type wrapping a GKComponent subclass.
+// ComponentProvider is accepted wherever a GKComponent (or one of its subclasses) is expected.
 type ComponentProvider interface {
-	asComponent() *raw.GKComponent
+	objref.Object
+	isComponent()
 }
 
-// GraphProvider is implemented by Graph and any idiomatic type wrapping a GKGraph subclass.
+// GraphProvider is accepted wherever a GKGraph (or one of its subclasses) is expected.
 type GraphProvider interface {
-	asGraph() *raw.GKGraph
+	objref.Object
+	isGraph()
 }
 
-// GraphNodeProvider is implemented by GraphNode and any idiomatic type wrapping a GKGraphNode subclass.
+// GraphNodeProvider is accepted wherever a GKGraphNode (or one of its subclasses) is expected.
 type GraphNodeProvider interface {
-	asGraphNode() *raw.GKGraphNode
+	objref.Object
+	isGraphNode()
 }
 
-// NoiseSourceProvider is implemented by NoiseSource and any idiomatic type wrapping a GKNoiseSource subclass.
+// NoiseSourceProvider is accepted wherever a GKNoiseSource (or one of its subclasses) is expected.
 type NoiseSourceProvider interface {
-	asNoiseSource() *raw.GKNoiseSource
+	objref.Object
+	isNoiseSource()
 }
 
-// ObstacleProvider is implemented by Obstacle and any idiomatic type wrapping a GKObstacle subclass.
+// ObstacleProvider is accepted wherever a GKObstacle (or one of its subclasses) is expected.
 type ObstacleProvider interface {
-	asObstacle() *raw.GKObstacle
+	objref.Object
+	isObstacle()
 }
 
-// RandomDistributionProvider is implemented by RandomDistribution and any idiomatic type wrapping a GKRandomDistribution subclass.
+// RandomDistributionProvider is accepted wherever a GKRandomDistribution (or one of its subclasses) is expected.
 type RandomDistributionProvider interface {
-	asRandomDistribution() *raw.GKRandomDistribution
+	objref.Object
+	isRandomDistribution()
 }
 
-// RandomSourceProvider is implemented by RandomSource and any idiomatic type wrapping a GKRandomSource subclass.
+// RandomSourceProvider is accepted wherever a GKRandomSource (or one of its subclasses) is expected.
 type RandomSourceProvider interface {
-	asRandomSource() *raw.GKRandomSource
+	objref.Object
+	isRandomSource()
 }
 
-// RuleProvider is implemented by Rule and any idiomatic type wrapping a GKRule subclass.
+// RuleProvider is accepted wherever a GKRule (or one of its subclasses) is expected.
 type RuleProvider interface {
-	asRule() *raw.GKRule
+	objref.Object
+	isRule()
 }

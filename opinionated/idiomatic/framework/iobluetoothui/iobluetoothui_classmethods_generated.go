@@ -5,63 +5,43 @@
 package iobluetoothui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetoothui"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DeviceSelector calls the underlying IOBluetoothDeviceSelectorControllerDeviceSelector.
+// DeviceSelector method call to instantiate a new IOBluetoothDeviceSelectorController object.
 func DeviceSelector() *BluetoothDeviceSelectorController {
-	_r := raw.IOBluetoothDeviceSelectorControllerDeviceSelector()
-	if _r == nil {
-		return nil
-	}
-	return &BluetoothDeviceSelectorController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDeviceSelectorController")), objc.RegisterName("deviceSelector"))
+	return BluetoothDeviceSelectorControllerFromID(_r)
 }
 
-// PairingController calls the underlying IOBluetoothPairingControllerPairingController.
+// PairingController method call to instantiate a new IOBluetoothPairingController object.
 func PairingController() *BluetoothPairingController {
-	_r := raw.IOBluetoothPairingControllerPairingController()
-	if _r == nil {
-		return nil
-	}
-	return &BluetoothPairingController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPairingController")), objc.RegisterName("pairingController"))
+	return BluetoothPairingControllerFromID(_r)
 }
 
-// SharedDisplayView calls the underlying IOBluetoothPasskeyDisplaySharedDisplayView.
+// SharedDisplayView wraps the corresponding Objective-C method.
 func SharedDisplayView() *BluetoothPasskeyDisplay {
-	_r := raw.IOBluetoothPasskeyDisplaySharedDisplayView()
-	if _r == nil {
-		return nil
-	}
-	return &BluetoothPasskeyDisplay{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPasskeyDisplay")), objc.RegisterName("sharedDisplayView"))
+	return BluetoothPasskeyDisplayFromID(_r)
 }
 
-// ServiceBrowserController calls the underlying IOBluetoothServiceBrowserControllerServiceBrowserController.
+// ServiceBrowserController allocator work Bluetooth Service Browser window controller.
 func ServiceBrowserController(inOptions uint32) *BluetoothServiceBrowserController {
-	_r := raw.IOBluetoothServiceBrowserControllerServiceBrowserController(inOptions)
-	if _r == nil {
-		return nil
-	}
-	return &BluetoothServiceBrowserController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("serviceBrowserController:"), inOptions)
+	return BluetoothServiceBrowserControllerFromID(_r)
 }
 
-// BrowseDevicesOptions calls the underlying IOBluetoothServiceBrowserControllerBrowseDevicesOptions.
-func BrowseDevicesOptions(outRecord *iobluetooth.IOBluetoothSDPServiceRecord, inOptions uint32) int {
-	return raw.IOBluetoothServiceBrowserControllerBrowseDevicesOptions(outRecord, inOptions)
+// BrowseDevicesOptions ***WARNING*** This method has been deprecated in favor of -setOptions:, -runModal and -getResults. This method allocates and runs the browser window as a modal window waiting for the user to either select a service, or cancel the browser window.
+func BrowseDevicesOptions(outRecord obj.Object, inOptions uint32) int {
+	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevices:options:"), objref.IDOf(outRecord), inOptions)
+	return _r
 }
 
-// BrowseDevicesAsSheetForWindowOptionsWindow calls the underlying IOBluetoothServiceBrowserControllerBrowseDevicesAsSheetForWindowOptionsWindow.
-func BrowseDevicesAsSheetForWindowOptionsWindow(outRecord *iobluetooth.IOBluetoothSDPServiceRecord, inOptions uint32, inWindow *appkit.NSWindow) int {
-	return raw.IOBluetoothServiceBrowserControllerBrowseDevicesAsSheetForWindowOptionsWindow(outRecord, inOptions, inWindow)
-}
-
-// WithServiceBrowserControllerRef calls the underlying IOBluetoothServiceBrowserControllerWithServiceBrowserControllerRef.
-func WithServiceBrowserControllerRef(serviceBrowserControllerRef unsafe.Pointer) *BluetoothServiceBrowserController {
-	_r := raw.IOBluetoothServiceBrowserControllerWithServiceBrowserControllerRef(serviceBrowserControllerRef)
-	if _r == nil {
-		return nil
-	}
-	return &BluetoothServiceBrowserController{inner: _r}
+// BrowseDevicesAsSheetForWindowOptionsWindow ***WARNING*** This method has been deprecated in favor of - beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:. This method will allocate and run the IOBluetoothServiceBrowserController browser window as a sheet for a window.
+func BrowseDevicesAsSheetForWindowOptionsWindow(outRecord obj.Object, inOptions uint32, inWindow obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevicesAsSheetForWindow:options:window:"), objref.IDOf(outRecord), inOptions, objref.IDOf(inWindow))
+	return _r
 }

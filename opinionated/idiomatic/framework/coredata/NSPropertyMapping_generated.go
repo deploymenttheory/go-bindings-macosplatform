@@ -5,110 +5,139 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.
+// PropertyMapping is an idiomatic wrapper over the Objective-C class NSPropertyMapping.
 //
-// PropertyMapping wraps [raw.NSPropertyMapping] with a fluent Go API.
+// A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.
 type PropertyMapping struct {
-	inner *raw.NSPropertyMapping
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPropertyMapping].
-func (x *PropertyMapping) Unwrap() *raw.NSPropertyMapping { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PropertyMapping) ID() objc.ID { return x.inner.Ptr() }
-
-// PropertyMappingFromID adopts an existing object pointer as a PropertyMapping (nil for 0).
+// PropertyMappingFromID adopts an existing Objective-C object as a PropertyMapping
+// (nil for 0), retaining it and registering a release finalizer.
 func PropertyMappingFromID(id objc.ID) *PropertyMapping {
 	if id == 0 {
 		return nil
 	}
-	return &PropertyMapping{inner: raw.NSPropertyMappingFromID(id)}
+	x := &PropertyMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPropertyMapping creates a new [PropertyMapping].
+// propertyMappingAdopt wraps an Objective-C object that this code just created as a
+// PropertyMapping (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func propertyMappingAdopt(id objc.ID) *PropertyMapping {
+	if id == 0 {
+		return nil
+	}
+	x := &PropertyMapping{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PropertyMapping) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PropertyMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PropertyMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PropertyMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPropertyMapping creates a new PropertyMapping.
 func NewPropertyMapping() *PropertyMapping {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPropertyMapping")), objc.RegisterName("new"))
-	return &PropertyMapping{inner: raw.NSPropertyMappingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPropertyMapping")), objc.RegisterName("new"))
+	return propertyMappingAdopt(_id)
 }
 
-// The name of the property in the destination entity for the property mapping.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the name of the property in the destination entity for the property mapping.
 func (x *PropertyMapping) WithName(name string) *PropertyMapping {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The value expression for the property mapping.
-//
-// WithValueExpression sets the valueExpression property and returns the receiver for chaining.
-func (x *PropertyMapping) WithValueExpression(valueExpression *foundation.NSExpression) *PropertyMapping {
-	x.inner.SetValueExpression(valueExpression)
+// WithValueExpression the value expression for the property mapping.
+func (x *PropertyMapping) WithValueExpression(valueExpression obj.Object) *PropertyMapping {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
 	return x
 }
 
-// The user info for the property mapping.
-//
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *PropertyMapping) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *PropertyMapping {
-	x.inner.SetUserInfo(userInfo)
+// WithUserInfo the user info for the property mapping.
+func (x *PropertyMapping) WithUserInfo(userInfo obj.Object) *PropertyMapping {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *PropertyMapping) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *PropertyMapping) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// ValueExpression calls the underlying ValueExpression.
-func (x *PropertyMapping) ValueExpression() *foundation.NSExpression {
-	return x.inner.ValueExpression()
+// ValueExpression wraps the corresponding Objective-C method.
+func (x *PropertyMapping) ValueExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueExpression"))
+	return obj.Wrap(_r)
 }
 
-// SetValueExpression calls the underlying SetValueExpression.
-func (x *PropertyMapping) SetValueExpression(valueExpression *foundation.NSExpression) {
-	x.inner.SetValueExpression(valueExpression)
+// SetValueExpression wraps the corresponding Objective-C method.
+func (x *PropertyMapping) SetValueExpression(valueExpression obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *PropertyMapping) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+// UserInfo wraps the corresponding Objective-C method.
+func (x *PropertyMapping) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// SetUserInfo calls the underlying SetUserInfo.
-func (x *PropertyMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetUserInfo(userInfo)
+// SetUserInfo wraps the corresponding Objective-C method.
+func (x *PropertyMapping) SetUserInfo(userInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }
 
 // PropertyMappingable is the interface implemented by [PropertyMapping], for mocking and DI.
 type PropertyMappingable interface {
-	Unwrap() *raw.NSPropertyMapping
+	obj.Object
 	WithName(name string) *PropertyMapping
-	WithValueExpression(valueExpression *foundation.NSExpression) *PropertyMapping
-	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *PropertyMapping
+	WithValueExpression(valueExpression obj.Object) *PropertyMapping
+	WithUserInfo(userInfo obj.Object) *PropertyMapping
 	Name() string
 	SetName(name string)
-	ValueExpression() *foundation.NSExpression
-	SetValueExpression(valueExpression *foundation.NSExpression)
-	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+	ValueExpression() obj.Object
+	SetValueExpression(valueExpression obj.Object)
+	UserInfo() obj.Object
+	SetUserInfo(userInfo obj.Object)
 }
 
 var _ PropertyMappingable = (*PropertyMapping)(nil)

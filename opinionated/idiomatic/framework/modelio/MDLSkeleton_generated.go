@@ -5,117 +5,95 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Skeleton wraps [raw.MDLSkeleton] with a fluent Go API.
+// Skeleton is an idiomatic wrapper over the Objective-C class MDLSkeleton.
+//
+// It embeds [Object], promoting that type's methods.
 type Skeleton struct {
-	inner *raw.MDLSkeleton
+	Object
 }
 
-// Unwrap returns the underlying [raw.MDLSkeleton].
-func (x *Skeleton) Unwrap() *raw.MDLSkeleton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Skeleton) ID() objc.ID { return x.inner.Ptr() }
-
-// SkeletonFromID adopts an existing object pointer as a Skeleton (nil for 0).
+// SkeletonFromID adopts an existing Objective-C object as a Skeleton
+// (nil for 0), retaining it and registering a release finalizer.
 func SkeletonFromID(id objc.ID) *Skeleton {
 	if id == 0 {
 		return nil
 	}
-	return &Skeleton{inner: raw.MDLSkeletonFromID(id)}
+	x := &Skeleton{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSkeletonWithNameJointPaths creates a new [Skeleton].
-func NewSkeletonWithNameJointPaths(name string, jointPaths *foundation.NSArray[*foundation.NSString]) *Skeleton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSkeleton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:jointPaths:"), foundation.NSStringStringWithUTF8String(name).Ptr(), jointPaths.Ptr())
-	return &Skeleton{inner: raw.MDLSkeletonFromID(_id)}
+// skeletonAdopt wraps an Objective-C object that this code just created as a
+// Skeleton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func skeletonAdopt(id objc.ID) *Skeleton {
+	if id == 0 {
+		return nil
+	}
+	x := &Skeleton{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets the parent property and returns the receiver for chaining.
+// NewSkeletonWithNameJointPaths creates a new Skeleton.
+func NewSkeletonWithNameJointPaths(name string, jointPaths []string) *Skeleton {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSkeleton")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:jointPaths:"), purego.NSString(name), purego.SliceToNSArray(jointPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return skeletonAdopt(_id)
+}
+
+// WithParent the parent object that contains this object.
 func (x *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
-	x.inner.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
-	x.inner.MDLObject.SetInstance(instance.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *Skeleton) WithTransform(transform raw.MDLTransformComponent) *Skeleton {
-	x.inner.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *Skeleton) WithChildren(children raw.MDLObjectContainerComponent) *Skeleton {
-	x.inner.MDLObject.SetChildren(children)
-	return x
-}
-
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *Skeleton) WithHidden(hidden bool) *Skeleton {
-	x.inner.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
+// JointPaths wraps the corresponding Objective-C method.
+//
 // JointPaths returns the collection as a Go slice.
 func (x *Skeleton) JointPaths() []string {
-	arr := x.inner.JointPaths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// JointBindTransforms calls the underlying JointBindTransforms.
+// JointBindTransforms wraps the corresponding Objective-C method.
 func (x *Skeleton) JointBindTransforms() *Matrix4x4Array {
-	_r := x.inner.JointBindTransforms()
-	if _r == nil {
-		return nil
-	}
-	return &Matrix4x4Array{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointBindTransforms"))
+	return Matrix4x4ArrayFromID(_r)
 }
 
-// JointRestTransforms calls the underlying JointRestTransforms.
+// JointRestTransforms wraps the corresponding Objective-C method.
 func (x *Skeleton) JointRestTransforms() *Matrix4x4Array {
-	_r := x.inner.JointRestTransforms()
-	if _r == nil {
-		return nil
-	}
-	return &Matrix4x4Array{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointRestTransforms"))
+	return Matrix4x4ArrayFromID(_r)
 }
-
-func (x *Skeleton) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 
 // Skeletonable is the interface implemented by [Skeleton], for mocking and DI.
 type Skeletonable interface {
-	Unwrap() *raw.MDLSkeleton
+	obj.Object
 	WithParent(parent ObjectProvider) *Skeleton
 	WithInstance(instance ObjectProvider) *Skeleton
-	WithTransform(transform raw.MDLTransformComponent) *Skeleton
-	WithChildren(children raw.MDLObjectContainerComponent) *Skeleton
 	WithHidden(hidden bool) *Skeleton
 	JointPaths() []string
 	JointBindTransforms() *Matrix4x4Array
@@ -123,3 +101,5 @@ type Skeletonable interface {
 }
 
 var _ Skeletonable = (*Skeleton)(nil)
+
+var _ ObjectProvider = (*Skeleton)(nil)

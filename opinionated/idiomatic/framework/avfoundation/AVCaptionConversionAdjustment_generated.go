@@ -5,56 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes an adjustment to correct a problem found during validation of a caption conversion.
+// CaptionConversionAdjustment is an idiomatic wrapper over the Objective-C class AVCaptionConversionAdjustment.
 //
-// CaptionConversionAdjustment wraps [raw.AVCaptionConversionAdjustment] with a fluent Go API.
+// CaptionConversionAdjustment is an abstract base — you do not construct it directly. Construct one of [CaptionConversionTimeRangeAdjustment] and pass it where a CaptionConversionAdjustment is accepted.
+//
+// An object that describes an adjustment to correct a problem found during validation of a caption conversion.
 type CaptionConversionAdjustment struct {
-	inner *raw.AVCaptionConversionAdjustment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionConversionAdjustment].
-func (x *CaptionConversionAdjustment) Unwrap() *raw.AVCaptionConversionAdjustment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionConversionAdjustment) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionConversionAdjustmentFromID adopts an existing object pointer as a CaptionConversionAdjustment (nil for 0).
+// CaptionConversionAdjustmentFromID adopts an existing Objective-C object as a CaptionConversionAdjustment
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionConversionAdjustmentFromID(id objc.ID) *CaptionConversionAdjustment {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionConversionAdjustment{inner: raw.AVCaptionConversionAdjustmentFromID(id)}
+	x := &CaptionConversionAdjustment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionConversionAdjustment creates a new [CaptionConversionAdjustment].
-func NewCaptionConversionAdjustment() *CaptionConversionAdjustment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionAdjustment")), objc.RegisterName("new"))
-	return &CaptionConversionAdjustment{inner: raw.AVCaptionConversionAdjustmentFromID(_id)}
-}
-
-// AdjustmentType calls the underlying AdjustmentType.
-func (x *CaptionConversionAdjustment) AdjustmentType() string {
-	_r := x.inner.AdjustmentType()
-	if _r == nil {
-		return ""
+// captionConversionAdjustmentAdopt wraps an Objective-C object that this code just created as a
+// CaptionConversionAdjustment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionConversionAdjustmentAdopt(id objc.ID) *CaptionConversionAdjustment {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &CaptionConversionAdjustment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *CaptionConversionAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment {
-	return x.inner
+// Description returns the object's -description text.
+func (x *CaptionConversionAdjustment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionConversionAdjustment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionConversionAdjustment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionConversionAdjustment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// AdjustmentType wraps the corresponding Objective-C method.
+func (x *CaptionConversionAdjustment) AdjustmentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentType"))
+	return obj.Wrap(_r)
 }
 
 // CaptionConversionAdjustmentable is the interface implemented by [CaptionConversionAdjustment], for mocking and DI.
 type CaptionConversionAdjustmentable interface {
-	Unwrap() *raw.AVCaptionConversionAdjustment
-	AdjustmentType() string
+	obj.Object
+	AdjustmentType() obj.Object
 }
 
 var _ CaptionConversionAdjustmentable = (*CaptionConversionAdjustment)(nil)
+
+// isCaptionConversionAdjustment marks CaptionConversionAdjustment — and, by embedding promotion, its
+// subclasses — as a member of the CaptionConversionAdjustment hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptionConversionAdjustment) isCaptionConversionAdjustment() {}
+
+var _ CaptionConversionAdjustmentProvider = (*CaptionConversionAdjustment)(nil)

@@ -8,101 +8,111 @@ import (
 	"fmt"
 )
 
-type IKCameraDeviceViewDisplayMode int64
+type CameraDeviceViewDisplayMode int64
 
 const (
-	IKCameraDeviceViewDisplayModeNone  IKCameraDeviceViewDisplayMode = -1
-	IKCameraDeviceViewDisplayModeTable IKCameraDeviceViewDisplayMode = 0
-	IKCameraDeviceViewDisplayModeIcon  IKCameraDeviceViewDisplayMode = 1
+	CameraDeviceViewDisplayModeNone  CameraDeviceViewDisplayMode = -1
+	CameraDeviceViewDisplayModeTable CameraDeviceViewDisplayMode = 0
+	CameraDeviceViewDisplayModeIcon  CameraDeviceViewDisplayMode = 1
 )
 
-func (e IKCameraDeviceViewDisplayMode) String() string {
+// String returns the CameraDeviceViewDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CameraDeviceViewDisplayMode) String() string {
 	switch e {
-	case IKCameraDeviceViewDisplayModeNone:
-		return "IKCameraDeviceViewDisplayModeNone"
-	case IKCameraDeviceViewDisplayModeTable:
-		return "IKCameraDeviceViewDisplayModeTable"
-	case IKCameraDeviceViewDisplayModeIcon:
-		return "IKCameraDeviceViewDisplayModeIcon"
+	case CameraDeviceViewDisplayModeNone:
+		return "CameraDeviceViewDisplayModeNone"
+	case CameraDeviceViewDisplayModeTable:
+		return "CameraDeviceViewDisplayModeTable"
+	case CameraDeviceViewDisplayModeIcon:
+		return "CameraDeviceViewDisplayModeIcon"
 	default:
-		return fmt.Sprintf("IKCameraDeviceViewDisplayMode(%d)", int64(e))
+		return fmt.Sprintf("CameraDeviceViewDisplayMode(%d)", int64(e))
 	}
 }
 
-type IKCameraDeviceViewTransferMode int64
+type CameraDeviceViewTransferMode int64
 
 const (
-	IKCameraDeviceViewTransferModeFileBased   IKCameraDeviceViewTransferMode = 0
-	IKCameraDeviceViewTransferModeMemoryBased IKCameraDeviceViewTransferMode = 1
+	CameraDeviceViewTransferModeFileBased   CameraDeviceViewTransferMode = 0
+	CameraDeviceViewTransferModeMemoryBased CameraDeviceViewTransferMode = 1
 )
 
-func (e IKCameraDeviceViewTransferMode) String() string {
+// String returns the CameraDeviceViewTransferMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CameraDeviceViewTransferMode) String() string {
 	switch e {
-	case IKCameraDeviceViewTransferModeFileBased:
-		return "IKCameraDeviceViewTransferModeFileBased"
-	case IKCameraDeviceViewTransferModeMemoryBased:
-		return "IKCameraDeviceViewTransferModeMemoryBased"
+	case CameraDeviceViewTransferModeFileBased:
+		return "CameraDeviceViewTransferModeFileBased"
+	case CameraDeviceViewTransferModeMemoryBased:
+		return "CameraDeviceViewTransferModeMemoryBased"
 	default:
-		return fmt.Sprintf("IKCameraDeviceViewTransferMode(%d)", int64(e))
+		return fmt.Sprintf("CameraDeviceViewTransferMode(%d)", int64(e))
 	}
 }
 
-type IKDeviceBrowserViewDisplayMode int64
+type DeviceBrowserViewDisplayMode int64
 
 const (
-	IKDeviceBrowserViewDisplayModeTable   IKDeviceBrowserViewDisplayMode = 0
-	IKDeviceBrowserViewDisplayModeOutline IKDeviceBrowserViewDisplayMode = 1
-	IKDeviceBrowserViewDisplayModeIcon    IKDeviceBrowserViewDisplayMode = 2
+	DeviceBrowserViewDisplayModeTable   DeviceBrowserViewDisplayMode = 0
+	DeviceBrowserViewDisplayModeOutline DeviceBrowserViewDisplayMode = 1
+	DeviceBrowserViewDisplayModeIcon    DeviceBrowserViewDisplayMode = 2
 )
 
-func (e IKDeviceBrowserViewDisplayMode) String() string {
+// String returns the DeviceBrowserViewDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceBrowserViewDisplayMode) String() string {
 	switch e {
-	case IKDeviceBrowserViewDisplayModeTable:
-		return "IKDeviceBrowserViewDisplayModeTable"
-	case IKDeviceBrowserViewDisplayModeOutline:
-		return "IKDeviceBrowserViewDisplayModeOutline"
-	case IKDeviceBrowserViewDisplayModeIcon:
-		return "IKDeviceBrowserViewDisplayModeIcon"
+	case DeviceBrowserViewDisplayModeTable:
+		return "DeviceBrowserViewDisplayModeTable"
+	case DeviceBrowserViewDisplayModeOutline:
+		return "DeviceBrowserViewDisplayModeOutline"
+	case DeviceBrowserViewDisplayModeIcon:
+		return "DeviceBrowserViewDisplayModeIcon"
 	default:
-		return fmt.Sprintf("IKDeviceBrowserViewDisplayMode(%d)", int64(e))
+		return fmt.Sprintf("DeviceBrowserViewDisplayMode(%d)", int64(e))
 	}
 }
 
-type IKScannerDeviceViewDisplayMode int64
+type ScannerDeviceViewDisplayMode int64
 
 const (
-	IKScannerDeviceViewDisplayModeNone     IKScannerDeviceViewDisplayMode = -1
-	IKScannerDeviceViewDisplayModeSimple   IKScannerDeviceViewDisplayMode = 0
-	IKScannerDeviceViewDisplayModeAdvanced IKScannerDeviceViewDisplayMode = 1
+	ScannerDeviceViewDisplayModeNone     ScannerDeviceViewDisplayMode = -1
+	ScannerDeviceViewDisplayModeSimple   ScannerDeviceViewDisplayMode = 0
+	ScannerDeviceViewDisplayModeAdvanced ScannerDeviceViewDisplayMode = 1
 )
 
-func (e IKScannerDeviceViewDisplayMode) String() string {
+// String returns the ScannerDeviceViewDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScannerDeviceViewDisplayMode) String() string {
 	switch e {
-	case IKScannerDeviceViewDisplayModeNone:
-		return "IKScannerDeviceViewDisplayModeNone"
-	case IKScannerDeviceViewDisplayModeSimple:
-		return "IKScannerDeviceViewDisplayModeSimple"
-	case IKScannerDeviceViewDisplayModeAdvanced:
-		return "IKScannerDeviceViewDisplayModeAdvanced"
+	case ScannerDeviceViewDisplayModeNone:
+		return "ScannerDeviceViewDisplayModeNone"
+	case ScannerDeviceViewDisplayModeSimple:
+		return "ScannerDeviceViewDisplayModeSimple"
+	case ScannerDeviceViewDisplayModeAdvanced:
+		return "ScannerDeviceViewDisplayModeAdvanced"
 	default:
-		return fmt.Sprintf("IKScannerDeviceViewDisplayMode(%d)", int64(e))
+		return fmt.Sprintf("ScannerDeviceViewDisplayMode(%d)", int64(e))
 	}
 }
 
-type IKScannerDeviceViewTransferMode int64
+type ScannerDeviceViewTransferMode int64
 
 const (
-	IKScannerDeviceViewTransferModeFileBased   IKScannerDeviceViewTransferMode = 0
-	IKScannerDeviceViewTransferModeMemoryBased IKScannerDeviceViewTransferMode = 1
+	ScannerDeviceViewTransferModeFileBased   ScannerDeviceViewTransferMode = 0
+	ScannerDeviceViewTransferModeMemoryBased ScannerDeviceViewTransferMode = 1
 )
 
-func (e IKScannerDeviceViewTransferMode) String() string {
+// String returns the ScannerDeviceViewTransferMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScannerDeviceViewTransferMode) String() string {
 	switch e {
-	case IKScannerDeviceViewTransferModeFileBased:
-		return "IKScannerDeviceViewTransferModeFileBased"
-	case IKScannerDeviceViewTransferModeMemoryBased:
-		return "IKScannerDeviceViewTransferModeMemoryBased"
+	case ScannerDeviceViewTransferModeFileBased:
+		return "ScannerDeviceViewTransferModeFileBased"
+	case ScannerDeviceViewTransferModeMemoryBased:
+		return "ScannerDeviceViewTransferModeMemoryBased"
 	default:
-		return fmt.Sprintf("IKScannerDeviceViewTransferMode(%d)", int64(e))
+		return fmt.Sprintf("ScannerDeviceViewTransferMode(%d)", int64(e))
 	}
 }

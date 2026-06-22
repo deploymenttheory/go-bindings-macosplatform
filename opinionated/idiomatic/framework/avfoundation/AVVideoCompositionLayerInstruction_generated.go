@@ -5,73 +5,79 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.
+// VideoCompositionLayerInstruction is an idiomatic wrapper over the Objective-C class AVVideoCompositionLayerInstruction.
 //
-// VideoCompositionLayerInstruction wraps [raw.AVVideoCompositionLayerInstruction] with a fluent Go API.
+// VideoCompositionLayerInstruction is an abstract base — you do not construct it directly. Construct one of [MutableVideoCompositionLayerInstruction] and pass it where a VideoCompositionLayerInstruction is accepted.
+//
+// An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.
 type VideoCompositionLayerInstruction struct {
-	inner *raw.AVVideoCompositionLayerInstruction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVVideoCompositionLayerInstruction].
-func (x *VideoCompositionLayerInstruction) Unwrap() *raw.AVVideoCompositionLayerInstruction {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoCompositionLayerInstruction) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoCompositionLayerInstructionFromID adopts an existing object pointer as a VideoCompositionLayerInstruction (nil for 0).
+// VideoCompositionLayerInstructionFromID adopts an existing Objective-C object as a VideoCompositionLayerInstruction
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoCompositionLayerInstructionFromID(id objc.ID) *VideoCompositionLayerInstruction {
 	if id == 0 {
 		return nil
 	}
-	return &VideoCompositionLayerInstruction{inner: raw.AVVideoCompositionLayerInstructionFromID(id)}
+	x := &VideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVideoCompositionLayerInstruction creates a new [VideoCompositionLayerInstruction].
-func NewVideoCompositionLayerInstruction() *VideoCompositionLayerInstruction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVVideoCompositionLayerInstruction")), objc.RegisterName("new"))
-	return &VideoCompositionLayerInstruction{inner: raw.AVVideoCompositionLayerInstructionFromID(_id)}
+// videoCompositionLayerInstructionAdopt wraps an Objective-C object that this code just created as a
+// VideoCompositionLayerInstruction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoCompositionLayerInstructionAdopt(id objc.ID) *VideoCompositionLayerInstruction {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoCompositionLayerInstruction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Obtains the transform ramp that includes a specified time.
-//
-// GetTransformRampForTimeStartTransformEndTransformTimeRange calls the underlying GetTransformRampForTimeStartTransformEndTransformTimeRange.
-func (x *VideoCompositionLayerInstruction) GetTransformRampForTimeStartTransformEndTransformTimeRange(time_ coremedia.CMTime, startTransform *corefoundation.CGAffineTransform, endTransform *corefoundation.CGAffineTransform, timeRange *coremedia.CMTimeRange) bool {
-	return x.inner.GetTransformRampForTimeStartTransformEndTransformTimeRange(time_, startTransform, endTransform, timeRange)
+// Description returns the object's -description text.
+func (x *VideoCompositionLayerInstruction) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Obtains the opacity ramp that includes a specified time.
-//
-// GetOpacityRampForTimeStartOpacityEndOpacityTimeRange calls the underlying GetOpacityRampForTimeStartOpacityEndOpacityTimeRange.
-func (x *VideoCompositionLayerInstruction) GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_ coremedia.CMTime, startOpacity *float32, endOpacity *float32, timeRange *coremedia.CMTimeRange) bool {
-	return x.inner.GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_, startOpacity, endOpacity, timeRange)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoCompositionLayerInstruction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Obtains the crop rectangle ramp that includes the specified time.
-//
-// GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange calls the underlying GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange.
-func (x *VideoCompositionLayerInstruction) GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_ coremedia.CMTime, startCropRectangle *corefoundation.CGRect, endCropRectangle *corefoundation.CGRect, timeRange *coremedia.CMTimeRange) bool {
-	return x.inner.GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_, startCropRectangle, endCropRectangle, timeRange)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoCompositionLayerInstruction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *VideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction {
-	return x.inner
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoCompositionLayerInstruction) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // VideoCompositionLayerInstructionable is the interface implemented by [VideoCompositionLayerInstruction], for mocking and DI.
 type VideoCompositionLayerInstructionable interface {
-	Unwrap() *raw.AVVideoCompositionLayerInstruction
-	GetTransformRampForTimeStartTransformEndTransformTimeRange(time_ coremedia.CMTime, startTransform *corefoundation.CGAffineTransform, endTransform *corefoundation.CGAffineTransform, timeRange *coremedia.CMTimeRange) bool
-	GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_ coremedia.CMTime, startOpacity *float32, endOpacity *float32, timeRange *coremedia.CMTimeRange) bool
-	GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_ coremedia.CMTime, startCropRectangle *corefoundation.CGRect, endCropRectangle *corefoundation.CGRect, timeRange *coremedia.CMTimeRange) bool
+	obj.Object
 }
 
 var _ VideoCompositionLayerInstructionable = (*VideoCompositionLayerInstruction)(nil)
+
+// isVideoCompositionLayerInstruction marks VideoCompositionLayerInstruction — and, by embedding promotion, its
+// subclasses — as a member of the VideoCompositionLayerInstruction hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VideoCompositionLayerInstruction) isVideoCompositionLayerInstruction() {}
+
+var _ VideoCompositionLayerInstructionProvider = (*VideoCompositionLayerInstruction)(nil)

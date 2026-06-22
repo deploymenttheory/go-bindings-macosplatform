@@ -6,66 +6,44 @@ package screencapturekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// SharedPicker calls the underlying SCContentSharingPickerSharedPicker.
+// SharedPicker sharedPicker the singleton shared picker for the application
 func SharedPicker() *ContentSharingPicker {
-	_r := raw.SCContentSharingPickerSharedPicker()
-	if _r == nil {
-		return nil
-	}
-	return &ContentSharingPicker{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCContentSharingPicker")), objc.RegisterName("sharedPicker"))
+	return ContentSharingPickerFromID(_r)
 }
 
+// SupportedContentTypes an array of UTTypes that corresponds to the file formats that are supported. ScreenCaptureKit can save the CGImage into heic, jpeg, and png
+//
 // SupportedContentTypes returns the collection as a Go slice.
-func SupportedContentTypes() []*uniformtypeidentifiers.UTType {
-	arr := raw.SCScreenshotConfigurationSupportedContentTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *uniformtypeidentifiers.UTType {
-		return uniformtypeidentifiers.UTTypeFromID(purego.Retain(_id))
-	})
+func SupportedContentTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objc.ID(_class("SCScreenshotConfiguration")), objc.RegisterName("supportedContentTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CaptureSampleBufferWithFilterConfigurationCompletionHandler calls the underlying SCScreenshotManagerCaptureSampleBufferWithFilterConfigurationCompletionHandler.
-func CaptureSampleBufferWithFilterConfigurationCompletionHandler(contentFilter *raw.SCContentFilter, config *raw.SCStreamConfiguration, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	raw.SCScreenshotManagerCaptureSampleBufferWithFilterConfigurationCompletionHandler(contentFilter, config, completionHandler)
-}
-
-// CaptureImageWithFilterConfigurationCompletionHandler calls the underlying SCScreenshotManagerCaptureImageWithFilterConfigurationCompletionHandler.
-func CaptureImageWithFilterConfigurationCompletionHandler(contentFilter *raw.SCContentFilter, config *raw.SCStreamConfiguration, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	raw.SCScreenshotManagerCaptureImageWithFilterConfigurationCompletionHandler(contentFilter, config, completionHandler)
-}
-
-// CaptureImageInRectCompletionHandler calls the underlying SCScreenshotManagerCaptureImageInRectCompletionHandler.
-func CaptureImageInRectCompletionHandler(rect corefoundation.CGRect, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	raw.SCScreenshotManagerCaptureImageInRectCompletionHandler(rect, completionHandler)
-}
-
+// CaptureScreenshotWithFilterConfiguration captureScreenshotWithFilter:configuration:completionHandler: this method returns an SCScreenshotOutput object containing CGImages of the screenshot requested by the client
+//
 // CaptureScreenshotWithFilterConfiguration blocks until the operation completes or ctx is cancelled.
-func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter *raw.SCContentFilter, config *raw.SCScreenshotConfiguration) (*ScreenshotOutput, error) {
+func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter *ContentFilter, config *ScreenshotConfiguration) (result *ScreenshotOutput, err error) {
 	type _result struct {
 		val *ScreenshotOutput
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCScreenshotManagerCaptureScreenshotWithFilterConfigurationCompletionHandler(contentFilter, config, func(_p0 *raw.SCScreenshotOutput, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ScreenshotOutput{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ScreenshotOutputFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCScreenshotManager")), objc.RegisterName("captureScreenshotWithFilter:configuration:completionHandler:"), objref.IDOf(contentFilter), objref.IDOf(config), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -75,23 +53,22 @@ func CaptureScreenshotWithFilterConfiguration(ctx context.Context, contentFilter
 	}
 }
 
+// CaptureScreenshotWithRectConfiguration captureScreenshotWithRect:configuration:completionHandler: this method returns an SCScreenshotOutput object containing CGImages of the screenshot requested by the client
+//
 // CaptureScreenshotWithRectConfiguration blocks until the operation completes or ctx is cancelled.
-func CaptureScreenshotWithRectConfiguration(ctx context.Context, rect corefoundation.CGRect, config *raw.SCScreenshotConfiguration) (*ScreenshotOutput, error) {
+func CaptureScreenshotWithRectConfiguration(ctx context.Context, rect corefoundation.CGRect, config *ScreenshotConfiguration) (result *ScreenshotOutput, err error) {
 	type _result struct {
 		val *ScreenshotOutput
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCScreenshotManagerCaptureScreenshotWithRectConfigurationCompletionHandler(rect, config, func(_p0 *raw.SCScreenshotOutput, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ScreenshotOutput{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ScreenshotOutputFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCScreenshotManager")), objc.RegisterName("captureScreenshotWithRect:configuration:completionHandler:"), rect, objref.IDOf(config), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -101,23 +78,22 @@ func CaptureScreenshotWithRectConfiguration(ctx context.Context, rect corefounda
 	}
 }
 
+// GetShareableContent retrieves the displays, apps, and windows that your app can capture.
+//
 // GetShareableContent blocks until the operation completes or ctx is cancelled.
-func GetShareableContent(ctx context.Context) (*ShareableContent, error) {
+func GetShareableContent(ctx context.Context) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCShareableContentGetShareableContentWithCompletionHandler(func(_p0 *raw.SCShareableContent, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareableContent{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareableContentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("getShareableContentWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -127,23 +103,22 @@ func GetShareableContent(ctx context.Context) (*ShareableContent, error) {
 	}
 }
 
+// GetCurrentProcessShareableContent getCurrentProcessShareableContentWithCompletionHandler:completionHandler this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain redacted information about windows, displays and applications that are available to capture by current process without user consent via TCC
+//
 // GetCurrentProcessShareableContent blocks until the operation completes or ctx is cancelled.
-func GetCurrentProcessShareableContent(ctx context.Context) (*ShareableContent, error) {
+func GetCurrentProcessShareableContent(ctx context.Context) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCShareableContentGetCurrentProcessShareableContentWithCompletionHandler(func(_p0 *raw.SCShareableContent, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareableContent{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareableContentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("getCurrentProcessShareableContentWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -153,23 +128,22 @@ func GetCurrentProcessShareableContent(ctx context.Context) (*ShareableContent, 
 	}
 }
 
+// GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly retrieves the displays, apps, and windows that match your criteria.
+//
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly blocks until the operation completes or ctx is cancelled.
-func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.Context, excludeDesktopWindows bool, onScreenWindowsOnly bool) (*ShareableContent, error) {
+func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.Context, excludeDesktopWindows bool, onScreenWindowsOnly bool) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyCompletionHandler(excludeDesktopWindows, onScreenWindowsOnly, func(_p0 *raw.SCShareableContent, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareableContent{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareableContentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnly:completionHandler:"), excludeDesktopWindows, onScreenWindowsOnly, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -179,23 +153,22 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnly(ctx context.C
 	}
 }
 
+// GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow retrieves the displays, apps, and windows that are behind the specified window.
+//
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow blocks until the operation completes or ctx is cancelled.
-func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ctx context.Context, excludeDesktopWindows bool, window *raw.SCWindow) (*ShareableContent, error) {
+func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindowCompletionHandler(excludeDesktopWindows, window, func(_p0 *raw.SCShareableContent, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareableContent{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareableContentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyBelowWindow:completionHandler:"), excludeDesktopWindows, objref.IDOf(window), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -205,23 +178,22 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindow(ct
 	}
 }
 
+// GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow retrieves the displays, apps, and windows that are in front of the specified window.
+//
 // GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow blocks until the operation completes or ctx is cancelled.
-func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ctx context.Context, excludeDesktopWindows bool, window *raw.SCWindow) (*ShareableContent, error) {
+func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ctx context.Context, excludeDesktopWindows bool, window *Window) (result *ShareableContent, err error) {
 	type _result struct {
 		val *ShareableContent
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindowCompletionHandler(excludeDesktopWindows, window, func(_p0 *raw.SCShareableContent, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ShareableContent{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ShareableContentFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyAboveWindow:completionHandler:"), excludeDesktopWindows, objref.IDOf(window), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,20 +203,14 @@ func GetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindow(ct
 	}
 }
 
-// InfoForFilter calls the underlying SCShareableContentInfoForFilter.
-func InfoForFilter(filter *raw.SCContentFilter) *ShareableContentInfo {
-	_r := raw.SCShareableContentInfoForFilter(filter)
-	if _r == nil {
-		return nil
-	}
-	return &ShareableContentInfo{inner: _r}
+// InfoForFilter retrieves any available sharable content information that matches the provided filter.
+func InfoForFilter(filter *ContentFilter) *ShareableContentInfo {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("infoForFilter:"), objref.IDOf(filter))
+	return ShareableContentInfoFromID(_r)
 }
 
-// StreamConfigurationWithPreset calls the underlying SCStreamConfigurationStreamConfigurationWithPreset.
-func StreamConfigurationWithPreset(preset SCStreamConfigurationPreset) *StreamConfiguration {
-	_r := raw.SCStreamConfigurationStreamConfigurationWithPreset(raw.SCStreamConfigurationPreset(preset))
-	if _r == nil {
-		return nil
-	}
-	return &StreamConfiguration{inner: _r}
+// StreamConfigurationWithPreset returns an instance of SCStreamConfiguration corresponding to the given preset The SCStreamConfiguration of the returned object can be used as a guide for creating and configuring an SCStream. If all the suggested properties are respected in creating the SCStream, the resulting capture result will conform to the criteria implied by the preset.
+func StreamConfigurationWithPreset(preset StreamConfigurationPreset) *StreamConfiguration {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCStreamConfiguration")), objc.RegisterName("streamConfigurationWithPreset:"), preset)
+	return StreamConfigurationFromID(_r)
 }

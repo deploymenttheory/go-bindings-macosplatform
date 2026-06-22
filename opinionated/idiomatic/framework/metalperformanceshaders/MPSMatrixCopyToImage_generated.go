@@ -5,147 +5,106 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A kernel that copies matrix data to a Metal Performance Shaders image.
+// MatrixCopyToImage is an idiomatic wrapper over the Objective-C class MPSMatrixCopyToImage.
 //
-// MatrixCopyToImage wraps [raw.MPSMatrixCopyToImage] with a fluent Go API.
+// It embeds [Kernel], promoting that type's methods.
+//
+// A kernel that copies matrix data to a Metal Performance Shaders image.
 type MatrixCopyToImage struct {
-	inner *raw.MPSMatrixCopyToImage
+	Kernel
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixCopyToImage].
-func (x *MatrixCopyToImage) Unwrap() *raw.MPSMatrixCopyToImage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixCopyToImage) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixCopyToImageFromID adopts an existing object pointer as a MatrixCopyToImage (nil for 0).
+// MatrixCopyToImageFromID adopts an existing Objective-C object as a MatrixCopyToImage
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixCopyToImageFromID(id objc.ID) *MatrixCopyToImage {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixCopyToImage{inner: raw.MPSMatrixCopyToImageFromID(id)}
+	x := &MatrixCopyToImage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract Initialize a MPSMatrixCopyToImage object on a device @param    device        The device the kernel will run on @param    dataLayout    The data layout @return   A valid MPSMatrixCopyToImage object or nil, if failure.
-//
-// NewMatrixCopyToImageWithDeviceDataLayout creates a new [MatrixCopyToImage].
-func NewMatrixCopyToImageWithDeviceDataLayout(device metal.MTLDevice, dataLayout mpscore.MPSDataLayout) *MatrixCopyToImage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyToImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:dataLayout:"), device, dataLayout)
-	return &MatrixCopyToImage{inner: raw.MPSMatrixCopyToImageFromID(_id)}
+// matrixCopyToImageAdopt wraps an Objective-C object that this code just created as a
+// MatrixCopyToImage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixCopyToImageAdopt(id objc.ID) *MatrixCopyToImage {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixCopyToImage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewMatrixCopyToImageWithCoderDevice creates a new [MatrixCopyToImage].
-func NewMatrixCopyToImageWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixCopyToImage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyToImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixCopyToImage{inner: raw.MPSMatrixCopyToImageFromID(_id)}
+// NewMatrixCopyToImage creates a new MatrixCopyToImage.
+func NewMatrixCopyToImage() *MatrixCopyToImage {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyToImage")), objc.RegisterName("new"))
+	return matrixCopyToImageAdopt(_id)
 }
 
-// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+// WithSourceMatrixOrigin the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixCopyToImage) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage {
-	x.inner.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
 	return x
 }
 
-// @property   sourceMatrixBatchIndex @discussion The index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
-//
-// WithSourceMatrixBatchIndex sets the sourceMatrixBatchIndex property and returns the receiver for chaining.
-func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex uint) *MatrixCopyToImage {
-	x.inner.SetSourceMatrixBatchIndex(sourceMatrixBatchIndex)
+// WithSourceMatrixBatchIndex the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixCopyToImage) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopyToImage {
-	x.inner.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *MatrixCopyToImage) WithLabel(label string) *MatrixCopyToImage {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract Encode a kernel that copies a MPSMatrix to a MPSImage into a command buffer using a MTLComputeCommandEncoder. @discussion The kernel copies feature channels from sourceMatrix to the destinationImage. The kernel will not begin to execute until after the command buffer has been enqueued and committed. NOTE: The sourceMatrix.dataType must match the feature channel data type in destinationImage. @param  commandBuffer       A valid MTLCommandBuffer. @param  sourceMatrix        A valid MPSMatrix or MPSTemporaryMatrix object describing the source matrix. @param  destinationImage    A valid MPSImage describing the image to copy to.
-//
-// EncodeToCommandBufferSourceMatrixDestinationImage calls the underlying EncodeToCommandBufferSourceMatrixDestinationImage.
-func (x *MatrixCopyToImage) EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImage *mpscore.MPSImage) {
-	x.inner.EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer, sourceMatrix, destinationImage)
-}
-
-// @abstract Encode a kernel that copies a MPSMatrix to a MPSImageBatch into a command buffer using a MTLComputeCommandEncoder. @discussion The kernel copies feature channels from sourceImage to the buffer associated with destinationMatrix.  The kernel will not begin to execute until after the command buffer has been enqueued and committed. Each image will be copied to its own row in the matrix, starting with row destinationMatrixOrigin.x. NOTE: The destinationMatrix.dataType must match the feature channel data type in sourceImage. NOTE: All the images in the source batch should be of the same size and have numberOfImages = 1. @param  commandBuffer       A valid MTLCommandBuffer. @param  sourceMatrix        A valid MPSMatrix or MPSTemporaryMatrix object describing the source matrix. @param  destinationImages   A valid MPSImageBatch describing the images to copy to.
-//
-// EncodeBatchToCommandBufferSourceMatrixDestinationImages calls the underlying EncodeBatchToCommandBufferSourceMatrixDestinationImages.
-func (x *MatrixCopyToImage) EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImages unsafe.Pointer) {
-	x.inner.EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer, sourceMatrix, destinationImages)
-}
-
-// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// SourceMatrixOrigin calls the underlying SourceMatrixOrigin.
+// SourceMatrixOrigin the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
-	return x.inner.SourceMatrixOrigin()
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("sourceMatrixOrigin"))
+	return _r
 }
 
-// SetSourceMatrixOrigin calls the underlying SetSourceMatrixOrigin.
+// SetSourceMatrixOrigin wraps the corresponding Objective-C method.
 func (x *MatrixCopyToImage) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) {
-	x.inner.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixOrigin:"), sourceMatrixOrigin)
 }
 
-// @property   sourceMatrixBatchIndex @discussion The index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
-//
-// SourceMatrixBatchIndex calls the underlying SourceMatrixBatchIndex.
-func (x *MatrixCopyToImage) SourceMatrixBatchIndex() uint {
-	return x.inner.SourceMatrixBatchIndex()
+// SourceMatrixBatchIndex the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+func (x *MatrixCopyToImage) SourceMatrixBatchIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceMatrixBatchIndex"))
+	return _r
 }
 
-// SetSourceMatrixBatchIndex calls the underlying SetSourceMatrixBatchIndex.
-func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex uint) {
-	x.inner.SetSourceMatrixBatchIndex(sourceMatrixBatchIndex)
+// SetSourceMatrixBatchIndex wraps the corresponding Objective-C method.
+func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMatrixBatchIndex:"), sourceMatrixBatchIndex)
 }
-
-// @property   dataLayout @abstract   The data layout to use @discussion Returns the data layout.  When copying from a MPSMatrix to a MPSImage, this describes the order in which the image values are to be stored in the buffer associated with the MPSMatrix. Default: MPSDataLayoutFeatureChannelsxHeightxWidth
-//
-// DataLayout calls the underlying DataLayout.
-func (x *MatrixCopyToImage) DataLayout() mpscore.MPSDataLayout {
-	return x.inner.DataLayout()
-}
-
-func (x *MatrixCopyToImage) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // MatrixCopyToImageable is the interface implemented by [MatrixCopyToImage], for mocking and DI.
 type MatrixCopyToImageable interface {
-	Unwrap() *raw.MPSMatrixCopyToImage
+	obj.Object
 	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage
-	WithSourceMatrixBatchIndex(sourceMatrixBatchIndex uint) *MatrixCopyToImage
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixCopyToImage
+	WithSourceMatrixBatchIndex(sourceMatrixBatchIndex int) *MatrixCopyToImage
 	WithLabel(label string) *MatrixCopyToImage
-	EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImage *mpscore.MPSImage)
-	EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImages unsafe.Pointer)
 	SourceMatrixOrigin() metal.MTLOrigin
 	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
-	SourceMatrixBatchIndex() uint
-	SetSourceMatrixBatchIndex(sourceMatrixBatchIndex uint)
-	DataLayout() mpscore.MPSDataLayout
+	SourceMatrixBatchIndex() int
+	SetSourceMatrixBatchIndex(sourceMatrixBatchIndex int)
 }
 
 var _ MatrixCopyToImageable = (*MatrixCopyToImage)(nil)
+
+var _ KernelProvider = (*MatrixCopyToImage)(nil)

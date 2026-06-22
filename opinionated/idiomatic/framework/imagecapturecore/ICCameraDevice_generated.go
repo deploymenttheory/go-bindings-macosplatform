@@ -6,348 +6,240 @@ package imagecapturecore
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a camera.
+// CameraDevice is an idiomatic wrapper over the Objective-C class ICCameraDevice.
 //
-// CameraDevice wraps [raw.ICCameraDevice] with a fluent Go API.
+// It embeds [Device], promoting that type's methods.
+//
+// An object that represents a camera.
 type CameraDevice struct {
-	inner *raw.ICCameraDevice
+	Device
 }
 
-// Unwrap returns the underlying [raw.ICCameraDevice].
-func (x *CameraDevice) Unwrap() *raw.ICCameraDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CameraDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// CameraDeviceFromID adopts an existing object pointer as a CameraDevice (nil for 0).
+// CameraDeviceFromID adopts an existing Objective-C object as a CameraDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func CameraDeviceFromID(id objc.ID) *CameraDevice {
 	if id == 0 {
 		return nil
 	}
-	return &CameraDevice{inner: raw.ICCameraDeviceFromID(id)}
+	x := &CameraDevice{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCameraDevice creates a new [CameraDevice].
+// cameraDeviceAdopt wraps an Objective-C object that this code just created as a
+// CameraDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cameraDeviceAdopt(id objc.ID) *CameraDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &CameraDevice{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCameraDevice creates a new CameraDevice.
 func NewCameraDevice() *CameraDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICCameraDevice")), objc.RegisterName("new"))
-	return &CameraDevice{inner: raw.ICCameraDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICCameraDevice")), objc.RegisterName("new"))
+	return cameraDeviceAdopt(_id)
 }
 
-// @property mediaPresentation @abstract The media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. @discussion A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
-//
-// WithMediaPresentation sets the mediaPresentation property and returns the receiver for chaining.
-func (x *CameraDevice) WithMediaPresentation(mediaPresentation ICMediaPresentation) *CameraDevice {
-	x.inner.SetMediaPresentation(raw.ICMediaPresentation(mediaPresentation))
+// WithMediaPresentation the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
+func (x *CameraDevice) WithMediaPresentation(mediaPresentation MediaPresentation) *CameraDevice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaPresentation:"), mediaPresentation)
 	return x
 }
 
-// A closure for handling PTP event packets.
-//
-// WithPtpEventHandler sets the ptpEventHandler property and returns the receiver for chaining.
-func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(*foundation.NSData)) *CameraDevice {
-	x.inner.SetPtpEventHandler(ptpEventHandler)
+// WithPtpEventHandler a closure for handling PTP event packets.
+func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(obj.Object)) *CameraDevice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPtpEventHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { ptpEventHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
-// The delegate to receive messages once a session is opened on the device.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CameraDevice) WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice {
-	x.inner.ICDevice.SetDelegate(delegate)
-	return x
+// FilesOfType returns an array of files of the selected type on the camera.
+func (x *CameraDevice) FilesOfType(fileUTType string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filesOfType:"), purego.NSString(fileUTType))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Returns an array of files of the selected type on the camera.
-//
-// FilesOfType calls the underlying FilesOfType.
-func (x *CameraDevice) FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.FilesOfType(foundation.NSStringStringWithUTF8String(fileUTType))
-}
-
-// Asynchronously reads data of a specified length from a specified offset.
-//
-// RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo calls the underlying RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo.
-func (x *CameraDevice) RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file *raw.ICCameraFile, offset int64, length int64, readDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file, offset, length, readDelegate, selector, contextInfo)
-}
-
-// Downloads a file from the camera.
-//
-// RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo calls the underlying RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo.
-func (x *CameraDevice) RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file, options, downloadDelegate, selector, contextInfo)
-}
-
-// Cancels a download from the camera.
-//
-// CancelDownload calls the underlying CancelDownload.
+// CancelDownload cancels a download from the camera.
 func (x *CameraDevice) CancelDownload() {
-	x.inner.CancelDownload()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDownload"))
 }
 
-// Deletes files from the camera.
-//
-// RequestDeleteFiles calls the underlying RequestDeleteFiles.
-func (x *CameraDevice) RequestDeleteFiles(files ...CameraItemProvider) {
-	_ptrs := make([]objc.ID, len(files))
-	for _i, _v := range files {
-		_ptrs[_i] = _v.asCameraItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.ICCameraItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.ICCameraItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.ICCameraItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.RequestDeleteFiles(_arg0)
+// RequestDeleteFiles deletes files from the camera.
+func (x *CameraDevice) RequestDeleteFiles(files []*CameraItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDeleteFiles:"), purego.SliceToNSArray(files, func(_v *CameraItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Deletes files from the camera, with the ability to catch failures and execute a completion block.
-//
-// RequestDeleteFilesDeleteFailedCompletion calls the underlying RequestDeleteFilesDeleteFailedCompletion.
-func (x *CameraDevice) RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed func(*foundation.NSDictionary[*foundation.NSString, *raw.ICCameraItem]), completion func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) *foundation.NSProgress {
-	return x.inner.RequestDeleteFilesDeleteFailedCompletion(files, deleteFailed, completion)
-}
-
-// Cancels the current delete operation.
-//
-// CancelDelete calls the underlying CancelDelete.
+// CancelDelete cancels the current delete operation.
 func (x *CameraDevice) CancelDelete() {
-	x.inner.CancelDelete()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDelete"))
 }
 
-// Synchronizes the camera’s clock with the computer’s clock.
-//
-// RequestSyncClock calls the underlying RequestSyncClock.
+// RequestSyncClock synchronizes the camera’s clock with the computer’s clock.
 func (x *CameraDevice) RequestSyncClock() {
-	x.inner.RequestSyncClock()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestSyncClock"))
 }
 
-// Uploads a file to the camera.
-//
-// RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo calls the underlying RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo.
-func (x *CameraDevice) RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(fileURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], uploadDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options, uploadDelegate, selector, contextInfo)
-}
-
-// Captures a new image using the camera.
-//
-// RequestTakePicture calls the underlying RequestTakePicture.
+// RequestTakePicture captures a new image using the camera.
 func (x *CameraDevice) RequestTakePicture() {
-	x.inner.RequestTakePicture()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestTakePicture"))
 }
 
-// Enables tethered capture if the camera has the capability to take pictures while connected.
-//
-// RequestEnableTethering calls the underlying RequestEnableTethering.
+// RequestEnableTethering enables tethered capture if the camera has the capability to take pictures while connected.
 func (x *CameraDevice) RequestEnableTethering() {
-	x.inner.RequestEnableTethering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEnableTethering"))
 }
 
-// Disables tethered capture on the camera.
-//
-// RequestDisableTethering calls the underlying RequestDisableTethering.
+// RequestDisableTethering disables tethered capture on the camera.
 func (x *CameraDevice) RequestDisableTethering() {
-	x.inner.RequestDisableTethering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDisableTethering"))
 }
 
-// Sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.
-//
-// RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo calls the underlying RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo.
-func (x *CameraDevice) RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command *foundation.NSData, data *foundation.NSData, sendCommandDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command, data, sendCommandDelegate, selector, contextInfo)
+// ContentCatalogPercentCompleted ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
+func (x *CameraDevice) ContentCatalogPercentCompleted() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contentCatalogPercentCompleted"))
+	return _r
 }
 
-// Sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.
-//
-// RequestSendPTPCommandOutDataCompletion calls the underlying RequestSendPTPCommandOutDataCompletion.
-func (x *CameraDevice) RequestSendPTPCommandOutDataCompletion(ptpCommand *foundation.NSData, ptpData *foundation.NSData, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {
-	x.inner.RequestSendPTPCommandOutDataCompletion(ptpCommand, ptpData, completion)
-}
-
-// @property contentCatalogPercentCompleted @abstract ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
-//
-// ContentCatalogPercentCompleted calls the underlying ContentCatalogPercentCompleted.
-func (x *CameraDevice) ContentCatalogPercentCompleted() uint {
-	return x.inner.ContentCatalogPercentCompleted()
-}
-
-// @property contents @abstract ￼Contents of the camera. The structure of the elements in this array will reflect the folder structure of the storage reported by the camera. Each item in this array will correspond to a storage on the camera.
+// Contents ￼Contents of the camera. The structure of the elements in this array will reflect the folder structure of the storage reported by the camera. Each item in this array will correspond to a storage on the camera.
 //
 // Contents returns the collection as a Go slice.
 func (x *CameraDevice) Contents() []*CameraItem {
-	arr := x.inner.Contents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
-		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
 
-// @property mediaFiles @abstract ￼The property mediaFiles represents all image, movie and audio files on the camera. These files are returned as a single array without regard to the folder hierarchy used to store these files on the camera.
+// MediaFiles ￼The property mediaFiles represents all image, movie and audio files on the camera. These files are returned as a single array without regard to the folder hierarchy used to store these files on the camera.
 //
 // MediaFiles returns the collection as a Go slice.
 func (x *CameraDevice) MediaFiles() []*CameraItem {
-	arr := x.inner.MediaFiles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
-		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaFiles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
 
-// @property ejectable @abstract ￼Indicates whether the device can be 'soft' removed or disconnected.
-//
-// IsEjectable calls the underlying IsEjectable.
+// IsEjectable ￼Indicates whether the device can be 'soft' removed or disconnected.
 func (x *CameraDevice) IsEjectable() bool {
-	return x.inner.IsEjectable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEjectable"))
+	return _r
 }
 
-// @property locked @abstract ￼Indicates whether the device is locked.  A locked device does not allow for deletion of any asset.
-//
-// IsLocked calls the underlying IsLocked.
+// IsLocked ￼Indicates whether the device is locked.  A locked device does not allow for deletion of any asset.
 func (x *CameraDevice) IsLocked() bool {
-	return x.inner.IsLocked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocked"))
+	return _r
 }
 
-// @property accessRestrictedAppleDevice @abstract Set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
-//
-// IsAccessRestrictedAppleDevice calls the underlying IsAccessRestrictedAppleDevice.
+// IsAccessRestrictedAppleDevice set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
 func (x *CameraDevice) IsAccessRestrictedAppleDevice() bool {
-	return x.inner.IsAccessRestrictedAppleDevice()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAccessRestrictedAppleDevice"))
+	return _r
 }
 
-// @property iCloudPhotosEnabled @abstract Set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
-//
-// ICloudPhotosEnabled calls the underlying ICloudPhotosEnabled.
+// ICloudPhotosEnabled set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
 func (x *CameraDevice) ICloudPhotosEnabled() bool {
-	return x.inner.ICloudPhotosEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("iCloudPhotosEnabled"))
+	return _r
 }
 
-// @property mountPoint @abstract Filesystem mount point for a device with transportType of ICTransportTypeMassStorage. This will be NULL for all other devices.
-//
-// MountPoint calls the underlying MountPoint.
-func (x *CameraDevice) MountPoint() unsafe.Pointer {
-	return x.inner.MountPoint()
+// MediaPresentation the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
+func (x *CameraDevice) MediaPresentation() MediaPresentation {
+	_r := objc.Send[MediaPresentation](objref.IDOf(x), objc.RegisterName("mediaPresentation"))
+	return _r
 }
 
-// @property mediaPresentation @abstract The media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. @discussion A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
-//
-// MediaPresentation calls the underlying MediaPresentation.
-func (x *CameraDevice) MediaPresentation() ICMediaPresentation {
-	return ICMediaPresentation(x.inner.MediaPresentation())
+// SetMediaPresentation wraps the corresponding Objective-C method.
+func (x *CameraDevice) SetMediaPresentation(mediaPresentation MediaPresentation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaPresentation:"), mediaPresentation)
 }
 
-// SetMediaPresentation calls the underlying SetMediaPresentation.
-func (x *CameraDevice) SetMediaPresentation(mediaPresentation ICMediaPresentation) {
-	x.inner.SetMediaPresentation(raw.ICMediaPresentation(mediaPresentation))
-}
-
-// @property timeOffset @abstract Indicates the time offset, in seconds, between the camera's clock and the computer's clock￼. This value is positive if the camera's clock is ahead of the computer's clock. This property should be ignored if the camera's capabilities property does not contain ICCameraDeviceCanSyncClock.
-//
-// TimeOffset calls the underlying TimeOffset.
+// TimeOffset indicates the time offset, in seconds, between the camera's clock and the computer's clock￼. This value is positive if the camera's clock is ahead of the computer's clock. This property should be ignored if the camera's capabilities property does not contain ICCameraDeviceCanSyncClock.
 func (x *CameraDevice) TimeOffset() float64 {
-	return x.inner.TimeOffset()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeOffset"))
+	return _r
 }
 
-// @property batteryLevelAvailable @abstract Indicates if the device has reported battery charge level￼.
-//
-// BatteryLevelAvailable calls the underlying BatteryLevelAvailable.
+// BatteryLevelAvailable indicates if the device has reported battery charge level￼.
 func (x *CameraDevice) BatteryLevelAvailable() bool {
-	return x.inner.BatteryLevelAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("batteryLevelAvailable"))
+	return _r
 }
 
-// @property batteryLevel @abstract ￼Indicates the battery charge level. Its value ranges from 0 to 100.
-//
-// BatteryLevel calls the underlying BatteryLevel.
-func (x *CameraDevice) BatteryLevel() uint {
-	return x.inner.BatteryLevel()
+// BatteryLevel ￼Indicates the battery charge level. Its value ranges from 0 to 100.
+func (x *CameraDevice) BatteryLevel() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batteryLevel"))
+	return _r
 }
 
-// @property tetheredCaptureEnabled @abstract This property is always set to YES when the device has the capability 'ICCameraDeviceCanTakePicture' @discussion requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard take picture functionality of supported cameras.
-//
-// TetheredCaptureEnabled calls the underlying TetheredCaptureEnabled.
+// TetheredCaptureEnabled this property is always set to YES when the device has the capability 'ICCameraDeviceCanTakePicture' requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard take picture functionality of supported cameras.
 func (x *CameraDevice) TetheredCaptureEnabled() bool {
-	return x.inner.TetheredCaptureEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tetheredCaptureEnabled"))
+	return _r
 }
 
-// @property ptpEventHandler @abstract As an alternative to setting up an object to handle PTP event packets, a handler can be set.  The handler will always be called in place of the delegate if non-nil.  If the handler is not present, the delegate will be called if present. It is guaranteed only one of the methods will be called if both are implemented.
+// SetPtpEventHandler wraps the corresponding Objective-C method.
 //
-// PtpEventHandler calls the underlying PtpEventHandler.
-func (x *CameraDevice) PtpEventHandler() objc.Block {
-	return x.inner.PtpEventHandler()
-}
-
 // SetPtpEventHandler blocks until the operation completes or ctx is cancelled.
-func (x *CameraDevice) SetPtpEventHandler(ctx context.Context) (*foundation.NSData, error) {
+func (x *CameraDevice) SetPtpEventHandler(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetPtpEventHandler(func(_p0 *foundation.NSData) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPtpEventHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-func (x *CameraDevice) asDevice() *raw.ICDevice { return &x.inner.ICDevice }
-
 // CameraDeviceable is the interface implemented by [CameraDevice], for mocking and DI.
 type CameraDeviceable interface {
-	Unwrap() *raw.ICCameraDevice
-	WithMediaPresentation(mediaPresentation ICMediaPresentation) *CameraDevice
-	WithPtpEventHandler(ptpEventHandler func(*foundation.NSData)) *CameraDevice
-	WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice
-	FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString]
-	RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file *raw.ICCameraFile, offset int64, length int64, readDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
-	RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer)
+	obj.Object
+	WithMediaPresentation(mediaPresentation MediaPresentation) *CameraDevice
+	WithPtpEventHandler(ptpEventHandler func(obj.Object)) *CameraDevice
+	FilesOfType(fileUTType string) []string
 	CancelDownload()
-	RequestDeleteFiles(files ...CameraItemProvider)
-	RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed func(*foundation.NSDictionary[*foundation.NSString, *raw.ICCameraItem]), completion func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) *foundation.NSProgress
+	RequestDeleteFiles(files []*CameraItem)
 	CancelDelete()
 	RequestSyncClock()
-	RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(fileURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], uploadDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
 	RequestTakePicture()
 	RequestEnableTethering()
 	RequestDisableTethering()
-	RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command *foundation.NSData, data *foundation.NSData, sendCommandDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
-	RequestSendPTPCommandOutDataCompletion(ptpCommand *foundation.NSData, ptpData *foundation.NSData, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer))
-	ContentCatalogPercentCompleted() uint
+	ContentCatalogPercentCompleted() int
 	Contents() []*CameraItem
 	MediaFiles() []*CameraItem
 	IsEjectable() bool
 	IsLocked() bool
 	IsAccessRestrictedAppleDevice() bool
 	ICloudPhotosEnabled() bool
-	MountPoint() unsafe.Pointer
-	MediaPresentation() ICMediaPresentation
-	SetMediaPresentation(mediaPresentation ICMediaPresentation)
+	MediaPresentation() MediaPresentation
+	SetMediaPresentation(mediaPresentation MediaPresentation)
 	TimeOffset() float64
 	BatteryLevelAvailable() bool
-	BatteryLevel() uint
+	BatteryLevel() int
 	TetheredCaptureEnabled() bool
-	PtpEventHandler() objc.Block
-	SetPtpEventHandler(ctx context.Context) (*foundation.NSData, error)
+	SetPtpEventHandler(ctx context.Context) (obj.Object, error)
 }
 
 var _ CameraDeviceable = (*CameraDevice)(nil)
+
+var _ DeviceProvider = (*CameraDevice)(nil)

@@ -5,116 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that outputs video frames from a player item.
+// PlayerItemVideoOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemVideoOutput.
 //
-// PlayerItemVideoOutput wraps [raw.AVPlayerItemVideoOutput] with a fluent Go API.
+// It embeds [PlayerItemOutput], promoting that type's methods.
+//
+// An object that outputs video frames from a player item.
 type PlayerItemVideoOutput struct {
-	inner *raw.AVPlayerItemVideoOutput
+	PlayerItemOutput
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemVideoOutput].
-func (x *PlayerItemVideoOutput) Unwrap() *raw.AVPlayerItemVideoOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemVideoOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemVideoOutputFromID adopts an existing object pointer as a PlayerItemVideoOutput (nil for 0).
+// PlayerItemVideoOutputFromID adopts an existing Objective-C object as a PlayerItemVideoOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemVideoOutputFromID(id objc.ID) *PlayerItemVideoOutput {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(id)}
-}
-
-// Creates a video output object using the specified pixel buffer attributes.
-//
-// NewPlayerItemVideoOutputWithPixelBufferAttributes creates a new [PlayerItemVideoOutput].
-func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes purego.IDer) *PlayerItemVideoOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), pixelBufferAttributes.ID())
-	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
-}
-
-// Creates a video output object initialized with the specified output settings.
-//
-// NewPlayerItemVideoOutputWithOutputSettings creates a new [PlayerItemVideoOutput].
-func NewPlayerItemVideoOutputWithOutputSettings(outputSettings purego.IDer) *PlayerItemVideoOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), outputSettings.ID())
-	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
-}
-
-// A Boolean value that indicates whether the player object renders the receiver’s output.
-//
-// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
-func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
-	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	x := &PlayerItemVideoOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a Boolean value that indicates whether video output is available for the specified item time.
-//
-// HasNewPixelBufferForItemTime calls the underlying HasNewPixelBufferForItemTime.
-func (x *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
-	return x.inner.HasNewPixelBufferForItemTime(itemTime)
+// playerItemVideoOutputAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemVideoOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemVideoOutputAdopt(id objc.ID) *PlayerItemVideoOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemVideoOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Retrieves an image that is appropriate for display at the specified item time, and marks the image as acquired.
-//
-// CopyPixelBufferForItemTimeItemTimeForDisplay calls the underlying CopyPixelBufferForItemTimeItemTimeForDisplay.
-func (x *PlayerItemVideoOutput) CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer {
-	return x.inner.CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime, outItemTimeForDisplay)
+// NewPlayerItemVideoOutputWithPixelBufferAttributes creates a video output object using the specified pixel buffer attributes.
+func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerItemVideoOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+	return playerItemVideoOutputAdopt(_id)
 }
 
-// Sets the delegate and dispatch queue for the receiver.
-//
-// SetDelegateQueue calls the underlying SetDelegateQueue.
-func (x *PlayerItemVideoOutput) SetDelegateQueue(delegate raw.AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject) {
-	x.inner.SetDelegateQueue(delegate, delegateQueue)
+// NewPlayerItemVideoOutputWithOutputSettings creates a video output object initialized with the specified output settings.
+func NewPlayerItemVideoOutputWithOutputSettings(outputSettings obj.Object) *PlayerItemVideoOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), objref.IDOf(outputSettings))
+	return playerItemVideoOutputAdopt(_id)
 }
 
-// Tells the receiver that the video out put client is entering a quiescent state.
-//
-// RequestNotificationOfMediaDataChangeWithAdvanceInterval calls the underlying RequestNotificationOfMediaDataChangeWithAdvanceInterval.
+// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
+func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return x
+}
+
+// RequestNotificationOfMediaDataChangeWithAdvanceInterval tells the receiver that the video out put client is entering a quiescent state.
 func (x *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
-	x.inner.RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:"), interval)
 }
 
-// @property		delegate @abstract		The receiver's delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *PlayerItemVideoOutput) Delegate() raw.AVPlayerItemOutputPullDelegate {
-	return x.inner.Delegate()
-}
-
-// DelegateQueue calls the underlying DelegateQueue.
-func (x *PlayerItemVideoOutput) DelegateQueue() *foundation.NSObject {
-	return x.inner.DelegateQueue()
-}
-
-func (x *PlayerItemVideoOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput {
-	return &x.inner.AVPlayerItemOutput
+// DelegateQueue wraps the corresponding Objective-C method.
+func (x *PlayerItemVideoOutput) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+	return obj.Wrap(_r)
 }
 
 // PlayerItemVideoOutputable is the interface implemented by [PlayerItemVideoOutput], for mocking and DI.
 type PlayerItemVideoOutputable interface {
-	Unwrap() *raw.AVPlayerItemVideoOutput
+	obj.Object
 	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput
-	HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool
-	CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer
-	SetDelegateQueue(delegate raw.AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject)
 	RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64)
-	Delegate() raw.AVPlayerItemOutputPullDelegate
-	DelegateQueue() *foundation.NSObject
+	DelegateQueue() obj.Object
 }
 
 var _ PlayerItemVideoOutputable = (*PlayerItemVideoOutput)(nil)
+
+var _ PlayerItemOutputProvider = (*PlayerItemVideoOutput)(nil)

@@ -5,52 +5,64 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SimpleCString wraps [raw.NSSimpleCString] with a fluent Go API.
+// SimpleCString is an idiomatic wrapper over the Objective-C class NSSimpleCString.
+//
+// SimpleCString is an abstract base — you do not construct it directly. Construct one of [ConstantString] and pass it where a SimpleCString is accepted.
 type SimpleCString struct {
-	inner *raw.NSSimpleCString
+	String
 }
 
-// Unwrap returns the underlying [raw.NSSimpleCString].
-func (x *SimpleCString) Unwrap() *raw.NSSimpleCString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SimpleCString) ID() objc.ID { return x.inner.Ptr() }
-
-// SimpleCStringFromID adopts an existing object pointer as a SimpleCString (nil for 0).
+// SimpleCStringFromID adopts an existing Objective-C object as a SimpleCString
+// (nil for 0), retaining it and registering a release finalizer.
 func SimpleCStringFromID(id objc.ID) *SimpleCString {
 	if id == 0 {
 		return nil
 	}
-	return &SimpleCString{inner: raw.NSSimpleCStringFromID(id)}
-}
-
-// NewSimpleCString creates a new [SimpleCString].
-func NewSimpleCString() *SimpleCString {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSimpleCString")), objc.RegisterName("new"))
-	return &SimpleCString{inner: raw.NSSimpleCStringFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SimpleCString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SimpleCString {
-	x.inner.NSString.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &SimpleCString{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *SimpleCString) asSimpleCString() *raw.NSSimpleCString { return x.inner }
+// simpleCStringAdopt wraps an Objective-C object that this code just created as a
+// SimpleCString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func simpleCStringAdopt(id objc.ID) *SimpleCString {
+	if id == 0 {
+		return nil
+	}
+	x := &SimpleCString{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *SimpleCString) asString() *raw.NSString { return &x.inner.NSString }
-
-func (x *SimpleCString) asObject() *raw.NSObject { return &x.inner.NSString.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *SimpleCString) WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // SimpleCStringable is the interface implemented by [SimpleCString], for mocking and DI.
 type SimpleCStringable interface {
-	Unwrap() *raw.NSSimpleCString
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SimpleCString
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString
 }
 
 var _ SimpleCStringable = (*SimpleCString)(nil)
+
+// isSimpleCString marks SimpleCString — and, by embedding promotion, its
+// subclasses — as a member of the SimpleCString hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SimpleCString) isSimpleCString() {}
+
+var _ SimpleCStringProvider = (*SimpleCString)(nil)
+
+var _ StringProvider = (*SimpleCString)(nil)

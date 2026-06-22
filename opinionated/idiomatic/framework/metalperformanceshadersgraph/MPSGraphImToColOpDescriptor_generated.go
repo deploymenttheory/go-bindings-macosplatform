@@ -5,306 +5,284 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that defines the parameters for an image to column or column to image operation.
+// GraphImToColOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphImToColOpDescriptor.
 //
-// GraphImToColOpDescriptor wraps [raw.MPSGraphImToColOpDescriptor] with a fluent Go API.
+// It embeds [GraphObject], promoting that type's methods.
+//
+// The class that defines the parameters for an image to column or column to image operation.
 type GraphImToColOpDescriptor struct {
-	inner *raw.MPSGraphImToColOpDescriptor
+	GraphObject
 }
 
-// Unwrap returns the underlying [raw.MPSGraphImToColOpDescriptor].
-func (x *GraphImToColOpDescriptor) Unwrap() *raw.MPSGraphImToColOpDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphImToColOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphImToColOpDescriptorFromID adopts an existing object pointer as a GraphImToColOpDescriptor (nil for 0).
+// GraphImToColOpDescriptorFromID adopts an existing Objective-C object as a GraphImToColOpDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphImToColOpDescriptorFromID(id objc.ID) *GraphImToColOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphImToColOpDescriptor{inner: raw.MPSGraphImToColOpDescriptorFromID(id)}
+	x := &GraphImToColOpDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphImToColOpDescriptor creates a new [GraphImToColOpDescriptor].
+// graphImToColOpDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphImToColOpDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphImToColOpDescriptorAdopt(id objc.ID) *GraphImToColOpDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphImToColOpDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGraphImToColOpDescriptor creates a new GraphImToColOpDescriptor.
 func NewGraphImToColOpDescriptor() *GraphImToColOpDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphImToColOpDescriptor")), objc.RegisterName("new"))
-	return &GraphImToColOpDescriptor{inner: raw.MPSGraphImToColOpDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphImToColOpDescriptor")), objc.RegisterName("new"))
+	return graphImToColOpDescriptorAdopt(_id)
 }
 
-// The property that defines the kernel size in width dimension.
-//
-// WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithKernelWidth(kernelWidth uint) *GraphImToColOpDescriptor {
-	x.inner.SetKernelWidth(kernelWidth)
+// WithKernelWidth the property that defines the kernel size in width dimension.
+func (x *GraphImToColOpDescriptor) WithKernelWidth(kernelWidth int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
-// The property that defines the kernel size in height dimension.
-//
-// WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithKernelHeight(kernelHeight uint) *GraphImToColOpDescriptor {
-	x.inner.SetKernelHeight(kernelHeight)
+// WithKernelHeight the property that defines the kernel size in height dimension.
+func (x *GraphImToColOpDescriptor) WithKernelHeight(kernelHeight int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
-// The property that defines the stride in width dimension.
-//
-// WithStrideInX sets the strideInX property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithStrideInX(strideInX uint) *GraphImToColOpDescriptor {
-	x.inner.SetStrideInX(strideInX)
+// WithStrideInX the property that defines the stride in width dimension.
+func (x *GraphImToColOpDescriptor) WithStrideInX(strideInX int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 	return x
 }
 
-// The property that defines the stride in height dimension.
-//
-// WithStrideInY sets the strideInY property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithStrideInY(strideInY uint) *GraphImToColOpDescriptor {
-	x.inner.SetStrideInY(strideInY)
+// WithStrideInY the property that defines the stride in height dimension.
+func (x *GraphImToColOpDescriptor) WithStrideInY(strideInY int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 	return x
 }
 
-// The property that defines the dilation in width dimension.
-//
-// WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphImToColOpDescriptor {
-	x.inner.SetDilationRateInX(dilationRateInX)
+// WithDilationRateInX the property that defines the dilation in width dimension.
+func (x *GraphImToColOpDescriptor) WithDilationRateInX(dilationRateInX int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 	return x
 }
 
-// The property that defines the dilation in height dimension.
-//
-// WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphImToColOpDescriptor {
-	x.inner.SetDilationRateInY(dilationRateInY)
+// WithDilationRateInY the property that defines the dilation in height dimension.
+func (x *GraphImToColOpDescriptor) WithDilationRateInY(dilationRateInY int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 	return x
 }
 
-// The property that defines the padding in width dimension on the left side.
-//
-// WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphImToColOpDescriptor {
-	x.inner.SetPaddingLeft(paddingLeft)
+// WithPaddingLeft the property that defines the padding in width dimension on the left side.
+func (x *GraphImToColOpDescriptor) WithPaddingLeft(paddingLeft int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 	return x
 }
 
-// The property that defines the padding in width dimension on the right side.
-//
-// WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithPaddingRight(paddingRight uint) *GraphImToColOpDescriptor {
-	x.inner.SetPaddingRight(paddingRight)
+// WithPaddingRight the property that defines the padding in width dimension on the right side.
+func (x *GraphImToColOpDescriptor) WithPaddingRight(paddingRight int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 	return x
 }
 
-// The property that defines the padding in height dimension at the top.
-//
-// WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithPaddingTop(paddingTop uint) *GraphImToColOpDescriptor {
-	x.inner.SetPaddingTop(paddingTop)
+// WithPaddingTop the property that defines the padding in height dimension at the top.
+func (x *GraphImToColOpDescriptor) WithPaddingTop(paddingTop int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 	return x
 }
 
-// The property that defines the padding in height dimension at the bottom.
-//
-// WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphImToColOpDescriptor {
-	x.inner.SetPaddingBottom(paddingBottom)
+// WithPaddingBottom the property that defines the padding in height dimension at the bottom.
+func (x *GraphImToColOpDescriptor) WithPaddingBottom(paddingBottom int) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 	return x
 }
 
-// The property that defines the layout of source or output tensor. e.g. batch x channels x width x height for NCHW layout
-//
-// WithDataLayout sets the dataLayout property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
-	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
+// WithDataLayout the property that defines the layout of source or output tensor. e.g. batch x channels x width x height for NCHW layout
+func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 	return x
 }
 
-// Sets the descriptor’s padding to the given values.
-//
-// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
-func (x *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
-	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the descriptor’s padding to the given values.
+func (x *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
-// The property that defines the kernel size in width dimension.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *GraphImToColOpDescriptor) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// KernelWidth the property that defines the kernel size in width dimension.
+func (x *GraphImToColOpDescriptor) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
 
-// SetKernelWidth calls the underlying SetKernelWidth.
-func (x *GraphImToColOpDescriptor) SetKernelWidth(kernelWidth uint) {
-	x.inner.SetKernelWidth(kernelWidth)
+// SetKernelWidth wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetKernelWidth(kernelWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
-// The property that defines the kernel size  in height dimension.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *GraphImToColOpDescriptor) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// KernelHeight the property that defines the kernel size  in height dimension.
+func (x *GraphImToColOpDescriptor) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// SetKernelHeight calls the underlying SetKernelHeight.
-func (x *GraphImToColOpDescriptor) SetKernelHeight(kernelHeight uint) {
-	x.inner.SetKernelHeight(kernelHeight)
+// SetKernelHeight wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetKernelHeight(kernelHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 }
 
-// The property that defines the stride in width dimension.
-//
-// StrideInX calls the underlying StrideInX.
-func (x *GraphImToColOpDescriptor) StrideInX() uint {
-	return x.inner.StrideInX()
+// StrideInX the property that defines the stride in width dimension.
+func (x *GraphImToColOpDescriptor) StrideInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
+	return _r
 }
 
-// SetStrideInX calls the underlying SetStrideInX.
-func (x *GraphImToColOpDescriptor) SetStrideInX(strideInX uint) {
-	x.inner.SetStrideInX(strideInX)
+// SetStrideInX wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetStrideInX(strideInX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInX:"), strideInX)
 }
 
-// The property that defines the stride in height dimension.
-//
-// StrideInY calls the underlying StrideInY.
-func (x *GraphImToColOpDescriptor) StrideInY() uint {
-	return x.inner.StrideInY()
+// StrideInY the property that defines the stride in height dimension.
+func (x *GraphImToColOpDescriptor) StrideInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
+	return _r
 }
 
-// SetStrideInY calls the underlying SetStrideInY.
-func (x *GraphImToColOpDescriptor) SetStrideInY(strideInY uint) {
-	x.inner.SetStrideInY(strideInY)
+// SetStrideInY wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetStrideInY(strideInY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInY:"), strideInY)
 }
 
-// The property that defines the dilation in width dimension.
-//
-// DilationRateInX calls the underlying DilationRateInX.
-func (x *GraphImToColOpDescriptor) DilationRateInX() uint {
-	return x.inner.DilationRateInX()
+// DilationRateInX the property that defines the dilation in width dimension.
+func (x *GraphImToColOpDescriptor) DilationRateInX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
+	return _r
 }
 
-// SetDilationRateInX calls the underlying SetDilationRateInX.
-func (x *GraphImToColOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
-	x.inner.SetDilationRateInX(dilationRateInX)
+// SetDilationRateInX wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetDilationRateInX(dilationRateInX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInX:"), dilationRateInX)
 }
 
-// The property that defines the dilation in height dimension.
-//
-// DilationRateInY calls the underlying DilationRateInY.
-func (x *GraphImToColOpDescriptor) DilationRateInY() uint {
-	return x.inner.DilationRateInY()
+// DilationRateInY the property that defines the dilation in height dimension.
+func (x *GraphImToColOpDescriptor) DilationRateInY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
+	return _r
 }
 
-// SetDilationRateInY calls the underlying SetDilationRateInY.
-func (x *GraphImToColOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
-	x.inner.SetDilationRateInY(dilationRateInY)
+// SetDilationRateInY wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetDilationRateInY(dilationRateInY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateInY:"), dilationRateInY)
 }
 
-// The property that defines the padding in width dimension on the left side.
-//
-// PaddingLeft calls the underlying PaddingLeft.
-func (x *GraphImToColOpDescriptor) PaddingLeft() uint {
-	return x.inner.PaddingLeft()
+// PaddingLeft the property that defines the padding in width dimension on the left side.
+func (x *GraphImToColOpDescriptor) PaddingLeft() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
+	return _r
 }
 
-// SetPaddingLeft calls the underlying SetPaddingLeft.
-func (x *GraphImToColOpDescriptor) SetPaddingLeft(paddingLeft uint) {
-	x.inner.SetPaddingLeft(paddingLeft)
+// SetPaddingLeft wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetPaddingLeft(paddingLeft int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), paddingLeft)
 }
 
-// The property that defines the padding in width dimension on the right side.
-//
-// PaddingRight calls the underlying PaddingRight.
-func (x *GraphImToColOpDescriptor) PaddingRight() uint {
-	return x.inner.PaddingRight()
+// PaddingRight the property that defines the padding in width dimension on the right side.
+func (x *GraphImToColOpDescriptor) PaddingRight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
+	return _r
 }
 
-// SetPaddingRight calls the underlying SetPaddingRight.
-func (x *GraphImToColOpDescriptor) SetPaddingRight(paddingRight uint) {
-	x.inner.SetPaddingRight(paddingRight)
+// SetPaddingRight wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetPaddingRight(paddingRight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), paddingRight)
 }
 
-// The property that defines the padding in height dimension at the top.
-//
-// PaddingTop calls the underlying PaddingTop.
-func (x *GraphImToColOpDescriptor) PaddingTop() uint {
-	return x.inner.PaddingTop()
+// PaddingTop the property that defines the padding in height dimension at the top.
+func (x *GraphImToColOpDescriptor) PaddingTop() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
+	return _r
 }
 
-// SetPaddingTop calls the underlying SetPaddingTop.
-func (x *GraphImToColOpDescriptor) SetPaddingTop(paddingTop uint) {
-	x.inner.SetPaddingTop(paddingTop)
+// SetPaddingTop wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetPaddingTop(paddingTop int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), paddingTop)
 }
 
-// The property that defines the padding in height dimension at the bottom.
-//
-// PaddingBottom calls the underlying PaddingBottom.
-func (x *GraphImToColOpDescriptor) PaddingBottom() uint {
-	return x.inner.PaddingBottom()
+// PaddingBottom the property that defines the padding in height dimension at the bottom.
+func (x *GraphImToColOpDescriptor) PaddingBottom() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
+	return _r
 }
 
-// SetPaddingBottom calls the underlying SetPaddingBottom.
-func (x *GraphImToColOpDescriptor) SetPaddingBottom(paddingBottom uint) {
-	x.inner.SetPaddingBottom(paddingBottom)
+// SetPaddingBottom wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetPaddingBottom(paddingBottom int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), paddingBottom)
 }
 
-// The property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
-//
-// DataLayout calls the underlying DataLayout.
-func (x *GraphImToColOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
-	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
+// DataLayout the property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
+func (x *GraphImToColOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
+	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(x), objc.RegisterName("dataLayout"))
+	return _r
 }
 
-// SetDataLayout calls the underlying SetDataLayout.
-func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout) {
-	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
-}
-
-func (x *GraphImToColOpDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+// SetDataLayout wraps the corresponding Objective-C method.
+func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout GraphTensorNamedDataLayout) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataLayout:"), dataLayout)
 }
 
 // GraphImToColOpDescriptorable is the interface implemented by [GraphImToColOpDescriptor], for mocking and DI.
 type GraphImToColOpDescriptorable interface {
-	Unwrap() *raw.MPSGraphImToColOpDescriptor
-	WithKernelWidth(kernelWidth uint) *GraphImToColOpDescriptor
-	WithKernelHeight(kernelHeight uint) *GraphImToColOpDescriptor
-	WithStrideInX(strideInX uint) *GraphImToColOpDescriptor
-	WithStrideInY(strideInY uint) *GraphImToColOpDescriptor
-	WithDilationRateInX(dilationRateInX uint) *GraphImToColOpDescriptor
-	WithDilationRateInY(dilationRateInY uint) *GraphImToColOpDescriptor
-	WithPaddingLeft(paddingLeft uint) *GraphImToColOpDescriptor
-	WithPaddingRight(paddingRight uint) *GraphImToColOpDescriptor
-	WithPaddingTop(paddingTop uint) *GraphImToColOpDescriptor
-	WithPaddingBottom(paddingBottom uint) *GraphImToColOpDescriptor
-	WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor
-	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint)
-	KernelWidth() uint
-	SetKernelWidth(kernelWidth uint)
-	KernelHeight() uint
-	SetKernelHeight(kernelHeight uint)
-	StrideInX() uint
-	SetStrideInX(strideInX uint)
-	StrideInY() uint
-	SetStrideInY(strideInY uint)
-	DilationRateInX() uint
-	SetDilationRateInX(dilationRateInX uint)
-	DilationRateInY() uint
-	SetDilationRateInY(dilationRateInY uint)
-	PaddingLeft() uint
-	SetPaddingLeft(paddingLeft uint)
-	PaddingRight() uint
-	SetPaddingRight(paddingRight uint)
-	PaddingTop() uint
-	SetPaddingTop(paddingTop uint)
-	PaddingBottom() uint
-	SetPaddingBottom(paddingBottom uint)
-	DataLayout() MPSGraphTensorNamedDataLayout
-	SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout)
+	obj.Object
+	WithKernelWidth(kernelWidth int) *GraphImToColOpDescriptor
+	WithKernelHeight(kernelHeight int) *GraphImToColOpDescriptor
+	WithStrideInX(strideInX int) *GraphImToColOpDescriptor
+	WithStrideInY(strideInY int) *GraphImToColOpDescriptor
+	WithDilationRateInX(dilationRateInX int) *GraphImToColOpDescriptor
+	WithDilationRateInY(dilationRateInY int) *GraphImToColOpDescriptor
+	WithPaddingLeft(paddingLeft int) *GraphImToColOpDescriptor
+	WithPaddingRight(paddingRight int) *GraphImToColOpDescriptor
+	WithPaddingTop(paddingTop int) *GraphImToColOpDescriptor
+	WithPaddingBottom(paddingBottom int) *GraphImToColOpDescriptor
+	WithDataLayout(dataLayout GraphTensorNamedDataLayout) *GraphImToColOpDescriptor
+	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int)
+	KernelWidth() int
+	SetKernelWidth(kernelWidth int)
+	KernelHeight() int
+	SetKernelHeight(kernelHeight int)
+	StrideInX() int
+	SetStrideInX(strideInX int)
+	StrideInY() int
+	SetStrideInY(strideInY int)
+	DilationRateInX() int
+	SetDilationRateInX(dilationRateInX int)
+	DilationRateInY() int
+	SetDilationRateInY(dilationRateInY int)
+	PaddingLeft() int
+	SetPaddingLeft(paddingLeft int)
+	PaddingRight() int
+	SetPaddingRight(paddingRight int)
+	PaddingTop() int
+	SetPaddingTop(paddingTop int)
+	PaddingBottom() int
+	SetPaddingBottom(paddingBottom int)
+	DataLayout() GraphTensorNamedDataLayout
+	SetDataLayout(dataLayout GraphTensorNamedDataLayout)
 }
 
 var _ GraphImToColOpDescriptorable = (*GraphImToColOpDescriptor)(nil)
+
+var _ GraphObjectProvider = (*GraphImToColOpDescriptor)(nil)

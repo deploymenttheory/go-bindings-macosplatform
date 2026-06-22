@@ -5,71 +5,103 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A preview object that contains information representing the pass you add to Wallet.
+// AddPassMetadataPreview is an idiomatic wrapper over the Objective-C class PKAddPassMetadataPreview.
 //
-// AddPassMetadataPreview wraps [raw.PKAddPassMetadataPreview] with a fluent Go API.
+// AddPassMetadataPreview is an abstract base — you do not construct it directly. Construct one of [ShareablePassMetadataPreview] and pass it where a AddPassMetadataPreview is accepted.
+//
+// A preview object that contains information representing the pass you add to Wallet.
 type AddPassMetadataPreview struct {
-	inner *raw.PKAddPassMetadataPreview
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKAddPassMetadataPreview].
-func (x *AddPassMetadataPreview) Unwrap() *raw.PKAddPassMetadataPreview { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddPassMetadataPreview) ID() objc.ID { return x.inner.Ptr() }
-
-// AddPassMetadataPreviewFromID adopts an existing object pointer as a AddPassMetadataPreview (nil for 0).
+// AddPassMetadataPreviewFromID adopts an existing Objective-C object as a AddPassMetadataPreview
+// (nil for 0), retaining it and registering a release finalizer.
 func AddPassMetadataPreviewFromID(id objc.ID) *AddPassMetadataPreview {
 	if id == 0 {
 		return nil
 	}
-	return &AddPassMetadataPreview{inner: raw.PKAddPassMetadataPreviewFromID(id)}
+	x := &AddPassMetadataPreview{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Provides a preview of an image object that represents the pass you add to Wallet.
-//
-// NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription creates a new [AddPassMetadataPreview].
-func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description string) *AddPassMetadataPreview {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddPassMetadataPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPassThumbnail:localizedDescription:"), passThumbnail, foundation.NSStringStringWithUTF8String(description).Ptr())
-	return &AddPassMetadataPreview{inner: raw.PKAddPassMetadataPreviewFromID(_id)}
+// addPassMetadataPreviewAdopt wraps an Objective-C object that this code just created as a
+// AddPassMetadataPreview (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addPassMetadataPreviewAdopt(id objc.ID) *AddPassMetadataPreview {
+	if id == 0 {
+		return nil
+	}
+	x := &AddPassMetadataPreview{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// CGImage representing the pass in our provisioning UI.
-//
-// PassThumbnailImage calls the underlying PassThumbnailImage.
-func (x *AddPassMetadataPreview) PassThumbnailImage() unsafe.Pointer {
-	return x.inner.PassThumbnailImage()
+// Description returns the object's -description text.
+func (x *AddPassMetadataPreview) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Localized description of the pass to be referenced during provisioning.
-//
-// LocalizedDescription calls the underlying LocalizedDescription.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddPassMetadataPreview) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddPassMetadataPreview) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddPassMetadataPreview) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription provides a preview of an image object that represents the pass you add to Wallet.
+func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnail obj.Object, description string) *AddPassMetadataPreview {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAddPassMetadataPreview")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail), purego.NSString(description))
+	return addPassMetadataPreviewAdopt(_id)
+}
+
+// PassThumbnailImage CGImage representing the pass in our provisioning UI.
+func (x *AddPassMetadataPreview) PassThumbnailImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passThumbnailImage"))
+	return obj.Wrap(_r)
+}
+
+// LocalizedDescription localized description of the pass to be referenced during provisioning.
 func (x *AddPassMetadataPreview) LocalizedDescription() string {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *AddPassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview {
-	return x.inner
+	return purego.GoString(_r)
 }
 
 // AddPassMetadataPreviewable is the interface implemented by [AddPassMetadataPreview], for mocking and DI.
 type AddPassMetadataPreviewable interface {
-	Unwrap() *raw.PKAddPassMetadataPreview
-	PassThumbnailImage() unsafe.Pointer
+	obj.Object
+	PassThumbnailImage() obj.Object
 	LocalizedDescription() string
 }
 
 var _ AddPassMetadataPreviewable = (*AddPassMetadataPreview)(nil)
+
+// isAddPassMetadataPreview marks AddPassMetadataPreview — and, by embedding promotion, its
+// subclasses — as a member of the AddPassMetadataPreview hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AddPassMetadataPreview) isAddPassMetadataPreview() {}
+
+var _ AddPassMetadataPreviewProvider = (*AddPassMetadataPreview)(nil)

@@ -5,53 +5,86 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the structure of a NeuralNetwork model.
+// ModelStructureNeuralNetwork is an idiomatic wrapper over the Objective-C class MLModelStructureNeuralNetwork.
 //
-// ModelStructureNeuralNetwork wraps [raw.MLModelStructureNeuralNetwork] with a fluent Go API.
+// A class representing the structure of a NeuralNetwork model.
 type ModelStructureNeuralNetwork struct {
-	inner *raw.MLModelStructureNeuralNetwork
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructureNeuralNetwork].
-func (x *ModelStructureNeuralNetwork) Unwrap() *raw.MLModelStructureNeuralNetwork { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructureNeuralNetwork) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureNeuralNetworkFromID adopts an existing object pointer as a ModelStructureNeuralNetwork (nil for 0).
+// ModelStructureNeuralNetworkFromID adopts an existing Objective-C object as a ModelStructureNeuralNetwork
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureNeuralNetworkFromID(id objc.ID) *ModelStructureNeuralNetwork {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructureNeuralNetwork{inner: raw.MLModelStructureNeuralNetworkFromID(id)}
+	x := &ModelStructureNeuralNetwork{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructureNeuralNetwork creates a new [ModelStructureNeuralNetwork].
-func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureNeuralNetwork")), objc.RegisterName("new"))
-	return &ModelStructureNeuralNetwork{inner: raw.MLModelStructureNeuralNetworkFromID(_id)}
-}
-
-// Layers returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
-	arr := x.inner.Layers()
-	if arr == nil {
+// modelStructureNeuralNetworkAdopt wraps an Objective-C object that this code just created as a
+// ModelStructureNeuralNetwork (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureNeuralNetworkAdopt(id objc.ID) *ModelStructureNeuralNetwork {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureNeuralNetworkLayer {
-		return &ModelStructureNeuralNetworkLayer{inner: raw.MLModelStructureNeuralNetworkLayerFromID(purego.Retain(_id))}
+	x := &ModelStructureNeuralNetwork{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructureNeuralNetwork) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructureNeuralNetwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructureNeuralNetwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModelStructureNeuralNetwork) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModelStructureNeuralNetwork creates a new ModelStructureNeuralNetwork.
+func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureNeuralNetwork")), objc.RegisterName("new"))
+	return modelStructureNeuralNetworkAdopt(_id)
+}
+
+// Layers wraps the corresponding Objective-C method.
+//
+// Layers returns the collection as a Go slice.
+func (x *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureNeuralNetworkLayer {
+		return ModelStructureNeuralNetworkLayerFromID(_id)
 	})
 }
 
 // ModelStructureNeuralNetworkable is the interface implemented by [ModelStructureNeuralNetwork], for mocking and DI.
 type ModelStructureNeuralNetworkable interface {
-	Unwrap() *raw.MLModelStructureNeuralNetwork
+	obj.Object
 	Layers() []*ModelStructureNeuralNetworkLayer
 }
 

@@ -5,67 +5,67 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A recognized 3D point that includes a parent joint.
+// HumanBodyRecognizedPoint3D is an idiomatic wrapper over the Objective-C class VNHumanBodyRecognizedPoint3D.
 //
-// HumanBodyRecognizedPoint3D wraps [raw.VNHumanBodyRecognizedPoint3D] with a fluent Go API.
+// It embeds [RecognizedPoint3D], promoting that type's methods.
+//
+// A recognized 3D point that includes a parent joint.
 type HumanBodyRecognizedPoint3D struct {
-	inner *raw.VNHumanBodyRecognizedPoint3D
+	RecognizedPoint3D
 }
 
-// Unwrap returns the underlying [raw.VNHumanBodyRecognizedPoint3D].
-func (x *HumanBodyRecognizedPoint3D) Unwrap() *raw.VNHumanBodyRecognizedPoint3D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HumanBodyRecognizedPoint3D) ID() objc.ID { return x.inner.Ptr() }
-
-// HumanBodyRecognizedPoint3DFromID adopts an existing object pointer as a HumanBodyRecognizedPoint3D (nil for 0).
+// HumanBodyRecognizedPoint3DFromID adopts an existing Objective-C object as a HumanBodyRecognizedPoint3D
+// (nil for 0), retaining it and registering a release finalizer.
 func HumanBodyRecognizedPoint3DFromID(id objc.ID) *HumanBodyRecognizedPoint3D {
 	if id == 0 {
 		return nil
 	}
-	return &HumanBodyRecognizedPoint3D{inner: raw.VNHumanBodyRecognizedPoint3DFromID(id)}
+	x := &HumanBodyRecognizedPoint3D{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHumanBodyRecognizedPoint3D creates a new [HumanBodyRecognizedPoint3D].
-func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNHumanBodyRecognizedPoint3D")), objc.RegisterName("new"))
-	return &HumanBodyRecognizedPoint3D{inner: raw.VNHumanBodyRecognizedPoint3DFromID(_id)}
-}
-
-// LocalPosition calls the underlying LocalPosition.
-func (x *HumanBodyRecognizedPoint3D) LocalPosition() unsafe.Pointer {
-	return x.inner.LocalPosition()
-}
-
-// ParentJoint calls the underlying ParentJoint.
-func (x *HumanBodyRecognizedPoint3D) ParentJoint() string {
-	_r := x.inner.ParentJoint()
-	if _r == nil {
-		return ""
+// humanBodyRecognizedPoint3DAdopt wraps an Objective-C object that this code just created as a
+// HumanBodyRecognizedPoint3D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func humanBodyRecognizedPoint3DAdopt(id objc.ID) *HumanBodyRecognizedPoint3D {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &HumanBodyRecognizedPoint3D{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *HumanBodyRecognizedPoint3D) asRecognizedPoint3D() *raw.VNRecognizedPoint3D {
-	return &x.inner.VNRecognizedPoint3D
+// NewHumanBodyRecognizedPoint3D creates a new HumanBodyRecognizedPoint3D.
+func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNHumanBodyRecognizedPoint3D")), objc.RegisterName("new"))
+	return humanBodyRecognizedPoint3DAdopt(_id)
 }
 
-func (x *HumanBodyRecognizedPoint3D) asPoint3D() *raw.VNPoint3D {
-	return &x.inner.VNRecognizedPoint3D.VNPoint3D
+// ParentJoint wraps the corresponding Objective-C method.
+func (x *HumanBodyRecognizedPoint3D) ParentJoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentJoint"))
+	return obj.Wrap(_r)
 }
 
 // HumanBodyRecognizedPoint3Dable is the interface implemented by [HumanBodyRecognizedPoint3D], for mocking and DI.
 type HumanBodyRecognizedPoint3Dable interface {
-	Unwrap() *raw.VNHumanBodyRecognizedPoint3D
-	LocalPosition() unsafe.Pointer
-	ParentJoint() string
+	obj.Object
+	ParentJoint() obj.Object
 }
 
 var _ HumanBodyRecognizedPoint3Dable = (*HumanBodyRecognizedPoint3D)(nil)
+
+var _ RecognizedPoint3DProvider = (*HumanBodyRecognizedPoint3D)(nil)
+
+var _ Point3DProvider = (*HumanBodyRecognizedPoint3D)(nil)

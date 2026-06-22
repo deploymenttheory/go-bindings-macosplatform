@@ -6,65 +6,96 @@ package foundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A service that provides a custom communication channel between your app and a File Provider extension.
+// FileProviderService is an idiomatic wrapper over the Objective-C class NSFileProviderService.
 //
-// FileProviderService wraps [raw.NSFileProviderService] with a fluent Go API.
+// A service that provides a custom communication channel between your app and a File Provider extension.
 type FileProviderService struct {
-	inner *raw.NSFileProviderService
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderService].
-func (x *FileProviderService) Unwrap() *raw.NSFileProviderService { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderService) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderServiceFromID adopts an existing object pointer as a FileProviderService (nil for 0).
+// FileProviderServiceFromID adopts an existing Objective-C object as a FileProviderService
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderServiceFromID(id objc.ID) *FileProviderService {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderService{inner: raw.NSFileProviderServiceFromID(id)}
-}
-
-// NewFileProviderService creates a new [FileProviderService].
-func NewFileProviderService() *FileProviderService {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderService")), objc.RegisterName("new"))
-	return &FileProviderService{inner: raw.NSFileProviderServiceFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileProviderService) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileProviderService {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &FileProviderService{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Asynchronously returns the service’s connection object.
+// fileProviderServiceAdopt wraps an Objective-C object that this code just created as a
+// FileProviderService (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderServiceAdopt(id objc.ID) *FileProviderService {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderService{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderService) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderService) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileProviderService creates a new FileProviderService.
+func NewFileProviderService() *FileProviderService {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderService")), objc.RegisterName("new"))
+	return fileProviderServiceAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *FileProviderService) WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// GetFileProviderConnection asynchronously returns the service’s connection object.
 //
 // GetFileProviderConnection blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (*XPCConnection, error) {
+func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (result *XPCConnection, err error) {
 	type _result struct {
 		val *XPCConnection
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetFileProviderConnectionWithCompletionHandler(func(_p0 *raw.NSXPCConnection, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &XPCConnection{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = XPCConnectionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getFileProviderConnectionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -74,21 +105,16 @@ func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (*X
 	}
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *FileProviderService) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return StringFromID(_r)
 }
-
-func (x *FileProviderService) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // FileProviderServiceable is the interface implemented by [FileProviderService], for mocking and DI.
 type FileProviderServiceable interface {
-	Unwrap() *raw.NSFileProviderService
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileProviderService
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService
 	GetFileProviderConnection(ctx context.Context) (*XPCConnection, error)
 	Name() *String
 }

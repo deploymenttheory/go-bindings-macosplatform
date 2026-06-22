@@ -5,73 +5,103 @@
 package oslog
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single entry from the unified logging system.
+// LogEntry is an idiomatic wrapper over the Objective-C class OSLogEntry.
 //
-// LogEntry wraps [raw.OSLogEntry] with a fluent Go API.
+// LogEntry is an abstract base — you do not construct it directly. Construct one of [LogEntryActivity], [LogEntryBoundary], [LogEntryLog], [LogEntrySignpost] and pass it where a LogEntry is accepted.
+//
+// A single entry from the unified logging system.
 type LogEntry struct {
-	inner *raw.OSLogEntry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogEntry].
-func (x *LogEntry) Unwrap() *raw.OSLogEntry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogEntry) ID() objc.ID { return x.inner.Ptr() }
-
-// LogEntryFromID adopts an existing object pointer as a LogEntry (nil for 0).
+// LogEntryFromID adopts an existing Objective-C object as a LogEntry
+// (nil for 0), retaining it and registering a release finalizer.
 func LogEntryFromID(id objc.ID) *LogEntry {
 	if id == 0 {
 		return nil
 	}
-	return &LogEntry{inner: raw.OSLogEntryFromID(id)}
+	x := &LogEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLogEntry creates a new [LogEntry].
-func NewLogEntry() *LogEntry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogEntry")), objc.RegisterName("new"))
-	return &LogEntry{inner: raw.OSLogEntryFromID(_id)}
+// logEntryAdopt wraps an Objective-C object that this code just created as a
+// LogEntry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logEntryAdopt(id objc.ID) *LogEntry {
+	if id == 0 {
+		return nil
+	}
+	x := &LogEntry{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property composedMessage @abstract The fully formatted message for the entry.
-//
-// ComposedMessage calls the underlying ComposedMessage.
+// Description returns the object's -description text.
+func (x *LogEntry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogEntry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// ComposedMessage the fully formatted message for the entry.
 func (x *LogEntry) ComposedMessage() string {
-	_r := x.inner.ComposedMessage()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composedMessage"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property date @abstract The timestamp of the entry.
-//
-// Date calls the underlying Date.
-func (x *LogEntry) Date() *foundation.NSDate {
-	return x.inner.Date()
+// Date the timestamp of the entry.
+func (x *LogEntry) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
-// @property storeCategory @abstract This entry's storage tag. See OSLogEntryStoreCategory.
-//
-// StoreCategory calls the underlying StoreCategory.
-func (x *LogEntry) StoreCategory() OSLogEntryStoreCategory {
-	return OSLogEntryStoreCategory(x.inner.StoreCategory())
+// StoreCategory this entry's storage tag. See OSLogEntryStoreCategory.
+func (x *LogEntry) StoreCategory() LogEntryStoreCategory {
+	_r := objc.Send[LogEntryStoreCategory](objref.IDOf(x), objc.RegisterName("storeCategory"))
+	return _r
 }
-
-func (x *LogEntry) asLogEntry() *raw.OSLogEntry { return x.inner }
 
 // LogEntryable is the interface implemented by [LogEntry], for mocking and DI.
 type LogEntryable interface {
-	Unwrap() *raw.OSLogEntry
+	obj.Object
 	ComposedMessage() string
-	Date() *foundation.NSDate
-	StoreCategory() OSLogEntryStoreCategory
+	Date() obj.Object
+	StoreCategory() LogEntryStoreCategory
 }
 
 var _ LogEntryable = (*LogEntry)(nil)
+
+// isLogEntry marks LogEntry — and, by embedding promotion, its
+// subclasses — as a member of the LogEntry hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LogEntry) isLogEntry() {}
+
+var _ LogEntryProvider = (*LogEntry)(nil)

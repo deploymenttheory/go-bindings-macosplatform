@@ -5,73 +5,97 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that appends captions to an asset writer input.
+// AssetWriterInputCaptionAdaptor is an idiomatic wrapper over the Objective-C class AVAssetWriterInputCaptionAdaptor.
 //
-// AssetWriterInputCaptionAdaptor wraps [raw.AVAssetWriterInputCaptionAdaptor] with a fluent Go API.
+// An object that appends captions to an asset writer input.
 type AssetWriterInputCaptionAdaptor struct {
-	inner *raw.AVAssetWriterInputCaptionAdaptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetWriterInputCaptionAdaptor].
-func (x *AssetWriterInputCaptionAdaptor) Unwrap() *raw.AVAssetWriterInputCaptionAdaptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetWriterInputCaptionAdaptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetWriterInputCaptionAdaptorFromID adopts an existing object pointer as a AssetWriterInputCaptionAdaptor (nil for 0).
+// AssetWriterInputCaptionAdaptorFromID adopts an existing Objective-C object as a AssetWriterInputCaptionAdaptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetWriterInputCaptionAdaptorFromID(id objc.ID) *AssetWriterInputCaptionAdaptor {
 	if id == 0 {
 		return nil
 	}
-	return &AssetWriterInputCaptionAdaptor{inner: raw.AVAssetWriterInputCaptionAdaptorFromID(id)}
+	x := &AssetWriterInputCaptionAdaptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new caption adaptor that writes to the specified asset writer input.
-//
-// NewAssetWriterInputCaptionAdaptorWithAssetWriterInput creates a new [AssetWriterInputCaptionAdaptor].
-func NewAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *raw.AVAssetWriterInput) *AssetWriterInputCaptionAdaptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputCaptionAdaptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), input.Ptr())
-	return &AssetWriterInputCaptionAdaptor{inner: raw.AVAssetWriterInputCaptionAdaptorFromID(_id)}
-}
-
-// Appends a caption to the writer input.
-//
-// AppendCaption calls the underlying AppendCaption.
-func (x *AssetWriterInputCaptionAdaptor) AppendCaption(caption *raw.AVCaption) bool {
-	return x.inner.AppendCaption(caption)
-}
-
-// Appends a caption group that the system writes to the output.
-//
-// AppendCaptionGroup calls the underlying AppendCaptionGroup.
-func (x *AssetWriterInputCaptionAdaptor) AppendCaptionGroup(captionGroup *raw.AVCaptionGroup) bool {
-	return x.inner.AppendCaptionGroup(captionGroup)
-}
-
-// The asset writer input that was used to initialize the receiver.
-//
-// AssetWriterInput calls the underlying AssetWriterInput.
-func (x *AssetWriterInputCaptionAdaptor) AssetWriterInput() *AssetWriterInput {
-	_r := x.inner.AssetWriterInput()
-	if _r == nil {
+// assetWriterInputCaptionAdaptorAdopt wraps an Objective-C object that this code just created as a
+// AssetWriterInputCaptionAdaptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetWriterInputCaptionAdaptorAdopt(id objc.ID) *AssetWriterInputCaptionAdaptor {
+	if id == 0 {
 		return nil
 	}
-	return &AssetWriterInput{inner: _r}
+	x := &AssetWriterInputCaptionAdaptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetWriterInputCaptionAdaptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetWriterInputCaptionAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetWriterInputCaptionAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetWriterInputCaptionAdaptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetWriterInputCaptionAdaptorWithAssetWriterInput creates a new caption adaptor that writes to the specified asset writer input.
+func NewAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputCaptionAdaptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputCaptionAdaptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), objref.IDOf(input))
+	return assetWriterInputCaptionAdaptorAdopt(_id)
+}
+
+// AppendCaption appends a caption to the writer input.
+func (x *AssetWriterInputCaptionAdaptor) AppendCaption(caption *Caption) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendCaption:"), objref.IDOf(caption))
+	return _r
+}
+
+// AppendCaptionGroup appends a caption group that the system writes to the output.
+func (x *AssetWriterInputCaptionAdaptor) AppendCaptionGroup(captionGroup *CaptionGroup) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendCaptionGroup:"), objref.IDOf(captionGroup))
+	return _r
+}
+
+// AssetWriterInput the asset writer input that was used to initialize the receiver.
+func (x *AssetWriterInputCaptionAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
+	return AssetWriterInputFromID(_r)
 }
 
 // AssetWriterInputCaptionAdaptorable is the interface implemented by [AssetWriterInputCaptionAdaptor], for mocking and DI.
 type AssetWriterInputCaptionAdaptorable interface {
-	Unwrap() *raw.AVAssetWriterInputCaptionAdaptor
-	AppendCaption(caption *raw.AVCaption) bool
-	AppendCaptionGroup(captionGroup *raw.AVCaptionGroup) bool
+	obj.Object
+	AppendCaption(caption *Caption) bool
+	AppendCaptionGroup(captionGroup *CaptionGroup) bool
 	AssetWriterInput() *AssetWriterInput
 }
 

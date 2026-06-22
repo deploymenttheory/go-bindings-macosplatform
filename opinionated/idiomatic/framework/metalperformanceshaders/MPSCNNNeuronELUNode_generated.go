@@ -5,79 +5,75 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a parametric ELU neuron filter.
+// CNNNeuronELUNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronELUNode.
 //
-// CNNNeuronELUNode wraps [raw.MPSCNNNeuronELUNode] with a fluent Go API.
+// It embeds [CNNNeuronNode], promoting that type's methods.
+//
+// A representation of a parametric ELU neuron filter.
 type CNNNeuronELUNode struct {
-	inner *raw.MPSCNNNeuronELUNode
+	CNNNeuronNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNeuronELUNode].
-func (x *CNNNeuronELUNode) Unwrap() *raw.MPSCNNNeuronELUNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNeuronELUNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNeuronELUNodeFromID adopts an existing object pointer as a CNNNeuronELUNode (nil for 0).
+// CNNNeuronELUNodeFromID adopts an existing Objective-C object as a CNNNeuronELUNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNeuronELUNodeFromID(id objc.ID) *CNNNeuronELUNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNeuronELUNode{inner: raw.MPSCNNNeuronELUNodeFromID(id)}
-}
-
-// @abstract Init a node with default values for parameters a & b
-//
-// NewCNNNeuronELUNodeWithSource creates a new [CNNNeuronELUNode].
-func NewCNNNeuronELUNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *CNNNeuronELUNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &CNNNeuronELUNode{inner: raw.MPSCNNNeuronELUNodeFromID(_id)}
-}
-
-// NewCNNNeuronELUNodeWithSourceA creates a new [CNNNeuronELUNode].
-func NewCNNNeuronELUNodeWithSourceA(sourceNode *mpsneuralnetwork.MPSNNImageNode, a float32) *CNNNeuronELUNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:"), sourceNode.Ptr(), a)
-	return &CNNNeuronELUNode{inner: raw.MPSCNNNeuronELUNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNNeuronELUNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronELUNode {
-	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNNeuronELUNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNNeuronELUNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNNeuronELUNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNeuronELUNodeAdopt(id objc.ID) *CNNNeuronELUNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNeuronELUNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNNeuronELUNodeWithSource init a node with default values for parameters a & b
+func NewCNNNeuronELUNodeWithSource(sourceNode obj.Object) *CNNNeuronELUNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return cNNNeuronELUNodeAdopt(_id)
+}
+
+// NewCNNNeuronELUNodeWithSourceA creates a new CNNNeuronELUNode.
+func NewCNNNeuronELUNodeWithSourceA(sourceNode obj.Object, a float32) *CNNNeuronELUNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:"), objref.IDOf(sourceNode), a)
+	return cNNNeuronELUNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronELUNode) WithLabel(label string) *CNNNeuronELUNode {
-	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNNeuronELUNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode {
-	return &x.inner.MPSCNNNeuronNode
-}
-
-func (x *CNNNeuronELUNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
 }
 
 // CNNNeuronELUNodeable is the interface implemented by [CNNNeuronELUNode], for mocking and DI.
 type CNNNeuronELUNodeable interface {
-	Unwrap() *raw.MPSCNNNeuronELUNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronELUNode
+	obj.Object
 	WithLabel(label string) *CNNNeuronELUNode
 }
 
 var _ CNNNeuronELUNodeable = (*CNNNeuronELUNode)(nil)
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronELUNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronELUNode)(nil)

@@ -5,49 +5,86 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The common behavior for subclasses that trigger the delivery of a local or remote notification.
+// NotificationTrigger is an idiomatic wrapper over the Objective-C class UNNotificationTrigger.
 //
-// NotificationTrigger wraps [raw.UNNotificationTrigger] with a fluent Go API.
+// NotificationTrigger is an abstract base — you do not construct it directly. Construct one of [CalendarNotificationTrigger], [PushNotificationTrigger], [TimeIntervalNotificationTrigger] and pass it where a NotificationTrigger is accepted.
+//
+// The common behavior for subclasses that trigger the delivery of a local or remote notification.
 type NotificationTrigger struct {
-	inner *raw.UNNotificationTrigger
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationTrigger].
-func (x *NotificationTrigger) Unwrap() *raw.UNNotificationTrigger { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationTriggerFromID adopts an existing object pointer as a NotificationTrigger (nil for 0).
+// NotificationTriggerFromID adopts an existing Objective-C object as a NotificationTrigger
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationTriggerFromID(id objc.ID) *NotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationTrigger{inner: raw.UNNotificationTriggerFromID(id)}
+	x := &NotificationTrigger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationTrigger creates a new [NotificationTrigger].
-func NewNotificationTrigger() *NotificationTrigger {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationTrigger")), objc.RegisterName("new"))
-	return &NotificationTrigger{inner: raw.UNNotificationTriggerFromID(_id)}
+// notificationTriggerAdopt wraps an Objective-C object that this code just created as a
+// NotificationTrigger (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationTriggerAdopt(id objc.ID) *NotificationTrigger {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationTrigger{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Repeats calls the underlying Repeats.
+// Description returns the object's -description text.
+func (x *NotificationTrigger) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationTrigger) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationTrigger) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationTrigger) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Repeats wraps the corresponding Objective-C method.
 func (x *NotificationTrigger) Repeats() bool {
-	return x.inner.Repeats()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("repeats"))
+	return _r
 }
-
-func (x *NotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return x.inner }
 
 // NotificationTriggerable is the interface implemented by [NotificationTrigger], for mocking and DI.
 type NotificationTriggerable interface {
-	Unwrap() *raw.UNNotificationTrigger
+	obj.Object
 	Repeats() bool
 }
 
 var _ NotificationTriggerable = (*NotificationTrigger)(nil)
+
+// isNotificationTrigger marks NotificationTrigger — and, by embedding promotion, its
+// subclasses — as a member of the NotificationTrigger hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NotificationTrigger) isNotificationTrigger() {}
+
+var _ NotificationTriggerProvider = (*NotificationTrigger)(nil)

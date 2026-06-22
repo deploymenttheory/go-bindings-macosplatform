@@ -21,6 +21,8 @@ const (
 	Ar_authorization_status_denied Ar_authorization_status_t = 2
 )
 
+// String returns the Ar_authorization_status_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Ar_authorization_status_t) String() string {
 	switch e {
 	case Ar_authorization_status_not_determined:
@@ -49,6 +51,8 @@ const (
 	Ar_authorization_type_camera_access Ar_authorization_type_t = 8
 )
 
+// String returns the Ar_authorization_type_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Ar_authorization_type_t) String() string {
 	var parts []string
 	if e&Ar_authorization_type_hand_tracking != 0 {
@@ -80,6 +84,8 @@ const (
 	Ar_data_provider_state_stopped Ar_data_provider_state_t = 3
 )
 
+// String returns the Ar_data_provider_state_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Ar_data_provider_state_t) String() string {
 	switch e {
 	case Ar_data_provider_state_initialized:
@@ -104,6 +110,8 @@ const (
 	Ar_device_anchor_query_status_failure Ar_device_anchor_query_status_t = 1
 )
 
+// String returns the Ar_device_anchor_query_status_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Ar_device_anchor_query_status_t) String() string {
 	switch e {
 	case Ar_device_anchor_query_status_success:
@@ -127,6 +135,8 @@ const (
 	Ar_device_anchor_tracking_state_tracked Ar_device_anchor_tracking_state_t = 2
 )
 
+// String returns the Ar_device_anchor_tracking_state_t constant's name, or its numeric form when the
+// value is not a known constant.
 func (e Ar_device_anchor_tracking_state_t) String() string {
 	switch e {
 	case Ar_device_anchor_tracking_state_untracked:

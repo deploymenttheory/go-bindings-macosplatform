@@ -5,55 +5,67 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a person that the request detects.
+// HumanObservation is an idiomatic wrapper over the Objective-C class VNHumanObservation.
 //
-// HumanObservation wraps [raw.VNHumanObservation] with a fluent Go API.
+// It embeds [DetectedObjectObservation], promoting that type's methods.
+//
+// An object that represents a person that the request detects.
 type HumanObservation struct {
-	inner *raw.VNHumanObservation
+	DetectedObjectObservation
 }
 
-// Unwrap returns the underlying [raw.VNHumanObservation].
-func (x *HumanObservation) Unwrap() *raw.VNHumanObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HumanObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// HumanObservationFromID adopts an existing object pointer as a HumanObservation (nil for 0).
+// HumanObservationFromID adopts an existing Objective-C object as a HumanObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func HumanObservationFromID(id objc.ID) *HumanObservation {
 	if id == 0 {
 		return nil
 	}
-	return &HumanObservation{inner: raw.VNHumanObservationFromID(id)}
+	x := &HumanObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHumanObservation creates a new [HumanObservation].
+// humanObservationAdopt wraps an Objective-C object that this code just created as a
+// HumanObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func humanObservationAdopt(id objc.ID) *HumanObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &HumanObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewHumanObservation creates a new HumanObservation.
 func NewHumanObservation() *HumanObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNHumanObservation")), objc.RegisterName("new"))
-	return &HumanObservation{inner: raw.VNHumanObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNHumanObservation")), objc.RegisterName("new"))
+	return humanObservationAdopt(_id)
 }
 
-// UpperBodyOnly calls the underlying UpperBodyOnly.
+// UpperBodyOnly wraps the corresponding Objective-C method.
 func (x *HumanObservation) UpperBodyOnly() bool {
-	return x.inner.UpperBodyOnly()
-}
-
-func (x *HumanObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return &x.inner.VNDetectedObjectObservation
-}
-
-func (x *HumanObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNDetectedObjectObservation.VNObservation
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("upperBodyOnly"))
+	return _r
 }
 
 // HumanObservationable is the interface implemented by [HumanObservation], for mocking and DI.
 type HumanObservationable interface {
-	Unwrap() *raw.VNHumanObservation
+	obj.Object
 	UpperBodyOnly() bool
 }
 
 var _ HumanObservationable = (*HumanObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*HumanObservation)(nil)
+
+var _ ObservationProvider = (*HumanObservation)(nil)

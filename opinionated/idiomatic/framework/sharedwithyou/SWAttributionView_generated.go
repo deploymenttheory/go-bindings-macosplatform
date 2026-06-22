@@ -5,217 +5,226 @@
 package sharedwithyou
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that displays the sender who shares a highlight and provides related actions.
+// AttributionView is an idiomatic wrapper over the Objective-C class SWAttributionView.
 //
-// AttributionView wraps [raw.SWAttributionView] with a fluent Go API.
+// A view that displays the sender who shares a highlight and provides related actions.
 type AttributionView struct {
-	inner *raw.SWAttributionView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWAttributionView].
-func (x *AttributionView) Unwrap() *raw.SWAttributionView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributionView) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributionViewFromID adopts an existing object pointer as a AttributionView (nil for 0).
+// AttributionViewFromID adopts an existing Objective-C object as a AttributionView
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributionViewFromID(id objc.ID) *AttributionView {
 	if id == 0 {
 		return nil
 	}
-	return &AttributionView{inner: raw.SWAttributionViewFromID(id)}
-}
-
-// NewAttributionView creates a new [AttributionView].
-func NewAttributionView() *AttributionView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWAttributionView")), objc.RegisterName("new"))
-	return &AttributionView{inner: raw.SWAttributionViewFromID(_id)}
-}
-
-// The highlight you use to display this attribution.
-//
-// WithHighlight sets the highlight property and returns the receiver for chaining.
-func (x *AttributionView) WithHighlight(highlight HighlightProvider) *AttributionView {
-	x.inner.SetHighlight(highlight.asHighlight())
+	x := &AttributionView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The context for the content the system displays with this view.
-//
-// WithDisplayContext sets the displayContext property and returns the receiver for chaining.
-func (x *AttributionView) WithDisplayContext(displayContext SWAttributionViewDisplayContext) *AttributionView {
-	x.inner.SetDisplayContext(raw.SWAttributionViewDisplayContext(displayContext))
-	return x
-}
-
-// The horizontal alignment of the view.
-//
-// WithHorizontalAlignment sets the horizontalAlignment property and returns the receiver for chaining.
-func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) *AttributionView {
-	x.inner.SetHorizontalAlignment(raw.SWAttributionViewHorizontalAlignment(horizontalAlignment))
-	return x
-}
-
-// The background style of the child view that contains names and avatars.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *AttributionView) WithBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) *AttributionView {
-	x.inner.SetBackgroundStyle(raw.SWAttributionViewBackgroundStyle(backgroundStyle))
-	return x
-}
-
-// A width the system uses to constrain the view contents.
-//
-// WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
-func (x *AttributionView) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView {
-	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
-	return x
-}
-
-// A localized string the system uses as a custom title for the hide menu item.
-//
-// WithMenuTitleForHideAction sets the menuTitleForHideAction property and returns the receiver for chaining.
-func (x *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView {
-	x.inner.SetMenuTitleForHideAction(foundation.NSStringStringWithUTF8String(menuTitleForHideAction))
-	return x
-}
-
-// A supplemental menu to augment the attribution view’s existing menu.
-//
-// WithSupplementalMenu sets the supplementalMenu property and returns the receiver for chaining.
-func (x *AttributionView) WithSupplementalMenu(supplementalMenu *appkit.NSMenuItem) *AttributionView {
-	x.inner.SetSupplementalMenu(supplementalMenu)
-	return x
-}
-
-// @abstract The SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
-//
-// Highlight calls the underlying Highlight.
-func (x *AttributionView) Highlight() *Highlight {
-	_r := x.inner.Highlight()
-	if _r == nil {
+// attributionViewAdopt wraps an Objective-C object that this code just created as a
+// AttributionView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributionViewAdopt(id objc.ID) *AttributionView {
+	if id == 0 {
 		return nil
 	}
-	return &Highlight{inner: _r}
+	x := &AttributionView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetHighlight calls the underlying SetHighlight.
-func (x *AttributionView) SetHighlight(highlight *raw.SWHighlight) {
-	x.inner.SetHighlight(highlight)
+// Description returns the object's -description text.
+func (x *AttributionView) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract The context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
-//
-// DisplayContext calls the underlying DisplayContext.
-func (x *AttributionView) DisplayContext() SWAttributionViewDisplayContext {
-	return SWAttributionViewDisplayContext(x.inner.DisplayContext())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributionView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDisplayContext calls the underlying SetDisplayContext.
-func (x *AttributionView) SetDisplayContext(displayContext SWAttributionViewDisplayContext) {
-	x.inner.SetDisplayContext(raw.SWAttributionViewDisplayContext(displayContext))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributionView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract The horizontal alignment of the view. You should specify a value, in case the internal default ever changes. @discussion This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
-//
-// HorizontalAlignment calls the underlying HorizontalAlignment.
-func (x *AttributionView) HorizontalAlignment() SWAttributionViewHorizontalAlignment {
-	return SWAttributionViewHorizontalAlignment(x.inner.HorizontalAlignment())
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributionView) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetHorizontalAlignment calls the underlying SetHorizontalAlignment.
-func (x *AttributionView) SetHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) {
-	x.inner.SetHorizontalAlignment(raw.SWAttributionViewHorizontalAlignment(horizontalAlignment))
+// NewAttributionView creates a new AttributionView.
+func NewAttributionView() *AttributionView {
+	_id := objc.Send[objc.ID](objc.ID(_class("SWAttributionView")), objc.RegisterName("new"))
+	return attributionViewAdopt(_id)
 }
 
-// @abstract The background style of the inner view containing names and avatars. @discussion If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
-//
-// BackgroundStyle calls the underlying BackgroundStyle.
-func (x *AttributionView) BackgroundStyle() SWAttributionViewBackgroundStyle {
-	return SWAttributionViewBackgroundStyle(x.inner.BackgroundStyle())
+// WithHighlight the highlight you use to display this attribution.
+func (x *AttributionView) WithHighlight(highlight HighlightProvider) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlight:"), objref.IDOf(highlight))
+	return x
 }
 
-// SetBackgroundStyle calls the underlying SetBackgroundStyle.
-func (x *AttributionView) SetBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) {
-	x.inner.SetBackgroundStyle(raw.SWAttributionViewBackgroundStyle(backgroundStyle))
+// WithDisplayContext the context for the content the system displays with this view.
+func (x *AttributionView) WithDisplayContext(displayContext AttributionViewDisplayContext) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayContext:"), displayContext)
+	return x
 }
 
-// @abstract For use when embedding this view in a SwiftUI view representable. @discussion When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
-//
-// PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
+// WithHorizontalAlignment the horizontal alignment of the view.
+func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment AttributionViewHorizontalAlignment) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalAlignment:"), horizontalAlignment)
+	return x
+}
+
+// WithBackgroundStyle the background style of the child view that contains names and avatars.
+func (x *AttributionView) WithBackgroundStyle(backgroundStyle AttributionViewBackgroundStyle) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return x
+}
+
+// WithPreferredMaxLayoutWidth a width the system uses to constrain the view contents.
+func (x *AttributionView) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	return x
+}
+
+// WithMenuTitleForHideAction a localized string the system uses as a custom title for the hide menu item.
+func (x *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuTitleForHideAction:"), purego.NSString(menuTitleForHideAction))
+	return x
+}
+
+// WithSupplementalMenu a supplemental menu to augment the attribution view’s existing menu.
+func (x *AttributionView) WithSupplementalMenu(supplementalMenu obj.Object) *AttributionView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementalMenu:"), objref.IDOf(supplementalMenu))
+	return x
+}
+
+// Highlight the SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
+func (x *AttributionView) Highlight() *Highlight {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlight"))
+	return HighlightFromID(_r)
+}
+
+// SetHighlight wraps the corresponding Objective-C method.
+func (x *AttributionView) SetHighlight(highlight *Highlight) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlight:"), objref.IDOf(highlight))
+}
+
+// DisplayContext the context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
+func (x *AttributionView) DisplayContext() AttributionViewDisplayContext {
+	_r := objc.Send[AttributionViewDisplayContext](objref.IDOf(x), objc.RegisterName("displayContext"))
+	return _r
+}
+
+// SetDisplayContext wraps the corresponding Objective-C method.
+func (x *AttributionView) SetDisplayContext(displayContext AttributionViewDisplayContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayContext:"), displayContext)
+}
+
+// HorizontalAlignment the horizontal alignment of the view. You should specify a value, in case the internal default ever changes. This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
+func (x *AttributionView) HorizontalAlignment() AttributionViewHorizontalAlignment {
+	_r := objc.Send[AttributionViewHorizontalAlignment](objref.IDOf(x), objc.RegisterName("horizontalAlignment"))
+	return _r
+}
+
+// SetHorizontalAlignment wraps the corresponding Objective-C method.
+func (x *AttributionView) SetHorizontalAlignment(horizontalAlignment AttributionViewHorizontalAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalAlignment:"), horizontalAlignment)
+}
+
+// BackgroundStyle the background style of the inner view containing names and avatars. If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
+func (x *AttributionView) BackgroundStyle() AttributionViewBackgroundStyle {
+	_r := objc.Send[AttributionViewBackgroundStyle](objref.IDOf(x), objc.RegisterName("backgroundStyle"))
+	return _r
+}
+
+// SetBackgroundStyle wraps the corresponding Objective-C method.
+func (x *AttributionView) SetBackgroundStyle(backgroundStyle AttributionViewBackgroundStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+}
+
+// PreferredMaxLayoutWidth for use when embedding this view in a SwiftUI view representable. When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
 func (x *AttributionView) PreferredMaxLayoutWidth() float64 {
-	return x.inner.PreferredMaxLayoutWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredMaxLayoutWidth"))
+	return _r
 }
 
-// SetPreferredMaxLayoutWidth calls the underlying SetPreferredMaxLayoutWidth.
+// SetPreferredMaxLayoutWidth wraps the corresponding Objective-C method.
 func (x *AttributionView) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 }
 
-// HighlightMenu calls the underlying HighlightMenu.
-func (x *AttributionView) HighlightMenu() *appkit.NSMenu {
-	return x.inner.HighlightMenu()
+// HighlightMenu wraps the corresponding Objective-C method.
+func (x *AttributionView) HighlightMenu() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightMenu"))
+	return obj.Wrap(_r)
 }
 
-// @abstract A custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. @discussion SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set @"Hide Article", localized to the current language. The string should include the word "Hide", localized correctly with the custom content type.
-//
-// MenuTitleForHideAction calls the underlying MenuTitleForHideAction.
+// MenuTitleForHideAction a custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set
 func (x *AttributionView) MenuTitleForHideAction() string {
-	_r := x.inner.MenuTitleForHideAction()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuTitleForHideAction"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMenuTitleForHideAction calls the underlying SetMenuTitleForHideAction.
+// SetMenuTitleForHideAction wraps the corresponding Objective-C method.
 func (x *AttributionView) SetMenuTitleForHideAction(menuTitleForHideAction string) {
-	x.inner.SetMenuTitleForHideAction(foundation.NSStringStringWithUTF8String(menuTitleForHideAction))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuTitleForHideAction:"), purego.NSString(menuTitleForHideAction))
 }
 
-// SupplementalMenu calls the underlying SupplementalMenu.
-func (x *AttributionView) SupplementalMenu() *appkit.NSMenuItem {
-	return x.inner.SupplementalMenu()
+// SupplementalMenu wraps the corresponding Objective-C method.
+func (x *AttributionView) SupplementalMenu() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementalMenu"))
+	return obj.Wrap(_r)
 }
 
-// SetSupplementalMenu calls the underlying SetSupplementalMenu.
-func (x *AttributionView) SetSupplementalMenu(supplementalMenu *appkit.NSMenuItem) {
-	x.inner.SetSupplementalMenu(supplementalMenu)
+// SetSupplementalMenu wraps the corresponding Objective-C method.
+func (x *AttributionView) SetSupplementalMenu(supplementalMenu obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementalMenu:"), objref.IDOf(supplementalMenu))
 }
 
 // AttributionViewable is the interface implemented by [AttributionView], for mocking and DI.
 type AttributionViewable interface {
-	Unwrap() *raw.SWAttributionView
+	obj.Object
 	WithHighlight(highlight HighlightProvider) *AttributionView
-	WithDisplayContext(displayContext SWAttributionViewDisplayContext) *AttributionView
-	WithHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) *AttributionView
-	WithBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) *AttributionView
+	WithDisplayContext(displayContext AttributionViewDisplayContext) *AttributionView
+	WithHorizontalAlignment(horizontalAlignment AttributionViewHorizontalAlignment) *AttributionView
+	WithBackgroundStyle(backgroundStyle AttributionViewBackgroundStyle) *AttributionView
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView
 	WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView
-	WithSupplementalMenu(supplementalMenu *appkit.NSMenuItem) *AttributionView
+	WithSupplementalMenu(supplementalMenu obj.Object) *AttributionView
 	Highlight() *Highlight
-	SetHighlight(highlight *raw.SWHighlight)
-	DisplayContext() SWAttributionViewDisplayContext
-	SetDisplayContext(displayContext SWAttributionViewDisplayContext)
-	HorizontalAlignment() SWAttributionViewHorizontalAlignment
-	SetHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment)
-	BackgroundStyle() SWAttributionViewBackgroundStyle
-	SetBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle)
+	SetHighlight(highlight *Highlight)
+	DisplayContext() AttributionViewDisplayContext
+	SetDisplayContext(displayContext AttributionViewDisplayContext)
+	HorizontalAlignment() AttributionViewHorizontalAlignment
+	SetHorizontalAlignment(horizontalAlignment AttributionViewHorizontalAlignment)
+	BackgroundStyle() AttributionViewBackgroundStyle
+	SetBackgroundStyle(backgroundStyle AttributionViewBackgroundStyle)
 	PreferredMaxLayoutWidth() float64
 	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
-	HighlightMenu() *appkit.NSMenu
+	HighlightMenu() obj.Object
 	MenuTitleForHideAction() string
 	SetMenuTitleForHideAction(menuTitleForHideAction string)
-	SupplementalMenu() *appkit.NSMenuItem
-	SetSupplementalMenu(supplementalMenu *appkit.NSMenuItem)
+	SupplementalMenu() obj.Object
+	SetSupplementalMenu(supplementalMenu obj.Object)
 }
 
 var _ AttributionViewable = (*AttributionView)(nil)

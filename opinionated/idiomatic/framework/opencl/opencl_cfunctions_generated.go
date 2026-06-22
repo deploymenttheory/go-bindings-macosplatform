@@ -5,712 +5,330 @@
 package opencl
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opencl"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// ClBuildProgram calls [raw.ClBuildProgram] (C function clBuildProgram).
-func ClBuildProgram(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
-	return raw.ClBuildProgram(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCompileProgram calls [raw.ClCompileProgram] (C function clCompileProgram).
-func ClCompileProgram(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 uint32, arg6 unsafe.Pointer, arg7 string, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClCompileProgram(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClCreateBuffer calls [raw.ClCreateBuffer] (C function clCreateBuffer).
-func ClCreateBuffer(arg unsafe.Pointer, arg2 uint64, arg3 uint, arg4 unsafe.Pointer, arg5 *int32) unsafe.Pointer {
-	return raw.ClCreateBuffer(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateCommandQueue calls [raw.ClCreateCommandQueue] (C function clCreateCommandQueue).
-func ClCreateCommandQueue(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint64, arg4 *int32) unsafe.Pointer {
-	return raw.ClCreateCommandQueue(arg, arg2, arg3, arg4)
-}
-
-// ClCreateCommandQueueWithPropertiesAPPLE calls [raw.ClCreateCommandQueueWithPropertiesAPPLE] (C function clCreateCommandQueueWithPropertiesAPPLE).
-func ClCreateCommandQueueWithPropertiesAPPLE(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 *int, arg4 *int32) unsafe.Pointer {
-	return raw.ClCreateCommandQueueWithPropertiesAPPLE(arg, arg2, arg3, arg4)
-}
-
-// ClCreateContext calls [raw.ClCreateContext] (C function clCreateContext).
-func ClCreateContext(arg *int, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 *int32) unsafe.Pointer {
-	return raw.ClCreateContext(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCreateContextAndCommandQueueAPPLE calls [raw.ClCreateContextAndCommandQueueAPPLE] (C function clCreateContextAndCommandQueueAPPLE).
-func ClCreateContextAndCommandQueueAPPLE(arg *int, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 uint64, arg7 unsafe.Pointer, arg8 unsafe.Pointer) int32 {
-	return raw.ClCreateContextAndCommandQueueAPPLE(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-}
-
-// ClCreateContextFromType calls [raw.ClCreateContextFromType] (C function clCreateContextFromType).
-func ClCreateContextFromType(arg *int, arg2 uint64, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 *int32) unsafe.Pointer {
-	return raw.ClCreateContextFromType(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateDAGAPPLE calls [raw.ClCreateDAGAPPLE] (C function clCreateDAGAPPLE).
-func ClCreateDAGAPPLE(c unsafe.Pointer) unsafe.Pointer {
-	return raw.ClCreateDAGAPPLE(c)
-}
-
-// ClCreateEventFromGLsyncKHR calls [raw.ClCreateEventFromGLsyncKHR] (C function clCreateEventFromGLsyncKHR).
-func ClCreateEventFromGLsyncKHR(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 *int32) unsafe.Pointer {
-	return raw.ClCreateEventFromGLsyncKHR(arg, arg2, arg3)
-}
-
-// ClCreateFromGLBuffer calls [raw.ClCreateFromGLBuffer] (C function clCreateFromGLBuffer).
-func ClCreateFromGLBuffer(arg unsafe.Pointer, arg2 uint64, arg3 uint, arg4 *int32) unsafe.Pointer {
-	return raw.ClCreateFromGLBuffer(arg, arg2, arg3, arg4)
-}
-
-// ClCreateFromGLRenderbuffer calls [raw.ClCreateFromGLRenderbuffer] (C function clCreateFromGLRenderbuffer).
-func ClCreateFromGLRenderbuffer(arg unsafe.Pointer, arg2 uint64, arg3 uint, arg4 *int32) unsafe.Pointer {
-	return raw.ClCreateFromGLRenderbuffer(arg, arg2, arg3, arg4)
-}
-
-// ClCreateFromGLTexture calls [raw.ClCreateFromGLTexture] (C function clCreateFromGLTexture).
-func ClCreateFromGLTexture(arg unsafe.Pointer, arg2 uint64, arg3 uint, arg4 int, arg5 uint, arg6 *int32) unsafe.Pointer {
-	return raw.ClCreateFromGLTexture(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCreateFromGLTexture2D calls [raw.ClCreateFromGLTexture2D] (C function clCreateFromGLTexture2D).
-func ClCreateFromGLTexture2D(arg unsafe.Pointer, arg2 uint64, arg3 uint, arg4 int, arg5 uint, arg6 *int32) unsafe.Pointer {
-	return raw.ClCreateFromGLTexture2D(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCreateFromGLTexture3D calls [raw.ClCreateFromGLTexture3D] (C function clCreateFromGLTexture3D).
-func ClCreateFromGLTexture3D(arg unsafe.Pointer, arg2 uint64, arg3 uint, arg4 int, arg5 uint, arg6 *int32) unsafe.Pointer {
-	return raw.ClCreateFromGLTexture3D(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCreateImage calls [raw.ClCreateImage] (C function clCreateImage).
-func ClCreateImage(arg unsafe.Pointer, arg2 uint64, arg3 *raw.ClImageFormat, arg4 *raw.ClImageDesc, arg5 unsafe.Pointer, arg6 *int32) unsafe.Pointer {
-	return raw.ClCreateImage(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCreateImage2D calls [raw.ClCreateImage2D] (C function clCreateImage2D).
-func ClCreateImage2D(arg unsafe.Pointer, arg2 uint64, arg3 *raw.ClImageFormat, arg4 uint, arg5 uint, arg6 uint, arg7 unsafe.Pointer, arg8 *int32) unsafe.Pointer {
-	return raw.ClCreateImage2D(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-}
-
-// ClCreateImage3D calls [raw.ClCreateImage3D] (C function clCreateImage3D).
-func ClCreateImage3D(arg unsafe.Pointer, arg2 uint64, arg3 *raw.ClImageFormat, arg4 uint, arg5 uint, arg6 uint, arg7 uint, arg8 uint, arg9 unsafe.Pointer, arg10 *int32) unsafe.Pointer {
-	return raw.ClCreateImage3D(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
-}
-
-// ClCreateImageFromIOSurface2DAPPLE calls [raw.ClCreateImageFromIOSurface2DAPPLE] (C function clCreateImageFromIOSurface2DAPPLE).
-func ClCreateImageFromIOSurface2DAPPLE(arg unsafe.Pointer, arg2 uint64, arg3 *raw.ClImageFormat, arg4 uint, arg5 uint, arg6 unsafe.Pointer, arg7 *int32) unsafe.Pointer {
-	return raw.ClCreateImageFromIOSurface2DAPPLE(arg, arg2, arg3, arg4, arg5, arg6, arg7)
-}
-
-// ClCreateImageFromIOSurfaceWithPropertiesAPPLE calls [raw.ClCreateImageFromIOSurfaceWithPropertiesAPPLE] (C function clCreateImageFromIOSurfaceWithPropertiesAPPLE).
-func ClCreateImageFromIOSurfaceWithPropertiesAPPLE(arg unsafe.Pointer, arg2 uint64, arg3 *raw.ClImageFormat, arg4 *raw.ClImageDesc, arg5 *int, arg6 *int32) unsafe.Pointer {
-	return raw.ClCreateImageFromIOSurfaceWithPropertiesAPPLE(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClCreateKernel calls [raw.ClCreateKernel] (C function clCreateKernel).
-func ClCreateKernel(arg unsafe.Pointer, arg2 string, arg3 *int32) unsafe.Pointer {
-	return raw.ClCreateKernel(arg, arg2, arg3)
-}
-
-// ClCreateKernelFromDAGAPPLE calls [raw.ClCreateKernelFromDAGAPPLE] (C function clCreateKernelFromDAGAPPLE).
-func ClCreateKernelFromDAGAPPLE(d unsafe.Pointer, n uint32, list unsafe.Pointer) unsafe.Pointer {
-	return raw.ClCreateKernelFromDAGAPPLE(d, n, list)
-}
-
-// ClCreateKernelsInProgram calls [raw.ClCreateKernelsInProgram] (C function clCreateKernelsInProgram).
-func ClCreateKernelsInProgram(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 *uint32) int32 {
-	return raw.ClCreateKernelsInProgram(arg, arg2, arg3, arg4)
-}
-
-// ClCreateProgramAndKernelsWithSourceAPPLE calls [raw.ClCreateProgramAndKernelsWithSourceAPPLE] (C function clCreateProgramAndKernelsWithSourceAPPLE).
-func ClCreateProgramAndKernelsWithSourceAPPLE(arg unsafe.Pointer, arg2 uint32, arg3 string, arg4 *uint, arg5 uint32, arg6 unsafe.Pointer, arg7 string, arg8 uint32, arg9 string, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
-	return raw.ClCreateProgramAndKernelsWithSourceAPPLE(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
-}
-
-// ClCreateProgramWithBinary calls [raw.ClCreateProgramWithBinary] (C function clCreateProgramWithBinary).
-func ClCreateProgramWithBinary(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 *uint, arg5 *uint8, arg6 *int32, arg7 *int32) unsafe.Pointer {
-	return raw.ClCreateProgramWithBinary(arg, arg2, arg3, arg4, arg5, arg6, arg7)
-}
-
-// ClCreateProgramWithBuiltInKernels calls [raw.ClCreateProgramWithBuiltInKernels] (C function clCreateProgramWithBuiltInKernels).
-func ClCreateProgramWithBuiltInKernels(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 *int32) unsafe.Pointer {
-	return raw.ClCreateProgramWithBuiltInKernels(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateProgramWithSource calls [raw.ClCreateProgramWithSource] (C function clCreateProgramWithSource).
-func ClCreateProgramWithSource(arg unsafe.Pointer, arg2 uint32, arg3 string, arg4 *uint, arg5 *int32) unsafe.Pointer {
-	return raw.ClCreateProgramWithSource(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateSampler calls [raw.ClCreateSampler] (C function clCreateSampler).
-func ClCreateSampler(arg unsafe.Pointer, arg2 uint32, arg3 uint32, arg4 uint32, arg5 *int32) unsafe.Pointer {
-	return raw.ClCreateSampler(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateSubBuffer calls [raw.ClCreateSubBuffer] (C function clCreateSubBuffer).
-func ClCreateSubBuffer(arg unsafe.Pointer, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer, arg5 *int32) unsafe.Pointer {
-	return raw.ClCreateSubBuffer(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateSubDevices calls [raw.ClCreateSubDevices] (C function clCreateSubDevices).
-func ClCreateSubDevices(arg unsafe.Pointer, arg2 *int, arg3 uint32, arg4 unsafe.Pointer, arg5 *uint32) int32 {
-	return raw.ClCreateSubDevices(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClCreateUserEvent calls [raw.ClCreateUserEvent] (C function clCreateUserEvent).
-func ClCreateUserEvent(arg unsafe.Pointer, arg2 *int32) unsafe.Pointer {
-	return raw.ClCreateUserEvent(arg, arg2)
-}
-
-// ClEnqueueAcquireGLObjects calls [raw.ClEnqueueAcquireGLObjects] (C function clEnqueueAcquireGLObjects).
-func ClEnqueueAcquireGLObjects(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
-	return raw.ClEnqueueAcquireGLObjects(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClEnqueueBarrier calls [raw.ClEnqueueBarrier] (C function clEnqueueBarrier).
-func ClEnqueueBarrier(arg unsafe.Pointer) int32 {
-	return raw.ClEnqueueBarrier(arg)
-}
-
-// ClEnqueueBarrierWithWaitList calls [raw.ClEnqueueBarrierWithWaitList] (C function clEnqueueBarrierWithWaitList).
-func ClEnqueueBarrierWithWaitList(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
-	return raw.ClEnqueueBarrierWithWaitList(arg, arg2, arg3, arg4)
-}
-
-// ClEnqueueCopyBuffer calls [raw.ClEnqueueCopyBuffer] (C function clEnqueueCopyBuffer).
-func ClEnqueueCopyBuffer(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 uint, arg5 uint, arg6 uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueCopyBuffer(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueCopyBufferRect calls [raw.ClEnqueueCopyBufferRect] (C function clEnqueueCopyBufferRect).
-func ClEnqueueCopyBufferRect(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *uint, arg5 *uint, arg6 *uint, arg7 uint, arg8 uint, arg9 uint, arg10 uint, arg11 uint32, arg12 unsafe.Pointer, arg13 unsafe.Pointer) int32 {
-	return raw.ClEnqueueCopyBufferRect(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
-}
-
-// ClEnqueueCopyBufferToImage calls [raw.ClEnqueueCopyBufferToImage] (C function clEnqueueCopyBufferToImage).
-func ClEnqueueCopyBufferToImage(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 uint, arg5 *uint, arg6 *uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueCopyBufferToImage(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueCopyImage calls [raw.ClEnqueueCopyImage] (C function clEnqueueCopyImage).
-func ClEnqueueCopyImage(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *uint, arg5 *uint, arg6 *uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueCopyImage(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueCopyImageToBuffer calls [raw.ClEnqueueCopyImageToBuffer] (C function clEnqueueCopyImageToBuffer).
-func ClEnqueueCopyImageToBuffer(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *uint, arg5 *uint, arg6 uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueCopyImageToBuffer(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueFillBuffer calls [raw.ClEnqueueFillBuffer] (C function clEnqueueFillBuffer).
-func ClEnqueueFillBuffer(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 uint, arg5 uint, arg6 uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueFillBuffer(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueFillImage calls [raw.ClEnqueueFillImage] (C function clEnqueueFillImage).
-func ClEnqueueFillImage(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 *uint, arg5 *uint, arg6 uint32, arg7 unsafe.Pointer, arg8 unsafe.Pointer) int32 {
-	return raw.ClEnqueueFillImage(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-}
-
-// ClEnqueueMapBuffer calls [raw.ClEnqueueMapBuffer] (C function clEnqueueMapBuffer).
-func ClEnqueueMapBuffer(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint64, arg5 uint, arg6 uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer, arg10 *int32) unsafe.Pointer {
-	return raw.ClEnqueueMapBuffer(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
-}
-
-// ClEnqueueMapImage calls [raw.ClEnqueueMapImage] (C function clEnqueueMapImage).
-func ClEnqueueMapImage(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint64, arg5 *uint, arg6 *uint, arg7 *uint, arg8 *uint, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer, arg12 *int32) unsafe.Pointer {
-	return raw.ClEnqueueMapImage(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-}
-
-// ClEnqueueMarker calls [raw.ClEnqueueMarker] (C function clEnqueueMarker).
-func ClEnqueueMarker(arg unsafe.Pointer, arg2 unsafe.Pointer) int32 {
-	return raw.ClEnqueueMarker(arg, arg2)
-}
-
-// ClEnqueueMarkerWithWaitList calls [raw.ClEnqueueMarkerWithWaitList] (C function clEnqueueMarkerWithWaitList).
-func ClEnqueueMarkerWithWaitList(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
-	return raw.ClEnqueueMarkerWithWaitList(arg, arg2, arg3, arg4)
-}
-
-// ClEnqueueMigrateMemObjects calls [raw.ClEnqueueMigrateMemObjects] (C function clEnqueueMigrateMemObjects).
-func ClEnqueueMigrateMemObjects(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 uint64, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer) int32 {
-	return raw.ClEnqueueMigrateMemObjects(arg, arg2, arg3, arg4, arg5, arg6, arg7)
-}
-
-// ClEnqueueNDRangeKernel calls [raw.ClEnqueueNDRangeKernel] (C function clEnqueueNDRangeKernel).
-func ClEnqueueNDRangeKernel(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 *uint, arg5 *uint, arg6 *uint, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueNDRangeKernel(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueNativeKernel calls [raw.ClEnqueueNativeKernel] (C function clEnqueueNativeKernel).
-func ClEnqueueNativeKernel(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 uint, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 uint32, arg9 unsafe.Pointer, arg10 unsafe.Pointer) int32 {
-	return raw.ClEnqueueNativeKernel(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
-}
-
-// ClEnqueueReadBuffer calls [raw.ClEnqueueReadBuffer] (C function clEnqueueReadBuffer).
-func ClEnqueueReadBuffer(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint, arg5 uint, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueReadBuffer(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueReadBufferRect calls [raw.ClEnqueueReadBufferRect] (C function clEnqueueReadBufferRect).
-func ClEnqueueReadBufferRect(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 *uint, arg5 *uint, arg6 *uint, arg7 uint, arg8 uint, arg9 uint, arg10 uint, arg11 unsafe.Pointer, arg12 uint32, arg13 unsafe.Pointer, arg14 unsafe.Pointer) int32 {
-	return raw.ClEnqueueReadBufferRect(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
-}
-
-// ClEnqueueReadImage calls [raw.ClEnqueueReadImage] (C function clEnqueueReadImage).
-func ClEnqueueReadImage(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 *uint, arg5 *uint, arg6 uint, arg7 uint, arg8 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
-	return raw.ClEnqueueReadImage(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
-}
-
-// ClEnqueueReleaseGLObjects calls [raw.ClEnqueueReleaseGLObjects] (C function clEnqueueReleaseGLObjects).
-func ClEnqueueReleaseGLObjects(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
-	return raw.ClEnqueueReleaseGLObjects(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClEnqueueTask calls [raw.ClEnqueueTask] (C function clEnqueueTask).
-func ClEnqueueTask(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int32 {
-	return raw.ClEnqueueTask(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClEnqueueUnmapMemObject calls [raw.ClEnqueueUnmapMemObject] (C function clEnqueueUnmapMemObject).
-func ClEnqueueUnmapMemObject(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
-	return raw.ClEnqueueUnmapMemObject(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// ClEnqueueWaitForEvents calls [raw.ClEnqueueWaitForEvents] (C function clEnqueueWaitForEvents).
-func ClEnqueueWaitForEvents(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer) int32 {
-	return raw.ClEnqueueWaitForEvents(arg, arg2, arg3)
-}
-
-// ClEnqueueWriteBuffer calls [raw.ClEnqueueWriteBuffer] (C function clEnqueueWriteBuffer).
-func ClEnqueueWriteBuffer(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint, arg5 uint, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
-	return raw.ClEnqueueWriteBuffer(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-}
-
-// ClEnqueueWriteBufferRect calls [raw.ClEnqueueWriteBufferRect] (C function clEnqueueWriteBufferRect).
-func ClEnqueueWriteBufferRect(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 *uint, arg5 *uint, arg6 *uint, arg7 uint, arg8 uint, arg9 uint, arg10 uint, arg11 unsafe.Pointer, arg12 uint32, arg13 unsafe.Pointer, arg14 unsafe.Pointer) int32 {
-	return raw.ClEnqueueWriteBufferRect(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
-}
-
-// ClEnqueueWriteImage calls [raw.ClEnqueueWriteImage] (C function clEnqueueWriteImage).
-func ClEnqueueWriteImage(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 *uint, arg5 *uint, arg6 uint, arg7 uint, arg8 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
-	return raw.ClEnqueueWriteImage(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
-}
-
-// ClFinish calls [raw.ClFinish] (C function clFinish).
-func ClFinish(arg unsafe.Pointer) int32 {
-	return raw.ClFinish(arg)
-}
-
-// ClFlush calls [raw.ClFlush] (C function clFlush).
-func ClFlush(arg unsafe.Pointer) int32 {
-	return raw.ClFlush(arg)
-}
-
-// ClGetCommandQueueInfo calls [raw.ClGetCommandQueueInfo] (C function clGetCommandQueueInfo).
-func ClGetCommandQueueInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetCommandQueueInfo(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClGetContextInfo calls [raw.ClGetContextInfo] (C function clGetContextInfo).
-func ClGetContextInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetContextInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClCreateDAGAPPLE func(objc.ID) objc.ID
 
-// ClGetDAGNodeAPPLE calls [raw.ClGetDAGNodeAPPLE] (C function clGetDAGNodeAPPLE).
-func ClGetDAGNodeAPPLE(d unsafe.Pointer, f unsafe.Pointer, args *int, arg_indices *uint32, nargs uint) int {
-	return raw.ClGetDAGNodeAPPLE(d, f, args, arg_indices, nargs)
+// ClCreateDAGAPPLE calls the OpenCL framework function clCreateDAGAPPLE.
+func ClCreateDAGAPPLE(c obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClCreateDAGAPPLE == nil {
+		ebipurego.RegisterLibFunc(&_fnClCreateDAGAPPLE, _lib, "clCreateDAGAPPLE")
+	}
+	_ret := _fnClCreateDAGAPPLE(objref.IDOf(c))
+	return obj.Wrap(_ret)
 }
 
-// ClGetDeviceIDs calls [raw.ClGetDeviceIDs] (C function clGetDeviceIDs).
-func ClGetDeviceIDs(arg unsafe.Pointer, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer, arg5 *uint32) int32 {
-	return raw.ClGetDeviceIDs(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClGetDeviceInfo calls [raw.ClGetDeviceInfo] (C function clGetDeviceInfo).
-func ClGetDeviceInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetDeviceInfo(arg, arg2, arg3, arg4, arg5)
-}
-
-// ClGetEventInfo calls [raw.ClGetEventInfo] (C function clGetEventInfo).
-func ClGetEventInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetEventInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClEnqueueBarrier func(objc.ID) int32
 
-// ClGetEventProfilingInfo calls [raw.ClGetEventProfilingInfo] (C function clGetEventProfilingInfo).
-func ClGetEventProfilingInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetEventProfilingInfo(arg, arg2, arg3, arg4, arg5)
+// ClEnqueueBarrier calls the OpenCL framework function clEnqueueBarrier.
+func ClEnqueueBarrier(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClEnqueueBarrier == nil {
+		ebipurego.RegisterLibFunc(&_fnClEnqueueBarrier, _lib, "clEnqueueBarrier")
+	}
+	return _fnClEnqueueBarrier(objref.IDOf(arg))
 }
 
-// ClGetExtensionFunctionAddress calls [raw.ClGetExtensionFunctionAddress] (C function clGetExtensionFunctionAddress).
-func ClGetExtensionFunctionAddress(arg string) unsafe.Pointer {
-	return raw.ClGetExtensionFunctionAddress(arg)
-}
-
-// ClGetExtensionFunctionAddressForPlatform calls [raw.ClGetExtensionFunctionAddressForPlatform] (C function clGetExtensionFunctionAddressForPlatform).
-func ClGetExtensionFunctionAddressForPlatform(arg unsafe.Pointer, arg2 string) unsafe.Pointer {
-	return raw.ClGetExtensionFunctionAddressForPlatform(arg, arg2)
-}
+var _fnClFinish func(objc.ID) int32
 
-// ClGetGLContextInfoAPPLE calls [raw.ClGetGLContextInfoAPPLE] (C function clGetGLContextInfoAPPLE).
-func ClGetGLContextInfoAPPLE(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint, arg5 unsafe.Pointer, arg6 *uint) int32 {
-	return raw.ClGetGLContextInfoAPPLE(arg, arg2, arg3, arg4, arg5, arg6)
+// ClFinish calls the OpenCL framework function clFinish.
+func ClFinish(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClFinish == nil {
+		ebipurego.RegisterLibFunc(&_fnClFinish, _lib, "clFinish")
+	}
+	return _fnClFinish(objref.IDOf(arg))
 }
 
-// ClGetGLObjectInfo calls [raw.ClGetGLObjectInfo] (C function clGetGLObjectInfo).
-func ClGetGLObjectInfo(arg unsafe.Pointer, arg2 *uint32, arg3 *uint) int32 {
-	return raw.ClGetGLObjectInfo(arg, arg2, arg3)
-}
+var _fnClFlush func(objc.ID) int32
 
-// ClGetGLTextureInfo calls [raw.ClGetGLTextureInfo] (C function clGetGLTextureInfo).
-func ClGetGLTextureInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetGLTextureInfo(arg, arg2, arg3, arg4, arg5)
+// ClFlush calls the OpenCL framework function clFlush.
+func ClFlush(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnClFlush, _lib, "clFlush")
+	}
+	return _fnClFlush(objref.IDOf(arg))
 }
 
-// ClGetImageInfo calls [raw.ClGetImageInfo] (C function clGetImageInfo).
-func ClGetImageInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetImageInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClReleaseCommandQueue func(objc.ID) int32
 
-// ClGetKernelArgInfo calls [raw.ClGetKernelArgInfo] (C function clGetKernelArgInfo).
-func ClGetKernelArgInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint32, arg4 uint, arg5 unsafe.Pointer, arg6 *uint) int32 {
-	return raw.ClGetKernelArgInfo(arg, arg2, arg3, arg4, arg5, arg6)
+// ClReleaseCommandQueue calls the OpenCL framework function clReleaseCommandQueue.
+func ClReleaseCommandQueue(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseCommandQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseCommandQueue, _lib, "clReleaseCommandQueue")
+	}
+	return _fnClReleaseCommandQueue(objref.IDOf(arg))
 }
 
-// ClGetKernelInfo calls [raw.ClGetKernelInfo] (C function clGetKernelInfo).
-func ClGetKernelInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetKernelInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClReleaseContext func(objc.ID) int32
 
-// ClGetKernelWorkGroupInfo calls [raw.ClGetKernelWorkGroupInfo] (C function clGetKernelWorkGroupInfo).
-func ClGetKernelWorkGroupInfo(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint, arg5 unsafe.Pointer, arg6 *uint) int32 {
-	return raw.ClGetKernelWorkGroupInfo(arg, arg2, arg3, arg4, arg5, arg6)
+// ClReleaseContext calls the OpenCL framework function clReleaseContext.
+func ClReleaseContext(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseContext == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseContext, _lib, "clReleaseContext")
+	}
+	return _fnClReleaseContext(objref.IDOf(arg))
 }
 
-// ClGetMemObjectInfo calls [raw.ClGetMemObjectInfo] (C function clGetMemObjectInfo).
-func ClGetMemObjectInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetMemObjectInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClReleaseDAGAPPLE func(objc.ID)
 
-// ClGetPlatformIDs calls [raw.ClGetPlatformIDs] (C function clGetPlatformIDs).
-func ClGetPlatformIDs(arg uint32, arg2 unsafe.Pointer, arg3 *uint32) int32 {
-	return raw.ClGetPlatformIDs(arg, arg2, arg3)
+// ClReleaseDAGAPPLE calls the OpenCL framework function clReleaseDAGAPPLE.
+func ClReleaseDAGAPPLE(dag obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseDAGAPPLE == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseDAGAPPLE, _lib, "clReleaseDAGAPPLE")
+	}
+	_fnClReleaseDAGAPPLE(objref.IDOf(dag))
 }
 
-// ClGetPlatformInfo calls [raw.ClGetPlatformInfo] (C function clGetPlatformInfo).
-func ClGetPlatformInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetPlatformInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClReleaseDevice func(objc.ID) int32
 
-// ClGetProgramBuildInfo calls [raw.ClGetProgramBuildInfo] (C function clGetProgramBuildInfo).
-func ClGetProgramBuildInfo(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint32, arg4 uint, arg5 unsafe.Pointer, arg6 *uint) int32 {
-	return raw.ClGetProgramBuildInfo(arg, arg2, arg3, arg4, arg5, arg6)
+// ClReleaseDevice calls the OpenCL framework function clReleaseDevice.
+func ClReleaseDevice(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseDevice, _lib, "clReleaseDevice")
+	}
+	return _fnClReleaseDevice(objref.IDOf(arg))
 }
 
-// ClGetProgramInfo calls [raw.ClGetProgramInfo] (C function clGetProgramInfo).
-func ClGetProgramInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetProgramInfo(arg, arg2, arg3, arg4, arg5)
-}
+var _fnClReleaseEvent func(objc.ID) int32
 
-// ClGetSamplerInfo calls [raw.ClGetSamplerInfo] (C function clGetSamplerInfo).
-func ClGetSamplerInfo(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer, arg5 *uint) int32 {
-	return raw.ClGetSamplerInfo(arg, arg2, arg3, arg4, arg5)
+// ClReleaseEvent calls the OpenCL framework function clReleaseEvent.
+func ClReleaseEvent(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseEvent, _lib, "clReleaseEvent")
+	}
+	return _fnClReleaseEvent(objref.IDOf(arg))
 }
 
-// ClGetSupportedImageFormats calls [raw.ClGetSupportedImageFormats] (C function clGetSupportedImageFormats).
-func ClGetSupportedImageFormats(arg unsafe.Pointer, arg2 uint64, arg3 uint32, arg4 uint32, arg5 *raw.ClImageFormat, arg6 *uint32) int32 {
-	return raw.ClGetSupportedImageFormats(arg, arg2, arg3, arg4, arg5, arg6)
-}
+var _fnClReleaseKernel func(objc.ID) int32
 
-// ClLinkProgram calls [raw.ClLinkProgram] (C function clLinkProgram).
-func ClLinkProgram(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 unsafe.Pointer, arg9 *int32) unsafe.Pointer {
-	return raw.ClLinkProgram(arg, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+// ClReleaseKernel calls the OpenCL framework function clReleaseKernel.
+func ClReleaseKernel(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseKernel == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseKernel, _lib, "clReleaseKernel")
+	}
+	return _fnClReleaseKernel(objref.IDOf(arg))
 }
 
-// ClLogMessagesToStderrAPPLE calls [raw.ClLogMessagesToStderrAPPLE] (C function clLogMessagesToStderrAPPLE).
-func ClLogMessagesToStderrAPPLE(arg string, arg2 unsafe.Pointer, arg3 uint, arg4 unsafe.Pointer) {
-	raw.ClLogMessagesToStderrAPPLE(arg, arg2, arg3, arg4)
-}
+var _fnClReleaseMemObject func(objc.ID) int32
 
-// ClLogMessagesToStdoutAPPLE calls [raw.ClLogMessagesToStdoutAPPLE] (C function clLogMessagesToStdoutAPPLE).
-func ClLogMessagesToStdoutAPPLE(arg string, arg2 unsafe.Pointer, arg3 uint, arg4 unsafe.Pointer) {
-	raw.ClLogMessagesToStdoutAPPLE(arg, arg2, arg3, arg4)
+// ClReleaseMemObject calls the OpenCL framework function clReleaseMemObject.
+func ClReleaseMemObject(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseMemObject == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseMemObject, _lib, "clReleaseMemObject")
+	}
+	return _fnClReleaseMemObject(objref.IDOf(arg))
 }
 
-// ClLogMessagesToSystemLogAPPLE calls [raw.ClLogMessagesToSystemLogAPPLE] (C function clLogMessagesToSystemLogAPPLE).
-func ClLogMessagesToSystemLogAPPLE(arg string, arg2 unsafe.Pointer, arg3 uint, arg4 unsafe.Pointer) {
-	raw.ClLogMessagesToSystemLogAPPLE(arg, arg2, arg3, arg4)
-}
+var _fnClReleaseProgram func(objc.ID) int32
 
-// ClReleaseCommandQueue calls [raw.ClReleaseCommandQueue] (C function clReleaseCommandQueue).
-func ClReleaseCommandQueue(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseCommandQueue(arg)
+// ClReleaseProgram calls the OpenCL framework function clReleaseProgram.
+func ClReleaseProgram(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseProgram == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseProgram, _lib, "clReleaseProgram")
+	}
+	return _fnClReleaseProgram(objref.IDOf(arg))
 }
 
-// ClReleaseContext calls [raw.ClReleaseContext] (C function clReleaseContext).
-func ClReleaseContext(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseContext(arg)
-}
+var _fnClReleaseSampler func(objc.ID) int32
 
-// ClReleaseDAGAPPLE calls [raw.ClReleaseDAGAPPLE] (C function clReleaseDAGAPPLE).
-func ClReleaseDAGAPPLE(dag unsafe.Pointer) {
-	raw.ClReleaseDAGAPPLE(dag)
+// ClReleaseSampler calls the OpenCL framework function clReleaseSampler.
+func ClReleaseSampler(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClReleaseSampler == nil {
+		ebipurego.RegisterLibFunc(&_fnClReleaseSampler, _lib, "clReleaseSampler")
+	}
+	return _fnClReleaseSampler(objref.IDOf(arg))
 }
 
-// ClReleaseDevice calls [raw.ClReleaseDevice] (C function clReleaseDevice).
-func ClReleaseDevice(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseDevice(arg)
-}
+var _fnClRetainCommandQueue func(objc.ID) int32
 
-// ClReleaseEvent calls [raw.ClReleaseEvent] (C function clReleaseEvent).
-func ClReleaseEvent(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseEvent(arg)
+// ClRetainCommandQueue calls the OpenCL framework function clRetainCommandQueue.
+func ClRetainCommandQueue(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainCommandQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainCommandQueue, _lib, "clRetainCommandQueue")
+	}
+	return _fnClRetainCommandQueue(objref.IDOf(arg))
 }
 
-// ClReleaseKernel calls [raw.ClReleaseKernel] (C function clReleaseKernel).
-func ClReleaseKernel(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseKernel(arg)
-}
+var _fnClRetainContext func(objc.ID) int32
 
-// ClReleaseMemObject calls [raw.ClReleaseMemObject] (C function clReleaseMemObject).
-func ClReleaseMemObject(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseMemObject(arg)
+// ClRetainContext calls the OpenCL framework function clRetainContext.
+func ClRetainContext(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainContext == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainContext, _lib, "clRetainContext")
+	}
+	return _fnClRetainContext(objref.IDOf(arg))
 }
 
-// ClReleaseProgram calls [raw.ClReleaseProgram] (C function clReleaseProgram).
-func ClReleaseProgram(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseProgram(arg)
-}
+var _fnClRetainDevice func(objc.ID) int32
 
-// ClReleaseSampler calls [raw.ClReleaseSampler] (C function clReleaseSampler).
-func ClReleaseSampler(arg unsafe.Pointer) int32 {
-	return raw.ClReleaseSampler(arg)
+// ClRetainDevice calls the OpenCL framework function clRetainDevice.
+func ClRetainDevice(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainDevice, _lib, "clRetainDevice")
+	}
+	return _fnClRetainDevice(objref.IDOf(arg))
 }
 
-// ClRetainCommandQueue calls [raw.ClRetainCommandQueue] (C function clRetainCommandQueue).
-func ClRetainCommandQueue(arg unsafe.Pointer) int32 {
-	return raw.ClRetainCommandQueue(arg)
-}
+var _fnClRetainEvent func(objc.ID) int32
 
-// ClRetainContext calls [raw.ClRetainContext] (C function clRetainContext).
-func ClRetainContext(arg unsafe.Pointer) int32 {
-	return raw.ClRetainContext(arg)
+// ClRetainEvent calls the OpenCL framework function clRetainEvent.
+func ClRetainEvent(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainEvent, _lib, "clRetainEvent")
+	}
+	return _fnClRetainEvent(objref.IDOf(arg))
 }
 
-// ClRetainDevice calls [raw.ClRetainDevice] (C function clRetainDevice).
-func ClRetainDevice(arg unsafe.Pointer) int32 {
-	return raw.ClRetainDevice(arg)
-}
+var _fnClRetainKernel func(objc.ID) int32
 
-// ClRetainEvent calls [raw.ClRetainEvent] (C function clRetainEvent).
-func ClRetainEvent(arg unsafe.Pointer) int32 {
-	return raw.ClRetainEvent(arg)
+// ClRetainKernel calls the OpenCL framework function clRetainKernel.
+func ClRetainKernel(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainKernel == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainKernel, _lib, "clRetainKernel")
+	}
+	return _fnClRetainKernel(objref.IDOf(arg))
 }
 
-// ClRetainKernel calls [raw.ClRetainKernel] (C function clRetainKernel).
-func ClRetainKernel(arg unsafe.Pointer) int32 {
-	return raw.ClRetainKernel(arg)
-}
+var _fnClRetainMemObject func(objc.ID) int32
 
-// ClRetainMemObject calls [raw.ClRetainMemObject] (C function clRetainMemObject).
-func ClRetainMemObject(arg unsafe.Pointer) int32 {
-	return raw.ClRetainMemObject(arg)
+// ClRetainMemObject calls the OpenCL framework function clRetainMemObject.
+func ClRetainMemObject(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainMemObject == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainMemObject, _lib, "clRetainMemObject")
+	}
+	return _fnClRetainMemObject(objref.IDOf(arg))
 }
 
-// ClRetainProgram calls [raw.ClRetainProgram] (C function clRetainProgram).
-func ClRetainProgram(arg unsafe.Pointer) int32 {
-	return raw.ClRetainProgram(arg)
-}
+var _fnClRetainProgram func(objc.ID) int32
 
-// ClRetainSampler calls [raw.ClRetainSampler] (C function clRetainSampler).
-func ClRetainSampler(arg unsafe.Pointer) int32 {
-	return raw.ClRetainSampler(arg)
+// ClRetainProgram calls the OpenCL framework function clRetainProgram.
+func ClRetainProgram(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainProgram == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainProgram, _lib, "clRetainProgram")
+	}
+	return _fnClRetainProgram(objref.IDOf(arg))
 }
 
-// ClSetEventCallback calls [raw.ClSetEventCallback] (C function clSetEventCallback).
-func ClSetEventCallback(arg unsafe.Pointer, arg2 int32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
-	return raw.ClSetEventCallback(arg, arg2, arg3, arg4)
-}
+var _fnClRetainSampler func(objc.ID) int32
 
-// ClSetKernelArg calls [raw.ClSetKernelArg] (C function clSetKernelArg).
-func ClSetKernelArg(arg unsafe.Pointer, arg2 uint32, arg3 uint, arg4 unsafe.Pointer) int32 {
-	return raw.ClSetKernelArg(arg, arg2, arg3, arg4)
+// ClRetainSampler calls the OpenCL framework function clRetainSampler.
+func ClRetainSampler(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClRetainSampler == nil {
+		ebipurego.RegisterLibFunc(&_fnClRetainSampler, _lib, "clRetainSampler")
+	}
+	return _fnClRetainSampler(objref.IDOf(arg))
 }
 
-// ClSetKernelArgByNameAPPLE calls [raw.ClSetKernelArgByNameAPPLE] (C function clSetKernelArgByNameAPPLE).
-func ClSetKernelArgByNameAPPLE(arg unsafe.Pointer, arg2 string, arg3 uint, arg4 unsafe.Pointer) int32 {
-	return raw.ClSetKernelArgByNameAPPLE(arg, arg2, arg3, arg4)
-}
+var _fnClSetKernelArgsVaListAPPLE func(objc.ID, uint32, string) int32
 
-// ClSetKernelArgsVaListAPPLE calls [raw.ClSetKernelArgsVaListAPPLE] (C function clSetKernelArgsVaListAPPLE).
-func ClSetKernelArgsVaListAPPLE(arg unsafe.Pointer, arg2 uint32, arg3 string) int32 {
-	return raw.ClSetKernelArgsVaListAPPLE(arg, arg2, arg3)
+// ClSetKernelArgsVaListAPPLE calls the OpenCL framework function clSetKernelArgsVaListAPPLE.
+func ClSetKernelArgsVaListAPPLE(arg obj.Object, arg2 uint32, arg3 string) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClSetKernelArgsVaListAPPLE == nil {
+		ebipurego.RegisterLibFunc(&_fnClSetKernelArgsVaListAPPLE, _lib, "clSetKernelArgsVaListAPPLE")
+	}
+	return _fnClSetKernelArgsVaListAPPLE(objref.IDOf(arg), arg2, arg3)
 }
 
-// ClSetMemObjectDestructorAPPLE calls [raw.ClSetMemObjectDestructorAPPLE] (C function clSetMemObjectDestructorAPPLE).
-func ClSetMemObjectDestructorAPPLE(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int32 {
-	return raw.ClSetMemObjectDestructorAPPLE(arg, arg2, arg3)
-}
+var _fnClSetUserEventStatus func(objc.ID, int32) int32
 
-// ClSetMemObjectDestructorCallback calls [raw.ClSetMemObjectDestructorCallback] (C function clSetMemObjectDestructorCallback).
-func ClSetMemObjectDestructorCallback(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int32 {
-	return raw.ClSetMemObjectDestructorCallback(arg, arg2, arg3)
+// ClSetUserEventStatus calls the OpenCL framework function clSetUserEventStatus.
+func ClSetUserEventStatus(arg obj.Object, arg2 int32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClSetUserEventStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnClSetUserEventStatus, _lib, "clSetUserEventStatus")
+	}
+	return _fnClSetUserEventStatus(objref.IDOf(arg), arg2)
 }
 
-// ClSetUserEventStatus calls [raw.ClSetUserEventStatus] (C function clSetUserEventStatus).
-func ClSetUserEventStatus(arg unsafe.Pointer, arg2 int32) int32 {
-	return raw.ClSetUserEventStatus(arg, arg2)
-}
+var _fnClUnloadCompiler func() int32
 
-// ClUnloadCompiler calls [raw.ClUnloadCompiler] (C function clUnloadCompiler).
+// ClUnloadCompiler calls the OpenCL framework function clUnloadCompiler.
 func ClUnloadCompiler() int32 {
-	return raw.ClUnloadCompiler()
+	_loadOnce.Do(_loadLibrary)
+	if _fnClUnloadCompiler == nil {
+		ebipurego.RegisterLibFunc(&_fnClUnloadCompiler, _lib, "clUnloadCompiler")
+	}
+	return _fnClUnloadCompiler()
 }
 
-// ClUnloadPlatformCompiler calls [raw.ClUnloadPlatformCompiler] (C function clUnloadPlatformCompiler).
-func ClUnloadPlatformCompiler(arg unsafe.Pointer) int32 {
-	return raw.ClUnloadPlatformCompiler(arg)
+var _fnClUnloadPlatformCompiler func(objc.ID) int32
+
+// ClUnloadPlatformCompiler calls the OpenCL framework function clUnloadPlatformCompiler.
+func ClUnloadPlatformCompiler(arg obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClUnloadPlatformCompiler == nil {
+		ebipurego.RegisterLibFunc(&_fnClUnloadPlatformCompiler, _lib, "clUnloadPlatformCompiler")
+	}
+	return _fnClUnloadPlatformCompiler(objref.IDOf(arg))
 }
 
-// ClWaitForEvents calls [raw.ClWaitForEvents] (C function clWaitForEvents).
-func ClWaitForEvents(arg uint32, arg2 unsafe.Pointer) int32 {
-	return raw.ClWaitForEvents(arg, arg2)
+var _fnGclGetContext func() objc.ID
+
+// GclGetContext calls the OpenCL framework function gcl_get_context.
+func GclGetContext() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGclGetContext == nil {
+		ebipurego.RegisterLibFunc(&_fnGclGetContext, _lib, "gcl_get_context")
+	}
+	_ret := _fnGclGetContext()
+	return obj.Wrap(_ret)
 }
 
-// GclCopyImage calls [raw.GclCopyImage] (C function gcl_copy_image).
-func GclCopyImage(dst_image unsafe.Pointer, src_image unsafe.Pointer, dst_origin *uint, src_origin *uint, region *uint) {
-	raw.GclCopyImage(dst_image, src_image, dst_origin, src_origin, region)
+var _fnGclGetDeviceIdWithDispatchQueue func(objc.ID) objc.ID
+
+// GclGetDeviceIdWithDispatchQueue calls the OpenCL framework function gcl_get_device_id_with_dispatch_queue.
+func GclGetDeviceIdWithDispatchQueue(queue obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGclGetDeviceIdWithDispatchQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnGclGetDeviceIdWithDispatchQueue, _lib, "gcl_get_device_id_with_dispatch_queue")
+	}
+	_ret := _fnGclGetDeviceIdWithDispatchQueue(objref.IDOf(queue))
+	return obj.Wrap(_ret)
 }
 
-// GclCopyImageToPtr calls [raw.GclCopyImageToPtr] (C function gcl_copy_image_to_ptr).
-func GclCopyImageToPtr(dst_ptr unsafe.Pointer, src_image unsafe.Pointer, src_origin *uint, region *uint) {
-	raw.GclCopyImageToPtr(dst_ptr, src_image, src_origin, region)
-}
+var _fnGclStartTimer func() uint64
 
-// GclCopyPtrToImage calls [raw.GclCopyPtrToImage] (C function gcl_copy_ptr_to_image).
-func GclCopyPtrToImage(dst_image unsafe.Pointer, src_ptr unsafe.Pointer, dst_origin *uint, region *uint) {
-	raw.GclCopyPtrToImage(dst_image, src_ptr, dst_origin, region)
-}
-
-// GclCreateBufferFromPtr calls [raw.GclCreateBufferFromPtr] (C function gcl_create_buffer_from_ptr).
-func GclCreateBufferFromPtr(ptr unsafe.Pointer) unsafe.Pointer {
-	return raw.GclCreateBufferFromPtr(ptr)
-}
-
-// GclCreateDispatchQueue calls [raw.GclCreateDispatchQueue] (C function gcl_create_dispatch_queue).
-func GclCreateDispatchQueue(flags uint64, device_id unsafe.Pointer) unsafe.Pointer {
-	return raw.GclCreateDispatchQueue(flags, device_id)
-}
-
-// GclCreateImage calls [raw.GclCreateImage] (C function gcl_create_image).
-func GclCreateImage(image_format *raw.ClImageFormat, image_width uint, image_height uint, image_depth uint, io_surface unsafe.Pointer) unsafe.Pointer {
-	return raw.GclCreateImage(image_format, image_width, image_height, image_depth, io_surface)
-}
-
-// GclCreateKernelFromBlock calls [raw.GclCreateKernelFromBlock] (C function gcl_create_kernel_from_block).
-func GclCreateKernelFromBlock(kernel_block_ptr unsafe.Pointer) unsafe.Pointer {
-	return raw.GclCreateKernelFromBlock(kernel_block_ptr)
-}
-
-// GclFree calls [raw.GclFree] (C function gcl_free).
-func GclFree(ptr unsafe.Pointer) {
-	raw.GclFree(ptr)
-}
-
-// GclGetContext calls [raw.GclGetContext] (C function gcl_get_context).
-func GclGetContext() unsafe.Pointer {
-	return raw.GclGetContext()
-}
-
-// GclGetDeviceIdWithDispatchQueue calls [raw.GclGetDeviceIdWithDispatchQueue] (C function gcl_get_device_id_with_dispatch_queue).
-func GclGetDeviceIdWithDispatchQueue(queue *foundation.NSObject) unsafe.Pointer {
-	return raw.GclGetDeviceIdWithDispatchQueue(queue)
-}
-
-// GclGetKernelBlockWorkgroupInfo calls [raw.GclGetKernelBlockWorkgroupInfo] (C function gcl_get_kernel_block_workgroup_info).
-func GclGetKernelBlockWorkgroupInfo(kernel_block_ptr unsafe.Pointer, param_name uint32, param_value_size uint, param_value unsafe.Pointer, param_value_size_ret *uint) {
-	raw.GclGetKernelBlockWorkgroupInfo(kernel_block_ptr, param_name, param_value_size, param_value, param_value_size_ret)
-}
-
-// GclGetSupportedImageFormats calls [raw.GclGetSupportedImageFormats] (C function gcl_get_supported_image_formats).
-func GclGetSupportedImageFormats(device_id unsafe.Pointer, image_type uint32, num_entries uint, image_formats *raw.ClImageFormat, num_image_formats *uint32) {
-	raw.GclGetSupportedImageFormats(device_id, image_type, num_entries, image_formats, num_image_formats)
-}
-
-// GclGlCreateImageFromRenderbuffer calls [raw.GclGlCreateImageFromRenderbuffer] (C function gcl_gl_create_image_from_renderbuffer).
-func GclGlCreateImageFromRenderbuffer(render_buffer uint32) unsafe.Pointer {
-	return raw.GclGlCreateImageFromRenderbuffer(render_buffer)
-}
-
-// GclGlCreateImageFromTexture calls [raw.GclGlCreateImageFromTexture] (C function gcl_gl_create_image_from_texture).
-func GclGlCreateImageFromTexture(texture_target uint32, mip_level int32, texture uint32) unsafe.Pointer {
-	return raw.GclGlCreateImageFromTexture(texture_target, mip_level, texture)
-}
-
-// GclGlCreatePtrFromBuffer calls [raw.GclGlCreatePtrFromBuffer] (C function gcl_gl_create_ptr_from_buffer).
-func GclGlCreatePtrFromBuffer(bufobj uint32) unsafe.Pointer {
-	return raw.GclGlCreatePtrFromBuffer(bufobj)
-}
-
-// GclGlSetSharegroup calls [raw.GclGlSetSharegroup] (C function gcl_gl_set_sharegroup).
-func GclGlSetSharegroup(share unsafe.Pointer) {
-	raw.GclGlSetSharegroup(share)
-}
-
-// GclMalloc calls [raw.GclMalloc] (C function gcl_malloc).
-func GclMalloc(bytes_ uint, host_ptr unsafe.Pointer, flags uint64) unsafe.Pointer {
-	return raw.GclMalloc(bytes_, host_ptr, flags)
-}
-
-// GclMapImage calls [raw.GclMapImage] (C function gcl_map_image).
-func GclMapImage(image unsafe.Pointer, map_flags uint64, origin *uint, region *uint) unsafe.Pointer {
-	return raw.GclMapImage(image, map_flags, origin, region)
-}
-
-// GclMapPtr calls [raw.GclMapPtr] (C function gcl_map_ptr).
-func GclMapPtr(ptr unsafe.Pointer, map_flags uint64, cb uint) unsafe.Pointer {
-	return raw.GclMapPtr(ptr, map_flags, cb)
-}
-
-// GclMemcpy calls [raw.GclMemcpy] (C function gcl_memcpy).
-func GclMemcpy(dst unsafe.Pointer, src unsafe.Pointer, size uint) {
-	raw.GclMemcpy(dst, src, size)
-}
-
-// GclMemcpyRect calls [raw.GclMemcpyRect] (C function gcl_memcpy_rect).
-func GclMemcpyRect(dst unsafe.Pointer, src unsafe.Pointer, dst_origin *uint, src_origin *uint, region *uint, dst_row_pitch uint, dst_slice_pitch uint, src_row_pitch uint, src_slice_pitch uint) {
-	raw.GclMemcpyRect(dst, src, dst_origin, src_origin, region, dst_row_pitch, dst_slice_pitch, src_row_pitch, src_slice_pitch)
-}
-
-// GclReleaseImage calls [raw.GclReleaseImage] (C function gcl_release_image).
-func GclReleaseImage(image unsafe.Pointer) {
-	raw.GclReleaseImage(image)
-}
-
-// GclRetainImage calls [raw.GclRetainImage] (C function gcl_retain_image).
-func GclRetainImage(image unsafe.Pointer) {
-	raw.GclRetainImage(image)
-}
-
-// GclSetFinalizer calls [raw.GclSetFinalizer] (C function gcl_set_finalizer).
-func GclSetFinalizer(object unsafe.Pointer, cl_pfn_finalizer unsafe.Pointer, user_data unsafe.Pointer) {
-	raw.GclSetFinalizer(object, cl_pfn_finalizer, user_data)
-}
-
-// GclStartTimer calls [raw.GclStartTimer] (C function gcl_start_timer).
+// GclStartTimer calls the OpenCL framework function gcl_start_timer.
 func GclStartTimer() uint64 {
-	return raw.GclStartTimer()
+	_loadOnce.Do(_loadLibrary)
+	if _fnGclStartTimer == nil {
+		ebipurego.RegisterLibFunc(&_fnGclStartTimer, _lib, "gcl_start_timer")
+	}
+	return _fnGclStartTimer()
 }
 
-// GclStopTimer calls [raw.GclStopTimer] (C function gcl_stop_timer).
+var _fnGclStopTimer func(uint64) float64
+
+// GclStopTimer calls the OpenCL framework function gcl_stop_timer.
 func GclStopTimer(t uint64) float64 {
-	return raw.GclStopTimer(t)
-}
-
-// GclUnmap calls [raw.GclUnmap] (C function gcl_unmap).
-func GclUnmap(arg unsafe.Pointer) {
-	raw.GclUnmap(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGclStopTimer == nil {
+		ebipurego.RegisterLibFunc(&_fnGclStopTimer, _lib, "gcl_stop_timer")
+	}
+	return _fnGclStopTimer(t)
 }

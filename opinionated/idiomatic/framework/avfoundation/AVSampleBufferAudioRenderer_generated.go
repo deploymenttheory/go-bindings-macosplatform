@@ -5,184 +5,186 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object used to decompress audio and play compressed or uncompressed audio.
+// SampleBufferAudioRenderer is an idiomatic wrapper over the Objective-C class AVSampleBufferAudioRenderer.
 //
-// SampleBufferAudioRenderer wraps [raw.AVSampleBufferAudioRenderer] with a fluent Go API.
+// An object used to decompress audio and play compressed or uncompressed audio.
 type SampleBufferAudioRenderer struct {
-	inner *raw.AVSampleBufferAudioRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSampleBufferAudioRenderer].
-func (x *SampleBufferAudioRenderer) Unwrap() *raw.AVSampleBufferAudioRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleBufferAudioRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleBufferAudioRendererFromID adopts an existing object pointer as a SampleBufferAudioRenderer (nil for 0).
+// SampleBufferAudioRendererFromID adopts an existing Objective-C object as a SampleBufferAudioRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleBufferAudioRendererFromID(id objc.ID) *SampleBufferAudioRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &SampleBufferAudioRenderer{inner: raw.AVSampleBufferAudioRendererFromID(id)}
+	x := &SampleBufferAudioRenderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSampleBufferAudioRenderer creates a new [SampleBufferAudioRenderer].
+// sampleBufferAudioRendererAdopt wraps an Objective-C object that this code just created as a
+// SampleBufferAudioRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleBufferAudioRendererAdopt(id objc.ID) *SampleBufferAudioRenderer {
+	if id == 0 {
+		return nil
+	}
+	x := &SampleBufferAudioRenderer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SampleBufferAudioRenderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleBufferAudioRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleBufferAudioRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferAudioRenderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleBufferAudioRenderer creates a new SampleBufferAudioRenderer.
 func NewSampleBufferAudioRenderer() *SampleBufferAudioRenderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleBufferAudioRenderer")), objc.RegisterName("new"))
-	return &SampleBufferAudioRenderer{inner: raw.AVSampleBufferAudioRendererFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferAudioRenderer")), objc.RegisterName("new"))
+	return sampleBufferAudioRendererAdopt(_id)
 }
 
-// The unique identifier of the output device used to play audio.
-//
-// WithAudioOutputDeviceUniqueID sets the audioOutputDeviceUniqueID property and returns the receiver for chaining.
+// WithAudioOutputDeviceUniqueID the unique identifier of the output device used to play audio.
 func (x *SampleBufferAudioRenderer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer {
-	x.inner.SetAudioOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(audioOutputDeviceUniqueID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
 	return x
 }
 
-// The processing algorithm used to manage audio pitch at different rates.
-//
-// WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
-func (x *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *SampleBufferAudioRenderer {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+// WithAudioTimePitchAlgorithm the processing algorithm used to manage audio pitch at different rates.
+func (x *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return x
 }
 
-// The source audio channel layouts the audio renderer supports for spatialization.
-//
-// WithAllowedAudioSpatializationFormats sets the allowedAudioSpatializationFormats property and returns the receiver for chaining.
-func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *SampleBufferAudioRenderer {
-	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
+// WithAllowedAudioSpatializationFormats the source audio channel layouts the audio renderer supports for spatialization.
+func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *SampleBufferAudioRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
 	return x
 }
 
-// The current audio volume for the audio renderer.
-//
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithVolume the current audio volume for the audio renderer.
 func (x *SampleBufferAudioRenderer) WithVolume(volume float32) *SampleBufferAudioRenderer {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
-// A Boolean value that indicates whether audio for the renderer is in a muted state.
-//
-// WithMuted sets the muted property and returns the receiver for chaining.
+// WithMuted a Boolean value that indicates whether audio for the renderer is in a muted state.
 func (x *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioRenderer {
-	x.inner.SetMuted(muted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *SampleBufferAudioRenderer) Status() AVQueuedSampleBufferRenderingStatus {
-	return AVQueuedSampleBufferRenderingStatus(x.inner.Status())
+// Status wraps the corresponding Objective-C method.
+func (x *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
+	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// Error calls the underlying Error.
-func (x *SampleBufferAudioRenderer) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-// @property		audioOutputDeviceUniqueID @abstract		Specifies the unique ID of the Core Audio output device used to play audio. @discussion By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
-//
-// AudioOutputDeviceUniqueID calls the underlying AudioOutputDeviceUniqueID.
+// AudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio. By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
 func (x *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
-	_r := x.inner.AudioOutputDeviceUniqueID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioOutputDeviceUniqueID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAudioOutputDeviceUniqueID calls the underlying SetAudioOutputDeviceUniqueID.
+// SetAudioOutputDeviceUniqueID wraps the corresponding Objective-C method.
 func (x *SampleBufferAudioRenderer) SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) {
-	x.inner.SetAudioOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(audioOutputDeviceUniqueID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
 }
 
-// @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral. If the timebase's rate is not supported by the audioTimePitchAlgorithm, audio will be muted. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0.
-//
-// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
-func (x *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() string {
-	_r := x.inner.AudioTimePitchAlgorithm()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch at varying rates. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral. If the timebase's rate is not supported by the audioTimePitchAlgorithm, audio will be muted. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0.
+func (x *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
+	return obj.Wrap(_r)
 }
 
-// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
-func (x *SampleBufferAudioRenderer) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
+func (x *SampleBufferAudioRenderer) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
 
-// @property allowedAudioSpatializationFormats @abstract Indicates the source audio channel layouts allowed by the receiver for spatialization. @discussion Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
-//
-// AllowedAudioSpatializationFormats calls the underlying AllowedAudioSpatializationFormats.
-func (x *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AVAudioSpatializationFormats {
-	return AVAudioSpatializationFormats(x.inner.AllowedAudioSpatializationFormats())
+// AllowedAudioSpatializationFormats indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
+func (x *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AudioSpatializationFormats {
+	_r := objc.Send[AudioSpatializationFormats](objref.IDOf(x), objc.RegisterName("allowedAudioSpatializationFormats"))
+	return _r
 }
 
-// SetAllowedAudioSpatializationFormats calls the underlying SetAllowedAudioSpatializationFormats.
-func (x *SampleBufferAudioRenderer) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) {
-	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
+// SetAllowedAudioSpatializationFormats wraps the corresponding Objective-C method.
+func (x *SampleBufferAudioRenderer) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedAudioSpatializationFormats:"), allowedAudioSpatializationFormats)
 }
 
-// Volume calls the underlying Volume.
+// Volume wraps the corresponding Objective-C method.
 func (x *SampleBufferAudioRenderer) Volume() float32 {
-	return x.inner.Volume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+	return _r
 }
 
-// SetVolume calls the underlying SetVolume.
+// SetVolume wraps the corresponding Objective-C method.
 func (x *SampleBufferAudioRenderer) SetVolume(volume float32) {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
-// IsMuted calls the underlying IsMuted.
+// IsMuted wraps the corresponding Objective-C method.
 func (x *SampleBufferAudioRenderer) IsMuted() bool {
-	return x.inner.IsMuted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
+	return _r
 }
 
-// SetMuted calls the underlying SetMuted.
+// SetMuted wraps the corresponding Objective-C method.
 func (x *SampleBufferAudioRenderer) SetMuted(muted bool) {
-	x.inner.SetMuted(muted)
-}
-
-// Flushes queued sample buffers with presentation time stamps later than or equal to the specified time.
-//
-// FlushFromSourceTimeCompletionHandler calls the underlying FlushFromSourceTimeCompletionHandler.
-func (x *SampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
-	x.inner.FlushFromSourceTimeCompletionHandler(time_, completionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
 }
 
 // SampleBufferAudioRendererable is the interface implemented by [SampleBufferAudioRenderer], for mocking and DI.
 type SampleBufferAudioRendererable interface {
-	Unwrap() *raw.AVSampleBufferAudioRenderer
+	obj.Object
 	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer
-	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *SampleBufferAudioRenderer
-	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *SampleBufferAudioRenderer
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *SampleBufferAudioRenderer
+	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats) *SampleBufferAudioRenderer
 	WithVolume(volume float32) *SampleBufferAudioRenderer
 	WithMuted(muted bool) *SampleBufferAudioRenderer
-	Status() AVQueuedSampleBufferRenderingStatus
-	Error() unsafe.Pointer
+	Status() QueuedSampleBufferRenderingStatus
 	AudioOutputDeviceUniqueID() string
 	SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string)
-	AudioTimePitchAlgorithm() string
-	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
-	AllowedAudioSpatializationFormats() AVAudioSpatializationFormats
-	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats)
+	AudioTimePitchAlgorithm() obj.Object
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object)
+	AllowedAudioSpatializationFormats() AudioSpatializationFormats
+	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AudioSpatializationFormats)
 	Volume() float32
 	SetVolume(volume float32)
 	IsMuted() bool
 	SetMuted(muted bool)
-	FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool))
 }
 
 var _ SampleBufferAudioRendererable = (*SampleBufferAudioRenderer)(nil)

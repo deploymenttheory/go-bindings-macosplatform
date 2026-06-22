@@ -5,76 +5,101 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The type for representing grammatical gender in localized text.
+// TermOfAddress is an idiomatic wrapper over the Objective-C class NSTermOfAddress.
 //
-// TermOfAddress wraps [raw.NSTermOfAddress] with a fluent Go API.
+// The type for representing grammatical gender in localized text.
 type TermOfAddress struct {
-	inner *raw.NSTermOfAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTermOfAddress].
-func (x *TermOfAddress) Unwrap() *raw.NSTermOfAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TermOfAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// TermOfAddressFromID adopts an existing object pointer as a TermOfAddress (nil for 0).
+// TermOfAddressFromID adopts an existing Objective-C object as a TermOfAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func TermOfAddressFromID(id objc.ID) *TermOfAddress {
 	if id == 0 {
 		return nil
 	}
-	return &TermOfAddress{inner: raw.NSTermOfAddressFromID(id)}
-}
-
-// NewTermOfAddress creates a new [TermOfAddress].
-func NewTermOfAddress() *TermOfAddress {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTermOfAddress")), objc.RegisterName("new"))
-	return &TermOfAddress{inner: raw.NSTermOfAddressFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *TermOfAddress) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TermOfAddress {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &TermOfAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The ISO language code if this is a localized term of address
-//
-// LanguageIdentifier calls the underlying LanguageIdentifier.
-func (x *TermOfAddress) LanguageIdentifier() *String {
-	_r := x.inner.LanguageIdentifier()
-	if _r == nil {
+// termOfAddressAdopt wraps an Objective-C object that this code just created as a
+// TermOfAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func termOfAddressAdopt(id objc.ID) *TermOfAddress {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &TermOfAddress{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A list of pronouns for a localized term of address
+// Description returns the object's -description text.
+func (x *TermOfAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TermOfAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TermOfAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TermOfAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTermOfAddress creates a new TermOfAddress.
+func NewTermOfAddress() *TermOfAddress {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("new"))
+	return termOfAddressAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *TermOfAddress) WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// LanguageIdentifier the ISO language code if this is a localized term of address
+func (x *TermOfAddress) LanguageIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Pronouns a list of pronouns for a localized term of address
 //
 // Pronouns returns the collection as a Go slice.
 func (x *TermOfAddress) Pronouns() []*MorphologyPronoun {
-	arr := x.inner.Pronouns()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MorphologyPronoun {
-		return &MorphologyPronoun{inner: raw.NSMorphologyPronounFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronouns"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MorphologyPronoun { return MorphologyPronounFromID(_id) })
 }
-
-func (x *TermOfAddress) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // TermOfAddressable is the interface implemented by [TermOfAddress], for mocking and DI.
 type TermOfAddressable interface {
-	Unwrap() *raw.NSTermOfAddress
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TermOfAddress
-	LanguageIdentifier() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress
+	LanguageIdentifier() string
 	Pronouns() []*MorphologyPronoun
 }
 

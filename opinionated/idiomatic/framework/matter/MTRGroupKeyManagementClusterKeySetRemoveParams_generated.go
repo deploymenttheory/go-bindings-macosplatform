@@ -5,107 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGroupKeyManagementClusterKeySetRemoveParams wraps [raw.MTRGroupKeyManagementClusterKeySetRemoveParams] with a fluent Go API.
+// MTRGroupKeyManagementClusterKeySetRemoveParams is an idiomatic wrapper over the Objective-C class MTRGroupKeyManagementClusterKeySetRemoveParams.
 type MTRGroupKeyManagementClusterKeySetRemoveParams struct {
-	inner *raw.MTRGroupKeyManagementClusterKeySetRemoveParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetRemoveParams].
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetRemoveParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupKeyManagementClusterKeySetRemoveParamsFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterKeySetRemoveParams (nil for 0).
+// MTRGroupKeyManagementClusterKeySetRemoveParamsFromID adopts an existing Objective-C object as a MTRGroupKeyManagementClusterKeySetRemoveParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupKeyManagementClusterKeySetRemoveParamsFromID(id objc.ID) *MTRGroupKeyManagementClusterKeySetRemoveParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupKeyManagementClusterKeySetRemoveParams{inner: raw.MTRGroupKeyManagementClusterKeySetRemoveParamsFromID(id)}
+	x := &MTRGroupKeyManagementClusterKeySetRemoveParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGroupKeyManagementClusterKeySetRemoveParams creates a new [MTRGroupKeyManagementClusterKeySetRemoveParams].
+// mTRGroupKeyManagementClusterKeySetRemoveParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupKeyManagementClusterKeySetRemoveParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupKeyManagementClusterKeySetRemoveParamsAdopt(id objc.ID) *MTRGroupKeyManagementClusterKeySetRemoveParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGroupKeyManagementClusterKeySetRemoveParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGroupKeyManagementClusterKeySetRemoveParams creates a new MTRGroupKeyManagementClusterKeySetRemoveParams.
 func NewMTRGroupKeyManagementClusterKeySetRemoveParams() *MTRGroupKeyManagementClusterKeySetRemoveParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupKeyManagementClusterKeySetRemoveParams")), objc.RegisterName("new"))
-	return &MTRGroupKeyManagementClusterKeySetRemoveParams{inner: raw.MTRGroupKeyManagementClusterKeySetRemoveParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGroupKeyManagementClusterKeySetRemoveParams")), objc.RegisterName("new"))
+	return mTRGroupKeyManagementClusterKeySetRemoveParamsAdopt(_id)
 }
 
-// WithGroupKeySetID sets the groupKeySetID property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams {
-	x.inner.SetGroupKeySetID(groupKeySetID)
+// WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// GroupKeySetID calls the underlying GroupKeySetID.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) GroupKeySetID() *foundation.NSNumber {
-	return x.inner.GroupKeySetID()
+// GroupKeySetID wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) GroupKeySetID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySetID"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupKeySetID calls the underlying SetGroupKeySetID.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetGroupKeySetID(groupKeySetID *foundation.NSNumber) {
-	x.inner.SetGroupKeySetID(groupKeySetID)
+// SetGroupKeySetID wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetGroupKeySetID(groupKeySetID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRGroupKeyManagementClusterKeySetRemoveParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetRemoveParams], for mocking and DI.
 type MTRGroupKeyManagementClusterKeySetRemoveParamsable interface {
-	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetRemoveParams
-	WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams
-	GroupKeySetID() *foundation.NSNumber
-	SetGroupKeySetID(groupKeySetID *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams
+	GroupKeySetID() obj.Object
+	SetGroupKeySetID(groupKeySetID obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRGroupKeyManagementClusterKeySetRemoveParamsable = (*MTRGroupKeyManagementClusterKeySetRemoveParams)(nil)

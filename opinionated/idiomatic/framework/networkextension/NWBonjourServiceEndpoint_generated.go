@@ -5,75 +5,103 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network endpoint specified as a Bonjour service name, type, and domain.
+// NWBonjourServiceEndpoint is an idiomatic wrapper over the Objective-C class NWBonjourServiceEndpoint.
 //
-// NWBonjourServiceEndpoint wraps [raw.NWBonjourServiceEndpoint] with a fluent Go API.
+// A network endpoint specified as a Bonjour service name, type, and domain.
 type NWBonjourServiceEndpoint struct {
-	inner *raw.NWBonjourServiceEndpoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NWBonjourServiceEndpoint].
-func (x *NWBonjourServiceEndpoint) Unwrap() *raw.NWBonjourServiceEndpoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NWBonjourServiceEndpoint) ID() objc.ID { return x.inner.Ptr() }
-
-// NWBonjourServiceEndpointFromID adopts an existing object pointer as a NWBonjourServiceEndpoint (nil for 0).
+// NWBonjourServiceEndpointFromID adopts an existing Objective-C object as a NWBonjourServiceEndpoint
+// (nil for 0), retaining it and registering a release finalizer.
 func NWBonjourServiceEndpointFromID(id objc.ID) *NWBonjourServiceEndpoint {
 	if id == 0 {
 		return nil
 	}
-	return &NWBonjourServiceEndpoint{inner: raw.NWBonjourServiceEndpointFromID(id)}
+	x := &NWBonjourServiceEndpoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNWBonjourServiceEndpoint creates a new [NWBonjourServiceEndpoint].
+// nWBonjourServiceEndpointAdopt wraps an Objective-C object that this code just created as a
+// NWBonjourServiceEndpoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nWBonjourServiceEndpointAdopt(id objc.ID) *NWBonjourServiceEndpoint {
+	if id == 0 {
+		return nil
+	}
+	x := &NWBonjourServiceEndpoint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NWBonjourServiceEndpoint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NWBonjourServiceEndpoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NWBonjourServiceEndpoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NWBonjourServiceEndpoint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNWBonjourServiceEndpoint creates a new NWBonjourServiceEndpoint.
 func NewNWBonjourServiceEndpoint() *NWBonjourServiceEndpoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NWBonjourServiceEndpoint")), objc.RegisterName("new"))
-	return &NWBonjourServiceEndpoint{inner: raw.NWBonjourServiceEndpointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NWBonjourServiceEndpoint")), objc.RegisterName("new"))
+	return nWBonjourServiceEndpointAdopt(_id)
 }
 
-// @property name @discussion The endpoint's Bonjour service name.
-//
-// Name calls the underlying Name.
+// Name the endpoint's Bonjour service name.
 func (x *NWBonjourServiceEndpoint) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property type @discussion The endpoint's Bonjour service type.
-//
-// Type calls the underlying Type.
+// Type the endpoint's Bonjour service type.
 func (x *NWBonjourServiceEndpoint) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property domain @discussion The endpoint's Bonjour service domain.
-//
-// Domain calls the underlying Domain.
+// Domain the endpoint's Bonjour service domain.
 func (x *NWBonjourServiceEndpoint) Domain() string {
-	_r := x.inner.Domain()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NWBonjourServiceEndpointable is the interface implemented by [NWBonjourServiceEndpoint], for mocking and DI.
 type NWBonjourServiceEndpointable interface {
-	Unwrap() *raw.NWBonjourServiceEndpoint
+	obj.Object
 	Name() string
 	Type() string
 	Domain() string

@@ -5,7726 +5,5044 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant		AVLayerVideoGravityResizeAspect @abstract		Preserve aspect ratio; fit within layer bounds. @discussion		AVLayerVideoGravityResizeAspect may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
-// AVLayerVideoGravityResizeAspect returns the string constant AVLayerVideoGravityResizeAspect as an objc.ID, for use as a dictionary key or selector argument.
-func AVLayerVideoGravityResizeAspect() objc.ID {
-	if _r := raw.AVLayerVideoGravityResizeAspect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @constant		AVLayerVideoGravityResizeAspectFill @abstract		Preserve aspect ratio; fill layer bounds. @discussion     AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
-// AVLayerVideoGravityResizeAspectFill returns the string constant AVLayerVideoGravityResizeAspectFill as an objc.ID, for use as a dictionary key or selector argument.
-func AVLayerVideoGravityResizeAspectFill() objc.ID {
-	if _r := raw.AVLayerVideoGravityResizeAspectFill(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @constant		AVLayerVideoGravityResize @abstract		Stretch to fill layer bounds. @discussion     AVLayerVideoGravityResize may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
-// AVLayerVideoGravityResize returns the string constant AVLayerVideoGravityResize as an objc.ID, for use as a dictionary key or selector argument.
-func AVLayerVideoGravityResize() objc.ID {
-	if _r := raw.AVLayerVideoGravityResize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Used to specify FairPlay Streaming (FPS) as the method of key delivery.
-// AVContentKeySystemFairPlayStreaming returns the string constant AVContentKeySystemFairPlayStreaming as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeySystemFairPlayStreaming() objc.ID {
-	if _r := raw.AVContentKeySystemFairPlayStreaming(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Used to specify clear key as the method of key delivery.
-// AVContentKeySystemClearKey returns the string constant AVContentKeySystemClearKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeySystemClearKey() objc.ID {
-	if _r := raw.AVContentKeySystemClearKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Used to specify a token that could be used to authorize playback of associated content key recipients.
-// AVContentKeySystemAuthorizationToken returns the string constant AVContentKeySystemAuthorizationToken as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeySystemAuthorizationToken() objc.ID {
-	if _r := raw.AVContentKeySystemAuthorizationToken(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Specifies the versions of the content protection protocol supported by the application; as an NSArray of one or more NSNumber objects. If this option is not set, an appropriate protocol version will be selected based on sideband information such as an associated HLS playlist. If such information is not available, a protocol version of 1 is assumed
-// AVContentKeySessionServerPlaybackContextOptionProtocolVersions returns the string constant AVContentKeySessionServerPlaybackContextOptionProtocolVersions as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeySessionServerPlaybackContextOptionProtocolVersions() objc.ID {
-	if _r := raw.AVContentKeySessionServerPlaybackContextOptionProtocolVersions(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Specifies a nonce as a 8-byte NSData object to be included in the secure server playback context (SPC) in order to prevent replay attacks. If not specified default server challenge of 0 is assumed.
-// AVContentKeySessionServerPlaybackContextOptionServerChallenge returns the string constant AVContentKeySessionServerPlaybackContextOptionServerChallenge as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeySessionServerPlaybackContextOptionServerChallenge() objc.ID {
-	if _r := raw.AVContentKeySessionServerPlaybackContextOptionServerChallenge(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Indicates that the content key request should be retried because the key response was not set soon enough either due the initial request/response was taking too long, or a lease was expiring in the meantime.
-// AVContentKeyRequestRetryReasonTimedOut returns the string constant AVContentKeyRequestRetryReasonTimedOut as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestRetryReasonTimedOut() objc.ID {
-	if _r := raw.AVContentKeyRequestRetryReasonTimedOut(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Indicates that the content key request should be retried because a key response with expired lease was set on the previous content key request.
-// AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease returns the string constant AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease() objc.ID {
-	if _r := raw.AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Indicates that the content key request should be retried because an obsolete key response was set on the previous content key request.
-// AVContentKeyRequestRetryReasonReceivedObsoleteContentKey returns the string constant AVContentKeyRequestRetryReasonReceivedObsoleteContentKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestRetryReasonReceivedObsoleteContentKey() objc.ID {
-	if _r := raw.AVContentKeyRequestRetryReasonReceivedObsoleteContentKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Request secure token to have extended validation data. The value for the key should be previously created offline key using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:].
-// AVContentKeyRequestRequiresValidationDataInSecureTokenKey returns the string constant AVContentKeyRequestRequiresValidationDataInSecureTokenKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestRequiresValidationDataInSecureTokenKey() objc.ID {
-	return purego.CFConstant(raw.AVContentKeyRequestRequiresValidationDataInSecureTokenKey())
+// AVLayerVideoGravityResizeAspect returns the string constant AVLayerVideoGravityResizeAspect, for use as a dictionary key or argument.
+func AVLayerVideoGravityResizeAspect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLayerVideoGravityResizeAspect")))
 }
 
-// Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects.
-// AVContentKeyRequestProtocolVersionsKey returns the string constant AVContentKeyRequestProtocolVersionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestProtocolVersionsKey() objc.ID {
-	return purego.CFConstant(raw.AVContentKeyRequestProtocolVersionsKey())
+// AVLayerVideoGravityResizeAspectFill returns the string constant AVLayerVideoGravityResizeAspectFill, for use as a dictionary key or argument.
+func AVLayerVideoGravityResizeAspectFill() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLayerVideoGravityResizeAspectFill")))
 }
 
-// Value is an Boolean indicating whether the user's deviceID contained in the SPC blob during FairPlay key exchange should be randomized using a system generated seed Content providers use the SPC to distinguish the playback device from other devices, typically to enforce per-screen business rule limits. If the app developer, in cooperation with the content vendor, does not require to distinguish the playback device, they can further enhance user privacy by making this identifier non-constant, using this option. In either case, apps are not allowed to store or use the FairPlay anonymized device ID for anything other than to enforce business rule limits. App developers must use the AppTrackingTransparency framework to disclose to users if the application or the related FairPlay Key Server collect data about end users and share it with other companies for purposes of tracking across apps and web sites. When true, the system generates a random seed with which the device id will be randomized. To override the seed used; use this property in conjunction with AVContentKeyRequestRandomDeviceIdentifierSeedKey to provide a seed generated by your application.
-// AVContentKeyRequestShouldRandomizeDeviceIdentifierKey returns the string constant AVContentKeyRequestShouldRandomizeDeviceIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestShouldRandomizeDeviceIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.AVContentKeyRequestShouldRandomizeDeviceIdentifierKey())
+// AVLayerVideoGravityResize returns the string constant AVLayerVideoGravityResize, for use as a dictionary key or argument.
+func AVLayerVideoGravityResize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVLayerVideoGravityResize")))
 }
 
-// Value is an NSData containing a 16-byte seed to randomize the user's deviceID contained in the SPC blob during FairPlay key exchange This property must be used in conjunction with AVContentKeyRequestShouldRandomizeDeviceIdentifierKey. Use a RND function to generate a 16 byte seed. This seed will be used to randomize the user's anonymized device ID if AVContentKeyRequestShouldRandomizeDeviceIdentifierKey is true. Content providers use the SPC to distinguish the playback device from other devices, typically to enforce per-screen business rule limits. If the app developer, in cooperation with the content vendor, does not require to distinguish the playback device, they can further enhance user privacy by making this identifier non-constant, using this option. In either case, apps are not allowed to store or use the FairPlay anonymized device ID for anything other than to enforce business rule limits. App developers must use the AppTrackingTransparency framework to disclose to users if the application or the related FairPlay Key Server collect data about end users and share it with other companies for purposes of tracking across apps and web sites.
-// AVContentKeyRequestRandomDeviceIdentifierSeedKey returns the string constant AVContentKeyRequestRandomDeviceIdentifierSeedKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVContentKeyRequestRandomDeviceIdentifierSeedKey() objc.ID {
-	return purego.CFConstant(raw.AVContentKeyRequestRandomDeviceIdentifierSeedKey())
+// AVContentKeySystemFairPlayStreaming returns the string constant AVContentKeySystemFairPlayStreaming, for use as a dictionary key or argument.
+func AVContentKeySystemFairPlayStreaming() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySystemFairPlayStreaming")))
 }
 
-// AVMediaTypeVideo returns the string constant AVMediaTypeVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeVideo() objc.ID {
-	if _r := raw.AVMediaTypeVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVContentKeySystemClearKey returns the string constant AVContentKeySystemClearKey, for use as a dictionary key or argument.
+func AVContentKeySystemClearKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySystemClearKey")))
 }
 
-// AVMediaTypeAudio returns the string constant AVMediaTypeAudio as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeAudio() objc.ID {
-	if _r := raw.AVMediaTypeAudio(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// AVContentKeySystemAuthorizationToken returns the string constant AVContentKeySystemAuthorizationToken, for use as a dictionary key or argument.
+func AVContentKeySystemAuthorizationToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySystemAuthorizationToken")))
+}
+
+// AVContentKeySessionServerPlaybackContextOptionProtocolVersions returns the string constant AVContentKeySessionServerPlaybackContextOptionProtocolVersions, for use as a dictionary key or argument.
+func AVContentKeySessionServerPlaybackContextOptionProtocolVersions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySessionServerPlaybackContextOptionProtocolVersions")))
+}
+
+// AVContentKeySessionServerPlaybackContextOptionServerChallenge returns the string constant AVContentKeySessionServerPlaybackContextOptionServerChallenge, for use as a dictionary key or argument.
+func AVContentKeySessionServerPlaybackContextOptionServerChallenge() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeySessionServerPlaybackContextOptionServerChallenge")))
+}
+
+// AVContentKeyRequestRetryReasonTimedOut returns the string constant AVContentKeyRequestRetryReasonTimedOut, for use as a dictionary key or argument.
+func AVContentKeyRequestRetryReasonTimedOut() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRetryReasonTimedOut")))
+}
+
+// AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease returns the string constant AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease, for use as a dictionary key or argument.
+func AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease")))
+}
+
+// AVContentKeyRequestRetryReasonReceivedObsoleteContentKey returns the string constant AVContentKeyRequestRetryReasonReceivedObsoleteContentKey, for use as a dictionary key or argument.
+func AVContentKeyRequestRetryReasonReceivedObsoleteContentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRetryReasonReceivedObsoleteContentKey")))
+}
+
+// AVContentKeyRequestRequiresValidationDataInSecureTokenKey returns the string constant AVContentKeyRequestRequiresValidationDataInSecureTokenKey, for use as a dictionary key or argument.
+func AVContentKeyRequestRequiresValidationDataInSecureTokenKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRequiresValidationDataInSecureTokenKey")))
+}
+
+// AVContentKeyRequestProtocolVersionsKey returns the string constant AVContentKeyRequestProtocolVersionsKey, for use as a dictionary key or argument.
+func AVContentKeyRequestProtocolVersionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestProtocolVersionsKey")))
+}
+
+// AVContentKeyRequestShouldRandomizeDeviceIdentifierKey returns the string constant AVContentKeyRequestShouldRandomizeDeviceIdentifierKey, for use as a dictionary key or argument.
+func AVContentKeyRequestShouldRandomizeDeviceIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestShouldRandomizeDeviceIdentifierKey")))
+}
+
+// AVContentKeyRequestRandomDeviceIdentifierSeedKey returns the string constant AVContentKeyRequestRandomDeviceIdentifierSeedKey, for use as a dictionary key or argument.
+func AVContentKeyRequestRandomDeviceIdentifierSeedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVContentKeyRequestRandomDeviceIdentifierSeedKey")))
+}
+
+// AVMediaTypeVideo returns the string constant AVMediaTypeVideo, for use as a dictionary key or argument.
+func AVMediaTypeVideo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeVideo"))) }
+
+// AVMediaTypeAudio returns the string constant AVMediaTypeAudio, for use as a dictionary key or argument.
+func AVMediaTypeAudio() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeAudio"))) }
+
+// AVMediaTypeText returns the string constant AVMediaTypeText, for use as a dictionary key or argument.
+func AVMediaTypeText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeText"))) }
+
+// AVMediaTypeClosedCaption returns the string constant AVMediaTypeClosedCaption, for use as a dictionary key or argument.
+func AVMediaTypeClosedCaption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeClosedCaption")))
+}
+
+// AVMediaTypeSubtitle returns the string constant AVMediaTypeSubtitle, for use as a dictionary key or argument.
+func AVMediaTypeSubtitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeSubtitle")))
+}
+
+// AVMediaTypeTimecode returns the string constant AVMediaTypeTimecode, for use as a dictionary key or argument.
+func AVMediaTypeTimecode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeTimecode")))
+}
+
+// AVMediaTypeMetadata returns the string constant AVMediaTypeMetadata, for use as a dictionary key or argument.
+func AVMediaTypeMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeMetadata")))
+}
+
+// AVMediaTypeMuxed returns the string constant AVMediaTypeMuxed, for use as a dictionary key or argument.
+func AVMediaTypeMuxed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeMuxed"))) }
+
+// AVMediaTypeHaptic returns the string constant AVMediaTypeHaptic, for use as a dictionary key or argument.
+func AVMediaTypeHaptic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeHaptic"))) }
+
+// AVVideoRangeSDR returns the string constant AVVideoRangeSDR, for use as a dictionary key or argument.
+func AVVideoRangeSDR() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoRangeSDR"))) }
+
+// AVVideoRangeHLG returns the string constant AVVideoRangeHLG, for use as a dictionary key or argument.
+func AVVideoRangeHLG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoRangeHLG"))) }
+
+// AVVideoRangePQ returns the string constant AVVideoRangePQ, for use as a dictionary key or argument.
+func AVVideoRangePQ() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoRangePQ"))) }
+
+// AVMediaTypeDepthData returns the string constant AVMediaTypeDepthData, for use as a dictionary key or argument.
+func AVMediaTypeDepthData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeDepthData")))
+}
+
+// AVMediaTypeAuxiliaryPicture returns the string constant AVMediaTypeAuxiliaryPicture, for use as a dictionary key or argument.
+func AVMediaTypeAuxiliaryPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaTypeAuxiliaryPicture")))
+}
+
+// AVMediaCharacteristicVisual returns the string constant AVMediaCharacteristicVisual, for use as a dictionary key or argument.
+func AVMediaCharacteristicVisual() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicVisual")))
+}
+
+// AVMediaCharacteristicAudible returns the string constant AVMediaCharacteristicAudible, for use as a dictionary key or argument.
+func AVMediaCharacteristicAudible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicAudible")))
+}
+
+// AVMediaCharacteristicLegible returns the string constant AVMediaCharacteristicLegible, for use as a dictionary key or argument.
+func AVMediaCharacteristicLegible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicLegible")))
+}
+
+// AVMediaCharacteristicFrameBased returns the string constant AVMediaCharacteristicFrameBased, for use as a dictionary key or argument.
+func AVMediaCharacteristicFrameBased() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicFrameBased")))
+}
+
+// AVMediaCharacteristicUsesWideGamutColorSpace returns the string constant AVMediaCharacteristicUsesWideGamutColorSpace, for use as a dictionary key or argument.
+func AVMediaCharacteristicUsesWideGamutColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicUsesWideGamutColorSpace")))
+}
+
+// AVMediaCharacteristicContainsHDRVideo returns the string constant AVMediaCharacteristicContainsHDRVideo, for use as a dictionary key or argument.
+func AVMediaCharacteristicContainsHDRVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsHDRVideo")))
+}
+
+// AVMediaCharacteristicContainsAlphaChannel returns the string constant AVMediaCharacteristicContainsAlphaChannel, for use as a dictionary key or argument.
+func AVMediaCharacteristicContainsAlphaChannel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsAlphaChannel")))
+}
+
+// AVMediaCharacteristicIsMainProgramContent returns the string constant AVMediaCharacteristicIsMainProgramContent, for use as a dictionary key or argument.
+func AVMediaCharacteristicIsMainProgramContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIsMainProgramContent")))
+}
+
+// AVMediaCharacteristicIsAuxiliaryContent returns the string constant AVMediaCharacteristicIsAuxiliaryContent, for use as a dictionary key or argument.
+func AVMediaCharacteristicIsAuxiliaryContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIsAuxiliaryContent")))
+}
+
+// AVMediaCharacteristicIsOriginalContent returns the string constant AVMediaCharacteristicIsOriginalContent, for use as a dictionary key or argument.
+func AVMediaCharacteristicIsOriginalContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIsOriginalContent")))
+}
+
+// AVMediaCharacteristicContainsOnlyForcedSubtitles returns the string constant AVMediaCharacteristicContainsOnlyForcedSubtitles, for use as a dictionary key or argument.
+func AVMediaCharacteristicContainsOnlyForcedSubtitles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsOnlyForcedSubtitles")))
+}
+
+// AVMediaCharacteristicTranscribesSpokenDialogForAccessibility returns the string constant AVMediaCharacteristicTranscribesSpokenDialogForAccessibility, for use as a dictionary key or argument.
+func AVMediaCharacteristicTranscribesSpokenDialogForAccessibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicTranscribesSpokenDialogForAccessibility")))
+}
+
+// AVMediaCharacteristicDescribesMusicAndSoundForAccessibility returns the string constant AVMediaCharacteristicDescribesMusicAndSoundForAccessibility, for use as a dictionary key or argument.
+func AVMediaCharacteristicDescribesMusicAndSoundForAccessibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicDescribesMusicAndSoundForAccessibility")))
+}
+
+// AVMediaCharacteristicEnhancesSpeechIntelligibility returns the string constant AVMediaCharacteristicEnhancesSpeechIntelligibility, for use as a dictionary key or argument.
+func AVMediaCharacteristicEnhancesSpeechIntelligibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicEnhancesSpeechIntelligibility")))
+}
+
+// AVMediaCharacteristicEasyToRead returns the string constant AVMediaCharacteristicEasyToRead, for use as a dictionary key or argument.
+func AVMediaCharacteristicEasyToRead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicEasyToRead")))
+}
+
+// AVMediaCharacteristicDescribesVideoForAccessibility returns the string constant AVMediaCharacteristicDescribesVideoForAccessibility, for use as a dictionary key or argument.
+func AVMediaCharacteristicDescribesVideoForAccessibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicDescribesVideoForAccessibility")))
+}
+
+// AVMediaCharacteristicLanguageTranslation returns the string constant AVMediaCharacteristicLanguageTranslation, for use as a dictionary key or argument.
+func AVMediaCharacteristicLanguageTranslation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicLanguageTranslation")))
+}
+
+// AVMediaCharacteristicDubbedTranslation returns the string constant AVMediaCharacteristicDubbedTranslation, for use as a dictionary key or argument.
+func AVMediaCharacteristicDubbedTranslation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicDubbedTranslation")))
+}
+
+// AVMediaCharacteristicVoiceOverTranslation returns the string constant AVMediaCharacteristicVoiceOverTranslation, for use as a dictionary key or argument.
+func AVMediaCharacteristicVoiceOverTranslation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicVoiceOverTranslation")))
+}
+
+// AVMediaCharacteristicTactileMinimal returns the string constant AVMediaCharacteristicTactileMinimal, for use as a dictionary key or argument.
+func AVMediaCharacteristicTactileMinimal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicTactileMinimal")))
+}
+
+// AVMediaCharacteristicContainsStereoMultiviewVideo returns the string constant AVMediaCharacteristicContainsStereoMultiviewVideo, for use as a dictionary key or argument.
+func AVMediaCharacteristicContainsStereoMultiviewVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicContainsStereoMultiviewVideo")))
+}
+
+// AVMediaCharacteristicCarriesVideoStereoMetadata returns the string constant AVMediaCharacteristicCarriesVideoStereoMetadata, for use as a dictionary key or argument.
+func AVMediaCharacteristicCarriesVideoStereoMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicCarriesVideoStereoMetadata")))
+}
+
+// AVMediaCharacteristicIndicatesHorizontalFieldOfView returns the string constant AVMediaCharacteristicIndicatesHorizontalFieldOfView, for use as a dictionary key or argument.
+func AVMediaCharacteristicIndicatesHorizontalFieldOfView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIndicatesHorizontalFieldOfView")))
+}
+
+// AVMediaCharacteristicIndicatesNonRectilinearProjection returns the string constant AVMediaCharacteristicIndicatesNonRectilinearProjection, for use as a dictionary key or argument.
+func AVMediaCharacteristicIndicatesNonRectilinearProjection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicIndicatesNonRectilinearProjection")))
+}
+
+// AVMediaCharacteristicMachineGenerated returns the string constant AVMediaCharacteristicMachineGenerated, for use as a dictionary key or argument.
+func AVMediaCharacteristicMachineGenerated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMediaCharacteristicMachineGenerated")))
+}
+
+// AVFileTypeQuickTimeMovie returns the string constant AVFileTypeQuickTimeMovie, for use as a dictionary key or argument.
+func AVFileTypeQuickTimeMovie() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeQuickTimeMovie")))
+}
+
+// AVFileTypeQuickTimeAudio returns the string constant AVFileTypeQuickTimeAudio, for use as a dictionary key or argument.
+func AVFileTypeQuickTimeAudio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeQuickTimeAudio")))
+}
+
+// AVFileTypeMPEG4 returns the string constant AVFileTypeMPEG4, for use as a dictionary key or argument.
+func AVFileTypeMPEG4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeMPEG4"))) }
+
+// AVFileTypeAppleM4V returns the string constant AVFileTypeAppleM4V, for use as a dictionary key or argument.
+func AVFileTypeAppleM4V() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAppleM4V")))
+}
+
+// AVFileTypeAppleM4A returns the string constant AVFileTypeAppleM4A, for use as a dictionary key or argument.
+func AVFileTypeAppleM4A() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAppleM4A")))
+}
+
+// AVFileType3GPP returns the string constant AVFileType3GPP, for use as a dictionary key or argument.
+func AVFileType3GPP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileType3GPP"))) }
+
+// AVFileType3GPP2 returns the string constant AVFileType3GPP2, for use as a dictionary key or argument.
+func AVFileType3GPP2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileType3GPP2"))) }
+
+// AVFileTypeCoreAudioFormat returns the string constant AVFileTypeCoreAudioFormat, for use as a dictionary key or argument.
+func AVFileTypeCoreAudioFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeCoreAudioFormat")))
+}
+
+// AVFileTypeWAVE returns the string constant AVFileTypeWAVE, for use as a dictionary key or argument.
+func AVFileTypeWAVE() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeWAVE"))) }
+
+// AVFileTypeAIFF returns the string constant AVFileTypeAIFF, for use as a dictionary key or argument.
+func AVFileTypeAIFF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAIFF"))) }
+
+// AVFileTypeAIFC returns the string constant AVFileTypeAIFC, for use as a dictionary key or argument.
+func AVFileTypeAIFC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAIFC"))) }
+
+// AVFileTypeAMR returns the string constant AVFileTypeAMR, for use as a dictionary key or argument.
+func AVFileTypeAMR() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAMR"))) }
+
+// AVFileTypeMPEGLayer3 returns the string constant AVFileTypeMPEGLayer3, for use as a dictionary key or argument.
+func AVFileTypeMPEGLayer3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeMPEGLayer3")))
+}
+
+// AVFileTypeSunAU returns the string constant AVFileTypeSunAU, for use as a dictionary key or argument.
+func AVFileTypeSunAU() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeSunAU"))) }
+
+// AVFileTypeAC3 returns the string constant AVFileTypeAC3, for use as a dictionary key or argument.
+func AVFileTypeAC3() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAC3"))) }
+
+// AVFileTypeEnhancedAC3 returns the string constant AVFileTypeEnhancedAC3, for use as a dictionary key or argument.
+func AVFileTypeEnhancedAC3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeEnhancedAC3")))
+}
+
+// AVFileTypeJPEG returns the string constant AVFileTypeJPEG, for use as a dictionary key or argument.
+func AVFileTypeJPEG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeJPEG"))) }
+
+// AVFileTypeDNG returns the string constant AVFileTypeDNG, for use as a dictionary key or argument.
+func AVFileTypeDNG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeDNG"))) }
+
+// AVFileTypeHEIC returns the string constant AVFileTypeHEIC, for use as a dictionary key or argument.
+func AVFileTypeHEIC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeHEIC"))) }
+
+// AVFileTypeAVCI returns the string constant AVFileTypeAVCI, for use as a dictionary key or argument.
+func AVFileTypeAVCI() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAVCI"))) }
+
+// AVFileTypeHEIF returns the string constant AVFileTypeHEIF, for use as a dictionary key or argument.
+func AVFileTypeHEIF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeHEIF"))) }
+
+// AVFileTypeTIFF returns the string constant AVFileTypeTIFF, for use as a dictionary key or argument.
+func AVFileTypeTIFF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeTIFF"))) }
+
+// AVFileTypeAppleiTT returns the string constant AVFileTypeAppleiTT, for use as a dictionary key or argument.
+func AVFileTypeAppleiTT() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAppleiTT")))
+}
+
+// AVFileTypeSCC returns the string constant AVFileTypeSCC, for use as a dictionary key or argument.
+func AVFileTypeSCC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeSCC"))) }
+
+// AVFileTypeAHAP returns the string constant AVFileTypeAHAP, for use as a dictionary key or argument.
+func AVFileTypeAHAP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeAHAP"))) }
+
+// AVFileTypeDICOM returns the string constant AVFileTypeDICOM, for use as a dictionary key or argument.
+func AVFileTypeDICOM() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeDICOM"))) }
+
+// AVStreamingKeyDeliveryContentKeyType returns the string constant AVStreamingKeyDeliveryContentKeyType, for use as a dictionary key or argument.
+func AVStreamingKeyDeliveryContentKeyType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVStreamingKeyDeliveryContentKeyType")))
+}
+
+// AVStreamingKeyDeliveryPersistentContentKeyType returns the string constant AVStreamingKeyDeliveryPersistentContentKeyType, for use as a dictionary key or argument.
+func AVStreamingKeyDeliveryPersistentContentKeyType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVStreamingKeyDeliveryPersistentContentKeyType")))
+}
+
+// AVFileTypeProfileMPEG4AppleHLS returns the string constant AVFileTypeProfileMPEG4AppleHLS, for use as a dictionary key or argument.
+func AVFileTypeProfileMPEG4AppleHLS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeProfileMPEG4AppleHLS")))
+}
+
+// AVFileTypeProfileMPEG4CMAFCompliant returns the string constant AVFileTypeProfileMPEG4CMAFCompliant, for use as a dictionary key or argument.
+func AVFileTypeProfileMPEG4CMAFCompliant() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFileTypeProfileMPEG4CMAFCompliant")))
+}
+
+// AVMetadataKeySpaceCommon returns the string constant AVMetadataKeySpaceCommon, for use as a dictionary key or argument.
+func AVMetadataKeySpaceCommon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceCommon")))
+}
+
+// AVMetadataCommonKeyTitle returns the string constant AVMetadataCommonKeyTitle, for use as a dictionary key or argument.
+func AVMetadataCommonKeyTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyTitle")))
+}
+
+// AVMetadataCommonKeyCreator returns the string constant AVMetadataCommonKeyCreator, for use as a dictionary key or argument.
+func AVMetadataCommonKeyCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyCreator")))
+}
+
+// AVMetadataCommonKeySubject returns the string constant AVMetadataCommonKeySubject, for use as a dictionary key or argument.
+func AVMetadataCommonKeySubject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeySubject")))
+}
+
+// AVMetadataCommonKeyDescription returns the string constant AVMetadataCommonKeyDescription, for use as a dictionary key or argument.
+func AVMetadataCommonKeyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyDescription")))
+}
+
+// AVMetadataCommonKeyPublisher returns the string constant AVMetadataCommonKeyPublisher, for use as a dictionary key or argument.
+func AVMetadataCommonKeyPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyPublisher")))
+}
+
+// AVMetadataCommonKeyContributor returns the string constant AVMetadataCommonKeyContributor, for use as a dictionary key or argument.
+func AVMetadataCommonKeyContributor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyContributor")))
+}
+
+// AVMetadataCommonKeyCreationDate returns the string constant AVMetadataCommonKeyCreationDate, for use as a dictionary key or argument.
+func AVMetadataCommonKeyCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyCreationDate")))
+}
+
+// AVMetadataCommonKeyLastModifiedDate returns the string constant AVMetadataCommonKeyLastModifiedDate, for use as a dictionary key or argument.
+func AVMetadataCommonKeyLastModifiedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyLastModifiedDate")))
+}
+
+// AVMetadataCommonKeyType returns the string constant AVMetadataCommonKeyType, for use as a dictionary key or argument.
+func AVMetadataCommonKeyType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyType")))
+}
+
+// AVMetadataCommonKeyFormat returns the string constant AVMetadataCommonKeyFormat, for use as a dictionary key or argument.
+func AVMetadataCommonKeyFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyFormat")))
+}
+
+// AVMetadataCommonKeyIdentifier returns the string constant AVMetadataCommonKeyIdentifier, for use as a dictionary key or argument.
+func AVMetadataCommonKeyIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyIdentifier")))
+}
+
+// AVMetadataCommonKeySource returns the string constant AVMetadataCommonKeySource, for use as a dictionary key or argument.
+func AVMetadataCommonKeySource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeySource")))
+}
+
+// AVMetadataCommonKeyLanguage returns the string constant AVMetadataCommonKeyLanguage, for use as a dictionary key or argument.
+func AVMetadataCommonKeyLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyLanguage")))
+}
+
+// AVMetadataCommonKeyRelation returns the string constant AVMetadataCommonKeyRelation, for use as a dictionary key or argument.
+func AVMetadataCommonKeyRelation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyRelation")))
+}
+
+// AVMetadataCommonKeyLocation returns the string constant AVMetadataCommonKeyLocation, for use as a dictionary key or argument.
+func AVMetadataCommonKeyLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyLocation")))
+}
+
+// AVMetadataCommonKeyCopyrights returns the string constant AVMetadataCommonKeyCopyrights, for use as a dictionary key or argument.
+func AVMetadataCommonKeyCopyrights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyCopyrights")))
+}
+
+// AVMetadataCommonKeyAlbumName returns the string constant AVMetadataCommonKeyAlbumName, for use as a dictionary key or argument.
+func AVMetadataCommonKeyAlbumName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyAlbumName")))
+}
+
+// AVMetadataCommonKeyAuthor returns the string constant AVMetadataCommonKeyAuthor, for use as a dictionary key or argument.
+func AVMetadataCommonKeyAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyAuthor")))
+}
+
+// AVMetadataCommonKeyArtist returns the string constant AVMetadataCommonKeyArtist, for use as a dictionary key or argument.
+func AVMetadataCommonKeyArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyArtist")))
+}
+
+// AVMetadataCommonKeyArtwork returns the string constant AVMetadataCommonKeyArtwork, for use as a dictionary key or argument.
+func AVMetadataCommonKeyArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyArtwork")))
+}
+
+// AVMetadataCommonKeyMake returns the string constant AVMetadataCommonKeyMake, for use as a dictionary key or argument.
+func AVMetadataCommonKeyMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyMake")))
+}
+
+// AVMetadataCommonKeyModel returns the string constant AVMetadataCommonKeyModel, for use as a dictionary key or argument.
+func AVMetadataCommonKeyModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyModel")))
+}
+
+// AVMetadataCommonKeySoftware returns the string constant AVMetadataCommonKeySoftware, for use as a dictionary key or argument.
+func AVMetadataCommonKeySoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeySoftware")))
+}
+
+// AVMetadataCommonKeyAccessibilityDescription returns the string constant AVMetadataCommonKeyAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataCommonKeyAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonKeyAccessibilityDescription")))
+}
+
+// AVMetadataFormatQuickTimeUserData returns the string constant AVMetadataFormatQuickTimeUserData, for use as a dictionary key or argument.
+func AVMetadataFormatQuickTimeUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatQuickTimeUserData")))
+}
+
+// AVMetadataKeySpaceQuickTimeUserData returns the string constant AVMetadataKeySpaceQuickTimeUserData, for use as a dictionary key or argument.
+func AVMetadataKeySpaceQuickTimeUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceQuickTimeUserData")))
+}
+
+// AVMetadataQuickTimeUserDataKeyAlbum returns the string constant AVMetadataQuickTimeUserDataKeyAlbum, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyAlbum")))
+}
+
+// AVMetadataQuickTimeUserDataKeyArranger returns the string constant AVMetadataQuickTimeUserDataKeyArranger, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyArranger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyArranger")))
+}
+
+// AVMetadataQuickTimeUserDataKeyArtist returns the string constant AVMetadataQuickTimeUserDataKeyArtist, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyArtist")))
+}
+
+// AVMetadataQuickTimeUserDataKeyAuthor returns the string constant AVMetadataQuickTimeUserDataKeyAuthor, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyAuthor")))
+}
+
+// AVMetadataQuickTimeUserDataKeyChapter returns the string constant AVMetadataQuickTimeUserDataKeyChapter, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyChapter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyChapter")))
+}
+
+// AVMetadataQuickTimeUserDataKeyComment returns the string constant AVMetadataQuickTimeUserDataKeyComment, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyComment")))
+}
+
+// AVMetadataQuickTimeUserDataKeyComposer returns the string constant AVMetadataQuickTimeUserDataKeyComposer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyComposer")))
+}
+
+// AVMetadataQuickTimeUserDataKeyCopyright returns the string constant AVMetadataQuickTimeUserDataKeyCopyright, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyCopyright")))
+}
+
+// AVMetadataQuickTimeUserDataKeyCreationDate returns the string constant AVMetadataQuickTimeUserDataKeyCreationDate, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyCreationDate")))
+}
+
+// AVMetadataQuickTimeUserDataKeyDescription returns the string constant AVMetadataQuickTimeUserDataKeyDescription, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyDescription")))
+}
+
+// AVMetadataQuickTimeUserDataKeyDirector returns the string constant AVMetadataQuickTimeUserDataKeyDirector, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyDirector")))
+}
+
+// AVMetadataQuickTimeUserDataKeyDisclaimer returns the string constant AVMetadataQuickTimeUserDataKeyDisclaimer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyDisclaimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyDisclaimer")))
+}
+
+// AVMetadataQuickTimeUserDataKeyEncodedBy returns the string constant AVMetadataQuickTimeUserDataKeyEncodedBy, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyEncodedBy")))
+}
+
+// AVMetadataQuickTimeUserDataKeyFullName returns the string constant AVMetadataQuickTimeUserDataKeyFullName, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyFullName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyFullName")))
+}
+
+// AVMetadataQuickTimeUserDataKeyGenre returns the string constant AVMetadataQuickTimeUserDataKeyGenre, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyGenre")))
+}
+
+// AVMetadataQuickTimeUserDataKeyHostComputer returns the string constant AVMetadataQuickTimeUserDataKeyHostComputer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyHostComputer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyHostComputer")))
+}
+
+// AVMetadataQuickTimeUserDataKeyInformation returns the string constant AVMetadataQuickTimeUserDataKeyInformation, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyInformation")))
+}
+
+// AVMetadataQuickTimeUserDataKeyKeywords returns the string constant AVMetadataQuickTimeUserDataKeyKeywords, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyKeywords")))
+}
+
+// AVMetadataQuickTimeUserDataKeyMake returns the string constant AVMetadataQuickTimeUserDataKeyMake, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyMake")))
+}
+
+// AVMetadataQuickTimeUserDataKeyModel returns the string constant AVMetadataQuickTimeUserDataKeyModel, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyModel")))
+}
+
+// AVMetadataQuickTimeUserDataKeyOriginalArtist returns the string constant AVMetadataQuickTimeUserDataKeyOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyOriginalArtist")))
+}
+
+// AVMetadataQuickTimeUserDataKeyOriginalFormat returns the string constant AVMetadataQuickTimeUserDataKeyOriginalFormat, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyOriginalFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyOriginalFormat")))
+}
+
+// AVMetadataQuickTimeUserDataKeyOriginalSource returns the string constant AVMetadataQuickTimeUserDataKeyOriginalSource, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyOriginalSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyOriginalSource")))
+}
+
+// AVMetadataQuickTimeUserDataKeyPerformers returns the string constant AVMetadataQuickTimeUserDataKeyPerformers, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyPerformers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyPerformers")))
+}
+
+// AVMetadataQuickTimeUserDataKeyProducer returns the string constant AVMetadataQuickTimeUserDataKeyProducer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyProducer")))
+}
+
+// AVMetadataQuickTimeUserDataKeyPublisher returns the string constant AVMetadataQuickTimeUserDataKeyPublisher, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyPublisher")))
+}
+
+// AVMetadataQuickTimeUserDataKeyProduct returns the string constant AVMetadataQuickTimeUserDataKeyProduct, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyProduct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyProduct")))
+}
+
+// AVMetadataQuickTimeUserDataKeySoftware returns the string constant AVMetadataQuickTimeUserDataKeySoftware, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeySoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeySoftware")))
+}
+
+// AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements returns the string constant AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements")))
+}
+
+// AVMetadataQuickTimeUserDataKeyTrack returns the string constant AVMetadataQuickTimeUserDataKeyTrack, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyTrack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyTrack")))
+}
+
+// AVMetadataQuickTimeUserDataKeyWarning returns the string constant AVMetadataQuickTimeUserDataKeyWarning, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyWarning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyWarning")))
+}
+
+// AVMetadataQuickTimeUserDataKeyWriter returns the string constant AVMetadataQuickTimeUserDataKeyWriter, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyWriter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyWriter")))
+}
+
+// AVMetadataQuickTimeUserDataKeyURLLink returns the string constant AVMetadataQuickTimeUserDataKeyURLLink, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyURLLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyURLLink")))
+}
+
+// AVMetadataQuickTimeUserDataKeyLocationISO6709 returns the string constant AVMetadataQuickTimeUserDataKeyLocationISO6709, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyLocationISO6709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyLocationISO6709")))
+}
+
+// AVMetadataQuickTimeUserDataKeyTrackName returns the string constant AVMetadataQuickTimeUserDataKeyTrackName, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyTrackName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyTrackName")))
+}
+
+// AVMetadataQuickTimeUserDataKeyCredits returns the string constant AVMetadataQuickTimeUserDataKeyCredits, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyCredits")))
+}
+
+// AVMetadataQuickTimeUserDataKeyPhonogramRights returns the string constant AVMetadataQuickTimeUserDataKeyPhonogramRights, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyPhonogramRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyPhonogramRights")))
+}
+
+// AVMetadataQuickTimeUserDataKeyTaggedCharacteristic returns the string constant AVMetadataQuickTimeUserDataKeyTaggedCharacteristic, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyTaggedCharacteristic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyTaggedCharacteristic")))
+}
+
+// AVMetadataQuickTimeUserDataKeyAccessibilityDescription returns the string constant AVMetadataQuickTimeUserDataKeyAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataQuickTimeUserDataKeyAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeUserDataKeyAccessibilityDescription")))
+}
+
+// AVMetadataFormatISOUserData returns the string constant AVMetadataFormatISOUserData, for use as a dictionary key or argument.
+func AVMetadataFormatISOUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatISOUserData")))
+}
+
+// AVMetadataKeySpaceISOUserData returns the string constant AVMetadataKeySpaceISOUserData, for use as a dictionary key or argument.
+func AVMetadataKeySpaceISOUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceISOUserData")))
+}
+
+// AVMetadataISOUserDataKeyCopyright returns the string constant AVMetadataISOUserDataKeyCopyright, for use as a dictionary key or argument.
+func AVMetadataISOUserDataKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataISOUserDataKeyCopyright")))
+}
+
+// AVMetadataISOUserDataKeyTaggedCharacteristic returns the string constant AVMetadataISOUserDataKeyTaggedCharacteristic, for use as a dictionary key or argument.
+func AVMetadataISOUserDataKeyTaggedCharacteristic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataISOUserDataKeyTaggedCharacteristic")))
+}
+
+// AVMetadataISOUserDataKeyDate returns the string constant AVMetadataISOUserDataKeyDate, for use as a dictionary key or argument.
+func AVMetadataISOUserDataKeyDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataISOUserDataKeyDate")))
+}
+
+// AVMetadataISOUserDataKeyAccessibilityDescription returns the string constant AVMetadataISOUserDataKeyAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataISOUserDataKeyAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataISOUserDataKeyAccessibilityDescription")))
+}
+
+// AVMetadata3GPUserDataKeyCopyright returns the string constant AVMetadata3GPUserDataKeyCopyright, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyCopyright")))
+}
+
+// AVMetadata3GPUserDataKeyAuthor returns the string constant AVMetadata3GPUserDataKeyAuthor, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyAuthor")))
+}
+
+// AVMetadata3GPUserDataKeyPerformer returns the string constant AVMetadata3GPUserDataKeyPerformer, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyPerformer")))
+}
+
+// AVMetadata3GPUserDataKeyGenre returns the string constant AVMetadata3GPUserDataKeyGenre, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyGenre")))
+}
+
+// AVMetadata3GPUserDataKeyRecordingYear returns the string constant AVMetadata3GPUserDataKeyRecordingYear, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyRecordingYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyRecordingYear")))
+}
+
+// AVMetadata3GPUserDataKeyLocation returns the string constant AVMetadata3GPUserDataKeyLocation, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyLocation")))
+}
+
+// AVMetadata3GPUserDataKeyTitle returns the string constant AVMetadata3GPUserDataKeyTitle, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyTitle")))
+}
+
+// AVMetadata3GPUserDataKeyDescription returns the string constant AVMetadata3GPUserDataKeyDescription, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyDescription")))
+}
+
+// AVMetadata3GPUserDataKeyCollection returns the string constant AVMetadata3GPUserDataKeyCollection, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyCollection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyCollection")))
+}
+
+// AVMetadata3GPUserDataKeyUserRating returns the string constant AVMetadata3GPUserDataKeyUserRating, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyUserRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyUserRating")))
+}
+
+// AVMetadata3GPUserDataKeyThumbnail returns the string constant AVMetadata3GPUserDataKeyThumbnail, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyThumbnail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyThumbnail")))
+}
+
+// AVMetadata3GPUserDataKeyAlbumAndTrack returns the string constant AVMetadata3GPUserDataKeyAlbumAndTrack, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyAlbumAndTrack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyAlbumAndTrack")))
+}
+
+// AVMetadata3GPUserDataKeyKeywordList returns the string constant AVMetadata3GPUserDataKeyKeywordList, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyKeywordList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyKeywordList")))
+}
+
+// AVMetadata3GPUserDataKeyMediaClassification returns the string constant AVMetadata3GPUserDataKeyMediaClassification, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyMediaClassification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyMediaClassification")))
+}
+
+// AVMetadata3GPUserDataKeyMediaRating returns the string constant AVMetadata3GPUserDataKeyMediaRating, for use as a dictionary key or argument.
+func AVMetadata3GPUserDataKeyMediaRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadata3GPUserDataKeyMediaRating")))
+}
+
+// AVMetadataFormatQuickTimeMetadata returns the string constant AVMetadataFormatQuickTimeMetadata, for use as a dictionary key or argument.
+func AVMetadataFormatQuickTimeMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatQuickTimeMetadata")))
+}
+
+// AVMetadataKeySpaceQuickTimeMetadata returns the string constant AVMetadataKeySpaceQuickTimeMetadata, for use as a dictionary key or argument.
+func AVMetadataKeySpaceQuickTimeMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceQuickTimeMetadata")))
+}
+
+// AVMetadataQuickTimeMetadataKeyAuthor returns the string constant AVMetadataQuickTimeMetadataKeyAuthor, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyAuthor")))
+}
+
+// AVMetadataQuickTimeMetadataKeyComment returns the string constant AVMetadataQuickTimeMetadataKeyComment, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyComment")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCopyright returns the string constant AVMetadataQuickTimeMetadataKeyCopyright, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCopyright")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCreationDate returns the string constant AVMetadataQuickTimeMetadataKeyCreationDate, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCreationDate")))
+}
+
+// AVMetadataQuickTimeMetadataKeyDirector returns the string constant AVMetadataQuickTimeMetadataKeyDirector, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyDirector")))
+}
+
+// AVMetadataQuickTimeMetadataKeyDisplayName returns the string constant AVMetadataQuickTimeMetadataKeyDisplayName, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyDisplayName")))
+}
+
+// AVMetadataQuickTimeMetadataKeyInformation returns the string constant AVMetadataQuickTimeMetadataKeyInformation, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyInformation")))
+}
+
+// AVMetadataQuickTimeMetadataKeyKeywords returns the string constant AVMetadataQuickTimeMetadataKeyKeywords, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyKeywords")))
+}
+
+// AVMetadataQuickTimeMetadataKeyProducer returns the string constant AVMetadataQuickTimeMetadataKeyProducer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyProducer")))
+}
+
+// AVMetadataQuickTimeMetadataKeyPublisher returns the string constant AVMetadataQuickTimeMetadataKeyPublisher, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyPublisher")))
+}
+
+// AVMetadataQuickTimeMetadataKeyAlbum returns the string constant AVMetadataQuickTimeMetadataKeyAlbum, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyAlbum")))
+}
+
+// AVMetadataQuickTimeMetadataKeyArtist returns the string constant AVMetadataQuickTimeMetadataKeyArtist, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyArtist")))
+}
+
+// AVMetadataQuickTimeMetadataKeyArtwork returns the string constant AVMetadataQuickTimeMetadataKeyArtwork, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyArtwork")))
+}
+
+// AVMetadataQuickTimeMetadataKeyDescription returns the string constant AVMetadataQuickTimeMetadataKeyDescription, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyDescription")))
+}
+
+// AVMetadataQuickTimeMetadataKeySoftware returns the string constant AVMetadataQuickTimeMetadataKeySoftware, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeySoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeySoftware")))
+}
+
+// AVMetadataQuickTimeMetadataKeyYear returns the string constant AVMetadataQuickTimeMetadataKeyYear, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyYear")))
+}
+
+// AVMetadataQuickTimeMetadataKeyGenre returns the string constant AVMetadataQuickTimeMetadataKeyGenre, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyGenre")))
+}
+
+// AVMetadataQuickTimeMetadataKeyiXML returns the string constant AVMetadataQuickTimeMetadataKeyiXML, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyiXML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyiXML")))
+}
+
+// AVMetadataQuickTimeMetadataKeyLocationISO6709 returns the string constant AVMetadataQuickTimeMetadataKeyLocationISO6709, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyLocationISO6709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyLocationISO6709")))
+}
+
+// AVMetadataQuickTimeMetadataKeyMake returns the string constant AVMetadataQuickTimeMetadataKeyMake, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyMake")))
+}
+
+// AVMetadataQuickTimeMetadataKeyModel returns the string constant AVMetadataQuickTimeMetadataKeyModel, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyModel")))
+}
+
+// AVMetadataQuickTimeMetadataKeyArranger returns the string constant AVMetadataQuickTimeMetadataKeyArranger, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyArranger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyArranger")))
+}
+
+// AVMetadataQuickTimeMetadataKeyEncodedBy returns the string constant AVMetadataQuickTimeMetadataKeyEncodedBy, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyEncodedBy")))
+}
+
+// AVMetadataQuickTimeMetadataKeyOriginalArtist returns the string constant AVMetadataQuickTimeMetadataKeyOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyOriginalArtist")))
+}
+
+// AVMetadataQuickTimeMetadataKeyPerformer returns the string constant AVMetadataQuickTimeMetadataKeyPerformer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyPerformer")))
+}
+
+// AVMetadataQuickTimeMetadataKeyComposer returns the string constant AVMetadataQuickTimeMetadataKeyComposer, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyComposer")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCredits returns the string constant AVMetadataQuickTimeMetadataKeyCredits, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCredits")))
+}
+
+// AVMetadataQuickTimeMetadataKeyPhonogramRights returns the string constant AVMetadataQuickTimeMetadataKeyPhonogramRights, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyPhonogramRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyPhonogramRights")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraIdentifier returns the string constant AVMetadataQuickTimeMetadataKeyCameraIdentifier, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraIdentifier")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime returns the string constant AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime")))
+}
+
+// AVMetadataQuickTimeMetadataKeyTitle returns the string constant AVMetadataQuickTimeMetadataKeyTitle, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyTitle")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCollectionUser returns the string constant AVMetadataQuickTimeMetadataKeyCollectionUser, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCollectionUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCollectionUser")))
+}
+
+// AVMetadataQuickTimeMetadataKeyRatingUser returns the string constant AVMetadataQuickTimeMetadataKeyRatingUser, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyRatingUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyRatingUser")))
+}
+
+// AVMetadataQuickTimeMetadataKeyLocationName returns the string constant AVMetadataQuickTimeMetadataKeyLocationName, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyLocationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyLocationName")))
+}
+
+// AVMetadataQuickTimeMetadataKeyLocationBody returns the string constant AVMetadataQuickTimeMetadataKeyLocationBody, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyLocationBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyLocationBody")))
+}
+
+// AVMetadataQuickTimeMetadataKeyLocationNote returns the string constant AVMetadataQuickTimeMetadataKeyLocationNote, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyLocationNote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyLocationNote")))
+}
+
+// AVMetadataQuickTimeMetadataKeyLocationRole returns the string constant AVMetadataQuickTimeMetadataKeyLocationRole, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyLocationRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyLocationRole")))
+}
+
+// AVMetadataQuickTimeMetadataKeyLocationDate returns the string constant AVMetadataQuickTimeMetadataKeyLocationDate, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyLocationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyLocationDate")))
+}
+
+// AVMetadataQuickTimeMetadataKeyDirectionFacing returns the string constant AVMetadataQuickTimeMetadataKeyDirectionFacing, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyDirectionFacing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyDirectionFacing")))
+}
+
+// AVMetadataQuickTimeMetadataKeyDirectionMotion returns the string constant AVMetadataQuickTimeMetadataKeyDirectionMotion, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyDirectionMotion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyDirectionMotion")))
+}
+
+// AVMetadataQuickTimeMetadataKeyContentIdentifier returns the string constant AVMetadataQuickTimeMetadataKeyContentIdentifier, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyContentIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyContentIdentifier")))
+}
+
+// AVMetadataQuickTimeMetadataKeyAccessibilityDescription returns the string constant AVMetadataQuickTimeMetadataKeyAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyAccessibilityDescription")))
+}
+
+// AVMetadataQuickTimeMetadataKeyIsMontage returns the string constant AVMetadataQuickTimeMetadataKeyIsMontage, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyIsMontage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyIsMontage")))
+}
+
+// AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent returns the string constant AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCinematicVideoIntent returns the string constant AVMetadataQuickTimeMetadataKeyCinematicVideoIntent, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCinematicVideoIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCinematicVideoIntent")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraISOSensitivity returns the string constant AVMetadataQuickTimeMetadataKeyCameraISOSensitivity, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraISOSensitivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraISOSensitivity")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraWhiteBalance returns the string constant AVMetadataQuickTimeMetadataKeyCameraWhiteBalance, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraWhiteBalance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraWhiteBalance")))
+}
+
+// AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors returns the string constant AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors")))
+}
+
+// AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices returns the string constant AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle returns the string constant AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime returns the string constant AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber returns the string constant AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraLensModel returns the string constant AVMetadataQuickTimeMetadataKeyCameraLensModel, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraLensModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraLensModel")))
+}
+
+// AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent returns the string constant AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent, for use as a dictionary key or argument.
+func AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent")))
+}
+
+// AVMetadataFormatiTunesMetadata returns the string constant AVMetadataFormatiTunesMetadata, for use as a dictionary key or argument.
+func AVMetadataFormatiTunesMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatiTunesMetadata")))
+}
+
+// AVMetadataKeySpaceiTunes returns the string constant AVMetadataKeySpaceiTunes, for use as a dictionary key or argument.
+func AVMetadataKeySpaceiTunes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceiTunes")))
+}
+
+// AVMetadataiTunesMetadataKeyAlbum returns the string constant AVMetadataiTunesMetadataKeyAlbum, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyAlbum")))
+}
+
+// AVMetadataiTunesMetadataKeyArtist returns the string constant AVMetadataiTunesMetadataKeyArtist, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyArtist")))
+}
+
+// AVMetadataiTunesMetadataKeyUserComment returns the string constant AVMetadataiTunesMetadataKeyUserComment, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyUserComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyUserComment")))
+}
+
+// AVMetadataiTunesMetadataKeyCoverArt returns the string constant AVMetadataiTunesMetadataKeyCoverArt, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyCoverArt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyCoverArt")))
+}
+
+// AVMetadataiTunesMetadataKeyCopyright returns the string constant AVMetadataiTunesMetadataKeyCopyright, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyCopyright")))
+}
+
+// AVMetadataiTunesMetadataKeyReleaseDate returns the string constant AVMetadataiTunesMetadataKeyReleaseDate, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyReleaseDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyReleaseDate")))
+}
+
+// AVMetadataiTunesMetadataKeyEncodedBy returns the string constant AVMetadataiTunesMetadataKeyEncodedBy, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyEncodedBy")))
+}
+
+// AVMetadataiTunesMetadataKeyPredefinedGenre returns the string constant AVMetadataiTunesMetadataKeyPredefinedGenre, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyPredefinedGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyPredefinedGenre")))
+}
+
+// AVMetadataiTunesMetadataKeyUserGenre returns the string constant AVMetadataiTunesMetadataKeyUserGenre, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyUserGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyUserGenre")))
+}
+
+// AVMetadataiTunesMetadataKeySongName returns the string constant AVMetadataiTunesMetadataKeySongName, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeySongName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeySongName")))
+}
+
+// AVMetadataiTunesMetadataKeyTrackSubTitle returns the string constant AVMetadataiTunesMetadataKeyTrackSubTitle, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyTrackSubTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyTrackSubTitle")))
+}
+
+// AVMetadataiTunesMetadataKeyEncodingTool returns the string constant AVMetadataiTunesMetadataKeyEncodingTool, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyEncodingTool() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyEncodingTool")))
+}
+
+// AVMetadataiTunesMetadataKeyComposer returns the string constant AVMetadataiTunesMetadataKeyComposer, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyComposer")))
+}
+
+// AVMetadataiTunesMetadataKeyAlbumArtist returns the string constant AVMetadataiTunesMetadataKeyAlbumArtist, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyAlbumArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyAlbumArtist")))
+}
+
+// AVMetadataiTunesMetadataKeyAccountKind returns the string constant AVMetadataiTunesMetadataKeyAccountKind, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyAccountKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyAccountKind")))
+}
+
+// AVMetadataiTunesMetadataKeyAppleID returns the string constant AVMetadataiTunesMetadataKeyAppleID, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyAppleID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyAppleID")))
+}
+
+// AVMetadataiTunesMetadataKeyArtistID returns the string constant AVMetadataiTunesMetadataKeyArtistID, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyArtistID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyArtistID")))
+}
+
+// AVMetadataiTunesMetadataKeySongID returns the string constant AVMetadataiTunesMetadataKeySongID, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeySongID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeySongID")))
+}
+
+// AVMetadataiTunesMetadataKeyDiscCompilation returns the string constant AVMetadataiTunesMetadataKeyDiscCompilation, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyDiscCompilation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyDiscCompilation")))
+}
+
+// AVMetadataiTunesMetadataKeyDiscNumber returns the string constant AVMetadataiTunesMetadataKeyDiscNumber, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyDiscNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyDiscNumber")))
+}
+
+// AVMetadataiTunesMetadataKeyGenreID returns the string constant AVMetadataiTunesMetadataKeyGenreID, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyGenreID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyGenreID")))
+}
+
+// AVMetadataiTunesMetadataKeyGrouping returns the string constant AVMetadataiTunesMetadataKeyGrouping, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyGrouping() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyGrouping")))
+}
+
+// AVMetadataiTunesMetadataKeyPlaylistID returns the string constant AVMetadataiTunesMetadataKeyPlaylistID, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyPlaylistID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyPlaylistID")))
+}
+
+// AVMetadataiTunesMetadataKeyContentRating returns the string constant AVMetadataiTunesMetadataKeyContentRating, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyContentRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyContentRating")))
+}
+
+// AVMetadataiTunesMetadataKeyBeatsPerMin returns the string constant AVMetadataiTunesMetadataKeyBeatsPerMin, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyBeatsPerMin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyBeatsPerMin")))
+}
+
+// AVMetadataiTunesMetadataKeyTrackNumber returns the string constant AVMetadataiTunesMetadataKeyTrackNumber, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyTrackNumber")))
+}
+
+// AVMetadataiTunesMetadataKeyArtDirector returns the string constant AVMetadataiTunesMetadataKeyArtDirector, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyArtDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyArtDirector")))
+}
+
+// AVMetadataiTunesMetadataKeyArranger returns the string constant AVMetadataiTunesMetadataKeyArranger, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyArranger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyArranger")))
+}
+
+// AVMetadataiTunesMetadataKeyAuthor returns the string constant AVMetadataiTunesMetadataKeyAuthor, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyAuthor")))
+}
+
+// AVMetadataiTunesMetadataKeyLyrics returns the string constant AVMetadataiTunesMetadataKeyLyrics, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyLyrics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyLyrics")))
+}
+
+// AVMetadataiTunesMetadataKeyAcknowledgement returns the string constant AVMetadataiTunesMetadataKeyAcknowledgement, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyAcknowledgement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyAcknowledgement")))
+}
+
+// AVMetadataiTunesMetadataKeyConductor returns the string constant AVMetadataiTunesMetadataKeyConductor, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyConductor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyConductor")))
+}
+
+// AVMetadataiTunesMetadataKeyDescription returns the string constant AVMetadataiTunesMetadataKeyDescription, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyDescription")))
+}
+
+// AVMetadataiTunesMetadataKeyDirector returns the string constant AVMetadataiTunesMetadataKeyDirector, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyDirector")))
+}
+
+// AVMetadataiTunesMetadataKeyEQ returns the string constant AVMetadataiTunesMetadataKeyEQ, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyEQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyEQ")))
+}
+
+// AVMetadataiTunesMetadataKeyLinerNotes returns the string constant AVMetadataiTunesMetadataKeyLinerNotes, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyLinerNotes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyLinerNotes")))
+}
+
+// AVMetadataiTunesMetadataKeyRecordCompany returns the string constant AVMetadataiTunesMetadataKeyRecordCompany, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyRecordCompany() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyRecordCompany")))
+}
+
+// AVMetadataiTunesMetadataKeyOriginalArtist returns the string constant AVMetadataiTunesMetadataKeyOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyOriginalArtist")))
+}
+
+// AVMetadataiTunesMetadataKeyPhonogramRights returns the string constant AVMetadataiTunesMetadataKeyPhonogramRights, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyPhonogramRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyPhonogramRights")))
+}
+
+// AVMetadataiTunesMetadataKeyProducer returns the string constant AVMetadataiTunesMetadataKeyProducer, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyProducer")))
+}
+
+// AVMetadataiTunesMetadataKeyPerformer returns the string constant AVMetadataiTunesMetadataKeyPerformer, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyPerformer")))
+}
+
+// AVMetadataiTunesMetadataKeyPublisher returns the string constant AVMetadataiTunesMetadataKeyPublisher, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyPublisher")))
+}
+
+// AVMetadataiTunesMetadataKeySoundEngineer returns the string constant AVMetadataiTunesMetadataKeySoundEngineer, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeySoundEngineer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeySoundEngineer")))
+}
+
+// AVMetadataiTunesMetadataKeySoloist returns the string constant AVMetadataiTunesMetadataKeySoloist, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeySoloist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeySoloist")))
+}
+
+// AVMetadataiTunesMetadataKeyCredits returns the string constant AVMetadataiTunesMetadataKeyCredits, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyCredits")))
+}
+
+// AVMetadataiTunesMetadataKeyThanks returns the string constant AVMetadataiTunesMetadataKeyThanks, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyThanks() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyThanks")))
+}
+
+// AVMetadataiTunesMetadataKeyOnlineExtras returns the string constant AVMetadataiTunesMetadataKeyOnlineExtras, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyOnlineExtras() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyOnlineExtras")))
+}
+
+// AVMetadataiTunesMetadataKeyExecProducer returns the string constant AVMetadataiTunesMetadataKeyExecProducer, for use as a dictionary key or argument.
+func AVMetadataiTunesMetadataKeyExecProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataiTunesMetadataKeyExecProducer")))
+}
+
+// AVMetadataFormatID3Metadata returns the string constant AVMetadataFormatID3Metadata, for use as a dictionary key or argument.
+func AVMetadataFormatID3Metadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatID3Metadata")))
+}
+
+// AVMetadataKeySpaceID3 returns the string constant AVMetadataKeySpaceID3, for use as a dictionary key or argument.
+func AVMetadataKeySpaceID3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceID3")))
+}
+
+// AVMetadataID3MetadataKeyAudioEncryption returns the string constant AVMetadataID3MetadataKeyAudioEncryption, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyAudioEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyAudioEncryption")))
+}
+
+// AVMetadataID3MetadataKeyAttachedPicture returns the string constant AVMetadataID3MetadataKeyAttachedPicture, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyAttachedPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyAttachedPicture")))
+}
+
+// AVMetadataID3MetadataKeyAudioSeekPointIndex returns the string constant AVMetadataID3MetadataKeyAudioSeekPointIndex, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyAudioSeekPointIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyAudioSeekPointIndex")))
+}
+
+// AVMetadataID3MetadataKeyComments returns the string constant AVMetadataID3MetadataKeyComments, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyComments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyComments")))
+}
+
+// AVMetadataID3MetadataKeyCommercial returns the string constant AVMetadataID3MetadataKeyCommercial, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyCommercial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyCommercial")))
+}
+
+// AVMetadataID3MetadataKeyCommerical returns the string constant AVMetadataID3MetadataKeyCommerical, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyCommerical() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyCommerical")))
+}
+
+// AVMetadataID3MetadataKeyEncryption returns the string constant AVMetadataID3MetadataKeyEncryption, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEncryption")))
+}
+
+// AVMetadataID3MetadataKeyEqualization returns the string constant AVMetadataID3MetadataKeyEqualization, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEqualization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEqualization")))
+}
+
+// AVMetadataID3MetadataKeyEqualization2 returns the string constant AVMetadataID3MetadataKeyEqualization2, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEqualization2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEqualization2")))
+}
+
+// AVMetadataID3MetadataKeyEventTimingCodes returns the string constant AVMetadataID3MetadataKeyEventTimingCodes, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEventTimingCodes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEventTimingCodes")))
+}
+
+// AVMetadataID3MetadataKeyGeneralEncapsulatedObject returns the string constant AVMetadataID3MetadataKeyGeneralEncapsulatedObject, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyGeneralEncapsulatedObject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyGeneralEncapsulatedObject")))
+}
+
+// AVMetadataID3MetadataKeyGroupIdentifier returns the string constant AVMetadataID3MetadataKeyGroupIdentifier, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyGroupIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyGroupIdentifier")))
+}
+
+// AVMetadataID3MetadataKeyInvolvedPeopleList_v23 returns the string constant AVMetadataID3MetadataKeyInvolvedPeopleList_v23, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyInvolvedPeopleList_v23() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyInvolvedPeopleList_v23")))
+}
+
+// AVMetadataID3MetadataKeyLink returns the string constant AVMetadataID3MetadataKeyLink, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyLink")))
+}
+
+// AVMetadataID3MetadataKeyMusicCDIdentifier returns the string constant AVMetadataID3MetadataKeyMusicCDIdentifier, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyMusicCDIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyMusicCDIdentifier")))
+}
+
+// AVMetadataID3MetadataKeyMPEGLocationLookupTable returns the string constant AVMetadataID3MetadataKeyMPEGLocationLookupTable, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyMPEGLocationLookupTable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyMPEGLocationLookupTable")))
+}
+
+// AVMetadataID3MetadataKeyOwnership returns the string constant AVMetadataID3MetadataKeyOwnership, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOwnership() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOwnership")))
+}
+
+// AVMetadataID3MetadataKeyPrivate returns the string constant AVMetadataID3MetadataKeyPrivate, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPrivate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPrivate")))
+}
+
+// AVMetadataID3MetadataKeyPlayCounter returns the string constant AVMetadataID3MetadataKeyPlayCounter, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPlayCounter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPlayCounter")))
+}
+
+// AVMetadataID3MetadataKeyPopularimeter returns the string constant AVMetadataID3MetadataKeyPopularimeter, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPopularimeter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPopularimeter")))
+}
+
+// AVMetadataID3MetadataKeyPositionSynchronization returns the string constant AVMetadataID3MetadataKeyPositionSynchronization, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPositionSynchronization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPositionSynchronization")))
+}
+
+// AVMetadataID3MetadataKeyRecommendedBufferSize returns the string constant AVMetadataID3MetadataKeyRecommendedBufferSize, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyRecommendedBufferSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyRecommendedBufferSize")))
+}
+
+// AVMetadataID3MetadataKeyRelativeVolumeAdjustment returns the string constant AVMetadataID3MetadataKeyRelativeVolumeAdjustment, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyRelativeVolumeAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyRelativeVolumeAdjustment")))
+}
+
+// AVMetadataID3MetadataKeyRelativeVolumeAdjustment2 returns the string constant AVMetadataID3MetadataKeyRelativeVolumeAdjustment2, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyRelativeVolumeAdjustment2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyRelativeVolumeAdjustment2")))
+}
+
+// AVMetadataID3MetadataKeyReverb returns the string constant AVMetadataID3MetadataKeyReverb, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyReverb() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyReverb")))
+}
+
+// AVMetadataID3MetadataKeySeek returns the string constant AVMetadataID3MetadataKeySeek, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySeek() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySeek")))
+}
+
+// AVMetadataID3MetadataKeySignature returns the string constant AVMetadataID3MetadataKeySignature, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySignature")))
+}
+
+// AVMetadataID3MetadataKeySynchronizedLyric returns the string constant AVMetadataID3MetadataKeySynchronizedLyric, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySynchronizedLyric() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySynchronizedLyric")))
+}
+
+// AVMetadataID3MetadataKeySynchronizedTempoCodes returns the string constant AVMetadataID3MetadataKeySynchronizedTempoCodes, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySynchronizedTempoCodes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySynchronizedTempoCodes")))
+}
+
+// AVMetadataID3MetadataKeyAlbumTitle returns the string constant AVMetadataID3MetadataKeyAlbumTitle, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyAlbumTitle")))
+}
+
+// AVMetadataID3MetadataKeyBeatsPerMinute returns the string constant AVMetadataID3MetadataKeyBeatsPerMinute, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyBeatsPerMinute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyBeatsPerMinute")))
+}
+
+// AVMetadataID3MetadataKeyComposer returns the string constant AVMetadataID3MetadataKeyComposer, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyComposer")))
+}
+
+// AVMetadataID3MetadataKeyContentType returns the string constant AVMetadataID3MetadataKeyContentType, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyContentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyContentType")))
+}
+
+// AVMetadataID3MetadataKeyCopyright returns the string constant AVMetadataID3MetadataKeyCopyright, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyCopyright")))
+}
+
+// AVMetadataID3MetadataKeyDate returns the string constant AVMetadataID3MetadataKeyDate, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyDate")))
+}
+
+// AVMetadataID3MetadataKeyEncodingTime returns the string constant AVMetadataID3MetadataKeyEncodingTime, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEncodingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEncodingTime")))
+}
+
+// AVMetadataID3MetadataKeyPlaylistDelay returns the string constant AVMetadataID3MetadataKeyPlaylistDelay, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPlaylistDelay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPlaylistDelay")))
+}
+
+// AVMetadataID3MetadataKeyOriginalReleaseTime returns the string constant AVMetadataID3MetadataKeyOriginalReleaseTime, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOriginalReleaseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOriginalReleaseTime")))
+}
+
+// AVMetadataID3MetadataKeyRecordingTime returns the string constant AVMetadataID3MetadataKeyRecordingTime, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyRecordingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyRecordingTime")))
+}
+
+// AVMetadataID3MetadataKeyReleaseTime returns the string constant AVMetadataID3MetadataKeyReleaseTime, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyReleaseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyReleaseTime")))
+}
+
+// AVMetadataID3MetadataKeyTaggingTime returns the string constant AVMetadataID3MetadataKeyTaggingTime, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyTaggingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyTaggingTime")))
+}
+
+// AVMetadataID3MetadataKeyEncodedBy returns the string constant AVMetadataID3MetadataKeyEncodedBy, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEncodedBy")))
+}
+
+// AVMetadataID3MetadataKeyLyricist returns the string constant AVMetadataID3MetadataKeyLyricist, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyLyricist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyLyricist")))
+}
+
+// AVMetadataID3MetadataKeyFileType returns the string constant AVMetadataID3MetadataKeyFileType, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyFileType")))
+}
+
+// AVMetadataID3MetadataKeyTime returns the string constant AVMetadataID3MetadataKeyTime, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyTime")))
+}
+
+// AVMetadataID3MetadataKeyInvolvedPeopleList_v24 returns the string constant AVMetadataID3MetadataKeyInvolvedPeopleList_v24, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyInvolvedPeopleList_v24() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyInvolvedPeopleList_v24")))
+}
+
+// AVMetadataID3MetadataKeyContentGroupDescription returns the string constant AVMetadataID3MetadataKeyContentGroupDescription, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyContentGroupDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyContentGroupDescription")))
+}
+
+// AVMetadataID3MetadataKeyTitleDescription returns the string constant AVMetadataID3MetadataKeyTitleDescription, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyTitleDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyTitleDescription")))
+}
+
+// AVMetadataID3MetadataKeySubTitle returns the string constant AVMetadataID3MetadataKeySubTitle, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySubTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySubTitle")))
+}
+
+// AVMetadataID3MetadataKeyInitialKey returns the string constant AVMetadataID3MetadataKeyInitialKey, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyInitialKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyInitialKey")))
+}
+
+// AVMetadataID3MetadataKeyLanguage returns the string constant AVMetadataID3MetadataKeyLanguage, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyLanguage")))
+}
+
+// AVMetadataID3MetadataKeyLength returns the string constant AVMetadataID3MetadataKeyLength, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyLength")))
+}
+
+// AVMetadataID3MetadataKeyMusicianCreditsList returns the string constant AVMetadataID3MetadataKeyMusicianCreditsList, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyMusicianCreditsList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyMusicianCreditsList")))
+}
+
+// AVMetadataID3MetadataKeyMediaType returns the string constant AVMetadataID3MetadataKeyMediaType, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyMediaType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyMediaType")))
+}
+
+// AVMetadataID3MetadataKeyMood returns the string constant AVMetadataID3MetadataKeyMood, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyMood() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyMood")))
+}
+
+// AVMetadataID3MetadataKeyOriginalAlbumTitle returns the string constant AVMetadataID3MetadataKeyOriginalAlbumTitle, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOriginalAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOriginalAlbumTitle")))
+}
+
+// AVMetadataID3MetadataKeyOriginalFilename returns the string constant AVMetadataID3MetadataKeyOriginalFilename, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOriginalFilename() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOriginalFilename")))
+}
+
+// AVMetadataID3MetadataKeyOriginalLyricist returns the string constant AVMetadataID3MetadataKeyOriginalLyricist, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOriginalLyricist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOriginalLyricist")))
+}
+
+// AVMetadataID3MetadataKeyOriginalArtist returns the string constant AVMetadataID3MetadataKeyOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOriginalArtist")))
+}
+
+// AVMetadataID3MetadataKeyOriginalReleaseYear returns the string constant AVMetadataID3MetadataKeyOriginalReleaseYear, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOriginalReleaseYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOriginalReleaseYear")))
+}
+
+// AVMetadataID3MetadataKeyFileOwner returns the string constant AVMetadataID3MetadataKeyFileOwner, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyFileOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyFileOwner")))
+}
+
+// AVMetadataID3MetadataKeyLeadPerformer returns the string constant AVMetadataID3MetadataKeyLeadPerformer, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyLeadPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyLeadPerformer")))
+}
+
+// AVMetadataID3MetadataKeyBand returns the string constant AVMetadataID3MetadataKeyBand, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyBand() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyBand")))
+}
+
+// AVMetadataID3MetadataKeyConductor returns the string constant AVMetadataID3MetadataKeyConductor, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyConductor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyConductor")))
+}
+
+// AVMetadataID3MetadataKeyModifiedBy returns the string constant AVMetadataID3MetadataKeyModifiedBy, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyModifiedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyModifiedBy")))
+}
+
+// AVMetadataID3MetadataKeyPartOfASet returns the string constant AVMetadataID3MetadataKeyPartOfASet, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPartOfASet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPartOfASet")))
+}
+
+// AVMetadataID3MetadataKeyProducedNotice returns the string constant AVMetadataID3MetadataKeyProducedNotice, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyProducedNotice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyProducedNotice")))
+}
+
+// AVMetadataID3MetadataKeyPublisher returns the string constant AVMetadataID3MetadataKeyPublisher, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPublisher")))
+}
+
+// AVMetadataID3MetadataKeyTrackNumber returns the string constant AVMetadataID3MetadataKeyTrackNumber, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyTrackNumber")))
+}
+
+// AVMetadataID3MetadataKeyRecordingDates returns the string constant AVMetadataID3MetadataKeyRecordingDates, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyRecordingDates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyRecordingDates")))
+}
+
+// AVMetadataID3MetadataKeyInternetRadioStationName returns the string constant AVMetadataID3MetadataKeyInternetRadioStationName, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyInternetRadioStationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyInternetRadioStationName")))
+}
+
+// AVMetadataID3MetadataKeyInternetRadioStationOwner returns the string constant AVMetadataID3MetadataKeyInternetRadioStationOwner, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyInternetRadioStationOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyInternetRadioStationOwner")))
+}
+
+// AVMetadataID3MetadataKeySize returns the string constant AVMetadataID3MetadataKeySize, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySize")))
+}
+
+// AVMetadataID3MetadataKeyAlbumSortOrder returns the string constant AVMetadataID3MetadataKeyAlbumSortOrder, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyAlbumSortOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyAlbumSortOrder")))
+}
+
+// AVMetadataID3MetadataKeyPerformerSortOrder returns the string constant AVMetadataID3MetadataKeyPerformerSortOrder, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPerformerSortOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPerformerSortOrder")))
+}
+
+// AVMetadataID3MetadataKeyTitleSortOrder returns the string constant AVMetadataID3MetadataKeyTitleSortOrder, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyTitleSortOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyTitleSortOrder")))
+}
+
+// AVMetadataID3MetadataKeyInternationalStandardRecordingCode returns the string constant AVMetadataID3MetadataKeyInternationalStandardRecordingCode, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyInternationalStandardRecordingCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyInternationalStandardRecordingCode")))
+}
+
+// AVMetadataID3MetadataKeyEncodedWith returns the string constant AVMetadataID3MetadataKeyEncodedWith, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyEncodedWith() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyEncodedWith")))
+}
+
+// AVMetadataID3MetadataKeySetSubtitle returns the string constant AVMetadataID3MetadataKeySetSubtitle, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeySetSubtitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeySetSubtitle")))
+}
+
+// AVMetadataID3MetadataKeyYear returns the string constant AVMetadataID3MetadataKeyYear, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyYear")))
+}
+
+// AVMetadataID3MetadataKeyUserText returns the string constant AVMetadataID3MetadataKeyUserText, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyUserText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyUserText")))
+}
+
+// AVMetadataID3MetadataKeyUniqueFileIdentifier returns the string constant AVMetadataID3MetadataKeyUniqueFileIdentifier, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyUniqueFileIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyUniqueFileIdentifier")))
+}
+
+// AVMetadataID3MetadataKeyTermsOfUse returns the string constant AVMetadataID3MetadataKeyTermsOfUse, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyTermsOfUse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyTermsOfUse")))
+}
+
+// AVMetadataID3MetadataKeyUnsynchronizedLyric returns the string constant AVMetadataID3MetadataKeyUnsynchronizedLyric, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyUnsynchronizedLyric() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyUnsynchronizedLyric")))
+}
+
+// AVMetadataID3MetadataKeyCommercialInformation returns the string constant AVMetadataID3MetadataKeyCommercialInformation, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyCommercialInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyCommercialInformation")))
+}
+
+// AVMetadataID3MetadataKeyCopyrightInformation returns the string constant AVMetadataID3MetadataKeyCopyrightInformation, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyCopyrightInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyCopyrightInformation")))
+}
+
+// AVMetadataID3MetadataKeyOfficialAudioFileWebpage returns the string constant AVMetadataID3MetadataKeyOfficialAudioFileWebpage, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOfficialAudioFileWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOfficialAudioFileWebpage")))
+}
+
+// AVMetadataID3MetadataKeyOfficialArtistWebpage returns the string constant AVMetadataID3MetadataKeyOfficialArtistWebpage, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOfficialArtistWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOfficialArtistWebpage")))
+}
+
+// AVMetadataID3MetadataKeyOfficialAudioSourceWebpage returns the string constant AVMetadataID3MetadataKeyOfficialAudioSourceWebpage, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOfficialAudioSourceWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOfficialAudioSourceWebpage")))
+}
+
+// AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage returns the string constant AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage")))
+}
+
+// AVMetadataID3MetadataKeyPayment returns the string constant AVMetadataID3MetadataKeyPayment, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyPayment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyPayment")))
+}
+
+// AVMetadataID3MetadataKeyOfficialPublisherWebpage returns the string constant AVMetadataID3MetadataKeyOfficialPublisherWebpage, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyOfficialPublisherWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyOfficialPublisherWebpage")))
+}
+
+// AVMetadataID3MetadataKeyUserURL returns the string constant AVMetadataID3MetadataKeyUserURL, for use as a dictionary key or argument.
+func AVMetadataID3MetadataKeyUserURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataID3MetadataKeyUserURL")))
+}
+
+// AVMetadataKeySpaceIcy returns the string constant AVMetadataKeySpaceIcy, for use as a dictionary key or argument.
+func AVMetadataKeySpaceIcy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceIcy")))
+}
+
+// AVMetadataIcyMetadataKeyStreamTitle returns the string constant AVMetadataIcyMetadataKeyStreamTitle, for use as a dictionary key or argument.
+func AVMetadataIcyMetadataKeyStreamTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIcyMetadataKeyStreamTitle")))
+}
+
+// AVMetadataIcyMetadataKeyStreamURL returns the string constant AVMetadataIcyMetadataKeyStreamURL, for use as a dictionary key or argument.
+func AVMetadataIcyMetadataKeyStreamURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIcyMetadataKeyStreamURL")))
+}
+
+// AVMetadataFormatHLSMetadata returns the string constant AVMetadataFormatHLSMetadata, for use as a dictionary key or argument.
+func AVMetadataFormatHLSMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatHLSMetadata")))
+}
+
+// AVMetadataKeySpaceHLSDateRange returns the string constant AVMetadataKeySpaceHLSDateRange, for use as a dictionary key or argument.
+func AVMetadataKeySpaceHLSDateRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceHLSDateRange")))
+}
+
+// AVMetadataKeySpaceAudioFile returns the string constant AVMetadataKeySpaceAudioFile, for use as a dictionary key or argument.
+func AVMetadataKeySpaceAudioFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataKeySpaceAudioFile")))
+}
+
+// AVMetadataFormatUnknown returns the string constant AVMetadataFormatUnknown, for use as a dictionary key or argument.
+func AVMetadataFormatUnknown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataFormatUnknown")))
+}
+
+// AVMetadataExtraAttributeValueURIKey returns the string constant AVMetadataExtraAttributeValueURIKey, for use as a dictionary key or argument.
+func AVMetadataExtraAttributeValueURIKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataExtraAttributeValueURIKey")))
+}
+
+// AVMetadataExtraAttributeBaseURIKey returns the string constant AVMetadataExtraAttributeBaseURIKey, for use as a dictionary key or argument.
+func AVMetadataExtraAttributeBaseURIKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataExtraAttributeBaseURIKey")))
+}
+
+// AVMetadataExtraAttributeInfoKey returns the string constant AVMetadataExtraAttributeInfoKey, for use as a dictionary key or argument.
+func AVMetadataExtraAttributeInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataExtraAttributeInfoKey")))
+}
+
+// AVVideoCodecKey returns the string constant AVVideoCodecKey, for use as a dictionary key or argument.
+func AVVideoCodecKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecKey"))) }
+
+// AVVideoCodecTypeHEVC returns the string constant AVVideoCodecTypeHEVC, for use as a dictionary key or argument.
+func AVVideoCodecTypeHEVC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeHEVC")))
+}
+
+// AVVideoCodecTypeH264 returns the string constant AVVideoCodecTypeH264, for use as a dictionary key or argument.
+func AVVideoCodecTypeH264() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeH264")))
+}
 
-// AVMediaTypeText returns the string constant AVMediaTypeText as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeText() objc.ID {
-	if _r := raw.AVMediaTypeText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeClosedCaption returns the string constant AVMediaTypeClosedCaption as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeClosedCaption() objc.ID {
-	if _r := raw.AVMediaTypeClosedCaption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeSubtitle returns the string constant AVMediaTypeSubtitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeSubtitle() objc.ID {
-	if _r := raw.AVMediaTypeSubtitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeTimecode returns the string constant AVMediaTypeTimecode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeTimecode() objc.ID {
-	if _r := raw.AVMediaTypeTimecode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeMetadata returns the string constant AVMediaTypeMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeMetadata() objc.ID {
-	if _r := raw.AVMediaTypeMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeMuxed returns the string constant AVMediaTypeMuxed as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeMuxed() objc.ID {
-	if _r := raw.AVMediaTypeMuxed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeHaptic returns the string constant AVMediaTypeHaptic as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeHaptic() objc.ID {
-	if _r := raw.AVMediaTypeHaptic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Indicates that the video range as SDR
-// AVVideoRangeSDR returns the string constant AVVideoRangeSDR as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoRangeSDR() objc.ID {
-	if _r := raw.AVVideoRangeSDR(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Indicates that the video range as HLG
-// AVVideoRangeHLG returns the string constant AVVideoRangeHLG as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoRangeHLG() objc.ID {
-	if _r := raw.AVVideoRangeHLG(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Indicates that the video range as PQ
-// AVVideoRangePQ returns the string constant AVVideoRangePQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoRangePQ() objc.ID {
-	if _r := raw.AVVideoRangePQ(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMediaTypeDepthData returns the string constant AVMediaTypeDepthData as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeDepthData() objc.ID {
-	if _r := raw.AVMediaTypeDepthData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// This media type is used only to identify the track type. An Auxiliary Picture track is not intended to be displayed; as such, the track_in_movie flag in TrackHeaderBox of these tracks will be 0. A track with this media type contain video samples the media type of the format description of which is AVMediaTypeVideo.
-// AVMediaTypeAuxiliaryPicture returns the string constant AVMediaTypeAuxiliaryPicture as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaTypeAuxiliaryPicture() objc.ID {
-	if _r := raw.AVMediaTypeAuxiliaryPicture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes visual content. AVMediaTypeVideo, AVMediaTypeSubtitle, AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicVisual. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicVisual returns the string constant AVMediaCharacteristicVisual as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicVisual() objc.ID {
-	if _r := raw.AVMediaCharacteristicVisual(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes audible content. AVMediaTypeAudio is a media type with the characteristic AVMediaCharacteristicAudible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicAudible returns the string constant AVMediaCharacteristicAudible as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicAudible() objc.ID {
-	if _r := raw.AVMediaCharacteristicAudible(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes legible content. AVMediaTypeSubtitle and AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicLegible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicLegible returns the string constant AVMediaCharacteristicLegible as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicLegible() objc.ID {
-	if _r := raw.AVMediaCharacteristicLegible(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes content that's frame-based. Frame-based content typically comprises discrete media samples that, once rendered, can remain current for indefinite periods of time without additional processing in support of "time-stretching". Further, any dependencies between samples are always explicitly signalled, so that the operations required to render any single sample can readily be performed on demand. AVMediaTypeVideo is the most common type of frame-based media. AVMediaTypeAudio is the most common counterexample. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicFrameBased returns the string constant AVMediaCharacteristicFrameBased as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicFrameBased() objc.ID {
-	if _r := raw.AVMediaCharacteristicFrameBased(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track uses a wide gamut color space and therefore may make use of colors that cannot be accurately represented otherwise. A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
-// AVMediaCharacteristicUsesWideGamutColorSpace returns the string constant AVMediaCharacteristicUsesWideGamutColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicUsesWideGamutColorSpace() objc.ID {
-	if _r := raw.AVMediaCharacteristicUsesWideGamutColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track contains HDR video. HDR video contains extended dynamic range that requires explicit support when compositing. The value of this characteristic is @“public.contains-hdr-video". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
-// AVMediaCharacteristicContainsHDRVideo returns the string constant AVMediaCharacteristicContainsHDRVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicContainsHDRVideo() objc.ID {
-	if _r := raw.AVMediaCharacteristicContainsHDRVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track contains an alpha channel. To determine whether alpha is straight or pre-multiplied, look for the format description extension with key kCMFormatDescriptionExtension_AlphaChannelMode.
-// AVMediaCharacteristicContainsAlphaChannel returns the string constant AVMediaCharacteristicContainsAlphaChannel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicContainsAlphaChannel() objc.ID {
-	if _r := raw.AVMediaCharacteristicContainsAlphaChannel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as intrinsic to the presentation of the asset. Example: an option that presents the main program audio for the presentation, regardless of locale, would typically have this characteristic. The value of this characteristic is @"public.main-program-content". Note for content authors: the presence of this characteristic for a media option is inferred; any option that does not have the characteristic AVMediaCharacteristicIsAuxiliaryContent is considered to have the characteristic AVMediaCharacteristicIsMainProgramContent. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicIsMainProgramContent returns the string constant AVMediaCharacteristicIsMainProgramContent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicIsMainProgramContent() objc.ID {
-	if _r := raw.AVMediaCharacteristicIsMainProgramContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as auxiliary to the presentation of the asset. The value of this characteristic is @"public.auxiliary-content". Example: an option that presents audio media containing commentary on the presentation would typically have this characteristic. Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicIsAuxiliaryContent if it's explicitly tagged with that characteristic or if, as a member of an alternate track group, its associated track is excluded from autoselection. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicIsAuxiliaryContent returns the string constant AVMediaCharacteristicIsAuxiliaryContent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicIsAuxiliaryContent() objc.ID {
-	if _r := raw.AVMediaCharacteristicIsAuxiliaryContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as original to the principal production of the media, as opposed to supplementary or derivative content created by means of language translation or by other means. The value of this characteristic is @"public.original-content". Example: an option that presents audio media with dialog in the principal language of the production may be tagged with this characteristic; audio media containing dialog dubbed in a language other than the principal language of the production typically would not be tagged with this characteristic. Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicIsOriginalContent returns the string constant AVMediaCharacteristicIsOriginalContent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicIsOriginalContent() objc.ID {
-	if _r := raw.AVMediaCharacteristicIsOriginalContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option presents only forced subtitles. Media options with forced-only subtitles are typically selected when 1) the user has not selected a legible option with an accessibility characteristic or an auxiliary purpose and 2) its locale matches the locale of the selected audible media selection option. The value of this characteristic is @"public.subtitles.forced-only". Note for content authors: the presence of this characteristic for a legible media option may be inferred from the format description of the associated track that presents the subtitle media, if the format description carries sufficient information to indicate the presence or absence of forced and non-forced subtitles. If the format description does not carry this information, the legible media option can be explicitly tagged with the characteristic. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicContainsOnlyForcedSubtitles returns the string constant AVMediaCharacteristicContainsOnlyForcedSubtitles as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicContainsOnlyForcedSubtitles() objc.ID {
-	if _r := raw.AVMediaCharacteristicContainsOnlyForcedSubtitles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - transcribes spoken dialog and - identifies speakers whenever other visual cues are insufficient for a viewer to determine who is speaking. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicDescribesMusicAndSoundForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track that has no spoken dialog can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is @"public.accessibility.transcribes-spoken-dialog". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicTranscribesSpokenDialogForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicTranscribesSpokenDialogForAccessibility returns the string constant AVMediaCharacteristicTranscribesSpokenDialogForAccessibility as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicTranscribesSpokenDialogForAccessibility() objc.ID {
-	if _r := raw.AVMediaCharacteristicTranscribesSpokenDialogForAccessibility(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - describes music and - describes sound other than spoken dialog, such as sound effects and significant silences, occurring in program audio. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicTranscribesSpokenDialogForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track without music and without sound other than spoken dialog -- lacking even significant silences -- can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is @"public.accessibility.describes-music-and-sound". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDescribesMusicAndSoundForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicDescribesMusicAndSoundForAccessibility returns the string constant AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicDescribesMusicAndSoundForAccessibility() objc.ID {
-	if _r := raw.AVMediaCharacteristicDescribesMusicAndSoundForAccessibility(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes audio that has been prepared or otherwise processed to heighten the intelligibility of speech. The value of this characteristic is @"public.accessibility.enhances-speech-intelligibility". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicEnhancesSpeechIntelligibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicEnhancesSpeechIntelligibility returns the string constant AVMediaCharacteristicEnhancesSpeechIntelligibility as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicEnhancesSpeechIntelligibility() objc.ID {
-	if _r := raw.AVMediaCharacteristicEnhancesSpeechIntelligibility(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option provides legible content in the language of its specified locale that has been edited for ease of reading. The value of this characteristic is @"public.easy-to-read". Closed caption tracks that carry "easy reader" captions (per the CEA-608 specification) should be tagged with this characteristic. Subtitle tracks can also be tagged with this characteristic, where appropriate. Note for content authors: for QuickTime movie and .m4v files a track is considered to have the characteristic AVMediaCharacteristicEasyToRead only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicEasyToRead returns the string constant AVMediaCharacteristicEasyToRead as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicEasyToRead() objc.ID {
-	if _r := raw.AVMediaCharacteristicEasyToRead(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option provides descriptions of the visual portion of the presentation that are sufficient to comprehend essential information that it depicts, such as action and setting. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.accessibility.describes-video". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDescribesVideoForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicDescribesVideoForAccessibility returns the string constant AVMediaCharacteristicDescribesVideoForAccessibility as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicDescribesVideoForAccessibility() objc.ID {
-	if _r := raw.AVMediaCharacteristicDescribesVideoForAccessibility(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, intended to be used as a substitute for that content by users who prefer its designated language. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicLanguageTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
-// AVMediaCharacteristicLanguageTranslation returns the string constant AVMediaCharacteristicLanguageTranslation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicLanguageTranslation() objc.ID {
-	if _r := raw.AVMediaCharacteristicLanguageTranslation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, created by substituting most or all of the dialog in a previous mix of audio content with dialog spoken in its designated language. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation.dubbed". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDubbedTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
-// AVMediaCharacteristicDubbedTranslation returns the string constant AVMediaCharacteristicDubbedTranslation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicDubbedTranslation() objc.ID {
-	if _r := raw.AVMediaCharacteristicDubbedTranslation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option contains a language translation of originally or previously produced content, created by adding, in its designated language, a verbal interpretation of dialog and translations of other important information to a new mix of the audio content. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation.voice-over". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicVoiceOverTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
-// AVMediaCharacteristicVoiceOverTranslation returns the string constant AVMediaCharacteristicVoiceOverTranslation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicVoiceOverTranslation() objc.ID {
-	if _r := raw.AVMediaCharacteristicVoiceOverTranslation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track or media selection option includes haptic content that's marked by the content author as providing minimal tactile stimulation. Example: an option that presents low strength haptics feedback when user is actively attending the device, would typically have this characteristic. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.haptics.minimal". Note for content authors: for QuickTime movie and MPEG-4 files a track is considered to have the characteristic AVMediaCharacteristicTactileMinimal only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
-// AVMediaCharacteristicTactileMinimal returns the string constant AVMediaCharacteristicTactileMinimal as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicTactileMinimal() objc.ID {
-	if _r := raw.AVMediaCharacteristicTactileMinimal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track contains stereoscopic video captured in a multiview compression format. Stereoscopic video contains two views with one view for the left eye and one view for the right eye. Multiview video contains more than one view (not necessarily stereoscopic) in the same compressed video sample. The combination of stereoscopic and multiview indicates that multiview carriage is used to carry at least two stereoscopic views. It does not imply that there might not be more than two views. Access to the two stereo views may require opt-in to retrieve both views. Accessing only one of the left or right stereoscopic views as a fallback for playback or compositing where stereoscopic rendering is not supported may itself not be supported. The value of this characteristic is @“public.contains-stereo-multiview-video". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
-// AVMediaCharacteristicContainsStereoMultiviewVideo returns the string constant AVMediaCharacteristicContainsStereoMultiviewVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicContainsStereoMultiviewVideo() objc.ID {
-	if _r := raw.AVMediaCharacteristicContainsStereoMultiviewVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that the stereoscopic video track carries additional information related to the stereoscopic video. This is not an indication that the encoded video carries stereoscopic views. It instead indicates that it carries additional information that may influence the interpretation of those views and contribute to a better experience. The value of this characteristic is @“com.apple.quicktime.video.stereo-metadata". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
-// AVMediaCharacteristicCarriesVideoStereoMetadata returns the string constant AVMediaCharacteristicCarriesVideoStereoMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicCarriesVideoStereoMetadata() objc.ID {
-	if _r := raw.AVMediaCharacteristicCarriesVideoStereoMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates the video track carries information related to the horizontal field of view. This media characteristic is currently synthesized if the CMVideoFormatDescription includes a kCMFormatDescriptionExtension_HorizontalFieldOfView extension. This is not an indication that the field of view is expanded beyond or more narrow than typical horizontal fields of view. The value of this characteristic is @“public.indicates-horizontal-field-of-view". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
-// AVMediaCharacteristicIndicatesHorizontalFieldOfView returns the string constant AVMediaCharacteristicIndicatesHorizontalFieldOfView as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicIndicatesHorizontalFieldOfView() objc.ID {
-	if _r := raw.AVMediaCharacteristicIndicatesHorizontalFieldOfView(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates the video track carries information related to how it should be projected for display. This media characteristic is currently synthesized if the CMVideoFormatDescription specifies a non-rectilinear projection. To determine which kind of projection is indicated, look for the format description extension with key kCMFormatDescriptionExtension_ProjectionKind. The value of this characteristic is @“public.indicates-non-rectilinear-projection". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
-// AVMediaCharacteristicIndicatesNonRectilinearProjection returns the string constant AVMediaCharacteristicIndicatesNonRectilinearProjection as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicIndicatesNonRectilinearProjection() objc.ID {
-	if _r := raw.AVMediaCharacteristicIndicatesNonRectilinearProjection(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A media characteristic that indicates that a track was generated in an automated fashion by a machine. This media characteristic can be used to distinguish machine generated content from human authored content. The value of this characteristic is @“public.machine-generated". Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
-// AVMediaCharacteristicMachineGenerated returns the string constant AVMediaCharacteristicMachineGenerated as an objc.ID, for use as a dictionary key or selector argument.
-func AVMediaCharacteristicMachineGenerated() objc.ID {
-	if _r := raw.AVMediaCharacteristicMachineGenerated(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the QuickTime movie file format. The value of this UTI is @"com.apple.quicktime-movie". Files are identified with the .mov and .qt extensions.
-// AVFileTypeQuickTimeMovie returns the string constant AVFileTypeQuickTimeMovie as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeQuickTimeMovie() objc.ID {
-	if _r := raw.AVFileTypeQuickTimeMovie(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the QuickTime audio file format The value of this UTI is @"com.apple.quicktime-audio". Files are identified with the .qta extension.
-// AVFileTypeQuickTimeAudio returns the string constant AVFileTypeQuickTimeAudio as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeQuickTimeAudio() objc.ID {
-	if _r := raw.AVFileTypeQuickTimeAudio(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the MPEG-4 file format. The value of this UTI is @"public.mpeg-4". Files are identified with the .mp4 extension.
-// AVFileTypeMPEG4 returns the string constant AVFileTypeMPEG4 as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeMPEG4() objc.ID {
-	if _r := raw.AVFileTypeMPEG4(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// The value of this UTI is @"com.apple.m4v-video". Files are identified with the .m4v extension.
-// AVFileTypeAppleM4V returns the string constant AVFileTypeAppleM4V as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAppleM4V() objc.ID {
-	if _r := raw.AVFileTypeAppleM4V(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// The value of this UTI is @"com.apple.m4a-audio". Files are identified with the .m4a extension.
-// AVFileTypeAppleM4A returns the string constant AVFileTypeAppleM4A as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAppleM4A() objc.ID {
-	if _r := raw.AVFileTypeAppleM4A(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the 3GPP file format. The value of this UTI is @"public.3gpp". Files are identified with the .3gp, .3gpp, and .sdv extensions.
-// AVFileType3GPP returns the string constant AVFileType3GPP as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileType3GPP() objc.ID {
-	if _r := raw.AVFileType3GPP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the 3GPP file format. The value of this UTI is @"public.3gpp2". Files are identified with the .3g2, .3gp2 extensions.
-// AVFileType3GPP2 returns the string constant AVFileType3GPP2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileType3GPP2() objc.ID {
-	if _r := raw.AVFileType3GPP2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the CoreAudio file format. The value of this UTI is @"com.apple.coreaudio-format". Files are identified with the .caf extension.
-// AVFileTypeCoreAudioFormat returns the string constant AVFileTypeCoreAudioFormat as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeCoreAudioFormat() objc.ID {
-	if _r := raw.AVFileTypeCoreAudioFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the WAVE audio file format. The value of this UTI is @"com.microsoft.waveform-audio". Files are identified with the .wav, .wave, and .bwf extensions.
-// AVFileTypeWAVE returns the string constant AVFileTypeWAVE as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeWAVE() objc.ID {
-	if _r := raw.AVFileTypeWAVE(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the AIFF audio file format. The value of this UTI is @"public.aiff-audio". Files are identified with the .aif and .aiff extensions.
-// AVFileTypeAIFF returns the string constant AVFileTypeAIFF as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAIFF() objc.ID {
-	if _r := raw.AVFileTypeAIFF(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the AIFC audio file format. The value of this UTI is @"public.aifc-audio". Files are identified with the .aifc and .cdda extensions.
-// AVFileTypeAIFC returns the string constant AVFileTypeAIFC as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAIFC() objc.ID {
-	if _r := raw.AVFileTypeAIFC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the adaptive multi-rate audio file format. The value of this UTI is @"org.3gpp.adaptive-multi-rate-audio". Files are identified with the .amr extension.
-// AVFileTypeAMR returns the string constant AVFileTypeAMR as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAMR() objc.ID {
-	if _r := raw.AVFileTypeAMR(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the MPEG layer 3 audio file format. The value of this UTI is @"public.mp3". Files are identified with the .mp3 extension.
-// AVFileTypeMPEGLayer3 returns the string constant AVFileTypeMPEGLayer3 as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeMPEGLayer3() objc.ID {
-	if _r := raw.AVFileTypeMPEGLayer3(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the Sun/NeXT audio file format. The value of this UTI is @"public.au-audio". Files are identified with the .au and .snd extensions.
-// AVFileTypeSunAU returns the string constant AVFileTypeSunAU as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeSunAU() objc.ID {
-	if _r := raw.AVFileTypeSunAU(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the AC-3 audio file format. The value of this UTI is @"public.ac3-audio". Files are identified with the .ac3 extension.
-// AVFileTypeAC3 returns the string constant AVFileTypeAC3 as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAC3() objc.ID {
-	if _r := raw.AVFileTypeAC3(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the enhanced AC-3 audio file format. The value of this UTI is @"public.enhanced-ac3-audio". Files are identified with the .eac3 extension.
-// AVFileTypeEnhancedAC3 returns the string constant AVFileTypeEnhancedAC3 as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeEnhancedAC3() objc.ID {
-	if _r := raw.AVFileTypeEnhancedAC3(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the JPEG (JFIF) format. The value of this UTI is @"public.jpeg". Files are identified with the .jpg or .jpeg extension.
-// AVFileTypeJPEG returns the string constant AVFileTypeJPEG as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeJPEG() objc.ID {
-	if _r := raw.AVFileTypeJPEG(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the Adobe digital negative file format. The value of this UTI is @"com.adobe.raw-image". Files are identified with the .dng extension.
-// AVFileTypeDNG returns the string constant AVFileTypeDNG as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeDNG() objc.ID {
-	if _r := raw.AVFileTypeDNG(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the high efficiency image file format containing HEVC compressed images. The value of this UTI is @"public.heic". Files are identified with the .heic extension.
-// AVFileTypeHEIC returns the string constant AVFileTypeHEIC as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeHEIC() objc.ID {
-	if _r := raw.AVFileTypeHEIC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the high efficiency image file format containing H.264 compressed images. The value of this UTI is @"public.avci". Files are identified with the .avci extension.
-// AVFileTypeAVCI returns the string constant AVFileTypeAVCI as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAVCI() objc.ID {
-	if _r := raw.AVFileTypeAVCI(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the high efficiency image file format containing images compressed with any codec. The value of this UTI is @"public.heif". Files are identified with the .heif extension.
-// AVFileTypeHEIF returns the string constant AVFileTypeHEIF as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeHEIF() objc.ID {
-	if _r := raw.AVFileTypeHEIF(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the tagged image file format. The value of this UTI is @"public.tiff". Files are identified with the .tiff or .tif extension.
-// AVFileTypeTIFF returns the string constant AVFileTypeTIFF as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeTIFF() objc.ID {
-	if _r := raw.AVFileTypeTIFF(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the Apple iTT caption file format The value of this UTI is @"com.apple.itunes-timed-text". Files are identified with the .itt extension.
-// AVFileTypeAppleiTT returns the string constant AVFileTypeAppleiTT as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAppleiTT() objc.ID {
-	if _r := raw.AVFileTypeAppleiTT(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the Scenarist closed caption file format The value of this UTI is @"com.scenarist.closed-caption". Files are identified with the .scc extension.
-// AVFileTypeSCC returns the string constant AVFileTypeSCC as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeSCC() objc.ID {
-	if _r := raw.AVFileTypeSCC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the Apple Haptics Audio Pattern file format. The value of this UTI is @"public.haptics-content". Files are identified with the .ahap extension.
-// AVFileTypeAHAP returns the string constant AVFileTypeAHAP as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeAHAP() objc.ID {
-	if _r := raw.AVFileTypeAHAP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for the Digital Imaging and Communications in Medicine (DICOM) file format. The value of this UTI is @"org.nema.dicom". Files are identified with the .dcm extension.
-// AVFileTypeDICOM returns the string constant AVFileTypeDICOM as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeDICOM() objc.ID {
-	if _r := raw.AVFileTypeDICOM(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A UTI for streaming key delivery content keys The value of this UTI is @"com.apple.streamingkeydelivery.contentkey".
-// AVStreamingKeyDeliveryContentKeyType returns the string constant AVStreamingKeyDeliveryContentKeyType as an objc.ID, for use as a dictionary key or selector argument.
-func AVStreamingKeyDeliveryContentKeyType() objc.ID {
-	return purego.CFConstant(raw.AVStreamingKeyDeliveryContentKeyType())
-}
-
-// A UTI for persistent streaming key delivery content keys The value of this UTI is @"com.apple.streamingkeydelivery.persistentcontentkey".
-// AVStreamingKeyDeliveryPersistentContentKeyType returns the string constant AVStreamingKeyDeliveryPersistentContentKeyType as an objc.ID, for use as a dictionary key or selector argument.
-func AVStreamingKeyDeliveryPersistentContentKeyType() objc.ID {
-	return purego.CFConstant(raw.AVStreamingKeyDeliveryPersistentContentKeyType())
-}
-
-// Apple HTTP Live Streaming profile The profile that is suitable for Apple HTTP Live Streaming.
-// AVFileTypeProfileMPEG4AppleHLS returns the string constant AVFileTypeProfileMPEG4AppleHLS as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeProfileMPEG4AppleHLS() objc.ID {
-	if _r := raw.AVFileTypeProfileMPEG4AppleHLS(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// CMAF compliant profile The profile that is compliance with CMAF format.
-// AVFileTypeProfileMPEG4CMAFCompliant returns the string constant AVFileTypeProfileMPEG4CMAFCompliant as an objc.ID, for use as a dictionary key or selector argument.
-func AVFileTypeProfileMPEG4CMAFCompliant() objc.ID {
-	if _r := raw.AVFileTypeProfileMPEG4CMAFCompliant(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataKeySpaceCommon returns the string constant AVMetadataKeySpaceCommon as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceCommon() objc.ID {
-	if _r := raw.AVMetadataKeySpaceCommon(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyTitle returns the string constant AVMetadataCommonKeyTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyTitle() objc.ID {
-	if _r := raw.AVMetadataCommonKeyTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyCreator returns the string constant AVMetadataCommonKeyCreator as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyCreator() objc.ID {
-	if _r := raw.AVMetadataCommonKeyCreator(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeySubject returns the string constant AVMetadataCommonKeySubject as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeySubject() objc.ID {
-	if _r := raw.AVMetadataCommonKeySubject(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyDescription returns the string constant AVMetadataCommonKeyDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyDescription() objc.ID {
-	if _r := raw.AVMetadataCommonKeyDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyPublisher returns the string constant AVMetadataCommonKeyPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyPublisher() objc.ID {
-	if _r := raw.AVMetadataCommonKeyPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyContributor returns the string constant AVMetadataCommonKeyContributor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyContributor() objc.ID {
-	if _r := raw.AVMetadataCommonKeyContributor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyCreationDate returns the string constant AVMetadataCommonKeyCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyCreationDate() objc.ID {
-	if _r := raw.AVMetadataCommonKeyCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyLastModifiedDate returns the string constant AVMetadataCommonKeyLastModifiedDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyLastModifiedDate() objc.ID {
-	if _r := raw.AVMetadataCommonKeyLastModifiedDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyType returns the string constant AVMetadataCommonKeyType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyType() objc.ID {
-	if _r := raw.AVMetadataCommonKeyType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyFormat returns the string constant AVMetadataCommonKeyFormat as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyFormat() objc.ID {
-	if _r := raw.AVMetadataCommonKeyFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyIdentifier returns the string constant AVMetadataCommonKeyIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyIdentifier() objc.ID {
-	if _r := raw.AVMetadataCommonKeyIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeySource returns the string constant AVMetadataCommonKeySource as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeySource() objc.ID {
-	if _r := raw.AVMetadataCommonKeySource(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyLanguage returns the string constant AVMetadataCommonKeyLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyLanguage() objc.ID {
-	if _r := raw.AVMetadataCommonKeyLanguage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyRelation returns the string constant AVMetadataCommonKeyRelation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyRelation() objc.ID {
-	if _r := raw.AVMetadataCommonKeyRelation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyLocation returns the string constant AVMetadataCommonKeyLocation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyLocation() objc.ID {
-	if _r := raw.AVMetadataCommonKeyLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyCopyrights returns the string constant AVMetadataCommonKeyCopyrights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyCopyrights() objc.ID {
-	if _r := raw.AVMetadataCommonKeyCopyrights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyAlbumName returns the string constant AVMetadataCommonKeyAlbumName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyAlbumName() objc.ID {
-	if _r := raw.AVMetadataCommonKeyAlbumName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyAuthor returns the string constant AVMetadataCommonKeyAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyAuthor() objc.ID {
-	if _r := raw.AVMetadataCommonKeyAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyArtist returns the string constant AVMetadataCommonKeyArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyArtist() objc.ID {
-	if _r := raw.AVMetadataCommonKeyArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyArtwork returns the string constant AVMetadataCommonKeyArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyArtwork() objc.ID {
-	if _r := raw.AVMetadataCommonKeyArtwork(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyMake returns the string constant AVMetadataCommonKeyMake as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyMake() objc.ID {
-	if _r := raw.AVMetadataCommonKeyMake(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyModel returns the string constant AVMetadataCommonKeyModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyModel() objc.ID {
-	if _r := raw.AVMetadataCommonKeyModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeySoftware returns the string constant AVMetadataCommonKeySoftware as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeySoftware() objc.ID {
-	if _r := raw.AVMetadataCommonKeySoftware(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataCommonKeyAccessibilityDescription returns the string constant AVMetadataCommonKeyAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonKeyAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataCommonKeyAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataFormatQuickTimeUserData returns the string constant AVMetadataFormatQuickTimeUserData as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatQuickTimeUserData() objc.ID {
-	if _r := raw.AVMetadataFormatQuickTimeUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataKeySpaceQuickTimeUserData returns the string constant AVMetadataKeySpaceQuickTimeUserData as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceQuickTimeUserData() objc.ID {
-	if _r := raw.AVMetadataKeySpaceQuickTimeUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyAlbum returns the string constant AVMetadataQuickTimeUserDataKeyAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyAlbum() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyAlbum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyArranger returns the string constant AVMetadataQuickTimeUserDataKeyArranger as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyArranger() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyArranger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyArtist returns the string constant AVMetadataQuickTimeUserDataKeyArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyArtist() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyAuthor returns the string constant AVMetadataQuickTimeUserDataKeyAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyAuthor() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyChapter returns the string constant AVMetadataQuickTimeUserDataKeyChapter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyChapter() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyChapter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyComment returns the string constant AVMetadataQuickTimeUserDataKeyComment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyComment() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyComposer returns the string constant AVMetadataQuickTimeUserDataKeyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyComposer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyCopyright returns the string constant AVMetadataQuickTimeUserDataKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyCopyright() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyCreationDate returns the string constant AVMetadataQuickTimeUserDataKeyCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyCreationDate() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyDescription returns the string constant AVMetadataQuickTimeUserDataKeyDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyDescription() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyDirector returns the string constant AVMetadataQuickTimeUserDataKeyDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyDirector() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyDisclaimer returns the string constant AVMetadataQuickTimeUserDataKeyDisclaimer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyDisclaimer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyDisclaimer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyEncodedBy returns the string constant AVMetadataQuickTimeUserDataKeyEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyEncodedBy() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyFullName returns the string constant AVMetadataQuickTimeUserDataKeyFullName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyFullName() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyFullName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyGenre returns the string constant AVMetadataQuickTimeUserDataKeyGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyGenre() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyHostComputer returns the string constant AVMetadataQuickTimeUserDataKeyHostComputer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyHostComputer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyHostComputer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyInformation returns the string constant AVMetadataQuickTimeUserDataKeyInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyInformation() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyKeywords returns the string constant AVMetadataQuickTimeUserDataKeyKeywords as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyKeywords() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyKeywords(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyMake returns the string constant AVMetadataQuickTimeUserDataKeyMake as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyMake() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyMake(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyModel returns the string constant AVMetadataQuickTimeUserDataKeyModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyModel() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyOriginalArtist returns the string constant AVMetadataQuickTimeUserDataKeyOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyOriginalFormat returns the string constant AVMetadataQuickTimeUserDataKeyOriginalFormat as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyOriginalFormat() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyOriginalFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyOriginalSource returns the string constant AVMetadataQuickTimeUserDataKeyOriginalSource as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyOriginalSource() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyOriginalSource(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyPerformers returns the string constant AVMetadataQuickTimeUserDataKeyPerformers as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyPerformers() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyPerformers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyProducer returns the string constant AVMetadataQuickTimeUserDataKeyProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyProducer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyPublisher returns the string constant AVMetadataQuickTimeUserDataKeyPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyPublisher() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyProduct returns the string constant AVMetadataQuickTimeUserDataKeyProduct as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyProduct() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyProduct(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeySoftware returns the string constant AVMetadataQuickTimeUserDataKeySoftware as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeySoftware() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeySoftware(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements returns the string constant AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyTrack returns the string constant AVMetadataQuickTimeUserDataKeyTrack as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyTrack() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyTrack(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyWarning returns the string constant AVMetadataQuickTimeUserDataKeyWarning as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyWarning() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyWarning(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyWriter returns the string constant AVMetadataQuickTimeUserDataKeyWriter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyWriter() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyWriter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyURLLink returns the string constant AVMetadataQuickTimeUserDataKeyURLLink as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyURLLink() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyURLLink(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyLocationISO6709 returns the string constant AVMetadataQuickTimeUserDataKeyLocationISO6709 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyLocationISO6709() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyLocationISO6709(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyTrackName returns the string constant AVMetadataQuickTimeUserDataKeyTrackName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyTrackName() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyTrackName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyCredits returns the string constant AVMetadataQuickTimeUserDataKeyCredits as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyCredits() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyCredits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyPhonogramRights returns the string constant AVMetadataQuickTimeUserDataKeyPhonogramRights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyPhonogramRights() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyPhonogramRights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyTaggedCharacteristic returns the string constant AVMetadataQuickTimeUserDataKeyTaggedCharacteristic as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyTaggedCharacteristic() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyTaggedCharacteristic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeUserDataKeyAccessibilityDescription returns the string constant AVMetadataQuickTimeUserDataKeyAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeUserDataKeyAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataQuickTimeUserDataKeyAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataFormatISOUserData returns the string constant AVMetadataFormatISOUserData as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatISOUserData() objc.ID {
-	if _r := raw.AVMetadataFormatISOUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataKeySpaceISOUserData returns the string constant AVMetadataKeySpaceISOUserData as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceISOUserData() objc.ID {
-	if _r := raw.AVMetadataKeySpaceISOUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataISOUserDataKeyCopyright returns the string constant AVMetadataISOUserDataKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataISOUserDataKeyCopyright() objc.ID {
-	if _r := raw.AVMetadataISOUserDataKeyCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataISOUserDataKeyTaggedCharacteristic returns the string constant AVMetadataISOUserDataKeyTaggedCharacteristic as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataISOUserDataKeyTaggedCharacteristic() objc.ID {
-	if _r := raw.AVMetadataISOUserDataKeyTaggedCharacteristic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// ISO User data key for the content creation date/time. The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
-// AVMetadataISOUserDataKeyDate returns the string constant AVMetadataISOUserDataKeyDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataISOUserDataKeyDate() objc.ID {
-	if _r := raw.AVMetadataISOUserDataKeyDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataISOUserDataKeyAccessibilityDescription returns the string constant AVMetadataISOUserDataKeyAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataISOUserDataKeyAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataISOUserDataKeyAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyCopyright returns the string constant AVMetadata3GPUserDataKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyCopyright() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyAuthor returns the string constant AVMetadata3GPUserDataKeyAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyAuthor() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyPerformer returns the string constant AVMetadata3GPUserDataKeyPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyPerformer() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyGenre returns the string constant AVMetadata3GPUserDataKeyGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyGenre() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyRecordingYear returns the string constant AVMetadata3GPUserDataKeyRecordingYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyRecordingYear() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyRecordingYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyLocation returns the string constant AVMetadata3GPUserDataKeyLocation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyLocation() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyTitle returns the string constant AVMetadata3GPUserDataKeyTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyTitle() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyDescription returns the string constant AVMetadata3GPUserDataKeyDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyDescription() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyCollection returns the string constant AVMetadata3GPUserDataKeyCollection as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyCollection() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyCollection(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyUserRating returns the string constant AVMetadata3GPUserDataKeyUserRating as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyUserRating() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyUserRating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyThumbnail returns the string constant AVMetadata3GPUserDataKeyThumbnail as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyThumbnail() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyThumbnail(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyAlbumAndTrack returns the string constant AVMetadata3GPUserDataKeyAlbumAndTrack as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyAlbumAndTrack() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyAlbumAndTrack(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyKeywordList returns the string constant AVMetadata3GPUserDataKeyKeywordList as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyKeywordList() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyKeywordList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyMediaClassification returns the string constant AVMetadata3GPUserDataKeyMediaClassification as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyMediaClassification() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyMediaClassification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadata3GPUserDataKeyMediaRating returns the string constant AVMetadata3GPUserDataKeyMediaRating as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadata3GPUserDataKeyMediaRating() objc.ID {
-	if _r := raw.AVMetadata3GPUserDataKeyMediaRating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataFormatQuickTimeMetadata returns the string constant AVMetadataFormatQuickTimeMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatQuickTimeMetadata() objc.ID {
-	if _r := raw.AVMetadataFormatQuickTimeMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataKeySpaceQuickTimeMetadata returns the string constant AVMetadataKeySpaceQuickTimeMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceQuickTimeMetadata() objc.ID {
-	if _r := raw.AVMetadataKeySpaceQuickTimeMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyAuthor returns the string constant AVMetadataQuickTimeMetadataKeyAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyAuthor() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyComment returns the string constant AVMetadataQuickTimeMetadataKeyComment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyComment() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyCopyright returns the string constant AVMetadataQuickTimeMetadataKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCopyright() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyCreationDate returns the string constant AVMetadataQuickTimeMetadataKeyCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCreationDate() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyDirector returns the string constant AVMetadataQuickTimeMetadataKeyDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyDirector() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyDisplayName returns the string constant AVMetadataQuickTimeMetadataKeyDisplayName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyDisplayName() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyDisplayName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyInformation returns the string constant AVMetadataQuickTimeMetadataKeyInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyInformation() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyKeywords returns the string constant AVMetadataQuickTimeMetadataKeyKeywords as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyKeywords() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyKeywords(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyProducer returns the string constant AVMetadataQuickTimeMetadataKeyProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyProducer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyPublisher returns the string constant AVMetadataQuickTimeMetadataKeyPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyPublisher() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyAlbum returns the string constant AVMetadataQuickTimeMetadataKeyAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyAlbum() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyAlbum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyArtist returns the string constant AVMetadataQuickTimeMetadataKeyArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyArtist() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyArtwork returns the string constant AVMetadataQuickTimeMetadataKeyArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyArtwork() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyArtwork(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyDescription returns the string constant AVMetadataQuickTimeMetadataKeyDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyDescription() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeySoftware returns the string constant AVMetadataQuickTimeMetadataKeySoftware as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeySoftware() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeySoftware(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyYear returns the string constant AVMetadataQuickTimeMetadataKeyYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyYear() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyGenre returns the string constant AVMetadataQuickTimeMetadataKeyGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyGenre() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyiXML returns the string constant AVMetadataQuickTimeMetadataKeyiXML as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyiXML() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyiXML(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyLocationISO6709 returns the string constant AVMetadataQuickTimeMetadataKeyLocationISO6709 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyLocationISO6709() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyLocationISO6709(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyMake returns the string constant AVMetadataQuickTimeMetadataKeyMake as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyMake() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyMake(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyModel returns the string constant AVMetadataQuickTimeMetadataKeyModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyModel() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyArranger returns the string constant AVMetadataQuickTimeMetadataKeyArranger as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyArranger() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyArranger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyEncodedBy returns the string constant AVMetadataQuickTimeMetadataKeyEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyEncodedBy() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyOriginalArtist returns the string constant AVMetadataQuickTimeMetadataKeyOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyPerformer returns the string constant AVMetadataQuickTimeMetadataKeyPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyPerformer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyComposer returns the string constant AVMetadataQuickTimeMetadataKeyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyComposer() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyCredits returns the string constant AVMetadataQuickTimeMetadataKeyCredits as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCredits() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCredits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyPhonogramRights returns the string constant AVMetadataQuickTimeMetadataKeyPhonogramRights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyPhonogramRights() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyPhonogramRights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyCameraIdentifier returns the string constant AVMetadataQuickTimeMetadataKeyCameraIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraIdentifier() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime returns the string constant AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyTitle returns the string constant AVMetadataQuickTimeMetadataKeyTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyTitle() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyCollectionUser returns the string constant AVMetadataQuickTimeMetadataKeyCollectionUser as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCollectionUser() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCollectionUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyRatingUser returns the string constant AVMetadataQuickTimeMetadataKeyRatingUser as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyRatingUser() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyRatingUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyLocationName returns the string constant AVMetadataQuickTimeMetadataKeyLocationName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyLocationName() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyLocationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyLocationBody returns the string constant AVMetadataQuickTimeMetadataKeyLocationBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyLocationBody() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyLocationBody(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyLocationNote returns the string constant AVMetadataQuickTimeMetadataKeyLocationNote as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyLocationNote() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyLocationNote(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyLocationRole returns the string constant AVMetadataQuickTimeMetadataKeyLocationRole as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyLocationRole() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyLocationRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyLocationDate returns the string constant AVMetadataQuickTimeMetadataKeyLocationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyLocationDate() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyLocationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyDirectionFacing returns the string constant AVMetadataQuickTimeMetadataKeyDirectionFacing as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyDirectionFacing() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyDirectionFacing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyDirectionMotion returns the string constant AVMetadataQuickTimeMetadataKeyDirectionMotion as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyDirectionMotion() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyDirectionMotion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyContentIdentifier returns the string constant AVMetadataQuickTimeMetadataKeyContentIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyContentIdentifier() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyContentIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyAccessibilityDescription returns the string constant AVMetadataQuickTimeMetadataKeyAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataQuickTimeMetadataKeyIsMontage returns the string constant AVMetadataQuickTimeMetadataKeyIsMontage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyIsMontage() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyIsMontage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
-// AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent returns the string constant AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
-// AVMetadataQuickTimeMetadataKeyCinematicVideoIntent returns the string constant AVMetadataQuickTimeMetadataKeyCinematicVideoIntent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCinematicVideoIntent() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCinematicVideoIntent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
-// AVMetadataQuickTimeMetadataKeyCameraISOSensitivity returns the string constant AVMetadataQuickTimeMetadataKeyCameraISOSensitivity as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraISOSensitivity() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraISOSensitivity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
-// AVMetadataQuickTimeMetadataKeyCameraWhiteBalance returns the string constant AVMetadataQuickTimeMetadataKeyCameraWhiteBalance as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraWhiteBalance() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraWhiteBalance(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
-// AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors returns the string constant AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
-// AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices returns the string constant AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
-// AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle returns the string constant AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
-// AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime returns the string constant AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
-// AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber returns the string constant AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
-// AVMetadataQuickTimeMetadataKeyCameraLensModel returns the string constant AVMetadataQuickTimeMetadataKeyCameraLensModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraLensModel() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraLensModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
-// AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent returns the string constant AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent() objc.ID {
-	if _r := raw.AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataFormatiTunesMetadata returns the string constant AVMetadataFormatiTunesMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatiTunesMetadata() objc.ID {
-	if _r := raw.AVMetadataFormatiTunesMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataKeySpaceiTunes returns the string constant AVMetadataKeySpaceiTunes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceiTunes() objc.ID {
-	if _r := raw.AVMetadataKeySpaceiTunes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyAlbum returns the string constant AVMetadataiTunesMetadataKeyAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyAlbum() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyAlbum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyArtist returns the string constant AVMetadataiTunesMetadataKeyArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyArtist() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyUserComment returns the string constant AVMetadataiTunesMetadataKeyUserComment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyUserComment() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyUserComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyCoverArt returns the string constant AVMetadataiTunesMetadataKeyCoverArt as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyCoverArt() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyCoverArt(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyCopyright returns the string constant AVMetadataiTunesMetadataKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyCopyright() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyReleaseDate returns the string constant AVMetadataiTunesMetadataKeyReleaseDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyReleaseDate() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyReleaseDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyEncodedBy returns the string constant AVMetadataiTunesMetadataKeyEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyEncodedBy() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyPredefinedGenre returns the string constant AVMetadataiTunesMetadataKeyPredefinedGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyPredefinedGenre() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyPredefinedGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyUserGenre returns the string constant AVMetadataiTunesMetadataKeyUserGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyUserGenre() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyUserGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeySongName returns the string constant AVMetadataiTunesMetadataKeySongName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeySongName() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeySongName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyTrackSubTitle returns the string constant AVMetadataiTunesMetadataKeyTrackSubTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyTrackSubTitle() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyTrackSubTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyEncodingTool returns the string constant AVMetadataiTunesMetadataKeyEncodingTool as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyEncodingTool() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyEncodingTool(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyComposer returns the string constant AVMetadataiTunesMetadataKeyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyComposer() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyAlbumArtist returns the string constant AVMetadataiTunesMetadataKeyAlbumArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyAlbumArtist() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyAlbumArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyAccountKind returns the string constant AVMetadataiTunesMetadataKeyAccountKind as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyAccountKind() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyAccountKind(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyAppleID returns the string constant AVMetadataiTunesMetadataKeyAppleID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyAppleID() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyAppleID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyArtistID returns the string constant AVMetadataiTunesMetadataKeyArtistID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyArtistID() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyArtistID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeySongID returns the string constant AVMetadataiTunesMetadataKeySongID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeySongID() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeySongID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyDiscCompilation returns the string constant AVMetadataiTunesMetadataKeyDiscCompilation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyDiscCompilation() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyDiscCompilation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyDiscNumber returns the string constant AVMetadataiTunesMetadataKeyDiscNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyDiscNumber() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyDiscNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyGenreID returns the string constant AVMetadataiTunesMetadataKeyGenreID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyGenreID() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyGenreID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyGrouping returns the string constant AVMetadataiTunesMetadataKeyGrouping as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyGrouping() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyGrouping(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyPlaylistID returns the string constant AVMetadataiTunesMetadataKeyPlaylistID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyPlaylistID() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyPlaylistID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyContentRating returns the string constant AVMetadataiTunesMetadataKeyContentRating as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyContentRating() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyContentRating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyBeatsPerMin returns the string constant AVMetadataiTunesMetadataKeyBeatsPerMin as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyBeatsPerMin() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyBeatsPerMin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyTrackNumber returns the string constant AVMetadataiTunesMetadataKeyTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyTrackNumber() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyTrackNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyArtDirector returns the string constant AVMetadataiTunesMetadataKeyArtDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyArtDirector() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyArtDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyArranger returns the string constant AVMetadataiTunesMetadataKeyArranger as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyArranger() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyArranger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyAuthor returns the string constant AVMetadataiTunesMetadataKeyAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyAuthor() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyLyrics returns the string constant AVMetadataiTunesMetadataKeyLyrics as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyLyrics() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyLyrics(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyAcknowledgement returns the string constant AVMetadataiTunesMetadataKeyAcknowledgement as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyAcknowledgement() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyAcknowledgement(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyConductor returns the string constant AVMetadataiTunesMetadataKeyConductor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyConductor() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyConductor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyDescription returns the string constant AVMetadataiTunesMetadataKeyDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyDescription() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyDirector returns the string constant AVMetadataiTunesMetadataKeyDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyDirector() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyEQ returns the string constant AVMetadataiTunesMetadataKeyEQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyEQ() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyEQ(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyLinerNotes returns the string constant AVMetadataiTunesMetadataKeyLinerNotes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyLinerNotes() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyLinerNotes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyRecordCompany returns the string constant AVMetadataiTunesMetadataKeyRecordCompany as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyRecordCompany() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyRecordCompany(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyOriginalArtist returns the string constant AVMetadataiTunesMetadataKeyOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyPhonogramRights returns the string constant AVMetadataiTunesMetadataKeyPhonogramRights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyPhonogramRights() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyPhonogramRights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyProducer returns the string constant AVMetadataiTunesMetadataKeyProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyProducer() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyPerformer returns the string constant AVMetadataiTunesMetadataKeyPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyPerformer() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyPublisher returns the string constant AVMetadataiTunesMetadataKeyPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyPublisher() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeySoundEngineer returns the string constant AVMetadataiTunesMetadataKeySoundEngineer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeySoundEngineer() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeySoundEngineer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeySoloist returns the string constant AVMetadataiTunesMetadataKeySoloist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeySoloist() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeySoloist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyCredits returns the string constant AVMetadataiTunesMetadataKeyCredits as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyCredits() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyCredits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyThanks returns the string constant AVMetadataiTunesMetadataKeyThanks as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyThanks() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyThanks(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyOnlineExtras returns the string constant AVMetadataiTunesMetadataKeyOnlineExtras as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyOnlineExtras() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyOnlineExtras(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataiTunesMetadataKeyExecProducer returns the string constant AVMetadataiTunesMetadataKeyExecProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataiTunesMetadataKeyExecProducer() objc.ID {
-	if _r := raw.AVMetadataiTunesMetadataKeyExecProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataFormatID3Metadata returns the string constant AVMetadataFormatID3Metadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatID3Metadata() objc.ID {
-	if _r := raw.AVMetadataFormatID3Metadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataKeySpaceID3 returns the string constant AVMetadataKeySpaceID3 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceID3() objc.ID {
-	if _r := raw.AVMetadataKeySpaceID3(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyAudioEncryption returns the string constant AVMetadataID3MetadataKeyAudioEncryption as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyAudioEncryption() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyAudioEncryption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyAttachedPicture returns the string constant AVMetadataID3MetadataKeyAttachedPicture as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyAttachedPicture() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyAttachedPicture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyAudioSeekPointIndex returns the string constant AVMetadataID3MetadataKeyAudioSeekPointIndex as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyAudioSeekPointIndex() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyAudioSeekPointIndex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyComments returns the string constant AVMetadataID3MetadataKeyComments as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyComments() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyComments(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyCommercial returns the string constant AVMetadataID3MetadataKeyCommercial as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyCommercial() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyCommercial(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyCommerical returns the string constant AVMetadataID3MetadataKeyCommerical as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyCommerical() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyCommerical(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEncryption returns the string constant AVMetadataID3MetadataKeyEncryption as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEncryption() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEncryption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEqualization returns the string constant AVMetadataID3MetadataKeyEqualization as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEqualization() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEqualization(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEqualization2 returns the string constant AVMetadataID3MetadataKeyEqualization2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEqualization2() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEqualization2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEventTimingCodes returns the string constant AVMetadataID3MetadataKeyEventTimingCodes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEventTimingCodes() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEventTimingCodes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyGeneralEncapsulatedObject returns the string constant AVMetadataID3MetadataKeyGeneralEncapsulatedObject as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyGeneralEncapsulatedObject() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyGeneralEncapsulatedObject(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyGroupIdentifier returns the string constant AVMetadataID3MetadataKeyGroupIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyGroupIdentifier() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyGroupIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyInvolvedPeopleList_v23 returns the string constant AVMetadataID3MetadataKeyInvolvedPeopleList_v23 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyInvolvedPeopleList_v23() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyInvolvedPeopleList_v23(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyLink returns the string constant AVMetadataID3MetadataKeyLink as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyLink() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyLink(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyMusicCDIdentifier returns the string constant AVMetadataID3MetadataKeyMusicCDIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyMusicCDIdentifier() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyMusicCDIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyMPEGLocationLookupTable returns the string constant AVMetadataID3MetadataKeyMPEGLocationLookupTable as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyMPEGLocationLookupTable() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyMPEGLocationLookupTable(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOwnership returns the string constant AVMetadataID3MetadataKeyOwnership as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOwnership() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOwnership(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPrivate returns the string constant AVMetadataID3MetadataKeyPrivate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPrivate() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPrivate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPlayCounter returns the string constant AVMetadataID3MetadataKeyPlayCounter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPlayCounter() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPlayCounter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPopularimeter returns the string constant AVMetadataID3MetadataKeyPopularimeter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPopularimeter() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPopularimeter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPositionSynchronization returns the string constant AVMetadataID3MetadataKeyPositionSynchronization as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPositionSynchronization() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPositionSynchronization(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyRecommendedBufferSize returns the string constant AVMetadataID3MetadataKeyRecommendedBufferSize as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyRecommendedBufferSize() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyRecommendedBufferSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyRelativeVolumeAdjustment returns the string constant AVMetadataID3MetadataKeyRelativeVolumeAdjustment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyRelativeVolumeAdjustment() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyRelativeVolumeAdjustment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyRelativeVolumeAdjustment2 returns the string constant AVMetadataID3MetadataKeyRelativeVolumeAdjustment2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyRelativeVolumeAdjustment2() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyRelativeVolumeAdjustment2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyReverb returns the string constant AVMetadataID3MetadataKeyReverb as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyReverb() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyReverb(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySeek returns the string constant AVMetadataID3MetadataKeySeek as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySeek() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySeek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySignature returns the string constant AVMetadataID3MetadataKeySignature as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySignature() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySignature(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySynchronizedLyric returns the string constant AVMetadataID3MetadataKeySynchronizedLyric as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySynchronizedLyric() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySynchronizedLyric(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySynchronizedTempoCodes returns the string constant AVMetadataID3MetadataKeySynchronizedTempoCodes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySynchronizedTempoCodes() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySynchronizedTempoCodes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyAlbumTitle returns the string constant AVMetadataID3MetadataKeyAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyAlbumTitle() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyAlbumTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyBeatsPerMinute returns the string constant AVMetadataID3MetadataKeyBeatsPerMinute as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyBeatsPerMinute() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyBeatsPerMinute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyComposer returns the string constant AVMetadataID3MetadataKeyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyComposer() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyContentType returns the string constant AVMetadataID3MetadataKeyContentType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyContentType() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyContentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyCopyright returns the string constant AVMetadataID3MetadataKeyCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyCopyright() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyDate returns the string constant AVMetadataID3MetadataKeyDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyDate() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEncodingTime returns the string constant AVMetadataID3MetadataKeyEncodingTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEncodingTime() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEncodingTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPlaylistDelay returns the string constant AVMetadataID3MetadataKeyPlaylistDelay as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPlaylistDelay() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPlaylistDelay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOriginalReleaseTime returns the string constant AVMetadataID3MetadataKeyOriginalReleaseTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOriginalReleaseTime() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOriginalReleaseTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyRecordingTime returns the string constant AVMetadataID3MetadataKeyRecordingTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyRecordingTime() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyRecordingTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyReleaseTime returns the string constant AVMetadataID3MetadataKeyReleaseTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyReleaseTime() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyReleaseTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyTaggingTime returns the string constant AVMetadataID3MetadataKeyTaggingTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyTaggingTime() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyTaggingTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEncodedBy returns the string constant AVMetadataID3MetadataKeyEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEncodedBy() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyLyricist returns the string constant AVMetadataID3MetadataKeyLyricist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyLyricist() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyLyricist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyFileType returns the string constant AVMetadataID3MetadataKeyFileType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyFileType() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyFileType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyTime returns the string constant AVMetadataID3MetadataKeyTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyTime() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyInvolvedPeopleList_v24 returns the string constant AVMetadataID3MetadataKeyInvolvedPeopleList_v24 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyInvolvedPeopleList_v24() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyInvolvedPeopleList_v24(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyContentGroupDescription returns the string constant AVMetadataID3MetadataKeyContentGroupDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyContentGroupDescription() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyContentGroupDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyTitleDescription returns the string constant AVMetadataID3MetadataKeyTitleDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyTitleDescription() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyTitleDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySubTitle returns the string constant AVMetadataID3MetadataKeySubTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySubTitle() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySubTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyInitialKey returns the string constant AVMetadataID3MetadataKeyInitialKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyInitialKey() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyInitialKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyLanguage returns the string constant AVMetadataID3MetadataKeyLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyLanguage() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyLanguage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyLength returns the string constant AVMetadataID3MetadataKeyLength as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyLength() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyLength(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyMusicianCreditsList returns the string constant AVMetadataID3MetadataKeyMusicianCreditsList as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyMusicianCreditsList() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyMusicianCreditsList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyMediaType returns the string constant AVMetadataID3MetadataKeyMediaType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyMediaType() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyMediaType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyMood returns the string constant AVMetadataID3MetadataKeyMood as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyMood() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyMood(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOriginalAlbumTitle returns the string constant AVMetadataID3MetadataKeyOriginalAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOriginalAlbumTitle() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOriginalAlbumTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOriginalFilename returns the string constant AVMetadataID3MetadataKeyOriginalFilename as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOriginalFilename() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOriginalFilename(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOriginalLyricist returns the string constant AVMetadataID3MetadataKeyOriginalLyricist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOriginalLyricist() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOriginalLyricist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOriginalArtist returns the string constant AVMetadataID3MetadataKeyOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOriginalReleaseYear returns the string constant AVMetadataID3MetadataKeyOriginalReleaseYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOriginalReleaseYear() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOriginalReleaseYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyFileOwner returns the string constant AVMetadataID3MetadataKeyFileOwner as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyFileOwner() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyFileOwner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyLeadPerformer returns the string constant AVMetadataID3MetadataKeyLeadPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyLeadPerformer() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyLeadPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyBand returns the string constant AVMetadataID3MetadataKeyBand as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyBand() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyBand(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyConductor returns the string constant AVMetadataID3MetadataKeyConductor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyConductor() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyConductor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyModifiedBy returns the string constant AVMetadataID3MetadataKeyModifiedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyModifiedBy() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyModifiedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPartOfASet returns the string constant AVMetadataID3MetadataKeyPartOfASet as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPartOfASet() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPartOfASet(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyProducedNotice returns the string constant AVMetadataID3MetadataKeyProducedNotice as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyProducedNotice() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyProducedNotice(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPublisher returns the string constant AVMetadataID3MetadataKeyPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPublisher() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyTrackNumber returns the string constant AVMetadataID3MetadataKeyTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyTrackNumber() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyTrackNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyRecordingDates returns the string constant AVMetadataID3MetadataKeyRecordingDates as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyRecordingDates() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyRecordingDates(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyInternetRadioStationName returns the string constant AVMetadataID3MetadataKeyInternetRadioStationName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyInternetRadioStationName() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyInternetRadioStationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyInternetRadioStationOwner returns the string constant AVMetadataID3MetadataKeyInternetRadioStationOwner as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyInternetRadioStationOwner() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyInternetRadioStationOwner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySize returns the string constant AVMetadataID3MetadataKeySize as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySize() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyAlbumSortOrder returns the string constant AVMetadataID3MetadataKeyAlbumSortOrder as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyAlbumSortOrder() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyAlbumSortOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPerformerSortOrder returns the string constant AVMetadataID3MetadataKeyPerformerSortOrder as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPerformerSortOrder() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPerformerSortOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyTitleSortOrder returns the string constant AVMetadataID3MetadataKeyTitleSortOrder as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyTitleSortOrder() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyTitleSortOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyInternationalStandardRecordingCode returns the string constant AVMetadataID3MetadataKeyInternationalStandardRecordingCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyInternationalStandardRecordingCode() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyInternationalStandardRecordingCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyEncodedWith returns the string constant AVMetadataID3MetadataKeyEncodedWith as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyEncodedWith() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyEncodedWith(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeySetSubtitle returns the string constant AVMetadataID3MetadataKeySetSubtitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeySetSubtitle() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeySetSubtitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyYear returns the string constant AVMetadataID3MetadataKeyYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyYear() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyUserText returns the string constant AVMetadataID3MetadataKeyUserText as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyUserText() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyUserText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyUniqueFileIdentifier returns the string constant AVMetadataID3MetadataKeyUniqueFileIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyUniqueFileIdentifier() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyUniqueFileIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyTermsOfUse returns the string constant AVMetadataID3MetadataKeyTermsOfUse as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyTermsOfUse() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyTermsOfUse(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyUnsynchronizedLyric returns the string constant AVMetadataID3MetadataKeyUnsynchronizedLyric as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyUnsynchronizedLyric() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyUnsynchronizedLyric(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyCommercialInformation returns the string constant AVMetadataID3MetadataKeyCommercialInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyCommercialInformation() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyCommercialInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyCopyrightInformation returns the string constant AVMetadataID3MetadataKeyCopyrightInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyCopyrightInformation() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyCopyrightInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOfficialAudioFileWebpage returns the string constant AVMetadataID3MetadataKeyOfficialAudioFileWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOfficialAudioFileWebpage() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOfficialAudioFileWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOfficialArtistWebpage returns the string constant AVMetadataID3MetadataKeyOfficialArtistWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOfficialArtistWebpage() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOfficialArtistWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOfficialAudioSourceWebpage returns the string constant AVMetadataID3MetadataKeyOfficialAudioSourceWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOfficialAudioSourceWebpage() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOfficialAudioSourceWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage returns the string constant AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyPayment returns the string constant AVMetadataID3MetadataKeyPayment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyPayment() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyPayment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyOfficialPublisherWebpage returns the string constant AVMetadataID3MetadataKeyOfficialPublisherWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyOfficialPublisherWebpage() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyOfficialPublisherWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataID3MetadataKeyUserURL returns the string constant AVMetadataID3MetadataKeyUserURL as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataID3MetadataKeyUserURL() objc.ID {
-	if _r := raw.AVMetadataID3MetadataKeyUserURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Icecast/ShoutCAST streaming metadata
-// AVMetadataKeySpaceIcy returns the string constant AVMetadataKeySpaceIcy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceIcy() objc.ID {
-	if _r := raw.AVMetadataKeySpaceIcy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataIcyMetadataKeyStreamTitle returns the string constant AVMetadataIcyMetadataKeyStreamTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIcyMetadataKeyStreamTitle() objc.ID {
-	if _r := raw.AVMetadataIcyMetadataKeyStreamTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVMetadataIcyMetadataKeyStreamURL returns the string constant AVMetadataIcyMetadataKeyStreamURL as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIcyMetadataKeyStreamURL() objc.ID {
-	if _r := raw.AVMetadataIcyMetadataKeyStreamURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// HTTP Live Streaming metadata
-// AVMetadataFormatHLSMetadata returns the string constant AVMetadataFormatHLSMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatHLSMetadata() objc.ID {
-	if _r := raw.AVMetadataFormatHLSMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
-// AVMetadataKeySpaceHLSDateRange returns the string constant AVMetadataKeySpaceHLSDateRange as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceHLSDateRange() objc.ID {
-	if _r := raw.AVMetadataKeySpaceHLSDateRange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
-// AVMetadataKeySpaceAudioFile returns the string constant AVMetadataKeySpaceAudioFile as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataKeySpaceAudioFile() objc.ID {
-	if _r := raw.AVMetadataKeySpaceAudioFile(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// Metadata format for AVMetadataItems of unknown provenance. This can occur when metadata is provided generically by an intermediate interface, such as AudioToolbox's AudioFile interface.
-// AVMetadataFormatUnknown returns the string constant AVMetadataFormatUnknown as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataFormatUnknown() objc.ID {
-	if _r := raw.AVMetadataFormatUnknown(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
-// AVMetadataExtraAttributeValueURIKey returns the string constant AVMetadataExtraAttributeValueURIKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataExtraAttributeValueURIKey() objc.ID {
-	if _r := raw.AVMetadataExtraAttributeValueURIKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
-// AVMetadataExtraAttributeBaseURIKey returns the string constant AVMetadataExtraAttributeBaseURIKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataExtraAttributeBaseURIKey() objc.ID {
-	if _r := raw.AVMetadataExtraAttributeBaseURIKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// More information about the item; specific to the item keySpace & key. For example, this key is used with the following ID3 tags: TXXX, WXXX, APIC, GEOB: carries the Description PRIV: carries the Owner Identifier
-// AVMetadataExtraAttributeInfoKey returns the string constant AVMetadataExtraAttributeInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataExtraAttributeInfoKey() objc.ID {
-	if _r := raw.AVMetadataExtraAttributeInfoKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecKey returns the string constant AVVideoCodecKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCodecKey())
-}
-
-// AVVideoCodecTypeHEVC returns the string constant AVVideoCodecTypeHEVC as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeHEVC() objc.ID {
-	if _r := raw.AVVideoCodecTypeHEVC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeH264 returns the string constant AVVideoCodecTypeH264 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeH264() objc.ID {
-	if _r := raw.AVVideoCodecTypeH264(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeJPEG returns the string constant AVVideoCodecTypeJPEG as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeJPEG() objc.ID {
-	if _r := raw.AVVideoCodecTypeJPEG(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeJPEGXL returns the string constant AVVideoCodecTypeJPEGXL as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeJPEGXL() objc.ID {
-	if _r := raw.AVVideoCodecTypeJPEGXL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProRes4444 returns the string constant AVVideoCodecTypeAppleProRes4444 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProRes4444() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProRes4444(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProRes4444XQ returns the string constant AVVideoCodecTypeAppleProRes4444XQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProRes4444XQ() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProRes4444XQ(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProRes422 returns the string constant AVVideoCodecTypeAppleProRes422 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProRes422() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProRes422(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProRes422HQ returns the string constant AVVideoCodecTypeAppleProRes422HQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProRes422HQ() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProRes422HQ(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProRes422LT returns the string constant AVVideoCodecTypeAppleProRes422LT as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProRes422LT() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProRes422LT(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProRes422Proxy returns the string constant AVVideoCodecTypeAppleProRes422Proxy as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProRes422Proxy() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProRes422Proxy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProResRAW returns the string constant AVVideoCodecTypeAppleProResRAW as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProResRAW() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProResRAW(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeAppleProResRAWHQ returns the string constant AVVideoCodecTypeAppleProResRAWHQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeAppleProResRAWHQ() objc.ID {
-	if _r := raw.AVVideoCodecTypeAppleProResRAWHQ(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecTypeHEVCWithAlpha returns the string constant AVVideoCodecTypeHEVCWithAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecTypeHEVCWithAlpha() objc.ID {
-	if _r := raw.AVVideoCodecTypeHEVCWithAlpha(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// AVVideoCodecHEVC returns the string constant AVVideoCodecHEVC as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecHEVC() objc.ID {
-	return purego.CFConstant(raw.AVVideoCodecHEVC())
-}
-
-// AVVideoCodecH264 returns the string constant AVVideoCodecH264 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecH264() objc.ID {
-	return purego.CFConstant(raw.AVVideoCodecH264())
-}
-
-// AVVideoCodecJPEG returns the string constant AVVideoCodecJPEG as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecJPEG() objc.ID {
-	return purego.CFConstant(raw.AVVideoCodecJPEG())
+// AVVideoCodecTypeJPEG returns the string constant AVVideoCodecTypeJPEG, for use as a dictionary key or argument.
+func AVVideoCodecTypeJPEG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeJPEG")))
 }
 
-// AVVideoCodecAppleProRes4444 returns the string constant AVVideoCodecAppleProRes4444 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecAppleProRes4444() objc.ID {
-	return purego.CFConstant(raw.AVVideoCodecAppleProRes4444())
+// AVVideoCodecTypeJPEGXL returns the string constant AVVideoCodecTypeJPEGXL, for use as a dictionary key or argument.
+func AVVideoCodecTypeJPEGXL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeJPEGXL")))
 }
 
-// AVVideoCodecAppleProRes422 returns the string constant AVVideoCodecAppleProRes422 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCodecAppleProRes422() objc.ID {
-	return purego.CFConstant(raw.AVVideoCodecAppleProRes422())
+// AVVideoCodecTypeAppleProRes4444 returns the string constant AVVideoCodecTypeAppleProRes4444, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProRes4444() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProRes4444")))
 }
 
-// AVVideoWidthKey returns the string constant AVVideoWidthKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoWidthKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoWidthKey())
+// AVVideoCodecTypeAppleProRes4444XQ returns the string constant AVVideoCodecTypeAppleProRes4444XQ, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProRes4444XQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProRes4444XQ")))
 }
 
-// AVVideoHeightKey returns the string constant AVVideoHeightKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoHeightKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoHeightKey())
+// AVVideoCodecTypeAppleProRes422 returns the string constant AVVideoCodecTypeAppleProRes422, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProRes422() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProRes422")))
 }
 
-// @constant	AVVideoPixelAspectRatioKey @abstract	The aspect ratio of the pixels in the video frame @discussion The value for this key is an NSDictionary containing AVVideoPixelAspectRatio*Key keys.  If no value is specified for this key, the default value for the codec is used.  Usually this is 1:1, meaning square pixels. Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
-// AVVideoPixelAspectRatioKey returns the string constant AVVideoPixelAspectRatioKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoPixelAspectRatioKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoPixelAspectRatioKey())
+// AVVideoCodecTypeAppleProRes422HQ returns the string constant AVVideoCodecTypeAppleProRes422HQ, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProRes422HQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProRes422HQ")))
 }
 
-// AVVideoPixelAspectRatioHorizontalSpacingKey returns the string constant AVVideoPixelAspectRatioHorizontalSpacingKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoPixelAspectRatioHorizontalSpacingKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoPixelAspectRatioHorizontalSpacingKey())
+// AVVideoCodecTypeAppleProRes422LT returns the string constant AVVideoCodecTypeAppleProRes422LT, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProRes422LT() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProRes422LT")))
 }
 
-// AVVideoPixelAspectRatioVerticalSpacingKey returns the string constant AVVideoPixelAspectRatioVerticalSpacingKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoPixelAspectRatioVerticalSpacingKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoPixelAspectRatioVerticalSpacingKey())
+// AVVideoCodecTypeAppleProRes422Proxy returns the string constant AVVideoCodecTypeAppleProRes422Proxy, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProRes422Proxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProRes422Proxy")))
 }
 
-// @constant	AVVideoCleanApertureKey @abstract	Defines the region within the video dimensions that will be displayed during playback @discussion The value for this key is an NSDictionary containing AVVideoCleanAperture*Key keys.  AVVideoCleanApertureWidthKey and AVVideoCleanApertureHeightKey define a clean rectangle which is centered on the video frame.  To offset this rectangle from center, use AVVideoCleanApertureHorizontalOffsetKey and AVVideoCleanApertureVerticalOffsetKey.  A positive value for AVVideoCleanApertureHorizontalOffsetKey moves the clean aperture region to the right, and a positive value for AVVideoCleanApertureVerticalOffsetKey moves the clean aperture region down. If no clean aperture region is specified, the entire frame will be displayed during playback. Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
-// AVVideoCleanApertureKey returns the string constant AVVideoCleanApertureKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCleanApertureKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCleanApertureKey())
+// AVVideoCodecTypeAppleProResRAW returns the string constant AVVideoCodecTypeAppleProResRAW, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProResRAW() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProResRAW")))
 }
 
-// AVVideoCleanApertureWidthKey returns the string constant AVVideoCleanApertureWidthKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCleanApertureWidthKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCleanApertureWidthKey())
+// AVVideoCodecTypeAppleProResRAWHQ returns the string constant AVVideoCodecTypeAppleProResRAWHQ, for use as a dictionary key or argument.
+func AVVideoCodecTypeAppleProResRAWHQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeAppleProResRAWHQ")))
 }
 
-// AVVideoCleanApertureHeightKey returns the string constant AVVideoCleanApertureHeightKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCleanApertureHeightKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCleanApertureHeightKey())
+// AVVideoCodecTypeHEVCWithAlpha returns the string constant AVVideoCodecTypeHEVCWithAlpha, for use as a dictionary key or argument.
+func AVVideoCodecTypeHEVCWithAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecTypeHEVCWithAlpha")))
 }
 
-// AVVideoCleanApertureHorizontalOffsetKey returns the string constant AVVideoCleanApertureHorizontalOffsetKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCleanApertureHorizontalOffsetKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCleanApertureHorizontalOffsetKey())
+// AVVideoCodecHEVC returns the string constant AVVideoCodecHEVC, for use as a dictionary key or argument.
+func AVVideoCodecHEVC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecHEVC"))) }
+
+// AVVideoCodecH264 returns the string constant AVVideoCodecH264, for use as a dictionary key or argument.
+func AVVideoCodecH264() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecH264"))) }
+
+// AVVideoCodecJPEG returns the string constant AVVideoCodecJPEG, for use as a dictionary key or argument.
+func AVVideoCodecJPEG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecJPEG"))) }
+
+// AVVideoCodecAppleProRes4444 returns the string constant AVVideoCodecAppleProRes4444, for use as a dictionary key or argument.
+func AVVideoCodecAppleProRes4444() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecAppleProRes4444")))
+}
+
+// AVVideoCodecAppleProRes422 returns the string constant AVVideoCodecAppleProRes422, for use as a dictionary key or argument.
+func AVVideoCodecAppleProRes422() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCodecAppleProRes422")))
+}
+
+// AVVideoWidthKey returns the string constant AVVideoWidthKey, for use as a dictionary key or argument.
+func AVVideoWidthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoWidthKey"))) }
+
+// AVVideoHeightKey returns the string constant AVVideoHeightKey, for use as a dictionary key or argument.
+func AVVideoHeightKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoHeightKey"))) }
+
+// AVVideoPixelAspectRatioKey returns the string constant AVVideoPixelAspectRatioKey, for use as a dictionary key or argument.
+func AVVideoPixelAspectRatioKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoPixelAspectRatioKey")))
+}
+
+// AVVideoPixelAspectRatioHorizontalSpacingKey returns the string constant AVVideoPixelAspectRatioHorizontalSpacingKey, for use as a dictionary key or argument.
+func AVVideoPixelAspectRatioHorizontalSpacingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoPixelAspectRatioHorizontalSpacingKey")))
+}
+
+// AVVideoPixelAspectRatioVerticalSpacingKey returns the string constant AVVideoPixelAspectRatioVerticalSpacingKey, for use as a dictionary key or argument.
+func AVVideoPixelAspectRatioVerticalSpacingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoPixelAspectRatioVerticalSpacingKey")))
 }
 
-// AVVideoCleanApertureVerticalOffsetKey returns the string constant AVVideoCleanApertureVerticalOffsetKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCleanApertureVerticalOffsetKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCleanApertureVerticalOffsetKey())
+// AVVideoCleanApertureKey returns the string constant AVVideoCleanApertureKey, for use as a dictionary key or argument.
+func AVVideoCleanApertureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCleanApertureKey")))
 }
 
-// AVVideoScalingModeKey returns the string constant AVVideoScalingModeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoScalingModeKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoScalingModeKey())
+// AVVideoCleanApertureWidthKey returns the string constant AVVideoCleanApertureWidthKey, for use as a dictionary key or argument.
+func AVVideoCleanApertureWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCleanApertureWidthKey")))
 }
 
-// AVVideoScalingModeFit returns the string constant AVVideoScalingModeFit as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoScalingModeFit() objc.ID {
-	return purego.CFConstant(raw.AVVideoScalingModeFit())
+// AVVideoCleanApertureHeightKey returns the string constant AVVideoCleanApertureHeightKey, for use as a dictionary key or argument.
+func AVVideoCleanApertureHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCleanApertureHeightKey")))
 }
 
-// AVVideoScalingModeResize returns the string constant AVVideoScalingModeResize as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoScalingModeResize() objc.ID {
-	return purego.CFConstant(raw.AVVideoScalingModeResize())
+// AVVideoCleanApertureHorizontalOffsetKey returns the string constant AVVideoCleanApertureHorizontalOffsetKey, for use as a dictionary key or argument.
+func AVVideoCleanApertureHorizontalOffsetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCleanApertureHorizontalOffsetKey")))
 }
 
-// AVVideoScalingModeResizeAspect returns the string constant AVVideoScalingModeResizeAspect as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoScalingModeResizeAspect() objc.ID {
-	return purego.CFConstant(raw.AVVideoScalingModeResizeAspect())
+// AVVideoCleanApertureVerticalOffsetKey returns the string constant AVVideoCleanApertureVerticalOffsetKey, for use as a dictionary key or argument.
+func AVVideoCleanApertureVerticalOffsetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCleanApertureVerticalOffsetKey")))
 }
 
-// AVVideoScalingModeResizeAspectFill returns the string constant AVVideoScalingModeResizeAspectFill as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoScalingModeResizeAspectFill() objc.ID {
-	return purego.CFConstant(raw.AVVideoScalingModeResizeAspectFill())
+// AVVideoScalingModeKey returns the string constant AVVideoScalingModeKey, for use as a dictionary key or argument.
+func AVVideoScalingModeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoScalingModeKey")))
 }
 
-// AVVideoColorPropertiesKey returns the string constant AVVideoColorPropertiesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPropertiesKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPropertiesKey())
+// AVVideoScalingModeFit returns the string constant AVVideoScalingModeFit, for use as a dictionary key or argument.
+func AVVideoScalingModeFit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoScalingModeFit")))
 }
 
-// AVVideoColorPrimariesKey returns the string constant AVVideoColorPrimariesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPrimariesKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPrimariesKey())
+// AVVideoScalingModeResize returns the string constant AVVideoScalingModeResize, for use as a dictionary key or argument.
+func AVVideoScalingModeResize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoScalingModeResize")))
 }
 
-// AVVideoColorPrimaries_ITU_R_709_2 returns the string constant AVVideoColorPrimaries_ITU_R_709_2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPrimaries_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPrimaries_ITU_R_709_2())
+// AVVideoScalingModeResizeAspect returns the string constant AVVideoScalingModeResizeAspect, for use as a dictionary key or argument.
+func AVVideoScalingModeResizeAspect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoScalingModeResizeAspect")))
 }
 
-// AVVideoColorPrimaries_EBU_3213 returns the string constant AVVideoColorPrimaries_EBU_3213 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPrimaries_EBU_3213() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPrimaries_EBU_3213())
+// AVVideoScalingModeResizeAspectFill returns the string constant AVVideoScalingModeResizeAspectFill, for use as a dictionary key or argument.
+func AVVideoScalingModeResizeAspectFill() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoScalingModeResizeAspectFill")))
 }
 
-// AVVideoColorPrimaries_SMPTE_C returns the string constant AVVideoColorPrimaries_SMPTE_C as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPrimaries_SMPTE_C() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPrimaries_SMPTE_C())
+// AVVideoColorPropertiesKey returns the string constant AVVideoColorPropertiesKey, for use as a dictionary key or argument.
+func AVVideoColorPropertiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPropertiesKey")))
 }
 
-// AVVideoColorPrimaries_P3_D65 returns the string constant AVVideoColorPrimaries_P3_D65 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPrimaries_P3_D65() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPrimaries_P3_D65())
+// AVVideoColorPrimariesKey returns the string constant AVVideoColorPrimariesKey, for use as a dictionary key or argument.
+func AVVideoColorPrimariesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPrimariesKey")))
 }
 
-// AVVideoColorPrimaries_ITU_R_2020 returns the string constant AVVideoColorPrimaries_ITU_R_2020 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoColorPrimaries_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.AVVideoColorPrimaries_ITU_R_2020())
+// AVVideoColorPrimaries_ITU_R_709_2 returns the string constant AVVideoColorPrimaries_ITU_R_709_2, for use as a dictionary key or argument.
+func AVVideoColorPrimaries_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPrimaries_ITU_R_709_2")))
 }
 
-// AVVideoTransferFunctionKey returns the string constant AVVideoTransferFunctionKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunctionKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunctionKey())
+// AVVideoColorPrimaries_EBU_3213 returns the string constant AVVideoColorPrimaries_EBU_3213, for use as a dictionary key or argument.
+func AVVideoColorPrimaries_EBU_3213() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPrimaries_EBU_3213")))
 }
 
-// AVVideoTransferFunction_ITU_R_709_2 returns the string constant AVVideoTransferFunction_ITU_R_709_2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunction_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunction_ITU_R_709_2())
+// AVVideoColorPrimaries_SMPTE_C returns the string constant AVVideoColorPrimaries_SMPTE_C, for use as a dictionary key or argument.
+func AVVideoColorPrimaries_SMPTE_C() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPrimaries_SMPTE_C")))
 }
 
-// AVVideoTransferFunction_SMPTE_240M_1995 returns the string constant AVVideoTransferFunction_SMPTE_240M_1995 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunction_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunction_SMPTE_240M_1995())
+// AVVideoColorPrimaries_P3_D65 returns the string constant AVVideoColorPrimaries_P3_D65, for use as a dictionary key or argument.
+func AVVideoColorPrimaries_P3_D65() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPrimaries_P3_D65")))
 }
 
-// AVVideoTransferFunction_SMPTE_ST_2084_PQ returns the string constant AVVideoTransferFunction_SMPTE_ST_2084_PQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunction_SMPTE_ST_2084_PQ() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunction_SMPTE_ST_2084_PQ())
+// AVVideoColorPrimaries_ITU_R_2020 returns the string constant AVVideoColorPrimaries_ITU_R_2020, for use as a dictionary key or argument.
+func AVVideoColorPrimaries_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoColorPrimaries_ITU_R_2020")))
 }
 
-// AVVideoTransferFunction_ITU_R_2100_HLG returns the string constant AVVideoTransferFunction_ITU_R_2100_HLG as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunction_ITU_R_2100_HLG() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunction_ITU_R_2100_HLG())
+// AVVideoTransferFunctionKey returns the string constant AVVideoTransferFunctionKey, for use as a dictionary key or argument.
+func AVVideoTransferFunctionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunctionKey")))
 }
 
-// AVVideoTransferFunction_Linear returns the string constant AVVideoTransferFunction_Linear as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunction_Linear() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunction_Linear())
+// AVVideoTransferFunction_ITU_R_709_2 returns the string constant AVVideoTransferFunction_ITU_R_709_2, for use as a dictionary key or argument.
+func AVVideoTransferFunction_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunction_ITU_R_709_2")))
 }
 
-// AVVideoTransferFunction_IEC_sRGB returns the string constant AVVideoTransferFunction_IEC_sRGB as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoTransferFunction_IEC_sRGB() objc.ID {
-	return purego.CFConstant(raw.AVVideoTransferFunction_IEC_sRGB())
+// AVVideoTransferFunction_SMPTE_240M_1995 returns the string constant AVVideoTransferFunction_SMPTE_240M_1995, for use as a dictionary key or argument.
+func AVVideoTransferFunction_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunction_SMPTE_240M_1995")))
 }
 
-// AVVideoYCbCrMatrixKey returns the string constant AVVideoYCbCrMatrixKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoYCbCrMatrixKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoYCbCrMatrixKey())
+// AVVideoTransferFunction_SMPTE_ST_2084_PQ returns the string constant AVVideoTransferFunction_SMPTE_ST_2084_PQ, for use as a dictionary key or argument.
+func AVVideoTransferFunction_SMPTE_ST_2084_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunction_SMPTE_ST_2084_PQ")))
 }
 
-// AVVideoYCbCrMatrix_ITU_R_709_2 returns the string constant AVVideoYCbCrMatrix_ITU_R_709_2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoYCbCrMatrix_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.AVVideoYCbCrMatrix_ITU_R_709_2())
+// AVVideoTransferFunction_ITU_R_2100_HLG returns the string constant AVVideoTransferFunction_ITU_R_2100_HLG, for use as a dictionary key or argument.
+func AVVideoTransferFunction_ITU_R_2100_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunction_ITU_R_2100_HLG")))
 }
 
-// AVVideoYCbCrMatrix_ITU_R_601_4 returns the string constant AVVideoYCbCrMatrix_ITU_R_601_4 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoYCbCrMatrix_ITU_R_601_4() objc.ID {
-	return purego.CFConstant(raw.AVVideoYCbCrMatrix_ITU_R_601_4())
+// AVVideoTransferFunction_Linear returns the string constant AVVideoTransferFunction_Linear, for use as a dictionary key or argument.
+func AVVideoTransferFunction_Linear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunction_Linear")))
 }
 
-// AVVideoYCbCrMatrix_SMPTE_240M_1995 returns the string constant AVVideoYCbCrMatrix_SMPTE_240M_1995 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoYCbCrMatrix_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.AVVideoYCbCrMatrix_SMPTE_240M_1995())
+// AVVideoTransferFunction_IEC_sRGB returns the string constant AVVideoTransferFunction_IEC_sRGB, for use as a dictionary key or argument.
+func AVVideoTransferFunction_IEC_sRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoTransferFunction_IEC_sRGB")))
 }
 
-// AVVideoYCbCrMatrix_ITU_R_2020 returns the string constant AVVideoYCbCrMatrix_ITU_R_2020 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoYCbCrMatrix_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.AVVideoYCbCrMatrix_ITU_R_2020())
+// AVVideoYCbCrMatrixKey returns the string constant AVVideoYCbCrMatrixKey, for use as a dictionary key or argument.
+func AVVideoYCbCrMatrixKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrixKey")))
 }
 
-// @constant	AVVideoAllowWideColorKey @abstract	Indicates whether the client can process wide color @discussion Clients who wish to process wide color content should set the value of this key to @YES, or specify AVVideoColorPropertiesKey. The default value, @NO, permits implicit color conversions to occur to a non-wide gamut color space.
-// AVVideoAllowWideColorKey returns the string constant AVVideoAllowWideColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoAllowWideColorKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoAllowWideColorKey())
+// AVVideoYCbCrMatrix_ITU_R_709_2 returns the string constant AVVideoYCbCrMatrix_ITU_R_709_2, for use as a dictionary key or argument.
+func AVVideoYCbCrMatrix_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrix_ITU_R_709_2")))
 }
 
-// @constant	AVVideoCompressionPropertiesKey @abstract The value for this key is an instance of NSDictionary, containing properties to be passed down to the video encoder. @discussion Package the below keys in an instance of NSDictionary and use it as the value for AVVideoCompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTCompressionProperties.h. Most keys can only be used for certain encoders.  Look at individual keys for details.
-// AVVideoCompressionPropertiesKey returns the string constant AVVideoCompressionPropertiesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCompressionPropertiesKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoCompressionPropertiesKey())
+// AVVideoYCbCrMatrix_ITU_R_601_4 returns the string constant AVVideoYCbCrMatrix_ITU_R_601_4, for use as a dictionary key or argument.
+func AVVideoYCbCrMatrix_ITU_R_601_4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrix_ITU_R_601_4")))
 }
 
-// AVVideoAverageBitRateKey returns the string constant AVVideoAverageBitRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoAverageBitRateKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoAverageBitRateKey())
+// AVVideoYCbCrMatrix_SMPTE_240M_1995 returns the string constant AVVideoYCbCrMatrix_SMPTE_240M_1995, for use as a dictionary key or argument.
+func AVVideoYCbCrMatrix_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrix_SMPTE_240M_1995")))
 }
 
-// AVVideoQualityKey returns the string constant AVVideoQualityKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoQualityKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoQualityKey())
+// AVVideoYCbCrMatrix_ITU_R_2020 returns the string constant AVVideoYCbCrMatrix_ITU_R_2020, for use as a dictionary key or argument.
+func AVVideoYCbCrMatrix_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoYCbCrMatrix_ITU_R_2020")))
 }
 
-// AVVideoMaxKeyFrameIntervalKey returns the string constant AVVideoMaxKeyFrameIntervalKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoMaxKeyFrameIntervalKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoMaxKeyFrameIntervalKey())
+// AVVideoAllowWideColorKey returns the string constant AVVideoAllowWideColorKey, for use as a dictionary key or argument.
+func AVVideoAllowWideColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAllowWideColorKey")))
 }
 
-// AVVideoMaxKeyFrameIntervalDurationKey returns the string constant AVVideoMaxKeyFrameIntervalDurationKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoMaxKeyFrameIntervalDurationKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoMaxKeyFrameIntervalDurationKey())
+// AVVideoCompressionPropertiesKey returns the string constant AVVideoCompressionPropertiesKey, for use as a dictionary key or argument.
+func AVVideoCompressionPropertiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompressionPropertiesKey")))
 }
 
-// AVVideoAppleProRAWBitDepthKey returns the string constant AVVideoAppleProRAWBitDepthKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoAppleProRAWBitDepthKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoAppleProRAWBitDepthKey())
+// AVVideoAverageBitRateKey returns the string constant AVVideoAverageBitRateKey, for use as a dictionary key or argument.
+func AVVideoAverageBitRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAverageBitRateKey")))
 }
+
+// AVVideoQualityKey returns the string constant AVVideoQualityKey, for use as a dictionary key or argument.
+func AVVideoQualityKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVVideoQualityKey"))) }
 
-// @constant	AVVideoAllowFrameReorderingKey @abstract Enables or disables frame reordering. @discussion In order to achieve the best compression while maintaining image quality, some video encoders can reorder frames.  This means that the order in which the frames will be emitted and stored (the decode order) will be different from the order in which they are presented to the video encoder (the display order). Encoding using frame reordering requires more system resources than encoding without frame reordering, so encoding performance should be taken into account when deciding whether to enable frame reordering.  This is especially important when encoding video data from a real-time source, such as AVCaptureVideoDataOutput.  In this situation, using a value of @NO for AVVideoAllowFrameReorderingKey may yield the best results. The default is @YES, which means that the encoder decides whether to enable frame reordering.
-// AVVideoAllowFrameReorderingKey returns the string constant AVVideoAllowFrameReorderingKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoAllowFrameReorderingKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoAllowFrameReorderingKey())
+// AVVideoMaxKeyFrameIntervalKey returns the string constant AVVideoMaxKeyFrameIntervalKey, for use as a dictionary key or argument.
+func AVVideoMaxKeyFrameIntervalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoMaxKeyFrameIntervalKey")))
 }
 
-// AVVideoProfileLevelKey returns the string constant AVVideoProfileLevelKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelKey())
+// AVVideoMaxKeyFrameIntervalDurationKey returns the string constant AVVideoMaxKeyFrameIntervalDurationKey, for use as a dictionary key or argument.
+func AVVideoMaxKeyFrameIntervalDurationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoMaxKeyFrameIntervalDurationKey")))
 }
 
-// AVVideoProfileLevelH264Baseline30 returns the string constant AVVideoProfileLevelH264Baseline30 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Baseline30() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Baseline30())
+// AVVideoAppleProRAWBitDepthKey returns the string constant AVVideoAppleProRAWBitDepthKey, for use as a dictionary key or argument.
+func AVVideoAppleProRAWBitDepthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAppleProRAWBitDepthKey")))
 }
 
-// AVVideoProfileLevelH264Baseline31 returns the string constant AVVideoProfileLevelH264Baseline31 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Baseline31() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Baseline31())
+// AVVideoAllowFrameReorderingKey returns the string constant AVVideoAllowFrameReorderingKey, for use as a dictionary key or argument.
+func AVVideoAllowFrameReorderingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAllowFrameReorderingKey")))
 }
 
-// AVVideoProfileLevelH264Baseline41 returns the string constant AVVideoProfileLevelH264Baseline41 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Baseline41() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Baseline41())
+// AVVideoProfileLevelKey returns the string constant AVVideoProfileLevelKey, for use as a dictionary key or argument.
+func AVVideoProfileLevelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelKey")))
 }
 
-// AVVideoProfileLevelH264BaselineAutoLevel returns the string constant AVVideoProfileLevelH264BaselineAutoLevel as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264BaselineAutoLevel() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264BaselineAutoLevel())
+// AVVideoProfileLevelH264Baseline30 returns the string constant AVVideoProfileLevelH264Baseline30, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Baseline30() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Baseline30")))
 }
 
-// AVVideoProfileLevelH264Main30 returns the string constant AVVideoProfileLevelH264Main30 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Main30() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Main30())
+// AVVideoProfileLevelH264Baseline31 returns the string constant AVVideoProfileLevelH264Baseline31, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Baseline31() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Baseline31")))
 }
 
-// AVVideoProfileLevelH264Main31 returns the string constant AVVideoProfileLevelH264Main31 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Main31() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Main31())
+// AVVideoProfileLevelH264Baseline41 returns the string constant AVVideoProfileLevelH264Baseline41, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Baseline41() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Baseline41")))
 }
 
-// AVVideoProfileLevelH264Main32 returns the string constant AVVideoProfileLevelH264Main32 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Main32() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Main32())
+// AVVideoProfileLevelH264BaselineAutoLevel returns the string constant AVVideoProfileLevelH264BaselineAutoLevel, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264BaselineAutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264BaselineAutoLevel")))
 }
 
-// AVVideoProfileLevelH264Main41 returns the string constant AVVideoProfileLevelH264Main41 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264Main41() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264Main41())
+// AVVideoProfileLevelH264Main30 returns the string constant AVVideoProfileLevelH264Main30, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Main30() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Main30")))
 }
 
-// AVVideoProfileLevelH264MainAutoLevel returns the string constant AVVideoProfileLevelH264MainAutoLevel as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264MainAutoLevel() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264MainAutoLevel())
+// AVVideoProfileLevelH264Main31 returns the string constant AVVideoProfileLevelH264Main31, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Main31() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Main31")))
 }
 
-// AVVideoProfileLevelH264High40 returns the string constant AVVideoProfileLevelH264High40 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264High40() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264High40())
+// AVVideoProfileLevelH264Main32 returns the string constant AVVideoProfileLevelH264Main32, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Main32() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Main32")))
 }
 
-// AVVideoProfileLevelH264High41 returns the string constant AVVideoProfileLevelH264High41 as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264High41() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264High41())
+// AVVideoProfileLevelH264Main41 returns the string constant AVVideoProfileLevelH264Main41, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264Main41() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264Main41")))
 }
 
-// AVVideoProfileLevelH264HighAutoLevel returns the string constant AVVideoProfileLevelH264HighAutoLevel as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoProfileLevelH264HighAutoLevel() objc.ID {
-	return purego.CFConstant(raw.AVVideoProfileLevelH264HighAutoLevel())
+// AVVideoProfileLevelH264MainAutoLevel returns the string constant AVVideoProfileLevelH264MainAutoLevel, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264MainAutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264MainAutoLevel")))
 }
 
-// @constant	AVVideoH264EntropyModeKey @abstract The entropy encoding mode for H.264 compression. @discussion If supported by an H.264 encoder, this property controls whether the encoder should use Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC).  CABAC generally gives better compression at the expense of higher computational overhead.  The default value is encoder-specific and may change depending on other encoder settings.  Care should be taken when using this property -- changes may result in a configuration which is not compatible with a requested Profile and Level.  Results in this case are undefined, and could include encode errors or a non-compliant output stream.
-// AVVideoH264EntropyModeKey returns the string constant AVVideoH264EntropyModeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoH264EntropyModeKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoH264EntropyModeKey())
+// AVVideoProfileLevelH264High40 returns the string constant AVVideoProfileLevelH264High40, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264High40() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264High40")))
 }
 
-// AVVideoH264EntropyModeCAVLC returns the string constant AVVideoH264EntropyModeCAVLC as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoH264EntropyModeCAVLC() objc.ID {
-	return purego.CFConstant(raw.AVVideoH264EntropyModeCAVLC())
+// AVVideoProfileLevelH264High41 returns the string constant AVVideoProfileLevelH264High41, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264High41() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264High41")))
 }
 
-// AVVideoH264EntropyModeCABAC returns the string constant AVVideoH264EntropyModeCABAC as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoH264EntropyModeCABAC() objc.ID {
-	return purego.CFConstant(raw.AVVideoH264EntropyModeCABAC())
+// AVVideoProfileLevelH264HighAutoLevel returns the string constant AVVideoProfileLevelH264HighAutoLevel, for use as a dictionary key or argument.
+func AVVideoProfileLevelH264HighAutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoProfileLevelH264HighAutoLevel")))
 }
 
-// @constant	AVVideoExpectedSourceFrameRateKey @abstract Indicates the expected source frame rate, if known. @discussion The frame rate is measured in frames per second. This is not used to control the frame rate; it is provided as a hint to the video encoder so that it can set up internal configuration before compression begins. The actual frame rate will depend on frame durations and may vary. This should be set if an AutoLevel AVVideoProfileLevelKey is used, or if the source content has a high frame rate (higher than 30 fps). The encoder might have to drop frames to satisfy bit stream requirements if this key is not specified.
-// AVVideoExpectedSourceFrameRateKey returns the string constant AVVideoExpectedSourceFrameRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoExpectedSourceFrameRateKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoExpectedSourceFrameRateKey())
+// AVVideoH264EntropyModeKey returns the string constant AVVideoH264EntropyModeKey, for use as a dictionary key or argument.
+func AVVideoH264EntropyModeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoH264EntropyModeKey")))
 }
 
-// @constant	AVVideoAverageNonDroppableFrameRateKey @abstract The desired average number of non-droppable frames to be encoded for each second of video. @discussion Some video encoders can produce a flexible mixture of non-droppable frames and droppable frames.  The difference between these types is that it is necessary for a video decoder to decode a non-droppable frame in order to successfully decode subsequent frames, whereas droppable frames are optional and can be skipped without impact on decode of subsequent frames.  Having a proportion of droppable frames in a sequence has advantages for temporal scalability: at playback time more or fewer frames may be decoded depending on the play rate.  This property requests that the encoder emit an overall proportion of non-droppable and droppable frames so that there are the specified number of non-droppable frames per second. For example, to specify that the encoder should include an average of 30 non-droppable frames for each second of video: [myVideoSettings setObject:@30 forKey:AVVideoAverageNonDroppableFrameRateKey];
-// AVVideoAverageNonDroppableFrameRateKey returns the string constant AVVideoAverageNonDroppableFrameRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoAverageNonDroppableFrameRateKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoAverageNonDroppableFrameRateKey())
+// AVVideoH264EntropyModeCAVLC returns the string constant AVVideoH264EntropyModeCAVLC, for use as a dictionary key or argument.
+func AVVideoH264EntropyModeCAVLC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoH264EntropyModeCAVLC")))
 }
 
-// @constant	AVVideoDecompressionPropertiesKey @abstract The value for this key is an instance of NSDictionary, containing properties to be passed down to the video decoder. @discussion Package the below keys in an instance of NSDictionary and use it as the value for AVVideoDecompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTDecompressionProperties.h. Most keys can only be used for certain decoders.  Look at individual keys for details.
-// AVVideoDecompressionPropertiesKey returns the string constant AVVideoDecompressionPropertiesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoDecompressionPropertiesKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoDecompressionPropertiesKey())
+// AVVideoH264EntropyModeCABAC returns the string constant AVVideoH264EntropyModeCABAC, for use as a dictionary key or argument.
+func AVVideoH264EntropyModeCABAC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoH264EntropyModeCABAC")))
 }
 
-// @constant AVVideoEncoderSpecificationKey @abstract The video encoder specification includes options for choosing a specific video encoder. @discussion The value for this key is a dictionary containing kVTVideoEncoderSpecification_* keys specified in the VideoToolbox framework.  This key should be specified at the top level of an AVVideoSettings dictionary.
-// AVVideoEncoderSpecificationKey returns the string constant AVVideoEncoderSpecificationKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoEncoderSpecificationKey() objc.ID {
-	return purego.CFConstant(raw.AVVideoEncoderSpecificationKey())
+// AVVideoExpectedSourceFrameRateKey returns the string constant AVVideoExpectedSourceFrameRateKey, for use as a dictionary key or argument.
+func AVVideoExpectedSourceFrameRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoExpectedSourceFrameRateKey")))
 }
 
-// @constant	AVVideoApertureModeCleanAperture @abstract	Both pixel aspect ratio and clean aperture will be applied. @discussion An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
-// AVVideoApertureModeCleanAperture returns the string constant AVVideoApertureModeCleanAperture as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoApertureModeCleanAperture() objc.ID {
-	if _r := raw.AVVideoApertureModeCleanAperture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVVideoAverageNonDroppableFrameRateKey returns the string constant AVVideoAverageNonDroppableFrameRateKey, for use as a dictionary key or argument.
+func AVVideoAverageNonDroppableFrameRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoAverageNonDroppableFrameRateKey")))
 }
 
-// @constant	AVVideoApertureModeProductionAperture @abstract	Only pixel aspect ratio will be applied. @discussion The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
-// AVVideoApertureModeProductionAperture returns the string constant AVVideoApertureModeProductionAperture as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoApertureModeProductionAperture() objc.ID {
-	if _r := raw.AVVideoApertureModeProductionAperture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVVideoDecompressionPropertiesKey returns the string constant AVVideoDecompressionPropertiesKey, for use as a dictionary key or argument.
+func AVVideoDecompressionPropertiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoDecompressionPropertiesKey")))
 }
 
-// @constant	AVVideoApertureModeEncodedPixels @abstract	Neither pixel aspect ratio nor clean aperture will be applied. @discussion The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
-// AVVideoApertureModeEncodedPixels returns the string constant AVVideoApertureModeEncodedPixels as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoApertureModeEncodedPixels() objc.ID {
-	if _r := raw.AVVideoApertureModeEncodedPixels(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVVideoEncoderSpecificationKey returns the string constant AVVideoEncoderSpecificationKey, for use as a dictionary key or argument.
+func AVVideoEncoderSpecificationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoEncoderSpecificationKey")))
 }
 
-// Indicates whether the asset should be prepared to indicate a precise duration and provide precise random access by time. The value for this key is a boolean NSNumber. If nil is passed as the value of the options parameter to -[AVURLAsset initWithURL:options:], or if a dictionary that lacks a value for the key AVURLAssetPreferPreciseDurationAndTimingKey is passed instead, a default value of NO is assumed. If the asset is intended to be played only, because AVPlayer will support approximate random access by time when full precision isn't available, the default value of NO will suffice. Pass YES if longer loading times are acceptable in cases in which precise timing is required. If the asset is intended to be inserted into an AVMutableComposition, precise random access is typically desirable and the value of YES is recommended. Note that such precision may require additional parsing of the resource in advance of operations that make use of any portion of it, depending on the specifics of its container format. Many container formats provide sufficient summary information for precise timing and do not require additional parsing to prepare for it; QuickTime movie files and MPEG-4 files are examples of such formats. Other formats do not provide sufficient summary information, and precise random access for them is possible only after a preliminary examination of a file's contents. If you pass YES for an asset that you intend to play via an instance of AVPlayerItem and you are prepared for playback to commence before the value of -[AVPlayerItem duration] becomes available, you can omit the key @"duration" from the array of AVAsset keys you pass to -[AVPlayerItem initWithAsset:automaticallyLoadedAssetKeys:] in order to prevent AVPlayerItem from automatically loading the value of duration while the item becomes ready to play. If precise duration and timing is not possible for the timed media resource referenced by the asset's URL, AVAsset.providesPreciseDurationAndTiming will be NO even if precise timing is requested via the use of this key.
-// AVURLAssetPreferPreciseDurationAndTimingKey returns the string constant AVURLAssetPreferPreciseDurationAndTimingKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetPreferPreciseDurationAndTimingKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetPreferPreciseDurationAndTimingKey())
+// AVVideoApertureModeCleanAperture returns the string constant AVVideoApertureModeCleanAperture, for use as a dictionary key or argument.
+func AVVideoApertureModeCleanAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoApertureModeCleanAperture")))
 }
 
-// Indicates the MIME type that should be used to identify the format of the media resource. When a value for this key is provided, only the specified MIME type is considered in determining how to handle or parse the media resource. Any other information that may be available, such as the URL path extension or a server-provided MIME type, is ignored.
-// AVURLAssetOverrideMIMETypeKey returns the string constant AVURLAssetOverrideMIMETypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetOverrideMIMETypeKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetOverrideMIMETypeKey())
+// AVVideoApertureModeProductionAperture returns the string constant AVVideoApertureModeProductionAperture, for use as a dictionary key or argument.
+func AVVideoApertureModeProductionAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoApertureModeProductionAperture")))
 }
 
-// Indicates the restrictions used by the asset when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. Some assets can contain references to media data stored outside the asset's container file, for example in another file. This key can be used to specify a policy to use when these references are encountered. If an asset contains one or more references of a type that is forbidden by the reference restrictions, loading of asset properties will fail. In addition, such an asset cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
-// AVURLAssetReferenceRestrictionsKey returns the string constant AVURLAssetReferenceRestrictionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetReferenceRestrictionsKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetReferenceRestrictionsKey())
+// AVVideoApertureModeEncodedPixels returns the string constant AVVideoApertureModeEncodedPixels, for use as a dictionary key or argument.
+func AVVideoApertureModeEncodedPixels() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoApertureModeEncodedPixels")))
 }
 
-// HTTP cookies that the AVURLAsset may send with HTTP requests Standard cross-site policy still applies: cookies will only be sent to domains to which they apply. By default, an AVURLAsset will only have access to cookies in the client's default cookie storage that apply to the AVURLAsset's URL. You can supplement the cookies available to the asset via use of this initialization option HTTP cookies do not apply to non-HTTP(S) URLS. In HLS, many HTTP requests (e.g., media, crypt key, variant index) might be issued to different paths or hosts. In both of these cases, HTTP requests will be missing any cookies that do not apply to the AVURLAsset's URL. This init option allows the AVURLAsset to use additional HTTP cookies for those HTTP(S) requests.
-// AVURLAssetHTTPCookiesKey returns the string constant AVURLAssetHTTPCookiesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetHTTPCookiesKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetHTTPCookiesKey())
+// AVURLAssetPreferPreciseDurationAndTimingKey returns the string constant AVURLAssetPreferPreciseDurationAndTimingKey, for use as a dictionary key or argument.
+func AVURLAssetPreferPreciseDurationAndTimingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetPreferPreciseDurationAndTimingKey")))
 }
 
-// Indicates whether network requests on behalf of this asset are allowed to use the cellular interface. Default is YES.
-// AVURLAssetAllowsCellularAccessKey returns the string constant AVURLAssetAllowsCellularAccessKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetAllowsCellularAccessKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetAllowsCellularAccessKey())
+// AVURLAssetOverrideMIMETypeKey returns the string constant AVURLAssetOverrideMIMETypeKey, for use as a dictionary key or argument.
+func AVURLAssetOverrideMIMETypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetOverrideMIMETypeKey")))
 }
 
-// Indicates whether network requests on behalf of this asset are allowed to use the expensive interface (e.g. cellular, tethered, constrained). Default is YES.
-// AVURLAssetAllowsExpensiveNetworkAccessKey returns the string constant AVURLAssetAllowsExpensiveNetworkAccessKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetAllowsExpensiveNetworkAccessKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetAllowsExpensiveNetworkAccessKey())
+// AVURLAssetReferenceRestrictionsKey returns the string constant AVURLAssetReferenceRestrictionsKey, for use as a dictionary key or argument.
+func AVURLAssetReferenceRestrictionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetReferenceRestrictionsKey")))
 }
 
-// Indicates whether network requests on behalf of this asset are allowed to use the constrained interface (e.g. interfaces marked as being in data saver mode). Default is YES.
-// AVURLAssetAllowsConstrainedNetworkAccessKey returns the string constant AVURLAssetAllowsConstrainedNetworkAccessKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetAllowsConstrainedNetworkAccessKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetAllowsConstrainedNetworkAccessKey())
+// AVURLAssetHTTPCookiesKey returns the string constant AVURLAssetHTTPCookiesKey, for use as a dictionary key or argument.
+func AVURLAssetHTTPCookiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetHTTPCookiesKey")))
 }
 
-// Indicates whether alias data references in the asset should be parsed and resolved. Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVURLAsset initialization option is appropriate. If you provide a value for AVURLAssetReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
-// AVURLAssetShouldSupportAliasDataReferencesKey returns the string constant AVURLAssetShouldSupportAliasDataReferencesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetShouldSupportAliasDataReferencesKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetShouldSupportAliasDataReferencesKey())
+// AVURLAssetAllowsCellularAccessKey returns the string constant AVURLAssetAllowsCellularAccessKey, for use as a dictionary key or argument.
+func AVURLAssetAllowsCellularAccessKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetAllowsCellularAccessKey")))
 }
 
-// Specifies the attribution of the URLs requested by this asset. Value is an NSNumber whose value is an NSURLRequestAttribution (see NSURLRequest.h). Default value is NSURLRequestAttributionDeveloper. All NSURLRequests issed on behalf of this AVURLAsset will be attributed with this value and follow the App Privacy Policy accordingly.
-// AVURLAssetURLRequestAttributionKey returns the string constant AVURLAssetURLRequestAttributionKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetURLRequestAttributionKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetURLRequestAttributionKey())
+// AVURLAssetAllowsExpensiveNetworkAccessKey returns the string constant AVURLAssetAllowsExpensiveNetworkAccessKey, for use as a dictionary key or argument.
+func AVURLAssetAllowsExpensiveNetworkAccessKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetAllowsExpensiveNetworkAccessKey")))
 }
 
-// Specifies the value of the User-Agent header to add to HTTP requests made by this asset. Value is an NSString Default value is the systems's default User-Agent.
-// AVURLAssetHTTPUserAgentKey returns the string constant AVURLAssetHTTPUserAgentKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetHTTPUserAgentKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetHTTPUserAgentKey())
+// AVURLAssetAllowsConstrainedNetworkAccessKey returns the string constant AVURLAssetAllowsConstrainedNetworkAccessKey, for use as a dictionary key or argument.
+func AVURLAssetAllowsConstrainedNetworkAccessKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetAllowsConstrainedNetworkAccessKey")))
 }
 
-// Specifies a UUID to append as the value of the query parameter "_HLS_primary_id" to selected HTTP requests issued on behalf of the asset. Supported for HLS assets only. Value is an NSUUID. Its UUID string value will be used as the query parameter. If you create AVURLAssets for the templateItems of AVPlayerInterstitialEvents and you want the instances of AVURLAsset that you create to be used during interstitial playback rather than equivalent AVURLAssets with the same URL, you must provide a value for this key that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVPlayerInterstitialEventController.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets.
-// AVURLAssetPrimarySessionIdentifierKey returns the string constant AVURLAssetPrimarySessionIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetPrimarySessionIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetPrimarySessionIdentifierKey())
+// AVURLAssetShouldSupportAliasDataReferencesKey returns the string constant AVURLAssetShouldSupportAliasDataReferencesKey, for use as a dictionary key or argument.
+func AVURLAssetShouldSupportAliasDataReferencesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetShouldSupportAliasDataReferencesKey")))
 }
 
-// Indicates whether additional projected media signaling in the asset should be parsed and resolved as format description extensions. Default is NO.
-// AVURLAssetShouldParseExternalSphericalTagsKey returns the string constant AVURLAssetShouldParseExternalSphericalTagsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVURLAssetShouldParseExternalSphericalTagsKey() objc.ID {
-	return purego.CFConstant(raw.AVURLAssetShouldParseExternalSphericalTagsKey())
+// AVURLAssetURLRequestAttributionKey returns the string constant AVURLAssetURLRequestAttributionKey, for use as a dictionary key or argument.
+func AVURLAssetURLRequestAttributionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetURLRequestAttributionKey")))
 }
 
-// Posted when the duration of an AVFragmentedAsset changes while it's being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
-// AVAssetDurationDidChangeNotification returns the string constant AVAssetDurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDurationDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetDurationDidChangeNotification())
+// AVURLAssetHTTPUserAgentKey returns the string constant AVURLAssetHTTPUserAgentKey, for use as a dictionary key or argument.
+func AVURLAssetHTTPUserAgentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetHTTPUserAgentKey")))
 }
 
-// Posted after the value of @"containsFragments" has already been loaded and the AVFragmentedAsset is added to an AVFragmentedAssetMinder, either when 1) fragments are detected in the asset on disk after it had previously contained none or when 2) no fragments are detected in the asset on disk after it had previously contained one or more.
-// AVAssetContainsFragmentsDidChangeNotification returns the string constant AVAssetContainsFragmentsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetContainsFragmentsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetContainsFragmentsDidChangeNotification())
+// AVURLAssetPrimarySessionIdentifierKey returns the string constant AVURLAssetPrimarySessionIdentifierKey, for use as a dictionary key or argument.
+func AVURLAssetPrimarySessionIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetPrimarySessionIdentifierKey")))
 }
 
-// Posted when the asset on disk is defragmented while an AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only if the defragmentation occurs after the status of the value of @"canContainFragments" has reached AVKeyValueStatusLoaded. After this notification is posted, the value of the asset properties canContainFragments and containsFragments will both be NO.
-// AVAssetWasDefragmentedNotification returns the string constant AVAssetWasDefragmentedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetWasDefragmentedNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetWasDefragmentedNotification())
+// AVURLAssetShouldParseExternalSphericalTagsKey returns the string constant AVURLAssetShouldParseExternalSphericalTagsKey, for use as a dictionary key or argument.
+func AVURLAssetShouldParseExternalSphericalTagsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVURLAssetShouldParseExternalSphericalTagsKey")))
 }
 
-// Posted when the collection of arrays of timed metadata groups representing chapters of an AVAsset change and when any of the contents of the timed metadata groups change, but only for changes that occur after the status of the value of @"availableChapterLocales" has reached AVKeyValueStatusLoaded.
-// AVAssetChapterMetadataGroupsDidChangeNotification returns the string constant AVAssetChapterMetadataGroupsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetChapterMetadataGroupsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetChapterMetadataGroupsDidChangeNotification())
+// AVAssetDurationDidChangeNotification returns the string constant AVAssetDurationDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetDurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDurationDidChangeNotification")))
 }
 
-// Posted when the collection of media selection groups provided by an AVAsset changes and when any of the contents of its media selection groups change, but only for changes that occur after the status of the value of @"availableMediaCharacteristicsWithMediaSelectionOptions" has reached AVKeyValueStatusLoaded.
-// AVAssetMediaSelectionGroupsDidChangeNotification returns the string constant AVAssetMediaSelectionGroupsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetMediaSelectionGroupsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetMediaSelectionGroupsDidChangeNotification())
+// AVAssetContainsFragmentsDidChangeNotification returns the string constant AVAssetContainsFragmentsDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetContainsFragmentsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetContainsFragmentsDidChangeNotification")))
 }
 
-// AVAudioTimePitchAlgorithmTimeDomain returns the string constant AVAudioTimePitchAlgorithmTimeDomain as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioTimePitchAlgorithmTimeDomain() objc.ID {
-	if _r := raw.AVAudioTimePitchAlgorithmTimeDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetWasDefragmentedNotification returns the string constant AVAssetWasDefragmentedNotification, for use as a dictionary key or argument.
+func AVAssetWasDefragmentedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWasDefragmentedNotification")))
 }
 
-// AVAudioTimePitchAlgorithmSpectral returns the string constant AVAudioTimePitchAlgorithmSpectral as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioTimePitchAlgorithmSpectral() objc.ID {
-	if _r := raw.AVAudioTimePitchAlgorithmSpectral(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetChapterMetadataGroupsDidChangeNotification returns the string constant AVAssetChapterMetadataGroupsDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetChapterMetadataGroupsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetChapterMetadataGroupsDidChangeNotification")))
 }
 
-// AVAudioTimePitchAlgorithmVarispeed returns the string constant AVAudioTimePitchAlgorithmVarispeed as an objc.ID, for use as a dictionary key or selector argument.
-func AVAudioTimePitchAlgorithmVarispeed() objc.ID {
-	if _r := raw.AVAudioTimePitchAlgorithmVarispeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetMediaSelectionGroupsDidChangeNotification returns the string constant AVAssetMediaSelectionGroupsDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetMediaSelectionGroupsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetMediaSelectionGroupsDidChangeNotification")))
 }
 
-// AVAssetExportPresetLowQuality returns the string constant AVAssetExportPresetLowQuality as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetLowQuality() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetLowQuality())
+// AVAudioTimePitchAlgorithmTimeDomain returns the string constant AVAudioTimePitchAlgorithmTimeDomain, for use as a dictionary key or argument.
+func AVAudioTimePitchAlgorithmTimeDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioTimePitchAlgorithmTimeDomain")))
 }
 
-// AVAssetExportPresetMediumQuality returns the string constant AVAssetExportPresetMediumQuality as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetMediumQuality() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetMediumQuality())
+// AVAudioTimePitchAlgorithmSpectral returns the string constant AVAudioTimePitchAlgorithmSpectral, for use as a dictionary key or argument.
+func AVAudioTimePitchAlgorithmSpectral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioTimePitchAlgorithmSpectral")))
 }
 
-// AVAssetExportPresetHighestQuality returns the string constant AVAssetExportPresetHighestQuality as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHighestQuality() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHighestQuality())
+// AVAudioTimePitchAlgorithmVarispeed returns the string constant AVAudioTimePitchAlgorithmVarispeed, for use as a dictionary key or argument.
+func AVAudioTimePitchAlgorithmVarispeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAudioTimePitchAlgorithmVarispeed")))
 }
 
-// AVAssetExportPresetHEVCHighestQuality returns the string constant AVAssetExportPresetHEVCHighestQuality as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVCHighestQuality() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVCHighestQuality())
+// AVAssetExportPresetLowQuality returns the string constant AVAssetExportPresetLowQuality, for use as a dictionary key or argument.
+func AVAssetExportPresetLowQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetLowQuality")))
 }
 
-// AVAssetExportPresetHEVCHighestQualityWithAlpha returns the string constant AVAssetExportPresetHEVCHighestQualityWithAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVCHighestQualityWithAlpha() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVCHighestQualityWithAlpha())
+// AVAssetExportPresetMediumQuality returns the string constant AVAssetExportPresetMediumQuality, for use as a dictionary key or argument.
+func AVAssetExportPresetMediumQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetMediumQuality")))
 }
 
-// AVAssetExportPreset640x480 returns the string constant AVAssetExportPreset640x480 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPreset640x480() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPreset640x480())
+// AVAssetExportPresetHighestQuality returns the string constant AVAssetExportPresetHighestQuality, for use as a dictionary key or argument.
+func AVAssetExportPresetHighestQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHighestQuality")))
 }
 
-// AVAssetExportPreset960x540 returns the string constant AVAssetExportPreset960x540 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPreset960x540() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPreset960x540())
+// AVAssetExportPresetHEVCHighestQuality returns the string constant AVAssetExportPresetHEVCHighestQuality, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVCHighestQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVCHighestQuality")))
 }
 
-// AVAssetExportPreset1280x720 returns the string constant AVAssetExportPreset1280x720 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPreset1280x720() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPreset1280x720())
+// AVAssetExportPresetHEVCHighestQualityWithAlpha returns the string constant AVAssetExportPresetHEVCHighestQualityWithAlpha, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVCHighestQualityWithAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVCHighestQualityWithAlpha")))
 }
 
-// AVAssetExportPreset1920x1080 returns the string constant AVAssetExportPreset1920x1080 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPreset1920x1080() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPreset1920x1080())
+// AVAssetExportPreset640x480 returns the string constant AVAssetExportPreset640x480, for use as a dictionary key or argument.
+func AVAssetExportPreset640x480() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPreset640x480")))
 }
 
-// AVAssetExportPreset3840x2160 returns the string constant AVAssetExportPreset3840x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPreset3840x2160() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPreset3840x2160())
+// AVAssetExportPreset960x540 returns the string constant AVAssetExportPreset960x540, for use as a dictionary key or argument.
+func AVAssetExportPreset960x540() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPreset960x540")))
 }
 
-// AVAssetExportPresetHEVC1920x1080 returns the string constant AVAssetExportPresetHEVC1920x1080 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVC1920x1080() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVC1920x1080())
+// AVAssetExportPreset1280x720 returns the string constant AVAssetExportPreset1280x720, for use as a dictionary key or argument.
+func AVAssetExportPreset1280x720() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPreset1280x720")))
 }
 
-// AVAssetExportPresetHEVC1920x1080WithAlpha returns the string constant AVAssetExportPresetHEVC1920x1080WithAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVC1920x1080WithAlpha() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVC1920x1080WithAlpha())
+// AVAssetExportPreset1920x1080 returns the string constant AVAssetExportPreset1920x1080, for use as a dictionary key or argument.
+func AVAssetExportPreset1920x1080() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPreset1920x1080")))
 }
 
-// AVAssetExportPresetHEVC3840x2160 returns the string constant AVAssetExportPresetHEVC3840x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVC3840x2160() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVC3840x2160())
+// AVAssetExportPreset3840x2160 returns the string constant AVAssetExportPreset3840x2160, for use as a dictionary key or argument.
+func AVAssetExportPreset3840x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPreset3840x2160")))
 }
 
-// AVAssetExportPresetHEVC3840x2160WithAlpha returns the string constant AVAssetExportPresetHEVC3840x2160WithAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVC3840x2160WithAlpha() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVC3840x2160WithAlpha())
+// AVAssetExportPresetHEVC1920x1080 returns the string constant AVAssetExportPresetHEVC1920x1080, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVC1920x1080() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVC1920x1080")))
 }
 
-// AVAssetExportPresetHEVC4320x2160 returns the string constant AVAssetExportPresetHEVC4320x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVC4320x2160() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVC4320x2160())
+// AVAssetExportPresetHEVC1920x1080WithAlpha returns the string constant AVAssetExportPresetHEVC1920x1080WithAlpha, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVC1920x1080WithAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVC1920x1080WithAlpha")))
 }
 
-// AVAssetExportPresetHEVC7680x4320 returns the string constant AVAssetExportPresetHEVC7680x4320 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetHEVC7680x4320() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetHEVC7680x4320())
+// AVAssetExportPresetHEVC3840x2160 returns the string constant AVAssetExportPresetHEVC3840x2160, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVC3840x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVC3840x2160")))
 }
 
-// AVAssetExportPresetMVHEVC960x960 returns the string constant AVAssetExportPresetMVHEVC960x960 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetMVHEVC960x960() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetMVHEVC960x960())
+// AVAssetExportPresetHEVC3840x2160WithAlpha returns the string constant AVAssetExportPresetHEVC3840x2160WithAlpha, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVC3840x2160WithAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVC3840x2160WithAlpha")))
 }
 
-// AVAssetExportPresetMVHEVC1440x1440 returns the string constant AVAssetExportPresetMVHEVC1440x1440 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetMVHEVC1440x1440() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetMVHEVC1440x1440())
+// AVAssetExportPresetHEVC4320x2160 returns the string constant AVAssetExportPresetHEVC4320x2160, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVC4320x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVC4320x2160")))
 }
 
-// AVAssetExportPresetMVHEVC4320x4320 returns the string constant AVAssetExportPresetMVHEVC4320x4320 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetMVHEVC4320x4320() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetMVHEVC4320x4320())
+// AVAssetExportPresetHEVC7680x4320 returns the string constant AVAssetExportPresetHEVC7680x4320, for use as a dictionary key or argument.
+func AVAssetExportPresetHEVC7680x4320() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetHEVC7680x4320")))
 }
 
-// AVAssetExportPresetMVHEVC7680x7680 returns the string constant AVAssetExportPresetMVHEVC7680x7680 as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetMVHEVC7680x7680() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetMVHEVC7680x7680())
+// AVAssetExportPresetMVHEVC960x960 returns the string constant AVAssetExportPresetMVHEVC960x960, for use as a dictionary key or argument.
+func AVAssetExportPresetMVHEVC960x960() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetMVHEVC960x960")))
 }
 
-// AVAssetExportPresetAppleM4A returns the string constant AVAssetExportPresetAppleM4A as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4A() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4A())
+// AVAssetExportPresetMVHEVC1440x1440 returns the string constant AVAssetExportPresetMVHEVC1440x1440, for use as a dictionary key or argument.
+func AVAssetExportPresetMVHEVC1440x1440() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetMVHEVC1440x1440")))
 }
 
-// AVAssetExportPresetPassthrough returns the string constant AVAssetExportPresetPassthrough as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetPassthrough() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetPassthrough())
+// AVAssetExportPresetMVHEVC4320x4320 returns the string constant AVAssetExportPresetMVHEVC4320x4320, for use as a dictionary key or argument.
+func AVAssetExportPresetMVHEVC4320x4320() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetMVHEVC4320x4320")))
 }
 
-// AVAssetExportPresetAppleProRes422LPCM returns the string constant AVAssetExportPresetAppleProRes422LPCM as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleProRes422LPCM() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleProRes422LPCM())
+// AVAssetExportPresetMVHEVC7680x7680 returns the string constant AVAssetExportPresetMVHEVC7680x7680, for use as a dictionary key or argument.
+func AVAssetExportPresetMVHEVC7680x7680() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetMVHEVC7680x7680")))
 }
 
-// AVAssetExportPresetAppleProRes4444LPCM returns the string constant AVAssetExportPresetAppleProRes4444LPCM as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleProRes4444LPCM() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleProRes4444LPCM())
+// AVAssetExportPresetAppleM4A returns the string constant AVAssetExportPresetAppleM4A, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4A() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4A")))
 }
 
-// AVAssetExportPresetAppleM4VCellular returns the string constant AVAssetExportPresetAppleM4VCellular as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4VCellular() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4VCellular())
+// AVAssetExportPresetPassthrough returns the string constant AVAssetExportPresetPassthrough, for use as a dictionary key or argument.
+func AVAssetExportPresetPassthrough() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetPassthrough")))
 }
 
-// AVAssetExportPresetAppleM4ViPod returns the string constant AVAssetExportPresetAppleM4ViPod as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4ViPod() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4ViPod())
+// AVAssetExportPresetAppleProRes422LPCM returns the string constant AVAssetExportPresetAppleProRes422LPCM, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleProRes422LPCM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleProRes422LPCM")))
 }
 
-// AVAssetExportPresetAppleM4V480pSD returns the string constant AVAssetExportPresetAppleM4V480pSD as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4V480pSD() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4V480pSD())
+// AVAssetExportPresetAppleProRes4444LPCM returns the string constant AVAssetExportPresetAppleProRes4444LPCM, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleProRes4444LPCM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleProRes4444LPCM")))
 }
 
-// AVAssetExportPresetAppleM4VAppleTV returns the string constant AVAssetExportPresetAppleM4VAppleTV as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4VAppleTV() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4VAppleTV())
+// AVAssetExportPresetAppleM4VCellular returns the string constant AVAssetExportPresetAppleM4VCellular, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4VCellular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4VCellular")))
 }
 
-// AVAssetExportPresetAppleM4VWiFi returns the string constant AVAssetExportPresetAppleM4VWiFi as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4VWiFi() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4VWiFi())
+// AVAssetExportPresetAppleM4ViPod returns the string constant AVAssetExportPresetAppleM4ViPod, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4ViPod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4ViPod")))
 }
 
-// AVAssetExportPresetAppleM4V720pHD returns the string constant AVAssetExportPresetAppleM4V720pHD as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4V720pHD() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4V720pHD())
+// AVAssetExportPresetAppleM4V480pSD returns the string constant AVAssetExportPresetAppleM4V480pSD, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4V480pSD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4V480pSD")))
 }
 
-// AVAssetExportPresetAppleM4V1080pHD returns the string constant AVAssetExportPresetAppleM4V1080pHD as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetExportPresetAppleM4V1080pHD() objc.ID {
-	return purego.CFConstant(raw.AVAssetExportPresetAppleM4V1080pHD())
+// AVAssetExportPresetAppleM4VAppleTV returns the string constant AVAssetExportPresetAppleM4VAppleTV, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4VAppleTV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4VAppleTV")))
 }
 
-// @constant		AVAssetImageGeneratorApertureModeCleanAperture @abstract		Both pixel aspect ratio and clean aperture will be applied. @discussion An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
-// AVAssetImageGeneratorApertureModeCleanAperture returns the string constant AVAssetImageGeneratorApertureModeCleanAperture as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetImageGeneratorApertureModeCleanAperture() objc.ID {
-	return purego.CFConstant(raw.AVAssetImageGeneratorApertureModeCleanAperture())
+// AVAssetExportPresetAppleM4VWiFi returns the string constant AVAssetExportPresetAppleM4VWiFi, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4VWiFi() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4VWiFi")))
 }
 
-// @constant		AVAssetImageGeneratorApertureModeProductionAperture @abstract		Only pixel aspect ratio will be applied. @discussion The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
-// AVAssetImageGeneratorApertureModeProductionAperture returns the string constant AVAssetImageGeneratorApertureModeProductionAperture as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetImageGeneratorApertureModeProductionAperture() objc.ID {
-	return purego.CFConstant(raw.AVAssetImageGeneratorApertureModeProductionAperture())
+// AVAssetExportPresetAppleM4V720pHD returns the string constant AVAssetExportPresetAppleM4V720pHD, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4V720pHD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4V720pHD")))
 }
 
-// @constant		AVAssetImageGeneratorApertureModeEncodedPixels @abstract		Neither pixel aspect ratio nor clean aperture will be applied. @discussion The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
-// AVAssetImageGeneratorApertureModeEncodedPixels returns the string constant AVAssetImageGeneratorApertureModeEncodedPixels as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetImageGeneratorApertureModeEncodedPixels() objc.ID {
-	return purego.CFConstant(raw.AVAssetImageGeneratorApertureModeEncodedPixels())
+// AVAssetExportPresetAppleM4V1080pHD returns the string constant AVAssetExportPresetAppleM4V1080pHD, for use as a dictionary key or argument.
+func AVAssetExportPresetAppleM4V1080pHD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetExportPresetAppleM4V1080pHD")))
 }
 
-// AVAssetImageGeneratorDynamicRangePolicyForceSDR returns the string constant AVAssetImageGeneratorDynamicRangePolicyForceSDR as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetImageGeneratorDynamicRangePolicyForceSDR() objc.ID {
-	return purego.CFConstant(raw.AVAssetImageGeneratorDynamicRangePolicyForceSDR())
+// AVAssetImageGeneratorApertureModeCleanAperture returns the string constant AVAssetImageGeneratorApertureModeCleanAperture, for use as a dictionary key or argument.
+func AVAssetImageGeneratorApertureModeCleanAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeCleanAperture")))
 }
 
-// AVAssetImageGeneratorDynamicRangePolicyMatchSource returns the string constant AVAssetImageGeneratorDynamicRangePolicyMatchSource as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetImageGeneratorDynamicRangePolicyMatchSource() objc.ID {
-	return purego.CFConstant(raw.AVAssetImageGeneratorDynamicRangePolicyMatchSource())
+// AVAssetImageGeneratorApertureModeProductionAperture returns the string constant AVAssetImageGeneratorApertureModeProductionAperture, for use as a dictionary key or argument.
+func AVAssetImageGeneratorApertureModeProductionAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeProductionAperture")))
 }
 
-// Default. Pass the HDR metadata through, if present on the composed frame.
-// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() objc.ID {
-	if _r := raw.AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetImageGeneratorApertureModeEncodedPixels returns the string constant AVAssetImageGeneratorApertureModeEncodedPixels, for use as a dictionary key or argument.
+func AVAssetImageGeneratorApertureModeEncodedPixels() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorApertureModeEncodedPixels")))
 }
 
-// AVVideoComposition may generate HDR metadata and attach it to the rendered frame. HDR metadata generation is influenced by the color space of the rendered frame, device, and HDR metadata format platform support. Any previously attached HDR metadata of the same metadata format will be overwritten.
-// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate as an objc.ID, for use as a dictionary key or selector argument.
-func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() objc.ID {
-	if _r := raw.AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetImageGeneratorDynamicRangePolicyForceSDR returns the string constant AVAssetImageGeneratorDynamicRangePolicyForceSDR, for use as a dictionary key or argument.
+func AVAssetImageGeneratorDynamicRangePolicyForceSDR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorDynamicRangePolicyForceSDR")))
 }
 
-// @constant		AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey @abstract		Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
-// AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey returns the string constant AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey())
+// AVAssetImageGeneratorDynamicRangePolicyMatchSource returns the string constant AVAssetImageGeneratorDynamicRangePolicyMatchSource, for use as a dictionary key or argument.
+func AVAssetImageGeneratorDynamicRangePolicyMatchSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetImageGeneratorDynamicRangePolicyMatchSource")))
 }
 
-// Indicates an association between an audio track with another audio track that contains the same content but is typically encoded in a different format that's more widely supported, used to nominate a track that should be used in place of an unsupported track. Associations of type AVTrackAssociationTypeAudioFallback are supported only between audio tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has content that's less widely supported, and the input parameter should be an instance of AVAssetWriterInput with a corresponding track that has content that's more widely supported. Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout. This would ensure that all clients are capable of playing back some form of the audio.
-// AVTrackAssociationTypeAudioFallback returns the string constant AVTrackAssociationTypeAudioFallback as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeAudioFallback() objc.ID {
-	if _r := raw.AVTrackAssociationTypeAudioFallback(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate, for use as a dictionary key or argument.
+func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate")))
 }
 
-// Indicates an association between a track with another track that contains chapter information. The track containing chapter information may be a text track, a video track, or a timed metadata track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
-// AVTrackAssociationTypeChapterList returns the string constant AVTrackAssociationTypeChapterList as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeChapterList() objc.ID {
-	if _r := raw.AVTrackAssociationTypeChapterList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate returns the string constant AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate, for use as a dictionary key or argument.
+func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate")))
 }
 
-// Indicates an association between a subtitle track typically containing both forced and non-forced subtitles with another subtitle track that contains only forced subtitles, for use when the user indicates that only essential subtitles should be displayed. When such an association is established, the forced subtitles in both tracks are expected to present the same content in the same language but may have different timing. Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
-// AVTrackAssociationTypeForcedSubtitlesOnly returns the string constant AVTrackAssociationTypeForcedSubtitlesOnly as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeForcedSubtitlesOnly() objc.ID {
-	if _r := raw.AVTrackAssociationTypeForcedSubtitlesOnly(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey returns the string constant AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey, for use as a dictionary key or argument.
+func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey")))
 }
 
-// Indicates an association between a pair of tracks that specifies that, when the first of the pair is selected, the second of the pair should be considered an appropriate default for selection also. Example: a subtitle track in the same language as an audio track may be associated with that audio track using AVTrackAssociationTypeSelectionFollower, to indicate that selection of the subtitle track, in the absence of a directive for subtitle selection from the user, can "follow" the selection of the audio track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver. In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
-// AVTrackAssociationTypeSelectionFollower returns the string constant AVTrackAssociationTypeSelectionFollower as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeSelectionFollower() objc.ID {
-	if _r := raw.AVTrackAssociationTypeSelectionFollower(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVTrackAssociationTypeAudioFallback returns the string constant AVTrackAssociationTypeAudioFallback, for use as a dictionary key or argument.
+func AVTrackAssociationTypeAudioFallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeAudioFallback")))
 }
 
-// Indicates an association between a track with another track that contains timecode information. The track containing timecode information should be a timecode track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
-// AVTrackAssociationTypeTimecode returns the string constant AVTrackAssociationTypeTimecode as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeTimecode() objc.ID {
-	if _r := raw.AVTrackAssociationTypeTimecode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVTrackAssociationTypeChapterList returns the string constant AVTrackAssociationTypeChapterList, for use as a dictionary key or argument.
+func AVTrackAssociationTypeChapterList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeChapterList")))
 }
 
-// Indicates an association between a metadata track and the track that's described or annotated via the contents of the metadata track. This track association is optional for AVAssetTracks with the mediaType AVMediaTypeMetadata. When a metadata track lacks this track association, its contents are assumed to describe or annotate the asset as a whole. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType AVMediaTypeMetadata while the input parameter should be an instance of AVAssetWriterInput that's used to create the track to which the contents of the receiver's corresponding metadata track refer.
-// AVTrackAssociationTypeMetadataReferent returns the string constant AVTrackAssociationTypeMetadataReferent as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeMetadataReferent() objc.ID {
-	if _r := raw.AVTrackAssociationTypeMetadataReferent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVTrackAssociationTypeForcedSubtitlesOnly returns the string constant AVTrackAssociationTypeForcedSubtitlesOnly, for use as a dictionary key or argument.
+func AVTrackAssociationTypeForcedSubtitlesOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeForcedSubtitlesOnly")))
 }
 
-// Indicates an association between a metadata track and another track where the metadata provides additional information for rendering of that track. This track association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType, AVMediaTypeMetadata, while the input parameter should be an instance of AVAssetWriterInput for the target track that would be rendered (for example, a video track).
-// AVTrackAssociationTypeRenderMetadataSource returns the string constant AVTrackAssociationTypeRenderMetadataSource as an objc.ID, for use as a dictionary key or selector argument.
-func AVTrackAssociationTypeRenderMetadataSource() objc.ID {
-	if _r := raw.AVTrackAssociationTypeRenderMetadataSource(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVTrackAssociationTypeSelectionFollower returns the string constant AVTrackAssociationTypeSelectionFollower, for use as a dictionary key or argument.
+func AVTrackAssociationTypeSelectionFollower() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeSelectionFollower")))
 }
 
-// Posted when the timeRange of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
-// AVAssetTrackTimeRangeDidChangeNotification returns the string constant AVAssetTrackTimeRangeDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetTrackTimeRangeDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetTrackTimeRangeDidChangeNotification())
+// AVTrackAssociationTypeTimecode returns the string constant AVTrackAssociationTypeTimecode, for use as a dictionary key or argument.
+func AVTrackAssociationTypeTimecode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeTimecode")))
 }
 
-// Posted when the array of segments of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
-// AVAssetTrackSegmentsDidChangeNotification returns the string constant AVAssetTrackSegmentsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetTrackSegmentsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetTrackSegmentsDidChangeNotification())
+// AVTrackAssociationTypeMetadataReferent returns the string constant AVTrackAssociationTypeMetadataReferent, for use as a dictionary key or argument.
+func AVTrackAssociationTypeMetadataReferent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeMetadataReferent")))
 }
 
-// Posted when the collection of track associations of an AVAssetTrack changes, but only for changes that occur after the status of the value of @"availableTrackAssociationTypes" has reached AVKeyValueStatusLoaded.
-// AVAssetTrackTrackAssociationsDidChangeNotification returns the string constant AVAssetTrackTrackAssociationsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetTrackTrackAssociationsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVAssetTrackTrackAssociationsDidChangeNotification())
+// AVTrackAssociationTypeRenderMetadataSource returns the string constant AVTrackAssociationTypeRenderMetadataSource, for use as a dictionary key or argument.
+func AVTrackAssociationTypeRenderMetadataSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVTrackAssociationTypeRenderMetadataSource")))
 }
 
-// Indicates that the media data should be interleaved with all other media data with this constant.
-// AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData() objc.ID {
-	return purego.CFConstant(raw.AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData())
+// AVAssetTrackTimeRangeDidChangeNotification returns the string constant AVAssetTrackTimeRangeDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetTrackTimeRangeDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetTrackTimeRangeDidChangeNotification")))
 }
 
-// Indicates that the media data should be laid out before all the media data with AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData and not be interleaved.
-// AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved returns the string constant AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved() objc.ID {
-	return purego.CFConstant(raw.AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved())
+// AVAssetTrackSegmentsDidChangeNotification returns the string constant AVAssetTrackSegmentsDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetTrackSegmentsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetTrackSegmentsDidChangeNotification")))
 }
 
-// Indicates that there may be large segments of time without any media data from this track. When mediaDataLocation is set to this value, AVAssetWriter will interleave the media data, but will not wait for media data from this track to achieve tight interleaving with other tracks.
-// AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() objc.ID {
-	return purego.CFConstant(raw.AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData())
+// AVAssetTrackTrackAssociationsDidChangeNotification returns the string constant AVAssetTrackTrackAssociationsDidChangeNotification, for use as a dictionary key or argument.
+func AVAssetTrackTrackAssociationsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetTrackTrackAssociationsDidChangeNotification")))
 }
 
-// Indicates whether or not the asset can be rendered as stereo video. Clients may use this property to determine whether to configure stereo video rendering.
-// AVAssetPlaybackConfigurationOptionStereoVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetPlaybackConfigurationOptionStereoVideo() objc.ID {
-	if _r := raw.AVAssetPlaybackConfigurationOptionStereoVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData, for use as a dictionary key or argument.
+func AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData")))
 }
 
-// Indicates whether or not the asset can rendered as stereo video and is also in a multiview compression format. Clients may use this property to determine whether to configure stereo video rendering.
-// AVAssetPlaybackConfigurationOptionStereoMultiviewVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoMultiviewVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetPlaybackConfigurationOptionStereoMultiviewVideo() objc.ID {
-	if _r := raw.AVAssetPlaybackConfigurationOptionStereoMultiviewVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved returns the string constant AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, for use as a dictionary key or argument.
+func AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved")))
 }
 
-// Indicates whether or not the asset can be rendered as spatial video. Clients may use this property to determine whether to configure spatial video rendering.
-// AVAssetPlaybackConfigurationOptionSpatialVideo returns the string constant AVAssetPlaybackConfigurationOptionSpatialVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetPlaybackConfigurationOptionSpatialVideo() objc.ID {
-	if _r := raw.AVAssetPlaybackConfigurationOptionSpatialVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData returns the string constant AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData, for use as a dictionary key or argument.
+func AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetWriterInputMediaDataLocationSparselyInterleavedWithMainMediaData")))
 }
 
-// Indicates whether the asset calls for the use of a non-rectilinear projection for rendering video. Clients may use this property to determine whether to configure a non-rectilinear projection when displaying video.
-// AVAssetPlaybackConfigurationOptionNonRectilinearProjection returns the string constant AVAssetPlaybackConfigurationOptionNonRectilinearProjection as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetPlaybackConfigurationOptionNonRectilinearProjection() objc.ID {
-	if _r := raw.AVAssetPlaybackConfigurationOptionNonRectilinearProjection(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetPlaybackConfigurationOptionStereoVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoVideo, for use as a dictionary key or argument.
+func AVAssetPlaybackConfigurationOptionStereoVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionStereoVideo")))
 }
 
-// Indicates whether the asset is Apple Immersive Video. Clients may use this property to switch into specific display and control modes for Apple Immersive Video playback.
-// AVAssetPlaybackConfigurationOptionAppleImmersiveVideo returns the string constant AVAssetPlaybackConfigurationOptionAppleImmersiveVideo as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetPlaybackConfigurationOptionAppleImmersiveVideo() objc.ID {
-	if _r := raw.AVAssetPlaybackConfigurationOptionAppleImmersiveVideo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetPlaybackConfigurationOptionStereoMultiviewVideo returns the string constant AVAssetPlaybackConfigurationOptionStereoMultiviewVideo, for use as a dictionary key or argument.
+func AVAssetPlaybackConfigurationOptionStereoMultiviewVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionStereoMultiviewVideo")))
 }
 
-// The lowest media bitrate greater than or equal to this value will be selected. Value should be a NSNumber in bps. If no suitable media bitrate is found, the highest media bitrate will be selected. The value for this key should be a NSNumber. By default, the highest media bitrate will be selected for download.
-// AVAssetDownloadTaskMinimumRequiredMediaBitrateKey returns the string constant AVAssetDownloadTaskMinimumRequiredMediaBitrateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadTaskMinimumRequiredMediaBitrateKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetDownloadTaskMinimumRequiredMediaBitrateKey())
+// AVAssetPlaybackConfigurationOptionSpatialVideo returns the string constant AVAssetPlaybackConfigurationOptionSpatialVideo, for use as a dictionary key or argument.
+func AVAssetPlaybackConfigurationOptionSpatialVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionSpatialVideo")))
 }
 
-// The lowest media presentation size greater than or equal to this value will be selected. If no suitable media presentation size is found, the highest media presentation size will be selected. The value for this key should be a NSValue of CGSize. By default, the highest media presentation size will be selected for download.
-// AVAssetDownloadTaskMinimumRequiredPresentationSizeKey returns the string constant AVAssetDownloadTaskMinimumRequiredPresentationSizeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadTaskMinimumRequiredPresentationSizeKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetDownloadTaskMinimumRequiredPresentationSizeKey())
+// AVAssetPlaybackConfigurationOptionNonRectilinearProjection returns the string constant AVAssetPlaybackConfigurationOptionNonRectilinearProjection, for use as a dictionary key or argument.
+func AVAssetPlaybackConfigurationOptionNonRectilinearProjection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionNonRectilinearProjection")))
 }
 
-// The media selection for this download. The value for this key should be an AVMediaSelection. By default, media selections for AVAssetDownloadTask will be automatically selected.
-// AVAssetDownloadTaskMediaSelectionKey returns the string constant AVAssetDownloadTaskMediaSelectionKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadTaskMediaSelectionKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetDownloadTaskMediaSelectionKey())
+// AVAssetPlaybackConfigurationOptionAppleImmersiveVideo returns the string constant AVAssetPlaybackConfigurationOptionAppleImmersiveVideo, for use as a dictionary key or argument.
+func AVAssetPlaybackConfigurationOptionAppleImmersiveVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetPlaybackConfigurationOptionAppleImmersiveVideo")))
 }
 
-// Download the specified media selections with or without support for multichannel playback. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer multichannel by downloading the most capable multichannel rendition available in additon to stereo.
-// AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey returns the string constant AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey())
+// AVAssetDownloadTaskMinimumRequiredMediaBitrateKey returns the string constant AVAssetDownloadTaskMinimumRequiredMediaBitrateKey, for use as a dictionary key or argument.
+func AVAssetDownloadTaskMinimumRequiredMediaBitrateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMinimumRequiredMediaBitrateKey")))
 }
 
-// Download the specified media selections in lossless audio representation. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer lossy audio representation.
-// AVAssetDownloadTaskPrefersLosslessAudioKey returns the string constant AVAssetDownloadTaskPrefersLosslessAudioKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadTaskPrefersLosslessAudioKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetDownloadTaskPrefersLosslessAudioKey())
+// AVAssetDownloadTaskMinimumRequiredPresentationSizeKey returns the string constant AVAssetDownloadTaskMinimumRequiredPresentationSizeKey, for use as a dictionary key or argument.
+func AVAssetDownloadTaskMinimumRequiredPresentationSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMinimumRequiredPresentationSizeKey")))
 }
 
-// Download the specified media selections with or without HDR content. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer HDR content.
-// AVAssetDownloadTaskPrefersHDRKey returns the string constant AVAssetDownloadTaskPrefersHDRKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadTaskPrefersHDRKey() objc.ID {
-	return purego.CFConstant(raw.AVAssetDownloadTaskPrefersHDRKey())
+// AVAssetDownloadTaskMediaSelectionKey returns the string constant AVAssetDownloadTaskMediaSelectionKey, for use as a dictionary key or argument.
+func AVAssetDownloadTaskMediaSelectionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMediaSelectionKey")))
 }
 
-// Used to mark assets with the highest priority. They will be the last to be purged.
-// AVAssetDownloadedAssetEvictionPriorityImportant returns the string constant AVAssetDownloadedAssetEvictionPriorityImportant as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadedAssetEvictionPriorityImportant() objc.ID {
-	if _r := raw.AVAssetDownloadedAssetEvictionPriorityImportant(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey returns the string constant AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey, for use as a dictionary key or argument.
+func AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey")))
 }
 
-// Used to mark assets have the default priority. They will be the first to be purged.
-// AVAssetDownloadedAssetEvictionPriorityDefault returns the string constant AVAssetDownloadedAssetEvictionPriorityDefault as an objc.ID, for use as a dictionary key or selector argument.
-func AVAssetDownloadedAssetEvictionPriorityDefault() objc.ID {
-	if _r := raw.AVAssetDownloadedAssetEvictionPriorityDefault(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetDownloadTaskPrefersLosslessAudioKey returns the string constant AVAssetDownloadTaskPrefersLosslessAudioKey, for use as a dictionary key or argument.
+func AVAssetDownloadTaskPrefersLosslessAudioKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskPrefersLosslessAudioKey")))
 }
 
-// @constant	AVCaptionMediaTypeKey @abstract	Indicates the output media type of a caption conversion operation. For example, AVMediaTypeClosedCaption.
-// AVCaptionMediaTypeKey returns the string constant AVCaptionMediaTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptionMediaTypeKey() objc.ID {
-	if _r := raw.AVCaptionMediaTypeKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetDownloadTaskPrefersHDRKey returns the string constant AVAssetDownloadTaskPrefersHDRKey, for use as a dictionary key or argument.
+func AVAssetDownloadTaskPrefersHDRKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadTaskPrefersHDRKey")))
 }
 
-// @constant	AVCaptionMediaSubTypeKey @abstract	Indicates the output media subtype of a caption conversion operation. For example, [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608]. @discussion Both numeric and string forms of media subtypes are accepted for caption conversions, so you could, for example, use @"c608" instead of [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608].
-// AVCaptionMediaSubTypeKey returns the string constant AVCaptionMediaSubTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptionMediaSubTypeKey() objc.ID {
-	if _r := raw.AVCaptionMediaSubTypeKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetDownloadedAssetEvictionPriorityImportant returns the string constant AVAssetDownloadedAssetEvictionPriorityImportant, for use as a dictionary key or argument.
+func AVAssetDownloadedAssetEvictionPriorityImportant() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadedAssetEvictionPriorityImportant")))
 }
 
-// @constant   AVCaptionTimeCodeFrameDurationKey @abstract	Frame duration used for the time code. @discussion Some formats, such as TTML, use time code notation to indicate the timing of a caption. Use the property to specify the frame rate of the time code. For example, if the time code steps for every 1001 / 30000 seconds, the value should be CMTime(value: 1001, scale: 30000).
-// AVCaptionTimeCodeFrameDurationKey returns the string constant AVCaptionTimeCodeFrameDurationKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptionTimeCodeFrameDurationKey() objc.ID {
-	if _r := raw.AVCaptionTimeCodeFrameDurationKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVAssetDownloadedAssetEvictionPriorityDefault returns the string constant AVAssetDownloadedAssetEvictionPriorityDefault, for use as a dictionary key or argument.
+func AVAssetDownloadedAssetEvictionPriorityDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVAssetDownloadedAssetEvictionPriorityDefault")))
 }
 
-// @constant	AVCaptionUseDropFrameTimeCodeKey @abstract	Indicates whether to use drop frame time code. @discussion Some formats, such as SCC, use time code notation to indicate the timing of a caption. Use the property to specify whether to use the drop frame time code or non-drop frame time code. When the value for this key is a NSNumber indicating the BOOL YES, the receiver will use the drop frame time code. When the value for this key is a NSNumber indicating the BOOL NO, the receiver will use the non-drop frame time code. The default is NO.
-// AVCaptionUseDropFrameTimeCodeKey returns the string constant AVCaptionUseDropFrameTimeCodeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptionUseDropFrameTimeCodeKey() objc.ID {
-	if _r := raw.AVCaptionUseDropFrameTimeCodeKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVCaptionMediaTypeKey returns the string constant AVCaptionMediaTypeKey, for use as a dictionary key or argument.
+func AVCaptionMediaTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionMediaTypeKey")))
 }
 
-// @constant      AVCaptionConversionWarningTypeExcessMediaData @abstract      Indicates that one or more captions in the validator's captions array exceed the capacity for media data of the media type and subtype specified by the conversion settings.
-// AVCaptionConversionWarningTypeExcessMediaData returns the string constant AVCaptionConversionWarningTypeExcessMediaData as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptionConversionWarningTypeExcessMediaData() objc.ID {
-	if _r := raw.AVCaptionConversionWarningTypeExcessMediaData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVCaptionMediaSubTypeKey returns the string constant AVCaptionMediaSubTypeKey, for use as a dictionary key or argument.
+func AVCaptionMediaSubTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionMediaSubTypeKey")))
 }
 
-// @constant      AVCaptionConversionAdjustmentTypeTimeRange @abstract      Indicates a timing adjustment.
-// AVCaptionConversionAdjustmentTypeTimeRange returns the string constant AVCaptionConversionAdjustmentTypeTimeRange as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptionConversionAdjustmentTypeTimeRange() objc.ID {
-	if _r := raw.AVCaptionConversionAdjustmentTypeTimeRange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVCaptionTimeCodeFrameDurationKey returns the string constant AVCaptionTimeCodeFrameDurationKey, for use as a dictionary key or argument.
+func AVCaptionTimeCodeFrameDurationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionTimeCodeFrameDurationKey")))
 }
 
-// AVFoundationErrorDomain returns the string constant AVFoundationErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func AVFoundationErrorDomain() objc.ID {
-	if _r := raw.AVFoundationErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVCaptionUseDropFrameTimeCodeKey returns the string constant AVCaptionUseDropFrameTimeCodeKey, for use as a dictionary key or argument.
+func AVCaptionUseDropFrameTimeCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionUseDropFrameTimeCodeKey")))
 }
 
-// AVErrorDeviceKey returns the string constant AVErrorDeviceKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorDeviceKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorDeviceKey())
+// AVCaptionConversionWarningTypeExcessMediaData returns the string constant AVCaptionConversionWarningTypeExcessMediaData, for use as a dictionary key or argument.
+func AVCaptionConversionWarningTypeExcessMediaData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionConversionWarningTypeExcessMediaData")))
 }
 
-// AVErrorTimeKey returns the string constant AVErrorTimeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorTimeKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorTimeKey())
+// AVCaptionConversionAdjustmentTypeTimeRange returns the string constant AVCaptionConversionAdjustmentTypeTimeRange, for use as a dictionary key or argument.
+func AVCaptionConversionAdjustmentTypeTimeRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptionConversionAdjustmentTypeTimeRange")))
 }
 
-// AVErrorFileSizeKey returns the string constant AVErrorFileSizeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorFileSizeKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorFileSizeKey())
+// AVFoundationErrorDomain returns the string constant AVFoundationErrorDomain, for use as a dictionary key or argument.
+func AVFoundationErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFoundationErrorDomain")))
 }
 
-// AVErrorPIDKey returns the string constant AVErrorPIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorPIDKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorPIDKey())
+// AVErrorDeviceKey returns the string constant AVErrorDeviceKey, for use as a dictionary key or argument.
+func AVErrorDeviceKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVErrorDeviceKey"))) }
+
+// AVErrorTimeKey returns the string constant AVErrorTimeKey, for use as a dictionary key or argument.
+func AVErrorTimeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVErrorTimeKey"))) }
+
+// AVErrorFileSizeKey returns the string constant AVErrorFileSizeKey, for use as a dictionary key or argument.
+func AVErrorFileSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorFileSizeKey")))
 }
+
+// AVErrorPIDKey returns the string constant AVErrorPIDKey, for use as a dictionary key or argument.
+func AVErrorPIDKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVErrorPIDKey"))) }
 
-// AVErrorRecordingSuccessfullyFinishedKey returns the string constant AVErrorRecordingSuccessfullyFinishedKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorRecordingSuccessfullyFinishedKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorRecordingSuccessfullyFinishedKey())
+// AVErrorRecordingSuccessfullyFinishedKey returns the string constant AVErrorRecordingSuccessfullyFinishedKey, for use as a dictionary key or argument.
+func AVErrorRecordingSuccessfullyFinishedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorRecordingSuccessfullyFinishedKey")))
 }
 
-// AVErrorMediaTypeKey returns the string constant AVErrorMediaTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorMediaTypeKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorMediaTypeKey())
+// AVErrorMediaTypeKey returns the string constant AVErrorMediaTypeKey, for use as a dictionary key or argument.
+func AVErrorMediaTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorMediaTypeKey")))
 }
 
-// AVErrorMediaSubTypeKey returns the string constant AVErrorMediaSubTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorMediaSubTypeKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorMediaSubTypeKey())
+// AVErrorMediaSubTypeKey returns the string constant AVErrorMediaSubTypeKey, for use as a dictionary key or argument.
+func AVErrorMediaSubTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorMediaSubTypeKey")))
 }
 
-// AVErrorPresentationTimeStampKey returns the string constant AVErrorPresentationTimeStampKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorPresentationTimeStampKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorPresentationTimeStampKey())
+// AVErrorPresentationTimeStampKey returns the string constant AVErrorPresentationTimeStampKey, for use as a dictionary key or argument.
+func AVErrorPresentationTimeStampKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorPresentationTimeStampKey")))
 }
 
-// AVErrorPersistentTrackIDKey returns the string constant AVErrorPersistentTrackIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorPersistentTrackIDKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorPersistentTrackIDKey())
+// AVErrorPersistentTrackIDKey returns the string constant AVErrorPersistentTrackIDKey, for use as a dictionary key or argument.
+func AVErrorPersistentTrackIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorPersistentTrackIDKey")))
 }
 
-// AVErrorFileTypeKey returns the string constant AVErrorFileTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorFileTypeKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorFileTypeKey())
+// AVErrorFileTypeKey returns the string constant AVErrorFileTypeKey, for use as a dictionary key or argument.
+func AVErrorFileTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorFileTypeKey")))
 }
 
-// AVErrorDiscontinuityFlagsKey returns the string constant AVErrorDiscontinuityFlagsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVErrorDiscontinuityFlagsKey() objc.ID {
-	return purego.CFConstant(raw.AVErrorDiscontinuityFlagsKey())
+// AVErrorDiscontinuityFlagsKey returns the string constant AVErrorDiscontinuityFlagsKey, for use as a dictionary key or argument.
+func AVErrorDiscontinuityFlagsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVErrorDiscontinuityFlagsKey")))
 }
 
-// AVMetadataCommonIdentifierTitle returns the string constant AVMetadataCommonIdentifierTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierTitle() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierTitle returns the string constant AVMetadataCommonIdentifierTitle, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierTitle")))
 }
 
-// AVMetadataCommonIdentifierCreator returns the string constant AVMetadataCommonIdentifierCreator as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierCreator() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierCreator(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierCreator returns the string constant AVMetadataCommonIdentifierCreator, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierCreator")))
 }
 
-// AVMetadataCommonIdentifierSubject returns the string constant AVMetadataCommonIdentifierSubject as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierSubject() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierSubject(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierSubject returns the string constant AVMetadataCommonIdentifierSubject, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierSubject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierSubject")))
 }
 
-// AVMetadataCommonIdentifierDescription returns the string constant AVMetadataCommonIdentifierDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierDescription() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierDescription returns the string constant AVMetadataCommonIdentifierDescription, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierDescription")))
 }
 
-// AVMetadataCommonIdentifierPublisher returns the string constant AVMetadataCommonIdentifierPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierPublisher() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierPublisher returns the string constant AVMetadataCommonIdentifierPublisher, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierPublisher")))
 }
 
-// AVMetadataCommonIdentifierContributor returns the string constant AVMetadataCommonIdentifierContributor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierContributor() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierContributor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierContributor returns the string constant AVMetadataCommonIdentifierContributor, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierContributor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierContributor")))
 }
 
-// AVMetadataCommonIdentifierCreationDate returns the string constant AVMetadataCommonIdentifierCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierCreationDate() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierCreationDate returns the string constant AVMetadataCommonIdentifierCreationDate, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierCreationDate")))
 }
 
-// AVMetadataCommonIdentifierLastModifiedDate returns the string constant AVMetadataCommonIdentifierLastModifiedDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierLastModifiedDate() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierLastModifiedDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierLastModifiedDate returns the string constant AVMetadataCommonIdentifierLastModifiedDate, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierLastModifiedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierLastModifiedDate")))
 }
 
-// AVMetadataCommonIdentifierType returns the string constant AVMetadataCommonIdentifierType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierType() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierType returns the string constant AVMetadataCommonIdentifierType, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierType")))
 }
 
-// AVMetadataCommonIdentifierFormat returns the string constant AVMetadataCommonIdentifierFormat as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierFormat() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierFormat returns the string constant AVMetadataCommonIdentifierFormat, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierFormat")))
 }
 
-// AVMetadataCommonIdentifierAssetIdentifier returns the string constant AVMetadataCommonIdentifierAssetIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierAssetIdentifier() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierAssetIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierAssetIdentifier returns the string constant AVMetadataCommonIdentifierAssetIdentifier, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierAssetIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierAssetIdentifier")))
 }
 
-// AVMetadataCommonIdentifierSource returns the string constant AVMetadataCommonIdentifierSource as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierSource() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierSource(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierSource returns the string constant AVMetadataCommonIdentifierSource, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierSource")))
 }
 
-// AVMetadataCommonIdentifierLanguage returns the string constant AVMetadataCommonIdentifierLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierLanguage() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierLanguage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierLanguage returns the string constant AVMetadataCommonIdentifierLanguage, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierLanguage")))
 }
 
-// AVMetadataCommonIdentifierRelation returns the string constant AVMetadataCommonIdentifierRelation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierRelation() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierRelation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierRelation returns the string constant AVMetadataCommonIdentifierRelation, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierRelation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierRelation")))
 }
 
-// AVMetadataCommonIdentifierLocation returns the string constant AVMetadataCommonIdentifierLocation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierLocation() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierLocation returns the string constant AVMetadataCommonIdentifierLocation, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierLocation")))
 }
 
-// AVMetadataCommonIdentifierCopyrights returns the string constant AVMetadataCommonIdentifierCopyrights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierCopyrights() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierCopyrights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierCopyrights returns the string constant AVMetadataCommonIdentifierCopyrights, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierCopyrights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierCopyrights")))
 }
 
-// AVMetadataCommonIdentifierAlbumName returns the string constant AVMetadataCommonIdentifierAlbumName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierAlbumName() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierAlbumName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierAlbumName returns the string constant AVMetadataCommonIdentifierAlbumName, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierAlbumName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierAlbumName")))
 }
 
-// AVMetadataCommonIdentifierAuthor returns the string constant AVMetadataCommonIdentifierAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierAuthor() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierAuthor returns the string constant AVMetadataCommonIdentifierAuthor, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierAuthor")))
 }
 
-// AVMetadataCommonIdentifierArtist returns the string constant AVMetadataCommonIdentifierArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierArtist() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierArtist returns the string constant AVMetadataCommonIdentifierArtist, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierArtist")))
 }
 
-// AVMetadataCommonIdentifierArtwork returns the string constant AVMetadataCommonIdentifierArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierArtwork() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierArtwork(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierArtwork returns the string constant AVMetadataCommonIdentifierArtwork, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierArtwork")))
 }
 
-// AVMetadataCommonIdentifierMake returns the string constant AVMetadataCommonIdentifierMake as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierMake() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierMake(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierMake returns the string constant AVMetadataCommonIdentifierMake, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierMake")))
 }
 
-// AVMetadataCommonIdentifierModel returns the string constant AVMetadataCommonIdentifierModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierModel() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierModel returns the string constant AVMetadataCommonIdentifierModel, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierModel")))
 }
 
-// AVMetadataCommonIdentifierSoftware returns the string constant AVMetadataCommonIdentifierSoftware as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierSoftware() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierSoftware(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierSoftware returns the string constant AVMetadataCommonIdentifierSoftware, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierSoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierSoftware")))
 }
 
-// AVMetadataCommonIdentifierAccessibilityDescription returns the string constant AVMetadataCommonIdentifierAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataCommonIdentifierAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataCommonIdentifierAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataCommonIdentifierAccessibilityDescription returns the string constant AVMetadataCommonIdentifierAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataCommonIdentifierAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataCommonIdentifierAccessibilityDescription")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataAlbum returns the string constant AVMetadataIdentifierQuickTimeUserDataAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataAlbum() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataAlbum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataAlbum returns the string constant AVMetadataIdentifierQuickTimeUserDataAlbum, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataAlbum")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataArranger returns the string constant AVMetadataIdentifierQuickTimeUserDataArranger as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataArranger() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataArranger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataArranger returns the string constant AVMetadataIdentifierQuickTimeUserDataArranger, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataArranger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataArranger")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataArtist returns the string constant AVMetadataIdentifierQuickTimeUserDataArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataArtist returns the string constant AVMetadataIdentifierQuickTimeUserDataArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataArtist")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataAuthor returns the string constant AVMetadataIdentifierQuickTimeUserDataAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataAuthor() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataAuthor returns the string constant AVMetadataIdentifierQuickTimeUserDataAuthor, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataAuthor")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataChapter returns the string constant AVMetadataIdentifierQuickTimeUserDataChapter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataChapter() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataChapter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataChapter returns the string constant AVMetadataIdentifierQuickTimeUserDataChapter, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataChapter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataChapter")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataComment returns the string constant AVMetadataIdentifierQuickTimeUserDataComment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataComment() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataComment returns the string constant AVMetadataIdentifierQuickTimeUserDataComment, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataComment")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataComposer returns the string constant AVMetadataIdentifierQuickTimeUserDataComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataComposer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataComposer returns the string constant AVMetadataIdentifierQuickTimeUserDataComposer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataComposer")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataCopyright returns the string constant AVMetadataIdentifierQuickTimeUserDataCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataCopyright() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataCopyright returns the string constant AVMetadataIdentifierQuickTimeUserDataCopyright, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataCopyright")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataCreationDate returns the string constant AVMetadataIdentifierQuickTimeUserDataCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataCreationDate() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataCreationDate returns the string constant AVMetadataIdentifierQuickTimeUserDataCreationDate, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataCreationDate")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataDescription returns the string constant AVMetadataIdentifierQuickTimeUserDataDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataDescription returns the string constant AVMetadataIdentifierQuickTimeUserDataDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataDescription")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataDirector returns the string constant AVMetadataIdentifierQuickTimeUserDataDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataDirector() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataDirector returns the string constant AVMetadataIdentifierQuickTimeUserDataDirector, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataDirector")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataDisclaimer returns the string constant AVMetadataIdentifierQuickTimeUserDataDisclaimer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataDisclaimer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataDisclaimer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataDisclaimer returns the string constant AVMetadataIdentifierQuickTimeUserDataDisclaimer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataDisclaimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataDisclaimer")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataEncodedBy returns the string constant AVMetadataIdentifierQuickTimeUserDataEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataEncodedBy() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataEncodedBy returns the string constant AVMetadataIdentifierQuickTimeUserDataEncodedBy, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataEncodedBy")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataFullName returns the string constant AVMetadataIdentifierQuickTimeUserDataFullName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataFullName() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataFullName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataFullName returns the string constant AVMetadataIdentifierQuickTimeUserDataFullName, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataFullName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataFullName")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataGenre returns the string constant AVMetadataIdentifierQuickTimeUserDataGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataGenre() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataGenre returns the string constant AVMetadataIdentifierQuickTimeUserDataGenre, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataGenre")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataHostComputer returns the string constant AVMetadataIdentifierQuickTimeUserDataHostComputer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataHostComputer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataHostComputer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataHostComputer returns the string constant AVMetadataIdentifierQuickTimeUserDataHostComputer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataHostComputer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataHostComputer")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataInformation returns the string constant AVMetadataIdentifierQuickTimeUserDataInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataInformation() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataInformation returns the string constant AVMetadataIdentifierQuickTimeUserDataInformation, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataInformation")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataKeywords returns the string constant AVMetadataIdentifierQuickTimeUserDataKeywords as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataKeywords() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataKeywords(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataKeywords returns the string constant AVMetadataIdentifierQuickTimeUserDataKeywords, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataKeywords")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataMake returns the string constant AVMetadataIdentifierQuickTimeUserDataMake as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataMake() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataMake(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataMake returns the string constant AVMetadataIdentifierQuickTimeUserDataMake, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataMake")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataModel returns the string constant AVMetadataIdentifierQuickTimeUserDataModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataModel() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataModel returns the string constant AVMetadataIdentifierQuickTimeUserDataModel, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataModel")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataOriginalArtist returns the string constant AVMetadataIdentifierQuickTimeUserDataOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataOriginalArtist returns the string constant AVMetadataIdentifierQuickTimeUserDataOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataOriginalArtist")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataOriginalFormat returns the string constant AVMetadataIdentifierQuickTimeUserDataOriginalFormat as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataOriginalFormat() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataOriginalFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataOriginalFormat returns the string constant AVMetadataIdentifierQuickTimeUserDataOriginalFormat, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataOriginalFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataOriginalFormat")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataOriginalSource returns the string constant AVMetadataIdentifierQuickTimeUserDataOriginalSource as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataOriginalSource() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataOriginalSource(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataOriginalSource returns the string constant AVMetadataIdentifierQuickTimeUserDataOriginalSource, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataOriginalSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataOriginalSource")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataPerformers returns the string constant AVMetadataIdentifierQuickTimeUserDataPerformers as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataPerformers() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataPerformers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataPerformers returns the string constant AVMetadataIdentifierQuickTimeUserDataPerformers, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataPerformers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataPerformers")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataProducer returns the string constant AVMetadataIdentifierQuickTimeUserDataProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataProducer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataProducer returns the string constant AVMetadataIdentifierQuickTimeUserDataProducer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataProducer")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataPublisher returns the string constant AVMetadataIdentifierQuickTimeUserDataPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataPublisher() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataPublisher returns the string constant AVMetadataIdentifierQuickTimeUserDataPublisher, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataPublisher")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataProduct returns the string constant AVMetadataIdentifierQuickTimeUserDataProduct as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataProduct() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataProduct(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataProduct returns the string constant AVMetadataIdentifierQuickTimeUserDataProduct, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataProduct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataProduct")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataSoftware returns the string constant AVMetadataIdentifierQuickTimeUserDataSoftware as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataSoftware() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataSoftware(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataSoftware returns the string constant AVMetadataIdentifierQuickTimeUserDataSoftware, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataSoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataSoftware")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements returns the string constant AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements returns the string constant AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataTrack returns the string constant AVMetadataIdentifierQuickTimeUserDataTrack as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataTrack() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataTrack(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataTrack returns the string constant AVMetadataIdentifierQuickTimeUserDataTrack, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataTrack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataTrack")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataWarning returns the string constant AVMetadataIdentifierQuickTimeUserDataWarning as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataWarning() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataWarning(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataWarning returns the string constant AVMetadataIdentifierQuickTimeUserDataWarning, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataWarning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataWarning")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataWriter returns the string constant AVMetadataIdentifierQuickTimeUserDataWriter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataWriter() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataWriter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataWriter returns the string constant AVMetadataIdentifierQuickTimeUserDataWriter, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataWriter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataWriter")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataURLLink returns the string constant AVMetadataIdentifierQuickTimeUserDataURLLink as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataURLLink() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataURLLink(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataURLLink returns the string constant AVMetadataIdentifierQuickTimeUserDataURLLink, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataURLLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataURLLink")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataLocationISO6709 returns the string constant AVMetadataIdentifierQuickTimeUserDataLocationISO6709 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataLocationISO6709() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataLocationISO6709(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataLocationISO6709 returns the string constant AVMetadataIdentifierQuickTimeUserDataLocationISO6709, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataLocationISO6709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataLocationISO6709")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataTrackName returns the string constant AVMetadataIdentifierQuickTimeUserDataTrackName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataTrackName() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataTrackName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataTrackName returns the string constant AVMetadataIdentifierQuickTimeUserDataTrackName, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataTrackName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataTrackName")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataCredits returns the string constant AVMetadataIdentifierQuickTimeUserDataCredits as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataCredits() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataCredits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataCredits returns the string constant AVMetadataIdentifierQuickTimeUserDataCredits, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataCredits")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataPhonogramRights returns the string constant AVMetadataIdentifierQuickTimeUserDataPhonogramRights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataPhonogramRights() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataPhonogramRights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataPhonogramRights returns the string constant AVMetadataIdentifierQuickTimeUserDataPhonogramRights, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataPhonogramRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataPhonogramRights")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic returns the string constant AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic returns the string constant AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic")))
 }
 
-// AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription returns the string constant AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription returns the string constant AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription")))
 }
 
-// AVMetadataIdentifierISOUserDataCopyright returns the string constant AVMetadataIdentifierISOUserDataCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierISOUserDataCopyright() objc.ID {
-	if _r := raw.AVMetadataIdentifierISOUserDataCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierISOUserDataCopyright returns the string constant AVMetadataIdentifierISOUserDataCopyright, for use as a dictionary key or argument.
+func AVMetadataIdentifierISOUserDataCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierISOUserDataCopyright")))
 }
 
-// AVMetadataIdentifierISOUserDataDate returns the string constant AVMetadataIdentifierISOUserDataDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierISOUserDataDate() objc.ID {
-	if _r := raw.AVMetadataIdentifierISOUserDataDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierISOUserDataDate returns the string constant AVMetadataIdentifierISOUserDataDate, for use as a dictionary key or argument.
+func AVMetadataIdentifierISOUserDataDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierISOUserDataDate")))
 }
 
-// AVMetadataIdentifierISOUserDataTaggedCharacteristic returns the string constant AVMetadataIdentifierISOUserDataTaggedCharacteristic as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierISOUserDataTaggedCharacteristic() objc.ID {
-	if _r := raw.AVMetadataIdentifierISOUserDataTaggedCharacteristic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierISOUserDataTaggedCharacteristic returns the string constant AVMetadataIdentifierISOUserDataTaggedCharacteristic, for use as a dictionary key or argument.
+func AVMetadataIdentifierISOUserDataTaggedCharacteristic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierISOUserDataTaggedCharacteristic")))
 }
 
-// AVMetadataIdentifierISOUserDataAccessibilityDescription returns the string constant AVMetadataIdentifierISOUserDataAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierISOUserDataAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierISOUserDataAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierISOUserDataAccessibilityDescription returns the string constant AVMetadataIdentifierISOUserDataAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierISOUserDataAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierISOUserDataAccessibilityDescription")))
 }
 
-// AVMetadataIdentifier3GPUserDataCopyright returns the string constant AVMetadataIdentifier3GPUserDataCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataCopyright() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataCopyright returns the string constant AVMetadataIdentifier3GPUserDataCopyright, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataCopyright")))
 }
 
-// AVMetadataIdentifier3GPUserDataAuthor returns the string constant AVMetadataIdentifier3GPUserDataAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataAuthor() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataAuthor returns the string constant AVMetadataIdentifier3GPUserDataAuthor, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataAuthor")))
 }
 
-// AVMetadataIdentifier3GPUserDataPerformer returns the string constant AVMetadataIdentifier3GPUserDataPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataPerformer() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataPerformer returns the string constant AVMetadataIdentifier3GPUserDataPerformer, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataPerformer")))
 }
 
-// AVMetadataIdentifier3GPUserDataGenre returns the string constant AVMetadataIdentifier3GPUserDataGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataGenre() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataGenre returns the string constant AVMetadataIdentifier3GPUserDataGenre, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataGenre")))
 }
 
-// AVMetadataIdentifier3GPUserDataRecordingYear returns the string constant AVMetadataIdentifier3GPUserDataRecordingYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataRecordingYear() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataRecordingYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataRecordingYear returns the string constant AVMetadataIdentifier3GPUserDataRecordingYear, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataRecordingYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataRecordingYear")))
 }
 
-// AVMetadataIdentifier3GPUserDataLocation returns the string constant AVMetadataIdentifier3GPUserDataLocation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataLocation() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataLocation returns the string constant AVMetadataIdentifier3GPUserDataLocation, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataLocation")))
 }
 
-// AVMetadataIdentifier3GPUserDataTitle returns the string constant AVMetadataIdentifier3GPUserDataTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataTitle returns the string constant AVMetadataIdentifier3GPUserDataTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataTitle")))
 }
 
-// AVMetadataIdentifier3GPUserDataDescription returns the string constant AVMetadataIdentifier3GPUserDataDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataDescription returns the string constant AVMetadataIdentifier3GPUserDataDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataDescription")))
 }
 
-// AVMetadataIdentifier3GPUserDataCollection returns the string constant AVMetadataIdentifier3GPUserDataCollection as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataCollection() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataCollection(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataCollection returns the string constant AVMetadataIdentifier3GPUserDataCollection, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataCollection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataCollection")))
 }
 
-// AVMetadataIdentifier3GPUserDataUserRating returns the string constant AVMetadataIdentifier3GPUserDataUserRating as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataUserRating() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataUserRating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataUserRating returns the string constant AVMetadataIdentifier3GPUserDataUserRating, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataUserRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataUserRating")))
 }
 
-// AVMetadataIdentifier3GPUserDataThumbnail returns the string constant AVMetadataIdentifier3GPUserDataThumbnail as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataThumbnail() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataThumbnail(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataThumbnail returns the string constant AVMetadataIdentifier3GPUserDataThumbnail, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataThumbnail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataThumbnail")))
 }
 
-// AVMetadataIdentifier3GPUserDataAlbumAndTrack returns the string constant AVMetadataIdentifier3GPUserDataAlbumAndTrack as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataAlbumAndTrack() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataAlbumAndTrack(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataAlbumAndTrack returns the string constant AVMetadataIdentifier3GPUserDataAlbumAndTrack, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataAlbumAndTrack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataAlbumAndTrack")))
 }
 
-// AVMetadataIdentifier3GPUserDataKeywordList returns the string constant AVMetadataIdentifier3GPUserDataKeywordList as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataKeywordList() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataKeywordList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataKeywordList returns the string constant AVMetadataIdentifier3GPUserDataKeywordList, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataKeywordList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataKeywordList")))
 }
 
-// AVMetadataIdentifier3GPUserDataMediaClassification returns the string constant AVMetadataIdentifier3GPUserDataMediaClassification as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataMediaClassification() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataMediaClassification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataMediaClassification returns the string constant AVMetadataIdentifier3GPUserDataMediaClassification, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataMediaClassification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataMediaClassification")))
 }
 
-// AVMetadataIdentifier3GPUserDataMediaRating returns the string constant AVMetadataIdentifier3GPUserDataMediaRating as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifier3GPUserDataMediaRating() objc.ID {
-	if _r := raw.AVMetadataIdentifier3GPUserDataMediaRating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifier3GPUserDataMediaRating returns the string constant AVMetadataIdentifier3GPUserDataMediaRating, for use as a dictionary key or argument.
+func AVMetadataIdentifier3GPUserDataMediaRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifier3GPUserDataMediaRating")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataAuthor returns the string constant AVMetadataIdentifierQuickTimeMetadataAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataAuthor() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataAuthor returns the string constant AVMetadataIdentifierQuickTimeMetadataAuthor, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAuthor")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataComment returns the string constant AVMetadataIdentifierQuickTimeMetadataComment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataComment() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataComment returns the string constant AVMetadataIdentifierQuickTimeMetadataComment, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataComment")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataCopyright returns the string constant AVMetadataIdentifierQuickTimeMetadataCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCopyright() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCopyright returns the string constant AVMetadataIdentifierQuickTimeMetadataCopyright, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCopyright")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataCreationDate returns the string constant AVMetadataIdentifierQuickTimeMetadataCreationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCreationDate() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCreationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCreationDate returns the string constant AVMetadataIdentifierQuickTimeMetadataCreationDate, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCreationDate")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDirector returns the string constant AVMetadataIdentifierQuickTimeMetadataDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDirector() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDirector returns the string constant AVMetadataIdentifierQuickTimeMetadataDirector, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDirector")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDisplayName returns the string constant AVMetadataIdentifierQuickTimeMetadataDisplayName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDisplayName() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDisplayName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDisplayName returns the string constant AVMetadataIdentifierQuickTimeMetadataDisplayName, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDisplayName")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataInformation returns the string constant AVMetadataIdentifierQuickTimeMetadataInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataInformation() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataInformation returns the string constant AVMetadataIdentifierQuickTimeMetadataInformation, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataInformation")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataKeywords returns the string constant AVMetadataIdentifierQuickTimeMetadataKeywords as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataKeywords() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataKeywords(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataKeywords returns the string constant AVMetadataIdentifierQuickTimeMetadataKeywords, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataKeywords")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataProducer returns the string constant AVMetadataIdentifierQuickTimeMetadataProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataProducer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataProducer returns the string constant AVMetadataIdentifierQuickTimeMetadataProducer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataProducer")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataPublisher returns the string constant AVMetadataIdentifierQuickTimeMetadataPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataPublisher() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataPublisher returns the string constant AVMetadataIdentifierQuickTimeMetadataPublisher, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataPublisher")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataAlbum returns the string constant AVMetadataIdentifierQuickTimeMetadataAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataAlbum() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataAlbum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataAlbum returns the string constant AVMetadataIdentifierQuickTimeMetadataAlbum, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAlbum")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataArtist returns the string constant AVMetadataIdentifierQuickTimeMetadataArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataArtist returns the string constant AVMetadataIdentifierQuickTimeMetadataArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataArtist")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataArtwork returns the string constant AVMetadataIdentifierQuickTimeMetadataArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataArtwork() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataArtwork(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataArtwork returns the string constant AVMetadataIdentifierQuickTimeMetadataArtwork, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataArtwork")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDescription returns the string constant AVMetadataIdentifierQuickTimeMetadataDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDescription returns the string constant AVMetadataIdentifierQuickTimeMetadataDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDescription")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataSoftware returns the string constant AVMetadataIdentifierQuickTimeMetadataSoftware as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataSoftware() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataSoftware(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataSoftware returns the string constant AVMetadataIdentifierQuickTimeMetadataSoftware, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataSoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataSoftware")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataYear returns the string constant AVMetadataIdentifierQuickTimeMetadataYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataYear() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataYear returns the string constant AVMetadataIdentifierQuickTimeMetadataYear, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataYear")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataGenre returns the string constant AVMetadataIdentifierQuickTimeMetadataGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataGenre() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataGenre returns the string constant AVMetadataIdentifierQuickTimeMetadataGenre, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataGenre")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataiXML returns the string constant AVMetadataIdentifierQuickTimeMetadataiXML as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataiXML() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataiXML(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataiXML returns the string constant AVMetadataIdentifierQuickTimeMetadataiXML, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataiXML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataiXML")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataLocationISO6709 returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationISO6709 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationISO6709() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationISO6709(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationISO6709 returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationISO6709, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationISO6709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationISO6709")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataMake returns the string constant AVMetadataIdentifierQuickTimeMetadataMake as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataMake() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataMake(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataMake returns the string constant AVMetadataIdentifierQuickTimeMetadataMake, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataMake")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataModel returns the string constant AVMetadataIdentifierQuickTimeMetadataModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataModel() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataModel returns the string constant AVMetadataIdentifierQuickTimeMetadataModel, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataModel")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataArranger returns the string constant AVMetadataIdentifierQuickTimeMetadataArranger as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataArranger() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataArranger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataArranger returns the string constant AVMetadataIdentifierQuickTimeMetadataArranger, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataArranger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataArranger")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataEncodedBy returns the string constant AVMetadataIdentifierQuickTimeMetadataEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataEncodedBy() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataEncodedBy returns the string constant AVMetadataIdentifierQuickTimeMetadataEncodedBy, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataEncodedBy")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataOriginalArtist returns the string constant AVMetadataIdentifierQuickTimeMetadataOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataOriginalArtist returns the string constant AVMetadataIdentifierQuickTimeMetadataOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataOriginalArtist")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataPerformer returns the string constant AVMetadataIdentifierQuickTimeMetadataPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataPerformer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataPerformer returns the string constant AVMetadataIdentifierQuickTimeMetadataPerformer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataPerformer")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataComposer returns the string constant AVMetadataIdentifierQuickTimeMetadataComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataComposer() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataComposer returns the string constant AVMetadataIdentifierQuickTimeMetadataComposer, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataComposer")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataCredits returns the string constant AVMetadataIdentifierQuickTimeMetadataCredits as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCredits() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCredits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCredits returns the string constant AVMetadataIdentifierQuickTimeMetadataCredits, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCredits")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataPhonogramRights returns the string constant AVMetadataIdentifierQuickTimeMetadataPhonogramRights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataPhonogramRights() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataPhonogramRights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataPhonogramRights returns the string constant AVMetadataIdentifierQuickTimeMetadataPhonogramRights, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataPhonogramRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataPhonogramRights")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataCameraIdentifier returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraIdentifier() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraIdentifier returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraIdentifier, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraIdentifier")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataTitle returns the string constant AVMetadataIdentifierQuickTimeMetadataTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataTitle returns the string constant AVMetadataIdentifierQuickTimeMetadataTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataTitle")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataCollectionUser returns the string constant AVMetadataIdentifierQuickTimeMetadataCollectionUser as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCollectionUser() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCollectionUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCollectionUser returns the string constant AVMetadataIdentifierQuickTimeMetadataCollectionUser, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCollectionUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCollectionUser")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataRatingUser returns the string constant AVMetadataIdentifierQuickTimeMetadataRatingUser as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataRatingUser() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataRatingUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataRatingUser returns the string constant AVMetadataIdentifierQuickTimeMetadataRatingUser, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataRatingUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataRatingUser")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataLocationName returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationName() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationName returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationName, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationName")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataLocationBody returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationBody() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationBody(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationBody returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationBody, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationBody")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataLocationNote returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationNote as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationNote() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationNote(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationNote returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationNote, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationNote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationNote")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataLocationRole returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationRole as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationRole() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationRole returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationRole, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationRole")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataLocationDate returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationDate() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationDate returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationDate, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationDate")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDirectionFacing returns the string constant AVMetadataIdentifierQuickTimeMetadataDirectionFacing as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDirectionFacing() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDirectionFacing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDirectionFacing returns the string constant AVMetadataIdentifierQuickTimeMetadataDirectionFacing, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDirectionFacing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDirectionFacing")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDirectionMotion returns the string constant AVMetadataIdentifierQuickTimeMetadataDirectionMotion as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDirectionMotion() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDirectionMotion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDirectionMotion returns the string constant AVMetadataIdentifierQuickTimeMetadataDirectionMotion, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDirectionMotion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDirectionMotion")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform returns the string constant AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform returns the string constant AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDetectedFace returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedFace as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDetectedFace() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDetectedFace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDetectedFace returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedFace, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDetectedFace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDetectedFace")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDetectedCatBody returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedCatBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDetectedCatBody() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDetectedCatBody(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDetectedCatBody returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedCatBody, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDetectedCatBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDetectedCatBody")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDetectedDogBody returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedDogBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDetectedDogBody() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDetectedDogBody(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDetectedDogBody returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedDogBody, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDetectedDogBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDetectedDogBody")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject returns the string constant AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataVideoOrientation returns the string constant AVMetadataIdentifierQuickTimeMetadataVideoOrientation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataVideoOrientation() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataVideoOrientation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataVideoOrientation returns the string constant AVMetadataIdentifierQuickTimeMetadataVideoOrientation, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataVideoOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataVideoOrientation")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataContentIdentifier returns the string constant AVMetadataIdentifierQuickTimeMetadataContentIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataContentIdentifier() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataContentIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataContentIdentifier returns the string constant AVMetadataIdentifierQuickTimeMetadataContentIdentifier, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataContentIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataContentIdentifier")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription returns the string constant AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription returns the string constant AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription")))
 }
 
-// AVMetadataIdentifierQuickTimeMetadataIsMontage returns the string constant AVMetadataIdentifierQuickTimeMetadataIsMontage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataIsMontage() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataIsMontage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataIsMontage returns the string constant AVMetadataIdentifierQuickTimeMetadataIsMontage, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataIsMontage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataIsMontage")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
-// AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent returns the string constant AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent returns the string constant AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent")))
 }
 
-// A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
-// AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent returns the string constant AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent returns the string constant AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
-// AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
-// AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
-// AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors returns the string constant AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors returns the string constant AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
-// AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices returns the string constant AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices returns the string constant AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
-// AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
-// AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
-// AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
-// AVMetadataIdentifierQuickTimeMetadataCameraLensModel returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraLensModel as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraLensModel() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraLensModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraLensModel returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraLensModel, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraLensModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraLensModel")))
 }
 
-// A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
-// AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent returns the string constant AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode. Clients capturing LivePhoto content may add this movie-level metadata to signify that the movie content should only be used (when swiping between photos, or force-touching a photo) if it's sufficiently dynamic. For instance, photos of static scenes or documents are to be excluded from the Live Photo experience.
-// AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto returns the string constant AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto returns the string constant AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto")))
 }
 
-// A value of type kCMMetadataBaseDataType_Float32. Live Photo movies may be algorithmically scored from 0. to 1. on their level of vitality. A Live Photo movie with a low vitality score offers little dynamism to the still photo it accompanies. The vitality score is normalized and independent of the vitality scoring version of the algorithm (see AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion). If a Live Photo movie contains the AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto key and its value is non-zero, apps should read the AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore value and only display the movie's content if the score is 0.5 or higher. If the capture session includes a metadata output configured to provide face, dog, or cat metadata objects, their presence will greatly increase the vitality score.
-// AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore returns the string constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore returns the string constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that scored the Live Photo movie for vitality.
-// AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion returns the string constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion returns the string constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion")))
 }
 
-// A value of type kCMMetadataBaseDataType_Float32. The video may be scored by a heuristic which considers factors such as exposure and focus. The value ranges from 0-1, where a score below 0.5 indicates the asset has serious flaws.
-// AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore returns the string constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore returns the string constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore")))
 }
 
-// A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that provided the spatial over capture quality score.
-// AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion returns the string constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion returns the string constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion")))
 }
 
-// A value of type kCMMetadataBaseDataType_Float32. The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
-// AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters returns the string constant AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData The static presentation metadata, Apple Immersive Media Embedded (AIME), for Apple Immersive Video that originates from ImmersiveMediaSupport framework's VenueDescriptor.aimeData.
-// AVMetadataIdentifierQuickTimeMetadataAIMEData returns the string constant AVMetadataIdentifierQuickTimeMetadataAIMEData as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataAIMEData() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataAIMEData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataAIMEData returns the string constant AVMetadataIdentifierQuickTimeMetadataAIMEData, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataAIMEData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataAIMEData")))
 }
 
-// A value of type kCMMetadataBaseDataType_RawData The presentation timed metadata for Apple Immerisve Video. Value is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object.
-// AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia returns the string constant AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia() objc.ID {
-	if _r := raw.AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia returns the string constant AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia, for use as a dictionary key or argument.
+func AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia")))
 }
 
-// AVMetadataIdentifieriTunesMetadataAlbum returns the string constant AVMetadataIdentifieriTunesMetadataAlbum as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataAlbum() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataAlbum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataAlbum returns the string constant AVMetadataIdentifieriTunesMetadataAlbum, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataAlbum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataAlbum")))
 }
 
-// AVMetadataIdentifieriTunesMetadataArtist returns the string constant AVMetadataIdentifieriTunesMetadataArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataArtist returns the string constant AVMetadataIdentifieriTunesMetadataArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataArtist")))
 }
 
-// AVMetadataIdentifieriTunesMetadataUserComment returns the string constant AVMetadataIdentifieriTunesMetadataUserComment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataUserComment() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataUserComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataUserComment returns the string constant AVMetadataIdentifieriTunesMetadataUserComment, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataUserComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataUserComment")))
 }
 
-// AVMetadataIdentifieriTunesMetadataCoverArt returns the string constant AVMetadataIdentifieriTunesMetadataCoverArt as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataCoverArt() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataCoverArt(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataCoverArt returns the string constant AVMetadataIdentifieriTunesMetadataCoverArt, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataCoverArt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataCoverArt")))
 }
 
-// AVMetadataIdentifieriTunesMetadataCopyright returns the string constant AVMetadataIdentifieriTunesMetadataCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataCopyright() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataCopyright returns the string constant AVMetadataIdentifieriTunesMetadataCopyright, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataCopyright")))
 }
 
-// AVMetadataIdentifieriTunesMetadataReleaseDate returns the string constant AVMetadataIdentifieriTunesMetadataReleaseDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataReleaseDate() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataReleaseDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataReleaseDate returns the string constant AVMetadataIdentifieriTunesMetadataReleaseDate, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataReleaseDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataReleaseDate")))
 }
 
-// AVMetadataIdentifieriTunesMetadataEncodedBy returns the string constant AVMetadataIdentifieriTunesMetadataEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataEncodedBy() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataEncodedBy returns the string constant AVMetadataIdentifieriTunesMetadataEncodedBy, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataEncodedBy")))
 }
 
-// AVMetadataIdentifieriTunesMetadataPredefinedGenre returns the string constant AVMetadataIdentifieriTunesMetadataPredefinedGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataPredefinedGenre() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataPredefinedGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataPredefinedGenre returns the string constant AVMetadataIdentifieriTunesMetadataPredefinedGenre, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataPredefinedGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataPredefinedGenre")))
 }
 
-// AVMetadataIdentifieriTunesMetadataUserGenre returns the string constant AVMetadataIdentifieriTunesMetadataUserGenre as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataUserGenre() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataUserGenre(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataUserGenre returns the string constant AVMetadataIdentifieriTunesMetadataUserGenre, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataUserGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataUserGenre")))
 }
 
-// AVMetadataIdentifieriTunesMetadataSongName returns the string constant AVMetadataIdentifieriTunesMetadataSongName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataSongName() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataSongName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataSongName returns the string constant AVMetadataIdentifieriTunesMetadataSongName, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataSongName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataSongName")))
 }
 
-// AVMetadataIdentifieriTunesMetadataTrackSubTitle returns the string constant AVMetadataIdentifieriTunesMetadataTrackSubTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataTrackSubTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataTrackSubTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataTrackSubTitle returns the string constant AVMetadataIdentifieriTunesMetadataTrackSubTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataTrackSubTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataTrackSubTitle")))
 }
 
-// AVMetadataIdentifieriTunesMetadataEncodingTool returns the string constant AVMetadataIdentifieriTunesMetadataEncodingTool as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataEncodingTool() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataEncodingTool(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataEncodingTool returns the string constant AVMetadataIdentifieriTunesMetadataEncodingTool, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataEncodingTool() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataEncodingTool")))
 }
 
-// AVMetadataIdentifieriTunesMetadataComposer returns the string constant AVMetadataIdentifieriTunesMetadataComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataComposer() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataComposer returns the string constant AVMetadataIdentifieriTunesMetadataComposer, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataComposer")))
 }
 
-// AVMetadataIdentifieriTunesMetadataAlbumArtist returns the string constant AVMetadataIdentifieriTunesMetadataAlbumArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataAlbumArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataAlbumArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataAlbumArtist returns the string constant AVMetadataIdentifieriTunesMetadataAlbumArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataAlbumArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataAlbumArtist")))
 }
 
-// AVMetadataIdentifieriTunesMetadataAccountKind returns the string constant AVMetadataIdentifieriTunesMetadataAccountKind as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataAccountKind() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataAccountKind(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataAccountKind returns the string constant AVMetadataIdentifieriTunesMetadataAccountKind, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataAccountKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataAccountKind")))
 }
 
-// AVMetadataIdentifieriTunesMetadataAppleID returns the string constant AVMetadataIdentifieriTunesMetadataAppleID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataAppleID() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataAppleID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataAppleID returns the string constant AVMetadataIdentifieriTunesMetadataAppleID, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataAppleID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataAppleID")))
 }
 
-// AVMetadataIdentifieriTunesMetadataArtistID returns the string constant AVMetadataIdentifieriTunesMetadataArtistID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataArtistID() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataArtistID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataArtistID returns the string constant AVMetadataIdentifieriTunesMetadataArtistID, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataArtistID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataArtistID")))
 }
 
-// AVMetadataIdentifieriTunesMetadataSongID returns the string constant AVMetadataIdentifieriTunesMetadataSongID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataSongID() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataSongID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataSongID returns the string constant AVMetadataIdentifieriTunesMetadataSongID, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataSongID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataSongID")))
 }
 
-// AVMetadataIdentifieriTunesMetadataDiscCompilation returns the string constant AVMetadataIdentifieriTunesMetadataDiscCompilation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataDiscCompilation() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataDiscCompilation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataDiscCompilation returns the string constant AVMetadataIdentifieriTunesMetadataDiscCompilation, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataDiscCompilation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataDiscCompilation")))
 }
 
-// AVMetadataIdentifieriTunesMetadataDiscNumber returns the string constant AVMetadataIdentifieriTunesMetadataDiscNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataDiscNumber() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataDiscNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataDiscNumber returns the string constant AVMetadataIdentifieriTunesMetadataDiscNumber, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataDiscNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataDiscNumber")))
 }
 
-// AVMetadataIdentifieriTunesMetadataGenreID returns the string constant AVMetadataIdentifieriTunesMetadataGenreID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataGenreID() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataGenreID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataGenreID returns the string constant AVMetadataIdentifieriTunesMetadataGenreID, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataGenreID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataGenreID")))
 }
 
-// AVMetadataIdentifieriTunesMetadataGrouping returns the string constant AVMetadataIdentifieriTunesMetadataGrouping as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataGrouping() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataGrouping(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataGrouping returns the string constant AVMetadataIdentifieriTunesMetadataGrouping, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataGrouping() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataGrouping")))
 }
 
-// AVMetadataIdentifieriTunesMetadataPlaylistID returns the string constant AVMetadataIdentifieriTunesMetadataPlaylistID as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataPlaylistID() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataPlaylistID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataPlaylistID returns the string constant AVMetadataIdentifieriTunesMetadataPlaylistID, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataPlaylistID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataPlaylistID")))
 }
 
-// AVMetadataIdentifieriTunesMetadataContentRating returns the string constant AVMetadataIdentifieriTunesMetadataContentRating as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataContentRating() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataContentRating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataContentRating returns the string constant AVMetadataIdentifieriTunesMetadataContentRating, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataContentRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataContentRating")))
 }
 
-// AVMetadataIdentifieriTunesMetadataBeatsPerMin returns the string constant AVMetadataIdentifieriTunesMetadataBeatsPerMin as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataBeatsPerMin() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataBeatsPerMin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataBeatsPerMin returns the string constant AVMetadataIdentifieriTunesMetadataBeatsPerMin, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataBeatsPerMin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataBeatsPerMin")))
 }
 
-// AVMetadataIdentifieriTunesMetadataTrackNumber returns the string constant AVMetadataIdentifieriTunesMetadataTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataTrackNumber() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataTrackNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataTrackNumber returns the string constant AVMetadataIdentifieriTunesMetadataTrackNumber, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataTrackNumber")))
 }
 
-// AVMetadataIdentifieriTunesMetadataArtDirector returns the string constant AVMetadataIdentifieriTunesMetadataArtDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataArtDirector() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataArtDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataArtDirector returns the string constant AVMetadataIdentifieriTunesMetadataArtDirector, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataArtDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataArtDirector")))
 }
 
-// AVMetadataIdentifieriTunesMetadataArranger returns the string constant AVMetadataIdentifieriTunesMetadataArranger as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataArranger() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataArranger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataArranger returns the string constant AVMetadataIdentifieriTunesMetadataArranger, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataArranger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataArranger")))
 }
 
-// AVMetadataIdentifieriTunesMetadataAuthor returns the string constant AVMetadataIdentifieriTunesMetadataAuthor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataAuthor() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataAuthor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataAuthor returns the string constant AVMetadataIdentifieriTunesMetadataAuthor, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataAuthor")))
 }
 
-// AVMetadataIdentifieriTunesMetadataLyrics returns the string constant AVMetadataIdentifieriTunesMetadataLyrics as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataLyrics() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataLyrics(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataLyrics returns the string constant AVMetadataIdentifieriTunesMetadataLyrics, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataLyrics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataLyrics")))
 }
 
-// AVMetadataIdentifieriTunesMetadataAcknowledgement returns the string constant AVMetadataIdentifieriTunesMetadataAcknowledgement as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataAcknowledgement() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataAcknowledgement(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataAcknowledgement returns the string constant AVMetadataIdentifieriTunesMetadataAcknowledgement, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataAcknowledgement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataAcknowledgement")))
 }
 
-// AVMetadataIdentifieriTunesMetadataConductor returns the string constant AVMetadataIdentifieriTunesMetadataConductor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataConductor() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataConductor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataConductor returns the string constant AVMetadataIdentifieriTunesMetadataConductor, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataConductor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataConductor")))
 }
 
-// AVMetadataIdentifieriTunesMetadataDescription returns the string constant AVMetadataIdentifieriTunesMetadataDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataDescription returns the string constant AVMetadataIdentifieriTunesMetadataDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataDescription")))
 }
 
-// AVMetadataIdentifieriTunesMetadataDirector returns the string constant AVMetadataIdentifieriTunesMetadataDirector as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataDirector() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataDirector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataDirector returns the string constant AVMetadataIdentifieriTunesMetadataDirector, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataDirector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataDirector")))
 }
 
-// AVMetadataIdentifieriTunesMetadataEQ returns the string constant AVMetadataIdentifieriTunesMetadataEQ as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataEQ() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataEQ(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataEQ returns the string constant AVMetadataIdentifieriTunesMetadataEQ, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataEQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataEQ")))
 }
 
-// AVMetadataIdentifieriTunesMetadataLinerNotes returns the string constant AVMetadataIdentifieriTunesMetadataLinerNotes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataLinerNotes() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataLinerNotes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataLinerNotes returns the string constant AVMetadataIdentifieriTunesMetadataLinerNotes, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataLinerNotes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataLinerNotes")))
 }
 
-// AVMetadataIdentifieriTunesMetadataRecordCompany returns the string constant AVMetadataIdentifieriTunesMetadataRecordCompany as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataRecordCompany() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataRecordCompany(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataRecordCompany returns the string constant AVMetadataIdentifieriTunesMetadataRecordCompany, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataRecordCompany() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataRecordCompany")))
 }
 
-// AVMetadataIdentifieriTunesMetadataOriginalArtist returns the string constant AVMetadataIdentifieriTunesMetadataOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataOriginalArtist returns the string constant AVMetadataIdentifieriTunesMetadataOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataOriginalArtist")))
 }
 
-// AVMetadataIdentifieriTunesMetadataPhonogramRights returns the string constant AVMetadataIdentifieriTunesMetadataPhonogramRights as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataPhonogramRights() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataPhonogramRights(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataPhonogramRights returns the string constant AVMetadataIdentifieriTunesMetadataPhonogramRights, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataPhonogramRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataPhonogramRights")))
 }
 
-// AVMetadataIdentifieriTunesMetadataProducer returns the string constant AVMetadataIdentifieriTunesMetadataProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataProducer() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataProducer returns the string constant AVMetadataIdentifieriTunesMetadataProducer, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataProducer")))
 }
 
-// AVMetadataIdentifieriTunesMetadataPerformer returns the string constant AVMetadataIdentifieriTunesMetadataPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataPerformer() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataPerformer returns the string constant AVMetadataIdentifieriTunesMetadataPerformer, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataPerformer")))
 }
 
-// AVMetadataIdentifieriTunesMetadataPublisher returns the string constant AVMetadataIdentifieriTunesMetadataPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataPublisher() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataPublisher returns the string constant AVMetadataIdentifieriTunesMetadataPublisher, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataPublisher")))
 }
 
-// AVMetadataIdentifieriTunesMetadataSoundEngineer returns the string constant AVMetadataIdentifieriTunesMetadataSoundEngineer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataSoundEngineer() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataSoundEngineer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataSoundEngineer returns the string constant AVMetadataIdentifieriTunesMetadataSoundEngineer, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataSoundEngineer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataSoundEngineer")))
 }
 
-// AVMetadataIdentifieriTunesMetadataSoloist returns the string constant AVMetadataIdentifieriTunesMetadataSoloist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataSoloist() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataSoloist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataSoloist returns the string constant AVMetadataIdentifieriTunesMetadataSoloist, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataSoloist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataSoloist")))
 }
 
-// AVMetadataIdentifieriTunesMetadataCredits returns the string constant AVMetadataIdentifieriTunesMetadataCredits as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataCredits() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataCredits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataCredits returns the string constant AVMetadataIdentifieriTunesMetadataCredits, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataCredits")))
 }
 
-// AVMetadataIdentifieriTunesMetadataThanks returns the string constant AVMetadataIdentifieriTunesMetadataThanks as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataThanks() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataThanks(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataThanks returns the string constant AVMetadataIdentifieriTunesMetadataThanks, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataThanks() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataThanks")))
 }
 
-// AVMetadataIdentifieriTunesMetadataOnlineExtras returns the string constant AVMetadataIdentifieriTunesMetadataOnlineExtras as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataOnlineExtras() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataOnlineExtras(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataOnlineExtras returns the string constant AVMetadataIdentifieriTunesMetadataOnlineExtras, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataOnlineExtras() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataOnlineExtras")))
 }
 
-// AVMetadataIdentifieriTunesMetadataExecProducer returns the string constant AVMetadataIdentifieriTunesMetadataExecProducer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifieriTunesMetadataExecProducer() objc.ID {
-	if _r := raw.AVMetadataIdentifieriTunesMetadataExecProducer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifieriTunesMetadataExecProducer returns the string constant AVMetadataIdentifieriTunesMetadataExecProducer, for use as a dictionary key or argument.
+func AVMetadataIdentifieriTunesMetadataExecProducer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifieriTunesMetadataExecProducer")))
 }
 
-// AVMetadataIdentifierID3MetadataAudioEncryption returns the string constant AVMetadataIdentifierID3MetadataAudioEncryption as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataAudioEncryption() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataAudioEncryption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataAudioEncryption returns the string constant AVMetadataIdentifierID3MetadataAudioEncryption, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataAudioEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataAudioEncryption")))
 }
 
-// AVMetadataIdentifierID3MetadataAttachedPicture returns the string constant AVMetadataIdentifierID3MetadataAttachedPicture as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataAttachedPicture() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataAttachedPicture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataAttachedPicture returns the string constant AVMetadataIdentifierID3MetadataAttachedPicture, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataAttachedPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataAttachedPicture")))
 }
 
-// AVMetadataIdentifierID3MetadataAudioSeekPointIndex returns the string constant AVMetadataIdentifierID3MetadataAudioSeekPointIndex as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataAudioSeekPointIndex() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataAudioSeekPointIndex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataAudioSeekPointIndex returns the string constant AVMetadataIdentifierID3MetadataAudioSeekPointIndex, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataAudioSeekPointIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataAudioSeekPointIndex")))
 }
 
-// AVMetadataIdentifierID3MetadataComments returns the string constant AVMetadataIdentifierID3MetadataComments as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataComments() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataComments(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataComments returns the string constant AVMetadataIdentifierID3MetadataComments, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataComments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataComments")))
 }
 
-// AVMetadataIdentifierID3MetadataCommercial returns the string constant AVMetadataIdentifierID3MetadataCommercial as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataCommercial() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataCommercial(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataCommercial returns the string constant AVMetadataIdentifierID3MetadataCommercial, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataCommercial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataCommercial")))
 }
 
-// AVMetadataIdentifierID3MetadataCommerical returns the string constant AVMetadataIdentifierID3MetadataCommerical as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataCommerical() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataCommerical(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataCommerical returns the string constant AVMetadataIdentifierID3MetadataCommerical, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataCommerical() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataCommerical")))
 }
 
-// AVMetadataIdentifierID3MetadataEncryption returns the string constant AVMetadataIdentifierID3MetadataEncryption as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEncryption() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEncryption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEncryption returns the string constant AVMetadataIdentifierID3MetadataEncryption, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEncryption")))
 }
 
-// AVMetadataIdentifierID3MetadataEqualization returns the string constant AVMetadataIdentifierID3MetadataEqualization as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEqualization() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEqualization(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEqualization returns the string constant AVMetadataIdentifierID3MetadataEqualization, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEqualization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEqualization")))
 }
 
-// AVMetadataIdentifierID3MetadataEqualization2 returns the string constant AVMetadataIdentifierID3MetadataEqualization2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEqualization2() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEqualization2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEqualization2 returns the string constant AVMetadataIdentifierID3MetadataEqualization2, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEqualization2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEqualization2")))
 }
 
-// AVMetadataIdentifierID3MetadataEventTimingCodes returns the string constant AVMetadataIdentifierID3MetadataEventTimingCodes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEventTimingCodes() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEventTimingCodes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEventTimingCodes returns the string constant AVMetadataIdentifierID3MetadataEventTimingCodes, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEventTimingCodes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEventTimingCodes")))
 }
 
-// AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject returns the string constant AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject returns the string constant AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject")))
 }
 
-// AVMetadataIdentifierID3MetadataGroupIdentifier returns the string constant AVMetadataIdentifierID3MetadataGroupIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataGroupIdentifier() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataGroupIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataGroupIdentifier returns the string constant AVMetadataIdentifierID3MetadataGroupIdentifier, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataGroupIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataGroupIdentifier")))
 }
 
-// AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23 returns the string constant AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23 returns the string constant AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23")))
 }
 
-// AVMetadataIdentifierID3MetadataLink returns the string constant AVMetadataIdentifierID3MetadataLink as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataLink() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataLink(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataLink returns the string constant AVMetadataIdentifierID3MetadataLink, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataLink")))
 }
 
-// AVMetadataIdentifierID3MetadataMusicCDIdentifier returns the string constant AVMetadataIdentifierID3MetadataMusicCDIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataMusicCDIdentifier() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataMusicCDIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataMusicCDIdentifier returns the string constant AVMetadataIdentifierID3MetadataMusicCDIdentifier, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataMusicCDIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataMusicCDIdentifier")))
 }
 
-// AVMetadataIdentifierID3MetadataMPEGLocationLookupTable returns the string constant AVMetadataIdentifierID3MetadataMPEGLocationLookupTable as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataMPEGLocationLookupTable() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataMPEGLocationLookupTable(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataMPEGLocationLookupTable returns the string constant AVMetadataIdentifierID3MetadataMPEGLocationLookupTable, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataMPEGLocationLookupTable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataMPEGLocationLookupTable")))
 }
 
-// AVMetadataIdentifierID3MetadataOwnership returns the string constant AVMetadataIdentifierID3MetadataOwnership as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOwnership() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOwnership(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOwnership returns the string constant AVMetadataIdentifierID3MetadataOwnership, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOwnership() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOwnership")))
 }
 
-// AVMetadataIdentifierID3MetadataPrivate returns the string constant AVMetadataIdentifierID3MetadataPrivate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPrivate() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPrivate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPrivate returns the string constant AVMetadataIdentifierID3MetadataPrivate, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPrivate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPrivate")))
 }
 
-// AVMetadataIdentifierID3MetadataPlayCounter returns the string constant AVMetadataIdentifierID3MetadataPlayCounter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPlayCounter() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPlayCounter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPlayCounter returns the string constant AVMetadataIdentifierID3MetadataPlayCounter, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPlayCounter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPlayCounter")))
 }
 
-// AVMetadataIdentifierID3MetadataPopularimeter returns the string constant AVMetadataIdentifierID3MetadataPopularimeter as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPopularimeter() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPopularimeter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPopularimeter returns the string constant AVMetadataIdentifierID3MetadataPopularimeter, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPopularimeter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPopularimeter")))
 }
 
-// AVMetadataIdentifierID3MetadataPositionSynchronization returns the string constant AVMetadataIdentifierID3MetadataPositionSynchronization as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPositionSynchronization() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPositionSynchronization(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPositionSynchronization returns the string constant AVMetadataIdentifierID3MetadataPositionSynchronization, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPositionSynchronization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPositionSynchronization")))
 }
 
-// AVMetadataIdentifierID3MetadataRecommendedBufferSize returns the string constant AVMetadataIdentifierID3MetadataRecommendedBufferSize as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataRecommendedBufferSize() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataRecommendedBufferSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataRecommendedBufferSize returns the string constant AVMetadataIdentifierID3MetadataRecommendedBufferSize, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataRecommendedBufferSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataRecommendedBufferSize")))
 }
 
-// AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment returns the string constant AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment returns the string constant AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment")))
 }
 
-// AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2 returns the string constant AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2 returns the string constant AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2")))
 }
 
-// AVMetadataIdentifierID3MetadataReverb returns the string constant AVMetadataIdentifierID3MetadataReverb as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataReverb() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataReverb(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataReverb returns the string constant AVMetadataIdentifierID3MetadataReverb, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataReverb() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataReverb")))
 }
 
-// AVMetadataIdentifierID3MetadataSeek returns the string constant AVMetadataIdentifierID3MetadataSeek as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSeek() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSeek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSeek returns the string constant AVMetadataIdentifierID3MetadataSeek, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSeek() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSeek")))
 }
 
-// AVMetadataIdentifierID3MetadataSignature returns the string constant AVMetadataIdentifierID3MetadataSignature as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSignature() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSignature(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSignature returns the string constant AVMetadataIdentifierID3MetadataSignature, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSignature")))
 }
 
-// AVMetadataIdentifierID3MetadataSynchronizedLyric returns the string constant AVMetadataIdentifierID3MetadataSynchronizedLyric as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSynchronizedLyric() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSynchronizedLyric(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSynchronizedLyric returns the string constant AVMetadataIdentifierID3MetadataSynchronizedLyric, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSynchronizedLyric() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSynchronizedLyric")))
 }
 
-// AVMetadataIdentifierID3MetadataSynchronizedTempoCodes returns the string constant AVMetadataIdentifierID3MetadataSynchronizedTempoCodes as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSynchronizedTempoCodes() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSynchronizedTempoCodes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSynchronizedTempoCodes returns the string constant AVMetadataIdentifierID3MetadataSynchronizedTempoCodes, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSynchronizedTempoCodes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSynchronizedTempoCodes")))
 }
 
-// AVMetadataIdentifierID3MetadataAlbumTitle returns the string constant AVMetadataIdentifierID3MetadataAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataAlbumTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataAlbumTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataAlbumTitle returns the string constant AVMetadataIdentifierID3MetadataAlbumTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataAlbumTitle")))
 }
 
-// AVMetadataIdentifierID3MetadataBeatsPerMinute returns the string constant AVMetadataIdentifierID3MetadataBeatsPerMinute as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataBeatsPerMinute() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataBeatsPerMinute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataBeatsPerMinute returns the string constant AVMetadataIdentifierID3MetadataBeatsPerMinute, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataBeatsPerMinute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataBeatsPerMinute")))
 }
 
-// AVMetadataIdentifierID3MetadataComposer returns the string constant AVMetadataIdentifierID3MetadataComposer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataComposer() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataComposer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataComposer returns the string constant AVMetadataIdentifierID3MetadataComposer, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataComposer")))
 }
 
-// AVMetadataIdentifierID3MetadataContentType returns the string constant AVMetadataIdentifierID3MetadataContentType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataContentType() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataContentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataContentType returns the string constant AVMetadataIdentifierID3MetadataContentType, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataContentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataContentType")))
 }
 
-// AVMetadataIdentifierID3MetadataCopyright returns the string constant AVMetadataIdentifierID3MetadataCopyright as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataCopyright() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataCopyright(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataCopyright returns the string constant AVMetadataIdentifierID3MetadataCopyright, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataCopyright")))
 }
 
-// AVMetadataIdentifierID3MetadataDate returns the string constant AVMetadataIdentifierID3MetadataDate as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataDate() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataDate returns the string constant AVMetadataIdentifierID3MetadataDate, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataDate")))
 }
 
-// AVMetadataIdentifierID3MetadataEncodingTime returns the string constant AVMetadataIdentifierID3MetadataEncodingTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEncodingTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEncodingTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEncodingTime returns the string constant AVMetadataIdentifierID3MetadataEncodingTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEncodingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEncodingTime")))
 }
 
-// AVMetadataIdentifierID3MetadataPlaylistDelay returns the string constant AVMetadataIdentifierID3MetadataPlaylistDelay as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPlaylistDelay() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPlaylistDelay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPlaylistDelay returns the string constant AVMetadataIdentifierID3MetadataPlaylistDelay, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPlaylistDelay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPlaylistDelay")))
 }
 
-// AVMetadataIdentifierID3MetadataOriginalReleaseTime returns the string constant AVMetadataIdentifierID3MetadataOriginalReleaseTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOriginalReleaseTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOriginalReleaseTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOriginalReleaseTime returns the string constant AVMetadataIdentifierID3MetadataOriginalReleaseTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOriginalReleaseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOriginalReleaseTime")))
 }
 
-// AVMetadataIdentifierID3MetadataRecordingTime returns the string constant AVMetadataIdentifierID3MetadataRecordingTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataRecordingTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataRecordingTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataRecordingTime returns the string constant AVMetadataIdentifierID3MetadataRecordingTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataRecordingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataRecordingTime")))
 }
 
-// AVMetadataIdentifierID3MetadataReleaseTime returns the string constant AVMetadataIdentifierID3MetadataReleaseTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataReleaseTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataReleaseTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataReleaseTime returns the string constant AVMetadataIdentifierID3MetadataReleaseTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataReleaseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataReleaseTime")))
 }
 
-// AVMetadataIdentifierID3MetadataTaggingTime returns the string constant AVMetadataIdentifierID3MetadataTaggingTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataTaggingTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataTaggingTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataTaggingTime returns the string constant AVMetadataIdentifierID3MetadataTaggingTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataTaggingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataTaggingTime")))
 }
 
-// AVMetadataIdentifierID3MetadataEncodedBy returns the string constant AVMetadataIdentifierID3MetadataEncodedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEncodedBy() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEncodedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEncodedBy returns the string constant AVMetadataIdentifierID3MetadataEncodedBy, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEncodedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEncodedBy")))
 }
 
-// AVMetadataIdentifierID3MetadataLyricist returns the string constant AVMetadataIdentifierID3MetadataLyricist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataLyricist() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataLyricist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataLyricist returns the string constant AVMetadataIdentifierID3MetadataLyricist, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataLyricist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataLyricist")))
 }
 
-// AVMetadataIdentifierID3MetadataFileType returns the string constant AVMetadataIdentifierID3MetadataFileType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataFileType() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataFileType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataFileType returns the string constant AVMetadataIdentifierID3MetadataFileType, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataFileType")))
 }
 
-// AVMetadataIdentifierID3MetadataTime returns the string constant AVMetadataIdentifierID3MetadataTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataTime() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataTime returns the string constant AVMetadataIdentifierID3MetadataTime, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataTime")))
 }
 
-// AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24 returns the string constant AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24 as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24 returns the string constant AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24")))
 }
 
-// AVMetadataIdentifierID3MetadataContentGroupDescription returns the string constant AVMetadataIdentifierID3MetadataContentGroupDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataContentGroupDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataContentGroupDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataContentGroupDescription returns the string constant AVMetadataIdentifierID3MetadataContentGroupDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataContentGroupDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataContentGroupDescription")))
 }
 
-// AVMetadataIdentifierID3MetadataTitleDescription returns the string constant AVMetadataIdentifierID3MetadataTitleDescription as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataTitleDescription() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataTitleDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataTitleDescription returns the string constant AVMetadataIdentifierID3MetadataTitleDescription, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataTitleDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataTitleDescription")))
 }
 
-// AVMetadataIdentifierID3MetadataSubTitle returns the string constant AVMetadataIdentifierID3MetadataSubTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSubTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSubTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSubTitle returns the string constant AVMetadataIdentifierID3MetadataSubTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSubTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSubTitle")))
 }
 
-// AVMetadataIdentifierID3MetadataInitialKey returns the string constant AVMetadataIdentifierID3MetadataInitialKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataInitialKey() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataInitialKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataInitialKey returns the string constant AVMetadataIdentifierID3MetadataInitialKey, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataInitialKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataInitialKey")))
 }
 
-// AVMetadataIdentifierID3MetadataLanguage returns the string constant AVMetadataIdentifierID3MetadataLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataLanguage() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataLanguage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataLanguage returns the string constant AVMetadataIdentifierID3MetadataLanguage, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataLanguage")))
 }
 
-// AVMetadataIdentifierID3MetadataLength returns the string constant AVMetadataIdentifierID3MetadataLength as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataLength() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataLength(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataLength returns the string constant AVMetadataIdentifierID3MetadataLength, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataLength")))
 }
 
-// AVMetadataIdentifierID3MetadataMusicianCreditsList returns the string constant AVMetadataIdentifierID3MetadataMusicianCreditsList as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataMusicianCreditsList() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataMusicianCreditsList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataMusicianCreditsList returns the string constant AVMetadataIdentifierID3MetadataMusicianCreditsList, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataMusicianCreditsList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataMusicianCreditsList")))
 }
 
-// AVMetadataIdentifierID3MetadataMediaType returns the string constant AVMetadataIdentifierID3MetadataMediaType as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataMediaType() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataMediaType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataMediaType returns the string constant AVMetadataIdentifierID3MetadataMediaType, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataMediaType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataMediaType")))
 }
 
-// AVMetadataIdentifierID3MetadataMood returns the string constant AVMetadataIdentifierID3MetadataMood as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataMood() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataMood(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataMood returns the string constant AVMetadataIdentifierID3MetadataMood, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataMood() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataMood")))
 }
 
-// AVMetadataIdentifierID3MetadataOriginalAlbumTitle returns the string constant AVMetadataIdentifierID3MetadataOriginalAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOriginalAlbumTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOriginalAlbumTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOriginalAlbumTitle returns the string constant AVMetadataIdentifierID3MetadataOriginalAlbumTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOriginalAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOriginalAlbumTitle")))
 }
 
-// AVMetadataIdentifierID3MetadataOriginalFilename returns the string constant AVMetadataIdentifierID3MetadataOriginalFilename as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOriginalFilename() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOriginalFilename(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOriginalFilename returns the string constant AVMetadataIdentifierID3MetadataOriginalFilename, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOriginalFilename() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOriginalFilename")))
 }
 
-// AVMetadataIdentifierID3MetadataOriginalLyricist returns the string constant AVMetadataIdentifierID3MetadataOriginalLyricist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOriginalLyricist() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOriginalLyricist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOriginalLyricist returns the string constant AVMetadataIdentifierID3MetadataOriginalLyricist, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOriginalLyricist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOriginalLyricist")))
 }
 
-// AVMetadataIdentifierID3MetadataOriginalArtist returns the string constant AVMetadataIdentifierID3MetadataOriginalArtist as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOriginalArtist() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOriginalArtist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOriginalArtist returns the string constant AVMetadataIdentifierID3MetadataOriginalArtist, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOriginalArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOriginalArtist")))
 }
 
-// AVMetadataIdentifierID3MetadataOriginalReleaseYear returns the string constant AVMetadataIdentifierID3MetadataOriginalReleaseYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOriginalReleaseYear() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOriginalReleaseYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOriginalReleaseYear returns the string constant AVMetadataIdentifierID3MetadataOriginalReleaseYear, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOriginalReleaseYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOriginalReleaseYear")))
 }
 
-// AVMetadataIdentifierID3MetadataFileOwner returns the string constant AVMetadataIdentifierID3MetadataFileOwner as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataFileOwner() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataFileOwner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataFileOwner returns the string constant AVMetadataIdentifierID3MetadataFileOwner, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataFileOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataFileOwner")))
 }
 
-// AVMetadataIdentifierID3MetadataLeadPerformer returns the string constant AVMetadataIdentifierID3MetadataLeadPerformer as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataLeadPerformer() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataLeadPerformer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataLeadPerformer returns the string constant AVMetadataIdentifierID3MetadataLeadPerformer, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataLeadPerformer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataLeadPerformer")))
 }
 
-// AVMetadataIdentifierID3MetadataBand returns the string constant AVMetadataIdentifierID3MetadataBand as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataBand() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataBand(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataBand returns the string constant AVMetadataIdentifierID3MetadataBand, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataBand() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataBand")))
 }
 
-// AVMetadataIdentifierID3MetadataConductor returns the string constant AVMetadataIdentifierID3MetadataConductor as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataConductor() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataConductor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataConductor returns the string constant AVMetadataIdentifierID3MetadataConductor, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataConductor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataConductor")))
 }
 
-// AVMetadataIdentifierID3MetadataModifiedBy returns the string constant AVMetadataIdentifierID3MetadataModifiedBy as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataModifiedBy() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataModifiedBy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataModifiedBy returns the string constant AVMetadataIdentifierID3MetadataModifiedBy, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataModifiedBy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataModifiedBy")))
 }
 
-// AVMetadataIdentifierID3MetadataPartOfASet returns the string constant AVMetadataIdentifierID3MetadataPartOfASet as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPartOfASet() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPartOfASet(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPartOfASet returns the string constant AVMetadataIdentifierID3MetadataPartOfASet, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPartOfASet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPartOfASet")))
 }
 
-// AVMetadataIdentifierID3MetadataProducedNotice returns the string constant AVMetadataIdentifierID3MetadataProducedNotice as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataProducedNotice() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataProducedNotice(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataProducedNotice returns the string constant AVMetadataIdentifierID3MetadataProducedNotice, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataProducedNotice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataProducedNotice")))
 }
 
-// AVMetadataIdentifierID3MetadataPublisher returns the string constant AVMetadataIdentifierID3MetadataPublisher as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPublisher() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPublisher(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPublisher returns the string constant AVMetadataIdentifierID3MetadataPublisher, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPublisher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPublisher")))
 }
 
-// AVMetadataIdentifierID3MetadataTrackNumber returns the string constant AVMetadataIdentifierID3MetadataTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataTrackNumber() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataTrackNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataTrackNumber returns the string constant AVMetadataIdentifierID3MetadataTrackNumber, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataTrackNumber")))
 }
 
-// AVMetadataIdentifierID3MetadataRecordingDates returns the string constant AVMetadataIdentifierID3MetadataRecordingDates as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataRecordingDates() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataRecordingDates(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataRecordingDates returns the string constant AVMetadataIdentifierID3MetadataRecordingDates, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataRecordingDates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataRecordingDates")))
 }
 
-// AVMetadataIdentifierID3MetadataInternetRadioStationName returns the string constant AVMetadataIdentifierID3MetadataInternetRadioStationName as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataInternetRadioStationName() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataInternetRadioStationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataInternetRadioStationName returns the string constant AVMetadataIdentifierID3MetadataInternetRadioStationName, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataInternetRadioStationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataInternetRadioStationName")))
 }
 
-// AVMetadataIdentifierID3MetadataInternetRadioStationOwner returns the string constant AVMetadataIdentifierID3MetadataInternetRadioStationOwner as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataInternetRadioStationOwner() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataInternetRadioStationOwner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataInternetRadioStationOwner returns the string constant AVMetadataIdentifierID3MetadataInternetRadioStationOwner, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataInternetRadioStationOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataInternetRadioStationOwner")))
 }
 
-// AVMetadataIdentifierID3MetadataSize returns the string constant AVMetadataIdentifierID3MetadataSize as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSize() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSize returns the string constant AVMetadataIdentifierID3MetadataSize, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSize")))
 }
 
-// AVMetadataIdentifierID3MetadataAlbumSortOrder returns the string constant AVMetadataIdentifierID3MetadataAlbumSortOrder as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataAlbumSortOrder() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataAlbumSortOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataAlbumSortOrder returns the string constant AVMetadataIdentifierID3MetadataAlbumSortOrder, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataAlbumSortOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataAlbumSortOrder")))
 }
 
-// AVMetadataIdentifierID3MetadataPerformerSortOrder returns the string constant AVMetadataIdentifierID3MetadataPerformerSortOrder as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPerformerSortOrder() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPerformerSortOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPerformerSortOrder returns the string constant AVMetadataIdentifierID3MetadataPerformerSortOrder, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPerformerSortOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPerformerSortOrder")))
 }
 
-// AVMetadataIdentifierID3MetadataTitleSortOrder returns the string constant AVMetadataIdentifierID3MetadataTitleSortOrder as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataTitleSortOrder() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataTitleSortOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataTitleSortOrder returns the string constant AVMetadataIdentifierID3MetadataTitleSortOrder, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataTitleSortOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataTitleSortOrder")))
 }
 
-// AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode returns the string constant AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode returns the string constant AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode")))
 }
 
-// AVMetadataIdentifierID3MetadataEncodedWith returns the string constant AVMetadataIdentifierID3MetadataEncodedWith as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataEncodedWith() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataEncodedWith(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataEncodedWith returns the string constant AVMetadataIdentifierID3MetadataEncodedWith, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataEncodedWith() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataEncodedWith")))
 }
 
-// AVMetadataIdentifierID3MetadataSetSubtitle returns the string constant AVMetadataIdentifierID3MetadataSetSubtitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataSetSubtitle() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataSetSubtitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataSetSubtitle returns the string constant AVMetadataIdentifierID3MetadataSetSubtitle, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataSetSubtitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataSetSubtitle")))
 }
 
-// AVMetadataIdentifierID3MetadataYear returns the string constant AVMetadataIdentifierID3MetadataYear as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataYear() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataYear returns the string constant AVMetadataIdentifierID3MetadataYear, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataYear")))
 }
 
-// AVMetadataIdentifierID3MetadataUserText returns the string constant AVMetadataIdentifierID3MetadataUserText as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataUserText() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataUserText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataUserText returns the string constant AVMetadataIdentifierID3MetadataUserText, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataUserText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataUserText")))
 }
 
-// AVMetadataIdentifierID3MetadataUniqueFileIdentifier returns the string constant AVMetadataIdentifierID3MetadataUniqueFileIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataUniqueFileIdentifier() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataUniqueFileIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataUniqueFileIdentifier returns the string constant AVMetadataIdentifierID3MetadataUniqueFileIdentifier, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataUniqueFileIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataUniqueFileIdentifier")))
 }
 
-// AVMetadataIdentifierID3MetadataTermsOfUse returns the string constant AVMetadataIdentifierID3MetadataTermsOfUse as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataTermsOfUse() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataTermsOfUse(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataTermsOfUse returns the string constant AVMetadataIdentifierID3MetadataTermsOfUse, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataTermsOfUse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataTermsOfUse")))
 }
 
-// AVMetadataIdentifierID3MetadataUnsynchronizedLyric returns the string constant AVMetadataIdentifierID3MetadataUnsynchronizedLyric as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataUnsynchronizedLyric() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataUnsynchronizedLyric(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataUnsynchronizedLyric returns the string constant AVMetadataIdentifierID3MetadataUnsynchronizedLyric, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataUnsynchronizedLyric() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataUnsynchronizedLyric")))
 }
 
-// AVMetadataIdentifierID3MetadataCommercialInformation returns the string constant AVMetadataIdentifierID3MetadataCommercialInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataCommercialInformation() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataCommercialInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataCommercialInformation returns the string constant AVMetadataIdentifierID3MetadataCommercialInformation, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataCommercialInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataCommercialInformation")))
 }
 
-// AVMetadataIdentifierID3MetadataCopyrightInformation returns the string constant AVMetadataIdentifierID3MetadataCopyrightInformation as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataCopyrightInformation() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataCopyrightInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataCopyrightInformation returns the string constant AVMetadataIdentifierID3MetadataCopyrightInformation, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataCopyrightInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataCopyrightInformation")))
 }
 
-// AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage")))
 }
 
-// AVMetadataIdentifierID3MetadataOfficialArtistWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialArtistWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOfficialArtistWebpage() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOfficialArtistWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOfficialArtistWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialArtistWebpage, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOfficialArtistWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOfficialArtistWebpage")))
 }
 
-// AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage")))
 }
 
-// AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage returns the string constant AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage returns the string constant AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage")))
 }
 
-// AVMetadataIdentifierID3MetadataPayment returns the string constant AVMetadataIdentifierID3MetadataPayment as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataPayment() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataPayment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataPayment returns the string constant AVMetadataIdentifierID3MetadataPayment, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataPayment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataPayment")))
 }
 
-// AVMetadataIdentifierID3MetadataOfficialPublisherWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialPublisherWebpage as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataOfficialPublisherWebpage() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataOfficialPublisherWebpage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataOfficialPublisherWebpage returns the string constant AVMetadataIdentifierID3MetadataOfficialPublisherWebpage, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataOfficialPublisherWebpage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataOfficialPublisherWebpage")))
 }
 
-// AVMetadataIdentifierID3MetadataUserURL returns the string constant AVMetadataIdentifierID3MetadataUserURL as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierID3MetadataUserURL() objc.ID {
-	if _r := raw.AVMetadataIdentifierID3MetadataUserURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierID3MetadataUserURL returns the string constant AVMetadataIdentifierID3MetadataUserURL, for use as a dictionary key or argument.
+func AVMetadataIdentifierID3MetadataUserURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierID3MetadataUserURL")))
 }
 
-// AVMetadataIdentifierIcyMetadataStreamTitle returns the string constant AVMetadataIdentifierIcyMetadataStreamTitle as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierIcyMetadataStreamTitle() objc.ID {
-	if _r := raw.AVMetadataIdentifierIcyMetadataStreamTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierIcyMetadataStreamTitle returns the string constant AVMetadataIdentifierIcyMetadataStreamTitle, for use as a dictionary key or argument.
+func AVMetadataIdentifierIcyMetadataStreamTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierIcyMetadataStreamTitle")))
 }
 
-// AVMetadataIdentifierIcyMetadataStreamURL returns the string constant AVMetadataIdentifierIcyMetadataStreamURL as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataIdentifierIcyMetadataStreamURL() objc.ID {
-	if _r := raw.AVMetadataIdentifierIcyMetadataStreamURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataIdentifierIcyMetadataStreamURL returns the string constant AVMetadataIdentifierIcyMetadataStreamURL, for use as a dictionary key or argument.
+func AVMetadataIdentifierIcyMetadataStreamURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataIdentifierIcyMetadataStreamURL")))
 }
 
-// @constant       AVFragmentedMovieTrackTimeRangeDidChangeNotification @abstract       Posted when the timeRange of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
-// AVFragmentedMovieTrackTimeRangeDidChangeNotification returns the string constant AVFragmentedMovieTrackTimeRangeDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVFragmentedMovieTrackTimeRangeDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVFragmentedMovieTrackTimeRangeDidChangeNotification())
+// AVFragmentedMovieTrackTimeRangeDidChangeNotification returns the string constant AVFragmentedMovieTrackTimeRangeDidChangeNotification, for use as a dictionary key or argument.
+func AVFragmentedMovieTrackTimeRangeDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieTrackTimeRangeDidChangeNotification")))
 }
 
-// @constant       AVFragmentedMovieTrackSegmentsDidChangeNotification @abstract       Posted when the array of segments of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
-// AVFragmentedMovieTrackSegmentsDidChangeNotification returns the string constant AVFragmentedMovieTrackSegmentsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVFragmentedMovieTrackSegmentsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVFragmentedMovieTrackSegmentsDidChangeNotification())
+// AVFragmentedMovieTrackSegmentsDidChangeNotification returns the string constant AVFragmentedMovieTrackSegmentsDidChangeNotification, for use as a dictionary key or argument.
+func AVFragmentedMovieTrackSegmentsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieTrackSegmentsDidChangeNotification")))
 }
 
-// @constant       AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification @discussion     This notification name has been deprecated. Use either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification instead; in either case, you can assume that timing changes to fragmented tracks result in changes to the total length of the sample data used by the track.
-// AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification returns the string constant AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification())
+// AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification returns the string constant AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification, for use as a dictionary key or argument.
+func AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification")))
 }
 
-// @constant		AVMovieReferenceRestrictionsKey @abstract Indicates the restrictions used by the movie when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. See AVAsset.h for the declaration of the AVAssetReferenceRestrictions enum. @discussion Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
-// AVMovieReferenceRestrictionsKey returns the string constant AVMovieReferenceRestrictionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMovieReferenceRestrictionsKey() objc.ID {
-	return purego.CFConstant(raw.AVMovieReferenceRestrictionsKey())
+// AVMovieReferenceRestrictionsKey returns the string constant AVMovieReferenceRestrictionsKey, for use as a dictionary key or argument.
+func AVMovieReferenceRestrictionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMovieReferenceRestrictionsKey")))
 }
 
-// @constant		AVMovieShouldSupportAliasDataReferencesKey @abstract		Indicates whether alias data references in the movie should be parsed and resolved. @discussion Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVMovie initialization option is appropriate. AVMovie and AVMutableMovie do not create movies using alias data references to external media files. If you provide a value for AVMovieReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
-// AVMovieShouldSupportAliasDataReferencesKey returns the string constant AVMovieShouldSupportAliasDataReferencesKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVMovieShouldSupportAliasDataReferencesKey() objc.ID {
-	return purego.CFConstant(raw.AVMovieShouldSupportAliasDataReferencesKey())
+// AVMovieShouldSupportAliasDataReferencesKey returns the string constant AVMovieShouldSupportAliasDataReferencesKey, for use as a dictionary key or argument.
+func AVMovieShouldSupportAliasDataReferencesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMovieShouldSupportAliasDataReferencesKey")))
 }
 
-// @constant       AVFragmentedMovieContainsMovieFragmentsDidChangeNotification @abstract       Posted after the value of @"containsMovieFragments" has already been loaded and the AVFragmentedMovie is added to an AVFragmentedMovieMinder, either when 1) movie fragments are detected in the movie file on disk after it had previously contained none or when 2) no movie fragments are detected in the movie file on disk after it had previously contained one or more.
-// AVFragmentedMovieContainsMovieFragmentsDidChangeNotification returns the string constant AVFragmentedMovieContainsMovieFragmentsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVFragmentedMovieContainsMovieFragmentsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVFragmentedMovieContainsMovieFragmentsDidChangeNotification())
+// AVFragmentedMovieContainsMovieFragmentsDidChangeNotification returns the string constant AVFragmentedMovieContainsMovieFragmentsDidChangeNotification, for use as a dictionary key or argument.
+func AVFragmentedMovieContainsMovieFragmentsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieContainsMovieFragmentsDidChangeNotification")))
 }
 
-// @constant       AVFragmentedMovieDurationDidChangeNotification @abstract       Posted when the duration of an AVFragmentedMovie changes while it's being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
-// AVFragmentedMovieDurationDidChangeNotification returns the string constant AVFragmentedMovieDurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVFragmentedMovieDurationDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.AVFragmentedMovieDurationDidChangeNotification())
+// AVFragmentedMovieDurationDidChangeNotification returns the string constant AVFragmentedMovieDurationDidChangeNotification, for use as a dictionary key or argument.
+func AVFragmentedMovieDurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieDurationDidChangeNotification")))
 }
 
-// @constant       AVFragmentedMovieWasDefragmentedNotification @abstract       Posted when the movie file on disk is defragmented while an AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only if the defragmentation occurs after the status of the value of @"canContainMovieFragments" has reached AVKeyValueStatusLoaded.
-// AVFragmentedMovieWasDefragmentedNotification returns the string constant AVFragmentedMovieWasDefragmentedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVFragmentedMovieWasDefragmentedNotification() objc.ID {
-	return purego.CFConstant(raw.AVFragmentedMovieWasDefragmentedNotification())
+// AVFragmentedMovieWasDefragmentedNotification returns the string constant AVFragmentedMovieWasDefragmentedNotification, for use as a dictionary key or argument.
+func AVFragmentedMovieWasDefragmentedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVFragmentedMovieWasDefragmentedNotification")))
 }
 
-// AVOutputSettingsPreset640x480 returns the string constant AVOutputSettingsPreset640x480 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPreset640x480() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPreset640x480())
+// AVOutputSettingsPreset640x480 returns the string constant AVOutputSettingsPreset640x480, for use as a dictionary key or argument.
+func AVOutputSettingsPreset640x480() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPreset640x480")))
 }
 
-// AVOutputSettingsPreset960x540 returns the string constant AVOutputSettingsPreset960x540 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPreset960x540() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPreset960x540())
+// AVOutputSettingsPreset960x540 returns the string constant AVOutputSettingsPreset960x540, for use as a dictionary key or argument.
+func AVOutputSettingsPreset960x540() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPreset960x540")))
 }
 
-// AVOutputSettingsPreset1280x720 returns the string constant AVOutputSettingsPreset1280x720 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPreset1280x720() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPreset1280x720())
+// AVOutputSettingsPreset1280x720 returns the string constant AVOutputSettingsPreset1280x720, for use as a dictionary key or argument.
+func AVOutputSettingsPreset1280x720() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPreset1280x720")))
 }
 
-// AVOutputSettingsPreset1920x1080 returns the string constant AVOutputSettingsPreset1920x1080 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPreset1920x1080() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPreset1920x1080())
+// AVOutputSettingsPreset1920x1080 returns the string constant AVOutputSettingsPreset1920x1080, for use as a dictionary key or argument.
+func AVOutputSettingsPreset1920x1080() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPreset1920x1080")))
 }
 
-// AVOutputSettingsPreset3840x2160 returns the string constant AVOutputSettingsPreset3840x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPreset3840x2160() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPreset3840x2160())
+// AVOutputSettingsPreset3840x2160 returns the string constant AVOutputSettingsPreset3840x2160, for use as a dictionary key or argument.
+func AVOutputSettingsPreset3840x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPreset3840x2160")))
 }
 
-// AVOutputSettingsPresetHEVC1920x1080 returns the string constant AVOutputSettingsPresetHEVC1920x1080 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetHEVC1920x1080() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPresetHEVC1920x1080())
+// AVOutputSettingsPresetHEVC1920x1080 returns the string constant AVOutputSettingsPresetHEVC1920x1080, for use as a dictionary key or argument.
+func AVOutputSettingsPresetHEVC1920x1080() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetHEVC1920x1080")))
 }
 
-// AVOutputSettingsPresetHEVC1920x1080WithAlpha returns the string constant AVOutputSettingsPresetHEVC1920x1080WithAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetHEVC1920x1080WithAlpha() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPresetHEVC1920x1080WithAlpha())
+// AVOutputSettingsPresetHEVC1920x1080WithAlpha returns the string constant AVOutputSettingsPresetHEVC1920x1080WithAlpha, for use as a dictionary key or argument.
+func AVOutputSettingsPresetHEVC1920x1080WithAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetHEVC1920x1080WithAlpha")))
 }
 
-// AVOutputSettingsPresetHEVC3840x2160 returns the string constant AVOutputSettingsPresetHEVC3840x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetHEVC3840x2160() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPresetHEVC3840x2160())
+// AVOutputSettingsPresetHEVC3840x2160 returns the string constant AVOutputSettingsPresetHEVC3840x2160, for use as a dictionary key or argument.
+func AVOutputSettingsPresetHEVC3840x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetHEVC3840x2160")))
 }
 
-// AVOutputSettingsPresetHEVC3840x2160WithAlpha returns the string constant AVOutputSettingsPresetHEVC3840x2160WithAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetHEVC3840x2160WithAlpha() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPresetHEVC3840x2160WithAlpha())
+// AVOutputSettingsPresetHEVC3840x2160WithAlpha returns the string constant AVOutputSettingsPresetHEVC3840x2160WithAlpha, for use as a dictionary key or argument.
+func AVOutputSettingsPresetHEVC3840x2160WithAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetHEVC3840x2160WithAlpha")))
 }
 
-// AVOutputSettingsPresetHEVC4320x2160 returns the string constant AVOutputSettingsPresetHEVC4320x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetHEVC4320x2160() objc.ID {
-	if _r := raw.AVOutputSettingsPresetHEVC4320x2160(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVOutputSettingsPresetHEVC4320x2160 returns the string constant AVOutputSettingsPresetHEVC4320x2160, for use as a dictionary key or argument.
+func AVOutputSettingsPresetHEVC4320x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetHEVC4320x2160")))
 }
 
-// AVOutputSettingsPresetHEVC7680x4320 returns the string constant AVOutputSettingsPresetHEVC7680x4320 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetHEVC7680x4320() objc.ID {
-	if _r := raw.AVOutputSettingsPresetHEVC7680x4320(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVOutputSettingsPresetHEVC7680x4320 returns the string constant AVOutputSettingsPresetHEVC7680x4320, for use as a dictionary key or argument.
+func AVOutputSettingsPresetHEVC7680x4320() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetHEVC7680x4320")))
 }
 
-// AVOutputSettingsPresetMVHEVC960x960 returns the string constant AVOutputSettingsPresetMVHEVC960x960 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetMVHEVC960x960() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPresetMVHEVC960x960())
+// AVOutputSettingsPresetMVHEVC960x960 returns the string constant AVOutputSettingsPresetMVHEVC960x960, for use as a dictionary key or argument.
+func AVOutputSettingsPresetMVHEVC960x960() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetMVHEVC960x960")))
 }
 
-// AVOutputSettingsPresetMVHEVC1440x1440 returns the string constant AVOutputSettingsPresetMVHEVC1440x1440 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetMVHEVC1440x1440() objc.ID {
-	return purego.CFConstant(raw.AVOutputSettingsPresetMVHEVC1440x1440())
+// AVOutputSettingsPresetMVHEVC1440x1440 returns the string constant AVOutputSettingsPresetMVHEVC1440x1440, for use as a dictionary key or argument.
+func AVOutputSettingsPresetMVHEVC1440x1440() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetMVHEVC1440x1440")))
 }
 
-// AVOutputSettingsPresetMVHEVC4320x4320 returns the string constant AVOutputSettingsPresetMVHEVC4320x4320 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetMVHEVC4320x4320() objc.ID {
-	if _r := raw.AVOutputSettingsPresetMVHEVC4320x4320(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVOutputSettingsPresetMVHEVC4320x4320 returns the string constant AVOutputSettingsPresetMVHEVC4320x4320, for use as a dictionary key or argument.
+func AVOutputSettingsPresetMVHEVC4320x4320() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetMVHEVC4320x4320")))
 }
 
-// AVOutputSettingsPresetMVHEVC7680x7680 returns the string constant AVOutputSettingsPresetMVHEVC7680x7680 as an objc.ID, for use as a dictionary key or selector argument.
-func AVOutputSettingsPresetMVHEVC7680x7680() objc.ID {
-	if _r := raw.AVOutputSettingsPresetMVHEVC7680x7680(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVOutputSettingsPresetMVHEVC7680x7680 returns the string constant AVOutputSettingsPresetMVHEVC7680x7680, for use as a dictionary key or argument.
+func AVOutputSettingsPresetMVHEVC7680x7680() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVOutputSettingsPresetMVHEVC7680x7680")))
 }
 
-// Indicates a player rate change. Posted by the player when its rate changes. Similar to KVO of AVPlayer.rate, but providing additional information about the rate change in the userInfo. See keys below.
-// AVPlayerRateDidChangeNotification returns the string constant AVPlayerRateDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerRateDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerRateDidChangeNotification returns the string constant AVPlayerRateDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeNotification")))
 }
 
-// Indicates a reason for the rate change notification. The value corresponding to this key is of type AVPlayerRateDidChangeReason.
-// AVPlayerRateDidChangeReasonKey returns the string constant AVPlayerRateDidChangeReasonKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerRateDidChangeReasonKey())
+// AVPlayerRateDidChangeReasonKey returns the string constant AVPlayerRateDidChangeReasonKey, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonKey")))
 }
 
-// Indicates a rate change was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerRateDidChangeNotification about a rate change originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the playback rate changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
-// AVPlayerRateDidChangeOriginatingParticipantKey returns the string constant AVPlayerRateDidChangeOriginatingParticipantKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeOriginatingParticipantKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerRateDidChangeOriginatingParticipantKey())
+// AVPlayerRateDidChangeOriginatingParticipantKey returns the string constant AVPlayerRateDidChangeOriginatingParticipantKey, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeOriginatingParticipantKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeOriginatingParticipantKey")))
 }
 
-// AVPlayerRateDidChangeReasonSetRateCalled returns the string constant AVPlayerRateDidChangeReasonSetRateCalled as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonSetRateCalled() objc.ID {
-	return purego.CFConstant(raw.AVPlayerRateDidChangeReasonSetRateCalled())
+// AVPlayerRateDidChangeReasonSetRateCalled returns the string constant AVPlayerRateDidChangeReasonSetRateCalled, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonSetRateCalled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonSetRateCalled")))
 }
 
-// AVPlayerRateDidChangeReasonSetRateFailed returns the string constant AVPlayerRateDidChangeReasonSetRateFailed as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonSetRateFailed() objc.ID {
-	return purego.CFConstant(raw.AVPlayerRateDidChangeReasonSetRateFailed())
+// AVPlayerRateDidChangeReasonSetRateFailed returns the string constant AVPlayerRateDidChangeReasonSetRateFailed, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonSetRateFailed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonSetRateFailed")))
 }
 
-// AVPlayerRateDidChangeReasonAudioSessionInterrupted returns the string constant AVPlayerRateDidChangeReasonAudioSessionInterrupted as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonAudioSessionInterrupted() objc.ID {
-	return purego.CFConstant(raw.AVPlayerRateDidChangeReasonAudioSessionInterrupted())
+// AVPlayerRateDidChangeReasonAudioSessionInterrupted returns the string constant AVPlayerRateDidChangeReasonAudioSessionInterrupted, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonAudioSessionInterrupted() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonAudioSessionInterrupted")))
 }
 
-// AVPlayerRateDidChangeReasonAppBackgrounded returns the string constant AVPlayerRateDidChangeReasonAppBackgrounded as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonAppBackgrounded() objc.ID {
-	return purego.CFConstant(raw.AVPlayerRateDidChangeReasonAppBackgrounded())
+// AVPlayerRateDidChangeReasonAppBackgrounded returns the string constant AVPlayerRateDidChangeReasonAppBackgrounded, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonAppBackgrounded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonAppBackgrounded")))
 }
 
-// AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge returns the string constant AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge() objc.ID {
-	if _r := raw.AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge returns the string constant AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge")))
 }
 
-// AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange returns the string constant AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() objc.ID {
-	if _r := raw.AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange returns the string constant AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange, for use as a dictionary key or argument.
+func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange")))
 }
 
-// Indicates that the player is waiting for appropriate playback buffer conditions before starting playback The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible. When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
-// AVPlayerWaitingToMinimizeStallsReason returns the string constant AVPlayerWaitingToMinimizeStallsReason as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerWaitingToMinimizeStallsReason() objc.ID {
-	if _r := raw.AVPlayerWaitingToMinimizeStallsReason(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerWaitingToMinimizeStallsReason returns the string constant AVPlayerWaitingToMinimizeStallsReason, for use as a dictionary key or argument.
+func AVPlayerWaitingToMinimizeStallsReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingToMinimizeStallsReason")))
 }
 
-// Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions. The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason. Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
-// AVPlayerWaitingWhileEvaluatingBufferingRateReason returns the string constant AVPlayerWaitingWhileEvaluatingBufferingRateReason as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerWaitingWhileEvaluatingBufferingRateReason() objc.ID {
-	if _r := raw.AVPlayerWaitingWhileEvaluatingBufferingRateReason(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerWaitingWhileEvaluatingBufferingRateReason returns the string constant AVPlayerWaitingWhileEvaluatingBufferingRateReason, for use as a dictionary key or argument.
+func AVPlayerWaitingWhileEvaluatingBufferingRateReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingWhileEvaluatingBufferingRateReason")))
 }
 
-// Indicates that the AVPlayer is waiting because its currentItem is nil The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
-// AVPlayerWaitingWithNoItemToPlayReason returns the string constant AVPlayerWaitingWithNoItemToPlayReason as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerWaitingWithNoItemToPlayReason() objc.ID {
-	if _r := raw.AVPlayerWaitingWithNoItemToPlayReason(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerWaitingWithNoItemToPlayReason returns the string constant AVPlayerWaitingWithNoItemToPlayReason, for use as a dictionary key or argument.
+func AVPlayerWaitingWithNoItemToPlayReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingWithNoItemToPlayReason")))
 }
 
-// Indicates that the player is waiting for another participant connected through its AVPlayerPlaybackCoordinator. The player is waiting for playback because its connected AVPlayerPlaybackCoordinator requires information from one of the other participants before playback can start.
-// AVPlayerWaitingForCoordinatedPlaybackReason returns the string constant AVPlayerWaitingForCoordinatedPlaybackReason as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerWaitingForCoordinatedPlaybackReason() objc.ID {
-	return purego.CFConstant(raw.AVPlayerWaitingForCoordinatedPlaybackReason())
+// AVPlayerWaitingForCoordinatedPlaybackReason returns the string constant AVPlayerWaitingForCoordinatedPlaybackReason, for use as a dictionary key or argument.
+func AVPlayerWaitingForCoordinatedPlaybackReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingForCoordinatedPlaybackReason")))
 }
 
-// AVPlayerEligibleForHDRPlaybackDidChangeNotification returns the string constant AVPlayerEligibleForHDRPlaybackDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerEligibleForHDRPlaybackDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerEligibleForHDRPlaybackDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerEligibleForHDRPlaybackDidChangeNotification returns the string constant AVPlayerEligibleForHDRPlaybackDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerEligibleForHDRPlaybackDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerEligibleForHDRPlaybackDidChangeNotification")))
 }
 
-// The participant's audio session was interrupted.
-// AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted returns the string constant AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted as an objc.ID, for use as a dictionary key or selector argument.
-func AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted() objc.ID {
-	return purego.CFConstant(raw.AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted())
+// AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted returns the string constant AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted, for use as a dictionary key or argument.
+func AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted")))
 }
 
-// The player is buffering data after a stall.
-// AVCoordinatedPlaybackSuspensionReasonStallRecovery returns the string constant AVCoordinatedPlaybackSuspensionReasonStallRecovery as an objc.ID, for use as a dictionary key or selector argument.
-func AVCoordinatedPlaybackSuspensionReasonStallRecovery() objc.ID {
-	return purego.CFConstant(raw.AVCoordinatedPlaybackSuspensionReasonStallRecovery())
+// AVCoordinatedPlaybackSuspensionReasonStallRecovery returns the string constant AVCoordinatedPlaybackSuspensionReasonStallRecovery, for use as a dictionary key or argument.
+func AVCoordinatedPlaybackSuspensionReasonStallRecovery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonStallRecovery")))
 }
 
-// The participant is presented with interstitial content instead of the main player.
-// AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial returns the string constant AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial as an objc.ID, for use as a dictionary key or selector argument.
-func AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial() objc.ID {
-	return purego.CFConstant(raw.AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial())
+// AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial returns the string constant AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial, for use as a dictionary key or argument.
+func AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial")))
 }
 
-// The participant cannot participate in coordinated playback.
-// AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible returns the string constant AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible as an objc.ID, for use as a dictionary key or selector argument.
-func AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible() objc.ID {
-	return purego.CFConstant(raw.AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible())
+// AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible returns the string constant AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible, for use as a dictionary key or argument.
+func AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible")))
 }
 
-// The participant's playback object is in a state that requires manual intervention by the user to resume playback.
-// AVCoordinatedPlaybackSuspensionReasonUserActionRequired returns the string constant AVCoordinatedPlaybackSuspensionReasonUserActionRequired as an objc.ID, for use as a dictionary key or selector argument.
-func AVCoordinatedPlaybackSuspensionReasonUserActionRequired() objc.ID {
-	return purego.CFConstant(raw.AVCoordinatedPlaybackSuspensionReasonUserActionRequired())
+// AVCoordinatedPlaybackSuspensionReasonUserActionRequired returns the string constant AVCoordinatedPlaybackSuspensionReasonUserActionRequired, for use as a dictionary key or argument.
+func AVCoordinatedPlaybackSuspensionReasonUserActionRequired() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonUserActionRequired")))
 }
 
-// The participant is actively changing current time.
-// AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime returns the string constant AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime as an objc.ID, for use as a dictionary key or selector argument.
-func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() objc.ID {
-	return purego.CFConstant(raw.AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime())
+// AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime returns the string constant AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime, for use as a dictionary key or argument.
+func AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime")))
 }
 
-// AVPlayerItemTimeJumpedNotification returns the string constant AVPlayerItemTimeJumpedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemTimeJumpedNotification() objc.ID {
-	if _r := raw.AVPlayerItemTimeJumpedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemTimeJumpedNotification returns the string constant AVPlayerItemTimeJumpedNotification, for use as a dictionary key or argument.
+func AVPlayerItemTimeJumpedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemTimeJumpedNotification")))
 }
 
-// AVPlayerItemDidPlayToEndTimeNotification returns the string constant AVPlayerItemDidPlayToEndTimeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemDidPlayToEndTimeNotification() objc.ID {
-	if _r := raw.AVPlayerItemDidPlayToEndTimeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemDidPlayToEndTimeNotification returns the string constant AVPlayerItemDidPlayToEndTimeNotification, for use as a dictionary key or argument.
+func AVPlayerItemDidPlayToEndTimeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemDidPlayToEndTimeNotification")))
 }
 
-// AVPlayerItemFailedToPlayToEndTimeNotification returns the string constant AVPlayerItemFailedToPlayToEndTimeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemFailedToPlayToEndTimeNotification() objc.ID {
-	if _r := raw.AVPlayerItemFailedToPlayToEndTimeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemFailedToPlayToEndTimeNotification returns the string constant AVPlayerItemFailedToPlayToEndTimeNotification, for use as a dictionary key or argument.
+func AVPlayerItemFailedToPlayToEndTimeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemFailedToPlayToEndTimeNotification")))
 }
 
-// AVPlayerItemPlaybackStalledNotification returns the string constant AVPlayerItemPlaybackStalledNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemPlaybackStalledNotification() objc.ID {
-	if _r := raw.AVPlayerItemPlaybackStalledNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemPlaybackStalledNotification returns the string constant AVPlayerItemPlaybackStalledNotification, for use as a dictionary key or argument.
+func AVPlayerItemPlaybackStalledNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemPlaybackStalledNotification")))
 }
 
-// AVPlayerItemNewAccessLogEntryNotification returns the string constant AVPlayerItemNewAccessLogEntryNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemNewAccessLogEntryNotification() objc.ID {
-	if _r := raw.AVPlayerItemNewAccessLogEntryNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemNewAccessLogEntryNotification returns the string constant AVPlayerItemNewAccessLogEntryNotification, for use as a dictionary key or argument.
+func AVPlayerItemNewAccessLogEntryNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemNewAccessLogEntryNotification")))
 }
 
-// AVPlayerItemNewErrorLogEntryNotification returns the string constant AVPlayerItemNewErrorLogEntryNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemNewErrorLogEntryNotification() objc.ID {
-	if _r := raw.AVPlayerItemNewErrorLogEntryNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemNewErrorLogEntryNotification returns the string constant AVPlayerItemNewErrorLogEntryNotification, for use as a dictionary key or argument.
+func AVPlayerItemNewErrorLogEntryNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemNewErrorLogEntryNotification")))
 }
 
-// AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification returns the string constant AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification returns the string constant AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification")))
 }
 
-// AVPlayerItemMediaSelectionDidChangeNotification returns the string constant AVPlayerItemMediaSelectionDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemMediaSelectionDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerItemMediaSelectionDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerItemMediaSelectionDidChangeNotification returns the string constant AVPlayerItemMediaSelectionDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerItemMediaSelectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemMediaSelectionDidChangeNotification")))
 }
 
-// AVPlayerItemFailedToPlayToEndTimeErrorKey returns the string constant AVPlayerItemFailedToPlayToEndTimeErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemFailedToPlayToEndTimeErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerItemFailedToPlayToEndTimeErrorKey())
+// AVPlayerItemFailedToPlayToEndTimeErrorKey returns the string constant AVPlayerItemFailedToPlayToEndTimeErrorKey, for use as a dictionary key or argument.
+func AVPlayerItemFailedToPlayToEndTimeErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemFailedToPlayToEndTimeErrorKey")))
 }
 
-// Indicates a time jump was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerItemTimeJumpedNotification that a time jump originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the current time changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
-// AVPlayerItemTimeJumpedOriginatingParticipantKey returns the string constant AVPlayerItemTimeJumpedOriginatingParticipantKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemTimeJumpedOriginatingParticipantKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerItemTimeJumpedOriginatingParticipantKey())
+// AVPlayerItemTimeJumpedOriginatingParticipantKey returns the string constant AVPlayerItemTimeJumpedOriginatingParticipantKey, for use as a dictionary key or argument.
+func AVPlayerItemTimeJumpedOriginatingParticipantKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemTimeJumpedOriginatingParticipantKey")))
 }
 
-// @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
-// AVPlayerItemLegibleOutputTextStylingResolutionDefault returns the string constant AVPlayerItemLegibleOutputTextStylingResolutionDefault as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemLegibleOutputTextStylingResolutionDefault() objc.ID {
-	return purego.CFConstant(raw.AVPlayerItemLegibleOutputTextStylingResolutionDefault())
+// AVPlayerItemLegibleOutputTextStylingResolutionDefault returns the string constant AVPlayerItemLegibleOutputTextStylingResolutionDefault, for use as a dictionary key or argument.
+func AVPlayerItemLegibleOutputTextStylingResolutionDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemLegibleOutputTextStylingResolutionDefault")))
 }
 
-// @constant		AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly @abstract		Specify this level of text styling resolution to receive only the styling present in the source media and the styling provided via AVPlayerItem.textStyleRules. @discussion This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
-// AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly returns the string constant AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly() objc.ID {
-	return purego.CFConstant(raw.AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly())
+// AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly returns the string constant AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly, for use as a dictionary key or argument.
+func AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly")))
 }
 
-// @constant		AVPlayerItemTrackVideoFieldModeDeinterlaceFields @abstract		Use with videoFieldMode property to request deinterlacing of video fields.
-// AVPlayerItemTrackVideoFieldModeDeinterlaceFields returns the string constant AVPlayerItemTrackVideoFieldModeDeinterlaceFields as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerItemTrackVideoFieldModeDeinterlaceFields() objc.ID {
-	return purego.CFConstant(raw.AVPlayerItemTrackVideoFieldModeDeinterlaceFields())
+// AVPlayerItemTrackVideoFieldModeDeinterlaceFields returns the string constant AVPlayerItemTrackVideoFieldModeDeinterlaceFields, for use as a dictionary key or argument.
+func AVPlayerItemTrackVideoFieldModeDeinterlaceFields() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerItemTrackVideoFieldModeDeinterlaceFields")))
 }
 
-// No cue specified; event playback should start at event time (or date).
-// AVPlayerInterstitialEventNoCue returns the string constant AVPlayerInterstitialEventNoCue as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventNoCue() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventNoCue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventNoCue returns the string constant AVPlayerInterstitialEventNoCue, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventNoCue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventNoCue")))
 }
 
-// Event playback should occur before starting primary playback, regardless of initial primary playback position.
-// AVPlayerInterstitialEventJoinCue returns the string constant AVPlayerInterstitialEventJoinCue as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventJoinCue() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventJoinCue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventJoinCue returns the string constant AVPlayerInterstitialEventJoinCue, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventJoinCue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventJoinCue")))
 }
 
-// Event playback should occur after primary playback ends without error, either at the end of the primary asset or at the client-specified forward playback end time.
-// AVPlayerInterstitialEventLeaveCue returns the string constant AVPlayerInterstitialEventLeaveCue as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventLeaveCue() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventLeaveCue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventLeaveCue returns the string constant AVPlayerInterstitialEventLeaveCue, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventLeaveCue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventLeaveCue")))
 }
 
-// A notification that's posted whenever the value of events of an AVPlayerInterstitialEventMonitor is changed.
-// AVPlayerInterstitialEventMonitorEventsDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorEventsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorEventsDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorEventsDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorEventsDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorEventsDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorEventsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorEventsDidChangeNotification")))
 }
 
-// A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventMonitor changes.
-// AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification")))
 }
 
-// A notification that is posted whenever an AVPlayerInterstitialEvent's asset list response status changes. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, with a value that indicates the AVPlayerInterstitialEvent for which the asset response status has changed. 2. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, with a value of type AVPlayerInterstitialEventAssetListResponseStatus, indicating the changed asset response status. 3. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, with a value of type NSError that carries additional information about the failure to read the asset list. This key is only present when the new AVPlayerInterstitialEventAssetListResponseStatus is AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
-// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitial event that had its asset list response status changed in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey())
+// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey")))
 }
 
-// The dictionary key for the asset list response status in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEventAssetListResponseStatus.
-// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey())
+// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey")))
 }
 
-// The dictionary key for the NSError in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification if AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey in the same payload points to a value of AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
-// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey())
+// AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey returns the string constant AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey")))
 }
 
-// A notification that's posted whenever the currentEventSkippableState of an AVPlayerInterstitialEventMonitor changes.
-// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitial event that had its skippable event state changed in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey())
+// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey")))
 }
 
-// The dictionary key for the skippable event state in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is an NSNumber containing type AVPlayerInterstitialEventSkippableEventState.
-// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey())
+// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey")))
 }
 
-// The dictionary key for the skip label of the event in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is an NSString that's the localized skip label if a localizedStringsBundle is set on the AVPlayerInterstitialEventController and a skipControlLocalizedLabelBundleKey on the AVPlayerInterstitialEvent whose skippable event state changed. Note that this key will not be present if there is no localizedStringsBundle set, or if the currentEventSkippableState changed to AVPlayerInterstitialEventSkippableEventStateNotSkippable.
-// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey())
+// AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey")))
 }
 
-// A notification that's posted whenever an event was skipped via skip control.
-// AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitialEvent that was skipped in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-// AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey())
+// AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey returns the string constant AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey")))
 }
 
-// A notification that is posted whenever an AVPlayerInterstitialEvent with loaded assets was unscheduled prior to playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, with a value that indicates which AVPlayerInterstitialEvent was unscheduled. 2. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, with an NSError value. This key will only be present if the AVPlayerInterstitialEvent was unscheduled due to an error.
-// AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitialEvent that was unscheduled in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-// AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey())
+// AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey")))
 }
 
-// The dictionary key to indicate whether the event that was unscheduled was due to an error. The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification if the interstitial event was unscheduled due to an error.
-// AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey())
+// AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey")))
 }
 
-// A notification that is posted whenever an AVPlayerInterstitialEvent finished playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey, with a value that indicates the AVPlayerInterstitialEvent that finished playing. 2. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey, with a value that indicates how long that AVPlayerInterstitialEvent played out for. 3. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey, with a value that indicates whether the AVPlayerInterstitialEvent was fully played out. Note that cancelling an AVPlayerInterstitialEvent after playback started but prior to playback finishing will also trigger this event.
-// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification")))
 }
 
-// The dictionary key for the AVPlayerInterstitialEvent that finished playing in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey())
+// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey")))
 }
 
-// The dictionary key for the playout time of the event that finished playing in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type CMTime as a NSDictionary.
-// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey())
+// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey")))
 }
 
-// The dictionary key to indicate whether the event that finished playing was fully played out in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type NSNumber with a BOOL value.
-// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey())
+// AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey returns the string constant AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey")))
 }
 
-// A notification that is posted whenever a daterange-schedule request completes. The userInfo dictionary can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, whose value is an NSString identifying the schedule. 2. AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, whose value is an NSData carrying the JSON response. Absent if request failed. 3. AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, whose value is an NSError.
-// AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification() objc.ID {
-	if _r := raw.AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification")))
 }
 
-// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSString.
-// AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey())
+// AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey")))
 }
 
-// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSData. Absent if the request failed.
-// AVPlayerInterstitialEventMonitorScheduleRequestResponseKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestResponseKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorScheduleRequestResponseKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorScheduleRequestResponseKey())
+// AVPlayerInterstitialEventMonitorScheduleRequestResponseKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorScheduleRequestResponseKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestResponseKey")))
 }
 
-// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSError. Absent if the request succeeded
-// AVPlayerInterstitialEventMonitorScheduleRequestErrorKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerInterstitialEventMonitorScheduleRequestErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerInterstitialEventMonitorScheduleRequestErrorKey())
+// AVPlayerInterstitialEventMonitorScheduleRequestErrorKey returns the string constant AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, for use as a dictionary key or argument.
+func AVPlayerInterstitialEventMonitorScheduleRequestErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerInterstitialEventMonitorScheduleRequestErrorKey")))
 }
 
-// Indicates that the player is waiting for the completion of an interstitial event. The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventMonitor.
-// AVPlayerWaitingDuringInterstitialEventReason returns the string constant AVPlayerWaitingDuringInterstitialEventReason as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerWaitingDuringInterstitialEventReason() objc.ID {
-	if _r := raw.AVPlayerWaitingDuringInterstitialEventReason(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerWaitingDuringInterstitialEventReason returns the string constant AVPlayerWaitingDuringInterstitialEventReason, for use as a dictionary key or argument.
+func AVPlayerWaitingDuringInterstitialEventReason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerWaitingDuringInterstitialEventReason")))
 }
 
-// @constant	AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification @abstract	A notification which is posted when the snapshot objects provided by this timeline would be out of sync with the current timeline state. See keys below.
-// AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification() objc.ID {
-	if _r := raw.AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification, for use as a dictionary key or argument.
+func AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification")))
 }
 
-// @constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey @abstract Indicates the reason for the snapshot out of sync notification.
-// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey() objc.ID {
-	return purego.CFConstant(raw.AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey())
+// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey, for use as a dictionary key or argument.
+func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey")))
 }
 
-// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged() objc.ID {
-	if _r := raw.AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged, for use as a dictionary key or argument.
+func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged")))
 }
 
-// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged() objc.ID {
-	if _r := raw.AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged, for use as a dictionary key or argument.
+func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged")))
 }
 
-// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged as an objc.ID, for use as a dictionary key or selector argument.
-func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged() objc.ID {
-	if _r := raw.AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged returns the string constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged, for use as a dictionary key or argument.
+func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged")))
 }
 
-// @constant		AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification @abstract		A notification that fires whenever the receiver's enqueued media data has been flushed for a reason other than a call to the -flush method. @discussion The renderer may flush enqueued media data when the user routes playback to a new destination.  The renderer may also flush enqueued media data when the playback rate of the attached AVSampleBufferRenderSynchronizer is changed (e.g. 1.0 -> 2.0 or 1.0 -> 0.0 -> 2.0), however no flush will occur for normal pauses (non-zero -> 0.0) and resumes (0.0 -> same non-zero rate as before). When an automatic flush occurs, the attached render synchronizer's timebase will remain running at its current rate.  It is typically best to respond to this notification by enqueueing media data with timestamps starting at the timebase's current time.  To the listener, this will sound similar to muting the audio for a short period of time.  If it is more desirable to ensure that all audio is played than to keep the timeline moving, you may also stop the synchronizer, set the synchronizer's current time to the value of AVSampleBufferAudioRendererFlushTimeKey, start reenqueueing sample buffers with timestamps starting at that time, and restart the synchronizer.  To the listener, this will sound similar to pausing the audio for a short period of time. This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
-// AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification returns the string constant AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() objc.ID {
-	if _r := raw.AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification returns the string constant AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification, for use as a dictionary key or argument.
+func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification")))
 }
 
-// @constant		AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification @abstract		A notification that indicates the hardware configuration does not match the enqueued data format. @discussion The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
-// AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification returns the string constant AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() objc.ID {
-	if _r := raw.AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification returns the string constant AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification, for use as a dictionary key or argument.
+func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification")))
 }
 
-// @constant		AVSampleBufferAudioRendererFlushTimeKey @abstract		The presentation timestamp of the first enqueued sample that was flushed. @discussion The value of this key is an NSValue wrapping a CMTime.
-// AVSampleBufferAudioRendererFlushTimeKey returns the string constant AVSampleBufferAudioRendererFlushTimeKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferAudioRendererFlushTimeKey() objc.ID {
-	return purego.CFConstant(raw.AVSampleBufferAudioRendererFlushTimeKey())
+// AVSampleBufferAudioRendererFlushTimeKey returns the string constant AVSampleBufferAudioRendererFlushTimeKey, for use as a dictionary key or argument.
+func AVSampleBufferAudioRendererFlushTimeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferAudioRendererFlushTimeKey")))
 }
 
-// AVSampleBufferDisplayLayerFailedToDecodeNotification returns the string constant AVSampleBufferDisplayLayerFailedToDecodeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferDisplayLayerFailedToDecodeNotification() objc.ID {
-	return purego.CFConstant(raw.AVSampleBufferDisplayLayerFailedToDecodeNotification())
+// AVSampleBufferDisplayLayerFailedToDecodeNotification returns the string constant AVSampleBufferDisplayLayerFailedToDecodeNotification, for use as a dictionary key or argument.
+func AVSampleBufferDisplayLayerFailedToDecodeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerFailedToDecodeNotification")))
 }
 
-// AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey returns the string constant AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey())
+// AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey returns the string constant AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey, for use as a dictionary key or argument.
+func AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey")))
 }
 
-// AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification returns the string constant AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification() objc.ID {
-	if _r := raw.AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification returns the string constant AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification, for use as a dictionary key or argument.
+func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification")))
 }
 
-// A notification that fires whenever the value of the "rate" property changes. The rate can change as a result of setting the rate property, either by directly setting the property or calling -setRate:time:. The rate can also change at any time, without any action by the client of the render synchronizer. For example, on iOS if the app's playback is interrupted (e.g. by a phone call or another non-mixable app starting playback), the rate will automatically be set to zero. This notification will be sent in all of those cases.
-// AVSampleBufferRenderSynchronizerRateDidChangeNotification returns the string constant AVSampleBufferRenderSynchronizerRateDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferRenderSynchronizerRateDidChangeNotification() objc.ID {
-	if _r := raw.AVSampleBufferRenderSynchronizerRateDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSampleBufferRenderSynchronizerRateDidChangeNotification returns the string constant AVSampleBufferRenderSynchronizerRateDidChangeNotification, for use as a dictionary key or argument.
+func AVSampleBufferRenderSynchronizerRateDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferRenderSynchronizerRateDidChangeNotification")))
 }
 
-// AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey returns the string constant AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey())
+// AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey returns the string constant AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey, for use as a dictionary key or argument.
+func AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey")))
 }
 
-// @constant AVCaptureSessionPresetPhoto @abstract An AVCaptureSession preset suitable for high resolution photo quality output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetPhoto for full resolution photo quality output.
-// AVCaptureSessionPresetPhoto returns the string constant AVCaptureSessionPresetPhoto as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPresetPhoto() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPresetPhoto())
+// AVCaptureSessionPresetPhoto returns the string constant AVCaptureSessionPresetPhoto, for use as a dictionary key or argument.
+func AVCaptureSessionPresetPhoto() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetPhoto")))
 }
 
-// @constant AVCaptureSessionPresetHigh @abstract An AVCaptureSession preset suitable for high quality video and audio output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetHigh to achieve high quality video and audio output. AVCaptureSessionPresetHigh is the default sessionPreset value.
-// AVCaptureSessionPresetHigh returns the string constant AVCaptureSessionPresetHigh as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPresetHigh() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPresetHigh())
+// AVCaptureSessionPresetHigh returns the string constant AVCaptureSessionPresetHigh, for use as a dictionary key or argument.
+func AVCaptureSessionPresetHigh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetHigh")))
 }
 
-// @constant AVCaptureSessionPresetMedium @abstract An AVCaptureSession preset suitable for medium quality output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetMedium to achieve output video and audio bitrates suitable for sharing over WiFi.
-// AVCaptureSessionPresetMedium returns the string constant AVCaptureSessionPresetMedium as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPresetMedium() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPresetMedium())
+// AVCaptureSessionPresetMedium returns the string constant AVCaptureSessionPresetMedium, for use as a dictionary key or argument.
+func AVCaptureSessionPresetMedium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetMedium")))
 }
 
-// @constant AVCaptureSessionPresetLow @abstract An AVCaptureSession preset suitable for low quality output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetLow to achieve output video and audio bitrates suitable for sharing over 3G.
-// AVCaptureSessionPresetLow returns the string constant AVCaptureSessionPresetLow as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPresetLow() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPresetLow())
+// AVCaptureSessionPresetLow returns the string constant AVCaptureSessionPresetLow, for use as a dictionary key or argument.
+func AVCaptureSessionPresetLow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetLow")))
 }
 
-// @constant AVCaptureSessionPreset320x240 @abstract An AVCaptureSession preset suitable for 320x240 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset320x240 to achieve 320x240 output.
-// AVCaptureSessionPreset320x240 returns the string constant AVCaptureSessionPreset320x240 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset320x240() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset320x240())
+// AVCaptureSessionPreset320x240 returns the string constant AVCaptureSessionPreset320x240, for use as a dictionary key or argument.
+func AVCaptureSessionPreset320x240() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset320x240")))
 }
 
-// @constant AVCaptureSessionPreset352x288 @abstract An AVCaptureSession preset suitable for 352x288 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset352x288 to achieve CIF quality (352x288) output.
-// AVCaptureSessionPreset352x288 returns the string constant AVCaptureSessionPreset352x288 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset352x288() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset352x288())
+// AVCaptureSessionPreset352x288 returns the string constant AVCaptureSessionPreset352x288, for use as a dictionary key or argument.
+func AVCaptureSessionPreset352x288() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset352x288")))
 }
 
-// @constant AVCaptureSessionPreset640x480 @abstract An AVCaptureSession preset suitable for 640x480 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset640x480 to achieve VGA quality (640x480) output.
-// AVCaptureSessionPreset640x480 returns the string constant AVCaptureSessionPreset640x480 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset640x480() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset640x480())
+// AVCaptureSessionPreset640x480 returns the string constant AVCaptureSessionPreset640x480, for use as a dictionary key or argument.
+func AVCaptureSessionPreset640x480() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset640x480")))
 }
 
-// @constant AVCaptureSessionPreset960x540 @abstract An AVCaptureSession preset suitable for 960x540 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset960x540 to achieve quarter HD quality (960x540) output.
-// AVCaptureSessionPreset960x540 returns the string constant AVCaptureSessionPreset960x540 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset960x540() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset960x540())
+// AVCaptureSessionPreset960x540 returns the string constant AVCaptureSessionPreset960x540, for use as a dictionary key or argument.
+func AVCaptureSessionPreset960x540() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset960x540")))
 }
 
-// @constant AVCaptureSessionPreset1280x720 @abstract An AVCaptureSession preset suitable for 1280x720 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1280x720 to achieve 1280x720 output.
-// AVCaptureSessionPreset1280x720 returns the string constant AVCaptureSessionPreset1280x720 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset1280x720() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset1280x720())
+// AVCaptureSessionPreset1280x720 returns the string constant AVCaptureSessionPreset1280x720, for use as a dictionary key or argument.
+func AVCaptureSessionPreset1280x720() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset1280x720")))
 }
 
-// @constant AVCaptureSessionPreset1920x1080 @abstract An AVCaptureSession preset suitable for 1920x1080 video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1920x1080 to achieve 1920x1080 output.
-// AVCaptureSessionPreset1920x1080 returns the string constant AVCaptureSessionPreset1920x1080 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset1920x1080() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset1920x1080())
+// AVCaptureSessionPreset1920x1080 returns the string constant AVCaptureSessionPreset1920x1080, for use as a dictionary key or argument.
+func AVCaptureSessionPreset1920x1080() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset1920x1080")))
 }
 
-// @constant AVCaptureSessionPreset3840x2160 @abstract An AVCaptureSession preset suitable for 3840x2160 (UHD 4K) video output. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset3840x2160 to achieve 3840x2160 output.
-// AVCaptureSessionPreset3840x2160 returns the string constant AVCaptureSessionPreset3840x2160 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPreset3840x2160() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPreset3840x2160())
+// AVCaptureSessionPreset3840x2160 returns the string constant AVCaptureSessionPreset3840x2160, for use as a dictionary key or argument.
+func AVCaptureSessionPreset3840x2160() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPreset3840x2160")))
 }
 
-// @constant AVCaptureSessionPresetiFrame960x540 @abstract An AVCaptureSession preset producing 960x540 Apple iFrame video and audio content. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetiFrame960x540 to achieve 960x540 quality iFrame H.264 video at ~30 Mbits/sec with AAC audio. QuickTime movies captured in iFrame format are optimal for editing applications.
-// AVCaptureSessionPresetiFrame960x540 returns the string constant AVCaptureSessionPresetiFrame960x540 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPresetiFrame960x540() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPresetiFrame960x540())
+// AVCaptureSessionPresetiFrame960x540 returns the string constant AVCaptureSessionPresetiFrame960x540, for use as a dictionary key or argument.
+func AVCaptureSessionPresetiFrame960x540() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetiFrame960x540")))
 }
 
-// @constant AVCaptureSessionPresetiFrame1280x720 @abstract An AVCaptureSession preset producing 1280x720 Apple iFrame video and audio content. @discussion Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPresetiFrame1280x720 to achieve 1280x720 quality iFrame H.264 video at ~40 Mbits/sec with AAC audio. QuickTime movies captured in iFrame format are optimal for editing applications.
-// AVCaptureSessionPresetiFrame1280x720 returns the string constant AVCaptureSessionPresetiFrame1280x720 as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionPresetiFrame1280x720() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionPresetiFrame1280x720())
+// AVCaptureSessionPresetiFrame1280x720 returns the string constant AVCaptureSessionPresetiFrame1280x720, for use as a dictionary key or argument.
+func AVCaptureSessionPresetiFrame1280x720() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionPresetiFrame1280x720")))
 }
 
-// @constant AVCaptureReactionTypeThumbsUp @abstract Indicates a reaction which features a thumbs-up symbol.
-// AVCaptureReactionTypeThumbsUp returns the string constant AVCaptureReactionTypeThumbsUp as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeThumbsUp() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeThumbsUp())
+// AVCaptureReactionTypeThumbsUp returns the string constant AVCaptureReactionTypeThumbsUp, for use as a dictionary key or argument.
+func AVCaptureReactionTypeThumbsUp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeThumbsUp")))
 }
 
-// @constant AVCaptureReactionTypeThumbsDown @abstract Indicates a reaction which features a thumbs-down symbol.
-// AVCaptureReactionTypeThumbsDown returns the string constant AVCaptureReactionTypeThumbsDown as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeThumbsDown() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeThumbsDown())
+// AVCaptureReactionTypeThumbsDown returns the string constant AVCaptureReactionTypeThumbsDown, for use as a dictionary key or argument.
+func AVCaptureReactionTypeThumbsDown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeThumbsDown")))
 }
 
-// @constant AVCaptureReactionTypeBalloons @abstract Indicates a reaction which features balloons rising through the scene.
-// AVCaptureReactionTypeBalloons returns the string constant AVCaptureReactionTypeBalloons as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeBalloons() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeBalloons())
+// AVCaptureReactionTypeBalloons returns the string constant AVCaptureReactionTypeBalloons, for use as a dictionary key or argument.
+func AVCaptureReactionTypeBalloons() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeBalloons")))
 }
 
-// @constant AVCaptureReactionTypeHeart @abstract Indicates a reaction which features one or more heart symbols.
-// AVCaptureReactionTypeHeart returns the string constant AVCaptureReactionTypeHeart as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeHeart() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeHeart())
+// AVCaptureReactionTypeHeart returns the string constant AVCaptureReactionTypeHeart, for use as a dictionary key or argument.
+func AVCaptureReactionTypeHeart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeHeart")))
 }
 
-// @constant AVCaptureReactionTypeFireworks @abstract Indicates a reaction which features fireworks bursting in the background.
-// AVCaptureReactionTypeFireworks returns the string constant AVCaptureReactionTypeFireworks as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeFireworks() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeFireworks())
+// AVCaptureReactionTypeFireworks returns the string constant AVCaptureReactionTypeFireworks, for use as a dictionary key or argument.
+func AVCaptureReactionTypeFireworks() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeFireworks")))
 }
 
-// @constant AVCaptureReactionTypeRain @abstract Indicates a reaction which features a dark and stormy night.
-// AVCaptureReactionTypeRain returns the string constant AVCaptureReactionTypeRain as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeRain() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeRain())
+// AVCaptureReactionTypeRain returns the string constant AVCaptureReactionTypeRain, for use as a dictionary key or argument.
+func AVCaptureReactionTypeRain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeRain")))
 }
 
-// @constant AVCaptureReactionTypeConfetti @abstract Indicates a reaction which features festive spots of color falling through the scene.
-// AVCaptureReactionTypeConfetti returns the string constant AVCaptureReactionTypeConfetti as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeConfetti() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeConfetti())
+// AVCaptureReactionTypeConfetti returns the string constant AVCaptureReactionTypeConfetti, for use as a dictionary key or argument.
+func AVCaptureReactionTypeConfetti() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeConfetti")))
 }
 
-// @constant AVCaptureReactionTypeLasers @abstract Indicates a reaction which features a bright laser display projecting into the scene.
-// AVCaptureReactionTypeLasers returns the string constant AVCaptureReactionTypeLasers as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureReactionTypeLasers() objc.ID {
-	return purego.CFConstant(raw.AVCaptureReactionTypeLasers())
+// AVCaptureReactionTypeLasers returns the string constant AVCaptureReactionTypeLasers, for use as a dictionary key or argument.
+func AVCaptureReactionTypeLasers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureReactionTypeLasers")))
 }
 
-// @constant AVCaptureDeviceTypeExternal An external device type. On iPad, external devices are those that conform to the UVC (USB Video Class) specification. @discussion Starting in Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeExternal by adding the following key to their Info.plist: <key>NSCameraUseExternalDeviceType</key> <true/> Otherwise, external cameras on Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera. Prior to visionOS 3.0, your app must have the `com.apple.developer.avfoundation.uvc-device-access` entitlement in order to discover and use devices of type `AVCaptureDeviceTypeExternal` on visionOS.
-// AVCaptureDeviceTypeExternal returns the string constant AVCaptureDeviceTypeExternal as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeExternal() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeExternal())
+// AVCaptureDeviceTypeExternal returns the string constant AVCaptureDeviceTypeExternal, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeExternal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeExternal")))
 }
 
-// @constant AVCaptureDeviceTypeMicrophone A microphone. On iOS and tvOS, only one AVCaptureDevice of type AVCaptureDeviceTypeMicrophone is exposed to the system. The audio routing subsystem decides which physical microphone to use, be it a built in microphone, a wired headset, an external microphone, etc. The microphone device's `localizedName` will change as the audio subsystem switches to a different physical device.
-// AVCaptureDeviceTypeMicrophone returns the string constant AVCaptureDeviceTypeMicrophone as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeMicrophone() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeMicrophone())
+// AVCaptureDeviceTypeMicrophone returns the string constant AVCaptureDeviceTypeMicrophone, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeMicrophone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeMicrophone")))
 }
 
-// @constant AVCaptureDeviceTypeBuiltInWideAngleCamera A built-in wide angle camera device. These devices are suitable for general purpose use.
-// AVCaptureDeviceTypeBuiltInWideAngleCamera returns the string constant AVCaptureDeviceTypeBuiltInWideAngleCamera as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeBuiltInWideAngleCamera() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeBuiltInWideAngleCamera())
+// AVCaptureDeviceTypeBuiltInWideAngleCamera returns the string constant AVCaptureDeviceTypeBuiltInWideAngleCamera, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeBuiltInWideAngleCamera() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeBuiltInWideAngleCamera")))
 }
 
-// @constant AVCaptureDeviceTypeContinuityCamera A continuity camera device. These devices are suitable for general purpose use. Note that devices of this type may only be discovered using an AVCaptureDeviceDiscoverySession or -[AVCaptureDevice defaultDeviceWithDeviceType:mediaType:position:]. @discussion Starting in macOS 14.0 and Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeContinuityCamera by adding the following key to their Info.plist: <key>NSCameraUseContinuityCameraDeviceType</key> <true/> Otherwise, continuity cameras on macOS and Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera.
-// AVCaptureDeviceTypeContinuityCamera returns the string constant AVCaptureDeviceTypeContinuityCamera as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeContinuityCamera() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeContinuityCamera())
+// AVCaptureDeviceTypeContinuityCamera returns the string constant AVCaptureDeviceTypeContinuityCamera, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeContinuityCamera() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeContinuityCamera")))
 }
 
-// @constant AVCaptureDeviceTypeDeskViewCamera A distortion corrected cut out from an ultra wide camera, made to approximate an overhead camera pointing at a desk. Supports multicam operation.
-// AVCaptureDeviceTypeDeskViewCamera returns the string constant AVCaptureDeviceTypeDeskViewCamera as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeDeskViewCamera() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeDeskViewCamera())
+// AVCaptureDeviceTypeDeskViewCamera returns the string constant AVCaptureDeviceTypeDeskViewCamera, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeDeskViewCamera() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeDeskViewCamera")))
 }
 
-// @constant AVCaptureDeviceTypeExternalUnknown A deprecated synonym for AVCaptureDeviceTypeExternal. Please use AVCaptureDeviceTypeExternal instead.
-// AVCaptureDeviceTypeExternalUnknown returns the string constant AVCaptureDeviceTypeExternalUnknown as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeExternalUnknown() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeExternalUnknown())
+// AVCaptureDeviceTypeExternalUnknown returns the string constant AVCaptureDeviceTypeExternalUnknown, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeExternalUnknown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeExternalUnknown")))
 }
 
-// @constant AVCaptureDeviceTypeBuiltInMicrophone A deprecated synonym for AVCaptureDeviceTypeMicrophone. Please use AVCaptureDeviceTypeMicrophone instead.
-// AVCaptureDeviceTypeBuiltInMicrophone returns the string constant AVCaptureDeviceTypeBuiltInMicrophone as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureDeviceTypeBuiltInMicrophone() objc.ID {
-	return purego.CFConstant(raw.AVCaptureDeviceTypeBuiltInMicrophone())
+// AVCaptureDeviceTypeBuiltInMicrophone returns the string constant AVCaptureDeviceTypeBuiltInMicrophone, for use as a dictionary key or argument.
+func AVCaptureDeviceTypeBuiltInMicrophone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureDeviceTypeBuiltInMicrophone")))
 }
 
-// @constant AVSpatialCaptureDiscomfortReasonNotEnoughLight The lighting of the current scene is not bright enough; the playback experience will likely be uncomfortable due to noise differences between the two cameras.
-// AVSpatialCaptureDiscomfortReasonNotEnoughLight returns the string constant AVSpatialCaptureDiscomfortReasonNotEnoughLight as an objc.ID, for use as a dictionary key or selector argument.
-func AVSpatialCaptureDiscomfortReasonNotEnoughLight() objc.ID {
-	return purego.CFConstant(raw.AVSpatialCaptureDiscomfortReasonNotEnoughLight())
+// AVSpatialCaptureDiscomfortReasonNotEnoughLight returns the string constant AVSpatialCaptureDiscomfortReasonNotEnoughLight, for use as a dictionary key or argument.
+func AVSpatialCaptureDiscomfortReasonNotEnoughLight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSpatialCaptureDiscomfortReasonNotEnoughLight")))
 }
 
-// @constant AVSpatialCaptureDiscomfortReasonSubjectTooClose The focus point of the current scene is too close; the playback experience will likely be uncomfortable due to the subject being closer than the minimum focus distance of one or both of the lenses.
-// AVSpatialCaptureDiscomfortReasonSubjectTooClose returns the string constant AVSpatialCaptureDiscomfortReasonSubjectTooClose as an objc.ID, for use as a dictionary key or selector argument.
-func AVSpatialCaptureDiscomfortReasonSubjectTooClose() objc.ID {
-	return purego.CFConstant(raw.AVSpatialCaptureDiscomfortReasonSubjectTooClose())
+// AVSpatialCaptureDiscomfortReasonSubjectTooClose returns the string constant AVSpatialCaptureDiscomfortReasonSubjectTooClose, for use as a dictionary key or argument.
+func AVSpatialCaptureDiscomfortReasonSubjectTooClose() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSpatialCaptureDiscomfortReasonSubjectTooClose")))
 }
 
-// The light level of the current scene is insufficient for the current set of features to function optimally.
-// AVCaptureSceneMonitoringStatusNotEnoughLight returns the string constant AVCaptureSceneMonitoringStatusNotEnoughLight as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSceneMonitoringStatusNotEnoughLight() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSceneMonitoringStatusNotEnoughLight())
+// AVCaptureSceneMonitoringStatusNotEnoughLight returns the string constant AVCaptureSceneMonitoringStatusNotEnoughLight, for use as a dictionary key or argument.
+func AVCaptureSceneMonitoringStatusNotEnoughLight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSceneMonitoringStatusNotEnoughLight")))
 }
 
-// @constant AVCaptureSessionErrorKey @abstract The key used to provide an NSError describing the failure condition in an AVCaptureSessionRuntimeErrorNotification. @discussion AVCaptureSessionErrorKey may be found in the userInfo dictionary provided with an AVCaptureSessionRuntimeErrorNotification. The NSError associated with the notification gives greater detail on the nature of the error, and in some cases recovery suggestions.
-// AVCaptureSessionErrorKey returns the string constant AVCaptureSessionErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func AVCaptureSessionErrorKey() objc.ID {
-	return purego.CFConstant(raw.AVCaptureSessionErrorKey())
+// AVCaptureSessionErrorKey returns the string constant AVCaptureSessionErrorKey, for use as a dictionary key or argument.
+func AVCaptureSessionErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVCaptureSessionErrorKey")))
 }
 
-// @constant AVMetadataObjectTypeHumanBody @abstract An identifier for an instance of AVMetadataHumanBodyObject. @discussion AVMetadataHumanBodyObject objects return this constant as their type.
-// AVMetadataObjectTypeHumanBody returns the string constant AVMetadataObjectTypeHumanBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeHumanBody() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeHumanBody())
+// AVMetadataObjectTypeHumanBody returns the string constant AVMetadataObjectTypeHumanBody, for use as a dictionary key or argument.
+func AVMetadataObjectTypeHumanBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeHumanBody")))
 }
 
-// @constant AVMetadataObjectTypeHumanFullBody @abstract An identifier for an instance of AVMetadataHumanFullBodyObject. @discussion AVMetadataHumanFullBodyObject objects return this constant as their type.
-// AVMetadataObjectTypeHumanFullBody returns the string constant AVMetadataObjectTypeHumanFullBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeHumanFullBody() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeHumanFullBody())
+// AVMetadataObjectTypeHumanFullBody returns the string constant AVMetadataObjectTypeHumanFullBody, for use as a dictionary key or argument.
+func AVMetadataObjectTypeHumanFullBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeHumanFullBody")))
 }
 
-// An identifier for an instance of a cat head object. “AVMetadataCatHeadObject“ objects return this constant as their type.
-// AVMetadataObjectTypeCatHead returns the string constant AVMetadataObjectTypeCatHead as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCatHead() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeCatHead())
+// AVMetadataObjectTypeCatHead returns the string constant AVMetadataObjectTypeCatHead, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCatHead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCatHead")))
 }
 
-// @constant AVMetadataObjectTypeCatBody @abstract An identifier for an instance of AVMetadataCatBodyObject. @discussion AVMetadataCatBodyObject objects return this constant as their type.
-// AVMetadataObjectTypeCatBody returns the string constant AVMetadataObjectTypeCatBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCatBody() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeCatBody())
+// AVMetadataObjectTypeCatBody returns the string constant AVMetadataObjectTypeCatBody, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCatBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCatBody")))
 }
 
-// An identifier for an instance of a dog head object. “AVMetadataDogHeadObject“ objects return this constant as their type.
-// AVMetadataObjectTypeDogHead returns the string constant AVMetadataObjectTypeDogHead as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeDogHead() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeDogHead())
+// AVMetadataObjectTypeDogHead returns the string constant AVMetadataObjectTypeDogHead, for use as a dictionary key or argument.
+func AVMetadataObjectTypeDogHead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeDogHead")))
 }
 
-// @constant AVMetadataObjectTypeDogBody @abstract An identifier for an instance of AVMetadataDogBodyObject. @discussion AVMetadataDogBodyObject objects return this constant as their type.
-// AVMetadataObjectTypeDogBody returns the string constant AVMetadataObjectTypeDogBody as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeDogBody() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeDogBody())
+// AVMetadataObjectTypeDogBody returns the string constant AVMetadataObjectTypeDogBody, for use as a dictionary key or argument.
+func AVMetadataObjectTypeDogBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeDogBody")))
 }
 
-// @constant AVMetadataObjectTypeSalientObject @abstract An identifier for an instance of AVMetadataSalientObject. @discussion AVMetadataSalientObject objects return this constant as their type.
-// AVMetadataObjectTypeSalientObject returns the string constant AVMetadataObjectTypeSalientObject as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeSalientObject() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeSalientObject())
+// AVMetadataObjectTypeSalientObject returns the string constant AVMetadataObjectTypeSalientObject, for use as a dictionary key or argument.
+func AVMetadataObjectTypeSalientObject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeSalientObject")))
 }
 
-// @constant AVMetadataObjectTypeFace @abstract An identifier for an instance of AVMetadataFaceObject. @discussion AVMetadataFaceObject objects return this constant as their type.
-// AVMetadataObjectTypeFace returns the string constant AVMetadataObjectTypeFace as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeFace() objc.ID {
-	if _r := raw.AVMetadataObjectTypeFace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeFace returns the string constant AVMetadataObjectTypeFace, for use as a dictionary key or argument.
+func AVMetadataObjectTypeFace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeFace")))
 }
 
-// @constant AVMetadataObjectTypeUPCECode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeUPCECode. @discussion AVMetadataMachineReadableCodeObject objects generated from UPC-E codes return this constant as their type.
-// AVMetadataObjectTypeUPCECode returns the string constant AVMetadataObjectTypeUPCECode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeUPCECode() objc.ID {
-	if _r := raw.AVMetadataObjectTypeUPCECode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeUPCECode returns the string constant AVMetadataObjectTypeUPCECode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeUPCECode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeUPCECode")))
 }
 
-// @constant AVMetadataObjectTypeCode39Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 39 codes return this constant as their type.
-// AVMetadataObjectTypeCode39Code returns the string constant AVMetadataObjectTypeCode39Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCode39Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeCode39Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeCode39Code returns the string constant AVMetadataObjectTypeCode39Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCode39Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode39Code")))
 }
 
-// @constant AVMetadataObjectTypeCode39Mod43Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Mod43Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 39 mod 43 codes return this constant as their type.
-// AVMetadataObjectTypeCode39Mod43Code returns the string constant AVMetadataObjectTypeCode39Mod43Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCode39Mod43Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeCode39Mod43Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeCode39Mod43Code returns the string constant AVMetadataObjectTypeCode39Mod43Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCode39Mod43Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode39Mod43Code")))
 }
 
-// @constant AVMetadataObjectTypeEAN13Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN13Code. @discussion AVMetadataMachineReadableCodeObject objects generated from EAN-13 (including UPC-A) codes return this constant as their type.
-// AVMetadataObjectTypeEAN13Code returns the string constant AVMetadataObjectTypeEAN13Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeEAN13Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeEAN13Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeEAN13Code returns the string constant AVMetadataObjectTypeEAN13Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeEAN13Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeEAN13Code")))
 }
 
-// @constant AVMetadataObjectTypeEAN8Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN8Code. @discussion AVMetadataMachineReadableCodeObject objects generated from EAN-8 codes return this constant as their type.
-// AVMetadataObjectTypeEAN8Code returns the string constant AVMetadataObjectTypeEAN8Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeEAN8Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeEAN8Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeEAN8Code returns the string constant AVMetadataObjectTypeEAN8Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeEAN8Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeEAN8Code")))
 }
 
-// @constant AVMetadataObjectTypeCode93Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode93Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 93 codes return this constant as their type.
-// AVMetadataObjectTypeCode93Code returns the string constant AVMetadataObjectTypeCode93Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCode93Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeCode93Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeCode93Code returns the string constant AVMetadataObjectTypeCode93Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCode93Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode93Code")))
 }
 
-// @constant AVMetadataObjectTypeCode128Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode128Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 128 codes return this constant as their type.
-// AVMetadataObjectTypeCode128Code returns the string constant AVMetadataObjectTypeCode128Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCode128Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeCode128Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeCode128Code returns the string constant AVMetadataObjectTypeCode128Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCode128Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCode128Code")))
 }
 
-// @constant AVMetadataObjectTypePDF417Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypePDF417Code. @discussion AVMetadataMachineReadableCodeObject objects generated from PDF417 codes return this constant as their type.
-// AVMetadataObjectTypePDF417Code returns the string constant AVMetadataObjectTypePDF417Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypePDF417Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypePDF417Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypePDF417Code returns the string constant AVMetadataObjectTypePDF417Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypePDF417Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypePDF417Code")))
 }
 
-// @constant AVMetadataObjectTypeQRCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeQRCode. @discussion AVMetadataMachineReadableCodeObject objects generated from QR codes return this constant as their type.
-// AVMetadataObjectTypeQRCode returns the string constant AVMetadataObjectTypeQRCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeQRCode() objc.ID {
-	if _r := raw.AVMetadataObjectTypeQRCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeQRCode returns the string constant AVMetadataObjectTypeQRCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeQRCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeQRCode")))
 }
 
-// @constant AVMetadataObjectTypeAztecCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeAztecCode. @discussion AVMetadataMachineReadableCodeObject objects generated from Aztec codes return this constant as their type.
-// AVMetadataObjectTypeAztecCode returns the string constant AVMetadataObjectTypeAztecCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeAztecCode() objc.ID {
-	if _r := raw.AVMetadataObjectTypeAztecCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeAztecCode returns the string constant AVMetadataObjectTypeAztecCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeAztecCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeAztecCode")))
 }
 
-// @constant AVMetadataObjectTypeInterleaved2of5Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeInterleaved2of5Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Interleaved 2 of 5 codes return this constant as their type.
-// AVMetadataObjectTypeInterleaved2of5Code returns the string constant AVMetadataObjectTypeInterleaved2of5Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeInterleaved2of5Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeInterleaved2of5Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeInterleaved2of5Code returns the string constant AVMetadataObjectTypeInterleaved2of5Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeInterleaved2of5Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeInterleaved2of5Code")))
 }
 
-// @constant AVMetadataObjectTypeITF14Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeITF14Code. @discussion AVMetadataMachineReadableCodeObject objects generated from ITF14 codes return this constant as their type.
-// AVMetadataObjectTypeITF14Code returns the string constant AVMetadataObjectTypeITF14Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeITF14Code() objc.ID {
-	if _r := raw.AVMetadataObjectTypeITF14Code(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeITF14Code returns the string constant AVMetadataObjectTypeITF14Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeITF14Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeITF14Code")))
 }
 
-// @constant AVMetadataObjectTypeDataMatrixCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeDataMatrixCode. @discussion AVMetadataMachineReadableCodeObject objects generated from DataMatrix codes return this constant as their type.
-// AVMetadataObjectTypeDataMatrixCode returns the string constant AVMetadataObjectTypeDataMatrixCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeDataMatrixCode() objc.ID {
-	if _r := raw.AVMetadataObjectTypeDataMatrixCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVMetadataObjectTypeDataMatrixCode returns the string constant AVMetadataObjectTypeDataMatrixCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeDataMatrixCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeDataMatrixCode")))
 }
 
-// @constant AVMetadataObjectTypeCodabarCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCodabarCode. @discussion AVMetadataMachineReadableCodeObject objects generated from Codabar codes return this constant as their type.
-// AVMetadataObjectTypeCodabarCode returns the string constant AVMetadataObjectTypeCodabarCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeCodabarCode() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeCodabarCode())
+// AVMetadataObjectTypeCodabarCode returns the string constant AVMetadataObjectTypeCodabarCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeCodabarCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeCodabarCode")))
 }
 
-// @constant AVMetadataObjectTypeGS1DataBarCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBar codes return this constant as their type.
-// AVMetadataObjectTypeGS1DataBarCode returns the string constant AVMetadataObjectTypeGS1DataBarCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeGS1DataBarCode() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeGS1DataBarCode())
+// AVMetadataObjectTypeGS1DataBarCode returns the string constant AVMetadataObjectTypeGS1DataBarCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeGS1DataBarCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeGS1DataBarCode")))
 }
 
-// @constant AVMetadataObjectTypeGS1DataBarExpandedCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarExpandedCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBarExpanded codes return this constant as their type.
-// AVMetadataObjectTypeGS1DataBarExpandedCode returns the string constant AVMetadataObjectTypeGS1DataBarExpandedCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeGS1DataBarExpandedCode() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeGS1DataBarExpandedCode())
+// AVMetadataObjectTypeGS1DataBarExpandedCode returns the string constant AVMetadataObjectTypeGS1DataBarExpandedCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeGS1DataBarExpandedCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeGS1DataBarExpandedCode")))
 }
 
-// @constant AVMetadataObjectTypeGS1DataBarLimitedCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarLimitedCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBarLimited codes return this constant as their type.
-// AVMetadataObjectTypeGS1DataBarLimitedCode returns the string constant AVMetadataObjectTypeGS1DataBarLimitedCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeGS1DataBarLimitedCode() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeGS1DataBarLimitedCode())
+// AVMetadataObjectTypeGS1DataBarLimitedCode returns the string constant AVMetadataObjectTypeGS1DataBarLimitedCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeGS1DataBarLimitedCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeGS1DataBarLimitedCode")))
 }
 
-// @constant AVMetadataObjectTypeMicroQRCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroQRCode. @discussion AVMetadataMachineReadableCodeObject objects generated from MicroQR codes return this constant as their type.
-// AVMetadataObjectTypeMicroQRCode returns the string constant AVMetadataObjectTypeMicroQRCode as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeMicroQRCode() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeMicroQRCode())
+// AVMetadataObjectTypeMicroQRCode returns the string constant AVMetadataObjectTypeMicroQRCode, for use as a dictionary key or argument.
+func AVMetadataObjectTypeMicroQRCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeMicroQRCode")))
 }
 
-// @constant AVMetadataObjectTypeMicroPDF417Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroPDF417Code. @discussion AVMetadataMachineReadableCodeObject objects generated from MicroPDF417 codes return this constant as their type.
-// AVMetadataObjectTypeMicroPDF417Code returns the string constant AVMetadataObjectTypeMicroPDF417Code as an objc.ID, for use as a dictionary key or selector argument.
-func AVMetadataObjectTypeMicroPDF417Code() objc.ID {
-	return purego.CFConstant(raw.AVMetadataObjectTypeMicroPDF417Code())
+// AVMetadataObjectTypeMicroPDF417Code returns the string constant AVMetadataObjectTypeMicroPDF417Code, for use as a dictionary key or argument.
+func AVMetadataObjectTypeMicroPDF417Code() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVMetadataObjectTypeMicroPDF417Code")))
 }
 
-// @constant AVSemanticSegmentationMatteTypeSkin A matting image segmenting all skin from all persons in the visible field-of-view of an image.
-// AVSemanticSegmentationMatteTypeSkin returns the string constant AVSemanticSegmentationMatteTypeSkin as an objc.ID, for use as a dictionary key or selector argument.
-func AVSemanticSegmentationMatteTypeSkin() objc.ID {
-	if _r := raw.AVSemanticSegmentationMatteTypeSkin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSemanticSegmentationMatteTypeSkin returns the string constant AVSemanticSegmentationMatteTypeSkin, for use as a dictionary key or argument.
+func AVSemanticSegmentationMatteTypeSkin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSemanticSegmentationMatteTypeSkin")))
 }
 
-// @constant AVSemanticSegmentationMatteTypeHair A matting image segmenting all hair from all persons in the visible field-of-view of an image.
-// AVSemanticSegmentationMatteTypeHair returns the string constant AVSemanticSegmentationMatteTypeHair as an objc.ID, for use as a dictionary key or selector argument.
-func AVSemanticSegmentationMatteTypeHair() objc.ID {
-	if _r := raw.AVSemanticSegmentationMatteTypeHair(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSemanticSegmentationMatteTypeHair returns the string constant AVSemanticSegmentationMatteTypeHair, for use as a dictionary key or argument.
+func AVSemanticSegmentationMatteTypeHair() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSemanticSegmentationMatteTypeHair")))
 }
 
-// @constant AVSemanticSegmentationMatteTypeTeeth A matting image segmenting all teeth from all persons in the visible field-of-view of an image.
-// AVSemanticSegmentationMatteTypeTeeth returns the string constant AVSemanticSegmentationMatteTypeTeeth as an objc.ID, for use as a dictionary key or selector argument.
-func AVSemanticSegmentationMatteTypeTeeth() objc.ID {
-	if _r := raw.AVSemanticSegmentationMatteTypeTeeth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSemanticSegmentationMatteTypeTeeth returns the string constant AVSemanticSegmentationMatteTypeTeeth, for use as a dictionary key or argument.
+func AVSemanticSegmentationMatteTypeTeeth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSemanticSegmentationMatteTypeTeeth")))
 }
 
-// @constant AVSemanticSegmentationMatteTypeGlasses A matting image segmenting all glasses ( e.g. eyeglasses, sunglasses ) from all persons wearing glasses in the visible field-of-view of an image.
-// AVSemanticSegmentationMatteTypeGlasses returns the string constant AVSemanticSegmentationMatteTypeGlasses as an objc.ID, for use as a dictionary key or selector argument.
-func AVSemanticSegmentationMatteTypeGlasses() objc.ID {
-	if _r := raw.AVSemanticSegmentationMatteTypeGlasses(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AVSemanticSegmentationMatteTypeGlasses returns the string constant AVSemanticSegmentationMatteTypeGlasses, for use as a dictionary key or argument.
+func AVSemanticSegmentationMatteTypeGlasses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AVSemanticSegmentationMatteTypeGlasses")))
 }

@@ -5,97 +5,81 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes a shader function from a Metal library.
+// MTL4LibraryFunctionDescriptor is an idiomatic wrapper over the Objective-C class MTL4LibraryFunctionDescriptor.
 //
-// MTL4LibraryFunctionDescriptor wraps [raw.MTL4LibraryFunctionDescriptor] with a fluent Go API.
+// It embeds [MTL4FunctionDescriptor], promoting that type's methods.
+//
+// Describes a shader function from a Metal library.
 type MTL4LibraryFunctionDescriptor struct {
-	inner *raw.MTL4LibraryFunctionDescriptor
+	MTL4FunctionDescriptor
 }
 
-// Unwrap returns the underlying [raw.MTL4LibraryFunctionDescriptor].
-func (x *MTL4LibraryFunctionDescriptor) Unwrap() *raw.MTL4LibraryFunctionDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4LibraryFunctionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4LibraryFunctionDescriptorFromID adopts an existing object pointer as a MTL4LibraryFunctionDescriptor (nil for 0).
+// MTL4LibraryFunctionDescriptorFromID adopts an existing Objective-C object as a MTL4LibraryFunctionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4LibraryFunctionDescriptorFromID(id objc.ID) *MTL4LibraryFunctionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4LibraryFunctionDescriptor{inner: raw.MTL4LibraryFunctionDescriptorFromID(id)}
+	x := &MTL4LibraryFunctionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4LibraryFunctionDescriptor creates a new [MTL4LibraryFunctionDescriptor].
+// mTL4LibraryFunctionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4LibraryFunctionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4LibraryFunctionDescriptorAdopt(id objc.ID) *MTL4LibraryFunctionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4LibraryFunctionDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTL4LibraryFunctionDescriptor creates a new MTL4LibraryFunctionDescriptor.
 func NewMTL4LibraryFunctionDescriptor() *MTL4LibraryFunctionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4LibraryFunctionDescriptor")), objc.RegisterName("new"))
-	return &MTL4LibraryFunctionDescriptor{inner: raw.MTL4LibraryFunctionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4LibraryFunctionDescriptor")), objc.RegisterName("new"))
+	return mTL4LibraryFunctionDescriptorAdopt(_id)
 }
 
-// Assigns a name to the function.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName assigns a name to the function.
 func (x *MTL4LibraryFunctionDescriptor) WithName(name string) *MTL4LibraryFunctionDescriptor {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Returns a reference to the library containing the function.
-//
-// WithLibrary sets the library property and returns the receiver for chaining.
-func (x *MTL4LibraryFunctionDescriptor) WithLibrary(library raw.MTLLibrary) *MTL4LibraryFunctionDescriptor {
-	x.inner.SetLibrary(library)
-	return x
-}
-
-// Assigns a name to the function.
-//
-// Name calls the underlying Name.
+// Name assigns a name to the function.
 func (x *MTL4LibraryFunctionDescriptor) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *MTL4LibraryFunctionDescriptor) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// Returns a reference to the library containing the function.
-//
-// Library calls the underlying Library.
-func (x *MTL4LibraryFunctionDescriptor) Library() raw.MTLLibrary {
-	return x.inner.Library()
-}
-
-// SetLibrary calls the underlying SetLibrary.
-func (x *MTL4LibraryFunctionDescriptor) SetLibrary(library raw.MTLLibrary) {
-	x.inner.SetLibrary(library)
-}
-
-func (x *MTL4LibraryFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor {
-	return &x.inner.MTL4FunctionDescriptor
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // MTL4LibraryFunctionDescriptorable is the interface implemented by [MTL4LibraryFunctionDescriptor], for mocking and DI.
 type MTL4LibraryFunctionDescriptorable interface {
-	Unwrap() *raw.MTL4LibraryFunctionDescriptor
+	obj.Object
 	WithName(name string) *MTL4LibraryFunctionDescriptor
-	WithLibrary(library raw.MTLLibrary) *MTL4LibraryFunctionDescriptor
 	Name() string
 	SetName(name string)
-	Library() raw.MTLLibrary
-	SetLibrary(library raw.MTLLibrary)
 }
 
 var _ MTL4LibraryFunctionDescriptorable = (*MTL4LibraryFunctionDescriptor)(nil)
+
+var _ MTL4FunctionDescriptorProvider = (*MTL4LibraryFunctionDescriptor)(nil)

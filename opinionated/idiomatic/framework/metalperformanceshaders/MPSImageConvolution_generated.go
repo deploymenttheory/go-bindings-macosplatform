@@ -5,149 +5,117 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that convolves an image with a given kernel of odd width and height.
+// ImageConvolution is an idiomatic wrapper over the Objective-C class MPSImageConvolution.
 //
-// ImageConvolution wraps [raw.MPSImageConvolution] with a fluent Go API.
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that convolves an image with a given kernel of odd width and height.
 type ImageConvolution struct {
-	inner *raw.MPSImageConvolution
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageConvolution].
-func (x *ImageConvolution) Unwrap() *raw.MPSImageConvolution { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageConvolution) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageConvolutionFromID adopts an existing object pointer as a ImageConvolution (nil for 0).
+// ImageConvolutionFromID adopts an existing Objective-C object as a ImageConvolution
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageConvolutionFromID(id objc.ID) *ImageConvolution {
 	if id == 0 {
 		return nil
 	}
-	return &ImageConvolution{inner: raw.MPSImageConvolutionFromID(id)}
+	x := &ImageConvolution{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a convolution filter.
-//
-// NewImageConvolutionWithDeviceKernelWidthKernelHeightWeights creates a new [ImageConvolution].
-func NewImageConvolutionWithDeviceKernelWidthKernelHeightWeights(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, kernelWeights *float32) *ImageConvolution {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:weights:"), device, kernelWidth, kernelHeight, kernelWeights)
-	return &ImageConvolution{inner: raw.MPSImageConvolutionFromID(_id)}
+// imageConvolutionAdopt wraps an Objective-C object that this code just created as a
+// ImageConvolution (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageConvolutionAdopt(id objc.ID) *ImageConvolution {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageConvolution{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageConvolutionWithCoderDevice creates a new [ImageConvolution].
-func NewImageConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageConvolution {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageConvolution{inner: raw.MPSImageConvolutionFromID(_id)}
+// NewImageConvolution creates a new ImageConvolution.
+func NewImageConvolution() *ImageConvolution {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageConvolution")), objc.RegisterName("new"))
+	return imageConvolutionAdopt(_id)
 }
 
-// The value added to a convolved pixel before it is converted back to its intended storage format.
-//
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias the value added to a convolved pixel before it is converted back to its intended storage format.
 func (x *ImageConvolution) WithBias(bias float32) *ImageConvolution {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageConvolution) WithOffset(offset mpscore.MPSOffset) *ImageConvolution {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageConvolution) WithClipRect(clipRect metal.MTLRegion) *ImageConvolution {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageConvolution) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConvolution {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageConvolution) WithOptions(options mpscore.MPSKernelOptions) *ImageConvolution {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageConvolution) WithLabel(label string) *ImageConvolution {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *ImageConvolution) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// KernelHeight the height of the filter window. Must be an odd number.
+func (x *ImageConvolution) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *ImageConvolution) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// KernelWidth the width of the filter window. Must be an odd number.
+func (x *ImageConvolution) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
 
-// @property    bias @discussion  The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
-//
-// Bias calls the underlying Bias.
+// Bias the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 func (x *ImageConvolution) Bias() float32 {
-	return x.inner.Bias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+	return _r
 }
 
-// SetBias calls the underlying SetBias.
+// SetBias wraps the corresponding Objective-C method.
 func (x *ImageConvolution) SetBias(bias float32) {
-	x.inner.SetBias(bias)
-}
-
-func (x *ImageConvolution) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageConvolution) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
 
 // ImageConvolutionable is the interface implemented by [ImageConvolution], for mocking and DI.
 type ImageConvolutionable interface {
-	Unwrap() *raw.MPSImageConvolution
+	obj.Object
 	WithBias(bias float32) *ImageConvolution
 	WithOffset(offset mpscore.MPSOffset) *ImageConvolution
 	WithClipRect(clipRect metal.MTLRegion) *ImageConvolution
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConvolution
-	WithOptions(options mpscore.MPSKernelOptions) *ImageConvolution
 	WithLabel(label string) *ImageConvolution
-	KernelHeight() uint
-	KernelWidth() uint
+	KernelHeight() int
+	KernelWidth() int
 	Bias() float32
 	SetBias(bias float32)
 }
 
 var _ ImageConvolutionable = (*ImageConvolution)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageConvolution)(nil)
+
+var _ KernelProvider = (*ImageConvolution)(nil)

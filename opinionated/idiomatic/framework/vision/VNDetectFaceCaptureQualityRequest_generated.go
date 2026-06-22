@@ -5,88 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that produces a floating-point number that represents the capture quality of a face in a photo.
+// DetectFaceCaptureQualityRequest is an idiomatic wrapper over the Objective-C class VNDetectFaceCaptureQualityRequest.
 //
-// DetectFaceCaptureQualityRequest wraps [raw.VNDetectFaceCaptureQualityRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that produces a floating-point number that represents the capture quality of a face in a photo.
 type DetectFaceCaptureQualityRequest struct {
-	inner *raw.VNDetectFaceCaptureQualityRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectFaceCaptureQualityRequest].
-func (x *DetectFaceCaptureQualityRequest) Unwrap() *raw.VNDetectFaceCaptureQualityRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectFaceCaptureQualityRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectFaceCaptureQualityRequestFromID adopts an existing object pointer as a DetectFaceCaptureQualityRequest (nil for 0).
+// DetectFaceCaptureQualityRequestFromID adopts an existing Objective-C object as a DetectFaceCaptureQualityRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectFaceCaptureQualityRequestFromID(id objc.ID) *DetectFaceCaptureQualityRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectFaceCaptureQualityRequest{inner: raw.VNDetectFaceCaptureQualityRequestFromID(id)}
+	x := &DetectFaceCaptureQualityRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectFaceCaptureQualityRequest creates a new [DetectFaceCaptureQualityRequest].
+// detectFaceCaptureQualityRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectFaceCaptureQualityRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectFaceCaptureQualityRequestAdopt(id objc.ID) *DetectFaceCaptureQualityRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectFaceCaptureQualityRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectFaceCaptureQualityRequest creates a new DetectFaceCaptureQualityRequest.
 func NewDetectFaceCaptureQualityRequest() *DetectFaceCaptureQualityRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectFaceCaptureQualityRequest")), objc.RegisterName("new"))
-	return &DetectFaceCaptureQualityRequest{inner: raw.VNDetectFaceCaptureQualityRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectFaceCaptureQualityRequest")), objc.RegisterName("new"))
+	return detectFaceCaptureQualityRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectFaceCaptureQualityRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectFaceCaptureQualityRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectFaceCaptureQualityRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectFaceCaptureQualityRequest) WithRevision(revision uint) *DetectFaceCaptureQualityRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectFaceCaptureQualityRequest) WithRevision(revision int) *DetectFaceCaptureQualityRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *DetectFaceCaptureQualityRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectFaceCaptureQualityRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // DetectFaceCaptureQualityRequestable is the interface implemented by [DetectFaceCaptureQualityRequest], for mocking and DI.
 type DetectFaceCaptureQualityRequestable interface {
-	Unwrap() *raw.VNDetectFaceCaptureQualityRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest
-	WithRevision(revision uint) *DetectFaceCaptureQualityRequest
+	WithRevision(revision int) *DetectFaceCaptureQualityRequest
 }
 
 var _ DetectFaceCaptureQualityRequestable = (*DetectFaceCaptureQualityRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectFaceCaptureQualityRequest)(nil)
+
+var _ RequestProvider = (*DetectFaceCaptureQualityRequest)(nil)

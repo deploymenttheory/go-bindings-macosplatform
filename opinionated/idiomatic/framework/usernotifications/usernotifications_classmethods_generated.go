@@ -5,182 +5,129 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// TriggerWithDateMatchingComponentsRepeats calls the underlying UNCalendarNotificationTriggerTriggerWithDateMatchingComponentsRepeats.
-func TriggerWithDateMatchingComponentsRepeats(dateComponents *foundation.NSDateComponents, repeats bool) *CalendarNotificationTrigger {
-	_r := raw.UNCalendarNotificationTriggerTriggerWithDateMatchingComponentsRepeats(dateComponents, repeats)
-	if _r == nil {
-		return nil
-	}
-	return &CalendarNotificationTrigger{inner: _r}
+// TriggerWithDateMatchingComponentsRepeats creates a calendar trigger using the date components parameter.
+func TriggerWithDateMatchingComponentsRepeats(dateComponents obj.Object, repeats bool) *CalendarNotificationTrigger {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNCalendarNotificationTrigger")), objc.RegisterName("triggerWithDateMatchingComponents:repeats:"), objref.IDOf(dateComponents), repeats)
+	return CalendarNotificationTriggerFromID(_r)
 }
 
-// ActionWithIdentifierTitleOptions calls the underlying UNNotificationActionActionWithIdentifierTitleOptions.
-func ActionWithIdentifierTitleOptions(identifier string, title string, options UNNotificationActionOptions) *NotificationAction {
-	_r := raw.UNNotificationActionActionWithIdentifierTitleOptions(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &NotificationAction{inner: _r}
+// ActionWithIdentifierTitleOptions creates an action object by using the specified title and options.
+func ActionWithIdentifierTitleOptions(identifier string, title string, options NotificationActionOptions) *NotificationAction {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAction")), objc.RegisterName("actionWithIdentifier:title:options:"), purego.NSString(identifier), purego.NSString(title), options)
+	return NotificationActionFromID(_r)
 }
 
-// ActionWithIdentifierTitleOptionsIcon calls the underlying UNNotificationActionActionWithIdentifierTitleOptionsIcon.
-func ActionWithIdentifierTitleOptionsIcon(identifier string, title string, options UNNotificationActionOptions, icon *raw.UNNotificationActionIcon) *NotificationAction {
-	_r := raw.UNNotificationActionActionWithIdentifierTitleOptionsIcon(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options), icon)
-	if _r == nil {
-		return nil
-	}
-	return &NotificationAction{inner: _r}
+// ActionWithIdentifierTitleOptionsIcon creates an action object by using the specified title, options, and icon.
+func ActionWithIdentifierTitleOptionsIcon(identifier string, title string, options NotificationActionOptions, icon *NotificationActionIcon) *NotificationAction {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAction")), objc.RegisterName("actionWithIdentifier:title:options:icon:"), purego.NSString(identifier), purego.NSString(title), options, objref.IDOf(icon))
+	return NotificationActionFromID(_r)
 }
 
-// IconWithTemplateImageName calls the underlying UNNotificationActionIconIconWithTemplateImageName.
+// IconWithTemplateImageName creates an action icon based on an image in your app’s bundle, preferably in an asset catalog.
 func IconWithTemplateImageName(templateImageName string) *NotificationActionIcon {
-	_r := raw.UNNotificationActionIconIconWithTemplateImageName(foundation.NSStringStringWithUTF8String(templateImageName))
-	if _r == nil {
-		return nil
-	}
-	return &NotificationActionIcon{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationActionIcon")), objc.RegisterName("iconWithTemplateImageName:"), purego.NSString(templateImageName))
+	return NotificationActionIconFromID(_r)
 }
 
-// IconWithSystemImageName calls the underlying UNNotificationActionIconIconWithSystemImageName.
+// IconWithSystemImageName creates an action icon by using a system symbol image.
 func IconWithSystemImageName(systemImageName string) *NotificationActionIcon {
-	_r := raw.UNNotificationActionIconIconWithSystemImageName(foundation.NSStringStringWithUTF8String(systemImageName))
-	if _r == nil {
-		return nil
-	}
-	return &NotificationActionIcon{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationActionIcon")), objc.RegisterName("iconWithSystemImageName:"), purego.NSString(systemImageName))
+	return NotificationActionIconFromID(_r)
 }
 
-// AttachmentWithIdentifierURLOptionsError calls the underlying UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError.
-func AttachmentWithIdentifierURLOptionsError(identifier string, uRL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (*NotificationAttachment, error) {
-	_r, _err := raw.UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError(foundation.NSStringStringWithUTF8String(identifier), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), options)
-	if _err != nil {
-		return nil, _err
+// AttachmentWithIdentifierURLOptionsError creates an attachment object from the specified file and options.
+func AttachmentWithIdentifierURLOptionsError(identifier string, uRL string, options obj.Object) (result *NotificationAttachment, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttachment")), objc.RegisterName("attachmentWithIdentifier:URL:options:error:"), purego.NSString(identifier), rt.FileURL(uRL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &NotificationAttachment{inner: _r}, nil
+	return NotificationAttachmentFromID(_r), nil
 }
 
-// ContextWithSendMessageIntentAttributedContent calls the underlying UNNotificationAttributedMessageContextContextWithSendMessageIntentAttributedContent.
-func ContextWithSendMessageIntentAttributedContent(sendMessageIntent *intents.INSendMessageIntent, attributedContent *foundation.NSAttributedString) *NotificationAttributedMessageContext {
-	_r := raw.UNNotificationAttributedMessageContextContextWithSendMessageIntentAttributedContent(sendMessageIntent, attributedContent)
-	if _r == nil {
-		return nil
-	}
-	return &NotificationAttributedMessageContext{inner: _r}
+// ContextWithSendMessageIntentAttributedContent wraps the corresponding Objective-C method.
+func ContextWithSendMessageIntentAttributedContent(sendMessageIntent obj.Object, attributedContent obj.Object) *NotificationAttributedMessageContext {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttributedMessageContext")), objc.RegisterName("contextWithSendMessageIntent:attributedContent:"), objref.IDOf(sendMessageIntent), objref.IDOf(attributedContent))
+	return NotificationAttributedMessageContextFromID(_r)
 }
 
-// CategoryWithIdentifierActionsIntentIdentifiersOptions calls the underlying UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions.
-func CategoryWithIdentifierActionsIntentIdentifiersOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], options UNNotificationCategoryOptions) *NotificationCategory {
-	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, raw.UNNotificationCategoryOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &NotificationCategory{inner: _r}
+// CategoryWithIdentifierActionsIntentIdentifiersOptions creates a category object containing the specified actions and options.
+func CategoryWithIdentifierActionsIntentIdentifiersOptions(identifier string, actions []*NotificationAction, intentIdentifiers []string, options NotificationCategoryOptions) *NotificationCategory {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationCategory")), objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:options:"), purego.NSString(identifier), purego.SliceToNSArray(actions, func(_v *NotificationAction) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(intentIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }), options)
+	return NotificationCategoryFromID(_r)
 }
 
-// CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions calls the underlying UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions.
-func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder string, options UNNotificationCategoryOptions) *NotificationCategory {
-	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, foundation.NSStringStringWithUTF8String(hiddenPreviewsBodyPlaceholder), raw.UNNotificationCategoryOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &NotificationCategory{inner: _r}
+// CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions creates a category object containing the specified actions, options, and placeholder text used when previews aren’t shown.
+func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(identifier string, actions []*NotificationAction, intentIdentifiers []string, hiddenPreviewsBodyPlaceholder string, options NotificationCategoryOptions) *NotificationCategory {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationCategory")), objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:options:"), purego.NSString(identifier), purego.SliceToNSArray(actions, func(_v *NotificationAction) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(intentIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(hiddenPreviewsBodyPlaceholder), options)
+	return NotificationCategoryFromID(_r)
 }
 
-// CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions calls the underlying UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions.
-func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder string, categorySummaryFormat string, options UNNotificationCategoryOptions) *NotificationCategory {
-	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, foundation.NSStringStringWithUTF8String(hiddenPreviewsBodyPlaceholder), foundation.NSStringStringWithUTF8String(categorySummaryFormat), raw.UNNotificationCategoryOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &NotificationCategory{inner: _r}
+// CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions creates a category object containing the specified actions, options, placeholder text used when previews aren’t shown, and summary format string.
+func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(identifier string, actions []*NotificationAction, intentIdentifiers []string, hiddenPreviewsBodyPlaceholder string, categorySummaryFormat string, options NotificationCategoryOptions) *NotificationCategory {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationCategory")), objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:categorySummaryFormat:options:"), purego.NSString(identifier), purego.SliceToNSArray(actions, func(_v *NotificationAction) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(intentIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(hiddenPreviewsBodyPlaceholder), purego.NSString(categorySummaryFormat), options)
+	return NotificationCategoryFromID(_r)
 }
 
-// RequestWithIdentifierContentTrigger calls the underlying UNNotificationRequestRequestWithIdentifierContentTrigger.
-func RequestWithIdentifierContentTrigger(identifier string, content *raw.UNNotificationContent, trigger *raw.UNNotificationTrigger) *NotificationRequest {
-	_r := raw.UNNotificationRequestRequestWithIdentifierContentTrigger(foundation.NSStringStringWithUTF8String(identifier), content, trigger)
-	if _r == nil {
-		return nil
-	}
-	return &NotificationRequest{inner: _r}
+// RequestWithIdentifierContentTrigger creates a notification request object that you use to schedule a notification.
+func RequestWithIdentifierContentTrigger(identifier string, content *NotificationContent, trigger *NotificationTrigger) *NotificationRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationRequest")), objc.RegisterName("requestWithIdentifier:content:trigger:"), purego.NSString(identifier), objref.IDOf(content), objref.IDOf(trigger))
+	return NotificationRequestFromID(_r)
 }
 
-// DefaultCriticalSoundWithAudioVolume calls the underlying UNNotificationSoundDefaultCriticalSoundWithAudioVolume.
+// DefaultCriticalSoundWithAudioVolume creates a sound object that plays the default critical alert sound at the volume you specify.
 func DefaultCriticalSoundWithAudioVolume(volume float32) *NotificationSound {
-	_r := raw.UNNotificationSoundDefaultCriticalSoundWithAudioVolume(volume)
-	if _r == nil {
-		return nil
-	}
-	return &NotificationSound{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("defaultCriticalSoundWithAudioVolume:"), volume)
+	return NotificationSoundFromID(_r)
 }
 
-// SoundNamed calls the underlying UNNotificationSoundSoundNamed.
-func SoundNamed(name *foundation.NSString) *NotificationSound {
-	_r := raw.UNNotificationSoundSoundNamed(name)
-	if _r == nil {
-		return nil
-	}
-	return &NotificationSound{inner: _r}
+// SoundNamed creates a sound object that represents a custom sound file.
+func SoundNamed(name obj.Object) *NotificationSound {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("soundNamed:"), objref.IDOf(name))
+	return NotificationSoundFromID(_r)
 }
 
-// CriticalSoundNamedWithAudioVolume calls the underlying UNNotificationSoundCriticalSoundNamedWithAudioVolume.
-func CriticalSoundNamedWithAudioVolume(name *foundation.NSString, volume float32) *NotificationSound {
-	_r := raw.UNNotificationSoundCriticalSoundNamedWithAudioVolume(name, volume)
-	if _r == nil {
-		return nil
-	}
-	return &NotificationSound{inner: _r}
+// CriticalSoundNamedWithAudioVolume creates a custom sound object for critical alerts with the volume you specify.
+func CriticalSoundNamedWithAudioVolume(name obj.Object, volume float32) *NotificationSound {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("criticalSoundNamed:withAudioVolume:"), objref.IDOf(name), volume)
+	return NotificationSoundFromID(_r)
 }
 
-// DefaultSound calls the underlying UNNotificationSoundDefaultSound.
+// DefaultSound wraps the corresponding Objective-C method.
 func DefaultSound() *NotificationSound {
-	_r := raw.UNNotificationSoundDefaultSound()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationSound{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("defaultSound"))
+	return NotificationSoundFromID(_r)
 }
 
-// ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder calls the underlying UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder.
-func ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options UNNotificationActionOptions, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
-	_r := raw.UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options), foundation.NSStringStringWithUTF8String(textInputButtonTitle), foundation.NSStringStringWithUTF8String(textInputPlaceholder))
-	if _r == nil {
-		return nil
-	}
-	return &TextInputNotificationAction{inner: _r}
+// ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder creates an action object that accepts text input from the user.
+func ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options NotificationActionOptions, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNTextInputNotificationAction")), objc.RegisterName("actionWithIdentifier:title:options:textInputButtonTitle:textInputPlaceholder:"), purego.NSString(identifier), purego.NSString(title), options, purego.NSString(textInputButtonTitle), purego.NSString(textInputPlaceholder))
+	return TextInputNotificationActionFromID(_r)
 }
 
-// ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder calls the underlying UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder.
-func ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options UNNotificationActionOptions, icon *raw.UNNotificationActionIcon, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
-	_r := raw.UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options), icon, foundation.NSStringStringWithUTF8String(textInputButtonTitle), foundation.NSStringStringWithUTF8String(textInputPlaceholder))
-	if _r == nil {
-		return nil
-	}
-	return &TextInputNotificationAction{inner: _r}
+// ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder creates an action object with an icon that accepts text input from the user.
+func ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options NotificationActionOptions, icon *NotificationActionIcon, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
+	_r := objc.Send[objc.ID](objc.ID(_class("UNTextInputNotificationAction")), objc.RegisterName("actionWithIdentifier:title:options:icon:textInputButtonTitle:textInputPlaceholder:"), purego.NSString(identifier), purego.NSString(title), options, objref.IDOf(icon), purego.NSString(textInputButtonTitle), purego.NSString(textInputPlaceholder))
+	return TextInputNotificationActionFromID(_r)
 }
 
-// TriggerWithTimeIntervalRepeats calls the underlying UNTimeIntervalNotificationTriggerTriggerWithTimeIntervalRepeats.
+// TriggerWithTimeIntervalRepeats creates a time interval trigger using the time value parameter.
 func TriggerWithTimeIntervalRepeats(timeInterval float64, repeats bool) *TimeIntervalNotificationTrigger {
-	_r := raw.UNTimeIntervalNotificationTriggerTriggerWithTimeIntervalRepeats(timeInterval, repeats)
-	if _r == nil {
-		return nil
-	}
-	return &TimeIntervalNotificationTrigger{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UNTimeIntervalNotificationTrigger")), objc.RegisterName("triggerWithTimeInterval:repeats:"), timeInterval, repeats)
+	return TimeIntervalNotificationTriggerFromID(_r)
 }
 
-// CurrentNotificationCenter calls the underlying UNUserNotificationCenterCurrentNotificationCenter.
+// CurrentNotificationCenter returns your app’s notification center.
 func CurrentNotificationCenter() *UserNotificationCenter {
-	_r := raw.UNUserNotificationCenterCurrentNotificationCenter()
-	if _r == nil {
-		return nil
-	}
-	return &UserNotificationCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("UNUserNotificationCenter")), objc.RegisterName("currentNotificationCenter"))
+	return UserNotificationCenterFromID(_r)
 }

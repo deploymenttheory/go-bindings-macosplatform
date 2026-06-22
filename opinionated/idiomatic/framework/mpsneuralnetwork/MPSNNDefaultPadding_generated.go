@@ -5,51 +5,83 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNDefaultPadding wraps [raw.MPSNNDefaultPadding] with a fluent Go API.
+// NNDefaultPadding is an idiomatic wrapper over the Objective-C class MPSNNDefaultPadding.
 type NNDefaultPadding struct {
-	inner *raw.MPSNNDefaultPadding
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNDefaultPadding].
-func (x *NNDefaultPadding) Unwrap() *raw.MPSNNDefaultPadding { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNDefaultPadding) ID() objc.ID { return x.inner.Ptr() }
-
-// NNDefaultPaddingFromID adopts an existing object pointer as a NNDefaultPadding (nil for 0).
+// NNDefaultPaddingFromID adopts an existing Objective-C object as a NNDefaultPadding
+// (nil for 0), retaining it and registering a release finalizer.
 func NNDefaultPaddingFromID(id objc.ID) *NNDefaultPadding {
 	if id == 0 {
 		return nil
 	}
-	return &NNDefaultPadding{inner: raw.MPSNNDefaultPaddingFromID(id)}
+	x := &NNDefaultPadding{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNNDefaultPadding creates a new [NNDefaultPadding].
+// nNDefaultPaddingAdopt wraps an Objective-C object that this code just created as a
+// NNDefaultPadding (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNDefaultPaddingAdopt(id objc.ID) *NNDefaultPadding {
+	if id == 0 {
+		return nil
+	}
+	x := &NNDefaultPadding{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNDefaultPadding) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNDefaultPadding) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNDefaultPadding) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NNDefaultPadding) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNNDefaultPadding creates a new NNDefaultPadding.
 func NewNNDefaultPadding() *NNDefaultPadding {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNDefaultPadding")), objc.RegisterName("new"))
-	return &NNDefaultPadding{inner: raw.MPSNNDefaultPaddingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("new"))
+	return nNDefaultPaddingAdopt(_id)
 }
 
-// @abstract  Human readable description of what the padding policy does
-//
-// Label calls the underlying Label.
+// Label human readable description of what the padding policy does
 func (x *NNDefaultPadding) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NNDefaultPaddingable is the interface implemented by [NNDefaultPadding], for mocking and DI.
 type NNDefaultPaddingable interface {
-	Unwrap() *raw.MPSNNDefaultPadding
+	obj.Object
 	Label() string
 }
 

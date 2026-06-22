@@ -5,110 +5,132 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view that allows user interaction with a VM.
+// VirtualMachineView is an idiomatic wrapper over the Objective-C class VZVirtualMachineView.
 //
-// VirtualMachineView wraps [raw.VZVirtualMachineView] with a fluent Go API.
+// A view that allows user interaction with a VM.
 type VirtualMachineView struct {
-	inner *raw.VZVirtualMachineView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtualMachineView].
-func (x *VirtualMachineView) Unwrap() *raw.VZVirtualMachineView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtualMachineView) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtualMachineViewFromID adopts an existing object pointer as a VirtualMachineView (nil for 0).
+// VirtualMachineViewFromID adopts an existing Objective-C object as a VirtualMachineView
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtualMachineViewFromID(id objc.ID) *VirtualMachineView {
 	if id == 0 {
 		return nil
 	}
-	return &VirtualMachineView{inner: raw.VZVirtualMachineViewFromID(id)}
-}
-
-// NewVirtualMachineView creates a new [VirtualMachineView].
-func NewVirtualMachineView() *VirtualMachineView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtualMachineView")), objc.RegisterName("new"))
-	return &VirtualMachineView{inner: raw.VZVirtualMachineViewFromID(_id)}
-}
-
-// The VM to display in the view.
-//
-// WithVirtualMachine sets the virtualMachine property and returns the receiver for chaining.
-func (x *VirtualMachineView) WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView {
-	x.inner.SetVirtualMachine(virtualMachine.Unwrap())
+	x := &VirtualMachineView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that determines whether the system should send certain system keyboard shortcuts to the guest instead of the host.
-//
-// WithCapturesSystemKeys sets the capturesSystemKeys property and returns the receiver for chaining.
-func (x *VirtualMachineView) WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView {
-	x.inner.SetCapturesSystemKeys(capturesSystemKeys)
-	return x
-}
-
-// A Boolean value that indicates whether the graphics display associated with this view automatically reconfigures with respect to view changes.
-//
-// WithAutomaticallyReconfiguresDisplay sets the automaticallyReconfiguresDisplay property and returns the receiver for chaining.
-func (x *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView {
-	x.inner.SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay)
-	return x
-}
-
-// @abstract The virtual machine to display in the view.
-//
-// VirtualMachine calls the underlying VirtualMachine.
-func (x *VirtualMachineView) VirtualMachine() *VirtualMachine {
-	_r := x.inner.VirtualMachine()
-	if _r == nil {
+// virtualMachineViewAdopt wraps an Objective-C object that this code just created as a
+// VirtualMachineView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtualMachineViewAdopt(id objc.ID) *VirtualMachineView {
+	if id == 0 {
 		return nil
 	}
-	return &VirtualMachine{inner: _r}
+	x := &VirtualMachineView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetVirtualMachine calls the underlying SetVirtualMachine.
-func (x *VirtualMachineView) SetVirtualMachine(virtualMachine *raw.VZVirtualMachine) {
-	x.inner.SetVirtualMachine(virtualMachine)
+// Description returns the object's -description text.
+func (x *VirtualMachineView) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract Whether certain system hot keys should be sent to the guest instead of the host. Defaults to NO.
-//
-// CapturesSystemKeys calls the underlying CapturesSystemKeys.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtualMachineView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtualMachineView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VirtualMachineView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVirtualMachineView creates a new VirtualMachineView.
+func NewVirtualMachineView() *VirtualMachineView {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachineView")), objc.RegisterName("new"))
+	return virtualMachineViewAdopt(_id)
+}
+
+// WithVirtualMachine the VM to display in the view.
+func (x *VirtualMachineView) WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVirtualMachine:"), objref.IDOf(virtualMachine))
+	return x
+}
+
+// WithCapturesSystemKeys a Boolean value that determines whether the system should send certain system keyboard shortcuts to the guest instead of the host.
+func (x *VirtualMachineView) WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesSystemKeys:"), capturesSystemKeys)
+	return x
+}
+
+// WithAutomaticallyReconfiguresDisplay a Boolean value that indicates whether the graphics display associated with this view automatically reconfigures with respect to view changes.
+func (x *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyReconfiguresDisplay:"), automaticallyReconfiguresDisplay)
+	return x
+}
+
+// VirtualMachine the virtual machine to display in the view.
+func (x *VirtualMachineView) VirtualMachine() *VirtualMachine {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMachine"))
+	return VirtualMachineFromID(_r)
+}
+
+// SetVirtualMachine wraps the corresponding Objective-C method.
+func (x *VirtualMachineView) SetVirtualMachine(virtualMachine *VirtualMachine) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVirtualMachine:"), objref.IDOf(virtualMachine))
+}
+
+// CapturesSystemKeys whether certain system hot keys should be sent to the guest instead of the host. Defaults to NO.
 func (x *VirtualMachineView) CapturesSystemKeys() bool {
-	return x.inner.CapturesSystemKeys()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("capturesSystemKeys"))
+	return _r
 }
 
-// SetCapturesSystemKeys calls the underlying SetCapturesSystemKeys.
+// SetCapturesSystemKeys wraps the corresponding Objective-C method.
 func (x *VirtualMachineView) SetCapturesSystemKeys(capturesSystemKeys bool) {
-	x.inner.SetCapturesSystemKeys(capturesSystemKeys)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesSystemKeys:"), capturesSystemKeys)
 }
 
-// @abstract Automatically reconfigures the graphics display associated with this view with respect to view changes. Defaults to NO. @discussion Automatically resize or reconfigure this graphics display when the view properties update. For example, resizing the display when the view has a live resize operation. When enabled, the graphics display will automatically be reconfigured to match the host display environment. This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property, only one view will respect the property, and the other view will have had the property disabled.
-//
-// AutomaticallyReconfiguresDisplay calls the underlying AutomaticallyReconfiguresDisplay.
+// AutomaticallyReconfiguresDisplay automatically reconfigures the graphics display associated with this view with respect to view changes. Defaults to NO. Automatically resize or reconfigure this graphics display when the view properties update. For example, resizing the display when the view has a live resize operation. When enabled, the graphics display will automatically be reconfigured to match the host display environment. This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property, only one view will respect the property, and the other view will have had the property disabled.
 func (x *VirtualMachineView) AutomaticallyReconfiguresDisplay() bool {
-	return x.inner.AutomaticallyReconfiguresDisplay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyReconfiguresDisplay"))
+	return _r
 }
 
-// SetAutomaticallyReconfiguresDisplay calls the underlying SetAutomaticallyReconfiguresDisplay.
+// SetAutomaticallyReconfiguresDisplay wraps the corresponding Objective-C method.
 func (x *VirtualMachineView) SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) {
-	x.inner.SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyReconfiguresDisplay:"), automaticallyReconfiguresDisplay)
 }
 
 // VirtualMachineViewable is the interface implemented by [VirtualMachineView], for mocking and DI.
 type VirtualMachineViewable interface {
-	Unwrap() *raw.VZVirtualMachineView
+	obj.Object
 	WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView
 	WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView
 	WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView
 	VirtualMachine() *VirtualMachine
-	SetVirtualMachine(virtualMachine *raw.VZVirtualMachine)
+	SetVirtualMachine(virtualMachine *VirtualMachine)
 	CapturesSystemKeys() bool
 	SetCapturesSystemKeys(capturesSystemKeys bool)
 	AutomaticallyReconfiguresDisplay() bool

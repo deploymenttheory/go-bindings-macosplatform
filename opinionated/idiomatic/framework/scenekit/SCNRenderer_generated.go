@@ -5,134 +5,133 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A renderer for displaying a SceneKit scene in an existing Metal workflow or OpenGL context.
+// Renderer is an idiomatic wrapper over the Objective-C class SCNRenderer.
 //
-// Renderer wraps [raw.SCNRenderer] with a fluent Go API.
+// A renderer for displaying a SceneKit scene in an existing Metal workflow or OpenGL context.
 type Renderer struct {
-	inner *raw.SCNRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNRenderer].
-func (x *Renderer) Unwrap() *raw.SCNRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Renderer) ID() objc.ID { return x.inner.Ptr() }
-
-// RendererFromID adopts an existing object pointer as a Renderer (nil for 0).
+// RendererFromID adopts an existing Objective-C object as a Renderer
+// (nil for 0), retaining it and registering a release finalizer.
 func RendererFromID(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	return &Renderer{inner: raw.SCNRendererFromID(id)}
-}
-
-// NewRenderer creates a new [Renderer].
-func NewRenderer() *Renderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNRenderer")), objc.RegisterName("new"))
-	return &Renderer{inner: raw.SCNRendererFromID(_id)}
-}
-
-// The scene to be rendered.
-//
-// WithScene sets the scene property and returns the receiver for chaining.
-func (x *Renderer) WithScene(scene *Scene) *Renderer {
-	x.inner.SetScene(scene.Unwrap())
+	x := &Renderer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Renders the scene’s contents at the specified system time in the specified Metal command buffer.
-//
-// RenderAtTimeViewportCommandBufferPassDescriptor calls the underlying RenderAtTimeViewportCommandBufferPassDescriptor.
-func (x *Renderer) RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
-	x.inner.RenderAtTimeViewportCommandBufferPassDescriptor(time_, viewport, commandBuffer, renderPassDescriptor)
-}
-
-// Renders the scene’s contents at the specified system time in the renderer’s OpenGL context.
-//
-// RenderAtTime calls the underlying RenderAtTime.
-func (x *Renderer) RenderAtTime(time_ float64) {
-	x.inner.RenderAtTime(time_)
-}
-
-// @method updateAtTime: @abstract updates the receiver's scene at the specified time (system time).
-//
-// UpdateAtTime calls the underlying UpdateAtTime.
-func (x *Renderer) UpdateAtTime(time_ float64) {
-	x.inner.UpdateAtTime(time_)
-}
-
-// @method renderWithViewport:viewport:commandBuffer:passDescriptor: @abstract renders the receiver's scene with the specified viewport, Metal command buffer and pass descriptor. @discussion Use this method to render using Metal. This method doesn't update the scene's animations, physics, particles etc... It's up to you to call "updateAtTime:" to update the scene.
-//
-// RenderWithViewportCommandBufferPassDescriptor calls the underlying RenderWithViewportCommandBufferPassDescriptor.
-func (x *Renderer) RenderWithViewportCommandBufferPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
-	x.inner.RenderWithViewportCommandBufferPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
-}
-
-// Creates an image by drawing the renderer’s content at the specified system time.
-//
-// SnapshotAtTimeWithSizeAntialiasingMode calls the underlying SnapshotAtTimeWithSizeAntialiasingMode.
-func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage {
-	return x.inner.SnapshotAtTimeWithSizeAntialiasingMode(time_, size, raw.SCNAntialiasingMode(antialiasingMode))
-}
-
-// @method updateProbes:atTime: @abstract Update the specified probes by computing their incoming irradiance in the receiver's scene at the specified time. @param lightProbes An array of nodes that must have a light probe attached. @param time The time used to render the scene when computing the light probes irradiance. @discussion Light probes are only supported with Metal. This method is observable using NSProgress.
-//
-// UpdateProbesAtTime calls the underlying UpdateProbesAtTime.
-func (x *Renderer) UpdateProbesAtTime(lightProbes *foundation.NSArray[*raw.SCNNode], time_ float64) {
-	x.inner.UpdateProbesAtTime(lightProbes, time_)
-}
-
-// @property scene @abstract Specifies the scene of the receiver
-//
-// Scene calls the underlying Scene.
-func (x *Renderer) Scene() *Scene {
-	_r := x.inner.Scene()
-	if _r == nil {
+// rendererAdopt wraps an Objective-C object that this code just created as a
+// Renderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rendererAdopt(id objc.ID) *Renderer {
+	if id == 0 {
 		return nil
 	}
-	return &Scene{inner: _r}
+	x := &Renderer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetScene calls the underlying SetScene.
-func (x *Renderer) SetScene(scene *raw.SCNScene) {
-	x.inner.SetScene(scene)
+// Description returns the object's -description text.
+func (x *Renderer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property nextFrameTime @abstract Returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
-//
-// NextFrameTime calls the underlying NextFrameTime.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Renderer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderer creates a new Renderer.
+func NewRenderer() *Renderer {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNRenderer")), objc.RegisterName("new"))
+	return rendererAdopt(_id)
+}
+
+// WithScene the scene to be rendered.
+func (x *Renderer) WithScene(scene *Scene) *Renderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	return x
+}
+
+// RenderAtTime renders the scene’s contents at the specified system time in the renderer’s OpenGL context.
+func (x *Renderer) RenderAtTime(time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderAtTime:"), time_)
+}
+
+// UpdateAtTime updates the receiver's scene at the specified time (system time).
+func (x *Renderer) UpdateAtTime(time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateAtTime:"), time_)
+}
+
+// SnapshotAtTimeWithSizeAntialiasingMode creates an image by drawing the renderer’s content at the specified system time.
+func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode AntialiasingMode) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotAtTime:withSize:antialiasingMode:"), time_, size, antialiasingMode)
+	return obj.Wrap(_r)
+}
+
+// UpdateProbesAtTime update the specified probes by computing their incoming irradiance in the receiver's scene at the specified time. Light probes are only supported with Metal. This method is observable using NSProgress.
+func (x *Renderer) UpdateProbesAtTime(lightProbes []*Node, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateProbes:atTime:"), purego.SliceToNSArray(lightProbes, func(_v *Node) objc.ID { return objref.IDOf(_v) }), time_)
+}
+
+// Scene specifies the scene of the receiver
+func (x *Renderer) Scene() *Scene {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+	return SceneFromID(_r)
+}
+
+// SetScene wraps the corresponding Objective-C method.
+func (x *Renderer) SetScene(scene *Scene) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
+}
+
+// NextFrameTime returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
 func (x *Renderer) NextFrameTime() float64 {
-	return x.inner.NextFrameTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("nextFrameTime"))
+	return _r
 }
 
-// Renders the scene’s contents in the renderer’s OpenGL context.
-//
-// Render calls the underlying Render.
+// Render renders the scene’s contents in the renderer’s OpenGL context.
 func (x *Renderer) Render() {
-	x.inner.Render()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("render"))
 }
 
 // Rendererable is the interface implemented by [Renderer], for mocking and DI.
 type Rendererable interface {
-	Unwrap() *raw.SCNRenderer
+	obj.Object
 	WithScene(scene *Scene) *Renderer
-	RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
 	RenderAtTime(time_ float64)
 	UpdateAtTime(time_ float64)
-	RenderWithViewportCommandBufferPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
-	SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage
-	UpdateProbesAtTime(lightProbes *foundation.NSArray[*raw.SCNNode], time_ float64)
+	SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode AntialiasingMode) obj.Object
+	UpdateProbesAtTime(lightProbes []*Node, time_ float64)
 	Scene() *Scene
-	SetScene(scene *raw.SCNScene)
+	SetScene(scene *Scene)
 	NextFrameTime() float64
 	Render()
 }

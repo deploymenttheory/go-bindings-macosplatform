@@ -5,300 +5,284 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A generator of texel data that creates cube textures using a physically realistic simulation of the sunlit sky.
+// SkyCubeTexture is an idiomatic wrapper over the Objective-C class MDLSkyCubeTexture.
 //
-// SkyCubeTexture wraps [raw.MDLSkyCubeTexture] with a fluent Go API.
+// It embeds [Texture], promoting that type's methods.
+//
+// A generator of texel data that creates cube textures using a physically realistic simulation of the sunlit sky.
 type SkyCubeTexture struct {
-	inner *raw.MDLSkyCubeTexture
+	Texture
 }
 
-// Unwrap returns the underlying [raw.MDLSkyCubeTexture].
-func (x *SkyCubeTexture) Unwrap() *raw.MDLSkyCubeTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SkyCubeTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// SkyCubeTextureFromID adopts an existing object pointer as a SkyCubeTexture (nil for 0).
+// SkyCubeTextureFromID adopts an existing Objective-C object as a SkyCubeTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func SkyCubeTextureFromID(id objc.ID) *SkyCubeTexture {
 	if id == 0 {
 		return nil
 	}
-	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(id)}
+	x := &SkyCubeTexture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a sky cube texture object with the specified parameters.
-//
-// NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo creates a new [SkyCubeTexture].
-func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLTextureChannelEncoding(channelEncoding), textureDimensions, turbidity, sunElevation, upperAtmosphereScattering, groundAlbedo)
-	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(_id)}
+// skyCubeTextureAdopt wraps an Objective-C object that this code just created as a
+// SkyCubeTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func skyCubeTextureAdopt(id objc.ID) *SkyCubeTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &SkyCubeTexture{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo creates a new [SkyCubeTexture].
-func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, sunAzimuth float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:sunAzimuth:upperAtmosphereScattering:groundAlbedo:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLTextureChannelEncoding(channelEncoding), textureDimensions, turbidity, sunElevation, sunAzimuth, upperAtmosphereScattering, groundAlbedo)
-	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(_id)}
+// NewSkyCubeTexture creates a new SkyCubeTexture.
+func NewSkyCubeTexture() *SkyCubeTexture {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLSkyCubeTexture")), objc.RegisterName("new"))
+	return skyCubeTextureAdopt(_id)
 }
 
-// The cloudiness or haziness of the simulated sky.
-//
-// WithTurbidity sets the turbidity property and returns the receiver for chaining.
+// WithTurbidity the cloudiness or haziness of the simulated sky.
 func (x *SkyCubeTexture) WithTurbidity(turbidity float32) *SkyCubeTexture {
-	x.inner.SetTurbidity(turbidity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTurbidity:"), turbidity)
 	return x
 }
 
-// The sun’s position in the simulated sky.
-//
-// WithSunElevation sets the sunElevation property and returns the receiver for chaining.
+// WithSunElevation the sun’s position in the simulated sky.
 func (x *SkyCubeTexture) WithSunElevation(sunElevation float32) *SkyCubeTexture {
-	x.inner.SetSunElevation(sunElevation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSunElevation:"), sunElevation)
 	return x
 }
 
-// WithSunAzimuth sets the sunAzimuth property and returns the receiver for chaining.
+// WithSunAzimuth sets the property and returns the receiver so calls can be chained.
 func (x *SkyCubeTexture) WithSunAzimuth(sunAzimuth float32) *SkyCubeTexture {
-	x.inner.SetSunAzimuth(sunAzimuth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSunAzimuth:"), sunAzimuth)
 	return x
 }
 
-// A factor that influences the color of the simulated sky.
-//
-// WithUpperAtmosphereScattering sets the upperAtmosphereScattering property and returns the receiver for chaining.
+// WithUpperAtmosphereScattering a factor that influences the color of the simulated sky.
 func (x *SkyCubeTexture) WithUpperAtmosphereScattering(upperAtmosphereScattering float32) *SkyCubeTexture {
-	x.inner.SetUpperAtmosphereScattering(upperAtmosphereScattering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAtmosphereScattering:"), upperAtmosphereScattering)
 	return x
 }
 
-// A factor that influences the clarity of the simulated sky.
-//
-// WithGroundAlbedo sets the groundAlbedo property and returns the receiver for chaining.
+// WithGroundAlbedo a factor that influences the clarity of the simulated sky.
 func (x *SkyCubeTexture) WithGroundAlbedo(groundAlbedo float32) *SkyCubeTexture {
-	x.inner.SetGroundAlbedo(groundAlbedo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroundAlbedo:"), groundAlbedo)
 	return x
 }
 
-// The angle, in radians relative to center, below which to render the ground color.
-//
-// WithHorizonElevation sets the horizonElevation property and returns the receiver for chaining.
+// WithHorizonElevation the angle, in radians relative to center, below which to render the ground color.
 func (x *SkyCubeTexture) WithHorizonElevation(horizonElevation float32) *SkyCubeTexture {
-	x.inner.SetHorizonElevation(horizonElevation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizonElevation:"), horizonElevation)
 	return x
 }
 
-// The amount of gamma correction to apply during tone mapping.
-//
-// WithGamma sets the gamma property and returns the receiver for chaining.
+// WithGroundColor the color of the simulated ground.
+func (x *SkyCubeTexture) WithGroundColor(groundColor obj.Object) *SkyCubeTexture {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroundColor:"), objref.IDOf(groundColor))
+	return x
+}
+
+// WithGamma the amount of gamma correction to apply during tone mapping.
 func (x *SkyCubeTexture) WithGamma(gamma float32) *SkyCubeTexture {
-	x.inner.SetGamma(gamma)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGamma:"), gamma)
 	return x
 }
 
-// The amount of exposure compensation to apply during tone mapping.
-//
-// WithExposure sets the exposure property and returns the receiver for chaining.
+// WithExposure the amount of exposure compensation to apply during tone mapping.
 func (x *SkyCubeTexture) WithExposure(exposure float32) *SkyCubeTexture {
-	x.inner.SetExposure(exposure)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposure:"), exposure)
 	return x
 }
 
-// The amount of brightness enhancement to apply during tone mapping.
-//
-// WithBrightness sets the brightness property and returns the receiver for chaining.
+// WithBrightness the amount of brightness enhancement to apply during tone mapping.
 func (x *SkyCubeTexture) WithBrightness(brightness float32) *SkyCubeTexture {
-	x.inner.SetBrightness(brightness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrightness:"), brightness)
 	return x
 }
 
-// The amount of contrast enhancement to apply during tone mapping.
-//
-// WithContrast sets the contrast property and returns the receiver for chaining.
+// WithContrast the amount of contrast enhancement to apply during tone mapping.
 func (x *SkyCubeTexture) WithContrast(contrast float32) *SkyCubeTexture {
-	x.inner.SetContrast(contrast)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrast:"), contrast)
 	return x
 }
 
-// The amount of saturation enhancement to apply during tone mapping.
-//
-// WithSaturation sets the saturation property and returns the receiver for chaining.
+// WithSaturation the amount of saturation enhancement to apply during tone mapping.
 func (x *SkyCubeTexture) WithSaturation(saturation float32) *SkyCubeTexture {
-	x.inner.SetSaturation(saturation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), saturation)
 	return x
 }
 
-// A Boolean value that indicates whether the texture is a cube textures.
-//
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
 func (x *SkyCubeTexture) WithIsCube(isCube bool) *SkyCubeTexture {
-	x.inner.MDLTexture.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *SkyCubeTexture) WithHasAlphaValues(hasAlphaValues bool) *SkyCubeTexture {
-	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
 
-// Generates new texel data matching the current sky parameters.
-//
-// UpdateTexture calls the underlying UpdateTexture.
+// UpdateTexture generates new texel data matching the current sky parameters.
 func (x *SkyCubeTexture) UpdateTexture() {
-	x.inner.UpdateTexture()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateTexture"))
 }
 
-// Turbidity calls the underlying Turbidity.
+// Turbidity wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) Turbidity() float32 {
-	return x.inner.Turbidity()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("turbidity"))
+	return _r
 }
 
-// SetTurbidity calls the underlying SetTurbidity.
+// SetTurbidity wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetTurbidity(turbidity float32) {
-	x.inner.SetTurbidity(turbidity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTurbidity:"), turbidity)
 }
 
-// SunElevation calls the underlying SunElevation.
+// SunElevation wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SunElevation() float32 {
-	return x.inner.SunElevation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sunElevation"))
+	return _r
 }
 
-// SetSunElevation calls the underlying SetSunElevation.
+// SetSunElevation wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetSunElevation(sunElevation float32) {
-	x.inner.SetSunElevation(sunElevation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSunElevation:"), sunElevation)
 }
 
-// SunAzimuth calls the underlying SunAzimuth.
+// SunAzimuth wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SunAzimuth() float32 {
-	return x.inner.SunAzimuth()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sunAzimuth"))
+	return _r
 }
 
-// SetSunAzimuth calls the underlying SetSunAzimuth.
+// SetSunAzimuth wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetSunAzimuth(sunAzimuth float32) {
-	x.inner.SetSunAzimuth(sunAzimuth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSunAzimuth:"), sunAzimuth)
 }
 
-// UpperAtmosphereScattering calls the underlying UpperAtmosphereScattering.
+// UpperAtmosphereScattering wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) UpperAtmosphereScattering() float32 {
-	return x.inner.UpperAtmosphereScattering()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("upperAtmosphereScattering"))
+	return _r
 }
 
-// SetUpperAtmosphereScattering calls the underlying SetUpperAtmosphereScattering.
+// SetUpperAtmosphereScattering wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetUpperAtmosphereScattering(upperAtmosphereScattering float32) {
-	x.inner.SetUpperAtmosphereScattering(upperAtmosphereScattering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAtmosphereScattering:"), upperAtmosphereScattering)
 }
 
-// GroundAlbedo calls the underlying GroundAlbedo.
+// GroundAlbedo wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) GroundAlbedo() float32 {
-	return x.inner.GroundAlbedo()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("groundAlbedo"))
+	return _r
 }
 
-// SetGroundAlbedo calls the underlying SetGroundAlbedo.
+// SetGroundAlbedo wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetGroundAlbedo(groundAlbedo float32) {
-	x.inner.SetGroundAlbedo(groundAlbedo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroundAlbedo:"), groundAlbedo)
 }
 
-// HorizonElevation calls the underlying HorizonElevation.
+// HorizonElevation wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) HorizonElevation() float32 {
-	return x.inner.HorizonElevation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("horizonElevation"))
+	return _r
 }
 
-// SetHorizonElevation calls the underlying SetHorizonElevation.
+// SetHorizonElevation wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetHorizonElevation(horizonElevation float32) {
-	x.inner.SetHorizonElevation(horizonElevation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizonElevation:"), horizonElevation)
 }
 
-// GroundColor calls the underlying GroundColor.
-func (x *SkyCubeTexture) GroundColor() unsafe.Pointer {
-	return x.inner.GroundColor()
+// GroundColor wraps the corresponding Objective-C method.
+func (x *SkyCubeTexture) GroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groundColor"))
+	return obj.Wrap(_r)
 }
 
-// SetGroundColor calls the underlying SetGroundColor.
-func (x *SkyCubeTexture) SetGroundColor(groundColor unsafe.Pointer) {
-	x.inner.SetGroundColor(groundColor)
+// SetGroundColor wraps the corresponding Objective-C method.
+func (x *SkyCubeTexture) SetGroundColor(groundColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroundColor:"), objref.IDOf(groundColor))
 }
 
-// Gamma calls the underlying Gamma.
+// Gamma wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) Gamma() float32 {
-	return x.inner.Gamma()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gamma"))
+	return _r
 }
 
-// SetGamma calls the underlying SetGamma.
+// SetGamma wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetGamma(gamma float32) {
-	x.inner.SetGamma(gamma)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGamma:"), gamma)
 }
 
-// Exposure calls the underlying Exposure.
+// Exposure wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) Exposure() float32 {
-	return x.inner.Exposure()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("exposure"))
+	return _r
 }
 
-// SetExposure calls the underlying SetExposure.
+// SetExposure wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetExposure(exposure float32) {
-	x.inner.SetExposure(exposure)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExposure:"), exposure)
 }
 
-// Brightness calls the underlying Brightness.
+// Brightness wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) Brightness() float32 {
-	return x.inner.Brightness()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("brightness"))
+	return _r
 }
 
-// SetBrightness calls the underlying SetBrightness.
+// SetBrightness wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetBrightness(brightness float32) {
-	x.inner.SetBrightness(brightness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrightness:"), brightness)
 }
 
-// Contrast calls the underlying Contrast.
+// Contrast wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) Contrast() float32 {
-	return x.inner.Contrast()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contrast"))
+	return _r
 }
 
-// SetContrast calls the underlying SetContrast.
+// SetContrast wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetContrast(contrast float32) {
-	x.inner.SetContrast(contrast)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrast:"), contrast)
 }
 
-// Saturation calls the underlying Saturation.
+// Saturation wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) Saturation() float32 {
-	return x.inner.Saturation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("saturation"))
+	return _r
 }
 
-// SetSaturation calls the underlying SetSaturation.
+// SetSaturation wraps the corresponding Objective-C method.
 func (x *SkyCubeTexture) SetSaturation(saturation float32) {
-	x.inner.SetSaturation(saturation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), saturation)
 }
-
-// HighDynamicRangeCompression calls the underlying HighDynamicRangeCompression.
-func (x *SkyCubeTexture) HighDynamicRangeCompression() unsafe.Pointer {
-	return x.inner.HighDynamicRangeCompression()
-}
-
-// SetHighDynamicRangeCompression calls the underlying SetHighDynamicRangeCompression.
-func (x *SkyCubeTexture) SetHighDynamicRangeCompression(highDynamicRangeCompression unsafe.Pointer) {
-	x.inner.SetHighDynamicRangeCompression(highDynamicRangeCompression)
-}
-
-func (x *SkyCubeTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // SkyCubeTextureable is the interface implemented by [SkyCubeTexture], for mocking and DI.
 type SkyCubeTextureable interface {
-	Unwrap() *raw.MDLSkyCubeTexture
+	obj.Object
 	WithTurbidity(turbidity float32) *SkyCubeTexture
 	WithSunElevation(sunElevation float32) *SkyCubeTexture
 	WithSunAzimuth(sunAzimuth float32) *SkyCubeTexture
 	WithUpperAtmosphereScattering(upperAtmosphereScattering float32) *SkyCubeTexture
 	WithGroundAlbedo(groundAlbedo float32) *SkyCubeTexture
 	WithHorizonElevation(horizonElevation float32) *SkyCubeTexture
+	WithGroundColor(groundColor obj.Object) *SkyCubeTexture
 	WithGamma(gamma float32) *SkyCubeTexture
 	WithExposure(exposure float32) *SkyCubeTexture
 	WithBrightness(brightness float32) *SkyCubeTexture
@@ -319,8 +303,8 @@ type SkyCubeTextureable interface {
 	SetGroundAlbedo(groundAlbedo float32)
 	HorizonElevation() float32
 	SetHorizonElevation(horizonElevation float32)
-	GroundColor() unsafe.Pointer
-	SetGroundColor(groundColor unsafe.Pointer)
+	GroundColor() obj.Object
+	SetGroundColor(groundColor obj.Object)
 	Gamma() float32
 	SetGamma(gamma float32)
 	Exposure() float32
@@ -331,8 +315,8 @@ type SkyCubeTextureable interface {
 	SetContrast(contrast float32)
 	Saturation() float32
 	SetSaturation(saturation float32)
-	HighDynamicRangeCompression() unsafe.Pointer
-	SetHighDynamicRangeCompression(highDynamicRangeCompression unsafe.Pointer)
 }
 
 var _ SkyCubeTextureable = (*SkyCubeTexture)(nil)
+
+var _ TextureProvider = (*SkyCubeTexture)(nil)

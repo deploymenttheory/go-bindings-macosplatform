@@ -5,265 +5,214 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A right rectangular pyramid geometry.
+// Pyramid is an idiomatic wrapper over the Objective-C class SCNPyramid.
 //
-// Pyramid wraps [raw.SCNPyramid] with a fluent Go API.
+// It embeds [Geometry], promoting that type's methods.
+//
+// A right rectangular pyramid geometry.
 type Pyramid struct {
-	inner *raw.SCNPyramid
+	Geometry
 }
 
-// Unwrap returns the underlying [raw.SCNPyramid].
-func (x *Pyramid) Unwrap() *raw.SCNPyramid { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Pyramid) ID() objc.ID { return x.inner.Ptr() }
-
-// PyramidFromID adopts an existing object pointer as a Pyramid (nil for 0).
+// PyramidFromID adopts an existing Objective-C object as a Pyramid
+// (nil for 0), retaining it and registering a release finalizer.
 func PyramidFromID(id objc.ID) *Pyramid {
 	if id == 0 {
 		return nil
 	}
-	return &Pyramid{inner: raw.SCNPyramidFromID(id)}
+	x := &Pyramid{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPyramid creates a new [Pyramid].
+// pyramidAdopt wraps an Objective-C object that this code just created as a
+// Pyramid (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pyramidAdopt(id objc.ID) *Pyramid {
+	if id == 0 {
+		return nil
+	}
+	x := &Pyramid{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPyramid creates a new Pyramid.
 func NewPyramid() *Pyramid {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPyramid")), objc.RegisterName("new"))
-	return &Pyramid{inner: raw.SCNPyramidFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPyramid")), objc.RegisterName("new"))
+	return pyramidAdopt(_id)
 }
 
-// The extent of the pyramid along its x-axis. Animatable.
-//
-// WithWidth sets the width property and returns the receiver for chaining.
+// WithWidth the extent of the pyramid along its x-axis. Animatable.
 func (x *Pyramid) WithWidth(width float64) *Pyramid {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// The extent of the pyramid along its y-axis. Animatable.
-//
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight the extent of the pyramid along its y-axis. Animatable.
 func (x *Pyramid) WithHeight(height float64) *Pyramid {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// The extent of the pyramid along its z-axis. Animatable.
-//
-// WithLength sets the length property and returns the receiver for chaining.
+// WithLength the extent of the pyramid along its z-axis. Animatable.
 func (x *Pyramid) WithLength(length float64) *Pyramid {
-	x.inner.SetLength(length)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// The number of subdivisions in each face of the pyramid along its x-axis. Animatable.
-//
-// WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
+// WithWidthSegmentCount the number of subdivisions in each face of the pyramid along its x-axis. Animatable.
 func (x *Pyramid) WithWidthSegmentCount(widthSegmentCount int) *Pyramid {
-	x.inner.SetWidthSegmentCount(widthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthSegmentCount:"), widthSegmentCount)
 	return x
 }
 
-// The number of subdivisions in each face of the pyramid along its y-axis. Animatable.
-//
-// WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
+// WithHeightSegmentCount the number of subdivisions in each face of the pyramid along its y-axis. Animatable.
 func (x *Pyramid) WithHeightSegmentCount(heightSegmentCount int) *Pyramid {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
-// The number of subdivisions in each face of the pyramid along its z-axis. Animatable.
-//
-// WithLengthSegmentCount sets the lengthSegmentCount property and returns the receiver for chaining.
+// WithLengthSegmentCount the number of subdivisions in each face of the pyramid along its z-axis. Animatable.
 func (x *Pyramid) WithLengthSegmentCount(lengthSegmentCount int) *Pyramid {
-	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthSegmentCount:"), lengthSegmentCount)
 	return x
 }
 
-// A name associated with the geometry object.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a name associated with the geometry object.
 func (x *Pyramid) WithName(name string) *Pyramid {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-//
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Pyramid) WithMaterials(items ...*raw.SCNMaterial) *Pyramid {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (x *Pyramid) WithMaterials(items ...*Material) *Pyramid {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
-// The first material attached to the geometry.
-//
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial the first material attached to the geometry.
 func (x *Pyramid) WithFirstMaterial(firstMaterial *Material) *Pyramid {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
-// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-//
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Pyramid) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (x *Pyramid) WithLevelsOfDetail(items ...*LevelOfDetail) *Pyramid {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets the property and returns the receiver so calls can be chained.
 func (x *Pyramid) WithTessellator(tessellator *GeometryTessellator) *Pyramid {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
-// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-//
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Pyramid) WithSubdivisionLevel(subdivisionLevel uint) *Pyramid {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (x *Pyramid) WithSubdivisionLevel(subdivisionLevel int) *Pyramid {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-//
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 func (x *Pyramid) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pyramid {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
-// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-//
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (x *Pyramid) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pyramid {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
-// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-//
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (x *Pyramid) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Pyramid {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property width @abstract The width of the pyramid base. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Width calls the underlying Width.
+// Width the width of the pyramid base. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Pyramid) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// SetWidth calls the underlying SetWidth.
+// SetWidth wraps the corresponding Objective-C method.
 func (x *Pyramid) SetWidth(width float64) {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// @property height @abstract The height of the pyramid. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Height calls the underlying Height.
+// Height the height of the pyramid. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Pyramid) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
+// SetHeight wraps the corresponding Objective-C method.
 func (x *Pyramid) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @property length @abstract The length of the pyramid base. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Length calls the underlying Length.
+// Length the length of the pyramid base. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Pyramid) Length() float64 {
-	return x.inner.Length()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// SetLength calls the underlying SetLength.
+// SetLength wraps the corresponding Objective-C method.
 func (x *Pyramid) SetLength(length float64) {
-	x.inner.SetLength(length)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
 
-// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// WidthSegmentCount calls the underlying WidthSegmentCount.
+// WidthSegmentCount the number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Pyramid) WidthSegmentCount() int {
-	return x.inner.WidthSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthSegmentCount"))
+	return _r
 }
 
-// SetWidthSegmentCount calls the underlying SetWidthSegmentCount.
+// SetWidthSegmentCount wraps the corresponding Objective-C method.
 func (x *Pyramid) SetWidthSegmentCount(widthSegmentCount int) {
-	x.inner.SetWidthSegmentCount(widthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthSegmentCount:"), widthSegmentCount)
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// HeightSegmentCount calls the underlying HeightSegmentCount.
+// HeightSegmentCount the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Pyramid) HeightSegmentCount() int {
-	return x.inner.HeightSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+	return _r
 }
 
-// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+// SetHeightSegmentCount wraps the corresponding Objective-C method.
 func (x *Pyramid) SetHeightSegmentCount(heightSegmentCount int) {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
 
-// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// LengthSegmentCount calls the underlying LengthSegmentCount.
+// LengthSegmentCount the number of subdivisions along the Z axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Pyramid) LengthSegmentCount() int {
-	return x.inner.LengthSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthSegmentCount"))
+	return _r
 }
 
-// SetLengthSegmentCount calls the underlying SetLengthSegmentCount.
+// SetLengthSegmentCount wraps the corresponding Objective-C method.
 func (x *Pyramid) SetLengthSegmentCount(lengthSegmentCount int) {
-	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLengthSegmentCount:"), lengthSegmentCount)
 }
-
-func (x *Pyramid) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Pyramidable is the interface implemented by [Pyramid], for mocking and DI.
 type Pyramidable interface {
-	Unwrap() *raw.SCNPyramid
+	obj.Object
 	WithWidth(width float64) *Pyramid
 	WithHeight(height float64) *Pyramid
 	WithLength(length float64) *Pyramid
@@ -271,11 +220,11 @@ type Pyramidable interface {
 	WithHeightSegmentCount(heightSegmentCount int) *Pyramid
 	WithLengthSegmentCount(lengthSegmentCount int) *Pyramid
 	WithName(name string) *Pyramid
-	WithMaterials(items ...*raw.SCNMaterial) *Pyramid
+	WithMaterials(items ...*Material) *Pyramid
 	WithFirstMaterial(firstMaterial *Material) *Pyramid
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Pyramid
 	WithTessellator(tessellator *GeometryTessellator) *Pyramid
-	WithSubdivisionLevel(subdivisionLevel uint) *Pyramid
+	WithSubdivisionLevel(subdivisionLevel int) *Pyramid
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pyramid
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pyramid
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Pyramid
@@ -294,3 +243,5 @@ type Pyramidable interface {
 }
 
 var _ Pyramidable = (*Pyramid)(nil)
+
+var _ GeometryProvider = (*Pyramid)(nil)

@@ -5,159 +5,140 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a stream of media data.
+// ExtensionStream is an idiomatic wrapper over the Objective-C class CMIOExtensionStream.
 //
-// ExtensionStream wraps [raw.CMIOExtensionStream] with a fluent Go API.
+// An object that represents a stream of media data.
 type ExtensionStream struct {
-	inner *raw.CMIOExtensionStream
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionStream].
-func (x *ExtensionStream) Unwrap() *raw.CMIOExtensionStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionStream) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionStreamFromID adopts an existing object pointer as a ExtensionStream (nil for 0).
+// ExtensionStreamFromID adopts an existing Objective-C object as a ExtensionStream
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionStreamFromID(id objc.ID) *ExtensionStream {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(id)}
+	x := &ExtensionStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a stream.
-//
-// NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource creates a new [ExtensionStream].
-func NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:streamID:direction:clockType:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), streamID.Ptr(), raw.CMIOExtensionStreamDirection(direction), raw.CMIOExtensionStreamClockType(clockType), source)
-	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
-}
-
-// Creates a stream that uses a custom clock configuration.
-//
-// NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource creates a new [ExtensionStream].
-func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:streamID:direction:customClockConfiguration:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), streamID.Ptr(), raw.CMIOExtensionStreamDirection(direction), customClockConfiguration.Ptr(), source)
-	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
-}
-
-// Notifies clients about stream property changes.
-//
-// NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
-func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.NotifyPropertiesChanged(propertyStates)
-}
-
-// Sends a media sample to stream client.
-//
-// SendSampleBufferDiscontinuityHostTimeInNanoseconds calls the underlying SendSampleBufferDiscontinuityHostTimeInNanoseconds.
-func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
-	x.inner.SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer, raw.CMIOExtensionStreamDiscontinuityFlags(discontinuity), hostTimeInNanoseconds)
-}
-
-// Consumes a sample buffer from a client.
-//
-// ConsumeSampleBufferFromClientCompletionHandler calls the underlying ConsumeSampleBufferFromClientCompletionHandler.
-func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
-	x.inner.ConsumeSampleBufferFromClientCompletionHandler(client, func(_a0 unsafe.Pointer, _a1 uint64, _a2 raw.CMIOExtensionStreamDiscontinuityFlags, _a3 bool, _a4 unsafe.Pointer) {
-		completionHandler(_a0, _a1, CMIOExtensionStreamDiscontinuityFlags(_a2), _a3, _a4)
-	})
-}
-
-// Notifies clients when a particular buffer is output.
-//
-// NotifyScheduledOutputChanged calls the underlying NotifyScheduledOutputChanged.
-func (x *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput) {
-	x.inner.NotifyScheduledOutputChanged(scheduledOutput)
-}
-
-// @property localizedName @abstract The localized name of the stream.
-//
-// LocalizedName calls the underlying LocalizedName.
-func (x *ExtensionStream) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @property streamID @abstract The stream identifier.
-//
-// StreamID calls the underlying StreamID.
-func (x *ExtensionStream) StreamID() *foundation.NSUUID {
-	return x.inner.StreamID()
-}
-
-// @property direction @abstract The stream direction.
-//
-// Direction calls the underlying Direction.
-func (x *ExtensionStream) Direction() CMIOExtensionStreamDirection {
-	return CMIOExtensionStreamDirection(x.inner.Direction())
-}
-
-// @property clockType @abstract The stream clock type. @discussion If the stream was specified with a custom clock configuration, the returned value will be CMIOExtensionStreamClockTypeCustom.
-//
-// ClockType calls the underlying ClockType.
-func (x *ExtensionStream) ClockType() CMIOExtensionStreamClockType {
-	return CMIOExtensionStreamClockType(x.inner.ClockType())
-}
-
-// @property customClockConfiguration @abstract Custom clock configuration. @discussion If the stream was specified using a clockType, the returned value will be nil.
-//
-// CustomClockConfiguration calls the underlying CustomClockConfiguration.
-func (x *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
-	_r := x.inner.CustomClockConfiguration()
-	if _r == nil {
+// extensionStreamAdopt wraps an Objective-C object that this code just created as a
+// ExtensionStream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionStreamAdopt(id objc.ID) *ExtensionStream {
+	if id == 0 {
 		return nil
 	}
-	return &ExtensionStreamCustomClockConfiguration{inner: _r}
+	x := &ExtensionStream{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property source @abstract The stream source.
-//
-// Source calls the underlying Source.
-func (x *ExtensionStream) Source() raw.CMIOExtensionStreamSource {
-	return x.inner.Source()
+// Description returns the object's -description text.
+func (x *ExtensionStream) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property streamingClients @abstract The array of streaming clients. @discussion This property is key-value observable.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionStream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionStream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionStream) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionStream creates a new ExtensionStream.
+func NewExtensionStream() *ExtensionStream {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStream")), objc.RegisterName("new"))
+	return extensionStreamAdopt(_id)
+}
+
+// NotifyPropertiesChanged notifies clients about stream property changes.
+func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
+}
+
+// SendSampleBufferDiscontinuityHostTimeInNanoseconds sends a media sample to stream client.
+func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer obj.Object, discontinuity ExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:"), objref.IDOf(sampleBuffer), discontinuity, hostTimeInNanoseconds)
+}
+
+// NotifyScheduledOutputChanged notifies clients when a particular buffer is output.
+func (x *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *ExtensionScheduledOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyScheduledOutputChanged:"), objref.IDOf(scheduledOutput))
+}
+
+// LocalizedName the localized name of the stream.
+func (x *ExtensionStream) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// StreamID the stream identifier.
+func (x *ExtensionStream) StreamID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamID"))
+	return obj.Wrap(_r)
+}
+
+// Direction the stream direction.
+func (x *ExtensionStream) Direction() ExtensionStreamDirection {
+	_r := objc.Send[ExtensionStreamDirection](objref.IDOf(x), objc.RegisterName("direction"))
+	return _r
+}
+
+// ClockType the stream clock type. If the stream was specified with a custom clock configuration, the returned value will be CMIOExtensionStreamClockTypeCustom.
+func (x *ExtensionStream) ClockType() ExtensionStreamClockType {
+	_r := objc.Send[ExtensionStreamClockType](objref.IDOf(x), objc.RegisterName("clockType"))
+	return _r
+}
+
+// CustomClockConfiguration custom clock configuration. If the stream was specified using a clockType, the returned value will be nil.
+func (x *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customClockConfiguration"))
+	return ExtensionStreamCustomClockConfigurationFromID(_r)
+}
+
+// StreamingClients the array of streaming clients. This property is key-value observable.
 //
 // StreamingClients returns the collection as a Go slice.
 func (x *ExtensionStream) StreamingClients() []*ExtensionClient {
-	arr := x.inner.StreamingClients()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionClient {
-		return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamingClients"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }
 
 // ExtensionStreamable is the interface implemented by [ExtensionStream], for mocking and DI.
 type ExtensionStreamable interface {
-	Unwrap() *raw.CMIOExtensionStream
-	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64)
-	ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer))
-	NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput)
+	obj.Object
+	NotifyPropertiesChanged(propertyStates obj.Object)
+	SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer obj.Object, discontinuity ExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64)
+	NotifyScheduledOutputChanged(scheduledOutput *ExtensionScheduledOutput)
 	LocalizedName() string
-	StreamID() *foundation.NSUUID
-	Direction() CMIOExtensionStreamDirection
-	ClockType() CMIOExtensionStreamClockType
+	StreamID() obj.Object
+	Direction() ExtensionStreamDirection
+	ClockType() ExtensionStreamClockType
 	CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration
-	Source() raw.CMIOExtensionStreamSource
 	StreamingClients() []*ExtensionClient
 }
 

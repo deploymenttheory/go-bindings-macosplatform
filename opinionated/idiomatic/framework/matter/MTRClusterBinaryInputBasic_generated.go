@@ -5,214 +5,236 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterBinaryInputBasic wraps [raw.MTRClusterBinaryInputBasic] with a fluent Go API.
+// MTRClusterBinaryInputBasic is an idiomatic wrapper over the Objective-C class MTRClusterBinaryInputBasic.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterBinaryInputBasic struct {
-	inner *raw.MTRClusterBinaryInputBasic
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBinaryInputBasic].
-func (x *MTRClusterBinaryInputBasic) Unwrap() *raw.MTRClusterBinaryInputBasic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBinaryInputBasic) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBinaryInputBasicFromID adopts an existing object pointer as a MTRClusterBinaryInputBasic (nil for 0).
+// MTRClusterBinaryInputBasicFromID adopts an existing Objective-C object as a MTRClusterBinaryInputBasic
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBinaryInputBasicFromID(id objc.ID) *MTRClusterBinaryInputBasic {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBinaryInputBasic{inner: raw.MTRClusterBinaryInputBasicFromID(id)}
+	x := &MTRClusterBinaryInputBasic{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
-//
-// NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue creates a new [MTRClusterBinaryInputBasic].
-func NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBinaryInputBasic {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterBinaryInputBasic{inner: raw.MTRClusterBinaryInputBasicFromID(_id)}
+// mTRClusterBinaryInputBasicAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBinaryInputBasic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBinaryInputBasicAdopt(id objc.ID) *MTRClusterBinaryInputBasic {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBinaryInputBasic{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterBinaryInputBasicWithDeviceEndpointQueue creates a new [MTRClusterBinaryInputBasic].
-func NewMTRClusterBinaryInputBasicWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBinaryInputBasic {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterBinaryInputBasic{inner: raw.MTRClusterBinaryInputBasicFromID(_id)}
+// NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+func NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBinaryInputBasic {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterBinaryInputBasicAdopt(_id)
 }
 
-// ReadAttributeActiveTextWithParams calls the underlying ReadAttributeActiveTextWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeActiveTextWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveTextWithParams(params)
+// NewMTRClusterBinaryInputBasicWithDeviceEndpointQueue creates a new MTRClusterBinaryInputBasic.
+func NewMTRClusterBinaryInputBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBinaryInputBasic {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterBinaryInputBasicAdopt(_id)
 }
 
-// WriteAttributeActiveTextWithValueExpectedValueInterval calls the underlying WriteAttributeActiveTextWithValueExpectedValueInterval.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeActiveTextWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeActiveTextWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTextWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeActiveTextWithValueExpectedValueIntervalParams calls the underlying WriteAttributeActiveTextWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeActiveTextWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeDescriptionWithParams calls the underlying ReadAttributeDescriptionWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDescriptionWithParams(params)
+// WriteAttributeActiveTextWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeDescriptionWithValueExpectedValueInterval calls the underlying WriteAttributeDescriptionWithValueExpectedValueInterval.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeDescriptionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDescriptionWithValueExpectedValueIntervalParams calls the underlying WriteAttributeDescriptionWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeDescriptionWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeInactiveTextWithParams calls the underlying ReadAttributeInactiveTextWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeInactiveTextWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInactiveTextWithParams(params)
+// WriteAttributeDescriptionWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeInactiveTextWithValueExpectedValueInterval calls the underlying WriteAttributeInactiveTextWithValueExpectedValueInterval.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeInactiveTextWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeInactiveTextWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInactiveTextWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeInactiveTextWithValueExpectedValueIntervalParams calls the underlying WriteAttributeInactiveTextWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeInactiveTextWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOutOfServiceWithParams calls the underlying ReadAttributeOutOfServiceWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeOutOfServiceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOutOfServiceWithParams(params)
+// WriteAttributeInactiveTextWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeOutOfServiceWithValueExpectedValueInterval calls the underlying WriteAttributeOutOfServiceWithValueExpectedValueInterval.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeOutOfServiceWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeOutOfServiceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOutOfServiceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeOutOfServiceWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributePolarityWithParams calls the underlying ReadAttributePolarityWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributePolarityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePolarityWithParams(params)
+// WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributePresentValueWithParams calls the underlying ReadAttributePresentValueWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributePresentValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePresentValueWithParams(params)
+// ReadAttributePolarityWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributePolarityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePolarityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributePresentValueWithValueExpectedValueInterval calls the underlying WriteAttributePresentValueWithValueExpectedValueInterval.
-func (x *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributePresentValueWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributePresentValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePresentValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributePresentValueWithValueExpectedValueIntervalParams calls the underlying WriteAttributePresentValueWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributePresentValueWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeReliabilityWithParams calls the underlying ReadAttributeReliabilityWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeReliabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeReliabilityWithParams(params)
+// WriteAttributePresentValueWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeReliabilityWithValueExpectedValueInterval calls the underlying WriteAttributeReliabilityWithValueExpectedValueInterval.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// ReadAttributeReliabilityWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeReliabilityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReliabilityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeReliabilityWithValueExpectedValueIntervalParams calls the underlying WriteAttributeReliabilityWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeReliabilityWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeStatusFlagsWithParams calls the underlying ReadAttributeStatusFlagsWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeStatusFlagsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStatusFlagsWithParams(params)
+// WriteAttributeReliabilityWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeApplicationTypeWithParams calls the underlying ReadAttributeApplicationTypeWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeApplicationTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeApplicationTypeWithParams(params)
+// ReadAttributeStatusFlagsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeStatusFlagsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStatusFlagsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeApplicationTypeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeApplicationTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApplicationTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterBinaryInputBasic) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterBinaryInputBasic) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterBinaryInputBasic) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterBinaryInputBasic) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterBinaryInputBasicable is the interface implemented by [MTRClusterBinaryInputBasic], for mocking and DI.
 type MTRClusterBinaryInputBasicable interface {
-	Unwrap() *raw.MTRClusterBinaryInputBasic
-	ReadAttributeActiveTextWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeDescriptionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeInactiveTextWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOutOfServiceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributePolarityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePresentValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeReliabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeStatusFlagsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeApplicationTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeActiveTextWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeInactiveTextWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOutOfServiceWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributePolarityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePresentValueWithParams(params *MTRReadParams) obj.Object
+	WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeReliabilityWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeStatusFlagsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeApplicationTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterBinaryInputBasicable = (*MTRClusterBinaryInputBasic)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterBinaryInputBasic)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterBinaryInputBasic)(nil)

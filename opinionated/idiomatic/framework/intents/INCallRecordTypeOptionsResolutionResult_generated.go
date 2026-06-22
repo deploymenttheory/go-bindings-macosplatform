@@ -5,47 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A resolution result for the call types to include in a search.
+// CallRecordTypeOptionsResolutionResult is an idiomatic wrapper over the Objective-C class INCallRecordTypeOptionsResolutionResult.
 //
-// CallRecordTypeOptionsResolutionResult wraps [raw.INCallRecordTypeOptionsResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// A resolution result for the call types to include in a search.
 type CallRecordTypeOptionsResolutionResult struct {
-	inner *raw.INCallRecordTypeOptionsResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INCallRecordTypeOptionsResolutionResult].
-func (x *CallRecordTypeOptionsResolutionResult) Unwrap() *raw.INCallRecordTypeOptionsResolutionResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CallRecordTypeOptionsResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// CallRecordTypeOptionsResolutionResultFromID adopts an existing object pointer as a CallRecordTypeOptionsResolutionResult (nil for 0).
+// CallRecordTypeOptionsResolutionResultFromID adopts an existing Objective-C object as a CallRecordTypeOptionsResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func CallRecordTypeOptionsResolutionResultFromID(id objc.ID) *CallRecordTypeOptionsResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &CallRecordTypeOptionsResolutionResult{inner: raw.INCallRecordTypeOptionsResolutionResultFromID(id)}
+	x := &CallRecordTypeOptionsResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCallRecordTypeOptionsResolutionResult creates a new [CallRecordTypeOptionsResolutionResult].
+// callRecordTypeOptionsResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// CallRecordTypeOptionsResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func callRecordTypeOptionsResolutionResultAdopt(id objc.ID) *CallRecordTypeOptionsResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &CallRecordTypeOptionsResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCallRecordTypeOptionsResolutionResult creates a new CallRecordTypeOptionsResolutionResult.
 func NewCallRecordTypeOptionsResolutionResult() *CallRecordTypeOptionsResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecordTypeOptionsResolutionResult")), objc.RegisterName("new"))
-	return &CallRecordTypeOptionsResolutionResult{inner: raw.INCallRecordTypeOptionsResolutionResultFromID(_id)}
-}
-
-func (x *CallRecordTypeOptionsResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeOptionsResolutionResult")), objc.RegisterName("new"))
+	return callRecordTypeOptionsResolutionResultAdopt(_id)
 }
 
 // CallRecordTypeOptionsResolutionResultable is the interface implemented by [CallRecordTypeOptionsResolutionResult], for mocking and DI.
 type CallRecordTypeOptionsResolutionResultable interface {
-	Unwrap() *raw.INCallRecordTypeOptionsResolutionResult
+	obj.Object
 }
 
 var _ CallRecordTypeOptionsResolutionResultable = (*CallRecordTypeOptionsResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*CallRecordTypeOptionsResolutionResult)(nil)

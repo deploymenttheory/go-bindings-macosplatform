@@ -9,221 +9,202 @@ import (
 )
 
 // The states that determine when language option changes take effect.
-type MPChangeLanguageOptionSetting int64
+type ChangeLanguageOptionSetting int64
 
 const (
 	// No language option change is to be made.
-	MPChangeLanguageOptionSettingNone MPChangeLanguageOptionSetting = 0
+	ChangeLanguageOptionSettingNone ChangeLanguageOptionSetting = 0
 	// The language option change is applied to the now playing item only.
-	MPChangeLanguageOptionSettingNowPlayingItemOnly MPChangeLanguageOptionSetting = 1
+	ChangeLanguageOptionSettingNowPlayingItemOnly ChangeLanguageOptionSetting = 1
 	// The language option change is applied to all future playback items.
-	MPChangeLanguageOptionSettingPermanent MPChangeLanguageOptionSetting = 2
+	ChangeLanguageOptionSettingPermanent ChangeLanguageOptionSetting = 2
 )
 
-func (e MPChangeLanguageOptionSetting) String() string {
+// String returns the ChangeLanguageOptionSetting constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ChangeLanguageOptionSetting) String() string {
 	switch e {
-	case MPChangeLanguageOptionSettingNone:
-		return "MPChangeLanguageOptionSettingNone"
-	case MPChangeLanguageOptionSettingNowPlayingItemOnly:
-		return "MPChangeLanguageOptionSettingNowPlayingItemOnly"
-	case MPChangeLanguageOptionSettingPermanent:
-		return "MPChangeLanguageOptionSettingPermanent"
+	case ChangeLanguageOptionSettingNone:
+		return "ChangeLanguageOptionSettingNone"
+	case ChangeLanguageOptionSettingNowPlayingItemOnly:
+		return "ChangeLanguageOptionSettingNowPlayingItemOnly"
+	case ChangeLanguageOptionSettingPermanent:
+		return "ChangeLanguageOptionSettingPermanent"
 	default:
-		return fmt.Sprintf("MPChangeLanguageOptionSetting(%d)", int64(e))
+		return fmt.Sprintf("ChangeLanguageOptionSetting(%d)", int64(e))
 	}
 }
 
 // An enumeration that represents error codes for framework operations.
-type MPErrorCode int64
+type ErrorCode int64
 
 const (
-	MPErrorUnknown                       MPErrorCode = 0
-	MPErrorPermissionDenied              MPErrorCode = 1
-	MPErrorCloudServiceCapabilityMissing MPErrorCode = 2
-	MPErrorNetworkConnectionFailed       MPErrorCode = 3
-	MPErrorNotFound                      MPErrorCode = 4
-	MPErrorNotSupported                  MPErrorCode = 5
-	MPErrorCancelled                     MPErrorCode = 6
-	MPErrorRequestTimedOut               MPErrorCode = 7
+	ErrorUnknown                       ErrorCode = 0
+	ErrorPermissionDenied              ErrorCode = 1
+	ErrorCloudServiceCapabilityMissing ErrorCode = 2
+	ErrorNetworkConnectionFailed       ErrorCode = 3
+	ErrorNotFound                      ErrorCode = 4
+	ErrorNotSupported                  ErrorCode = 5
+	ErrorCancelled                     ErrorCode = 6
+	ErrorRequestTimedOut               ErrorCode = 7
 )
 
-func (e MPErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case MPErrorUnknown:
-		return "MPErrorUnknown"
-	case MPErrorPermissionDenied:
-		return "MPErrorPermissionDenied"
-	case MPErrorCloudServiceCapabilityMissing:
-		return "MPErrorCloudServiceCapabilityMissing"
-	case MPErrorNetworkConnectionFailed:
-		return "MPErrorNetworkConnectionFailed"
-	case MPErrorNotFound:
-		return "MPErrorNotFound"
-	case MPErrorNotSupported:
-		return "MPErrorNotSupported"
-	case MPErrorCancelled:
-		return "MPErrorCancelled"
-	case MPErrorRequestTimedOut:
-		return "MPErrorRequestTimedOut"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorPermissionDenied:
+		return "ErrorPermissionDenied"
+	case ErrorCloudServiceCapabilityMissing:
+		return "ErrorCloudServiceCapabilityMissing"
+	case ErrorNetworkConnectionFailed:
+		return "ErrorNetworkConnectionFailed"
+	case ErrorNotFound:
+		return "ErrorNotFound"
+	case ErrorNotSupported:
+		return "ErrorNotSupported"
+	case ErrorCancelled:
+		return "ErrorCancelled"
+	case ErrorRequestTimedOut:
+		return "ErrorRequestTimedOut"
 	default:
-		return fmt.Sprintf("MPErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // The language option type to use for the Now Playing item.
-type MPNowPlayingInfoLanguageOptionType uint64
+type NowPlayingInfoLanguageOptionType uint64
 
 const (
 	// Indicates an audible language option is used.
-	MPNowPlayingInfoLanguageOptionTypeAudible MPNowPlayingInfoLanguageOptionType = 0
+	NowPlayingInfoLanguageOptionTypeAudible NowPlayingInfoLanguageOptionType = 0
 	// Indicates a written language option is used.
-	MPNowPlayingInfoLanguageOptionTypeLegible MPNowPlayingInfoLanguageOptionType = 1
+	NowPlayingInfoLanguageOptionTypeLegible NowPlayingInfoLanguageOptionType = 1
 )
 
-func (e MPNowPlayingInfoLanguageOptionType) String() string {
+// String returns the NowPlayingInfoLanguageOptionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NowPlayingInfoLanguageOptionType) String() string {
 	switch e {
-	case MPNowPlayingInfoLanguageOptionTypeAudible:
-		return "MPNowPlayingInfoLanguageOptionTypeAudible"
-	case MPNowPlayingInfoLanguageOptionTypeLegible:
-		return "MPNowPlayingInfoLanguageOptionTypeLegible"
+	case NowPlayingInfoLanguageOptionTypeAudible:
+		return "NowPlayingInfoLanguageOptionTypeAudible"
+	case NowPlayingInfoLanguageOptionTypeLegible:
+		return "NowPlayingInfoLanguageOptionTypeLegible"
 	default:
-		return fmt.Sprintf("MPNowPlayingInfoLanguageOptionType(%d)", int64(e))
+		return fmt.Sprintf("NowPlayingInfoLanguageOptionType(%d)", int64(e))
 	}
 }
 
 // The playback state of the app.
-type MPNowPlayingPlaybackState uint64
+type NowPlayingPlaybackState uint64
 
 const (
 	// The current state of the app is unknown.
-	MPNowPlayingPlaybackStateUnknown MPNowPlayingPlaybackState = 0
+	NowPlayingPlaybackStateUnknown NowPlayingPlaybackState = 0
 	// The app is currently playing a media item.
-	MPNowPlayingPlaybackStatePlaying MPNowPlayingPlaybackState = 1
+	NowPlayingPlaybackStatePlaying NowPlayingPlaybackState = 1
 	// The app is currently paused.
-	MPNowPlayingPlaybackStatePaused MPNowPlayingPlaybackState = 2
+	NowPlayingPlaybackStatePaused NowPlayingPlaybackState = 2
 	// The app has stopped playing.
-	MPNowPlayingPlaybackStateStopped MPNowPlayingPlaybackState = 3
+	NowPlayingPlaybackStateStopped NowPlayingPlaybackState = 3
 	// The app has been interrupted during playback.
-	MPNowPlayingPlaybackStateInterrupted MPNowPlayingPlaybackState = 4
+	NowPlayingPlaybackStateInterrupted NowPlayingPlaybackState = 4
 )
 
-func (e MPNowPlayingPlaybackState) String() string {
+// String returns the NowPlayingPlaybackState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NowPlayingPlaybackState) String() string {
 	switch e {
-	case MPNowPlayingPlaybackStateUnknown:
-		return "MPNowPlayingPlaybackStateUnknown"
-	case MPNowPlayingPlaybackStatePlaying:
-		return "MPNowPlayingPlaybackStatePlaying"
-	case MPNowPlayingPlaybackStatePaused:
-		return "MPNowPlayingPlaybackStatePaused"
-	case MPNowPlayingPlaybackStateStopped:
-		return "MPNowPlayingPlaybackStateStopped"
-	case MPNowPlayingPlaybackStateInterrupted:
-		return "MPNowPlayingPlaybackStateInterrupted"
+	case NowPlayingPlaybackStateUnknown:
+		return "NowPlayingPlaybackStateUnknown"
+	case NowPlayingPlaybackStatePlaying:
+		return "NowPlayingPlaybackStatePlaying"
+	case NowPlayingPlaybackStatePaused:
+		return "NowPlayingPlaybackStatePaused"
+	case NowPlayingPlaybackStateStopped:
+		return "NowPlayingPlaybackStateStopped"
+	case NowPlayingPlaybackStateInterrupted:
+		return "NowPlayingPlaybackStateInterrupted"
 	default:
-		return fmt.Sprintf("MPNowPlayingPlaybackState(%d)", int64(e))
-	}
-}
-
-// Constants indicating the status of a command.
-type MPRemoteCommandHandlerStatus int64
-
-const (
-	// The requested command executed successfully.
-	MPRemoteCommandHandlerStatusSuccess MPRemoteCommandHandlerStatus = 0
-	// The requested command couldn’t execute because its required content isn’t available.
-	MPRemoteCommandHandlerStatusNoSuchContent MPRemoteCommandHandlerStatus = 100
-	// The requested command couldn’t execute because no Now Playing item is available.
-	MPRemoteCommandHandlerStatusNoActionableNowPlayingItem MPRemoteCommandHandlerStatus = 110
-	// The requested command couldn’t execute because a required device isn’t available.
-	MPRemoteCommandHandlerStatusDeviceNotFound MPRemoteCommandHandlerStatus = 120
-	// The requested command failed to execute.
-	MPRemoteCommandHandlerStatusCommandFailed MPRemoteCommandHandlerStatus = 200
-)
-
-func (e MPRemoteCommandHandlerStatus) String() string {
-	switch e {
-	case MPRemoteCommandHandlerStatusSuccess:
-		return "MPRemoteCommandHandlerStatusSuccess"
-	case MPRemoteCommandHandlerStatusNoSuchContent:
-		return "MPRemoteCommandHandlerStatusNoSuchContent"
-	case MPRemoteCommandHandlerStatusNoActionableNowPlayingItem:
-		return "MPRemoteCommandHandlerStatusNoActionableNowPlayingItem"
-	case MPRemoteCommandHandlerStatusDeviceNotFound:
-		return "MPRemoteCommandHandlerStatusDeviceNotFound"
-	case MPRemoteCommandHandlerStatusCommandFailed:
-		return "MPRemoteCommandHandlerStatusCommandFailed"
-	default:
-		return fmt.Sprintf("MPRemoteCommandHandlerStatus(%d)", int64(e))
+		return fmt.Sprintf("NowPlayingPlaybackState(%d)", int64(e))
 	}
 }
 
 // Indicates which items to play repeatedly.
-type MPRepeatType int64
+type RepeatType int64
 
 const (
 	// Nothing is repeated during playback.
-	MPRepeatTypeOff MPRepeatType = 0
+	RepeatTypeOff RepeatType = 0
 	// A single item is repeated indefinitely.
-	MPRepeatTypeOne MPRepeatType = 1
+	RepeatTypeOne RepeatType = 1
 	// The current container or playlist is repeated indefinitely.
-	MPRepeatTypeAll MPRepeatType = 2
+	RepeatTypeAll RepeatType = 2
 )
 
-func (e MPRepeatType) String() string {
+// String returns the RepeatType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RepeatType) String() string {
 	switch e {
-	case MPRepeatTypeOff:
-		return "MPRepeatTypeOff"
-	case MPRepeatTypeOne:
-		return "MPRepeatTypeOne"
-	case MPRepeatTypeAll:
-		return "MPRepeatTypeAll"
+	case RepeatTypeOff:
+		return "RepeatTypeOff"
+	case RepeatTypeOne:
+		return "RepeatTypeOne"
+	case RepeatTypeAll:
+		return "RepeatTypeAll"
 	default:
-		return fmt.Sprintf("MPRepeatType(%d)", int64(e))
+		return fmt.Sprintf("RepeatType(%d)", int64(e))
 	}
 }
 
 // Defines the beginning and ending of seek events.
-type MPSeekCommandEventType uint64
+type SeekCommandEventType uint64
 
 const (
 	// Indicates the external media player began seeking.
-	MPSeekCommandEventTypeBeginSeeking MPSeekCommandEventType = 0
+	SeekCommandEventTypeBeginSeeking SeekCommandEventType = 0
 	// Indicates the external media player stopped seeking.
-	MPSeekCommandEventTypeEndSeeking MPSeekCommandEventType = 1
+	SeekCommandEventTypeEndSeeking SeekCommandEventType = 1
 )
 
-func (e MPSeekCommandEventType) String() string {
+// String returns the SeekCommandEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SeekCommandEventType) String() string {
 	switch e {
-	case MPSeekCommandEventTypeBeginSeeking:
-		return "MPSeekCommandEventTypeBeginSeeking"
-	case MPSeekCommandEventTypeEndSeeking:
-		return "MPSeekCommandEventTypeEndSeeking"
+	case SeekCommandEventTypeBeginSeeking:
+		return "SeekCommandEventTypeBeginSeeking"
+	case SeekCommandEventTypeEndSeeking:
+		return "SeekCommandEventTypeEndSeeking"
 	default:
-		return fmt.Sprintf("MPSeekCommandEventType(%d)", int64(e))
+		return fmt.Sprintf("SeekCommandEventType(%d)", int64(e))
 	}
 }
 
 // Indicates which item types to shuffle.
-type MPShuffleType int64
+type ShuffleType int64
 
 const (
 	// Nothing is shuffled during playback.
-	MPShuffleTypeOff MPShuffleType = 0
+	ShuffleTypeOff ShuffleType = 0
 	// Individual items are shuffled during playback.
-	MPShuffleTypeItems MPShuffleType = 1
+	ShuffleTypeItems ShuffleType = 1
 	// Collections of items are shuffled during playback.
-	MPShuffleTypeCollections MPShuffleType = 2
+	ShuffleTypeCollections ShuffleType = 2
 )
 
-func (e MPShuffleType) String() string {
+// String returns the ShuffleType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShuffleType) String() string {
 	switch e {
-	case MPShuffleTypeOff:
-		return "MPShuffleTypeOff"
-	case MPShuffleTypeItems:
-		return "MPShuffleTypeItems"
-	case MPShuffleTypeCollections:
-		return "MPShuffleTypeCollections"
+	case ShuffleTypeOff:
+		return "ShuffleTypeOff"
+	case ShuffleTypeItems:
+		return "ShuffleTypeItems"
+	case ShuffleTypeCollections:
+		return "ShuffleTypeCollections"
 	default:
-		return fmt.Sprintf("MPShuffleType(%d)", int64(e))
+		return fmt.Sprintf("ShuffleType(%d)", int64(e))
 	}
 }

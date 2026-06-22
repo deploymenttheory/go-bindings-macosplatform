@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDoorLockClusterDoorLockAlarmEvent wraps [raw.MTRDoorLockClusterDoorLockAlarmEvent] with a fluent Go API.
+// MTRDoorLockClusterDoorLockAlarmEvent is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterDoorLockAlarmEvent.
 type MTRDoorLockClusterDoorLockAlarmEvent struct {
-	inner *raw.MTRDoorLockClusterDoorLockAlarmEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterDoorLockAlarmEvent].
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) Unwrap() *raw.MTRDoorLockClusterDoorLockAlarmEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterDoorLockAlarmEventFromID adopts an existing object pointer as a MTRDoorLockClusterDoorLockAlarmEvent (nil for 0).
+// MTRDoorLockClusterDoorLockAlarmEventFromID adopts an existing Objective-C object as a MTRDoorLockClusterDoorLockAlarmEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterDoorLockAlarmEventFromID(id objc.ID) *MTRDoorLockClusterDoorLockAlarmEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterDoorLockAlarmEvent{inner: raw.MTRDoorLockClusterDoorLockAlarmEventFromID(id)}
-}
-
-// NewMTRDoorLockClusterDoorLockAlarmEvent creates a new [MTRDoorLockClusterDoorLockAlarmEvent].
-func NewMTRDoorLockClusterDoorLockAlarmEvent() *MTRDoorLockClusterDoorLockAlarmEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterDoorLockAlarmEvent")), objc.RegisterName("new"))
-	return &MTRDoorLockClusterDoorLockAlarmEvent{inner: raw.MTRDoorLockClusterDoorLockAlarmEventFromID(_id)}
-}
-
-// WithAlarmCode sets the alarmCode property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode *foundation.NSNumber) *MTRDoorLockClusterDoorLockAlarmEvent {
-	x.inner.SetAlarmCode(alarmCode)
+	x := &MTRDoorLockClusterDoorLockAlarmEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// AlarmCode calls the underlying AlarmCode.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() *foundation.NSNumber {
-	return x.inner.AlarmCode()
+// mTRDoorLockClusterDoorLockAlarmEventAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterDoorLockAlarmEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterDoorLockAlarmEventAdopt(id objc.ID) *MTRDoorLockClusterDoorLockAlarmEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDoorLockClusterDoorLockAlarmEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetAlarmCode calls the underlying SetAlarmCode.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) SetAlarmCode(alarmCode *foundation.NSNumber) {
-	x.inner.SetAlarmCode(alarmCode)
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDoorLockClusterDoorLockAlarmEvent creates a new MTRDoorLockClusterDoorLockAlarmEvent.
+func NewMTRDoorLockClusterDoorLockAlarmEvent() *MTRDoorLockClusterDoorLockAlarmEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterDoorLockAlarmEvent")), objc.RegisterName("new"))
+	return mTRDoorLockClusterDoorLockAlarmEventAdopt(_id)
+}
+
+// WithAlarmCode sets the property and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
+	return x
+}
+
+// AlarmCode wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmCode"))
+	return obj.Wrap(_r)
+}
+
+// SetAlarmCode wraps the corresponding Objective-C method.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) SetAlarmCode(alarmCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
 }
 
 // MTRDoorLockClusterDoorLockAlarmEventable is the interface implemented by [MTRDoorLockClusterDoorLockAlarmEvent], for mocking and DI.
 type MTRDoorLockClusterDoorLockAlarmEventable interface {
-	Unwrap() *raw.MTRDoorLockClusterDoorLockAlarmEvent
-	WithAlarmCode(alarmCode *foundation.NSNumber) *MTRDoorLockClusterDoorLockAlarmEvent
-	AlarmCode() *foundation.NSNumber
-	SetAlarmCode(alarmCode *foundation.NSNumber)
+	obj.Object
+	WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent
+	AlarmCode() obj.Object
+	SetAlarmCode(alarmCode obj.Object)
 }
 
 var _ MTRDoorLockClusterDoorLockAlarmEventable = (*MTRDoorLockClusterDoorLockAlarmEvent)(nil)

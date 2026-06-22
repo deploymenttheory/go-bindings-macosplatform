@@ -5,159 +5,183 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Options that affect the parsing of Markdown content into an attributed string.
+// AttributedStringMarkdownParsingOptions is an idiomatic wrapper over the Objective-C class NSAttributedStringMarkdownParsingOptions.
 //
-// AttributedStringMarkdownParsingOptions wraps [raw.NSAttributedStringMarkdownParsingOptions] with a fluent Go API.
+// Options that affect the parsing of Markdown content into an attributed string.
 type AttributedStringMarkdownParsingOptions struct {
-	inner *raw.NSAttributedStringMarkdownParsingOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAttributedStringMarkdownParsingOptions].
-func (x *AttributedStringMarkdownParsingOptions) Unwrap() *raw.NSAttributedStringMarkdownParsingOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributedStringMarkdownParsingOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributedStringMarkdownParsingOptionsFromID adopts an existing object pointer as a AttributedStringMarkdownParsingOptions (nil for 0).
+// AttributedStringMarkdownParsingOptionsFromID adopts an existing Objective-C object as a AttributedStringMarkdownParsingOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributedStringMarkdownParsingOptionsFromID(id objc.ID) *AttributedStringMarkdownParsingOptions {
 	if id == 0 {
 		return nil
 	}
-	return &AttributedStringMarkdownParsingOptions{inner: raw.NSAttributedStringMarkdownParsingOptionsFromID(id)}
-}
-
-// NewAttributedStringMarkdownParsingOptions creates a new [AttributedStringMarkdownParsingOptions].
-func NewAttributedStringMarkdownParsingOptions() *AttributedStringMarkdownParsingOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedStringMarkdownParsingOptions")), objc.RegisterName("new"))
-	return &AttributedStringMarkdownParsingOptions{inner: raw.NSAttributedStringMarkdownParsingOptionsFromID(_id)}
-}
-
-// A Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
-//
-// WithAllowsExtendedAttributes sets the allowsExtendedAttributes property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetAllowsExtendedAttributes(allowsExtendedAttributes)
+	x := &AttributedStringMarkdownParsingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The syntax for intepreting a Markdown string.
-//
-// WithInterpretedSyntax sets the interpretedSyntax property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetInterpretedSyntax(raw.NSAttributedStringMarkdownInterpretedSyntax(interpretedSyntax))
-	return x
-}
-
-// The policy for handling a parsing failure.
-//
-// WithFailurePolicy sets the failurePolicy property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetFailurePolicy(raw.NSAttributedStringMarkdownParsingFailurePolicy(failurePolicy))
-	return x
-}
-
-// The BCP-47 language code for this document.
-//
-// WithLanguageCode sets the languageCode property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode string) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
-	return x
-}
-
-// A Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
-//
-// WithAppliesSourcePositionAttributes sets the appliesSourcePositionAttributes property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownParsingOptions {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// AllowsExtendedAttributes calls the underlying AllowsExtendedAttributes.
-func (x *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
-	return x.inner.AllowsExtendedAttributes()
-}
-
-// SetAllowsExtendedAttributes calls the underlying SetAllowsExtendedAttributes.
-func (x *AttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(allowsExtendedAttributes bool) {
-	x.inner.SetAllowsExtendedAttributes(allowsExtendedAttributes)
-}
-
-// InterpretedSyntax calls the underlying InterpretedSyntax.
-func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() NSAttributedStringMarkdownInterpretedSyntax {
-	return NSAttributedStringMarkdownInterpretedSyntax(x.inner.InterpretedSyntax())
-}
-
-// SetInterpretedSyntax calls the underlying SetInterpretedSyntax.
-func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) {
-	x.inner.SetInterpretedSyntax(raw.NSAttributedStringMarkdownInterpretedSyntax(interpretedSyntax))
-}
-
-// FailurePolicy calls the underlying FailurePolicy.
-func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() NSAttributedStringMarkdownParsingFailurePolicy {
-	return NSAttributedStringMarkdownParsingFailurePolicy(x.inner.FailurePolicy())
-}
-
-// SetFailurePolicy calls the underlying SetFailurePolicy.
-func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) {
-	x.inner.SetFailurePolicy(raw.NSAttributedStringMarkdownParsingFailurePolicy(failurePolicy))
-}
-
-// LanguageCode calls the underlying LanguageCode.
-func (x *AttributedStringMarkdownParsingOptions) LanguageCode() *String {
-	_r := x.inner.LanguageCode()
-	if _r == nil {
+// attributedStringMarkdownParsingOptionsAdopt wraps an Objective-C object that this code just created as a
+// AttributedStringMarkdownParsingOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributedStringMarkdownParsingOptionsAdopt(id objc.ID) *AttributedStringMarkdownParsingOptions {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &AttributedStringMarkdownParsingOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetLanguageCode calls the underlying SetLanguageCode.
+// Description returns the object's -description text.
+func (x *AttributedStringMarkdownParsingOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributedStringMarkdownParsingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributedStringMarkdownParsingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributedStringMarkdownParsingOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttributedStringMarkdownParsingOptions creates a new AttributedStringMarkdownParsingOptions.
+func NewAttributedStringMarkdownParsingOptions() *AttributedStringMarkdownParsingOptions {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAttributedStringMarkdownParsingOptions")), objc.RegisterName("new"))
+	return attributedStringMarkdownParsingOptionsAdopt(_id)
+}
+
+// WithAllowsExtendedAttributes a Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
+func (x *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
+	return x
+}
+
+// WithInterpretedSyntax the syntax for intepreting a Markdown string.
+func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
+	return x
+}
+
+// WithFailurePolicy the policy for handling a parsing failure.
+func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailurePolicy:"), failurePolicy)
+	return x
+}
+
+// WithLanguageCode the BCP-47 language code for this document.
+func (x *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), objref.IDOf(languageCode))
+	return x
+}
+
+// WithAppliesSourcePositionAttributes a Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
+func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// AllowsExtendedAttributes wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExtendedAttributes"))
+	return _r
+}
+
+// SetAllowsExtendedAttributes wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(allowsExtendedAttributes bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExtendedAttributes:"), allowsExtendedAttributes)
+}
+
+// InterpretedSyntax wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
+	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(x), objc.RegisterName("interpretedSyntax"))
+	return _r
+}
+
+// SetInterpretedSyntax wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpretedSyntax:"), interpretedSyntax)
+}
+
+// FailurePolicy wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
+	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(x), objc.RegisterName("failurePolicy"))
+	return _r
+}
+
+// SetFailurePolicy wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailurePolicy:"), failurePolicy)
+}
+
+// LanguageCode wraps the corresponding Objective-C method.
+func (x *AttributedStringMarkdownParsingOptions) LanguageCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetLanguageCode wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetLanguageCode(languageCode string) {
-	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
 }
 
-// AppliesSourcePositionAttributes calls the underlying AppliesSourcePositionAttributes.
+// AppliesSourcePositionAttributes wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
-	return x.inner.AppliesSourcePositionAttributes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesSourcePositionAttributes"))
+	return _r
 }
 
-// SetAppliesSourcePositionAttributes calls the underlying SetAppliesSourcePositionAttributes.
+// SetAppliesSourcePositionAttributes wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownParsingOptions) SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) {
-	x.inner.SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
 }
-
-func (x *AttributedStringMarkdownParsingOptions) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // AttributedStringMarkdownParsingOptionsable is the interface implemented by [AttributedStringMarkdownParsingOptions], for mocking and DI.
 type AttributedStringMarkdownParsingOptionsable interface {
-	Unwrap() *raw.NSAttributedStringMarkdownParsingOptions
+	obj.Object
 	WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions
-	WithInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions
-	WithFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
-	WithLanguageCode(languageCode string) *AttributedStringMarkdownParsingOptions
+	WithInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions
+	WithFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
+	WithLanguageCode(languageCode StringProvider) *AttributedStringMarkdownParsingOptions
 	WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownParsingOptions
+	WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions
 	AllowsExtendedAttributes() bool
 	SetAllowsExtendedAttributes(allowsExtendedAttributes bool)
-	InterpretedSyntax() NSAttributedStringMarkdownInterpretedSyntax
-	SetInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax)
-	FailurePolicy() NSAttributedStringMarkdownParsingFailurePolicy
-	SetFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy)
-	LanguageCode() *String
+	InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax
+	SetInterpretedSyntax(interpretedSyntax AttributedStringMarkdownInterpretedSyntax)
+	FailurePolicy() AttributedStringMarkdownParsingFailurePolicy
+	SetFailurePolicy(failurePolicy AttributedStringMarkdownParsingFailurePolicy)
+	LanguageCode() string
 	SetLanguageCode(languageCode string)
 	AppliesSourcePositionAttributes() bool
 	SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool)

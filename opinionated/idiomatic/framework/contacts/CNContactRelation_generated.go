@@ -5,55 +5,86 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents the relationship between one contact to another.
+// ContactRelation is an idiomatic wrapper over the Objective-C class CNContactRelation.
 //
-// ContactRelation wraps [raw.CNContactRelation] with a fluent Go API.
+// An immutable object that represents the relationship between one contact to another.
 type ContactRelation struct {
-	inner *raw.CNContactRelation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactRelation].
-func (x *ContactRelation) Unwrap() *raw.CNContactRelation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactRelation) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactRelationFromID adopts an existing object pointer as a ContactRelation (nil for 0).
+// ContactRelationFromID adopts an existing Objective-C object as a ContactRelation
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactRelationFromID(id objc.ID) *ContactRelation {
 	if id == 0 {
 		return nil
 	}
-	return &ContactRelation{inner: raw.CNContactRelationFromID(id)}
+	x := &ContactRelation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object with the name of the related contact.
-//
-// NewContactRelationWithName creates a new [ContactRelation].
+// contactRelationAdopt wraps an Objective-C object that this code just created as a
+// ContactRelation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactRelationAdopt(id objc.ID) *ContactRelation {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactRelation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactRelation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactRelation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactRelation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactRelation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContactRelationWithName creates an object with the name of the related contact.
 func NewContactRelationWithName(name string) *ContactRelation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactRelation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &ContactRelation{inner: raw.CNContactRelationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNContactRelation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
+	return contactRelationAdopt(_id)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *ContactRelation) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ContactRelationable is the interface implemented by [ContactRelation], for mocking and DI.
 type ContactRelationable interface {
-	Unwrap() *raw.CNContactRelation
+	obj.Object
 	Name() string
 }
 

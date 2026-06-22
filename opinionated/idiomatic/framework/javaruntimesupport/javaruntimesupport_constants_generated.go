@@ -5,12 +5,11 @@
 package javaruntimesupport
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// JRSMenuDidReuseItemNotification returns the string constant JRSMenuDidReuseItemNotification as an objc.ID, for use as a dictionary key or selector argument.
-func JRSMenuDidReuseItemNotification() objc.ID {
-	return purego.CFConstant(raw.JRSMenuDidReuseItemNotification())
+// JRSMenuDidReuseItemNotification returns the string constant JRSMenuDidReuseItemNotification, for use as a dictionary key or argument.
+func JRSMenuDidReuseItemNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JRSMenuDidReuseItemNotification")))
 }

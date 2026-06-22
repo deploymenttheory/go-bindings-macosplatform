@@ -4,135 +4,122 @@
 
 package icadevices
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/icadevices"
-)
+type ICACloseSessionPB struct {
+	Header    ICAHeader
+	SessionID uint
+}
 
-// ICACloseSessionPB is a type alias for the raw ICACloseSessionPB value-type struct.
-type ICACloseSessionPB = raw.ICACloseSessionPB
+type ICAGetDeviceListPB struct {
+	Header ICAHeader
+	Object uint
+}
 
-// ICACopyObjectDataPB is a type alias for the raw ICACopyObjectDataPB value-type struct.
-type ICACopyObjectDataPB = raw.ICACopyObjectDataPB
+// This is the first field in all parameter blocks used by APIs defined in ICAApplication.h. Type of parameter passed to a callback function used by APIs defined in ICAApplication.h. The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful.
+type ICAHeader struct {
+	Err    int16
+	Refcon uint
+}
 
-// ICACopyObjectPropertyDictionaryPB is a type alias for the raw ICACopyObjectPropertyDictionaryPB value-type struct.
-type ICACopyObjectPropertyDictionaryPB = raw.ICACopyObjectPropertyDictionaryPB
+type ICAObjectInfo struct {
+	ObjectType    uint
+	ObjectSubtype uint
+}
 
-// ICACopyObjectThumbnailPB is a type alias for the raw ICACopyObjectThumbnailPB value-type struct.
-type ICACopyObjectThumbnailPB = raw.ICACopyObjectThumbnailPB
+type ICAOpenSessionPB struct {
+	Header       ICAHeader
+	DeviceObject uint
+	SessionID    uint
+}
 
-// ICADownloadFilePB is a type alias for the raw ICADownloadFilePB value-type struct.
-type ICADownloadFilePB = raw.ICADownloadFilePB
+type ICAScannerCloseSessionPB struct {
+	Header    ICAHeader
+	SessionID uint
+}
 
-// ICAGetDeviceListPB is a type alias for the raw ICAGetDeviceListPB value-type struct.
-type ICAGetDeviceListPB = raw.ICAGetDeviceListPB
+type ICAScannerInitializePB struct {
+	Header    ICAHeader
+	SessionID uint
+}
 
-// ICAHeader is a type alias for the raw ICAHeader value-type struct.
-type ICAHeader = raw.ICAHeader
+type ICAScannerOpenSessionPB struct {
+	Header    ICAHeader
+	Object    uint
+	SessionID uint
+}
 
-// ICAImportImagePB is a type alias for the raw ICAImportImagePB value-type struct.
-type ICAImportImagePB = raw.ICAImportImagePB
+type ICAScannerStartPB struct {
+	Header    ICAHeader
+	SessionID uint
+}
 
-// ICALoadDeviceModulePB is a type alias for the raw ICALoadDeviceModulePB value-type struct.
-type ICALoadDeviceModulePB = raw.ICALoadDeviceModulePB
+type ICAScannerStatusPB struct {
+	Header    ICAHeader
+	SessionID uint
+	Status    uint
+}
 
-// ICAMessage is a type alias for the raw ICAMessage value-type struct.
-type ICAMessage = raw.ICAMessage
+type ICAUnloadDeviceModulePB struct {
+	Header       ICAHeader
+	DeviceObject uint
+}
 
-// ICAObjectInfo is a type alias for the raw ICAObjectInfo value-type struct.
-type ICAObjectInfo = raw.ICAObjectInfo
+// This is the first field in all parameter blocks used by APIs defined in ICADevices.h. Type of parameter passed to a callback function used by APIs defined in ICADevices.h. The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
+type ICDHeader struct {
+	Err    int16
+	Refcon uint
+}
 
-// ICAObjectSendMessagePB is a type alias for the raw ICAObjectSendMessagePB value-type struct.
-type ICAObjectSendMessagePB = raw.ICAObjectSendMessagePB
+// Parameter block passed to function <code>ICDDisposeObject</code>.
+type ICD_DisposeObjectPB struct {
+	Header ICDHeader
+	Object uint
+}
 
-// ICAOpenSessionPB is a type alias for the raw ICAOpenSessionPB value-type struct.
-type ICAOpenSessionPB = raw.ICAOpenSessionPB
+// Parameter block passed to function <code>ICDNewObject</code>.
+type ICD_NewObjectPB struct {
+	Header       ICDHeader
+	ParentObject uint
+	ObjectInfo   ICAObjectInfo
+	Object       uint
+}
 
-// ICAPTPEventDataset is a type alias for the raw ICAPTPEventDataset value-type struct.
-type ICAPTPEventDataset = raw.ICAPTPEventDataset
+type ICD_ScannerCloseSessionPB struct {
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
+	ConnectionID uint
+	SessionID    uint
+}
 
-// ICAPTPPassThroughPB is a type alias for the raw ICAPTPPassThroughPB value-type struct.
-type ICAPTPPassThroughPB = raw.ICAPTPPassThroughPB
+type ICD_ScannerInitializePB struct {
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
+	ConnectionID uint
+	SessionID    uint
+}
 
-// ICARawFileHeader is a type alias for the raw ICARawFileHeader value-type struct.
-type ICARawFileHeader = raw.ICARawFileHeader
+type ICD_ScannerOpenSessionPB struct {
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
+	ConnectionID uint
+	SessionID    uint
+}
 
-// ICARegisterForEventNotificationPB is a type alias for the raw ICARegisterForEventNotificationPB value-type struct.
-type ICARegisterForEventNotificationPB = raw.ICARegisterForEventNotificationPB
+type ICD_ScannerStartPB struct {
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
+	ConnectionID uint
+	SessionID    uint
+}
 
-// ICAScannerCloseSessionPB is a type alias for the raw ICAScannerCloseSessionPB value-type struct.
-type ICAScannerCloseSessionPB = raw.ICAScannerCloseSessionPB
-
-// ICAScannerGetParametersPB is a type alias for the raw ICAScannerGetParametersPB value-type struct.
-type ICAScannerGetParametersPB = raw.ICAScannerGetParametersPB
-
-// ICAScannerInitializePB is a type alias for the raw ICAScannerInitializePB value-type struct.
-type ICAScannerInitializePB = raw.ICAScannerInitializePB
-
-// ICAScannerOpenSessionPB is a type alias for the raw ICAScannerOpenSessionPB value-type struct.
-type ICAScannerOpenSessionPB = raw.ICAScannerOpenSessionPB
-
-// ICAScannerSetParametersPB is a type alias for the raw ICAScannerSetParametersPB value-type struct.
-type ICAScannerSetParametersPB = raw.ICAScannerSetParametersPB
-
-// ICAScannerStartPB is a type alias for the raw ICAScannerStartPB value-type struct.
-type ICAScannerStartPB = raw.ICAScannerStartPB
-
-// ICAScannerStatusPB is a type alias for the raw ICAScannerStatusPB value-type struct.
-type ICAScannerStatusPB = raw.ICAScannerStatusPB
-
-// ICASendNotificationPB is a type alias for the raw ICASendNotificationPB value-type struct.
-type ICASendNotificationPB = raw.ICASendNotificationPB
-
-// ICAUnloadDeviceModulePB is a type alias for the raw ICAUnloadDeviceModulePB value-type struct.
-type ICAUnloadDeviceModulePB = raw.ICAUnloadDeviceModulePB
-
-// ICAUploadFilePB is a type alias for the raw ICAUploadFilePB value-type struct.
-type ICAUploadFilePB = raw.ICAUploadFilePB
-
-// ICDHeader is a type alias for the raw ICDHeader value-type struct.
-type ICDHeader = raw.ICDHeader
-
-// ICD_DisposeObjectPB is a type alias for the raw ICD_DisposeObjectPB value-type struct.
-type ICD_DisposeObjectPB = raw.ICD_DisposeObjectPB
-
-// ICD_NewObjectPB is a type alias for the raw ICD_NewObjectPB value-type struct.
-type ICD_NewObjectPB = raw.ICD_NewObjectPB
-
-// ICD_ObjectSendMessagePB is a type alias for the raw ICD_ObjectSendMessagePB value-type struct.
-type ICD_ObjectSendMessagePB = raw.ICD_ObjectSendMessagePB
-
-// ICD_ScannerCloseSessionPB is a type alias for the raw ICD_ScannerCloseSessionPB value-type struct.
-type ICD_ScannerCloseSessionPB = raw.ICD_ScannerCloseSessionPB
-
-// ICD_ScannerGetParametersPB is a type alias for the raw ICD_ScannerGetParametersPB value-type struct.
-type ICD_ScannerGetParametersPB = raw.ICD_ScannerGetParametersPB
-
-// ICD_ScannerInitializePB is a type alias for the raw ICD_ScannerInitializePB value-type struct.
-type ICD_ScannerInitializePB = raw.ICD_ScannerInitializePB
-
-// ICD_ScannerObjectSendMessagePB is a type alias for the raw ICD_ScannerObjectSendMessagePB value-type struct.
-type ICD_ScannerObjectSendMessagePB = raw.ICD_ScannerObjectSendMessagePB
-
-// ICD_ScannerOpenSessionPB is a type alias for the raw ICD_ScannerOpenSessionPB value-type struct.
-type ICD_ScannerOpenSessionPB = raw.ICD_ScannerOpenSessionPB
-
-// ICD_ScannerSetParametersPB is a type alias for the raw ICD_ScannerSetParametersPB value-type struct.
-type ICD_ScannerSetParametersPB = raw.ICD_ScannerSetParametersPB
-
-// ICD_ScannerStartPB is a type alias for the raw ICD_ScannerStartPB value-type struct.
-type ICD_ScannerStartPB = raw.ICD_ScannerStartPB
-
-// ICD_ScannerStatusPB is a type alias for the raw ICD_ScannerStatusPB value-type struct.
-type ICD_ScannerStatusPB = raw.ICD_ScannerStatusPB
-
-// ICD_Scannerscanner_callback_functions is a type alias for the raw ICD_Scannerscanner_callback_functions value-type struct.
-type ICD_Scannerscanner_callback_functions = raw.ICD_Scannerscanner_callback_functions
-
-// ICD_callback_functions is a type alias for the raw ICD_callback_functions value-type struct.
-type ICD_callback_functions = raw.ICD_callback_functions
-
-// ObjectInfo is a type alias for the raw ObjectInfo value-type struct.
-type ObjectInfo = raw.ObjectInfo
-
-// ScannerObjectInfo is a type alias for the raw ScannerObjectInfo value-type struct.
-type ScannerObjectInfo = raw.ScannerObjectInfo
+type ICD_ScannerStatusPB struct {
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
+	ConnectionID uint
+	SessionID    uint
+	Status       uint
+}

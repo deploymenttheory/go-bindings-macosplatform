@@ -5,61 +5,74 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNNormalizationMeanAndVarianceState wraps [raw.MPSCNNNormalizationMeanAndVarianceState] with a fluent Go API.
+// CNNNormalizationMeanAndVarianceState is an idiomatic wrapper over the Objective-C class MPSCNNNormalizationMeanAndVarianceState.
 type CNNNormalizationMeanAndVarianceState struct {
-	inner *raw.MPSCNNNormalizationMeanAndVarianceState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNormalizationMeanAndVarianceState].
-func (x *CNNNormalizationMeanAndVarianceState) Unwrap() *raw.MPSCNNNormalizationMeanAndVarianceState {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNormalizationMeanAndVarianceState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNormalizationMeanAndVarianceStateFromID adopts an existing object pointer as a CNNNormalizationMeanAndVarianceState (nil for 0).
+// CNNNormalizationMeanAndVarianceStateFromID adopts an existing Objective-C object as a CNNNormalizationMeanAndVarianceState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNormalizationMeanAndVarianceStateFromID(id objc.ID) *CNNNormalizationMeanAndVarianceState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNormalizationMeanAndVarianceState{inner: raw.MPSCNNNormalizationMeanAndVarianceStateFromID(id)}
+	x := &CNNNormalizationMeanAndVarianceState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a MPSCNNNormalizationMeanAndVarianceState object using values contained in MTLBuffers. @param      mean        The MTLBuffer containing mean terms. @param      variance    The MTLBuffer containing variance terms.
-//
-// NewCNNNormalizationMeanAndVarianceStateWithMeanVariance creates a new [CNNNormalizationMeanAndVarianceState].
-func NewCNNNormalizationMeanAndVarianceStateWithMeanVariance(mean metal.MTLBuffer, variance metal.MTLBuffer) *CNNNormalizationMeanAndVarianceState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNormalizationMeanAndVarianceState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMean:variance:"), mean, variance)
-	return &CNNNormalizationMeanAndVarianceState{inner: raw.MPSCNNNormalizationMeanAndVarianceStateFromID(_id)}
+// cNNNormalizationMeanAndVarianceStateAdopt wraps an Objective-C object that this code just created as a
+// CNNNormalizationMeanAndVarianceState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNormalizationMeanAndVarianceStateAdopt(id objc.ID) *CNNNormalizationMeanAndVarianceState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNormalizationMeanAndVarianceState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   mean @abstract   A MTLBuffer containing the mean terms.
-//
-// Mean calls the underlying Mean.
-func (x *CNNNormalizationMeanAndVarianceState) Mean() metal.MTLBuffer {
-	return x.inner.Mean()
+// Description returns the object's -description text.
+func (x *CNNNormalizationMeanAndVarianceState) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property   variance @abstract   A MTLBuffer containing the variance terms.
-//
-// Variance calls the underlying Variance.
-func (x *CNNNormalizationMeanAndVarianceState) Variance() metal.MTLBuffer {
-	return x.inner.Variance()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNNormalizationMeanAndVarianceState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNNormalizationMeanAndVarianceState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CNNNormalizationMeanAndVarianceState) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCNNNormalizationMeanAndVarianceState creates a new CNNNormalizationMeanAndVarianceState.
+func NewCNNNormalizationMeanAndVarianceState() *CNNNormalizationMeanAndVarianceState {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationMeanAndVarianceState")), objc.RegisterName("new"))
+	return cNNNormalizationMeanAndVarianceStateAdopt(_id)
 }
 
 // CNNNormalizationMeanAndVarianceStateable is the interface implemented by [CNNNormalizationMeanAndVarianceState], for mocking and DI.
 type CNNNormalizationMeanAndVarianceStateable interface {
-	Unwrap() *raw.MPSCNNNormalizationMeanAndVarianceState
-	Mean() metal.MTLBuffer
-	Variance() metal.MTLBuffer
+	obj.Object
 }
 
 var _ CNNNormalizationMeanAndVarianceStateable = (*CNNNormalizationMeanAndVarianceState)(nil)

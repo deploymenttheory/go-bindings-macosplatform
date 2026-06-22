@@ -5,66 +5,99 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides common data and methods for the different player objects.
+// BasePlayer is an idiomatic wrapper over the Objective-C class GKBasePlayer.
 //
-// BasePlayer wraps [raw.GKBasePlayer] with a fluent Go API.
+// BasePlayer is an abstract base — you do not construct it directly. Construct one of [CloudPlayer], [Player] and pass it where a BasePlayer is accepted.
+//
+// A class that provides common data and methods for the different player objects.
 type BasePlayer struct {
-	inner *raw.GKBasePlayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKBasePlayer].
-func (x *BasePlayer) Unwrap() *raw.GKBasePlayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BasePlayer) ID() objc.ID { return x.inner.Ptr() }
-
-// BasePlayerFromID adopts an existing object pointer as a BasePlayer (nil for 0).
+// BasePlayerFromID adopts an existing Objective-C object as a BasePlayer
+// (nil for 0), retaining it and registering a release finalizer.
 func BasePlayerFromID(id objc.ID) *BasePlayer {
 	if id == 0 {
 		return nil
 	}
-	return &BasePlayer{inner: raw.GKBasePlayerFromID(id)}
+	x := &BasePlayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBasePlayer creates a new [BasePlayer].
-func NewBasePlayer() *BasePlayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKBasePlayer")), objc.RegisterName("new"))
-	return &BasePlayer{inner: raw.GKBasePlayerFromID(_id)}
+// basePlayerAdopt wraps an Objective-C object that this code just created as a
+// BasePlayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func basePlayerAdopt(id objc.ID) *BasePlayer {
+	if id == 0 {
+		return nil
+	}
+	x := &BasePlayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PlayerID calls the underlying PlayerID.
+// Description returns the object's -description text.
+func (x *BasePlayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BasePlayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BasePlayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BasePlayer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// PlayerID wraps the corresponding Objective-C method.
 func (x *BasePlayer) PlayerID() string {
-	_r := x.inner.PlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// This player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
-//
-// DisplayName calls the underlying DisplayName.
+// DisplayName this player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
 func (x *BasePlayer) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *BasePlayer) asBasePlayer() *raw.GKBasePlayer { return x.inner }
 
 // BasePlayerable is the interface implemented by [BasePlayer], for mocking and DI.
 type BasePlayerable interface {
-	Unwrap() *raw.GKBasePlayer
+	obj.Object
 	PlayerID() string
 	DisplayName() string
 }
 
 var _ BasePlayerable = (*BasePlayer)(nil)
+
+// isBasePlayer marks BasePlayer — and, by embedding promotion, its
+// subclasses — as a member of the BasePlayer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *BasePlayer) isBasePlayer() {}
+
+var _ BasePlayerProvider = (*BasePlayer)(nil)

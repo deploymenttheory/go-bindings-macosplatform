@@ -5,77 +5,82 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a MIDI control change message.
+// MIDIControlChangeEvent is an idiomatic wrapper over the Objective-C class AVMIDIControlChangeEvent.
 //
-// MIDIControlChangeEvent wraps [raw.AVMIDIControlChangeEvent] with a fluent Go API.
+// It embeds [MIDIChannelEvent], promoting that type's methods.
+//
+// An object that represents a MIDI control change message.
 type MIDIControlChangeEvent struct {
-	inner *raw.AVMIDIControlChangeEvent
+	MIDIChannelEvent
 }
 
-// Unwrap returns the underlying [raw.AVMIDIControlChangeEvent].
-func (x *MIDIControlChangeEvent) Unwrap() *raw.AVMIDIControlChangeEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIControlChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIControlChangeEventFromID adopts an existing object pointer as a MIDIControlChangeEvent (nil for 0).
+// MIDIControlChangeEventFromID adopts an existing Objective-C object as a MIDIControlChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIControlChangeEventFromID(id objc.ID) *MIDIControlChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(id)}
-}
-
-// Creates an event with a channel, control change type, and a value.
-//
-// NewMIDIControlChangeEventWithChannelMessageTypeValue creates a new [MIDIControlChangeEvent].
-func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageType AVMIDIControlChangeMessageType, value uint) *MIDIControlChangeEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIControlChangeEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:messageType:value:"), channel, raw.AVMIDIControlChangeMessageType(messageType), value)
-	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(_id)}
-}
-
-// The MIDI channel.
-//
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MIDIControlChangeEvent) WithChannel(channel uint) *MIDIControlChangeEvent {
-	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+	x := &MIDIControlChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property messageType The type of control change message, specified as an AVMIDIControlChangeMessageType.
-//
-// MessageType calls the underlying MessageType.
-func (x *MIDIControlChangeEvent) MessageType() AVMIDIControlChangeMessageType {
-	return AVMIDIControlChangeMessageType(x.inner.MessageType())
+// mIDIControlChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIControlChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIControlChangeEventAdopt(id objc.ID) *MIDIControlChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIControlChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property value The value of the control change event.  The range of this value depends on the type (see the General MIDI specification).
-//
-// Value calls the underlying Value.
-func (x *MIDIControlChangeEvent) Value() uint {
-	return x.inner.Value()
+// NewMIDIControlChangeEventWithChannelMessageTypeValue creates an event with a channel, control change type, and a value.
+func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel int, messageType MIDIControlChangeMessageType, value int) *MIDIControlChangeEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIControlChangeEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:messageType:value:"), channel, messageType, value)
+	return mIDIControlChangeEventAdopt(_id)
 }
 
-func (x *MIDIControlChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
-	return &x.inner.AVMIDIChannelEvent
+// WithChannel the MIDI channel.
+func (x *MIDIControlChangeEvent) WithChannel(channel int) *MIDIControlChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
+	return x
 }
 
-func (x *MIDIControlChangeEvent) asMusicEvent() *raw.AVMusicEvent {
-	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+// MessageType wraps the corresponding Objective-C method.
+func (x *MIDIControlChangeEvent) MessageType() MIDIControlChangeMessageType {
+	_r := objc.Send[MIDIControlChangeMessageType](objref.IDOf(x), objc.RegisterName("messageType"))
+	return _r
+}
+
+// Value wraps the corresponding Objective-C method.
+func (x *MIDIControlChangeEvent) Value() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
 // MIDIControlChangeEventable is the interface implemented by [MIDIControlChangeEvent], for mocking and DI.
 type MIDIControlChangeEventable interface {
-	Unwrap() *raw.AVMIDIControlChangeEvent
-	WithChannel(channel uint) *MIDIControlChangeEvent
-	MessageType() AVMIDIControlChangeMessageType
-	Value() uint
+	obj.Object
+	WithChannel(channel int) *MIDIControlChangeEvent
+	MessageType() MIDIControlChangeMessageType
+	Value() int
 }
 
 var _ MIDIControlChangeEventable = (*MIDIControlChangeEvent)(nil)
+
+var _ MIDIChannelEventProvider = (*MIDIControlChangeEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIControlChangeEvent)(nil)

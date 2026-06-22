@@ -5,45 +5,79 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Base interface for describing a Metal 4 shader function.
+// MTL4FunctionDescriptor is an idiomatic wrapper over the Objective-C class MTL4FunctionDescriptor.
 //
-// MTL4FunctionDescriptor wraps [raw.MTL4FunctionDescriptor] with a fluent Go API.
+// MTL4FunctionDescriptor is an abstract base — you do not construct it directly. Construct one of [MTL4LibraryFunctionDescriptor], [MTL4SpecializedFunctionDescriptor], [MTL4StitchedFunctionDescriptor] and pass it where a MTL4FunctionDescriptor is accepted.
+//
+// Base interface for describing a Metal 4 shader function.
 type MTL4FunctionDescriptor struct {
-	inner *raw.MTL4FunctionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4FunctionDescriptor].
-func (x *MTL4FunctionDescriptor) Unwrap() *raw.MTL4FunctionDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4FunctionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4FunctionDescriptorFromID adopts an existing object pointer as a MTL4FunctionDescriptor (nil for 0).
+// MTL4FunctionDescriptorFromID adopts an existing Objective-C object as a MTL4FunctionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4FunctionDescriptorFromID(id objc.ID) *MTL4FunctionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(id)}
+	x := &MTL4FunctionDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4FunctionDescriptor creates a new [MTL4FunctionDescriptor].
-func NewMTL4FunctionDescriptor() *MTL4FunctionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4FunctionDescriptor")), objc.RegisterName("new"))
-	return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(_id)}
+// mTL4FunctionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4FunctionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4FunctionDescriptorAdopt(id objc.ID) *MTL4FunctionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4FunctionDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MTL4FunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor {
-	return x.inner
+// Description returns the object's -description text.
+func (x *MTL4FunctionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4FunctionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4FunctionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4FunctionDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // MTL4FunctionDescriptorable is the interface implemented by [MTL4FunctionDescriptor], for mocking and DI.
 type MTL4FunctionDescriptorable interface {
-	Unwrap() *raw.MTL4FunctionDescriptor
+	obj.Object
 }
 
 var _ MTL4FunctionDescriptorable = (*MTL4FunctionDescriptor)(nil)
+
+// isMTL4FunctionDescriptor marks MTL4FunctionDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the MTL4FunctionDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTL4FunctionDescriptor) isMTL4FunctionDescriptor() {}
+
+var _ MTL4FunctionDescriptorProvider = (*MTL4FunctionDescriptor)(nil)

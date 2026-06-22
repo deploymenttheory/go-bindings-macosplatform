@@ -5,116 +5,150 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRActionsClusterEndpointListStruct wraps [raw.MTRActionsClusterEndpointListStruct] with a fluent Go API.
+// MTRActionsClusterEndpointListStruct is an idiomatic wrapper over the Objective-C class MTRActionsClusterEndpointListStruct.
 type MTRActionsClusterEndpointListStruct struct {
-	inner *raw.MTRActionsClusterEndpointListStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRActionsClusterEndpointListStruct].
-func (x *MTRActionsClusterEndpointListStruct) Unwrap() *raw.MTRActionsClusterEndpointListStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRActionsClusterEndpointListStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRActionsClusterEndpointListStructFromID adopts an existing object pointer as a MTRActionsClusterEndpointListStruct (nil for 0).
+// MTRActionsClusterEndpointListStructFromID adopts an existing Objective-C object as a MTRActionsClusterEndpointListStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRActionsClusterEndpointListStructFromID(id objc.ID) *MTRActionsClusterEndpointListStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRActionsClusterEndpointListStruct{inner: raw.MTRActionsClusterEndpointListStructFromID(id)}
+	x := &MTRActionsClusterEndpointListStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRActionsClusterEndpointListStruct creates a new [MTRActionsClusterEndpointListStruct].
+// mTRActionsClusterEndpointListStructAdopt wraps an Objective-C object that this code just created as a
+// MTRActionsClusterEndpointListStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRActionsClusterEndpointListStructAdopt(id objc.ID) *MTRActionsClusterEndpointListStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRActionsClusterEndpointListStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRActionsClusterEndpointListStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRActionsClusterEndpointListStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRActionsClusterEndpointListStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRActionsClusterEndpointListStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRActionsClusterEndpointListStruct creates a new MTRActionsClusterEndpointListStruct.
 func NewMTRActionsClusterEndpointListStruct() *MTRActionsClusterEndpointListStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRActionsClusterEndpointListStruct")), objc.RegisterName("new"))
-	return &MTRActionsClusterEndpointListStruct{inner: raw.MTRActionsClusterEndpointListStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterEndpointListStruct")), objc.RegisterName("new"))
+	return mTRActionsClusterEndpointListStructAdopt(_id)
 }
 
-// WithEndpointListID sets the endpointListID property and returns the receiver for chaining.
-func (x *MTRActionsClusterEndpointListStruct) WithEndpointListID(endpointListID *foundation.NSNumber) *MTRActionsClusterEndpointListStruct {
-	x.inner.SetEndpointListID(endpointListID)
+// WithEndpointListID sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterEndpointListStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterEndpointListStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets the property and returns the receiver so calls can be chained.
 func (x *MTRActionsClusterEndpointListStruct) WithName(name string) *MTRActionsClusterEndpointListStruct {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *MTRActionsClusterEndpointListStruct) WithType(type_ *foundation.NSNumber) *MTRActionsClusterEndpointListStruct {
-	x.inner.SetType(type_)
+// WithType sets the property and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterEndpointListStruct) WithType(type_ obj.Object) *MTRActionsClusterEndpointListStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// EndpointListID calls the underlying EndpointListID.
-func (x *MTRActionsClusterEndpointListStruct) EndpointListID() *foundation.NSNumber {
-	return x.inner.EndpointListID()
+// EndpointListID wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterEndpointListStruct) EndpointListID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointListID"))
+	return obj.Wrap(_r)
 }
 
-// SetEndpointListID calls the underlying SetEndpointListID.
-func (x *MTRActionsClusterEndpointListStruct) SetEndpointListID(endpointListID *foundation.NSNumber) {
-	x.inner.SetEndpointListID(endpointListID)
+// SetEndpointListID wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterEndpointListStruct) SetEndpointListID(endpointListID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *MTRActionsClusterEndpointListStruct) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// Type calls the underlying Type.
-func (x *MTRActionsClusterEndpointListStruct) Type() *foundation.NSNumber {
-	return x.inner.Type()
+// Type wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterEndpointListStruct) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	return obj.Wrap(_r)
 }
 
-// SetType calls the underlying SetType.
-func (x *MTRActionsClusterEndpointListStruct) SetType(type_ *foundation.NSNumber) {
-	x.inner.SetType(type_)
+// SetType wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterEndpointListStruct) SetType(type_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
 
-// Endpoints calls the underlying Endpoints.
-func (x *MTRActionsClusterEndpointListStruct) Endpoints() *foundation.NSArray[objc.ID] {
-	return x.inner.Endpoints()
+// Endpoints wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterEndpointListStruct) Endpoints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoints"))
+	return obj.Wrap(_r)
 }
 
-// SetEndpoints calls the underlying SetEndpoints.
-func (x *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
-	x.inner.SetEndpoints(endpoints)
+// SetEndpoints wraps the corresponding Objective-C method.
+func (x *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }
 
 // MTRActionsClusterEndpointListStructable is the interface implemented by [MTRActionsClusterEndpointListStruct], for mocking and DI.
 type MTRActionsClusterEndpointListStructable interface {
-	Unwrap() *raw.MTRActionsClusterEndpointListStruct
-	WithEndpointListID(endpointListID *foundation.NSNumber) *MTRActionsClusterEndpointListStruct
+	obj.Object
+	WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterEndpointListStruct
 	WithName(name string) *MTRActionsClusterEndpointListStruct
-	WithType(type_ *foundation.NSNumber) *MTRActionsClusterEndpointListStruct
-	EndpointListID() *foundation.NSNumber
-	SetEndpointListID(endpointListID *foundation.NSNumber)
+	WithType(type_ obj.Object) *MTRActionsClusterEndpointListStruct
+	EndpointListID() obj.Object
+	SetEndpointListID(endpointListID obj.Object)
 	Name() string
 	SetName(name string)
-	Type() *foundation.NSNumber
-	SetType(type_ *foundation.NSNumber)
-	Endpoints() *foundation.NSArray[objc.ID]
-	SetEndpoints(endpoints *foundation.NSArray[objc.ID])
+	Type() obj.Object
+	SetType(type_ obj.Object)
+	Endpoints() obj.Object
+	SetEndpoints(endpoints obj.Object)
 }
 
 var _ MTRActionsClusterEndpointListStructable = (*MTRActionsClusterEndpointListStruct)(nil)

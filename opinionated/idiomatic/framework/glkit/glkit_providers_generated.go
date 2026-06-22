@@ -5,15 +5,17 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// BaseEffectProvider is implemented by BaseEffect and any idiomatic type wrapping a GLKBaseEffect subclass.
+// BaseEffectProvider is accepted wherever a GLKBaseEffect (or one of its subclasses) is expected.
 type BaseEffectProvider interface {
-	asBaseEffect() *raw.GLKBaseEffect
+	objref.Object
+	isBaseEffect()
 }
 
-// EffectPropertyProvider is implemented by EffectProperty and any idiomatic type wrapping a GLKEffectProperty subclass.
+// EffectPropertyProvider is accepted wherever a GLKEffectProperty (or one of its subclasses) is expected.
 type EffectPropertyProvider interface {
-	asEffectProperty() *raw.GLKEffectProperty
+	objref.Object
+	isEffectProperty()
 }

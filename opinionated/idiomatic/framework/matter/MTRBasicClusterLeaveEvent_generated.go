@@ -5,51 +5,63 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBasicClusterLeaveEvent wraps [raw.MTRBasicClusterLeaveEvent] with a fluent Go API.
+// MTRBasicClusterLeaveEvent is an idiomatic wrapper over the Objective-C class MTRBasicClusterLeaveEvent.
+//
+// It embeds [MTRBasicInformationClusterLeaveEvent], promoting that type's methods.
 type MTRBasicClusterLeaveEvent struct {
-	inner *raw.MTRBasicClusterLeaveEvent
+	MTRBasicInformationClusterLeaveEvent
 }
 
-// Unwrap returns the underlying [raw.MTRBasicClusterLeaveEvent].
-func (x *MTRBasicClusterLeaveEvent) Unwrap() *raw.MTRBasicClusterLeaveEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBasicClusterLeaveEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBasicClusterLeaveEventFromID adopts an existing object pointer as a MTRBasicClusterLeaveEvent (nil for 0).
+// MTRBasicClusterLeaveEventFromID adopts an existing Objective-C object as a MTRBasicClusterLeaveEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBasicClusterLeaveEventFromID(id objc.ID) *MTRBasicClusterLeaveEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBasicClusterLeaveEvent{inner: raw.MTRBasicClusterLeaveEventFromID(id)}
-}
-
-// NewMTRBasicClusterLeaveEvent creates a new [MTRBasicClusterLeaveEvent].
-func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBasicClusterLeaveEvent")), objc.RegisterName("new"))
-	return &MTRBasicClusterLeaveEvent{inner: raw.MTRBasicClusterLeaveEventFromID(_id)}
-}
-
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRBasicClusterLeaveEvent {
-	x.inner.MTRBasicInformationClusterLeaveEvent.SetFabricIndex(fabricIndex)
+	x := &MTRBasicClusterLeaveEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *MTRBasicClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent {
-	return &x.inner.MTRBasicInformationClusterLeaveEvent
+// mTRBasicClusterLeaveEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBasicClusterLeaveEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBasicClusterLeaveEventAdopt(id objc.ID) *MTRBasicClusterLeaveEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBasicClusterLeaveEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRBasicClusterLeaveEvent creates a new MTRBasicClusterLeaveEvent.
+func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicClusterLeaveEvent")), objc.RegisterName("new"))
+	return mTRBasicClusterLeaveEventAdopt(_id)
+}
+
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return x
 }
 
 // MTRBasicClusterLeaveEventable is the interface implemented by [MTRBasicClusterLeaveEvent], for mocking and DI.
 type MTRBasicClusterLeaveEventable interface {
-	Unwrap() *raw.MTRBasicClusterLeaveEvent
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRBasicClusterLeaveEvent
+	obj.Object
+	WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent
 }
 
 var _ MTRBasicClusterLeaveEventable = (*MTRBasicClusterLeaveEvent)(nil)
+
+var _ MTRBasicInformationClusterLeaveEventProvider = (*MTRBasicClusterLeaveEvent)(nil)

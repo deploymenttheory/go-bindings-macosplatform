@@ -5,451 +5,424 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract class that represents a scanner functional unit.
+// ScannerFunctionalUnit is an idiomatic wrapper over the Objective-C class ICScannerFunctionalUnit.
 //
-// ScannerFunctionalUnit wraps [raw.ICScannerFunctionalUnit] with a fluent Go API.
+// ScannerFunctionalUnit is an abstract base — you do not construct it directly. Construct one of [ScannerFunctionalUnitDocumentFeeder], [ScannerFunctionalUnitFlatbed], [ScannerFunctionalUnitNegativeTransparency], [ScannerFunctionalUnitPositiveTransparency] and pass it where a ScannerFunctionalUnit is accepted.
+//
+// An abstract class that represents a scanner functional unit.
 type ScannerFunctionalUnit struct {
-	inner *raw.ICScannerFunctionalUnit
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICScannerFunctionalUnit].
-func (x *ScannerFunctionalUnit) Unwrap() *raw.ICScannerFunctionalUnit { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerFunctionalUnit) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerFunctionalUnitFromID adopts an existing object pointer as a ScannerFunctionalUnit (nil for 0).
+// ScannerFunctionalUnitFromID adopts an existing Objective-C object as a ScannerFunctionalUnit
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerFunctionalUnitFromID(id objc.ID) *ScannerFunctionalUnit {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerFunctionalUnit{inner: raw.ICScannerFunctionalUnitFromID(id)}
-}
-
-// NewScannerFunctionalUnit creates a new [ScannerFunctionalUnit].
-func NewScannerFunctionalUnit() *ScannerFunctionalUnit {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerFunctionalUnit")), objc.RegisterName("new"))
-	return &ScannerFunctionalUnit{inner: raw.ICScannerFunctionalUnitFromID(_id)}
-}
-
-// @property pixelDataType @abstract ￼The pixel data type.
-//
-// WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnit {
-	x.inner.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
+	x := &ScannerFunctionalUnit{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
-//
-// WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnit {
-	x.inner.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
+// scannerFunctionalUnitAdopt wraps an Objective-C object that this code just created as a
+// ScannerFunctionalUnit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerFunctionalUnitAdopt(id objc.ID) *ScannerFunctionalUnit {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerFunctionalUnit{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
-//
-// WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnit {
-	x.inner.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
+// Description returns the object's -description text.
+func (x *ScannerFunctionalUnit) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerFunctionalUnit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerFunctionalUnit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScannerFunctionalUnit) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithPixelDataType ￼The pixel data type.
+func (x *ScannerFunctionalUnit) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelDataType:"), pixelDataType)
 	return x
 }
 
-// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
-//
-// WithResolution sets the resolution property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithResolution(resolution uint) *ScannerFunctionalUnit {
-	x.inner.SetResolution(resolution)
+// WithBitDepth ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+func (x *ScannerFunctionalUnit) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitDepth:"), bitDepth)
 	return x
 }
 
-// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
-//
-// WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnit {
-	x.inner.SetScaleFactor(scaleFactor)
+// WithMeasurementUnit ￼Current measurement unit. This will always be one of the supported measurement units.
+func (x *ScannerFunctionalUnit) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
 	return x
 }
 
-// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
-//
-// WithScanArea sets the scanArea property and returns the receiver for chaining.
+// WithResolution ￼Current scan resolution. This will always be one of the supported resolution values.
+func (x *ScannerFunctionalUnit) WithResolution(resolution int) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolution:"), resolution)
+	return x
+}
+
+// WithScaleFactor ￼Current scale factor. This will always be one of the supported scale factor values.
+func (x *ScannerFunctionalUnit) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
+	return x
+}
+
+// WithScanArea ￼This property along with scanAreaOrientation describes the area to be scanned.
 func (x *ScannerFunctionalUnit) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnit {
-	x.inner.SetScanArea(scanArea)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanArea:"), scanArea)
 	return x
 }
 
-// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
-//
-// WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnit {
-	x.inner.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
+// WithScanAreaOrientation ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+func (x *ScannerFunctionalUnit) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
 	return x
 }
 
-// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-//
-// WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+// WithUsesThresholdForBlackAndWhiteScanning ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
 func (x *ScannerFunctionalUnit) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnit {
-	x.inner.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
 	return x
 }
 
-// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
-//
-// WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+// WithThresholdForBlackAndWhiteScanning ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
 func (x *ScannerFunctionalUnit) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnit {
-	x.inner.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
 	return x
 }
 
-// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
-//
-// WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnit {
-	x.inner.SetOverviewResolution(overviewResolution)
+// WithOverviewResolution ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+func (x *ScannerFunctionalUnit) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewResolution:"), overviewResolution)
 	return x
 }
 
-// @property type @abstract ￼Functional unit type.
-//
-// Type calls the underlying Type.
-func (x *ScannerFunctionalUnit) Type() ICScannerFunctionalUnitType {
-	return ICScannerFunctionalUnitType(x.inner.Type())
+// Type ￼Functional unit type.
+func (x *ScannerFunctionalUnit) Type() ScannerFunctionalUnitType {
+	_r := objc.Send[ScannerFunctionalUnitType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @property pixelDataType @abstract ￼The pixel data type.
-//
-// PixelDataType calls the underlying PixelDataType.
-func (x *ScannerFunctionalUnit) PixelDataType() ICScannerPixelDataType {
-	return ICScannerPixelDataType(x.inner.PixelDataType())
+// PixelDataType ￼The pixel data type.
+func (x *ScannerFunctionalUnit) PixelDataType() ScannerPixelDataType {
+	_r := objc.Send[ScannerPixelDataType](objref.IDOf(x), objc.RegisterName("pixelDataType"))
+	return _r
 }
 
-// SetPixelDataType calls the underlying SetPixelDataType.
-func (x *ScannerFunctionalUnit) SetPixelDataType(pixelDataType ICScannerPixelDataType) {
-	x.inner.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
+// SetPixelDataType wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetPixelDataType(pixelDataType ScannerPixelDataType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelDataType:"), pixelDataType)
 }
 
-// @property supportedBitDepths @abstract ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
-//
-// SupportedBitDepths calls the underlying SupportedBitDepths.
-func (x *ScannerFunctionalUnit) SupportedBitDepths() *foundation.NSIndexSet {
-	return x.inner.SupportedBitDepths()
+// SupportedBitDepths ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
+func (x *ScannerFunctionalUnit) SupportedBitDepths() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedBitDepths"))
+	return obj.Wrap(_r)
 }
 
-// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
-//
-// BitDepth calls the underlying BitDepth.
-func (x *ScannerFunctionalUnit) BitDepth() ICScannerBitDepth {
-	return ICScannerBitDepth(x.inner.BitDepth())
+// BitDepth ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+func (x *ScannerFunctionalUnit) BitDepth() ScannerBitDepth {
+	_r := objc.Send[ScannerBitDepth](objref.IDOf(x), objc.RegisterName("bitDepth"))
+	return _r
 }
 
-// SetBitDepth calls the underlying SetBitDepth.
-func (x *ScannerFunctionalUnit) SetBitDepth(bitDepth ICScannerBitDepth) {
-	x.inner.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
+// SetBitDepth wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetBitDepth(bitDepth ScannerBitDepth) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitDepth:"), bitDepth)
 }
 
-// @property supportedMeasurementUnits @abstract ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
-//
-// SupportedMeasurementUnits calls the underlying SupportedMeasurementUnits.
-func (x *ScannerFunctionalUnit) SupportedMeasurementUnits() *foundation.NSIndexSet {
-	return x.inner.SupportedMeasurementUnits()
+// SupportedMeasurementUnits ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
+func (x *ScannerFunctionalUnit) SupportedMeasurementUnits() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedMeasurementUnits"))
+	return obj.Wrap(_r)
 }
 
-// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
-//
-// MeasurementUnit calls the underlying MeasurementUnit.
-func (x *ScannerFunctionalUnit) MeasurementUnit() ICScannerMeasurementUnit {
-	return ICScannerMeasurementUnit(x.inner.MeasurementUnit())
+// MeasurementUnit ￼Current measurement unit. This will always be one of the supported measurement units.
+func (x *ScannerFunctionalUnit) MeasurementUnit() ScannerMeasurementUnit {
+	_r := objc.Send[ScannerMeasurementUnit](objref.IDOf(x), objc.RegisterName("measurementUnit"))
+	return _r
 }
 
-// SetMeasurementUnit calls the underlying SetMeasurementUnit.
-func (x *ScannerFunctionalUnit) SetMeasurementUnit(measurementUnit ICScannerMeasurementUnit) {
-	x.inner.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
+// SetMeasurementUnit wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetMeasurementUnit(measurementUnit ScannerMeasurementUnit) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
 }
 
-// @property supportedResolutions @abstract ￼Supported scan resolutions in DPI.
-//
-// SupportedResolutions calls the underlying SupportedResolutions.
-func (x *ScannerFunctionalUnit) SupportedResolutions() *foundation.NSIndexSet {
-	return x.inner.SupportedResolutions()
+// SupportedResolutions ￼Supported scan resolutions in DPI.
+func (x *ScannerFunctionalUnit) SupportedResolutions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedResolutions"))
+	return obj.Wrap(_r)
 }
 
-// @property preferredResolutions @abstract ￼Preferred scan resolutions in DPI.
-//
-// PreferredResolutions calls the underlying PreferredResolutions.
-func (x *ScannerFunctionalUnit) PreferredResolutions() *foundation.NSIndexSet {
-	return x.inner.PreferredResolutions()
+// PreferredResolutions ￼Preferred scan resolutions in DPI.
+func (x *ScannerFunctionalUnit) PreferredResolutions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredResolutions"))
+	return obj.Wrap(_r)
 }
 
-// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
-//
-// Resolution calls the underlying Resolution.
-func (x *ScannerFunctionalUnit) Resolution() uint {
-	return x.inner.Resolution()
+// Resolution ￼Current scan resolution. This will always be one of the supported resolution values.
+func (x *ScannerFunctionalUnit) Resolution() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resolution"))
+	return _r
 }
 
-// SetResolution calls the underlying SetResolution.
-func (x *ScannerFunctionalUnit) SetResolution(resolution uint) {
-	x.inner.SetResolution(resolution)
+// SetResolution wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetResolution(resolution int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolution:"), resolution)
 }
 
-// @property nativeXResolution @abstract ￼Optical resolution along the X axis.
-//
-// NativeXResolution calls the underlying NativeXResolution.
-func (x *ScannerFunctionalUnit) NativeXResolution() uint {
-	return x.inner.NativeXResolution()
+// NativeXResolution ￼Optical resolution along the X axis.
+func (x *ScannerFunctionalUnit) NativeXResolution() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nativeXResolution"))
+	return _r
 }
 
-// @property nativeYResolution @abstract ￼Optical resolution along the Y axis.
-//
-// NativeYResolution calls the underlying NativeYResolution.
-func (x *ScannerFunctionalUnit) NativeYResolution() uint {
-	return x.inner.NativeYResolution()
+// NativeYResolution ￼Optical resolution along the Y axis.
+func (x *ScannerFunctionalUnit) NativeYResolution() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nativeYResolution"))
+	return _r
 }
 
-// @property supportedScaleFactors @abstract ￼Supported scale factors in percentage.
-//
-// SupportedScaleFactors calls the underlying SupportedScaleFactors.
-func (x *ScannerFunctionalUnit) SupportedScaleFactors() *foundation.NSIndexSet {
-	return x.inner.SupportedScaleFactors()
+// SupportedScaleFactors ￼Supported scale factors in percentage.
+func (x *ScannerFunctionalUnit) SupportedScaleFactors() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedScaleFactors"))
+	return obj.Wrap(_r)
 }
 
-// @property preferredScaleFactors @abstract ￼Preferred scale factors in percentage.
-//
-// PreferredScaleFactors calls the underlying PreferredScaleFactors.
-func (x *ScannerFunctionalUnit) PreferredScaleFactors() *foundation.NSIndexSet {
-	return x.inner.PreferredScaleFactors()
+// PreferredScaleFactors ￼Preferred scale factors in percentage.
+func (x *ScannerFunctionalUnit) PreferredScaleFactors() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredScaleFactors"))
+	return obj.Wrap(_r)
 }
 
-// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
-//
-// ScaleFactor calls the underlying ScaleFactor.
-func (x *ScannerFunctionalUnit) ScaleFactor() uint {
-	return x.inner.ScaleFactor()
+// ScaleFactor ￼Current scale factor. This will always be one of the supported scale factor values.
+func (x *ScannerFunctionalUnit) ScaleFactor() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scaleFactor"))
+	return _r
 }
 
-// SetScaleFactor calls the underlying SetScaleFactor.
-func (x *ScannerFunctionalUnit) SetScaleFactor(scaleFactor uint) {
-	x.inner.SetScaleFactor(scaleFactor)
+// SetScaleFactor wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetScaleFactor(scaleFactor int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 }
 
-// @property templates @abstract An array of objects of type ICScannerFeatureTemplate.
+// Templates an array of objects of type ICScannerFeatureTemplate.
 //
 // Templates returns the collection as a Go slice.
 func (x *ScannerFunctionalUnit) Templates() []*ScannerFeatureTemplate {
-	arr := x.inner.Templates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ScannerFeatureTemplate {
-		return &ScannerFeatureTemplate{inner: raw.ICScannerFeatureTemplateFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ScannerFeatureTemplate { return ScannerFeatureTemplateFromID(_id) })
 }
 
-// @property vendorFeatures @abstract An array of objects of type ICScannerFeature.
+// VendorFeatures an array of objects of type ICScannerFeature.
 //
 // VendorFeatures returns the collection as a Go slice.
 func (x *ScannerFunctionalUnit) VendorFeatures() []*ScannerFeature {
-	arr := x.inner.VendorFeatures()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ScannerFeature {
-		return &ScannerFeature{inner: raw.ICScannerFeatureFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorFeatures"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ScannerFeature { return ScannerFeatureFromID(_id) })
 }
 
-// @property physicalSize @abstract ￼Physical size of the scan area in current measurement unit.
-//
-// PhysicalSize calls the underlying PhysicalSize.
+// PhysicalSize ￼Physical size of the scan area in current measurement unit.
 func (x *ScannerFunctionalUnit) PhysicalSize() corefoundation.CGSize {
-	return x.inner.PhysicalSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("physicalSize"))
+	return _r
 }
 
-// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
-//
-// ScanArea calls the underlying ScanArea.
+// ScanArea ￼This property along with scanAreaOrientation describes the area to be scanned.
 func (x *ScannerFunctionalUnit) ScanArea() corefoundation.CGRect {
-	return x.inner.ScanArea()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("scanArea"))
+	return _r
 }
 
-// SetScanArea calls the underlying SetScanArea.
+// SetScanArea wraps the corresponding Objective-C method.
 func (x *ScannerFunctionalUnit) SetScanArea(scanArea corefoundation.CGRect) {
-	x.inner.SetScanArea(scanArea)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanArea:"), scanArea)
 }
 
-// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
-//
-// ScanAreaOrientation calls the underlying ScanAreaOrientation.
-func (x *ScannerFunctionalUnit) ScanAreaOrientation() ICEXIFOrientationType {
-	return ICEXIFOrientationType(x.inner.ScanAreaOrientation())
+// ScanAreaOrientation ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+func (x *ScannerFunctionalUnit) ScanAreaOrientation() EXIFOrientationType {
+	_r := objc.Send[EXIFOrientationType](objref.IDOf(x), objc.RegisterName("scanAreaOrientation"))
+	return _r
 }
 
-// SetScanAreaOrientation calls the underlying SetScanAreaOrientation.
-func (x *ScannerFunctionalUnit) SetScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) {
-	x.inner.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
+// SetScanAreaOrientation wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetScanAreaOrientation(scanAreaOrientation EXIFOrientationType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
 }
 
-// @property acceptsThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit accepts threshold value to be used when performing a scan in black & white.
-//
-// AcceptsThresholdForBlackAndWhiteScanning calls the underlying AcceptsThresholdForBlackAndWhiteScanning.
+// AcceptsThresholdForBlackAndWhiteScanning ￼Indicates if this functional unit accepts threshold value to be used when performing a scan in black & white.
 func (x *ScannerFunctionalUnit) AcceptsThresholdForBlackAndWhiteScanning() bool {
-	return x.inner.AcceptsThresholdForBlackAndWhiteScanning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsThresholdForBlackAndWhiteScanning"))
+	return _r
 }
 
-// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-//
-// UsesThresholdForBlackAndWhiteScanning calls the underlying UsesThresholdForBlackAndWhiteScanning.
+// UsesThresholdForBlackAndWhiteScanning ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
 func (x *ScannerFunctionalUnit) UsesThresholdForBlackAndWhiteScanning() bool {
-	return x.inner.UsesThresholdForBlackAndWhiteScanning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesThresholdForBlackAndWhiteScanning"))
+	return _r
 }
 
-// SetUsesThresholdForBlackAndWhiteScanning calls the underlying SetUsesThresholdForBlackAndWhiteScanning.
+// SetUsesThresholdForBlackAndWhiteScanning wraps the corresponding Objective-C method.
 func (x *ScannerFunctionalUnit) SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) {
-	x.inner.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
 }
 
-// @property defaultThresholdForBlackAndWhiteScanning @abstract ￼Default threshold value used when performing a scan in black & white. This value is from 0 to 255.
-//
-// DefaultThresholdForBlackAndWhiteScanning calls the underlying DefaultThresholdForBlackAndWhiteScanning.
+// DefaultThresholdForBlackAndWhiteScanning ￼Default threshold value used when performing a scan in black & white. This value is from 0 to 255.
 func (x *ScannerFunctionalUnit) DefaultThresholdForBlackAndWhiteScanning() uint8 {
-	return x.inner.DefaultThresholdForBlackAndWhiteScanning()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("defaultThresholdForBlackAndWhiteScanning"))
+	return _r
 }
 
-// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
-//
-// ThresholdForBlackAndWhiteScanning calls the underlying ThresholdForBlackAndWhiteScanning.
+// ThresholdForBlackAndWhiteScanning ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
 func (x *ScannerFunctionalUnit) ThresholdForBlackAndWhiteScanning() uint8 {
-	return x.inner.ThresholdForBlackAndWhiteScanning()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("thresholdForBlackAndWhiteScanning"))
+	return _r
 }
 
-// SetThresholdForBlackAndWhiteScanning calls the underlying SetThresholdForBlackAndWhiteScanning.
+// SetThresholdForBlackAndWhiteScanning wraps the corresponding Objective-C method.
 func (x *ScannerFunctionalUnit) SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) {
-	x.inner.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
 }
 
-// @property state @abstract ￼Indicates the current state of the functional unit.
-//
-// State calls the underlying State.
-func (x *ScannerFunctionalUnit) State() ICScannerFunctionalUnitState {
-	return ICScannerFunctionalUnitState(x.inner.State())
+// State ￼Indicates the current state of the functional unit.
+func (x *ScannerFunctionalUnit) State() ScannerFunctionalUnitState {
+	_r := objc.Send[ScannerFunctionalUnitState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @property scanInProgress @abstract ￼Indicates if a scan is in progress.
-//
-// ScanInProgress calls the underlying ScanInProgress.
+// ScanInProgress ￼Indicates if a scan is in progress.
 func (x *ScannerFunctionalUnit) ScanInProgress() bool {
-	return x.inner.ScanInProgress()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scanInProgress"))
+	return _r
 }
 
-// @property scanProgressPercentDone @abstract ￼Indicates percentage of scan completed.
-//
-// ScanProgressPercentDone calls the underlying ScanProgressPercentDone.
+// ScanProgressPercentDone ￼Indicates percentage of scan completed.
 func (x *ScannerFunctionalUnit) ScanProgressPercentDone() float64 {
-	return x.inner.ScanProgressPercentDone()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scanProgressPercentDone"))
+	return _r
 }
 
-// @property canPerformOverviewScan @abstract ￼Indicates if this functional unit can perfrom an overview scan. Not all functional units can perform an overview scan. For example, a document feeder or a sheet feeder unit cannot perform an overview scan.
-//
-// CanPerformOverviewScan calls the underlying CanPerformOverviewScan.
+// CanPerformOverviewScan ￼Indicates if this functional unit can perfrom an overview scan. Not all functional units can perform an overview scan. For example, a document feeder or a sheet feeder unit cannot perform an overview scan.
 func (x *ScannerFunctionalUnit) CanPerformOverviewScan() bool {
-	return x.inner.CanPerformOverviewScan()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformOverviewScan"))
+	return _r
 }
 
-// @property overviewScanInProgress @abstract ￼Indicates if an overview scan is in progress.
-//
-// OverviewScanInProgress calls the underlying OverviewScanInProgress.
+// OverviewScanInProgress ￼Indicates if an overview scan is in progress.
 func (x *ScannerFunctionalUnit) OverviewScanInProgress() bool {
-	return x.inner.OverviewScanInProgress()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("overviewScanInProgress"))
+	return _r
 }
 
-// @property overviewImage @abstract ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
-//
-// OverviewImage calls the underlying OverviewImage.
-func (x *ScannerFunctionalUnit) OverviewImage() unsafe.Pointer {
-	return x.inner.OverviewImage()
+// OverviewImage ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
+func (x *ScannerFunctionalUnit) OverviewImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overviewImage"))
+	return obj.Wrap(_r)
 }
 
-// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
-//
-// OverviewResolution calls the underlying OverviewResolution.
-func (x *ScannerFunctionalUnit) OverviewResolution() uint {
-	return x.inner.OverviewResolution()
+// OverviewResolution ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+func (x *ScannerFunctionalUnit) OverviewResolution() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("overviewResolution"))
+	return _r
 }
 
-// SetOverviewResolution calls the underlying SetOverviewResolution.
-func (x *ScannerFunctionalUnit) SetOverviewResolution(overviewResolution uint) {
-	x.inner.SetOverviewResolution(overviewResolution)
-}
-
-func (x *ScannerFunctionalUnit) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
-	return x.inner
+// SetOverviewResolution wraps the corresponding Objective-C method.
+func (x *ScannerFunctionalUnit) SetOverviewResolution(overviewResolution int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewResolution:"), overviewResolution)
 }
 
 // ScannerFunctionalUnitable is the interface implemented by [ScannerFunctionalUnit], for mocking and DI.
 type ScannerFunctionalUnitable interface {
-	Unwrap() *raw.ICScannerFunctionalUnit
-	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnit
-	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnit
-	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnit
-	WithResolution(resolution uint) *ScannerFunctionalUnit
-	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnit
+	obj.Object
+	WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnit
+	WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnit
+	WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnit
+	WithResolution(resolution int) *ScannerFunctionalUnit
+	WithScaleFactor(scaleFactor int) *ScannerFunctionalUnit
 	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnit
-	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnit
+	WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnit
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnit
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnit
-	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnit
-	Type() ICScannerFunctionalUnitType
-	PixelDataType() ICScannerPixelDataType
-	SetPixelDataType(pixelDataType ICScannerPixelDataType)
-	SupportedBitDepths() *foundation.NSIndexSet
-	BitDepth() ICScannerBitDepth
-	SetBitDepth(bitDepth ICScannerBitDepth)
-	SupportedMeasurementUnits() *foundation.NSIndexSet
-	MeasurementUnit() ICScannerMeasurementUnit
-	SetMeasurementUnit(measurementUnit ICScannerMeasurementUnit)
-	SupportedResolutions() *foundation.NSIndexSet
-	PreferredResolutions() *foundation.NSIndexSet
-	Resolution() uint
-	SetResolution(resolution uint)
-	NativeXResolution() uint
-	NativeYResolution() uint
-	SupportedScaleFactors() *foundation.NSIndexSet
-	PreferredScaleFactors() *foundation.NSIndexSet
-	ScaleFactor() uint
-	SetScaleFactor(scaleFactor uint)
+	WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnit
+	Type() ScannerFunctionalUnitType
+	PixelDataType() ScannerPixelDataType
+	SetPixelDataType(pixelDataType ScannerPixelDataType)
+	SupportedBitDepths() obj.Object
+	BitDepth() ScannerBitDepth
+	SetBitDepth(bitDepth ScannerBitDepth)
+	SupportedMeasurementUnits() obj.Object
+	MeasurementUnit() ScannerMeasurementUnit
+	SetMeasurementUnit(measurementUnit ScannerMeasurementUnit)
+	SupportedResolutions() obj.Object
+	PreferredResolutions() obj.Object
+	Resolution() int
+	SetResolution(resolution int)
+	NativeXResolution() int
+	NativeYResolution() int
+	SupportedScaleFactors() obj.Object
+	PreferredScaleFactors() obj.Object
+	ScaleFactor() int
+	SetScaleFactor(scaleFactor int)
 	Templates() []*ScannerFeatureTemplate
 	VendorFeatures() []*ScannerFeature
 	PhysicalSize() corefoundation.CGSize
 	ScanArea() corefoundation.CGRect
 	SetScanArea(scanArea corefoundation.CGRect)
-	ScanAreaOrientation() ICEXIFOrientationType
-	SetScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType)
+	ScanAreaOrientation() EXIFOrientationType
+	SetScanAreaOrientation(scanAreaOrientation EXIFOrientationType)
 	AcceptsThresholdForBlackAndWhiteScanning() bool
 	UsesThresholdForBlackAndWhiteScanning() bool
 	SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool)
 	DefaultThresholdForBlackAndWhiteScanning() uint8
 	ThresholdForBlackAndWhiteScanning() uint8
 	SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8)
-	State() ICScannerFunctionalUnitState
+	State() ScannerFunctionalUnitState
 	ScanInProgress() bool
 	ScanProgressPercentDone() float64
 	CanPerformOverviewScan() bool
 	OverviewScanInProgress() bool
-	OverviewImage() unsafe.Pointer
-	OverviewResolution() uint
-	SetOverviewResolution(overviewResolution uint)
+	OverviewImage() obj.Object
+	OverviewResolution() int
+	SetOverviewResolution(overviewResolution int)
 }
 
 var _ ScannerFunctionalUnitable = (*ScannerFunctionalUnit)(nil)
+
+// isScannerFunctionalUnit marks ScannerFunctionalUnit — and, by embedding promotion, its
+// subclasses — as a member of the ScannerFunctionalUnit hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScannerFunctionalUnit) isScannerFunctionalUnit() {}
+
+var _ ScannerFunctionalUnitProvider = (*ScannerFunctionalUnit)(nil)

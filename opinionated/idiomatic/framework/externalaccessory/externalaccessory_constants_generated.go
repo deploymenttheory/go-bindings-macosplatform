@@ -5,32 +5,29 @@
 package externalaccessory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// EABluetoothAccessoryPickerErrorDomain returns the string constant EABluetoothAccessoryPickerErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func EABluetoothAccessoryPickerErrorDomain() objc.ID {
-	return purego.CFConstant(raw.EABluetoothAccessoryPickerErrorDomain())
+// EABluetoothAccessoryPickerErrorDomain returns the string constant EABluetoothAccessoryPickerErrorDomain, for use as a dictionary key or argument.
+func EABluetoothAccessoryPickerErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("EABluetoothAccessoryPickerErrorDomain")))
 }
 
-// EAAccessoryDidConnectNotification returns the string constant EAAccessoryDidConnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func EAAccessoryDidConnectNotification() objc.ID {
-	return purego.CFConstant(raw.EAAccessoryDidConnectNotification())
+// EAAccessoryDidConnectNotification returns the string constant EAAccessoryDidConnectNotification, for use as a dictionary key or argument.
+func EAAccessoryDidConnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("EAAccessoryDidConnectNotification")))
 }
 
-// EAAccessoryDidDisconnectNotification returns the string constant EAAccessoryDidDisconnectNotification as an objc.ID, for use as a dictionary key or selector argument.
-func EAAccessoryDidDisconnectNotification() objc.ID {
-	return purego.CFConstant(raw.EAAccessoryDidDisconnectNotification())
+// EAAccessoryDidDisconnectNotification returns the string constant EAAccessoryDidDisconnectNotification, for use as a dictionary key or argument.
+func EAAccessoryDidDisconnectNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("EAAccessoryDidDisconnectNotification")))
 }
 
-// EAAccessoryKey returns the string constant EAAccessoryKey as an objc.ID, for use as a dictionary key or selector argument.
-func EAAccessoryKey() objc.ID {
-	return purego.CFConstant(raw.EAAccessoryKey())
-}
+// EAAccessoryKey returns the string constant EAAccessoryKey, for use as a dictionary key or argument.
+func EAAccessoryKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("EAAccessoryKey"))) }
 
-// EAAccessorySelectedKey returns the string constant EAAccessorySelectedKey as an objc.ID, for use as a dictionary key or selector argument.
-func EAAccessorySelectedKey() objc.ID {
-	return purego.CFConstant(raw.EAAccessorySelectedKey())
+// EAAccessorySelectedKey returns the string constant EAAccessorySelectedKey, for use as a dictionary key or argument.
+func EAAccessorySelectedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("EAAccessorySelectedKey")))
 }

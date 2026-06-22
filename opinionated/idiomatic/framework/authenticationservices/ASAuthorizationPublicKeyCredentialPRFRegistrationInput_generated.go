@@ -5,58 +5,89 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for PRF extensions during registration.
+// AuthorizationPublicKeyCredentialPRFRegistrationInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFRegistrationInput.
 //
-// AuthorizationPublicKeyCredentialPRFRegistrationInput wraps [raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput] with a fluent Go API.
+// A type that encapsulates input for PRF extensions during registration.
 type AuthorizationPublicKeyCredentialPRFRegistrationInput struct {
-	inner *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput].
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPublicKeyCredentialPRFRegistrationInputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialPRFRegistrationInput (nil for 0).
+// AuthorizationPublicKeyCredentialPRFRegistrationInputFromID adopts an existing Objective-C object as a AuthorizationPublicKeyCredentialPRFRegistrationInput
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(id objc.ID) *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialPRFRegistrationInput{inner: raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(id)}
+	x := &AuthorizationPublicKeyCredentialPRFRegistrationInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues creates a new [AuthorizationPublicKeyCredentialPRFRegistrationInput].
-func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inputValues *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues) *AuthorizationPublicKeyCredentialPRFRegistrationInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputValues:"), inputValues.Ptr())
-	return &AuthorizationPublicKeyCredentialPRFRegistrationInput{inner: raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_id)}
-}
-
-// ShouldCheckForSupport calls the underlying ShouldCheckForSupport.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
-	return x.inner.ShouldCheckForSupport()
-}
-
-// InputValues calls the underlying InputValues.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
-	_r := x.inner.InputValues()
-	if _r == nil {
+// authorizationPublicKeyCredentialPRFRegistrationInputAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPublicKeyCredentialPRFRegistrationInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPublicKeyCredentialPRFRegistrationInputAdopt(id objc.ID) *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: _r}
+	x := &AuthorizationPublicKeyCredentialPRFRegistrationInput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues creates a new AuthorizationPublicKeyCredentialPRFRegistrationInput.
+func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inputValues *AuthorizationPublicKeyCredentialPRFAssertionInputValues) *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputValues:"), objref.IDOf(inputValues))
+	return authorizationPublicKeyCredentialPRFRegistrationInputAdopt(_id)
+}
+
+// ShouldCheckForSupport wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCheckForSupport"))
+	return _r
+}
+
+// InputValues wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputValues"))
+	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }
 
 // AuthorizationPublicKeyCredentialPRFRegistrationInputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFRegistrationInput], for mocking and DI.
 type AuthorizationPublicKeyCredentialPRFRegistrationInputable interface {
-	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput
+	obj.Object
 	ShouldCheckForSupport() bool
 	InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues
 }

@@ -5,66 +5,100 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGeneralDiagnosticsClusterRadioFaultChangeEvent wraps [raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterRadioFaultChangeEvent is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterRadioFaultChangeEvent.
 type MTRGeneralDiagnosticsClusterRadioFaultChangeEvent struct {
-	inner *raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent].
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Unwrap() *raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterRadioFaultChangeEvent (nil for 0).
+// MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterRadioFaultChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID(id objc.ID) *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterRadioFaultChangeEvent{inner: raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID(id)}
+	x := &MTRGeneralDiagnosticsClusterRadioFaultChangeEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGeneralDiagnosticsClusterRadioFaultChangeEvent creates a new [MTRGeneralDiagnosticsClusterRadioFaultChangeEvent].
+// mTRGeneralDiagnosticsClusterRadioFaultChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterRadioFaultChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterRadioFaultChangeEventAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralDiagnosticsClusterRadioFaultChangeEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRGeneralDiagnosticsClusterRadioFaultChangeEvent creates a new MTRGeneralDiagnosticsClusterRadioFaultChangeEvent.
 func NewMTRGeneralDiagnosticsClusterRadioFaultChangeEvent() *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterRadioFaultChangeEvent")), objc.RegisterName("new"))
-	return &MTRGeneralDiagnosticsClusterRadioFaultChangeEvent{inner: raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterRadioFaultChangeEvent")), objc.RegisterName("new"))
+	return mTRGeneralDiagnosticsClusterRadioFaultChangeEventAdopt(_id)
 }
 
-// Current calls the underlying Current.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
-	return x.inner.Current()
+// Current wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+	return obj.Wrap(_r)
 }
 
-// SetCurrent calls the underlying SetCurrent.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	x.inner.SetCurrent(current)
+// SetCurrent wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous calls the underlying Previous.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
-	return x.inner.Previous()
+// Previous wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+	return obj.Wrap(_r)
 }
 
-// SetPrevious calls the underlying SetPrevious.
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	x.inner.SetPrevious(previous)
+// SetPrevious wraps the corresponding Objective-C method.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
 
 // MTRGeneralDiagnosticsClusterRadioFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterRadioFaultChangeEvent], for mocking and DI.
 type MTRGeneralDiagnosticsClusterRadioFaultChangeEventable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent
-	Current() *foundation.NSArray[objc.ID]
-	SetCurrent(current *foundation.NSArray[objc.ID])
-	Previous() *foundation.NSArray[objc.ID]
-	SetPrevious(previous *foundation.NSArray[objc.ID])
+	obj.Object
+	Current() obj.Object
+	SetCurrent(current obj.Object)
+	Previous() obj.Object
+	SetPrevious(previous obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterRadioFaultChangeEventable = (*MTRGeneralDiagnosticsClusterRadioFaultChangeEvent)(nil)

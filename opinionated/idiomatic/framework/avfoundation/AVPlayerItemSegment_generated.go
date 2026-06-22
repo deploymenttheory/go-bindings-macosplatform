@@ -5,93 +5,105 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a segment of time on the integrated timeline.
+// PlayerItemSegment is an idiomatic wrapper over the Objective-C class AVPlayerItemSegment.
 //
-// PlayerItemSegment wraps [raw.AVPlayerItemSegment] with a fluent Go API.
+// An immutable object that represents a segment of time on the integrated timeline.
 type PlayerItemSegment struct {
-	inner *raw.AVPlayerItemSegment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemSegment].
-func (x *PlayerItemSegment) Unwrap() *raw.AVPlayerItemSegment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemSegment) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemSegmentFromID adopts an existing object pointer as a PlayerItemSegment (nil for 0).
+// PlayerItemSegmentFromID adopts an existing Objective-C object as a PlayerItemSegment
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemSegmentFromID(id objc.ID) *PlayerItemSegment {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemSegment{inner: raw.AVPlayerItemSegmentFromID(id)}
+	x := &PlayerItemSegment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemSegment creates a new [PlayerItemSegment].
+// playerItemSegmentAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemSegment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemSegmentAdopt(id objc.ID) *PlayerItemSegment {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemSegment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerItemSegment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PlayerItemSegment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPlayerItemSegment creates a new PlayerItemSegment.
 func NewPlayerItemSegment() *PlayerItemSegment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemSegment")), objc.RegisterName("new"))
-	return &PlayerItemSegment{inner: raw.AVPlayerItemSegmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemSegment")), objc.RegisterName("new"))
+	return playerItemSegmentAdopt(_id)
 }
 
-// @property		segmentType @abstract		The type of content this segment represents.
-//
-// SegmentType calls the underlying SegmentType.
-func (x *PlayerItemSegment) SegmentType() AVPlayerItemSegmentType {
-	return AVPlayerItemSegmentType(x.inner.SegmentType())
+// SegmentType the type of content this segment represents.
+func (x *PlayerItemSegment) SegmentType() PlayerItemSegmentType {
+	_r := objc.Send[PlayerItemSegmentType](objref.IDOf(x), objc.RegisterName("segmentType"))
+	return _r
 }
 
-// @property		timeMapping @abstract		The timeMapping for this segment. @discussion The timeMapping source timeRange represents the start and duration in the segment source's timeline (ie: primary item timeline or interstitial event). The target timeRange represents the start point and duration in the integrated timeline. For interstitial events which occupy a single point, the target's duration will be kCMTimeZero.
-//
-// TimeMapping calls the underlying TimeMapping.
-func (x *PlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
-	return x.inner.TimeMapping()
-}
-
-// @property	loadedTimeRanges @abstract	This property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. @discussion Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
+// LoadedTimeRanges this property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *PlayerItemSegment) LoadedTimeRanges() []*foundation.NSValue {
-	arr := x.inner.LoadedTimeRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *PlayerItemSegment) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property		startDate @abstract		The date this segment starts at. @discussion The date this segment starts at. This value will be nil if the primary item does not contain dates.
-//
-// StartDate calls the underlying StartDate.
-func (x *PlayerItemSegment) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// StartDate the date this segment starts at. The date this segment starts at. This value will be nil if the primary item does not contain dates.
+func (x *PlayerItemSegment) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// @property		interstitialEvent @abstract		The associated interstitial event for this segment. @discussion The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
-//
-// InterstitialEvent calls the underlying InterstitialEvent.
+// InterstitialEvent the associated interstitial event for this segment. The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
 func (x *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
-	_r := x.inner.InterstitialEvent()
-	if _r == nil {
-		return nil
-	}
-	return &PlayerInterstitialEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interstitialEvent"))
+	return PlayerInterstitialEventFromID(_r)
 }
 
 // PlayerItemSegmentable is the interface implemented by [PlayerItemSegment], for mocking and DI.
 type PlayerItemSegmentable interface {
-	Unwrap() *raw.AVPlayerItemSegment
-	SegmentType() AVPlayerItemSegmentType
-	TimeMapping() coremedia.CMTimeMapping
-	LoadedTimeRanges() []*foundation.NSValue
-	StartDate() *foundation.NSDate
+	obj.Object
+	SegmentType() PlayerItemSegmentType
+	LoadedTimeRanges() []obj.Object
+	StartDate() obj.Object
 	InterstitialEvent() *PlayerInterstitialEvent
 }
 

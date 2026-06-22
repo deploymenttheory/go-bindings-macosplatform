@@ -5,177 +5,174 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// This class serves as the entry point to the iTunesLibrary framework.
+// Library is an idiomatic wrapper over the Objective-C class ITLibrary.
 //
-// Library wraps [raw.ITLibrary] with a fluent Go API.
+// This class serves as the entry point to the iTunesLibrary framework.
 type Library struct {
-	inner *raw.ITLibrary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibrary].
-func (x *Library) Unwrap() *raw.ITLibrary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Library) ID() objc.ID { return x.inner.Ptr() }
-
-// LibraryFromID adopts an existing object pointer as a Library (nil for 0).
+// LibraryFromID adopts an existing Objective-C object as a Library
+// (nil for 0), retaining it and registering a release finalizer.
 func LibraryFromID(id objc.ID) *Library {
 	if id == 0 {
 		return nil
 	}
-	return &Library{inner: raw.ITLibraryFromID(id)}
+	x := &Library{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an instance of ITLibrary that can retrieve media entities.
-//
-// NewLibraryWithAPIVersionError creates a new [Library].
-func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibrary")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:error:"), foundation.NSStringStringWithUTF8String(requestedAPIVersion).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
-}
-
-// Initializes an instance of ITLibrary that can retrieve media entities.
-//
-// NewLibraryWithAPIVersionOptionsError creates a new [Library].
-func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ITLibInitOptions) (*Library, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibrary")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:options:error:"), foundation.NSStringStringWithUTF8String(requestedAPIVersion).Ptr(), raw.ITLibInitOptions(options), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
-}
-
-// Retrieves the artwork from a media file that may or may not be in the iTunes library.
-//
-// ArtworkForMediaFile calls the underlying ArtworkForMediaFile.
-func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
-	_r := x.inner.ArtworkForMediaFile(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mediaFileURL)))
-	if _r == nil {
+// libraryAdopt wraps an Objective-C object that this code just created as a
+// Library (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libraryAdopt(id objc.ID) *Library {
+	if id == 0 {
 		return nil
 	}
-	return &LibArtwork{inner: _r}
+	x := &Library{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Refreshes the data that the framework uses.
-//
-// ReloadData calls the underlying ReloadData.
+// Description returns the object's -description text.
+func (x *Library) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Library) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Library) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Library) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLibraryWithAPIVersionError initializes an instance of ITLibrary that can retrieve media entities.
+func NewLibraryWithAPIVersionError(requestedAPIVersion string) (result *Library, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ITLibrary")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:error:"), purego.NSString(requestedAPIVersion), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return libraryAdopt(_id), nil
+}
+
+// NewLibraryWithAPIVersionOptionsError initializes an instance of ITLibrary that can retrieve media entities.
+func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options LibInitOptions) (result *Library, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ITLibrary")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:options:error:"), purego.NSString(requestedAPIVersion), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return libraryAdopt(_id), nil
+}
+
+// ArtworkForMediaFile retrieves the artwork from a media file that may or may not be in the iTunes library.
+func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artworkForMediaFile:"), rt.FileURL(mediaFileURL))
+	return LibArtworkFromID(_r)
+}
+
+// ReloadData refreshes the data that the framework uses.
 func (x *Library) ReloadData() bool {
-	return x.inner.ReloadData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reloadData"))
+	return _r
 }
 
-// Unloads the data that the framework uses.
-//
-// UnloadData calls the underlying UnloadData.
+// UnloadData unloads the data that the framework uses.
 func (x *Library) UnloadData() {
-	x.inner.UnloadData()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unloadData"))
 }
 
-// @abstract The version of iTunes being accessed.
-//
-// ApplicationVersion calls the underlying ApplicationVersion.
+// ApplicationVersion the version of iTunes being accessed.
 func (x *Library) ApplicationVersion() string {
-	_r := x.inner.ApplicationVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract A bitwise OR combination of the features of this library.
-//
-// Features calls the underlying Features.
-func (x *Library) Features() ITLibExportFeature {
-	return ITLibExportFeature(x.inner.Features())
+// Features a bitwise OR combination of the features of this library.
+func (x *Library) Features() LibExportFeature {
+	_r := objc.Send[LibExportFeature](objref.IDOf(x), objc.RegisterName("features"))
+	return _r
 }
 
-// @abstract The major version number of this API.
-//
-// ApiMajorVersion calls the underlying ApiMajorVersion.
-func (x *Library) ApiMajorVersion() uint {
-	return x.inner.ApiMajorVersion()
+// ApiMajorVersion the major version number of this API.
+func (x *Library) ApiMajorVersion() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("apiMajorVersion"))
+	return _r
 }
 
-// @abstract The minor version number of this API.
-//
-// ApiMinorVersion calls the underlying ApiMinorVersion.
-func (x *Library) ApiMinorVersion() uint {
-	return x.inner.ApiMinorVersion()
+// ApiMinorVersion the minor version number of this API.
+func (x *Library) ApiMinorVersion() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("apiMinorVersion"))
+	return _r
 }
 
-// @abstract The location of the iTunes music folder.
-//
-// MediaFolderLocation calls the underlying MediaFolderLocation.
-func (x *Library) MediaFolderLocation() unsafe.Pointer {
-	return x.inner.MediaFolderLocation()
+// MusicFolderLocation the location of the iTunes music folder. Replaced by mediaFolderLocation.
+func (x *Library) MusicFolderLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("musicFolderLocation"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The location of the iTunes music folder. Replaced by mediaFolderLocation.
-//
-// MusicFolderLocation calls the underlying MusicFolderLocation.
-func (x *Library) MusicFolderLocation() *foundation.NSURL {
-	return x.inner.MusicFolderLocation()
-}
-
-// @abstract Whether to show content rating labels.
-//
-// ShouldShowContentRating calls the underlying ShouldShowContentRating.
+// ShouldShowContentRating whether to show content rating labels.
 func (x *Library) ShouldShowContentRating() bool {
-	return x.inner.ShouldShowContentRating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldShowContentRating"))
+	return _r
 }
 
-// @abstract All media items in the library.
+// AllMediaItems all media items in the library.
 //
 // AllMediaItems returns the collection as a Go slice.
 func (x *Library) AllMediaItems() []*LibMediaItem {
-	arr := x.inner.AllMediaItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LibMediaItem {
-		return &LibMediaItem{inner: raw.ITLibMediaItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allMediaItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LibMediaItem { return LibMediaItemFromID(_id) })
 }
 
-// @abstract All playlists in the library.
+// AllPlaylists all playlists in the library.
 //
 // AllPlaylists returns the collection as a Go slice.
 func (x *Library) AllPlaylists() []*LibPlaylist {
-	arr := x.inner.AllPlaylists()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LibPlaylist {
-		return &LibPlaylist{inner: raw.ITLibPlaylistFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allPlaylists"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LibPlaylist { return LibPlaylistFromID(_id) })
 }
 
 // Libraryable is the interface implemented by [Library], for mocking and DI.
 type Libraryable interface {
-	Unwrap() *raw.ITLibrary
+	obj.Object
 	ArtworkForMediaFile(mediaFileURL string) *LibArtwork
 	ReloadData() bool
 	UnloadData()
 	ApplicationVersion() string
-	Features() ITLibExportFeature
-	ApiMajorVersion() uint
-	ApiMinorVersion() uint
-	MediaFolderLocation() unsafe.Pointer
-	MusicFolderLocation() *foundation.NSURL
+	Features() LibExportFeature
+	ApiMajorVersion() int
+	ApiMinorVersion() int
+	MusicFolderLocation() obj.Object
 	ShouldShowContentRating() bool
 	AllMediaItems() []*LibMediaItem
 	AllPlaylists() []*LibPlaylist

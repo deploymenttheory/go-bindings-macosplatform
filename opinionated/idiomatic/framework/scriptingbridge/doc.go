@@ -3,4 +3,11 @@
 //go:build darwin
 
 // Package scriptingbridge provides a fluent Go API over the macOS ScriptingBridge framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Object: [Application]
 package scriptingbridge

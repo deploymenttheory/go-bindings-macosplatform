@@ -3,4 +3,14 @@
 //go:build darwin
 
 // Package imagecapturecore provides a fluent Go API over the macOS ImageCaptureCore framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - CameraItem: [CameraFile], [CameraFolder]
+//   - Device: [CameraDevice], [ScannerDevice]
+//   - ScannerFeature: [ScannerFeatureBoolean], [ScannerFeatureEnumeration], [ScannerFeatureRange], [ScannerFeatureTemplate]
+//   - ScannerFunctionalUnit: [ScannerFunctionalUnitDocumentFeeder], [ScannerFunctionalUnitFlatbed], [ScannerFunctionalUnitNegativeTransparency], [ScannerFunctionalUnitPositiveTransparency]
 package imagecapturecore

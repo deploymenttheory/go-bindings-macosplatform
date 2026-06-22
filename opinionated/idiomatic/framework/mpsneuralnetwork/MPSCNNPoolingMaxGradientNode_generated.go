@@ -5,70 +5,67 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNPoolingMaxGradientNode wraps [raw.MPSCNNPoolingMaxGradientNode] with a fluent Go API.
+// CNNPoolingMaxGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNPoolingMaxGradientNode.
+//
+// It embeds [CNNPoolingGradientNode], promoting that type's methods.
 type CNNPoolingMaxGradientNode struct {
-	inner *raw.MPSCNNPoolingMaxGradientNode
+	CNNPoolingGradientNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNPoolingMaxGradientNode].
-func (x *CNNPoolingMaxGradientNode) Unwrap() *raw.MPSCNNPoolingMaxGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNPoolingMaxGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNPoolingMaxGradientNodeFromID adopts an existing object pointer as a CNNPoolingMaxGradientNode (nil for 0).
+// CNNPoolingMaxGradientNodeFromID adopts an existing Objective-C object as a CNNPoolingMaxGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNPoolingMaxGradientNodeFromID(id objc.ID) *CNNPoolingMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNPoolingMaxGradientNode{inner: raw.MPSCNNPoolingMaxGradientNodeFromID(id)}
+	x := &CNNPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNPoolingMaxGradientNode creates a new [CNNPoolingMaxGradientNode].
+// cNNPoolingMaxGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNPoolingMaxGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNPoolingMaxGradientNodeAdopt(id objc.ID) *CNNPoolingMaxGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNPoolingMaxGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNPoolingMaxGradientNode creates a new CNNPoolingMaxGradientNode.
 func NewCNNPoolingMaxGradientNode() *CNNPoolingMaxGradientNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNPoolingMaxGradientNode")), objc.RegisterName("new"))
-	return &CNNPoolingMaxGradientNode{inner: raw.MPSCNNPoolingMaxGradientNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingMaxGradientNode")), objc.RegisterName("new"))
+	return cNNPoolingMaxGradientNodeAdopt(_id)
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNPoolingMaxGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingMaxGradientNode {
-	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *CNNPoolingMaxGradientNode) WithLabel(label string) *CNNPoolingMaxGradientNode {
-	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNPoolingMaxGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode {
-	return &x.inner.MPSCNNPoolingGradientNode
-}
-
-func (x *CNNPoolingMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode
-}
-
-func (x *CNNPoolingMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // CNNPoolingMaxGradientNodeable is the interface implemented by [CNNPoolingMaxGradientNode], for mocking and DI.
 type CNNPoolingMaxGradientNodeable interface {
-	Unwrap() *raw.MPSCNNPoolingMaxGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingMaxGradientNode
+	obj.Object
 	WithLabel(label string) *CNNPoolingMaxGradientNode
 }
 
 var _ CNNPoolingMaxGradientNodeable = (*CNNPoolingMaxGradientNode)(nil)
+
+var _ CNNPoolingGradientNodeProvider = (*CNNPoolingMaxGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNPoolingMaxGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNPoolingMaxGradientNode)(nil)

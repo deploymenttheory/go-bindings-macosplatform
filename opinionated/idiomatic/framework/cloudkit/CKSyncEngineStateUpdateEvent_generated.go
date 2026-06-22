@@ -5,55 +5,65 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The sync engine state was updated, and you should persist it locally.
+// SyncEngineStateUpdateEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineStateUpdateEvent.
 //
-// SyncEngineStateUpdateEvent wraps [raw.CKSyncEngineStateUpdateEvent] with a fluent Go API.
+// It embeds [SyncEngineEvent], promoting that type's methods.
+//
+// The sync engine state was updated, and you should persist it locally.
 type SyncEngineStateUpdateEvent struct {
-	inner *raw.CKSyncEngineStateUpdateEvent
+	SyncEngineEvent
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineStateUpdateEvent].
-func (x *SyncEngineStateUpdateEvent) Unwrap() *raw.CKSyncEngineStateUpdateEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineStateUpdateEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineStateUpdateEventFromID adopts an existing object pointer as a SyncEngineStateUpdateEvent (nil for 0).
+// SyncEngineStateUpdateEventFromID adopts an existing Objective-C object as a SyncEngineStateUpdateEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineStateUpdateEventFromID(id objc.ID) *SyncEngineStateUpdateEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineStateUpdateEvent{inner: raw.CKSyncEngineStateUpdateEventFromID(id)}
+	x := &SyncEngineStateUpdateEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineStateUpdateEvent creates a new [SyncEngineStateUpdateEvent].
-func NewSyncEngineStateUpdateEvent() *SyncEngineStateUpdateEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineStateUpdateEvent")), objc.RegisterName("new"))
-	return &SyncEngineStateUpdateEvent{inner: raw.CKSyncEngineStateUpdateEventFromID(_id)}
-}
-
-// StateSerialization calls the underlying StateSerialization.
-func (x *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
-	_r := x.inner.StateSerialization()
-	if _r == nil {
+// syncEngineStateUpdateEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineStateUpdateEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineStateUpdateEventAdopt(id objc.ID) *SyncEngineStateUpdateEvent {
+	if id == 0 {
 		return nil
 	}
-	return &SyncEngineStateSerialization{inner: _r}
+	x := &SyncEngineStateUpdateEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SyncEngineStateUpdateEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+// NewSyncEngineStateUpdateEvent creates a new SyncEngineStateUpdateEvent.
+func NewSyncEngineStateUpdateEvent() *SyncEngineStateUpdateEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineStateUpdateEvent")), objc.RegisterName("new"))
+	return syncEngineStateUpdateEventAdopt(_id)
+}
+
+// StateSerialization wraps the corresponding Objective-C method.
+func (x *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateSerialization"))
+	return SyncEngineStateSerializationFromID(_r)
 }
 
 // SyncEngineStateUpdateEventable is the interface implemented by [SyncEngineStateUpdateEvent], for mocking and DI.
 type SyncEngineStateUpdateEventable interface {
-	Unwrap() *raw.CKSyncEngineStateUpdateEvent
+	obj.Object
 	StateSerialization() *SyncEngineStateSerialization
 }
 
 var _ SyncEngineStateUpdateEventable = (*SyncEngineStateUpdateEvent)(nil)
+
+var _ SyncEngineEventProvider = (*SyncEngineStateUpdateEvent)(nil)

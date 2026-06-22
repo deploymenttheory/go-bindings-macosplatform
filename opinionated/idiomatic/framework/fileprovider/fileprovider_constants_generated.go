@@ -5,73 +5,51 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// The root of the hierarchical enumeration, i.e the container enumerated when the user starts browsing your file provider.
-// NSFileProviderRootContainerItemIdentifier returns the string constant NSFileProviderRootContainerItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderRootContainerItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSFileProviderRootContainerItemIdentifier())
+// NSFileProviderRootContainerItemIdentifier returns the string constant NSFileProviderRootContainerItemIdentifier, for use as a dictionary key or argument.
+func NSFileProviderRootContainerItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderRootContainerItemIdentifier")))
 }
 
-// The item identifier of the working set, a synthetic container used by the extension to communicate changes to the system even when the parent directories of these items aren't actively being enumerated.  Items in this set should have their parentItemIdentifier set to the identifier of their parent directory. The working set is the set of files and directories that should be made available to the system regardless of the local browsing history.  Files listed in the working set are indexed in the local Spotlight index and appear in offline search results.  They contribute to the Recents view of the Files app, sorted by lastUsedDate, and it is therefore important to provide a consistent experience across devices by including in the working set all the documents recently used, trashed, favorited, shared or tagged. The Spotlight index and the Recents view will show outdated information unless the file provider extension keeps the working set up to date with local and remote changes.  When an item in the working set is remotely modified, the extension calls -signalEnumeratorForContainerItemIdentifier: on the identifier of the working set; the system will then enumerate changes and update its caches. Starting in iOS 12 and macOS 10.15, the system maintains a cache on the local file system of files and directories previously enumerated.  The working set is the container used to update that set of files.  The extension may know whether an item is in that set by checking whether its parentItemIdentifier is listed in the materialized containers, see the documentation on -materializedItemsDidChangeWithCompletionHandler:.
-// NSFileProviderWorkingSetContainerItemIdentifier returns the string constant NSFileProviderWorkingSetContainerItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderWorkingSetContainerItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSFileProviderWorkingSetContainerItemIdentifier())
+// NSFileProviderWorkingSetContainerItemIdentifier returns the string constant NSFileProviderWorkingSetContainerItemIdentifier, for use as a dictionary key or argument.
+func NSFileProviderWorkingSetContainerItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderWorkingSetContainerItemIdentifier")))
 }
 
-// The container containing all the trashed items. When an item is trashed, its `parentItemIdentifier` becomes `NSFileProviderTrashContainerItemIdentifier`. Extension should be able to return all trashed items by supporting the creation of a NSFileProviderEnumerator for the trashed items.
-// NSFileProviderTrashContainerItemIdentifier returns the string constant NSFileProviderTrashContainerItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderTrashContainerItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSFileProviderTrashContainerItemIdentifier())
+// NSFileProviderTrashContainerItemIdentifier returns the string constant NSFileProviderTrashContainerItemIdentifier, for use as a dictionary key or argument.
+func NSFileProviderTrashContainerItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderTrashContainerItemIdentifier")))
 }
 
-// Posted when any domain changed. Interested client should then call `+[NSFileProviderManager getDomainsWithCompletionHandler:]` and see what changed. Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
-// NSFileProviderDomainDidChange returns the string constant NSFileProviderDomainDidChange as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderDomainDidChange() objc.ID {
-	if _r := raw.NSFileProviderDomainDidChange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFileProviderDomainDidChange returns the string constant NSFileProviderDomainDidChange, for use as a dictionary key or argument.
+func NSFileProviderDomainDidChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderDomainDidChange")))
 }
 
-// System interpreted user info key When setting a value to that user info on a domain, the system will ingest this value. If user has given their consent for telemetry, this value will be used to decorate telemetry messages sent by the FileProvider subsystem. The telemetry messages can be then later on retrieved by developers along with the other metrics through the CloudKit console as detailed here: https://developer.apple.com/documentation/fileprovider/exporting-file-provider-metrics-data?language=objc This will help developers triaging data they receive from testing population compared to regular users The value must either be a NSNumber between [0 - 31]. If it's not in that range, or if it is not a NSNumber, any call to addDomain with that invalid UserInfo dictionary will fail with a EINVAL POSIX NSError. To update this value, the provider must call addDomain with an updated userInfo dictionary
-// NSFileProviderUserInfoExperimentIDKey returns the string constant NSFileProviderUserInfoExperimentIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderUserInfoExperimentIDKey() objc.ID {
-	return purego.CFConstant(raw.NSFileProviderUserInfoExperimentIDKey())
+// NSFileProviderUserInfoExperimentIDKey returns the string constant NSFileProviderUserInfoExperimentIDKey, for use as a dictionary key or argument.
+func NSFileProviderUserInfoExperimentIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderUserInfoExperimentIDKey")))
 }
 
-// NSFileProviderErrorDomain returns the string constant NSFileProviderErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderErrorDomain() objc.ID {
-	if _r := raw.NSFileProviderErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFileProviderErrorDomain returns the string constant NSFileProviderErrorDomain, for use as a dictionary key or argument.
+func NSFileProviderErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderErrorDomain")))
 }
 
-// NSFileProviderErrorNonExistentItemIdentifierKey returns the string constant NSFileProviderErrorNonExistentItemIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderErrorNonExistentItemIdentifierKey() objc.ID {
-	if _r := raw.NSFileProviderErrorNonExistentItemIdentifierKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFileProviderErrorNonExistentItemIdentifierKey returns the string constant NSFileProviderErrorNonExistentItemIdentifierKey, for use as a dictionary key or argument.
+func NSFileProviderErrorNonExistentItemIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderErrorNonExistentItemIdentifierKey")))
 }
 
-// NSFileProviderMaterializedSetDidChange returns the string constant NSFileProviderMaterializedSetDidChange as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderMaterializedSetDidChange() objc.ID {
-	if _r := raw.NSFileProviderMaterializedSetDidChange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFileProviderMaterializedSetDidChange returns the string constant NSFileProviderMaterializedSetDidChange, for use as a dictionary key or argument.
+func NSFileProviderMaterializedSetDidChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderMaterializedSetDidChange")))
 }
 
-// Posted when the pending set has changed. Interested clients can then use the pending set enumerator returned by -enumeratorForPendingItems to enumerate changes on the pending set. Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
-// NSFileProviderPendingSetDidChange returns the string constant NSFileProviderPendingSetDidChange as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileProviderPendingSetDidChange() objc.ID {
-	if _r := raw.NSFileProviderPendingSetDidChange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFileProviderPendingSetDidChange returns the string constant NSFileProviderPendingSetDidChange, for use as a dictionary key or argument.
+func NSFileProviderPendingSetDidChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderPendingSetDidChange")))
 }

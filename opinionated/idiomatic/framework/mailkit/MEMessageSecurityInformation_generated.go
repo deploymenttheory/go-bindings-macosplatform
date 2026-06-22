@@ -5,110 +5,107 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.
+// MessageSecurityInformation is an idiomatic wrapper over the Objective-C class MEMessageSecurityInformation.
 //
-// MessageSecurityInformation wraps [raw.MEMessageSecurityInformation] with a fluent Go API.
+// An object that contains details about a message’s content, such as if it’s encrypted and who digitally signed it.
 type MessageSecurityInformation struct {
-	inner *raw.MEMessageSecurityInformation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEMessageSecurityInformation].
-func (x *MessageSecurityInformation) Unwrap() *raw.MEMessageSecurityInformation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MessageSecurityInformation) ID() objc.ID { return x.inner.Ptr() }
-
-// MessageSecurityInformationFromID adopts an existing object pointer as a MessageSecurityInformation (nil for 0).
+// MessageSecurityInformationFromID adopts an existing Objective-C object as a MessageSecurityInformation
+// (nil for 0), retaining it and registering a release finalizer.
 func MessageSecurityInformationFromID(id objc.ID) *MessageSecurityInformation {
 	if id == 0 {
 		return nil
 	}
-	return &MessageSecurityInformation{inner: raw.MEMessageSecurityInformationFromID(id)}
+	x := &MessageSecurityInformation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a message security information object that indicates if a message is encrypted, who signed it, or if an error occurred when decoding the message.
-//
-// NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionError creates a new [MessageSecurityInformation].
-func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionError(signers *foundation.NSArray[*raw.MEMessageSigner], isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageSecurityInformation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageSecurityInformation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:"), signers.Ptr(), isEncrypted, signingError, encryptionError)
-	return &MessageSecurityInformation{inner: raw.MEMessageSecurityInformationFromID(_id)}
+// messageSecurityInformationAdopt wraps an Objective-C object that this code just created as a
+// MessageSecurityInformation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messageSecurityInformationAdopt(id objc.ID) *MessageSecurityInformation {
+	if id == 0 {
+		return nil
+	}
+	x := &MessageSecurityInformation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason creates a new [MessageSecurityInformation].
-func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason(signers *foundation.NSArray[*raw.MEMessageSigner], isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer, shouldBlockRemoteContent bool, localizedRemoteContentBlockingReason string) *MessageSecurityInformation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageSecurityInformation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:shouldBlockRemoteContent:localizedRemoteContentBlockingReason:"), signers.Ptr(), isEncrypted, signingError, encryptionError, shouldBlockRemoteContent, foundation.NSStringStringWithUTF8String(localizedRemoteContentBlockingReason).Ptr())
-	return &MessageSecurityInformation{inner: raw.MEMessageSecurityInformationFromID(_id)}
+// Description returns the object's -description text.
+func (x *MessageSecurityInformation) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief The signers of the message
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MessageSecurityInformation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MessageSecurityInformation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MessageSecurityInformation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMessageSecurityInformation creates a new MessageSecurityInformation.
+func NewMessageSecurityInformation() *MessageSecurityInformation {
+	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageSecurityInformation")), objc.RegisterName("new"))
+	return messageSecurityInformationAdopt(_id)
+}
+
+// Signers the signers of the message
 //
 // Signers returns the collection as a Go slice.
 func (x *MessageSecurityInformation) Signers() []*MessageSigner {
-	arr := x.inner.Signers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MessageSigner {
-		return &MessageSigner{inner: raw.MEMessageSignerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MessageSigner { return MessageSignerFromID(_id) })
 }
 
-// @brief Whether or not the message was encrypted.
-//
-// IsEncrypted calls the underlying IsEncrypted.
+// IsEncrypted whether or not the message was encrypted.
 func (x *MessageSecurityInformation) IsEncrypted() bool {
-	return x.inner.IsEncrypted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+	return _r
 }
 
-// @brief Any signing error that occured when decoding the message.
-//
-// SigningError calls the underlying SigningError.
-func (x *MessageSecurityInformation) SigningError() unsafe.Pointer {
-	return x.inner.SigningError()
-}
-
-// @brief Any encryption error that occured when decoding the message.
-//
-// EncryptionError calls the underlying EncryptionError.
-func (x *MessageSecurityInformation) EncryptionError() unsafe.Pointer {
-	return x.inner.EncryptionError()
-}
-
-// @brief Whether or not Mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
-//
-// ShouldBlockRemoteContent calls the underlying ShouldBlockRemoteContent.
+// ShouldBlockRemoteContent whether or not Mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
 func (x *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
-	return x.inner.ShouldBlockRemoteContent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBlockRemoteContent"))
+	return _r
 }
 
-// @brief A localized string containing the reason for blocking remote content.
-//
-// LocalizedRemoteContentBlockingReason calls the underlying LocalizedRemoteContentBlockingReason.
+// LocalizedRemoteContentBlockingReason a localized string containing the reason for blocking remote content.
 func (x *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
-	_r := x.inner.LocalizedRemoteContentBlockingReason()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRemoteContentBlockingReason"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // MessageSecurityInformationable is the interface implemented by [MessageSecurityInformation], for mocking and DI.
 type MessageSecurityInformationable interface {
-	Unwrap() *raw.MEMessageSecurityInformation
+	obj.Object
 	Signers() []*MessageSigner
 	IsEncrypted() bool
-	SigningError() unsafe.Pointer
-	EncryptionError() unsafe.Pointer
 	ShouldBlockRemoteContent() bool
 	LocalizedRemoteContentBlockingReason() string
 }

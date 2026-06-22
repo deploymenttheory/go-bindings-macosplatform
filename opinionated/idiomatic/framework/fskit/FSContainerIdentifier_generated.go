@@ -5,74 +5,79 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies a container.
+// ContainerIdentifier is an idiomatic wrapper over the Objective-C class FSContainerIdentifier.
 //
-// ContainerIdentifier wraps [raw.FSContainerIdentifier] with a fluent Go API.
+// It embeds [EntityIdentifier], promoting that type's methods.
+//
+// A type that identifies a container.
 type ContainerIdentifier struct {
-	inner *raw.FSContainerIdentifier
+	EntityIdentifier
 }
 
-// Unwrap returns the underlying [raw.FSContainerIdentifier].
-func (x *ContainerIdentifier) Unwrap() *raw.FSContainerIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContainerIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// ContainerIdentifierFromID adopts an existing object pointer as a ContainerIdentifier (nil for 0).
+// ContainerIdentifierFromID adopts an existing Objective-C object as a ContainerIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func ContainerIdentifierFromID(id objc.ID) *ContainerIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &ContainerIdentifier{inner: raw.FSContainerIdentifierFromID(id)}
-}
-
-// NewContainerIdentifier creates a new [ContainerIdentifier].
-func NewContainerIdentifier() *ContainerIdentifier {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSContainerIdentifier")), objc.RegisterName("new"))
-	return &ContainerIdentifier{inner: raw.FSContainerIdentifierFromID(_id)}
-}
-
-// A UUID to uniquely identify this entity.
-//
-// WithUuid sets the uuid property and returns the receiver for chaining.
-func (x *ContainerIdentifier) WithUuid(uuid *foundation.NSUUID) *ContainerIdentifier {
-	x.inner.FSEntityIdentifier.SetUuid(uuid)
+	x := &ContainerIdentifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// An optional piece of data to distinguish entities that otherwise share the same UUID.
-//
-// WithQualifier sets the qualifier property and returns the receiver for chaining.
-func (x *ContainerIdentifier) WithQualifier(qualifier *foundation.NSData) *ContainerIdentifier {
-	x.inner.FSEntityIdentifier.SetQualifier(qualifier)
-	return x
-}
-
-// VolumeIdentifier calls the underlying VolumeIdentifier.
-func (x *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
-	_r := x.inner.VolumeIdentifier()
-	if _r == nil {
+// containerIdentifierAdopt wraps an Objective-C object that this code just created as a
+// ContainerIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func containerIdentifierAdopt(id objc.ID) *ContainerIdentifier {
+	if id == 0 {
 		return nil
 	}
-	return &VolumeIdentifier{inner: _r}
+	x := &ContainerIdentifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ContainerIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier {
-	return &x.inner.FSEntityIdentifier
+// NewContainerIdentifier creates a new ContainerIdentifier.
+func NewContainerIdentifier() *ContainerIdentifier {
+	_id := objc.Send[objc.ID](objc.ID(_class("FSContainerIdentifier")), objc.RegisterName("new"))
+	return containerIdentifierAdopt(_id)
+}
+
+// WithUuid a UUID to uniquely identify this entity.
+func (x *ContainerIdentifier) WithUuid(uuid obj.Object) *ContainerIdentifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
+	return x
+}
+
+// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
+func (x *ContainerIdentifier) WithQualifier(qualifier obj.Object) *ContainerIdentifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+	return x
+}
+
+// VolumeIdentifier wraps the corresponding Objective-C method.
+func (x *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeIdentifier"))
+	return VolumeIdentifierFromID(_r)
 }
 
 // ContainerIdentifierable is the interface implemented by [ContainerIdentifier], for mocking and DI.
 type ContainerIdentifierable interface {
-	Unwrap() *raw.FSContainerIdentifier
-	WithUuid(uuid *foundation.NSUUID) *ContainerIdentifier
-	WithQualifier(qualifier *foundation.NSData) *ContainerIdentifier
+	obj.Object
+	WithUuid(uuid obj.Object) *ContainerIdentifier
+	WithQualifier(qualifier obj.Object) *ContainerIdentifier
 	VolumeIdentifier() *VolumeIdentifier
 }
 
 var _ ContainerIdentifierable = (*ContainerIdentifier)(nil)
+
+var _ EntityIdentifierProvider = (*ContainerIdentifier)(nil)

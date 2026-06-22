@@ -4,24 +4,33 @@
 
 package avfaudio
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-)
+// A structure that represents the angular orientation of the listener in 3D space.
+type AVAudio3DAngularOrientation struct {
+	Yaw   float32
+	Pitch float32
+	Roll  float32
+}
 
-// AVAudio3DAngularOrientation is a type alias for the raw AVAudio3DAngularOrientation value-type struct.
-type AVAudio3DAngularOrientation = raw.AVAudio3DAngularOrientation
+// A structure that represents a point in 3D space.
+type AVAudio3DPoint struct {
+	X float32
+	Y float32
+	Z float32
+}
 
-// AVAudio3DPoint is a type alias for the raw AVAudio3DPoint value-type struct.
-type AVAudio3DPoint = raw.AVAudio3DPoint
+// A structure that represents two orthogonal vectors that describe the orientation of the listener in 3D space.
+type AVAudio3DVectorOrientation struct {
+	Forward AVAudio3DPoint
+	Up      AVAudio3DPoint
+}
 
-// AVAudio3DVectorOrientation is a type alias for the raw AVAudio3DVectorOrientation value-type struct.
-type AVAudio3DVectorOrientation = raw.AVAudio3DVectorOrientation
+// Priming information for audio conversion.
+type AVAudioConverterPrimeInfo struct {
+	LeadingFrames  uint32
+	TrailingFrames uint32
+}
 
-// AVAudioConverterPrimeInfo is a type alias for the raw AVAudioConverterPrimeInfo value-type struct.
-type AVAudioConverterPrimeInfo = raw.AVAudioConverterPrimeInfo
-
-// AVAudioVoiceProcessingOtherAudioDuckingConfiguration is a type alias for the raw AVAudioVoiceProcessingOtherAudioDuckingConfiguration value-type struct.
-type AVAudioVoiceProcessingOtherAudioDuckingConfiguration = raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration
-
-// AVBeatRange is a type alias for the raw AVBeatRange value-type struct.
-type AVBeatRange = raw.AVBeatRange
+type AVBeatRange struct {
+	Start  float64
+	Length float64
+}

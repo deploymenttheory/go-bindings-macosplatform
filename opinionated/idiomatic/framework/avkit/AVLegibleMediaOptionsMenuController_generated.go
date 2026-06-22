@@ -5,108 +5,102 @@
 package avkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// LegibleMediaOptionsMenuController wraps [raw.AVLegibleMediaOptionsMenuController] with a fluent Go API.
+// LegibleMediaOptionsMenuController is an idiomatic wrapper over the Objective-C class AVLegibleMediaOptionsMenuController.
 type LegibleMediaOptionsMenuController struct {
-	inner *raw.AVLegibleMediaOptionsMenuController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVLegibleMediaOptionsMenuController].
-func (x *LegibleMediaOptionsMenuController) Unwrap() *raw.AVLegibleMediaOptionsMenuController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LegibleMediaOptionsMenuController) ID() objc.ID { return x.inner.Ptr() }
-
-// LegibleMediaOptionsMenuControllerFromID adopts an existing object pointer as a LegibleMediaOptionsMenuController (nil for 0).
+// LegibleMediaOptionsMenuControllerFromID adopts an existing Objective-C object as a LegibleMediaOptionsMenuController
+// (nil for 0), retaining it and registering a release finalizer.
 func LegibleMediaOptionsMenuControllerFromID(id objc.ID) *LegibleMediaOptionsMenuController {
 	if id == 0 {
 		return nil
 	}
-	return &LegibleMediaOptionsMenuController{inner: raw.AVLegibleMediaOptionsMenuControllerFromID(id)}
-}
-
-// @method			initWithPlayer: @param			player The AVPlayer to build menus from, or nil for non-track-specific options only @abstract		Creates an AVLegibleMediaOptionsMenuController with an optional player @discussion		When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
-//
-// NewLegibleMediaOptionsMenuControllerWithPlayer creates a new [LegibleMediaOptionsMenuController].
-func NewLegibleMediaOptionsMenuControllerWithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVLegibleMediaOptionsMenuController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), player.Ptr())
-	return &LegibleMediaOptionsMenuController{inner: raw.AVLegibleMediaOptionsMenuControllerFromID(_id)}
-}
-
-// @property		player @abstract		The player associated with the menu controller.
-//
-// WithPlayer sets the player property and returns the receiver for chaining.
-func (x *LegibleMediaOptionsMenuController) WithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController {
-	x.inner.SetPlayer(player)
+	x := &LegibleMediaOptionsMenuController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property		delegate @abstract		The delegate for receiving caption preview and state change notifications.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *LegibleMediaOptionsMenuController) WithDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) *LegibleMediaOptionsMenuController {
-	x.inner.SetDelegate(delegate)
+// legibleMediaOptionsMenuControllerAdopt wraps an Objective-C object that this code just created as a
+// LegibleMediaOptionsMenuController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func legibleMediaOptionsMenuControllerAdopt(id objc.ID) *LegibleMediaOptionsMenuController {
+	if id == 0 {
+		return nil
+	}
+	x := &LegibleMediaOptionsMenuController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @method			menuWithContents: @param			contents A set of values from the AVLegibleMediaOptionsMenuContents @abstract		Builds a legible options menu using the specified contents. @return			A NSMenu ready to be presented by the client, or nil if the menu cannot be built @discussion		Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
-//
-// MenuWithContents calls the underlying MenuWithContents.
-func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents AVLegibleMediaOptionsMenuContents) *appkit.NSMenu {
-	return x.inner.MenuWithContents(raw.AVLegibleMediaOptionsMenuContents(contents))
+// Description returns the object's -description text.
+func (x *LegibleMediaOptionsMenuController) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property		player @abstract		The player associated with the menu controller.
-//
-// Player calls the underlying Player.
-func (x *LegibleMediaOptionsMenuController) Player() *avfoundation.AVPlayer {
-	return x.inner.Player()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LegibleMediaOptionsMenuController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetPlayer calls the underlying SetPlayer.
-func (x *LegibleMediaOptionsMenuController) SetPlayer(player *avfoundation.AVPlayer) {
-	x.inner.SetPlayer(player)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LegibleMediaOptionsMenuController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property		delegate @abstract		The delegate for receiving caption preview and state change notifications.
-//
-// Delegate calls the underlying Delegate.
-func (x *LegibleMediaOptionsMenuController) Delegate() raw.AVLegibleMediaOptionsMenuControllerDelegate {
-	return x.inner.Delegate()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LegibleMediaOptionsMenuController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *LegibleMediaOptionsMenuController) SetDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// NewLegibleMediaOptionsMenuControllerWithPlayer creates an AVLegibleMediaOptionsMenuController with an optional player When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
+func NewLegibleMediaOptionsMenuControllerWithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVLegibleMediaOptionsMenuController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), objref.IDOf(player))
+	return legibleMediaOptionsMenuControllerAdopt(_id)
 }
 
-// @property		menuState @abstract		The current of the legible media options menu. @discussion		Use this to check the legible options menu state.
-//
-// MenuState calls the underlying MenuState.
-func (x *LegibleMediaOptionsMenuController) MenuState() raw.AVLegibleMediaOptionsMenuState {
-	return x.inner.MenuState()
+// WithPlayer the player associated with the menu controller.
+func (x *LegibleMediaOptionsMenuController) WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	return x
+}
+
+// MenuWithContents builds a legible options menu using the specified contents. Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
+func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuWithContents:"), contents)
+	return obj.Wrap(_r)
+}
+
+// Player the player associated with the menu controller.
+func (x *LegibleMediaOptionsMenuController) Player() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+	return obj.Wrap(_r)
+}
+
+// SetPlayer wraps the corresponding Objective-C method.
+func (x *LegibleMediaOptionsMenuController) SetPlayer(player obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 }
 
 // LegibleMediaOptionsMenuControllerable is the interface implemented by [LegibleMediaOptionsMenuController], for mocking and DI.
 type LegibleMediaOptionsMenuControllerable interface {
-	Unwrap() *raw.AVLegibleMediaOptionsMenuController
-	WithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController
-	WithDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) *LegibleMediaOptionsMenuController
-	MenuWithContents(contents AVLegibleMediaOptionsMenuContents) *appkit.NSMenu
-	Player() *avfoundation.AVPlayer
-	SetPlayer(player *avfoundation.AVPlayer)
-	Delegate() raw.AVLegibleMediaOptionsMenuControllerDelegate
-	SetDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate)
-	MenuState() raw.AVLegibleMediaOptionsMenuState
+	obj.Object
+	WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController
+	MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object
+	Player() obj.Object
+	SetPlayer(player obj.Object)
 }
 
 var _ LegibleMediaOptionsMenuControllerable = (*LegibleMediaOptionsMenuController)(nil)

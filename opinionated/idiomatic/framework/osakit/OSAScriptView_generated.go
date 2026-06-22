@@ -5,178 +5,217 @@
 package osakit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ScriptView wraps [raw.OSAScriptView] with a fluent Go API.
+// ScriptView is an idiomatic wrapper over the Objective-C class OSAScriptView.
 type ScriptView struct {
-	inner *raw.OSAScriptView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSAScriptView].
-func (x *ScriptView) Unwrap() *raw.OSAScriptView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptView) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptViewFromID adopts an existing object pointer as a ScriptView (nil for 0).
+// ScriptViewFromID adopts an existing Objective-C object as a ScriptView
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptViewFromID(id objc.ID) *ScriptView {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptView{inner: raw.OSAScriptViewFromID(id)}
+	x := &ScriptView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScriptView creates a new [ScriptView].
+// scriptViewAdopt wraps an Objective-C object that this code just created as a
+// ScriptView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptViewAdopt(id objc.ID) *ScriptView {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScriptView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScriptView creates a new ScriptView.
 func NewScriptView() *ScriptView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScriptView")), objc.RegisterName("new"))
-	return &ScriptView{inner: raw.OSAScriptViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSAScriptView")), objc.RegisterName("new"))
+	return scriptViewAdopt(_id)
 }
 
-// WithSource sets the source property and returns the receiver for chaining.
+// WithSource sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithSource(source string) *ScriptView {
-	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 	return x
 }
 
-// WithUsesScriptAssistant sets the usesScriptAssistant property and returns the receiver for chaining.
+// WithUsesScriptAssistant sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithUsesScriptAssistant(usesScriptAssistant bool) *ScriptView {
-	x.inner.SetUsesScriptAssistant(usesScriptAssistant)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesScriptAssistant:"), usesScriptAssistant)
 	return x
 }
 
-// WithUsesTabs sets the usesTabs property and returns the receiver for chaining.
+// WithUsesTabs sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithUsesTabs(usesTabs bool) *ScriptView {
-	x.inner.SetUsesTabs(usesTabs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesTabs:"), usesTabs)
 	return x
 }
 
-// WithTabWidth sets the tabWidth property and returns the receiver for chaining.
-func (x *ScriptView) WithTabWidth(tabWidth uint) *ScriptView {
-	x.inner.SetTabWidth(tabWidth)
+// WithTabWidth sets the property and returns the receiver so calls can be chained.
+func (x *ScriptView) WithTabWidth(tabWidth int) *ScriptView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabWidth:"), tabWidth)
 	return x
 }
 
-// WithWrapsLines sets the wrapsLines property and returns the receiver for chaining.
+// WithWrapsLines sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithWrapsLines(wrapsLines bool) *ScriptView {
-	x.inner.SetWrapsLines(wrapsLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapsLines:"), wrapsLines)
 	return x
 }
 
-// WithIndentsWrappedLines sets the indentsWrappedLines property and returns the receiver for chaining.
+// WithIndentsWrappedLines sets the property and returns the receiver so calls can be chained.
 func (x *ScriptView) WithIndentsWrappedLines(indentsWrappedLines bool) *ScriptView {
-	x.inner.SetIndentsWrappedLines(indentsWrappedLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentsWrappedLines:"), indentsWrappedLines)
 	return x
 }
 
-// WithIndentWidth sets the indentWidth property and returns the receiver for chaining.
-func (x *ScriptView) WithIndentWidth(indentWidth uint) *ScriptView {
-	x.inner.SetIndentWidth(indentWidth)
+// WithIndentWidth sets the property and returns the receiver so calls can be chained.
+func (x *ScriptView) WithIndentWidth(indentWidth int) *ScriptView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentWidth:"), indentWidth)
 	return x
 }
 
-// Source calls the underlying Source.
+// Source wraps the corresponding Objective-C method.
 func (x *ScriptView) Source() string {
-	_r := x.inner.Source()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSource calls the underlying SetSource.
+// SetSource wraps the corresponding Objective-C method.
 func (x *ScriptView) SetSource(source string) {
-	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 }
 
-// UsesScriptAssistant calls the underlying UsesScriptAssistant.
+// UsesScriptAssistant wraps the corresponding Objective-C method.
 func (x *ScriptView) UsesScriptAssistant() bool {
-	return x.inner.UsesScriptAssistant()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesScriptAssistant"))
+	return _r
 }
 
-// SetUsesScriptAssistant calls the underlying SetUsesScriptAssistant.
+// SetUsesScriptAssistant wraps the corresponding Objective-C method.
 func (x *ScriptView) SetUsesScriptAssistant(usesScriptAssistant bool) {
-	x.inner.SetUsesScriptAssistant(usesScriptAssistant)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesScriptAssistant:"), usesScriptAssistant)
 }
 
-// UsesTabs calls the underlying UsesTabs.
+// UsesTabs wraps the corresponding Objective-C method.
 func (x *ScriptView) UsesTabs() bool {
-	return x.inner.UsesTabs()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesTabs"))
+	return _r
 }
 
-// SetUsesTabs calls the underlying SetUsesTabs.
+// SetUsesTabs wraps the corresponding Objective-C method.
 func (x *ScriptView) SetUsesTabs(usesTabs bool) {
-	x.inner.SetUsesTabs(usesTabs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesTabs:"), usesTabs)
 }
 
-// TabWidth calls the underlying TabWidth.
-func (x *ScriptView) TabWidth() uint {
-	return x.inner.TabWidth()
+// TabWidth wraps the corresponding Objective-C method.
+func (x *ScriptView) TabWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tabWidth"))
+	return _r
 }
 
-// SetTabWidth calls the underlying SetTabWidth.
-func (x *ScriptView) SetTabWidth(tabWidth uint) {
-	x.inner.SetTabWidth(tabWidth)
+// SetTabWidth wraps the corresponding Objective-C method.
+func (x *ScriptView) SetTabWidth(tabWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabWidth:"), tabWidth)
 }
 
-// WrapsLines calls the underlying WrapsLines.
+// WrapsLines wraps the corresponding Objective-C method.
 func (x *ScriptView) WrapsLines() bool {
-	return x.inner.WrapsLines()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wrapsLines"))
+	return _r
 }
 
-// SetWrapsLines calls the underlying SetWrapsLines.
+// SetWrapsLines wraps the corresponding Objective-C method.
 func (x *ScriptView) SetWrapsLines(wrapsLines bool) {
-	x.inner.SetWrapsLines(wrapsLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapsLines:"), wrapsLines)
 }
 
-// IndentsWrappedLines calls the underlying IndentsWrappedLines.
+// IndentsWrappedLines wraps the corresponding Objective-C method.
 func (x *ScriptView) IndentsWrappedLines() bool {
-	return x.inner.IndentsWrappedLines()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("indentsWrappedLines"))
+	return _r
 }
 
-// SetIndentsWrappedLines calls the underlying SetIndentsWrappedLines.
+// SetIndentsWrappedLines wraps the corresponding Objective-C method.
 func (x *ScriptView) SetIndentsWrappedLines(indentsWrappedLines bool) {
-	x.inner.SetIndentsWrappedLines(indentsWrappedLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentsWrappedLines:"), indentsWrappedLines)
 }
 
-// IndentWidth calls the underlying IndentWidth.
-func (x *ScriptView) IndentWidth() uint {
-	return x.inner.IndentWidth()
+// IndentWidth wraps the corresponding Objective-C method.
+func (x *ScriptView) IndentWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indentWidth"))
+	return _r
 }
 
-// SetIndentWidth calls the underlying SetIndentWidth.
-func (x *ScriptView) SetIndentWidth(indentWidth uint) {
-	x.inner.SetIndentWidth(indentWidth)
+// SetIndentWidth wraps the corresponding Objective-C method.
+func (x *ScriptView) SetIndentWidth(indentWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentWidth:"), indentWidth)
 }
 
 // ScriptViewable is the interface implemented by [ScriptView], for mocking and DI.
 type ScriptViewable interface {
-	Unwrap() *raw.OSAScriptView
+	obj.Object
 	WithSource(source string) *ScriptView
 	WithUsesScriptAssistant(usesScriptAssistant bool) *ScriptView
 	WithUsesTabs(usesTabs bool) *ScriptView
-	WithTabWidth(tabWidth uint) *ScriptView
+	WithTabWidth(tabWidth int) *ScriptView
 	WithWrapsLines(wrapsLines bool) *ScriptView
 	WithIndentsWrappedLines(indentsWrappedLines bool) *ScriptView
-	WithIndentWidth(indentWidth uint) *ScriptView
+	WithIndentWidth(indentWidth int) *ScriptView
 	Source() string
 	SetSource(source string)
 	UsesScriptAssistant() bool
 	SetUsesScriptAssistant(usesScriptAssistant bool)
 	UsesTabs() bool
 	SetUsesTabs(usesTabs bool)
-	TabWidth() uint
-	SetTabWidth(tabWidth uint)
+	TabWidth() int
+	SetTabWidth(tabWidth int)
 	WrapsLines() bool
 	SetWrapsLines(wrapsLines bool)
 	IndentsWrappedLines() bool
 	SetIndentsWrappedLines(indentsWrappedLines bool)
-	IndentWidth() uint
-	SetIndentWidth(indentWidth uint)
+	IndentWidth() int
+	SetIndentWidth(indentWidth int)
 }
 
 var _ ScriptViewable = (*ScriptView)(nil)

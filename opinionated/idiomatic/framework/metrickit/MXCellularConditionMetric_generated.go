@@ -5,49 +5,65 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the condition of the cellular network.
+// CellularConditionMetric is an idiomatic wrapper over the Objective-C class MXCellularConditionMetric.
 //
-// CellularConditionMetric wraps [raw.MXCellularConditionMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the condition of the cellular network.
 type CellularConditionMetric struct {
-	inner *raw.MXCellularConditionMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXCellularConditionMetric].
-func (x *CellularConditionMetric) Unwrap() *raw.MXCellularConditionMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CellularConditionMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// CellularConditionMetricFromID adopts an existing object pointer as a CellularConditionMetric (nil for 0).
+// CellularConditionMetricFromID adopts an existing Objective-C object as a CellularConditionMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func CellularConditionMetricFromID(id objc.ID) *CellularConditionMetric {
 	if id == 0 {
 		return nil
 	}
-	return &CellularConditionMetric{inner: raw.MXCellularConditionMetricFromID(id)}
+	x := &CellularConditionMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCellularConditionMetric creates a new [CellularConditionMetric].
+// cellularConditionMetricAdopt wraps an Objective-C object that this code just created as a
+// CellularConditionMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cellularConditionMetricAdopt(id objc.ID) *CellularConditionMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &CellularConditionMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCellularConditionMetric creates a new CellularConditionMetric.
 func NewCellularConditionMetric() *CellularConditionMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXCellularConditionMetric")), objc.RegisterName("new"))
-	return &CellularConditionMetric{inner: raw.MXCellularConditionMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXCellularConditionMetric")), objc.RegisterName("new"))
+	return cellularConditionMetricAdopt(_id)
 }
 
-// HistogrammedCellularConditionTime calls the underlying HistogrammedCellularConditionTime.
-func (x *CellularConditionMetric) HistogrammedCellularConditionTime() *raw.MXHistogram[*raw.MXUnitSignalBars] {
-	return x.inner.HistogrammedCellularConditionTime()
+// HistogrammedCellularConditionTime wraps the corresponding Objective-C method.
+func (x *CellularConditionMetric) HistogrammedCellularConditionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedCellularConditionTime"))
+	return obj.Wrap(_r)
 }
-
-func (x *CellularConditionMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // CellularConditionMetricable is the interface implemented by [CellularConditionMetric], for mocking and DI.
 type CellularConditionMetricable interface {
-	Unwrap() *raw.MXCellularConditionMetric
-	HistogrammedCellularConditionTime() *raw.MXHistogram[*raw.MXUnitSignalBars]
+	obj.Object
+	HistogrammedCellularConditionTime() obj.Object
 }
 
 var _ CellularConditionMetricable = (*CellularConditionMetric)(nil)
+
+var _ MetricProvider = (*CellularConditionMetric)(nil)

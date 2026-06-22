@@ -5,21 +5,19 @@
 package iobluetoothui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetoothui"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// IOBluetoothGetDeviceSelectorController calls [raw.IOBluetoothGetDeviceSelectorController] (C function IOBluetoothGetDeviceSelectorController).
-func IOBluetoothGetDeviceSelectorController() unsafe.Pointer {
-	return raw.IOBluetoothGetDeviceSelectorController()
-}
+var _fnIOBluetoothValidateHardwareWithDescription func(objc.ID, objc.ID) int
 
-// IOBluetoothGetPairingController calls [raw.IOBluetoothGetPairingController] (C function IOBluetoothGetPairingController).
-func IOBluetoothGetPairingController() unsafe.Pointer {
-	return raw.IOBluetoothGetPairingController()
-}
-
-// IOBluetoothValidateHardwareWithDescription calls [raw.IOBluetoothValidateHardwareWithDescription] (C function IOBluetoothValidateHardwareWithDescription).
-func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle unsafe.Pointer, descriptionText unsafe.Pointer) int {
-	return raw.IOBluetoothValidateHardwareWithDescription(cancelButtonTitle, descriptionText)
+// IOBluetoothValidateHardwareWithDescription calls the IOBluetoothUI framework function IOBluetoothValidateHardwareWithDescription.
+func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle obj.Object, descriptionText obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothValidateHardwareWithDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothValidateHardwareWithDescription, _lib, "IOBluetoothValidateHardwareWithDescription")
+	}
+	return _fnIOBluetoothValidateHardwareWithDescription(objref.IDOf(cancelButtonTitle), objref.IDOf(descriptionText))
 }

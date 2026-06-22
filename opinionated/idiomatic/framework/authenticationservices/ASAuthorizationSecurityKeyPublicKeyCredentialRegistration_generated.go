@@ -5,68 +5,91 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A newly created security key credential that results from a credential registration request.
+// AuthorizationSecurityKeyPublicKeyCredentialRegistration is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialRegistration.
 //
-// AuthorizationSecurityKeyPublicKeyCredentialRegistration wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration] with a fluent Go API.
+// A newly created security key credential that results from a credential registration request.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
-	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration].
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialRegistration (nil for 0).
+// AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID adopts an existing Objective-C object as a AuthorizationSecurityKeyPublicKeyCredentialRegistration
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialRegistration {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationSecurityKeyPublicKeyCredentialRegistration{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationSecurityKeyPublicKeyCredentialRegistration creates a new [AuthorizationSecurityKeyPublicKeyCredentialRegistration].
+// authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationSecurityKeyPublicKeyCredentialRegistration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialRegistration {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialRegistration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationSecurityKeyPublicKeyCredentialRegistration creates a new AuthorizationSecurityKeyPublicKeyCredentialRegistration.
 func NewAuthorizationSecurityKeyPublicKeyCredentialRegistration() *AuthorizationSecurityKeyPublicKeyCredentialRegistration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSecurityKeyPublicKeyCredentialRegistration")), objc.RegisterName("new"))
-	return &AuthorizationSecurityKeyPublicKeyCredentialRegistration{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialRegistration")), objc.RegisterName("new"))
+	return authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(_id)
 }
 
-// @abstract A list of transports that the authenticator is believed to support, if this could be determined.
+// Transports a list of transports that the authenticator is believed to support, if this could be determined.
 //
 // Transports returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []*foundation.NSString {
-	arr := x.inner.Transports()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transports"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Prf calls the underlying Prf.
+// Prf wraps the corresponding Objective-C method.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
-	_r := x.inner.Prf()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialPRFRegistrationOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)
 }
 
 // AuthorizationSecurityKeyPublicKeyCredentialRegistrationable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialRegistration], for mocking and DI.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistrationable interface {
-	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration
-	Transports() []*foundation.NSString
+	obj.Object
+	Transports() []obj.Object
 	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput
 }
 

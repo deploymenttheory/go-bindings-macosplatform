@@ -5,65 +5,92 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Constraint of a state feature value.
+// StateConstraint is an idiomatic wrapper over the Objective-C class MLStateConstraint.
 //
-// StateConstraint wraps [raw.MLStateConstraint] with a fluent Go API.
+// Constraint of a state feature value.
 type StateConstraint struct {
-	inner *raw.MLStateConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLStateConstraint].
-func (x *StateConstraint) Unwrap() *raw.MLStateConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StateConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// StateConstraintFromID adopts an existing object pointer as a StateConstraint (nil for 0).
+// StateConstraintFromID adopts an existing Objective-C object as a StateConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func StateConstraintFromID(id objc.ID) *StateConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &StateConstraint{inner: raw.MLStateConstraintFromID(id)}
+	x := &StateConstraint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStateConstraint creates a new [StateConstraint].
-func NewStateConstraint() *StateConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLStateConstraint")), objc.RegisterName("new"))
-	return &StateConstraint{inner: raw.MLStateConstraintFromID(_id)}
-}
-
-// The shape of the state buffer.
-//
-// BufferShape returns the collection as a Go slice.
-func (x *StateConstraint) BufferShape() []*foundation.NSNumber {
-	arr := x.inner.BufferShape()
-	if arr == nil {
+// stateConstraintAdopt wraps an Objective-C object that this code just created as a
+// StateConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateConstraintAdopt(id objc.ID) *StateConstraint {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &StateConstraint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The data type of scalars in the state buffer.
+// Description returns the object's -description text.
+func (x *StateConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StateConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StateConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *StateConstraint) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStateConstraint creates a new StateConstraint.
+func NewStateConstraint() *StateConstraint {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLStateConstraint")), objc.RegisterName("new"))
+	return stateConstraintAdopt(_id)
+}
+
+// BufferShape the shape of the state buffer.
 //
-// DataType calls the underlying DataType.
-func (x *StateConstraint) DataType() MLMultiArrayDataType {
-	return MLMultiArrayDataType(x.inner.DataType())
+// BufferShape returns the collection as a Go slice.
+func (x *StateConstraint) BufferShape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bufferShape"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// DataType the data type of scalars in the state buffer.
+func (x *StateConstraint) DataType() MultiArrayDataType {
+	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
 // StateConstraintable is the interface implemented by [StateConstraint], for mocking and DI.
 type StateConstraintable interface {
-	Unwrap() *raw.MLStateConstraint
-	BufferShape() []*foundation.NSNumber
-	DataType() MLMultiArrayDataType
+	obj.Object
+	BufferShape() []obj.Object
+	DataType() MultiArrayDataType
 }
 
 var _ StateConstraintable = (*StateConstraint)(nil)

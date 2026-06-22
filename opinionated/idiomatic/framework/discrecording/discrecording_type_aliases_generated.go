@@ -4,18 +4,9 @@
 
 package discrecording
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-)
-
-// DRFileForkSizeInfo is a type alias for the raw DRFileForkSizeInfo value-type struct.
-type DRFileForkSizeInfo = raw.DRFileForkSizeInfo
-
-// DRFileProductionInfo is a type alias for the raw DRFileProductionInfo value-type struct.
-type DRFileProductionInfo = raw.DRFileProductionInfo
-
-// DRRefConCallbacks is a type alias for the raw DRRefConCallbacks value-type struct.
-type DRRefConCallbacks = raw.DRRefConCallbacks
-
-// DRTrackProductionInfo is a type alias for the raw DRTrackProductionInfo value-type struct.
-type DRTrackProductionInfo = raw.DRTrackProductionInfo
+// Structure used when requesting fork sizes.
+type DRFileForkSizeInfo struct {
+	Fork  uint
+	Query uint
+	Size  uint64
+}

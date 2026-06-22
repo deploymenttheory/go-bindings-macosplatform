@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package addressbook provides a fluent Go API over the macOS AddressBook framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - MultiValue: [MutableMultiValue]
+//   - Record: [Group], [Person]
 package addressbook

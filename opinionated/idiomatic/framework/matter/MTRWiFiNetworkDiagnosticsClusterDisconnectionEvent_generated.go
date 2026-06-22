@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent wraps [raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent] with a fluent Go API.
+// MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent is an idiomatic wrapper over the Objective-C class MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent.
 type MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent struct {
-	inner *raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent].
-func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID adopts an existing object pointer as a MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent (nil for 0).
+// MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID adopts an existing Objective-C object as a MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID(id objc.ID) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{inner: raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID(id)}
-}
-
-// NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent creates a new [MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent].
-func NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent() *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent")), objc.RegisterName("new"))
-	return &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{inner: raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEventFromID(_id)}
-}
-
-// WithReasonCode sets the reasonCode property and returns the receiver for chaining.
-func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) WithReasonCode(reasonCode *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
-	x.inner.SetReasonCode(reasonCode)
+	x := &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ReasonCode calls the underlying ReasonCode.
-func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() *foundation.NSNumber {
-	return x.inner.ReasonCode()
+// mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt wraps an Objective-C object that this code just created as a
+// MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt(id objc.ID) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetReasonCode calls the underlying SetReasonCode.
-func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) SetReasonCode(reasonCode *foundation.NSNumber) {
-	x.inner.SetReasonCode(reasonCode)
+// Description returns the object's -description text.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent creates a new MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent.
+func NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent() *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent")), objc.RegisterName("new"))
+	return mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt(_id)
+}
+
+// WithReasonCode sets the property and returns the receiver so calls can be chained.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) WithReasonCode(reasonCode obj.Object) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasonCode:"), objref.IDOf(reasonCode))
+	return x
+}
+
+// ReasonCode wraps the corresponding Objective-C method.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reasonCode"))
+	return obj.Wrap(_r)
+}
+
+// SetReasonCode wraps the corresponding Objective-C method.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) SetReasonCode(reasonCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasonCode:"), objref.IDOf(reasonCode))
 }
 
 // MTRWiFiNetworkDiagnosticsClusterDisconnectionEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent], for mocking and DI.
 type MTRWiFiNetworkDiagnosticsClusterDisconnectionEventable interface {
-	Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
-	WithReasonCode(reasonCode *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
-	ReasonCode() *foundation.NSNumber
-	SetReasonCode(reasonCode *foundation.NSNumber)
+	obj.Object
+	WithReasonCode(reasonCode obj.Object) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
+	ReasonCode() obj.Object
+	SetReasonCode(reasonCode obj.Object)
 }
 
 var _ MTRWiFiNetworkDiagnosticsClusterDisconnectionEventable = (*MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent)(nil)

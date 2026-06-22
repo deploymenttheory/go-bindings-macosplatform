@@ -5,365 +5,282 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A group of subitems in a toolbar item.
+// ToolbarItemGroup is an idiomatic wrapper over the Objective-C class NSToolbarItemGroup.
 //
-// ToolbarItemGroup wraps [raw.NSToolbarItemGroup] with a fluent Go API.
+// It embeds [ToolbarItem], promoting that type's methods.
+//
+// A group of subitems in a toolbar item.
 type ToolbarItemGroup struct {
-	inner *raw.NSToolbarItemGroup
+	ToolbarItem
 }
 
-// Unwrap returns the underlying [raw.NSToolbarItemGroup].
-func (x *ToolbarItemGroup) Unwrap() *raw.NSToolbarItemGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ToolbarItemGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// ToolbarItemGroupFromID adopts an existing object pointer as a ToolbarItemGroup (nil for 0).
+// ToolbarItemGroupFromID adopts an existing Objective-C object as a ToolbarItemGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func ToolbarItemGroupFromID(id objc.ID) *ToolbarItemGroup {
 	if id == 0 {
 		return nil
 	}
-	return &ToolbarItemGroup{inner: raw.NSToolbarItemGroupFromID(id)}
+	x := &ToolbarItemGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewToolbarItemGroup creates a new [ToolbarItemGroup].
+// toolbarItemGroupAdopt wraps an Objective-C object that this code just created as a
+// ToolbarItemGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func toolbarItemGroupAdopt(id objc.ID) *ToolbarItemGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &ToolbarItemGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewToolbarItemGroup creates a new ToolbarItemGroup.
 func NewToolbarItemGroup() *ToolbarItemGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSToolbarItemGroup")), objc.RegisterName("new"))
-	return &ToolbarItemGroup{inner: raw.NSToolbarItemGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSToolbarItemGroup")), objc.RegisterName("new"))
+	return toolbarItemGroupAdopt(_id)
 }
 
-// The subitems of the grouped toolbar item.
-//
-// WithSubitems sets the collection, converting the Go slice to an NSArray.
+// WithSubitems the subitems of the grouped toolbar item.
 func (x *ToolbarItemGroup) WithSubitems(items ...ToolbarItemProvider) *ToolbarItemGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSubitems(foundation.NSArrayFromID[*raw.NSToolbarItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asToolbarItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSToolbarItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSubitems(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ToolbarItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubitems:"), _arr)
 	return x
 }
 
-// A value that represents how a toolbar displays a grouped toolbar item.
-//
-// WithControlRepresentation sets the controlRepresentation property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup {
-	x.inner.SetControlRepresentation(raw.NSToolbarItemGroupControlRepresentation(controlRepresentation))
+// WithControlRepresentation a value that represents how a toolbar displays a grouped toolbar item.
+func (x *ToolbarItemGroup) WithControlRepresentation(controlRepresentation ToolbarItemGroupControlRepresentation) *ToolbarItemGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlRepresentation:"), controlRepresentation)
 	return x
 }
 
-// The selection mode of the grouped toolbar item.
-//
-// WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) *ToolbarItemGroup {
-	x.inner.SetSelectionMode(raw.NSToolbarItemGroupSelectionMode(selectionMode))
+// WithSelectionMode the selection mode of the grouped toolbar item.
+func (x *ToolbarItemGroup) WithSelectionMode(selectionMode ToolbarItemGroupSelectionMode) *ToolbarItemGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionMode:"), selectionMode)
 	return x
 }
 
-// The index value for the most recently selected subitem of a grouped toolbar item.
-//
-// WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
+// WithSelectedIndex the index value for the most recently selected subitem of a grouped toolbar item.
 func (x *ToolbarItemGroup) WithSelectedIndex(selectedIndex int) *ToolbarItemGroup {
-	x.inner.SetSelectedIndex(selectedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return x
 }
 
-// The label that appears for this item in the toolbar.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the label that appears for this item in the toolbar.
 func (x *ToolbarItemGroup) WithLabel(label string) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The label that appears when the toolbar item is in the customization palette.
-//
-// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+// WithPaletteLabel the label that appears when the toolbar item is in the customization palette.
 func (x *ToolbarItemGroup) WithPaletteLabel(paletteLabel string) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
 	return x
 }
 
-// The set of labels that the item might display.
-//
-// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+// WithPossibleLabels the set of labels that the item might display.
+func (x *ToolbarItemGroup) WithPossibleLabels(possibleLabels obj.Object) *ToolbarItemGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
 	return x
 }
 
-// The tooltip to display when someone hovers over the item in the toolbar.
-//
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip the tooltip to display when someone hovers over the item in the toolbar.
 func (x *ToolbarItemGroup) WithToolTip(toolTip string) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// The menu item to use when the toolbar item is in the overflow menu.
-//
-// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+// WithMenuFormRepresentation the menu item to use when the toolbar item is in the overflow menu.
 func (x *ToolbarItemGroup) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	return x
 }
 
-// An integer tag you can use to identify the toolbar item.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag an integer tag you can use to identify the toolbar item.
 func (x *ToolbarItemGroup) WithTag(tag int) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The object that defines the action method the toolbar item calls when clicked.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithTarget(target objc.ID) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetTarget(target)
+// WithTarget the object that defines the action method the toolbar item calls when clicked.
+func (x *ToolbarItemGroup) WithTarget(target obj.Object) *ToolbarItemGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action method to call when someone clicks on the toolbar item.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithAction(action objc.SEL) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetAction(action)
-	return x
-}
-
-// A Boolean value that indicates whether the item is enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the item is enabled.
 func (x *ToolbarItemGroup) WithEnabled(enabled bool) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The image to display for the toolbar item.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image to display for the toolbar item.
 func (x *ToolbarItemGroup) WithImage(image *Image) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The title of the toolbar item.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the title of the toolbar item.
 func (x *ToolbarItemGroup) WithTitle(title string) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar item has a bordered style.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value that indicates whether the toolbar item has a bordered style.
 func (x *ToolbarItemGroup) WithBordered(bordered bool) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
 func (x *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithStyle(style NSToolbarItemStyle) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
+// WithStyle defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
+func (x *ToolbarItemGroup) WithStyle(style ToolbarItemStyle) *ToolbarItemGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
-//
-// WithNavigational sets the navigational property and returns the receiver for chaining.
+// WithNavigational a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (x *ToolbarItemGroup) WithNavigational(navigational bool) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetNavigational(navigational)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
 	return x
 }
 
-// The custom view you use to draw the toolbar item.
-//
-// WithView sets the view property and returns the receiver for chaining.
+// WithView the custom view you use to draw the toolbar item.
 func (x *ToolbarItemGroup) WithView(view ViewProvider) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// Determines whether an item is visible in the toolbar.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden determines whether an item is visible in the toolbar.
 func (x *ToolbarItemGroup) WithHidden(hidden bool) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The toolbar item’s minimum size.
-//
-// WithMinSize sets the minSize property and returns the receiver for chaining.
+// WithMinSize the toolbar item’s minimum size.
 func (x *ToolbarItemGroup) WithMinSize(minSize corefoundation.CGSize) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetMinSize(minSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
 	return x
 }
 
-// The toolbar item’s maximum size.
-//
-// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+// WithMaxSize the toolbar item’s maximum size.
 func (x *ToolbarItemGroup) WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
 	return x
 }
 
-// The display priority associated with the toolbar item.
-//
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority the display priority associated with the toolbar item.
 func (x *ToolbarItemGroup) WithVisibilityPriority(visibilityPriority int) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-//
-// WithBadge sets the badge property and returns the receiver for chaining.
+// WithBadge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (x *ToolbarItemGroup) WithBadge(badge *ItemBadge) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar automatically validates the item.
-//
-// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+// WithAutovalidates a Boolean value that indicates whether the toolbar automatically validates the item.
 func (x *ToolbarItemGroup) WithAutovalidates(autovalidates bool) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
 	return x
 }
 
-// Sets the selected state of a subitem in a grouped toolbar item.
-//
-// SetSelectedAtIndex calls the underlying SetSelectedAtIndex.
+// SetSelectedAtIndex sets the selected state of a subitem in a grouped toolbar item.
 func (x *ToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
-	x.inner.SetSelectedAtIndex(selected, index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:atIndex:"), selected, index)
 }
 
-// Indicates whether a specified index is currently selected.
-//
-// IsSelectedAtIndex calls the underlying IsSelectedAtIndex.
+// IsSelectedAtIndex indicates whether a specified index is currently selected.
 func (x *ToolbarItemGroup) IsSelectedAtIndex(index int) bool {
-	return x.inner.IsSelectedAtIndex(index)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectedAtIndex:"), index)
+	return _r
 }
 
-// Set or get the array of subitems for the toolbar item. By default, a `NSToolbarItemGroup` has an empty array of subitems. You should call this to set the subitems before returning the item to the toolbar. `NSToolbarItemGroups` may not contain other `NSToolbarItemGroups` as subitems.
+// Subitems set or get the array of subitems for the toolbar item. By default, a `NSToolbarItemGroup` has an empty array of subitems. You should call this to set the subitems before returning the item to the toolbar. `NSToolbarItemGroups` may not contain other `NSToolbarItemGroups` as subitems.
 //
 // Subitems returns the collection as a Go slice.
 func (x *ToolbarItemGroup) Subitems() []*ToolbarItem {
-	arr := x.inner.Subitems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ToolbarItem {
-		return &ToolbarItem{inner: raw.NSToolbarItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subitems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
 }
 
-// SetSubitems calls the underlying SetSubitems.
-func (x *ToolbarItemGroup) SetSubitems(subitems ...ToolbarItemProvider) {
-	_ptrs := make([]objc.ID, len(subitems))
-	for _i, _v := range subitems {
-		_ptrs[_i] = _v.asToolbarItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSToolbarItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSToolbarItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSToolbarItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetSubitems(_arg0)
+// SetSubitems wraps the corresponding Objective-C method.
+func (x *ToolbarItemGroup) SetSubitems(subitems []*ToolbarItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubitems:"), purego.SliceToNSArray(subitems, func(_v *ToolbarItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The style in which this item will be represented to the user. Defaults to `NSToolbarItemGroupControlRepresentationAutomatic`.
-//
-// ControlRepresentation calls the underlying ControlRepresentation.
-func (x *ToolbarItemGroup) ControlRepresentation() NSToolbarItemGroupControlRepresentation {
-	return NSToolbarItemGroupControlRepresentation(x.inner.ControlRepresentation())
+// ControlRepresentation the style in which this item will be represented to the user. Defaults to `NSToolbarItemGroupControlRepresentationAutomatic`.
+func (x *ToolbarItemGroup) ControlRepresentation() ToolbarItemGroupControlRepresentation {
+	_r := objc.Send[ToolbarItemGroupControlRepresentation](objref.IDOf(x), objc.RegisterName("controlRepresentation"))
+	return _r
 }
 
-// SetControlRepresentation calls the underlying SetControlRepresentation.
-func (x *ToolbarItemGroup) SetControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) {
-	x.inner.SetControlRepresentation(raw.NSToolbarItemGroupControlRepresentation(controlRepresentation))
+// SetControlRepresentation wraps the corresponding Objective-C method.
+func (x *ToolbarItemGroup) SetControlRepresentation(controlRepresentation ToolbarItemGroupControlRepresentation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlRepresentation:"), controlRepresentation)
 }
 
-// Get and set how selection is handled by the control. Only applies when using one of the constructors to create the item with a system defined control representation.
-//
-// SelectionMode calls the underlying SelectionMode.
-func (x *ToolbarItemGroup) SelectionMode() NSToolbarItemGroupSelectionMode {
-	return NSToolbarItemGroupSelectionMode(x.inner.SelectionMode())
+// SelectionMode get and set how selection is handled by the control. Only applies when using one of the constructors to create the item with a system defined control representation.
+func (x *ToolbarItemGroup) SelectionMode() ToolbarItemGroupSelectionMode {
+	_r := objc.Send[ToolbarItemGroupSelectionMode](objref.IDOf(x), objc.RegisterName("selectionMode"))
+	return _r
 }
 
-// SetSelectionMode calls the underlying SetSelectionMode.
-func (x *ToolbarItemGroup) SetSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) {
-	x.inner.SetSelectionMode(raw.NSToolbarItemGroupSelectionMode(selectionMode))
+// SetSelectionMode wraps the corresponding Objective-C method.
+func (x *ToolbarItemGroup) SetSelectionMode(selectionMode ToolbarItemGroupSelectionMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionMode:"), selectionMode)
 }
 
-// The most recently selected item of the group, or -1 if nothing is selected.
-//
-// SelectedIndex calls the underlying SelectedIndex.
+// SelectedIndex the most recently selected item of the group, or -1 if nothing is selected.
 func (x *ToolbarItemGroup) SelectedIndex() int {
-	return x.inner.SelectedIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
+	return _r
 }
 
-// SetSelectedIndex calls the underlying SetSelectedIndex.
+// SetSelectedIndex wraps the corresponding Objective-C method.
 func (x *ToolbarItemGroup) SetSelectedIndex(selectedIndex int) {
-	x.inner.SetSelectedIndex(selectedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 }
-
-func (x *ToolbarItemGroup) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
 
 // ToolbarItemGroupable is the interface implemented by [ToolbarItemGroup], for mocking and DI.
 type ToolbarItemGroupable interface {
-	Unwrap() *raw.NSToolbarItemGroup
+	obj.Object
 	WithSubitems(items ...ToolbarItemProvider) *ToolbarItemGroup
-	WithControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup
-	WithSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) *ToolbarItemGroup
+	WithControlRepresentation(controlRepresentation ToolbarItemGroupControlRepresentation) *ToolbarItemGroup
+	WithSelectionMode(selectionMode ToolbarItemGroupSelectionMode) *ToolbarItemGroup
 	WithSelectedIndex(selectedIndex int) *ToolbarItemGroup
 	WithLabel(label string) *ToolbarItemGroup
 	WithPaletteLabel(paletteLabel string) *ToolbarItemGroup
-	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItemGroup
+	WithPossibleLabels(possibleLabels obj.Object) *ToolbarItemGroup
 	WithToolTip(toolTip string) *ToolbarItemGroup
 	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItemGroup
 	WithTag(tag int) *ToolbarItemGroup
-	WithTarget(target objc.ID) *ToolbarItemGroup
-	WithAction(action objc.SEL) *ToolbarItemGroup
+	WithTarget(target obj.Object) *ToolbarItemGroup
 	WithEnabled(enabled bool) *ToolbarItemGroup
 	WithImage(image *Image) *ToolbarItemGroup
 	WithTitle(title string) *ToolbarItemGroup
 	WithBordered(bordered bool) *ToolbarItemGroup
 	WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup
-	WithStyle(style NSToolbarItemStyle) *ToolbarItemGroup
+	WithStyle(style ToolbarItemStyle) *ToolbarItemGroup
 	WithNavigational(navigational bool) *ToolbarItemGroup
 	WithView(view ViewProvider) *ToolbarItemGroup
 	WithHidden(hidden bool) *ToolbarItemGroup
@@ -375,13 +292,15 @@ type ToolbarItemGroupable interface {
 	SetSelectedAtIndex(selected bool, index int)
 	IsSelectedAtIndex(index int) bool
 	Subitems() []*ToolbarItem
-	SetSubitems(subitems ...ToolbarItemProvider)
-	ControlRepresentation() NSToolbarItemGroupControlRepresentation
-	SetControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation)
-	SelectionMode() NSToolbarItemGroupSelectionMode
-	SetSelectionMode(selectionMode NSToolbarItemGroupSelectionMode)
+	SetSubitems(subitems []*ToolbarItem)
+	ControlRepresentation() ToolbarItemGroupControlRepresentation
+	SetControlRepresentation(controlRepresentation ToolbarItemGroupControlRepresentation)
+	SelectionMode() ToolbarItemGroupSelectionMode
+	SetSelectionMode(selectionMode ToolbarItemGroupSelectionMode)
 	SelectedIndex() int
 	SetSelectedIndex(selectedIndex int)
 }
 
 var _ ToolbarItemGroupable = (*ToolbarItemGroup)(nil)
+
+var _ ToolbarItemProvider = (*ToolbarItemGroup)(nil)

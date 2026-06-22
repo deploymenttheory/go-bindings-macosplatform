@@ -5,195 +5,233 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CNNArithmeticProvider is implemented by CNNArithmetic and any idiomatic type wrapping a MPSCNNArithmetic subclass.
+// CNNArithmeticProvider is accepted wherever a MPSCNNArithmetic (or one of its subclasses) is expected.
 type CNNArithmeticProvider interface {
-	asCNNArithmetic() *raw.MPSCNNArithmetic
+	objref.Object
+	isCNNArithmetic()
 }
 
-// CNNArithmeticGradientProvider is implemented by CNNArithmeticGradient and any idiomatic type wrapping a MPSCNNArithmeticGradient subclass.
+// CNNArithmeticGradientProvider is accepted wherever a MPSCNNArithmeticGradient (or one of its subclasses) is expected.
 type CNNArithmeticGradientProvider interface {
-	asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient
+	objref.Object
+	isCNNArithmeticGradient()
 }
 
-// CNNBinaryConvolutionProvider is implemented by CNNBinaryConvolution and any idiomatic type wrapping a MPSCNNBinaryConvolution subclass.
+// CNNBinaryConvolutionProvider is accepted wherever a MPSCNNBinaryConvolution (or one of its subclasses) is expected.
 type CNNBinaryConvolutionProvider interface {
-	asCNNBinaryConvolution() *raw.MPSCNNBinaryConvolution
+	objref.Object
+	isCNNBinaryConvolution()
 }
 
-// CNNBinaryConvolutionNodeProvider is implemented by CNNBinaryConvolutionNode and any idiomatic type wrapping a MPSCNNBinaryConvolutionNode subclass.
+// CNNBinaryConvolutionNodeProvider is accepted wherever a MPSCNNBinaryConvolutionNode (or one of its subclasses) is expected.
 type CNNBinaryConvolutionNodeProvider interface {
-	asCNNBinaryConvolutionNode() *raw.MPSCNNBinaryConvolutionNode
+	objref.Object
+	isCNNBinaryConvolutionNode()
 }
 
-// CNNBinaryKernelProvider is implemented by CNNBinaryKernel and any idiomatic type wrapping a MPSCNNBinaryKernel subclass.
+// CNNBinaryKernelProvider is accepted wherever a MPSCNNBinaryKernel (or one of its subclasses) is expected.
 type CNNBinaryKernelProvider interface {
-	asCNNBinaryKernel() *raw.MPSCNNBinaryKernel
+	objref.Object
+	isCNNBinaryKernel()
 }
 
-// CNNConvolutionProvider is implemented by CNNConvolution and any idiomatic type wrapping a MPSCNNConvolution subclass.
+// CNNConvolutionProvider is accepted wherever a MPSCNNConvolution (or one of its subclasses) is expected.
 type CNNConvolutionProvider interface {
-	asCNNConvolution() *raw.MPSCNNConvolution
+	objref.Object
+	isCNNConvolution()
 }
 
-// CNNConvolutionDescriptorProvider is implemented by CNNConvolutionDescriptor and any idiomatic type wrapping a MPSCNNConvolutionDescriptor subclass.
+// CNNConvolutionDescriptorProvider is accepted wherever a MPSCNNConvolutionDescriptor (or one of its subclasses) is expected.
 type CNNConvolutionDescriptorProvider interface {
-	asCNNConvolutionDescriptor() *raw.MPSCNNConvolutionDescriptor
+	objref.Object
+	isCNNConvolutionDescriptor()
 }
 
-// CNNConvolutionGradientProvider is implemented by CNNConvolutionGradient and any idiomatic type wrapping a MPSCNNConvolutionGradient subclass.
+// CNNConvolutionGradientProvider is accepted wherever a MPSCNNConvolutionGradient (or one of its subclasses) is expected.
 type CNNConvolutionGradientProvider interface {
-	asCNNConvolutionGradient() *raw.MPSCNNConvolutionGradient
+	objref.Object
+	isCNNConvolutionGradient()
 }
 
-// CNNConvolutionGradientNodeProvider is implemented by CNNConvolutionGradientNode and any idiomatic type wrapping a MPSCNNConvolutionGradientNode subclass.
+// CNNConvolutionGradientNodeProvider is accepted wherever a MPSCNNConvolutionGradientNode (or one of its subclasses) is expected.
 type CNNConvolutionGradientNodeProvider interface {
-	asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode
+	objref.Object
+	isCNNConvolutionGradientNode()
 }
 
-// CNNConvolutionGradientStateProvider is implemented by CNNConvolutionGradientState and any idiomatic type wrapping a MPSCNNConvolutionGradientState subclass.
+// CNNConvolutionGradientStateProvider is accepted wherever a MPSCNNConvolutionGradientState (or one of its subclasses) is expected.
 type CNNConvolutionGradientStateProvider interface {
-	asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState
+	objref.Object
+	isCNNConvolutionGradientState()
 }
 
-// CNNConvolutionGradientStateNodeProvider is implemented by CNNConvolutionGradientStateNode and any idiomatic type wrapping a MPSCNNConvolutionGradientStateNode subclass.
+// CNNConvolutionGradientStateNodeProvider is accepted wherever a MPSCNNConvolutionGradientStateNode (or one of its subclasses) is expected.
 type CNNConvolutionGradientStateNodeProvider interface {
-	asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode
+	objref.Object
+	isCNNConvolutionGradientStateNode()
 }
 
-// CNNConvolutionNodeProvider is implemented by CNNConvolutionNode and any idiomatic type wrapping a MPSCNNConvolutionNode subclass.
+// CNNConvolutionNodeProvider is accepted wherever a MPSCNNConvolutionNode (or one of its subclasses) is expected.
 type CNNConvolutionNodeProvider interface {
-	asCNNConvolutionNode() *raw.MPSCNNConvolutionNode
+	objref.Object
+	isCNNConvolutionNode()
 }
 
-// CNNGradientKernelProvider is implemented by CNNGradientKernel and any idiomatic type wrapping a MPSCNNGradientKernel subclass.
+// CNNGradientKernelProvider is accepted wherever a MPSCNNGradientKernel (or one of its subclasses) is expected.
 type CNNGradientKernelProvider interface {
-	asCNNGradientKernel() *raw.MPSCNNGradientKernel
+	objref.Object
+	isCNNGradientKernel()
 }
 
-// CNNKernelProvider is implemented by CNNKernel and any idiomatic type wrapping a MPSCNNKernel subclass.
+// CNNKernelProvider is accepted wherever a MPSCNNKernel (or one of its subclasses) is expected.
 type CNNKernelProvider interface {
-	asCNNKernel() *raw.MPSCNNKernel
+	objref.Object
+	isCNNKernel()
 }
 
-// CNNNeuronProvider is implemented by CNNNeuron and any idiomatic type wrapping a MPSCNNNeuron subclass.
+// CNNNeuronProvider is accepted wherever a MPSCNNNeuron (or one of its subclasses) is expected.
 type CNNNeuronProvider interface {
-	asCNNNeuron() *raw.MPSCNNNeuron
+	objref.Object
+	isCNNNeuron()
 }
 
-// CNNNeuronNodeProvider is implemented by CNNNeuronNode and any idiomatic type wrapping a MPSCNNNeuronNode subclass.
+// CNNNeuronNodeProvider is accepted wherever a MPSCNNNeuronNode (or one of its subclasses) is expected.
 type CNNNeuronNodeProvider interface {
-	asCNNNeuronNode() *raw.MPSCNNNeuronNode
+	objref.Object
+	isCNNNeuronNode()
 }
 
-// CNNNormalizationNodeProvider is implemented by CNNNormalizationNode and any idiomatic type wrapping a MPSCNNNormalizationNode subclass.
+// CNNNormalizationNodeProvider is accepted wherever a MPSCNNNormalizationNode (or one of its subclasses) is expected.
 type CNNNormalizationNodeProvider interface {
-	asCNNNormalizationNode() *raw.MPSCNNNormalizationNode
+	objref.Object
+	isCNNNormalizationNode()
 }
 
-// CNNPoolingProvider is implemented by CNNPooling and any idiomatic type wrapping a MPSCNNPooling subclass.
+// CNNPoolingProvider is accepted wherever a MPSCNNPooling (or one of its subclasses) is expected.
 type CNNPoolingProvider interface {
-	asCNNPooling() *raw.MPSCNNPooling
+	objref.Object
+	isCNNPooling()
 }
 
-// CNNPoolingGradientProvider is implemented by CNNPoolingGradient and any idiomatic type wrapping a MPSCNNPoolingGradient subclass.
+// CNNPoolingGradientProvider is accepted wherever a MPSCNNPoolingGradient (or one of its subclasses) is expected.
 type CNNPoolingGradientProvider interface {
-	asCNNPoolingGradient() *raw.MPSCNNPoolingGradient
+	objref.Object
+	isCNNPoolingGradient()
 }
 
-// CNNPoolingGradientNodeProvider is implemented by CNNPoolingGradientNode and any idiomatic type wrapping a MPSCNNPoolingGradientNode subclass.
+// CNNPoolingGradientNodeProvider is accepted wherever a MPSCNNPoolingGradientNode (or one of its subclasses) is expected.
 type CNNPoolingGradientNodeProvider interface {
-	asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode
+	objref.Object
+	isCNNPoolingGradientNode()
 }
 
-// CNNPoolingNodeProvider is implemented by CNNPoolingNode and any idiomatic type wrapping a MPSCNNPoolingNode subclass.
+// CNNPoolingNodeProvider is accepted wherever a MPSCNNPoolingNode (or one of its subclasses) is expected.
 type CNNPoolingNodeProvider interface {
-	asCNNPoolingNode() *raw.MPSCNNPoolingNode
+	objref.Object
+	isCNNPoolingNode()
 }
 
-// CNNUpsamplingProvider is implemented by CNNUpsampling and any idiomatic type wrapping a MPSCNNUpsampling subclass.
+// CNNUpsamplingProvider is accepted wherever a MPSCNNUpsampling (or one of its subclasses) is expected.
 type CNNUpsamplingProvider interface {
-	asCNNUpsampling() *raw.MPSCNNUpsampling
+	objref.Object
+	isCNNUpsampling()
 }
 
-// CNNUpsamplingGradientProvider is implemented by CNNUpsamplingGradient and any idiomatic type wrapping a MPSCNNUpsamplingGradient subclass.
+// CNNUpsamplingGradientProvider is accepted wherever a MPSCNNUpsamplingGradient (or one of its subclasses) is expected.
 type CNNUpsamplingGradientProvider interface {
-	asCNNUpsamplingGradient() *raw.MPSCNNUpsamplingGradient
+	objref.Object
+	isCNNUpsamplingGradient()
 }
 
-// NNArithmeticGradientNodeProvider is implemented by NNArithmeticGradientNode and any idiomatic type wrapping a MPSNNArithmeticGradientNode subclass.
+// NNArithmeticGradientNodeProvider is accepted wherever a MPSNNArithmeticGradientNode (or one of its subclasses) is expected.
 type NNArithmeticGradientNodeProvider interface {
-	asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode
+	objref.Object
+	isNNArithmeticGradientNode()
 }
 
-// NNBinaryArithmeticNodeProvider is implemented by NNBinaryArithmeticNode and any idiomatic type wrapping a MPSNNBinaryArithmeticNode subclass.
+// NNBinaryArithmeticNodeProvider is accepted wherever a MPSNNBinaryArithmeticNode (or one of its subclasses) is expected.
 type NNBinaryArithmeticNodeProvider interface {
-	asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode
+	objref.Object
+	isNNBinaryArithmeticNode()
 }
 
-// NNBinaryGradientStateProvider is implemented by NNBinaryGradientState and any idiomatic type wrapping a MPSNNBinaryGradientState subclass.
+// NNBinaryGradientStateProvider is accepted wherever a MPSNNBinaryGradientState (or one of its subclasses) is expected.
 type NNBinaryGradientStateProvider interface {
-	asNNBinaryGradientState() *raw.MPSNNBinaryGradientState
+	objref.Object
+	isNNBinaryGradientState()
 }
 
-// NNBinaryGradientStateNodeProvider is implemented by NNBinaryGradientStateNode and any idiomatic type wrapping a MPSNNBinaryGradientStateNode subclass.
+// NNBinaryGradientStateNodeProvider is accepted wherever a MPSNNBinaryGradientStateNode (or one of its subclasses) is expected.
 type NNBinaryGradientStateNodeProvider interface {
-	asNNBinaryGradientStateNode() *raw.MPSNNBinaryGradientStateNode
+	objref.Object
+	isNNBinaryGradientStateNode()
 }
 
-// NNFilterNodeProvider is implemented by NNFilterNode and any idiomatic type wrapping a MPSNNFilterNode subclass.
+// NNFilterNodeProvider is accepted wherever a MPSNNFilterNode (or one of its subclasses) is expected.
 type NNFilterNodeProvider interface {
-	asNNFilterNode() *raw.MPSNNFilterNode
+	objref.Object
+	isNNFilterNode()
 }
 
-// NNGradientFilterNodeProvider is implemented by NNGradientFilterNode and any idiomatic type wrapping a MPSNNGradientFilterNode subclass.
+// NNGradientFilterNodeProvider is accepted wherever a MPSNNGradientFilterNode (or one of its subclasses) is expected.
 type NNGradientFilterNodeProvider interface {
-	asNNGradientFilterNode() *raw.MPSNNGradientFilterNode
+	objref.Object
+	isNNGradientFilterNode()
 }
 
-// NNGradientStateProvider is implemented by NNGradientState and any idiomatic type wrapping a MPSNNGradientState subclass.
+// NNGradientStateProvider is accepted wherever a MPSNNGradientState (or one of its subclasses) is expected.
 type NNGradientStateProvider interface {
-	asNNGradientState() *raw.MPSNNGradientState
+	objref.Object
+	isNNGradientState()
 }
 
-// NNGradientStateNodeProvider is implemented by NNGradientStateNode and any idiomatic type wrapping a MPSNNGradientStateNode subclass.
+// NNGradientStateNodeProvider is accepted wherever a MPSNNGradientStateNode (or one of its subclasses) is expected.
 type NNGradientStateNodeProvider interface {
-	asNNGradientStateNode() *raw.MPSNNGradientStateNode
+	objref.Object
+	isNNGradientStateNode()
 }
 
-// NNOptimizerProvider is implemented by NNOptimizer and any idiomatic type wrapping a MPSNNOptimizer subclass.
+// NNOptimizerProvider is accepted wherever a MPSNNOptimizer (or one of its subclasses) is expected.
 type NNOptimizerProvider interface {
-	asNNOptimizer() *raw.MPSNNOptimizer
+	objref.Object
+	isNNOptimizer()
 }
 
-// NNReduceBinaryProvider is implemented by NNReduceBinary and any idiomatic type wrapping a MPSNNReduceBinary subclass.
+// NNReduceBinaryProvider is accepted wherever a MPSNNReduceBinary (or one of its subclasses) is expected.
 type NNReduceBinaryProvider interface {
-	asNNReduceBinary() *raw.MPSNNReduceBinary
+	objref.Object
+	isNNReduceBinary()
 }
 
-// NNReduceUnaryProvider is implemented by NNReduceUnary and any idiomatic type wrapping a MPSNNReduceUnary subclass.
+// NNReduceUnaryProvider is accepted wherever a MPSNNReduceUnary (or one of its subclasses) is expected.
 type NNReduceUnaryProvider interface {
-	asNNReduceUnary() *raw.MPSNNReduceUnary
+	objref.Object
+	isNNReduceUnary()
 }
 
-// NNScaleNodeProvider is implemented by NNScaleNode and any idiomatic type wrapping a MPSNNScaleNode subclass.
+// NNScaleNodeProvider is accepted wherever a MPSNNScaleNode (or one of its subclasses) is expected.
 type NNScaleNodeProvider interface {
-	asNNScaleNode() *raw.MPSNNScaleNode
+	objref.Object
+	isNNScaleNode()
 }
 
-// NNStateNodeProvider is implemented by NNStateNode and any idiomatic type wrapping a MPSNNStateNode subclass.
+// NNStateNodeProvider is accepted wherever a MPSNNStateNode (or one of its subclasses) is expected.
 type NNStateNodeProvider interface {
-	asNNStateNode() *raw.MPSNNStateNode
+	objref.Object
+	isNNStateNode()
 }
 
-// NNUnaryReductionNodeProvider is implemented by NNUnaryReductionNode and any idiomatic type wrapping a MPSNNUnaryReductionNode subclass.
+// NNUnaryReductionNodeProvider is accepted wherever a MPSNNUnaryReductionNode (or one of its subclasses) is expected.
 type NNUnaryReductionNodeProvider interface {
-	asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode
+	objref.Object
+	isNNUnaryReductionNode()
 }
 
-// RNNDescriptorProvider is implemented by RNNDescriptor and any idiomatic type wrapping a MPSRNNDescriptor subclass.
+// RNNDescriptorProvider is accepted wherever a MPSRNNDescriptor (or one of its subclasses) is expected.
 type RNNDescriptorProvider interface {
-	asRNNDescriptor() *raw.MPSRNNDescriptor
+	objref.Object
+	isRNNDescriptor()
 }

@@ -5,192 +5,159 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents an axis of numerical data.
+// NumericDataAxisDescriptor is an idiomatic wrapper over the Objective-C class AXNumericDataAxisDescriptor.
 //
-// NumericDataAxisDescriptor wraps [raw.AXNumericDataAxisDescriptor] with a fluent Go API.
+// An object that represents an axis of numerical data.
 type NumericDataAxisDescriptor struct {
-	inner *raw.AXNumericDataAxisDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXNumericDataAxisDescriptor].
-func (x *NumericDataAxisDescriptor) Unwrap() *raw.AXNumericDataAxisDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NumericDataAxisDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// NumericDataAxisDescriptorFromID adopts an existing object pointer as a NumericDataAxisDescriptor (nil for 0).
+// NumericDataAxisDescriptorFromID adopts an existing Objective-C object as a NumericDataAxisDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func NumericDataAxisDescriptorFromID(id objc.ID) *NumericDataAxisDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(id)}
-}
-
-// Creates a numeric data axis with the specified title, lower bound value, upper bound value, gridline positions, and value description provider block.
-//
-// NewNumericDataAxisDescriptorWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider creates a new [NumericDataAxisDescriptor].
-func NewNumericDataAxisDescriptorWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(title string, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXNumericDataAxisDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:"), foundation.NSStringStringWithUTF8String(title).Ptr(), lowerbound, upperBound, gridlinePositions.Ptr(), valueDescriptionProvider)
-	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(_id)}
-}
-
-// Creates a numeric data axis with the specified attributed title, lower bound value, upper bound value, gridline positions, and value description provider block.
-//
-// NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider creates a new [NumericDataAxisDescriptor].
-func NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(attributedTitle *foundation.NSAttributedString, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXNumericDataAxisDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:"), attributedTitle.Ptr(), lowerbound, upperBound, gridlinePositions.Ptr(), valueDescriptionProvider)
-	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(_id)}
-}
-
-// The scale for the axis.
-//
-// WithScaleType sets the scaleType property and returns the receiver for chaining.
-func (x *NumericDataAxisDescriptor) WithScaleType(scaleType AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
-	x.inner.SetScaleType(raw.AXNumericDataAxisDescriptorScale(scaleType))
+	x := &NumericDataAxisDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The minimum displayable value for the axis.
-//
-// WithLowerBound sets the lowerBound property and returns the receiver for chaining.
-func (x *NumericDataAxisDescriptor) WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor {
-	x.inner.SetLowerBound(lowerBound)
-	return x
-}
-
-// The maximum displayable value for the axis.
-//
-// WithUpperBound sets the upperBound property and returns the receiver for chaining.
-func (x *NumericDataAxisDescriptor) WithUpperBound(upperBound float64) *NumericDataAxisDescriptor {
-	x.inner.SetUpperBound(upperBound)
-	return x
-}
-
-// A description to speak for a particular data value on the axis.
-//
-// WithValueDescriptionProvider sets the valueDescriptionProvider property and returns the receiver for chaining.
-func (x *NumericDataAxisDescriptor) WithValueDescriptionProvider(valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
-	x.inner.SetValueDescriptionProvider(valueDescriptionProvider)
-	return x
-}
-
-// The positions of the gridlines along the axis.
-//
-// WithGridlinePositions sets the collection, converting the Go slice to an NSArray.
-func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetGridlinePositions(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetGridlinePositions(_arr)
-	return x
-}
-
-// The scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
-//
-// ScaleType calls the underlying ScaleType.
-func (x *NumericDataAxisDescriptor) ScaleType() AXNumericDataAxisDescriptorScale {
-	return AXNumericDataAxisDescriptorScale(x.inner.ScaleType())
-}
-
-// SetScaleType calls the underlying SetScaleType.
-func (x *NumericDataAxisDescriptor) SetScaleType(scaleType AXNumericDataAxisDescriptorScale) {
-	x.inner.SetScaleType(raw.AXNumericDataAxisDescriptorScale(scaleType))
-}
-
-// The minimum displayable value for the axis.
-//
-// LowerBound calls the underlying LowerBound.
-func (x *NumericDataAxisDescriptor) LowerBound() float64 {
-	return x.inner.LowerBound()
-}
-
-// SetLowerBound calls the underlying SetLowerBound.
-func (x *NumericDataAxisDescriptor) SetLowerBound(lowerBound float64) {
-	x.inner.SetLowerBound(lowerBound)
-}
-
-// The maximum displayable value for the axis.
-//
-// UpperBound calls the underlying UpperBound.
-func (x *NumericDataAxisDescriptor) UpperBound() float64 {
-	return x.inner.UpperBound()
-}
-
-// SetUpperBound calls the underlying SetUpperBound.
-func (x *NumericDataAxisDescriptor) SetUpperBound(upperBound float64) {
-	x.inner.SetUpperBound(upperBound)
-}
-
-// Provides a value description to be spoken for a particular data value on this axis. Use this to format data values to string representations that include units, dates, times, etc.
-//
-// ValueDescriptionProvider calls the underlying ValueDescriptionProvider.
-func (x *NumericDataAxisDescriptor) ValueDescriptionProvider() objc.Block {
-	return x.inner.ValueDescriptionProvider()
-}
-
-// SetValueDescriptionProvider calls the underlying SetValueDescriptionProvider.
-func (x *NumericDataAxisDescriptor) SetValueDescriptionProvider(valueDescriptionProvider objc.Block) {
-	x.inner.SetValueDescriptionProvider(valueDescriptionProvider)
-}
-
-// The positions of any gridlines along this axis.
-//
-// GridlinePositions returns the collection as a Go slice.
-func (x *NumericDataAxisDescriptor) GridlinePositions() []*foundation.NSNumber {
-	arr := x.inner.GridlinePositions()
-	if arr == nil {
+// numericDataAxisDescriptorAdopt wraps an Objective-C object that this code just created as a
+// NumericDataAxisDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func numericDataAxisDescriptorAdopt(id objc.ID) *NumericDataAxisDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &NumericDataAxisDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetGridlinePositions calls the underlying SetGridlinePositions.
-func (x *NumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetGridlinePositions(gridlinePositions)
+// Description returns the object's -description text.
+func (x *NumericDataAxisDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NumericDataAxisDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NumericDataAxisDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NumericDataAxisDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNumericDataAxisDescriptor creates a new NumericDataAxisDescriptor.
+func NewNumericDataAxisDescriptor() *NumericDataAxisDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("AXNumericDataAxisDescriptor")), objc.RegisterName("new"))
+	return numericDataAxisDescriptorAdopt(_id)
+}
+
+// WithScaleType the scale for the axis.
+func (x *NumericDataAxisDescriptor) WithScaleType(scaleType NumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleType:"), scaleType)
+	return x
+}
+
+// WithLowerBound the minimum displayable value for the axis.
+func (x *NumericDataAxisDescriptor) WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerBound:"), lowerBound)
+	return x
+}
+
+// WithUpperBound the maximum displayable value for the axis.
+func (x *NumericDataAxisDescriptor) WithUpperBound(upperBound float64) *NumericDataAxisDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBound:"), upperBound)
+	return x
+}
+
+// WithGridlinePositions the positions of the gridlines along the axis.
+func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...obj.Object) *NumericDataAxisDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGridlinePositions:"), _arr)
+	return x
+}
+
+// ScaleType the scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
+func (x *NumericDataAxisDescriptor) ScaleType() NumericDataAxisDescriptorScale {
+	_r := objc.Send[NumericDataAxisDescriptorScale](objref.IDOf(x), objc.RegisterName("scaleType"))
+	return _r
+}
+
+// SetScaleType wraps the corresponding Objective-C method.
+func (x *NumericDataAxisDescriptor) SetScaleType(scaleType NumericDataAxisDescriptorScale) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleType:"), scaleType)
+}
+
+// LowerBound the minimum displayable value for the axis.
+func (x *NumericDataAxisDescriptor) LowerBound() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerBound"))
+	return _r
+}
+
+// SetLowerBound wraps the corresponding Objective-C method.
+func (x *NumericDataAxisDescriptor) SetLowerBound(lowerBound float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerBound:"), lowerBound)
+}
+
+// UpperBound the maximum displayable value for the axis.
+func (x *NumericDataAxisDescriptor) UpperBound() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperBound"))
+	return _r
+}
+
+// SetUpperBound wraps the corresponding Objective-C method.
+func (x *NumericDataAxisDescriptor) SetUpperBound(upperBound float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperBound:"), upperBound)
+}
+
+// GridlinePositions the positions of any gridlines along this axis.
+//
+// GridlinePositions returns the collection as a Go slice.
+func (x *NumericDataAxisDescriptor) GridlinePositions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gridlinePositions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetGridlinePositions wraps the corresponding Objective-C method.
+func (x *NumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGridlinePositions:"), purego.SliceToNSArray(gridlinePositions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // NumericDataAxisDescriptorable is the interface implemented by [NumericDataAxisDescriptor], for mocking and DI.
 type NumericDataAxisDescriptorable interface {
-	Unwrap() *raw.AXNumericDataAxisDescriptor
-	WithScaleType(scaleType AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor
+	obj.Object
+	WithScaleType(scaleType NumericDataAxisDescriptorScale) *NumericDataAxisDescriptor
 	WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor
 	WithUpperBound(upperBound float64) *NumericDataAxisDescriptor
-	WithValueDescriptionProvider(valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor
-	WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor
-	ScaleType() AXNumericDataAxisDescriptorScale
-	SetScaleType(scaleType AXNumericDataAxisDescriptorScale)
+	WithGridlinePositions(items ...obj.Object) *NumericDataAxisDescriptor
+	ScaleType() NumericDataAxisDescriptorScale
+	SetScaleType(scaleType NumericDataAxisDescriptorScale)
 	LowerBound() float64
 	SetLowerBound(lowerBound float64)
 	UpperBound() float64
 	SetUpperBound(upperBound float64)
-	ValueDescriptionProvider() objc.Block
-	SetValueDescriptionProvider(valueDescriptionProvider objc.Block)
-	GridlinePositions() []*foundation.NSNumber
-	SetGridlinePositions(gridlinePositions *foundation.NSArray[*foundation.NSNumber])
+	GridlinePositions() []obj.Object
+	SetGridlinePositions(gridlinePositions []obj.Object)
 }
 
 var _ NumericDataAxisDescriptorable = (*NumericDataAxisDescriptor)(nil)
